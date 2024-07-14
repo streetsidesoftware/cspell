@@ -275,10 +275,10 @@ export function isEndOfWordNode(n: TrieNode | undefined): boolean {
 }
 
 function walk(root: Root | TrieNode | undefined, word: string): TrieNode | undefined {
-    const w = word;
+    const w = [...word];
     let n: TrieNode | undefined = root;
     let i = 0;
-    while (n && i < word.length) {
+    while (n && i < w.length) {
         const h = w[i++];
         n = n.c?.[h];
     }

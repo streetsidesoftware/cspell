@@ -10,6 +10,7 @@ import {
     has,
     isCircular,
     iteratorTrieWords,
+    validateTrie,
 } from './trie-util.js';
 
 const oc = <T>(obj: T) => expect.objectContaining(obj);
@@ -62,6 +63,7 @@ describe('Validate Util Functions', () => {
         const { ref } = checkCircular(trie);
         if (ref) ref.stack = [];
         expect(ref).toEqual(oc({ word: 'spaces', pos: 2 }));
+        expect(validateTrie(trie).isValid).toBe(false);
     });
 
     test('countWords', () => {
@@ -86,6 +88,20 @@ describe('Validate Util Functions', () => {
 
         expect(mergeDefaults(a, b)).toEqual({ a: 1, b: 'b' });
         expect(mergeDefaults(b, a)).toEqual({ a: 3, b: 'bb', c: 'c' });
+    });
+});
+
+describe('validateTrie', () => {
+    test('validateTrie valid', () => {
+        const trie = createTrieRootFromList(words);
+        expect(validateTrie(trie)).toEqual(oc({ isValid: true }));
+
+        const n = findNode(trie, 'sa');
+        n && n.c && (n.c['😀'[0]] = {});
+
+        expect(validateTrie(trie)).toEqual(
+            oc({ isValid: false, error: `Invalid character "${'😀'[0]}" in trie node` }),
+        );
     });
 });
 

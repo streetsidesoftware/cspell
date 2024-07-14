@@ -2,6 +2,7 @@ import { type BuilderCursor, insertWordsAtCursor, type TrieBuilder } from '../Bu
 import { defaultTrieInfo } from '../constants.js';
 import type { PartialTrieOptions, TrieOptions } from '../trie.js';
 import { assert } from '../utils/assert.js';
+import { assertIsValidChar } from '../utils/isValidChar.js';
 import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.js';
 import type { ChildMap, TrieNode, TrieRoot } from './TrieNode.js';
 import { TrieNodeTrie } from './TrieNodeTrie.js';
@@ -68,6 +69,7 @@ export class TrieNodeBuilder implements TrieBuilder<TrieNodeTrie> {
         let depth = 0;
 
         const insertChar = (char: string) => {
+            assertIsValidChar(char);
             // console.warn('i %o', char);
             if (currNode.k) {
                 const s = stack[depth];

@@ -116,23 +116,6 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
         let depth = 0;
 
         const insertChar = (char: string) => {
-            // eslint-disable-next-line unicorn/prefer-code-point
-            const cc = char.charCodeAt(0) & 0xfc00;
-            // Work with partial surrogate pairs.
-            if (cc === 0xd800 && char.length == 1) {
-                // We have a high surrogate
-                const s = stack[depth];
-                const ns = stack[++depth];
-                if (ns) {
-                    ns.nodeIdx = s.nodeIdx;
-                    ns.pos = s.pos;
-                    ns.dCount = 1;
-                    ns.ps = char;
-                } else {
-                    stack[depth] = { nodeIdx: s.nodeIdx, pos: s.pos, dCount: 1, ps: char };
-                }
-                return;
-            }
             if (stack[depth].ps) {
                 char = stack[depth].ps + char;
                 assertValidUtf16Character(char);
@@ -383,6 +366,8 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
 
         function addCharToNode(node: FastTrieBlobNode, char: string, n: TrieNode): void {
             const indexSeq = tf.letterToNodeCharIndexSequence(char);
+            assertValidUtf16Character(char);
+            // console.error('addCharToNode %o', { char, indexSeq });
             for (const idx of indexSeq.slice(0, -1)) {
                 const pos = resolveChild(node, idx);
                 if (pos < node.length) {

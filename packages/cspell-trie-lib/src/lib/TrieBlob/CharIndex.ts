@@ -53,6 +53,7 @@ export class CharIndex {
                 seq[i++] = cIdx;
             }
         }
+        if (seq.length !== i) seq.length = i;
         return seq;
     }
 
@@ -73,6 +74,10 @@ export class CharIndex {
 
     indexToCharacter(idx: number): string {
         return this.charIndex[idx] || '';
+    }
+
+    toJSON() {
+        return { charIndex: this.charIndex };
     }
 }
 

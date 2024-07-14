@@ -3,9 +3,9 @@ import { describe, expect, test } from 'vitest';
 import type { BuilderCursor } from '../Builder/index.js';
 import { insertWordsAtCursor } from '../Builder/index.js';
 import { consolidate } from '../consolidate.js';
-import { createTrieRoot, insert } from './trie-util.js';
+import { createTrieRoot, insert, validateTrie } from './trie-util.js';
 import type { TrieNode, TrieRoot } from './TrieNode.js';
-import { TrieNodeBuilder } from './TrieNodeBuilder.js';
+import { buildTrieNodeTrieFromWords, TrieNodeBuilder } from './TrieNodeBuilder.js';
 
 describe('TrieNodeBuilder', () => {
     test('cursor', () => {
@@ -51,10 +51,18 @@ describe('TrieNodeBuilder', () => {
         const t = builder.build();
         expect([...t.words()].sort()).toEqual(sortedUnique);
     });
+
+    test('buildTrieNodeTrieFromWords', () => {
+        const words = [...new Set(sampleWords())].sort();
+        const trie = buildTrieNodeTrieFromWords(words);
+        expect([...trie.words()]).toEqual(words);
+        expect(words.some((w) => !trie.has(w))).toBe(false);
+        expect(validateTrie(trie.root).isValid).toBe(true);
+    });
 });
 
 function sampleWords() {
-    return (
+    const words1 = (
         'Here are a few words to use as a dictionary. They just need to be split. ' +
         'walk walked walking walker ' +
         'talk talked talking talker ' +
@@ -65,6 +73,8 @@ function sampleWords() {
     )
         .split(/[^a-zA-Z]/g)
         .filter((a) => !!a);
+    const words2 = ['one', 'two', 'three', 'four', 'walk', 'walking', 'walks', 'wall', 'walls', 'walled', '😀😎'];
+    return [...words1, ...words2];
 }
 
 function insertFromOptimizedTrie(cursor: BuilderCursor, words: string[]) {
