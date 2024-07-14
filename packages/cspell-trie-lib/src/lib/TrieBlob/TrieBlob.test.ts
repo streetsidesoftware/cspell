@@ -1,9 +1,12 @@
 import { describe, expect, test } from 'vitest';
 
-import { createITrieFromList } from '../TrieNode/trie-util.js';
+import { readFastTrieBlobFromConfig } from '../../test/dictionaries.test.helper.js';
+import { createITrieFromList, validateTrie } from '../TrieNode/trie-util.js';
+import { buildTrieNodeTrieFromWords } from '../TrieNode/TrieNodeBuilder.js';
 import { TrieNodeTrie } from '../TrieNode/TrieNodeTrie.js';
 import { walkerWordsITrie } from '../walker/walker.js';
 import { createTrieBlob, createTrieBlobFromITrieNodeRoot, createTrieBlobFromTrieData } from './createTrieBlob.js';
+import { FastTrieBlobBuilder } from './FastTrieBlobBuilder.js';
 import { TrieBlob } from './TrieBlob.js';
 
 describe('TrieBlob', () => {
@@ -63,5 +66,31 @@ describe('TrieBlob', () => {
         const trieBlob = createTrieBlobFromITrieNodeRoot(root);
         const iter = walkerWordsITrie(trieBlob.getRoot());
         expect([...iter]).toEqual(sampleWords);
+    });
+
+    test('from Trie', () => {
+        const trie = buildTrieNodeTrieFromWords(sampleWords);
+        expect([...trie.words()]).toEqual(sampleWords);
+        expect(sampleWords.some((w) => !trie.has(w))).toBe(false);
+        expect(validateTrie(trie.root).isValid).toBe(true);
+        const ft = FastTrieBlobBuilder.fromTrieRoot(trie.root);
+        // console.error('%o', JSON.parse(JSON.stringify(ft)));
+        expect([...ft.words()].sort()).toEqual(sampleWords);
+        expect(sampleWords.some((w) => !ft.has(w))).toBe(false);
+        const tb = ft.toTrieBlob();
+        expect(sampleWords.some((w) => !tb.has(w))).toBe(false);
+    });
+});
+
+describe.skip('TrieBlob encode/decode', async () => {
+    const ft = await readFastTrieBlobFromConfig('@cspell/dict-en_us/cspell-ext.json');
+    const trieBlob = ft.toTrieBlob();
+
+    test('encode/decode', () => {
+        const words = [...trieBlob.words()];
+        const bin = trieBlob.encodeBin();
+        const r = TrieBlob.decodeBin(bin);
+        expect([...r.words()]).toEqual(words);
+        expect(words.some((w) => !r.has(w))).toBe(false);
     });
 });

@@ -1,19 +1,20 @@
 import type { BuilderCursor } from './BuilderCursor.js';
 
 export function insertWordsAtCursor(cursor: BuilderCursor, words: Iterable<string>) {
-    let prevWord = '';
-    for (const word of words) {
-        const pLen = commonStrPrefix(prevWord, word);
-        const stepBack = prevWord.length - pLen;
+    let prevWordLetters: string[] = [];
+    for (const _word of words) {
+        const letters = [..._word];
+        const pLen = commonStrPrefix(prevWordLetters, letters);
+        const stepBack = prevWordLetters.length - pLen;
         cursor.backStep(stepBack);
-        const wLen = word.length;
+        const wLen = letters.length;
         for (let i = pLen; i < wLen; ++i) {
-            cursor.insertChar(word[i]);
+            cursor.insertChar(letters[i]);
         }
         cursor.markEOW();
-        prevWord = word;
+        prevWordLetters = letters;
     }
-    cursor.backStep(prevWord.length);
+    cursor.backStep(prevWordLetters.length);
 }
 
 export function commonStringPrefixLen(a: string, b: string): number {
@@ -32,7 +33,7 @@ export function commonStringPrefixLen(a: string, b: string): number {
     return i;
 }
 
-function commonStrPrefix(a: string, b: string): number {
+function commonStrPrefix(a: string[], b: string[]): number {
     let i = 0;
     for (i = 0; i < a.length && a[i] === b[i]; ++i) {
         /* empty */

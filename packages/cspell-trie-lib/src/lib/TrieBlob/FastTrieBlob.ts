@@ -203,7 +203,7 @@ export class FastTrieBlob implements TrieData {
     toJSON() {
         return {
             info: this.info,
-            nodes: nodesToJson(this.nodes),
+            nodes: nodesToJson(this.nodes, this._charIndex.charIndex),
             charIndex: this._charIndex,
         };
     }
@@ -364,11 +364,12 @@ interface NodeElement {
     c: { c: number | string; i: number }[];
 }
 
-function nodesToJson(nodes: FastTrieBlobNode[]) {
+function nodesToJson(nodes: Readonly<FastTrieBlobNode[]>, charIndex: Readonly<string[]>) {
     function nodeElement(node: FastTrieBlobNode, index: number): NodeElement {
         const eow = !!(node[0] & TrieBlob.NodeMaskEOW);
         const children: { c: number | string; i: number }[] = node.slice(1).map((n) => ({
-            c: ('00' + (n & TrieBlob.NodeMaskChildCharIndex).toString(16)).slice(-2),
+            c: charIndex[n & TrieBlob.NodeMaskChildCharIndex],
+            cx: n & TrieBlob.NodeMaskChildCharIndex,
             i: n >>> TrieBlob.NodeChildRefShift,
         }));
         return { id: index, eow, n: node.length, c: children };

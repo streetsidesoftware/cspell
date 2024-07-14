@@ -110,8 +110,8 @@ function _findWord(root: Root, word: string, options: FindOptions): FindFullResu
  */
 function _findWordNode(root: Root, word: string, options: FindOptions): FindFullNodeResult {
     const compoundMode = knownCompoundModes.get(options.compoundMode) || _defaultFindOptions.compoundMode;
-    const compoundPrefix = options.compoundMode === 'compound' ? (root.compoundCharacter ?? options.compoundFix) : '';
-    const ignoreCasePrefix = options.matchCase ? '' : (root.stripCaseAndAccentsPrefix ?? options.caseInsensitivePrefix);
+    const compoundPrefix = options.compoundMode === 'compound' ? root.compoundCharacter ?? options.compoundFix : '';
+    const ignoreCasePrefix = options.matchCase ? '' : root.stripCaseAndAccentsPrefix ?? options.caseInsensitivePrefix;
 
     function __findCompound(): FindFullNodeResult {
         const f = findCompoundWord(root, word, compoundPrefix, ignoreCasePrefix);
@@ -275,10 +275,10 @@ export function isEndOfWordNode(n: TrieNode | undefined): boolean {
 }
 
 function walk(root: Root | TrieNode | undefined, word: string): TrieNode | undefined {
-    const w = word;
+    const w = [...word];
     let n: TrieNode | undefined = root;
     let i = 0;
-    while (n && i < word.length) {
+    while (n && i < w.length) {
         const h = w[i++];
         n = n.c?.[h];
     }

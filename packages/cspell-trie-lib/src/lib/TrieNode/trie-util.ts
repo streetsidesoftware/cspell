@@ -1,5 +1,6 @@
 import type { ITrieNodeRoot } from '../ITrieNode/ITrieNode.js';
 import type { PartialTrieInfo } from '../ITrieNode/TrieInfo.js';
+import { isValidChar } from '../utils/isValidChar.js';
 import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.js';
 import { walker, walkerWords } from '../walker/walker.js';
 import type { YieldResult } from '../walker/walkerTypes.js';
@@ -7,7 +8,9 @@ import { trieRootToITrieRoot } from './trie.js';
 import type { TrieNode, TrieRoot } from './TrieNode.js';
 import { FLAG_WORD } from './TrieNode.js';
 
-export function insert(text: string, root: TrieNode = {}): TrieNode {
+export function insert(word: string, root: TrieNode = {}): TrieNode {
+    // spread is necessary to handle surrogates.
+    const text = [...word];
     let node = root;
     for (let i = 0; i < text.length; ++i) {
         const head = text[i];
@@ -218,4 +221,31 @@ export function trieNodeToRoot(node: TrieNode, options: PartialTrieInfo): TrieRo
         ...newOptions,
         c: node.c || Object.create(null),
     };
+}
+
+export interface ValidateTrieResult {
+    root: TrieNode;
+    isValid: boolean;
+    node?: TrieNode;
+    error?: string;
+}
+
+export function validateTrie(root: TrieNode): ValidateTrieResult {
+    if (checkCircular(root).isCircular) return { root, isValid: false, error: 'Circular Reference' };
+
+    const result: ValidateTrieResult = { root, isValid: true };
+
+    function walk(n: TrieNode): boolean {
+        if (!n.c) return true;
+        if (Object.keys(n.c).some((c) => !isValidChar(c))) {
+            const c = Object.keys(n.c).find((c) => !isValidChar(c));
+            result.error = `Invalid character "${c}" in trie node`;
+            result.node = n;
+            return false;
+        }
+        return Object.values(n.c).every(walk);
+    }
+
+    result.isValid = walk(root);
+    return result;
 }
