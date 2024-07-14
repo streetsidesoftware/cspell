@@ -711,7 +711,7 @@ declare class TrieBuilder {
     private createNode;
 }
 
-declare function insert(text: string, root?: TrieNode): TrieNode;
+declare function insert(word: string, root?: TrieNode): TrieNode;
 declare function isWordTerminationNode(node: TrieNode): boolean;
 /**
  * Sorts the nodes in a trie in place.
