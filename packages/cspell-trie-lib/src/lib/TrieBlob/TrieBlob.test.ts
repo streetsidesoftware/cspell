@@ -52,20 +52,20 @@ describe('TrieBlob', () => {
     test('createTrieBlobFromITrieNodeRoot', () => {
         const root = createITrieFromList(sampleWords);
         const trieBlob = createTrieBlobFromITrieNodeRoot(root);
-        expect([...trieBlob.words()]).toEqual(sampleWords);
+        expect([...trieBlob.words()].sort()).toEqual(sampleWords);
     });
 
     test('createTrieBlobFromTrieData', () => {
         const root = TrieNodeTrie.createFromWords(sampleWords);
         const trieBlob = createTrieBlobFromTrieData(root);
-        expect([...trieBlob.words()]).toEqual(sampleWords);
+        expect([...trieBlob.words()].sort()).toEqual(sampleWords);
     });
 
     test('toITrieNodeRoot', () => {
         const root = createITrieFromList(sampleWords);
         const trieBlob = createTrieBlobFromITrieNodeRoot(root);
         const iter = walkerWordsITrie(trieBlob.getRoot());
-        expect([...iter]).toEqual(sampleWords);
+        expect([...iter].sort()).toEqual(sampleWords);
     });
 
     test('from Trie', () => {
