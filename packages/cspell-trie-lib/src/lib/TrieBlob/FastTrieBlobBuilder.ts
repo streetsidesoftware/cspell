@@ -5,7 +5,6 @@ import type { BuilderCursor, TrieBuilder } from '../Builder/index.js';
 import type { PartialTrieInfo, TrieInfo } from '../ITrieNode/TrieInfo.js';
 import type { TrieNode, TrieRoot } from '../TrieNode/TrieNode.js';
 import { assert } from '../utils/assert.js';
-import { assertIsValidChar } from '../utils/isValidChar.js';
 import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.js';
 import { assertValidUtf16Character } from '../utils/text.js';
 import { CharIndexBuilder } from './CharIndex.js';
@@ -117,7 +116,6 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
         let depth = 0;
 
         const insertChar = (char: string) => {
-            assertIsValidChar(char);
             if (stack[depth].ps) {
                 char = stack[depth].ps + char;
                 assertValidUtf16Character(char);
@@ -368,7 +366,7 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
 
         function addCharToNode(node: FastTrieBlobNode, char: string, n: TrieNode): void {
             const indexSeq = tf.letterToNodeCharIndexSequence(char);
-            assertIsValidChar(char);
+            assertValidUtf16Character(char);
             // console.error('addCharToNode %o', { char, indexSeq });
             for (const idx of indexSeq.slice(0, -1)) {
                 const pos = resolveChild(node, idx);

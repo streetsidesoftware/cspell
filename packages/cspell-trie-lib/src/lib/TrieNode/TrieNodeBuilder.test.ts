@@ -62,30 +62,19 @@ describe('TrieNodeBuilder', () => {
 });
 
 function sampleWords() {
-    return [
-        ...(
-            'Here are a few words to use as a dictionary. They just need to be split. ' +
-            'walk walked walking walker ' +
-            'talk talked talking talker ' +
-            'play played playing player ' +
-            'red green blue yellow orange ' +
-            'on the first day of ' +
-            'on a dark and '
-        )
-            .split(/[^a-zA-Z]/g)
-            .filter((a) => !!a),
-        'one',
-        'two',
-        'three',
-        'four',
-        'walk',
-        'walking',
-        'walks',
-        'wall',
-        'walls',
-        'walled',
-        '😀😎',
-    ];
+    const words1 = (
+        'Here are a few words to use as a dictionary. They just need to be split. ' +
+        'walk walked walking walker ' +
+        'talk talked talking talker ' +
+        'play played playing player ' +
+        'red green blue yellow orange ' +
+        'on the first day of ' +
+        'on a dark and '
+    )
+        .split(/[^a-zA-Z]/g)
+        .filter((a) => !!a);
+    const words2 = ['one', 'two', 'three', 'four', 'walk', 'walking', 'walks', 'wall', 'walls', 'walled', '😀😎'];
+    return [...words1, ...words2];
 }
 
 function insertFromOptimizedTrie(cursor: BuilderCursor, words: string[]) {

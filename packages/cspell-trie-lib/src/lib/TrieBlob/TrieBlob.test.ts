@@ -82,7 +82,7 @@ describe('TrieBlob', () => {
     });
 });
 
-describe.skip('TrieBlob encode/decode', async () => {
+describe('TrieBlob encode/decode', async () => {
     const ft = await readFastTrieBlobFromConfig('@cspell/dict-en_us/cspell-ext.json');
     const trieBlob = ft.toTrieBlob();
 
