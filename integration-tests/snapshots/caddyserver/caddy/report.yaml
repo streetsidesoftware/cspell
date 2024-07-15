@@ -3,7 +3,7 @@ Repository: caddyserver/caddy
 Url: https://github.com/caddyserver/caddy.git
 Args: '["**/*.go"]'
 Summary:
-  files: 274
+  files: 275
   filesWithIssues: 255
   issues: 4073
   errors: 0
@@ -261,7 +261,7 @@ issues:
   - "modules/caddyhttp/proxyprotocol/policy.go:64:38         unmarshaller    U       implements the text unmarshaller method."
   - "modules/caddyhttp/requestbody/caddyfile.go:15:9         requestbody     U       package requestbody"
   - "modules/caddyhttp/responsewriter_test.go:22:6           barebones       U       // a barebones http.ResponseWriter"
-  - "modules/caddyhttp/reverseproxy/caddyfile.go:608:5       usize       U       usize, err := humanize.ParseBytes"
+  - "modules/caddyhttp/reverseproxy/caddyfile.go:621:5       usize       U       usize, err := humanize.ParseBytes"
   - "modules/caddyhttp/reverseproxy/fastcgi/client_test.go:50:26         fcgic       U       scriptFile = \"/tank/www/fcgic_test.php\""
   - "modules/caddyhttp/reverseproxy/fastcgi/client_test.go:51:26         serv        U       ipPort = \"remote-php-serv:59000\""
   - "modules/caddyhttp/reverseproxy/fastcgi/client_test.go:55:5          globalt     U       var globalt *testing.T"
@@ -272,7 +272,7 @@ issues:
   - "modules/caddyhttp/reverseproxy/fastcgi/client.go:45:18          Fileno      U       // FCGIListenSockFileno describes listen socket"
   - "modules/caddyhttp/reverseproxy/fastcgi/client.go:113:27         MPXS        U       MultiplexConns string = \"MPXS_CONNS\""
   - "modules/caddyhttp/reverseproxy/forwardauth/caddyfile.go:15:9        forwardauth     U       package forwardauth"
-  - "modules/caddyhttp/reverseproxy/healthchecks.go:530:71       forgetter       U       health check failure forgetter panicked\","
+  - "modules/caddyhttp/reverseproxy/healthchecks.go:538:71       forgetter       U       health check failure forgetter panicked\","
   - "modules/caddyhttp/reverseproxy/httptransport_test.go:13:22          MIID                U       const test_der_1 = `MIIDSzCCAjOgAwIBAgIUfIRObjWNUA"
   - "modules/caddyhttp/reverseproxy/httptransport_test.go:13:48          WNUA                U       MIIDSzCCAjOgAwIBAgIUfIRObjWNUA4jxQ/0x8BOCvE2Vw4wDQYJKoZIhvcN"
   - "modules/caddyhttp/reverseproxy/httptransport_test.go:13:70          DQYJ                U       IUfIRObjWNUA4jxQ/0x8BOCvE2Vw4wDQYJKoZIhvcNAQELBQAwFjEUMBIGA"
@@ -345,7 +345,7 @@ issues:
   - "modules/caddyhttp/reverseproxy/streaming.go:263:8       werr            U       nw, werr := dst.Write(buf[:nr"
   - "modules/caddyhttp/reverseproxy/streaming.go:364:37      pascaldekloe    U       connection. Thanks to @pascaldekloe who provided inspiration"
   - "modules/caddyhttp/reverseproxy/upstreams.go:120:2       srvs            U       srvsMu.RLock()"
-  - "modules/caddyhttp/reverseproxy/upstreams.go:418:4       failovers       U       // failovers, especially in conjunction"
+  - "modules/caddyhttp/reverseproxy/upstreams.go:420:4       failovers       U       // failovers, especially in conjunction"
   - "modules/caddyhttp/rewrite/caddyfile.go:105:6        rewr        U       var rewr Rewrite"
   - "modules/caddyhttp/rewrite/caddyfile.go:145:49       substr      U       append(rewr.URISubstring, substrReplacer{"
   - "modules/caddyhttp/rewrite/rewrite_test.go:64:40         Fbaz        U       newRequest(t, \"GET\", \"/bar%3Fbaz?c=d\"),"
