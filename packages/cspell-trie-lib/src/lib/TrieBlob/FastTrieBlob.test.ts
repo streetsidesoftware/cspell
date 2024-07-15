@@ -20,7 +20,10 @@ describe('FastTrieBlob', () => {
         expect(ft.has('Hello')).toBe(false);
         ft.insert('Hello');
         expect(ft.has('Hello')).toBe(true);
-        expect(words.findIndex((word) => !ft.has(word))).toBe(-1);
+        expect(words.every((word) => ft.has(word))).toBe(true);
+        const trieBlob = ft.build();
+        expect(words.every((word) => trieBlob.has(word))).toBe(true);
+        expect([...trieBlob.words()].sort()).toEqual([...words, 'hello', 'Hello'].sort());
     });
 
     test('expected', () => {

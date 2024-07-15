@@ -1,9 +1,7 @@
 import type { ITrieNode, ITrieNodeId, ITrieNodeRoot } from '../ITrieNode/ITrieNode.js';
 import type { TrieInfo } from '../ITrieNode/TrieInfo.js';
-import {
-    NumberSequenceByteDecoderAccumulator,
-    NumberSequenceByteEncoderDecoder,
-} from './NumberSequenceByteDecoderAccumulator.js';
+import { CharIndex } from './CharIndex.js';
+import { Utf8Accumulator } from './Utf8.js';
 
 interface BitMaskInfo {
     readonly NodeMaskEOW: number;
@@ -11,8 +9,6 @@ interface BitMaskInfo {
     readonly NodeMaskChildCharIndex: number;
     readonly NodeChildRefShift: number;
 }
-
-const SpecialCharIndexMask = NumberSequenceByteEncoderDecoder.SpecialCharIndexMask;
 
 type Node = number;
 type NodeIndex = number;
@@ -26,7 +22,7 @@ export class TrieBlobInternals implements BitMaskInfo {
 
     constructor(
         readonly nodes: Uint32Array,
-        readonly charIndex: readonly string[],
+        readonly charIndex: Readonly<CharIndex>,
         maskInfo: BitMaskInfo,
     ) {
         const { NodeMaskEOW, NodeMaskChildCharIndex, NodeMaskNumChildren, NodeChildRefShift } = maskInfo;
@@ -34,7 +30,7 @@ export class TrieBlobInternals implements BitMaskInfo {
         this.NodeMaskNumChildren = NodeMaskNumChildren;
         this.NodeMaskChildCharIndex = NodeMaskChildCharIndex;
         this.NodeChildRefShift = NodeChildRefShift;
-        this.isIndexDecoderNeeded = charIndex.length > NumberSequenceByteEncoderDecoder.MaxCharIndex;
+        this.isIndexDecoderNeeded = charIndex.indexContainsMultiByteChars();
     }
 }
 
@@ -141,7 +137,7 @@ class TrieBlobINode implements ITrieNode {
         for (let i = 0; i < len && !found; ++i) {
             const entry = nodes[i + offset];
             const charIdx = entry & NodeMaskChildCharIndex;
-            found = (charIdx & SpecialCharIndexMask) === SpecialCharIndexMask;
+            found = Utf8Accumulator.isMultiByte(charIdx);
         }
 
         this._chained = !!found;
@@ -154,13 +150,12 @@ class TrieBlobINode implements ITrieNode {
             const entries = Array<[string, number]>(this._count);
             const nodes = this.trie.nodes;
             const offset = this.nodeIdx + 1;
-            const charIndex = this.trie.charIndex;
             const NodeMaskChildCharIndex = this.trie.NodeMaskChildCharIndex;
             const RefShift = this.trie.NodeChildRefShift;
             for (let i = 0; i < this._count; ++i) {
                 const entry = nodes[offset + i];
-                const charIdx = entry & NodeMaskChildCharIndex;
-                entries[i] = [charIndex[charIdx], entry >>> RefShift];
+                const codePoint = entry & NodeMaskChildCharIndex;
+                entries[i] = [String.fromCodePoint(codePoint), entry >>> RefShift];
             }
             this._nodesEntries = entries;
             return entries;
@@ -174,18 +169,17 @@ class TrieBlobINode implements ITrieNode {
         interface StackItem {
             nodeIdx: number;
             lastIdx: number;
-            acc: NumberSequenceByteDecoderAccumulator;
+            acc: Utf8Accumulator;
         }
         const NodeMaskChildCharIndex = this.trie.NodeMaskChildCharIndex;
         const NodeChildRefShift = this.trie.NodeChildRefShift;
         const NodeMaskNumChildren = this.trie.NodeMaskNumChildren;
         const nodes = this.trie.nodes;
-        const acc = NumberSequenceByteDecoderAccumulator.create();
+        const acc = Utf8Accumulator.create();
         const stack: StackItem[] = [{ nodeIdx: this.nodeIdx + 1, lastIdx: this.nodeIdx + this._count, acc }];
         let depth = 0;
         const entries = Array<[string, number]>(this._count);
         let eIdx = 0;
-        const charIndex = this.trie.charIndex;
 
         while (depth >= 0) {
             const s = stack[depth];
@@ -198,9 +192,9 @@ class TrieBlobINode implements ITrieNode {
             const entry = nodes[nodeIdx];
             const charIdx = entry & NodeMaskChildCharIndex;
             const acc = s.acc.clone();
-            const letterIdx = acc.decode(charIdx);
-            if (letterIdx !== undefined) {
-                const char = charIndex[letterIdx];
+            const codePoint = acc.decode(charIdx);
+            if (codePoint !== undefined) {
+                const char = String.fromCodePoint(codePoint);
                 const nodeIdx = entry >>> NodeChildRefShift;
                 entries[eIdx++] = [char, nodeIdx];
                 continue;

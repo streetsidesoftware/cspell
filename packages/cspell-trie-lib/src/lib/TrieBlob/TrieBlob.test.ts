@@ -1,11 +1,9 @@
 import { describe, expect, test } from 'vitest';
 
 import { readFastTrieBlobFromConfig } from '../../test/dictionaries.test.helper.js';
-import { createITrieFromList, validateTrie } from '../TrieNode/trie-util.js';
+import { validateTrie } from '../TrieNode/trie-util.js';
 import { buildTrieNodeTrieFromWords } from '../TrieNode/TrieNodeBuilder.js';
-import { TrieNodeTrie } from '../TrieNode/TrieNodeTrie.js';
-import { walkerWordsITrie } from '../walker/walker.js';
-import { createTrieBlob, createTrieBlobFromITrieNodeRoot, createTrieBlobFromTrieData } from './createTrieBlob.js';
+import { createTrieBlob } from './createTrieBlob.js';
 import { FastTrieBlobBuilder } from './FastTrieBlobBuilder.js';
 import { TrieBlob } from './TrieBlob.js';
 
@@ -47,25 +45,6 @@ describe('TrieBlob', () => {
         const r = TrieBlob.decodeBin(bin);
         expect(r.toJSON()).toEqual(tb.toJSON());
         expect([...r.words()]).toEqual(sampleWords);
-    });
-
-    test('createTrieBlobFromITrieNodeRoot', () => {
-        const root = createITrieFromList(sampleWords);
-        const trieBlob = createTrieBlobFromITrieNodeRoot(root);
-        expect([...trieBlob.words()].sort()).toEqual(sampleWords);
-    });
-
-    test('createTrieBlobFromTrieData', () => {
-        const root = TrieNodeTrie.createFromWords(sampleWords);
-        const trieBlob = createTrieBlobFromTrieData(root);
-        expect([...trieBlob.words()].sort()).toEqual(sampleWords);
-    });
-
-    test('toITrieNodeRoot', () => {
-        const root = createITrieFromList(sampleWords);
-        const trieBlob = createTrieBlobFromITrieNodeRoot(root);
-        const iter = walkerWordsITrie(trieBlob.getRoot());
-        expect([...iter].sort()).toEqual(sampleWords);
     });
 
     test('from Trie', () => {

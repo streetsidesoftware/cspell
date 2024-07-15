@@ -6,9 +6,9 @@ import { findNode } from '../ITrieNode/trie-util.js';
 import type { PartialTrieInfo, TrieInfo } from '../ITrieNode/TrieInfo.js';
 import type { TrieData } from '../TrieData.js';
 import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.js';
-import { CharIndex, CharIndexSeq } from './CharIndex.js';
-import { NumberSequenceByteDecoderAccumulator, SpecialCharIndex } from './NumberSequenceByteDecoderAccumulator.js';
+import { CharIndex, Utf8Seq } from './CharIndex.js';
 import { TrieBlobInternals, TrieBlobIRoot } from './TrieBlobIRoot.js';
+import { Utf8Accumulator } from './Utf8.js';
 
 const NodeHeaderNumChildrenBits = 8;
 const NodeHeaderNumChildrenShift = 0;
@@ -82,12 +82,12 @@ export class TrieBlob implements TrieData {
         this.#nonStrictIdx = this._lookupNode(0, this.info.stripCaseAndAccentsPrefix);
     }
 
-    public wordToNodeCharIndexSequence(word: string): CharIndexSeq {
-        return this.charIndex.wordToCharIndexSequence(word);
+    public wordToNodeCharIndexSequence(word: string): Utf8Seq {
+        return this.charIndex.wordToUtf8Seq(word);
     }
 
-    private letterToNodeCharIndexSequence(letter: string): CharIndexSeq {
-        return this.charIndex.getCharIndexSeq(letter);
+    private letterToNodeCharIndexSequence(letter: string): Utf8Seq {
+        return this.charIndex.getCharUtf8Seq(letter);
     }
 
     has(word: string): boolean {
@@ -134,7 +134,7 @@ export class TrieBlob implements TrieData {
     }
 
     private _getRoot(): ITrieNodeRoot {
-        const trieData = new TrieBlobInternals(this.nodes, this.charIndex.charIndex, {
+        const trieData = new TrieBlobInternals(this.nodes, this.charIndex, {
             NodeMaskEOW: TrieBlob.NodeMaskEOW,
             NodeMaskNumChildren: TrieBlob.NodeMaskNumChildren,
             NodeMaskChildCharIndex: TrieBlob.NodeMaskChildCharIndex,
@@ -250,16 +250,14 @@ export class TrieBlob implements TrieData {
             nodeIdx: number;
             pos: number;
             word: string;
-            acc: NumberSequenceByteDecoderAccumulator;
+            acc: Utf8Accumulator;
         }
         const NodeMaskNumChildren = TrieBlob.NodeMaskNumChildren;
         const NodeMaskEOW = TrieBlob.NodeMaskEOW;
         const NodeMaskChildCharIndex = TrieBlob.NodeMaskChildCharIndex;
         const NodeChildRefShift = TrieBlob.NodeChildRefShift;
         const nodes = this.nodes;
-        const stack: StackItem[] = [
-            { nodeIdx: 0, pos: 0, word: '', acc: NumberSequenceByteDecoderAccumulator.create() },
-        ];
+        const stack: StackItem[] = [{ nodeIdx: 0, pos: 0, word: '', acc: Utf8Accumulator.create() }];
         let depth = 0;
 
         while (depth >= 0) {
@@ -277,8 +275,8 @@ export class TrieBlob implements TrieData {
             const nextPos = ++stack[depth].pos;
             const entry = nodes[nodeIdx + nextPos];
             const nAcc = acc.clone();
-            const charIdx = nAcc.decode(entry & NodeMaskChildCharIndex);
-            const letter = (charIdx && this.charIndex.indexToCharacter(charIdx)) || '';
+            const codePoint = nAcc.decode(entry & NodeMaskChildCharIndex);
+            const letter = (codePoint && String.fromCodePoint(codePoint)) || '';
             ++depth;
             stack[depth] = {
                 nodeIdx: entry >>> NodeChildRefShift,
@@ -429,9 +427,6 @@ export class TrieBlob implements TrieData {
      * - @see {@link TrieBlob.MaxCharIndex}
      */
     static NodeMaskChildCharIndex = 0x0000_00ff;
-    /** SpecialCharIndexMask is used to indicate a node chain */
-    static SpecialCharIndexMask = SpecialCharIndex.Mask;
-    static MaxCharIndex = SpecialCharIndex.MaxCharIndex;
 
     static nodesView(trie: TrieBlob): Readonly<Uint32Array> {
         return new Uint32Array(trie.nodes);

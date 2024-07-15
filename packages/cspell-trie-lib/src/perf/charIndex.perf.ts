@@ -38,13 +38,13 @@ suite('encode to sequence', async (test) => {
 
     test('charIndex.wordToCharIndexSequence' + msgSuffix, () => {
         for (const word of words) {
-            charIndex.wordToCharIndexSequence(word);
+            charIndex.wordToUtf8Seq(word);
         }
     });
 
     test('charIndex.__wordToCharIndexSequence' + msgSuffix, () => {
         for (const word of words) {
-            charIndex.__wordToCharIndexSequence(word);
+            charIndex.__wordToUtf8Seq(word);
         }
     });
 

@@ -3,12 +3,10 @@ import assert from 'node:assert';
 import { suite } from 'perf-insight';
 
 import type { Trie } from '../lib/index.js';
-import { createTrieBlobFromITrieNodeRoot } from '../lib/TrieBlob/createTrieBlob.js';
 import type { FastTrieBlob } from '../lib/TrieBlob/FastTrieBlob.js';
 import { FastTrieBlobBuilder } from '../lib/TrieBlob/FastTrieBlobBuilder.js';
 import { TrieBlob } from '../lib/TrieBlob/TrieBlob.js';
 import type { TrieData } from '../lib/TrieData.js';
-import { trieRootToITrieRoot } from '../lib/TrieNode/trie.js';
 import { TrieNodeTrie } from '../lib/TrieNode/TrieNodeTrie.js';
 import { walkerWordsITrie } from '../lib/walker/walker.js';
 import { readFastTrieBlobFromConfig, readTrieFromConfig } from '../test/dictionaries.test.helper.js';
@@ -69,42 +67,37 @@ const di = new DI();
 // const measureTimeout = 100;
 
 suite('blob.FastTrieBlobBuilder', async (test) => {
-    try {
-        const { trie, words, trieFast } = await prepareDI(['trie', 'words', 'trieFast']);
-        const trieBlob = createTrieBlobFromITrieNodeRoot(trieRootToITrieRoot(trie.root));
-        const trieBlobFromFast = trieFast.toTrieBlob();
-        assert(!words.some((w) => !trieFast.has(w)), 'Expect all words to be found in trieFast.');
-        assert(!words.some((w) => !trieBlobFromFast.has(w)), 'Expect all words to be found in trieBlobFromFast.');
-        assert(!words.some((w) => !trie.has(w)), 'Expect all words to be found in trie.');
-        assert(!words.some((w) => !trieBlob.has(w)), 'Expect all words to be found in trieBlob. p1');
+    const { trie, words, trieFast } = await prepareDI(['trie', 'words', 'trieFast']);
+    const trieBlob = FastTrieBlobBuilder.fromTrieRoot(trie.root).toTrieBlob();
+    const trieBlobFromFast = trieFast.toTrieBlob();
+    assert(!words.some((w) => !trieFast.has(w)), 'Expect all words to be found in trieFast.');
+    assert(!words.some((w) => !trieBlobFromFast.has(w)), 'Expect all words to be found in trieBlobFromFast.');
+    assert(!words.some((w) => !trie.has(w)), 'Expect all words to be found in trie.');
+    assert(!words.some((w) => !trieBlob.has(w)), 'Expect all words to be found in trieBlob. p1');
 
-        test('FastTrieBlobBuilder.fromTrieRoot', () => FastTrieBlobBuilder.fromTrieRoot(trie.root));
+    test('FastTrieBlobBuilder.fromTrieRoot', () => FastTrieBlobBuilder.fromTrieRoot(trie.root));
 
-        test.prepare(() => FastTrieBlobBuilder.fromTrieRoot(trie.root)).test(
-            'blob.FastTrieBlobBuilder.fromTrieRoot',
-            (ft) => ft.toTrieBlob(),
-        );
+    test.prepare(() => FastTrieBlobBuilder.fromTrieRoot(trie.root)).test(
+        'blob.FastTrieBlobBuilder.fromTrieRoot',
+        (ft) => ft.toTrieBlob(),
+    );
 
-        test('blob.createTrieBlobFromITrieNodeRoot', () =>
-            createTrieBlobFromITrieNodeRoot(trieRootToITrieRoot(trie.root)));
+    test('blob.createTrieBlobFromITrieNodeRoot', () => FastTrieBlobBuilder.fromTrieRoot(trie.root).toTrieBlob());
 
-        test('blob.TrieBlob.has', () => trieHasWords(trieBlob, words));
-        test('blob.words', () => [...trieBlob.words()]);
-        test('blob.walkerWordsITrie', () => [...walkerWordsITrie(trieBlob.getRoot())]);
+    test('blob.TrieBlob.has', () => trieHasWords(trieBlob, words));
+    test('blob.words', () => [...trieBlob.words()]);
+    test('blob.walkerWordsITrie', () => [...walkerWordsITrie(trieBlob.getRoot())]);
 
-        test('JSON.stringify', () => JSON.stringify(trieBlob, undefined, 2));
-        test('encodeBin', () => trieBlob.encodeBin());
+    test('JSON.stringify', () => JSON.stringify(trieBlob, undefined, 2));
+    test('encodeBin', () => trieBlob.encodeBin());
 
-        const trieBlobBin = trieBlob.encodeBin();
-        test('decodeBin', () => TrieBlob.decodeBin(trieBlobBin));
+    const trieBlobBin = trieBlob.encodeBin();
+    test('decodeBin', () => TrieBlob.decodeBin(trieBlobBin));
 
-        const trieBlob2 = TrieBlob.decodeBin(trieBlobBin);
-        assert(!words.some((w) => !trieBlob.has(w)), 'Expect all words to be found in trieBlob. p2');
-        assert(!words.some((w) => !trieBlob2.has(w)), 'Expect all words to be found in trieBlob2.');
-        test('blob.TrieBlob.has', () => trieHasWords(trieBlob2, words));
-    } catch (e) {
-        console.error(e);
-    }
+    const trieBlob2 = TrieBlob.decodeBin(trieBlobBin);
+    assert(!words.some((w) => !trieBlob.has(w)), 'Expect all words to be found in trieBlob. p2');
+    assert(!words.some((w) => !trieBlob2.has(w)), 'Expect all words to be found in trieBlob2.');
+    test('blob.TrieBlob.has', () => trieHasWords(trieBlob2, words));
 });
 
 type AwaitedRecord<T> = { [K in keyof T]: AwaitedFnOrValue<T[K]> };
