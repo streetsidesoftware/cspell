@@ -3,9 +3,9 @@ Repository: microsoft/TypeScript-Website
 Url: https://github.com/microsoft/TypeScript-Website.git
 Args: '["--config=${repoConfig}/cspell.json","**/*.*"]'
 Summary:
-  files: 752
-  filesWithIssues: 171
-  issues: 741
+  files: 754
+  filesWithIssues: 172
+  issues: 747
   errors: 0
 Errors: []
 
@@ -69,12 +69,14 @@ issues:
   - "packages/documentation/copy/en/project-config/Compiler Options.md:243:117       fixedchunksizepolling           U       oritypolling</code>, or <code>fixedchunksizepolling</code></p>"
   - "packages/documentation/copy/en/project-config/Compiler Options.md:252:51        prioritypollinginterval         U       pollinginterval</code>, <code>prioritypollinginterval</code>, <code>dynamicpriority"
   - "packages/documentation/copy/en/project-config/Compiler Options.md:252:191       usefseventsonparentdirectory    U       usefsevents</code>, or <code>usefseventsonparentdirectory</code></p>"
-  - "packages/documentation/copy/en/project-config/Compiler Options.md:702:119       jsxdev                          U       code>, or <code>react-jsxdev</code></p>"
+  - "packages/documentation/copy/en/project-config/Compiler Options.md:713:119       jsxdev                          U       code>, or <code>react-jsxdev</code></p>"
   - "packages/documentation/copy/en/project-config/Compiler Options in MSBuild.md:199:31         sourcemaps      U       Include source code in the sourcemaps inside the emitted JavaScript"
   - "packages/documentation/copy/en/project-config/Integrating with Build Tools.md:131:16        jmreidy             U       More details: [jmreidy/grunt-browserify](https"
   - "packages/documentation/copy/en/project-config/Integrating with Build Tools.md:262:33        preprocessors       U       more information about preprocessors"
   - "packages/documentation/copy/en/reference/Advanced Types.md:869:102      otherwords      U       index to an object. In otherwords, `keyof any` is currently"
   - "packages/documentation/copy/en/reference/Enums.md:388:43        deconstifying       U       ambient const enums, by deconstifying them with the help of"
+  - "packages/documentation/copy/en/reference/JSX.md:127:121     jsxs            U       runtime needs the `jsx`, `jsxs`, and `Fragment` exports"
+  - "packages/documentation/copy/en/reference/JSX.md:449:114     behaviour       U       always represent runtime behaviour. As of TypeScript 5"
   - "packages/documentation/copy/en/reference/Mixins.md:127:6        Positionable    U       type Positionable = GConstructor<{ setPos"
   - "packages/documentation/copy/en/reference/Mixins.md:224:7        Pausable        U       const Pausable = (target: typeof Player"
   - "packages/documentation/copy/en/reference/Type Compatibility.md:48:42        Weatherwax      U       Lassie\", owner: \"Rudd Weatherwax\" };"
@@ -97,7 +99,6 @@ issues:
   - "packages/documentation/copy/en/release-notes/TypeScript 4.1.md:18:23        middel      U       setVerticalAlignment(\"middel\");"
   - "packages/documentation/copy/en/release-notes/TypeScript 4.1.md:104:7        twslash     U       ```ts twslash"
   - "packages/documentation/copy/en/release-notes/TypeScript 4.1.md:305:32       Collatz     U       model numbers in the Collatz conjecture or Fibonacci"
-  - "packages/documentation/copy/en/release-notes/TypeScript 4.1.md:433:56       jsxs        U       upcoming `jsx` and `jsxs` factory functions through"
   - "packages/documentation/copy/en/release-notes/TypeScript 4.2.md:158:49       Hübotter        U       external contributor [Jonas Hübotter](https://github.com"
   - "packages/documentation/copy/en/release-notes/TypeScript 4.2.md:338:5        badda           U       badda() {}"
   - "packages/documentation/copy/en/release-notes/TypeScript 4.2.md:472:14       Tenenbaums      U       \"The Royal Tenenbaums\"?: number;"
@@ -197,6 +198,7 @@ issues:
   - "packages/playground/src/sidebar/fixtures/npmPlugins.ts:141:147      Gantt           U       configuration with a React Gantt chart visualization"
   - "packages/playground/src/sidebar/fixtures/npmPlugins.ts:142:14       jsuder          U       author: \"jsuder\","
   - "packages/playground/src/sidebar/fixtures/npmPlugins.ts:149:14       antfu           U       author: \"antfu\","
+  - "packages/sandbox/src/compilerOptions.ts:88:91       jakebailey      U       == false) { // TODO(jakebailey): remove as any, check"
   - "packages/sandbox/src/index.ts:457:16        Complier (Compiler)     U       getTwoSlashComplierOptions: getTwoSlashCompilerOp"
   - "packages/sandbox/src/theme.ts:12:53         fffffe      U       0000\", background: \"fffffe\" },"
   - "packages/sandbox/src/vendor/lzstring.min.js:6:28        Hocevar     U       Copyright (C) 2004 Sam Hocevar <sam@hocevar.net>"
@@ -211,8 +213,8 @@ issues:
   - "packages/tsconfig-reference/scripts/schema/generateJSON.ts:162:6        subschema       U       (subschema): subschema is Extract"
   - "packages/tsconfig-reference/scripts/tsconfig/generateMarkdown.ts:100:75         failable    U       ionalExampleContent?: string, failable = false) => {"
   - "packages/tsconfig-reference/scripts/types.ts:30:11          Compatability (Compatibility)       U       elidedInCompatabilityPyramid?: boolean;"
-  - "packages/typescript-vfs/src/index.ts:185:17         weakref         U       \"lib.es2021.weakref.d.ts\","
-  - "packages/typescript-vfs/src/index.ts:621:41         nightlies       U       weeks of 4.8 TypeScript nightlies had a bug where the"
+  - "packages/typescript-vfs/src/index.ts:192:17         weakref         U       \"lib.es2021.weakref.d.ts\","
+  - "packages/typescript-vfs/src/index.ts:640:41         nightlies       U       weeks of 4.8 TypeScript nightlies had a bug where the"
   - "packages/typescript-vfs/test/fsbacked.test.ts:26:53         Compone     U       from \"react\"\\nReact.Compone`"
   - "packages/typescriptlang-org/gatsby-browser.js:13:56         kyel        U       clarity\", \"script\", \"3w5kyel345\");"
   - "packages/typescriptlang-org/gatsby-browser.js:30:41         aisdk       U       window[sdkInstance], aisdk = window[aiName] ||"
@@ -315,7 +317,6 @@ issues:
   - "packages/typescriptlang-org/src/templates/pages/css/cheatsheets.scss:113:8          BIIIGG      U       // BIIIGG"
   - "packages/typescriptlang-org/src/templates/pages/css/index.scss:80:32        doens't     U       Doesn't show because it doens't have a way to generate"
   - "packages/typescriptlang-org/src/templates/pages/index.tsx:64:23         ikey    U       const P = (props: { ikey: keyof typeof indexCopy"
-  - "packages/typescriptlang-org/src/templates/pages/why-create-typescript.tsx:165:71        behaviour       U       file can affect the behaviour of any number of other"
   - "packages/typescriptlang-org/src/templates/tsconfigReference.tsx:97:11       subnavs     U       const subnavs = document.querySelectorAll"
   - "packages/typescriptlang-org/static/js/docsearch.js:2:3184           clazz               U       className:function(prefix,clazz,skipDot){return(skipDot"
   - "packages/typescriptlang-org/static/js/docsearch.js:2:6920           darkorchid          U       goldenrod\",\"dodgerblue\",\"darkorchid\",\"crimson\"];function"
