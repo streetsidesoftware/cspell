@@ -79,6 +79,7 @@ suite('Utf8 decode buffer', async (test) => {
 });
 
 function sampleText() {
+    // cspell:disable
     return `
     import { describe, expect, test } from 'vitest';
     Sample Chinese text: 你好世界
@@ -96,4 +97,5 @@ function sampleText() {
     Sample Emoji text: 😊🌍🌎🌏
     //     Sample Flags text: 🇺🇸🇨🇳🇯🇵🇰🇷🇷🇺🇮🇳🇹🇭🇻🇳
     `;
+    // cspell:enable
 }
