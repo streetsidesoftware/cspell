@@ -1,6 +1,5 @@
 import { CharIndex } from './CharIndex.js';
 import type { FastTrieBlobBitMaskInfo } from './FastTrieBlobBitMaskInfo.js';
-import { NumberSequenceByteEncoderDecoder } from './NumberSequenceByteDecoderAccumulator.js';
 
 export class FastTrieBlobInternals implements FastTrieBlobBitMaskInfo {
     readonly NodeMaskEOW: number;
@@ -19,7 +18,7 @@ export class FastTrieBlobInternals implements FastTrieBlobBitMaskInfo {
         this.NodeMaskEOW = NodeMaskEOW;
         this.NodeMaskChildCharIndex = NodeMaskChildCharIndex;
         this.NodeChildRefShift = NodeChildRefShift;
-        this.isIndexDecoderNeeded = charIndex.charIndex.length > NumberSequenceByteEncoderDecoder.MaxCharIndex;
+        this.isIndexDecoderNeeded = charIndex.indexContainsMultiByteChars();
         !sorted && sortNodes(nodes, this.NodeMaskChildCharIndex);
     }
 }

@@ -13,11 +13,6 @@ export interface TrieBuilder<T extends TrieData> {
      * @returns An array of characters, one for each character in the word.
      */
     wordToCharacters(word: string): string[];
-    /**
-     * This should be called before adding words to the trie, otherwise the order of the word my be unpredictable.
-     * @param letters - letters of the alphabet - order and duplicate characters do NOT matter, they will be sorted.
-     */
-    setCharacterSet(letters: string | Iterable<string>): void;
     getCursor(): BuilderCursor;
     build(): T;
     setOptions(options: Readonly<PartialTrieOptions>): Readonly<TrieOptions>;

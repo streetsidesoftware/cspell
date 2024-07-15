@@ -87,6 +87,22 @@ describe('FastTrieBlobBuilder', () => {
         expect([...t.words()].sort()).toEqual(sortedUnique);
     });
 
+    test('insertFromOptimizedTrie small', () => {
+        const words = sampleWords2();
+        const sortedUnique = [...new Set(words)].sort();
+
+        const b = FastTrieBlobBuilder.fromWordList(words);
+        // console.warn('trie 1 %o', toJsonObj(b));
+        expect([...b.words()].sort()).toEqual(sortedUnique);
+
+        const builder = new FastTrieBlobBuilder();
+        const cursor = builder.getCursor();
+        insertFromOptimizedTrie(cursor, words);
+        // console.warn('trie 2 %o', toJsonObj(builder));
+        const t = builder.build();
+        expect([...t.words()].sort()).toEqual(sortedUnique);
+    });
+
     test('insertFromOptimizedTrie', () => {
         const builder = new FastTrieBlobBuilder();
         const cursor = builder.getCursor();
@@ -144,6 +160,45 @@ function sampleWords() {
         .filter((a) => !!a);
 }
 
+function sampleWords2() {
+    // cspell:disable
+    const samples = [
+        'Here are a few words to use as a dictionary. They just need to be split. ',
+        'walk walked walking walker ',
+        'talk talked talking talker ',
+        'play played playing player ',
+        'red green blue yellow orange ',
+        'on the first day of ',
+        'on a dark and ',
+        'ted red bed reed bees',
+        'fëé',
+        'café',
+        'cat béat',
+        'féé',
+        'téé',
+        'ትኛ',
+        'አኛ',
+        'ትግርኛ',
+        'አማርኛ',
+        'ພາສາລາວ',
+        'ꦧꦱꦗꦮ',
+        'ᐃᓄᒃᑎᑐᑦ',
+        'ᐊᓂᔑᓈᐯᒧᐎᓐ',
+        'ᓀᐦᐃᔭᐍᐏᐣ',
+        '😀😃😄😁😆🥹😅😂🤣🥲☺️😊😇🙂🙃😉',
+        '😌😍🥰😘😗😙😚😋😛😝😜🤪🤨🧐🤓😎',
+        '🥸🤩🥳😏😒😞😔😟😕🙁☹️😣😖😫😩🥺',
+        '😢😭😤😠😡🤬🤯😳🥵🥶😶‍🌫️😱😨😰😥😓',
+        '🤗🤔🫣🤭🫢🫡🤫🫠🤥😶🫥😐🫤😑🫨😬',
+        '🙄😯😦😧😮😲🥱😴🤤😪😮‍💨😵😵‍💫🤐🥴🤢',
+        '🤮🤧😷🤒🤕🤑🤠😈 ',
+    ] // cspell:enable
+        .flatMap((a) => a.split(' '))
+        .map((a) => a.normalize('NFC'))
+        .filter((a) => !!a);
+    return [...new Set(samples)].sort();
+}
+
 function insertFromOptimizedTrie(cursor: BuilderCursor, words: string[]) {
     const trie = buildTrie(words);
     const nodeToRef = new Map<TrieNode, number>();
@@ -157,7 +212,8 @@ function insertFromOptimizedTrie(cursor: BuilderCursor, words: string[]) {
             return;
         }
         if (node.c) {
-            nodeToRef.set(node, ++count);
+            const ref = ++count;
+            nodeToRef.set(node, ref);
             for (const [k, n] of Object.entries(node.c)) {
                 cursor.insertChar(k);
                 walk(n);
@@ -200,3 +256,7 @@ function genWords(len: number, startLetter: string, endLetter: string): string[]
     }
     return words;
 }
+
+// function toJsonObj(s: { toJSON: () => any }) {
+//     return JSON.parse(JSON.stringify(s));
+// }

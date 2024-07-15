@@ -1,12 +1,7 @@
 import type { ITrieNode, ITrieNodeId, ITrieNodeRoot } from '../ITrieNode/ITrieNode.js';
 import type { TrieInfo } from '../ITrieNode/TrieInfo.js';
 import type { FastTrieBlobInternals } from './FastTrieBlobInternals.js';
-import {
-    NumberSequenceByteDecoderAccumulator,
-    NumberSequenceByteEncoderDecoder,
-} from './NumberSequenceByteDecoderAccumulator.js';
-
-const SpecialCharIndexMask = NumberSequenceByteEncoderDecoder.SpecialCharIndexMask;
+import { Utf8Accumulator } from './Utf8.js';
 
 const EmptyKeys: readonly string[] = Object.freeze([]);
 const EmptyNodes: readonly ITrieNode[] = Object.freeze([]);
@@ -112,8 +107,8 @@ class FastTrieBlobINode implements ITrieNode {
         const node = this.node;
         for (let i = 1; i <= len && !found; ++i) {
             const entry = node[i];
-            const charIdx = entry & NodeMaskChildCharIndex;
-            found = (charIdx & SpecialCharIndexMask) === SpecialCharIndexMask;
+            const codePoint = entry & NodeMaskChildCharIndex;
+            found = Utf8Accumulator.isMultiByte(codePoint);
         }
 
         this._chained = !!found;
@@ -125,13 +120,12 @@ class FastTrieBlobINode implements ITrieNode {
         if (!this.containsChainedIndexes()) {
             const entries = Array<[string, NodeIndex]>(this._count);
             const nodes = this.node;
-            const charIndex = this.trie.charIndex;
             const NodeMaskChildCharIndex = this.trie.NodeMaskChildCharIndex;
             const RefShift = this.trie.NodeChildRefShift;
             for (let i = 0; i < this._count; ++i) {
                 const entry = nodes[i + 1];
-                const charIdx = entry & NodeMaskChildCharIndex;
-                entries[i] = [charIndex.indexToCharacter(charIdx), entry >>> RefShift];
+                const codePoint = entry & NodeMaskChildCharIndex;
+                entries[i] = [String.fromCodePoint(codePoint), entry >>> RefShift];
             }
             this._nodesEntries = entries;
             return entries;
@@ -148,18 +142,17 @@ class FastTrieBlobINode implements ITrieNode {
             /** the offset of the child within the current node */
             c: number;
             /** the decoder */
-            acc: NumberSequenceByteDecoderAccumulator;
+            acc: Utf8Accumulator;
         }
         const NodeMaskChildCharIndex = this.trie.NodeMaskChildCharIndex;
         const NodeChildRefShift = this.trie.NodeChildRefShift;
         const nodes = this.trie.nodes;
-        const acc = NumberSequenceByteDecoderAccumulator.create();
+        const acc = Utf8Accumulator.create();
         const stack: StackItem[] = [{ n: this.node, c: 1, acc }];
         let depth = 0;
         /** there is at least this._count number of entries, more if there are nested indexes. */
         const entries = Array<[string, NodeIndex]>(this._count);
         let eIdx = 0;
-        const charIndex = this.trie.charIndex;
 
         while (depth >= 0) {
             const s = stack[depth];
@@ -172,9 +165,9 @@ class FastTrieBlobINode implements ITrieNode {
             const entry = node[off];
             const charIdx = entry & NodeMaskChildCharIndex;
             const acc = s.acc.clone();
-            const letterIdx = acc.decode(charIdx);
-            if (letterIdx !== undefined) {
-                const char = charIndex.indexToCharacter(letterIdx);
+            const codePoint = acc.decode(charIdx);
+            if (codePoint !== undefined) {
+                const char = String.fromCodePoint(codePoint);
                 const nodeIdx = entry >>> NodeChildRefShift;
                 entries[eIdx++] = [char, nodeIdx];
                 continue;

@@ -119,7 +119,7 @@ export function writeUtf8NtoBuffer(utf8: Utf8BE32, buffer: Uint8Array, offset: n
 export class Utf8Accumulator {
     remaining = 0;
     value = 0;
-    add(byte: number): CodePoint | undefined {
+    decode(byte: number): CodePoint | undefined {
         let remaining = this.remaining;
         if (byte & ~0xff) return this.reset();
         if ((byte & 0x80) === 0) {
@@ -164,6 +164,18 @@ export class Utf8Accumulator {
         into.value = this.value;
         return into;
     }
+
+    static isMultiByte(v: number) {
+        return (v & 0x80) !== 0;
+    }
+
+    static isSingleByte(v: number) {
+        return (v & 0x80) === 0;
+    }
+
+    static create() {
+        return new this();
+    }
 }
 
 export function decodeUtf8ByteStream(
@@ -180,7 +192,7 @@ export function decodeUtf8ByteArray(bytes: ReadonlyArray<number> | Uint8Array): 
     const acc = new Utf8Accumulator();
     let i = 0;
     for (const byte of bytes) {
-        const code = acc.add(byte);
+        const code = acc.decode(byte);
         if (code !== undefined) {
             values[i++] = code;
         }
@@ -191,7 +203,7 @@ export function decodeUtf8ByteArray(bytes: ReadonlyArray<number> | Uint8Array): 
 function* _decodeUtf8ByteStream(bytes: Iterable<number>): Iterable<CodePoint> {
     const acc = new Utf8Accumulator();
     for (const byte of bytes) {
-        const code = acc.add(byte);
+        const code = acc.decode(byte);
         if (code !== undefined) {
             yield code;
         }

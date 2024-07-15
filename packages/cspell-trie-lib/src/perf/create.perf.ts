@@ -1,10 +1,10 @@
 import { suite } from 'perf-insight';
 
 import { buildITrieFromWords } from '../lib/index.js';
-import { createTrieBlobFromITrieNodeRoot } from '../lib/TrieBlob/createTrieBlob.js';
+import { createTrieBlobFromTrieRoot } from '../lib/TrieBlob/createTrieBlob.js';
 import { FastTrieBlob } from '../lib/TrieBlob/FastTrieBlob.js';
 import { FastTrieBlobBuilder } from '../lib/TrieBlob/FastTrieBlobBuilder.js';
-import { createITrieFromList, createTrieRootFromList } from '../lib/TrieNode/trie-util.js';
+import { createTrieRootFromList } from '../lib/TrieNode/trie-util.js';
 import { readTrieFromConfig } from '../test/dictionaries.test.helper.js';
 
 // const measureTimeout = 100;
@@ -14,7 +14,6 @@ const getWords = memorize(async () => [...(await getTrie()).words()]);
 
 suite('trie create', async (test) => {
     const words = await getWords();
-    const iTrie = createITrieFromList(words);
     const trie = createTrieRootFromList(words);
     const fastTrie = FastTrieBlobBuilder.fromWordList(words);
     console.error('Info: %o', {
@@ -50,8 +49,8 @@ suite('trie create', async (test) => {
         createTrieRootFromList(words);
     });
 
-    test('TrieBlob createTrieBlobFromITrieNodeRoot', () => {
-        createTrieBlobFromITrieNodeRoot(iTrie);
+    test('TrieBlob createTrieBlobFromTrieRoot', () => {
+        createTrieBlobFromTrieRoot(trie);
     });
 
     test('TrieBlob fastTrie.toTrieBlob', () => {

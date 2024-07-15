@@ -7,7 +7,7 @@ import { FastTrieBlob } from './FastTrieBlob.js';
 import { FastTrieBlobBuilder } from './FastTrieBlobBuilder.js';
 
 describe('FastTrieBlob', () => {
-    const words = ['one', 'two', 'three', 'four', 'walk', 'walking', 'walks', 'wall', 'walls', 'walled'];
+    const words = ['one', 'two', 'three', 'four', 'walk', 'walking', 'walks', 'wall', 'walls', 'walled', 'café'];
 
     test('toITrieNodeRoot', () => {
         const root = createTrieRootFromList(words);

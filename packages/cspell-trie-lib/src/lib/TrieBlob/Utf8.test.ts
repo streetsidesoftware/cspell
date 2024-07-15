@@ -66,8 +66,7 @@ describe('Utf8Accumulator', () => {
         const data = encoder.encode(text);
         const acc = new Utf8Accumulator();
         const r = [...data].map((d) => {
-            const v = acc.add(d);
-            console.log('%o', acc);
+            const v = acc.decode(d);
             return v;
         });
         expect(r).toEqual(expected);
@@ -108,7 +107,21 @@ function sampleText() {
     Sample English text: Hello World
     Sample Spanish text: Hola Mundo
     Sample Emoji text: 😊🌍🌎🌏
-    //     Sample Flags text: 🇺🇸🇨🇳🇯🇵🇰🇷🇷🇺🇮🇳🇹🇭🇻🇳
+    Sample Flags text: 🇺🇸🇨🇳🇯🇵🇰🇷🇷🇺🇮🇳🇹🇭🇻🇳
+    "ትግርኛ",
+    "አማርኛ",
+    "ພາສາລາວ",
+    "ꦧꦱꦗꦮ",
+    "ᐃᓄᒃᑎᑐᑦ",
+    "ᐊᓂᔑᓈᐯᒧᐎᓐ",
+    "ᓀᐦᐃᔭᐍᐏᐣ"
+    😀😃😄😁😆🥹😅😂🤣🥲☺️😊😇🙂🙃😉
+    😌😍🥰😘😗😙😚😋😛😝😜🤪🤨🧐🤓😎
+    🥸🤩🥳😏😒😞😔😟😕🙁☹️😣😖😫😩🥺
+    😢😭😤😠😡🤬🤯😳🥵🥶😶‍🌫️😱😨😰😥😓
+    🤗🤔🫣🤭🫢🫡🤫🫠🤥😶🫥😐🫤😑🫨😬
+    🙄😯😦😧😮😲🥱😴🤤😪😮‍💨😵😵‍💫🤐🥴🤢
+    🤮🤧😷🤒🤕🤑🤠😈
     `;
     // cspell:enable
 }
