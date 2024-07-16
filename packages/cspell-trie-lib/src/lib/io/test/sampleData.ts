@@ -89,9 +89,11 @@ export const sampleWords = [
     'fun walk',
     ...specialCharacters,
     ...smallSample,
+    // cspell:disable
     'ᐊᓂᔑᓈᐯᒧᐎᓐ',
     'ᓀᐦᐃᔭᐍᐏᐣ',
     '😀😃😄😁😆🥹😅😂🤣🥲☺️😊😇🙂🙃😉',
+    // cspell:enable
 ];
 
 export const sampleWordsExt = [...sampleWords, ...mixedLanguageWords].filter(filterUnique());
