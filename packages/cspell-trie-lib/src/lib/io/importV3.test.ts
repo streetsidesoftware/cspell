@@ -1,6 +1,5 @@
 import { readFile } from 'node:fs/promises';
 
-import { genSequence } from 'gensequence';
 import { describe, expect, test } from 'vitest';
 
 import { resolveSample as resolveSamplePath } from '../../test/samples.js';
@@ -11,6 +10,7 @@ import { trieRootToITrieRoot } from '../TrieNode/trie.js';
 import { TrieNodeBuilder } from '../TrieNode/TrieNodeBuilder.js';
 import { serializeTrie } from './importExportV3.js';
 import { importTrieV3AsTrieRoot, importTrieV3WithBuilder } from './importV3.js';
+import { sampleWords, smallSample, specialCharacters } from './test/sampleData.js';
 
 const sampleFile = resolveSamplePath('sampleV3.trie');
 
@@ -151,67 +151,4 @@ function toTree(root: ITrieNode): string {
     }
 
     return ['\n', ...walk(root, '')].join('');
-}
-
-const specialCharacters = [
-    'arrow <',
-    'escape \\',
-    '\\\\\\',
-    'eol \n',
-    'eow $',
-    'ref #',
-    'Numbers 0123456789',
-    'Braces: {}[]()',
-];
-
-const smallSample = genSequence(['lift', 'talk', 'walk', 'turn', 'burn', 'chalk', 'churn'])
-    .concatMap(applyEndings)
-    .toArray();
-
-const sampleWords = [
-    'journal',
-    'journalism',
-    'journalist',
-    'journalistic',
-    'journals',
-    'journey',
-    'journeyer',
-    'journeyman',
-    'journeymen',
-    'joust',
-    'jouster',
-    'jousting',
-    'jovial',
-    'joviality',
-    'jowl',
-    'jowly',
-    'joy',
-    'joyful',
-    'joyfuller',
-    'joyfullest',
-    'joyfulness',
-    'joyless',
-    'joylessness',
-    'joyous',
-    'joyousness',
-    'joyridden',
-    'joyride',
-    'joyrider',
-    'joyriding',
-    'joyrode',
-    'joystick',
-    'Big Apple',
-    'New York',
-    'apple',
-    'big apple',
-    'fun journey',
-    'long walk',
-    'fun walk',
-    ...specialCharacters,
-    ...smallSample,
-];
-
-function applyEndings(s: string): string[] {
-    const endings = ['', 'ed', 'er', 'ing', 's'];
-    return endings.map((e) => s + e);
 }

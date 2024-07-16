@@ -1,17 +1,24 @@
-import { readFile } from 'node:fs/promises';
+import { readFile, writeFile } from 'node:fs/promises';
 
-import { genSequence } from 'gensequence';
-import { describe, expect, test } from 'vitest';
+import { beforeAll, describe, expect, test } from 'vitest';
 
 import { resolveSample as resolveSamplePath } from '../../test/samples.js';
 import { consolidate } from '../consolidate.js';
 import * as Trie from '../index.js';
 import type { TrieNode } from '../TrieNode/TrieNode.js';
 import { importTrie, serializeTrie } from './importExportV3.js';
+import { sampleWords, smallSample, specialCharacters } from './test/sampleData.js';
 
 const sampleFile = resolveSamplePath('sampleV3.trie');
+const updateSampleFile = false;
 
 describe('Import/Export', () => {
+    beforeAll(async () => {
+        if (updateSampleFile) {
+            await createSampleFile();
+        }
+    });
+
     test('tests serialize / deserialize small sample', () => {
         const trie = Trie.buildTrie(smallSample).root;
         const expected = toTree(trie);
@@ -48,7 +55,6 @@ describe('Import/Export', () => {
         const root = importTrie(data.split('\n').map((a) => (a ? a + '\n' : a)));
         const words = [...Trie.iteratorTrieWords(root)];
         expect(words).toEqual([...sampleWords].sort());
-        // await writeFile(sampleFile, data);
     });
 
     test('tests deserialize from file', async () => {
@@ -125,65 +131,14 @@ function toTree(root: TrieNode): string {
     return ['\n', ...walk(root, '')].join('');
 }
 
-const specialCharacters = [
-    'arrow <',
-    'escape \\',
-    '\\\\\\',
-    'eol \n',
-    'eow $',
-    'ref #',
-    'Numbers 0123456789',
-    'Braces: {}[]()',
-];
-
-const smallSample = genSequence(['lift', 'talk', 'walk', 'turn', 'burn', 'chalk', 'churn'])
-    .concatMap(applyEndings)
-    .toArray();
-
-const sampleWords = [
-    'journal',
-    'journalism',
-    'journalist',
-    'journalistic',
-    'journals',
-    'journey',
-    'journeyer',
-    'journeyman',
-    'journeymen',
-    'joust',
-    'jouster',
-    'jousting',
-    'jovial',
-    'joviality',
-    'jowl',
-    'jowly',
-    'joy',
-    'joyful',
-    'joyfuller',
-    'joyfullest',
-    'joyfulness',
-    'joyless',
-    'joylessness',
-    'joyous',
-    'joyousness',
-    'joyridden',
-    'joyride',
-    'joyrider',
-    'joyriding',
-    'joyrode',
-    'joystick',
-    'Big Apple',
-    'New York',
-    'apple',
-    'big apple',
-    'fun journey',
-    'long walk',
-    'fun walk',
-    ...specialCharacters,
-    ...smallSample,
-];
-
-function applyEndings(s: string): string[] {
-    const endings = ['', 'ed', 'er', 'ing', 's'];
-    return endings.map((e) => s + e);
+async function createSampleFile() {
+    const trie = Trie.buildTrie(sampleWords).root;
+    const data = [
+        ...serializeTrie(consolidate(trie), {
+            base: 10,
+            comment: 'Sample Words',
+            addLineBreaksToImproveDiffs: false,
+        }),
+    ].join('');
+    await writeFile(sampleFile, data);
 }
