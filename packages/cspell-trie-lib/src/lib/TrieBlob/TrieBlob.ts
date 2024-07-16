@@ -82,7 +82,7 @@ export class TrieBlob implements TrieData {
         this.#nonStrictIdx = this._lookupNode(0, this.info.stripCaseAndAccentsPrefix);
     }
 
-    public wordToNodeCharIndexSequence(word: string): Utf8Seq {
+    public wordToUtf8Seq(word: string): Utf8Seq {
         return this.charIndex.wordToUtf8Seq(word);
     }
 
@@ -159,7 +159,7 @@ export class TrieBlob implements TrieData {
         const NodeChildRefShift = TrieBlob.NodeChildRefShift;
         const nodes = this.nodes;
         const nodes8 = this.#nodes8;
-        const wordIndexes = this.wordToNodeCharIndexSequence(word);
+        const wordIndexes = this.wordToUtf8Seq(word);
         const lookup = this.#nodeIdxLookup;
         const len = wordIndexes.length;
         let p = 0;
