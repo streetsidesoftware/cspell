@@ -214,7 +214,7 @@ export class FastTrieBlob implements TrieData {
 
     static toITrieNodeRoot(trie: FastTrieBlob): ITrieNodeRoot {
         return new FastTrieBlobIRoot(
-            new FastTrieBlobInternals(trie.nodes, trie._charIndex, trie.bitMasksInfo, trie.sorted),
+            new FastTrieBlobInternals(trie.nodes, trie._charIndex, trie.bitMasksInfo),
             0,
             trie.info,
         );

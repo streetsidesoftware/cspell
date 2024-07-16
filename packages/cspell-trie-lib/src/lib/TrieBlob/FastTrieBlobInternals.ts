@@ -12,14 +12,13 @@ export class FastTrieBlobInternals implements FastTrieBlobBitMaskInfo {
         readonly nodes: number[][],
         readonly charIndex: CharIndex,
         maskInfo: FastTrieBlobBitMaskInfo,
-        sorted = false,
     ) {
         const { NodeMaskEOW, NodeMaskChildCharIndex, NodeChildRefShift } = maskInfo;
         this.NodeMaskEOW = NodeMaskEOW;
         this.NodeMaskChildCharIndex = NodeMaskChildCharIndex;
         this.NodeChildRefShift = NodeChildRefShift;
         this.isIndexDecoderNeeded = charIndex.indexContainsMultiByteChars();
-        !sorted && sortNodes(nodes, this.NodeMaskChildCharIndex);
+        sortNodes(nodes, this.NodeMaskChildCharIndex);
     }
 }
 
@@ -30,6 +29,10 @@ export class FastTrieBlobInternals implements FastTrieBlobBitMaskInfo {
  * @returns
  */
 export function sortNodes(nodes: number[][], mask: number): number[][] {
+    if (Object.isFrozen(nodes)) {
+        assertSorted(nodes, mask);
+        return nodes;
+    }
     for (let i = 0; i < nodes.length; ++i) {
         let node = nodes[i];
         if (node.length > 2) {
