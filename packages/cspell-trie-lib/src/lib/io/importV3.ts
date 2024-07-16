@@ -91,8 +91,8 @@ export function importTrieV3WithBuilder<T extends TrieData>(
 
     for (let i = startOfData + 1; i < dataLines.length; ++i) {
         const line = dataLines[i];
-        for (let j = 0; j < line.length; ++j) {
-            node = parser(node, line[j]);
+        for (const c of line) {
+            node = parser(node, c);
         }
     }
     timerParse();

@@ -1,6 +1,5 @@
 import { readFile } from 'node:fs/promises';
 
-import { genSequence } from 'gensequence';
 import { describe, expect, test } from 'vitest';
 
 import { resolveSample as resolveSamplePath } from '../../test/samples.js';
@@ -11,6 +10,14 @@ import { FastTrieBlob } from '../TrieBlob/FastTrieBlob.js';
 import { trieRootToITrieRoot } from '../TrieNode/trie.js';
 import { serializeTrie } from './importExportV3.js';
 import { importTrieV3AsFastTrieBlob } from './importV3FastBlob.js';
+import {
+    filterUnique,
+    mixedLanguageWords,
+    sampleWords,
+    sampleWordsExt,
+    smallSample,
+    specialCharacters,
+} from './test/sampleData.js';
 
 const sampleFile = resolveSamplePath('sampleV3.trie');
 
@@ -32,14 +39,16 @@ describe('Import/Export', () => {
     });
 
     test('tests serialize / deserialize specialCharacters', () => {
-        const trie = Trie.buildTrie(specialCharacters).root;
+        const sampleWords = [...specialCharacters, ...mixedLanguageWords].filter(filterUnique());
+        const trie = Trie.buildTrie(sampleWords).root;
         const data = [...serializeTrie(consolidate(trie), 10)];
         const ft = importTrieV3AsFastTrieBlob(data);
         const words = [...ft.words()];
-        expect(words.sort()).toEqual([...specialCharacters].sort());
+        expect(words.sort()).toEqual([...sampleWords].sort());
     });
 
     test('tests serialize / deserialize', async () => {
+        const sampleWords = sampleWordsExt;
         const trie = Trie.buildTrie(sampleWords).root;
         const data = [
             ...serializeTrie(consolidate(trie), {
@@ -129,67 +138,4 @@ function toTree(root: ITrieNode): string {
     }
 
     return ['\n', ...walk(root, '')].join('');
-}
-
-const specialCharacters = [
-    'arrow <',
-    'escape \\',
-    '\\\\\\',
-    'eol \n',
-    'eow $',
-    'ref #',
-    'Numbers 0123456789',
-    'Braces: {}[]()',
-];
-
-const smallSample = genSequence(['lift', 'talk', 'walk', 'turn', 'burn', 'chalk', 'churn'])
-    .concatMap(applyEndings)
-    .toArray();
-
-const sampleWords = [
-    'journal',
-    'journalism',
-    'journalist',
-    'journalistic',
-    'journals',
-    'journey',
-    'journeyer',
-    'journeyman',
-    'journeymen',
-    'joust',
-    'jouster',
-    'jousting',
-    'jovial',
-    'joviality',
-    'jowl',
-    'jowly',
-    'joy',
-    'joyful',
-    'joyfuller',
-    'joyfullest',
-    'joyfulness',
-    'joyless',
-    'joylessness',
-    'joyous',
-    'joyousness',
-    'joyridden',
-    'joyride',
-    'joyrider',
-    'joyriding',
-    'joyrode',
-    'joystick',
-    'Big Apple',
-    'New York',
-    'apple',
-    'big apple',
-    'fun journey',
-    'long walk',
-    'fun walk',
-    ...specialCharacters,
-    ...smallSample,
-];
-
-function applyEndings(s: string): string[] {
-    const endings = ['', 'ed', 'er', 'ing', 's'];
-    return endings.map((e) => s + e);
 }
