@@ -1,4 +1,4 @@
-import { encodeUtf8N_BE, type Utf8BE32 } from './Utf8.js';
+import { encodeTextToUtf8, encodeUtf8N_BE, type Utf8BE32 } from './Utf8.js';
 
 export type Utf8Seq = Readonly<number[]>;
 
@@ -6,7 +6,7 @@ export type CharIndexMap = Record<string, Utf8BE32>;
 
 export type RO_CharIndexMap = Readonly<CharIndexMap>;
 
-export type CharIndexSeqMap = Record<string, Utf8Seq | number>;
+export type CharIndexSeqMap = Record<string, Utf8Seq>;
 
 export type RO_CharIndexSeqMap = Readonly<CharIndexSeqMap>;
 
@@ -15,52 +15,29 @@ const emptySeq: Utf8Seq = [0];
 Object.freeze(emptySeq);
 
 export class CharIndex {
-    readonly charToUtf8Map: RO_CharIndexMap;
-    readonly charToUtf8SeqMap: RO_CharIndexSeqMap;
+    #charToUtf8SeqMap: CharIndexSeqMap;
 
     #lastWord = '';
     #lastWordSeq: Utf8Seq = [];
+    #multiByteChars: boolean;
 
     constructor(readonly charIndex: readonly string[]) {
-        this.charToUtf8Map = buildCharIndexMap(charIndex);
-        this.charToUtf8SeqMap = buildCharIndexSequenceMap(this.charToUtf8Map);
-    }
-
-    getUtf8Value(c: string): number {
-        return this.charToUtf8Map[c] || 0;
+        this.#charToUtf8SeqMap = buildCharIndexSequenceMap(charIndex);
+        this.#multiByteChars = Object.values(this.#charToUtf8SeqMap).some((c) => c.length > 1);
     }
 
     getCharUtf8Seq(c: string): Utf8Seq {
-        const r = this.charToUtf8SeqMap[c] ?? emptySeq;
-        return typeof r === 'number' ? [r] : r;
-    }
-
-    __wordToUtf8Seq(word: string): Utf8Seq {
-        // Note: Array.flatMap is very slow
-        const seq: number[] = new Array(word.length);
-        let i = 0;
-        for (const c of word) {
-            const cSep = this.charToUtf8SeqMap[c];
-            if (typeof cSep === 'number') {
-                seq[i++] = cSep;
-                continue;
-            }
-            if (!cSep) {
-                seq[i++] = 0;
-                continue;
-            }
-            for (const cIdx of cSep) {
-                seq[i++] = cIdx;
-            }
-        }
-        if (seq.length !== i) seq.length = i;
-        return seq;
+        const found = this.#charToUtf8SeqMap[c];
+        if (found) return found;
+        const s = encodeTextToUtf8(c);
+        this.#charToUtf8SeqMap[c] = s;
+        return s;
     }
 
     wordToUtf8Seq(word: string): Utf8Seq {
         if (this.#lastWord === word) return this.#lastWordSeq;
 
-        const seq = this.__wordToUtf8Seq(word);
+        const seq = encodeTextToUtf8(word);
 
         this.#lastWord = word;
         this.#lastWordSeq = seq;
@@ -69,7 +46,7 @@ export class CharIndex {
     }
 
     indexContainsMultiByteChars(): boolean {
-        return Object.values(this.charToUtf8Map).some((v) => v >= 0x80);
+        return this.#multiByteChars;
     }
 
     get size(): number {
@@ -81,22 +58,10 @@ export class CharIndex {
     }
 }
 
-function buildCharIndexMap(charIndex: readonly string[]): CharIndexMap {
-    const map: CharIndexMap = Object.create(null);
-    for (const c of charIndex) {
-        const cn = c.normalize('NFC');
-        const utf8 = encodeUtf8N_BE(cn.codePointAt(0) || 0);
-        map[c] = utf8;
-        map[c.normalize('NFC')] = utf8;
-        map[c.normalize('NFD')] = utf8;
-    }
-    return map;
-}
-
-function buildCharIndexSequenceMap(charIndexMap: RO_CharIndexMap): CharIndexSeqMap {
+function buildCharIndexSequenceMap(charIndex: readonly string[]): CharIndexSeqMap {
     const map: CharIndexSeqMap = Object.create(null);
-    for (const [key, value] of Object.entries(charIndexMap)) {
-        map[key] = splitUtf8IfNeeded(value);
+    for (const key of charIndex) {
+        map[key] = encodeTextToUtf8(key);
     }
     return map;
 }
@@ -106,7 +71,7 @@ export class CharIndexBuilder {
     readonly charIndexMap: CharIndexMap = Object.create(null);
     readonly charIndexSeqMap: CharIndexSeqMap = Object.create(null);
 
-    readonly #mapIdxToSeq = new Map<number, number[] | number>();
+    readonly #mapIdxToSeq = new Map<number, number[]>();
 
     constructor() {
         this.getUtf8Value('');
@@ -126,24 +91,22 @@ export class CharIndexBuilder {
         return utf8;
     }
 
-    utf8ValueToUtf8Seq(idx: number): number[] | number {
+    utf8ValueToUtf8Seq(idx: number): number[] {
         const found = this.#mapIdxToSeq.get(idx);
         if (found !== undefined) {
             return found;
         }
-        const seq = splitUtf8IfNeeded(idx);
+        const seq = splitUtf8(idx);
         this.#mapIdxToSeq.set(idx, seq);
         return seq;
     }
 
     charToUtf8Seq(c: string): number[] {
         const idx = this.getUtf8Value(c);
-        const s = this.utf8ValueToUtf8Seq(idx);
-        return typeof s === 'number' ? [s] : s;
+        return this.utf8ValueToUtf8Seq(idx);
     }
 
     wordToUtf8Seq(word: string): number[] {
-        // word = word.normalize('NFC');
         const seq: number[] = new Array(word.length);
         let i = 0;
         for (const c of word) {
@@ -170,8 +133,9 @@ export class CharIndexBuilder {
     }
 }
 
-function splitUtf8IfNeeded(utf8: number): number | number[] {
-    if (utf8 < 0x80) return utf8;
-    const s = [(utf8 >> 24) & 0xff, (utf8 >> 16) & 0xff, (utf8 >> 8) & 0xff, utf8 & 0xff].filter((v) => v);
-    return s.length ? s : s[0];
+function splitUtf8(utf8: number): number[] {
+    if (utf8 <= 0xff) return [utf8];
+    if (utf8 <= 0xffff) return [(utf8 >> 8) & 0xff, utf8 & 0xff];
+    if (utf8 <= 0xff_ffff) return [(utf8 >> 16) & 0xff, (utf8 >> 8) & 0xff, utf8 & 0xff];
+    return [(utf8 >> 24) & 0xff, (utf8 >> 16) & 0xff, (utf8 >> 8) & 0xff, utf8 & 0xff].filter((v) => v);
 }

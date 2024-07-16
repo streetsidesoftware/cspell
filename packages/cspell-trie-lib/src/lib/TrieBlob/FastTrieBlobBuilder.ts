@@ -111,7 +111,6 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
             for (let i = 0; i < utf8Seq.length; ++i) {
                 insertCharIndexes(utf8Seq[i], pDepth);
             }
-            // dumpState({ step: 'insertChar', char });
         };
 
         /**
@@ -174,8 +173,6 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
             const pos = s.pos;
             const node = nodes[nodeIdx];
             node[pos] = (refNodeIdx << NodeChildRefShift) | (node[pos] & LetterMask);
-
-            // dumpState({ step: 'reference', refId, refNodeIdx });
         };
 
         const backStep = (num: number) => {
@@ -186,37 +183,7 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
                 depth = stack[depth].pDepth;
             }
             nodeIdx = stack[depth + 1].nodeIdx;
-
-            // dumpState({ step: 'backStep', num });
         };
-
-        // function dumpNode(node: number[]): string {
-        //     const n = node
-        //         .map((n, i) => {
-        //             if (!i) return `w: ${(n & NodeMaskEOW && 1) || 0}`;
-        //             return `{ c: ${(n & LetterMask).toString(16).padStart(2, '0')}, r: ${n >>> NodeChildRefShift} }`;
-        //         })
-        //         .join(', ');
-        //     return `[${n}]`;
-        // }
-
-        // function dumpNodes(nodes: FastTrieBlobNode[]) {
-        //     return nodes.map((n, i) => `${i}: ${dumpNode(n)}`);
-        // }
-
-        // const debug = false;
-
-        // function dumpState(extra?: Record<string, unknown>) {
-        //     debug &&
-        //         console.warn('%o', {
-        //             stack: stack.slice(0, depth + 1),
-        //             nodes: dumpNodes(nodes),
-        //             nodeIdx,
-        //             depth,
-        //             refNodes,
-        //             ...extra,
-        //         });
-        // }
 
         const c: BuilderCursor = {
             insertChar,
