@@ -1,5 +1,6 @@
 import { suite } from 'perf-insight';
 
+import { encodeTextToUtf8 } from '../lib/TrieBlob/Utf8.js';
 import { readFastTrieBlobFromConfig, readTrieFromConfig } from '../test/dictionaries.test.helper.js';
 
 // const measureTimeout = 100;
@@ -24,14 +25,14 @@ suite('encode to sequence', async (test) => {
 
     test('trieBlob.wordToNodeCharIndexSequence' + msgSuffix, () => {
         for (const word of words) {
-            trieBlob.wordToNodeCharIndexSequence(word);
+            trieBlob.wordToUtf8Seq(word);
         }
     });
 
     test('trieBlob.wordToNodeCharIndexSequence x4' + msgSuffix, () => {
         for (const word of words) {
             for (let i = 0; i < 4; ++i) {
-                trieBlob.wordToNodeCharIndexSequence(word);
+                trieBlob.wordToUtf8Seq(word);
             }
         }
     });
@@ -42,9 +43,9 @@ suite('encode to sequence', async (test) => {
         }
     });
 
-    test('charIndex.__wordToCharIndexSequence' + msgSuffix, () => {
+    test('encodeTextToUtf8' + msgSuffix, () => {
         for (const word of words) {
-            charIndex.__wordToUtf8Seq(word);
+            encodeTextToUtf8(word);
         }
     });
 
