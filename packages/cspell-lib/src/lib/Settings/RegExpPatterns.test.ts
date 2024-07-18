@@ -293,18 +293,19 @@ describe('Validate InDocSettings', () => {
         expect(r?.[0]).toEqual(expected);
     });
     test.each`
-        str                                      | expected
-        ${''}                                    | ${undefined}
-        ${'hello'}                               | ${undefined}
-        ${'commit 0x60975ea j'}                  | ${'0x60975ea'}
-        ${'only letters 0xfeed j'}               | ${'0xfeed'}
-        ${'commit 0xfeeeeed1 j'}                 | ${'0xfeeeeed1'}
-        ${'small value 0xf'}                     | ${'0xf'}
-        ${'trailing _ messes stuff up 0xf_ '}    | ${undefined}
-        ${'leading _ messes stuff up _0xf '}     | ${undefined}
-        ${'leading digit does not match 10xf '}  | ${undefined}
-        ${'leading letter does not match a0xf '} | ${undefined}
-        ${'commit c00ffee 0x0baad j'}            | ${'0x0baad'}
+        str                                          | expected
+        ${''}                                        | ${undefined}
+        ${'hello'}                                   | ${undefined}
+        ${'commit 0x60975ea j'}                      | ${'0x60975ea'}
+        ${'only letters 0xfeed j'}                   | ${'0xfeed'}
+        ${'commit 0xfeeeeed1 j'}                     | ${'0xfeeeeed1'}
+        ${'small value 0xf'}                         | ${'0xf'}
+        ${'trailing _ messes stuff up 0xf_ '}        | ${'0xf_'}
+        ${'trailing _ messes stuff up 0xbadc_0ffe '} | ${'0xbadc_0ffe'}
+        ${'leading _ messes stuff up _0xf '}         | ${undefined}
+        ${'leading digit does not match 10xf '}      | ${undefined}
+        ${'leading letter does not match a0xf '}     | ${undefined}
+        ${'commit c00ffee 0x0baad j'}                | ${'0x0baad'}
     `('regExHexValue "$str" expect "$expected"', ({ str, expected }) => {
         const r = str.match(RegPat.regExCStyleHexValue);
         expect(r?.[0]).toEqual(expected);
