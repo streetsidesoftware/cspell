@@ -56,6 +56,25 @@ describe('getReporter', () => {
         expect(joinCalls(stdout.mock.calls)).toMatchSnapshot();
     });
 
+    test.each`
+        settings
+        ${undefined}
+        ${{ outFile: undefined }}
+        ${{ outFile: 'stdout' }}
+        ${{ outFile: 'stderr' }}
+    `('saves json to console $settings', async ({ settings }) => {
+        const console = {
+            log: vi.fn(),
+            error: vi.fn(),
+            warn: vi.fn(),
+        };
+
+        const reporter = getReporter(settings, { console });
+        await runReporter(reporter);
+        expect(joinCalls(console.error.mock.calls)).toMatchSnapshot();
+        expect(joinCalls(console.log.mock.calls)).toMatchSnapshot();
+    });
+
     test('saves additional data', async () => {
         const reporter = getReporter({ outFile: 'out.json', verbose: true, debug: true, progress: true });
         await runReporter(reporter);

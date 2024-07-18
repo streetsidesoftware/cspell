@@ -1,5 +1,6 @@
 import type { Command } from 'commander';
 
+import { console } from './console.js';
 import {
     addPathsToGlobalImports,
     addPathsToGlobalImportsResultToTable,

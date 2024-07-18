@@ -15,17 +15,26 @@ function mkdirp(p: string) {
 
 const noopReporter = () => undefined;
 
+type ReporterConsole = Pick<Console, 'log' | 'warn' | 'error'>;
+
+export interface CSpellJSONReporterConfiguration extends ReporterConfiguration {
+    console?: ReporterConsole;
+}
+
 const STDOUT = 'stdout';
 const STDERR = 'stderr';
 
 type Data = Omit<CSpellJSONReporterOutput, 'result'>;
 
+const _console = console;
+
 export function getReporter(
     settings: unknown | CSpellJSONReporterSettings,
-    cliOptions?: ReporterConfiguration,
+    cliOptions?: CSpellJSONReporterConfiguration,
 ): Required<CSpellReporter> {
     const useSettings = normalizeSettings(settings);
     const reportData: Data = { issues: [], info: [], debug: [], error: [], progress: [] };
+    const console = cliOptions?.console ?? _console;
     return {
         issue: (issue) => {
             reportData.issues.push(issue);

@@ -1,3 +1,4 @@
+import { Chalk } from 'chalk';
 import { describe, expect, test } from 'vitest';
 
 import type { ReporterIssue } from './cli-reporter.js';
@@ -19,6 +20,8 @@ And some words to be used for some spelling issues.
 There are many options.
 `;
 
+const ioChalk = { chalk: new Chalk({ level: 0 }) };
+
 describe('cli-reporter', () => {
     test.each`
         issue                  | template                                             | expected
@@ -29,8 +32,8 @@ describe('cli-reporter', () => {
         ${genIssue('message')} | ${'$row:$col:$text - $contextFull'}                  | ${'8:36:message - adRowCol,$message,$text,$pa'}
         ${genIssue('used')}    | ${'$contextLeft:$text:$contextRight - $contextFull'} | ${'rds to be :used: for some  - rds to be used for some'}
         ${genIssue('used')}    | ${'"$contextFull"'}                                  | ${'"rds to be used for some "'}
-    `('formatIssue', ({ issue, template, expected }) => {
-        expect(formatIssue(template, issue, 200)).toBe(expected);
+    `('formatIssue $issue $template', ({ issue, template, expected }) => {
+        expect(formatIssue(ioChalk, template, issue, 200)).toBe(expected);
     });
 });
 

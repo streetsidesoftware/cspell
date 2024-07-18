@@ -1,9 +1,13 @@
-import type { CSpellReporter, Issue, ReporterConfiguration } from '@cspell/cspell-types';
+import type { CSpellReporter, CSpellReporterConfiguration, Issue } from 'cspell';
 
-export function getReporter(settings: unknown, config: ReporterConfiguration): CSpellReporter {
+export function getReporter(settings: unknown, config: CSpellReporterConfiguration): CSpellReporter {
     const issues: Issue[] = [];
 
-    console.log(`Settings: %o\nOptions: %o`, settings, config);
+    const { console: _console, ...cfg } = config;
+
+    const console = _console ?? globalThis.console;
+
+    console.log(`Settings: %o\nOptions: %o`, settings, cfg);
 
     return {
         issue: (issue) => issues.push(issue),

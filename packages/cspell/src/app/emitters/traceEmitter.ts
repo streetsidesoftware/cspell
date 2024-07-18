@@ -3,6 +3,7 @@ import * as iPath from 'node:path';
 import chalk from 'chalk';
 
 import type { TraceResult } from '../application.js';
+import { console } from '../console.js';
 import { TableRow, tableToLines } from '../util/table.js';
 import type { DictionaryPathFormat } from './DictionaryPathFormat.js';
 

@@ -26,7 +26,7 @@ export function createFromFile(pathToCache: string, useCheckSum: boolean, useRel
             return feCache.getHash(buffer);
         },
         hasFileChanged: wrap((cwd, file: string) => {
-            console.log(file);
+            // console.log(file);
             return feCache.hasFileChanged(resolveFile(cwd, file));
         }),
         analyzeFiles: wrap((cwd, files?: string[]) => {
@@ -43,7 +43,7 @@ export function createFromFile(pathToCache: string, useCheckSum: boolean, useRel
             return feCache.normalizeEntries(resolveFiles(cwd, files));
         }),
         removeEntry: wrap((cwd, file: string) => {
-            console.log(file);
+            // console.log(file);
             return feCache.removeEntry(resolveFile(cwd, file));
         }),
         deleteCacheFile(): void {

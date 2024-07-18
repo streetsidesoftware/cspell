@@ -1,5 +1,6 @@
 import { describe, expect, test, vi } from 'vitest';
 
+import { console } from '../console.js';
 import { getFeatureFlags, parseFeatureFlags } from './featureFlags.js';
 
 describe('featureFlags', () => {
