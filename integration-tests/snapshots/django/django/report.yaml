@@ -4,8 +4,8 @@ Url: https://github.com/django/django.git
 Args: '["--issues-summary-report","**/*.{md,py}"]'
 Summary:
   files: 2789
-  filesWithIssues: 902
-  issues: 8003
+  filesWithIssues: 901
+  issues: 8001
   errors: 0
 Errors: []
 
@@ -405,7 +405,7 @@ issues:
   - "django/core/files/locks.py:86:28        osfhandle           U       hfile = msvcrt.get_osfhandle(_fd(f))"
   - "django/core/files/move.py:73:37         CIFS        U       Certain filesystems (e.g. CIFS) fail to copy the file"
   - "django/core/files/move.py:89:24         winerror    U       if getattr(e, \"winerror\", 0) != 32:"
-  - "django/core/files/storage/base.py:40:35         overriden       U       get_available_name` is overriden and validation is lost"
+  - "django/core/files/storage/base.py:40:35         overriden (overridden)      U       get_available_name` is overriden and validation is lost"
   - "django/core/files/storage/memory.py:2:43        Soyland         U       inmemorystorage (BSD) by Cody Soyland, Seán Hayes, Tore Birkeland"
   - "django/core/files/storage/memory.py:2:52        Seán            U       BSD) by Cody Soyland, Seán Hayes, Tore Birkeland"
   - "django/core/files/storage/memory.py:2:69        Birkeland       U       Soyland, Seán Hayes, Tore Birkeland,"
@@ -438,7 +438,6 @@ issues:
   - "django/core/management/commands/makemessages.py:112:9       xgettext        U       xgettext GNU gettext utility"
   - "django/core/management/commands/makemessages.py:550:33      followlinks     U       root, topdown=True, followlinks=self.symlinks"
   - "django/core/management/commands/makemessages.py:717:9       pofile          U       pofile = os.path.join(basedir"
-  - "django/core/management/commands/makemigrations.py:453:15        mergeable       U       # mergeable. For now, we always"
   - "django/core/management/commands/runserver.py:15:1           naiveip             U       naiveip_re = _lazy_re_compile"
   - "django/core/management/commands/runserver.py:42:67          ipaddr              U       Optional port number, or ipaddr:port\""
   - "django/core/management/commands/runserver.py:52:16          nothreading         U       \"--nothreading\","
@@ -4297,7 +4296,6 @@ issuesSummary:
   - "text: melb, count: 5, files: 1,"
   - "text: memorydb, count: 3, files: 2,"
   - "text: Mercoledì, count: 1, files: 1,"
-  - "text: mergeable, count: 2, files: 2,"
   - "text: měsíc, count: 1, files: 1,"
   - "text: měsíce, count: 3, files: 1,"
   - "text: měsícem, count: 1, files: 1,"

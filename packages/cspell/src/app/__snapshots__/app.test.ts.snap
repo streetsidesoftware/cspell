@@ -416,7 +416,7 @@ info
 info	Checking: ./src/app/app.test.ts, File type: auto, Language: default
 info	Checked: ./src/app/app.test.ts, File type: typescript, Language: en ... Issues: 0 0.00ms
 info	Config file Used: ./cspell.json
-info	Dictionaries Used: companies, cryptocurrencies, filetypes, public-licenses, softwareTerms, computing-acronyms, web-services, workspace, [in-document-dict], aws, en_us, en-common-misspellings, fullstack, node, npm, svelte, typescript
+info	Dictionaries Used: companies, cryptocurrencies, filetypes, public-licenses, softwareTerms, computing-acronyms, software-term-suggestions, web-services, workspace, [in-document-dict], aws, en_us, en-common-misspellings, fullstack, node, npm, svelte, typescript
 error	 0.00ms
 error	CSpell: Files checked: 1, Issues found: 0 in 0 files."
 `;
@@ -483,7 +483,7 @@ info
 info	Checking: ./fixtures/issue-2998/fix-words.txt, File type: fix, Language: default
 info	Checked: ./fixtures/issue-2998/fix-words.txt, File type: fix, Language: en ... Issues: 0 0.00ms
 info	Config file Used: ./fixtures/issue-2998/cspell.json
-info	Dictionaries Used: companies, cryptocurrencies, filetypes, public-licenses, softwareTerms, computing-acronyms, web-services, aws, en_us, en-common-misspellings, fixture
+info	Dictionaries Used: companies, cryptocurrencies, filetypes, public-licenses, softwareTerms, computing-acronyms, software-term-suggestions, web-services, aws, en_us, en-common-misspellings, fixture
 error	 0.00ms
 error	CSpell: Files checked: 1, Issues found: 0 in 0 files."
 `;
@@ -1340,6 +1340,7 @@ café - en-common-misspelli* node_modules/@cspell/.../dict-en.yaml
 café * en-gb                node_modules/@cspell/dict-en-gb/en_GB.trie.gz
 café - filetypes*           node_modules/@cspell/dict-filetypes/filetypes.txt.gz
 café - public-licenses*     node_modules/@cspell/.../public-licenses.txt.gz
+café - software-term-sugge* node_modules/@cspell/.../cspell-corrections.yaml
 café - softwareTerms*       node_modules/@cspell/.../dict/softwareTerms.txt
 café - web-services*        node_modules/@cspell/.../dict/webServices.txt
 café - workspace*           ../../cspell-dict.txt"
@@ -1364,6 +1365,7 @@ flavour * en-gb                node_modules/@cspell/dict-en-gb/en_GB.trie.gz
 flavour - filetypes*           node_modules/.../dict-filetypes/filetypes.txt.gz
 flavour ! forbidden-words*     samples/forbidden-words.txt
 flavour - public-licenses*     node_modules/@cspell/.../public-licenses.txt.gz
+flavour - software-term-sugge* node_modules/@cspell/.../cspell-corrections.yaml
 flavour - softwareTerms*       node_modules/@cspell/.../dict/softwareTerms.txt
 flavour - web-services*        node_modules/@cspell/.../dict/webServices.txt"
 `;
@@ -1388,6 +1390,7 @@ hello - filetypes*           node_modules/.../dict-filetypes/filetypes.txt.gz
 hello * golang               node_modules/@cspell/dict-golang/dict/go.txt
 hello * node                 node_modules/@cspell/dict-node/dict/node.txt
 hello - public-licenses*     node_modules/@cspell/.../public-licenses.txt.gz
+hello - software-term-sugge* node_modules/@cspell/.../cspell-corrections.yaml
 hello - softwareTerms*       node_modules/@cspell/.../dict/softwareTerms.txt
 hello - web-services*        node_modules/@cspell/.../dict/webServices.txt
 hello - workspace*           ../../cspell-dict.txt"
@@ -1413,6 +1416,7 @@ hello - filetypes*           node_modules/.../dict-filetypes/filetypes.txt.gz
 hello * golang               node_modules/@cspell/dict-golang/dict/go.txt
 hello * node                 node_modules/@cspell/dict-node/dict/node.txt
 hello - public-licenses*     node_modules/@cspell/.../public-licenses.txt.gz
+hello - software-term-sugge* node_modules/@cspell/.../cspell-corrections.yaml
 hello - softwareTerms*       node_modules/@cspell/.../dict/softwareTerms.txt
 hello - web-services*        node_modules/@cspell/.../dict/webServices.txt
 hello - workspace*           ../../cspell-dict.txt"
@@ -1473,6 +1477,7 @@ hello * golang               node_modules/@cspell/dict-golang/dict/go.txt
 hello - ignore words*        ../../cspell-ignore-words.txt
 hello * node                 node_modules/@cspell/dict-node/dict/node.txt
 hello - public-licenses*     node_modules/@cspell/.../public-licenses.txt.gz
+hello - software-term-sugge* node_modules/@cspell/.../cspell-corrections.yaml
 hello - softwareTerms*       node_modules/@cspell/.../dict/softwareTerms.txt
 hello - web-services*        node_modules/@cspell/.../dict/webServices.txt
 hello - workspace*           ../../cspell-dict.txt"
@@ -1494,6 +1499,7 @@ notinanydictionary - en_us*               node_modules/@cspell/.../en_US.trie.gz
 notinanydictionary - en-common-misspelli* node_modules/@cspell/.../dict-en.yaml
 notinanydictionary - filetypes*           node_modules/.../filetypes.txt.gz
 notinanydictionary - public-licenses*     .../public-licenses.txt.gz
+notinanydictionary - software-term-sugge* .../cspell-corrections.yaml
 notinanydictionary - softwareTerms*       node_modules/.../softwareTerms.txt
 notinanydictionary - web-services*        node_modules/.../dict/webServices.txt
 notinanydictionary - workspace*           ../../cspell-dict.txt"
@@ -3011,6 +3017,7 @@ café - en-common-misspelli* node_modules/@cspell/.../dict-en.yaml
 café * en-gb                node_modules/@cspell/dict-en-gb/en_GB.trie.gz
 café - filetypes*           node_modules/@cspell/dict-filetypes/filetypes.txt.gz
 café - public-licenses*     node_modules/@cspell/.../public-licenses.txt.gz
+café - software-term-sugge* node_modules/@cspell/.../cspell-corrections.yaml
 café - softwareTerms*       node_modules/@cspell/.../dict/softwareTerms.txt
 café - web-services*        node_modules/@cspell/.../dict/webServices.txt
 café - workspace*           ../../cspell-dict.txt"
@@ -3080,6 +3087,7 @@ hello - r                    node_modules/@cspell/dict-r/r.txt.gz
 hello - ruby                 node_modules/@cspell/dict-ruby/dict/ruby.txt
 hello - rust                 node_modules/@cspell/dict-rust/dict/rust.txt
 hello - scala                node_modules/@cspell/dict-scala/dict/scala.txt
+hello - software-term-sugge* node_modules/@cspell/.../cspell-corrections.yaml
 hello - softwareTerms*       node_modules/@cspell/.../dict/softwareTerms.txt
 hello - sql                  node_modules/@cspell/dict-sql/sql.txt.gz
 hello - svelte               node_modules/@cspell/dict-svelte/dict/svelte.txt
@@ -3122,6 +3130,7 @@ hello - filetypes*           node_modules/.../dict-filetypes/filetypes.txt.gz
 hello * golang               node_modules/@cspell/dict-golang/dict/go.txt
 hello * node                 node_modules/@cspell/dict-node/dict/node.txt
 hello - public-licenses*     node_modules/@cspell/.../public-licenses.txt.gz
+hello - software-term-sugge* node_modules/@cspell/.../cspell-corrections.yaml
 hello - softwareTerms*       node_modules/@cspell/.../dict/softwareTerms.txt
 hello - web-services*        node_modules/@cspell/.../dict/webServices.txt
 hello - workspace*           ../../cspell-dict.txt"

@@ -5,7 +5,7 @@ Args: '["**"]'
 Summary:
   files: 612
   filesWithIssues: 319
-  issues: 2939
+  issues: 2936
   errors: 0
 Errors: []
 
@@ -508,8 +508,6 @@ issues:
   - "stdlib/src/mmap.rs:44:19        MADV                        U       libc::MADV_DONTFORK => Advice:"
   - "stdlib/src/mmap.rs:44:24        DONTFORK                    U       libc::MADV_DONTFORK => Advice::DontFork"
   - "stdlib/src/mmap.rs:46:24        DOFORK                      U       libc::MADV_DOFORK => Advice::DoFork,"
-  - "stdlib/src/mmap.rs:50:24        UNMERGEABLE                 U       libc::MADV_UNMERGEABLE => Advice::Unmergeable"
-  - "stdlib/src/mmap.rs:50:47        Unmergeable                 U       UNMERGEABLE => Advice::Unmergeable,"
   - "stdlib/src/mmap.rs:52:24        HUGEPAGE                    U       libc::MADV_HUGEPAGE => Advice::HugePage"
   - "stdlib/src/mmap.rs:54:24        NOHUGEPAGE                  U       libc::MADV_NOHUGEPAGE => Advice::NoHugePage"
   - "stdlib/src/mmap.rs:58:24        DONTDUMP                    U       libc::MADV_DONTDUMP => Advice::DontDump"
