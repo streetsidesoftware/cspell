@@ -2,7 +2,7 @@ import assert from 'node:assert';
 import Path from 'node:path';
 
 import { toFilePathOrHref } from './fileUrl.mjs';
-import { addTrailingSlash, isUrlLike, urlParent, urlToUrlRelative } from './url.mjs';
+import { addTrailingSlash, isUrlLike, normalizeWindowsUrl, urlParent, urlToUrlRelative } from './url.mjs';
 
 export const isWindows = process.platform === 'win32';
 
@@ -108,6 +108,17 @@ export class FileUrlBuilder {
      * @returns a URL
      */
     toFileURL(filenameOrUrl: string | URL, relativeTo?: string | URL): URL {
+        return normalizeWindowsUrl(this.#toFileURL(filenameOrUrl, relativeTo));
+    }
+
+    /**
+     * Try to make a file URL.
+     * - if filenameOrUrl is already a URL, it is returned as is.
+     * @param filenameOrUrl
+     * @param relativeTo - optional URL, if given, filenameOrUrl will be parsed as relative.
+     * @returns a URL
+     */
+    #toFileURL(filenameOrUrl: string | URL, relativeTo?: string | URL): URL {
         if (typeof filenameOrUrl !== 'string') return filenameOrUrl;
         if (isUrlLike(filenameOrUrl)) return new URL(filenameOrUrl);
         relativeTo ??= this.cwd;

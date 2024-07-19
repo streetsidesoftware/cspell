@@ -1,7 +1,10 @@
 import assert from 'node:assert';
 
+import { toFilePathOrHref } from '@cspell/url';
 import { isUrlLike } from 'cspell-io';
 import { URI, Utils } from 'vscode-uri';
+
+import { DocumentUri, documentUriToURL } from '../Models/TextDocument.js';
 
 export interface Uri {
     readonly scheme: string;
@@ -38,10 +41,11 @@ export function toUri(uriOrFile: string | Uri | URL): UriInstance {
 
 const hasDriveLetter = /^[A-Z]:/i;
 
-export function uriToFilePath(uri: Uri): string {
-    const adj = uri.scheme === 'stdin' ? { scheme: 'file' } : {};
+export function uriToFilePath(uri: DocumentUri): string {
+    let url = documentUriToURL(uri);
+    url = url.protocol === 'stdin:' ? new URL(url.pathname, 'file:///') : url;
 
-    return normalizeDriveLetter(URI.from(UriImpl.from(uri, adj)).fsPath);
+    return toFilePathOrHref(url);
 }
 
 export function fromFilePath(file: string): UriInstance {

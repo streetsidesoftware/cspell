@@ -1,5 +1,4 @@
 import assert from 'node:assert';
-import * as path from 'node:path';
 import { format } from 'node:util';
 
 import type {
@@ -11,12 +10,12 @@ import type {
     ProgressItem,
     RunResult,
 } from '@cspell/cspell-types';
+import { toFileDirURL, toFilePathOrHref, toFileURL, urlRelative } from '@cspell/url';
 import type { ChalkInstance } from 'chalk';
 import { Chalk } from 'chalk';
 import { makeTemplate } from 'chalk-template';
 import type { ImportError, SpellCheckFilePerf, SpellingDictionaryLoadError } from 'cspell-lib';
 import { isSpellingDictionaryLoadError } from 'cspell-lib';
-import { URI } from 'vscode-uri';
 
 import type { Channel } from './console.js';
 import { console as customConsole } from './console.js';
@@ -85,51 +84,40 @@ function nullEmitter() {
     /* empty */
 }
 
-function relativeFilename(filename: string, cwd: string): string {
-    const rel = path.relative(cwd, filename);
-    if (rel.startsWith('..')) return filename;
-    return '.' + path.sep + rel;
+function relativeUriFilename(uri: string, rootURL: URL): string {
+    const url = toFileURL(uri);
+    const rel = urlRelative(rootURL, url);
+    if (rel.startsWith('..')) return toFilePathOrHref(url);
+    return rel;
 }
 
-function relativeUriFilename(uri: string, fsPathRoot: string): string {
-    const fsPath = URI.parse(uri).fsPath;
-    const rel = path.relative(fsPathRoot, fsPath);
-    if (rel.startsWith('..')) return fsPath;
-    return '.' + path.sep + rel;
-}
-
-function reportProgress(io: IO, p: ProgressItem, cwd: string, options: CSpellReporterConfiguration) {
+function reportProgress(io: IO, p: ProgressItem, cwdURL: URL, options: CSpellReporterConfiguration) {
     if (p.type === 'ProgressFileComplete') {
-        return reportProgressFileComplete(io, p, cwd, options);
+        return reportProgressFileComplete(io, p, cwdURL, options);
     }
     if (p.type === 'ProgressFileBegin') {
-        return reportProgressFileBegin(io, p, cwd);
+        return reportProgressFileBegin(io, p, cwdURL);
     }
 }
 
-function determineFilename(io: IO, p: ProgressFileBase, cwd: string) {
+function determineFilename(io: IO, p: ProgressFileBase, cwd: URL) {
     const fc = '' + p.fileCount;
     const fn = (' '.repeat(fc.length) + p.fileNum).slice(-fc.length);
     const idx = fn + '/' + fc;
-    const filename = io.chalk.gray(relativeFilename(p.filename, cwd));
+    const filename = io.chalk.gray(relativeUriFilename(p.filename, cwd));
 
     return { idx, filename };
 }
 
-function reportProgressFileBegin(io: IO, p: ProgressFileBegin, cwd: string) {
-    const { idx, filename } = determineFilename(io, p, cwd);
+function reportProgressFileBegin(io: IO, p: ProgressFileBegin, cwdURL: URL) {
+    const { idx, filename } = determineFilename(io, p, cwdURL);
     if (io.getColorLevel() > 0) {
         io.clearLine?.(0);
         io.write(`${idx} ${filename}\r`);
     }
 }
 
-function reportProgressFileComplete(
-    io: IO,
-    p: ProgressFileComplete,
-    cwd: string,
-    options: CSpellReporterConfiguration,
-) {
+function reportProgressFileComplete(io: IO, p: ProgressFileComplete, cwd: URL, options: CSpellReporterConfiguration) {
     const { idx, filename } = determineFilename(io, p, cwd);
     const { verbose, debug } = options;
     const time = reportTime(io, p.elapsedTimeMs, !!p.cached);
@@ -231,15 +219,15 @@ export function getReporter(options: ReporterOptions, config?: CSpellReporterCon
         emitters[msgType]?.(message);
     }
 
-    const root = URI.file(path.resolve(options.root || process.cwd()));
-    const fsPathRoot = root.fsPath;
+    const rootURL = toFileDirURL(options.root || process.cwd());
     function relativeIssue(fn: (i: ReporterIssue) => void): (i: Issue) => void {
         const fnFilename = options.relative
-            ? (uri: string) => relativeUriFilename(uri, fsPathRoot)
-            : (uri: string) => URI.parse(uri).fsPath;
+            ? (uri: string) => relativeUriFilename(uri, rootURL)
+            : (uri: string) => toFilePathOrHref(toFileURL(uri, rootURL));
         return (i: Issue) => {
+            const fullFilename = i.uri ? toFilePathOrHref(toFileURL(i.uri, rootURL)) : '';
             const filename = i.uri ? fnFilename(i.uri) : '';
-            const r = { ...i, filename };
+            const r = { ...i, filename, fullFilename };
             fn(r);
         };
     }
@@ -330,7 +318,7 @@ export function getReporter(options: ReporterOptions, config?: CSpellReporterCon
 
     function progress(p: ProgressItem) {
         if (!silent && showProgress) {
-            reportProgress(stderr, p, fsPathRoot, options);
+            reportProgress(stderr, p, rootURL, options);
         }
         if (p.type === 'ProgressFileComplete') {
             collectPerfStats(p);

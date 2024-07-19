@@ -25,28 +25,7 @@ declare function clearCachedFiles(): Promise<void>;
  */
 declare function clearCaches(): void;
 
-interface Uri {
-    readonly scheme: string;
-    readonly path: string;
-    readonly authority?: string;
-    readonly fragment?: string;
-    readonly query?: string;
-}
-
-interface Document {
-    uri: UriString;
-    text?: string;
-    languageId?: string;
-    locale?: string;
-}
-type UriString = string;
-interface DocumentWithText extends Document {
-    text: string;
-}
-
-declare function isBinaryFile(filename: Uri | URL | string, languageId?: string | string[], text?: string): boolean;
-
-type DocumentUri = Uri;
+type DocumentUri = Uri | URL | string;
 interface Position {
     line: number;
     character: number;
@@ -127,6 +106,27 @@ interface TextDocumentContentChangeEvent {
 }
 declare function createTextDocument({ uri, content, languageId, locale, version, }: CreateTextDocumentParams): TextDocument;
 declare function updateTextDocument(doc: TextDocument, edits: TextDocumentContentChangeEvent[], version?: number): TextDocument;
+
+interface Uri {
+    readonly scheme: string;
+    readonly path: string;
+    readonly authority?: string;
+    readonly fragment?: string;
+    readonly query?: string;
+}
+
+interface Document {
+    uri: UriString;
+    text?: string;
+    languageId?: string;
+    locale?: string;
+}
+type UriString = string;
+interface DocumentWithText extends Document {
+    text: string;
+}
+
+declare function isBinaryFile(filename: Uri | URL | string, languageId?: string | string[], text?: string): boolean;
 
 declare function fileToDocument(file: string): Document;
 declare function fileToDocument(file: string, text: string, languageId?: string, locale?: string): DocumentWithText;

@@ -2,13 +2,13 @@ import { promises as fsp } from 'node:fs';
 import * as path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
+import { toFileDirURL, toFileURL } from '@cspell/url';
 import type { BufferEncoding } from 'cspell-io';
-import { readFileText as cioReadFile } from 'cspell-io';
+import { readFileText as cioReadFile, toURL } from 'cspell-io';
 import type { CSpellUserSettings, Document, Issue } from 'cspell-lib';
 import * as cspell from 'cspell-lib';
 import { fileToDocument, isBinaryFile as isUriBinaryFile } from 'cspell-lib';
 import getStdin from 'get-stdin';
-import { URI } from 'vscode-uri';
 
 import { asyncAwait, asyncFlatten, asyncMap, asyncPipe, mergeAsyncIterables } from './async.js';
 import { FileProtocol, STDIN, STDINProtocol, UTF8 } from './constants.js';
@@ -17,8 +17,6 @@ import type { GlobOptions } from './glob.js';
 import { globP } from './glob.js';
 import { readStdin } from './stdin.js';
 import { clean } from './util.js';
-
-const doesMatchUrl = /^(file|stdin|https?):\/\//;
 
 export interface ConfigInfo {
     source: string;
@@ -71,36 +69,35 @@ export function fileInfoToDocument(
 
     const uri = filenameToUrlString(filename);
 
-    if (uri.startsWith(STDINProtocol)) {
+    if (uri.href.startsWith(STDINProtocol)) {
         return clean({
-            uri,
+            uri: uri.href,
             text,
             languageId,
             locale,
         });
     }
 
-    return fileToDocument(uri, text, languageId, locale);
+    return fileToDocument(uri.href, text, languageId, locale);
 }
 
-export function filenameToUrlString(filename: string, cwd = '.'): string {
-    if (filename === STDIN) return 'stdin:///';
+export function filenameToUrlString(filename: string, cwd = '.'): URL {
+    const cwdURL = toFileDirURL(cwd);
+    if (filename === STDIN) return new URL('stdin:///');
     if (filename.startsWith(STDINProtocol)) {
         const filePath = filename.slice(STDINProtocol.length);
-        const fullPath = path.resolve(cwd, filePath);
-        return pathToFileURL(fullPath).toString();
+        return toFileURL(filePath, cwdURL);
     }
-    if (doesMatchUrl.test(filename)) return filename;
-    return pathToFileURL(path.resolve(cwd, filename)).toString();
+    return toFileURL(filename, cwdURL);
 }
 
-export function filenameToUri(filename: string, cwd?: string): URI {
-    return URI.parse(filenameToUrlString(filename, cwd));
+export function filenameToUri(filename: string, cwd?: string): URL {
+    return toURL(filenameToUrlString(filename, cwd));
 }
 
 export function isBinaryFile(filename: string, cwd?: string): boolean {
     const uri = filenameToUri(filename, cwd);
-    if (uri.scheme.startsWith('stdin')) return false;
+    if (uri.protocol.startsWith('stdin')) return false;
     return isUriBinaryFile(uri);
 }
 

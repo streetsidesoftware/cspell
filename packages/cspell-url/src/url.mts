@@ -7,7 +7,7 @@ const isURLRegEx = /^(\w[\w-]{1,63}:\/|data:|stdin:)/i;
  * @returns a URL
  */
 export function toURL(url: string | URL, relativeTo?: string | URL): URL {
-    return url instanceof URL ? url : new URL(url, relativeTo);
+    return normalizeWindowsUrl(url instanceof URL ? url : new URL(url, relativeTo));
 }
 
 /**
@@ -173,4 +173,19 @@ export function urlToUrlRelative(urlFrom: URL, urlTo: URL): string {
     }
     const rel = '../'.repeat(p0Parts.length - i) + p1Parts.slice(i).join('/');
     return decodeURIComponent(rel.length < p1.length ? rel : p1);
+}
+
+const regExpWindowsPath = /^[/][a-zA-Z]:[/]/;
+
+export function normalizeWindowsUrl(url: URL | string): URL {
+    url = typeof url === 'string' ? new URL(url) : url;
+    if (url.protocol === 'file:') {
+        const pathname = url.pathname.replaceAll(/%3A/gi, ':').replace(regExpWindowsPath, (d) => d.toLowerCase());
+        if (pathname !== url.pathname) {
+            url = new URL(url);
+            url.pathname = pathname;
+            return url;
+        }
+    }
+    return url;
 }
