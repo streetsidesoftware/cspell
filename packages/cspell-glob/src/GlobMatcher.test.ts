@@ -51,7 +51,7 @@ describe('Validate assumptions', () => {
 
     test.each`
         a                            | b                                           | path          | expected
-        ${'C:\\user\\home\\project'} | ${'D:\\projects'}                           | ${path.win32} | ${'/D:/projects'}
+        ${'C:\\user\\home\\project'} | ${'D:\\projects'}                           | ${path.win32} | ${'/d:/projects'}
         ${'/User/home/project'}      | ${'/User/home/project/fun/with/coding'}     | ${path.win32} | ${'fun/with/coding'}
         ${'/User/home/project'}      | ${'/User/home/project/fun/with/coding'}     | ${path.posix} | ${'fun/with/coding'}
         ${'/User/home/project/'}     | ${'/User/home/project/fun/with/coding'}     | ${path.win32} | ${'fun/with/coding'}
