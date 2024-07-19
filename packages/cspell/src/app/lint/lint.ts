@@ -1,4 +1,5 @@
 import * as path from 'node:path';
+import { pathToFileURL } from 'node:url';
 import { format } from 'node:util';
 
 import { isAsyncIterable, operators, opFilter, pipeAsync } from '@cspell/cspell-pipe';
@@ -21,7 +22,6 @@ import {
     spellCheckDocument,
     Text as cspellText,
 } from 'cspell-lib';
-import { URI } from 'vscode-uri';
 
 import { npmPackage } from '../../lib/pkgInfo.cjs';
 import { console } from '../console.js';
@@ -121,7 +121,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
                 const fileResult = { ...cachedResult, elapsedTimeMs: getElapsedTimeMs() };
                 return { fileResult };
             }
-            const uri = filenameToUri(filename, cfg.root);
+            const uri = filenameToUri(filename, cfg.root).href;
             const checkResult = await shouldCheckDocument({ uri }, {}, configInfo.config);
             if (!checkResult.shouldCheck) return { skip: true } as const;
             const fileInfo = await readFileInfo(filename, undefined, true);
@@ -569,7 +569,7 @@ async function determineFilesToCheck(
     }
 
     function isExcluded(filename: string, globMatcherExclude: GlobMatcher) {
-        if (cspellIsBinaryFile(URI.file(filename))) {
+        if (cspellIsBinaryFile(pathToFileURL(filename))) {
             return true;
         }
         const { root } = cfg;

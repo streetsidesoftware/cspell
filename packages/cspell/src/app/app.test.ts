@@ -3,11 +3,11 @@ import * as readline from 'node:readline';
 import { fileURLToPath } from 'node:url';
 import * as Util from 'node:util';
 
+import { toFileDirURL } from '@cspell/url';
 import chalk from 'chalk';
 import * as Commander from 'commander';
 import stripAnsi from 'strip-ansi';
 import { afterEach, beforeEach, type Constructable, describe, expect, test, vi } from 'vitest';
-import { URI } from 'vscode-uri';
 
 import * as app from './app.js';
 import { console } from './console.js';
@@ -25,7 +25,7 @@ const hideOutput = true;
 
 const projectRoot = pathPackageRoot;
 const repoRoot = Path.join(projectRoot, '../..');
-const projectRootUri = URI.file(projectRoot);
+const projectRootUri = toFileDirURL(projectRoot);
 
 function argv(...args: string[]): string[] {
     return [...process.argv.slice(0, 2), ...args];
