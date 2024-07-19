@@ -113,8 +113,8 @@ describe('util', () => {
 
     test.each`
         url                        | expected
-        ${toFileURL('./').href}    | ${pathToFileURL('./').href}
-        ${'.'}                     | ${pathToFileURL('./').href}
+        ${toFileURL('./').href}    | ${normalizeWindowsUrl(pathToFileURL('./')).href}
+        ${'.'}                     | ${normalizeWindowsUrl(pathToFileURL('./')).href}
         ${'data:application/json'} | ${'data:application/json'}
         ${'stdin:file.txt'}        | ${'stdin:file.txt'}
         ${'stdin:/path/to/dir'}    | ${'stdin:/path/to/dir/'}
