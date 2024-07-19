@@ -3,6 +3,7 @@ import url from 'node:url';
 
 import { describe, expect, test } from 'vitest';
 
+import { windowsDriveLetterToUpper } from './fileUrl.mjs';
 import { FileUrlBuilder } from './FileUrlBuilder.mjs';
 
 describe('FileUrlBuilder', () => {
@@ -54,5 +55,17 @@ describe('FileUrlBuilder', () => {
     `('isUrlLike $filePath', ({ filePath, path, expected }) => {
         const builder = new FileUrlBuilder({ path });
         expect(builder.isUrlLike(filePath)).toEqual(expected);
+    });
+
+    test.each`
+        filePath                                  | expected
+        ${'.'}                                    | ${windowsDriveLetterToUpper(process.cwd() + Path.sep)}
+        ${'e:/path/to/file.txt'}                  | ${'E:/path/to/file.txt'}
+        ${'/path/to/file.txt'}                    | ${'/path/to/file.txt'}
+        ${'file:///e:/user/test/project/deeper/'} | ${'E:/user/test/project/deeper/'}
+        ${'vscode:///E:/user/test/project/'}      | ${'vscode:///E:/user/test/project/'}
+    `('urlToFilePathOrHref $filePath', ({ filePath, expected }) => {
+        const builder = new FileUrlBuilder();
+        expect(builder.urlToFilePathOrHref(builder.toFileURL(filePath))).toEqual(expected);
     });
 });
