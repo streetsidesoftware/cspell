@@ -4,6 +4,7 @@ import { Option as CommanderOption } from 'commander';
 
 import * as App from './application.js';
 import { checkText } from './application.js';
+import { console } from './console.js';
 import type { BaseOptions } from './options.js';
 import { CheckFailed } from './util/errors.js';
 

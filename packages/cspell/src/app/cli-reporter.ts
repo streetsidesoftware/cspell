@@ -1,21 +1,26 @@
+import assert from 'node:assert';
 import * as path from 'node:path';
 import { format } from 'node:util';
 
 import type {
     Issue,
     MessageType,
+    ProgressFileBase,
     ProgressFileBegin,
     ProgressFileComplete,
     ProgressItem,
-    ReporterConfiguration,
     RunResult,
 } from '@cspell/cspell-types';
-import chalk from 'chalk';
-import chalkTemplate from 'chalk-template';
+import type { ChalkInstance } from 'chalk';
+import { Chalk } from 'chalk';
+import { makeTemplate } from 'chalk-template';
 import type { ImportError, SpellCheckFilePerf, SpellingDictionaryLoadError } from 'cspell-lib';
 import { isSpellingDictionaryLoadError } from 'cspell-lib';
 import { URI } from 'vscode-uri';
 
+import type { Channel } from './console.js';
+import { console as customConsole } from './console.js';
+import { CSpellReporterConfiguration } from './models.js';
 import type { LinterCliOptions } from './options.js';
 import type { FinalizedReporter } from './util/reporters.js';
 import { uniqueFilterFnGenerator } from './util/util.js';
@@ -25,17 +30,23 @@ const templateIssueNoFix = `{green $filename}:{yellow $row:$col} - $message ({re
 const templateIssueWithSuggestions = `{green $filename}:{yellow $row:$col} - $message ({red $text}) Suggestions: {yellow [$suggestions]}`;
 const templateIssueWithContext = `{green $filename}:{yellow $row:$col} $padRowCol- $message ({red $text})$padContext -- {gray $contextLeft}{red {underline $text}}{gray $contextRight}`;
 const templateIssueWithContextWithSuggestions = `{green $filename}:{yellow $row:$col} $padRowCol- $message ({red $text})$padContext -- {gray $contextLeft}{red {underline $text}}{gray $contextRight}\n\t Suggestions: {yellow [$suggestions]}`;
-const templateIssueLegacy = `${chalk.green('$filename')}[$row, $col]: $message: ${chalk.red('$text')}`;
+const templateIssueLegacy = `{green $filename}[$row, $col]: $message: {red $text}`;
 const templateIssueWordsOnly = '$text';
+
+const console = undefined;
+
+assert(!console);
 
 export // Exported for testing.
 interface ReporterIssue extends Issue {
     filename: string;
 }
 
-function consoleError(...params: Parameters<typeof console.error>) {
-    console.error(chalk.white('%s'), format(...params));
+interface IOChalk {
+    readonly chalk: ChalkInstance;
 }
+
+interface IO extends Channel, IOChalk {}
 
 /**
  *
@@ -44,7 +55,12 @@ function consoleError(...params: Parameters<typeof console.error>) {
  * @param reportedIssuesCollection - optional collection to store reported issues.
  * @returns issueEmitter function
  */
-function genIssueEmitter(template: string, uniqueIssues: boolean, reportedIssuesCollection: string[] | undefined) {
+function genIssueEmitter(
+    io: IO,
+    template: string,
+    uniqueIssues: boolean,
+    reportedIssuesCollection: string[] | undefined,
+) {
     const uniqueFilter = uniqueIssues ? uniqueFilterFnGenerator((issue: Issue) => issue.text) : () => true;
     const defaultWidth = 10;
     let maxWidth = defaultWidth;
@@ -57,9 +73,9 @@ function genIssueEmitter(template: string, uniqueIssues: boolean, reportedIssues
             uri = issue.uri;
         }
         maxWidth = Math.max(maxWidth * 0.999, issue.text.length, 10);
-        const issueText = formatIssue(template, issue, Math.ceil(maxWidth));
+        const issueText = formatIssue(io, template, issue, Math.ceil(maxWidth));
         reportedIssuesCollection?.push(issueText);
-        console.log(issueText);
+        io.writeLine(issueText);
     };
 }
 
@@ -82,35 +98,61 @@ function relativeUriFilename(uri: string, fsPathRoot: string): string {
     return '.' + path.sep + rel;
 }
 
-function reportProgress(p: ProgressItem, cwd: string) {
+function reportProgress(io: IO, p: ProgressItem, cwd: string, options: CSpellReporterConfiguration) {
     if (p.type === 'ProgressFileComplete') {
-        return reportProgressFileComplete(p);
+        return reportProgressFileComplete(io, p, cwd, options);
     }
     if (p.type === 'ProgressFileBegin') {
-        return reportProgressFileBegin(p, cwd);
+        return reportProgressFileBegin(io, p, cwd);
     }
 }
 
-function reportProgressFileBegin(p: ProgressFileBegin, cwd: string) {
+function determineFilename(io: IO, p: ProgressFileBase, cwd: string) {
     const fc = '' + p.fileCount;
     const fn = (' '.repeat(fc.length) + p.fileNum).slice(-fc.length);
     const idx = fn + '/' + fc;
-    const filename = chalk.gray(relativeFilename(p.filename, cwd));
-    process.stderr.write(`\r${idx} ${filename}`);
+    const filename = io.chalk.gray(relativeFilename(p.filename, cwd));
+
+    return { idx, filename };
 }
 
-function reportProgressFileComplete(p: ProgressFileComplete) {
-    const time = reportTime(p.elapsedTimeMs, !!p.cached);
+function reportProgressFileBegin(io: IO, p: ProgressFileBegin, cwd: string) {
+    const { idx, filename } = determineFilename(io, p, cwd);
+    if (io.getColorLevel() > 0) {
+        io.clearLine?.(0);
+        io.write(`${idx} ${filename}\r`);
+    }
+}
+
+function reportProgressFileComplete(
+    io: IO,
+    p: ProgressFileComplete,
+    cwd: string,
+    options: CSpellReporterConfiguration,
+) {
+    const { idx, filename } = determineFilename(io, p, cwd);
+    const { verbose, debug } = options;
+    const time = reportTime(io, p.elapsedTimeMs, !!p.cached);
     const skipped = p.processed === false ? ' skipped' : '';
-    const hasErrors = p.numErrors ? chalk.red` X` : '';
-    consoleError(` ${time}${skipped}${hasErrors}`);
+    const hasErrors = p.numErrors ? io.chalk.red` X` : '';
+    const newLine =
+        (skipped && (verbose || debug)) || hasErrors || isSlow(p.elapsedTimeMs) || io.getColorLevel() < 1 ? '\n' : '';
+    const msg = `${idx} ${filename} ${time}${skipped}${hasErrors}${newLine || '\r'}`;
+    io.write(msg);
 }
 
-function reportTime(elapsedTimeMs: number | undefined, cached: boolean): string {
-    if (cached) return chalk.green('cached');
+function reportTime(io: IO, elapsedTimeMs: number | undefined, cached: boolean): string {
+    if (cached) return io.chalk.green('cached');
     if (elapsedTimeMs === undefined) return '-';
-    const color = elapsedTimeMs < 1000 ? chalk.white : elapsedTimeMs < 2000 ? chalk.yellow : chalk.redBright;
+    const slow = isSlow(elapsedTimeMs);
+    const color = !slow ? io.chalk.white : slow === 1 ? io.chalk.yellow : io.chalk.redBright;
     return color(elapsedTimeMs.toFixed(2) + 'ms');
+}
+
+function isSlow(elapsedTmeMs: number | undefined): number | undefined {
+    if (!elapsedTmeMs || elapsedTmeMs < 1000) return 0;
+    if (elapsedTmeMs < 2000) return 1;
+    return 2;
 }
 
 export interface ReporterOptions
@@ -118,6 +160,7 @@ export interface ReporterOptions
         LinterCliOptions,
         | 'debug'
         | 'issues'
+        | 'issuesSummaryReport'
         | 'legacy'
         | 'progress'
         | 'relative'
@@ -137,7 +180,7 @@ interface ProgressFileCompleteWithPerf extends ProgressFileComplete {
     perf?: SpellCheckFilePerf;
 }
 
-export function getReporter(options: ReporterOptions, config?: ReporterConfiguration): FinalizedReporter {
+export function getReporter(options: ReporterOptions, config?: CSpellReporterConfiguration): FinalizedReporter {
     const perfStats = {
         filesProcessed: 0,
         filesSkipped: 0,
@@ -161,10 +204,27 @@ export function getReporter(options: ReporterOptions, config?: ReporterConfigura
                 : templateIssue;
     const { fileGlobs, silent, summary, issues, progress: showProgress, verbose, debug } = options;
 
+    const console = config?.console || customConsole;
+
+    const stdio: IO = {
+        ...console.stdoutChannel,
+        chalk: new Chalk({ level: console.stdoutChannel.getColorLevel() }),
+    };
+    const stderr: IO = {
+        ...console.stderrChannel,
+        chalk: new Chalk({ level: console.stderrChannel.getColorLevel() }),
+    };
+
+    const consoleError = (msg: string) => stderr.writeLine(msg);
+
+    function createInfoLog(wrap: (s: string) => string): (msg: string) => void {
+        return (msg: string) => console.info(wrap(msg));
+    }
+
     const emitters: InfoEmitter = {
-        Debug: !silent && debug ? (s) => console.info(chalk.cyan(s)) : nullEmitter,
-        Info: !silent && verbose ? (s) => console.info(chalk.yellow(s)) : nullEmitter,
-        Warning: (s) => console.info(chalk.yellow(s)),
+        Debug: !silent && debug ? createInfoLog(stdio.chalk.cyan) : nullEmitter,
+        Info: !silent && verbose ? createInfoLog(stdio.chalk.yellow) : nullEmitter,
+        Warning: createInfoLog(stdio.chalk.yellow),
     };
 
     function infoEmitter(message: string, msgType: MessageType): void {
@@ -191,7 +251,7 @@ export function getReporter(options: ReporterOptions, config?: ReporterConfigura
         if (isSpellingDictionaryLoadError(error)) {
             error = error.cause;
         }
-        const errorText = format(chalk.red(message), error.toString());
+        const errorText = format(stderr.chalk.red(message), error.toString());
         errorCollection?.push(errorText);
         consoleError(errorText);
     }
@@ -202,6 +262,11 @@ export function getReporter(options: ReporterOptions, config?: ReporterConfigura
         }
         const { files, issues, cachedFiles, filesWithIssues, errors } = result;
         const numFilesWithIssues = filesWithIssues.size;
+
+        if (stderr.getColorLevel() > 0) {
+            stderr.write('\r');
+            stderr.clearLine(0);
+        }
 
         if (issuesCollection?.length || errorCollection?.length) {
             consoleError('-------------------------------------------');
@@ -265,7 +330,7 @@ export function getReporter(options: ReporterOptions, config?: ReporterConfigura
 
     function progress(p: ProgressItem) {
         if (!silent && showProgress) {
-            reportProgress(p, fsPathRoot);
+            reportProgress(stderr, p, fsPathRoot, options);
         }
         if (p.type === 'ProgressFileComplete') {
             collectPerfStats(p);
@@ -274,7 +339,7 @@ export function getReporter(options: ReporterOptions, config?: ReporterConfigura
 
     return {
         issue: relativeIssue(
-            silent || !issues ? nullEmitter : genIssueEmitter(issueTemplate, uniqueIssues, issuesCollection),
+            silent || !issues ? nullEmitter : genIssueEmitter(stdio, issueTemplate, uniqueIssues, issuesCollection),
         ),
         error: silent ? nullEmitter : errorEmitter,
         info: infoEmitter,
@@ -284,7 +349,7 @@ export function getReporter(options: ReporterOptions, config?: ReporterConfigura
     };
 }
 
-function formatIssue(templateStr: string, issue: ReporterIssue, maxIssueTextWidth: number): string {
+function formatIssue(io: IOChalk, templateStr: string, issue: ReporterIssue, maxIssueTextWidth: number): string {
     function clean(t: string) {
         return t.replace(/\s+/, ' ');
     }
@@ -296,7 +361,7 @@ function formatIssue(templateStr: string, issue: ReporterIssue, maxIssueTextWidt
     const rowText = row.toString();
     const colText = col.toString();
     const padRowCol = ' '.repeat(Math.max(1, 8 - (rowText.length + colText.length)));
-    const suggestions = formatSuggestions(issue);
+    const suggestions = formatSuggestions(io, issue);
     const msg = issue.message || (issue.isFlagged ? 'Forbidden word' : 'Unknown word');
     const message = issue.isFlagged ? `{yellow ${msg}}` : msg;
 
@@ -312,20 +377,20 @@ function formatIssue(templateStr: string, issue: ReporterIssue, maxIssueTextWidt
         $suggestions: suggestions,
         $text: text,
         $uri: uri,
-        $quickFix: formatQuickFix(issue),
+        $quickFix: formatQuickFix(io, issue),
     };
 
-    const t = template(templateStr.replaceAll('$message', message));
-
+    const t = templateStr.replaceAll('$message', message);
+    const chalkTemplate = makeTemplate(io.chalk);
     return substitute(chalkTemplate(t), substitutions).trimEnd();
 }
 
-function formatSuggestions(issue: Issue): string {
+function formatSuggestions(io: IOChalk, issue: Issue): string {
     if (issue.suggestionsEx) {
         return issue.suggestionsEx
             .map((sug) =>
                 sug.isPreferred
-                    ? chalk.italic(chalk.bold(sug.wordAdjustedToMatchCase || sug.word)) + '*'
+                    ? io.chalk.italic(io.chalk.bold(sug.wordAdjustedToMatchCase || sug.word)) + '*'
                     : sug.wordAdjustedToMatchCase || sug.word,
             )
             .join(', ');
@@ -336,26 +401,14 @@ function formatSuggestions(issue: Issue): string {
     return '';
 }
 
-function formatQuickFix(issue: Issue): string {
+function formatQuickFix(io: IOChalk, issue: Issue): string {
     if (!issue.suggestionsEx?.length) return '';
     const preferred = issue.suggestionsEx
         .filter((sug) => sug.isPreferred)
         .map((sug) => sug.wordAdjustedToMatchCase || sug.word);
     if (!preferred.length) return '';
-    const fixes = preferred.map((w) => chalk.italic(chalk.yellow(w)));
+    const fixes = preferred.map((w) => io.chalk.italic(io.chalk.yellow(w)));
     return `fix: (${fixes.join(', ')})`;
-}
-
-class TS extends Array<string> {
-    raw: string[];
-    constructor(s: string) {
-        super(s);
-        this.raw = [s];
-    }
-}
-
-function template(s: string): TemplateStringsArray {
-    return new TS(s);
 }
 
 function substitute(text: string, substitutions: Record<string, string>): string {

@@ -10,6 +10,7 @@ import { afterEach, beforeEach, type Constructable, describe, expect, test, vi }
 import { URI } from 'vscode-uri';
 
 import * as app from './app.js';
+import { console } from './console.js';
 import * as Link from './link.js';
 import { pathPackageRoot } from './test/test.helper.js';
 import { mergeAsyncIterables } from './util/async.js';
@@ -115,8 +116,8 @@ const colorLevel = chalk.level;
 
 describe('Validate cli', () => {
     const logger = makeLogger();
-    let error = vi.spyOn(console, 'error').mockName('console.error').mockImplementation(logger.error);
-    let log = vi.spyOn(console, 'log').mockName('console.log').mockImplementation(logger.log);
+    let error = vi.spyOn(console.stderrChannel, 'write').mockName('console.error').mockImplementation(logger.error);
+    let log = vi.spyOn(console.stdoutChannel, 'write').mockName('console.log').mockImplementation(logger.log);
     let info = vi.spyOn(console, 'info').mockName('console.info').mockImplementation(logger.info);
     const listGlobalImports = vi.spyOn(Link, 'listGlobalImports').mockName('istGlobalImports');
     const addPathsToGlobalImports = vi.spyOn(Link, 'addPathsToGlobalImports').mockName('addPathsToGlobalImports');
@@ -129,8 +130,10 @@ describe('Validate cli', () => {
     beforeEach(() => {
         mockCreateInterface.mockClear();
         logger.clear();
-        error = vi.spyOn(console, 'error').mockName('console.error').mockImplementation(logger.error);
-        log = vi.spyOn(console, 'log').mockName('console.log').mockImplementation(logger.log);
+        vi.spyOn(console.stderrChannel, 'getColorLevel').mockReturnValue(0);
+        vi.spyOn(console.stdoutChannel, 'getColorLevel').mockReturnValue(0);
+        error = vi.spyOn(console.stderrChannel, 'write').mockName('console.error').mockImplementation(logger.error);
+        log = vi.spyOn(console.stdoutChannel, 'write').mockName('console.log').mockImplementation(logger.log);
         info = vi.spyOn(console, 'info').mockName('console.info').mockImplementation(logger.info);
         captureStdout.startCapture();
         captureStderr.startCapture();
@@ -379,14 +382,17 @@ function makeLogger() {
     const history: string[] = [];
 
     function record(prefix: string, ...rest: unknown[]) {
+        if (rest.some((r) => r === undefined || (typeof r === 'string' && r.trim() === 'undefined'))) {
+            console.error(new Error('undefined in log'));
+        }
         const s = Util.format(...rest);
         s.split('\n').forEach((line) => history.push(prefix + '\t' + line));
     }
 
     function normalizedHistory() {
-        let t = history.join('\n');
+        let t = history.map((a) => a.replaceAll('\u001B[2K', '').trimEnd()).join('\n');
         t = stripAnsi(t);
-        t = t.replaceAll(/\r/gm, '');
+        t = t.replaceAll('\r', '');
         t = t.replace(RegExp(escapeRegExp(projectRootUri.toString()), 'gi'), '.');
         t = t.replace(RegExp(escapeRegExp(projectRoot), 'gi'), '.');
         t = t.replaceAll('\\', '/');
@@ -394,6 +400,12 @@ function makeLogger() {
         t = t.replaceAll(/ +[\d.]+ms\b/g, ' 0.00ms');
         t = t.replaceAll(/\b[\d.]+ms\b/g, '0.00ms');
         t = t.replaceAll(/\b[\d.]+S\b/g, '0.00S');
+
+        const m = t.match(/.\[2K/g);
+        if (m) {
+            console.error('Found: %o', m);
+        }
+
         return t;
     }
 
@@ -402,9 +414,9 @@ function makeLogger() {
             history.length = 0;
             return;
         },
-        log: (...params: unknown[]) => record('log', ...params),
-        error: (...params: unknown[]) => record('error', ...params),
-        info: (...params: unknown[]) => record('info', ...params),
+        log: (...params: any[]) => record('log', ...params),
+        error: (...params: any[]) => record('error', ...params),
+        info: (...params: any[]) => record('info', ...params),
         history,
         normalizedHistory,
     };

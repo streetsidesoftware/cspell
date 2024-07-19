@@ -1,6 +1,8 @@
 import type { FeatureFlags } from 'cspell-lib';
 import { getSystemFeatureFlags } from 'cspell-lib';
 
+import { console } from '../console.js';
+
 export function getFeatureFlags(): FeatureFlags {
     return getSystemFeatureFlags();
 }

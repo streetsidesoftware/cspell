@@ -12,9 +12,11 @@ import {
 } from 'cspell-lib';
 
 import { getReporter } from './cli-reporter.js';
+import { console } from './console.js';
 import type { TimedSuggestionsForWordResult } from './emitters/suggestionsEmitter.js';
 import { getFeatureFlags, parseFeatureFlags } from './featureFlags/index.js';
 import { LintRequest, runLint } from './lint/index.js';
+import { CSpellReporterConfiguration } from './models.js';
 import type { BaseOptions, LegacyOptions, LinterCliOptions, SuggestionOptions, TraceOptions } from './options.js';
 import { fixLegacy } from './options.js';
 import { simpleRepl } from './repl/index.js';
@@ -30,10 +32,11 @@ export type AppError = NodeJS.ErrnoException;
 
 export function lint(fileGlobs: string[], options: LinterCliOptions, reporter?: CSpellReporter): Promise<RunResult> {
     options = fixLegacy(options);
+    const reporterOptions: CSpellReporterConfiguration = { ...options, console };
     const cfg = new LintRequest(
         fileGlobs,
         options,
-        finalizeReporter(reporter) ?? getReporter({ ...options, fileGlobs }, options),
+        finalizeReporter(reporter) ?? getReporter({ ...options, fileGlobs }, reporterOptions),
     );
     return runLint(cfg);
 }

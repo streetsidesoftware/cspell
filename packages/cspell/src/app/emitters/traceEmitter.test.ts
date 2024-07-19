@@ -4,6 +4,7 @@ import strip from 'strip-ansi';
 import { describe, expect, test, vi } from 'vitest';
 
 import type { TraceResult } from '../application.js';
+import { console } from '../console.js';
 import { __testing__, calcTraceResultsReport, emitTraceResults } from './traceEmitter.js';
 
 const compareStr = Intl.Collator().compare;

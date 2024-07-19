@@ -3,15 +3,7 @@ import { format } from 'node:util';
 
 import { isAsyncIterable, operators, opFilter, pipeAsync } from '@cspell/cspell-pipe';
 import { opMap, pipe } from '@cspell/cspell-pipe/sync';
-import type {
-    CSpellSettings,
-    Glob,
-    Issue,
-    ReporterConfiguration,
-    RunResult,
-    TextDocumentOffset,
-    TextOffset,
-} from '@cspell/cspell-types';
+import type { CSpellSettings, Glob, Issue, RunResult, TextDocumentOffset, TextOffset } from '@cspell/cspell-types';
 import { MessageTypes } from '@cspell/cspell-types';
 import chalk from 'chalk';
 import { findRepoRoot, GitIgnore } from 'cspell-gitignore';
@@ -32,7 +24,9 @@ import {
 import { URI } from 'vscode-uri';
 
 import { npmPackage } from '../../lib/pkgInfo.cjs';
+import { console } from '../console.js';
 import { getFeatureFlags } from '../featureFlags/index.js';
+import { CSpellReporterConfiguration } from '../models.js';
 import type { CreateCacheSettings, CSpellLintResultCache } from '../util/cache/index.js';
 import { calcCacheSettings, createCache } from '../util/cache/index.js';
 import { CheckFailed, toApplicationError, toError } from '../util/errors.js';
@@ -418,11 +412,12 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         if (cfg.options.defaultConfiguration !== undefined) {
             configInfo.config.loadDefaultConfiguration = cfg.options.defaultConfiguration;
         }
-        const reporterConfig: ReporterConfiguration = util.clean({
+        const reporterConfig: CSpellReporterConfiguration = util.clean({
             maxNumberOfProblems: configInfo.config.maxNumberOfProblems,
             maxDuplicateProblems: configInfo.config.maxDuplicateProblems,
             minWordLength: configInfo.config.minWordLength,
             ...cfg.options,
+            console,
         });
 
         const reporters = cfg.options.reporter ?? configInfo.config.reporters;
