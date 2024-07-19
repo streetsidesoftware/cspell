@@ -5,7 +5,7 @@ import { describe, expect, test } from 'vitest';
 
 import { urlBasename } from './dataUrl.mjs';
 import { normalizeFilePathForUrl, toFileDirURL, toFileURL } from './defaultFileUrlBuilder.mjs';
-import { toFilePathOrHref } from './fileUrl.mjs';
+import { toFilePathOrHref, windowsDriveLetterToUpper } from './fileUrl.mjs';
 import { FileUrlBuilder } from './FileUrlBuilder.mjs';
 import { isUrlLike, toURL, urlParent } from './url.mjs';
 
@@ -120,6 +120,17 @@ describe('util', () => {
         ${'stdin:/path/to/dir'}    | ${'stdin:/path/to/dir/'}
     `('toFileDirURL $url', ({ url, expected }) => {
         expect(toFileDirURL(url).href).toEqual(expected);
+    });
+
+    test.each`
+        path                         | expected
+        ${'d:\\user\\data\\file.md'} | ${'D:\\user\\data\\file.md'}
+        ${'c:/user/data/file.md'}    | ${'C:/user/data/file.md'}
+        ${'data:application/json'}   | ${'data:application/json'}
+        ${'stdin:file.txt'}          | ${'stdin:file.txt'}
+        ${'stdin:/path/to/dir'}      | ${'stdin:/path/to/dir'}
+    `('windowsDriveLetterToUpper $path', ({ path, expected }) => {
+        expect(windowsDriveLetterToUpper(path)).toEqual(expected);
     });
 });
 

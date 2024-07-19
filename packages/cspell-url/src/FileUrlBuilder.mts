@@ -1,7 +1,7 @@
 import assert from 'node:assert';
 import Path from 'node:path';
 
-import { toFilePathOrHref } from './fileUrl.mjs';
+import { toFilePathOrHref, windowsDriveLetterToUpper } from './fileUrl.mjs';
 import { addTrailingSlash, isUrlLike, normalizeWindowsUrl, urlParent, urlToUrlRelative } from './url.mjs';
 
 export const isWindows = process.platform === 'win32';
@@ -156,7 +156,7 @@ export class FileUrlBuilder {
             this.path === Path
                 ? toFilePathOrHref(url)
                 : decodeURIComponent(url.pathname.split('/').join(this.path.sep));
-        return p.replace(isWindowsPathRegEx, (drive) => drive.toUpperCase()).replace(isWindowsPathname, '$1');
+        return windowsDriveLetterToUpper(p.replace(isWindowsPathname, '$1'));
     }
 
     /**
