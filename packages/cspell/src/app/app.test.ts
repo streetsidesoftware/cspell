@@ -390,7 +390,7 @@ function makeLogger() {
     }
 
     function normalizedHistory() {
-        let t = history.map((a) => a.replaceAll('\u001B[2K', '')).join('\n');
+        let t = history.map((a) => a.replaceAll('\u001B[2K', '').trimEnd()).join('\n');
         t = stripAnsi(t);
         t = t.replaceAll('\r', '');
         t = t.replace(RegExp(escapeRegExp(projectRootUri.toString()), 'gi'), '.');
