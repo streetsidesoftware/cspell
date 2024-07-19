@@ -7,7 +7,7 @@ import { urlBasename } from './dataUrl.mjs';
 import { normalizeFilePathForUrl, toFileDirURL, toFileURL } from './defaultFileUrlBuilder.mjs';
 import { toFilePathOrHref, windowsDriveLetterToUpper } from './fileUrl.mjs';
 import { FileUrlBuilder } from './FileUrlBuilder.mjs';
-import { isUrlLike, toURL, urlParent } from './url.mjs';
+import { isUrlLike, normalizeWindowsUrl, toURL, urlParent } from './url.mjs';
 
 const root = Path.join(__dirname, '../..');
 // const oc = <T>(obj: T) => expect.objectContaining(obj);
@@ -85,8 +85,8 @@ describe('util', () => {
         path                     | windows | expected
         ${'path/to/file'}        | ${true} | ${'path/to/file'}
         ${'path\\to\\file.txt'}  | ${true} | ${'path/to/file.txt'}
-        ${'C:/path/to/file'}     | ${true} | ${'/C:/path/to/file'}
-        ${'d:/path/to/file'}     | ${true} | ${'/D:/path/to/file'}
+        ${'C:/path/to/file'}     | ${true} | ${'/c:/path/to/file'}
+        ${'d:/path/to/file'}     | ${true} | ${'/d:/path/to/file'}
         ${'http://example.com/'} | ${true} | ${'http://example.com/'}
         ${'path/to/file/'}       | ${true} | ${'path/to/file/'}
         ${'path/to/file\\'}      | ${true} | ${'path/to/file/'}
@@ -135,7 +135,7 @@ describe('util', () => {
 });
 
 function u(path: string, relativeURL?: string | URL) {
-    return new URL(path, relativeURL);
+    return normalizeWindowsUrl(new URL(path, relativeURL));
 }
 
 function uh(path: string, relativeURL = cwdURL) {

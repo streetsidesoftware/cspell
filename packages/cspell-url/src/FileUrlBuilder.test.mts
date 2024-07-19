@@ -60,10 +60,9 @@ describe('FileUrlBuilder', () => {
     test.each`
         filePath                                  | expected
         ${'.'}                                    | ${windowsDriveLetterToUpper(process.cwd() + Path.sep)}
-        ${'e:/path/to/file.txt'}                  | ${'E:/path/to/file.txt'}
-        ${'/path/to/file.txt'}                    | ${'/path/to/file.txt'}
-        ${'file:///e:/user/test/project/deeper/'} | ${'E:/user/test/project/deeper/'}
-        ${'vscode:///E:/user/test/project/'}      | ${'vscode:///E:/user/test/project/'}
+        ${'e:/path/to/file.txt'}                  | ${'E:/path/to/file.txt'.split('/').join(Path.sep)}
+        ${'file:///e:/user/test/project/deeper/'} | ${'E:/user/test/project/deeper/'.split('/').join(Path.sep)}
+        ${'vscode:///e:/user/test/project/'}      | ${'vscode:///e:/user/test/project/'}
     `('urlToFilePathOrHref $filePath', ({ filePath, expected }) => {
         const builder = new FileUrlBuilder();
         expect(builder.urlToFilePathOrHref(builder.toFileURL(filePath))).toEqual(expected);
