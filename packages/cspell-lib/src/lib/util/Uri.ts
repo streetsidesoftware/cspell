@@ -36,7 +36,8 @@ export function toUri(uriOrFile: string | Uri | URL): UriInstance {
     return UriImpl.file(normalizeDriveLetter(uriOrFile));
 }
 
-const hasDriveLetter = /^[A-Z]:/i;
+const isWindows = process.platform === 'win32';
+const hasDriveLetter = /^[a-zA-Z]:[\\/]/;
 
 const rootUrl = pathToFileURL('/');
 
@@ -155,6 +156,9 @@ class UriImpl extends URI implements UriInstance {
     }
 
     static file(filename: string): UriImpl {
+        if (!isWindows && hasDriveLetter.test(filename)) {
+            filename = '/' + filename.replaceAll('\\', '/');
+        }
         const url = toFileURL(filename);
         return UriImpl.parse(url.href);
     }

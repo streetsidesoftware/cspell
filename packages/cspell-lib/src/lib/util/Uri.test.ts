@@ -36,7 +36,7 @@ describe('Uri', () => {
         ${UriToString(URIfile(__filename))}                 | ${{ ...u, ...URIparse(URI.file(__filename).toString()) }}
         ${'file.txt'}                                       | ${{ ...u, ...URIfile('file.txt') }}
         ${'uri://example.com/'}                             | ${{ ...u, ...URIparse('uri://example.com/') }}
-        ${'i:/example.com/'}                                | ${{ ...u, ...URIfile('I:/example.com/') }}
+        ${'i:/example.com/'}                                | ${{ ...u, scheme: 'file', path: '/I:/example.com/' }}
         ${'stdin:D:\\home\\prj\\code.c'}                    | ${{ ...u, scheme: 'stdin', path: 'D:/home/prj/code.c' }}
         ${'stdin:/D:\\home\\prj\\code.c'}                   | ${{ ...u, scheme: 'stdin', path: 'D:/home/prj/code.c' }}
         ${'stdin://D:\\home\\prj\\code.c'}                  | ${{ ...u, scheme: 'stdin', path: 'D:/home/prj/code.c' }}
