@@ -1,3 +1,5 @@
+import { pathToFileURL } from 'node:url';
+
 import type { Glob } from '@cspell/cspell-types';
 import { describe, expect, test } from 'vitest';
 
@@ -23,7 +25,7 @@ describe('Verify Exclusion Helper functions', () => {
         ${'file:///project/myProject/.vscode/cSpell.json'}              | ${true}
         ${'file:///project/myProject/.github/node_modules/cSpell.json'} | ${true}
     `('generated matching function "$uri" expected: $expected', ({ uri, expected }) => {
-        expect(fnExcludeGlobs(uri)).toBe(expected);
+        expect(fnExcludeGlobs(fixUrlPathname(uri))).toBe(expected);
     });
 
     test('the generated matching function', () => {
@@ -32,7 +34,7 @@ describe('Verify Exclusion Helper functions', () => {
             'file:///project/myProject/node_modules',
             'file:///project/myProject/node_modules/test/test.js',
             'file:///project/myProject/.vscode/cSpell.json',
-        ];
+        ].map(fixUrlPathname);
         const fn = generateExclusionFunctionForUri(globs, '/project/myProject');
 
         filesMatching.forEach((filepath) => {
@@ -48,7 +50,7 @@ describe('Verify Exclusion Helper functions', () => {
             'file:///User/projects/myProject/node_modules/test/test.js',
             'file:///User/projects/myProject/node_modules/test/test.json',
             'untitled:///User/projects/myProject/node_modules/test/test.js',
-        ];
+        ].map(fixUrlPathname);
         const fn = generateExclusionFunctionForUri(globs, '/User/projects/myProject/node_modules/test');
 
         filesMatching.forEach((filepath) => {
@@ -65,7 +67,7 @@ describe('Verify Exclusion Helper functions', () => {
             'file:///project/myProject/README.md.rendered',
             'git-index:///projects/myProject/node_modules/test/test.js',
             'git-index:///projects/myProject/node_modules/test/test.json',
-        ];
+        ].map(fixUrlPathname);
 
         const fn = generateExclusionFunctionForUri(globs, '/project/myProject');
 
@@ -85,7 +87,7 @@ describe('Verify Exclusion Helper functions', () => {
             '**/*.rendered',
             '**/*.*.rendered',
         ];
-        const files = ['file:///src/extHostCommands.ts', 'file:///test/test.ts'];
+        const files = ['file:///src/extHostCommands.ts', 'file:///test/test.ts'].map(fixUrlPathname);
 
         const fn = generateExclusionFunctionForUri(globs, '/project/myProject');
 
@@ -96,3 +98,10 @@ describe('Verify Exclusion Helper functions', () => {
         });
     });
 });
+
+function fixUrlPathname(url: string): string {
+    if (!url.startsWith('file:')) return url;
+    const u = new URL(url);
+    const root = pathToFileURL('/');
+    return new URL(u.pathname, root).href;
+}

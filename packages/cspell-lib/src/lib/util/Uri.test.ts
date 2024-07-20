@@ -36,24 +36,24 @@ describe('Uri', () => {
         ${UriToString(URIfile(__filename))}                 | ${{ ...u, ...URIparse(URI.file(__filename).toString()) }}
         ${'file.txt'}                                       | ${{ ...u, ...URIfile('file.txt') }}
         ${'uri://example.com/'}                             | ${{ ...u, ...URIparse('uri://example.com/') }}
-        ${'i://example.com/'}                               | ${{ ...u, ...URIparse('i://example.com/') }}
-        ${'stdin:D:\\home\\prj\\code.c'}                    | ${{ ...u, scheme: 'stdin', path: 'd:/home/prj/code.c' }}
-        ${'stdin:/D:\\home\\prj\\code.c'}                   | ${{ ...u, scheme: 'stdin', path: 'd:/home/prj/code.c' }}
-        ${'stdin://D:\\home\\prj\\code.c'}                  | ${{ ...u, scheme: 'stdin', path: 'd:/home/prj/code.c' }}
-        ${'stdin:///D:\\home\\prj\\code.c'}                 | ${{ ...u, scheme: 'stdin', path: '/d:/home/prj/code.c' }}
-        ${'stdin:///D:\\home\\prj\\code.c?q=42'}            | ${{ ...u, scheme: 'stdin', path: '/d:/home/prj/code.c', query: 'q=42' }}
-        ${'stdin:///D:\\home\\prj\\code.c#README'}          | ${{ ...u, scheme: 'stdin', path: '/d:/home/prj/code.c', fragment: 'README' }}
-        ${'stdin:///D:\\home\\prj\\code.c?q=42&a=9#README'} | ${{ ...u, scheme: 'stdin', path: '/d:/home/prj/code.c', query: 'q=42&a=9', fragment: 'README' }}
+        ${'i:/example.com/'}                                | ${{ ...u, ...URIfile('I:/example.com/') }}
+        ${'stdin:D:\\home\\prj\\code.c'}                    | ${{ ...u, scheme: 'stdin', path: 'D:/home/prj/code.c' }}
+        ${'stdin:/D:\\home\\prj\\code.c'}                   | ${{ ...u, scheme: 'stdin', path: 'D:/home/prj/code.c' }}
+        ${'stdin://D:\\home\\prj\\code.c'}                  | ${{ ...u, scheme: 'stdin', path: 'D:/home/prj/code.c' }}
+        ${'stdin:///D:\\home\\prj\\code.c'}                 | ${{ ...u, scheme: 'stdin', path: '/D:/home/prj/code.c' }}
+        ${'stdin:///D:\\home\\prj\\code.c?q=42'}            | ${{ ...u, scheme: 'stdin', path: '/D:/home/prj/code.c', query: 'q=42' }}
+        ${'stdin:///D:\\home\\prj\\code.c#README'}          | ${{ ...u, scheme: 'stdin', path: '/D:/home/prj/code.c', fragment: 'README' }}
+        ${'stdin:///D:\\home\\prj\\code.c?q=42&a=9#README'} | ${{ ...u, scheme: 'stdin', path: '/D:/home/prj/code.c', query: 'q=42&a=9', fragment: 'README' }}
         ${'stdin://readme.md?'}                             | ${{ ...u, scheme: 'stdin', path: 'readme.md' }}
         ${'stdin://readme.md#'}                             | ${{ ...u, scheme: 'stdin', path: 'readme.md' }}
         ${'stdin:#README'}                                  | ${{ ...u, scheme: 'stdin', path: '', fragment: 'README' }}
         ${'stdin:?README'}                                  | ${{ ...u, scheme: 'stdin', path: '', query: 'README' }}
         ${'stdin://readme.md?#README'}                      | ${{ ...u, scheme: 'stdin', path: 'readme.md', fragment: 'README' }}
         ${'stdin://readme.md#?#README'}                     | ${{ ...u, scheme: 'stdin', path: 'readme.md', fragment: '?#README' }}
-        ${encodeURI('stdin:///D:\\home\\prj\\code.c')}      | ${{ ...u, scheme: 'stdin', path: '/d:/home/prj/code.c' }}
-        ${fromStdinFilePath('D:\\home\\prj\\code.c')}       | ${{ ...u, scheme: 'stdin', path: '/d:/home/prj/code.c' }}
+        ${encodeURI('stdin:///D:\\home\\prj\\code.c')}      | ${{ ...u, scheme: 'stdin', path: '/D:/home/prj/code.c' }}
+        ${fromStdinFilePath('D:\\home\\prj\\code.c')}       | ${{ ...u, scheme: 'stdin', path: '/D:/home/prj/code.c' }}
         ${fromStdinFilePath(__filename)}                    | ${{ ...u, scheme: 'stdin', path: normalizePath(__filename) }}
-        ${'example.com/'}                                   | ${{ ...u, ...URIparse('example.com/') }}
+        ${'example.com/'}                                   | ${{ ...u, ...URIfile('example.com/') }}
         ${'vsls:/cspell.config.yaml'}                       | ${{ ...u, scheme: 'vsls', path: '/cspell.config.yaml' }}
     `('toUri $uri', ({ uri, expected }) => {
         const u = toUri(uri);
@@ -107,7 +107,7 @@ describe('Uri', () => {
         ${j(toUri('https://g.com/maps?lat=43.23&lon=-0.5#first'))}          | ${{ ...u, scheme: 'https', path: '/maps', query: 'lat=43.23&lon=-0.5', fragment: 'first', authority: 'g.com' }}
         ${j(toUri(new URL('https://g.com/maps?lat=43.23&lon=-0.5#first')))} | ${{ ...u, scheme: 'https', path: '/maps', query: 'lat=43.23&lon=-0.5', fragment: 'first', authority: 'g.com' }}
         ${j(parse('https://google.com/maps'))}                              | ${{ ...u, scheme: 'https', authority: 'google.com', path: '/maps' }}
-        ${j(toUri('file:relative_file'))}                                   | ${{ ...u, scheme: 'file', path: '/relative_file' }}
+        ${j(toUri('file:relative_file'))}                                   | ${{ ...u, scheme: 'file', path: normalizePath(Path.resolve('relative_file')) }}
         ${j(toUri('stdin://relative/file/path'))}                           | ${{ ...u, scheme: 'stdin', path: 'relative/file/path' }}
         ${toUri('stdin://relative/file/path').toString()}                   | ${'stdin://relative/file/path'}
         ${toUri('stdin:///absolute-file-path').toString()}                  | ${'stdin:///absolute-file-path'}
@@ -119,19 +119,19 @@ describe('Uri', () => {
 
     test.each`
         uri                                  | expected
-        ${URI.file(titleCase(__filename))}   | ${unTitleCase(__filename)}
-        ${URI.file(unTitleCase(__filename))} | ${unTitleCase(__filename)}
-        ${toUri(stdinFilename)}              | ${unTitleCase(__filename)}
+        ${URI.file(titleCase(__filename))}   | ${titleCase(__filename)}
+        ${URI.file(unTitleCase(__filename))} | ${titleCase(__filename)}
+        ${toUri(stdinFilename)}              | ${titleCase(__filename)}
     `('uriToFilePath $uri', ({ uri, expected }) => {
         expect(uriToFilePath(uri)).toBe(expected);
     });
 
     test.each`
         uri                         | expected
-        ${titleCase(__filename)}    | ${unTitleCase(__filename)}
-        ${unTitleCase(__filename)}  | ${unTitleCase(__filename)}
-        ${'D:\\programs\\code.exe'} | ${'d:\\programs\\code.exe'}
-        ${'d:\\programs\\code.exe'} | ${'d:\\programs\\code.exe'}
+        ${titleCase(__filename)}    | ${titleCase(__filename)}
+        ${unTitleCase(__filename)}  | ${titleCase(__filename)}
+        ${'D:\\programs\\code.exe'} | ${'D:\\programs\\code.exe'}
+        ${'d:\\programs\\code.exe'} | ${'D:\\programs\\code.exe'}
     `('uriToFilePath $uri', ({ uri, expected }) => {
         expect(normalizeDriveLetter(uri)).toBe(expected);
     });
@@ -164,7 +164,8 @@ function URIparse(url: string): Uri {
 }
 
 function URIfile(file: string): Uri {
-    return URItoUri(URI.file(file));
+    const url = pathToFileURL(file);
+    return URItoUri(URI.parse(url.href));
 }
 
 function UriToString(uri: Uri): string {

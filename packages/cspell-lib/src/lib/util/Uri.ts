@@ -1,6 +1,7 @@
 import assert from 'node:assert';
+import { pathToFileURL } from 'node:url';
 
-import { toFilePathOrHref } from '@cspell/url';
+import { toFilePathOrHref, toFileURL } from '@cspell/url';
 import { isUrlLike } from 'cspell-io';
 import { URI, Utils } from 'vscode-uri';
 
@@ -16,14 +17,12 @@ export interface Uri {
 
 export interface UriInstance extends Uri {
     toString(): string;
+    toJSON(): unknown;
 }
 
 interface HRef {
     href: string;
 }
-
-const isFile = /^(?:[a-zA-Z]:|[/\\])/;
-const isPossibleUri = /\w:\/\//;
 
 const STDIN_PROTOCOL = 'stdin:';
 
@@ -34,17 +33,16 @@ export function toUri(uriOrFile: string | Uri | URL): UriInstance {
     if (isHRef(uriOrFile)) return UriImpl.parse(uriOrFile.href);
     if (isUri(uriOrFile)) return UriImpl.from(uriOrFile);
     if (isUrlLike(uriOrFile)) return UriImpl.parse(uriOrFile);
-    return isFile.test(uriOrFile) && !isPossibleUri.test(uriOrFile)
-        ? UriImpl.file(normalizeDriveLetter(uriOrFile))
-        : UriImpl.parse(uriOrFile);
+    return UriImpl.file(normalizeDriveLetter(uriOrFile));
 }
 
 const hasDriveLetter = /^[A-Z]:/i;
 
+const rootUrl = pathToFileURL('/');
+
 export function uriToFilePath(uri: DocumentUri): string {
     let url = documentUriToURL(uri);
-    url = url.protocol === 'stdin:' ? new URL(url.pathname, 'file:///') : url;
-
+    url = url.protocol === 'stdin:' ? new URL(url.pathname, rootUrl) : url;
     return toFilePathOrHref(url);
 }
 
@@ -63,14 +61,14 @@ export function parse(uri: string): UriInstance {
 }
 
 export function normalizeDriveLetter(path: string): string {
-    return hasDriveLetter.test(path) ? path[0].toLowerCase() + path.slice(1) : path;
+    return hasDriveLetter.test(path) ? path[0].toUpperCase() + path.slice(1) : path;
 }
 
 function isHRef(url: unknown): url is HRef {
     return (!!url && typeof url === 'object' && typeof (<HRef>url).href === 'string') || false;
 }
 
-export function isUri(uri: unknown): uri is UriInstance {
+export function isUri(uri: unknown): uri is Uri {
     if (!uri || typeof uri !== 'object') return false;
     if (UriImpl.isUri(uri)) return true;
     if (URI.isUri(uri)) return true;
@@ -120,7 +118,7 @@ class UriImpl extends URI implements UriInstance {
         return url;
     }
 
-    toJson() {
+    toJSON() {
         const { scheme, authority, path, query, fragment } = this;
         return { scheme, authority, path, query, fragment };
     }
@@ -157,7 +155,8 @@ class UriImpl extends URI implements UriInstance {
     }
 
     static file(filename: string): UriImpl {
-        return UriImpl.from(URI.file(normalizeFilePath(filename)));
+        const url = toFileURL(filename);
+        return UriImpl.parse(url.href);
     }
 
     static stdin(filePath = '') {

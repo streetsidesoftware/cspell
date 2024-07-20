@@ -137,11 +137,11 @@ describe('url', () => {
     test.each`
         url                                   | expected
         ${'file:///path/to/my/file.txt'}      | ${'file:///path/to/my/file.txt'}
-        ${'file:///C:/path/to/my/file.txt'}   | ${'file:///c:/path/to/my/file.txt'}
-        ${'file:///C%3a/path/to/my/file.txt'} | ${'file:///c:/path/to/my/file.txt'}
-        ${'file:///d:/path/to/my/file.txt'}   | ${'file:///d:/path/to/my/file.txt'}
-        ${'file:///d%3a/path/to/my/file.txt'} | ${'file:///d:/path/to/my/file.txt'}
-        ${'file:///d%3A/path/to/my/file.txt'} | ${'file:///d:/path/to/my/file.txt'}
+        ${'file:///C:/path/to/my/file.txt'}   | ${'file:///C:/path/to/my/file.txt'}
+        ${'file:///C%3a/path/to/my/file.txt'} | ${'file:///C:/path/to/my/file.txt'}
+        ${'file:///d:/path/to/my/file.txt'}   | ${'file:///D:/path/to/my/file.txt'}
+        ${'file:///d%3a/path/to/my/file.txt'} | ${'file:///D:/path/to/my/file.txt'}
+        ${'file:///d%3A/path/to/my/file.txt'} | ${'file:///D:/path/to/my/file.txt'}
     `('normalizeWindowsUrl  $url', ({ url, expected }) => {
         url = new URL(url);
         expect(normalizeWindowsUrl(url).href).toBe(expected);

@@ -1,7 +1,10 @@
 /* eslint-disable unicorn/text-encoding-identifier-case */
 
+import { pathToFileURL } from 'node:url';
+
 import { opConcatMap, pipe, toArray } from '@cspell/cspell-pipe/sync';
 import type { TextOffset } from '@cspell/cspell-types';
+import { urlRelative } from '@cspell/url';
 import { describe, expect, test } from 'vitest';
 
 import * as Text from './text.js';
@@ -377,9 +380,15 @@ describe('Validates offset conversions', () => {
             expect(line.text.slice(offsetInLine, offsetInLine + text.length)).toBe(text);
         });
 
-        expect(results.map(({ doc: _doc, ...rest }) => rest)).toMatchSnapshot();
+        expect(
+            results.map(({ doc: _doc, uri, ...rest }) => ({ ...rest, uri: uri && relativeUri(uri) })),
+        ).toMatchSnapshot();
     });
 });
+
+function relativeUri(uri: string): string {
+    return urlRelative(pathToFileURL('./'), uri);
+}
 
 function nfc(s: string): string {
     return s.normalize('NFC');

@@ -1,13 +1,21 @@
 import assert from 'node:assert';
 import Path from 'node:path';
+import { pathToFileURL } from 'node:url';
 
-import { toFilePathOrHref, windowsDriveLetterToUpper } from './fileUrl.mjs';
-import { addTrailingSlash, isUrlLike, normalizeWindowsUrl, urlParent, urlToUrlRelative } from './url.mjs';
+import { pathWindowsDriveLetterToUpper, regExpWindowsPathDriveLetter, toFilePathOrHref } from './fileUrl.mjs';
+import {
+    addTrailingSlash,
+    isUrlLike,
+    normalizeWindowsUrl,
+    regExpWindowsPath,
+    urlParent,
+    urlToUrlRelative,
+} from './url.mjs';
 
 export const isWindows = process.platform === 'win32';
 
-export const isWindowsPathRegEx = /^[a-z]:[\\/]/i;
-const isWindowsPathname = /^[\\/]([a-z]:[\\/])/i;
+const isWindowsPathRegEx = regExpWindowsPathDriveLetter;
+const isWindowsPathname = regExpWindowsPath;
 
 export const percentRegEx = /%/g;
 export const backslashRegEx = /\\/g;
@@ -33,7 +41,6 @@ export interface BuilderOptions {
 }
 
 const ProtocolFile = 'file:';
-const RootFileURL = 'file:///';
 
 export class FileUrlBuilder {
     private windows: boolean;
@@ -156,7 +163,7 @@ export class FileUrlBuilder {
             this.path === Path
                 ? toFilePathOrHref(url)
                 : decodeURIComponent(url.pathname.split('/').join(this.path.sep));
-        return windowsDriveLetterToUpper(p.replace(isWindowsPathname, '$1'));
+        return pathWindowsDriveLetterToUpper(p.replace(isWindowsPathname, '$1'));
     }
 
     /**
@@ -199,7 +206,13 @@ export class FileUrlBuilder {
     rootFileURL(filePath?: string): URL {
         const path = this.path;
         const p = path.parse(path.normalize(path.resolve(filePath ?? '.')));
-        return new URL(this.normalizeFilePathForUrl(p.root), RootFileURL);
+        return new URL(this.normalizeFilePathForUrl(p.root), this.#getFsRootURL());
+    }
+
+    #getFsRootURL() {
+        if (this.path === Path) return pathToFileURL('/');
+        const p = this.path.resolve('/');
+        return new URL(this.normalizeFilePathForUrl(p), 'file:///');
     }
 
     /**

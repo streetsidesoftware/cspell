@@ -1,6 +1,6 @@
 import assert from 'node:assert';
 
-import { toURL } from '@cspell/url';
+import { toFileURL, toURL } from '@cspell/url';
 import { TextDocument as VsTextDocument } from 'vscode-languageserver-textdocument';
 
 import { getFileSystem } from '../fileSystem.js';
@@ -233,5 +233,7 @@ export async function loadTextDocument(filename: string | DocumentUri, languageI
 export const isTextDocument: (doc: TextDocument | unknown) => doc is TextDocument = isTextDocumentImpl;
 
 export function documentUriToURL(uri: DocumentUri): URL {
-    return toURL(uri instanceof URL ? uri : typeof uri === 'string' ? new URL(uri) : new URL(Uri.from(uri).toString()));
+    return toURL(
+        uri instanceof URL ? uri : typeof uri === 'string' ? toFileURL(uri) : new URL(Uri.from(uri).toString()),
+    );
 }

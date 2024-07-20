@@ -3,7 +3,7 @@ import url from 'node:url';
 
 import { describe, expect, test } from 'vitest';
 
-import { windowsDriveLetterToUpper } from './fileUrl.mjs';
+import { pathWindowsDriveLetterToUpper } from './fileUrl.mjs';
 import { FileUrlBuilder } from './FileUrlBuilder.mjs';
 
 describe('FileUrlBuilder', () => {
@@ -59,7 +59,7 @@ describe('FileUrlBuilder', () => {
 
     test.each`
         filePath                                  | expected
-        ${'.'}                                    | ${windowsDriveLetterToUpper(process.cwd() + Path.sep)}
+        ${'.'}                                    | ${pathWindowsDriveLetterToUpper(process.cwd() + Path.sep)}
         ${'e:/path/to/file.txt'}                  | ${'E:/path/to/file.txt'.split('/').join(Path.sep)}
         ${'file:///e:/user/test/project/deeper/'} | ${'E:/user/test/project/deeper/'.split('/').join(Path.sep)}
         ${'vscode:///e:/user/test/project/'}      | ${'vscode:///e:/user/test/project/'}

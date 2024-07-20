@@ -175,12 +175,21 @@ export function urlToUrlRelative(urlFrom: URL, urlTo: URL): string {
     return decodeURIComponent(rel.length < p1.length ? rel : p1);
 }
 
-const regExpWindowsPath = /^[/][a-zA-Z]:[/]/;
+export const regExpWindowsPath = /^[\\/]([a-zA-Z]:[\\/])/;
+export const regExpEncodedColon = /%3[aA]/g;
 
+/**
+ * Ensure that a windows file url is correctly formatted with a capitol letter for the drive.
+ *
+ * @param url - URL to check.
+ * @returns a new URL if modified or converted from a string.
+ */
 export function normalizeWindowsUrl(url: URL | string): URL {
     url = typeof url === 'string' ? new URL(url) : url;
     if (url.protocol === 'file:') {
-        const pathname = url.pathname.replaceAll(/%3A/gi, ':').replace(regExpWindowsPath, (d) => d.toLowerCase());
+        const pathname = url.pathname
+            .replaceAll(regExpEncodedColon, ':')
+            .replace(regExpWindowsPath, (d) => d.toUpperCase());
         if (pathname !== url.pathname) {
             url = new URL(url);
             url.pathname = pathname;
