@@ -2,7 +2,7 @@ import { describe, expect, test } from 'vitest';
 
 import * as Uri from '../util/Uri.js';
 import type { TextDocument } from './TextDocument.js';
-import { createTextDocument, isTextDocument, updateTextDocument } from './TextDocument.js';
+import { createTextDocument, documentUriToURL, isTextDocument, updateTextDocument } from './TextDocument.js';
 
 describe('TextDocument', () => {
     test('create', () => {
@@ -10,7 +10,7 @@ describe('TextDocument', () => {
         const doc = createTextDocument({ uri: __filename, content });
         expect(doc.text).toBe(content);
         expect(doc.languageId).toContain('typescript');
-        expect(Uri.isUri(doc.uri)).toBe(true);
+        expect(doc.uri instanceof URL).toBe(true);
         expect(doc.uri.toString().toLowerCase()).toEqual(Uri.fromFilePath(__filename).toString().toLowerCase());
     });
 
@@ -45,6 +45,15 @@ describe('TextDocument', () => {
         doc = typeof doc === 'string' ? sampleDoc(undefined, doc) : doc;
         const lines = [...doc.getLines()];
         expect(lines.map((t) => t.text).join('')).toBe(doc.text);
+    });
+
+    test.each`
+        uri                                              | expected
+        ${'file:///user/path/doc.md'}                    | ${'file:///user/path/doc.md'}
+        ${new URL('file:///user/path/doc.md')}           | ${'file:///user/path/doc.md'}
+        ${{ scheme: 'file', path: '/user/path/doc.md' }} | ${'file:///user/path/doc.md'}
+    `('documentUriToURL $uri', ({ uri, expected }) => {
+        expect(documentUriToURL(uri).href).toBe(expected);
     });
 });
 

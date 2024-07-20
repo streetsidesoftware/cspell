@@ -46,6 +46,8 @@ export function fileURLOrPathToPath(filenameOrURL: string | URL): string {
     return toFilePathOrHref(filenameOrURL);
 }
 
+const regExpWindowsPathDriveLetter = /^([a-zA-Z]):[\\]/;
+
 export function windowsDriveLetterToUpper(absoluteFilePath: string): string {
-    return absoluteFilePath.replace(/^([a-z]):\\/, (s) => s.toUpperCase());
+    return absoluteFilePath.replace(regExpWindowsPathDriveLetter, (s) => s.toUpperCase());
 }

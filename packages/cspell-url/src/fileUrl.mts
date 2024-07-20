@@ -20,9 +20,11 @@ export function toFilePathOrHref(url: URL | string): string {
 }
 
 function toFilePath(url: string | URL): string {
-    return windowsDriveLetterToUpper(fileURLToPath(url));
+    return pathWindowsDriveLetterToUpper(fileURLToPath(url));
 }
 
-function windowsDriveLetterToUpper(absoluteFilePath: string): string {
-    return absoluteFilePath.replace(/^([a-z]):\\/, (s) => s.toUpperCase());
+export const regExpWindowsPathDriveLetter = /^([a-zA-Z]):[\\/]/;
+
+export function pathWindowsDriveLetterToUpper(absoluteFilePath: string): string {
+    return absoluteFilePath.replace(regExpWindowsPathDriveLetter, (s) => s.toUpperCase());
 }

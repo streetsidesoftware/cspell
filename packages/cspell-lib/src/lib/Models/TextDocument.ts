@@ -1,12 +1,13 @@
 import assert from 'node:assert';
 
+import { toFileURL, toURL } from '@cspell/url';
 import { TextDocument as VsTextDocument } from 'vscode-languageserver-textdocument';
 
 import { getFileSystem } from '../fileSystem.js';
 import { getLanguagesForBasename } from '../LanguageIds.js';
 import * as Uri from '../util/Uri.js';
 
-export type DocumentUri = Uri.Uri;
+export type DocumentUri = Uri.Uri | URL | string;
 
 export interface Position {
     line: number;
@@ -88,8 +89,10 @@ export interface TextDocument {
 class TextDocumentImpl implements TextDocument {
     private vsTextDoc: VsTextDocument;
 
+    readonly uri: URL;
+
     constructor(
-        readonly uri: DocumentUri,
+        uri: DocumentUri,
         text: string,
         readonly languageId: string | string[],
         readonly locale: string | undefined,
@@ -97,6 +100,7 @@ class TextDocumentImpl implements TextDocument {
     ) {
         const primaryLanguageId = typeof languageId === 'string' ? languageId : languageId[0] || 'plaintext';
         this.vsTextDoc = VsTextDocument.create(uri.toString(), primaryLanguageId, version, text);
+        this.uri = documentUriToURL(uri);
     }
 
     get version(): number {
@@ -227,3 +231,9 @@ export async function loadTextDocument(filename: string | DocumentUri, languageI
 }
 
 export const isTextDocument: (doc: TextDocument | unknown) => doc is TextDocument = isTextDocumentImpl;
+
+export function documentUriToURL(uri: DocumentUri): URL {
+    return toURL(
+        uri instanceof URL ? uri : typeof uri === 'string' ? toFileURL(uri) : new URL(Uri.from(uri).toString()),
+    );
+}

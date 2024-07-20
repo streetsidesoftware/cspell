@@ -10,13 +10,13 @@ import type {
     PnPSettings,
 } from '@cspell/cspell-types';
 import { IssueType } from '@cspell/cspell-types';
-import { toFileURL } from '@cspell/url';
+import { toFilePathOrHref, toFileURL } from '@cspell/url';
 
 import { getGlobMatcherForExcluding } from '../globs/getGlobMatcher.js';
 import type { CSpellSettingsInternal, CSpellSettingsInternalFinalized } from '../Models/CSpellSettingsInternalDef.js';
 import type { ExtendedSuggestion } from '../Models/Suggestion.js';
 import type { TextDocument, TextDocumentLine, TextDocumentRef } from '../Models/TextDocument.js';
-import { updateTextDocument } from '../Models/TextDocument.js';
+import { documentUriToURL, updateTextDocument } from '../Models/TextDocument.js';
 import type { ValidationIssue } from '../Models/ValidationIssue.js';
 import { createPerfTimer } from '../perf/index.js';
 import {
@@ -399,7 +399,7 @@ export class DocumentValidator {
         assert(this._preparations, ERROR_NOT_PREPARED);
         const parser = this._preparations.finalSettings.parserFn;
         if (typeof parser !== 'object') return this.defaultParser();
-        return parser.parse(this.document.text, this.document.uri.path).parsedTexts;
+        return parser.parse(this.document.text, toFilePathOrHref(documentUriToURL(this.document.uri))).parsedTexts;
     }
 
     private getSuggestions(text: string): ExtendedSuggestion[] {
@@ -498,9 +498,13 @@ async function searchForDocumentConfig(
     defaultConfig: CSpellSettingsWithSourceTrace,
     pnpSettings: PnPSettings,
 ): Promise<CSpellSettingsWithSourceTrace> {
-    const { uri } = document;
-    if (uri.scheme !== 'file') return defaultConfig;
-    return searchForConfig(uri.toString(), pnpSettings).then((s) => s || defaultConfig);
+    const url = documentUriToURL(document.uri);
+    try {
+        return await searchForConfig(url, pnpSettings).then((s) => s || defaultConfig);
+    } catch (e) {
+        if (url.protocol !== 'file:') return defaultConfig;
+        throw e;
+    }
 }
 
 function mapSug(sug: ExtendedSuggestion | SuggestionResult): SuggestionResult {
@@ -541,9 +545,8 @@ export async function shouldCheckDocument(
         const config = mergeSettings(settings, localConfig);
         const matcher = getGlobMatcherForExcluding(localConfig?.ignorePaths);
         const docSettings = await determineTextDocumentSettings(doc, config);
-        const uri = doc.uri;
         // eslint-disable-next-line unicorn/prefer-regexp-test
-        return !matcher.match(uriToFilePath(uri)) && (docSettings.enabled ?? true);
+        return !matcher.match(uriToFilePath(doc.uri)) && (docSettings.enabled ?? true);
     }
 
     return { errors, shouldCheck: await shouldCheck() };

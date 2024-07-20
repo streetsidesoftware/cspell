@@ -1,13 +1,21 @@
 import assert from 'node:assert';
 import Path from 'node:path';
+import { pathToFileURL } from 'node:url';
 
-import { toFilePathOrHref } from './fileUrl.mjs';
-import { addTrailingSlash, isUrlLike, urlParent, urlToUrlRelative } from './url.mjs';
+import { pathWindowsDriveLetterToUpper, regExpWindowsPathDriveLetter, toFilePathOrHref } from './fileUrl.mjs';
+import {
+    addTrailingSlash,
+    isUrlLike,
+    normalizeWindowsUrl,
+    regExpWindowsPath,
+    urlParent,
+    urlToUrlRelative,
+} from './url.mjs';
 
 export const isWindows = process.platform === 'win32';
 
-export const isWindowsPathRegEx = /^[a-z]:[\\/]/i;
-const isWindowsPathname = /^[\\/]([a-z]:[\\/])/i;
+const isWindowsPathRegEx = regExpWindowsPathDriveLetter;
+const isWindowsPathname = regExpWindowsPath;
 
 export const percentRegEx = /%/g;
 export const backslashRegEx = /\\/g;
@@ -33,7 +41,6 @@ export interface BuilderOptions {
 }
 
 const ProtocolFile = 'file:';
-const RootFileURL = 'file:///';
 
 export class FileUrlBuilder {
     private windows: boolean;
@@ -108,6 +115,17 @@ export class FileUrlBuilder {
      * @returns a URL
      */
     toFileURL(filenameOrUrl: string | URL, relativeTo?: string | URL): URL {
+        return normalizeWindowsUrl(this.#toFileURL(filenameOrUrl, relativeTo));
+    }
+
+    /**
+     * Try to make a file URL.
+     * - if filenameOrUrl is already a URL, it is returned as is.
+     * @param filenameOrUrl
+     * @param relativeTo - optional URL, if given, filenameOrUrl will be parsed as relative.
+     * @returns a URL
+     */
+    #toFileURL(filenameOrUrl: string | URL, relativeTo?: string | URL): URL {
         if (typeof filenameOrUrl !== 'string') return filenameOrUrl;
         if (isUrlLike(filenameOrUrl)) return new URL(filenameOrUrl);
         relativeTo ??= this.cwd;
@@ -145,7 +163,7 @@ export class FileUrlBuilder {
             this.path === Path
                 ? toFilePathOrHref(url)
                 : decodeURIComponent(url.pathname.split('/').join(this.path.sep));
-        return p.replace(isWindowsPathRegEx, (drive) => drive.toUpperCase()).replace(isWindowsPathname, '$1');
+        return pathWindowsDriveLetterToUpper(p.replace(isWindowsPathname, '$1'));
     }
 
     /**
@@ -188,7 +206,13 @@ export class FileUrlBuilder {
     rootFileURL(filePath?: string): URL {
         const path = this.path;
         const p = path.parse(path.normalize(path.resolve(filePath ?? '.')));
-        return new URL(this.normalizeFilePathForUrl(p.root), RootFileURL);
+        return new URL(this.normalizeFilePathForUrl(p.root), this.#getFsRootURL());
+    }
+
+    #getFsRootURL() {
+        if (this.path === Path) return pathToFileURL('/');
+        const p = this.path.resolve('/');
+        return new URL(this.normalizeFilePathForUrl(p), 'file:///');
     }
 
     /**

@@ -3,21 +3,21 @@
 exports[`Validate cli > app '--fail-fast no option' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli > app '--fail-fast no option' Expect Error: [Function CheckFailed] 2`] = `
-"error	1/2 ./first-fail.txt 0.00ms X
+"error	1/2 first-fail.txt 0.00ms X
 error
-log	./first-fail.txt:1:1 - Unknown word (iamtypo)
+log	first-fail.txt:1:1 - Unknown word (iamtypo)
 log
-error	2/2 ./second-fail.txt 0.00ms X
+error	2/2 second-fail.txt 0.00ms X
 error
-log	./second-fail.txt:1:1 - Unknown word (iamtypotoo)
+log	second-fail.txt:1:1 - Unknown word (iamtypotoo)
 log
 error	-------------------------------------------
 error
 error	Issues found:
 error
-error	./first-fail.txt:1:1 - Unknown word (iamtypo)
+error	first-fail.txt:1:1 - Unknown word (iamtypo)
 error
-error	./second-fail.txt:1:1 - Unknown word (iamtypotoo)
+error	second-fail.txt:1:1 - Unknown word (iamtypotoo)
 error
 error	CSpell: Files checked: 2, Issues found: 2 in 2 files.
 error"
@@ -28,15 +28,15 @@ exports[`Validate cli > app '--fail-fast no option' Expect Error: [Function Chec
 exports[`Validate cli > app '--fail-fast with config' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli > app '--fail-fast with config' Expect Error: [Function CheckFailed] 2`] = `
-"error	1/2 ./first-fail.txt 0.00ms X
+"error	1/2 first-fail.txt 0.00ms X
 error
-log	./first-fail.txt:1:1 - Unknown word (iamtypo)
+log	first-fail.txt:1:1 - Unknown word (iamtypo)
 log
 error	-------------------------------------------
 error
 error	Issues found:
 error
-error	./first-fail.txt:1:1 - Unknown word (iamtypo)
+error	first-fail.txt:1:1 - Unknown word (iamtypo)
 error
 error	CSpell: Files checked: 1, Issues found: 1 in 1 file.
 error"
@@ -47,15 +47,15 @@ exports[`Validate cli > app '--fail-fast with config' Expect Error: [Function Ch
 exports[`Validate cli > app '--fail-fast with option' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli > app '--fail-fast with option' Expect Error: [Function CheckFailed] 2`] = `
-"error	1/2 ./first-fail.txt 0.00ms X
+"error	1/2 first-fail.txt 0.00ms X
 error
-log	./first-fail.txt:1:1 - Unknown word (iamtypo)
+log	first-fail.txt:1:1 - Unknown word (iamtypo)
 log
 error	-------------------------------------------
 error
 error	Issues found:
 error
-error	./first-fail.txt:1:1 - Unknown word (iamtypo)
+error	first-fail.txt:1:1 - Unknown word (iamtypo)
 error
 error	CSpell: Files checked: 1, Issues found: 1 in 1 file.
 error"
@@ -95,21 +95,21 @@ exports[`Validate cli > app '--help' Expect Error: 'outputHelp' 3`] = `""`;
 exports[`Validate cli > app '--no-fail-fast with config' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli > app '--no-fail-fast with config' Expect Error: [Function CheckFailed] 2`] = `
-"error	1/2 ./first-fail.txt 0.00ms X
+"error	1/2 first-fail.txt 0.00ms X
 error
-log	./first-fail.txt:1:1 - Unknown word (iamtypo)
+log	first-fail.txt:1:1 - Unknown word (iamtypo)
 log
-error	2/2 ./second-fail.txt 0.00ms X
+error	2/2 second-fail.txt 0.00ms X
 error
-log	./second-fail.txt:1:1 - Unknown word (iamtypotoo)
+log	second-fail.txt:1:1 - Unknown word (iamtypotoo)
 log
 error	-------------------------------------------
 error
 error	Issues found:
 error
-error	./first-fail.txt:1:1 - Unknown word (iamtypo)
+error	first-fail.txt:1:1 - Unknown word (iamtypo)
 error
-error	./second-fail.txt:1:1 - Unknown word (iamtypotoo)
+error	second-fail.txt:1:1 - Unknown word (iamtypotoo)
 error
 error	CSpell: Files checked: 2, Issues found: 2 in 2 files.
 error"
@@ -120,7 +120,7 @@ exports[`Validate cli > app '--no-fail-fast with config' Expect Error: [Function
 exports[`Validate cli > app 'Explicit file://' Expect Error: undefined 1`] = `[]`;
 
 exports[`Validate cli > app 'Explicit file://' Expect Error: undefined 2`] = `
-"error	1/1 ./star-not.md 0.00ms
+"error	1/1 star-not.md 0.00ms
 error
 error	CSpell: Files checked: 1, Issues found: 0 in 0 files.
 error"
@@ -133,7 +133,7 @@ exports[`Validate cli > app 'Explicit not found file://' Expect Error: [Function
 exports[`Validate cli > app 'Explicit not found file://' Expect Error: [Function CheckFailed] 2`] = `
 "error	Linter: File not found: "./fixtures/misc/not-fond.md"
 error
-error	1/1 ./not-fond.md 0.00ms skipped X
+error	1/1 not-fond.md 0.00ms skipped X
 error
 error	-------------------------------------------
 error
@@ -146,7 +146,7 @@ exports[`Validate cli > app 'Explicit not found file://' Expect Error: [Function
 exports[`Validate cli > app 'LICENSE' Expect Error: undefined 1`] = `[]`;
 
 exports[`Validate cli > app 'LICENSE' Expect Error: undefined 2`] = `
-"error	1/1 ./LICENSE 0.00ms
+"error	1/1 LICENSE 0.00ms
 error
 error	CSpell: Files checked: 1, Issues found: 0 in 0 files.
 error"
@@ -361,7 +361,7 @@ exports[`Validate cli > app 'check with spelling errors' Expect Error: [Function
 exports[`Validate cli > app 'cspell-bad.json' Expect Error: undefined 1`] = `[]`;
 
 exports[`Validate cli > app 'cspell-bad.json' Expect Error: undefined 2`] = `
-"error	1/1 ./src/app/app.test.ts 0.00ms
+"error	1/1 src/app/app.test.ts 0.00ms
 error
 error	CSpell: Files checked: 1, Issues found: 0 in 0 files.
 error"
@@ -385,7 +385,7 @@ exports[`Validate cli > app 'cspell-import-missing.json' Expect Error: [Function
 exports[`Validate cli > app 'current_file --show-perf-summary' Expect Error: undefined 1`] = `[]`;
 
 exports[`Validate cli > app 'current_file --show-perf-summary' Expect Error: undefined 2`] = `
-"error	1/1 ./src/app/app.test.ts 0.00ms
+"error	1/1 src/app/app.test.ts 0.00ms
 error
 error	CSpell: Files checked: 1, Issues found: 0 in 0 files.
 error
@@ -465,7 +465,7 @@ info	Checking: ./src/app/app.test.ts, File type: auto, Language: default
 info	Checked: ./src/app/app.test.ts, File type: typescript, Language: en ... Issues: 0 0.00ms
 info	Config file Used: ./cspell.json
 info	Dictionaries Used: companies, cryptocurrencies, filetypes, public-licenses, softwareTerms, computing-acronyms, software-term-suggestions, web-services, workspace, [in-document-dict], aws, en_us, en-common-misspellings, fullstack, node, npm, svelte, typescript
-error	1/1 ./src/app/app.test.ts 0.00ms
+error	1/1 src/app/app.test.ts 0.00ms
 error
 error	CSpell: Files checked: 1, Issues found: 0 in 0 files.
 error"
@@ -476,7 +476,7 @@ exports[`Validate cli > app 'current_file --verbose' Expect Error: undefined 3`]
 exports[`Validate cli > app 'current_file languageId' Expect Error: undefined 1`] = `[]`;
 
 exports[`Validate cli > app 'current_file languageId' Expect Error: undefined 2`] = `
-"error	1/1 ./src/app/app.test.ts 0.00ms
+"error	1/1 src/app/app.test.ts 0.00ms
 error
 error	CSpell: Files checked: 1, Issues found: 0 in 0 files.
 error"
@@ -487,7 +487,7 @@ exports[`Validate cli > app 'current_file languageId' Expect Error: undefined 3`
 exports[`Validate cli > app 'current_file' Expect Error: undefined 1`] = `[]`;
 
 exports[`Validate cli > app 'current_file' Expect Error: undefined 2`] = `
-"error	1/1 ./src/app/app.test.ts 0.00ms
+"error	1/1 src/app/app.test.ts 0.00ms
 error
 error	CSpell: Files checked: 1, Issues found: 0 in 0 files.
 error"
@@ -498,9 +498,9 @@ exports[`Validate cli > app 'current_file' Expect Error: undefined 3`] = `""`;
 exports[`Validate cli > app 'inline suggest' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli > app 'inline suggest' Expect Error: [Function CheckFailed] 2`] = `
-"log	./README.md:7:3 - Unknown word (bluelist) Suggestions: [blueList*, bluest, blueish, bluefish, bluesiest]
+"log	README.md:7:3 - Unknown word (bluelist) Suggestions: [blueList*, bluest, blueish, bluefish, bluesiest]
 log
-log	./README.md:8:3 - Unknown word (blulist) Suggestions: [blueList*, bullish, bluest, bluish, blueish]
+log	README.md:8:3 - Unknown word (blulist) Suggestions: [blueList*, bullish, bluest, bluish, blueish]
 log
 error	CSpell: Files checked: 1, Issues found: 2 in 1 file.
 error"
@@ -532,7 +532,7 @@ info	Checking: ./fixtures/issue-2998/fix-words.txt, File type: fix, Language: de
 info	Checked: ./fixtures/issue-2998/fix-words.txt, File type: fix, Language: en ... Issues: 0 0.00ms
 info	Config file Used: ./fixtures/issue-2998/cspell.json
 info	Dictionaries Used: companies, cryptocurrencies, filetypes, public-licenses, softwareTerms, computing-acronyms, software-term-suggestions, web-services, aws, en_us, en-common-misspellings, fixture
-error	1/1 ./fix-words.txt 0.00ms
+error	1/1 fix-words.txt 0.00ms
 error
 error	CSpell: Files checked: 1, Issues found: 0 in 0 files.
 error"
@@ -552,7 +552,7 @@ exports[`Validate cli > app 'issue-4811 **/README.md' Expect Error: undefined 3`
 exports[`Validate cli > app 'issue-4811' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli > app 'issue-4811' Expect Error: [Function CheckFailed] 2`] = `
-"log	./#local/version@2.md:3:9 - Unknown word (marrkdown)
+"log	#local/version@2.md:3:9 - Unknown word (marrkdown)
 log
 error	CSpell: Files checked: 9, Issues found: 1 in 1 file.
 error"
@@ -1002,767 +1002,767 @@ exports[`Validate cli > app 'reporter' Expect Error: undefined 3`] = `""`;
 exports[`Validate cli > app 'samples/Dutch.txt' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli > app 'samples/Dutch.txt' Expect Error: [Function CheckFailed] 2`] = `
-"error	1/1 ./samples/Dutch.txt 0.00ms X
+"error	1/1 samples/Dutch.txt 0.00ms X
 error
-log	./samples/Dutch.txt:1:32 - Unknown word (NEDERLANDS)
+log	samples/Dutch.txt:1:32 - Unknown word (NEDERLANDS)
 log
-log	./samples/Dutch.txt:2:11 - Unknown word (wordt)
+log	samples/Dutch.txt:2:11 - Unknown word (wordt)
 log
-log	./samples/Dutch.txt:2:17 - Unknown word (vriendelijk)
+log	samples/Dutch.txt:2:17 - Unknown word (vriendelijk)
 log
-log	./samples/Dutch.txt:2:29 - Unknown word (verzocht)
+log	samples/Dutch.txt:2:29 - Unknown word (verzocht)
 log
-log	./samples/Dutch.txt:2:45 - Unknown word (bestand)
+log	samples/Dutch.txt:2:45 - Unknown word (bestand)
 log
-log	./samples/Dutch.txt:3:10 - Unknown word (lezen)
+log	samples/Dutch.txt:3:10 - Unknown word (lezen)
 log
-log	./samples/Dutch.txt:3:26 - Unknown word (leveren)
+log	samples/Dutch.txt:3:26 - Unknown word (leveren)
 log
-log	./samples/Dutch.txt:3:38 - Unknown word (iedere)
+log	samples/Dutch.txt:3:38 - Unknown word (iedere)
 log
-log	./samples/Dutch.txt:3:45 - Unknown word (kopie)
+log	samples/Dutch.txt:3:45 - Unknown word (kopie)
 log
-log	./samples/Dutch.txt:3:59 - Unknown word (taalhulpbestand)
+log	samples/Dutch.txt:3:59 - Unknown word (taalhulpbestand)
 log
-log	./samples/Dutch.txt:5:4 - Unknown word (Naam)
+log	samples/Dutch.txt:5:4 - Unknown word (Naam)
 log
-log	./samples/Dutch.txt:5:10 - Unknown word (Nederlandstalige)
+log	samples/Dutch.txt:5:10 - Unknown word (Nederlandstalige)
 log
-log	./samples/Dutch.txt:5:27 - Unknown word (woordenlijst)
+log	samples/Dutch.txt:5:27 - Unknown word (woordenlijst)
 log
-log	./samples/Dutch.txt:5:40 - Unknown word (voor)
+log	samples/Dutch.txt:5:40 - Unknown word (voor)
 log
-log	./samples/Dutch.txt:5:45 - Unknown word (spellingcontrole)
+log	samples/Dutch.txt:5:45 - Unknown word (spellingcontrole)
 log
-log	./samples/Dutch.txt:6:4 - Unknown word (Versie)
+log	samples/Dutch.txt:6:4 - Unknown word (Versie)
 log
-log	./samples/Dutch.txt:6:11 - Unknown word (woordenlijst)
+log	samples/Dutch.txt:6:11 - Unknown word (woordenlijst)
 log
-log	./samples/Dutch.txt:6:32 - Unknown word (versie)
+log	samples/Dutch.txt:6:32 - Unknown word (versie)
 log
-log	./samples/Dutch.txt:6:39 - Unknown word (spellingcontrole)
+log	samples/Dutch.txt:6:39 - Unknown word (spellingcontrole)
 log
-log	./samples/Dutch.txt:7:4 - Unknown word (Vereisten)
+log	samples/Dutch.txt:7:4 - Unknown word (Vereisten)
 log
-log	./samples/Dutch.txt:7:33 - Unknown word (hoger)
+log	samples/Dutch.txt:7:33 - Unknown word (hoger)
 log
-log	./samples/Dutch.txt:8:4 - Unknown word (Keurmerk)
+log	samples/Dutch.txt:8:4 - Unknown word (Keurmerk)
 log
-log	./samples/Dutch.txt:8:22 - Unknown word (Nederlandse)
+log	samples/Dutch.txt:8:22 - Unknown word (Nederlandse)
 log
-log	./samples/Dutch.txt:8:34 - Unknown word (Taalunie)
+log	samples/Dutch.txt:8:34 - Unknown word (Taalunie)
 log
-log	./samples/Dutch.txt:8:47 - Unknown word (lijst)
+log	samples/Dutch.txt:8:47 - Unknown word (lijst)
 log
-log	./samples/Dutch.txt:8:57 - Unknown word (basiswoorden)
+log	samples/Dutch.txt:8:57 - Unknown word (basiswoorden)
 log
-log	./samples/Dutch.txt:9:13 - Unknown word (draagt)
+log	samples/Dutch.txt:9:13 - Unknown word (draagt)
 log
-log	./samples/Dutch.txt:9:24 - Unknown word (keurmerk)
+log	samples/Dutch.txt:9:24 - Unknown word (keurmerk)
 log
-log	./samples/Dutch.txt:9:40 - Unknown word (Nederlandse)
+log	samples/Dutch.txt:9:40 - Unknown word (Nederlandse)
 log
-log	./samples/Dutch.txt:9:52 - Unknown word (Taalunie)
+log	samples/Dutch.txt:9:52 - Unknown word (Taalunie)
 log
-log	./samples/Dutch.txt:9:62 - Unknown word (Voor)
+log	samples/Dutch.txt:9:62 - Unknown word (Voor)
 log
-log	./samples/Dutch.txt:9:67 - Unknown word (meer)
+log	samples/Dutch.txt:9:67 - Unknown word (meer)
 log
-log	./samples/Dutch.txt:10:4 - Unknown word (informatie)
+log	samples/Dutch.txt:10:4 - Unknown word (informatie)
 log
-log	./samples/Dutch.txt:11:4 - Unknown word (Auteursrechten)
+log	samples/Dutch.txt:11:4 - Unknown word (Auteursrechten)
 log
-log	./samples/Dutch.txt:11:60 - Unknown word (Brouwer)
+log	samples/Dutch.txt:11:60 - Unknown word (Brouwer)
 log
-log	./samples/Dutch.txt:12:11 - Unknown word (Nederlandstalige)
+log	samples/Dutch.txt:12:11 - Unknown word (Nederlandstalige)
 log
-log	./samples/Dutch.txt:12:32 - Unknown word (Gebruikersgroep)
+log	samples/Dutch.txt:12:32 - Unknown word (Gebruikersgroep)
 log
-log	./samples/Dutch.txt:13:4 - Unknown word (Licenties)
+log	samples/Dutch.txt:13:4 - Unknown word (Licenties)
 log
-log	./samples/Dutch.txt:13:24 - Unknown word (heeft)
+log	samples/Dutch.txt:13:24 - Unknown word (heeft)
 log
-log	./samples/Dutch.txt:13:34 - Unknown word (doel)
+log	samples/Dutch.txt:13:34 - Unknown word (doel)
 log
-log	./samples/Dutch.txt:13:42 - Unknown word (vrij)
+log	samples/Dutch.txt:13:42 - Unknown word (vrij)
 log
-log	./samples/Dutch.txt:13:47 - Unknown word (beschikbare)
+log	samples/Dutch.txt:13:47 - Unknown word (beschikbare)
 log
-log	./samples/Dutch.txt:13:59 - Unknown word (Nederlandstalige)
+log	samples/Dutch.txt:13:59 - Unknown word (Nederlandstalige)
 log
-log	./samples/Dutch.txt:14:4 - Unknown word (taalhulpbestanden)
+log	samples/Dutch.txt:14:4 - Unknown word (taalhulpbestanden)
 log
-log	./samples/Dutch.txt:14:25 - Unknown word (ontwikkelen)
+log	samples/Dutch.txt:14:25 - Unknown word (ontwikkelen)
 log
-log	./samples/Dutch.txt:14:43 - Unknown word (verspreiden)
+log	samples/Dutch.txt:14:43 - Unknown word (verspreiden)
 log
-log	./samples/Dutch.txt:14:70 - Unknown word (gebruik)
+log	samples/Dutch.txt:14:70 - Unknown word (gebruik)
 log
-log	./samples/Dutch.txt:15:4 - Unknown word (mogelijk)
+log	samples/Dutch.txt:15:4 - Unknown word (mogelijk)
 log
-log	./samples/Dutch.txt:15:16 - Unknown word (maken)
+log	samples/Dutch.txt:15:16 - Unknown word (maken)
 log
-log	./samples/Dutch.txt:15:22 - Unknown word (zijn)
+log	samples/Dutch.txt:15:22 - Unknown word (zijn)
 log
-log	./samples/Dutch.txt:15:30 - Unknown word (taalhulpbestanden)
+log	samples/Dutch.txt:15:30 - Unknown word (taalhulpbestanden)
 log
-log	./samples/Dutch.txt:15:55 - Unknown word (beschikbaar)
+log	samples/Dutch.txt:15:55 - Unknown word (beschikbaar)
 log
-log	./samples/Dutch.txt:15:67 - Unknown word (onder)
+log	samples/Dutch.txt:15:67 - Unknown word (onder)
 log
-log	./samples/Dutch.txt:16:4 - Unknown word (onderstaande)
+log	samples/Dutch.txt:16:4 - Unknown word (onderstaande)
 log
-log	./samples/Dutch.txt:16:18 - Unknown word (liberale)
+log	samples/Dutch.txt:16:18 - Unknown word (liberale)
 log
-log	./samples/Dutch.txt:16:27 - Unknown word (licenties)
+log	samples/Dutch.txt:16:27 - Unknown word (licenties)
 log
-log	./samples/Dutch.txt:16:37 - Unknown word (naar)
+log	samples/Dutch.txt:16:37 - Unknown word (naar)
 log
-log	./samples/Dutch.txt:16:42 - Unknown word (keuze)
+log	samples/Dutch.txt:16:42 - Unknown word (keuze)
 log
-log	./samples/Dutch.txt:16:55 - Unknown word (gebruiker)
+log	samples/Dutch.txt:16:55 - Unknown word (gebruiker)
 log
-log	./samples/Dutch.txt:16:68 - Unknown word (wordt)
+log	samples/Dutch.txt:16:68 - Unknown word (wordt)
 log
-log	./samples/Dutch.txt:17:4 - Unknown word (zeerste)
+log	samples/Dutch.txt:17:4 - Unknown word (zeerste)
 log
-log	./samples/Dutch.txt:17:12 - Unknown word (aangeraden)
+log	samples/Dutch.txt:17:12 - Unknown word (aangeraden)
 log
-log	./samples/Dutch.txt:17:26 - Unknown word (voorafgaand)
+log	samples/Dutch.txt:17:26 - Unknown word (voorafgaand)
 log
-log	./samples/Dutch.txt:17:46 - Unknown word (gebruik)
+log	samples/Dutch.txt:17:46 - Unknown word (gebruik)
 log
-log	./samples/Dutch.txt:17:54 - Unknown word (kennis)
+log	samples/Dutch.txt:17:54 - Unknown word (kennis)
 log
-log	./samples/Dutch.txt:17:64 - Unknown word (nemen)
+log	samples/Dutch.txt:17:64 - Unknown word (nemen)
 log
-log	./samples/Dutch.txt:18:4 - Unknown word (toepasselijke)
+log	samples/Dutch.txt:18:4 - Unknown word (toepasselijke)
 log
-log	./samples/Dutch.txt:18:18 - Unknown word (licentie)
+log	samples/Dutch.txt:18:18 - Unknown word (licentie)
 log
-log	./samples/Dutch.txt:19:12 - Unknown word (herziene)
+log	samples/Dutch.txt:19:12 - Unknown word (herziene)
 log
-log	./samples/Dutch.txt:19:21 - Unknown word (versie)
+log	samples/Dutch.txt:19:21 - Unknown word (versie)
 log
-log	./samples/Dutch.txt:20:6 - Unknown word (Volledige)
+log	samples/Dutch.txt:20:6 - Unknown word (Volledige)
 log
-log	./samples/Dutch.txt:20:16 - Unknown word (licentie)
+log	samples/Dutch.txt:20:16 - Unknown word (licentie)
 log
-log	./samples/Dutch.txt:21:6 - Unknown word (Samenvatting)
+log	samples/Dutch.txt:21:6 - Unknown word (Samenvatting)
 log
-log	./samples/Dutch.txt:22:25 - Unknown word (Naamsvermelding)
+log	samples/Dutch.txt:22:25 - Unknown word (Naamsvermelding)
 log
-log	./samples/Dutch.txt:22:46 - Unknown word (unported)
+log	samples/Dutch.txt:22:46 - Unknown word (unported)
 log
-log	./samples/Dutch.txt:23:6 - Unknown word (Volledige)
+log	samples/Dutch.txt:23:6 - Unknown word (Volledige)
 log
-log	./samples/Dutch.txt:23:16 - Unknown word (licentie)
+log	samples/Dutch.txt:23:16 - Unknown word (licentie)
 log
-log	./samples/Dutch.txt:24:6 - Unknown word (Samenvatting)
+log	samples/Dutch.txt:24:6 - Unknown word (Samenvatting)
 log
-log	./samples/Dutch.txt:25:4 - Unknown word (Steun)
+log	samples/Dutch.txt:25:4 - Unknown word (Steun)
 log
-log	./samples/Dutch.txt:25:36 - Unknown word (vrijwilligersproject)
+log	samples/Dutch.txt:25:36 - Unknown word (vrijwilligersproject)
 log
-log	./samples/Dutch.txt:25:57 - Unknown word (zonder)
+log	samples/Dutch.txt:25:57 - Unknown word (zonder)
 log
-log	./samples/Dutch.txt:25:64 - Unknown word (winstoogmerk)
+log	samples/Dutch.txt:25:64 - Unknown word (winstoogmerk)
 log
-log	./samples/Dutch.txt:26:13 - Unknown word (kleine)
+log	samples/Dutch.txt:26:13 - Unknown word (kleine)
 log
-log	./samples/Dutch.txt:26:21 - Unknown word (financiële)
+log	samples/Dutch.txt:26:21 - Unknown word (financiële)
 log
-log	./samples/Dutch.txt:26:32 - Unknown word (steun)
+log	samples/Dutch.txt:26:32 - Unknown word (steun)
 log
-log	./samples/Dutch.txt:26:51 - Unknown word (meer)
+log	samples/Dutch.txt:26:51 - Unknown word (meer)
 log
-log	./samples/Dutch.txt:26:56 - Unknown word (activiteiten)
+log	samples/Dutch.txt:26:56 - Unknown word (activiteiten)
 log
-log	./samples/Dutch.txt:26:69 - Unknown word (ontplooien)
+log	samples/Dutch.txt:26:69 - Unknown word (ontplooien)
 log
-log	./samples/Dutch.txt:27:19 - Unknown word (professionaliseren)
+log	samples/Dutch.txt:27:19 - Unknown word (professionaliseren)
 log
-log	./samples/Dutch.txt:27:42 - Unknown word (donatie)
+log	samples/Dutch.txt:27:42 - Unknown word (donatie)
 log
-log	./samples/Dutch.txt:27:63 - Unknown word (welkom)
+log	samples/Dutch.txt:27:63 - Unknown word (welkom)
 log
-log	./samples/Dutch.txt:28:4 - Unknown word (rekeningnummer)
+log	samples/Dutch.txt:28:4 - Unknown word (rekeningnummer)
 log
-log	./samples/Dutch.txt:28:39 - Unknown word (Stichting)
+log	samples/Dutch.txt:28:39 - Unknown word (Stichting)
 log
-log	./samples/Dutch.txt:28:62 - Unknown word (giften)
+log	samples/Dutch.txt:28:62 - Unknown word (giften)
 log
-log	./samples/Dutch.txt:28:69 - Unknown word (zijn)
+log	samples/Dutch.txt:28:69 - Unknown word (zijn)
 log
-log	./samples/Dutch.txt:29:4 - Unknown word (aftrekbaar)
+log	samples/Dutch.txt:29:4 - Unknown word (aftrekbaar)
 log
-log	./samples/Dutch.txt:29:22 - Unknown word (belasting)
+log	samples/Dutch.txt:29:22 - Unknown word (belasting)
 log
-log	./samples/Dutch.txt:29:33 - Unknown word (Stichting)
+log	samples/Dutch.txt:29:33 - Unknown word (Stichting)
 log
-log	./samples/Dutch.txt:29:55 - Unknown word (namelijk)
+log	samples/Dutch.txt:29:55 - Unknown word (namelijk)
 log
-log	./samples/Dutch.txt:30:4 - Unknown word (Belastingdienst)
+log	samples/Dutch.txt:30:4 - Unknown word (Belastingdienst)
 log
-log	./samples/Dutch.txt:30:20 - Unknown word (erkend)
+log	samples/Dutch.txt:30:20 - Unknown word (erkend)
 log
-log	./samples/Dutch.txt:30:31 - Unknown word (ANBI)
+log	samples/Dutch.txt:30:31 - Unknown word (ANBI)
 log
-log	./samples/Dutch.txt:30:37 - Unknown word (oftewel)
+log	samples/Dutch.txt:30:37 - Unknown word (oftewel)
 log
-log	./samples/Dutch.txt:30:46 - Unknown word (Algemeen)
+log	samples/Dutch.txt:30:46 - Unknown word (Algemeen)
 log
-log	./samples/Dutch.txt:30:59 - Unknown word (Beogende)
+log	samples/Dutch.txt:30:59 - Unknown word (Beogende)
 log
-log	./samples/Dutch.txt:30:68 - Unknown word (Instelling)
+log	samples/Dutch.txt:30:68 - Unknown word (Instelling)
 log
-log	./samples/Dutch.txt:32:4 - Unknown word (Meedoen)
+log	samples/Dutch.txt:32:4 - Unknown word (Meedoen)
 log
-log	./samples/Dutch.txt:32:13 - Unknown word (Iedereen)
+log	samples/Dutch.txt:32:13 - Unknown word (Iedereen)
 log
-log	./samples/Dutch.txt:32:25 - Unknown word (welkom)
+log	samples/Dutch.txt:32:25 - Unknown word (welkom)
 log
-log	./samples/Dutch.txt:32:42 - Unknown word (doen)
+log	samples/Dutch.txt:32:42 - Unknown word (doen)
 log
-log	./samples/Dutch.txt:32:53 - Unknown word (fouten)
+log	samples/Dutch.txt:32:53 - Unknown word (fouten)
 log
-log	./samples/Dutch.txt:32:61 - Unknown word (discussieer)
+log	samples/Dutch.txt:32:61 - Unknown word (discussieer)
 log
-log	./samples/Dutch.txt:33:7 - Unknown word (mailinglijst)
+log	samples/Dutch.txt:33:7 - Unknown word (mailinglijst)
 log
-log	./samples/Dutch.txt:33:23 - Unknown word (draai)
+log	samples/Dutch.txt:33:23 - Unknown word (draai)
 log
-log	./samples/Dutch.txt:33:52 - Unknown word (dragen)
+log	samples/Dutch.txt:33:52 - Unknown word (dragen)
 log
-log	./samples/Dutch.txt:33:75 - Unknown word (stemt)
+log	samples/Dutch.txt:33:75 - Unknown word (stemt)
 log
-log	./samples/Dutch.txt:34:6 - Unknown word (ermee)
+log	samples/Dutch.txt:34:6 - Unknown word (ermee)
 log
-log	./samples/Dutch.txt:34:22 - Unknown word (bijdrage)
+log	samples/Dutch.txt:34:22 - Unknown word (bijdrage)
 log
-log	./samples/Dutch.txt:34:39 - Unknown word (desbetreffende)
+log	samples/Dutch.txt:34:39 - Unknown word (desbetreffende)
 log
-log	./samples/Dutch.txt:34:54 - Unknown word (taalhulpbestand)
+log	samples/Dutch.txt:34:54 - Unknown word (taalhulpbestand)
 log
-log	./samples/Dutch.txt:34:70 - Unknown word (beschikbaar)
+log	samples/Dutch.txt:34:70 - Unknown word (beschikbaar)
 log
-log	./samples/Dutch.txt:35:4 - Unknown word (komt)
+log	samples/Dutch.txt:35:4 - Unknown word (komt)
 log
-log	./samples/Dutch.txt:35:9 - Unknown word (onder)
+log	samples/Dutch.txt:35:9 - Unknown word (onder)
 log
-log	./samples/Dutch.txt:35:15 - Unknown word (vrije)
+log	samples/Dutch.txt:35:15 - Unknown word (vrije)
 log
-log	./samples/Dutch.txt:35:27 - Unknown word (opensource)
+log	samples/Dutch.txt:35:27 - Unknown word (opensource)
 log
-log	./samples/Dutch.txt:35:38 - Unknown word (licenties)
+log	samples/Dutch.txt:35:38 - Unknown word (licenties)
 log
-log	./samples/Dutch.txt:35:49 - Unknown word (Indien)
+log	samples/Dutch.txt:35:49 - Unknown word (Indien)
 log
-log	./samples/Dutch.txt:35:62 - Unknown word (wenst)
+log	samples/Dutch.txt:35:62 - Unknown word (wenst)
 log
-log	./samples/Dutch.txt:36:4 - Unknown word (naam)
+log	samples/Dutch.txt:36:4 - Unknown word (naam)
 log
-log	./samples/Dutch.txt:36:23 - Unknown word (genoemd)
+log	samples/Dutch.txt:36:23 - Unknown word (genoemd)
 log
-log	./samples/Dutch.txt:36:31 - Unknown word (worden)
+log	samples/Dutch.txt:36:31 - Unknown word (worden)
 log
-log	./samples/Dutch.txt:36:42 - Unknown word (ontvangen)
+log	samples/Dutch.txt:36:42 - Unknown word (ontvangen)
 log
-log	./samples/Dutch.txt:36:55 - Unknown word (schriftelijk)
+log	samples/Dutch.txt:36:55 - Unknown word (schriftelijk)
 log
-log	./samples/Dutch.txt:36:68 - Unknown word (verzoek)
+log	samples/Dutch.txt:36:68 - Unknown word (verzoek)
 log
-log	./samples/Dutch.txt:37:4 - Unknown word (daarvoor)
+log	samples/Dutch.txt:37:4 - Unknown word (daarvoor)
 log
-log	./samples/Dutch.txt:37:13 - Unknown word (graag)
+log	samples/Dutch.txt:37:13 - Unknown word (graag)
 log
-log	./samples/Dutch.txt:38:4 - Unknown word (Rechten)
+log	samples/Dutch.txt:38:4 - Unknown word (Rechten)
 log
-log	./samples/Dutch.txt:38:16 - Unknown word (derden)
+log	samples/Dutch.txt:38:16 - Unknown word (derden)
 log
-log	./samples/Dutch.txt:38:33 - Unknown word (respecteert)
+log	samples/Dutch.txt:38:33 - Unknown word (respecteert)
 log
-log	./samples/Dutch.txt:38:48 - Unknown word (rechten)
+log	samples/Dutch.txt:38:48 - Unknown word (rechten)
 log
-log	./samples/Dutch.txt:38:60 - Unknown word (derden)
+log	samples/Dutch.txt:38:60 - Unknown word (derden)
 log
-log	./samples/Dutch.txt:39:13 - Unknown word (gegevens)
+log	samples/Dutch.txt:39:13 - Unknown word (gegevens)
 log
-log	./samples/Dutch.txt:39:22 - Unknown word (vrij)
+log	samples/Dutch.txt:39:22 - Unknown word (vrij)
 log
-log	./samples/Dutch.txt:39:27 - Unknown word (beschikbaar)
+log	samples/Dutch.txt:39:27 - Unknown word (beschikbaar)
 log
-log	./samples/Dutch.txt:39:39 - Unknown word (houden)
+log	samples/Dutch.txt:39:39 - Unknown word (houden)
 log
-log	./samples/Dutch.txt:39:47 - Unknown word (Voor)
+log	samples/Dutch.txt:39:47 - Unknown word (Voor)
 log
-log	./samples/Dutch.txt:39:52 - Unknown word (bijdragen)
+log	samples/Dutch.txt:39:52 - Unknown word (bijdragen)
 log
-log	./samples/Dutch.txt:40:6 - Unknown word (daarom)
+log	samples/Dutch.txt:40:6 - Unknown word (daarom)
 log
-log	./samples/Dutch.txt:40:13 - Unknown word (niet)
+log	samples/Dutch.txt:40:13 - Unknown word (niet)
 log
-log	./samples/Dutch.txt:40:18 - Unknown word (zonder)
+log	samples/Dutch.txt:40:18 - Unknown word (zonder)
 log
-log	./samples/Dutch.txt:40:25 - Unknown word (toestemming)
+log	samples/Dutch.txt:40:25 - Unknown word (toestemming)
 log
-log	./samples/Dutch.txt:40:37 - Unknown word (gebruikmaken)
+log	samples/Dutch.txt:40:37 - Unknown word (gebruikmaken)
 log
-log	./samples/Dutch.txt:40:54 - Unknown word (beschermde)
+log	samples/Dutch.txt:40:54 - Unknown word (beschermde)
 log
-log	./samples/Dutch.txt:40:65 - Unknown word (naslagwerken)
+log	samples/Dutch.txt:40:65 - Unknown word (naslagwerken)
 log
-log	./samples/Dutch.txt:41:4 - Unknown word (zoals)
+log	samples/Dutch.txt:41:4 - Unknown word (zoals)
 log
-log	./samples/Dutch.txt:41:10 - Unknown word (woordenboeken)
+log	samples/Dutch.txt:41:10 - Unknown word (woordenboeken)
 log
-log	./samples/Dutch.txt:41:36 - Unknown word (toegestaan)
+log	samples/Dutch.txt:41:36 - Unknown word (toegestaan)
 log
-log	./samples/Dutch.txt:41:50 - Unknown word (gebruik)
+log	samples/Dutch.txt:41:50 - Unknown word (gebruik)
 log
-log	./samples/Dutch.txt:41:61 - Unknown word (maken)
+log	samples/Dutch.txt:41:61 - Unknown word (maken)
 log
-log	./samples/Dutch.txt:42:4 - Unknown word (materialen)
+log	samples/Dutch.txt:42:4 - Unknown word (materialen)
 log
-log	./samples/Dutch.txt:42:22 - Unknown word (Nederlandse)
+log	samples/Dutch.txt:42:22 - Unknown word (Nederlandse)
 log
-log	./samples/Dutch.txt:42:34 - Unknown word (Taalunie)
+log	samples/Dutch.txt:42:34 - Unknown word (Taalunie)
 log
-log	./samples/Dutch.txt:42:44 - Unknown word (zoals)
+log	samples/Dutch.txt:42:44 - Unknown word (zoals)
 log
-log	./samples/Dutch.txt:42:53 - Unknown word (leidraad)
+log	samples/Dutch.txt:42:53 - Unknown word (leidraad)
 log
-log	./samples/Dutch.txt:42:68 - Unknown word (woordenlijst)
+log	samples/Dutch.txt:42:68 - Unknown word (woordenlijst)
 log
-log	./samples/Dutch.txt:43:4 - Unknown word (Indien)
+log	samples/Dutch.txt:43:4 - Unknown word (Indien)
 log
-log	./samples/Dutch.txt:43:17 - Unknown word (mening)
+log	samples/Dutch.txt:43:17 - Unknown word (mening)
 log
-log	./samples/Dutch.txt:43:42 - Unknown word (inbreuk)
+log	samples/Dutch.txt:43:42 - Unknown word (inbreuk)
 log
-log	./samples/Dutch.txt:43:50 - Unknown word (maakt)
+log	samples/Dutch.txt:43:50 - Unknown word (maakt)
 log
-log	./samples/Dutch.txt:43:62 - Unknown word (rechten)
+log	samples/Dutch.txt:43:62 - Unknown word (rechten)
 log
-log	./samples/Dutch.txt:44:4 - Unknown word (verzoeken)
+log	samples/Dutch.txt:44:4 - Unknown word (verzoeken)
 log
-log	./samples/Dutch.txt:44:19 - Unknown word (hierover)
+log	samples/Dutch.txt:44:19 - Unknown word (hierover)
 log
-log	./samples/Dutch.txt:44:31 - Unknown word (spoedig)
+log	samples/Dutch.txt:44:31 - Unknown word (spoedig)
 log
-log	./samples/Dutch.txt:44:39 - Unknown word (mogelijk)
+log	samples/Dutch.txt:44:39 - Unknown word (mogelijk)
 log
-log	./samples/Dutch.txt:44:48 - Unknown word (schriftelijk)
+log	samples/Dutch.txt:44:48 - Unknown word (schriftelijk)
 log
-log	./samples/Dutch.txt:45:7 - Unknown word (nemen)
+log	samples/Dutch.txt:45:7 - Unknown word (nemen)
 log
-log	./samples/Dutch.txt:46:13 - Unknown word (Stichting)
+log	samples/Dutch.txt:46:13 - Unknown word (Stichting)
 log
-log	./samples/Dutch.txt:59:56 - Unknown word (Brouwer)
+log	samples/Dutch.txt:59:56 - Unknown word (Brouwer)
 log
-log	./samples/Dutch.txt:60:11 - Unknown word (Nederlandstalige)
+log	samples/Dutch.txt:60:11 - Unknown word (Nederlandstalige)
 log
-log	./samples/Dutch.txt:60:32 - Unknown word (Gebruikersgroep)
+log	samples/Dutch.txt:60:32 - Unknown word (Gebruikersgroep)
 log
-log	./samples/Dutch.txt:68:42 - Unknown word (unported)
+log	samples/Dutch.txt:68:42 - Unknown word (unported)
 log
-log	./samples/Dutch.txt:74:39 - Unknown word (RABONL)
+log	samples/Dutch.txt:74:39 - Unknown word (RABONL)
 log
-log	./samples/Dutch.txt:74:49 - Unknown word (IBAN)
+log	samples/Dutch.txt:74:49 - Unknown word (IBAN)
 log
-log	./samples/Dutch.txt:74:59 - Unknown word (RABO)
+log	samples/Dutch.txt:74:59 - Unknown word (RABO)
 log
-log	./samples/Dutch.txt:75:4 - Unknown word (Stichting)
+log	samples/Dutch.txt:75:4 - Unknown word (Stichting)
 log
-log	./samples/Dutch.txt:77:58 - Unknown word (algemeen)
+log	samples/Dutch.txt:77:58 - Unknown word (algemeen)
 log
-log	./samples/Dutch.txt:77:71 - Unknown word (beogende)
+log	samples/Dutch.txt:77:71 - Unknown word (beogende)
 log
-log	./samples/Dutch.txt:78:4 - Unknown word (instelling)
+log	samples/Dutch.txt:78:4 - Unknown word (instelling)
 log
-log	./samples/Dutch.txt:78:18 - Unknown word (ANBI)
+log	samples/Dutch.txt:78:18 - Unknown word (ANBI)
 log
 error	-------------------------------------------
 error
 error	Issues found:
 error
-error	./samples/Dutch.txt:1:32 - Unknown word (NEDERLANDS)
+error	samples/Dutch.txt:1:32 - Unknown word (NEDERLANDS)
 error
-error	./samples/Dutch.txt:2:11 - Unknown word (wordt)
+error	samples/Dutch.txt:2:11 - Unknown word (wordt)
 error
-error	./samples/Dutch.txt:2:17 - Unknown word (vriendelijk)
+error	samples/Dutch.txt:2:17 - Unknown word (vriendelijk)
 error
-error	./samples/Dutch.txt:2:29 - Unknown word (verzocht)
+error	samples/Dutch.txt:2:29 - Unknown word (verzocht)
 error
-error	./samples/Dutch.txt:2:45 - Unknown word (bestand)
+error	samples/Dutch.txt:2:45 - Unknown word (bestand)
 error
-error	./samples/Dutch.txt:3:10 - Unknown word (lezen)
+error	samples/Dutch.txt:3:10 - Unknown word (lezen)
 error
-error	./samples/Dutch.txt:3:26 - Unknown word (leveren)
+error	samples/Dutch.txt:3:26 - Unknown word (leveren)
 error
-error	./samples/Dutch.txt:3:38 - Unknown word (iedere)
+error	samples/Dutch.txt:3:38 - Unknown word (iedere)
 error
-error	./samples/Dutch.txt:3:45 - Unknown word (kopie)
+error	samples/Dutch.txt:3:45 - Unknown word (kopie)
 error
-error	./samples/Dutch.txt:3:59 - Unknown word (taalhulpbestand)
+error	samples/Dutch.txt:3:59 - Unknown word (taalhulpbestand)
 error
-error	./samples/Dutch.txt:5:4 - Unknown word (Naam)
+error	samples/Dutch.txt:5:4 - Unknown word (Naam)
 error
-error	./samples/Dutch.txt:5:10 - Unknown word (Nederlandstalige)
+error	samples/Dutch.txt:5:10 - Unknown word (Nederlandstalige)
 error
-error	./samples/Dutch.txt:5:27 - Unknown word (woordenlijst)
+error	samples/Dutch.txt:5:27 - Unknown word (woordenlijst)
 error
-error	./samples/Dutch.txt:5:40 - Unknown word (voor)
+error	samples/Dutch.txt:5:40 - Unknown word (voor)
 error
-error	./samples/Dutch.txt:5:45 - Unknown word (spellingcontrole)
+error	samples/Dutch.txt:5:45 - Unknown word (spellingcontrole)
 error
-error	./samples/Dutch.txt:6:4 - Unknown word (Versie)
+error	samples/Dutch.txt:6:4 - Unknown word (Versie)
 error
-error	./samples/Dutch.txt:6:11 - Unknown word (woordenlijst)
+error	samples/Dutch.txt:6:11 - Unknown word (woordenlijst)
 error
-error	./samples/Dutch.txt:6:32 - Unknown word (versie)
+error	samples/Dutch.txt:6:32 - Unknown word (versie)
 error
-error	./samples/Dutch.txt:6:39 - Unknown word (spellingcontrole)
+error	samples/Dutch.txt:6:39 - Unknown word (spellingcontrole)
 error
-error	./samples/Dutch.txt:7:4 - Unknown word (Vereisten)
+error	samples/Dutch.txt:7:4 - Unknown word (Vereisten)
 error
-error	./samples/Dutch.txt:7:33 - Unknown word (hoger)
+error	samples/Dutch.txt:7:33 - Unknown word (hoger)
 error
-error	./samples/Dutch.txt:8:4 - Unknown word (Keurmerk)
+error	samples/Dutch.txt:8:4 - Unknown word (Keurmerk)
 error
-error	./samples/Dutch.txt:8:22 - Unknown word (Nederlandse)
+error	samples/Dutch.txt:8:22 - Unknown word (Nederlandse)
 error
-error	./samples/Dutch.txt:8:34 - Unknown word (Taalunie)
+error	samples/Dutch.txt:8:34 - Unknown word (Taalunie)
 error
-error	./samples/Dutch.txt:8:47 - Unknown word (lijst)
+error	samples/Dutch.txt:8:47 - Unknown word (lijst)
 error
-error	./samples/Dutch.txt:8:57 - Unknown word (basiswoorden)
+error	samples/Dutch.txt:8:57 - Unknown word (basiswoorden)
 error
-error	./samples/Dutch.txt:9:13 - Unknown word (draagt)
+error	samples/Dutch.txt:9:13 - Unknown word (draagt)
 error
-error	./samples/Dutch.txt:9:24 - Unknown word (keurmerk)
+error	samples/Dutch.txt:9:24 - Unknown word (keurmerk)
 error
-error	./samples/Dutch.txt:9:40 - Unknown word (Nederlandse)
+error	samples/Dutch.txt:9:40 - Unknown word (Nederlandse)
 error
-error	./samples/Dutch.txt:9:52 - Unknown word (Taalunie)
+error	samples/Dutch.txt:9:52 - Unknown word (Taalunie)
 error
-error	./samples/Dutch.txt:9:62 - Unknown word (Voor)
+error	samples/Dutch.txt:9:62 - Unknown word (Voor)
 error
-error	./samples/Dutch.txt:9:67 - Unknown word (meer)
+error	samples/Dutch.txt:9:67 - Unknown word (meer)
 error
-error	./samples/Dutch.txt:10:4 - Unknown word (informatie)
+error	samples/Dutch.txt:10:4 - Unknown word (informatie)
 error
-error	./samples/Dutch.txt:11:4 - Unknown word (Auteursrechten)
+error	samples/Dutch.txt:11:4 - Unknown word (Auteursrechten)
 error
-error	./samples/Dutch.txt:11:60 - Unknown word (Brouwer)
+error	samples/Dutch.txt:11:60 - Unknown word (Brouwer)
 error
-error	./samples/Dutch.txt:12:11 - Unknown word (Nederlandstalige)
+error	samples/Dutch.txt:12:11 - Unknown word (Nederlandstalige)
 error
-error	./samples/Dutch.txt:12:32 - Unknown word (Gebruikersgroep)
+error	samples/Dutch.txt:12:32 - Unknown word (Gebruikersgroep)
 error
-error	./samples/Dutch.txt:13:4 - Unknown word (Licenties)
+error	samples/Dutch.txt:13:4 - Unknown word (Licenties)
 error
-error	./samples/Dutch.txt:13:24 - Unknown word (heeft)
+error	samples/Dutch.txt:13:24 - Unknown word (heeft)
 error
-error	./samples/Dutch.txt:13:34 - Unknown word (doel)
+error	samples/Dutch.txt:13:34 - Unknown word (doel)
 error
-error	./samples/Dutch.txt:13:42 - Unknown word (vrij)
+error	samples/Dutch.txt:13:42 - Unknown word (vrij)
 error
-error	./samples/Dutch.txt:13:47 - Unknown word (beschikbare)
+error	samples/Dutch.txt:13:47 - Unknown word (beschikbare)
 error
-error	./samples/Dutch.txt:13:59 - Unknown word (Nederlandstalige)
+error	samples/Dutch.txt:13:59 - Unknown word (Nederlandstalige)
 error
-error	./samples/Dutch.txt:14:4 - Unknown word (taalhulpbestanden)
+error	samples/Dutch.txt:14:4 - Unknown word (taalhulpbestanden)
 error
-error	./samples/Dutch.txt:14:25 - Unknown word (ontwikkelen)
+error	samples/Dutch.txt:14:25 - Unknown word (ontwikkelen)
 error
-error	./samples/Dutch.txt:14:43 - Unknown word (verspreiden)
+error	samples/Dutch.txt:14:43 - Unknown word (verspreiden)
 error
-error	./samples/Dutch.txt:14:70 - Unknown word (gebruik)
+error	samples/Dutch.txt:14:70 - Unknown word (gebruik)
 error
-error	./samples/Dutch.txt:15:4 - Unknown word (mogelijk)
+error	samples/Dutch.txt:15:4 - Unknown word (mogelijk)
 error
-error	./samples/Dutch.txt:15:16 - Unknown word (maken)
+error	samples/Dutch.txt:15:16 - Unknown word (maken)
 error
-error	./samples/Dutch.txt:15:22 - Unknown word (zijn)
+error	samples/Dutch.txt:15:22 - Unknown word (zijn)
 error
-error	./samples/Dutch.txt:15:30 - Unknown word (taalhulpbestanden)
+error	samples/Dutch.txt:15:30 - Unknown word (taalhulpbestanden)
 error
-error	./samples/Dutch.txt:15:55 - Unknown word (beschikbaar)
+error	samples/Dutch.txt:15:55 - Unknown word (beschikbaar)
 error
-error	./samples/Dutch.txt:15:67 - Unknown word (onder)
+error	samples/Dutch.txt:15:67 - Unknown word (onder)
 error
-error	./samples/Dutch.txt:16:4 - Unknown word (onderstaande)
+error	samples/Dutch.txt:16:4 - Unknown word (onderstaande)
 error
-error	./samples/Dutch.txt:16:18 - Unknown word (liberale)
+error	samples/Dutch.txt:16:18 - Unknown word (liberale)
 error
-error	./samples/Dutch.txt:16:27 - Unknown word (licenties)
+error	samples/Dutch.txt:16:27 - Unknown word (licenties)
 error
-error	./samples/Dutch.txt:16:37 - Unknown word (naar)
+error	samples/Dutch.txt:16:37 - Unknown word (naar)
 error
-error	./samples/Dutch.txt:16:42 - Unknown word (keuze)
+error	samples/Dutch.txt:16:42 - Unknown word (keuze)
 error
-error	./samples/Dutch.txt:16:55 - Unknown word (gebruiker)
+error	samples/Dutch.txt:16:55 - Unknown word (gebruiker)
 error
-error	./samples/Dutch.txt:16:68 - Unknown word (wordt)
+error	samples/Dutch.txt:16:68 - Unknown word (wordt)
 error
-error	./samples/Dutch.txt:17:4 - Unknown word (zeerste)
+error	samples/Dutch.txt:17:4 - Unknown word (zeerste)
 error
-error	./samples/Dutch.txt:17:12 - Unknown word (aangeraden)
+error	samples/Dutch.txt:17:12 - Unknown word (aangeraden)
 error
-error	./samples/Dutch.txt:17:26 - Unknown word (voorafgaand)
+error	samples/Dutch.txt:17:26 - Unknown word (voorafgaand)
 error
-error	./samples/Dutch.txt:17:46 - Unknown word (gebruik)
+error	samples/Dutch.txt:17:46 - Unknown word (gebruik)
 error
-error	./samples/Dutch.txt:17:54 - Unknown word (kennis)
+error	samples/Dutch.txt:17:54 - Unknown word (kennis)
 error
-error	./samples/Dutch.txt:17:64 - Unknown word (nemen)
+error	samples/Dutch.txt:17:64 - Unknown word (nemen)
 error
-error	./samples/Dutch.txt:18:4 - Unknown word (toepasselijke)
+error	samples/Dutch.txt:18:4 - Unknown word (toepasselijke)
 error
-error	./samples/Dutch.txt:18:18 - Unknown word (licentie)
+error	samples/Dutch.txt:18:18 - Unknown word (licentie)
 error
-error	./samples/Dutch.txt:19:12 - Unknown word (herziene)
+error	samples/Dutch.txt:19:12 - Unknown word (herziene)
 error
-error	./samples/Dutch.txt:19:21 - Unknown word (versie)
+error	samples/Dutch.txt:19:21 - Unknown word (versie)
 error
-error	./samples/Dutch.txt:20:6 - Unknown word (Volledige)
+error	samples/Dutch.txt:20:6 - Unknown word (Volledige)
 error
-error	./samples/Dutch.txt:20:16 - Unknown word (licentie)
+error	samples/Dutch.txt:20:16 - Unknown word (licentie)
 error
-error	./samples/Dutch.txt:21:6 - Unknown word (Samenvatting)
+error	samples/Dutch.txt:21:6 - Unknown word (Samenvatting)
 error
-error	./samples/Dutch.txt:22:25 - Unknown word (Naamsvermelding)
+error	samples/Dutch.txt:22:25 - Unknown word (Naamsvermelding)
 error
-error	./samples/Dutch.txt:22:46 - Unknown word (unported)
+error	samples/Dutch.txt:22:46 - Unknown word (unported)
 error
-error	./samples/Dutch.txt:23:6 - Unknown word (Volledige)
+error	samples/Dutch.txt:23:6 - Unknown word (Volledige)
 error
-error	./samples/Dutch.txt:23:16 - Unknown word (licentie)
+error	samples/Dutch.txt:23:16 - Unknown word (licentie)
 error
-error	./samples/Dutch.txt:24:6 - Unknown word (Samenvatting)
+error	samples/Dutch.txt:24:6 - Unknown word (Samenvatting)
 error
-error	./samples/Dutch.txt:25:4 - Unknown word (Steun)
+error	samples/Dutch.txt:25:4 - Unknown word (Steun)
 error
-error	./samples/Dutch.txt:25:36 - Unknown word (vrijwilligersproject)
+error	samples/Dutch.txt:25:36 - Unknown word (vrijwilligersproject)
 error
-error	./samples/Dutch.txt:25:57 - Unknown word (zonder)
+error	samples/Dutch.txt:25:57 - Unknown word (zonder)
 error
-error	./samples/Dutch.txt:25:64 - Unknown word (winstoogmerk)
+error	samples/Dutch.txt:25:64 - Unknown word (winstoogmerk)
 error
-error	./samples/Dutch.txt:26:13 - Unknown word (kleine)
+error	samples/Dutch.txt:26:13 - Unknown word (kleine)
 error
-error	./samples/Dutch.txt:26:21 - Unknown word (financiële)
+error	samples/Dutch.txt:26:21 - Unknown word (financiële)
 error
-error	./samples/Dutch.txt:26:32 - Unknown word (steun)
+error	samples/Dutch.txt:26:32 - Unknown word (steun)
 error
-error	./samples/Dutch.txt:26:51 - Unknown word (meer)
+error	samples/Dutch.txt:26:51 - Unknown word (meer)
 error
-error	./samples/Dutch.txt:26:56 - Unknown word (activiteiten)
+error	samples/Dutch.txt:26:56 - Unknown word (activiteiten)
 error
-error	./samples/Dutch.txt:26:69 - Unknown word (ontplooien)
+error	samples/Dutch.txt:26:69 - Unknown word (ontplooien)
 error
-error	./samples/Dutch.txt:27:19 - Unknown word (professionaliseren)
+error	samples/Dutch.txt:27:19 - Unknown word (professionaliseren)
 error
-error	./samples/Dutch.txt:27:42 - Unknown word (donatie)
+error	samples/Dutch.txt:27:42 - Unknown word (donatie)
 error
-error	./samples/Dutch.txt:27:63 - Unknown word (welkom)
+error	samples/Dutch.txt:27:63 - Unknown word (welkom)
 error
-error	./samples/Dutch.txt:28:4 - Unknown word (rekeningnummer)
+error	samples/Dutch.txt:28:4 - Unknown word (rekeningnummer)
 error
-error	./samples/Dutch.txt:28:39 - Unknown word (Stichting)
+error	samples/Dutch.txt:28:39 - Unknown word (Stichting)
 error
-error	./samples/Dutch.txt:28:62 - Unknown word (giften)
+error	samples/Dutch.txt:28:62 - Unknown word (giften)
 error
-error	./samples/Dutch.txt:28:69 - Unknown word (zijn)
+error	samples/Dutch.txt:28:69 - Unknown word (zijn)
 error
-error	./samples/Dutch.txt:29:4 - Unknown word (aftrekbaar)
+error	samples/Dutch.txt:29:4 - Unknown word (aftrekbaar)
 error
-error	./samples/Dutch.txt:29:22 - Unknown word (belasting)
+error	samples/Dutch.txt:29:22 - Unknown word (belasting)
 error
-error	./samples/Dutch.txt:29:33 - Unknown word (Stichting)
+error	samples/Dutch.txt:29:33 - Unknown word (Stichting)
 error
-error	./samples/Dutch.txt:29:55 - Unknown word (namelijk)
+error	samples/Dutch.txt:29:55 - Unknown word (namelijk)
 error
-error	./samples/Dutch.txt:30:4 - Unknown word (Belastingdienst)
+error	samples/Dutch.txt:30:4 - Unknown word (Belastingdienst)
 error
-error	./samples/Dutch.txt:30:20 - Unknown word (erkend)
+error	samples/Dutch.txt:30:20 - Unknown word (erkend)
 error
-error	./samples/Dutch.txt:30:31 - Unknown word (ANBI)
+error	samples/Dutch.txt:30:31 - Unknown word (ANBI)
 error
-error	./samples/Dutch.txt:30:37 - Unknown word (oftewel)
+error	samples/Dutch.txt:30:37 - Unknown word (oftewel)
 error
-error	./samples/Dutch.txt:30:46 - Unknown word (Algemeen)
+error	samples/Dutch.txt:30:46 - Unknown word (Algemeen)
 error
-error	./samples/Dutch.txt:30:59 - Unknown word (Beogende)
+error	samples/Dutch.txt:30:59 - Unknown word (Beogende)
 error
-error	./samples/Dutch.txt:30:68 - Unknown word (Instelling)
+error	samples/Dutch.txt:30:68 - Unknown word (Instelling)
 error
-error	./samples/Dutch.txt:32:4 - Unknown word (Meedoen)
+error	samples/Dutch.txt:32:4 - Unknown word (Meedoen)
 error
-error	./samples/Dutch.txt:32:13 - Unknown word (Iedereen)
+error	samples/Dutch.txt:32:13 - Unknown word (Iedereen)
 error
-error	./samples/Dutch.txt:32:25 - Unknown word (welkom)
+error	samples/Dutch.txt:32:25 - Unknown word (welkom)
 error
-error	./samples/Dutch.txt:32:42 - Unknown word (doen)
+error	samples/Dutch.txt:32:42 - Unknown word (doen)
 error
-error	./samples/Dutch.txt:32:53 - Unknown word (fouten)
+error	samples/Dutch.txt:32:53 - Unknown word (fouten)
 error
-error	./samples/Dutch.txt:32:61 - Unknown word (discussieer)
+error	samples/Dutch.txt:32:61 - Unknown word (discussieer)
 error
-error	./samples/Dutch.txt:33:7 - Unknown word (mailinglijst)
+error	samples/Dutch.txt:33:7 - Unknown word (mailinglijst)
 error
-error	./samples/Dutch.txt:33:23 - Unknown word (draai)
+error	samples/Dutch.txt:33:23 - Unknown word (draai)
 error
-error	./samples/Dutch.txt:33:52 - Unknown word (dragen)
+error	samples/Dutch.txt:33:52 - Unknown word (dragen)
 error
-error	./samples/Dutch.txt:33:75 - Unknown word (stemt)
+error	samples/Dutch.txt:33:75 - Unknown word (stemt)
 error
-error	./samples/Dutch.txt:34:6 - Unknown word (ermee)
+error	samples/Dutch.txt:34:6 - Unknown word (ermee)
 error
-error	./samples/Dutch.txt:34:22 - Unknown word (bijdrage)
+error	samples/Dutch.txt:34:22 - Unknown word (bijdrage)
 error
-error	./samples/Dutch.txt:34:39 - Unknown word (desbetreffende)
+error	samples/Dutch.txt:34:39 - Unknown word (desbetreffende)
 error
-error	./samples/Dutch.txt:34:54 - Unknown word (taalhulpbestand)
+error	samples/Dutch.txt:34:54 - Unknown word (taalhulpbestand)
 error
-error	./samples/Dutch.txt:34:70 - Unknown word (beschikbaar)
+error	samples/Dutch.txt:34:70 - Unknown word (beschikbaar)
 error
-error	./samples/Dutch.txt:35:4 - Unknown word (komt)
+error	samples/Dutch.txt:35:4 - Unknown word (komt)
 error
-error	./samples/Dutch.txt:35:9 - Unknown word (onder)
+error	samples/Dutch.txt:35:9 - Unknown word (onder)
 error
-error	./samples/Dutch.txt:35:15 - Unknown word (vrije)
+error	samples/Dutch.txt:35:15 - Unknown word (vrije)
 error
-error	./samples/Dutch.txt:35:27 - Unknown word (opensource)
+error	samples/Dutch.txt:35:27 - Unknown word (opensource)
 error
-error	./samples/Dutch.txt:35:38 - Unknown word (licenties)
+error	samples/Dutch.txt:35:38 - Unknown word (licenties)
 error
-error	./samples/Dutch.txt:35:49 - Unknown word (Indien)
+error	samples/Dutch.txt:35:49 - Unknown word (Indien)
 error
-error	./samples/Dutch.txt:35:62 - Unknown word (wenst)
+error	samples/Dutch.txt:35:62 - Unknown word (wenst)
 error
-error	./samples/Dutch.txt:36:4 - Unknown word (naam)
+error	samples/Dutch.txt:36:4 - Unknown word (naam)
 error
-error	./samples/Dutch.txt:36:23 - Unknown word (genoemd)
+error	samples/Dutch.txt:36:23 - Unknown word (genoemd)
 error
-error	./samples/Dutch.txt:36:31 - Unknown word (worden)
+error	samples/Dutch.txt:36:31 - Unknown word (worden)
 error
-error	./samples/Dutch.txt:36:42 - Unknown word (ontvangen)
+error	samples/Dutch.txt:36:42 - Unknown word (ontvangen)
 error
-error	./samples/Dutch.txt:36:55 - Unknown word (schriftelijk)
+error	samples/Dutch.txt:36:55 - Unknown word (schriftelijk)
 error
-error	./samples/Dutch.txt:36:68 - Unknown word (verzoek)
+error	samples/Dutch.txt:36:68 - Unknown word (verzoek)
 error
-error	./samples/Dutch.txt:37:4 - Unknown word (daarvoor)
+error	samples/Dutch.txt:37:4 - Unknown word (daarvoor)
 error
-error	./samples/Dutch.txt:37:13 - Unknown word (graag)
+error	samples/Dutch.txt:37:13 - Unknown word (graag)
 error
-error	./samples/Dutch.txt:38:4 - Unknown word (Rechten)
+error	samples/Dutch.txt:38:4 - Unknown word (Rechten)
 error
-error	./samples/Dutch.txt:38:16 - Unknown word (derden)
+error	samples/Dutch.txt:38:16 - Unknown word (derden)
 error
-error	./samples/Dutch.txt:38:33 - Unknown word (respecteert)
+error	samples/Dutch.txt:38:33 - Unknown word (respecteert)
 error
-error	./samples/Dutch.txt:38:48 - Unknown word (rechten)
+error	samples/Dutch.txt:38:48 - Unknown word (rechten)
 error
-error	./samples/Dutch.txt:38:60 - Unknown word (derden)
+error	samples/Dutch.txt:38:60 - Unknown word (derden)
 error
-error	./samples/Dutch.txt:39:13 - Unknown word (gegevens)
+error	samples/Dutch.txt:39:13 - Unknown word (gegevens)
 error
-error	./samples/Dutch.txt:39:22 - Unknown word (vrij)
+error	samples/Dutch.txt:39:22 - Unknown word (vrij)
 error
-error	./samples/Dutch.txt:39:27 - Unknown word (beschikbaar)
+error	samples/Dutch.txt:39:27 - Unknown word (beschikbaar)
 error
-error	./samples/Dutch.txt:39:39 - Unknown word (houden)
+error	samples/Dutch.txt:39:39 - Unknown word (houden)
 error
-error	./samples/Dutch.txt:39:47 - Unknown word (Voor)
+error	samples/Dutch.txt:39:47 - Unknown word (Voor)
 error
-error	./samples/Dutch.txt:39:52 - Unknown word (bijdragen)
+error	samples/Dutch.txt:39:52 - Unknown word (bijdragen)
 error
-error	./samples/Dutch.txt:40:6 - Unknown word (daarom)
+error	samples/Dutch.txt:40:6 - Unknown word (daarom)
 error
-error	./samples/Dutch.txt:40:13 - Unknown word (niet)
+error	samples/Dutch.txt:40:13 - Unknown word (niet)
 error
-error	./samples/Dutch.txt:40:18 - Unknown word (zonder)
+error	samples/Dutch.txt:40:18 - Unknown word (zonder)
 error
-error	./samples/Dutch.txt:40:25 - Unknown word (toestemming)
+error	samples/Dutch.txt:40:25 - Unknown word (toestemming)
 error
-error	./samples/Dutch.txt:40:37 - Unknown word (gebruikmaken)
+error	samples/Dutch.txt:40:37 - Unknown word (gebruikmaken)
 error
-error	./samples/Dutch.txt:40:54 - Unknown word (beschermde)
+error	samples/Dutch.txt:40:54 - Unknown word (beschermde)
 error
-error	./samples/Dutch.txt:40:65 - Unknown word (naslagwerken)
+error	samples/Dutch.txt:40:65 - Unknown word (naslagwerken)
 error
-error	./samples/Dutch.txt:41:4 - Unknown word (zoals)
+error	samples/Dutch.txt:41:4 - Unknown word (zoals)
 error
-error	./samples/Dutch.txt:41:10 - Unknown word (woordenboeken)
+error	samples/Dutch.txt:41:10 - Unknown word (woordenboeken)
 error
-error	./samples/Dutch.txt:41:36 - Unknown word (toegestaan)
+error	samples/Dutch.txt:41:36 - Unknown word (toegestaan)
 error
-error	./samples/Dutch.txt:41:50 - Unknown word (gebruik)
+error	samples/Dutch.txt:41:50 - Unknown word (gebruik)
 error
-error	./samples/Dutch.txt:41:61 - Unknown word (maken)
+error	samples/Dutch.txt:41:61 - Unknown word (maken)
 error
-error	./samples/Dutch.txt:42:4 - Unknown word (materialen)
+error	samples/Dutch.txt:42:4 - Unknown word (materialen)
 error
-error	./samples/Dutch.txt:42:22 - Unknown word (Nederlandse)
+error	samples/Dutch.txt:42:22 - Unknown word (Nederlandse)
 error
-error	./samples/Dutch.txt:42:34 - Unknown word (Taalunie)
+error	samples/Dutch.txt:42:34 - Unknown word (Taalunie)
 error
-error	./samples/Dutch.txt:42:44 - Unknown word (zoals)
+error	samples/Dutch.txt:42:44 - Unknown word (zoals)
 error
-error	./samples/Dutch.txt:42:53 - Unknown word (leidraad)
+error	samples/Dutch.txt:42:53 - Unknown word (leidraad)
 error
-error	./samples/Dutch.txt:42:68 - Unknown word (woordenlijst)
+error	samples/Dutch.txt:42:68 - Unknown word (woordenlijst)
 error
-error	./samples/Dutch.txt:43:4 - Unknown word (Indien)
+error	samples/Dutch.txt:43:4 - Unknown word (Indien)
 error
-error	./samples/Dutch.txt:43:17 - Unknown word (mening)
+error	samples/Dutch.txt:43:17 - Unknown word (mening)
 error
-error	./samples/Dutch.txt:43:42 - Unknown word (inbreuk)
+error	samples/Dutch.txt:43:42 - Unknown word (inbreuk)
 error
-error	./samples/Dutch.txt:43:50 - Unknown word (maakt)
+error	samples/Dutch.txt:43:50 - Unknown word (maakt)
 error
-error	./samples/Dutch.txt:43:62 - Unknown word (rechten)
+error	samples/Dutch.txt:43:62 - Unknown word (rechten)
 error
-error	./samples/Dutch.txt:44:4 - Unknown word (verzoeken)
+error	samples/Dutch.txt:44:4 - Unknown word (verzoeken)
 error
-error	./samples/Dutch.txt:44:19 - Unknown word (hierover)
+error	samples/Dutch.txt:44:19 - Unknown word (hierover)
 error
-error	./samples/Dutch.txt:44:31 - Unknown word (spoedig)
+error	samples/Dutch.txt:44:31 - Unknown word (spoedig)
 error
-error	./samples/Dutch.txt:44:39 - Unknown word (mogelijk)
+error	samples/Dutch.txt:44:39 - Unknown word (mogelijk)
 error
-error	./samples/Dutch.txt:44:48 - Unknown word (schriftelijk)
+error	samples/Dutch.txt:44:48 - Unknown word (schriftelijk)
 error
-error	./samples/Dutch.txt:45:7 - Unknown word (nemen)
+error	samples/Dutch.txt:45:7 - Unknown word (nemen)
 error
-error	./samples/Dutch.txt:46:13 - Unknown word (Stichting)
+error	samples/Dutch.txt:46:13 - Unknown word (Stichting)
 error
-error	./samples/Dutch.txt:59:56 - Unknown word (Brouwer)
+error	samples/Dutch.txt:59:56 - Unknown word (Brouwer)
 error
-error	./samples/Dutch.txt:60:11 - Unknown word (Nederlandstalige)
+error	samples/Dutch.txt:60:11 - Unknown word (Nederlandstalige)
 error
-error	./samples/Dutch.txt:60:32 - Unknown word (Gebruikersgroep)
+error	samples/Dutch.txt:60:32 - Unknown word (Gebruikersgroep)
 error
-error	./samples/Dutch.txt:68:42 - Unknown word (unported)
+error	samples/Dutch.txt:68:42 - Unknown word (unported)
 error
-error	./samples/Dutch.txt:74:39 - Unknown word (RABONL)
+error	samples/Dutch.txt:74:39 - Unknown word (RABONL)
 error
-error	./samples/Dutch.txt:74:49 - Unknown word (IBAN)
+error	samples/Dutch.txt:74:49 - Unknown word (IBAN)
 error
-error	./samples/Dutch.txt:74:59 - Unknown word (RABO)
+error	samples/Dutch.txt:74:59 - Unknown word (RABO)
 error
-error	./samples/Dutch.txt:75:4 - Unknown word (Stichting)
+error	samples/Dutch.txt:75:4 - Unknown word (Stichting)
 error
-error	./samples/Dutch.txt:77:58 - Unknown word (algemeen)
+error	samples/Dutch.txt:77:58 - Unknown word (algemeen)
 error
-error	./samples/Dutch.txt:77:71 - Unknown word (beogende)
+error	samples/Dutch.txt:77:71 - Unknown word (beogende)
 error
-error	./samples/Dutch.txt:78:4 - Unknown word (instelling)
+error	samples/Dutch.txt:78:4 - Unknown word (instelling)
 error
-error	./samples/Dutch.txt:78:18 - Unknown word (ANBI)
+error	samples/Dutch.txt:78:18 - Unknown word (ANBI)
 error
 error	CSpell: Files checked: 1, Issues found: 189 in 1 file.
 error"
@@ -1961,17 +1961,17 @@ notinanydictionary - workspace*           ../../cspell-dict.txt
 exports[`Validate cli > app 'typos --no-show-suggestions' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli > app 'typos --no-show-suggestions' Expect Error: [Function CheckFailed] 2`] = `
-"log	./code.ts:1:26 - Unknown word (Orangges)
+"log	code.ts:1:26 - Unknown word (Orangges)
 log
-log	./test.md:5:3 - Forbidden word (blacklist)
+log	test.md:5:3 - Forbidden word (blacklist)
 log
-log	./test.md:6:3 - Forbidden word (whitelist)
+log	test.md:6:3 - Forbidden word (whitelist)
 log
-log	./test.md:7:3 - Forbidden word (rad)
+log	test.md:7:3 - Forbidden word (rad)
 log
-log	./test.md:9:13 - Forbidden word (english)
+log	test.md:9:13 - Forbidden word (english)
 log
-log	./test.md:9:38 - Forbidden word (Blacklisted)
+log	test.md:9:38 - Forbidden word (Blacklisted)
 log
 error	CSpell: Files checked: 3, Issues found: 6 in 2 files.
 error"
@@ -1982,17 +1982,17 @@ exports[`Validate cli > app 'typos --no-show-suggestions' Expect Error: [Functio
 exports[`Validate cli > app 'typos --show-suggestions' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli > app 'typos --show-suggestions' Expect Error: [Function CheckFailed] 2`] = `
-"log	./code.ts:1:26 - Unknown word (Orangges) Suggestions: [Oranges, orange, Orange, Orangs, Orangey]
+"log	code.ts:1:26 - Unknown word (Orangges) Suggestions: [Oranges, orange, Orange, Orangs, Orangey]
 log
-log	./test.md:5:3 - Forbidden word (blacklist) Suggestions: [denylist*, backlist, backlit, blackest, blackish]
+log	test.md:5:3 - Forbidden word (blacklist) Suggestions: [denylist*, backlist, backlit, blackest, blackish]
 log
-log	./test.md:6:3 - Forbidden word (whitelist) Suggestions: [allowlist*, whitelists, whitest, whitefish, whitelisted]
+log	test.md:6:3 - Forbidden word (whitelist) Suggestions: [allowlist*, whitelists, whitest, whitefish, whitelisted]
 log
-log	./test.md:7:3 - Forbidden word (rad) Suggestions: [cool*, ard, rda, rads, raid]
+log	test.md:7:3 - Forbidden word (rad) Suggestions: [cool*, ard, rda, rads, raid]
 log
-log	./test.md:9:13 - Forbidden word (english) Suggestions: [English*, enlist, english's, englished, englisher]
+log	test.md:9:13 - Forbidden word (english) Suggestions: [English*, enlist, english's, englished, englisher]
 log
-log	./test.md:9:38 - Forbidden word (Blacklisted) Suggestions: [Denylisted*, Backlist, Backlists, Backlashed, Blacklegged]
+log	test.md:9:38 - Forbidden word (Blacklisted) Suggestions: [Denylisted*, Backlist, Backlists, Backlashed, Blacklegged]
 log
 error	CSpell: Files checked: 3, Issues found: 6 in 2 files.
 error"
@@ -2003,17 +2003,17 @@ exports[`Validate cli > app 'typos --show-suggestions' Expect Error: [Function C
 exports[`Validate cli > app 'typos' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli > app 'typos' Expect Error: [Function CheckFailed] 2`] = `
-"log	./code.ts:1:26 - Unknown word (Orangges)
+"log	code.ts:1:26 - Unknown word (Orangges)
 log
-log	./test.md:5:3 - Forbidden word (blacklist) fix: (denylist)
+log	test.md:5:3 - Forbidden word (blacklist) fix: (denylist)
 log
-log	./test.md:6:3 - Forbidden word (whitelist) fix: (allowlist)
+log	test.md:6:3 - Forbidden word (whitelist) fix: (allowlist)
 log
-log	./test.md:7:3 - Forbidden word (rad) fix: (cool)
+log	test.md:7:3 - Forbidden word (rad) fix: (cool)
 log
-log	./test.md:9:13 - Forbidden word (english) fix: (English)
+log	test.md:9:13 - Forbidden word (english) fix: (English)
 log
-log	./test.md:9:38 - Forbidden word (Blacklisted) fix: (Denylisted)
+log	test.md:9:38 - Forbidden word (Blacklisted) fix: (Denylisted)
 log
 error	CSpell: Files checked: 3, Issues found: 6 in 2 files.
 error"
@@ -2024,9 +2024,9 @@ exports[`Validate cli > app 'typos' Expect Error: [Function CheckFailed] 3`] = `
 exports[`Validate cli > app 'verify globRoot works' Expect Error: undefined 1`] = `[]`;
 
 exports[`Validate cli > app 'verify globRoot works' Expect Error: undefined 2`] = `
-"error	1/2 ./config/cspell.config.yaml 0.00ms
+"error	1/2 config/cspell.config.yaml 0.00ms
 error
-error	2/2 ./cspell.json 0.00ms
+error	2/2 cspell.json 0.00ms
 error
 error	CSpell: Files checked: 2, Issues found: 0 in 0 files.
 error"
@@ -2037,49 +2037,49 @@ exports[`Validate cli > app 'verify globRoot works' Expect Error: undefined 3`] 
 exports[`Validate cli > app 'with errors and excludes' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli > app 'with errors and excludes' Expect Error: [Function CheckFailed] 2`] = `
-"error	1/6 ./cspell-bad.json 0.00ms
+"error	1/6 cspell-bad.json 0.00ms
 error
-error	2/6 ./cspell-includes.json 0.00ms
+error	2/6 cspell-includes.json 0.00ms
 error
-error	3/6 ./cspell-missing-dict.json 0.00ms
+error	3/6 cspell-missing-dict.json 0.00ms
 error
-error	4/6 ./sample.c 0.00ms
+error	4/6 sample.c 0.00ms
 error
-error	5/6 ./sample.py 0.00ms
+error	5/6 sample.py 0.00ms
 error
-error	6/6 ./text.txt 0.00ms X
+error	6/6 text.txt 0.00ms X
 error
-log	./text.txt:1:14 - Unknown word (fulll)
+log	text.txt:1:14 - Unknown word (fulll)
 log
-log	./text.txt:1:23 - Unknown word (errrorrrs)
+log	text.txt:1:23 - Unknown word (errrorrrs)
 log
-log	./text.txt:3:4 - Unknown word (hass)
+log	text.txt:3:4 - Unknown word (hass)
 log
-log	./text.txt:3:9 - Unknown word (someissues)
+log	text.txt:3:9 - Unknown word (someissues)
 log
-log	./text.txt:3:23 - Unknown word (everyline)
+log	text.txt:3:23 - Unknown word (everyline)
 log
-log	./text.txt:5:24 - Unknown word (okkk)
+log	text.txt:5:24 - Unknown word (okkk)
 log
-log	./text.txt:5:32 - Unknown word (reead)
+log	text.txt:5:32 - Unknown word (reead)
 log
 error	-------------------------------------------
 error
 error	Issues found:
 error
-error	./text.txt:1:14 - Unknown word (fulll)
+error	text.txt:1:14 - Unknown word (fulll)
 error
-error	./text.txt:1:23 - Unknown word (errrorrrs)
+error	text.txt:1:23 - Unknown word (errrorrrs)
 error
-error	./text.txt:3:4 - Unknown word (hass)
+error	text.txt:3:4 - Unknown word (hass)
 error
-error	./text.txt:3:9 - Unknown word (someissues)
+error	text.txt:3:9 - Unknown word (someissues)
 error
-error	./text.txt:3:23 - Unknown word (everyline)
+error	text.txt:3:23 - Unknown word (everyline)
 error
-error	./text.txt:5:24 - Unknown word (okkk)
+error	text.txt:5:24 - Unknown word (okkk)
 error
-error	./text.txt:5:32 - Unknown word (reead)
+error	text.txt:5:32 - Unknown word (reead)
 error
 error	CSpell: Files checked: 6, Issues found: 7 in 1 file.
 error"
@@ -2090,19 +2090,19 @@ exports[`Validate cli > app 'with errors and excludes' Expect Error: [Function C
 exports[`Validate cli > app 'with forbidden words' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli > app 'with forbidden words' Expect Error: [Function CheckFailed] 2`] = `
-"error	1/1 ./samples/src/sample-with-forbidden-words.md 0.00ms X
+"error	1/1 samples/src/sample-with-forbidden-words.md 0.00ms X
 error
-log	./samples/src/sample-with-forbidden-words.md:3:3 - Unknown word (behaviour)
+log	samples/src/sample-with-forbidden-words.md:3:3 - Unknown word (behaviour)
 log
-log	./samples/src/sample-with-forbidden-words.md:5:3 - Unknown word (colour)
+log	samples/src/sample-with-forbidden-words.md:5:3 - Unknown word (colour)
 log
 error	-------------------------------------------
 error
 error	Issues found:
 error
-error	./samples/src/sample-with-forbidden-words.md:3:3 - Unknown word (behaviour)
+error	samples/src/sample-with-forbidden-words.md:3:3 - Unknown word (behaviour)
 error
-error	./samples/src/sample-with-forbidden-words.md:5:3 - Unknown word (colour)
+error	samples/src/sample-with-forbidden-words.md:5:3 - Unknown word (colour)
 error
 error	CSpell: Files checked: 1, Issues found: 2 in 1 file.
 error"
@@ -2113,383 +2113,383 @@ exports[`Validate cli > app 'with forbidden words' Expect Error: [Function Check
 exports[`Validate cli > app 'with spelling errors --debug Dutch.txt' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli > app 'with spelling errors --debug Dutch.txt' Expect Error: [Function CheckFailed] 2`] = `
-"./samples/Dutch.txt:1:32 - Unknown word (NEDERLANDS)
+"samples/Dutch.txt:1:32 - Unknown word (NEDERLANDS)
 
-./samples/Dutch.txt:2:11 - Unknown word (wordt)
+samples/Dutch.txt:2:11 - Unknown word (wordt)
 
-./samples/Dutch.txt:2:17 - Unknown word (vriendelijk)
+samples/Dutch.txt:2:17 - Unknown word (vriendelijk)
 
-./samples/Dutch.txt:2:29 - Unknown word (verzocht)
+samples/Dutch.txt:2:29 - Unknown word (verzocht)
 
-./samples/Dutch.txt:2:45 - Unknown word (bestand)
+samples/Dutch.txt:2:45 - Unknown word (bestand)
 
-./samples/Dutch.txt:3:10 - Unknown word (lezen)
+samples/Dutch.txt:3:10 - Unknown word (lezen)
 
-./samples/Dutch.txt:3:26 - Unknown word (leveren)
+samples/Dutch.txt:3:26 - Unknown word (leveren)
 
-./samples/Dutch.txt:3:38 - Unknown word (iedere)
+samples/Dutch.txt:3:38 - Unknown word (iedere)
 
-./samples/Dutch.txt:3:45 - Unknown word (kopie)
+samples/Dutch.txt:3:45 - Unknown word (kopie)
 
-./samples/Dutch.txt:3:59 - Unknown word (taalhulpbestand)
+samples/Dutch.txt:3:59 - Unknown word (taalhulpbestand)
 
-./samples/Dutch.txt:5:4 - Unknown word (Naam)
+samples/Dutch.txt:5:4 - Unknown word (Naam)
 
-./samples/Dutch.txt:5:10 - Unknown word (Nederlandstalige)
+samples/Dutch.txt:5:10 - Unknown word (Nederlandstalige)
 
-./samples/Dutch.txt:5:27 - Unknown word (woordenlijst)
+samples/Dutch.txt:5:27 - Unknown word (woordenlijst)
 
-./samples/Dutch.txt:5:40 - Unknown word (voor)
+samples/Dutch.txt:5:40 - Unknown word (voor)
 
-./samples/Dutch.txt:5:45 - Unknown word (spellingcontrole)
+samples/Dutch.txt:5:45 - Unknown word (spellingcontrole)
 
-./samples/Dutch.txt:6:4 - Unknown word (Versie)
+samples/Dutch.txt:6:4 - Unknown word (Versie)
 
-./samples/Dutch.txt:6:11 - Unknown word (woordenlijst)
+samples/Dutch.txt:6:11 - Unknown word (woordenlijst)
 
-./samples/Dutch.txt:6:32 - Unknown word (versie)
+samples/Dutch.txt:6:32 - Unknown word (versie)
 
-./samples/Dutch.txt:6:39 - Unknown word (spellingcontrole)
+samples/Dutch.txt:6:39 - Unknown word (spellingcontrole)
 
-./samples/Dutch.txt:7:4 - Unknown word (Vereisten)
+samples/Dutch.txt:7:4 - Unknown word (Vereisten)
 
-./samples/Dutch.txt:7:33 - Unknown word (hoger)
+samples/Dutch.txt:7:33 - Unknown word (hoger)
 
-./samples/Dutch.txt:8:4 - Unknown word (Keurmerk)
+samples/Dutch.txt:8:4 - Unknown word (Keurmerk)
 
-./samples/Dutch.txt:8:22 - Unknown word (Nederlandse)
+samples/Dutch.txt:8:22 - Unknown word (Nederlandse)
 
-./samples/Dutch.txt:8:34 - Unknown word (Taalunie)
+samples/Dutch.txt:8:34 - Unknown word (Taalunie)
 
-./samples/Dutch.txt:8:47 - Unknown word (lijst)
+samples/Dutch.txt:8:47 - Unknown word (lijst)
 
-./samples/Dutch.txt:8:57 - Unknown word (basiswoorden)
+samples/Dutch.txt:8:57 - Unknown word (basiswoorden)
 
-./samples/Dutch.txt:9:13 - Unknown word (draagt)
+samples/Dutch.txt:9:13 - Unknown word (draagt)
 
-./samples/Dutch.txt:9:24 - Unknown word (keurmerk)
+samples/Dutch.txt:9:24 - Unknown word (keurmerk)
 
-./samples/Dutch.txt:9:40 - Unknown word (Nederlandse)
+samples/Dutch.txt:9:40 - Unknown word (Nederlandse)
 
-./samples/Dutch.txt:9:52 - Unknown word (Taalunie)
+samples/Dutch.txt:9:52 - Unknown word (Taalunie)
 
-./samples/Dutch.txt:9:62 - Unknown word (Voor)
+samples/Dutch.txt:9:62 - Unknown word (Voor)
 
-./samples/Dutch.txt:9:67 - Unknown word (meer)
+samples/Dutch.txt:9:67 - Unknown word (meer)
 
-./samples/Dutch.txt:10:4 - Unknown word (informatie)
+samples/Dutch.txt:10:4 - Unknown word (informatie)
 
-./samples/Dutch.txt:11:4 - Unknown word (Auteursrechten)
+samples/Dutch.txt:11:4 - Unknown word (Auteursrechten)
 
-./samples/Dutch.txt:11:60 - Unknown word (Brouwer)
+samples/Dutch.txt:11:60 - Unknown word (Brouwer)
 
-./samples/Dutch.txt:12:11 - Unknown word (Nederlandstalige)
+samples/Dutch.txt:12:11 - Unknown word (Nederlandstalige)
 
-./samples/Dutch.txt:12:32 - Unknown word (Gebruikersgroep)
+samples/Dutch.txt:12:32 - Unknown word (Gebruikersgroep)
 
-./samples/Dutch.txt:13:4 - Unknown word (Licenties)
+samples/Dutch.txt:13:4 - Unknown word (Licenties)
 
-./samples/Dutch.txt:13:24 - Unknown word (heeft)
+samples/Dutch.txt:13:24 - Unknown word (heeft)
 
-./samples/Dutch.txt:13:34 - Unknown word (doel)
+samples/Dutch.txt:13:34 - Unknown word (doel)
 
-./samples/Dutch.txt:13:42 - Unknown word (vrij)
+samples/Dutch.txt:13:42 - Unknown word (vrij)
 
-./samples/Dutch.txt:13:47 - Unknown word (beschikbare)
+samples/Dutch.txt:13:47 - Unknown word (beschikbare)
 
-./samples/Dutch.txt:13:59 - Unknown word (Nederlandstalige)
+samples/Dutch.txt:13:59 - Unknown word (Nederlandstalige)
 
-./samples/Dutch.txt:14:4 - Unknown word (taalhulpbestanden)
+samples/Dutch.txt:14:4 - Unknown word (taalhulpbestanden)
 
-./samples/Dutch.txt:14:25 - Unknown word (ontwikkelen)
+samples/Dutch.txt:14:25 - Unknown word (ontwikkelen)
 
-./samples/Dutch.txt:14:43 - Unknown word (verspreiden)
+samples/Dutch.txt:14:43 - Unknown word (verspreiden)
 
-./samples/Dutch.txt:14:70 - Unknown word (gebruik)
+samples/Dutch.txt:14:70 - Unknown word (gebruik)
 
-./samples/Dutch.txt:15:4 - Unknown word (mogelijk)
+samples/Dutch.txt:15:4 - Unknown word (mogelijk)
 
-./samples/Dutch.txt:15:16 - Unknown word (maken)
+samples/Dutch.txt:15:16 - Unknown word (maken)
 
-./samples/Dutch.txt:15:22 - Unknown word (zijn)
+samples/Dutch.txt:15:22 - Unknown word (zijn)
 
-./samples/Dutch.txt:15:30 - Unknown word (taalhulpbestanden)
+samples/Dutch.txt:15:30 - Unknown word (taalhulpbestanden)
 
-./samples/Dutch.txt:15:55 - Unknown word (beschikbaar)
+samples/Dutch.txt:15:55 - Unknown word (beschikbaar)
 
-./samples/Dutch.txt:15:67 - Unknown word (onder)
+samples/Dutch.txt:15:67 - Unknown word (onder)
 
-./samples/Dutch.txt:16:4 - Unknown word (onderstaande)
+samples/Dutch.txt:16:4 - Unknown word (onderstaande)
 
-./samples/Dutch.txt:16:18 - Unknown word (liberale)
+samples/Dutch.txt:16:18 - Unknown word (liberale)
 
-./samples/Dutch.txt:16:27 - Unknown word (licenties)
+samples/Dutch.txt:16:27 - Unknown word (licenties)
 
-./samples/Dutch.txt:16:37 - Unknown word (naar)
+samples/Dutch.txt:16:37 - Unknown word (naar)
 
-./samples/Dutch.txt:16:42 - Unknown word (keuze)
+samples/Dutch.txt:16:42 - Unknown word (keuze)
 
-./samples/Dutch.txt:16:55 - Unknown word (gebruiker)
+samples/Dutch.txt:16:55 - Unknown word (gebruiker)
 
-./samples/Dutch.txt:16:68 - Unknown word (wordt)
+samples/Dutch.txt:16:68 - Unknown word (wordt)
 
-./samples/Dutch.txt:17:4 - Unknown word (zeerste)
+samples/Dutch.txt:17:4 - Unknown word (zeerste)
 
-./samples/Dutch.txt:17:12 - Unknown word (aangeraden)
+samples/Dutch.txt:17:12 - Unknown word (aangeraden)
 
-./samples/Dutch.txt:17:26 - Unknown word (voorafgaand)
+samples/Dutch.txt:17:26 - Unknown word (voorafgaand)
 
-./samples/Dutch.txt:17:46 - Unknown word (gebruik)
+samples/Dutch.txt:17:46 - Unknown word (gebruik)
 
-./samples/Dutch.txt:17:54 - Unknown word (kennis)
+samples/Dutch.txt:17:54 - Unknown word (kennis)
 
-./samples/Dutch.txt:17:64 - Unknown word (nemen)
+samples/Dutch.txt:17:64 - Unknown word (nemen)
 
-./samples/Dutch.txt:18:4 - Unknown word (toepasselijke)
+samples/Dutch.txt:18:4 - Unknown word (toepasselijke)
 
-./samples/Dutch.txt:18:18 - Unknown word (licentie)
+samples/Dutch.txt:18:18 - Unknown word (licentie)
 
-./samples/Dutch.txt:19:12 - Unknown word (herziene)
+samples/Dutch.txt:19:12 - Unknown word (herziene)
 
-./samples/Dutch.txt:19:21 - Unknown word (versie)
+samples/Dutch.txt:19:21 - Unknown word (versie)
 
-./samples/Dutch.txt:20:6 - Unknown word (Volledige)
+samples/Dutch.txt:20:6 - Unknown word (Volledige)
 
-./samples/Dutch.txt:20:16 - Unknown word (licentie)
+samples/Dutch.txt:20:16 - Unknown word (licentie)
 
-./samples/Dutch.txt:21:6 - Unknown word (Samenvatting)
+samples/Dutch.txt:21:6 - Unknown word (Samenvatting)
 
-./samples/Dutch.txt:22:25 - Unknown word (Naamsvermelding)
+samples/Dutch.txt:22:25 - Unknown word (Naamsvermelding)
 
-./samples/Dutch.txt:22:46 - Unknown word (unported)
+samples/Dutch.txt:22:46 - Unknown word (unported)
 
-./samples/Dutch.txt:23:6 - Unknown word (Volledige)
+samples/Dutch.txt:23:6 - Unknown word (Volledige)
 
-./samples/Dutch.txt:23:16 - Unknown word (licentie)
+samples/Dutch.txt:23:16 - Unknown word (licentie)
 
-./samples/Dutch.txt:24:6 - Unknown word (Samenvatting)
+samples/Dutch.txt:24:6 - Unknown word (Samenvatting)
 
-./samples/Dutch.txt:25:4 - Unknown word (Steun)
+samples/Dutch.txt:25:4 - Unknown word (Steun)
 
-./samples/Dutch.txt:25:36 - Unknown word (vrijwilligersproject)
+samples/Dutch.txt:25:36 - Unknown word (vrijwilligersproject)
 
-./samples/Dutch.txt:25:57 - Unknown word (zonder)
+samples/Dutch.txt:25:57 - Unknown word (zonder)
 
-./samples/Dutch.txt:25:64 - Unknown word (winstoogmerk)
+samples/Dutch.txt:25:64 - Unknown word (winstoogmerk)
 
-./samples/Dutch.txt:26:13 - Unknown word (kleine)
+samples/Dutch.txt:26:13 - Unknown word (kleine)
 
-./samples/Dutch.txt:26:21 - Unknown word (financiële)
+samples/Dutch.txt:26:21 - Unknown word (financiële)
 
-./samples/Dutch.txt:26:32 - Unknown word (steun)
+samples/Dutch.txt:26:32 - Unknown word (steun)
 
-./samples/Dutch.txt:26:51 - Unknown word (meer)
+samples/Dutch.txt:26:51 - Unknown word (meer)
 
-./samples/Dutch.txt:26:56 - Unknown word (activiteiten)
+samples/Dutch.txt:26:56 - Unknown word (activiteiten)
 
-./samples/Dutch.txt:26:69 - Unknown word (ontplooien)
+samples/Dutch.txt:26:69 - Unknown word (ontplooien)
 
-./samples/Dutch.txt:27:19 - Unknown word (professionaliseren)
+samples/Dutch.txt:27:19 - Unknown word (professionaliseren)
 
-./samples/Dutch.txt:27:42 - Unknown word (donatie)
+samples/Dutch.txt:27:42 - Unknown word (donatie)
 
-./samples/Dutch.txt:27:63 - Unknown word (welkom)
+samples/Dutch.txt:27:63 - Unknown word (welkom)
 
-./samples/Dutch.txt:28:4 - Unknown word (rekeningnummer)
+samples/Dutch.txt:28:4 - Unknown word (rekeningnummer)
 
-./samples/Dutch.txt:28:39 - Unknown word (Stichting)
+samples/Dutch.txt:28:39 - Unknown word (Stichting)
 
-./samples/Dutch.txt:28:62 - Unknown word (giften)
+samples/Dutch.txt:28:62 - Unknown word (giften)
 
-./samples/Dutch.txt:28:69 - Unknown word (zijn)
+samples/Dutch.txt:28:69 - Unknown word (zijn)
 
-./samples/Dutch.txt:29:4 - Unknown word (aftrekbaar)
+samples/Dutch.txt:29:4 - Unknown word (aftrekbaar)
 
-./samples/Dutch.txt:29:22 - Unknown word (belasting)
+samples/Dutch.txt:29:22 - Unknown word (belasting)
 
-./samples/Dutch.txt:29:33 - Unknown word (Stichting)
+samples/Dutch.txt:29:33 - Unknown word (Stichting)
 
-./samples/Dutch.txt:29:55 - Unknown word (namelijk)
+samples/Dutch.txt:29:55 - Unknown word (namelijk)
 
-./samples/Dutch.txt:30:4 - Unknown word (Belastingdienst)
+samples/Dutch.txt:30:4 - Unknown word (Belastingdienst)
 
-./samples/Dutch.txt:30:20 - Unknown word (erkend)
+samples/Dutch.txt:30:20 - Unknown word (erkend)
 
-./samples/Dutch.txt:30:31 - Unknown word (ANBI)
+samples/Dutch.txt:30:31 - Unknown word (ANBI)
 
-./samples/Dutch.txt:30:37 - Unknown word (oftewel)
+samples/Dutch.txt:30:37 - Unknown word (oftewel)
 
-./samples/Dutch.txt:30:46 - Unknown word (Algemeen)
+samples/Dutch.txt:30:46 - Unknown word (Algemeen)
 
-./samples/Dutch.txt:30:59 - Unknown word (Beogende)
+samples/Dutch.txt:30:59 - Unknown word (Beogende)
 
-./samples/Dutch.txt:30:68 - Unknown word (Instelling)
+samples/Dutch.txt:30:68 - Unknown word (Instelling)
 
-./samples/Dutch.txt:32:4 - Unknown word (Meedoen)
+samples/Dutch.txt:32:4 - Unknown word (Meedoen)
 
-./samples/Dutch.txt:32:13 - Unknown word (Iedereen)
+samples/Dutch.txt:32:13 - Unknown word (Iedereen)
 
-./samples/Dutch.txt:32:25 - Unknown word (welkom)
+samples/Dutch.txt:32:25 - Unknown word (welkom)
 
-./samples/Dutch.txt:32:42 - Unknown word (doen)
+samples/Dutch.txt:32:42 - Unknown word (doen)
 
-./samples/Dutch.txt:32:53 - Unknown word (fouten)
+samples/Dutch.txt:32:53 - Unknown word (fouten)
 
-./samples/Dutch.txt:32:61 - Unknown word (discussieer)
+samples/Dutch.txt:32:61 - Unknown word (discussieer)
 
-./samples/Dutch.txt:33:7 - Unknown word (mailinglijst)
+samples/Dutch.txt:33:7 - Unknown word (mailinglijst)
 
-./samples/Dutch.txt:33:23 - Unknown word (draai)
+samples/Dutch.txt:33:23 - Unknown word (draai)
 
-./samples/Dutch.txt:33:52 - Unknown word (dragen)
+samples/Dutch.txt:33:52 - Unknown word (dragen)
 
-./samples/Dutch.txt:33:75 - Unknown word (stemt)
+samples/Dutch.txt:33:75 - Unknown word (stemt)
 
-./samples/Dutch.txt:34:6 - Unknown word (ermee)
+samples/Dutch.txt:34:6 - Unknown word (ermee)
 
-./samples/Dutch.txt:34:22 - Unknown word (bijdrage)
+samples/Dutch.txt:34:22 - Unknown word (bijdrage)
 
-./samples/Dutch.txt:34:39 - Unknown word (desbetreffende)
+samples/Dutch.txt:34:39 - Unknown word (desbetreffende)
 
-./samples/Dutch.txt:34:54 - Unknown word (taalhulpbestand)
+samples/Dutch.txt:34:54 - Unknown word (taalhulpbestand)
 
-./samples/Dutch.txt:34:70 - Unknown word (beschikbaar)
+samples/Dutch.txt:34:70 - Unknown word (beschikbaar)
 
-./samples/Dutch.txt:35:4 - Unknown word (komt)
+samples/Dutch.txt:35:4 - Unknown word (komt)
 
-./samples/Dutch.txt:35:9 - Unknown word (onder)
+samples/Dutch.txt:35:9 - Unknown word (onder)
 
-./samples/Dutch.txt:35:15 - Unknown word (vrije)
+samples/Dutch.txt:35:15 - Unknown word (vrije)
 
-./samples/Dutch.txt:35:27 - Unknown word (opensource)
+samples/Dutch.txt:35:27 - Unknown word (opensource)
 
-./samples/Dutch.txt:35:38 - Unknown word (licenties)
+samples/Dutch.txt:35:38 - Unknown word (licenties)
 
-./samples/Dutch.txt:35:49 - Unknown word (Indien)
+samples/Dutch.txt:35:49 - Unknown word (Indien)
 
-./samples/Dutch.txt:35:62 - Unknown word (wenst)
+samples/Dutch.txt:35:62 - Unknown word (wenst)
 
-./samples/Dutch.txt:36:4 - Unknown word (naam)
+samples/Dutch.txt:36:4 - Unknown word (naam)
 
-./samples/Dutch.txt:36:23 - Unknown word (genoemd)
+samples/Dutch.txt:36:23 - Unknown word (genoemd)
 
-./samples/Dutch.txt:36:31 - Unknown word (worden)
+samples/Dutch.txt:36:31 - Unknown word (worden)
 
-./samples/Dutch.txt:36:42 - Unknown word (ontvangen)
+samples/Dutch.txt:36:42 - Unknown word (ontvangen)
 
-./samples/Dutch.txt:36:55 - Unknown word (schriftelijk)
+samples/Dutch.txt:36:55 - Unknown word (schriftelijk)
 
-./samples/Dutch.txt:36:68 - Unknown word (verzoek)
+samples/Dutch.txt:36:68 - Unknown word (verzoek)
 
-./samples/Dutch.txt:37:4 - Unknown word (daarvoor)
+samples/Dutch.txt:37:4 - Unknown word (daarvoor)
 
-./samples/Dutch.txt:37:13 - Unknown word (graag)
+samples/Dutch.txt:37:13 - Unknown word (graag)
 
-./samples/Dutch.txt:38:4 - Unknown word (Rechten)
+samples/Dutch.txt:38:4 - Unknown word (Rechten)
 
-./samples/Dutch.txt:38:16 - Unknown word (derden)
+samples/Dutch.txt:38:16 - Unknown word (derden)
 
-./samples/Dutch.txt:38:33 - Unknown word (respecteert)
+samples/Dutch.txt:38:33 - Unknown word (respecteert)
 
-./samples/Dutch.txt:38:48 - Unknown word (rechten)
+samples/Dutch.txt:38:48 - Unknown word (rechten)
 
-./samples/Dutch.txt:38:60 - Unknown word (derden)
+samples/Dutch.txt:38:60 - Unknown word (derden)
 
-./samples/Dutch.txt:39:13 - Unknown word (gegevens)
+samples/Dutch.txt:39:13 - Unknown word (gegevens)
 
-./samples/Dutch.txt:39:22 - Unknown word (vrij)
+samples/Dutch.txt:39:22 - Unknown word (vrij)
 
-./samples/Dutch.txt:39:27 - Unknown word (beschikbaar)
+samples/Dutch.txt:39:27 - Unknown word (beschikbaar)
 
-./samples/Dutch.txt:39:39 - Unknown word (houden)
+samples/Dutch.txt:39:39 - Unknown word (houden)
 
-./samples/Dutch.txt:39:47 - Unknown word (Voor)
+samples/Dutch.txt:39:47 - Unknown word (Voor)
 
-./samples/Dutch.txt:39:52 - Unknown word (bijdragen)
+samples/Dutch.txt:39:52 - Unknown word (bijdragen)
 
-./samples/Dutch.txt:40:6 - Unknown word (daarom)
+samples/Dutch.txt:40:6 - Unknown word (daarom)
 
-./samples/Dutch.txt:40:13 - Unknown word (niet)
+samples/Dutch.txt:40:13 - Unknown word (niet)
 
-./samples/Dutch.txt:40:18 - Unknown word (zonder)
+samples/Dutch.txt:40:18 - Unknown word (zonder)
 
-./samples/Dutch.txt:40:25 - Unknown word (toestemming)
+samples/Dutch.txt:40:25 - Unknown word (toestemming)
 
-./samples/Dutch.txt:40:37 - Unknown word (gebruikmaken)
+samples/Dutch.txt:40:37 - Unknown word (gebruikmaken)
 
-./samples/Dutch.txt:40:54 - Unknown word (beschermde)
+samples/Dutch.txt:40:54 - Unknown word (beschermde)
 
-./samples/Dutch.txt:40:65 - Unknown word (naslagwerken)
+samples/Dutch.txt:40:65 - Unknown word (naslagwerken)
 
-./samples/Dutch.txt:41:4 - Unknown word (zoals)
+samples/Dutch.txt:41:4 - Unknown word (zoals)
 
-./samples/Dutch.txt:41:10 - Unknown word (woordenboeken)
+samples/Dutch.txt:41:10 - Unknown word (woordenboeken)
 
-./samples/Dutch.txt:41:36 - Unknown word (toegestaan)
+samples/Dutch.txt:41:36 - Unknown word (toegestaan)
 
-./samples/Dutch.txt:41:50 - Unknown word (gebruik)
+samples/Dutch.txt:41:50 - Unknown word (gebruik)
 
-./samples/Dutch.txt:41:61 - Unknown word (maken)
+samples/Dutch.txt:41:61 - Unknown word (maken)
 
-./samples/Dutch.txt:42:4 - Unknown word (materialen)
+samples/Dutch.txt:42:4 - Unknown word (materialen)
 
-./samples/Dutch.txt:42:22 - Unknown word (Nederlandse)
+samples/Dutch.txt:42:22 - Unknown word (Nederlandse)
 
-./samples/Dutch.txt:42:34 - Unknown word (Taalunie)
+samples/Dutch.txt:42:34 - Unknown word (Taalunie)
 
-./samples/Dutch.txt:42:44 - Unknown word (zoals)
+samples/Dutch.txt:42:44 - Unknown word (zoals)
 
-./samples/Dutch.txt:42:53 - Unknown word (leidraad)
+samples/Dutch.txt:42:53 - Unknown word (leidraad)
 
-./samples/Dutch.txt:42:68 - Unknown word (woordenlijst)
+samples/Dutch.txt:42:68 - Unknown word (woordenlijst)
 
-./samples/Dutch.txt:43:4 - Unknown word (Indien)
+samples/Dutch.txt:43:4 - Unknown word (Indien)
 
-./samples/Dutch.txt:43:17 - Unknown word (mening)
+samples/Dutch.txt:43:17 - Unknown word (mening)
 
-./samples/Dutch.txt:43:42 - Unknown word (inbreuk)
+samples/Dutch.txt:43:42 - Unknown word (inbreuk)
 
-./samples/Dutch.txt:43:50 - Unknown word (maakt)
+samples/Dutch.txt:43:50 - Unknown word (maakt)
 
-./samples/Dutch.txt:43:62 - Unknown word (rechten)
+samples/Dutch.txt:43:62 - Unknown word (rechten)
 
-./samples/Dutch.txt:44:4 - Unknown word (verzoeken)
+samples/Dutch.txt:44:4 - Unknown word (verzoeken)
 
-./samples/Dutch.txt:44:19 - Unknown word (hierover)
+samples/Dutch.txt:44:19 - Unknown word (hierover)
 
-./samples/Dutch.txt:44:31 - Unknown word (spoedig)
+samples/Dutch.txt:44:31 - Unknown word (spoedig)
 
-./samples/Dutch.txt:44:39 - Unknown word (mogelijk)
+samples/Dutch.txt:44:39 - Unknown word (mogelijk)
 
-./samples/Dutch.txt:44:48 - Unknown word (schriftelijk)
+samples/Dutch.txt:44:48 - Unknown word (schriftelijk)
 
-./samples/Dutch.txt:45:7 - Unknown word (nemen)
+samples/Dutch.txt:45:7 - Unknown word (nemen)
 
-./samples/Dutch.txt:46:13 - Unknown word (Stichting)
+samples/Dutch.txt:46:13 - Unknown word (Stichting)
 
-./samples/Dutch.txt:59:56 - Unknown word (Brouwer)
+samples/Dutch.txt:59:56 - Unknown word (Brouwer)
 
-./samples/Dutch.txt:60:11 - Unknown word (Nederlandstalige)
+samples/Dutch.txt:60:11 - Unknown word (Nederlandstalige)
 
-./samples/Dutch.txt:60:32 - Unknown word (Gebruikersgroep)
+samples/Dutch.txt:60:32 - Unknown word (Gebruikersgroep)
 
-./samples/Dutch.txt:68:42 - Unknown word (unported)
+samples/Dutch.txt:68:42 - Unknown word (unported)
 
-./samples/Dutch.txt:74:39 - Unknown word (RABONL)
+samples/Dutch.txt:74:39 - Unknown word (RABONL)
 
-./samples/Dutch.txt:74:49 - Unknown word (IBAN)
+samples/Dutch.txt:74:49 - Unknown word (IBAN)
 
-./samples/Dutch.txt:74:59 - Unknown word (RABO)
+samples/Dutch.txt:74:59 - Unknown word (RABO)
 
-./samples/Dutch.txt:75:4 - Unknown word (Stichting)
+samples/Dutch.txt:75:4 - Unknown word (Stichting)
 
-./samples/Dutch.txt:77:58 - Unknown word (algemeen)
+samples/Dutch.txt:77:58 - Unknown word (algemeen)
 
-./samples/Dutch.txt:77:71 - Unknown word (beogende)
+samples/Dutch.txt:77:71 - Unknown word (beogende)
 
-./samples/Dutch.txt:78:4 - Unknown word (instelling)
+samples/Dutch.txt:78:4 - Unknown word (instelling)
 
-./samples/Dutch.txt:78:18 - Unknown word (ANBI)
+samples/Dutch.txt:78:18 - Unknown word (ANBI)
 "
 `;
 
@@ -2502,767 +2502,767 @@ exports[`Validate cli > app 'with spelling errors --silent Dutch.txt' Expect Err
 exports[`Validate cli > app 'with spelling errors Dutch.txt --legacy' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli > app 'with spelling errors Dutch.txt --legacy' Expect Error: [Function CheckFailed] 2`] = `
-"error	1/1 ./samples/Dutch.txt 0.00ms X
+"error	1/1 samples/Dutch.txt 0.00ms X
 error
-log	./samples/Dutch.txt[1, 32]: Unknown word: NEDERLANDS
+log	samples/Dutch.txt[1, 32]: Unknown word: NEDERLANDS
 log
-log	./samples/Dutch.txt[2, 11]: Unknown word: wordt
+log	samples/Dutch.txt[2, 11]: Unknown word: wordt
 log
-log	./samples/Dutch.txt[2, 17]: Unknown word: vriendelijk
+log	samples/Dutch.txt[2, 17]: Unknown word: vriendelijk
 log
-log	./samples/Dutch.txt[2, 29]: Unknown word: verzocht
+log	samples/Dutch.txt[2, 29]: Unknown word: verzocht
 log
-log	./samples/Dutch.txt[2, 45]: Unknown word: bestand
+log	samples/Dutch.txt[2, 45]: Unknown word: bestand
 log
-log	./samples/Dutch.txt[3, 10]: Unknown word: lezen
+log	samples/Dutch.txt[3, 10]: Unknown word: lezen
 log
-log	./samples/Dutch.txt[3, 26]: Unknown word: leveren
+log	samples/Dutch.txt[3, 26]: Unknown word: leveren
 log
-log	./samples/Dutch.txt[3, 38]: Unknown word: iedere
+log	samples/Dutch.txt[3, 38]: Unknown word: iedere
 log
-log	./samples/Dutch.txt[3, 45]: Unknown word: kopie
+log	samples/Dutch.txt[3, 45]: Unknown word: kopie
 log
-log	./samples/Dutch.txt[3, 59]: Unknown word: taalhulpbestand
+log	samples/Dutch.txt[3, 59]: Unknown word: taalhulpbestand
 log
-log	./samples/Dutch.txt[5, 4]: Unknown word: Naam
+log	samples/Dutch.txt[5, 4]: Unknown word: Naam
 log
-log	./samples/Dutch.txt[5, 10]: Unknown word: Nederlandstalige
+log	samples/Dutch.txt[5, 10]: Unknown word: Nederlandstalige
 log
-log	./samples/Dutch.txt[5, 27]: Unknown word: woordenlijst
+log	samples/Dutch.txt[5, 27]: Unknown word: woordenlijst
 log
-log	./samples/Dutch.txt[5, 40]: Unknown word: voor
+log	samples/Dutch.txt[5, 40]: Unknown word: voor
 log
-log	./samples/Dutch.txt[5, 45]: Unknown word: spellingcontrole
+log	samples/Dutch.txt[5, 45]: Unknown word: spellingcontrole
 log
-log	./samples/Dutch.txt[6, 4]: Unknown word: Versie
+log	samples/Dutch.txt[6, 4]: Unknown word: Versie
 log
-log	./samples/Dutch.txt[6, 11]: Unknown word: woordenlijst
+log	samples/Dutch.txt[6, 11]: Unknown word: woordenlijst
 log
-log	./samples/Dutch.txt[6, 32]: Unknown word: versie
+log	samples/Dutch.txt[6, 32]: Unknown word: versie
 log
-log	./samples/Dutch.txt[6, 39]: Unknown word: spellingcontrole
+log	samples/Dutch.txt[6, 39]: Unknown word: spellingcontrole
 log
-log	./samples/Dutch.txt[7, 4]: Unknown word: Vereisten
+log	samples/Dutch.txt[7, 4]: Unknown word: Vereisten
 log
-log	./samples/Dutch.txt[7, 33]: Unknown word: hoger
+log	samples/Dutch.txt[7, 33]: Unknown word: hoger
 log
-log	./samples/Dutch.txt[8, 4]: Unknown word: Keurmerk
+log	samples/Dutch.txt[8, 4]: Unknown word: Keurmerk
 log
-log	./samples/Dutch.txt[8, 22]: Unknown word: Nederlandse
+log	samples/Dutch.txt[8, 22]: Unknown word: Nederlandse
 log
-log	./samples/Dutch.txt[8, 34]: Unknown word: Taalunie
+log	samples/Dutch.txt[8, 34]: Unknown word: Taalunie
 log
-log	./samples/Dutch.txt[8, 47]: Unknown word: lijst
+log	samples/Dutch.txt[8, 47]: Unknown word: lijst
 log
-log	./samples/Dutch.txt[8, 57]: Unknown word: basiswoorden
+log	samples/Dutch.txt[8, 57]: Unknown word: basiswoorden
 log
-log	./samples/Dutch.txt[9, 13]: Unknown word: draagt
+log	samples/Dutch.txt[9, 13]: Unknown word: draagt
 log
-log	./samples/Dutch.txt[9, 24]: Unknown word: keurmerk
+log	samples/Dutch.txt[9, 24]: Unknown word: keurmerk
 log
-log	./samples/Dutch.txt[9, 40]: Unknown word: Nederlandse
+log	samples/Dutch.txt[9, 40]: Unknown word: Nederlandse
 log
-log	./samples/Dutch.txt[9, 52]: Unknown word: Taalunie
+log	samples/Dutch.txt[9, 52]: Unknown word: Taalunie
 log
-log	./samples/Dutch.txt[9, 62]: Unknown word: Voor
+log	samples/Dutch.txt[9, 62]: Unknown word: Voor
 log
-log	./samples/Dutch.txt[9, 67]: Unknown word: meer
+log	samples/Dutch.txt[9, 67]: Unknown word: meer
 log
-log	./samples/Dutch.txt[10, 4]: Unknown word: informatie
+log	samples/Dutch.txt[10, 4]: Unknown word: informatie
 log
-log	./samples/Dutch.txt[11, 4]: Unknown word: Auteursrechten
+log	samples/Dutch.txt[11, 4]: Unknown word: Auteursrechten
 log
-log	./samples/Dutch.txt[11, 60]: Unknown word: Brouwer
+log	samples/Dutch.txt[11, 60]: Unknown word: Brouwer
 log
-log	./samples/Dutch.txt[12, 11]: Unknown word: Nederlandstalige
+log	samples/Dutch.txt[12, 11]: Unknown word: Nederlandstalige
 log
-log	./samples/Dutch.txt[12, 32]: Unknown word: Gebruikersgroep
+log	samples/Dutch.txt[12, 32]: Unknown word: Gebruikersgroep
 log
-log	./samples/Dutch.txt[13, 4]: Unknown word: Licenties
+log	samples/Dutch.txt[13, 4]: Unknown word: Licenties
 log
-log	./samples/Dutch.txt[13, 24]: Unknown word: heeft
+log	samples/Dutch.txt[13, 24]: Unknown word: heeft
 log
-log	./samples/Dutch.txt[13, 34]: Unknown word: doel
+log	samples/Dutch.txt[13, 34]: Unknown word: doel
 log
-log	./samples/Dutch.txt[13, 42]: Unknown word: vrij
+log	samples/Dutch.txt[13, 42]: Unknown word: vrij
 log
-log	./samples/Dutch.txt[13, 47]: Unknown word: beschikbare
+log	samples/Dutch.txt[13, 47]: Unknown word: beschikbare
 log
-log	./samples/Dutch.txt[13, 59]: Unknown word: Nederlandstalige
+log	samples/Dutch.txt[13, 59]: Unknown word: Nederlandstalige
 log
-log	./samples/Dutch.txt[14, 4]: Unknown word: taalhulpbestanden
+log	samples/Dutch.txt[14, 4]: Unknown word: taalhulpbestanden
 log
-log	./samples/Dutch.txt[14, 25]: Unknown word: ontwikkelen
+log	samples/Dutch.txt[14, 25]: Unknown word: ontwikkelen
 log
-log	./samples/Dutch.txt[14, 43]: Unknown word: verspreiden
+log	samples/Dutch.txt[14, 43]: Unknown word: verspreiden
 log
-log	./samples/Dutch.txt[14, 70]: Unknown word: gebruik
+log	samples/Dutch.txt[14, 70]: Unknown word: gebruik
 log
-log	./samples/Dutch.txt[15, 4]: Unknown word: mogelijk
+log	samples/Dutch.txt[15, 4]: Unknown word: mogelijk
 log
-log	./samples/Dutch.txt[15, 16]: Unknown word: maken
+log	samples/Dutch.txt[15, 16]: Unknown word: maken
 log
-log	./samples/Dutch.txt[15, 22]: Unknown word: zijn
+log	samples/Dutch.txt[15, 22]: Unknown word: zijn
 log
-log	./samples/Dutch.txt[15, 30]: Unknown word: taalhulpbestanden
+log	samples/Dutch.txt[15, 30]: Unknown word: taalhulpbestanden
 log
-log	./samples/Dutch.txt[15, 55]: Unknown word: beschikbaar
+log	samples/Dutch.txt[15, 55]: Unknown word: beschikbaar
 log
-log	./samples/Dutch.txt[15, 67]: Unknown word: onder
+log	samples/Dutch.txt[15, 67]: Unknown word: onder
 log
-log	./samples/Dutch.txt[16, 4]: Unknown word: onderstaande
+log	samples/Dutch.txt[16, 4]: Unknown word: onderstaande
 log
-log	./samples/Dutch.txt[16, 18]: Unknown word: liberale
+log	samples/Dutch.txt[16, 18]: Unknown word: liberale
 log
-log	./samples/Dutch.txt[16, 27]: Unknown word: licenties
+log	samples/Dutch.txt[16, 27]: Unknown word: licenties
 log
-log	./samples/Dutch.txt[16, 37]: Unknown word: naar
+log	samples/Dutch.txt[16, 37]: Unknown word: naar
 log
-log	./samples/Dutch.txt[16, 42]: Unknown word: keuze
+log	samples/Dutch.txt[16, 42]: Unknown word: keuze
 log
-log	./samples/Dutch.txt[16, 55]: Unknown word: gebruiker
+log	samples/Dutch.txt[16, 55]: Unknown word: gebruiker
 log
-log	./samples/Dutch.txt[16, 68]: Unknown word: wordt
+log	samples/Dutch.txt[16, 68]: Unknown word: wordt
 log
-log	./samples/Dutch.txt[17, 4]: Unknown word: zeerste
+log	samples/Dutch.txt[17, 4]: Unknown word: zeerste
 log
-log	./samples/Dutch.txt[17, 12]: Unknown word: aangeraden
+log	samples/Dutch.txt[17, 12]: Unknown word: aangeraden
 log
-log	./samples/Dutch.txt[17, 26]: Unknown word: voorafgaand
+log	samples/Dutch.txt[17, 26]: Unknown word: voorafgaand
 log
-log	./samples/Dutch.txt[17, 46]: Unknown word: gebruik
+log	samples/Dutch.txt[17, 46]: Unknown word: gebruik
 log
-log	./samples/Dutch.txt[17, 54]: Unknown word: kennis
+log	samples/Dutch.txt[17, 54]: Unknown word: kennis
 log
-log	./samples/Dutch.txt[17, 64]: Unknown word: nemen
+log	samples/Dutch.txt[17, 64]: Unknown word: nemen
 log
-log	./samples/Dutch.txt[18, 4]: Unknown word: toepasselijke
+log	samples/Dutch.txt[18, 4]: Unknown word: toepasselijke
 log
-log	./samples/Dutch.txt[18, 18]: Unknown word: licentie
+log	samples/Dutch.txt[18, 18]: Unknown word: licentie
 log
-log	./samples/Dutch.txt[19, 12]: Unknown word: herziene
+log	samples/Dutch.txt[19, 12]: Unknown word: herziene
 log
-log	./samples/Dutch.txt[19, 21]: Unknown word: versie
+log	samples/Dutch.txt[19, 21]: Unknown word: versie
 log
-log	./samples/Dutch.txt[20, 6]: Unknown word: Volledige
+log	samples/Dutch.txt[20, 6]: Unknown word: Volledige
 log
-log	./samples/Dutch.txt[20, 16]: Unknown word: licentie
+log	samples/Dutch.txt[20, 16]: Unknown word: licentie
 log
-log	./samples/Dutch.txt[21, 6]: Unknown word: Samenvatting
+log	samples/Dutch.txt[21, 6]: Unknown word: Samenvatting
 log
-log	./samples/Dutch.txt[22, 25]: Unknown word: Naamsvermelding
+log	samples/Dutch.txt[22, 25]: Unknown word: Naamsvermelding
 log
-log	./samples/Dutch.txt[22, 46]: Unknown word: unported
+log	samples/Dutch.txt[22, 46]: Unknown word: unported
 log
-log	./samples/Dutch.txt[23, 6]: Unknown word: Volledige
+log	samples/Dutch.txt[23, 6]: Unknown word: Volledige
 log
-log	./samples/Dutch.txt[23, 16]: Unknown word: licentie
+log	samples/Dutch.txt[23, 16]: Unknown word: licentie
 log
-log	./samples/Dutch.txt[24, 6]: Unknown word: Samenvatting
+log	samples/Dutch.txt[24, 6]: Unknown word: Samenvatting
 log
-log	./samples/Dutch.txt[25, 4]: Unknown word: Steun
+log	samples/Dutch.txt[25, 4]: Unknown word: Steun
 log
-log	./samples/Dutch.txt[25, 36]: Unknown word: vrijwilligersproject
+log	samples/Dutch.txt[25, 36]: Unknown word: vrijwilligersproject
 log
-log	./samples/Dutch.txt[25, 57]: Unknown word: zonder
+log	samples/Dutch.txt[25, 57]: Unknown word: zonder
 log
-log	./samples/Dutch.txt[25, 64]: Unknown word: winstoogmerk
+log	samples/Dutch.txt[25, 64]: Unknown word: winstoogmerk
 log
-log	./samples/Dutch.txt[26, 13]: Unknown word: kleine
+log	samples/Dutch.txt[26, 13]: Unknown word: kleine
 log
-log	./samples/Dutch.txt[26, 21]: Unknown word: financiële
+log	samples/Dutch.txt[26, 21]: Unknown word: financiële
 log
-log	./samples/Dutch.txt[26, 32]: Unknown word: steun
+log	samples/Dutch.txt[26, 32]: Unknown word: steun
 log
-log	./samples/Dutch.txt[26, 51]: Unknown word: meer
+log	samples/Dutch.txt[26, 51]: Unknown word: meer
 log
-log	./samples/Dutch.txt[26, 56]: Unknown word: activiteiten
+log	samples/Dutch.txt[26, 56]: Unknown word: activiteiten
 log
-log	./samples/Dutch.txt[26, 69]: Unknown word: ontplooien
+log	samples/Dutch.txt[26, 69]: Unknown word: ontplooien
 log
-log	./samples/Dutch.txt[27, 19]: Unknown word: professionaliseren
+log	samples/Dutch.txt[27, 19]: Unknown word: professionaliseren
 log
-log	./samples/Dutch.txt[27, 42]: Unknown word: donatie
+log	samples/Dutch.txt[27, 42]: Unknown word: donatie
 log
-log	./samples/Dutch.txt[27, 63]: Unknown word: welkom
+log	samples/Dutch.txt[27, 63]: Unknown word: welkom
 log
-log	./samples/Dutch.txt[28, 4]: Unknown word: rekeningnummer
+log	samples/Dutch.txt[28, 4]: Unknown word: rekeningnummer
 log
-log	./samples/Dutch.txt[28, 39]: Unknown word: Stichting
+log	samples/Dutch.txt[28, 39]: Unknown word: Stichting
 log
-log	./samples/Dutch.txt[28, 62]: Unknown word: giften
+log	samples/Dutch.txt[28, 62]: Unknown word: giften
 log
-log	./samples/Dutch.txt[28, 69]: Unknown word: zijn
+log	samples/Dutch.txt[28, 69]: Unknown word: zijn
 log
-log	./samples/Dutch.txt[29, 4]: Unknown word: aftrekbaar
+log	samples/Dutch.txt[29, 4]: Unknown word: aftrekbaar
 log
-log	./samples/Dutch.txt[29, 22]: Unknown word: belasting
+log	samples/Dutch.txt[29, 22]: Unknown word: belasting
 log
-log	./samples/Dutch.txt[29, 33]: Unknown word: Stichting
+log	samples/Dutch.txt[29, 33]: Unknown word: Stichting
 log
-log	./samples/Dutch.txt[29, 55]: Unknown word: namelijk
+log	samples/Dutch.txt[29, 55]: Unknown word: namelijk
 log
-log	./samples/Dutch.txt[30, 4]: Unknown word: Belastingdienst
+log	samples/Dutch.txt[30, 4]: Unknown word: Belastingdienst
 log
-log	./samples/Dutch.txt[30, 20]: Unknown word: erkend
+log	samples/Dutch.txt[30, 20]: Unknown word: erkend
 log
-log	./samples/Dutch.txt[30, 31]: Unknown word: ANBI
+log	samples/Dutch.txt[30, 31]: Unknown word: ANBI
 log
-log	./samples/Dutch.txt[30, 37]: Unknown word: oftewel
+log	samples/Dutch.txt[30, 37]: Unknown word: oftewel
 log
-log	./samples/Dutch.txt[30, 46]: Unknown word: Algemeen
+log	samples/Dutch.txt[30, 46]: Unknown word: Algemeen
 log
-log	./samples/Dutch.txt[30, 59]: Unknown word: Beogende
+log	samples/Dutch.txt[30, 59]: Unknown word: Beogende
 log
-log	./samples/Dutch.txt[30, 68]: Unknown word: Instelling
+log	samples/Dutch.txt[30, 68]: Unknown word: Instelling
 log
-log	./samples/Dutch.txt[32, 4]: Unknown word: Meedoen
+log	samples/Dutch.txt[32, 4]: Unknown word: Meedoen
 log
-log	./samples/Dutch.txt[32, 13]: Unknown word: Iedereen
+log	samples/Dutch.txt[32, 13]: Unknown word: Iedereen
 log
-log	./samples/Dutch.txt[32, 25]: Unknown word: welkom
+log	samples/Dutch.txt[32, 25]: Unknown word: welkom
 log
-log	./samples/Dutch.txt[32, 42]: Unknown word: doen
+log	samples/Dutch.txt[32, 42]: Unknown word: doen
 log
-log	./samples/Dutch.txt[32, 53]: Unknown word: fouten
+log	samples/Dutch.txt[32, 53]: Unknown word: fouten
 log
-log	./samples/Dutch.txt[32, 61]: Unknown word: discussieer
+log	samples/Dutch.txt[32, 61]: Unknown word: discussieer
 log
-log	./samples/Dutch.txt[33, 7]: Unknown word: mailinglijst
+log	samples/Dutch.txt[33, 7]: Unknown word: mailinglijst
 log
-log	./samples/Dutch.txt[33, 23]: Unknown word: draai
+log	samples/Dutch.txt[33, 23]: Unknown word: draai
 log
-log	./samples/Dutch.txt[33, 52]: Unknown word: dragen
+log	samples/Dutch.txt[33, 52]: Unknown word: dragen
 log
-log	./samples/Dutch.txt[33, 75]: Unknown word: stemt
+log	samples/Dutch.txt[33, 75]: Unknown word: stemt
 log
-log	./samples/Dutch.txt[34, 6]: Unknown word: ermee
+log	samples/Dutch.txt[34, 6]: Unknown word: ermee
 log
-log	./samples/Dutch.txt[34, 22]: Unknown word: bijdrage
+log	samples/Dutch.txt[34, 22]: Unknown word: bijdrage
 log
-log	./samples/Dutch.txt[34, 39]: Unknown word: desbetreffende
+log	samples/Dutch.txt[34, 39]: Unknown word: desbetreffende
 log
-log	./samples/Dutch.txt[34, 54]: Unknown word: taalhulpbestand
+log	samples/Dutch.txt[34, 54]: Unknown word: taalhulpbestand
 log
-log	./samples/Dutch.txt[34, 70]: Unknown word: beschikbaar
+log	samples/Dutch.txt[34, 70]: Unknown word: beschikbaar
 log
-log	./samples/Dutch.txt[35, 4]: Unknown word: komt
+log	samples/Dutch.txt[35, 4]: Unknown word: komt
 log
-log	./samples/Dutch.txt[35, 9]: Unknown word: onder
+log	samples/Dutch.txt[35, 9]: Unknown word: onder
 log
-log	./samples/Dutch.txt[35, 15]: Unknown word: vrije
+log	samples/Dutch.txt[35, 15]: Unknown word: vrije
 log
-log	./samples/Dutch.txt[35, 27]: Unknown word: opensource
+log	samples/Dutch.txt[35, 27]: Unknown word: opensource
 log
-log	./samples/Dutch.txt[35, 38]: Unknown word: licenties
+log	samples/Dutch.txt[35, 38]: Unknown word: licenties
 log
-log	./samples/Dutch.txt[35, 49]: Unknown word: Indien
+log	samples/Dutch.txt[35, 49]: Unknown word: Indien
 log
-log	./samples/Dutch.txt[35, 62]: Unknown word: wenst
+log	samples/Dutch.txt[35, 62]: Unknown word: wenst
 log
-log	./samples/Dutch.txt[36, 4]: Unknown word: naam
+log	samples/Dutch.txt[36, 4]: Unknown word: naam
 log
-log	./samples/Dutch.txt[36, 23]: Unknown word: genoemd
+log	samples/Dutch.txt[36, 23]: Unknown word: genoemd
 log
-log	./samples/Dutch.txt[36, 31]: Unknown word: worden
+log	samples/Dutch.txt[36, 31]: Unknown word: worden
 log
-log	./samples/Dutch.txt[36, 42]: Unknown word: ontvangen
+log	samples/Dutch.txt[36, 42]: Unknown word: ontvangen
 log
-log	./samples/Dutch.txt[36, 55]: Unknown word: schriftelijk
+log	samples/Dutch.txt[36, 55]: Unknown word: schriftelijk
 log
-log	./samples/Dutch.txt[36, 68]: Unknown word: verzoek
+log	samples/Dutch.txt[36, 68]: Unknown word: verzoek
 log
-log	./samples/Dutch.txt[37, 4]: Unknown word: daarvoor
+log	samples/Dutch.txt[37, 4]: Unknown word: daarvoor
 log
-log	./samples/Dutch.txt[37, 13]: Unknown word: graag
+log	samples/Dutch.txt[37, 13]: Unknown word: graag
 log
-log	./samples/Dutch.txt[38, 4]: Unknown word: Rechten
+log	samples/Dutch.txt[38, 4]: Unknown word: Rechten
 log
-log	./samples/Dutch.txt[38, 16]: Unknown word: derden
+log	samples/Dutch.txt[38, 16]: Unknown word: derden
 log
-log	./samples/Dutch.txt[38, 33]: Unknown word: respecteert
+log	samples/Dutch.txt[38, 33]: Unknown word: respecteert
 log
-log	./samples/Dutch.txt[38, 48]: Unknown word: rechten
+log	samples/Dutch.txt[38, 48]: Unknown word: rechten
 log
-log	./samples/Dutch.txt[38, 60]: Unknown word: derden
+log	samples/Dutch.txt[38, 60]: Unknown word: derden
 log
-log	./samples/Dutch.txt[39, 13]: Unknown word: gegevens
+log	samples/Dutch.txt[39, 13]: Unknown word: gegevens
 log
-log	./samples/Dutch.txt[39, 22]: Unknown word: vrij
+log	samples/Dutch.txt[39, 22]: Unknown word: vrij
 log
-log	./samples/Dutch.txt[39, 27]: Unknown word: beschikbaar
+log	samples/Dutch.txt[39, 27]: Unknown word: beschikbaar
 log
-log	./samples/Dutch.txt[39, 39]: Unknown word: houden
+log	samples/Dutch.txt[39, 39]: Unknown word: houden
 log
-log	./samples/Dutch.txt[39, 47]: Unknown word: Voor
+log	samples/Dutch.txt[39, 47]: Unknown word: Voor
 log
-log	./samples/Dutch.txt[39, 52]: Unknown word: bijdragen
+log	samples/Dutch.txt[39, 52]: Unknown word: bijdragen
 log
-log	./samples/Dutch.txt[40, 6]: Unknown word: daarom
+log	samples/Dutch.txt[40, 6]: Unknown word: daarom
 log
-log	./samples/Dutch.txt[40, 13]: Unknown word: niet
+log	samples/Dutch.txt[40, 13]: Unknown word: niet
 log
-log	./samples/Dutch.txt[40, 18]: Unknown word: zonder
+log	samples/Dutch.txt[40, 18]: Unknown word: zonder
 log
-log	./samples/Dutch.txt[40, 25]: Unknown word: toestemming
+log	samples/Dutch.txt[40, 25]: Unknown word: toestemming
 log
-log	./samples/Dutch.txt[40, 37]: Unknown word: gebruikmaken
+log	samples/Dutch.txt[40, 37]: Unknown word: gebruikmaken
 log
-log	./samples/Dutch.txt[40, 54]: Unknown word: beschermde
+log	samples/Dutch.txt[40, 54]: Unknown word: beschermde
 log
-log	./samples/Dutch.txt[40, 65]: Unknown word: naslagwerken
+log	samples/Dutch.txt[40, 65]: Unknown word: naslagwerken
 log
-log	./samples/Dutch.txt[41, 4]: Unknown word: zoals
+log	samples/Dutch.txt[41, 4]: Unknown word: zoals
 log
-log	./samples/Dutch.txt[41, 10]: Unknown word: woordenboeken
+log	samples/Dutch.txt[41, 10]: Unknown word: woordenboeken
 log
-log	./samples/Dutch.txt[41, 36]: Unknown word: toegestaan
+log	samples/Dutch.txt[41, 36]: Unknown word: toegestaan
 log
-log	./samples/Dutch.txt[41, 50]: Unknown word: gebruik
+log	samples/Dutch.txt[41, 50]: Unknown word: gebruik
 log
-log	./samples/Dutch.txt[41, 61]: Unknown word: maken
+log	samples/Dutch.txt[41, 61]: Unknown word: maken
 log
-log	./samples/Dutch.txt[42, 4]: Unknown word: materialen
+log	samples/Dutch.txt[42, 4]: Unknown word: materialen
 log
-log	./samples/Dutch.txt[42, 22]: Unknown word: Nederlandse
+log	samples/Dutch.txt[42, 22]: Unknown word: Nederlandse
 log
-log	./samples/Dutch.txt[42, 34]: Unknown word: Taalunie
+log	samples/Dutch.txt[42, 34]: Unknown word: Taalunie
 log
-log	./samples/Dutch.txt[42, 44]: Unknown word: zoals
+log	samples/Dutch.txt[42, 44]: Unknown word: zoals
 log
-log	./samples/Dutch.txt[42, 53]: Unknown word: leidraad
+log	samples/Dutch.txt[42, 53]: Unknown word: leidraad
 log
-log	./samples/Dutch.txt[42, 68]: Unknown word: woordenlijst
+log	samples/Dutch.txt[42, 68]: Unknown word: woordenlijst
 log
-log	./samples/Dutch.txt[43, 4]: Unknown word: Indien
+log	samples/Dutch.txt[43, 4]: Unknown word: Indien
 log
-log	./samples/Dutch.txt[43, 17]: Unknown word: mening
+log	samples/Dutch.txt[43, 17]: Unknown word: mening
 log
-log	./samples/Dutch.txt[43, 42]: Unknown word: inbreuk
+log	samples/Dutch.txt[43, 42]: Unknown word: inbreuk
 log
-log	./samples/Dutch.txt[43, 50]: Unknown word: maakt
+log	samples/Dutch.txt[43, 50]: Unknown word: maakt
 log
-log	./samples/Dutch.txt[43, 62]: Unknown word: rechten
+log	samples/Dutch.txt[43, 62]: Unknown word: rechten
 log
-log	./samples/Dutch.txt[44, 4]: Unknown word: verzoeken
+log	samples/Dutch.txt[44, 4]: Unknown word: verzoeken
 log
-log	./samples/Dutch.txt[44, 19]: Unknown word: hierover
+log	samples/Dutch.txt[44, 19]: Unknown word: hierover
 log
-log	./samples/Dutch.txt[44, 31]: Unknown word: spoedig
+log	samples/Dutch.txt[44, 31]: Unknown word: spoedig
 log
-log	./samples/Dutch.txt[44, 39]: Unknown word: mogelijk
+log	samples/Dutch.txt[44, 39]: Unknown word: mogelijk
 log
-log	./samples/Dutch.txt[44, 48]: Unknown word: schriftelijk
+log	samples/Dutch.txt[44, 48]: Unknown word: schriftelijk
 log
-log	./samples/Dutch.txt[45, 7]: Unknown word: nemen
+log	samples/Dutch.txt[45, 7]: Unknown word: nemen
 log
-log	./samples/Dutch.txt[46, 13]: Unknown word: Stichting
+log	samples/Dutch.txt[46, 13]: Unknown word: Stichting
 log
-log	./samples/Dutch.txt[59, 56]: Unknown word: Brouwer
+log	samples/Dutch.txt[59, 56]: Unknown word: Brouwer
 log
-log	./samples/Dutch.txt[60, 11]: Unknown word: Nederlandstalige
+log	samples/Dutch.txt[60, 11]: Unknown word: Nederlandstalige
 log
-log	./samples/Dutch.txt[60, 32]: Unknown word: Gebruikersgroep
+log	samples/Dutch.txt[60, 32]: Unknown word: Gebruikersgroep
 log
-log	./samples/Dutch.txt[68, 42]: Unknown word: unported
+log	samples/Dutch.txt[68, 42]: Unknown word: unported
 log
-log	./samples/Dutch.txt[74, 39]: Unknown word: RABONL
+log	samples/Dutch.txt[74, 39]: Unknown word: RABONL
 log
-log	./samples/Dutch.txt[74, 49]: Unknown word: IBAN
+log	samples/Dutch.txt[74, 49]: Unknown word: IBAN
 log
-log	./samples/Dutch.txt[74, 59]: Unknown word: RABO
+log	samples/Dutch.txt[74, 59]: Unknown word: RABO
 log
-log	./samples/Dutch.txt[75, 4]: Unknown word: Stichting
+log	samples/Dutch.txt[75, 4]: Unknown word: Stichting
 log
-log	./samples/Dutch.txt[77, 58]: Unknown word: algemeen
+log	samples/Dutch.txt[77, 58]: Unknown word: algemeen
 log
-log	./samples/Dutch.txt[77, 71]: Unknown word: beogende
+log	samples/Dutch.txt[77, 71]: Unknown word: beogende
 log
-log	./samples/Dutch.txt[78, 4]: Unknown word: instelling
+log	samples/Dutch.txt[78, 4]: Unknown word: instelling
 log
-log	./samples/Dutch.txt[78, 18]: Unknown word: ANBI
+log	samples/Dutch.txt[78, 18]: Unknown word: ANBI
 log
 error	-------------------------------------------
 error
 error	Issues found:
 error
-error	./samples/Dutch.txt[1, 32]: Unknown word: NEDERLANDS
+error	samples/Dutch.txt[1, 32]: Unknown word: NEDERLANDS
 error
-error	./samples/Dutch.txt[2, 11]: Unknown word: wordt
+error	samples/Dutch.txt[2, 11]: Unknown word: wordt
 error
-error	./samples/Dutch.txt[2, 17]: Unknown word: vriendelijk
+error	samples/Dutch.txt[2, 17]: Unknown word: vriendelijk
 error
-error	./samples/Dutch.txt[2, 29]: Unknown word: verzocht
+error	samples/Dutch.txt[2, 29]: Unknown word: verzocht
 error
-error	./samples/Dutch.txt[2, 45]: Unknown word: bestand
+error	samples/Dutch.txt[2, 45]: Unknown word: bestand
 error
-error	./samples/Dutch.txt[3, 10]: Unknown word: lezen
+error	samples/Dutch.txt[3, 10]: Unknown word: lezen
 error
-error	./samples/Dutch.txt[3, 26]: Unknown word: leveren
+error	samples/Dutch.txt[3, 26]: Unknown word: leveren
 error
-error	./samples/Dutch.txt[3, 38]: Unknown word: iedere
+error	samples/Dutch.txt[3, 38]: Unknown word: iedere
 error
-error	./samples/Dutch.txt[3, 45]: Unknown word: kopie
+error	samples/Dutch.txt[3, 45]: Unknown word: kopie
 error
-error	./samples/Dutch.txt[3, 59]: Unknown word: taalhulpbestand
+error	samples/Dutch.txt[3, 59]: Unknown word: taalhulpbestand
 error
-error	./samples/Dutch.txt[5, 4]: Unknown word: Naam
+error	samples/Dutch.txt[5, 4]: Unknown word: Naam
 error
-error	./samples/Dutch.txt[5, 10]: Unknown word: Nederlandstalige
+error	samples/Dutch.txt[5, 10]: Unknown word: Nederlandstalige
 error
-error	./samples/Dutch.txt[5, 27]: Unknown word: woordenlijst
+error	samples/Dutch.txt[5, 27]: Unknown word: woordenlijst
 error
-error	./samples/Dutch.txt[5, 40]: Unknown word: voor
+error	samples/Dutch.txt[5, 40]: Unknown word: voor
 error
-error	./samples/Dutch.txt[5, 45]: Unknown word: spellingcontrole
+error	samples/Dutch.txt[5, 45]: Unknown word: spellingcontrole
 error
-error	./samples/Dutch.txt[6, 4]: Unknown word: Versie
+error	samples/Dutch.txt[6, 4]: Unknown word: Versie
 error
-error	./samples/Dutch.txt[6, 11]: Unknown word: woordenlijst
+error	samples/Dutch.txt[6, 11]: Unknown word: woordenlijst
 error
-error	./samples/Dutch.txt[6, 32]: Unknown word: versie
+error	samples/Dutch.txt[6, 32]: Unknown word: versie
 error
-error	./samples/Dutch.txt[6, 39]: Unknown word: spellingcontrole
+error	samples/Dutch.txt[6, 39]: Unknown word: spellingcontrole
 error
-error	./samples/Dutch.txt[7, 4]: Unknown word: Vereisten
+error	samples/Dutch.txt[7, 4]: Unknown word: Vereisten
 error
-error	./samples/Dutch.txt[7, 33]: Unknown word: hoger
+error	samples/Dutch.txt[7, 33]: Unknown word: hoger
 error
-error	./samples/Dutch.txt[8, 4]: Unknown word: Keurmerk
+error	samples/Dutch.txt[8, 4]: Unknown word: Keurmerk
 error
-error	./samples/Dutch.txt[8, 22]: Unknown word: Nederlandse
+error	samples/Dutch.txt[8, 22]: Unknown word: Nederlandse
 error
-error	./samples/Dutch.txt[8, 34]: Unknown word: Taalunie
+error	samples/Dutch.txt[8, 34]: Unknown word: Taalunie
 error
-error	./samples/Dutch.txt[8, 47]: Unknown word: lijst
+error	samples/Dutch.txt[8, 47]: Unknown word: lijst
 error
-error	./samples/Dutch.txt[8, 57]: Unknown word: basiswoorden
+error	samples/Dutch.txt[8, 57]: Unknown word: basiswoorden
 error
-error	./samples/Dutch.txt[9, 13]: Unknown word: draagt
+error	samples/Dutch.txt[9, 13]: Unknown word: draagt
 error
-error	./samples/Dutch.txt[9, 24]: Unknown word: keurmerk
+error	samples/Dutch.txt[9, 24]: Unknown word: keurmerk
 error
-error	./samples/Dutch.txt[9, 40]: Unknown word: Nederlandse
+error	samples/Dutch.txt[9, 40]: Unknown word: Nederlandse
 error
-error	./samples/Dutch.txt[9, 52]: Unknown word: Taalunie
+error	samples/Dutch.txt[9, 52]: Unknown word: Taalunie
 error
-error	./samples/Dutch.txt[9, 62]: Unknown word: Voor
+error	samples/Dutch.txt[9, 62]: Unknown word: Voor
 error
-error	./samples/Dutch.txt[9, 67]: Unknown word: meer
+error	samples/Dutch.txt[9, 67]: Unknown word: meer
 error
-error	./samples/Dutch.txt[10, 4]: Unknown word: informatie
+error	samples/Dutch.txt[10, 4]: Unknown word: informatie
 error
-error	./samples/Dutch.txt[11, 4]: Unknown word: Auteursrechten
+error	samples/Dutch.txt[11, 4]: Unknown word: Auteursrechten
 error
-error	./samples/Dutch.txt[11, 60]: Unknown word: Brouwer
+error	samples/Dutch.txt[11, 60]: Unknown word: Brouwer
 error
-error	./samples/Dutch.txt[12, 11]: Unknown word: Nederlandstalige
+error	samples/Dutch.txt[12, 11]: Unknown word: Nederlandstalige
 error
-error	./samples/Dutch.txt[12, 32]: Unknown word: Gebruikersgroep
+error	samples/Dutch.txt[12, 32]: Unknown word: Gebruikersgroep
 error
-error	./samples/Dutch.txt[13, 4]: Unknown word: Licenties
+error	samples/Dutch.txt[13, 4]: Unknown word: Licenties
 error
-error	./samples/Dutch.txt[13, 24]: Unknown word: heeft
+error	samples/Dutch.txt[13, 24]: Unknown word: heeft
 error
-error	./samples/Dutch.txt[13, 34]: Unknown word: doel
+error	samples/Dutch.txt[13, 34]: Unknown word: doel
 error
-error	./samples/Dutch.txt[13, 42]: Unknown word: vrij
+error	samples/Dutch.txt[13, 42]: Unknown word: vrij
 error
-error	./samples/Dutch.txt[13, 47]: Unknown word: beschikbare
+error	samples/Dutch.txt[13, 47]: Unknown word: beschikbare
 error
-error	./samples/Dutch.txt[13, 59]: Unknown word: Nederlandstalige
+error	samples/Dutch.txt[13, 59]: Unknown word: Nederlandstalige
 error
-error	./samples/Dutch.txt[14, 4]: Unknown word: taalhulpbestanden
+error	samples/Dutch.txt[14, 4]: Unknown word: taalhulpbestanden
 error
-error	./samples/Dutch.txt[14, 25]: Unknown word: ontwikkelen
+error	samples/Dutch.txt[14, 25]: Unknown word: ontwikkelen
 error
-error	./samples/Dutch.txt[14, 43]: Unknown word: verspreiden
+error	samples/Dutch.txt[14, 43]: Unknown word: verspreiden
 error
-error	./samples/Dutch.txt[14, 70]: Unknown word: gebruik
+error	samples/Dutch.txt[14, 70]: Unknown word: gebruik
 error
-error	./samples/Dutch.txt[15, 4]: Unknown word: mogelijk
+error	samples/Dutch.txt[15, 4]: Unknown word: mogelijk
 error
-error	./samples/Dutch.txt[15, 16]: Unknown word: maken
+error	samples/Dutch.txt[15, 16]: Unknown word: maken
 error
-error	./samples/Dutch.txt[15, 22]: Unknown word: zijn
+error	samples/Dutch.txt[15, 22]: Unknown word: zijn
 error
-error	./samples/Dutch.txt[15, 30]: Unknown word: taalhulpbestanden
+error	samples/Dutch.txt[15, 30]: Unknown word: taalhulpbestanden
 error
-error	./samples/Dutch.txt[15, 55]: Unknown word: beschikbaar
+error	samples/Dutch.txt[15, 55]: Unknown word: beschikbaar
 error
-error	./samples/Dutch.txt[15, 67]: Unknown word: onder
+error	samples/Dutch.txt[15, 67]: Unknown word: onder
 error
-error	./samples/Dutch.txt[16, 4]: Unknown word: onderstaande
+error	samples/Dutch.txt[16, 4]: Unknown word: onderstaande
 error
-error	./samples/Dutch.txt[16, 18]: Unknown word: liberale
+error	samples/Dutch.txt[16, 18]: Unknown word: liberale
 error
-error	./samples/Dutch.txt[16, 27]: Unknown word: licenties
+error	samples/Dutch.txt[16, 27]: Unknown word: licenties
 error
-error	./samples/Dutch.txt[16, 37]: Unknown word: naar
+error	samples/Dutch.txt[16, 37]: Unknown word: naar
 error
-error	./samples/Dutch.txt[16, 42]: Unknown word: keuze
+error	samples/Dutch.txt[16, 42]: Unknown word: keuze
 error
-error	./samples/Dutch.txt[16, 55]: Unknown word: gebruiker
+error	samples/Dutch.txt[16, 55]: Unknown word: gebruiker
 error
-error	./samples/Dutch.txt[16, 68]: Unknown word: wordt
+error	samples/Dutch.txt[16, 68]: Unknown word: wordt
 error
-error	./samples/Dutch.txt[17, 4]: Unknown word: zeerste
+error	samples/Dutch.txt[17, 4]: Unknown word: zeerste
 error
-error	./samples/Dutch.txt[17, 12]: Unknown word: aangeraden
+error	samples/Dutch.txt[17, 12]: Unknown word: aangeraden
 error
-error	./samples/Dutch.txt[17, 26]: Unknown word: voorafgaand
+error	samples/Dutch.txt[17, 26]: Unknown word: voorafgaand
 error
-error	./samples/Dutch.txt[17, 46]: Unknown word: gebruik
+error	samples/Dutch.txt[17, 46]: Unknown word: gebruik
 error
-error	./samples/Dutch.txt[17, 54]: Unknown word: kennis
+error	samples/Dutch.txt[17, 54]: Unknown word: kennis
 error
-error	./samples/Dutch.txt[17, 64]: Unknown word: nemen
+error	samples/Dutch.txt[17, 64]: Unknown word: nemen
 error
-error	./samples/Dutch.txt[18, 4]: Unknown word: toepasselijke
+error	samples/Dutch.txt[18, 4]: Unknown word: toepasselijke
 error
-error	./samples/Dutch.txt[18, 18]: Unknown word: licentie
+error	samples/Dutch.txt[18, 18]: Unknown word: licentie
 error
-error	./samples/Dutch.txt[19, 12]: Unknown word: herziene
+error	samples/Dutch.txt[19, 12]: Unknown word: herziene
 error
-error	./samples/Dutch.txt[19, 21]: Unknown word: versie
+error	samples/Dutch.txt[19, 21]: Unknown word: versie
 error
-error	./samples/Dutch.txt[20, 6]: Unknown word: Volledige
+error	samples/Dutch.txt[20, 6]: Unknown word: Volledige
 error
-error	./samples/Dutch.txt[20, 16]: Unknown word: licentie
+error	samples/Dutch.txt[20, 16]: Unknown word: licentie
 error
-error	./samples/Dutch.txt[21, 6]: Unknown word: Samenvatting
+error	samples/Dutch.txt[21, 6]: Unknown word: Samenvatting
 error
-error	./samples/Dutch.txt[22, 25]: Unknown word: Naamsvermelding
+error	samples/Dutch.txt[22, 25]: Unknown word: Naamsvermelding
 error
-error	./samples/Dutch.txt[22, 46]: Unknown word: unported
+error	samples/Dutch.txt[22, 46]: Unknown word: unported
 error
-error	./samples/Dutch.txt[23, 6]: Unknown word: Volledige
+error	samples/Dutch.txt[23, 6]: Unknown word: Volledige
 error
-error	./samples/Dutch.txt[23, 16]: Unknown word: licentie
+error	samples/Dutch.txt[23, 16]: Unknown word: licentie
 error
-error	./samples/Dutch.txt[24, 6]: Unknown word: Samenvatting
+error	samples/Dutch.txt[24, 6]: Unknown word: Samenvatting
 error
-error	./samples/Dutch.txt[25, 4]: Unknown word: Steun
+error	samples/Dutch.txt[25, 4]: Unknown word: Steun
 error
-error	./samples/Dutch.txt[25, 36]: Unknown word: vrijwilligersproject
+error	samples/Dutch.txt[25, 36]: Unknown word: vrijwilligersproject
 error
-error	./samples/Dutch.txt[25, 57]: Unknown word: zonder
+error	samples/Dutch.txt[25, 57]: Unknown word: zonder
 error
-error	./samples/Dutch.txt[25, 64]: Unknown word: winstoogmerk
+error	samples/Dutch.txt[25, 64]: Unknown word: winstoogmerk
 error
-error	./samples/Dutch.txt[26, 13]: Unknown word: kleine
+error	samples/Dutch.txt[26, 13]: Unknown word: kleine
 error
-error	./samples/Dutch.txt[26, 21]: Unknown word: financiële
+error	samples/Dutch.txt[26, 21]: Unknown word: financiële
 error
-error	./samples/Dutch.txt[26, 32]: Unknown word: steun
+error	samples/Dutch.txt[26, 32]: Unknown word: steun
 error
-error	./samples/Dutch.txt[26, 51]: Unknown word: meer
+error	samples/Dutch.txt[26, 51]: Unknown word: meer
 error
-error	./samples/Dutch.txt[26, 56]: Unknown word: activiteiten
+error	samples/Dutch.txt[26, 56]: Unknown word: activiteiten
 error
-error	./samples/Dutch.txt[26, 69]: Unknown word: ontplooien
+error	samples/Dutch.txt[26, 69]: Unknown word: ontplooien
 error
-error	./samples/Dutch.txt[27, 19]: Unknown word: professionaliseren
+error	samples/Dutch.txt[27, 19]: Unknown word: professionaliseren
 error
-error	./samples/Dutch.txt[27, 42]: Unknown word: donatie
+error	samples/Dutch.txt[27, 42]: Unknown word: donatie
 error
-error	./samples/Dutch.txt[27, 63]: Unknown word: welkom
+error	samples/Dutch.txt[27, 63]: Unknown word: welkom
 error
-error	./samples/Dutch.txt[28, 4]: Unknown word: rekeningnummer
+error	samples/Dutch.txt[28, 4]: Unknown word: rekeningnummer
 error
-error	./samples/Dutch.txt[28, 39]: Unknown word: Stichting
+error	samples/Dutch.txt[28, 39]: Unknown word: Stichting
 error
-error	./samples/Dutch.txt[28, 62]: Unknown word: giften
+error	samples/Dutch.txt[28, 62]: Unknown word: giften
 error
-error	./samples/Dutch.txt[28, 69]: Unknown word: zijn
+error	samples/Dutch.txt[28, 69]: Unknown word: zijn
 error
-error	./samples/Dutch.txt[29, 4]: Unknown word: aftrekbaar
+error	samples/Dutch.txt[29, 4]: Unknown word: aftrekbaar
 error
-error	./samples/Dutch.txt[29, 22]: Unknown word: belasting
+error	samples/Dutch.txt[29, 22]: Unknown word: belasting
 error
-error	./samples/Dutch.txt[29, 33]: Unknown word: Stichting
+error	samples/Dutch.txt[29, 33]: Unknown word: Stichting
 error
-error	./samples/Dutch.txt[29, 55]: Unknown word: namelijk
+error	samples/Dutch.txt[29, 55]: Unknown word: namelijk
 error
-error	./samples/Dutch.txt[30, 4]: Unknown word: Belastingdienst
+error	samples/Dutch.txt[30, 4]: Unknown word: Belastingdienst
 error
-error	./samples/Dutch.txt[30, 20]: Unknown word: erkend
+error	samples/Dutch.txt[30, 20]: Unknown word: erkend
 error
-error	./samples/Dutch.txt[30, 31]: Unknown word: ANBI
+error	samples/Dutch.txt[30, 31]: Unknown word: ANBI
 error
-error	./samples/Dutch.txt[30, 37]: Unknown word: oftewel
+error	samples/Dutch.txt[30, 37]: Unknown word: oftewel
 error
-error	./samples/Dutch.txt[30, 46]: Unknown word: Algemeen
+error	samples/Dutch.txt[30, 46]: Unknown word: Algemeen
 error
-error	./samples/Dutch.txt[30, 59]: Unknown word: Beogende
+error	samples/Dutch.txt[30, 59]: Unknown word: Beogende
 error
-error	./samples/Dutch.txt[30, 68]: Unknown word: Instelling
+error	samples/Dutch.txt[30, 68]: Unknown word: Instelling
 error
-error	./samples/Dutch.txt[32, 4]: Unknown word: Meedoen
+error	samples/Dutch.txt[32, 4]: Unknown word: Meedoen
 error
-error	./samples/Dutch.txt[32, 13]: Unknown word: Iedereen
+error	samples/Dutch.txt[32, 13]: Unknown word: Iedereen
 error
-error	./samples/Dutch.txt[32, 25]: Unknown word: welkom
+error	samples/Dutch.txt[32, 25]: Unknown word: welkom
 error
-error	./samples/Dutch.txt[32, 42]: Unknown word: doen
+error	samples/Dutch.txt[32, 42]: Unknown word: doen
 error
-error	./samples/Dutch.txt[32, 53]: Unknown word: fouten
+error	samples/Dutch.txt[32, 53]: Unknown word: fouten
 error
-error	./samples/Dutch.txt[32, 61]: Unknown word: discussieer
+error	samples/Dutch.txt[32, 61]: Unknown word: discussieer
 error
-error	./samples/Dutch.txt[33, 7]: Unknown word: mailinglijst
+error	samples/Dutch.txt[33, 7]: Unknown word: mailinglijst
 error
-error	./samples/Dutch.txt[33, 23]: Unknown word: draai
+error	samples/Dutch.txt[33, 23]: Unknown word: draai
 error
-error	./samples/Dutch.txt[33, 52]: Unknown word: dragen
+error	samples/Dutch.txt[33, 52]: Unknown word: dragen
 error
-error	./samples/Dutch.txt[33, 75]: Unknown word: stemt
+error	samples/Dutch.txt[33, 75]: Unknown word: stemt
 error
-error	./samples/Dutch.txt[34, 6]: Unknown word: ermee
+error	samples/Dutch.txt[34, 6]: Unknown word: ermee
 error
-error	./samples/Dutch.txt[34, 22]: Unknown word: bijdrage
+error	samples/Dutch.txt[34, 22]: Unknown word: bijdrage
 error
-error	./samples/Dutch.txt[34, 39]: Unknown word: desbetreffende
+error	samples/Dutch.txt[34, 39]: Unknown word: desbetreffende
 error
-error	./samples/Dutch.txt[34, 54]: Unknown word: taalhulpbestand
+error	samples/Dutch.txt[34, 54]: Unknown word: taalhulpbestand
 error
-error	./samples/Dutch.txt[34, 70]: Unknown word: beschikbaar
+error	samples/Dutch.txt[34, 70]: Unknown word: beschikbaar
 error
-error	./samples/Dutch.txt[35, 4]: Unknown word: komt
+error	samples/Dutch.txt[35, 4]: Unknown word: komt
 error
-error	./samples/Dutch.txt[35, 9]: Unknown word: onder
+error	samples/Dutch.txt[35, 9]: Unknown word: onder
 error
-error	./samples/Dutch.txt[35, 15]: Unknown word: vrije
+error	samples/Dutch.txt[35, 15]: Unknown word: vrije
 error
-error	./samples/Dutch.txt[35, 27]: Unknown word: opensource
+error	samples/Dutch.txt[35, 27]: Unknown word: opensource
 error
-error	./samples/Dutch.txt[35, 38]: Unknown word: licenties
+error	samples/Dutch.txt[35, 38]: Unknown word: licenties
 error
-error	./samples/Dutch.txt[35, 49]: Unknown word: Indien
+error	samples/Dutch.txt[35, 49]: Unknown word: Indien
 error
-error	./samples/Dutch.txt[35, 62]: Unknown word: wenst
+error	samples/Dutch.txt[35, 62]: Unknown word: wenst
 error
-error	./samples/Dutch.txt[36, 4]: Unknown word: naam
+error	samples/Dutch.txt[36, 4]: Unknown word: naam
 error
-error	./samples/Dutch.txt[36, 23]: Unknown word: genoemd
+error	samples/Dutch.txt[36, 23]: Unknown word: genoemd
 error
-error	./samples/Dutch.txt[36, 31]: Unknown word: worden
+error	samples/Dutch.txt[36, 31]: Unknown word: worden
 error
-error	./samples/Dutch.txt[36, 42]: Unknown word: ontvangen
+error	samples/Dutch.txt[36, 42]: Unknown word: ontvangen
 error
-error	./samples/Dutch.txt[36, 55]: Unknown word: schriftelijk
+error	samples/Dutch.txt[36, 55]: Unknown word: schriftelijk
 error
-error	./samples/Dutch.txt[36, 68]: Unknown word: verzoek
+error	samples/Dutch.txt[36, 68]: Unknown word: verzoek
 error
-error	./samples/Dutch.txt[37, 4]: Unknown word: daarvoor
+error	samples/Dutch.txt[37, 4]: Unknown word: daarvoor
 error
-error	./samples/Dutch.txt[37, 13]: Unknown word: graag
+error	samples/Dutch.txt[37, 13]: Unknown word: graag
 error
-error	./samples/Dutch.txt[38, 4]: Unknown word: Rechten
+error	samples/Dutch.txt[38, 4]: Unknown word: Rechten
 error
-error	./samples/Dutch.txt[38, 16]: Unknown word: derden
+error	samples/Dutch.txt[38, 16]: Unknown word: derden
 error
-error	./samples/Dutch.txt[38, 33]: Unknown word: respecteert
+error	samples/Dutch.txt[38, 33]: Unknown word: respecteert
 error
-error	./samples/Dutch.txt[38, 48]: Unknown word: rechten
+error	samples/Dutch.txt[38, 48]: Unknown word: rechten
 error
-error	./samples/Dutch.txt[38, 60]: Unknown word: derden
+error	samples/Dutch.txt[38, 60]: Unknown word: derden
 error
-error	./samples/Dutch.txt[39, 13]: Unknown word: gegevens
+error	samples/Dutch.txt[39, 13]: Unknown word: gegevens
 error
-error	./samples/Dutch.txt[39, 22]: Unknown word: vrij
+error	samples/Dutch.txt[39, 22]: Unknown word: vrij
 error
-error	./samples/Dutch.txt[39, 27]: Unknown word: beschikbaar
+error	samples/Dutch.txt[39, 27]: Unknown word: beschikbaar
 error
-error	./samples/Dutch.txt[39, 39]: Unknown word: houden
+error	samples/Dutch.txt[39, 39]: Unknown word: houden
 error
-error	./samples/Dutch.txt[39, 47]: Unknown word: Voor
+error	samples/Dutch.txt[39, 47]: Unknown word: Voor
 error
-error	./samples/Dutch.txt[39, 52]: Unknown word: bijdragen
+error	samples/Dutch.txt[39, 52]: Unknown word: bijdragen
 error
-error	./samples/Dutch.txt[40, 6]: Unknown word: daarom
+error	samples/Dutch.txt[40, 6]: Unknown word: daarom
 error
-error	./samples/Dutch.txt[40, 13]: Unknown word: niet
+error	samples/Dutch.txt[40, 13]: Unknown word: niet
 error
-error	./samples/Dutch.txt[40, 18]: Unknown word: zonder
+error	samples/Dutch.txt[40, 18]: Unknown word: zonder
 error
-error	./samples/Dutch.txt[40, 25]: Unknown word: toestemming
+error	samples/Dutch.txt[40, 25]: Unknown word: toestemming
 error
-error	./samples/Dutch.txt[40, 37]: Unknown word: gebruikmaken
+error	samples/Dutch.txt[40, 37]: Unknown word: gebruikmaken
 error
-error	./samples/Dutch.txt[40, 54]: Unknown word: beschermde
+error	samples/Dutch.txt[40, 54]: Unknown word: beschermde
 error
-error	./samples/Dutch.txt[40, 65]: Unknown word: naslagwerken
+error	samples/Dutch.txt[40, 65]: Unknown word: naslagwerken
 error
-error	./samples/Dutch.txt[41, 4]: Unknown word: zoals
+error	samples/Dutch.txt[41, 4]: Unknown word: zoals
 error
-error	./samples/Dutch.txt[41, 10]: Unknown word: woordenboeken
+error	samples/Dutch.txt[41, 10]: Unknown word: woordenboeken
 error
-error	./samples/Dutch.txt[41, 36]: Unknown word: toegestaan
+error	samples/Dutch.txt[41, 36]: Unknown word: toegestaan
 error
-error	./samples/Dutch.txt[41, 50]: Unknown word: gebruik
+error	samples/Dutch.txt[41, 50]: Unknown word: gebruik
 error
-error	./samples/Dutch.txt[41, 61]: Unknown word: maken
+error	samples/Dutch.txt[41, 61]: Unknown word: maken
 error
-error	./samples/Dutch.txt[42, 4]: Unknown word: materialen
+error	samples/Dutch.txt[42, 4]: Unknown word: materialen
 error
-error	./samples/Dutch.txt[42, 22]: Unknown word: Nederlandse
+error	samples/Dutch.txt[42, 22]: Unknown word: Nederlandse
 error
-error	./samples/Dutch.txt[42, 34]: Unknown word: Taalunie
+error	samples/Dutch.txt[42, 34]: Unknown word: Taalunie
 error
-error	./samples/Dutch.txt[42, 44]: Unknown word: zoals
+error	samples/Dutch.txt[42, 44]: Unknown word: zoals
 error
-error	./samples/Dutch.txt[42, 53]: Unknown word: leidraad
+error	samples/Dutch.txt[42, 53]: Unknown word: leidraad
 error
-error	./samples/Dutch.txt[42, 68]: Unknown word: woordenlijst
+error	samples/Dutch.txt[42, 68]: Unknown word: woordenlijst
 error
-error	./samples/Dutch.txt[43, 4]: Unknown word: Indien
+error	samples/Dutch.txt[43, 4]: Unknown word: Indien
 error
-error	./samples/Dutch.txt[43, 17]: Unknown word: mening
+error	samples/Dutch.txt[43, 17]: Unknown word: mening
 error
-error	./samples/Dutch.txt[43, 42]: Unknown word: inbreuk
+error	samples/Dutch.txt[43, 42]: Unknown word: inbreuk
 error
-error	./samples/Dutch.txt[43, 50]: Unknown word: maakt
+error	samples/Dutch.txt[43, 50]: Unknown word: maakt
 error
-error	./samples/Dutch.txt[43, 62]: Unknown word: rechten
+error	samples/Dutch.txt[43, 62]: Unknown word: rechten
 error
-error	./samples/Dutch.txt[44, 4]: Unknown word: verzoeken
+error	samples/Dutch.txt[44, 4]: Unknown word: verzoeken
 error
-error	./samples/Dutch.txt[44, 19]: Unknown word: hierover
+error	samples/Dutch.txt[44, 19]: Unknown word: hierover
 error
-error	./samples/Dutch.txt[44, 31]: Unknown word: spoedig
+error	samples/Dutch.txt[44, 31]: Unknown word: spoedig
 error
-error	./samples/Dutch.txt[44, 39]: Unknown word: mogelijk
+error	samples/Dutch.txt[44, 39]: Unknown word: mogelijk
 error
-error	./samples/Dutch.txt[44, 48]: Unknown word: schriftelijk
+error	samples/Dutch.txt[44, 48]: Unknown word: schriftelijk
 error
-error	./samples/Dutch.txt[45, 7]: Unknown word: nemen
+error	samples/Dutch.txt[45, 7]: Unknown word: nemen
 error
-error	./samples/Dutch.txt[46, 13]: Unknown word: Stichting
+error	samples/Dutch.txt[46, 13]: Unknown word: Stichting
 error
-error	./samples/Dutch.txt[59, 56]: Unknown word: Brouwer
+error	samples/Dutch.txt[59, 56]: Unknown word: Brouwer
 error
-error	./samples/Dutch.txt[60, 11]: Unknown word: Nederlandstalige
+error	samples/Dutch.txt[60, 11]: Unknown word: Nederlandstalige
 error
-error	./samples/Dutch.txt[60, 32]: Unknown word: Gebruikersgroep
+error	samples/Dutch.txt[60, 32]: Unknown word: Gebruikersgroep
 error
-error	./samples/Dutch.txt[68, 42]: Unknown word: unported
+error	samples/Dutch.txt[68, 42]: Unknown word: unported
 error
-error	./samples/Dutch.txt[74, 39]: Unknown word: RABONL
+error	samples/Dutch.txt[74, 39]: Unknown word: RABONL
 error
-error	./samples/Dutch.txt[74, 49]: Unknown word: IBAN
+error	samples/Dutch.txt[74, 49]: Unknown word: IBAN
 error
-error	./samples/Dutch.txt[74, 59]: Unknown word: RABO
+error	samples/Dutch.txt[74, 59]: Unknown word: RABO
 error
-error	./samples/Dutch.txt[75, 4]: Unknown word: Stichting
+error	samples/Dutch.txt[75, 4]: Unknown word: Stichting
 error
-error	./samples/Dutch.txt[77, 58]: Unknown word: algemeen
+error	samples/Dutch.txt[77, 58]: Unknown word: algemeen
 error
-error	./samples/Dutch.txt[77, 71]: Unknown word: beogende
+error	samples/Dutch.txt[77, 71]: Unknown word: beogende
 error
-error	./samples/Dutch.txt[78, 4]: Unknown word: instelling
+error	samples/Dutch.txt[78, 4]: Unknown word: instelling
 error
-error	./samples/Dutch.txt[78, 18]: Unknown word: ANBI
+error	samples/Dutch.txt[78, 18]: Unknown word: ANBI
 error
 error	CSpell: Files checked: 1, Issues found: 189 in 1 file.
 error"
@@ -3273,7 +3273,7 @@ exports[`Validate cli > app 'with spelling errors Dutch.txt --legacy' Expect Err
 exports[`Validate cli > app 'with spelling errors Dutch.txt words only' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli > app 'with spelling errors Dutch.txt words only' Expect Error: [Function CheckFailed] 2`] = `
-"error	1/1 ./samples/Dutch.txt 0.00ms X
+"error	1/1 samples/Dutch.txt 0.00ms X
 error
 log	NEDERLANDS
 log
@@ -4044,767 +4044,767 @@ exports[`Validate cli > app 'with spelling errors Dutch.txt words only' Expect E
 exports[`Validate cli > app 'with spelling errors Dutch.txt' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli > app 'with spelling errors Dutch.txt' Expect Error: [Function CheckFailed] 2`] = `
-"error	1/1 ./samples/Dutch.txt 0.00ms X
+"error	1/1 samples/Dutch.txt 0.00ms X
 error
-log	./samples/Dutch.txt:1:32 - Unknown word (NEDERLANDS)
+log	samples/Dutch.txt:1:32 - Unknown word (NEDERLANDS)
 log
-log	./samples/Dutch.txt:2:11 - Unknown word (wordt)
+log	samples/Dutch.txt:2:11 - Unknown word (wordt)
 log
-log	./samples/Dutch.txt:2:17 - Unknown word (vriendelijk)
+log	samples/Dutch.txt:2:17 - Unknown word (vriendelijk)
 log
-log	./samples/Dutch.txt:2:29 - Unknown word (verzocht)
+log	samples/Dutch.txt:2:29 - Unknown word (verzocht)
 log
-log	./samples/Dutch.txt:2:45 - Unknown word (bestand)
+log	samples/Dutch.txt:2:45 - Unknown word (bestand)
 log
-log	./samples/Dutch.txt:3:10 - Unknown word (lezen)
+log	samples/Dutch.txt:3:10 - Unknown word (lezen)
 log
-log	./samples/Dutch.txt:3:26 - Unknown word (leveren)
+log	samples/Dutch.txt:3:26 - Unknown word (leveren)
 log
-log	./samples/Dutch.txt:3:38 - Unknown word (iedere)
+log	samples/Dutch.txt:3:38 - Unknown word (iedere)
 log
-log	./samples/Dutch.txt:3:45 - Unknown word (kopie)
+log	samples/Dutch.txt:3:45 - Unknown word (kopie)
 log
-log	./samples/Dutch.txt:3:59 - Unknown word (taalhulpbestand)
+log	samples/Dutch.txt:3:59 - Unknown word (taalhulpbestand)
 log
-log	./samples/Dutch.txt:5:4 - Unknown word (Naam)
+log	samples/Dutch.txt:5:4 - Unknown word (Naam)
 log
-log	./samples/Dutch.txt:5:10 - Unknown word (Nederlandstalige)
+log	samples/Dutch.txt:5:10 - Unknown word (Nederlandstalige)
 log
-log	./samples/Dutch.txt:5:27 - Unknown word (woordenlijst)
+log	samples/Dutch.txt:5:27 - Unknown word (woordenlijst)
 log
-log	./samples/Dutch.txt:5:40 - Unknown word (voor)
+log	samples/Dutch.txt:5:40 - Unknown word (voor)
 log
-log	./samples/Dutch.txt:5:45 - Unknown word (spellingcontrole)
+log	samples/Dutch.txt:5:45 - Unknown word (spellingcontrole)
 log
-log	./samples/Dutch.txt:6:4 - Unknown word (Versie)
+log	samples/Dutch.txt:6:4 - Unknown word (Versie)
 log
-log	./samples/Dutch.txt:6:11 - Unknown word (woordenlijst)
+log	samples/Dutch.txt:6:11 - Unknown word (woordenlijst)
 log
-log	./samples/Dutch.txt:6:32 - Unknown word (versie)
+log	samples/Dutch.txt:6:32 - Unknown word (versie)
 log
-log	./samples/Dutch.txt:6:39 - Unknown word (spellingcontrole)
+log	samples/Dutch.txt:6:39 - Unknown word (spellingcontrole)
 log
-log	./samples/Dutch.txt:7:4 - Unknown word (Vereisten)
+log	samples/Dutch.txt:7:4 - Unknown word (Vereisten)
 log
-log	./samples/Dutch.txt:7:33 - Unknown word (hoger)
+log	samples/Dutch.txt:7:33 - Unknown word (hoger)
 log
-log	./samples/Dutch.txt:8:4 - Unknown word (Keurmerk)
+log	samples/Dutch.txt:8:4 - Unknown word (Keurmerk)
 log
-log	./samples/Dutch.txt:8:22 - Unknown word (Nederlandse)
+log	samples/Dutch.txt:8:22 - Unknown word (Nederlandse)
 log
-log	./samples/Dutch.txt:8:34 - Unknown word (Taalunie)
+log	samples/Dutch.txt:8:34 - Unknown word (Taalunie)
 log
-log	./samples/Dutch.txt:8:47 - Unknown word (lijst)
+log	samples/Dutch.txt:8:47 - Unknown word (lijst)
 log
-log	./samples/Dutch.txt:8:57 - Unknown word (basiswoorden)
+log	samples/Dutch.txt:8:57 - Unknown word (basiswoorden)
 log
-log	./samples/Dutch.txt:9:13 - Unknown word (draagt)
+log	samples/Dutch.txt:9:13 - Unknown word (draagt)
 log
-log	./samples/Dutch.txt:9:24 - Unknown word (keurmerk)
+log	samples/Dutch.txt:9:24 - Unknown word (keurmerk)
 log
-log	./samples/Dutch.txt:9:40 - Unknown word (Nederlandse)
+log	samples/Dutch.txt:9:40 - Unknown word (Nederlandse)
 log
-log	./samples/Dutch.txt:9:52 - Unknown word (Taalunie)
+log	samples/Dutch.txt:9:52 - Unknown word (Taalunie)
 log
-log	./samples/Dutch.txt:9:62 - Unknown word (Voor)
+log	samples/Dutch.txt:9:62 - Unknown word (Voor)
 log
-log	./samples/Dutch.txt:9:67 - Unknown word (meer)
+log	samples/Dutch.txt:9:67 - Unknown word (meer)
 log
-log	./samples/Dutch.txt:10:4 - Unknown word (informatie)
+log	samples/Dutch.txt:10:4 - Unknown word (informatie)
 log
-log	./samples/Dutch.txt:11:4 - Unknown word (Auteursrechten)
+log	samples/Dutch.txt:11:4 - Unknown word (Auteursrechten)
 log
-log	./samples/Dutch.txt:11:60 - Unknown word (Brouwer)
+log	samples/Dutch.txt:11:60 - Unknown word (Brouwer)
 log
-log	./samples/Dutch.txt:12:11 - Unknown word (Nederlandstalige)
+log	samples/Dutch.txt:12:11 - Unknown word (Nederlandstalige)
 log
-log	./samples/Dutch.txt:12:32 - Unknown word (Gebruikersgroep)
+log	samples/Dutch.txt:12:32 - Unknown word (Gebruikersgroep)
 log
-log	./samples/Dutch.txt:13:4 - Unknown word (Licenties)
+log	samples/Dutch.txt:13:4 - Unknown word (Licenties)
 log
-log	./samples/Dutch.txt:13:24 - Unknown word (heeft)
+log	samples/Dutch.txt:13:24 - Unknown word (heeft)
 log
-log	./samples/Dutch.txt:13:34 - Unknown word (doel)
+log	samples/Dutch.txt:13:34 - Unknown word (doel)
 log
-log	./samples/Dutch.txt:13:42 - Unknown word (vrij)
+log	samples/Dutch.txt:13:42 - Unknown word (vrij)
 log
-log	./samples/Dutch.txt:13:47 - Unknown word (beschikbare)
+log	samples/Dutch.txt:13:47 - Unknown word (beschikbare)
 log
-log	./samples/Dutch.txt:13:59 - Unknown word (Nederlandstalige)
+log	samples/Dutch.txt:13:59 - Unknown word (Nederlandstalige)
 log
-log	./samples/Dutch.txt:14:4 - Unknown word (taalhulpbestanden)
+log	samples/Dutch.txt:14:4 - Unknown word (taalhulpbestanden)
 log
-log	./samples/Dutch.txt:14:25 - Unknown word (ontwikkelen)
+log	samples/Dutch.txt:14:25 - Unknown word (ontwikkelen)
 log
-log	./samples/Dutch.txt:14:43 - Unknown word (verspreiden)
+log	samples/Dutch.txt:14:43 - Unknown word (verspreiden)
 log
-log	./samples/Dutch.txt:14:70 - Unknown word (gebruik)
+log	samples/Dutch.txt:14:70 - Unknown word (gebruik)
 log
-log	./samples/Dutch.txt:15:4 - Unknown word (mogelijk)
+log	samples/Dutch.txt:15:4 - Unknown word (mogelijk)
 log
-log	./samples/Dutch.txt:15:16 - Unknown word (maken)
+log	samples/Dutch.txt:15:16 - Unknown word (maken)
 log
-log	./samples/Dutch.txt:15:22 - Unknown word (zijn)
+log	samples/Dutch.txt:15:22 - Unknown word (zijn)
 log
-log	./samples/Dutch.txt:15:30 - Unknown word (taalhulpbestanden)
+log	samples/Dutch.txt:15:30 - Unknown word (taalhulpbestanden)
 log
-log	./samples/Dutch.txt:15:55 - Unknown word (beschikbaar)
+log	samples/Dutch.txt:15:55 - Unknown word (beschikbaar)
 log
-log	./samples/Dutch.txt:15:67 - Unknown word (onder)
+log	samples/Dutch.txt:15:67 - Unknown word (onder)
 log
-log	./samples/Dutch.txt:16:4 - Unknown word (onderstaande)
+log	samples/Dutch.txt:16:4 - Unknown word (onderstaande)
 log
-log	./samples/Dutch.txt:16:18 - Unknown word (liberale)
+log	samples/Dutch.txt:16:18 - Unknown word (liberale)
 log
-log	./samples/Dutch.txt:16:27 - Unknown word (licenties)
+log	samples/Dutch.txt:16:27 - Unknown word (licenties)
 log
-log	./samples/Dutch.txt:16:37 - Unknown word (naar)
+log	samples/Dutch.txt:16:37 - Unknown word (naar)
 log
-log	./samples/Dutch.txt:16:42 - Unknown word (keuze)
+log	samples/Dutch.txt:16:42 - Unknown word (keuze)
 log
-log	./samples/Dutch.txt:16:55 - Unknown word (gebruiker)
+log	samples/Dutch.txt:16:55 - Unknown word (gebruiker)
 log
-log	./samples/Dutch.txt:16:68 - Unknown word (wordt)
+log	samples/Dutch.txt:16:68 - Unknown word (wordt)
 log
-log	./samples/Dutch.txt:17:4 - Unknown word (zeerste)
+log	samples/Dutch.txt:17:4 - Unknown word (zeerste)
 log
-log	./samples/Dutch.txt:17:12 - Unknown word (aangeraden)
+log	samples/Dutch.txt:17:12 - Unknown word (aangeraden)
 log
-log	./samples/Dutch.txt:17:26 - Unknown word (voorafgaand)
+log	samples/Dutch.txt:17:26 - Unknown word (voorafgaand)
 log
-log	./samples/Dutch.txt:17:46 - Unknown word (gebruik)
+log	samples/Dutch.txt:17:46 - Unknown word (gebruik)
 log
-log	./samples/Dutch.txt:17:54 - Unknown word (kennis)
+log	samples/Dutch.txt:17:54 - Unknown word (kennis)
 log
-log	./samples/Dutch.txt:17:64 - Unknown word (nemen)
+log	samples/Dutch.txt:17:64 - Unknown word (nemen)
 log
-log	./samples/Dutch.txt:18:4 - Unknown word (toepasselijke)
+log	samples/Dutch.txt:18:4 - Unknown word (toepasselijke)
 log
-log	./samples/Dutch.txt:18:18 - Unknown word (licentie)
+log	samples/Dutch.txt:18:18 - Unknown word (licentie)
 log
-log	./samples/Dutch.txt:19:12 - Unknown word (herziene)
+log	samples/Dutch.txt:19:12 - Unknown word (herziene)
 log
-log	./samples/Dutch.txt:19:21 - Unknown word (versie)
+log	samples/Dutch.txt:19:21 - Unknown word (versie)
 log
-log	./samples/Dutch.txt:20:6 - Unknown word (Volledige)
+log	samples/Dutch.txt:20:6 - Unknown word (Volledige)
 log
-log	./samples/Dutch.txt:20:16 - Unknown word (licentie)
+log	samples/Dutch.txt:20:16 - Unknown word (licentie)
 log
-log	./samples/Dutch.txt:21:6 - Unknown word (Samenvatting)
+log	samples/Dutch.txt:21:6 - Unknown word (Samenvatting)
 log
-log	./samples/Dutch.txt:22:25 - Unknown word (Naamsvermelding)
+log	samples/Dutch.txt:22:25 - Unknown word (Naamsvermelding)
 log
-log	./samples/Dutch.txt:22:46 - Unknown word (unported)
+log	samples/Dutch.txt:22:46 - Unknown word (unported)
 log
-log	./samples/Dutch.txt:23:6 - Unknown word (Volledige)
+log	samples/Dutch.txt:23:6 - Unknown word (Volledige)
 log
-log	./samples/Dutch.txt:23:16 - Unknown word (licentie)
+log	samples/Dutch.txt:23:16 - Unknown word (licentie)
 log
-log	./samples/Dutch.txt:24:6 - Unknown word (Samenvatting)
+log	samples/Dutch.txt:24:6 - Unknown word (Samenvatting)
 log
-log	./samples/Dutch.txt:25:4 - Unknown word (Steun)
+log	samples/Dutch.txt:25:4 - Unknown word (Steun)
 log
-log	./samples/Dutch.txt:25:36 - Unknown word (vrijwilligersproject)
+log	samples/Dutch.txt:25:36 - Unknown word (vrijwilligersproject)
 log
-log	./samples/Dutch.txt:25:57 - Unknown word (zonder)
+log	samples/Dutch.txt:25:57 - Unknown word (zonder)
 log
-log	./samples/Dutch.txt:25:64 - Unknown word (winstoogmerk)
+log	samples/Dutch.txt:25:64 - Unknown word (winstoogmerk)
 log
-log	./samples/Dutch.txt:26:13 - Unknown word (kleine)
+log	samples/Dutch.txt:26:13 - Unknown word (kleine)
 log
-log	./samples/Dutch.txt:26:21 - Unknown word (financiële)
+log	samples/Dutch.txt:26:21 - Unknown word (financiële)
 log
-log	./samples/Dutch.txt:26:32 - Unknown word (steun)
+log	samples/Dutch.txt:26:32 - Unknown word (steun)
 log
-log	./samples/Dutch.txt:26:51 - Unknown word (meer)
+log	samples/Dutch.txt:26:51 - Unknown word (meer)
 log
-log	./samples/Dutch.txt:26:56 - Unknown word (activiteiten)
+log	samples/Dutch.txt:26:56 - Unknown word (activiteiten)
 log
-log	./samples/Dutch.txt:26:69 - Unknown word (ontplooien)
+log	samples/Dutch.txt:26:69 - Unknown word (ontplooien)
 log
-log	./samples/Dutch.txt:27:19 - Unknown word (professionaliseren)
+log	samples/Dutch.txt:27:19 - Unknown word (professionaliseren)
 log
-log	./samples/Dutch.txt:27:42 - Unknown word (donatie)
+log	samples/Dutch.txt:27:42 - Unknown word (donatie)
 log
-log	./samples/Dutch.txt:27:63 - Unknown word (welkom)
+log	samples/Dutch.txt:27:63 - Unknown word (welkom)
 log
-log	./samples/Dutch.txt:28:4 - Unknown word (rekeningnummer)
+log	samples/Dutch.txt:28:4 - Unknown word (rekeningnummer)
 log
-log	./samples/Dutch.txt:28:39 - Unknown word (Stichting)
+log	samples/Dutch.txt:28:39 - Unknown word (Stichting)
 log
-log	./samples/Dutch.txt:28:62 - Unknown word (giften)
+log	samples/Dutch.txt:28:62 - Unknown word (giften)
 log
-log	./samples/Dutch.txt:28:69 - Unknown word (zijn)
+log	samples/Dutch.txt:28:69 - Unknown word (zijn)
 log
-log	./samples/Dutch.txt:29:4 - Unknown word (aftrekbaar)
+log	samples/Dutch.txt:29:4 - Unknown word (aftrekbaar)
 log
-log	./samples/Dutch.txt:29:22 - Unknown word (belasting)
+log	samples/Dutch.txt:29:22 - Unknown word (belasting)
 log
-log	./samples/Dutch.txt:29:33 - Unknown word (Stichting)
+log	samples/Dutch.txt:29:33 - Unknown word (Stichting)
 log
-log	./samples/Dutch.txt:29:55 - Unknown word (namelijk)
+log	samples/Dutch.txt:29:55 - Unknown word (namelijk)
 log
-log	./samples/Dutch.txt:30:4 - Unknown word (Belastingdienst)
+log	samples/Dutch.txt:30:4 - Unknown word (Belastingdienst)
 log
-log	./samples/Dutch.txt:30:20 - Unknown word (erkend)
+log	samples/Dutch.txt:30:20 - Unknown word (erkend)
 log
-log	./samples/Dutch.txt:30:31 - Unknown word (ANBI)
+log	samples/Dutch.txt:30:31 - Unknown word (ANBI)
 log
-log	./samples/Dutch.txt:30:37 - Unknown word (oftewel)
+log	samples/Dutch.txt:30:37 - Unknown word (oftewel)
 log
-log	./samples/Dutch.txt:30:46 - Unknown word (Algemeen)
+log	samples/Dutch.txt:30:46 - Unknown word (Algemeen)
 log
-log	./samples/Dutch.txt:30:59 - Unknown word (Beogende)
+log	samples/Dutch.txt:30:59 - Unknown word (Beogende)
 log
-log	./samples/Dutch.txt:30:68 - Unknown word (Instelling)
+log	samples/Dutch.txt:30:68 - Unknown word (Instelling)
 log
-log	./samples/Dutch.txt:32:4 - Unknown word (Meedoen)
+log	samples/Dutch.txt:32:4 - Unknown word (Meedoen)
 log
-log	./samples/Dutch.txt:32:13 - Unknown word (Iedereen)
+log	samples/Dutch.txt:32:13 - Unknown word (Iedereen)
 log
-log	./samples/Dutch.txt:32:25 - Unknown word (welkom)
+log	samples/Dutch.txt:32:25 - Unknown word (welkom)
 log
-log	./samples/Dutch.txt:32:42 - Unknown word (doen)
+log	samples/Dutch.txt:32:42 - Unknown word (doen)
 log
-log	./samples/Dutch.txt:32:53 - Unknown word (fouten)
+log	samples/Dutch.txt:32:53 - Unknown word (fouten)
 log
-log	./samples/Dutch.txt:32:61 - Unknown word (discussieer)
+log	samples/Dutch.txt:32:61 - Unknown word (discussieer)
 log
-log	./samples/Dutch.txt:33:7 - Unknown word (mailinglijst)
+log	samples/Dutch.txt:33:7 - Unknown word (mailinglijst)
 log
-log	./samples/Dutch.txt:33:23 - Unknown word (draai)
+log	samples/Dutch.txt:33:23 - Unknown word (draai)
 log
-log	./samples/Dutch.txt:33:52 - Unknown word (dragen)
+log	samples/Dutch.txt:33:52 - Unknown word (dragen)
 log
-log	./samples/Dutch.txt:33:75 - Unknown word (stemt)
+log	samples/Dutch.txt:33:75 - Unknown word (stemt)
 log
-log	./samples/Dutch.txt:34:6 - Unknown word (ermee)
+log	samples/Dutch.txt:34:6 - Unknown word (ermee)
 log
-log	./samples/Dutch.txt:34:22 - Unknown word (bijdrage)
+log	samples/Dutch.txt:34:22 - Unknown word (bijdrage)
 log
-log	./samples/Dutch.txt:34:39 - Unknown word (desbetreffende)
+log	samples/Dutch.txt:34:39 - Unknown word (desbetreffende)
 log
-log	./samples/Dutch.txt:34:54 - Unknown word (taalhulpbestand)
+log	samples/Dutch.txt:34:54 - Unknown word (taalhulpbestand)
 log
-log	./samples/Dutch.txt:34:70 - Unknown word (beschikbaar)
+log	samples/Dutch.txt:34:70 - Unknown word (beschikbaar)
 log
-log	./samples/Dutch.txt:35:4 - Unknown word (komt)
+log	samples/Dutch.txt:35:4 - Unknown word (komt)
 log
-log	./samples/Dutch.txt:35:9 - Unknown word (onder)
+log	samples/Dutch.txt:35:9 - Unknown word (onder)
 log
-log	./samples/Dutch.txt:35:15 - Unknown word (vrije)
+log	samples/Dutch.txt:35:15 - Unknown word (vrije)
 log
-log	./samples/Dutch.txt:35:27 - Unknown word (opensource)
+log	samples/Dutch.txt:35:27 - Unknown word (opensource)
 log
-log	./samples/Dutch.txt:35:38 - Unknown word (licenties)
+log	samples/Dutch.txt:35:38 - Unknown word (licenties)
 log
-log	./samples/Dutch.txt:35:49 - Unknown word (Indien)
+log	samples/Dutch.txt:35:49 - Unknown word (Indien)
 log
-log	./samples/Dutch.txt:35:62 - Unknown word (wenst)
+log	samples/Dutch.txt:35:62 - Unknown word (wenst)
 log
-log	./samples/Dutch.txt:36:4 - Unknown word (naam)
+log	samples/Dutch.txt:36:4 - Unknown word (naam)
 log
-log	./samples/Dutch.txt:36:23 - Unknown word (genoemd)
+log	samples/Dutch.txt:36:23 - Unknown word (genoemd)
 log
-log	./samples/Dutch.txt:36:31 - Unknown word (worden)
+log	samples/Dutch.txt:36:31 - Unknown word (worden)
 log
-log	./samples/Dutch.txt:36:42 - Unknown word (ontvangen)
+log	samples/Dutch.txt:36:42 - Unknown word (ontvangen)
 log
-log	./samples/Dutch.txt:36:55 - Unknown word (schriftelijk)
+log	samples/Dutch.txt:36:55 - Unknown word (schriftelijk)
 log
-log	./samples/Dutch.txt:36:68 - Unknown word (verzoek)
+log	samples/Dutch.txt:36:68 - Unknown word (verzoek)
 log
-log	./samples/Dutch.txt:37:4 - Unknown word (daarvoor)
+log	samples/Dutch.txt:37:4 - Unknown word (daarvoor)
 log
-log	./samples/Dutch.txt:37:13 - Unknown word (graag)
+log	samples/Dutch.txt:37:13 - Unknown word (graag)
 log
-log	./samples/Dutch.txt:38:4 - Unknown word (Rechten)
+log	samples/Dutch.txt:38:4 - Unknown word (Rechten)
 log
-log	./samples/Dutch.txt:38:16 - Unknown word (derden)
+log	samples/Dutch.txt:38:16 - Unknown word (derden)
 log
-log	./samples/Dutch.txt:38:33 - Unknown word (respecteert)
+log	samples/Dutch.txt:38:33 - Unknown word (respecteert)
 log
-log	./samples/Dutch.txt:38:48 - Unknown word (rechten)
+log	samples/Dutch.txt:38:48 - Unknown word (rechten)
 log
-log	./samples/Dutch.txt:38:60 - Unknown word (derden)
+log	samples/Dutch.txt:38:60 - Unknown word (derden)
 log
-log	./samples/Dutch.txt:39:13 - Unknown word (gegevens)
+log	samples/Dutch.txt:39:13 - Unknown word (gegevens)
 log
-log	./samples/Dutch.txt:39:22 - Unknown word (vrij)
+log	samples/Dutch.txt:39:22 - Unknown word (vrij)
 log
-log	./samples/Dutch.txt:39:27 - Unknown word (beschikbaar)
+log	samples/Dutch.txt:39:27 - Unknown word (beschikbaar)
 log
-log	./samples/Dutch.txt:39:39 - Unknown word (houden)
+log	samples/Dutch.txt:39:39 - Unknown word (houden)
 log
-log	./samples/Dutch.txt:39:47 - Unknown word (Voor)
+log	samples/Dutch.txt:39:47 - Unknown word (Voor)
 log
-log	./samples/Dutch.txt:39:52 - Unknown word (bijdragen)
+log	samples/Dutch.txt:39:52 - Unknown word (bijdragen)
 log
-log	./samples/Dutch.txt:40:6 - Unknown word (daarom)
+log	samples/Dutch.txt:40:6 - Unknown word (daarom)
 log
-log	./samples/Dutch.txt:40:13 - Unknown word (niet)
+log	samples/Dutch.txt:40:13 - Unknown word (niet)
 log
-log	./samples/Dutch.txt:40:18 - Unknown word (zonder)
+log	samples/Dutch.txt:40:18 - Unknown word (zonder)
 log
-log	./samples/Dutch.txt:40:25 - Unknown word (toestemming)
+log	samples/Dutch.txt:40:25 - Unknown word (toestemming)
 log
-log	./samples/Dutch.txt:40:37 - Unknown word (gebruikmaken)
+log	samples/Dutch.txt:40:37 - Unknown word (gebruikmaken)
 log
-log	./samples/Dutch.txt:40:54 - Unknown word (beschermde)
+log	samples/Dutch.txt:40:54 - Unknown word (beschermde)
 log
-log	./samples/Dutch.txt:40:65 - Unknown word (naslagwerken)
+log	samples/Dutch.txt:40:65 - Unknown word (naslagwerken)
 log
-log	./samples/Dutch.txt:41:4 - Unknown word (zoals)
+log	samples/Dutch.txt:41:4 - Unknown word (zoals)
 log
-log	./samples/Dutch.txt:41:10 - Unknown word (woordenboeken)
+log	samples/Dutch.txt:41:10 - Unknown word (woordenboeken)
 log
-log	./samples/Dutch.txt:41:36 - Unknown word (toegestaan)
+log	samples/Dutch.txt:41:36 - Unknown word (toegestaan)
 log
-log	./samples/Dutch.txt:41:50 - Unknown word (gebruik)
+log	samples/Dutch.txt:41:50 - Unknown word (gebruik)
 log
-log	./samples/Dutch.txt:41:61 - Unknown word (maken)
+log	samples/Dutch.txt:41:61 - Unknown word (maken)
 log
-log	./samples/Dutch.txt:42:4 - Unknown word (materialen)
+log	samples/Dutch.txt:42:4 - Unknown word (materialen)
 log
-log	./samples/Dutch.txt:42:22 - Unknown word (Nederlandse)
+log	samples/Dutch.txt:42:22 - Unknown word (Nederlandse)
 log
-log	./samples/Dutch.txt:42:34 - Unknown word (Taalunie)
+log	samples/Dutch.txt:42:34 - Unknown word (Taalunie)
 log
-log	./samples/Dutch.txt:42:44 - Unknown word (zoals)
+log	samples/Dutch.txt:42:44 - Unknown word (zoals)
 log
-log	./samples/Dutch.txt:42:53 - Unknown word (leidraad)
+log	samples/Dutch.txt:42:53 - Unknown word (leidraad)
 log
-log	./samples/Dutch.txt:42:68 - Unknown word (woordenlijst)
+log	samples/Dutch.txt:42:68 - Unknown word (woordenlijst)
 log
-log	./samples/Dutch.txt:43:4 - Unknown word (Indien)
+log	samples/Dutch.txt:43:4 - Unknown word (Indien)
 log
-log	./samples/Dutch.txt:43:17 - Unknown word (mening)
+log	samples/Dutch.txt:43:17 - Unknown word (mening)
 log
-log	./samples/Dutch.txt:43:42 - Unknown word (inbreuk)
+log	samples/Dutch.txt:43:42 - Unknown word (inbreuk)
 log
-log	./samples/Dutch.txt:43:50 - Unknown word (maakt)
+log	samples/Dutch.txt:43:50 - Unknown word (maakt)
 log
-log	./samples/Dutch.txt:43:62 - Unknown word (rechten)
+log	samples/Dutch.txt:43:62 - Unknown word (rechten)
 log
-log	./samples/Dutch.txt:44:4 - Unknown word (verzoeken)
+log	samples/Dutch.txt:44:4 - Unknown word (verzoeken)
 log
-log	./samples/Dutch.txt:44:19 - Unknown word (hierover)
+log	samples/Dutch.txt:44:19 - Unknown word (hierover)
 log
-log	./samples/Dutch.txt:44:31 - Unknown word (spoedig)
+log	samples/Dutch.txt:44:31 - Unknown word (spoedig)
 log
-log	./samples/Dutch.txt:44:39 - Unknown word (mogelijk)
+log	samples/Dutch.txt:44:39 - Unknown word (mogelijk)
 log
-log	./samples/Dutch.txt:44:48 - Unknown word (schriftelijk)
+log	samples/Dutch.txt:44:48 - Unknown word (schriftelijk)
 log
-log	./samples/Dutch.txt:45:7 - Unknown word (nemen)
+log	samples/Dutch.txt:45:7 - Unknown word (nemen)
 log
-log	./samples/Dutch.txt:46:13 - Unknown word (Stichting)
+log	samples/Dutch.txt:46:13 - Unknown word (Stichting)
 log
-log	./samples/Dutch.txt:59:56 - Unknown word (Brouwer)
+log	samples/Dutch.txt:59:56 - Unknown word (Brouwer)
 log
-log	./samples/Dutch.txt:60:11 - Unknown word (Nederlandstalige)
+log	samples/Dutch.txt:60:11 - Unknown word (Nederlandstalige)
 log
-log	./samples/Dutch.txt:60:32 - Unknown word (Gebruikersgroep)
+log	samples/Dutch.txt:60:32 - Unknown word (Gebruikersgroep)
 log
-log	./samples/Dutch.txt:68:42 - Unknown word (unported)
+log	samples/Dutch.txt:68:42 - Unknown word (unported)
 log
-log	./samples/Dutch.txt:74:39 - Unknown word (RABONL)
+log	samples/Dutch.txt:74:39 - Unknown word (RABONL)
 log
-log	./samples/Dutch.txt:74:49 - Unknown word (IBAN)
+log	samples/Dutch.txt:74:49 - Unknown word (IBAN)
 log
-log	./samples/Dutch.txt:74:59 - Unknown word (RABO)
+log	samples/Dutch.txt:74:59 - Unknown word (RABO)
 log
-log	./samples/Dutch.txt:75:4 - Unknown word (Stichting)
+log	samples/Dutch.txt:75:4 - Unknown word (Stichting)
 log
-log	./samples/Dutch.txt:77:58 - Unknown word (algemeen)
+log	samples/Dutch.txt:77:58 - Unknown word (algemeen)
 log
-log	./samples/Dutch.txt:77:71 - Unknown word (beogende)
+log	samples/Dutch.txt:77:71 - Unknown word (beogende)
 log
-log	./samples/Dutch.txt:78:4 - Unknown word (instelling)
+log	samples/Dutch.txt:78:4 - Unknown word (instelling)
 log
-log	./samples/Dutch.txt:78:18 - Unknown word (ANBI)
+log	samples/Dutch.txt:78:18 - Unknown word (ANBI)
 log
 error	-------------------------------------------
 error
 error	Issues found:
 error
-error	./samples/Dutch.txt:1:32 - Unknown word (NEDERLANDS)
+error	samples/Dutch.txt:1:32 - Unknown word (NEDERLANDS)
 error
-error	./samples/Dutch.txt:2:11 - Unknown word (wordt)
+error	samples/Dutch.txt:2:11 - Unknown word (wordt)
 error
-error	./samples/Dutch.txt:2:17 - Unknown word (vriendelijk)
+error	samples/Dutch.txt:2:17 - Unknown word (vriendelijk)
 error
-error	./samples/Dutch.txt:2:29 - Unknown word (verzocht)
+error	samples/Dutch.txt:2:29 - Unknown word (verzocht)
 error
-error	./samples/Dutch.txt:2:45 - Unknown word (bestand)
+error	samples/Dutch.txt:2:45 - Unknown word (bestand)
 error
-error	./samples/Dutch.txt:3:10 - Unknown word (lezen)
+error	samples/Dutch.txt:3:10 - Unknown word (lezen)
 error
-error	./samples/Dutch.txt:3:26 - Unknown word (leveren)
+error	samples/Dutch.txt:3:26 - Unknown word (leveren)
 error
-error	./samples/Dutch.txt:3:38 - Unknown word (iedere)
+error	samples/Dutch.txt:3:38 - Unknown word (iedere)
 error
-error	./samples/Dutch.txt:3:45 - Unknown word (kopie)
+error	samples/Dutch.txt:3:45 - Unknown word (kopie)
 error
-error	./samples/Dutch.txt:3:59 - Unknown word (taalhulpbestand)
+error	samples/Dutch.txt:3:59 - Unknown word (taalhulpbestand)
 error
-error	./samples/Dutch.txt:5:4 - Unknown word (Naam)
+error	samples/Dutch.txt:5:4 - Unknown word (Naam)
 error
-error	./samples/Dutch.txt:5:10 - Unknown word (Nederlandstalige)
+error	samples/Dutch.txt:5:10 - Unknown word (Nederlandstalige)
 error
-error	./samples/Dutch.txt:5:27 - Unknown word (woordenlijst)
+error	samples/Dutch.txt:5:27 - Unknown word (woordenlijst)
 error
-error	./samples/Dutch.txt:5:40 - Unknown word (voor)
+error	samples/Dutch.txt:5:40 - Unknown word (voor)
 error
-error	./samples/Dutch.txt:5:45 - Unknown word (spellingcontrole)
+error	samples/Dutch.txt:5:45 - Unknown word (spellingcontrole)
 error
-error	./samples/Dutch.txt:6:4 - Unknown word (Versie)
+error	samples/Dutch.txt:6:4 - Unknown word (Versie)
 error
-error	./samples/Dutch.txt:6:11 - Unknown word (woordenlijst)
+error	samples/Dutch.txt:6:11 - Unknown word (woordenlijst)
 error
-error	./samples/Dutch.txt:6:32 - Unknown word (versie)
+error	samples/Dutch.txt:6:32 - Unknown word (versie)
 error
-error	./samples/Dutch.txt:6:39 - Unknown word (spellingcontrole)
+error	samples/Dutch.txt:6:39 - Unknown word (spellingcontrole)
 error
-error	./samples/Dutch.txt:7:4 - Unknown word (Vereisten)
+error	samples/Dutch.txt:7:4 - Unknown word (Vereisten)
 error
-error	./samples/Dutch.txt:7:33 - Unknown word (hoger)
+error	samples/Dutch.txt:7:33 - Unknown word (hoger)
 error
-error	./samples/Dutch.txt:8:4 - Unknown word (Keurmerk)
+error	samples/Dutch.txt:8:4 - Unknown word (Keurmerk)
 error
-error	./samples/Dutch.txt:8:22 - Unknown word (Nederlandse)
+error	samples/Dutch.txt:8:22 - Unknown word (Nederlandse)
 error
-error	./samples/Dutch.txt:8:34 - Unknown word (Taalunie)
+error	samples/Dutch.txt:8:34 - Unknown word (Taalunie)
 error
-error	./samples/Dutch.txt:8:47 - Unknown word (lijst)
+error	samples/Dutch.txt:8:47 - Unknown word (lijst)
 error
-error	./samples/Dutch.txt:8:57 - Unknown word (basiswoorden)
+error	samples/Dutch.txt:8:57 - Unknown word (basiswoorden)
 error
-error	./samples/Dutch.txt:9:13 - Unknown word (draagt)
+error	samples/Dutch.txt:9:13 - Unknown word (draagt)
 error
-error	./samples/Dutch.txt:9:24 - Unknown word (keurmerk)
+error	samples/Dutch.txt:9:24 - Unknown word (keurmerk)
 error
-error	./samples/Dutch.txt:9:40 - Unknown word (Nederlandse)
+error	samples/Dutch.txt:9:40 - Unknown word (Nederlandse)
 error
-error	./samples/Dutch.txt:9:52 - Unknown word (Taalunie)
+error	samples/Dutch.txt:9:52 - Unknown word (Taalunie)
 error
-error	./samples/Dutch.txt:9:62 - Unknown word (Voor)
+error	samples/Dutch.txt:9:62 - Unknown word (Voor)
 error
-error	./samples/Dutch.txt:9:67 - Unknown word (meer)
+error	samples/Dutch.txt:9:67 - Unknown word (meer)
 error
-error	./samples/Dutch.txt:10:4 - Unknown word (informatie)
+error	samples/Dutch.txt:10:4 - Unknown word (informatie)
 error
-error	./samples/Dutch.txt:11:4 - Unknown word (Auteursrechten)
+error	samples/Dutch.txt:11:4 - Unknown word (Auteursrechten)
 error
-error	./samples/Dutch.txt:11:60 - Unknown word (Brouwer)
+error	samples/Dutch.txt:11:60 - Unknown word (Brouwer)
 error
-error	./samples/Dutch.txt:12:11 - Unknown word (Nederlandstalige)
+error	samples/Dutch.txt:12:11 - Unknown word (Nederlandstalige)
 error
-error	./samples/Dutch.txt:12:32 - Unknown word (Gebruikersgroep)
+error	samples/Dutch.txt:12:32 - Unknown word (Gebruikersgroep)
 error
-error	./samples/Dutch.txt:13:4 - Unknown word (Licenties)
+error	samples/Dutch.txt:13:4 - Unknown word (Licenties)
 error
-error	./samples/Dutch.txt:13:24 - Unknown word (heeft)
+error	samples/Dutch.txt:13:24 - Unknown word (heeft)
 error
-error	./samples/Dutch.txt:13:34 - Unknown word (doel)
+error	samples/Dutch.txt:13:34 - Unknown word (doel)
 error
-error	./samples/Dutch.txt:13:42 - Unknown word (vrij)
+error	samples/Dutch.txt:13:42 - Unknown word (vrij)
 error
-error	./samples/Dutch.txt:13:47 - Unknown word (beschikbare)
+error	samples/Dutch.txt:13:47 - Unknown word (beschikbare)
 error
-error	./samples/Dutch.txt:13:59 - Unknown word (Nederlandstalige)
+error	samples/Dutch.txt:13:59 - Unknown word (Nederlandstalige)
 error
-error	./samples/Dutch.txt:14:4 - Unknown word (taalhulpbestanden)
+error	samples/Dutch.txt:14:4 - Unknown word (taalhulpbestanden)
 error
-error	./samples/Dutch.txt:14:25 - Unknown word (ontwikkelen)
+error	samples/Dutch.txt:14:25 - Unknown word (ontwikkelen)
 error
-error	./samples/Dutch.txt:14:43 - Unknown word (verspreiden)
+error	samples/Dutch.txt:14:43 - Unknown word (verspreiden)
 error
-error	./samples/Dutch.txt:14:70 - Unknown word (gebruik)
+error	samples/Dutch.txt:14:70 - Unknown word (gebruik)
 error
-error	./samples/Dutch.txt:15:4 - Unknown word (mogelijk)
+error	samples/Dutch.txt:15:4 - Unknown word (mogelijk)
 error
-error	./samples/Dutch.txt:15:16 - Unknown word (maken)
+error	samples/Dutch.txt:15:16 - Unknown word (maken)
 error
-error	./samples/Dutch.txt:15:22 - Unknown word (zijn)
+error	samples/Dutch.txt:15:22 - Unknown word (zijn)
 error
-error	./samples/Dutch.txt:15:30 - Unknown word (taalhulpbestanden)
+error	samples/Dutch.txt:15:30 - Unknown word (taalhulpbestanden)
 error
-error	./samples/Dutch.txt:15:55 - Unknown word (beschikbaar)
+error	samples/Dutch.txt:15:55 - Unknown word (beschikbaar)
 error
-error	./samples/Dutch.txt:15:67 - Unknown word (onder)
+error	samples/Dutch.txt:15:67 - Unknown word (onder)
 error
-error	./samples/Dutch.txt:16:4 - Unknown word (onderstaande)
+error	samples/Dutch.txt:16:4 - Unknown word (onderstaande)
 error
-error	./samples/Dutch.txt:16:18 - Unknown word (liberale)
+error	samples/Dutch.txt:16:18 - Unknown word (liberale)
 error
-error	./samples/Dutch.txt:16:27 - Unknown word (licenties)
+error	samples/Dutch.txt:16:27 - Unknown word (licenties)
 error
-error	./samples/Dutch.txt:16:37 - Unknown word (naar)
+error	samples/Dutch.txt:16:37 - Unknown word (naar)
 error
-error	./samples/Dutch.txt:16:42 - Unknown word (keuze)
+error	samples/Dutch.txt:16:42 - Unknown word (keuze)
 error
-error	./samples/Dutch.txt:16:55 - Unknown word (gebruiker)
+error	samples/Dutch.txt:16:55 - Unknown word (gebruiker)
 error
-error	./samples/Dutch.txt:16:68 - Unknown word (wordt)
+error	samples/Dutch.txt:16:68 - Unknown word (wordt)
 error
-error	./samples/Dutch.txt:17:4 - Unknown word (zeerste)
+error	samples/Dutch.txt:17:4 - Unknown word (zeerste)
 error
-error	./samples/Dutch.txt:17:12 - Unknown word (aangeraden)
+error	samples/Dutch.txt:17:12 - Unknown word (aangeraden)
 error
-error	./samples/Dutch.txt:17:26 - Unknown word (voorafgaand)
+error	samples/Dutch.txt:17:26 - Unknown word (voorafgaand)
 error
-error	./samples/Dutch.txt:17:46 - Unknown word (gebruik)
+error	samples/Dutch.txt:17:46 - Unknown word (gebruik)
 error
-error	./samples/Dutch.txt:17:54 - Unknown word (kennis)
+error	samples/Dutch.txt:17:54 - Unknown word (kennis)
 error
-error	./samples/Dutch.txt:17:64 - Unknown word (nemen)
+error	samples/Dutch.txt:17:64 - Unknown word (nemen)
 error
-error	./samples/Dutch.txt:18:4 - Unknown word (toepasselijke)
+error	samples/Dutch.txt:18:4 - Unknown word (toepasselijke)
 error
-error	./samples/Dutch.txt:18:18 - Unknown word (licentie)
+error	samples/Dutch.txt:18:18 - Unknown word (licentie)
 error
-error	./samples/Dutch.txt:19:12 - Unknown word (herziene)
+error	samples/Dutch.txt:19:12 - Unknown word (herziene)
 error
-error	./samples/Dutch.txt:19:21 - Unknown word (versie)
+error	samples/Dutch.txt:19:21 - Unknown word (versie)
 error
-error	./samples/Dutch.txt:20:6 - Unknown word (Volledige)
+error	samples/Dutch.txt:20:6 - Unknown word (Volledige)
 error
-error	./samples/Dutch.txt:20:16 - Unknown word (licentie)
+error	samples/Dutch.txt:20:16 - Unknown word (licentie)
 error
-error	./samples/Dutch.txt:21:6 - Unknown word (Samenvatting)
+error	samples/Dutch.txt:21:6 - Unknown word (Samenvatting)
 error
-error	./samples/Dutch.txt:22:25 - Unknown word (Naamsvermelding)
+error	samples/Dutch.txt:22:25 - Unknown word (Naamsvermelding)
 error
-error	./samples/Dutch.txt:22:46 - Unknown word (unported)
+error	samples/Dutch.txt:22:46 - Unknown word (unported)
 error
-error	./samples/Dutch.txt:23:6 - Unknown word (Volledige)
+error	samples/Dutch.txt:23:6 - Unknown word (Volledige)
 error
-error	./samples/Dutch.txt:23:16 - Unknown word (licentie)
+error	samples/Dutch.txt:23:16 - Unknown word (licentie)
 error
-error	./samples/Dutch.txt:24:6 - Unknown word (Samenvatting)
+error	samples/Dutch.txt:24:6 - Unknown word (Samenvatting)
 error
-error	./samples/Dutch.txt:25:4 - Unknown word (Steun)
+error	samples/Dutch.txt:25:4 - Unknown word (Steun)
 error
-error	./samples/Dutch.txt:25:36 - Unknown word (vrijwilligersproject)
+error	samples/Dutch.txt:25:36 - Unknown word (vrijwilligersproject)
 error
-error	./samples/Dutch.txt:25:57 - Unknown word (zonder)
+error	samples/Dutch.txt:25:57 - Unknown word (zonder)
 error
-error	./samples/Dutch.txt:25:64 - Unknown word (winstoogmerk)
+error	samples/Dutch.txt:25:64 - Unknown word (winstoogmerk)
 error
-error	./samples/Dutch.txt:26:13 - Unknown word (kleine)
+error	samples/Dutch.txt:26:13 - Unknown word (kleine)
 error
-error	./samples/Dutch.txt:26:21 - Unknown word (financiële)
+error	samples/Dutch.txt:26:21 - Unknown word (financiële)
 error
-error	./samples/Dutch.txt:26:32 - Unknown word (steun)
+error	samples/Dutch.txt:26:32 - Unknown word (steun)
 error
-error	./samples/Dutch.txt:26:51 - Unknown word (meer)
+error	samples/Dutch.txt:26:51 - Unknown word (meer)
 error
-error	./samples/Dutch.txt:26:56 - Unknown word (activiteiten)
+error	samples/Dutch.txt:26:56 - Unknown word (activiteiten)
 error
-error	./samples/Dutch.txt:26:69 - Unknown word (ontplooien)
+error	samples/Dutch.txt:26:69 - Unknown word (ontplooien)
 error
-error	./samples/Dutch.txt:27:19 - Unknown word (professionaliseren)
+error	samples/Dutch.txt:27:19 - Unknown word (professionaliseren)
 error
-error	./samples/Dutch.txt:27:42 - Unknown word (donatie)
+error	samples/Dutch.txt:27:42 - Unknown word (donatie)
 error
-error	./samples/Dutch.txt:27:63 - Unknown word (welkom)
+error	samples/Dutch.txt:27:63 - Unknown word (welkom)
 error
-error	./samples/Dutch.txt:28:4 - Unknown word (rekeningnummer)
+error	samples/Dutch.txt:28:4 - Unknown word (rekeningnummer)
 error
-error	./samples/Dutch.txt:28:39 - Unknown word (Stichting)
+error	samples/Dutch.txt:28:39 - Unknown word (Stichting)
 error
-error	./samples/Dutch.txt:28:62 - Unknown word (giften)
+error	samples/Dutch.txt:28:62 - Unknown word (giften)
 error
-error	./samples/Dutch.txt:28:69 - Unknown word (zijn)
+error	samples/Dutch.txt:28:69 - Unknown word (zijn)
 error
-error	./samples/Dutch.txt:29:4 - Unknown word (aftrekbaar)
+error	samples/Dutch.txt:29:4 - Unknown word (aftrekbaar)
 error
-error	./samples/Dutch.txt:29:22 - Unknown word (belasting)
+error	samples/Dutch.txt:29:22 - Unknown word (belasting)
 error
-error	./samples/Dutch.txt:29:33 - Unknown word (Stichting)
+error	samples/Dutch.txt:29:33 - Unknown word (Stichting)
 error
-error	./samples/Dutch.txt:29:55 - Unknown word (namelijk)
+error	samples/Dutch.txt:29:55 - Unknown word (namelijk)
 error
-error	./samples/Dutch.txt:30:4 - Unknown word (Belastingdienst)
+error	samples/Dutch.txt:30:4 - Unknown word (Belastingdienst)
 error
-error	./samples/Dutch.txt:30:20 - Unknown word (erkend)
+error	samples/Dutch.txt:30:20 - Unknown word (erkend)
 error
-error	./samples/Dutch.txt:30:31 - Unknown word (ANBI)
+error	samples/Dutch.txt:30:31 - Unknown word (ANBI)
 error
-error	./samples/Dutch.txt:30:37 - Unknown word (oftewel)
+error	samples/Dutch.txt:30:37 - Unknown word (oftewel)
 error
-error	./samples/Dutch.txt:30:46 - Unknown word (Algemeen)
+error	samples/Dutch.txt:30:46 - Unknown word (Algemeen)
 error
-error	./samples/Dutch.txt:30:59 - Unknown word (Beogende)
+error	samples/Dutch.txt:30:59 - Unknown word (Beogende)
 error
-error	./samples/Dutch.txt:30:68 - Unknown word (Instelling)
+error	samples/Dutch.txt:30:68 - Unknown word (Instelling)
 error
-error	./samples/Dutch.txt:32:4 - Unknown word (Meedoen)
+error	samples/Dutch.txt:32:4 - Unknown word (Meedoen)
 error
-error	./samples/Dutch.txt:32:13 - Unknown word (Iedereen)
+error	samples/Dutch.txt:32:13 - Unknown word (Iedereen)
 error
-error	./samples/Dutch.txt:32:25 - Unknown word (welkom)
+error	samples/Dutch.txt:32:25 - Unknown word (welkom)
 error
-error	./samples/Dutch.txt:32:42 - Unknown word (doen)
+error	samples/Dutch.txt:32:42 - Unknown word (doen)
 error
-error	./samples/Dutch.txt:32:53 - Unknown word (fouten)
+error	samples/Dutch.txt:32:53 - Unknown word (fouten)
 error
-error	./samples/Dutch.txt:32:61 - Unknown word (discussieer)
+error	samples/Dutch.txt:32:61 - Unknown word (discussieer)
 error
-error	./samples/Dutch.txt:33:7 - Unknown word (mailinglijst)
+error	samples/Dutch.txt:33:7 - Unknown word (mailinglijst)
 error
-error	./samples/Dutch.txt:33:23 - Unknown word (draai)
+error	samples/Dutch.txt:33:23 - Unknown word (draai)
 error
-error	./samples/Dutch.txt:33:52 - Unknown word (dragen)
+error	samples/Dutch.txt:33:52 - Unknown word (dragen)
 error
-error	./samples/Dutch.txt:33:75 - Unknown word (stemt)
+error	samples/Dutch.txt:33:75 - Unknown word (stemt)
 error
-error	./samples/Dutch.txt:34:6 - Unknown word (ermee)
+error	samples/Dutch.txt:34:6 - Unknown word (ermee)
 error
-error	./samples/Dutch.txt:34:22 - Unknown word (bijdrage)
+error	samples/Dutch.txt:34:22 - Unknown word (bijdrage)
 error
-error	./samples/Dutch.txt:34:39 - Unknown word (desbetreffende)
+error	samples/Dutch.txt:34:39 - Unknown word (desbetreffende)
 error
-error	./samples/Dutch.txt:34:54 - Unknown word (taalhulpbestand)
+error	samples/Dutch.txt:34:54 - Unknown word (taalhulpbestand)
 error
-error	./samples/Dutch.txt:34:70 - Unknown word (beschikbaar)
+error	samples/Dutch.txt:34:70 - Unknown word (beschikbaar)
 error
-error	./samples/Dutch.txt:35:4 - Unknown word (komt)
+error	samples/Dutch.txt:35:4 - Unknown word (komt)
 error
-error	./samples/Dutch.txt:35:9 - Unknown word (onder)
+error	samples/Dutch.txt:35:9 - Unknown word (onder)
 error
-error	./samples/Dutch.txt:35:15 - Unknown word (vrije)
+error	samples/Dutch.txt:35:15 - Unknown word (vrije)
 error
-error	./samples/Dutch.txt:35:27 - Unknown word (opensource)
+error	samples/Dutch.txt:35:27 - Unknown word (opensource)
 error
-error	./samples/Dutch.txt:35:38 - Unknown word (licenties)
+error	samples/Dutch.txt:35:38 - Unknown word (licenties)
 error
-error	./samples/Dutch.txt:35:49 - Unknown word (Indien)
+error	samples/Dutch.txt:35:49 - Unknown word (Indien)
 error
-error	./samples/Dutch.txt:35:62 - Unknown word (wenst)
+error	samples/Dutch.txt:35:62 - Unknown word (wenst)
 error
-error	./samples/Dutch.txt:36:4 - Unknown word (naam)
+error	samples/Dutch.txt:36:4 - Unknown word (naam)
 error
-error	./samples/Dutch.txt:36:23 - Unknown word (genoemd)
+error	samples/Dutch.txt:36:23 - Unknown word (genoemd)
 error
-error	./samples/Dutch.txt:36:31 - Unknown word (worden)
+error	samples/Dutch.txt:36:31 - Unknown word (worden)
 error
-error	./samples/Dutch.txt:36:42 - Unknown word (ontvangen)
+error	samples/Dutch.txt:36:42 - Unknown word (ontvangen)
 error
-error	./samples/Dutch.txt:36:55 - Unknown word (schriftelijk)
+error	samples/Dutch.txt:36:55 - Unknown word (schriftelijk)
 error
-error	./samples/Dutch.txt:36:68 - Unknown word (verzoek)
+error	samples/Dutch.txt:36:68 - Unknown word (verzoek)
 error
-error	./samples/Dutch.txt:37:4 - Unknown word (daarvoor)
+error	samples/Dutch.txt:37:4 - Unknown word (daarvoor)
 error
-error	./samples/Dutch.txt:37:13 - Unknown word (graag)
+error	samples/Dutch.txt:37:13 - Unknown word (graag)
 error
-error	./samples/Dutch.txt:38:4 - Unknown word (Rechten)
+error	samples/Dutch.txt:38:4 - Unknown word (Rechten)
 error
-error	./samples/Dutch.txt:38:16 - Unknown word (derden)
+error	samples/Dutch.txt:38:16 - Unknown word (derden)
 error
-error	./samples/Dutch.txt:38:33 - Unknown word (respecteert)
+error	samples/Dutch.txt:38:33 - Unknown word (respecteert)
 error
-error	./samples/Dutch.txt:38:48 - Unknown word (rechten)
+error	samples/Dutch.txt:38:48 - Unknown word (rechten)
 error
-error	./samples/Dutch.txt:38:60 - Unknown word (derden)
+error	samples/Dutch.txt:38:60 - Unknown word (derden)
 error
-error	./samples/Dutch.txt:39:13 - Unknown word (gegevens)
+error	samples/Dutch.txt:39:13 - Unknown word (gegevens)
 error
-error	./samples/Dutch.txt:39:22 - Unknown word (vrij)
+error	samples/Dutch.txt:39:22 - Unknown word (vrij)
 error
-error	./samples/Dutch.txt:39:27 - Unknown word (beschikbaar)
+error	samples/Dutch.txt:39:27 - Unknown word (beschikbaar)
 error
-error	./samples/Dutch.txt:39:39 - Unknown word (houden)
+error	samples/Dutch.txt:39:39 - Unknown word (houden)
 error
-error	./samples/Dutch.txt:39:47 - Unknown word (Voor)
+error	samples/Dutch.txt:39:47 - Unknown word (Voor)
 error
-error	./samples/Dutch.txt:39:52 - Unknown word (bijdragen)
+error	samples/Dutch.txt:39:52 - Unknown word (bijdragen)
 error
-error	./samples/Dutch.txt:40:6 - Unknown word (daarom)
+error	samples/Dutch.txt:40:6 - Unknown word (daarom)
 error
-error	./samples/Dutch.txt:40:13 - Unknown word (niet)
+error	samples/Dutch.txt:40:13 - Unknown word (niet)
 error
-error	./samples/Dutch.txt:40:18 - Unknown word (zonder)
+error	samples/Dutch.txt:40:18 - Unknown word (zonder)
 error
-error	./samples/Dutch.txt:40:25 - Unknown word (toestemming)
+error	samples/Dutch.txt:40:25 - Unknown word (toestemming)
 error
-error	./samples/Dutch.txt:40:37 - Unknown word (gebruikmaken)
+error	samples/Dutch.txt:40:37 - Unknown word (gebruikmaken)
 error
-error	./samples/Dutch.txt:40:54 - Unknown word (beschermde)
+error	samples/Dutch.txt:40:54 - Unknown word (beschermde)
 error
-error	./samples/Dutch.txt:40:65 - Unknown word (naslagwerken)
+error	samples/Dutch.txt:40:65 - Unknown word (naslagwerken)
 error
-error	./samples/Dutch.txt:41:4 - Unknown word (zoals)
+error	samples/Dutch.txt:41:4 - Unknown word (zoals)
 error
-error	./samples/Dutch.txt:41:10 - Unknown word (woordenboeken)
+error	samples/Dutch.txt:41:10 - Unknown word (woordenboeken)
 error
-error	./samples/Dutch.txt:41:36 - Unknown word (toegestaan)
+error	samples/Dutch.txt:41:36 - Unknown word (toegestaan)
 error
-error	./samples/Dutch.txt:41:50 - Unknown word (gebruik)
+error	samples/Dutch.txt:41:50 - Unknown word (gebruik)
 error
-error	./samples/Dutch.txt:41:61 - Unknown word (maken)
+error	samples/Dutch.txt:41:61 - Unknown word (maken)
 error
-error	./samples/Dutch.txt:42:4 - Unknown word (materialen)
+error	samples/Dutch.txt:42:4 - Unknown word (materialen)
 error
-error	./samples/Dutch.txt:42:22 - Unknown word (Nederlandse)
+error	samples/Dutch.txt:42:22 - Unknown word (Nederlandse)
 error
-error	./samples/Dutch.txt:42:34 - Unknown word (Taalunie)
+error	samples/Dutch.txt:42:34 - Unknown word (Taalunie)
 error
-error	./samples/Dutch.txt:42:44 - Unknown word (zoals)
+error	samples/Dutch.txt:42:44 - Unknown word (zoals)
 error
-error	./samples/Dutch.txt:42:53 - Unknown word (leidraad)
+error	samples/Dutch.txt:42:53 - Unknown word (leidraad)
 error
-error	./samples/Dutch.txt:42:68 - Unknown word (woordenlijst)
+error	samples/Dutch.txt:42:68 - Unknown word (woordenlijst)
 error
-error	./samples/Dutch.txt:43:4 - Unknown word (Indien)
+error	samples/Dutch.txt:43:4 - Unknown word (Indien)
 error
-error	./samples/Dutch.txt:43:17 - Unknown word (mening)
+error	samples/Dutch.txt:43:17 - Unknown word (mening)
 error
-error	./samples/Dutch.txt:43:42 - Unknown word (inbreuk)
+error	samples/Dutch.txt:43:42 - Unknown word (inbreuk)
 error
-error	./samples/Dutch.txt:43:50 - Unknown word (maakt)
+error	samples/Dutch.txt:43:50 - Unknown word (maakt)
 error
-error	./samples/Dutch.txt:43:62 - Unknown word (rechten)
+error	samples/Dutch.txt:43:62 - Unknown word (rechten)
 error
-error	./samples/Dutch.txt:44:4 - Unknown word (verzoeken)
+error	samples/Dutch.txt:44:4 - Unknown word (verzoeken)
 error
-error	./samples/Dutch.txt:44:19 - Unknown word (hierover)
+error	samples/Dutch.txt:44:19 - Unknown word (hierover)
 error
-error	./samples/Dutch.txt:44:31 - Unknown word (spoedig)
+error	samples/Dutch.txt:44:31 - Unknown word (spoedig)
 error
-error	./samples/Dutch.txt:44:39 - Unknown word (mogelijk)
+error	samples/Dutch.txt:44:39 - Unknown word (mogelijk)
 error
-error	./samples/Dutch.txt:44:48 - Unknown word (schriftelijk)
+error	samples/Dutch.txt:44:48 - Unknown word (schriftelijk)
 error
-error	./samples/Dutch.txt:45:7 - Unknown word (nemen)
+error	samples/Dutch.txt:45:7 - Unknown word (nemen)
 error
-error	./samples/Dutch.txt:46:13 - Unknown word (Stichting)
+error	samples/Dutch.txt:46:13 - Unknown word (Stichting)
 error
-error	./samples/Dutch.txt:59:56 - Unknown word (Brouwer)
+error	samples/Dutch.txt:59:56 - Unknown word (Brouwer)
 error
-error	./samples/Dutch.txt:60:11 - Unknown word (Nederlandstalige)
+error	samples/Dutch.txt:60:11 - Unknown word (Nederlandstalige)
 error
-error	./samples/Dutch.txt:60:32 - Unknown word (Gebruikersgroep)
+error	samples/Dutch.txt:60:32 - Unknown word (Gebruikersgroep)
 error
-error	./samples/Dutch.txt:68:42 - Unknown word (unported)
+error	samples/Dutch.txt:68:42 - Unknown word (unported)
 error
-error	./samples/Dutch.txt:74:39 - Unknown word (RABONL)
+error	samples/Dutch.txt:74:39 - Unknown word (RABONL)
 error
-error	./samples/Dutch.txt:74:49 - Unknown word (IBAN)
+error	samples/Dutch.txt:74:49 - Unknown word (IBAN)
 error
-error	./samples/Dutch.txt:74:59 - Unknown word (RABO)
+error	samples/Dutch.txt:74:59 - Unknown word (RABO)
 error
-error	./samples/Dutch.txt:75:4 - Unknown word (Stichting)
+error	samples/Dutch.txt:75:4 - Unknown word (Stichting)
 error
-error	./samples/Dutch.txt:77:58 - Unknown word (algemeen)
+error	samples/Dutch.txt:77:58 - Unknown word (algemeen)
 error
-error	./samples/Dutch.txt:77:71 - Unknown word (beogende)
+error	samples/Dutch.txt:77:71 - Unknown word (beogende)
 error
-error	./samples/Dutch.txt:78:4 - Unknown word (instelling)
+error	samples/Dutch.txt:78:4 - Unknown word (instelling)
 error
-error	./samples/Dutch.txt:78:18 - Unknown word (ANBI)
+error	samples/Dutch.txt:78:18 - Unknown word (ANBI)
 error
 error	CSpell: Files checked: 1, Issues found: 189 in 1 file.
 error"

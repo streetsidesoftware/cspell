@@ -7,7 +7,7 @@ const isURLRegEx = /^(\w[\w-]{1,63}:\/|data:|stdin:)/i;
  * @returns a URL
  */
 export function toURL(url: string | URL, relativeTo?: string | URL): URL {
-    return url instanceof URL ? url : new URL(url, relativeTo);
+    return normalizeWindowsUrl(url instanceof URL ? url : new URL(url, relativeTo));
 }
 
 /**
@@ -173,4 +173,28 @@ export function urlToUrlRelative(urlFrom: URL, urlTo: URL): string {
     }
     const rel = '../'.repeat(p0Parts.length - i) + p1Parts.slice(i).join('/');
     return decodeURIComponent(rel.length < p1.length ? rel : p1);
+}
+
+export const regExpWindowsPath = /^[\\/]([a-zA-Z]:[\\/])/;
+export const regExpEncodedColon = /%3[aA]/g;
+
+/**
+ * Ensure that a windows file url is correctly formatted with a capitol letter for the drive.
+ *
+ * @param url - URL to check.
+ * @returns a new URL if modified or converted from a string.
+ */
+export function normalizeWindowsUrl(url: URL | string): URL {
+    url = typeof url === 'string' ? new URL(url) : url;
+    if (url.protocol === 'file:') {
+        const pathname = url.pathname
+            .replaceAll(regExpEncodedColon, ':')
+            .replace(regExpWindowsPath, (d) => d.toUpperCase());
+        if (pathname !== url.pathname) {
+            url = new URL(url);
+            url.pathname = pathname;
+            return url;
+        }
+    }
+    return url;
 }

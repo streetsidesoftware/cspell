@@ -5,9 +5,9 @@ import { describe, expect, test } from 'vitest';
 
 import { urlBasename } from './dataUrl.mjs';
 import { normalizeFilePathForUrl, toFileDirURL, toFileURL } from './defaultFileUrlBuilder.mjs';
-import { toFilePathOrHref } from './fileUrl.mjs';
+import { pathWindowsDriveLetterToUpper, toFilePathOrHref } from './fileUrl.mjs';
 import { FileUrlBuilder } from './FileUrlBuilder.mjs';
-import { isUrlLike, toURL, urlParent } from './url.mjs';
+import { isUrlLike, normalizeWindowsUrl, toURL, urlParent } from './url.mjs';
 
 const root = Path.join(__dirname, '../..');
 // const oc = <T>(obj: T) => expect.objectContaining(obj);
@@ -113,18 +113,29 @@ describe('util', () => {
 
     test.each`
         url                        | expected
-        ${toFileURL('./').href}    | ${pathToFileURL('./').href}
-        ${'.'}                     | ${pathToFileURL('./').href}
+        ${toFileURL('./').href}    | ${normalizeWindowsUrl(pathToFileURL('./')).href}
+        ${'.'}                     | ${normalizeWindowsUrl(pathToFileURL('./')).href}
         ${'data:application/json'} | ${'data:application/json'}
         ${'stdin:file.txt'}        | ${'stdin:file.txt'}
         ${'stdin:/path/to/dir'}    | ${'stdin:/path/to/dir/'}
     `('toFileDirURL $url', ({ url, expected }) => {
         expect(toFileDirURL(url).href).toEqual(expected);
     });
+
+    test.each`
+        path                         | expected
+        ${'d:\\user\\data\\file.md'} | ${'D:\\user\\data\\file.md'}
+        ${'c:/user/data/file.md'}    | ${'C:/user/data/file.md'}
+        ${'data:application/json'}   | ${'data:application/json'}
+        ${'stdin:file.txt'}          | ${'stdin:file.txt'}
+        ${'stdin:/path/to/dir'}      | ${'stdin:/path/to/dir'}
+    `('windowsDriveLetterToUpper $path', ({ path, expected }) => {
+        expect(pathWindowsDriveLetterToUpper(path)).toEqual(expected);
+    });
 });
 
 function u(path: string, relativeURL?: string | URL) {
-    return new URL(path, relativeURL);
+    return normalizeWindowsUrl(new URL(path, relativeURL));
 }
 
 function uh(path: string, relativeURL = cwdURL) {

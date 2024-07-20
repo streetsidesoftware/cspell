@@ -227,7 +227,7 @@ describe('Validate Uri assumptions', () => {
         ${'C:\\home\\project\\file.js'}                          | ${m(schema('C'), path('\\home\\project\\file.js'))}                                       | ${'Windows path by "accident"'}
     `('URI assumptions uri: "$uri" $comment -- $expected', ({ uri, expected }: UriTestCase) => {
         const u = Uri.parse(uri);
-        expect(u).toEqual(expect.objectContaining(expected));
+        expect(u.toJSON()).toEqual(expect.objectContaining(expected));
     });
 });
 
@@ -243,7 +243,7 @@ describe('fileToTextDocument', () => {
 
 function fixDriveLetter(p: string): string {
     if (!hasDriveLetter.test(p)) return p;
-    return p[0].toLowerCase() + p.slice(1);
+    return p[0].toUpperCase() + p.slice(1);
 }
 
 /**

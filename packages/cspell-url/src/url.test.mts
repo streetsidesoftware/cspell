@@ -4,6 +4,7 @@ import {
     addTrailingSlash,
     basenameOfUrlPathname,
     isUrlLike,
+    normalizeWindowsUrl,
     toURL,
     urlFilename,
     urlParent,
@@ -131,5 +132,18 @@ describe('url', () => {
         url = new URL(url);
         expect(urlFilename(url)).toBe(expected);
         expect(new URL(urlFilename(url), urlRemoveFilename(url)).href).toBe(url.href);
+    });
+
+    test.each`
+        url                                   | expected
+        ${'file:///path/to/my/file.txt'}      | ${'file:///path/to/my/file.txt'}
+        ${'file:///C:/path/to/my/file.txt'}   | ${'file:///C:/path/to/my/file.txt'}
+        ${'file:///C%3a/path/to/my/file.txt'} | ${'file:///C:/path/to/my/file.txt'}
+        ${'file:///d:/path/to/my/file.txt'}   | ${'file:///D:/path/to/my/file.txt'}
+        ${'file:///d%3a/path/to/my/file.txt'} | ${'file:///D:/path/to/my/file.txt'}
+        ${'file:///d%3A/path/to/my/file.txt'} | ${'file:///D:/path/to/my/file.txt'}
+    `('normalizeWindowsUrl  $url', ({ url, expected }) => {
+        url = new URL(url);
+        expect(normalizeWindowsUrl(url).href).toBe(expected);
     });
 });
