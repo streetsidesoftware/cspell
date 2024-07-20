@@ -225,6 +225,7 @@ jobs:
 
   integration-tests-summary:
     permissions:
+      contents: write
       pull-requests: write
     needs:
       - integration-tests
@@ -291,6 +292,12 @@ jobs:
         uses: mshick/add-pr-comment@v2
         with:
           message: ${{ steps.report.outputs.report }}
+
+      - name: tag versions
+        if: github.ref_name == 'main'
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
 
       - name: Create Pull Request
         if: github.ref_name == 'main'
