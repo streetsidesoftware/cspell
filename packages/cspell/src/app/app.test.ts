@@ -164,6 +164,7 @@ describe('Validate cli', () => {
         ${'--help'}                                    | ${['--help']}                                                                                  | ${'outputHelp'}    | ${false} | ${false} | ${false}
         ${'lint --help'}                               | ${['lint', '--help']}                                                                          | ${'outputHelp'}    | ${false} | ${false} | ${false}
         ${'lint --help --verbose'}                     | ${['lint', '--help', '--verbose']}                                                             | ${'outputHelp'}    | ${false} | ${false} | ${false}
+        ${'lint --help --issue-template'}              | ${['lint', '--help', '--issue-template']}                                                      | ${'outputHelp'}    | ${false} | ${false} | ${false}
         ${'current_file'}                              | ${[__filename]}                                                                                | ${undefined}       | ${true}  | ${false} | ${false}
         ${'current_file --show-perf-summary'}          | ${[__filename, '--show-perf-summary']}                                                         | ${undefined}       | ${true}  | ${false} | ${false}
         ${'with spelling errors Dutch.txt'}            | ${[pathSamples('Dutch.txt')]}                                                                  | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
@@ -195,6 +196,7 @@ describe('Validate cli', () => {
         ${'typos'}                                     | ${['-r', pathFix('features/typos'), '--no-progress', '.']}                                     | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
         ${'typos --no-show-suggestions'}               | ${['-r', pathFix('features/typos'), '--no-progress', '--no-show-suggestions', '.']}            | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
         ${'typos --show-suggestions'}                  | ${['-r', pathFix('features/typos'), '--no-progress', '--show-suggestions', '**']}              | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
+        ${'typos --issue-template'}                    | ${['-r', pathFix('features/typos'), '--no-progress', '.', '--issue-template', '$text']}        | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
         ${'inline suggest'}                            | ${['-r', pathFix('features/inline-suggest'), '--no-progress', '--show-suggestions', '.']}      | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
         ${'reporter'}                                  | ${['-r', pathFix('features/reporter'), '-c', pathFix('features/reporter/cspell.config.yaml')]} | ${undefined}       | ${false} | ${true}  | ${false}
         ${'issue-4811 **/README.md'}                   | ${['-r', pIssues('issue-4811'), '--no-progress', '**/README.md']}                              | ${undefined}       | ${true}  | ${false} | ${false}

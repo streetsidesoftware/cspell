@@ -5,6 +5,7 @@ import * as App from './application.js';
 import type { LinterCliOptions } from './options.js';
 import { DEFAULT_CACHE_LOCATION } from './util/cache/index.js';
 import { CheckFailed } from './util/errors.js';
+import { unindent } from './util/unindent.js';
 
 // interface InitOptions extends Options {}
 
@@ -162,7 +163,7 @@ export function commandLint(prog: Command): Command {
         )
         .addOption(crOpt('--issues-summary-report', 'Output a summary of issues found.').hideHelp())
         .addOption(crOpt('--show-perf-summary', 'Output a performance summary report.').hideHelp())
-        .option('--issue-template <template>', 'Use a custom issue template. See API for details.')
+        .option('--issue-template [template]', 'Use a custom issue template. See --help --issue-template for details.')
         // Planned options
         // .option('--dictionary <dictionary name>', 'Enable a dictionary by name.', collect)
         // .option('--no-dictionary <dictionary name>', 'Disable a dictionary by name.', collect)
@@ -196,6 +197,39 @@ export function commandLint(prog: Command): Command {
     return spellCheckCommand;
 }
 
+function helpIssueTemplate(opts: LinterCliOptions): string {
+    if (!('issueTemplate' in opts)) return '';
+
+    return unindent`
+      Issue Template:
+        Use "--issue-template"  to set the template to use when reporting issues.
+
+        The template is a string that can contain the following placeholders:
+        - $filename - the file name
+        - $col - the column number
+        - $row - the row number
+        - $text - the word that is misspelled
+        - $message - the issues message: "unknown word", "word is misspelled", etc.
+        - $messageColored - the issues message with color based upon the message type.
+        - $uri - the URI of the file
+        - $suggestions - suggestions for the misspelled word (if requested)
+        - $quickFix - possible quick fixes for the misspelled word.
+        - $contextFull - the full context of the misspelled word.
+        - $contextLeft - the context to the left of the misspelled word.
+        - $contextRight - the context to the right of the misspelled word.
+
+        Color is supported using the following template pattern:
+        - \`{<style[.style]> <text>}\` - where \`<style>\` is a style name and \`<text>\` is the text to style.
+
+        Styles
+        - \`bold\`, \`italic\`, \`underline\`, \`strikethrough\`, \`dim\`, \`inverse\`
+        - \`black\`, \`red\`, \`green\`, \`yellow\`, \`blue\`, \`magenta\`, \`cyan\`, \`white\`
+
+        Example:
+          --issue-template '{green $filename}:{yellow $row}:{yellow $col} $message {red $text} $quickFix {dim $suggestions}'
+    `;
+}
+
 /**
  * Add additional help text to the command.
  * When the verbose flag is set, show the hidden options.
@@ -205,7 +239,8 @@ export function commandLint(prog: Command): Command {
 function augmentCommandHelp(context: AddHelpTextContext) {
     const output: string[] = [];
     const command = context.command;
-    const showHidden = !!command.opts().verbose;
+    const opts = command.opts();
+    const showHidden = !!opts.verbose;
     const hiddenHelp: string[] = [];
     const help = command.createHelp();
     const hiddenOptions = command.options.filter((opt) => opt.hidden && showHidden);
@@ -224,7 +259,7 @@ function augmentCommandHelp(context: AddHelpTextContext) {
         );
     }
     output.push(...hiddenHelp, advanced);
-    return output.join('\n');
+    return helpIssueTemplate(opts) + output.join('\n');
 }
 
 /**

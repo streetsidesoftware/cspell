@@ -260,6 +260,7 @@ export interface LinterCliOptions extends LinterOptions {
      *
      * Example:
      * @example "{green $filename}:{yellow $row}:{yellow $col} $message {red $text} $quickFix {dim $suggestions}"
+     * @since 8.12.0
      */
     issueTemplate?: string;
 }
