@@ -255,7 +255,7 @@ export interface LinterCliOptions extends LinterOptions {
      * - `{<style[.style]> <text>}` - where `<style>` is a style name and `<text>` is the text to style.
      *
      * Styles
-     * - `bold`, `italic`, `underline`, `strike`, `dim`, `inverse`
+     * - `bold`, `italic`, `underline`, `strikethrough`, `dim`, `inverse`
      * - `black`, `red`, `green`, `yellow`, `blue`, `magenta`, `cyan`, `white`
      *
      * Example:
