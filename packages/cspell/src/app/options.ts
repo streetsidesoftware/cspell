@@ -233,6 +233,35 @@ export interface LinterCliOptions extends LinterOptions {
      * Generate a summary report of performance.
      */
     showPerfSummary?: boolean;
+
+    /**
+     * Set the template to use when reporting issues.
+     *
+     * The template is a string that can contain the following placeholders:
+     * - `$filename` - the file name
+     * - `$col` - the column number
+     * - `$row` - the row number
+     * - `$text` - the word that is misspelled
+     * - `$message` - the issues message: "unknown word", "word is misspelled", etc.
+     * - `$messageColored` - the issues message with color based upon the message type.
+     * - `$uri` - the URI of the file
+     * - `$suggestions` - suggestions for the misspelled word (if requested)
+     * - `$quickFix` - possible quick fixes for the misspelled word.
+     * - `$contextFull` - the full context of the misspelled word.
+     * - `$contextLeft` - the context to the left of the misspelled word.
+     * - `$contextRight` - the context to the right of the misspelled word.
+     *
+     * Color is supported using the following template pattern:
+     * - `{<style[.style]> <text>}` - where `<style>` is a style name and `<text>` is the text to style.
+     *
+     * Styles
+     * - `bold`, `italic`, `underline`, `strike`, `dim`, `inverse`
+     * - `black`, `red`, `green`, `yellow`, `blue`, `magenta`, `cyan`, `white`
+     *
+     * Example:
+     * @example "{green $filename}:{yellow $row}:{yellow $col} $message {red $text} $quickFix {dim $suggestions}"
+     */
+    issueTemplate?: string;
 }
 
 export function fixLegacy<T extends BaseOptions>(opts: T & LegacyOptions): Omit<T & LegacyOptions, 'local'> {

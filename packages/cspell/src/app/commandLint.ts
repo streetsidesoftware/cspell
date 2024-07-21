@@ -162,6 +162,7 @@ export function commandLint(prog: Command): Command {
         )
         .addOption(crOpt('--issues-summary-report', 'Output a summary of issues found.').hideHelp())
         .addOption(crOpt('--show-perf-summary', 'Output a performance summary report.').hideHelp())
+        .option('--issue-template <template>', 'Use a custom issue template. See API for details.')
         // Planned options
         // .option('--dictionary <dictionary name>', 'Enable a dictionary by name.', collect)
         // .option('--no-dictionary <dictionary name>', 'Disable a dictionary by name.', collect)
