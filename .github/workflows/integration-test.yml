@@ -292,14 +292,14 @@ jobs:
         with:
           message: ${{ steps.report.outputs.report }}
 
-      - name: Create Pull Request
+      - name: Create PR
         if: github.ref_name == 'main'
-        uses: peter-evans/create-pull-request@v6.1.0
+        uses: streetsidesoftware/actions/.github/actions/pr@v1
         with:
-          commit-message: 'ci: ${{ steps.pr-body.outputs.title }}'
+          commit-message: 'chore: ${{ steps.pr-body.outputs.title }}'
           branch: update-perf-main
           base: main
-          title: 'ci: ${{ steps.pr-body.outputs.title }}'
+          title: 'chore: ${{ steps.pr-body.outputs.title }}'
           body: ${{ steps.pr-body.outputs.body }}
-          token: secrets.GITHUB_TOKEN
-          delete-branch: true
+          app_id: ${{ secrets.AUTOMATION_APP_ID }}
+          app_private_key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
