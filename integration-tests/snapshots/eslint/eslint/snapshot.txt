@@ -3,13 +3,13 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: [".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 1943, Issues found: 1735 in 323 files.
+ CSpell: Files checked: 1944, Issues found: 1738 in 325 files.
  exit code: 1
-Makefile.js:145:88    - Unknown word (ined)               -- followed by the string "ined".
-Makefile.js:356:12    - Unknown word (gensite)            -- target.gensite();
-Makefile.js:77:88     - Unknown word (markdownlintignore) -- path.join(__dirname, ".markdownlintignore"), "utf-8")),
-Makefile.js:81:10     - Unknown word (MULTIFILES)         -- PERF_MULTIFILES_TARGET_DIR = path.join
-Makefile.js:948:18    - Unknown word (Multifiles)         -- function downloadMultifilesTestTarget(cb) {
+Makefile.js:132:88    - Unknown word (ined)               -- followed by the string "ined".
+Makefile.js:343:12    - Unknown word (gensite)            -- target.gensite();
+Makefile.js:76:88     - Unknown word (markdownlintignore) -- path.join(__dirname, ".markdownlintignore"), "utf-8")),
+Makefile.js:80:10     - Unknown word (MULTIFILES)         -- PERF_MULTIFILES_TARGET_DIR = path.join
+Makefile.js:932:18    - Unknown word (Multifiles)         -- function downloadMultifilesTestTarget(cb) {
 README.md:108:109   - Unknown word (myplugin)   -- npm view eslint-plugin-myplugin peerDependencies` to
 README.md:212:5     - Unknown word (teamstart)  -- <!--teamstart-->
 README.md:220:87    - Unknown word (Zakas's)    -- 5" alt="Nicholas C. Zakas's Avatar"><br />
@@ -171,6 +171,7 @@ docs/src/use/command-line-interface.md:303:68    - Unknown word (levn)       -- 
 docs/src/use/command-line-interface.md:454:5     - Unknown word (myfile)     -- cat myfile.js | npx eslint --stdin
 docs/src/use/command-line-interface.md:550:17    - Unknown word (customformat) -- npx eslint -f ./customformat.js file.js
 docs/src/use/configure/configuration-files-deprecated.md:39:25     - Unknown word (myfiletotest) -- eslint -c myconfig.json myfiletotest.js
+docs/src/use/configure/debug.md:28:44     - Unknown word (nzakas)     -- config from C:\Users\nzakas\projects\eslint\eslint
 docs/src/use/configure/ignore-deprecated.md:100:200   - Unknown word (jshintignore) -- example, you can use `.jshintignore` file because it has
 docs/src/use/configure/ignore-deprecated.md:120:14    - Unknown word (mypackage)    -- "name": "mypackage",
 docs/src/use/configure/ignore.md:65:4      - Unknown word (Unignoring) -- ## Unignoring Files and Directories
@@ -203,6 +204,7 @@ docs/src/use/migrating-from-jscs.md:65:4      - Unknown word (mdcs)       -- | `
 docs/src/use/migrating-to-2.0.0.md:347:45    - Unknown word (FEFF)       -- parse(text.replace(/^\uFEFF/, ""), options);
 docs/src/use/migrating-to-3.0.0.md:47:229    - Unknown word (lifed)      -- Explorer 8 was end-of-lifed](https://www.microsoft
 docs/src/use/migrating-to-5.0.0.md:114:68    - Unknown word (lintable)   -- line does not match any lintable files
+eslint.config.js:189:18    - Unknown word (knip)       -- files: ["knip.jsonc"],
 knip.jsonc:15:23     - Unknown word (Knip)       -- // If Knip would consider exports
 knip.jsonc:27:19     - Unknown word (wdio)       -- "@wdio/cli",
 lib/cli-engine/formatters/html.js:247:66    - Unknown word (noopener)   -- target="_blank" rel="noopener noreferrer">${ruleId
@@ -268,9 +270,8 @@ lib/rules/use-isnan.js:131:25    - Unknown word (Castable)    -- const isCastabl
 lib/rules/use-isnan.js:89:15     - Unknown word (castable)   -- const castableOperators = new Set(
 lib/rules/utils/ast-utils.js:1049:89   - Unknown word (braket)     -- opening parenthesis or braket.
 lib/rules/utils/ast-utils.js:404:40    - Unknown word (samely)     -- a.b` and `a?.b` are samely.
-package.json:126:6     - Unknown word (eslump)     -- "eslump": "^3.0.0",
-package.json:143:6     - Unknown word (metascraper) -- "metascraper": "^5.25.7",
-package.json:26:21     - Unknown word (knip)       -- "lint:unused": "knip",
+package.json:127:6     - Unknown word (eslump)     -- "eslump": "^3.0.0",
+package.json:144:6     - Unknown word (metascraper) -- "metascraper": "^5.25.7",
 templates/blogpost.md.ejs:18:10     - Unknown word (linkify)    -- function linkify(line) {
 tests/fixtures/code-path-analysis/try--try-finally-4.js:43:156    - Unknown word (Expressio)  -- Expression\nIdentifier (bar)\nExpressio
 tests/fixtures/config-hierarchy/file-structure.json:19:10     - Unknown word (subbroken)  -- "subbroken": {
