@@ -2,7 +2,7 @@ import { Chalk } from 'chalk';
 import { describe, expect, test } from 'vitest';
 
 import type { ReporterIssue } from './cli-reporter.js';
-import { __testing__ } from './cli-reporter.js';
+import { __testing__, checkTemplate } from './cli-reporter.js';
 
 const { formatIssue } = __testing__;
 
@@ -34,6 +34,19 @@ describe('cli-reporter', () => {
         ${genIssue('used')}    | ${'"$contextFull"'}                                  | ${'"rds to be used for some "'}
     `('formatIssue $issue $template', ({ issue, template, expected }) => {
         expect(formatIssue(ioChalk, template, issue, 200)).toBe(expected);
+    });
+
+    test.each`
+        template                                     | expected
+        ${''}                                        | ${true}
+        ${'{red $filename}'}                         | ${true}
+        ${'{red $filename'}                          | ${new Error('Chalk template literal is missing 1 closing bracket (`}`)')}
+        ${'{hello $filename}'}                       | ${new Error('Unknown Chalk style: hello')}
+        ${'{green.bold.underline $file}'}            | ${new Error(`Unresolved template variable: '$file'`)}
+        ${'{green.bold.underline $file}:$rows:$col'} | ${new Error(`Unresolved template variables: '$file', '$rows'`)}
+    `('checkTemplate $template', ({ template, expected }) => {
+        const r = checkTemplate(template);
+        expect(r).toEqual(expected);
     });
 });
 

@@ -11,7 +11,7 @@ import { commandTrace } from './commandTrace.js';
 import { ApplicationError } from './util/errors.js';
 
 export { LinterCliOptions as Options } from './options.js';
-export { CheckFailed } from './util/errors.js';
+export { ApplicationError, CheckFailed } from './util/errors.js';
 
 export async function run(command?: Command, argv?: string[]): Promise<void> {
     const prog = command || program;

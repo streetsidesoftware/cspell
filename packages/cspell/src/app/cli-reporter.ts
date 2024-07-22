@@ -21,6 +21,7 @@ import type { Channel } from './console.js';
 import { console as customConsole } from './console.js';
 import { CSpellReporterConfiguration } from './models.js';
 import type { LinterCliOptions } from './options.js';
+import { ApplicationError } from './util/errors.js';
 import type { FinalizedReporter } from './util/reporters.js';
 import { uniqueFilterFnGenerator } from './util/util.js';
 
@@ -35,6 +36,23 @@ const templateIssueWordsOnly = '$text';
 const console = undefined;
 
 assert(!console);
+
+export interface TemplateSubstitutions extends Record<string, string> {
+    $col: string;
+    $contextFull: string;
+    $contextLeft: string;
+    $contextRight: string;
+    $filename: string;
+    $padContext: string;
+    $padRowCol: string;
+    $row: string;
+    $suggestions: string;
+    $text: string;
+    $uri: string;
+    $quickFix: string;
+    $message: string;
+    $messageColored: string;
+}
 
 export // Exported for testing.
 interface ReporterIssue extends Issue {
@@ -177,7 +195,7 @@ export function getReporter(options: ReporterOptions, config?: CSpellReporterCon
         perf: Object.create(null) as SpellCheckFilePerf,
     };
     const uniqueIssues = config?.unique || false;
-    const issueTemplate = options.wordsOnly
+    const defaultIssueTemplate = options.wordsOnly
         ? templateIssueWordsOnly
         : options.legacy
           ? templateIssueLegacy
@@ -191,6 +209,10 @@ export function getReporter(options: ReporterOptions, config?: CSpellReporterCon
                 ? templateIssueNoFix
                 : templateIssue;
     const { fileGlobs, silent, summary, issues, progress: showProgress, verbose, debug } = options;
+
+    const issueTemplate = config?.issueTemplate || defaultIssueTemplate;
+
+    assertCheckTemplate(issueTemplate);
 
     const console = config?.console || customConsole;
 
@@ -351,7 +373,7 @@ function formatIssue(io: IOChalk, templateStr: string, issue: ReporterIssue, max
     const padRowCol = ' '.repeat(Math.max(1, 8 - (rowText.length + colText.length)));
     const suggestions = formatSuggestions(io, issue);
     const msg = issue.message || (issue.isFlagged ? 'Forbidden word' : 'Unknown word');
-    const message = issue.isFlagged ? `{yellow ${msg}}` : msg;
+    const messageColored = issue.isFlagged ? `{yellow ${msg}}` : msg;
 
     const substitutions = {
         $col: colText,
@@ -366,9 +388,11 @@ function formatIssue(io: IOChalk, templateStr: string, issue: ReporterIssue, max
         $text: text,
         $uri: uri,
         $quickFix: formatQuickFix(io, issue),
+        $message: msg,
+        $messageColored: messageColored,
     };
 
-    const t = templateStr.replaceAll('$message', message);
+    const t = templateStr.replaceAll('$messageColored', messageColored);
     const chalkTemplate = makeTemplate(io.chalk);
     return substitute(chalkTemplate(t), substitutions).trimEnd();
 }
@@ -399,14 +423,20 @@ function formatQuickFix(io: IOChalk, issue: Issue): string {
     return `fix: (${fixes.join(', ')})`;
 }
 
-function substitute(text: string, substitutions: Record<string, string>): string {
+function substitute(text: string, substitutions: TemplateSubstitutions): string {
     type SubRange = [number, number, string];
     const subs: SubRange[] = [];
 
     for (const [match, replaceWith] of Object.entries(substitutions)) {
         const len = match.length;
-        for (let i = text.indexOf(match); i >= 0; i = text.indexOf(match, i + 1)) {
-            subs.push([i, i + len, replaceWith]);
+        for (let i = text.indexOf(match); i >= 0; i = text.indexOf(match, i)) {
+            const end = i + len;
+            const reg = /\b/y;
+            reg.lastIndex = end;
+            if (reg.test(text)) {
+                subs.push([i, end, replaceWith]);
+            }
+            i = end;
         }
     }
 
@@ -422,6 +452,49 @@ function substitute(text: string, substitutions: Record<string, string>): string
 
     const parts = subs.map(sub);
     return parts.join('') + text.slice(i);
+}
+
+function assertCheckTemplate(template: string): void {
+    const r = checkTemplate(template);
+    if (r instanceof Error) {
+        throw r;
+    }
+}
+
+export function checkTemplate(template: string): true | Error {
+    const chalk = new Chalk();
+    const chalkTemplate = makeTemplate(chalk);
+    const substitutions: TemplateSubstitutions = {
+        $col: '<col>',
+        $contextFull: '<contextFull>',
+        $contextLeft: '<contextLeft>',
+        $contextRight: '<contextRight>',
+        $filename: '<filename>',
+        $padContext: '<padContext>',
+        $padRowCol: '<padRowCol>',
+        $row: '<row>',
+        $suggestions: '<suggestions>',
+        $text: '<text>',
+        $uri: '<uri>',
+        $quickFix: '<quickFix>',
+        $message: '<message>',
+        $messageColored: '<messageColored>',
+    };
+
+    try {
+        const t = chalkTemplate(template);
+        const result = substitute(t, substitutions);
+        const problems = [...result.matchAll(/\$[a-z]+/gi)].map((m) => m[0]);
+        if (problems.length) {
+            throw new Error(
+                `Unresolved template variable${problems.length > 1 ? 's' : ''}: ${problems.map((v) => `'${v}'`).join(', ')}`,
+            );
+        }
+        return true;
+    } catch (e) {
+        const msg = e instanceof Error ? e.message : `${e}`;
+        return new ApplicationError(msg);
+    }
 }
 
 export const __testing__ = {

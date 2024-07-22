@@ -588,6 +588,149 @@ exports[`Validate cli > app 'link remove' 1`] = `""`;
 
 exports[`Validate cli > app 'link' 1`] = `""`;
 
+exports[`Validate cli > app 'lint --help --issue-template' Expect Error: 'outputHelp' 1`] = `
+[
+  "Usage: cspell lint [options] [globs...] [file://<path> ...] [stdin[://<path>]]",
+  "",
+  "Patterns:",
+  " - [globs...]            Glob Patterns",
+  " - [stdin]               Read from "stdin" assume text file.",
+  " - [stdin://<path>]      Read from "stdin", use <path> for file type and config.",
+  " - [file://<path>]       Check the file at <path>",
+  "",
+  "Examples:",
+  "    cspell .                        Recursively check all files.",
+  "    cspell lint .                   The same as "cspell ."",
+  "    cspell "*.js"                   Check all .js files in the current directory",
+  "    cspell "**/*.js"                Check all .js files recursively",
+  "    cspell "src/**/*.js"            Only check .js under src",
+  "    cspell "**/*.txt" "**/*.js"     Check both .js and .txt files.",
+  "    cspell "**/*.{txt,js,md}"       Check .txt, .js, and .md files.",
+  "    cat LICENSE | cspell stdin      Check stdin",
+  "    cspell stdin://docs/doc.md      Check stdin as if it was "./docs/doc.md"",
+  "",
+  "Check spelling",
+  "",
+  "Options:",
+  "  -c, --config <cspell.json>   Configuration file to use.  By default cspell",
+  "                               looks for cspell.json in the current directory.",
+  "  -v, --verbose                Display more information about the files being",
+  "                               checked and the configuration.",
+  "  --locale <locale>            Set language locales. i.e. "en,fr" for English",
+  "                               and French, or "en-GB" for British English.",
+  "  --language-id <file-type>    Force programming language for unknown",
+  "                               extensions. i.e. "php" or "scala"",
+  "  --words-only                 Only output the words not found in the",
+  "                               dictionaries.",
+  "  -u, --unique                 Only output the first instance of a word not",
+  "                               found in the dictionaries.",
+  "  -e, --exclude <glob>         Exclude files matching the glob pattern. This",
+  "                               option can be used multiple times to add",
+  "                               multiple globs.",
+  "  --file-list <path or stdin>  Specify a list of files to be spell checked. The",
+  "                               list is filtered against the glob file patterns.",
+  "                               Note: the format is 1 file path per line.",
+  "  --file [file...]             Specify files to spell check. They are filtered",
+  "                               by the [globs...].",
+  "  --no-issues                  Do not show the spelling errors.",
+  "  --no-progress                Turn off progress messages",
+  "  --no-summary                 Turn off summary message in console.",
+  "  -s, --silent                 Silent mode, suppress error messages.",
+  "  --no-exit-code               Do not return an exit code if issues are found.",
+  "  --quiet                      Only show spelling issues or errors.",
+  "  --fail-fast                  Exit after first file with an issue or error.",
+  "  -r, --root <root folder>     Root directory, defaults to current directory.",
+  "  --no-relative                Issues are displayed with absolute path instead",
+  "                               of relative to the root.",
+  "  --show-context               Show the surrounding text around an issue.",
+  "  --show-suggestions           Show spelling suggestions.",
+  "  --no-show-suggestions        Do not show spelling suggestions or fixes.",
+  "  --no-must-find-files         Do not error if no files are found.",
+  "  --cache                      Use cache to only check changed files.",
+  "  --no-cache                   Do not use cache.",
+  "  --cache-reset                Reset the cache file.",
+  "  --cache-strategy <strategy>  Strategy to use for detecting changed files.",
+  "                               (choices: "metadata", "content")",
+  "  --cache-location <path>      Path to the cache file or directory. (default:",
+  "                               ".cspellcache")",
+  "  --dot                        Include files and directories starting with \`.\`",
+  "                               (period) when matching globs.",
+  "  --gitignore                  Ignore files matching glob patterns found in",
+  "                               .gitignore files.",
+  "  --no-gitignore               Do NOT use .gitignore files.",
+  "  --gitignore-root <path>      Prevent searching for .gitignore files past",
+  "                               root.",
+  "  --validate-directives        Validate in-document CSpell directives.",
+  "  --no-color                   Turn off color.",
+  "  --color                      Force color.",
+  "  --no-default-configuration   Do not load the default configuration and",
+  "                               dictionaries.",
+  "  --debug                      Output information useful for debugging",
+  "                               cspell.json files.",
+  "  --reporter <module|path>     Specify one or more reporters to use.",
+  "  --issue-template [template]  Use a custom issue template. See --help",
+  "                               --issue-template for details.",
+  "  -h, --help                   display help for command",
+  "",
+  "Issue Template:",
+  "  Use "--issue-template"  to set the template to use when reporting issues.",
+  "",
+  "  The template is a string that can contain the following placeholders:",
+  "  - $filename - the file name",
+  "  - $col - the column number",
+  "  - $row - the row number",
+  "  - $text - the word that is misspelled",
+  "  - $message - the issues message: "unknown word", "word is misspelled", etc.",
+  "  - $messageColored - the issues message with color based upon the message type.",
+  "  - $uri - the URI of the file",
+  "  - $suggestions - suggestions for the misspelled word (if requested)",
+  "  - $quickFix - possible quick fixes for the misspelled word.",
+  "  - $contextFull - the full context of the misspelled word.",
+  "  - $contextLeft - the context to the left of the misspelled word.",
+  "  - $contextRight - the context to the right of the misspelled word.",
+  "",
+  "  Color is supported using the following template pattern:",
+  "  - \`{<style[.style]> <text>}\` - where \`<style>\` is a style name and \`<text>\` is the text to style.",
+  "",
+  "  Styles",
+  "  - \`bold\`, \`italic\`, \`underline\`, \`strikethrough\`, \`dim\`, \`inverse\`",
+  "  - \`black\`, \`red\`, \`green\`, \`yellow\`, \`blue\`, \`magenta\`, \`cyan\`, \`white\`",
+  "",
+  "  Example:",
+  "    --issue-template '{green $filename}:{yellow $row}:{yellow $col} $message {red $text} $quickFix {dim $suggestions}'",
+  "",
+  "More Examples:",
+  "",
+  "    cspell "**/*.js" --reporter @cspell/cspell-json-reporter",
+  "        This will spell check all ".js" files recursively and use",
+  "        "@cspell/cspell-json-reporter".",
+  "",
+  "    cspell . --reporter default",
+  "        This will force the default reporter to be used overriding",
+  "        any reporters defined in the configuration.",
+  "",
+  "    cspell . --reporter ./<path>/reporter.cjs",
+  "        Use a custom reporter. See API for details.",
+  "",
+  "    cspell "*.md" --exclude CHANGELOG.md --files README.md CHANGELOG.md",
+  "        Spell check only check "README.md" but NOT "CHANGELOG.md".",
+  "",
+  "    cspell "/*.md" --no-must-find-files --files $FILES",
+  "        Only spell check the "/*.md" files in $FILES,",
+  "        where $FILES is a shell variable that contains the list of files.",
+  "",
+  "References:",
+  "    https://cspell.org",
+  "    https://github.com/streetsidesoftware/cspell",
+  "",
+  "",
+]
+`;
+
+exports[`Validate cli > app 'lint --help --issue-template' Expect Error: 'outputHelp' 2`] = `""`;
+
+exports[`Validate cli > app 'lint --help --issue-template' Expect Error: 'outputHelp' 3`] = `""`;
+
 exports[`Validate cli > app 'lint --help --verbose' Expect Error: 'outputHelp' 1`] = `
 [
   "Usage: cspell lint [options] [globs...] [file://<path> ...] [stdin[://<path>]]",
@@ -668,6 +811,8 @@ exports[`Validate cli > app 'lint --help --verbose' Expect Error: 'outputHelp' 1
   "  --debug                      Output information useful for debugging",
   "                               cspell.json files.",
   "  --reporter <module|path>     Specify one or more reporters to use.",
+  "  --issue-template [template]  Use a custom issue template. See --help",
+  "                               --issue-template for details.",
   "  -h, --help                   display help for command",
   "",
   "Hidden Options:",
@@ -802,6 +947,8 @@ exports[`Validate cli > app 'lint --help' Expect Error: 'outputHelp' 1`] = `
   "  --debug                      Output information useful for debugging",
   "                               cspell.json files.",
   "  --reporter <module|path>     Specify one or more reporters to use.",
+  "  --issue-template [template]  Use a custom issue template. See --help",
+  "                               --issue-template for details.",
   "  -h, --help                   display help for command",
   "",
   "More Examples:",
@@ -934,6 +1081,8 @@ exports[`Validate cli > app 'no-args' Expect Error: 'outputHelp' 1`] = `
   "  --debug                      Output information useful for debugging",
   "                               cspell.json files.",
   "  --reporter <module|path>     Specify one or more reporters to use.",
+  "  --issue-template [template]  Use a custom issue template. See --help",
+  "                               --issue-template for details.",
   "  -h, --help                   display help for command",
   "",
   "More Examples:",
@@ -1957,6 +2106,27 @@ notinanydictionary - web-services*        node_modules/.../dict/webServices.txt
 notinanydictionary - workspace*           ../../cspell-dict.txt
 "
 `;
+
+exports[`Validate cli > app 'typos --issue-template' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app 'typos --issue-template' Expect Error: [Function CheckFailed] 2`] = `
+"log	Orangges
+log
+log	blacklist
+log
+log	whitelist
+log
+log	rad
+log
+log	english
+log
+log	Blacklisted
+log
+error	CSpell: Files checked: 3, Issues found: 6 in 2 files.
+error"
+`;
+
+exports[`Validate cli > app 'typos --issue-template' Expect Error: [Function CheckFailed] 3`] = `""`;
 
 exports[`Validate cli > app 'typos --no-show-suggestions' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
