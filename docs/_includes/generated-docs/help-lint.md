@@ -79,6 +79,8 @@ Options:
   --debug                      Output information useful for debugging
                                cspell.json files.
   --reporter <module|path>     Specify one or more reporters to use.
+  --issue-template [template]  Use a custom issue template. See --help
+                               --issue-template for details.
   -h, --help                   display help for command
 
 More Examples:
