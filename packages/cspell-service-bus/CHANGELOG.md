@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 8.12.0 (2024-07-22)
+
+* chore: Update Integration Test Performance Data (#5959) ([ea71b8a](https://github.com/streetsidesoftware/cspell/commit/ea71b8a)), closes [#5959](https://github.com/streetsidesoftware/cspell/issues/5959)
+
 ## 8.11.0 (2024-07-16)
 
 * refactor: char index (#5926) ([077b3ba](https://github.com/streetsidesoftware/cspell/commit/077b3ba)), closes [#5926](https://github.com/streetsidesoftware/cspell/issues/5926)
