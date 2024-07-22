@@ -2,13 +2,13 @@
  * This is a wrapper for 'file-entry-cache'
  */
 
-export type { FileDescriptor } from '../../../lib/file-entry-cache.cjs';
+export type { FileDescriptor } from './file-entry-cache.mjs';
 import { mkdirSync } from 'node:fs';
 import * as path from 'node:path';
 import { isMainThread } from 'node:worker_threads';
 
-import type { FileEntryCache as FecFileEntryCache } from '../../../lib/file-entry-cache.cjs';
-import * as fec from '../../../lib/file-entry-cache.cjs';
+import type { FileEntryCache as FecFileEntryCache } from './file-entry-cache.mjs';
+import * as fec from './file-entry-cache.mjs';
 
 export type FileEntryCache = FecFileEntryCache;
 

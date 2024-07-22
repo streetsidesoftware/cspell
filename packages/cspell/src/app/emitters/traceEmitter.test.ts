@@ -3,7 +3,7 @@ import { posix, win32 } from 'node:path';
 import strip from 'strip-ansi';
 import { describe, expect, test, vi } from 'vitest';
 
-import type { TraceResult } from '../application.js';
+import type { TraceResult } from '../application.mjs';
 import { console } from '../console.js';
 import { __testing__, calcTraceResultsReport, emitTraceResults } from './traceEmitter.js';
 

@@ -1,7 +1,7 @@
 import type { AddHelpTextContext, Command } from 'commander';
 import { Option as CommanderOption } from 'commander';
 
-import * as App from './application.js';
+import * as App from './application.mjs';
 import type { LinterCliOptions } from './options.js';
 import { DEFAULT_CACHE_LOCATION } from './util/cache/index.js';
 import { CheckFailed } from './util/errors.js';

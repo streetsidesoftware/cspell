@@ -1,7 +1,7 @@
 import type { Command } from 'commander';
 import { Option as CommanderOption } from 'commander';
 
-import * as App from './application.js';
+import * as App from './application.mjs';
 import { console } from './console.js';
 import { isDictionaryPathFormat } from './emitters/DictionaryPathFormat.js';
 import { emitTraceResults } from './emitters/traceEmitter.js';

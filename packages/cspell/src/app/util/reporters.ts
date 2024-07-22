@@ -8,7 +8,7 @@ import type {
 } from '@cspell/cspell-types';
 import { dynamicImport } from '@cspell/dynamic-import';
 
-import { pkgDir } from '../../lib/pkgInfo.cjs';
+import { pkgDir } from '../pkgInfo.js';
 import { ApplicationError, toError } from './errors.js';
 
 type StandardEmitters = Omit<CSpellReporter, 'result'>;

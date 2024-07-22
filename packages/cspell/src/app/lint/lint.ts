@@ -23,10 +23,10 @@ import {
     Text as cspellText,
 } from 'cspell-lib';
 
-import { npmPackage } from '../../lib/pkgInfo.cjs';
 import { console } from '../console.js';
 import { getFeatureFlags } from '../featureFlags/index.js';
 import { CSpellReporterConfiguration } from '../models.js';
+import { npmPackage } from '../pkgInfo.js';
 import type { CreateCacheSettings, CSpellLintResultCache } from '../util/cache/index.js';
 import { calcCacheSettings, createCache } from '../util/cache/index.js';
 import { CheckFailed, toApplicationError, toError } from '../util/errors.js';

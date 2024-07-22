@@ -2,12 +2,12 @@ import type { Command } from 'commander';
 import { Option as CommanderOption, program } from 'commander';
 import { satisfies as semverSatisfies } from 'semver';
 
-import { npmPackage } from '../lib/pkgInfo.cjs';
 import { commandCheck } from './commandCheck.js';
 import { commandLink } from './commandLink.js';
 import { commandLint } from './commandLint.js';
 import { commandSuggestion } from './commandSuggestion.js';
 import { commandTrace } from './commandTrace.js';
+import { npmPackage } from './pkgInfo.js';
 import { ApplicationError } from './util/errors.js';
 
 export { LinterCliOptions as Options } from './options.js';
