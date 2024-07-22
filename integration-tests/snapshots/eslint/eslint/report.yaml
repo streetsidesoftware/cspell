@@ -3,9 +3,9 @@ Repository: eslint/eslint
 Url: https://github.com/eslint/eslint
 Args: '[".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]'
 Summary:
-  files: 1943
-  filesWithIssues: 323
-  issues: 1735
+  files: 1944
+  filesWithIssues: 325
+  issues: 1738
   errors: 0
 Errors: []
 
@@ -146,6 +146,7 @@ issues:
   - "docs/src/use/command-line-interface.md:454:5        myfile          U       cat myfile.js | npx eslint --stdin"
   - "docs/src/use/command-line-interface.md:550:17       customformat    U       npx eslint -f ./customformat.js file.js"
   - "docs/src/use/configure/configuration-files-deprecated.md:39:25          myfiletotest    U       eslint -c myconfig.json myfiletotest.js"
+  - "docs/src/use/configure/debug.md:28:44       nzakas      U       config from C:\\Users\\nzakas\\projects\\eslint\\eslint"
   - "docs/src/use/configure/ignore-deprecated.md:100:200     jshintignore    U       example, you can use `.jshintignore` file because it has"
   - "docs/src/use/configure/ignore-deprecated.md:120:14      mypackage       U       \"name\": \"mypackage\","
   - "docs/src/use/configure/ignore.md:65:4           Unignoring      U       ## Unignoring Files and Directories"
@@ -178,6 +179,7 @@ issues:
   - "docs/src/use/migrating-to-2.0.0.md:347:45       FEFF    U       parse(text.replace(/^\\uFEFF/, \"\"), options);"
   - "docs/src/use/migrating-to-3.0.0.md:47:229       lifed       U       Explorer 8 was end-of-lifed](https://www.microsoft"
   - "docs/src/use/migrating-to-5.0.0.md:114:68       lintable    U       line does not match any lintable files"
+  - "eslint.config.js:189:18         knip    U       files: [\"knip.jsonc\"],"
   - "knip.jsonc:15:23        Knip    U       // If Knip would consider exports"
   - "knip.jsonc:27:19        wdio    U       \"@wdio/cli\","
   - "lib/cli-engine/formatters/html.js:46:48         Neue            U       family: Arial, \"Helvetica Neue\", Helvetica, sans-serif"
@@ -243,14 +245,13 @@ issues:
   - "lib/rules/use-isnan.js:131:25       Castable        U       const isCastable = castableOperators"
   - "lib/rules/utils/ast-utils.js:404:40         samely      U       a.b` and `a?.b` are samely."
   - "lib/rules/utils/ast-utils.js:1049:89        braket      U       opening parenthesis or braket."
-  - "Makefile.js:77:88       markdownlintignore      U       path.join(__dirname, \".markdownlintignore\"), \"utf-8\")),"
-  - "Makefile.js:81:10       MULTIFILES              U       PERF_MULTIFILES_TARGET_DIR = path.join"
-  - "Makefile.js:145:88      ined                    U       followed by the string \"ined\"."
-  - "Makefile.js:356:12      gensite                 U       target.gensite();"
-  - "Makefile.js:948:18      Multifiles              U       function downloadMultifilesTestTarget(cb) {"
-  - "package.json:26:21          knip            U       \"lint:unused\": \"knip\","
-  - "package.json:126:6          eslump          U       \"eslump\": \"^3.0.0\","
-  - "package.json:143:6          metascraper     U       \"metascraper\": \"^5.25.7\","
+  - "Makefile.js:76:88       markdownlintignore      U       path.join(__dirname, \".markdownlintignore\"), \"utf-8\")),"
+  - "Makefile.js:80:10       MULTIFILES              U       PERF_MULTIFILES_TARGET_DIR = path.join"
+  - "Makefile.js:132:88      ined                    U       followed by the string \"ined\"."
+  - "Makefile.js:343:12      gensite                 U       target.gensite();"
+  - "Makefile.js:932:18      Multifiles              U       function downloadMultifilesTestTarget(cb) {"
+  - "package.json:127:6          eslump          U       \"eslump\": \"^3.0.0\","
+  - "package.json:144:6          metascraper     U       \"metascraper\": \"^5.25.7\","
   - "README.md:108:109       myplugin                U       npm view eslint-plugin-myplugin peerDependencies` to"
   - "README.md:212:5         teamstart               U       <!--teamstart-->"
   - "README.md:220:87        Zakas's                 U       5\" alt=\"Nicholas C. Zakas's Avatar\"><br />"
@@ -793,7 +794,7 @@ issuesSummary:
   - "text: Kanti, count: 1, files: 1,"
   - "text: Kanti's, count: 1, files: 1,"
   - "text: Karlton, count: 2, files: 2,"
-  - "text: knip, count: 2, files: 1,"
+  - "text: knip, count: 3, files: 2,"
   - "text: Knip, count: 2, files: 2,"
   - "text: Kovalyov, count: 1, files: 1,"
   - "text: Kumar, count: 1, files: 1,"
@@ -916,6 +917,7 @@ issuesSummary:
   - "text: Nums, count: 4, files: 1,"
   - "text: numvals, count: 2, files: 1,"
   - "text: nunber, count: 1, files: 1,"
+  - "text: nzakas, count: 2, files: 1,"
   - "text: occured, count: 4, files: 2,"
   - "text: octals, count: 1, files: 1,"
   - "text: Officiële, count: 1, files: 1,"
