@@ -2,8 +2,8 @@ import chalk from 'chalk';
 import type { Command } from 'commander';
 import { Option as CommanderOption } from 'commander';
 
-import * as App from './application.js';
-import { checkText } from './application.js';
+import * as App from './application.mjs';
+import { checkText } from './application.mjs';
 import { console } from './console.js';
 import type { BaseOptions } from './options.js';
 import { CheckFailed } from './util/errors.js';

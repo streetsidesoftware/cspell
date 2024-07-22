@@ -1,4 +1,4 @@
-export * from './application.js';
+export * from './application.mjs';
 export { getReporter as getDefaultReporter } from './cli-reporter.js';
 export type { CSpellReporterConfiguration, CSpellReporterModule } from './models.js';
 export type { BaseOptions, LinterCliOptions as CSpellApplicationOptions, TraceOptions } from './options.js';

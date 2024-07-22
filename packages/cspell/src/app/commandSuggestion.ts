@@ -1,7 +1,7 @@
 import type { Command } from 'commander';
 import { Option as CommanderOption } from 'commander';
 
-import * as App from './application.js';
+import * as App from './application.mjs';
 import { emitSuggestionResult } from './emitters/suggestionsEmitter.js';
 import type { SuggestionOptions } from './options.js';
 import { CheckFailed } from './util/errors.js';

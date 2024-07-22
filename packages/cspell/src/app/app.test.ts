@@ -9,7 +9,7 @@ import * as Commander from 'commander';
 import stripAnsi from 'strip-ansi';
 import { afterEach, beforeEach, type Constructable, describe, expect, test, vi } from 'vitest';
 
-import * as app from './app.js';
+import * as app from './app.mjs';
 import { console } from './console.js';
 import * as Link from './link.js';
 import { pathPackageRoot } from './test/test.helper.js';

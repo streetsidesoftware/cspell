@@ -40,10 +40,9 @@
   ],
   "scripts": {
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
-    "build": "tsc -b . -f && ts2mjs dist/esm && pnpm run build:api",
+    "build": "tsc -p . && pnpm run build:api",
     "build:api": "rollup -c rollup.config.mjs",
-    "build:esm": "tsc -b tsconfig.esm.json -f",
-    "build:esm:ts2mjs": "tsc -b tsconfig.esm.json && ts2mjs dist/esm",
+    "build:esm": "tsc -p .",
     "build:lib": "tsc -b src/lib/tsconfig.json -f",
     "build:readme": "pnpm build:readme:help",
     "build:readme:help": "pnpm build:readme:help:lint && pnpm build:readme:help:trace && inject-markdown README.md && prettier -w README.md",
@@ -56,6 +55,7 @@
     "watch": "tsc -b . -w -f",
     "compile": "tsc -b . -f",
     "test-watch": "vitest",
+    "version": "node ./tools/patch-version.mjs",
     "prepublishOnly": "pnpm run clean-build",
     "test:update-snapshot": "vitest run --update"
   },

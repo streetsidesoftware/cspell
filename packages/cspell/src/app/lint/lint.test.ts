@@ -2,7 +2,7 @@ import * as path from 'node:path';
 
 import { describe, expect, test } from 'vitest';
 
-import { CheckFailed } from '../app.js';
+import { CheckFailed } from '../app.mjs';
 import { pathPackageRoot } from '../test/test.helper.js';
 import { InMemoryReporter } from '../util/InMemoryReporter.js';
 import { runLint } from './lint.js';

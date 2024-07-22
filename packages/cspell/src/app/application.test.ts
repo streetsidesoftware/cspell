@@ -6,7 +6,7 @@ import type { Issue, RunResult } from '@cspell/cspell-types';
 import getStdin from 'get-stdin';
 import { afterEach, describe, expect, test, vi } from 'vitest';
 
-import * as App from './application.js';
+import * as App from './application.mjs';
 import type { LinterOptions, TraceOptions } from './options.js';
 import { pathPackageRoot, pathSamples } from './test/test.helper.js';
 import { asyncIterableToArray } from './util/async.js';

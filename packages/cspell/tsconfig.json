@@ -1,4 +1,11 @@
 {
-    "files": [],
-    "references": [{ "path": "./tsconfig.esm.json" }, { "path": "./src/lib/tsconfig.json" }]
+    "extends": "../../tsconfig.esm.json",
+    "compilerOptions": {
+        "rootDir": "src/app",
+        "outDir": "dist/esm",
+        "target": "es2022",
+        "lib": ["es2023"],
+        "types": ["node"]
+    },
+    "include": ["src/app"]
 }
