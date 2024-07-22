@@ -55,7 +55,7 @@
     "watch": "tsc -b . -w -f",
     "compile": "tsc -b . -f",
     "test-watch": "vitest",
-    "version": "node ./tools/patch-version.mjs",
+    "version": "node ./tools/patch-version.mjs && git add .",
     "prepublishOnly": "pnpm run clean-build",
     "test:update-snapshot": "vitest run --update"
   },
