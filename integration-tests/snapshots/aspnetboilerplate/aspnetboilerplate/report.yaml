@@ -4,8 +4,8 @@ Url: https://github.com/aspnetboilerplate/aspnetboilerplate
 Args: '["**/*.{md,cs,cshtml}","--exclude=wwwroot","--exclude=**/*SampleApp.Tests/Web*"]'
 Summary:
   files: 2739
-  filesWithIssues: 856
-  issues: 2854
+  filesWithIssues: 848
+  issues: 2816
   errors: 0
 Errors: []
 
@@ -159,8 +159,6 @@ issues:
   - "src/Abp.AspNetCore.OData/Properties/AssemblyInfo.cs:21:44       typelib     U       is for the ID of the typelib if this project is exposed"
   - "src/Abp.AspNetCore.OpenIddict/AspNetCore/OpenIddict/Controllers/AuthorizeController.cs:77:56        promptless      U       application requested promptless authentication,"
   - "src/Abp.AspNetCore.OpenIddict/AspNetCore/OpenIddict/Controllers/TokenController.Password.cs:25:21       OIDDICT     U       // TODO@OIDDICT: Should we use session"
-  - "src/Abp.AspNetCore/Application/Services/Dto/ComboboxItemDtoExtensions.cs:5:25           Combobox    U       public static class ComboboxItemDtoExtensions"
-  - "src/Abp.AspNetCore/Application/Services/Dto/ComboboxItemDtoExtensions.cs:7:76           combobox    U       this ComboboxItemDto comboboxItem)"
   - "src/Abp.AspNetCore/AspNetCore/Configuration/AbpControllerAssemblySettingBuilder.cs:21:101       configurer      U       Action<ControllerModel> configurer)"
   - "src/Abp.AspNetCore/AspNetCore/EntityHistory/HttpRequestEntityChangeSetReasonProvider.cs:17:42       Overrided       U       override string Reason => OverridedValue != null"
   - "src/Abp.AspNetCore/AspNetCore/MultiTenancy/DomainTenantResolveContributor.cs:9:43           Extracter       U       FormattedStringValueExtracter;"
@@ -452,7 +450,6 @@ issues:
   - "src/Abp/Threading/Timers/AbpAsyncTimer.cs:27:54         spesified       U       to perfom the task at spesified intervals."
   - "src/Abp/Threading/Timers/AbpTimer.cs:8:11           roboust     U       /// A roboust timer implementation"
   - "src/Abp/Timing/Timezone/TimezoneHelper.cs:103:45        datetimeoffset      U       utc datetime in to a datetimeoffset"
-  - "src/Abp/UI/Inputs/ComboboxInputType.cs:10:17        COMBOBOX    U       [InputType(\"COMBOBOX\")]"
   - "test/Abp.AspNetCore.Tests/App/MultiTenancy/TestTenantStore.cs:13:33         vlsft       U       new TenantInfo(43, \"vlsft\")"
   - "test/Abp.AspNetCore.Tests/Tests/AbpLocalizationController_Tests.cs:5:7          Shouldly        U       using Shouldly;"
   - "test/Abp.AspNetCore.Tests/Tests/AbpLocalizationController_Tests.cs:6:7          Xunit           U       using Xunit;"
@@ -564,7 +561,6 @@ issues:
   - "test/Abp.ZeroCore.Tests/Zero/Redis/PerRequestRedisCache/AbpPerRequestRedisCache_Test.cs:250:127     redisdb     U       it should go to the redisdb again"
   - "test/Abp.ZeroCore.Tests/Zero/Sessions/Session_Override_Tests.cs:47:37       Carluccio's     U       Name = \"Carluccio's\","
   - "test/aspnet-core-demo/AbpAspNetCoreDemo.Tests/Tests/SanitizerControllerTests.cs:115:30      malicioussite       U       InlineData(\"<a href='://malicioussite'>Please verify your"
-  - "test/aspnet-core-demo/AbpAspNetCoreDemo/Views/Home/Index.cshtml:12:39       listbox         U       carousel-inner\" role=\"listbox\">"
   - "test/aspnet-core-demo/AbpAspNetCoreDemo/Views/Home/Index.cshtml:59:22       glyphicon       U       <span class=\"glyphicon glyphicon-chevron-left"
   - "test/aspnet-core-demo/AbpAspNetCoreDemo/Views/Home/Index.cshtml:81:80       appsetting      U       LinkID=699562\">Add an appsetting in config and access"
   - "test/aspnet-core-demo/AbpAspNetCoreDemo/Views/Shared/_Layout.cshtml:56:28       jquery      U       <script src=\"~/lib/jquery/dist/jquery.js\"></script"
