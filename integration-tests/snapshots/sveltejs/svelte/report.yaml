@@ -4,8 +4,8 @@ Url: https://github.com/sveltejs/svelte.git
 Args: '["**"]'
 Summary:
   files: 6992
-  filesWithIssues: 640
-  issues: 5274
+  filesWithIssues: 635
+  issues: 5204
   errors: 0
 Errors: []
 
@@ -1039,20 +1039,16 @@ issues:
   - "packages/svelte/elements.d.ts:425:2         onclosecapture                  U       onclosecapture?: EventHandler<Event"
   - "packages/svelte/elements.d.ts:428:2         onfullscreenchangecapture       U       onfullscreenchangecapture?: EventHandler<Event"
   - "packages/svelte/elements.d.ts:431:2         onfullscreenerrorcapture        U       onfullscreenerrorcapture?: EventHandler<Event"
-  - "packages/svelte/elements.d.ts:436:87        textbox                         U       a composite widget, textbox, group, or application"
   - "packages/svelte/elements.d.ts:437:8         activedescendant                U       'aria-activedescendant'?: string | undefined"
   - "packages/svelte/elements.d.ts:453:62        treegrid                        U       in a table, grid, or treegrid."
   - "packages/svelte/elements.d.ts:454:15        colindex                        U       * @see aria-colindex."
   - "packages/svelte/elements.d.ts:456:8         colcount                        U       'aria-colcount'?: number | undefined"
-  - "packages/svelte/elements.d.ts:463:56        gridcell                        U       spanned by a cell or gridcell within a table, grid"
   - "packages/svelte/elements.d.ts:464:34        rowspan                         U       aria-colindex @see aria-rowspan."
   - "packages/svelte/elements.d.ts:476:15        labelledby                      U       * @see aria-labelledby"
   - "packages/svelte/elements.d.ts:478:8         describedby                     U       'aria-describedby'?: string | undefined"
   - "packages/svelte/elements.d.ts:493:8         dropeffect                      U       'aria-dropeffect'?: 'none' | 'copy'"
-  - "packages/svelte/elements.d.ts:498:8         errormessage                    U       'aria-errormessage'?: string | undefined"
   - "packages/svelte/elements.d.ts:505:8         flowto                          U       'aria-flowto'?: string | undefined"
   - "packages/svelte/elements.d.ts:512:8         haspopup                        U       'aria-haspopup'?: Booleanish | 'menu"
-  - "packages/svelte/elements.d.ts:512:43        listbox                         U       Booleanish | 'menu' | 'listbox' | 'tree' | 'grid'"
   - "packages/svelte/elements.d.ts:524:8         keyshortcuts                    U       'aria-keyshortcuts'?: string | undefined"
   - "packages/svelte/elements.d.ts:544:8         multiselectable                 U       'aria-multiselectable'?: Booleanish | undefined"
   - "packages/svelte/elements.d.ts:559:67        listitems                       U       in the current set of listitems or treeitems. Not required"
@@ -1066,19 +1062,15 @@ issues:
   - "packages/svelte/elements.d.ts:629:8         valuenow                        U       'aria-valuenow'?: number | undefined"
   - "packages/svelte/elements.d.ts:637:5         alertdialog                     U       | 'alertdialog'"
   - "packages/svelte/elements.d.ts:644:5         columnheader                    U       | 'columnheader'"
-  - "packages/svelte/elements.d.ts:645:5         combobox                        U       | 'combobox'"
   - "packages/svelte/elements.d.ts:647:5         contentinfo                     U       | 'contentinfo'"
   - "packages/svelte/elements.d.ts:663:5         listitem                        U       | 'listitem'"
   - "packages/svelte/elements.d.ts:671:5         menuitemcheckbox                U       | 'menuitemcheckbox'"
   - "packages/svelte/elements.d.ts:672:5         menuitemradio                   U       | 'menuitemradio'"
   - "packages/svelte/elements.d.ts:678:5         progressbar                     U       | 'progressbar'"
-  - "packages/svelte/elements.d.ts:680:5         radiogroup                      U       | 'radiogroup'"
   - "packages/svelte/elements.d.ts:683:5         rowgroup                        U       | 'rowgroup'"
   - "packages/svelte/elements.d.ts:684:5         rowheader                       U       | 'rowheader'"
-  - "packages/svelte/elements.d.ts:687:5         searchbox                       U       | 'searchbox'"
   - "packages/svelte/elements.d.ts:690:5         spinbutton                      U       | 'spinbutton'"
   - "packages/svelte/elements.d.ts:695:5         tablist                         U       | 'tablist'"
-  - "packages/svelte/elements.d.ts:704:5         treeitem                        U       | 'treeitem'"
   - "packages/svelte/elements.d.ts:712:2         contenteditable                 U       contenteditable?: Booleanish | 'inherit"
   - "packages/svelte/elements.d.ts:716:2         elementtiming                   U       elementtiming?: string | undefined"
   - "packages/svelte/elements.d.ts:717:2         enterkeyhint                    U       enterkeyhint?:"
@@ -2514,7 +2506,6 @@ issues:
   - "packages/svelte/src/internal/client/reactivity/props.js:344:36      synchronisation     U       current_value); // force a synchronisation immediately"
   - "packages/svelte/src/internal/client/reactivity/types.d.ts:33:6          Deriveds    U       /** Deriveds created inside this"
   - "packages/svelte/src/internal/client/render.js:168:19        occured (occurred)      U       // If an error occured above, the operations"
-  - "packages/svelte/src/internal/client/runtime.js:247:36       callstack           U       internal files from callstack"
   - "packages/svelte/src/internal/client/runtime.js:809:26       doesnt (doesn't)    U       mutate(dep, null /* doesnt matter */);"
   - "packages/svelte/src/internal/client/runtime.js:1182:29      noone (no one)      U       value; // let's hope noone modifies this global"
   - "packages/svelte/src/internal/client/types.d.ts:10:19        JITs            U       // when the JS VM JITs the code."
@@ -2592,7 +2583,6 @@ issues:
   - "packages/svelte/tests/runtime-browser/samples/component-event-handler-contenteditable-false/_config.js:13:21        bcde        U       component.text = 'bcde';"
   - "packages/svelte/tests/runtime-browser/samples/component-event-handler-contenteditable-false/_config.js:14:34        bcdea       U       equal(div.textContent, 'bcdea');"
   - "packages/svelte/tests/runtime-browser/samples/inline-style-directive-important/_config.js:5:21          szzkfu      U       <h1 class=\"svelte-szzkfu\" style=\"background-color"
-  - "packages/svelte/tests/runtime-legacy/samples/animation-css/_config.js:1:8           nocheck     U       // @ts-nocheck"
   - "packages/svelte/tests/runtime-legacy/samples/attribute-casing/_config.js:5:15           SHOUTY          U       <div class='SHOUTY'>YELL</div>"
   - "packages/svelte/tests/runtime-legacy/samples/attribute-casing/_config.js:8:25           hellooooo       U       text textLength=100>hellooooo</text>"
   - "packages/svelte/tests/runtime-legacy/samples/attribute-casing/main.svelte:3:6           viewbox         U       <svg viewbox='0 0 100 100' id='one"

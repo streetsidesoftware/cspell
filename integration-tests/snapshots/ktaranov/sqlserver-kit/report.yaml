@@ -5,7 +5,7 @@ Args: '["**","--exclude=**/Backup/**"]'
 Summary:
   files: 489
   filesWithIssues: 452
-  issues: 14335
+  issues: 14311
   errors: 0
 Errors: []
 
@@ -492,7 +492,6 @@ issues:
   - "Extended_Events/AppExecutionTimeout.sql:3:18        Yamamoto    U       Author: Franklin Yamamoto"
   - "Extended_Events/BackupRestoreTrace.sql:13:11        sqlos       U       ADD EVENT sqlos.async_io_completed("
   - "Extended_Events/CheckpointTracking.sql:7:31         inadvertant (inadvertent)       U       to prevent inadvertant loss of events."
-  - "Extended_Events/CheckpointTracking.sql:20:24        callstack                       U       package0.callstack"
   - "Extended_Events/ConfigurationItemsChanged.sql:10:32         SYSDATETIMEOFFSET       U       DateName(TzOffset, SYSDATETIMEOFFSET()))) AS datetime_local"
   - "Extended_Events/ConfigurationItemsChanged.sql:32:37         Procs                   U       configure 'Scan for Startup Procs',1;"
   - "Extended_Events/ConvertingSQLTracetoExtendedEvents.sql:14:10        Addlogin        U       /* Audit Addlogin Event is not implemented"
@@ -695,7 +694,6 @@ issues:
   - "PowerShell/CsvSqlimport.ps1:590:5       sqldatatypes            U       $sqldatatypes = @(); $index = 0"
   - "PowerShell/CsvSqlimport.ps1:593:6       sqlcolumnname           U       $sqlcolumnname = $Columns[$index]"
   - "PowerShell/CsvSqlimport.ps1:598:57      sqldatatype             U       ref]0) -eq $true) { $sqldatatype = \"varchar(255)\" }"
-  - "PowerShell/CsvSqlimport.ps1:609:5       errormessage            U       $errormessage = $_.Exception.Message"
   - "PowerShell/CsvSqlimport.ps1:651:4       Supafast                U       # Supafast turbo mode requires"
   - "PowerShell/CsvSqlimport.ps1:652:27      tablelock               U       turbo -eq $true) { $tablelock = $true }"
   - "PowerShell/CsvSqlimport.ps1:663:39      Streamreader            U       support -First in both Streamreader, and OleDb imports,"

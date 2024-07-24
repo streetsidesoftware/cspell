@@ -3,7 +3,7 @@ Repository: php/php-src
 Url: "https://github.com/php/php-src.git"
 Args: ["--config=../../../../config/repositories/php/php-src/cspell.json","**/*.{md,c,h,php}"]
 Lines:
- CSpell: Files checked: 2203, Issues found: 43719 in 1676 files.
+ CSpell: Files checked: 2203, Issues found: 43710 in 1676 files.
  exit code: 1
 CODING_STANDARDS.md:103:23    - Unknown word (intvl)        -- // Could be 'date_intvl_create_from_date_str
 CODING_STANDARDS.md:112:8     - Unknown word (setclientencoding) -- pg_setclientencoding
@@ -6742,24 +6742,23 @@ ext/pgsql/pgsql.c:685:1     - Unknown word (newpconn)   -- newpconn:
 ext/pgsql/pgsql.c:974:31    - Unknown word (datetimes)  -- COPY_PARAM("integer_datetimes");
 ext/pgsql/pgsql.stub.php:12:17     - Unknown word (LIBPQ)      -- const PGSQL_LIBPQ_VERSION = UNKNOWN;
 ext/pgsql/pgsql.stub.php:6:8       - Unknown word (libpq)      -- /* libpq version */
-ext/pgsql/pgsql_arginfo.h:183:20    - Unknown word (fieldprtlen)  -- #define arginfo_pg_fieldprtlen arginfo_pg_field_prtlen
-ext/pgsql/pgsql_arginfo.h:215:20    - Unknown word (locreate)     -- #define arginfo_pg_locreate arginfo_pg_lo_create
-ext/pgsql/pgsql_arginfo.h:222:20    - Unknown word (lounlink)     -- #define arginfo_pg_lounlink arginfo_pg_lo_unlink
-ext/pgsql/pgsql_arginfo.h:230:20    - Unknown word (loopen)       -- #define arginfo_pg_loopen arginfo_pg_lo_open
-ext/pgsql/pgsql_arginfo.h:236:20    - Unknown word (loclose)      -- #define arginfo_pg_loclose arginfo_pg_lo_close
-ext/pgsql/pgsql_arginfo.h:243:20    - Unknown word (loread)       -- #define arginfo_pg_loread arginfo_pg_lo_read
-ext/pgsql/pgsql_arginfo.h:251:20    - Unknown word (lowrite)      -- #define arginfo_pg_lowrite arginfo_pg_lo_write
-ext/pgsql/pgsql_arginfo.h:257:20    - Unknown word (loreadall)    -- #define arginfo_pg_loreadall arginfo_pg_lo_read_all
-ext/pgsql/pgsql_arginfo.h:25:20     - Unknown word (errormessage) -- #define arginfo_pg_errormessage arginfo_pg_dbname
-ext/pgsql/pgsql_arginfo.h:265:20    - Unknown word (loimport)     -- #define arginfo_pg_loimport arginfo_pg_lo_import
-ext/pgsql/pgsql_arginfo.h:273:20    - Unknown word (loexport)     -- #define arginfo_pg_loexport arginfo_pg_lo_export
+ext/pgsql/pgsql_arginfo.h:183:20    - Unknown word (fieldprtlen) -- #define arginfo_pg_fieldprtlen arginfo_pg_field_prtlen
+ext/pgsql/pgsql_arginfo.h:215:20    - Unknown word (locreate)    -- #define arginfo_pg_locreate arginfo_pg_lo_create
+ext/pgsql/pgsql_arginfo.h:222:20    - Unknown word (lounlink)    -- #define arginfo_pg_lounlink arginfo_pg_lo_unlink
+ext/pgsql/pgsql_arginfo.h:230:20    - Unknown word (loopen)      -- #define arginfo_pg_loopen arginfo_pg_lo_open
+ext/pgsql/pgsql_arginfo.h:236:20    - Unknown word (loclose)     -- #define arginfo_pg_loclose arginfo_pg_lo_close
+ext/pgsql/pgsql_arginfo.h:243:20    - Unknown word (loread)      -- #define arginfo_pg_loread arginfo_pg_lo_read
+ext/pgsql/pgsql_arginfo.h:251:20    - Unknown word (lowrite)     -- #define arginfo_pg_lowrite arginfo_pg_lo_write
+ext/pgsql/pgsql_arginfo.h:257:20    - Unknown word (loreadall)   -- #define arginfo_pg_loreadall arginfo_pg_lo_read_all
+ext/pgsql/pgsql_arginfo.h:265:20    - Unknown word (loimport)    -- #define arginfo_pg_loimport arginfo_pg_lo_import
+ext/pgsql/pgsql_arginfo.h:273:20    - Unknown word (loexport)    -- #define arginfo_pg_loexport arginfo_pg_lo_export
 ext/pgsql/pgsql_arginfo.h:302:20    - Unknown word (clientencoding) -- #define arginfo_pg_clientencoding arginfo_pg_dbname
 ext/pgsql/pgsql_arginfo.h:776:47    - Unknown word (PQERRORS)       -- PGSQL_ERRORS_TERSE", PQERRORS_TERSE, CONST_PERSISTENT
 ext/pgsql/pgsql_arginfo.h:832:30    - Unknown word (NONLOCALIZED)   -- defined(PG_DIAG_SEVERITY_NONLOCALIZED)
 ext/pgsql/pgsql_arginfo.h:843:13    - Unknown word (PQTRACE)        -- #if defined(PQTRACE_SUPPPRESS_TIMESTAMPS
 ext/pgsql/pgsql_arginfo.h:843:21    - Unknown word (SUPPPRESS)      -- #if defined(PQTRACE_SUPPPRESS_TIMESTAMPS)
 ext/pgsql/pgsql_arginfo.h:849:53    - Unknown word (PQSHOW)         -- SHOW_CONTEXT_NEVER", PQSHOW_CONTEXT_NEVER, CONST
-ext/pgsql/pgsql_arginfo.h:87:20     - Unknown word (cmdtuples)    -- #define arginfo_pg_cmdtuples arginfo_pg_num_rows
+ext/pgsql/pgsql_arginfo.h:87:20     - Unknown word (cmdtuples)  -- #define arginfo_pg_cmdtuples arginfo_pg_num_rows
 ext/pgsql/php_pgsql.h:128:5     - Unknown word (geometoric) -- /* geometoric */
 ext/pgsql/tests/README.md:9:38      - Unknown word (testuser)   -- your login name is `testuser`, you should have PostgreSQL
 ext/phar/dirstream.c:24:11     - Unknown word (dostat)     -- void phar_dostat(phar_archive_data *phar
@@ -7823,7 +7822,6 @@ ext/standard/dir.c:128:63    - Unknown word (createobject) -- FUNCTION_PARAMETER
 ext/standard/dir.c:384:45    - Unknown word (FLAGMASK)     -- pattern, flags & GLOB_FLAGMASK, NULL, &globbuf)))
 ext/standard/dir.c:43:9      - Unknown word (DIRG)       -- #define DIRG(v) ZEND_TSRMG(dir_globals
 ext/standard/dir.c:454:8     - Unknown word (dirn)         -- char *dirn;
-ext/standard/dir.stub.php:38:19     - Unknown word (NOCHECK)    -- #if (defined(GLOB_NOCHECK) && GLOB_NOCHECK !=
 ext/standard/dir.stub.php:52:19     - Unknown word (NOSORT)     -- #if (defined(GLOB_NOSORT) && GLOB_NOSORT !=
 ext/standard/dir_arginfo.h:25:50     - Unknown word (dirsep)     -- DIRECTORY_SEPARATOR", dirsep_str, CONST_PERSISTENT
 ext/standard/dir_arginfo.h:26:45     - Unknown word (pathsep)    -- CONSTANT("PATH_SEPARATOR", pathsep_str, CONST_PERSISTENT
