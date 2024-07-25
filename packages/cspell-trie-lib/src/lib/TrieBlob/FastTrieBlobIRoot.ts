@@ -1,4 +1,4 @@
-import type { ITrieNode, ITrieNodeId, ITrieNodeRoot } from '../ITrieNode/ITrieNode.js';
+import type { FindResult, ITrieNode, ITrieNodeId, ITrieNodeRoot } from '../ITrieNode/ITrieNode.js';
 import type { TrieInfo } from '../ITrieNode/TrieInfo.js';
 import type { FastTrieBlobInternals } from './FastTrieBlobInternals.js';
 import { Utf8Accumulator } from './Utf8.js';
@@ -7,7 +7,7 @@ const EmptyKeys: readonly string[] = Object.freeze([]);
 const EmptyNodes: readonly ITrieNode[] = Object.freeze([]);
 const EmptyEntries: readonly (readonly [string, ITrieNode])[] = Object.freeze([]);
 
-type Node = readonly number[];
+type Node = Readonly<Uint32Array>;
 type NodeIndex = number;
 
 class FastTrieBlobINode implements ITrieNode {
@@ -203,10 +203,21 @@ export class FastTrieBlobIRoot extends FastTrieBlobINode implements ITrieNodeRoo
         trie: FastTrieBlobInternals,
         nodeIdx: number,
         readonly info: Readonly<TrieInfo>,
+        readonly findExact: (word: string) => boolean,
     ) {
         super(trie, nodeIdx);
     }
     resolveId(id: ITrieNodeId): ITrieNode {
         return new FastTrieBlobINode(this.trie, id as number);
+    }
+
+    find(word: string, strict: boolean): FindResult | undefined {
+        let found = this.findExact(word);
+        if (found) {
+            return { found: word, compoundUsed: false, caseMatched: true };
+        }
+        if (strict) return undefined;
+        found = this.findExact(this.info.stripCaseAndAccentsPrefix + word);
+        return found ? { found: word, compoundUsed: false, caseMatched: false } : undefined;
     }
 }

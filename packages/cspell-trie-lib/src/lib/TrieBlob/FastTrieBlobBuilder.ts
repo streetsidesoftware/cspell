@@ -8,7 +8,7 @@ import { assertValidUtf16Character } from '../utils/text.js';
 import { CharIndexBuilder } from './CharIndex.js';
 import { FastTrieBlob, nodesToJSON } from './FastTrieBlob.js';
 import type { FastTrieBlobBitMaskInfo } from './FastTrieBlobBitMaskInfo.js';
-import { FastTrieBlobInternals } from './FastTrieBlobInternals.js';
+import { FastTrieBlobInternals, sortNodes } from './FastTrieBlobInternals.js';
 import { resolveMap } from './resolveMap.js';
 import { TrieBlob } from './TrieBlob.js';
 
@@ -278,7 +278,14 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
         this.freeze();
 
         return FastTrieBlob.create(
-            new FastTrieBlobInternals(this.nodes, this.charIndex.build(), this.bitMasksInfo),
+            new FastTrieBlobInternals(
+                sortNodes(
+                    this.nodes.map((n) => Uint32Array.from(n)),
+                    this.bitMasksInfo.NodeMaskChildCharIndex,
+                ),
+                this.charIndex.build(),
+                this.bitMasksInfo,
+            ),
             this.options,
         );
     }
@@ -286,7 +293,7 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
     toJSON() {
         return {
             options: this.options,
-            nodes: nodesToJSON(this.nodes),
+            nodes: nodesToJSON(this.nodes.map((n) => Uint32Array.from(n))),
         };
     }
 

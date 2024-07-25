@@ -19,7 +19,7 @@ suite('encode to sequence', async (test) => {
 
     test('fastTrieBlob.wordToNodeCharIndexSequence' + msgSuffix, () => {
         for (const word of words) {
-            fastTrieBlob.wordToNodeCharIndexSequence(word);
+            fastTrieBlob.wordToUtf8Seq(word);
         }
     });
 

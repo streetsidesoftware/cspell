@@ -1,6 +1,9 @@
 import { CharIndex } from './CharIndex.js';
 import type { FastTrieBlobBitMaskInfo } from './FastTrieBlobBitMaskInfo.js';
 
+type Node = Uint32Array;
+type Nodes = Node[];
+
 export class FastTrieBlobInternals implements FastTrieBlobBitMaskInfo {
     readonly NodeMaskEOW: number;
     readonly NodeMaskChildCharIndex: number;
@@ -9,7 +12,7 @@ export class FastTrieBlobInternals implements FastTrieBlobBitMaskInfo {
     readonly sorted = true;
 
     constructor(
-        readonly nodes: number[][],
+        readonly nodes: Nodes,
         readonly charIndex: CharIndex,
         maskInfo: FastTrieBlobBitMaskInfo,
     ) {
@@ -18,7 +21,6 @@ export class FastTrieBlobInternals implements FastTrieBlobBitMaskInfo {
         this.NodeMaskChildCharIndex = NodeMaskChildCharIndex;
         this.NodeChildRefShift = NodeChildRefShift;
         this.isIndexDecoderNeeded = charIndex.indexContainsMultiByteChars();
-        sortNodes(nodes, this.NodeMaskChildCharIndex);
     }
 }
 
@@ -28,7 +30,7 @@ export class FastTrieBlobInternals implements FastTrieBlobBitMaskInfo {
  * @param mask
  * @returns
  */
-export function sortNodes(nodes: number[][], mask: number): number[][] {
+export function sortNodes(nodes: Uint32Array[], mask: number): Uint32Array[] {
     if (Object.isFrozen(nodes)) {
         assertSorted(nodes, mask);
         return nodes;
@@ -37,7 +39,7 @@ export function sortNodes(nodes: number[][], mask: number): number[][] {
         let node = nodes[i];
         if (node.length > 2) {
             const isFrozen = Object.isFrozen(node);
-            node = isFrozen ? [...node] : node;
+            node = isFrozen ? Uint32Array.from(node) : node;
             const nodeInfo = node[0];
             node[0] = 0;
             node.sort((a, b) => (!a ? -1 : !b ? 1 : (a & mask) - (b & mask)));
@@ -55,7 +57,7 @@ export function sortNodes(nodes: number[][], mask: number): number[][] {
     return nodes;
 }
 
-export function assertSorted(nodes: number[][], mask: number): void {
+export function assertSorted(nodes: Uint32Array[], mask: number): void {
     for (let i = 0; i < nodes.length; ++i) {
         const node = nodes[i];
         if (node.length > 2) {
