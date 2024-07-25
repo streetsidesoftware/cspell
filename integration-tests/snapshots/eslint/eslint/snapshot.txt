@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: [".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 1944, Issues found: 1738 in 325 files.
+ CSpell: Files checked: 1944, Issues found: 1731 in 325 files.
  exit code: 1
 Makefile.js:132:88    - Unknown word (ined)               -- followed by the string "ined".
 Makefile.js:343:12    - Unknown word (gensite)            -- target.gensite();
@@ -44,7 +44,6 @@ docs/package.json:50:10     - Unknown word (prismjs)         -- "prismjs": "^1.2
 docs/src/_plugins/md-syntax-highlighter.js:4:29      - Unknown word (Yuxi)       -- Copyright (c) 2019-present, Yuxi (Evan) You
 docs/src/about/index.md:6:87      - Unknown word (Zakas)      -- created by Nicholas C. Zakas in June 2013. Code
 docs/src/assets/js/components-index.js:17:14     - Unknown word (toggleindex) -- function toggleindex(e) {
-docs/src/assets/js/css-vars-ponyfill@2.js:2:13      - Unknown word (ponyfill)   -- * css-vars-ponyfill
 docs/src/assets/js/css-vars-ponyfill@2.js:5:23      - Unknown word (Hildenbiddle) -- (c) 2018-2019 John Hildenbiddle <http://hildenbiddle
 docs/src/assets/js/css-vars-ponyfill@2.js:8:10158   - Unknown word (CSSVARSPONYFILL) -- e.comment.indexOf("__CSSVARSPONYFILL")?"/*"+e.comment+"*
 docs/src/assets/js/css-vars-ponyfill@2.js:8:14683   - Unknown word (cssvars)         -- e.hasAttribute("data-cssvars"),n=function(e){return
@@ -55,12 +54,12 @@ docs/src/assets/js/main.js:274:17    - Unknown word (thepanel)   -- var thepanel
 docs/src/assets/js/tabs.js:164:10    - Unknown word (unactivate) -- // unactivate all other tabs
 docs/src/assets/js/tabs.js:225:9     - Unknown word (incrementcurrent) -- var incrementcurrentIndex = function ()
 docs/src/assets/js/tabs.js:236:9     - Unknown word (decrementcurrent) -- var decrementcurrentIndex = function ()
-docs/src/assets/js/tabs.js:95:9      - Unknown word (tablist)    -- var tablist = el.querySelector(
 docs/src/assets/js/tabs.js:97:9      - Unknown word (tabpanels)  -- var tabpanels = Array.from(el.querySelector
 docs/src/assets/scss/ads.scss:141:32    - Unknown word (callout)    -- publisher].loaded .ea-callout a:link,
 docs/src/assets/scss/ads.scss:16:2      - Unknown word (carbonads)  -- #carbonads * {
 docs/src/assets/scss/components/docs-navigation.scss:27:6      - Unknown word (flexer)     -- .flexer {
 docs/src/assets/scss/components/search.scss:178:10    - Unknown word (docsearch)  -- .algolia-docsearch-suggestion--highlight
+docs/src/assets/scss/components/tabs.scss:8:10      - Unknown word (tablist)    -- .c-tabs__tablist {
 docs/src/assets/scss/docs.scss:124:216   - Unknown word (Cpath)      -- fill='%23ECFDF3'/%3E%3Cpath d='M30.5 16L19.5 27L
 docs/src/assets/scss/docs.scss:124:339   - Unknown word (Crect)      -- linejoin='round'/%3E%3Crect x='1.5' y='1' width
 docs/src/assets/scss/docs.scss:124:44    - Unknown word (Csvg)       -- data:image/svg+xml,%3Csvg width='45' height='
@@ -543,11 +542,10 @@ tests/tools/check-rule-examples.js:75:55     - Unknown word (merror)     -- 1:4\
 tests/tools/eslint-fuzzer.js:124:50    - Unknown word (foos)       -- message: "no foos allowed",
 tools/check-emfile-handling.js:30:10     - Unknown word (Sonoma)     -- * MacOS Sonoma v14.4 has a limit of
 tools/fuzzer-runner.js:50:42     - Unknown word (elapseds)   -- rules [:bar] :percent, :elapseds elapsed, eta :etas,
-wdio.conf.js:121:21    - Unknown word (webdriverio) -- * - webdriver, webdriverio
-wdio.conf.js:125:16    - Unknown word (sumologic)   -- * - @wdio/sumologic-reporter
-wdio.conf.js:130:19    - Unknown word (appium)      -- * '@wdio/appium-service': 'info'
-wdio.conf.js:178:48    - Unknown word (specfile)    -- to retry the entire specfile when it fails as a whole
-wdio.conf.js:184:31    - Unknown word (specfiles)   -- Whether or not retried specfiles should be retried immediately
-wdio.conf.js:225:76    - Unknown word (initialise)  -- spawned and can be used to initialise specific service
+wdio.conf.js:125:16    - Unknown word (sumologic)  -- * - @wdio/sumologic-reporter
+wdio.conf.js:130:19    - Unknown word (appium)     -- * '@wdio/appium-service': 'info'
+wdio.conf.js:178:48    - Unknown word (specfile)   -- to retry the entire specfile when it fails as a whole
+wdio.conf.js:184:31    - Unknown word (specfiles)  -- Whether or not retried specfiles should be retried immediately
+wdio.conf.js:225:76    - Unknown word (initialise) -- spawned and can be used to initialise specific service
 wdio.conf.js:249:34    - Unknown word (initialising) -- executed just before initialising the webdriver session
 wdio.conf.js:319:39    - Unknown word (informations) -- Object} result.retries informations to spec related retries

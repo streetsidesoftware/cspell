@@ -4,8 +4,8 @@ Url: https://github.com/sveltejs/svelte.git
 Args: '["**"]'
 Summary:
   files: 6992
-  filesWithIssues: 635
-  issues: 5204
+  filesWithIssues: 634
+  issues: 5184
   errors: 0
 Errors: []
 
@@ -1051,7 +1051,6 @@ issues:
   - "packages/svelte/elements.d.ts:512:8         haspopup                        U       'aria-haspopup'?: Booleanish | 'menu"
   - "packages/svelte/elements.d.ts:524:8         keyshortcuts                    U       'aria-keyshortcuts'?: string | undefined"
   - "packages/svelte/elements.d.ts:544:8         multiselectable                 U       'aria-multiselectable'?: Booleanish | undefined"
-  - "packages/svelte/elements.d.ts:559:67        listitems                       U       in the current set of listitems or treeitems. Not required"
   - "packages/svelte/elements.d.ts:559:80        treeitems                       U       set of listitems or treeitems. Not required if all"
   - "packages/svelte/elements.d.ts:560:15        setsize                         U       * @see aria-setsize."
   - "packages/svelte/elements.d.ts:562:8         posinset                        U       'aria-posinset'?: number | undefined"
@@ -1060,17 +1059,10 @@ issues:
   - "packages/svelte/elements.d.ts:598:8         rowcount                        U       'aria-rowcount'?: number | undefined"
   - "packages/svelte/elements.d.ts:627:15        valuetext                       U       * @see aria-valuetext."
   - "packages/svelte/elements.d.ts:629:8         valuenow                        U       'aria-valuenow'?: number | undefined"
-  - "packages/svelte/elements.d.ts:637:5         alertdialog                     U       | 'alertdialog'"
-  - "packages/svelte/elements.d.ts:644:5         columnheader                    U       | 'columnheader'"
   - "packages/svelte/elements.d.ts:647:5         contentinfo                     U       | 'contentinfo'"
-  - "packages/svelte/elements.d.ts:663:5         listitem                        U       | 'listitem'"
   - "packages/svelte/elements.d.ts:671:5         menuitemcheckbox                U       | 'menuitemcheckbox'"
   - "packages/svelte/elements.d.ts:672:5         menuitemradio                   U       | 'menuitemradio'"
-  - "packages/svelte/elements.d.ts:678:5         progressbar                     U       | 'progressbar'"
-  - "packages/svelte/elements.d.ts:683:5         rowgroup                        U       | 'rowgroup'"
-  - "packages/svelte/elements.d.ts:684:5         rowheader                       U       | 'rowheader'"
   - "packages/svelte/elements.d.ts:690:5         spinbutton                      U       | 'spinbutton'"
-  - "packages/svelte/elements.d.ts:695:5         tablist                         U       | 'tablist'"
   - "packages/svelte/elements.d.ts:712:2         contenteditable                 U       contenteditable?: Booleanish | 'inherit"
   - "packages/svelte/elements.d.ts:716:2         elementtiming                   U       elementtiming?: string | undefined"
   - "packages/svelte/elements.d.ts:717:2         enterkeyhint                    U       enterkeyhint?:"
@@ -2686,15 +2678,20 @@ issues:
   - "packages/svelte/tests/validator/samples/a11y-no-abstract-roles/input.svelte:8:12        sectionhead     U       <div role=\"sectionhead\"></div>"
   - "packages/svelte/tests/validator/samples/a11y-no-access-key/warnings.json:3:17           accesskey       U       \"code\": \"a11y_accesskey\","
   - "packages/svelte/tests/validator/samples/a11y-no-interactive-element-to-noninteractive-role/warnings.json:3:43           noninteractive      U       interactive_element_to_noninteractive_role\","
+  - "packages/svelte/tests/validator/samples/a11y-no-interactive-element-to-noninteractive-role/warnings.json:56:39          listitem            U       ` cannot have role 'listitem'\","
   - "packages/svelte/tests/validator/samples/a11y-no-noninteractive-element-to-interactive-role/input.svelte:33:20       backlink        U       <marquee role=\"doc-backlink\"></marquee>"
   - "packages/svelte/tests/validator/samples/a11y-no-noninteractive-element-to-interactive-role/input.svelte:34:17       biblioref       U       <menu role=\"doc-biblioref\"></menu>"
   - "packages/svelte/tests/validator/samples/a11y-no-noninteractive-element-to-interactive-role/input.svelte:35:18       glossref        U       <meter role=\"doc-glossref\"></meter>"
   - "packages/svelte/tests/validator/samples/a11y-no-noninteractive-element-to-interactive-role/input.svelte:36:16       noteref         U       <nav role=\"doc-noteref\"></nav>"
-  - "packages/svelte/tests/validator/samples/a11y-no-noninteractive-element-to-interactive-role/warnings.json:136:41         fieldset    U       interactive element `<fieldset>` cannot have interactive"
-  - "packages/svelte/tests/validator/samples/a11y-no-noninteractive-element-to-interactive-role/warnings.json:436:41         optgroup    U       interactive element `<optgroup>` cannot have interactive"
-  - "packages/svelte/tests/validator/samples/a11y-no-noninteractive-element-to-interactive-role/warnings.json:532:41         tbody       U       interactive element `<tbody>` cannot have interactive"
-  - "packages/svelte/tests/validator/samples/a11y-no-noninteractive-element-to-interactive-role/warnings.json:544:41         tfoot       U       interactive element `<tfoot>` cannot have interactive"
-  - "packages/svelte/tests/validator/samples/a11y-no-noninteractive-element-to-interactive-role/warnings.json:556:41         thead       U       interactive element `<thead>` cannot have interactive"
+  - "packages/svelte/tests/validator/samples/a11y-no-noninteractive-element-to-interactive-role/warnings.json:28:84          columnheader    U       have interactive role 'columnheader'\","
+  - "packages/svelte/tests/validator/samples/a11y-no-noninteractive-element-to-interactive-role/warnings.json:136:41         fieldset        U       interactive element `<fieldset>` cannot have interactive"
+  - "packages/svelte/tests/validator/samples/a11y-no-noninteractive-element-to-interactive-role/warnings.json:196:76         rowheader       U       have interactive role 'rowheader'\","
+  - "packages/svelte/tests/validator/samples/a11y-no-noninteractive-element-to-interactive-role/warnings.json:436:41         optgroup        U       interactive element `<optgroup>` cannot have interactive"
+  - "packages/svelte/tests/validator/samples/a11y-no-noninteractive-element-to-interactive-role/warnings.json:532:41         tbody           U       interactive element `<tbody>` cannot have interactive"
+  - "packages/svelte/tests/validator/samples/a11y-no-noninteractive-element-to-interactive-role/warnings.json:544:41         tfoot           U       interactive element `<tfoot>` cannot have interactive"
+  - "packages/svelte/tests/validator/samples/a11y-no-noninteractive-element-to-interactive-role/warnings.json:556:41         thead           U       interactive element `<thead>` cannot have interactive"
+  - "packages/svelte/tests/validator/samples/a11y-no-redundant-roles/warnings.json:344:31        progressbar     U       message\": \"Redundant role 'progressbar'\","
+  - "packages/svelte/tests/validator/samples/a11y-no-redundant-roles/warnings.json:392:31        rowgroup        U       message\": \"Redundant role 'rowgroup'\","
   - "packages/svelte/tests/validator/samples/a11y-no-static-element-interactions/warnings.json:8:30          keydown         U       message\": \"`<div>` with a keydown handler must have an"
   - "packages/svelte/tests/validator/samples/a11y-no-static-element-interactions/warnings.json:20:28         mousedown       U       message\": \"`<a>` with a mousedown or mouseup handler must"
   - "packages/svelte/tests/validator/samples/a11y-no-static-element-interactions/warnings.json:20:41         mouseup         U       with a mousedown or mouseup handler must have an"
@@ -2702,8 +2699,10 @@ issues:
   - "packages/svelte/tests/validator/samples/a11y-role-supports-aria-props/input.svelte:153:16       pagebreak       U       <div role=\"doc-pagebreak\" aria-rowcount=\"0\">"
   - "packages/svelte/tests/validator/samples/a11y-role-supports-aria-props/input.svelte:154:16       pagelist        U       <div role=\"doc-pagelist\" aria-modal=\"true\">"
   - "packages/svelte/tests/validator/samples/a11y-role-supports-aria-props/input.svelte:158:16       pullquote       U       <div role=\"doc-pullquote\" aria-rowcount=\"0\">"
-  - "packages/svelte/tests/validator/samples/a11y-role-supports-aria-props/warnings.json:80:124      datalist    U       implicit on the element `<datalist>`\","
-  - "packages/svelte/tests/validator/samples/a11y-role-supports-aria-props/warnings.json:140:35      valuemin    U       The attribute 'aria-valuemin' is not supported by"
+  - "packages/svelte/tests/validator/samples/a11y-role-supports-aria-props/warnings.json:80:124      datalist        U       implicit on the element `<datalist>`\","
+  - "packages/svelte/tests/validator/samples/a11y-role-supports-aria-props/warnings.json:140:35      valuemin        U       The attribute 'aria-valuemin' is not supported by"
+  - "packages/svelte/tests/validator/samples/a11y-role-supports-aria-props/warnings.json:500:79      alertdialog     U       supported by the role 'alertdialog'\","
+  - "packages/svelte/tests/validator/samples/a11y-role-supports-aria-props/warnings.json:1328:74     tablist         U       supported by the role 'tablist'\","
   - "packages/svelte/tests/validator/samples/document-binding-invalid-dimensions/errors.json:4:126       fullscreen      U       activeElement, focused, fullscreenElement, pointerLockElement"
   - "packages/svelte/tests/validator/samples/dollar-dollar-global-in-markup/errors.json:4:18         billsyall       U       \"message\": \"`$$billsyall` is an illegal variable"
   - "packages/svelte/tests/validator/samples/event-attribute/input.svelte:2:17           onbar       U       <Button onclick onbar=\"bar\">ok</Button>"
