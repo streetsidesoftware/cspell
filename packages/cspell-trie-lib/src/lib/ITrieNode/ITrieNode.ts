@@ -55,6 +55,8 @@ export interface ITrieNode {
     has(char: string): boolean;
     /** `true` iff this node has children */
     hasChildren(): boolean;
+    /** check if a word exists within this node. */
+    findExact?: ((word: string) => boolean) | undefined;
 }
 
 export interface ITrieNodeRoot extends ITrieNode {

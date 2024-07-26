@@ -133,6 +133,8 @@ interface ITrieNode {
     has(char: string): boolean;
     /** `true` iff this node has children */
     hasChildren(): boolean;
+    /** check if a word exists within this node. */
+    findExact?: ((word: string) => boolean) | undefined;
 }
 interface ITrieNodeRoot extends ITrieNode {
     info: Readonly<TrieInfo>;

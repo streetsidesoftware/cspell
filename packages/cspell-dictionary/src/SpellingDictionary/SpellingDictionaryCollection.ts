@@ -1,6 +1,5 @@
 import type { SuggestionCollector, SuggestionResult } from 'cspell-trie-lib';
 import { CASE_INSENSITIVE_PREFIX, CompoundWordsMethod } from 'cspell-trie-lib';
-import { genSequence } from 'gensequence';
 
 import { isDefined } from '../util/util.js';
 import * as Defaults from './defaults.js';
@@ -138,7 +137,7 @@ function isWordInAnyDictionary(
     word: string,
     options: SearchOptions,
 ): SpellingDictionary | undefined {
-    return genSequence(dicts).first((dict) => dict.has(word, options));
+    return dicts.find((dict) => dict.has(word, options));
 }
 
 function findInAnyDictionary(
@@ -160,7 +159,7 @@ function isNoSuggestWordInAnyDictionary(
     word: string,
     options: HasOptions,
 ): SpellingDictionary | undefined {
-    return genSequence(dicts).first((dict) => dict.isNoSuggestWord(word, options));
+    return dicts.find((dict) => dict.isNoSuggestWord(word, options));
 }
 
 function isWordForbiddenInAnyDictionary(
@@ -168,7 +167,7 @@ function isWordForbiddenInAnyDictionary(
     word: string,
     ignoreCase: boolean | undefined,
 ): SpellingDictionary | undefined {
-    return genSequence(dicts).first((dict) => dict.isForbidden(word, ignoreCase));
+    return dicts.find((dict) => dict.isForbidden(word, ignoreCase));
 }
 
 export function isSpellingDictionaryCollection(dict: SpellingDictionary): dict is SpellingDictionaryCollection {

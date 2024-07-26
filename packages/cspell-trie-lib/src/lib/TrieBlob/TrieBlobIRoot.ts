@@ -38,6 +38,10 @@ const EmptyKeys: readonly string[] = Object.freeze([]);
 const EmptyNodes: readonly ITrieNode[] = Object.freeze([]);
 const EmptyEntries: readonly (readonly [string, ITrieNode])[] = Object.freeze([]);
 
+export interface ITrieSupportMethods extends Readonly<Pick<ITrieNodeRoot, 'find' | 'isForbidden'>> {
+    nodeFindExact: (idx: number, word: string) => boolean;
+}
+
 class TrieBlobINode implements ITrieNode {
     readonly id: number;
     readonly node: Node;
@@ -54,6 +58,7 @@ class TrieBlobINode implements ITrieNode {
     constructor(
         readonly trie: TrieBlobInternals,
         readonly nodeIdx: NodeIndex,
+        protected nodeFindExact: (idx: number, word: string) => boolean,
     ) {
         const node = trie.nodes[nodeIdx];
         this.node = node;
@@ -81,7 +86,7 @@ class TrieBlobINode implements ITrieNode {
         if (this._entries) return this._entries;
         if (!this._count) return EmptyEntries;
         const entries = this.getNodesEntries();
-        this._entries = entries.map(([key, value]) => [key, new TrieBlobINode(this.trie, value)]);
+        this._entries = entries.map(([key, value]) => [key, new TrieBlobINode(this.trie, value, this.nodeFindExact)]);
         return this._entries;
     }
 
@@ -105,7 +110,7 @@ class TrieBlobINode implements ITrieNode {
         if (!this._values && !this.containsChainedIndexes()) {
             const n = this.trie.nodes[this.nodeIdx + keyIdx + 1];
             const nodeIdx = n >>> this.trie.NodeChildRefShift;
-            return new TrieBlobINode(this.trie, nodeIdx);
+            return new TrieBlobINode(this.trie, nodeIdx, this.nodeFindExact);
         }
         return this.values()[keyIdx];
     }
@@ -120,6 +125,10 @@ class TrieBlobINode implements ITrieNode {
         }
         this.charToIdx = map;
         return map;
+    }
+
+    findExact(word: string): boolean {
+        return this.nodeFindExact(this.nodeIdx, word);
     }
 
     private containsChainedIndexes(): boolean {
@@ -226,25 +235,21 @@ class TrieBlobINode implements ITrieNode {
     }
 }
 
-export interface ITrieSupportMethods extends Readonly<Pick<ITrieNodeRoot, 'find' | 'findExact' | 'isForbidden'>> {}
-
 export class TrieBlobIRoot extends TrieBlobINode implements ITrieNodeRoot {
     find: ITrieNodeRoot['find'];
-    findExact: ITrieNodeRoot['findExact'];
     isForbidden: ITrieNodeRoot['isForbidden'];
 
     constructor(
         trie: TrieBlobInternals,
         nodeIdx: number,
         readonly info: Readonly<TrieInfo>,
-        methods: ITrieSupportMethods | undefined,
+        methods: ITrieSupportMethods,
     ) {
-        super(trie, nodeIdx);
-        this.find = methods?.find;
-        this.findExact = methods?.findExact;
-        this.isForbidden = methods?.isForbidden;
+        super(trie, nodeIdx, methods.nodeFindExact);
+        this.find = methods.find;
+        this.isForbidden = methods.isForbidden;
     }
     resolveId(id: ITrieNodeId): ITrieNode {
-        return new TrieBlobINode(this.trie, id as number);
+        return new TrieBlobINode(this.trie, id as number, this.nodeFindExact);
     }
 }
