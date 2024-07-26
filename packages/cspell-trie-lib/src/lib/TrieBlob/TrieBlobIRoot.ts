@@ -14,6 +14,7 @@ type Node = number;
 type NodeIndex = number;
 
 interface TrieMethods {
+    readonly nodeFindNode: (idx: number, word: string) => number | undefined;
     readonly nodeFindExact: (idx: number, word: string) => boolean;
     readonly nodeGetChild: (idx: number, letter: string) => number | undefined;
     readonly isForbidden: (word: string) => boolean;
@@ -30,6 +31,7 @@ export class TrieBlobInternals implements TrieMethods, BitMaskInfo {
     readonly isForbidden: (word: string) => boolean;
     readonly findExact: (word: string) => boolean;
     readonly nodeGetChild: (idx: number, letter: string) => number | undefined;
+    readonly nodeFindNode: (idx: number, word: string) => number | undefined;
 
     constructor(
         readonly nodes: Uint32Array,
@@ -47,6 +49,7 @@ export class TrieBlobInternals implements TrieMethods, BitMaskInfo {
         this.isForbidden = methods.isForbidden;
         this.findExact = methods.findExact;
         this.nodeGetChild = methods.nodeGetChild;
+        this.nodeFindNode = methods.nodeFindNode;
     }
 }
 
@@ -150,6 +153,11 @@ class TrieBlobINode implements ITrieNode {
         }
         this.charToIdx = map;
         return map;
+    }
+
+    getNode(word: string): ITrieNode | undefined {
+        const n = this.trie.nodeFindNode(this.nodeIdx, word);
+        return n === undefined ? undefined : new TrieBlobINode(this.trie, n);
     }
 
     findExact(word: string): boolean {

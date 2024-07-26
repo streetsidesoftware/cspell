@@ -159,7 +159,6 @@ export function* getSuggestionsAStar(
 
     function calcEdges(p: PNode): void {
         const { n, i, t } = p;
-        const keys = n.keys();
         const s = srcWord[i];
         const sg = visMap[s] || 0;
         const cost0 = p.c;
@@ -169,9 +168,9 @@ export function* getSuggestionsAStar(
         const costCompound = cost0 + opCosts.compound;
         if (s) {
             // Match
-            const mIdx = keys.indexOf(s);
-            if (mIdx >= 0) {
-                storePath(t, n.child(mIdx), i + 1, cost0, s, p, '=', s);
+            const m = n.get(s);
+            if (m) {
+                storePath(t, m, i + 1, cost0, s, p, '=', s);
             }
 
             if (weightMap) {
@@ -180,20 +179,19 @@ export function* getSuggestionsAStar(
 
             // Double letter, delete 1
             const ns = srcWord[i + 1];
-            if (s == ns && mIdx >= 0) {
-                storePath(t, n.child(mIdx), i + 2, cost0 + DL, s, p, 'dd', s);
+            if (s == ns && m) {
+                storePath(t, m, i + 2, cost0 + DL, s, p, 'dd', s);
             }
             // Delete
             storePath(t, n, i + 1, cost, '', p, 'd', '');
 
             // Replace
-            for (let j = 0; j < keys.length; ++j) {
-                const ss = keys[j];
-                if (j === mIdx || ss in sc) continue;
+            for (const [ss, node] of n.entries()) {
+                if (node.id === m?.id || ss in sc) continue;
                 const g = visMap[ss] || 0;
                 // srcWord === 'WALK' && console.log(g.toString(2));
                 const c = sg & g ? costVis : cost;
-                storePath(t, n.child(j), i + 1, c, ss, p, 'r', ss);
+                storePath(t, node, i + 1, c, ss, p, 'r', ss);
             }
 
             if (n.eow && i && compoundMethod) {
@@ -213,7 +211,7 @@ export function* getSuggestionsAStar(
         }
 
         // Natural Compound
-        if (compRoot && costCompound <= limit && keys.includes(comp)) {
+        if (compRoot && costCompound <= limit && n.get(comp)) {
             if (compRootIgnoreCase) {
                 storePath(t, compRootIgnoreCase, i, costCompound, '', p, '~+', '~+');
             }
@@ -223,10 +221,9 @@ export function* getSuggestionsAStar(
         // Insert
         if (cost <= limit) {
             // At the end of the word, only append is possible.
-            for (let j = 0; j < keys.length; ++j) {
-                const char = keys[j];
+            for (const [char, node] of n.entries()) {
                 if (char in sc) continue;
-                storePath(t, n.child(j), i, cost, char, p, 'i', char);
+                storePath(t, node, i, cost, char, p, 'i', char);
             }
         }
     }
@@ -381,12 +378,9 @@ function searchTrieCostNodesMatchingTrie2<T extends { n?: Record<string, T> }>(
 ): void {
     const n = trie.n;
     if (!n) return;
-    const keys = node.keys();
-    for (let i = 0; i < keys.length; ++i) {
-        const key = keys[i];
+    for (const [key, c] of node.entries()) {
         const t = n[key];
         if (!t) continue;
-        const c = node.child(i);
         const pfx = s + key;
         emit(pfx, t, c);
         if (t.n) {

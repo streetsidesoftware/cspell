@@ -30,6 +30,7 @@ export class FastTrieBlobInternals implements FastTrieBlobBitMaskInfo {
 }
 
 interface TrieMethods {
+    readonly nodeFindNode: (idx: number, word: string) => number | undefined;
     readonly nodeFindExact: (idx: number, word: string) => boolean;
     readonly nodeGetChild: (idx: number, letter: string) => number | undefined;
     readonly isForbidden: (word: string) => boolean;
@@ -37,6 +38,7 @@ interface TrieMethods {
 }
 
 export class FastTrieBlobInternalsAndMethods extends FastTrieBlobInternals implements TrieMethods {
+    readonly nodeFindNode: (idx: number, word: string) => number | undefined;
     readonly nodeFindExact: (idx: number, word: string) => boolean;
     readonly nodeGetChild: (idx: number, letter: string) => number | undefined;
     readonly isForbidden: (word: string) => boolean;
@@ -54,6 +56,7 @@ export class FastTrieBlobInternalsAndMethods extends FastTrieBlobInternals imple
         this.nodeGetChild = trieMethods.nodeGetChild;
         this.isForbidden = trieMethods.isForbidden;
         this.findExact = trieMethods.findExact;
+        this.nodeFindNode = trieMethods.nodeFindNode;
     }
 }
 

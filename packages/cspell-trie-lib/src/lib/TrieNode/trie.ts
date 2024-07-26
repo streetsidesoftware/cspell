@@ -58,6 +58,10 @@ class ImplITrieNode implements ITrieNode {
         return ImplITrieNode.toITrieNode(n);
     }
 
+    getNode(chars: string): ITrieNode | undefined {
+        return this.findNode(chars);
+    }
+
     has(char: string): boolean {
         const c = this.node.c;
         return (c && char in c) || false;
@@ -72,6 +76,25 @@ class ImplITrieNode implements ITrieNode {
 
     hasChildren(): boolean {
         return !!this.node.c;
+    }
+
+    #findTrieNode(word: string): TrieNode | undefined {
+        let node: TrieNode | undefined = this.node;
+        for (const char of word) {
+            if (!node) return undefined;
+            node = node.c?.[char];
+        }
+        return node;
+    }
+
+    findNode(word: string): ITrieNode | undefined {
+        const node = this.#findTrieNode(word);
+        return node && ImplITrieNode.toITrieNode(node);
+    }
+
+    findExact(word: string): boolean {
+        const node = this.#findTrieNode(word);
+        return !!node && !!node.f;
     }
 
     static toITrieNode(node: TrieNode): ITrieNode {

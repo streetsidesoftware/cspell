@@ -86,8 +86,8 @@ function* hintedWalkerNext(
             // We don't want to suggest the compound character.
             hints.add(compoundCharacter);
             // Then yield everything else.
-            yield* n
-                .entries()
+            const entries = n.entries();
+            yield* (Array.isArray(entries) ? entries : [...entries])
                 .filter((a) => !hints.has(a[0]))
                 .map(([letter, node]) => ({
                     letter,
@@ -154,8 +154,8 @@ class ITrieNodeFiltered implements ITrieNode {
     readonly id: ITrieNodeId;
     readonly eow: boolean;
     readonly size: number;
-    private filtered: (readonly [string, number])[];
-    private keyMap: Map<string, number>;
+    private filtered: (readonly [string, ITrieNode])[];
+    private keyMap: Map<string, ITrieNode>;
 
     constructor(
         private srcNode: ITrieNode,
@@ -163,10 +163,10 @@ class ITrieNodeFiltered implements ITrieNode {
     ) {
         this.id = srcNode.id;
         this.eow = srcNode.eow;
-        const keys = srcNode.keys();
-        this.filtered = keys
-            .map((key, idx) => [key, idx] as const)
-            .filter(([key, idx]) => predicate(key, idx, srcNode));
+        const entries = srcNode.entries();
+        this.filtered = (Array.isArray(entries) ? entries : [...entries]).filter(([key], idx) =>
+            predicate(key, idx, srcNode),
+        );
         this.keyMap = new Map(this.filtered);
         this.size = this.keyMap.size;
     }
@@ -176,16 +176,11 @@ class ITrieNodeFiltered implements ITrieNode {
     }
 
     values(): readonly ITrieNode[] {
-        return this.filtered.map(([_, idx]) => this.srcNode.child(idx));
-    }
-
-    child(idx: number): ITrieNode {
-        const [_, srcIdx] = this.filtered[idx];
-        return this.srcNode.child(srcIdx);
+        return this.filtered.map(([, node]) => node);
     }
 
     entries(): readonly (readonly [string, ITrieNode])[] {
-        return this.filtered.map(([key, idx]) => [key, this.srcNode.child(idx)] as const);
+        return this.filtered;
     }
 
     has(char: string): boolean {
@@ -197,8 +192,8 @@ class ITrieNodeFiltered implements ITrieNode {
     }
 
     get(char: string): ITrieNode | undefined {
-        const idx = this.keyMap.get(char);
-        if (idx === undefined) return undefined;
-        return this.srcNode.child(idx);
+        const node = this.keyMap.get(char);
+        if (node === undefined) return undefined;
+        return node;
     }
 }

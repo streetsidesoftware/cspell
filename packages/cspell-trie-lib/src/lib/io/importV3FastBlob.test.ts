@@ -121,14 +121,10 @@ function toTree(root: ITrieNode): string {
     function* walk(n: ITrieNode, prefix: string): Generator<string> {
         const nextPrefix = '.'.repeat(prefix.length);
         if (n.hasChildren()) {
-            const keys = n
-                .keys()
-                .map((k, i) => ({ k, i }))
-                .sort((a, b) => (a.k < b.k ? -1 : 1));
-            for (const key of keys) {
-                const c = n.child(key.i);
-                if (!c) continue;
-                yield* walk(c, prefix + key.k);
+            const entries = [...n.entries()];
+            entries.sort((a, b) => (a[0] < b[0] ? -1 : 1));
+            for (const [key, c] of entries) {
+                yield* walk(c, prefix + key);
                 prefix = nextPrefix;
             }
         }

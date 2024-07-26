@@ -64,6 +64,12 @@ class FastTrieBlobINode implements ITrieNode {
         return new FastTrieBlobINode(this.trie, idx);
     }
 
+    getNode(chars: string): ITrieNode | undefined {
+        const idx = this.trie.nodeFindNode(this.id, chars);
+        if (idx === undefined) return undefined;
+        return new FastTrieBlobINode(this.trie, idx);
+    }
+
     has(char: string): boolean {
         const idx = this.trie.nodeGetChild(this.id, char);
         return idx !== undefined;

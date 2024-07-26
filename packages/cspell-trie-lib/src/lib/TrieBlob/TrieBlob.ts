@@ -132,6 +132,7 @@ export class TrieBlob implements TrieData {
             {
                 nodeFindExact: (idx, word) => this.#hasWord(idx, word),
                 nodeGetChild: (idx, letter) => this._lookupNode(idx, letter),
+                nodeFindNode: (idx, word) => this.#findNode(idx, word),
                 isForbidden: (word) => this.isForbiddenWord(word),
                 findExact: (word) => this.has(word),
             },
@@ -149,11 +150,15 @@ export class TrieBlob implements TrieData {
      * Check if the word is in the trie starting at the given node index.
      */
     #hasWord(nodeIdx: number, word: string): boolean {
-        const wordIndexes = this.wordToUtf8Seq(word);
-        const nodeIdxFound = this.#lookupNode(nodeIdx, wordIndexes);
+        const nodeIdxFound = this.#findNode(nodeIdx, word);
         if (nodeIdxFound === undefined) return false;
         const node = this.nodes[nodeIdxFound];
         return (node & TrieBlob.NodeMaskEOW) === TrieBlob.NodeMaskEOW;
+    }
+
+    #findNode(nodeIdx: number, word: string): number | undefined {
+        const wordIndexes = this.wordToUtf8Seq(word);
+        return this.#lookupNode(nodeIdx, wordIndexes);
     }
 
     /**

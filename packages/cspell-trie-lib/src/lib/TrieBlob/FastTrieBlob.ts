@@ -33,8 +33,8 @@ export class FastTrieBlob implements TrieData {
         readonly info: Readonly<TrieInfo>,
     ) {
         this.wordToCharacters = (word: string) => [...word];
-        this._forbidIdx = this._searchNodeForChar(0, this.info.forbiddenWordPrefix) || 0;
-        this._caseInsensitiveIdx = this._searchNodeForChar(0, this.info.stripCaseAndAccentsPrefix) || 0;
+        this._forbidIdx = this.#searchNodeForChar(0, this.info.forbiddenWordPrefix) || 0;
+        this._caseInsensitiveIdx = this.#searchNodeForChar(0, this.info.stripCaseAndAccentsPrefix) || 0;
 
         if (checkSorted) {
             assertSorted(this.nodes, bitMasksInfo.NodeMaskChildCharIndex);
@@ -210,8 +210,9 @@ export class FastTrieBlob implements TrieData {
     static toITrieNodeRoot(trie: FastTrieBlob): ITrieNodeRoot {
         return new FastTrieBlobIRoot(
             new FastTrieBlobInternalsAndMethods(trie.nodes, trie._charIndex, trie.bitMasksInfo, trie.info, {
+                nodeFindNode: (idx: number, word: string) => trie.#lookupNode(idx, trie.wordToUtf8Seq(word)),
                 nodeFindExact: (idx: number, word: string) => trie.#has(idx, word),
-                nodeGetChild: (idx: number, letter: string) => trie._searchNodeForChar(idx, letter),
+                nodeGetChild: (idx: number, letter: string) => trie.#searchNodeForChar(idx, letter),
                 isForbidden: (word: string) => trie.isForbiddenWord(word),
                 findExact: (word: string) => trie.has(word),
             }),
@@ -273,7 +274,7 @@ export class FastTrieBlob implements TrieData {
     }
 
     /** Search from nodeIdx for the node index representing the character. */
-    private _searchNodeForChar(nodeIdx: number, char: string): number | undefined {
+    #searchNodeForChar(nodeIdx: number, char: string): number | undefined {
         const charIndexes = this.letterToUtf8Seq(char);
         return this.#lookupNode(nodeIdx, charIndexes);
     }

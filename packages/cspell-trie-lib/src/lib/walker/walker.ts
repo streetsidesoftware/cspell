@@ -168,7 +168,8 @@ export function* walkerWordsITrie(root: ITrieNode): Iterable<string> {
 
     let depth = 0;
     const stack: Stack[] = [];
-    stack[depth] = { t: '', n: root, c: root.keys(), ci: 0 };
+    const keys = root.keys();
+    stack[depth] = { t: '', n: root, c: Array.isArray(keys) ? keys : [...root.keys()], ci: 0 };
     while (depth >= 0) {
         let s = stack[depth];
         let baseText = s.t;
@@ -180,7 +181,8 @@ export function* walkerWordsITrie(root: ITrieNode): Iterable<string> {
             if (node.eow) yield text;
             depth++;
             baseText = text;
-            const c = node.keys();
+            const keys = node.keys();
+            const c = Array.isArray(keys) ? keys : [...keys];
             if (stack[depth]) {
                 s = stack[depth];
                 s.t = text;

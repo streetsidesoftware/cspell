@@ -42,8 +42,8 @@ export function countNodes(root: ITrieNode): number {
     function walk(n: ITrieNode) {
         if (seen.has(n.id)) return;
         seen.add(n.id);
-        for (let i = 0; i < n.size; ++i) {
-            walk(n.child(i));
+        for (const c of n.values()) {
+            walk(c);
         }
     }
 
@@ -64,9 +64,8 @@ export function countWords(root: ITrieNode): number {
         // add the node to the set to avoid getting stuck on circular references.
         visited.set(n, cnt);
 
-        const size = n.size;
-        for (let i = 0; i < size; ++i) {
-            cnt += walk(n.child(i));
+        for (const c of n.values()) {
+            cnt += walk(c);
         }
         visited.set(n, cnt);
         return cnt;
