@@ -57,28 +57,28 @@ suite('dictionary has Not', async (test) => {
     const dict3 = createSpellingDictionary(words3, 'test3', import.meta.url);
     const dictCol = createCollection([dict, dict2, dict3], 'test-collection');
 
-    test('dictionary has 100k words', () => {
+    test('dictionary has not 100k words', () => {
         checkWords(dict, missingWords, false);
     });
 
-    test('dictionary has 100k words (2nd time)', () => {
+    test('dictionary has not 100k words (2nd time)', () => {
         checkWords(dict, missingWords, false);
     });
 
-    test('collection has 100k words', () => {
+    test('collection has not 100k words', () => {
         checkWords(dictCol, missingWords, false);
     });
 
-    test('iTrie has 100k words', () => {
+    test('iTrie has not 100k words', () => {
         checkWords(iTrie, missingWords, false);
     });
 
-    test('iTrie.hasWord has 100k words', () => {
+    test('iTrie.hasWord has not 100k words', () => {
         const dict = { has: (word: string) => iTrie.hasWord(word, true) };
         checkWords(dict, missingWords, false);
     });
 
-    test('iTrie.data has 100k words', () => {
+    test('iTrie.data has not 100k words', () => {
         checkWords(iTrie.data, missingWords, false);
     });
 });

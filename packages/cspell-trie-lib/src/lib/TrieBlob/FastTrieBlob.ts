@@ -17,6 +17,7 @@ const checkSorted = false;
 export class FastTrieBlob implements TrieData {
     private _readonly = false;
     private _forbidIdx: number;
+    private _caseInsensitiveIdx: number;
     private _iTrieRoot: ITrieNodeRoot | undefined;
     wordToCharacters: (word: string) => readonly string[];
     // private nodes8: Uint8Array[];
@@ -32,6 +33,8 @@ export class FastTrieBlob implements TrieData {
         this.info = mergeOptionalWithDefaults(options);
         this.wordToCharacters = (word: string) => [...word];
         this._forbidIdx = this._searchNodeForChar(0, this.info.forbiddenWordPrefix);
+        this._caseInsensitiveIdx = this._searchNodeForChar(0, this.info.stripCaseAndAccentsPrefix);
+
         if (checkSorted) {
             assertSorted(this.nodes, bitMasksInfo.NodeMaskChildCharIndex);
         }
@@ -47,6 +50,11 @@ export class FastTrieBlob implements TrieData {
 
     has(word: string): boolean {
         return this._has(0, word);
+    }
+
+    hasCaseInsensitive(word: string): boolean {
+        if (!this._caseInsensitiveIdx) return false;
+        return this._has(this._caseInsensitiveIdx, word);
     }
 
     private _has(nodeIdx: number, word: string): boolean {
@@ -192,6 +200,9 @@ export class FastTrieBlob implements TrieData {
             0,
             trie.info,
             (word: string) => trie.has(word),
+            (word: string) => trie.isForbiddenWord(word),
+            (word: string) => trie.hasCaseInsensitive(word),
+            (idx: number, word: string) => trie._has(idx, word),
         );
     }
 

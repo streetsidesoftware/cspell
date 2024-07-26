@@ -26,6 +26,7 @@ class FastTrieBlobINode implements ITrieNode {
     constructor(
         readonly trie: FastTrieBlobInternals,
         readonly nodeIdx: NodeIndex,
+        protected nodeHas: (idx: number, word: string) => boolean,
     ) {
         const node = trie.nodes[nodeIdx];
         this.node = node;
@@ -53,7 +54,7 @@ class FastTrieBlobINode implements ITrieNode {
         if (this._entries) return this._entries;
         if (!this._count) return EmptyEntries;
         const entries = this.getNodesEntries();
-        this._entries = entries.map(([key, value]) => [key, new FastTrieBlobINode(this.trie, value)]);
+        this._entries = entries.map(([key, value]) => [key, new FastTrieBlobINode(this.trie, value, this.nodeHas)]);
         return this._entries;
     }
 
@@ -77,7 +78,7 @@ class FastTrieBlobINode implements ITrieNode {
         if (!this._values && !this.containsChainedIndexes()) {
             const n = this.node[keyIdx + 1];
             const nodeIdx = n >>> this.trie.NodeChildRefShift;
-            return new FastTrieBlobINode(this.trie, nodeIdx);
+            return new FastTrieBlobINode(this.trie, nodeIdx, this.nodeHas);
         }
         return this.values()[keyIdx];
     }
@@ -92,6 +93,10 @@ class FastTrieBlobINode implements ITrieNode {
         }
         this.charToIdx = map;
         return map;
+    }
+
+    findExact(word: string): boolean {
+        return this.nodeHas(this.id, word);
     }
 
     private containsChainedIndexes(): boolean {
@@ -204,11 +209,14 @@ export class FastTrieBlobIRoot extends FastTrieBlobINode implements ITrieNodeRoo
         nodeIdx: number,
         readonly info: Readonly<TrieInfo>,
         readonly findExact: (word: string) => boolean,
+        readonly isForbidden: (word: string) => boolean,
+        readonly findCaseInsensitive: (word: string) => boolean,
+        nodeHas: (idx: number, word: string) => boolean,
     ) {
-        super(trie, nodeIdx);
+        super(trie, nodeIdx, nodeHas);
     }
     resolveId(id: ITrieNodeId): ITrieNode {
-        return new FastTrieBlobINode(this.trie, id as number);
+        return new FastTrieBlobINode(this.trie, id as number, this.nodeHas);
     }
 
     find(word: string, strict: boolean): FindResult | undefined {
@@ -217,7 +225,19 @@ export class FastTrieBlobIRoot extends FastTrieBlobINode implements ITrieNodeRoo
             return { found: word, compoundUsed: false, caseMatched: true };
         }
         if (strict) return undefined;
-        found = this.findExact(this.info.stripCaseAndAccentsPrefix + word);
+        found = this.findCaseInsensitive(word);
         return found ? { found: word, compoundUsed: false, caseMatched: false } : undefined;
+    }
+
+    get forbidPrefix(): string {
+        return this.info.forbiddenWordPrefix;
+    }
+
+    get compoundFix(): string {
+        return this.info.compoundCharacter;
+    }
+
+    get caseInsensitivePrefix(): string {
+        return this.info.stripCaseAndAccentsPrefix;
     }
 }

@@ -133,6 +133,8 @@ interface ITrieNode {
     has(char: string): boolean;
     /** `true` iff this node has children */
     hasChildren(): boolean;
+    /** check if a word exists within this node. */
+    findExact?: ((word: string) => boolean) | undefined;
 }
 interface ITrieNodeRoot extends ITrieNode {
     info: Readonly<TrieInfo>;
@@ -150,6 +152,9 @@ interface ITrieNodeRoot extends ITrieNode {
      */
     find?: ((word: string, strict: boolean) => FindResult$1 | undefined) | undefined;
     isForbidden?: ((word: string) => boolean) | undefined;
+    forbidPrefix: string;
+    compoundFix: string;
+    caseInsensitivePrefix: string;
 }
 
 declare const FLAG_WORD = 1;

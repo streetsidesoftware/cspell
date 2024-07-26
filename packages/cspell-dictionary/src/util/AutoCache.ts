@@ -10,30 +10,40 @@ export interface CacheStats {
     swaps: number;
 }
 
-class Cache01<R> implements CacheStats {
-    private count = 0;
-    private cache0: Record<string, R> = Object.create(null);
-    private cache1: Record<string, R> = Object.create(null);
-
+abstract class Cache01<R> implements CacheStats {
     hits = 0;
     misses = 0;
     swaps = 0;
 
     constructor(readonly maxSize: number) {}
 
+    abstract get(key: string): R | undefined;
+    abstract set(key: string, value: R): this;
+}
+
+class Cache01Map<R> extends Cache01<R> implements CacheStats {
+    private count = 0;
+    private cache0: Map<string, R> = new Map();
+    private cache1: Map<string, R> = new Map();
+
+    constructor(maxSize: number) {
+        super(maxSize);
+    }
+
     get(key: string): R | undefined {
         const cache0 = this.cache0;
         const cache1 = this.cache1;
-        if (key in cache0) {
+        let found = cache0.get(key);
+        if (found !== undefined) {
             ++this.hits;
-            return cache0[key];
+            return found;
         }
-        if (key in cache1) {
+        found = cache1.get(key);
+        if (found !== undefined) {
             ++this.hits;
             ++this.count;
-            const r = cache1[key];
-            cache0[key] = r;
-            return r;
+            cache0.set(key, found);
+            return found;
         }
         ++this.misses;
         return undefined;
@@ -41,19 +51,21 @@ class Cache01<R> implements CacheStats {
 
     set(key: string, value: R): this {
         if (this.count >= this.maxSize) {
+            const c = this.cache1;
             this.cache1 = this.cache0;
-            this.cache0 = Object.create(null);
+            this.cache0 = c;
+            c.clear();
             this.swaps++;
             this.count = 0;
         }
         ++this.count;
-        this.cache0[key] = value;
+        this.cache0.set(key, value);
         return this;
     }
 }
 
 export function createCache01<R>(size: number): Cache01<R> {
-    return new Cache01(size);
+    return new Cache01Map(size);
 }
 
 export function autoCache<R>(fn: (p: string) => R, size = CACHE_SIZE): AutoCache<R> {

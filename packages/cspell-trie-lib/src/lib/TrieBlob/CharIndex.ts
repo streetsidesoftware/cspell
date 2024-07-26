@@ -2,11 +2,11 @@ import { encodeTextToUtf8, encodeUtf8N_BE, type Utf8BE32 } from './Utf8.js';
 
 export type Utf8Seq = Readonly<number[]>;
 
-export type CharIndexMap = Record<string, Utf8BE32>;
+export type CharIndexMap = Map<string, Utf8BE32>;
 
 export type RO_CharIndexMap = Readonly<CharIndexMap>;
 
-export type CharIndexSeqMap = Record<string, Utf8Seq>;
+export type CharIndexSeqMap = Map<string, Utf8Seq>;
 
 export type RO_CharIndexSeqMap = Readonly<CharIndexSeqMap>;
 
@@ -23,14 +23,14 @@ export class CharIndex {
 
     constructor(readonly charIndex: readonly string[]) {
         this.#charToUtf8SeqMap = buildCharIndexSequenceMap(charIndex);
-        this.#multiByteChars = Object.values(this.#charToUtf8SeqMap).some((c) => c.length > 1);
+        this.#multiByteChars = [...this.#charToUtf8SeqMap.values()].some((c) => c.length > 1);
     }
 
     getCharUtf8Seq(c: string): Utf8Seq {
-        const found = this.#charToUtf8SeqMap[c];
+        const found = this.#charToUtf8SeqMap.get(c);
         if (found) return found;
         const s = encodeTextToUtf8(c);
-        this.#charToUtf8SeqMap[c] = s;
+        this.#charToUtf8SeqMap.set(c, s);
         return s;
     }
 
@@ -59,17 +59,17 @@ export class CharIndex {
 }
 
 function buildCharIndexSequenceMap(charIndex: readonly string[]): CharIndexSeqMap {
-    const map: CharIndexSeqMap = Object.create(null);
+    const map: CharIndexSeqMap = new Map();
     for (const key of charIndex) {
-        map[key] = encodeTextToUtf8(key);
+        map.set(key, encodeTextToUtf8(key));
     }
     return map;
 }
 
 export class CharIndexBuilder {
     private readonly charIndex: string[] = [];
-    readonly charIndexMap: CharIndexMap = Object.create(null);
-    readonly charIndexSeqMap: CharIndexSeqMap = Object.create(null);
+    readonly charIndexMap: CharIndexMap = new Map();
+    readonly charIndexSeqMap: CharIndexSeqMap = new Map();
 
     readonly #mapIdxToSeq = new Map<number, number[]>();
 
@@ -78,16 +78,16 @@ export class CharIndexBuilder {
     }
 
     getUtf8Value(c: string): number {
-        const found = this.charIndexMap[c];
+        const found = this.charIndexMap.get(c);
         if (found !== undefined) {
             return found;
         }
         const nc = c.normalize('NFC');
         this.charIndex.push(nc);
         const utf8 = encodeUtf8N_BE(nc.codePointAt(0) || 0);
-        this.charIndexMap[c] = utf8;
-        this.charIndexMap[nc] = utf8;
-        this.charIndexMap[c.normalize('NFD')] = utf8;
+        this.charIndexMap.set(c, utf8);
+        this.charIndexMap.set(nc, utf8);
+        this.charIndexMap.set(c.normalize('NFD'), utf8);
         return utf8;
     }
 
