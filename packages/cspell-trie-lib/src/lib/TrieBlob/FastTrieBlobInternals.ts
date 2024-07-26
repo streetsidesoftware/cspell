@@ -1,3 +1,5 @@
+import { PartialTrieInfo, TrieInfo } from '../ITrieNode/TrieInfo.js';
+import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.js';
 import { CharIndex } from './CharIndex.js';
 import type { FastTrieBlobBitMaskInfo } from './FastTrieBlobBitMaskInfo.js';
 
@@ -9,18 +11,49 @@ export class FastTrieBlobInternals implements FastTrieBlobBitMaskInfo {
     readonly NodeMaskChildCharIndex: number;
     readonly NodeChildRefShift: number;
     readonly isIndexDecoderNeeded: boolean;
-    readonly sorted = true;
+    readonly info: Readonly<TrieInfo>;
 
     constructor(
         readonly nodes: Nodes,
         readonly charIndex: CharIndex,
         maskInfo: FastTrieBlobBitMaskInfo,
+        info: Readonly<PartialTrieInfo>,
     ) {
         const { NodeMaskEOW, NodeMaskChildCharIndex, NodeChildRefShift } = maskInfo;
         this.NodeMaskEOW = NodeMaskEOW;
         this.NodeMaskChildCharIndex = NodeMaskChildCharIndex;
         this.NodeChildRefShift = NodeChildRefShift;
         this.isIndexDecoderNeeded = charIndex.indexContainsMultiByteChars();
+
+        this.info = mergeOptionalWithDefaults(info);
+    }
+}
+
+interface TrieMethods {
+    readonly nodeFindExact: (idx: number, word: string) => boolean;
+    readonly nodeGetChild: (idx: number, letter: string) => number | undefined;
+    readonly isForbidden: (word: string) => boolean;
+    readonly findExact: (word: string) => boolean;
+}
+
+export class FastTrieBlobInternalsAndMethods extends FastTrieBlobInternals implements TrieMethods {
+    readonly nodeFindExact: (idx: number, word: string) => boolean;
+    readonly nodeGetChild: (idx: number, letter: string) => number | undefined;
+    readonly isForbidden: (word: string) => boolean;
+    readonly findExact: (word: string) => boolean;
+
+    constructor(
+        nodes: Nodes,
+        charIndex: CharIndex,
+        maskInfo: FastTrieBlobBitMaskInfo,
+        info: PartialTrieInfo,
+        trieMethods: Readonly<TrieMethods>,
+    ) {
+        super(nodes, charIndex, maskInfo, info);
+        this.nodeFindExact = trieMethods.nodeFindExact;
+        this.nodeGetChild = trieMethods.nodeGetChild;
+        this.isForbidden = trieMethods.isForbidden;
+        this.findExact = trieMethods.findExact;
     }
 }
 

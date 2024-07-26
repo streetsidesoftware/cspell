@@ -20,7 +20,7 @@ interface TrieMethods {
     readonly findExact: (word: string) => boolean;
 }
 
-export class TrieBlobInternals implements BitMaskInfo {
+export class TrieBlobInternals implements TrieMethods, BitMaskInfo {
     readonly NodeMaskEOW: number;
     readonly NodeMaskNumChildren: number;
     readonly NodeMaskChildCharIndex: number;

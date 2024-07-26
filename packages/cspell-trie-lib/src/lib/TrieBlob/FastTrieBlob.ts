@@ -1,11 +1,15 @@
 import type { ITrieNode, ITrieNodeRoot } from '../ITrieNode/ITrieNode.js';
 import { findNode } from '../ITrieNode/trie-util.js';
-import type { PartialTrieInfo, TrieInfo } from '../ITrieNode/TrieInfo.js';
+import type { TrieInfo } from '../ITrieNode/TrieInfo.js';
 import type { TrieData } from '../TrieData.js';
-import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.js';
 import { CharIndex, Utf8Seq } from './CharIndex.js';
 import { extractInfo, type FastTrieBlobBitMaskInfo } from './FastTrieBlobBitMaskInfo.js';
-import { assertSorted, FastTrieBlobInternals, sortNodes } from './FastTrieBlobInternals.js';
+import {
+    assertSorted,
+    FastTrieBlobInternals,
+    FastTrieBlobInternalsAndMethods,
+    sortNodes,
+} from './FastTrieBlobInternals.js';
 import { FastTrieBlobIRoot } from './FastTrieBlobIRoot.js';
 import { TrieBlob } from './TrieBlob.js';
 import { Utf8Accumulator } from './Utf8.js';
@@ -22,18 +26,15 @@ export class FastTrieBlob implements TrieData {
     wordToCharacters: (word: string) => readonly string[];
     // private nodes8: Uint8Array[];
 
-    readonly info: Readonly<TrieInfo>;
-
     private constructor(
         private nodes: FastTrieBlobNode[],
         private _charIndex: CharIndex,
         readonly bitMasksInfo: FastTrieBlobBitMaskInfo,
-        options?: PartialTrieInfo,
+        readonly info: Readonly<TrieInfo>,
     ) {
-        this.info = mergeOptionalWithDefaults(options);
         this.wordToCharacters = (word: string) => [...word];
-        this._forbidIdx = this._searchNodeForChar(0, this.info.forbiddenWordPrefix);
-        this._caseInsensitiveIdx = this._searchNodeForChar(0, this.info.stripCaseAndAccentsPrefix);
+        this._forbidIdx = this._searchNodeForChar(0, this.info.forbiddenWordPrefix) || 0;
+        this._caseInsensitiveIdx = this._searchNodeForChar(0, this.info.stripCaseAndAccentsPrefix) || 0;
 
         if (checkSorted) {
             assertSorted(this.nodes, bitMasksInfo.NodeMaskChildCharIndex);
@@ -202,19 +203,19 @@ export class FastTrieBlob implements TrieData {
         };
     }
 
-    static create(data: FastTrieBlobInternals, options?: PartialTrieInfo) {
-        return new FastTrieBlob(data.nodes, data.charIndex, extractInfo(data), options);
+    static create(data: FastTrieBlobInternals) {
+        return new FastTrieBlob(data.nodes, data.charIndex, extractInfo(data), data.info);
     }
 
     static toITrieNodeRoot(trie: FastTrieBlob): ITrieNodeRoot {
         return new FastTrieBlobIRoot(
-            new FastTrieBlobInternals(trie.nodes, trie._charIndex, trie.bitMasksInfo),
+            new FastTrieBlobInternalsAndMethods(trie.nodes, trie._charIndex, trie.bitMasksInfo, trie.info, {
+                nodeFindExact: (idx: number, word: string) => trie.#has(idx, word),
+                nodeGetChild: (idx: number, letter: string) => trie._searchNodeForChar(idx, letter),
+                isForbidden: (word: string) => trie.isForbiddenWord(word),
+                findExact: (word: string) => trie.has(word),
+            }),
             0,
-            trie.info,
-            (word: string) => trie.has(word),
-            (word: string) => trie.isForbiddenWord(word),
-            (word: string) => trie.hasCaseInsensitive(word),
-            (idx: number, word: string) => trie.#has(idx, word),
         );
     }
 
@@ -271,31 +272,10 @@ export class FastTrieBlob implements TrieData {
         return this.nodes.length;
     }
 
-    private _lookupCharIndexNode(nodeIdx: number, charIndex: number): number {
-        const NodeMaskChildCharIndex = this.bitMasksInfo.NodeMaskChildCharIndex;
-        const NodeChildRefShift = this.bitMasksInfo.NodeChildRefShift;
-        const nodes = this.nodes;
-        const node = nodes[nodeIdx];
-        const letterIdx = charIndex;
-        const count = node.length;
-        let i = count - 1;
-        for (; i > 0; --i) {
-            if ((node[i] & NodeMaskChildCharIndex) === letterIdx) {
-                return node[i] >>> NodeChildRefShift;
-            }
-        }
-        return 0;
-    }
-
     /** Search from nodeIdx for the node index representing the character. */
-    private _searchNodeForChar(nodeIdx: number, char: string): number {
+    private _searchNodeForChar(nodeIdx: number, char: string): number | undefined {
         const charIndexes = this.letterToUtf8Seq(char);
-        let idx = nodeIdx;
-        for (let i = 0; i < charIndexes.length; ++i) {
-            idx = this._lookupCharIndexNode(idx, charIndexes[i]);
-            if (!idx) return 0;
-        }
-        return idx;
+        return this.#lookupNode(nodeIdx, charIndexes);
     }
 
     get charIndex(): readonly string[] {

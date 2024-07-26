@@ -119,6 +119,8 @@ export class ITrieImpl implements ITrie {
     private root: ITrieNodeRoot;
     private count?: number;
     weightMap: WeightMap | undefined;
+    #optionsCompound = this.createFindOptions({ compoundMode: 'compound' });
+
     constructor(
         readonly data: TrieData,
         private numNodes?: number,
@@ -157,8 +159,7 @@ export class ITrieImpl implements ITrie {
      * @param text - text to find in the Trie
      */
     find(text: string): ITrieNode | undefined {
-        const options = this.createFindOptions({ compoundMode: 'compound' });
-        return findWordNode(this.data.getRoot(), text, options).node;
+        return findWordNode(this.data.getRoot(), text, this.#optionsCompound).node;
     }
 
     has(word: string, minLegacyCompoundLength?: boolean | number): boolean {
