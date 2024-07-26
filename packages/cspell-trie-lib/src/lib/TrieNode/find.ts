@@ -179,7 +179,8 @@ export function findCompoundNode(
     ];
     const compoundPrefix = compoundCharacter || ignoreCasePrefix;
     const possibleCompoundPrefix = ignoreCasePrefix && compoundCharacter ? ignoreCasePrefix + compoundCharacter : '';
-    const w = word.normalize();
+    const nw = word.normalize();
+    const w = [...nw];
 
     function determineRoot(s: FindCompoundChain): FindCompoundChain {
         const prefix = s.compoundPrefix;
@@ -228,7 +229,7 @@ export function findCompoundNode(
                 if (!r.cr) {
                     break;
                 }
-                if (!i && !r.caseMatched && w !== w.toLowerCase()) {
+                if (!i && !r.caseMatched && nw !== nw.toLowerCase()) {
                     // It is not going to be found.
                     break;
                 }

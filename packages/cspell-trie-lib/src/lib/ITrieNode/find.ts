@@ -134,7 +134,8 @@ export function findCompoundNode(
     ];
     const compoundPrefix = compoundCharacter || ignoreCasePrefix;
     const possibleCompoundPrefix = ignoreCasePrefix && compoundCharacter ? ignoreCasePrefix + compoundCharacter : '';
-    const w = word.normalize();
+    const nw = word.normalize();
+    const w = [...nw];
 
     function determineRoot(s: FindCompoundChain): FindCompoundChain {
         const prefix = s.compoundPrefix;
@@ -161,7 +162,7 @@ export function findCompoundNode(
         const s = stack[i];
         const h = w[i++];
         const n = s.cr || s.n;
-        const c = n?.get(h);
+        const c = (h && n?.get(h)) || undefined;
         if (c && i < word.length) {
             // Go deeper.
             caseMatched = s.caseMatched;
@@ -183,7 +184,7 @@ export function findCompoundNode(
                 if (!r.cr) {
                     break;
                 }
-                if (!i && !r.caseMatched && w !== w.toLowerCase()) {
+                if (!i && !r.caseMatched && nw !== nw.toLowerCase()) {
                     // It is not going to be found.
                     break;
                 }
@@ -197,7 +198,7 @@ export function findCompoundNode(
         }
     }
 
-    const found = (i && i === word.length && word) || false;
+    const found = (i === word.length && word) || false;
     const result: FindFullNodeResult = { found, compoundUsed, node, forbidden: undefined, caseMatched };
     return result;
 }
