@@ -77,4 +77,8 @@ export interface ITrieNodeRoot extends ITrieNode {
     find?: ((word: string, strict: boolean) => FindResult | undefined) | undefined;
 
     isForbidden?: ((word: string) => boolean) | undefined;
+
+    forbidPrefix: string;
+    compoundFix: string;
+    caseInsensitivePrefix: string;
 }

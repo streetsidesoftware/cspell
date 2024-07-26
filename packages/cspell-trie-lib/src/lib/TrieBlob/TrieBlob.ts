@@ -77,11 +77,11 @@ export class TrieBlob implements TrieData {
     }
 
     has(word: string): boolean {
-        return this._has8(0, word);
+        return this.#hasWord(0, word);
     }
 
     isForbiddenWord(word: string): boolean {
-        return !!this.#forbidIdx && this._has8(this.#forbidIdx, word);
+        return !!this.#forbidIdx && this.#hasWord(this.#forbidIdx, word);
     }
 
     hasForbiddenWords(): boolean {
@@ -106,10 +106,10 @@ export class TrieBlob implements TrieData {
      */
     find(word: string, strict: boolean): FindResult | undefined {
         if (!this.hasCompoundWords()) {
-            const found = this._has8(0, word);
+            const found = this.#hasWord(0, word);
             if (found) return { found: word, compoundUsed: false, caseMatched: true };
             if (strict || !this.#nonStrictIdx) return { found: false, compoundUsed: false, caseMatched: false };
-            return { found: this._has8(this.#nonStrictIdx, word) && word, compoundUsed: false, caseMatched: false };
+            return { found: this.#hasWord(this.#nonStrictIdx, word) && word, compoundUsed: false, caseMatched: false };
         }
         // @todo: handle compound words.
         return undefined;
@@ -120,16 +120,24 @@ export class TrieBlob implements TrieData {
     }
 
     private _getRoot(): ITrieNodeRoot {
-        const trieData = new TrieBlobInternals(this.nodes, this.charIndex, {
-            NodeMaskEOW: TrieBlob.NodeMaskEOW,
-            NodeMaskNumChildren: TrieBlob.NodeMaskNumChildren,
-            NodeMaskChildCharIndex: TrieBlob.NodeMaskChildCharIndex,
-            NodeChildRefShift: TrieBlob.NodeChildRefShift,
-        });
+        const trieData = new TrieBlobInternals(
+            this.nodes,
+            this.charIndex,
+            {
+                NodeMaskEOW: TrieBlob.NodeMaskEOW,
+                NodeMaskNumChildren: TrieBlob.NodeMaskNumChildren,
+                NodeMaskChildCharIndex: TrieBlob.NodeMaskChildCharIndex,
+                NodeChildRefShift: TrieBlob.NodeChildRefShift,
+            },
+            {
+                nodeFindExact: (idx, word) => this.#hasWord(idx, word),
+                nodeGetChild: (idx, letter) => this._lookupNode(idx, letter),
+                isForbidden: (word) => this.isForbiddenWord(word),
+                findExact: (word) => this.has(word),
+            },
+        );
         return new TrieBlobIRoot(trieData, 0, this.info, {
-            isForbidden: (word) => this.isForbiddenWord(word),
             find: (word, strict) => this.find(word, strict),
-            nodeFindExact: (idx, word) => this._has8(idx, word),
         });
     }
 
@@ -140,12 +148,26 @@ export class TrieBlob implements TrieData {
     /**
      * Check if the word is in the trie starting at the given node index.
      */
-    private _has8(nodeIdx: number, word: string): boolean {
+    #hasWord(nodeIdx: number, word: string): boolean {
+        const wordIndexes = this.wordToUtf8Seq(word);
+        const nodeIdxFound = this.#lookupNode(nodeIdx, wordIndexes);
+        if (nodeIdxFound === undefined) return false;
+        const node = this.nodes[nodeIdxFound];
+        return (node & TrieBlob.NodeMaskEOW) === TrieBlob.NodeMaskEOW;
+    }
+
+    /**
+     * Find the node index for the given Utf8 character sequence.
+     * @param nodeIdx - node index to start the search
+     * @param seq - the byte sequence of the character to look for
+     * @returns
+     */
+    #lookupNode(nodeIdx: number, seq: readonly number[] | Readonly<Uint8Array>): number | undefined {
         const NodeMaskNumChildren = TrieBlob.NodeMaskNumChildren;
         const NodeChildRefShift = TrieBlob.NodeChildRefShift;
         const nodes = this.nodes;
         const nodes8 = this.#nodes8;
-        const wordIndexes = this.wordToUtf8Seq(word);
+        const wordIndexes = seq;
         const len = wordIndexes.length;
         let node = nodes[nodeIdx];
         for (let p = 0; p < len; ++p, node = nodes[nodeIdx]) {
@@ -164,7 +186,7 @@ export class TrieBlob implements TrieData {
                         j = m;
                     }
                 }
-                if (i > pEnd || nodes8[i] !== letterIdx) return false;
+                if (i > pEnd || nodes8[i] !== letterIdx) return undefined;
                 nodeIdx = nodes[i >> 2] >>> NodeChildRefShift;
                 continue;
             }
@@ -174,11 +196,11 @@ export class TrieBlob implements TrieData {
                     break;
                 }
             }
-            if (i <= idx4) return false;
+            if (i <= idx4) return undefined;
             nodeIdx = nodes[i >> 2] >>> NodeChildRefShift;
         }
 
-        return (node & TrieBlob.NodeMaskEOW) === TrieBlob.NodeMaskEOW;
+        return nodeIdx;
     }
 
     /**
@@ -189,39 +211,8 @@ export class TrieBlob implements TrieData {
      */
     private _lookupNode(nodeIdx: number, char: string): number | undefined {
         const indexSeq = this.letterToNodeCharIndexSequence(char);
-        const len = indexSeq.length;
-        if (!len) return undefined;
-        let currNodeIdx: number | undefined = nodeIdx;
-        for (let i = 0; i < len; ++i) {
-            currNodeIdx = this._lookupNodeByCharIndexSeq(currNodeIdx, indexSeq[i]);
-            if (currNodeIdx === undefined) {
-                return undefined;
-            }
-        }
+        const currNodeIdx = this.#lookupNode(nodeIdx, indexSeq);
         return currNodeIdx;
-    }
-
-    /**
-     * Find the node index for the given character.
-     * @param nodeIdx - node index to start the search
-     * @param char - character to look for
-     * @returns
-     */
-    private _lookupNodeByCharIndexSeq(nodeIdx: number, index: number): number | undefined {
-        const NodeMaskNumChildren = TrieBlob.NodeMaskNumChildren;
-        const NodeMaskChildCharIndex = TrieBlob.NodeMaskChildCharIndex;
-        const NodeChildRefShift = TrieBlob.NodeChildRefShift;
-        const nodes = this.nodes;
-        const node = nodes[nodeIdx];
-        const letterIdx = index;
-        const count = node & NodeMaskNumChildren;
-        let i = count;
-        for (; i > 0; --i) {
-            if ((nodes[i + nodeIdx] & NodeMaskChildCharIndex) === letterIdx) {
-                return nodes[i + nodeIdx] >>> NodeChildRefShift;
-            }
-        }
-        return undefined;
     }
 
     *words(): Iterable<string> {

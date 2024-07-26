@@ -97,6 +97,18 @@ class ImplITrieRoot extends ImplITrieNode implements ITrieNodeRoot {
         return new ImplITrieNode(n);
     }
 
+    get forbidPrefix(): string {
+        return this.root.forbiddenWordPrefix;
+    }
+
+    get compoundFix(): string {
+        return this.root.compoundCharacter;
+    }
+
+    get caseInsensitivePrefix(): string {
+        return this.root.stripCaseAndAccentsPrefix;
+    }
+
     static toITrieNode(node: TrieRoot): ITrieNodeRoot {
         return new this(node);
     }

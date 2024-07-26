@@ -228,4 +228,16 @@ export class FastTrieBlobIRoot extends FastTrieBlobINode implements ITrieNodeRoo
         found = this.findCaseInsensitive(word);
         return found ? { found: word, compoundUsed: false, caseMatched: false } : undefined;
     }
+
+    get forbidPrefix(): string {
+        return this.info.forbiddenWordPrefix;
+    }
+
+    get compoundFix(): string {
+        return this.info.compoundCharacter;
+    }
+
+    get caseInsensitivePrefix(): string {
+        return this.info.stripCaseAndAccentsPrefix;
+    }
 }

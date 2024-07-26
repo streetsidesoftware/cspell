@@ -152,6 +152,9 @@ interface ITrieNodeRoot extends ITrieNode {
      */
     find?: ((word: string, strict: boolean) => FindResult$1 | undefined) | undefined;
     isForbidden?: ((word: string) => boolean) | undefined;
+    forbidPrefix: string;
+    compoundFix: string;
+    caseInsensitivePrefix: string;
 }
 
 declare const FLAG_WORD = 1;

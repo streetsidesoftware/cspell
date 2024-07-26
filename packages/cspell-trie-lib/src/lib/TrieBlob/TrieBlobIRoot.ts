@@ -13,17 +13,29 @@ interface BitMaskInfo {
 type Node = number;
 type NodeIndex = number;
 
+interface TrieMethods {
+    readonly nodeFindExact: (idx: number, word: string) => boolean;
+    readonly nodeGetChild: (idx: number, letter: string) => number | undefined;
+    readonly isForbidden: (word: string) => boolean;
+    readonly findExact: (word: string) => boolean;
+}
+
 export class TrieBlobInternals implements BitMaskInfo {
     readonly NodeMaskEOW: number;
     readonly NodeMaskNumChildren: number;
     readonly NodeMaskChildCharIndex: number;
     readonly NodeChildRefShift: number;
     readonly isIndexDecoderNeeded: boolean;
+    readonly nodeFindExact: (idx: number, word: string) => boolean;
+    readonly isForbidden: (word: string) => boolean;
+    readonly findExact: (word: string) => boolean;
+    readonly nodeGetChild: (idx: number, letter: string) => number | undefined;
 
     constructor(
         readonly nodes: Uint32Array,
         readonly charIndex: Readonly<CharIndex>,
         maskInfo: BitMaskInfo,
+        methods: TrieMethods,
     ) {
         const { NodeMaskEOW, NodeMaskChildCharIndex, NodeMaskNumChildren, NodeChildRefShift } = maskInfo;
         this.NodeMaskEOW = NodeMaskEOW;
@@ -31,6 +43,10 @@ export class TrieBlobInternals implements BitMaskInfo {
         this.NodeMaskChildCharIndex = NodeMaskChildCharIndex;
         this.NodeChildRefShift = NodeChildRefShift;
         this.isIndexDecoderNeeded = charIndex.indexContainsMultiByteChars();
+        this.nodeFindExact = methods.nodeFindExact;
+        this.isForbidden = methods.isForbidden;
+        this.findExact = methods.findExact;
+        this.nodeGetChild = methods.nodeGetChild;
     }
 }
 
@@ -38,9 +54,7 @@ const EmptyKeys: readonly string[] = Object.freeze([]);
 const EmptyNodes: readonly ITrieNode[] = Object.freeze([]);
 const EmptyEntries: readonly (readonly [string, ITrieNode])[] = Object.freeze([]);
 
-export interface ITrieSupportMethods extends Readonly<Pick<ITrieNodeRoot, 'find' | 'isForbidden'>> {
-    nodeFindExact: (idx: number, word: string) => boolean;
-}
+export interface ITrieSupportMethods extends Readonly<Pick<ITrieNodeRoot, 'find'>> {}
 
 class TrieBlobINode implements ITrieNode {
     readonly id: number;
@@ -58,7 +72,6 @@ class TrieBlobINode implements ITrieNode {
     constructor(
         readonly trie: TrieBlobInternals,
         readonly nodeIdx: NodeIndex,
-        protected nodeFindExact: (idx: number, word: string) => boolean,
     ) {
         const node = trie.nodes[nodeIdx];
         this.node = node;
@@ -86,20 +99,17 @@ class TrieBlobINode implements ITrieNode {
         if (this._entries) return this._entries;
         if (!this._count) return EmptyEntries;
         const entries = this.getNodesEntries();
-        this._entries = entries.map(([key, value]) => [key, new TrieBlobINode(this.trie, value, this.nodeFindExact)]);
+        this._entries = entries.map(([key, value]) => [key, new TrieBlobINode(this.trie, value)]);
         return this._entries;
     }
 
     /** get child ITrieNode */
     get(char: string): ITrieNode | undefined {
-        const idx = this.getCharToIdxMap()[char];
-        if (idx === undefined) return undefined;
-        return this.child(idx);
+        return this.#getChildNode(char);
     }
 
     has(char: string): boolean {
-        const idx = this.getCharToIdxMap()[char];
-        return idx !== undefined;
+        return this.trie.nodeGetChild(this.nodeIdx, char) !== undefined;
     }
 
     hasChildren(): boolean {
@@ -110,9 +120,24 @@ class TrieBlobINode implements ITrieNode {
         if (!this._values && !this.containsChainedIndexes()) {
             const n = this.trie.nodes[this.nodeIdx + keyIdx + 1];
             const nodeIdx = n >>> this.trie.NodeChildRefShift;
-            return new TrieBlobINode(this.trie, nodeIdx, this.nodeFindExact);
+            return new TrieBlobINode(this.trie, nodeIdx);
         }
         return this.values()[keyIdx];
+    }
+
+    #getChildNodeIdx(char: string) {
+        return this.trie.nodeGetChild(this.nodeIdx, char);
+    }
+
+    #getChildNode(char: string): ITrieNode | undefined {
+        if (this.charToIdx) {
+            const keyIdx = this.charToIdx[char];
+            if (keyIdx === undefined) return undefined;
+            return this.child(keyIdx);
+        }
+        const idx = this.#getChildNodeIdx(char);
+        if (idx === undefined) return undefined;
+        return new TrieBlobINode(this.trie, idx);
     }
 
     getCharToIdxMap(): Record<string, number> {
@@ -128,7 +153,7 @@ class TrieBlobINode implements ITrieNode {
     }
 
     findExact(word: string): boolean {
-        return this.nodeFindExact(this.nodeIdx, word);
+        return this.trie.nodeFindExact(this.nodeIdx, word);
     }
 
     private containsChainedIndexes(): boolean {
@@ -245,11 +270,23 @@ export class TrieBlobIRoot extends TrieBlobINode implements ITrieNodeRoot {
         readonly info: Readonly<TrieInfo>,
         methods: ITrieSupportMethods,
     ) {
-        super(trie, nodeIdx, methods.nodeFindExact);
+        super(trie, nodeIdx);
         this.find = methods.find;
-        this.isForbidden = methods.isForbidden;
+        this.isForbidden = trie.isForbidden;
     }
     resolveId(id: ITrieNodeId): ITrieNode {
-        return new TrieBlobINode(this.trie, id as number, this.nodeFindExact);
+        return new TrieBlobINode(this.trie, id as number);
+    }
+
+    get forbidPrefix(): string {
+        return this.info.forbiddenWordPrefix;
+    }
+
+    get compoundFix(): string {
+        return this.info.compoundCharacter;
+    }
+
+    get caseInsensitivePrefix(): string {
+        return this.info.stripCaseAndAccentsPrefix;
     }
 }

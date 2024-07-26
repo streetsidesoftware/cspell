@@ -115,7 +115,6 @@ export interface ITrie {
 
 export class ITrieImpl implements ITrie {
     private _info: TrieInfo;
-    private _findOptionsDefaults: PartialFindOptions;
     private hasForbidden: boolean;
     private root: ITrieNodeRoot;
     private count?: number;
@@ -127,11 +126,6 @@ export class ITrieImpl implements ITrie {
         this.root = data.getRoot();
         this._info = mergeOptionalWithDefaults(data.info);
         this.hasForbidden = data.hasForbiddenWords();
-        this._findOptionsDefaults = {
-            caseInsensitivePrefix: this._info.stripCaseAndAccentsPrefix,
-            compoundFix: this._info.compoundCharacter,
-            forbidPrefix: this._info.forbiddenWordPrefix,
-        };
     }
 
     /**
@@ -195,7 +189,7 @@ export class ITrieImpl implements ITrie {
                     : defaultLegacyMinCompoundLength;
             const findOptions = this.createFindOptions({
                 legacyMinCompoundLength: len,
-                matchCase: options.caseSensitive,
+                matchCase: options.caseSensitive || false,
             });
             return findLegacyCompound(this.root, word, findOptions);
         }
@@ -290,11 +284,8 @@ export class ITrieImpl implements ITrie {
         return new ITrieImpl(root, undefined);
     }
 
-    private createFindOptions(options: PartialFindOptions = {}): FindOptions {
-        const findOptions = createFindOptions({
-            ...this._findOptionsDefaults,
-            ...options,
-        });
+    private createFindOptions(options: PartialFindOptions | undefined): FindOptions {
+        const findOptions = createFindOptions(options);
         return findOptions;
     }
 
