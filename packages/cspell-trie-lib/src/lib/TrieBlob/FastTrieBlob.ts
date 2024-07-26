@@ -49,31 +49,43 @@ export class FastTrieBlob implements TrieData {
     }
 
     has(word: string): boolean {
-        return this._has(0, word);
+        return this.#has(0, word);
     }
 
     hasCaseInsensitive(word: string): boolean {
         if (!this._caseInsensitiveIdx) return false;
-        return this._has(this._caseInsensitiveIdx, word);
+        return this.#has(this._caseInsensitiveIdx, word);
     }
 
-    private _has(nodeIdx: number, word: string): boolean {
+    #has(nodeIdx: number, word: string): boolean {
         return this.#hasSorted(nodeIdx, word);
     }
 
     #hasSorted(nodeIdx: number, word: string): boolean {
+        const charIndexes = this.wordToUtf8Seq(word);
+        const found = this.#lookupNode(nodeIdx, charIndexes);
+        if (found === undefined) return false;
+        const node = this.nodes[found];
+        return !!(node[0] & this.bitMasksInfo.NodeMaskEOW);
+    }
+
+    /**
+     * Find the node index for the given Utf8 character sequence.
+     * @param nodeIdx - node index to start the search
+     * @param seq - the byte sequence of the character to look for
+     * @returns
+     */
+    #lookupNode(nodeIdx: number, seq: readonly number[] | Readonly<Uint8Array>): number | undefined {
         const NodeMaskChildCharIndex = this.bitMasksInfo.NodeMaskChildCharIndex;
         const NodeChildRefShift = this.bitMasksInfo.NodeChildRefShift;
-        const NodeMaskEOW = this.bitMasksInfo.NodeMaskEOW;
         const nodes = this.nodes;
-        const charIndexes = this.wordToUtf8Seq(word);
-        const len = charIndexes.length;
+        const len = seq.length;
         let node = nodes[nodeIdx];
         for (let p = 0; p < len; ++p, node = nodes[nodeIdx]) {
-            const letterIdx = charIndexes[p];
+            const letterIdx = seq[p];
             const count = node.length;
             // console.error('%o', { p, letterIdx, ...this.nodeInfo(nodeIdx) });
-            if (count < 2) return false;
+            if (count < 2) return undefined;
             let i = 1;
             let j = count - 1;
             let c: number = -1;
@@ -86,12 +98,12 @@ export class FastTrieBlob implements TrieData {
                     j = m;
                 }
             }
-            if (i >= count || (node[i] & NodeMaskChildCharIndex) !== letterIdx) return false;
+            if (i >= count || (node[i] & NodeMaskChildCharIndex) !== letterIdx) return undefined;
             nodeIdx = node[i] >>> NodeChildRefShift;
-            if (!nodeIdx) return false;
+            if (!nodeIdx) return undefined;
         }
 
-        return !!(node[0] & NodeMaskEOW);
+        return nodeIdx;
     }
 
     *words(): Iterable<string> {
@@ -202,7 +214,7 @@ export class FastTrieBlob implements TrieData {
             (word: string) => trie.has(word),
             (word: string) => trie.isForbiddenWord(word),
             (word: string) => trie.hasCaseInsensitive(word),
-            (idx: number, word: string) => trie._has(idx, word),
+            (idx: number, word: string) => trie.#has(idx, word),
         );
     }
 
@@ -229,7 +241,7 @@ export class FastTrieBlob implements TrieData {
     }
 
     isForbiddenWord(word: string): boolean {
-        return !!this._forbidIdx && this._has(this._forbidIdx, word);
+        return !!this._forbidIdx && this.#has(this._forbidIdx, word);
     }
 
     hasForbiddenWords(): boolean {
