@@ -283,6 +283,27 @@ describe('docValidator trace', () => {
     });
 });
 
+describe('docValidator suggestions', () => {
+    test('suggestions', async () => {
+        const doc = td(__filename, sampleCode());
+        const dVal = new DocumentValidator(doc, { generateSuggestions: true, numSuggestions: 8 }, {});
+        await dVal.prepare();
+        const issues = dVal.checkDocument();
+        expect(issues).toHaveLength(1);
+        expect(issues[0].suggestionsEx).toMatchSnapshot();
+    });
+});
+
+function sampleCode() {
+    // cspell:ignore Orangges
+    const text = `
+export function remainingOrangges(count: number): number {
+    return count % 42;
+}
+`;
+    return text;
+}
+
 function extractRawText(text: string, issues: ValidationIssue[]): string[] {
     return issues.map((issue) => {
         const start = issue.offset;
