@@ -32,13 +32,17 @@ function run(program: Command) {
         .option('-u, --update-snapshots', 'Update Snapshots', false)
         .option('-f, --fail', 'Fail on first error.', false)
         .option('-x, --exclude <exclusions...>', 'Exclusions patterns.')
-        .option('-t, --githubToken <token>', 'GitHub Personal Access Token')
+        .option(
+            '-t, --githubToken <token>',
+            'GitHub Personal Access Token. Can also be set via the environment variable GITHUB_TOKEN. Example: -t $(gh auth token)',
+        )
         .option(
             '-p, --parallelLimit <number>',
             'Max number of parallel checks.',
             validateParallelArg,
             `${defaultParallel}`,
         )
+        .option('--cpu-prof', 'Enable NodeJS CPU Profiling')
         .description('Run the integration tests, checking the spelling results against the various repositories')
         .action(
             (
@@ -50,6 +54,7 @@ function run(program: Command) {
                     exclude?: string[];
                     parallelLimit: string;
                     githubToken?: string | undefined;
+                    cpuProf?: boolean;
                 },
             ) => {
                 const {
@@ -57,10 +62,11 @@ function run(program: Command) {
                     fail = false,
                     exclude = [],
                     updateSnapshots = false,
+                    cpuProf = false,
                 } = options;
                 const parallelLimit = processParallelArg(options.parallelLimit);
                 registerToken(options.githubToken);
-                return check(patterns || [], { update, updateSnapshots, fail, exclude, parallelLimit });
+                return check(patterns || [], { update, updateSnapshots, fail, exclude, parallelLimit, cpuProf });
             },
         );
 
