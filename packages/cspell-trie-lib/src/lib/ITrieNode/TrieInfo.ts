@@ -6,4 +6,11 @@ export interface TrieInfo {
     forbiddenWordPrefix: string;
     isCaseAware: boolean;
 }
+
+export interface TrieCharacteristics {
+    hasForbiddenWords: boolean;
+    hasCompoundWords: boolean;
+    hasNonStrictWords: boolean;
+}
+
 export type PartialTrieInfo = PartialWithUndefined<TrieInfo> | undefined;

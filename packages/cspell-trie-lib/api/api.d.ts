@@ -80,6 +80,11 @@ interface TrieInfo {
     forbiddenWordPrefix: string;
     isCaseAware: boolean;
 }
+interface TrieCharacteristics {
+    hasForbiddenWords: boolean;
+    hasCompoundWords: boolean;
+    hasNonStrictWords: boolean;
+}
 type PartialTrieInfo = PartialWithUndefined<TrieInfo> | undefined;
 
 interface FindResult$1 {
@@ -117,18 +122,16 @@ interface ITrieNode {
     readonly id: ITrieNodeId;
     /** flag End of Word */
     readonly eow: boolean;
-    /** number of children */
-    readonly size: number;
     /** get keys to children */
-    keys(): readonly string[];
+    keys(): Iterable<string>;
     /** get keys to children */
-    values(): readonly ITrieNode[];
+    values(): Iterable<ITrieNode>;
     /** get the children as key value pairs */
-    entries(): readonly Entry[];
+    entries(): Iterable<Entry>;
     /** get child ITrieNode */
     get(char: string): ITrieNode | undefined;
-    /** get a child by the key index */
-    child(idx: number): ITrieNode;
+    /** get a nested child ITrieNode */
+    getNode?: (chars: string) => ITrieNode | undefined;
     /** has child */
     has(char: string): boolean;
     /** `true` iff this node has children */
@@ -137,13 +140,13 @@ interface ITrieNode {
     findExact?: ((word: string) => boolean) | undefined;
 }
 interface ITrieNodeRoot extends ITrieNode {
-    info: Readonly<TrieInfo>;
+    readonly info: Readonly<TrieInfo>;
     /**
      * converts an `id` into a node.
      * @param id an of a ITrieNode in this Trie
      */
     resolveId(id: ITrieNodeId): ITrieNode;
-    findExact?: ((word: string) => boolean) | undefined;
+    findExact: ((word: string) => boolean) | undefined;
     /**
      * Try to find a word.
      * @param word - the normalized word to look up.
@@ -152,9 +155,12 @@ interface ITrieNodeRoot extends ITrieNode {
      */
     find?: ((word: string, strict: boolean) => FindResult$1 | undefined) | undefined;
     isForbidden?: ((word: string) => boolean) | undefined;
-    forbidPrefix: string;
-    compoundFix: string;
-    caseInsensitivePrefix: string;
+    readonly forbidPrefix: string;
+    readonly compoundFix: string;
+    readonly caseInsensitivePrefix: string;
+    readonly hasForbiddenWords: boolean;
+    readonly hasCompoundWords: boolean;
+    readonly hasNonStrictWords: boolean;
 }
 
 declare const FLAG_WORD = 1;
@@ -376,8 +382,8 @@ declare function suggestionCollector(wordToMatch: string, options: SuggestionCol
  */
 declare function impersonateCollector(collector: SuggestionCollector, word: string): SuggestionCollector;
 
-interface TrieData {
-    info: Readonly<TrieInfo>;
+interface TrieData extends Readonly<TrieCharacteristics> {
+    readonly info: Readonly<TrieInfo>;
     /** Method used to split words into individual characters. */
     wordToCharacters(word: string): readonly string[];
     /** get an iterable for all the words in the dictionary. */
@@ -386,8 +392,10 @@ interface TrieData {
     getNode(prefix: string): ITrieNode | undefined;
     has(word: string): boolean;
     isForbiddenWord(word: string): boolean;
-    hasForbiddenWords(): boolean;
-    size: number;
+    readonly hasForbiddenWords: boolean;
+    readonly hasCompoundWords: boolean;
+    readonly hasNonStrictWords: boolean;
+    readonly size: number;
 }
 
 interface ITrie {
@@ -463,12 +471,16 @@ interface ITrie {
      * On the returned Iterator, calling .next(goDeeper: boolean), allows for controlling the depth.
      */
     iterate(): WalkerIterator;
-    weightMap: WeightMap | undefined;
-    get isCaseAware(): boolean;
+    readonly weightMap: WeightMap | undefined;
+    readonly isCaseAware: boolean;
+    readonly hasForbiddenWords: boolean;
+    readonly hasCompoundWords: boolean;
+    readonly hasNonStrictWords: boolean;
 }
 interface FindWordOptions$1 {
     caseSensitive?: boolean;
     useLegacyWordCompounds?: boolean | number;
+    checkForbidden?: boolean;
 }
 
 declare function buildITrieFromWords(words: Iterable<string>, info?: PartialTrieInfo): ITrie;

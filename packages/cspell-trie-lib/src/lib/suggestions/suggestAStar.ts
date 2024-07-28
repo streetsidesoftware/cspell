@@ -77,8 +77,10 @@ export function* getSuggestionsAStar(
     const compRootIgnoreCase = rootIgnoreCase && rootIgnoreCase.get(comp);
     const emitted: Record<string, number> = Object.create(null);
 
+    const srcLetters = [...srcWord];
+
     /** Initial limit is based upon the length of the word. */
-    let limit = BC * Math.min(srcWord.length * opCosts.wordLengthCostFactor, changeLimit);
+    let limit = BC * Math.min(srcLetters.length * opCosts.wordLengthCostFactor, changeLimit);
 
     pathHeap.add(rootPNode);
     if (rootIgnoreCase) {
@@ -146,7 +148,7 @@ export function* getSuggestionsAStar(
     }
 
     function processPath(p: PNode) {
-        const len = srcWord.length;
+        const len = srcLetters.length;
 
         if (p.n.eow && p.i === len) {
             const word = pNodeToWord(p);
@@ -159,8 +161,7 @@ export function* getSuggestionsAStar(
 
     function calcEdges(p: PNode): void {
         const { n, i, t } = p;
-        const keys = n.keys();
-        const s = srcWord[i];
+        const s = srcLetters[i];
         const sg = visMap[s] || 0;
         const cost0 = p.c;
         const cost = cost0 + BC + (i ? 0 : opCosts.firstLetterBias);
@@ -169,9 +170,9 @@ export function* getSuggestionsAStar(
         const costCompound = cost0 + opCosts.compound;
         if (s) {
             // Match
-            const mIdx = keys.indexOf(s);
-            if (mIdx >= 0) {
-                storePath(t, n.child(mIdx), i + 1, cost0, s, p, '=', s);
+            const m = n.get(s);
+            if (m) {
+                storePath(t, m, i + 1, cost0, s, p, '=', s);
             }
 
             if (weightMap) {
@@ -179,21 +180,20 @@ export function* getSuggestionsAStar(
             }
 
             // Double letter, delete 1
-            const ns = srcWord[i + 1];
-            if (s == ns && mIdx >= 0) {
-                storePath(t, n.child(mIdx), i + 2, cost0 + DL, s, p, 'dd', s);
+            const ns = srcLetters[i + 1];
+            if (s == ns && m) {
+                storePath(t, m, i + 2, cost0 + DL, s, p, 'dd', s);
             }
             // Delete
             storePath(t, n, i + 1, cost, '', p, 'd', '');
 
             // Replace
-            for (let j = 0; j < keys.length; ++j) {
-                const ss = keys[j];
-                if (j === mIdx || ss in sc) continue;
+            for (const [ss, node] of n.entries()) {
+                if (node.id === m?.id || ss in sc) continue;
                 const g = visMap[ss] || 0;
                 // srcWord === 'WALK' && console.log(g.toString(2));
                 const c = sg & g ? costVis : cost;
-                storePath(t, n.child(j), i + 1, c, ss, p, 'r', ss);
+                storePath(t, node, i + 1, c, ss, p, 'r', ss);
             }
 
             if (n.eow && i && compoundMethod) {
@@ -213,7 +213,7 @@ export function* getSuggestionsAStar(
         }
 
         // Natural Compound
-        if (compRoot && costCompound <= limit && keys.includes(comp)) {
+        if (compRoot && costCompound <= limit && n.get(comp)) {
             if (compRootIgnoreCase) {
                 storePath(t, compRootIgnoreCase, i, costCompound, '', p, '~+', '~+');
             }
@@ -223,18 +223,17 @@ export function* getSuggestionsAStar(
         // Insert
         if (cost <= limit) {
             // At the end of the word, only append is possible.
-            for (let j = 0; j < keys.length; ++j) {
-                const char = keys[j];
+            for (const [char, node] of n.entries()) {
                 if (char in sc) continue;
-                storePath(t, n.child(j), i, cost, char, p, 'i', char);
+                storePath(t, node, i, cost, char, p, 'i', char);
             }
         }
     }
 
     function processWeightMapEdges(p: PNode, weightMap: WeightMap) {
-        delLetters(p, weightMap, srcWord, storePath);
-        insLetters(p, weightMap, srcWord, storePath);
-        repLetters(p, weightMap, srcWord, storePath);
+        delLetters(p, weightMap, srcLetters, storePath);
+        insLetters(p, weightMap, srcLetters, storePath);
+        repLetters(p, weightMap, srcLetters, storePath);
         return;
     }
 
@@ -264,16 +263,16 @@ export function* getSuggestionsAStar(
     }
 }
 
-function delLetters(pNode: PNode, weightMap: WeightMap, word: string, storePath: FnStorePath) {
+function delLetters(pNode: PNode, weightMap: WeightMap, letters: string[], storePath: FnStorePath) {
     const { t, n } = pNode;
     const trie = weightMap.insDel;
     let ii = pNode.i;
     const cost0 = pNode.c - pNode.i;
 
-    const len = word.length;
+    const len = letters.length;
 
     for (let nn = trie.n; ii < len && nn; ) {
-        const tt = nn[word[ii]];
+        const tt = nn[letters[ii]];
         if (!tt) return;
         ++ii;
         if (tt.c !== undefined) {
@@ -283,7 +282,7 @@ function delLetters(pNode: PNode, weightMap: WeightMap, word: string, storePath:
     }
 }
 
-function insLetters(p: PNode, weightMap: WeightMap, _word: string, storePath: FnStorePath) {
+function insLetters(p: PNode, weightMap: WeightMap, _letters: string[], storePath: FnStorePath) {
     const { t, i, c, n } = p;
     const cost0 = c;
 
@@ -294,16 +293,16 @@ function insLetters(p: PNode, weightMap: WeightMap, _word: string, storePath: Fn
     });
 }
 
-function repLetters(pNode: PNode, weightMap: WeightMap, word: string, storePath: FnStorePath) {
+function repLetters(pNode: PNode, weightMap: WeightMap, letters: string[], storePath: FnStorePath) {
     const node = pNode.n;
     const pt = pNode.t;
     const cost0 = pNode.c;
-    const len = word.length;
+    const len = letters.length;
     const trie = weightMap.replace;
     let i = pNode.i;
 
     for (let n = trie.n; i < len && n; ) {
-        const t = n[word[i]];
+        const t = n[letters[i]];
         if (!t) return;
         ++i;
         // yield { i, t };
@@ -381,12 +380,9 @@ function searchTrieCostNodesMatchingTrie2<T extends { n?: Record<string, T> }>(
 ): void {
     const n = trie.n;
     if (!n) return;
-    const keys = node.keys();
-    for (let i = 0; i < keys.length; ++i) {
-        const key = keys[i];
+    for (const [key, c] of node.entries()) {
         const t = n[key];
         if (!t) continue;
-        const c = node.child(i);
         const pfx = s + key;
         emit(pfx, t, c);
         if (t.n) {

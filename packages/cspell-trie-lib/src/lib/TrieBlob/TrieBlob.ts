@@ -53,6 +53,9 @@ export class TrieBlob implements TrieData {
     #beAdj = endianness() === 'BE' ? 3 : 0;
 
     readonly wordToCharacters = (word: string) => [...word];
+    readonly hasForbiddenWords: boolean;
+    readonly hasCompoundWords: boolean;
+    readonly hasNonStrictWords: boolean;
 
     constructor(
         protected nodes: Uint32Array,
@@ -66,6 +69,9 @@ export class TrieBlob implements TrieData {
         this.#forbidIdx = this._lookupNode(0, this.info.forbiddenWordPrefix);
         this.#compoundIdx = this._lookupNode(0, this.info.compoundCharacter);
         this.#nonStrictIdx = this._lookupNode(0, this.info.stripCaseAndAccentsPrefix);
+        this.hasForbiddenWords = !!this.#forbidIdx;
+        this.hasCompoundWords = !!this.#compoundIdx;
+        this.hasNonStrictWords = !!this.#nonStrictIdx;
     }
 
     public wordToUtf8Seq(word: string): Utf8Seq {
@@ -84,18 +90,6 @@ export class TrieBlob implements TrieData {
         return !!this.#forbidIdx && this.#hasWord(this.#forbidIdx, word);
     }
 
-    hasForbiddenWords(): boolean {
-        return !!this.#forbidIdx;
-    }
-
-    hasCompoundWords(): boolean {
-        return !!this.#compoundIdx;
-    }
-
-    hasNonStrictWords(): boolean {
-        return !!this.#nonStrictIdx;
-    }
-
     /**
      * Try to find the word in the trie. The word must be normalized.
      * If `strict` is `true` the case and accents must match.
@@ -105,7 +99,7 @@ export class TrieBlob implements TrieData {
      * @param strict - if `true` the case and accents must match.
      */
     find(word: string, strict: boolean): FindResult | undefined {
-        if (!this.hasCompoundWords()) {
+        if (!this.hasCompoundWords) {
             const found = this.#hasWord(0, word);
             if (found) return { found: word, compoundUsed: false, caseMatched: true };
             if (strict || !this.#nonStrictIdx) return { found: false, compoundUsed: false, caseMatched: false };
@@ -132,8 +126,12 @@ export class TrieBlob implements TrieData {
             {
                 nodeFindExact: (idx, word) => this.#hasWord(idx, word),
                 nodeGetChild: (idx, letter) => this._lookupNode(idx, letter),
+                nodeFindNode: (idx, word) => this.#findNode(idx, word),
                 isForbidden: (word) => this.isForbiddenWord(word),
                 findExact: (word) => this.has(word),
+                hasCompoundWords: this.hasCompoundWords,
+                hasForbiddenWords: this.hasForbiddenWords,
+                hasNonStrictWords: this.hasNonStrictWords,
             },
         );
         return new TrieBlobIRoot(trieData, 0, this.info, {
@@ -149,11 +147,16 @@ export class TrieBlob implements TrieData {
      * Check if the word is in the trie starting at the given node index.
      */
     #hasWord(nodeIdx: number, word: string): boolean {
-        const wordIndexes = this.wordToUtf8Seq(word);
-        const nodeIdxFound = this.#lookupNode(nodeIdx, wordIndexes);
-        if (nodeIdxFound === undefined) return false;
+        const nodeIdxFound = this.#findNode(nodeIdx, word);
+        if (!nodeIdxFound) return false;
         const node = this.nodes[nodeIdxFound];
-        return (node & TrieBlob.NodeMaskEOW) === TrieBlob.NodeMaskEOW;
+        const m = TrieBlob.NodeMaskEOW;
+        return (node & m) === m;
+    }
+
+    #findNode(nodeIdx: number, word: string): number | undefined {
+        const wordIndexes = this.wordToUtf8Seq(word);
+        return this.#lookupNode(nodeIdx, wordIndexes);
     }
 
     /**
@@ -386,8 +389,8 @@ export class TrieBlob implements TrieData {
     //     }
     // }
 
-    static NodeMaskEOW = 0x0000_0100;
-    static NodeMaskNumChildren = (1 << NodeHeaderNumChildrenBits) - 1;
+    static NodeMaskEOW = 0x0000_0100 & 0xffff;
+    static NodeMaskNumChildren = ((1 << NodeHeaderNumChildrenBits) - 1) & 0xffff;
     static NodeMaskNumChildrenShift = NodeHeaderNumChildrenShift;
     static NodeChildRefShift = 8;
     /**

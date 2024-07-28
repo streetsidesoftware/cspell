@@ -1,5 +1,7 @@
+import { DictionaryDefinition } from '@cspell/cspell-types';
 import { describe, expect, test } from 'vitest';
 
+import { readFastTrieBlobFromConfig, readTrieFromConfig } from '../../test/dictionaries.test.helper.js';
 import type { WeightMap } from '../distance/index.js';
 import { mapDictionaryInformationToWeightMap } from '../mappers/mapDictionaryInfoToWeightMap.js';
 import { parseDictionaryLegacy } from '../SimpleDictionaryParser.js';
@@ -317,4 +319,129 @@ function calcWeightMap(): WeightMap {
             },
         ],
     });
+}
+
+describe('Validate Suggest A Star with English Dict', async () => {
+    const changeLimit = 3;
+
+    const trie = new TrieNodeTrie((await _getTrie()).root);
+    const fastTrie = await _getFastTrieBlob();
+    const trieBlob = fastTrie.toTrieBlob();
+
+    // cspell:ignore Orangges
+    test('Tests suggestions for Orangges Trie', () => {
+        const results = Sug.suggestAStar(trie, 'Orangges', { changeLimit: changeLimit, weightMap: dictWeightMap() });
+        expect(results).toEqual([
+            sr('oranges', 101),
+            sr('orangs', 191),
+            sr('Orange', 200),
+            sr('orange', 201),
+            sr('orangey', 201),
+            sr('orangier', 201),
+            sr('orangiest', 201),
+            sr('orangeries', 241),
+        ]);
+    });
+
+    test('Tests suggestions for Orangges FastTrie', () => {
+        const results = Sug.suggestAStar(fastTrie, 'Orangges', {
+            changeLimit: changeLimit,
+            weightMap: dictWeightMap(),
+        });
+        expect(results).toEqual([
+            sr('oranges', 101),
+            sr('orangs', 191),
+            sr('Orange', 200),
+            sr('orange', 201),
+            sr('orangey', 201),
+            sr('orangier', 201),
+            sr('orangiest', 201),
+            sr('orangeries', 241),
+        ]);
+    });
+
+    test('Tests suggestions for Orangges TrieBlob', () => {
+        const results = Sug.suggestAStar(trieBlob, 'Orangges', {
+            changeLimit: changeLimit,
+            weightMap: dictWeightMap(),
+        });
+        expect(results).toEqual([
+            sr('oranges', 101),
+            sr('orangs', 191),
+            sr('Orange', 200),
+            sr('orange', 201),
+            sr('orangey', 201),
+            sr('orangier', 201),
+            sr('orangiest', 201),
+            sr('orangeries', 241),
+        ]);
+    });
+});
+
+function _getTrie() {
+    return readTrieFromConfig('@cspell/dict-en_us/cspell-ext.json');
+}
+
+function _getFastTrieBlob() {
+    return readFastTrieBlobFromConfig('@cspell/dict-en_us/cspell-ext.json');
+}
+
+function dictWeightMap() {
+    return mapDictionaryInformationToWeightMap(dictDef().dictionaryInformation);
+}
+
+function dictDef() {
+    return {
+        name: 'en_us',
+        path: './en_US.trie.gz',
+        repMap: [["'|`|’", "'"]],
+        description: 'American English Dictionary',
+        dictionaryInformation: {
+            locale: 'en-US',
+            alphabet: 'a-zA-Z',
+            suggestionEditCosts: [
+                { description: "Words like 'break' and 'brake'", map: '(ate)(eat)|(ake)(eak)', replace: 75 },
+                {
+                    description: 'Sounds alike',
+                    map: 'f(ph)(gh)|(sion)(tion)(cion)|(ail)(ale)|(r)(ur)(er)(ure)(or)',
+                    replace: 75,
+                },
+                {
+                    description: 'Double letter score',
+                    map: 'l(ll)|s(ss)|t(tt)|e(ee)|b(bb)|d(dd)',
+                    replace: 75,
+                },
+                {
+                    map: 'aeiou',
+                    replace: 98,
+                    swap: 75,
+                    insDel: 90,
+                },
+                {
+                    description: 'Common vowel sounds.',
+                    map: 'o(oh)(oo)|(oo)(ou)|(oa)(ou)|(ee)(ea)',
+                    replace: 75,
+                },
+                {
+                    map: 'o(oo)|a(aa)|e(ee)|u(uu)|(eu)(uu)|(ou)(ui)(ow)|(ie)(ei)|i(ie)|e(en)|e(ie)',
+                    replace: 50,
+                },
+                {
+                    description: "Do not rank `'s` high on the list.",
+                    map: "($)('$)('s$)|(s$)(s'$)(s's$)",
+                    replace: 10,
+                    penalty: 180,
+                },
+                {
+                    description: "Plurals ending in 'y'",
+                    map: '(ys)(ies)',
+                    replace: 75,
+                },
+                {
+                    map: '(d$)(t$)(dt$)',
+                    replace: 75,
+                },
+            ],
+        },
+    } as const satisfies DictionaryDefinition;
 }

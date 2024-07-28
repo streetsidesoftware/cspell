@@ -36,12 +36,9 @@ describe('FastTrieBlob', () => {
         const root = createTrieRootFromList(words);
         const ft = FastTrieBlobBuilder.fromTrieRoot(root);
         const iTrieRoot = FastTrieBlob.toITrieNodeRoot(ft);
-        const keys = iTrieRoot.keys();
-        const values = iTrieRoot.values();
+        const keys = [...iTrieRoot.keys()];
+        const values = [...iTrieRoot.values()];
         expect(values.length).toBe(keys.length);
-        const valueIds = values.map((v) => v.id);
-        const idsFromLookUp = keys.map((_, i) => iTrieRoot.child(i).id);
-        expect(valueIds).toEqual(idsFromLookUp);
     });
 
     test('extended number of letters', () => {

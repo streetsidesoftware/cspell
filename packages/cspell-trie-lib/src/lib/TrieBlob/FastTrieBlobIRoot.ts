@@ -1,6 +1,5 @@
 import type { FindResult, ITrieNode, ITrieNodeId, ITrieNodeRoot } from '../ITrieNode/ITrieNode.js';
-import type { TrieInfo } from '../ITrieNode/TrieInfo.js';
-import type { FastTrieBlobInternals } from './FastTrieBlobInternals.js';
+import type { FastTrieBlobInternalsAndMethods } from './FastTrieBlobInternals.js';
 import { Utf8Accumulator } from './Utf8.js';
 
 const EmptyKeys: readonly string[] = Object.freeze([]);
@@ -24,15 +23,15 @@ class FastTrieBlobINode implements ITrieNode {
     protected charToIdx: Readonly<Record<string, NodeIndex>> | undefined;
 
     constructor(
-        readonly trie: FastTrieBlobInternals,
+        readonly trie: FastTrieBlobInternalsAndMethods,
         readonly nodeIdx: NodeIndex,
-        protected nodeHas: (idx: number, word: string) => boolean,
     ) {
         const node = trie.nodes[nodeIdx];
         this.node = node;
         this.eow = !!(node[0] & trie.NodeMaskEOW);
         this._count = node.length - 1;
         this.id = nodeIdx;
+        this.findExact = (word: string) => trie.nodeFindExact(nodeIdx, word);
     }
 
     /** get keys to children */
@@ -54,19 +53,25 @@ class FastTrieBlobINode implements ITrieNode {
         if (this._entries) return this._entries;
         if (!this._count) return EmptyEntries;
         const entries = this.getNodesEntries();
-        this._entries = entries.map(([key, value]) => [key, new FastTrieBlobINode(this.trie, value, this.nodeHas)]);
+        this._entries = entries.map(([key, value]) => [key, new FastTrieBlobINode(this.trie, value)]);
         return this._entries;
     }
 
     /** get child ITrieNode */
     get(char: string): ITrieNode | undefined {
-        const idx = this.getCharToIdxMap()[char];
+        const idx = this.trie.nodeGetChild(this.id, char);
         if (idx === undefined) return undefined;
-        return this.child(idx);
+        return new FastTrieBlobINode(this.trie, idx);
+    }
+
+    getNode(chars: string): ITrieNode | undefined {
+        const idx = this.trie.nodeFindNode(this.id, chars);
+        if (idx === undefined) return undefined;
+        return new FastTrieBlobINode(this.trie, idx);
     }
 
     has(char: string): boolean {
-        const idx = this.getCharToIdxMap()[char];
+        const idx = this.trie.nodeGetChild(this.id, char);
         return idx !== undefined;
     }
 
@@ -78,7 +83,7 @@ class FastTrieBlobINode implements ITrieNode {
         if (!this._values && !this.containsChainedIndexes()) {
             const n = this.node[keyIdx + 1];
             const nodeIdx = n >>> this.trie.NodeChildRefShift;
-            return new FastTrieBlobINode(this.trie, nodeIdx, this.nodeHas);
+            return new FastTrieBlobINode(this.trie, nodeIdx);
         }
         return this.values()[keyIdx];
     }
@@ -96,7 +101,19 @@ class FastTrieBlobINode implements ITrieNode {
     }
 
     findExact(word: string): boolean {
-        return this.nodeHas(this.id, word);
+        return this.trie.nodeFindExact(this.id, word);
+    }
+
+    isForbidden(word: string): boolean {
+        const n = this.trie.nodeGetChild(this.id, this.trie.info.forbiddenWordPrefix);
+        if (n === undefined) return false;
+        return this.trie.nodeFindExact(n, word);
+    }
+
+    findCaseInsensitive(word: string): boolean {
+        const n = this.trie.nodeGetChild(this.id, this.trie.info.stripCaseAndAccentsPrefix);
+        if (n === undefined) return false;
+        return this.trie.nodeFindExact(n, word);
     }
 
     private containsChainedIndexes(): boolean {
@@ -204,19 +221,18 @@ class FastTrieBlobINode implements ITrieNode {
 }
 
 export class FastTrieBlobIRoot extends FastTrieBlobINode implements ITrieNodeRoot {
-    constructor(
-        trie: FastTrieBlobInternals,
-        nodeIdx: number,
-        readonly info: Readonly<TrieInfo>,
-        readonly findExact: (word: string) => boolean,
-        readonly isForbidden: (word: string) => boolean,
-        readonly findCaseInsensitive: (word: string) => boolean,
-        nodeHas: (idx: number, word: string) => boolean,
-    ) {
-        super(trie, nodeIdx, nodeHas);
+    readonly hasForbiddenWords: boolean;
+    readonly hasCompoundWords: boolean;
+    readonly hasNonStrictWords: boolean;
+
+    constructor(trie: FastTrieBlobInternalsAndMethods, nodeIdx: number) {
+        super(trie, nodeIdx);
+        this.hasForbiddenWords = trie.hasForbiddenWords;
+        this.hasCompoundWords = trie.hasCompoundWords;
+        this.hasNonStrictWords = trie.hasNonStrictWords;
     }
     resolveId(id: ITrieNodeId): ITrieNode {
-        return new FastTrieBlobINode(this.trie, id as number, this.nodeHas);
+        return new FastTrieBlobINode(this.trie, id as number);
     }
 
     find(word: string, strict: boolean): FindResult | undefined {
@@ -229,15 +245,19 @@ export class FastTrieBlobIRoot extends FastTrieBlobINode implements ITrieNodeRoo
         return found ? { found: word, compoundUsed: false, caseMatched: false } : undefined;
     }
 
+    get info() {
+        return this.trie.info;
+    }
+
     get forbidPrefix(): string {
-        return this.info.forbiddenWordPrefix;
+        return this.trie.info.forbiddenWordPrefix;
     }
 
     get compoundFix(): string {
-        return this.info.compoundCharacter;
+        return this.trie.info.compoundCharacter;
     }
 
     get caseInsensitivePrefix(): string {
-        return this.info.stripCaseAndAccentsPrefix;
+        return this.trie.info.stripCaseAndAccentsPrefix;
     }
 }

@@ -39,18 +39,16 @@ export interface ITrieNode {
     readonly id: ITrieNodeId;
     /** flag End of Word */
     readonly eow: boolean;
-    /** number of children */
-    readonly size: number;
     /** get keys to children */
-    keys(): readonly string[];
+    keys(): Iterable<string>;
     /** get keys to children */
-    values(): readonly ITrieNode[];
+    values(): Iterable<ITrieNode>;
     /** get the children as key value pairs */
-    entries(): readonly Entry[];
+    entries(): Iterable<Entry>;
     /** get child ITrieNode */
     get(char: string): ITrieNode | undefined;
-    /** get a child by the key index */
-    child(idx: number): ITrieNode;
+    /** get a nested child ITrieNode */
+    getNode?: (chars: string) => ITrieNode | undefined;
     /** has child */
     has(char: string): boolean;
     /** `true` iff this node has children */
@@ -60,14 +58,14 @@ export interface ITrieNode {
 }
 
 export interface ITrieNodeRoot extends ITrieNode {
-    info: Readonly<TrieInfo>;
+    readonly info: Readonly<TrieInfo>;
     /**
      * converts an `id` into a node.
      * @param id an of a ITrieNode in this Trie
      */
     resolveId(id: ITrieNodeId): ITrieNode;
 
-    findExact?: ((word: string) => boolean) | undefined;
+    findExact: ((word: string) => boolean) | undefined;
     /**
      * Try to find a word.
      * @param word - the normalized word to look up.
@@ -78,7 +76,11 @@ export interface ITrieNodeRoot extends ITrieNode {
 
     isForbidden?: ((word: string) => boolean) | undefined;
 
-    forbidPrefix: string;
-    compoundFix: string;
-    caseInsensitivePrefix: string;
+    readonly forbidPrefix: string;
+    readonly compoundFix: string;
+    readonly caseInsensitivePrefix: string;
+
+    readonly hasForbiddenWords: boolean;
+    readonly hasCompoundWords: boolean;
+    readonly hasNonStrictWords: boolean;
 }

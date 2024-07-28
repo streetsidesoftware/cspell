@@ -158,7 +158,7 @@ function _walkerWords2(root: TrieNode): Iterable<string> {
  * Walks the Trie and yields each word.
  */
 export function* walkerWordsITrie(root: ITrieNode): Iterable<string> {
-    type Children = readonly string[];
+    type Children = readonly Readonly<[string, ITrieNode]>[];
     interface Stack {
         t: string;
         n: ITrieNode;
@@ -168,19 +168,18 @@ export function* walkerWordsITrie(root: ITrieNode): Iterable<string> {
 
     let depth = 0;
     const stack: Stack[] = [];
-    stack[depth] = { t: '', n: root, c: root.keys(), ci: 0 };
+    stack[depth] = { t: '', n: root, c: [...root.entries()], ci: 0 };
     while (depth >= 0) {
         let s = stack[depth];
         let baseText = s.t;
         while (s.ci < s.c.length && s.n) {
-            const char = s.c[s.ci++];
-            const node = s.n.get(char);
+            const [char, node] = s.c[s.ci++];
             if (!node) continue;
             const text = baseText + char;
             if (node.eow) yield text;
             depth++;
             baseText = text;
-            const c = node.keys();
+            const c = [...node.entries()];
             if (stack[depth]) {
                 s = stack[depth];
                 s.t = text;

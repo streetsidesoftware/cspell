@@ -55,12 +55,31 @@ suite('encode to sequence', async (test) => {
         }
     });
 
-    const buffer = new Uint8Array(1024);
+    const buffer = new ArrayBuffer(1024);
+    const u8buffer = new Uint8Array(buffer);
 
     test('TextEncoder.encodeInto to Uint8Array' + msgSuffix, () => {
         for (const word of words) {
-            encoder.encodeInto(word, buffer);
+            encoder.encodeInto(word, u8buffer);
         }
+    });
+
+    test('TextEncoder.encodeInto to Uint8Array slice' + msgSuffix, () => {
+        let s: Uint8Array | undefined;
+        for (const word of words) {
+            const n = encoder.encodeInto(word, u8buffer);
+            s = u8buffer.slice(0, n.written);
+        }
+        return s;
+    });
+
+    test('TextEncoder.encodeInto to Uint8Array from buffer' + msgSuffix, () => {
+        let s: Uint8Array | undefined;
+        for (const word of words) {
+            const n = encoder.encodeInto(word, u8buffer);
+            s = new Uint8Array(buffer, 0, n.written);
+        }
+        return s;
     });
 
     test('Normalize("NFC")' + msgSuffix, () => {

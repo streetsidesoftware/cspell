@@ -19,7 +19,8 @@ function* compoundWalker(root: ITrieNode, compoundingMethod: CompoundWordsMethod
 
     function children(n: ITrieNode): Children {
         if (n.hasChildren()) {
-            const c = n.keys().map((k, i) => [k, n.child(i)] as const);
+            const entries = n.entries();
+            const c = Array.isArray(entries) ? entries : [...entries];
             return n.eow && rc ? [...c, ...rc] : c;
         }
         if (n.eow) {
@@ -54,25 +55,26 @@ function* compoundWalker(root: ITrieNode, compoundingMethod: CompoundWordsMethod
  * next(goDeeper: boolean):
  */
 function* nodeWalker(root: ITrieNode): WalkerIterator {
-    type Children = Readonly<Array<string>>;
+    type Children = Readonly<Array<[string, ITrieNode]>>;
 
     let depth = 0;
     const stack: { t: string; n: ITrieNode; c: Children; ci: number }[] = [];
-    stack[depth] = { t: '', n: root, c: root.keys(), ci: 0 };
+    const entries = root.entries();
+    stack[depth] = { t: '', n: root, c: Array.isArray(entries) ? entries : [...entries], ci: 0 };
     while (depth >= 0) {
         let s = stack[depth];
         let baseText = s.t;
         while (s.ci < s.c.length && s.n) {
             const idx = s.ci++;
-            const char = s.c[idx];
-            const node = s.n.child(idx);
+            const [char, node] = s.c[idx];
             const text = baseText + char;
             const goDeeper = yield { text, node, depth };
             if (goDeeper !== false) {
                 depth++;
                 baseText = text;
                 const s = stack[depth];
-                const c = node.keys();
+                const entries = node.entries();
+                const c = Array.isArray(entries) ? entries : [...entries];
                 if (s) {
                     s.t = text;
                     s.n = node;
@@ -103,7 +105,7 @@ export function walkerWords(root: ITrieNode): Iterable<string> {
  * Walks the Trie and yields each word.
  */
 export function* walkerWordsITrie(root: ITrieNode): Iterable<string> {
-    type Children = readonly string[];
+    type Children = readonly [string, ITrieNode][];
     interface Stack {
         t: string;
         n: ITrieNode;
@@ -113,19 +115,21 @@ export function* walkerWordsITrie(root: ITrieNode): Iterable<string> {
 
     let depth = 0;
     const stack: Stack[] = [];
-    stack[depth] = { t: '', n: root, c: root.keys(), ci: 0 };
+    const entries = root.entries();
+    const c = Array.isArray(entries) ? entries : [...entries];
+    stack[depth] = { t: '', n: root, c, ci: 0 };
     while (depth >= 0) {
         let s = stack[depth];
         let baseText = s.t;
         while (s.ci < s.c.length && s.n) {
-            const char = s.c[s.ci++];
-            const node = s.n.get(char);
+            const [char, node] = s.c[s.ci++];
             if (!node) continue;
             const text = baseText + char;
             if (node.eow) yield text;
             depth++;
             baseText = text;
-            const c = node.keys();
+            const entries = node.entries();
+            const c = Array.isArray(entries) ? entries : [...entries];
             if (stack[depth]) {
                 s = stack[depth];
                 s.t = text;

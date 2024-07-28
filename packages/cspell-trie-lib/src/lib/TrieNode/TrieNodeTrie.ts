@@ -13,8 +13,15 @@ export class TrieNodeTrie implements TrieData {
     private _iTrieRoot: ITrieNodeRoot | undefined;
     readonly info: TrieOptions;
     private _size: number | undefined;
+    readonly hasForbiddenWords: boolean;
+    readonly hasCompoundWords: boolean;
+    readonly hasNonStrictWords: boolean;
+
     constructor(readonly root: TrieRoot) {
         this.info = mergeOptionalWithDefaults(root);
+        this.hasForbiddenWords = !!root.c[root.forbiddenWordPrefix];
+        this.hasCompoundWords = !!root.c[root.compoundCharacter];
+        this.hasNonStrictWords = !!root.c[root.stripCaseAndAccentsPrefix];
     }
 
     wordToCharacters = (word: string): string[] => [...word];
@@ -41,11 +48,6 @@ export class TrieNodeTrie implements TrieData {
 
     isForbiddenWord(word: string): boolean {
         return findWordExact(this.root.c[this.root.forbiddenWordPrefix], word);
-    }
-
-    hasForbiddenWords(): boolean {
-        const root = this.root;
-        return !!root.c[root.forbiddenWordPrefix];
     }
 
     get size() {

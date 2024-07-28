@@ -1,8 +1,8 @@
 import type { ITrieNode, ITrieNodeRoot } from './ITrieNode/ITrieNode.js';
-import type { TrieInfo } from './ITrieNode/TrieInfo.js';
+import type { TrieCharacteristics, TrieInfo } from './ITrieNode/TrieInfo.js';
 
-export interface TrieData {
-    info: Readonly<TrieInfo>;
+export interface TrieData extends Readonly<TrieCharacteristics> {
+    readonly info: Readonly<TrieInfo>;
     /** Method used to split words into individual characters. */
     wordToCharacters(word: string): readonly string[];
     /** get an iterable for all the words in the dictionary. */
@@ -11,6 +11,8 @@ export interface TrieData {
     getNode(prefix: string): ITrieNode | undefined;
     has(word: string): boolean;
     isForbiddenWord(word: string): boolean;
-    hasForbiddenWords(): boolean;
-    size: number;
+    readonly hasForbiddenWords: boolean;
+    readonly hasCompoundWords: boolean;
+    readonly hasNonStrictWords: boolean;
+    readonly size: number;
 }

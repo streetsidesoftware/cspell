@@ -533,6 +533,11 @@ interface ExtendedSuggestion {
      * The suggested word adjusted to match the original case.
      */
     wordAdjustedToMatchCase?: string;
+    /**
+     * The cost of using this word.
+     * The lower the cost, the better the suggestion.
+     */
+    cost?: number;
 }
 
 interface ValidationResult extends TextOffset, Pick<Issue, 'message' | 'issueType'> {

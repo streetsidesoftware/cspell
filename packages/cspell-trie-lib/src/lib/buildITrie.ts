@@ -7,5 +7,5 @@ export function buildITrieFromWords(words: Iterable<string>, info: PartialTrieIn
     const builder = new FastTrieBlobBuilder(info);
     builder.insert(words);
     const ft = builder.build();
-    return new ITrieImpl(ft.size > 100 ? ft.toTrieBlob() : ft);
+    return new ITrieImpl(ft.size > 1000 ? ft.toTrieBlob() : ft);
 }

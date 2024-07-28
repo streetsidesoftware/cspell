@@ -285,8 +285,8 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
                 ),
                 this.charIndex.build(),
                 this.bitMasksInfo,
+                this.options,
             ),
-            this.options,
         );
     }
 

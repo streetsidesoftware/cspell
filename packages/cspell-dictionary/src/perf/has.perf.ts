@@ -18,17 +18,18 @@ suite('dictionary has', async (test) => {
     const dict3 = createSpellingDictionary(words3, 'test3', import.meta.url);
 
     const dictCol = createCollection([dict, dict2, dict3], 'test-collection');
+    const dictColRev = createCollection([dict3, dict2, dict], 'test-collection-reverse');
 
     test('dictionary has 100k words', () => {
         checkWords(dict, words);
     });
 
-    test('dictionary has 100k words (2nd time)', () => {
-        checkWords(dict, words);
-    });
-
     test('collection has 100k words', () => {
         checkWords(dictCol, words);
+    });
+
+    test('collection reverse has 100k words', () => {
+        checkWords(dictColRev, words);
     });
 
     test('iTrie has 100k words', () => {
@@ -58,10 +59,6 @@ suite('dictionary has Not', async (test) => {
     const dictCol = createCollection([dict, dict2, dict3], 'test-collection');
 
     test('dictionary has not 100k words', () => {
-        checkWords(dict, missingWords, false);
-    });
-
-    test('dictionary has not 100k words (2nd time)', () => {
         checkWords(dict, missingWords, false);
     });
 

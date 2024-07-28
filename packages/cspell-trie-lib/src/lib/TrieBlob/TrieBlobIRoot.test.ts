@@ -31,12 +31,9 @@ describe('FastTrieBlob', () => {
     test('toITrieNodeRoot.values', () => {
         const trie = createTrieBlob(words);
         const iTrieRoot = trie.getRoot();
-        const keys = iTrieRoot.keys();
-        const values = iTrieRoot.values();
+        const keys = [...iTrieRoot.keys()];
+        const values = [...iTrieRoot.values()];
         expect(values.length).toBe(keys.length);
-        const valueIds = values.map((v) => v.id);
-        const idsFromLookUp = keys.map((_, i) => iTrieRoot.child(i).id);
-        expect(valueIds).toEqual(idsFromLookUp);
     });
 
     test('toITrieNodeRoot with large number of characters', async () => {

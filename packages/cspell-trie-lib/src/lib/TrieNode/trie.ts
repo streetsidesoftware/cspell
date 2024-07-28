@@ -58,6 +58,10 @@ class ImplITrieNode implements ITrieNode {
         return ImplITrieNode.toITrieNode(n);
     }
 
+    getNode(chars: string): ITrieNode | undefined {
+        return this.findNode(chars);
+    }
+
     has(char: string): boolean {
         const c = this.node.c;
         return (c && char in c) || false;
@@ -74,6 +78,25 @@ class ImplITrieNode implements ITrieNode {
         return !!this.node.c;
     }
 
+    #findTrieNode(word: string): TrieNode | undefined {
+        let node: TrieNode | undefined = this.node;
+        for (const char of word) {
+            if (!node) return undefined;
+            node = node.c?.[char];
+        }
+        return node;
+    }
+
+    findNode(word: string): ITrieNode | undefined {
+        const node = this.#findTrieNode(word);
+        return node && ImplITrieNode.toITrieNode(node);
+    }
+
+    findExact(word: string): boolean {
+        const node = this.#findTrieNode(word);
+        return !!node && !!node.f;
+    }
+
     static toITrieNode(node: TrieNode): ITrieNode {
         return new this(node);
     }
@@ -82,10 +105,17 @@ class ImplITrieNode implements ITrieNode {
 class ImplITrieRoot extends ImplITrieNode implements ITrieNodeRoot {
     readonly info: Readonly<TrieInfo>;
 
+    readonly hasForbiddenWords: boolean;
+    readonly hasCompoundWords: boolean;
+    readonly hasNonStrictWords: boolean;
+
     protected constructor(readonly root: TrieRoot) {
         super(root);
         const { stripCaseAndAccentsPrefix, compoundCharacter, forbiddenWordPrefix, isCaseAware } = root;
         this.info = { stripCaseAndAccentsPrefix, compoundCharacter, forbiddenWordPrefix, isCaseAware };
+        this.hasForbiddenWords = !!root.c[forbiddenWordPrefix];
+        this.hasCompoundWords = !!root.c[compoundCharacter];
+        this.hasNonStrictWords = !!root.c[stripCaseAndAccentsPrefix];
     }
 
     get eow(): boolean {
