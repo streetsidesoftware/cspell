@@ -18,6 +18,7 @@ on:
       - 'packages/**/package.json'
       - 'packages/**/*-lock.yaml'
       - 'packages/**/*.ts'
+      - 'packages/**/*.mts'
       - 'integration-tests/**'
       - '!integration-tests/perf/**'
       - 'package.json'
@@ -149,9 +150,14 @@ jobs:
               'integration-tests/config/repositories/${{matrix.repo}}/**',
               'integration-tests/snapshots/${{ matrix.repo }}/*',
               'integration-tests/repositories/*',
-              'integration-tests/src/**/*.ts', 'integration-tests/tsconfig.json',
-              'packages/*/src/**/*.ts', 'packages/*/tsconfig.json',
+              'integration-tests/src/**/*.ts',
+              'integration-tests/src/**/*.mts',
+              'integration-tests/tsconfig.json',
+              'packages/*/src/**/*.ts',
+              'packages/*/src/**/*.mts',
+              'packages/*/tsconfig.json',
               'packages/*/*.ts',
+              'packages/*/*.mts',
               'tools/perf-chart/lib/app.cjs',
               '*-lock.yaml'
             ) }}
