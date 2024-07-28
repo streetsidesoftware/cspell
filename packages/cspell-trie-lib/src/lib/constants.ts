@@ -12,4 +12,7 @@ export const defaultTrieInfo: TrieInfo = Object.freeze({
     forbiddenWordPrefix: FORBID_PREFIX,
     stripCaseAndAccentsPrefix: CASE_INSENSITIVE_PREFIX,
     isCaseAware: true,
+    hasForbiddenWords: false,
+    hasCompoundWords: false,
+    hasNonStrictWords: false,
 });

@@ -108,18 +108,23 @@ export interface ITrie {
      */
     iterate(): WalkerIterator;
 
-    weightMap: WeightMap | undefined;
-
-    get isCaseAware(): boolean;
+    readonly weightMap: WeightMap | undefined;
+    readonly isCaseAware: boolean;
+    readonly hasForbiddenWords: boolean;
+    readonly hasCompoundWords: boolean;
+    readonly hasNonStrictWords: boolean;
 }
 
 export class ITrieImpl implements ITrie {
     private _info: TrieInfo;
-    private hasForbidden: boolean;
     private root: ITrieNodeRoot;
     private count?: number;
     weightMap: WeightMap | undefined;
     #optionsCompound = this.createFindOptions({ compoundMode: 'compound' });
+
+    readonly hasForbiddenWords: boolean;
+    readonly hasCompoundWords: boolean;
+    readonly hasNonStrictWords: boolean;
 
     constructor(
         readonly data: TrieData,
@@ -127,7 +132,9 @@ export class ITrieImpl implements ITrie {
     ) {
         this.root = data.getRoot();
         this._info = mergeOptionalWithDefaults(data.info);
-        this.hasForbidden = data.hasForbiddenWords();
+        this.hasForbiddenWords = data.hasForbiddenWords;
+        this.hasCompoundWords = data.hasCompoundWords;
+        this.hasNonStrictWords = data.hasNonStrictWords;
     }
 
     /**
@@ -178,8 +185,8 @@ export class ITrieImpl implements ITrie {
      * @returns true if the word was found and is not forbidden.
      */
     hasWord(word: string, caseSensitive: boolean): boolean {
-        const f = this.findWord(word, { caseSensitive });
-        return !!f.found && !f.forbidden;
+        const f = this.findWord(word, { caseSensitive, checkForbidden: false });
+        return !!f.found;
     }
 
     findWord(word: string, options?: FindWordOptions): FindFullResult {
@@ -194,8 +201,10 @@ export class ITrieImpl implements ITrie {
             });
             return findLegacyCompound(this.root, word, findOptions);
         }
-        const findOptions = this.createFindOptionsMatchCase(options?.caseSensitive);
-        return findWord(this.root, word, findOptions);
+        return findWord(this.root, word, {
+            matchCase: options?.caseSensitive,
+            checkForbidden: options?.checkForbidden,
+        });
     }
 
     /**
@@ -203,7 +212,7 @@ export class ITrieImpl implements ITrie {
      * @param word the word to lookup.
      */
     isForbiddenWord(word: string): boolean {
-        return this.hasForbidden && isForbiddenWord(this.root, word, this.info.forbiddenWordPrefix);
+        return this.hasForbiddenWords && isForbiddenWord(this.root, word, this.info.forbiddenWordPrefix);
     }
 
     /**
@@ -289,17 +298,9 @@ export class ITrieImpl implements ITrie {
         const findOptions = createFindOptions(options);
         return findOptions;
     }
-
-    private lastCreateFindOptionsMatchCaseMap = new Map<boolean | undefined, FindOptions>();
-    private createFindOptionsMatchCase(matchCase: boolean | undefined) {
-        const f = this.lastCreateFindOptionsMatchCaseMap.get(matchCase);
-        if (f !== undefined) return f;
-        const findOptions = this.createFindOptions({ matchCase });
-        this.lastCreateFindOptionsMatchCaseMap.set(matchCase, findOptions);
-        return findOptions;
-    }
 }
 export interface FindWordOptions {
     caseSensitive?: boolean;
     useLegacyWordCompounds?: boolean | number;
+    checkForbidden?: boolean;
 }

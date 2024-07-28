@@ -27,11 +27,18 @@ describe('Validate findWord', () => {
         expect(findWord(trie, word, opts)).toEqual(expected);
     });
 
+    const ncf = { checkForbidden: false };
+
     const tests: [string, PartialFindOptions, FindFullResult][] = [
         [
             'errorCodes',
-            { matchCase: false, compoundMode: 'compound' },
+            { matchCase: false, compoundMode: 'compound', checkForbidden: true },
             frCompoundFound('errorCodes', { forbidden: false }),
+        ],
+        [
+            'errorCodes',
+            { matchCase: false, compoundMode: 'compound', checkForbidden: false },
+            frCompoundFound('errorCodes', { forbidden: undefined }),
         ],
         [
             'errorcodes',
@@ -42,6 +49,12 @@ describe('Validate findWord', () => {
         ['code', { matchCase: true, compoundMode: 'none' }, frFound('code', { forbidden: false })],
         ['cafe', { matchCase: true, compoundMode: 'none' }, frNotFound({ forbidden: false })],
         ['café', { matchCase: true, compoundMode: 'none' }, frFound('café', { forbidden: false })],
+
+        // Do not check forbidden words.
+        ['Code', { matchCase: true, compoundMode: 'none', ...ncf }, frNotFound()],
+        ['code', { matchCase: true, compoundMode: 'none', ...ncf }, frFound('code')],
+        ['cafe', { matchCase: true, compoundMode: 'none', ...ncf }, frNotFound()],
+        ['café', { matchCase: true, compoundMode: 'none', ...ncf }, frFound('café')],
 
         // non-normalized words
         ['café', { matchCase: false, compoundMode: 'none' }, frFound('café')],
@@ -156,12 +169,8 @@ describe('Validate Legacy Compound lookup', () => {
 
 type PartialFindFullResult = Partial<FindFullResult>;
 
-function fr({
-    found = false,
-    forbidden = undefined,
-    compoundUsed = false,
-    caseMatched = true,
-}: PartialFindFullResult): FindFullResult {
+function fr(r: PartialFindFullResult): FindFullResult {
+    const { found = false, forbidden = undefined, compoundUsed = false, caseMatched = true } = r;
     return {
         found,
         forbidden,

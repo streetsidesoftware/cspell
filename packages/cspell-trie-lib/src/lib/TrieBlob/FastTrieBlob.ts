@@ -20,11 +20,14 @@ const checkSorted = false;
 
 export class FastTrieBlob implements TrieData {
     private _readonly = false;
-    private _forbidIdx: number;
-    private _caseInsensitiveIdx: number;
+    #forbidIdx: number;
+    #compoundIdx: number;
+    #nonStrictIdx: number;
     private _iTrieRoot: ITrieNodeRoot | undefined;
     wordToCharacters: (word: string) => readonly string[];
-    // private nodes8: Uint8Array[];
+    readonly hasForbiddenWords: boolean;
+    readonly hasCompoundWords: boolean;
+    readonly hasNonStrictWords: boolean;
 
     private constructor(
         private nodes: FastTrieBlobNode[],
@@ -33,8 +36,13 @@ export class FastTrieBlob implements TrieData {
         readonly info: Readonly<TrieInfo>,
     ) {
         this.wordToCharacters = (word: string) => [...word];
-        this._forbidIdx = this.#searchNodeForChar(0, this.info.forbiddenWordPrefix) || 0;
-        this._caseInsensitiveIdx = this.#searchNodeForChar(0, this.info.stripCaseAndAccentsPrefix) || 0;
+        this.#forbidIdx = this.#searchNodeForChar(0, this.info.forbiddenWordPrefix) || 0;
+        this.#compoundIdx = this.#searchNodeForChar(0, this.info.compoundCharacter) || 0;
+        this.#nonStrictIdx = this.#searchNodeForChar(0, this.info.stripCaseAndAccentsPrefix) || 0;
+
+        this.hasForbiddenWords = !!this.#forbidIdx;
+        this.hasCompoundWords = !!this.#compoundIdx;
+        this.hasNonStrictWords = !!this.#nonStrictIdx;
 
         if (checkSorted) {
             assertSorted(this.nodes, bitMasksInfo.NodeMaskChildCharIndex);
@@ -54,8 +62,8 @@ export class FastTrieBlob implements TrieData {
     }
 
     hasCaseInsensitive(word: string): boolean {
-        if (!this._caseInsensitiveIdx) return false;
-        return this.#has(this._caseInsensitiveIdx, word);
+        if (!this.#nonStrictIdx) return false;
+        return this.#has(this.#nonStrictIdx, word);
     }
 
     #has(nodeIdx: number, word: string): boolean {
@@ -215,6 +223,9 @@ export class FastTrieBlob implements TrieData {
                 nodeGetChild: (idx: number, letter: string) => trie.#searchNodeForChar(idx, letter),
                 isForbidden: (word: string) => trie.isForbiddenWord(word),
                 findExact: (word: string) => trie.has(word),
+                hasForbiddenWords: trie.hasForbiddenWords,
+                hasCompoundWords: trie.hasCompoundWords,
+                hasNonStrictWords: trie.hasNonStrictWords,
             }),
             0,
         );
@@ -243,11 +254,7 @@ export class FastTrieBlob implements TrieData {
     }
 
     isForbiddenWord(word: string): boolean {
-        return !!this._forbidIdx && this.#has(this._forbidIdx, word);
-    }
-
-    hasForbiddenWords(): boolean {
-        return !!this._forbidIdx;
+        return !!this.#forbidIdx && this.#has(this.#forbidIdx, word);
     }
 
     nodeInfo(nodeIndex: number, accumulator?: Utf8Accumulator): TrieBlobNodeInfo {

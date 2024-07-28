@@ -1,4 +1,4 @@
-import { PartialTrieInfo, TrieInfo } from '../ITrieNode/TrieInfo.js';
+import { PartialTrieInfo, TrieCharacteristics, TrieInfo } from '../ITrieNode/TrieInfo.js';
 import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.js';
 import { CharIndex } from './CharIndex.js';
 import type { FastTrieBlobBitMaskInfo } from './FastTrieBlobBitMaskInfo.js';
@@ -29,7 +29,7 @@ export class FastTrieBlobInternals implements FastTrieBlobBitMaskInfo {
     }
 }
 
-interface TrieMethods {
+interface TrieMethods extends Readonly<TrieCharacteristics> {
     readonly nodeFindNode: (idx: number, word: string) => number | undefined;
     readonly nodeFindExact: (idx: number, word: string) => boolean;
     readonly nodeGetChild: (idx: number, letter: string) => number | undefined;
@@ -43,6 +43,9 @@ export class FastTrieBlobInternalsAndMethods extends FastTrieBlobInternals imple
     readonly nodeGetChild: (idx: number, letter: string) => number | undefined;
     readonly isForbidden: (word: string) => boolean;
     readonly findExact: (word: string) => boolean;
+    readonly hasForbiddenWords: boolean;
+    readonly hasCompoundWords: boolean;
+    readonly hasNonStrictWords: boolean;
 
     constructor(
         nodes: Nodes,
@@ -57,6 +60,9 @@ export class FastTrieBlobInternalsAndMethods extends FastTrieBlobInternals imple
         this.isForbidden = trieMethods.isForbidden;
         this.findExact = trieMethods.findExact;
         this.nodeFindNode = trieMethods.nodeFindNode;
+        this.hasForbiddenWords = trieMethods.hasForbiddenWords;
+        this.hasCompoundWords = trieMethods.hasCompoundWords;
+        this.hasNonStrictWords = trieMethods.hasNonStrictWords;
     }
 }
 

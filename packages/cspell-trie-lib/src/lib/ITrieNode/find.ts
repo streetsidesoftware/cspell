@@ -1,5 +1,4 @@
 import { memorizeLastCall } from '../utils/memorizeLastCall.js';
-import { mergeDefaults } from '../utils/mergeDefaults.js';
 import type { CompoundModes } from './CompoundModes.js';
 import type { FindOptions, PartialFindOptions } from './FindOptions.js';
 import type { FindFullNodeResult } from './FindTypes.js';
@@ -20,15 +19,8 @@ Object.freeze(_defaultFindOptions);
 const arrayCompoundModes: CompoundModes[] = ['none', 'compound', 'legacy'];
 const knownCompoundModes = new Map<CompoundModes | undefined, CompoundModes>(arrayCompoundModes.map((a) => [a, a]));
 
-/**
- *
- * @param root Trie root node. root.c contains the compound root and forbidden root.
- * @param word A pre normalized word use `normalizeWord` or `normalizeWordToLowercase`
- * @param options
- */
-export function findWord(root: Root, word: string, options?: PartialFindOptions): FindFullResult {
-    return _findWord(root, word, options);
-}
+const notFound: FindFullResult = { found: false, compoundUsed: false, caseMatched: false, forbidden: undefined };
+Object.freeze(notFound);
 
 /**
  *
@@ -46,13 +38,22 @@ export function findWordNode(root: Root, word: string, options?: PartialFindOpti
  * @param word A pre normalized word use `normalizeWord` or `normalizeWordToLowercase`
  * @param options
  */
-function _findWord(root: Root, word: string, options: PartialFindOptions): FindFullResult {
+export function findWord(root: Root, word: string, options?: PartialFindOptions): FindFullResult {
     if (root.find) {
         const found = root.find(word, options?.matchCase || false);
         if (found) return found as FindFullResult;
+        if (!root.hasCompoundWords) {
+            return notFound;
+        }
     }
-    const { node: _, ...result } = _findWordNode(root, word, options);
-    return result;
+    // return { found: false, compoundUsed: false, caseMatched: false, forbidden: false };
+    const v = _findWordNode(root, word, options);
+    return {
+        found: v.found,
+        compoundUsed: v.compoundUsed,
+        caseMatched: v.caseMatched,
+        forbidden: v.forbidden,
+    };
 }
 
 /**
@@ -67,6 +68,7 @@ function _findWordNode(root: Root, word: string, options: PartialFindOptions): F
     const compoundMode = knownCompoundModes.get(options?.compoundMode) || _defaultFindOptions.compoundMode;
     const compoundPrefix = compoundMode === 'compound' ? (trieInfo.compoundCharacter ?? root.compoundFix) : '';
     const ignoreCasePrefix = matchCase ? '' : (trieInfo.stripCaseAndAccentsPrefix ?? root.caseInsensitivePrefix);
+    const checkForbidden = options?.checkForbidden ?? true;
 
     function __findCompound(): FindFullNodeResult {
         const f = findCompoundWord(root, word, compoundPrefix, ignoreCasePrefix);
@@ -75,18 +77,18 @@ function _findWordNode(root: Root, word: string, options: PartialFindOptions): F
             // If case was ignored when searching for the word, then check the forbidden
             // in the ignore case forbidden list.
             const r = !f.caseMatched ? walk(root, root.caseInsensitivePrefix) : root;
-            result.forbidden = isForbiddenWord(r, word, root.forbidPrefix);
+            result.forbidden = checkForbidden ? isForbiddenWord(r, word, root.forbidPrefix) : undefined;
         }
         return result;
     }
 
     function __findExact(): FindFullNodeResult {
-        const n = walk(root, word);
+        const n = root.getNode ? root.getNode(word) : walk(root, word);
         const isFound = isEndOfWordNode(n);
         const result: FindFullNodeResult = {
             found: isFound && word,
             compoundUsed: false,
-            forbidden: isForbiddenWord(root, word, root.forbidPrefix),
+            forbidden: checkForbidden ? isForbiddenWord(root, word, root.forbidPrefix) : undefined,
             node: n,
             caseMatched: true,
         };
@@ -356,7 +358,13 @@ export const createFindOptions = memorizeLastCall(_createFindOptions);
 
 function _createFindOptions(options: PartialFindOptions | undefined): FindOptions {
     if (!options) return _defaultFindOptions;
-    return mergeDefaults(options, _defaultFindOptions);
+    const d = _defaultFindOptions;
+    return {
+        matchCase: options.matchCase ?? d.matchCase,
+        compoundMode: options.compoundMode ?? d.compoundMode,
+        legacyMinCompoundLength: options.legacyMinCompoundLength ?? d.legacyMinCompoundLength,
+        checkForbidden: options.checkForbidden ?? d.checkForbidden,
+    };
 }
 
 export const __testing__ = {

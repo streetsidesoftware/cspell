@@ -1,5 +1,5 @@
 import type { ITrieNode, ITrieNodeId, ITrieNodeRoot } from '../ITrieNode/ITrieNode.js';
-import type { TrieInfo } from '../ITrieNode/TrieInfo.js';
+import type { TrieCharacteristics, TrieInfo } from '../ITrieNode/TrieInfo.js';
 import { CharIndex } from './CharIndex.js';
 import { Utf8Accumulator } from './Utf8.js';
 
@@ -13,7 +13,7 @@ interface BitMaskInfo {
 type Node = number;
 type NodeIndex = number;
 
-interface TrieMethods {
+interface TrieMethods extends Readonly<TrieCharacteristics> {
     readonly nodeFindNode: (idx: number, word: string) => number | undefined;
     readonly nodeFindExact: (idx: number, word: string) => boolean;
     readonly nodeGetChild: (idx: number, letter: string) => number | undefined;
@@ -33,6 +33,10 @@ export class TrieBlobInternals implements TrieMethods, BitMaskInfo {
     readonly nodeGetChild: (idx: number, letter: string) => number | undefined;
     readonly nodeFindNode: (idx: number, word: string) => number | undefined;
 
+    readonly hasForbiddenWords: boolean;
+    readonly hasCompoundWords: boolean;
+    readonly hasNonStrictWords: boolean;
+
     constructor(
         readonly nodes: Uint32Array,
         readonly charIndex: Readonly<CharIndex>,
@@ -50,6 +54,9 @@ export class TrieBlobInternals implements TrieMethods, BitMaskInfo {
         this.findExact = methods.findExact;
         this.nodeGetChild = methods.nodeGetChild;
         this.nodeFindNode = methods.nodeFindNode;
+        this.hasForbiddenWords = methods.hasForbiddenWords;
+        this.hasCompoundWords = methods.hasCompoundWords;
+        this.hasNonStrictWords = methods.hasNonStrictWords;
     }
 }
 
@@ -272,6 +279,10 @@ export class TrieBlobIRoot extends TrieBlobINode implements ITrieNodeRoot {
     find: ITrieNodeRoot['find'];
     isForbidden: ITrieNodeRoot['isForbidden'];
 
+    readonly hasForbiddenWords: boolean;
+    readonly hasCompoundWords: boolean;
+    readonly hasNonStrictWords: boolean;
+
     constructor(
         trie: TrieBlobInternals,
         nodeIdx: number,
@@ -281,6 +292,9 @@ export class TrieBlobIRoot extends TrieBlobINode implements ITrieNodeRoot {
         super(trie, nodeIdx);
         this.find = methods.find;
         this.isForbidden = trie.isForbidden;
+        this.hasForbiddenWords = trie.hasForbiddenWords;
+        this.hasCompoundWords = trie.hasCompoundWords;
+        this.hasNonStrictWords = trie.hasNonStrictWords;
     }
     resolveId(id: ITrieNodeId): ITrieNode {
         return new TrieBlobINode(this.trie, id as number);

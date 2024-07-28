@@ -211,18 +211,25 @@ function* outerWordForms(word: string, mapWord: (word: string) => string[]): Ite
     // Only generate the needed forms.
     const sent = new Set<string>();
     let w = word;
+    const ww = w;
     yield w;
     sent.add(w);
     w = word.normalize('NFC');
-    if (!sent.has(w)) yield w;
-    sent.add(w);
+    if (w !== ww) {
+        yield w;
+        sent.add(w);
+    }
     w = word.normalize('NFD');
-    if (!sent.has(w)) yield w;
-    sent.add(w);
-    for (const f of [...sent]) {
+    if (w !== ww && !sent.has(w)) {
+        yield w;
+        sent.add(w);
+    }
+    for (const f of sent) {
         for (const m of mapWord(f)) {
-            if (!sent.has(m)) yield m;
-            sent.add(m);
+            if (m !== ww && !sent.has(m)) {
+                yield m;
+                sent.add(m);
+            }
         }
     }
     return;

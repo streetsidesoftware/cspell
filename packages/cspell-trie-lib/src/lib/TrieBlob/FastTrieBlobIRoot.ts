@@ -221,8 +221,15 @@ class FastTrieBlobINode implements ITrieNode {
 }
 
 export class FastTrieBlobIRoot extends FastTrieBlobINode implements ITrieNodeRoot {
+    readonly hasForbiddenWords: boolean;
+    readonly hasCompoundWords: boolean;
+    readonly hasNonStrictWords: boolean;
+
     constructor(trie: FastTrieBlobInternalsAndMethods, nodeIdx: number) {
         super(trie, nodeIdx);
+        this.hasForbiddenWords = trie.hasForbiddenWords;
+        this.hasCompoundWords = trie.hasCompoundWords;
+        this.hasNonStrictWords = trie.hasNonStrictWords;
     }
     resolveId(id: ITrieNodeId): ITrieNode {
         return new FastTrieBlobINode(this.trie, id as number);

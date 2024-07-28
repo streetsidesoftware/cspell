@@ -105,10 +105,17 @@ class ImplITrieNode implements ITrieNode {
 class ImplITrieRoot extends ImplITrieNode implements ITrieNodeRoot {
     readonly info: Readonly<TrieInfo>;
 
+    readonly hasForbiddenWords: boolean;
+    readonly hasCompoundWords: boolean;
+    readonly hasNonStrictWords: boolean;
+
     protected constructor(readonly root: TrieRoot) {
         super(root);
         const { stripCaseAndAccentsPrefix, compoundCharacter, forbiddenWordPrefix, isCaseAware } = root;
         this.info = { stripCaseAndAccentsPrefix, compoundCharacter, forbiddenWordPrefix, isCaseAware };
+        this.hasForbiddenWords = !!root.c[forbiddenWordPrefix];
+        this.hasCompoundWords = !!root.c[compoundCharacter];
+        this.hasNonStrictWords = !!root.c[stripCaseAndAccentsPrefix];
     }
 
     get eow(): boolean {

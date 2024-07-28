@@ -58,7 +58,7 @@ export interface ITrieNode {
 }
 
 export interface ITrieNodeRoot extends ITrieNode {
-    info: Readonly<TrieInfo>;
+    readonly info: Readonly<TrieInfo>;
     /**
      * converts an `id` into a node.
      * @param id an of a ITrieNode in this Trie
@@ -76,7 +76,11 @@ export interface ITrieNodeRoot extends ITrieNode {
 
     isForbidden?: ((word: string) => boolean) | undefined;
 
-    forbidPrefix: string;
-    compoundFix: string;
-    caseInsensitivePrefix: string;
+    readonly forbidPrefix: string;
+    readonly compoundFix: string;
+    readonly caseInsensitivePrefix: string;
+
+    readonly hasForbiddenWords: boolean;
+    readonly hasCompoundWords: boolean;
+    readonly hasNonStrictWords: boolean;
 }
