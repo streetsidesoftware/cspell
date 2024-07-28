@@ -22,8 +22,6 @@ const cspellArgs =
     '-u --no-progress --relative --show-context --gitignore --gitignore-root=. --reporter=default --reporter=${pathReporter}';
 const jsCspell = JSON.stringify(Path.resolve(__dirname, '../../bin.mjs'));
 
-const cspellCommand = `node ${jsCspell}`;
-
 let checkCount = 0;
 
 const colors = [
@@ -46,11 +44,13 @@ interface CheckContext {
     color: (strings: string | TemplateStringsArray, ...rest: unknown[]) => string;
     logger: Logger;
     rep: Repository;
+    cpuProf: boolean;
 }
 
 interface CheckAndUpdateOptions {
     update: boolean;
     updateSnapshots: boolean;
+    cpuProf: boolean;
 }
 
 async function execCheckAndUpdate(rep: Repository, options: CheckAndUpdateOptions): Promise<CheckResult> {
@@ -90,6 +90,7 @@ async function execCheckAndUpdate(rep: Repository, options: CheckAndUpdateOption
         color,
         logger,
         rep,
+        cpuProf: options.cpuProf,
     };
 
     return execCheck(context, options.update || options.updateSnapshots);
@@ -99,7 +100,8 @@ async function execCheck(context: CheckContext, update: boolean): Promise<CheckR
     const { rep, logger, color } = context;
     const name = rep.path;
     const path = Path.join(repositoryDir, rep.path);
-    const cmdToExec = resolveArgs(rep.path, [cspellCommand, cspellArgs]).join(' ');
+    const nodeArgs = context.cpuProf ? ['--cpu-prof', '--cpu-prof-dir="../../../.."'] : [];
+    const cmdToExec = resolveArgs(rep.path, [genLaunchCSpellCommand(nodeArgs), cspellArgs]).join(' ');
     const { log } = logger;
     ++checkCount;
 
@@ -238,6 +240,8 @@ export interface CheckOptions {
     fail: boolean;
     /** Max number of parallel processes */
     parallelLimit: number;
+    /** Turn on NodeJS --cpu-prof */
+    cpuProf: boolean;
 }
 
 type PendingState = 'pending' | 'rejected' | 'resolved';
@@ -323,7 +327,7 @@ Stop on fail:   ${tf(fail)}
 
     const buffered = asyncBuffer(
         matching,
-        async (rep) => execCheckAndUpdate(rep, { update, updateSnapshots }),
+        async (rep) => execCheckAndUpdate(rep, { update, updateSnapshots, cpuProf: options.cpuProf }),
         parallelLimit,
     );
 
@@ -371,4 +375,8 @@ function tfn(colorFn: ChalkInstance): (strings: string | TemplateStringsArray, .
         }
         return colorFn(parts.join(''));
     };
+}
+
+function genLaunchCSpellCommand(nodeArgs: string[]) {
+    return `node ${nodeArgs.join(' ')} ${jsCspell}`;
 }
