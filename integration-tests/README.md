@@ -35,7 +35,7 @@ Repositories are choose to be representative of public domain code bases and pro
 
 ### Steps
 
-1. Add the repository: `./tester.js add https://github.com/<owner>/<repository>.git`
+1. Add the repository: `./tester.js add https://github.com/<owner>/<repository>.git -t $(gh auth token)`
 1. Adjust the arguments in: `config/config.json`
 1. Create a snapshot: `./tester.js check -u <owner/repository>`
 1. Verify the snapshot: `snapshots/owner/repository/snapshot.txt`
