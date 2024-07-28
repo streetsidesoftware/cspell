@@ -1,6 +1,5 @@
 import { opConcatMap, opMap, pipe } from '@cspell/cspell-pipe/sync';
 import type { TextDocumentOffset, TextOffset } from '@cspell/cspell-types';
-import { sequenceFromRegExpMatch } from 'gensequence';
 
 import { binarySearch } from './search.js';
 import {
@@ -47,7 +46,9 @@ export function splitCamelCaseWord(word: string): string[] {
  * This function lets you iterate over regular expression matches.
  */
 export function match(reg: RegExp, text: string): Iterable<RegExpExecArray> {
-    return sequenceFromRegExpMatch(reg, text);
+    if (!text) return [];
+    reg = reg.global ? reg : new RegExp(reg.source, reg.flags + 'g');
+    return text.matchAll(reg);
 }
 
 export function matchStringToTextOffset(reg: RegExp, text: string): Iterable<TextOffset> {
