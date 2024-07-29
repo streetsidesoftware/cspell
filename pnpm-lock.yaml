@@ -15,8 +15,8 @@ importers:
         specifier: workspace:*
         version: link:packages/cspell-eslint-plugin
       '@eslint/js':
-        specifier: ^9.8.0
-        version: 9.8.0
+        specifier: ^10.0.0
+        version: 10.0.0
       '@internal/scripts':
         specifier: workspace:*
         version: link:scripts
@@ -497,8 +497,8 @@ importers:
         specifier: ^3.1.0
         version: 3.1.0
       '@eslint/js':
-        specifier: ^9.8.0
-        version: 9.8.0
+        specifier: ^10.0.0
+        version: 10.0.0
       '@internal/cspell-eslint-plugin-scripts':
         specifier: workspace:*
         version: link:scripts
@@ -937,8 +937,8 @@ importers:
         specifier: workspace:*
         version: link:../../../packages/cspell-eslint-plugin
       '@eslint/js':
-        specifier: ^8.57.0
-        version: 8.57.0
+        specifier: ^10.0.0
+        version: 10.0.0
       '@types/react':
         specifier: ^18.3.3
         version: 18.3.3
@@ -2696,6 +2696,10 @@ packages:
 
   '@eslint/eslintrc@3.1.0':
     resolution: {integrity: sha512-4Bfj15dVJdoy3RfZmmo86RK1Fwzn6SstsvK9JS+BaVKqC6QQQQyXekNaC+g+LKNgkQ+2VhGAzm6hO40AhMR3zQ==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@eslint/js@10.0.0':
+    resolution: {integrity: sha512-J2VKrn6YUBegZFzRQVOVA8jk7VViV/MXhQUvXuCUK1I2RGGT2E+bmNGOsgtdO9Wo25Kd3hfZFuCm8LcfsUFV7g==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@eslint/js@8.57.0':
@@ -11738,6 +11742,8 @@ snapshots:
       strip-json-comments: 3.1.1
     transitivePeerDependencies:
       - supports-color
+
+  '@eslint/js@10.0.0': {}
 
   '@eslint/js@8.57.0': {}
 
