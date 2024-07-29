@@ -3,9 +3,9 @@ Repository: wireapp/wire-webapp
 Url: https://github.com/wireapp/wire-webapp.git
 Args: '["src/script/**/*.{js,ts,tsx,md}"]'
 Summary:
-  files: 1188
-  filesWithIssues: 636
-  issues: 2755
+  files: 1191
+  filesWithIssues: 638
+  issues: 2757
   errors: 0
 Errors: []
 
@@ -374,8 +374,9 @@ issues:
   - "src/script/page/AppLock/AppLock.tsx:355:50      specialchar     U       passcode-validation-specialchar\""
   - "src/script/page/components/FeatureConfigChange/FeatureConfigChangeNotifier/FeatureConfigChangeNotifier.test.tsx:101:101     dlpath      U       enforcedDownloadLocation: 'dlpath'}}),"
   - "src/script/page/components/FeatureConfigChange/FeatureConfigChangeNotifier/FeatureConfigChangeNotifier.ts:87:47         Applock     U       featureConfigChangeModalApplock'),"
+  - "src/script/page/LeftSidebar/panels/Conversations/ConversationsList.test.tsx:100:11      unser       U       const unserNames = ['Alice', 'Bob"
   - "src/script/page/LeftSidebar/panels/Conversations/EmptyConversationList/EmptyConversationList.styles.ts:51:14        seperator       U       export const seperator: CSSObject = {"
-  - "src/script/page/LeftSidebar/panels/Conversations/state.ts:100:7         partialize      U       partialize: state => ({"
+  - "src/script/page/LeftSidebar/panels/Conversations/useSidebarStore.ts:61:7        partialize      U       partialize: state => ({"
   - "src/script/page/MainContent/panels/Collection/Collection.tsx:108:39         converation     U       message from a different converation, nothing to do"
   - "src/script/page/MainContent/panels/Collection/Collection.tsx:202:28         fullsearch      U       aria-label={t('fullsearchCancelLabel')}"
   - "src/script/page/MainContent/panels/preferences/accountPreferences/DataUsageSection.tsx:59:49        COUNTLY     U       !Config.getConfig().COUNTLY_API_KEY;"
@@ -428,7 +429,7 @@ issues:
   - "src/script/ui/ContextMenu.tsx:104:54        begings     U       such as 10 seconds etc begings with digit which is"
   - "src/script/ui/ContextMenu.tsx:124:90        trigerer    U       the menu and focus the trigerer"
   - "src/script/ui/Shortcut.ts:21:25         keyboardjs      U       import keyboardJS from 'keyboardjs';"
-  - "src/script/ui/Shortcut.ts:139:33        graveaccent     U       macos: 'command + alt + graveaccent', // KeyboardJS fires"
+  - "src/script/ui/Shortcut.ts:153:33        graveaccent     U       macos: 'command + alt + graveaccent', // KeyboardJS fires"
   - "src/script/user/AvailabilityModal.ts:38:20          dont    U       action: (dontShowAgain?: boolean)"
   - "src/script/util/ArrayUtil.ts:37:54          referencial     U       matching function in case referencial equality is not enough"
   - "src/script/util/ArrayUtil.ts:124:14         uniquify        U       export const uniquify = <T>(elements: T[]"
@@ -476,8 +477,8 @@ issues:
   - "src/script/util/messageRenderer.ts:72:27        hardbreak       U       markdownit.renderer.rules.hardbreak = () => '<br>';"
   - "src/script/util/messageRenderer.ts:107:7        mentionless     U       let mentionlessText = mentionEntities"
   - "src/script/util/SanitizationUtil.test.ts:38:39          Unsanitzed      U       name(`<script>alert('Unsanitzed');</script>`);"
-  - "src/script/util/test/mock/WebRTCMock.ts:20:8        wrtc        U       import wrtc from '@koush/wrtc';"
-  - "src/script/util/test/mock/WebRTCMock.ts:20:20       koush       U       import wrtc from '@koush/wrtc';"
+  - "src/script/util/test/mock/WebRTCMock.ts:20:56       roamhq      U       MediaStream} from '@roamhq/wrtc';"
+  - "src/script/util/test/mock/WebRTCMock.ts:20:63       wrtc        U       MediaStream} from '@roamhq/wrtc';"
   - "src/script/util/TimeUtil.ts:96:26       momentjs    U       This is equivalent to momentjs' `LT` formatting"
   - "src/script/util/util.test.ts:131:65         AQABAAAAA       U       image/gif;base64,R0lGODlhAQABAAAAACw=');"
   - "src/script/util/uuid.ts:20:15       uuidv       U       import {v4 as uuidv4, v1 as uuidv1} from"
