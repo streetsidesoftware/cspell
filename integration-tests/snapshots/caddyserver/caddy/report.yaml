@@ -5,7 +5,7 @@ Args: '["**/*.go"]'
 Summary:
   files: 275
   filesWithIssues: 255
-  issues: 4072
+  issues: 4105
   errors: 0
 Errors: []
 
@@ -187,9 +187,9 @@ issues:
   - "modules/caddyhttp/encode/encode.go:98:19        opentype        U       \"application/opentype*\","
   - "modules/caddyhttp/encode/encode.go:104:26       fontobject      U       \"application/vnd.ms-fontobject*\","
   - "modules/caddyhttp/encode/encode.go:111:21       protobuf        U       \"application/x-protobuf*\","
-  - "modules/caddyhttp/encode/encode.go:269:11       bodyclose       U       //nolint:bodyclose"
-  - "modules/caddyhttp/encode/encode.go:320:4        deallocates     U       // deallocates any active resources"
-  - "modules/caddyhttp/encode/encode.go:405:2        prefs           U       prefs := []encodingPreference"
+  - "modules/caddyhttp/encode/encode.go:277:11       bodyclose       U       //nolint:bodyclose"
+  - "modules/caddyhttp/encode/encode.go:328:4        deallocates     U       // deallocates any active resources"
+  - "modules/caddyhttp/encode/encode.go:413:2        prefs           U       prefs := []encodingPreference"
   - "modules/caddyhttp/encode/gzip/gzip_precompressed.go:1:9         caddygzip       U       package caddygzip"
   - "modules/caddyhttp/encode/gzip/gzip.go:21:14         klauspost       U       \"github.com/klauspost/compress/gzip\""
   - "modules/caddyhttp/encode/zstd/zstd_precompressed.go:1:9         caddyzstd       U       package caddyzstd"
@@ -413,11 +413,11 @@ issues:
   - "modules/caddytls/connpolicy.go:186:5        Wireshark           U       // Wireshark and other tools. This"
   - "modules/caddytls/connpolicy.go:291:17       ACMETLS             U       if a == acmez.ACMETLS1Protocol {"
   - "modules/caddytls/connpolicy.go:332:11       destructable        U       return destructableWriter{w}, err"
-  - "modules/caddytls/connpolicy.go:474:4        ders                U       ders, err := convertPEMFilesToDER"
-  - "modules/caddytls/connpolicy.go:561:7        clientauth          U       func (clientauth *ClientAuthentication"
-  - "modules/caddytls/connpolicy.go:612:46       clientauth's        U       sets up cfg to enforce clientauth's configuration."
-  - "modules/caddytls/connpolicy.go:747:13       Certloaders         U       trustedLeafCertloaders := []LeafCertificateLoader"
-  - "modules/caddytls/connpolicy.go:782:33       unmarshalable       U       PublicKeyAlgorithm is a JSON-unmarshalable wrapper type."
+  - "modules/caddytls/connpolicy.go:604:4        ders                U       ders, err := convertPEMFilesToDER"
+  - "modules/caddytls/connpolicy.go:691:7        clientauth          U       func (clientauth *ClientAuthentication"
+  - "modules/caddytls/connpolicy.go:742:46       clientauth's        U       sets up cfg to enforce clientauth's configuration."
+  - "modules/caddytls/connpolicy.go:877:13       Certloaders         U       trustedLeafCertloaders := []LeafCertificateLoader"
+  - "modules/caddytls/connpolicy.go:912:33       unmarshalable       U       PublicKeyAlgorithm is a JSON-unmarshalable wrapper type."
   - "modules/caddytls/distributedstek/distributedstek.go:15:12       distributedstek     U       // Package distributedstek provides TLS session"
   - "modules/caddytls/distributedstek/distributedstek.go:46:38       STEK                U       implements a distributed STEK provider. This"
   - "modules/caddytls/distributedstek/distributedstek.go:57:2        stek                U       stekConfig *caddytls.SessionTicket"
