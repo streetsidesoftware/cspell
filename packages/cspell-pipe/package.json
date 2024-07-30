@@ -99,18 +99,21 @@
     "!**/*.tsbuildInfo",
     "!**/__mocks__",
     "!**/*.spec.*",
+    "!**/*.perf.*",
     "!**/*.test.*",
+    "!**/perf/**",
     "!**/test/**",
     "!**/*.map"
   ],
   "scripts": {
-    "build": "tsc -b . -f",
-    "watch": "tsc -b . -w -f",
+    "build": "tsc -p .",
+    "watch": "tsc -p . -w",
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "clean-build": "pnpm run clean && pnpm run build",
     "coverage": "vitest run --coverage",
     "test-watch": "vitest",
-    "test": "vitest run"
+    "test": "vitest run",
+    "test:perf": "NODE_ENV=production insight --register ts-node/esm --file \"**/*.perf.{mts,ts}\""
   },
   "repository": {
     "type": "git",
@@ -124,6 +127,7 @@
     "node": ">=18"
   },
   "devDependencies": {
-    "globby": "^14.0.2"
+    "globby": "^14.0.2",
+    "perf-insight": "^1.2.0"
   }
 }

@@ -7,7 +7,7 @@ import type { PipeFn } from '../internalTypes.js';
  * @returns A function that takes an async iterable and returns an async iterable of arrays of the given size.
  */
 export function opBufferAsync<T>(size: number): (iter: AsyncIterable<T>) => AsyncIterable<T[]> {
-    async function* fn(iter: Iterable<T> | AsyncIterable<T>) {
+    async function* fnBuffer(iter: Iterable<T> | AsyncIterable<T>) {
         let buffer: T[] = [];
         for await (const v of iter) {
             buffer.push(v);
@@ -22,7 +22,7 @@ export function opBufferAsync<T>(size: number): (iter: AsyncIterable<T>) => Asyn
         }
     }
 
-    return fn;
+    return fnBuffer;
 }
 
 /**
@@ -30,7 +30,7 @@ export function opBufferAsync<T>(size: number): (iter: AsyncIterable<T>) => Asyn
  * @returns A function that takes an iterable and returns an iterable of arrays of the given size.
  */
 export function opBufferSync<T>(size: number): (iter: Iterable<T>) => Iterable<T[]> {
-    function* fn(iter: Iterable<T>) {
+    function* fnBuffer(iter: Iterable<T>) {
         let buffer: T[] = [];
         for (const v of iter) {
             buffer.push(v);
@@ -45,7 +45,7 @@ export function opBufferSync<T>(size: number): (iter: Iterable<T>) => Iterable<T
         }
     }
 
-    return fn;
+    return fnBuffer;
 }
 
 export function opBuffer<T>(size: number): PipeFn<T, T[]> {

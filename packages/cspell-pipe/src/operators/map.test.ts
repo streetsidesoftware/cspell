@@ -2,7 +2,7 @@ import { describe, expect, test } from 'vitest';
 
 import { toArray } from '../helpers/index.js';
 import { pipeAsync, pipeSync } from '../pipe.js';
-import { opMap } from './map.js';
+import { _opMapSync, opMap } from './map.js';
 
 describe('Validate map', () => {
     test('map', async () => {
@@ -17,11 +17,13 @@ describe('Validate map', () => {
 
         const s = pipeSync(values, mapToLen, opMap(mapFn2));
         const a = pipeAsync(values, mapToLen, opMap(mapFn2));
+        const sGen = pipeSync(values, mapToLen, _opMapSync(mapFn2));
 
         const sync = toArray(s);
         const async = await toArray(a);
 
         expect(sync).toEqual(expected);
         expect(async).toEqual(expected);
+        expect(toArray(sGen)).toEqual(expected);
     });
 });
