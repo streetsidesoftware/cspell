@@ -60,17 +60,16 @@ class CachedDict implements CachingDictionary {
         // console.log(`CachedDict for ${this.name}`);
     }
 
-    has = (word: string): boolean => {
-        if (logRequests) {
-            const time = performance.now() - startTime;
-            const value = this.#has(word);
-            log.push({ time, method: 'has', word, value });
-            return value;
-        }
-        return this.#has(word);
-    };
-
     #has = autoCache((word: string) => this.dict.has(word, this.options), DefaultAutoCacheSize);
+    has = logRequests
+        ? (word: string): boolean => {
+              const time = performance.now() - startTime;
+              const value = this.#has(word);
+              log.push({ time, method: 'has', word, value });
+              return value;
+          }
+        : this.#has;
+
     readonly isNoSuggestWord = autoCache(
         (word: string) => this.dict.isNoSuggestWord(word, this.options),
         DefaultAutoCacheSize,

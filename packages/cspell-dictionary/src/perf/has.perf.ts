@@ -165,6 +165,45 @@ suite('dictionary has sampling', async (test) => {
     });
 });
 
+suite('dictionary isForbidden sampling', async (test) => {
+    const words1 = genWords(10_000);
+    const words2 = genWords(1000);
+    const words3 = genWords(1000);
+
+    const sampleIdx = genSamples(100_000, words1.length);
+    const wordsSample = sampleIdx.map((i) => words1[i]);
+
+    const dict = createSpellingDictionary(words1, 'test', import.meta.url);
+    const dict2 = createSpellingDictionary(words2, 'test2', import.meta.url);
+    const dict3 = createSpellingDictionary(words3, 'test3', import.meta.url);
+
+    const dictCol = createCollection([dict, dict2, dict3], 'test-collection');
+    const dictColRev = createCollection([dict3, dict2, dict], 'test-collection-reverse');
+
+    const cacheDictSingle = createCachingDictionary(dict, {});
+    const cacheDictCol = createCachingDictionary(dictCol, {});
+
+    test('dictionary isForbidden 100k words', () => {
+        checkForForbiddenWords(dict, wordsSample);
+    });
+
+    test('collection isForbidden 100k words', () => {
+        checkForForbiddenWords(dictCol, wordsSample);
+    });
+
+    test('collection reverse isForbidden 100k words', () => {
+        checkForForbiddenWords(dictColRev, wordsSample);
+    });
+
+    test('cache dictionary isForbidden 100k words', () => {
+        checkForForbiddenWords(cacheDictSingle, wordsSample);
+    });
+
+    test('cache collection isForbidden 100k words', () => {
+        checkForForbiddenWords(cacheDictCol, wordsSample);
+    });
+});
+
 function checkWords(dict: { has: (word: string) => boolean }, words: string[], expected = true, totalChecks = 100_000) {
     let has = true;
     const len = words.length;
@@ -177,6 +216,21 @@ function checkWords(dict: { has: (word: string) => boolean }, words: string[], e
         has = r && has;
     }
     assert(has, 'All words should be found in the dictionary');
+}
+
+function checkForForbiddenWords(
+    dict: { isForbidden: (word: string) => boolean },
+    words: string[],
+    totalChecks = 100_000,
+) {
+    let result = true;
+    const len = words.length;
+    for (let i = 0; i < totalChecks; ++i) {
+        const word = words[i % len];
+        const r = !dict.isForbidden(word);
+        result = r && result;
+    }
+    assert(result, 'All words should not be forbidden');
 }
 
 function genWords(count: number, includeForbidden = true): string[] {
