@@ -24,7 +24,7 @@ export function execAsync(command: string, options: ExecOptions = {}): Promise<S
     return new Promise<Shell.ExecOutputReturnValue>((resolve) => {
         Shell.exec(
             command /* lgtm[js/shell-command-injection-from-environment] */,
-            { silent: !echo, fatal: bail },
+            { silent: !echo, fatal: bail, env: { ...process.env } },
             (code, stdout, stderr) => resolve({ code, stdout, stderr }),
         );
     });

@@ -17,6 +17,9 @@ let dictionaryCounter = 0;
 
 const DefaultAutoCacheSize = 1000;
 
+let logRequests = false;
+const log: LogEntry[] = [];
+
 /**
  * Caching Dictionary remembers method calls to increase performance.
  */
@@ -30,6 +33,22 @@ export interface CachingDictionary {
     getPreferredSuggestions(word: string): PreferredSuggestion[] | undefined;
 }
 
+interface LogEntryBase extends SearchOptions {
+    time: number;
+    method: 'has';
+    word: string;
+    value?: unknown;
+}
+
+interface LogEntryHas extends LogEntryBase {
+    method: 'has';
+    value: boolean;
+}
+
+const startTime = performance.now();
+
+export type LogEntry = LogEntryHas;
+
 class CachedDict implements CachingDictionary {
     readonly name: string;
     readonly id = ++dictionaryCounter;
@@ -41,7 +60,17 @@ class CachedDict implements CachingDictionary {
         // console.log(`CachedDict for ${this.name}`);
     }
 
-    readonly has = autoCache((word: string) => this.dict.has(word, this.options), DefaultAutoCacheSize);
+    has = (word: string): boolean => {
+        if (logRequests) {
+            const time = performance.now() - startTime;
+            const value = this.#has(word);
+            log.push({ time, method: 'has', word, value });
+            return value;
+        }
+        return this.#has(word);
+    };
+
+    #has = autoCache((word: string) => this.dict.has(word, this.options), DefaultAutoCacheSize);
     readonly isNoSuggestWord = autoCache(
         (word: string) => this.dict.isNoSuggestWord(word, this.options),
         DefaultAutoCacheSize,
@@ -56,7 +85,7 @@ class CachedDict implements CachingDictionary {
         return {
             name: this.name,
             id: this.id,
-            has: extractStats(this.has),
+            has: extractStats(this.#has),
             isNoSuggestWord: extractStats(this.isNoSuggestWord),
             isForbidden: extractStats(this.isForbidden),
             getPreferredSuggestions: extractStats(this.getPreferredSuggestions),
@@ -89,4 +118,12 @@ export function createCachingDictionary(
 
     knownOptions.set(dict, cached);
     return cached;
+}
+
+export function enableLogging(enabled = !logRequests): void {
+    logRequests = enabled;
+}
+
+export function getLog(): LogEntryBase[] {
+    return log;
 }

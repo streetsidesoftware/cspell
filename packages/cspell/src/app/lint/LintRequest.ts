@@ -2,7 +2,7 @@ import * as path from 'node:path';
 
 import type { Issue } from '@cspell/cspell-types';
 
-import type { LinterOptions } from '../options.js';
+import type { LinterCliOptions, LinterOptions } from '../options.js';
 import type { GlobSrcInfo } from '../util/glob.js';
 import { calcExcludeGlobInfo } from '../util/glob.js';
 import type { FinalizedReporter } from '../util/reporters.js';
@@ -28,7 +28,7 @@ export class LintRequest {
 
     constructor(
         readonly fileGlobs: string[],
-        readonly options: LinterOptions & Deprecated,
+        readonly options: LinterCliOptions & Deprecated,
         readonly reporter: FinalizedReporter,
     ) {
         this.root = path.resolve(options.root || process.cwd());

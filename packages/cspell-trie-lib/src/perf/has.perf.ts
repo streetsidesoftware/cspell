@@ -18,6 +18,11 @@ suite('trie has', async (test) => {
     const trieBlob = fastTrieBlob.toTrieBlob();
     const iTrieFast = new ITrieImpl(fastTrieBlob);
     const iTrieBlob = new ITrieImpl(trieBlob);
+    const setOfWords = new Set(words);
+
+    test('set has words', () => {
+        trieHasWords(setOfWords, words);
+    });
 
     test('trie has words', () => {
         trieHasWords(trie, words);

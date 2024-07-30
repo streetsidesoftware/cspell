@@ -1,8 +1,9 @@
 import * as path from 'node:path';
 
-import { describe, expect, test } from 'vitest';
+import { describe, expect, test, vi } from 'vitest';
 
 import { CheckFailed } from '../app.mjs';
+import { environmentKeys } from '../environment.js';
 import { pathPackageRoot } from '../test/test.helper.js';
 import { InMemoryReporter } from '../util/InMemoryReporter.js';
 import { runLint } from './lint.js';
@@ -78,9 +79,40 @@ describe('Linter Validation Tests', () => {
         expect(runResult).toEqual(expectedRunResult);
         expect(runResult).toEqual(reporter.runResult);
     });
+
+    test.each`
+        files | options
+        ${[]} | ${{ root: latexSamples }}
+    `('runLint $files $options', async ({ files, options }) => {
+        const reporter = new InMemoryReporter();
+        process.env[environmentKeys.CSPELL_ENABLE_DICTIONARY_LOGGING] = 'true';
+        process.env[environmentKeys.CSPELL_ENABLE_DICTIONARY_LOG_FILE] = 'stdout';
+        process.env[environmentKeys.CSPELL_ENABLE_DICTIONARY_LOG_FIELDS] = 'word, value';
+        const stdout = vi.spyOn(process.stdout, 'write').mockImplementation(mockWrite);
+        const runResult = await runLint(new LintRequest(files, { ...options }, reporter));
+        expect(runResult).toEqual(reporter.runResult);
+        expect(stdout).toHaveBeenCalledOnce();
+        expect(stdout.mock.calls.map(([data]) => data).join('')).toMatchFileSnapshot(
+            './__snapshots__/logging/dictionary-logging.csv',
+        );
+    });
 });
 
 function report(reporter: InMemoryReporter) {
     const { issues, errorCount, errors } = reporter;
     return { issues, errorCount, errors };
+}
+
+function mockWrite(buffer: Uint8Array | string, cb?: (err?: Error) => void): boolean;
+function mockWrite(str: Uint8Array | string, encoding?: BufferEncoding, cb?: (err?: Error) => void): boolean;
+function mockWrite(
+    _data: unknown,
+    encodingOrCb?: BufferEncoding | ((err?: Error) => void),
+    cb?: (err?: Error) => void,
+) {
+    if (typeof encodingOrCb === 'function') {
+        cb = encodingOrCb;
+    }
+    cb?.();
+    return true;
 }
