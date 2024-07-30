@@ -5,6 +5,8 @@ export interface ExecOptions {
     echo?: boolean;
     /** exit if error code non zero */
     bail?: boolean;
+    /** Optional environment variables. */
+    env?: Record<string, string> | undefined;
 }
 
 export function exec(command: string, options: ExecOptions = {}): Shell.ExecOutputReturnValue {
@@ -17,14 +19,14 @@ export function exec(command: string, options: ExecOptions = {}): Shell.ExecOutp
 }
 
 export function execAsync(command: string, options: ExecOptions = {}): Promise<Shell.ExecOutputReturnValue> {
-    const { echo = false, bail = false } = options;
+    const { echo = false, bail = false, env } = options;
     if (echo) {
         console.log(command);
     }
     return new Promise<Shell.ExecOutputReturnValue>((resolve) => {
         Shell.exec(
             command /* lgtm[js/shell-command-injection-from-environment] */,
-            { silent: !echo, fatal: bail, env: { ...process.env } },
+            { silent: !echo, fatal: bail, env },
             (code, stdout, stderr) => resolve({ code, stdout, stderr }),
         );
     });
