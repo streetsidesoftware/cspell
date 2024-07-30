@@ -2,7 +2,7 @@ import { describe, expect, test } from 'vitest';
 
 import { toArray, toAsyncIterable } from '../helpers/index.js';
 import { pipeAsync, pipeSync } from '../pipe.js';
-import { opFilter, opFilterAsync } from './filter.js';
+import { _opFilterSync, opFilter, opFilterAsync } from './filter.js';
 
 describe('Validate filter', () => {
     test('filter', async () => {
@@ -22,6 +22,7 @@ describe('Validate filter', () => {
 
         expect(sync).toEqual(expected);
         expect(async).toEqual(expected);
+        expect([..._opFilterSync(filterFn)(values)]).toEqual(expected);
     });
 
     type Primitives = string | number | boolean;

@@ -11,26 +11,50 @@ export function opFilterAsync<T>(filterFn: (v: Awaited<T>) => boolean): (iter: A
 export function opFilterAsync<T>(filterFn: (v: Awaited<T>) => Promise<boolean>): (iter: AsyncIterable<T>) => AsyncIterable<Awaited<T>>;
 // prettier-ignore
 export function opFilterAsync<T>(filterFn: (v: Awaited<T>) => boolean | Promise<boolean>): (iter: AsyncIterable<T>) => AsyncIterable<Awaited<T>> {
-    async function* fn(iter: Iterable<T> | AsyncIterable<T>) {
+    async function* genFilter(iter: Iterable<T> | AsyncIterable<T>) {
         for await (const v of iter) {
             const pass = await filterFn(v);
             if (pass) yield v;
         }
     }
 
-    return fn;
+    return genFilter;
 }
 
 export function opFilterSync<T, S extends T>(filterFn: (v: T) => v is S): (iter: Iterable<T>) => Iterable<S>;
 export function opFilterSync<T>(filterFn: (v: T) => boolean): (iter: Iterable<T>) => Iterable<T>;
 export function opFilterSync<T>(filterFn: (v: T) => boolean): (iter: Iterable<T>) => Iterable<T> {
-    function* fn(iter: Iterable<T>) {
+    function opFilterIterable(iterable: Iterable<T>) {
+        function opFilterIterator() {
+            const iter = iterable[Symbol.iterator]();
+            function nextOpFilter() {
+                while (true) {
+                    const { done, value } = iter.next();
+                    if (done) return { done, value: undefined };
+                    if (filterFn(value)) return { value };
+                }
+            }
+            return {
+                next: nextOpFilter,
+            };
+        }
+        return {
+            [Symbol.iterator]: opFilterIterator,
+        };
+    }
+    return opFilterIterable;
+}
+
+export function _opFilterSync<T, S extends T>(filterFn: (v: T) => v is S): (iter: Iterable<T>) => Iterable<S>;
+export function _opFilterSync<T>(filterFn: (v: T) => boolean): (iter: Iterable<T>) => Iterable<T>;
+export function _opFilterSync<T>(filterFn: (v: T) => boolean): (iter: Iterable<T>) => Iterable<T> {
+    function* genFilter(iter: Iterable<T>) {
         for (const v of iter) {
             if (filterFn(v)) yield v;
         }
     }
 
-    return fn;
+    return genFilter;
 }
 
 export function opFilter<T, S extends T>(fn: (v: T) => v is S): PipeFn<T, S>;

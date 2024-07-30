@@ -7,6 +7,7 @@ import { opMap, pipe } from '@cspell/cspell-pipe/sync';
 import type { CSpellSettings, Glob, Issue, RunResult, TextDocumentOffset, TextOffset } from '@cspell/cspell-types';
 import { MessageTypes } from '@cspell/cspell-types';
 import chalk from 'chalk';
+import { _debug as cspellDictionaryDebug } from 'cspell-dictionary';
 import { findRepoRoot, GitIgnore } from 'cspell-gitignore';
 import { GlobMatcher, type GlobMatchOptions, type GlobPatternNormalized, type GlobPatternWithRoot } from 'cspell-glob';
 import type { Logger, SpellCheckFileResult, ValidationIssue } from 'cspell-lib';
@@ -24,6 +25,7 @@ import {
 } from 'cspell-lib';
 
 import { console } from '../console.js';
+import { getEnvironmentVariable, setEnvironmentVariable, truthy } from '../environment.js';
 import { getFeatureFlags } from '../featureFlags/index.js';
 import { CSpellReporterConfiguration } from '../models.js';
 import { npmPackage } from '../pkgInfo.js';
@@ -56,6 +58,7 @@ import type { FinalizedReporter } from '../util/reporters.js';
 import { loadReporters, mergeReporters } from '../util/reporters.js';
 import { getTimeMeasurer } from '../util/timer.js';
 import * as util from '../util/util.js';
+import { writeFileOrStream } from '../util/writeFile.js';
 import type { LintRequest } from './LintRequest.js';
 
 const version = npmPackage.version;
@@ -73,7 +76,17 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
 
     const timer = getTimeMeasurer();
 
+    const logDictRequests = truthy(getEnvironmentVariable('CSPELL_ENABLE_DICTIONARY_LOGGING'));
+    if (logDictRequests) {
+        cspellDictionaryDebug.cacheDictionaryEnableLogging(true);
+    }
+
     const lintResult = await run();
+
+    if (logDictRequests) {
+        await writeDictionaryLog();
+    }
+
     await reporter.result(lintResult);
     const elapsed = timer();
     if (getFeatureFlags().getFlag('timer')) {
@@ -405,7 +418,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
 
     async function run(): Promise<RunResult> {
         if (cfg.options.root) {
-            process.env[ENV_CSPELL_GLOB_ROOT] = cfg.root;
+            setEnvironmentVariable(ENV_CSPELL_GLOB_ROOT, cfg.options.root);
         }
 
         const configInfo: ConfigInfo = await readConfig(cfg.configFile, cfg.root);
@@ -713,4 +726,18 @@ async function* concatAsyncIterables<T>(
         if (!iter) continue;
         yield* iter;
     }
+}
+
+async function writeDictionaryLog() {
+    const fieldsCsv = getEnvironmentVariable('CSPELL_ENABLE_DICTIONARY_LOG_FIELDS') || 'time, word, value';
+    const fields = fieldsCsv.split(',').map((f) => f.trim());
+    const header = fields.join(', ') + '\n';
+    const lines = cspellDictionaryDebug
+        .cacheDictionaryGetLog()
+        .filter((d) => d.method === 'has')
+        .map((d) => fields.map((f) => (f in d ? `${d[f as keyof typeof d]}` : '')).join(', '));
+    const data = header + lines.join('\n') + '\n';
+    const filename = getEnvironmentVariable('CSPELL_ENABLE_DICTIONARY_LOG_FILE') || 'cspell-dictionary-log.csv';
+
+    await writeFileOrStream(filename, data);
 }

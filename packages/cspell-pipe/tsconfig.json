@@ -1,4 +1,10 @@
 {
-    "files": [],
-    "references": [{ "path": "./tsconfig.esm.json" }]
+    "$schema": "https://json.schemastore.org/tsconfig",
+    "extends": "../../tsconfig.esm.json",
+    "compilerOptions": {
+        "rootDir": "src",
+        "outDir": "dist",
+        "types": ["node"]
+    },
+    "include": ["src"]
 }
