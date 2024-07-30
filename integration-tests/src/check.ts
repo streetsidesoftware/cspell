@@ -22,6 +22,13 @@ const cspellArgs =
     '-u --no-progress --relative --show-context --gitignore --gitignore-root=. --reporter=default --reporter=${pathReporter}';
 const jsCspell = JSON.stringify(Path.resolve(__dirname, '../../bin.mjs'));
 
+const envVariables: string[] = [
+    'CSPELL_ENABLE_DICTIONARY_LOGGING',
+    'CSPELL_ENABLE_DICTIONARY_LOG_FILE',
+    'CSPELL_ENABLE_DICTIONARY_LOG_FIELDS',
+    'CSPELL_GLOB_ROOT',
+];
+
 let checkCount = 0;
 
 const colors = [
@@ -103,6 +110,7 @@ async function execCheck(context: CheckContext, update: boolean): Promise<CheckR
     const nodeArgs = context.cpuProf ? ['--cpu-prof', '--cpu-prof-dir="../../../.."'] : [];
     const cmdToExec = resolveArgs(rep.path, [genLaunchCSpellCommand(nodeArgs), cspellArgs]).join(' ');
     const { log } = logger;
+    const env = getEnvVariables();
     ++checkCount;
 
     log('');
@@ -121,7 +129,7 @@ async function execCheck(context: CheckContext, update: boolean): Promise<CheckR
         return { success: false, rep, elapsedTime: 0 };
     }
     log(time());
-    const cspellResult = await execCommand(logger, path, cmdToExec, rep.args);
+    const cspellResult = await execCommand({ logger, path, command: cmdToExec, args: rep.args, env });
     log(resultReport(cspellResult));
     log(time());
     log(color`\n************ Checking Results ************`);
@@ -143,13 +151,21 @@ function time() {
     return new Date().toISOString();
 }
 
-async function execCommand(logger: Logger, path: string, command: string, args: string[]): Promise<Result> {
+interface ExecCommandOptions {
+    logger: Logger;
+    path: string;
+    command: string;
+    args: string[];
+    env?: Record<string, string> | undefined;
+}
+
+async function execCommand({ logger, path, command, args, env }: ExecCommandOptions): Promise<Result> {
     const start = Date.now();
     const argv = args.map((a) => JSON.stringify(a)).join(' ');
     const fullCommand = command + ' ' + argv;
     Shell.pushd('-q', path);
     logger.log(`Execute: '${fullCommand}'`);
-    const pResult = execAsync(fullCommand);
+    const pResult = execAsync(fullCommand, { env });
     Shell.popd('-q', '+0');
     const result = await pResult;
     const { stdout, stderr, code } = result;
@@ -168,7 +184,7 @@ async function execPostCheckoutSteps(context: CheckContext) {
     const steps = rep.postCheckoutSteps || [];
     for (const step of steps) {
         logger.log(`Step: %j`, step);
-        const r = await execCommand(logger, path, step, []);
+        const r = await execCommand({ logger, path, command: step, args: [] });
         if (r.code !== 0) {
             logger.error(r.stderr);
             return false;
@@ -379,4 +395,15 @@ function tfn(colorFn: ChalkInstance): (strings: string | TemplateStringsArray, .
 
 function genLaunchCSpellCommand(nodeArgs: string[]) {
     return `node ${nodeArgs.join(' ')} ${jsCspell}`;
+}
+
+function getEnvVariables(): Record<string, string> | undefined {
+    const env: Record<string, string> = {};
+    for (const key of envVariables) {
+        const value = process.env[key];
+        if (value) {
+            env[key] = value;
+        }
+    }
+    return Object.keys(env).length ? env : undefined;
 }
