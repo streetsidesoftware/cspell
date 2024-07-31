@@ -58,7 +58,6 @@ export function matchStringToTextOffset(reg: RegExp, text: string): Iterable<Tex
 export function matchToTextOffset(reg: RegExp, text: TextOffset): Iterable<TextOffset> {
     const textOffset = text;
     const fnOffsetMap = offsetMap(textOffset.offset);
-    textOffset.text.matchAll(reg);
     return pipe(
         match(reg, textOffset.text),
         opMap((m) => fnOffsetMap<TextOffset>({ text: m[0], offset: m.index || 0 })),
