@@ -8,5 +8,10 @@ export interface Repository {
     branch: string | undefined;
     commit: string;
     args: string[];
+    /**
+     * Only snapshot unique issues.
+     * @default true
+     */
+    uniqueOnly?: boolean;
     postCheckoutSteps: string[] | undefined;
 }
