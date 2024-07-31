@@ -19,7 +19,7 @@ const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 const config = readConfig();
 const cspellArgs =
-    '-u --no-progress --relative --show-context --gitignore --gitignore-root=. --reporter=default --reporter=${pathReporter}';
+    '--no-progress --relative --show-context --gitignore --gitignore-root=. --reporter=default --reporter=${pathReporter}';
 const jsCspell = JSON.stringify(Path.resolve(__dirname, '../../bin.mjs'));
 
 const envVariables: string[] = [
@@ -108,7 +108,8 @@ async function execCheck(context: CheckContext, update: boolean): Promise<CheckR
     const name = rep.path;
     const path = Path.join(repositoryDir, rep.path);
     const nodeArgs = context.cpuProf ? ['--cpu-prof', '--cpu-prof-dir="../../../.."'] : [];
-    const cmdToExec = resolveArgs(rep.path, [genLaunchCSpellCommand(nodeArgs), cspellArgs]).join(' ');
+    const uniqueArgs = rep.uniqueOnly !== false ? ['--unique'] : [];
+    const cmdToExec = resolveArgs(rep.path, [genLaunchCSpellCommand(nodeArgs), cspellArgs, ...uniqueArgs]).join(' ');
     const { log } = logger;
     const env = getEnvVariables();
     ++checkCount;
