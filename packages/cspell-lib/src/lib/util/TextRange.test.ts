@@ -2,8 +2,6 @@ import { describe, expect, test } from 'vitest';
 
 import * as TextRange from './TextRange.js';
 
-const { makeSortedMatchRangeArray } = TextRange.__testing__;
-
 describe('Util Text', () => {
     test.each`
         ranges                                                         | expected
@@ -15,6 +13,6 @@ describe('Util Text', () => {
         ${[{ startPos: 10, endPos: 15 }, { startPos: 0, endPos: 10 }]} | ${[{ startPos: 0, endPos: 15 }]}
     `('unionRanges $ranges', ({ ranges, expected }) => {
         const r = TextRange.unionRanges(ranges);
-        expect(r).toEqual(makeSortedMatchRangeArray(expected));
+        expect(r.values).toEqual(expected);
     });
 });

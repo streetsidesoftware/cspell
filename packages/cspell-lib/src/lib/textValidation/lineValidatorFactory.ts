@@ -6,7 +6,6 @@ import { createCachingDictionary } from 'cspell-dictionary';
 import type { ValidationIssue } from '../Models/ValidationIssue.js';
 import * as RxPat from '../Settings/RegExpPatterns.js';
 import * as Text from '../util/text.js';
-import { clean } from '../util/util.js';
 import { split } from '../util/wordSplitter.js';
 import { defaultMinWordLength } from './defaultConstants.js';
 import { isWordValidWithEscapeRetry } from './isWordValid.js';
@@ -31,6 +30,14 @@ interface TextOffsetWithLine extends TextOffsetRW {
     line?: TextOffsetRO;
 }
 
+interface WordStatusInfo {
+    word: string;
+    isFound: boolean | undefined;
+    isFlagged: boolean | undefined;
+    isIgnored: boolean | undefined;
+    fin: boolean;
+}
+
 export function lineValidatorFactory(sDict: SpellingDictionary, options: ValidationOptions): LineValidator {
     const {
         minWordLength = defaultMinWordLength,
@@ -44,6 +51,8 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
     };
 
     const dictCol = createCachingDictionary(sDict, hasWordOptions);
+
+    const knownWords = new Map<string, WordStatusInfo>();
 
     const setOfFlagWords = new Set(flagWords);
     const setOfKnownSuccessfulWords = new Set<string>();
@@ -60,26 +69,33 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
         return !setOfKnownSuccessfulWords.has(wo.text);
     };
 
-    function testForFlaggedWord(wo: TextOffsetRO): boolean {
-        const text = wo.text;
-        return setOfFlagWords.has(text) || setOfFlagWords.has(text.toLowerCase()) || dictCol.isForbidden(text);
+    function calcIgnored(info: WordStatusInfo): boolean {
+        info.isIgnored ??= dictCol.isNoSuggestWord(info.word);
+        return info.isIgnored;
+    }
+
+    function calcFlagged(info: WordStatusInfo): boolean {
+        if (info.isFlagged !== undefined) return info.isFlagged;
+        const word = info.word;
+        info.isFlagged =
+            (setOfFlagWords.has(word) || setOfFlagWords.has(word.toLowerCase()) || dictCol.isForbidden(word)) &&
+            !calcIgnored(info);
+        return info.isFlagged;
     }
 
     function isWordIgnored(word: string): boolean {
-        return dictCol.isNoSuggestWord(word);
+        return calcIgnored(getWordInfo(word));
     }
 
     function getSuggestions(word: string) {
         return dictCol.getPreferredSuggestions(word);
     }
 
-    function isWordFlagged(word: TextOffsetRO): boolean {
-        const isIgnored = isWordIgnored(word.text);
-        const isFlagged = !isIgnored && testForFlaggedWord(word);
-        return isFlagged;
+    function isWordFlagged(wo: TextOffsetRO): boolean {
+        return calcFlagged(getWordInfo(wo.text));
     }
 
-    function annotateIsFlagged(word: ValidationIssue): ValidationIssueRO {
+    function annotateIsFlagged(word: ValidationIssue): ValidationIssue {
         word.isFlagged = isWordFlagged(word);
         return word;
     }
@@ -92,18 +108,31 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
         return issue;
     }
 
-    function checkWord(word: ValidationIssueRO): ValidationIssueRO {
-        const isIgnored = isWordIgnored(word.text);
-        const { isFlagged = !isIgnored && testForFlaggedWord(word) } = word;
-        const isFound = isFlagged ? undefined : isIgnored || isWordValidWithEscapeRetry(dictCol, word, word.line);
-        return clean({ ...word, isFlagged, isFound });
+    function checkWord(issue: ValidationIssue): ValidationIssueRO {
+        const info = getWordInfo(issue.text);
+        if (info.fin) {
+            const { isFlagged: isForbidden, isFound, isIgnored } = info;
+            const isFlagged = issue.isFlagged ?? (!isIgnored && isForbidden);
+            issue.isFlagged = isFlagged;
+            issue.isFound = isFound;
+            return issue;
+        }
+        const isIgnored = calcIgnored(info);
+        const isFlagged = issue.isFlagged ?? calcFlagged(info);
+        const isFound = isFlagged ? undefined : isIgnored || isWordValidWithEscapeRetry(dictCol, issue, issue.line);
+        info.isFlagged = !!isFlagged;
+        info.isFound = isFound;
+        info.fin = true;
+        issue.isFlagged = isFlagged;
+        issue.isFound = isFound;
+        return issue;
     }
 
     const fn: LineValidatorFn = (lineSegment: LineSegment) => {
         function splitterIsValid(word: TextOffsetRO): boolean {
             return (
                 setOfKnownSuccessfulWords.has(word.text) ||
-                (!testForFlaggedWord(word) && isWordValidWithEscapeRetry(dictCol, word, lineSegment.line))
+                (!isWordFlagged(word) && isWordValidWithEscapeRetry(dictCol, word, lineSegment.line))
             );
         }
 
@@ -116,10 +145,11 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
                 pipe(
                     Text.extractWordsFromCodeTextOffset(vr),
                     opFilter(filterAlreadyChecked),
-                    opMap((t) => ({ ...t, line: vr.line })),
+                    opMap((t) => ({ ...t, line: vr.line, isFlagged: undefined, isFound: undefined })),
                     opMap(annotateIsFlagged),
+                    // Filter out words that are too short, except for flagged words.
                     opFilter(rememberFilter((wo) => wo.text.length >= minWordLength || !!wo.isFlagged)),
-                    opMap((wo) => (wo.isFlagged ? wo : checkWord(wo))),
+                    opMap((wo) => checkWord(wo)),
                     opFilter(rememberFilter((wo) => wo.isFlagged || !wo.isFound)),
                     opFilter(rememberFilter((wo) => !RxPat.regExRepeatedChar.test(wo.text))),
 
@@ -178,6 +208,14 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
         );
         return checkedPossibleWords;
     };
+
+    function getWordInfo(word: string): WordStatusInfo {
+        const info = knownWords.get(word);
+        if (info) return info;
+        const result = { word, isFound: undefined, isFlagged: undefined, isIgnored: undefined, fin: false };
+        knownWords.set(word, result);
+        return result;
+    }
 
     return { fn, dict: dictCol };
 }

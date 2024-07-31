@@ -1,5 +1,3 @@
-import * as GS from 'gensequence';
-
 /**
  * A range of text in a document.
  * The range is inclusive of the startPos and exclusive of the endPos.
@@ -45,20 +43,21 @@ function compareRanges(a: MatchRange, b: MatchRange) {
     return a.startPos - b.startPos || a.endPos - b.endPos;
 }
 
-export function unionRanges(ranges: MatchRange[]): MatchRange[] {
-    return makeSortedMatchRangeArray([..._unionRanges(ranges)]);
-}
-
-function* _unionRanges(ranges: MatchRange[]): Generator<MatchRange> {
+export function unionRanges(ranges: MatchRange[]): SortedMatchRangeArray {
     const sortedRanges = sortMatchRangeArray(ranges);
 
-    if (!sortedRanges.length) return;
+    ranges = sortedRanges.values;
 
-    let { startPos, endPos } = sortedRanges[0];
+    if (!ranges.length) return sortedRanges;
 
-    for (const r of ranges) {
+    let i = 0;
+    let j = 0;
+    let { startPos, endPos } = ranges[i++];
+
+    for (; i < ranges.length; ++i) {
+        const r = ranges[i];
         if (r.startPos > endPos) {
-            yield { startPos, endPos };
+            ranges[j++] = { startPos, endPos };
             startPos = r.startPos;
             endPos = r.endPos;
             continue;
@@ -66,31 +65,40 @@ function* _unionRanges(ranges: MatchRange[]): Generator<MatchRange> {
         endPos = Math.max(endPos, r.endPos);
     }
     if (startPos < endPos) {
-        yield { startPos, endPos };
+        ranges[j++] = { startPos, endPos };
     }
+    ranges.length = j;
+    return sortedRanges;
 }
 
 export function findMatchingRangesForPatterns(patterns: RegExp[], text: string): MatchRange[] {
-    const matchedPatterns = GS.genSequence(patterns).concatMap((pattern) => findMatchingRanges(pattern, text));
-    return unionRanges(matchedPatterns.toArray());
+    const nested = patterns.map((pattern) => findMatchingRanges(pattern, text));
+
+    return unionRanges(flatten(nested)).values;
 }
 
 /**
  * Create a new set of positions that have the excluded position ranges removed.
  */
 export function excludeRanges(includeRanges: MatchRange[], excludeRanges: MatchRange[]): MatchRange[] {
-    return [..._excludeRanges(sortMatchRangeArray(includeRanges), sortMatchRangeArray(excludeRanges))];
+    return _excludeRanges(sortMatchRangeArray(includeRanges), sortMatchRangeArray(excludeRanges));
 }
 
-function* _excludeRanges(
-    includeRanges: SortedMatchRangeArray,
-    excludeRanges: SortedMatchRangeArray,
-): Generator<MatchRange, undefined, undefined> {
-    if (!includeRanges.length) return;
+function _excludeRanges(
+    sortedIncludeRanges: SortedMatchRangeArray,
+    sortedExcludeRanges: SortedMatchRangeArray,
+): MatchRange[] {
+    const includeRanges = sortedIncludeRanges.values;
+    const excludeRanges = sortedExcludeRanges.values;
+    if (!includeRanges.length) return includeRanges;
     if (!excludeRanges.length) {
-        yield* includeRanges;
-        return;
+        return includeRanges;
     }
+
+    const ranges: MatchRange[] = [];
+    ranges.length = includeRanges.length + excludeRanges.length + 1;
+
+    let i = 0;
 
     let exIndex = 0;
     const limit = excludeRanges.length;
@@ -104,16 +112,19 @@ function* _excludeRanges(
             if (ex.startPos >= endPos) break;
             if (ex.endPos <= startPos) continue;
             if (ex.startPos > startPos) {
-                yield { startPos, endPos: ex.startPos };
+                ranges[i++] = { startPos, endPos: ex.startPos };
             }
             startPos = ex.endPos;
             if (startPos >= endPos) break;
         }
 
         if (startPos < endPos) {
-            yield { startPos, endPos };
+            ranges[i++] = { startPos, endPos };
         }
     }
+
+    ranges.length = i;
+    return ranges;
 }
 
 export function extractRangeText(text: string, ranges: MatchRange[]): MatchRangeWithText[] {
@@ -124,29 +135,27 @@ export function extractRangeText(text: string, ranges: MatchRange[]): MatchRange
     }));
 }
 
-const SymSortedMatchRangeArray = Symbol('SortedMatchRangeArray');
-
-interface SortedMatchRangeArray extends Array<MatchRange> {
-    [SymSortedMatchRangeArray]: true;
+interface SortedMatchRangeArray {
+    values: MatchRange[];
 }
 
 function sortMatchRangeArray(values: MatchRange[]): SortedMatchRangeArray {
-    if (isSortedMatchRangeArray(values)) return values;
-
-    return makeSortedMatchRangeArray(values.sort(compareRanges));
+    values.sort(compareRanges);
+    return { values };
 }
 
-function isSortedMatchRangeArray(a: MatchRange[] | SortedMatchRangeArray): a is SortedMatchRangeArray {
-    return (<SortedMatchRangeArray>a)[SymSortedMatchRangeArray] === true;
+function flatten<T>(data: T[][]): T[] {
+    let size = 0;
+    for (let i = data.length - 1; i >= 0; --i) {
+        size += data[i].length;
+    }
+    const result = new Array<T>(size);
+    let k = 0;
+    for (let i = 0; i < data.length; ++i) {
+        const d = data[i];
+        for (let j = 0; j < d.length; ++j) {
+            result[k++] = d[j];
+        }
+    }
+    return result;
 }
-
-function makeSortedMatchRangeArray(sortedValues: MatchRange[]): SortedMatchRangeArray {
-    const sorted: SortedMatchRangeArray = sortedValues as SortedMatchRangeArray;
-    sorted[SymSortedMatchRangeArray] = true;
-    Object.freeze(sorted);
-    return sorted;
-}
-
-export const __testing__ = {
-    makeSortedMatchRangeArray,
-};

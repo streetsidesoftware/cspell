@@ -244,7 +244,7 @@ describe('Validate textValidator functions', () => {
         ${"This should've not been ok"} | ${[]}         | ${["should've"]} | ${[ov({ text: "should've", isFlagged: true })]}
         ${"They'll be allowed"}         | ${[]}         | ${[]}            | ${[]}
         ${"They'll not be allowed"}     | ${[]}         | ${["they'll"]}   | ${[ov({ text: "They'll", isFlagged: true })]}
-    `('Validate forbidden words', ({ text, ignoreWords, expected, flagWords }) => {
+    `('Validate forbidden words $text', ({ text, ignoreWords, expected, flagWords }) => {
         const dict = getSpellingDictionaryCollectionSync({ ignoreWords });
         const result = [...validateText(text, dict, { ignoreCase: false, flagWords })];
         expect(result).toEqual(expected);
