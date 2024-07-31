@@ -5,7 +5,7 @@ Args: '["**","--exclude=**/Backup/**"]'
 Summary:
   files: 489
   filesWithIssues: 452
-  issues: 14311
+  issues: 14314
   errors: 0
 Errors: []
 
@@ -4806,9 +4806,12 @@ issues:
   - "Scripts/Search_Script.sql:147:26        SSRS                        U       WHEN 2 THEN 'SSRS Report'"
   - "Scripts/Search_Script.sql:148:26        SSRS                        U       WHEN 3 THEN 'SSRS Resource'"
   - "Scripts/Search_Script.sql:156:10        reportserver                U       FROM reportserver.dbo.Catalog"
+  - "Scripts/Search_Script.sql:180:12        SSIS                        U       IF @search_SSIS_MSDB = 1"
   - "Scripts/Search_Script.sql:180:17        MSDB                        U       IF @search_SSIS_MSDB = 1"
+  - "Scripts/Search_Script.sql:182:14        SSIS                        U       WITH CTE_SSIS AS ("
   - "Scripts/Search_Script.sql:185:44        packagedata                 U       CONVERT(VARBINARY(MAX),packagedata)) AS package_details"
   - "Scripts/Search_Script.sql:186:67        packagedata                 U       CONVERT(VARBINARY(MAX),packagedata))) AS package_details"
+  - "Scripts/Search_Script.sql:187:10        SSIS                        U       'SSIS Package (MSDB)' AS object"
   - "Scripts/Search_Script.sql:187:24        MSDB                        U       'SSIS Package (MSDB)' AS object_type"
   - "Scripts/Search_Script.sql:188:10        msdb                        U       FROM msdb.dbo.sysssispackages"
   - "Scripts/Search_Script.sql:188:19        sysssispackages             U       FROM msdb.dbo.sysssispackages p"
