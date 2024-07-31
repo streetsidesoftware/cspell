@@ -1,13 +1,15 @@
-import type { CachingDictionary } from 'cspell-dictionary';
-
 import type { TextOffsetRO } from './ValidationTypes.js';
 
-function hasWordCheck(dict: CachingDictionary, word: string): boolean {
+interface Dict {
+    has(word: string): boolean;
+}
+
+function hasWordCheck(dict: Dict, word: string): boolean {
     word = word.includes('\\') ? word.replaceAll('\\', '') : word;
     return dict.has(word);
 }
 
-export function isWordValidWithEscapeRetry(dict: CachingDictionary, wo: TextOffsetRO, line: TextOffsetRO): boolean {
+export function isWordValidWithEscapeRetry(dict: Dict, wo: TextOffsetRO, line: TextOffsetRO): boolean {
     const firstTry = hasWordCheck(dict, wo.text);
     return (
         firstTry ||

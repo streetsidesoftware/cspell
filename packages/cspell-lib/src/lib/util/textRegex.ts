@@ -1,6 +1,6 @@
 // cspell:ignore ings ning gimuy anrvtbf gimuxy
 
-export const regExUpperSOrIng = /([\p{Lu}\p{M}]+\\?['’]?(?:s|ing|ies|es|ings|ed|ning))(?!\p{Ll})/gu;
+export const regExUpperSOrIng = /([\p{Lu}\p{M}]+(?:\\?['’])?(?:s|ing|ies|es|ings|ed|ning))(?!\p{Ll})/gu;
 export const regExSplitWords = /(\p{Ll}\p{M}?)(\p{Lu})/gu;
 export const regExSplitWords2 = /(\p{Lu}\p{M}?)(\p{Lu}\p{M}?\p{Ll})/gu;
 export const regExWords = /\p{L}\p{M}?(?:(?:\\?['’])?\p{L}\p{M}?)*/gu;

@@ -9,8 +9,8 @@ import { importResolveModuleName } from '@cspell/dynamic-import';
 import type { VFileSystem } from 'cspell-io';
 import resolveFrom from 'resolve-from';
 
-import { srcDirectory } from '../../lib-cjs/pkg-info.cjs';
 import { getFileSystem } from '../fileSystem.js';
+import { srcDirectory } from '../pkg-info.mjs';
 import { envToTemplateVars, replaceTemplate } from './templates.js';
 import {
     fileURLOrPathToPath,

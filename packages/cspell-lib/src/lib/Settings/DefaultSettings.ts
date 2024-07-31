@@ -1,10 +1,10 @@
 import type { PredefinedPatterns, RegExpPatternDefinition } from '@cspell/cspell-types';
 import { parsers } from 'cspell-grammar';
 
-import { srcDirectory } from '../../lib-cjs/index.cjs';
 import type { CSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef.js';
 import { createCSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef.js';
 import { PatternRegExp } from '../Models/PatternRegExp.js';
+import { srcDirectory } from '../pkg-info.mjs';
 import { resolveFile } from '../util/resolveFile.js';
 import { defaultConfigFileModuleRef } from './constants.js';
 import { readSettings } from './Controller/configLoader/index.js';

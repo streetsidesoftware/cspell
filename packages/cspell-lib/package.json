@@ -4,11 +4,11 @@
   "description": "A library of useful functions used across various cspell tools.",
   "type": "module",
   "sideEffects": false,
-  "types": "dist/esm/index.d.ts",
-  "module": "dist/esm/index.js",
+  "types": "dist/lib/index.d.ts",
+  "module": "dist/lib/index.js",
   "exports": {
     ".": {
-      "import": "./dist/esm/index.js"
+      "import": "./dist/lib/index.js"
     }
   },
   "files": [
@@ -24,17 +24,16 @@
   "scripts": {
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "clean-build": "pnpm clean && pnpm build",
-    "build": "tsc -b . -f && pnpm run build:api",
+    "build": "tsc -p . && pnpm run build:api",
     "build:api": "rollup -c api/rollup.config.mjs",
-    "build:esm": "tsc -b tsconfig.esm.json -f",
-    "build:lib": "tsc -b src/lib/tsconfig.json -f",
-    "watch": "tsc -b . --watch -f",
+    "watch": "tsc -p . --watch",
     "coverage": "vitest run --coverage --pool=forks",
     "test-watch": "vitest",
     "prepublishOnly": "pnpm run clean-build",
     "#test": "vitest run --reporter=hanging-process --reporter=default",
     "test": "vitest run --pool=forks",
-    "test:update-snapshot": "vitest run -u"
+    "test:update-snapshot": "vitest run -u",
+    "test:perf": "NODE_ENV=production insight --register ts-node/esm --file \"**/*.perf.{mts,ts}\""
   },
   "repository": {
     "type": "git",
@@ -99,6 +98,7 @@
     "configstore": "^7.0.0",
     "cspell-dict-nl-nl": "^1.1.2",
     "leaked-handles": "^5.2.0",
-    "lorem-ipsum": "^2.0.8"
+    "lorem-ipsum": "^2.0.8",
+    "perf-insight": "^1.2.0"
   }
 }
