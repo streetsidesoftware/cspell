@@ -987,7 +987,7 @@ declare function splitCamelCaseWord(word: string): string[];
  */
 declare function match(reg: RegExp, text: string): Iterable<RegExpExecArray>;
 declare function matchStringToTextOffset(reg: RegExp, text: string): Iterable<TextOffset>;
-declare function matchToTextOffset(reg: RegExp, text: TextOffset): Iterable<TextOffset>;
+declare function matchToTextOffset(reg: RegExp, t: TextOffset): Iterable<TextOffset>;
 declare function extractLinesOfText(text: string): Iterable<TextOffset>;
 /**
  * Extract out whole words from a string of text.

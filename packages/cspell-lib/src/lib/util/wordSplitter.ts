@@ -13,7 +13,7 @@ import {
     regExWordsAndDigits,
 } from './textRegex.js';
 
-const ignoreBreak: readonly number[] = Object.freeze([] as number[]);
+const ignoreBreak: BreakPairs = Object.freeze([]) as unknown as BreakPairs;
 
 export type IsValidWordFn = (word: TextOffset) => boolean;
 
@@ -150,7 +150,7 @@ function findNextWordText({ text, offset }: TextOffset): TextOffset {
     };
 }
 
-type BreakPairs = readonly number[];
+type BreakPairs = readonly [number, number];
 
 interface PossibleWordBreak {
     /** offset from the start of the string */

@@ -8,6 +8,7 @@ import {
     regExAllUpper,
     regExFirstUpper,
     regExIgnoreCharacters,
+    regExpSplitWordBreaks,
     regExSplitWords,
     regExSplitWords2,
     regExUpperSOrIng,
@@ -35,11 +36,7 @@ export function splitCamelCaseWordWithOffset(wo: TextOffset): Array<TextOffset> 
  * Split camelCase words into an array of strings.
  */
 export function splitCamelCaseWord(word: string): string[] {
-    const wPrime = word.replace(regExUpperSOrIng, (s) => s[0] + s.slice(1).toLowerCase());
-    const separator = '_<^*_*^>_';
-    const pass1 = wPrime.replace(regExSplitWords, '$1' + separator + '$2');
-    const pass2 = pass1.replace(regExSplitWords2, '$1' + separator + '$2');
-    return pass2.split(separator);
+    return word.split(regExpSplitWordBreaks);
 }
 
 /**
@@ -55,12 +52,13 @@ export function matchStringToTextOffset(reg: RegExp, text: string): Iterable<Tex
     return matchToTextOffset(reg, { text, offset: 0 });
 }
 
-export function matchToTextOffset(reg: RegExp, text: TextOffset): Iterable<TextOffset> {
-    const textOffset = text;
-    const fnOffsetMap = offsetMap(textOffset.offset);
+export function matchToTextOffset(reg: RegExp, t: TextOffset): Iterable<TextOffset> {
+    const text = t.text;
+    const offset = t.offset;
+    // return opMap((m: RegExpExecArray) => ({ text: m[0], offset: offset + m.index }))(match(reg, text));
     return pipe(
-        match(reg, textOffset.text),
-        opMap((m) => fnOffsetMap<TextOffset>({ text: m[0], offset: m.index || 0 })),
+        match(reg, text),
+        opMap((m) => ({ text: m[0], offset: offset + m.index })),
     );
 }
 
@@ -180,13 +178,6 @@ export function extractText(textOffset: TextOffset, startPos: number, endPos: nu
     const a = Math.max(startPos - orig, 0);
     const b = Math.max(endPos - orig, 0);
     return text.slice(a, b);
-}
-
-interface OffsetMap {
-    offset: number;
-}
-function offsetMap(offset: number) {
-    return <T extends OffsetMap>(xo: T) => ({ ...xo, offset: xo.offset + offset }) as T;
 }
 
 export function calculateTextDocumentOffsets<T extends TextOffset>(

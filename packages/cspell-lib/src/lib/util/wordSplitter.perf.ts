@@ -4,7 +4,14 @@ import { extname } from 'node:path/posix';
 import { TextOffset } from '@cspell/cspell-types';
 import { suite } from 'perf-insight';
 
-import { extractPossibleWordsFromTextOffset, extractWordsFromCode, extractWordsFromText, textOffset } from './text.js';
+import {
+    extractPossibleWordsFromTextOffset,
+    extractWordsFromCode,
+    extractWordsFromText,
+    matchStringToTextOffset,
+    splitCamelCaseWordWithOffset,
+    textOffset,
+} from './text.js';
 import { regExWordsAndDigits } from './textRegex.js';
 
 const regExpWord = /\b[\w\p{L}\p{M}]+\b/gu;
@@ -60,6 +67,17 @@ suite('wordSplitter', async (test) => {
         return s;
     });
 
+    test('baseline: matchAll regExWordsAndDigits matchStringToTextOffset', () => {
+        const s: TextOffset[] = [];
+        const regExp = regExWordsAndDigits;
+        for (let i = iterations; i > 0; --i) {
+            for (const line of lines) {
+                s.push(...matchStringToTextOffset(regExp, line));
+            }
+        }
+        return s;
+    });
+
     test('matchAll into possible words', () => {
         const s: TextOffset[] = [];
         const regExpMaybeWord = /[^\s();:{}[\]*&^%$#@!~"?/\\,<>+=]+/g;
@@ -92,6 +110,20 @@ suite('wordSplitter', async (test) => {
         for (let i = iterations; i > 0; --i) {
             for (const line of lines) {
                 s.push(...extractPossibleWordsFromTextOffset(textOffset(line)));
+            }
+        }
+        return s;
+    });
+
+    test('extractPossibleWordsFromTextOffset splitCamelCaseWordWithOffset', () => {
+        const s: TextOffset[] = [];
+        for (let i = iterations; i > 0; --i) {
+            for (const line of lines) {
+                for (const wo of extractPossibleWordsFromTextOffset(textOffset(line))) {
+                    for (const cWord of splitCamelCaseWordWithOffset(wo)) {
+                        s.push(cWord);
+                    }
+                }
             }
         }
         return s;

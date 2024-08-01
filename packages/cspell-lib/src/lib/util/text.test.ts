@@ -9,6 +9,7 @@ import { describe, expect, test } from 'vitest';
 
 import * as Text from './text.js';
 import { splitCamelCaseWord } from './text.js';
+import { regExSplitWords, regExSplitWords2, regExUpperSOrIng } from './textRegex.js';
 
 // cSpell:ignore Ápple DBAs ctrip γάμμα
 
@@ -35,10 +36,23 @@ describe('Util Text', () => {
         ${'HelloThere'}     | ${['Hello', 'There']}
         ${'BigÁpple'}       | ${['Big', 'Ápple']}
         ${'ASCIIToUTF16'}   | ${['ASCII', 'To', 'UTF16']}
+        ${'URLsAndDBAs'}    | ${['URLs', 'And', 'DBAs']}
+        ${'WALKingRUNning'} | ${['WALKing', 'RUNning']}
+    `('splitCamelCaseWord $word', ({ word, expected }) => {
+        expect(splitCamelCaseWord(word)).toEqual(expected);
+    });
+
+    test.each`
+        word                | expected
+        ${'hello'}          | ${'hello'.split('|')}
+        ${'helloThere'}     | ${['hello', 'There']}
+        ${'HelloThere'}     | ${['Hello', 'There']}
+        ${'BigÁpple'}       | ${['Big', 'Ápple']}
+        ${'ASCIIToUTF16'}   | ${['ASCII', 'To', 'UTF16']}
         ${'URLsAndDBAs'}    | ${['Urls', 'And', 'Dbas']}
         ${'WALKingRUNning'} | ${['Walking', 'Running']}
     `('splitCamelCaseWord $word', ({ word, expected }) => {
-        expect(splitCamelCaseWord(word)).toEqual(expected);
+        expect(splitCamelCaseWordOrig(word)).toEqual(expected);
     });
 
     test('extract word from text', () => {
@@ -473,3 +487,14 @@ SQL;
 Not checked.
 
 `;
+
+/**
+ * Split camelCase words into an array of strings.
+ */
+function splitCamelCaseWordOrig(word: string): string[] {
+    const wPrime = word.replace(regExUpperSOrIng, (s) => s[0] + s.slice(1).toLowerCase());
+    const separator = '_<^*_*^>_';
+    const pass1 = wPrime.replace(regExSplitWords, '$1' + separator + '$2');
+    const pass2 = pass1.replace(regExSplitWords2, '$1' + separator + '$2');
+    return pass2.split(separator);
+}
