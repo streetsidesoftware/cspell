@@ -9,9 +9,6 @@ import {
     regExFirstUpper,
     regExIgnoreCharacters,
     regExpSplitWordBreaks,
-    regExSplitWords,
-    regExSplitWords2,
-    regExUpperSOrIng,
     regExWords,
     regExWordsAndDigits,
 } from './textRegex.js';
