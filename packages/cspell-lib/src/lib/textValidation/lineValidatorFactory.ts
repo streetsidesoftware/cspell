@@ -188,7 +188,9 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
             return codeWordResults;
         }
 
-        function _rebaseKnownIssues(possibleWord: TextOffsetRO, known: KnownIssuesForWord): ValidationIssue[] {
+        const useKnownIssues = false;
+
+        function rebaseKnownIssues(possibleWord: TextOffsetRO, known: KnownIssuesForWord): ValidationIssue[] {
             const { issues } = known;
             const adjOffset = possibleWord.offset - known.possibleWord.offset;
             return issues.map((issue) => {
@@ -201,13 +203,10 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
 
         function checkPossibleWords(possibleWord: TextOffsetRO): ValidationIssue[] {
             const known = setOfKnownIssues.get(possibleWord.text);
-            if (known) {
-                // eslint-disable-next-line unicorn/no-lonely-if
-                if (!known.issues.length) return known.issues;
-                // const adjusted = rebaseKnownIssues(possibleWord, known);
-                // const issues = _checkPossibleWords(possibleWord).map(annotateIssue);
-                // assert.deepStrictEqual(adjusted, issues);
-                // return adjusted;
+            if (known && !known.issues.length) return known.issues;
+            if (known && useKnownIssues) {
+                const adjusted = rebaseKnownIssues(possibleWord, known);
+                return adjusted;
             }
             const issues = _checkPossibleWords(possibleWord).map(annotateIssue);
             setOfKnownIssues.set(possibleWord.text, { possibleWord, issues });
