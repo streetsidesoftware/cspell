@@ -1,4 +1,6 @@
-import { opConcatMap, opFilter, opMap, pipe } from '@cspell/cspell-pipe/sync';
+import assert from 'node:assert';
+
+import { opConcatMap, opFilter, pipe } from '@cspell/cspell-pipe/sync';
 import type { ParsedText } from '@cspell/cspell-types';
 import type { CachingDictionary, SearchOptions, SpellingDictionary } from 'cspell-dictionary';
 import { createCachingDictionary } from 'cspell-dictionary';
@@ -204,9 +206,11 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
             if (known) {
                 if (!known.issues.length) return known.issues;
                 const adjusted = rebaseKnownIssues(possibleWord, known);
+                const issues = _checkPossibleWords(possibleWord).map(annotateIssue);
+                assert.deepStrictEqual(adjusted, issues);
                 return adjusted;
             }
-            const issues = _checkPossibleWords(possibleWord);
+            const issues = _checkPossibleWords(possibleWord).map(annotateIssue);
             setOfKnownIssues.set(possibleWord.text, { possibleWord, issues });
             return issues;
         }
@@ -247,7 +251,6 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
             extractPossibleWordsFromTextOffset(lineSegment.segment),
             opFilter(filterAlreadyChecked),
             opConcatMap(checkPossibleWords),
-            opMap(annotateIssue),
         );
         return checkedPossibleWords;
     };
