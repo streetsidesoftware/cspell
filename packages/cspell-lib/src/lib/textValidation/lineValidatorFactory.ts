@@ -38,6 +38,11 @@ interface WordStatusInfo {
     fin: boolean;
 }
 
+interface KnownIssuesForWord {
+    possibleWord: TextOffsetRO;
+    issues: ValidationIssue[];
+}
+
 export function lineValidatorFactory(sDict: SpellingDictionary, options: ValidationOptions): LineValidator {
     const {
         minWordLength = defaultMinWordLength,
@@ -55,7 +60,7 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
     const knownWords = new Map<string, WordStatusInfo>();
 
     const setOfFlagWords = new Set(flagWords);
-    const setOfKnownIssues = new Set<string>();
+    const setOfKnownIssues = new Map<string, KnownIssuesForWord>();
     const setOfKnownSuccessfulWords = new Set<string>();
     const rememberFilter =
         <T extends TextOffsetRO>(fn: (v: T) => boolean) =>
@@ -183,11 +188,27 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
             return codeWordResults;
         }
 
+        function adjustKnownIssues(possibleWord: TextOffsetRO, known: KnownIssuesForWord): ValidationIssue[] {
+            const { issues } = known;
+            const adjOffset = possibleWord.offset - known.possibleWord.offset;
+            return issues.map((issue) => {
+                issue = { ...issue };
+                issue.offset += adjOffset;
+                issue.line = lineSegment.line;
+                return issue;
+            });
+        }
+
         function checkPossibleWords(possibleWord: TextOffsetRO): ValidationIssue[] {
-            const issues = _checkPossibleWords(possibleWord);
-            for (const issue of issues) {
-                setOfKnownIssues.add(issue.text);
+            const known = setOfKnownIssues.get(possibleWord.text);
+            if (known) {
+                if (!known.issues.length) return known.issues;
+                const adjusted = adjustKnownIssues(possibleWord, known);
+                // console.error('Known %o', { possibleWord, known, adjusted });
+                return adjusted;
             }
+            const issues = _checkPossibleWords(possibleWord);
+            setOfKnownIssues.set(possibleWord.text, { possibleWord, issues });
             return issues;
         }
 
