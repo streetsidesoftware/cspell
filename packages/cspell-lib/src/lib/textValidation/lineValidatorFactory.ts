@@ -188,7 +188,7 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
             return codeWordResults;
         }
 
-        function adjustKnownIssues(possibleWord: TextOffsetRO, known: KnownIssuesForWord): ValidationIssue[] {
+        function rebaseKnownIssues(possibleWord: TextOffsetRO, known: KnownIssuesForWord): ValidationIssue[] {
             const { issues } = known;
             const adjOffset = possibleWord.offset - known.possibleWord.offset;
             return issues.map((issue) => {
@@ -203,8 +203,7 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
             const known = setOfKnownIssues.get(possibleWord.text);
             if (known) {
                 if (!known.issues.length) return known.issues;
-                const adjusted = adjustKnownIssues(possibleWord, known);
-                // console.error('Known %o', { possibleWord, known, adjusted });
+                const adjusted = rebaseKnownIssues(possibleWord, known);
                 return adjusted;
             }
             const issues = _checkPossibleWords(possibleWord);
@@ -233,7 +232,6 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
                     mismatches.push(w);
                 }
             }
-            // if (mismatches.length && mismatches.some((w) => !setOfKnownIssues.has(w.text))) {
             if (mismatches.length) {
                 // Try the more expensive word splitter
                 const splitResult = split(lineSegment.segment, possibleWord.offset, splitterIsValid);
