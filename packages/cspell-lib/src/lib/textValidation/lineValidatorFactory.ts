@@ -5,7 +5,12 @@ import { createCachingDictionary } from 'cspell-dictionary';
 
 import type { ValidationIssue } from '../Models/ValidationIssue.js';
 import * as RxPat from '../Settings/RegExpPatterns.js';
-import * as Text from '../util/text.js';
+import {
+    extractPossibleWordsFromTextOffset,
+    extractText,
+    extractWordsFromCodeTextOffset,
+    extractWordsFromTextOffset,
+} from '../util/text.js';
 import { split } from '../util/wordSplitter.js';
 import { defaultMinWordLength } from './defaultConstants.js';
 import { isWordValidWithEscapeRetry } from './isWordValid.js';
@@ -64,6 +69,17 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
         return !setOfKnownSuccessfulWords.has(wo.text);
     };
 
+    const hasDict = {
+        has(word: string): boolean {
+            const info = getWordInfo(word);
+            if (info.isFound !== undefined) return info.isFound;
+            if (info.isFlagged) return true;
+            if (info.isFlagged) return false;
+            info.isFound = dictCol.has(word);
+            return info.isFound;
+        },
+    };
+
     function calcIgnored(info: WordStatusInfo): boolean {
         info.isIgnored ??= dictCol.isNoSuggestWord(info.word);
         return info.isIgnored;
@@ -116,17 +132,16 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
             const { isFlagged: isForbidden, isFound, isIgnored } = info;
             const isFlagged = issue.isFlagged ?? (!isIgnored && isForbidden);
             issue.isFlagged = isFlagged;
-            issue.isFound = isFound;
+            issue.isFound = isFlagged ? undefined : isFound;
             return issue;
         }
         const isIgnored = calcIgnored(info);
         const isFlagged = issue.isFlagged ?? calcFlagged(info);
-        const isFound = isFlagged ? undefined : isIgnored || isWordValidWithEscapeRetry(dictCol, issue, issue.line);
+        info.isFound ??= isFlagged ? false : isIgnored || isWordValidWithEscapeRetry(hasDict, issue, issue.line);
         info.isFlagged = !!isFlagged;
-        info.isFound = isFound;
         info.fin = true;
         issue.isFlagged = isFlagged;
-        issue.isFound = isFound;
+        issue.isFound = isFlagged ? undefined : info.isFound;
         return issue;
     }
 
@@ -134,7 +149,7 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
         function splitterIsValid(word: TextOffsetRO): boolean {
             return (
                 setOfKnownSuccessfulWords.has(word.text) ||
-                (!isWordFlagged(word) && isWordValidWithEscapeRetry(dictCol, word, lineSegment.line))
+                (!isWordFlagged(word) && isWordValidWithEscapeRetry(hasDict, word, lineSegment.line))
             );
         }
 
@@ -145,7 +160,7 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
 
             const codeWordResults: ValidationIssueRO[] = [];
 
-            for (const wo of Text.extractWordsFromCodeTextOffset(vr)) {
+            for (const wo of extractWordsFromCodeTextOffset(vr)) {
                 if (setOfKnownSuccessfulWords.has(wo.text)) continue;
                 const issue = wo as ValidationIssue;
                 issue.line = vr.line;
@@ -155,7 +170,7 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
                 if (!isFlaggedOrMinLength(issue)) continue;
                 checkWord(issue);
                 if (!isFlaggedOrNotFound(issue) || !isNotRepeatingChar(issue)) continue;
-                issue.text = Text.extractText(lineSegment.segment, issue.offset, issue.offset + issue.text.length);
+                issue.text = extractText(lineSegment.segment, issue.offset, issue.offset + issue.text.length);
                 codeWordResults.push(issue);
             }
 
@@ -178,7 +193,7 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
             }
 
             const mismatches: ValidationIssue[] = [];
-            for (const wo of Text.extractWordsFromTextOffset(possibleWord)) {
+            for (const wo of extractWordsFromTextOffset(possibleWord)) {
                 if (setOfKnownSuccessfulWords.has(wo.text)) continue;
                 const issue = wo as ValidationIssue;
                 issue.line = lineSegment.line;
@@ -200,7 +215,7 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
         }
 
         const checkedPossibleWords: Iterable<ValidationIssue> = pipe(
-            Text.extractPossibleWordsFromTextOffset(lineSegment.segment),
+            extractPossibleWordsFromTextOffset(lineSegment.segment),
             opFilter(filterAlreadyChecked),
             opConcatMap(checkPossibleWords),
             opMap(annotateIssue),

@@ -3,7 +3,7 @@ import { pathToFileURL } from 'node:url';
 
 import { toFilePathOrHref, toFileURL } from '@cspell/url';
 
-import { srcDirectory } from '../../lib-cjs/pkg-info.cjs';
+import { srcDirectory } from '../pkg-info.mjs';
 
 export {
     addTrailingSlash,

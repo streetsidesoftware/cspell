@@ -8,11 +8,11 @@ import { createReaderWriter, CSpellConfigFileInMemory } from 'cspell-config-lib'
 import { isUrlLike, toFileURL } from 'cspell-io';
 import { URI, Utils as UriUtils } from 'vscode-uri';
 
-import { srcDirectory } from '../../../../lib-cjs/index.cjs';
 import { onClearCache } from '../../../events/index.js';
 import type { VFileSystem } from '../../../fileSystem.js';
 import { getVirtualFS } from '../../../fileSystem.js';
 import { createCSpellSettingsInternal as csi } from '../../../Models/CSpellSettingsInternalDef.js';
+import { srcDirectory } from '../../../pkg-info.mjs';
 import { autoResolve, AutoResolveCache, autoResolveWeak } from '../../../util/AutoResolve.js';
 import { logError, logWarning } from '../../../util/logger.js';
 import { FileResolver } from '../../../util/resolveFile.js';

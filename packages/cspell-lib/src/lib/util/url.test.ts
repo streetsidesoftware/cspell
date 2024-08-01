@@ -3,7 +3,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import { describe, expect, test } from 'vitest';
 
-import { srcDirectory } from '../../lib-cjs/pkg-info.cjs';
+import { srcDirectory } from '../pkg-info.mjs';
 import {
     cwdURL,
     getSourceDirectoryUrl,
