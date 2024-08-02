@@ -14,7 +14,9 @@ const samples = path.resolve(root, 'samples');
 const latexSamples = path.resolve(samples, 'latex');
 const failFastSamples = path.resolve(samples, 'fail-fast');
 const hiddenSamples = path.resolve(samples, 'hidden-test');
-const filesToCheck = path.resolve(root, 'fixtures/features/file-list/files-to-check.txt');
+const fixtures = path.resolve(root, 'fixtures');
+const features = path.resolve(fixtures, 'features');
+const filesToCheck = path.resolve(features, 'file-list/files-to-check.txt');
 const filesToCheckWithMissing = path.resolve(root, 'fixtures/features/file-list/files-to-check-missing.txt');
 const configSamples = path.resolve(samples, 'config');
 
@@ -72,6 +74,7 @@ describe('Linter Validation Tests', () => {
         ${[]}               | ${{ ...optionsRootCSpellJson, files: ['README.md', 'missing.txt'], dot: true, mustFindFiles: true }}   | ${oc({ errors: 1, files: 2 })} | ${oc({ errorCount: 1, errors: [expect.anything()], issues: [] })}
         ${[]}               | ${{ ...optionsRootCSpellJson, files: ['../../README.md'], dot: true }}                                 | ${oc({ errors: 0, files: 1 })} | ${oc({ errorCount: 0, errors: [], issues: [] })}
         ${[]}               | ${{ ...optionsRootCSpellJson, files: ['../../resources/patreon.png' /* skip binary */], dot: true }}   | ${oc({ errors: 0, files: 0 })} | ${oc({ errorCount: 0, errors: [], issues: [] })}
+        ${['**/*.md']}      | ${{ root: './fixtures/issue-6025', config: './fixtures/issue-6025/nested/cspell.config.yaml' }}        | ${oc({ errors: 0, files: 2 })} | ${oc({ errorCount: 0, errors: [], issues: [] })}
     `('runLint $files $options', async ({ files, options, expectedRunResult, expectedReport }) => {
         const reporter = new InMemoryReporter();
         const runResult = await runLint(new LintRequest(files, options, reporter));
