@@ -84,12 +84,22 @@ export function extractWordsFromTextOffset(text: TextOffset): Iterable<TextOffse
     return matchToTextOffset(reg, cleanTextOffset(text));
 }
 
+/**
+ * Remove Hiragana, Han, Katakana, Hangul characters from the text.
+ * @param text
+ * @returns the text with the characters removed.
+ */
 export function cleanText(text: string): string {
+    regExIgnoreCharacters.lastIndex = 0;
+    if (!regExIgnoreCharacters.test(text)) return text;
     text = text.replace(regExIgnoreCharacters, (match: string) => ' '.repeat(match.length));
     return text;
 }
 
 export function cleanTextOffset(text: TextOffset): TextOffset {
+    // Do not make a new object if the text is already clean.
+    regExIgnoreCharacters.lastIndex = 0;
+    if (!regExIgnoreCharacters.test(text.text)) return text;
     return {
         text: cleanText(text.text),
         offset: text.offset,

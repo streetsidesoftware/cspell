@@ -1,4 +1,4 @@
-import { opConcatMap, opFilter, opMap, pipe } from '@cspell/cspell-pipe/sync';
+import { opConcatMap, opFilter, pipe } from '@cspell/cspell-pipe/sync';
 import type { ParsedText } from '@cspell/cspell-types';
 import type { CachingDictionary, SearchOptions, SpellingDictionary } from 'cspell-dictionary';
 import { createCachingDictionary } from 'cspell-dictionary';
@@ -38,6 +38,11 @@ interface WordStatusInfo {
     fin: boolean;
 }
 
+interface KnownIssuesForWord {
+    possibleWord: TextOffsetRO;
+    issues: ValidationIssue[];
+}
+
 export function lineValidatorFactory(sDict: SpellingDictionary, options: ValidationOptions): LineValidator {
     const {
         minWordLength = defaultMinWordLength,
@@ -55,6 +60,7 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
     const knownWords = new Map<string, WordStatusInfo>();
 
     const setOfFlagWords = new Set(flagWords);
+    const setOfKnownIssues = new Map<string, KnownIssuesForWord>();
     const setOfKnownSuccessfulWords = new Set<string>();
     const rememberFilter =
         <T extends TextOffsetRO>(fn: (v: T) => boolean) =>
@@ -182,7 +188,32 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
             return codeWordResults;
         }
 
-        function checkPossibleWords(possibleWord: TextOffsetRO) {
+        const useKnownIssues = false;
+
+        function rebaseKnownIssues(possibleWord: TextOffsetRO, known: KnownIssuesForWord): ValidationIssue[] {
+            const { issues } = known;
+            const adjOffset = possibleWord.offset - known.possibleWord.offset;
+            return issues.map((issue) => {
+                issue = { ...issue };
+                issue.offset += adjOffset;
+                issue.line = lineSegment.line;
+                return issue;
+            });
+        }
+
+        function checkPossibleWords(possibleWord: TextOffsetRO): ValidationIssue[] {
+            const known = setOfKnownIssues.get(possibleWord.text);
+            if (known && !known.issues.length) return known.issues;
+            if (known && useKnownIssues) {
+                const adjusted = rebaseKnownIssues(possibleWord, known);
+                return adjusted;
+            }
+            const issues = _checkPossibleWords(possibleWord).map(annotateIssue);
+            setOfKnownIssues.set(possibleWord.text, { possibleWord, issues });
+            return issues;
+        }
+
+        function _checkPossibleWords(possibleWord: TextOffsetRO): ValidationIssue[] {
             if (isWordFlagged(possibleWord)) {
                 const vr: ValidationIssueRO = {
                     ...possibleWord,
@@ -218,7 +249,6 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
             extractPossibleWordsFromTextOffset(lineSegment.segment),
             opFilter(filterAlreadyChecked),
             opConcatMap(checkPossibleWords),
-            opMap(annotateIssue),
         );
         return checkedPossibleWords;
     };

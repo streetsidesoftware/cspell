@@ -351,7 +351,7 @@ function splitIntoWords(
         return br.breaks.map(c);
     }
 
-    function toTextOffset(text: string, offset: number): TextOffsetWithValid {
+    function checkTextOffset(text: string, offset: number): TextOffsetWithValid {
         const valid = has({ text, offset });
         return {
             text,
@@ -417,7 +417,7 @@ function splitIntoWords(
             // yes
             const i = best.bp[0];
             const j = best.bp[1];
-            const t = i > best.i ? toTextOffset(text.slice(best.i, i), best.i) : undefined;
+            const t = i > best.i ? checkTextOffset(text.slice(best.i, i), best.i) : undefined;
             const cost = !t || t.isFound ? 0 : t.text.length;
             const mc = maxIndex - j;
             best.c += cost;
@@ -437,12 +437,12 @@ function splitIntoWords(
             const c = makeCandidates(best.p, best.i, best.bi + 1, best.c);
             candidates.append(c);
             if (!c.length) {
-                const t = maxIndex > best.i ? toTextOffset(text.slice(best.i, maxIndex), best.i) : undefined;
+                const t = maxIndex > best.i ? checkTextOffset(text.slice(best.i, maxIndex), best.i) : undefined;
                 const cost = !t || t.isFound ? 0 : t.text.length;
                 best.c += cost;
                 best.ec = best.c;
                 best.text = t;
-                const segText = t || best.p?.text || toTextOffset('', best.i);
+                const segText = t || best.p?.text || checkTextOffset('', best.i);
                 const can = t ? { ...best, text: segText } : { ...best, ...best.p, text: segText };
                 const f = addToKnownPaths(can, undefined);
                 bestPath = !bestPath || (f && f.c < bestPath.c) ? f : bestPath;

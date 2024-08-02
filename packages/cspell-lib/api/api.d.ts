@@ -997,6 +997,11 @@ declare function extractWordsFromText(text: string): Iterable<TextOffset>;
  * Extract out whole words from a string of text.
  */
 declare function extractWordsFromTextOffset(text: TextOffset): Iterable<TextOffset>;
+/**
+ * Remove Hiragana, Han, Katakana, Hangul characters from the text.
+ * @param text
+ * @returns the text with the characters removed.
+ */
 declare function cleanText(text: string): string;
 declare function cleanTextOffset(text: TextOffset): TextOffset;
 /**
