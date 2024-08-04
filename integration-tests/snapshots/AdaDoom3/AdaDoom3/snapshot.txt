@@ -3,7 +3,7 @@ Repository: AdaDoom3/AdaDoom3
 Url: "https://github.com/AdaDoom3/AdaDoom3.git"
 Args: ["**/*.*"]
 Lines:
- CSpell: Files checked: 103, Issues found: 3226 in 98 files.
+ CSpell: Files checked: 103, Issues found: 3245 in 98 files.
  exit code: 1
 Engine/Assembly/PPC/neo-engine-cpu.adb:5:78      - Unknown word (Squirek)    -- Copyright (C) 2016 Justin Squirek
 Engine/Assembly/x86-64/neo-engine-cpu.adb:100:111   - Unknown word (POPCNT)     -- ECX_Register, 23); -- POPCNT
@@ -107,9 +107,15 @@ Engine/neo-api-openal.ads:1457:15   - Unknown word (Bufferf)               -- pr
 Engine/neo-api-openal.ads:1471:15   - Unknown word (Bufferi)               -- procedure alBufferi (bid : Int_Unsigned
 Engine/neo-api-openal.ads:1485:15   - Unknown word (Bufferfv)              -- procedure alBufferfv (bid : Int_Unsigned
 Engine/neo-api-openal.ads:1491:15   - Unknown word (Bufferiv)              -- procedure alBufferiv (bid : Int_Unsigned
+Engine/neo-api-openal.ads:1532:58   - Unknown word (Cenum)                 -- Int_Unsigned_C; -- ALCenum
 Engine/neo-api-openal.ads:1537:27   - Unknown word (devicename)            -- function alcOpenDevice (devicename : String) -- ALCchar
+Engine/neo-api-openal.ads:1537:53   - Unknown word (Cchar)                 -- devicename : String) -- ALCchar*
+Engine/neo-api-openal.ads:1543:57   - Unknown word (Cboolean)              -- Int_8_Unsigned_C -- ALCboolean
 Engine/neo-api-openal.ads:1548:30   - Unknown word (attrlist)              -- attrlist : Pointer) -- ALCint
+Engine/neo-api-openal.ads:1548:55   - Unknown word (Cint)                  -- attrlist : Pointer) -- ALCint*
+Engine/neo-api-openal.ads:1549:46   - Unknown word (Ccontext)              -- return Ptr -- ALCcontext*
 Engine/neo-api-openal.ads:1586:70   - Unknown word (Csizei)                -- -- ALCsizei
+Engine/neo-api-openal.ads:1605:58   - Unknown word (Cvoid)                 -- : Ptr;        -- ALCvoid*
 Engine/neo-api-openal.ads:1606:32   - Unknown word (samps)                 -- samps : Int_Size_C) -- ALCsizei
 Engine/neo-api-openal.ads:1609:20   - Unknown word (APIENTRY)              -- typedef ALvoid (AL_APIENTRY*PFNALBUFFERDATASTATICPROC
 Engine/neo-api-openal.ads:1609:29   - Unknown word (PFNALBUFFERDATASTATICPROC) -- ALvoid (AL_APIENTRY*PFNALBUFFERDATASTATICPROC)(const ALint,ALenum

@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["--issues-summary-report","**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2789, Issues found: 8006 in 901 files.
+ CSpell: Files checked: 2789, Issues found: 8012 in 901 files.
  exit code: 1
 django/__init__.py:12:26     - Unknown word (urlresolvers) -- Set the thread-local urlresolvers script prefix if `set
 django/apps/registry.py:134:40    - Unknown word (unconfigured) -- not ready" is due to unconfigured settings, accessing
@@ -251,6 +251,7 @@ django/contrib/gis/gdal/prototypes/srs.py:100:1     - Unknown word (islocal)    
 django/contrib/gis/gdal/prototypes/srs.py:101:1     - Unknown word (isprojected)   -- isprojected = int_output(lgdal.OSRIsProje
 django/contrib/gis/gdal/prototypes/srs.py:46:1      - Unknown word (invflattening) -- invflattening = srs_double(lgdal.OSRGetInvF
 django/contrib/gis/gdal/prototypes/srs.py:99:1      - Unknown word (isgeographic)  -- isgeographic = int_output(lgdal.OSRIsGeogr
+django/contrib/gis/gdal/prototypes/srs.py:99:33     - Unknown word (OSRIs)         -- geographic = int_output(lgdal.OSRIsGeographic, [c_void_p
 django/contrib/gis/gdal/raster/band.py:220:50    - Unknown word (ndarray)    -- isinstance(data, numpy.ndarray)
 django/contrib/gis/gdal/raster/band.py:248:30    - Unknown word (frombuffer) -- return numpy.frombuffer(
 django/contrib/gis/gdal/raster/band.py:84:15     - Unknown word (smax)       -- smin, smax, smean, sstd = c_double
@@ -634,7 +635,6 @@ django/db/models/fields/__init__.py:531:79    - Unknown word (WXXX)       -- det
 django/db/models/fields/json.py:322:7     - Unknown word (JSONI)      -- class JSONIContains(CaseInsensitiveMixin
 django/db/models/fields/json.py:401:65    - Unknown word (MDEV)       -- and ->> operators (see MDEV-13594).
 django/db/models/fields/related.py:823:63    - Unknown word (pushdown)   -- joining and subquery pushdown. The
-django/db/models/fields/related.py:888:20    - Unknown word (FK's)       -- # Internal FK's - i.e., those with a
 django/db/models/fields/related_descriptors.py:31:69     - Unknown word (unicity)    -- is checked upstream (unicity
 django/db/models/functions/datetime.py:156:35    - Unknown word (mydatetime) -- replicate this in Python: (mydatetime.isoweekday() % 7) +
 django/db/models/functions/datetime.py:241:45    - Unknown word (LOCALTIMESTAMP) -- connection, template="LOCALTIMESTAMP", **extra_context
@@ -1161,7 +1161,6 @@ tests/admin_views/models.py:1023:5    - Unknown word (rname)        -- rname = m
 tests/admin_views/models.py:1098:7    - Unknown word (Héllo)        -- class Héllo(models.Model):
 tests/admin_views/models.py:195:30    - Unknown word (Palin)      -- "leader__name": "Palin",
 tests/admin_views/models.py:506:82    - Unknown word (Žćžšđ)      -- title (with Unicode ŠĐĆŽćžšđ)"
-tests/admin_views/models.py:548:61    - Unknown word (GFKs)       -- one real use case for GFKs."
 tests/admin_views/models.py:595:5     - Unknown word (supervillain) -- supervillain = models.ForeignKey
 tests/admin_views/models.py:736:24    - Unknown word (Pography)     -- ("thai", "Thai Pography"),
 tests/admin_views/test_actions.py:187:40    - Unknown word (unchangeableobject) -- reverse("admin:admin_views_unchangeableobject_changelist"), action
@@ -1605,7 +1604,6 @@ tests/file_uploads/tests.py:377:49    - Unknown word (monkeybusiness) -- uploade
 tests/file_uploads/tests.py:660:14    - Unknown word (fileupload)     -- def test_fileupload_getlist(self):
 tests/file_uploads/tests.py:688:14    - Unknown word (fileuploads)    -- def test_fileuploads_closed_at_request_end
 tests/file_uploads/views.py:57:5      - Unknown word (largefile)  -- largefile = request.FILES["file
-tests/files/tests.py:176:25    - Unknown word (l'été)      -- content = "vive l'été\n"
 tests/files/tests.py:230:14    - Unknown word (noname)     -- def test_noname_file_default_name(self
 tests/files/tests.py:36:34     - Unknown word (Cómo)       -- UploadedFile(name="¿Cómo?", content_type="text
 tests/files/tests.py:40:25     - Unknown word (djángö)     -- f = File(None, "djángö")
@@ -1895,6 +1893,7 @@ tests/httpwrappers/tests.py:416:39    - Unknown word (idanalexjacob) -- assertEq
 tests/httpwrappers/tests.py:425:25    - Unknown word (unichr)        -- # '\xde\x9e' == unichr(1950).encode()
 tests/httpwrappers/tests.py:449:23    - Unknown word (isnt)          -- def test_iterator_isnt_rewound(self):
 tests/httpwrappers/tests.py:464:18    - Unknown word (привет)        -- r.write("привет")
+tests/httpwrappers/tests.py:486:48    - Unknown word (nbaz)          -- content, b"foo\nbar\nbaz\n")
 tests/httpwrappers/tests.py:615:25    - Unknown word (łóżko)         -- data = {"key": "łóżko"}
 tests/httpwrappers/tests.py:849:27    - Unknown word (keebler)       -- parse_cookie('keebler="E=mc2; L=\\"Loves\
 tests/httpwrappers/tests.py:863:21    - Unknown word (edgecases)     -- def test_cookie_edgecases(self):
@@ -2545,7 +2544,6 @@ tests/serializers/test_deserializedobject.py:10:9      - Unknown word (deserial)
 tests/serializers/test_json.py:106:20    - Unknown word (badpk)      -- "pk": "badpk",
 tests/serializers/test_json.py:129:26    - Unknown word (invalidint) -- "rank": "invalidint",
 tests/serializers/test_natural.py:24:72     - Unknown word (Anghor)     -- , data="Natural Key Anghor"),
-tests/serializers/test_natural.py:7:5       - Unknown word (FKAs)       -- FKAsPKNoNaturalKey,
 tests/serializers/tests.py:244:25    - Unknown word (יוניקוד)    -- unicode_name = "יוניקוד"
 tests/serializers/tests.py:322:21    - Unknown word (Spartak)    -- team_str = "Spartak Moskva"
 tests/serializers/tests.py:324:24    - Unknown word (Soslan)     -- player.name = "Soslan Djanaev"
@@ -2672,6 +2670,7 @@ tests/template_tests/syntax_tests/i18n/test_underscore_syntax.py:60:30     - Unk
 tests/template_tests/syntax_tests/i18n/test_underscore_syntax.py:88:35     - Unknown word (Passwort)   -- assertEqual(output, "Passwort")
 tests/template_tests/syntax_tests/test_autoescape.py:132:25    - Unknown word (stringiterations) -- @setup({"autoescape-stringiterations01": "{% for l in var
 tests/template_tests/syntax_tests/test_autoescape.py:95:25     - Unknown word (filtertag)  -- "autoescape-filtertag01": (
+tests/template_tests/syntax_tests/test_basic.py:50:41     - Unknown word (INVALI)     -- assertEqual(output, "asINVALIDdf")
 tests/template_tests/syntax_tests/test_basic.py:90:39     - Unknown word (otherclass) -- basic-syntax10": "{{ var.otherclass.method }}"})
 tests/template_tests/syntax_tests/test_basic.py:98:39     - Unknown word (blech)      -- basic-syntax11": "{{ var.blech }}"})
 tests/template_tests/syntax_tests/test_cache.py:122:25    - Unknown word (freddled)   -- "Oh freddled gruntbuggly/Thy micturations
@@ -2783,6 +2782,7 @@ tests/utils_tests/test_datastructures.py:244:24    - Unknown word (unpackable) -
 tests/utils_tests/test_datastructures.py:274:14    - Unknown word (dictwrapper) -- def test_dictwrapper(self):
 tests/utils_tests/test_dateformat.py:147:14    - Unknown word (futuredates) -- def test_futuredates(self):
 tests/utils_tests/test_encoding.py:127:23    - Unknown word (xfctest)    -- data = b"test\xfctest\xfctest\xfc"
+tests/utils_tests/test_encoding.py:136:70    - Unknown word (Ctest)      -- unicode(data), b"test%FCtest%FCtest%FC")
 tests/utils_tests/test_encoding.py:149:38    - Unknown word (чубака)     -- filepath_to_uri("upload\\чубака.mp4"),
 tests/utils_tests/test_encoding.py:158:21    - Unknown word (rosé)       -- ("red%09rosé#red", "red%09ros%C3
 tests/utils_tests/test_encoding.py:159:25    - Unknown word (Jürgen)     -- ("/blog/for/Jürgen Münster/", "/blog/for
