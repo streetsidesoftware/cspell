@@ -156,11 +156,39 @@ describe('docValidator', () => {
         },
     );
 
+    // cspell:disable
+    const expectedIssues = {
+        WOX_Permissions: [
+            'Versionm',
+            'explicitily',
+            'instancename',
+            'Dbase',
+            'dbase',
+            'Dbase',
+            'enumroles',
+            'Dbase',
+            'foregroundcolor',
+            'Dbase',
+            'explicitily',
+            'Dbase',
+            'permissionstate',
+            'permissiontype',
+            'objectname',
+            'Lsvr',
+            'Lsvr',
+            'foregroundcolor',
+            'adgroupmember',
+            'foregroundcolor',
+        ],
+    };
+    // cspell:enable
+
     test.each`
-        filename                               | maxDuplicateProblems | expectedIssues | expectedRawIssues
-        ${tFix('issues/issue-5222/README.md')} | ${undefined}         | ${[]}          | ${undefined}
+        filename                                               | maxDuplicateProblems | expectedIssues                    | expectedRawIssues
+        ${tFix('issues/issue-5222/README.md')}                 | ${undefined}         | ${[]}                             | ${undefined}
+        ${fix('sample-files-with-issues/WOX_Permissions.ps1')} | ${undefined}         | ${expectedIssues.WOX_Permissions} | ${expectedIssues.WOX_Permissions}
     `(
-        'checkDocument $filename $maxDuplicateProblems',
+        'checkDocument group2 $filename $maxDuplicateProblems',
         async ({ filename, maxDuplicateProblems, expectedIssues, expectedRawIssues }) => {
             const doc = await loadDoc(filename);
             const dVal = new DocumentValidator(doc, { generateSuggestions: false }, { maxDuplicateProblems });

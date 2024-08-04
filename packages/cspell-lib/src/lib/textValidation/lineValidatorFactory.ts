@@ -125,9 +125,7 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
         return issue;
     }
 
-    const isFlaggedOrMinLength = rememberFilter(
-        (wo: ValidationIssue) => wo.text.length >= minWordLength || !!wo.isFlagged,
-    );
+    const isFlaggedOrMinLength = (wo: ValidationIssue) => wo.text.length >= minWordLength || !!wo.isFlagged;
 
     const isFlaggedOrNotFound = rememberFilter((wo: ValidationIssue) => wo.isFlagged || !wo.isFound);
     const isNotRepeatingChar = rememberFilter((wo: ValidationIssue) => !RxPat.regExRepeatedChar.test(wo.text));
@@ -188,8 +186,6 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
             return codeWordResults;
         }
 
-        const useKnownIssues = false;
-
         function rebaseKnownIssues(possibleWord: TextOffsetRO, known: KnownIssuesForWord): ValidationIssue[] {
             const { issues } = known;
             const adjOffset = possibleWord.offset - known.possibleWord.offset;
@@ -203,8 +199,8 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
 
         function checkPossibleWords(possibleWord: TextOffsetRO): ValidationIssue[] {
             const known = setOfKnownIssues.get(possibleWord.text);
-            if (known && !known.issues.length) return known.issues;
-            if (known && useKnownIssues) {
+            if (known) {
+                if (!known.issues.length) return known.issues;
                 const adjusted = rebaseKnownIssues(possibleWord, known);
                 return adjusted;
             }
