@@ -5,7 +5,7 @@ Args: '["**/*.*"]'
 Summary:
   files: 103
   filesWithIssues: 98
-  issues: 3226
+  issues: 3245
   errors: 0
 Errors: []
 
@@ -134,9 +134,15 @@ issues:
   - "Engine/neo-api-openal.ads:1471:15       Bufferi                             U       procedure alBufferi (bid : Int_Unsigned"
   - "Engine/neo-api-openal.ads:1485:15       Bufferfv                            U       procedure alBufferfv (bid : Int_Unsigned"
   - "Engine/neo-api-openal.ads:1491:15       Bufferiv                            U       procedure alBufferiv (bid : Int_Unsigned"
+  - "Engine/neo-api-openal.ads:1532:58       Cenum                               U       Int_Unsigned_C; -- ALCenum"
   - "Engine/neo-api-openal.ads:1537:27       devicename                          U       function alcOpenDevice (devicename : String) -- ALCchar"
+  - "Engine/neo-api-openal.ads:1537:53       Cchar                               U       devicename : String) -- ALCchar*"
+  - "Engine/neo-api-openal.ads:1543:57       Cboolean                            U       Int_8_Unsigned_C -- ALCboolean"
   - "Engine/neo-api-openal.ads:1548:30       attrlist                            U       attrlist : Pointer) -- ALCint"
+  - "Engine/neo-api-openal.ads:1548:55       Cint                                U       attrlist : Pointer) -- ALCint*"
+  - "Engine/neo-api-openal.ads:1549:46       Ccontext                            U       return Ptr -- ALCcontext*"
   - "Engine/neo-api-openal.ads:1586:70       Csizei                              U       -- ALCsizei"
+  - "Engine/neo-api-openal.ads:1605:58       Cvoid                               U       : Ptr; -- ALCvoid*"
   - "Engine/neo-api-openal.ads:1606:32       samps                               U       samps : Int_Size_C) -- ALCsizei"
   - "Engine/neo-api-openal.ads:1609:20       APIENTRY                            U       typedef ALvoid (AL_APIENTRY*PFNALBUFFERDATASTATICPROC"
   - "Engine/neo-api-openal.ads:1609:29       PFNALBUFFERDATASTATICPROC           U       ALvoid (AL_APIENTRY*PFNALBUFFERDATASTATICPROC)(const ALint,ALenum"

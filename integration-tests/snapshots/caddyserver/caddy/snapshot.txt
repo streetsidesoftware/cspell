@@ -3,7 +3,7 @@ Repository: caddyserver/caddy
 Url: "https://github.com/caddyserver/caddy.git"
 Args: ["**/*.go"]
 Lines:
- CSpell: Files checked: 275, Issues found: 4105 in 255 files.
+ CSpell: Files checked: 275, Issues found: 4109 in 255 files.
  exit code: 1
 admin.go:1371:21   - Unknown word (pidfile)     -- // PIDFile writes a pidfile to the file at filename
 admin.go:331:29    - Unknown word (infosec)     -- security checks, the infosec community assures me
@@ -48,6 +48,7 @@ caddyconfig/caddyfile/parse.go:726:21    - Unknown word (curlies)    -- // block
 caddyconfig/caddyfile/parse_test.go:665:13    - Unknown word (foofoobarbar) -- expect: "foofoobarbar",
 caddyconfig/caddyfile/parse_test.go:677:13    - Unknown word (foobarfoobar) -- expect: "foobarfoobar",
 caddyconfig/caddyfile/parse_test.go:689:13    - Unknown word (foobarbaz)    -- expect: "foobarbaz",
+caddyconfig/caddyfile/parse_test.go:693:23    - Unknown word (baz)          -- expect: "foo$FOOBARbaz", // should not chain
 caddyconfig/httpcaddyfile/addresses.go:154:2     - Unknown word (sbaddrs)    -- sbaddrs := make([]sbAddrAssociation
 caddyconfig/httpcaddyfile/addresses.go:155:12    - Unknown word (sblocks)    -- for addr, sblocks := range addrToServerBlocks
 caddyconfig/httpcaddyfile/addresses.go:166:23    - Unknown word (Sblocks)    -- for otherAddr, otherSblocks := range addrToServerBlocks
@@ -314,9 +315,10 @@ modules/caddyhttp/reverseproxy/httptransport_test.go:13:712    - Unknown word (N
 modules/caddyhttp/reverseproxy/httptransport_test.go:13:752    - Unknown word (NVHRMEBTADAQH)  -- QDiPFD/THwE4K8TZXDjAMBgNVHRMEBTADAQH/MAsGA1UdDwQEAwIBBjANBgkqhkiG
 modules/caddyhttp/reverseproxy/httptransport_test.go:13:77     - Unknown word (Ihvc)       -- 0x8BOCvE2Vw4wDQYJKoZIhvcNAQELBQAwFjEUMBIGA1UEAwwLRWFze
 modules/caddyhttp/reverseproxy/httptransport_test.go:13:786    - Unknown word (Bgkqhki)        -- MAsGA1UdDwQEAwIBBjANBgkqhkiG9w0BAQsFAAOCAQEAKB3V
+modules/caddyhttp/reverseproxy/httptransport_test.go:13:797    - Unknown word (BAQs)           -- UdDwQEAwIBBjANBgkqhkiG9w0BAQsFAAOCAQEAKB3V4HIzoiO
 modules/caddyhttp/reverseproxy/httptransport_test.go:13:801    - Unknown word (FAAOCAQEAKB)    -- UdDwQEAwIBBjANBgkqhkiG9w0BAQsFAAOCAQEAKB3V4HIzoiO/Ch6WMj9bLJ
 modules/caddyhttp/reverseproxy/httptransport_test.go:13:81     - Unknown word (NAQELBQ)    -- BOCvE2Vw4wDQYJKoZIhvcNAQELBQAwFjEUMBIGA1UEAwwLRWFzeS
-modules/caddyhttp/reverseproxy/httptransport_test.go:13:817    - Unknown word (zoi)            -- BAQsFAAOCAQEAKB3V4HIzoiO/Ch6WMj9bLJ2FGbpkMrcb
+modules/caddyhttp/reverseproxy/httptransport_test.go:13:816    - Unknown word (Izoi)           -- w0BAQsFAAOCAQEAKB3V4HIzoiO/Ch6WMj9bLJ2FGbpkMrcb
 modules/caddyhttp/reverseproxy/httptransport_test.go:13:834    - Unknown word (Gbpk)           -- V4HIzoiO/Ch6WMj9bLJ2FGbpkMrcb/Eq01hT5zcfKD66lVS
 modules/caddyhttp/reverseproxy/httptransport_test.go:13:838    - Unknown word (Mrcb)           -- HIzoiO/Ch6WMj9bLJ2FGbpkMrcb/Eq01hT5zcfKD66lVS1MlK
 modules/caddyhttp/reverseproxy/httptransport_test.go:13:885    - Unknown word (qmrmtdwr)       -- cRL446Z2b2KDP1oFyVs+qmrmtdwrWgD+nfe2sBmmIHo9m9KygMkEOfG

@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: [".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 1945, Issues found: 1735 in 327 files.
+ CSpell: Files checked: 1945, Issues found: 1755 in 330 files.
  exit code: 1
 Makefile.js:132:88    - Unknown word (ined)               -- followed by the string "ined".
 Makefile.js:343:12    - Unknown word (gensite)            -- target.gensite();
@@ -324,12 +324,12 @@ tests/lib/linter/source-code-fixer.js:77:19     - Unknown word (removeend)    --
 tests/lib/options.js:359:71    - Unknown word (morerules)  -- trcOptions.parse("--rulesdir /morerules");
 tests/lib/rule-tester/rule-tester.js:2750:33   - Unknown word (outpt)      -- outpt: "var baz;"
 tests/lib/rule-tester/rule-tester.js:3478:15   - Unknown word (Subclassing) -- describe("Subclassing", () => {
-tests/lib/rules/array-bracket-spacing.js:51:47     - Unknown word (n'qux)      -- [{\n'bar': 'baz', \n'qux': [{ 'bar': 'baz' }
 tests/lib/rules/array-bracket-spacing.js:51:76     - Unknown word (n'quxx)     -- { 'bar': 'baz' }], \n'quxx': 1 \n}]", options:
 tests/lib/rules/array-element-newline.js:45:78     - Unknown word (nosomething) -- ,\nfunction bar() {\nosomething();\n}\n];",
 tests/lib/rules/arrow-body-style.js:27:38     - Unknown word (nretv)      -- = (retv, name) => {\nretv[name] = true;\nreturn
 tests/lib/rules/brace-style.js:103:35    - Unknown word (fontstack)  -- code: "if (tag === 1) fontstack.name = pbf.readString
 tests/lib/rules/brace-style.js:32:44     - Unknown word (Varint)     -- glyph.id = pbf.readVarint();\nelse if (tag ==
+tests/lib/rules/brace-style.js:451:77    - Unknown word (nqux)       -- \nbaz();\n}\nelse {\nqux();\n}",
 tests/lib/rules/capitalized-comments.js:344:22    - Unknown word (über)       -- code: "//über",
 tests/lib/rules/capitalized-comments.js:345:24    - Unknown word (Über)       -- output: "//Über",
 tests/lib/rules/capitalized-comments.js:380:23    - Unknown word (𐳡𐳡𐳡)     -- code: "/* 𐳡𐳡𐳡 */", // right-to-left
@@ -340,6 +340,7 @@ tests/lib/rules/capitalized-comments.js:573:38    - Unknown word (Citi)       --
 tests/lib/rules/comma-spacing.js:22:10     - Unknown word (myfunc)     -- "myfunc(404, true/* bla bla
 tests/lib/rules/comma-style.js:268:38    - Unknown word (fifi)       -- "const arr = [\n ,'fifi' \n]",
 tests/lib/rules/comma-style.js:69:36     - Unknown word (nsnd)       -- code: "var ar ={fst:1,\nsnd: [1,\n2]};",
+tests/lib/rules/function-paren-newline.js:945:31    - Unknown word (nqwe)       -- function baz(\nqwe, \nfoo,
 tests/lib/rules/getter-return.js:207:70    - Unknown word (getfoo)     -- bar', { get: function getfoo (){}});",
 tests/lib/rules/handle-callback-err.js:52:99     - Unknown word (rror)       -- options: ["^.+(e|E)rror$"] }
 tests/lib/rules/id-blacklist.js:141:41    - Unknown word (mydate)     -- ["array", "date", "mydate", "myarray", "new",
@@ -351,6 +352,7 @@ tests/lib/rules/id-length.js:625:29    - Unknown word (NOTMATCHED) -- code: "fun
 tests/lib/rules/id-match.js:25:30     - Unknown word (Matthieu)   -- code: "__foo = \"Matthieu\"",
 tests/lib/rules/id-match.js:34:20     - Unknown word (firstname)  -- code: "firstname = \"Matthieu\"",
 tests/lib/rules/id-match.js:46:34     - Unknown word (Larcher)    -- code: "last_Name = \"Larcher\"",
+tests/lib/rules/indent-legacy.js:1553:41   - Unknown word (tqux)       -- t\t\t \t\t\t  \t   \tqux();\n" +
 tests/lib/rules/indent-legacy.js:1667:18   - Unknown word (barqux)     -- " barqux, bazqux);",
 tests/lib/rules/indent-legacy.js:1667:26   - Unknown word (bazqux)     -- " barqux, bazqux);",
 tests/lib/rules/indent-legacy.js:329:16    - Unknown word (otherdata)  -- " otherdata.forEach(function(zero
@@ -369,6 +371,7 @@ tests/lib/rules/no-constructor-return.js:32:28     - Unknown word (Kumiko)     -
 tests/lib/rules/no-constructor-return.js:32:35     - Unknown word (Oumae)      -- code: "return 'Kumiko Oumae'",
 tests/lib/rules/no-dupe-else-if.js:56:61     - Unknown word (subconditions) -- may contain redundant subconditions, but the branch can
 tests/lib/rules/no-duplicate-imports.js:94:32     - Unknown word (modns)      -- code: "import * as modns from \"lodash-es\";
+tests/lib/rules/no-else-return.js:164:77    - Unknown word (nqaz)       -- bar \nelse { baz() } \nqaz() }",
 tests/lib/rules/no-eval.js:44:29     - Unknown word (noneval)    -- { code: "globalThis.noneval('foo')", languageOptions
 tests/lib/rules/no-extra-parens.js:783:32    - Unknown word (ipaddr)     -- code: "const net = ipaddr.parseCIDR(/** @type
 tests/lib/rules/no-inline-comments.js:131:37    - Unknown word (otherthing) -- ignorePattern: "otherthing"
