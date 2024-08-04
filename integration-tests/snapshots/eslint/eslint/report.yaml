@@ -4,8 +4,8 @@ Url: https://github.com/eslint/eslint
 Args: '[".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]'
 Summary:
   files: 1945
-  filesWithIssues: 327
-  issues: 1735
+  filesWithIssues: 330
+  issues: 1755
   errors: 0
 Errors: []
 
@@ -329,12 +329,12 @@ issues:
   - "tests/lib/options.js:359:71         morerules       U       trcOptions.parse(\"--rulesdir /morerules\");"
   - "tests/lib/rule-tester/rule-tester.js:2750:33        outpt           U       outpt: \"var baz;\""
   - "tests/lib/rule-tester/rule-tester.js:3478:15        Subclassing     U       describe(\"Subclassing\", () => {"
-  - "tests/lib/rules/array-bracket-spacing.js:51:47          n'qux       U       [{\\n'bar': 'baz', \\n'qux': [{ 'bar': 'baz' }"
   - "tests/lib/rules/array-bracket-spacing.js:51:76          n'quxx      U       { 'bar': 'baz' }], \\n'quxx': 1 \\n}]\", options:"
   - "tests/lib/rules/array-element-newline.js:45:78          nosomething     U       ,\\nfunction bar() {\\nosomething();\\n}\\n];\","
   - "tests/lib/rules/arrow-body-style.js:27:38       nretv       U       = (retv, name) => {\\nretv[name] = true;\\nreturn"
   - "tests/lib/rules/brace-style.js:32:44        Varint          U       glyph.id = pbf.readVarint();\\nelse if (tag =="
   - "tests/lib/rules/brace-style.js:103:35       fontstack       U       code: \"if (tag === 1) fontstack.name = pbf.readString"
+  - "tests/lib/rules/brace-style.js:451:77       nqux            U       \\nbaz();\\n}\\nelse {\\nqux();\\n}\","
   - "tests/lib/rules/capitalized-comments.js:344:22      über        U       code: \"//über\","
   - "tests/lib/rules/capitalized-comments.js:345:24      Über        U       output: \"//Über\","
   - "tests/lib/rules/capitalized-comments.js:380:23      𐳡𐳡𐳡      U       code: \"/* 𐳡𐳡𐳡 */\", // right-to-left"
@@ -345,6 +345,7 @@ issues:
   - "tests/lib/rules/comma-spacing.js:22:10          myfunc      U       \"myfunc(404, true/* bla bla"
   - "tests/lib/rules/comma-style.js:69:36        nsnd    U       code: \"var ar ={fst:1,\\nsnd: [1,\\n2]};\","
   - "tests/lib/rules/comma-style.js:268:38       fifi    U       \"const arr = [\\n ,'fifi' \\n]\","
+  - "tests/lib/rules/function-paren-newline.js:945:31        nqwe    U       function baz(\\nqwe, \\nfoo,"
   - "tests/lib/rules/getter-return.js:207:70         getfoo      U       bar', { get: function getfoo (){}});\","
   - "tests/lib/rules/handle-callback-err.js:52:99        rror    U       options: [\"^.+(e|E)rror$\"] }"
   - "tests/lib/rules/id-blacklist.js:69:70       bingg           U       ba\", \"barr\", \"bazz\", \"bingg\"]"
@@ -358,6 +359,7 @@ issues:
   - "tests/lib/rules/id-match.js:46:34       Larcher         U       code: \"last_Name = \\\"Larcher\\\"\","
   - "tests/lib/rules/indent-legacy.js:329:16         otherdata       U       \" otherdata.forEach(function(zero"
   - "tests/lib/rules/indent-legacy.js:940:46         xfilter         U       function create (id, xfilter, rawType,\\n\" +"
+  - "tests/lib/rules/indent-legacy.js:1553:41        tqux            U       t\\t\\t \\t\\t\\t \\t \\tqux();\\n\" +"
   - "tests/lib/rules/indent-legacy.js:1667:18        barqux          U       \" barqux, bazqux);\","
   - "tests/lib/rules/indent-legacy.js:1667:26        bazqux          U       \" barqux, bazqux);\","
   - "tests/lib/rules/indent.js:409:17        lmnn        U       lmnn = [{"
@@ -374,6 +376,7 @@ issues:
   - "tests/lib/rules/no-constructor-return.js:32:35          Oumae       U       code: \"return 'Kumiko Oumae'\","
   - "tests/lib/rules/no-dupe-else-if.js:56:61        subconditions       U       may contain redundant subconditions, but the branch can"
   - "tests/lib/rules/no-duplicate-imports.js:94:32       modns       U       code: \"import * as modns from \\\"lodash-es\\\";"
+  - "tests/lib/rules/no-else-return.js:164:77        nqaz    U       bar \\nelse { baz() } \\nqaz() }\","
   - "tests/lib/rules/no-eval.js:44:29        noneval     U       { code: \"globalThis.noneval('foo')\", languageOptions"
   - "tests/lib/rules/no-extra-parens.js:783:32       ipaddr      U       code: \"const net = ipaddr.parseCIDR(/** @type"
   - "tests/lib/rules/no-inline-comments.js:131:37        otherthing      U       ignorePattern: \"otherthing\""
@@ -869,7 +872,6 @@ issuesSummary:
   - "text: myparser, count: 2, files: 1,"
   - "text: myplugin, count: 2, files: 1,"
   - "text: mysafereg, count: 1, files: 1,"
-  - "text: n'qux, count: 3, files: 1,"
   - "text: n'quxx, count: 3, files: 1,"
   - "text: Nandinagari, count: 1, files: 1,"
   - "text: nashorn, count: 4, files: 3,"
@@ -909,6 +911,9 @@ issuesSummary:
   - "text: notoctal, count: 2, files: 1,"
   - "text: notregbutstring, count: 5, files: 1,"
   - "text: npmjs, count: 1, files: 1,"
+  - "text: nqaz, count: 2, files: 1,"
+  - "text: nqux, count: 10, files: 2,"
+  - "text: nqwe, count: 1, files: 1,"
   - "text: nretv, count: 3, files: 1,"
   - "text: nrvtbfux, count: 1, files: 1,"
   - "text: nsnd, count: 5, files: 1,"
@@ -1042,6 +1047,7 @@ issuesSummary:
   - "text: toggleindex, count: 4, files: 2,"
   - "text: togglenav, count: 2, files: 1,"
   - "text: toint, count: 1, files: 1,"
+  - "text: tqux, count: 10, files: 2,"
   - "text: Traceur, count: 1, files: 1,"
   - "text: triaging, count: 5, files: 2,"
   - "text: Triaging, count: 5, files: 1,"

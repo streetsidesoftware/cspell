@@ -5,7 +5,7 @@ Args: '["**/*.go"]'
 Summary:
   files: 275
   filesWithIssues: 255
-  issues: 4105
+  issues: 4109
   errors: 0
 Errors: []
 
@@ -50,6 +50,7 @@ issues:
   - "caddyconfig/caddyfile/parse_test.go:665:13      foofoobarbar    U       expect: \"foofoobarbar\","
   - "caddyconfig/caddyfile/parse_test.go:677:13      foobarfoobar    U       expect: \"foobarfoobar\","
   - "caddyconfig/caddyfile/parse_test.go:689:13      foobarbaz       U       expect: \"foobarbaz\","
+  - "caddyconfig/caddyfile/parse_test.go:693:23      baz             U       expect: \"foo$FOOBARbaz\", // should not chain"
   - "caddyconfig/caddyfile/parse.go:391:13       elee        U       // TODO(elee1766): we don't enter"
   - "caddyconfig/caddyfile/parse.go:725:36       Curlies     U       parser) blockTokens(retainCurlies bool) ([]Token, error"
   - "caddyconfig/caddyfile/parse.go:726:21       curlies     U       // block must have curlies."
@@ -311,8 +312,9 @@ issues:
   - "modules/caddyhttp/reverseproxy/httptransport_test.go:13:712         NBIEN               U       GqQYMBYxFDASBgNVBAMMC0Vhc3ktUlNBIENBghR8hE5uNY1QDiPFD/THwE"
   - "modules/caddyhttp/reverseproxy/httptransport_test.go:13:752         NVHRMEBTADAQH       U       QDiPFD/THwE4K8TZXDjAMBgNVHRMEBTADAQH/MAsGA1UdDwQEAwIBBjANBgkqhkiG"
   - "modules/caddyhttp/reverseproxy/httptransport_test.go:13:786         Bgkqhki             U       MAsGA1UdDwQEAwIBBjANBgkqhkiG9w0BAQsFAAOCAQEAKB3V"
+  - "modules/caddyhttp/reverseproxy/httptransport_test.go:13:797         BAQs                U       UdDwQEAwIBBjANBgkqhkiG9w0BAQsFAAOCAQEAKB3V4HIzoiO"
   - "modules/caddyhttp/reverseproxy/httptransport_test.go:13:801         FAAOCAQEAKB         U       UdDwQEAwIBBjANBgkqhkiG9w0BAQsFAAOCAQEAKB3V4HIzoiO/Ch6WMj9bLJ"
-  - "modules/caddyhttp/reverseproxy/httptransport_test.go:13:817         zoi                 U       BAQsFAAOCAQEAKB3V4HIzoiO/Ch6WMj9bLJ2FGbpkMrcb"
+  - "modules/caddyhttp/reverseproxy/httptransport_test.go:13:816         Izoi                U       w0BAQsFAAOCAQEAKB3V4HIzoiO/Ch6WMj9bLJ2FGbpkMrcb"
   - "modules/caddyhttp/reverseproxy/httptransport_test.go:13:834         Gbpk                U       V4HIzoiO/Ch6WMj9bLJ2FGbpkMrcb/Eq01hT5zcfKD66lVS"
   - "modules/caddyhttp/reverseproxy/httptransport_test.go:13:838         Mrcb                U       HIzoiO/Ch6WMj9bLJ2FGbpkMrcb/Eq01hT5zcfKD66lVS1MlK"
   - "modules/caddyhttp/reverseproxy/httptransport_test.go:13:885         qmrmtdwr            U       cRL446Z2b2KDP1oFyVs+qmrmtdwrWgD+nfe2sBmmIHo9m9KygMkEOfG"

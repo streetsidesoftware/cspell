@@ -1,3 +1,5 @@
+import assert from 'node:assert';
+
 import { opConcatMap, opFilter, pipe } from '@cspell/cspell-pipe/sync';
 import type { ParsedText } from '@cspell/cspell-types';
 import type { CachingDictionary, SearchOptions, SpellingDictionary } from 'cspell-dictionary';
@@ -125,10 +127,7 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
         return issue;
     }
 
-    const isFlaggedOrMinLength = rememberFilter(
-        (wo: ValidationIssue) => wo.text.length >= minWordLength || !!wo.isFlagged,
-    );
-
+    const isFlaggedOrMinLength = (wo: ValidationIssue) => wo.text.length >= minWordLength || !!wo.isFlagged;
     const isFlaggedOrNotFound = rememberFilter((wo: ValidationIssue) => wo.isFlagged || !wo.isFound);
     const isNotRepeatingChar = rememberFilter((wo: ValidationIssue) => !RxPat.regExRepeatedChar.test(wo.text));
 
@@ -151,18 +150,54 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
         return issue;
     }
 
+    const regExUpperCaseWithTrailingCommonEnglishSuffix =
+        /^([\p{Lu}\p{M}]{2,})['’]?(?:s|ing|ies|es|ings|ize|ed|ning)$/u; // cspell:disable-line
+    const regExpIsLetter = /\p{L}/u;
+
     const fn: LineValidatorFn = (lineSegment: LineSegment) => {
+        const line = lineSegment.line;
+
+        function isWordTooShort(word: TextOffsetRO, ignoreSuffix = false): boolean {
+            if (word.text.length >= minWordLength) return false;
+            const offset = word.offset - line.offset;
+            assert.equal(line.text.slice(offset, offset + word.text.length), word.text);
+            const prefix = [...line.text.slice(Math.max(0, offset - 2), offset)];
+            const hasLetterPrefix = !!prefix.length && regExpIsLetter.test(prefix[prefix.length - 1]);
+            if (hasLetterPrefix) return false;
+            if (ignoreSuffix) return true;
+            const suffix = [...line.text.slice(offset + word.text.length, offset + word.text.length + 2)];
+            const hasLetterSuffix = !!suffix.length && regExpIsLetter.test(suffix[0]);
+            return !hasLetterSuffix;
+        }
+
         function splitterIsValid(word: TextOffsetRO): boolean {
-            return (
-                setOfKnownSuccessfulWords.has(word.text) ||
-                (!isWordFlagged(word) && isWordValidWithEscapeRetry(hasDict, word, lineSegment.line))
-            );
+            if (setOfKnownSuccessfulWords.has(word.text)) return true;
+            if (isWordFlagged(word)) return false;
+            if (isWordValidWithEscapeRetry(hasDict, word, lineSegment.line)) return true;
+            if (isWordTooShort(word)) return true;
+            return isAllCapsWithTrailingCommonEnglishSuffixOk(word);
+        }
+
+        function isAllCapsWithTrailingCommonEnglishSuffixOk(tWord: TextOffsetRO): boolean {
+            if (!regExUpperCaseWithTrailingCommonEnglishSuffix.test(tWord.text)) return false;
+            const m = tWord.text.match(regExUpperCaseWithTrailingCommonEnglishSuffix);
+            if (!m) return false;
+            const offset = tWord.offset;
+            const v = { offset, text: m[1], line };
+            const check = checkWord(v);
+            if (check.isFlagged) return false;
+            if (check.isFound) return true;
+            if (isWordTooShort(v, true)) return true;
+            return false;
         }
 
         function checkFullWord(vr: ValidationIssueRO): Iterable<ValidationIssueRO> {
             if (vr.isFlagged) {
                 return [vr];
             }
+
+            // English exceptions :-(
+            if (isAllCapsWithTrailingCommonEnglishSuffixOk(vr)) return [];
 
             const codeWordResults: ValidationIssueRO[] = [];
 
@@ -188,8 +223,6 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
             return codeWordResults;
         }
 
-        const useKnownIssues = false;
-
         function rebaseKnownIssues(possibleWord: TextOffsetRO, known: KnownIssuesForWord): ValidationIssue[] {
             const { issues } = known;
             const adjOffset = possibleWord.offset - known.possibleWord.offset;
@@ -203,8 +236,8 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
 
         function checkPossibleWords(possibleWord: TextOffsetRO): ValidationIssue[] {
             const known = setOfKnownIssues.get(possibleWord.text);
-            if (known && !known.issues.length) return known.issues;
-            if (known && useKnownIssues) {
+            if (known) {
+                if (!known.issues.length) return known.issues;
                 const adjusted = rebaseKnownIssues(possibleWord, known);
                 return adjusted;
             }
@@ -237,7 +270,14 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
             if (mismatches.length) {
                 // Try the more expensive word splitter
                 const splitResult = split(lineSegment.segment, possibleWord.offset, splitterIsValid);
-                const nonMatching = splitResult.words.filter((w) => !w.isFound);
+                const nonMatching = splitResult.words
+                    .filter((w) => !w.isFound)
+                    .filter((w) => {
+                        const m = w.text.match(regExUpperCaseWithTrailingCommonEnglishSuffix);
+                        if (!m) return true;
+                        const v = checkWord({ ...w, text: m[1], line: lineSegment.line });
+                        return v.isFlagged || !v.isFound;
+                    });
                 if (nonMatching.length < mismatches.length) {
                     return nonMatching.map((w) => ({ ...w, line: lineSegment.line })).map(annotateIsFlagged);
                 }

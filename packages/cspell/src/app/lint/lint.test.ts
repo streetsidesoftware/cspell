@@ -20,12 +20,6 @@ const filesToCheck = path.resolve(features, 'file-list/files-to-check.txt');
 const filesToCheckWithMissing = path.resolve(root, 'fixtures/features/file-list/files-to-check-missing.txt');
 const configSamples = path.resolve(samples, 'config');
 
-// console.error('%o', {
-//     root,
-//     samples,
-//     filesToCheckWithMissing,
-// });
-
 const oc = <T>(obj: T) => expect.objectContaining(obj);
 const j = path.join;
 
