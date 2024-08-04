@@ -126,7 +126,6 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
     }
 
     const isFlaggedOrMinLength = (wo: ValidationIssue) => wo.text.length >= minWordLength || !!wo.isFlagged;
-
     const isFlaggedOrNotFound = rememberFilter((wo: ValidationIssue) => wo.isFlagged || !wo.isFound);
     const isNotRepeatingChar = rememberFilter((wo: ValidationIssue) => !RxPat.regExRepeatedChar.test(wo.text));
 
@@ -149,6 +148,8 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
         return issue;
     }
 
+    const regExUpperCaseWithTrailingCommonEnglishSuffix = /^([\p{Lu}\p{M}]+)['’](?:s|ing|ies|es|ings|ed|ning)$/u;
+
     const fn: LineValidatorFn = (lineSegment: LineSegment) => {
         function splitterIsValid(word: TextOffsetRO): boolean {
             return (
@@ -160,6 +161,18 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
         function checkFullWord(vr: ValidationIssueRO): Iterable<ValidationIssueRO> {
             if (vr.isFlagged) {
                 return [vr];
+            }
+
+            // English exceptions :-(
+            if (regExUpperCaseWithTrailingCommonEnglishSuffix.test(vr.text)) {
+                const m = vr.text.match(regExUpperCaseWithTrailingCommonEnglishSuffix);
+                if (m) {
+                    const v = { ...vr, text: m[1] };
+                    annotateIsFlagged(v);
+                    if (!isFlaggedOrMinLength(v)) {
+                        return [];
+                    }
+                }
             }
 
             const codeWordResults: ValidationIssueRO[] = [];
