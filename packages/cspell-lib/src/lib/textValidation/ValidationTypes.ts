@@ -38,7 +38,9 @@ export type ValidationIssueRO = Readonly<ValidationIssue>;
 export type LineValidatorFn = (line: LineSegment) => Iterable<ValidationIssue>;
 
 export interface LineSegment {
+    /** A line from the document, the offset is relative to the beginning of the document. */
     line: TextOffsetRO;
+    /** A segment of text from the line, the offset is relative to the beginning of the document. */
     segment: TextOffsetRO;
 }
 
