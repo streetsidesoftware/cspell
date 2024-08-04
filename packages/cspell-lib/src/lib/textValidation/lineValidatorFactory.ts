@@ -151,7 +151,7 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
     }
 
     const regExUpperCaseWithTrailingCommonEnglishSuffix =
-        /^([\p{Lu}\p{M}]{2,})['’]?(?:s|ing|ies|es|ings|ize|ed|ning)$/u;
+        /^([\p{Lu}\p{M}]{2,})['’]?(?:s|ing|ies|es|ings|ize|ed|ning)$/u; // cspell:disable-line
     const regExpIsLetter = /\p{L}/u;
 
     const fn: LineValidatorFn = (lineSegment: LineSegment) => {
