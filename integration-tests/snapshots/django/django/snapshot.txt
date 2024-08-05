@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["--issues-summary-report","**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2789, Issues found: 8012 in 901 files.
+ CSpell: Files checked: 2794, Issues found: 8017 in 902 files.
  exit code: 1
 django/__init__.py:12:26     - Unknown word (urlresolvers) -- Set the thread-local urlresolvers script prefix if `set
 django/apps/registry.py:134:40    - Unknown word (unconfigured) -- not ready" is due to unconfigured settings, accessing
@@ -414,7 +414,7 @@ django/core/handlers/asgi.py:175:39    - Unknown word (asend)      -- signals.re
 django/core/handlers/base.py:193:58    - Unknown word (subthread)  -- synchronous view, run it in a subthread.
 django/core/handlers/wsgi.py:167:53    - Unknown word (lighttpd)   -- not every web server (lighttpd!) passes this
 django/core/handlers/wsgi.py:8:35      - Unknown word (repercent)  -- utils.encoding import repercent_broken_unicode
-django/core/mail/__init__.py:92:5      - Unknown word (datatuple)  -- datatuple, fail_silently=False
+django/core/mail/__init__.py:96:5      - Unknown word (datatuple)  -- datatuple, fail_silently=False
 django/core/mail/message.py:172:41    - Unknown word (surrogateescape) -- line.encode(errors="surrogateescape"))
 django/core/management/__init__.py:282:58    - Unknown word (COMPREPLY)  -- is passed to BASH's `COMPREPLY` variable
 django/core/management/__init__.py:392:49    - Unknown word (noreload)   -- "runserver" and "--noreload" not in self.argv:
@@ -650,14 +650,14 @@ django/db/models/options.py:530:33    - Unknown word (longwinded) -- The third l
 django/db/models/query.py:761:30    - Unknown word (childmost)  -- insert into the childmost table.
 django/db/models/query_utils.py:23:49     - Unknown word (somecol)    -- converting lookups (fk__somecol). The contents
 django/db/models/query_utils.py:94:19     - Unknown word (subq)       -- split_subq=False,
-django/db/models/sql/compiler.py:1437:49   - Unknown word (popleft)    -- klass_info = queue.popleft()
-django/db/models/sql/compiler.py:1515:23   - Unknown word (convs)      -- for pos, (convs, expression) in converters
-django/db/models/sql/compiler.py:1923:9    - Unknown word (innerq)     -- innerq = self.query.clone(
-django/db/models/sql/compiler.py:1928:9    - Unknown word (outerq)     -- outerq = Query(self.query.model
-django/db/models/sql/compiler.py:458:23    - Unknown word (combinated) -- # combinated queries might define
-django/db/models/sql/compiler.py:505:37    - Unknown word (orderbycol) -- col_alias = f"__orderbycol{order_by_idx}"
-django/db/models/sql/compiler.py:604:54    - Unknown word (resultset)  -- always including an empty resultset query to force
-django/db/models/sql/compiler.py:957:36    - Unknown word (subparams)  -- subselect, subparams = select_clone.as_sql
+django/db/models/sql/compiler.py:1442:49   - Unknown word (popleft)    -- klass_info = queue.popleft()
+django/db/models/sql/compiler.py:1520:23   - Unknown word (convs)      -- for pos, (convs, expression) in converters
+django/db/models/sql/compiler.py:1928:9    - Unknown word (innerq)     -- innerq = self.query.clone(
+django/db/models/sql/compiler.py:1933:9    - Unknown word (outerq)     -- outerq = Query(self.query.model
+django/db/models/sql/compiler.py:463:23    - Unknown word (combinated) -- # combinated queries might define
+django/db/models/sql/compiler.py:510:37    - Unknown word (orderbycol) -- col_alias = f"__orderbycol{order_by_idx}"
+django/db/models/sql/compiler.py:609:54    - Unknown word (resultset)  -- always including an empty resultset query to force
+django/db/models/sql/compiler.py:962:36    - Unknown word (subparams)  -- subselect, subparams = select_clone.as_sql
 django/db/models/sql/constants.py:24:1      - Unknown word (LOUTER)      -- LOUTER = "LEFT OUTER JOIN"
 django/db/models/sql/constants.py:9:3       - Unknown word (Namedtuples) -- # Namedtuples for sql.* internal use
 django/db/models/sql/datastructures.py:204:35    - Unknown word (somecond)   -- SELECT * FROM "foo" WHERE somecond
@@ -669,9 +669,9 @@ django/db/models/sql/datastructures.py:84:24     - Unknown word (nullabled)  -- 
 django/db/models/sql/datastructures.py:99:46     - Unknown word (depraction) -- edInDjango60Warning: when the depraction ends, replace with:
 django/db/models/sql/query.py:113:19    - Unknown word (repointing) -- # without repointing to the filtered annotation
 django/db/models/sql/query.py:1466:28   - Unknown word (unreffing)  -- is responsible for unreffing the joins used.
-django/db/models/sql/query.py:1575:40   - Unknown word (someval)    -- is null, then col != someval will result in SQL
-django/db/models/sql/query.py:2381:44   - Unknown word (datastructure) -- that we can use a set datastructure. We do the foo__bar
-django/db/models/sql/query.py:2663:5    - Unknown word (dirn)          -- dirn = ORDER_DIR[default
+django/db/models/sql/query.py:1573:40   - Unknown word (someval)    -- is null, then col != someval will result in SQL
+django/db/models/sql/query.py:2379:44   - Unknown word (datastructure) -- that we can use a set datastructure. We do the foo__bar
+django/db/models/sql/query.py:2661:5    - Unknown word (dirn)          -- dirn = ORDER_DIR[default
 django/db/models/sql/query.py:353:53    - Unknown word (deepcopied) -- work when a Query is deepcopied."""
 django/db/models/sql/query.py:541:62    - Unknown word (realiasing) -- would require complex realiasing logic.
 django/db/models/sql/query.py:559:50    - Unknown word (repointed)  -- sure the aggregates are repointed to them.
@@ -690,10 +690,10 @@ django/forms/fields.py:802:19    - Unknown word (misformatted) -- # misformatted
 django/forms/models.py:824:13    - Unknown word (uclass)     -- for uclass, unique_check in all
 django/forms/renderers.py:42:26     - Unknown word (djangoforms) -- "NAME": "djangoforms",
 django/forms/utils.py:150:24    - Unknown word (initlist)   -- def __init__(self, initlist=None, error_class=None
-django/forms/widgets.py:1032:43   - Unknown word (splithiddendatetime) -- django/forms/widgets/splithiddendatetime.html"
-django/forms/widgets.py:670:17    - Unknown word (subvalue)   -- for subvalue, sublabel in choices
-django/forms/widgets.py:670:27    - Unknown word (sublabel)   -- for subvalue, sublabel in choices:
-django/forms/widgets.py:998:43    - Unknown word (splitdatetime) -- django/forms/widgets/splitdatetime.html"
+django/forms/widgets.py:1016:43   - Unknown word (splitdatetime) -- django/forms/widgets/splitdatetime.html"
+django/forms/widgets.py:1050:43   - Unknown word (splithiddendatetime) -- django/forms/widgets/splithiddendatetime.html"
+django/forms/widgets.py:688:17    - Unknown word (subvalue)   -- for subvalue, sublabel in choices
+django/forms/widgets.py:688:27    - Unknown word (sublabel)   -- for subvalue, sublabel in choices:
 django/http/cookie.py:11:5      - Unknown word (cookiedict) -- cookiedict = {}
 django/http/multipartparser.py:362:17    - Unknown word (shortcircuits) -- # any() shortcircuits if a handler's upload
 django/http/multipartparser.py:513:64    - Unknown word (ungetting)     -- one chunk. If we keep ungetting the
@@ -1289,30 +1289,30 @@ tests/admin_views/tests.py:914:63    - Unknown word (fooddelivery)            --
 tests/admin_views/tests.py:927:53    - Unknown word (chapterxtra)             -- reverse("admin:admin_views_chapterxtra1_changelist")
 tests/admin_views/tests.py:987:54    - Unknown word (notarealfield)           -- get(changelist_url, {"notarealfield": "5"})
 tests/admin_widgets/models.py:51:40     - Unknown word (escapeme)   -- choices_to={"name": '"&><escapeme'},
-tests/admin_widgets/tests.py:1018:56   - Unknown word (clocklink)            -- find_element(By.ID, "clocklink0")
-tests/admin_widgets/tests.py:1029:45   - Unknown word (timelist)             -- XPATH, "//ul[@class='timelist']/li/a"
-tests/admin_widgets/tests.py:1067:56   - Unknown word (calendarin)           -- find_element(By.ID, "calendarin0")
-tests/admin_widgets/tests.py:1191:21   - Unknown word (neighbouring)         -- # If we are neighbouring a DST, we add an hour
-tests/admin_widgets/tests.py:1207:49   - Unknown word (datetimeshortcuts)    -- ".field-birthdate .datetimeshortcuts"
-tests/admin_widgets/tests.py:1218:61   - Unknown word (timezonewarning)      -- umElements(".field-birthdate .timezonewarning", 1)
-tests/admin_widgets/tests.py:1893:59   - Unknown word (brokenimg)            -- tests_files_folder}/brokenimg.png")
-tests/admin_widgets/tests.py:306:65    - Unknown word (cartire)     -- admin:admin_widgets_cartire_add"))
-tests/admin_widgets/tests.py:344:27    - Unknown word (Iñtërnâtiônàlizætiøn) -- for test_str in ("Iñtërnâtiônàlizætiøn", "1234'", -1234):
-tests/admin_widgets/tests.py:392:50    - Unknown word (selectfilterstacked)  -- multiple name="test" class="selectfilterstacked" '
-tests/admin_widgets/tests.py:52:7      - Unknown word (widgetadmin) -- from .widgetadmin import site as widget
-tests/admin_widgets/tests.py:569:42    - Unknown word (Linkin)               -- objects.create(name="Linkin Park")
-tests/admin_widgets/tests.py:578:71    - Unknown word (salbums)              -- href="%(STORAGE_URL)salbums/'
-tests/admin_widgets/tests.py:61:53     - Unknown word (testser)     -- create_user(username="testser", password="secret"
-tests/admin_widgets/tests.py:62:75     - Unknown word (Passat)      -- Volkswagen", model="Passat")
-tests/admin_widgets/tests.py:687:54    - Unknown word (banduuid)             -- name="test" value="%(banduuid)s" '
-tests/admin_widgets/tests.py:691:45    - Unknown word (bandpk)               -- admin_widgets/band/%(bandpk)s/change/">Linkin Park
-tests/admin_widgets/tests.py:71:49     - Unknown word (widgetclass) -- self, model, fieldname, widgetclass, **admin_overrides)
-tests/admin_widgets/tests.py:732:66    - Unknown word (hcombpk)              -- honeycomb_widget" value="%(hcombpk)s">'
-tests/admin_widgets/tests.py:733:30    - Unknown word (hcomb)                -- "&nbsp;<strong>%(hcomb)s</strong>"
-tests/admin_widgets/tests.py:777:60    - Unknown word (Cescapeme)            -- band/?name=%22%26%3E%3Cescapeme&amp;'
-tests/admin_widgets/tests.py:788:38    - Unknown word (releaseevent)         -- href="/admin_widgets/releaseevent/?_to_field=album" '
-tests/admin_widgets/tests.py:829:51    - Unknown word (Rockstar)             -- objects.create(name="Rockstar Techie")
-tests/admin_widgets/tests.py:829:9     - Unknown word (consultor)            -- consultor1 = Advisor.objects.create
+tests/admin_widgets/tests.py:1019:56   - Unknown word (clocklink)            -- find_element(By.ID, "clocklink0")
+tests/admin_widgets/tests.py:1030:45   - Unknown word (timelist)             -- XPATH, "//ul[@class='timelist']/li/a"
+tests/admin_widgets/tests.py:1068:56   - Unknown word (calendarin)           -- find_element(By.ID, "calendarin0")
+tests/admin_widgets/tests.py:1192:21   - Unknown word (neighbouring)         -- # If we are neighbouring a DST, we add an hour
+tests/admin_widgets/tests.py:1208:49   - Unknown word (datetimeshortcuts)    -- ".field-birthdate .datetimeshortcuts"
+tests/admin_widgets/tests.py:1219:61   - Unknown word (timezonewarning)      -- umElements(".field-birthdate .timezonewarning", 1)
+tests/admin_widgets/tests.py:1896:59   - Unknown word (brokenimg)            -- tests_files_folder}/brokenimg.png")
+tests/admin_widgets/tests.py:307:65    - Unknown word (cartire)     -- admin:admin_widgets_cartire_add"))
+tests/admin_widgets/tests.py:345:27    - Unknown word (Iñtërnâtiônàlizætiøn) -- for test_str in ("Iñtërnâtiônàlizætiøn", "1234'", -1234):
+tests/admin_widgets/tests.py:393:50    - Unknown word (selectfilterstacked)  -- multiple name="test" class="selectfilterstacked" '
+tests/admin_widgets/tests.py:53:7      - Unknown word (widgetadmin) -- from .widgetadmin import site as widget
+tests/admin_widgets/tests.py:570:42    - Unknown word (Linkin)               -- objects.create(name="Linkin Park")
+tests/admin_widgets/tests.py:579:71    - Unknown word (salbums)              -- href="%(STORAGE_URL)salbums/'
+tests/admin_widgets/tests.py:62:53     - Unknown word (testser)     -- create_user(username="testser", password="secret"
+tests/admin_widgets/tests.py:63:75     - Unknown word (Passat)      -- Volkswagen", model="Passat")
+tests/admin_widgets/tests.py:688:59    - Unknown word (banduuid)             -- name="test" value="%(banduuid)s" '
+tests/admin_widgets/tests.py:692:45    - Unknown word (bandpk)               -- admin_widgets/band/%(bandpk)s/change/">Linkin Park
+tests/admin_widgets/tests.py:72:49     - Unknown word (widgetclass) -- self, model, fieldname, widgetclass, **admin_overrides)
+tests/admin_widgets/tests.py:733:66    - Unknown word (hcombpk)              -- honeycomb_widget" value="%(hcombpk)s">'
+tests/admin_widgets/tests.py:734:30    - Unknown word (hcomb)                -- "&nbsp;<strong>%(hcomb)s</strong>"
+tests/admin_widgets/tests.py:778:60    - Unknown word (Cescapeme)            -- band/?name=%22%26%3E%3Cescapeme&amp;'
+tests/admin_widgets/tests.py:789:38    - Unknown word (releaseevent)         -- href="/admin_widgets/releaseevent/?_to_field=album" '
+tests/admin_widgets/tests.py:830:51    - Unknown word (Rockstar)             -- objects.create(name="Rockstar Techie")
+tests/admin_widgets/tests.py:830:9     - Unknown word (consultor)            -- consultor1 = Advisor.objects.create
 tests/aggregation/test_filter_argument.py:142:9     - Unknown word (aggs)       -- aggs = Author.objects.annotate
 tests/aggregation/tests.py:1056:9    - Unknown word (thedate)    -- thedate = timezone.now()
 tests/aggregation/tests.py:1072:14   - Unknown word (nonaggregate) -- def test_nonaggregate_aggregation_throws(self
@@ -1632,6 +1632,7 @@ tests/flatpages_tests/test_forms.py:137:23    - Unknown word (nosites)    -- def
 tests/flatpages_tests/test_models.py:10:31     - Unknown word (urlencodes) -- test_get_absolute_url_urlencodes(self):
 tests/flatpages_tests/test_models.py:26:58     - Unknown word (flatpagecaf) -- get_absolute_url(), "/flatpagecaf%C3%A9/")
 tests/flatpages_tests/test_templatetags.py:70:35     - Unknown word (anonuser)   -- % get_flatpages for anonuser as flatpages %}"
+tests/foreign_object/test_tuple_lookups.py:50:9      - Unknown word (cust)       -- cust_1, cust_2, cust_3, cust
 tests/foreign_object/tests.py:412:43    - Unknown word (Otsikko)    -- , lang="fi", title="Otsikko", body="Diipadaapa"
 tests/foreign_object/tests.py:412:59    - Unknown word (Diipadaapa) -- title="Otsikko", body="Diipadaapa"
 tests/foreign_object/tests.py:416:57    - Unknown word (Lalalalala) -- title="Title", body="Lalalalala"
@@ -2067,23 +2068,23 @@ tests/m2m_through_regress/tests.py:130:64    - Unknown word (autonumbering) -- d
 tests/m2m_through_regress/tests.py:131:64    - Unknown word (Gumble)        -- create(name="Barney Gumble")
 tests/m2m_through_regress/tests.py:133:52    - Unknown word (Trabant)       -- objects.create(make="Trabant")
 tests/m2m_through_regress/tests.py:165:9     - Unknown word (nullcar)       -- nullcar = Car(make=None)
-tests/mail/tests.py:1057:15   - Unknown word (localpartonly) -- ("localpartonly", "ascii", "localpartonly
-tests/mail/tests.py:1065:18   - Unknown word (éxample)       -- ("to@éxample.com", "utf-8", "to@xn
-tests/mail/tests.py:1065:49   - Unknown word (xample)        -- com", "utf-8", "to@xn--xample-9ua.com"),
-tests/mail/tests.py:1118:50   - Unknown word (exampl)        -- very long" * 4, "to@exampl€.com"),
-tests/mail/tests.py:1295:14   - Unknown word (Chère)         -- "Chère maman", "Je t'aime tr
-tests/mail/tests.py:1295:20   - Unknown word (maman)         -- "Chère maman", "Je t'aime très fort
-tests/mail/tests.py:1295:32   - Unknown word (t'aime)        -- "Chère maman", "Je t'aime très fort", "from@example
-tests/mail/tests.py:1314:27   - Unknown word (южных)         -- "Subject", "В южных морях " * 60, "from
-tests/mail/tests.py:1314:33   - Unknown word (морях)         -- "Subject", "В южных морях " * 60, "from@example
-tests/mail/tests.py:1605:28   - Unknown word (locmen)        -- Make sure that the locmen backend populates the
-tests/mail/tests.py:34:10     - Unknown word (aiosmtpd)   -- from aiosmtpd.controller import Controller
-tests/mail/tests.py:36:9      - Unknown word (AIOSMTPD)   -- HAS_AIOSMTPD = True
-tests/mail/tests.py:479:26    - Unknown word (Sürname)    -- ['"Firstname Sürname" <to@example.com>',
-tests/mail/tests.py:483:40    - Unknown word (Crname)     -- 8?q?Firstname_S=C3=BCrname?= <to@example.com>,
-tests/mail/tests.py:498:14    - Unknown word (Gżegżółka)  -- "Gżegżółka",
-tests/mail/tests.py:697:25    - Unknown word (pièce)      -- msg.attach("une pièce jointe.pdf", b"%PDF
-tests/mail/tests.py:697:31    - Unknown word (jointe)     -- msg.attach("une pièce jointe.pdf", b"%PDF-1.4.%.
+tests/mail/tests.py:1142:15   - Unknown word (localpartonly) -- ("localpartonly", "ascii", "localpartonly
+tests/mail/tests.py:1150:18   - Unknown word (éxample)       -- ("to@éxample.com", "utf-8", "to@xn
+tests/mail/tests.py:1150:49   - Unknown word (xample)        -- com", "utf-8", "to@xn--xample-9ua.com"),
+tests/mail/tests.py:1203:50   - Unknown word (exampl)        -- very long" * 4, "to@exampl€.com"),
+tests/mail/tests.py:1380:14   - Unknown word (Chère)         -- "Chère maman", "Je t'aime tr
+tests/mail/tests.py:1380:20   - Unknown word (maman)         -- "Chère maman", "Je t'aime très fort
+tests/mail/tests.py:1380:32   - Unknown word (t'aime)        -- "Chère maman", "Je t'aime très fort", "from@example
+tests/mail/tests.py:1399:27   - Unknown word (южных)         -- "Subject", "В южных морях " * 60, "from
+tests/mail/tests.py:1399:33   - Unknown word (морях)         -- "Subject", "В южных морях " * 60, "from@example
+tests/mail/tests.py:1690:28   - Unknown word (locmen)        -- Make sure that the locmen backend populates the
+tests/mail/tests.py:36:10     - Unknown word (aiosmtpd)   -- from aiosmtpd.controller import Controller
+tests/mail/tests.py:38:9      - Unknown word (AIOSMTPD)   -- HAS_AIOSMTPD = True
+tests/mail/tests.py:481:26    - Unknown word (Sürname)    -- ['"Firstname Sürname" <to@example.com>',
+tests/mail/tests.py:485:40    - Unknown word (Crname)     -- 8?q?Firstname_S=C3=BCrname?= <to@example.com>,
+tests/mail/tests.py:500:14    - Unknown word (Gżegżółka)  -- "Gżegżółka",
+tests/mail/tests.py:782:25    - Unknown word (pièce)      -- msg.attach("une pièce jointe.pdf", b"%PDF
+tests/mail/tests.py:782:31    - Unknown word (jointe)     -- msg.attach("une pièce jointe.pdf", b"%PDF-1.4.%.
 tests/many_to_one/tests.py:439:43    - Unknown word (Royko)      -- name="Mike", last_name="Royko", email="royko@suntimes
 tests/many_to_one/tests.py:442:43    - Unknown word (Kass)       -- name="John", last_name="Kass", email="jkass@tribune
 tests/many_to_one/tests.py:568:38    - Unknown word (notafield)  -- Cannot resolve keyword 'notafield' into field. Choices
@@ -2861,7 +2862,7 @@ tests/view_tests/tests/test_debug.py:1167:24   - Unknown word (filecontent)     
 tests/view_tests/tests/test_debug.py:1306:9    - Unknown word (templ)               -- templ_path = Path(
 tests/view_tests/tests/test_debug.py:1448:53   - Unknown word (fattie)              -- ADMINS=[("Admin", "admin@fattie-breakie.com")]):
 tests/view_tests/tests/test_debug.py:1448:60   - Unknown word (breakie)             -- Admin", "admin@fattie-breakie.com")]):
-tests/view_tests/tests/test_debug.py:1904:45   - Unknown word (djangosession)       -- SESSION_COOKIE_NAME="djangosession")
+tests/view_tests/tests/test_debug.py:1916:45   - Unknown word (djangosession)       -- SESSION_COOKIE_NAME="djangosession")
 tests/view_tests/tests/test_debug.py:587:55    - Unknown word (pasteform)  -- /dpaste.com/" name="pasteform" '
 tests/view_tests/tests/test_debug.py:781:34    - Unknown word (pastebin)   -- one as plain text (for pastebin)
 tests/view_tests/tests/test_debug.py:797:28    - Unknown word (PYTHONNODEBUGRANGES) -- or os.environ.get("PYTHONNODEBUGRANGES", False),
