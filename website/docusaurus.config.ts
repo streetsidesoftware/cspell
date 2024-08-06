@@ -43,7 +43,7 @@ const config: Config = {
                 id: 'api-cspell-lib',
                 out: './docs/api/cspell-lib',
                 entryPoints: ['../packages/cspell-lib/src/lib/index.ts'],
-                tsconfig: '../packages/cspell-lib/tsconfig.esm.json',
+                tsconfig: '../packages/cspell-lib/tsconfig.json',
                 // outputFileStrategy: 'modules',
                 fileExtension: '.md',
             },
