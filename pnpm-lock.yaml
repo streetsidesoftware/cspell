@@ -957,6 +957,9 @@ importers:
       '@cspell/eslint-plugin':
         specifier: workspace:*
         version: link:../../../packages/cspell-eslint-plugin
+      '@eslint/js':
+        specifier: ^9.8.0
+        version: 9.8.0
       '@types/react':
         specifier: ^18.3.3
         version: 18.3.3
@@ -969,6 +972,18 @@ importers:
       typescript-eslint:
         specifier: ^7.18.0
         version: 7.18.0(eslint@9.8.0)(typescript@5.5.4)
+
+  test-packages/cspell-eslint-plugin/test-cspell-eslint-plugin-v9-basic:
+    devDependencies:
+      '@cspell/eslint-plugin':
+        specifier: workspace:*
+        version: link:../../../packages/cspell-eslint-plugin
+      '@eslint/js':
+        specifier: ^9.8.0
+        version: 9.8.0
+      eslint:
+        specifier: 9.8.0
+        version: 9.8.0
 
   test-packages/cspell-gitignore/test-cspell-gitignore:
     dependencies:

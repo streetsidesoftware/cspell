@@ -1,0 +1,23 @@
+{
+  "name": "test-cspell-eslint-plugin-v9-basic",
+  "version": "8.13.1",
+  "description": "Pure testing package for @cspell/eslint-plugin-cspell.",
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "test:eslint": "eslint . -c eslint.config.mjs",
+    "test": "pnpm test:eslint"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "author": "",
+  "license": "MIT",
+  "main": "index.js",
+  "keywords": [],
+  "devDependencies": {
+    "@cspell/eslint-plugin": "workspace:*",
+    "@eslint/js": "^9.8.0",
+    "eslint": "9.8.0"
+  }
+}
