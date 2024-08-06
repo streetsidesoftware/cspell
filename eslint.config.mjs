@@ -17,6 +17,7 @@ export default tsEslint.config(
     ...tsEslint.configs.recommended,
     // unicorn.configs['flat/recommended'],
     {
+        ignores: ['**/*.json'],
         plugins: {
             unicorn,
         },
@@ -226,6 +227,14 @@ export default tsEslint.config(
         rules: {
             'unicorn/prefer-module': 'off',
             '@typescript-eslint/no-var-requires': 'off',
+            '@typescript-eslint/no-require-imports': 'off',
+        },
+    },
+    {
+        files: ['**/*.json'],
+        rules: {
+            '@typescript-eslint/no-unused-expressions': 'off',
+            'unicorn/no-null': 'off',
         },
     },
     {
@@ -253,10 +262,25 @@ export default tsEslint.config(
         },
     },
     {
+        files: ['**/*.{ts,mts,cts}'],
+        rules: {
+            // Turn off for now
+            '@typescript-eslint/no-unused-expressions': 'off',
+            '@typescript-eslint/no-empty-object-type': 'off',
+        },
+    },
+    {
+        files: ['**/*.test.{ts,mts,cts}', '**/*.spec.ts'],
+        rules: {
+            '@typescript-eslint/no-unused-expressions': 'off',
+        },
+    },
+    {
         files: ['**/vitest.config.*', '**/jest.config.*', '**/__mocks__/**'],
         rules: {
-            'n/no-extraneous-require': 'off',
+            '@typescript-eslint/no-require-imports': 'off',
             'n/no-extraneous-import': 'off',
+            'n/no-extraneous-require': 'off',
             'no-undef': 'off',
             'unicorn/prefer-module': 'off',
         },
