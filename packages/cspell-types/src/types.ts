@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/ban-types */
 
-export type Serialize<T> = T extends Function
+export type Serialize<T> = T extends () => void
     ? never
     : T extends null
       ? null
