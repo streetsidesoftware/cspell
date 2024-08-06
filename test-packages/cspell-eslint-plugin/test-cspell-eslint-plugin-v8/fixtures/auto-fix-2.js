@@ -5,7 +5,7 @@ const aboutthe = ['one', 'two', 'three'];
  * What do you think aboutit?
  * Time to go to the café.
  */
-export function calcBluelist(names: string[]) {
+export function calcBluelist(names) {
     const bluelistSet = new Set(aboutthe);
 
     return names.filter((name) => bluelistSet.has(name));
