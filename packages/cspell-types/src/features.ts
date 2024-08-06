@@ -11,13 +11,23 @@ export interface FeaturesExperimental {
 /**
  * These are the current set of active features
  */
-export interface FeaturesActive {}
+export interface FeaturesActive {
+    /**
+     * @hidden
+     */
+    featureName?: boolean;
+}
 
 /**
  * These are feature settings that have been deprecated or moved elsewhere they will have no
  * effect on the code but are here to prevent schema errors. The will get cleaned out on major versions.
  */
-export interface FeaturesDeprecated {}
+export interface FeaturesDeprecated {
+    /**
+     * @hidden
+     */
+    featureName?: boolean;
+}
 
 /**
  * Features are behaviors or settings that can be explicitly configured.
