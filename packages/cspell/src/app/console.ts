@@ -1,5 +1,5 @@
 import type { WriteStream } from 'node:tty';
-import { format as utilFormat } from 'node:util';
+import { formatWithOptions } from 'node:util';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Log = (format?: any, ...params: any[]) => void;
@@ -25,7 +25,8 @@ class ImplChannel implements Channel {
     write = (msg: string) => this.stream.write(msg);
     writeLine = (msg: string) => this.write(msg + '\n');
     clearLine = (dir: -1 | 0 | 1, callback?: () => void) => this.stream.clearLine?.(dir, callback) ?? false;
-    printLine = (...params: unknown[]) => this.writeLine((params.length && utilFormat(...params)) || '');
+    printLine = (...params: unknown[]) =>
+        this.writeLine((params.length && formatWithOptions({ colors: this.stream.hasColors?.() }, ...params)) || '');
     getColorLevel = () => getColorLevel(this.stream);
 }
 

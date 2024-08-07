@@ -264,7 +264,7 @@ export function getReporter(options: ReporterOptions, config?: CSpellReporterCon
             error = error.cause;
         }
         const errorText = formatWithOptions(
-            { colors: stderr.getColorLevel() !== 0 },
+            { colors: stderr.stream.hasColors?.() },
             stderr.chalk.red(message),
             error.toString(),
         );
