@@ -1,5 +1,5 @@
 import assert from 'node:assert';
-import { format } from 'node:util';
+import { formatWithOptions } from 'node:util';
 
 import type {
     Issue,
@@ -73,7 +73,8 @@ interface IO extends Channel, IOChalk {}
  * @returns issueEmitter function
  */
 function genIssueEmitter(
-    io: IO,
+    stdIO: IO,
+    errIO: IO,
     template: string,
     uniqueIssues: boolean,
     reportedIssuesCollection: string[] | undefined,
@@ -90,9 +91,9 @@ function genIssueEmitter(
             uri = issue.uri;
         }
         maxWidth = Math.max(maxWidth * 0.999, issue.text.length, 10);
-        const issueText = formatIssue(io, template, issue, Math.ceil(maxWidth));
-        reportedIssuesCollection?.push(issueText);
-        io.writeLine(issueText);
+        const issueText = formatIssue(stdIO, template, issue, Math.ceil(maxWidth));
+        reportedIssuesCollection?.push(formatIssue(errIO, template, issue, Math.ceil(maxWidth)));
+        stdIO.writeLine(issueText);
     };
 }
 
@@ -254,14 +255,19 @@ export function getReporter(options: ReporterOptions, config?: CSpellReporterCon
         };
     }
 
-    const issuesCollection: string[] | undefined = showProgress ? [] : undefined;
+    const issuesCollection: string[] | undefined =
+        showProgress && !(stdio.stream.isTTY && stderr.stream.isTTY) ? [] : undefined;
     const errorCollection: string[] | undefined = [];
 
     function errorEmitter(message: string, error: Error | SpellingDictionaryLoadError | ImportError) {
         if (isSpellingDictionaryLoadError(error)) {
             error = error.cause;
         }
-        const errorText = format(stderr.chalk.red(message), error.toString());
+        const errorText = formatWithOptions(
+            { colors: stderr.getColorLevel() !== 0 },
+            stderr.chalk.red(message),
+            error.toString(),
+        );
         errorCollection?.push(errorText);
         consoleError(errorText);
     }
@@ -349,7 +355,9 @@ export function getReporter(options: ReporterOptions, config?: CSpellReporterCon
 
     return {
         issue: relativeIssue(
-            silent || !issues ? nullEmitter : genIssueEmitter(stdio, issueTemplate, uniqueIssues, issuesCollection),
+            silent || !issues
+                ? nullEmitter
+                : genIssueEmitter(stdio, stderr, issueTemplate, uniqueIssues, issuesCollection),
         ),
         error: silent ? nullEmitter : errorEmitter,
         info: infoEmitter,
