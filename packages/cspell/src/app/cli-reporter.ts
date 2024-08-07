@@ -257,7 +257,7 @@ export function getReporter(options: ReporterOptions, config?: CSpellReporterCon
 
     /*
      * Turn off repeated issues see https://github.com/streetsidesoftware/cspell/pull/6058
-     * We might want to add a cli option later to turn this back on.
+     * We might want to add a CLI option later to turn this back on.
      */
     const repeatIssues = false;
 
