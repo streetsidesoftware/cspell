@@ -255,8 +255,13 @@ export function getReporter(options: ReporterOptions, config?: CSpellReporterCon
         };
     }
 
-    const issuesCollection: string[] | undefined =
-        showProgress && !(stdio.stream.isTTY && stderr.stream.isTTY) ? [] : undefined;
+    /*
+     * Turn off repeated issues see https://github.com/streetsidesoftware/cspell/pull/6058
+     * We might want to add a cli option later to turn this back on.
+     */
+    const repeatIssues = false;
+
+    const issuesCollection: string[] | undefined = showProgress && repeatIssues ? [] : undefined;
     const errorCollection: string[] | undefined = [];
 
     function errorEmitter(message: string, error: Error | SpellingDictionaryLoadError | ImportError) {
