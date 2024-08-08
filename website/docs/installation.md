@@ -10,7 +10,7 @@ sidebar_label: Installation
 
 ## Node
 
-CSpell requires Node JS to run. Most likely it is already install.
+CSpell requires Node.js to run. Most likely it is already installed.
 
 ### **Check the node version**
 
