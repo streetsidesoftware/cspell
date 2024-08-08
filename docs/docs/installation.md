@@ -9,7 +9,7 @@ nav_order: 2
 
 ## Node
 
-CSpell requires Node.js to run. Most likely it is already installed.
+CSpell requires Node.js to run.
 
 ### **Check the node version**
 
@@ -17,7 +17,7 @@ CSpell requires Node.js to run. Most likely it is already installed.
 node -v
 ```
 
-It should be greater than `18.x`.
+CSpell requires Node.js version `>=18.0`.
 
 ### Resources:
 
