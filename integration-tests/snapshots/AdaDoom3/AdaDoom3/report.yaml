@@ -5,7 +5,7 @@ Args: '["**/*.*"]'
 Summary:
   files: 103
   filesWithIssues: 98
-  issues: 3245
+  issues: 3243
   errors: 0
 Errors: []
 
@@ -38,7 +38,6 @@ issues:
   - "Engine/Assembly/x86-64/neo-engine-cpu.adb:464:17        denormals           U       -- Enable denormals are zero"
   - "Engine/Assembly/x86-64/neo-engine-cpu.adb:473:28        fxsave              U       \" fxsave (%%eax) \""
   - "Engine/main.adb:45:14       Fullscreen      U       when Fullscreen_Mode => Maximize"
-  - "Engine/main.adb:67:19       CVARs           U       -- Load saved CVARs"
   - "Engine/main.adb:214:24      framebuffer     U       -- Restart the framebuffer if our resolution changed"
   - "Engine/main.adb:219:19      Framebuffer     U       Restart_Framebuffer;"
   - "Engine/neo-api-openal.ads:26:7          Lsizei                              U       -- ALsizei Int_Size_C"
@@ -324,7 +323,6 @@ issues:
   - "Engine/neo-api-vulkan.ads:2573:8        Subpasses           U       pSubpasses : Ptr_VkSubpassDescripti"
   - "Engine/neo-api-vulkan.ads:2781:18       AABBNV              U       type VkGeometryAABBNV;"
   - "Engine/neo-api-vulkan.ads:2786:7        aabb                U       aabbData : Ptr"
-  - "Engine/neo-api-vulkan.ads:2787:10       AABBs               U       numAABBs : Int_Unsigned_C"
   - "Engine/neo-api-vulkan.ads:2820:7        aabbs               U       aabbs : VkGeometryAABBNV"
   - "Engine/neo-api-vulkan.ads:3115:11       Palletized          U       -- Palletized"
   - "Engine/neo-api-vulkan.ads:3233:50       raygen              U       raygenShaderBindingTableBuffer"
