@@ -2,9 +2,10 @@
 
 export const regExUpperSOrIng = /([\p{Lu}\p{M}]+(?:\\?['’])?(?:s|ing|ies|es|ings|ed|ning))(?!\p{Ll})/gu;
 export const regExSplitWords = /(\p{Ll}\p{M}?)(\p{Lu})/gu;
-export const regExSplitWords2 = /(\p{Lu}\p{M}?)(\p{Lu}\p{M}?\p{Ll})/gu;
-export const regExpSplitWordBreaks =
+export const regExSplitWords2 = /(\p{Lu}\p{M}?)((\p{Lu}\p{M}?)\p{Ll})/gu;
+export const regExpCamelCaseWordBreaksWithEnglishSuffix =
     /(?<=\p{Ll}\p{M}?)(?=\p{Lu})|(?<=\p{Lu}\p{M}?)(?=\p{Lu}\p{M}?\p{Ll})(?!\p{Lu}\p{M}?(?:s|ing|ies|es|ings|ed|ning)(?!\p{Ll}))/gu;
+export const regExpCamelCaseWordBreaks = /(?<=\p{Ll}\p{M}?)(?=\p{Lu})|(?<=\p{Lu}\p{M}?)(?=\p{Lu}\p{M}?\p{Ll})/gu;
 export const regExpAllPossibleWordBreaks =
     /(?<=\p{Ll}\p{M}?)(?=\p{Lu})|(?<=\p{Lu}\p{M}?)(?=\p{Lu}\p{M}?\p{Ll})|(?<=\p{Lu}\p{M}?\p{Lu}\p{M}?)(?=\p{Ll})|(?<=\p{L}\p{M}?)(?=\P{L})|(?<=\P{L})(?=\p{L})/gu;
 export const regExWords = /\p{L}\p{M}?(?:(?:\\?['’])?\p{L}\p{M}?)*/gu;
