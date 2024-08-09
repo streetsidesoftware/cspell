@@ -33,7 +33,7 @@ describe('Validate wordSplitter', () => {
         expect(result.words.filter((w) => !w.isFound).length).toBe(7);
     });
 
-    // cspell:ignore MOVSX
+    // cspell:ignore MOVSX UI
     test.each`
         text                | expected
         ${'hello'}          | ${['hello']}
@@ -43,6 +43,7 @@ describe('Validate wordSplitter', () => {
         ${'MOVSX_r_rm16'}   | ${['MOVSX', 'r', 'rm']}
         ${'32bit-checksum'} | ${['bit', 'checksum']}
         ${'camelCase'}      | ${['camel', 'Case']}
+        ${'markUIAsReady'}  | ${['mark', 'UI', 'As', '', 'Ready']}
     `('Extract word breaks to $text', ({ text, expected }: TestApplyWordBreaks) => {
         const line = {
             text,
@@ -83,6 +84,7 @@ describe('Validate wordSplitter', () => {
         ${'32bit-checksum'} | ${['bit|checksum']}
         ${'ERRORCode'}      | ${['ERROR|Code']}
         ${'camelCase'}      | ${['camel|Case', 'camelCase']}
+        ${'markUIAsReady'}  | ${['mark|UI|As|Ready']}
     `('Extract all possible word breaks to $text', ({ text, expected }: TestApplyWordBreaks) => {
         const line = {
             text,

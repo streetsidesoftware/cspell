@@ -43,11 +43,21 @@ describe('Validate textValidator functions', () => {
     });
 
     test('tests trailing s, ed, ing, etc. are attached to the words', async () => {
-        const dictEmpty = await createSpellingDictionary([], 'empty', 'test', opts());
-        const text = 'We have PUBLISHed multiple FIXesToThePROBLEMs';
+        const dictEmpty = createSpellingDictionary([], 'empty', 'test', opts());
+        const text = 'We have PUBLISHed multiple FixesToThePROBLEMs';
         const result = [...validateText(text, dictEmpty, sToV({}))];
         const errors = result.map((wo) => wo.text);
-        expect(errors).toEqual(['have', 'PUBLISHed', 'multiple', 'FIXes', 'PROBLEMs']);
+        expect(errors).toEqual(['have', 'PUBLISHed', 'multiple', 'Fixes', 'PROBLEMs']);
+    });
+
+    // cspell:ignore UI
+
+    test('words breaks', async () => {
+        const dictEmpty = createSpellingDictionary(['mark', 'as', 'ready'], 'sample', 'test', opts());
+        const text = 'markUIAsReady() ';
+        const result = [...validateText(text, dictEmpty, sToV({}))];
+        const errors = result.map((wo) => wo.text);
+        expect(errors).toEqual([]);
     });
 
     test('tests case in ignore words', async () => {

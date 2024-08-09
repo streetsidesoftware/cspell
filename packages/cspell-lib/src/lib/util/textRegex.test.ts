@@ -121,11 +121,11 @@ describe('Validate textRegex', () => {
     test.each`
         text                | expected
         ${'hello'}          | ${[]}
-        ${'ERRORCode'}      | ${[['RCo', 'R', 'Co']]}
-        ${nfc('CAFÉStyle')} | ${[[nfc('ÉSt'), nfc('É'), 'St']]}
-        ${nfd('CAFÉStyle')} | ${[[nfd('ÉSt'), nfd('É'), 'St']]}
-        ${nfc('CODEÉrror')} | ${[[nfc('EÉr'), 'E', nfc('Ér')]]}
-        ${nfd('CODEÉrror')} | ${[[nfd('EÉr'), 'E', nfd('Ér')]]}
+        ${'ERRORCode'}      | ${[['RCo', 'R', 'Co', 'C']]}
+        ${nfc('CAFÉStyle')} | ${[[nfc('ÉSt'), nfc('É'), 'St', 'S']]}
+        ${nfd('CAFÉStyle')} | ${[[nfd('ÉSt'), nfd('É'), 'St', 'S']]}
+        ${nfc('CODEÉrror')} | ${[[nfc('EÉr'), 'E', nfc('Ér'), nfc('É')]]}
+        ${nfd('CODEÉrror')} | ${[[nfd('EÉr'), 'E', nfd('Ér'), nfd('É')]]}
         ${'ERRORS'}         | ${[]}
     `('regExSplitWords2 on "$text"', ({ text, expected }: { text: string; expected: string[] }) => {
         const m = [...text.matchAll(regExSplitWords2)].map((m) => [...m]);
