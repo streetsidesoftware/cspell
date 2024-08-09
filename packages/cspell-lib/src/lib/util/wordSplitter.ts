@@ -189,7 +189,7 @@ function genWordBreakCamel(line: LineSegment): SortedBreaks[] {
     // lower,Upper: camelCase -> camel|Case
     for (const m of text.matchAll(offsetRegEx(regExSplitWords, line.relStart))) {
         if (m.index === undefined) break;
-        const i = m.index + 1;
+        const i = m.index + m[1].length;
         breaksCamel1.push({
             offset: m.index,
             breaks: [[i, i], ignoreBreak],
@@ -203,7 +203,7 @@ function genWordBreakCamel(line: LineSegment): SortedBreaks[] {
     for (const m of text.matchAll(offsetRegEx(regExSplitWords2, line.relStart))) {
         if (m.index === undefined) break;
         const i = m.index + m[1].length;
-        const j = i + 1;
+        const j = i + m[3].length;
         breaksCamel2.push({
             offset: m.index,
             breaks: [[i, i], [j, j], ignoreBreak],

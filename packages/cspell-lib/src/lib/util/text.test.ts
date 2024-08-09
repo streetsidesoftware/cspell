@@ -38,6 +38,7 @@ describe('Util Text', () => {
         ${'ASCIIToUTF16'}   | ${['ASCII', 'To', 'UTF16']}
         ${'URLsAndDBAs'}    | ${['URLs', 'And', 'DBAs']}
         ${'WALKingRUNning'} | ${['WALKing', 'RUNning']}
+        ${'c0de'}           | ${['c0de']}
     `('splitCamelCaseWord $word', ({ word, expected }) => {
         expect(splitCamelCaseWord(word)).toEqual(expected);
     });

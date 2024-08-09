@@ -8,7 +8,7 @@ import {
     regExAllUpper,
     regExFirstUpper,
     regExIgnoreCharacters,
-    regExpSplitWordBreaks,
+    regExpCamelCaseWordBreaksWithEnglishSuffix,
     regExWords,
     regExWordsAndDigits,
 } from './textRegex.js';
@@ -20,7 +20,7 @@ export { stringToRegExp } from './textRegex.js';
 
 // CSpell:ignore ings ning gimuy tsmerge
 
-export function splitCamelCaseWordWithOffset(wo: TextOffset): Array<TextOffset> {
+export function splitCamelCaseWordWithOffset(wo: TextOffset): TextOffset[] {
     return splitCamelCaseWord(wo.text).map(
         scanMap<string, TextOffset>((last, text) => ({ text, offset: last.offset + last.text.length }), {
             text: '',
@@ -33,7 +33,23 @@ export function splitCamelCaseWordWithOffset(wo: TextOffset): Array<TextOffset> 
  * Split camelCase words into an array of strings.
  */
 export function splitCamelCaseWord(word: string): string[] {
-    return word.split(regExpSplitWordBreaks);
+    return splitWord(word, regExpCamelCaseWordBreaksWithEnglishSuffix);
+}
+
+export function splitWordWithOffset(wo: TextOffset, regExpWordBreaks: RegExp): TextOffset[] {
+    return splitWord(wo.text, regExpWordBreaks).map(
+        scanMap<string, TextOffset>((last, text) => ({ text, offset: last.offset + last.text.length }), {
+            text: '',
+            offset: wo.offset,
+        }),
+    );
+}
+
+/**
+ * Split camelCase words into an array of strings.
+ */
+export function splitWord(word: string, regExpWordBreaks: RegExp): string[] {
+    return word.split(regExpWordBreaks);
 }
 
 /**

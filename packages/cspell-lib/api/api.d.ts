@@ -979,7 +979,7 @@ declare function getLogger(): Logger;
 
 declare function stringToRegExp(pattern: string | RegExp, defaultFlags?: string, forceFlags?: string): RegExp | undefined;
 
-declare function splitCamelCaseWordWithOffset(wo: TextOffset): Array<TextOffset>;
+declare function splitCamelCaseWordWithOffset(wo: TextOffset): TextOffset[];
 /**
  * Split camelCase words into an array of strings.
  */
@@ -1025,41 +1025,38 @@ declare function textOffset(text: string, offset?: number): TextOffset;
 declare function extractText(textOffset: TextOffset, startPos: number, endPos: number): string;
 declare function calculateTextDocumentOffsets<T extends TextOffset>(uri: string | Uri | URL, doc: string, wordOffsets: T[]): (TextDocumentOffset & T)[];
 declare function removeAccents(text: string): string;
-declare const __testing__: {
-    regExWords: RegExp;
-    regExWordsAndDigits: RegExp;
-};
 
-declare const text_d___testing__: typeof __testing__;
-declare const text_d_calculateTextDocumentOffsets: typeof calculateTextDocumentOffsets;
-declare const text_d_camelToSnake: typeof camelToSnake;
-declare const text_d_cleanText: typeof cleanText;
-declare const text_d_cleanTextOffset: typeof cleanTextOffset;
-declare const text_d_extractLinesOfText: typeof extractLinesOfText;
-declare const text_d_extractPossibleWordsFromTextOffset: typeof extractPossibleWordsFromTextOffset;
-declare const text_d_extractText: typeof extractText;
-declare const text_d_extractWordsFromCode: typeof extractWordsFromCode;
-declare const text_d_extractWordsFromCodeTextOffset: typeof extractWordsFromCodeTextOffset;
-declare const text_d_extractWordsFromText: typeof extractWordsFromText;
-declare const text_d_extractWordsFromTextOffset: typeof extractWordsFromTextOffset;
-declare const text_d_isFirstCharacterLower: typeof isFirstCharacterLower;
-declare const text_d_isFirstCharacterUpper: typeof isFirstCharacterUpper;
-declare const text_d_isLowerCase: typeof isLowerCase;
-declare const text_d_isUpperCase: typeof isUpperCase;
-declare const text_d_lcFirst: typeof lcFirst;
-declare const text_d_match: typeof match;
-declare const text_d_matchCase: typeof matchCase;
-declare const text_d_matchStringToTextOffset: typeof matchStringToTextOffset;
-declare const text_d_matchToTextOffset: typeof matchToTextOffset;
-declare const text_d_removeAccents: typeof removeAccents;
-declare const text_d_snakeToCamel: typeof snakeToCamel;
-declare const text_d_splitCamelCaseWord: typeof splitCamelCaseWord;
-declare const text_d_splitCamelCaseWordWithOffset: typeof splitCamelCaseWordWithOffset;
-declare const text_d_stringToRegExp: typeof stringToRegExp;
-declare const text_d_textOffset: typeof textOffset;
-declare const text_d_ucFirst: typeof ucFirst;
-declare namespace text_d {
-  export { text_d___testing__ as __testing__, text_d_calculateTextDocumentOffsets as calculateTextDocumentOffsets, text_d_camelToSnake as camelToSnake, text_d_cleanText as cleanText, text_d_cleanTextOffset as cleanTextOffset, text_d_extractLinesOfText as extractLinesOfText, text_d_extractPossibleWordsFromTextOffset as extractPossibleWordsFromTextOffset, text_d_extractText as extractText, text_d_extractWordsFromCode as extractWordsFromCode, text_d_extractWordsFromCodeTextOffset as extractWordsFromCodeTextOffset, text_d_extractWordsFromText as extractWordsFromText, text_d_extractWordsFromTextOffset as extractWordsFromTextOffset, text_d_isFirstCharacterLower as isFirstCharacterLower, text_d_isFirstCharacterUpper as isFirstCharacterUpper, text_d_isLowerCase as isLowerCase, text_d_isUpperCase as isUpperCase, text_d_lcFirst as lcFirst, text_d_match as match, text_d_matchCase as matchCase, text_d_matchStringToTextOffset as matchStringToTextOffset, text_d_matchToTextOffset as matchToTextOffset, text_d_removeAccents as removeAccents, text_d_snakeToCamel as snakeToCamel, text_d_splitCamelCaseWord as splitCamelCaseWord, text_d_splitCamelCaseWordWithOffset as splitCamelCaseWordWithOffset, text_d_stringToRegExp as stringToRegExp, text_d_textOffset as textOffset, text_d_ucFirst as ucFirst };
+//# sourceMappingURL=textApi.d.ts.map
+
+declare const textApi_d_calculateTextDocumentOffsets: typeof calculateTextDocumentOffsets;
+declare const textApi_d_camelToSnake: typeof camelToSnake;
+declare const textApi_d_cleanText: typeof cleanText;
+declare const textApi_d_cleanTextOffset: typeof cleanTextOffset;
+declare const textApi_d_extractLinesOfText: typeof extractLinesOfText;
+declare const textApi_d_extractPossibleWordsFromTextOffset: typeof extractPossibleWordsFromTextOffset;
+declare const textApi_d_extractText: typeof extractText;
+declare const textApi_d_extractWordsFromCode: typeof extractWordsFromCode;
+declare const textApi_d_extractWordsFromCodeTextOffset: typeof extractWordsFromCodeTextOffset;
+declare const textApi_d_extractWordsFromText: typeof extractWordsFromText;
+declare const textApi_d_extractWordsFromTextOffset: typeof extractWordsFromTextOffset;
+declare const textApi_d_isFirstCharacterLower: typeof isFirstCharacterLower;
+declare const textApi_d_isFirstCharacterUpper: typeof isFirstCharacterUpper;
+declare const textApi_d_isLowerCase: typeof isLowerCase;
+declare const textApi_d_isUpperCase: typeof isUpperCase;
+declare const textApi_d_lcFirst: typeof lcFirst;
+declare const textApi_d_match: typeof match;
+declare const textApi_d_matchCase: typeof matchCase;
+declare const textApi_d_matchStringToTextOffset: typeof matchStringToTextOffset;
+declare const textApi_d_matchToTextOffset: typeof matchToTextOffset;
+declare const textApi_d_removeAccents: typeof removeAccents;
+declare const textApi_d_snakeToCamel: typeof snakeToCamel;
+declare const textApi_d_splitCamelCaseWord: typeof splitCamelCaseWord;
+declare const textApi_d_splitCamelCaseWordWithOffset: typeof splitCamelCaseWordWithOffset;
+declare const textApi_d_stringToRegExp: typeof stringToRegExp;
+declare const textApi_d_textOffset: typeof textOffset;
+declare const textApi_d_ucFirst: typeof ucFirst;
+declare namespace textApi_d {
+  export { textApi_d_calculateTextDocumentOffsets as calculateTextDocumentOffsets, textApi_d_camelToSnake as camelToSnake, textApi_d_cleanText as cleanText, textApi_d_cleanTextOffset as cleanTextOffset, textApi_d_extractLinesOfText as extractLinesOfText, textApi_d_extractPossibleWordsFromTextOffset as extractPossibleWordsFromTextOffset, textApi_d_extractText as extractText, textApi_d_extractWordsFromCode as extractWordsFromCode, textApi_d_extractWordsFromCodeTextOffset as extractWordsFromCodeTextOffset, textApi_d_extractWordsFromText as extractWordsFromText, textApi_d_extractWordsFromTextOffset as extractWordsFromTextOffset, textApi_d_isFirstCharacterLower as isFirstCharacterLower, textApi_d_isFirstCharacterUpper as isFirstCharacterUpper, textApi_d_isLowerCase as isLowerCase, textApi_d_isUpperCase as isUpperCase, textApi_d_lcFirst as lcFirst, textApi_d_match as match, textApi_d_matchCase as matchCase, textApi_d_matchStringToTextOffset as matchStringToTextOffset, textApi_d_matchToTextOffset as matchToTextOffset, textApi_d_removeAccents as removeAccents, textApi_d_snakeToCamel as snakeToCamel, textApi_d_splitCamelCaseWord as splitCamelCaseWord, textApi_d_splitCamelCaseWordWithOffset as splitCamelCaseWordWithOffset, textApi_d_stringToRegExp as stringToRegExp, textApi_d_textOffset as textOffset, textApi_d_ucFirst as ucFirst };
 }
 
-export { type CheckTextInfo, type ConfigurationDependencies, type CreateTextDocumentParams, type DetermineFinalDocumentSettingsResult, type Document, DocumentValidator, type DocumentValidatorOptions, ENV_CSPELL_GLOB_ROOT, type ExcludeFilesGlobMap, type ExclusionFunction, exclusionHelper_d as ExclusionHelper, type FeatureFlag, FeatureFlags, ImportError, type ImportFileRefWithError$1 as ImportFileRefWithError, IncludeExcludeFlag, type IncludeExcludeOptions, index_link_d as Link, type Logger, type PerfTimer, type SpellCheckFileOptions, type SpellCheckFilePerf, type SpellCheckFileResult, SpellingDictionaryLoadError, type SuggestedWord, SuggestionError, type SuggestionOptions, type SuggestionsForWordResult, text_d as Text, type TextDocument, type TextDocumentLine, type TextDocumentRef, type TextInfoItem, type TraceOptions, type TraceResult, type TraceWordResult, UnknownFeatureFlagError, type ValidationIssue, calcOverrideSettings, checkFilenameMatchesExcludeGlob as checkFilenameMatchesGlob, checkText, checkTextDocument, clearCachedFiles, clearCaches, combineTextAndLanguageSettings, combineTextAndLanguageSettings as constructSettingsForText, createConfigLoader, createPerfTimer, createTextDocument, currentSettingsFileVersion, defaultConfigFilenames, defaultFileName, defaultFileName as defaultSettingsFilename, determineFinalDocumentSettings, extractDependencies, extractImportErrors, fileToDocument, fileToTextDocument, finalizeSettings, getCachedFileSize, getDefaultBundledSettingsAsync, getDefaultConfigLoader, getDefaultSettings, getDictionary, getGlobalSettings, getGlobalSettingsAsync, getLanguagesForBasename as getLanguageIdsForBaseFilename, getLanguagesForExt, getLogger, getSources, getSystemFeatureFlags, getVirtualFS, isBinaryFile, isSpellingDictionaryLoadError, loadConfig, loadPnP, mergeInDocSettings, mergeSettings, readRawSettings, readSettings, readSettingsFiles, refreshDictionaryCache, resolveFile, searchForConfig, sectionCSpell, setLogger, shouldCheckDocument, spellCheckDocument, spellCheckFile, suggestionsForWord, suggestionsForWords, traceWords, traceWordsAsync, updateTextDocument, validateText };
+export { type CheckTextInfo, type ConfigurationDependencies, type CreateTextDocumentParams, type DetermineFinalDocumentSettingsResult, type Document, DocumentValidator, type DocumentValidatorOptions, ENV_CSPELL_GLOB_ROOT, type ExcludeFilesGlobMap, type ExclusionFunction, exclusionHelper_d as ExclusionHelper, type FeatureFlag, FeatureFlags, ImportError, type ImportFileRefWithError$1 as ImportFileRefWithError, IncludeExcludeFlag, type IncludeExcludeOptions, index_link_d as Link, type Logger, type PerfTimer, type SpellCheckFileOptions, type SpellCheckFilePerf, type SpellCheckFileResult, SpellingDictionaryLoadError, type SuggestedWord, SuggestionError, type SuggestionOptions, type SuggestionsForWordResult, textApi_d as Text, type TextDocument, type TextDocumentLine, type TextDocumentRef, type TextInfoItem, type TraceOptions, type TraceResult, type TraceWordResult, UnknownFeatureFlagError, type ValidationIssue, calcOverrideSettings, checkFilenameMatchesExcludeGlob as checkFilenameMatchesGlob, checkText, checkTextDocument, clearCachedFiles, clearCaches, combineTextAndLanguageSettings, combineTextAndLanguageSettings as constructSettingsForText, createConfigLoader, createPerfTimer, createTextDocument, currentSettingsFileVersion, defaultConfigFilenames, defaultFileName, defaultFileName as defaultSettingsFilename, determineFinalDocumentSettings, extractDependencies, extractImportErrors, fileToDocument, fileToTextDocument, finalizeSettings, getCachedFileSize, getDefaultBundledSettingsAsync, getDefaultConfigLoader, getDefaultSettings, getDictionary, getGlobalSettings, getGlobalSettingsAsync, getLanguagesForBasename as getLanguageIdsForBaseFilename, getLanguagesForExt, getLogger, getSources, getSystemFeatureFlags, getVirtualFS, isBinaryFile, isSpellingDictionaryLoadError, loadConfig, loadPnP, mergeInDocSettings, mergeSettings, readRawSettings, readSettings, readSettingsFiles, refreshDictionaryCache, resolveFile, searchForConfig, sectionCSpell, setLogger, shouldCheckDocument, spellCheckDocument, spellCheckFile, suggestionsForWord, suggestionsForWords, traceWords, traceWordsAsync, updateTextDocument, validateText };

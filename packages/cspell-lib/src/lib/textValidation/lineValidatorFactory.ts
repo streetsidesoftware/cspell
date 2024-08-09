@@ -10,9 +10,10 @@ import * as RxPat from '../Settings/RegExpPatterns.js';
 import {
     extractPossibleWordsFromTextOffset,
     extractText,
-    extractWordsFromCodeTextOffset,
     extractWordsFromTextOffset,
+    splitWordWithOffset,
 } from '../util/text.js';
+import { regExpCamelCaseWordBreaks, regExpCamelCaseWordBreaksWithEnglishSuffix } from '../util/textRegex.js';
 import { split } from '../util/wordSplitter.js';
 import { defaultMinWordLength } from './defaultConstants.js';
 import { isWordValidWithEscapeRetry } from './isWordValid.js';
@@ -199,9 +200,32 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
             // English exceptions :-(
             if (isAllCapsWithTrailingCommonEnglishSuffixOk(vr)) return [];
 
+            if (isWordIgnored(vr.text) || checkWord(vr).isFound) {
+                rememberFilter((_) => false)(vr);
+                return [];
+            }
+
+            const codeWordResults: ValidationIssueRO[] = checkCamelCaseWord(vr);
+
+            if (!codeWordResults.length) {
+                rememberFilter((_) => false)(vr);
+                return [];
+            }
+
+            return codeWordResults;
+        }
+
+        function checkCamelCaseWord(vr: ValidationIssueRO): ValidationIssueRO[] {
+            const results = _checkCamelCaseWord(vr, regExpCamelCaseWordBreaks);
+            if (!results.length) return results;
+            const resultsEnglishBreaks = _checkCamelCaseWord(vr, regExpCamelCaseWordBreaksWithEnglishSuffix);
+            return results.length < resultsEnglishBreaks.length ? results : resultsEnglishBreaks;
+        }
+
+        function _checkCamelCaseWord(vr: ValidationIssueRO, regExpWordBreaks: RegExp): ValidationIssueRO[] {
             const codeWordResults: ValidationIssueRO[] = [];
 
-            for (const wo of extractWordsFromCodeTextOffset(vr)) {
+            for (const wo of splitWordWithOffset(vr, regExpWordBreaks)) {
                 if (setOfKnownSuccessfulWords.has(wo.text)) continue;
                 const issue = wo as ValidationIssue;
                 issue.line = vr.line;
@@ -213,11 +237,6 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
                 if (!isFlaggedOrNotFound(issue) || !isNotRepeatingChar(issue)) continue;
                 issue.text = extractText(lineSegment.segment, issue.offset, issue.offset + issue.text.length);
                 codeWordResults.push(issue);
-            }
-
-            if (!codeWordResults.length || isWordIgnored(vr.text) || checkWord(vr).isFound) {
-                rememberFilter((_) => false)(vr);
-                return [];
             }
 
             return codeWordResults;
