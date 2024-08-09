@@ -13,7 +13,7 @@ import {
     extractWordsFromTextOffset,
     splitWordWithOffset,
 } from '../util/text.js';
-import { regExpCamelCaseWordBreaks, regExpCamelCaseWordBreaksWithEnglishSuffix } from '../util/textRegex.js';
+import { regExpCamelCaseWordBreaksWithEnglishSuffix } from '../util/textRegex.js';
 import { split } from '../util/wordSplitter.js';
 import { defaultMinWordLength } from './defaultConstants.js';
 import { isWordValidWithEscapeRetry } from './isWordValid.js';
@@ -204,6 +204,7 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
                 rememberFilter((_) => false)(vr);
                 return [];
             }
+            if (vr.isFlagged) return [vr];
 
             const codeWordResults: ValidationIssueRO[] = checkCamelCaseWord(vr);
 
@@ -215,11 +216,29 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
             return codeWordResults;
         }
 
+        /**
+         * Break a camel case word into its parts and check each part.
+         *
+         * There are two word break patterns:
+         * - `regExpCamelCaseWordBreaks`
+         * - `regExpCamelCaseWordBreaksWithEnglishSuffix` is the default pattern with English suffixes on ALL CAPS words.
+         *
+         * Note: See [#6066](https://github.com/streetsidesoftware/cspell/pull/6066)
+         * Using just `regExpCamelCaseWordBreaks` misses unknown 4-letter words.
+         *
+         * The code below was tried, but it missed words.
+         * - `LSTM` was caught. // cspell:disable-line
+         * - `LSTMs` was missed because it becomes `LST` and `Ms`. // cspell:disable-line
+         *
+         * ```ts
+         * const results = _checkCamelCaseWord(vr, regExpCamelCaseWordBreaks);
+         * if (!results.length) return results;
+         * const resultsEnglishBreaks = _checkCamelCaseWord(vr, regExpCamelCaseWordBreaksWithEnglishSuffix);
+         * return results.length < resultsEnglishBreaks.length ? results : resultsEnglishBreaks;
+         * ```
+         */
         function checkCamelCaseWord(vr: ValidationIssueRO): ValidationIssueRO[] {
-            const results = _checkCamelCaseWord(vr, regExpCamelCaseWordBreaks);
-            if (!results.length) return results;
-            const resultsEnglishBreaks = _checkCamelCaseWord(vr, regExpCamelCaseWordBreaksWithEnglishSuffix);
-            return results.length < resultsEnglishBreaks.length ? results : resultsEnglishBreaks;
+            return _checkCamelCaseWord(vr, regExpCamelCaseWordBreaksWithEnglishSuffix);
         }
 
         function _checkCamelCaseWord(vr: ValidationIssueRO, regExpWordBreaks: RegExp): ValidationIssueRO[] {

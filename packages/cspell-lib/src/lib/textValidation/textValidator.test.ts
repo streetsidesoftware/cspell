@@ -57,7 +57,7 @@ describe('Validate textValidator functions', () => {
         const text = 'markUIAsReady() ';
         const result = [...validateText(text, dictEmpty, sToV({}))];
         const errors = result.map((wo) => wo.text);
-        expect(errors).toEqual([]);
+        expect(errors).toEqual(['UIAs']);
     });
 
     test('tests case in ignore words', async () => {
