@@ -10,9 +10,10 @@ import * as RxPat from '../Settings/RegExpPatterns.js';
 import {
     extractPossibleWordsFromTextOffset,
     extractText,
-    extractWordsFromCodeTextOffset,
     extractWordsFromTextOffset,
+    splitWordWithOffset,
 } from '../util/text.js';
+import { regExpCamelCaseWordBreaksWithEnglishSuffix } from '../util/textRegex.js';
 import { split } from '../util/wordSplitter.js';
 import { defaultMinWordLength } from './defaultConstants.js';
 import { isWordValidWithEscapeRetry } from './isWordValid.js';
@@ -199,9 +200,51 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
             // English exceptions :-(
             if (isAllCapsWithTrailingCommonEnglishSuffixOk(vr)) return [];
 
+            if (isWordIgnored(vr.text) || checkWord(vr).isFound) {
+                rememberFilter((_) => false)(vr);
+                return [];
+            }
+            if (vr.isFlagged) return [vr];
+
+            const codeWordResults: ValidationIssueRO[] = checkCamelCaseWord(vr);
+
+            if (!codeWordResults.length) {
+                rememberFilter((_) => false)(vr);
+                return [];
+            }
+
+            return codeWordResults;
+        }
+
+        /**
+         * Break a camel case word into its parts and check each part.
+         *
+         * There are two word break patterns:
+         * - `regExpCamelCaseWordBreaks`
+         * - `regExpCamelCaseWordBreaksWithEnglishSuffix` is the default pattern with English suffixes on ALL CAPS words.
+         *
+         * Note: See [#6066](https://github.com/streetsidesoftware/cspell/pull/6066)
+         * Using just `regExpCamelCaseWordBreaks` misses unknown 4-letter words.
+         *
+         * The code below was tried, but it missed words.
+         * - `LSTM` was caught. // cspell:disable-line
+         * - `LSTMs` was missed because it becomes `LST` and `Ms`. // cspell:disable-line
+         *
+         * ```ts
+         * const results = _checkCamelCaseWord(vr, regExpCamelCaseWordBreaks);
+         * if (!results.length) return results;
+         * const resultsEnglishBreaks = _checkCamelCaseWord(vr, regExpCamelCaseWordBreaksWithEnglishSuffix);
+         * return results.length < resultsEnglishBreaks.length ? results : resultsEnglishBreaks;
+         * ```
+         */
+        function checkCamelCaseWord(vr: ValidationIssueRO): ValidationIssueRO[] {
+            return _checkCamelCaseWord(vr, regExpCamelCaseWordBreaksWithEnglishSuffix);
+        }
+
+        function _checkCamelCaseWord(vr: ValidationIssueRO, regExpWordBreaks: RegExp): ValidationIssueRO[] {
             const codeWordResults: ValidationIssueRO[] = [];
 
-            for (const wo of extractWordsFromCodeTextOffset(vr)) {
+            for (const wo of splitWordWithOffset(vr, regExpWordBreaks)) {
                 if (setOfKnownSuccessfulWords.has(wo.text)) continue;
                 const issue = wo as ValidationIssue;
                 issue.line = vr.line;
@@ -213,11 +256,6 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
                 if (!isFlaggedOrNotFound(issue) || !isNotRepeatingChar(issue)) continue;
                 issue.text = extractText(lineSegment.segment, issue.offset, issue.offset + issue.text.length);
                 codeWordResults.push(issue);
-            }
-
-            if (!codeWordResults.length || isWordIgnored(vr.text) || checkWord(vr).isFound) {
-                rememberFilter((_) => false)(vr);
-                return [];
             }
 
             return codeWordResults;

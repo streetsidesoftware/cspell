@@ -83,7 +83,7 @@ export type { TraceOptions, TraceResult, TraceWordResult } from './trace.js';
 export { traceWords, traceWordsAsync } from './trace.js';
 export { getLogger, Logger, setLogger } from './util/logger.js';
 export { resolveFile } from './util/resolveFile.js';
-export * as Text from './util/text.js';
+export * as Text from './util/textApi.js';
 export {
     checkText,
     checkTextDocument,
