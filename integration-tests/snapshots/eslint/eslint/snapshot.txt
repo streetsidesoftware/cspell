@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: [".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 1946, Issues found: 1753 in 329 files.
+ CSpell: Files checked: 1981, Issues found: 1774 in 330 files.
  exit code: 1
 Makefile.js:132:88    - Unknown word (ined)               -- followed by the string "ined".
 Makefile.js:343:12    - Unknown word (gensite)            -- target.gensite();
@@ -85,7 +85,7 @@ docs/src/extend/custom-formatters.md:274:9     - Unknown word (eslintformatter) 
 docs/src/extend/custom-parsers.md:121:27    - Unknown word (myparser)   -- install eslint-parser-myparser --save-dev
 docs/src/extend/custom-rule-tutorial.md:171:4     - Unknown word (endraw)     -- {% endraw %}
 docs/src/extend/custom-rule-tutorial.md:87:127    - Unknown word (fixability) -- documentation, and fixability. In this case, the rule
-docs/src/extend/plugin-migration-flat-config.md:217:17    - Unknown word (xdescribe)  -- xdescribe: true
+docs/src/extend/plugin-migration-flat-config.md:252:17    - Unknown word (xdescribe)  -- xdescribe: true
 docs/src/extend/selectors.md:140:405   - Unknown word (Fpath)      -- so: `[value=/some\u002Fpath/]`.
 docs/src/extend/shareable-configs-deprecated.md:19:55     - Unknown word (myconfig)   -- such as `eslint-config-myconfig`.
 docs/src/integrate/nodejs-api.md:209:35    - Unknown word (omittable)  -- parameter `options` is omittable.
@@ -170,6 +170,8 @@ docs/src/use/command-line-interface.md:303:68    - Unknown word (levn)       -- 
 docs/src/use/command-line-interface.md:454:5     - Unknown word (myfile)     -- cat myfile.js | npx eslint --stdin
 docs/src/use/command-line-interface.md:550:17    - Unknown word (customformat) -- npx eslint -f ./customformat.js file.js
 docs/src/use/configure/configuration-files-deprecated.md:39:25     - Unknown word (myfiletotest) -- eslint -c myconfig.json myfiletotest.js
+docs/src/use/configure/configuration-files.md:514:134   - Unknown word (jiti)       -- optional dev dependency [`jiti`](https://github.com
+docs/src/use/configure/configuration-files.md:514:5     - Unknown word (Deno)       -- For Deno and Bun, TypeScript
 docs/src/use/configure/debug.md:28:44     - Unknown word (nzakas)     -- config from C:\Users\nzakas\projects\eslint\eslint
 docs/src/use/configure/ignore-deprecated.md:100:200   - Unknown word (jshintignore) -- example, you can use `.jshintignore` file because it has
 docs/src/use/configure/ignore-deprecated.md:120:14    - Unknown word (mypackage)    -- "name": "mypackage",
@@ -215,6 +217,7 @@ lib/config/flat-config-schema.js:255:42    - Unknown word (incompat)   -- messag
 lib/eslint/eslint-helpers.js:18:26     - Unknown word (nodelib)    -- const fswalk = require("@nodelib/fs.walk");
 lib/eslint/eslint-helpers.js:18:7      - Unknown word (fswalk)     -- const fswalk = require("@nodelib
 lib/eslint/eslint-helpers.js:629:34    - Unknown word (unconfigured) -- ignored"|"external"|"unconfigured"} configStatus A status
+lib/eslint/eslint.js:368:21    - Unknown word (Jiti)       -- const createJiti = await import("jiti
 lib/languages/js/index.js:102:47    - Unknown word (FEENSTRA)   -- NO EVENT SHALL JOEL FEENSTRA BE LIABLE FOR ANY
 lib/languages/js/index.js:85:37     - Unknown word (Feenstra)   -- Copyright (c) 2013, Joel Feenstra
 lib/linter/code-path-analysis/code-path-state.js:1256:46   - Unknown word (circuting)  -- path due to the short-circuting, so we are just seeding
@@ -269,7 +272,7 @@ lib/rules/use-isnan.js:131:25    - Unknown word (Castable)    -- const isCastabl
 lib/rules/use-isnan.js:89:15     - Unknown word (castable)   -- const castableOperators = new Set(
 lib/rules/utils/ast-utils.js:404:40    - Unknown word (samely)     -- a.b` and `a?.b` are samely.
 package.json:127:6     - Unknown word (eslump)     -- "eslump": "^3.0.0",
-package.json:144:6     - Unknown word (metascraper) -- "metascraper": "^5.25.7",
+package.json:145:6     - Unknown word (metascraper) -- "metascraper": "^5.25.7",
 templates/blogpost.md.ejs:18:10     - Unknown word (linkify)    -- function linkify(line) {
 tests/fixtures/code-path-analysis/try--try-finally-4.js:43:156    - Unknown word (Expressio)  -- Expression\nIdentifier (bar)\nExpressio
 tests/fixtures/config-hierarchy/file-structure.json:19:10     - Unknown word (subbroken)  -- "subbroken": {
@@ -298,14 +301,15 @@ tests/lib/config/flat-config-array.js:2114:30   - Unknown word (doesnt)      -- 
 tests/lib/config/flat-config-array.js:211:22    - Unknown word (noniterable) -- it("should allow noniterable baseConfig objects"
 tests/lib/config/flat-config-schema.js:19:50     - Unknown word (reults)     -- expectedResult] The expected reults of merging first and
 tests/lib/config/flat-config-schema.js:46:20     - Unknown word (emtpy)      -- it("returns an emtpy object if both values
-tests/lib/eslint/eslint.js:1486:57   - Unknown word (doesnotexist) -- lintFiles(["subdir1", "doesnotexist/*.js"]);
-tests/lib/eslint/eslint.js:1561:58   - Unknown word (doesexist)    -- await eslint.lintFiles(["doesexist/*.js"]);
-tests/lib/eslint/eslint.js:2169:71   - Unknown word (unignoring)   -- unignored without also unignoring all files in them",
-tests/lib/eslint/eslint.js:2183:47   - Unknown word (jsfmt)        -- "!tests/format/**/jsfmt.spec.js"
-tests/lib/eslint/eslint.js:3391:39   - Unknown word (previos)      -- make sure that the previos assertion checks the
-tests/lib/eslint/eslint.js:3444:59   - Unknown word (intenationally) -- cacheFilePath, "[]"); // intenationally invalid to additionally
-tests/lib/eslint/eslint.js:3614:59   - Unknown word (occured)        -- the previous run that occured after the cache was
-tests/lib/eslint/eslint.js:6628:31   - Unknown word (dignore)        -- cwd: `${root}-dignore`,
+tests/lib/eslint/eslint.js:1736:57   - Unknown word (doesnotexist) -- lintFiles(["subdir1", "doesnotexist/*.js"]);
+tests/lib/eslint/eslint.js:1811:58   - Unknown word (doesexist)    -- await eslint.lintFiles(["doesexist/*.js"]);
+tests/lib/eslint/eslint.js:2419:71   - Unknown word (unignoring)   -- unignored without also unignoring all files in them",
+tests/lib/eslint/eslint.js:2433:47   - Unknown word (jsfmt)        -- "!tests/format/**/jsfmt.spec.js"
+tests/lib/eslint/eslint.js:3641:39   - Unknown word (previos)      -- make sure that the previos assertion checks the
+tests/lib/eslint/eslint.js:3694:59   - Unknown word (intenationally) -- cacheFilePath, "[]"); // intenationally invalid to additionally
+tests/lib/eslint/eslint.js:3864:59   - Unknown word (occured)        -- the previous run that occured after the cache was
+tests/lib/eslint/eslint.js:6301:40   - Unknown word (mcts)           -- "eslint.config.mcts": configFileContent
+tests/lib/eslint/eslint.js:7971:31   - Unknown word (dignore)        -- cwd: `${root}-dignore`,
 tests/lib/eslint/legacy-eslint.js:2536:24   - Unknown word (succesfully) -- it("should succesfully execute with a rule
 tests/lib/linter/config-comment-parser.js:159:41    - Unknown word (ELEVENTEEN) -- code = "a: seventy, b:ELEVENTEEN";
 tests/lib/linter/linter.js:16380:52  - Unknown word (intentionaly)   -- // intentionaly mutates objects and

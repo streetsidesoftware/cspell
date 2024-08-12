@@ -3,9 +3,9 @@ Repository: eslint/eslint
 Url: https://github.com/eslint/eslint
 Args: '[".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]'
 Summary:
-  files: 1946
-  filesWithIssues: 329
-  issues: 1753
+  files: 1981
+  filesWithIssues: 330
+  issues: 1774
   errors: 0
 Errors: []
 
@@ -60,7 +60,7 @@ issues:
   - "docs/src/extend/custom-parsers.md:121:27        myparser    U       install eslint-parser-myparser --save-dev"
   - "docs/src/extend/custom-rule-tutorial.md:87:127      fixability      U       documentation, and fixability. In this case, the rule"
   - "docs/src/extend/custom-rule-tutorial.md:171:4       endraw          U       {% endraw %}"
-  - "docs/src/extend/plugin-migration-flat-config.md:217:17      xdescribe       U       xdescribe: true"
+  - "docs/src/extend/plugin-migration-flat-config.md:252:17      xdescribe       U       xdescribe: true"
   - "docs/src/extend/selectors.md:140:405        Fpath       U       so: `[value=/some\\u002Fpath/]`."
   - "docs/src/extend/shareable-configs-deprecated.md:19:55       myconfig    U       such as `eslint-config-myconfig`."
   - "docs/src/integrate/nodejs-api.md:209:35         omittable       U       parameter `options` is omittable."
@@ -145,6 +145,8 @@ issues:
   - "docs/src/use/command-line-interface.md:454:5        myfile          U       cat myfile.js | npx eslint --stdin"
   - "docs/src/use/command-line-interface.md:550:17       customformat    U       npx eslint -f ./customformat.js file.js"
   - "docs/src/use/configure/configuration-files-deprecated.md:39:25          myfiletotest    U       eslint -c myconfig.json myfiletotest.js"
+  - "docs/src/use/configure/configuration-files.md:514:5         Deno    U       For Deno and Bun, TypeScript"
+  - "docs/src/use/configure/configuration-files.md:514:134       jiti    U       optional dev dependency [`jiti`](https://github.com"
   - "docs/src/use/configure/debug.md:28:44       nzakas      U       config from C:\\Users\\nzakas\\projects\\eslint\\eslint"
   - "docs/src/use/configure/ignore-deprecated.md:100:200     jshintignore    U       example, you can use `.jshintignore` file because it has"
   - "docs/src/use/configure/ignore-deprecated.md:120:14      mypackage       U       \"name\": \"mypackage\","
@@ -190,6 +192,7 @@ issues:
   - "lib/eslint/eslint-helpers.js:18:7           fswalk          U       const fswalk = require(\"@nodelib"
   - "lib/eslint/eslint-helpers.js:18:26          nodelib         U       const fswalk = require(\"@nodelib/fs.walk\");"
   - "lib/eslint/eslint-helpers.js:629:34         unconfigured    U       ignored\"|\"external\"|\"unconfigured\"} configStatus A status"
+  - "lib/eslint/eslint.js:368:21         Jiti    U       const createJiti = await import(\"jiti"
   - "lib/languages/js/index.js:85:37         Feenstra    U       Copyright (c) 2013, Joel Feenstra"
   - "lib/languages/js/index.js:102:47        FEENSTRA    U       NO EVENT SHALL JOEL FEENSTRA BE LIABLE FOR ANY"
   - "lib/linter/code-path-analysis/code-path-state.js:351:34         expresion       U       The end of the update expresion. This may change during"
@@ -249,7 +252,7 @@ issues:
   - "Makefile.js:343:12      gensite                 U       target.gensite();"
   - "Makefile.js:932:18      Multifiles              U       function downloadMultifilesTestTarget(cb) {"
   - "package.json:127:6          eslump          U       \"eslump\": \"^3.0.0\","
-  - "package.json:144:6          metascraper     U       \"metascraper\": \"^5.25.7\","
+  - "package.json:145:6          metascraper     U       \"metascraper\": \"^5.25.7\","
   - "README.md:108:109       myplugin                U       npm view eslint-plugin-myplugin peerDependencies` to"
   - "README.md:212:5         teamstart               U       <!--teamstart-->"
   - "README.md:220:87        Zakas's                 U       5\" alt=\"Nicholas C. Zakas's Avatar\"><br />"
@@ -303,14 +306,15 @@ issues:
   - "tests/lib/config/flat-config-array.js:2114:30       doesnt (doesn't)    U       \"doesnt-exist/match\": \"error"
   - "tests/lib/config/flat-config-schema.js:19:50        reults      U       expectedResult] The expected reults of merging first and"
   - "tests/lib/config/flat-config-schema.js:46:20        emtpy       U       it(\"returns an emtpy object if both values"
-  - "tests/lib/eslint/eslint.js:1486:57      doesnotexist            U       lintFiles([\"subdir1\", \"doesnotexist/*.js\"]);"
-  - "tests/lib/eslint/eslint.js:1561:58      doesexist               U       await eslint.lintFiles([\"doesexist/*.js\"]);"
-  - "tests/lib/eslint/eslint.js:2169:71      unignoring              U       unignored without also unignoring all files in them\","
-  - "tests/lib/eslint/eslint.js:2183:47      jsfmt                   U       \"!tests/format/**/jsfmt.spec.js\""
-  - "tests/lib/eslint/eslint.js:3391:39      previos                 U       make sure that the previos assertion checks the"
-  - "tests/lib/eslint/eslint.js:3444:59      intenationally          U       cacheFilePath, \"[]\"); // intenationally invalid to additionally"
-  - "tests/lib/eslint/eslint.js:3614:59      occured (occurred)      U       the previous run that occured after the cache was"
-  - "tests/lib/eslint/eslint.js:6628:31      dignore                 U       cwd: `${root}-dignore`,"
+  - "tests/lib/eslint/eslint.js:1736:57      doesnotexist            U       lintFiles([\"subdir1\", \"doesnotexist/*.js\"]);"
+  - "tests/lib/eslint/eslint.js:1811:58      doesexist               U       await eslint.lintFiles([\"doesexist/*.js\"]);"
+  - "tests/lib/eslint/eslint.js:2419:71      unignoring              U       unignored without also unignoring all files in them\","
+  - "tests/lib/eslint/eslint.js:2433:47      jsfmt                   U       \"!tests/format/**/jsfmt.spec.js\""
+  - "tests/lib/eslint/eslint.js:3641:39      previos                 U       make sure that the previos assertion checks the"
+  - "tests/lib/eslint/eslint.js:3694:59      intenationally          U       cacheFilePath, \"[]\"); // intenationally invalid to additionally"
+  - "tests/lib/eslint/eslint.js:3864:59      occured (occurred)      U       the previous run that occured after the cache was"
+  - "tests/lib/eslint/eslint.js:6301:40      mcts                    U       \"eslint.config.mcts\": configFileContent"
+  - "tests/lib/eslint/eslint.js:7971:31      dignore                 U       cwd: `${root}-dignore`,"
   - "tests/lib/eslint/legacy-eslint.js:2536:24       succesfully (successfully)      U       it(\"should succesfully execute with a rule"
   - "tests/lib/linter/config-comment-parser.js:159:41        ELEVENTEEN      U       code = \"a: seventy, b:ELEVENTEEN\";"
   - "tests/lib/linter/linter.js:3287:1       consolexlog         U       consolexlog(\"test2\");"
@@ -656,6 +660,7 @@ issuesSummary:
   - "text: Cypro, count: 1, files: 1,"
   - "text: dbname, count: 3, files: 1,"
   - "text: decrementcurrent, count: 2, files: 1,"
+  - "text: Deno, count: 1, files: 1,"
   - "text: destructures, count: 1, files: 1,"
   - "text: devel, count: 4, files: 1,"
   - "text: Dfnp, count: 1, files: 1,"
@@ -785,6 +790,8 @@ issuesSummary:
   - "text: isfunc, count: 5, files: 1,"
   - "text: isnan, count: 9, files: 3,"
   - "text: isundef, count: 5, files: 1,"
+  - "text: jiti, count: 15, files: 5,"
+  - "text: Jiti, count: 2, files: 1,"
   - "text: jscript, count: 2, files: 1,"
   - "text: jscsrs, count: 1, files: 1,"
   - "text: jsfmt, count: 5, files: 1,"
@@ -838,6 +845,7 @@ issuesSummary:
   - "text: maxparams, count: 4, files: 1,"
   - "text: maxstatements, count: 4, files: 1,"
   - "text: mbad, count: 1, files: 1,"
+  - "text: mcts, count: 3, files: 1,"
   - "text: mdcs, count: 2, files: 1,"
   - "text: Meep, count: 2, files: 1,"
   - "text: merror, count: 5, files: 1,"

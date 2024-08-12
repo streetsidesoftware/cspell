@@ -4,8 +4,8 @@ Url: https://github.com/googleapis/google-cloud-cpp.git
 Args: '["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]'
 Summary:
   files: 19462
-  filesWithIssues: 12310
-  issues: 99905
+  filesWithIssues: 12311
+  issues: 99911
   errors: 0
 Errors: []
 
@@ -422,8 +422,8 @@ issues:
   - "external/googleapis/protolists/aiplatform.list:76:52        featurestore    U       cloud/aiplatform/v1:featurestore.proto"
   - "external/googleapis/protolists/aiplatform.list:80:52        genai           U       cloud/aiplatform/v1:genai_tuning_service.proto"
   - "external/googleapis/protolists/aiplatform.list:97:52        migratable      U       cloud/aiplatform/v1:migratable_resource.proto"
-  - "external/googleapis/protolists/aiplatform.list:131:52       tensorboard     U       cloud/aiplatform/v1:tensorboard.proto"
-  - "external/googleapis/protolists/aiplatform.list:141:52       unmanaged       U       cloud/aiplatform/v1:unmanaged_container_model.proto"
+  - "external/googleapis/protolists/aiplatform.list:132:52       tensorboard     U       cloud/aiplatform/v1:tensorboard.proto"
+  - "external/googleapis/protolists/aiplatform.list:142:52       unmanaged       U       cloud/aiplatform/v1:unmanaged_container_model.proto"
   - "external/googleapis/protolists/artifactregistry.list:10:61          vpcsc       U       artifactregistry/v1:vpcsc_config.proto"
   - "external/googleapis/protolists/baremetalsolution.list:7:59          osimage     U       baremetalsolution/v2:osimage.proto"
   - "external/googleapis/protolists/bigquery.list:4:63           datapolicy      U       bigquery/datapolicies/v1:datapolicy.proto"
@@ -503,7 +503,7 @@ issues:
   - "generator/internal/codegen_utils_test.cc:473:45         uhoh                                    U       CommentBlockTestParams{\"line1 uhoh\", 0, \"\", 0, 5, R\"\"\""
   - "generator/internal/codegen_utils_test.cc:476:43         wordthatiswaytoolong                    U       atCommentBlockTestParams{\"foo wordthatiswaytoolong\", 0, \"\", 0, 5,"
   - "generator/internal/codegen_utils.h:98:47        metacharacter       U       ), where comma is a metacharacter (see above)."
-  - "generator/internal/descriptor_utils_test.cc:1463:10     endcond     U       /// @endcond"
+  - "generator/internal/descriptor_utils_test.cc:1455:10     endcond     U       /// @endcond"
   - "generator/internal/descriptor_utils.cc:101:33       CPPTYPE         U       case FieldDescriptor::CPPTYPE_STRING:"
   - "generator/internal/descriptor_utils.cc:294:32       scikit          U       environment would specify the scikit-learn version as follows"
   - "generator/internal/descriptor_utils.cc:518:5        NOTREACHED      U       /*NOTREACHED*/"
@@ -530,7 +530,7 @@ issues:
   - "generator/internal/http_annotation_parser.h:66:18       pchar       U       * LITERAL = pchar { pchar }"
   - "generator/internal/http_annotation_parser.h:69:22       HEXDIG      U       * pct-encoded = \"%\" HEXDIG HEXDIG"
   - "generator/internal/longrunning.h:15:45          LONGRUNNING     U       CPP_GENERATOR_INTERNAL_LONGRUNNING_H"
-  - "generator/internal/pagination.cc:113:17         sqladmin    U       // For both the sqladmin and compute proto definitions"
+  - "generator/internal/pagination.cc:114:17         sqladmin    U       // For both the sqladmin and compute proto definitions"
   - "generator/internal/predicate_utils_test.cc:418:44       falsefragment       U       std::string(\"fragment0_falsefragment1_true\"));"
   - "generator/internal/printer_test.cc:36:33        Inigo       U       VarsDictionary vars{{\"name\", \"Inigo Montoya\"}};"
   - "generator/internal/resolve_comment_references_test.cc:261:38        Oneof       U       ResolveCommentsReferenceTest, Oneof) {"
@@ -880,7 +880,7 @@ issues:
   - "google/cloud/internal/build_info.cc.in:18:11        cctype              U       #include <cctype>"
   - "google/cloud/internal/build_info.cc.in:25:4         NOLINTNEXTLINE      U       // NOLINTNEXTLINE(readability-identifier"
   - "google/cloud/internal/compute_engine_util.h:26:49       sevrre      U       query a GCE metadata sevrre."
-  - "google/cloud/internal/curl_impl.cc:164:35       defrag      U       0) start_ = 0; // defrag optimization"
+  - "google/cloud/internal/curl_impl.cc:170:35       defrag      U       0) start_ = 0; // defrag optimization"
   - "google/cloud/internal/curl_rest_client_integration_test.cc:60:10        httpbin     U       auto httpbin_endpoint = google::cloud"
   - "google/cloud/internal/curl_rest_client_integration_test.cc:60:62        HTTPBIN     U       cloud::internal::GetEnv(\"HTTPBIN_ENDPOINT\");"
   - "google/cloud/internal/curl_rest_client_integration_test.cc:113:21       httbin      U       // TODO(#8396): httbin.org doesn't send back"
@@ -1281,7 +1281,7 @@ issues:
   - "google/cloud/tpu/v1/internal/tpu_auth_decorator.cc:104:64       Reimage     U       Operation>> TpuAuth::AsyncReimageNode("
   - "google/cloud/tpu/v1/tpu_client.h:449:7          Reimages    U       /// Reimages a node's OS."
   - "google/cloud/tracing_options_test.cc:65:14          unparseable     U       // Unknown/unparseable options are ignored"
-  - "google/cloud/translate/v3/translation_client.h:165:24       regionalized    U       // For global (non-regionalized) requests, use `location"
+  - "google/cloud/translate/v3/translation_client.h:168:24       regionalized    U       // For global (non-regionalized) requests, use `location"
   - "google/cloud/version.h:23:26        VCONCAT     U       define GOOGLE_CLOUD_CPP_VCONCAT(Ma, Mi, Pa) v##Ma##"
   - "google/cloud/version.h:24:26        VEVAL       U       define GOOGLE_CLOUD_CPP_VEVAL(Ma, Mi, Pa) GOOGLE_CLOUD"
   - "google/cloud/video/doc/environment-variables.dox:13:21          LIVESTREAM          U       - `GOOGLE_CLOUD_CPP_LIVESTREAM_SERVICE_ENDPOINT=.."

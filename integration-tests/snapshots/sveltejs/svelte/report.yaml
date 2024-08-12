@@ -3,9 +3,9 @@ Repository: sveltejs/svelte
 Url: https://github.com/sveltejs/svelte.git
 Args: '["**"]'
 Summary:
-  files: 7198
-  filesWithIssues: 668
-  issues: 5222
+  files: 7241
+  filesWithIssues: 665
+  issues: 5184
   errors: 0
 Errors: []
 
@@ -1160,8 +1160,8 @@ issues:
   - "packages/svelte/src/compiler/migrate/index.js:856:55        preceeded (preceded)    U       node. If the start is preceeded with white-space-only"
   - "packages/svelte/src/compiler/phases/1-parse/index.js:2:48           borked      U       type definitions are borked in the release we use"
   - "packages/svelte/src/compiler/phases/1-parse/read/options.js:3:20        MATHML          U       import { NAMESPACE_MATHML, NAMESPACE_SVG } from"
-  - "packages/svelte/src/compiler/phases/1-parse/read/options.js:140:12      shadowdom       U       const shadowdom = shadow?.value;"
-  - "packages/svelte/src/compiler/phases/1-parse/read/options.js:161:37      mathml          U       options.namespace = 'mathml';"
+  - "packages/svelte/src/compiler/phases/1-parse/read/options.js:138:12      shadowdom       U       const shadowdom = shadow?.value;"
+  - "packages/svelte/src/compiler/phases/1-parse/read/options.js:159:37      mathml          U       options.namespace = 'mathml';"
   - "packages/svelte/src/compiler/phases/1-parse/read/style.js:52:34         Atrule      U       Array<Css.Rule | Css.Atrule>} */"
   - "packages/svelte/src/compiler/phases/1-parse/state/element.js:59:20          shadowroot          U       function parent_is_shadowroot_template(stack) {"
   - "packages/svelte/src/compiler/phases/1-parse/state/element.js:66:50          shadowrootmode      U       Attribute' && a.name === 'shadowrootmode'"
@@ -2434,7 +2434,7 @@ issues:
   - "packages/svelte/src/compiler/phases/2-analyze/css/css-prune.js:206:19       combinators     U       // TODO other combinators"
   - "packages/svelte/src/compiler/phases/2-analyze/css/css-prune.js:234:29       unscopeable     U       a `:global(...)` or unscopeable selector, or"
   - "packages/svelte/src/compiler/phases/2-analyze/index.js:444:18       nonstate    U       // warn on any nonstate declarations that are"
-  - "packages/svelte/src/compiler/phases/2-analyze/visitors/Attribute.js:43:35       hoistable       U       delegated_event.type === 'hoistable') {"
+  - "packages/svelte/src/compiler/phases/2-analyze/visitors/Attribute.js:54:7        unhoisted       U       const unhoisted = { hoisted: false"
   - "packages/svelte/src/compiler/phases/2-analyze/visitors/RegularElement.js:41:72          qirk    U       stripped because of a qirk:"
   - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y.js:335:3         bday            U       'bday',"
   - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y.js:354:3         impp            U       'impp'"
@@ -2442,16 +2442,15 @@ issues:
   - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y.js:418:12        labelable       U       const a11y_labelable = ["
   - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y.js:749:12        proptypes       U       // aria-proptypes"
   - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/utils.js:99:41        inbetween (between)     U       whitespace is allowed inbetween. TODO remove once legacy"
-  - "packages/svelte/src/compiler/phases/3-transform/client/utils.js:368:29      unsub       U       return b.call('$.store_unsub', call, b.literal(`"
-  - "packages/svelte/src/compiler/phases/3-transform/client/visitors/RegularElement.js:458:67        readded     U       it isn't removed and readded on every update"
-  - "packages/svelte/src/compiler/phases/3-transform/client/visitors/shared/element.js:62:65         toogle      U       something like `$.class_toogle(element, class_name"
-  - "packages/svelte/src/compiler/phases/3-transform/client/visitors/SvelteElement.js:80:46          computeds       U       ...lets); // create computeds in the outer context"
+  - "packages/svelte/src/compiler/phases/3-transform/client/visitors/RegularElement.js:469:67        readded     U       it isn't removed and readded on every update"
+  - "packages/svelte/src/compiler/phases/3-transform/client/visitors/shared/declarations.js:31:30        unsub       U       call = b.call('$.store_unsub', call, b.literal(`"
+  - "packages/svelte/src/compiler/phases/3-transform/client/visitors/shared/element.js:57:65         toogle      U       something like `$.class_toogle(element, class_name"
+  - "packages/svelte/src/compiler/phases/3-transform/client/visitors/SvelteElement.js:83:46          computeds       U       ...lets); // create computeds in the outer context"
   - "packages/svelte/src/compiler/phases/3-transform/utils.js:236:76         spaceand    U       text node with a single spaceand keep whitespace"
   - "packages/svelte/src/compiler/phases/patterns.js:21:43       aeiou       U       starts_with_vowel = /^[aeiou]/;"
-  - "packages/svelte/src/compiler/phases/scope.js:413:128        hella       U       itself, because slots are hella weird"
-  - "packages/svelte/src/compiler/types/index.d.ts:308:45        klass       U       class` in `{ export klass as class}`. $props("
-  - "packages/svelte/src/compiler/types/template.d.ts:42:41          mrow    U       for e.g. `<math>` or `<mrow>`"
-  - "packages/svelte/src/compiler/utils/ast.js:532:40        subexpression       U       expression.expressions.some((subexpression) => is_expression_async"
+  - "packages/svelte/src/compiler/types/index.d.ts:306:45        klass       U       class` in `{ export klass as class}`. $props("
+  - "packages/svelte/src/compiler/types/template.d.ts:43:41          mrow    U       for e.g. `<math>` or `<mrow>`"
+  - "packages/svelte/src/compiler/utils/ast.js:531:40        subexpression       U       expression.expressions.some((subexpression) => is_expression_async"
   - "packages/svelte/src/compiler/utils/builders.js:472:12       instane     U       const null_instane = literal(null);"
   - "packages/svelte/src/compiler/utils/extract_svelte_ignore.js:16:16       eachblock       U       'invalid-rest-eachblock-binding': 'bind_invalid"
   - "packages/svelte/src/compiler/utils/mapped_code.js:134:6         unswitched      U       // unswitched loops are faster"
@@ -2466,12 +2465,12 @@ issues:
   - "packages/svelte/src/internal/client/dom/elements/class.js:80:6          peformance      U       // peformance issues vs simply making"
   - "packages/svelte/src/internal/client/dom/elements/misc.js:54:66          possiblity (possibility)    U       get noticed of it (no possiblity of stopPropagation)"
   - "packages/svelte/src/internal/client/dom/elements/transitions.js:213:71      outro'd     U       element is intro'd, then outro'd, then intro'd again"
-  - "packages/svelte/src/internal/client/dom/elements/transitions.js:371:7       WAAPI       U       // WAAPI"
-  - "packages/svelte/src/internal/client/reactivity/props.js:344:36      synchronisation     U       current_value); // force a synchronisation immediately"
+  - "packages/svelte/src/internal/client/dom/elements/transitions.js:380:7       WAAPI       U       // WAAPI"
+  - "packages/svelte/src/internal/client/reactivity/props.js:351:36      synchronisation     U       current_value); // force a synchronisation immediately"
   - "packages/svelte/src/internal/client/reactivity/types.d.ts:33:6          Deriveds    U       /** Deriveds created inside this"
   - "packages/svelte/src/internal/client/render.js:149:19        occured (occurred)      U       // If an error occured above, the operations"
-  - "packages/svelte/src/internal/client/runtime.js:807:26       doesnt (doesn't)    U       mutate(dep, null /* doesnt matter */);"
-  - "packages/svelte/src/internal/client/runtime.js:1177:29      noone (no one)      U       value; // let's hope noone modifies this global"
+  - "packages/svelte/src/internal/client/runtime.js:810:26       doesnt (doesn't)    U       mutate(dep, null /* doesnt matter */);"
+  - "packages/svelte/src/internal/client/runtime.js:1164:29      noone (no one)      U       value; // let's hope noone modifies this global"
   - "packages/svelte/src/internal/client/types.d.ts:181:20       proxified       U       /** `true` if the proxified object is an array"
   - "packages/svelte/src/internal/server/index.js:23:23          FDEF        U       [\\s'\">/=\\u{FDD0}-\\u{FDEF}\\u{FFFE}\\u{FFFF}\\u{"
   - "packages/svelte/src/internal/server/index.js:23:31          FFFE        U       \\u{FDD0}-\\u{FDEF}\\u{FFFE}\\u{FFFF}\\u{1FFFE}\\u"
@@ -2542,7 +2541,7 @@ issues:
   - "packages/svelte/tests/css/samples/unused-selector-string-concat/expected.css:10:4           aabar       U       .aabar.svelte-xyz {color: red"
   - "packages/svelte/tests/css/samples/unused-selector-string-concat/expected.css:17:4           fooddbar    U       .fooddbar.svelte-xyz {color: red"
   - "packages/svelte/tests/css/samples/unused-selector-ternary/_config.js:11:36          maybeactive     U       Unused CSS selector \".maybeactive\"',"
-  - "packages/svelte/tests/hydration/test.ts:131:22      borks       U       // Error logger borks because of circular"
+  - "packages/svelte/tests/hydration/test.ts:132:22      borks       U       // Error logger borks because of circular"
   - "packages/svelte/tests/migrate/samples/event-handlers/output.svelte:2:80         oncustom    U       event: any) => void, 'oncustom-event-bubble'?: (event"
   - "packages/svelte/tests/parser-legacy/samples/action-duplicate/output.json:17:16          autofocus       U       \"name\": \"autofocus\","
   - "packages/svelte/tests/parser-legacy/samples/nbsp/output.json:18:16          nbsp    U       \"raw\": \"&nbsp;\","
@@ -2614,6 +2613,7 @@ issues:
   - "packages/svelte/tests/runtime-legacy/samples/each-block-keyed-random-permute/_config.js:60:9        kgjnempcboaflidh            U       test('kgjnempcboaflidh');"
   - "packages/svelte/tests/runtime-legacy/samples/each-block-keyed-random-permute/_config.js:61:9        fekbijachgd                 U       test('fekbijachgd');"
   - "packages/svelte/tests/runtime-legacy/samples/each-block-keyed-random-permute/_config.js:62:9        kdmlgfbicheja               U       test('kdmlgfbicheja');"
+  - "packages/svelte/tests/runtime-legacy/samples/function-hoisting/main.svelte:5:37         hoistable       U       functions, and `name` are hoistable, but hoistMe does not"
   - "packages/svelte/tests/runtime-legacy/samples/helpers/_config.js:4:12        sdrawkcab       U       html: '<p>sdrawkcab</p>'"
   - "packages/svelte/tests/runtime-legacy/samples/html-entities-inside-attributes/_config.js:13:24       copyotherstring     U       span data-xxx=\"&amp;copyotherstring=value\" style=\"&amp;copyothers"
   - "packages/svelte/tests/runtime-legacy/samples/html-entities/_config.js:16:14         stringnotanentity       U       <span>&amp;stringnotanentity;</span>"
@@ -2648,8 +2648,8 @@ issues:
   - "packages/svelte/tests/runtime-runes/samples/destructure-async-assignments/main.svelte:48:13         mult            U       let mult = (a, b) => (a * b)"
   - "packages/svelte/tests/runtime-runes/samples/destructure-async-assignments/main.svelte:57:12         anotherprop     U       ({ anotherprop: p = await Promise.resolve"
   - "packages/svelte/tests/runtime-runes/samples/directives-with-member-access/main.svelte:14:31         Relatedly       U       other words a number. Relatedly, people should not do"
-  - "packages/svelte/tests/runtime-runes/samples/dynamic-element-event-handler-2/_config.js:4:17         Tama        U       html: '<button>Tama</button><button>Pochi"
-  - "packages/svelte/tests/runtime-runes/samples/dynamic-element-event-handler-2/_config.js:4:38         Pochi       U       Tama</button><button>Pochi</button><br><button"
+  - "packages/svelte/tests/runtime-runes/samples/dynamic-event-handler-2/_config.js:4:17         Tama        U       html: '<button>Tama</button><button>Pochi"
+  - "packages/svelte/tests/runtime-runes/samples/dynamic-event-handler-2/_config.js:4:38         Pochi       U       Tama</button><button>Pochi</button><br><button"
   - "packages/svelte/tests/runtime-runes/samples/event-attribute-not-hoistable/main.svelte:31:73         delegateable    U       when one of them is not delegateable -->"
   - "packages/svelte/tests/runtime-runes/samples/multiple-head/_config.js:9:155          svelteawesome       U       description\"><meta content=\"@svelteawesome\" name=\"author\"><title"
   - "packages/svelte/tests/runtime-runes/samples/non-local-mutation-with-binding-3/Counter.svelte:2:42           notshared       U       { count: number }, notshared: { count: number }"
