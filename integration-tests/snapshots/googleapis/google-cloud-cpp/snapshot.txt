@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 19462, Issues found: 99905 in 12310 files.
+ CSpell: Files checked: 19462, Issues found: 99911 in 12311 files.
  exit code: 1
 ARCHITECTURE.md:110:20    - Unknown word (bigtable)   -- - Bigtable has a [`bigtable::DataClient`](/google
 ARCHITECTURE.md:110:3     - Unknown word (Bigtable)   -- - Bigtable has a [`bigtable::DataClient
@@ -414,8 +414,8 @@ external/googleapis/CMakeLists.txt:81:32     - Unknown word (iamcredentials) -- 
 external/googleapis/CMakeLists.txt:86:13     - Unknown word (longrunning)    -- "google/longrunning/operations.proto"
 external/googleapis/CMakeLists.txt:95:18     - Unknown word (dayofweek)      -- "google/type/dayofweek.proto"
 external/googleapis/protodeps/binaryauthorization.deps:8:25      - Unknown word (grafeas)    -- com_google_googleapis//grafeas/v1:grafeas_proto
-external/googleapis/protolists/aiplatform.list:131:52    - Unknown word (tensorboard)  -- cloud/aiplatform/v1:tensorboard.proto
-external/googleapis/protolists/aiplatform.list:141:52    - Unknown word (unmanaged)    -- cloud/aiplatform/v1:unmanaged_container_model.proto
+external/googleapis/protolists/aiplatform.list:132:52    - Unknown word (tensorboard)  -- cloud/aiplatform/v1:tensorboard.proto
+external/googleapis/protolists/aiplatform.list:142:52    - Unknown word (unmanaged)    -- cloud/aiplatform/v1:unmanaged_container_model.proto
 external/googleapis/protolists/aiplatform.list:27:59     - Unknown word (trainingjob) -- aiplatform/v1/schema/trainingjob/definition:automl_image
 external/googleapis/protolists/aiplatform.list:76:52     - Unknown word (featurestore) -- cloud/aiplatform/v1:featurestore.proto
 external/googleapis/protolists/aiplatform.list:80:52     - Unknown word (genai)        -- cloud/aiplatform/v1:genai_tuning_service.proto
@@ -502,7 +502,7 @@ generator/internal/codegen_utils_test.cc:62:59     - Unknown word (BAAAAA)     -
 generator/internal/descriptor_utils.cc:101:33    - Unknown word (CPPTYPE)    -- case FieldDescriptor::CPPTYPE_STRING:
 generator/internal/descriptor_utils.cc:294:32    - Unknown word (scikit)     -- environment would specify the scikit-learn version as follows
 generator/internal/descriptor_utils.cc:518:5     - Unknown word (NOTREACHED) -- /*NOTREACHED*/
-generator/internal/descriptor_utils_test.cc:1463:10   - Unknown word (endcond)    -- /// @endcond
+generator/internal/descriptor_utils_test.cc:1455:10   - Unknown word (endcond)    -- /// @endcond
 generator/internal/discovery_proto_export_file_test.cc:50:36     - Unknown word (IWYU)       -- However, it is not IWYU friendly. Including
 generator/internal/discovery_to_proto.cc:577:13    - Unknown word (sdhart)     -- // TODO(sdhart): figure out if we can
 generator/internal/discovery_to_proto.cc:577:68    - Unknown word (nhlomann)   -- more error info from nhlomann as
@@ -526,7 +526,7 @@ generator/internal/http_annotation_parser.h:69:22     - Unknown word (HEXDIG)   
 generator/internal/http_annotation_parser_test.cc:159:12    - Unknown word (gkeconnect) -- // cloud/gkeconnect/v1beta1/gateway.proto
 generator/internal/http_annotation_parser_test.cc:244:6     - Unknown word (Parset)     -- TEST(ParsetHttpTemplate, OStream
 generator/internal/longrunning.h:15:45     - Unknown word (LONGRUNNING) -- CPP_GENERATOR_INTERNAL_LONGRUNNING_H
-generator/internal/pagination.cc:113:17    - Unknown word (sqladmin)   -- // For both the sqladmin and compute proto definitions
+generator/internal/pagination.cc:114:17    - Unknown word (sqladmin)   -- // For both the sqladmin and compute proto definitions
 generator/internal/predicate_utils_test.cc:418:44    - Unknown word (falsefragment) -- std::string("fragment0_falsefragment1_true"));
 generator/internal/printer_test.cc:36:33     - Unknown word (Inigo)      -- VarsDictionary vars{{"name", "Inigo Montoya"}};
 generator/internal/resolve_comment_references_test.cc:261:38    - Unknown word (Oneof)      -- ResolveCommentsReferenceTest, Oneof) {
@@ -876,7 +876,7 @@ google/cloud/internal/base64_transforms_test.cc:48:54     - Unknown word (Fycw) 
 google/cloud/internal/build_info.cc.in:18:11     - Unknown word (cctype)     -- #include <cctype>
 google/cloud/internal/build_info.cc.in:25:4      - Unknown word (NOLINTNEXTLINE) -- // NOLINTNEXTLINE(readability-identifier
 google/cloud/internal/compute_engine_util.h:26:49     - Unknown word (sevrre)     -- query a GCE metadata sevrre.
-google/cloud/internal/curl_impl.cc:164:35    - Unknown word (defrag)     -- 0) start_ = 0;  // defrag optimization
+google/cloud/internal/curl_impl.cc:170:35    - Unknown word (defrag)     -- 0) start_ = 0;  // defrag optimization
 google/cloud/internal/curl_rest_client_integration_test.cc:113:21    - Unknown word (httbin)     -- // TODO(#8396): httbin.org doesn't send back
 google/cloud/internal/curl_rest_client_integration_test.cc:60:10     - Unknown word (httpbin)    -- auto httpbin_endpoint = google::cloud
 google/cloud/internal/curl_rest_client_integration_test.cc:60:62     - Unknown word (HTTPBIN)    -- cloud::internal::GetEnv("HTTPBIN_ENDPOINT");
@@ -1277,7 +1277,7 @@ google/cloud/timeseriesinsights/v1/internal/timeseries_insights_controller_auth_
 google/cloud/tpu/v1/internal/tpu_auth_decorator.cc:104:64    - Unknown word (Reimage)    -- Operation>> TpuAuth::AsyncReimageNode(
 google/cloud/tpu/v1/tpu_client.h:449:7     - Unknown word (Reimages)   -- /// Reimages a node's OS.
 google/cloud/tracing_options_test.cc:65:14     - Unknown word (unparseable) -- // Unknown/unparseable options are ignored
-google/cloud/translate/v3/translation_client.h:165:24    - Unknown word (regionalized) -- // For global (non-regionalized) requests, use `location
+google/cloud/translate/v3/translation_client.h:168:24    - Unknown word (regionalized) -- // For global (non-regionalized) requests, use `location
 google/cloud/version.h:23:26     - Unknown word (VCONCAT)    -- define GOOGLE_CLOUD_CPP_VCONCAT(Ma, Mi, Pa) v##Ma##
 google/cloud/version.h:24:26     - Unknown word (VEVAL)      -- define GOOGLE_CLOUD_CPP_VEVAL(Ma, Mi, Pa) GOOGLE_CLOUD
 google/cloud/video/doc/environment-variables.dox:13:21     - Unknown word (LIVESTREAM) -- - `GOOGLE_CLOUD_CPP_LIVESTREAM_SERVICE_ENDPOINT=..

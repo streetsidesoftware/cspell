@@ -3,9 +3,9 @@ Repository: caddyserver/caddy
 Url: https://github.com/caddyserver/caddy.git
 Args: '["**/*.go"]'
 Summary:
-  files: 275
+  files: 276
   filesWithIssues: 255
-  issues: 4109
+  issues: 4119
   errors: 0
 Errors: []
 
@@ -217,10 +217,10 @@ issues:
   - "modules/caddyhttp/fileserver/matcher.go:333:3       fullpath    U       fullpath, relative, splitRemainder"
   - "modules/caddyhttp/fileserver/matcher.go:562:2       nlen        U       nlen := len(needle)"
   - "modules/caddyhttp/fileserver/staticfiles.go:125:51      explictness         U       maximum clarity and explictness, use complete,"
-  - "modules/caddyhttp/fileserver/staticfiles.go:163:2       precompressors      U       precompressors map[string]encode"
-  - "modules/caddyhttp/fileserver/staticfiles.go:165:44      Etags               U       extensions to try to read Etags from."
-  - "modules/caddyhttp/fileserver/staticfiles.go:477:3       mtyp                U       mtyp := mime.TypeByExtension"
-  - "modules/caddyhttp/fileserver/staticfiles.go:553:74      Caza                U       written by Nathaniel Caza."
+  - "modules/caddyhttp/fileserver/staticfiles.go:173:2       precompressors      U       precompressors map[string]encode"
+  - "modules/caddyhttp/fileserver/staticfiles.go:175:44      Etags               U       extensions to try to read Etags from."
+  - "modules/caddyhttp/fileserver/staticfiles.go:503:3       mtyp                U       mtyp := mime.TypeByExtension"
+  - "modules/caddyhttp/fileserver/staticfiles.go:579:74      Caza                U       written by Nathaniel Caza."
   - "modules/caddyhttp/headers/headers_test.go:93:32         lalala          U       Header-Suffix\": []string{\"lalala\"},"
   - "modules/caddyhttp/headers/headers_test.go:96:32         foofoofoo       U       Me\": []string{\"foofoofoo\"},"
   - "modules/caddyhttp/headers/headers_test.go:216:11        hdrs            U       for k, hdrs := range tc.respHeader"
@@ -262,7 +262,7 @@ issues:
   - "modules/caddyhttp/proxyprotocol/policy.go:64:38         unmarshaller    U       implements the text unmarshaller method."
   - "modules/caddyhttp/requestbody/caddyfile.go:15:9         requestbody     U       package requestbody"
   - "modules/caddyhttp/responsewriter_test.go:22:6           barebones       U       // a barebones http.ResponseWriter"
-  - "modules/caddyhttp/reverseproxy/caddyfile.go:645:5       usize       U       usize, err := humanize.ParseBytes"
+  - "modules/caddyhttp/reverseproxy/caddyfile.go:646:5       usize       U       usize, err := humanize.ParseBytes"
   - "modules/caddyhttp/reverseproxy/fastcgi/client_test.go:50:26         fcgic       U       scriptFile = \"/tank/www/fcgic_test.php\""
   - "modules/caddyhttp/reverseproxy/fastcgi/client_test.go:51:26         serv        U       ipPort = \"remote-php-serv:59000\""
   - "modules/caddyhttp/reverseproxy/fastcgi/client_test.go:55:5          globalt     U       var globalt *testing.T"

@@ -3,16 +3,17 @@ Repository: RustPython/RustPython
 Url: "https://github.com/RustPython/RustPython.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 612, Issues found: 2935 in 319 files.
+ CSpell: Files checked: 621, Issues found: 2971 in 327 files.
  exit code: 1
-Cargo.toml:156:62    - Unknown word (redoxer)    -- to compile/check with redoxer
-Cargo.toml:159:37    - Unknown word (vcpkg)      -- Windows to build the vcpkg dependencies
-Cargo.toml:16:61     - Unknown word (pylib)      -- , "vm/sre_engine", "pylib", "stdlib", "wasm/lib
-Cargo.toml:62:119    - Unknown word (zerocopy)   -- "socket", "sched", "zerocopy", "dir", "hostname"
-Cargo.toml:75:1      - Unknown word (rustyline)  -- rustyline = "14.0.0"
-Cargo.toml:80:1      - Unknown word (thiserror)  -- thiserror = "1.0"
-Cargo.toml:83:1      - Unknown word (widestring) -- widestring = "1.1.0"
-Cargo.toml:91:49     - Unknown word (flamescope) -- flame-it", "flame", "flamescope"]
+Cargo.toml:150:1     - Unknown word (getrandom)  -- getrandom = "0.2.12"
+Cargo.toml:160:119   - Unknown word (zerocopy)   -- "socket", "sched", "zerocopy", "dir", "hostname"
+Cargo.toml:16:44     - Unknown word (pylib)      -- stdlib", "rustpython-pylib", "encodings"]
+Cargo.toml:178:1     - Unknown word (thiserror)  -- thiserror = "1.0"
+Cargo.toml:17:49     - Unknown word (flamescope) -- flame-it", "flame", "flamescope"]
+Cargo.toml:181:1     - Unknown word (widestring) -- widestring = "1.1.0"
+Cargo.toml:47:1      - Unknown word (rustyline)  -- rustyline = { workspace = true
+Cargo.toml:82:62     - Unknown word (redoxer)    -- to compile/check with redoxer
+Cargo.toml:85:37     - Unknown word (vcpkg)      -- Windows to build the vcpkg dependencies
 DEVELOPMENT.md:113:5     - Unknown word (speedscope) -- The speedscope json format (default
 DEVELOPMENT.md:131:26    - Unknown word (subcrates)  -- src`: using the other subcrates to bring rustpython
 DEVELOPMENT.md:24:20     - Unknown word (rustup)     -- - If you have `rustup` on your system, enter
@@ -55,7 +56,7 @@ benches/microbenchmarks.rs:12:12     - Unknown word (microbenchmarks) -- // List
 benches/microbenchmarks.rs:20:12     - Unknown word (MICROBENCHMARKS) -- const SKIP_MICROBENCHMARKS: [&str; 8] = [
 benches/microbenchmarks.rs:54:39     - Unknown word (microbenchmark)  -- panic!("Error running microbenchmark")
 benches/test_benchmarks.py:19:18     - Unknown word (nbody)      -- ['benchmarks/nbody.py'],
-common/Cargo.toml:33:1      - Unknown word (siphasher)  -- siphasher = "0.3"
+common/Cargo.toml:34:1      - Unknown word (siphasher)  -- siphasher = "0.3"
 common/src/boxvec.rs:1:8       - Unknown word (unresizable) -- //! An unresizable vector backed by a
 common/src/boxvec.rs:264:23    - Unknown word (nonoverlapping) -- ptr::copy_nonoverlapping(other.as_ptr(), dst
 common/src/boxvec.rs:582:5     - Unknown word (Rawptr)         -- /// Rawptr add but uses arithmetic
@@ -108,6 +109,9 @@ deny.toml:199:18    - Unknown word (webpki)     -- # "rustls-tls-webpki-roots",
 deny.toml:210:21    - Unknown word (gnullvm)    -- "windows_x86_64_gnullvm",
 deny.toml:73:7      - Unknown word (RUSTSEC)    -- #"RUSTSEC-0000-0000",
 derive-impl/src/lib.rs:21:5      - Unknown word (pytraverse) -- mod pytraverse;
+example_projects/aheui-rust.md:1:3       - Unknown word (aheui)      -- # aheui-rust
+example_projects/aheui-rust.md:4:14      - Unknown word (frozenlib)  -- - Creating a frozenlib: https://github.com
+example_projects/barebone/Cargo.toml:2:17      - Unknown word (barebone)   -- name = "example-barebone"
 examples/atexit_example.py:4:5       - Unknown word (myexit)     -- def myexit():
 examples/parse_folder.rs:68:35     - Unknown word (Erreur)     -- Err(y) => error!("Erreur in file {:?} {:?}",
 extra_tests/custom_text_test_runner.py:7:22      - Unknown word (Abtin)      -- Copyright (c) 2015 Abtin Gramian
@@ -383,8 +387,8 @@ extra_tests/snippets/testutils.py:18:14     - Unknown word (failmsg)    -- self.
 extra_tests/snippets/testutils.py:69:53     - Unknown word (isisntance) -- isinstance(obj, klass), ['isisntance(', _typed(obj), ','
 extra_tests/test_snippets.py:27:5      - Unknown word (pushd)      -- def pushd(path):
 extra_tests/test_snippets.py:54:41     - Unknown word (jobserver)  -- = 'info,cargo=error,jobserver=error'
-jit/Cargo.toml:10:1      - Unknown word (autotests)  -- autotests = false
-jit/Cargo.toml:18:1      - Unknown word (cranelift)  -- cranelift = "0.88.0"
+jit/Cargo.toml:11:1      - Unknown word (autotests)  -- autotests = false
+jit/Cargo.toml:19:1      - Unknown word (cranelift)  -- cranelift = "0.88.0"
 jit/src/instructions.rs:125:46    - Unknown word (fcmp)       -- self.builder.ins().fcmp(FloatCC::NotEqual, val
 jit/src/instructions.rs:126:39    - Unknown word (bint)       -- Ok(self.builder.ins().bint(types::I8, val))
 jit/src/instructions.rs:129:47    - Unknown word (iconst)     -- self.builder.ins().iconst(types::I64, 0);
@@ -408,6 +412,7 @@ jit/src/lib.rs:285:23    - Unknown word (wasmtime)   -- TODO: confirm with wasmt
 jit/src/lib.rs:38:65     - Unknown word (libcall)    -- cranelift_module::default_libcall_names())
 jit/tests/common.rs:68:17     - Unknown word (oparg)      -- let mut oparg_state = OpArgState:
 pdc.sh:26:90     - Unknown word (Dwarnings)  -- cargo clippy --all -- -Dwarnings" "cargo test --all"
+scripts/bench.sh:1:40      - Unknown word (scimark)    -- "nbody" "fannkuch" "scimark"; do
 scripts/install-openssl.ps1:1:12      - Unknown word (Actix)      -- # From the Actix Web windows workflow
 scripts/redox/recipe.sh:3:1       - Unknown word (CARGOFLAGS) -- CARGOFLAGS=--no-default-features
 src/lib.rs:122:13    - Unknown word (getpip)     -- let get_getpip = rustpython_vm::py
@@ -425,9 +430,9 @@ src/settings.rs:287:49    - Unknown word (PYTHONWARNDEFAULTENCODING) -- environm
 src/settings.rs:293:18    - Unknown word (warnoptions)               -- settings.warnoptions.push("default".to_owned
 src/settings.rs:344:37    - Unknown word (PYTHONHASHSEED)            -- seed = match env::var("PYTHONHASHSEED") {
 src/shell/helper.rs:20:13     - Unknown word (startpos)   -- let mut startpos = 0;
-stdlib/Cargo.toml:118:25    - Unknown word (netioapi)   -- winsock2", "ifdef", "netioapi", "ws2tcpip",
-stdlib/Cargo.toml:126:28    - Unknown word (Ndis)       -- 2_NetworkManagement_Ndis",
-stdlib/Cargo.toml:48:1      - Unknown word (puruspe)    -- puruspe = "0.2.4"
+stdlib/Cargo.toml:121:25    - Unknown word (netioapi)   -- winsock2", "ifdef", "netioapi", "ws2tcpip",
+stdlib/Cargo.toml:129:28    - Unknown word (Ndis)       -- 2_NetworkManagement_Ndis",
+stdlib/Cargo.toml:51:1      - Unknown word (puruspe)    -- puruspe = "0.2.4"
 stdlib/build.rs:2:44      - Unknown word (osslconf)   -- rustc-check-cfg=cfg(osslconf, values("OPENSSL_NO
 stdlib/build.rs:3:42      - Unknown word (ossl)       -- rustc-check-cfg=cfg(ossl101)");
 stdlib/src/array.rs:1442:9    - Unknown word (mformat)    -- mformat_code: MachineFormatCode
@@ -635,10 +640,9 @@ stdlib/src/termios.rs:66:53     - Unknown word (TIOCINQ)         -- TIOCGSERIAL,
 stdlib/src/termios.rs:66:62     - Unknown word (TIOCLINUX)       -- TIOCGSOFTCAR, TIOCINQ, TIOCLINUX, TIOCSSOFTCAR, XTABS
 stdlib/src/termios.rs:66:73     - Unknown word (TIOCSSOFTCAR)    -- TIOCINQ, TIOCLINUX, TIOCSSOFTCAR, XTABS,
 stdlib/src/termios.rs:66:9      - Unknown word (TCSETSW)         -- TCSETSW, TCXONC, TIOCGSERIAL
-vm/Cargo.toml:48:43     - Unknown word (wasmbind)   -- true, features = ["wasmbind"] }
-vm/Cargo.toml:72:1      - Unknown word (caseless)   -- caseless = "0.2.1"
-vm/Cargo.toml:73:1      - Unknown word (getrandom)  -- getrandom = { version = "0.2.
-vm/Cargo.toml:76:1      - Unknown word (memoffset)  -- memoffset = "0.9.1"
+vm/Cargo.toml:13:25     - Unknown word (wasmbind)   -- default = ["compiler", "wasmbind"]
+vm/Cargo.toml:75:1      - Unknown word (caseless)   -- caseless = "0.2.1"
+vm/Cargo.toml:78:1      - Unknown word (memoffset)  -- memoffset = "0.9.1"
 vm/Lib/python_builtins/__reducelib.py:50:17     - Unknown word (slotnames)  -- names = slotnames(cls) # not checking
 vm/build.rs:38:10     - Unknown word (sysvars)    -- "sysvars! {{ {} }}",
 vm/src/anystr.rs:183:9     - Unknown word (splitw)     -- splitw: SW,
@@ -955,14 +959,14 @@ vm/src/stdlib/sys.rs:964:9     - Unknown word (releaselevel)       -- releaselev
 vm/src/stdlib/sys.rs:974:36    - Unknown word (RELEASELEVEL)       -- releaselevel: version::RELEASELEVEL,
 vm/src/stdlib/sysconfigdata.rs:20:19     - Unknown word (GETRANDOM)  -- "HAVE_GETRANDOM" => 1,
 vm/src/stdlib/thread.rs:337:25    - Unknown word (sents)      -- SENTINELS.with(|sents| {
-vm/src/stdlib/time.rs:237:11    - Unknown word (CFMT)       -- const CFMT: &str = "%a %b %e %H
 vm/src/stdlib/time.rs:23:19     - Unknown word (dstbias)    -- // pub static dstbias: std::ffi::c_int;
-vm/src/stdlib/time.rs:306:24    - Unknown word (muldiv)     -- pub(super) fn time_muldiv(ticks: i64, mul: i6
-vm/src/stdlib/time.rs:307:13    - Unknown word (intpart)    -- let intpart = ticks / div;
+vm/src/stdlib/time.rs:253:11    - Unknown word (CFMT)       -- const CFMT: &str = "%a %b %e %H
+vm/src/stdlib/time.rs:322:24    - Unknown word (muldiv)     -- pub(super) fn time_muldiv(ticks: i64, mul: i6
+vm/src/stdlib/time.rs:323:13    - Unknown word (intpart)    -- let intpart = ticks / div;
 vm/src/stdlib/time.rs:42:19     - Unknown word (Datelike)   -- DateTime, Datelike, Timelike,
 vm/src/stdlib/time.rs:42:29     - Unknown word (Timelike)   -- DateTime, Datelike, Timelike,
-vm/src/stdlib/time.rs:455:21    - Unknown word (HIGHRES)    -- use libc::CLOCK_HIGHRES;
-vm/src/stdlib/time.rs:638:48    - Unknown word (gethrvtime) -- nanos(unsafe { libc::gethrvtime() }))
+vm/src/stdlib/time.rs:471:21    - Unknown word (HIGHRES)    -- use libc::CLOCK_HIGHRES;
+vm/src/stdlib/time.rs:654:48    - Unknown word (gethrvtime) -- nanos(unsafe { libc::gethrvtime() }))
 vm/src/stdlib/typing.rs:151:34    - Unknown word (gigity)     -- println!("gigity");
 vm/src/stdlib/typing.rs:24:20     - Unknown word (idfunc)     -- pub(crate) fn _idfunc(_vm: &VirtualMachine
 vm/src/stdlib/winapi.rs:167:60    - Unknown word (STARTUPINFOEXW) -- :System::Threading::STARTUPINFOEXW =
@@ -981,14 +985,14 @@ vm/src/types/slot.rs:138:28    - Unknown word (TPFLAGS)    -- CPython default: P
 vm/src/types/slot.rs:142:43    - Unknown word (Subclassable) -- types created in Python. Subclassable and are a
 vm/src/types/slot.rs:393:29    - Unknown word (subslot)      -- macro_rules! toggle_subslot {
 vm/src/vm/mod.rs:226:17    - Unknown word (rustpythonpath) -- let rustpythonpath_env = std::env::var
-vm/src/vm/mod.rs:604:29    - Unknown word (pyiter)         -- return self.map_pyiter(value, func);
+vm/src/vm/mod.rs:608:29    - Unknown word (pyiter)         -- return self.map_pyiter(value, func);
 vm/src/vm/setting.rs:39:10     - Unknown word (Xfoo)       -- /// -Xfoo[=bar]
 vm/src/vm/setting.rs:42:10     - Unknown word (Wfoo)       -- /// -Wfoo
 vm/src/vm/setting.rs:93:12     - Unknown word (pathconfig) -- // int pathconfig_warnings;
 vm/src/vm/thread.rs:42:24     - Unknown word (intp)       -- let vm_owns_obj = |intp: NonNull<VirtualMachine
 vm/src/vm/vm_new.rs:171:28    - Unknown word (ternop)     -- pub fn new_unsupported_ternop_error(
 vm/src/windows.rs:86:55     - Unknown word (birthtime)  -- from 3.12, so we copy birthtime across
-vm/sre_engine/Cargo.toml:4:13      - Unknown word (Kangzhi)    -- authors = ["Kangzhi Shi <shikangzhi@gmail
+vm/sre_engine/Cargo.toml:3:13      - Unknown word (Kangzhi)    -- authors = ["Kangzhi Shi <shikangzhi@gmail
 vm/sre_engine/benches/benches.rs:51:86     - Unknown word (fastmap)    -- c9,'), # Disable the fastmap optimization
 vm/sre_engine/src/constants.rs:31:5      - Unknown word (BIGCHARSET) -- BIGCHARSET = 10,
 vm/sre_engine/src/constants.rs:32:5      - Unknown word (GROUPREF)   -- GROUPREF = 11,
@@ -1014,8 +1018,8 @@ wasm/demo/snippets/import_pypi.py:19:5      - Unknown word (fmter)      -- fmter
 wasm/demo/snippets/import_pypi.py:19:52     - Unknown word (noclasses)  -- formatters.html.HtmlFormatter(noclasses=True, style="default
 wasm/demo/snippets/import_pypi.py:2:8       - Unknown word (whlimport)  -- import whlimport
 wasm/demo/snippets/mandelbrot.py:4:5       - Unknown word (mandel)     -- def mandel():
-wasm/lib/Cargo.toml:11:16     - Unknown word (cdylib)     -- crate-type = ["cdylib", "rlib"]
-wasm/lib/Cargo.toml:11:26     - Unknown word (rlib)       -- crate-type = ["cdylib", "rlib"]
+wasm/lib/Cargo.toml:12:16     - Unknown word (cdylib)     -- crate-type = ["cdylib", "rlib"]
+wasm/lib/Cargo.toml:12:26     - Unknown word (rlib)       -- crate-type = ["cdylib", "rlib"]
 wasm/lib/Lib/_microdistlib.py:24:5      - Unknown word (distname)   -- distname = m.groups()[0]
 wasm/lib/Lib/asyncweb.py:204:18    - Unknown word (jsclosure)  -- @browser.jsclosure_once
 wasm/lib/Lib/asyncweb.py:209:47    - Unknown word (jsfloat)    -- cb.detach(), browser.jsfloat(ms))
