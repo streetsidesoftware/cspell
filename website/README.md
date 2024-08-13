@@ -27,3 +27,7 @@ This command generates static content into the `build` directory and can be serv
 ### Deployment
 
 Deployment is handled by the [Deploy Website](../.github/workflows/deploy-website.yml) workflow.
+
+### Scripts
+
+- `pnpm gen-docs` -- Generate Markdown Documents from the Scheme.
