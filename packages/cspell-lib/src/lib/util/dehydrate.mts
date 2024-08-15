@@ -11,6 +11,11 @@ type PrimitiveMap = Map<
 interface PrimitiveObject {
     readonly [key: string]: Primitive | PrimitiveObject | PrimitiveArray | PrimitiveSet | PrimitiveMap;
 }
+
+interface ObjectWrapper {
+    valueOf(): PrimitiveObject;
+}
+
 type PrimitiveArray = readonly (Primitive | PrimitiveObject | PrimitiveArray | PrimitiveSet | PrimitiveMap)[];
 
 type PrimitiveElement = Primitive;
@@ -286,11 +291,18 @@ export function dehydrate<V extends Serializable>(json: V, options?: NormalizeJs
         return storeElement(value, idx, element);
     }
 
-    function objToIdx(value: PrimitiveObject): number {
+    function objToIdx(value: PrimitiveObject | ObjectWrapper): number {
         const found = cache.get(value);
         if (found !== undefined) {
             referenced.add(found);
             return found;
+        }
+
+        if (isObjectWrapper(value)) {
+            const idx = data.push({}) - 1;
+            cache.set(value, idx);
+            const element: ObjectElement = [ElementType.Object, 0, valueToIdx(value.valueOf())];
+            return storeElement(value, idx, element);
         }
 
         const entries = Object.entries(value);
@@ -318,7 +330,7 @@ export function dehydrate<V extends Serializable>(json: V, options?: NormalizeJs
         return storeElement(value, idx, element);
     }
 
-    function storeElement(value: Serializable, idx: Index, element: CachedElements): number {
+    function storeElement(value: Serializable | ObjectWrapper, idx: Index, element: CachedElements): number {
         const useIdx = dedupe ? cacheElement(idx, element) : idx;
 
         if (useIdx !== idx && idx === data.length - 1) {
@@ -514,6 +526,13 @@ export function hydrate(data: Dehydrated): Hydrated {
     function toObj(idx: number, elem: ObjectElement): PrimitiveObject {
         const [_, k, v] = elem;
 
+        // Object Wrapper
+        if (!k && v) {
+            const obj = Object(idxToValue(v));
+            cache.set(idx, obj);
+            return obj as PrimitiveObject;
+        }
+
         const obj = {};
         cache.set(idx, obj);
 
@@ -624,29 +643,14 @@ function isArrayElement(value: Element): value is ArrayElement {
     return Array.isArray(value) && value[0] === ElementType.Array;
 }
 
-// function isCustomElement(value: Element): value is CustomElement {
-//     return (value && typeof value === 'object' && !Array.isArray(value)) || false;
-// }
-
-// function isSetElement(value: Element): value is SetElement {
-//     return isCustomElement(value) && value.t === 'S';
-// }
-
-// function isMapElement(value: Element): value is MapElement {
-//     return isCustomElement(value) && value.t === 'M';
-// }
-
-// function isObjectElement(value: Element): value is ObjectElement {
-//     return isCustomElement(value) && (value.t === 'O' || value.t === undefined);
-// }
-
-// type NestedString = string | NestedString[];
-
-// function nestString(values: string[]): NestedString[] {
-//     const start: NestedString[] = [];
-
-//     return values.reduce((a, v) => (a.length > 1 ? [a, v] : [...a, v]), start);
-// }
+function isObjectWrapper(value: unknown): value is ObjectWrapper {
+    return (
+        typeof value === 'object' &&
+        value !== null &&
+        typeof (value as ObjectWrapper).valueOf === 'function' &&
+        value.valueOf() !== value
+    );
+}
 
 type ChildMap<T> = Map<string, TrieNode<T>>;
 
