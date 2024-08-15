@@ -57,6 +57,7 @@ describe('dehydrate', async () => {
         ${sampleRepeatedStrings()}                                                                      | ${undefined}
         ${/[\p{L}\p{M}]+/gu}                                                                            | ${undefined}
         ${[/[\p{L}\p{M}]+/gu, /[\p{L}\p{M}]+/gu, /[\p{Lu}\p{M}]+/gu]}                                   | ${undefined}
+        ${[new Date('2024-01-01'), new Date('2024-01-01'), new Date('2024-01-02')]}                     | ${undefined}
     `('dehydrate $data $options', ({ data, options }) => {
         const v = dehydrate(data, { dedupe: options?.dedupe });
         expect(v).toMatchSnapshot();

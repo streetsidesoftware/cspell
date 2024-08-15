@@ -1,6 +1,6 @@
 import assert from 'node:assert';
 
-type Primitive = string | number | boolean | null | undefined | RegExp; // | Date | BigInt;
+type Primitive = string | number | boolean | null | undefined | RegExp | Date; // | BigInt;
 
 type PrimitiveSet = Set<Primitive | PrimitiveObject | PrimitiveArray | PrimitiveSet | PrimitiveMap>;
 type PrimitiveMap = Map<
@@ -25,6 +25,7 @@ enum ElementType {
     Set = 4,
     Map = 5,
     RegExp = 6,
+    Date = 7,
 }
 
 interface EmptyObject {
@@ -34,6 +35,7 @@ interface EmptyObject {
 type ObjectBasedElements = EmptyObject;
 type ArrayBasedElements =
     | ArrayElement
+    | DateElement
     | MapElement
     | ObjectElement
     | RegExpElement
@@ -49,6 +51,7 @@ type ObjectElement = readonly [type: ElementType.Object, keys: Index, values: In
 type SetElement = readonly [type: ElementType.Set, keys: Index];
 type MapElement = readonly [type: ElementType.Map, keys: Index, values: Index];
 type RegExpElement = readonly [type: ElementType.RegExp, pattern: Index, flags: Index];
+type DateElement = readonly [type: ElementType.Date, value: number];
 
 type ArrayElement = readonly [type: ElementType.Array, ...Index[]];
 
@@ -110,7 +113,7 @@ export function dehydrate<V extends Serializable>(json: V, options?: NormalizeJs
      */
     type CacheMap = Map<Index, Index | CacheMap>;
     const cachedElements = new Map<number, CacheMap>();
-    type CachedElements = ObjectElement | SetElement | MapElement | RegExpElement;
+    type CachedElements = ObjectElement | SetElement | MapElement | RegExpElement | DateElement;
 
     function primitiveToIdx(value: Primitive): number {
         if (typeof value === 'string') return stringToIdx(value);
@@ -248,6 +251,18 @@ export function dehydrate<V extends Serializable>(json: V, options?: NormalizeJs
         return storeElement(value, idx, element);
     }
 
+    function objDateToIdx(value: Date): number {
+        const found = cache.get(value);
+        if (found !== undefined) {
+            return found;
+        }
+
+        const idx = data.push(0) - 1;
+        cache.set(value, idx);
+        const element: DateElement = [ElementType.Date, value.getTime()];
+        return storeElement(value, idx, element);
+    }
+
     function objToIdx(value: PrimitiveObject): number {
         const found = cache.get(value);
         if (found !== undefined) {
@@ -382,6 +397,9 @@ export function dehydrate<V extends Serializable>(json: V, options?: NormalizeJs
             if (Array.isArray(value)) {
                 return arrToIdx(value);
             }
+            if (value instanceof Date) {
+                return objDateToIdx(value);
+            }
             return objToIdx(value as PrimitiveObject);
         }
 
@@ -446,6 +464,13 @@ export function hydrate(data: Dehydrated): Hydrated {
         const p = idxToValue(pattern) as string;
         const f = idxToValue(flags) as string;
         const r = new RegExp(p, f);
+        cache.set(idx, r);
+        return r;
+    }
+
+    function toDate(idx: number, elem: DateElement): Date {
+        const [_, value] = elem;
+        const r = new Date(value);
         cache.set(idx, r);
         return r;
     }
@@ -522,6 +547,9 @@ export function hydrate(data: Dehydrated): Hydrated {
             }
             case ElementType.RegExp: {
                 return toRegExp(idx, element as RegExpElement);
+            }
+            case ElementType.Date: {
+                return toDate(idx, element as DateElement);
             }
         }
         return toArr(idx, element as ArrayElement);
