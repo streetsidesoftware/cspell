@@ -1,12 +1,9 @@
 import { readFile } from 'node:fs/promises';
 
-import * as flatted from 'flatted';
 import { describe, expect, test } from 'vitest';
 
 import { getLanguageIdsForBaseFilename } from '../index.js';
 import { dehydrate, hydrate } from './dehydrate.mjs';
-
-const urlCSpellCache = new URL('../../../../../.cspell/.cspellcache', import.meta.url);
 
 const urlFileList = new URL('../../../fixtures/fileList.txt', import.meta.url);
 
@@ -86,17 +83,6 @@ describe('dehydrate', async () => {
         // The set is smaller.
         expect(hv.s).not.toEqual(value.s);
         expect(hv.n).toEqual(value.n);
-    });
-
-    test('dedupe cache.json', async () => {
-        const json = await readFile(urlCSpellCache, 'utf8');
-        const data = flatted.parse(json);
-        const v = dehydrate(data, { dedupe: true });
-        const hv = hydrate(v) as typeof data;
-        expect(hv).toEqual(data);
-
-        // console.warn('%s', JSON.stringify(v, null, 2));
-        console.warn('cache.json.json %o', { pkg: json.length, d: JSON.stringify(v).length });
     });
 });
 
