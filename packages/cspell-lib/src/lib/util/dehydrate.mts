@@ -2,7 +2,7 @@ import assert from 'node:assert';
 
 type Primitive = string | number | boolean | null | undefined;
 
-type PrimitiveSet = Set<Primitive | PrimitiveObject | PrimitiveArray>;
+type PrimitiveSet = Set<Primitive | PrimitiveObject | PrimitiveArray | PrimitiveSet | PrimitiveMap>;
 type PrimitiveMap = Map<
     Primitive | PrimitiveObject | PrimitiveArray | PrimitiveSet | PrimitiveMap,
     Primitive | PrimitiveObject | PrimitiveArray | PrimitiveSet | PrimitiveMap
@@ -15,6 +15,8 @@ type PrimitiveArray = readonly (Primitive | PrimitiveObject | PrimitiveArray | P
 
 type PrimitiveElement = Primitive;
 
+type Serializable = Primitive | PrimitiveObject | PrimitiveArray | PrimitiveSet | PrimitiveMap;
+
 enum ElementType {
     Array = 0,
     Object = 1,
@@ -22,14 +24,10 @@ enum ElementType {
     SubString = 3,
     Set = 4,
     Map = 5,
+    RegExp = 6,
 }
 
 interface EmptyObject {
-    /**
-     * The Type of object.
-     * - S: Set
-     * - M: Map
-     */
     readonly t?: ElementType.Object;
 }
 
@@ -43,6 +41,7 @@ type SubStringElement = readonly [type: ElementType.SubString, Index, len: numbe
 type ObjectElement = readonly [type: ElementType.Object, keys: Index, values: Index];
 type SetElement = readonly [type: ElementType.Set, keys: Index];
 type MapElement = readonly [type: ElementType.Map, keys: Index, values: Index];
+// type RegExpElement = readonly [type: ElementType.RegExp, pattern: Index, flags: Index];
 
 type ArrayElement = readonly [type: ElementType.Array, ...Index[]];
 
@@ -51,8 +50,6 @@ type Element = Readonly<PrimitiveElement | ObjectBasedElements | ArrayBasedEleme
 type Header = string;
 
 type Dehydrated = [Header, ...Element[]];
-
-type Serializable = Primitive | PrimitiveObject | PrimitiveArray | PrimitiveSet | PrimitiveMap;
 
 type Hydrated = Readonly<Serializable>;
 
@@ -99,13 +96,13 @@ export function dehydrate<V extends Serializable>(json: V, options?: NormalizeJs
     const knownStrings = new Trie<TrieData>();
 
     /**
-     * To dedupe objects.
+     * To dedupe objects, Sets, Maps, etc.
      * ```ts
-     * cacheObjs.get(keyIdx)?.get(valueIdx);
+     * cacheObjs.get(type)?.get(keyIdx)?.get(valueIdx);
      * ```
      */
-    const cacheObjs = new Map<number, Map<number, number>>();
-    const cacheMapSetObjs = new Map<number, Map<number, number>>();
+    type CacheMap = Map<Index, Index | CacheMap>;
+    const cachedElements = new Map<number, CacheMap>();
 
     function primitiveToIdx(value: Primitive): number {
         if (typeof value === 'string') return stringToIdx(value);
@@ -147,6 +144,12 @@ export function dehydrate<V extends Serializable>(json: V, options?: NormalizeJs
         return idx;
     }
 
+    function duplicateIndex(idx: number): number {
+        const element = data[idx];
+        const duplicate = data.push(element) - 1;
+        return duplicate;
+    }
+
     function stringToIdx(value: string): number {
         const found = cache.get(value);
         if (found !== undefined) {
@@ -183,19 +186,28 @@ export function dehydrate<V extends Serializable>(json: V, options?: NormalizeJs
         cache.set(value, idx);
         const keys = [...value];
 
-        const k = arrToIdx(keys);
-        const useIdx = dedupe ? stashObj(cacheMapSetObjs, idx, k, 0) : idx;
+        const k = createUniqueKeys(keys);
+        const element: SetElement = [ElementType.Set, k];
+        return storeElement(value, idx, element);
+    }
 
-        if (useIdx !== idx) {
-            assert(data.length == idx + 1);
-            data.length = idx;
-            cache.set(value, useIdx);
-            return useIdx;
+    function createUniqueKeys(keys: Serializable[]): Index {
+        let k = arrToIdx(keys);
+        const elementKeys = data[k] as ArrayElement;
+        const uniqueKeys = new Set(elementKeys.slice(1));
+        if (uniqueKeys.size !== keys.length) {
+            // one or more of the keys got deduped. We need to duplicate it.
+            uniqueKeys.clear();
+            const indexes = elementKeys.slice(1).map((idx) => {
+                if (uniqueKeys.has(idx)) {
+                    return duplicateIndex(idx);
+                }
+                uniqueKeys.add(idx);
+                return idx;
+            });
+            k = createArrayElementFromIndexValues(data.length, indexes);
         }
-
-        data[idx] = [ElementType.Set, k];
-
-        return idx;
+        return k;
     }
 
     function objMapToIdx(value: Map<Serializable, Serializable>): number {
@@ -209,21 +221,11 @@ export function dehydrate<V extends Serializable>(json: V, options?: NormalizeJs
         cache.set(value, idx);
         const entries = [...value.entries()];
 
-        const k = arrToIdx(entries.map(([key]) => key));
+        const k = createUniqueKeys(entries.map(([key]) => key));
         const v = arrToIdx(entries.map(([, value]) => value));
 
-        const useIdx = dedupe ? stashObj(cacheMapSetObjs, idx, k, v) : idx;
-
-        if (useIdx !== idx) {
-            assert(data.length == idx + 1);
-            data.length = idx;
-            cache.set(value, useIdx);
-            return useIdx;
-        }
-
-        data[idx] = [ElementType.Map, k, v];
-
-        return idx;
+        const element: MapElement = [ElementType.Map, k, v];
+        return storeElement(value, idx, element);
     }
 
     function objToIdx(value: PrimitiveObject): number {
@@ -254,7 +256,12 @@ export function dehydrate<V extends Serializable>(json: V, options?: NormalizeJs
         const k = arrToIdx(entries.map(([key]) => key));
         const v = arrToIdx(entries.map(([, value]) => value));
 
-        const useIdx = dedupe ? stashObj(cacheObjs, idx, k, v) : idx;
+        const element: ObjectElement = [ElementType.Object, k, v];
+        return storeElement(value, idx, element);
+    }
+
+    function storeElement(value: Serializable, idx: Index, element: ObjectElement | SetElement | MapElement): number {
+        const useIdx = dedupe && idx === data.length - 1 ? cacheElement(idx, element) : idx;
 
         if (useIdx !== idx) {
             assert(data.length == idx + 1);
@@ -263,28 +270,29 @@ export function dehydrate<V extends Serializable>(json: V, options?: NormalizeJs
             return useIdx;
         }
 
-        data[idx] = [ElementType.Object, k, v];
-
+        data[idx] = element;
         return idx;
     }
 
-    function stashObj(
-        cacheObjs: Map<number, Map<number, number>>,
-        idx: number,
-        keyIdx: number,
-        valueIdx: number,
-    ): number {
-        let found = cacheObjs.get(keyIdx);
-        if (!found) {
-            found = new Map();
-            cacheObjs.set(keyIdx, found);
+    function cacheElement(elemIdx: Index, element: ObjectElement | SetElement | MapElement): number {
+        let map: CacheMap = cachedElements;
+        for (let i = 0; i < element.length - 1; i++) {
+            const idx = element[i];
+            let found = map.get(idx);
+            if (!found) {
+                found = new Map();
+                map.set(idx, found);
+            }
+            assert(found instanceof Map);
+            map = found;
         }
-        const foundIdx = found.get(valueIdx);
-        if (foundIdx) {
-            return referenced.has(idx) ? idx : foundIdx;
+        const idx = element[element.length - 1];
+        const foundIdx = map.get(idx);
+        if (typeof foundIdx === 'number') {
+            return referenced.has(elemIdx) ? elemIdx : foundIdx;
         }
-        found.set(valueIdx, idx);
-        return idx;
+        map.set(idx, elemIdx);
+        return elemIdx;
     }
 
     function stashArray(idx: number, element: ArrayElement): number {
@@ -302,6 +310,21 @@ export function dehydrate<V extends Serializable>(json: V, options?: NormalizeJs
         return idx;
     }
 
+    function createArrayElementFromIndexValues(idx: Index, indexValues: Index[]): Index {
+        const element: ArrayElement = [ElementType.Array, ...indexValues];
+        const useIdx = dedupe ? stashArray(idx, element) : idx;
+
+        if (useIdx !== idx) {
+            assert(data.length == idx + 1, `Expected ${idx + 1} but got ${data.length}`);
+            data.length = idx;
+            return useIdx;
+        }
+
+        data[idx] = element;
+
+        return idx;
+    }
+
     function arrToIdx(value: PrimitiveArray): number {
         const found = cache.get(value);
         if (found !== undefined) {
@@ -312,19 +335,13 @@ export function dehydrate<V extends Serializable>(json: V, options?: NormalizeJs
         const idx = data.push(0) - 1;
         cache.set(value, idx);
 
-        const indexValues: ArrayElement = [ElementType.Array, ...value.map((idx) => valueToIdx(idx))];
-        const useIdx = dedupe ? stashArray(idx, indexValues) : idx;
+        const useIdx = createArrayElementFromIndexValues(
+            idx,
+            value.map((idx) => valueToIdx(idx)),
+        );
 
-        if (useIdx !== idx) {
-            assert(data.length == idx + 1);
-            data.length = idx;
-            cache.set(value, useIdx);
-            return useIdx;
-        }
-
-        data[idx] = indexValues;
-
-        return idx;
+        cache.set(value, useIdx);
+        return useIdx;
     }
 
     function valueToIdx(value: Serializable): number {

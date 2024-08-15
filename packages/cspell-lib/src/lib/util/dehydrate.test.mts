@@ -74,14 +74,23 @@ describe('dehydrate', async () => {
         expect(hydrate(v)).toEqual(data);
     });
 
-    test('dedupe can break Sets', () => {
+    test("make sure dedupe doesn't break Sets", () => {
         const data = sampleNestedData();
         const value = { ...data, s: new Set(data.n) };
 
         const v = dehydrate(value, { dedupe: true });
         const hv = hydrate(v) as typeof value;
-        // The set is smaller.
-        expect(hv.s).not.toEqual(value.s);
+        expect(hv.s).toEqual(value.s);
+        expect(hv.n).toEqual(value.n);
+    });
+
+    test("make sure dedupe doesn't break Maps", () => {
+        const data = sampleNestedData();
+        const value = { ...data, m: new Map(data.n.map((a) => [a, a])) };
+
+        const v = dehydrate(value, { dedupe: true });
+        const hv = hydrate(v) as typeof value;
+        expect(hv.m).toEqual(value.m);
         expect(hv.n).toEqual(value.n);
     });
 });
