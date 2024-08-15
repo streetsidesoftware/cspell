@@ -1,0 +1,597 @@
+import assert from 'node:assert';
+
+type Primitive = string | number | boolean | null | undefined;
+
+type PrimitiveSet = Set<Primitive | PrimitiveObject | PrimitiveArray>;
+type PrimitiveMap = Map<
+    Primitive | PrimitiveObject | PrimitiveArray | PrimitiveSet | PrimitiveMap,
+    Primitive | PrimitiveObject | PrimitiveArray | PrimitiveSet | PrimitiveMap
+>;
+
+interface PrimitiveObject {
+    readonly [key: string]: Primitive | PrimitiveObject | PrimitiveArray | PrimitiveSet | PrimitiveMap;
+}
+type PrimitiveArray = readonly (Primitive | PrimitiveObject | PrimitiveArray | PrimitiveSet | PrimitiveMap)[];
+
+type PrimitiveElement = Primitive;
+
+interface BaseElement {
+    /**
+     * The Type of object.
+     * - S: Set
+     * - M: Map
+     */
+    readonly t?: 'S' | 'M' | 'O';
+    /**
+     * Index to the keys.
+     */
+    readonly k?: Index | undefined;
+    /**
+     * Index to the values.
+     */
+    readonly v?: Index | undefined;
+}
+
+interface ObjectElement extends BaseElement {
+    readonly t?: 'O';
+    /**
+     * Index to the keys.
+     */
+    readonly k?: Index;
+    /**
+     * Index to the values.
+     */
+    readonly v?: Index;
+}
+
+interface SetElement extends BaseElement {
+    readonly t: 'S';
+    /**
+     * Index to the keys.
+     */
+    readonly k?: Index;
+    /**
+     * Index to the values.
+     */
+    readonly v?: undefined;
+}
+
+interface MapElement extends BaseElement {
+    readonly t: 'M';
+    /**
+     * Index to the keys.
+     */
+    readonly k?: Index;
+    /**
+     * Index to the values.
+     */
+    readonly v?: Index;
+}
+
+type CustomElement = SetElement | MapElement | ObjectElement;
+type CustomArrayElements = StringElement | ArrayElement | AObjectElement | SubStringElement;
+
+type Index = number;
+
+type StringElement = readonly [type: 's', ...Index[]];
+type SubStringElement = readonly [type: 'u', Index, len: number, offset?: number];
+type AObjectElement = readonly [type: 'O', keys: Index, values: Index];
+
+type ArrayElement = readonly Index[];
+
+type Element = Readonly<PrimitiveElement | CustomElement | CustomArrayElements>;
+
+type Header = string;
+
+type Dehydrated = [Header, ...Element[]];
+
+type Serializable = Primitive | PrimitiveObject | PrimitiveArray | PrimitiveSet | PrimitiveMap;
+
+type Hydrated = Readonly<Serializable>;
+
+const blockSplitRegex = /^sha\d/;
+
+export interface NormalizeJsonOptions {
+    sortKeys?: boolean;
+    /**
+     * Dedupe objects and arrays.
+     * Implies `sortKeys`.
+     */
+    dedupe?: boolean;
+}
+
+const dataHeader = 'Dehydrated JSON v1';
+
+const collator = new Intl.Collator('en', {
+    usage: 'sort',
+    numeric: true,
+    sensitivity: 'variant',
+    caseFirst: 'upper',
+    ignorePunctuation: false,
+});
+const compare = collator.compare;
+
+const forceStringPrimitives = false;
+const minSubStringLen = 4;
+
+export function dehydrate<V extends Serializable>(json: V, options?: NormalizeJsonOptions): Dehydrated {
+    const data = [dataHeader] as Dehydrated;
+    const dedupe = options?.dedupe ?? true;
+    const sortKeys = options?.sortKeys || dedupe;
+    let emptyObjIdx = 0;
+
+    const cache = new Map<unknown, number>([[undefined, 0]]);
+    const referenced = new Set<number>();
+    const cachedArrays = new Map<number, { idx: number; v: number[] }[]>();
+
+    interface TrieData {
+        idx: number;
+        offset?: number;
+    }
+
+    const knownStrings = new Trie<TrieData>();
+
+    /**
+     * To dedupe objects.
+     * ```ts
+     * cacheObjs.get(keyIdx)?.get(valueIdx);
+     * ```
+     */
+    const cacheObjs = new Map<number, Map<number, number>>();
+    const cacheMapSetObjs = new Map<number, Map<number, number>>();
+
+    function primitiveToIdx(value: Primitive): number {
+        if (typeof value === 'string') return stringToIdx(value);
+
+        const found = cache.get(value);
+        if (found !== undefined) {
+            return found;
+        }
+
+        const idx = data.push(value) - 1;
+        cache.set(value, idx);
+        return idx;
+    }
+
+    function addSubStringRef(idxString: number, value: string, offset: number | undefined): number {
+        const found = cache.get(value);
+        if (found !== undefined) {
+            return found;
+        }
+
+        const sub: SubStringElement = offset ? ['u', idxString, value.length, offset] : ['u', idxString, value.length];
+        const idx = data.push(sub) - 1;
+        cache.set(value, idx);
+        return idx;
+    }
+
+    function addKnownString(idx: number, value: string) {
+        if (value.length >= minSubStringLen) {
+            knownStrings.add(value.length > 256 ? value.slice(0, 256) : value, { idx });
+        }
+    }
+
+    function addStringPrimitive(value: string): number {
+        const idx = data.push(value) - 1;
+        addKnownString(idx, value);
+        cache.set(value, idx);
+        return idx;
+    }
+
+    function stringToIdx(value: string): number {
+        const found = cache.get(value);
+        if (found !== undefined) {
+            return found;
+        }
+
+        if (forceStringPrimitives || value.length < minSubStringLen || blockSplitRegex.test(value)) {
+            return addStringPrimitive(value);
+        }
+
+        const trieFound = knownStrings.find(value);
+        if (!trieFound || !trieFound.data || trieFound.found.length < minSubStringLen) {
+            return addStringPrimitive(value);
+        }
+
+        const { data: tData, found: subStr } = trieFound;
+        const sIdx = addSubStringRef(tData.idx, subStr, tData.offset);
+        if (subStr === value) return sIdx;
+        const v = [sIdx, stringToIdx(value.slice(subStr.length))];
+        const idx = data.push(['s', ...v]) - 1;
+        cache.set(value, idx);
+        addKnownString(idx, value);
+        return idx;
+    }
+
+    function objSetToIdx(value: Set<Serializable>): number {
+        const found = cache.get(value);
+        if (found !== undefined) {
+            referenced.add(found);
+            return found;
+        }
+
+        const idx = data.push(0) - 1;
+        cache.set(value, idx);
+        const keys = [...value];
+
+        const k = arrToIdx(keys);
+        const useIdx = dedupe ? stashObj(cacheMapSetObjs, idx, k, 0) : idx;
+
+        if (useIdx !== idx) {
+            assert(data.length == idx + 1);
+            data.length = idx;
+            cache.set(value, useIdx);
+            return useIdx;
+        }
+
+        data[idx] = { t: 'S', k };
+
+        return idx;
+    }
+
+    function objMapToIdx(value: Map<Serializable, Serializable>): number {
+        const found = cache.get(value);
+        if (found !== undefined) {
+            referenced.add(found);
+            return found;
+        }
+
+        const idx = data.push(0) - 1;
+        cache.set(value, idx);
+        const entries = [...value.entries()];
+
+        const k = arrToIdx(entries.map(([key]) => key));
+        const v = arrToIdx(entries.map(([, value]) => value));
+
+        const useIdx = dedupe ? stashObj(cacheMapSetObjs, idx, k, v) : idx;
+
+        if (useIdx !== idx) {
+            assert(data.length == idx + 1);
+            data.length = idx;
+            cache.set(value, useIdx);
+            return useIdx;
+        }
+
+        data[idx] = { t: 'M', k, v };
+
+        return idx;
+    }
+
+    function objToIdx(value: PrimitiveObject): number {
+        const found = cache.get(value);
+        if (found !== undefined) {
+            referenced.add(found);
+            return found;
+        }
+
+        const entries = Object.entries(value);
+
+        if (!entries.length) {
+            if (emptyObjIdx) {
+                return emptyObjIdx;
+            }
+            const idx = data.push({}) - 1;
+            emptyObjIdx = idx;
+            return idx;
+        }
+
+        const idx = data.push(0) - 1;
+        cache.set(value, idx);
+
+        if (sortKeys) {
+            entries.sort(([a], [b]) => compare(a, b));
+        }
+
+        const k = arrToIdx(entries.map(([key]) => key));
+        const v = arrToIdx(entries.map(([, value]) => value));
+
+        const useIdx = dedupe ? stashObj(cacheObjs, idx, k, v) : idx;
+
+        if (useIdx !== idx) {
+            assert(data.length == idx + 1);
+            data.length = idx;
+            cache.set(value, useIdx);
+            return useIdx;
+        }
+
+        data[idx] = ['O', k, v];
+
+        return idx;
+    }
+
+    function stashObj(
+        cacheObjs: Map<number, Map<number, number>>,
+        idx: number,
+        keyIdx: number,
+        valueIdx: number,
+    ): number {
+        let found = cacheObjs.get(keyIdx);
+        if (!found) {
+            found = new Map();
+            cacheObjs.set(keyIdx, found);
+        }
+        const foundIdx = found.get(valueIdx);
+        if (foundIdx) {
+            return referenced.has(idx) ? idx : foundIdx;
+        }
+        found.set(valueIdx, idx);
+        return idx;
+    }
+
+    function stashArray(idx: number, indexValues: number[]): number {
+        const indexHash = simpleHash(indexValues);
+        let found = cachedArrays.get(indexHash);
+        if (!found) {
+            found = [];
+            cachedArrays.set(indexHash, found);
+        }
+        const foundIdx = found.find((entry) => isEqual(entry.v, indexValues));
+        if (foundIdx) {
+            return referenced.has(idx) ? idx : foundIdx.idx;
+        }
+        found.push({ idx, v: indexValues });
+        return idx;
+    }
+
+    function arrToIdx(value: PrimitiveArray): number {
+        const found = cache.get(value);
+        if (found !== undefined) {
+            referenced.add(found);
+            return found;
+        }
+
+        const idx = data.push(0) - 1;
+        cache.set(value, idx);
+
+        const indexValues = value.map((idx) => valueToIdx(idx));
+        const useIdx = dedupe ? stashArray(idx, indexValues) : idx;
+
+        if (useIdx !== idx) {
+            assert(data.length == idx + 1);
+            data.length = idx;
+            cache.set(value, useIdx);
+            return useIdx;
+        }
+
+        data[idx] = indexValues;
+
+        return idx;
+    }
+
+    function valueToIdx(value: Serializable): number {
+        if (value === null) {
+            // eslint-disable-next-line unicorn/no-null
+            return primitiveToIdx(null);
+        }
+
+        if (typeof value === 'object') {
+            if (value instanceof Set) {
+                return objSetToIdx(value);
+            }
+            if (value instanceof Map) {
+                return objMapToIdx(value);
+            }
+            if (Array.isArray(value)) {
+                return arrToIdx(value);
+            }
+            return objToIdx(value as PrimitiveObject);
+        }
+
+        return primitiveToIdx(value);
+    }
+
+    valueToIdx(json);
+
+    return data;
+}
+
+function isEqual(a: number[], b: number[]): boolean {
+    if (a.length !== b.length) return false;
+    for (let i = 0; i < a.length; i++) {
+        if (a[i] !== b[i]) return false;
+    }
+    return true;
+}
+
+function simpleHash(values: number[]): number {
+    let hash = Math.sqrt(values.length);
+    for (const value of values) {
+        hash += value * value;
+    }
+    return hash;
+}
+
+export function hydrate(data: Dehydrated): Hydrated {
+    const [header] = data;
+
+    if (header !== dataHeader) {
+        throw new Error('Invalid header');
+    }
+
+    const cache = new Map<number | number[], Hydrated>([[0, undefined]]);
+    /**
+     * indexes that have been referenced by other objects.
+     */
+    const referenced = new Set<number>();
+
+    function mergeKeysValues<K>(keys: readonly K[], values: PrimitiveArray): [K, Serializable][] {
+        return keys.map((key, i) => [key, values[i]]);
+    }
+
+    function toSet(idx: number, elem: SetElement): PrimitiveSet {
+        const { k } = elem;
+        const s: PrimitiveSet = k ? (new Set(idxToArr(k)) as PrimitiveSet) : new Set();
+        cache.set(idx, s);
+        return s;
+    }
+
+    function toMap(idx: number, elem: MapElement): PrimitiveMap {
+        const { k, v } = elem;
+        const m: PrimitiveMap =
+            !k || !v ? new Map() : (new Map(mergeKeysValues(idxToArr(k), idxToArr(v))) as PrimitiveMap);
+        cache.set(idx, m);
+        return m;
+    }
+
+    function toString(idx: number, elem: StringElement): string {
+        const s = idxToValue(elem.slice(1) as number[]);
+        cache.set(idx, s);
+        return s as string;
+    }
+
+    function toObj(idx: number, elem: CustomElement): Primitive | PrimitiveObject | PrimitiveSet | PrimitiveMap {
+        const { t, k, v } = elem;
+
+        if (t === 'S') return toSet(idx, elem);
+        if (t === 'M') return toMap(idx, elem);
+
+        const obj = {};
+        cache.set(idx, obj);
+
+        if (!k || !v) return obj;
+        const keys = idxToArr(k) as string[];
+        const values = idxToArr(v);
+        Object.assign(obj, Object.fromEntries(mergeKeysValues(keys, values)));
+        return obj;
+    }
+
+    function idxToArr(idx: number): PrimitiveArray {
+        const element = data[idx];
+        assert(Array.isArray(element));
+        return toArr(idx, element);
+    }
+
+    function toArr(idx: number, refs: Readonly<ArrayElement>): PrimitiveArray {
+        const placeHolder: Serializable[] = [];
+        cache.set(idx, placeHolder);
+        const arr = refs.map(idxToValue);
+        // check if the array has been referenced by another object.
+        if (!referenced.has(idx)) {
+            // It has not, just replace the placeholder with the array.
+            cache.set(idx, arr);
+            return arr;
+        }
+        placeHolder.push(...arr);
+        return placeHolder;
+    }
+
+    function handleSubStringElement(idx: number, refs: SubStringElement): string {
+        const [_t, sIdx, len, offset = 0] = refs;
+        const s = `${idxToValue(sIdx)}`.slice(offset, offset + len);
+        cache.set(idx, s);
+        return s;
+    }
+
+    function handleArrayElement(
+        idx: number,
+        refs: CustomArrayElements,
+    ): PrimitiveArray | Primitive | PrimitiveObject | PrimitiveSet | PrimitiveMap {
+        if (refs[0] === 's') return toString(idx, refs as StringElement);
+        if (refs[0] === 'O') return toObj(idx, { t: 'O', k: refs[1], v: refs[2] });
+        if (refs[0] === 'u') return handleSubStringElement(idx, refs);
+        return toArr(idx, refs as ArrayElement);
+    }
+
+    function idxToValue(idx: number | number[]): Serializable {
+        if (!idx) return undefined;
+        const found = cache.get(idx);
+        if (found !== undefined) {
+            if (typeof idx === 'number') referenced.add(idx);
+            return found as Serializable;
+        }
+
+        if (Array.isArray(idx)) {
+            // it is a nested string;
+            const parts = idx.map((i) => idxToValue(i));
+            return joinToString(parts);
+        }
+
+        const element = data[idx];
+
+        if (typeof element === 'object') {
+            // eslint-disable-next-line unicorn/no-null
+            if (element === null) return null;
+            if (Array.isArray(element)) return handleArrayElement(idx, element);
+            return toObj(idx, element as ObjectElement);
+        }
+        return element;
+    }
+
+    return idxToValue(1);
+}
+
+function joinToString(parts: PrimitiveArray): string {
+    return parts.map((a) => (Array.isArray(a) ? joinToString(a) : a)).join('');
+}
+
+// function isCustomElement(value: Element): value is CustomElement {
+//     return (value && typeof value === 'object' && !Array.isArray(value)) || false;
+// }
+
+// function isSetElement(value: Element): value is SetElement {
+//     return isCustomElement(value) && value.t === 'S';
+// }
+
+// function isMapElement(value: Element): value is MapElement {
+//     return isCustomElement(value) && value.t === 'M';
+// }
+
+// function isObjectElement(value: Element): value is ObjectElement {
+//     return isCustomElement(value) && (value.t === 'O' || value.t === undefined);
+// }
+
+// type NestedString = string | NestedString[];
+
+// function nestString(values: string[]): NestedString[] {
+//     const start: NestedString[] = [];
+
+//     return values.reduce((a, v) => (a.length > 1 ? [a, v] : [...a, v]), start);
+// }
+
+type ChildMap<T> = Map<string, TrieNode<T>>;
+
+interface TrieNode<T> {
+    d?: T | undefined;
+    c?: ChildMap<T>;
+}
+
+interface RootNode<T> extends TrieNode<T> {
+    d: undefined;
+}
+
+class Trie<T> {
+    root: RootNode<T> = { d: undefined, c: new Map() };
+
+    add(key: string, data: T): void {
+        let node: TrieNode<T> = this.root;
+        for (const k of key) {
+            let c = node.c;
+            if (!c) {
+                node.c = c = new Map();
+            }
+            let n = c.get(k);
+            if (!n) {
+                c.set(k, (n = { d: data }));
+            }
+            node = n;
+        }
+    }
+
+    find(key: string): { data: T | undefined; found: string } | undefined {
+        let node: TrieNode<T> = this.root;
+        let found = '';
+        for (const k of key) {
+            const c = node.c;
+            if (!c) {
+                break;
+            }
+            const n = c.get(k);
+            if (!n) {
+                break;
+            }
+            found += k;
+            node = n;
+        }
+        return { data: node.d, found };
+    }
+}
