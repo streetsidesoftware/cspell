@@ -1,6 +1,6 @@
 import assert from 'node:assert';
 
-type Primitive = string | number | boolean | null | undefined | RegExp | Date; // | BigInt;
+type Primitive = string | number | boolean | null | undefined | RegExp | Date | bigint;
 
 type PrimitiveSet = Set<Primitive | PrimitiveObject | PrimitiveArray | PrimitiveSet | PrimitiveMap>;
 type PrimitiveMap = Map<
@@ -26,6 +26,7 @@ enum ElementType {
     Map = 5,
     RegExp = 6,
     Date = 7,
+    BigInt = 8,
 }
 
 interface EmptyObject {
@@ -35,6 +36,7 @@ interface EmptyObject {
 type ObjectBasedElements = EmptyObject;
 type ArrayBasedElements =
     | ArrayElement
+    | BigIntElement
     | DateElement
     | MapElement
     | ObjectElement
@@ -52,6 +54,7 @@ type SetElement = readonly [type: ElementType.Set, keys: Index];
 type MapElement = readonly [type: ElementType.Map, keys: Index, values: Index];
 type RegExpElement = readonly [type: ElementType.RegExp, pattern: Index, flags: Index];
 type DateElement = readonly [type: ElementType.Date, value: number];
+type BigIntElement = readonly [type: ElementType.BigInt, value: Index];
 
 type ArrayElement = readonly [type: ElementType.Array, ...Index[]];
 
@@ -113,10 +116,11 @@ export function dehydrate<V extends Serializable>(json: V, options?: NormalizeJs
      */
     type CacheMap = Map<Index, Index | CacheMap>;
     const cachedElements = new Map<number, CacheMap>();
-    type CachedElements = ObjectElement | SetElement | MapElement | RegExpElement | DateElement;
+    type CachedElements = ObjectElement | SetElement | MapElement | RegExpElement | DateElement | BigIntElement;
 
     function primitiveToIdx(value: Primitive): number {
         if (typeof value === 'string') return stringToIdx(value);
+        if (typeof value === 'bigint') return bigintToIdx(value);
 
         const found = cache.get(value);
         if (found !== undefined) {
@@ -260,6 +264,25 @@ export function dehydrate<V extends Serializable>(json: V, options?: NormalizeJs
         const idx = data.push(0) - 1;
         cache.set(value, idx);
         const element: DateElement = [ElementType.Date, value.getTime()];
+        return storeElement(value, idx, element);
+    }
+
+    function bigintToIdx(value: bigint): number {
+        const found = cache.get(value);
+        if (found !== undefined) {
+            return found;
+        }
+
+        const idx = data.push(0) - 1;
+        cache.set(value, idx);
+        const element: BigIntElement = [
+            ElementType.BigInt,
+            primitiveToIdx(
+                value <= Number.MAX_SAFE_INTEGER && value >= -Number.MAX_SAFE_INTEGER
+                    ? Number(value)
+                    : value.toString(),
+            ),
+        ];
         return storeElement(value, idx, element);
     }
 
@@ -468,6 +491,13 @@ export function hydrate(data: Dehydrated): Hydrated {
         return r;
     }
 
+    function toBigInt(idx: number, elem: BigIntElement): bigint {
+        const [_, vIdx] = elem;
+        const r = BigInt(idxToValue(vIdx) as string | number);
+        cache.set(idx, r);
+        return r;
+    }
+
     function toDate(idx: number, elem: DateElement): Date {
         const [_, value] = elem;
         const r = new Date(value);
@@ -550,6 +580,9 @@ export function hydrate(data: Dehydrated): Hydrated {
             }
             case ElementType.Date: {
                 return toDate(idx, element as DateElement);
+            }
+            case ElementType.BigInt: {
+                return toBigInt(idx, element as BigIntElement);
             }
         }
         return toArr(idx, element as ArrayElement);
