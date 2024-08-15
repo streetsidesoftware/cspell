@@ -15,71 +15,38 @@ type PrimitiveArray = readonly (Primitive | PrimitiveObject | PrimitiveArray | P
 
 type PrimitiveElement = Primitive;
 
-interface BaseElement {
+enum ElementType {
+    Array = 0,
+    Object = 1,
+    String = 2,
+    SubString = 3,
+    Set = 4,
+    Map = 5,
+}
+
+interface EmptyObject {
     /**
      * The Type of object.
      * - S: Set
      * - M: Map
      */
-    readonly t?: 'S' | 'M' | 'O';
-    /**
-     * Index to the keys.
-     */
-    readonly k?: Index | undefined;
-    /**
-     * Index to the values.
-     */
-    readonly v?: Index | undefined;
+    readonly t?: ElementType.Object;
 }
 
-interface ObjectElement extends BaseElement {
-    readonly t?: 'O';
-    /**
-     * Index to the keys.
-     */
-    readonly k?: Index;
-    /**
-     * Index to the values.
-     */
-    readonly v?: Index;
-}
-
-interface SetElement extends BaseElement {
-    readonly t: 'S';
-    /**
-     * Index to the keys.
-     */
-    readonly k?: Index;
-    /**
-     * Index to the values.
-     */
-    readonly v?: undefined;
-}
-
-interface MapElement extends BaseElement {
-    readonly t: 'M';
-    /**
-     * Index to the keys.
-     */
-    readonly k?: Index;
-    /**
-     * Index to the values.
-     */
-    readonly v?: Index;
-}
-
-type CustomElement = SetElement | MapElement | ObjectElement;
-type CustomArrayElements = StringElement | ArrayElement | AObjectElement | SubStringElement;
+type ObjectBasedElements = EmptyObject;
+type ArrayBasedElements = StringElement | ArrayElement | ObjectElement | SubStringElement | SetElement | MapElement;
 
 type Index = number;
 
-type StringElement = readonly [type: 's', ...Index[]];
-type SubStringElement = readonly [type: 'u', Index, len: number, offset?: number];
-type AObjectElement = readonly [type: 'O', keys: Index, values: Index];
+type StringElement = readonly [type: ElementType.String, ...Index[]];
+type SubStringElement = readonly [type: ElementType.SubString, Index, len: number, offset?: number];
+type ObjectElement = readonly [type: ElementType.Object, keys: Index, values: Index];
+type SetElement = readonly [type: ElementType.Set, keys: Index];
+type MapElement = readonly [type: ElementType.Map, keys: Index, values: Index];
 
-type ArrayElement = readonly Index[];
+type ArrayElement = readonly [type: ElementType.Array, ...Index[]];
 
-type Element = Readonly<PrimitiveElement | CustomElement | CustomArrayElements>;
+type Element = Readonly<PrimitiveElement | ObjectBasedElements | ArrayBasedElements>;
 
 type Header = string;
 
@@ -122,7 +89,7 @@ export function dehydrate<V extends Serializable>(json: V, options?: NormalizeJs
 
     const cache = new Map<unknown, number>([[undefined, 0]]);
     const referenced = new Set<number>();
-    const cachedArrays = new Map<number, { idx: number; v: number[] }[]>();
+    const cachedArrays = new Map<number, { idx: number; v: ArrayElement }[]>();
 
     interface TrieData {
         idx: number;
@@ -159,7 +126,9 @@ export function dehydrate<V extends Serializable>(json: V, options?: NormalizeJs
             return found;
         }
 
-        const sub: SubStringElement = offset ? ['u', idxString, value.length, offset] : ['u', idxString, value.length];
+        const sub: SubStringElement = offset
+            ? [ElementType.SubString, idxString, value.length, offset]
+            : [ElementType.SubString, idxString, value.length];
         const idx = data.push(sub) - 1;
         cache.set(value, idx);
         return idx;
@@ -197,7 +166,7 @@ export function dehydrate<V extends Serializable>(json: V, options?: NormalizeJs
         const sIdx = addSubStringRef(tData.idx, subStr, tData.offset);
         if (subStr === value) return sIdx;
         const v = [sIdx, stringToIdx(value.slice(subStr.length))];
-        const idx = data.push(['s', ...v]) - 1;
+        const idx = data.push([ElementType.String, ...v]) - 1;
         cache.set(value, idx);
         addKnownString(idx, value);
         return idx;
@@ -224,7 +193,7 @@ export function dehydrate<V extends Serializable>(json: V, options?: NormalizeJs
             return useIdx;
         }
 
-        data[idx] = { t: 'S', k };
+        data[idx] = [ElementType.Set, k];
 
         return idx;
     }
@@ -252,7 +221,7 @@ export function dehydrate<V extends Serializable>(json: V, options?: NormalizeJs
             return useIdx;
         }
 
-        data[idx] = { t: 'M', k, v };
+        data[idx] = [ElementType.Map, k, v];
 
         return idx;
     }
@@ -294,7 +263,7 @@ export function dehydrate<V extends Serializable>(json: V, options?: NormalizeJs
             return useIdx;
         }
 
-        data[idx] = ['O', k, v];
+        data[idx] = [ElementType.Object, k, v];
 
         return idx;
     }
@@ -318,18 +287,18 @@ export function dehydrate<V extends Serializable>(json: V, options?: NormalizeJs
         return idx;
     }
 
-    function stashArray(idx: number, indexValues: number[]): number {
-        const indexHash = simpleHash(indexValues);
+    function stashArray(idx: number, element: ArrayElement): number {
+        const indexHash = simpleHash(element);
         let found = cachedArrays.get(indexHash);
         if (!found) {
             found = [];
             cachedArrays.set(indexHash, found);
         }
-        const foundIdx = found.find((entry) => isEqual(entry.v, indexValues));
+        const foundIdx = found.find((entry) => isEqual(entry.v, element));
         if (foundIdx) {
             return referenced.has(idx) ? idx : foundIdx.idx;
         }
-        found.push({ idx, v: indexValues });
+        found.push({ idx, v: element });
         return idx;
     }
 
@@ -343,7 +312,7 @@ export function dehydrate<V extends Serializable>(json: V, options?: NormalizeJs
         const idx = data.push(0) - 1;
         cache.set(value, idx);
 
-        const indexValues = value.map((idx) => valueToIdx(idx));
+        const indexValues: ArrayElement = [ElementType.Array, ...value.map((idx) => valueToIdx(idx))];
         const useIdx = dedupe ? stashArray(idx, indexValues) : idx;
 
         if (useIdx !== idx) {
@@ -385,7 +354,7 @@ export function dehydrate<V extends Serializable>(json: V, options?: NormalizeJs
     return data;
 }
 
-function isEqual(a: number[], b: number[]): boolean {
+function isEqual(a: readonly number[], b: readonly number[]): boolean {
     if (a.length !== b.length) return false;
     for (let i = 0; i < a.length; i++) {
         if (a[i] !== b[i]) return false;
@@ -393,7 +362,7 @@ function isEqual(a: number[], b: number[]): boolean {
     return true;
 }
 
-function simpleHash(values: number[]): number {
+function simpleHash(values: readonly number[]): number {
     let hash = Math.sqrt(values.length);
     for (const value of values) {
         hash += value * value;
@@ -419,14 +388,14 @@ export function hydrate(data: Dehydrated): Hydrated {
     }
 
     function toSet(idx: number, elem: SetElement): PrimitiveSet {
-        const { k } = elem;
+        const [_, k] = elem;
         const s: PrimitiveSet = k ? (new Set(idxToArr(k)) as PrimitiveSet) : new Set();
         cache.set(idx, s);
         return s;
     }
 
     function toMap(idx: number, elem: MapElement): PrimitiveMap {
-        const { k, v } = elem;
+        const [_, k, v] = elem;
         const m: PrimitiveMap =
             !k || !v ? new Map() : (new Map(mergeKeysValues(idxToArr(k), idxToArr(v))) as PrimitiveMap);
         cache.set(idx, m);
@@ -439,11 +408,8 @@ export function hydrate(data: Dehydrated): Hydrated {
         return s as string;
     }
 
-    function toObj(idx: number, elem: CustomElement): Primitive | PrimitiveObject | PrimitiveSet | PrimitiveMap {
-        const { t, k, v } = elem;
-
-        if (t === 'S') return toSet(idx, elem);
-        if (t === 'M') return toMap(idx, elem);
+    function toObj(idx: number, elem: ObjectElement): PrimitiveObject {
+        const [_, k, v] = elem;
 
         const obj = {};
         cache.set(idx, obj);
@@ -457,12 +423,13 @@ export function hydrate(data: Dehydrated): Hydrated {
 
     function idxToArr(idx: number): PrimitiveArray {
         const element = data[idx];
-        assert(Array.isArray(element));
+        assert(isArrayElement(element));
         return toArr(idx, element);
     }
 
-    function toArr(idx: number, refs: Readonly<ArrayElement>): PrimitiveArray {
+    function toArr(idx: number, element: ArrayElement): PrimitiveArray {
         const placeHolder: Serializable[] = [];
+        const refs = element.slice(1);
         cache.set(idx, placeHolder);
         const arr = refs.map(idxToValue);
         // check if the array has been referenced by another object.
@@ -484,12 +451,14 @@ export function hydrate(data: Dehydrated): Hydrated {
 
     function handleArrayElement(
         idx: number,
-        refs: CustomArrayElements,
+        element: ArrayBasedElements,
     ): PrimitiveArray | Primitive | PrimitiveObject | PrimitiveSet | PrimitiveMap {
-        if (refs[0] === 's') return toString(idx, refs as StringElement);
-        if (refs[0] === 'O') return toObj(idx, { t: 'O', k: refs[1], v: refs[2] });
-        if (refs[0] === 'u') return handleSubStringElement(idx, refs);
-        return toArr(idx, refs as ArrayElement);
+        if (element[0] === ElementType.String) return toString(idx, element);
+        if (element[0] === ElementType.Object) return toObj(idx, element);
+        if (element[0] === ElementType.SubString) return handleSubStringElement(idx, element);
+        if (element[0] === ElementType.Set) return toSet(idx, element);
+        if (element[0] === ElementType.Map) return toMap(idx, element);
+        return toArr(idx, element as ArrayElement);
     }
 
     function idxToValue(idx: number | number[]): Serializable {
@@ -511,8 +480,8 @@ export function hydrate(data: Dehydrated): Hydrated {
         if (typeof element === 'object') {
             // eslint-disable-next-line unicorn/no-null
             if (element === null) return null;
-            if (Array.isArray(element)) return handleArrayElement(idx, element);
-            return toObj(idx, element as ObjectElement);
+            if (Array.isArray(element)) return handleArrayElement(idx, element as ArrayBasedElements);
+            return {};
         }
         return element;
     }
@@ -522,6 +491,10 @@ export function hydrate(data: Dehydrated): Hydrated {
 
 function joinToString(parts: PrimitiveArray): string {
     return parts.map((a) => (Array.isArray(a) ? joinToString(a) : a)).join('');
+}
+
+function isArrayElement(value: Element): value is ArrayElement {
+    return Array.isArray(value) && value[0] === ElementType.Array;
 }
 
 // function isCustomElement(value: Element): value is CustomElement {
