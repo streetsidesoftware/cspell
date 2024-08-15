@@ -55,6 +55,8 @@ describe('dehydrate', async () => {
         ${[{ a: 'a', b: 'b' }, { a: 'a', b: 'b' }, { a: 'a', b: 'b' }, { a: 'a', b: 'b' }]}             | ${{ dedupe: false }}
         ${sampleNestedData()}                                                                           | ${undefined}
         ${sampleRepeatedStrings()}                                                                      | ${undefined}
+        ${/[\p{L}\p{M}]+/gu}                                                                            | ${undefined}
+        ${[/[\p{L}\p{M}]+/gu, /[\p{L}\p{M}]+/gu, /[\p{Lu}\p{M}]+/gu]}                                   | ${undefined}
     `('dehydrate $data $options', ({ data, options }) => {
         const v = dehydrate(data, { dedupe: options?.dedupe });
         expect(v).toMatchSnapshot();
@@ -125,8 +127,9 @@ function sampleRepeatedStrings() {
 function sampleNestedData() {
     const a = { a: 'a', b: 'b' };
     const b = { a: 'c', b: 'd' };
-    const n = [a, b, { b: 'b', a: 'a' }, ['a', 'b'], ['c', 'd']];
-    const s = new Set(['a', 'b']);
+    const r = /[\p{L}\p{M}]+/gu;
+    const n = [a, b, { b: 'b', a: 'a' }, ['a', 'b'], ['c', 'd'], r, { r, rr: new RegExp(r) }];
+    const s = new Set(n);
     const m = new Map([
         ['a', 'a'],
         ['b', 'b'],
@@ -138,6 +141,7 @@ function sampleNestedData() {
         nn: n,
         nnn: [...n],
         s,
+        r,
         m,
     };
 }

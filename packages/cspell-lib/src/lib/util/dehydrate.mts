@@ -1,6 +1,6 @@
 import assert from 'node:assert';
 
-type Primitive = string | number | boolean | null | undefined;
+type Primitive = string | number | boolean | null | undefined | RegExp; // | Date | BigInt;
 
 type PrimitiveSet = Set<Primitive | PrimitiveObject | PrimitiveArray | PrimitiveSet | PrimitiveMap>;
 type PrimitiveMap = Map<
@@ -32,7 +32,14 @@ interface EmptyObject {
 }
 
 type ObjectBasedElements = EmptyObject;
-type ArrayBasedElements = StringElement | ArrayElement | ObjectElement | SubStringElement | SetElement | MapElement;
+type ArrayBasedElements =
+    | ArrayElement
+    | MapElement
+    | ObjectElement
+    | RegExpElement
+    | SetElement
+    | StringElement
+    | SubStringElement;
 
 type Index = number;
 
@@ -41,7 +48,7 @@ type SubStringElement = readonly [type: ElementType.SubString, Index, len: numbe
 type ObjectElement = readonly [type: ElementType.Object, keys: Index, values: Index];
 type SetElement = readonly [type: ElementType.Set, keys: Index];
 type MapElement = readonly [type: ElementType.Map, keys: Index, values: Index];
-// type RegExpElement = readonly [type: ElementType.RegExp, pattern: Index, flags: Index];
+type RegExpElement = readonly [type: ElementType.RegExp, pattern: Index, flags: Index];
 
 type ArrayElement = readonly [type: ElementType.Array, ...Index[]];
 
@@ -103,6 +110,7 @@ export function dehydrate<V extends Serializable>(json: V, options?: NormalizeJs
      */
     type CacheMap = Map<Index, Index | CacheMap>;
     const cachedElements = new Map<number, CacheMap>();
+    type CachedElements = ObjectElement | SetElement | MapElement | RegExpElement;
 
     function primitiveToIdx(value: Primitive): number {
         if (typeof value === 'string') return stringToIdx(value);
@@ -228,6 +236,18 @@ export function dehydrate<V extends Serializable>(json: V, options?: NormalizeJs
         return storeElement(value, idx, element);
     }
 
+    function objRegExpToIdx(value: RegExp): number {
+        const found = cache.get(value);
+        if (found !== undefined) {
+            return found;
+        }
+
+        const idx = data.push(0) - 1;
+        cache.set(value, idx);
+        const element: RegExpElement = [ElementType.RegExp, stringToIdx(value.source), stringToIdx(value.flags)];
+        return storeElement(value, idx, element);
+    }
+
     function objToIdx(value: PrimitiveObject): number {
         const found = cache.get(value);
         if (found !== undefined) {
@@ -260,11 +280,10 @@ export function dehydrate<V extends Serializable>(json: V, options?: NormalizeJs
         return storeElement(value, idx, element);
     }
 
-    function storeElement(value: Serializable, idx: Index, element: ObjectElement | SetElement | MapElement): number {
-        const useIdx = dedupe && idx === data.length - 1 ? cacheElement(idx, element) : idx;
+    function storeElement(value: Serializable, idx: Index, element: CachedElements): number {
+        const useIdx = dedupe ? cacheElement(idx, element) : idx;
 
-        if (useIdx !== idx) {
-            assert(data.length == idx + 1);
+        if (useIdx !== idx && idx === data.length - 1) {
             data.length = idx;
             cache.set(value, useIdx);
             return useIdx;
@@ -274,7 +293,7 @@ export function dehydrate<V extends Serializable>(json: V, options?: NormalizeJs
         return idx;
     }
 
-    function cacheElement(elemIdx: Index, element: ObjectElement | SetElement | MapElement): number {
+    function cacheElement(elemIdx: Index, element: CachedElements): number {
         let map: CacheMap = cachedElements;
         for (let i = 0; i < element.length - 1; i++) {
             const idx = element[i];
@@ -357,6 +376,9 @@ export function dehydrate<V extends Serializable>(json: V, options?: NormalizeJs
             if (value instanceof Map) {
                 return objMapToIdx(value);
             }
+            if (value instanceof RegExp) {
+                return objRegExpToIdx(value);
+            }
             if (Array.isArray(value)) {
                 return arrToIdx(value);
             }
@@ -419,8 +441,17 @@ export function hydrate(data: Dehydrated): Hydrated {
         return m;
     }
 
-    function toString(idx: number, elem: StringElement): string {
-        const s = idxToValue(elem.slice(1) as number[]);
+    function toRegExp(idx: number, elem: RegExpElement): RegExp {
+        const [_, pattern, flags] = elem;
+        const p = idxToValue(pattern) as string;
+        const f = idxToValue(flags) as string;
+        const r = new RegExp(p, f);
+        cache.set(idx, r);
+        return r;
+    }
+
+    function toString(idx: number, elem: StringElement | string): string {
+        const s = typeof elem === 'string' ? elem : idxToValue(elem.slice(1) as number[]);
         cache.set(idx, s);
         return s as string;
     }
@@ -470,11 +501,29 @@ export function hydrate(data: Dehydrated): Hydrated {
         idx: number,
         element: ArrayBasedElements,
     ): PrimitiveArray | Primitive | PrimitiveObject | PrimitiveSet | PrimitiveMap {
-        if (element[0] === ElementType.String) return toString(idx, element);
-        if (element[0] === ElementType.Object) return toObj(idx, element);
-        if (element[0] === ElementType.SubString) return handleSubStringElement(idx, element);
-        if (element[0] === ElementType.Set) return toSet(idx, element);
-        if (element[0] === ElementType.Map) return toMap(idx, element);
+        switch (element[0]) {
+            case ElementType.Array: {
+                break;
+            }
+            case ElementType.Object: {
+                return toObj(idx, element as ObjectElement);
+            }
+            case ElementType.String: {
+                return toString(idx, element as StringElement);
+            }
+            case ElementType.SubString: {
+                return handleSubStringElement(idx, element as SubStringElement);
+            }
+            case ElementType.Set: {
+                return toSet(idx, element as SetElement);
+            }
+            case ElementType.Map: {
+                return toMap(idx, element as MapElement);
+            }
+            case ElementType.RegExp: {
+                return toRegExp(idx, element as RegExpElement);
+            }
+        }
         return toArr(idx, element as ArrayElement);
     }
 
