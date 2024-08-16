@@ -371,4 +371,5 @@ export const definitions: FileTypeDefinitions = [
 
 // cspell:ignoreRegExp /id: '.*?'/g
 // cspell:ignoreRegExp /extensions: \[[^\]]*?\]/g
+// cspell:ignoreRegExp /filenames: \[[^\]]*?\]/g
 // cspell:ignore SPSS
