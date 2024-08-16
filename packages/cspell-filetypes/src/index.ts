@@ -1,4 +1,3 @@
-export type { FileTypeId } from './filetypes.js';
 export {
     findMatchingFileTypes,
     getFileTypesForExt,
@@ -9,3 +8,4 @@ export {
     isGeneratedExt,
     isGeneratedFile,
 } from './filetypes.js';
+export type { FileTypeId } from './types.js';

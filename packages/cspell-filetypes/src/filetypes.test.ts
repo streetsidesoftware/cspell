@@ -1,5 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
+import { definitions } from './definitions.js';
 import * as LangId from './filetypes.js';
 
 describe('Validate LanguageIds', () => {
@@ -22,11 +23,15 @@ describe('Validate LanguageIds', () => {
         ${'base.r'}                          | ${['r']}
         ${'base.R'}                          | ${['r']}
         ${'doc.tex'}                         | ${['latex']}
+        ${'Dockerfile.bin'}                  | ${['dockerfile']}
+        ${'aws.Dockerfile'}                  | ${['dockerfile']}
         ${'image.jpg'}                       | ${['image']}
         ${'workspace.code-workspace'}        | ${['jsonc']}
+        ${'.code-workspace'}                 | ${['jsonc']}
         ${'.cspellcache'}                    | ${['cache_files']}
         ${'Gemfile'}                         | ${['ruby']}
-        ${'path/Gemfile'}                    | ${[]}
+        ${'path/Gemfile'}                    | ${['ruby']}
+        ${'Cargo.lock'}                      | ${['lock', 'toml']}
         ${'my-cert.pem'}                     | ${['pem']}
         ${'my-private-cert.private-key.pem'} | ${['pem', 'pem-private-key']}
         ${'Dockerfile'}                      | ${['dockerfile']}
@@ -37,7 +42,7 @@ describe('Validate LanguageIds', () => {
     });
 
     test('that all extensions start with a .', () => {
-        for (const def of LangId.languageExtensionDefinitions) {
+        for (const def of definitions) {
             const extsWithoutPeriod = def.extensions.filter((ext) => ext[0] !== '.');
             expect(extsWithoutPeriod).toEqual([]);
         }
@@ -100,6 +105,7 @@ describe('Validate LanguageIds', () => {
         ${'image.gif'}    | ${true}
         ${'picture.jpeg'} | ${true}
         ${'picture.jpg'}  | ${true}
+        ${'Cargo.lock'}   | ${true}
         ${'doc.txt'}      | ${false}
         ${'lock'}         | ${false}
         ${'Gemfile'}      | ${false}
@@ -122,6 +128,7 @@ describe('Validate LanguageIds', () => {
         ${'picture.jpg'}   | ${true}
         ${'doc.txt'}       | ${false}
         ${'lock'}          | ${false}
+        ${'Cargo.lock'}    | ${false}
         ${'Gemfile'}       | ${false}
         ${'.cspellcache'}  | ${false}
         ${'my-video.webm'} | ${true}
