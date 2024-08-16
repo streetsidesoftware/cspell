@@ -1,11 +1,11 @@
 import { readFile } from 'node:fs/promises';
 
+import { findMatchingFileTypes } from '@cspell/filetypes';
 import { describe, expect, test } from 'vitest';
 
-import { getLanguageIdsForBaseFilename } from '@cspell/';
 import { fromJSON as hydrate, toJSON as dehydrate } from './dehydrate.mjs';
 
-const urlFileList = new URL('../../../fixtures/fileList.txt', import.meta.url);
+const urlFileList = new URL('../fixtures/fileList.txt', import.meta.url);
 
 describe('dehydrate', async () => {
     test.each`
@@ -115,7 +115,7 @@ async function sampleFileListObjects() {
 
 function getFileType(filename: string) {
     const baseName = filename.split('/').slice(-1).join('');
-    return getLanguageIdsForBaseFilename(baseName);
+    return findMatchingFileTypes(baseName);
 }
 
 function sampleRepeatedStrings() {

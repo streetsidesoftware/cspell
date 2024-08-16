@@ -1,5 +1,5 @@
 export {
-    findMatchingFileTypes,
+    findMatchingFileTypes as findMatchingFileTypes,
     getFileTypesForExt,
     isBinaryExt,
     isBinaryFile,
