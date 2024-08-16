@@ -158,7 +158,7 @@ export const definitions: FileTypeDefinitions = [
     { id: 'log', extensions: ['.log'], filenames: ['*.log.?'] },
     { id: 'lua', extensions: ['.lua'] },
     { id: 'makefile', extensions: ['.mak', '.mk'], filenames: ['GNUmakefile', 'Makefile', 'OCamlMakefile', 'makefile'] },
-    { id: 'map', extensions: ['.map'] },
+    { id: 'map', extensions: ['.map', '.css.map', '.ts.map', '.js.map'] },
     { id: 'markdown', extensions: ['.markdn', '.markdown', '.md', '.mdown', '.mdtext', '.mdtxt', '.mdwn', '.mkd', '.workbook'] },
     { id: 'markdown_latex_combined', extensions: [] },
     { id: 'markdown-math', extensions: [] },

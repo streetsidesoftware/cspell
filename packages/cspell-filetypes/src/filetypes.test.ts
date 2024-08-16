@@ -40,6 +40,7 @@ describe('Validate LanguageIds', () => {
         ${'docker.aws.compose.yaml'}         | ${['dockercompose']}
         ${'composer.lock'}                   | ${['json', 'lock']}
         ${'code.jl'}                         | ${['julia']}
+        ${'code.ts.map'}                     | ${['json', 'map']}
     `('getLanguagesForBasename $filename', ({ filename, expected }) => {
         expect(LangId.findMatchingFileTypes(filename)).toEqual(expected);
     });
