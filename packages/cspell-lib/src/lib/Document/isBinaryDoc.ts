@@ -1,4 +1,4 @@
-import { getLanguagesForBasename, isGenerated } from '../LanguageIds.js';
+import { getLanguagesForBasename, isGenerated } from '../fileTypes.js';
 import type { Uri } from '../util/Uri.js';
 import { basename, toUri } from '../util/Uri.js';
 import type { Document } from './Document.js';

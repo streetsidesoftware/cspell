@@ -2,7 +2,7 @@ import * as path from 'node:path';
 
 import type { CSpellUserSettings } from '@cspell/cspell-types';
 
-import { getLanguagesForBasename } from '../LanguageIds.js';
+import { getLanguagesForBasename } from '../fileTypes.js';
 import type { CSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef.js';
 import type { TextDocument, TextDocumentRef } from '../Models/TextDocument.js';
 import { calcOverrideSettings, getDefaultSettings, getGlobalSettings, mergeSettings } from '../Settings/index.js';

@@ -1,7 +1,7 @@
 import type { CSpellSettings, DictionaryId, LocaleId } from '@cspell/cspell-types';
 import { genSequence } from 'gensequence';
 
-import type { LanguageId } from './LanguageIds.js';
+import type { LanguageId } from './fileTypes.js';
 import type { CSpellSettingsInternal } from './Models/CSpellSettingsInternalDef.js';
 import { toInternalSettings } from './Settings/CSpellSettingsServer.js';
 import { finalizeSettings, mergeSettings } from './Settings/index.js';
