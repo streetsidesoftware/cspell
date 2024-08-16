@@ -2,8 +2,8 @@ import { readFile } from 'node:fs/promises';
 
 import { describe, expect, test } from 'vitest';
 
-import { getLanguageIdsForBaseFilename } from '../index.js';
-import { dehydrate, hydrate } from './dehydrate.mjs';
+import { getLanguageIdsForBaseFilename } from '@cspell/';
+import { fromJSON as hydrate, toJSON as dehydrate } from './dehydrate.mjs';
 
 const urlFileList = new URL('../../../fixtures/fileList.txt', import.meta.url);
 
