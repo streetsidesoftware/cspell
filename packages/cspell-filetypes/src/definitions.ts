@@ -6,6 +6,7 @@ export const definitions: FileTypeDefinitions = [
     { id: 'argdown', extensions: ['.ad', '.adown', '.argdn', '.argdown'] },
     { id: 'asciidoc', extensions: ['.adoc', '.asc', '.asciidoc'] },
     { id: 'bat', extensions: ['.bat', '.cmd'] },
+    { id: 'bazel', extensions: ['.bazel', '.bzl'] },
     { id: 'bicep', extensions: ['.bicep'] },
     { id: 'c', extensions: ['.c'] },
     { id: 'cache_files', extensions: [], filenames: ['.DS_Store', '.cspellcache', '.eslintcache'] },
@@ -221,4 +222,4 @@ export const definitions: FileTypeDefinitions = [
 // cspell:ignore rprofile cshtml gemspec cginc ebuild zshrc zprofile zlogin zlogout zshenv dsql ascx axml
 // cspell:ignore bpmn csproj dita ditamap dtml fsproj fxml isml mxml adoc
 // cspell:ignore purescript purs dhall SPSS tfvars vala argdn argdown styl resi eliom eliomi nunj nunjs tmpl stache
-// cspell:ignore haxe rhtml haml tscn
+// cspell:ignore haxe rhtml haml tscn bazel
