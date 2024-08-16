@@ -96,7 +96,7 @@ const compare = collator.compare;
 const forceStringPrimitives = false;
 const minSubStringLen = 4;
 
-export function dehydrate<V extends Serializable>(json: V, options?: NormalizeJsonOptions): Dehydrated {
+export function toJSON<V extends Serializable>(json: V, options?: NormalizeJsonOptions): Dehydrated {
     const data = [dataHeader] as Dehydrated;
     const dedupe = options?.dedupe ?? true;
     const sortKeys = options?.sortKeys || dedupe;
@@ -462,7 +462,7 @@ function simpleHash(values: readonly number[]): number {
     return hash;
 }
 
-export function hydrate(data: Dehydrated): Hydrated {
+export function fromJSON(data: Dehydrated): Hydrated {
     const [header] = data;
 
     if (header !== dataHeader) {
@@ -698,4 +698,12 @@ class Trie<T> {
         }
         return { data: node.d, found };
     }
+}
+
+export function parse(data: string): Hydrated {
+    return fromJSON(JSON.parse(data));
+}
+
+export function stringify(data: Hydrated): string {
+    return JSON.stringify(toJSON(data));
 }
