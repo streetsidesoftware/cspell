@@ -6,8 +6,8 @@ export * as ExclusionHelper from './exclusionHelper.js';
 export { FeatureFlag, FeatureFlags, getSystemFeatureFlags, UnknownFeatureFlagError } from './FeatureFlags/index.js';
 export type { VFileSystemProvider, VirtualFS } from './fileSystem.js';
 export { FSCapabilityFlags, getVirtualFS } from './fileSystem.js';
-export { getDictionary } from './getDictionary.js';
 export { getLanguagesForBasename as getLanguageIdsForBaseFilename, getLanguagesForExt } from './fileTypes.js';
+export { getDictionary } from './getDictionary.js';
 export type {
     CreateTextDocumentParams,
     TextDocument,
