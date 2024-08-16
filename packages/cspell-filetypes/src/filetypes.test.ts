@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import * as LangId from './LanguageIds.js';
+import * as LangId from './filetypes.js';
 
 describe('Validate LanguageIds', () => {
     test.each`
@@ -13,7 +13,7 @@ describe('Validate LanguageIds', () => {
         ${'hs'}     | ${['haskell']}
         ${'PNG'}    | ${['image']}
     `('getLanguagesForExt $ext', ({ ext, expected }) => {
-        expect(LangId.getLanguagesForExt(ext)).toEqual(expected);
+        expect(LangId.getFileTypesForExt(ext)).toEqual(expected);
     });
 
     test.each`
@@ -33,7 +33,7 @@ describe('Validate LanguageIds', () => {
         ${'Dockerfile.dev'}                  | ${['dockerfile']}
         ${'code.jl'}                         | ${['julia']}
     `('getLanguagesForBasename $filename', ({ filename, expected }) => {
-        expect(LangId.getLanguagesForBasename(filename)).toEqual(expected);
+        expect(LangId.findMatchingFileTypes(filename)).toEqual(expected);
     });
 
     test('that all extensions start with a .', () => {
@@ -44,21 +44,24 @@ describe('Validate LanguageIds', () => {
     });
 
     test.each`
-        ext        | expected
-        ${'.md'}   | ${false}
-        ${'.exe'}  | ${true}
-        ${'.obj'}  | ${true}
-        ${'.dll'}  | ${true}
-        ${'.gif'}  | ${true}
-        ${'.jpeg'} | ${true}
-        ${'.jpg'}  | ${true}
-        ${'.txt'}  | ${false}
-        ${'md'}    | ${false}
-        ${'exe'}   | ${true}
-        ${'obj'}   | ${true}
-        ${'dll'}   | ${true}
-        ${'gif'}   | ${true}
-        ${'txt'}   | ${false}
+        ext          | expected
+        ${'.md'}     | ${false}
+        ${'.exe'}    | ${true}
+        ${'.obj'}    | ${true}
+        ${'.dll'}    | ${true}
+        ${'.gif'}    | ${true}
+        ${'.jpeg'}   | ${true}
+        ${'.jpg'}    | ${true}
+        ${'.txt'}    | ${false}
+        ${'md'}      | ${false}
+        ${'exe'}     | ${true}
+        ${'obj'}     | ${true}
+        ${'.EXE'}    | ${true}
+        ${'.bin'}    | ${true}
+        ${'dll'}     | ${true}
+        ${'gif'}     | ${true}
+        ${'txt'}     | ${false}
+        ${'unknown'} | ${false}
     `('isBinaryExt $ext => $expected', ({ ext, expected }) => {
         expect(LangId.isBinaryExt(ext)).toBe(expected);
     });
@@ -75,6 +78,8 @@ describe('Validate LanguageIds', () => {
         ${'.txt'}  | ${false}
         ${'md'}    | ${false}
         ${'exe'}   | ${true}
+        ${'.EXE'}  | ${true}
+        ${'.bin'}  | ${true}
         ${'obj'}   | ${true}
         ${'dll'}   | ${true}
         ${'gif'}   | ${true}
@@ -121,7 +126,16 @@ describe('Validate LanguageIds', () => {
         ${'.cspellcache'}  | ${false}
         ${'my-video.webm'} | ${true}
         ${'my-logo.svg'}   | ${false}
-    `('isGeneratedExt $filename => $expected', ({ filename, expected }) => {
+    `('isBinaryFile $filename => $expected', ({ filename, expected }) => {
         expect(LangId.isBinaryFile(filename)).toBe(expected);
+    });
+
+    test.each`
+        filetype        | expected
+        ${'typescript'} | ${false}
+        ${'gzip'}       | ${true}
+        ${'unknown'}    | ${false}
+    `('isBinaryFileType $filetype => $expected', ({ filetype, expected }) => {
+        expect(LangId.isBinaryFileType(filetype)).toBe(expected);
     });
 });
