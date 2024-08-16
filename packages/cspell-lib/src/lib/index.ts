@@ -7,7 +7,7 @@ export { FeatureFlag, FeatureFlags, getSystemFeatureFlags, UnknownFeatureFlagErr
 export type { VFileSystemProvider, VirtualFS } from './fileSystem.js';
 export { FSCapabilityFlags, getVirtualFS } from './fileSystem.js';
 export { getDictionary } from './getDictionary.js';
-export { getLanguagesForBasename as getLanguageIdsForBaseFilename, getLanguagesForExt } from './LanguageIds.js';
+export { getLanguagesForBasename as getLanguageIdsForBaseFilename, getLanguagesForExt } from './fileTypes.js';
 export type {
     CreateTextDocumentParams,
     TextDocument,

@@ -4,7 +4,7 @@ import { toFileURL, toURL } from '@cspell/url';
 import { TextDocument as VsTextDocument } from 'vscode-languageserver-textdocument';
 
 import { getFileSystem } from '../fileSystem.js';
-import { getLanguagesForBasename } from '../LanguageIds.js';
+import { getLanguagesForBasename } from '../fileTypes.js';
 import * as Uri from '../util/Uri.js';
 
 export type DocumentUri = Uri.Uri | URL | string;

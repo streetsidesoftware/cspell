@@ -5,6 +5,8 @@ import { VFileSystem } from 'cspell-io';
 export { FSCapabilityFlags, VFileSystemProvider, VirtualFS, asyncIterableToArray, readFileText as readFile, readFileTextSync as readFileSync, writeToFile, writeToFileIterable, writeToFileIterableP } from 'cspell-io';
 import { SpellingDictionaryCollection, SuggestOptions, SuggestionResult, CachingDictionary } from 'cspell-dictionary';
 export { SpellingDictionary, SpellingDictionaryCollection, SuggestOptions, SuggestionCollector, SuggestionResult, createSpellingDictionary, createCollection as createSpellingDictionaryCollection } from 'cspell-dictionary';
+import { FileTypeId } from '@cspell/filetypes';
+export { findMatchingFileTypes as getLanguageIdsForBaseFilename, getFileTypesForExt as getLanguagesForExt } from '@cspell/filetypes';
 import { WeightMap } from 'cspell-trie-lib';
 export { CompoundWordsMethod } from 'cspell-trie-lib';
 import { CSpellConfigFile } from 'cspell-config-lib';
@@ -254,10 +256,6 @@ declare function isSpellingDictionaryLoadError(e: Error): e is SpellingDictionar
  * @returns a dictionary collection that represents all the enabled dictionaries.
  */
 declare function getDictionary(settings: CSpellUserSettings): Promise<SpellingDictionaryCollection>;
-
-type LanguageId = string;
-declare function getLanguagesForExt(ext: string): string[];
-declare function getLanguagesForBasename(basename: string): string[];
 
 interface PerfTimer {
     readonly name: string;
@@ -606,7 +604,7 @@ interface SuggestionOptions extends FromSuggestOptions {
     /**
      * languageId to use when determining file type.
      */
-    languageId?: LanguageId | LanguageId[];
+    languageId?: FileTypeId | FileTypeId[];
     /**
      * Locale to use.
      */
@@ -948,7 +946,7 @@ interface TraceResult extends DictionaryTraceResult {
     dictActive: boolean;
 }
 interface TraceOptions {
-    languageId?: LanguageId | LanguageId[];
+    languageId?: FileTypeId | FileTypeId[];
     locale?: LocaleId;
     ignoreCase?: boolean;
     allowCompoundWords?: boolean;
@@ -1059,4 +1057,4 @@ declare namespace textApi_d {
   export { textApi_d_calculateTextDocumentOffsets as calculateTextDocumentOffsets, textApi_d_camelToSnake as camelToSnake, textApi_d_cleanText as cleanText, textApi_d_cleanTextOffset as cleanTextOffset, textApi_d_extractLinesOfText as extractLinesOfText, textApi_d_extractPossibleWordsFromTextOffset as extractPossibleWordsFromTextOffset, textApi_d_extractText as extractText, textApi_d_extractWordsFromCode as extractWordsFromCode, textApi_d_extractWordsFromCodeTextOffset as extractWordsFromCodeTextOffset, textApi_d_extractWordsFromText as extractWordsFromText, textApi_d_extractWordsFromTextOffset as extractWordsFromTextOffset, textApi_d_isFirstCharacterLower as isFirstCharacterLower, textApi_d_isFirstCharacterUpper as isFirstCharacterUpper, textApi_d_isLowerCase as isLowerCase, textApi_d_isUpperCase as isUpperCase, textApi_d_lcFirst as lcFirst, textApi_d_match as match, textApi_d_matchCase as matchCase, textApi_d_matchStringToTextOffset as matchStringToTextOffset, textApi_d_matchToTextOffset as matchToTextOffset, textApi_d_removeAccents as removeAccents, textApi_d_snakeToCamel as snakeToCamel, textApi_d_splitCamelCaseWord as splitCamelCaseWord, textApi_d_splitCamelCaseWordWithOffset as splitCamelCaseWordWithOffset, textApi_d_stringToRegExp as stringToRegExp, textApi_d_textOffset as textOffset, textApi_d_ucFirst as ucFirst };
 }
 
-export { type CheckTextInfo, type ConfigurationDependencies, type CreateTextDocumentParams, type DetermineFinalDocumentSettingsResult, type Document, DocumentValidator, type DocumentValidatorOptions, ENV_CSPELL_GLOB_ROOT, type ExcludeFilesGlobMap, type ExclusionFunction, exclusionHelper_d as ExclusionHelper, type FeatureFlag, FeatureFlags, ImportError, type ImportFileRefWithError$1 as ImportFileRefWithError, IncludeExcludeFlag, type IncludeExcludeOptions, index_link_d as Link, type Logger, type PerfTimer, type SpellCheckFileOptions, type SpellCheckFilePerf, type SpellCheckFileResult, SpellingDictionaryLoadError, type SuggestedWord, SuggestionError, type SuggestionOptions, type SuggestionsForWordResult, textApi_d as Text, type TextDocument, type TextDocumentLine, type TextDocumentRef, type TextInfoItem, type TraceOptions, type TraceResult, type TraceWordResult, UnknownFeatureFlagError, type ValidationIssue, calcOverrideSettings, checkFilenameMatchesExcludeGlob as checkFilenameMatchesGlob, checkText, checkTextDocument, clearCachedFiles, clearCaches, combineTextAndLanguageSettings, combineTextAndLanguageSettings as constructSettingsForText, createConfigLoader, createPerfTimer, createTextDocument, currentSettingsFileVersion, defaultConfigFilenames, defaultFileName, defaultFileName as defaultSettingsFilename, determineFinalDocumentSettings, extractDependencies, extractImportErrors, fileToDocument, fileToTextDocument, finalizeSettings, getCachedFileSize, getDefaultBundledSettingsAsync, getDefaultConfigLoader, getDefaultSettings, getDictionary, getGlobalSettings, getGlobalSettingsAsync, getLanguagesForBasename as getLanguageIdsForBaseFilename, getLanguagesForExt, getLogger, getSources, getSystemFeatureFlags, getVirtualFS, isBinaryFile, isSpellingDictionaryLoadError, loadConfig, loadPnP, mergeInDocSettings, mergeSettings, readRawSettings, readSettings, readSettingsFiles, refreshDictionaryCache, resolveFile, searchForConfig, sectionCSpell, setLogger, shouldCheckDocument, spellCheckDocument, spellCheckFile, suggestionsForWord, suggestionsForWords, traceWords, traceWordsAsync, updateTextDocument, validateText };
+export { type CheckTextInfo, type ConfigurationDependencies, type CreateTextDocumentParams, type DetermineFinalDocumentSettingsResult, type Document, DocumentValidator, type DocumentValidatorOptions, ENV_CSPELL_GLOB_ROOT, type ExcludeFilesGlobMap, type ExclusionFunction, exclusionHelper_d as ExclusionHelper, type FeatureFlag, FeatureFlags, ImportError, type ImportFileRefWithError$1 as ImportFileRefWithError, IncludeExcludeFlag, type IncludeExcludeOptions, index_link_d as Link, type Logger, type PerfTimer, type SpellCheckFileOptions, type SpellCheckFilePerf, type SpellCheckFileResult, SpellingDictionaryLoadError, type SuggestedWord, SuggestionError, type SuggestionOptions, type SuggestionsForWordResult, textApi_d as Text, type TextDocument, type TextDocumentLine, type TextDocumentRef, type TextInfoItem, type TraceOptions, type TraceResult, type TraceWordResult, UnknownFeatureFlagError, type ValidationIssue, calcOverrideSettings, checkFilenameMatchesExcludeGlob as checkFilenameMatchesGlob, checkText, checkTextDocument, clearCachedFiles, clearCaches, combineTextAndLanguageSettings, combineTextAndLanguageSettings as constructSettingsForText, createConfigLoader, createPerfTimer, createTextDocument, currentSettingsFileVersion, defaultConfigFilenames, defaultFileName, defaultFileName as defaultSettingsFilename, determineFinalDocumentSettings, extractDependencies, extractImportErrors, fileToDocument, fileToTextDocument, finalizeSettings, getCachedFileSize, getDefaultBundledSettingsAsync, getDefaultConfigLoader, getDefaultSettings, getDictionary, getGlobalSettings, getGlobalSettingsAsync, getLogger, getSources, getSystemFeatureFlags, getVirtualFS, isBinaryFile, isSpellingDictionaryLoadError, loadConfig, loadPnP, mergeInDocSettings, mergeSettings, readRawSettings, readSettings, readSettingsFiles, refreshDictionaryCache, resolveFile, searchForConfig, sectionCSpell, setLogger, shouldCheckDocument, spellCheckDocument, spellCheckFile, suggestionsForWord, suggestionsForWords, traceWords, traceWordsAsync, updateTextDocument, validateText };

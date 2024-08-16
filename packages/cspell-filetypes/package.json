@@ -1,0 +1,51 @@
+{
+  "name": "@cspell/filetypes",
+  "version": "8.13.3",
+  "description": "Library to determine file types based upon the file name.",
+  "keywords": [
+    "cspell",
+    "filetypes"
+  ],
+  "author": "Jason Dent <jason@streetsidesoftware.nl>",
+  "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-filetypes#readme",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "directories": {
+    "dist": "dist"
+  },
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "!**/*.tsbuildInfo",
+    "!**/__mocks__",
+    "!**/*.test.*",
+    "!**/*.spec.*",
+    "!**/*.map"
+  ],
+  "scripts": {
+    "build": "tsc -p .",
+    "watch": "tsc -p . -w",
+    "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
+    "clean-build": "pnpm run clean && pnpm run build",
+    "sort-filetypes": "pnpm build && node scripts/sortFileTypes.js && prettier --write src/definitions.ts",
+    "coverage": "vitest run --coverage",
+    "test-watch": "vitest",
+    "test": "vitest run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/streetsidesoftware/cspell.git",
+    "directory": "packages/cspell-filetypes"
+  },
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/cspell/labels/filetype"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {}
+}
