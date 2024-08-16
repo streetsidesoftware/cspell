@@ -36,6 +36,8 @@ describe('Validate LanguageIds', () => {
         ${'my-private-cert.private-key.pem'} | ${['pem', 'pem-private-key']}
         ${'Dockerfile'}                      | ${['dockerfile']}
         ${'Dockerfile.dev'}                  | ${['dockerfile']}
+        ${'docker.aws.compose.yaml'}         | ${['dockercompose']}
+        ${'composer.lock'}                   | ${[['lock']]}
         ${'code.jl'}                         | ${['julia']}
     `('getLanguagesForBasename $filename', ({ filename, expected }) => {
         expect(LangId.findMatchingFileTypes(filename)).toEqual(expected);
@@ -146,3 +148,5 @@ describe('Validate LanguageIds', () => {
         expect(LangId.isBinaryFileType(filetype)).toBe(expected);
     });
 });
+
+// cspell:ignore dockercompose

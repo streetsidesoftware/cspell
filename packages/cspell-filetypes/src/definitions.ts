@@ -18,7 +18,8 @@ export const definitions: FileTypeDefinitions = [
     { id: 'css', extensions: ['.css'] },
     { id: 'dhall', extensions: ['.dhall'] },
     { id: 'diff', extensions: ['.diff', '.patch', '.rej'] },
-    { id: 'dockerfile', extensions: ['.dockerfile'], filenames: ['Dockerfile', 'Dockerfile.dev', 'dockerfile', /\bDockerfile.[\w.-]/] },
+    { id: 'dockercompose', extensions: [], filenames: ['*docker*compose*.yaml', '*docker*compose*.yml', 'compose.*.yaml', 'compose.*.yml', 'compose.yaml', 'compose.yml'] },
+    { id: 'dockerfile', extensions: ['.dockerfile'], filenames: ['*.Dockerfile.*', 'Dockerfile', 'Dockerfile.*', 'Dockerfile.dev', 'dockerfile'] },
     { id: 'elisp', extensions: ['.el'] },
     { id: 'elixir', extensions: ['.ex', '.exs'] },
     { id: 'elm', extensions: ['.elm'] },
@@ -33,20 +34,14 @@ export const definitions: FileTypeDefinitions = [
     { id: 'handlebars', extensions: ['.handlebars', '.hbs'] },
     { id: 'haskell', extensions: ['.hs', '.lhs'] },
     { id: 'haxe', extensions: ['.hx'] },
-    {
-        id: 'html',
-        extensions: ['.asp', '.aspx', '.htm', '.html', '.jshtm', '.jsp', '.mdoc', '.shtml', '.volt', '.vue', '.xhtml'],
-    },
+    { id: 'html', extensions: ['.asp', '.aspx', '.htm', '.html', '.jshtm', '.jsp', '.mdoc', '.shtml', '.volt', '.vue', '.xhtml'] },
     { id: 'ini', extensions: ['.conf', '.ini'] },
     { id: 'jade', extensions: ['.jade', '.pug'] },
     { id: 'java', extensions: ['.jav', '.java'] },
     { id: 'javascript', extensions: ['.cjs', '.es6', '.js', '.mjs'] },
     { id: 'javascriptreact', extensions: ['.jsx'] },
     { id: 'jinja', extensions: ['.jinja'] },
-    {
-        id: 'json',
-        extensions: ['.babelrc', '.bowerrc', '.eslintrc', '.jscsrc', '.jshintrc', '.json', '.jsonc', '.webmanifest'],
-    },
+    { id: 'json', extensions: ['.babelrc', '.bowerrc', '.eslintrc', '.jscsrc', '.jshintrc', '.json', '.jsonc', '.webmanifest'] },
     { id: 'jsonc', extensions: ['.jsonc'] },
     { id: 'jsonc', extensions: ['.code-workspace'], filenames: ['.code-workspace'] },
     { id: 'julia', extensions: ['.jl'] },
@@ -56,7 +51,7 @@ export const definitions: FileTypeDefinitions = [
     { id: 'less', extensions: ['.less'] },
     { id: 'lisp', extensions: ['.fasl', '.l', '.lisp', '.lsp'] },
     { id: 'literate haskell', extensions: ['.lhs'] },
-    { id: 'lock', extensions: ['.lock'], filenames: ['package-lock.json', 'Cargo.lock'] },
+    { id: 'lock', extensions: ['.lock'], filenames: ['Cargo.lock', 'package-lock.json'] },
     { id: 'lua', extensions: ['.lua'] },
     { id: 'makefile', extensions: ['.mk'], filenames: ['makefile'] },
     { id: 'map', extensions: ['.map'] },
@@ -64,6 +59,7 @@ export const definitions: FileTypeDefinitions = [
     { id: 'mdx', extensions: ['.mdx'] },
     { id: 'monkeyc', extensions: ['.mb', '.mc'] },
     { id: 'mustache', extensions: ['.mst', '.mu', '.mustache', '.stache'] },
+    { id: 'nix', extensions: ['.nix'] },
     { id: 'nunjucks', extensions: ['.nj', '.njk', '.nunj', '.nunjs', '.nunjucks', '.tmpl', '.tpl'] },
     { id: 'objective-c', extensions: ['.m'] },
     { id: 'ocaml', extensions: ['.eliom', '.eliomi', '.ml', '.mli', '.mll', '.mly'] },
@@ -124,6 +120,7 @@ export const definitions: FileTypeDefinitions = [
     { id: 'toml', extensions: ['.toml'], filenames: ['Cargo.lock', 'Cargo.toml'] },
     { id: 'typescript', extensions: ['.cts', '.mts', '.ts'] },
     { id: 'typescriptreact', extensions: ['.tsx'] },
+    { id: 'typst', extensions: ['.typst'] },
     { id: 'vala', extensions: ['.vala'] },
     { id: 'vb', extensions: ['.bas', '.brs', '.vb', '.vbs'] },
     { id: 'vue', extensions: ['.vue'] },
@@ -191,12 +188,8 @@ export const definitions: FileTypeDefinitions = [
         ],
     },
     { id: 'xsl', extensions: ['.xsl', '.xslt'] },
-    { id: 'yaml', extensions: ['.eyaml', '.eyml', '.yaml', '.yml'] },
-    {
-        id: 'binary',
-        extensions: ['.bin', '.cur', '.dll', '.eot', '.exe', '.gz', '.lib', '.o', '.obj', '.zip'],
-        format: 'Binary',
-    },
+    { id: 'yaml', extensions: ['.cff', '.eyaml', '.eyml', '.yaml', '.yaml-tmlanguage', '.yaml-tmpreferences', '.yaml-tmtheme', '.yml'] },
+    { id: 'binary', extensions: ['.bin', '.cur', '.dll', '.eot', '.exe', '.gz', '.lib', '.o', '.obj', '.phar', '.zip'], format: 'Binary' },
     { id: 'dll', extensions: ['.dll'], format: 'Binary' },
     { id: 'exe', extensions: ['.exe'], format: 'Binary' },
     { id: 'fonts', extensions: ['.ttf', '.woff', '.woff2'], format: 'Binary' },
@@ -217,9 +210,6 @@ export const definitions: FileTypeDefinitions = [
     { id: 'wheel', extensions: ['.whl'], format: 'Binary' },
 ];
 
-// cspell:ignore cljs cljx cson iname pcregrep fsscript fasl gradle shtml xhtml mdoc aspx jshtm gitconfig bowerrc
-// cspell:ignore jshintrc jscsrc eslintrc babelrc webmanifest mdown markdn psgi phtml pssc psrc gypi rhistory
-// cspell:ignore rprofile cshtml gemspec cginc ebuild zshrc zprofile zlogin zlogout zshenv dsql ascx axml
-// cspell:ignore bpmn csproj dita ditamap dtml fsproj fxml isml mxml adoc
-// cspell:ignore purescript purs dhall SPSS tfvars vala argdn argdown styl resi eliom eliomi nunj nunjs tmpl stache
-// cspell:ignore haxe rhtml haml tscn bazel
+// cspell:ignoreRegExp /id: '.*?'/g
+// cspell:ignoreRegExp /extensions: \[[^\]]*?\]/g
+// cspell:ignore SPSS

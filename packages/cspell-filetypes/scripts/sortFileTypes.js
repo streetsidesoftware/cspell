@@ -1,4 +1,8 @@
+import { readFile, writeFile } from 'node:fs/promises';
+
 import { definitions } from '../dist/definitions.js';
+
+const urlFile = new URL('../src/definitions.ts', import.meta.url);
 
 /**
  * @typedef {import('../dist/types.js').FileTypeDefinition} FileTypeDefinition
@@ -26,11 +30,20 @@ const fieldOrder = ['id', 'extensions', 'filenames', 'format', 'description', 'c
 function normalizeDef(def) {
     const entries = Object.entries(def).sort(([a], [b]) => fieldOrder.indexOf(a) - fieldOrder.indexOf(b));
     def = Object.fromEntries(entries);
-    def.extensions = def.extensions.map((a) => (a.startsWith('.') ? a : '.' + a)).sort();
-    def.filenames = def.filenames?.sort();
+    def.extensions = [...new Set(def.extensions.map((a) => (a.startsWith('.') ? a : '.' + a)).sort())];
+    def.filenames = def.filenames ? [...new Set(def.filenames.sort())] : undefined;
     return def;
 }
 
 const defs = [...definitions].sort(compare).map(normalizeDef);
 
-console.log(JSON.stringify(defs));
+async function updateFile() {
+    const content = await readFile(urlFile, 'utf8');
+    const newLines = `export const definitions: FileTypeDefinitions = ${JSON.stringify(defs)};\n`;
+    const start = content.indexOf('export const definitions:');
+    const end = content.indexOf('];\n', start);
+    const output = content.slice(0, start) + newLines + content.slice(end + 3);
+    await writeFile(urlFile, output, 'utf8');
+}
+
+updateFile();

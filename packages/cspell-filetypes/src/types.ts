@@ -5,7 +5,7 @@ export interface FileTypeExtensionDefinition {
     /** List of extensions starting with '.' */
     extensions: string[];
     /** Filenames that do not have an extension or have a different type than their implied extension */
-    filenames?: (string | RegExp)[];
+    filenames?: string[];
     /** Indicates that it is a Text or Binary file type. */
     format?: 'Text' | 'Binary';
     /** Optional Description */

@@ -1,5 +1,5 @@
 import { definitions } from './definitions.js';
-import { FileTypeDefinitions, FileTypeId } from './types.js';
+import { FileTypeDefinition, FileTypeDefinitions, FileTypeId } from './types.js';
 
 type ExtensionToFileTypeIdMapSet = Map<string, Set<string>>;
 type ExtensionToFileTypeIdMap = Map<string, string[]>;
@@ -21,10 +21,7 @@ interface RegExpMatchToFileTypeId {
     id: FileTypeId;
 }
 
-const idsWithRegExp: RegExpMatchToFileTypeId[] = definitions
-    .filter((d) => d.filenames)
-    .flatMap((d) => d.filenames?.map((f) => (f instanceof RegExp ? { regexp: f, id: d.id } : undefined)))
-    .filter((f) => !!f);
+const idsWithRegExp: RegExpMatchToFileTypeId[] = definitions.map(defToRegExp).filter((f) => !!f);
 
 /**
  * Checks to see if a file type is considered to be a binary file type.
@@ -172,4 +169,31 @@ export function autoResolve<K, V>(map: Map<K, V>, key: K, resolve: (k: K) => V):
     const value = resolve(key);
     map.set(key, value);
     return value;
+}
+
+function escapeRegEx(s: string): string {
+    return s.replaceAll(/[|\\{}()[\]^$+*?.]/g, '\\$&').replaceAll('-', '\\x2d');
+}
+
+function stringOrGlob(s: string): string | RegExp {
+    return s.includes('*') ? simpleGlob(s) : s;
+}
+
+function simpleGlob(s: string): RegExp {
+    s = s.replaceAll('**', '*');
+    const pattern = s.split('*').map(escapeRegEx).join('.*');
+    return new RegExp(pattern);
+}
+
+function defToRegExp(def: FileTypeDefinition): RegExpMatchToFileTypeId | undefined {
+    if (!def.filenames) return undefined;
+    const regExps = def.filenames
+        .map(stringOrGlob)
+        .map((f) => (f instanceof RegExp ? f : undefined))
+        .filter((f) => !!f);
+
+    if (!regExps.length) return undefined;
+
+    const regexp = new RegExp(regExps.map((r) => r.source).join('|'));
+    return { regexp, id: def.id };
 }
