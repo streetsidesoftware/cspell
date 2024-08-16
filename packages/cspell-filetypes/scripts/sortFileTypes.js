@@ -35,7 +35,7 @@ function normalizeDef(def) {
     return def;
 }
 
-const defs = [...definitions].sort(compare).map(normalizeDef);
+const defs = dedupe(definitions).sort(compare).map(normalizeDef);
 
 async function updateFile() {
     const content = await readFile(urlFile, 'utf8');
@@ -44,6 +44,33 @@ async function updateFile() {
     const end = content.indexOf('];\n', start);
     const output = content.slice(0, start) + newLines + content.slice(end + 3);
     await writeFile(urlFile, output, 'utf8');
+}
+
+/**
+ *
+ * @param {FileTypeDefinition[]} defs
+ * @returns {FileTypeDefinition[]}
+ */
+function dedupe(defs) {
+    /** @type {Map<string, FileTypeDefinition>} */
+    const map = new Map();
+    for (const def of defs) {
+        const key = def.id;
+        const existing = map.get(key);
+        if (!existing) {
+            map.set(key, def);
+        } else {
+            existing.extensions = [...existing.extensions, ...def.extensions];
+            existing.filenames = [...(existing.filenames || []), ...(def.filenames || [])];
+            if (!existing.filenames.length) {
+                delete existing.filenames;
+            }
+            existing.format ??= def.format;
+            existing.description ??= def.description;
+            existing.comment ??= def.comment;
+        }
+    }
+    return [...map.values()];
 }
 
 updateFile();

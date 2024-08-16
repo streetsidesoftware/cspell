@@ -8,7 +8,17 @@ const binaryFormatIds = definitions.filter((d) => d.format === 'Binary').map((d)
 
 export const binaryLanguages = new Set(['binary', 'image', 'video', 'fonts', ...binaryFormatIds]);
 
-export const generatedFiles = new Set([...binaryLanguages, 'map', 'lock', 'pdf', 'cache_files', 'rsa', 'pem', 'trie']);
+export const generatedFiles = new Set([
+    ...binaryLanguages,
+    'map',
+    'lock',
+    'pdf',
+    'cache_files',
+    'rsa',
+    'pem',
+    'trie',
+    'log',
+]);
 
 export const languageIds: FileTypeId[] = definitions.map(({ id }) => id);
 
@@ -181,7 +191,22 @@ function stringOrGlob(s: string): string | RegExp {
 
 function simpleGlob(s: string): RegExp {
     s = s.replaceAll('**', '*');
-    const pattern = s.split('*').map(escapeRegEx).join('.*');
+    let pattern = '';
+    for (const char of s) {
+        switch (char) {
+            case '?': {
+                pattern += '.';
+                break;
+            }
+            case '*': {
+                pattern += '.*';
+                break;
+            }
+            default: {
+                pattern += escapeRegEx(char);
+            }
+        }
+    }
     return new RegExp(pattern);
 }
 

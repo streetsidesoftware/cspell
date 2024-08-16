@@ -32,12 +32,13 @@ describe('Validate LanguageIds', () => {
         ${'Gemfile'}                         | ${['ruby']}
         ${'path/Gemfile'}                    | ${['ruby']}
         ${'Cargo.lock'}                      | ${['lock', 'toml']}
+        ${'.errors.log.2'}                   | ${['log']}
         ${'my-cert.pem'}                     | ${['pem']}
         ${'my-private-cert.private-key.pem'} | ${['pem', 'pem-private-key']}
         ${'Dockerfile'}                      | ${['dockerfile']}
         ${'Dockerfile.dev'}                  | ${['dockerfile']}
         ${'docker.aws.compose.yaml'}         | ${['dockercompose']}
-        ${'composer.lock'}                   | ${[['lock']]}
+        ${'composer.lock'}                   | ${['json', 'lock']}
         ${'code.jl'}                         | ${['julia']}
     `('getLanguagesForBasename $filename', ({ filename, expected }) => {
         expect(LangId.findMatchingFileTypes(filename)).toEqual(expected);
