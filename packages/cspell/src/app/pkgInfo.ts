@@ -3,7 +3,7 @@
 export { pkgDir } from './dirname.js';
 
 export const name = 'cspell';
-export const version = '8.14.0';
+export const version = '8.14.1';
 export const engines = { node: '>=18' };
 
 export const npmPackage = { name, version, engines };
