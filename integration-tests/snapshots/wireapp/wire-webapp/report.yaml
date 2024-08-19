@@ -3,9 +3,9 @@ Repository: wireapp/wire-webapp
 Url: https://github.com/wireapp/wire-webapp.git
 Args: '["src/script/**/*.{js,ts,tsx,md}"]'
 Summary:
-  files: 1206
-  filesWithIssues: 641
-  issues: 2773
+  files: 1207
+  filesWithIssues: 642
+  issues: 2784
   errors: 0
 Errors: []
 
@@ -129,14 +129,14 @@ issues:
   - "src/script/calling/CallingRepository.ts:1133:7      convid                      U       convid: serializedConversationId"
   - "src/script/calling/CallingRepository.ts:1257:70     screensharing               U       V preferences) when screensharing is activated"
   - "src/script/calling/CallingRepository.ts:1415:47     Recepients (Recipients)     U       rtParticipantsToCallingMessageRecepients = (participants: Participant"
-  - "src/script/calling/CallingRepository.ts:1501:27     NOONE (NO ONE)              U       if (reason === REASON.NOONE_JOINED || reason =="
-  - "src/script/calling/CallingRepository.ts:1583:27     ECONN                       U       case REASON.TIMEOUT_ECONN:"
-  - "src/script/calling/CallingRepository.ts:1689:102    vrecv                       U       ?.videoState(member.vrecv));"
-  - "src/script/calling/CallingRepository.ts:1854:44     wuser                       U       updateActiveSpeakers = (wuser: number, convId: string"
-  - "src/script/calling/CallingRepository.ts:1986:11     Segmentations               U       customSegmentations: Record<string, any"
-  - "src/script/calling/CallingRepository.ts:1994:11     segmentations               U       const segmentations = {"
-  - "src/script/calling/CallingRepository.ts:2053:68     noopener                    U       target=\"_blank\" rel=\"noopener noreferrer\">`,"
-  - "src/script/calling/CallingRepository.ts:2053:77     noreferrer                  U       blank\" rel=\"noopener noreferrer\">`,"
+  - "src/script/calling/CallingRepository.ts:1508:27     NOONE (NO ONE)              U       if (reason === REASON.NOONE_JOINED || reason =="
+  - "src/script/calling/CallingRepository.ts:1590:27     ECONN                       U       case REASON.TIMEOUT_ECONN:"
+  - "src/script/calling/CallingRepository.ts:1696:102    vrecv                       U       ?.videoState(member.vrecv));"
+  - "src/script/calling/CallingRepository.ts:1861:44     wuser                       U       updateActiveSpeakers = (wuser: number, convId: string"
+  - "src/script/calling/CallingRepository.ts:1993:11     Segmentations               U       customSegmentations: Record<string, any"
+  - "src/script/calling/CallingRepository.ts:2001:11     segmentations               U       const segmentations = {"
+  - "src/script/calling/CallingRepository.ts:2060:68     noopener                    U       target=\"_blank\" rel=\"noopener noreferrer\">`,"
+  - "src/script/calling/CallingRepository.ts:2060:77     noreferrer                  U       blank\" rel=\"noopener noreferrer\">`,"
   - "src/script/calling/enum/CallMessageType.ts:23:15        CONFEND         U       CONF_END = 'CONFEND',"
   - "src/script/calling/enum/CallMessageType.ts:25:18        GROUPCHECK      U       GROUP_CHECK = 'GROUPCHECK',"
   - "src/script/calling/enum/CallMessageType.ts:26:18        GROUPLEAVE      U       GROUP_LEAVE = 'GROUPLEAVE',"
@@ -204,7 +204,7 @@ issues:
   - "src/script/components/MessagesList/Message/ContentMessage/MessageActions/MessageActions.tsx:50:24       thumbsup        U       THUMBSUP: 'reactwith-thumbsup-messag',"
   - "src/script/components/MessagesList/Message/ContentMessage/MessageActions/MessageActions.tsx:50:33       messag          U       'reactwith-thumbsup-messag',"
   - "src/script/components/MessagesList/Message/ContentMessage/MessageActions/MessageReactions/EmojiPicker.tsx:109:58        naviage     U       up/down arrow key to naviage between messages in"
-  - "src/script/components/MessagesList/Message/ContentMessage/MessageActions/MessageReactions/EmojiPill.tsx:110:16      showmore    U       start: '[showmore]',"
+  - "src/script/components/MessagesList/Message/ContentMessage/MessageActions/MessageReactions/EmojiPill.tsx:120:16      showmore    U       start: '[showmore]',"
   - "src/script/components/MessagesList/Message/ContentMessage/MessageActions/MessageReactions/MessageReactions.tsx:62:22        POSX    U       const [clientX, setPOSX] = useState(INITIAL"
   - "src/script/components/MessagesList/Message/ContentMessage/Warnings/PartialFailureToSend/PartialFailureToSend.tsx:55:28          Qulified    U       parsedUsers, currentQulifiedId) => {"
   - "src/script/components/MessagesList/Message/DecryptErrorMessage.tsx:56:33        sysmsg      U       span className=\"icon-sysmsg-error text-red\" />"
@@ -241,7 +241,7 @@ issues:
   - "src/script/conversation/ConversationAccessPermission.ts:138:53      sigfigs     U       feature with the correct sigfigs"
   - "src/script/conversation/ConversationFilter.test.ts:66:16        Florian     U       name: 'Florian@Staging11',"
   - "src/script/conversation/ConversationLabelRepository.ts:76:88        favorited       U       type: 'conversation-favorited'}> {"
-  - "src/script/conversation/ConversationLabelRepository.ts:109:12       unmarshal       U       readonly unmarshal = (labelJson: LabelProperty"
+  - "src/script/conversation/ConversationLabelRepository.ts:112:12       unmarshal       U       readonly unmarshal = (labelJson: LabelProperty"
   - "src/script/conversation/ConversationMapper.test.ts:59:25        Emtpy       U       const functionCallEmtpyArray = () => ConversationMapp"
   - "src/script/conversation/ConversationRepository.test.ts:830:80       testt               U       dk03f38414', domain: 'testt-domain'};"
   - "src/script/conversation/ConversationRepository.test.ts:836:59       kfbe                U       ca-a495asd47a8-ac70-9kfbe924b2d0', domain: 'testt"
@@ -369,7 +369,7 @@ issues:
   - "src/script/page/AppLock/AppLock.test.tsx:58:5           applock     U       applock: {"
   - "src/script/page/AppLock/AppLock.tsx:321:50      charnumber      U       passcode-validation-charnumber\""
   - "src/script/page/AppLock/AppLock.tsx:355:50      specialchar     U       passcode-validation-specialchar\""
-  - "src/script/page/components/FeatureConfigChange/FeatureConfigChangeNotifier/FeatureConfigChangeNotifier.test.tsx:101:101     dlpath      U       enforcedDownloadLocation: 'dlpath'}}),"
+  - "src/script/page/components/FeatureConfigChange/FeatureConfigChangeNotifier/FeatureConfigChangeNotifier.test.tsx:102:101     dlpath      U       enforcedDownloadLocation: 'dlpath'}}),"
   - "src/script/page/components/FeatureConfigChange/FeatureConfigChangeNotifier/FeatureConfigChangeNotifier.ts:87:47         Applock     U       featureConfigChangeModalApplock'),"
   - "src/script/page/LeftSidebar/LeftSidebar.tsx:30:53       Temporaty       U       Conversations} from './panels/TemporatyGuestConversations';"
   - "src/script/page/LeftSidebar/panels/Conversations/ConversationsList.test.tsx:100:11      unser       U       const unserNames = ['Alice', 'Bob"
@@ -421,10 +421,11 @@ issues:
   - "src/script/strings.ts:81:210        analysed    U       extensively recorded and analysed. To use the secure messenger"
   - "src/script/team/TeamRepository.ts:89:30         Detete      U       private readonly onMemberDetete: () => Promise<void"
   - "src/script/team/TeamService.ts:73:80        webapps     U       to ensure that modern webapps work with legacy backends"
-  - "src/script/tracking/EventTrackingRepository.ts:47:8         COUNTLY         U       .COUNTLY_ALLOWED_BACKEND?.split"
-  - "src/script/tracking/EventTrackingRepository.ts:72:17        UNSYNCED        U       COUNTLY_UNSYNCED_DEVICE_ID_LOCAL_STORAGE"
-  - "src/script/tracking/EventTrackingRepository.ts:120:11       unsynced        U       const unsyncedCountlyDeviceId = loadValue"
-  - "src/script/tracking/EventTrackingRepository.ts:214:17       localstorage    U       storage: 'localstorage',"
+  - "src/script/tracking/Countly.helpers.ts:23:10        COUNTLY     U       const {COUNTLY_API_KEY, COUNTLY_ALLOWED"
+  - "src/script/tracking/EventTrackingRepository.ts:60:17        UNSYNCED        U       COUNTLY_UNSYNCED_DEVICE_ID_LOCAL_STORAGE"
+  - "src/script/tracking/EventTrackingRepository.ts:104:16       Telemtry        U       async init(isTelemtryConsentGiven: boolean"
+  - "src/script/tracking/EventTrackingRepository.ts:108:11       unsynced        U       const unsyncedCountlyDeviceId = loadValue"
+  - "src/script/tracking/EventTrackingRepository.ts:201:17       localstorage    U       storage: 'localstorage',"
   - "src/script/ui/ContextMenu.tsx:104:54        begings     U       such as 10 seconds etc begings with digit which is"
   - "src/script/ui/ContextMenu.tsx:124:90        trigerer    U       the menu and focus the trigerer"
   - "src/script/ui/Shortcut.ts:21:25         keyboardjs      U       import keyboardJS from 'keyboardjs';"

@@ -660,15 +660,15 @@ vm/src/builtins/dict.rs:14:5      - Unknown word (dictdatatype) -- dictdatatype:
 vm/src/builtins/dict.rs:285:13    - Unknown word (dicted)       -- let dicted: Result<PyDictRef,
 vm/src/builtins/dict.rs:978:10    - Unknown word (reversekeyiterator) -- dict_reversekeyiterator_type,
 vm/src/builtins/frame.rs:57:10     - Unknown word (lasti)      -- fn f_lasti(&self) -> u32 {
-vm/src/builtins/function.rs:134:13    - Unknown word (argpos)     -- let argpos = |range: std::ops:
-vm/src/builtins/function.rs:144:17    - Unknown word (posonly)    -- let mut posonly_passed_as_kwarg = Vec
-vm/src/builtins/function.rs:191:17    - Unknown word (ndefs)      -- let ndefs = defaults.map_or(0
-vm/src/builtins/function.rs:193:17    - Unknown word (nrequired)  -- let nrequired = code.arg_count as
+vm/src/builtins/function.rs:103:17    - Unknown word (fastlocals) -- let mut fastlocals = frame.fastlocals.lock
+vm/src/builtins/function.rs:144:13    - Unknown word (argpos)     -- let argpos = |range: std::ops:
+vm/src/builtins/function.rs:154:17    - Unknown word (posonly)    -- let mut posonly_passed_as_kwarg = Vec
+vm/src/builtins/function.rs:201:17    - Unknown word (ndefs)      -- let ndefs = defaults.map_or(0
+vm/src/builtins/function.rs:203:17    - Unknown word (nrequired)  -- let nrequired = code.arg_count as
 vm/src/builtins/function.rs:2:5       - Unknown word (jitfunc)    -- mod jitfunc;
-vm/src/builtins/function.rs:599:13    - Unknown word (funcself)   -- let funcself = self.object.clone
-vm/src/builtins/function.rs:83:13     - Unknown word (nexpected)  -- let nexpected_args = code.arg_count
-vm/src/builtins/function.rs:89:16     - Unknown word (starargs)   -- // and starargs and kwargs.
-vm/src/builtins/function.rs:93:17     - Unknown word (fastlocals) -- let mut fastlocals = frame.fastlocals.lock
+vm/src/builtins/function.rs:644:13    - Unknown word (funcself)   -- let funcself = self.object.clone
+vm/src/builtins/function.rs:93:13     - Unknown word (nexpected)  -- let nexpected_args = code.arg_count
+vm/src/builtins/function.rs:99:16     - Unknown word (starargs)   -- // and starargs and kwargs.
 vm/src/builtins/function/jitfunc.rs:89:14     - Unknown word (Jitting)    -- "Jitting function requires arguments
 vm/src/builtins/genericalias.rs:254:9     - Unknown word (tvars)      -- fn subs_tvars(
 vm/src/builtins/genericalias.rs:257:5     - Unknown word (argitems)   -- argitems: &[PyObjectRef],
