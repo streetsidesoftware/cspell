@@ -1,5 +1,4 @@
 import assert from 'node:assert';
-import { pathToFileURL } from 'node:url';
 
 import type {
     AdvancedCSpellSettingsWithSourceTrace,
@@ -22,6 +21,7 @@ import { configSettingsFileVersion0_1, ENV_CSPELL_GLOB_ROOT } from './constants.
 import { calcDictionaryDefsToLoad, mapDictDefsToInternal } from './DictionarySettings.js';
 import { mergeList, mergeListUnique } from './mergeList.js';
 import { resolvePatterns } from './patterns.js';
+import { CwdUrlResolver } from './resolveCwd.js';
 
 type CSpellSettingsWST = AdvancedCSpellSettingsWithSourceTrace;
 export type CSpellSettingsWSTO = OptionalOrUndefined<AdvancedCSpellSettingsWithSourceTrace>;
@@ -44,12 +44,17 @@ const cacheInternalSettings = new AutoResolveWeakCache<CSpellSettingsI | CSpellS
 const parserCache = new AutoResolveWeakCache<Exclude<CSpellSettingsI['plugins'], undefined>, Map<string, Parser>>();
 const emptyParserMap = new Map<string, Parser>();
 
+const cwdResolver = new CwdUrlResolver();
+let envCSpellGlobRoot = process.env[ENV_CSPELL_GLOB_ROOT];
+
 onClearCache(() => {
     parserCache.clear();
     emptyParserMap.clear();
     cachedMerges.clear();
     mergeCache.clear();
     cacheInternalSettings.clear();
+    cwdResolver.reset();
+    envCSpellGlobRoot = process.env[ENV_CSPELL_GLOB_ROOT];
 });
 
 function _mergeWordsCached(left: string[], right: string[]): string[] {
@@ -120,10 +125,10 @@ function _merge(
     const _left = toInternalSettings(left);
     const _right = toInternalSettings(right);
     if (left === right) {
-        return _left;
+        return toInternalSettings(_left);
     }
     if (isEmpty(right)) {
-        return _left;
+        return toInternalSettings(_left);
     }
     if (isEmpty(left)) {
         return _right;
@@ -221,11 +226,8 @@ function hasAncestor(s: CSpellSettingsWSTO, ancestor: CSpellSettingsWSTO, side: 
     return src === ancestor || (src && hasAncestor(src, ancestor, side)) || false;
 }
 
-export function mergeInDocSettings(left: CSpellSettingsWSTO, right: CSpellSettingsWSTO): CSpellSettingsWST {
-    const merged = {
-        ...mergeSettings(left, right),
-        includeRegExpList: mergeListUnique(left.includeRegExpList, right.includeRegExpList),
-    };
+export function mergeInDocSettings(left: CSpellSettingsWSTO, ...rest: CSpellSettingsWSTO[]): CSpellSettingsWST {
+    const merged = mergeSettings(left, ...rest);
     return util.clean(merged);
 }
 
@@ -283,10 +285,12 @@ export function toInternalSettings(settings?: CSpellSettingsI | CSpellSettingsWS
 function _toInternalSettings(settings: CSpellSettingsI | CSpellSettingsWSTO): CSpellSettingsI {
     const { dictionaryDefinitions: defs, ...rest } = settings;
 
-    const dictionaryDefinitions = mapDictDefsToInternal(
-        defs,
-        (settings.source?.filename && toFileUrl(settings.source?.filename)) || resolveCwd(),
-    );
+    const dictionaryDefinitions =
+        defs &&
+        mapDictDefsToInternal(
+            defs,
+            (settings.source?.filename && toFileUrl(settings.source?.filename)) || resolveCwd(),
+        );
     const setting = dictionaryDefinitions ? { ...rest, dictionaryDefinitions } : rest;
     return csi(setting);
 }
@@ -371,9 +375,7 @@ export function extractDependencies(settings: CSpellSettingsWSTO | CSpellSetting
 }
 
 function resolveCwd(): URL {
-    const envGlobRoot = process.env[ENV_CSPELL_GLOB_ROOT];
-    const cwd = envGlobRoot || process.cwd();
-    return pathToFileURL(cwd);
+    return cwdResolver.resolveUrl(envCSpellGlobRoot);
 }
 
 function resolveParser(settings: CSpellSettingsI): Parser | undefined {

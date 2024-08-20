@@ -57,20 +57,17 @@ export type DictionaryDefinitionInternalWithSource = DictionaryDefinitionInterna
 };
 
 export function cleanCSpellSettingsInternal(
-    parts: OptionalOrUndefined<Partial<CSpellSettingsInternal>> = {},
+    parts?: OptionalOrUndefined<Partial<CSpellSettingsInternal>>,
 ): CSpellSettingsInternal {
-    const csi = clean(parts as CSpellSettingsInternal);
-    Object.assign(csi, { [SymbolCSpellSettingsInternal]: true });
-    return csi;
+    return parts
+        ? Object.assign(clean(parts), { [SymbolCSpellSettingsInternal]: true })
+        : { [SymbolCSpellSettingsInternal]: true };
 }
 
 export function createCSpellSettingsInternal(
-    parts: OptionalOrUndefined<Partial<CSpellSettingsInternal>> = {},
+    parts?: OptionalOrUndefined<Partial<CSpellSettingsInternal>>,
 ): CSpellSettingsInternal {
-    return clean({
-        ...parts,
-        [SymbolCSpellSettingsInternal]: true,
-    });
+    return cleanCSpellSettingsInternal({ ...parts });
 }
 
 export function isCSpellSettingsInternal(

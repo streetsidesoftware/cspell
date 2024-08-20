@@ -1,7 +1,5 @@
-import { opAppend, opFilter, opMap, pipeSync } from '@cspell/cspell-pipe/sync';
+import { opAppend, opFilter, opFlatten, opMap, pipeSync } from '@cspell/cspell-pipe/sync';
 import type { CSpellUserSettings, DictionaryDefinitionInline } from '@cspell/cspell-types';
-import type { Sequence } from 'gensequence';
-import { genSequence } from 'gensequence';
 
 import type { ExtendedSuggestion } from '../Models/Suggestion.js';
 import { createSpellingDictionary } from '../SpellingDictionary/index.js';
@@ -99,15 +97,17 @@ export interface DirectiveIssue {
     suggestionsEx: ExtendedSuggestion[];
 }
 
+function collectInDocumentSettings(text: string): CSpellUserSettings[] {
+    const collectedSettings = [...getPossibleInDocSettings(text)].flatMap((a) => parseSettingMatch(a));
+    return collectedSettings;
+}
+
+const baseInDocSettings: CSpellUserSettings = { id: 'in-doc-settings' };
+Object.freeze(baseInDocSettings);
+
 export function getInDocumentSettings(text: string): CSpellUserSettings {
-    const collectedSettings = getPossibleInDocSettings(text)
-        .concatMap((a) => parseSettingMatch(a))
-        .reduce(
-            (s, setting) => {
-                return mergeInDocSettings(s, setting);
-            },
-            { id: 'in-doc-settings' } as CSpellUserSettings,
-        );
+    const found = collectInDocumentSettings(text);
+    const collectedSettings = found.length ? mergeInDocSettings(baseInDocSettings, ...found) : baseInDocSettings;
     const {
         words,
         flagWords,
@@ -300,8 +300,12 @@ function parseDictionaries(match: string): CSpellUserSettings {
     return { dictionaries };
 }
 
-function getPossibleInDocSettings(text: string): Sequence<RegExpExecArray> {
-    return genSequence(regExInFileSettings).concatMap((regexp) => Text.match(regexp, text));
+function getPossibleInDocSettings(text: string): Iterable<RegExpExecArray> {
+    return pipeSync(
+        regExInFileSettings,
+        opMap((regexp) => Text.match(regexp, text)),
+        opFlatten(),
+    );
 }
 
 function getWordsFromDocument(text: string): string[] {
@@ -338,7 +342,8 @@ export function getIgnoreRegExpFromDocument(text: string): (string | RegExp)[] {
 /**
  * These internal functions are used exposed for unit testing.
  */
-export const internal = {
+export const __internal = {
+    collectInDocumentSettings,
     getPossibleInDocSettings,
     getWordsFromDocument,
     parseWords,
