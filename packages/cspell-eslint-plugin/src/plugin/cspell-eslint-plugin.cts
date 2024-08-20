@@ -17,7 +17,7 @@ const optionsSchema = JSON.parse(readFileSync(pathJoin(__dirname, '../../assets/
 const schema = optionsSchema as unknown as Rule.RuleMetaData['schema'];
 
 // eslint-disable-next-line n/no-missing-require
-const spellCheck = createSyncFn<SpellCheckFn>(require.resolve('../worker/worker.mjs'), 30_000);
+const spellCheck = createSyncFn<SpellCheckFn>(require.resolve('../worker/worker.mjs'));
 
 interface ExtendedSuggestion {
     /**
