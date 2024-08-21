@@ -77,10 +77,8 @@ const sampleTextWithBadRegexp = `
 
 describe('Validate InDocSettings', () => {
     test('tests matching settings', () => {
-        const matches = [...InDoc.__internal.getPossibleInDocSettings(sampleCode)].map((a) =>
-            a.slice(1).filter((a) => !!a),
-        );
-        expect(matches.map((a) => a[0])).toEqual([
+        const matches = [...InDoc.__internal.getPossibleInDocSettings(sampleCode)].map((a) => a.match);
+        expect(matches).toEqual([
             'enableCompoundWords',
             'disableCompoundWords',
             ' enableCOMPOUNDWords',

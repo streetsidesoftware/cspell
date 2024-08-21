@@ -98,7 +98,7 @@ export interface DirectiveIssue {
 }
 
 function collectInDocumentSettings(text: string): CSpellUserSettings[] {
-    const collectedSettings = [...getPossibleInDocSettings(text)].flatMap((a) => parseSettingMatch(a));
+    const collectedSettings = [...getPossibleInDocSettings(text)].flatMap((a) => parseSettingMatchToSettings(a));
     return collectedSettings;
 }
 
@@ -149,20 +149,49 @@ export function validateInDocumentSettings(docText: string, _settings: CSpellUse
     return pipeSync(getPossibleInDocSettings(docText), opMap(parseSettingMatchValidation), opFilter(isDefined));
 }
 
-const settingParsers: readonly (readonly [RegExp, (m: string) => CSpellUserSettings])[] = [
-    [/^(?:enable|disable)(?:allow)?CompoundWords\b(?!-)/i, parseCompoundWords],
-    [/^(?:enable|disable)CaseSensitive\b(?!-)/i, parseCaseSensitive],
-    [/^enable\b(?!-)/i, parseEnable],
-    [/^disable(-line|-next(-line)?)?\b(?!-)/i, parseDisable],
-    [/^words?\b(?!-)/i, parseWords],
-    [/^ignore(?:-?words?)?\b(?!-)/i, parseIgnoreWords],
-    [/^(?:flag|forbid)(?:-?words?)?\b(?!-)/i, parseFlagWords],
-    [/^ignore_?Reg_?Exp\s+.+$/i, parseIgnoreRegExp],
-    [/^include_?Reg_?Exp\s+.+$/i, parseIncludeRegExp],
-    [/^locale?\b(?!-)/i, parseLocale],
-    [/^language\s\b(?!-)/i, parseLocale],
-    [/^dictionar(?:y|ies)\b(?!-)/i, parseDictionaries], // cspell:disable-line
-    [/^LocalWords:/, (w) => parseWords(w.replaceAll(/^LocalWords:?/gi, ' '))],
+interface PossibleMatch {
+    /** The full directive text till the end of the line */
+    fullDirective: string;
+    /** Offset of the directive */
+    offset: number;
+    /** the partial directive, missing the CSpell prefix. */
+    match: string;
+}
+
+type Directive =
+    | 'CompoundWords'
+    | 'CaseSensitive'
+    | 'Enable'
+    | 'Disable'
+    | 'Words'
+    | 'Ignore'
+    | 'Flag'
+    | 'IgnoreRegExp'
+    | 'IncludeRegExp'
+    | 'Locale'
+    | 'Dictionaries';
+
+type ParserFn = (match: string) => CSpellUserSettings;
+
+interface DirectiveMatchWithParser extends PossibleMatch {
+    directive: Directive;
+    fn: ParserFn;
+}
+
+const settingParsers: readonly (readonly [RegExp, ParserFn, Directive])[] = [
+    [/^(?:enable|disable)(?:allow)?CompoundWords\b(?!-)/i, parseCompoundWords, 'CompoundWords'],
+    [/^(?:enable|disable)CaseSensitive\b(?!-)/i, parseCaseSensitive, 'CaseSensitive'],
+    [/^enable\b(?!-)/i, parseEnable, 'Enable'],
+    [/^disable(-line|-next(-line)?)?\b(?!-)/i, parseDisable, 'Disable'],
+    [/^words?\b(?!-)/i, parseWords, 'Words'],
+    [/^ignore(?:-?words?)?\b(?!-)/i, parseIgnoreWords, 'Ignore'],
+    [/^(?:flag|forbid)(?:-?words?)?\b(?!-)/i, parseFlagWords, 'Flag'],
+    [/^ignore_?Reg_?Exp\s+.+$/i, parseIgnoreRegExp, 'IgnoreRegExp'],
+    [/^include_?Reg_?Exp\s+.+$/i, parseIncludeRegExp, 'IncludeRegExp'],
+    [/^locale?\b(?!-)/i, parseLocale, 'Locale'],
+    [/^language\s\b(?!-)/i, parseLocale, 'Locale'],
+    [/^dictionar(?:y|ies)\b(?!-)/i, parseDictionaries, 'Dictionaries'], // cspell:disable-line
+    [/^LocalWords:/, (w) => parseWords(w.replaceAll(/^LocalWords:?/gi, ' ')), 'Words'],
 ] as const;
 
 export const regExSpellingGuardBlock =
@@ -176,17 +205,17 @@ const issueMessages = {
     unknownDirective: 'Unknown CSpell directive',
 } as const;
 
-function parseSettingMatchValidation(matchArray: RegExpMatchArray): DirectiveIssue | undefined {
-    const [fullMatch = ''] = matchArray;
+function parseSettingMatchValidation(possibleMatch: PossibleMatch): DirectiveIssue | undefined {
+    const { fullDirective, offset } = possibleMatch;
 
-    const directiveMatch = fullMatch.match(regExCSpellDirectiveKey);
+    const directiveMatch = fullDirective.match(regExCSpellDirectiveKey);
     if (!directiveMatch) return undefined;
 
     const match = directiveMatch[1];
     const possibleSetting = match.trim();
     if (!possibleSetting) return undefined;
 
-    const start = (matchArray.index || 0) + (directiveMatch.index || 0) + (match.length - match.trimStart().length);
+    const start = offset + (directiveMatch.index || 0) + (match.length - match.trimStart().length);
     const text = possibleSetting.replace(/^([-\w]+)?.*/, '$1');
     const end = start + text.length;
 
@@ -227,14 +256,17 @@ function* filterUniqueSuggestions(sugs: Iterable<ExtendedSuggestion>): Iterable<
     }
 }
 
-function parseSettingMatch(matchArray: RegExpMatchArray): CSpellUserSettings[] {
-    const [, match = ''] = matchArray;
+function associateDirectivesWithParsers(possibleMatch: PossibleMatch): DirectiveMatchWithParser[] {
+    const { match } = possibleMatch;
     const possibleSetting = match.trim();
 
     return settingParsers
         .filter(([regex]) => regex.test(possibleSetting))
-        .map(([, fn]) => fn)
-        .map((fn) => fn(possibleSetting));
+        .map(([, fn, directive]) => ({ ...possibleMatch, directive, fn }));
+}
+
+function parseSettingMatchToSettings(possibleMatch: PossibleMatch): CSpellUserSettings[] {
+    return associateDirectivesWithParsers(possibleMatch).map((m) => m.fn(m.match));
 }
 
 function parseCompoundWords(match: string): CSpellUserSettings {
@@ -249,7 +281,6 @@ function parseCaseSensitive(match: string): CSpellUserSettings {
 
 function parseWords(match: string): CSpellUserSettings {
     const words = match
-        // .replace(/[@#$%^&={}/"]/g, ' ')
         .split(/[,\s;]+/g)
         .slice(1)
         .filter((a) => !!a);
@@ -300,11 +331,12 @@ function parseDictionaries(match: string): CSpellUserSettings {
     return { dictionaries };
 }
 
-function getPossibleInDocSettings(text: string): Iterable<RegExpExecArray> {
+function getPossibleInDocSettings(text: string): Iterable<PossibleMatch> {
     return pipeSync(
         regExInFileSettings,
         opMap((regexp) => Text.match(regexp, text)),
         opFlatten(),
+        opMap((match) => ({ fullDirective: match[0], offset: match.index, match: match[1].trim() })),
     );
 }
 
