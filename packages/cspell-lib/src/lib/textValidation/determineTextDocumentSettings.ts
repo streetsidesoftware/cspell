@@ -5,7 +5,7 @@ import type { CSpellUserSettings } from '@cspell/cspell-types';
 import { getLanguagesForBasename } from '../fileTypes.js';
 import type { CSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef.js';
 import type { TextDocument, TextDocumentRef } from '../Models/TextDocument.js';
-import { calcOverrideSettings, getDefaultSettings, getGlobalSettings, mergeSettings } from '../Settings/index.js';
+import { calcOverrideSettings, getDefaultSettings, getGlobalSettingsAsync, mergeSettings } from '../Settings/index.js';
 import { combineTextAndLanguageSettings } from '../Settings/TextDocumentSettings.js';
 import { uriToFilePath } from '../util/Uri.js';
 
@@ -29,7 +29,7 @@ export async function determineTextDocumentSettings(
     const filename = uriToFilePath(doc.uri);
     const settingsWithDefaults = mergeSettings(
         await getDefaultSettings(settings.loadDefaultConfiguration ?? true),
-        getGlobalSettings(),
+        await getGlobalSettingsAsync(),
         settings,
     );
     const fileSettings = calcOverrideSettings(settingsWithDefaults, filename);

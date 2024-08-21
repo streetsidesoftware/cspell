@@ -110,10 +110,7 @@ function isEmpty(obj: object) {
     return !obj || Object.keys(obj).length === 0;
 }
 
-function merge(
-    left: CSpellSettingsWSTO | CSpellSettingsI,
-    right: CSpellSettingsWSTO | CSpellSettingsI,
-): CSpellSettingsI {
+function merge(left: CSpellSettingsI, right: CSpellSettingsWSTO | CSpellSettingsI): CSpellSettingsI {
     const map = mergeCache.get(left, () => new WeakMap());
     return autoResolveWeak(map, right, () => _merge(left, right));
 }

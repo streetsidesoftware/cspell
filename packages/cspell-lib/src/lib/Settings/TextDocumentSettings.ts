@@ -17,7 +17,8 @@ export function combineTextAndLanguageSettings(
     const settingsForText = mergeSettings(settings, docSettings);
     const langSettings = calcSettingsForLanguageId(settingsForText, languageId);
     // Merge again, to force In-Doc settings.
-    return mergeSettings(langSettings, docSettings);
+    const final = mergeSettings(langSettings, docSettings);
+    return final;
 }
 
 export function extractSettingsFromText(text: string): CSpellSettings {

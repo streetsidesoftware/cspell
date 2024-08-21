@@ -18,9 +18,13 @@ suite('Get InDocSettings', async (test) => {
 
 suite('Collect InDocSettings', async (test) => {
     const doc = sampleDoc();
+    const iterations = 10;
 
     test('collectInDocumentSettings', () => {
-        const settings = __internal.collectInDocumentSettings(doc);
+        let settings: unknown | undefined = undefined;
+        for (let i = iterations; i > 0; --i) {
+            settings = __internal.collectInDocumentSettings(doc);
+        }
         return settings;
     });
 });
