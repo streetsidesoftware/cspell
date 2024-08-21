@@ -5,7 +5,7 @@ Args: '["--issues-summary-report","**/*.{md,py}"]'
 Summary:
   files: 2794
   filesWithIssues: 901
-  issues: 8005
+  issues: 8002
   errors: 0
 Errors: []
 
@@ -571,7 +571,6 @@ issues:
   - "django/db/backends/postgresql/introspection.py:169:77       confkey             U       AND a2.attnum = con.confkey[1]"
   - "django/db/backends/postgresql/introspection.py:172:21       contype             U       con.contype = 'f' AND"
   - "django/db/backends/postgresql/introspection.py:193:19       conname             U       c.conname,"
-  - "django/db/backends/postgresql/introspection.py:196:26       unnest              U       FROM unnest(c.conkey) WITH ORDINALITY"
   - "django/db/backends/postgresql/introspection.py:196:48       ORDINALITY          U       unnest(c.conkey) WITH ORDINALITY cols(colid, arridx)"
   - "django/db/backends/postgresql/introspection.py:196:64       colid               U       WITH ORDINALITY cols(colid, arridx)"
   - "django/db/backends/postgresql/introspection.py:196:71       arridx              U       ORDINALITY cols(colid, arridx)"
@@ -2492,10 +2491,9 @@ issues:
   - "tests/responses/tests.py:32:38          qwer                U       writelines([\"asdf\\n\", \"qwer\\n\"])"
   - "tests/responses/tests.py:94:34          J'attendrai         U       HttpResponse(status=\"J'attendrai\")"
   - "tests/responses/tests.py:164:19         textiowrapper       U       def test_wrap_textiowrapper(self):"
-  - "tests/runtests.py:55:8          refcounting         U       # uses refcounting, garbage collection"
-  - "tests/runtests.py:57:58         deallocations       U       of 700 allocations + deallocations without"
-  - "tests/runtests.py:77:69         coveragerc          U       join(RUNTESTS_DIR, \".coveragerc\")"
-  - "tests/runtests.py:329:40        finalizer           U       multiprocessing.util finalizer that tries to remove"
+  - "tests/runtests.py:55:8          refcounting     U       # uses refcounting, garbage collection"
+  - "tests/runtests.py:77:69         coveragerc      U       join(RUNTESTS_DIR, \".coveragerc\")"
+  - "tests/runtests.py:329:40        finalizer       U       multiprocessing.util finalizer that tries to remove"
   - "tests/schema/fields.py:106:17       MEDIUMBLOB      U       return \"MEDIUMBLOB\""
   - "tests/schema/models.py:147:21       INTEGERPK       U       db_table = \"INTEGERPK\" # uppercase to ensure"
   - "tests/schema/tests.py:737:38        TINYINT             U       BooleanField are stored as TINYINT(1) on MySQL."
@@ -3477,7 +3475,6 @@ issuesSummary:
   - "text: dbcomment, count: 1, files: 1,"
   - "text: dbcommentmodel, count: 1, files: 1,"
   - "text: dbop, count: 3, files: 1,"
-  - "text: deallocations, count: 1, files: 1,"
   - "text: debe, count: 2, files: 1,"
   - "text: debitis, count: 1, files: 1,"
   - "text: Decemberists, count: 5, files: 1,"
@@ -5525,7 +5522,6 @@ issuesSummary:
   - "text: unmigdep, count: 1, files: 1,"
   - "text: unmigration, count: 1, files: 1,"
   - "text: unmigrations, count: 1, files: 1,"
-  - "text: unnest, count: 2, files: 1,"
   - "text: unorderedobject, count: 3, files: 2,"
   - "text: unpackable, count: 1, files: 1,"
   - "text: unparseable, count: 1, files: 1,"

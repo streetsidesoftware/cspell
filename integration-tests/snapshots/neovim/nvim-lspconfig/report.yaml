@@ -4,8 +4,8 @@ Url: https://github.com/neovim/nvim-lspconfig.git
 Args: '["**"]'
 Summary:
   files: 351
-  filesWithIssues: 347
-  issues: 4563
+  filesWithIssues: 346
+  issues: 4487
   errors: 0
 Errors: []
 
@@ -23,13 +23,11 @@ issues:
   - "CONTRIBUTING.md:58:32       bufnr               U       arguments = { vim.uri_from_bufnr(0) },"
   - "CONTRIBUTING.md:65:22       langserver          U       cmd = { 'pyright-langserver', '--stdio' },"
   - "CONTRIBUTING.md:80:5        Pyright             U       PyrightOrganizeImports = {"
-  - "CONTRIBUTING.md:97:17       neovim              U       lspconfig, like neovim core, follows the [convention"
   - "CONTRIBUTING.md:110:4       luacheck            U       - [luacheck](https://github.com"
   - "CONTRIBUTING.md:111:4       stylua              U       - [stylua](https://github.com"
   - "CONTRIBUTING.md:127:36      luafile             U       Es +'set rtp+=$PWD' +'luafile scripts/docgen.lua'"
   - "doc/lspconfig.txt:1:29          Nvim                    U       lspconfig.txt* For Nvim version 0.8+"
   - "doc/lspconfig.txt:17:7          autocommand             U       - an autocommand mapping that either"
-  - "doc/lspconfig.txt:33:29         Neovim                  U       enable the server in your Neovim configuration (Lua example"
   - "doc/lspconfig.txt:35:5          require'lspconfig       U       require'lspconfig'.clangd.setup{}"
   - "doc/lspconfig.txt:46:11         METAMETHOD              U       THE SETUP METAMETHOD"
   - "doc/lspconfig.txt:49:36         metamethod              U       exposes a `setup {}` metamethod which makes it easy"
@@ -222,7 +220,6 @@ issues:
   - "doc/server_configurations.md:1518:16        brighterscript      U       npm install -g brighterscript"
   - "doc/server_configurations.md:1605:18        buckconfig          U       root_pattern(\".buckconfig\")"
   - "doc/server_configurations.md:1649:23        bufbuild            U       go install github.com/bufbuild/buf-language-server"
-  - "doc/server_configurations.md:1652:12        Protobuf            U       bufls is a Protobuf language server compatible"
   - "doc/server_configurations.md:1790:17        Scarb               U       root_pattern(\"Scarb.toml\", \"cairo_project"
   - "doc/server_configurations.md:1813:25        frounding           U       excludeArgs = { \"-frounding-math\"} ;"
   - "doc/server_configurations.md:1836:18        objc                U       { \"c\", \"cpp\", \"objc\", \"objcpp\", \"cuda\""
@@ -256,7 +253,6 @@ issues:
   - "doc/server_configurations.md:3369:33        hanzi               U       symbols_only_follow_by_hanzi = false"
   - "doc/server_configurations.md:3403:6         earthfile           U       { \"earthfile\" }"
   - "doc/server_configurations.md:3415:21        Ecsact              U       Language server for Ecsact."
-  - "doc/server_configurations.md:3464:20        neovim's            U       Note: In order for neovim's built-in language server"
   - "doc/server_configurations.md:3537:16        eelixir             U       { \"elixir\", \"eelixir\", \"heex\", \"surface\""
   - "doc/server_configurations.md:3537:27        heex                U       elixir\", \"eelixir\", \"heex\", \"surface\" }"
   - "doc/server_configurations.md:3622:17        rebar               U       root_pattern('rebar.config', 'erlang.mk"
@@ -370,7 +366,6 @@ issues:
   - "doc/server_configurations.md:8314:8         FPCTARGET           U       export FPCTARGET=''"
   - "doc/server_configurations.md:8315:8         FPCTARGETCPU        U       export FPCTARGETCPU='x86_64' #"
   - "doc/server_configurations.md:8349:23        protoc              U       Prerequisites: Ensure protoc is on your $PATH."
-  - "doc/server_configurations.md:8356:31        protobuf            U       Language Server for protobuf"
   - "doc/server_configurations.md:8400:99        nostdio             U       \"--port 13603\", \"--nostdio 0\" }"
   - "doc/server_configurations.md:8447:101       perltidy            U       perlnavigator` at your `perltidy` and `perlcritic` configurati"
   - "doc/server_configurations.md:8447:116       perlcritic          U       your `perltidy` and `perlcritic` configurations."
@@ -461,9 +456,7 @@ issues:
   - "doc/server_configurations.md:13749:43       yammls              U       is special-cased in yammls, see the following upstream"
   - "doc/server_configurations.md:13841:22       YARA                U       An YLS plugin adding YARA linting capabilities"
   - "doc/server_configurations.md:13843:18       yara                U       This plugin runs yara.compile on every save"
-  - "doc/server_configurations.txt:277:4         stylelint       U       - [stylelint_lsp](#stylelint_lsp"
-  - "doc/server_configurations.txt:285:4         tailwindcss     U       - [tailwindcss](#tailwindcss)"
-  - "doc/server_configurations.txt:5648:313      nunjucks        U       \"mustache\", \"njk\", \"nunjucks\", \"php\", \"razor\", \"slim"
+  - "doc/server_configurations.txt:5648:313      nunjucks    U       \"mustache\", \"njk\", \"nunjucks\", \"php\", \"razor\", \"slim"
   - "flake.nix:5:36          numtide     U       utils.url = \"github:numtide/flake-utils\";"
   - "flake.nix:9:11          pkgs        U       let pkgs = nixpkgs.legacyPackages"
   - "flake.nix:15:18         luajit      U       pkgs.luajitPackages.vusted"
@@ -561,7 +554,6 @@ issues:
   - "nvim-lspconfig-scm-1.rockspec:1:8           MODREV      U       local _MODREV, _SPECREV = 'scm',"
   - "nvim-lspconfig-scm-1.rockspec:1:17          SPECREV     U       local _MODREV, _SPECREV = 'scm', '-1'"
   - "nvim-lspconfig-scm-1.rockspec:3:1           rockspec    U       rockspec_format = \"3.0\""
-  - "nvim-lspconfig-scm-1.rockspec:8:56          Neovim's    U       common configurations for Neovim's built-in language server"
   - "plugin/lspconfig.lua:62:14          scriptnames     U       -- script in scriptnames to be executed is lspconfig"
   - "plugin/lspconfig.lua:156:26         tabnew          U       vim.cmd(string.format('tabnew %s', lsp.get_log_path"
   - "README.md:37:10         checkhealth     U       4. Run `:checkhealth lsp` to see the status"
