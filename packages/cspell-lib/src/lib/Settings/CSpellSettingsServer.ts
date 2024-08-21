@@ -122,10 +122,10 @@ function _merge(
     const _left = toInternalSettings(left);
     const _right = toInternalSettings(right);
     if (left === right) {
-        return toInternalSettings(_left);
+        return _left;
     }
     if (isEmpty(right)) {
-        return toInternalSettings(_left);
+        return _left;
     }
     if (isEmpty(left)) {
         return _right;
