@@ -4,8 +4,8 @@ Url: https://github.com/liriliri/licia.git
 Args: '["**/*.*"]'
 Summary:
   files: 1415
-  filesWithIssues: 84
-  issues: 363
+  filesWithIssues: 83
+  issues: 350
   errors: 0
 Errors: []
 
@@ -29,8 +29,6 @@ issues:
   - "DOC_CN.md:10678:29      babca           U       abc', 5, 'ab'); // -> 'babca'"
   - "DOC_CN.md:10679:28      ababa           U       ab', 5, 'ab'); // -> 'ababa'"
   - "DOC_CN.md:11325:28      cbbcb           U       randomId(5, 'abc'); // -> 'cbbcb'"
-  - "DOC_CN.md:11612:5       substr          U       substr: string,"
-  - "DOC_CN.md:11613:8       Substr          U       newSubstr: string"
   - "DOC_CN.md:11811:30      abcab           U       abc', 5, 'ab'); // -> 'abcab'"
   - "DOC_CN.md:12809:20      mcake           U       stripAnsi('\\u001b[4mcake\\u001b[0m'); // -> 'cake"
   - "DOC_CN.md:12831:16      Flicia          U       stripBom('\\uFEFFlicia'); // -> 'licia'"
@@ -45,9 +43,8 @@ issues:
   - "DOC.md:13977:9      Uppercased      U       |return|Uppercased string|"
   - "DOC.md:14298:9      Workerized      U       |return|Workerized Function|"
   - "lib/setup.js:3:7            execa       U       const execa = require('execa');"
-  - "lib/tpl/karma.conf.tpl:4:45         jquery              U       mocha', 'chai', 'chai-jquery', 'jquery-1.8.3'],"
-  - "lib/tpl/karma.conf.tpl:15:9         preprocessors       U       preprocessors: {"
-  - "lib/tpl/karma.conf.tpl:19:32        lcovonly            U       reports: ['html', 'lcovonly', 'text', 'text-summary"
+  - "lib/tpl/karma.conf.tpl:4:45         jquery      U       mocha', 'chai', 'chai-jquery', 'jquery-1.8.3'],"
+  - "lib/tpl/karma.conf.tpl:19:32        lcovonly    U       reports: ['html', 'lcovonly', 'text', 'text-summary"
   - "lib/tpl/karma.sauce.tpl:33:30       saucelabs       U       reporters: ['dots', 'saucelabs'],"
   - "package.json:14:52          copyfiles       U       npm run format:pkg && copyfiles -u 2 .licia/packages"
   - "README.md:33:141        mout    U       such as underscore, mout, which strictly separates"
