@@ -3,13 +3,12 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 19549, Issues found: 99967 in 12318 files.
+ CSpell: Files checked: 19549, Issues found: 96123 in 12314 files.
  exit code: 1
 ARCHITECTURE.md:110:20    - Unknown word (bigtable)   -- - Bigtable has a [`bigtable::DataClient`](/google
 ARCHITECTURE.md:110:3     - Unknown word (Bigtable)   -- - Bigtable has a [`bigtable::DataClient
 ARCHITECTURE.md:158:48    - Unknown word (googlemock) -- implementation using `googlemock`
 ARCHITECTURE.md:29:61     - Unknown word (retryable)  -- RPCs that fail with a retryable error,
-ARCHITECTURE.md:70:4      - Unknown word (quickstart) -- - `quickstart/` contains a small program
 BUILD.bazel:151:20    - Unknown word (ctype)      -- name = "enable-ctype-cord-workaround",
 BUILD.bazel:15:14     - Unknown word (skylib)     -- load("@bazel_skylib//rules:common_settings
 BUILD.bazel:53:5      - Unknown word (testonly)   -- testonly = True,
@@ -52,7 +51,6 @@ bazel/googleapis.modules.patch:42:20     - Unknown word (protobuf)   -- +bazel_d
 bazel/library_names.bzl:16:16     - Unknown word (startswith) -- if library.startswith("compute_"):
 bazel/library_names.bzl:22:24     - Unknown word (removeprefix) -- return library.removeprefix("compute_") + "_mock
 bazel/workspace0.bzl:148:17    - Unknown word (boringssl)  -- name = "boringssl",
-bazel/workspace0.bzl:182:15    - Unknown word (libcurl)    -- # We need libcurl for the Google Cloud
 bazel/workspace3.bzl:35:7      - Unknown word (Protobuf)   -- # Protobuf dependencies must be
 bazel/workspace3.bzl:39:7      - Unknown word (Googletest) -- # Googletest dependencies
 ci/check-include-guards.gawk:26:1      - Unknown word (BEGINFILE)  -- BEGINFILE {
@@ -187,7 +185,6 @@ ci/verify_current_targets/CMakeLists.txt:87:26     - Unknown word (protos)      
 ci/verify_quickstart/CMakeLists.txt:103:22    - Unknown word (STREQUAL)        -- if ("${feature}" STREQUAL "experimental-storage
 ci/verify_quickstart/CMakeLists.txt:108:10    - Unknown word (vcpkg)           -- # In vcpkg we cannot use `_` in
 ci/verify_quickstart/CMakeLists.txt:22:35     - Unknown word (DFEATURES)  -- FATAL_ERROR "Missing -DFEATURES argument, for example
-ci/verify_quickstart/CMakeLists.txt:26:15     - Unknown word (QUICKSTART) -- option(VERIFY_QUICKSTART_ENABLE_MAKE "Test with
 ci/verify_quickstart/CMakeLists.txt:42:16     - Unknown word (DCMAKE)     -- "-DCMAKE_PREFIX_PATH=${CMAKE
 ci/verify_quickstart/CMakeLists.txt:48:9      - Unknown word (VCPKG)      -- if (VCPKG_TARGET_TRIPLET)
 ci/verify_quickstart/CMakeLists.txt:50:16     - Unknown word (DVCPKG)     -- "-DVCPKG_TARGET_TRIPLET=${VCPKG
@@ -546,7 +543,6 @@ google/cloud/accessapproval/README.md:25:11     - Unknown word (iostream)   -- #
 google/cloud/accessapproval/README.md:29:10     - Unknown word (cerr)       -- std::cerr << "Usage: " << argv
 google/cloud/accessapproval/README.md:39:10     - Unknown word (cout)       -- std::cout << a->DebugString()
 google/cloud/accessapproval/access_approval_client.h:19:39     - Unknown word (ACCESSAPPROVAL) -- CLOUD_CPP_GOOGLE_CLOUD_ACCESSAPPROVAL_ACCESS_APPROVAL_CLIENT
-google/cloud/accessapproval/doc/main.dox:13:4      - Unknown word (Quickstart) -- ## Quickstart
 google/cloud/accessapproval/doc/options.dox:2:2       - Unknown word (defgroup)   -- @defgroup google-cloud-accessapproval
 google/cloud/accessapproval/quickstart/README.md:40:25     - Unknown word (setenv)     -- csh/tsch | `setenv GOOGLE_APPLICATION_CREDENTIAL
 google/cloud/accesscontextmanager/access_context_manager_client.h:19:39     - Unknown word (ACCESSCONTEXTMANAGER) -- CLOUD_CPP_GOOGLE_CLOUD_ACCESSCONTEXTMANAGER_ACCESS_CONTEXT_MANAGER
@@ -683,7 +679,6 @@ google/cloud/bigquery/v2/minimal/testing/table_test_utils.cc:58:28     - Unknown
 google/cloud/bigquerycontrol/v2/dataset_client.h:19:39     - Unknown word (BIGQUERYCONTROL) -- CLOUD_CPP_GOOGLE_CLOUD_BIGQUERYCONTROL_V2_DATASET_CLIENT_H
 google/cloud/bigtable/BUILD.bazel:106:22    - Unknown word (readrowsparser) -- name = "internal_readrowsparser_test",
 google/cloud/bigtable/CMakeLists.txt:32:6      - Unknown word (testproxy)  -- "testproxy"
-google/cloud/bigtable/README.md:27:35     - Unknown word (substr)     -- << "Usage: " << cmd.substr(last_slash + 1)
 google/cloud/bigtable/admin/internal/bigtable_instance_admin_option_defaults.cc:41:8      - Unknown word (bigtableadmin) -- "bigtableadmin.googleapis.com");
 google/cloud/bigtable/app_profile_config_test.cc:101:51    - Unknown word (xyzzy)      -- ofileUpdateConfig().set_etag("xyzzy").as_proto();
 google/cloud/bigtable/async_read_stream_test.cc:152:24    - Unknown word (callables)  -- streaming read RPC callables.
@@ -1463,7 +1458,6 @@ protos/google/cloud/compute/v1/internal/common_122.proto:190:49    - Unknown wor
 protos/google/cloud/compute/v1/internal/common_124.proto:86:14     - Unknown word (hyperdisk)  -- // type is hyperdisk-balanced.
 protos/google/cloud/compute/v1/internal/common_127.proto:82:30     - Unknown word (proxyless)  -- optional bool validate_for_proxyless = 10
 protos/google/cloud/compute/v1/internal/common_138.proto:92:24     - Unknown word (vpntunnels) -- / using the compute.vpntunnels.insert method and associated
-protos/google/cloud/compute/v1/internal/common_143.proto:136:42    - Unknown word (deallocated) -- Resources are being deallocated for the VPN tunnel.
 release/README.md:217:29    - Unknown word (vckpkg)     -- Get to your clone of vckpkg
 release/README.md:266:66    - Unknown word (portfile)   -- ports/google-cloud-cpp/portfile.cmake
 release/howto-update-conan-package.md:119:30    - Unknown word (conandata)  -- google-cloud-cpp/2.x/conandata.yml

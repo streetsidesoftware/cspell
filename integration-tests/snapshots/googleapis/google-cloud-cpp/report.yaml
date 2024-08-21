@@ -4,14 +4,13 @@ Url: https://github.com/googleapis/google-cloud-cpp.git
 Args: '["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]'
 Summary:
   files: 19549
-  filesWithIssues: 12318
-  issues: 99967
+  filesWithIssues: 12314
+  issues: 96123
   errors: 0
 Errors: []
 
 issues:
   - "ARCHITECTURE.md:29:61       retryable       U       RPCs that fail with a retryable error,"
-  - "ARCHITECTURE.md:70:4        quickstart      U       - `quickstart/` contains a small program"
   - "ARCHITECTURE.md:110:3       Bigtable        U       - Bigtable has a [`bigtable::DataClient"
   - "ARCHITECTURE.md:110:20      bigtable        U       - Bigtable has a [`bigtable::DataClient`](/google"
   - "ARCHITECTURE.md:158:48      googlemock      U       implementation using `googlemock`"
@@ -39,7 +38,6 @@ issues:
   - "bazel/library_names.bzl:16:16       startswith      U       if library.startswith(\"compute_\"):"
   - "bazel/library_names.bzl:22:24       removeprefix    U       return library.removeprefix(\"compute_\") + \"_mock"
   - "bazel/workspace0.bzl:148:17         boringssl       U       name = \"boringssl\","
-  - "bazel/workspace0.bzl:182:15         libcurl         U       # We need libcurl for the Google Cloud"
   - "bazel/workspace3.bzl:35:7           Protobuf        U       # Protobuf dependencies must be"
   - "bazel/workspace3.bzl:39:7           Googletest      U       # Googletest dependencies"
   - "BUILD.bazel:15:14       skylib      U       load(\"@bazel_skylib//rules:common_settings"
@@ -175,7 +173,6 @@ issues:
   - "ci/verify_current_targets/CMakeLists.txt:60:1           endforeach      U       endforeach ()"
   - "ci/verify_current_targets/CMakeLists.txt:87:26          protos          U       cloud_dialogflow_v2_protos\""
   - "ci/verify_quickstart/CMakeLists.txt:22:35       DFEATURES           U       FATAL_ERROR \"Missing -DFEATURES argument, for example"
-  - "ci/verify_quickstart/CMakeLists.txt:26:15       QUICKSTART          U       option(VERIFY_QUICKSTART_ENABLE_MAKE \"Test with"
   - "ci/verify_quickstart/CMakeLists.txt:42:16       DCMAKE              U       \"-DCMAKE_PREFIX_PATH=${CMAKE"
   - "ci/verify_quickstart/CMakeLists.txt:48:9        VCPKG               U       if (VCPKG_TARGET_TRIPLET)"
   - "ci/verify_quickstart/CMakeLists.txt:50:16       DVCPKG              U       \"-DVCPKG_TARGET_TRIPLET=${VCPKG"
@@ -546,7 +543,6 @@ issues:
   - "generator/templates/WORKSPACE.bazel:19:21       Starlark    U       # Add the necessary Starlark functions to fetch google"
   - "generator/testing/descriptor_pool_fixture.cc:49:7           multifile       U       multifile_error_collector_("
   - "google/cloud/accessapproval/access_approval_client.h:19:39          ACCESSAPPROVAL      U       CLOUD_CPP_GOOGLE_CLOUD_ACCESSAPPROVAL_ACCESS_APPROVAL_CLIENT"
-  - "google/cloud/accessapproval/doc/main.dox:13:4           Quickstart      U       ## Quickstart"
   - "google/cloud/accessapproval/doc/options.dox:2:2         defgroup    U       @defgroup google-cloud-accessapproval"
   - "google/cloud/accessapproval/quickstart/README.md:40:25          setenv      U       csh/tsch | `setenv GOOGLE_APPLICATION_CREDENTIAL"
   - "google/cloud/accessapproval/README.md:25:11         iostream    U       #include <iostream>"
@@ -741,7 +737,6 @@ issues:
   - "google/cloud/bigtable/internal/unary_client_utils.h:62:8        metafunction    U       * A metafunction to determine if @p F"
   - "google/cloud/bigtable/metadata_update_policy_test.cc:76:55          gccl    U       header(), HasSubstr(\"gccl/\"));"
   - "google/cloud/bigtable/mutations.h:159:15        vexpressed      U       * in seconds,vexpressed as a `std::ratio<>`"
-  - "google/cloud/bigtable/README.md:27:35       substr      U       << \"Usage: \" << cmd.substr(last_slash + 1)"
   - "google/cloud/bigtable/row_range_test.cc:149:31      fooa        U       TRUE(range.Contains(\"fooa\"));"
   - "google/cloud/bigtable/row_range_test.cc:219:20      AFFFF       U       std::string const kAFFFF00 = std::string(\"a\\xFF"
   - "google/cloud/bigtable/row_set.h:72:32       rowkeys     U       function removes any rowkeys outside @p range, it"
@@ -1467,7 +1462,6 @@ issues:
   - "protos/google/cloud/compute/v1/internal/common_124.proto:86:14          hyperdisk       U       // type is hyperdisk-balanced."
   - "protos/google/cloud/compute/v1/internal/common_127.proto:82:30          proxyless       U       optional bool validate_for_proxyless = 10"
   - "protos/google/cloud/compute/v1/internal/common_138.proto:92:24          vpntunnels      U       / using the compute.vpntunnels.insert method and associated"
-  - "protos/google/cloud/compute/v1/internal/common_143.proto:136:42         deallocated     U       Resources are being deallocated for the VPN tunnel."
   - "release/howto-update-conan-package.md:38:31         UTAG            U       use `TAG=2.15.1` and `UTAG=2_15_1` and `LATEST"
   - "release/howto-update-conan-package.md:73:51         agan            U       io. Run the command agan if needed."
   - "release/howto-update-conan-package.md:119:30        conandata       U       google-cloud-cpp/2.x/conandata.yml"

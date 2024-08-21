@@ -3,7 +3,7 @@ Repository: ktaranov/sqlserver-kit
 Url: "https://github.com/ktaranov/sqlserver-kit.git"
 Args: ["--issues-summary-report","**","--exclude=**/Backup/**"]
 Lines:
- CSpell: Files checked: 489, Issues found: 11600 in 428 files.
+ CSpell: Files checked: 489, Issues found: 11574 in 428 files.
  exit code: 1
 ADS/README.md:30:15     - Unknown word (Dacpac)     -- | [SQL Server Dacpac]
 ADS/README.md:30:181    - Unknown word (wizarding)  -- Provides an easy-to-use wizarding experience to deploy
@@ -1996,7 +1996,6 @@ PowerShell/ResetSqlSaPassword.psm1:139:4     - Unknown word (baseaddress)  -- $b
 PowerShell/ResetSqlSaPassword.psm1:140:33    - Unknown word (baseaddress)  -- baseaddress -eq "." -or $baseaddress -eq $env:COMPUTERNAME
 PowerShell/ResetSqlSaPassword.psm1:140:54    - Unknown word (COMPUTERNAME) -- baseaddress -eq $env:COMPUTERNAME) {
 PowerShell/ResetSqlSaPassword.psm1:140:8     - Unknown word (baseaddress)  -- if ($baseaddress -eq "." -or $baseaddress
-PowerShell/ResetSqlSaPassword.psm1:141:5     - Unknown word (ipaddr)       -- $ipaddr = "."
 PowerShell/ResetSqlSaPassword.psm1:142:21    - Unknown word (COMPUTERNAME) -- $hostname = $env:COMPUTERNAME
 PowerShell/ResetSqlSaPassword.psm1:143:24    - Unknown word (COMPUTERNAME) -- $baseaddress = $env:COMPUTERNAME
 PowerShell/ResetSqlSaPassword.psm1:143:5     - Unknown word (baseaddress)  -- $baseaddress = $env:COMPUTERNAME
@@ -2008,17 +2007,13 @@ PowerShell/ResetSqlSaPassword.psm1:150:5     - Unknown word (testconnect)  -- $t
 PowerShell/ResetSqlSaPassword.psm1:152:9     - Unknown word (testconnect)  -- if ($testconnect -eq $false) {
 PowerShell/ResetSqlSaPassword.psm1:163:6     - Unknown word (hostentry)    -- $hostentry = [System.Net.Dns]:
 PowerShell/ResetSqlSaPassword.psm1:164:17    - Unknown word (hostentry)    -- $ipaddr = ($hostentry.AddressList | Where
-PowerShell/ResetSqlSaPassword.psm1:164:6     - Unknown word (ipaddr)       -- $ipaddr = ($hostentry.AddressList
-PowerShell/ResetSqlSaPassword.psm1:169:111   - Unknown word (ipaddr)       -- TRUE -ComputerName $ipaddr).PSComputerName
 PowerShell/ResetSqlSaPassword.psm1:170:45    - Unknown word (nbtstat)      -- null) { $hostname = (nbtstat -A $ipaddr | Where-Object
-PowerShell/ResetSqlSaPassword.psm1:170:57    - Unknown word (ipaddr)       -- hostname = (nbtstat -A $ipaddr | Where-Object {$_
 PowerShell/ResetSqlSaPassword.psm1:176:26    - Unknown word (COMPUTERNAME) -- ($hostname -ne $env:COMPUTERNAME) {
 PowerShell/ResetSqlSaPassword.psm1:179:93    - Unknown word (Remoting)     -- settings and ensure Remoting is enabled or run the
 PowerShell/ResetSqlSaPassword.psm1:187:5     - Unknown word (windowslogin) -- $windowslogin = $true
 PowerShell/ResetSqlSaPassword.psm1:202:8     - Unknown word (windowslogin) -- if ($windowslogin -ne $true) {
 PowerShell/ResetSqlSaPassword.psm1:209:43    - Unknown word (MSSQLSERVER)  -- null) { $instance = "MSSQLSERVER" }
 PowerShell/ResetSqlSaPassword.psm1:213:5     - Unknown word (instanceservices) -- $instanceservices = Get-Service -ComputerName
-PowerShell/ResetSqlSaPassword.psm1:213:51    - Unknown word (ipaddr)           -- Service -ComputerName $ipaddr | Where-Object { $_
 PowerShell/ResetSqlSaPassword.psm1:214:5     - Unknown word (sqlservice)       -- $sqlservice = Get-Service -ComputerName
 PowerShell/ResetSqlSaPassword.psm1:217:8     - Unknown word (instanceservices) -- if ($instanceservices -eq $null) { throw
 PowerShell/ResetSqlSaPassword.psm1:223:10    - Unknown word (checkcluster)     -- try { $checkcluster = Get-Service -ComputerName
@@ -5140,7 +5135,6 @@ Scripts/SQL Managed Instance Diagnostic Information Queries.sql:178:58    - Unkn
 Scripts/SQL Managed Instance Diagnostic Information Queries.sql:213:8     - Unknown word (numa)         -- numa_node_count, max_workers
 Scripts/SQL Managed Instance Diagnostic Information Queries.sql:218:8     - Unknown word (softnuma)     -- softnuma_configuration_desc AS
 Scripts/SQL Managed Instance Diagnostic Information Queries.sql:245:13    - Unknown word (readerrorlog) -- EXEC sys.xp_readerrorlog 0, 1, N'Manufacturer
-Scripts/SQL Managed Instance Diagnostic Information Queries.sql:284:8     - Unknown word (Deallocated)  -- -- 7 = Deallocated by DBCC
 Scripts/SQL Managed Instance Diagnostic Information Queries.sql:405:10    - Unknown word (readerrorlog) -- EXEC xp_readerrorlog 0, 1, N'taking longer
 Scripts/SQL Managed Instance Diagnostic Information Queries.sql:408:10    - Unknown word (readerrorlog) -- EXEC xp_readerrorlog 1, 1, N'taking longer
 Scripts/SQL Managed Instance Diagnostic Information Queries.sql:411:10    - Unknown word (readerrorlog) -- EXEC xp_readerrorlog 2, 1, N'taking longer
@@ -5624,7 +5618,6 @@ Scripts/SQL Server 2012 Diagnostic Information Queries.sql:467:16    - Unknown w
 Scripts/SQL Server 2012 Diagnostic Information Queries.sql:526:13    - Unknown word (readerrorlog)      -- EXEC sys.xp_readerrorlog 0, 1, N'Manufacturer
 Scripts/SQL Server 2012 Diagnostic Information Queries.sql:536:22    - Unknown word (regread)           -- EXEC sys.xp_instance_regread N'HKEY_LOCAL_MACHINE
 Scripts/SQL Server 2012 Diagnostic Information Queries.sql:544:22    - Unknown word (regread)           -- EXEC sys.xp_instance_regread N'HKEY_LOCAL_MACHINE
-Scripts/SQL Server 2012 Diagnostic Information Queries.sql:588:8     - Unknown word (Deallocated)       -- -- 7 = Deallocated by DBCC
 Scripts/SQL Server 2012 Diagnostic Information Queries.sql:598:13    - Unknown word (readerrorlog)      -- EXEC sys.xp_readerrorlog 0, 1, N'The tempdb database
 Scripts/SQL Server 2012 Diagnostic Information Queries.sql:726:10    - Unknown word (readerrorlog)      -- EXEC xp_readerrorlog 0, 1, N'taking longer
 Scripts/SQL Server 2012 Diagnostic Information Queries.sql:775:38    - Unknown word (SUSER)             -- AS [Database Name], SUSER_SNAME(db.owner_sid)
@@ -5671,7 +5664,7 @@ Scripts/SQL Server 2012 Diagnostic Information Queries.sql:975:17    - Unknown w
 Scripts/SQL Server 2012 Diagnostic Information Queries.sql:976:31    - Unknown word (SQLTRACE)          -- SQLTRACE_BUFFER_FLUSH', N'SQLTRACE_INCREMENTAL_FLUSH_SLEEP
 Scripts/SQL Server 2012 Diagnostic Information Queries.sql:976:5     - Unknown word (SQLTRACE)          -- N'SQLTRACE_BUFFER_FLUSH', N'SQLTRACE
 Scripts/SQL Server 2012 Diagnostic Information Queries.sql:976:68    - Unknown word (SQLTRACE)          -- INCREMENTAL_FLUSH_SLEEP', N'SQLTRACE_WAIT_ENTRIES',
-Scripts/SQL Server 2012 Diagnostic Information Queries.sql:977:46    - Unknown word (TASKSHUTDOWN)     -- WAITFOR', N'WAITFOR_TASKSHUTDOWN', N'WAIT_XTP_HOST_WAIT
+Scripts/SQL Server 2012 Diagnostic Information Queries.sql:977:46    - Unknown word (TASKSHUTDOWN)      -- WAITFOR', N'WAITFOR_TASKSHUTDOWN', N'WAIT_XTP_HOST_WAIT
 Scripts/SQL Server 2012 Diagnostic Information Queries.sql:978:22    - Unknown word (CKPT)             -- N'WAIT_XTP_OFFLINE_CKPT_NEW_LOG', N'WAIT_XTP
 Scripts/SQL Server 2012 Diagnostic Information Queries.sql:978:48    - Unknown word (CKPT)             -- NEW_LOG', N'WAIT_XTP_CKPT_CLOSE', N'XE_DISPATCHER
 Scripts/SQL Server 2014 Diagnostic Information Queries.sql:1160:28   - Unknown word (CACHESTORE)        -- Look for high value for CACHESTORE_SQLCP (Ad-hoc query
@@ -5728,7 +5721,6 @@ Scripts/SQL Server 2014 Diagnostic Information Queries.sql:451:16    - Unknown w
 Scripts/SQL Server 2014 Diagnostic Information Queries.sql:510:13    - Unknown word (readerrorlog)      -- EXEC sys.xp_readerrorlog 0, 1, N'Manufacturer
 Scripts/SQL Server 2014 Diagnostic Information Queries.sql:520:22    - Unknown word (regread)           -- EXEC sys.xp_instance_regread N'HKEY_LOCAL_MACHINE
 Scripts/SQL Server 2014 Diagnostic Information Queries.sql:528:22    - Unknown word (regread)           -- EXEC sys.xp_instance_regread N'HKEY_LOCAL_MACHINE
-Scripts/SQL Server 2014 Diagnostic Information Queries.sql:572:8     - Unknown word (Deallocated)       -- -- 7 = Deallocated by DBCC
 Scripts/SQL Server 2014 Diagnostic Information Queries.sql:582:13    - Unknown word (readerrorlog)      -- EXEC sys.xp_readerrorlog 0, 1, N'The tempdb database
 Scripts/SQL Server 2014 Diagnostic Information Queries.sql:710:10    - Unknown word (readerrorlog)      -- EXEC xp_readerrorlog 0, 1, N'taking longer
 Scripts/SQL Server 2014 Diagnostic Information Queries.sql:760:38    - Unknown word (SUSER)             -- AS [Database Name], SUSER_SNAME(db.owner_sid)
@@ -5844,7 +5836,6 @@ Scripts/SQL Server 2016 Diagnostic Information Queries.sql:525:22    - Unknown w
 Scripts/SQL Server 2016 Diagnostic Information Queries.sql:525:89    - Unknown word (pvscsi)       -- CurrentControlSet\services\pvscsi\Parameters\Device',
 Scripts/SQL Server 2016 Diagnostic Information Queries.sql:535:22    - Unknown word (regread)      -- EXEC sys.xp_instance_regread N'HKEY_LOCAL_MACHINE
 Scripts/SQL Server 2016 Diagnostic Information Queries.sql:543:22    - Unknown word (regread)      -- EXEC sys.xp_instance_regread N'HKEY_LOCAL_MACHINE
-Scripts/SQL Server 2016 Diagnostic Information Queries.sql:587:8     - Unknown word (Deallocated)  -- -- 7 = Deallocated by DBCC
 Scripts/SQL Server 2016 Diagnostic Information Queries.sql:597:13    - Unknown word (readerrorlog) -- EXEC sys.xp_readerrorlog 0, 1, N'The tempdb database
 Scripts/SQL Server 2016 Diagnostic Information Queries.sql:715:10    - Unknown word (readerrorlog) -- EXEC xp_readerrorlog 0, 1, N'taking longer
 Scripts/SQL Server 2016 Diagnostic Information Queries.sql:718:10    - Unknown word (readerrorlog) -- EXEC xp_readerrorlog 1, 1, N'taking longer
@@ -5997,7 +5988,6 @@ Scripts/SQL Server 2016 SP1 Diagnostic Information Queries.sql:503:5     - Unkno
 Scripts/SQL Server 2016 SP1 Diagnostic Information Queries.sql:530:13    - Unknown word (readerrorlog)      -- EXEC sys.xp_readerrorlog 0, 1, N'Manufacturer
 Scripts/SQL Server 2016 SP1 Diagnostic Information Queries.sql:540:22    - Unknown word (regread)           -- EXEC sys.xp_instance_regread N'HKEY_LOCAL_MACHINE
 Scripts/SQL Server 2016 SP1 Diagnostic Information Queries.sql:548:22    - Unknown word (regread)           -- EXEC sys.xp_instance_regread N'HKEY_LOCAL_MACHINE
-Scripts/SQL Server 2016 SP1 Diagnostic Information Queries.sql:592:8     - Unknown word (Deallocated)       -- -- 7 = Deallocated by DBCC
 Scripts/SQL Server 2016 SP1 Diagnostic Information Queries.sql:602:13    - Unknown word (readerrorlog)      -- EXEC sys.xp_readerrorlog 0, 1, N'The tempdb database
 Scripts/SQL Server 2016 SP1 Diagnostic Information Queries.sql:728:10    - Unknown word (readerrorlog)      -- EXEC xp_readerrorlog 0, 1, N'taking longer
 Scripts/SQL Server 2016 SP1 Diagnostic Information Queries.sql:731:10    - Unknown word (readerrorlog)      -- EXEC xp_readerrorlog 1, 1, N'taking longer
@@ -6106,7 +6096,6 @@ Scripts/SQL Server 2016 SP2 Diagnostic Information Queries.sql:473:8     - Unkno
 Scripts/SQL Server 2016 SP2 Diagnostic Information Queries.sql:500:13    - Unknown word (readerrorlog)      -- EXEC sys.xp_readerrorlog 0, 1, N'Manufacturer
 Scripts/SQL Server 2016 SP2 Diagnostic Information Queries.sql:510:22    - Unknown word (regread)           -- EXEC sys.xp_instance_regread N'HKEY_LOCAL_MACHINE
 Scripts/SQL Server 2016 SP2 Diagnostic Information Queries.sql:518:22    - Unknown word (regread)           -- EXEC sys.xp_instance_regread N'HKEY_LOCAL_MACHINE
-Scripts/SQL Server 2016 SP2 Diagnostic Information Queries.sql:562:8     - Unknown word (Deallocated)       -- -- 7 = Deallocated by DBCC
 Scripts/SQL Server 2016 SP2 Diagnostic Information Queries.sql:572:13    - Unknown word (readerrorlog)      -- EXEC sys.xp_readerrorlog 0, 1, N'The tempdb database
 Scripts/SQL Server 2016 SP2 Diagnostic Information Queries.sql:699:10    - Unknown word (readerrorlog)      -- EXEC xp_readerrorlog 0, 1, N'taking longer
 Scripts/SQL Server 2016 SP2 Diagnostic Information Queries.sql:702:10    - Unknown word (readerrorlog)      -- EXEC xp_readerrorlog 1, 1, N'taking longer
@@ -6256,7 +6245,6 @@ Scripts/SQL Server 2017 Diagnostic Information Queries.sql:490:8     - Unknown w
 Scripts/SQL Server 2017 Diagnostic Information Queries.sql:517:13    - Unknown word (readerrorlog)      -- EXEC sys.xp_readerrorlog 0, 1, N'Manufacturer
 Scripts/SQL Server 2017 Diagnostic Information Queries.sql:527:22    - Unknown word (regread)           -- EXEC sys.xp_instance_regread N'HKEY_LOCAL_MACHINE
 Scripts/SQL Server 2017 Diagnostic Information Queries.sql:536:22    - Unknown word (regread)           -- EXEC sys.xp_instance_regread N'HKEY_LOCAL_MACHINE
-Scripts/SQL Server 2017 Diagnostic Information Queries.sql:581:8     - Unknown word (Deallocated)       -- -- 7 = Deallocated by DBCC
 Scripts/SQL Server 2017 Diagnostic Information Queries.sql:591:13    - Unknown word (readerrorlog)      -- EXEC sys.xp_readerrorlog 0, 1, N'The tempdb database
 Scripts/SQL Server 2017 Diagnostic Information Queries.sql:731:10    - Unknown word (readerrorlog)      -- EXEC xp_readerrorlog 0, 1, N'taking longer
 Scripts/SQL Server 2017 Diagnostic Information Queries.sql:734:10    - Unknown word (readerrorlog)      -- EXEC xp_readerrorlog 1, 1, N'taking longer
@@ -6421,7 +6409,6 @@ Scripts/SQL Server 2019 Diagnostic Information Queries.sql:451:8     - Unknown w
 Scripts/SQL Server 2019 Diagnostic Information Queries.sql:479:13    - Unknown word (readerrorlog)      -- EXEC sys.xp_readerrorlog 0, 1, N'Manufacturer
 Scripts/SQL Server 2019 Diagnostic Information Queries.sql:489:22    - Unknown word (regread)           -- EXEC sys.xp_instance_regread N'HKEY_LOCAL_MACHINE
 Scripts/SQL Server 2019 Diagnostic Information Queries.sql:498:22    - Unknown word (regread)           -- EXEC sys.xp_instance_regread N'HKEY_LOCAL_MACHINE
-Scripts/SQL Server 2019 Diagnostic Information Queries.sql:543:8     - Unknown word (Deallocated)       -- -- 7 = Deallocated by DBCC
 Scripts/SQL Server 2019 Diagnostic Information Queries.sql:559:20    - Unknown word (enumerrorlogs)     -- EXEC master.sys.xp_enumerrorlogs;
 Scripts/SQL Server 2019 Diagnostic Information Queries.sql:573:27    - Unknown word (readerrorlog)      -- EXEC master.sys.sp_readerrorlog ' + CAST(@i AS NVARCHAR
 Scripts/SQL Server 2019 Diagnostic Information Queries.sql:588:13    - Unknown word (readerrorlog)      -- EXEC sys.xp_readerrorlog 0, 1, N'The tempdb database
@@ -6977,7 +6964,6 @@ Scripts/Stop_long-running_SQL_Server_Agent_Jobs.sql:48:10     - Unknown word (cm
 Scripts/Stop_long-running_SQL_Server_Agent_Jobs.sql:60:22     - Unknown word (jobschedule)    -- EXEC msdb.dbo.sp_add_jobschedule @job_id=N'f0cc44dc-
 Scripts/Stop_long-running_SQL_Server_Agent_Jobs.sql:64:15     - Unknown word (subday)         -- @freq_subday_type=4,
 Scripts/Stop_long-running_SQL_Server_Agent_Jobs.sql:65:15     - Unknown word (subday)         -- @freq_subday_interval=1,
-Scripts/Suspect_Database_Pages.sql:23:15     - Unknown word (Deallocated) -- THEN 'Deallocated by DBCC'
 Scripts/Suspect_Database_Pages.sql:2:13      - Unknown word (Snaidero)   -- Author: Ben Snaidero
 Scripts/Table_Parameters.sql:112:23    - Unknown word (dsidx)          -- WHEN 'PS' = dsidx.type THEN dsidx.name
 Scripts/Table_Parameters.sql:112:39    - Unknown word (dsidx)          -- PS' = dsidx.type THEN dsidx.name
@@ -8494,9 +8480,7 @@ Stored_Procedure/Recover_Deleted_Data_Proc.sql:401:10    - Unknown word (Pageid)
 Stored_Procedure/Recover_Deleted_Data_Proc.sql:402:10    - Unknown word (Slotid)         -- DECLARE @Slotid INT
 Stored_Procedure/Recover_Deleted_Data_Proc.sql:409:10    - Unknown word (temppagedata)   -- declare @temppagedata table
 Stored_Procedure/Recover_Deleted_Data_Proc.sql:416:10    - Unknown word (pagedata)       -- declare @pagedata table
-Stored_Procedure/Recover_Deleted_Data_Proc.sql:445:55    - Unknown word (Deallocated)    -- Replace([Description],'Deallocated',''))) AS [PAGE ID]
 Stored_Procedure/Recover_Deleted_Data_Proc.sql:447:28    - Unknown word (dblog)          -- FROM sys.fn_dblog(NULL, NULL)
-Stored_Procedure/Recover_Deleted_Data_Proc.sql:456:36    - Unknown word (Deallocated)    -- AND Description Like '%Deallocated%'
 Stored_Procedure/Recover_Deleted_Data_Proc.sql:457:24    - Unknown word (subquery)       -- /*Use this subquery to filter the date*
 Stored_Procedure/Recover_Deleted_Data_Proc.sql:458:86    - Unknown word (dblog)          -- RANSACTION ID] FROM    sys.fn_dblog(NULL, NULL)
 Stored_Procedure/Recover_Deleted_Data_Proc.sql:459:72    - Unknown word (XACT)           -- Operation in ('LOP_BEGIN_XACT')
@@ -9171,9 +9155,6 @@ Stored_Procedure/dbo.sp_capture_login_auth.sql:187:16    - Unknown word (hexstri
 Stored_Procedure/dbo.sp_capture_login_auth.sql:187:28    - Unknown word (secondint)   -- SUBSTRING(@hexstring, @secondint+1, 1)
 Stored_Procedure/dbo.sp_capture_login_auth.sql:191:21    - Unknown word (charvalue)   -- SELECT @hexvalue = @charvalue
 Stored_Procedure/dbo.sp_capture_login_auth.sql:191:9     - Unknown word (hexvalue)    -- SELECT @hexvalue = @charvalue
-Stored_Procedure/dbo.sp_capture_login_auth.sql:195:33    - Unknown word (auths)       -- ID ('sp_capture_login_auths') IS NOT NULL
-Stored_Procedure/dbo.sp_capture_login_auth.sql:196:35    - Unknown word (auths)       -- PROCEDURE sp_capture_login_auths
-Stored_Procedure/dbo.sp_capture_login_auth.sql:198:42    - Unknown word (auths)       -- dbo].[sp_capture_login_auths] @user sysname = NULL
 Stored_Procedure/dbo.sp_capture_login_auth.sql:202:10    - Unknown word (deflt)       -- DECLARE @deflt_dbid smallint
 Stored_Procedure/dbo.sp_capture_login_auth.sql:205:10    - Unknown word (hasaccess)   -- DECLARE @hasaccess int
 Stored_Procedure/dbo.sp_capture_login_auth.sql:206:10    - Unknown word (denylogin)   -- DECLARE @denylogin int
@@ -9183,14 +9164,12 @@ Stored_Procedure/dbo.sp_capture_login_auth.sql:217:10    - Unknown word (usrname
 Stored_Procedure/dbo.sp_capture_login_auth.sql:219:2     - Unknown word (savedb)      -- @savedb NVARCHAR(128),
 Stored_Procedure/dbo.sp_capture_login_auth.sql:220:2     - Unknown word (dbrole)      -- @dbrole varchar(50),
 Stored_Procedure/dbo.sp_capture_login_auth.sql:221:2     - Unknown word (svrrole)     -- @svrrole varchar(50)
-Stored_Procedure/dbo.sp_capture_login_auth.sql:22:23     - Unknown word (auths)       -- EX - sp_capture_login_auths 'domain name\snooze
 Stored_Procedure/dbo.sp_capture_login_auth.sql:240:73    - Unknown word (hasaccess)   -- default_database_name, l.hasaccess, l.denylogin
 Stored_Procedure/dbo.sp_capture_login_auth.sql:240:86    - Unknown word (denylogin)   -- name, l.hasaccess, l.denylogin
 Stored_Procedure/dbo.sp_capture_login_auth.sql:241:44    - Unknown word (syslogins)   -- principals p LEFT JOIN sys.syslogins l
 Stored_Procedure/dbo.sp_capture_login_auth.sql:248:102   - Unknown word (denylogin)   -- defaultdb, @hasaccess, @denylogin
 Stored_Procedure/dbo.sp_capture_login_auth.sql:248:78    - Unknown word (defaultdb)   -- type, @is_disabled, @defaultdb, @hasaccess, @denylogin
 Stored_Procedure/dbo.sp_capture_login_auth.sql:248:90    - Unknown word (hasaccess)   -- disabled, @defaultdb, @hasaccess, @denylogin
-Stored_Procedure/dbo.sp_capture_login_auth.sql:24:23     - Unknown word (auths)       -- EX - sp_capture_login_auths 'snooze'
 Stored_Procedure/dbo.sp_capture_login_auth.sql:257:27    - Unknown word (revlogin)    -- tmpstr = '/* sp_help_revlogin script '
 Stored_Procedure/dbo.sp_capture_login_auth.sql:257:6     - Unknown word (tmpstr)      -- SET @tmpstr = '/* sp_help_revlogin
 Stored_Procedure/dbo.sp_capture_login_auth.sql:258:8     - Unknown word (tmpstr)      -- PRINT @tmpstr
@@ -9262,9 +9241,7 @@ Stored_Procedure/dbo.sp_capture_login_auth.sql:503:104   - Unknown word (denylog
 Stored_Procedure/dbo.sp_capture_login_auth.sql:503:80    - Unknown word (defaultdb)         -- type, @is_disabled, @defaultdb, @hasaccess, @denylogin
 Stored_Procedure/dbo.sp_capture_login_auth.sql:503:92    - Unknown word (hasaccess)         -- disabled, @defaultdb, @hasaccess, @denylogin
 Stored_Procedure/dbo.sp_capture_login_auth.sql:515:3     - Unknown word (DBUSRNAME)         -- @DBUSRNAME NVARCHAR(128),
-Stored_Procedure/dbo.sp_capture_login_auth.sql:524:19    - Unknown word (Auths)             -- CREATE TABLE #DB_Auths (
 Stored_Procedure/dbo.sp_capture_login_auth.sql:526:3     - Unknown word (DBUSRNAME)         -- #DBUSRNAME NVARCHAR(128),
-Stored_Procedure/dbo.sp_capture_login_auth.sql:537:25    - Unknown word (Auths)             -- use ? INSERT INTO #DB_Auths
 Stored_Procedure/dbo.sp_capture_login_auth.sql:540:24    - Unknown word (princ)             -- DatabaseUserName] = princ.[name],
 Stored_Procedure/dbo.sp_capture_login_auth.sql:549:15    - Unknown word (schem)             -- WHEN 3 THEN schem.[name] -- Schemas
 Stored_Procedure/dbo.sp_capture_login_auth.sql:54:9      - Unknown word (dblist)      -- @dblist NVARCHAR(MAX),
@@ -9274,16 +9251,14 @@ Stored_Procedure/dbo.sp_capture_login_auth.sql:558:35    - Unknown word (princ) 
 Stored_Procedure/dbo.sp_capture_login_auth.sql:558:49    - Unknown word (ulogin)            -- ulogin on princ.[sid] = ulogin.[sid]
 Stored_Procedure/dbo.sp_capture_login_auth.sql:561:66    - Unknown word (princ)             -- grantee_principal_id] = princ.[principal_id]
 Stored_Procedure/dbo.sp_capture_login_auth.sql:569:15    - Unknown word (schem)             -- sys.schemas schem ON schem.[schema_id
-Stored_Procedure/dbo.sp_capture_login_auth.sql:569:24    - Unknown word (schem)            -- sys.schemas schem ON schem.[schema_id] = perm.
-Stored_Procedure/dbo.sp_capture_login_auth.sql:575:3     - Unknown word (princ)            -- princ.[type] IN (''S'',''U
+Stored_Procedure/dbo.sp_capture_login_auth.sql:569:24    - Unknown word (schem)             -- sys.schemas schem ON schem.[schema_id] = perm.
+Stored_Procedure/dbo.sp_capture_login_auth.sql:575:3     - Unknown word (princ)             -- princ.[type] IN (''S'',''U
 Stored_Procedure/dbo.sp_capture_login_auth.sql:578:7     - Unknown word (ulogin)           -- AND ulogin.name = ''' + @name
 Stored_Procedure/dbo.sp_capture_login_auth.sql:586:28    - Unknown word (DBUSRNAME)        -- SELECT #DBname_AUTH, #DBUSRNAME, #PERMISSION_NAME,
-Stored_Procedure/dbo.sp_capture_login_auth.sql:587:11    - Unknown word (AUTHS)            -- FROM #DB_AUTHS
 Stored_Procedure/dbo.sp_capture_login_auth.sql:592:22    - Unknown word (DBUSRNAME)        -- INTO @DBNAME_AUTH, @DBUSRNAME, @PERMISSION_NAME,
 Stored_Procedure/dbo.sp_capture_login_auth.sql:610:35    - Unknown word (DBUSRNAME)        -- tmpstr = '--Login: ' + @DBUSRNAME
 Stored_Procedure/dbo.sp_capture_login_auth.sql:669:65    - Unknown word (AUTHORIES)        -- DATABASE OBJECT AUTHORIES [' + @DBNAME_AUTH +
 Stored_Procedure/dbo.sp_capture_login_auth.sql:66:16     - Unknown word (dblist)      -- SELECT @dblist = REPLACE(REPLACE(REPLACE
-Stored_Procedure/dbo.sp_capture_login_auth.sql:699:17    - Unknown word (Auths)            -- DROP TABLE #DB_Auths
 Stored_Procedure/dbo.sp_capture_login_auth.sql:91:21     - Unknown word (dblist)      -- + CASE WHEN @dblist IS NOT NULL THEN
 Stored_Procedure/dbo.sp_capture_login_auth.sql:92:32     - Unknown word (dblist)      -- ' AND name IN (' + @dblist + ')'
 Stored_Procedure/dbo.sp_ctrl3.sql:1000:49   - Unknown word (hyph)                   -- ' AND p.fk1=1 THEN @hyph+@one
@@ -11184,7 +11159,6 @@ Utilities/README.md:3214:3    - Unknown word (Diffo)           -- dbDiffo - The 
 Utilities/README.md:3222:13   - Unknown word (Delte)           -- Author: SQL Delte<br/>
 Utilities/README.md:322:191   - Unknown word (Sergey)        -- | 2019-05-19 | Sergey Syrovatchenko    |
 Utilities/README.md:322:198   - Unknown word (Syrovatchenko) -- 2019-05-19 | Sergey Syrovatchenko |            | Open
-Utilities/README.md:3240:42   - Unknown word (nosql)           -- working with relational, nosql or cloud databases,
 Utilities/README.md:324:191   - Unknown word (Talend)        -- | 2019-09-20 | Talend |
 Utilities/README.md:325:126   - Unknown word (Talend)        -- | [ETL]    | [Talend Data Integration]
 Utilities/README.md:325:191   - Unknown word (Talend)        -- | 2019-06-20 | Talend |
