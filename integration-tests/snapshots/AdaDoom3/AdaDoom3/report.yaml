@@ -5,7 +5,7 @@ Args: '["**/*.*"]'
 Summary:
   files: 103
   filesWithIssues: 98
-  issues: 3245
+  issues: 3238
   errors: 0
 Errors: []
 
@@ -816,8 +816,6 @@ issues:
   - "Engine/neo-world.adb:82:27          Memroy      U       --if Memory = GPU_Memroy then"
   - "Engine/neo-world.ads:87:11          Singleplayer    U       Has_Singleplayer : Bool := False;"
   - "Engine/neo-world.ads:88:11          Deathmatch      U       Has_Deathmatch : Bool := False"
-  - "Engine/neo.adb:40:25        Tracebacks      U       Traces : Tracebacks_Array (1..128);"
-  - "Engine/neo.adb:49:32        Traceback       U       for Item of Symbolic_Traceback (Traces) loop"
   - "Engine/neo.ads:41:18        Superbounded    U       with Ada.Strings.Superbounded; use Ada.Strings"
   - "Engine/Runtime/a-comutr.adb:462:29      multiway        U       Implement Vet for multiway tree???"
   - "Engine/Runtime/a-comutr.adb:761:19      represention    U       -- Restore represention invariants before attempting"
@@ -863,7 +861,6 @@ issues:
   - "Games/DOOM/Resource/locale.csv:2:120        d'informations      U       voudriez-vous voir plus d'informations?\",OK,asdf,,,,,,,,,"
   - "neo.gpr:87:72       GLSL                    U       -- GLSL shaders"
   - "neo.gpr:92:98       senario                 U       the source access to senario variable DEBUG"
-  - "neo.gpr:98:55       traceback               U       -- Store traceback in exceptions"
   - "neo.gpr:99:25       Xlinker                 U       Switch_Linker := (\"-Xlinker\", -- Setup"
   - "neo.gpr:108:59      gnato                   U       Switch_Compiler & (\"-gnato\","
   - "neo.gpr:109:59      gnatf                   U       \"-gnatf\");"
