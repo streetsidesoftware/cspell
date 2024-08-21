@@ -5,7 +5,7 @@ Args: '["**/*.go"]'
 Summary:
   files: 276
   filesWithIssues: 252
-  issues: 3884
+  issues: 3829
   errors: 0
 Errors: []
 
@@ -14,8 +14,6 @@ issues:
   - "admin_test.go:34:8          yourserver      U       \"yourserver\": {"
   - "admin_test.go:44:10         Unsynced        U       func TestUnsyncedConfigAccess(t *testing"
   - "admin_test.go:114:10        unsynced        U       err := unsyncedConfigAccess(tc.method"
-  - "admin_test.go:176:42        etag            U       config with the wrong etag"
-  - "admin_test.go:189:93        Etag            U       intField\": 1}`), makeEtag(key, hash), false)"
   - "admin.go:42:14          caddyserver     U       \"github.com/caddyserver/certmagic\""
   - "admin.go:42:26          certmagic       U       github.com/caddyserver/certmagic\""
   - "admin.go:43:14          cespare         U       \"github.com/cespare/xxhash/v2\""
@@ -163,14 +161,11 @@ issues:
   - "modules/caddyhttp/celmatcher_test.go:57:60          localdomain     U       subject} == 'CN=client.localdomain'\","
   - "modules/caddyhttp/celmatcher.go:428:62      setes       U       matcherLibrary from option setes."
   - "modules/caddyhttp/encode/brotli/brotli_precompressed.go:1:9         caddybrotli     U       package caddybrotli"
-  - "modules/caddyhttp/encode/brotli/brotli_precompressed.go:9:23        Brotli          U       caddy.RegisterModule(BrotliPrecompressed{})"
-  - "modules/caddyhttp/encode/brotli/brotli_precompressed.go:12:81       brotli          U       files precompressed with brotli encoding."
   - "modules/caddyhttp/encode/caddyfile.go:44:8          zstd    U       // zstd"
   - "modules/caddyhttp/encode/encode.go:19:65        Httpgzip        U       Copyright (c) 2015 The Httpgzip Authors."
   - "modules/caddyhttp/encode/encode.go:52:59        Mmatcher        U       against this ResponseMmatcher."
   - "modules/caddyhttp/encode/encode.go:98:19        opentype        U       \"application/opentype*\","
   - "modules/caddyhttp/encode/encode.go:104:26       fontobject      U       \"application/vnd.ms-fontobject*\","
-  - "modules/caddyhttp/encode/encode.go:111:21       protobuf        U       \"application/x-protobuf*\","
   - "modules/caddyhttp/encode/encode.go:277:11       bodyclose       U       //nolint:bodyclose"
   - "modules/caddyhttp/encode/encode.go:328:4        deallocates     U       // deallocates any active resources"
   - "modules/caddyhttp/encode/encode.go:413:2        prefs           U       prefs := []encodingPreference"
@@ -198,7 +193,6 @@ issues:
   - "modules/caddyhttp/fileserver/matcher.go:333:3       fullpath    U       fullpath, relative, splitRemainder"
   - "modules/caddyhttp/fileserver/matcher.go:562:2       nlen        U       nlen := len(needle)"
   - "modules/caddyhttp/fileserver/staticfiles.go:125:51      explictness     U       maximum clarity and explictness, use complete,"
-  - "modules/caddyhttp/fileserver/staticfiles.go:175:44      Etags           U       extensions to try to read Etags from."
   - "modules/caddyhttp/fileserver/staticfiles.go:503:3       mtyp            U       mtyp := mime.TypeByExtension"
   - "modules/caddyhttp/fileserver/staticfiles.go:579:74      Caza            U       written by Nathaniel Caza."
   - "modules/caddyhttp/headers/headers_test.go:93:32         lalala          U       Header-Suffix\": []string{\"lalala\"},"
@@ -340,7 +334,6 @@ issues:
   - "modules/caddyhttp/templates/templates.go:156:18         mydir           U       // {{listFiles \"/mydir\"}}"
   - "modules/caddyhttp/templates/templates.go:162:5          Goldmark        U       // [Goldmark](https://github.com"
   - "modules/caddyhttp/templates/templates.go:250:4          sitename        U       // sitename = \"A Caddy site\""
-  - "modules/caddyhttp/templates/templates.go:423:14         etags           U       // and weak etags still cause browsers"
   - "modules/caddyhttp/templates/tplcontext_test.go:486:75       ctxtest     U       tplContext.Root), \"caddy_ctxtest\")"
   - "modules/caddyhttp/templates/tplcontext.go:35:2          chromahtml      U       chromahtml \"github.com/alecthomas"
   - "modules/caddyhttp/templates/tplcontext.go:35:25         alecthomas      U       chromahtml \"github.com/alecthomas/chroma/v2/formatters"

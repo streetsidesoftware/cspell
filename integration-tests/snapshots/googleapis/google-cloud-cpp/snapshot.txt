@@ -3,10 +3,8 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 19549, Issues found: 96123 in 12314 files.
+ CSpell: Files checked: 19549, Issues found: 92538 in 12071 files.
  exit code: 1
-ARCHITECTURE.md:110:20    - Unknown word (bigtable)   -- - Bigtable has a [`bigtable::DataClient`](/google
-ARCHITECTURE.md:110:3     - Unknown word (Bigtable)   -- - Bigtable has a [`bigtable::DataClient
 ARCHITECTURE.md:158:48    - Unknown word (googlemock) -- implementation using `googlemock`
 ARCHITECTURE.md:29:61     - Unknown word (retryable)  -- RPCs that fail with a retryable error,
 BUILD.bazel:151:20    - Unknown word (ctype)      -- name = "enable-ctype-cord-workaround",
@@ -17,12 +15,9 @@ CMakeLists.txt:101:32    - Unknown word (CCACHE)     -- GOOGLE_CLOUD_CPP_ENABLE_
 CMakeLists.txt:121:37    - Unknown word (REFDOC)     -- CLOUD_CPP_USE_LATEST_FOR_REFDOC_LINKS
 CMakeLists.txt:130:31    - Unknown word (DOCFX)      -- GOOGLE_CLOUD_CPP_INTERNAL_DOCFX
 CMakeLists.txt:20:13     - Unknown word (BUGREPORT)  -- set(PACKAGE_BUGREPORT "https://github.com
-CMakeLists.txt:214:39    - Unknown word (protobufs)  -- target results in all protobufs being compiled.
 CMakeLists.txt:217:8     - Unknown word (subproject) -- # Each subproject adds dependencies to
 CMakeLists.txt:224:17    - Unknown word (PROTOC)     -- # `Protobuf_PROTOC_EXECUTABLE` is pretty
-CMakeLists.txt:225:67    - Unknown word (Protobuf's) -- and it is defined by Protobuf's
 CMakeLists.txt:233:33    - Unknown word (protoc)     -- [==[Override gRPC's protoc plugin location.
-CMakeLists.txt:241:42    - Unknown word (PROTOBUF)   -- CPP_FIND_DEPENDENCY_PROTOBUF
 CMakeLists.txt:260:64    - Unknown word (gmock)      -- GTest::gtest and GTest::gmock libraries.
 CMakeLists.txt:90:25     - Unknown word (DOPENSSL)   -- " cmake -DOPENSSL_ROOT_DIR=/usr/local
 CMakeLists.txt:97:25     - Unknown word (DGOOGLE)    -- " cmake -DGOOGLE_CLOUD_CPP_ENABLE_MACOS
@@ -47,11 +42,9 @@ bazel/gapic.bzl:40:17     - Unknown word (srcs)           -- name = "srcs",
 bazel/gapic.bzl:45:17     - Unknown word (hdrs)           -- name = "hdrs",
 bazel/gapic.bzl:75:26     - Unknown word (googletest)     -- "@com_google_googletest//:gtest",
 bazel/googleapis.modules.patch:10:2      - Unknown word (genrule)    -- genrule(
-bazel/googleapis.modules.patch:42:20     - Unknown word (protobuf)   -- +bazel_dep(name = "protobuf", version = "21.7",
 bazel/library_names.bzl:16:16     - Unknown word (startswith) -- if library.startswith("compute_"):
 bazel/library_names.bzl:22:24     - Unknown word (removeprefix) -- return library.removeprefix("compute_") + "_mock
 bazel/workspace0.bzl:148:17    - Unknown word (boringssl)  -- name = "boringssl",
-bazel/workspace3.bzl:35:7      - Unknown word (Protobuf)   -- # Protobuf dependencies must be
 bazel/workspace3.bzl:39:7      - Unknown word (Googletest) -- # Googletest dependencies
 ci/check-include-guards.gawk:26:1      - Unknown word (BEGINFILE)  -- BEGINFILE {
 ci/check-include-guards.gawk:32:16     - Unknown word (toupper)    -- guard_body=toupper(FILENAME)
@@ -396,7 +389,6 @@ docfx/testing/inputs.cc:63:120    - Unknown word (adbc)       -- erviceConnectio
 examples/BUILD.bazel:84:14     - Unknown word (GENDIR)     -- "-I$(GENDIR)/examples",
 examples/CMakeLists.txt:33:9      - Unknown word (Findg)      -- include(FindgRPC)
 examples/gcs2cbt.cc:253:13    - Unknown word (cbta)       -- namespace cbta = ::google::cloud::bigtable
-examples/gcs2cbt.cc:256:51    - Unknown word (BIGTABLE)   -- , "GOOGLE_CLOUD_CPP_BIGTABLE_TEST_INSTANCE_ID",
 external/googleapis/CMakeLists.txt:100:18    - Unknown word (latlng)         -- "google/type/latlng.proto"
 external/googleapis/CMakeLists.txt:107:18    - Unknown word (timeofday)      -- "google/type/timeofday.proto")
 external/googleapis/CMakeLists.txt:123:16    - Unknown word (Protos)         -- include(CompileProtos)
@@ -539,7 +531,6 @@ generator/internal/service_code_generator.h:188:46    - Unknown word (autopopula
 generator/templates/WORKSPACE.bazel:19:21     - Unknown word (Starlark)   -- # Add the necessary Starlark functions to fetch google
 generator/testing/descriptor_pool_fixture.cc:49:7      - Unknown word (multifile)  -- multifile_error_collector_(
 google/cloud/BUILD.bazel:73:15     - Unknown word (DEFAULTLIB) -- "-DEFAULTLIB:bcrypt.lib",
-google/cloud/accessapproval/README.md:25:11     - Unknown word (iostream)   -- #include <iostream>
 google/cloud/accessapproval/README.md:29:10     - Unknown word (cerr)       -- std::cerr << "Usage: " << argv
 google/cloud/accessapproval/README.md:39:10     - Unknown word (cout)       -- std::cout << a->DebugString()
 google/cloud/accessapproval/access_approval_client.h:19:39     - Unknown word (ACCESSAPPROVAL) -- CLOUD_CPP_GOOGLE_CLOUD_ACCESSAPPROVAL_ACCESS_APPROVAL_CLIENT
@@ -698,7 +689,6 @@ google/cloud/bigtable/client_options_test.cc:319:44    - Unknown word (GRPCLB)  
 google/cloud/bigtable/client_options_test.cc:86:38     - Unknown word (testadmin)  -- AdminEndpointOption>("testadmin.googleapis.com")
 google/cloud/bigtable/client_options_test.cc:87:46     - Unknown word (testinstanceadmin) -- InstanceAdminEndpointOption>("testinstanceadmin.googleapis.com")
 google/cloud/bigtable/column_family.h:154:43    - Unknown word (Differencer) -- protobuf::util::MessageDifferencer::Equivalent(a.gc_rule
-google/cloud/bigtable/data_client.h:45:22     - Unknown word (Bigtable's) -- * Connects to Cloud Bigtable's data manipulation APIs
 google/cloud/bigtable/data_client.h:64:28     - Unknown word (dataclient) -- @ref migrating-from-dataclient "Migrating from DataClient
 google/cloud/bigtable/doc/bigtable-main.dox:57:2      - Unknown word (howto)      -- [howto-setup-dev-workstation
 google/cloud/bigtable/doc/bigtable-samples-grpc-credentials.dox:41:33     - Unknown word (googleusercontent) -- client_id": "XXXXXX.apps.googleusercontent.com",
@@ -1305,8 +1295,6 @@ protos/google/cloud/compute/v1/internal/common_000.proto:1280:35   - Unknown wor
 protos/google/cloud/compute/v1/internal/common_000.proto:1309:37   - Unknown word (stdev)        -- success rate: mean - (stdev * successRateStdevFactor
 protos/google/cloud/compute/v1/internal/common_000.proto:1309:56   - Unknown word (Stdev)        -- (stdev * successRateStdevFactor). This factor
 protos/google/cloud/compute/v1/internal/common_000.proto:1357:22   - Unknown word (SUBSETTING)   -- // CONSISTENT_HASH_SUBSETTING: Subsetting based on
-protos/google/cloud/compute/v1/internal/common_000.proto:166:32    - Unknown word (Proxyless)  -- that has validateForProxyless field set to true.
-protos/google/cloud/compute/v1/internal/common_000.proto:179:36    - Unknown word (Brotli)     -- text responses using Brotli or gzip compression
 protos/google/cloud/compute/v1/internal/common_000.proto:202:33    - Unknown word (MAGLEV)     -- localityLbPolicy is set to MAGLEV or RING_HASH. This field
 protos/google/cloud/compute/v1/internal/common_000.proto:31:9      - Unknown word (AWSV)       -- message AWSV4Signature {
 protos/google/cloud/compute/v1/internal/common_000.proto:320:6     - Unknown word (Maglev)     -- // Maglev is not as stable as
@@ -1344,7 +1332,6 @@ protos/google/cloud/compute/v1/internal/common_007.proto:48:45     - Unknown wor
 protos/google/cloud/compute/v1/internal/common_007.proto:56:33     - Unknown word (CPUS)       -- following custom-NUMBER_OF_CPUS-AMOUNT_OF_MEMORY pattern
 protos/google/cloud/compute/v1/internal/common_008.proto:125:35    - Unknown word (uniqueid)      -- user:{emailid}?uid={uniqueid}`: An email address
 protos/google/cloud/compute/v1/internal/common_008.proto:163:6     - Unknown word (CREDS)         -- // CREDS_ASSERTION: This is deprecated
-protos/google/cloud/compute/v1/internal/common_008.proto:266:68    - Unknown word (etag)          -- 00.000Z')", } } ], "etag":
 protos/google/cloud/compute/v1/internal/common_008.proto:36:5      - Unknown word (sampleservice) -- // "sampleservice.googleapis.com", "audit
 protos/google/cloud/compute/v1/internal/common_008.proto:50:33     - Unknown word (cloudsql)      -- storage.googleapis.com`, `cloudsql.googleapis.com`. `allServices
 protos/google/cloud/compute/v1/internal/common_008.proto:97:51     - Unknown word (emailid)       -- federation. * `user:{emailid}`: An email address
@@ -1353,7 +1340,6 @@ protos/google/cloud/compute/v1/internal/common_009.proto:142:22    - Unknown wor
 protos/google/cloud/compute/v1/internal/common_009.proto:143:26    - Unknown word (stockout)   -- there is a resource stockout in the chosen region
 protos/google/cloud/compute/v1/internal/common_009.proto:182:39    - Unknown word (AUTOSCALER) -- INSTANCES_GREATER_THAN_AUTOSCALER_MAX: For some scaling
 protos/google/cloud/compute/v1/internal/common_009.proto:38:44     - Unknown word (autoscale)  -- the default will be to autoscale based on cpuUtilization
-protos/google/cloud/compute/v1/internal/common_010.proto:48:27     - Unknown word (Etag)       -- MixerListResponseWithEtagBuilder
 protos/google/cloud/compute/v1/internal/common_013.proto:166:71    - Unknown word (PORTMAP)    -- SERVICE_CONNECT, GCE_VM_IP_PORTMAP.
 protos/google/cloud/compute/v1/internal/common_013.proto:225:15    - Unknown word (appname)    -- // foo1-dot-appname.appspot.com/v1 and foo
 protos/google/cloud/compute/v1/internal/common_014.proto:1203:36   - Unknown word (Nics)       -- VM endpoints (i.e., Nics) that can use NAT.
@@ -1362,7 +1348,6 @@ protos/google/cloud/compute/v1/internal/common_014.proto:558:24    - Unknown wor
 protos/google/cloud/compute/v1/internal/common_014.proto:558:63    - Unknown word (Nexthop)    -- 3 [json_name = "ipv4NexthopAddress"];
 protos/google/cloud/compute/v1/internal/common_014.proto:664:46    - Unknown word (fdff)       -- address (ULA) range from fdff:1::/64 with a mask length
 protos/google/cloud/compute/v1/internal/common_014.proto:82:10     - Unknown word (multipoint) -- // The multipoint bit of the BFD packet
-protos/google/cloud/compute/v1/internal/common_015.proto:55:10     - Unknown word (Hyperdisk)  -- // for Hyperdisk disk types.
 protos/google/cloud/compute/v1/internal/common_016.proto:105:60    - Unknown word (tollerate)  -- workloads that cannot tollerate
 protos/google/cloud/compute/v1/internal/common_016.proto:38:17     - Unknown word (chosing)    -- // Policy for chosing target zone. For more
 protos/google/cloud/compute/v1/internal/common_019.proto:40:44     - Unknown word (VCPU)       -- machine resources such as VCPU or MEMORY, listed in
@@ -1455,8 +1440,6 @@ protos/google/cloud/compute/v1/internal/common_111.proto:707:34    - Unknown wor
 protos/google/cloud/compute/v1/internal/common_113.proto:68:22     - Unknown word (mycompany)  -- // domain name: "p.mycompany.com.". Current max number
 protos/google/cloud/compute/v1/internal/common_116.proto:44:56     - Unknown word (chargeback) -- chains, for example, for chargeback tracking. When
 protos/google/cloud/compute/v1/internal/common_122.proto:190:49    - Unknown word (broadset)   -- profile. Allows the broadset set of clients, even
-protos/google/cloud/compute/v1/internal/common_124.proto:86:14     - Unknown word (hyperdisk)  -- // type is hyperdisk-balanced.
-protos/google/cloud/compute/v1/internal/common_127.proto:82:30     - Unknown word (proxyless)  -- optional bool validate_for_proxyless = 10
 protos/google/cloud/compute/v1/internal/common_138.proto:92:24     - Unknown word (vpntunnels) -- / using the compute.vpntunnels.insert method and associated
 release/README.md:217:29    - Unknown word (vckpkg)     -- Get to your clone of vckpkg
 release/README.md:266:66    - Unknown word (portfile)   -- ports/google-cloud-cpp/portfile.cmake
