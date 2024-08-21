@@ -6,7 +6,7 @@ import * as TextRange from '../util/TextRange.js';
 import { isDefined } from '../util/util.js';
 import * as InDoc from './InDocSettings.js';
 
-const dictName = InDoc.internal.staticInDocumentDictionaryName;
+const dictName = InDoc.__internal.staticInDocumentDictionaryName;
 
 const oc = <T>(obj: T) => expect.objectContaining(obj);
 const ac = <T>(a: Array<T>) => expect.arrayContaining(a);
@@ -77,22 +77,19 @@ const sampleTextWithBadRegexp = `
 
 describe('Validate InDocSettings', () => {
     test('tests matching settings', () => {
-        const matches = InDoc.internal
-            .getPossibleInDocSettings(sampleCode)
-            .map((a) => a.slice(1).filter((a) => !!a))
-            .toArray();
-        expect(matches.map((a) => a[0])).toEqual([
+        const matches = [...InDoc.__internal.getPossibleInDocSettings(sampleCode)].map((a) => a.match);
+        expect(matches).toEqual([
             'enableCompoundWords',
             'disableCompoundWords',
-            ' enableCOMPOUNDWords',
+            'enableCOMPOUNDWords',
             'words whiteberry, redberry, lightbrown',
-            ' ignoreRegExp /\\/\\/\\/.*/',
+            'ignoreRegExp /\\/\\/\\/.*/',
             'ignoreRegexp w\\w+berry',
             'ignoreRegExp  /',
             'ignoreRegExp \\w+s{4}\\w+ */',
             'ignoreRegExp /faullts[/]?/ */',
             'ignore tripe, comment */',
-            ' ignoreWords tooo faullts',
+            'ignoreWords tooo faullts',
             'language en-US',
             'local',
             'locale es-ES',
@@ -139,7 +136,7 @@ describe('Validate InDocSettings', () => {
     });
 
     test('tests finding words to add to dictionary', () => {
-        const words = InDoc.internal.getWordsFromDocument(sampleCode);
+        const words = InDoc.__internal.getWordsFromDocument(sampleCode);
         // we match to the end of the line, so the */ is included.
         expect(words).toEqual(['whiteberry', 'redberry', 'lightbrown', 'one', 'two', 'three', 'four', 'five', 'six']);
         expect(InDoc.getIgnoreWordsFromDocument('Hello')).toEqual([]);
@@ -197,7 +194,7 @@ describe('Validate InDocSettings', () => {
         ${'cspell\u003A ignored */'}               | ${{}}    | ${[oc({ range: [8, 15], suggestions: ac(['ignore', 'ignoreWord']), text: 'ignored' })]}
         ${'cspell\u003Alokal en'}                  | ${{}}    | ${[oc({ suggestions: ac(['locale']) })]}
         ${'cspell\u003Alokal en'}                  | ${{}}    | ${[oc({ suggestions: nac(['local']) })]}
-    `('validateInDocumentSettings', ({ text, settings, expected }) => {
+    `('validateInDocumentSettings $text', ({ text, settings, expected }) => {
         const result = [...InDoc.validateInDocumentSettings(text, settings)];
         expect(result).toEqual(expected);
     });

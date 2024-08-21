@@ -272,7 +272,7 @@ type CSpellSettingsWSTO = OptionalOrUndefined<AdvancedCSpellSettingsWithSourceTr
 type CSpellSettingsI$1 = CSpellSettingsInternal;
 
 declare function mergeSettings(left: CSpellSettingsWSTO | CSpellSettingsI$1, ...settings: (CSpellSettingsWSTO | CSpellSettingsI$1 | undefined)[]): CSpellSettingsI$1;
-declare function mergeInDocSettings(left: CSpellSettingsWSTO, right: CSpellSettingsWSTO): CSpellSettingsWST$1;
+declare function mergeInDocSettings(left: CSpellSettingsWSTO, ...rest: CSpellSettingsWSTO[]): CSpellSettingsWST$1;
 /**
  *
  * @param settings - settings to finalize

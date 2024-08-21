@@ -33,7 +33,8 @@
     "#test": "vitest run --reporter=hanging-process --reporter=default",
     "test": "vitest run --pool=forks",
     "test:update-snapshot": "vitest run -u",
-    "test:perf": "NODE_ENV=production insight --register ts-node/esm --file \"**/*.perf.{mts,ts}\""
+    "test:perf": "NODE_ENV=production insight --file \"**/*.perf.{mts,ts}\" --register ts-node/esm",
+    "test:perf:prof": "NODE_ENV=production node --cpu-prof ../../node_modules/perf-insight/bin.mjs --file \"dist/**/*.perf.{mjs,js}\" -t 1000"
   },
   "repository": {
     "type": "git",

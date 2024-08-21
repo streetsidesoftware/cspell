@@ -1,13 +1,10 @@
-import { opAppend, opFilter, opMap, pipeSync } from '@cspell/cspell-pipe/sync';
+import { opAppend, opFilter, opFlatten, opMap, pipeSync } from '@cspell/cspell-pipe/sync';
 import type { CSpellUserSettings, DictionaryDefinitionInline } from '@cspell/cspell-types';
-import type { Sequence } from 'gensequence';
-import { genSequence } from 'gensequence';
 
 import type { ExtendedSuggestion } from '../Models/Suggestion.js';
 import { createSpellingDictionary } from '../SpellingDictionary/index.js';
 import * as Text from '../util/text.js';
 import { clean, isDefined } from '../util/util.js';
-import { mergeInDocSettings } from './CSpellSettingsServer.js';
 
 // cspell:ignore gimuy
 const regExMatchRegEx = /\/.*\/[gimuy]*/;
@@ -99,15 +96,18 @@ export interface DirectiveIssue {
     suggestionsEx: ExtendedSuggestion[];
 }
 
+function collectInDocumentDirectives(text: string): DirectiveMatchWithParser[] {
+    const dirs = [...getPossibleInDocSettings(text)].flatMap((a) => associateDirectivesWithParsers(a));
+    return dirs;
+}
+
+const baseInDocSettings: CSpellUserSettings = { id: 'in-doc-settings' };
+Object.freeze(baseInDocSettings);
+
 export function getInDocumentSettings(text: string): CSpellUserSettings {
-    const collectedSettings = getPossibleInDocSettings(text)
-        .concatMap((a) => parseSettingMatch(a))
-        .reduce(
-            (s, setting) => {
-                return mergeInDocSettings(s, setting);
-            },
-            { id: 'in-doc-settings' } as CSpellUserSettings,
-        );
+    const found = collectInDocumentDirectives(text);
+    if (!found.length) return { ...baseInDocSettings };
+    const collectedSettings = reducePossibleMatchesToSettings(found, { ...baseInDocSettings });
     const {
         words,
         flagWords,
@@ -141,7 +141,6 @@ export function getInDocumentSettings(text: string): CSpellUserSettings {
         ...rest,
         ...dictSettings,
     };
-    // console.log('InDocSettings: %o', settings);
     return settings;
 }
 
@@ -149,20 +148,49 @@ export function validateInDocumentSettings(docText: string, _settings: CSpellUse
     return pipeSync(getPossibleInDocSettings(docText), opMap(parseSettingMatchValidation), opFilter(isDefined));
 }
 
-const settingParsers: readonly (readonly [RegExp, (m: string) => CSpellUserSettings])[] = [
-    [/^(?:enable|disable)(?:allow)?CompoundWords\b(?!-)/i, parseCompoundWords],
-    [/^(?:enable|disable)CaseSensitive\b(?!-)/i, parseCaseSensitive],
-    [/^enable\b(?!-)/i, parseEnable],
-    [/^disable(-line|-next(-line)?)?\b(?!-)/i, parseDisable],
-    [/^words?\b(?!-)/i, parseWords],
-    [/^ignore(?:-?words?)?\b(?!-)/i, parseIgnoreWords],
-    [/^(?:flag|forbid)(?:-?words?)?\b(?!-)/i, parseFlagWords],
-    [/^ignore_?Reg_?Exp\s+.+$/i, parseIgnoreRegExp],
-    [/^include_?Reg_?Exp\s+.+$/i, parseIncludeRegExp],
-    [/^locale?\b(?!-)/i, parseLocale],
-    [/^language\s\b(?!-)/i, parseLocale],
-    [/^dictionar(?:y|ies)\b(?!-)/i, parseDictionaries], // cspell:disable-line
-    [/^LocalWords:/, (w) => parseWords(w.replaceAll(/^LocalWords:?/gi, ' '))],
+interface PossibleMatch {
+    /** The full directive text till the end of the line */
+    fullDirective: string;
+    /** Offset of the directive */
+    offset: number;
+    /** the partial directive, missing the CSpell prefix. */
+    match: string;
+}
+
+type Directive =
+    | 'CompoundWords'
+    | 'CaseSensitive'
+    | 'Enable'
+    | 'Disable'
+    | 'Words'
+    | 'Ignore'
+    | 'Flag'
+    | 'IgnoreRegExp'
+    | 'IncludeRegExp'
+    | 'Locale'
+    | 'Dictionaries';
+
+type ReducerFn = (acc: CSpellUserSettings, match: string) => CSpellUserSettings;
+
+interface DirectiveMatchWithParser extends PossibleMatch {
+    directive: Directive;
+    fn: ReducerFn;
+}
+
+const settingParsers: readonly (readonly [RegExp, ReducerFn, Directive])[] = [
+    [/^(?:enable|disable)(?:allow)?CompoundWords\b(?!-)/i, parseCompoundWords, 'CompoundWords'],
+    [/^(?:enable|disable)CaseSensitive\b(?!-)/i, parseCaseSensitive, 'CaseSensitive'],
+    [/^enable\b(?!-)/i, parseEnable, 'Enable'],
+    [/^disable(-line|-next(-line)?)?\b(?!-)/i, parseDisable, 'Disable'],
+    [/^words?\b(?!-)/i, parseWords, 'Words'],
+    [/^ignore(?:-?words?)?\b(?!-)/i, parseIgnoreWords, 'Ignore'],
+    [/^(?:flag|forbid)(?:-?words?)?\b(?!-)/i, parseFlagWords, 'Flag'],
+    [/^ignore_?Reg_?Exp\s+.+$/i, parseIgnoreRegExp, 'IgnoreRegExp'],
+    [/^include_?Reg_?Exp\s+.+$/i, parseIncludeRegExp, 'IncludeRegExp'],
+    [/^locale?\b(?!-)/i, parseLocale, 'Locale'],
+    [/^language\s\b(?!-)/i, parseLocale, 'Locale'],
+    [/^dictionar(?:y|ies)\b(?!-)/i, parseDictionaries, 'Dictionaries'], // cspell:disable-line
+    [/^LocalWords:/, (acc, m) => reduceWordList(acc, m.replaceAll(/^LocalWords:?/gi, ' '), 'words'), 'Words'],
 ] as const;
 
 export const regExSpellingGuardBlock =
@@ -170,23 +198,21 @@ export const regExSpellingGuardBlock =
 export const regExSpellingGuardNext = /\bc?spell(?:-?checker)?::?\s*disable-next\b.*\s\s?.*/gi;
 export const regExSpellingGuardLine = /^.*\bc?spell(?:-?checker)?::?\s*disable-line\b.*/gim;
 
-const emptySettings: CSpellUserSettings = Object.freeze({});
-
 const issueMessages = {
     unknownDirective: 'Unknown CSpell directive',
 } as const;
 
-function parseSettingMatchValidation(matchArray: RegExpMatchArray): DirectiveIssue | undefined {
-    const [fullMatch = ''] = matchArray;
+function parseSettingMatchValidation(possibleMatch: PossibleMatch): DirectiveIssue | undefined {
+    const { fullDirective, offset } = possibleMatch;
 
-    const directiveMatch = fullMatch.match(regExCSpellDirectiveKey);
+    const directiveMatch = fullDirective.match(regExCSpellDirectiveKey);
     if (!directiveMatch) return undefined;
 
     const match = directiveMatch[1];
     const possibleSetting = match.trim();
     if (!possibleSetting) return undefined;
 
-    const start = (matchArray.index || 0) + (directiveMatch.index || 0) + (match.length - match.trimStart().length);
+    const start = offset + (directiveMatch.index || 0) + (match.length - match.trimStart().length);
     const text = possibleSetting.replace(/^([-\w]+)?.*/, '$1');
     const end = start + text.length;
 
@@ -227,51 +253,86 @@ function* filterUniqueSuggestions(sugs: Iterable<ExtendedSuggestion>): Iterable<
     }
 }
 
-function parseSettingMatch(matchArray: RegExpMatchArray): CSpellUserSettings[] {
-    const [, match = ''] = matchArray;
+function associateDirectivesWithParsers(possibleMatch: PossibleMatch): DirectiveMatchWithParser[] {
+    const { match } = possibleMatch;
     const possibleSetting = match.trim();
 
     return settingParsers
         .filter(([regex]) => regex.test(possibleSetting))
-        .map(([, fn]) => fn)
-        .map((fn) => fn(possibleSetting));
+        .map(([, fn, directive]) => ({ ...possibleMatch, directive, fn }));
 }
 
-function parseCompoundWords(match: string): CSpellUserSettings {
-    const allowCompoundWords = /enable/i.test(match);
-    return { allowCompoundWords };
+function mergeDirectiveIntoSettings(
+    settings: CSpellUserSettings,
+    directive: DirectiveMatchWithParser,
+): CSpellUserSettings {
+    return directive.fn(settings, directive.match);
 }
 
-function parseCaseSensitive(match: string): CSpellUserSettings {
-    const caseSensitive = /enable/i.test(match);
-    return { caseSensitive };
+function reducePossibleMatchesToSettings(
+    directives: DirectiveMatchWithParser[],
+    settings: CSpellUserSettings,
+): CSpellUserSettings {
+    for (const directive of directives) {
+        settings = mergeDirectiveIntoSettings(settings, directive);
+    }
+    return settings;
 }
 
-function parseWords(match: string): CSpellUserSettings {
-    const words = match
-        // .replace(/[@#$%^&={}/"]/g, ' ')
+function parseCompoundWords(acc: CSpellUserSettings, match: string): CSpellUserSettings {
+    acc.allowCompoundWords = /enable/i.test(match);
+    return acc;
+}
+
+function parseCaseSensitive(acc: CSpellUserSettings, match: string): CSpellUserSettings {
+    acc.caseSensitive = /enable/i.test(match);
+    return acc;
+}
+
+function splitWords(match: string): string[] {
+    return match
         .split(/[,\s;]+/g)
         .slice(1)
         .filter((a) => !!a);
-    return { words };
 }
 
-function parseLocale(match: string): CSpellUserSettings {
+function mergeList<T>(a: T[] | undefined, b: T[]): T[] {
+    if (!a) return b;
+    if (!b) return a;
+    return [...a, ...b];
+}
+
+function reduceWordList(
+    acc: CSpellUserSettings,
+    match: string,
+    key: 'words' | 'ignoreWords' | 'flagWords',
+): CSpellUserSettings {
+    const words = splitWords(match);
+    if (words.length) {
+        acc[key] = mergeList(acc[key], words);
+    }
+    return acc;
+}
+
+function parseWords(acc: CSpellUserSettings, match: string): CSpellUserSettings {
+    return reduceWordList(acc, match, 'words');
+}
+
+function parseLocale(acc: CSpellUserSettings, match: string): CSpellUserSettings {
     const parts = match.trim().split(/[\s,]+/);
     const language = parts.slice(1).join(',');
-    return language ? { language } : emptySettings;
+    if (language) {
+        acc.language = language;
+    }
+    return acc;
 }
 
-function parseIgnoreWords(match: string): CSpellUserSettings {
-    const wordsSetting = parseWords(match);
-    const ignoreWords = wordsSetting.words;
-    return ignoreWords && ignoreWords.length ? { ignoreWords } : emptySettings;
+function parseIgnoreWords(acc: CSpellUserSettings, match: string): CSpellUserSettings {
+    return reduceWordList(acc, match, 'ignoreWords');
 }
 
-function parseFlagWords(match: string): CSpellUserSettings {
-    const wordsSetting = parseWords(match);
-    const flagWords = wordsSetting.words;
-    return flagWords && flagWords.length ? { flagWords } : emptySettings;
+function parseFlagWords(acc: CSpellUserSettings, match: string): CSpellUserSettings {
+    return reduceWordList(acc, match, 'flagWords');
 }
 
 function parseRegEx(match: string): string[] {
@@ -285,23 +346,37 @@ function parseRegEx(match: string): string[] {
     return patterns;
 }
 
-function parseIgnoreRegExp(match: string): CSpellUserSettings {
+function parseIgnoreRegExp(acc: CSpellUserSettings, match: string): CSpellUserSettings {
     const ignoreRegExpList = parseRegEx(match);
-    return { ignoreRegExpList };
+    if (ignoreRegExpList.length) {
+        acc.ignoreRegExpList = mergeList(acc.ignoreRegExpList, ignoreRegExpList);
+    }
+    return acc;
 }
 
-function parseIncludeRegExp(match: string): CSpellUserSettings {
+function parseIncludeRegExp(acc: CSpellUserSettings, match: string): CSpellUserSettings {
     const includeRegExpList = parseRegEx(match);
-    return { includeRegExpList };
+    if (includeRegExpList.length) {
+        acc.includeRegExpList = mergeList(acc.includeRegExpList, includeRegExpList);
+    }
+    return acc;
 }
 
-function parseDictionaries(match: string): CSpellUserSettings {
+function parseDictionaries(acc: CSpellUserSettings, match: string): CSpellUserSettings {
     const dictionaries = match.split(/[,\s]+/g).slice(1);
-    return { dictionaries };
+    if (dictionaries.length) {
+        acc.dictionaries = mergeList(acc.dictionaries, dictionaries);
+    }
+    return acc;
 }
 
-function getPossibleInDocSettings(text: string): Sequence<RegExpExecArray> {
-    return genSequence(regExInFileSettings).concatMap((regexp) => Text.match(regexp, text));
+function getPossibleInDocSettings(text: string): Iterable<PossibleMatch> {
+    return pipeSync(
+        regExInFileSettings,
+        opMap((regexp) => Text.match(regexp, text)),
+        opFlatten(),
+        opMap((match) => ({ fullDirective: match[0], offset: match.index, match: match[1].trim() })),
+    );
 }
 
 function getWordsFromDocument(text: string): string[] {
@@ -309,14 +384,14 @@ function getWordsFromDocument(text: string): string[] {
     return dict?.words || EmptyWords;
 }
 
-function parseEnable(_match: string): CSpellUserSettings {
+function parseEnable(acc: CSpellUserSettings, _match: string): CSpellUserSettings {
     // Do nothing. Enable / Disable is handled in a different way.
-    return {};
+    return acc;
 }
 
-function parseDisable(_match: string): CSpellUserSettings {
+function parseDisable(acc: CSpellUserSettings, _match: string): CSpellUserSettings {
     // Do nothing. Enable / Disable is handled in a different way.
-    return {};
+    return acc;
 }
 
 export function extractInDocDictionary(settings: CSpellUserSettings): DictionaryDefinitionInline | undefined {
@@ -338,7 +413,8 @@ export function getIgnoreRegExpFromDocument(text: string): (string | RegExp)[] {
 /**
  * These internal functions are used exposed for unit testing.
  */
-export const internal = {
+export const __internal = {
+    collectInDocumentSettings: collectInDocumentDirectives,
     getPossibleInDocSettings,
     getWordsFromDocument,
     parseWords,
