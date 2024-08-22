@@ -108,7 +108,7 @@ Contributions are welcome! See our [contribution notes](CONTRIBUTING.md). **Note
 
 <!--- @@inject: static/contributors.md --->
 
-<--- cspell:disable --->
+<!--- cspell:disable --->
 
 [<img alt="Contributor Jason3S" src="https://avatars.githubusercontent.com/u/3740137?v=4&size=128" width=64>](https://github.com/Jason3S)
 [<img alt="Contributor street-side-software-automation[bot]" src="https://avatars.githubusercontent.com/u/50543896?v=4&size=128" width=64>](https://github.com/apps/street-side-software-automation)
@@ -175,7 +175,7 @@ Contributions are welcome! See our [contribution notes](CONTRIBUTING.md). **Note
 [<img alt="Contributor Maxim-Mazurok" src="https://avatars.githubusercontent.com/u/7756211?v=4&size=128" width=64>](https://github.com/Maxim-Mazurok)
 [<img alt="Contributor exhuma" src="https://avatars.githubusercontent.com/u/65717?v=4&size=128" width=64>](https://github.com/exhuma)
 
-<--- cspell:enable --->
+<!--- cspell:enable --->
 
 <!--- @@inject-end: static/contributors.md --->
 
