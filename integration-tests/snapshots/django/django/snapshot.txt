@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["--issues-summary-report","**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2794, Issues found: 8002 in 901 files.
+ CSpell: Files checked: 2794, Issues found: 8005 in 902 files.
  exit code: 1
 django/__init__.py:12:26     - Unknown word (urlresolvers) -- Set the thread-local urlresolvers script prefix if `set
 django/apps/registry.py:134:40    - Unknown word (unconfigured) -- not ready" is due to unconfigured settings, accessing
@@ -3526,10 +3526,6 @@ tests/auth_tests/test_hashers.py:65:46     - Unknown word (lètmein)    -- await
 tests/auth_tests/test_hashers.py:66:29     - Unknown word (acheck)     -- self.assertIs(await acheck_password("lètmeinz"
 tests/auth_tests/test_hashers.py:66:46     - Unknown word (lètmeinz)   -- await acheck_password("lètmeinz", encoded), False)
 tests/auth_tests/test_hashers.py:69:29     - Unknown word (acheck)     -- self.assertIs(await acheck_password("", blank_encoded
-tests/auth_tests/test_hashers.py:707:39    - Unknown word (ECMI)       -- scrypt$16384$seasalt$8$5$ECMIUp+LMxMSK8xB/IVyba+KYGTI
-tests/auth_tests/test_hashers.py:707:58    - Unknown word (yba)        -- $ECMIUp+LMxMSK8xB/IVyba+KYGTI7FTnet025q/1f"
-tests/auth_tests/test_hashers.py:707:62    - Unknown word (KYGTI)      -- ECMIUp+LMxMSK8xB/IVyba+KYGTI7FTnet025q/1f"
-tests/auth_tests/test_hashers.py:708:46    - Unknown word (JEFPK)      -- hdYqJuRi+mJn6ji6ze3Fbb7JEFPKGpuEf5vw==",
 tests/auth_tests/test_hashers.py:84:34     - Unknown word (lètmein)    -- encoded = make_password("lètmein", "seasalt", "pbkdf
 tests/auth_tests/test_hashers.py:92:42     - Unknown word (lètmeinz)   -- assertFalse(check_password("lètmeinz", encoded))
 tests/auth_tests/test_management.py:1266:14   - Unknown word (usermodel)                     -- def test_usermodel_without_password(self
@@ -3828,6 +3824,11 @@ tests/csrf_tests/tests.py:1240:41   - Unknown word (badvalue)   -- get_request(c
 tests/csrf_tests/tests.py:39:16     - Unknown word (lccccccc)   -- TEST_SECRET = "lcccccccX2kcccccccY2jcccccccssIC
 tests/csrf_tests/tests.py:39:26     - Unknown word (kccccccc)   -- SECRET = "lcccccccX2kcccccccY2jcccccccssIC"
 tests/csrf_tests/tests.py:39:36     - Unknown word (jcccccccss) -- lcccccccX2kcccccccY2jcccccccssIC"
+tests/csrf_tests/tests.py:41:25     - Unknown word (bcdefghij)  -- MASKED_TEST_SECRET1 = "1bcdefghij2bcdefghij3bcdefghij
+tests/csrf_tests/tests.py:41:35     - Unknown word (bcdefghij)  -- SECRET1 = "1bcdefghij2bcdefghij3bcdefghij4bcdefghij
+tests/csrf_tests/tests.py:41:45     - Unknown word (bcdefghij)  -- bcdefghij2bcdefghij3bcdefghij4bcdefghij5bcdefghij
+tests/csrf_tests/tests.py:41:55     - Unknown word (bcdefghij)  -- bcdefghij3bcdefghij4bcdefghij5bcdefghij6bcdefghijABCD
+tests/csrf_tests/tests.py:41:65     - Unknown word (bcdefghij)  -- bcdefghij4bcdefghij5bcdefghij6bcdefghijABCD"
 tests/csrf_tests/tests.py:618:24    - Unknown word (referer)    -- def test_https_bad_referer(self):
 tests/csrf_tests/tests.py:620:41    - Unknown word (referer)    -- HTTPS request with a bad referer is rejected
 tests/csrf_tests/tests.py:625:24    - Unknown word (REFERER)    -- req.META["HTTP_REFERER"] = "https://www.evil
@@ -4100,6 +4101,11 @@ tests/decorators/test_clickjacking.py:25:24     - Unknown word (xframe)     -- w
 tests/decorators/test_clickjacking.py:7:5       - Unknown word (xframe)     -- xframe_options_deny,
 tests/decorators/test_clickjacking.py:8:5       - Unknown word (xframe)     -- xframe_options_exempt,
 tests/decorators/test_clickjacking.py:9:5       - Unknown word (xframe)     -- xframe_options_sameorigin,
+tests/decorators/test_csrf.py:13:16     - Unknown word (bcdefghij)  -- CSRF_TOKEN = "1bcdefghij2bcdefghij3bcdefghij
+tests/decorators/test_csrf.py:13:26     - Unknown word (bcdefghij)  -- TOKEN = "1bcdefghij2bcdefghij3bcdefghij4bcdefghij
+tests/decorators/test_csrf.py:13:36     - Unknown word (bcdefghij)  -- bcdefghij2bcdefghij3bcdefghij4bcdefghij5bcdefghij
+tests/decorators/test_csrf.py:13:46     - Unknown word (bcdefghij)  -- bcdefghij3bcdefghij4bcdefghij5bcdefghij6bcdefghijABCD
+tests/decorators/test_csrf.py:13:56     - Unknown word (bcdefghij)  -- bcdefghij4bcdefghij5bcdefghij6bcdefghijABCD"
 tests/decorators/tests.py:279:16    - Unknown word (argumented) -- # Test for argumented decorator
 tests/decorators/tests.py:280:14    - Unknown word (argumented) -- def test_argumented(self):
 tests/defer_regress/tests.py:148:22    - Unknown word (ofield)     -- # side has o2ofield or unique FK) - the
@@ -7072,7 +7078,6 @@ tests/signals/tests.py:564:31    - Unknown word (asend)                 -- resul
 tests/signals/tests.py:603:20    - Unknown word (asend)                 -- async def test_asend_robust(self):
 tests/signals/tests.py:618:31    - Unknown word (asend)                 -- result = await signal.asend_robust(self.__class
 tests/signals/tests.py:630:20    - Unknown word (asend)                 -- async def test_asend_only_async_receivers
-tests/signing/tests.py:159:52    - Unknown word (Rhemh)      -- msxYA0sBohAxLC0BJf8uRhemh0BGU",
 tests/signing/tests.py:185:18    - Unknown word (newsecret)  -- key="newsecret", fallback_keys=["othersecret
 tests/signing/tests.py:185:46    - Unknown word (othersecret) -- newsecret", fallback_keys=["othersecret", "secret"]
 tests/signing/tests.py:50:19     - Unknown word (VQOZ)       -- "Usf3uVQOZ9m6uPfVonKR-EBXjPe7bjMbp
@@ -7118,8 +7123,6 @@ tests/staticfiles_tests/test_management.py:181:14    - Unknown word (collectstat
 tests/staticfiles_tests/test_storage.py:107:58    - Unknown word (iefix)      -- font.b9b105392eb8.eot?#iefix", content)
 tests/staticfiles_tests/test_storage.py:108:67    - Unknown word (Zbse)       -- e42714.svg#webfontIyfZbseF", content)
 tests/staticfiles_tests/test_storage.py:265:45    - Unknown word (GURL)       -- assertIn(b"/*# sOuRcEMaPpInGURL=source_map.css.map
-tests/staticfiles_tests/test_storage.py:279:31    - Unknown word (Ijoz)       -- b"eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIl9zcmMv
-tests/staticfiles_tests/test_storage.py:279:47    - Unknown word (Ijpb)       -- ZXJzaW9uIjozLCJzb3VyY2VzIjpbIl9zcmMv*/"
 tests/staticfiles_tests/test_storage.py:315:45    - Unknown word (GURL)       -- assertIn(b"//# sOuRcEMaPpInGURL=source_map.js.map",
 tests/staticfiles_tests/test_storage.py:350:63    - Unknown word (nonutf)     -- TEST_ROOT, "project", "nonutf8")],
 tests/staticfiles_tests/test_storage.py:353:30    - Unknown word (nonutf)     -- test_post_processing_nonutf8(self):
