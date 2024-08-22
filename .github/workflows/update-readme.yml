@@ -24,7 +24,7 @@ jobs:
 
       - name: Update Contributors
         run: |
-          pnpm run update:contributors ${{ secrets.GITHUB_TOKEN }}
+          pnpm update-contributors ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build Readme
         run: |
