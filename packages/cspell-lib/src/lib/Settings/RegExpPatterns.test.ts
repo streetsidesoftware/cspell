@@ -8,7 +8,7 @@ import { pathPackageSamples } from '../../test-util/test.locations.cjs';
 import { calculateTextDocumentOffsets } from '../util/text.js';
 import * as TextRange from '../util/TextRange.js';
 import * as RegPat from './RegExpPatterns.js';
-import { regExMatchCommonHexFormats, regExMatchUrls } from './RegExpPatterns.js';
+import { regExBase64SingleLine, regExMatchCommonHexFormats, regExMatchUrls } from './RegExpPatterns.js';
 
 const matchUrl = regExMatchUrls;
 const matchHexValues = regExMatchCommonHexFormats;
@@ -459,6 +459,11 @@ describe('Validate InDocSettings', () => {
     test('regExIgnoreSpellingDirectives', () => {
         const match = sampleBug345.match(RegPat.regExIgnoreSpellingDirectives);
         expect(match?.[0]).toBe('cspell\u003AignoreRegExp "(foobar|foobaz)"');
+    });
+
+    test('regExBase64SingleLine', () => {
+        const match = [...sampleCert.matchAll(regExBase64SingleLine)].map((a) => a[0]);
+        expect(match).toMatchSnapshot();
     });
 });
 

@@ -27,11 +27,16 @@ export const regExBase64 =
  *
  * It must be:
  * - at least 40 characters
- * - contain at least 1 of [0-9+=]
- * - end at the end of the line or with [,"'\]
+ * - contain at least 1 of [0-9+/]
+ * - contain at least 1 of [A-Z][a-z][A-Z]
+ * - contain at least 1 of [A-Z][0-9][A-Z] | [a-z][0-9][a-z] | [A-Z][0-9][a-z] | [0-9][A-Za-z][0-9]
+ * - contain at least 1 of [a-z]{3} | [A-Z]{3}
  */
 export const regExBase64SingleLine =
-    /(?<![A-Za-z0-9/+])(?=[^/]|[/][A-Za-z0-9/+]+?[=+])(?![A-Za-z/]+(?![A-Za-z0-9/+=]))(?=[A-Za-z0-9/+=]*?(?:[A-Z]{2}|[0-9]{2}))(?:[A-Za-z0-9/+]{4}){10,}(?:[A-Za-z0-9/+]{3}={1}|[A-Za-z0-9/+]{2}={2}|[A-Za-z0-9/+]{1}={3})?(?![A-Za-z0-9/+=])(?=$|[:.,"'\\)])/gm;
+    /(?=[A-Za-z]{0,80}[0-9+/])(?=[A-Za-z0-9/+]{0,80}?[A-Z][a-z][A-Z])(?=[A-Za-z0-9/+]{0,80}?(?:[A-Z][0-9][A-Z]|[a-z][0-9][a-z]|[A-Z][0-9][a-z])|[0-9][A-Za-z][0-9])(?=[A-Za-z0-9/+]{0,80}?(?:[a-z]{3}|[A-Z]{3}))(?:[A-Za-z0-9/+]{40,})=*/gm;
+
+// export const regExBase64SingleLine =
+//     /(?<![A-Za-z0-9/+])(?=[^/]|[/][A-Za-z0-9/+]+?[=+])(?![A-Za-z/]+(?![A-Za-z0-9/+=]))(?=[A-Za-z0-9/+=]*?(?:[A-Z]{2}|[0-9]{2}))(?:[A-Za-z0-9/+]{4}){10,}(?:[A-Za-z0-9/+]{3}={1}|[A-Za-z0-9/+]{2}={2}|[A-Za-z0-9/+]{1}={3})?(?![A-Za-z0-9/+=])(?=$|[:.,"'\\)])/gm;
 
 export const regExBase64MultiLine =
     /(?<![A-Za-z0-9/+])["']?(?:[A-Za-z0-9/+]{40,})["']?(?:\s^\s*["']?[A-Za-z0-9/+]{40,}["']?)+(?:\s^\s*["']?[A-Za-z0-9/+]+={0,3}["']?)?(?![A-Za-z0-9/+=])/gm;
