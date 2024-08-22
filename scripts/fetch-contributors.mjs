@@ -57,7 +57,7 @@ async function fetchContributors(token) {
  * @returns string
  */
 function contributorToMd(contributor) {
-    return `[<img src="${contributor.avatar_url}&size=128" width=64>](${contributor.html_url})`;
+    return `[<img alt="Contributor ${contributor.login}" src="${contributor.avatar_url}&size=128" width=64>](${contributor.html_url})`;
 }
 
 /**
