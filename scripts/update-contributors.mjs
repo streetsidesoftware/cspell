@@ -29,7 +29,11 @@ function contributorToMd(contributor) {
  * @returns string
  */
 function contributorsToMd(contributors) {
-    return '<--- cspell:disable --->\n' + contributors.map(contributorToMd).join('\n') + '\n<--- cspell:enable --->\n';
+    return (
+        '\n<--- cspell:disable --->\n\n' +
+        contributors.map(contributorToMd).join('\n') +
+        '\n\n<--- cspell:enable --->\n\n'
+    );
 }
 
 async function run() {
