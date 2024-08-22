@@ -18,7 +18,7 @@
     "build-integration-tests": "cd ./integration-tests && pnpm i",
     "build-schema": "pnpm -r run build-schema",
     "build": "pnpm -r --stream --workspace-concurrency=2 run build && pnpm -r run prepare-cspell-action",
-    "build:readme": "pnpm build:readme:packages && pnpm build:readme:root && pnpm docs:inject",
+    "build:readme": "pnpm update-contributors && pnpm build:readme:packages && pnpm build:readme:root && pnpm docs:inject",
     "build:readme:packages": "pnpm -r build:readme",
     "build:readme:root": "inject-markdown README.md \"packages/*/README.md\" && prettier -w README.md \"packages/*/README.md\"",
     "docs:inject": "inject-markdown \"docs/**/*.md\" && pnpm lint-docs",

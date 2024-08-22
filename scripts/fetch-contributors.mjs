@@ -1,7 +1,4 @@
 /* eslint-disable n/no-unsupported-features/node-builtins */
-
-const token = process.argv[2];
-
 const perPage = 100;
 
 /**
@@ -13,7 +10,7 @@ const perPage = 100;
  * @param {string} token
  * @returns {Promise<Contributor[]>}
  */
-async function fetchContributors(token) {
+export async function fetchContributors(token) {
     /**
      *
      * @param {number} page
@@ -50,33 +47,3 @@ async function fetchContributors(token) {
 
     return contributors;
 }
-
-/**
- *
- * @param {Contributor} contributor
- * @returns string
- */
-function contributorToMd(contributor) {
-    return `[<img alt="Contributor ${contributor.login}" src="${contributor.avatar_url}&size=128" width=64>](${contributor.html_url})`;
-}
-
-/**
- *
- * @param {Contributor[]} contributors
- * @returns string
- */
-function contributorsToMd(contributors) {
-    return contributors.map(contributorToMd).join('\n');
-}
-
-async function run() {
-    if (!token) {
-        throw new Error('GitHub token is required');
-    }
-
-    const contributors = await fetchContributors(token);
-
-    console.log('%s', contributorsToMd(contributors));
-}
-
-run();

@@ -1,5 +1,4 @@
-<!--- cspell:disable --->
-
+<--- cspell:disable --->
 [<img alt="Contributor Jason3S" src="https://avatars.githubusercontent.com/u/3740137?v=4&size=128" width=64>](https://github.com/Jason3S)
 [<img alt="Contributor street-side-software-automation[bot]" src="https://avatars.githubusercontent.com/u/50543896?v=4&size=128" width=64>](https://github.com/apps/street-side-software-automation)
 [<img alt="Contributor dependabot[bot]" src="https://avatars.githubusercontent.com/in/29110?v=4&size=128" width=64>](https://github.com/apps/dependabot)
@@ -63,6 +62,4 @@
 [<img alt="Contributor fughilli" src="https://avatars.githubusercontent.com/u/6869039?v=4&size=128" width=64>](https://github.com/fughilli)
 [<img alt="Contributor Ki-er" src="https://avatars.githubusercontent.com/u/32241933?v=4&size=128" width=64>](https://github.com/Ki-er)
 [<img alt="Contributor Maxim-Mazurok" src="https://avatars.githubusercontent.com/u/7756211?v=4&size=128" width=64>](https://github.com/Maxim-Mazurok)
-[<img alt="Contributor exhuma" src="https://avatars.githubusercontent.com/u/65717?v=4&size=128" width=64>](https://github.com/exhuma)
-
-<!--- cspell:disable --->
+[<img alt="Contributor exhuma" src="https://avatars.githubusercontent.com/u/65717?v=4&size=128" width=64>](https://github.com/exhuma)<--- cspell:enable --->
