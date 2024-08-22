@@ -556,6 +556,8 @@ Not checked.
 const sampleOldFalsePositivesBase64 = `
   - Multisample   residencyStandard2DMultisampleBlockShape : Int_Unsigned"
   - mynamespace   myNameSpace1/MyNameSpace2/mynamespace3/myserviceName"));"
+  - ERKS          PxTransform12transformInvERKS0_";"
+  External_Name => "_ZNK5physx11PxTransform12transformInvERKNS_6PxVec3E";
 `;
 
 const nonCert = `
