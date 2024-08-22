@@ -22,6 +22,10 @@ jobs:
       - name: Setup and Build
         uses: ./.github/actions/install-build
 
+      - name: Update Contributors
+        run: |
+          pnpm update-contributors ${{ secrets.GITHUB_TOKEN }}
+
       - name: Build Readme
         run: |
           pnpm run build:readme
