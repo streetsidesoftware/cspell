@@ -1,10 +1,7 @@
-import fs from 'node:fs';
-import Path from 'node:path';
-
 import type { TextOffset } from '@cspell/cspell-types';
 import { describe, expect, test } from 'vitest';
 
-import { pathPackageSamples } from '../../test-util/test.locations.cjs';
+import { readSampleFileSync } from '../../test-util/test.helper.mjs';
 import { calculateTextDocumentOffsets } from '../util/text.js';
 import * as TextRange from '../util/TextRange.js';
 import * as RegPat from './RegExpPatterns.js';
@@ -462,7 +459,15 @@ describe('Validate InDocSettings', () => {
     });
 
     test('regExBase64SingleLine', () => {
-        const match = [...sampleCert.matchAll(regExBase64SingleLine)].map((a) => a[0]);
+        const text = [
+            sampleCert,
+            sampleCodeSrc,
+            sampleOldFalsePositivesBase64,
+            samplesWithBase64,
+            sampleEmail,
+            sampleCodeWithBase64,
+        ].join('\n');
+        const match = [...text.matchAll(regExBase64SingleLine)].map((a) => a[0]);
         expect(match).toMatchSnapshot();
     });
 });
@@ -548,11 +553,24 @@ Not checked.
 
 `;
 
+const sampleOldFalsePositivesBase64 = `
+  - Multisample   residencyStandard2DMultisampleBlockShape : Int_Unsigned"
+  - mynamespace   myNameSpace1/MyNameSpace2/mynamespace3/myserviceName"));"
+`;
+
 const nonCert = `
 if [[ "\${tmp}" = *"-----BEGIN CERTIFICATE-----"* ]]; then
 echo "\${certText}" | grep -A 1 "Subject Alternative Name:" \
     | sed -e "2s/DNS://g" -e "s/ //g" | tr "," "\n" | tail -n +2;
 fi;
+`;
+
+const samplesWithBase64 = `
+self.assertIn(
+    b"data:font/woff;charset=utf-8;"
+    b"base64,d09GRgABAAAAADJoAA0AAAAAR2QAAQAAAAAAAAAAAAA",
+    content,
+)
 `;
 
 const sampleCert = `
@@ -597,4 +615,6 @@ pAqEAuV4DNoxQKKWmhVv+J0ptMWD25Pnpxeq5sXzghfJnslJlQND
 const sampleCode2LF = sampleCodeSrc.replaceAll(/\r?\n/g, '\n');
 const sampleCode2CRLF = sampleCode2LF.replaceAll('\n', '\r\n');
 
-const sampleBug345 = fs.readFileSync(Path.join(pathPackageSamples, './bug-fixes/bug345.ts'), 'utf8');
+const sampleBug345 = readSampleFileSync('./bug-fixes/bug345.ts');
+const sampleEmail = readSampleFileSync('src/email.mail');
+const sampleCodeWithBase64 = readSampleFileSync('patterns/test/fileType.js');
