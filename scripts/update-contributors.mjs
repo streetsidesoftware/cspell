@@ -30,9 +30,9 @@ function contributorToMd(contributor) {
  */
 function contributorsToMd(contributors) {
     return (
-        '\n<!--- cspell:disable --->\n\n' +
+        '<!--- cspell:disable --->\n\n' +
         contributors.map(contributorToMd).join('\n') +
-        '\n\n<!--- cspell:enable --->\n\n'
+        '\n\n<!--- cspell:enable --->\n'
     );
 }
 
