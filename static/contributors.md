@@ -1,4 +1,3 @@
-
 <!--- cspell:disable --->
 
 [<img alt="Contributor Jason3S" src="https://avatars.githubusercontent.com/u/3740137?v=4&size=128" width=64>](https://github.com/Jason3S)
@@ -67,4 +66,3 @@
 [<img alt="Contributor exhuma" src="https://avatars.githubusercontent.com/u/65717?v=4&size=128" width=64>](https://github.com/exhuma)
 
 <!--- cspell:enable --->
-
