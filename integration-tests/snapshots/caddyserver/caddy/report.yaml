@@ -5,7 +5,7 @@ Args: '["**/*.go"]'
 Summary:
   files: 276
   filesWithIssues: 252
-  issues: 3661
+  issues: 3658
   errors: 0
 Errors: []
 
@@ -3335,9 +3335,6 @@ issues:
   - "modules/caddytls/tls.go:163:31      Iface           U       automateNames, ok := modIface.(*AutomateLoader); ok"
   - "modules/caddytls/tls.go:171:101     Iface           U       strings, got: %T\", modIface)"
   - "modules/caddytls/tls.go:248:36      STEK            U       ticket ephemeral keys (STEK) service and provider"
-  - "modules/caddytls/tls.go:256:25      unmanaged       U       load manual/static (unmanaged) certificates - we do"
-  - "modules/caddytls/tls.go:277:28      Unmanaged       U       hash, err := magic.CacheUnmanagedTLSCertificate(ctx, cert"
-  - "modules/caddytls/tls.go:279:32      unmanaged       U       fmt.Errorf(\"caching unmanaged certificate: %v\", err"
   - "modules/caddytls/tls.go:474:2       zerossl         U       zerosslValidation := certmagic"
   - "modules/caddytls/tls.go:474:46      SSLHTTP         U       certmagic.LooksLikeZeroSSLHTTPValidation(r)"
   - "modules/caddytls/tls.go:477:24      zerossl         U       if !acmeChallenge && !zerosslValidation {"

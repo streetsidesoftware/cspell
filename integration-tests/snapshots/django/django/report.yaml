@@ -5,7 +5,7 @@ Args: '["--issues-summary-report","**/*.{md,py}"]'
 Summary:
   files: 2794
   filesWithIssues: 902
-  issues: 8005
+  issues: 8001
   errors: 0
 Errors: []
 
@@ -311,9 +311,7 @@ issues:
   - "django/contrib/gis/db/backends/postgis/adapter.py:29:41         ISQL    U       psycopg2.extensions import ISQLQuote"
   - "django/contrib/gis/db/backends/postgis/adapter.py:31:21         ISQL    U       if proto == ISQLQuote:"
   - "django/contrib/gis/db/backends/postgis/base.py:116:62       extname     U       FROM pg_extension WHERE extname = %s\", [\"postgis\"])"
-  - "django/contrib/gis/db/backends/postgis/const.py:14:3        Endianness      U       # Endianness, PostGIS raster version"
-  - "django/contrib/gis/db/backends/postgis/const.py:18:11       endianness      U       # a fixed endianness (1) and there is only"
-  - "django/contrib/gis/db/backends/postgis/const.py:62:10       PIXTYPE         U       BANDTYPE_PIXTYPE_MASK = 0x0F"
+  - "django/contrib/gis/db/backends/postgis/const.py:62:10       PIXTYPE     U       BANDTYPE_PIXTYPE_MASK = 0x0F"
   - "django/contrib/gis/db/backends/postgis/introspection.py:25:34       typname     U       \"SELECT oid, typname \""
   - "django/contrib/gis/db/backends/postgis/introspection.py:27:28       typname     U       \"WHERE typname IN ('geometry', 'geography"
   - "django/contrib/gis/db/backends/postgis/models.py:63:5           srtext      U       srtext = models.CharField(max"
@@ -331,7 +329,6 @@ issues:
   - "django/contrib/gis/db/backends/postgis/pgraster.py:25:26        hexlified       U       Unpack little endian hexlified binary string into a"
   - "django/contrib/gis/db/backends/postgis/pgraster.py:55:53        PIXTYPE         U       with_flags & BANDTYPE_PIXTYPE_MASK"
   - "django/contrib/gis/db/backends/postgis/pgraster.py:100:17       rast            U       def to_pgraster(rast):"
-  - "django/contrib/gis/db/backends/postgis/pgraster.py:105:11       endianness      U       # the endianness and the PostGIS Raster"
   - "django/contrib/gis/db/backends/postgis/pgraster.py:107:5        rasterheader    U       rasterheader = ("
   - "django/contrib/gis/db/backends/postgis/pgraster.py:110:13       rast            U       len(rast.bands),"
   - "django/contrib/gis/db/backends/postgis/pgraster.py:111:9        rast            U       rast.scale.x,"
@@ -2421,7 +2418,6 @@ issues:
   - "docs/_ext/djangodocs.py:123:31      starttag            U       self.body.append(self.starttag(node, \"table\", CLASS"
   - "docs/_ext/djangodocs.py:130:20      parameterlist       U       def visit_desc_parameterlist(self, node):"
   - "docs/_ext/djangodocs.py:150:21      parameterlist       U       def depart_desc_parameterlist(self, node):"
-  - "docs/_ext/djangodocs.py:155:14      callout             U       # better callout -- the Sphinx default"
   - "docs/_ext/djangodocs.py:167:15      versionmodified     U       def visit_versionmodified(self, node):"
   - "docs/_ext/djangodocs.py:168:31      starttag            U       self.body.append(self.starttag(node, \"div\", CLASS=node"
   - "docs/_ext/djangodocs.py:174:16      versionmodified     U       def depart_versionmodified(self, node):"
@@ -8398,7 +8394,6 @@ issuesSummary:
   - "text: cadeau, count: 5, files: 1,"
   - "text: cadeaux, count: 5, files: 1,"
   - "text: calendarin, count: 4, files: 1,"
-  - "text: callout, count: 1, files: 1,"
   - "text: camelcaserelatedmodel, count: 2, files: 1,"
   - "text: cand, count: 4, files: 2,"
   - "text: capi, count: 87, files: 18,"
@@ -8780,8 +8775,6 @@ issuesSummary:
   - "text: ENCTYPE, count: 3, files: 1,"
   - "text: endbadtag, count: 1, files: 1,"
   - "text: endbmatch, count: 2, files: 1,"
-  - "text: endianness, count: 2, files: 2,"
-  - "text: Endianness, count: 1, files: 1,"
   - "text: endtag, count: 3, files: 1,"
   - "text: enim, count: 3, files: 2,"
   - "text: enoent, count: 1, files: 1,"

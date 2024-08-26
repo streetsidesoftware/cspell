@@ -5,7 +5,7 @@ Args: '["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGEL
 Summary:
   files: 19549
   filesWithIssues: 12071
-  issues: 92521
+  issues: 92506
   errors: 0
 Errors: []
 
@@ -264,7 +264,6 @@ issues:
   - "doc/packaging.md:664:8          DJSON               U       -DJSON_BuildTests=OFF \\"
   - "doc/packaging.md:1199:21        epel                U       sudo dnf install -y epel-release && \\"
   - "doc/packaging.md:1237:1         Abseiil             U       Abseiil from source. Enabling"
-  - "doc/public-api.md:33:45         structs     U       including macros, classes, structs, typedefs, functions"
   - "doc/public-api.md:163:20        lgoogle     U       e.g., by using `-lgoogle_cloud_cpp_bigtable`"
   - "docfx/CMakeLists.txt:122:10         fname       U       foreach (fname IN LISTS unit_tests"
   - "docfx/doxygen_errors.cc:22:59       pugi    U       std::string_view name, pugi::xml_node node) {"
@@ -412,7 +411,6 @@ issues:
   - "external/googleapis/protolists/aiplatform.list:80:52        genai           U       cloud/aiplatform/v1:genai_tuning_service.proto"
   - "external/googleapis/protolists/aiplatform.list:97:52        migratable      U       cloud/aiplatform/v1:migratable_resource.proto"
   - "external/googleapis/protolists/aiplatform.list:132:52       tensorboard     U       cloud/aiplatform/v1:tensorboard.proto"
-  - "external/googleapis/protolists/aiplatform.list:142:52       unmanaged       U       cloud/aiplatform/v1:unmanaged_container_model.proto"
   - "external/googleapis/protolists/artifactregistry.list:10:61          vpcsc       U       artifactregistry/v1:vpcsc_config.proto"
   - "external/googleapis/protolists/baremetalsolution.list:7:59          osimage     U       baremetalsolution/v2:osimage.proto"
   - "external/googleapis/protolists/bigquery.list:4:63           datapolicy      U       bigquery/datapolicies/v1:datapolicy.proto"
@@ -452,7 +450,6 @@ issues:
   - "generator/CMakeLists.txt:288:26         everytime (every time)      U       build all the tests everytime they create a new package"
   - "generator/generator_config.proto:26:27          rpcs        U       repeated string omitted_rpcs = 4;"
   - "generator/generator_config.proto:41:35          gcpxx       U       to true generate the `gcpxxV1` alias for our inline"
-  - "generator/generator_config.proto:48:42          struct      U       ServiceNameRetryTraits struct using the provided codes"
   - "generator/generator_config.textproto:271:3          Apigee          U       # Apigee Connect"
   - "generator/generator_config.textproto:277:47         APIGEE          U       var: \"GOOGLE_CLOUD_CPP_APIGEE_CONNECTION_SERVICE_ENDPOINT"
   - "generator/generator_config.textproto:351:47         AUTOML          U       var: \"GOOGLE_CLOUD_CPP_AUTOML_PREDICTION_SERVICE_ENDPOINT"
@@ -478,7 +475,6 @@ issues:
   - "generator/integration_tests/golden/v1/internal/request_id_connection_impl.cc:187:64         foos    U       requestid::v1::Foo> result(r.foos().size());"
   - "generator/integration_tests/test.proto:357:3        oneof           U       oneof source_info {"
   - "generator/integration_tests/test.proto:972:52       UNIQUEID        U       iceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`. The `-` wildcard"
-  - "generator/integration_tests/test.proto:1205:21      Struct          U       google.protobuf.Struct json_payload = 6;"
   - "generator/integration_tests/test.proto:1260:19      projectid       U       // `projects/my-projectid/traces/06796866738c"
   - "generator/integration_tests/tests/golden_kitchen_sink_metadata_decorator_test.cc:403:54         Finstance       U       location=instances%2Finstance_bar\";"
   - "generator/integration_tests/tests/golden_kitchen_sink_metadata_decorator_test.cc:564:58         Fvalue          U       \"routing_id=%2Fvalue\")));"

@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 19549, Issues found: 92521 in 12071 files.
+ CSpell: Files checked: 19549, Issues found: 92506 in 12071 files.
  exit code: 1
 ARCHITECTURE.md:158:48    - Unknown word (googlemock) -- implementation using `googlemock`
 ARCHITECTURE.md:29:61     - Unknown word (retryable)  -- RPCs that fail with a retryable error,
@@ -261,7 +261,6 @@ doc/packaging.md:72:65     - Unknown word (NCPU)       -- consider appending `--
 doc/packaging.md:74:73     - Unknown word (nproc)      -- information using the `nproc`
 doc/packaging.md:75:38     - Unknown word (physicalcpu) -- Linux, or `sysctl -n hw.physicalcpu` on macOS.
 doc/public-api.md:163:20    - Unknown word (lgoogle)    -- e.g., by using `-lgoogle_cloud_cpp_bigtable`
-doc/public-api.md:33:45     - Unknown word (structs)    -- including macros, classes, structs, typedefs, functions
 docfx/CMakeLists.txt:122:10    - Unknown word (fname)      -- foreach (fname IN LISTS unit_tests
 docfx/README.md:55:35     - Unknown word (devrel)     -- TRAMPOLINE_IMAGE=gcr.io/cloud-devrel-kokoro-resources/docfx
 docfx/README.md:74:28     - Unknown word (xrefmap)    -- HOME/doc-pipeline/site/xrefmap.yml build-out
@@ -404,7 +403,6 @@ external/googleapis/CMakeLists.txt:86:13     - Unknown word (longrunning)    -- 
 external/googleapis/CMakeLists.txt:95:18     - Unknown word (dayofweek)      -- "google/type/dayofweek.proto"
 external/googleapis/protodeps/binaryauthorization.deps:8:25      - Unknown word (grafeas)    -- com_google_googleapis//grafeas/v1:grafeas_proto
 external/googleapis/protolists/aiplatform.list:132:52    - Unknown word (tensorboard)  -- cloud/aiplatform/v1:tensorboard.proto
-external/googleapis/protolists/aiplatform.list:142:52    - Unknown word (unmanaged)    -- cloud/aiplatform/v1:unmanaged_container_model.proto
 external/googleapis/protolists/aiplatform.list:27:59     - Unknown word (trainingjob) -- aiplatform/v1/schema/trainingjob/definition:automl_image
 external/googleapis/protolists/aiplatform.list:76:52     - Unknown word (featurestore) -- cloud/aiplatform/v1:featurestore.proto
 external/googleapis/protolists/aiplatform.list:80:52     - Unknown word (genai)        -- cloud/aiplatform/v1:genai_tuning_service.proto
@@ -449,7 +447,6 @@ generator/CMakeLists.txt:288:26    - Unknown word (everytime)  -- build all the 
 generator/generator.h:27:8      - Unknown word (microgenerator) -- * C++ microgenerator plugin entry point.
 generator/generator_config.proto:26:27     - Unknown word (rpcs)       -- repeated string omitted_rpcs = 4;
 generator/generator_config.proto:41:35     - Unknown word (gcpxx)      -- to true generate the `gcpxxV1` alias for our inline
-generator/generator_config.proto:48:42     - Unknown word (struct)     -- ServiceNameRetryTraits struct using the provided codes
 generator/generator_config.textproto:1723:15   - Unknown word (Abac)       -- "SetLegacyAbac(std::string const&,
 generator/generator_config.textproto:1832:3    - Unknown word (Dataplex)   -- # Dataplex
 generator/generator_config.textproto:1878:3    - Unknown word (Dataproc)   -- # Dataproc
@@ -472,7 +469,6 @@ generator/integration_tests/golden/v1/internal/golden_rest_only_option_defaults.
 generator/integration_tests/golden/v1/internal/golden_thing_admin_rest_stub.cc:38:38     - Unknown word (Longrunning) -- options.get<rest_internal::LongrunningEndpointOption>(), options
 generator/integration_tests/golden/v1/internal/request_id_auth_decorator.cc:72:43     - Unknown word (Foos)       -- :requestid::v1::ListFoosResponse> RequestIdServiceAuth
 generator/integration_tests/golden/v1/internal/request_id_connection_impl.cc:187:64    - Unknown word (foos)       -- requestid::v1::Foo> result(r.foos().size());
-generator/integration_tests/test.proto:1205:21   - Unknown word (Struct)     -- google.protobuf.Struct json_payload = 6;
 generator/integration_tests/test.proto:1260:19   - Unknown word (projectid)  -- // `projects/my-projectid/traces/06796866738c
 generator/integration_tests/test.proto:357:3     - Unknown word (oneof)      -- oneof source_info {
 generator/integration_tests/test.proto:972:52    - Unknown word (UNIQUEID)   -- iceAccounts/{ACCOUNT_EMAIL_OR_UNIQUEID}`. The `-` wildcard
