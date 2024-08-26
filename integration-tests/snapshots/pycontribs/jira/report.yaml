@@ -5,7 +5,7 @@ Args: '["**/*.*"]'
 Summary:
   files: 79
   filesWithIssues: 41
-  issues: 569
+  issues: 538
   errors: 0
 Errors: []
 
@@ -19,7 +19,6 @@ issues:
   - "bindep.txt:2:1          libkrb      U       libkrb5-dev [platform:dpkg"
   - "bindep.txt:2:23         dpkg        U       libkrb5-dev [platform:dpkg]"
   - "constraints.txt:9:1         asttokens           U       asttokens==2.4.1"
-  - "constraints.txt:13:11       tarfile             U       backports-tarfile==1.2.0"
   - "constraints.txt:14:11       jaraco              U       # via jaraco-context"
   - "constraints.txt:15:1        beautifulsoup       U       beautifulsoup4==4.12.3"
   - "constraints.txt:16:11       furo                U       # via furo"
@@ -30,20 +29,16 @@ issues:
   - "constraints.txt:32:9        ipython             U       # ipython"
   - "constraints.txt:33:1        defusedxml          U       defusedxml==0.7.1"
   - "constraints.txt:34:17       pyproject           U       # via jira (pyproject.toml)"
-  - "constraints.txt:35:1        docutils            U       docutils==0.21.2"
   - "constraints.txt:39:1        exceptiongroup      U       exceptiongroup==1.2.2"
   - "constraints.txt:43:1        execnet             U       execnet==2.1.1"
   - "constraints.txt:46:16       xdist               U       # pytest-xdist"
   - "constraints.txt:49:1        filemagic           U       filemagic==1.6"
   - "constraints.txt:57:1        idna                U       idna==3.8"
-  - "constraints.txt:59:1        imagesize           U       imagesize==1.4.1"
-  - "constraints.txt:61:1        importlib           U       importlib-metadata==8.4.0"
   - "constraints.txt:65:1        iniconfig           U       iniconfig==2.0.0"
   - "constraints.txt:73:8        functools           U       jaraco-functools==4.0.2"
   - "constraints.txt:83:1        markupsafe          U       markupsafe==2.1.5"
   - "constraints.txt:87:1        matplotlib          U       matplotlib-inline==0.1.7"
   - "constraints.txt:89:6        itertools           U       more-itertools==10.4.0"
-  - "constraints.txt:93:1        oauthlib            U       oauthlib==3.2.2"
   - "constraints.txt:105:1       parso               U       parso==0.8.4"
   - "constraints.txt:107:1       pexpect             U       pexpect==4.9.0"
   - "constraints.txt:111:1       pluggy              U       pluggy==1.5.0"
@@ -176,8 +171,6 @@ issues:
   - "jira/client.py:4859:30      workflowschemes     U       url = self._get_url(\"workflowschemes\")"
   - "jira/client.py:5203:33      Dalko               U       Experimental support for iDalko Grid, expect API to"
   - "jira/client.py:5205:13      igrid               U       def get_igrid(self, issueid: str,"
-  - "jira/client.py:5205:25      issueid             U       def get_igrid(self, issueid: str, customfield: str"
-  - "jira/client.py:5205:57      schemeid            U       str, customfield: str, schemeid: str):"
   - "jira/client.py:5206:40      idalko              U       server_url + \"/rest/idalko-igrid/1.0/datagrid/data"
   - "jira/client.py:5363:9       incompleted         U       def incompletedIssuesEstimateSum(self"
   - "jira/client.py:5366:28      sprintreport        U       f\"rapid/charts/sprintreport?rapidViewId={board_id"
@@ -193,7 +186,6 @@ issues:
   - "jira/resources.py:894:42        browsable                   U       URL of the issue, the browsable one not the REST one"
   - "jira/resources.py:1032:32       issuesecuritylevelscheme    U       self, \"project/{0}/issuesecuritylevelscheme?expand=user\", options"
   - "jira/resources.py:1288:14       categorised                 U       \"categorisedActors\": {"
-  - "jira/resources.py:1340:34       securitylevel               U       Resource.__init__(self, \"securitylevel/{0}\", options, session"
   - "MANIFEST.in:14:23       pycache     U       recursive-exclude * __pycache__"
   - "pyproject.toml:95:7         codespell           U       [tool.codespell]"
   - "pyproject.toml:104:9        mypy                U       \"./.mypy_cache\","
@@ -246,11 +238,9 @@ issues:
   - "tox.ini:6:1         envlist                 U       envlist ="
   - "tox.ini:14:8        basepython              U       ignore_basepython_conflict = True"
   - "tox.ini:16:1        skipdist                U       skipdist = True"
-  - "tox.ini:26:2        testenv                 U       [testenv]"
   - "tox.ini:27:1        usedevelop              U       usedevelop = True"
   - "tox.ini:34:1        sitepackages            U       sitepackages=False"
   - "tox.ini:39:23       posargs                 U       python -m pytest {posargs}"
-  - "tox.ini:40:1        setenv                  U       setenv ="
   - "tox.ini:41:21       toxinidir               U       PIP_CONSTRAINT={toxinidir}/constraints.txt"
   - "tox.ini:42:14       envdir                  U       PIP_LOG={envdir}/pip.log"
   - "tox.ini:45:5        PYTHONWARNINGS          U       PYTHONWARNINGS=ignore:DEPRECATION:"
@@ -258,7 +248,6 @@ issues:
   - "tox.ini:63:26       getpass                 U       For Windows users, getpass.get_user() needs USERNAME"
   - "tox.ini:80:6        envpython               U       {envpython} -m pre_commit autoupdate"
   - "tox.ini:80:31       autoupdate              U       envpython} -m pre_commit autoupdate"
-  - "tox.ini:86:3        changedir               U       # changedir=docs"
   - "tox.ini:90:5        PYTHONHTTPSVERIFY       U       PYTHONHTTPSVERIFY=0"
   - "tox.ini:95:9        nitpicky                U       --nitpicky --fail-on-warning \\"
   - "tox.ini:97:12       toxworkdir              U       -d \"{toxworkdir}/docs_doctree\" \\"
@@ -268,4 +257,3 @@ issues:
   - "tox.ini:116:35      shutil                  U       -c 'import os.path, shutil, sys; \\"
   - "tox.ini:118:11      isdir                   U       os.path.isdir(dist_dir) or sys.exit"
   - "tox.ini:120:10      rmtree                  U       shutil.rmtree(dist_dir)'"
-  - "tox.ini:122:7       outdir                  U       --outdir {toxinidir}/dist/ \\"

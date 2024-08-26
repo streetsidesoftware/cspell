@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: [".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 1983, Issues found: 1765 in 329 files.
+ CSpell: Files checked: 1983, Issues found: 1730 in 324 files.
  exit code: 1
 Makefile.js:116:88    - Unknown word (ined)       -- followed by the string "ined".
 Makefile.js:327:12    - Unknown word (gensite)    -- target.gensite();
@@ -33,7 +33,6 @@ README.md:302:1054  - Unknown word (Nextbase)      -- 145838380?v=4" alt="Nextba
 README.md:303:5     - Unknown word (sponsorsend)   -- <!--sponsorsend-->
 README.md:305:5     - Unknown word (techsponsorsstart) -- <!--techsponsorsstart-->
 README.md:308:5     - Unknown word (techsponsorsend)   -- <!--techsponsorsend-->
-README.md:89:125    - Unknown word (Devs)       -- [tidelift] and [HeroDevs][herodevs].
 docs/README.md:45:51     - Unknown word (openjsf)    -- ESLint contributors, [www.openjsf.org](https://www.openjsf
 docs/package.json:31:32     - Unknown word (syntaxhighlight) -- 1ty/eleventy-plugin-syntaxhighlight": "^5.0.0",
 docs/package.json:32:11     - Unknown word (munter)          -- "@munter/tap-render": "^0.2.
@@ -54,7 +53,6 @@ docs/src/assets/js/tabs.js:164:10    - Unknown word (unactivate) -- // unactivat
 docs/src/assets/js/tabs.js:225:9     - Unknown word (incrementcurrent) -- var incrementcurrentIndex = function ()
 docs/src/assets/js/tabs.js:236:9     - Unknown word (decrementcurrent) -- var decrementcurrentIndex = function ()
 docs/src/assets/js/tabs.js:97:9      - Unknown word (tabpanels)  -- var tabpanels = Array.from(el.querySelector
-docs/src/assets/js/themes.js:6:35      - Unknown word (btns)       -- disableToggle = function (btns) {
 docs/src/assets/scss/ads.scss:16:2      - Unknown word (carbonads)  -- #carbonads * {
 docs/src/assets/scss/components/docs-navigation.scss:27:6      - Unknown word (flexer)     -- .flexer {
 docs/src/assets/scss/components/search.scss:178:10    - Unknown word (docsearch)  -- .algolia-docsearch-suggestion--highlight
@@ -223,10 +221,7 @@ lib/linter/code-path-analysis/code-path-state.js:351:34    - Unknown word (expre
 lib/linter/code-path-analysis/debug-helpers.js:95:44     - Unknown word (Graphvis)   -- can be visualized with Graphvis.
 lib/linter/config-comment-parser.js:76:22     - Unknown word (commaless)  -- // Also, commaless notations have invalid
 lib/linter/config-comment-parser.js:87:20     - Unknown word (Levn)       -- debug("Levn parsing failed; falling
-lib/linter/linter.js:1077:43   - Unknown word (tdiff)         -- ruleListenersReturn.tdiff, { type: "rules", key
-lib/linter/linter.js:125:52    - Unknown word (postprocessor) -- postprocess} [postprocess] postprocessor for report
 lib/linter/linter.js:47:7      - Unknown word (jslang)     -- const jslang = require("../languages
-lib/linter/linter.js:57:30     - Unknown word (vfile)      -- VFile } = require("./vfile");
 lib/rule-tester/rule-tester.js:249:42    - Unknown word (errorize)   -- ast The root node to errorize `start`/`end` properties
 lib/rule-tester/rule-tester.js:855:27    - Unknown word (Didnt)      -- function assertASTDidntChange(beforeAST, afterAST
 lib/rules/dot-notation.js:138:63    - Unknown word (quasis)     -- node, node.property.quasis[0].value.cooked);
@@ -265,8 +260,6 @@ lib/rules/object-shorthand.js:102:54    - Unknown word (longform)   -- eralMetho
 lib/rules/space-unary-ops.js:133:28    - Unknown word (Doesnt)     -- function verifyWordDoesntHaveSpaces(node, firstToken
 lib/rules/space-unary-ops.js:246:32    - Unknown word (Dont)       -- function verifyNonWordsDontHaveSpaces(node, firstToken
 lib/rules/use-isnan.js:130:25    - Unknown word (Suggestable) -- const isSuggestable = fixableOperators.has
-lib/rules/use-isnan.js:131:25    - Unknown word (Castable)    -- const isCastable = castableOperators
-lib/rules/use-isnan.js:89:15     - Unknown word (castable)   -- const castableOperators = new Set(
 lib/rules/utils/ast-utils.js:404:40    - Unknown word (samely)     -- a.b` and `a?.b` are samely.
 package.json:109:7     - Unknown word (trunkio)    -- "@trunkio/launcher": "^1.3.0"
 package.json:129:6     - Unknown word (eslump)     -- "eslump": "^3.0.0",
@@ -417,7 +410,6 @@ tests/lib/rules/spaced-comment.js:649:23    - Unknown word (endregionfoo) -- cod
 tests/lib/rules/utils/ast-utils.js:1091:17   - Unknown word (ncde)       -- "ab\ncde\n": [[1, 0], [1, 1]
 tests/lib/rules/utils/ast-utils.js:1550:19   - Unknown word (invalidtoken) -- [["123invalidtoken", "("], false],
 tests/lib/rules/valid-typeof.js:91:40     - Unknown word (umdefined)  -- if (typeof bar === 'umdefined') {}",
-tests/lib/shared/runtime-info.js:28:25     - Unknown word (Vals)       -- param {Array} returnVals Values to be returned
 tests/lib/shared/string-utils.js:37:9      - Unknown word (uppercases) -- it("uppercases the first letter of
 tests/performance/jshint.js:10050:6   - Unknown word (Fastpath)                 -- // Fastpath empty strings
 tests/performance/jshint.js:10714:4   - Unknown word (Whoh)                     -- * Whoh there, Javascript, that
@@ -453,7 +445,6 @@ tests/performance/jshint.js:1285:3    - Unknown word (funct)         -- funct, /
 tests/performance/jshint.js:1290:3    - Unknown word (inblock)       -- inblock,
 tests/performance/jshint.js:1296:3    - Unknown word (noreach)       -- noreach,
 tests/performance/jshint.js:1301:3    - Unknown word (unuseds)       -- unuseds,
-tests/performance/jshint.js:1501:11   - Unknown word (isundef)       -- function isundef(scope, code, token,
 tests/performance/jshint.js:1502:17   - Unknown word (undefs)        -- return JSHINT.undefs.push([scope, code, token
 tests/performance/jshint.js:1586:11   - Unknown word (addlabel)      -- function addlabel(t, type, tkn, islet
 tests/performance/jshint.js:1606:31   - Unknown word (getlabel)      -- funct["(blockscope)"].getlabel(t))) {

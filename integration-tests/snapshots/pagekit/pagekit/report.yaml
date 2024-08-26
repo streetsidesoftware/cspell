@@ -4,8 +4,8 @@ Url: https://github.com/pagekit/pagekit.git
 Args: '["-e","/app/assets/codemirror","-e","/app/system/languages","**"]'
 Summary:
   files: 741
-  filesWithIssues: 210
-  issues: 631
+  filesWithIssues: 206
+  issues: 624
   errors: 0
 Errors: []
 
@@ -13,7 +13,6 @@ issues:
   - "app/assets/marked/marked.js:19:3        nptable                 U       nptable: noop,"
   - "app/assets/marked/marked.js:20:3        lheading                U       lheading: /^([^\\n]+)\\n *(=|-"
   - "app/assets/marked/marked.js:1211:27     occured (occurred)      U       return '<p>An error occured:</p><pre>'"
-  - "app/console/app.php:11:7        autoloader      U       $app['autoloader'] = $loader;"
   - "app/console/src/Commands/BuildCommand.php:32:24         lusitanian          U       '^app\\/vendor\\/lusitanian\\/oauth\\/examples',"
   - "app/console/src/Commands/BuildCommand.php:33:24         maximebf            U       '^app\\/vendor\\/maximebf\\/debugbar\\/src\\/DebugBar"
   - "app/console/src/Commands/BuildCommand.php:33:34         debugbar            U       app\\/vendor\\/maximebf\\/debugbar\\/src\\/DebugBar\\/Resources"
@@ -49,7 +48,6 @@ issues:
   - "app/installer/requirements.php:427:22       PCRE                U       defined('PCRE_VERSION'),"
   - "app/installer/requirements.php:522:46       eaccelerator        U       | (function_exists('eaccelerator_put') && ini_get('eaccelerato"
   - "app/installer/requirements.php:524:45       xcache              U       || function_exists('xcache_set');"
-  - "app/installer/src/Helper/Composer.php:145:26        Autoloader      U       ->setOptimizeAutoloader(true)"
   - "app/installer/src/Package/PackageFactory.php:176:39         NOSORT      U       paths = glob($path, GLOB_NOSORT) ?: [];"
   - "app/installer/views/installer.php:6:90          precomposed     U       rel=\"apple-touch-icon-precomposed\">"
   - "app/installer/views/installer.php:80:60         dbhost          U       label for=\"form-mysql-dbhost\" class=\"uk-form-label"

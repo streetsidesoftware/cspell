@@ -5,7 +5,7 @@ Args: '["**"]'
 Summary:
   files: 352
   filesWithIssues: 347
-  issues: 4512
+  issues: 4489
   errors: 0
 Errors: []
 
@@ -323,7 +323,6 @@ issues:
   - "doc/server_configurations.md:6244:222       joinpath            U       ls_install_path = joinpath(\\n get(DEPOT"
   - "doc/server_configurations.md:6244:346       pushfirst           U       lspconfig\"\\n )\\n pushfirst!(LOAD_PATH, ls_install"
   - "doc/server_configurations.md:6244:416       popfirst            U       LanguageServer\\n popfirst!(LOAD_PATH)\\n depot"
-  - "doc/server_configurations.md:6244:744       isempty             U       nothing ? nothing : isempty(p) ? nothing : p\\n"
   - "doc/server_configurations.md:6244:1432      runlinter           U       depot_path)\\n server.runlinter = true\\n run(server"
   - "doc/server_configurations.md:6263:1         Koka                U       Koka is a functional programming"
   - "doc/server_configurations.md:6276:37        lsstdio             U       language-server\", \"--lsstdio\" }"
@@ -490,7 +489,6 @@ issues:
   - "lua/lspconfig/server_configurations/hls.lua:27:13       chanid      U       local chanid = vim.fn.jobstart({"
   - "lua/lspconfig/server_configurations/hls.lua:28:14       jobwait     U       vim.fn.jobwait { chanid }"
   - "lua/lspconfig/server_configurations/idris2_lsp.lua:7:37         ipkg    U       util.root_pattern '*.ipkg',"
-  - "lua/lspconfig/server_configurations/intelephense.lua:27:77          tmpdir      U       dir. Defaults to os.tmpdir()."
   - "lua/lspconfig/server_configurations/intelephense.lua:29:9           licence     U       licenceKey = Optional licence"
   - "lua/lspconfig/server_configurations/jdtls.lua:50:32         codeaction      U       function on_textdocument_codeaction(err, actions, ctx)"
   - "lua/lspconfig/server_configurations/jdtls.lua:52:15         steelsojka      U       -- TODO: (steelsojka) Handle more than one"
@@ -544,8 +542,6 @@ issues:
   - "lua/lspconfig/ui/windows.lua:109:36         winhl           U       set_option(win_id, 'winhl', 'FloatBorder:LspInfoBorder"
   - "lua/lspconfig/ui/windows.lua:119:36         cursorcolumn    U       set_option(win_id, 'cursorcolumn', false)"
   - "lua/lspconfig/ui/windows.lua:121:35         shiftwidth      U       buf_set_option(bufnr, 'shiftwidth', 2)"
-  - "lua/lspconfig/util.lua:26:74        zipfile         U       or bufname:match '^zipfile://' or bufname:match"
-  - "lua/lspconfig/util.lua:26:105       tarfile         U       or bufname:match '^tarfile:' then"
   - "lua/lspconfig/util.lua:77:50        customlist      U       \"-nargs=* -complete=customlist,v:lua.something\" into"
   - "lua/lspconfig/util.lua:94:81        fargs           U       name][1](unpack(info.fargs))"
   - "lua/lspconfig/util.lua:199:41       rootdir         U       path until we find the rootdir."

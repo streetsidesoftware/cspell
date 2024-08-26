@@ -4,8 +4,8 @@ Url: https://github.com/alexiosc/megistos.git
 Args: '["--config=${repoConfig}/cspell.json","**/*.{md,c,h,html}"]'
 Summary:
   files: 583
-  filesWithIssues: 578
-  issues: 47337
+  filesWithIssues: 577
+  issues: 47252
   errors: 0
 Errors: []
 
@@ -3312,7 +3312,6 @@ issues:
   - "ATTIC/src/modules/emailclubs/clubhdr.c:269:30       keyreadax       U       owns (uacc, clubhdr.keyreadax))"
   - "ATTIC/src/modules/emailclubs/clubhdr.c:297:36       CLUBAXDIR       U       fname, \"%s/%s\", mkfname (CLUBAXDIR), uacc->userid);"
   - "ATTIC/src/modules/emailclubs/clublist.c:3:16        clublist        U       ** FILE: clublist.c"
-  - "ATTIC/src/modules/emailclubs/clublist.c:83:1        msglist         U       msglist (int msg, int method"
   - "ATTIC/src/modules/emailclubs/clublist.c:99:29       LASTMSG         U       msgno != msg && msg != LASTMSG && msg >= 0)"
   - "ATTIC/src/modules/emailclubs/clublist.c:117:10      nextone         U       goto nextone;"
   - "ATTIC/src/modules/emailclubs/clublist.c:140:5       showheader      U       showheader (clubhdr.club, &m);"
@@ -3522,7 +3521,6 @@ issues:
   - "ATTIC/src/modules/emailclubs/download.c:139:28      dnlatt      U       sprintf (dnldir, TMPDIR \"/dnlatt%d%lx\", getpid (), time"
   - "ATTIC/src/modules/emailclubs/download.c:152:24      ESDNLS      U       strcpy (audit[0], AUS_ESDNLS);"
   - "ATTIC/src/modules/emailclubs/download.c:156:24      ESDNLF      U       strcpy (audit[2], AUS_ESDNLF);"
-  - "ATTIC/src/modules/emailclubs/ecdbase.h:80:9         DATAFILE    U       #define DATAFILE \".DATA\""
   - "ATTIC/src/modules/emailclubs/email.c:71:48          newclubmsgs         U       for new mail. Fixed newclubmsgs()"
   - "ATTIC/src/modules/emailclubs/email.c:74:24          writeecuser         U       Also, added call to writeecuser() to save the user's"
   - "ATTIC/src/modules/emailclubs/email.c:185:1          makenewqsc          U       makenewqsc ()"
@@ -3887,7 +3885,6 @@ issues:
   - "ATTIC/src/modules/files/cache.c:119:1       incache             U       incache (struct libidx *lib"
   - "ATTIC/src/modules/files/cache.c:137:1       cachesel            U       cachesel (const struct dirent"
   - "ATTIC/src/modules/files/cache.c:171:1       linkfile            U       linkfile (struct libidx *lib"
-  - "ATTIC/src/modules/files/cache.c:203:39      fileidx             U       libidx *lib, struct fileidx *file)"
   - "ATTIC/src/modules/files/cache.c:205:18      getlibgroup         U       int group = getlibgroup (lib);"
   - "ATTIC/src/modules/files/cache.c:229:7       obtainliblock       U       if (!obtainliblock (lib, sldevto, \"caching"
   - "ATTIC/src/modules/files/cache.c:229:27      sldevto             U       obtainliblock (lib, sldevto, \"caching\")) {"
@@ -3971,7 +3968,6 @@ issues:
   - "ATTIC/src/modules/files/dbfile.c:55:30          filegetoldest           U       a pair of functions filegetoldest() and"
   - "ATTIC/src/modules/files/dbfile.c:56:4           filegetnextoldest       U       * filegetnextoldest() to traverse files"
   - "ATTIC/src/modules/files/dbfile.c:87:22          FILELIBDBDIR            U       d_dbfpath (mkfname (FILELIBDBDIR));"
-  - "ATTIC/src/modules/files/dbfile.c:101:17         FILEIDX                 U       if (d_fillnew (FILEIDX, file) == S_OKAY)"
   - "ATTIC/src/modules/files/dbfile.c:112:6          fileexists              U       if (fileexists (file->flibnum, file"
   - "ATTIC/src/modules/files/dbfile.c:122:1          fileupdate              U       fileupdate (struct fileidx *file"
   - "ATTIC/src/modules/files/dbfile.c:137:9          statlibfn               U       struct statlibfn key;"
@@ -4046,7 +4042,6 @@ issues:
   - "ATTIC/src/modules/files/fileops.c:133:1         loadslowdevs    U       loadslowdevs ()"
   - "ATTIC/src/modules/files/fileops.c:184:1         initslowdevs    U       initslowdevs ()"
   - "ATTIC/src/modules/files/fileops.c:193:43        MBKDIR          U       files.mbk\", mkfname (MBKDIR));"
-  - "ATTIC/src/modules/files/fileops.c:216:11        devs            U       int devs[512], ndevs = 0;"
   - "ATTIC/src/modules/files/fileops.c:216:22        ndevs           U       int devs[512], ndevs = 0;"
   - "ATTIC/src/modules/files/fileops.c:268:29        lastgroup       U       int lastlibnum = -1, lastgroup = -1;"
   - "ATTIC/src/modules/files/fileops.c:291:1         checkliblock    U       checkliblock (struct libidx *lib"
@@ -4196,7 +4191,6 @@ issues:
   - "ATTIC/src/modules/files/opdisapp.c:100:1        disapprovefile          U       disapprovefile (struct libidx *l, char"
   - "ATTIC/src/modules/files/opedit.c:81:13          olddir      U       char *olddir, int libnum, int *changes"
   - "ATTIC/src/modules/files/opedit.c:84:10          statedir    U       int statedir = 0, res;"
-  - "ATTIC/src/modules/files/opedit.c:118:14         newdir      U       char newdir[256];"
   - "ATTIC/src/modules/files/operations.c:45:30          ADDTREE         U       command entries for ADDTREE and DELTREE."
   - "ATTIC/src/modules/files/operations.c:45:42          DELTREE         U       entries for ADDTREE and DELTREE."
   - "ATTIC/src/modules/files/operations.c:87:4           LIBDEL          U       {\"LIBDEL\", 1, op_delete},"
@@ -6348,7 +6342,6 @@ issues:
   - "src/libmegistos/format.c:202:12         LINELEN             U       static int LINELEN = 80;"
   - "src/libmegistos/format.c:204:12         LMARGIN             U       static int LMARGIN = 0;"
   - "src/libmegistos/format.c:205:12         SINDLM              U       static int SINDLM = 0;"
-  - "src/libmegistos/format.c:207:12         xpos                U       static int xpos = 0;"
   - "src/libmegistos/format.c:209:12         plidx               U       static int plidx = 0;"
   - "src/libmegistos/format.c:211:12         comidx              U       static int comidx = 0;"
   - "src/libmegistos/format.c:212:12         comstate            U       static int comstate = 0;"

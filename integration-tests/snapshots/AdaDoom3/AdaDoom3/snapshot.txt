@@ -3,7 +3,7 @@ Repository: AdaDoom3/AdaDoom3
 Url: "https://github.com/AdaDoom3/AdaDoom3.git"
 Args: ["**/*.*"]
 Lines:
- CSpell: Files checked: 103, Issues found: 3237 in 98 files.
+ CSpell: Files checked: 103, Issues found: 3164 in 98 files.
  exit code: 1
 Engine/Assembly/PPC/neo-engine-cpu.adb:5:78      - Unknown word (Squirek)    -- Copyright (C) 2016 Justin Squirek
 Engine/Assembly/x86-64/neo-engine-cpu.adb:100:111   - Unknown word (POPCNT)     -- ECX_Register, 23); -- POPCNT
@@ -83,11 +83,6 @@ Engine/Systems/SDL/neo-engine-system-console.adb:79:13     - Unknown word (Fulls
 Engine/Systems/SDL/neo-engine-system.adb:106:74    - Unknown word (Fullscreen) -- Height : Int_4_Positive; Fullscreen : Bool) is
 Engine/Systems/SDL/neo-engine-system.adb:130:12    - Unknown word (Fullscreen) -- function Fullscreen_Only return Bool is
 Engine/Systems/SDL/neo-engine-system.adb:188:12    - Unknown word (HWND)       -- -- Main "HWND"s for the invisible
-Engine/Systems/SDL/neo-engine-system.adb:203:6     - Unknown word (Vulkan)     -- -- Vulkan --
-Engine/Systems/SDL/neo-engine-system.adb:207:3     - Unknown word (Vulkan)     -- Vulkan_DLL : Ptr := LoadLibraryW
-Engine/Systems/SDL/neo-engine-system.adb:210:16    - Unknown word (Vulkan)     -- function Get_Vulkan_Subprogram (Name : Str
-Engine/Systems/SDL/neo-engine-system.adb:210:78    - Unknown word (Vulkan)     -- is (GetProcAddress (Vulkan_DLL, To_Str_8_C (Name
-Engine/Systems/SDL/neo-engine-system.adb:213:16    - Unknown word (Vulkan)     -- function Get_Vulkan_Extension return Str
 Engine/Systems/SDL/neo-engine-system.adb:268:12    - Unknown word (Fullscreen) -- function Fullscreen_Only return Bool;
 Engine/Systems/SDL/neo-engine-system.adb:270:69    - Unknown word (cvars)      -- Set Activated and Mode cvars
 Engine/Systems/SDL/neo-engine-system.adb:47:41     - Unknown word (Fullscreen) -- (Path : Str_2; Fullscreen : Bool) is null;
@@ -166,10 +161,6 @@ Engine/Systems/Win32/neo-engine-system-console.adb:628:107   - Unknown word (LIN
 Engine/Systems/Win32/neo-engine-system-console.adb:628:95    - Unknown word (VSCROLL)             -- SendMessageW (Output_Box, WM_VSCROLL, SB_LINEDOWN, 0)); end
 Engine/Systems/Win32/neo-engine-system-console.adb:632:48    - Unknown word (SETREDRAW)           -- SendMessageW (Output_Box, WM_SETREDRAW, 1, 0));
 Engine/Systems/Win32/neo-engine-system-console.adb:637:16    - Unknown word (Outter)              -- end loop Outter;
-Engine/Systems/Win32/neo-engine-system.adb:100:3     - Unknown word (Vulkan)     -- Vulkan_DLL : Ptr := LoadLibraryW
-Engine/Systems/Win32/neo-engine-system.adb:103:16    - Unknown word (Vulkan)     -- function Get_Vulkan_Subprogram (Name : Str
-Engine/Systems/Win32/neo-engine-system.adb:103:78    - Unknown word (Vulkan)     -- is (GetProcAddress (Vulkan_DLL, To_Str_8_C (Name
-Engine/Systems/Win32/neo-engine-system.adb:106:16    - Unknown word (Vulkan)     -- function Get_Vulkan_Extension return Ptr
 Engine/Systems/Win32/neo-engine-system.adb:140:28    - Unknown word (GMEM)       -- Data := GlobalAlloc (GMEM_MOVEABLE, Text_Array
 Engine/Systems/Win32/neo-engine-system.adb:151:36    - Unknown word (UNICODETEXT) -- SetClipboardData (CF_UNICODETEXT, Data));
 Engine/Systems/Win32/neo-engine-system.adb:161:36    - Unknown word (UNICODETEXT) -- GetClipboardData (CF_UNICODETEXT); Assert (Data);
@@ -329,7 +320,6 @@ Engine/Systems/Win32/neo-engine-system.adb:950:44    - Unknown word (DPAD)      
 Engine/Systems/Win32/neo-engine-system.adb:951:44    - Unknown word (DPAD)               -- Button (I, XINPUT_GAMEPAD_DPAD_LEFT, DPad_Left
 Engine/Systems/Win32/neo-engine-system.adb:952:44    - Unknown word (DPAD)               -- Button (I, XINPUT_GAMEPAD_DPAD_RIGHT, DPad_Right
 Engine/Systems/Win32/neo-engine-system.adb:954:14    - Unknown word (Thumbsticks)        -- -- Thumbsticks
-Engine/Systems/Win32/neo-engine-system.adb:96:6      - Unknown word (Vulkan)     -- -- Vulkan --
 Engine/main.adb:128:28    - Unknown word (Fullscreen) -- if Mode.Get /= Fullscreen_Mode then Clip_Cursor
 Engine/main.adb:159:43    - Unknown word (Fullscreen) -- Multi_Monitor_Mode | Fullscreen_Mode =>
 Engine/main.adb:214:24    - Unknown word (framebuffer) -- -- Restart the framebuffer if our resolution changed
@@ -903,16 +893,12 @@ Engine/neo-api-vulkan.adb:125:15    - Unknown word (Swapchain)   -- vkCreateSwap
 Engine/neo-api-vulkan.adb:125:72    - Unknown word (Swapchain)   -- := To_Ptr_vkCreateSwapchainKHR
 Engine/neo-api-vulkan.adb:126:12    - Unknown word (Swapchain)   -- vkGetSwapchainImagesKHR
 Engine/neo-api-vulkan.adb:126:69    - Unknown word (Swapchain)   -- := To_Ptr_vkGetSwapchainImagesKHR
-Engine/neo-api-vulkan.adb:19:22     - Unknown word (Vulkan)     -- package body Neo.API.Vulkan is
 Engine/neo-api-vulkan.adb:5:76      - Unknown word (Squirek)    -- Copyright (C) 2020 Justin Squirek
-Engine/neo-api-vulkan.adb:73:36     - Unknown word (Vulkan)     -- function pointers to the Vulkan dynamic library
-Engine/neo-api-vulkan.adb:75:54     - Unknown word (Vulkan)     -- return Ptr renames Get_Vulkan_Subprogram;
 Engine/neo-api-vulkan.ads:1008:6    - Unknown word (SLUMINANCE)     -- GL_SLUMINANCE
 Engine/neo-api-vulkan.ads:1010:6    - Unknown word (SLUMINANCE)     -- GL_SLUMINANCE_ALPHA
 Engine/neo-api-vulkan.ads:1016:6    - Unknown word (BGRA)           -- GL_BGRA
 Engine/neo-api-vulkan.ads:1027:6    - Unknown word (BGRA)           -- GL_BGRA_INTEGER
 Engine/neo-api-vulkan.ads:104:8     - Unknown word (Framebuffer) -- -- VkFramebufferCreateFlags
-Engine/neo-api-vulkan.ads:110:15    - Unknown word (Mipmap)      -- -- VkSamplerMipmapMode
 Engine/neo-api-vulkan.ads:1143:6    - Unknown word (SLUMINANCE)     -- GL_SLUMINANCE8
 Engine/neo-api-vulkan.ads:1159:6    - Unknown word (SLUMINANCE)     -- GL_SLUMINANCE8_ALPHA8
 Engine/neo-api-vulkan.ads:1189:17   - Unknown word (SLUMINANCE)     -- GL_COMPRESSED_SLUMINANCE
@@ -937,10 +923,7 @@ Engine/neo-api-vulkan.ads:1234:29   - Unknown word (BPPV)          -- COMPRESSED
 Engine/neo-api-vulkan.ads:1235:29   - Unknown word (BPPV)          -- COMPRESSED_RGBA_PVRTC_2BPPV2_IMG : constant
 Engine/neo-api-vulkan.ads:124:8     - Unknown word (Swapchain)   -- -- VkSwapchainKHR
 Engine/neo-api-vulkan.ads:131:8     - Unknown word (Framebuffer) -- -- VkFramebuffer
-Engine/neo-api-vulkan.ads:1426:7    - Unknown word (mipmap)        -- mipmapMode : Int
-Engine/neo-api-vulkan.ads:1426:73   - Unknown word (Mipmap)        -- -- VkSamplerMipmapMode
 Engine/neo-api-vulkan.ads:1438:7    - Unknown word (unnormalized)  -- unnormalizedCoordinates : Int_Unsigned
-Engine/neo-api-vulkan.ads:145:57    - Unknown word (vulkan)      -- _C := To_Str_16_C ("vulkan-1.dll");
 Engine/neo-api-vulkan.ads:1494:15   - Unknown word (Subresource)   -- type VkImageSubresourceLayers;
 Engine/neo-api-vulkan.ads:1495:19   - Unknown word (Subresource)   -- type Ptr_VkImageSubresourceLayers is access all
 Engine/neo-api-vulkan.ads:1495:58   - Unknown word (Subresource)   -- is access all VkImageSubresourceLayers with Convention
@@ -959,7 +942,6 @@ Engine/neo-api-vulkan.ads:1693:25   - Unknown word (Multisample)   -- shaderStor
 Engine/neo-api-vulkan.ads:1716:15   - Unknown word (Multisample)   -- variableMultisampleRate
 Engine/neo-api-vulkan.ads:1731:10   - Unknown word (Texel)         -- maxTexelBufferElements
 Engine/neo-api-vulkan.ads:1782:10   - Unknown word (Texel)         -- subTexelPrecisionBits
-Engine/neo-api-vulkan.ads:1783:7    - Unknown word (mipmap)        -- mipmapPrecisionBits
 Engine/neo-api-vulkan.ads:1788:10   - Unknown word (Viewports)     -- maxViewports
 Engine/neo-api-vulkan.ads:178:18    - Unknown word (SRGB)        -- VK_COLOR_SPACE_SRGB_NONLINEAR_KHR : constant
 Engine/neo-api-vulkan.ads:1793:10   - Unknown word (Texel)         -- minTexelBufferOffsetAlignment
@@ -973,14 +955,8 @@ Engine/neo-api-vulkan.ads:1807:7    - Unknown word (framebuffer)   -- framebuffe
 Engine/neo-api-vulkan.ads:1808:7    - Unknown word (framebuffer)   -- framebufferStencilSampleCounts
 Engine/neo-api-vulkan.ads:1809:7    - Unknown word (framebuffer)   -- framebufferNoAttachmentsSampleCounts
 Engine/neo-api-vulkan.ads:1841:26   - Unknown word (Multisample)   -- residencyStandard2DMultisampleBlockShape : Int_Unsigned
-Engine/neo-api-vulkan.ads:192:14    - Unknown word (MIPMAP)      -- VK_SAMPLER_MIPMAP_MODE_NEAREST : constant
-Engine/neo-api-vulkan.ads:192:78    - Unknown word (Mipmap)      -- C := 0; -- VkSamplerMipmapMode
-Engine/neo-api-vulkan.ads:193:14    - Unknown word (MIPMAP)      -- VK_SAMPLER_MIPMAP_MODE_LINEAR : constant
-Engine/neo-api-vulkan.ads:193:78    - Unknown word (Mipmap)      -- C := 1; -- VkSamplerMipmapMode
 Engine/neo-api-vulkan.ads:1954:7    - Unknown word (subresource)   -- subresourceRange : VkImageSubresourceR
-Engine/neo-api-vulkan.ads:19:26     - Unknown word (Vulkan)     -- Custom binding to the Vulkan API: http://web.archive
 Engine/neo-api-vulkan.ads:209:26    - Unknown word (DONT)        -- ATTACHMENT_STORE_OP_DONT_CARE : constant Int
-Engine/neo-api-vulkan.ads:20:17     - Unknown word (Vulkan)     -- package Neo.API.Vulkan is
 Engine/neo-api-vulkan.ads:2153:7    - Unknown word (swapchain)     -- swapchainCount : Int_Unsigned
 Engine/neo-api-vulkan.ads:2154:8    - Unknown word (Swapchains)    -- pSwapchains : Ptr_Ptr
 Engine/neo-api-vulkan.ads:219:25    - Unknown word (DONT)        -- VK_ATTACHMENT_LOAD_OP_DONT_CARE : constant Int
@@ -994,7 +970,6 @@ Engine/neo-api-vulkan.ads:246:86    - Unknown word (Subpass)     -- Unsigned_C :
 Engine/neo-api-vulkan.ads:247:6     - Unknown word (SUBPASS)     -- VK_SUBPASS_CONTENTS_SECONDARY_COMMAND
 Engine/neo-api-vulkan.ads:247:86    - Unknown word (Subpass)     -- Unsigned_C := 1; -- VkSubpassContents
 Engine/neo-api-vulkan.ads:2483:7    - Unknown word (subpass)       -- subpass : Int_Unsigned
-Engine/neo-api-vulkan.ads:24:23     - Unknown word (Vulkan)     -- with function Get_Vulkan_Subprogram (Name : Str
 Engine/neo-api-vulkan.ads:2516:10   - Unknown word (Subpass)       -- type VkSubpassDescription;
 Engine/neo-api-vulkan.ads:2552:61   - Unknown word (FRAMEBUFFER)   -- = VK_STRUCTURE_TYPE_FRAMEBUFFER_CREATE_INFO; -- VkStructureTy
 Engine/neo-api-vulkan.ads:2572:7    - Unknown word (subpass)       -- subpassCount : Int_Unsigned
@@ -1010,7 +985,6 @@ Engine/neo-api-vulkan.ads:2785:32   - Unknown word (AABBNV)        -- pNext : Pt
 Engine/neo-api-vulkan.ads:2786:7    - Unknown word (aabb)          -- aabbData : Ptr
 Engine/neo-api-vulkan.ads:2787:10   - Unknown word (AABBs)         -- numAABBs : Int_Unsigned_C
 Engine/neo-api-vulkan.ads:2820:7    - Unknown word (aabbs)         -- aabbs : VkGeometryAABBNV
-Engine/neo-api-vulkan.ads:2933:56   - Unknown word (Vulkan)        -- format to the equivalent Vulkan one
 Engine/neo-api-vulkan.ads:3008:83   - Unknown word (UFLOAT)        -- VK_FORMAT_B10G11R11_UFLOAT_PACK32,
 Engine/neo-api-vulkan.ads:3009:82   - Unknown word (UFLOAT)        -- VK_FORMAT_E5B9G9R9_UFLOAT_PACK32,
 Engine/neo-api-vulkan.ads:3020:37   - Unknown word (LATC)          -- COMPRESSED_LUMINANCE_LATC1_EXT =
@@ -1494,11 +1468,6 @@ Engine/neo-core-compression.ads:5:78      - Unknown word (Squirek)    -- Copyrig
 Engine/neo-core-console.adb:102:73    - Unknown word (cvar)       -- NULL_STR_UNBOUND; -- A cvar that goes out of scope
 Engine/neo-core-console.adb:16:33     - Unknown word (perserve)   -- Optimize string stuff, perserve config comments, and
 Engine/neo-core-console.adb:201:14    - Unknown word (cvar)       -- -- Maximum cvar values displayable after
-Engine/neo-core-console.adb:217:9     - Unknown word (Vals)       -- Vals : Str_Unbound := NULL
-Engine/neo-core-console.adb:220:13    - Unknown word (Vals)       -- Vals := U (Var_T'First'Wide
-Engine/neo-core-console.adb:223:18    - Unknown word (Vals)       -- if Vals = NULL_STR_UNBOUND then
-Engine/neo-core-console.adb:223:47    - Unknown word (Vals)       -- NULL_STR_UNBOUND then Vals := " " & U (I'Wide_Image
-Engine/neo-core-console.adb:224:20    - Unknown word (Vals)       -- else Vals := Vals & ", " & U
 Engine/neo-core-console.adb:238:46    - Unknown word (cvar)       -- Incorrect parameter for cvar """ & Name & """: "
 Engine/neo-core-console.adb:271:42    - Unknown word (cvar)       -- Incorrect parameter for cvar """ & Name & """: "
 Engine/neo-core-console.adb:340:58    - Unknown word (cvar)       -- Text); Line ("No such cvar or command!"); end;
@@ -1587,17 +1556,8 @@ Engine/neo-data-game.ads:45:59     - Unknown word (archtoolbox) -- Percent := 0.
 Engine/neo-data-game.ads:5:76      - Unknown word (Squirek)    -- Copyright (C) 2020 Justin Squirek
 Engine/neo-data-game.ads:65:25     - Unknown word (Subview)     -- type Sort_Kind    is (Subview_Sort, GUI_Sort,
 Engine/neo-data-game.ads:79:7      - Unknown word (Prefilter)   -- Prefilter : Texture_Name
-Engine/neo-data-texture.adb:37:9      - Unknown word (Mipmaps)    -- Mipmaps,
-Engine/neo-data-texture.adb:52:16     - Unknown word (mipmap)     -- -- Fixup mipmap values - according to
-Engine/neo-data-texture.adb:52:59     - Unknown word (mipmaps)    -- according to the spec zero mipmaps also happens to mean
-Engine/neo-data-texture.adb:52:92     - Unknown word (mipmap)     -- happens to mean one mipmap
-Engine/neo-data-texture.adb:53:17     - Unknown word (Mipmaps)    -- if Header.Mipmaps = 0 then Header.Mipmaps
-Engine/neo-data-texture.adb:53:41     - Unknown word (Mipmaps)    -- Mipmaps = 0 then Header.Mipmaps := 1; end if;
 Engine/neo-data-texture.adb:5:76      - Unknown word (Squirek)    -- Copyright (C) 2020 Justin Squirek
 Engine/neo-data-texture.adb:72:88     - Unknown word (UNORM)      -- then VK_FORMAT_R8G8B8A8_UNORM
-Engine/neo-data-texture.adb:77:57     - Unknown word (Mipmaps)    -- (Data_Size), Header.Mipmaps, Header.Faces, Header
-Engine/neo-data-texture.ads:16:14     - Unknown word (Vulkan)     -- with Neo.API.Vulkan; use Neo.API.Vulkan
-Engine/neo-data-texture.ads:16:34     - Unknown word (Vulkan)     -- Vulkan; use Neo.API.Vulkan;
 Engine/neo-data-texture.ads:28:45     - Unknown word (preferribly) -- textures through KTX1 (preferribly generated through PVRTexTool
 Engine/neo-data-texture.ads:29:102    - Unknown word (Orienation)  -- have the correct KTXOrienation of "S=r,T=u,R=i"
 Engine/neo-data-texture.ads:42:22     - Unknown word (PVRTC)       -- -- PVRTC1_4_RGB, PVRTC1_2_RGB, PVRTC1_2,
@@ -1610,7 +1570,6 @@ Engine/neo-data-texture.ads:43:36     - Unknown word (ASTC)        -- , ASTC_5x4
 Engine/neo-data-texture.ads:43:48     - Unknown word (ASTC)        -- x4, ASTC_5x5,   ASTC_6x5, ASTC_6x6,   ASTC
 Engine/neo-data-texture.ads:43:60     - Unknown word (ASTC)        -- ASTC_5x5, ASTC_6x5,   ASTC_6x6, ASTC_8x5,   ASTC
 Engine/neo-data-texture.ads:43:8      - Unknown word (ASTC)        -- -- ASTC_4x4, ASTC_5x4,
-Engine/neo-data-texture.ads:53:7      - Unknown word (Mipmaps)     -- Mipmaps,
 Engine/neo-data-texture.ads:5:76      - Unknown word (Squirek)    -- Copyright (C) 2020 Justin Squirek
 Engine/neo-data.adb:1186:36   - Unknown word (dimensinal)   -- -- Parse multi-dimensinal
 Engine/neo-data.adb:1189:40   - Unknown word (curlies)      -- -- Jump over the curlies
@@ -1682,11 +1641,6 @@ Engine/neo-engine.adb:431:151   - Unknown word (Gamepad)        -- Id); begin if
 Engine/neo-engine.adb:431:193   - Unknown word (Gamepad)        -- /= Down then Device.Gamepad (Button) := (Down, Clock
 Engine/neo-engine.adb:431:53    - Unknown word (Gamepad)        -- Int_Ptr; Button  : Gamepad_Kind; Down : Bool)
 Engine/neo-engine.adb:445:20    - Unknown word (descriminate)   -- -- Setters for descriminate unions
-Engine/neo-engine.adb:46:10     - Unknown word (Vulkan)     -- -- Vulkan
-Engine/neo-engine.adb:47:28     - Unknown word (Vulkan)     -- procedure Initialize_Vulkan_Library;
-Engine/neo-engine.adb:48:26     - Unknown word (Vulkan)     -- procedure Finalize_Vulkan_Library;
-Engine/neo-engine.adb:49:23     - Unknown word (Vulkan)     -- function Create_Vulkan_Surface (Instance :
-Engine/neo-engine.adb:50:20     - Unknown word (Vulkan)     -- function Get_Vulkan_Subprogram (Name
 Engine/neo-engine.adb:527:100   - Unknown word (recieve)        -- as such it will never recieve an up, so force it
 Engine/neo-engine.adb:533:24    - Unknown word (gamepads)       -- -- Combine gamepads
 Engine/neo-engine.adb:568:32    - Unknown word (Dont)           -- Args.Clear; -- Dont register clicks or cursor
@@ -1696,8 +1650,6 @@ Engine/neo-engine.adb:91:73     - Unknown word (cvars)      -- Set Activated and
 Engine/neo-engine.ads:137:27    - Unknown word (cvar)       -- Enumerated types for cvar settings
 Engine/neo-engine.ads:138:27    - Unknown word (Fullscreen) -- type Mode_Kind      is (Fullscreen_Mode, Multi_Monitor
 Engine/neo-engine.ads:148:68    - Unknown word (cvars)      -- Set Activated and Mode cvars
-Engine/neo-engine.ads:16:14     - Unknown word (Vulkan)     -- with Neo.API.Vulkan; use Neo.API.Vulkan
-Engine/neo-engine.ads:16:36     - Unknown word (Vulkan)     -- Vulkan; use Neo.API.Vulkan;
 Engine/neo-engine.ads:174:67    - Unknown word (Gamepad)    -- Mouse_Device, Gamepad_Device);
 Engine/neo-engine.ads:175:46    - Unknown word (Gamepad)    -- Stick_Impulse, Gamepad_Impulse, Trigger
 Engine/neo-engine.ads:177:8     - Unknown word (Gamepad)    -- type Gamepad_Kind is (Y_Button,
@@ -1722,9 +1674,6 @@ Engine/neo-engine.ads:416:25    - Unknown word (SIMD)         -- Has_Streaming_S
 Engine/neo-engine.ads:418:15    - Unknown word (Carryless)    -- Has_Carryless_Multiplication_Of_Two
 Engine/neo-engine.ads:428:15    - Unknown word (Hyperthreading) -- Has_Hyperthreading
 Engine/neo-engine.ads:5:76      - Unknown word (Squirek)    -- Copyright (C) 2020 Justin Squirek
-Engine/neo-engine.ads:62:6      - Unknown word (Vulkan)     -- -- Vulkan --
-Engine/neo-engine.ads:65:24     - Unknown word (Vulkan)     -- procedure Initialize_Vulkan_Library;
-Engine/neo-engine.ads:66:22     - Unknown word (Vulkan)     -- procedure Finalize_Vulkan_Library;
 Engine/neo-engine.ads:82:115    - Unknown word (cvars)      -- protected types and cvars)
 Engine/neo-engine.ads:82:24     - Unknown word (spawnable)  -- - Package to create spawnable tasks in a simple way
 Engine/neo-world-animation.adb:5:78      - Unknown word (Squirek)    -- Copyright (C) 2016 Justin Squirek
@@ -1974,7 +1923,6 @@ Engine/neo-world-graphics-renderer.adb:653:85    - Unknown word (Rectange)    --
 Engine/neo-world-graphics-renderer.adb:658:85    - Unknown word (Rectange)    -- Unchecked_Access, 1, Clear_Rectange'Unchecked_Access);
 Engine/neo-world-graphics-renderer.adb:671:16    - Unknown word (Textur)      -- -- Light_To_Textur : Matrix_4D   := ZERO
 Engine/neo-world-graphics-renderer.adb:700:9     - Unknown word (Overbright)  -- -- Overbright.Set (lightScale
-Engine/neo-world-graphics-renderer.adb:750:65    - Unknown word (Vulkan)      -- := To_Vulkan (COLOR_BLACK);
 Engine/neo-world-graphics-renderer.adb:763:28    - Unknown word (Skybox)      -- when Skybox_Cube_Map => SkyBox_Pass
 Engine/neo-world-graphics-renderer.adb:889:103   - Unknown word (ZFAIL)       -- KEEP | GLS_STENCIL_OP_ZFAIL_DECR | GLS_STENCIL_OP
 Engine/neo-world-graphics-renderer.adb:889:109   - Unknown word (DECR)        -- GLS_STENCIL_OP_ZFAIL_DECR | GLS_STENCIL_OP_PASS
@@ -2022,12 +1970,10 @@ Engine/neo-world-graphics.adb:1252:42   - Unknown word (swapchain)      -- swapc
 Engine/neo-world-graphics.adb:1259:44   - Unknown word (swapchain)      -- swapchain => Swapchain
 Engine/neo-world-graphics.adb:1320:28   - Unknown word (reate)          -- - Reset the indexes reate the inital view
 Engine/neo-world-graphics.adb:1320:38   - Unknown word (inital)         -- the indexes reate the inital view
-Engine/neo-world-graphics.adb:1339:26   - Unknown word (Vulkan)         -- procedure Initialize_Vulkan_Subprograms is new API
 Engine/neo-world-graphics.adb:1379:54   - Unknown word (ppenabled)      -- ppenabledExtensionNames => Instance
 Engine/neo-world-graphics.adb:1380:103  - Unknown word (DEBUGING)       -- if Is_Debugging then DEBUGING_EXTENSIONS'Length else
 Engine/neo-world-graphics.adb:1381:81   - Unknown word (DEBUGING)       -- ppEnabledLayerNames => DEBUGING_EXTENSIONS (1)'Address
 Engine/neo-world-graphics.adb:1396:50   - Unknown word (ppenabled)      -- ppenabledExtensionNames => DEVICE
-Engine/neo-world-graphics.adb:1450:22   - Unknown word (Vulkan's)       -- Info ("Using Vulkan's debugging layer requires
 Engine/neo-world-graphics.adb:1473:75   - Unknown word (aquire)         -- surface support; then aquire it
 Engine/neo-world-graphics.adb:1501:28   - Unknown word (SWAPCHAIN)      -- if SUPPORTED_SWAPCHAIN_FORMAT = Surface_Image
 Engine/neo-world-graphics.adb:1667:79   - Unknown word (SPIR)           -- each with their own SPIR-V program
@@ -2059,13 +2005,10 @@ Engine/neo-world-graphics.adb:252:52    - Unknown word (Framebuffer) -- aitForFe
 Engine/neo-world-graphics.adb:259:32    - Unknown word (framebuffer) -- Render_Pass_Begin_Info.framebuffer := Framebuffer (Positive
 Engine/neo-world-graphics.adb:259:88    - Unknown word (Swapchain)   -- Positive (Image_Index + 1)).Swapchain_Buffer;
 Engine/neo-world-graphics.adb:260:101   - Unknown word (SUBPASS)     -- Unchecked_Access, VK_SUBPASS_CONTENTS_INLINE);
-Engine/neo-world-graphics.adb:313:43    - Unknown word (Vulkan)      -- is (Neo.API.Vulkan.vkQueueSubmit (Queue
 Engine/neo-world-graphics.adb:371:74    - Unknown word (avaliable)   -- the staging buffer is avaliable
 Engine/neo-world-graphics.adb:387:23    - Unknown word (Subresource) -- imageSubresource => (aspectMask
 Engine/neo-world-graphics.adb:399:18    - Unknown word (subresource) -- subresourceRange => (aspectMask
-Engine/neo-world-graphics.adb:455:20    - Unknown word (Vulkan)      -- -- Calculate the Vulkan memory flags based on
 Engine/neo-world-graphics.adb:49:6      - Unknown word (Samper)     -- -- Samper --
-Engine/neo-world-graphics.adb:522:84    - Unknown word (Vulkan)      -- same page - see the Vulkan spec "Buffer-Image Granularit
 Engine/neo-world-graphics.adb:5:76      - Unknown word (Squirek)    -- Copyright (C) 2020 Justin Squirek
 Engine/neo-world-graphics.adb:773:10    - Unknown word (Verticies)   -- -- Verticies
 Engine/neo-world-graphics.adb:783:14    - Unknown word (Indicies)    -- Mesh_Indicies : Array_x2_Int_32_Unsigned
@@ -2076,16 +2019,8 @@ Engine/neo-world-graphics.adb:797:49    - Unknown word (Indicies)    -- Data_Siz
 Engine/neo-world-graphics.adb:837:24    - Unknown word (sepcial)     -- -- Fetch our sepcial "handle" used to Id
 Engine/neo-world-graphics.adb:860:112   - Unknown word (SFLOAT)      -- VK_FORMAT_R32G32B32_SFLOAT,
 Engine/neo-world-graphics.adb:884:26    - Unknown word (sepcial)     -- -- Fetch our sepcial "handle" used to Id
-Engine/neo-world-graphics.adb:934:25    - Unknown word (Vulkan)      -- -- Buffer it to Vulkan
 Engine/neo-world-graphics.adb:941:61    - Unknown word (subresource) -- subresourceRange => (aspectMask
 Engine/neo-world-graphics.adb:946:56    - Unknown word (unnormalized) -- unnormalizedCoordinates => VK_FALSE
-Engine/neo-world-graphics.adb:955:91    - Unknown word (Mipmaps)      -- Int_Unsigned_C (Image.Mipmaps),
-Engine/neo-world-graphics.adb:971:28    - Unknown word (mipmap)       -- Sampler_Info.mipmapMode := VK_SAMPLER_MIPMAP
-Engine/neo-world-graphics.adb:971:53    - Unknown word (MIPMAP)       -- mipmapMode := VK_SAMPLER_MIPMAP_MODE_LINEAR;
-Engine/neo-world-graphics.adb:975:28    - Unknown word (mipmap)       -- Sampler_Info.mipmapMode := VK_SAMPLER_MIPMAP
-Engine/neo-world-graphics.adb:975:53    - Unknown word (MIPMAP)       -- mipmapMode := VK_SAMPLER_MIPMAP_MODE_NEAREST;
-Engine/neo-world-graphics.ads:16:14     - Unknown word (Vulkan)     -- with Neo.API.Vulkan; use Neo.API.Vulkan
-Engine/neo-world-graphics.ads:16:34     - Unknown word (Vulkan)     -- Vulkan; use Neo.API.Vulkan;
 Engine/neo-world-graphics.ads:230:6     - Unknown word (Framebuffer) -- -- Framebuffer --
 Engine/neo-world-graphics.ads:233:8     - Unknown word (Framebuffer) -- type Framebuffer_State is record
 Engine/neo-world-graphics.ads:240:30    - Unknown word (Framebuffer) -- Swapchain_Buffer, -- VkFramebuffer
@@ -2225,7 +2160,6 @@ Engine/neo-world-network.adb:538:9     - Unknown word (BUFLEN)              -- #
 Engine/neo-world-network.adb:53:6      - Unknown word (Netchan)        -- -- Netchan_TransmitNextFragment
 Engine/neo-world-network.adb:543:2     - Unknown word (perror)              -- perror(s);
 Engine/neo-world-network.adb:549:9     - Unknown word (sockaddr)            -- struct sockaddr_in si_me, si_other;
-Engine/neo-world-network.adb:551:12    - Unknown word (slen)                -- int s, i, slen = sizeof(si_other)
 Engine/neo-world-network.adb:552:11    - Unknown word (BUFLEN)              -- char buf[BUFLEN];
 Engine/neo-world-network.adb:555:19    - Unknown word (INET)                -- if ((s=socket(AF_INET, SOCK_DGRAM, IPPROTO
 Engine/neo-world-network.adb:555:30    - Unknown word (DGRAM)               -- socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == -
@@ -2239,13 +2173,11 @@ Engine/neo-world-network.adb:577:3     - Unknown word (fflush)              -- f
 Engine/neo-world-network.adb:580:19    - Unknown word (recvfrom)            -- if ((recv_len = recvfrom(s, buf, BUFLEN, 0,
 Engine/neo-world-network.adb:580:36    - Unknown word (BUFLEN)              -- len = recvfrom(s, buf, BUFLEN, 0, (struct sockaddr
 Engine/neo-world-network.adb:580:55    - Unknown word (sockaddr)            -- BUFLEN, 0, (struct sockaddr *) &amp;si_other, &amp
-Engine/neo-world-network.adb:580:87    - Unknown word (slen)                -- &amp;si_other, &amp;slen)) == -1)
 Engine/neo-world-network.adb:582:14    - Unknown word (recvfrom)            -- die(&quot;recvfrom()&quot;);
 Engine/neo-world-network.adb:586:52    - Unknown word (inet)                -- from %s:%d\n&quot;, inet_ntoa(si_other.sin_addr
 Engine/neo-world-network.adb:586:57    - Unknown word (ntoa)                -- %s:%d\n&quot;, inet_ntoa(si_other.sin_addr),
 Engine/neo-world-network.adb:586:82    - Unknown word (ntohs)               -- si_other.sin_addr), ntohs(si_other.sin_port))
 Engine/neo-world-network.adb:590:43    - Unknown word (sockaddr)            -- recv_len, 0, (struct sockaddr*) &amp;si_other, slen
-Engine/neo-world-network.adb:590:69    - Unknown word (slen)                -- sockaddr*) &amp;si_other, slen) == -1)
 Engine/neo-world-network.adb:590:7     - Unknown word (sendto)              -- if (sendto(s, buf, recv_len, 0
 Engine/neo-world-network.adb:592:14    - Unknown word (sendto)              -- die(&quot;sendto()&quot;);
 Engine/neo-world-network.adb:5:76      - Unknown word (Squirek)    -- Copyright (C) 2020 Justin Squirek
@@ -2265,9 +2197,9 @@ Engine/neo-world-network.adb:678:48    - Unknown word (netbuf)              -- N
 Engine/neo-world-network.adb:679:56    - Unknown word (netbuf)              -- Transmit( &client->netchan, netbuf->msg.cursize, netbuf
 Engine/neo-world-network.adb:679:68    - Unknown word (cursize)             -- netchan, netbuf->msg.cursize, netbuf->msg.data )
 Engine/neo-world-network.adb:679:77    - Unknown word (netbuf)              -- netbuf->msg.cursize, netbuf->msg.data );
-Engine/neo-world-network.adb:692:36    - Unknown word (MSGLEN)             -- byte msg_buf[MAX_MSGLEN];
-Engine/neo-world-network.adb:698:29    - Unknown word (gentity)            -- if ( client->gentity && client->gentity-
-Engine/neo-world-network.adb:698:48    - Unknown word (gentity)            -- >gentity && client->gentity->r.svFlags & SVF_BOT
+Engine/neo-world-network.adb:692:36    - Unknown word (MSGLEN)              -- byte msg_buf[MAX_MSGLEN];
+Engine/neo-world-network.adb:698:29    - Unknown word (gentity)             -- if ( client->gentity && client->gentity-
+Engine/neo-world-network.adb:698:48    - Unknown word (gentity)             -- >gentity && client->gentity->r.svFlags & SVF_BOT
 Engine/neo-world-network.adb:702:20    - Unknown word (allowoverflow)      -- -- msg.allowoverflow = qtrue;
 Engine/neo-world-network.adb:702:36    - Unknown word (qtrue)              -- msg.allowoverflow = qtrue;
 Engine/neo-world-network.adb:70:31     - Unknown word (repsonses)      -- -- Send challenge repsonses instead of request packets
@@ -2430,11 +2362,9 @@ Games/DOOM/Base/impulses.ads:46:42     - Unknown word (moveback)    -- Backward 
 Games/DOOM/Base/impulses.ads:5:78      - Unknown word (Squirek)    -- Copyright (C) 2016 Justin Squirek
 Games/DOOM/Base/main-menu.adb:27:22     - Unknown word (testmap)    -- Initialize_Map ("testmap");
 Games/DOOM/Base/main-menu.adb:5:76      - Unknown word (Squirek)    -- Copyright (C) 2020 Justin Squirek
-Games/DOOM/Logs/Squirek.txt:11:15     - Unknown word (Vulkan)     -- Graphics API: Vulkan 1.2.155
 Games/DOOM/Logs/Squirek.txt:15:8      - Unknown word (aaduffy)    -- Loaded aaduffyTest in 0.002639800s
 Games/DOOM/Logs/Squirek.txt:16:8      - Unknown word (alphalabs)  -- Loaded alphalabs in 0.001143800s
 Games/DOOM/Logs/Squirek.txt:18:8      - Unknown word (atest)      -- Loaded atest in 0.002686700s
-Games/DOOM/Logs/Squirek.txt:206:12    - Unknown word (vulkan)        -- at neo-api-vulkan.adb:49
 Games/DOOM/Logs/Squirek.txt:24:8      - Unknown word (berserkhelmet) -- Loaded berserkhelmet in 0.000307700s
 Games/DOOM/Logs/Squirek.txt:32:8      - Unknown word (enpro)         -- Loaded enpro in 0.005489300s
 Games/DOOM/Logs/Squirek.txt:41:8      - Unknown word (kentest)       -- Loaded kentest in 0.001587000s
@@ -3211,12 +3141,9 @@ neo.gpr:114:97    - Unknown word (SIMD)       -- -- Force SIMD optmization
 neo.gpr:119:43    - Unknown word (mwindows)    -- Switch_Linker & ("-mwindows",
 neo.gpr:120:74    - Unknown word (comctl)      -- WinDir") & "\System32\comctl32.dll", -- Common
 neo.gpr:121:74    - Unknown word (setupapi)    -- WinDir") & "\System32\setupapi.dll", -- Device
-neo.gpr:125:120   - Unknown word (vulkan)      -- dynamically Ex. "\System32\vulkan-1.dll"
-neo.gpr:125:46    - Unknown word (Vulkan)      -- -- A Vulkan driver is also necessary
 neo.gpr:87:72     - Unknown word (GLSL)       -- -- GLSL shaders
 neo.gpr:92:98     - Unknown word (senario)    -- the source access to senario variable DEBUG
 neo.gpr:99:25     - Unknown word (Xlinker)    -- Switch_Linker := ("-Xlinker", -- Setup
-readme.md:19:27     - Unknown word (Vulkan)     -- Threaded rendering with Vulkan
 readme.md:27:2      - Unknown word (gprbuild)   -- `gprbuild -p -P neo.gpr `
 runsdk.hta:161:13    - Unknown word (APPDATA)    -- var APPDATA_FOLDER = '%APPDATA%
 runsdk.hta:161:32    - Unknown word (APPDATA)    -- var APPDATA_FOLDER = '%APPDATA%\\roaming\\neo';
