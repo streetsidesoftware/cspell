@@ -3,7 +3,7 @@ Repository: MicrosoftDocs/PowerShell-Docs
 Url: "https://github.com/MicrosoftDocs/PowerShell-Docs.git"
 Args: ["--config=../../../cspell-power-shell-docs.config.yaml","**"]
 Lines:
- CSpell: Files checked: 2683, Issues found: 5335 in 1235 files.
+ CSpell: Files checked: 2685, Issues found: 5334 in 1235 files.
  exit code: 1
 CODE_OF_CONDUCT.md:10:38     - Unknown word (opensource) -- reach out at [aka.ms/opensource/moderation-support]
 LICENSE:139:15    - Unknown word (sublicensable)   -- non-sublicensable, non-exclusive, irrevocable
@@ -613,12 +613,12 @@ reference/5.1/Microsoft.PowerShell.Management/Set-ItemProperty.md:30:79     - Un
 reference/5.1/Microsoft.PowerShell.Management/Set-ItemProperty.md:38:79     - Unknown word (pscredential) -- string[]>] [-Credential <pscredential>]
 reference/5.1/Microsoft.PowerShell.Management/Set-ItemProperty.md:46:79     - Unknown word (pscredential) -- string[]>] [-Credential <pscredential>]
 reference/5.1/Microsoft.PowerShell.Management/Set-ItemProperty.md:54:79     - Unknown word (pscredential) -- string[]>] [-Credential <pscredential>]
-reference/5.1/Microsoft.PowerShell.Management/Set-WmiInstance.md:139:60    - Unknown word (testvar)    -- environment -Argument @{Name="testvar";VariableValue="testvalue
-reference/5.1/Microsoft.PowerShell.Management/Set-WmiInstance.md:139:84    - Unknown word (testvalue)  -- testvar";VariableValue="testvalue";UserName="<SYSTEM>
-reference/5.1/Microsoft.PowerShell.Management/Set-WmiInstance.md:163:26    - Unknown word (testvar)    -- command creates the testvar environment variable
-reference/5.1/Microsoft.PowerShell.Management/Set-WmiInstance.md:163:74    - Unknown word (testvalue)  -- variable that has the value testvalue. It does this by
-reference/5.1/Microsoft.PowerShell.Management/Set-WmiInstance.md:309:68    - Unknown word (ntlmdomain) -- authority setting to ntlmdomain:\<DomainName\>, where
-reference/5.1/Microsoft.PowerShell.Management/Set-WmiInstance.md:598:4     - Unknown word (swmi)       -- - `swmi`
+reference/5.1/Microsoft.PowerShell.Management/Set-WmiInstance.md:142:15    - Unknown word (testvar)    -- Name="testvar"
+reference/5.1/Microsoft.PowerShell.Management/Set-WmiInstance.md:143:24    - Unknown word (testvalue)  -- VariableValue="testvalue"
+reference/5.1/Microsoft.PowerShell.Management/Set-WmiInstance.md:171:27    - Unknown word (testvar)    -- command creates the `testvar` environment variable
+reference/5.1/Microsoft.PowerShell.Management/Set-WmiInstance.md:171:77    - Unknown word (testvalue)  -- that has the value `testvalue`. It does this
+reference/5.1/Microsoft.PowerShell.Management/Set-WmiInstance.md:322:69    - Unknown word (ntlmdomain) -- authority setting to `ntlmdomain:<DomainName>`, where
+reference/5.1/Microsoft.PowerShell.Management/Set-WmiInstance.md:605:4     - Unknown word (swmi)       -- - `swmi`
 reference/5.1/Microsoft.PowerShell.Management/Split-Path.md:368:65    - Unknown word (Normpath)   -- would use **Dirname**, **Normpath**, **Realpath**, **Join
 reference/5.1/Microsoft.PowerShell.Management/Split-Path.md:368:79    - Unknown word (Realpath)   -- Dirname**, **Normpath**, **Realpath**, **Join**,
 reference/5.1/Microsoft.PowerShell.Management/Start-Process.md:21:79     - Unknown word (pscredential) -- string[]>] [-Credential <pscredential>]
@@ -4736,14 +4736,14 @@ reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:150:123   
 reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:150:146   - Unknown word (PSREMOTING)     -- RUNPOWERSHELL=1 ENABLE_PSREMOTING=1 REGISTER_MANIFEST
 reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:150:84    - Unknown word (OPENPOWERSHELL) -- EXPLORER_CONTEXT_MENU_OPENPOWERSHELL=1 ADD_FILE_CONTEXT_MENU
 reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:275:2     - Unknown word (deviceip)       -- $deviceip = '<device ip address
-reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:276:2     - Unknown word (zipfile)        -- $zipfile = 'PowerShell-7.4.4
+reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:276:2     - Unknown word (zipfile)        -- $zipfile = 'PowerShell-7.4.5
 reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:277:2     - Unknown word (downloadfolder) -- $downloadfolder = 'u:\users\administrator
 reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:281:54    - Unknown word (deviceip)       -- Client\TrustedHosts $deviceip
 reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:284:12    - Unknown word (zipfile)        -- Copy-Item $zipfile -Destination $downloadfolder
 reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:284:34    - Unknown word (downloadfolder) -- zipfile -Destination $downloadfolder -ToSession $S
 reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:314:28    - Unknown word (workarea)       -- include the package in the workarea and add _OPENSRC_POWERSHELL
 reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:314:46    - Unknown word (OPENSRC)        -- the workarea and add _OPENSRC_POWERSHELL_ feature
-reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:353:2     - Unknown word (zipfile)        -- $zipfile = 'PowerShell-7.4.4
+reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:353:2     - Unknown word (zipfile)        -- $zipfile = 'PowerShell-7.4.5
 reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:357:12    - Unknown word (zipfile)        -- Copy-Item $zipfile c:\ -ToSession $session
 reference/docs-conceptual/install/community-support.md:89:35     - Unknown word (libunwind)  -- install jq libssl1.1 libunwind8 -y
 reference/docs-conceptual/install/community-support.md:95:8      - Unknown word (getconf)    -- bits=$(getconf LONG_BIT)
@@ -4919,7 +4919,6 @@ reference/docs-conceptual/learn/ps101/01-getting-started.md:3:24      - Unknown 
 reference/docs-conceptual/learn/ps101/01-getting-started.md:5:14      - Unknown word (mirobb)       -- ms.reviewer: mirobb
 reference/docs-conceptual/learn/ps101/02-help-system.md:3:24      - Unknown word (mikefrobbins) -- custom: Contributor-mikefrobbins
 reference/docs-conceptual/learn/ps101/02-help-system.md:5:14      - Unknown word (mirobb)       -- ms.reviewer: mirobb
-reference/docs-conceptual/learn/ps101/03-discovering-objects.md:253:32    - Unknown word (SMSS)         -- Server Management Studio (SMSS)][SMSS]. No corresponding
 reference/docs-conceptual/learn/ps101/03-discovering-objects.md:3:24      - Unknown word (mikefrobbins) -- custom: Contributor-mikefrobbins
 reference/docs-conceptual/learn/ps101/03-discovering-objects.md:5:14      - Unknown word (mirobb)       -- ms.reviewer: mirobb
 reference/docs-conceptual/learn/ps101/04-pipelines.md:3:24      - Unknown word (mikefrobbins) -- custom: Contributor-mikefrobbins
