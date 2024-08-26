@@ -5,8 +5,8 @@ import { posix } from 'node:path';
 import type { CSpellUserSettings, Glob } from '@cspell/cspell-types';
 import type { GlobPatternWithRoot } from 'cspell-glob';
 import { fileOrGlobToGlob, GlobMatcher } from 'cspell-glob';
-import type { Options as FastGlobOptions } from 'fast-glob';
-import glob from 'fast-glob';
+import type { GlobOptions as TinyGlobbyOptions } from 'tinyglobby';
+import { glob } from 'tinyglobby';
 
 import { clean } from './util.js';
 
@@ -34,13 +34,12 @@ export async function globP(pattern: string | string[], options?: GlobOptions): 
     const onlyFiles = options?.nodir;
     const dot = options?.dot;
     const patterns = typeof pattern === 'string' ? [pattern] : pattern;
-    const useOptions: FastGlobOptions = clean({
+    const useOptions: TinyGlobbyOptions = clean({
         cwd,
         onlyFiles,
         dot,
         ignore,
-        absolute: true,
-        followSymbolicLinks: false,
+        absolute: true
     });
 
     const compare = new Intl.Collator('en').compare;
