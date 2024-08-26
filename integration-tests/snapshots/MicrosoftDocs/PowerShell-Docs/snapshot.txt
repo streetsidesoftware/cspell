@@ -3,7 +3,7 @@ Repository: MicrosoftDocs/PowerShell-Docs
 Url: "https://github.com/MicrosoftDocs/PowerShell-Docs.git"
 Args: ["--config=../../../cspell-power-shell-docs.config.yaml","**"]
 Lines:
- CSpell: Files checked: 2685, Issues found: 5334 in 1235 files.
+ CSpell: Files checked: 2685, Issues found: 5215 in 1227 files.
  exit code: 1
 CODE_OF_CONDUCT.md:10:38     - Unknown word (opensource) -- reach out at [aka.ms/opensource/moderation-support]
 LICENSE:139:15    - Unknown word (sublicensable)   -- non-sublicensable, non-exclusive, irrevocable
@@ -61,10 +61,6 @@ reference/5.1/CimCmdlets/Invoke-CimMethod.md:393:74    - Unknown word (DCOM)    
 reference/5.1/CimCmdlets/New-CimInstance.md:327:55    - Unknown word (DMTF)       -- this parameter, the DMTF standard resource URI
 reference/5.1/CimCmdlets/New-CimInstance.md:333:15    - Unknown word (DCOM)       -- created using DCOM protocol, you will get
 reference/5.1/CimCmdlets/New-CimInstance.md:333:65    - Unknown word (DCOM)       -- an error, because the DCOM protocol does not support
-reference/5.1/CimCmdlets/New-CimInstance.md:78:64     - Unknown word (testvar)    -- Environment -Property @{Name="testvar";VariableValue="testvalue
-reference/5.1/CimCmdlets/New-CimInstance.md:78:88     - Unknown word (testvalue)  -- testvar";VariableValue="testvalue";UserName="domain\user
-reference/5.1/CimCmdlets/New-CimInstance.md:92:52     - Unknown word (testvar)    -- class -Property @{Name="testvar";VariableValue="testvalue
-reference/5.1/CimCmdlets/New-CimInstance.md:92:76     - Unknown word (testvalue)  -- testvar";VariableValue="testvalue";UserName="Contoso\User
 reference/5.1/CimCmdlets/New-CimSession.md:107:43    - Unknown word (DCOM)       -- a CIM session using DCOM
 reference/5.1/CimCmdlets/New-CimSession.md:109:63    - Unknown word (DCOM)       -- the Distributed COM (DCOM) protocol instead of
 reference/5.1/CimCmdlets/New-CimSession.md:112:49    - Unknown word (DCOM)       -- CimSessionOption -Protocol DCOM
@@ -88,13 +84,9 @@ reference/5.1/CimCmdlets/New-CimSessionOption.md:94:47     - Unknown word (regio
 reference/5.1/CimCmdlets/Remove-CimInstance.md:242:55    - Unknown word (DMTF)       -- this parameter, the DMTF standard resource URI
 reference/5.1/CimCmdlets/Remove-CimInstance.md:247:94    - Unknown word (DCOM)       -- session created using DCOM
 reference/5.1/CimCmdlets/Remove-CimInstance.md:248:41    - Unknown word (DCOM)       -- an error, because the DCOM protocol does not support
-reference/5.1/CimCmdlets/Remove-CimInstance.md:67:62     - Unknown word (testvar)    -- the character string **testvar** .
-reference/5.1/CimCmdlets/Remove-CimInstance.md:70:77     - Unknown word (testvar)    -- Environment where name LIKE "testvar%"'
 reference/5.1/CimCmdlets/Set-CimInstance.md:102:77    - Unknown word (somevalue)  -- VariableValue** property to **somevalue**. Because the
 reference/5.1/CimCmdlets/Set-CimInstance.md:103:3     - Unknown word (Passthru)   -- **Passthru** parameter is used
 reference/5.1/CimCmdlets/Set-CimInstance.md:110:15    - Unknown word (Passthru)   -- Because the **Passthru** parameter is used
-reference/5.1/CimCmdlets/Set-CimInstance.md:113:74    - Unknown word (testvar)    -- Environment where name="testvar"'
-reference/5.1/CimCmdlets/Set-CimInstance.md:124:74    - Unknown word (testvar)    -- Environment where name LIKE "testvar%"' -Property @{VariableValue
 reference/5.1/CimCmdlets/Set-CimInstance.md:140:87    - Unknown word (somevalue)  -- VariableValue** property to **somevalue**.
 reference/5.1/CimCmdlets/Set-CimInstance.md:141:15    - Unknown word (Passthru)   -- Because the **Passthru** parameter is used
 reference/5.1/CimCmdlets/Set-CimInstance.md:145:60    - Unknown word (somevalue)  -- Property @{VariableValue="somevalue"} -PassThru
@@ -102,9 +94,6 @@ reference/5.1/CimCmdlets/Set-CimInstance.md:337:55    - Unknown word (DMTF)     
 reference/5.1/CimCmdlets/Set-CimInstance.md:342:94    - Unknown word (DCOM)       -- session created using DCOM
 reference/5.1/CimCmdlets/Set-CimInstance.md:343:46    - Unknown word (DCOM)       -- an error, because the DCOM protocol does not support
 reference/5.1/CimCmdlets/Set-CimInstance.md:412:20    - Unknown word (Passthru)   -- When you use the **Passthru** parameter, this cmdlet
-reference/5.1/CimCmdlets/Set-CimInstance.md:79:74     - Unknown word (testvar)    -- Environment where name LIKE "testvar%"' -Property @{VariableValue
-reference/5.1/CimCmdlets/Set-CimInstance.md:89:74     - Unknown word (testvar)    -- Environment where name LIKE "testvar%"' |
-reference/5.1/CimCmdlets/Set-CimInstance.md:96:74     - Unknown word (testvar)    -- Environment where Name="testvar"'
 reference/5.1/CimCmdlets/Set-CimInstance.md:97:60     - Unknown word (somevalue)  -- Property @{VariableValue="somevalue"} -PassThru
 reference/5.1/Microsoft.PowerShell.Archive/Compress-Archive.md:100:58    - Unknown word (Draftdoc)   -- zip` file contains `Draftdoc.docx` and all the files
 reference/5.1/Microsoft.PowerShell.Archive/Compress-Archive.md:120:86    - Unknown word (Draftdoc)   -- file only contains `Draftdoc.docx`
@@ -144,11 +133,7 @@ reference/5.1/Microsoft.PowerShell.Core/About/about_Character_Encoding.md:162:4 
 reference/5.1/Microsoft.PowerShell.Core/About/about_Classes.md:165:35    - Unknown word (Unwin)      -- = 'George Allen & Unwin'
 reference/5.1/Microsoft.PowerShell.Core/About/about_Classes.md:176:32    - Unknown word (nwhich)     -- Time to read $Book,`nwhich was published $Age years
 reference/5.1/Microsoft.PowerShell.Core/About/about_Classes.md:317:35    - Unknown word (Unwin)      -- = 'George Allen & Unwin'
-reference/5.1/Microsoft.PowerShell.Core/About/about_Classes_Constructors.md:447:13    - Unknown word (nondefault) -- To invoke a nondefault base constructor, add
-reference/5.1/Microsoft.PowerShell.Core/About/about_Classes_Inheritance.md:1418:13   - Unknown word (nondefault) -- To invoke a nondefault base constructor, add
 reference/5.1/Microsoft.PowerShell.Core/About/about_Classes_Inheritance.md:429:14    - Unknown word (Pinkney)    -- 'Jerry Pinkney',
-reference/5.1/Microsoft.PowerShell.Core/About/about_Classes_Methods.md:205:54    - Unknown word (nonstatic)      -- GetVolume()` as an instance (nonstatic) method. This
-reference/5.1/Microsoft.PowerShell.Core/About/about_Classes_Methods.md:32:1      - Unknown word (Nonterminating) -- Nonterminating errors written to the
 reference/5.1/Microsoft.PowerShell.Core/About/about_Classes_Properties.md:124:24    - Unknown word (Mikey)      -- DisplayName = 'Mikey Lombardi'
 reference/5.1/Microsoft.PowerShell.Core/About/about_Classes_Properties.md:125:24    - Unknown word (michaeltlombardi) -- UserName = 'michaeltlombardi'
 reference/5.1/Microsoft.PowerShell.Core/About/about_Command_Precedence.md:210:16    - Unknown word (Progra)     -- //localhost/c$/Progra~1/PowerShell/7-preview
@@ -613,10 +598,6 @@ reference/5.1/Microsoft.PowerShell.Management/Set-ItemProperty.md:30:79     - Un
 reference/5.1/Microsoft.PowerShell.Management/Set-ItemProperty.md:38:79     - Unknown word (pscredential) -- string[]>] [-Credential <pscredential>]
 reference/5.1/Microsoft.PowerShell.Management/Set-ItemProperty.md:46:79     - Unknown word (pscredential) -- string[]>] [-Credential <pscredential>]
 reference/5.1/Microsoft.PowerShell.Management/Set-ItemProperty.md:54:79     - Unknown word (pscredential) -- string[]>] [-Credential <pscredential>]
-reference/5.1/Microsoft.PowerShell.Management/Set-WmiInstance.md:142:15    - Unknown word (testvar)    -- Name="testvar"
-reference/5.1/Microsoft.PowerShell.Management/Set-WmiInstance.md:143:24    - Unknown word (testvalue)  -- VariableValue="testvalue"
-reference/5.1/Microsoft.PowerShell.Management/Set-WmiInstance.md:171:27    - Unknown word (testvar)    -- command creates the `testvar` environment variable
-reference/5.1/Microsoft.PowerShell.Management/Set-WmiInstance.md:171:77    - Unknown word (testvalue)  -- that has the value `testvalue`. It does this
 reference/5.1/Microsoft.PowerShell.Management/Set-WmiInstance.md:322:69    - Unknown word (ntlmdomain) -- authority setting to `ntlmdomain:<DomainName>`, where
 reference/5.1/Microsoft.PowerShell.Management/Set-WmiInstance.md:605:4     - Unknown word (swmi)       -- - `swmi`
 reference/5.1/Microsoft.PowerShell.Management/Split-Path.md:368:65    - Unknown word (Normpath)   -- would use **Dirname**, **Normpath**, **Realpath**, **Join
@@ -847,10 +828,6 @@ reference/7.2/CimCmdlets/New-CimInstance.md:329:55    - Unknown word (DMTF)     
 reference/7.2/CimCmdlets/New-CimInstance.md:335:15    - Unknown word (DCOM)       -- created using DCOM protocol, you will get
 reference/7.2/CimCmdlets/New-CimInstance.md:335:65    - Unknown word (DCOM)       -- an error, because the DCOM protocol does not support
 reference/7.2/CimCmdlets/New-CimInstance.md:409:6     - Unknown word (ncim)       -- - `ncim`
-reference/7.2/CimCmdlets/New-CimInstance.md:80:64     - Unknown word (testvar)    -- Environment -Property @{Name="testvar";VariableValue="testvalue
-reference/7.2/CimCmdlets/New-CimInstance.md:80:88     - Unknown word (testvalue)  -- testvar";VariableValue="testvalue";UserName="domain\user
-reference/7.2/CimCmdlets/New-CimInstance.md:94:52     - Unknown word (testvar)    -- class -Property @{Name="testvar";VariableValue="testvalue
-reference/7.2/CimCmdlets/New-CimInstance.md:94:76     - Unknown word (testvalue)  -- testvar";VariableValue="testvalue";UserName="Contoso\User
 reference/7.2/CimCmdlets/New-CimSession.md:109:43    - Unknown word (DCOM)       -- a CIM session using DCOM
 reference/7.2/CimCmdlets/New-CimSession.md:111:63    - Unknown word (DCOM)       -- the Distributed COM (DCOM) protocol instead of
 reference/7.2/CimCmdlets/New-CimSession.md:114:49    - Unknown word (DCOM)       -- CimSessionOption -Protocol DCOM
@@ -876,14 +853,10 @@ reference/7.2/CimCmdlets/Remove-CimInstance.md:244:55    - Unknown word (DMTF)  
 reference/7.2/CimCmdlets/Remove-CimInstance.md:249:94    - Unknown word (DCOM)       -- session created using DCOM
 reference/7.2/CimCmdlets/Remove-CimInstance.md:250:41    - Unknown word (DCOM)       -- an error, because the DCOM protocol does not support
 reference/7.2/CimCmdlets/Remove-CimInstance.md:324:6     - Unknown word (rcim)       -- - `rcim`
-reference/7.2/CimCmdlets/Remove-CimInstance.md:69:62     - Unknown word (testvar)    -- the character string **testvar** .
-reference/7.2/CimCmdlets/Remove-CimInstance.md:72:77     - Unknown word (testvar)    -- Environment where name LIKE "testvar%"'
 reference/7.2/CimCmdlets/Remove-CimSession.md:236:6     - Unknown word (rcms)       -- - `rcms`
 reference/7.2/CimCmdlets/Set-CimInstance.md:104:77    - Unknown word (somevalue)  -- VariableValue** property to **somevalue**. Because the
 reference/7.2/CimCmdlets/Set-CimInstance.md:105:3     - Unknown word (Passthru)   -- **Passthru** parameter is used
 reference/7.2/CimCmdlets/Set-CimInstance.md:112:15    - Unknown word (Passthru)   -- Because the **Passthru** parameter is used
-reference/7.2/CimCmdlets/Set-CimInstance.md:115:74    - Unknown word (testvar)    -- Environment where name="testvar"'
-reference/7.2/CimCmdlets/Set-CimInstance.md:126:74    - Unknown word (testvar)    -- Environment where name LIKE "testvar%"' -Property @{VariableValue
 reference/7.2/CimCmdlets/Set-CimInstance.md:142:87    - Unknown word (somevalue)  -- VariableValue** property to **somevalue**.
 reference/7.2/CimCmdlets/Set-CimInstance.md:143:15    - Unknown word (Passthru)   -- Because the **Passthru** parameter is used
 reference/7.2/CimCmdlets/Set-CimInstance.md:147:60    - Unknown word (somevalue)  -- Property @{VariableValue="somevalue"} -PassThru
@@ -892,9 +865,6 @@ reference/7.2/CimCmdlets/Set-CimInstance.md:344:94    - Unknown word (DCOM)     
 reference/7.2/CimCmdlets/Set-CimInstance.md:345:46    - Unknown word (DCOM)       -- an error, because the DCOM protocol does not support
 reference/7.2/CimCmdlets/Set-CimInstance.md:414:20    - Unknown word (Passthru)   -- When you use the **Passthru** parameter, this cmdlet
 reference/7.2/CimCmdlets/Set-CimInstance.md:421:6     - Unknown word (scim)       -- - `scim`
-reference/7.2/CimCmdlets/Set-CimInstance.md:81:74     - Unknown word (testvar)    -- Environment where name LIKE "testvar%"' -Property @{VariableValue
-reference/7.2/CimCmdlets/Set-CimInstance.md:91:74     - Unknown word (testvar)    -- Environment where name LIKE "testvar%"' |
-reference/7.2/CimCmdlets/Set-CimInstance.md:98:74     - Unknown word (testvar)    -- Environment where Name="testvar"'
 reference/7.2/CimCmdlets/Set-CimInstance.md:99:60     - Unknown word (somevalue)  -- Property @{VariableValue="somevalue"} -PassThru
 reference/7.2/Microsoft.PowerShell.Archive/Compress-Archive.md:101:58    - Unknown word (Draftdoc)   -- zip` file contains `Draftdoc.docx` and all the files
 reference/7.2/Microsoft.PowerShell.Archive/Compress-Archive.md:121:86    - Unknown word (Draftdoc)   -- file only contains `Draftdoc.docx`
@@ -942,11 +912,7 @@ reference/7.2/Microsoft.PowerShell.Core/About/about_Character_Encoding.md:162:4 
 reference/7.2/Microsoft.PowerShell.Core/About/about_Classes.md:165:35    - Unknown word (Unwin)      -- = 'George Allen & Unwin'
 reference/7.2/Microsoft.PowerShell.Core/About/about_Classes.md:176:32    - Unknown word (nwhich)     -- Time to read $Book,`nwhich was published $Age years
 reference/7.2/Microsoft.PowerShell.Core/About/about_Classes.md:317:35    - Unknown word (Unwin)      -- = 'George Allen & Unwin'
-reference/7.2/Microsoft.PowerShell.Core/About/about_Classes_Constructors.md:446:13    - Unknown word (nondefault) -- To invoke a nondefault base constructor, add
-reference/7.2/Microsoft.PowerShell.Core/About/about_Classes_Inheritance.md:1414:13   - Unknown word (nondefault) -- To invoke a nondefault base constructor, add
 reference/7.2/Microsoft.PowerShell.Core/About/about_Classes_Inheritance.md:429:14    - Unknown word (Pinkney)    -- 'Jerry Pinkney',
-reference/7.2/Microsoft.PowerShell.Core/About/about_Classes_Methods.md:202:54    - Unknown word (nonstatic)      -- GetVolume()` as an instance (nonstatic) method. This
-reference/7.2/Microsoft.PowerShell.Core/About/about_Classes_Methods.md:32:1      - Unknown word (Nonterminating) -- Nonterminating errors written to the
 reference/7.2/Microsoft.PowerShell.Core/About/about_Classes_Properties.md:124:24    - Unknown word (Mikey)      -- DisplayName = 'Mikey Lombardi'
 reference/7.2/Microsoft.PowerShell.Core/About/about_Classes_Properties.md:125:24    - Unknown word (michaeltlombardi) -- UserName = 'michaeltlombardi'
 reference/7.2/Microsoft.PowerShell.Core/About/about_Command_Precedence.md:210:16    - Unknown word (Progra)     -- //localhost/c$/Progra~1/PowerShell/7-preview
@@ -1555,10 +1521,6 @@ reference/7.4/CimCmdlets/New-CimInstance.md:329:55    - Unknown word (DMTF)     
 reference/7.4/CimCmdlets/New-CimInstance.md:335:15    - Unknown word (DCOM)       -- created using DCOM protocol, you will get
 reference/7.4/CimCmdlets/New-CimInstance.md:335:65    - Unknown word (DCOM)       -- an error, because the DCOM protocol does not support
 reference/7.4/CimCmdlets/New-CimInstance.md:409:6     - Unknown word (ncim)       -- - `ncim`
-reference/7.4/CimCmdlets/New-CimInstance.md:80:64     - Unknown word (testvar)    -- Environment -Property @{Name="testvar";VariableValue="testvalue
-reference/7.4/CimCmdlets/New-CimInstance.md:80:88     - Unknown word (testvalue)  -- testvar";VariableValue="testvalue";UserName="domain\user
-reference/7.4/CimCmdlets/New-CimInstance.md:94:52     - Unknown word (testvar)    -- class -Property @{Name="testvar";VariableValue="testvalue
-reference/7.4/CimCmdlets/New-CimInstance.md:94:76     - Unknown word (testvalue)  -- testvar";VariableValue="testvalue";UserName="Contoso\User
 reference/7.4/CimCmdlets/New-CimSession.md:109:43    - Unknown word (DCOM)       -- a CIM session using DCOM
 reference/7.4/CimCmdlets/New-CimSession.md:111:63    - Unknown word (DCOM)       -- the Distributed COM (DCOM) protocol instead of
 reference/7.4/CimCmdlets/New-CimSession.md:114:49    - Unknown word (DCOM)       -- CimSessionOption -Protocol DCOM
@@ -1584,14 +1546,10 @@ reference/7.4/CimCmdlets/Remove-CimInstance.md:244:55    - Unknown word (DMTF)  
 reference/7.4/CimCmdlets/Remove-CimInstance.md:249:94    - Unknown word (DCOM)       -- session created using DCOM
 reference/7.4/CimCmdlets/Remove-CimInstance.md:250:41    - Unknown word (DCOM)       -- an error, because the DCOM protocol does not support
 reference/7.4/CimCmdlets/Remove-CimInstance.md:324:6     - Unknown word (rcim)       -- - `rcim`
-reference/7.4/CimCmdlets/Remove-CimInstance.md:69:62     - Unknown word (testvar)    -- the character string **testvar** .
-reference/7.4/CimCmdlets/Remove-CimInstance.md:72:77     - Unknown word (testvar)    -- Environment where name LIKE "testvar%"'
 reference/7.4/CimCmdlets/Remove-CimSession.md:236:6     - Unknown word (rcms)       -- - `rcms`
 reference/7.4/CimCmdlets/Set-CimInstance.md:104:77    - Unknown word (somevalue)  -- VariableValue** property to **somevalue**. Because the
 reference/7.4/CimCmdlets/Set-CimInstance.md:105:3     - Unknown word (Passthru)   -- **Passthru** parameter is used
 reference/7.4/CimCmdlets/Set-CimInstance.md:112:15    - Unknown word (Passthru)   -- Because the **Passthru** parameter is used
-reference/7.4/CimCmdlets/Set-CimInstance.md:115:74    - Unknown word (testvar)    -- Environment where name="testvar"'
-reference/7.4/CimCmdlets/Set-CimInstance.md:126:74    - Unknown word (testvar)    -- Environment where name LIKE "testvar%"' -Property @{VariableValue
 reference/7.4/CimCmdlets/Set-CimInstance.md:142:87    - Unknown word (somevalue)  -- VariableValue** property to **somevalue**.
 reference/7.4/CimCmdlets/Set-CimInstance.md:143:15    - Unknown word (Passthru)   -- Because the **Passthru** parameter is used
 reference/7.4/CimCmdlets/Set-CimInstance.md:147:60    - Unknown word (somevalue)  -- Property @{VariableValue="somevalue"} -PassThru
@@ -1600,9 +1558,6 @@ reference/7.4/CimCmdlets/Set-CimInstance.md:344:94    - Unknown word (DCOM)     
 reference/7.4/CimCmdlets/Set-CimInstance.md:345:46    - Unknown word (DCOM)       -- an error, because the DCOM protocol does not support
 reference/7.4/CimCmdlets/Set-CimInstance.md:414:20    - Unknown word (Passthru)   -- When you use the **Passthru** parameter, this cmdlet
 reference/7.4/CimCmdlets/Set-CimInstance.md:421:6     - Unknown word (scim)       -- - `scim`
-reference/7.4/CimCmdlets/Set-CimInstance.md:81:74     - Unknown word (testvar)    -- Environment where name LIKE "testvar%"' -Property @{VariableValue
-reference/7.4/CimCmdlets/Set-CimInstance.md:91:74     - Unknown word (testvar)    -- Environment where name LIKE "testvar%"' |
-reference/7.4/CimCmdlets/Set-CimInstance.md:98:74     - Unknown word (testvar)    -- Environment where Name="testvar"'
 reference/7.4/CimCmdlets/Set-CimInstance.md:99:60     - Unknown word (somevalue)  -- Property @{VariableValue="somevalue"} -PassThru
 reference/7.4/Microsoft.PowerShell.Archive/Compress-Archive.md:101:58    - Unknown word (Draftdoc)   -- zip` file contains `Draftdoc.docx` and all the files
 reference/7.4/Microsoft.PowerShell.Archive/Compress-Archive.md:121:86    - Unknown word (Draftdoc)   -- file only contains `Draftdoc.docx`
@@ -1651,11 +1606,7 @@ reference/7.4/Microsoft.PowerShell.Core/About/about_Character_Encoding.md:164:4 
 reference/7.4/Microsoft.PowerShell.Core/About/about_Classes.md:165:35    - Unknown word (Unwin)      -- = 'George Allen & Unwin'
 reference/7.4/Microsoft.PowerShell.Core/About/about_Classes.md:176:32    - Unknown word (nwhich)     -- Time to read $Book,`nwhich was published $Age years
 reference/7.4/Microsoft.PowerShell.Core/About/about_Classes.md:317:35    - Unknown word (Unwin)      -- = 'George Allen & Unwin'
-reference/7.4/Microsoft.PowerShell.Core/About/about_Classes_Constructors.md:446:13    - Unknown word (nondefault) -- To invoke a nondefault base constructor, add
-reference/7.4/Microsoft.PowerShell.Core/About/about_Classes_Inheritance.md:1414:13   - Unknown word (nondefault) -- To invoke a nondefault base constructor, add
 reference/7.4/Microsoft.PowerShell.Core/About/about_Classes_Inheritance.md:429:14    - Unknown word (Pinkney)    -- 'Jerry Pinkney',
-reference/7.4/Microsoft.PowerShell.Core/About/about_Classes_Methods.md:202:54    - Unknown word (nonstatic)      -- GetVolume()` as an instance (nonstatic) method. This
-reference/7.4/Microsoft.PowerShell.Core/About/about_Classes_Methods.md:32:1      - Unknown word (Nonterminating) -- Nonterminating errors written to the
 reference/7.4/Microsoft.PowerShell.Core/About/about_Classes_Properties.md:124:24    - Unknown word (Mikey)      -- DisplayName = 'Mikey Lombardi'
 reference/7.4/Microsoft.PowerShell.Core/About/about_Classes_Properties.md:125:24    - Unknown word (michaeltlombardi) -- UserName = 'michaeltlombardi'
 reference/7.4/Microsoft.PowerShell.Core/About/about_Command_Precedence.md:210:16    - Unknown word (Progra)     -- //localhost/c$/Progra~1/PowerShell/7-preview
@@ -1791,9 +1742,6 @@ reference/7.4/Microsoft.PowerShell.Core/About/about_PowerShell_Config.md:406:10 
 reference/7.4/Microsoft.PowerShell.Core/About/about_PowerShell_Config.md:419:16    - Unknown word (Transcripting) -- "EnableTranscripting": true,
 reference/7.4/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:1041:4    - Unknown word (cscript)    -- - `cscript.exe`
 reference/7.4/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:1044:4    - Unknown word (wscript)    -- - `wscript.exe`
-reference/7.4/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:1064:29   - Unknown word (robocopy)   -- native commands, like [robocopy][01] use non-zero exit
-reference/7.4/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:1072:5    - Unknown word (robocopy)   -- robocopy.exe D:\reports\operational
-reference/7.4/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:1074:16   - Unknown word (robocopy)   -- throw "robocopy failed with exit code
 reference/7.4/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:578:24    - Unknown word (nofile)     -- Get-ChildItem -Path C:\nofile.txt
 reference/7.4/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:592:24    - Unknown word (nofile)     -- Get-ChildItem -Path C:\nofile.txt
 reference/7.4/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:903:2     - Unknown word (hexdump)    -- `hexdump.ps1` to illustrate the
@@ -2285,10 +2233,6 @@ reference/7.5/CimCmdlets/New-CimInstance.md:329:55    - Unknown word (DMTF)     
 reference/7.5/CimCmdlets/New-CimInstance.md:335:15    - Unknown word (DCOM)       -- created using DCOM protocol, you will get
 reference/7.5/CimCmdlets/New-CimInstance.md:335:65    - Unknown word (DCOM)       -- an error, because the DCOM protocol does not support
 reference/7.5/CimCmdlets/New-CimInstance.md:409:6     - Unknown word (ncim)       -- - `ncim`
-reference/7.5/CimCmdlets/New-CimInstance.md:80:64     - Unknown word (testvar)    -- Environment -Property @{Name="testvar";VariableValue="testvalue
-reference/7.5/CimCmdlets/New-CimInstance.md:80:88     - Unknown word (testvalue)  -- testvar";VariableValue="testvalue";UserName="domain\user
-reference/7.5/CimCmdlets/New-CimInstance.md:94:52     - Unknown word (testvar)    -- class -Property @{Name="testvar";VariableValue="testvalue
-reference/7.5/CimCmdlets/New-CimInstance.md:94:76     - Unknown word (testvalue)  -- testvar";VariableValue="testvalue";UserName="Contoso\User
 reference/7.5/CimCmdlets/New-CimSession.md:109:43    - Unknown word (DCOM)       -- a CIM session using DCOM
 reference/7.5/CimCmdlets/New-CimSession.md:111:63    - Unknown word (DCOM)       -- the Distributed COM (DCOM) protocol instead of
 reference/7.5/CimCmdlets/New-CimSession.md:114:49    - Unknown word (DCOM)       -- CimSessionOption -Protocol DCOM
@@ -2314,14 +2258,10 @@ reference/7.5/CimCmdlets/Remove-CimInstance.md:244:55    - Unknown word (DMTF)  
 reference/7.5/CimCmdlets/Remove-CimInstance.md:249:94    - Unknown word (DCOM)       -- session created using DCOM
 reference/7.5/CimCmdlets/Remove-CimInstance.md:250:41    - Unknown word (DCOM)       -- an error, because the DCOM protocol does not support
 reference/7.5/CimCmdlets/Remove-CimInstance.md:324:6     - Unknown word (rcim)       -- - `rcim`
-reference/7.5/CimCmdlets/Remove-CimInstance.md:69:62     - Unknown word (testvar)    -- the character string **testvar** .
-reference/7.5/CimCmdlets/Remove-CimInstance.md:72:77     - Unknown word (testvar)    -- Environment where name LIKE "testvar%"'
 reference/7.5/CimCmdlets/Remove-CimSession.md:236:6     - Unknown word (rcms)       -- - `rcms`
 reference/7.5/CimCmdlets/Set-CimInstance.md:104:77    - Unknown word (somevalue)  -- VariableValue** property to **somevalue**. Because the
 reference/7.5/CimCmdlets/Set-CimInstance.md:105:3     - Unknown word (Passthru)   -- **Passthru** parameter is used
 reference/7.5/CimCmdlets/Set-CimInstance.md:112:15    - Unknown word (Passthru)   -- Because the **Passthru** parameter is used
-reference/7.5/CimCmdlets/Set-CimInstance.md:115:74    - Unknown word (testvar)    -- Environment where name="testvar"'
-reference/7.5/CimCmdlets/Set-CimInstance.md:126:74    - Unknown word (testvar)    -- Environment where name LIKE "testvar%"' -Property @{VariableValue
 reference/7.5/CimCmdlets/Set-CimInstance.md:142:87    - Unknown word (somevalue)  -- VariableValue** property to **somevalue**.
 reference/7.5/CimCmdlets/Set-CimInstance.md:143:15    - Unknown word (Passthru)   -- Because the **Passthru** parameter is used
 reference/7.5/CimCmdlets/Set-CimInstance.md:147:60    - Unknown word (somevalue)  -- Property @{VariableValue="somevalue"} -PassThru
@@ -2330,9 +2270,6 @@ reference/7.5/CimCmdlets/Set-CimInstance.md:344:94    - Unknown word (DCOM)     
 reference/7.5/CimCmdlets/Set-CimInstance.md:345:46    - Unknown word (DCOM)       -- an error, because the DCOM protocol does not support
 reference/7.5/CimCmdlets/Set-CimInstance.md:414:20    - Unknown word (Passthru)   -- When you use the **Passthru** parameter, this cmdlet
 reference/7.5/CimCmdlets/Set-CimInstance.md:421:6     - Unknown word (scim)       -- - `scim`
-reference/7.5/CimCmdlets/Set-CimInstance.md:81:74     - Unknown word (testvar)    -- Environment where name LIKE "testvar%"' -Property @{VariableValue
-reference/7.5/CimCmdlets/Set-CimInstance.md:91:74     - Unknown word (testvar)    -- Environment where name LIKE "testvar%"' |
-reference/7.5/CimCmdlets/Set-CimInstance.md:98:74     - Unknown word (testvar)    -- Environment where Name="testvar"'
 reference/7.5/CimCmdlets/Set-CimInstance.md:99:60     - Unknown word (somevalue)  -- Property @{VariableValue="somevalue"} -PassThru
 reference/7.5/Microsoft.PowerShell.Archive/Compress-Archive.md:101:58    - Unknown word (Draftdoc)   -- zip` file contains `Draftdoc.docx` and all the files
 reference/7.5/Microsoft.PowerShell.Archive/Compress-Archive.md:121:86    - Unknown word (Draftdoc)   -- file only contains `Draftdoc.docx`
@@ -2381,11 +2318,7 @@ reference/7.5/Microsoft.PowerShell.Core/About/about_Character_Encoding.md:164:4 
 reference/7.5/Microsoft.PowerShell.Core/About/about_Classes.md:165:35    - Unknown word (Unwin)      -- = 'George Allen & Unwin'
 reference/7.5/Microsoft.PowerShell.Core/About/about_Classes.md:176:32    - Unknown word (nwhich)     -- Time to read $Book,`nwhich was published $Age years
 reference/7.5/Microsoft.PowerShell.Core/About/about_Classes.md:317:35    - Unknown word (Unwin)      -- = 'George Allen & Unwin'
-reference/7.5/Microsoft.PowerShell.Core/About/about_Classes_Constructors.md:446:13    - Unknown word (nondefault) -- To invoke a nondefault base constructor, add
-reference/7.5/Microsoft.PowerShell.Core/About/about_Classes_Inheritance.md:1414:13   - Unknown word (nondefault) -- To invoke a nondefault base constructor, add
 reference/7.5/Microsoft.PowerShell.Core/About/about_Classes_Inheritance.md:429:14    - Unknown word (Pinkney)    -- 'Jerry Pinkney',
-reference/7.5/Microsoft.PowerShell.Core/About/about_Classes_Methods.md:202:54    - Unknown word (nonstatic)      -- GetVolume()` as an instance (nonstatic) method. This
-reference/7.5/Microsoft.PowerShell.Core/About/about_Classes_Methods.md:32:1      - Unknown word (Nonterminating) -- Nonterminating errors written to the
 reference/7.5/Microsoft.PowerShell.Core/About/about_Classes_Properties.md:124:24    - Unknown word (Mikey)      -- DisplayName = 'Mikey Lombardi'
 reference/7.5/Microsoft.PowerShell.Core/About/about_Classes_Properties.md:125:24    - Unknown word (michaeltlombardi) -- UserName = 'michaeltlombardi'
 reference/7.5/Microsoft.PowerShell.Core/About/about_Command_Precedence.md:210:16    - Unknown word (Progra)     -- //localhost/c$/Progra~1/PowerShell/7-preview
@@ -2520,9 +2453,6 @@ reference/7.5/Microsoft.PowerShell.Core/About/about_PowerShell_Config.md:406:10 
 reference/7.5/Microsoft.PowerShell.Core/About/about_PowerShell_Config.md:419:16    - Unknown word (Transcripting) -- "EnableTranscripting": true,
 reference/7.5/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:1041:4    - Unknown word (cscript)    -- - `cscript.exe`
 reference/7.5/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:1044:4    - Unknown word (wscript)    -- - `wscript.exe`
-reference/7.5/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:1064:29   - Unknown word (robocopy)   -- native commands, like [robocopy][01] use non-zero exit
-reference/7.5/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:1072:5    - Unknown word (robocopy)   -- robocopy.exe D:\reports\operational
-reference/7.5/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:1074:16   - Unknown word (robocopy)   -- throw "robocopy failed with exit code
 reference/7.5/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:578:24    - Unknown word (nofile)     -- Get-ChildItem -Path C:\nofile.txt
 reference/7.5/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:592:24    - Unknown word (nofile)     -- Get-ChildItem -Path C:\nofile.txt
 reference/7.5/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:903:2     - Unknown word (hexdump)    -- `hexdump.ps1` to illustrate the
@@ -4059,17 +3989,14 @@ reference/docs-conceptual/developer/module/how-to-create-a-windows-powershell-sn
 reference/docs-conceptual/developer/module/how-to-import-cmdlets-using-modules.md:21:58     - Unknown word (mymodule)   -- indowsPowerShell\v1.0\Modules\mymodule`
 reference/docs-conceptual/developer/module/installing-a-powershell-module.md:74:10     - Unknown word (SETTINGCHANGE) -- > **WM_SETTINGCHANGE** message with `lParam
 reference/docs-conceptual/developer/module/writing-a-custom-windows-powershell-snap-in.md:155:57    - Unknown word (customsnapintest)         -- mdletConfigurationEntry("test-customsnapintest", typeof(TestCustomSnapinTest
-reference/docs-conceptual/developer/module/writing-a-custom-windows-powershell-snap-in.md:156:57    - Unknown word (helloworld)               -- mdletConfigurationEntry("test-helloworld", typeof(TestHelloWorld
 reference/docs-conceptual/developer/module/writing-a-custom-windows-powershell-snap-in.md:19:34     - Unknown word (Custompssnapin) -- Management.Automation.Custompssnapin](/dotnet/api/System
 reference/docs-conceptual/developer/module/writing-a-custom-windows-powershell-snap-in.md:51:44     - Unknown word (Cmdletconfigurationentry) -- Automation.Runspaces.Cmdletconfigurationentry](/dotnet/api/System
 reference/docs-conceptual/developer/prog-guide/creating-a-basic-windows-powershell-provider.md:113:31    - Unknown word (Runtimedefinedparameterdictionary) -- Management.Automation.Runtimedefinedparameterdictionary](/dotnet/api/System
 reference/docs-conceptual/developer/prog-guide/creating-a-basic-windows-powershell-provider.md:118:53    - Unknown word (samplesaccessdbprov)               -- reference [!CODE [Msh_samplesaccessdbprov01#accessdbprov01ProviderDynam
 reference/docs-conceptual/developer/prog-guide/creating-a-basic-windows-powershell-provider.md:118:75    - Unknown word (accessdbprov)                      -- samplesaccessdbprov01#accessdbprov01ProviderDynamicParameters
 reference/docs-conceptual/developer/prog-guide/creating-a-basic-windows-powershell-provider.md:120:4     - Unknown word (Uninitializing)                    -- ## Uninitializing the Provider
-reference/docs-conceptual/developer/prog-guide/creating-a-basic-windows-powershell-provider.md:124:68    - Unknown word (uninitialize)                      -- PowerShell runtime to uninitialize the provider at the
 reference/docs-conceptual/developer/prog-guide/creating-a-basic-windows-powershell-provider.md:130:53    - Unknown word (samplesaccessdbprov)               -- reference [!CODE [Msh_samplesaccessdbprov01#accessdbprov01ProviderStop
 reference/docs-conceptual/developer/prog-guide/creating-a-basic-windows-powershell-provider.md:130:75    - Unknown word (accessdbprov)                      -- samplesaccessdbprov01#accessdbprov01ProviderStop](Msh_samplesacc
-reference/docs-conceptual/developer/prog-guide/creating-a-basic-windows-powershell-provider.md:16:1      - Unknown word (uninitialize) -- uninitialize the provider.
 reference/docs-conceptual/developer/prog-guide/creating-a-basic-windows-powershell-provider.md:26:40     - Unknown word (Cmdletprovider) -- Automation.Provider.Cmdletprovider](/dotnet/api/System
 reference/docs-conceptual/developer/prog-guide/creating-a-basic-windows-powershell-provider.md:43:40     - Unknown word (Cmdletproviderattribute) -- Automation.Provider.Cmdletproviderattribute](/dotnet/api/System
 reference/docs-conceptual/developer/prog-guide/creating-a-basic-windows-powershell-provider.md:47:40     - Unknown word (Cmdletproviderattribute) -- Automation.Provider.Cmdletproviderattribute](/dotnet/api/System
@@ -4276,10 +4203,9 @@ reference/docs-conceptual/developer/prog-guide/designing-your-windows-powershell
 reference/docs-conceptual/developer/prog-guide/designing-your-windows-powershell-provider.md:235:101   - Unknown word (Accesscontrol)                     -- of [System.Security.Accesscontrol.Objectsecurity](/dotnet
 reference/docs-conceptual/developer/prog-guide/designing-your-windows-powershell-provider.md:235:115   - Unknown word (Objectsecurity)                    -- Security.Accesscontrol.Objectsecurity](/dotnet/api/System
 reference/docs-conceptual/developer/prog-guide/designing-your-windows-powershell-provider.md:30:10     - Unknown word (mydrive)    -- example, mydrive:\abc\bar.
-reference/docs-conceptual/developer/prog-guide/designing-your-windows-powershell-provider.md:34:59     - Unknown word (uninitialize) -- runtime to initialize and uninitialize the provider, your Windows
-reference/docs-conceptual/developer/prog-guide/designing-your-windows-powershell-provider.md:36:16     - Unknown word (uncshare)     -- FileSystem::\\\uncshare\abc\bar is the provider
-reference/docs-conceptual/developer/prog-guide/designing-your-windows-powershell-provider.md:43:56     - Unknown word (regkeypath)   -- provider can use \\\server\regkeypath as a provider-direct
-reference/docs-conceptual/developer/prog-guide/designing-your-windows-powershell-provider.md:50:59     - Unknown word (uncshare)     -- PowerShell provider is \\\uncshare\abc\bar.
+reference/docs-conceptual/developer/prog-guide/designing-your-windows-powershell-provider.md:36:16     - Unknown word (uncshare)   -- FileSystem::\\\uncshare\abc\bar is the provider
+reference/docs-conceptual/developer/prog-guide/designing-your-windows-powershell-provider.md:43:56     - Unknown word (regkeypath) -- provider can use \\\server\regkeypath as a provider-direct
+reference/docs-conceptual/developer/prog-guide/designing-your-windows-powershell-provider.md:50:59     - Unknown word (uncshare)   -- PowerShell provider is \\\uncshare\abc\bar.
 reference/docs-conceptual/developer/prog-guide/designing-your-windows-powershell-provider.md:55:40     - Unknown word (Cmdletprovider) -- Automation.Provider.Cmdletprovider.Writeitemobject*](/dotnet
 reference/docs-conceptual/developer/prog-guide/designing-your-windows-powershell-provider.md:79:40     - Unknown word (Cmdletprovider) -- Automation.Provider.Cmdletprovider](/dotnet/api/System
 reference/docs-conceptual/developer/prog-guide/designing-your-windows-powershell-provider.md:91:40     - Unknown word (Drivecmdletprovider) -- Automation.Provider.Drivecmdletprovider](/dotnet/api/System
@@ -4304,7 +4230,6 @@ reference/docs-conceptual/developer/prog-guide/getproc04-vb-net-sample-code.md:1
 reference/docs-conceptual/developer/prog-guide/getproc04-vb-net-sample-code.md:18:79     - Unknown word (vball)          -- samplesgetproc04#GetProc04vball](Msh_samplesgetproc
 reference/docs-conceptual/developer/prog-guide/getproc05-vb-net-sample-code.md:93:39     - Unknown word (processnames) -- each of the requested processnames, retrieve and write
 reference/docs-conceptual/developer/prog-guide/how-to-create-a-windows-powershell-provider.md:11:64     - Unknown word (Metabase)   -- Information Services (IIS) Metabase, the Microsoft Windows
-reference/docs-conceptual/developer/prog-guide/how-to-create-a-windows-powershell-provider.md:59:235    - Unknown word (uninitialize) -- runtime to initialize and uninitialize the provider.
 reference/docs-conceptual/developer/prog-guide/runspace01-vb-net-code-sample.md:27:11     - Unknown word (handlecount) -- ' handlecount are then extracted from
 reference/docs-conceptual/developer/prog-guide/runspace02-code-samples.md:9:103     - Unknown word (Runspaceinvoke) -- Management.Automation.Runspaceinvoke](/dotnet/api/System
 reference/docs-conceptual/developer/prog-guide/runspace02-csharp-code-sample.md:10:31     - Unknown word (Runspaceinvoke) -- Management.Automation.Runspaceinvoke](/dotnet/api/System
@@ -4436,44 +4361,28 @@ reference/docs-conceptual/developer/provider/windows-powershell-provider-overvie
 reference/docs-conceptual/developer/provider/windows-powershell-provider-overview.md:125:40    - Unknown word (Icmdletprovidersupportshelp) -- Automation.Provider.Icmdletprovidersupportshelp.Gethelpmaml*](/dotnet
 reference/docs-conceptual/developer/provider/windows-powershell-provider-overview.md:132:48    - Unknown word (PSMAML)                      -- file is written using PSMAML XML. This is the same
 reference/docs-conceptual/developer/provider/windows-powershell-provider-overview.md:55:49     - Unknown word (childitem)  -- . For example: `get-childitem C:`
-reference/docs-conceptual/developer/provider/windows-powershell-provider-overview.md:59:58     - Unknown word (uninitialize) -- engine to initialize and uninitialize your provider, the provider
-reference/docs-conceptual/developer/provider/windows-powershell-provider-overview.md:60:82     - Unknown word (uninitialize) -- user can initialize and uninitialize the
-reference/docs-conceptual/developer/provider/windows-powershell-provider-overview.md:62:16     - Unknown word (uncshare)     -- `FileSystem::\\uncshare\abc\bar`.
-reference/docs-conceptual/developer/provider/windows-powershell-provider-overview.md:68:56     - Unknown word (regkeypath)   -- provider can use `\\server\regkeypath` as a provider-direct
-reference/docs-conceptual/developer/provider/windows-powershell-provider-overview.md:75:59     - Unknown word (uncshare)     -- PowerShell provider is `\\uncshare\abc\bar`.
+reference/docs-conceptual/developer/provider/windows-powershell-provider-overview.md:62:16     - Unknown word (uncshare)   -- `FileSystem::\\uncshare\abc\bar`.
+reference/docs-conceptual/developer/provider/windows-powershell-provider-overview.md:68:56     - Unknown word (regkeypath) -- provider can use `\\server\regkeypath` as a provider-direct
+reference/docs-conceptual/developer/provider/windows-powershell-provider-overview.md:75:59     - Unknown word (uncshare)   -- PowerShell provider is `\\uncshare\abc\bar`.
 reference/docs-conceptual/developer/provider/windows-powershell-provider-overview.md:94:40     - Unknown word (Providercapabilities) -- Automation.Provider.Providercapabilities](/dotnet/api/System
 reference/docs-conceptual/developer/provider/windows-powershell-provider-overview.md:98:40     - Unknown word (Providercapabilities) -- Automation.Provider.Providercapabilities](/dotnet/api/System
 reference/docs-conceptual/developer/provider/windows-powershell-provider-quickstart.md:100:13    - Unknown word (DBPS)                     -- accessDBPSDriveInfo.Connection
-reference/docs-conceptual/developer/provider/windows-powershell-provider-quickstart.md:127:26    - Unknown word (ODBC)                     -- // Gets or sets the ODBC connection information
 reference/docs-conceptual/developer/provider/windows-powershell-provider-quickstart.md:13:168    - Unknown word (Drivecmdletprovider) -- Automation.Provider.Drivecmdletprovider.Newdrive*](/dotnet/api
 reference/docs-conceptual/developer/provider/windows-powershell-provider-quickstart.md:13:322    - Unknown word (Drivecmdletprovider) -- Automation.Provider.Drivecmdletprovider.Removedrive*](/dotnet
 reference/docs-conceptual/developer/provider/windows-powershell-provider-quickstart.md:13:493    - Unknown word (Drivecmdletprovider) -- Automation.Provider.Drivecmdletprovider](/dotnet/api/System
-reference/docs-conceptual/developer/provider/windows-powershell-provider-quickstart.md:156:20    - Unknown word (ODBC)                     -- // Close the ODBC connection to the drive
 reference/docs-conceptual/developer/provider/windows-powershell-provider-quickstart.md:29:92     - Unknown word (noexit)              -- line arguments** box: `-noexit -command "[reflection
 reference/docs-conceptual/developer/provider/windows-powershell-provider-quickstart.md:33:375    - Unknown word (Navigationcmdletprovider) -- Automation.Provider.Navigationcmdletprovider](/dotnet/api/System
 reference/docs-conceptual/developer/provider/windows-powershell-provider-quickstart.md:33:70     - Unknown word (Drivecmdletprovider) -- Automation.Provider.Drivecmdletprovider](/dotnet/api/System
 reference/docs-conceptual/developer/provider/windows-powershell-provider-quickstart.md:35:256    - Unknown word (Cmdletproviderattribute)  -- Automation.Provider.Cmdletproviderattribute](/dotnet/api/System
 reference/docs-conceptual/developer/provider/windows-powershell-provider-quickstart.md:35:94     - Unknown word (Drivecmdletprovider)      -- Automation.Provider.Drivecmdletprovider](/dotnet/api/System
-reference/docs-conceptual/developer/provider/windows-powershell-provider-quickstart.md:42:21     - Unknown word (Odbc)                     -- using System.Data.Odbc;
 reference/docs-conceptual/developer/provider/windows-powershell-provider-quickstart.md:61:204    - Unknown word (DBPS)                     -- internal class AccessDBPSDriveInfo to create a
-reference/docs-conceptual/developer/provider/windows-powershell-provider-quickstart.md:91:43     - Unknown word (ODBC)                     -- drive and create an ODBC connection to the new
 reference/docs-conceptual/developer/provider/windows-powershell-provider-quickstart.md:92:13     - Unknown word (DBPS)                     -- AccessDBPSDriveInfo accessDBPSDriveInfo
 reference/docs-conceptual/developer/provider/windows-powershell-provider-quickstart.md:92:33     - Unknown word (DBPS)                     -- AccessDBPSDriveInfo accessDBPSDriveInfo = new AccessDBPSDriv
 reference/docs-conceptual/developer/provider/windows-powershell-provider-quickstart.md:92:59     - Unknown word (DBPS)                     -- cessDBPSDriveInfo = new AccessDBPSDriveInfo(drive);
-reference/docs-conceptual/developer/provider/windows-powershell-provider-quickstart.md:93:49     - Unknown word (Odbc)                     -- onStringBuilder builder = new OdbcConnectionStringBuilder
-reference/docs-conceptual/developer/provider/windows-powershell-provider-quickstart.md:93:7      - Unknown word (Odbc)                     -- OdbcConnectionStringBuilder
-reference/docs-conceptual/developer/provider/windows-powershell-provider-quickstart.md:98:33     - Unknown word (Odbc)                     -- OdbcConnection conn = new OdbcConnection(builder.ConnectionS
-reference/docs-conceptual/developer/provider/windows-powershell-provider-quickstart.md:98:7      - Unknown word (Odbc)                     -- OdbcConnection conn = new
 reference/docs-conceptual/developer/provider/writing-a-container-provider.md:12:40     - Unknown word (Containercmdletprovider) -- Automation.Provider.Containercmdletprovider](/dotnet/api/System
-reference/docs-conceptual/developer/provider/writing-a-container-provider.md:240:45    - Unknown word (ODBC)                    -- Execute command using ODBC connection to create
-reference/docs-conceptual/developer/provider/writing-a-container-provider.md:253:54    - Unknown word (Odbc)                    -- the table using the Odbc connection from the
 reference/docs-conceptual/developer/provider/writing-a-container-provider.md:255:30    - Unknown word (DBPS)                    -- AccessDBPSDriveInfo di = this.PSDriveInf
 reference/docs-conceptual/developer/provider/writing-a-container-provider.md:255:75    - Unknown word (DBPS)                    -- PSDriveInfo as AccessDBPSDriveInfo;
-reference/docs-conceptual/developer/provider/writing-a-container-provider.md:261:24    - Unknown word (Odbc)                    -- OdbcConnection connection
-reference/docs-conceptual/developer/provider/writing-a-container-provider.md:265:28    - Unknown word (Odbc)                    -- OdbcCommand cmd = new OdbcCommand
-reference/docs-conceptual/developer/provider/writing-a-container-provider.md:265:50    - Unknown word (Odbc)                    -- OdbcCommand cmd = new OdbcCommand(sql, connection
 reference/docs-conceptual/developer/provider/writing-a-container-provider.md:26:40     - Unknown word (Containercmdletprovider) -- Automation.Provider.Containercmdletprovider](/dotnet/api/System
-reference/docs-conceptual/developer/provider/writing-a-container-provider.md:311:20    - Unknown word (Odbc)                    -- OdbcDataAdapter da = GetAdapterFor
 reference/docs-conceptual/developer/provider/writing-a-container-provider.md:36:42     - Unknown word (Drivecmdletprovider)     -- Automation.Provider.Drivecmdletprovider](/dotnet/api/System
 reference/docs-conceptual/developer/provider/writing-a-container-provider.md:39:42     - Unknown word (Itemcmdletprovider)      -- Automation.Provider.Itemcmdletprovider](/dotnet/api/System
 reference/docs-conceptual/developer/provider/writing-a-container-provider.md:46:40     - Unknown word (Containercmdletprovider) -- Automation.Provider.Containercmdletprovider](/dotnet/api/System
@@ -4482,13 +4391,7 @@ reference/docs-conceptual/developer/provider/writing-a-container-provider.md:61:
 reference/docs-conceptual/developer/provider/writing-a-container-provider.md:67:40     - Unknown word (Containercmdletprovider) -- Automation.Provider.Containercmdletprovider.Getchilditems*](/dotnet
 reference/docs-conceptual/developer/provider/writing-a-container-provider.md:72:40     - Unknown word (Cmdletprovider)          -- Automation.Provider.Cmdletprovider.Writeitemobject*](/dotnet
 reference/docs-conceptual/developer/provider/writing-a-navigation-provider.md:12:40     - Unknown word (Navigationcmdletprovider) -- Automation.Provider.Navigationcmdletprovider](/dotnet/api/System
-reference/docs-conceptual/developer/provider/writing-a-navigation-provider.md:194:216   - Unknown word (basepath)                 -- method takes `path` and `basepath` parameters, and returns
-reference/docs-conceptual/developer/provider/writing-a-navigation-provider.md:194:332   - Unknown word (basepath)                 -- and relative to the `basepath` parameter.
-reference/docs-conceptual/developer/provider/writing-a-navigation-provider.md:198:68    - Unknown word (basepath)                 -- string basepath)
-reference/docs-conceptual/developer/provider/writing-a-navigation-provider.md:203:50    - Unknown word (basepath)                 -- ormalBasePath = NormalizePath(basepath);
-reference/docs-conceptual/developer/provider/writing-a-navigation-provider.md:259:16    - Unknown word (Odbc)                     -- OdbcDataAdapter da = GetAdapterFor
 reference/docs-conceptual/developer/provider/writing-a-navigation-provider.md:25:40     - Unknown word (Navigationcmdletprovider) -- Automation.Provider.Navigationcmdletprovider](/dotnet/api/System
-reference/docs-conceptual/developer/provider/writing-a-navigation-provider.md:268:16    - Unknown word (Odbc)                     -- OdbcDataAdapter dda = GetAdapterFo
 reference/docs-conceptual/developer/provider/writing-a-navigation-provider.md:31:294    - Unknown word (Drivecmdletprovider)      -- Automation.Provider.Drivecmdletprovider](/dotnet/api/System
 reference/docs-conceptual/developer/provider/writing-a-navigation-provider.md:31:533    - Unknown word (Itemcmdletprovider)       -- Automation.Provider.Itemcmdletprovider](/dotnet/api/System
 reference/docs-conceptual/developer/provider/writing-a-navigation-provider.md:31:665    - Unknown word (Containercmdletprovider)  -- Automation.Provider.Containercmdletprovider](/dotnet/api/System
@@ -4497,7 +4400,6 @@ reference/docs-conceptual/developer/provider/writing-a-navigation-provider.md:35
 reference/docs-conceptual/developer/provider/writing-a-navigation-provider.md:47:44     - Unknown word (Navigationcmdletprovider) -- Automation.Provider.Navigationcmdletprovider.Isitemcontainer*](/dotnet
 reference/docs-conceptual/developer/provider/writing-a-navigation-provider.md:80:44     - Unknown word (Navigationcmdletprovider) -- Automation.Provider.Navigationcmdletprovider.Getchildname*](/dotnet
 reference/docs-conceptual/developer/provider/writing-an-item-provider.md:11:40     - Unknown word (Itemcmdletprovider) -- Automation.Provider.Itemcmdletprovider](/dotnet/api/System
-reference/docs-conceptual/developer/provider/writing-an-item-provider.md:143:12    - Unknown word (Odbc)                    -- OdbcDataAdapter da = GetAdapterFor
 reference/docs-conceptual/developer/provider/writing-an-item-provider.md:186:40    - Unknown word (Cmdletprovider)          -- Automation.Provider.Cmdletprovider.Writeitemobject*](/dotnet
 reference/docs-conceptual/developer/provider/writing-an-item-provider.md:25:40     - Unknown word (Itemcmdletprovider) -- Automation.Provider.Itemcmdletprovider](/dotnet/api/System
 reference/docs-conceptual/developer/provider/writing-an-item-provider.md:30:40     - Unknown word (Itemcmdletprovider) -- Automation.Provider.Itemcmdletprovider.Getitem*](/dotnet/api
@@ -4735,16 +4637,7 @@ reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:141:4     
 reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:150:123   - Unknown word (RUNPOWERSHELL)  -- ADD_FILE_CONTEXT_MENU_RUNPOWERSHELL=1 ENABLE_PSREMOTING
 reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:150:146   - Unknown word (PSREMOTING)     -- RUNPOWERSHELL=1 ENABLE_PSREMOTING=1 REGISTER_MANIFEST
 reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:150:84    - Unknown word (OPENPOWERSHELL) -- EXPLORER_CONTEXT_MENU_OPENPOWERSHELL=1 ADD_FILE_CONTEXT_MENU
-reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:275:2     - Unknown word (deviceip)       -- $deviceip = '<device ip address
-reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:276:2     - Unknown word (zipfile)        -- $zipfile = 'PowerShell-7.4.5
-reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:277:2     - Unknown word (downloadfolder) -- $downloadfolder = 'u:\users\administrator
-reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:281:54    - Unknown word (deviceip)       -- Client\TrustedHosts $deviceip
-reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:284:12    - Unknown word (zipfile)        -- Copy-Item $zipfile -Destination $downloadfolder
-reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:284:34    - Unknown word (downloadfolder) -- zipfile -Destination $downloadfolder -ToSession $S
-reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:314:28    - Unknown word (workarea)       -- include the package in the workarea and add _OPENSRC_POWERSHELL
 reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:314:46    - Unknown word (OPENSRC)        -- the workarea and add _OPENSRC_POWERSHELL_ feature
-reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:353:2     - Unknown word (zipfile)        -- $zipfile = 'PowerShell-7.4.5
-reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:357:12    - Unknown word (zipfile)        -- Copy-Item $zipfile c:\ -ToSession $session
 reference/docs-conceptual/install/community-support.md:89:35     - Unknown word (libunwind)  -- install jq libssl1.1 libunwind8 -y
 reference/docs-conceptual/install/community-support.md:95:8      - Unknown word (getconf)    -- bits=$(getconf LONG_BIT)
 reference/docs-conceptual/install/install-alpine.md:34:13     - Unknown word (terminfo)   -- ncurses-terminfo-base \
@@ -4864,9 +4757,7 @@ reference/docs-conceptual/learn/deep-dives/everything-about-hashtable.md:482:34 
 reference/docs-conceptual/learn/deep-dives/everything-about-hashtable.md:540:32    - Unknown word (testlab)        -- Description = 'Network for testlab A'
 reference/docs-conceptual/learn/deep-dives/everything-about-hashtable.md:543:9     - Unknown word (Serverv)        -- Add-DhcpServerv4Scope @DHCPScope @Common
 reference/docs-conceptual/learn/deep-dives/everything-about-hashtable.md:553:20    - Unknown word (logfile)        -- $log = @{Path = '.\logfile.log'}
-reference/docs-conceptual/learn/deep-dives/everything-about-hashtable.md:559:77    - Unknown word (Robocopy)       -- param:value` syntax. `Robocopy.exe`, for
 reference/docs-conceptual/learn/deep-dives/everything-about-hashtable.md:563:2     - Unknown word (robo)           -- $robo = @{R=1;W=1;MT=8}
-reference/docs-conceptual/learn/deep-dives/everything-about-hashtable.md:564:1     - Unknown word (robocopy)       -- robocopy source destination
 reference/docs-conceptual/learn/deep-dives/everything-about-hashtable.md:564:30    - Unknown word (robo)           -- source destination @robo
 reference/docs-conceptual/learn/deep-dives/everything-about-hashtable.md:931:10    - Unknown word (Sorens)         -- [Michael Sorens][Michael Sorens].
 reference/docs-conceptual/learn/deep-dives/everything-about-if.md:316:5     - Unknown word (inotin)     -- - `-inotin` case-insensitive not
@@ -4968,11 +4859,6 @@ reference/docs-conceptual/samples/Changing-Computer-State.md:30:66     - Unknown
 reference/docs-conceptual/samples/Changing-Computer-State.md:58:2      - Unknown word (tsshutdn)   -- `tsshutdn.exe` or `shutdown.exe
 reference/docs-conceptual/samples/Changing-Computer-State.md:59:7      - Unknown word (tsshutdn)   -- from `tsshutdn.exe /?` or `shutdown
 reference/docs-conceptual/samples/Creating-.NET-and-COM-Objects--New-Object-.md:168:52    - Unknown word (progids)    -- by specifying these progids: **WScript.Shell**,
-reference/docs-conceptual/samples/Creating-Get-WinEvent-queries-with-FilterHashtable.md:134:4     - Unknown word (Defrag)     -- > `Defrag`, the correct **ProviderName
-reference/docs-conceptual/samples/Creating-Get-WinEvent-queries-with-FilterHashtable.md:134:64    - Unknown word (Defrag)     -- is `Microsoft-Windows-Defrag`.
-reference/docs-conceptual/samples/Creating-Get-WinEvent-queries-with-FilterHashtable.md:22:21     - Unknown word (Defrag)     -- **Microsoft-Windows-Defrag** logs:
-reference/docs-conceptual/samples/Creating-Get-WinEvent-queries-with-FilterHashtable.md:25:64     - Unknown word (defrag)     -- Object Source -Match defrag
-reference/docs-conceptual/samples/Creating-Get-WinEvent-queries-with-FilterHashtable.md:27:76     - Unknown word (defrag)     -- ProviderName -Match 'defrag' }
 reference/docs-conceptual/samples/Creating-Get-WinEvent-queries-with-FilterHashtable.md:80:78     - Unknown word (Perflib)    -- field. For example, the Perflib event 1008
 reference/docs-conceptual/samples/Creating-Get-WinEvent-queries-with-FilterHashtable.md:86:44     - Unknown word (bitsperf)   -- C:\Windows\System32\bitsperf.dll</Data>
 reference/docs-conceptual/samples/Decode-PowerShell-Command-from-a-Running-Process.md:2:9       - Unknown word (randomnote) -- author: randomnote1
@@ -5012,7 +4898,6 @@ reference/docs-conceptual/samples/Working-With-Files-Folders-and-Registry-Keys.m
 reference/docs-conceptual/samples/Working-With-Files-Folders-and-Registry-Keys.md:67:72     - Unknown word (Childitem)  -- * parameter of `Get-Childitem`:
 reference/docs-conceptual/samples/Working-With-Files-Folders-and-Registry-Keys.md:71:1      - Unknown word (addins)     -- addins
 reference/docs-conceptual/samples/Working-with-Files-and-Folders.md:81:41     - Unknown word (xcopy)      -- native commands like `xcopy.exe` and `robocopy.exe
-reference/docs-conceptual/samples/Working-with-Files-and-Folders.md:81:57     - Unknown word (robocopy)   -- like `xcopy.exe` and `robocopy.exe` to copy files.
 reference/docs-conceptual/samples/Working-with-Printers.md:36:72     - Unknown word (Printserver) -- ddWindowsPrinterConnection("\\Printserver01\Xerox5")
 reference/docs-conceptual/samples/Working-with-Printers.md:61:68     - Unknown word (Printserver) -- RemovePrinterConnection("\\Printserver01\Xerox5")
 reference/docs-conceptual/samples/Working-with-Registry-Entries.md:167:2     - Unknown word (newpath)    -- $newpath = $value.Path += ";C
@@ -5029,7 +4914,6 @@ reference/docs-conceptual/security/overview.yml:88:46     - Unknown word (secret
 reference/docs-conceptual/security/overview.yml:88:77     - Unknown word (secretstore)      -- ecretmanagement/how-to/manage-secretstore
 reference/docs-conceptual/security/overview.yml:90:46     - Unknown word (secretmanagement) -- powershell/utility-modules/secretmanagement/how-to/using-secrets
 reference/docs-conceptual/security/overview.yml:92:46     - Unknown word (secretmanagement) -- powershell/utility-modules/secretmanagement/how-to/using-azure-keyvault
-reference/docs-conceptual/security/overview.yml:92:82     - Unknown word (keyvault)         -- management/how-to/using-azure-keyvault
 reference/docs-conceptual/security/overview.yml:98:58     - Unknown word (secretstore)      -- microsoft.powershell.secretstore
 reference/docs-conceptual/security/preventing-script-injection.md:104:36    - Unknown word (pwnd)       -- rocessById "$pid; Write-Host 'pwnd!'"
 reference/docs-conceptual/security/preventing-script-injection.md:136:36    - Unknown word (pwnd)       -- rocessById "$pid; Write-Host 'pwnd!'"
@@ -5042,15 +4926,12 @@ reference/docs-conceptual/security/remoting/PS-remoting-second-hop.md:240:57    
 reference/docs-conceptual/security/remoting/PS-remoting-second-hop.md:257:64    - Unknown word (Entra)          -- Delegation for Microsoft Entra application proxy deployments
 reference/docs-conceptual/security/remoting/PS-remoting-second-hop.md:324:48    - Unknown word (creds)          -- delegation, passing fresh creds
 reference/docs-conceptual/security/remoting/PS-remoting-second-hop.md:84:20     - Unknown word (Analysing)  -- > [Security Focus: Analysing 'Account is sensitive
-reference/docs-conceptual/security/remoting/SSH-Remoting-in-PowerShell.md:114:4     - Unknown word (Pubkey)        -- PubkeyAuthentication yes
 reference/docs-conceptual/security/remoting/SSH-Remoting-in-PowerShell.md:12:59     - Unknown word (multiplatform) -- platforms and allows true multiplatform PowerShell remoting
-reference/docs-conceptual/security/remoting/SSH-Remoting-in-PowerShell.md:149:4     - Unknown word (Pubkey)        -- PubkeyAuthentication yes
 reference/docs-conceptual/security/remoting/SSH-Remoting-in-PowerShell.md:158:40    - Unknown word (sshs)          -- powershell /usr/bin/pwsh -sshs -nologo
 reference/docs-conceptual/security/remoting/SSH-Remoting-in-PowerShell.md:158:46    - Unknown word (nologo)        -- usr/bin/pwsh -sshs -nologo
 reference/docs-conceptual/security/remoting/SSH-Remoting-in-PowerShell.md:166:66    - Unknown word (nologo)        -- longer need to use the `-nologo` parameter when running
 reference/docs-conceptual/security/remoting/SSH-Remoting-in-PowerShell.md:205:46    - Unknown word (sshs)          -- usr/local/bin/pwsh -sshs -nologo
 reference/docs-conceptual/security/remoting/SSH-Remoting-in-PowerShell.md:205:52    - Unknown word (nologo)        -- local/bin/pwsh -sshs -nologo
-reference/docs-conceptual/security/remoting/SSH-Remoting-in-PowerShell.md:219:4     - Unknown word (Pubkey)        -- PubkeyAuthentication yes
 reference/docs-conceptual/security/remoting/SSH-Remoting-in-PowerShell.md:82:28     - Unknown word (progra)        -- Subsystem powershell c:/progra~1/powershell/7/pwsh
 reference/docs-conceptual/security/remoting/SSH-Remoting-in-PowerShell.md:82:60     - Unknown word (sshs)          -- powershell/7/pwsh.exe -sshs -nologo
 reference/docs-conceptual/security/remoting/SSH-Remoting-in-PowerShell.md:82:66     - Unknown word (nologo)        -- powershell/7/pwsh.exe -sshs -nologo

@@ -3,7 +3,7 @@ Repository: wireapp/wire-webapp
 Url: "https://github.com/wireapp/wire-webapp.git"
 Args: ["src/script/**/*.{js,ts,tsx,md}"]
 Lines:
- CSpell: Files checked: 1207, Issues found: 2768 in 642 files.
+ CSpell: Files checked: 1207, Issues found: 2711 in 640 files.
  exit code: 1
 src/script/Config.ts:20:25     - Unknown word (wireapp)    -- import {Runtime} from '@wireapp/commons';
 src/script/Config.ts:83:31     - Unknown word (acces)      -- DataDog client api keys acces */
@@ -473,21 +473,17 @@ src/script/calling/CallingRepository.test.ts:849:19    - Unknown word (vstateh) 
 src/script/calling/CallingRepository.test.ts:92:14     - Unknown word (Wcall)       -- let wCall: Wcall;
 src/script/calling/CallingRepository.ts:104:22    - Unknown word (Wcall)           -- export type QualifiedWcallMember = Omit<WcallMember
 src/script/calling/CallingRepository.ts:104:41    - Unknown word (Wcall)           -- QualifiedWcallMember = Omit<WcallMember, 'userid'> &
-src/script/calling/CallingRepository.ts:104:55    - Unknown word (userid)          -- Omit<WcallMember, 'userid'> & {userId: QualifiedId
 src/script/calling/CallingRepository.ts:1091:76   - Unknown word (clientid)        -- core.userId && member.clientid === this.core.clientId
 src/script/calling/CallingRepository.ts:1103:18   - Unknown word (aestab)          -- if (member.aestab === AUDIO_STATE.ESTABLISHED
 src/script/calling/CallingRepository.ts:1114:57   - Unknown word (MILLIS)          -- getTime() + TIME_IN_MILLIS.MINUTE * 3;
 src/script/calling/CallingRepository.ts:1133:7    - Unknown word (convid)          -- convid: serializedConversationId
 src/script/calling/CallingRepository.ts:113:3     - Unknown word (clientid)        -- clientid: string;
-src/script/calling/CallingRepository.ts:114:3     - Unknown word (userid)          -- userid: string;
 src/script/calling/CallingRepository.ts:1157:11   - Unknown word (conv)            -- const convId = this.serializeQualifiedId
-src/script/calling/CallingRepository.ts:1161:9    - Unknown word (userid)          -- userid: this.serializeQualifiedId
 src/script/calling/CallingRepository.ts:1163:15   - Unknown word (conv)            -- convid: convId,
 src/script/calling/CallingRepository.ts:1163:7    - Unknown word (convid)          -- convid: convId,
 src/script/calling/CallingRepository.ts:1165:57   - Unknown word (VSTREAMS)        -- this.wUser, convId, VSTREAMS.LIST, JSON.stringify
 src/script/calling/CallingRepository.ts:1207:55   - Unknown word (ESTAB)           -- = [CALL_STATE.MEDIA_ESTAB, CALL_STATE.ANSWERED
 src/script/calling/CallingRepository.ts:121:17    - Unknown word (clientid)        -- type Clients = {clientid: string; userid: string
-src/script/calling/CallingRepository.ts:121:35    - Unknown word (userid)          -- {clientid: string; userid: string}[];
 src/script/calling/CallingRepository.ts:1257:70   - Unknown word (screensharing)   -- V preferences) when screensharing is activated
 src/script/calling/CallingRepository.ts:128:6     - Unknown word (Subconversation) -- type SubconversationData = {epoch: number
 src/script/calling/CallingRepository.ts:128:72    - Unknown word (Subconversation) -- secretKey: string; members: SubconversationEpochInfoMember[]};
@@ -497,7 +493,6 @@ src/script/calling/CallingRepository.ts:1428:64   - Unknown word (Recepients)   
 src/script/calling/CallingRepository.ts:1437:64   - Unknown word (Recepients)      -- rtParticipantsToCallingMessageRecepients(participants);
 src/script/calling/CallingRepository.ts:148:44    - Unknown word (MILLIS)          -- OUT_DURATION = TIME_IN_MILLIS.SECOND * 4;
 src/script/calling/CallingRepository.ts:1508:27   - Unknown word (NOONE)           -- if (reason === REASON.NOONE_JOINED || reason ==
-src/script/calling/CallingRepository.ts:1540:52   - Unknown word (SCREENSHARE)     -- videoState() === VIDEO_STATE.SCREENSHARE && participant.startedScreenS
 src/script/calling/CallingRepository.ts:1590:27   - Unknown word (ECONN)           -- case REASON.TIMEOUT_ECONN:
 src/script/calling/CallingRepository.ts:1600:19   - Unknown word (NOONE)           -- case REASON.NOONE_JOINED:
 src/script/calling/CallingRepository.ts:1676:29   - Unknown word (ESTAB)           -- case CALL_STATE.MEDIA_ESTAB:
@@ -505,8 +500,6 @@ src/script/calling/CallingRepository.ts:1696:102  - Unknown word (vrecv)        
 src/script/calling/CallingRepository.ts:1703:37   - Unknown word (aestab)          -- isAudioEstablished(member.aestab === AUDIO_STATE.ESTABLISHED
 src/script/calling/CallingRepository.ts:1861:44   - Unknown word (wuser)           -- updateActiveSpeakers = (wuser: number, convId: string
 src/script/calling/CallingRepository.ts:1909:48   - Unknown word (ONEONONE)        -- onversationType !== CONV_TYPE.ONEONONE) {
-src/script/calling/CallingRepository.ts:1957:50   - Unknown word (SCREENSHARE)     -- videoState() !== VIDEO_STATE.SCREENSHARE && state === VIDEO_STATE
-src/script/calling/CallingRepository.ts:1957:87   - Unknown word (SCREENSHARE)     -- state === VIDEO_STATE.SCREENSHARE) {
 src/script/calling/CallingRepository.ts:1980:43   - Unknown word (ESTAB)           -- == CALL_STATE.MEDIA_ESTAB && isSameUser && !selfPartici
 src/script/calling/CallingRepository.ts:1993:11   - Unknown word (Segmentations)   -- customSegmentations: Record<string, any
 src/script/calling/CallingRepository.ts:2001:11   - Unknown word (segmentations)   -- const segmentations = {
@@ -546,7 +539,6 @@ src/script/calling/CallingRepository.ts:38:3      - Unknown word (CONV)         
 src/script/calling/CallingRepository.ts:405:44    - Unknown word (ESTAB)           -- = [CALL_STATE.MEDIA_ESTAB, CALL_STATE.ANSWERED
 src/script/calling/CallingRepository.ts:423:20    - Unknown word (clientid)        -- data.map(clientid => ({clientid, userid
 src/script/calling/CallingRepository.ts:423:34    - Unknown word (clientid)        -- data.map(clientid => ({clientid, userid: this.serializeQualif
-src/script/calling/CallingRepository.ts:423:44    - Unknown word (userid)          -- clientid => ({clientid, userid: this.serializeQualifiedId
 src/script/calling/CallingRepository.ts:427:32    - Unknown word (Conv)            -- wCall?.setClientsForConv(
 src/script/calling/CallingRepository.ts:47:3      - Unknown word (VSTREAMS)        -- VSTREAMS,
 src/script/calling/CallingRepository.ts:48:3      - Unknown word (Wcall)           -- Wcall,
@@ -567,13 +559,8 @@ src/script/calling/CallingRepository.ts:831:24    - Unknown word (ONEONONE)     
 src/script/calling/CallingRepository.ts:853:11    - Unknown word (conv)            -- const convId = this.serializeQualifiedId
 src/script/calling/CallingRepository.ts:854:82    - Unknown word (conv)            -- in conversation ID "${convId}"...`);
 src/script/calling/CallingRepository.ts:885:39    - Unknown word (conv)            -- wCall?.start(this.wUser, convId, callType, conversationType
-src/script/calling/CallingRepository.ts:937:14    - Unknown word (screenshare)     -- * Toggles screenshare ON and OFF for the given
-src/script/calling/CallingRepository.ts:939:9     - Unknown word (Screenshare)     -- toggleScreenshare = async (call: Call
-src/script/calling/CallingRepository.ts:967:46    - Unknown word (SCREENSHARE)     -- videoState(VIDEO_STATE.SCREENSHARE);
-src/script/calling/CallingRepository.ts:972:21    - Unknown word (SCREENSHARE)     -- VIDEO_STATE.SCREENSHARE,
 src/script/calling/Participant.ts:20:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
 src/script/calling/Participant.ts:23:29     - Unknown word (wireapp)    -- VIDEO_STATE} from '@wireapp/avs';
-src/script/calling/Participant.ts:59:48     - Unknown word (SCREENSHARE) -- videoState() === VIDEO_STATE.SCREENSHARE;
 src/script/calling/callingSubscriptionsHandler.ts:20:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
 src/script/calling/enum/CallMessageType.ts:22:17     - Unknown word (CONFSTART)  -- CONF_START = 'CONFSTART',
 src/script/calling/enum/CallMessageType.ts:23:15     - Unknown word (CONFEND)    -- CONF_END = 'CONFEND',
@@ -617,8 +604,6 @@ src/script/client/ClientUtils.ts:20:34     - Unknown word (wireapp)    -- Regist
 src/script/client/clientMLSConfig.ts:20:29     - Unknown word (wireapp)    -- FeatureList} from '@wireapp/api-client/lib/team
 src/script/client/clientMLSConfig.ts:33:16     - Unknown word (Ciphersuite) -- defaultCiphersuite: mlsConfig.config.defaultCiph
 src/script/client/clientMLSConfig.ts:34:9      - Unknown word (ciphersuites) -- ciphersuites: mlsConfig.config.allowedCiph
-src/script/components/AppContainer/AppContainer.tsx:108:17    - Unknown word (Screenshare) -- toggleScreenshare={mainView.calling.callActions
-src/script/components/AppContainer/AppContainer.tsx:108:65    - Unknown word (Screenshare) -- calling.callActions.toggleScreenshare}
 src/script/components/AppContainer/AppContainer.tsx:22:28     - Unknown word (wireapp)    -- {ClientType} from '@wireapp/api-client/lib/client
 src/script/components/AppContainer/AppContainer.tsx:23:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 src/script/components/AppContainer/AppContainer.tsx:25:37     - Unknown word (wireapp)    -- StyledApp, THEME_ID} from '@wireapp/react-ui-kit';
@@ -1008,7 +993,6 @@ src/script/components/TitleBar/TitleBar.test.tsx:25:25     - Unknown word (wirea
 src/script/components/TitleBar/TitleBar.test.tsx:26:26     - Unknown word (wireapp)    -- import * as uiKit from '@wireapp/react-ui-kit';
 src/script/components/TitleBar/TitleBar.test.tsx:27:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
 src/script/components/TitleBar/TitleBar.test.tsx:43:13     - Unknown word (wireapp)    -- jest.mock('@wireapp/react-ui-kit', () =
-src/script/components/TitleBar/TitleBar.test.tsx:73:9      - Unknown word (Screenshare) -- toggleScreenshare: jest.fn(),
 src/script/components/TitleBar/TitleBar.tsx:183:84    - Unknown word (MILLIS)     -- ?.remove(), TIME_IN_MILLIS.SECOND);
 src/script/components/TitleBar/TitleBar.tsx:22:26     - Unknown word (wireapp)    -- import {TabIndex} from '@wireapp/react-ui-kit/lib/types
 src/script/components/TitleBar/TitleBar.tsx:25:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
@@ -1052,8 +1036,6 @@ src/script/components/ZoomableImage/ZoomableImage.tsx:71:38     - Unknown word (
 src/script/components/ZoomableImage/index.ts:20:18     - Unknown word (Zoomable)   -- export * from './ZoomableImage';
 src/script/components/calling/CallParticipantsListItem/CallParticipantItemContent/CallParticipantItemContent.tsx:22:26     - Unknown word (wireapp)    -- import {TabIndex} from '@wireapp/react-ui-kit/lib/types
 src/script/components/calling/CallParticipantsListItem/CallParticipantItemContent/CallParticipantItemContent.tsx:69:30     - Unknown word (UNFOCUSABLE) -- tabIndex={TabIndex.UNFOCUSABLE}
-src/script/components/calling/CallParticipantsListItem/CallParticipantStatusIcons.tsx:52:30     - Unknown word (Screenshare) -- sharesScreen && <Icon.ScreenshareIcon css={screenShareIcon
-src/script/components/calling/CallParticipantsListItem/CallParticipantStatusIcons.tsx:52:90     - Unknown word (screenshare) -- data-uie-name="status-screenshare" />}
 src/script/components/calling/CallParticipantsListItem/CallParticipantsListItem.test.tsx:148:54    - Unknown word (unestablishd) -- text if user is in unestablishd audio state', () =>
 src/script/components/calling/CallParticipantsListItem/CallParticipantsListItem.test.tsx:22:30     - Unknown word (wireapp)    -- Availability} from '@wireapp/protocol-messaging'
 src/script/components/calling/CallParticipantsListItem/CallParticipantsListItem.tsx:22:26     - Unknown word (wireapp)    -- import {TabIndex} from '@wireapp/react-ui-kit/lib/types
@@ -1064,30 +1046,16 @@ src/script/components/calling/CallingCell/CallingCell.tsx:123:48    - Unknown wo
 src/script/components/calling/CallingCell/CallingCell.tsx:22:26     - Unknown word (wireapp)    -- import {TabIndex} from '@wireapp/react-ui-kit/lib/types
 src/script/components/calling/CallingCell/CallingCell.tsx:23:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 src/script/components/calling/CallingCell/CallingCell.tsx:25:71     - Unknown word (wireapp)    -- as CALL_STATE} from '@wireapp/avs';
-src/script/components/calling/CallingCell/CallingControls/CallingControls.tsx:143:52    - Unknown word (Screenshare) -- > callActions.toggleScreenshare(call, DesktopScreenShareMenu
-src/script/components/calling/CallingCell/CallingControls/CallingControls.tsx:145:58    - Unknown word (screenshare) -- call-controls-toggle-screenshare"
-src/script/components/calling/CallingCell/CallingControls/CallingControls.tsx:152:27    - Unknown word (Screenshare) -- <Icon.ScreenshareIcon className="small
-src/script/components/calling/CallingCell/CallingControls/CallingControls.tsx:154:27    - Unknown word (Screenshare) -- <Icon.ScreenshareOffIcon className="small
 src/script/components/calling/CallingCell/CallingControls/CallingControls.tsx:21:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 src/script/components/calling/CallingCell/CallingHeader/CallingHeader.tsx:20:26     - Unknown word (wireapp)    -- import {TabIndex} from '@wireapp/react-ui-kit/lib/types
-src/script/components/calling/CallingOverlayContainer.tsx:134:11    - Unknown word (Screenshare) -- toggleScreenshare(call, DesktopScreenShareMenu
-src/script/components/calling/CallingOverlayContainer.tsx:137:11    - Unknown word (Screenshare) -- const isScreenshareActive =
-src/script/components/calling/CallingOverlayContainer.tsx:155:31    - Unknown word (Screenshare) -- isChoosingScreen={isScreenshareActive}
 src/script/components/calling/CallingOverlayContainer.tsx:22:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 src/script/components/calling/CallingOverlayContainer.tsx:24:48     - Unknown word (wireapp)    -- as CALL_STATE} from '@wireapp/avs';
-src/script/components/calling/CallingOverlayContainer.tsx:45:18     - Unknown word (Screenshare) -- readonly toggleScreenshare: (call: Call, desktopScreenSh
-src/script/components/calling/CallingOverlayContainer.tsx:52:9      - Unknown word (Screenshare) -- toggleScreenshare,
-src/script/components/calling/CallingOverlayContainer.tsx:72:47     - Unknown word (ESTAB)       -- == CALL_STATE.MEDIA_ESTAB && joinedCall?.initialType
+src/script/components/calling/CallingOverlayContainer.tsx:72:47     - Unknown word (ESTAB)      -- == CALL_STATE.MEDIA_ESTAB && joinedCall?.initialType
 src/script/components/calling/ChooseScreen.tsx:22:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 src/script/components/calling/DetachedCallingCell/DetachedCallingCell.tsx:20:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
-src/script/components/calling/DetachedCallingCell/DetachedCallingCell.tsx:35:9      - Unknown word (Screenshare) -- toggleScreenshare: (call: Call, desktopScreenSh
-src/script/components/calling/DetachedCallingCell/DetachedCallingCell.tsx:43:9      - Unknown word (Screenshare) -- toggleScreenshare,
-src/script/components/calling/DetachedCallingCell/DetachedCallingCell.tsx:61:15     - Unknown word (Screenshare) -- toggleScreenshare={toggleScreenshare}
-src/script/components/calling/DetachedCallingCell/DetachedCallingCell.tsx:61:34     - Unknown word (Screenshare) -- toggleScreenshare={toggleScreenshare}
 src/script/components/calling/FullscreenVideoCall.styles.ts:38:52     - Unknown word (inversed)   -- accent-color-highlight-inversed);
-src/script/components/calling/FullscreenVideoCall.tsx:125:9     - Unknown word (Screenshare) -- toggleScreenshare,
-src/script/components/calling/FullscreenVideoCall.tsx:209:22    - Unknown word (Callaudio)   -- label: t('videoCallaudioInputMicrophone'),
-src/script/components/calling/FullscreenVideoCall.tsx:227:22    - Unknown word (Callaudio)   -- label: t('videoCallaudioOutputSpeaker'),
+src/script/components/calling/FullscreenVideoCall.tsx:209:22    - Unknown word (Callaudio)  -- label: t('videoCallaudioInputMicrophone'),
+src/script/components/calling/FullscreenVideoCall.tsx:227:22    - Unknown word (Callaudio)  -- label: t('videoCallaudioOutputSpeaker'),
 src/script/components/calling/FullscreenVideoCall.tsx:22:45     - Unknown word (wireapp)    -- tConversationRoleName} from '@wireapp/api-client/lib/conversation
 src/script/components/calling/FullscreenVideoCall.tsx:23:26     - Unknown word (wireapp)    -- import {TabIndex} from '@wireapp/react-ui-kit/lib/types
 src/script/components/calling/FullscreenVideoCall.tsx:25:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
@@ -1097,12 +1065,8 @@ src/script/components/calling/FullscreenVideoCall.tsx:277:24    - Unknown word (
 src/script/components/calling/FullscreenVideoCall.tsx:27:27     - Unknown word (wireapp)    -- import {CALL_TYPE} from '@wireapp/avs';
 src/script/components/calling/FullscreenVideoCall.tsx:287:22    - Unknown word (Callvideo)      -- label: t('videoCallvideoInputCamera'),
 src/script/components/calling/FullscreenVideoCall.tsx:28:76     - Unknown word (wireapp)    -- ButtonVariant, Select} from '@wireapp/react-ui-kit';
-src/script/components/calling/FullscreenVideoCall.tsx:656:42    - Unknown word (Screenshare)    -- onClick={() => toggleScreenshare(call)}
-src/script/components/calling/FullscreenVideoCall.tsx:657:74    - Unknown word (Screenshare)    -- dleKeyDown(event, () => toggleScreenshare(call))}
-src/script/components/calling/FullscreenVideoCall.tsx:665:29    - Unknown word (Screenshare)    -- <Icon.ScreenshareIcon width={16} height
 src/script/components/calling/FullscreenVideoCall.tsx:70:10     - Unknown word (bluroff)    -- OFF = 'bluroff',
 src/script/components/calling/FullscreenVideoCall.tsx:71:9      - Unknown word (bluron)     -- ON = 'bluron',
-src/script/components/calling/FullscreenVideoCall.tsx:97:9      - Unknown word (Screenshare) -- toggleScreenshare: (call: Call) => void
 src/script/components/calling/GroupVideoGrid.test.tsx:22:29     - Unknown word (wireapp)    -- VIDEO_STATE} from '@wireapp/avs';
 src/script/components/calling/GroupVideoGrid.test.tsx:49:28     - Unknown word (Anot)       -- participant.user.name('Anot Heruser');
 src/script/components/calling/GroupVideoGrid.test.tsx:49:33     - Unknown word (Heruser)    -- participant.user.name('Anot Heruser');
@@ -1112,7 +1076,6 @@ src/script/components/calling/GroupVideoGridTile.tsx:150:61    - Unknown word (U
 src/script/components/calling/GroupVideoGridTile.tsx:22:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
 src/script/components/calling/GroupVideoGridTile.tsx:23:26     - Unknown word (wireapp)    -- import {TabIndex} from '@wireapp/react-ui-kit/lib/types
 src/script/components/calling/GroupVideoGridTile.tsx:25:29     - Unknown word (wireapp)    -- VIDEO_STATE} from '@wireapp/avs';
-src/script/components/calling/GroupVideoGridTile.tsx:83:51     - Unknown word (SCREENSHARE) -- videoState === VIDEO_STATE.SCREENSHARE;
 src/script/components/calling/chooseScreen.test.tsx:21:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 src/script/components/calling/fullscreenVideoCall.test.tsx:33:13     - Unknown word (wireapp)    -- jest.mock('@wireapp/react-ui-kit', () =
 src/script/components/calling/fullscreenVideoCall.test.tsx:34:28     - Unknown word (wireapp)    -- jest.requireActual('@wireapp/react-ui-kit') as any
@@ -1139,8 +1102,6 @@ src/script/components/panel/UserActions.test.tsx:21:34     - Unknown word (wirea
 src/script/components/panel/UserActions.test.tsx:22:57     - Unknown word (wireapp)    -- CONVERSATION_TYPE} from '@wireapp/api-client/lib/conversation
 src/script/components/panel/UserActions.test.tsx:23:53     - Unknown word (wireapp)    -- ClientMLSErrorLabel} from '@wireapp/core/lib/messagingProtocols
 src/script/components/panel/UserActions.test.tsx:25:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
-src/script/components/panel/UserActions.test.tsx:287:28    - Unknown word (userid)     -- const user = new User('userid1', teamDomain);
-src/script/components/panel/UserActions.test.tsx:294:32    - Unknown word (userid)     -- selfUser = new User('userid2', teamDomain);
 src/script/components/panel/UserActions.tsx:22:34     - Unknown word (wireapp)    -- ConnectionStatus} from '@wireapp/api-client/lib/connection
 src/script/components/panel/UserActions.tsx:23:35     - Unknown word (wireapp)    -- CONVERSATION_TYPE} from '@wireapp/api-client/lib/conversation
 src/script/components/panel/UserActions.tsx:24:53     - Unknown word (wireapp)    -- ClientMLSErrorLabel} from '@wireapp/core/lib/messagingProtocols
@@ -1952,14 +1913,10 @@ src/script/page/AppLock/AppLock.tsx:45:12     - Unknown word (applock)    -- SET
 src/script/page/AppLock/AppLock.tsx:46:19     - Unknown word (applock)    -- SETUP_CHANGE = 'applock.setup_change',
 src/script/page/AppLock/AppLock.tsx:73:38     - Unknown word (APPLOCK)    -- setState] = useState<APPLOCK_STATE>(APPLOCK_STATE
 src/script/page/AppLock/AppLock.tsx:73:53     - Unknown word (APPLOCK)    -- useState<APPLOCK_STATE>(APPLOCK_STATE.NONE);
-src/script/page/AppMain.tsx:114:11    - Unknown word (Screenshare) -- const isScreenshareActive =
-src/script/page/AppMain.tsx:211:11    - Unknown word (initialise)  -- await initialiseMLSMigrationFlow({
+src/script/page/AppMain.tsx:211:11    - Unknown word (initialise) -- await initialiseMLSMigrationFlow({
 src/script/page/AppMain.tsx:24:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 src/script/page/AppMain.tsx:26:52     - Unknown word (wireapp)    -- useMatchMedia} from '@wireapp/react-ui-kit';
 src/script/page/AppMain.tsx:27:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
-src/script/page/AppMain.tsx:293:25    - Unknown word (Screenshare) -- toggleScreenshare={mainView.calling.callActions
-src/script/page/AppMain.tsx:293:73    - Unknown word (Screenshare) -- calling.callActions.toggleScreenshare}
-src/script/page/AppMain.tsx:297:18    - Unknown word (Screenshare) -- {isScreenshareActive && <ChooseScreen
 src/script/page/AppMain.tsx:55:9      - Unknown word (initialise) -- import {initialiseMLSMigrationFlow} from
 src/script/page/LeftSidebar/LeftSidebar.tsx:25:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
 src/script/page/LeftSidebar/LeftSidebar.tsx:30:53     - Unknown word (Temporaty)  -- Conversations} from './panels/TemporatyGuestConversations';
@@ -2404,14 +2361,8 @@ src/script/tracking/Countly.helpers.ts:27:7      - Unknown word (COUNTLY)    -- 
 src/script/tracking/Countly.helpers.ts:29:12     - Unknown word (Countly)    -- return isCountlyEnabled;
 src/script/tracking/EventTrackingRepository.ts:103:44    - Unknown word (countly)       -- `Failed to send new countly tracking id to other
 src/script/tracking/EventTrackingRepository.ts:108:16    - Unknown word (Telemtry)      -- async init(isTelemtryConsentGiven: boolean
-src/script/tracking/EventTrackingRepository.ts:112:11    - Unknown word (unsynced)      -- const unsyncedCountlyDeviceId = loadValue
-src/script/tracking/EventTrackingRepository.ts:113:61    - Unknown word (UNSYNCED)      -- USER_ANALYTICS.COUNTLY_UNSYNCED_DEVICE_ID_LOCAL_STORAGE
-src/script/tracking/EventTrackingRepository.ts:119:9     - Unknown word (unsynced)      -- if (unsyncedCountlyDeviceId) {
-src/script/tracking/EventTrackingRepository.ts:122:79    - Unknown word (UNSYNCED)      -- USER_ANALYTICS.COUNTLY_UNSYNCED_DEVICE_ID_LOCAL_STORAGE
-src/script/tracking/EventTrackingRepository.ts:162:74    - Unknown word (UNSYNCED)      -- USER_ANALYTICS.COUNTLY_UNSYNCED_DEVICE_ID_LOCAL_STORAGE
 src/script/tracking/EventTrackingRepository.ts:166:69    - Unknown word (Telemtry)      -- error reporting: ${isTelemtryConsentGiven}`);
 src/script/tracking/EventTrackingRepository.ts:169:32    - Unknown word (Telemtry)      -- this.toggleCountly(isTelemtryConsentGiven);
-src/script/tracking/EventTrackingRepository.ts:204:31    - Unknown word (localstorage)  -- window.Countly.storage = 'localstorage';
 src/script/tracking/EventTrackingRepository.ts:21:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 src/script/tracking/EventTrackingRepository.ts:23:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
 src/script/tracking/EventTrackingRepository.ts:240:27    - Unknown word (segmentations) -- (eventName: string, segmentations?: ContributedSegmentations
@@ -2429,7 +2380,6 @@ src/script/tracking/EventTrackingRepository.ts:56:9      - Unknown word (COUNTLY
 src/script/tracking/EventTrackingRepository.ts:57:47     - Unknown word (COUNTLY)       -- MIGRATE_DEVICE_ID: 'COUNTLY_FAILED_TO_MIGRATE_DEVICE
 src/script/tracking/EventTrackingRepository.ts:57:9      - Unknown word (COUNTLY)       -- COUNTLY_FAILED_TO_MIGRATE_DEVICE
 src/script/tracking/EventTrackingRepository.ts:58:9      - Unknown word (COUNTLY)       -- COUNTLY_SYNCED_AT_LEAST_ONCE
-src/script/tracking/EventTrackingRepository.ts:59:17     - Unknown word (UNSYNCED)      -- COUNTLY_UNSYNCED_DEVICE_ID_LOCAL_STORAGE
 src/script/tracking/EventTrackingRepository.ts:84:17     - Unknown word (Countly)       -- if (!window.Countly) {
 src/script/tracking/EventTrackingRepository.ts:85:25     - Unknown word (Countly)       -- this.logger.warn('Countly is not available');
 src/script/tracking/EventTrackingRepository.ts:92:47     - Unknown word (countly)       -- startProductReporting(this.countlyDeviceId);
@@ -2442,8 +2392,6 @@ src/script/tracking/countly-skd-web.d.ts:35:18     - Unknown word (Countly)     
 src/script/tracking/countly-skd-web.d.ts:40:29     - Unknown word (Segmentations) -- segmentation?: ContributedSegmentations | Values;
 src/script/tracking/countly-skd-web.d.ts:43:18     - Unknown word (Countly)       -- export interface Countly {
 src/script/tracking/countly-skd-web.d.ts:44:26     - Unknown word (Countly)       -- init: (config: any) => Countly;
-src/script/tracking/countly-skd-web.d.ts:56:9      - Unknown word (pageview)      -- track_pageview: (page: string) => void
-src/script/tracking/countly-skd-web.d.ts:60:13     - Unknown word (localstorage)  -- storage: 'localstorage' | 'cookie';
 src/script/tracking/countly-skd-web.d.ts:63:36     - Unknown word (countly)       -- tracking, provided by the countly plugin script countly
 src/script/tracking/countly-skd-web.d.ts:63:58     - Unknown word (countly)       -- countly plugin script countly_boomerang.js
 src/script/tracking/countly-skd-web.d.ts:64:27     - Unknown word (countly)       -- Does not come with the countly.min.js script and has
@@ -2649,7 +2597,6 @@ src/script/util/conversationMessages.test.ts:46:20     - Unknown word (Arjita)  
 src/script/util/conversationMessages.test.ts:51:25     - Unknown word (Arjita)     -- const expected = `Arjita. At 5:15 PM. with file
 src/script/util/isDetachedCallingFeatureEnabled.ts:20:25     - Unknown word (wireapp)    -- import {Runtime} from '@wireapp/commons';
 src/script/util/isDetachedCallingFeatureEnabled.ts:25:85     - Unknown word (Popout)     -- sktopConfig()?.supportsCallingPopoutWindow) : true;
-src/script/util/localStorage.ts:21:41     - Unknown word (localstorage) -- browser's instance of localstorage if present.
 src/script/util/messageRenderer.test.ts:118:58    - Unknown word (ohoh)       -- quot;javascript:alert('ohoh!')&quot;&gt;what?&lt
 src/script/util/messageRenderer.test.ts:120:55    - Unknown word (ohoh)       -- "javascript:alert(\'ohoh!\')">what?</a>')).toBe
 src/script/util/messageRenderer.test.ts:162:15    - Unknown word (endlines)   -- it('renders endlines to <br>', () => {
@@ -2750,12 +2697,8 @@ src/script/view_model/CallingViewModel.ts:25:71     - Unknown word (wireapp)    
 src/script/view_model/CallingViewModel.ts:26:30     - Unknown word (wireapp)    -- Availability} from '@wireapp/protocol-messaging'
 src/script/view_model/CallingViewModel.ts:27:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
 src/script/view_model/CallingViewModel.ts:315:50    - Unknown word (screeninput) -- evicesHandler.currentDeviceId.screeninput(deviceId);
-src/script/view_model/CallingViewModel.ts:323:13    - Unknown word (Screenshare) -- toggleScreenshare: async (call, desktopScreenSh
-src/script/view_model/CallingViewModel.ts:325:47    - Unknown word (Screenshare) -- callingRepository.toggleScreenshare(call);
 src/script/view_model/CallingViewModel.ts:331:56    - Unknown word (screeninput) -- evicesHandler.currentDeviceId.screeninput(deviceId);
-src/script/view_model/CallingViewModel.ts:348:52    - Unknown word (Screenshare) -- callingRepository.toggleScreenshare(call));
 src/script/view_model/CallingViewModel.ts:472:46    - Unknown word (ESTAB)       -- == CALL_STATE.MEDIA_ESTAB;
-src/script/view_model/CallingViewModel.ts:68:9      - Unknown word (Screenshare) -- toggleScreenshare: (call: Call, desktopScreenSh
 src/script/view_model/ContentViewModel.ts:20:34     - Unknown word (wireapp)    -- ConnectionStatus} from '@wireapp/api-client/lib/connection
 src/script/view_model/ContentViewModel.ts:21:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
 src/script/view_model/ContentViewModel.ts:24:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';

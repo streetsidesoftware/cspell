@@ -3,7 +3,7 @@ Repository: pycontribs/jira
 Url: "https://github.com/pycontribs/jira.git"
 Args: ["**/*.*"]
 Lines:
- CSpell: Files checked: 79, Issues found: 569 in 41 files.
+ CSpell: Files checked: 79, Issues found: 538 in 41 files.
  exit code: 1
 AUTHORS.rst:3:21      - Unknown word (Contribs)   -- Development Team (PyContribs)
 AUTHORS.rst:5:7       - Unknown word (Speakmon)   -- - Ben Speakmon <ben.speakmon@gmail
@@ -26,7 +26,6 @@ constraints.txt:119:1     - Unknown word (pycparser)      -- pycparser==2.22
 constraints.txt:121:1     - Unknown word (pygments)       -- pygments==2.18.0
 constraints.txt:126:1     - Unknown word (pyjwt)          -- pyjwt==2.9.0
 constraints.txt:137:16    - Unknown word (instafail)      -- # pytest-instafail
-constraints.txt:13:11     - Unknown word (tarfile)    -- backports-tarfile==1.2.0
 constraints.txt:14:11     - Unknown word (jaraco)     -- # via jaraco-context
 constraints.txt:153:1     - Unknown word (pyyaml)         -- pyyaml==6.0.2
 constraints.txt:15:1      - Unknown word (beautifulsoup) -- beautifulsoup4==4.12.3
@@ -56,20 +55,16 @@ constraints.txt:27:9      - Unknown word (pyspnego)      -- # pyspnego
 constraints.txt:32:9      - Unknown word (ipython)       -- # ipython
 constraints.txt:33:1      - Unknown word (defusedxml)    -- defusedxml==0.7.1
 constraints.txt:34:17     - Unknown word (pyproject)     -- # via jira (pyproject.toml)
-constraints.txt:35:1      - Unknown word (docutils)      -- docutils==0.21.2
 constraints.txt:39:1      - Unknown word (exceptiongroup) -- exceptiongroup==1.2.2
 constraints.txt:43:1      - Unknown word (execnet)        -- execnet==2.1.1
 constraints.txt:46:16     - Unknown word (xdist)          -- # pytest-xdist
 constraints.txt:49:1      - Unknown word (filemagic)      -- filemagic==1.6
 constraints.txt:57:1      - Unknown word (idna)           -- idna==3.8
-constraints.txt:59:1      - Unknown word (imagesize)      -- imagesize==1.4.1
-constraints.txt:61:1      - Unknown word (importlib)      -- importlib-metadata==8.4.0
 constraints.txt:65:1      - Unknown word (iniconfig)      -- iniconfig==2.0.0
 constraints.txt:73:8      - Unknown word (functools)      -- jaraco-functools==4.0.2
 constraints.txt:83:1      - Unknown word (markupsafe)     -- markupsafe==2.1.5
 constraints.txt:87:1      - Unknown word (matplotlib)     -- matplotlib-inline==0.1.7
 constraints.txt:89:6      - Unknown word (itertools)      -- more-itertools==10.4.0
-constraints.txt:93:1      - Unknown word (oauthlib)       -- oauthlib==3.2.2
 constraints.txt:9:1       - Unknown word (asttokens)  -- asttokens==2.4.1
 docs/api.rst:10:4      - Unknown word (automodule) -- .. automodule:: jira.client
 docs/api.rst:12:5      - Unknown word (undoc)      -- :undoc-members:
@@ -175,8 +170,6 @@ jira/client.py:4676:42   - Unknown word (backupmanager)    -- server_url + "/web
 jira/client.py:4859:30   - Unknown word (workflowschemes)  -- url = self._get_url("workflowschemes")
 jira/client.py:5203:33   - Unknown word (Dalko)            -- Experimental support for iDalko Grid, expect API to
 jira/client.py:5205:13   - Unknown word (igrid)            -- def get_igrid(self, issueid: str,
-jira/client.py:5205:25   - Unknown word (issueid)          -- def get_igrid(self, issueid: str, customfield: str
-jira/client.py:5205:57   - Unknown word (schemeid)         -- str, customfield: str, schemeid: str):
 jira/client.py:5206:40   - Unknown word (idalko)           -- server_url + "/rest/idalko-igrid/1.0/datagrid/data
 jira/client.py:5363:9    - Unknown word (incompleted)      -- def incompletedIssuesEstimateSum(self
 jira/client.py:5366:28   - Unknown word (sprintreport)     -- f"rapid/charts/sprintreport?rapidViewId={board_id
@@ -190,7 +183,6 @@ jira/jirashell.py:71:51     - Unknown word (faceplants) -- dance. Your partner f
 jira/resilientsession.py:185:65    - Unknown word (behaviour)  -- should preserve old behaviour
 jira/resources.py:1032:32   - Unknown word (issuesecuritylevelscheme) -- self, "project/{0}/issuesecuritylevelscheme?expand=user", options
 jira/resources.py:1288:14   - Unknown word (categorised)              -- "categorisedActors": {
-jira/resources.py:1340:34   - Unknown word (securitylevel)            -- Resource.__init__(self, "securitylevel/{0}", options, session
 jira/resources.py:762:18    - Unknown word (duedate)    -- self.duedate: str | None = None
 jira/resources.py:772:18    - Unknown word (statuscategorychangedate) -- self.statuscategorychangedate: str | None = None
 jira/resources.py:894:42    - Unknown word (browsable)                -- URL of the issue, the browsable one not the REST one
@@ -243,14 +235,11 @@ tox.ini:115:21    - Unknown word (sdist)             -- # build wheel and sdist 
 tox.ini:116:35    - Unknown word (shutil)            -- -c 'import os.path, shutil, sys; \
 tox.ini:118:11    - Unknown word (isdir)             -- os.path.isdir(dist_dir) or sys.exit
 tox.ini:120:10    - Unknown word (rmtree)            -- shutil.rmtree(dist_dir)'
-tox.ini:122:7     - Unknown word (outdir)            -- --outdir {toxinidir}/dist/ \
 tox.ini:14:8      - Unknown word (basepython) -- ignore_basepython_conflict = True
 tox.ini:16:1      - Unknown word (skipdist)   -- skipdist = True
-tox.ini:26:2      - Unknown word (testenv)    -- [testenv]
 tox.ini:27:1      - Unknown word (usedevelop) -- usedevelop = True
 tox.ini:34:1      - Unknown word (sitepackages) -- sitepackages=False
 tox.ini:39:23     - Unknown word (posargs)      -- python -m pytest {posargs}
-tox.ini:40:1      - Unknown word (setenv)       -- setenv =
 tox.ini:41:21     - Unknown word (toxinidir)    -- PIP_CONSTRAINT={toxinidir}/constraints.txt
 tox.ini:42:14     - Unknown word (envdir)       -- PIP_LOG={envdir}/pip.log
 tox.ini:45:5      - Unknown word (PYTHONWARNINGS) -- PYTHONWARNINGS=ignore:DEPRECATION:
@@ -259,7 +248,6 @@ tox.ini:63:26     - Unknown word (getpass)        -- For Windows users, getpass.
 tox.ini:6:1       - Unknown word (envlist)    -- envlist =
 tox.ini:80:31     - Unknown word (autoupdate)     -- envpython} -m pre_commit autoupdate
 tox.ini:80:6      - Unknown word (envpython)      -- {envpython} -m pre_commit autoupdate
-tox.ini:86:3      - Unknown word (changedir)      -- # changedir=docs
 tox.ini:90:5      - Unknown word (PYTHONHTTPSVERIFY) -- PYTHONHTTPSVERIFY=0
 tox.ini:95:9      - Unknown word (nitpicky)          -- --nitpicky --fail-on-warning \
 tox.ini:97:12     - Unknown word (toxworkdir)        -- -d "{toxworkdir}/docs_doctree" \

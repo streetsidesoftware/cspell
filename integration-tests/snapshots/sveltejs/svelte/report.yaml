@@ -4,8 +4,8 @@ Url: https://github.com/sveltejs/svelte.git
 Args: '["**"]'
 Summary:
   files: 7295
-  filesWithIssues: 663
-  issues: 5152
+  filesWithIssues: 653
+  issues: 5088
   errors: 0
 Errors: []
 
@@ -14,7 +14,6 @@ issues:
   - "benchmarking/benchmarks.js:14:2         sbench      U       sbench_create_0to1,"
   - "benchmarking/benchmarks/kairo/kairo_mux.js:9:8          splited     U       const splited = heads"
   - "benchmarking/benchmarks/sbench.js:143:20        scount      U       * @param {number} scount"
-  - "benchmarking/compare/index.js:14:7          outdir      U       const outdir = path.resolve(filename"
   - "CONTRIBUTING.md:22:5        Triaging    U       ### Triaging issues and pull requests"
   - "documentation/blog/2016-11-26-frameworks-without-the-framework.md:29:303        analysing       U       modules. By statically analysing the component template"
   - "documentation/blog/2016-11-26-frameworks-without-the-framework.md:33:243        Ractive         U       Angular, or Ember, or Ractive, or Preact, or Riot"
@@ -651,7 +650,6 @@ issues:
   - "documentation/blog/2023-07-01-whats-new-in-svelte-july-2023.md:64:163       Paolo           U       paolo) with Antonio and Paolo"
   - "documentation/blog/2023-07-01-whats-new-in-svelte-july-2023.md:77:151       Holanda         U       requests/) by Claudio Holanda"
   - "documentation/blog/2023-07-01-whats-new-in-svelte-july-2023.md:78:32        journaling      U       published a gratitude journaling app for iOS and Android"
-  - "documentation/blog/2023-07-01-whats-new-in-svelte-july-2023.md:79:28        devs            U       Learning by doing - Vue devs build a Svelte Single"
   - "documentation/blog/2023-07-01-whats-new-in-svelte-july-2023.md:80:471       Aakash          U       salesforce-oauth-provider) by Aakash Goplani"
   - "documentation/blog/2023-07-01-whats-new-in-svelte-july-2023.md:80:478       Goplani         U       provider) by Aakash Goplani"
   - "documentation/blog/2023-07-01-whats-new-in-svelte-july-2023.md:81:158       Zaborowski      U       38ea2d99) by Jeremy Zaborowski"
@@ -768,7 +766,6 @@ issues:
   - "documentation/docs/02-template-syntax/10-data-fetching.md:14:59         unergonomic     U       with promises somewhat unergonomic. Svelte alleviates this"
   - "documentation/docs/03-runes/02-side-effects.md:68:38        reactivy            U       automatically picks up any reactivy values (`$state`, `"
   - "documentation/docs/03-runes/02-side-effects.md:144:215      synchronise         U       particular, avoid using it to synchronise state. Instead of this"
-  - "documentation/docs/03-runes/02-side-effects.md:276:6        autoscroll          U       // autoscroll when new messages are"
   - "documentation/docs/03-runes/02-side-effects.md:337:55       unlistens           U       called once a listener unlistens"
   - "documentation/docs/03-runes/02-side-effects.md:361:122      initialisation      U       outside of the component initialisation phase."
   - "documentation/docs/04-runtime/01-stores.md:111:42       tock                U       sound === 'tick' ? 'tock' : 'tick'));"
@@ -1059,7 +1056,6 @@ issues:
   - "packages/svelte/elements.d.ts:762:2         itemprop                        U       itemprop?: string | undefined"
   - "packages/svelte/elements.d.ts:763:2         itemscope                       U       itemscope?: boolean | undefined"
   - "packages/svelte/elements.d.ts:764:2         itemtype                        U       itemtype?: string | undefined"
-  - "packages/svelte/elements.d.ts:765:2         itemid                          U       itemid?: string | undefined"
   - "packages/svelte/elements.d.ts:766:2         itemref                         U       itemref?: string | undefined"
   - "packages/svelte/elements.d.ts:776:2         inputmode                       U       inputmode?:"
   - "packages/svelte/elements.d.ts:843:2         referrerpolicy                  U       referrerpolicy?: ReferrerPolicy | undefined"
@@ -1147,7 +1143,6 @@ issues:
   - "packages/svelte/src/compiler/legacy.js:278:9        elseblock       U       let elseblock = undefined;"
   - "packages/svelte/src/compiler/migrate/index.js:312:76        automigration           U       is not supported for automigration.'"
   - "packages/svelte/src/compiler/migrate/index.js:859:55        preceeded (preceded)    U       node. If the start is preceeded with white-space-only"
-  - "packages/svelte/src/compiler/phases/1-parse/index.js:2:48           borked      U       type definitions are borked in the release we use"
   - "packages/svelte/src/compiler/phases/1-parse/read/options.js:3:20        MATHML          U       import { NAMESPACE_MATHML, NAMESPACE_SVG } from"
   - "packages/svelte/src/compiler/phases/1-parse/read/options.js:138:12      shadowdom       U       const shadowdom = shadow?.value;"
   - "packages/svelte/src/compiler/phases/1-parse/read/options.js:159:37      mathml          U       options.namespace = 'mathml';"
@@ -2571,9 +2566,7 @@ issues:
   - "packages/svelte/tests/runtime-legacy/samples/binding-circular/_config.js:6:36           wheeee      U       value=\"[object Object]\">wheeee</option>"
   - "packages/svelte/tests/runtime-legacy/samples/binding-this-multiple/main.svelte:25:3         duiv    U       <duiv>"
   - "packages/svelte/tests/runtime-legacy/samples/class-shortcut-with-transition/_config.js:14:37        yszte       U       p class=\"red svelte-1yszte8 border\" style=\"\">bar"
-  - "packages/svelte/tests/runtime-legacy/samples/component-binding-each-remount-keyed/main.svelte:14:6          vals    U       let vals = [1, 2, 3];"
   - "packages/svelte/tests/runtime-legacy/samples/component-slot-fallback-2/_config.js:6:26          Blub    U       ssrHtml: '<input value=\"Blub\"> <input value=\"Blub"
-  - "packages/svelte/tests/runtime-legacy/samples/component-template-inline-mutation/_config.js:6:9          btns    U       const btns = target.querySelectorAll"
   - "packages/svelte/tests/runtime-legacy/samples/const-tag-await-then-destructuring-computed-in-computed/main.svelte:23:28          leng    U       await promise2 catch { [`leng${th}`]: l, [`wid${th"
   - "packages/svelte/tests/runtime-legacy/samples/const-tag-each-const/_config.js:19:13          nums    U       component.nums = [1, 2, 3];"
   - "packages/svelte/tests/runtime-legacy/samples/const-tag-each-const/main.svelte:3:6           foos    U       let foos = ["
@@ -2602,7 +2595,6 @@ issues:
   - "packages/svelte/tests/runtime-legacy/samples/each-block-keyed-random-permute/_config.js:60:9        kgjnempcboaflidh            U       test('kgjnempcboaflidh');"
   - "packages/svelte/tests/runtime-legacy/samples/each-block-keyed-random-permute/_config.js:61:9        fekbijachgd                 U       test('fekbijachgd');"
   - "packages/svelte/tests/runtime-legacy/samples/each-block-keyed-random-permute/_config.js:62:9        kdmlgfbicheja               U       test('kdmlgfbicheja');"
-  - "packages/svelte/tests/runtime-legacy/samples/function-hoisting/main.svelte:5:37         hoistable       U       functions, and `name` are hoistable, but hoistMe does not"
   - "packages/svelte/tests/runtime-legacy/samples/helpers/_config.js:4:12        sdrawkcab       U       html: '<p>sdrawkcab</p>'"
   - "packages/svelte/tests/runtime-legacy/samples/html-entities-inside-attributes/_config.js:13:24       copyotherstring     U       span data-xxx=\"&amp;copyotherstring=value\" style=\"&amp;copyothers"
   - "packages/svelte/tests/runtime-legacy/samples/html-entities/_config.js:16:14         stringnotanentity       U       <span>&amp;stringnotanentity;</span>"
@@ -2676,9 +2668,6 @@ issues:
   - "packages/svelte/tests/validator/samples/a11y-no-noninteractive-element-to-interactive-role/warnings.json:136:41         fieldset        U       interactive element `<fieldset>` cannot have interactive"
   - "packages/svelte/tests/validator/samples/a11y-no-noninteractive-element-to-interactive-role/warnings.json:196:76         rowheader       U       have interactive role 'rowheader'\","
   - "packages/svelte/tests/validator/samples/a11y-no-noninteractive-element-to-interactive-role/warnings.json:436:41         optgroup        U       interactive element `<optgroup>` cannot have interactive"
-  - "packages/svelte/tests/validator/samples/a11y-no-noninteractive-element-to-interactive-role/warnings.json:532:41         tbody           U       interactive element `<tbody>` cannot have interactive"
-  - "packages/svelte/tests/validator/samples/a11y-no-noninteractive-element-to-interactive-role/warnings.json:544:41         tfoot           U       interactive element `<tfoot>` cannot have interactive"
-  - "packages/svelte/tests/validator/samples/a11y-no-noninteractive-element-to-interactive-role/warnings.json:556:41         thead           U       interactive element `<thead>` cannot have interactive"
   - "packages/svelte/tests/validator/samples/a11y-no-redundant-roles/warnings.json:344:31        progressbar     U       message\": \"Redundant role 'progressbar'\","
   - "packages/svelte/tests/validator/samples/a11y-no-redundant-roles/warnings.json:392:31        rowgroup        U       message\": \"Redundant role 'rowgroup'\","
   - "packages/svelte/tests/validator/samples/a11y-no-static-element-interactions/warnings.json:8:30          keydown         U       message\": \"`<div>` with a keydown handler must have an"
@@ -2707,7 +2696,6 @@ issues:
   - "sites/svelte-5-preview/package.json:18:7        lezer               U       \"@lezer/common\": \"^1.2.1\","
   - "sites/svelte-5-preview/package.json:28:6        shiki               U       \"shiki\": \"^0.14.7\","
   - "sites/svelte-5-preview/package.json:29:12       twoslash            U       \"shiki-twoslash\": \"^3.1.2\","
-  - "sites/svelte-5-preview/package.json:37:7        codemirror          U       \"@codemirror/autocomplete\": \"^6."
   - "sites/svelte-5-preview/package.json:49:7        neocodemirror       U       \"@neocodemirror/svelte\": \"0.0.15\","
   - "sites/svelte-5-preview/package.json:50:7        replit              U       \"@replit/codemirror-lang-svelte"
   - "sites/svelte-5-preview/src/lib/Bundler.js:11:58         onstatus    U       svelte_url: string; onstatus: (val: string | null"
@@ -2723,7 +2711,6 @@ issues:
   - "sites/svelte-5-preview/src/routes/docs/content/02-examples/04-old-vs-new.md:9:175       practise        U       attributes now, which in practise means just removing"
   - "sites/svelte-5-preview/src/routes/docs/content/02-examples/04-old-vs-new.md:40:220      refactorable    U       in more maintainable, refactorable code."
   - "sites/svelte-5-preview/src/routes/docs/content/02-examples/04-old-vs-new.md:67:4        Untracking      U       ## Untracking dependencies"
-  - "sites/svelte-5-preview/src/routes/docs/content/02-examples/04-old-vs-new.md:127:4       Autoscroll      U       ## Autoscroll"
   - "sites/svelte-5-preview/src/routes/docs/content/03-appendix/02-breaking-changes.md:256:11        footgun     U       This is a footgun. In runes mode, if you"
   - "sites/svelte.dev/package.json:27:6          flexsearch      U       \"flexsearch\": \"^0.7.43\","
   - "sites/svelte.dev/package.json:28:6          flru            U       \"flru\": \"^1.0.2\""
@@ -2735,7 +2722,6 @@ issues:
   - "sites/svelte.dev/README.md:193:58       frontematter                U       is mentioned in the frontematter of a post. For example"
   - "sites/svelte.dev/README.md:210:124      latinised                   U       english language) they are latinised to make sure the URL"
   - "sites/svelte.dev/src/lib/db/client.js:2:10          SUPABASE    U       import { SUPABASE_URL, SUPABASE_KEY }"
-  - "sites/svelte.dev/src/lib/db/gist.js:19:8        userid      U       list_userid: user.id,"
   - "sites/svelte.dev/src/lib/db/gist.js:75:20       gistid      U       * @param {string} gistid"
   - "sites/svelte.dev/src/routes/_components/Demo.svelte:15:142      favourite       U       css-in-js\">use your favourite CSS-in-JS library</a"
   - "sites/svelte.dev/src/routes/_components/WhosUsingSvelte/companies.js:12:14          alaskaairlines      U       filename: 'alaskaairlines.svg',"

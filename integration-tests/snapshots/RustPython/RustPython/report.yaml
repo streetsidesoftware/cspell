@@ -5,7 +5,7 @@ Args: '["**"]'
 Summary:
   files: 621
   filesWithIssues: 326
-  issues: 2968
+  issues: 2935
   errors: 0
 Errors: []
 
@@ -49,14 +49,10 @@ issues:
   - "common/src/boxvec.rs:264:23         nonoverlapping      U       ptr::copy_nonoverlapping(other.as_ptr(), dst"
   - "common/src/boxvec.rs:582:5          Rawptr              U       /// Rawptr add but uses arithmetic"
   - "common/src/boxvec.rs:703:7          CAPERROR            U       const CAPERROR: &str = \"insufficient"
-  - "common/src/fileutils.rs:1:11        fileutils       U       // Python/fileutils.c in CPython"
-  - "common/src/fileutils.rs:31:28       PCWSTR          U       use windows_sys::core::PCWSTR;"
-  - "common/src/fileutils.rs:43:56       REPARSE         U       :SystemServices::IO_REPARSE_TAG_SYMLINK;"
-  - "common/src/fileutils.rs:69:16       reparse         U       pub st_reparse_tag: u32,"
-  - "common/src/fileutils.rs:110:18      noraise         U       // _Py_fstat_noraise in cpython"
-  - "common/src/fileutils.rs:262:44      IFEXEC          U       S_IFDIR | 0o111; // IFEXEC for user,group,other"
-  - "common/src/fileutils.rs:284:13      Reparse         U       pub ReparseTag: u32,"
-  - "common/src/fileutils.rs:402:34      DATALINK        U       Ioctl::FILE_DEVICE_DATALINK => {}"
+  - "common/src/fileutils.rs:31:28       PCWSTR      U       use windows_sys::core::PCWSTR;"
+  - "common/src/fileutils.rs:110:18      noraise     U       // _Py_fstat_noraise in cpython"
+  - "common/src/fileutils.rs:262:44      IFEXEC      U       S_IFDIR | 0o111; // IFEXEC for user,group,other"
+  - "common/src/fileutils.rs:402:34      DATALINK    U       Ioctl::FILE_DEVICE_DATALINK => {}"
   - "common/src/float_ops.rs:5:8         ufrexp      U       pub fn ufrexp(value: f64) -> (f64"
   - "common/src/hash.rs:21:25        siphash     U       const ALGO: &str = \"siphash24\";"
   - "common/src/hash.rs:65:58        hashf       U       E>(&self, iter: I, hashf: F) -> Result<PyHash"
@@ -772,7 +768,6 @@ issues:
   - "vm/src/stdlib/codecs.rs:381:8       readbuffer      U       fn readbuffer_encode(args: FuncArgs"
   - "vm/src/stdlib/collections.rs:142:12         extendleft      U       fn extendleft(&self, iter: PyObjectRef"
   - "vm/src/stdlib/collections.rs:224:12         popleft         U       fn popleft(&self, vm: &VirtualMachine"
-  - "vm/src/stdlib/errno.rs:8:9          errorcode                   U       let errorcode = vm.ctx.new_dict()"
   - "vm/src/stdlib/errno.rs:30:13        WSABASEERR                  U       WSABASEERR, WSADESCRIPTION_LEN"
   - "vm/src/stdlib/errno.rs:30:25        WSADESCRIPTION              U       WSABASEERR, WSADESCRIPTION_LEN, WSAEACCES, WSAEADDRINUSE"
   - "vm/src/stdlib/errno.rs:30:71        WSAEADDRNOTAVAIL            U       WSAEACCES, WSAEADDRINUSE, WSAEADDRNOTAVAIL,"
@@ -1014,8 +1009,7 @@ issues:
   - "vm/sre_engine/tests/tests.rs:121:37         pythonpython    U       mut state) = p.state(\"pythonpython\");"
   - "vm/sre_engine/tests/tests.rs:141:37         eeea            U       mut state) = p.state(\"eeea\");"
   - "vm/sre_engine/tests/tests.rs:179:16         nonascii        U       fn test_search_nonascii() {"
-  - "wasm/demo/package.json:7:10         codemirror      U       \"codemirror\": \"^5.42.0\","
-  - "wasm/demo/package.json:33:21        Liddle          U       \"author\": \"Ryan Liddle\","
+  - "wasm/demo/package.json:33:21        Liddle      U       \"author\": \"Ryan Liddle\","
   - "wasm/demo/snippets/asyncbrowser.py:2:8          asyncweb    U       import asyncweb"
   - "wasm/demo/snippets/import_pypi.py:2:8           whlimport       U       import whlimport"
   - "wasm/demo/snippets/import_pypi.py:19:5          fmter           U       fmter = pygments.formatters"

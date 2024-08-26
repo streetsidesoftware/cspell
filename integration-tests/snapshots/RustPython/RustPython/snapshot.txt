@@ -3,7 +3,7 @@ Repository: RustPython/RustPython
 Url: "https://github.com/RustPython/RustPython.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 621, Issues found: 2968 in 326 files.
+ CSpell: Files checked: 621, Issues found: 2935 in 326 files.
  exit code: 1
 Cargo.toml:150:1     - Unknown word (getrandom)  -- getrandom = "0.2.12"
 Cargo.toml:160:119   - Unknown word (zerocopy)   -- "socket", "sched", "zerocopy", "dir", "hostname"
@@ -61,13 +61,9 @@ common/src/boxvec.rs:264:23    - Unknown word (nonoverlapping) -- ptr::copy_nono
 common/src/boxvec.rs:582:5     - Unknown word (Rawptr)         -- /// Rawptr add but uses arithmetic
 common/src/boxvec.rs:703:7     - Unknown word (CAPERROR)       -- const CAPERROR: &str = "insufficient
 common/src/fileutils.rs:110:18    - Unknown word (noraise)    -- // _Py_fstat_noraise in cpython
-common/src/fileutils.rs:1:11      - Unknown word (fileutils)  -- // Python/fileutils.c in CPython
 common/src/fileutils.rs:262:44    - Unknown word (IFEXEC)     -- S_IFDIR | 0o111; // IFEXEC for user,group,other
-common/src/fileutils.rs:284:13    - Unknown word (Reparse)    -- pub ReparseTag: u32,
 common/src/fileutils.rs:31:28     - Unknown word (PCWSTR)     -- use windows_sys::core::PCWSTR;
 common/src/fileutils.rs:402:34    - Unknown word (DATALINK)   -- Ioctl::FILE_DEVICE_DATALINK => {}
-common/src/fileutils.rs:43:56     - Unknown word (REPARSE)    -- :SystemServices::IO_REPARSE_TAG_SYMLINK;
-common/src/fileutils.rs:69:16     - Unknown word (reparse)    -- pub st_reparse_tag: u32,
 common/src/float_ops.rs:5:8       - Unknown word (ufrexp)     -- pub fn ufrexp(value: f64) -> (f64
 common/src/hash.rs:21:25     - Unknown word (siphash)    -- const ALGO: &str = "siphash24";
 common/src/hash.rs:65:58     - Unknown word (hashf)      -- E>(&self, iter: I, hashf: F) -> Result<PyHash
@@ -835,7 +831,6 @@ vm/src/stdlib/errno.rs:62:44     - Unknown word (winerrs)                -- shou
 vm/src/stdlib/errno.rs:62:70     - Unknown word (errnos)                 -- winerrs are translated to errnos but it messes up some
 vm/src/stdlib/errno.rs:655:9     - Unknown word (ERFKILL)                -- ERFKILL
 vm/src/stdlib/errno.rs:65:15     - Unknown word (WSAHOS)                 -- pub const WSAHOS: i32 = WSAHOST_NOT_FOUND
-vm/src/stdlib/errno.rs:8:9       - Unknown word (errorcode)  -- let errorcode = vm.ctx.new_dict()
 vm/src/stdlib/imp.rs:172:9     - Unknown word (withdata)     -- withdata: OptionalArg<bool>,
 vm/src/stdlib/imp.rs:53:48     - Unknown word (unimportable) -- present but marked as unimportable, stops search).
 vm/src/stdlib/io.rs:1351:17   - Unknown word (fileobj)       -- pub fn repr_fileobj_name(obj: &PyObject
@@ -1011,7 +1006,6 @@ vm/sre_engine/tests/tests.rs:64:37     - Unknown word (axxzaz)     -- mut state)
 vm/sre_engine/tests/tests.rs:89:37     - Unknown word (baaaa)      -- mut state) = p.state("baaaa");
 wasm/README.md:1:16      - Unknown word (webassembly) -- # Compiling to webassembly
 wasm/demo/package.json:33:21     - Unknown word (Liddle)     -- "author": "Ryan Liddle",
-wasm/demo/package.json:7:10      - Unknown word (codemirror) -- "codemirror": "^5.42.0",
 wasm/demo/snippets/asyncbrowser.py:2:8       - Unknown word (asyncweb)   -- import asyncweb
 wasm/demo/snippets/import_pypi.py:19:5      - Unknown word (fmter)      -- fmter = pygments.formatters
 wasm/demo/snippets/import_pypi.py:19:52     - Unknown word (noclasses)  -- formatters.html.HtmlFormatter(noclasses=True, style="default
