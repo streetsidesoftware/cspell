@@ -3,9 +3,9 @@ Repository: MicrosoftDocs/PowerShell-Docs
 Url: https://github.com/MicrosoftDocs/PowerShell-Docs.git
 Args: '["--config=../../../cspell-power-shell-docs.config.yaml","**"]'
 Summary:
-  files: 2683
+  files: 2685
   filesWithIssues: 1235
-  issues: 5335
+  issues: 5334
   errors: 0
 Errors: []
 
@@ -618,12 +618,12 @@ issues:
   - "reference/5.1/Microsoft.PowerShell.Management/Set-ItemProperty.md:38:79         pscredential    U       string[]>] [-Credential <pscredential>]"
   - "reference/5.1/Microsoft.PowerShell.Management/Set-ItemProperty.md:46:79         pscredential    U       string[]>] [-Credential <pscredential>]"
   - "reference/5.1/Microsoft.PowerShell.Management/Set-ItemProperty.md:54:79         pscredential    U       string[]>] [-Credential <pscredential>]"
-  - "reference/5.1/Microsoft.PowerShell.Management/Set-WmiInstance.md:139:60         testvar         U       environment -Argument @{Name=\"testvar\";VariableValue=\"testvalue"
-  - "reference/5.1/Microsoft.PowerShell.Management/Set-WmiInstance.md:139:84         testvalue       U       testvar\";VariableValue=\"testvalue\";UserName=\"<SYSTEM>"
-  - "reference/5.1/Microsoft.PowerShell.Management/Set-WmiInstance.md:163:26         testvar         U       command creates the testvar environment variable"
-  - "reference/5.1/Microsoft.PowerShell.Management/Set-WmiInstance.md:163:74         testvalue       U       variable that has the value testvalue. It does this by"
-  - "reference/5.1/Microsoft.PowerShell.Management/Set-WmiInstance.md:309:68         ntlmdomain      U       authority setting to ntlmdomain:\\<DomainName\\>, where"
-  - "reference/5.1/Microsoft.PowerShell.Management/Set-WmiInstance.md:598:4          swmi            U       - `swmi`"
+  - "reference/5.1/Microsoft.PowerShell.Management/Set-WmiInstance.md:142:15         testvar         U       Name=\"testvar\""
+  - "reference/5.1/Microsoft.PowerShell.Management/Set-WmiInstance.md:143:24         testvalue       U       VariableValue=\"testvalue\""
+  - "reference/5.1/Microsoft.PowerShell.Management/Set-WmiInstance.md:171:27         testvar         U       command creates the `testvar` environment variable"
+  - "reference/5.1/Microsoft.PowerShell.Management/Set-WmiInstance.md:171:77         testvalue       U       that has the value `testvalue`. It does this"
+  - "reference/5.1/Microsoft.PowerShell.Management/Set-WmiInstance.md:322:69         ntlmdomain      U       authority setting to `ntlmdomain:<DomainName>`, where"
+  - "reference/5.1/Microsoft.PowerShell.Management/Set-WmiInstance.md:605:4          swmi            U       - `swmi`"
   - "reference/5.1/Microsoft.PowerShell.Management/Split-Path.md:368:65      Normpath    U       would use **Dirname**, **Normpath**, **Realpath**, **Join"
   - "reference/5.1/Microsoft.PowerShell.Management/Split-Path.md:368:79      Realpath    U       Dirname**, **Normpath**, **Realpath**, **Join**,"
   - "reference/5.1/Microsoft.PowerShell.Management/Start-Process.md:21:79        pscredential    U       string[]>] [-Credential <pscredential>]"
@@ -4754,14 +4754,14 @@ issues:
   - "reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:150:123       RUNPOWERSHELL       U       ADD_FILE_CONTEXT_MENU_RUNPOWERSHELL=1 ENABLE_PSREMOTING"
   - "reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:150:146       PSREMOTING          U       RUNPOWERSHELL=1 ENABLE_PSREMOTING=1 REGISTER_MANIFEST"
   - "reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:275:2         deviceip            U       $deviceip = '<device ip address"
-  - "reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:276:2         zipfile             U       $zipfile = 'PowerShell-7.4.4"
+  - "reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:276:2         zipfile             U       $zipfile = 'PowerShell-7.4.5"
   - "reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:277:2         downloadfolder      U       $downloadfolder = 'u:\\users\\administrator"
   - "reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:281:54        deviceip            U       Client\\TrustedHosts $deviceip"
   - "reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:284:12        zipfile             U       Copy-Item $zipfile -Destination $downloadfolder"
   - "reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:284:34        downloadfolder      U       zipfile -Destination $downloadfolder -ToSession $S"
   - "reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:314:28        workarea            U       include the package in the workarea and add _OPENSRC_POWERSHELL"
   - "reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:314:46        OPENSRC             U       the workarea and add _OPENSRC_POWERSHELL_ feature"
-  - "reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:353:2         zipfile             U       $zipfile = 'PowerShell-7.4.4"
+  - "reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:353:2         zipfile             U       $zipfile = 'PowerShell-7.4.5"
   - "reference/docs-conceptual/install/Installing-PowerShell-on-Windows.md:357:12        zipfile             U       Copy-Item $zipfile c:\\ -ToSession $session"
   - "reference/docs-conceptual/install/microsoft-update-faq.yml:43:37        lifecycles      U       information about support lifecycles, see"
   - "reference/docs-conceptual/lang-spec/chapter-02.md:366:2         végösszeg       U       $végösszeg # Hungarian"
@@ -4926,7 +4926,6 @@ issues:
   - "reference/docs-conceptual/learn/ps101/02-help-system.md:5:14        mirobb          U       ms.reviewer: mirobb"
   - "reference/docs-conceptual/learn/ps101/03-discovering-objects.md:3:24        mikefrobbins    U       custom: Contributor-mikefrobbins"
   - "reference/docs-conceptual/learn/ps101/03-discovering-objects.md:5:14        mirobb          U       ms.reviewer: mirobb"
-  - "reference/docs-conceptual/learn/ps101/03-discovering-objects.md:253:32      SMSS            U       Server Management Studio (SMSS)][SMSS]. No corresponding"
   - "reference/docs-conceptual/learn/ps101/04-pipelines.md:3:24          mikefrobbins    U       custom: Contributor-mikefrobbins"
   - "reference/docs-conceptual/learn/ps101/04-pipelines.md:5:14          mirobb          U       ms.reviewer: mirobb"
   - "reference/docs-conceptual/learn/ps101/05-formatting-aliases-providers-comparison.md:3:24        mikefrobbins    U       custom: Contributor-mikefrobbins"
