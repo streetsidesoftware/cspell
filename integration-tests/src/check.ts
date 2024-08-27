@@ -12,7 +12,12 @@ import { PrefixLogger } from './PrefixLogger.js';
 import { addRepository, checkoutRepositoryAsync, repositoryDir } from './repositoryHelper.js';
 import { execAsync } from './sh.js';
 import { shouldCheckRepo } from './shouldCheckRepo.js';
-import { checkAgainstSnapshot } from './snapshots.js';
+import {
+    checkAgainstReportSnapshot,
+    checkAgainstSnapshot,
+    readReportSnapshot,
+    writeReportSnapshot,
+} from './snapshots.js';
 import type { Logger } from './types.js';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
@@ -20,6 +25,8 @@ const __dirname = fileURLToPath(new URL('.', import.meta.url));
 const config = readConfig();
 const cspellArgs =
     '--no-progress --relative --show-context --gitignore --gitignore-root=. --reporter=default --reporter=${pathReporter}';
+const cspellArgsListAllFiles =
+    '--no-progress --relative --show-context --gitignore --gitignore-root=. --reporter=default --reporter=${pathReporterListAll}';
 const jsCspell = JSON.stringify(Path.resolve(__dirname, '../../bin.mjs'));
 
 const envVariables: string[] = [
@@ -109,7 +116,8 @@ async function execCheck(context: CheckContext, update: boolean): Promise<CheckR
     const path = Path.join(repositoryDir, rep.path);
     const nodeArgs = context.cpuProf ? ['--cpu-prof', '--cpu-prof-dir="../../../.."'] : [];
     const uniqueArgs = rep.uniqueOnly !== false ? ['--unique'] : [];
-    const cmdToExec = resolveArgs(rep.path, [genLaunchCSpellCommand(nodeArgs), cspellArgs, ...uniqueArgs]).join(' ');
+    const cmdArgs = rep.listAllFiles ? cspellArgsListAllFiles : cspellArgs;
+    const cmdToExec = resolveArgs(rep.path, [genLaunchCSpellCommand(nodeArgs), cmdArgs, ...uniqueArgs]).join(' ');
     const { log } = logger;
     const env = getEnvVariables();
     ++checkCount;
@@ -120,6 +128,7 @@ async function execCheck(context: CheckContext, update: boolean): Promise<CheckR
     log(color`*    '${name}'`);
     log(color`**********************************************\n`);
     log(time());
+    const originalReport = await readReportSnapshot(rep);
     if (!(await checkoutRepositoryAsync(logger, rep.url, rep.path, rep.commit, rep.branch))) {
         logger.log('******** fail ********');
         return { success: false, rep, elapsedTime: 0 };
@@ -138,11 +147,15 @@ async function execCheck(context: CheckContext, update: boolean): Promise<CheckR
     if (update) {
         log(color`************ Update Snapshot *************`);
     }
-    const r = checkResult(rep, cspellResult, update);
+    const r = await checkResult(rep, cspellResult, originalReport, update);
     log(time());
     if (r.diff) {
         log(r.diff);
         log('');
+    }
+    if (!update) {
+        // Restore the original report.
+        await writeReportSnapshot(rep, originalReport);
     }
     log(color`\n************ Done: ${name} ************\n`);
     return { success: r.match, rep, elapsedTime: cspellResult.elapsedTime };
@@ -204,8 +217,11 @@ function assembleOutput(result: Result) {
     return `${stdout} ${stderr} exit code: ${code}`;
 }
 
-function checkResult(rep: Repository, result: Result, update: boolean) {
-    return checkAgainstSnapshot(rep, assembleOutput(result), update);
+async function checkResult(rep: Repository, result: Result, originalReport: string, update: boolean) {
+    const snapDiff = await checkAgainstSnapshot(rep, assembleOutput(result), update);
+    if (update) return snapDiff;
+    const reportDiff = await checkAgainstReportSnapshot(rep, originalReport);
+    return reportDiff.match ? snapDiff : reportDiff;
 }
 
 function cleanResult(result: Result): Result {

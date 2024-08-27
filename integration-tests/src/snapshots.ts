@@ -1,4 +1,5 @@
-import * as fs from 'node:fs';
+import fs from 'node:fs';
+import fsp from 'node:fs/promises';
 import * as Path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -11,6 +12,7 @@ const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 export const snapshotDir = Path.resolve(Path.join(__dirname, '..', 'snapshots'));
 const snapshotFileName = 'snapshot.txt';
+const reportFileName = 'report.yaml';
 
 export function writeSnapshot(rep: Repository, output: string): void {
     const text = prepareOutput(rep, output);
@@ -30,18 +32,22 @@ export interface SnapshotCompareResult {
     diff?: string;
 }
 
-export function checkAgainstSnapshot(rep: Repository, output: string, update: boolean): SnapshotCompareResult {
+export async function checkAgainstSnapshot(
+    rep: Repository,
+    output: string,
+    update: boolean,
+): Promise<SnapshotCompareResult> {
     if (update) {
         writeSnapshot(rep, output);
         return { match: true };
     }
 
     const text = prepareOutput(rep, output);
-    const lines = text.split(/\n/g);
+    const lines = text.split('\n');
     const cleanText = linesToCleanText(lines);
 
-    const snapText = readSnapshot(rep);
-    const snapLines = snapText.split(/\n/g);
+    const snapText = await readSnapshot(rep);
+    const snapLines = snapText.split('\n');
     const cleanSnapText = linesToCleanText(snapLines);
 
     if (cleanText !== cleanSnapText) {
@@ -55,6 +61,21 @@ export function checkAgainstSnapshot(rep: Repository, output: string, update: bo
     return { match: true };
 }
 
+export async function checkAgainstReportSnapshot(
+    rep: Repository,
+    originalReport: string,
+): Promise<SnapshotCompareResult> {
+    const newReport = await readReportSnapshot(rep);
+    if (originalReport === newReport) {
+        return { match: true };
+    }
+    const diff = Diff.diffLinesUnified(originalReport.split('\n'), newReport.split('\n'), {
+        contextLines: 5,
+        expand: false,
+    });
+    return { match: false, diff };
+}
+
 function linesToCleanText(lines: string[]): string {
     return lines
         .map((t) => t.trim())
@@ -62,11 +83,11 @@ function linesToCleanText(lines: string[]): string {
         .join('\n');
 }
 
-export function readSnapshot(rep: Repository): string {
+export async function readSnapshot(rep: Repository): Promise<string> {
     const dir = Path.join(snapshotDir, rep.path);
     const filename = Path.join(dir, snapshotFileName);
     try {
-        return fs.readFileSync(filename, 'utf8');
+        return fsp.readFile(filename, 'utf8');
     } catch {
         return '';
     }
@@ -84,4 +105,20 @@ Lines:
 ${lines.join('\n')}
 `;
     return text;
+}
+
+export async function readReportSnapshot(rep: Repository): Promise<string> {
+    const dir = Path.join(snapshotDir, rep.path);
+    const filename = Path.join(dir, reportFileName);
+    try {
+        return fsp.readFile(filename, 'utf8');
+    } catch {
+        return '';
+    }
+}
+
+export async function writeReportSnapshot(rep: Repository, report: string): Promise<void> {
+    const dir = Path.join(snapshotDir, rep.path);
+    const filename = Path.join(dir, reportFileName);
+    return fsp.writeFile(filename, report, 'utf8');
 }

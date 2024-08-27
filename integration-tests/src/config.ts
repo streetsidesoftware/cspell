@@ -16,6 +16,7 @@ const pathCommonRepoRoot = Path.join(pathRoot, 'repositories');
 const pathCommonRepoCSpellConfig = Path.join(pathCommonRepoRoot, 'cspell.yaml');
 const pathCommonRepoBase = Path.join(pathCommonRepoRoot, 'temp');
 const pathReporter = Path.join(pathRoot, 'custom-reporter.js');
+const pathReporterListAll = Path.join(pathRoot, 'custom-reporter-list-all.js');
 
 const defaultConfig: Config = {
     repositories: [],
@@ -57,6 +58,7 @@ export function resolveArgs(repPath: string, args: string[]): string[] {
         '${commonBase}': pathCommonRepoBase,
         '${commonConfig}': pathCommonRepoCSpellConfig,
         '${pathReporter}': pathReporter,
+        '${pathReporterListAll}': pathReporterListAll,
         '${repoPath}': repPath,
     };
 

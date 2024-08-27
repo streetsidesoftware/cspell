@@ -53,7 +53,13 @@ interface Config extends ReporterConfiguration {
     issuesSummaryReport?: boolean;
 }
 
+interface ReporterSettings {
+    listAllFiles?: boolean;
+}
+
 export function getReporter(_settings: unknown, config?: Config): CSpellReporter {
+    const settings = toReporterSettings(_settings);
+    const { listAllFiles = false } = settings;
     const issueFilter = config?.unique ? uniqueFilter((i: Issue) => i.text) : () => true;
     const issues: Issue[] = [];
     const errors: string[] = [];
@@ -77,7 +83,7 @@ export function getReporter(_settings: unknown, config?: Config): CSpellReporter
             repository: fetchRepositoryInfo(root),
             issuesSummary: issuesSummaryReport && issuesSummary.size ? [...issuesSummary.values()] : undefined,
         };
-        const report = generateReport(reportData);
+        const report = generateReport(reportData, { listAllFiles });
         const repPath = extractRepositoryPath(root);
         writeSnapshotRaw(repPath, 'report.yaml', stringify(report));
         const csvRecord: CsvRecord = {
@@ -219,4 +225,19 @@ async function getFileSizes(files: string[]): Promise<number> {
     }
 
     return Math.ceil(total / 1024);
+}
+
+function toReporterSettings(settings: unknown): ReporterSettings {
+    if (!isReporterSettings(settings)) {
+        return {};
+    }
+    return settings;
+}
+
+function isReporterSettings(settings: unknown): settings is ReporterSettings {
+    return typeof settings === 'object' && settings !== null && !Array.isArray(settings);
+}
+
+export function getReporterListAll(_settings: unknown, config?: Config): CSpellReporter {
+    return getReporter({ listAllFiles: true }, config);
 }
