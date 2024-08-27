@@ -10,6 +10,8 @@ import { glob } from 'tinyglobby';
 
 import { clean } from './util.js';
 
+// cspell:ignore tinyglobby
+
 /**
  * This is a subset of IOptions from 'glob'.
  */
