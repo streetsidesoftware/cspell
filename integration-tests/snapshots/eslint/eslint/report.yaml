@@ -4,8 +4,8 @@ Url: https://github.com/eslint/eslint
 Args: '[".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]'
 Summary:
   files: 1983
-  filesWithIssues: 324
-  issues: 1730
+  filesWithIssues: 320
+  issues: 1703
   errors: 0
 Errors: []
 
@@ -14,7 +14,6 @@ issues:
   - "docs/package.json:32:11         munter              U       \"@munter/tap-render\": \"^0.2."
   - "docs/package.json:34:10         algoliasearch       U       \"algoliasearch\": \"^4.12.1\","
   - "docs/package.json:43:10         luxon               U       \"luxon\": \"^2.4.0\","
-  - "docs/package.json:50:10         prismjs             U       \"prismjs\": \"^1.29.0\","
   - "docs/README.md:45:51        openjsf     U       ESLint contributors, [www.openjsf.org](https://www.openjsf"
   - "docs/src/_plugins/md-syntax-highlighter.js:4:29         Yuxi    U       Copyright (c) 2019-present, Yuxi (Evan) You"
   - "docs/src/about/index.md:6:87        Zakas       U       created by Nicholas C. Zakas in June 2013. Code"
@@ -43,7 +42,6 @@ issues:
   - "docs/src/assets/scss/syntax-highlighter.scss:105:222        Cpolygon    U       fill%3D'%23f14c4c'%3E%3Cpolygon%20points%3D'5.5%2C0"
   - "docs/src/assets/scss/syntax-highlighter.scss:164:39         nums        U       variant-numeric: tabular-nums;"
   - "docs/src/assets/scss/tokens/typography.scss:63:10       Twemoji     U       \"Twemoji Country Flags\","
-  - "docs/src/contribute/architecture/index.md:68:29         estraverse      U       the AST is available, `estraverse` is used to traverse"
   - "docs/src/contribute/governance.md:35:51         triaging            U       least one hour per week triaging issues and reviewing"
   - "docs/src/contribute/governance.md:85:35         committership       U       important to recognize that committership is a privilege, not"
   - "docs/src/contribute/package-json-conventions.md:17:38       ABNF            U       summary of the proposal in ABNF."
@@ -143,7 +141,6 @@ issues:
   - "docs/src/use/command-line-interface.md:550:17       customformat    U       npx eslint -f ./customformat.js file.js"
   - "docs/src/use/configure/configuration-files-deprecated.md:39:25          myfiletotest    U       eslint -c myconfig.json myfiletotest.js"
   - "docs/src/use/configure/configuration-files.md:514:5         Deno    U       For Deno and Bun, TypeScript"
-  - "docs/src/use/configure/configuration-files.md:514:134       jiti    U       optional dev dependency [`jiti`](https://github.com"
   - "docs/src/use/configure/debug.md:28:44       nzakas      U       config from C:\\Users\\nzakas\\projects\\eslint\\eslint"
   - "docs/src/use/configure/ignore-deprecated.md:100:200     jshintignore    U       example, you can use `.jshintignore` file because it has"
   - "docs/src/use/configure/ignore-deprecated.md:120:14      mypackage       U       \"name\": \"mypackage\","
@@ -177,8 +174,6 @@ issues:
   - "docs/src/use/migrating-to-2.0.0.md:347:45       FEFF    U       parse(text.replace(/^\\uFEFF/, \"\"), options);"
   - "docs/src/use/migrating-to-3.0.0.md:47:229       lifed       U       Explorer 8 was end-of-lifed](https://www.microsoft"
   - "docs/src/use/migrating-to-5.0.0.md:114:68       lintable    U       line does not match any lintable files"
-  - "eslint.config.js:191:18         knip    U       files: [\"knip.jsonc\"],"
-  - "knip.jsonc:15:23        Knip    U       // If Knip would consider exports"
   - "knip.jsonc:27:19        wdio    U       \"@wdio/cli\","
   - "lib/cli-engine/formatters/html.js:46:48         Neue            U       family: Arial, \"Helvetica Neue\", Helvetica, sans-serif"
   - "lib/cli-engine/formatters/html.js:247:66        noopener        U       target=\"_blank\" rel=\"noopener noreferrer\">${ruleId"
@@ -189,7 +184,6 @@ issues:
   - "lib/eslint/eslint-helpers.js:18:7           fswalk          U       const fswalk = require(\"@nodelib"
   - "lib/eslint/eslint-helpers.js:18:26          nodelib         U       const fswalk = require(\"@nodelib/fs.walk\");"
   - "lib/eslint/eslint-helpers.js:629:34         unconfigured    U       ignored\"|\"external\"|\"unconfigured\"} configStatus A status"
-  - "lib/eslint/eslint.js:368:21         Jiti    U       const createJiti = await import(\"jiti"
   - "lib/languages/js/index.js:85:37         Feenstra    U       Copyright (c) 2013, Joel Feenstra"
   - "lib/languages/js/index.js:102:47        FEENSTRA    U       NO EVENT SHALL JOEL FEENSTRA BE LIABLE FOR ANY"
   - "lib/linter/code-path-analysis/code-path-state.js:351:34         expresion       U       The end of the update expresion. This may change during"
@@ -685,7 +679,6 @@ issuesSummary:
   - "text: eslintformatter, count: 1, files: 1,"
   - "text: eslump, count: 5, files: 2,"
   - "text: estools, count: 1, files: 1,"
-  - "text: estraverse, count: 1, files: 1,"
   - "text: esutils, count: 8, files: 3,"
   - "text: Europese, count: 1, files: 1,"
   - "text: exportee, count: 1, files: 1,"
@@ -774,8 +767,6 @@ issuesSummary:
   - "text: isfatarrow, count: 2, files: 1,"
   - "text: isfunc, count: 5, files: 1,"
   - "text: isnan, count: 9, files: 3,"
-  - "text: jiti, count: 15, files: 5,"
-  - "text: Jiti, count: 2, files: 1,"
   - "text: jscript, count: 2, files: 1,"
   - "text: jscsrs, count: 1, files: 1,"
   - "text: jsfmt, count: 5, files: 1,"
@@ -785,8 +776,6 @@ issuesSummary:
   - "text: Kanti, count: 1, files: 1,"
   - "text: Kanti's, count: 1, files: 1,"
   - "text: Karlton, count: 2, files: 2,"
-  - "text: knip, count: 3, files: 2,"
-  - "text: Knip, count: 2, files: 2,"
   - "text: Kovalyov, count: 1, files: 1,"
   - "text: Kumar, count: 1, files: 1,"
   - "text: Kumar's, count: 1, files: 1,"
@@ -946,7 +935,6 @@ issuesSummary:
   - "text: preinc, count: 1, files: 1,"
   - "text: prereg, count: 5, files: 1,"
   - "text: previos, count: 2, files: 2,"
-  - "text: prismjs, count: 4, files: 3,"
   - "text: Propert, count: 2, files: 2,"
   - "text: prototypejs, count: 5, files: 2,"
   - "text: pushd, count: 1, files: 1,"
