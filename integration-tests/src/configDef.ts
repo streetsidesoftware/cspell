@@ -13,5 +13,10 @@ export interface Repository {
      * @default true
      */
     uniqueOnly?: boolean;
+    /**
+     * List all files in the report, even if they have no issues.
+     * @default false
+     */
+    listAllFiles?: boolean;
     postCheckoutSteps: string[] | undefined;
 }

@@ -1,5 +1,5 @@
 import type { Issue, RunResult } from '@cspell/cspell-types';
-import type { URI as Uri } from 'vscode-uri';
+import { URI as Uri } from 'vscode-uri';
 
 import type { Repository } from '../configDef.js';
 
@@ -40,7 +40,11 @@ export interface ReportData {
 
 const compare = new Intl.Collator().compare;
 
-export function generateReport(data: ReportData): Report {
+interface GenerateReportOptions {
+    listAllFiles?: boolean | undefined;
+}
+
+export function generateReport(data: ReportData, options: GenerateReportOptions): Report {
     const { errors, runResult, issues, root } = data;
     const rootUri = root.toString();
     const byFile = new Map<string, Issue[]>();
@@ -51,6 +55,14 @@ export function generateReport(data: ReportData): Report {
         }
         return decodeURIComponent(uri);
     }
+
+    if (options.listAllFiles) {
+        data.files.forEach((file) => {
+            const uri = Uri.file(file).toString();
+            byFile.set(uri, []);
+        });
+    }
+
     issues.forEach((issue) => {
         const uri = issue.uri || '';
         const found = byFile.get(uri);
@@ -65,6 +77,9 @@ export function generateReport(data: ReportData): Report {
 
     const issuesByFile = sortedByFile.map(([uri, issues]) => {
         const file = relative(uri);
+        if (!issues.length) {
+            return [`${file}:1:1\tNo issues found`];
+        }
         return padLines(issues.map((issue) => formatIssue(file, issue)));
     });
 

@@ -13,6 +13,7 @@
   },
   "scripts": {
     "build": "tsc -p .",
+    "watch": "tsc -p . --watch",
     "clean": "pnpm run clean-dist && pnpm run clean-repos",
     "clean-dist": "shx rm -rf dist coverage \"*.tsbuildInfo\"",
     "clean-repos": "shx rm -rf repositories/temp temp",
