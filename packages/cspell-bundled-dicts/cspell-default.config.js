@@ -133,6 +133,7 @@ const settings = {
         '@cspell/dict-en-common-misspellings/cspell-ext.json',
         '@cspell/dict-en-gb/cspell-ext.json',
         '@cspell/dict-filetypes/cspell-ext.json',
+        '@cspell/dict-flutter/cspell-ext.json',
         '@cspell/dict-fonts/cspell-ext.json',
         '@cspell/dict-fsharp/cspell-ext.json',
         '@cspell/dict-fullstack/cspell-ext.json',
