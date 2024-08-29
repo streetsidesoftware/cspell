@@ -5,7 +5,7 @@ Args: '["--issues-summary-report","**","--exclude=**/Backup/**"]'
 Summary:
   files: 489
   filesWithIssues: 428
-  issues: 11040
+  issues: 11034
   errors: 0
 Errors: []
 
@@ -1602,7 +1602,6 @@ issues:
   - "PowerShell/Get-CmsHosts.ps1:44:30       Sqlcmd                      U       If ( (Invoke-Sqlcmd -Query \"SELECT SERVERPROPERTY"
   - "PowerShell/Get-CmsHosts.ps1:44:68       productversion              U       SELECT SERVERPROPERTY('productversion') AS v\" -ServerInstance"
   - "PowerShell/Get-CmsHosts.ps1:71:8        Sqlcmd                      U       Invoke-Sqlcmd -Query $query"
-  - "PowerShell/Get-CmsHosts.ps1:74:122      Runspace                    U       Select * -ExcludeProperty RunspaceId | Out-GridView"
   - "PowerShell/Get-MachineInformationExcel.ps1:8:21         Stad                    U       Written by Sander Stad, SQLStad.nl"
   - "PowerShell/Get-MachineInformationExcel.ps1:8:30         Stad                    U       Written by Sander Stad, SQLStad.nl"
   - "PowerShell/Get-MachineInformationExcel.ps1:10:16        Stad                    U       (c) 2015, SQLStad.nl. All rights reserved"
@@ -1661,13 +1660,8 @@ issues:
   - "PowerShell/Get-SQLErrorLog.ps1:117:48       errorlogpath        U       Server Error Log Path: $errorlogpath\""
   - "PowerShell/Get-SQLErrorLog.ps1:118:47       Paramters           U       Command @InvokeCommandParamters -ScriptBlock {param"
   - "PowerShell/Get-SQLErrorLog.ps1:118:214      errorlogpath        U       ogFileName*\"}} -ArgumentList $errorlogpath, $errorLogFileName"
-  - "PowerShell/Get-SQLErrorLog.ps1:135:10       Runspace            U       $Runspace = [runspacefactory]"
   - "PowerShell/Get-SQLErrorLog.ps1:135:22       runspacefactory     U       $Runspace = [runspacefactory]::CreateRunspace()"
-  - "PowerShell/Get-SQLErrorLog.ps1:135:46       Runspace            U       runspacefactory]::CreateRunspace()"
   - "PowerShell/Get-SQLErrorLog.ps1:136:138      Paramters           U       AddArgument($InvokeCommandParamters)"
-  - "PowerShell/Get-SQLErrorLog.ps1:137:21       Runspace            U       $PowerShell.Runspace = $Runspace"
-  - "PowerShell/Get-SQLErrorLog.ps1:137:33       Runspace            U       PowerShell.Runspace = $Runspace"
-  - "PowerShell/Get-SQLErrorLog.ps1:143:27       Runspace            U       $PowerShellObject.Runspace.Open()"
   - "PowerShell/Get-SQLErrorLog.ps1:188:22       runspacefactory     U       $Runspace = [runspacefactory]::CreateRunspace()"
   - "PowerShell/Get-SQLErrorLog.ps1:199:22       runspacefactory     U       $Runspace = [runspacefactory]::CreateRunspace()"
   - "PowerShell/Get-SQLServerGlobalTraceFlags.ps1:20:6           cmdletbinding       U       [cmdletbinding()]"
@@ -13306,7 +13300,6 @@ issuesSummary:
   - "text: Runing, count: 1, files: 1,"
   - "text: runnig, count: 2, files: 2,"
   - "text: runningdisagentcount, count: 1, files: 1,"
-  - "text: Runspace, count: 6, files: 2,"
   - "text: runspacefactory, count: 3, files: 1,"
   - "text: runspeed, count: 3, files: 1,"
   - "text: RUNTIMESTAMP, count: 4, files: 1,"
