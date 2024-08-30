@@ -445,6 +445,26 @@
       ],
       "uniqueOnly": false,
       "commit": "20c1002132603be8b00997dfe93e8f4947fb4015"
+    },
+    {
+      "path": "dart-lang/sdk",
+      "url": "https://github.com/dart-lang/sdk",
+      "args": [
+        "--issues-summary-report",
+        "--locale=en,en-GB",
+        "--exclude=tools/dom/**/*.json",
+        "--exclude=pkg/*/test/**",
+        "--exclude=**/*_data.*",
+        "--exclude=runtime/vm/**",
+        "--exclude=sdk/lib/html/**",
+        "--exclude=benchmarks/**",
+        "--exclude=**/*_test.*",
+        "--exclude=*/**/*.{json,yaml,yml}",
+        "--exclude=tests/corelib/regexp/**",
+        "--exclude=**/{third_party,assets}/**",
+        "**/*.{dart,md}"
+      ],
+      "commit": "a0411ae24485526470b7f99148132f29fe01edcb"
     }
   ]
 }
