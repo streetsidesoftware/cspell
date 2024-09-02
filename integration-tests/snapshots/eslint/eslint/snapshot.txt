@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: [".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 1983, Issues found: 1702 in 319 files.
+ CSpell: Files checked: 1983, Issues found: 1692 in 317 files.
  exit code: 1
 Makefile.js:116:88    - Unknown word (ined)       -- followed by the string "ined".
 Makefile.js:327:12    - Unknown word (gensite)    -- target.gensite();
@@ -27,7 +27,6 @@ README.md:280:86    - Unknown word (Strek's)       -- 5" height="75" alt="Strek'
 README.md:281:1     - Unknown word (Strek)         -- Strek
 README.md:290:5     - Unknown word (teamend)       -- <!--teamend-->
 README.md:297:5     - Unknown word (sponsorsstart) -- <!--sponsorsstart-->
-README.md:300:96    - Unknown word (Schleifer)     -- avatar.png" alt="Eli Schleifer" height="96"></a> <a
 README.md:301:564   - Unknown word (Workleap)      -- f99fe2465f&v=4" alt="Workleap" height="64"></a></p
 README.md:302:1054  - Unknown word (Nextbase)      -- 145838380?v=4" alt="Nextbase Starter Kit" height
 README.md:303:5     - Unknown word (sponsorsend)   -- <!--sponsorsend-->
@@ -212,9 +211,7 @@ lib/linter/code-path-analysis/code-path-state.js:1256:46   - Unknown word (circu
 lib/linter/code-path-analysis/code-path-state.js:1730:23   - Unknown word (Segs)       -- const prevSegsOfLeavingSegment = [headOfLeav
 lib/linter/code-path-analysis/code-path-state.js:351:34    - Unknown word (expresion)  -- The end of the update expresion. This may change during
 lib/linter/code-path-analysis/debug-helpers.js:95:44     - Unknown word (Graphvis)   -- can be visualized with Graphvis.
-lib/linter/config-comment-parser.js:76:22     - Unknown word (commaless)  -- // Also, commaless notations have invalid
-lib/linter/config-comment-parser.js:87:20     - Unknown word (Levn)       -- debug("Levn parsing failed; falling
-lib/linter/linter.js:47:7      - Unknown word (jslang)     -- const jslang = require("../languages
+lib/linter/linter.js:44:7      - Unknown word (jslang)     -- const jslang = require("../languages
 lib/rule-tester/rule-tester.js:249:42    - Unknown word (errorize)   -- ast The root node to errorize `start`/`end` properties
 lib/rule-tester/rule-tester.js:855:27    - Unknown word (Didnt)      -- function assertASTDidntChange(beforeAST, afterAST
 lib/rules/dot-notation.js:138:63    - Unknown word (quasis)     -- node, node.property.quasis[0].value.cooked);
@@ -237,7 +234,7 @@ lib/rules/no-extra-parens.js:565:19    - Unknown word (prec)           -- const 
 lib/rules/no-implicit-coercion.js:14:39     - Unknown word (ndex)       -- PATTERN = /^(?:i|lastI)ndexOf$/u;
 lib/rules/no-inline-comments.js:61:17     - Unknown word (postamble)  -- postamble = endLine.slice(node
 lib/rules/no-inline-comments.js:63:19     - Unknown word (Postamble)  -- isPostambleEmpty = !postamble;
-lib/rules/no-invalid-regexp.js:13:22     - Unknown word (dgimsuvy)   -- const validFlags = /[dgimsuvy]/gu;
+lib/rules/no-invalid-regexp.js:13:21     - Unknown word (dgimsuvy)   -- const validFlags = "dgimsuvy";
 lib/rules/no-mixed-requires.js:78:66     - Unknown word (iojs)       -- per nodejs v0.12.2 and iojs v0.7.1
 lib/rules/no-new-native-nonconstructor.js:32:18     - Unknown word (Nonconstructor) -- noNewNonconstructor: "`{{name}}` cannot
 lib/rules/no-trailing-spaces.js:60:13     - Unknown word (NONBLANK)   -- NONBLANK = `${BLANK_CLASS}+$
@@ -280,10 +277,10 @@ tests/lib/cli-engine/cli-engine.js:6680:52   - Unknown word (extendees)         
 tests/lib/cli-engine/formatters/html.js:528:130   - Unknown word (apos)       -- Unexpected &lt;&amp;&quot;&apos;&gt; foo.", ruleId:
 tests/lib/cli.js:1923:53   - Unknown word (oldx)          -- = `--flag test_only_oldx --config ${configPath
 tests/lib/cli.js:413:60    - Unknown word (fakeformatter) -- await cli.execute(`-f fakeformatter ${filePath} ${flag}
-tests/lib/config/flat-config-array.js:1564:43   - Unknown word (truex)       -- foo: "truex"
-tests/lib/config/flat-config-array.js:2092:29   - Unknown word (foox)        -- foox: [1, "bar"]
-tests/lib/config/flat-config-array.js:2114:30   - Unknown word (doesnt)      -- "doesnt-exist/match": "error
-tests/lib/config/flat-config-array.js:211:22    - Unknown word (noniterable) -- it("should allow noniterable baseConfig objects"
+tests/lib/config/flat-config-array.js:1577:43   - Unknown word (truex)       -- foo: "truex"
+tests/lib/config/flat-config-array.js:2105:29   - Unknown word (foox)        -- foox: [1, "bar"]
+tests/lib/config/flat-config-array.js:2127:30   - Unknown word (doesnt)      -- "doesnt-exist/match": "error
+tests/lib/config/flat-config-array.js:216:22    - Unknown word (noniterable) -- it("should allow noniterable baseConfig objects"
 tests/lib/config/flat-config-schema.js:19:50     - Unknown word (reults)     -- expectedResult] The expected reults of merging first and
 tests/lib/config/flat-config-schema.js:46:20     - Unknown word (emtpy)      -- it("returns an emtpy object if both values
 tests/lib/eslint/eslint.js:1736:57   - Unknown word (doesnotexist) -- lintFiles(["subdir1", "doesnotexist/*.js"]);
@@ -296,7 +293,6 @@ tests/lib/eslint/eslint.js:3864:59   - Unknown word (occured)        -- the prev
 tests/lib/eslint/eslint.js:6301:40   - Unknown word (mcts)           -- "eslint.config.mcts": configFileContent
 tests/lib/eslint/eslint.js:8039:31   - Unknown word (dignore)        -- cwd: `${root}-dignore`,
 tests/lib/eslint/legacy-eslint.js:2536:24   - Unknown word (succesfully) -- it("should succesfully execute with a rule
-tests/lib/linter/config-comment-parser.js:159:41    - Unknown word (ELEVENTEEN) -- code = "a: seventy, b:ELEVENTEEN";
 tests/lib/linter/linter.js:16380:52  - Unknown word (intentionaly)   -- // intentionaly mutates objects and
 tests/lib/linter/linter.js:3287:1    - Unknown word (consolexlog) -- consolexlog("test2");
 tests/lib/linter/linter.js:3431:84   - Unknown word (rulename)    -- this is 2, since the rulename is very likely to be

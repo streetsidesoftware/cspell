@@ -3,9 +3,9 @@ Repository: googleapis/google-cloud-cpp
 Url: https://github.com/googleapis/google-cloud-cpp.git
 Args: '["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]'
 Summary:
-  files: 19596
-  filesWithIssues: 12107
-  issues: 91826
+  files: 19600
+  filesWithIssues: 12110
+  issues: 91830
   errors: 0
 Errors: []
 
@@ -674,7 +674,6 @@ issues:
   - "google/cloud/bigtable/doc/bigtable-samples-grpc-credentials.dox:57:71       endl                    U       < ex.what() << std::endl;"
   - "google/cloud/bigtable/doc/override-retry-policies.dox:89:41         idempontent     U       assigned timestamps are idempontent by default."
   - "google/cloud/bigtable/examples/bigtable_hello_app_profile.cc:145:40         abcdefghilklmnopqrstuvwxyz      U       generator, 8, \"abcdefghilklmnopqrstuvwxyz0123456789\");"
-  - "google/cloud/bigtable/examples/data_filter_snippets.cc:132:28       Ofset       U       FilterLimitCellsPerRowOfset(google::cloud::bigtable"
   - "google/cloud/bigtable/examples/data_snippets.cc:643:21      rowkey      U       std::cerr << \"rowkey[\" << f.original_index"
   - "google/cloud/bigtable/examples/howto_mock_data_api.cc:32:11         cbtm    U       namespace cbtm = ::google::cloud::bigtable"
   - "google/cloud/bigtable/filters.h:622:6       subfilters      U       * subfilters S1, S2, and S3, the"
@@ -821,11 +820,11 @@ issues:
   - "google/cloud/gkeconnect/quickstart/MODULE.bazel:2:18        Bzlmod      U       # Bazel now uses Bzlmod by default to manage"
   - "google/cloud/gkehub/gke_hub_client.h:19:39          GKEHUB      U       CLOUD_CPP_GOOGLE_CLOUD_GKEHUB_GKE_HUB_CLIENT_H"
   - "google/cloud/gkemulticloud/CMakeLists.txt:32:30         GKEMULTICLOUD       U       GOOGLE_CLOUD_CPP_GKEMULTICLOUD_TEST_REGION)"
-  - "google/cloud/google_cloud_cpp_common_unit_tests.bzl:49:15       noexcept    U       \"internal/noexcept_action_test.cc\","
-  - "google/cloud/google_cloud_cpp_common_unit_tests.bzl:60:22       hmac        U       \"internal/sha256_hmac_test.cc\","
-  - "google/cloud/google_cloud_cpp_common_unit_tests.bzl:63:15       strerror    U       \"internal/strerror_test.cc\","
-  - "google/cloud/google_cloud_cpp_common.bzl:50:23          msvc        U       \"internal/disable_msvc_crt_secure_warnings"
-  - "google/cloud/google_cloud_cpp_common.bzl:59:15          getenv      U       \"internal/getenv.h\","
+  - "google/cloud/google_cloud_cpp_common_unit_tests.bzl:50:15       noexcept    U       \"internal/noexcept_action_test.cc\","
+  - "google/cloud/google_cloud_cpp_common_unit_tests.bzl:61:22       hmac        U       \"internal/sha256_hmac_test.cc\","
+  - "google/cloud/google_cloud_cpp_common_unit_tests.bzl:64:15       strerror    U       \"internal/strerror_test.cc\","
+  - "google/cloud/google_cloud_cpp_common.bzl:52:23          msvc        U       \"internal/disable_msvc_crt_secure_warnings"
+  - "google/cloud/google_cloud_cpp_common.bzl:61:15          getenv      U       \"internal/getenv.h\","
   - "google/cloud/google_cloud_cpp_rest_internal_unit_tests.bzl:26:37        sigpipe     U       curl_wrappers_disable_sigpipe_handler_test.cc\","
   - "google/cloud/google_cloud_cpp_rest_internal_unit_tests.bzl:32:20        writev      U       \"internal/curl_writev_test.cc\","
   - "google/cloud/grpc_options_test.cc:406:42        fieldmask       U       Pair(\"x-goog-fieldmask\", \"items.name,token"
@@ -846,6 +845,9 @@ issues:
   - "google/cloud/internal/curl_rest_client_integration_test.cc:60:62        HTTPBIN     U       cloud::internal::GetEnv(\"HTTPBIN_ENDPOINT\");"
   - "google/cloud/internal/curl_rest_client_integration_test.cc:113:21       httbin      U       // TODO(#8396): httbin.org doesn't send back"
   - "google/cloud/internal/curl_wrappers_test.cc:53:14       Casse       U       struct TestCasse {"
+  - "google/cloud/internal/detect_gcp_impl.cc:122:16         HKEY    U       config.key = HKEY_LOCAL_MACHINE;"
+  - "google/cloud/internal/detect_gcp_test.cc:43:43          Loogle      U       testing::Values(\"Loogle\", \"Test\", \"Google K"
+  - "google/cloud/internal/detect_gcp_test.cc:58:56          LPBYTE      U       value_key, 0, REG_SZ, (LPBYTE)value.c_str(),"
   - "google/cloud/internal/diagnostics_pop.inc:17:2          elif    U       #elif __clang__"
   - "google/cloud/internal/diagnostics_pop.inc:19:9          GNUC    U       #elif __GNUC__"
   - "google/cloud/internal/disable_deprecation_warnings.inc:19:36        Wdeprecated     U       diagnostic ignored \"-Wdeprecated-declarations\""
@@ -980,8 +982,7 @@ issues:
   - "google/cloud/pubsublite/internal/partition_publisher_test.cc:987:64         unacked         U       messages that are left unacked"
   - "google/cloud/pubsublite/internal/partition_publisher.cc:74:22       unbatched       U       MessageWithPromise unbatched{std::move(m), promise"
   - "google/cloud/pubsublite/internal/partition_publisher.cc:202:21      Unbatch         U       PartitionPublisher::UnbatchAll(std::unique_lock"
-  - "google/cloud/pubsublite/internal/publisher_connection_impl_test.cc:58:56        abadoned    U       value the promise is \"abadoned\", that sets"
-  - "google/cloud/pubsublite/internal/publisher_connection_impl_test.cc:73:52        ohhh        U       StatusCode::kAborted, \"uh ohhh\"};"
+  - "google/cloud/pubsublite/internal/publisher_connection_impl_test.cc:73:52        ohhh    U       StatusCode::kAborted, \"uh ohhh\"};"
   - "google/cloud/pubsublite/internal/resumable_async_streaming_read_write_rpc.h:446:50      downcalls       U       futures which may have downcalls outside the class"
   - "google/cloud/rapidmigrationassessment/v1/internal/rapid_migration_assessment_auth_decorator.h:20:39         RAPIDMIGRATIONASSESSMENT    U       CLOUD_CPP_GOOGLE_CLOUD_RAPIDMIGRATIONASSESSMENT_V1_INTERNAL_RAPID_MIGRATION"
   - "google/cloud/rapidmigrationassessment/v1/rapid_migration_assessment_client.h:661:43         thorugh     U       does final deletion thorugh producer api."
@@ -1097,11 +1098,10 @@ issues:
   - "google/cloud/storage/bucket_autoclass.h:31:8        autoclass       U       * The autoclass configuration for a"
   - "google/cloud/storage/bucket_autoclass.h:49:66       tscu            U       system_clock::time_point tscu)"
   - "google/cloud/storage/bucket_custom_placement_config.h:32:69         Multiregion     U       regions within the same Multiregion."
-  - "google/cloud/storage/bucket_metadata_test.cc:78:34          NEARLINE        U       terminalStorageClass\": \"NEARLINE\","
-  - "google/cloud/storage/bucket_metadata_test.cc:265:55         Nearline        U       LifecycleRule::SetStorageClassNearline()},"
-  - "google/cloud/storage/bucket_metadata_test.cc:1316:21        hierarhical     U       ASSERT_TRUE(json[\"hierarhicalNamespace\"].is_null("
-  - "google/cloud/storage/bucket_metadata_test.cc:1390:37        Coldline        U       LifecycleRule::SetStorageClassColdline());"
-  - "google/cloud/storage/bucket_metadata_test.cc:1404:65        COLDLINE        U       orageClass\", \"storageClass\": \"COLDLINE\"},"
+  - "google/cloud/storage/bucket_metadata_test.cc:78:34          NEARLINE    U       terminalStorageClass\": \"NEARLINE\","
+  - "google/cloud/storage/bucket_metadata_test.cc:265:55         Nearline    U       LifecycleRule::SetStorageClassNearline()},"
+  - "google/cloud/storage/bucket_metadata_test.cc:1390:37        Coldline    U       LifecycleRule::SetStorageClassColdline());"
+  - "google/cloud/storage/bucket_metadata_test.cc:1404:65        COLDLINE    U       orageClass\", \"storageClass\": \"COLDLINE\"},"
   - "google/cloud/storage/bucket_metadata.cc:241:14      subpatch    U       if (labels_subpatch_dirty_) {"
   - "google/cloud/storage/client_options_test.cc:50:38       TESTBENCH       U       endpoint_(\"CLOUD_STORAGE_TESTBENCH_ENDPOINT\", {}),"
   - "google/cloud/storage/client_options_test.cc:497:27      Projec          U       F(ClientOptionsTest, ProjecIdtWithEnv) {"
@@ -1350,10 +1350,9 @@ issues:
   - "protos/google/cloud/compute/v1/internal/common_041.proto:199:45         applifed            U       specified here will be applifed before those specified"
   - "protos/google/cloud/compute/v1/internal/common_041.proto:201:17         Loadbalancers       U       // applies to Loadbalancers that have their loadBalancing"
   - "protos/google/cloud/compute/v1/internal/common_041.proto:269:33         discontiguous       U       can be contiguous or discontiguous. For external forwarding"
-  - "protos/google/cloud/compute/v1/internal/common_043.proto:101:35         resevervation       U       to true,the delivered resevervation will have the same name"
-  - "protos/google/cloud/compute/v1/internal/common_043.proto:140:64         Resevation          U       amendment to the Future Resevation has"
-  - "protos/google/cloud/compute/v1/internal/common_043.proto:145:22         reviewd             U       // currently being reviewd by GCP."
-  - "protos/google/cloud/compute/v1/internal/common_043.proto:316:66         resevation          U       egatedListResponse for future resevation"
+  - "protos/google/cloud/compute/v1/internal/common_043.proto:133:64         Resevation      U       amendment to the Future Resevation has"
+  - "protos/google/cloud/compute/v1/internal/common_043.proto:138:22         reviewd         U       // currently being reviewd by GCP."
+  - "protos/google/cloud/compute/v1/internal/common_043.proto:309:66         resevation      U       egatedListResponse for future resevation"
   - "protos/google/cloud/compute/v1/internal/common_044.proto:267:51         Autohealing     U       Load balancer guide. **Autohealing in MIGs** The"
   - "protos/google/cloud/compute/v1/internal/common_050.proto:75:68          Servicefor      U       Always compute#healthCheckServicefor"
   - "protos/google/cloud/compute/v1/internal/common_055.proto:126:26         unpackaging     U       / disk image before unpackaging provided by the client"
