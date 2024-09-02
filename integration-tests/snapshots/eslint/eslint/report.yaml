@@ -4,8 +4,8 @@ Url: https://github.com/eslint/eslint
 Args: '[".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]'
 Summary:
   files: 1983
-  filesWithIssues: 319
-  issues: 1702
+  filesWithIssues: 317
+  issues: 1692
   errors: 0
 Errors: []
 
@@ -189,9 +189,7 @@ issues:
   - "lib/linter/code-path-analysis/code-path-state.js:1256:46        circuting       U       path due to the short-circuting, so we are just seeding"
   - "lib/linter/code-path-analysis/code-path-state.js:1730:23        Segs            U       const prevSegsOfLeavingSegment = [headOfLeav"
   - "lib/linter/code-path-analysis/debug-helpers.js:95:44        Graphvis    U       can be visualized with Graphvis."
-  - "lib/linter/config-comment-parser.js:76:22       commaless       U       // Also, commaless notations have invalid"
-  - "lib/linter/config-comment-parser.js:87:20       Levn            U       debug(\"Levn parsing failed; falling"
-  - "lib/linter/linter.js:47:7           jslang      U       const jslang = require(\"../languages"
+  - "lib/linter/linter.js:44:7           jslang      U       const jslang = require(\"../languages"
   - "lib/rule-tester/rule-tester.js:249:42       errorize            U       ast The root node to errorize `start`/`end` properties"
   - "lib/rule-tester/rule-tester.js:855:27       Didnt (Didn't)      U       function assertASTDidntChange(beforeAST, afterAST"
   - "lib/rules/dot-notation.js:138:63        quasis      U       node, node.property.quasis[0].value.cooked);"
@@ -214,7 +212,7 @@ issues:
   - "lib/rules/no-implicit-coercion.js:14:39         ndex    U       PATTERN = /^(?:i|lastI)ndexOf$/u;"
   - "lib/rules/no-inline-comments.js:61:17       postamble       U       postamble = endLine.slice(node"
   - "lib/rules/no-inline-comments.js:63:19       Postamble       U       isPostambleEmpty = !postamble;"
-  - "lib/rules/no-invalid-regexp.js:13:22        dgimsuvy    U       const validFlags = /[dgimsuvy]/gu;"
+  - "lib/rules/no-invalid-regexp.js:13:21        dgimsuvy    U       const validFlags = \"dgimsuvy\";"
   - "lib/rules/no-mixed-requires.js:78:66        iojs    U       per nodejs v0.12.2 and iojs v0.7.1"
   - "lib/rules/no-new-native-nonconstructor.js:32:18         Nonconstructor      U       noNewNonconstructor: \"`{{name}}` cannot"
   - "lib/rules/no-trailing-spaces.js:60:13       NONBLANK    U       NONBLANK = `${BLANK_CLASS}+$"
@@ -257,7 +255,6 @@ issues:
   - "README.md:281:1         Strek                   U       Strek"
   - "README.md:290:5         teamend                 U       <!--teamend-->"
   - "README.md:297:5         sponsorsstart           U       <!--sponsorsstart-->"
-  - "README.md:300:96        Schleifer               U       avatar.png\" alt=\"Eli Schleifer\" height=\"96\"></a> <a"
   - "README.md:301:564       Workleap                U       f99fe2465f&v=4\" alt=\"Workleap\" height=\"64\"></a></p"
   - "README.md:302:1054      Nextbase                U       145838380?v=4\" alt=\"Nextbase Starter Kit\" height"
   - "README.md:303:5         sponsorsend             U       <!--sponsorsend-->"
@@ -285,10 +282,10 @@ issues:
   - "tests/lib/cli-engine/formatters/html.js:528:130     apos    U       Unexpected &lt;&amp;&quot;&apos;&gt; foo.\", ruleId:"
   - "tests/lib/cli.js:413:60         fakeformatter       U       await cli.execute(`-f fakeformatter ${filePath} ${flag}"
   - "tests/lib/cli.js:1923:53        oldx                U       = `--flag test_only_oldx --config ${configPath"
-  - "tests/lib/config/flat-config-array.js:211:22        noniterable         U       it(\"should allow noniterable baseConfig objects\""
-  - "tests/lib/config/flat-config-array.js:1564:43       truex               U       foo: \"truex\""
-  - "tests/lib/config/flat-config-array.js:2092:29       foox                U       foox: [1, \"bar\"]"
-  - "tests/lib/config/flat-config-array.js:2114:30       doesnt (doesn't)    U       \"doesnt-exist/match\": \"error"
+  - "tests/lib/config/flat-config-array.js:216:22        noniterable         U       it(\"should allow noniterable baseConfig objects\""
+  - "tests/lib/config/flat-config-array.js:1577:43       truex               U       foo: \"truex\""
+  - "tests/lib/config/flat-config-array.js:2105:29       foox                U       foox: [1, \"bar\"]"
+  - "tests/lib/config/flat-config-array.js:2127:30       doesnt (doesn't)    U       \"doesnt-exist/match\": \"error"
   - "tests/lib/config/flat-config-schema.js:19:50        reults      U       expectedResult] The expected reults of merging first and"
   - "tests/lib/config/flat-config-schema.js:46:20        emtpy       U       it(\"returns an emtpy object if both values"
   - "tests/lib/eslint/eslint.js:1736:57      doesnotexist            U       lintFiles([\"subdir1\", \"doesnotexist/*.js\"]);"
@@ -301,7 +298,6 @@ issues:
   - "tests/lib/eslint/eslint.js:6301:40      mcts                    U       \"eslint.config.mcts\": configFileContent"
   - "tests/lib/eslint/eslint.js:8039:31      dignore                 U       cwd: `${root}-dignore`,"
   - "tests/lib/eslint/legacy-eslint.js:2536:24       succesfully (successfully)      U       it(\"should succesfully execute with a rule"
-  - "tests/lib/linter/config-comment-parser.js:159:41        ELEVENTEEN      U       code = \"a: seventy, b:ELEVENTEEN\";"
   - "tests/lib/linter/linter.js:3287:1       consolexlog         U       consolexlog(\"test2\");"
   - "tests/lib/linter/linter.js:3431:84      rulename            U       this is 2, since the rulename is very likely to be"
   - "tests/lib/linter/linter.js:5427:31      suppresed           U       it(\"should report one suppresed problem when noInlineConfig"
@@ -614,7 +610,6 @@ issuesSummary:
   - "text: CLASSSET, count: 2, files: 1,"
   - "text: classtail, count: 2, files: 1,"
   - "text: cliengine, count: 2, files: 2,"
-  - "text: commaless, count: 2, files: 1,"
   - "text: committership, count: 2, files: 1,"
   - "text: comparray, count: 5, files: 1,"
   - "text: complexdomain, count: 1, files: 1,"
@@ -662,7 +657,6 @@ issuesSummary:
   - "text: Droppables, count: 1, files: 1,"
   - "text: egal, count: 2, files: 1,"
   - "text: elapseds, count: 1, files: 1,"
-  - "text: ELEVENTEEN, count: 2, files: 1,"
   - "text: eleventy, count: 3, files: 3,"
   - "text: embertest, count: 1, files: 1,"
   - "text: emtpy, count: 1, files: 1,"
@@ -792,8 +786,7 @@ issuesSummary:
   - "text: letblock, count: 3, files: 1,"
   - "text: letscope, count: 4, files: 1,"
   - "text: letstatement, count: 2, files: 1,"
-  - "text: levn, count: 5, files: 3,"
-  - "text: Levn, count: 1, files: 1,"
+  - "text: levn, count: 1, files: 1,"
   - "text: lifed, count: 1, files: 1,"
   - "text: linkify, count: 2, files: 1,"
   - "text: lintable, count: 1, files: 1,"
@@ -955,7 +948,6 @@ issuesSummary:
   - "text: rulename, count: 1, files: 1,"
   - "text: samely, count: 1, files: 1,"
   - "text: sampleignorepattern, count: 10, files: 2,"
-  - "text: Schleifer, count: 1, files: 1,"
   - "text: Schlueter, count: 2, files: 2,"
   - "text: Scriptaculous, count: 2, files: 1,"
   - "text: scripturl, count: 4, files: 2,"
