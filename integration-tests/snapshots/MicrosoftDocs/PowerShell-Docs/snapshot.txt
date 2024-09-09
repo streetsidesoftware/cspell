@@ -3,7 +3,7 @@ Repository: MicrosoftDocs/PowerShell-Docs
 Url: "https://github.com/MicrosoftDocs/PowerShell-Docs.git"
 Args: ["--config=../../../cspell-power-shell-docs.config.yaml","**"]
 Lines:
- CSpell: Files checked: 2685, Issues found: 5220 in 1228 files.
+ CSpell: Files checked: 2685, Issues found: 5255 in 1229 files.
  exit code: 1
 CODE_OF_CONDUCT.md:10:38     - Unknown word (opensource) -- reach out at [aka.ms/opensource/moderation-support]
 LICENSE.md:122:56    - Unknown word (sublicensable)   -- worldwide, royalty-free, non-sublicensable,
@@ -187,7 +187,12 @@ reference/5.1/Microsoft.PowerShell.Core/About/about_Function_Provider.md:133:42 
 reference/5.1/Microsoft.PowerShell.Core/About/about_Functions.md:194:4     - Unknown word (allpix)     -- $allpix = Get-ChildItem -Path
 reference/5.1/Microsoft.PowerShell.Core/About/about_Functions.md:195:4     - Unknown word (allpix)     -- $allpix | Where-Object {$_.LastWriteT
 reference/5.1/Microsoft.PowerShell.Core/About/about_Functions_Advanced_Parameters.md:733:50    - Unknown word (dynamicparameters) -- tab completion. Like **dynamicparameters**, the
-reference/5.1/Microsoft.PowerShell.Core/About/about_Hash_Tables.md:429:59    - Unknown word (Manag)      -- Remote Management (WS-Manag...
+reference/5.1/Microsoft.PowerShell.Core/About/about_Hash_Tables.md:130:11    - Unknown word (orderedhash) -- [ordered]$orderedhash = @{}
+reference/5.1/Microsoft.PowerShell.Core/About/about_Hash_Tables.md:133:19    - Unknown word (orderedhash) -- 1 |  [ordered]$orderedhash = @{}
+reference/5.1/Microsoft.PowerShell.Core/About/about_Hash_Tables.md:141:2     - Unknown word (orderedhash) -- $orderedhash = [ordered]@{}
+reference/5.1/Microsoft.PowerShell.Core/About/about_Hash_Tables.md:148:13    - Unknown word (newhash)     -- [hashtable]$newhash = [ordered]@{
+reference/5.1/Microsoft.PowerShell.Core/About/about_Hash_Tables.md:153:2     - Unknown word (newhash)     -- $newhash
+reference/5.1/Microsoft.PowerShell.Core/About/about_Hash_Tables.md:513:59    - Unknown word (Manag)       -- Remote Management (WS-Manag...
 reference/5.1/Microsoft.PowerShell.Core/About/about_Join.md:85:22     - Unknown word (ERSHELL)    -- a = "WIND", "S P", "ERSHELL"
 reference/5.1/Microsoft.PowerShell.Core/About/about_Language_Modes.md:226:5     - Unknown word (adsisearcher) -- - `[adsisearcher]`
 reference/5.1/Microsoft.PowerShell.Core/About/about_Language_Modes.md:238:5     - Unknown word (cimclass)     -- - `[cimclass]`
@@ -233,7 +238,6 @@ reference/5.1/Microsoft.PowerShell.Core/About/about_Parsing.md:474:24    - Unkno
 reference/5.1/Microsoft.PowerShell.Core/About/about_Parsing.md:480:51    - Unknown word (repocache)      -- 2 PM          88177 repocache.clixml
 reference/5.1/Microsoft.PowerShell.Core/About/about_Parsing.md:482:24    - Unknown word (repocache)      -- D:\temp> more.com ~\repocache.clixml
 reference/5.1/Microsoft.PowerShell.Core/About/about_Parsing.md:483:30    - Unknown word (repocache)      -- access file D:\temp\~\repocache.clixml
-reference/5.1/Microsoft.PowerShell.Core/About/about_Path_Syntax.md:21:16     - Unknown word (pathnames)  -- In PowerShell, pathnames can be one of two types
 reference/5.1/Microsoft.PowerShell.Core/About/about_PowerShell_exe.md:296:27    - Unknown word (sqlsnapin)  -- PowerShell -PSConsoleFile sqlsnapin.psc1
 reference/5.1/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:1011:2    - Unknown word (hexdump)    -- `hexdump.ps1` to illustrate the
 reference/5.1/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:1027:18   - Unknown word (hexdump)    -- when piped into `hexdump.ps1` created above.
@@ -299,15 +303,12 @@ reference/5.1/Microsoft.PowerShell.Core/About/about_Split.md:92:2      - Unknown
 reference/5.1/Microsoft.PowerShell.Core/About/about_Split.md:93:1      - Unknown word (Lastname)   -- Lastname
 reference/5.1/Microsoft.PowerShell.Core/About/about_Split.md:99:2      - Unknown word (Lastname)   -- "Lastname/:/FirstName/:/Address
 reference/5.1/Microsoft.PowerShell.Core/About/about_Tab_Expansion.md:81:28     - Unknown word (actsetup)   -- Get-Content C:\windows\actsetup.log
-reference/5.1/Microsoft.PowerShell.Core/About/about_Transactions.md:236:4     - Unknown word (hkcu)           -- cd hkcu:\Software
-reference/5.1/Microsoft.PowerShell.Core/About/about_Transactions.md:351:5     - Unknown word (itemproperty)   -- new-itemproperty -path MyCompany -Name
-reference/5.1/Microsoft.PowerShell.Core/About/about_Transactions.md:519:20    - Unknown word (rollbackpreference) -- start-transaction -rollbackpreference Never
-reference/5.1/Microsoft.PowerShell.Core/About/about_Transactions.md:584:4     - Unknown word (tostring)           -- $t.tostring()
-reference/5.1/Microsoft.PowerShell.Core/About/about_Transactions.md:597:21    - Unknown word (tostring)           -- use-transaction {$s.tostring()} -usetx
-reference/5.1/Microsoft.PowerShell.Core/About/about_Transactions.md:615:4     - Unknown word (tostring)           -- $t.tostring()
-reference/5.1/Microsoft.PowerShell.Core/About/about_Transactions.md:678:5     - Unknown word (itemproperty)       -- new-itemproperty -path MyCompany -name
-reference/5.1/Microsoft.PowerShell.Core/About/about_Transactions.md:79:5      - Unknown word (psprovider) -- get-psprovider | where {$_.Capabilities
-reference/5.1/Microsoft.PowerShell.Core/About/about_Transactions.md:95:8      - Unknown word (USETRANSACTION) -- ## THE USETRANSACTION PARAMETER
+reference/5.1/Microsoft.PowerShell.Core/About/about_Transactions.md:235:4     - Unknown word (hkcu)       -- cd hkcu:\Software
+reference/5.1/Microsoft.PowerShell.Core/About/about_Transactions.md:350:5     - Unknown word (Itemproperty) -- New-Itemproperty -path MyCompany -Name
+reference/5.1/Microsoft.PowerShell.Core/About/about_Transactions.md:585:4     - Unknown word (tostring)     -- $t.tostring()
+reference/5.1/Microsoft.PowerShell.Core/About/about_Transactions.md:598:21    - Unknown word (tostring)     -- Use-Transaction {$t.tostring()} -usetx
+reference/5.1/Microsoft.PowerShell.Core/About/about_Transactions.md:616:4     - Unknown word (tostring)     -- $t.tostring()
+reference/5.1/Microsoft.PowerShell.Core/About/about_Transactions.md:77:7      - Unknown word (Povider)    -- Get-PSPovider | Where-Object {$_.Capabiliti
 reference/5.1/Microsoft.PowerShell.Core/About/about_Type_Accelerators.md:117:3     - Unknown word (wmiclass)              -- | wmiclass
 reference/5.1/Microsoft.PowerShell.Core/About/about_Type_Accelerators.md:118:3     - Unknown word (wmisearcher)           -- | wmisearcher |
 reference/5.1/Microsoft.PowerShell.Core/About/about_Type_Accelerators.md:29:3      - Unknown word (adsisearcher) -- | adsisearcher | [System
@@ -601,8 +602,8 @@ reference/5.1/Microsoft.PowerShell.Management/Set-ItemProperty.md:46:79     - Un
 reference/5.1/Microsoft.PowerShell.Management/Set-ItemProperty.md:54:79     - Unknown word (pscredential) -- string[]>] [-Credential <pscredential>]
 reference/5.1/Microsoft.PowerShell.Management/Set-WmiInstance.md:322:69    - Unknown word (ntlmdomain) -- authority setting to `ntlmdomain:<DomainName>`, where
 reference/5.1/Microsoft.PowerShell.Management/Set-WmiInstance.md:605:4     - Unknown word (swmi)       -- - `swmi`
-reference/5.1/Microsoft.PowerShell.Management/Split-Path.md:368:65    - Unknown word (Normpath)   -- would use **Dirname**, **Normpath**, **Realpath**, **Join
-reference/5.1/Microsoft.PowerShell.Management/Split-Path.md:368:79    - Unknown word (Realpath)   -- Dirname**, **Normpath**, **Realpath**, **Join**,
+reference/5.1/Microsoft.PowerShell.Management/Split-Path.md:383:65    - Unknown word (Normpath)   -- would use **Dirname**, **Normpath**, **Realpath**, **Join
+reference/5.1/Microsoft.PowerShell.Management/Split-Path.md:383:79    - Unknown word (Realpath)   -- Dirname**, **Normpath**, **Realpath**, **Join**,
 reference/5.1/Microsoft.PowerShell.Management/Start-Process.md:21:79     - Unknown word (pscredential) -- string[]>] [-Credential <pscredential>]
 reference/5.1/Microsoft.PowerShell.Management/Start-Process.md:65:26     - Unknown word (myfile)       -- Start-Process -FilePath "myfile.txt" -WorkingDirectory
 reference/5.1/Microsoft.PowerShell.Management/Start-Transaction.md:112:23    - Unknown word (rollbackpreference) -- Start-Transaction (-rollbackpreference never)
@@ -736,6 +737,8 @@ reference/5.1/Microsoft.PowerShell.Utility/Trace-Command.md:352:4     - Unknown 
 reference/5.1/Microsoft.PowerShell.Utility/Trace-Command.md:47:30     - Unknown word (parameterbinding) -- Command -Name metadata,parameterbinding,cmdlet -Expression
 reference/5.1/Microsoft.PowerShell.Utility/Update-TypeData.md:202:27    - Unknown word (currnet)    -- last command gets the currnet date and displays it
 reference/5.1/Microsoft.PowerShell.Utility/Update-TypeData.md:550:3     - Unknown word (Noteproperty) -- - Noteproperty
+reference/5.1/Microsoft.PowerShell.Utility/Wait-Debugger.md:38:11     - Unknown word (dbgtest)    -- The file `dbgtest.ps1` contains a function
+reference/5.1/Microsoft.PowerShell.Utility/Wait-Debugger.md:67:17     - Unknown word (dbgtest)    -- At D:\temp\test\dbgtest.ps1:13 char:9
 reference/5.1/Microsoft.PowerShell.Utility/Wait-Event.md:65:8      - Unknown word (Autoreset)  -- $Timer.Autoreset = $False
 reference/5.1/Microsoft.PowerShell.Utility/Write-Information.md:141:2     - Unknown word (psproc)     -- $psproc = Get-Process -Id $PID
 reference/5.1/Microsoft.PowerShell.Utility/Write-Information.md:142:33    - Unknown word (psproc)     -- Information -MessageData $psproc -Tags 'PowerShell'
@@ -949,8 +952,8 @@ reference/7.2/Microsoft.PowerShell.Core/About/about_Debuggers.md:498:10    - Unk
 reference/7.2/Microsoft.PowerShell.Core/About/about_Debuggers.md:501:35    - Unknown word (scriptname) -- breakpoint on the `$scriptname` variable.
 reference/7.2/Microsoft.PowerShell.Core/About/about_Debuggers.md:504:43    - Unknown word (scriptname) -- PSBreakpoint -variable scriptname -script test.ps1
 reference/7.2/Microsoft.PowerShell.Core/About/about_Debuggers.md:510:23    - Unknown word (scriptname) -- PS C:\ps-test> sbp -v scriptname -s test.ps1
-reference/7.2/Microsoft.PowerShell.Core/About/about_Environment_Variables.md:19:16     - Unknown word (UPDATECHECK) -- - **POWERSHELL_UPDATECHECK**
-reference/7.2/Microsoft.PowerShell.Core/About/about_Environment_Variables.md:360:16    - Unknown word (UPDATECHECK) -- - **POWERSHELL_UPDATECHECK**
+reference/7.2/Microsoft.PowerShell.Core/About/about_Environment_Variables.md:19:15     - Unknown word (UPDATECHECK) -- - `POWERSHELL_UPDATECHECK`
+reference/7.2/Microsoft.PowerShell.Core/About/about_Environment_Variables.md:360:15    - Unknown word (UPDATECHECK) -- - `POWERSHELL_UPDATECHECK`
 reference/7.2/Microsoft.PowerShell.Core/About/about_Environment_Variables.md:363:15    - Unknown word (UPDATECHECK) -- `POWERSHELL_UPDATECHECK` environment variable
 reference/7.2/Microsoft.PowerShell.Core/About/about_Environment_Variables.md:369:55    - Unknown word (UPDATECHECK) -- defining `POWERSHELL_UPDATECHECK`:
 reference/7.2/Microsoft.PowerShell.Core/About/about_Environment_Variables.md:544:6     - Unknown word (xtermm)      -- - `xtermm` - sets `$PSStyle.OutputRende
@@ -976,7 +979,12 @@ reference/7.2/Microsoft.PowerShell.Core/About/about_Functions.md:195:4     - Unk
 reference/7.2/Microsoft.PowerShell.Core/About/about_Functions_Advanced_Parameters.md:742:50    - Unknown word (dynamicparameters) -- tab completion. Like **dynamicparameters**, the
 reference/7.2/Microsoft.PowerShell.Core/About/about_Functions_Argument_Completion.md:265:37    - Unknown word (pswh)       -- toryCompleter(ContainingFile="pswh.exe", Depth=2)]
 reference/7.2/Microsoft.PowerShell.Core/About/about_Group_Policy_Settings.md:59:10     - Unknown word (gpedit)     -- editor (`gpedit.msc`).
-reference/7.2/Microsoft.PowerShell.Core/About/about_Hash_Tables.md:427:59    - Unknown word (Managem)    -- Remote Management (WS-Managem…
+reference/7.2/Microsoft.PowerShell.Core/About/about_Hash_Tables.md:130:11    - Unknown word (orderedhash) -- [ordered]$orderedhash = @{}
+reference/7.2/Microsoft.PowerShell.Core/About/about_Hash_Tables.md:133:19    - Unknown word (orderedhash) -- 1 |  [ordered]$orderedhash = @{}
+reference/7.2/Microsoft.PowerShell.Core/About/about_Hash_Tables.md:141:2     - Unknown word (orderedhash) -- $orderedhash = [ordered]@{}
+reference/7.2/Microsoft.PowerShell.Core/About/about_Hash_Tables.md:148:13    - Unknown word (newhash)     -- [hashtable]$newhash = [ordered]@{
+reference/7.2/Microsoft.PowerShell.Core/About/about_Hash_Tables.md:153:2     - Unknown word (newhash)     -- $newhash
+reference/7.2/Microsoft.PowerShell.Core/About/about_Hash_Tables.md:512:59    - Unknown word (Managem)     -- Remote Management (WS-Managem…
 reference/7.2/Microsoft.PowerShell.Core/About/about_Join.md:83:22     - Unknown word (ERSHELL)    -- a = "WIND", "S P", "ERSHELL"
 reference/7.2/Microsoft.PowerShell.Core/About/about_Language_Modes.md:221:5     - Unknown word (adsisearcher) -- - `[adsisearcher]`
 reference/7.2/Microsoft.PowerShell.Core/About/about_Language_Modes.md:233:5     - Unknown word (cimclass)     -- - `[cimclass]`
@@ -1039,7 +1047,6 @@ reference/7.2/Microsoft.PowerShell.Core/About/about_Parsing.md:526:24    - Unkno
 reference/7.2/Microsoft.PowerShell.Core/About/about_Parsing.md:532:51    - Unknown word (repocache)      -- 2 PM          88177 repocache.clixml
 reference/7.2/Microsoft.PowerShell.Core/About/about_Parsing.md:534:24    - Unknown word (repocache)      -- D:\temp> more.com ~\repocache.clixml
 reference/7.2/Microsoft.PowerShell.Core/About/about_Parsing.md:535:30    - Unknown word (repocache)      -- access file D:\temp\~\repocache.clixml
-reference/7.2/Microsoft.PowerShell.Core/About/about_Path_Syntax.md:21:16     - Unknown word (pathnames)  -- In PowerShell, pathnames can be one of two types
 reference/7.2/Microsoft.PowerShell.Core/About/about_Pipeline_Chain_Operators.md:172:25    - Unknown word (behaviour)  -- of PowerShell 7, the behaviour of these syntaxes has
 reference/7.2/Microsoft.PowerShell.Core/About/about_PowerShell_Config.md:406:10    - Unknown word (Transcripting) -- - `EnableTranscripting` - When this setting
 reference/7.2/Microsoft.PowerShell.Core/About/about_PowerShell_Config.md:419:16    - Unknown word (Transcripting) -- "EnableTranscripting": true,
@@ -1065,6 +1072,7 @@ reference/7.2/Microsoft.PowerShell.Core/About/about_Pwsh.md:288:3     - Unknown 
 reference/7.2/Microsoft.PowerShell.Core/About/about_Pwsh.md:312:24    - Unknown word (noni)           -- -NonInteractive | -noni
 reference/7.2/Microsoft.PowerShell.Core/About/about_Pwsh.md:343:33    - Unknown word (myproject)      -- pwsh -SettingsFile c:\myproject\powershell.config.json
 reference/7.2/Microsoft.PowerShell.Core/About/about_Pwsh.md:345:23    - Unknown word (sshs)           -- # -SSHServerMode | -sshs
+reference/7.2/Microsoft.PowerShell.Core/About/about_Pwsh.md:358:41    - Unknown word (exectuable)     -- version of this PowerShell exectuable. Additional parameters
 reference/7.2/Microsoft.PowerShell.Core/About/about_Pwsh.md:5:244     - Unknown word (noni)       -- nol, -NonInteractive, -noni, -NoProfile, -nop,
 reference/7.2/Microsoft.PowerShell.Core/About/about_Pwsh.md:5:335     - Unknown word (sshs)       -- settings, -SSHServerMode, -sshs, -STA, -Version, -v
 reference/7.2/Microsoft.PowerShell.Core/About/about_Redirection.md:80:10     - Unknown word (fakepath)   -- dir C:\, fakepath 2>&1 > .\dir.log
@@ -1322,8 +1330,9 @@ reference/7.2/Microsoft.PowerShell.Management/Set-ItemProperty.md:54:79     - Un
 reference/7.2/Microsoft.PowerShell.Management/Set-Service.md:197:16    - Unknown word (CCLCSWRPWPDTLOCRRC) -- $SDDL = "D:(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSD
 reference/7.2/Microsoft.PowerShell.Management/Set-Service.md:197:44    - Unknown word (CCDCLCSWRPWPDTLOCRSDRCWDWO) -- CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)(A;;CCLCSWLOCRRC
 reference/7.2/Microsoft.PowerShell.Management/Set-Service.md:197:80    - Unknown word (CCLCSWLOCRRC)               -- SWRPWPDTLOCRSDRCWDWO;;;BA)(A;;CCLCSWLOCRRC;;;SU)"
-reference/7.2/Microsoft.PowerShell.Management/Split-Path.md:401:65    - Unknown word (Normpath)   -- would use **Dirname**, **Normpath**, **Realpath**, **Join
-reference/7.2/Microsoft.PowerShell.Management/Split-Path.md:401:79    - Unknown word (Realpath)   -- Dirname**, **Normpath**, **Realpath**, **Join**,
+reference/7.2/Microsoft.PowerShell.Management/Split-Path.md:418:65    - Unknown word (Normpath)   -- would use **Dirname**, **Normpath**, **Realpath**, **Join
+reference/7.2/Microsoft.PowerShell.Management/Split-Path.md:418:79    - Unknown word (Realpath)   -- Dirname**, **Normpath**, **Realpath**, **Join**,
+reference/7.2/Microsoft.PowerShell.Management/Split-Path.md:77:26     - Unknown word (returs)     -- parameters, `Split-Path` returs the parent part of the
 reference/7.2/Microsoft.PowerShell.Management/Start-Process.md:146:2     - Unknown word (nohup)      -- `nohup`. The following example
 reference/7.2/Microsoft.PowerShell.Management/Start-Process.md:147:56    - Unknown word (nohup)      -- launching session. The `nohup` command collects output
 reference/7.2/Microsoft.PowerShell.Management/Start-Process.md:148:2     - Unknown word (nohup)      -- `nohup.out` in the current
@@ -1462,6 +1471,8 @@ reference/7.2/Microsoft.PowerShell.Utility/Trace-Command.md:47:30     - Unknown 
 reference/7.2/Microsoft.PowerShell.Utility/Trace-Command.md:87:57     - Unknown word (echoargs)         -- ParameterBinding { TestExe -echoargs $a 'c" "d' e" "f }
 reference/7.2/Microsoft.PowerShell.Utility/Update-TypeData.md:204:27    - Unknown word (currnet)    -- last command gets the currnet date and displays it
 reference/7.2/Microsoft.PowerShell.Utility/Update-TypeData.md:558:3     - Unknown word (Noteproperty) -- - Noteproperty
+reference/7.2/Microsoft.PowerShell.Utility/Wait-Debugger.md:38:11     - Unknown word (dbgtest)    -- The file `dbgtest.ps1` contains a function
+reference/7.2/Microsoft.PowerShell.Utility/Wait-Debugger.md:67:17     - Unknown word (dbgtest)    -- At D:\temp\test\dbgtest.ps1:13 char:9
 reference/7.2/Microsoft.PowerShell.Utility/Wait-Event.md:65:8      - Unknown word (Autoreset)  -- $Timer.Autoreset = $False
 reference/7.2/Microsoft.PowerShell.Utility/Write-Progress.md:164:49    - Unknown word (Substep)    -- ParentId 0 "Step $i - Substep $j"
 reference/7.2/Microsoft.PowerShell.Utility/Write-Progress.md:166:52    - Unknown word (Substep)    -- ParentId 1 "Step $i - Substep $j - iteration $k"
@@ -1560,17 +1571,19 @@ reference/7.4/CimCmdlets/Set-CimInstance.md:345:46    - Unknown word (DCOM)     
 reference/7.4/CimCmdlets/Set-CimInstance.md:414:20    - Unknown word (Passthru)   -- When you use the **Passthru** parameter, this cmdlet
 reference/7.4/CimCmdlets/Set-CimInstance.md:421:6     - Unknown word (scim)       -- - `scim`
 reference/7.4/CimCmdlets/Set-CimInstance.md:99:60     - Unknown word (somevalue)  -- Property @{VariableValue="somevalue"} -PassThru
-reference/7.4/Microsoft.PowerShell.Archive/Compress-Archive.md:101:58    - Unknown word (Draftdoc)   -- zip` file contains `Draftdoc.docx` and all the files
-reference/7.4/Microsoft.PowerShell.Archive/Compress-Archive.md:121:86    - Unknown word (Draftdoc)   -- file only contains `Draftdoc.docx`
-reference/7.4/Microsoft.PowerShell.Archive/Compress-Archive.md:208:93    - Unknown word (testsub)    -- subdirectory named `testsub`
-reference/7.4/Microsoft.PowerShell.Archive/Compress-Archive.md:209:20    - Unknown word (testlog)    -- that contains the `testlog.txt` file.
-reference/7.4/Microsoft.PowerShell.Archive/Compress-Archive.md:213:2     - Unknown word (testsub)    -- `testsub` and a **FileInfo**
-reference/7.4/Microsoft.PowerShell.Archive/Compress-Archive.md:213:38    - Unknown word (testlog)    -- *FileInfo** object `testlog.txt`.
-reference/7.4/Microsoft.PowerShell.Archive/Compress-Archive.md:222:45    - Unknown word (testsub)    -- object creates the `testsub` directory and contains
-reference/7.4/Microsoft.PowerShell.Archive/Compress-Archive.md:222:82    - Unknown word (testlog)    -- directory and contains the `testlog.txt` file,
-reference/7.4/Microsoft.PowerShell.Archive/Compress-Archive.md:224:48    - Unknown word (testlog)    -- creates a duplicate `testlog.txt` in the archive
-reference/7.4/Microsoft.PowerShell.Archive/Compress-Archive.md:91:24     - Unknown word (Draftdoc)   -- Path = "C:\Reference\Draftdoc.docx", "C:\Reference
-reference/7.4/Microsoft.PowerShell.Archive/Expand-Archive.md:58:22     - Unknown word (Draftv)     -- Expand-Archive -Path Draftv2.zip -DestinationPath
+reference/7.4/Microsoft.PowerShell.Archive/Compress-Archive.md:102:58    - Unknown word (Draftdoc)   -- zip` file contains `Draftdoc.docx` and all the files
+reference/7.4/Microsoft.PowerShell.Archive/Compress-Archive.md:122:86    - Unknown word (Draftdoc)   -- file only contains `Draftdoc.docx`
+reference/7.4/Microsoft.PowerShell.Archive/Compress-Archive.md:209:93    - Unknown word (testsub)    -- subdirectory named `testsub`
+reference/7.4/Microsoft.PowerShell.Archive/Compress-Archive.md:210:20    - Unknown word (testlog)    -- that contains the `testlog.txt` file.
+reference/7.4/Microsoft.PowerShell.Archive/Compress-Archive.md:214:2     - Unknown word (testsub)    -- `testsub` and a **FileInfo**
+reference/7.4/Microsoft.PowerShell.Archive/Compress-Archive.md:214:38    - Unknown word (testlog)    -- *FileInfo** object `testlog.txt`.
+reference/7.4/Microsoft.PowerShell.Archive/Compress-Archive.md:223:45    - Unknown word (testsub)    -- object creates the `testsub` directory and contains
+reference/7.4/Microsoft.PowerShell.Archive/Compress-Archive.md:223:82    - Unknown word (testlog)    -- directory and contains the `testlog.txt` file,
+reference/7.4/Microsoft.PowerShell.Archive/Compress-Archive.md:225:48    - Unknown word (testlog)    -- creates a duplicate `testlog.txt` in the archive
+reference/7.4/Microsoft.PowerShell.Archive/Compress-Archive.md:69:43     - Unknown word (PKWARE)     -- format specification by PKWARE Inc. For more information
+reference/7.4/Microsoft.PowerShell.Archive/Compress-Archive.md:92:24     - Unknown word (Draftdoc)   -- Path = "C:\Reference\Draftdoc.docx", "C:\Reference
+reference/7.4/Microsoft.PowerShell.Archive/Expand-Archive.md:40:43     - Unknown word (PKWARE)     -- format specification by PKWARE Inc. For more information
+reference/7.4/Microsoft.PowerShell.Archive/Expand-Archive.md:63:22     - Unknown word (Draftv)     -- Expand-Archive -Path Draftv2.zip -DestinationPath
 reference/7.4/Microsoft.PowerShell.Core/About/About.md:122:395   - Unknown word (modulename) -- follow the form of `<modulename>.<experimentname>`.
 reference/7.4/Microsoft.PowerShell.Core/About/About.md:122:408   - Unknown word (experimentname) -- form of `<modulename>.<experimentname>`. The `ExperimentAction
 reference/7.4/Microsoft.PowerShell.Core/About/about_ANSI_Terminals.md:232:31    - Unknown word (Childitem)     -- noprofile -command 'Get-Childitem' > out.txt
@@ -1643,8 +1656,8 @@ reference/7.4/Microsoft.PowerShell.Core/About/about_Debuggers.md:498:10    - Unk
 reference/7.4/Microsoft.PowerShell.Core/About/about_Debuggers.md:501:35    - Unknown word (scriptname) -- breakpoint on the `$scriptname` variable.
 reference/7.4/Microsoft.PowerShell.Core/About/about_Debuggers.md:504:43    - Unknown word (scriptname) -- PSBreakpoint -variable scriptname -script test.ps1
 reference/7.4/Microsoft.PowerShell.Core/About/about_Debuggers.md:510:23    - Unknown word (scriptname) -- PS C:\ps-test> sbp -v scriptname -s test.ps1
-reference/7.4/Microsoft.PowerShell.Core/About/about_Environment_Variables.md:19:16     - Unknown word (UPDATECHECK) -- - **POWERSHELL_UPDATECHECK**
-reference/7.4/Microsoft.PowerShell.Core/About/about_Environment_Variables.md:360:16    - Unknown word (UPDATECHECK) -- - **POWERSHELL_UPDATECHECK**
+reference/7.4/Microsoft.PowerShell.Core/About/about_Environment_Variables.md:19:15     - Unknown word (UPDATECHECK) -- - `POWERSHELL_UPDATECHECK`
+reference/7.4/Microsoft.PowerShell.Core/About/about_Environment_Variables.md:360:15    - Unknown word (UPDATECHECK) -- - `POWERSHELL_UPDATECHECK`
 reference/7.4/Microsoft.PowerShell.Core/About/about_Environment_Variables.md:363:15    - Unknown word (UPDATECHECK) -- `POWERSHELL_UPDATECHECK` environment variable
 reference/7.4/Microsoft.PowerShell.Core/About/about_Environment_Variables.md:369:55    - Unknown word (UPDATECHECK) -- defining `POWERSHELL_UPDATECHECK`:
 reference/7.4/Microsoft.PowerShell.Core/About/about_Environment_Variables.md:544:6     - Unknown word (xtermm)      -- - `xtermm` - sets `$PSStyle.OutputRende
@@ -1670,8 +1683,13 @@ reference/7.4/Microsoft.PowerShell.Core/About/about_Functions.md:222:4     - Unk
 reference/7.4/Microsoft.PowerShell.Core/About/about_Functions_Advanced_Parameters.md:742:50    - Unknown word (dynamicparameters) -- tab completion. Like **dynamicparameters**, the
 reference/7.4/Microsoft.PowerShell.Core/About/about_Functions_Argument_Completion.md:265:37    - Unknown word (pswh)       -- toryCompleter(ContainingFile="pswh.exe", Depth=2)]
 reference/7.4/Microsoft.PowerShell.Core/About/about_Group_Policy_Settings.md:59:10     - Unknown word (gpedit)     -- editor (`gpedit.msc`).
-reference/7.4/Microsoft.PowerShell.Core/About/about_Hash_Tables.md:420:23    - Unknown word (Servi)      -- System.ServiceProcess.Servi... Running
-reference/7.4/Microsoft.PowerShell.Core/About/about_Hash_Tables.md:428:59    - Unknown word (Manag)      -- Remote Management (WS-Manag...
+reference/7.4/Microsoft.PowerShell.Core/About/about_Hash_Tables.md:130:11    - Unknown word (orderedhash) -- [ordered]$orderedhash = @{}
+reference/7.4/Microsoft.PowerShell.Core/About/about_Hash_Tables.md:133:19    - Unknown word (orderedhash) -- 1 |  [ordered]$orderedhash = @{}
+reference/7.4/Microsoft.PowerShell.Core/About/about_Hash_Tables.md:141:2     - Unknown word (orderedhash) -- $orderedhash = [ordered]@{}
+reference/7.4/Microsoft.PowerShell.Core/About/about_Hash_Tables.md:148:13    - Unknown word (newhash)     -- [hashtable]$newhash = [ordered]@{
+reference/7.4/Microsoft.PowerShell.Core/About/about_Hash_Tables.md:153:2     - Unknown word (newhash)     -- $newhash
+reference/7.4/Microsoft.PowerShell.Core/About/about_Hash_Tables.md:505:23    - Unknown word (Servi)       -- System.ServiceProcess.Servi... Running
+reference/7.4/Microsoft.PowerShell.Core/About/about_Hash_Tables.md:513:59    - Unknown word (Manag)       -- Remote Management (WS-Manag...
 reference/7.4/Microsoft.PowerShell.Core/About/about_Join.md:83:22     - Unknown word (ERSHELL)    -- a = "WIND", "S P", "ERSHELL"
 reference/7.4/Microsoft.PowerShell.Core/About/about_Language_Modes.md:224:5     - Unknown word (adsisearcher) -- - `[adsisearcher]`
 reference/7.4/Microsoft.PowerShell.Core/About/about_Language_Modes.md:236:5     - Unknown word (cimclass)     -- - `[cimclass]`
@@ -1734,7 +1752,6 @@ reference/7.4/Microsoft.PowerShell.Core/About/about_Parsing.md:524:24    - Unkno
 reference/7.4/Microsoft.PowerShell.Core/About/about_Parsing.md:530:51    - Unknown word (repocache)      -- 2 PM          88177 repocache.clixml
 reference/7.4/Microsoft.PowerShell.Core/About/about_Parsing.md:532:24    - Unknown word (repocache)      -- D:\temp> more.com ~\repocache.clixml
 reference/7.4/Microsoft.PowerShell.Core/About/about_Parsing.md:533:30    - Unknown word (repocache)      -- access file D:\temp\~\repocache.clixml
-reference/7.4/Microsoft.PowerShell.Core/About/about_Path_Syntax.md:21:16     - Unknown word (pathnames)  -- In PowerShell, pathnames can be one of two types
 reference/7.4/Microsoft.PowerShell.Core/About/about_Pipeline_Chain_Operators.md:172:25    - Unknown word (behaviour)  -- of PowerShell 7, the behaviour of these syntaxes has
 reference/7.4/Microsoft.PowerShell.Core/About/about_Pipelines.md:432:24    - Unknown word (xzvf)       -- curl -s -L $uri | tar -xzvf - -C .
 reference/7.4/Microsoft.PowerShell.Core/About/about_Pipelines.md:441:41    - Unknown word (xzvf)       -- uri).Content | tar -xzvf - -C .
@@ -1763,6 +1780,7 @@ reference/7.4/Microsoft.PowerShell.Core/About/about_Pwsh.md:334:3     - Unknown 
 reference/7.4/Microsoft.PowerShell.Core/About/about_Pwsh.md:358:24    - Unknown word (noni)           -- -NonInteractive | -noni
 reference/7.4/Microsoft.PowerShell.Core/About/about_Pwsh.md:394:33    - Unknown word (myproject)      -- pwsh -SettingsFile c:\myproject\powershell.config.json
 reference/7.4/Microsoft.PowerShell.Core/About/about_Pwsh.md:396:23    - Unknown word (sshs)           -- # -SSHServerMode | -sshs
+reference/7.4/Microsoft.PowerShell.Core/About/about_Pwsh.md:409:41    - Unknown word (exectuable)     -- version of this PowerShell exectuable. Additional parameters
 reference/7.4/Microsoft.PowerShell.Core/About/about_Pwsh.md:5:268     - Unknown word (noni)       -- nol, -NonInteractive, -noni, -NoProfile, -nop,
 reference/7.4/Microsoft.PowerShell.Core/About/about_Pwsh.md:5:359     - Unknown word (sshs)       -- settings, -SSHServerMode, -sshs, -STA, -Version, -v
 reference/7.4/Microsoft.PowerShell.Core/About/about_Redirection.md:239:24    - Unknown word (xzvf)       -- curl -s -L $uri | tar -xzvf - -C .
@@ -2029,8 +2047,9 @@ reference/7.4/Microsoft.PowerShell.Management/Set-ItemProperty.md:54:79     - Un
 reference/7.4/Microsoft.PowerShell.Management/Set-Service.md:197:16    - Unknown word (CCLCSWRPWPDTLOCRRC) -- $SDDL = "D:(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSD
 reference/7.4/Microsoft.PowerShell.Management/Set-Service.md:197:44    - Unknown word (CCDCLCSWRPWPDTLOCRSDRCWDWO) -- CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)(A;;CCLCSWLOCRRC
 reference/7.4/Microsoft.PowerShell.Management/Set-Service.md:197:80    - Unknown word (CCLCSWLOCRRC)               -- SWRPWPDTLOCRSDRCWDWO;;;BA)(A;;CCLCSWLOCRRC;;;SU)"
-reference/7.4/Microsoft.PowerShell.Management/Split-Path.md:401:65    - Unknown word (Normpath)   -- would use **Dirname**, **Normpath**, **Realpath**, **Join
-reference/7.4/Microsoft.PowerShell.Management/Split-Path.md:401:79    - Unknown word (Realpath)   -- Dirname**, **Normpath**, **Realpath**, **Join**,
+reference/7.4/Microsoft.PowerShell.Management/Split-Path.md:418:65    - Unknown word (Normpath)   -- would use **Dirname**, **Normpath**, **Realpath**, **Join
+reference/7.4/Microsoft.PowerShell.Management/Split-Path.md:418:79    - Unknown word (Realpath)   -- Dirname**, **Normpath**, **Realpath**, **Join**,
+reference/7.4/Microsoft.PowerShell.Management/Split-Path.md:77:26     - Unknown word (returs)     -- parameters, `Split-Path` returs the parent part of the
 reference/7.4/Microsoft.PowerShell.Management/Start-Process.md:144:2     - Unknown word (nohup)        -- `nohup`. The following example
 reference/7.4/Microsoft.PowerShell.Management/Start-Process.md:145:56    - Unknown word (nohup)        -- launching session. The `nohup` command collects output
 reference/7.4/Microsoft.PowerShell.Management/Start-Process.md:146:2     - Unknown word (nohup)        -- `nohup.out` in the current
@@ -2174,6 +2193,8 @@ reference/7.4/Microsoft.PowerShell.Utility/Trace-Command.md:47:30     - Unknown 
 reference/7.4/Microsoft.PowerShell.Utility/Trace-Command.md:86:57     - Unknown word (echoargs)         -- ParameterBinding { TestExe -echoargs $a 'c" "d' e" "f }
 reference/7.4/Microsoft.PowerShell.Utility/Update-TypeData.md:204:27    - Unknown word (currnet)    -- last command gets the currnet date and displays it
 reference/7.4/Microsoft.PowerShell.Utility/Update-TypeData.md:558:3     - Unknown word (Noteproperty) -- - Noteproperty
+reference/7.4/Microsoft.PowerShell.Utility/Wait-Debugger.md:38:11     - Unknown word (dbgtest)    -- The file `dbgtest.ps1` contains a function
+reference/7.4/Microsoft.PowerShell.Utility/Wait-Debugger.md:67:17     - Unknown word (dbgtest)    -- At D:\temp\test\dbgtest.ps1:13 char:9
 reference/7.4/Microsoft.PowerShell.Utility/Wait-Event.md:65:8      - Unknown word (Autoreset)  -- $Timer.Autoreset = $False
 reference/7.4/Microsoft.PowerShell.Utility/Write-Progress.md:164:49    - Unknown word (Substep)    -- ParentId 0 "Step $i - Substep $j"
 reference/7.4/Microsoft.PowerShell.Utility/Write-Progress.md:166:52    - Unknown word (Substep)    -- ParentId 1 "Step $i - Substep $j - iteration $k"
@@ -2355,8 +2376,8 @@ reference/7.5/Microsoft.PowerShell.Core/About/about_Debuggers.md:498:10    - Unk
 reference/7.5/Microsoft.PowerShell.Core/About/about_Debuggers.md:501:35    - Unknown word (scriptname) -- breakpoint on the `$scriptname` variable.
 reference/7.5/Microsoft.PowerShell.Core/About/about_Debuggers.md:504:43    - Unknown word (scriptname) -- PSBreakpoint -variable scriptname -script test.ps1
 reference/7.5/Microsoft.PowerShell.Core/About/about_Debuggers.md:510:23    - Unknown word (scriptname) -- PS C:\ps-test> sbp -v scriptname -s test.ps1
-reference/7.5/Microsoft.PowerShell.Core/About/about_Environment_Variables.md:19:16     - Unknown word (UPDATECHECK) -- - **POWERSHELL_UPDATECHECK**
-reference/7.5/Microsoft.PowerShell.Core/About/about_Environment_Variables.md:360:16    - Unknown word (UPDATECHECK) -- - **POWERSHELL_UPDATECHECK**
+reference/7.5/Microsoft.PowerShell.Core/About/about_Environment_Variables.md:19:15     - Unknown word (UPDATECHECK) -- - `POWERSHELL_UPDATECHECK`
+reference/7.5/Microsoft.PowerShell.Core/About/about_Environment_Variables.md:360:15    - Unknown word (UPDATECHECK) -- - `POWERSHELL_UPDATECHECK`
 reference/7.5/Microsoft.PowerShell.Core/About/about_Environment_Variables.md:363:15    - Unknown word (UPDATECHECK) -- `POWERSHELL_UPDATECHECK` environment variable
 reference/7.5/Microsoft.PowerShell.Core/About/about_Environment_Variables.md:369:55    - Unknown word (UPDATECHECK) -- defining `POWERSHELL_UPDATECHECK`:
 reference/7.5/Microsoft.PowerShell.Core/About/about_Environment_Variables.md:544:6     - Unknown word (xtermm)      -- - `xtermm` - sets `$PSStyle.OutputRende
@@ -2382,8 +2403,13 @@ reference/7.5/Microsoft.PowerShell.Core/About/about_Functions.md:222:4     - Unk
 reference/7.5/Microsoft.PowerShell.Core/About/about_Functions_Advanced_Parameters.md:742:50    - Unknown word (dynamicparameters) -- tab completion. Like **dynamicparameters**, the
 reference/7.5/Microsoft.PowerShell.Core/About/about_Functions_Argument_Completion.md:265:37    - Unknown word (pswh)       -- toryCompleter(ContainingFile="pswh.exe", Depth=2)]
 reference/7.5/Microsoft.PowerShell.Core/About/about_Group_Policy_Settings.md:59:10     - Unknown word (gpedit)     -- editor (`gpedit.msc`).
-reference/7.5/Microsoft.PowerShell.Core/About/about_Hash_Tables.md:420:23    - Unknown word (Servi)      -- System.ServiceProcess.Servi... Running
-reference/7.5/Microsoft.PowerShell.Core/About/about_Hash_Tables.md:428:59    - Unknown word (Manag)      -- Remote Management (WS-Manag...
+reference/7.5/Microsoft.PowerShell.Core/About/about_Hash_Tables.md:130:11    - Unknown word (orderedhash) -- [ordered]$orderedhash = @{}
+reference/7.5/Microsoft.PowerShell.Core/About/about_Hash_Tables.md:133:19    - Unknown word (orderedhash) -- 1 |  [ordered]$orderedhash = @{}
+reference/7.5/Microsoft.PowerShell.Core/About/about_Hash_Tables.md:141:2     - Unknown word (orderedhash) -- $orderedhash = [ordered]@{}
+reference/7.5/Microsoft.PowerShell.Core/About/about_Hash_Tables.md:148:13    - Unknown word (newhash)     -- [hashtable]$newhash = [ordered]@{
+reference/7.5/Microsoft.PowerShell.Core/About/about_Hash_Tables.md:153:2     - Unknown word (newhash)     -- $newhash
+reference/7.5/Microsoft.PowerShell.Core/About/about_Hash_Tables.md:505:23    - Unknown word (Servi)       -- System.ServiceProcess.Servi... Running
+reference/7.5/Microsoft.PowerShell.Core/About/about_Hash_Tables.md:513:59    - Unknown word (Manag)       -- Remote Management (WS-Manag...
 reference/7.5/Microsoft.PowerShell.Core/About/about_Join.md:83:22     - Unknown word (ERSHELL)    -- a = "WIND", "S P", "ERSHELL"
 reference/7.5/Microsoft.PowerShell.Core/About/about_Language_Modes.md:224:5     - Unknown word (adsisearcher) -- - `[adsisearcher]`
 reference/7.5/Microsoft.PowerShell.Core/About/about_Language_Modes.md:236:5     - Unknown word (cimclass)     -- - `[cimclass]`
@@ -2445,7 +2471,6 @@ reference/7.5/Microsoft.PowerShell.Core/About/about_Parsing.md:402:10    - Unkno
 reference/7.5/Microsoft.PowerShell.Core/About/about_Parsing.md:525:24    - Unknown word (repocache)      -- findstr /c:"foo" ~\repocache.clixml
 reference/7.5/Microsoft.PowerShell.Core/About/about_Parsing.md:536:16    - Unknown word (repocache)      -- Notice that `~\repocache.clixml` was expanded
 reference/7.5/Microsoft.PowerShell.Core/About/about_Parsing.md:537:17    - Unknown word (repocache)      -- `C:\Users\user2\repocache.clixml`.
-reference/7.5/Microsoft.PowerShell.Core/About/about_Path_Syntax.md:21:16     - Unknown word (pathnames)  -- In PowerShell, pathnames can be one of two types
 reference/7.5/Microsoft.PowerShell.Core/About/about_Pipeline_Chain_Operators.md:172:25    - Unknown word (behaviour)  -- of PowerShell 7, the behaviour of these syntaxes has
 reference/7.5/Microsoft.PowerShell.Core/About/about_Pipelines.md:432:24    - Unknown word (xzvf)       -- curl -s -L $uri | tar -xzvf - -C .
 reference/7.5/Microsoft.PowerShell.Core/About/about_Pipelines.md:441:41    - Unknown word (xzvf)       -- uri).Content | tar -xzvf - -C .
@@ -2474,6 +2499,7 @@ reference/7.5/Microsoft.PowerShell.Core/About/about_Pwsh.md:334:3     - Unknown 
 reference/7.5/Microsoft.PowerShell.Core/About/about_Pwsh.md:358:24    - Unknown word (noni)           -- -NonInteractive | -noni
 reference/7.5/Microsoft.PowerShell.Core/About/about_Pwsh.md:394:33    - Unknown word (myproject)      -- pwsh -SettingsFile c:\myproject\powershell.config.json
 reference/7.5/Microsoft.PowerShell.Core/About/about_Pwsh.md:396:23    - Unknown word (sshs)           -- # -SSHServerMode | -sshs
+reference/7.5/Microsoft.PowerShell.Core/About/about_Pwsh.md:409:41    - Unknown word (exectuable)     -- version of this PowerShell exectuable. Additional parameters
 reference/7.5/Microsoft.PowerShell.Core/About/about_Pwsh.md:5:268     - Unknown word (noni)       -- nol, -NonInteractive, -noni, -NoProfile, -nop,
 reference/7.5/Microsoft.PowerShell.Core/About/about_Pwsh.md:5:359     - Unknown word (sshs)       -- settings, -SSHServerMode, -sshs, -STA, -Version, -v
 reference/7.5/Microsoft.PowerShell.Core/About/about_Redirection.md:239:24    - Unknown word (xzvf)       -- curl -s -L $uri | tar -xzvf - -C .
@@ -2740,8 +2766,9 @@ reference/7.5/Microsoft.PowerShell.Management/Set-ItemProperty.md:54:79     - Un
 reference/7.5/Microsoft.PowerShell.Management/Set-Service.md:197:16    - Unknown word (CCLCSWRPWPDTLOCRRC) -- $SDDL = "D:(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSD
 reference/7.5/Microsoft.PowerShell.Management/Set-Service.md:197:44    - Unknown word (CCDCLCSWRPWPDTLOCRSDRCWDWO) -- CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)(A;;CCLCSWLOCRRC
 reference/7.5/Microsoft.PowerShell.Management/Set-Service.md:197:80    - Unknown word (CCLCSWLOCRRC)               -- SWRPWPDTLOCRSDRCWDWO;;;BA)(A;;CCLCSWLOCRRC;;;SU)"
-reference/7.5/Microsoft.PowerShell.Management/Split-Path.md:401:65    - Unknown word (Normpath)   -- would use **Dirname**, **Normpath**, **Realpath**, **Join
-reference/7.5/Microsoft.PowerShell.Management/Split-Path.md:401:79    - Unknown word (Realpath)   -- Dirname**, **Normpath**, **Realpath**, **Join**,
+reference/7.5/Microsoft.PowerShell.Management/Split-Path.md:418:65    - Unknown word (Normpath)   -- would use **Dirname**, **Normpath**, **Realpath**, **Join
+reference/7.5/Microsoft.PowerShell.Management/Split-Path.md:418:79    - Unknown word (Realpath)   -- Dirname**, **Normpath**, **Realpath**, **Join**,
+reference/7.5/Microsoft.PowerShell.Management/Split-Path.md:77:26     - Unknown word (returs)     -- parameters, `Split-Path` returs the parent part of the
 reference/7.5/Microsoft.PowerShell.Management/Start-Process.md:144:2     - Unknown word (nohup)        -- `nohup`. The following example
 reference/7.5/Microsoft.PowerShell.Management/Start-Process.md:145:56    - Unknown word (nohup)        -- launching session. The `nohup` command collects output
 reference/7.5/Microsoft.PowerShell.Management/Start-Process.md:146:2     - Unknown word (nohup)        -- `nohup.out` in the current
@@ -2884,6 +2911,8 @@ reference/7.5/Microsoft.PowerShell.Utility/Trace-Command.md:47:30     - Unknown 
 reference/7.5/Microsoft.PowerShell.Utility/Trace-Command.md:86:57     - Unknown word (echoargs)         -- ParameterBinding { TestExe -echoargs $a 'c" "d' e" "f }
 reference/7.5/Microsoft.PowerShell.Utility/Update-TypeData.md:204:27    - Unknown word (currnet)    -- last command gets the currnet date and displays it
 reference/7.5/Microsoft.PowerShell.Utility/Update-TypeData.md:558:3     - Unknown word (Noteproperty) -- - Noteproperty
+reference/7.5/Microsoft.PowerShell.Utility/Wait-Debugger.md:38:11     - Unknown word (dbgtest)    -- The file `dbgtest.ps1` contains a function
+reference/7.5/Microsoft.PowerShell.Utility/Wait-Debugger.md:67:17     - Unknown word (dbgtest)    -- At D:\temp\test\dbgtest.ps1:13 char:9
 reference/7.5/Microsoft.PowerShell.Utility/Wait-Event.md:65:8      - Unknown word (Autoreset)  -- $Timer.Autoreset = $False
 reference/7.5/Microsoft.PowerShell.Utility/Write-Progress.md:164:49    - Unknown word (Substep)    -- ParentId 0 "Step $i - Substep $j"
 reference/7.5/Microsoft.PowerShell.Utility/Write-Progress.md:166:52    - Unknown word (Substep)    -- ParentId 1 "Step $i - Substep $j - iteration $k"
@@ -3332,53 +3361,58 @@ reference/docs-conceptual/community/2023-updates.md:78:3      - Unknown word (di
 reference/docs-conceptual/community/2023-updates.md:79:3      - Unknown word (tabad)        -- | tabad |
 reference/docs-conceptual/community/2023-updates.md:80:3      - Unknown word (mklement)     -- | mklement0 |            |
 reference/docs-conceptual/community/2023-updates.md:81:3      - Unknown word (radkedan)     -- | radkedan |            |
-reference/docs-conceptual/community/2024-updates.md:100:3     - Unknown word (Matej)       -- | MatejKafka |
-reference/docs-conceptual/community/2024-updates.md:101:8     - Unknown word (guanyuming)  -- | real-guanyuming-he |     1      |
-reference/docs-conceptual/community/2024-updates.md:102:3     - Unknown word (santisq)     -- | santisq |     2
-reference/docs-conceptual/community/2024-updates.md:103:3     - Unknown word (stephanadler) -- | stephanadler1 |     1
-reference/docs-conceptual/community/2024-updates.md:104:3     - Unknown word (stevenjudd)   -- | stevenjudd |     2
-reference/docs-conceptual/community/2024-updates.md:136:3     - Unknown word (Hrxn)         -- | Hrxn |
-reference/docs-conceptual/community/2024-updates.md:137:3     - Unknown word (aberus)       -- | aberus |     1
-reference/docs-conceptual/community/2024-updates.md:138:3     - Unknown word (nickcox)      -- | nickcox |     1
-reference/docs-conceptual/community/2024-updates.md:139:3     - Unknown word (kilasuit)     -- | kilasuit |     1
-reference/docs-conceptual/community/2024-updates.md:140:9     - Unknown word (slayden)      -- | glenn-slayden |     1      |
-reference/docs-conceptual/community/2024-updates.md:141:3     - Unknown word (darthwalsh)   -- | darthwalsh |     1
-reference/docs-conceptual/community/2024-updates.md:143:3     - Unknown word (joshooaj)     -- | joshooaj |     1
-reference/docs-conceptual/community/2024-updates.md:144:3     - Unknown word (mklement)     -- | mklement0 |
-reference/docs-conceptual/community/2024-updates.md:145:13    - Unknown word (Lockhart)     -- | RokeJulianLockhart |            |
-reference/docs-conceptual/community/2024-updates.md:145:3     - Unknown word (Roke)         -- | RokeJulianLockhart |
-reference/docs-conceptual/community/2024-updates.md:171:3     - Unknown word (Hrxn)         -- | Hrxn |     3
-reference/docs-conceptual/community/2024-updates.md:172:3     - Unknown word (muzimuzhi)    -- | muzimuzhi |     1      |
-reference/docs-conceptual/community/2024-updates.md:173:3     - Unknown word (bergmeister)  -- | bergmeister |     1      |
-reference/docs-conceptual/community/2024-updates.md:199:3     - Unknown word (Certezalito)  -- | Certezalito |     1      |
-reference/docs-conceptual/community/2024-updates.md:200:3     - Unknown word (sethvs)       -- | sethvs |     1
-reference/docs-conceptual/community/2024-updates.md:201:3     - Unknown word (chrisdent)    -- | chrisdent-de |     1      |
-reference/docs-conceptual/community/2024-updates.md:202:3     - Unknown word (jborean)      -- | jborean93 |     1      |
-reference/docs-conceptual/community/2024-updates.md:203:3     - Unknown word (brucificus)   -- | brucificus |     1      |
-reference/docs-conceptual/community/2024-updates.md:204:4     - Unknown word (Plantefeve)   -- | XPlantefeve |     1      |
-reference/docs-conceptual/community/2024-updates.md:205:3     - Unknown word (mklement)     -- | mklement0 |            |
-reference/docs-conceptual/community/2024-updates.md:228:3     - Unknown word (flcdrg)       -- | flcdrg |     1
-reference/docs-conceptual/community/2024-updates.md:229:3     - Unknown word (holtkampjs)   -- | holtkampjs |     1
-reference/docs-conceptual/community/2024-updates.md:231:11    - Unknown word (Nurillaew)    -- | MuzaffarNurillaew |     1      |
-reference/docs-conceptual/community/2024-updates.md:231:3     - Unknown word (Muzaffar)     -- | MuzaffarNurillaew |     1
-reference/docs-conceptual/community/2024-updates.md:232:3     - Unknown word (ybeltrikov)   -- | ybeltrikov |     1
-reference/docs-conceptual/community/2024-updates.md:233:3     - Unknown word (Armaan)       -- | ArmaanMcleod |
-reference/docs-conceptual/community/2024-updates.md:234:3     - Unknown word (mklement)     -- | mklement0 |
-reference/docs-conceptual/community/2024-updates.md:235:3     - Unknown word (deraeler)     -- | deraeler |
-reference/docs-conceptual/community/2024-updates.md:237:3     - Unknown word (tabad)        -- | tabad |
-reference/docs-conceptual/community/2024-updates.md:238:3     - Unknown word (wwilliams)    -- | wwilliams69 |
-reference/docs-conceptual/community/2024-updates.md:34:3      - Unknown word (guillermooo) -- | guillermooo |     4      |
-reference/docs-conceptual/community/2024-updates.md:35:3      - Unknown word (darthwalsh)  -- | darthwalsh |     2      |
-reference/docs-conceptual/community/2024-updates.md:36:3      - Unknown word (shekeriev)   -- | shekeriev |     1      |
-reference/docs-conceptual/community/2024-updates.md:38:3      - Unknown word (paaspaas)    -- | paaspaas00 |     1      |
-reference/docs-conceptual/community/2024-updates.md:39:3      - Unknown word (ninmonkey)   -- | ninmonkey |     1      |
-reference/docs-conceptual/community/2024-updates.md:61:3      - Unknown word (mklement)    -- | mklement0 |
-reference/docs-conceptual/community/2024-updates.md:62:3      - Unknown word (sethvs)      -- | sethvs
-reference/docs-conceptual/community/2024-updates.md:65:3      - Unknown word (trackd)      -- | trackd
-reference/docs-conceptual/community/2024-updates.md:66:10     - Unknown word (lengyel)     -- | landon-lengyel |     1
-reference/docs-conceptual/community/2024-updates.md:67:3      - Unknown word (msklv)       -- | msklv
-reference/docs-conceptual/community/2024-updates.md:97:3      - Unknown word (berlintay)   -- | berlintay |     1
-reference/docs-conceptual/community/2024-updates.md:98:3      - Unknown word (dcarpenter)  -- | dcarpenter31 |     1
+reference/docs-conceptual/community/2024-updates.md:121:3     - Unknown word (berlintay)   -- | berlintay |     1
+reference/docs-conceptual/community/2024-updates.md:122:3     - Unknown word (dcarpenter)  -- | dcarpenter31 |     1
+reference/docs-conceptual/community/2024-updates.md:124:3     - Unknown word (Matej)       -- | MatejKafka |
+reference/docs-conceptual/community/2024-updates.md:125:8     - Unknown word (guanyuming)  -- | real-guanyuming-he |     1      |
+reference/docs-conceptual/community/2024-updates.md:126:3     - Unknown word (santisq)     -- | santisq |     2
+reference/docs-conceptual/community/2024-updates.md:127:3     - Unknown word (stephanadler) -- | stephanadler1 |     1
+reference/docs-conceptual/community/2024-updates.md:128:3     - Unknown word (stevenjudd)   -- | stevenjudd |     2
+reference/docs-conceptual/community/2024-updates.md:160:3     - Unknown word (Hrxn)         -- | Hrxn |
+reference/docs-conceptual/community/2024-updates.md:161:3     - Unknown word (aberus)       -- | aberus |     1
+reference/docs-conceptual/community/2024-updates.md:162:3     - Unknown word (nickcox)      -- | nickcox |     1
+reference/docs-conceptual/community/2024-updates.md:163:3     - Unknown word (kilasuit)     -- | kilasuit |     1
+reference/docs-conceptual/community/2024-updates.md:164:9     - Unknown word (slayden)      -- | glenn-slayden |     1      |
+reference/docs-conceptual/community/2024-updates.md:165:3     - Unknown word (darthwalsh)   -- | darthwalsh |     1
+reference/docs-conceptual/community/2024-updates.md:167:3     - Unknown word (joshooaj)     -- | joshooaj |     1
+reference/docs-conceptual/community/2024-updates.md:168:3     - Unknown word (mklement)     -- | mklement0 |
+reference/docs-conceptual/community/2024-updates.md:169:13    - Unknown word (Lockhart)     -- | RokeJulianLockhart |            |
+reference/docs-conceptual/community/2024-updates.md:169:3     - Unknown word (Roke)         -- | RokeJulianLockhart |
+reference/docs-conceptual/community/2024-updates.md:195:3     - Unknown word (Hrxn)         -- | Hrxn |     3
+reference/docs-conceptual/community/2024-updates.md:196:3     - Unknown word (muzimuzhi)    -- | muzimuzhi |     1      |
+reference/docs-conceptual/community/2024-updates.md:197:3     - Unknown word (bergmeister)  -- | bergmeister |     1      |
+reference/docs-conceptual/community/2024-updates.md:223:3     - Unknown word (Certezalito)  -- | Certezalito |     1      |
+reference/docs-conceptual/community/2024-updates.md:224:3     - Unknown word (sethvs)       -- | sethvs |     1
+reference/docs-conceptual/community/2024-updates.md:225:3     - Unknown word (chrisdent)    -- | chrisdent-de |     1      |
+reference/docs-conceptual/community/2024-updates.md:226:3     - Unknown word (jborean)      -- | jborean93 |     1      |
+reference/docs-conceptual/community/2024-updates.md:227:3     - Unknown word (brucificus)   -- | brucificus |     1      |
+reference/docs-conceptual/community/2024-updates.md:228:4     - Unknown word (Plantefeve)   -- | XPlantefeve |     1      |
+reference/docs-conceptual/community/2024-updates.md:229:3     - Unknown word (mklement)     -- | mklement0 |            |
+reference/docs-conceptual/community/2024-updates.md:252:3     - Unknown word (flcdrg)       -- | flcdrg |     1
+reference/docs-conceptual/community/2024-updates.md:253:3     - Unknown word (holtkampjs)   -- | holtkampjs |     1
+reference/docs-conceptual/community/2024-updates.md:255:11    - Unknown word (Nurillaew)    -- | MuzaffarNurillaew |     1      |
+reference/docs-conceptual/community/2024-updates.md:255:3     - Unknown word (Muzaffar)     -- | MuzaffarNurillaew |     1
+reference/docs-conceptual/community/2024-updates.md:256:3     - Unknown word (ybeltrikov)   -- | ybeltrikov |     1
+reference/docs-conceptual/community/2024-updates.md:257:3     - Unknown word (Armaan)       -- | ArmaanMcleod |
+reference/docs-conceptual/community/2024-updates.md:258:3     - Unknown word (mklement)     -- | mklement0 |
+reference/docs-conceptual/community/2024-updates.md:259:3     - Unknown word (deraeler)     -- | deraeler |
+reference/docs-conceptual/community/2024-updates.md:261:3     - Unknown word (tabad)        -- | tabad |
+reference/docs-conceptual/community/2024-updates.md:262:3     - Unknown word (wwilliams)    -- | wwilliams69 |
+reference/docs-conceptual/community/2024-updates.md:34:13     - Unknown word (Lockhart)   -- | RokeJulianLockhart |     1      |
+reference/docs-conceptual/community/2024-updates.md:34:3      - Unknown word (Roke)       -- | RokeJulianLockhart |
+reference/docs-conceptual/community/2024-updates.md:35:3      - Unknown word (mohit)      -- | mohitNarang |
+reference/docs-conceptual/community/2024-updates.md:35:8      - Unknown word (Narang)     -- | mohitNarang |     1
+reference/docs-conceptual/community/2024-updates.md:36:3      - Unknown word (aberus)     -- | aberus |     1
+reference/docs-conceptual/community/2024-updates.md:58:3      - Unknown word (guillermooo) -- | guillermooo |     4      |
+reference/docs-conceptual/community/2024-updates.md:59:3      - Unknown word (darthwalsh)  -- | darthwalsh |     2      |
+reference/docs-conceptual/community/2024-updates.md:60:3      - Unknown word (shekeriev)   -- | shekeriev |     1      |
+reference/docs-conceptual/community/2024-updates.md:62:3      - Unknown word (paaspaas)    -- | paaspaas00 |     1      |
+reference/docs-conceptual/community/2024-updates.md:63:3      - Unknown word (ninmonkey)   -- | ninmonkey |     1      |
+reference/docs-conceptual/community/2024-updates.md:85:3      - Unknown word (mklement)    -- | mklement0 |
+reference/docs-conceptual/community/2024-updates.md:86:3      - Unknown word (sethvs)      -- | sethvs
+reference/docs-conceptual/community/2024-updates.md:89:3      - Unknown word (trackd)      -- | trackd
+reference/docs-conceptual/community/2024-updates.md:90:10     - Unknown word (lengyel)     -- | landon-lengyel |     1
+reference/docs-conceptual/community/2024-updates.md:91:3      - Unknown word (msklv)       -- | msklv
 reference/docs-conceptual/community/community-update.yml:50:21     - Unknown word (Helmick's)  -- - text: Jason Helmick's - The Show
 reference/docs-conceptual/community/contributing/general-markdown.md:248:41    - Unknown word (friendlyname) -- use Markdown syntax `[friendlyname](url-or-path)`.
 reference/docs-conceptual/community/contributing/general-markdown.md:260:56    - Unknown word (DMTF)         -- this parameter, the DMTF standard resource URI
@@ -3400,6 +3434,7 @@ reference/docs-conceptual/community/contributing/labelling-in-github.md:60:9    
 reference/docs-conceptual/community/contributing/labelling-in-github.md:65:9      - Unknown word (threadjob)         -- | `area-threadjob` | The [ThreadJob
 reference/docs-conceptual/community/contributing/managing-pull-requests.md:93:41     - Unknown word (modulepath) -- name for `<version>/<modulepath>/About/About.md`
 reference/docs-conceptual/community/contributing/powershell-style-guide.md:239:32    - Unknown word (DXGI)       -- GameDVR_DXGIHonorFSEWindowsCompatible
+reference/docs-conceptual/community/contributing/product-terminology.md:99:19     - Unknown word (Entra)      -- - Microsoft.Graph.Entra PowerShell
 reference/docs-conceptual/community/digital-art.md:15:15     - Unknown word (Infographics) -- ## PowerShell Infographics
 reference/docs-conceptual/community/hall-of-fame.md:21:8      - Unknown word (ucci)       -- | matt9ucci |      |
 reference/docs-conceptual/community/hall-of-fame.md:22:3      - Unknown word (nschonni)   -- | nschonni |      |
@@ -5150,7 +5185,7 @@ reference/media/shared/large-yellow-circle-1f7e1.svg:6:72      - Unknown word (e
 reference/media/shared/large-yellow-circle-1f7e1.svg:7:72      - Unknown word (evenodd)    -- 100d43c" fill-rule="evenodd"></path>
 reference/media/shared/large-yellow-circle-1f7e1.svg:8:72      - Unknown word (evenodd)    -- 100d43c" fill-rule="evenodd"></path>
 reference/module/index.md:14:36     - Unknown word (windowsserver) -- FilterColumn1: powershell-7.4,windowsserver2022-ps
-reference/module/index.md:15:21     - Unknown word (azps)          -- quickFilterColumn2: azps-12.2.0,sqlserver-ps
+reference/module/index.md:15:21     - Unknown word (azps)          -- quickFilterColumn2: azps-12.3.0,sqlserver-ps
 reference/module/index.md:16:42     - Unknown word (systemcenter)  -- graph-powershell-1.0,systemcenter-ps-2022
 tests/Pester/Update-Help.Tests.ps1:134:89    - Unknown word (updatablehelp) -- $PSScriptRoot\..\..\updatablehelp\5.1\$moduleName"
 tests/Pester/Update-Help.Tests.ps1:24:34     - Unknown word (pshome)     -- HelpInstallationPath = "$pshome\en-US"
