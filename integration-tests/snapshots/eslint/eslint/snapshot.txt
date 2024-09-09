@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: [".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 1983, Issues found: 1692 in 317 files.
+ CSpell: Files checked: 1996, Issues found: 1698 in 320 files.
  exit code: 1
 Makefile.js:116:88    - Unknown word (ined)       -- followed by the string "ined".
 Makefile.js:327:12    - Unknown word (gensite)    -- target.gensite();
@@ -28,7 +28,7 @@ README.md:281:1     - Unknown word (Strek)         -- Strek
 README.md:290:5     - Unknown word (teamend)       -- <!--teamend-->
 README.md:297:5     - Unknown word (sponsorsstart) -- <!--sponsorsstart-->
 README.md:301:564   - Unknown word (Workleap)      -- f99fe2465f&v=4" alt="Workleap" height="64"></a></p
-README.md:302:1054  - Unknown word (Nextbase)      -- 145838380?v=4" alt="Nextbase Starter Kit" height
+README.md:302:790   - Unknown word (Nextbase)      -- 145838380?v=4" alt="Nextbase Starter Kit" height
 README.md:303:5     - Unknown word (sponsorsend)   -- <!--sponsorsend-->
 README.md:305:5     - Unknown word (techsponsorsstart) -- <!--techsponsorsstart-->
 README.md:308:5     - Unknown word (techsponsorsend)   -- <!--techsponsorsend-->
@@ -251,10 +251,10 @@ lib/rules/space-unary-ops.js:133:28    - Unknown word (Doesnt)     -- function v
 lib/rules/space-unary-ops.js:246:32    - Unknown word (Dont)       -- function verifyNonWordsDontHaveSpaces(node, firstToken
 lib/rules/use-isnan.js:130:25    - Unknown word (Suggestable) -- const isSuggestable = fixableOperators.has
 lib/rules/utils/ast-utils.js:404:40    - Unknown word (samely)     -- a.b` and `a?.b` are samely.
-package.json:109:7     - Unknown word (trunkio)    -- "@trunkio/launcher": "^1.3.0"
-package.json:129:6     - Unknown word (eslump)     -- "eslump": "^3.0.0",
-package.json:144:6     - Unknown word (metascraper) -- "metascraper": "^5.25.7",
-package.json:26:81     - Unknown word (flter)      -- ignore=!docs/**/*.js -a --flter=eslint && trunk check
+package.json:120:7     - Unknown word (trunkio)    -- "@trunkio/launcher": "^1.3.0"
+package.json:141:6     - Unknown word (eslump)     -- "eslump": "^3.0.0",
+package.json:156:6     - Unknown word (metascraper) -- "metascraper": "^5.25.7",
+package.json:36:81     - Unknown word (flter)      -- ignore=!docs/**/*.js -a --flter=eslint && trunk check
 templates/blogpost.md.ejs:18:10     - Unknown word (linkify)    -- function linkify(line) {
 tests/fixtures/code-path-analysis/try--try-finally-4.js:43:156    - Unknown word (Expressio)  -- Expression\nIdentifier (bar)\nExpressio
 tests/fixtures/config-hierarchy/file-structure.json:19:10     - Unknown word (subbroken)  -- "subbroken": {
@@ -331,7 +331,7 @@ tests/lib/rules/id-blacklist.js:141:51    - Unknown word (myarray)    -- "date",
 tests/lib/rules/id-blacklist.js:196:47    - Unknown word (writability) -- myGlobal } = foo);", // writability doesn't affect the logic
 tests/lib/rules/id-blacklist.js:69:70     - Unknown word (bingg)      -- ba", "barr", "bazz", "bingg"]
 tests/lib/rules/id-length.js:50:22     - Unknown word (lalala)     -- { code: "var lalala = Foo(42)", options
-tests/lib/rules/id-length.js:625:29    - Unknown word (NOTMATCHED) -- code: "function NOTMATCHED_send() {};",
+tests/lib/rules/id-length.js:642:29    - Unknown word (NOTMATCHED) -- code: "function NOTMATCHED_send() {};",
 tests/lib/rules/id-match.js:25:30     - Unknown word (Matthieu)   -- code: "__foo = \"Matthieu\"",
 tests/lib/rules/id-match.js:34:20     - Unknown word (firstname)  -- code: "firstname = \"Matthieu\"",
 tests/lib/rules/id-match.js:46:34     - Unknown word (Larcher)    -- code: "last_Name = \"Larcher\"",
@@ -388,10 +388,10 @@ tests/lib/rules/prefer-regex-literals.js:1685:191  - Unknown word (notregbutstri
 tests/lib/rules/prefer-regex-literals.js:2633:62   - Unknown word (avalue)          -- condition2) new RegExp('avalue').test(str);",
 tests/lib/rules/prefer-regex-literals.js:2824:32   - Unknown word (mysafereg)       -- code: "new RegExp('mysafereg' /* comment explaining
 tests/lib/rules/quotes.js:537:24    - Unknown word (notoctal)   -- code: "var notoctal = '\\0'",
-tests/lib/rules/require-unicode-regexp.js:53:23     - Unknown word (gimvy)      -- { code: "/foo/gimvy", languageOptions:
-tests/lib/rules/require-unicode-regexp.js:62:33     - Unknown word (gimv)       -- code: "const flags = 'gimv'; new RegExp('foo',
-tests/lib/rules/require-unicode-regexp.js:85:25     - Unknown word (gimy)       -- code: "/foo/gimy",
-tests/lib/rules/require-unicode-regexp.js:91:39     - Unknown word (gimyu)      -- output: "/foo/gimyu"
+tests/lib/rules/require-unicode-regexp.js:55:23     - Unknown word (gimvy)      -- { code: "/foo/gimvy", languageOptions:
+tests/lib/rules/require-unicode-regexp.js:64:33     - Unknown word (gimv)       -- code: "const flags = 'gimv'; new RegExp('foo',
+tests/lib/rules/require-unicode-regexp.js:89:25     - Unknown word (gimy)       -- code: "/foo/gimy",
+tests/lib/rules/require-unicode-regexp.js:95:39     - Unknown word (gimyu)      -- output: "/foo/gimyu"
 tests/lib/rules/semi.js:194:66    - Unknown word (mylib)      -- named2 } from 'src/mylib';", languageOptions
 tests/lib/rules/sort-keys.js:261:24    - Unknown word (abce)       -- // abce
 tests/lib/rules/spaced-comment.js:115:54    - Unknown word (xmldoc)     -- comment\n//----\n/// xmldoc style comment\n//!<
