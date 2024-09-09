@@ -3,8 +3,8 @@ import { readFile } from 'node:fs/promises';
 import { findMatchingFileTypes } from '@cspell/filetypes';
 import { describe, expect, test } from 'vitest';
 
-import { fromJSON } from './dehydrate.mjs';
-import { toJSON } from './storage.mts';
+import { fromJSON } from './dehydrate.mts';
+import { toJSON } from './storage.mjs';
 
 const urlFileList = new URL('../fixtures/fileList.txt', import.meta.url);
 
