@@ -105,7 +105,7 @@ importers:
         specifier: ^2.7.0
         version: 2.7.0
       typescript:
-        specifier: ^5.5.4
+        specifier: ~5.5.4
         version: 5.5.4
       typescript-eslint:
         specifier: ^8.4.0
@@ -121,10 +121,10 @@ importers:
     dependencies:
       typedoc:
         specifier: ^0.26.6
-        version: 0.26.6(typescript@5.5.4)
+        version: 0.26.6(typescript@5.6.2)
       typedoc-plugin-markdown:
         specifier: 4.2.6
-        version: 4.2.6(typedoc@0.26.6(typescript@5.5.4))
+        version: 4.2.6(typedoc@0.26.6(typescript@5.6.2))
 
   integration-tests:
     dependencies:
@@ -554,7 +554,7 @@ importers:
         specifier: ^2.3.0
         version: 2.3.0
       typescript:
-        specifier: ^5.5.4
+        specifier: ~5.5.4
         version: 5.5.4
       typescript-eslint:
         specifier: ^8.4.0
@@ -628,7 +628,7 @@ importers:
         specifier: ^2.0.8
         version: 2.0.8
       typescript:
-        specifier: ^5.5.4
+        specifier: ~5.5.4
         version: 5.5.4
 
   packages/cspell-json-reporter:
@@ -790,7 +790,7 @@ importers:
         version: 12.1.0
       cosmiconfig:
         specifier: 9.0.0
-        version: 9.0.0(typescript@5.5.4)
+        version: 9.0.0(typescript@5.6.2)
       cspell-trie-lib:
         specifier: workspace:*
         version: link:../cspell-trie-lib
@@ -1067,7 +1067,7 @@ importers:
         version: link:../../../packages/cspell-types
       ts-loader:
         specifier: ^9.5.1
-        version: 9.5.1(typescript@5.5.4)(webpack@5.94.0(webpack-cli@5.1.4))
+        version: 9.5.1(typescript@5.6.2)(webpack@5.94.0(webpack-cli@5.1.4))
       webpack:
         specifier: ^5.94.0
         version: 5.94.0(webpack-cli@5.1.4)
@@ -1304,7 +1304,7 @@ importers:
         specifier: 4.2.6
         version: 4.2.6(typedoc@0.26.6(typescript@5.5.4))
       typescript:
-        specifier: ^5.5.4
+        specifier: ~5.5.4
         version: 5.5.4
 
 packages:
@@ -9067,6 +9067,11 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
+  typescript@5.6.2:
+    resolution: {integrity: sha512-NW8ByodCSNCwZeghjN3o+JX5OFH0Ojg6sadjEKY4huZ52TqbJTJnDo5+Tw98lSy63NZvi4n+ez5m2u5d4PkZyw==}
+    engines: {node: '>=14.17'}
+    hasBin: true
+
   uc.micro@2.1.0:
     resolution: {integrity: sha512-ARDJmphmdvUk6Glw7y9DQ2bFkKBHwQHLi2lsaH6PPmz/Ka9sFOBsBluozhDltWmnv9u/cF6Rt87znRTPV+yp/A==}
 
@@ -14110,6 +14115,15 @@ snapshots:
       parse-json: 5.2.0
     optionalDependencies:
       typescript: 5.5.4
+
+  cosmiconfig@9.0.0(typescript@5.6.2):
+    dependencies:
+      env-paths: 2.2.1
+      import-fresh: 3.3.0
+      js-yaml: 4.1.0
+      parse-json: 5.2.0
+    optionalDependencies:
+      typescript: 5.6.2
 
   create-jest@29.7.0(@types/node@18.19.50)(ts-node@10.9.2(@types/node@18.19.50)(typescript@5.5.4)):
     dependencies:
@@ -19646,14 +19660,14 @@ snapshots:
       tslib: 2.7.0
       typescript: 5.5.4
 
-  ts-loader@9.5.1(typescript@5.5.4)(webpack@5.94.0(webpack-cli@5.1.4)):
+  ts-loader@9.5.1(typescript@5.6.2)(webpack@5.94.0(webpack-cli@5.1.4)):
     dependencies:
       chalk: 4.1.2
       enhanced-resolve: 5.17.1
       micromatch: 4.0.8
       semver: 7.6.3
       source-map: 0.7.4
-      typescript: 5.5.4
+      typescript: 5.6.2
       webpack: 5.94.0(webpack-cli@5.1.4)
 
   ts-node@10.9.2(@types/node@18.19.50)(typescript@5.5.4):
@@ -19779,6 +19793,10 @@ snapshots:
     dependencies:
       typedoc: 0.26.6(typescript@5.5.4)
 
+  typedoc-plugin-markdown@4.2.6(typedoc@0.26.6(typescript@5.6.2)):
+    dependencies:
+      typedoc: 0.26.6(typescript@5.6.2)
+
   typedoc@0.26.6(typescript@5.5.4):
     dependencies:
       lunr: 2.3.9
@@ -19786,6 +19804,15 @@ snapshots:
       minimatch: 9.0.5
       shiki: 1.16.2
       typescript: 5.5.4
+      yaml: 2.5.1
+
+  typedoc@0.26.6(typescript@5.6.2):
+    dependencies:
+      lunr: 2.3.9
+      markdown-it: 14.1.0
+      minimatch: 9.0.5
+      shiki: 1.16.2
+      typescript: 5.6.2
       yaml: 2.5.1
 
   typescript-eslint@8.4.0(eslint@9.9.1(jiti@1.21.6))(typescript@5.5.4):
@@ -19800,6 +19827,8 @@ snapshots:
       - supports-color
 
   typescript@5.5.4: {}
+
+  typescript@5.6.2: {}
 
   uc.micro@2.1.0: {}
 
