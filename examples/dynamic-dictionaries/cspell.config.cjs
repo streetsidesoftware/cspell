@@ -7,12 +7,13 @@ const path = require('node:path');
 const { glob } = require('tinyglobby');
 
 function getDictionaries() {
-    return glob('dictionaries/*.txt');
+    return glob(['dictionaries/*.txt'], { cwd: __dirname, absolute: true });
 }
 
 async function createConfig() {
     const dictFiles = await getDictionaries();
     const dictionaryDefinitions = dictFiles.map((dict) => ({ name: path.parse(dict).name, path: dict }));
+
     return {
         dictionaryDefinitions,
         dictionaries: dictionaryDefinitions.map((dict) => dict.name),
