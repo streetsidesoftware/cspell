@@ -3,6 +3,7 @@ import * as path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import typeScriptParser from '@typescript-eslint/parser';
+import type { Linter } from 'eslint';
 import { RuleTester } from 'eslint';
 
 import type { Options as RuleOptions } from '../plugin/index.cjs';
@@ -12,7 +13,7 @@ const __dirname = fileURLToPath(new URL('.', import.meta.url));
 const root = path.resolve(__dirname, '../..');
 const fixturesDir = path.join(root, 'fixtures');
 
-const parsers: Record<string, string | undefined | unknown> = {
+const parsers: Record<string, Linter.Parser | undefined> = {
     // Note: it is possible for @typescript-eslint/parser to break the path
     '.ts': typeScriptParser,
 };
@@ -206,11 +207,7 @@ function resolveFix(filename: string): string {
     return path.resolve(fixturesDir, filename);
 }
 
-interface ValidTestCaseEsLint9 extends ValidTestCase {
-    languageOptions?: {
-        parser?: unknown;
-    };
-}
+type ValidTestCaseEsLint9 = ValidTestCase;
 
 function readFix(filename: string, options?: Options): ValidTestCase {
     const __filename = resolveFix(filename);
