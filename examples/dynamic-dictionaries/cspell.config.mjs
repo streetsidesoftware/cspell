@@ -10,7 +10,7 @@ import { glob } from 'tinyglobby';
 const __dir = fileURLToPath(new URL('.', import.meta.url));
 
 function getDictionaries() {
-    return glob(['dictionaries/*.txt'], { cwd: __dir, absolute: true });
+    return glob(['dictionaries/*.txt'], { cwd: __dir });
 }
 
 async function createConfig() {

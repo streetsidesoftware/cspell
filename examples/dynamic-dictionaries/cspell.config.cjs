@@ -7,7 +7,7 @@ const path = require('node:path');
 const { glob } = require('tinyglobby');
 
 function getDictionaries() {
-    return glob(['dictionaries/*.txt'], { cwd: __dirname, absolute: true });
+    return glob(['dictionaries/*.txt'], { cwd: __dirname });
 }
 
 async function createConfig() {
