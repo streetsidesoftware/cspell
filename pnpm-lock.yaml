@@ -126,6 +126,15 @@ importers:
         specifier: 4.2.6
         version: 4.2.6(typedoc@0.26.7(typescript@5.6.2))
 
+  examples/dynamic-dictionaries:
+    dependencies:
+      cspell:
+        specifier: workspace:*
+        version: link:../../packages/cspell
+      tinyglobby:
+        specifier: ^0.2.6
+        version: 0.2.6
+
   integration-tests:
     dependencies:
       '@cspell/cspell-types':
@@ -5428,6 +5437,14 @@ packages:
   fb-watchman@2.0.2:
     resolution: {integrity: sha512-p5161BqbuCaSnB8jIbzQHOlpgsPmK5rJVDfDKO91Axs5NC1uu3HRQm6wt9cd9/+GtQQIO53JdGXXoyDpTAsgYA==}
 
+  fdir@6.3.0:
+    resolution: {integrity: sha512-QOnuT+BOtivR77wYvCWHfGt9s4Pz1VIMbD463vegT5MLqNXy8rYFT/lPVEqf/bhYeT6qmqrNHhsX+rWwe3rOCQ==}
+    peerDependencies:
+      picomatch: ^3 || ^4
+    peerDependenciesMeta:
+      picomatch:
+        optional: true
+
   feed@4.2.2:
     resolution: {integrity: sha512-u5/sxGfiMfZNtJ3OvQpXcvotFpYkL0n9u9mM2vkui2nGo8b4wvDkJ8gAkYqbA8QpGyFCv3RK0Z+Iv+9veCS9bQ==}
     engines: {node: '>=0.4.0'}
@@ -7628,6 +7645,10 @@ packages:
     resolution: {integrity: sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==}
     engines: {node: '>=8.6'}
 
+  picomatch@4.0.2:
+    resolution: {integrity: sha512-M7BAV6Rlcy5u+m6oPhAPFgJTzAioX/6B0DxyvDlo9l8+T3nLKbrczg2WLUyzd45L8RqfUMyGPzekbMvX2Ldkwg==}
+    engines: {node: '>=12'}
+
   pify@6.1.0:
     resolution: {integrity: sha512-KocF8ve28eFjjuBKKGvzOBGzG8ew2OqOOSxTTZhirkzH7h3BI1vyzqlR0qbfcDBve1Yzo3FVlWUAtCRrbVN8Fw==}
     engines: {node: '>=14.16'}
@@ -8890,6 +8911,10 @@ packages:
 
   tinybench@2.9.0:
     resolution: {integrity: sha512-0+DUvqWMValLmha6lr4kD8iAMK1HzV0/aKnCtWb9v9641TnP/MFb7Pc2bxoxQjTXAErryXVgUOfv2YqNllqGeg==}
+
+  tinyglobby@0.2.6:
+    resolution: {integrity: sha512-NbBoFBpqfcgd1tCiO8Lkfdk+xrA7mlLR9zgvZcZWQQwU63XAfUePyd6wZBaU93Hqw347lHnwFzttAkemHzzz4g==}
+    engines: {node: '>=12.0.0'}
 
   tinypool@1.0.1:
     resolution: {integrity: sha512-URZYihUbRPcGv95En+sz6MfghfIc2OJ1sv/RmhWZLouPY0/8Vo80viwPvg3dlaS9fuq7fQMEfgRRK7BBZThBEA==}
@@ -15297,6 +15322,10 @@ snapshots:
     dependencies:
       bser: 2.1.1
 
+  fdir@6.3.0(picomatch@4.0.2):
+    optionalDependencies:
+      picomatch: 4.0.2
+
   feed@4.2.2:
     dependencies:
       xml-js: 1.6.11
@@ -18230,6 +18259,8 @@ snapshots:
 
   picomatch@2.3.1: {}
 
+  picomatch@4.0.2: {}
+
   pify@6.1.0: {}
 
   pirates@4.0.6: {}
@@ -19665,6 +19696,11 @@ snapshots:
   tiny-warning@1.0.3: {}
 
   tinybench@2.9.0: {}
+
+  tinyglobby@0.2.6:
+    dependencies:
+      fdir: 6.3.0(picomatch@4.0.2)
+      picomatch: 4.0.2
 
   tinypool@1.0.1: {}
 
