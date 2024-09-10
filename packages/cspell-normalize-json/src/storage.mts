@@ -384,13 +384,16 @@ export class CompactStorage {
         return this.primitiveToIdx(value);
     }
 
-    private reset(): void {
+    /**
+     * Reset things in a way that allows for reuse.
+     */
+    private softReset(): void {
         this.cache.clear();
         this.cache.set(undefined, 0);
     }
 
     toJSON<V extends Serializable>(json: V): Dehydrated {
-        this.reset();
+        this.softReset();
         this.valueToIdx(json);
         return this.data;
     }
