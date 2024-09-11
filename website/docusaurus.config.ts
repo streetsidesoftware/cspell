@@ -108,6 +108,11 @@ const config: Config = {
     themeConfig: {
         // Replace with your project's social card
         // image: 'img/docusaurus-social-card.jpg',
+        colorMode: {
+            defaultMode: 'light',
+            disableSwitch: false,
+            respectPrefersColorScheme: false,
+        },
         navbar: {
             title: 'CSpell',
             logo: {
@@ -115,13 +120,14 @@ const config: Config = {
                 src: 'img/logo.png',
             },
             items: [
-                { to: '/about', label: 'About', position: 'left' },
                 {
                     type: 'docSidebar',
                     sidebarId: 'tutorialSidebar',
                     position: 'left',
                     label: 'Docs',
                 },
+                { to: '/about', label: 'About', position: 'left' },
+                { label: 'Street Side Software', href: 'https://streetsidesoftware.com', position: 'right' },
                 // {to: '/blog', label: 'Blog', position: 'left'},
                 {
                     href: 'https://github.com/streetsidesoftware/cspell',
