@@ -765,6 +765,10 @@ importers:
         version: 1.2.0
 
   packages/cspell-normalize-json:
+    dependencies:
+      flatpack-json:
+        specifier: workspace:*
+        version: link:../flatpack-json
     devDependencies:
       '@cspell/filetypes':
         specifier: workspace:*
@@ -866,6 +870,12 @@ importers:
       import-meta-resolve:
         specifier: ^4.1.0
         version: 4.1.0
+
+  packages/flatpack-json:
+    devDependencies:
+      '@cspell/filetypes':
+        specifier: workspace:*
+        version: link:../cspell-filetypes
 
   packages/hunspell-reader:
     dependencies:

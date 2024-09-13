@@ -1,13 +1,18 @@
 {
-  "name": "cspell-config-lib",
+  "name": "flatpack-json",
+  "publishConfig": {
+    "access": "public"
+  },
   "version": "8.14.2",
-  "description": "CSpell Config library",
+  "description": "A library to normalize JSON objects to reduce the size.",
   "keywords": [
     "cspell",
-    "config"
+    "json",
+    "normalize",
+    "flatten"
   ],
   "author": "Jason Dent <jason@streetsidesoftware.nl>",
-  "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-config-lib#readme",
+  "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/flatpack-json#readme",
   "license": "MIT",
   "type": "module",
   "sideEffects": false,
@@ -31,24 +36,22 @@
     "watch": "tsc -p . -w",
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "clean-build": "pnpm run clean && pnpm run build",
-    "coverage": "vitest run --coverage --pool=forks",
+    "coverage": "vitest run --coverage",
     "test-watch": "vitest",
-    "test": "vitest run --pool=forks"
+    "test": "vitest run"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/streetsidesoftware/cspell.git",
-    "directory": "packages/cspell-config-lib"
+    "directory": "packages/flatpack-json"
   },
   "bugs": {
-    "url": "https://github.com/streetsidesoftware/cspell/labels/cspell-config"
+    "url": "https://github.com/streetsidesoftware/cspell/labels/filetype"
   },
   "engines": {
     "node": ">=18"
   },
-  "dependencies": {
-    "@cspell/cspell-types": "workspace:*",
-    "comment-json": "^4.2.5",
-    "yaml": "^2.5.1"
+  "devDependencies": {
+    "@cspell/filetypes": "workspace:*"
   }
 }

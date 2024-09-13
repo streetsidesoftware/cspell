@@ -1,0 +1,746 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`dehydrate > dehydrate 'string' undefined 1`] = `
+[
+  "Dehydrated JSON v1",
+  "string",
+]
+`;
+
+exports[`dehydrate > dehydrate /[\\p{L}\\p{M}]+/gu undefined 1`] = `
+[
+  "Dehydrated JSON v1",
+  [
+    6,
+    2,
+    3,
+  ],
+  "[\\p{L}\\p{M}]+",
+  "gu",
+]
+`;
+
+exports[`dehydrate > dehydrate [ 'apple', 'banana', 'apple', 'banana', 'apple', 'pineapple' ] undefined 1`] = `
+[
+  "Dehydrated JSON v1",
+  [
+    0,
+    2,
+    3,
+    2,
+    3,
+    2,
+    4,
+  ],
+  "apple",
+  "banana",
+  "pineapple",
+]
+`;
+
+exports[`dehydrate > dehydrate [ /[\\p{L}\\p{M}]+/gu, /[\\p{L}\\p{M}]+/gu, /[\\p{Lu}\\p{M}]+/gu ] undefined 1`] = `
+[
+  "Dehydrated JSON v1",
+  [
+    0,
+    2,
+    2,
+    5,
+  ],
+  [
+    6,
+    3,
+    4,
+  ],
+  "[\\p{L}\\p{M}]+",
+  "gu",
+  [
+    6,
+    8,
+    4,
+  ],
+  [
+    3,
+    3,
+    5,
+  ],
+  "u}\\p{M}]+",
+  [
+    2,
+    6,
+    7,
+  ],
+]
+`;
+
+exports[`dehydrate > dehydrate [ { a: 'a', b: 'b' }, { a: 'a', b: 'b' }, { a: 'a', b: 'b' }, …(1) ] { dedupe: false } 1`] = `
+[
+  "Dehydrated JSON v1",
+  [
+    0,
+    2,
+    7,
+    10,
+    13,
+  ],
+  [
+    1,
+    3,
+    6,
+  ],
+  [
+    0,
+    4,
+    5,
+  ],
+  "a",
+  "b",
+  [
+    0,
+    4,
+    5,
+  ],
+  [
+    1,
+    8,
+    9,
+  ],
+  [
+    0,
+    4,
+    5,
+  ],
+  [
+    0,
+    4,
+    5,
+  ],
+  [
+    1,
+    11,
+    12,
+  ],
+  [
+    0,
+    4,
+    5,
+  ],
+  [
+    0,
+    4,
+    5,
+  ],
+  [
+    1,
+    14,
+    15,
+  ],
+  [
+    0,
+    4,
+    5,
+  ],
+  [
+    0,
+    4,
+    5,
+  ],
+]
+`;
+
+exports[`dehydrate > dehydrate [ { a: 'a', b: 'b' }, { a: 'c', b: 'd' }, { b: 'b', a: 'a' }, …(2) ] undefined 1`] = `
+[
+  "Dehydrated JSON v1",
+  [
+    0,
+    2,
+    6,
+    2,
+    3,
+    7,
+  ],
+  [
+    1,
+    3,
+    3,
+  ],
+  [
+    0,
+    4,
+    5,
+  ],
+  "a",
+  "b",
+  [
+    1,
+    3,
+    7,
+  ],
+  [
+    0,
+    8,
+    9,
+  ],
+  "c",
+  "d",
+]
+`;
+
+exports[`dehydrate > dehydrate [ {}, {}, {} ] undefined 1`] = `
+[
+  "Dehydrated JSON v1",
+  [
+    0,
+    2,
+    2,
+    2,
+  ],
+  {},
+]
+`;
+
+exports[`dehydrate > dehydrate [ 1, 2 ] undefined 1`] = `
+[
+  "Dehydrated JSON v1",
+  [
+    0,
+    2,
+    3,
+  ],
+  1,
+  2,
+]
+`;
+
+exports[`dehydrate > dehydrate [ 1n, 'hello', /\\w+/g, {}, [], 'hello' ] undefined 1`] = `
+[
+  "Dehydrated JSON v1",
+  [
+    0,
+    2,
+    5,
+    7,
+    10,
+    11,
+    5,
+  ],
+  [
+    1,
+    0,
+    3,
+  ],
+  [
+    8,
+    4,
+  ],
+  1,
+  [
+    1,
+    0,
+    6,
+  ],
+  "hello",
+  [
+    6,
+    8,
+    9,
+  ],
+  "\\w+",
+  "g",
+  {},
+  [
+    0,
+  ],
+]
+`;
+
+exports[`dehydrate > dehydrate [ 1n, 2n, 1n, 2n, 9007199254740991n, -9007199254740991n, …(2) ] undefined 1`] = `
+[
+  "Dehydrated JSON v1",
+  [
+    0,
+    2,
+    4,
+    2,
+    4,
+    6,
+    8,
+    10,
+    12,
+  ],
+  [
+    8,
+    3,
+  ],
+  1,
+  [
+    8,
+    5,
+  ],
+  2,
+  [
+    8,
+    7,
+  ],
+  9007199254740991,
+  [
+    8,
+    9,
+  ],
+  -9007199254740991,
+  [
+    8,
+    11,
+  ],
+  "9007199254740992",
+  [
+    8,
+    13,
+  ],
+  "-9007199254740992",
+]
+`;
+
+exports[`dehydrate > dehydrate [ Array(3) ] undefined 1`] = `
+[
+  "Dehydrated JSON v1",
+  [
+    0,
+    2,
+    2,
+    3,
+  ],
+  [
+    7,
+    1704067200000,
+  ],
+  [
+    7,
+    1704153600000,
+  ],
+]
+`;
+
+exports[`dehydrate > dehydrate [] undefined 1`] = `
+[
+  "Dehydrated JSON v1",
+  [
+    0,
+  ],
+]
+`;
+
+exports[`dehydrate > dehydrate { a: [ 1 ] } undefined 1`] = `
+[
+  "Dehydrated JSON v1",
+  [
+    1,
+    2,
+    4,
+  ],
+  [
+    0,
+    3,
+  ],
+  "a",
+  [
+    0,
+    5,
+  ],
+  [
+    0,
+    6,
+  ],
+  1,
+]
+`;
+
+exports[`dehydrate > dehydrate { a: { a: 'a', b: 'b' }, b: { a: 'c', b: 'd' }, …(6) } undefined 1`] = `
+[
+  "Dehydrated JSON v1",
+  [
+    1,
+    2,
+    11,
+  ],
+  [
+    0,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+  ],
+  "a",
+  "b",
+  "m",
+  "n",
+  "nn",
+  "nnn",
+  "r",
+  "s",
+  [
+    0,
+    12,
+    14,
+    18,
+    19,
+    19,
+    19,
+    20,
+    27,
+  ],
+  [
+    1,
+    13,
+    13,
+  ],
+  [
+    0,
+    3,
+    4,
+  ],
+  [
+    1,
+    13,
+    15,
+  ],
+  [
+    0,
+    16,
+    17,
+  ],
+  "c",
+  "d",
+  [
+    5,
+    13,
+    13,
+  ],
+  [
+    0,
+    12,
+    14,
+    12,
+    13,
+    15,
+    20,
+    23,
+  ],
+  [
+    6,
+    21,
+    22,
+  ],
+  "[\\p{L}\\p{M}]+",
+  "gu",
+  [
+    1,
+    24,
+    26,
+  ],
+  [
+    0,
+    9,
+    25,
+  ],
+  "rr",
+  [
+    0,
+    20,
+    20,
+  ],
+  [
+    4,
+    29,
+  ],
+  [
+    1,
+    13,
+    13,
+  ],
+  [
+    0,
+    12,
+    14,
+    28,
+    13,
+    15,
+    20,
+    23,
+  ],
+]
+`;
+
+exports[`dehydrate > dehydrate { a: { a: 'a', b: 42 } } undefined 1`] = `
+[
+  "Dehydrated JSON v1",
+  [
+    1,
+    2,
+    4,
+  ],
+  [
+    0,
+    3,
+  ],
+  "a",
+  [
+    0,
+    5,
+  ],
+  [
+    1,
+    6,
+    8,
+  ],
+  [
+    0,
+    3,
+    7,
+  ],
+  "b",
+  [
+    0,
+    3,
+    9,
+  ],
+  42,
+]
+`;
+
+exports[`dehydrate > dehydrate { a: { b: 1 } } undefined 1`] = `
+[
+  "Dehydrated JSON v1",
+  [
+    1,
+    2,
+    4,
+  ],
+  [
+    0,
+    3,
+  ],
+  "a",
+  [
+    0,
+    5,
+  ],
+  [
+    1,
+    6,
+    8,
+  ],
+  [
+    0,
+    7,
+  ],
+  "b",
+  [
+    0,
+    9,
+  ],
+  1,
+]
+`;
+
+exports[`dehydrate > dehydrate { a: 1 } undefined 1`] = `
+[
+  "Dehydrated JSON v1",
+  [
+    1,
+    2,
+    4,
+  ],
+  [
+    0,
+    3,
+  ],
+  "a",
+  [
+    0,
+    5,
+  ],
+  1,
+]
+`;
+
+exports[`dehydrate > dehydrate { fruit: [ 'apple', 'banana', 'apple', 'banana', 'apple', 'pineapple' ], …(2) } undefined 1`] = `
+[
+  "Dehydrated JSON v1",
+  [
+    1,
+    2,
+    6,
+  ],
+  [
+    0,
+    3,
+    4,
+    5,
+  ],
+  "fruit",
+  "joinFruit",
+  "sentence",
+  [
+    0,
+    7,
+    12,
+    13,
+  ],
+  [
+    0,
+    8,
+    9,
+    8,
+    9,
+    8,
+    10,
+  ],
+  "apple",
+  "banana",
+  "pineapple",
+  "-banana-apple-banana-apple-pineapple",
+  [
+    2,
+    8,
+    11,
+  ],
+  "There is a bit of fruit on the table. Some banana, apple, and pineapple.",
+]
+`;
+
+exports[`dehydrate > dehydrate { values: [ 'apple', 'banana', 'pineapple' ], …(1) } undefined 1`] = `
+[
+  "Dehydrated JSON v1",
+  [
+    1,
+    2,
+    5,
+  ],
+  [
+    0,
+    3,
+    4,
+  ],
+  "set",
+  "values",
+  [
+    0,
+    6,
+    7,
+  ],
+  [
+    4,
+    7,
+  ],
+  [
+    0,
+    8,
+    9,
+    10,
+  ],
+  "apple",
+  "banana",
+  "pineapple",
+]
+`;
+
+exports[`dehydrate > dehydrate {} undefined 1`] = `
+[
+  "Dehydrated JSON v1",
+  {},
+]
+`;
+
+exports[`dehydrate > dehydrate 1 undefined 1`] = `
+[
+  "Dehydrated JSON v1",
+  1,
+]
+`;
+
+exports[`dehydrate > dehydrate 1.1 undefined 1`] = `
+[
+  "Dehydrated JSON v1",
+  1.1,
+]
+`;
+
+exports[`dehydrate > dehydrate Map{ 'apple' => 1, 'banana' => 2, 'pineapple' => 3 } undefined 1`] = `
+[
+  "Dehydrated JSON v1",
+  [
+    5,
+    2,
+    6,
+  ],
+  [
+    0,
+    3,
+    4,
+    5,
+  ],
+  "apple",
+  "banana",
+  "pineapple",
+  [
+    0,
+    7,
+    8,
+    9,
+  ],
+  1,
+  2,
+  3,
+]
+`;
+
+exports[`dehydrate > dehydrate Set{ 'apple', 'banana', 'pineapple' } undefined 1`] = `
+[
+  "Dehydrated JSON v1",
+  [
+    4,
+    2,
+  ],
+  [
+    0,
+    3,
+    4,
+    5,
+  ],
+  "apple",
+  "banana",
+  "pineapple",
+]
+`;
+
+exports[`dehydrate > dehydrate false undefined 1`] = `
+[
+  "Dehydrated JSON v1",
+  false,
+]
+`;
+
+exports[`dehydrate > dehydrate null undefined 1`] = `
+[
+  "Dehydrated JSON v1",
+  null,
+]
+`;
+
+exports[`dehydrate > dehydrate true undefined 1`] = `
+[
+  "Dehydrated JSON v1",
+  true,
+]
+`;
+
+exports[`dehydrate > dehydrate undefined undefined 1`] = `
+[
+  "Dehydrated JSON v1",
+]
+`;
