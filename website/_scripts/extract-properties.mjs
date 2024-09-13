@@ -1,5 +1,6 @@
 // @ts-check
 import { promises as fs } from 'node:fs';
+import { inject, createTable, padLines } from './lib/utils.mjs';
 
 const schemaFile = new URL('../../cspell.schema.json', import.meta.url);
 const schemaFileOut = new URL('../docs/Configuration/auto_properties.md', import.meta.url);
@@ -8,18 +9,17 @@ async function run() {
     const schema = await loadSchema();
 
     const header = inject`\
-    ---
-    # AUTO-GENERATED ALL CHANGES WILL BE LOST
-    # See \`_scripts/extract-properties.js\`
-    title: Properties
-    slug: properties
-    toc_max_heading_level: 5
-    format: md
-    ---
+        ---
+        # AUTO-GENERATED ALL CHANGES WILL BE LOST
+        # See \`_scripts/extract-properties.js\`
+        title: Properties
+        slug: properties
+        toc_max_heading_level: 5
+        format: md
+        ---
 
-    # CSpell Configuration
-
-  `;
+        # CSpell Configuration
+    `;
 
     const sections = [header, '', schemaEntry(schema, 'Settings'), '', formatDefinitions(schema)];
 
@@ -212,100 +212,6 @@ function replaceLinks(markdown) {
         return link;
     });
     return markdown;
-}
-
-/**
- * @param {string} str - multi-line string to left pad
- * @param {string} [padding] - the padding to use
- * @param {string} [firstLinePadding] - optional padding of first line.
- */
-function padLines(str, padding = '', firstLinePadding = '') {
-    let pad = firstLinePadding;
-    const lines = [];
-    for (const line of str.split('\n')) {
-        lines.push(pad + line);
-        pad = padding;
-    }
-
-    return lines.join('\n');
-}
-
-/**
- * Inject values into a template string.
- * @param {TemplateStringsArray} template
- * @param  {...any} values
- * @returns
- */
-function inject(template, ...values) {
-    const strings = template;
-    const adjValues = [];
-    for (let i = 0; i < values.length; ++i) {
-        const prevLines = strings[i].split('\n');
-        const currLine = prevLines[prevLines.length - 1];
-        const padLen = padLength(currLine);
-        const padding = ' '.repeat(padLen);
-        const value = `${values[i]}`;
-        let pad = '';
-        const valueLines = [];
-        for (const line of value.split('\n')) {
-            valueLines.push(pad + line);
-            pad = padding;
-        }
-        adjValues.push(valueLines.join('\n'));
-    }
-
-    return unindent(String.raw({ raw: strings }, ...adjValues));
-}
-
-/**
- *
- * @param {string[]} headers
- * @param {string[][]} rows
- * @returns
- */
-function createTable(headers, rows) {
-    const colWidths = [];
-
-    for (const row of [headers, ...rows]) {
-        row.forEach((col, i) => {
-            colWidths[i] = Math.max(colWidths[i] || 0, [...col].length);
-        });
-    }
-
-    const rowPlaceholders = colWidths.map(() => '');
-    const sep = headers.map((_, i) => '---'.padEnd(colWidths[i], '-'));
-    const table = [headers, sep, ...rows];
-
-    return table
-        .map((row) => [...row, ...rowPlaceholders.slice(row.length)])
-        .map((row) => row.map((col, i) => col.padEnd(colWidths[i])))
-        .map((row) => `| ${row.join(' | ')} |`)
-        .join('\n');
-}
-
-/**
- * Calculate the padding at the start of the string.
- * @param {string} s
- * @returns {number}
- */
-function padLength(s) {
-    return s.length - s.trimStart().length;
-}
-
-/**
- * Remove the left padding from a multi-line string.
- * @param {string} str
- * @returns {string}
- */
-function unindent(str) {
-    const lines = str.split('\n');
-    let curPad = str.length;
-    for (const line of lines) {
-        if (!line.trim()) continue;
-        curPad = Math.min(curPad, padLength(line));
-    }
-
-    return lines.map((line) => line.slice(curPad)).join('\n');
 }
 
 run();
