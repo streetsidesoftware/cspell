@@ -5,8 +5,7 @@ import type {
     ArrayElement,
     BigIntElement,
     DateElement,
-    Dehydrated,
-    Hydrated,
+    Flatpacked,
     Index,
     MapElement,
     NormalizeJsonOptions,
@@ -19,6 +18,7 @@ import type {
     Serializable,
     SetElement,
     SubStringElement,
+    Unpacked,
 } from './types.mjs';
 import { blockSplitRegex, dataHeader, ElementType } from './types.mjs';
 
@@ -35,7 +35,7 @@ const forceStringPrimitives = false;
 const minSubStringLen = 4;
 
 export class CompactStorage {
-    private data = [dataHeader] as Dehydrated;
+    private data = [dataHeader] as Flatpacked;
     private dedupe = true;
     private sortKeys = true;
     private emptyObjIdx = 0;
@@ -146,13 +146,13 @@ export class CompactStorage {
         this.cache.set(value, idx);
         const keys = [...value];
 
-        const k = this.createUniqueKeys(keys);
+        const k = this.createUniqueKeys(keys, false);
         const element: SetElement = [ElementType.Set, k];
         return this.storeElement(value, idx, element);
     }
 
-    private createUniqueKeys(keys: Serializable[]): Index {
-        let k = this.arrToIdx(keys);
+    private createUniqueKeys(keys: Serializable[], cacheValue = true): Index {
+        let k = this.arrToIdx(keys, cacheValue);
         const elementKeys = this.data[k] as ArrayElement;
         const uniqueKeys = new Set(elementKeys.slice(1));
         if (uniqueKeys.size !== keys.length) {
@@ -181,8 +181,14 @@ export class CompactStorage {
         this.cache.set(value, idx);
         const entries = [...value.entries()];
 
-        const k = this.createUniqueKeys(entries.map(([key]) => key));
-        const v = this.arrToIdx(entries.map(([, value]) => value));
+        const k = this.createUniqueKeys(
+            entries.map(([key]) => key),
+            false,
+        );
+        const v = this.arrToIdx(
+            entries.map(([, value]) => value),
+            false,
+        );
 
         const element: MapElement = [ElementType.Map, k, v];
         return this.storeElement(value, idx, element);
@@ -338,7 +344,13 @@ export class CompactStorage {
         return idx;
     }
 
-    private arrToIdx(value: PrimitiveArray): number {
+    /**
+     * Convert an array to an index.
+     * @param value - The array to convert to an index.
+     * @param cacheValue - Whether to cache the value.
+     * @returns the index of the array.
+     */
+    private arrToIdx(value: PrimitiveArray, cacheValue = true): number {
         const found = this.cache.get(value);
         if (found !== undefined) {
             this.referenced.add(found);
@@ -353,7 +365,9 @@ export class CompactStorage {
             value.map((idx) => this.valueToIdx(idx)),
         );
 
-        this.cache.set(value, useIdx);
+        if (cacheValue) {
+            this.cache.set(value, useIdx);
+        }
         return useIdx;
     }
 
@@ -392,7 +406,7 @@ export class CompactStorage {
         this.cache.set(undefined, 0);
     }
 
-    toJSON<V extends Serializable>(json: V): Dehydrated {
+    toJSON<V extends Serializable>(json: V): Flatpacked {
         this.softReset();
         this.valueToIdx(json);
         return this.data;
@@ -408,6 +422,7 @@ type CacheMap = Map<Index, Index | CacheMap>;
 type CachedElements = ObjectElement | SetElement | MapElement | RegExpElement | DateElement | BigIntElement;
 
 function isEqual(a: readonly number[], b: readonly number[]): boolean {
+    if (a === b) return true;
     if (a.length !== b.length) return false;
     for (let i = 0; i < a.length; i++) {
         if (a[i] !== b[i]) return false;
@@ -432,10 +447,10 @@ function isObjectWrapper(value: unknown): value is ObjectWrapper {
     );
 }
 
-export function toJSON<V extends Serializable>(json: V, options?: NormalizeJsonOptions): Dehydrated {
+export function toJSON<V extends Serializable>(json: V, options?: NormalizeJsonOptions): Flatpacked {
     return new CompactStorage(options).toJSON(json);
 }
 
-export function stringify(data: Hydrated): string {
+export function stringify(data: Unpacked): string {
     return JSON.stringify(toJSON(data));
 }

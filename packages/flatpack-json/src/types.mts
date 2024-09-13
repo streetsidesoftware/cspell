@@ -89,8 +89,8 @@ export type ArrayElement = readonly [type: ElementType.Array, ...Index[]];
 export type Element = Readonly<PrimitiveElement | ObjectBasedElements | ArrayBasedElements>;
 
 type Header = string;
-export type Dehydrated = [Header, ...Element[]];
-export type Hydrated = Readonly<Serializable>;
+export type Flatpacked = [Header, ...Element[]];
+export type Unpacked = Readonly<Serializable>;
 export const blockSplitRegex = /^sha\d/;
 
 export interface NormalizeJsonOptions {

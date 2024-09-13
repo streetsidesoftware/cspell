@@ -6,10 +6,10 @@ import {
     BigIntElement,
     dataHeader,
     DateElement,
-    Dehydrated,
+    Flatpacked,
     Element,
     ElementType,
-    Hydrated,
+    Unpacked,
     MapElement,
     ObjectElement,
     Primitive,
@@ -24,14 +24,14 @@ import {
     SubStringElement,
 } from './types.mjs';
 
-export function fromJSON(data: Dehydrated): Hydrated {
+export function fromJSON(data: Flatpacked): Unpacked {
     const [header] = data;
 
     if (header !== dataHeader) {
         throw new Error('Invalid header');
     }
 
-    const cache = new Map<number | number[], Hydrated>([[0, undefined]]);
+    const cache = new Map<number | number[], Unpacked>([[0, undefined]]);
     /**
      * indexes that have been referenced by other objects.
      */
@@ -205,6 +205,6 @@ function isArrayElement(value: Element): value is ArrayElement {
     return Array.isArray(value) && value[0] === ElementType.Array;
 }
 
-export function parse(data: string): Hydrated {
+export function parse(data: string): Unpacked {
     return fromJSON(JSON.parse(data));
 }

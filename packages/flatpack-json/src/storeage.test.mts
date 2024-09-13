@@ -4,7 +4,7 @@ import { findMatchingFileTypes } from '@cspell/filetypes';
 import { describe, expect, test } from 'vitest';
 
 import { fromJSON } from './dehydrate.mts';
-import { toJSON } from './storage.mjs';
+import { stringify, toJSON } from './storage.mjs';
 
 const urlFileList = new URL('../fixtures/fileList.txt', import.meta.url);
 
@@ -46,6 +46,7 @@ describe('dehydrate', async () => {
         ${[1, 2]}                                                                                       | ${undefined}
         ${['apple', 'banana', 'apple', 'banana', 'apple', 'pineapple']}                                 | ${undefined}
         ${new Set(['apple', 'banana', 'pineapple'])}                                                    | ${undefined}
+        ${new Set(['pineapple', 'apple', 'banana'])}                                                    | ${undefined}
         ${new Map([['apple', 1], ['banana', 2], ['pineapple', 3]])}                                     | ${undefined}
         ${{}}                                                                                           | ${undefined}
         ${[{}, {}, {}]}                                                                                 | ${undefined}
@@ -68,6 +69,7 @@ describe('dehydrate', async () => {
         expect(v).toMatchSnapshot();
         expect(fromJSON(v)).toEqual(data);
         expect(fromJSON(JSON.parse(JSON.stringify(v)))).toEqual(data);
+        expect(fromJSON(JSON.parse(stringify(data)))).toEqual(data);
     });
 
     test.each`
@@ -140,6 +142,11 @@ function sampleNestedData() {
         ['a', 'a'],
         ['b', 'b'],
     ]);
+
+    const values = ['apple', 'banana', 'pineapple'];
+    const rValues = [...values].reverse();
+    const cValues = [...values];
+
     return {
         a,
         b,
@@ -149,5 +156,10 @@ function sampleNestedData() {
         s,
         r,
         m,
+        ss: s,
+        mm: m,
+        values,
+        rValues,
+        cValues,
     };
 }
