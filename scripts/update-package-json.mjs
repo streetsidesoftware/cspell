@@ -6,6 +6,10 @@ import { globby } from 'globby';
 
 const rootUrl = new URL('../', import.meta.url);
 
+const homepages = {
+    'packages/cspell': 'https://cspell.org/',
+};
+
 async function updatePackageJson(pkgFile) {
     const directory = pkgFile.split(/[/\\]/g).slice(-3, -1).join('/');
     console.log(directory);
@@ -19,6 +23,8 @@ async function updatePackageJson(pkgFile) {
     };
 
     pkg.repository = repository;
+    pkg.homepage =
+        homepages[directory] || 'https://github.com/streetsidesoftware/cspell/tree/main/' + directory + '#readme';
 
     await fs.writeFile(pkgFile, JSON.stringify(pkg, undefined, 2) + '\n');
 }
