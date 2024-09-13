@@ -10,13 +10,12 @@ format: md
 # CSpell Configuration
 
 
-
 ## Settings
 
 | Field                                                          | Type                                                                      | Description                                                                                                                                                          |
 | -------------------------------------------------------------- | ------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [$schema](#settings--schema)                                   | `string`                                                                  | Url to JSON Schema                                                                                                                                                   |
-| [allowCompoundWords](#settings-allowcompoundwords)             | `boolean`                                                                 | True to enable compound word checking. See [Case Sensitivity](https://cspell.org/docs/case-sensitive/) for more details.                                             |
+| [allowCompoundWords](#settings-allowcompoundwords)             | `boolean`                                                                 | True to enable compound word checking.                                                                                                                               |
 | [cache](#settings-cache)                                       | [`CacheSettings`](#cachesettings)                                         | Define cache settings.                                                                                                                                               |
 | [caseSensitive](#settings-casesensitive)                       | `boolean`                                                                 | Determines if words must match case and accent rules.                                                                                                                |
 | [description](#settings-description)                           | `string`                                                                  | Optional description of configuration.                                                                                                                               |
@@ -51,7 +50,7 @@ format: md
 | [noSuggestDictionaries](#settings-nosuggestdictionaries)       | [`DictionaryReference`](#dictionaryreference)&ZeroWidthSpace;`[]`         | Optional list of dictionaries that will not be used for suggestions.                                                                                                 |
 | [numSuggestions](#settings-numsuggestions)                     | `number`                                                                  | Number of suggestions to make.                                                                                                                                       |
 | [overrides](#settings-overrides)                               | [`OverrideSettings`](#overridesettings)&ZeroWidthSpace;`[]`               | Overrides are used to apply settings for specific files in your project.                                                                                             |
-| [patterns](#settings-patterns)                                 | [`RegExpPatternDefinition`](#regexppatterndefinition)&ZeroWidthSpace;`[]` | Defines a list of patterns that can be used with the `ignoreRegExpList` and                                                                                          |
+| [patterns](#settings-patterns)                                 | [`RegExpPatternDefinition`](#regexppatterndefinition)&ZeroWidthSpace;`[]` | Defines a list of patterns that can be used with the  [ignoreRegExpList](#ignoreregexplist)  and                                                                     |
 | [pnpFiles](#settings-pnpfiles)                                 | `string`&ZeroWidthSpace;`[]`                                              | The PnP files to search for. Note: `.mjs` files are not currently supported.                                                                                         |
 | [readonly](#settings-readonly)                                 | `boolean`                                                                 | Indicate that the configuration file should not be modified.                                                                                                         |
 | [reporters](#settings-reporters)                               | [`ReporterSettings`](#reportersettings)&ZeroWidthSpace;`[]`               | Define which reports to use.                                                                                                                                         |
@@ -106,7 +105,7 @@ Url to JSON Schema
 <dt>Description</dt>
 <dd>
 
-True to enable compound word checking. See [Case Sensitivity](https://cspell.org/docs/case-sensitive/) for more details.
+True to enable compound word checking.
 
 </dd>
 
@@ -157,6 +156,8 @@ Define cache settings.
 <dd>
 
 Determines if words must match case and accent rules.
+
+See [Case Sensitivity](https://cspell.org/docs/case-sensitive/) for more details.
 
 - `false` - Case is ignored and accents can be missing on the entire word.
   Incorrect accents or partially missing accents will be marked as incorrect.
@@ -641,7 +642,7 @@ Optional identifier.
 
 Glob patterns of files to be ignored.
 
-Glob patterns are relative to the `globRoot` of the configuration file that defines them.
+Glob patterns are relative to the  [globRoot](#globroot)  of the configuration file that defines them.
 
 </dd>
 
@@ -1130,8 +1131,8 @@ For example:
 <dt>Description</dt>
 <dd>
 
-Defines a list of patterns that can be used with the `ignoreRegExpList` and
-`includeRegExpList` options.
+Defines a list of patterns that can be used with the  [ignoreRegExpList](#ignoreregexplist)  and
+ [includeRegExpList](#includeregexplist)  options.
 
 For example:
 
@@ -1153,8 +1154,6 @@ For example:
   }
 ]
 ```
-Defines a list of patterns that can be used with the `ignoreRegExpList` and
-`includeRegExpList` options.
 
 </dd>
 
@@ -2481,15 +2480,15 @@ Specifies the scope of a dictionary.
 
 ## DictionaryDefinitionAlternate
 
-| Field                                                       | Type                                          | Description                                                     |
-| ----------------------------------------------------------- | --------------------------------------------- | --------------------------------------------------------------- |
-| [description](#dictionarydefinitionalternate-description)   | `string`                                      | Optional description.                                           |
-| [file](#dictionarydefinitionalternate-file)                 | [`DictionaryPath`](#dictionarypath)           | Path to the file, only for legacy dictionary definitions.       |
-| [name](#dictionarydefinitionalternate-name)                 | [`DictionaryId`](#dictionaryid)               | This is the name of a dictionary.                               |
-| [noSuggest](#dictionarydefinitionalternate-nosuggest)       | `boolean`                                     | Indicate that suggestions should not come from this dictionary. |
-| [repMap](#dictionarydefinitionalternate-repmap)             | [`ReplaceMap`](#replacemap)                   | Replacement pairs.                                              |
-| [type](#dictionarydefinitionalternate-type)                 | [`DictionaryFileTypes`](#dictionaryfiletypes) | Type of file:                                                   |
-| [useCompounds](#dictionarydefinitionalternate-usecompounds) | `boolean`                                     | Use Compounds.                                                  |
+| Field                                                       | Type                                          | Description                                                       |
+| ----------------------------------------------------------- | --------------------------------------------- | ----------------------------------------------------------------- |
+| [description](#dictionarydefinitionalternate-description)   | `string`                                      | Optional description of the contents / purpose of the dictionary. |
+| [file](#dictionarydefinitionalternate-file)                 | [`DictionaryPath`](#dictionarypath)           | Path to the file, only for legacy dictionary definitions.         |
+| [name](#dictionarydefinitionalternate-name)                 | [`DictionaryId`](#dictionaryid)               | This is the name of a dictionary.                                 |
+| [noSuggest](#dictionarydefinitionalternate-nosuggest)       | `boolean`                                     | Indicate that suggestions should not come from this dictionary.   |
+| [repMap](#dictionarydefinitionalternate-repmap)             | [`ReplaceMap`](#replacemap)                   | Replacement pairs.                                                |
+| [type](#dictionarydefinitionalternate-type)                 | [`DictionaryFileTypes`](#dictionaryfiletypes) | Type of file:                                                     |
+| [useCompounds](#dictionarydefinitionalternate-usecompounds) | `boolean`                                     | Use Compounds.                                                    |
 
 
 ### DictionaryDefinitionAlternate Fields
@@ -2505,7 +2504,7 @@ Specifies the scope of a dictionary.
 <dt>Description</dt>
 <dd>
 
-Optional description.
+Optional description of the contents / purpose of the dictionary.
 
 </dd>
 
@@ -2652,6 +2651,8 @@ Default is S.
 
 C is the slowest to load due to the need to split each line based upon code splitting rules.
 
+Note: this settings does not apply to inline dictionaries or `.trie` files.
+
 </dd>
 
 <dt>Type</dt>
@@ -2691,16 +2692,16 @@ Use Compounds.
 
 ## DictionaryDefinitionAugmented
 
-| Field                                                                         | Type                                              | Description                                                     |
-| ----------------------------------------------------------------------------- | ------------------------------------------------- | --------------------------------------------------------------- |
-| [description](#dictionarydefinitionaugmented-description)                     | `string`                                          | Optional description.                                           |
-| [dictionaryInformation](#dictionarydefinitionaugmented-dictionaryinformation) | [`DictionaryInformation`](#dictionaryinformation) |                                                                 |
-| [name](#dictionarydefinitionaugmented-name)                                   | [`DictionaryId`](#dictionaryid)                   | This is the name of a dictionary.                               |
-| [noSuggest](#dictionarydefinitionaugmented-nosuggest)                         | `boolean`                                         | Indicate that suggestions should not come from this dictionary. |
-| [path](#dictionarydefinitionaugmented-path)                                   | [`DictionaryPath`](#dictionarypath)               | Path to the file.                                               |
-| [repMap](#dictionarydefinitionaugmented-repmap)                               | [`ReplaceMap`](#replacemap)                       | Replacement pairs.                                              |
-| [type](#dictionarydefinitionaugmented-type)                                   | [`DictionaryFileTypes`](#dictionaryfiletypes)     | Type of file:                                                   |
-| [useCompounds](#dictionarydefinitionaugmented-usecompounds)                   | `boolean`                                         | Use Compounds.                                                  |
+| Field                                                                         | Type                                              | Description                                                       |
+| ----------------------------------------------------------------------------- | ------------------------------------------------- | ----------------------------------------------------------------- |
+| [description](#dictionarydefinitionaugmented-description)                     | `string`                                          | Optional description of the contents / purpose of the dictionary. |
+| [dictionaryInformation](#dictionarydefinitionaugmented-dictionaryinformation) | [`DictionaryInformation`](#dictionaryinformation) |                                                                   |
+| [name](#dictionarydefinitionaugmented-name)                                   | [`DictionaryId`](#dictionaryid)                   | This is the name of a dictionary.                                 |
+| [noSuggest](#dictionarydefinitionaugmented-nosuggest)                         | `boolean`                                         | Indicate that suggestions should not come from this dictionary.   |
+| [path](#dictionarydefinitionaugmented-path)                                   | [`DictionaryPath`](#dictionarypath)               | Path to the file.                                                 |
+| [repMap](#dictionarydefinitionaugmented-repmap)                               | [`ReplaceMap`](#replacemap)                       | Replacement pairs.                                                |
+| [type](#dictionarydefinitionaugmented-type)                                   | [`DictionaryFileTypes`](#dictionaryfiletypes)     | Type of file:                                                     |
+| [useCompounds](#dictionarydefinitionaugmented-usecompounds)                   | `boolean`                                         | Use Compounds.                                                    |
 
 
 ### DictionaryDefinitionAugmented Fields
@@ -2716,7 +2717,7 @@ Use Compounds.
 <dt>Description</dt>
 <dd>
 
-Optional description.
+Optional description of the contents / purpose of the dictionary.
 
 </dd>
 
@@ -2881,6 +2882,8 @@ Default is S.
 
 C is the slowest to load due to the need to split each line based upon code splitting rules.
 
+Note: this settings does not apply to inline dictionaries or `.trie` files.
+
 </dd>
 
 <dt>Type</dt>
@@ -2923,7 +2926,7 @@ Use Compounds.
 | Field                                                    | Type                                                                                                                         | Description                                                                           |
 | -------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
 | [addWords](#dictionarydefinitioncustom-addwords)         | `boolean`                                                                                                                    | When `true`, let's the spell checker know that words can be added to this dictionary. |
-| [description](#dictionarydefinitioncustom-description)   | `string`                                                                                                                     | Optional description.                                                                 |
+| [description](#dictionarydefinitioncustom-description)   | `string`                                                                                                                     | Optional description of the contents / purpose of the dictionary.                     |
 | [name](#dictionarydefinitioncustom-name)                 | [`DictionaryId`](#dictionaryid)                                                                                              | This is the name of a dictionary.                                                     |
 | [noSuggest](#dictionarydefinitioncustom-nosuggest)       | `boolean`                                                                                                                    | Indicate that suggestions should not come from this dictionary.                       |
 | [path](#dictionarydefinitioncustom-path)                 | [`CustomDictionaryPath`](#customdictionarypath)                                                                              | Path to custom dictionary text file.                                                  |
@@ -2971,7 +2974,7 @@ When `true`, let's the spell checker know that words can be added to this dictio
 <dt>Description</dt>
 <dd>
 
-Optional description.
+Optional description of the contents / purpose of the dictionary.
 
 </dd>
 
@@ -3145,6 +3148,8 @@ Default is S.
 
 C is the slowest to load due to the need to split each line based upon code splitting rules.
 
+Note: this settings does not apply to inline dictionaries or `.trie` files.
+
 </dd>
 
 <dt>Type</dt>
@@ -3201,7 +3206,7 @@ Inline Dictionary Definitions
 <dt>Type</dt>
 <dd>
 
-[`DictionaryDefinitionInlineWords`](#dictionarydefinitioninlinewords)<br />[`DictionaryDefinitionInlineIgnoreWords`](#dictionarydefinitioninlineignorewords)<br />[`DictionaryDefinitionInlineFlagWords`](#dictionarydefinitioninlineflagwords)
+[`DictionaryDefinitionInlineWords`](#dictionarydefinitioninlinewords)<br />[`DictionaryDefinitionInlineIgnoreWords`](#dictionarydefinitioninlineignorewords)<br />[`DictionaryDefinitionInlineFlagWords`](#dictionarydefinitioninlineflagwords)<br />[`DictionaryDefinitionInlineSuggestWords`](#dictionarydefinitioninlinesuggestwords)
 
 </dd>
 </dl>
@@ -3212,7 +3217,7 @@ Inline Dictionary Definitions
 
 | Field                                                             | Type                                          | Description                                                                                   |
 | ----------------------------------------------------------------- | --------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| [description](#dictionarydefinitioninlineflagwords-description)   | `string`                                      | Optional description.                                                                         |
+| [description](#dictionarydefinitioninlineflagwords-description)   | `string`                                      | Optional description of the contents / purpose of the dictionary.                             |
 | [flagWords](#dictionarydefinitioninlineflagwords-flagwords)       | `string`&ZeroWidthSpace;`[]`                  | List of words to always be considered incorrect. Words found in `flagWords` override `words`. |
 | [ignoreWords](#dictionarydefinitioninlineflagwords-ignorewords)   | `string`&ZeroWidthSpace;`[]`                  | List of words to be ignored. An ignored word will not show up as an error, even if it is      |
 | [name](#dictionarydefinitioninlineflagwords-name)                 | [`DictionaryId`](#dictionaryid)               | This is the name of a dictionary.                                                             |
@@ -3237,7 +3242,7 @@ Inline Dictionary Definitions
 <dt>Description</dt>
 <dd>
 
-Optional description.
+Optional description of the contents / purpose of the dictionary.
 
 </dd>
 
@@ -3459,6 +3464,8 @@ Default is S.
 
 C is the slowest to load due to the need to split each line based upon code splitting rules.
 
+Note: this settings does not apply to inline dictionaries or `.trie` files.
+
 </dd>
 
 <dt>Type</dt>
@@ -3525,7 +3532,7 @@ List of words to be considered correct.
 
 | Field                                                               | Type                                          | Description                                                                                   |
 | ------------------------------------------------------------------- | --------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| [description](#dictionarydefinitioninlineignorewords-description)   | `string`                                      | Optional description.                                                                         |
+| [description](#dictionarydefinitioninlineignorewords-description)   | `string`                                      | Optional description of the contents / purpose of the dictionary.                             |
 | [flagWords](#dictionarydefinitioninlineignorewords-flagwords)       | `string`&ZeroWidthSpace;`[]`                  | List of words to always be considered incorrect. Words found in `flagWords` override `words`. |
 | [ignoreWords](#dictionarydefinitioninlineignorewords-ignorewords)   | `string`&ZeroWidthSpace;`[]`                  | List of words to be ignored. An ignored word will not show up as an error, even if it is      |
 | [name](#dictionarydefinitioninlineignorewords-name)                 | [`DictionaryId`](#dictionaryid)               | This is the name of a dictionary.                                                             |
@@ -3550,7 +3557,7 @@ List of words to be considered correct.
 <dt>Description</dt>
 <dd>
 
-Optional description.
+Optional description of the contents / purpose of the dictionary.
 
 </dd>
 
@@ -3772,6 +3779,8 @@ Default is S.
 
 C is the slowest to load due to the need to split each line based upon code splitting rules.
 
+Note: this settings does not apply to inline dictionaries or `.trie` files.
+
 </dd>
 
 <dt>Type</dt>
@@ -3834,11 +3843,326 @@ List of words to be considered correct.
 
 
 
+## DictionaryDefinitionInlineSuggestWords
+
+| Field                                                                | Type                                          | Description                                                                                   |
+| -------------------------------------------------------------------- | --------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| [description](#dictionarydefinitioninlinesuggestwords-description)   | `string`                                      | Optional description of the contents / purpose of the dictionary.                             |
+| [flagWords](#dictionarydefinitioninlinesuggestwords-flagwords)       | `string`&ZeroWidthSpace;`[]`                  | List of words to always be considered incorrect. Words found in `flagWords` override `words`. |
+| [ignoreWords](#dictionarydefinitioninlinesuggestwords-ignorewords)   | `string`&ZeroWidthSpace;`[]`                  | List of words to be ignored. An ignored word will not show up as an error, even if it is      |
+| [name](#dictionarydefinitioninlinesuggestwords-name)                 | [`DictionaryId`](#dictionaryid)               | This is the name of a dictionary.                                                             |
+| [noSuggest](#dictionarydefinitioninlinesuggestwords-nosuggest)       | `boolean`                                     | Indicate that suggestions should not come from this dictionary.                               |
+| [repMap](#dictionarydefinitioninlinesuggestwords-repmap)             | [`ReplaceMap`](#replacemap)                   | Replacement pairs.                                                                            |
+| [suggestWords](#dictionarydefinitioninlinesuggestwords-suggestwords) | `string`&ZeroWidthSpace;`[]`                  | A list of suggested replacements for words.                                                   |
+| [type](#dictionarydefinitioninlinesuggestwords-type)                 | [`DictionaryFileTypes`](#dictionaryfiletypes) | Type of file:                                                                                 |
+| [useCompounds](#dictionarydefinitioninlinesuggestwords-usecompounds) | `boolean`                                     | Use Compounds.                                                                                |
+| [words](#dictionarydefinitioninlinesuggestwords-words)               | `string`&ZeroWidthSpace;`[]`                  | List of words to be considered correct.                                                       |
+
+
+### DictionaryDefinitionInlineSuggestWords Fields
+
+
+---
+
+#### `description` {#dictionarydefinitioninlinesuggestwords-description}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+Optional description of the contents / purpose of the dictionary.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
+</dl>
+
+
+
+
+---
+
+#### `flagWords` {#dictionarydefinitioninlinesuggestwords-flagwords}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+List of words to always be considered incorrect. Words found in `flagWords` override `words`.
+
+Format of `flagWords`
+- single word entry - `word`
+- with suggestions - `word:suggestion` or `word->suggestion, suggestions`
+
+Example:
+```ts
+"flagWords": [
+  "color: colour",
+  "incase: in case, encase",
+  "canot->cannot",
+  "cancelled->canceled"
+]
+```
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`&ZeroWidthSpace;`[]`
+
+</dd>
+</dl>
+
+
+
+
+---
+
+#### `ignoreWords` {#dictionarydefinitioninlinesuggestwords-ignorewords}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+List of words to be ignored. An ignored word will not show up as an error, even if it is
+also in the `flagWords`.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`&ZeroWidthSpace;`[]`
+
+</dd>
+</dl>
+
+
+
+
+---
+
+#### `name` {#dictionarydefinitioninlinesuggestwords-name}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+This is the name of a dictionary.
+
+Name Format:
+- Must contain at least 1 number or letter.
+- Spaces are allowed.
+- Leading and trailing space will be removed.
+- Names ARE case-sensitive.
+- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`DictionaryId`](#dictionaryid)
+
+</dd>
+</dl>
+
+
+
+
+---
+
+#### `noSuggest` {#dictionarydefinitioninlinesuggestwords-nosuggest}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+Indicate that suggestions should not come from this dictionary.
+Words in this dictionary are considered correct, but will not be
+used when making spell correction suggestions.
+
+Note: if a word is suggested by another dictionary, but found in
+this dictionary, it will be removed from the set of
+possible suggestions.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`boolean`
+
+</dd>
+</dl>
+
+
+
+
+---
+
+#### `repMap` {#dictionarydefinitioninlinesuggestwords-repmap}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+Replacement pairs.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`ReplaceMap`](#replacemap)
+
+</dd>
+</dl>
+
+
+
+
+---
+
+#### `suggestWords` {#dictionarydefinitioninlinesuggestwords-suggestwords}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+A list of suggested replacements for words.
+Suggested words provide a way to make preferred suggestions on word replacements.
+To hint at a preferred change, but not to require it.
+
+Format of `suggestWords`
+- Single suggestion (possible auto fix)
+    - `word: suggestion`
+    - `word->suggestion`
+- Multiple suggestions (not auto fixable)
+   - `word: first, second, third`
+   - `word->first, second, third`
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`&ZeroWidthSpace;`[]`
+
+</dd>
+</dl>
+
+
+
+
+---
+
+#### `type` {#dictionarydefinitioninlinesuggestwords-type}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+Type of file:
+- S - single word per line,
+- W - each line can contain one or more words separated by space,
+- C - each line is treated like code (Camel Case is allowed).
+
+Default is S.
+
+C is the slowest to load due to the need to split each line based upon code splitting rules.
+
+Note: this settings does not apply to inline dictionaries or `.trie` files.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`DictionaryFileTypes`](#dictionaryfiletypes)
+
+</dd>
+</dl>
+
+
+
+
+---
+
+#### `useCompounds` {#dictionarydefinitioninlinesuggestwords-usecompounds}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+Use Compounds.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`boolean`
+
+</dd>
+</dl>
+
+
+
+
+---
+
+#### `words` {#dictionarydefinitioninlinesuggestwords-words}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+List of words to be considered correct.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`&ZeroWidthSpace;`[]`
+
+</dd>
+</dl>
+
+
+
 ## DictionaryDefinitionInlineWords
 
 | Field                                                         | Type                                          | Description                                                                                   |
 | ------------------------------------------------------------- | --------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| [description](#dictionarydefinitioninlinewords-description)   | `string`                                      | Optional description.                                                                         |
+| [description](#dictionarydefinitioninlinewords-description)   | `string`                                      | Optional description of the contents / purpose of the dictionary.                             |
 | [flagWords](#dictionarydefinitioninlinewords-flagwords)       | `string`&ZeroWidthSpace;`[]`                  | List of words to always be considered incorrect. Words found in `flagWords` override `words`. |
 | [ignoreWords](#dictionarydefinitioninlinewords-ignorewords)   | `string`&ZeroWidthSpace;`[]`                  | List of words to be ignored. An ignored word will not show up as an error, even if it is      |
 | [name](#dictionarydefinitioninlinewords-name)                 | [`DictionaryId`](#dictionaryid)               | This is the name of a dictionary.                                                             |
@@ -3863,7 +4187,7 @@ List of words to be considered correct.
 <dt>Description</dt>
 <dd>
 
-Optional description.
+Optional description of the contents / purpose of the dictionary.
 
 </dd>
 
@@ -4085,6 +4409,8 @@ Default is S.
 
 C is the slowest to load due to the need to split each line based upon code splitting rules.
 
+Note: this settings does not apply to inline dictionaries or `.trie` files.
+
 </dd>
 
 <dt>Type</dt>
@@ -4149,15 +4475,15 @@ List of words to be considered correct.
 
 ## DictionaryDefinitionPreferred
 
-| Field                                                       | Type                                          | Description                                                     |
-| ----------------------------------------------------------- | --------------------------------------------- | --------------------------------------------------------------- |
-| [description](#dictionarydefinitionpreferred-description)   | `string`                                      | Optional description.                                           |
-| [name](#dictionarydefinitionpreferred-name)                 | [`DictionaryId`](#dictionaryid)               | This is the name of a dictionary.                               |
-| [noSuggest](#dictionarydefinitionpreferred-nosuggest)       | `boolean`                                     | Indicate that suggestions should not come from this dictionary. |
-| [path](#dictionarydefinitionpreferred-path)                 | [`DictionaryPath`](#dictionarypath)           | Path to the file.                                               |
-| [repMap](#dictionarydefinitionpreferred-repmap)             | [`ReplaceMap`](#replacemap)                   | Replacement pairs.                                              |
-| [type](#dictionarydefinitionpreferred-type)                 | [`DictionaryFileTypes`](#dictionaryfiletypes) | Type of file:                                                   |
-| [useCompounds](#dictionarydefinitionpreferred-usecompounds) | `boolean`                                     | Use Compounds.                                                  |
+| Field                                                       | Type                                          | Description                                                       |
+| ----------------------------------------------------------- | --------------------------------------------- | ----------------------------------------------------------------- |
+| [description](#dictionarydefinitionpreferred-description)   | `string`                                      | Optional description of the contents / purpose of the dictionary. |
+| [name](#dictionarydefinitionpreferred-name)                 | [`DictionaryId`](#dictionaryid)               | This is the name of a dictionary.                                 |
+| [noSuggest](#dictionarydefinitionpreferred-nosuggest)       | `boolean`                                     | Indicate that suggestions should not come from this dictionary.   |
+| [path](#dictionarydefinitionpreferred-path)                 | [`DictionaryPath`](#dictionarypath)           | Path to the file.                                                 |
+| [repMap](#dictionarydefinitionpreferred-repmap)             | [`ReplaceMap`](#replacemap)                   | Replacement pairs.                                                |
+| [type](#dictionarydefinitionpreferred-type)                 | [`DictionaryFileTypes`](#dictionaryfiletypes) | Type of file:                                                     |
+| [useCompounds](#dictionarydefinitionpreferred-usecompounds) | `boolean`                                     | Use Compounds.                                                    |
 
 
 ### DictionaryDefinitionPreferred Fields
@@ -4173,7 +4499,7 @@ List of words to be considered correct.
 <dt>Description</dt>
 <dd>
 
-Optional description.
+Optional description of the contents / purpose of the dictionary.
 
 </dd>
 
@@ -4319,6 +4645,8 @@ Type of file:
 Default is S.
 
 C is the slowest to load due to the need to split each line based upon code splitting rules.
+
+Note: this settings does not apply to inline dictionaries or `.trie` files.
 
 </dd>
 
@@ -5166,7 +5494,10 @@ The costs to apply when using the hunspell settings
 <dt>Description</dt>
 <dd>
 
-This can be 'typescript,cpp,json,literal haskell', etc.
+A single string with a comma separated list of file types:
+- `typescript,cpp`
+- `json,jsonc,yaml`
+- etc.
 
 </dd>
 
@@ -5192,7 +5523,10 @@ This can be 'typescript,cpp,json,literal haskell', etc.
 <dt>Description</dt>
 <dd>
 
-This can be 'typescript,cpp,json,literal haskell', etc.
+A Negative File Type used to exclude files of that type.
+- `!typescript` - will exclude typescript files.
+- `!cpp,!json` - will exclude cpp and json files.
+- `!typescript,javascript` - will exclude typescript files and include javascript files.
 
 </dd>
 
@@ -5218,7 +5552,9 @@ This can be 'typescript,cpp,json,literal haskell', etc.
 <dt>Description</dt>
 <dd>
 
-This can be '*', 'typescript', 'cpp', 'json', etc.
+A file type:
+- `*` - will match ALL file types.
+- `typescript`, `cpp`, `json`, etc.
 
 </dd>
 
@@ -5236,7 +5572,7 @@ This can be '*', 'typescript', 'cpp', 'json', etc.
 
 | Field                                                           | Type                                                                      | Description                                                                                                                   |
 | --------------------------------------------------------------- | ------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| [allowCompoundWords](#languagesetting-allowcompoundwords)       | `boolean`                                                                 | True to enable compound word checking. See [Case Sensitivity](https://cspell.org/docs/case-sensitive/) for more details.      |
+| [allowCompoundWords](#languagesetting-allowcompoundwords)       | `boolean`                                                                 | True to enable compound word checking.                                                                                        |
 | [caseSensitive](#languagesetting-casesensitive)                 | `boolean`                                                                 | Determines if words must match case and accent rules.                                                                         |
 | [description](#languagesetting-description)                     | `string`                                                                  | Optional description of configuration.                                                                                        |
 | [dictionaries](#languagesetting-dictionaries)                   | [`DictionaryReference`](#dictionaryreference)&ZeroWidthSpace;`[]`         | Optional list of dictionaries to use. Each entry should match the name of the dictionary.                                     |
@@ -5247,12 +5583,12 @@ This can be '*', 'typescript', 'cpp', 'json', etc.
 | [ignoreRegExpList](#languagesetting-ignoreregexplist)           | [`RegExpPatternList`](#regexppatternlist)                                 | List of regular expression patterns or pattern names to exclude from spell checking.                                          |
 | [ignoreWords](#languagesetting-ignorewords)                     | `string`&ZeroWidthSpace;`[]`                                              | List of words to be ignored. An ignored word will not show up as an error, even if it is                                      |
 | [includeRegExpList](#languagesetting-includeregexplist)         | [`RegExpPatternList`](#regexppatternlist)                                 | List of regular expression patterns or defined pattern names to match for spell checking.                                     |
-| [languageId](#languagesetting-languageid)                       | [`MatchingFileType`](#matchingfiletype)                                   | The language id.  Ex: "typescript", "html", or "php".  "*" -- will match all languages.                                       |
-| [local](#languagesetting-local)                                 | [`LocaleId`](#localeid)<br />[`LocaleId`](#localeid)&ZeroWidthSpace;`[]`  | Deprecated - The locale filter, matches against the language. This can be a comma separated list. "*" will match all locales. |
-| [locale](#languagesetting-locale)                               | [`LocaleId`](#localeid)<br />[`LocaleId`](#localeid)&ZeroWidthSpace;`[]`  | The locale filter, matches against the language. This can be a comma separated list. "*" will match all locales.              |
+| [languageId](#languagesetting-languageid)                       | [`MatchingFileType`](#matchingfiletype)                                   | The language id.  Ex: `typescript`, `html`, or `php`.  `*` -- will match all languages.                                       |
+| [local](#languagesetting-local)                                 | [`LocaleId`](#localeid)<br />[`LocaleId`](#localeid)&ZeroWidthSpace;`[]`  | Deprecated - The locale filter, matches against the language. This can be a comma separated list. `*` will match all locales. |
+| [locale](#languagesetting-locale)                               | [`LocaleId`](#localeid)<br />[`LocaleId`](#localeid)&ZeroWidthSpace;`[]`  | The locale filter, matches against the language. This can be a comma separated list. `*` will match all locales.              |
 | [name](#languagesetting-name)                                   | `string`                                                                  | Optional name of configuration.                                                                                               |
 | [noSuggestDictionaries](#languagesetting-nosuggestdictionaries) | [`DictionaryReference`](#dictionaryreference)&ZeroWidthSpace;`[]`         | Optional list of dictionaries that will not be used for suggestions.                                                          |
-| [patterns](#languagesetting-patterns)                           | [`RegExpPatternDefinition`](#regexppatterndefinition)&ZeroWidthSpace;`[]` | Defines a list of patterns that can be used with the `ignoreRegExpList` and                                                   |
+| [patterns](#languagesetting-patterns)                           | [`RegExpPatternDefinition`](#regexppatterndefinition)&ZeroWidthSpace;`[]` | Defines a list of patterns that can be used with the  [ignoreRegExpList](#ignoreregexplist)  and                              |
 | [suggestWords](#languagesetting-suggestwords)                   | `string`&ZeroWidthSpace;`[]`                                              | A list of suggested replacements for words.                                                                                   |
 | [words](#languagesetting-words)                                 | `string`&ZeroWidthSpace;`[]`                                              | List of words to be considered correct.                                                                                       |
 
@@ -5270,7 +5606,7 @@ This can be '*', 'typescript', 'cpp', 'json', etc.
 <dt>Description</dt>
 <dd>
 
-True to enable compound word checking. See [Case Sensitivity](https://cspell.org/docs/case-sensitive/) for more details.
+True to enable compound word checking.
 
 </dd>
 
@@ -5296,6 +5632,8 @@ True to enable compound word checking. See [Case Sensitivity](https://cspell.org
 <dd>
 
 Determines if words must match case and accent rules.
+
+See [Case Sensitivity](https://cspell.org/docs/case-sensitive/) for more details.
 
 - `false` - Case is ignored and accents can be missing on the entire word.
   Incorrect accents or partially missing accents will be marked as incorrect.
@@ -5609,7 +5947,7 @@ While you can create your own patterns, you can also leverage several patterns t
 <dt>Description</dt>
 <dd>
 
-The language id.  Ex: "typescript", "html", or "php".  "*" -- will match all languages.
+The language id.  Ex: `typescript`, `html`, or `php`.  `*` -- will match all languages.
 
 </dd>
 
@@ -5634,7 +5972,7 @@ The language id.  Ex: "typescript", "html", or "php".  "*" -- will match all lan
 <dt>Description</dt>
 <dd>
 
-Deprecated - The locale filter, matches against the language. This can be a comma separated list. "*" will match all locales.
+Deprecated - The locale filter, matches against the language. This can be a comma separated list. `*` will match all locales.
 
 </dd>
 
@@ -5659,7 +5997,7 @@ Deprecated - The locale filter, matches against the language. This can be a comm
 <dt>Description</dt>
 <dd>
 
-The locale filter, matches against the language. This can be a comma separated list. "*" will match all locales.
+The locale filter, matches against the language. This can be a comma separated list. `*` will match all locales.
 
 </dd>
 
@@ -5740,8 +6078,8 @@ possible suggestions.
 <dt>Description</dt>
 <dd>
 
-Defines a list of patterns that can be used with the `ignoreRegExpList` and
-`includeRegExpList` options.
+Defines a list of patterns that can be used with the  [ignoreRegExpList](#ignoreregexplist)  and
+ [includeRegExpList](#includeregexplist)  options.
 
 For example:
 
@@ -5763,8 +6101,6 @@ For example:
   }
 ]
 ```
-Defines a list of patterns that can be used with the `ignoreRegExpList` and
-`includeRegExpList` options.
 
 </dd>
 
@@ -5850,7 +6186,7 @@ List of words to be considered correct.
 <dt>Description</dt>
 <dd>
 
-This is a written language locale like: 'en', 'en-GB', 'fr', 'es', 'de', etc.
+This is a written language locale like: `en`, `en-GB`, `fr`, `es`, `de` or `en,fr` for both English and French
 
 </dd>
 
@@ -5887,7 +6223,7 @@ This is a written language locale like: 'en', 'en-GB', 'fr', 'es', 'de', etc.
 
 | Field                                                                  | Type                                                                      | Description                                                                                                                                                          |
 | ---------------------------------------------------------------------- | ------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [allowCompoundWords](#overridesettings-allowcompoundwords)             | `boolean`                                                                 | True to enable compound word checking. See [Case Sensitivity](https://cspell.org/docs/case-sensitive/) for more details.                                             |
+| [allowCompoundWords](#overridesettings-allowcompoundwords)             | `boolean`                                                                 | True to enable compound word checking.                                                                                                                               |
 | [caseSensitive](#overridesettings-casesensitive)                       | `boolean`                                                                 | Determines if words must match case and accent rules.                                                                                                                |
 | [description](#overridesettings-description)                           | `string`                                                                  | Optional description of configuration.                                                                                                                               |
 | [dictionaries](#overridesettings-dictionaries)                         | [`DictionaryReference`](#dictionaryreference)&ZeroWidthSpace;`[]`         | Optional list of dictionaries to use. Each entry should match the name of the dictionary.                                                                            |
@@ -5912,7 +6248,7 @@ This is a written language locale like: 'en', 'en-GB', 'fr', 'es', 'de', etc.
 | [name](#overridesettings-name)                                         | `string`                                                                  | Optional name of configuration.                                                                                                                                      |
 | [noSuggestDictionaries](#overridesettings-nosuggestdictionaries)       | [`DictionaryReference`](#dictionaryreference)&ZeroWidthSpace;`[]`         | Optional list of dictionaries that will not be used for suggestions.                                                                                                 |
 | [numSuggestions](#overridesettings-numsuggestions)                     | `number`                                                                  | Number of suggestions to make.                                                                                                                                       |
-| [patterns](#overridesettings-patterns)                                 | [`RegExpPatternDefinition`](#regexppatterndefinition)&ZeroWidthSpace;`[]` | Defines a list of patterns that can be used with the `ignoreRegExpList` and                                                                                          |
+| [patterns](#overridesettings-patterns)                                 | [`RegExpPatternDefinition`](#regexppatterndefinition)&ZeroWidthSpace;`[]` | Defines a list of patterns that can be used with the  [ignoreRegExpList](#ignoreregexplist)  and                                                                     |
 | [pnpFiles](#overridesettings-pnpfiles)                                 | `string`&ZeroWidthSpace;`[]`                                              | The PnP files to search for. Note: `.mjs` files are not currently supported.                                                                                         |
 | [suggestWords](#overridesettings-suggestwords)                         | `string`&ZeroWidthSpace;`[]`                                              | A list of suggested replacements for words.                                                                                                                          |
 | [suggestionNumChanges](#overridesettings-suggestionnumchanges)         | `number`                                                                  | The maximum number of changes allowed on a word to be considered a suggestions.                                                                                      |
@@ -5934,7 +6270,7 @@ This is a written language locale like: 'en', 'en-GB', 'fr', 'es', 'de', etc.
 <dt>Description</dt>
 <dd>
 
-True to enable compound word checking. See [Case Sensitivity](https://cspell.org/docs/case-sensitive/) for more details.
+True to enable compound word checking.
 
 </dd>
 
@@ -5960,6 +6296,8 @@ True to enable compound word checking. See [Case Sensitivity](https://cspell.org
 <dd>
 
 Determines if words must match case and accent rules.
+
+See [Case Sensitivity](https://cspell.org/docs/case-sensitive/) for more details.
 
 - `false` - Case is ignored and accents can be missing on the entire word.
   Incorrect accents or partially missing accents will be marked as incorrect.
@@ -6666,8 +7004,8 @@ Number of suggestions to make.
 <dt>Description</dt>
 <dd>
 
-Defines a list of patterns that can be used with the `ignoreRegExpList` and
-`includeRegExpList` options.
+Defines a list of patterns that can be used with the  [ignoreRegExpList](#ignoreregexplist)  and
+ [includeRegExpList](#includeregexplist)  options.
 
 For example:
 
@@ -6689,8 +7027,6 @@ For example:
   }
 ]
 ```
-Defines a list of patterns that can be used with the `ignoreRegExpList` and
-`includeRegExpList` options.
 
 </dd>
 
