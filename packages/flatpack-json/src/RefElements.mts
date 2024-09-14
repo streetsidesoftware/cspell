@@ -49,8 +49,6 @@ export type RefElements =
 
 export type StringRefElements = SubStringRefElement | StringConcatRefElement | StringPrimitiveRefElement;
 
-export type StringPrimitiveRefElement = PrimitiveRefElement<string>;
-
 export class BaseRefElement implements IndexRef {
     i = 0;
 
@@ -79,6 +77,16 @@ export class PrimitiveRefElement<T extends SimplePrimitive> extends BaseRefEleme
 
     getDependencies(): undefined {
         return undefined;
+    }
+}
+
+export class StringPrimitiveRefElement extends PrimitiveRefElement<string> {
+    constructor(value: string) {
+        super(value);
+    }
+
+    get length(): number {
+        return this.value.length;
     }
 }
 
@@ -356,6 +364,10 @@ export class SubStringRefElement extends BaseRefElement implements RefElement<Su
         return v;
     }
 
+    get length(): number {
+        return this.#l;
+    }
+
     clone(): SubStringRefElement {
         return new SubStringRefElement(this.#v, this.#l, this.#o);
     }
@@ -367,6 +379,7 @@ export class SubStringRefElement extends BaseRefElement implements RefElement<Su
 
 export class StringConcatRefElement extends BaseRefElement implements RefElement<StringElement> {
     #v: StringRefElements[];
+    #l = 0;
     constructor(values: StringRefElements[]) {
         super();
         this.#v = values;
@@ -378,6 +391,13 @@ export class StringConcatRefElement extends BaseRefElement implements RefElement
     get value(): string {
         const v = this.#v.map((r) => r.value).join('');
         return v;
+    }
+
+    get length(): number {
+        if (!this.#l) {
+            this.#l = this.#v.reduce((acc, r) => acc + r.length, 0);
+        }
+        return this.#l;
     }
 
     clone(): StringConcatRefElement {

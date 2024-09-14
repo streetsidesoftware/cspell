@@ -41,6 +41,8 @@ const compare = collator.compare;
 const forceStringPrimitives = false;
 const minSubStringLen = 4;
 
+const maxCachedStringLen = 256;
+
 export class FlatpackStore {
     private elements = new Set<RefElements>();
     private root: RefElements | undefined = undefined;
@@ -72,6 +74,11 @@ export class FlatpackStore {
      * Cache of strings that have been deduped and stored in the data array.
      */
     private knownStrings = new Trie<TrieData>();
+    /**
+     * Cache of reversed strings that have been deduped and stored in the data array.
+     * This is used to find matching suffixes.
+     */
+    private knownStringsRev = new Trie<TrieData>();
 
     constructor(
         json: Serializable,
@@ -139,17 +146,30 @@ export class FlatpackStore {
 
     private addKnownString(ref: StringRefElements, value: string) {
         if (value.length >= minSubStringLen) {
-            this.knownStrings.add(value.length > 256 ? value.slice(0, 256) : value, ref);
+            this.knownStrings.add(prefix(value, maxCachedStringLen), ref);
+            const rev = reverse(suffix(value, maxCachedStringLen));
+            this.knownStringsRev.add(rev, ref);
         }
     }
 
     private addStringPrimitive(value: string): StringPrimitiveRefElement {
-        return this.addStringElement(value, new PrimitiveRefElement(value));
+        return this.addStringElement(value, new StringPrimitiveRefElement(value));
     }
 
     private addStringElement<T extends StringRefElements>(value: string, element: T): T {
         this.addKnownString(element, value);
         return this.addValueAndElement(value, element);
+    }
+
+    private stringPrefix(value: string): SubStringRefElement | undefined {
+        const trieFound = this.knownStrings.find(value);
+        if (!trieFound || !trieFound.data || trieFound.found.length < minSubStringLen) {
+            return undefined;
+        }
+
+        const { data: tData, found: subStr } = trieFound;
+        // assert(subStr === value.slice(0, subStr.length));
+        return this.createSubStringRef(tData, subStr);
     }
 
     private stringToRef(value: string): StringRefElements {
@@ -162,18 +182,20 @@ export class FlatpackStore {
             return this.addStringPrimitive(value);
         }
 
-        const trieFound = this.knownStrings.find(value);
-        if (!trieFound || !trieFound.data || trieFound.found.length < minSubStringLen) {
-            return this.addStringPrimitive(value);
+        const partials: StringRefElements[] = [];
+        let subStr = value;
+        for (let prefix = this.stringPrefix(subStr); prefix; prefix = this.stringPrefix(subStr)) {
+            partials.push(prefix);
+            subStr = subStr.slice(prefix.length);
         }
 
-        const { data: tData, found: subStr } = trieFound;
-        const partial = this.createSubStringRef(tData, subStr);
-        if (subStr === value) return partial;
-        return this.addStringElement(
-            value,
-            new StringConcatRefElement([partial, this.stringToRef(value.slice(subStr.length))]),
-        );
+        if (!partials.length) {
+            return this.addStringPrimitive(value);
+        }
+        if (subStr.length) {
+            partials.push(this.stringToRef(subStr));
+        }
+        return this.addStringElement(value, partials.length === 1 ? partials[0] : new StringConcatRefElement(partials));
     }
 
     private cvtSetToRef(value: Set<Serializable>): SetRefElement {
@@ -491,6 +513,18 @@ function isObjectWrapper(value: unknown): value is ObjectWrapper {
         typeof (value as ObjectWrapper).valueOf === 'function' &&
         value.valueOf() !== value
     );
+}
+
+function prefix(value: string, len: number): string | string[] {
+    return value.length > len ? [...value].slice(0, len) : value;
+}
+
+function suffix(value: string, len: number): string | string[] {
+    return value.length > len ? [...value].slice(-len) : value;
+}
+
+function reverse(value: string | string[]): string[] {
+    return [...value].reverse();
 }
 
 export function toJSON<V extends Serializable>(json: V, options?: NormalizeJsonOptions): Flatpacked {

@@ -3,8 +3,9 @@ import { readFile } from 'node:fs/promises';
 import { findMatchingFileTypes } from '@cspell/filetypes';
 import { describe, expect, test } from 'vitest';
 
-import { fromJSON } from './dehydrate.mts';
+import { fromJSON } from './dehydrate.mjs';
 import { stringify, toJSON } from './Flatpack.mjs';
+import { stringifyFlatpacked } from './stringify.mjs';
 
 const urlFileList = new URL('../fixtures/fileList.txt', import.meta.url);
 const baseFilename = new URL(import.meta.url).pathname.split('/').slice(-1).join('').split('.').slice(0, -2).join('.');
@@ -80,11 +81,13 @@ describe('dehydrate', async () => {
         name             | data                             | options
         ${'fileList'}    | ${await sampleFileList()}        | ${undefined}
         ${'fileObjects'} | ${await sampleFileListObjects()} | ${undefined}
-    `('dehydrate $data $options', ({ name, data, options }) => {
+    `('dehydrate $data $options', async ({ name, data, options }) => {
         const v = toJSON(data, { dedupe: options?.dedupe });
-        expect(v).toMatchFileSnapshot(`__snapshots__/${baseFilename}_${name}.jsonc`);
-        expect(JSON.stringify(v) + '\n').toMatchFileSnapshot(`__snapshots__/${baseFilename}_${name}.json`);
-        expect(JSON.stringify(data) + '\n').toMatchFileSnapshot(`__snapshots__/${baseFilename}_${name}.data.json`);
+        await expect(stringifyFlatpacked(v)).toMatchFileSnapshot(`__snapshots__/${baseFilename}_${name}.jsonc`);
+        await expect(JSON.stringify(v) + '\n').toMatchFileSnapshot(`__snapshots__/${baseFilename}_${name}.json`);
+        await expect(JSON.stringify(data) + '\n').toMatchFileSnapshot(
+            `__snapshots__/${baseFilename}_${name}.data.json`,
+        );
         expect(fromJSON(v)).toEqual(data);
     });
 
