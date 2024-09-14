@@ -14,7 +14,8 @@ import {
     StringPrimitiveRefElement,
     StringRefElements,
     SubStringRefElement,
-} from './RefElements.mts';
+} from './RefElements.mjs';
+import { stringifyFlatpacked } from './stringify.mjs';
 import { Trie } from './Trie.mjs';
 import type {
     Flatpacked,
@@ -72,10 +73,19 @@ export class FlatpackStore {
      */
     private knownStrings = new Trie<TrieData>();
 
-    constructor(readonly options?: NormalizeJsonOptions) {
+    constructor(
+        json: Serializable,
+        readonly options?: NormalizeJsonOptions,
+    ) {
         this.dedupe = options?.dedupe ?? true;
         this.sortKeys = options?.sortKeys || this.dedupe;
         this.addValueAndElement(undefined, new PrimitiveRefElement(undefined));
+        this.root = this.valueToRef(json);
+    }
+
+    setValue(value: Serializable): void {
+        this.softReset();
+        this.root = this.valueToRef(value);
     }
 
     private nextId(): number {
@@ -417,13 +427,14 @@ export class FlatpackStore {
     /**
      * Reset things in a way that allows for reuse.
      */
-    private softReset(): void {}
+    private softReset(): void {
+        this.referenced.clear();
+    }
 
-    toJSON<V extends Serializable>(json: V): Flatpacked {
-        this.softReset();
-
+    toJSON(): Flatpacked {
         const data = [dataHeader] as Flatpacked;
-        if (json === undefined) return data;
+        const root = this.root;
+        if (root === undefined) return data;
 
         const idxLookup = new Map<RefElement<unknown>, number>();
         const refUndef = this.cache.get(undefined);
@@ -441,8 +452,6 @@ export class FlatpackStore {
             }
             return idx;
         }
-
-        const root = this.valueToRef(json);
 
         function walkRefs(ref: RefElement<unknown>): void {
             const s = idxLookup.size;
@@ -467,6 +476,10 @@ export class FlatpackStore {
 
         return data;
     }
+
+    stringify(): string {
+        return stringifyFlatpacked(this.toJSON());
+    }
 }
 
 type TrieData = StringRefElements;
@@ -481,7 +494,7 @@ function isObjectWrapper(value: unknown): value is ObjectWrapper {
 }
 
 export function toJSON<V extends Serializable>(json: V, options?: NormalizeJsonOptions): Flatpacked {
-    return new FlatpackStore(options).toJSON(json);
+    return new FlatpackStore(json, options).toJSON();
 }
 
 export function stringify(data: Unpacked): string {
