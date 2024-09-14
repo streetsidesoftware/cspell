@@ -12,9 +12,37 @@ exports[`dehydrate > dehydrate /[\\p{L}\\p{M}]+/gu undefined 1`] = `
   "Dehydrated JSON v1",
   [
     6,
-    0,
-    0,
+    2,
+    3,
   ],
+  "[\\p{L}\\p{M}]+",
+  "gu",
+]
+`;
+
+exports[`dehydrate > dehydrate [ 'apple pie', 'apple', 'banana', 'apple-banana' ] undefined 1`] = `
+[
+  "Dehydrated JSON v1",
+  [
+    0,
+    2,
+    3,
+    4,
+    5,
+  ],
+  "apple pie",
+  [
+    3,
+    2,
+    5,
+  ],
+  "banana",
+  [
+    2,
+    3,
+    6,
+  ],
+  "-banana",
 ]
 `;
 
@@ -40,26 +68,39 @@ exports[`dehydrate > dehydrate [ /[\\p{L}\\p{M}]+/gu, /[\\p{L}\\p{M}]+/gu, /[\\p
 [
   "Dehydrated JSON v1",
   [
-    6,
     0,
-    0,
-  ],
-  [
-    6,
-    0,
-    0,
-  ],
-  [
-    6,
-    0,
-    0,
-  ],
-  [
-    0,
-    1,
     2,
-    3,
+    5,
+    6,
   ],
+  [
+    6,
+    3,
+    4,
+  ],
+  "[\\p{L}\\p{M}]+",
+  "gu",
+  [
+    6,
+    3,
+    4,
+  ],
+  [
+    6,
+    7,
+    4,
+  ],
+  [
+    2,
+    8,
+    9,
+  ],
+  [
+    3,
+    3,
+    5,
+  ],
+  "u}\\p{M}]+",
 ]
 `;
 
@@ -210,46 +251,49 @@ exports[`dehydrate > dehydrate [ 1n, 'hello', /\\w+/g, {}, [], 'hello' ] undefin
 [
   "Dehydrated JSON v1",
   [
+    0,
+    2,
+    5,
+    7,
+    10,
+    11,
+    12,
+  ],
+  [
     1,
     0,
     3,
   ],
+  [
+    8,
+    4,
+  ],
   1,
   [
-    8,
-    2,
-  ],
-  [
     1,
     0,
-    0,
+    6,
   ],
+  "hello",
   [
     6,
-    0,
-    0,
-  ],
-  [
-    1,
-    0,
-    0,
-  ],
-  [
-    0,
-  ],
-  [
-    1,
-    0,
-    0,
-  ],
-  [
-    0,
-    1,
-    4,
-    5,
-    6,
-    7,
     8,
+    9,
+  ],
+  "\\w+",
+  "g",
+  [
+    1,
+    0,
+    0,
+  ],
+  [
+    0,
+  ],
+  [
+    1,
+    0,
+    6,
   ],
 ]
 `;
@@ -257,34 +301,6 @@ exports[`dehydrate > dehydrate [ 1n, 'hello', /\\w+/g, {}, [], 'hello' ] undefin
 exports[`dehydrate > dehydrate [ 1n, 2n, 1n, 2n, 9007199254740991n, -9007199254740991n, …(2) ] undefined 1`] = `
 [
   "Dehydrated JSON v1",
-  1,
-  [
-    8,
-    1,
-  ],
-  2,
-  [
-    8,
-    3,
-  ],
-  9007199254740991,
-  [
-    8,
-    5,
-  ],
-  -9007199254740991,
-  [
-    8,
-    7,
-  ],
-  [
-    8,
-    0,
-  ],
-  [
-    8,
-    0,
-  ],
   [
     0,
     2,
@@ -293,15 +309,51 @@ exports[`dehydrate > dehydrate [ 1n, 2n, 1n, 2n, 9007199254740991n, -90071992547
     4,
     6,
     8,
-    9,
     10,
+    12,
   ],
+  [
+    8,
+    3,
+  ],
+  1,
+  [
+    8,
+    5,
+  ],
+  2,
+  [
+    8,
+    7,
+  ],
+  9007199254740991,
+  [
+    8,
+    9,
+  ],
+  -9007199254740991,
+  [
+    8,
+    11,
+  ],
+  "9007199254740992",
+  [
+    8,
+    13,
+  ],
+  "-9007199254740992",
 ]
 `;
 
 exports[`dehydrate > dehydrate [ Array(3) ] undefined 1`] = `
 [
   "Dehydrated JSON v1",
+  [
+    0,
+    2,
+    3,
+    4,
+  ],
   [
     7,
     1704067200000,
@@ -313,12 +365,6 @@ exports[`dehydrate > dehydrate [ Array(3) ] undefined 1`] = `
   [
     7,
     1704153600000,
-  ],
-  [
-    0,
-    1,
-    2,
-    3,
   ],
 ]
 `;
@@ -625,8 +671,8 @@ exports[`dehydrate > dehydrate { fruit: [ 'apple', 'banana', 'apple', 'banana', 
   [
     0,
     7,
-    8,
     11,
+    13,
   ],
   [
     0,
@@ -640,6 +686,12 @@ exports[`dehydrate > dehydrate { fruit: [ 'apple', 'banana', 'apple', 'banana', 
   "apple",
   "banana",
   "pineapple",
+  [
+    2,
+    8,
+    12,
+  ],
+  "-banana-apple-banana-apple-pineapple",
   "There is a bit of fruit on the table. Some banana, apple, and pineapple.",
 ]
 `;

@@ -10,6 +10,7 @@ import {
     RefElements,
     RegExpRefElement,
     SetRefElement,
+    StringConcatRefElement,
     StringPrimitiveRefElement,
     StringRefElements,
     SubStringRefElement,
@@ -155,7 +156,12 @@ export class FlatpackStore {
         }
 
         const { data: tData, found: subStr } = trieFound;
-        return this.createSubStringRef(tData, subStr);
+        const partial = this.createSubStringRef(tData, subStr);
+        if (subStr === value) return partial;
+        return this.addStringElement(
+            value,
+            new StringConcatRefElement([partial, this.stringToRef(value.slice(subStr.length))]),
+        );
     }
 
     private cvtSetToRef(value: Set<Serializable>): SetRefElement {

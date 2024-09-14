@@ -7,6 +7,7 @@ import { fromJSON } from './dehydrate.mts';
 import { stringify, toJSON } from './Flatpack.mjs';
 
 const urlFileList = new URL('../fixtures/fileList.txt', import.meta.url);
+const baseFilename = new URL(import.meta.url).pathname.split('/').slice(-1).join('').split('.').slice(0, -2).join('.');
 
 describe('dehydrate', async () => {
     test.each`
@@ -33,19 +34,6 @@ describe('dehydrate', async () => {
 
     const biMaxSafe = BigInt(Number.MAX_SAFE_INTEGER);
 
-    test.only.each`
-        data                                                                                | options
-        ${[{ a: 'a', b: 'b' }, { a: 'a', b: 'b' }, { a: 'a', b: 'b' }, { a: 'a', b: 'b' }]} | ${{ dedupe: false }}
-        ${sampleRepeatedStrings()}                                                          | ${undefined}
-    `('dehydrate $data $options', ({ data, options }) => {
-        const v = toJSON(data, { dedupe: options?.dedupe });
-        console.log('%o', v);
-        expect(v).toMatchSnapshot();
-        expect(fromJSON(v)).toEqual(data);
-        expect(fromJSON(JSON.parse(JSON.stringify(v)))).toEqual(data);
-        expect(fromJSON(JSON.parse(stringify(data)))).toEqual(data);
-    });
-
     test.each`
         data                                                                                            | options
         ${undefined}                                                                                    | ${undefined}
@@ -58,6 +46,7 @@ describe('dehydrate', async () => {
         ${[]}                                                                                           | ${undefined}
         ${[1, 2]}                                                                                       | ${undefined}
         ${['apple', 'banana', 'apple', 'banana', 'apple', 'pineapple']}                                 | ${undefined}
+        ${['apple pie', 'apple', 'banana', 'apple-banana']}                                             | ${undefined}
         ${new Set(['apple', 'banana', 'pineapple'])}                                                    | ${undefined}
         ${new Set(['pineapple', 'apple', 'banana'])}                                                    | ${undefined}
         ${new Map([['apple', 1], ['banana', 2], ['pineapple', 3]])}                                     | ${undefined}
@@ -91,9 +80,9 @@ describe('dehydrate', async () => {
         ${'fileObjects'} | ${await sampleFileListObjects()} | ${undefined}
     `('dehydrate $data $options', ({ name, data, options }) => {
         const v = toJSON(data, { dedupe: options?.dedupe });
-        expect(v).toMatchFileSnapshot(`__snapshots__/${name}.jsonc`);
-        expect(JSON.stringify(v) + '\n').toMatchFileSnapshot(`__snapshots__/${name}.json`);
-        expect(JSON.stringify(data) + '\n').toMatchFileSnapshot(`__snapshots__/${name}.data.json`);
+        expect(v).toMatchFileSnapshot(`__snapshots__/${baseFilename}_${name}.jsonc`);
+        expect(JSON.stringify(v) + '\n').toMatchFileSnapshot(`__snapshots__/${baseFilename}_${name}.json`);
+        expect(JSON.stringify(data) + '\n').toMatchFileSnapshot(`__snapshots__/${baseFilename}_${name}.data.json`);
         expect(fromJSON(v)).toEqual(data);
     });
 

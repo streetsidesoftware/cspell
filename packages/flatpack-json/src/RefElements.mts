@@ -44,10 +44,10 @@ export type RefElements =
     | RegExpRefElement
     | SetRefElement
     | StringPrimitiveRefElement
-    | StringRefElement
+    | StringConcatRefElement
     | SubStringRefElement;
 
-export type StringRefElements = SubStringRefElement | StringRefElement | StringPrimitiveRefElement;
+export type StringRefElements = SubStringRefElement | StringConcatRefElement | StringPrimitiveRefElement;
 
 export type StringPrimitiveRefElement = PrimitiveRefElement<string>;
 
@@ -353,7 +353,7 @@ export class SubStringRefElement extends BaseRefElement implements RefElement<Su
     }
 }
 
-export class StringRefElement extends BaseRefElement implements RefElement<StringElement> {
+export class StringConcatRefElement extends BaseRefElement implements RefElement<StringElement> {
     #v: StringRefElements[];
     constructor(values: StringRefElements[]) {
         super();
@@ -368,8 +368,8 @@ export class StringRefElement extends BaseRefElement implements RefElement<Strin
         return v;
     }
 
-    clone(): StringRefElement {
-        return new StringRefElement(this.#v);
+    clone(): StringConcatRefElement {
+        return new StringConcatRefElement(this.#v);
     }
 
     getDependencies(): RefElement<unknown>[] | undefined {
