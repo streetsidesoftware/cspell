@@ -143,26 +143,30 @@ export class ObjectWrapperRefElement extends BaseRefElement implements RefElemen
 }
 
 export class SetRefElement extends BaseRefElement implements RefElement<SetElement> {
-    #k: ArrayRefElement | undefined;
+    #v: ArrayRefElement | undefined;
     constructor(values?: ArrayRefElement) {
         super();
-        this.#k = values;
+        this.#v = values;
     }
 
     setValues(values: ArrayRefElement): void {
-        this.#k = values;
+        this.#v = values;
     }
 
     toElement(lookup: FnIndexLookup): SetElement {
-        return [ElementType.Set, lookup(this.#k)];
+        return [ElementType.Set, lookup(this.#v)];
     }
 
     clone(): SetRefElement {
-        return new SetRefElement(this.#k);
+        return new SetRefElement(this.#v);
     }
 
     getDependencies(): RefElement<unknown>[] | undefined {
-        return this.#k ? [this.#k] : undefined;
+        return this.#v ? [this.#v] : undefined;
+    }
+
+    values(): ArrayRefElement | undefined {
+        return this.#v;
     }
 }
 
@@ -192,6 +196,14 @@ export class MapRefElement extends BaseRefElement implements RefElement<MapEleme
 
     getDependencies(): RefElement<unknown>[] | undefined {
         return [this.#k, this.#v].filter((r) => !!r);
+    }
+
+    keys(): ArrayRefElement | undefined {
+        return this.#k;
+    }
+
+    values(): ArrayRefElement | undefined {
+        return this.#v;
     }
 }
 

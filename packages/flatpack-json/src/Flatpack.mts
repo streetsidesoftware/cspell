@@ -64,6 +64,8 @@ export class FlatpackStore {
      */
     private cachedArrays = new Map<number, ArrayRefElement[]>();
     private cachedObjects = new Map<ArrayRefElement | undefined, Map<ArrayRefElement | undefined, ObjectRefElement>>();
+    private cachedSets = new Map<ArrayRefElement | undefined, SetRefElement>();
+    private cachedMaps = new Map<ArrayRefElement | undefined, Map<ArrayRefElement | undefined, MapRefElement>>();
 
     /**
      * Cache of strings that have been deduped and stored in the data array.
@@ -172,12 +174,26 @@ export class FlatpackStore {
         }
 
         const element = this.addValueAndElement(value, new SetRefElement());
-        element.setValues(this.createUniqueKeys([...value], false));
-        // need to dedupe
-        return element;
+        element.setValues(this.createUniqueKeys([...value]));
+        return this.dedupeSetRefs(value, element);
     }
 
-    private createUniqueKeys(keys: Serializable[], cacheValue = true): ArrayRefElement {
+    private dedupeSetRefs(value: Set<Serializable>, element: SetRefElement): SetRefElement {
+        if (!this.dedupe) return element;
+        const values = element.values();
+        const found = this.cachedSets.get(values);
+        if (!found) {
+            this.cachedSets.set(values, element);
+            return element;
+        }
+        if (this.referenced.has(element)) return element;
+        this.elements.delete(element);
+        this.cache.set(value, found);
+        return found;
+    }
+
+    private createUniqueKeys(keys: Serializable[]): ArrayRefElement {
+        const cacheValue = false;
         let k = this.arrToRef(keys, cacheValue);
         const uniqueKeys = new Set(k.valueRefs());
         if (uniqueKeys.size !== keys.length) {
@@ -203,11 +219,29 @@ export class FlatpackStore {
         }
 
         const element = this.addValueAndElement(value, new MapRefElement());
-        element.setKeysAndValues(
-            this.createUniqueKeys([...value.keys()], false),
-            this.arrToRef([...value.values()], false),
-        );
-        // need to dedupe
+        element.setKeysAndValues(this.createUniqueKeys([...value.keys()]), this.arrToRef([...value.values()], false));
+        return this.dedupeMapRefs(value, element);
+    }
+
+    private dedupeMapRefs(value: Map<Serializable, Serializable>, element: MapRefElement): MapRefElement {
+        if (!this.dedupe) return element;
+        const keys = element.keys();
+        const values = element.values();
+        let found = this.cachedMaps.get(keys);
+        if (!found) {
+            found = new Map();
+            found.set(values, element);
+            this.cachedMaps.set(keys, found);
+            return element;
+        }
+        const foundValue = found.get(values);
+        if (foundValue) {
+            if (this.referenced.has(element)) return element;
+            this.elements.delete(element);
+            this.cache.set(value, foundValue);
+            return foundValue;
+        }
+        found.set(values, element);
         return element;
     }
 
@@ -271,8 +305,14 @@ export class FlatpackStore {
             entries.sort((a, b) => compare(a[0], b[0]));
         }
         const element = this.addValueAndElement(value, new ObjectRefElement());
-        const k = this.arrToRef(entries.map(([key]) => key));
-        const v = this.arrToRef(entries.map(([, value]) => value));
+        const k = this.arrToRef(
+            entries.map(([key]) => key),
+            false,
+        );
+        const v = this.arrToRef(
+            entries.map(([, value]) => value),
+            false,
+        );
 
         element.setKeysAndValues(k, v);
         return this.dedupeObject(value, element);
@@ -300,8 +340,16 @@ export class FlatpackStore {
         return element;
     }
 
-    private dedupeArray(value: PrimitiveArray, element: ArrayRefElement): ArrayRefElement {
-        if (!this.dedupe) return element;
+    /**
+     *
+     * @param value - The array converted to an ArrayRefElement.
+     * @param element - the element to dedupe.
+     * @param cacheValue - Whether to cache the value. It is false when it is a dynamic array, like object keys,
+     *      in that case, we want to dedupe the keys and values.
+     * @returns the element to use.
+     */
+    private dedupeArray(value: PrimitiveArray, element: ArrayRefElement, cacheValue: boolean): ArrayRefElement {
+        if (cacheValue && !this.dedupe) return element;
         const indexHash = element.hash;
         let cached = this.cachedArrays.get(indexHash);
         if (!cached) {
@@ -312,7 +360,9 @@ export class FlatpackStore {
         if (found) {
             if (this.referenced.has(element)) return element;
             this.elements.delete(element);
-            this.cache.set(value, found);
+            if (cacheValue || this.cache.has(value)) {
+                this.cache.set(value, found);
+            }
             return found;
         }
         cached.push(element);
@@ -334,7 +384,7 @@ export class FlatpackStore {
 
         const element = this.addValueAndElement(value, new ArrayRefElement(), cacheValue);
         element.setValues(value.map((v) => this.valueToRef(v)));
-        return this.dedupeArray(value, element);
+        return this.dedupeArray(value, element, cacheValue);
     }
 
     private valueToRef(value: Serializable): RefElements {

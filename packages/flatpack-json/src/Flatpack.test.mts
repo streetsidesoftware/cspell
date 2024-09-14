@@ -49,7 +49,9 @@ describe('dehydrate', async () => {
         ${['apple pie', 'apple', 'banana', 'apple-banana']}                                             | ${undefined}
         ${new Set(['apple', 'banana', 'pineapple'])}                                                    | ${undefined}
         ${new Set(['pineapple', 'apple', 'banana'])}                                                    | ${undefined}
+        ${[new Set(['a', 'b', 'c']), new Set(['a', 'b', 'c']), new Set(['a', 'b', 'c'])]}               | ${undefined}
         ${new Map([['apple', 1], ['banana', 2], ['pineapple', 3]])}                                     | ${undefined}
+        ${[new Map([['a', 1], ['b', 2], ['p', 3]]), new Map([['a', 1], ['b', 2], ['p', 3]])]}           | ${undefined}
         ${{}}                                                                                           | ${undefined}
         ${[{}, {}, {}]}                                                                                 | ${undefined}
         ${{ a: 1 }}                                                                                     | ${undefined}
