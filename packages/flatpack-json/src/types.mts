@@ -1,4 +1,5 @@
-export type Primitive = string | number | boolean | null | undefined | RegExp | Date | bigint;
+export type SimplePrimitive = string | number | boolean | null | undefined;
+export type Primitive = SimplePrimitive | RegExp | Date | bigint;
 export type PrimitiveSet = Set<Primitive | PrimitiveObject | PrimitiveArray | PrimitiveSet | PrimitiveMap>;
 export type PrimitiveMap = Map<
     Primitive | PrimitiveObject | PrimitiveArray | PrimitiveSet | PrimitiveMap,
@@ -56,7 +57,7 @@ export type StringElement = readonly [type: ElementType.String, ...Index[]];
  * The second index is the length of the substring.
  * The third index is the offset of the substring, defaults to 0.
  */
-export type SubStringElement = readonly [type: ElementType.SubString, Index, len: number, offset?: number];
+export type SubStringElement = readonly [type: ElementType.SubString, idx: Index, len: number, offset?: number];
 /**
  * An object element. The first index is a reference to an array of keys.
  * The second index is a reference to an array of values.
