@@ -342,7 +342,7 @@ function simpleHash(values: readonly number[]): number {
     return hash;
 }
 
-export class SubStringRefElement extends BaseRefElement implements RefElement<SubStringElement> {
+export class SubStringRefElement extends BaseRefElement implements RefElement<SubStringElement | string> {
     #v: StringRefElements;
     #l: number;
     #o?: number | undefined;
@@ -352,10 +352,12 @@ export class SubStringRefElement extends BaseRefElement implements RefElement<Su
         this.#l = len;
         this.#o = offset;
     }
-    toElement(lookup: FnIndexLookup): SubStringElement {
-        return this.#o
+    toElement(lookup: FnIndexLookup): SubStringElement | string {
+        const elm: SubStringElement = this.#o
             ? [ElementType.SubString, lookup(this.#v), this.#l, this.#o]
             : [ElementType.SubString, lookup(this.#v), this.#l];
+        const v = this.value;
+        return JSON.stringify(elm).length < JSON.stringify(v).length ? elm : v;
     }
 
     get value(): string {
@@ -377,20 +379,25 @@ export class SubStringRefElement extends BaseRefElement implements RefElement<Su
     }
 }
 
-export class StringConcatRefElement extends BaseRefElement implements RefElement<StringElement> {
+export class StringConcatRefElement extends BaseRefElement implements RefElement<StringElement | string> {
     #v: StringRefElements[];
+    #s: string = '';
     #l = 0;
     constructor(values: StringRefElements[]) {
         super();
         this.#v = values;
     }
-    toElement(lookup: FnIndexLookup): StringElement {
-        return [ElementType.String, ...this.#v.map(lookup)];
+    toElement(lookup: FnIndexLookup): StringElement | string {
+        const elem: StringElement = [ElementType.String, ...this.#v.map(lookup)];
+        const v = this.value;
+        return JSON.stringify(elem).length < JSON.stringify(v).length ? elem : v;
     }
 
     get value(): string {
-        const v = this.#v.map((r) => r.value).join('');
-        return v;
+        if (!this.#s) {
+            this.#s = this.#v.map((r) => r.value).join('');
+        }
+        return this.#s;
     }
 
     get length(): number {

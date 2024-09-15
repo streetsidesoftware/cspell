@@ -31,18 +31,9 @@ exports[`dehydrate > dehydrate [ 'apple pie', 'apple', 'banana', 'apple-banana' 
     5,
   ],
   "apple pie",
-  [
-    3,
-    2,
-    5,
-  ],
+  "apple",
   "banana",
-  [
-    2,
-    3,
-    6,
-  ],
-  "-banana",
+  "apple-banana",
 ]
 `;
 
@@ -90,17 +81,7 @@ exports[`dehydrate > dehydrate [ /[\\p{L}\\p{M}]+/gu, /[\\p{L}\\p{M}]+/gu, /[\\p
     7,
     4,
   ],
-  [
-    2,
-    8,
-    9,
-  ],
-  [
-    3,
-    3,
-    5,
-  ],
-  "u}\\p{M}]+",
+  "[\\p{Lu}\\p{M}]+",
 ]
 `;
 
@@ -306,7 +287,12 @@ exports[`dehydrate > dehydrate [ 1n, 2n, 1n, 2n, 9007199254740991n, -90071992547
     8,
     13,
   ],
-  "-9007199254740992",
+  [
+    2,
+    14,
+    11,
+  ],
+  "-",
 ]
 `;
 
@@ -696,7 +682,7 @@ exports[`dehydrate > dehydrate { fruit: [ 'apple', 'banana', 'apple', 'banana', 
     0,
     7,
     11,
-    13,
+    12,
   ],
   [
     0,
@@ -710,12 +696,7 @@ exports[`dehydrate > dehydrate { fruit: [ 'apple', 'banana', 'apple', 'banana', 
   "apple",
   "banana",
   "pineapple",
-  [
-    2,
-    8,
-    12,
-  ],
-  "-banana-apple-banana-apple-pineapple",
+  "apple-banana-apple-banana-apple-pineapple",
   "There is a bit of fruit on the table. Some banana, apple, and pineapple.",
 ]
 `;

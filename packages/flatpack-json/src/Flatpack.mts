@@ -39,7 +39,9 @@ const collator = new Intl.Collator('en', {
 const compare = collator.compare;
 
 const forceStringPrimitives = false;
-const minSubStringLen = 4;
+const minSubStringLen = 8;
+const minSubStringSuffixLen = 16;
+const useSuffix = true;
 
 const maxCachedStringLen = 256;
 
@@ -135,13 +137,13 @@ export class FlatpackStore {
         return this.addValueAndElement(value, new PrimitiveRefElement(value));
     }
 
-    private createSubStringRef(baseString: StringRefElements, value: string): SubStringRefElement {
+    private createSubStringRef(baseString: StringRefElements, value: string, offset?: number): SubStringRefElement {
         const found = this.cache.get(value);
         if (found !== undefined) {
             return found as SubStringRefElement;
         }
 
-        return this.addStringElement(value, new SubStringRefElement(baseString, value.length));
+        return this.addStringElement(value, new SubStringRefElement(baseString, value.length, offset));
     }
 
     private addKnownString(ref: StringRefElements, value: string) {
@@ -162,6 +164,7 @@ export class FlatpackStore {
     }
 
     private stringPrefix(value: string): SubStringRefElement | undefined {
+        // if (value.length < maxCachedStringLen * 2) return undefined;
         const trieFound = this.knownStrings.find(value);
         if (!trieFound || !trieFound.data || trieFound.found.length < minSubStringLen) {
             return undefined;
@@ -170,6 +173,19 @@ export class FlatpackStore {
         const { data: tData, found: subStr } = trieFound;
         // assert(subStr === value.slice(0, subStr.length));
         return this.createSubStringRef(tData, subStr);
+    }
+
+    private stringSuffix(value: string): SubStringRefElement | undefined {
+        if (!useSuffix) return undefined;
+        const rev = reverse(value);
+        const trieFound = this.knownStringsRev.find(rev);
+        if (!trieFound || !trieFound.data || trieFound.found.length < minSubStringSuffixLen) {
+            return undefined;
+        }
+
+        const { data: tData, found: subStr } = trieFound;
+        // assert(subStr === value.slice(0, subStr.length));
+        return this.createSubStringRef(tData, value.slice(-subStr.length), tData.length - subStr.length);
     }
 
     private stringToRef(value: string): StringRefElements {
@@ -182,19 +198,31 @@ export class FlatpackStore {
             return this.addStringPrimitive(value);
         }
 
-        const partials: StringRefElements[] = [];
+        const partialsPfx: StringRefElements[] = [];
+        const partialsSfx: StringRefElements[] = [];
         let subStr = value;
-        for (let prefix = this.stringPrefix(subStr); prefix; prefix = this.stringPrefix(subStr)) {
-            partials.push(prefix);
-            subStr = subStr.slice(prefix.length);
+        while (subStr.length) {
+            const prefix = this.stringPrefix(subStr);
+            const suffix = this.stringSuffix(subStr);
+            if (!prefix && !suffix) break;
+            if (prefix && prefix.length >= (suffix?.length || 0)) {
+                partialsPfx.push(prefix);
+                subStr = subStr.slice(prefix.length);
+            } else {
+                const sfx = suffix!;
+                partialsSfx.push(sfx);
+                subStr = subStr.slice(0, -sfx.length);
+            }
         }
+        partialsSfx.reverse();
 
-        if (!partials.length) {
+        if (!partialsPfx.length && !partialsSfx.length) {
             return this.addStringPrimitive(value);
         }
         if (subStr.length) {
-            partials.push(this.stringToRef(subStr));
+            partialsPfx.push(this.stringToRef(subStr));
         }
+        const partials = [...partialsPfx, ...partialsSfx];
         return this.addStringElement(value, partials.length === 1 ? partials[0] : new StringConcatRefElement(partials));
     }
 
@@ -491,9 +519,9 @@ export class FlatpackStore {
         walkRefs(root);
 
         for (const element of elements) {
-            const idx = element.toElement((ref) => (ref && idxLookup.get(ref)) || 0);
-            if (idx === undefined) continue;
-            data.push(idx);
+            const value = element.toElement((ref) => (ref && idxLookup.get(ref)) || 0);
+            if (value === undefined) continue;
+            data.push(value);
         }
 
         return data;
