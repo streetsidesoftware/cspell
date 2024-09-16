@@ -1,13 +1,167 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`dehydrate > dehydrate 'string' undefined 1`] = `
+exports[`Flatpack > Flatpack diff 'string', 'string + more' 1`] = `
+"Index: data
+===================================================================
+--- data
++++ data
+@@ -1,4 +1,4 @@
+ [
+ "Dehydrated JSON v1",
+-"string"
++"string + more"
+ ]
+"
+`;
+
+exports[`Flatpack > Flatpack diff 'string', 'string' 1`] = `
+"Index: data
+===================================================================
+--- data
++++ data
+"
+`;
+
+exports[`Flatpack > Flatpack diff [ 'a', 'b', 'a', 'b' ], [ 'a', 'b', 'a', 'b', 'c' ] 1`] = `
+"Index: data
+===================================================================
+--- data
++++ data
+@@ -1,6 +1,7 @@
+ [
+ "Dehydrated JSON v1",
+-[0,2,3,2,3],
++[0,2,3,2,3,4],
+ "a",
+-"b"
++"b",
++"c"
+ ]
+"
+`;
+
+exports[`Flatpack > Flatpack diff { a: [ 1 ] }, { a: [ 1, 2, 3 ] } 1`] = `
+"Index: data
+===================================================================
+--- data
++++ data
+@@ -3,7 +3,9 @@
+ [1,2,4],
+ [0,3],
+ "a",
+ [0,5],
+-[0,6],
+-1
++[0,6,7,8],
++1,
++2,
++3
+ ]
+"
+`;
+
+exports[`Flatpack > Flatpack diff { a: { a: 'a', b: 42 } }, { a: { a: 'a', b: 42 }, b: 42 } 1`] = `
+"Index: data
+===================================================================
+--- data
++++ data
+@@ -1,10 +1,10 @@
+ [
+ "Dehydrated JSON v1",
+-[1,2,4],
+-[0,3],
++[1,6,2],
++[0,5,9],
+ "a",
+-[0,5],
++0,
+ [1,6,8],
+ [0,3,7],
+ "b",
+ [0,3,9],
+"
+`;
+
+exports[`Flatpack > Flatpack diff { a: { b: 1 } }, { a: { b: 1 }, b: { a: 1 } } 1`] = `
+"Index: data
+===================================================================
+--- data
++++ data
+@@ -1,12 +1,14 @@
+ [
+ "Dehydrated JSON v1",
+-[1,2,4],
++[1,4,10],
+ [0,3],
+ "a",
+-[0,5],
++[0,3,7],
+ [1,6,8],
+ [0,7],
+ "b",
+ [0,9],
+-1
++1,
++[0,5,11],
++[1,2,8]
+ ]
+"
+`;
+
+exports[`Flatpack > Flatpack diff { a: 1 }, { a: 1, b: 1 } 1`] = `
+"Index: data
+===================================================================
+--- data
++++ data
+@@ -1,8 +1,9 @@
+ [
+ "Dehydrated JSON v1",
+-[1,2,4],
+-[0,3],
++[1,2,6],
++[0,3,4],
+ "a",
+-[0,5],
+-1
++"b",
++1,
++[0,5,5]
+ ]
+"
+`;
+
+exports[`Flatpack > Flatpack diff {}, { a: 'a' } 1`] = `
+"Index: data
+===================================================================
+--- data
++++ data
+@@ -1,4 +1,6 @@
+ [
+ "Dehydrated JSON v1",
+-[1,0,0]
++[1,2,2],
++[0,3],
++"a"
+ ]
+"
+`;
+
+exports[`Flatpack > Flatpack diff undefined, undefined 1`] = `
+"Index: data
+===================================================================
+--- data
++++ data
+"
+`;
+
+exports[`Flatpack > dehydrate 'string' undefined 1`] = `
 [
   "Dehydrated JSON v1",
   "string",
 ]
 `;
 
-exports[`dehydrate > dehydrate /[\\p{L}\\p{M}]+/gu undefined 1`] = `
+exports[`Flatpack > dehydrate /[\\p{L}\\p{M}]+/gu undefined 1`] = `
 [
   "Dehydrated JSON v1",
   [
@@ -20,7 +174,7 @@ exports[`dehydrate > dehydrate /[\\p{L}\\p{M}]+/gu undefined 1`] = `
 ]
 `;
 
-exports[`dehydrate > dehydrate [ 'apple pie', 'apple', 'banana', 'apple-banana' ] undefined 1`] = `
+exports[`Flatpack > dehydrate [ 'apple pie', 'apple', 'banana', 'apple-banana' ] undefined 1`] = `
 [
   "Dehydrated JSON v1",
   [
@@ -37,7 +191,7 @@ exports[`dehydrate > dehydrate [ 'apple pie', 'apple', 'banana', 'apple-banana' 
 ]
 `;
 
-exports[`dehydrate > dehydrate [ 'apple', 'banana', 'apple', 'banana', 'apple', 'pineapple' ] undefined 1`] = `
+exports[`Flatpack > dehydrate [ 'apple', 'banana', 'apple', 'banana', 'apple', 'pineapple' ] undefined 1`] = `
 [
   "Dehydrated JSON v1",
   [
@@ -55,7 +209,7 @@ exports[`dehydrate > dehydrate [ 'apple', 'banana', 'apple', 'banana', 'apple', 
 ]
 `;
 
-exports[`dehydrate > dehydrate [ /[\\p{L}\\p{M}]+/gu, /[\\p{L}\\p{M}]+/gu, /[\\p{Lu}\\p{M}]+/gu ] undefined 1`] = `
+exports[`Flatpack > dehydrate [ /[\\p{L}\\p{M}]+/gu, /[\\p{L}\\p{M}]+/gu, /[\\p{Lu}\\p{M}]+/gu ] undefined 1`] = `
 [
   "Dehydrated JSON v1",
   [
@@ -85,7 +239,7 @@ exports[`dehydrate > dehydrate [ /[\\p{L}\\p{M}]+/gu, /[\\p{L}\\p{M}]+/gu, /[\\p
 ]
 `;
 
-exports[`dehydrate > dehydrate [ { a: 'a', b: 'b' }, { a: 'a', b: 'b' }, { a: 'a', b: 'b' }, …(1) ] { dedupe: false } 1`] = `
+exports[`Flatpack > dehydrate [ { a: 'a', b: 'b' }, { a: 'a', b: 'b' }, { a: 'a', b: 'b' }, …(1) ] { dedupe: false } 1`] = `
 [
   "Dehydrated JSON v1",
   [
@@ -125,7 +279,7 @@ exports[`dehydrate > dehydrate [ { a: 'a', b: 'b' }, { a: 'a', b: 'b' }, { a: 'a
 ]
 `;
 
-exports[`dehydrate > dehydrate [ { a: 'a', b: 'b' }, { a: 'c', b: 'd' }, { b: 'b', a: 'a' }, …(2) ] undefined 1`] = `
+exports[`Flatpack > dehydrate [ { a: 'a', b: 'b' }, { a: 'c', b: 'd' }, { b: 'b', a: 'a' }, …(2) ] undefined 1`] = `
 [
   "Dehydrated JSON v1",
   [
@@ -163,7 +317,7 @@ exports[`dehydrate > dehydrate [ { a: 'a', b: 'b' }, { a: 'c', b: 'd' }, { b: 'b
 ]
 `;
 
-exports[`dehydrate > dehydrate [ {}, {}, {} ] undefined 1`] = `
+exports[`Flatpack > dehydrate [ {}, {}, {} ] undefined 1`] = `
 [
   "Dehydrated JSON v1",
   [
@@ -180,7 +334,7 @@ exports[`dehydrate > dehydrate [ {}, {}, {} ] undefined 1`] = `
 ]
 `;
 
-exports[`dehydrate > dehydrate [ 1, 2 ] undefined 1`] = `
+exports[`Flatpack > dehydrate [ 1, 2 ] undefined 1`] = `
 [
   "Dehydrated JSON v1",
   [
@@ -193,7 +347,7 @@ exports[`dehydrate > dehydrate [ 1, 2 ] undefined 1`] = `
 ]
 `;
 
-exports[`dehydrate > dehydrate [ 1n, 'hello', /\\w+/g, {}, [], 'hello' ] undefined 1`] = `
+exports[`Flatpack > dehydrate [ 1n, 'hello', /\\w+/g, {}, [], 'hello' ] undefined 1`] = `
 [
   "Dehydrated JSON v1",
   [
@@ -244,7 +398,7 @@ exports[`dehydrate > dehydrate [ 1n, 'hello', /\\w+/g, {}, [], 'hello' ] undefin
 ]
 `;
 
-exports[`dehydrate > dehydrate [ 1n, 2n, 1n, 2n, 9007199254740991n, -9007199254740991n, …(2) ] undefined 1`] = `
+exports[`Flatpack > dehydrate [ 1n, 2n, 1n, 2n, 9007199254740991n, -9007199254740991n, …(2) ] undefined 1`] = `
 [
   "Dehydrated JSON v1",
   [
@@ -296,7 +450,7 @@ exports[`dehydrate > dehydrate [ 1n, 2n, 1n, 2n, 9007199254740991n, -90071992547
 ]
 `;
 
-exports[`dehydrate > dehydrate [ Array(3) ] undefined 1`] = `
+exports[`Flatpack > dehydrate [ Array(3) ] undefined 1`] = `
 [
   "Dehydrated JSON v1",
   [
@@ -320,7 +474,7 @@ exports[`dehydrate > dehydrate [ Array(3) ] undefined 1`] = `
 ]
 `;
 
-exports[`dehydrate > dehydrate [ Map{ 'a' => 1, 'b' => 2, 'p' => 3 }, Map{ 'a' => 1, 'b' => 2, 'p' => 3 } ] undefined 1`] = `
+exports[`Flatpack > dehydrate [ Map{ 'a' => 1, 'b' => 2, 'p' => 3 }, Map{ 'a' => 1, 'b' => 2, 'p' => 3 } ] undefined 1`] = `
 [
   "Dehydrated JSON v1",
   [
@@ -354,7 +508,7 @@ exports[`dehydrate > dehydrate [ Map{ 'a' => 1, 'b' => 2, 'p' => 3 }, Map{ 'a' =
 ]
 `;
 
-exports[`dehydrate > dehydrate [ Set{ 'a', 'b', 'c' }, Set{ 'a', 'b', 'c' }, Set{ 'a', 'b', 'c' } ] undefined 1`] = `
+exports[`Flatpack > dehydrate [ Set{ 'a', 'b', 'c' }, Set{ 'a', 'b', 'c' }, Set{ 'a', 'b', 'c' } ] undefined 1`] = `
 [
   "Dehydrated JSON v1",
   [
@@ -379,7 +533,7 @@ exports[`dehydrate > dehydrate [ Set{ 'a', 'b', 'c' }, Set{ 'a', 'b', 'c' }, Set
 ]
 `;
 
-exports[`dehydrate > dehydrate [] undefined 1`] = `
+exports[`Flatpack > dehydrate [] undefined 1`] = `
 [
   "Dehydrated JSON v1",
   [
@@ -388,7 +542,7 @@ exports[`dehydrate > dehydrate [] undefined 1`] = `
 ]
 `;
 
-exports[`dehydrate > dehydrate { a: [ 1 ] } undefined 1`] = `
+exports[`Flatpack > dehydrate { a: [ 1 ] } undefined 1`] = `
 [
   "Dehydrated JSON v1",
   [
@@ -413,7 +567,7 @@ exports[`dehydrate > dehydrate { a: [ 1 ] } undefined 1`] = `
 ]
 `;
 
-exports[`dehydrate > dehydrate { a: { a: 'a', b: 'b' }, b: { a: 'c', b: 'd' }, …(11) } undefined 1`] = `
+exports[`Flatpack > dehydrate { a: { a: 'a', b: 'b' }, b: { a: 'c', b: 'd' }, …(11) } undefined 1`] = `
 [
   "Dehydrated JSON v1",
   [
@@ -568,7 +722,7 @@ exports[`dehydrate > dehydrate { a: { a: 'a', b: 'b' }, b: { a: 'c', b: 'd' }, �
 ]
 `;
 
-exports[`dehydrate > dehydrate { a: { a: 'a', b: 42 } } undefined 1`] = `
+exports[`Flatpack > dehydrate { a: { a: 'a', b: 42 } } undefined 1`] = `
 [
   "Dehydrated JSON v1",
   [
@@ -605,7 +759,7 @@ exports[`dehydrate > dehydrate { a: { a: 'a', b: 42 } } undefined 1`] = `
 ]
 `;
 
-exports[`dehydrate > dehydrate { a: { b: 1 } } undefined 1`] = `
+exports[`Flatpack > dehydrate { a: { b: 1 } } undefined 1`] = `
 [
   "Dehydrated JSON v1",
   [
@@ -640,7 +794,7 @@ exports[`dehydrate > dehydrate { a: { b: 1 } } undefined 1`] = `
 ]
 `;
 
-exports[`dehydrate > dehydrate { a: 1 } undefined 1`] = `
+exports[`Flatpack > dehydrate { a: 1 } undefined 1`] = `
 [
   "Dehydrated JSON v1",
   [
@@ -661,7 +815,7 @@ exports[`dehydrate > dehydrate { a: 1 } undefined 1`] = `
 ]
 `;
 
-exports[`dehydrate > dehydrate { fruit: [ 'apple', 'banana', 'apple', 'banana', 'apple', 'pineapple' ], …(2) } undefined 1`] = `
+exports[`Flatpack > dehydrate { fruit: [ 'apple', 'banana', 'apple', 'banana', 'apple', 'pineapple' ], …(2) } undefined 1`] = `
 [
   "Dehydrated JSON v1",
   [
@@ -701,7 +855,7 @@ exports[`dehydrate > dehydrate { fruit: [ 'apple', 'banana', 'apple', 'banana', 
 ]
 `;
 
-exports[`dehydrate > dehydrate { values: [ 'apple', 'banana', 'pineapple' ], …(1) } undefined 1`] = `
+exports[`Flatpack > dehydrate { values: [ 'apple', 'banana', 'pineapple' ], …(1) } undefined 1`] = `
 [
   "Dehydrated JSON v1",
   [
@@ -737,7 +891,7 @@ exports[`dehydrate > dehydrate { values: [ 'apple', 'banana', 'pineapple' ], …
 ]
 `;
 
-exports[`dehydrate > dehydrate {} undefined 1`] = `
+exports[`Flatpack > dehydrate {} undefined 1`] = `
 [
   "Dehydrated JSON v1",
   [
@@ -748,21 +902,21 @@ exports[`dehydrate > dehydrate {} undefined 1`] = `
 ]
 `;
 
-exports[`dehydrate > dehydrate 1 undefined 1`] = `
+exports[`Flatpack > dehydrate 1 undefined 1`] = `
 [
   "Dehydrated JSON v1",
   1,
 ]
 `;
 
-exports[`dehydrate > dehydrate 1.1 undefined 1`] = `
+exports[`Flatpack > dehydrate 1.1 undefined 1`] = `
 [
   "Dehydrated JSON v1",
   1.1,
 ]
 `;
 
-exports[`dehydrate > dehydrate Map{ 'apple' => 1, 'banana' => 2, 'pineapple' => 3 } undefined 1`] = `
+exports[`Flatpack > dehydrate Map{ 'apple' => 1, 'banana' => 2, 'pineapple' => 3 } undefined 1`] = `
 [
   "Dehydrated JSON v1",
   [
@@ -791,7 +945,7 @@ exports[`dehydrate > dehydrate Map{ 'apple' => 1, 'banana' => 2, 'pineapple' => 
 ]
 `;
 
-exports[`dehydrate > dehydrate Set{ 'apple', 'banana', 'pineapple' } undefined 1`] = `
+exports[`Flatpack > dehydrate Set{ 'apple', 'banana', 'pineapple' } undefined 1`] = `
 [
   "Dehydrated JSON v1",
   [
@@ -810,7 +964,7 @@ exports[`dehydrate > dehydrate Set{ 'apple', 'banana', 'pineapple' } undefined 1
 ]
 `;
 
-exports[`dehydrate > dehydrate Set{ 'pineapple', 'apple', 'banana' } undefined 1`] = `
+exports[`Flatpack > dehydrate Set{ 'pineapple', 'apple', 'banana' } undefined 1`] = `
 [
   "Dehydrated JSON v1",
   [
@@ -829,28 +983,28 @@ exports[`dehydrate > dehydrate Set{ 'pineapple', 'apple', 'banana' } undefined 1
 ]
 `;
 
-exports[`dehydrate > dehydrate false undefined 1`] = `
+exports[`Flatpack > dehydrate false undefined 1`] = `
 [
   "Dehydrated JSON v1",
   false,
 ]
 `;
 
-exports[`dehydrate > dehydrate null undefined 1`] = `
+exports[`Flatpack > dehydrate null undefined 1`] = `
 [
   "Dehydrated JSON v1",
   null,
 ]
 `;
 
-exports[`dehydrate > dehydrate true undefined 1`] = `
+exports[`Flatpack > dehydrate true undefined 1`] = `
 [
   "Dehydrated JSON v1",
   true,
 ]
 `;
 
-exports[`dehydrate > dehydrate undefined undefined 1`] = `
+exports[`Flatpack > dehydrate undefined undefined 1`] = `
 [
   "Dehydrated JSON v1",
 ]

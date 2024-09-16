@@ -488,6 +488,14 @@ export class FlatpackStore {
      */
     private softReset(): void {
         this.referenced.clear();
+        if (this.root) {
+            const idx = this.assignedElements.get(this.root);
+            if (idx) {
+                this.elements[idx] = undefined;
+                this.assignedElements.delete(this.root);
+            }
+        }
+        this.root = undefined;
     }
 
     #resolveRefs() {
@@ -545,6 +553,7 @@ export class FlatpackStore {
                     elements[i] = undefined;
                 }
             }
+            availableIndexes.reverse();
         }
 
         function addElements(root: RefElements) {

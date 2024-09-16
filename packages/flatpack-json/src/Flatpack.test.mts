@@ -1,16 +1,17 @@
 import { readFile } from 'node:fs/promises';
 
 import { findMatchingFileTypes } from '@cspell/filetypes';
+import { createPatch } from 'diff';
 import { describe, expect, test } from 'vitest';
 
 import { fromJSON } from './dehydrate.mjs';
-import { stringify, toJSON } from './Flatpack.mjs';
+import { FlatpackStore, stringify, toJSON } from './Flatpack.mjs';
 import { stringifyFlatpacked } from './stringify.mjs';
 
 const urlFileList = new URL('../fixtures/fileList.txt', import.meta.url);
 const baseFilename = new URL(import.meta.url).pathname.split('/').slice(-1).join('').split('.').slice(0, -2).join('.');
 
-describe('dehydrate', async () => {
+describe('Flatpack', async () => {
     test.each`
         data
         ${undefined}
@@ -110,6 +111,40 @@ describe('dehydrate', async () => {
         const hv = fromJSON(v) as typeof value;
         expect(hv.m).toEqual(value.m);
         expect(hv.n).toEqual(value.n);
+    });
+
+    // test.only.each`
+    //     data        | updated
+    //     ${{ a: 1 }} | ${{ a: 1, b: 1 }}
+    // `('Flatpack diff $data, $updated', ({ data, updated }) => {
+    //     const fp = new FlatpackStore(data);
+    //     const s0 = fp.stringify();
+    //     fp.setValue(updated);
+    //     expect(fromJSON(fp.toJSON())).toEqual(updated);
+    //     const s1 = fp.stringify();
+    //     const diff = createPatch('data', s0, s1);
+    //     expect(diff).toMatchSnapshot();
+    // });
+
+    test.each`
+        data                        | updated
+        ${undefined}                | ${undefined}
+        ${'string'}                 | ${'string'}
+        ${'string'}                 | ${'string + more'}
+        ${['a', 'b', 'a', 'b']}     | ${['a', 'b', 'a', 'b', 'c']}
+        ${{}}                       | ${{ a: 'a' }}
+        ${{ a: 1 }}                 | ${{ a: 1, b: 1 }}
+        ${{ a: { b: 1 } }}          | ${{ a: { b: 1 }, b: { a: 1 } }}
+        ${{ a: { a: 'a', b: 42 } }} | ${{ a: { a: 'a', b: 42 }, b: 42 }}
+        ${{ a: [1] }}               | ${{ a: [1, 2, 3] }}
+    `('Flatpack diff $data, $updated', ({ data, updated }) => {
+        const fp = new FlatpackStore(data);
+        const s0 = fp.stringify();
+        fp.setValue(updated);
+        expect(fromJSON(fp.toJSON())).toEqual(updated);
+        const s1 = fp.stringify();
+        const diff = createPatch('data', s0, s1);
+        expect(diff).toMatchSnapshot();
     });
 });
 
