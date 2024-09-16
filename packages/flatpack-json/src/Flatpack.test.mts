@@ -87,13 +87,6 @@ describe('Flatpack', async () => {
         ${'fileObjects'} | ${await sampleFileListObjects()} | ${undefined}
     `('dehydrate $data $options', async ({ name, data, options }) => {
         const v = toJSON(data, { dedupe: options?.dedupe });
-        const baseFilename = new URL(import.meta.url).pathname
-            .split('/')
-            .slice(-1)
-            .join('')
-            .split('.')
-            .slice(0, -2)
-            .join('.');
         await expect(stringifyFlatpacked(v)).toMatchFileSnapshot(`__snapshots__/${baseFilename}_${name}.jsonc`);
         await expect(JSON.stringify(v) + '\n').toMatchFileSnapshot(`__snapshots__/${baseFilename}_${name}.json`);
         await expect(JSON.stringify(data) + '\n').toMatchFileSnapshot(
