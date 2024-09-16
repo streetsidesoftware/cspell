@@ -4,9 +4,9 @@ import { findMatchingFileTypes } from '@cspell/filetypes';
 import { createPatch } from 'diff';
 import { describe, expect, test } from 'vitest';
 
-import { fromJSON } from './dehydrate.mjs';
 import { FlatpackStore, stringify, toJSON } from './Flatpack.mjs';
 import { stringifyFlatpacked } from './stringify.mjs';
+import { fromJSON } from './unpack.mjs';
 
 const urlFileList = new URL('../fixtures/fileList.txt', import.meta.url);
 const baseFilename = new URL(import.meta.url).pathname.split('/').slice(-1).join('').split('.').slice(0, -2).join('.');

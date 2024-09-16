@@ -3,9 +3,9 @@ import { readFile } from 'node:fs/promises';
 import { findMatchingFileTypes } from '@cspell/filetypes';
 import { describe, expect, test } from 'vitest';
 
-import { fromJSON } from './dehydrate.mts';
 import { stringify, toJSON } from './storage.mjs';
 import { stringifyFlatpacked } from './stringify.mjs';
+import { fromJSON } from './unpack.mjs';
 
 const urlFileList = new URL('../fixtures/fileList.txt', import.meta.url);
 
