@@ -6,10 +6,9 @@ import {
     BigIntElement,
     dataHeader,
     DateElement,
-    Flatpacked,
     Element,
     ElementType,
-    Unpacked,
+    Flatpacked,
     MapElement,
     ObjectElement,
     Primitive,
@@ -22,6 +21,7 @@ import {
     SetElement,
     StringElement,
     SubStringElement,
+    Unpacked,
 } from './types.mjs';
 
 export function fromJSON(data: Flatpacked): Unpacked {
