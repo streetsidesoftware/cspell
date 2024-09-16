@@ -75,6 +75,7 @@ describe('dehydrate', async () => {
         expect(fromJSON(v)).toEqual(data);
         expect(fromJSON(JSON.parse(JSON.stringify(v)))).toEqual(data);
         expect(fromJSON(JSON.parse(stringify(data)))).toEqual(data);
+        expect(fromJSON(JSON.parse(stringify(data, false)))).toEqual(data);
     });
 
     test.each`

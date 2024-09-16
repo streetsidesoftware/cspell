@@ -559,6 +559,6 @@ export function toJSON<V extends Serializable>(json: V, options?: NormalizeJsonO
     return new FlatpackStore(json, options).toJSON();
 }
 
-export function stringify(data: Unpacked): string {
-    return JSON.stringify(toJSON(data));
+export function stringify(data: Unpacked, pretty = true): string {
+    return pretty ? stringifyFlatpacked(toJSON(data)) : JSON.stringify(toJSON(data));
 }

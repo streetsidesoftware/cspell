@@ -5,6 +5,7 @@ import { describe, expect, test } from 'vitest';
 
 import { fromJSON } from './dehydrate.mts';
 import { stringify, toJSON } from './storage.mjs';
+import { stringifyFlatpacked } from './stringify.mjs';
 
 const urlFileList = new URL('../fixtures/fileList.txt', import.meta.url);
 
@@ -70,6 +71,7 @@ describe('dehydrate', async () => {
         expect(fromJSON(v)).toEqual(data);
         expect(fromJSON(JSON.parse(JSON.stringify(v)))).toEqual(data);
         expect(fromJSON(JSON.parse(stringify(data)))).toEqual(data);
+        expect(fromJSON(JSON.parse(stringify(data, false)))).toEqual(data);
     });
 
     test.each`
@@ -79,7 +81,7 @@ describe('dehydrate', async () => {
     `('dehydrate $data $options', ({ name, data, options }) => {
         const v = toJSON(data, { dedupe: options?.dedupe });
         expect(v).toMatchFileSnapshot(`__snapshots__/${name}.jsonc`);
-        expect(JSON.stringify(v) + '\n').toMatchFileSnapshot(`__snapshots__/${name}.json`);
+        expect(stringifyFlatpacked(v) + '\n').toMatchFileSnapshot(`__snapshots__/${name}.json`);
         expect(JSON.stringify(data) + '\n').toMatchFileSnapshot(`__snapshots__/${name}.data.json`);
         expect(fromJSON(v)).toEqual(data);
     });
