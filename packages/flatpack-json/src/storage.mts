@@ -9,7 +9,7 @@ import type {
     Flatpacked,
     Index,
     MapElement,
-    NormalizeJsonOptions,
+    FlatpackOptions,
     ObjectElement,
     ObjectWrapper,
     Primitive,
@@ -59,7 +59,7 @@ export class CompactStorage {
     private knownStrings = new Trie<TrieData>();
     private cachedElements = new Map<number, CacheMap>();
 
-    constructor(readonly options?: NormalizeJsonOptions) {
+    constructor(readonly options?: FlatpackOptions) {
         this.dedupe = options?.dedupe ?? true;
         this.sortKeys = options?.sortKeys || this.dedupe;
     }
@@ -448,7 +448,7 @@ function isObjectWrapper(value: unknown): value is ObjectWrapper {
     );
 }
 
-export function toJSON<V extends Serializable>(json: V, options?: NormalizeJsonOptions): Flatpacked {
+export function toJSON<V extends Serializable>(json: V, options?: FlatpackOptions): Flatpacked {
     return new CompactStorage(options).toJSON(json);
 }
 

@@ -15,17 +15,17 @@ import {
     type SubStringElement,
 } from './types.mjs';
 
-export interface IndexRef {
-    /** Index */
-    i: number;
+export interface BaseRef {
+    /** Unique id of the reference */
+    id: number;
 }
 
-export type FnIndexLookup = (ref: RefElement<unknown> | undefined) => Index;
+export type FnIndexLookup = (ref: RefElements | undefined) => Index;
 
-export interface RefElement<T> extends IndexRef {
+export interface RefElement<T> extends BaseRef {
     toElement(lookupFn: FnIndexLookup): T;
     clone(): RefElement<T>;
-    getDependencies(): RefElement<unknown>[] | undefined;
+    getDependencies(): RefElements[] | undefined;
 }
 
 export type RefElements =
@@ -49,11 +49,11 @@ export type RefElements =
 
 export type StringRefElements = SubStringRefElement | StringConcatRefElement | StringPrimitiveRefElement;
 
-export class BaseRefElement implements IndexRef {
-    i = 0;
+export class BaseRefElement implements BaseRef {
+    id = 0;
 
     setId(i: number): void {
-        this.i = i;
+        this.id = i;
     }
 }
 
@@ -121,7 +121,7 @@ export class ObjectRefElement extends BaseRefElement implements RefElement<Objec
         return new ObjectRefElement(this.#k, this.#v);
     }
 
-    getDependencies(): RefElement<unknown>[] | undefined {
+    getDependencies(): RefElements[] | undefined {
         return [this.#k, this.#v].filter((r) => !!r);
     }
 }
@@ -145,7 +145,7 @@ export class ObjectWrapperRefElement extends BaseRefElement implements RefElemen
         return new ObjectWrapperRefElement(this.#v);
     }
 
-    getDependencies(): RefElement<unknown>[] | undefined {
+    getDependencies(): RefElements[] | undefined {
         return this.#v ? [this.#v] : undefined;
     }
 }
@@ -169,7 +169,7 @@ export class SetRefElement extends BaseRefElement implements RefElement<SetEleme
         return new SetRefElement(this.#v);
     }
 
-    getDependencies(): RefElement<unknown>[] | undefined {
+    getDependencies(): RefElements[] | undefined {
         return this.#v ? [this.#v] : undefined;
     }
 
@@ -202,7 +202,7 @@ export class MapRefElement extends BaseRefElement implements RefElement<MapEleme
         return new MapRefElement(this.#k, this.#v);
     }
 
-    getDependencies(): RefElement<unknown>[] | undefined {
+    getDependencies(): RefElements[] | undefined {
         return [this.#k, this.#v].filter((r) => !!r);
     }
 
@@ -233,7 +233,7 @@ export class RegExpRefElement extends BaseRefElement implements RefElement<RegEx
         return new RegExpRefElement(this.#p, this.#f);
     }
 
-    getDependencies(): RefElement<unknown>[] | undefined {
+    getDependencies(): RefElements[] | undefined {
         return [this.#p, this.#f].filter((r) => !!r);
     }
 }
@@ -275,7 +275,7 @@ export class BigIntRefElement extends BaseRefElement implements RefElement<BigIn
         return new BigIntRefElement(this.#v);
     }
 
-    getDependencies(): RefElement<unknown>[] | undefined {
+    getDependencies(): RefElements[] | undefined {
         return [this.#v];
     }
 }
@@ -297,7 +297,7 @@ export class ArrayRefElement extends BaseRefElement implements RefElement<ArrayE
         if (!this.#v.length) {
             this.#hash = 0;
         }
-        this.#hash = simpleHash(this.#v.map((v) => v.i));
+        this.#hash = simpleHash(this.#v.map((v) => v.id));
     }
 
     setValues(values: RefElements[]): void {
@@ -329,7 +329,7 @@ export class ArrayRefElement extends BaseRefElement implements RefElement<ArrayE
         return new ArrayRefElement(this.#v);
     }
 
-    getDependencies(): RefElement<unknown>[] | undefined {
+    getDependencies(): RefElements[] | undefined {
         return this.#v;
     }
 }
@@ -374,7 +374,7 @@ export class SubStringRefElement extends BaseRefElement implements RefElement<Su
         return new SubStringRefElement(this.#v, this.#l, this.#o);
     }
 
-    getDependencies(): RefElement<unknown>[] | undefined {
+    getDependencies(): RefElements[] | undefined {
         return [this.#v];
     }
 }
@@ -411,7 +411,7 @@ export class StringConcatRefElement extends BaseRefElement implements RefElement
         return new StringConcatRefElement(this.#v);
     }
 
-    getDependencies(): RefElement<unknown>[] | undefined {
+    getDependencies(): RefElements[] | undefined {
         return this.#v;
     }
 }

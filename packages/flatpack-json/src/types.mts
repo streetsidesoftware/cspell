@@ -94,11 +94,16 @@ export type Flatpacked = [Header, ...Element[]];
 export type Unpacked = Readonly<Serializable>;
 export const blockSplitRegex = /^sha\d/;
 
-export interface NormalizeJsonOptions {
+export interface FlatpackOptions {
+    /**
+     * Sort keys in objects.
+     * Does not affect arrays, sets, or maps.
+     */
     sortKeys?: boolean;
     /**
      * Dedupe objects and arrays.
-     * Implies `sortKeys`.
+     * Implies {@linkcode sortKeys}.
+     * @default true
      */
     dedupe?: boolean;
 }

@@ -6,7 +6,6 @@ import {
     ObjectRefElement,
     ObjectWrapperRefElement,
     PrimitiveRefElement,
-    RefElement,
     RefElements,
     RegExpRefElement,
     SetRefElement,
@@ -19,7 +18,7 @@ import { stringifyFlatpacked } from './stringify.mjs';
 import { Trie } from './Trie.mjs';
 import type {
     Flatpacked,
-    NormalizeJsonOptions,
+    FlatpackOptions,
     ObjectWrapper,
     PrimitiveArray,
     PrimitiveObject,
@@ -46,7 +45,9 @@ const useSuffix = true;
 const maxCachedStringLen = 256;
 
 export class FlatpackStore {
-    private elements = new Set<RefElements>();
+    private knownElements = new Set<RefElements>();
+    private assignedElements = new Map<RefElements, number>();
+    private elements: (RefElements | undefined)[] = [undefined];
     private root: RefElements | undefined = undefined;
 
     private dedupe = true;
@@ -60,7 +61,7 @@ export class FlatpackStore {
      */
     private cache = new Map<unknown, RefElements>();
     /**
-     * Set of indexes that have been referenced by other indexes.
+     * Set of elements that have been referenced by other indexes.
      */
     private referenced = new Set<RefElements>();
     /**
@@ -82,19 +83,27 @@ export class FlatpackStore {
      */
     private knownStringsRev = new Trie<TrieData>();
 
+    private refUndefined: PrimitiveRefElement<undefined>;
+
     constructor(
-        json: Serializable,
-        readonly options?: NormalizeJsonOptions,
+        value: Serializable,
+        readonly options?: FlatpackOptions,
     ) {
         this.dedupe = options?.dedupe ?? true;
         this.sortKeys = options?.sortKeys || this.dedupe;
-        this.addValueAndElement(undefined, new PrimitiveRefElement(undefined));
-        this.root = this.valueToRef(json);
+        this.refUndefined = this.addValueAndElement(undefined, new PrimitiveRefElement(undefined));
+        this.root = this.#setValue(value);
     }
 
     setValue(value: Serializable): void {
+        this.#setValue(value);
+    }
+
+    #setValue(value: Serializable) {
         this.softReset();
         this.root = this.valueToRef(value);
+        this.#resolveRefs();
+        return this.root;
     }
 
     private nextId(): number {
@@ -102,9 +111,9 @@ export class FlatpackStore {
     }
 
     private addElement<T extends RefElements>(element: T): T {
-        if (this.elements.has(element)) return element;
+        if (this.knownElements.has(element)) return element;
         element.setId(this.nextId());
-        this.elements.add(element);
+        this.knownElements.add(element);
         return element;
     }
 
@@ -247,7 +256,7 @@ export class FlatpackStore {
             return element;
         }
         if (this.referenced.has(element)) return element;
-        this.elements.delete(element);
+        this.knownElements.delete(element);
         this.cache.set(value, found);
         return found;
     }
@@ -297,7 +306,7 @@ export class FlatpackStore {
         const foundValue = found.get(values);
         if (foundValue) {
             if (this.referenced.has(element)) return element;
-            this.elements.delete(element);
+            this.knownElements.delete(element);
             this.cache.set(value, foundValue);
             return foundValue;
         }
@@ -392,7 +401,7 @@ export class FlatpackStore {
         const foundValue = found.get(values);
         if (foundValue) {
             if (this.referenced.has(element)) return element;
-            this.elements.delete(element);
+            this.knownElements.delete(element);
             this.cache.set(value, foundValue);
             return foundValue;
         }
@@ -419,7 +428,7 @@ export class FlatpackStore {
         const found = cached.find((entry) => element.isEqual(entry));
         if (found) {
             if (this.referenced.has(element)) return element;
-            this.elements.delete(element);
+            this.knownElements.delete(element);
             if (cacheValue || this.cache.has(value)) {
                 this.cache.set(value, found);
             }
@@ -481,45 +490,87 @@ export class FlatpackStore {
         this.referenced.clear();
     }
 
+    #resolveRefs() {
+        if (!this.root) return;
+
+        const elements = this.elements;
+        const assigned = this.assignedElements;
+        const referenced = this.referenced;
+        const availableIndexes: number[] = [];
+
+        function addElement(ref: RefElements) {
+            if (assigned.has(ref)) return false;
+            const emptyCell = availableIndexes.pop();
+            if (emptyCell) {
+                assigned.set(ref, emptyCell);
+                elements[emptyCell] = ref;
+                return true;
+            }
+            const i = elements.push(ref) - 1;
+            assigned.set(ref, i);
+            return true;
+        }
+
+        function walk(ref: RefElements, action: (ref: RefElements) => boolean): void {
+            function _walk(ref: RefElements): void {
+                if (!action(ref)) return;
+                const deps = ref.getDependencies();
+                if (!deps) return;
+                for (const dep of deps) {
+                    _walk(dep);
+                }
+            }
+
+            _walk(ref);
+        }
+
+        function calcReferences(root: RefElements) {
+            referenced.clear();
+            walk(root, (ref) => {
+                if (referenced.has(ref)) return false;
+                referenced.add(ref);
+                return true;
+            });
+        }
+
+        function calcAvailableIndexes() {
+            availableIndexes.length = 0;
+            for (let i = 1; i < elements.length; i++) {
+                const ref = elements[i];
+                if (!ref || !referenced.has(ref)) {
+                    availableIndexes.push(i);
+                    if (ref) {
+                        assigned.delete(ref);
+                    }
+                    elements[i] = undefined;
+                }
+            }
+        }
+
+        function addElements(root: RefElements) {
+            walk(root, addElement);
+        }
+
+        calcReferences(this.root);
+        elements[0] = this.refUndefined;
+        assigned.set(this.refUndefined, 0);
+        calcAvailableIndexes();
+        addElements(this.root);
+    }
+
     toJSON(): Flatpacked {
         const data = [dataHeader] as Flatpacked;
-        const root = this.root;
-        if (root === undefined) return data;
+        const idxLookup = this.assignedElements;
+        const lookup = (ref: RefElements | undefined) => (ref && idxLookup.get(ref)) || 0;
 
-        const idxLookup = new Map<RefElement<unknown>, number>();
-        const refUndef = this.cache.get(undefined);
-        const elements: RefElement<unknown>[] = [];
-
-        if (refUndef) {
-            idxLookup.set(refUndef, 0);
-        }
-        function calcIndex(ref: RefElement<unknown> | undefined): number {
-            if (!ref) return 0;
-            let idx = idxLookup.get(ref);
-            if (idx === undefined) {
-                idx = idxLookup.size;
-                idxLookup.set(ref, idx);
+        const elements = this.elements;
+        for (let i = 1; i < elements.length; i++) {
+            const element = elements[i];
+            if (!element) {
+                data.push(0);
+                continue;
             }
-            return idx;
-        }
-
-        function walkRefs(ref: RefElement<unknown>): void {
-            const s = idxLookup.size;
-            calcIndex(ref);
-            if (s === idxLookup.size) return;
-            elements.push(ref);
-            const deps = ref.getDependencies();
-            if (!deps) return;
-            const sorted = [...deps].sort((a, b) => a.i - b.i);
-            for (const dep of sorted) {
-                walkRefs(dep);
-            }
-        }
-
-        walkRefs(root);
-
-        for (const element of elements) {
-            const value = element.toElement((ref) => (ref && idxLookup.get(ref)) || 0);
+            const value = element.toElement(lookup);
             if (value === undefined) continue;
             data.push(value);
         }
@@ -555,7 +606,7 @@ function reverse(value: string | string[]): string[] {
     return [...value].reverse();
 }
 
-export function toJSON<V extends Serializable>(json: V, options?: NormalizeJsonOptions): Flatpacked {
+export function toJSON<V extends Serializable>(json: V, options?: FlatpackOptions): Flatpacked {
     return new FlatpackStore(json, options).toJSON();
 }
 
