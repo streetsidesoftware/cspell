@@ -113,19 +113,6 @@ describe('Flatpack', async () => {
         expect(hv.n).toEqual(value.n);
     });
 
-    // test.only.each`
-    //     data        | updated
-    //     ${{ a: 1 }} | ${{ a: 1, b: 1 }}
-    // `('Flatpack diff $data, $updated', ({ data, updated }) => {
-    //     const fp = new FlatpackStore(data);
-    //     const s0 = fp.stringify();
-    //     fp.setValue(updated);
-    //     expect(fromJSON(fp.toJSON())).toEqual(updated);
-    //     const s1 = fp.stringify();
-    //     const diff = createPatch('data', s0, s1);
-    //     expect(diff).toMatchSnapshot();
-    // });
-
     test.each`
         data                        | updated
         ${undefined}                | ${undefined}
