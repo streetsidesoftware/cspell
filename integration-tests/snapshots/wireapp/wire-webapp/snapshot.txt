@@ -3,7 +3,7 @@ Repository: wireapp/wire-webapp
 Url: "https://github.com/wireapp/wire-webapp.git"
 Args: ["src/script/**/*.{js,ts,tsx,md}"]
 Lines:
- CSpell: Files checked: 1217, Issues found: 2723 in 644 files.
+ CSpell: Files checked: 1224, Issues found: 2727 in 644 files.
  exit code: 1
 src/script/Config.ts:20:25     - Unknown word (wireapp)    -- import {Runtime} from '@wireapp/commons';
 src/script/Config.ts:83:31     - Unknown word (acces)      -- DataDog client api keys acces */
@@ -482,7 +482,7 @@ src/script/calling/CallingRepository.ts:1166:15   - Unknown word (conv)         
 src/script/calling/CallingRepository.ts:1166:7    - Unknown word (convid)          -- convid: convId,
 src/script/calling/CallingRepository.ts:1168:57   - Unknown word (VSTREAMS)        -- this.wUser, convId, VSTREAMS.LIST, JSON.stringify
 src/script/calling/CallingRepository.ts:116:3     - Unknown word (clientid)        -- clientid: string;
-src/script/calling/CallingRepository.ts:1199:11   - Unknown word (Countly)         -- if (isCountlyEnabledAtCurrentEnvironment
+src/script/calling/CallingRepository.ts:1194:11   - Unknown word (Countly)         -- if (isCountlyEnabledAtCurrentEnvironment
 src/script/calling/CallingRepository.ts:1241:55   - Unknown word (ESTAB)           -- = [CALL_STATE.MEDIA_ESTAB, CALL_STATE.ANSWERED
 src/script/calling/CallingRepository.ts:124:17    - Unknown word (clientid)        -- type Clients = {clientid: string; userid: string
 src/script/calling/CallingRepository.ts:1291:70   - Unknown word (screensharing)   -- V preferences) when screensharing is activated
@@ -627,6 +627,11 @@ src/script/components/Avatar/UserAvatar/UserAvatar.test.tsx:22:30     - Unknown 
 src/script/components/Avatar/UserAvatar/UserAvatar.tsx:22:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 src/script/components/Avatar/UserAvatar/UserAvatar.tsx:24:50     - Unknown word (wireapp)    -- AvailabilityType} from '@wireapp/protocol-messaging'
 src/script/components/Avatar/UserAvatar/UserAvatar.tsx:25:23     - Unknown word (wireapp)    -- import {COLOR} from '@wireapp/react-ui-kit';
+src/script/components/ConfigToolbar/ConfigToolbar.tsx:22:25     - Unknown word (keyboardjs) -- import keyboardjs from 'keyboardjs';
+src/script/components/ConfigToolbar/ConfigToolbar.tsx:22:8      - Unknown word (keyboardjs) -- import keyboardjs from 'keyboardjs';
+src/script/components/ConfigToolbar/ConfigToolbar.tsx:24:39     - Unknown word (wireapp)    -- Input, Switch} from '@wireapp/react-ui-kit';
+src/script/components/ConfigToolbar/ConfigToolbar.tsx:42:5      - Unknown word (keyboardjs) -- keyboardjs.bind(['command+shift
+src/script/components/ConfigToolbar/ConfigToolbar.tsx:45:7      - Unknown word (keyboardjs) -- keyboardjs.unbind(['command+shift
 src/script/components/ConnectRequests/ConnectionRequests.tsx:22:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 src/script/components/ConnectRequests/ConnectionRequests.tsx:24:85     - Unknown word (wireapp)    -- useMatchMedia} from '@wireapp/react-ui-kit';
 src/script/components/Conversation/Conversation.tsx:227:13    - Unknown word (Giphy)      -- const openGiphy = (text: string) =>
@@ -950,7 +955,7 @@ src/script/components/Modals/GroupCreation/GroupCreationModal.tsx:22:30     - Un
 src/script/components/Modals/GroupCreation/GroupCreationModal.tsx:23:38     - Unknown word (wireapp)    -- ConversationProtocol} from '@wireapp/api-client/lib/conversation
 src/script/components/Modals/GroupCreation/GroupCreationModal.tsx:24:46     - Unknown word (wireapp)    -- deratingBackendsError} from '@wireapp/core/lib/errors';
 src/script/components/Modals/GroupCreation/GroupCreationModal.tsx:27:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
-src/script/components/Modals/GroupCreation/GroupCreationModal.tsx:29:47     - Unknown word (wireapp)    -- ButtonVariant, Select} from '@wireapp/react-ui-kit';
+src/script/components/Modals/GroupCreation/GroupCreationModal.tsx:29:55     - Unknown word (wireapp)    -- Option, Select} from '@wireapp/react-ui-kit';
 src/script/components/Modals/GroupCreation/GroupCreationModal.tsx:30:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
 src/script/components/Modals/InviteModal/InviteModal.test.tsx:32:21     - Unknown word (janek)      -- const userName = 'janek';
 src/script/components/Modals/InviteModal/InviteModal.tsx:22:25     - Unknown word (wireapp)    -- import {Runtime} from '@wireapp/commons';
@@ -1066,19 +1071,19 @@ src/script/components/calling/CallingOverlayContainer.tsx:22:26     - Unknown wo
 src/script/components/calling/ChooseScreen.tsx:22:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 src/script/components/calling/DetachedCallingCell/DetachedCallingCell.tsx:20:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 src/script/components/calling/FullscreenVideoCall.styles.ts:38:52     - Unknown word (inversed)   -- accent-color-highlight-inversed);
-src/script/components/calling/FullscreenVideoCall.tsx:209:22    - Unknown word (Callaudio)  -- label: t('videoCallaudioInputMicrophone'),
-src/script/components/calling/FullscreenVideoCall.tsx:227:22    - Unknown word (Callaudio)  -- label: t('videoCallaudioOutputSpeaker'),
+src/script/components/calling/FullscreenVideoCall.tsx:227:22    - Unknown word (Callaudio)  -- label: t('videoCallaudioInputMicrophone'),
 src/script/components/calling/FullscreenVideoCall.tsx:22:45     - Unknown word (wireapp)    -- tConversationRoleName} from '@wireapp/api-client/lib/conversation
 src/script/components/calling/FullscreenVideoCall.tsx:23:26     - Unknown word (wireapp)    -- import {TabIndex} from '@wireapp/react-ui-kit/lib/types
+src/script/components/calling/FullscreenVideoCall.tsx:245:22    - Unknown word (Callaudio)  -- label: t('videoCallaudioOutputSpeaker'),
 src/script/components/calling/FullscreenVideoCall.tsx:25:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
-src/script/components/calling/FullscreenVideoCall.tsx:266:20    - Unknown word (Callbackground) -- label: t('videoCallbackgroundBlurHeadline'),
-src/script/components/calling/FullscreenVideoCall.tsx:271:24    - Unknown word (Callbackground) -- label: t('videoCallbackgroundBlur'),
-src/script/components/calling/FullscreenVideoCall.tsx:277:24    - Unknown word (Callbackground) -- label: t('videoCallbackgroundNotBlurred'),
 src/script/components/calling/FullscreenVideoCall.tsx:27:27     - Unknown word (wireapp)    -- import {CALL_TYPE} from '@wireapp/avs';
-src/script/components/calling/FullscreenVideoCall.tsx:287:22    - Unknown word (Callvideo)      -- label: t('videoCallvideoInputCamera'),
+src/script/components/calling/FullscreenVideoCall.tsx:286:20    - Unknown word (Callbackground) -- label: t('videoCallbackgroundBlurHeadline'),
 src/script/components/calling/FullscreenVideoCall.tsx:28:76     - Unknown word (wireapp)    -- ButtonVariant, Select} from '@wireapp/react-ui-kit';
-src/script/components/calling/FullscreenVideoCall.tsx:70:10     - Unknown word (bluroff)    -- OFF = 'bluroff',
-src/script/components/calling/FullscreenVideoCall.tsx:71:9      - Unknown word (bluron)     -- ON = 'bluron',
+src/script/components/calling/FullscreenVideoCall.tsx:291:24    - Unknown word (Callbackground) -- label: t('videoCallbackgroundBlur'),
+src/script/components/calling/FullscreenVideoCall.tsx:297:24    - Unknown word (Callbackground) -- label: t('videoCallbackgroundNotBlurred'),
+src/script/components/calling/FullscreenVideoCall.tsx:307:22    - Unknown word (Callvideo)      -- label: t('videoCallvideoInputCamera'),
+src/script/components/calling/FullscreenVideoCall.tsx:71:10     - Unknown word (bluroff)    -- OFF = 'bluroff',
+src/script/components/calling/FullscreenVideoCall.tsx:72:9      - Unknown word (bluron)     -- ON = 'bluron',
 src/script/components/calling/GroupVideoGrid.test.tsx:22:29     - Unknown word (wireapp)    -- VIDEO_STATE} from '@wireapp/avs';
 src/script/components/calling/GroupVideoGrid.test.tsx:49:28     - Unknown word (Anot)       -- participant.user.name('Anot Heruser');
 src/script/components/calling/GroupVideoGrid.test.tsx:49:33     - Unknown word (Heruser)    -- participant.user.name('Anot Heruser');
@@ -1926,16 +1931,16 @@ src/script/page/AppLock/AppLock.tsx:45:12     - Unknown word (applock)    -- SET
 src/script/page/AppLock/AppLock.tsx:46:19     - Unknown word (applock)    -- SETUP_CHANGE = 'applock.setup_change',
 src/script/page/AppLock/AppLock.tsx:73:38     - Unknown word (APPLOCK)    -- setState] = useState<APPLOCK_STATE>(APPLOCK_STATE
 src/script/page/AppLock/AppLock.tsx:73:53     - Unknown word (APPLOCK)    -- useState<APPLOCK_STATE>(APPLOCK_STATE.NONE);
-src/script/page/AppMain.tsx:211:11    - Unknown word (initialise) -- await initialiseMLSMigrationFlow({
+src/script/page/AppMain.tsx:213:11    - Unknown word (initialise) -- await initialiseMLSMigrationFlow({
 src/script/page/AppMain.tsx:24:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 src/script/page/AppMain.tsx:26:52     - Unknown word (wireapp)    -- useMatchMedia} from '@wireapp/react-ui-kit';
 src/script/page/AppMain.tsx:27:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
-src/script/page/AppMain.tsx:55:9      - Unknown word (initialise) -- import {initialiseMLSMigrationFlow} from
+src/script/page/AppMain.tsx:57:9      - Unknown word (initialise) -- import {initialiseMLSMigrationFlow} from
 src/script/page/LeftSidebar/LeftSidebar.tsx:25:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
 src/script/page/LeftSidebar/LeftSidebar.tsx:30:53     - Unknown word (Temporaty)  -- Conversations} from './panels/TemporatyGuestConversations';
 src/script/page/LeftSidebar/UserDetails/UserDetails.tsx:22:26     - Unknown word (wireapp)    -- import {TabIndex} from '@wireapp/react-ui-kit/lib/types
 src/script/page/LeftSidebar/panels/Conversations/ConnectionRequests/ConnectionRequests.tsx:20:26     - Unknown word (wireapp)    -- import {TabIndex} from '@wireapp/react-ui-kit/lib/types
-src/script/page/LeftSidebar/panels/Conversations/ConnectionRequests/ConnectionRequests.tsx:52:28     - Unknown word (UNFOCUSABLE) -- li tabIndex={TabIndex.UNFOCUSABLE} data-uie-name="connection
+src/script/page/LeftSidebar/panels/Conversations/ConnectionRequests/ConnectionRequests.tsx:50:28     - Unknown word (UNFOCUSABLE) -- li tabIndex={TabIndex.UNFOCUSABLE} data-uie-name="connection
 src/script/page/LeftSidebar/panels/Conversations/ConversationHeader/ConversationHeader.tsx:24:64     - Unknown word (wireapp)    -- SearchIcon} from '@wireapp/react-ui-kit';
 src/script/page/LeftSidebar/panels/Conversations/ConversationHeader/ConversationHeader.tsx:25:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
 src/script/page/LeftSidebar/panels/Conversations/ConversationTab/ConversationFolderTab.tsx:116:47    - Unknown word (conv)       -- unreadConversations.some(conv => conv.id === conversation
@@ -1946,11 +1951,10 @@ src/script/page/LeftSidebar/panels/Conversations/Conversations.tsx:227:69    - U
 src/script/page/LeftSidebar/panels/Conversations/Conversations.tsx:23:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 src/script/page/LeftSidebar/panels/Conversations/Conversations.tsx:25:56     - Unknown word (wireapp)    -- useMatchMedia} from '@wireapp/react-ui-kit';
 src/script/page/LeftSidebar/panels/Conversations/Conversations.tsx:26:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
-src/script/page/LeftSidebar/panels/Conversations/ConversationsList.test.tsx:100:11    - Unknown word (unser)      -- const unserNames = ['Alice', 'Bob
-src/script/page/LeftSidebar/panels/Conversations/ConversationsList.test.tsx:101:27    - Unknown word (unser)      -- const conversations = unserNames.map(create1to1Conversati
-src/script/page/LeftSidebar/panels/Conversations/ConversationsList.test.tsx:105:5     - Unknown word (unser)      -- unserNames.forEach(userName
+src/script/page/LeftSidebar/panels/Conversations/ConversationsList.test.tsx:104:11    - Unknown word (unser)      -- const unserNames = ['Alice', 'Bob
+src/script/page/LeftSidebar/panels/Conversations/ConversationsList.test.tsx:105:27    - Unknown word (unser)      -- const conversations = unserNames.map(create1to1Conversati
+src/script/page/LeftSidebar/panels/Conversations/ConversationsList.test.tsx:109:5     - Unknown word (unser)      -- unserNames.forEach(userName
 src/script/page/LeftSidebar/panels/Conversations/ConversationsList.test.tsx:21:57     - Unknown word (wireapp)    -- CONVERSATION_TYPE} from '@wireapp/api-client/lib/conversation
-src/script/page/LeftSidebar/panels/Conversations/ConversationsList.tsx:23:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
 src/script/page/LeftSidebar/panels/Conversations/EmptyConversationList/EmptyConversationList.styles.ts:51:14     - Unknown word (seperator)  -- export const seperator: CSSObject = {
 src/script/page/LeftSidebar/panels/Conversations/EmptyConversationList/EmptyConversationList.tsx:102:22    - Unknown word (seperator)  -- <span css={seperator}>{t('conversationButtonSepara
 src/script/page/LeftSidebar/panels/Conversations/EmptyConversationList/EmptyConversationList.tsx:22:58     - Unknown word (wireapp)    -- LinkVariant} from '@wireapp/react-ui-kit';
@@ -1972,8 +1976,8 @@ src/script/page/LeftSidebar/panels/Preferences.tsx:26:30     - Unknown word (wir
 src/script/page/LeftSidebar/panels/Preferences.tsx:97:24     - Unknown word (UNFOCUSABLE) -- tabIndex={TabIndex.UNFOCUSABLE}
 src/script/page/LeftSidebar/panels/StartUI/PeopleTab.tsx:22:35     - Unknown word (wireapp)    -- BackendErrorLabel} from '@wireapp/api-client/lib/http
 src/script/page/LeftSidebar/panels/StartUI/PeopleTab.tsx:27:19     - Unknown word (Userlist)   -- import {UserList, UserlistMode} from 'Components
-src/script/page/LeftSidebar/panels/StartUI/PeopleTab.tsx:312:23    - Unknown word (Userlist)   -- mode={UserlistMode.COMPACT}
-src/script/page/LeftSidebar/panels/StartUI/PeopleTab.tsx:336:23    - Unknown word (Userlist)   -- mode={UserlistMode.OTHERS}
+src/script/page/LeftSidebar/panels/StartUI/PeopleTab.tsx:307:23    - Unknown word (Userlist)   -- mode={UserlistMode.COMPACT}
+src/script/page/LeftSidebar/panels/StartUI/PeopleTab.tsx:324:23    - Unknown word (Userlist)   -- mode={UserlistMode.OTHERS}
 src/script/page/LeftSidebar/panels/StartUI/ServicesTab.tsx:22:39     - Unknown word (wireapp)    -- ButtonVariant} from '@wireapp/react-ui-kit';
 src/script/page/LeftSidebar/panels/StartUI/StartUI.tsx:23:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 src/script/page/LeftSidebar/panels/StartUI/components/GroupList.test.tsx:21:35     - Unknown word (wireapp)    -- CONVERSATION_TYPE} from '@wireapp/api-client/lib/conversation
@@ -2608,7 +2612,7 @@ src/script/util/TypePredicateUtil.ts:21:35     - Unknown word (wireapp)    -- Ba
 src/script/util/conversationMessages.test.ts:46:20     - Unknown word (Arjita)     -- senderName: 'Arjita',
 src/script/util/conversationMessages.test.ts:51:25     - Unknown word (Arjita)     -- const expected = `Arjita. At 5:15 PM. with file
 src/script/util/isDetachedCallingFeatureEnabled.ts:20:25     - Unknown word (wireapp)    -- import {Runtime} from '@wireapp/commons';
-src/script/util/isDetachedCallingFeatureEnabled.ts:25:85     - Unknown word (Popout)     -- sktopConfig()?.supportsCallingPopoutWindow) : true;
+src/script/util/isDetachedCallingFeatureEnabled.ts:29:85     - Unknown word (Popout)     -- sktopConfig()?.supportsCallingPopoutWindow) : true;
 src/script/util/messageRenderer.test.ts:118:58    - Unknown word (ohoh)       -- quot;javascript:alert('ohoh!')&quot;&gt;what?&lt
 src/script/util/messageRenderer.test.ts:120:55    - Unknown word (ohoh)       -- "javascript:alert(\'ohoh!\')">what?</a>')).toBe
 src/script/util/messageRenderer.test.ts:162:15    - Unknown word (endlines)   -- it('renders endlines to <br>', () => {
