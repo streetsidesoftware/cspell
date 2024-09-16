@@ -558,6 +558,12 @@ export class FlatpackStore {
 
         function addElements(root: RefElements) {
             walk(root, addElement);
+
+            let i = elements.length - 1;
+            for (; i > 0 && elements[i] === undefined; i--) {
+                // empty
+            }
+            elements.length = i + 1;
         }
 
         calcReferences(this.root);

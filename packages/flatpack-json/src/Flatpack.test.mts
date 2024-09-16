@@ -12,6 +12,8 @@ const urlFileList = new URL('../fixtures/fileList.txt', import.meta.url);
 const baseFilename = new URL(import.meta.url).pathname.split('/').slice(-1).join('').split('.').slice(0, -2).join('.');
 
 describe('Flatpack', async () => {
+    const sampleFiles = await sampleFileList();
+
     test.each`
         data
         ${undefined}
@@ -81,7 +83,7 @@ describe('Flatpack', async () => {
 
     test.each`
         name             | data                             | options
-        ${'fileList'}    | ${await sampleFileList()}        | ${undefined}
+        ${'fileList'}    | ${sampleFiles}                   | ${undefined}
         ${'fileObjects'} | ${await sampleFileListObjects()} | ${undefined}
     `('dehydrate $data $options', async ({ name, data, options }) => {
         const v = toJSON(data, { dedupe: options?.dedupe });
@@ -113,17 +115,22 @@ describe('Flatpack', async () => {
         expect(hv.n).toEqual(value.n);
     });
 
+    const shortSampleFiles = sampleFiles.slice(0, 20);
+
     test.each`
-        data                        | updated
-        ${undefined}                | ${undefined}
-        ${'string'}                 | ${'string'}
-        ${'string'}                 | ${'string + more'}
-        ${['a', 'b', 'a', 'b']}     | ${['a', 'b', 'a', 'b', 'c']}
-        ${{}}                       | ${{ a: 'a' }}
-        ${{ a: 1 }}                 | ${{ a: 1, b: 1 }}
-        ${{ a: { b: 1 } }}          | ${{ a: { b: 1 }, b: { a: 1 } }}
-        ${{ a: { a: 'a', b: 42 } }} | ${{ a: { a: 'a', b: 42 }, b: 42 }}
-        ${{ a: [1] }}               | ${{ a: [1, 2, 3] }}
+        data                         | updated
+        ${undefined}                 | ${undefined}
+        ${'string'}                  | ${'string'}
+        ${'string'}                  | ${'string + more'}
+        ${['a', 'b', 'a', 'b']}      | ${['a', 'b', 'a', 'b', 'c']}
+        ${['a', 'b', 'a', 'b', 'c']} | ${['a']}
+        ${{}}                        | ${{ a: 'a' }}
+        ${{ a: 1 }}                  | ${{ a: 1, b: 1 }}
+        ${{ a: { b: 1 } }}           | ${{ a: { b: 1 }, b: { a: 1 } }}
+        ${{ a: { a: 'a', b: 42 } }}  | ${{ a: { a: 'a', b: 42 }, b: 42 }}
+        ${{ a: [1] }}                | ${{ a: [1, 2, 3] }}
+        ${shortSampleFiles}          | ${[...shortSampleFiles.slice(0, 10), ...shortSampleFiles.slice(15)]}
+        ${shortSampleFiles}          | ${[...shortSampleFiles.slice(0, 10), ...shortSampleFiles.slice(15), ...shortSampleFiles.slice(10, 15)]}
     `('Flatpack diff $data, $updated', ({ data, updated }) => {
         const fp = new FlatpackStore(data);
         const s0 = fp.stringify();
