@@ -1,7 +1,7 @@
 export class Trie<T> {
     root: RootNode<T> = { d: undefined, c: new Map() };
 
-    add(key: string, data: T): void {
+    add(key: string | Iterable<string>, data: T): void {
         let node: TrieNode<T> = this.root;
         for (const k of key) {
             let c = node.c;
@@ -16,7 +16,7 @@ export class Trie<T> {
         }
     }
 
-    find(key: string): { data: T | undefined; found: string } | undefined {
+    find(key: string | Iterable<string>): { data: T | undefined; found: string } | undefined {
         let node: TrieNode<T> = this.root;
         let found = '';
         for (const k of key) {
