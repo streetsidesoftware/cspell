@@ -3,7 +3,7 @@ Repository: Azure/azure-rest-api-specs
 Url: "https://github.com/Azure/azure-rest-api-specs.git"
 Args: ["--config=cSpell.json","**/*.{md,ts,js}"]
 Lines:
- CSpell: Files checked: 2416, Issues found: 3032 in 868 files.
+ CSpell: Files checked: 2417, Issues found: 3041 in 869 files.
  exit code: 1
 CONTRIBUTING.md:24:6      - Unknown word (tocstop)    -- <!-- tocstop -->
 CONTRIBUTING.md:79:3      - Unknown word (Poli)       -- - PoliCheck -
@@ -131,7 +131,7 @@ specification/apimanagement/resource-manager/readme.md:96:47     - Unknown word 
 specification/apimanagement/resource-manager/readme.md:97:47     - Unknown word (apimworkspaces)                   -- iManagement/stable/2024-05-01/apimworkspaces.json
 specification/app/resource-manager/readme.python.md:9:26      - Unknown word (appcontainers) -- package-name: azure-mgmt-appcontainers
 specification/appcomplianceautomation/resource-manager/readme.az.md:9:17      - Unknown word (appcomplianceautomation) -- extensions: appcomplianceautomation
-specification/appconfiguration/resource-manager/readme.md:52:39     - Unknown word (packge)     -- apply only when `--tag=packge-2023-03-01` is specified
+specification/appconfiguration/resource-manager/readme.md:61:39     - Unknown word (packge)     -- apply only when `--tag=packge-2023-03-01` is specified
 specification/applicationinsights/ApplicationInsights.LiveMetrics/README.md:1:17      - Unknown word (Appliation) -- # Azure Monitor AppliationInsights LiveMetrics
 specification/applicationinsights/ApplicationInsights.LiveMetrics/README.md:48:133    - Unknown word (livemetrics) -- status>\<api-version>\livemetrics.json`:
 specification/applicationinsights/data-plane/Monitor.Exporters/readme.md:29:39     - Unknown word (schemaregistry) -- global settings for the schemaregistry.
@@ -208,8 +208,8 @@ specification/containerstorage/ContainerStorage.Management/README.md:61:35     -
 specification/cosmos-db/data-plane/readme.go.md:8:14      - Unknown word (storagetables) -- namespace: storagetables
 specification/cosmos-db/data-plane/readme.md:49:46     - Unknown word (outputm)    -- only supports XML input/outputm which is not supported
 specification/cosmos-db/resource-manager/readme.go.md:14:41     - Unknown word (armcosmos)  -- resourcemanager/cosmos/armcosmos
-specification/cosmos-db/resource-manager/readme.md:43:53     - Unknown word (mongorbac)  -- preview/2024-05-15-preview/mongorbac.json
-specification/cosmos-db/resource-manager/readme.md:50:53     - Unknown word (throughputpool) -- preview/2024-05-15-preview/throughputpool.json
+specification/cosmos-db/resource-manager/readme.md:42:53     - Unknown word (mongorbac)  -- preview/2024-09-01-preview/mongorbac.json
+specification/cosmos-db/resource-manager/readme.md:50:53     - Unknown word (throughputpool) -- preview/2024-09-01-preview/throughputpool.json
 specification/cost-management/resource-manager/readme.md:377:52    - Unknown word (Operatio)                   -- Response schema of OperatioAPI does not match Arm
 specification/cost-management/resource-manager/readme.md:43:48     - Unknown word (costallocation) -- tManagement/stable/2023-11-01/costallocation.json
 specification/cost-management/resource-manager/readme.md:468:74    - Unknown word (desgin)                     -- in cost allocation by desgin'
@@ -236,7 +236,7 @@ specification/desktopvirtualization/resource-manager/readme.cli.md:10:49     - U
 specification/desktopvirtualization/resource-manager/readme.md:43:19     - Unknown word (postive)    -- reason: False postive -> additionalProperties
 specification/developerhub/resource-manager/readme.go.md:7:34      - Unknown word (devhub)     -- sdk/resourcemanager/devhub/armdevhub
 specification/developerhub/resource-manager/readme.go.md:7:41      - Unknown word (armdevhub)  -- resourcemanager/devhub/armdevhub
-specification/deviceregistry/resource-manager/readme.md:42:57     - Unknown word (deviceregistry) -- preview/2023-11-01-preview/deviceregistry.json
+specification/deviceregistry/resource-manager/readme.md:42:57     - Unknown word (deviceregistry) -- preview/2024-09-01-preview/deviceregistry.json
 specification/deviceupdate/data-plane/readme.md:83:5      - Unknown word (supress)    -- - supress: R2010
 specification/devops/resource-manager/readme.go.md:14:41     - Unknown word (armdevops)  -- resourcemanager/devops/armdevops
 specification/devopsinfrastructure/resource-manager/readme.az.md:9:17      - Unknown word (devopsinfrastructure) -- extensions: devopsinfrastructure
@@ -414,8 +414,9 @@ specification/network/resource-manager/readme.cli.md:620:14    - Unknown word (v
 specification/network/resource-manager/readme.cli.md:625:14    - Unknown word (expressroutecircuitconnections)      -- - split: expressroutecircuitconnections
 specification/network/resource-manager/readme.cli.md:90:14     - Unknown word (routetables)   -- - split: routetables
 specification/network/resource-manager/readme.go.md:14:42     - Unknown word (armnetwork) -- resourcemanager/network/armnetwork
-specification/network/resource-manager/readme.md:3581:44   - Unknown word (groupmembership) -- no id is needed for groupmembership resources.
-specification/network/resource-manager/readme.md:3638:11   - Unknown word (bastionhost)     -- from: bastionhost.json
+specification/network/resource-manager/readme.md:3460:53   - Unknown word (seperate)   -- network specs reference a seperate systemData defined in
+specification/network/resource-manager/readme.md:3677:44   - Unknown word (groupmembership) -- no id is needed for groupmembership resources.
+specification/network/resource-manager/readme.md:3734:11   - Unknown word (bastionhost)     -- from: bastionhost.json
 specification/networkanalytics/resource-manager/readme.csharp.md:14:40     - Unknown word (networkanalytics) -- csharp-sdks-folder)/networkanalytics/management/[[ResourceProvider
 specification/networkcloud/resource-manager/readme.csharp.md:14:40     - Unknown word (networkcloud) -- csharp-sdks-folder)/networkcloud/management/Microsoft
 specification/newrelic/resource-manager/readme.python.md:10:23     - Unknown word (newrelicobservability) -- namespace: azure.mgmt.newrelicobservability
@@ -500,6 +501,7 @@ specification/search/data-plane/Azure.Search/readme.md:518:1     - Unknown word 
 specification/search/data-plane/Azure.Search/readme.md:582:33    - Unknown word (fasterxml)  -- replace(/(import com.fasterxml.jackson.annotation.JsonProper
 specification/search/resource-manager/readme.go.md:14:41     - Unknown word (armsearch)  -- resourcemanager/search/armsearch
 specification/security/resource-manager/readme.csharp.md:32:40     - Unknown word (securitycenter) -- csharp-sdks-folder)/securitycenter/Microsoft.Azure.Management
+specification/security/resource-manager/readme.md:117:48    - Unknown word (Recommedations) -- stable/2024-08-01/customRecommedations.json
 specification/securityinsights/resource-manager/readme.md:963:152   - Unknown word (reviewr)    -- supress this by Swagger reviewr.'
 specification/securityinsights/resource-manager/readme.md:965:14    - Unknown word (Tenent)     -- reason: 'Tenent Id should be a Guid
 specification/servicebus/resource-manager/readme.md:41:51     - Unknown word (migrationconfigs) -- preview/2021-01-01-preview/migrationconfigs.json
@@ -516,7 +518,7 @@ specification/sphere/resource-manager/readme.azureresourceschema.md:9:17      - 
 specification/sphere/resource-manager/readme.go.md:7:41      - Unknown word (armsphere)  -- resourcemanager/sphere/armsphere
 specification/splitio/resource-manager/readme.md:39:56     - Unknown word (splitio)    -- preview/2024-07-01-preview/splitio.json
 specification/sql/resource-manager/readme.go.md:7:38      - Unknown word (armsql)     -- resourcemanager/sql/armsql
-specification/sql/resource-manager/readme.md:2969:40   - Unknown word (sqlmanagement) -- csharp-sdks-folder)/sqlmanagement/Microsoft.Azure.Management
+specification/sql/resource-manager/readme.md:3119:40   - Unknown word (sqlmanagement) -- csharp-sdks-folder)/sqlmanagement/Microsoft.Azure.Management
 specification/storage/data-plane/Azure.Storage.Files.DataLake/readme.md:100:34    - Unknown word (predfined)  -- These parameters are predfined by storage specifications
 specification/storage/resource-manager/readme.go.md:14:42     - Unknown word (armstorage) -- resourcemanager/storage/armstorage
 specification/storage/resource-manager/readme.md:53:20     - Unknown word (ramoka)     -- approved-by: "@ramoka178"
