@@ -576,6 +576,8 @@ export class FlatpackStore {
                         assigned.delete(ref);
                     }
                     elements[i] = undefined;
+                } else {
+                    assigned.set(ref, i);
                 }
             }
             availableIndexes.reverse();
