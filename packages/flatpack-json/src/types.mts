@@ -41,6 +41,7 @@ export type ArrayBasedElements =
     | DateElement
     | MapElement
     | ObjectElement
+    | ObjectWrapperElement
     | RegExpElement
     | SetElement
     | StringElement
@@ -63,6 +64,10 @@ export type SubStringElement = readonly [type: ElementType.SubString, idx: Index
  * The second index is a reference to an array of values.
  */
 export type ObjectElement = readonly [type: ElementType.Object, keys: Index, values: Index];
+/**
+ * A Object wrapper element.
+ */
+export type ObjectWrapperElement = readonly [type: ElementType.Object, keys: 0, values: Index];
 /**
  * A set element. The first index is a reference to an array of keys.
  */
@@ -87,10 +92,10 @@ export type BigIntElement = readonly [type: ElementType.BigInt, value: Index];
  */
 export type ArrayElement = readonly [type: ElementType.Array, ...Index[]];
 
-export type Element = Readonly<PrimitiveElement | ObjectBasedElements | ArrayBasedElements>;
+export type FlattenedElement = Readonly<PrimitiveElement | ObjectBasedElements | ArrayBasedElements>;
 
 type Header = string;
-export type Flatpacked = [Header, ...Element[]];
+export type Flatpacked = [Header, ...FlattenedElement[]];
 export type Unpacked = Readonly<Serializable>;
 export const blockSplitRegex = /^sha\d/;
 

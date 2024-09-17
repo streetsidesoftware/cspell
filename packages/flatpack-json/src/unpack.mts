@@ -6,9 +6,9 @@ import {
     BigIntElement,
     dataHeader,
     DateElement,
-    Element,
     ElementType,
     Flatpacked,
+    FlattenedElement,
     MapElement,
     ObjectElement,
     Primitive,
@@ -201,7 +201,7 @@ function joinToString(parts: PrimitiveArray): string {
     return parts.map((a) => (Array.isArray(a) ? joinToString(a) : a)).join('');
 }
 
-function isArrayElement(value: Element): value is ArrayElement {
+function isArrayElement(value: FlattenedElement): value is ArrayElement {
     return Array.isArray(value) && value[0] === ElementType.Array;
 }
 

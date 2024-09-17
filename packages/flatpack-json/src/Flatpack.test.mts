@@ -79,6 +79,35 @@ describe('Flatpack', async () => {
         expect(fromJSON(JSON.parse(JSON.stringify(v)))).toEqual(data);
         expect(fromJSON(JSON.parse(stringify(data)))).toEqual(data);
         expect(fromJSON(JSON.parse(stringify(data, false)))).toEqual(data);
+
+        // Make sure we can rebuild from the Flattened data.
+        const fp = FlatpackStore.fromJSON(v);
+        expect(fromJSON(fp.toJSON())).toEqual(data);
+    });
+
+    test.each`
+        data
+        ${undefined}
+        ${'string'}
+        ${1}
+        ${1.1}
+        ${null}
+        ${true}
+        ${false}
+        ${[]}
+        ${[1, 2]}
+        ${['a', 'b', 'a', 'b']}
+        ${{}}
+        ${{ a: 1 }}
+        ${{ a: { b: 1 } }}
+        ${{ a: { a: 'a', b: 42 } }}
+        ${{ a: [1] }}
+    `('toJSON/fromJSON $data', ({ data }) => {
+        const v = toJSON(data);
+        expect(fromJSON(v)).toEqual(data);
+        const fp = FlatpackStore.fromJSON(v);
+        expect(fp.toJSON()).toEqual(v);
+        expect(fp.toValue()).toEqual(data);
     });
 
     test.each`
@@ -133,12 +162,20 @@ describe('Flatpack', async () => {
         ${shortSampleFiles}          | ${[...shortSampleFiles.slice(0, 10), ...shortSampleFiles.slice(15), ...shortSampleFiles.slice(10, 15)]}
     `('Flatpack diff $data, $updated', ({ data, updated }) => {
         const fp = new FlatpackStore(data);
+        const v = fp.toJSON();
         const s0 = fp.stringify();
         fp.setValue(updated);
         expect(fromJSON(fp.toJSON())).toEqual(updated);
         const s1 = fp.stringify();
         const diff = createPatch('data', s0, s1);
         expect(diff).toMatchSnapshot();
+
+        const fp2 = FlatpackStore.fromJSON(v);
+        expect(fp2.toJSON()).toEqual(v);
+        fp2.setValue(updated);
+        expect(fromJSON(fp.toJSON())).toEqual(updated);
+        const s2 = fp.stringify();
+        expect(s2).toEqual(s1);
     });
 });
 
