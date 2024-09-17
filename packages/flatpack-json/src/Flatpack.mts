@@ -599,6 +599,24 @@ export class FlatpackStore {
         assigned.set(this.refUndefined, 0);
         calcAvailableIndexes();
         addElements(this.root);
+        this.#cleanCache();
+    }
+
+    /**
+     * Remove objects from the cache after the FlatpackStore has been built.
+     */
+    #cleanCache() {
+        const toRemove = new Set<unknown>();
+
+        for (const key of this.cache.keys()) {
+            if (key && typeof key === 'object') {
+                toRemove.add(key);
+            }
+        }
+
+        for (const key of toRemove) {
+            this.cache.delete(key);
+        }
     }
 
     toJSON(): Flatpacked {

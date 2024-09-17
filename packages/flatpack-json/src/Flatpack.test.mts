@@ -177,6 +177,18 @@ describe('Flatpack', async () => {
         const s2 = fp.stringify();
         expect(s2).toEqual(s1);
     });
+
+    test('Updating the object used.', () => {
+        const data: Record<string, number | string | number[]> & { d: number[] } = { a: 1, b: 2, d: [1, 2, 3] };
+        const fp = new FlatpackStore(data);
+        const v = fp.toJSON();
+        expect(fromJSON(v)).toEqual(data);
+        data.c = 3;
+        data.d.push(4);
+        fp.setValue(data);
+        expect(fromJSON(fp.toJSON())).toEqual(data);
+        expect(fp.toJSON()).not.toEqual(v);
+    });
 });
 
 async function sampleFileList() {
