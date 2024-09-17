@@ -170,8 +170,11 @@ describe('Flatpack', async () => {
         expect(diff).toMatchSnapshot();
 
         const fp2 = FlatpackStore.fromJSON(v);
-        console.log('%s', createPatch('data', s0, fp2.stringify()));
         expect(fp2.toJSON()).toEqual(v);
+        fp2.setValue(updated);
+        expect(fromJSON(fp.toJSON())).toEqual(updated);
+        const s2 = fp.stringify();
+        expect(s2).toEqual(s1);
     });
 });
 
