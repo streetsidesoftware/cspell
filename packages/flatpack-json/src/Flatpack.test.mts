@@ -107,6 +107,7 @@ describe('Flatpack', async () => {
         expect(fromJSON(v)).toEqual(data);
         const fp = FlatpackStore.fromJSON(v);
         expect(fp.toJSON()).toEqual(v);
+        expect(fp.toValue()).toEqual(data);
     });
 
     test.each`

@@ -29,6 +29,7 @@ import type {
     Unpacked,
 } from './types.mjs';
 import { blockSplitRegex, dataHeader } from './types.mjs';
+import { fromJSON } from './unpack.mjs';
 
 const collator = new Intl.Collator('en', {
     usage: 'sort',
@@ -630,6 +631,10 @@ export class FlatpackStore {
 
     stringify(): string {
         return stringifyFlatpacked(this.toJSON());
+    }
+
+    toValue(): Unpacked {
+        return fromJSON(this.toJSON());
     }
 }
 
