@@ -1,7 +1,9 @@
+import { FlatpackedWrapper } from './flatpackUtil.mjs';
 import {
     ArrayRefElement,
     BigIntRefElement,
     DateRefElement,
+    isStringRefElements,
     MapRefElement,
     ObjectRefElement,
     ObjectWrapperRefElement,
@@ -86,13 +88,36 @@ export class FlatpackStore {
     private refUndefined: PrimitiveRefElement<undefined>;
 
     constructor(
-        value: Serializable,
+        value: Serializable | FlatpackedWrapper,
         readonly options?: FlatpackOptions,
     ) {
         this.dedupe = options?.dedupe ?? true;
         this.sortKeys = options?.sortKeys || this.dedupe;
         this.refUndefined = this.addValueAndElement(undefined, new PrimitiveRefElement(undefined));
-        this.root = this.#setValue(value);
+
+        if (value instanceof FlatpackedWrapper) {
+            this.#fromWrapper(value);
+        } else {
+            this.#setValue(value);
+        }
+    }
+
+    #fromWrapper(wrapper: FlatpackedWrapper) {
+        this.elements = wrapper.toRefElements();
+        this.root = this.elements[1];
+        for (let i = 1; i < this.elements.length; i++) {
+            const element = this.elements[i];
+            if (!element) continue;
+            this.knownElements.add(element);
+            if (element instanceof PrimitiveRefElement) {
+                this.addValueAndElement(element.value, element);
+            }
+            if (isStringRefElements(element)) {
+                this.addStringElement(element.value, element);
+            }
+        }
+        this.ids = this.elements.length;
+        this.#resolveRefs();
     }
 
     setValue(value: Serializable): void {
@@ -591,6 +616,14 @@ export class FlatpackStore {
         }
 
         return data;
+    }
+
+    static fromJSON(data: Flatpacked): FlatpackStore {
+        return new FlatpackStore(new FlatpackedWrapper(data));
+    }
+
+    static parse(content: string): FlatpackStore {
+        return new FlatpackStore(FlatpackedWrapper.parse(content));
     }
 
     stringify(): string {

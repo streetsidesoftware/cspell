@@ -79,6 +79,10 @@ describe('Flatpack', async () => {
         expect(fromJSON(JSON.parse(JSON.stringify(v)))).toEqual(data);
         expect(fromJSON(JSON.parse(stringify(data)))).toEqual(data);
         expect(fromJSON(JSON.parse(stringify(data, false)))).toEqual(data);
+
+        // Make sure we can rebuild from the Flattened data.
+        const fp = FlatpackStore.fromJSON(v);
+        expect(fromJSON(fp.toJSON())).toEqual(data);
     });
 
     test.each`

@@ -1,19 +1,20 @@
 import assert from 'node:assert';
 
-import {
-    type ArrayElement,
-    type BigIntElement,
-    type DateElement,
-    ElementType,
-    type Index,
-    type MapElement,
-    type ObjectElement,
-    type RegExpElement,
-    type SetElement,
+import type {
+    ArrayElement,
+    BigIntElement,
+    DateElement,
+    Index,
+    MapElement,
+    ObjectElement,
+    ObjectWrapperElement,
+    RegExpElement,
+    SetElement,
     SimplePrimitive,
-    type StringElement,
-    type SubStringElement,
+    StringElement,
+    SubStringElement,
 } from './types.mjs';
+import { ElementType } from './types.mjs';
 
 export interface BaseRef {
     /** Unique id of the reference */
@@ -57,7 +58,7 @@ export class BaseRefElement implements BaseRef {
     }
 }
 
-export class PrimitiveRefElement<T extends SimplePrimitive> extends BaseRefElement implements RefElement<T> {
+export class PrimitiveRefElementBase<T extends SimplePrimitive> extends BaseRefElement implements RefElement<T> {
     #v: T;
     constructor(value: T) {
         super();
@@ -80,13 +81,37 @@ export class PrimitiveRefElement<T extends SimplePrimitive> extends BaseRefEleme
     }
 }
 
-export class StringPrimitiveRefElement extends PrimitiveRefElement<string> {
+export class PrimitiveRefElement<T extends SimplePrimitive> extends PrimitiveRefElementBase<T> {
+    constructor(value: T) {
+        super(value);
+    }
+
+    static fromJSON<T extends SimplePrimitive>(value: T): PrimitiveRefElement<T> {
+        return new PrimitiveRefElement(value);
+    }
+}
+
+export class NumberRefElement extends PrimitiveRefElementBase<number> {
+    constructor(value: number) {
+        super(value);
+    }
+
+    static fromJSON(value: number): NumberRefElement {
+        return new NumberRefElement(value);
+    }
+}
+
+export class StringPrimitiveRefElement extends PrimitiveRefElementBase<string> {
     constructor(value: string) {
         super(value);
     }
 
     get length(): number {
         return this.value.length;
+    }
+
+    static fromJSON(value: string): StringPrimitiveRefElement {
+        return new StringPrimitiveRefElement(value);
     }
 }
 
@@ -124,6 +149,18 @@ export class ObjectRefElement extends BaseRefElement implements RefElement<Objec
     getDependencies(): RefElements[] | undefined {
         return [this.#k, this.#v].filter((r) => !!r);
     }
+
+    static fromJSON(elem: ObjectElement, resolve: (index: number) => RefElements): ObjectRefElement {
+        const keys = resolve(elem[1]);
+        const values = resolve(elem[2]);
+        if (isPrimitiveRefElement(values)) {
+            assert(values.value === undefined);
+            return new ObjectRefElement();
+        }
+        assert(keys instanceof ArrayRefElement || keys === undefined);
+        assert(values instanceof ArrayRefElement || values === undefined);
+        return new ObjectRefElement(keys, values);
+    }
 }
 
 export class ObjectWrapperRefElement extends BaseRefElement implements RefElement<ObjectElement> {
@@ -137,7 +174,7 @@ export class ObjectWrapperRefElement extends BaseRefElement implements RefElemen
         this.#v = value;
     }
 
-    toElement(lookup: FnIndexLookup): ObjectElement {
+    toElement(lookup: FnIndexLookup): ObjectWrapperElement {
         return [ElementType.Object, 0, lookup(this.#v)];
     }
 
@@ -147,6 +184,12 @@ export class ObjectWrapperRefElement extends BaseRefElement implements RefElemen
 
     getDependencies(): RefElements[] | undefined {
         return this.#v ? [this.#v] : undefined;
+    }
+
+    static fromJSON(elem: ObjectWrapperElement, resolve: (index: number) => RefElements): ObjectWrapperRefElement {
+        const values = resolve(elem[2]);
+        assert(elem[1] === 0);
+        return new ObjectWrapperRefElement(values);
     }
 }
 
@@ -175,6 +218,12 @@ export class SetRefElement extends BaseRefElement implements RefElement<SetEleme
 
     values(): ArrayRefElement | undefined {
         return this.#v;
+    }
+
+    static fromJSON(elem: SetElement, resolve: (index: number) => RefElements): SetRefElement {
+        const values = resolve(elem[1]);
+        assert(values instanceof ArrayRefElement || values === undefined);
+        return new SetRefElement(values);
     }
 }
 
@@ -213,6 +262,14 @@ export class MapRefElement extends BaseRefElement implements RefElement<MapEleme
     values(): ArrayRefElement | undefined {
         return this.#v;
     }
+
+    static fromJSON(elem: MapElement, resolve: (index: number) => RefElements): MapRefElement {
+        const keys = resolve(elem[1]);
+        const values = resolve(elem[2]);
+        assert(keys instanceof ArrayRefElement || keys === undefined);
+        assert(values instanceof ArrayRefElement || values === undefined);
+        return new MapRefElement(keys, values);
+    }
 }
 
 export class RegExpRefElement extends BaseRefElement implements RefElement<RegExpElement> {
@@ -236,6 +293,14 @@ export class RegExpRefElement extends BaseRefElement implements RefElement<RegEx
     getDependencies(): RefElements[] | undefined {
         return [this.#p, this.#f].filter((r) => !!r);
     }
+
+    static fromJSON(elem: RegExpElement, resolve: (index: number) => RefElements): RegExpRefElement {
+        const pattern = resolve(elem[1]);
+        const flags = resolve(elem[2]);
+        assert(isStringRefElements(pattern) || pattern === undefined);
+        assert(isStringRefElements(flags) || flags === undefined);
+        return new RegExpRefElement(pattern, flags);
+    }
 }
 
 export class DateRefElement extends BaseRefElement implements RefElement<DateElement> {
@@ -257,6 +322,10 @@ export class DateRefElement extends BaseRefElement implements RefElement<DateEle
     getDependencies(): undefined {
         return undefined;
     }
+
+    static fromJSON(value: DateElement): DateRefElement {
+        return new DateRefElement(value[1]);
+    }
 }
 
 export class BigIntRefElement extends BaseRefElement implements RefElement<BigIntElement> {
@@ -277,6 +346,12 @@ export class BigIntRefElement extends BaseRefElement implements RefElement<BigIn
 
     getDependencies(): RefElements[] | undefined {
         return [this.#v];
+    }
+
+    static fromJSON(elem: BigIntElement, resolve: (index: number) => RefElements): BigIntRefElement {
+        const value = resolve(elem[1]);
+        assert(value instanceof NumberRefElement || isStringRefElements(value));
+        return new BigIntRefElement(value);
     }
 }
 
@@ -332,6 +407,11 @@ export class ArrayRefElement extends BaseRefElement implements RefElement<ArrayE
     getDependencies(): RefElements[] | undefined {
         return this.#v;
     }
+
+    static fromJSON(elem: ArrayElement, resolve: (index: number) => RefElements): ArrayRefElement {
+        const values = elem.slice(1).map(resolve);
+        return new ArrayRefElement(values);
+    }
 }
 
 function simpleHash(values: readonly number[]): number {
@@ -377,6 +457,12 @@ export class SubStringRefElement extends BaseRefElement implements RefElement<Su
     getDependencies(): RefElements[] | undefined {
         return [this.#v];
     }
+
+    static fromJSON(elem: SubStringElement, resolve: (index: number) => RefElements): SubStringRefElement {
+        const idx = resolve(elem[1]);
+        assert(isStringRefElements(idx));
+        return new SubStringRefElement(idx, elem[2], elem[3]);
+    }
 }
 
 export class StringConcatRefElement extends BaseRefElement implements RefElement<StringElement | string> {
@@ -414,4 +500,21 @@ export class StringConcatRefElement extends BaseRefElement implements RefElement
     getDependencies(): RefElements[] | undefined {
         return this.#v;
     }
+
+    static fromJSON(elem: StringElement, resolve: (index: number) => RefElements): StringConcatRefElement {
+        const values = elem.slice(1).map(resolve).filter(isStringRefElements);
+        return new StringConcatRefElement(values);
+    }
+}
+
+export function isStringRefElements(elem: RefElements): elem is StringRefElements {
+    return (
+        elem instanceof SubStringRefElement ||
+        elem instanceof StringConcatRefElement ||
+        elem instanceof StringPrimitiveRefElement
+    );
+}
+
+export function isPrimitiveRefElement(elem: RefElements): elem is PrimitiveRefElement<SimplePrimitive> {
+    return elem instanceof PrimitiveRefElementBase;
 }
