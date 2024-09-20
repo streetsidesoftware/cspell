@@ -5,7 +5,7 @@ Args: '["--config=${repoConfig}/cspell.json","**/*.*"]'
 Summary:
   files: 144
   filesWithIssues: 77
-  issues: 801
+  issues: 796
   errors: 0
 Errors: []
 
@@ -394,7 +394,6 @@ issues:
   - "docs/docs/extending-mdx.mdx:99:5        goodproblems        U       * [`goodproblems/remark-mdx-math-enhanced"
   - "docs/docs/extending-mdx.mdx:124:8       twoslash            U       ```tsx twoslash"
   - "docs/docs/extending-mdx.mdx:126:14      Katex               U       import rehypeKatex from 'rehype-katex'"
-  - "docs/docs/extending-mdx.mdx:126:33      katex               U       rehypeKatex from 'rehype-katex' // Render math with"
   - "docs/docs/extending-mdx.mdx:146:44      Katex               U       rehypePlugins: [rehypeKatex], remarkPlugins: [remarkMath"
   - "docs/docs/extending-mdx.mdx:151:26      Katex               U       rehypePlugins: [[rehypeKatex, {strict: true, throwOnError"
   - "docs/docs/extending-mdx.mdx:161:2       unifiedjs           U       `unifiedjs.com`][learn]."
@@ -513,17 +512,17 @@ issues:
   - "docs/guides/injecting-components.mdx:128:32         jsxs        U       jsx as _jsx, jsxs as _jsxs} from 'react/jsx-runtime"
   - "docs/guides/math.mdx:5:15           wooorm              U       {github: 'wooorm', name: 'Titus Wormer"
   - "docs/guides/math.mdx:5:56           wooorm              U       Titus Wormer', twitter: 'wooorm'}"
-  - "docs/guides/math.mdx:19:10          katex               U       [`rehype-katex`][rehype-katex] (KaTeX"
-  - "docs/guides/math.mdx:19:25          katex               U       rehype-katex`][rehype-katex] (KaTeX) or [`rehype"
   - "docs/guides/math.mdx:19:52          mathjax             U       (KaTeX) or [`rehype-mathjax`][rehype-mathjax]"
   - "docs/guides/math.mdx:19:69          mathjax             U       rehype-mathjax`][rehype-mathjax]"
   - "docs/guides/math.mdx:33:7           twoslash            U       ```js twoslash path=\"example.js\""
   - "docs/guides/math.mdx:39:14          Katex               U       import rehypeKatex from 'rehype-katex'"
-  - "docs/guides/math.mdx:39:33          katex               U       rehypeKatex from 'rehype-katex'"
   - "docs/guides/math.mdx:45:29          Katex               U       rehypePlugins: [rehypeKatex],"
   - "docs/guides/math.mdx:58:24          katex               U       <span className=\"katex\">"
   - "docs/guides/math.mdx:59:26          katex               U       <span className=\"katex-mathml\">"
   - "docs/guides/math.mdx:59:32          mathml              U       span className=\"katex-mathml\">"
+  - "docs/guides/math.mdx:62:26          katex               U       <span className=\"katex-html\" aria-hidden=\"true"
+  - "docs/guides/math.mdx:72:68          katex               U       you should also use `katex.css`"
+  - "docs/guides/math.mdx:81:53          katex               U       stylesheet, go to [`katex docs`][katex docs]."
   - "docs/guides/math.mdx:93:2           commonmark          U       [commonmark]: https://spec.commonmark"
   - "docs/guides/math.mdx:99:9           mathjax             U       [rehype-mathjax]: https://github.com"
   - "docs/guides/math.mdx:101:37         processoroptions    U       options]: /packages/mdx/#processoroptions"
@@ -705,7 +704,6 @@ issues:
   - "packages/mdx/readme.md:915:39       recma               U       recmaMdxIsMdxComponent from 'recma-mdx-is-mdx-component"
   - "packages/mdx/readme.md:917:24       recma               U       await compile(file, {recmaPlugins: [recmaMdxIsMdxCompone"
   - "packages/mdx/readme.md:929:16       Katex               U       import rehypeKatex from 'rehype-katex'"
-  - "packages/mdx/readme.md:929:35       katex               U       rehypeKatex from 'rehype-katex' // Render math with"
   - "packages/mdx/readme.md:932:46       Katex               U       rehypePlugins: [rehypeKatex], remarkPlugins: [remarkMath"
   - "packages/mdx/readme.md:936:28       Katex               U       rehypePlugins: [[rehypeKatex, {strict: true, throwOnError"
   - "packages/mdx/readme.md:950:16       Frontmatter         U       import remarkFrontmatter from 'remark-frontmatter"
@@ -725,7 +723,6 @@ issues:
   - "packages/mdx/readme.md:1113:57      frontmatter         U       remark-gfm` or `remark-frontmatter`,"
   - "packages/mdx/readme.md:1129:3       rehypejs            U       [`rehypejs/rehype-highlight`][rehype"
   - "packages/mdx/readme.md:1130:3       rehypejs            U       [`rehypejs/rehype-katex`][rehype"
-  - "packages/mdx/readme.md:1130:19      katex               U       [`rehypejs/rehype-katex`][rehype-katex] for"
   - "packages/mdx/readme.md:1134:28      esast               U       we go to JavaScript: [esast][] (JS; an"
   - "packages/mdx/readme.md:1144:29      astring             U       final step is done by [astring][], a"
   - "packages/mdx/test/compile.js:3:21           Mdast       U       * @import {Root as MdastRoot} from 'mdast'"
@@ -750,11 +747,9 @@ issues:
   - "packages/mdx/test/syntax.js:5:21        Mdast           U       * @import {Root as MdastRoot} from 'mdast'"
   - "packages/mdx/test/syntax.js:5:38        mdast           U       as MdastRoot} from 'mdast'"
   - "packages/mdx/test/syntax.js:14:14       Katex           U       import rehypeKatex from 'rehype-katex'"
-  - "packages/mdx/test/syntax.js:14:33       katex           U       rehypeKatex from 'rehype-katex'"
   - "packages/mdx/test/syntax.js:180:31      setext          U       should support headings (setext) (`=` -> `<h1>`)',"
   - "packages/mdx/test/syntax.js:263:103     describedby     U       footnote-ref=\"true\" aria-describedby=\"footnote-label\">1<"
   - "packages/mdx/test/syntax.js:338:105     describedby     U       footnote-ref=\"true\" aria-describedby=\"footnote-label\">1<"
-  - "packages/mdx/test/syntax.js:383:67      katex           U       remark-math`, `rehype-katex`)', async function"
   - "packages/mdx/test/syntax.js:391:37      Katex           U       rehypePlugins: [rehypeKatex]"
   - "packages/mdx/test/syntax.js:420:16      Mdast           U       * @param {MdastRoot} tree"
   - "packages/mdx/test/syntax.js:644:31      jsxs            U       import {jsx as _jsx, jsxs as _jsxs} from \"react"

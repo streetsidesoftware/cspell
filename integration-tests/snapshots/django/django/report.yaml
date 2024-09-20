@@ -5,7 +5,7 @@ Args: '["--issues-summary-report","**/*.{md,py}"]'
 Summary:
   files: 2792
   filesWithIssues: 897
-  issues: 7920
+  issues: 7911
   errors: 0
 Errors: []
 
@@ -2417,7 +2417,6 @@ issues:
   - "docs/_ext/github_links.py:88:43         maxsplit    U       fullname.split(\".\", maxsplit=1)[0]"
   - "docs/_ext/github_links.py:103:37        maxsplit    U       module.rsplit(\".\", maxsplit=1)[0]"
   - "docs/_ext/github_links.py:118:57        maxsplit    U       fullname.rsplit(\".\", maxsplit=1)"
-  - "docs/_ext/github_links.py:132:12        linkcode    U       def github_linkcode_resolve(domain, info"
   - "docs/conf.py:17:15          doctree                 U       # pickle.dump(doctree, f, pickle.HIGHEST_PROTOCOL"
   - "docs/conf.py:23:5           setrecursionlimit       U       sys.setrecursionlimit(2000)"
   - "docs/conf.py:33:71          directoy                U       import it after the _ext directoy"
@@ -2425,7 +2424,6 @@ issues:
   - "docs/conf.py:46:17          extlinks                U       \"sphinx.ext.extlinks\","
   - "docs/conf.py:47:17          intersphinx             U       \"sphinx.ext.intersphinx\","
   - "docs/conf.py:48:17          autosectionlabel        U       \"sphinx.ext.autosectionlabel\","
-  - "docs/conf.py:49:17          linkcode                U       \"sphinx.ext.linkcode\","
   - "docs/conf.py:52:3           Autosection             U       # AutosectionLabel settings."
   - "docs/conf.py:55:1           autosectionlabel        U       autosectionlabel_prefix_document = True"
   - "docs/conf.py:56:1           autosectionlabel        U       autosectionlabel_maxdepth = 2"
@@ -2470,8 +2468,6 @@ issues:
   - "docs/conf.py:428:8          tocdup                  U       # epub_tocdup = True"
   - "docs/conf.py:430:33         includehidden           U       between 'default' and 'includehidden'."
   - "docs/conf.py:431:8          tocscope                U       # epub_tocscope = 'default'"
-  - "docs/conf.py:445:1          linkcode                U       linkcode_resolve = functools"
-  - "docs/conf.py:446:25         linkcode                U       github_links.github_linkcode_resolve,"
   - "scripts/manage_translations.py:13:36        transifex       U       fetch translations from transifex.com"
   - "scripts/manage_translations.py:45:55        transifexrc     U       otherwise read from the ~/.transifexrc file."
   - "scripts/manage_translations.py:46:28        TRANSIFEX       U       api_token = os.getenv(\"TRANSIFEX_API_TOKEN\")"
@@ -7050,11 +7046,6 @@ issues:
   - "tests/sitemaps_tests/test_http.py:572:23        sitemod         U       def test_callable_sitemod_no_items(self):"
   - "tests/sitemaps_tests/urls/http.py:163:5         testmodelview       U       def testmodelview(request, id):"
   - "tests/sitemaps_tests/urls/http.py:479:38        testmodelview       U       testmodel/<int:id>/\", testmodelview, name=\"i18n_testmodel"
-  - "tests/sphinx/test_github_links.py:151:21        linkcode                U       def test_github_linkcode_resolve_unspecified"
-  - "tests/sphinx/test_github_links.py:155:33        linkcode                U       github_links.github_linkcode_resolve("
-  - "tests/sphinx/test_github_links.py:160:21        linkcode                U       def test_github_linkcode_resolve_unspecified"
-  - "tests/sphinx/test_github_links.py:164:33        linkcode                U       github_links.github_linkcode_resolve("
-  - "tests/sphinx/test_github_links.py:169:21        linkcode                U       def test_github_linkcode_resolve_not_found(self"
   - "tests/sphinx/test_github_links.py:171:50        existant (existent)     U       bar.baz.hopefully_non_existant_module\","
   - "tests/staticfiles_tests/cases.py:34:45          asvar       U       snippet(self, path, asvar=False):"
   - "tests/staticfiles_tests/cases.py:35:12          asvar       U       if asvar:"
@@ -9228,7 +9219,6 @@ issuesSummary:
   - "text: linestrings, count: 2, files: 2,"
   - "text: linkcheck, count: 1, files: 1,"
   - "text: Linkcheck, count: 1, files: 1,"
-  - "text: linkcode, count: 9, files: 3,"
   - "text: Linkin, count: 4, files: 1,"
   - "text: LISTAGG, count: 5, files: 2,"
   - "text: listfilter, count: 2, files: 1,"
