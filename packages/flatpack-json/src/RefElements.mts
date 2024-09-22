@@ -124,11 +124,11 @@ export class ObjectRefElement extends BaseRefElement implements RefElement<Objec
         this.#v = values;
     }
 
-    keys(): ArrayRefElement | undefined {
+    keyRefs(): ArrayRefElement | undefined {
         return this.#k;
     }
 
-    values(): ArrayRefElement | undefined {
+    valueRefs(): ArrayRefElement | undefined {
         return this.#v;
     }
 
@@ -174,6 +174,10 @@ export class ObjectWrapperRefElement extends BaseRefElement implements RefElemen
         this.#v = value;
     }
 
+    valueRef(): RefElements | undefined {
+        return this.#v;
+    }
+
     toElement(lookup: FnIndexLookup): ObjectWrapperElement {
         return [ElementType.Object, 0, lookup(this.#v)];
     }
@@ -216,7 +220,7 @@ export class SetRefElement extends BaseRefElement implements RefElement<SetEleme
         return this.#v ? [this.#v] : undefined;
     }
 
-    values(): ArrayRefElement | undefined {
+    valueRefs(): ArrayRefElement | undefined {
         return this.#v;
     }
 
@@ -255,11 +259,11 @@ export class MapRefElement extends BaseRefElement implements RefElement<MapEleme
         return [this.#k, this.#v].filter((r) => !!r);
     }
 
-    keys(): ArrayRefElement | undefined {
+    keyRefs(): ArrayRefElement | undefined {
         return this.#k;
     }
 
-    values(): ArrayRefElement | undefined {
+    valueRefs(): ArrayRefElement | undefined {
         return this.#v;
     }
 
@@ -284,6 +288,10 @@ export class RegExpRefElement extends BaseRefElement implements RefElement<RegEx
 
     toElement(lookup: FnIndexLookup): RegExpElement {
         return [ElementType.RegExp, lookup(this.#p), lookup(this.#f)];
+    }
+
+    get value(): RegExp {
+        return new RegExp(this.#p.value, this.#f.value);
     }
 
     clone(): RegExpRefElement {
@@ -315,6 +323,14 @@ export class DateRefElement extends BaseRefElement implements RefElement<DateEle
         return [ElementType.Date, this.#v];
     }
 
+    get value(): Date {
+        return new Date(this.#v);
+    }
+
+    setTime(time: number): void {
+        this.#v = time;
+    }
+
     clone(): DateRefElement {
         return new DateRefElement(this.#v);
     }
@@ -334,6 +350,10 @@ export class BigIntRefElement extends BaseRefElement implements RefElement<BigIn
     constructor(value: PrimitiveRefElement<number> | StringRefElements) {
         super();
         this.#v = value;
+    }
+
+    get value(): bigint {
+        return BigInt(this.#v.value);
     }
 
     toElement(lookup: FnIndexLookup): BigIntElement {
