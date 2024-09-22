@@ -1,4 +1,7 @@
+import assert from 'node:assert';
+
 import { FlatpackedWrapper } from './flatpackUtil.mjs';
+import { proxyDate, proxyObject, proxySet } from './proxy.mjs';
 import {
     ArrayRefElement,
     BigIntRefElement,
@@ -8,6 +11,7 @@ import {
     ObjectRefElement,
     ObjectWrapperRefElement,
     PrimitiveRefElement,
+    PrimitiveRefElementBase,
     RefElements,
     RegExpRefElement,
     SetRefElement,
@@ -75,6 +79,8 @@ export class FlatpackStore {
     private cachedObjects = new Map<ArrayRefElement | undefined, Map<ArrayRefElement | undefined, ObjectRefElement>>();
     private cachedSets = new Map<ArrayRefElement | undefined, SetRefElement>();
     private cachedMaps = new Map<ArrayRefElement | undefined, Map<ArrayRefElement | undefined, MapRefElement>>();
+
+    private cachedProxies = new WeakMap<RefElements, Serializable>();
 
     /**
      * Cache of strings that have been deduped and stored in the data array.
@@ -275,7 +281,7 @@ export class FlatpackStore {
 
     private dedupeSetRefs(value: Set<Serializable>, element: SetRefElement): SetRefElement {
         if (!this.dedupe) return element;
-        const values = element.values();
+        const values = element.valueRefs();
         const found = this.cachedSets.get(values);
         if (!found) {
             this.cachedSets.set(values, element);
@@ -285,6 +291,10 @@ export class FlatpackStore {
         this.knownElements.delete(element);
         this.cache.set(value, found);
         return found;
+    }
+
+    private proxySetRef(ref: SetRefElement): Set<Serializable> {
+        return proxySet(new Set(this.#toValue(ref.valueRefs()) as Serializable[]), () => {});
     }
 
     private createUniqueKeys(keys: Serializable[]): ArrayRefElement {
@@ -320,8 +330,8 @@ export class FlatpackStore {
 
     private dedupeMapRefs(value: Map<Serializable, Serializable>, element: MapRefElement): MapRefElement {
         if (!this.dedupe) return element;
-        const keys = element.keys();
-        const values = element.values();
+        const keys = element.keyRefs();
+        const values = element.valueRefs();
         let found = this.cachedMaps.get(keys);
         if (!found) {
             found = new Map();
@@ -338,6 +348,10 @@ export class FlatpackStore {
         }
         found.set(values, element);
         return element;
+    }
+
+    private proxyMapRef(_ref: MapRefElement): Map<Serializable, Serializable> {
+        return new Map();
     }
 
     private cvtRegExpToRef(value: RegExp): RegExpRefElement {
@@ -359,6 +373,10 @@ export class FlatpackStore {
         }
 
         return this.addValueAndElement(value, new DateRefElement(value.getTime()));
+    }
+
+    private proxyDateRef(ref: DateRefElement): Date {
+        return proxyDate(ref.value, (date) => ref.setTime(date.getTime()));
     }
 
     private cvtBigintToRef(value: bigint): BigIntRefElement {
@@ -415,8 +433,8 @@ export class FlatpackStore {
 
     private dedupeObject(value: PrimitiveObject | ObjectWrapper, element: ObjectRefElement): ObjectRefElement {
         if (!this.dedupe) return element;
-        const keys = element.keys();
-        const values = element.values();
+        const keys = element.keyRefs();
+        const values = element.valueRefs();
         let found = this.cachedObjects.get(keys);
         if (!found) {
             found = new Map();
@@ -433,6 +451,18 @@ export class FlatpackStore {
         }
         found.set(values, element);
         return element;
+    }
+
+    private proxyObjectRef(ref: ObjectRefElement): PrimitiveObject {
+        const keys = this.#toValue(ref.keyRefs()) as string[] | undefined;
+        const values = this.#toValue(ref.valueRefs()) as Serializable[] | undefined;
+        const obj = keys && values ? Object.fromEntries(keys.map((key, i) => [key, values[i]])) : {};
+        return proxyObject(obj, (_value) => {});
+    }
+
+    private proxyObjectWrapperRef(ref: ObjectWrapperRefElement): PrimitiveObject {
+        const value = Object(this.#toValue(ref.valueRef())) as PrimitiveObject;
+        return proxyObject(value, (_value) => {});
     }
 
     /**
@@ -480,6 +510,11 @@ export class FlatpackStore {
         const element = this.addValueAndElement(value, new ArrayRefElement(), cacheValue);
         element.setValues(value.map((v) => this.valueToRef(v)));
         return this.dedupeArray(value, element, cacheValue);
+    }
+
+    private proxyArrayRef(ref: ArrayRefElement): PrimitiveArray {
+        const arr = ref.valueRefs().map((v) => this.#toValue(v));
+        return proxyObject(arr, (_value) => {});
     }
 
     private valueToRef(value: Serializable): RefElements {
@@ -619,6 +654,26 @@ export class FlatpackStore {
         }
     }
 
+    #resolveToValueProxy(ref: RefElements | undefined): Unpacked {
+        if (!ref) return undefined;
+        if (ref instanceof ArrayRefElement) return this.proxyArrayRef(ref);
+        if (ref instanceof ObjectRefElement) return this.proxyObjectRef(ref);
+        if (ref instanceof PrimitiveRefElementBase) return ref.value;
+        if (isStringRefElements(ref)) return ref.value;
+        if (ref instanceof MapRefElement) return this.proxyMapRef(ref);
+        if (ref instanceof SetRefElement) return this.proxySetRef(ref);
+        if (ref instanceof BigIntRefElement) return ref.value;
+        if (ref instanceof RegExpRefElement) return ref.value;
+        if (ref instanceof DateRefElement) return this.proxyDateRef(ref);
+        if (ref instanceof ObjectWrapperRefElement) return this.proxyObjectWrapperRef(ref);
+        assert(false, 'Unknown ref type');
+    }
+
+    #toValue(ref: RefElements | undefined): Unpacked {
+        if (!ref) return undefined;
+        return getOrResolve(this.cachedProxies, ref, (ref) => this.#resolveToValueProxy(ref));
+    }
+
     toJSON(): Flatpacked {
         const data = [dataHeader] as Flatpacked;
         const idxLookup = this.assignedElements;
@@ -654,6 +709,10 @@ export class FlatpackStore {
     toValue(): Unpacked {
         return fromJSON(this.toJSON());
     }
+
+    _toValueProxy(): Unpacked {
+        return this.#toValue(this.root);
+    }
 }
 
 type TrieData = StringRefElements;
@@ -685,4 +744,16 @@ export function toJSON<V extends Serializable>(json: V, options?: FlatpackOption
 
 export function stringify(data: Unpacked, pretty = true): string {
     return pretty ? stringifyFlatpacked(toJSON(data)) : JSON.stringify(toJSON(data));
+}
+
+type WeakOrNever<K, V> = K extends WeakKey ? WeakMap<K, V> : never;
+type SupportedMap<K, V> = Map<K, V> | WeakOrNever<K, V>;
+
+function getOrResolve<K, V>(map: SupportedMap<K, V>, key: K, resolver: (key: K) => V): V {
+    let value = map.get(key);
+    if (value === undefined && !map.has(key)) {
+        value = resolver(key);
+        map.set(key, value);
+    }
+    return value as V;
 }

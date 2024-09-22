@@ -7,6 +7,7 @@ import { describe, expect, test } from 'vitest';
 import { FlatpackStore, stringify, toJSON } from './Flatpack.mjs';
 import { stringifyFlatpacked } from './stringify.mjs';
 import { fromJSON } from './unpack.mjs';
+import { deepEqual } from './proxy.mts';
 
 const urlFileList = new URL('../fixtures/fileList.txt', import.meta.url);
 const baseFilename = new URL(import.meta.url).pathname.split('/').slice(-1).join('').split('.').slice(0, -2).join('.');
@@ -189,6 +190,23 @@ describe('Flatpack', async () => {
         expect(fromJSON(fp.toJSON())).toEqual(data);
         expect(fp.toJSON()).not.toEqual(v);
     });
+
+    test.each`
+        data
+        ${undefined}
+        ${'string'}
+        ${1}
+        ${1.1}
+        ${null}
+        ${true}
+        ${false}
+        ${new Date()}
+        ${/[a-z]+/}
+    `('toValue $data', ({ data }) => {
+        const fp = new FlatpackStore(data);
+        expect(fp.toValue()).toEqual(data);
+        expect(fp._toValueProxy()).toEqual(data);
+    });
 });
 
 async function sampleFileList() {
@@ -249,3 +267,34 @@ function sampleNestedData() {
         cValues,
     };
 }
+
+describe('Flatpack value proxy', () => {
+    test.each`
+        value
+        ${undefined}
+        ${'string'}
+        ${1}
+        ${1.1}
+        ${null}
+        ${true}
+        ${false}
+        ${[]}
+        ${[1, 2]}
+        ${['a', 'b', 'a', 'b']}
+        ${{}}
+        ${{ a: 1 }}
+        ${{ a: { b: 1 } }}
+        ${{ a: { a: 'a', b: 42 } }}
+        ${{ a: [1] }}
+        ${new Set(['apple', 'banana', 'pineapple'])}
+        ${new Map([['apple', 1], ['banana', 2], ['pineapple', 3]])}
+        ${/[\p{L}\p{M}]+/gu}
+        ${new Date('2024-01-01')}
+    `('identity $value', ({ value }) => {
+        const fp = new FlatpackStore(value);
+        const proxy = fp._toValueProxy();
+        expect(deepEqual(proxy, value)).toBe(true);
+        !(proxy instanceof Map || proxy instanceof Set) && expect(proxy).toEqual(value);
+        expect(fp._toValueProxy()).toBe(proxy);
+    });
+});
