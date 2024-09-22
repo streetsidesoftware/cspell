@@ -179,7 +179,7 @@ export async function spellCheck(
         const parent = getImportParent(node);
         if (!parent) return true;
         const { imported, local } = parent;
-        if (imported.name !== local.name) return true;
+        if (imported.type === 'Identifier' && imported.name !== local.name) return true;
         return imported.range?.[0] !== local.range?.[0] && imported.range?.[1] !== local.range?.[1];
     }
 
@@ -316,7 +316,7 @@ export async function spellCheck(
 
     function debugNode(path: ASTPath, value: unknown) {
         log(`${inheritanceSummary(path)}: %o`, value);
-        debugMode && _dumpNode(path);
+        if (debugMode) _dumpNode(path);
     }
 
     // console.warn('root: %o', root);
