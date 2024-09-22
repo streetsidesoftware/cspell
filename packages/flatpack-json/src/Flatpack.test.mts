@@ -5,9 +5,9 @@ import { createPatch } from 'diff';
 import { describe, expect, test } from 'vitest';
 
 import { FlatpackStore, stringify, toJSON } from './Flatpack.mjs';
+import { deepEqual } from './proxy.mts';
 import { stringifyFlatpacked } from './stringify.mjs';
 import { fromJSON } from './unpack.mjs';
-import { deepEqual } from './proxy.mts';
 
 const urlFileList = new URL('../fixtures/fileList.txt', import.meta.url);
 const baseFilename = new URL(import.meta.url).pathname.split('/').slice(-1).join('').split('.').slice(0, -2).join('.');
