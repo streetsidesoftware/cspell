@@ -41,7 +41,8 @@ export async function globP(pattern: string | string[], options?: GlobOptions): 
         onlyFiles,
         dot,
         ignore,
-        absolute: true
+        absolute: true,
+        followSymbolicLinks: false,
     });
 
     const compare = new Intl.Collator('en').compare;
