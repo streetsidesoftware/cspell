@@ -3,7 +3,7 @@ Repository: MicrosoftDocs/PowerShell-Docs
 Url: "https://github.com/MicrosoftDocs/PowerShell-Docs.git"
 Args: ["--config=../../../cspell-power-shell-docs.config.yaml","**"]
 Lines:
- CSpell: Files checked: 2690, Issues found: 5267 in 1233 files.
+ CSpell: Files checked: 2692, Issues found: 5279 in 1234 files.
  exit code: 1
 CODE_OF_CONDUCT.md:10:38     - Unknown word (opensource) -- reach out at [aka.ms/opensource/moderation-support]
 LICENSE.md:122:56    - Unknown word (sublicensable)   -- worldwide, royalty-free, non-sublicensable,
@@ -502,7 +502,7 @@ reference/5.1/Microsoft.PowerShell.LocalAccounts/Rename-LocalUser.md:183:4     -
 reference/5.1/Microsoft.PowerShell.LocalAccounts/Rename-LocalUser.md:191:13    - Unknown word (Entra)      -- - Microsoft Entra group
 reference/5.1/Microsoft.PowerShell.LocalAccounts/Set-LocalGroup.md:192:13    - Unknown word (Entra)      -- - Microsoft Entra group
 reference/5.1/Microsoft.PowerShell.LocalAccounts/Set-LocalUser.md:320:13    - Unknown word (Entra)      -- - Microsoft Entra group
-reference/5.1/Microsoft.PowerShell.Management/Add-Computer.md:144:24    - Unknown word (pscredential) -- joinCred = New-Object pscredential -ArgumentList ([pscustomobjec
+reference/5.1/Microsoft.PowerShell.Management/Add-Computer.md:178:24    - Unknown word (pscredential) -- joinCred = New-Object pscredential -ArgumentList ([pscustomobjec
 reference/5.1/Microsoft.PowerShell.Management/Add-Content.md:22:69     - Unknown word (pscredential) -- Force] [-Credential <pscredential>] [-WhatIf]
 reference/5.1/Microsoft.PowerShell.Management/Add-Content.md:31:69     - Unknown word (pscredential) -- Force] [-Credential <pscredential>] [-WhatIf]
 reference/5.1/Microsoft.PowerShell.Management/Complete-Transaction.md:182:14    - Unknown word (hkcu)       -- Set-Location hkcu:\software
@@ -4837,6 +4837,7 @@ reference/docs-conceptual/learn/deep-dives/everything-about-shouldprocess.md:42:
 reference/docs-conceptual/learn/deep-dives/everything-about-shouldprocess.md:43:68     - Unknown word (myfile)        -- on target "C:\Temp\myfile1.txt".
 reference/docs-conceptual/learn/deep-dives/everything-about-shouldprocess.md:51:68     - Unknown word (myfile)        -- on target "C:\Temp\myfile1.txt".
 reference/docs-conceptual/learn/deep-dives/everything-about-shouldprocess.md:53:68     - Unknown word (importantfile) -- on target "C:\Temp\importantfile.txt".
+reference/docs-conceptual/learn/deep-dives/everything-about-shouldprocess.md:547:33    - Unknown word (Shoud)         -- specifies `-Confirm` then `ShoudProcess()` honors the
 reference/docs-conceptual/learn/deep-dives/everything-about-string-substitutions.md:237:11    - Unknown word (Redditor)   -- Thank you Redditor `u/real_parbold` for
 reference/docs-conceptual/learn/deep-dives/everything-about-string-substitutions.md:237:28    - Unknown word (parbold)    -- you Redditor `u/real_parbold` for that one.
 reference/docs-conceptual/learn/deep-dives/everything-about-string-substitutions.md:308:19    - Unknown word (Kraus)      -- $nameList = 'Mark Kraus','Kevin Marquette',
@@ -4845,10 +4846,11 @@ reference/docs-conceptual/learn/deep-dives/everything-about-string-substitutions
 reference/docs-conceptual/learn/deep-dives/everything-about-switch.md:430:2     - Unknown word (filelist)   -- :filelist foreach($path in $logs
 reference/docs-conceptual/learn/deep-dives/everything-about-switch.md:437:19    - Unknown word (filelist)   -- break filelist
 reference/docs-conceptual/learn/deep-dives/everything-about-switch.md:649:5     - Unknown word (Dailey)     -- Lee Dailey pointed out that we
-reference/docs-conceptual/learn/experimental-features.md:231:4     - Unknown word (cscript)    -- - `cscript.exe`
-reference/docs-conceptual/learn/experimental-features.md:232:4     - Unknown word (wscript)    -- - `wscript.exe`
-reference/docs-conceptual/learn/experimental-features.md:256:16    - Unknown word (echoargs)   -- PS> TestExe -echoargs $a 'c" "d' e" "f
-reference/docs-conceptual/learn/experimental-features.md:265:16    - Unknown word (echoargs)   -- PS> TestExe -echoargs '' a b ''
+reference/docs-conceptual/learn/experimental-features.md:233:4     - Unknown word (cscript)    -- - `cscript.exe`
+reference/docs-conceptual/learn/experimental-features.md:234:4     - Unknown word (wscript)    -- - `wscript.exe`
+reference/docs-conceptual/learn/experimental-features.md:258:16    - Unknown word (echoargs)   -- PS> TestExe -echoargs $a 'c" "d' e" "f
+reference/docs-conceptual/learn/experimental-features.md:267:16    - Unknown word (echoargs)   -- PS> TestExe -echoargs '' a b ''
+reference/docs-conceptual/learn/experimental-features.md:420:45    - Unknown word (behaviour)  -- revert back to the old behaviour
 reference/docs-conceptual/learn/ps101/00-introduction.md:19:62     - Unknown word (Leanpub)      -- the original book from Leanpub at
 reference/docs-conceptual/learn/ps101/00-introduction.md:3:24      - Unknown word (mikefrobbins) -- custom: Contributor-mikefrobbins
 reference/docs-conceptual/learn/ps101/00-introduction.md:5:14      - Unknown word (mirobb)       -- ms.reviewer: mirobb
@@ -4955,14 +4957,25 @@ reference/docs-conceptual/samples/Working-with-Registry-Entries.md:187:38    - U
 reference/docs-conceptual/samples/Working-with-Registry-Keys.md:104:37    - Unknown word (regini)     -- including `reg.exe`, `regini.exe`, `regedit.exe`
 reference/docs-conceptual/samples/Working-with-Registry-Keys.md:104:51    - Unknown word (regedit)    -- exe`, `regini.exe`, `regedit.exe`, and COM objects
 reference/docs-conceptual/samples/Working-with-Registry-Keys.md:51:3      - Unknown word (regedit)    -- (`regedit.exe`).
-reference/docs-conceptual/security/application-control.md:55:1      - Unknown word (wevtutil)   -- wevtutil.exe sl PowerShellCore
-reference/docs-conceptual/security/overview.yml:82:46     - Unknown word (secretmanagement) -- powershell/utility-modules/secretmanagement/overview
-reference/docs-conceptual/security/overview.yml:84:46     - Unknown word (secretmanagement) -- powershell/utility-modules/secretmanagement/security-concepts
-reference/docs-conceptual/security/overview.yml:88:46     - Unknown word (secretmanagement) -- powershell/utility-modules/secretmanagement/how-to/manage-secretstore
-reference/docs-conceptual/security/overview.yml:88:77     - Unknown word (secretstore)      -- ecretmanagement/how-to/manage-secretstore
-reference/docs-conceptual/security/overview.yml:90:46     - Unknown word (secretmanagement) -- powershell/utility-modules/secretmanagement/how-to/using-secrets
-reference/docs-conceptual/security/overview.yml:92:46     - Unknown word (secretmanagement) -- powershell/utility-modules/secretmanagement/how-to/using-azure-keyvault
-reference/docs-conceptual/security/overview.yml:98:58     - Unknown word (secretstore)      -- microsoft.powershell.secretstore
+reference/docs-conceptual/security/app-control/application-control.md:85:39     - Unknown word (DCOM)       -- Cmdlets that use COM or DCOM internally aren't affected
+reference/docs-conceptual/security/app-control/how-to-use-wdac.md:129:1     - Unknown word (wevtutil)   -- wevtutil.exe sl PowerShellCore
+reference/docs-conceptual/security/app-control/how-wdac-works.md:19:34     - Unknown word (Wldp)       -- uses the legacy WDAC `WldpGetLockdownPolicy` API
+reference/docs-conceptual/security/app-control/how-wdac-works.md:29:10     - Unknown word (Wldp)       -- the new `WldpCanExecuteFile` API to
+reference/docs-conceptual/security/app-control/how-wdac-works.md:36:4      - Unknown word (WLDP)       -- - `WLDP_CAN_EXECUTE_ALLOWED
+reference/docs-conceptual/security/app-control/how-wdac-works.md:37:4      - Unknown word (WLDP)       -- - `WLDP_CAN_EXECUTE_BLOCKED
+reference/docs-conceptual/security/app-control/how-wdac-works.md:38:4      - Unknown word (WLDP)       -- - `WLDP_CAN_EXECUTE_REQUIRE
+reference/docs-conceptual/security/app-control/how-wdac-works.md:55:5      - Unknown word (Noninteractive) -- ### Noninteractive mode running under policy
+reference/docs-conceptual/security/app-control/how-wdac-works.md:60:44     - Unknown word (Wldp)           -- or higher uses the `WldpCanExecuteFile` API if
+reference/docs-conceptual/security/app-control/how-wdac-works.md:63:4      - Unknown word (WLDP)           -- - `WLDP_CAN_EXECUTE_ALLOWED
+reference/docs-conceptual/security/app-control/how-wdac-works.md:65:4      - Unknown word (WLDP)           -- - `WLDP_CAN_EXECUTE_BLOCKED
+reference/docs-conceptual/security/app-control/how-wdac-works.md:70:34     - Unknown word (Wldp)           -- PowerShell 5.1 or if `WldpCanExecuteFile` API isn
+reference/docs-conceptual/security/overview.yml:102:46    - Unknown word (secretmanagement) -- powershell/utility-modules/secretmanagement/how-to/manage-secretstore
+reference/docs-conceptual/security/overview.yml:102:77    - Unknown word (secretstore)      -- ecretmanagement/how-to/manage-secretstore
+reference/docs-conceptual/security/overview.yml:104:46    - Unknown word (secretmanagement) -- powershell/utility-modules/secretmanagement/how-to/using-secrets
+reference/docs-conceptual/security/overview.yml:106:46    - Unknown word (secretmanagement) -- powershell/utility-modules/secretmanagement/how-to/using-azure-keyvault
+reference/docs-conceptual/security/overview.yml:112:58    - Unknown word (secretstore)      -- microsoft.powershell.secretstore
+reference/docs-conceptual/security/overview.yml:96:46     - Unknown word (secretmanagement) -- powershell/utility-modules/secretmanagement/overview
+reference/docs-conceptual/security/overview.yml:98:46     - Unknown word (secretmanagement) -- powershell/utility-modules/secretmanagement/security-concepts
 reference/docs-conceptual/security/preventing-script-injection.md:104:36    - Unknown word (pwnd)       -- rocessById "$pid; Write-Host 'pwnd!'"
 reference/docs-conceptual/security/preventing-script-injection.md:136:36    - Unknown word (pwnd)       -- rocessById "$pid; Write-Host 'pwnd!'"
 reference/docs-conceptual/security/preventing-script-injection.md:48:36     - Unknown word (pwnd)       -- rocessById "$pid; Write-Host 'pwnd!'"
@@ -5022,7 +5035,6 @@ reference/docs-conceptual/security/remoting/jea/using-jea.md:184:5     - Unknown
 reference/docs-conceptual/security/remoting/jea/using-jea.md:229:63    - Unknown word (Aformy)     -- UserName 'localhost\JEAformyHoster'
 reference/docs-conceptual/security/remoting/jea/using-jea.md:229:69    - Unknown word (Hoster)     -- UserName 'localhost\JEAformyHoster'
 reference/docs-conceptual/security/remoting/powershell-remoting-faq.yml:415:20    - Unknown word (Wsmprovhost) -- process (Wsmprovhost.exe) on the remote computer
-reference/docs-conceptual/security/security-features.md:103:39    - Unknown word (DCOM)       -- Cmdlets that use COM or DCOM internally aren't affected
 reference/docs-conceptual/toc.yml:118:57    - Unknown word (shouldprocess) -- dives/everything-about-shouldprocess.md
 reference/docs-conceptual/toc.yml:150:56    - Unknown word (ciminstance)   -- getting-wmi-objects--get-ciminstance-.md
 reference/docs-conceptual/toc.yml:160:66    - Unknown word (filterhashtable) -- winEvent-queries-with-filterhashtable.md
@@ -5039,11 +5051,11 @@ reference/docs-conceptual/toc.yml:287:63    - Unknown word (isesnippetcollection
 reference/docs-conceptual/toc.yml:289:63    - Unknown word (isesnippetobject)       -- ise/object-model/the-isesnippetobject.md
 reference/docs-conceptual/toc.yml:291:63    - Unknown word (powershelltabcollection) -- ise/object-model/the-powershelltabcollection-object.md
 reference/docs-conceptual/toc.yml:293:63    - Unknown word (powershelltab)           -- ise/object-model/the-powershelltab-object.md
-reference/docs-conceptual/toc.yml:401:41    - Unknown word (cmdline)                 -- dev-cross-plat/create-cmdline-predictor.md
-reference/docs-conceptual/toc.yml:405:47    - Unknown word (platyps)                 -- powershell/utility-modules/platyps/create-help-using-platyps
-reference/docs-conceptual/toc.yml:405:73    - Unknown word (platyps)                 -- platyps/create-help-using-platyps
-reference/docs-conceptual/toc.yml:464:46    - Unknown word (thon)                    -- acktoberfest and other hack-a-thon events
-reference/docs-conceptual/toc.yml:465:38    - Unknown word (hackathons)              -- community/contributing/hackathons.md
+reference/docs-conceptual/toc.yml:407:41    - Unknown word (cmdline)                 -- dev-cross-plat/create-cmdline-predictor.md
+reference/docs-conceptual/toc.yml:411:47    - Unknown word (platyps)                 -- powershell/utility-modules/platyps/create-help-using-platyps
+reference/docs-conceptual/toc.yml:411:73    - Unknown word (platyps)                 -- platyps/create-help-using-platyps
+reference/docs-conceptual/toc.yml:470:46    - Unknown word (thon)                    -- acktoberfest and other hack-a-thon events
+reference/docs-conceptual/toc.yml:471:38    - Unknown word (hackathons)              -- community/contributing/hackathons.md
 reference/docs-conceptual/toc.yml:90:37     - Unknown word (keyhandlers) -- href: learn/shell/using-keyhandlers.md
 reference/docs-conceptual/whats-new/Migrating-from-Windows-PowerShell-51-to-PowerShell-7.md:133:1     - Unknown word (autoloading) -- autoloading of modules.
 reference/docs-conceptual/whats-new/What-s-New-in-PowerShell-72.md:129:11    - Unknown word (awakecoding) -- host by awakecoding · Pull Request #146

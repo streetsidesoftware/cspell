@@ -3,9 +3,9 @@ Repository: neovim/nvim-lspconfig
 Url: https://github.com/neovim/nvim-lspconfig.git
 Args: '["**"]'
 Summary:
-  files: 356
-  filesWithIssues: 351
-  issues: 4473
+  files: 355
+  filesWithIssues: 350
+  issues: 4436
   errors: 0
 Errors: []
 
@@ -27,19 +27,16 @@ issues:
   - "CONTRIBUTING.md:111:4       stylua              U       - [stylua](https://github.com"
   - "CONTRIBUTING.md:127:36      luafile             U       Es +'set rtp+=$PWD' +'luafile scripts/docgen.lua'"
   - "doc/lspconfig.txt:1:29          Nvim                    U       lspconfig.txt* For Nvim version 0.8+"
-  - "doc/lspconfig.txt:17:7          autocommand             U       - an autocommand mapping that either"
-  - "doc/lspconfig.txt:35:5          require'lspconfig       U       require'lspconfig'.clangd.setup{}"
-  - "doc/lspconfig.txt:46:11         METAMETHOD              U       THE SETUP METAMETHOD"
-  - "doc/lspconfig.txt:49:36         metamethod              U       exposes a `setup {}` metamethod which makes it easy"
-  - "doc/lspconfig.txt:60:49         Nvim's                  U       to wrap the call to Nvim's built-in"
-  - "doc/lspconfig.txt:140:46        blankspace              U       entry corresponds to the blankspace delimited part of"
-  - "doc/lspconfig.txt:301:23        autocmd                 U       vim.api.nvim_create_autocmd('LspAttach', {"
-  - "doc/lspconfig.txt:313:16        newindex                U       The `configs.__newindex` metamethod consumes"
-  - "doc/lspconfig.txt:323:13        texlab                  U       configs.texlab.buf_build = buf_build"
-  - "doc/lspconfig.txt:343:30        fname                   U       root_dir = function(fname)"
-  - "doc/lspconfig.txt:483:66        omnifunc                U       provided by Nvim's built-in omnifunc."
-  - "doc/lspconfig.txt:573:66        featureful              U       usability. For more featureful"
-  - "doc/lspconfig.txt:592:24        norl                    U       vim:tw=78:ts=8:ft=help:norl:"
+  - "doc/lspconfig.txt:23:4          require'lspconfig       U       require'lspconfig'.pyright.setup{}"
+  - "doc/lspconfig.txt:28:10         checkhealth             U       5. Run `:checkhealth lsp` to see the status"
+  - "doc/lspconfig.txt:34:36         metamethod              U       exposes a `setup {}` metamethod which makes it easy"
+  - "doc/lspconfig.txt:65:67         autocommand             U       Controls if the `FileType` autocommand"
+  - "doc/lspconfig.txt:216:23        autocmd                 U       vim.api.nvim_create_autocmd('LspAttach', {"
+  - "doc/lspconfig.txt:228:16        newindex                U       The `configs.__newindex` metamethod consumes"
+  - "doc/lspconfig.txt:238:13        texlab                  U       configs.texlab.buf_build = buf_build"
+  - "doc/lspconfig.txt:256:30        fname                   U       root_dir = function(fname)"
+  - "doc/lspconfig.txt:420:10        Nvim's                  U       All bugs Nvim's built-in client should"
+  - "doc/lspconfig.txt:495:24        norl                    U       vim:tw=78:ts=8:ft=help:norl:"
   - "doc/server_configurations.md:8:4            agda                U       - [agda_ls](#agda_ls)"
   - "doc/server_configurations.md:10:4           anakin              U       - [anakin_language_server](#anakin"
   - "doc/server_configurations.md:11:4           angularls           U       - [angularls](#angularls)"
@@ -218,6 +215,7 @@ issues:
   - "doc/server_configurations.md:1481:16        brighterscript      U       npm install -g brighterscript"
   - "doc/server_configurations.md:1568:18        buckconfig          U       root_pattern(\".buckconfig\")"
   - "doc/server_configurations.md:1612:23        bufbuild            U       go install github.com/bufbuild/buf-language-server"
+  - "doc/server_configurations.md:1768:6         scarb               U       { \"scarb-cairo-language-server"
   - "doc/server_configurations.md:1782:17        Scarb               U       root_pattern(\"Scarb.toml\", \"cairo_project"
   - "doc/server_configurations.md:1805:25        frounding           U       excludeArgs = { \"-frounding-math\"} ;"
   - "doc/server_configurations.md:1828:18        objc                U       { \"c\", \"cpp\", \"objc\", \"objcpp\", \"cuda\""
@@ -401,7 +399,7 @@ issues:
   - "doc/server_configurations.md:11527:40       Starlark            U       LSP implementation for Starlark. Installation instructions"
   - "doc/server_configurations.md:11591:11       Steepfile           U       You need `Steepfile` to make it work. Generate"
   - "doc/server_configurations.md:11665:42       stylelintplus       U       passing a `settings.stylelintplus` object to `stylelint"
-  - "doc/server_configurations.md:11692:47       wxss                U       \"sugarss\", \"vue\", \"wxss\", \"javascript\", \"javascriptre"
+  - "doc/server_configurations.md:11692:47       wxss                U       \"sugarss\", \"vue\", \"wxss\" }"
   - "doc/server_configurations.md:11771:6        svelteserver        U       { \"svelteserver\", \"--stdio\" }"
   - "doc/server_configurations.md:11787:27       Verilog             U       Language server for SystemVerilog."
   - "doc/server_configurations.md:11802:3        Svlangserver        U       - SvlangserverBuildIndex: Instructs"
@@ -453,7 +451,7 @@ issues:
   - "doc/server_configurations.txt:1292:19       biomejs             U       npm install [-g] @biomejs/biome"
   - "doc/server_configurations.txt:2636:7        loglevel            U       loglevel = \"debug\","
   - "doc/server_configurations.txt:5693:313      nunjucks            U       \"mustache\", \"njk\", \"nunjucks\", \"php\", \"razor\", \"slim"
-  - "doc/server_configurations.txt:11692:29      sugarss             U       css\", \"less\", \"scss\", \"sugarss\", \"vue\", \"wxss\", \"javascript"
+  - "doc/server_configurations.txt:11692:29      sugarss             U       css\", \"less\", \"scss\", \"sugarss\", \"vue\", \"wxss\" }"
   - "flake.nix:12:31         pkgs        U       devShells = forEachSystem (pkgs: {"
   - "flake.nix:17:16         luajit      U       pkgs.luajitPackages.vusted"
   - "flake.nix:17:31         vusted      U       pkgs.luajitPackages.vusted"
@@ -523,6 +521,7 @@ issues:
   - "lua/lspconfig/server_configurations/zk.lua:5:15         isdirectory     U       if vim.fn.isdirectory(vim.fs.joinpath(dir"
   - "lua/lspconfig/server_configurations/zk.lua:29:15        bufpath         U       local bufpath = vim.api.nvim_buf_get"
   - "lua/lspconfig/ui/lspinfo.lua:12:7           helptags            U       local helptags = {"
+  - "lua/lspconfig/ui/lspinfo.lua:17:21          blankspace          U       local function trim_blankspace(cmd)"
   - "lua/lspconfig/ui/lspinfo.lua:110:39         helptag             U       vim.tbl_map(function(helptag)"
   - "lua/lspconfig/ui/lspinfo.lua:197:27         breakindent         U       windows.default_options.breakindent = true"
   - "lua/lspconfig/ui/lspinfo.lua:198:27         breakindentopt      U       windows.default_options.breakindentopt = 'shift:25'"
@@ -551,15 +550,12 @@ issues:
   - "nvim-lspconfig-scm-1.rockspec:3:1           rockspec    U       rockspec_format = \"3.0\""
   - "plugin/lspconfig.lua:62:14          scriptnames     U       -- script in scriptnames to be executed is lspconfig"
   - "plugin/lspconfig.lua:156:26         tabnew          U       vim.cmd(string.format('tabnew %s', lsp.get_log_path"
-  - "README.md:37:10         checkhealth     U       4. Run `:checkhealth lsp` to see the status"
-  - "README.md:45:6          tagfunc         U       * [`'tagfunc'`][tagfunc]"
-  - "README.md:49:6          formatexpr      U       * [`'formatexpr'`][formatexpr]"
+  - "README.md:54:6          tagfunc         U       * [`'tagfunc'`][tagfunc]"
+  - "README.md:56:6          omnifunc        U       * [`'omnifunc'`][omnifunc]"
+  - "README.md:58:6          formatexpr      U       * [`'formatexpr'`][formatexpr]"
   - "scripts/docgen.lua:50:29        indentlvl       U       function make_section(indentlvl, sep, parts)"
   - "scripts/docgen.lua:153:36       DOCGEN          U       tempdir = os.getenv 'DOCGEN_TEMPDIR' or uv.fs_mkdtemp"
   - "scripts/docgen.lua:274:9        copyfile        U       uv.fs_copyfile('doc/server_configurations"
   - "scripts/docgen.sh:2:71          docgen      U       PWD' +'luafile scripts/docgen.lua' +q"
   - "test/lspconfig_spec.lua:14:13       doesnt (doesn't)    U       it('doesnt escape if not needed"
   - "test/lspconfig_spec.lua:157:26      subpaths            U       it('strips zipfile subpaths', function()"
-  - "test/minimal_init.lua:13:14         packpath        U       vim.cmd('set packpath=' .. join_paths(temp"
-  - "test/minimal_init.lua:33:34         noremap         U       = { buffer = bufnr, noremap = true, silent = true"
-  - "test/minimal_init.lua:50:50         setloclist      U       space>q', vim.diagnostic.setloclist, opts)"

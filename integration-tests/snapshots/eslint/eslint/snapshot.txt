@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: [".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 2000, Issues found: 1717 in 322 files.
+ CSpell: Files checked: 2016, Issues found: 1722 in 322 files.
  exit code: 1
 Makefile.js:128:88    - Unknown word (ined)       -- followed by the string "ined".
 Makefile.js:343:12    - Unknown word (gensite)    -- target.gensite();
@@ -28,7 +28,8 @@ README.md:281:1     - Unknown word (Strek)         -- Strek
 README.md:290:5     - Unknown word (teamend)       -- <!--teamend-->
 README.md:297:5     - Unknown word (sponsorsstart) -- <!--sponsorsstart-->
 README.md:301:564   - Unknown word (Workleap)      -- f99fe2465f&v=4" alt="Workleap" height="64"></a></p
-README.md:302:790   - Unknown word (Nextbase)      -- 145838380?v=4" alt="Nextbase Starter Kit" height
+README.md:302:1075  - Unknown word (Nextbase)      -- 145838380?v=4" alt="Nextbase Starter Kit" height
+README.md:302:133   - Unknown word (Goread)        -- 337d/logo.png" alt="Goread.io" height="32"></a
 README.md:303:5     - Unknown word (sponsorsend)   -- <!--sponsorsend-->
 README.md:305:5     - Unknown word (techsponsorsstart) -- <!--techsponsorsstart-->
 README.md:308:5     - Unknown word (techsponsorsend)   -- <!--techsponsorsend-->
@@ -95,6 +96,7 @@ docs/src/rules/brace-style.md:60:5      - Unknown word (stroustrup) -- * `"strou
 docs/src/rules/brace-style.md:61:5      - Unknown word (allman)     -- * `"allman"` enforces Allman style
 docs/src/rules/capitalized-comments.md:274:84    - Unknown word (blockignore) -- { "ignorePattern": "blockignore" } }] */
 docs/src/rules/comma-dangle.md:13:11     - Unknown word (quux)       -- qux: "quux",
+docs/src/rules/complexity.md:177:37    - Unknown word (Cabe)       -- default) - Classic McCabe cyclomatic complexity
 docs/src/rules/function-paren-newline.md:338:5     - Unknown word (barbaz)     -- var barbaz = function(
 docs/src/rules/id-denylist.md:7:102     - Unknown word (Karlton)    -- naming things." — Phil Karlton
 docs/src/rules/id-length.md:91:10     - Unknown word (foobaz)     -- function foobaz({ a: prop }) { }
@@ -214,9 +216,11 @@ lib/cli-engine/formatters/html.js:46:48     - Unknown word (Neue)       -- famil
 lib/cli-engine/lint-result-cache.js:14:58     - Unknown word (jsonify)    -- stable-stringify-without-jsonify");
 lib/cli.js:28:38     - Unknown word (humanwhocodes) -- ModuleImporter } = require("@humanwhocodes/module-importer");
 lib/config/flat-config-schema.js:255:42    - Unknown word (incompat)   -- messageTemplate = "eslintrc-incompat";
-lib/eslint/eslint-helpers.js:18:26     - Unknown word (nodelib)    -- const fswalk = require("@nodelib/fs.walk");
-lib/eslint/eslint-helpers.js:18:7      - Unknown word (fswalk)     -- const fswalk = require("@nodelib
-lib/eslint/eslint-helpers.js:629:34    - Unknown word (unconfigured) -- ignored"|"external"|"unconfigured"} configStatus A status
+lib/eslint/eslint-helpers.js:164:36    - Unknown word (humanfs)    -- hfs } = await import("@humanfs/node");
+lib/eslint/eslint-helpers.js:471:74    - Unknown word (loeader)    -- configLoader The config loeader for the current run
+lib/eslint/eslint-helpers.js:514:56    - Unknown word (subsubdir)  -- the form of "subdir/subsubdir".
+lib/eslint/eslint-helpers.js:520:54    - Unknown word (subd)       -- pattern is passed (e.g., "subd*"). We want
+lib/eslint/eslint-helpers.js:623:34    - Unknown word (unconfigured) -- ignored"|"external"|"unconfigured"} configStatus A status
 lib/languages/js/index.js:102:47    - Unknown word (FEENSTRA)   -- NO EVENT SHALL JOEL FEENSTRA BE LIABLE FOR ANY
 lib/languages/js/index.js:85:37     - Unknown word (Feenstra)   -- Copyright (c) 2013, Joel Feenstra
 lib/linter/code-path-analysis/code-path-state.js:1256:46   - Unknown word (circuting)  -- path due to the short-circuting, so we are just seeding
@@ -224,8 +228,8 @@ lib/linter/code-path-analysis/code-path-state.js:1730:23   - Unknown word (Segs)
 lib/linter/code-path-analysis/code-path-state.js:351:34    - Unknown word (expresion)  -- The end of the update expresion. This may change during
 lib/linter/code-path-analysis/debug-helpers.js:95:44     - Unknown word (Graphvis)   -- can be visualized with Graphvis.
 lib/linter/linter.js:44:7      - Unknown word (jslang)     -- const jslang = require("../languages
-lib/rule-tester/rule-tester.js:249:42    - Unknown word (errorize)   -- ast The root node to errorize `start`/`end` properties
-lib/rule-tester/rule-tester.js:855:27    - Unknown word (Didnt)      -- function assertASTDidntChange(beforeAST, afterAST
+lib/rule-tester/rule-tester.js:255:42    - Unknown word (errorize)   -- ast The root node to errorize `start`/`end` properties
+lib/rule-tester/rule-tester.js:876:27    - Unknown word (Didnt)      -- function assertASTDidntChange(beforeAST, afterAST
 lib/rules/dot-notation.js:138:63    - Unknown word (quasis)     -- node, node.property.quasis[0].value.cooked);
 lib/rules/for-direction.js:73:65     - Unknown word (nochange)   -- if sub return -1, if nochange, return 0
 lib/rules/func-name-matching.js:13:7      - Unknown word (esutils)    -- const esutils = require("esutils"
@@ -264,16 +268,17 @@ lib/rules/space-unary-ops.js:246:32    - Unknown word (Dont)       -- function v
 lib/rules/use-isnan.js:130:25    - Unknown word (Suggestable) -- const isSuggestable = fixableOperators.has
 lib/rules/utils/ast-utils.js:404:40    - Unknown word (samely)     -- a.b` and `a?.b` are samely.
 lib/services/processor-service.js:94:8      - Unknown word (Postprocesses) -- * Postprocesses the given messages synchronou
-package.json:125:7     - Unknown word (trunkio)    -- "@trunkio/launcher": "^1.3.0"
-package.json:148:6     - Unknown word (eslump)     -- "eslump": "^3.0.0",
-package.json:163:6     - Unknown word (metascraper) -- "metascraper": "^5.25.7",
-package.json:40:81     - Unknown word (flter)      -- ignore=!docs/**/*.js -a --flter=eslint && trunk check
+package.json:137:7     - Unknown word (arethetypeswrong) -- "@arethetypeswrong/cli": "^0.16.4",
+package.json:141:7     - Unknown word (trunkio)          -- "@trunkio/launcher": "^1.3.0"
+package.json:162:6     - Unknown word (eslump)           -- "eslump": "^3.0.0",
+package.json:177:6     - Unknown word (metascraper)      -- "metascraper": "^5.25.7",
+package.json:53:81     - Unknown word (flter)      -- ignore=!docs/**/*.js -a --flter=eslint && trunk check
+package.json:54:20     - Unknown word (attw)       -- "lint:types": "attw --pack",
 templates/blogpost.md.ejs:18:10     - Unknown word (linkify)    -- function linkify(line) {
 tests/fixtures/code-path-analysis/try--try-finally-4.js:43:156    - Unknown word (Expressio)  -- Expression\nIdentifier (bar)\nExpressio
 tests/fixtures/config-hierarchy/file-structure.json:19:10     - Unknown word (subbroken)  -- "subbroken": {
 tests/fixtures/config-hierarchy/file-structure.json:22:14     - Unknown word (subsubbroken) -- "subsubbroken": {
 tests/fixtures/config-hierarchy/file-structure.json:36:6      - Unknown word (fileexts)     -- "fileexts": {
-tests/fixtures/config-hierarchy/file-structure.json:40:14     - Unknown word (subsubdir)    -- "subsubdir": {
 tests/fixtures/config-hierarchy/file-structure.json:57:6      - Unknown word (packagejson)  -- "packagejson": {
 tests/fixtures/config-hierarchy/file-structure.json:64:18     - Unknown word (subsubsubdir) -- "subsubsubdir": {
 tests/fixtures/parsers/arrow-parens/identifier-type.js:323:17    - Unknown word (binop)      -- binop: null,
@@ -296,16 +301,16 @@ tests/lib/config/flat-config-array.js:2127:30   - Unknown word (doesnt)      -- 
 tests/lib/config/flat-config-array.js:216:22    - Unknown word (noniterable) -- it("should allow noniterable baseConfig objects"
 tests/lib/config/flat-config-schema.js:19:50     - Unknown word (reults)     -- expectedResult] The expected reults of merging first and
 tests/lib/config/flat-config-schema.js:46:20     - Unknown word (emtpy)      -- it("returns an emtpy object if both values
-tests/lib/eslint/eslint.js:1255:39   - Unknown word (myjs)       -- files: ["**/*.myjs"],
-tests/lib/eslint/eslint.js:1766:57   - Unknown word (doesnotexist) -- lintFiles(["subdir1", "doesnotexist/*.js"]);
-tests/lib/eslint/eslint.js:1841:58   - Unknown word (doesexist)    -- await eslint.lintFiles(["doesexist/*.js"]);
-tests/lib/eslint/eslint.js:2449:71   - Unknown word (unignoring)   -- unignored without also unignoring all files in them",
-tests/lib/eslint/eslint.js:2463:47   - Unknown word (jsfmt)        -- "!tests/format/**/jsfmt.spec.js"
-tests/lib/eslint/eslint.js:3671:39   - Unknown word (previos)      -- make sure that the previos assertion checks the
-tests/lib/eslint/eslint.js:3724:59   - Unknown word (intenationally) -- cacheFilePath, "[]"); // intenationally invalid to additionally
-tests/lib/eslint/eslint.js:3894:59   - Unknown word (occured)        -- the previous run that occured after the cache was
-tests/lib/eslint/eslint.js:6331:40   - Unknown word (mcts)           -- "eslint.config.mcts": configFileContent
-tests/lib/eslint/eslint.js:8069:31   - Unknown word (dignore)        -- cwd: `${root}-dignore`,
+tests/lib/eslint/eslint.js:1318:43   - Unknown word (myjs)       -- files: ["**/*.myjs"],
+tests/lib/eslint/eslint.js:1899:61   - Unknown word (doesnotexist) -- lintFiles(["subdir1", "doesnotexist/*.js"]);
+tests/lib/eslint/eslint.js:1979:62   - Unknown word (doesexist)    -- await eslint.lintFiles(["doesexist/*.js"]);
+tests/lib/eslint/eslint.js:2622:75   - Unknown word (unignoring)   -- unignored without also unignoring all files in them",
+tests/lib/eslint/eslint.js:2637:51   - Unknown word (jsfmt)        -- "!tests/format/**/jsfmt.spec.js"
+tests/lib/eslint/eslint.js:5688:44   - Unknown word (mcts)         -- "eslint.config.mcts": configFileContent
+tests/lib/eslint/eslint.js:7486:35   - Unknown word (dignore)      -- cwd: `${root}-dignore`,
+tests/lib/eslint/eslint.js:8902:35   - Unknown word (previos)      -- make sure that the previos assertion checks the
+tests/lib/eslint/eslint.js:8955:55   - Unknown word (intenationally) -- cacheFilePath, "[]"); // intenationally invalid to additionally
+tests/lib/eslint/eslint.js:9125:55   - Unknown word (occured)        -- the previous run that occured after the cache was
 tests/lib/eslint/legacy-eslint.js:2536:24   - Unknown word (succesfully) -- it("should succesfully execute with a rule
 tests/lib/linter/linter.js:16421:52  - Unknown word (intentionaly)   -- // intentionaly mutates objects and
 tests/lib/linter/linter.js:3287:1    - Unknown word (consolexlog) -- consolexlog("test2");
@@ -319,8 +324,8 @@ tests/lib/linter/source-code-fixer.js:63:19     - Unknown word (removestart) -- 
 tests/lib/linter/source-code-fixer.js:70:19     - Unknown word (removemiddle) -- message: "removemiddle",
 tests/lib/linter/source-code-fixer.js:77:19     - Unknown word (removeend)    -- message: "removeend",
 tests/lib/options.js:359:71    - Unknown word (morerules)  -- trcOptions.parse("--rulesdir /morerules");
-tests/lib/rule-tester/rule-tester.js:2750:33   - Unknown word (outpt)      -- outpt: "var baz;"
-tests/lib/rule-tester/rule-tester.js:3478:15   - Unknown word (Subclassing) -- describe("Subclassing", () => {
+tests/lib/rule-tester/rule-tester.js:2907:33   - Unknown word (outpt)      -- outpt: "var baz;"
+tests/lib/rule-tester/rule-tester.js:3635:15   - Unknown word (Subclassing) -- describe("Subclassing", () => {
 tests/lib/rules/array-bracket-spacing.js:51:76     - Unknown word (n'quxx)     -- { 'bar': 'baz' }], \n'quxx': 1 \n}]", options:
 tests/lib/rules/array-element-newline.js:45:78     - Unknown word (nosomething) -- ,\nfunction bar() {\nosomething();\n}\n];",
 tests/lib/rules/arrow-body-style.js:27:38     - Unknown word (nretv)      -- = (retv, name) => {\nretv[name] = true;\nreturn
