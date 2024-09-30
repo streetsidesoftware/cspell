@@ -43,6 +43,7 @@ export async function globP(pattern: string | string[], options?: GlobOptions): 
         ignore,
         absolute: true,
         followSymbolicLinks: false,
+        expandDirectories: false,
     });
 
     const compare = new Intl.Collator('en').compare;
