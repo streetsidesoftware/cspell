@@ -1,1 +1,1 @@
-export { fromJSON, parse, stringify, toJSON } from './dehydrate.mjs';
+export * from 'flatpack-json';

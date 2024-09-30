@@ -111,7 +111,7 @@ export async function readReportSnapshot(rep: Repository): Promise<string> {
     const dir = Path.join(snapshotDir, rep.path);
     const filename = Path.join(dir, reportFileName);
     try {
-        return fsp.readFile(filename, 'utf8');
+        return await fsp.readFile(filename, 'utf8');
     } catch {
         return '';
     }

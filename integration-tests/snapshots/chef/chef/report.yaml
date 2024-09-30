@@ -3,9 +3,9 @@ Repository: chef/chef
 Url: https://github.com/chef/chef.git
 Args: '["--config=../../../cspell-chef.config.yaml","**"]'
 Summary:
-  files: 1180
-  filesWithIssues: 3
-  issues: 12
+  files: 1201
+  filesWithIssues: 2
+  issues: 11
   errors: 0
 Errors: []
 
@@ -21,4 +21,3 @@ issues:
   - "lib/chef/provider/package/dnf/dnf_helper.py:62:18       versionstr      U       dash_index = versionstr.find('-')"
   - "lib/chef/provider/package/dnf/dnf_helper.py:64:15       versionstr      U       tmp = versionstr[colon_index + 1:dash"
   - "lib/chef/provider/package/dnf/dnf_helper.py:124:39      hawkey          U       filter(arch=[ 'noarch', hawkey.detect_arch() ])"
-  - "lib/chef/resource/ssh_known_hosts_entry.rb:152:36       nistp       U       ecdsa\" => \"ecdsa-sha2-nistp256\","

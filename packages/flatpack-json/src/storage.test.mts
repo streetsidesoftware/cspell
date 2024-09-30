@@ -3,9 +3,12 @@ import { readFile } from 'node:fs/promises';
 import { findMatchingFileTypes } from '@cspell/filetypes';
 import { describe, expect, test } from 'vitest';
 
-import { fromJSON as hydrate, toJSON as dehydrate } from './dehydrate.mjs';
+import { stringify, toJSON } from './storage.mjs';
+import { stringifyFlatpacked } from './stringify.mjs';
+import { fromJSON } from './unpack.mjs';
 
 const urlFileList = new URL('../fixtures/fileList.txt', import.meta.url);
+const baseFilename = new URL(import.meta.url).pathname.split('/').slice(-1).join('').split('.').slice(0, -2).join('.');
 
 describe('dehydrate', async () => {
     test.each`
@@ -26,8 +29,8 @@ describe('dehydrate', async () => {
         ${{ a: { a: 'a', b: 42 } }}
         ${{ a: [1] }}
     `('dehydrate/hydrate $data', ({ data }) => {
-        const v = dehydrate(data);
-        expect(hydrate(v)).toEqual(data);
+        const v = toJSON(data);
+        expect(fromJSON(v)).toEqual(data);
     });
 
     const biMaxSafe = BigInt(Number.MAX_SAFE_INTEGER);
@@ -45,6 +48,7 @@ describe('dehydrate', async () => {
         ${[1, 2]}                                                                                       | ${undefined}
         ${['apple', 'banana', 'apple', 'banana', 'apple', 'pineapple']}                                 | ${undefined}
         ${new Set(['apple', 'banana', 'pineapple'])}                                                    | ${undefined}
+        ${new Set(['pineapple', 'apple', 'banana'])}                                                    | ${undefined}
         ${new Map([['apple', 1], ['banana', 2], ['pineapple', 3]])}                                     | ${undefined}
         ${{}}                                                                                           | ${undefined}
         ${[{}, {}, {}]}                                                                                 | ${undefined}
@@ -63,30 +67,34 @@ describe('dehydrate', async () => {
         ${[1n, 2n, 1n, 2n, biMaxSafe, -biMaxSafe, biMaxSafe + 1n, -biMaxSafe - 1n]}                     | ${undefined}
         ${[Object(1n), Object('hello'), Object(/\w+/g), Object(null), Object([]), Object('hello')]}     | ${undefined}
     `('dehydrate $data $options', ({ data, options }) => {
-        const v = dehydrate(data, { dedupe: options?.dedupe });
+        const v = toJSON(data, { dedupe: options?.dedupe });
         expect(v).toMatchSnapshot();
-        expect(hydrate(v)).toEqual(data);
-        expect(hydrate(JSON.parse(JSON.stringify(v)))).toEqual(data);
+        expect(fromJSON(v)).toEqual(data);
+        expect(fromJSON(JSON.parse(JSON.stringify(v)))).toEqual(data);
+        expect(fromJSON(JSON.parse(stringify(data)))).toEqual(data);
+        expect(fromJSON(JSON.parse(stringify(data, false)))).toEqual(data);
     });
 
     test.each`
         name             | data                             | options
         ${'fileList'}    | ${await sampleFileList()}        | ${undefined}
         ${'fileObjects'} | ${await sampleFileListObjects()} | ${undefined}
-    `('dehydrate $data $options', ({ name, data, options }) => {
-        const v = dehydrate(data, { dedupe: options?.dedupe });
-        expect(v).toMatchFileSnapshot(`__snapshots__/${name}.jsonc`);
-        expect(JSON.stringify(v) + '\n').toMatchFileSnapshot(`__snapshots__/${name}.json`);
-        expect(JSON.stringify(data) + '\n').toMatchFileSnapshot(`__snapshots__/${name}.data.json`);
-        expect(hydrate(v)).toEqual(data);
+    `('dehydrate $data $options', async ({ name, data, options }) => {
+        const v = toJSON(data, { dedupe: options?.dedupe });
+        await expect(stringifyFlatpacked(v)).toMatchFileSnapshot(`__snapshots__/${baseFilename}_${name}.jsonc`);
+        await expect(JSON.stringify(v) + '\n').toMatchFileSnapshot(`__snapshots__/${baseFilename}_${name}.json`);
+        await expect(JSON.stringify(data) + '\n').toMatchFileSnapshot(
+            `__snapshots__/${baseFilename}_${name}.data.json`,
+        );
+        expect(fromJSON(v)).toEqual(data);
     });
 
     test("make sure dedupe doesn't break Sets", () => {
         const data = sampleNestedData();
         const value = { ...data, s: new Set(data.n) };
 
-        const v = dehydrate(value, { dedupe: true });
-        const hv = hydrate(v) as typeof value;
+        const v = toJSON(value, { dedupe: true });
+        const hv = fromJSON(v) as typeof value;
         expect(hv.s).toEqual(value.s);
         expect(hv.n).toEqual(value.n);
     });
@@ -95,8 +103,8 @@ describe('dehydrate', async () => {
         const data = sampleNestedData();
         const value = { ...data, m: new Map(data.n.map((a) => [a, a])) };
 
-        const v = dehydrate(value, { dedupe: true });
-        const hv = hydrate(v) as typeof value;
+        const v = toJSON(value, { dedupe: true });
+        const hv = fromJSON(v) as typeof value;
         expect(hv.m).toEqual(value.m);
         expect(hv.n).toEqual(value.n);
     });
@@ -139,6 +147,11 @@ function sampleNestedData() {
         ['a', 'a'],
         ['b', 'b'],
     ]);
+
+    const values = ['apple', 'banana', 'pineapple'];
+    const rValues = [...values].reverse();
+    const cValues = [...values];
+
     return {
         a,
         b,
@@ -148,5 +161,10 @@ function sampleNestedData() {
         s,
         r,
         m,
+        ss: s,
+        mm: m,
+        values,
+        rValues,
+        cValues,
     };
 }
