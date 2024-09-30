@@ -3,9 +3,9 @@ Repository: sveltejs/svelte
 Url: https://github.com/sveltejs/svelte.git
 Args: '["**"]'
 Summary:
-  files: 7431
-  filesWithIssues: 659
-  issues: 5081
+  files: 7455
+  filesWithIssues: 666
+  issues: 5110
   errors: 0
 Errors: []
 
@@ -1130,13 +1130,13 @@ issues:
   - "packages/svelte/scripts/check-treeshakeability.js:42:20         errr        U       throw new Error('errr what');"
   - "packages/svelte/scripts/process-messages/index.js:196:10        quasis      U       const quasis = [];"
   - "packages/svelte/src/action/public.d.ts:14:5         newprop         U       * newprop?: string;"
-  - "packages/svelte/src/action/public.d.ts:73:101       nonstrict       U       with both strict and nonstrict mode"
+  - "packages/svelte/src/action/public.d.ts:69:101       nonstrict       U       with both strict and nonstrict mode"
   - "packages/svelte/src/compiler/legacy.js:118:9        pendingblock    U       let pendingblock = {"
   - "packages/svelte/src/compiler/legacy.js:128:9        thenblock       U       let thenblock = {"
   - "packages/svelte/src/compiler/legacy.js:138:9        catchblock      U       let catchblock = {"
   - "packages/svelte/src/compiler/legacy.js:278:9        elseblock       U       let elseblock = undefined;"
-  - "packages/svelte/src/compiler/migrate/index.js:312:76        automigration           U       is not supported for automigration.'"
-  - "packages/svelte/src/compiler/migrate/index.js:886:55        preceeded (preceded)    U       node. If the start is preceeded with white-space-only"
+  - "packages/svelte/src/compiler/migrate/index.js:360:76        automigration           U       is not supported for automigration.'"
+  - "packages/svelte/src/compiler/migrate/index.js:823:55        preceeded (preceded)    U       node. If the start is preceeded with white-space-only"
   - "packages/svelte/src/compiler/phases/1-parse/read/options.js:3:20        MATHML          U       import { NAMESPACE_MATHML, NAMESPACE_SVG } from"
   - "packages/svelte/src/compiler/phases/1-parse/read/options.js:136:12      shadowdom       U       const shadowdom = shadow?.value;"
   - "packages/svelte/src/compiler/phases/1-parse/read/options.js:157:37      mathml          U       options.namespace = 'mathml';"
@@ -2421,7 +2421,7 @@ issues:
   - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y.js:745:12        proptypes       U       // aria-proptypes"
   - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/utils.js:108:41       inbetween (between)     U       whitespace is allowed inbetween. TODO remove once legacy"
   - "packages/svelte/src/compiler/phases/3-transform/client/visitors/BindDirective.js:42:14          unthunk     U       let set = b.unthunk("
-  - "packages/svelte/src/compiler/phases/3-transform/client/visitors/RegularElement.js:554:8         inlinable       U       const inlinable_expression ="
+  - "packages/svelte/src/compiler/phases/3-transform/client/visitors/RegularElement.js:563:8         inlinable       U       const inlinable_expression ="
   - "packages/svelte/src/compiler/phases/3-transform/client/visitors/shared/declarations.js:31:30        unsub       U       call = b.call('$.store_unsub', call, b.literal(`"
   - "packages/svelte/src/compiler/phases/3-transform/client/visitors/shared/element.js:43:67         readded     U       it isn't removed and readded on every update"
   - "packages/svelte/src/compiler/phases/3-transform/client/visitors/shared/element.js:146:65        toogle      U       something like `$.class_toogle(element, class_name"
@@ -2447,9 +2447,9 @@ issues:
   - "packages/svelte/src/internal/client/proxy.js:25:12          proxyable       U       // if non-proxyable, or is already a proxy"
   - "packages/svelte/src/internal/client/reactivity/props.js:366:36      synchronisation     U       current_value); // force a synchronisation immediately"
   - "packages/svelte/src/internal/client/reactivity/sources.js:179:66        overfiring      U       - this way we avoid overfiring."
-  - "packages/svelte/src/internal/client/render.js:155:19        occured (occurred)      U       // If an error occured above, the operations"
+  - "packages/svelte/src/internal/client/render.js:154:19        occured (occurred)      U       // If an error occured above, the operations"
   - "packages/svelte/src/internal/client/runtime.js:820:26       doesnt (doesn't)    U       mutate(dep, null /* doesnt matter */);"
-  - "packages/svelte/src/internal/client/runtime.js:1157:29      noone (no one)      U       value; // let's hope noone modifies this global"
+  - "packages/svelte/src/internal/client/runtime.js:1153:29      noone (no one)      U       value; // let's hope noone modifies this global"
   - "packages/svelte/src/internal/server/index.js:24:23          FDEF        U       [\\s'\">/=\\u{FDD0}-\\u{FDEF}\\u{FFFE}\\u{FFFF}\\u{"
   - "packages/svelte/src/internal/server/index.js:24:31          FFFE        U       \\u{FDD0}-\\u{FDEF}\\u{FFFE}\\u{FFFF}\\u{1FFFE}\\u"
   - "packages/svelte/src/internal/server/index.js:24:209         AFFFE       U       u{9FFFE}\\u{9FFFF}\\u{AFFFE}\\u{AFFFF}\\u{BFFFE}\\u"
@@ -2465,7 +2465,7 @@ issues:
   - "packages/svelte/src/internal/shared/clone.js:34:8           uncloned    U       let uncloned = slice.map((path)"
   - "packages/svelte/src/reactivity/set.js:77:39         nilly       U       create sources willy-nilly to track all possible"
   - "packages/svelte/src/store/public.d.ts:5:13          Unsubscriber    U       export type Unsubscriber = () => void;"
-  - "packages/svelte/src/store/shared/index.js:159:9         unsubscribers       U       const unsubscribers = stores_array.map("
+  - "packages/svelte/src/store/shared/index.js:155:9         unsubscribers       U       const unsubscribers = stores_array.map("
   - "packages/svelte/src/utils.js:324:3          hatchpath           U       'hatchpath',"
   - "packages/svelte/src/utils.js:325:3          hkern               U       'hkern',"
   - "packages/svelte/src/utils.js:332:3          meshgradient        U       'meshgradient',"
@@ -2521,7 +2521,7 @@ issues:
   - "packages/svelte/tests/css/samples/unused-selector-string-concat/expected.css:17:4           fooddbar    U       .fooddbar.svelte-xyz {color: red"
   - "packages/svelte/tests/css/samples/unused-selector-ternary/_config.js:11:36          maybeactive     U       Unused CSS selector \".maybeactive\"',"
   - "packages/svelte/tests/hydration/test.ts:132:22      borks       U       // Error logger borks because of circular"
-  - "packages/svelte/tests/migrate/samples/event-handlers/output.svelte:2:80         oncustom    U       event: any) => void, 'oncustom-event-bubble'?: (event"
+  - "packages/svelte/tests/migrate/samples/event-handlers-with-alias/output.svelte:28:9          oncustom    U       <button oncustom-event={() => 'hi'}>click"
   - "packages/svelte/tests/parser-legacy/samples/action-duplicate/output.json:17:16          autofocus       U       \"name\": \"autofocus\","
   - "packages/svelte/tests/parser-legacy/samples/nbsp/output.json:18:16          nbsp    U       \"raw\": \"&nbsp;\","
   - "packages/svelte/tests/parser-legacy/samples/textarea-end-tag/input.svelte:2:9           actu            U       <p>not actu </textar ally an element"
@@ -2550,6 +2550,8 @@ issues:
   - "packages/svelte/tests/runtime-browser/samples/component-css-custom-properties-dynamic-svg/_config.js:14:52          qzlp    U       \"10\" class=\"svelte-1qzlp1k\"></circle>"
   - "packages/svelte/tests/runtime-browser/samples/component-event-handler-contenteditable-false/_config.js:13:21        bcde        U       component.text = 'bcde';"
   - "packages/svelte/tests/runtime-browser/samples/component-event-handler-contenteditable-false/_config.js:14:34        bcdea       U       equal(div.textContent, 'bcdea');"
+  - "packages/svelte/tests/runtime-browser/samples/head-scripts/main.svelte:2:11         jssrc       U       function jssrc(src) {"
+  - "packages/svelte/tests/runtime-browser/samples/head-scripts/main.svelte:6:14         Srcs        U       const scriptSrcs = [ 1, 2, 3 ]"
   - "packages/svelte/tests/runtime-browser/samples/inline-style-directive-important/_config.js:5:21          szzkfu      U       <h1 class=\"svelte-szzkfu\" style=\"background-color"
   - "packages/svelte/tests/runtime-legacy/samples/attribute-casing/_config.js:5:15           SHOUTY          U       <div class='SHOUTY'>YELL</div>"
   - "packages/svelte/tests/runtime-legacy/samples/attribute-casing/_config.js:8:25           hellooooo       U       text textLength=100>hellooooo</text>"
