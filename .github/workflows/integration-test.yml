@@ -292,6 +292,7 @@ jobs:
             ${{ steps.pr-body.outputs.body }}
 
       - name: Add comment to PR
+        continue-on-error: true
         uses: mshick/add-pr-comment@v2
         with:
           message: ${{ steps.report.outputs.report }}
