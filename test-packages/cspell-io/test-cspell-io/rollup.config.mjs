@@ -1,20 +1,24 @@
+// @ts-check
+import Path from 'node:path';
+
 import rollupPluginCommonjs from '@rollup/plugin-commonjs';
 import rollupPluginJson from '@rollup/plugin-json';
 import rollupPluginNodeResolve from '@rollup/plugin-node-resolve';
 import rollupPluginTypescript from '@rollup/plugin-typescript';
-// import { readFileSync } from 'fs';
+
+/** @typedef {import('rollup').RollupOptions} RollupOptions */
+/** @typedef {import('rollup').OutputOptions} OutputOptions */
+/** @typedef {import('@rollup/plugin-typescript').RollupTypescriptPluginOptions} RollupTypescriptPluginOptions */
 
 // const pkg = JSON.parse(readFileSync('./package.json', 'utf-8'));
 
-/** @type {import('rollup').RollupOptions} */
+/** @type {RollupOptions} */
 const common = {
     input: 'src/index.ts',
 
     output: {
         sourcemap: true,
     },
-
-    // external: ['@cspell/cspell-pipe', '@cspell/cspell-pipe/sync'],
 
     treeshake: {
         annotations: true,
@@ -24,13 +28,17 @@ const common = {
     },
 };
 
+/** @type {RollupTypescriptPluginOptions} */
+const defaultTypeScriptConfig = { tsconfig: 'tsconfig.json' };
+
 /**
  * Get new instances of all the common plugins.
+ * @param {RollupTypescriptPluginOptions} typeScriptConfig
  */
-function getPlugins(tsconfig = 'tsconfig.json') {
+function getPlugins(typeScriptConfig = defaultTypeScriptConfig) {
     return [
         rollupPluginTypescript({
-            tsconfig,
+            ...typeScriptConfig,
         }),
         rollupPluginNodeResolve({
             mainFields: ['module', 'exports', 'es', 'es6', 'esm', 'main'],
@@ -41,27 +49,23 @@ function getPlugins(tsconfig = 'tsconfig.json') {
             transformMixedEsModules: true,
         }),
         rollupPluginJson(),
-        // rollupPluginTerser({
-        //     ecma: 2018,
-        //     warnings: true,
-        //     compress: { drop_console: false },
-        //     format: { comments: false },
-        //     sourceMap: true,
-        // }),
     ];
 }
 
-/** @type {import('rollup').RollupOptions[]} */
-const configs = [
-    {
-        ...common,
-        external: [],
-        output: [
-            { ...common.output, file: './dist/rollup/cjs/index.cjs', format: 'cjs' },
-            { ...common.output, file: './dist/rollup/esm/index.mjs', format: 'es' },
-            // { ...common.output, file: pkg.browser, format: 'umd', name: 'test-cspell-pipe-rollup' },
-        ],
-        plugins: getPlugins(),
-    },
+/** @type {OutputOptions[]} */
+const targets = [
+    { file: './dist/rollup/cjs/index.cjs', format: 'cjs' },
+    { file: './dist/rollup/esm/index.mjs', format: 'es' },
+    // { file: pkg.browser, format: 'umd', name: 'test-cspell-pipe-rollup' },
 ];
+
+/** @type {import('rollup').RollupOptions[]} */
+const configs = targets.map((target) => ({
+    ...common,
+    output: { ...common.output, ...target },
+    plugins: getPlugins({
+        tsconfig: 'tsconfig.json',
+        compilerOptions: { outDir: (target.file && Path.dirname(target.file)) || undefined },
+    }),
+}));
 export default configs;
