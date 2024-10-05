@@ -4,7 +4,6 @@
   "description": "A spelling dictionary library useful for checking words and getting suggestions.",
   "type": "module",
   "sideEffects": false,
-  "types": "dist/index.d.ts",
   "module": "dist/index.js",
   "exports": {
     ".": {
@@ -27,7 +26,8 @@
     "coverage": "vitest run --coverage",
     "test:watch": "vitest",
     "test": "vitest run",
-    "test:perf": "NODE_ENV=production insight --register ts-node/esm --file \"**/*.perf.{mts,ts}\" -t 500",
+    "test:perf": "pnpm test:perf:js --all",
+    "test:perf:ts": "NODE_ENV=production NODE_OPTIONS=--import=@swc-node/register/esm-register insight  --file \"**/*.perf.{mts,ts}\" -t 500",
     "test:perf:js": "NODE_ENV=production insight -t 500",
     "test:perf:prof": "NODE_ENV=production node --cpu-prof  ../../node_modules/perf-insight/bin.mjs",
     "watch": "tsc -p . -w "
