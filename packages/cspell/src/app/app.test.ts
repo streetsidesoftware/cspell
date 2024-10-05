@@ -6,7 +6,6 @@ import * as Util from 'node:util';
 import { toFileDirURL } from '@cspell/url';
 import chalk from 'chalk';
 import * as Commander from 'commander';
-import stripAnsi from 'strip-ansi';
 import { afterEach, beforeEach, type Constructable, describe, expect, test, vi } from 'vitest';
 
 import * as app from './app.mjs';
@@ -393,7 +392,7 @@ function makeLogger() {
 
     function normalizedHistory() {
         let t = history.map((a) => a.replaceAll('\u001B[2K', '').trimEnd()).join('\n');
-        t = stripAnsi(t);
+        t = Util.stripVTControlCharacters(t);
         t = t.replaceAll('\r', '');
         t = t.replace(RegExp(escapeRegExp(projectRootUri.toString()), 'gi'), '.');
         t = t.replace(RegExp(escapeRegExp(projectRoot), 'gi'), '.');

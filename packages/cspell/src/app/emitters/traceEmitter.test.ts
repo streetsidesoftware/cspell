@@ -1,6 +1,6 @@
 import { posix, win32 } from 'node:path';
+import { stripVTControlCharacters } from 'node:util';
 
-import strip from 'strip-ansi';
 import { describe, expect, test, vi } from 'vitest';
 
 import type { TraceResult } from '../application.mjs';
@@ -17,7 +17,7 @@ describe('traceEmitter', () => {
             dictionaryPathFormat: 'long',
             iPath: posix,
         });
-        expect(strip(report.table)).toEqual('Word F Dictionary Dictionary Location');
+        expect(stripVTControlCharacters(report.table)).toEqual('Word F Dictionary Dictionary Location');
     });
 
     test('posix format long', () => {
@@ -28,7 +28,7 @@ describe('traceEmitter', () => {
             dictionaryPathFormat: 'long',
             iPath: posix,
         });
-        const lines = report.table.split('\n').map(strip);
+        const lines = report.table.split('\n').map(stripVTControlCharacters);
         expect(lines.reduce((a, b) => Math.max(a, b.length), 0)).toBeLessThanOrEqual(lineWidth);
         const output = lines.join('\n');
         expect(output).toEqual(`\
@@ -42,7 +42,7 @@ errorcode  - softwareTerms*    node_modules/@cspell/.../dict/softwareTerms.txt`)
 
     test('posix format short', () => {
         const consoleLines: string[] = [];
-        vi.spyOn(console, 'log').mockImplementation((a) => consoleLines.push(strip(a)));
+        vi.spyOn(console, 'log').mockImplementation((a) => consoleLines.push(stripVTControlCharacters(a)));
         const lineWidth = 80;
         emitTraceResults('errorcode', true, sampleResults(), {
             cwd: '/this_is_a_very/long/path',
@@ -64,7 +64,7 @@ errorcode  - softwareTerms*    node_modules/@cspell/.../dict/softwareTerms.txt`)
 
     test('win32 format long', () => {
         const consoleLines: string[] = [];
-        vi.spyOn(console, 'log').mockImplementation((a) => consoleLines.push(strip(a)));
+        vi.spyOn(console, 'log').mockImplementation((a) => consoleLines.push(stripVTControlCharacters(a)));
         const lineWidth = 80;
         emitTraceResults('errorcode', true, sampleResultsWin32(), {
             cwd: 'D:/this_is_a_very/long/path',
@@ -88,7 +88,7 @@ errorcode  - softwareTerms*    node_modules/@cspell/.../dict/softwareTerms.txt`)
 
     test('win32 format full', () => {
         const lines: string[] = [];
-        vi.spyOn(console, 'log').mockImplementation((a) => lines.push(strip(a)));
+        vi.spyOn(console, 'log').mockImplementation((a) => lines.push(stripVTControlCharacters(a)));
         const lineWidth = 80;
         emitTraceResults('errorcode', true, sampleResultsWin32(), {
             cwd: 'D:/this_is_a_very/long/path',

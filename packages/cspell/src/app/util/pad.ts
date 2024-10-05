@@ -1,4 +1,4 @@
-import strip from 'strip-ansi';
+import { stripVTControlCharacters } from "node:util";
 
 export function pad(s: string, w: number): string {
     const p = padWidth(s, w);
@@ -28,5 +28,5 @@ export function width(s: string): number {
 }
 
 export function ansiWidth(s: string): number {
-    return width(strip(s));
+    return width(stripVTControlCharacters(s));
 }
