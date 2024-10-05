@@ -38,6 +38,7 @@ const defaultTypeScriptConfig = { tsconfig: 'tsconfig.json' };
 function getPlugins(typeScriptConfig = defaultTypeScriptConfig) {
     return [
         rollupPluginTypescript({
+            outputToFilesystem: true,
             ...typeScriptConfig,
         }),
         rollupPluginNodeResolve({

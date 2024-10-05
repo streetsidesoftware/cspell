@@ -12,7 +12,7 @@ export {
 export { decodeTrie } from './decodeTrie.js';
 export type { WeightMap } from './distance/index.js';
 export { createWeightedMap, editDistance, editDistanceWeighted } from './distance/index.js';
-export { ExportOptions, importTrie, serializeTrie } from './io/importExport.js';
+export { type ExportOptions, importTrie, serializeTrie } from './io/importExport.js';
 export type { ITrie } from './ITrie.js';
 export { mapDictionaryInformationToWeightMap } from './mappers/mapDictionaryInfoToWeightMap.js';
 export type { SuggestionCostMapDef } from './models/suggestionCostsDef.js';
@@ -44,7 +44,8 @@ export {
     trieNodeToRoot,
     walk,
 } from './TrieNode/trie-util.js';
-export { ChildMap, FLAG_WORD, TrieNode, TrieRoot } from './TrieNode/TrieNode.js';
+export type { ChildMap, TrieNode, TrieRoot } from './TrieNode/TrieNode.js';
+export { FLAG_WORD } from './TrieNode/TrieNode.js';
 export { isDefined } from './utils/isDefined.js';
 export { mergeDefaults } from './utils/mergeDefaults.js';
 export { mergeOptionalWithDefaults } from './utils/mergeOptionalWithDefaults.js';

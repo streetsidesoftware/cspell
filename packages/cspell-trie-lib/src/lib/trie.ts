@@ -21,7 +21,7 @@ import { replaceAllFactory } from './utils/util.js';
 import type { CompoundWordsMethod, WalkerIterator } from './walker/index.js';
 import { walker } from './walker/index.js';
 
-export { PartialTrieInfo as PartialTrieOptions, TrieInfo as TrieOptions } from './ITrieNode/TrieInfo.js';
+export type { PartialTrieInfo as PartialTrieOptions, TrieInfo as TrieOptions } from './ITrieNode/TrieInfo.js';
 
 const defaultLegacyMinCompoundLength = 3;
 
