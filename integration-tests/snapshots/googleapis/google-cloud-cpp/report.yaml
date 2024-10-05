@@ -5,7 +5,7 @@ Args: '["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGEL
 Summary:
   files: 19694
   filesWithIssues: 12204
-  issues: 92570
+  issues: 92548
   errors: 0
 Errors: []
 
@@ -174,7 +174,6 @@ issues:
   - "ci/verify_quickstart/CMakeLists.txt:48:9        VCPKG               U       if (VCPKG_TARGET_TRIPLET)"
   - "ci/verify_quickstart/CMakeLists.txt:50:16       DVCPKG              U       \"-DVCPKG_TARGET_TRIPLET=${VCPKG"
   - "ci/verify_quickstart/CMakeLists.txt:53:5        externalproject     U       externalproject_add("
-  - "ci/verify_quickstart/CMakeLists.txt:86:57       pkgconfig           U       CMAKE_PREFIX_PATH}/lib64/pkgconfig:${CMAKE_PREFIX_PATH"
   - "ci/verify_quickstart/CMakeLists.txt:103:22      STREQUAL            U       if (\"${feature}\" STREQUAL \"experimental-storage"
   - "ci/verify_quickstart/CMakeLists.txt:108:10      vcpkg               U       # In vcpkg we cannot use `_` in"
   - "cmake/templates/config.pc.in:15:10          pcfiledir       U       prefix=${pcfiledir}/../.."

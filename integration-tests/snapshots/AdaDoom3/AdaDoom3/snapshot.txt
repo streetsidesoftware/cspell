@@ -3,7 +3,7 @@ Repository: AdaDoom3/AdaDoom3
 Url: "https://github.com/AdaDoom3/AdaDoom3.git"
 Args: ["**/*.*"]
 Lines:
- CSpell: Files checked: 103, Issues found: 3164 in 98 files.
+ CSpell: Files checked: 103, Issues found: 3159 in 98 files.
  exit code: 1
 Engine/Assembly/PPC/neo-engine-cpu.adb:5:78      - Unknown word (Squirek)    -- Copyright (C) 2016 Justin Squirek
 Engine/Assembly/x86-64/neo-engine-cpu.adb:100:111   - Unknown word (POPCNT)     -- ECX_Register, 23); -- POPCNT
@@ -144,9 +144,7 @@ Engine/Systems/Win32/neo-engine-system-console.adb:519:34    - Unknown word (Out
 Engine/Systems/Win32/neo-engine-system-console.adb:522:21    - Unknown word (MOUSEWHEEL)          -- when WM_MOUSEWHEEL =>
 Engine/Systems/Win32/neo-engine-system-console.adb:526:55    - Unknown word (VSCROLL)             -- Msg => WM_VSCROLL,
 Engine/Systems/Win32/neo-engine-system-console.adb:539:21    - Unknown word (KEYDOWN)             -- when WM_KEYDOWN =>
-Engine/Systems/Win32/neo-engine-system-console.adb:558:55    - Unknown word (GETTEXT)             -- SendMessageW (Input_Box, WM_GETTEXT, Int_Ptr (Input_Buffer
 Engine/Systems/Win32/neo-engine-system-console.adb:55:27     - Unknown word (TEXTMETRIC) -- Text_Metric : aliased TEXTMETRIC := (others =
-Engine/Systems/Win32/neo-engine-system-console.adb:564:55    - Unknown word (GETTEXT)             -- SendMessageW (Input_Box, WM_GETTEXT, Int_Ptr (Input_Buffer
 Engine/Systems/Win32/neo-engine-system-console.adb:56:27     - Unknown word (WNDCLASSEX) -- Class : aliased WNDCLASSEX := (others =
 Engine/Systems/Win32/neo-engine-system-console.adb:57:27     - Unknown word (NONCLIENTMETRICS) -- Metrics : aliased NONCLIENTMETRICS := (others => <>);
 Engine/Systems/Win32/neo-engine-system-console.adb:598:74    - Unknown word (GETFIRSTVISIBLELINE) -- SendMessageW (Output_Box, EM_GETFIRSTVISIBLELINE, 0, 0));
@@ -1185,10 +1183,9 @@ Engine/neo-api-windows.ads:281:6     - Unknown word (GETMINMAXINFO)       -- WM_
 Engine/neo-api-windows.ads:285:6     - Unknown word (VSCROLL)             -- WM_VSCROLL : constant Int
 Engine/neo-api-windows.ads:286:6     - Unknown word (SETREDRAW)           -- WM_SETREDRAW : constant Int
 Engine/neo-api-windows.ads:287:6     - Unknown word (MOUSEWHEEL)          -- WM_MOUSEWHEEL : constant Int_Unsigned
-Engine/neo-api-windows.ads:288:6     - Unknown word (GETTEXT)             -- WM_GETTEXT : constant Int
 Engine/neo-api-windows.ads:289:6     - Unknown word (KEYDOWN)             -- WM_KEYDOWN : constant Int
 Engine/neo-api-windows.ads:290:6     - Unknown word (SYSKEYDOWN)          -- WM_SYSKEYDOWN : constant Int_Unsigned
-Engine/neo-api-windows.ads:291:6     - Unknown word (SETTEXT)            -- WM_SETTEXT : constant Int
+Engine/neo-api-windows.ads:291:6     - Unknown word (SETTEXT)             -- WM_SETTEXT : constant Int
 Engine/neo-api-windows.ads:292:6     - Unknown word (SETFONT)            -- WM_SETFONT : constant Int
 Engine/neo-api-windows.ads:295:6     - Unknown word (SYSCOMMAND)         -- WM_SYSCOMMAND : constant Int_Unsigned
 Engine/neo-api-windows.ads:296:6     - Unknown word (CTLCOLOREDIT)       -- WM_CTLCOLOREDIT : constant Int_Unsigned
@@ -1252,7 +1249,7 @@ Engine/neo-api-windows.ads:430:54    - Unknown word (HCURSOR)            -- := N
 Engine/neo-api-windows.ads:431:54    - Unknown word (HBRUSH)             -- := 0;        -- HBRUSH
 Engine/neo-api-windows.ads:432:54    - Unknown word (LPCTSTR)            -- _C := null;     -- LPCTSTR
 Engine/neo-api-windows.ads:432:7     - Unknown word (lpsz)               -- lpszMenuName : Ptr_Char
-Engine/neo-api-windows.ads:433:54    - Unknown word (LPCTSTR)           -- _C := null;     -- LPCTSTR
+Engine/neo-api-windows.ads:433:54    - Unknown word (LPCTSTR)            -- _C := null;     -- LPCTSTR
 Engine/neo-api-windows.ads:433:7     - Unknown word (lpsz)               -- lpszClassName : Ptr_Char
 Engine/neo-api-windows.ads:434:54    - Unknown word (HICON)             -- := NULL_PTR; -- HICON
 Engine/neo-api-windows.ads:451:7     - Unknown word (Gamepad)           -- Gamepad : XINPUT_GAMEPAD
@@ -3145,8 +3142,6 @@ neo.gpr:87:72     - Unknown word (GLSL)       -- -- GLSL shaders
 neo.gpr:92:98     - Unknown word (senario)    -- the source access to senario variable DEBUG
 neo.gpr:99:25     - Unknown word (Xlinker)    -- Switch_Linker := ("-Xlinker", -- Setup
 readme.md:27:2      - Unknown word (gprbuild)   -- `gprbuild -p -P neo.gpr `
-runsdk.hta:161:13    - Unknown word (APPDATA)    -- var APPDATA_FOLDER = '%APPDATA%
-runsdk.hta:161:32    - Unknown word (APPDATA)    -- var APPDATA_FOLDER = '%APPDATA%\\roaming\\neo';
 runsdk.hta:168:37    - Unknown word (HKLM)       -- ARCHITECTURE_REG_KEY = 'HKLM\\SYSTEM\\CurrentControlSet
 runsdk.hta:16:52     - Unknown word (scriptable) -- tools or performing scriptable actions necessary for
 runsdk.hta:175:66    - Unknown word (Bitsize)    -- SCENARIO_OPTION_PREFIX + 'Bitsize=' + BIT_SIZE;
