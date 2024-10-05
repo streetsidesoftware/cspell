@@ -1,4 +1,4 @@
-import { stripVTControlCharacters } from "node:util";
+import { stripVTControlCharacters } from 'node:util';
 
 export function pad(s: string, w: number): string {
     const p = padWidth(s, w);
