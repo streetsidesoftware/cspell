@@ -1,4 +1,5 @@
-import strip from 'strip-ansi';
+import { stripVTControlCharacters } from 'node:util';
+
 import { describe, expect, test } from 'vitest';
 
 import type { Table } from './table.js';
@@ -15,7 +16,7 @@ describe('Validate table.ts', () => {
             ],
         };
         const x = tableToLines(table);
-        expect(x.map(strip)).toEqual([
+        expect(x.map(stripVTControlCharacters)).toEqual([
             'id     | name    ',
             '27438  | Computer',
             '273438 | Desk    ',
