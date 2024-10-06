@@ -5,7 +5,7 @@ Args: '["**"]'
 Summary:
   files: 355
   filesWithIssues: 350
-  issues: 4423
+  issues: 4416
   errors: 0
 Errors: []
 
@@ -502,7 +502,6 @@ issues:
   - "lua/lspconfig/server_configurations/rust_analyzer.lua:24:34         RUSTUP      U       rustup_home = os.getenv 'RUSTUP_HOME' or util.path.join"
   - "lua/lspconfig/server_configurations/scheme_langserver.lua:4:4           Akku    U       'Akku.manifest',"
   - "lua/lspconfig/server_configurations/shopify_theme_ls.lua:4:5            shopifyignore       U       '.shopifyignore',"
-  - "lua/lspconfig/server_configurations/sourcery.lua:20:28          readfile    U       local content = vim.fn.readfile(auth_file_path)"
   - "lua/lspconfig/server_configurations/spyglassmc_language_server.lua:7:40         mcmeta      U       util.root_pattern 'pack.mcmeta',"
   - "lua/lspconfig/server_configurations/sqlls.lua:7:36          sqllsrc     U       util.root_pattern '.sqllsrc.json',"
   - "lua/lspconfig/server_configurations/stylelint_lsp.lua:4:5           stylelintrc     U       '.stylelintrc',"
@@ -512,9 +511,7 @@ issues:
   - "lua/lspconfig/server_configurations/texlab.lua:159:58       texlabroot      U       git', '.latexmkrc', '.texlabroot', 'texlabroot', 'Tectonic"
   - "lua/lspconfig/server_configurations/textlsp.lua:13:69       enaled      U       page. LanguageTool is enaled here"
   - "lua/lspconfig/server_configurations/vdmj.lua:24:9           subdirs         U       local subdirs = function(file)"
-  - "lua/lspconfig/server_configurations/vdmj.lua:29:29          readdir         U       candidates = vim.fn.readdir(path, subdirs)"
   - "lua/lspconfig/server_configurations/vdmj.lua:35:37          startpath       U       find_vscode_ancestor(startpath)"
-  - "lua/lspconfig/server_configurations/vdmj.lua:103:11         classpath       U       local classpath = table.concat({"
   - "lua/lspconfig/server_configurations/vdmj.lua:114:9          Dlsp            U       '-Dlsp.log.filename=' .. config"
   - "lua/lspconfig/server_configurations/zk.lua:5:15         isdirectory     U       if vim.fn.isdirectory(vim.fs.joinpath(dir"
   - "lua/lspconfig/server_configurations/zk.lua:29:15        bufpath         U       local bufpath = vim.api.nvim_buf_get"

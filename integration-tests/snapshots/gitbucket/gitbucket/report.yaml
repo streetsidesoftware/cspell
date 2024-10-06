@@ -5,7 +5,7 @@ Args: '["**"]'
 Summary:
   files: 411
   filesWithIssues: 396
-  issues: 2032
+  issues: 1920
   errors: 0
 Errors: []
 
@@ -36,7 +36,6 @@ issues:
   - "build.sbt:91:11         javac               U       compile / javacOptions ++= Seq(\"-target"
   - "build.sbt:92:26         Dlogback            U       Jetty / javaOptions += \"-Dlogback.configurationFile=/logback"
   - "build.sbt:96:25         Dgitbucket          U       Test / javaOptions += \"-Dgitbucket.home=target/gitbucket"
-  - "build.sbt:130:32        servlet             U       eclipse.jetty\" % \"jetty-servlet\" % JettyVersion %"
   - "build.sbt:241:11        takezoe             U       <id>takezoe</id>"
   - "build.sbt:242:13        Naoki               U       <name>Naoki Takezoe</name>"
   - "build.sbt:242:19        Takezoe             U       <name>Naoki Takezoe</name>"
@@ -69,8 +68,6 @@ issues:
   - "doc/auto_update.md:3:56         Solidbase       U       automatically using [Solidbase](https://github.com"
   - "doc/auto_update.md:10:9         Liquibase       U       new LiquibaseMigration(\"update/gitbucket"
   - "doc/auto_update.md:28:48        varchar         U       EXTERNAL_WIKI_URL\" type=\"varchar(200)\" nullable=\"true"
-  - "doc/auto_update.md:36:104       classpath       U       load a SQL file from classpath in the following order"
-  - "doc/directory.md:15:53          Servlet     U       substance of repository. GitServlet sees this directory"
   - "doc/directory.md:32:24          millis      U       * current time millis + random 10 alphanumeric"
   - "doc/icons.svg:3:61          xlink           U       org/2000/svg\" xmlns:xlink=\"http://www.w3.org/"
   - "doc/icons.svg:13:145        linecap         U       width=\"0.781\" stroke-linecap=\"round\" stroke-linejoin"
@@ -118,7 +115,6 @@ issues:
   - "doc/licenses.md:92:70       reactivestreams         U       publicdomain/zero/1.0/) | org.reactivestreams # reactive-streams"
   - "doc/licenses.md:94:92       scijava                 U       publicdomain/zero/1.0/) | org.scijava # native-lib-loader"
   - "doc/licenses.md:97:86       jaxb                    U       | javax.xml.bind # jaxb-api # 2.3.0 | <notextile"
-  - "doc/licenses.md:98:10       Classpath               U       GPL with Classpath Extension | [CDDL +"
   - "doc/licenses.md:102:106     mchange                 U       lgpl-2.1.html) | com.mchange # c3p0 # 0.9.5.2 |"
   - "doc/licenses.md:104:39      jdbc                    U       null) | org.mariadb.jdbc # mariadb-java-client"
   - "doc/licenses.md:105:55      rnorth                  U       licenses/MIT) | org.rnorth # tcp-unix-socket-proxy"

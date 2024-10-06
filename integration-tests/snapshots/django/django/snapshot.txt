@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["--issues-summary-report","**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2792, Issues found: 7915 in 897 files.
+ CSpell: Files checked: 2792, Issues found: 7906 in 897 files.
  exit code: 1
 django/__init__.py:12:26     - Unknown word (urlresolvers) -- Set the thread-local urlresolvers script prefix if `set
 django/apps/registry.py:134:40    - Unknown word (unconfigured) -- not ready" is due to unconfigured settings, accessing
@@ -314,10 +314,6 @@ django/contrib/gis/db/backends/postgis/operations.py:128:5     - Unknown word (u
 django/contrib/gis/db/backends/postgis/operations.py:167:44    - Unknown word (bytea)      -- is_psycopg3 else "%s::bytea"
 django/contrib/gis/db/backends/postgis/operations.py:201:17    - Unknown word (vtup)       -- vtup = self.postgis_version
 django/contrib/gis/db/backends/postgis/operations.py:210:23    - Unknown word (vtup)       -- version = vtup[1:]
-django/contrib/gis/db/backends/postgis/operations.py:235:21    - Unknown word (zmin)       -- xmin, ymin, zmin = map(float, ll.split
-django/contrib/gis/db/backends/postgis/operations.py:236:21    - Unknown word (zmax)       -- xmax, ymax, zmax = map(float, ur.split
-django/contrib/gis/db/backends/postgis/operations.py:237:29    - Unknown word (zmin)       -- return (xmin, ymin, zmin, xmax, ymax, zmax)
-django/contrib/gis/db/backends/postgis/operations.py:237:47    - Unknown word (zmax)       -- ymin, zmin, xmax, ymax, zmax)
 django/contrib/gis/db/backends/postgis/operations.py:83:70     - Unknown word (rast)       -- don't support mixed (rast-geom)
 django/contrib/gis/db/backends/postgis/pgraster.py:100:17    - Unknown word (rast)       -- def to_pgraster(rast):
 django/contrib/gis/db/backends/postgis/pgraster.py:107:5     - Unknown word (rasterheader) -- rasterheader = (
@@ -481,9 +477,7 @@ django/contrib/gis/gdal/layer.py:63:9      - Unknown word (capi)       -- capi.r
 django/contrib/gis/gdal/layer.py:65:27     - Unknown word (capi)       -- yield Feature(capi.get_next_feature(self
 django/contrib/gis/gdal/layer.py:85:32     - Unknown word (capi)       -- return Feature(capi.get_feature(self.ptr
 django/contrib/gis/gdal/libgdal.py:67:1      - Unknown word (lgdal)      -- lgdal = CDLL(lib_path)
-django/contrib/gis/gdal/libgdal.py:70:3      - Unknown word (STDCALL)    -- # STDCALL, while others are not
 django/contrib/gis/gdal/libgdal.py:76:5      - Unknown word (lwingdal)   -- lwingdal = WinDLL(lib_path)
-django/contrib/gis/gdal/libgdal.py:81:24     - Unknown word (STDCALL)    -- Return the correct STDCALL function for certain
 django/contrib/gis/gdal/libgdal.py:85:16     - Unknown word (lwingdal)   -- return lwingdal[func]
 django/contrib/gis/gdal/libgdal.py:87:16     - Unknown word (lgdal)      -- return lgdal[func]
 django/contrib/gis/gdal/prototypes/ds.py:10:30     - Unknown word (libgdal)    -- django.contrib.gis.gdal.libgdal import lgdal
@@ -1139,7 +1133,6 @@ django/core/signing.py:16:20     - Unknown word (Imhlb)      -- >>> signing.load
 django/core/signing.py:16:61     - Unknown word (sgmk)       -- YIye-ze3TTx7gtSv422nZA4sgmk")
 django/core/signing.py:18:20     - Unknown word (Imhlb)      -- >>> signing.loads("ImhlbGxvIg:1QaUZC:YIye-ze
 django/core/signing.py:20:26     - Unknown word (Imhlb)      -- BadSignature: Signature "ImhlbGxvIg:1QaUZC:YIye-ze
-django/core/signing.py:246:32    - Unknown word (uncompress) -- # It's compressed; uncompress it first.
 django/core/signing.py:27:32     - Unknown word (ZVJs)       -- eJwFwcERACAIwLCF-rCiILN47r-GyZVJsNgkxaFxoDgxcOHGxMKD_T
 django/core/signing.py:27:36     - Unknown word (Ngkxa)      -- FwcERACAIwLCF-rCiILN47r-GyZVJsNgkxaFxoDgxcOHGxMKD_T7vhAml
 django/core/signing.py:27:44     - Unknown word (Dgxc)       -- rCiILN47r-GyZVJsNgkxaFxoDgxcOHGxMKD_T7vhAml:1QaUaL
@@ -1778,7 +1771,6 @@ django/http/response.py:474:20    - Unknown word (awrapper)   -- return awrapper
 django/http/response.py:576:37    - Unknown word (getbuffer)  -- elif hasattr(filelike, "getbuffer"):
 django/http/response.py:578:30    - Unknown word (getbuffer)  -- filelike.getbuffer().nbytes - filelike
 django/http/response.py:578:42    - Unknown word (nbytes)     -- filelike.getbuffer().nbytes - filelike.tell()
-django/http/response.py:595:19    - Unknown word (uncompressing) -- # uncompressing files.
 django/middleware/clickjacking.py:17:7      - Unknown word (xframe)     -- a xframe_options_exempt value
 django/middleware/clickjacking.py:30:38     - Unknown word (xframe)     -- set it if they used @xframe_options_exempt
 django/middleware/clickjacking.py:31:31     - Unknown word (xframe)     -- if getattr(response, "xframe_options_exempt", False
@@ -6779,7 +6771,6 @@ tests/responses/test_fileresponse.py:114:33    - Unknown word (pynosuchfile) -- 
 tests/responses/test_fileresponse.py:237:16    - Unknown word (mkfifo)       -- os.mkfifo(pipe_file)
 tests/responses/test_fileresponse.py:238:53    - Unknown word (RDONLY)       -- open(pipe_file, os.O_RDONLY | os.O_NONBLOCK)
 tests/responses/test_fileresponse.py:238:67    - Unknown word (NONBLOCK)     -- os.O_RDONLY | os.O_NONBLOCK)
-tests/responses/test_fileresponse.py:252:9     - Unknown word (uncompress)   -- uncompress the file, which is most
 tests/responses/test_fileresponse.py:272:49    - Unknown word (opendocument) -- application/vnd.oasis.opendocument.text",
 tests/responses/test_fileresponse.py:276:36    - Unknown word (opendocument) -- application/vnd.oasis.opendocument.text",
 tests/responses/tests.py:164:19    - Unknown word (textiowrapper) -- def test_wrap_textiowrapper(self):

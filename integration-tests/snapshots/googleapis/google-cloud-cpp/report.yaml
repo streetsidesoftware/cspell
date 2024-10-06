@@ -4,8 +4,8 @@ Url: https://github.com/googleapis/google-cloud-cpp.git
 Args: '["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]'
 Summary:
   files: 19694
-  filesWithIssues: 12204
-  issues: 92548
+  filesWithIssues: 12202
+  issues: 92484
   errors: 0
 Errors: []
 
@@ -169,16 +169,12 @@ issues:
   - "ci/verify_current_targets/CMakeLists.txt:56:1           endfunction     U       endfunction ()"
   - "ci/verify_current_targets/CMakeLists.txt:60:1           endforeach      U       endforeach ()"
   - "ci/verify_current_targets/CMakeLists.txt:87:26          protos          U       cloud_dialogflow_v2_protos\""
-  - "ci/verify_quickstart/CMakeLists.txt:22:35       DFEATURES           U       FATAL_ERROR \"Missing -DFEATURES argument, for example"
-  - "ci/verify_quickstart/CMakeLists.txt:42:16       DCMAKE              U       \"-DCMAKE_PREFIX_PATH=${CMAKE"
-  - "ci/verify_quickstart/CMakeLists.txt:48:9        VCPKG               U       if (VCPKG_TARGET_TRIPLET)"
-  - "ci/verify_quickstart/CMakeLists.txt:50:16       DVCPKG              U       \"-DVCPKG_TARGET_TRIPLET=${VCPKG"
-  - "ci/verify_quickstart/CMakeLists.txt:53:5        externalproject     U       externalproject_add("
-  - "ci/verify_quickstart/CMakeLists.txt:103:22      STREQUAL            U       if (\"${feature}\" STREQUAL \"experimental-storage"
-  - "ci/verify_quickstart/CMakeLists.txt:108:10      vcpkg               U       # In vcpkg we cannot use `_` in"
-  - "cmake/templates/config.pc.in:15:10          pcfiledir       U       prefix=${pcfiledir}/../.."
-  - "cmake/templates/config.pc.in:17:1           libdir          U       libdir=@GOOGLE_CLOUD_CPP_PC"
-  - "cmake/templates/config.pc.in:17:29          LIBDIR          U       GOOGLE_CLOUD_CPP_PC_LIBDIR@"
+  - "ci/verify_quickstart/CMakeLists.txt:22:35       DFEATURES       U       FATAL_ERROR \"Missing -DFEATURES argument, for example"
+  - "ci/verify_quickstart/CMakeLists.txt:42:16       DCMAKE          U       \"-DCMAKE_PREFIX_PATH=${CMAKE"
+  - "ci/verify_quickstart/CMakeLists.txt:48:9        VCPKG           U       if (VCPKG_TARGET_TRIPLET)"
+  - "ci/verify_quickstart/CMakeLists.txt:50:16       DVCPKG          U       \"-DVCPKG_TARGET_TRIPLET=${VCPKG"
+  - "ci/verify_quickstart/CMakeLists.txt:103:22      STREQUAL        U       if (\"${feature}\" STREQUAL \"experimental-storage"
+  - "ci/verify_quickstart/CMakeLists.txt:108:10      vcpkg           U       # In vcpkg we cannot use `_` in"
   - "cmake/templates/config.pc.in:18:1           includedir      U       includedir=@GOOGLE_CLOUD_CPP_PC"
   - "cmake/templates/config.pc.in:18:33          INCLUDEDIR      U       GOOGLE_CLOUD_CPP_PC_INCLUDEDIR@"
   - "cmake/templates/config.pc.in:26:1           Cflags          U       Cflags: -I${includedir} @GOOGLE"
@@ -229,7 +225,6 @@ issues:
   - "doc/contributor/howto-guide-setup-development-workstation.md:306:1          choco               U       choco install -y visualstudio"
   - "doc/contributor/howto-guide-setup-development-workstation.md:306:70         nativedesktop       U       visualstudio2019-workload-nativedesktop visualstudio2019buildtools"
   - "doc/contributor/howto-guide-setup-development-workstation.md:306:100        buildtools          U       nativedesktop visualstudio2019buildtools"
-  - "doc/contributor/howto-guide-setup-development-workstation.md:328:100        vcvars              U       Community\\VC\\Auxiliary\\Build\\vcvars64.bat\""
   - "doc/contributor/howto-guide-setup-development-workstation.md:405:20         Bcmake              U       cmake -GNinja -S. -Bcmake-out/ \\"
   - "doc/contributor/howto-guide-setup-development-workstation.md:442:29         devbox              U       e.g. VM=my-windows-devbox"
   - "doc/contributor/howto-guide-setup-development-workstation.md:473:16         vtpm                U       --shielded-vtpm \\"
@@ -849,7 +844,6 @@ issues:
   - "google/cloud/internal/curl_rest_client_integration_test.cc:60:62        HTTPBIN     U       cloud::internal::GetEnv(\"HTTPBIN_ENDPOINT\");"
   - "google/cloud/internal/curl_rest_client_integration_test.cc:113:21       httbin      U       // TODO(#8396): httbin.org doesn't send back"
   - "google/cloud/internal/curl_wrappers_test.cc:53:14       Casse       U       struct TestCasse {"
-  - "google/cloud/internal/detect_gcp_impl.cc:122:16         HKEY    U       config.key = HKEY_LOCAL_MACHINE;"
   - "google/cloud/internal/detect_gcp_test.cc:43:43          Loogle      U       testing::Values(\"Loogle\", \"Test\", \"Google K"
   - "google/cloud/internal/detect_gcp_test.cc:58:56          LPBYTE      U       value_key, 0, REG_SZ, (LPBYTE)value.c_str(),"
   - "google/cloud/internal/diagnostics_pop.inc:17:2          elif    U       #elif __clang__"

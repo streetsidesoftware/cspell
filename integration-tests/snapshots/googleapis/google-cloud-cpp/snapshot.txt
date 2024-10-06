@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 19694, Issues found: 92548 in 12204 files.
+ CSpell: Files checked: 19694, Issues found: 92484 in 12202 files.
  exit code: 1
 ARCHITECTURE.md:158:48    - Unknown word (googlemock) -- implementation using `googlemock`
 ARCHITECTURE.md:29:61     - Unknown word (retryable)  -- RPCs that fail with a retryable error,
@@ -176,16 +176,12 @@ ci/verify_current_targets/CMakeLists.txt:54:47     - Unknown word (ARGN)       -
 ci/verify_current_targets/CMakeLists.txt:56:1      - Unknown word (endfunction) -- endfunction ()
 ci/verify_current_targets/CMakeLists.txt:60:1      - Unknown word (endforeach)  -- endforeach ()
 ci/verify_current_targets/CMakeLists.txt:87:26     - Unknown word (protos)      -- cloud_dialogflow_v2_protos"
-ci/verify_quickstart/CMakeLists.txt:103:22    - Unknown word (STREQUAL)        -- if ("${feature}" STREQUAL "experimental-storage
-ci/verify_quickstart/CMakeLists.txt:108:10    - Unknown word (vcpkg)           -- # In vcpkg we cannot use `_` in
+ci/verify_quickstart/CMakeLists.txt:103:22    - Unknown word (STREQUAL)   -- if ("${feature}" STREQUAL "experimental-storage
+ci/verify_quickstart/CMakeLists.txt:108:10    - Unknown word (vcpkg)      -- # In vcpkg we cannot use `_` in
 ci/verify_quickstart/CMakeLists.txt:22:35     - Unknown word (DFEATURES)  -- FATAL_ERROR "Missing -DFEATURES argument, for example
 ci/verify_quickstart/CMakeLists.txt:42:16     - Unknown word (DCMAKE)     -- "-DCMAKE_PREFIX_PATH=${CMAKE
 ci/verify_quickstart/CMakeLists.txt:48:9      - Unknown word (VCPKG)      -- if (VCPKG_TARGET_TRIPLET)
 ci/verify_quickstart/CMakeLists.txt:50:16     - Unknown word (DVCPKG)     -- "-DVCPKG_TARGET_TRIPLET=${VCPKG
-ci/verify_quickstart/CMakeLists.txt:53:5      - Unknown word (externalproject) -- externalproject_add(
-cmake/templates/config.pc.in:15:10     - Unknown word (pcfiledir)  -- prefix=${pcfiledir}/../..
-cmake/templates/config.pc.in:17:1      - Unknown word (libdir)     -- libdir=@GOOGLE_CLOUD_CPP_PC
-cmake/templates/config.pc.in:17:29     - Unknown word (LIBDIR)     -- GOOGLE_CLOUD_CPP_PC_LIBDIR@
 cmake/templates/config.pc.in:18:1      - Unknown word (includedir) -- includedir=@GOOGLE_CLOUD_CPP_PC
 cmake/templates/config.pc.in:18:33     - Unknown word (INCLUDEDIR) -- GOOGLE_CLOUD_CPP_PC_INCLUDEDIR@
 cmake/templates/config.pc.in:26:1      - Unknown word (Cflags)     -- Cflags: -I${includedir} @GOOGLE
@@ -224,7 +220,6 @@ doc/contributor/howto-guide-setup-development-workstation.md:300:111   - Unknown
 doc/contributor/howto-guide-setup-development-workstation.md:306:1     - Unknown word (choco)           -- choco install -y visualstudio
 doc/contributor/howto-guide-setup-development-workstation.md:306:100   - Unknown word (buildtools)      -- nativedesktop visualstudio2019buildtools
 doc/contributor/howto-guide-setup-development-workstation.md:306:70    - Unknown word (nativedesktop)   -- visualstudio2019-workload-nativedesktop visualstudio2019buildtools
-doc/contributor/howto-guide-setup-development-workstation.md:328:100   - Unknown word (vcvars)          -- Community\VC\Auxiliary\Build\vcvars64.bat"
 doc/contributor/howto-guide-setup-development-workstation.md:405:20    - Unknown word (Bcmake)          -- cmake -GNinja -S. -Bcmake-out/ \
 doc/contributor/howto-guide-setup-development-workstation.md:442:29    - Unknown word (devbox)          -- e.g. VM=my-windows-devbox
 doc/contributor/howto-guide-setup-development-workstation.md:473:16    - Unknown word (vtpm)            -- --shielded-vtpm \
@@ -845,7 +840,6 @@ google/cloud/internal/curl_rest_client_integration_test.cc:113:21    - Unknown w
 google/cloud/internal/curl_rest_client_integration_test.cc:60:10     - Unknown word (httpbin)    -- auto httpbin_endpoint = google::cloud
 google/cloud/internal/curl_rest_client_integration_test.cc:60:62     - Unknown word (HTTPBIN)    -- cloud::internal::GetEnv("HTTPBIN_ENDPOINT");
 google/cloud/internal/curl_wrappers_test.cc:53:14     - Unknown word (Casse)      -- struct TestCasse {
-google/cloud/internal/detect_gcp_impl.cc:122:16    - Unknown word (HKEY)       -- config.key = HKEY_LOCAL_MACHINE;
 google/cloud/internal/detect_gcp_test.cc:43:43     - Unknown word (Loogle)     -- testing::Values("Loogle", "Test", "Google K
 google/cloud/internal/detect_gcp_test.cc:58:56     - Unknown word (LPBYTE)     -- value_key, 0, REG_SZ, (LPBYTE)value.c_str(),
 google/cloud/internal/diagnostics_pop.inc:17:2      - Unknown word (elif)       -- #elif __clang__
