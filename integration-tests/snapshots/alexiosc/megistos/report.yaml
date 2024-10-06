@@ -5,7 +5,7 @@ Args: '["--config=${repoConfig}/cspell.json","**/*.{md,c,h,html}"]'
 Summary:
   files: 583
   filesWithIssues: 577
-  issues: 47252
+  issues: 47233
   errors: 0
 Errors: []
 
@@ -42,7 +42,6 @@ issues:
   - "ATTIC/intl/dcigettext.c:229:20      nfile               U       struct loaded_l10nfile *domain;"
   - "ATTIC/intl/dcigettext.c:251:12      transcmp            U       static int transcmp PARAMS ((const void"
   - "ATTIC/intl/dcigettext.c:279:9       INTVARDEF           U       #ifndef INTVARDEF"
-  - "ATTIC/intl/dcigettext.c:298:36      LOCALEDIR           U       default_dirname[] = LOCALEDIR;"
   - "ATTIC/intl/dcigettext.c:313:20      categoryname        U       const char *categoryname))"
   - "ATTIC/intl/dcigettext.c:316:22      localeinfo          U       include \"../locale/localeinfo.h\""
   - "ATTIC/intl/dcigettext.c:327:10      freea               U       # define freea(p) /* nothing */"
@@ -147,11 +146,9 @@ issues:
   - "ATTIC/intl/localename.c:733:19      TAMAZIGHT           U       case 0x5f: /* TAMAZIGHT */ return \"ber_MA\";"
   - "ATTIC/intl/localename.c:741:19      TSONGA              U       case 0x31: /* TSONGA */ return \"ts_ZA\";"
   - "ATTIC/intl/localename.c:760:19      VENDA               U       case 0x33: /* VENDA */ return \"ven_ZA\";"
-  - "ATTIC/intl/log.c:99:27          nmsgstr     U       fprintf (logfile, \"\\nmsgstr[0] \\\"\\\"\\n\");"
   - "ATTIC/intl/os2compat.c:29:80        ppsz                U       pszName, unsigned char **ppszValue);"
   - "ATTIC/intl/os2compat.c:44:8         nlos                U       char *_nlos2_libdir = NULL;"
   - "ATTIC/intl/os2compat.c:45:14        localealiaspath     U       char *_nlos2_localealiaspath = NULL;"
-  - "ATTIC/intl/os2compat.c:46:14        localedir           U       char *_nlos2_localedir = NULL;"
   - "ATTIC/intl/os2compat.c:51:25        UNIXROOT            U       char *root = getenv (\"UNIXROOT\");"
   - "ATTIC/intl/os2compat.c:52:9         gnulocaledir        U       char *gnulocaledir = getenv (\"GNULOCALEDIR"
   - "ATTIC/intl/os2compat.c:52:33        GNULOCALEDIR        U       gnulocaledir = getenv (\"GNULOCALEDIR\");"
@@ -6459,7 +6456,6 @@ issues:
   - "src/libmegistos/msgidx.c:274:11         sourceidx           U       int32_t sourceidx = strlen (MBK_MAGIC"
   - "src/libmegistos/msgidx.c:378:23         xlated              U       char line[1024], xlated[1024], text[16384];"
   - "src/libmegistos/msgidx.c:417:16         shouldbe            U       char shouldbe[256];"
-  - "src/libmegistos/msgidx.c:704:20         BUILDDIR            U       if ((s = getenv (\"BUILDDIR\")) != NULL) {"
   - "src/libmegistos/msgidx.c:715:13         msdidx              U       perror(\"msdidx: malloc()\");"
   - "src/libmegistos/msgidx.c:732:40         INSTANCEDIR         U       malloc (/*strlen (__INSTANCEDIR) + 1 +*/"
   - "src/libmegistos/output.c:66:24          protectvars     U       Fixed bug involving protectvars in printfile()."

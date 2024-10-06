@@ -5,7 +5,7 @@ Args: '["**/*.*"]'
 Summary:
   files: 103
   filesWithIssues: 98
-  issues: 3164
+  issues: 3159
   errors: 0
 Errors: []
 
@@ -922,7 +922,6 @@ issues:
   - "Engine/neo-api-windows.ads:285:6        VSCROLL                 U       WM_VSCROLL : constant Int"
   - "Engine/neo-api-windows.ads:286:6        SETREDRAW               U       WM_SETREDRAW : constant Int"
   - "Engine/neo-api-windows.ads:287:6        MOUSEWHEEL              U       WM_MOUSEWHEEL : constant Int_Unsigned"
-  - "Engine/neo-api-windows.ads:288:6        GETTEXT                 U       WM_GETTEXT : constant Int"
   - "Engine/neo-api-windows.ads:289:6        KEYDOWN                 U       WM_KEYDOWN : constant Int"
   - "Engine/neo-api-windows.ads:290:6        SYSKEYDOWN              U       WM_SYSKEYDOWN : constant Int_Unsigned"
   - "Engine/neo-api-windows.ads:291:6        SETTEXT                 U       WM_SETTEXT : constant Int"
@@ -2187,8 +2186,6 @@ issues:
   - "Engine/Systems/Win32/neo-engine-system-console.adb:522:21       MOUSEWHEEL              U       when WM_MOUSEWHEEL =>"
   - "Engine/Systems/Win32/neo-engine-system-console.adb:526:55       VSCROLL                 U       Msg => WM_VSCROLL,"
   - "Engine/Systems/Win32/neo-engine-system-console.adb:539:21       KEYDOWN                 U       when WM_KEYDOWN =>"
-  - "Engine/Systems/Win32/neo-engine-system-console.adb:558:55       GETTEXT                 U       SendMessageW (Input_Box, WM_GETTEXT, Int_Ptr (Input_Buffer"
-  - "Engine/Systems/Win32/neo-engine-system-console.adb:564:55       GETTEXT                 U       SendMessageW (Input_Box, WM_GETTEXT, Int_Ptr (Input_Buffer"
   - "Engine/Systems/Win32/neo-engine-system-console.adb:598:74       GETFIRSTVISIBLELINE     U       SendMessageW (Output_Box, EM_GETFIRSTVISIBLELINE, 0, 0));"
   - "Engine/Systems/Win32/neo-engine-system-console.adb:604:48       SETREDRAW               U       SendMessageW (Output_Box, WM_SETREDRAW, 0, 0));"
   - "Engine/Systems/Win32/neo-engine-system-console.adb:607:48       GETSEL                  U       SendMessageW (Output_Box, EM_GETSEL, To_Int_Ptr (Start_Selection"
@@ -2428,8 +2425,6 @@ issues:
   - "readme.md:27:2          gprbuild    U       `gprbuild -p -P neo.gpr `"
   - "runsdk.hta:5:78         Squirek         U       Copyright (C) 2016 Justin Squirek"
   - "runsdk.hta:16:52        scriptable      U       tools or performing scriptable actions necessary for"
-  - "runsdk.hta:161:13       APPDATA         U       var APPDATA_FOLDER = '%APPDATA%"
-  - "runsdk.hta:161:32       APPDATA         U       var APPDATA_FOLDER = '%APPDATA%\\\\roaming\\\\neo';"
   - "runsdk.hta:168:37       HKLM            U       ARCHITECTURE_REG_KEY = 'HKLM\\\\SYSTEM\\\\CurrentControlSet"
   - "runsdk.hta:175:66       Bitsize         U       SCENARIO_OPTION_PREFIX + 'Bitsize=' + BIT_SIZE;"
   - "runsdk.hta:182:17       GNATMAKE        U       var CMD_GNATMAKE = 'gnatmake -P .\\\\neo"

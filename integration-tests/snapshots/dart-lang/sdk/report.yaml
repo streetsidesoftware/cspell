@@ -4,8 +4,8 @@ Url: https://github.com/dart-lang/sdk
 Args: '["--issues-summary-report","--locale=en,en-GB","--exclude=tools/dom/**/*.json","--exclude=pkg/*/test/**","--exclude=**/*_data.*","--exclude=runtime/vm/**","--exclude=sdk/lib/html/**","--exclude=benchmarks/**","--exclude=**/*_test.*","--exclude=*/**/*.{json,yaml,yml}","--exclude=tests/corelib/regexp/**","--exclude=**/{third_party,assets}/**","**/*.{dart,md}"]'
 Summary:
   files: 9723
-  filesWithIssues: 1910
-  issues: 8845
+  filesWithIssues: 1909
+  issues: 8824
   errors: 0
 Errors: []
 
@@ -13,7 +13,6 @@ issues:
   - "build/linux/alpine_sysroot_scripts/README.md:1:16           Sysroots    U       # Alpine Linux Sysroots"
   - "build/linux/alpine_sysroot_scripts/README.md:3:73           sysroot     U       contributed alpine linux sysroot support."
   - "build/linux/alpine_sysroot_scripts/README.md:11:33          sysroots    U       the script installs sysroots for the following architectur"
-  - "build/linux/alpine_sysroot_scripts/README.md:13:4           aarch       U       - `aarch64`"
   - "build/linux/alpine_sysroot_scripts/README.md:14:4           armv        U       - `armv7`"
   - "build/linux/alpine_sysroot_scripts/README.md:21:65          riscv       U       install-sysroot.sh aarch64 riscv64 x86_64 ..."
   - "build/linux/alpine_sysroot_scripts/README.md:29:24          workdir     U       --workdir \"$PWD\" \\"
@@ -36,7 +35,6 @@ issues:
   - "docs/Building.md:151:9          runhooks        U       gclient runhooks"
   - "docs/Building.md:163:52         dartk           U       arch=ia32 --compiler=dartk,dart2js --runtime=vm"
   - "docs/Building.md:169:54         corelib         U       arch=ia32 --runtime=vm corelib"
-  - "docs/Building.md:239:12         xvfb            U       * Use `xvfb`:"
   - "docs/Building.md:245:84         xhost           U       NX, VNC, setting up `xhost` and exporting the DISPLAY"
   - "docs/Cherry-picks-to-a-release-channel.md:10:89         Cherrypick      U       combined [Dart & Flutter Cherrypick Review and Approval"
   - "docs/Cherry-picks-to-a-release-channel.md:19:17         changelists     U       backported. Two changelists may be required if both"
@@ -761,7 +759,6 @@ issues:
   - "pkg/dartdev/lib/src/templates/server_shelf.dart:92:22       myserver    U       $ docker build . -t myserver"
   - "pkg/dartdev/lib/src/templates/server_shelf.dart:153:1       WORKDIR     U       WORKDIR /app"
   - "pkg/dartdev/lib/src/templates/web.dart:38:35        webdev      U       pub global activate webdev\\n'"
-  - "pkg/dartdev/lib/src/unified_analytics.dart:30:57        APPDATA     U       eratingSystem == 'windows' ? 'APPDATA' : 'HOME';"
   - "pkg/dds/dds_protocol.md:24:9        Perfetto    U       - [getPerfettoVMTimeline](#getperfettovmtime"
   - "pkg/dds/lib/devtools_server.dart:58:40          cros                U       isChromeOS = File('/dev/.cros_milestone').existsSync"
   - "pkg/dds/lib/devtools_server.dart:134:29         headlessly          U       'Start devtools headlessly and write memory profiling"
@@ -1053,7 +1050,6 @@ issues:
   - "pkg/native_stack_traces/lib/src/elf.dart:80:29          ELFMAG                      U       bytes[_EI_MAG0] != _ELFMAG0) return null;"
   - "pkg/native_stack_traces/lib/src/elf.dart:92:13          ELFCLASS                    U       case _ELFCLASS32:"
   - "pkg/native_stack_traces/lib/src/elf.dart:104:13         ELFDATA                     U       case _ELFDATA2LSB:"
-  - "pkg/native_stack_traces/lib/src/elf.dart:260:20         AARCH                       U       static const _EM_AARCH64 = 183;"
   - "pkg/native_stack_traces/lib/src/elf.dart:353:20         PHDR                        U       static const _PT_PHDR = 6;"
   - "pkg/native_stack_traces/lib/src/elf.dart:356:24         RELRO                       U       static const _PT_GNU_RELRO = 0x6474e552;"
   - "pkg/native_stack_traces/lib/src/elf.dart:519:21         PROGBITS                    U       static const _SHT_PROGBITS = 1;"
@@ -2019,8 +2015,6 @@ issuesSummary:
   - "text: Aabb, count: 2, files: 1,"
   - "text: aabbccddeeffgg, count: 2, files: 1,"
   - "text: aabbccddeeffgghhii, count: 1, files: 1,"
-  - "text: aarch, count: 15, files: 7,"
-  - "text: AARCH, count: 2, files: 1,"
   - "text: aarm, count: 2, files: 1,"
   - "text: AARRGGBB, count: 2, files: 2,"
   - "text: abbaa, count: 1, files: 1,"
@@ -2091,7 +2085,6 @@ issuesSummary:
   - "text: aotruntime, count: 2, files: 1,"
   - "text: aotsnapshot, count: 5, files: 2,"
   - "text: apiimpl, count: 1, files: 1,"
-  - "text: APPDATA, count: 1, files: 1,"
   - "text: Appelbe, count: 3, files: 3,"
   - "text: appjit, count: 2, files: 1,"
   - "text: appspot, count: 1, files: 1,"
@@ -3993,7 +3986,6 @@ issuesSummary:
   - "text: Xrequired, count: 3, files: 1,"
   - "text: XSSI, count: 1, files: 1,"
   - "text: xvalue, count: 2, files: 1,"
-  - "text: xvfb, count: 3, files: 2,"
   - "text: Xword, count: 5, files: 1,"
   - "text: Yaroslavskiy's, count: 1, files: 1,"
   - "text: yeardate, count: 2, files: 1,"
