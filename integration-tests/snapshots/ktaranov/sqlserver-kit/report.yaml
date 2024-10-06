@@ -5,7 +5,7 @@ Args: '["--issues-summary-report","**","--exclude=**/Backup/**"]'
 Summary:
   files: 489
   filesWithIssues: 428
-  issues: 11034
+  issues: 11023
   errors: 0
 Errors: []
 
@@ -1062,7 +1062,6 @@ issues:
   - "Extended_Events/system_health_azure.sql:86:372      SETENDOFFILE                        U       REMOVEDIRECTORY;PREEMPTIVE_OS_SETENDOFFILE;PREEMPTIVE_OS_SETFILEPOINTER"
   - "Extended_Events/system_health_azure.sql:86:399      SETFILEPOINTER                      U       SETENDOFFILE;PREEMPTIVE_OS_SETFILEPOINTER;PREEMPTIVE_OS_SETFILEVALIDDAT"
   - "Extended_Events/system_health_azure.sql:86:428      SETFILEVALIDDATA                    U       SETFILEPOINTER;PREEMPTIVE_OS_SETFILEVALIDDATA;PREEMPTIVE_OS_WRITEFILE"
-  - "Extended_Events/system_health_azure.sql:86:459      WRITEFILE                           U       ETFILEVALIDDATA;PREEMPTIVE_OS_WRITEFILE;PREEMPTIVE_OS_WRITEFILEGATHER"
   - "Extended_Events/system_health_azure.sql:86:483      WRITEFILEGATHER                     U       WRITEFILE;PREEMPTIVE_OS_WRITEFILEGATHER;PREEMPTIVE_OS_LIBRARYOPS"
   - "Extended_Events/system_health_azure.sql:86:513      LIBRARYOPS                          U       WRITEFILEGATHER;PREEMPTIVE_OS_LIBRARYOPS;PREEMPTIVE_OS_FREELIBRARY"
   - "Extended_Events/system_health_azure.sql:86:538      FREELIBRARY                         U       LIBRARYOPS;PREEMPTIVE_OS_FREELIBRARY;PREEMPTIVE_OS_GETPROCADDRESS"
@@ -2687,7 +2686,6 @@ issues:
   - "Scripts/Azure SQL Database Diagnostic Information Queries.sql:478:19        FILEOPS                 U       N'PREEMPTIVE_OS_FILEOPS', N'PREEMPTIVE_OS_DEVICEOPS"
   - "Scripts/Azure SQL Database Diagnostic Information Queries.sql:478:45        DEVICEOPS               U       FILEOPS', N'PREEMPTIVE_OS_DEVICEOPS', N'PREEMPTIVE_OS_QUERYREGIST"
   - "Scripts/Azure SQL Database Diagnostic Information Queries.sql:478:73        QUERYREGISTRY           U       DEVICEOPS', N'PREEMPTIVE_OS_QUERYREGISTRY',"
-  - "Scripts/Azure SQL Database Diagnostic Information Queries.sql:479:19        WRITEFILE               U       N'PREEMPTIVE_OS_WRITEFILE',"
   - "Scripts/Azure SQL Database Diagnostic Information Queries.sql:480:19        CALLBACKEXECUTE         U       N'PREEMPTIVE_XE_CALLBACKEXECUTE', N'PREEMPTIVE_XE_DISPATCHER"
   - "Scripts/Azure SQL Database Diagnostic Information Queries.sql:481:19        GETTARGETSTATE          U       N'PREEMPTIVE_XE_GETTARGETSTATE', N'PREEMPTIVE_XE_SESSIONCOMM"
   - "Scripts/Azure SQL Database Diagnostic Information Queries.sql:481:52        SESSIONCOMMIT           U       TARGETSTATE', N'PREEMPTIVE_XE_SESSIONCOMMIT',"
@@ -3479,11 +3477,8 @@ issues:
   - "Scripts/Index Breakdown.sql:615:63      IBKF                U       filters ttIBKF ON ttIBKF.[object_id] = sqBAQ"
   - "Scripts/Indexes_Script_Out.sql:78:15        filegroups      U       LEFT JOIN sys.filegroups AS fg ON si.data_space"
   - "Scripts/Job_AG_Resume_Data_Movement.sql:19:33       jobname         U       ReturnCode = 0;DECLARE @jobname sysname = N'AG - Resume"
-  - "Scripts/Job_AG_Resume_Data_Movement.sql:20:10       categoryname    U       DECLARE @categoryname sysname = 'HADR-Availability"
   - "Scripts/Job_AG_Resume_Data_Movement.sql:22:55       jobname         U       sysjobs where name = @jobname)"
   - "Scripts/Job_AG_Resume_Data_Movement.sql:24:45       jobname         U       delete_job @job_name = @jobname;"
-  - "Scripts/Job_AG_Resume_Data_Movement.sql:27:68       categoryname    U       syscategories WHERE name=@categoryname AND category_class="
-  - "Scripts/Job_AG_Resume_Data_Movement.sql:29:86       categoryname    U       type=N'LOCAL', @name=@categoryname;"
   - "Scripts/Job_AG_Resume_Data_Movement.sql:35:12       jobname         U       @job_name=@jobname,"
   - "Scripts/Job_AG_Resume_Data_Movement.sql:39:15       netsend         U       @notify_level_netsend=2,"
   - "Scripts/Job_AG_Resume_Data_Movement.sql:49:39       jobserver       U       ReturnCode = msdb.dbo.sp_add_jobserver @job_name=@jobname,"
@@ -4335,7 +4330,6 @@ issues:
   - "Scripts/SQL Managed Instance Diagnostic Information Queries.sql:644:19      FILEOPS                 U       N'PREEMPTIVE_OS_FILEOPS', N'PREEMPTIVE_OS_DEVICEOPS"
   - "Scripts/SQL Managed Instance Diagnostic Information Queries.sql:644:45      DEVICEOPS               U       FILEOPS', N'PREEMPTIVE_OS_DEVICEOPS', N'PREEMPTIVE_OS_QUERYREGIST"
   - "Scripts/SQL Managed Instance Diagnostic Information Queries.sql:644:73      QUERYREGISTRY           U       DEVICEOPS', N'PREEMPTIVE_OS_QUERYREGISTRY',"
-  - "Scripts/SQL Managed Instance Diagnostic Information Queries.sql:645:19      WRITEFILE               U       N'PREEMPTIVE_OS_WRITEFILE',"
   - "Scripts/SQL Managed Instance Diagnostic Information Queries.sql:646:19      CALLBACKEXECUTE         U       N'PREEMPTIVE_XE_CALLBACKEXECUTE', N'PREEMPTIVE_XE_DISPATCHER"
   - "Scripts/SQL Managed Instance Diagnostic Information Queries.sql:647:19      GETTARGETSTATE          U       N'PREEMPTIVE_XE_GETTARGETSTATE', N'PREEMPTIVE_XE_SESSIONCOMM"
   - "Scripts/SQL Managed Instance Diagnostic Information Queries.sql:647:52      SESSIONCOMMIT           U       TARGETSTATE', N'PREEMPTIVE_XE_SESSIONCOMMIT',"
@@ -4973,7 +4967,6 @@ issues:
   - "Scripts/SQL Server 2016 Diagnostic Information Queries.sql:976:19       FILEOPS                     U       N'PREEMPTIVE_OS_FILEOPS', N'PREEMPTIVE_OS_DEVICEOPS"
   - "Scripts/SQL Server 2016 Diagnostic Information Queries.sql:976:45       DEVICEOPS                   U       FILEOPS', N'PREEMPTIVE_OS_DEVICEOPS', N'PREEMPTIVE_OS_QUERYREGIST"
   - "Scripts/SQL Server 2016 Diagnostic Information Queries.sql:976:73       QUERYREGISTRY               U       DEVICEOPS', N'PREEMPTIVE_OS_QUERYREGISTRY',"
-  - "Scripts/SQL Server 2016 Diagnostic Information Queries.sql:977:19       WRITEFILE                   U       N'PREEMPTIVE_OS_WRITEFILE',"
   - "Scripts/SQL Server 2016 Diagnostic Information Queries.sql:978:19       CALLBACKEXECUTE             U       N'PREEMPTIVE_XE_CALLBACKEXECUTE', N'PREEMPTIVE_XE_DISPATCHER"
   - "Scripts/SQL Server 2016 Diagnostic Information Queries.sql:979:19       GETTARGETSTATE              U       N'PREEMPTIVE_XE_GETTARGETSTATE', N'PREEMPTIVE_XE_SESSIONCOMM"
   - "Scripts/SQL Server 2016 Diagnostic Information Queries.sql:979:52       SESSIONCOMMIT               U       TARGETSTATE', N'PREEMPTIVE_XE_SESSIONCOMMIT',"
@@ -5094,7 +5087,6 @@ issues:
   - "Scripts/SQL Server 2016 SP1 Diagnostic Information Queries.sql:995:19       FILEOPS                     U       N'PREEMPTIVE_OS_FILEOPS', N'PREEMPTIVE_OS_DEVICEOPS"
   - "Scripts/SQL Server 2016 SP1 Diagnostic Information Queries.sql:995:45       DEVICEOPS                   U       FILEOPS', N'PREEMPTIVE_OS_DEVICEOPS', N'PREEMPTIVE_OS_QUERYREGIST"
   - "Scripts/SQL Server 2016 SP1 Diagnostic Information Queries.sql:995:73       QUERYREGISTRY               U       DEVICEOPS', N'PREEMPTIVE_OS_QUERYREGISTRY',"
-  - "Scripts/SQL Server 2016 SP1 Diagnostic Information Queries.sql:996:19       WRITEFILE                   U       N'PREEMPTIVE_OS_WRITEFILE',"
   - "Scripts/SQL Server 2016 SP1 Diagnostic Information Queries.sql:997:19       CALLBACKEXECUTE             U       N'PREEMPTIVE_XE_CALLBACKEXECUTE', N'PREEMPTIVE_XE_DISPATCHER"
   - "Scripts/SQL Server 2016 SP1 Diagnostic Information Queries.sql:998:19       GETTARGETSTATE              U       N'PREEMPTIVE_XE_GETTARGETSTATE', N'PREEMPTIVE_XE_SESSIONCOMM"
   - "Scripts/SQL Server 2016 SP1 Diagnostic Information Queries.sql:998:52       SESSIONCOMMIT               U       TARGETSTATE', N'PREEMPTIVE_XE_SESSIONCOMMIT',"
@@ -5212,7 +5204,6 @@ issues:
   - "Scripts/SQL Server 2016 SP2 Diagnostic Information Queries.sql:960:19       FILEOPS                     U       N'PREEMPTIVE_OS_FILEOPS', N'PREEMPTIVE_OS_DEVICEOPS"
   - "Scripts/SQL Server 2016 SP2 Diagnostic Information Queries.sql:960:45       DEVICEOPS                   U       FILEOPS', N'PREEMPTIVE_OS_DEVICEOPS', N'PREEMPTIVE_OS_QUERYREGIST"
   - "Scripts/SQL Server 2016 SP2 Diagnostic Information Queries.sql:960:73       QUERYREGISTRY               U       DEVICEOPS', N'PREEMPTIVE_OS_QUERYREGISTRY',"
-  - "Scripts/SQL Server 2016 SP2 Diagnostic Information Queries.sql:961:19       WRITEFILE                   U       N'PREEMPTIVE_OS_WRITEFILE',"
   - "Scripts/SQL Server 2016 SP2 Diagnostic Information Queries.sql:962:19       CALLBACKEXECUTE             U       N'PREEMPTIVE_XE_CALLBACKEXECUTE', N'PREEMPTIVE_XE_DISPATCHER"
   - "Scripts/SQL Server 2016 SP2 Diagnostic Information Queries.sql:963:19       GETTARGETSTATE              U       N'PREEMPTIVE_XE_GETTARGETSTATE', N'PREEMPTIVE_XE_SESSIONCOMM"
   - "Scripts/SQL Server 2016 SP2 Diagnostic Information Queries.sql:963:52       SESSIONCOMMIT               U       TARGETSTATE', N'PREEMPTIVE_XE_SESSIONCOMMIT',"
@@ -5331,7 +5322,6 @@ issues:
   - "Scripts/SQL Server 2017 Diagnostic Information Queries.sql:995:19       FILEOPS                     U       N'PREEMPTIVE_OS_FILEOPS', N'PREEMPTIVE_OS_DEVICEOPS"
   - "Scripts/SQL Server 2017 Diagnostic Information Queries.sql:995:45       DEVICEOPS                   U       FILEOPS', N'PREEMPTIVE_OS_DEVICEOPS', N'PREEMPTIVE_OS_QUERYREGIST"
   - "Scripts/SQL Server 2017 Diagnostic Information Queries.sql:995:73       QUERYREGISTRY               U       DEVICEOPS', N'PREEMPTIVE_OS_QUERYREGISTRY',"
-  - "Scripts/SQL Server 2017 Diagnostic Information Queries.sql:996:19       WRITEFILE                   U       N'PREEMPTIVE_OS_WRITEFILE',"
   - "Scripts/SQL Server 2017 Diagnostic Information Queries.sql:997:19       CALLBACKEXECUTE             U       N'PREEMPTIVE_XE_CALLBACKEXECUTE', N'PREEMPTIVE_XE_DISPATCHER"
   - "Scripts/SQL Server 2017 Diagnostic Information Queries.sql:998:19       GETTARGETSTATE              U       N'PREEMPTIVE_XE_GETTARGETSTATE', N'PREEMPTIVE_XE_SESSIONCOMM"
   - "Scripts/SQL Server 2017 Diagnostic Information Queries.sql:998:52       SESSIONCOMMIT               U       TARGETSTATE', N'PREEMPTIVE_XE_SESSIONCOMMIT',"
@@ -5451,7 +5441,6 @@ issues:
   - "Scripts/SQL Server 2019 Diagnostic Information Queries.sql:1018:19      FILEOPS                     U       N'PREEMPTIVE_OS_FILEOPS', N'PREEMPTIVE_OS_DEVICEOPS"
   - "Scripts/SQL Server 2019 Diagnostic Information Queries.sql:1018:45      DEVICEOPS                   U       FILEOPS', N'PREEMPTIVE_OS_DEVICEOPS', N'PREEMPTIVE_OS_QUERYREGIST"
   - "Scripts/SQL Server 2019 Diagnostic Information Queries.sql:1018:73      QUERYREGISTRY               U       DEVICEOPS', N'PREEMPTIVE_OS_QUERYREGISTRY',"
-  - "Scripts/SQL Server 2019 Diagnostic Information Queries.sql:1019:19      WRITEFILE                   U       N'PREEMPTIVE_OS_WRITEFILE', N'PREEMPTIVE_OS_WRITEFILEGA"
   - "Scripts/SQL Server 2019 Diagnostic Information Queries.sql:1019:47      WRITEFILEGATHER             U       WRITEFILE', N'PREEMPTIVE_OS_WRITEFILEGATHER',"
   - "Scripts/SQL Server 2019 Diagnostic Information Queries.sql:1020:19      CALLBACKEXECUTE             U       N'PREEMPTIVE_XE_CALLBACKEXECUTE', N'PREEMPTIVE_XE_DISPATCHER"
   - "Scripts/SQL Server 2019 Diagnostic Information Queries.sql:1021:19      GETTARGETSTATE              U       N'PREEMPTIVE_XE_GETTARGETSTATE', N'PREEMPTIVE_XE_SESSIONCOMM"
@@ -11327,7 +11316,6 @@ issuesSummary:
   - "text: callstacks, count: 1, files: 1,"
   - "text: Cardett, count: 1, files: 1,"
   - "text: Castilho, count: 1, files: 1,"
-  - "text: categoryname, count: 3, files: 1,"
   - "text: Cathrine, count: 6, files: 2,"
   - "text: Cazares, count: 2, files: 2,"
   - "text: Ccan, count: 1, files: 1,"
@@ -14158,7 +14146,6 @@ issuesSummary:
   - "text: workfile, count: 1, files: 1,"
   - "text: Worthen, count: 2, files: 1,"
   - "text: Wrism, count: 3, files: 1,"
-  - "text: WRITEFILE, count: 8, files: 8,"
   - "text: WRITEFILEGATHER, count: 2, files: 2,"
   - "text: WRITELOG, count: 3, files: 2,"
   - "text: writepage, count: 1, files: 1,"

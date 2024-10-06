@@ -4,8 +4,8 @@ Url: https://github.com/MicrosoftDocs/PowerShell-Docs.git
 Args: '["--config=../../../cspell-power-shell-docs.config.yaml","**"]'
 Summary:
   files: 2692
-  filesWithIssues: 1234
-  issues: 5279
+  filesWithIssues: 1232
+  issues: 5267
   errors: 0
 Errors: []
 
@@ -30,7 +30,6 @@ issues:
   - "build.ps1:137:26        warningaction       U       # Adding warningaction=stop to throw errors"
   - "build.ps1:137:79        erroraction         U       errors for all warnings, erroraction=stop to make them terminating"
   - "build.ps1:140:75        helpinfo            U       help files (cab and helpinfo.xml files)"
-  - "build.ps1:144:43        fileinfo            U       Only output the cab fileinfo object"
   - "cabgen-bootstrap.yml:14:24          cabgen      U       template: PowerShell/cabgen.yml@ReferenceAutomation"
   - "ci-steps.yml:10:33          ARTIFACTSTAGINGDIRECTORY    U       destPath = \"${env:BUILD_ARTIFACTSTAGINGDIRECTORY}/install-powershell"
   - "ci-steps.yml:26:55          updatablehelp               U       Build.SourcesDirectory)\\updatablehelp\\*\" -DestinationPath"
@@ -671,7 +670,6 @@ issues:
   - "reference/5.1/Microsoft.PowerShell.Utility/Export-FormatData.md:49:57       allformat           U       Export-FormatData -Path \"allformat.ps1xml\" -IncludeScriptBlock"
   - "reference/5.1/Microsoft.PowerShell.Utility/Export-FormatData.md:66:32       helpinfoshort       U       FormatData -TypeName \"helpinfoshort\""
   - "reference/5.1/Microsoft.PowerShell.Utility/Export-PSSession.md:474:4        epsn    U       - `epsn`"
-  - "reference/5.1/Microsoft.PowerShell.Utility/Format-Hex.md:160:13         fileinfo    U       `[system.io.fileinfo]` are supported."
   - "reference/5.1/Microsoft.PowerShell.Utility/Format-Table.md:106:51       mygciview       U       Format-Table -View mygciview"
   - "reference/5.1/Microsoft.PowerShell.Utility/Format-Table.md:124:73       mygciview       U       specify the custom view **mygciview** that includes"
   - "reference/5.1/Microsoft.PowerShell.Utility/Format-Wide.md:49:64         pschildname     U       Format-Wide -Property pschildname -AutoSize"
@@ -1394,7 +1392,6 @@ issues:
   - "reference/7.2/Microsoft.PowerShell.Utility/Export-FormatData.md:66:32       helpinfoshort       U       FormatData -TypeName \"helpinfoshort\""
   - "reference/7.2/Microsoft.PowerShell.Utility/Export-PSSession.md:296:4        bigendianutf    U       - `bigendianutf32`: Encodes in UTF-"
   - "reference/7.2/Microsoft.PowerShell.Utility/Format-Hex.md:186:4          bigendianutf    U       - `bigendianutf32`: Encodes in UTF-"
-  - "reference/7.2/Microsoft.PowerShell.Utility/Format-Hex.md:223:13         fileinfo        U       `[system.io.fileinfo]` are supported."
   - "reference/7.2/Microsoft.PowerShell.Utility/Format-Table.md:106:51       mygciview       U       Format-Table -View mygciview"
   - "reference/7.2/Microsoft.PowerShell.Utility/Format-Table.md:124:73       mygciview       U       specify the custom view **mygciview** that includes"
   - "reference/7.2/Microsoft.PowerShell.Utility/Format-Wide.md:49:64         pschildname     U       Format-Wide -Property pschildname -AutoSize"
@@ -2114,7 +2111,6 @@ issues:
   - "reference/7.4/Microsoft.PowerShell.Utility/Export-FormatData.md:66:32       helpinfoshort       U       FormatData -TypeName \"helpinfoshort\""
   - "reference/7.4/Microsoft.PowerShell.Utility/Export-PSSession.md:298:4        bigendianutf    U       - `bigendianutf32`: Encodes in UTF-"
   - "reference/7.4/Microsoft.PowerShell.Utility/Format-Hex.md:188:4          bigendianutf    U       - `bigendianutf32`: Encodes in UTF-"
-  - "reference/7.4/Microsoft.PowerShell.Utility/Format-Hex.md:228:13         fileinfo        U       `[system.io.fileinfo]` are supported."
   - "reference/7.4/Microsoft.PowerShell.Utility/Format-Table.md:106:51       mygciview       U       Format-Table -View mygciview"
   - "reference/7.4/Microsoft.PowerShell.Utility/Format-Table.md:124:73       mygciview       U       specify the custom view **mygciview** that includes"
   - "reference/7.4/Microsoft.PowerShell.Utility/Format-Wide.md:49:64         pschildname     U       Format-Wide -Property pschildname -AutoSize"
@@ -2836,7 +2832,6 @@ issues:
   - "reference/7.5/Microsoft.PowerShell.Utility/Export-FormatData.md:66:32       helpinfoshort       U       FormatData -TypeName \"helpinfoshort\""
   - "reference/7.5/Microsoft.PowerShell.Utility/Export-PSSession.md:298:4        bigendianutf    U       - `bigendianutf32`: Encodes in UTF-"
   - "reference/7.5/Microsoft.PowerShell.Utility/Format-Hex.md:188:4          bigendianutf    U       - `bigendianutf32`: Encodes in UTF-"
-  - "reference/7.5/Microsoft.PowerShell.Utility/Format-Hex.md:228:13         fileinfo        U       `[system.io.fileinfo]` are supported."
   - "reference/7.5/Microsoft.PowerShell.Utility/Format-Table.md:106:51       mygciview       U       Format-Table -View mygciview"
   - "reference/7.5/Microsoft.PowerShell.Utility/Format-Table.md:124:73       mygciview       U       specify the custom view **mygciview** that includes"
   - "reference/7.5/Microsoft.PowerShell.Utility/Format-Wide.md:49:64         pschildname     U       Format-Wide -Property pschildname -AutoSize"
@@ -3545,7 +3540,6 @@ issues:
   - "reference/docs-conceptual/developer/cmdlet/alias-attribute-declaration.md:27:31         Aliasattribute      U       Management.Automation.Aliasattribute](/dotnet/api/System"
   - "reference/docs-conceptual/developer/cmdlet/approved-verbs-for-windows-powershell-commands.md:92:364         Unmark          U       Flush, Erase, Release, Unmark, Unset, Nullify"
   - "reference/docs-conceptual/developer/cmdlet/approved-verbs-for-windows-powershell-commands.md:123:350        Unrestrict      U       | Release, Unrestrict, Unsecure"
-  - "reference/docs-conceptual/developer/cmdlet/approved-verbs-for-windows-powershell-commands.md:159:387        Uncompress      U       | Explode, Uncompress"
   - "reference/docs-conceptual/developer/cmdlet/background-jobs.md:29:257        Pseventjob              U       Management.Automation.Pseventjob](/dotnet/api/System"
   - "reference/docs-conceptual/developer/cmdlet/background-jobs.md:46:31         Jobrepository           U       Management.Automation.Jobrepository](/dotnet/api/System"
   - "reference/docs-conceptual/developer/cmdlet/background-jobs.md:49:31         Jobstate                U       Management.Automation.Jobstate](/dotnet/api/System"
@@ -3615,7 +3609,6 @@ issues:
   - "reference/docs-conceptual/developer/cmdlet/interpreting-errorrecord-objects.md:120:38       Categoryinfo    U       Management.Automation.ErrorCategoryinfo](/dotnet/api/System"
   - "reference/docs-conceptual/developer/cmdlet/parameter-attribute-declaration.md:71:75         Parameterattribute      U       Management.Automation.Parameterattribute](/dotnet/api/System"
   - "reference/docs-conceptual/developer/cmdlet/parameter-attribute-declaration.md:75:31         Parameterattribute      U       Management.Automation.Parameterattribute](/dotnet/api/System"
-  - "reference/docs-conceptual/developer/cmdlet/property-parameters.md:27:123        KEYDOWN     U       names of states, such as KEYDOWN.|"
   - "reference/docs-conceptual/developer/cmdlet/requesting-confirmation-from-cmdlets.md:70:40        Shouldprocess       U       Management.Automation.Cmdlet.Shouldprocess](/dotnet/api/System"
   - "reference/docs-conceptual/developer/cmdlet/requesting-confirmation-from-cmdlets.md:72:42        Cmdletprovider      U       Automation.Provider.Cmdletprovider.Shouldprocess](/dotnet"
   - "reference/docs-conceptual/developer/cmdlet/requesting-confirmation-from-cmdlets.md:72:57        Shouldprocess       U       Provider.Cmdletprovider.Shouldprocess](/dotnet/api/System"
@@ -4142,12 +4135,8 @@ issues:
   - "reference/docs-conceptual/developer/prog-guide/creating-a-windows-powershell-drive-provider.md:39:40        Drivecmdletprovider                         U       Automation.Provider.Drivecmdletprovider](/dotnet/api/System"
   - "reference/docs-conceptual/developer/prog-guide/creating-a-windows-powershell-drive-provider.md:41:40        Cmdletprovider                              U       Automation.Provider.Cmdletprovider](/dotnet/api/System"
   - "reference/docs-conceptual/developer/prog-guide/creating-a-windows-powershell-drive-provider.md:42:65        uninitializing                              U       for initializing and uninitializing the provider. To"
-  - "reference/docs-conceptual/developer/prog-guide/creating-a-windows-powershell-drive-provider.md:57:33        Driveinfo                                   U       Management.Automation.PSDriveinfo](/dotnet/api/System"
   - "reference/docs-conceptual/developer/prog-guide/creating-a-windows-powershell-drive-provider.md:65:40        Drivecmdletprovider                         U       Automation.Provider.Drivecmdletprovider.Newdrive*](/dotnet/api"
   - "reference/docs-conceptual/developer/prog-guide/creating-a-windows-powershell-drive-provider.md:67:40        Drivecmdletprovider                         U       Automation.Provider.Drivecmdletprovider.Newdrive*](/dotnet/api"
-  - "reference/docs-conceptual/developer/prog-guide/creating-a-windows-powershell-drive-provider.md:75:35        Driveinfo                                   U       Management.Automation.PSDriveinfo.Root*](/dotnet/api/System"
-  - "reference/docs-conceptual/developer/prog-guide/creating-a-windows-powershell-drive-provider.md:79:35        Driveinfo                                   U       Management.Automation.PSDriveinfo](/dotnet/api/System"
-  - "reference/docs-conceptual/developer/prog-guide/creating-a-windows-powershell-drive-provider.md:82:35        Driveinfo                                   U       Management.Automation.PSDriveinfo](/dotnet/api/System"
   - "reference/docs-conceptual/developer/prog-guide/creating-a-windows-powershell-drive-provider.md:86:42        Cmdletprovider                              U       Automation.Provider.Cmdletprovider.WriteError](/dotnet"
   - "reference/docs-conceptual/developer/prog-guide/creating-a-windows-powershell-drive-provider.md:96:40        Drivecmdletprovider                         U       Automation.Provider.Drivecmdletprovider.Newdrivedynamicparameters"
   - "reference/docs-conceptual/developer/prog-guide/creating-a-windows-powershell-drive-provider.md:99:31        Runtimedefinedparameterdictionary           U       Management.Automation.Runtimedefinedparameterdictionary](/dotnet/api/System"
@@ -5269,7 +5258,6 @@ issues:
   - "tools/build-updatedhelp.ps1:158:18      warningaction       U       # Adding warningaction=stop to throw errors"
   - "tools/build-updatedhelp.ps1:158:71      erroraction         U       errors for all warnings, erroraction=stop to make them terminating"
   - "tools/build-updatedhelp.ps1:161:67      helpinfo            U       help files (cab and helpinfo.xml files)"
-  - "tools/build-updatedhelp.ps1:164:31      fileinfo            U       Only output the cab fileinfo object"
   - "tools/terms/FileTypeSet.xml:2:2         xmldata         U       <xmldata>"
   - "tools/terms/FileTypeSet.xml:33:61       gitmodules      U       DllPath=\"\" ClassName=\"\">.gitmodules</Ext>"
   - "tools/terms/FileTypeSet.xml:60:61       resjson         U       DllPath=\"\" ClassName=\"\">.resjson</Ext>"

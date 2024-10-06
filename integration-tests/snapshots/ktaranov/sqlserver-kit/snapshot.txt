@@ -3,7 +3,7 @@ Repository: ktaranov/sqlserver-kit
 Url: "https://github.com/ktaranov/sqlserver-kit.git"
 Args: ["--issues-summary-report","**","--exclude=**/Backup/**"]
 Lines:
- CSpell: Files checked: 489, Issues found: 11034 in 428 files.
+ CSpell: Files checked: 489, Issues found: 11023 in 428 files.
  exit code: 1
 ADS/README.md:30:15     - Unknown word (Dacpac)     -- | [SQL Server Dacpac]
 ADS/README.md:30:181    - Unknown word (wizarding)  -- Provides an easy-to-use wizarding experience to deploy
@@ -1118,7 +1118,6 @@ Extended_Events/system_health_azure.sql:86:342    - Unknown word (REMOVEDIRECTOR
 Extended_Events/system_health_azure.sql:86:372    - Unknown word (SETENDOFFILE)                     -- REMOVEDIRECTORY;PREEMPTIVE_OS_SETENDOFFILE;PREEMPTIVE_OS_SETFILEPOINTER
 Extended_Events/system_health_azure.sql:86:399    - Unknown word (SETFILEPOINTER)                   -- SETENDOFFILE;PREEMPTIVE_OS_SETFILEPOINTER;PREEMPTIVE_OS_SETFILEVALIDDAT
 Extended_Events/system_health_azure.sql:86:428    - Unknown word (SETFILEVALIDDATA)                 -- SETFILEPOINTER;PREEMPTIVE_OS_SETFILEVALIDDATA;PREEMPTIVE_OS_WRITEFILE
-Extended_Events/system_health_azure.sql:86:459    - Unknown word (WRITEFILE)                        -- ETFILEVALIDDATA;PREEMPTIVE_OS_WRITEFILE;PREEMPTIVE_OS_WRITEFILEGATHER
 Extended_Events/system_health_azure.sql:86:483    - Unknown word (WRITEFILEGATHER)                  -- WRITEFILE;PREEMPTIVE_OS_WRITEFILEGATHER;PREEMPTIVE_OS_LIBRARYOPS
 Extended_Events/system_health_azure.sql:86:513    - Unknown word (LIBRARYOPS)                       -- WRITEFILEGATHER;PREEMPTIVE_OS_LIBRARYOPS;PREEMPTIVE_OS_FREELIBRARY
 Extended_Events/system_health_azure.sql:86:538    - Unknown word (FREELIBRARY)                      -- LIBRARYOPS;PREEMPTIVE_OS_FREELIBRARY;PREEMPTIVE_OS_GETPROCADDRESS
@@ -1145,7 +1144,7 @@ Extended_Events/system_health_azure.sql:88:394    - Unknown word (QUERYREGISTRY)
 Extended_Events/system_health_azure.sql:88:419    - Unknown word (CLOSEBACKUPMEDIA)                 -- QUERYREGISTRY;PREEMPTIVE_CLOSEBACKUPMEDIA
 Extended_Events/system_health_azure.sql:88:66     - Unknown word (DISCONNECTNAMEDPIPE)              -- BACKUPMEDIA') --PREEMPTIVE_OS_DISCONNECTNAMEDPIPE;PREEMPTIVE_OS_PROCESSOPS
 Extended_Events/system_health_azure.sql:89:32     - Unknown word (AUTHENTICATIONOPS)                -- type = N'PREEMPTIVE_OS_AUTHENTICATIONOPS'
-Extended_Events/system_health_azure.sql:90:32     - Unknown word (FREECREDENTIALSHANDLE)           -- type = N'PREEMPTIVE_OS_FREECREDENTIALSHANDLE'
+Extended_Events/system_health_azure.sql:90:32     - Unknown word (FREECREDENTIALSHANDLE)            -- type = N'PREEMPTIVE_OS_FREECREDENTIALSHANDLE'
 Extended_Events/system_health_azure.sql:91:32     - Unknown word (AUTHORIZATIONOPS)                -- type = N'PREEMPTIVE_OS_AUTHORIZATIONOPS'
 Extended_Events/system_health_azure.sql:92:33     - Unknown word (COCREATEINSTANCE)                -- type = N'PREEMPTIVE_COM_COCREATEINSTANCE'
 Extended_Events/system_health_azure.sql:93:32     - Unknown word (NETVALIDATEPASSWORDPOLICY)       -- type = N'PREEMPTIVE_OS_NETVALIDATEPASSWORDPOLICY'
@@ -3814,7 +3813,6 @@ Scripts/Azure SQL Database Diagnostic Information Queries.sql:477:48    - Unknow
 Scripts/Azure SQL Database Diagnostic Information Queries.sql:478:19    - Unknown word (FILEOPS)           -- N'PREEMPTIVE_OS_FILEOPS', N'PREEMPTIVE_OS_DEVICEOPS
 Scripts/Azure SQL Database Diagnostic Information Queries.sql:478:45    - Unknown word (DEVICEOPS)         -- FILEOPS', N'PREEMPTIVE_OS_DEVICEOPS', N'PREEMPTIVE_OS_QUERYREGIST
 Scripts/Azure SQL Database Diagnostic Information Queries.sql:478:73    - Unknown word (QUERYREGISTRY)     -- DEVICEOPS', N'PREEMPTIVE_OS_QUERYREGISTRY',
-Scripts/Azure SQL Database Diagnostic Information Queries.sql:479:19    - Unknown word (WRITEFILE)         -- N'PREEMPTIVE_OS_WRITEFILE',
 Scripts/Azure SQL Database Diagnostic Information Queries.sql:480:19    - Unknown word (CALLBACKEXECUTE)   -- N'PREEMPTIVE_XE_CALLBACKEXECUTE', N'PREEMPTIVE_XE_DISPATCHER
 Scripts/Azure SQL Database Diagnostic Information Queries.sql:481:19    - Unknown word (GETTARGETSTATE)    -- N'PREEMPTIVE_XE_GETTARGETSTATE', N'PREEMPTIVE_XE_SESSIONCOMM
 Scripts/Azure SQL Database Diagnostic Information Queries.sql:481:52    - Unknown word (SESSIONCOMMIT)     -- TARGETSTATE', N'PREEMPTIVE_XE_SESSIONCOMMIT',
@@ -4601,29 +4599,26 @@ Scripts/Index_Creating_Info.sql:6:19      - Unknown word (Rutzky)     -- <author
 Scripts/Index_Creating_Info.sql:8:27      - Unknown word (Konstantin) -- modified>2021-08-12 by Konstantin Taranov</modified>
 Scripts/Index_Creating_Info.sql:8:38      - Unknown word (Taranov)    -- 08-12 by Konstantin Taranov</modified>
 Scripts/Indexes_Script_Out.sql:78:15     - Unknown word (filegroups) -- LEFT JOIN sys.filegroups AS fg ON si.data_space
-Scripts/Job_AG_Resume_Data_Movement.sql:103:10    - Unknown word (alertname)    -- DECLARE @alertname sysname = N'AG Data
-Scripts/Job_AG_Resume_Data_Movement.sql:104:59    - Unknown word (alertname)    -- sysalerts WHERE name = @alertname)
-Scripts/Job_AG_Resume_Data_Movement.sql:106:49    - Unknown word (alertname)    -- dbo.sp_delete_alert @alertname;
-Scripts/Job_AG_Resume_Data_Movement.sql:115:8     - Unknown word (alertname)    -- @name=@alertname,
-Scripts/Job_AG_Resume_Data_Movement.sql:127:7     - Unknown word (TRANCOUNT)    -- IF (@@TRANCOUNT > 0) ROLLBACK TRANSACTION
+Scripts/Job_AG_Resume_Data_Movement.sql:103:10    - Unknown word (alertname)  -- DECLARE @alertname sysname = N'AG Data
+Scripts/Job_AG_Resume_Data_Movement.sql:104:59    - Unknown word (alertname)  -- sysalerts WHERE name = @alertname)
+Scripts/Job_AG_Resume_Data_Movement.sql:106:49    - Unknown word (alertname)  -- dbo.sp_delete_alert @alertname;
+Scripts/Job_AG_Resume_Data_Movement.sql:115:8     - Unknown word (alertname)  -- @name=@alertname,
+Scripts/Job_AG_Resume_Data_Movement.sql:127:7     - Unknown word (TRANCOUNT)  -- IF (@@TRANCOUNT > 0) ROLLBACK TRANSACTION
 Scripts/Job_AG_Resume_Data_Movement.sql:19:33     - Unknown word (jobname)    -- ReturnCode = 0;DECLARE @jobname sysname = N'AG - Resume
-Scripts/Job_AG_Resume_Data_Movement.sql:20:10     - Unknown word (categoryname) -- DECLARE @categoryname sysname = 'HADR-Availability
-Scripts/Job_AG_Resume_Data_Movement.sql:22:55     - Unknown word (jobname)      -- sysjobs where name = @jobname)
-Scripts/Job_AG_Resume_Data_Movement.sql:24:45     - Unknown word (jobname)      -- delete_job @job_name = @jobname;
-Scripts/Job_AG_Resume_Data_Movement.sql:27:68     - Unknown word (categoryname) -- syscategories WHERE name=@categoryname AND category_class=
-Scripts/Job_AG_Resume_Data_Movement.sql:29:86     - Unknown word (categoryname) -- type=N'LOCAL', @name=@categoryname;
-Scripts/Job_AG_Resume_Data_Movement.sql:35:12     - Unknown word (jobname)      -- @job_name=@jobname,
-Scripts/Job_AG_Resume_Data_Movement.sql:39:15     - Unknown word (netsend)      -- @notify_level_netsend=2,
-Scripts/Job_AG_Resume_Data_Movement.sql:49:39     - Unknown word (jobserver)    -- ReturnCode = msdb.dbo.sp_add_jobserver @job_name=@jobname,
-Scripts/Job_AG_Resume_Data_Movement.sql:49:60     - Unknown word (jobname)      -- jobserver @job_name=@jobname, @server_name = N'(local
-Scripts/Job_AG_Resume_Data_Movement.sql:52:39     - Unknown word (jobstep)      -- ReturnCode = msdb.dbo.sp_add_jobstep
-Scripts/Job_AG_Resume_Data_Movement.sql:56:2      - Unknown word (cmdexec)      -- @cmdexec_success_code=0,
-Scripts/Job_AG_Resume_Data_Movement.sql:63:21     - Unknown word (SQLCMD)       -- @command=N'DECLARE @SQLCMD VARCHAR(1000);
-Scripts/Job_AG_Resume_Data_Movement.sql:72:36     - Unknown word (SQLCMD)       -- FROM cDBSuspended INTO @SQLCMD;
-Scripts/Job_AG_Resume_Data_Movement.sql:75:11     - Unknown word (SQLCMD)       -- EXECUTE (@SQLCMD);
-Scripts/Job_AG_Resume_Data_Movement.sql:76:36     - Unknown word (SQLCMD)       -- FROM cDBSuspended INTO @SQLCMD;
-Scripts/Job_AG_Resume_Data_Movement.sql:92:15     - Unknown word (netsend)      -- @notify_level_netsend=2,
-Scripts/Job_AG_Resume_Data_Movement.sql:99:9      - Unknown word (netsend)      -- @notify_netsend_operator_name=N'',
+Scripts/Job_AG_Resume_Data_Movement.sql:22:55     - Unknown word (jobname)    -- sysjobs where name = @jobname)
+Scripts/Job_AG_Resume_Data_Movement.sql:24:45     - Unknown word (jobname)    -- delete_job @job_name = @jobname;
+Scripts/Job_AG_Resume_Data_Movement.sql:35:12     - Unknown word (jobname)    -- @job_name=@jobname,
+Scripts/Job_AG_Resume_Data_Movement.sql:39:15     - Unknown word (netsend)    -- @notify_level_netsend=2,
+Scripts/Job_AG_Resume_Data_Movement.sql:49:39     - Unknown word (jobserver)  -- ReturnCode = msdb.dbo.sp_add_jobserver @job_name=@jobname,
+Scripts/Job_AG_Resume_Data_Movement.sql:49:60     - Unknown word (jobname)    -- jobserver @job_name=@jobname, @server_name = N'(local
+Scripts/Job_AG_Resume_Data_Movement.sql:52:39     - Unknown word (jobstep)    -- ReturnCode = msdb.dbo.sp_add_jobstep
+Scripts/Job_AG_Resume_Data_Movement.sql:56:2      - Unknown word (cmdexec)    -- @cmdexec_success_code=0,
+Scripts/Job_AG_Resume_Data_Movement.sql:63:21     - Unknown word (SQLCMD)     -- @command=N'DECLARE @SQLCMD VARCHAR(1000);
+Scripts/Job_AG_Resume_Data_Movement.sql:72:36     - Unknown word (SQLCMD)     -- FROM cDBSuspended INTO @SQLCMD;
+Scripts/Job_AG_Resume_Data_Movement.sql:75:11     - Unknown word (SQLCMD)     -- EXECUTE (@SQLCMD);
+Scripts/Job_AG_Resume_Data_Movement.sql:76:36     - Unknown word (SQLCMD)     -- FROM cDBSuspended INTO @SQLCMD;
+Scripts/Job_AG_Resume_Data_Movement.sql:92:15     - Unknown word (netsend)    -- @notify_level_netsend=2,
+Scripts/Job_AG_Resume_Data_Movement.sql:99:9      - Unknown word (netsend)    -- @notify_netsend_operator_name=N'',
 Scripts/Jobs_Detailed_History.sql:100:15    - Unknown word (jobhist)      -- LEFT JOIN jobhist oa
 Scripts/Jobs_Detailed_History.sql:102:21    - Unknown word (agglastsixty) -- LEFT OUTER JOIN agglastsixty als
 Scripts/Jobs_Detailed_History.sql:105:21    - Unknown word (aggtotal)     -- LEFT OUTER JOIN aggtotal agt
@@ -4959,7 +4954,6 @@ Scripts/SQL Managed Instance Diagnostic Information Queries.sql:643:48    - Unkn
 Scripts/SQL Managed Instance Diagnostic Information Queries.sql:644:19    - Unknown word (FILEOPS)           -- N'PREEMPTIVE_OS_FILEOPS', N'PREEMPTIVE_OS_DEVICEOPS
 Scripts/SQL Managed Instance Diagnostic Information Queries.sql:644:45    - Unknown word (DEVICEOPS)         -- FILEOPS', N'PREEMPTIVE_OS_DEVICEOPS', N'PREEMPTIVE_OS_QUERYREGIST
 Scripts/SQL Managed Instance Diagnostic Information Queries.sql:644:73    - Unknown word (QUERYREGISTRY)     -- DEVICEOPS', N'PREEMPTIVE_OS_QUERYREGISTRY',
-Scripts/SQL Managed Instance Diagnostic Information Queries.sql:645:19    - Unknown word (WRITEFILE)         -- N'PREEMPTIVE_OS_WRITEFILE',
 Scripts/SQL Managed Instance Diagnostic Information Queries.sql:646:19    - Unknown word (CALLBACKEXECUTE)   -- N'PREEMPTIVE_XE_CALLBACKEXECUTE', N'PREEMPTIVE_XE_DISPATCHER
 Scripts/SQL Managed Instance Diagnostic Information Queries.sql:647:19    - Unknown word (GETTARGETSTATE)    -- N'PREEMPTIVE_XE_GETTARGETSTATE', N'PREEMPTIVE_XE_SESSIONCOMM
 Scripts/SQL Managed Instance Diagnostic Information Queries.sql:647:52    - Unknown word (SESSIONCOMMIT)     -- TARGETSTATE', N'PREEMPTIVE_XE_SESSIONCOMMIT',
@@ -5614,7 +5608,6 @@ Scripts/SQL Server 2016 Diagnostic Information Queries.sql:975:48    - Unknown w
 Scripts/SQL Server 2016 Diagnostic Information Queries.sql:976:19    - Unknown word (FILEOPS)           -- N'PREEMPTIVE_OS_FILEOPS', N'PREEMPTIVE_OS_DEVICEOPS
 Scripts/SQL Server 2016 Diagnostic Information Queries.sql:976:45    - Unknown word (DEVICEOPS)         -- FILEOPS', N'PREEMPTIVE_OS_DEVICEOPS', N'PREEMPTIVE_OS_QUERYREGIST
 Scripts/SQL Server 2016 Diagnostic Information Queries.sql:976:73    - Unknown word (QUERYREGISTRY)     -- DEVICEOPS', N'PREEMPTIVE_OS_QUERYREGISTRY',
-Scripts/SQL Server 2016 Diagnostic Information Queries.sql:977:19    - Unknown word (WRITEFILE)         -- N'PREEMPTIVE_OS_WRITEFILE',
 Scripts/SQL Server 2016 Diagnostic Information Queries.sql:978:19    - Unknown word (CALLBACKEXECUTE)   -- N'PREEMPTIVE_XE_CALLBACKEXECUTE', N'PREEMPTIVE_XE_DISPATCHER
 Scripts/SQL Server 2016 Diagnostic Information Queries.sql:979:19    - Unknown word (GETTARGETSTATE)    -- N'PREEMPTIVE_XE_GETTARGETSTATE', N'PREEMPTIVE_XE_SESSIONCOMM
 Scripts/SQL Server 2016 Diagnostic Information Queries.sql:979:52    - Unknown word (SESSIONCOMMIT)     -- TARGETSTATE', N'PREEMPTIVE_XE_SESSIONCOMMIT',
@@ -5757,7 +5750,6 @@ Scripts/SQL Server 2016 SP1 Diagnostic Information Queries.sql:994:48    - Unkno
 Scripts/SQL Server 2016 SP1 Diagnostic Information Queries.sql:995:19    - Unknown word (FILEOPS)           -- N'PREEMPTIVE_OS_FILEOPS', N'PREEMPTIVE_OS_DEVICEOPS
 Scripts/SQL Server 2016 SP1 Diagnostic Information Queries.sql:995:45    - Unknown word (DEVICEOPS)         -- FILEOPS', N'PREEMPTIVE_OS_DEVICEOPS', N'PREEMPTIVE_OS_QUERYREGIST
 Scripts/SQL Server 2016 SP1 Diagnostic Information Queries.sql:995:73    - Unknown word (QUERYREGISTRY)     -- DEVICEOPS', N'PREEMPTIVE_OS_QUERYREGISTRY',
-Scripts/SQL Server 2016 SP1 Diagnostic Information Queries.sql:996:19    - Unknown word (WRITEFILE)         -- N'PREEMPTIVE_OS_WRITEFILE',
 Scripts/SQL Server 2016 SP1 Diagnostic Information Queries.sql:997:19    - Unknown word (CALLBACKEXECUTE)   -- N'PREEMPTIVE_XE_CALLBACKEXECUTE', N'PREEMPTIVE_XE_DISPATCHER
 Scripts/SQL Server 2016 SP1 Diagnostic Information Queries.sql:998:19    - Unknown word (GETTARGETSTATE)    -- N'PREEMPTIVE_XE_GETTARGETSTATE', N'PREEMPTIVE_XE_SESSIONCOMM
 Scripts/SQL Server 2016 SP1 Diagnostic Information Queries.sql:998:52    - Unknown word (SESSIONCOMMIT)     -- TARGETSTATE', N'PREEMPTIVE_XE_SESSIONCOMMIT',
@@ -5854,7 +5846,6 @@ Scripts/SQL Server 2016 SP2 Diagnostic Information Queries.sql:959:48    - Unkno
 Scripts/SQL Server 2016 SP2 Diagnostic Information Queries.sql:960:19    - Unknown word (FILEOPS)           -- N'PREEMPTIVE_OS_FILEOPS', N'PREEMPTIVE_OS_DEVICEOPS
 Scripts/SQL Server 2016 SP2 Diagnostic Information Queries.sql:960:45    - Unknown word (DEVICEOPS)         -- FILEOPS', N'PREEMPTIVE_OS_DEVICEOPS', N'PREEMPTIVE_OS_QUERYREGIST
 Scripts/SQL Server 2016 SP2 Diagnostic Information Queries.sql:960:73    - Unknown word (QUERYREGISTRY)     -- DEVICEOPS', N'PREEMPTIVE_OS_QUERYREGISTRY',
-Scripts/SQL Server 2016 SP2 Diagnostic Information Queries.sql:961:19    - Unknown word (WRITEFILE)         -- N'PREEMPTIVE_OS_WRITEFILE',
 Scripts/SQL Server 2016 SP2 Diagnostic Information Queries.sql:962:19    - Unknown word (CALLBACKEXECUTE)   -- N'PREEMPTIVE_XE_CALLBACKEXECUTE', N'PREEMPTIVE_XE_DISPATCHER
 Scripts/SQL Server 2016 SP2 Diagnostic Information Queries.sql:963:19    - Unknown word (GETTARGETSTATE)    -- N'PREEMPTIVE_XE_GETTARGETSTATE', N'PREEMPTIVE_XE_SESSIONCOMM
 Scripts/SQL Server 2016 SP2 Diagnostic Information Queries.sql:963:52    - Unknown word (SESSIONCOMMIT)     -- TARGETSTATE', N'PREEMPTIVE_XE_SESSIONCOMMIT',
@@ -5994,7 +5985,6 @@ Scripts/SQL Server 2017 Diagnostic Information Queries.sql:994:48    - Unknown w
 Scripts/SQL Server 2017 Diagnostic Information Queries.sql:995:19    - Unknown word (FILEOPS)           -- N'PREEMPTIVE_OS_FILEOPS', N'PREEMPTIVE_OS_DEVICEOPS
 Scripts/SQL Server 2017 Diagnostic Information Queries.sql:995:45    - Unknown word (DEVICEOPS)         -- FILEOPS', N'PREEMPTIVE_OS_DEVICEOPS', N'PREEMPTIVE_OS_QUERYREGIST
 Scripts/SQL Server 2017 Diagnostic Information Queries.sql:995:73    - Unknown word (QUERYREGISTRY)     -- DEVICEOPS', N'PREEMPTIVE_OS_QUERYREGISTRY',
-Scripts/SQL Server 2017 Diagnostic Information Queries.sql:996:19    - Unknown word (WRITEFILE)         -- N'PREEMPTIVE_OS_WRITEFILE',
 Scripts/SQL Server 2017 Diagnostic Information Queries.sql:997:19    - Unknown word (CALLBACKEXECUTE)   -- N'PREEMPTIVE_XE_CALLBACKEXECUTE', N'PREEMPTIVE_XE_DISPATCHER
 Scripts/SQL Server 2017 Diagnostic Information Queries.sql:998:19    - Unknown word (GETTARGETSTATE)    -- N'PREEMPTIVE_XE_GETTARGETSTATE', N'PREEMPTIVE_XE_SESSIONCOMM
 Scripts/SQL Server 2017 Diagnostic Information Queries.sql:998:52    - Unknown word (SESSIONCOMMIT)     -- TARGETSTATE', N'PREEMPTIVE_XE_SESSIONCOMMIT',
@@ -6029,7 +6019,6 @@ Scripts/SQL Server 2019 Diagnostic Information Queries.sql:1017:48   - Unknown w
 Scripts/SQL Server 2019 Diagnostic Information Queries.sql:1018:19   - Unknown word (FILEOPS)           -- N'PREEMPTIVE_OS_FILEOPS', N'PREEMPTIVE_OS_DEVICEOPS
 Scripts/SQL Server 2019 Diagnostic Information Queries.sql:1018:45   - Unknown word (DEVICEOPS)         -- FILEOPS', N'PREEMPTIVE_OS_DEVICEOPS', N'PREEMPTIVE_OS_QUERYREGIST
 Scripts/SQL Server 2019 Diagnostic Information Queries.sql:1018:73   - Unknown word (QUERYREGISTRY)     -- DEVICEOPS', N'PREEMPTIVE_OS_QUERYREGISTRY',
-Scripts/SQL Server 2019 Diagnostic Information Queries.sql:1019:19   - Unknown word (WRITEFILE)         -- N'PREEMPTIVE_OS_WRITEFILE', N'PREEMPTIVE_OS_WRITEFILEGA
 Scripts/SQL Server 2019 Diagnostic Information Queries.sql:1019:47   - Unknown word (WRITEFILEGATHER)   -- WRITEFILE', N'PREEMPTIVE_OS_WRITEFILEGATHER',
 Scripts/SQL Server 2019 Diagnostic Information Queries.sql:1020:19   - Unknown word (CALLBACKEXECUTE)   -- N'PREEMPTIVE_XE_CALLBACKEXECUTE', N'PREEMPTIVE_XE_DISPATCHER
 Scripts/SQL Server 2019 Diagnostic Information Queries.sql:1021:19   - Unknown word (GETTARGETSTATE)    -- N'PREEMPTIVE_XE_GETTARGETSTATE', N'PREEMPTIVE_XE_SESSIONCOMM
