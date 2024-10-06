@@ -90,7 +90,9 @@ export function factoryPathHelper(path: PathInterface): PathHelper {
     }
 
     async function findRepoRoot(directory: string): Promise<string | undefined> {
-        const found = await findUp('.git', { cwd: directory, type: 'directory' });
+        const foundDir = (await findUp('.git', { cwd: directory, type: 'directory' })) || '';
+        const foundFile = (await findUp('.git', { cwd: directory, type: 'file' })) || '';
+        const found = foundDir.length >= foundFile.length ? foundDir : foundFile;
         if (!found) return undefined;
         return path.dirname(found);
     }
