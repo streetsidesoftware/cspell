@@ -3,549 +3,553 @@ Repository: neovim/nvim-lspconfig
 Url: "https://github.com/neovim/nvim-lspconfig.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 355, Issues found: 4416 in 350 files.
+ CSpell: Files checked: 361, Issues found: 4483 in 353 files.
  exit code: 1
-CONTRIBUTING.md:110:4     - Unknown word (luacheck)        -- - [luacheck](https://github.com
-CONTRIBUTING.md:111:4     - Unknown word (stylua)          -- - [stylua](https://github.com
-CONTRIBUTING.md:127:36    - Unknown word (luafile)         -- Es +'set rtp+=$PWD' +'luafile scripts/docgen.lua'
-CONTRIBUTING.md:23:121    - Unknown word (pyright)    -- server is a unique name (`pyright`, `clangd`) or a commonly
-CONTRIBUTING.md:23:132    - Unknown word (clangd)     -- unique name (`pyright`, `clangd`) or a commonly used
-CONTRIBUTING.md:23:306    - Unknown word (jsonnet)    -- convention `x_ls` (`jsonnet_ls`).
-CONTRIBUTING.md:47:4      - Unknown word (pyproject)  -- 'pyproject.toml',
-CONTRIBUTING.md:51:4      - Unknown word (Pipfile)    -- 'Pipfile',
-CONTRIBUTING.md:52:4      - Unknown word (pyrightconfig) -- 'pyrightconfig.json',
-CONTRIBUTING.md:57:24     - Unknown word (organizeimports) -- command = 'pyright.organizeimports',
-CONTRIBUTING.md:58:32     - Unknown word (bufnr)           -- arguments = { vim.uri_from_bufnr(0) },
-CONTRIBUTING.md:65:22     - Unknown word (langserver)      -- cmd = { 'pyright-langserver', '--stdio' },
-CONTRIBUTING.md:7:13      - Unknown word (lspconfig)  -- ## Scope of lspconfig
+CONTRIBUTING.md:117:4     - Unknown word (luacheck)        -- - [luacheck](https://github.com
+CONTRIBUTING.md:118:4     - Unknown word (stylua)          -- - [stylua](https://github.com
+CONTRIBUTING.md:136:36    - Unknown word (luafile)         -- Es +'set rtp+=$PWD' +'luafile scripts/docgen.lua'
+CONTRIBUTING.md:22:118    - Unknown word (pyright)    -- server is a unique name (`pyright`, `clangd`) or a commonly
+CONTRIBUTING.md:22:129    - Unknown word (clangd)     -- unique name (`pyright`, `clangd`) or a commonly used
+CONTRIBUTING.md:22:303    - Unknown word (jsonnet)    -- convention `x_ls` (`jsonnet_ls`).
+CONTRIBUTING.md:50:24     - Unknown word (organizeimports) -- command = 'pyright.organizeimports',
+CONTRIBUTING.md:51:32     - Unknown word (bufnr)           -- arguments = { vim.uri_from_bufnr(0) },
+CONTRIBUTING.md:58:22     - Unknown word (langserver)      -- cmd = { 'pyright-langserver', '--stdio' },
+CONTRIBUTING.md:61:8      - Unknown word (pyproject)       -- 'pyproject.toml',
+CONTRIBUTING.md:65:8      - Unknown word (Pipfile)         -- 'Pipfile',
+CONTRIBUTING.md:66:8      - Unknown word (pyrightconfig)   -- 'pyrightconfig.json',
+CONTRIBUTING.md:7:13      - Unknown word (nvim)       -- ## Scope of nvim-lspconfig
+CONTRIBUTING.md:7:18      - Unknown word (lspconfig)  -- ## Scope of nvim-lspconfig
 CONTRIBUTING.md:80:5      - Unknown word (Pyright)         -- PyrightOrganizeImports = {
-CONTRIBUTING.md:9:340     - Unknown word (nvim)       -- dedicated plugin such as nvim-jdtls, nvim-metals,
 CONTRIBUTING.md:9:345     - Unknown word (jdtls)      -- plugin such as nvim-jdtls, nvim-metals, etc.
 README.md:54:6      - Unknown word (tagfunc)    -- * [`'tagfunc'`][tagfunc]
 README.md:56:6      - Unknown word (omnifunc)   -- * [`'omnifunc'`][omnifunc]
 README.md:58:6      - Unknown word (formatexpr) -- * [`'formatexpr'`][formatexpr]
-doc/lspconfig.txt:1:29      - Unknown word (Nvim)       -- lspconfig.txt* For Nvim version 0.8+
-doc/lspconfig.txt:216:23    - Unknown word (autocmd)           -- vim.api.nvim_create_autocmd('LspAttach', {
-doc/lspconfig.txt:228:16    - Unknown word (newindex)          -- The `configs.__newindex` metamethod consumes
-doc/lspconfig.txt:238:13    - Unknown word (texlab)            -- configs.texlab.buf_build = buf_build
-doc/lspconfig.txt:23:4      - Unknown word (require'lspconfig) -- require'lspconfig'.pyright.setup{}
-doc/lspconfig.txt:256:30    - Unknown word (fname)             -- root_dir = function(fname)
-doc/lspconfig.txt:28:10     - Unknown word (checkhealth)       -- 5. Run `:checkhealth lsp` to see the status
-doc/lspconfig.txt:34:36     - Unknown word (metamethod)        -- exposes a `setup {}` metamethod which makes it easy
-doc/lspconfig.txt:420:10    - Unknown word (Nvim's)            -- All bugs Nvim's built-in client should
-doc/lspconfig.txt:495:24    - Unknown word (norl)              -- vim:tw=78:ts=8:ft=help:norl:
-doc/lspconfig.txt:65:67     - Unknown word (autocommand)       -- Controls if the `FileType` autocommand
-doc/server_configurations.md:10010:22  - Unknown word (robotidy)        -- util.root_pattern('robotidy.toml', 'pyproject.toml
-doc/server_configurations.md:102:4     - Unknown word (fortls)       -- - [fortls](#fortls)
-doc/server_configurations.md:103:4     - Unknown word (fsautocomplete) -- - [fsautocomplete](#fsautocomplete)
-doc/server_configurations.md:105:4     - Unknown word (fstar)          -- - [fstar](#fstar)
-doc/server_configurations.md:10629:14  - Unknown word (shaderslang)     -- { "hlsl", "shaderslang" }
-doc/server_configurations.md:10629:6   - Unknown word (hlsl)            -- { "hlsl", "shaderslang" }
-doc/server_configurations.md:10644:2   - Unknown word (Slint)           -- `Slint`'s language server
-doc/server_configurations.md:107:4     - Unknown word (gdscript)       -- - [gdscript](#gdscript)
-doc/server_configurations.md:108:4     - Unknown word (gdshader)       -- - [gdshader_lsp](#gdshader_lsp)
-doc/server_configurations.md:10984:52  - Unknown word (remappings)      -- json, just create a `remappings.txt` with:
-doc/server_configurations.md:109:4     - Unknown word (ghcide)         -- - [ghcide](#ghcide)
-doc/server_configurations.md:10:4      - Unknown word (anakin)     -- - [anakin_language_server](#anakin
-doc/server_configurations.md:11073:71  - Unknown word (Nomic)           -- language, built by the Nomic Foundation for the Ethereum
-doc/server_configurations.md:110:4     - Unknown word (ghdl)           -- - [ghdl_ls](#ghdl_ls)
-doc/server_configurations.md:111:4     - Unknown word (ginko)          -- - [ginko_ls](#ginko_ls)
-doc/server_configurations.md:11226:39  - Unknown word (xcodeproj)       -- buildServer.json", "*.xcodeproj", "*.xcworkspace",
-doc/server_configurations.md:11226:54  - Unknown word (xcworkspace)     -- , "*.xcodeproj", "*.xcworkspace", "compile_commands
-doc/server_configurations.md:11241:17  - Unknown word (Sourcery)        -- --- The Sourcery token for authenticating
-doc/server_configurations.md:11342:31  - Unknown word (datapacks)       -- server for Minecraft datapacks.
-doc/server_configurations.md:11352:31  - Unknown word (mcfunction)      -- BufNewFile,BufRead *.mcfunction set filetype=mcfunction
-doc/server_configurations.md:11427:1   - Unknown word (Sqls)            -- Sqls can be installed via
-doc/server_configurations.md:11527:40  - Unknown word (Starlark)        -- LSP implementation for Starlark. Installation instructions
-doc/server_configurations.md:11591:11  - Unknown word (Steepfile)       -- You need `Steepfile` to make it work. Generate
-doc/server_configurations.md:11665:42  - Unknown word (stylelintplus)   -- passing a `settings.stylelintplus` object to `stylelint
-doc/server_configurations.md:11692:47  - Unknown word (wxss)            -- "sugarss", "vue", "wxss" }
-doc/server_configurations.md:116:4     - Unknown word (glsl)           -- - [glsl_analyzer](#glsl_analyzer
-doc/server_configurations.md:11771:6   - Unknown word (svelteserver)    -- { "svelteserver", "--stdio" }
-doc/server_configurations.md:11787:27  - Unknown word (Verilog)         -- Language server for SystemVerilog.
-doc/server_configurations.md:117:4     - Unknown word (glslls)         -- - [glslls](#glslls)
-doc/server_configurations.md:11802:3   - Unknown word (Svlangserver)    -- - SvlangserverBuildIndex: Instructs
-doc/server_configurations.md:118:4     - Unknown word (golangci)       -- - [golangci_lint_ls](#golangci_lint
-doc/server_configurations.md:11921:6   - Unknown word (stree)           -- { "stree", "lsp" }
-doc/server_configurations.md:11929:18  - Unknown word (streerc)         -- root_pattern(".streerc", "Gemfile", ".git"
-doc/server_configurations.md:11937:31  - Unknown word (opensource)     -- server for Tabby, an opensource, self-hosted AI coding
-doc/server_configurations.md:119:4     - Unknown word (gopls)          -- - [gopls](#gopls)
-doc/server_configurations.md:11:4      - Unknown word (angularls)  -- - [angularls](#angularls)
-doc/server_configurations.md:12036:21  - Unknown word (Taplo)          -- Language server for Taplo, a TOML toolkit.
-doc/server_configurations.md:12093:6   - Unknown word (tablegen)       -- { "tablegen" }
-doc/server_configurations.md:12107:1   - Unknown word (luarocks)       -- luarocks install teal-language
-doc/server_configurations.md:12134:17  - Unknown word (tlconfig)       -- root_pattern("tlconfig.lua")
-doc/server_configurations.md:12292:3   - Unknown word (Texlab)         -- - TexlabBuild: Build the current
-doc/server_configurations.md:12321:40  - Unknown word (nonstopmode)    -- pdf", "-interaction=nonstopmode", "-synctex=1", "%f
-doc/server_configurations.md:12321:56  - Unknown word (synctex)        -- interaction=nonstopmode", "-synctex=1", "%f" },
-doc/server_configurations.md:12322:23  - Unknown word (latexmk)        -- executable = "latexmk",
-doc/server_configurations.md:12326:7   - Unknown word (chktex)         -- chktex = {
-doc/server_configurations.md:12335:25  - Unknown word (latexindent)    -- latexFormatter = "latexindent",
-doc/server_configurations.md:12386:7   - Unknown word (analysers)      -- analysers = {
-doc/server_configurations.md:12387:9   - Unknown word (languagetool)   -- languagetool = {
-doc/server_configurations.md:123:4     - Unknown word (groovyls)       -- - [groovyls](#groovyls)
-doc/server_configurations.md:12527:17  - Unknown word (Tiltfile)       -- autocmd BufRead Tiltfile setf=tiltfile
-doc/server_configurations.md:12527:31  - Unknown word (tiltfile)       -- BufRead Tiltfile setf=tiltfile
-doc/server_configurations.md:12560:36  - Unknown word (Typst)          -- language service for Typst [taɪpst]. You can also
-doc/server_configurations.md:12560:43  - Unknown word (taɪpst)         -- language service for Typst [taɪpst]. You can also call
-doc/server_configurations.md:1256:7    - Unknown word (mktemp)         -- (cd $(mktemp -d) \
-doc/server_configurations.md:12696:49  - Unknown word (typespec)       -- installed together with the typespec compiler via `npm`:
-doc/server_configurations.md:126:4     - Unknown word (haxe)           -- - [haxe_language_server](#haxe
-doc/server_configurations.md:12720:22  - Unknown word (tspconfig)      -- util.root_pattern("tspconfig.yaml", ".git")
-doc/server_configurations.md:12953:36  - Unknown word (Uiua)           -- language server of the Uiua interpreter.
-doc/server_configurations.md:129:4     - Unknown word (hhvm)           -- - [hhvm](#hhvm)
-doc/server_configurations.md:12:4      - Unknown word (ansiblels)  -- - [ansiblels](#ansiblels)
-doc/server_configurations.md:131:4     - Unknown word (hlasm)          -- - [hlasm](#hlasm)
-doc/server_configurations.md:13235:5   - Unknown word (VDMJ)           -- The VDMJ language server can
-doc/server_configurations.md:13268:15  - Unknown word (vdmpp)          -- { "vdmsl", "vdmpp", "vdmrt" }
-doc/server_configurations.md:13268:24  - Unknown word (vdmrt)          -- "vdmsl", "vdmpp", "vdmrt" }
-doc/server_configurations.md:13268:6   - Unknown word (vdmsl)          -- { "vdmsl", "vdmpp", "vdmrt"
-doc/server_configurations.md:13278:33  - Unknown word (stdpath)        -- = "path.join(vim.fn.stdpath 'cache', 'vdm-lsp.log
-doc/server_configurations.md:13278:5   - Unknown word (logfile)        -- logfile = "path.join(vim.fn
-doc/server_configurations.md:13279:5   - Unknown word (mavenrepo)      -- mavenrepo = "$HOME/.m2/repository
-doc/server_configurations.md:13363:21  - Unknown word (Veryl)          -- Language server for Veryl
-doc/server_configurations.md:133:4     - Unknown word (hoon)           -- - [hoon_ls](#hoon_ls)
-doc/server_configurations.md:13484:59  - Unknown word (autoload)       -- runtime", "nvim", ".git", "autoload", "plugin" },
-doc/server_configurations.md:13488:5   - Unknown word (iskeyword)      -- iskeyword = "@,48-57,_,192-25
-doc/server_configurations.md:13491:11  - Unknown word (Runtimepath)    -- fromRuntimepath = true,
-doc/server_configurations.md:13492:11  - Unknown word (Vimruntime)     -- fromVimruntime = true
-doc/server_configurations.md:13494:5   - Unknown word (vimruntime)     -- vimruntime = ""
-doc/server_configurations.md:13511:21  - Unknown word (Visualforce)    -- Language server for Visualforce.
-doc/server_configurations.md:13514:14  - Unknown word (salesforcedx)   -- [forcedotcom/salesforcedx-vscode](https://github
-doc/server_configurations.md:13514:2   - Unknown word (forcedotcom)    -- [forcedotcom/salesforcedx-vscode
-doc/server_configurations.md:1354:10   - Unknown word (Bitbake)        -- Official Bitbake Language Server for
-doc/server_configurations.md:1354:42   - Unknown word (Yocto)          -- Language Server for the Yocto Project.
-doc/server_configurations.md:13578:11  - Unknown word (vlang)          -- { "v", "vlang" }
-doc/server_configurations.md:135:4     - Unknown word (htmx)           -- - [htmx](#htmx)
-doc/server_configurations.md:13643:29  - Unknown word (yourusernamehere) -- global_ts = '/home/[yourusernamehere]/.npm/lib/node_modules
-doc/server_configurations.md:13786:7   - Unknown word (vetur)            -- vetur = {
-doc/server_configurations.md:137:4     - Unknown word (hyprls)         -- - [hyprls](#hyprls)
-doc/server_configurations.md:13893:43  - Unknown word (yammls)           -- is special-cased in yammls, see the following upstream
-doc/server_configurations.md:138:4     - Unknown word (idris)          -- - [idris2_lsp](#idris2_lsp)
-doc/server_configurations.md:13985:22  - Unknown word (YARA)             -- An YLS plugin adding YARA linting capabilities
-doc/server_configurations.md:13987:18  - Unknown word (yara)             -- This plugin runs yara.compile on every save
-doc/server_configurations.md:139:4     - Unknown word (intelephense)   -- - [intelephense](#intelephense)
-doc/server_configurations.md:13:4      - Unknown word (antlersls)  -- - [antlersls](#antlersls)
-doc/server_configurations.md:1438:46   - Unknown word (CBQN)           -- the shared library of [CBQN](https://github.com
-doc/server_configurations.md:1438:85   - Unknown word (libcbqn)        -- github.com/dzaima/CBQN) `libcbqn.so`.
-doc/server_configurations.md:1439:188  - Unknown word (ldconfig)       -- cache by executing `sudo ldconfig`.
-doc/server_configurations.md:1441:71   - Unknown word (DYLD)           -- LIBRARY_PATH` (Linux) or `DYLD_LIBRARY_PATH` (macOS
-doc/server_configurations.md:145:4     - Unknown word (jqls)           -- - [jqls](#jqls)
-doc/server_configurations.md:146:4     - Unknown word (jsonls)         -- - [jsonls](#jsonls)
-doc/server_configurations.md:1479:2    - Unknown word (brightscript)   -- `brightscript` can be installed via
-doc/server_configurations.md:1481:16   - Unknown word (brighterscript) -- npm install -g brighterscript
-doc/server_configurations.md:148:4     - Unknown word (julials)        -- - [julials](#julials)
-doc/server_configurations.md:150:4     - Unknown word (koka)           -- - [koka](#koka)
-doc/server_configurations.md:153:4     - Unknown word (leanls)         -- - [leanls](#leanls)
-doc/server_configurations.md:154:4     - Unknown word (lelwel)         -- - [lelwel_ls](#lelwel_ls)
-doc/server_configurations.md:155:4     - Unknown word (lemminx)        -- - [lemminx](#lemminx)
-doc/server_configurations.md:1568:18   - Unknown word (buckconfig)     -- root_pattern(".buckconfig")
-doc/server_configurations.md:157:4     - Unknown word (ltex)           -- - [ltex](#ltex)
-doc/server_configurations.md:1612:23   - Unknown word (bufbuild)       -- go install github.com/bufbuild/buf-language-server
-doc/server_configurations.md:166:4     - Unknown word (mesonlsp)       -- - [mesonlsp](#mesonlsp)
-doc/server_configurations.md:170:4     - Unknown word (mlir)           -- - [mlir_lsp_server](#mlir_lsp
-doc/server_configurations.md:171:9     - Unknown word (pdll)           -- - [mlir_pdll_lsp_server](#mlir_pdll
-doc/server_configurations.md:174:4     - Unknown word (motoko)         -- - [motoko_lsp](#motoko_lsp)
-doc/server_configurations.md:1768:6    - Unknown word (scarb)          -- { "scarb-cairo-language-server
-doc/server_configurations.md:176:4     - Unknown word (msbuild)        -- - [msbuild_project_tools_server
-doc/server_configurations.md:1782:17   - Unknown word (Scarb)          -- root_pattern("Scarb.toml", "cairo_project
-doc/server_configurations.md:178:4     - Unknown word (nelua)          -- - [nelua_lsp](#nelua_lsp)
-doc/server_configurations.md:179:4     - Unknown word (neocmake)       -- - [neocmake](#neocmake)
-doc/server_configurations.md:1805:25   - Unknown word (frounding)      -- excludeArgs = { "-frounding-math"} ;
-doc/server_configurations.md:180:4     - Unknown word (nextls)         -- - [nextls](#nextls)
-doc/server_configurations.md:1828:18   - Unknown word (objc)           -- { "c", "cpp", "objc", "objcpp", "cuda"
-doc/server_configurations.md:1828:26   - Unknown word (objcpp)         -- c", "cpp", "objc", "objcpp", "cuda" }
-doc/server_configurations.md:1828:36   - Unknown word (cuda)           -- "objc", "objcpp", "cuda" }
-doc/server_configurations.md:185:4     - Unknown word (nimls)          -- - [nimls](#nimls)
-doc/server_configurations.md:186:4     - Unknown word (nixd)           -- - [nixd](#nixd)
-doc/server_configurations.md:1893:2    - Unknown word (Circom)         -- [Circom Language Server](https
-doc/server_configurations.md:189:4     - Unknown word (nushell)        -- - [nushell](#nushell)
-doc/server_configurations.md:18:4      - Unknown word (astro)      -- - [astro](#astro)
-doc/server_configurations.md:190:4     - Unknown word (nxls)           -- - [nxls](#nxls)
-doc/server_configurations.md:191:4     - Unknown word (ocamlls)        -- - [ocamlls](#ocamlls)
-doc/server_configurations.md:192:4     - Unknown word (ocamllsp)       -- - [ocamllsp](#ocamllsp)
-doc/server_configurations.md:1932:18   - Unknown word (myproject)      -- ln -s /path/to/myproject/build/compile_commands
-doc/server_configurations.md:1944:3    - Unknown word (Clangd)         -- - ClangdShowSymbolInfo: Show
-doc/server_configurations.md:194:4     - Unknown word (omnisharp)      -- - [omnisharp](#omnisharp)
-doc/server_configurations.md:195:4     - Unknown word (opencl)         -- - [opencl_ls](#opencl_ls)
-doc/server_configurations.md:196:4     - Unknown word (openedge)       -- - [openedge_ls](#openedge_ls)
-doc/server_configurations.md:197:4     - Unknown word (openscad)       -- - [openscad_ls](#openscad_ls)
-doc/server_configurations.md:19:4      - Unknown word (autotools)  -- - [autotools_ls](#autotools_ls)
-doc/server_configurations.md:2000:6    - Unknown word (clar)           -- { "clar", "clarity" }
-doc/server_configurations.md:200:4     - Unknown word (pasls)          -- - [pasls](#pasls)
-doc/server_configurations.md:201:4     - Unknown word (pbls)           -- - [pbls](#pbls)
-doc/server_configurations.md:202:4     - Unknown word (perlls)         -- - [perlls](#perlls)
-doc/server_configurations.md:203:4     - Unknown word (perlnavigator)  -- - [perlnavigator](#perlnavigator)
-doc/server_configurations.md:204:4     - Unknown word (perlpls)        -- - [perlpls](#perlpls)
-doc/server_configurations.md:206:4     - Unknown word (phan)           -- - [phan](#phan)
-doc/server_configurations.md:207:4     - Unknown word (phpactor)       -- - [phpactor](#phpactor)
-doc/server_configurations.md:208:4     - Unknown word (pico)           -- - [pico8_ls](#pico8_ls)
-doc/server_configurations.md:209:4     - Unknown word (pkgbuild)       -- - [pkgbuild_language_server](#pkgbuild
-doc/server_configurations.md:213:4     - Unknown word (prismals)       -- - [prismals](#prismals)
-doc/server_configurations.md:215:4     - Unknown word (prosemd)        -- - [prosemd_lsp](#prosemd_lsp)
-doc/server_configurations.md:216:4     - Unknown word (protols)        -- - [protols](#protols)
-doc/server_configurations.md:2189:21   - Unknown word (Contextive)     -- Language Server for Contextive.
-doc/server_configurations.md:220:4     - Unknown word (purescriptls)   -- - [purescriptls](#purescriptls)
-doc/server_configurations.md:221:4     - Unknown word (pylsp)          -- - [pylsp](#pylsp)
-doc/server_configurations.md:222:4     - Unknown word (pylyzer)        -- - [pylyzer](#pylyzer)
-doc/server_configurations.md:226:4     - Unknown word (qmlls)          -- - [qmlls](#qmlls)
-doc/server_configurations.md:230:4     - Unknown word (raku)           -- - [raku_navigator](#raku_navigator
-doc/server_configurations.md:233:4     - Unknown word (regols)         -- - [regols](#regols)
-doc/server_configurations.md:2350:43   - Unknown word (bufdir)         -- package.json", ".git") or bufdir
-doc/server_configurations.md:236:4     - Unknown word (rescriptls)     -- - [rescriptls](#rescriptls)
-doc/server_configurations.md:2383:17   - Unknown word (langservers)    -- npm i -g vscode-langservers-extracted
-doc/server_configurations.md:238:4     - Unknown word (rnix)           -- - [rnix](#rnix)
-doc/server_configurations.md:239:4     - Unknown word (robotframework) -- - [robotframework_ls](#robotframework
-doc/server_configurations.md:242:4     - Unknown word (rubocop)        -- - [rubocop](#rubocop)
-doc/server_configurations.md:24:4      - Unknown word (basedpyright) -- - [basedpyright](#basedpyright)
-doc/server_configurations.md:250:4     - Unknown word (scry)           -- - [scry](#scry)
-doc/server_configurations.md:253:4     - Unknown word (sixtyfps)       -- - [sixtyfps](#sixtyfps)
-doc/server_configurations.md:254:4     - Unknown word (slangd)         -- - [slangd](#slangd)
-doc/server_configurations.md:255:4     - Unknown word (slint)          -- - [slint_lsp](#slint_lsp)
-doc/server_configurations.md:25:4      - Unknown word (bashls)       -- - [bashls](#bashls)
-doc/server_configurations.md:260:4     - Unknown word (solang)         -- - [solang](#solang)
-doc/server_configurations.md:261:4     - Unknown word (solargraph)     -- - [solargraph](#solargraph)
-doc/server_configurations.md:2646:21   - Unknown word (Dafny)          -- Support for the Dafny language server.
-doc/server_configurations.md:266:4     - Unknown word (somesass)       -- - [somesass_ls](#somesass_ls)
-doc/server_configurations.md:2684:25   - Unknown word (cuelang)        -- Dagger's lsp server for cuelang.
-doc/server_configurations.md:268:4     - Unknown word (sourcekit)      -- - [sourcekit](#sourcekit)
-doc/server_configurations.md:2697:6    - Unknown word (cuelsp)         -- { "cuelsp" }
-doc/server_configurations.md:269:4     - Unknown word (sourcery)       -- - [sourcery](#sourcery)
-doc/server_configurations.md:26:4      - Unknown word (bazelrc)      -- - [bazelrc_lsp](#bazelrc_lsp)
-doc/server_configurations.md:271:4     - Unknown word (spyglassmc)     -- - [spyglassmc_language_server](#spyglassmc
-doc/server_configurations.md:272:4     - Unknown word (sqlls)          -- - [sqlls](#sqlls)
-doc/server_configurations.md:273:4     - Unknown word (sqls)           -- - [sqls](#sqls)
-doc/server_configurations.md:2748:17   - Unknown word (pubspec)        -- root_pattern("pubspec.yaml")
-doc/server_configurations.md:274:4     - Unknown word (standardrb)     -- - [standardrb](#standardrb)
-doc/server_configurations.md:275:4     - Unknown word (starlark)       -- - [starlark_rust](#starlark_rust
-doc/server_configurations.md:276:4     - Unknown word (starpls)        -- - [starpls](#starpls)
-doc/server_configurations.md:277:4     - Unknown word (statix)         -- - [statix](#statix)
-doc/server_configurations.md:27:4      - Unknown word (beancount)    -- - [beancount](#beancount)
-doc/server_configurations.md:2811:20   - Unknown word (debcopyright)   -- { "debcontrol", "debcopyright", "debchangelog", "make
-doc/server_configurations.md:2811:36   - Unknown word (debchangelog)   -- debcontrol", "debcopyright", "debchangelog", "make", "yaml" }
-doc/server_configurations.md:2811:6    - Unknown word (debcontrol)     -- { "debcontrol", "debcopyright", "debchangel
-doc/server_configurations.md:281:4     - Unknown word (superhtml)      -- - [superhtml](#superhtml)
-doc/server_configurations.md:2824:14   - Unknown word (delphilsp)      -- Note, the '*.delphilsp.json' file is required
-doc/server_configurations.md:283:4     - Unknown word (svlangserver)   -- - [svlangserver](#svlangserver)
-doc/server_configurations.md:284:4     - Unknown word (svls)           -- - [svls](#svls)
-doc/server_configurations.md:285:10    - Unknown word (mesonls)        -- - [swift_mesonls](#swift_mesonls)
-doc/server_configurations.md:2890:28   - Unknown word (codefences)     -- appropriately highlight codefences returned from denols
-doc/server_configurations.md:289:4     - Unknown word (taplo)          -- - [taplo](#taplo)
-doc/server_configurations.md:2907:3    - Unknown word (Denols)         -- - DenolsCache: Cache a module
-doc/server_configurations.md:290:4     - Unknown word (tblgen)         -- - [tblgen_lsp_server](#tblgen
-doc/server_configurations.md:292:4     - Unknown word (templ)          -- - [templ](#templ)
-doc/server_configurations.md:294:4     - Unknown word (terraformls)    -- - [terraformls](#terraformls)
-doc/server_configurations.md:296:4     - Unknown word (textlsp)        -- - [textlsp](#textlsp)
-doc/server_configurations.md:297:4     - Unknown word (tflint)         -- - [tflint](#tflint)
-doc/server_configurations.md:299:4     - Unknown word (thriftls)       -- - [thriftls](#thriftls)
-doc/server_configurations.md:301:4     - Unknown word (tinymist)       -- - [tinymist](#tinymist)
-doc/server_configurations.md:3029:75   - Unknown word (caterva)        -- for LaTeX, ConTeXt et caterva. It provides
-doc/server_configurations.md:304:4     - Unknown word (ttags)          -- - [ttags](#ttags)
-doc/server_configurations.md:3050:13   - Unknown word (plaintex)       -- { "tex", "plaintex", "context" }
-doc/server_configurations.md:3083:14   - Unknown word (htmldjango)     -- { "html", "htmldjango" }
-doc/server_configurations.md:308:4     - Unknown word (typeprof)       -- - [typeprof](#typeprof)
-doc/server_configurations.md:30:4      - Unknown word (bitbake)      -- - [bitbake_language_server](#bitbake
-doc/server_configurations.md:310:4     - Unknown word (typst)          -- - [typst_lsp](#typst_lsp)
-doc/server_configurations.md:311:4     - Unknown word (uiua)           -- - [uiua](#uiua)
-doc/server_configurations.md:313:4     - Unknown word (unocss)         -- - [unocss](#unocss)
-doc/server_configurations.md:314:4     - Unknown word (uvls)           -- - [uvls](#uvls)
-doc/server_configurations.md:3190:34   - Unknown word (opam)           -- can be installed via `opam`
-doc/server_configurations.md:319:4     - Unknown word (vdmj)           -- - [vdmj](#vdmj)
-doc/server_configurations.md:320:4     - Unknown word (verible)        -- - [verible](#verible)
-doc/server_configurations.md:3210:14   - Unknown word (tptp)           -- { "smt2", "tptp", "p", "cnf", "icnf
-doc/server_configurations.md:3210:34   - Unknown word (icnf)           -- tptp", "p", "cnf", "icnf", "zf" }
-doc/server_configurations.md:321:4     - Unknown word (veridian)       -- - [veridian](#veridian)
-doc/server_configurations.md:322:4     - Unknown word (veryl)          -- - [veryl_ls](#veryl_ls)
-doc/server_configurations.md:323:4     - Unknown word (vhdl)           -- - [vhdl_ls](#vhdl_ls)
-doc/server_configurations.md:324:4     - Unknown word (vimls)          -- - [vimls](#vimls)
-doc/server_configurations.md:325:4     - Unknown word (visualforce)    -- - [visualforce_ls](#visualforce_ls
-doc/server_configurations.md:328:4     - Unknown word (vtsls)          -- - [vtsls](#vtsls)
-doc/server_configurations.md:329:4     - Unknown word (vuels)          -- - [vuels](#vuels)
-doc/server_configurations.md:330:4     - Unknown word (wgsl)           -- - [wgsl_analyzer](#wgsl_analyzer
-doc/server_configurations.md:331:4     - Unknown word (yamlls)         -- - [yamlls](#yamlls)
-doc/server_configurations.md:33:4      - Unknown word (bqnlsp)       -- - [bqnlsp](#bqnlsp)
-doc/server_configurations.md:3401:33   - Unknown word (hanzi)          -- symbols_only_follow_by_hanzi = false
-doc/server_configurations.md:3435:6    - Unknown word (earthfile)      -- { "earthfile" }
-doc/server_configurations.md:343:21    - Unknown word (Agda)           -- Language Server for Agda.
-doc/server_configurations.md:3447:21   - Unknown word (Ecsact)         -- Language server for Ecsact.
-doc/server_configurations.md:3569:16   - Unknown word (eelixir)        -- { "elixir", "eelixir", "heex", "surface"
-doc/server_configurations.md:3569:27   - Unknown word (heex)           -- elixir", "eelixir", "heex", "surface" }
-doc/server_configurations.md:3654:17   - Unknown word (rebar)          -- root_pattern('rebar.config', 'erlang.mk
-doc/server_configurations.md:3701:17   - Unknown word (olrtg)          -- npm install -g @olrtg/emmet-language-server
-doc/server_configurations.md:3719:13   - Unknown word (eruby)          -- { "css", "eruby", "html", "htmldjango
-doc/server_configurations.md:3848:1    - Unknown word (Esbonio)        -- Esbonio is a language server
-doc/server_configurations.md:3868:21   - Unknown word (virtualenv)     -- cmd = { '/path/to/virtualenv/bin/python', '-m',
-doc/server_configurations.md:38:4      - Unknown word (bufls)        -- - [bufls](#bufls)
-doc/server_configurations.md:4200:18   - Unknown word (flowconfig)     -- root_pattern(".flowconfig")
-doc/server_configurations.md:426:6     - Unknown word (anakinls)       -- { "anakinls" }
-doc/server_configurations.md:4316:52   - Unknown word (FSAC)           -- provided by FsAutoComplete (FSAC).
-doc/server_configurations.md:4328:168  - Unknown word (adelarsq)       -- fsharp/vim-fsharp), and [adelarsq/neofsharp.vim](https
-doc/server_configurations.md:4328:177  - Unknown word (neofsharp)      -- fsharp), and [adelarsq/neofsharp.vim](https://github
-doc/server_configurations.md:4365:44   - Unknown word (failwith)       -- ceStubGenerationMethodBody = 'failwith "Not Implemented"',
-doc/server_configurations.md:43:4      - Unknown word (ccls)         -- - [ccls](#ccls)
-doc/server_configurations.md:440:7     - Unknown word (pyflakes)       -- pyflakes_errors = { "ImportStarNotPerm
-doc/server_configurations.md:4548:18   - Unknown word (gdshaderinc)    -- { "gdshader", "gdshaderinc" }
-doc/server_configurations.md:4578:17   - Unknown word (lhaskell)       -- { "haskell", "lhaskell" }
-doc/server_configurations.md:4582:49   - Unknown word (bazel)          -- "hie-bios", "BUILD.bazel", "cabal.config", "package
-doc/server_configurations.md:4590:23   - Unknown word (VHDL)           -- language server for VHDL, using ghdl as its backend
-doc/server_configurations.md:4592:22   - Unknown word (pyghdl)         -- ghdl-ls` is part of pyghdl, for installation instruction
-doc/server_configurations.md:45:4      - Unknown word (circom)       -- - [circom-lsp](#circom-lsp)
-doc/server_configurations.md:460:15    - Unknown word (ngserver)       -- local cmd = {"ngserver", "--stdio", "--tsProbeLocati
-doc/server_configurations.md:4702:32   - Unknown word (WGSL)           -- language features for WGSL (WebGPU Shading Language
-doc/server_configurations.md:4839:21   - Unknown word (GLSL)           -- Language server for GLSL
-doc/server_configurations.md:485:65    - Unknown word (htmlangular)    -- "typescript.tsx", "htmlangular" }
-doc/server_configurations.md:4860:22   - Unknown word (tesc)           -- { "glsl", "vert", "tesc", "tese", "frag", "geom
-doc/server_configurations.md:4860:30   - Unknown word (tese)           -- glsl", "vert", "tesc", "tese", "frag", "geom", "comp
-doc/server_configurations.md:4930:23   - Unknown word (nametake)       -- go install github.com/nametake/golangci-lint-langserver
-doc/server_configurations.md:4950:12   - Unknown word (gomod)          -- { "go", "gomod" }
-doc/server_configurations.md:4985:21   - Unknown word (gowork)         -- { "go", "gomod", "gowork", "gotmpl" }
-doc/server_configurations.md:4985:31   - Unknown word (gotmpl)         -- "gomod", "gowork", "gotmpl" }
-doc/server_configurations.md:5003:66   - Unknown word (gradlew)        -- vscode-gradle using `./gradlew installDist` and point
-doc/server_configurations.md:5074:40   - Unknown word (YRCX)           -- client_BaDkMgx4X19X9UxxYRCXZo"
-doc/server_configurations.md:5118:31   - Unknown word (graphqlrc)      -- root_pattern('.git', '.graphqlrc*', '.graphql.config
-doc/server_configurations.md:5169:175  - Unknown word (guix)           -- the provided channel guix.scm in the repo:
-doc/server_configurations.md:5169:61   - Unknown word (Guix)           -- lsp-server is using Guix. Unfortunately it is
-doc/server_configurations.md:5176:95   - Unknown word (modeline)       -- file type using `:help modeline` or adding https://gitlab
-doc/server_configurations.md:51:4      - Unknown word (codeqlls)     -- - [codeqlls](#codeqlls)
-doc/server_configurations.md:5255:5    - Unknown word (Haxe)           -- The Haxe language server can
-doc/server_configurations.md:5259:17   - Unknown word (vshaxe)         -- npx lix run vshaxe-build -t language-server
-doc/server_configurations.md:5273:56   - Unknown word (HXML)           -- configured with the HXML compiler arguments
-doc/server_configurations.md:5274:26   - Unknown word (hxml)           -- contained in the first `.hxml` file found in your
-doc/server_configurations.md:52:4      - Unknown word (coffeesense)  -- - [coffeesense](#coffeesense)
-doc/server_configurations.md:5348:14   - Unknown word (verilog)        -- { "vhdl", "verilog", "systemverilog" }
-doc/server_configurations.md:5348:25   - Unknown word (systemverilog)  -- "vhdl", "verilog", "systemverilog" }
-doc/server_configurations.md:53:4      - Unknown word (contextive)   -- - [contextive](#contextive)
-doc/server_configurations.md:5408:28   - Unknown word (HHVM)           -- below for how to setup HHVM & typechecker:
-doc/server_configurations.md:5430:18   - Unknown word (hhconfig)       -- root_pattern(".hhconfig")
-doc/server_configurations.md:5442:5    - Unknown word (hlint)          -- hlintOn = bool;
-doc/server_configurations.md:5448:65   - Unknown word (floskell)      -- brittany", alternate "floskell");
-doc/server_configurations.md:5480:35   - Unknown word (HLASM)         -- how to configure the HLASM language server, see
-doc/server_configurations.md:5501:18   - Unknown word (hlasmplugin)   -- root_pattern(".hlasmplugin")
-doc/server_configurations.md:5540:6    - Unknown word (lspinfo)       -- - `lspinfo` :
-doc/server_configurations.md:5552:34   - Unknown word (cabalfmt)      -- cabalFormattingProvider = "cabalfmt",
-doc/server_configurations.md:5567:23   - Unknown word (Hoon)          -- language server for Hoon.
-doc/server_configurations.md:5571:25   - Unknown word (urbit)         -- Start a fake ~zod with `urbit -F zod`.
-doc/server_configurations.md:5572:34   - Unknown word (Urbit)         -- language server at the Urbit Dojo prompt with: `
-doc/server_configurations.md:5693:153  - Unknown word (gohtml)          -- ejs", "erb", "eruby", "gohtml", "gohtmltmpl", "haml
-doc/server_configurations.md:5693:163  - Unknown word (gohtmltmpl)      -- "eruby", "gohtml", "gohtmltmpl", "haml", "handlebars
-doc/server_configurations.md:5693:177  - Unknown word (haml)            -- gohtml", "gohtmltmpl", "haml", "handlebars", "hbs
-doc/server_configurations.md:5693:6    - Unknown word (aspnetcorerazor) -- { "aspnetcorerazor", "astro", "astro-markdown
-doc/server_configurations.md:5744:23   - Unknown word (ewen)            -- go install github.com/ewen-lbh/hyprls/cmd/hyprls
-doc/server_configurations.md:5763:6    - Unknown word (hyprlang)        -- { "hyprlang" }
-doc/server_configurations.md:5779:5    - Unknown word (Idris)           -- The Idris 2 language server.
-doc/server_configurations.md:58:4      - Unknown word (cssls)        -- - [cssls](#cssls)
-doc/server_configurations.md:5932:77   - Unknown word (gotos)           -- completion, imports, gotos and formatting and some
-doc/server_configurations.md:5944:55   - Unknown word (JDTLS)           -- jvm arguments with the JDTLS_JVM_ARGS environment
-doc/server_configurations.md:5949:25   - Unknown word (javaagent)       -- export JDTLS_JVM_ARGS="-javaagent:$HOME/.local/share/java
-doc/server_configurations.md:598:34    - Unknown word (jorje)          -- path = '/path/to/apex-jorje-lsp.jar',
-doc/server_configurations.md:59:4      - Unknown word (cssmodules)   -- - [cssmodules_ls](#cssmodules_ls)
-doc/server_configurations.md:6004:21   - Unknown word (getcwd)          -- } or vim.fn.getcwd()
-doc/server_configurations.md:6047:20   - Unknown word (minijinja)       -- jinja-lsp enhances minijinja development experience
-doc/server_configurations.md:6101:13   - Unknown word (GOPATH)          -- cp $(go env GOPATH)/bin/jq-lsp /usr/local
-doc/server_configurations.md:6106:40   - Unknown word (setfiletype)     -- BufRead,BufNewFile *.jq setfiletype jq\]\])
-doc/server_configurations.md:615:6     - Unknown word (apexcode)       -- { "apexcode" }
-doc/server_configurations.md:6196:45   - Unknown word (Jsonnet)         -- Protocol (LSP) server for Jsonnet.
-doc/server_configurations.md:6218:17   - Unknown word (libsonnet)       -- { "jsonnet", "libsonnet" }
-doc/server_configurations.md:6226:17   - Unknown word (jsonnetfile)     -- root_pattern("jsonnetfile.json")
-doc/server_configurations.md:623:17    - Unknown word (sfdx)           -- root_pattern('sfdx-project.json')
-doc/server_configurations.md:6267:1432  - Unknown word (runlinter)       -- depot_path)\n server.runlinter = true\n    run(server
-doc/server_configurations.md:6267:222  - Unknown word (joinpath)        -- ls_install_path = joinpath(\n get(DEPOT
-doc/server_configurations.md:6267:346  - Unknown word (pushfirst)       -- lspconfig"\n )\n    pushfirst!(LOAD_PATH, ls_install
-doc/server_configurations.md:6267:416  - Unknown word (popfirst)        -- LanguageServer\n popfirst!(LOAD_PATH)\n depot
-doc/server_configurations.md:6316:1    - Unknown word (Koka)            -- Koka is a functional programming
-doc/server_configurations.md:6329:37   - Unknown word (lsstdio)         -- language-server", "--lsstdio" }
-doc/server_configurations.md:6349:12   - Unknown word (fwcd)            -- but by fwcd.
-doc/server_configurations.md:6431:17   - Unknown word (leanpkg)         -- root_pattern("leanpkg.toml") or root_pattern
-doc/server_configurations.md:6476:17   - Unknown word (lakefile)        -- root_pattern("lakefile.toml", "lakefile.lean
-doc/server_configurations.md:64:4      - Unknown word (dafny)        -- - [dafny](#dafny)
-doc/server_configurations.md:6524:208  - Unknown word (xattr)           -- Gatekeeper quarantine with `xattr -d com.apple.quarantine
-doc/server_configurations.md:6606:27   - Unknown word (sweave)          -- support org files or R sweave, users can define a
-doc/server_configurations.md:6627:64   - Unknown word (rnoweb)          -- "plaintex", "rst", "rnoweb", "tex", "pandoc",
-doc/server_configurations.md:6627:81   - Unknown word (pandoc)          -- , "rnoweb", "tex", "pandoc", "quarto", "rmd",
-doc/server_configurations.md:6641:20   - Unknown word (bibtex)          -- enabled = { "bibtex", "gitcommit", "markdown
-doc/server_configurations.md:6641:89   - Unknown word (rsweave)         -- restructuredtext", "rsweave", "latex", "quarto"
-doc/server_configurations.md:6670:36   - Unknown word (luarc)           -- loop.fs_stat(path..'/.luarc.json') or vim.loop.fs
-doc/server_configurations.md:667:53    - Unknown word (FQBN)           -- Board Name  FQBN Core
-doc/server_configurations.md:6685:19   - Unknown word (VIMRUNTIME)      -- vim.env.VIMRUNTIME
-doc/server_configurations.md:6690:31   - Unknown word (runtimepath)     -- or pull in all of 'runtimepath'. NOTE: this is a lot
-doc/server_configurations.md:66:4      - Unknown word (dartls)       -- - [dartls](#dartls)
-doc/server_configurations.md:6729:49   - Unknown word (luacheckrc)      -- , ".luarc.jsonc", ".luacheckrc", ".stylua.toml", "stylua
-doc/server_configurations.md:67:4      - Unknown word (dcmls)        -- - [dcmls](#dcmls)
-doc/server_configurations.md:680:9     - Unknown word (fqbn)           -- default_fqbn: arduino:avr:uno
-doc/server_configurations.md:6831:7    - Unknown word (asmsyntax)       -- vim.g.asmsyntax = 'asm68k'
-doc/server_configurations.md:68:4      - Unknown word (debputy)      -- - [debputy](#debputy)
-doc/server_configurations.md:7071:39   - Unknown word (coursier)        -- make sure to have [coursier](https://get-coursier
-doc/server_configurations.md:70:4      - Unknown word (denols)       -- - [denols](#denols)
-doc/server_configurations.md:7196:34   - Unknown word (MLIR)            -- Server for the LLVM MLIR language
-doc/server_configurations.md:71:4      - Unknown word (dhall)        -- - [dhall_lsp_server](#dhall_lsp
-doc/server_configurations.md:7231:34   - Unknown word (PDLL)            -- Server for the LLVM PDLL language
-doc/server_configurations.md:7262:25   - Unknown word (metamath)        -- Language Server for the metamath-zero theorem prover
-doc/server_configurations.md:72:4      - Unknown word (diagnosticls) -- - [diagnosticls](#diagnosticls)
-doc/server_configurations.md:7300:159  - Unknown word (metaprogramming) -- systems programming and metaprogramming features.
-doc/server_configurations.md:7333:25   - Unknown word (Motoko)          -- Language server for the Motoko programming language
-doc/server_configurations.md:7450:35   - Unknown word (muttrc)          -- server for (neo)mutt's muttrc. It can be installed
-doc/server_configurations.md:7471:16   - Unknown word (neomuttrc)       -- { "muttrc", "neomuttrc" }
-doc/server_configurations.md:7495:4    - Unknown word (vimscript)       -- in vimscript:
-doc/server_configurations.md:7497:31   - Unknown word (setf)            -- BufNewFile,BufRead *.nelua setf nelua
-doc/server_configurations.md:74:4      - Unknown word (djlsp)        -- - [djlsp](#djlsp)
-doc/server_configurations.md:7542:55   - Unknown word (neocmakelsp)     -- built-in snippets. `neocmakelsp` only provides completions
-doc/server_configurations.md:755:13    - Unknown word (vmasm)          -- { "asm", "vmasm" }
-doc/server_configurations.md:7670:72   - Unknown word (autostarting)    -- (a prerequisite for autostarting a server),
-doc/server_configurations.md:768:48    - Unknown word (sgconfig)       -- projects that have `sgconfig.y[a]ml` in their root
-doc/server_configurations.md:76:4      - Unknown word (dockerls)     -- - [dockerls](#dockerls)
-doc/server_configurations.md:7702:75   - Unknown word (oxalica)         -- profile install github:oxalica/nil` to install.
-doc/server_configurations.md:7741:16   - Unknown word (nimlangserver)   -- nimble install nimlangserver
-doc/server_configurations.md:7775:2    - Unknown word (nimlsp)          -- `nimlsp` can be installed via
-doc/server_configurations.md:77:4      - Unknown word (dolmenls)     -- - [dolmenls](#dolmenls)
-doc/server_configurations.md:78:4      - Unknown word (dotls)        -- - [dotls](#dotls)
-doc/server_configurations.md:7914:6    - Unknown word (ttcn)            -- { "ttcn" }
-doc/server_configurations.md:7926:1    - Unknown word (Nushell)         -- Nushell built-in language server
-doc/server_configurations.md:79:4      - Unknown word (dprint)       -- - [dprint](#dprint)
-doc/server_configurations.md:802:17    - Unknown word (astrojs)        -- npm install -g @astrojs/language-server
-doc/server_configurations.md:8047:25   - Unknown word (ocamlinterface)  -- "ocaml", "menhir", "ocamlinterface", "ocamllex", "reason
-doc/server_configurations.md:8047:43   - Unknown word (ocamllex)        -- "ocamlinterface", "ocamllex", "reason", "dune"
-doc/server_configurations.md:8125:65   - Unknown word (rulesets)        -- analyzers, code fixes and rulesets.
-doc/server_configurations.md:82:4      - Unknown word (earthlyls)    -- - [earthlyls](#earthlyls)
-doc/server_configurations.md:8388:8    - Unknown word (FPCDIR)          -- export FPCDIR='/usr/lib/fpc/src'
-doc/server_configurations.md:8389:31   - Unknown word (ppcx)            -- '/usr/lib/fpc/3.2.2/ppcx64' # Path to the Free
-doc/server_configurations.md:8390:8    - Unknown word (LAZARUSDIR)      -- export LAZARUSDIR='/usr/lib/lazarus'
-doc/server_configurations.md:8391:8    - Unknown word (FPCTARGET)       -- export FPCTARGET=''
-doc/server_configurations.md:8392:8    - Unknown word (FPCTARGETCPU)    -- export FPCTARGETCPU='x86_64' #
-doc/server_configurations.md:83:4      - Unknown word (ecsact)       -- - [ecsact](#ecsact)
-doc/server_configurations.md:8426:23   - Unknown word (protoc)          -- Prerequisites: Ensure protoc is on your $PATH.
-doc/server_configurations.md:8477:99   - Unknown word (nostdio)         -- "--port 13603", "--nostdio 0" }
-doc/server_configurations.md:8524:101  - Unknown word (perltidy)        -- perlnavigator` at your `perltidy` and `perlcritic` configurati
-doc/server_configurations.md:8524:116  - Unknown word (perlcritic)      -- your `perltidy` and `perlcritic` configurations.
-doc/server_configurations.md:85:4      - Unknown word (elixirls)     -- - [elixirls](#elixirls)
-doc/server_configurations.md:86:4      - Unknown word (elmls)        -- - [elmls](#elmls)
-doc/server_configurations.md:8701:31   - Unknown word (PICO)            -- language support for the PICO-8 dialect of Lua.
-doc/server_configurations.md:8734:39   - Unknown word (Msys)            -- for ArchLinux/Windows Msys2's PKGBUILD.
-doc/server_configurations.md:8734:47   - Unknown word (PKGBUILD)        -- ArchLinux/Windows Msys2's PKGBUILD.
-doc/server_configurations.md:8846:46   - Unknown word (pwsh)            -- languageserver is started in `pwsh` (PowerShell Core).
-doc/server_configurations.md:8863:59   - Unknown word (PSES)            -- NoProfile', '-Command', "c:/PSES/Start-EditorServices
-doc/server_configurations.md:8955:6    - Unknown word (swipl)           -- { "swipl", "-g", "use_module
-doc/server_configurations.md:8:4       - Unknown word (agda)       -- - [agda_ls](#agda_ls)
-doc/server_configurations.md:9143:49   - Unknown word (hiera)           -- ".puppet-lint.rc", "hiera.yaml", ".git")
-doc/server_configurations.md:9155:6    - Unknown word (purescript)      -- The `purescript-language-server` can
-doc/server_configurations.md:9179:77   - Unknown word (spago)           -- json', 'shell.nix', 'spago.dhall', 'spago.yaml
-doc/server_configurations.md:9193:49   - Unknown word (pycodestyle)     -- set the `pylsp.plugins.pycodestyle.ignore` option:
-doc/server_configurations.md:9209:36   - Unknown word (pyls)            -- a community fork of `pyls`.
-doc/server_configurations.md:9288:36   - Unknown word (featureset)      -- an extremely limited featureset. It currently only supports
-doc/server_configurations.md:92:4      - Unknown word (erlangls)     -- - [erlangls](#erlangls)
-doc/server_configurations.md:9385:6    - Unknown word (qmljs)           -- { "qmljs" }
-doc/server_configurations.md:93:4      - Unknown word (esbonio)      -- - [esbonio](#esbonio)
-doc/server_configurations.md:9467:19   - Unknown word (CRAN)            -- It is released on CRAN and can be easily installed
-doc/server_configurations.md:9508:14   - Unknown word (raco)            -- Install via `raco`: `raco pkg install
-doc/server_configurations.md:9540:3    - Unknown word (Raku)            -- A Raku language server
-doc/server_configurations.md:9619:14   - Unknown word (Rego)            -- A linter for Rego, with support for running
-doc/server_configurations.md:9623:23   - Unknown word (Styra)           -- go install github.com/StyraInc/regal@latest
-doc/server_configurations.md:9641:6    - Unknown word (rego)            -- { "rego" }
-doc/server_configurations.md:9661:23   - Unknown word (kitagry)         -- go install github.com/kitagry/regols@latest
-doc/server_configurations.md:9773:36   - Unknown word (remarkrc)        -- given the following `.remarkrc.json`:
-doc/server_configurations.md:9917:9    - Unknown word (rustup)          -- cmd = {"rustup", "run", "nightly",
-doc/server_configurations.md:9947:73   - Unknown word (nixpkgs)         -- completion and formatting via nixpkgs-fmt.
-doc/server_configurations.txt:11692:29  - Unknown word (sugarss)         -- css", "less", "scss", "sugarss", "vue", "wxss" }
-doc/server_configurations.txt:1292:19   - Unknown word (biomejs)         -- npm install [-g] @biomejs/biome
-doc/server_configurations.txt:2636:7    - Unknown word (loglevel)        -- loglevel = "debug",
-doc/server_configurations.txt:265:16    - Unknown word (nomicfoundation) -- - [solidity_ls_nomicfoundation](#solidity_ls_nomicfoundation
-doc/server_configurations.txt:5693:313  - Unknown word (nunjucks)        -- "mustache", "njk", "nunjucks", "php", "razor", "slim
+doc/configs.md:10025:73  - Unknown word (nixpkgs)         -- completion and formatting via nixpkgs-fmt.
+doc/configs.md:10088:22  - Unknown word (robotidy)        -- util.root_pattern('robotidy.toml', 'pyproject.toml
+doc/configs.md:10088:84  - Unknown word (fname)           -- yaml', 'robot.yaml')(fname)
+doc/configs.md:102:4     - Unknown word (fortls)       -- - [fortls](#fortls)
+doc/configs.md:103:4     - Unknown word (fsautocomplete) -- - [fsautocomplete](#fsautocomplete)
+doc/configs.md:105:4     - Unknown word (fstar)          -- - [fstar](#fstar)
+doc/configs.md:10707:14  - Unknown word (shaderslang)     -- { "hlsl", "shaderslang" }
+doc/configs.md:10707:6   - Unknown word (hlsl)            -- { "hlsl", "shaderslang" }
+doc/configs.md:10722:2   - Unknown word (Slint)           -- `Slint`'s language server
+doc/configs.md:107:4     - Unknown word (gdscript)       -- - [gdscript](#gdscript)
+doc/configs.md:108:4     - Unknown word (gdshader)       -- - [gdshader_lsp](#gdshader_lsp)
+doc/configs.md:109:4     - Unknown word (ghcide)         -- - [ghcide](#ghcide)
+doc/configs.md:10:4      - Unknown word (anakin)     -- - [anakin_language_server](#anakin
+doc/configs.md:11062:52  - Unknown word (remappings)      -- json, just create a `remappings.txt` with:
+doc/configs.md:110:4     - Unknown word (ghdl)           -- - [ghdl_ls](#ghdl_ls)
+doc/configs.md:11151:71  - Unknown word (Nomic)           -- language, built by the Nomic Foundation for the Ethereum
+doc/configs.md:111:4     - Unknown word (ginko)          -- - [ginko_ls](#ginko_ls)
+doc/configs.md:11304:39  - Unknown word (xcodeproj)       -- buildServer.json", "*.xcodeproj", "*.xcworkspace",
+doc/configs.md:11304:54  - Unknown word (xcworkspace)     -- , "*.xcodeproj", "*.xcworkspace", "compile_commands
+doc/configs.md:11319:17  - Unknown word (Sourcery)        -- --- The Sourcery token for authenticating
+doc/configs.md:11420:31  - Unknown word (datapacks)       -- server for Minecraft datapacks.
+doc/configs.md:11430:31  - Unknown word (mcfunction)      -- BufNewFile,BufRead *.mcfunction set filetype=mcfunction
+doc/configs.md:11505:1   - Unknown word (Sqls)            -- Sqls can be installed via
+doc/configs.md:11605:40  - Unknown word (Starlark)        -- LSP implementation for Starlark. Installation instructions
+doc/configs.md:11669:11  - Unknown word (Steepfile)       -- You need `Steepfile` to make it work. Generate
+doc/configs.md:116:4     - Unknown word (glsl)           -- - [glsl_analyzer](#glsl_analyzer
+doc/configs.md:11743:42  - Unknown word (stylelintplus)   -- passing a `settings.stylelintplus` object to `stylelint
+doc/configs.md:11770:47  - Unknown word (wxss)            -- "sugarss", "vue", "wxss" }
+doc/configs.md:117:4     - Unknown word (glslls)         -- - [glslls](#glslls)
+doc/configs.md:11849:6   - Unknown word (svelteserver)    -- { "svelteserver", "--stdio" }
+doc/configs.md:11865:27  - Unknown word (Verilog)         -- Language server for SystemVerilog.
+doc/configs.md:11880:3   - Unknown word (Svlangserver)    -- - SvlangserverBuildIndex: Instructs
+doc/configs.md:118:4     - Unknown word (golangci)       -- - [golangci_lint_ls](#golangci_lint
+doc/configs.md:11999:6   - Unknown word (stree)           -- { "stree", "lsp" }
+doc/configs.md:119:4     - Unknown word (gopls)          -- - [gopls](#gopls)
+doc/configs.md:11:4      - Unknown word (angularls)  -- - [angularls](#angularls)
+doc/configs.md:12007:18  - Unknown word (streerc)        -- root_pattern(".streerc", "Gemfile", ".git"
+doc/configs.md:12015:31  - Unknown word (opensource)     -- server for Tabby, an opensource, self-hosted AI coding
+doc/configs.md:12114:21  - Unknown word (Taplo)          -- Language server for Taplo, a TOML toolkit.
+doc/configs.md:12171:6   - Unknown word (tablegen)       -- { "tablegen" }
+doc/configs.md:12185:1   - Unknown word (luarocks)       -- luarocks install teal-language
+doc/configs.md:12212:17  - Unknown word (tlconfig)       -- root_pattern("tlconfig.lua")
+doc/configs.md:12370:3   - Unknown word (Texlab)         -- - TexlabBuild: Build the current
+doc/configs.md:12399:40  - Unknown word (nonstopmode)    -- pdf", "-interaction=nonstopmode", "-synctex=1", "%f
+doc/configs.md:12399:56  - Unknown word (synctex)        -- interaction=nonstopmode", "-synctex=1", "%f" },
+doc/configs.md:123:4     - Unknown word (groovyls)       -- - [groovyls](#groovyls)
+doc/configs.md:12400:23  - Unknown word (latexmk)        -- executable = "latexmk",
+doc/configs.md:12404:7   - Unknown word (chktex)         -- chktex = {
+doc/configs.md:12413:25  - Unknown word (latexindent)    -- latexFormatter = "latexindent",
+doc/configs.md:1243:40   - Unknown word (autocmd)           -- can be added via an autocmd:
+doc/configs.md:12464:7   - Unknown word (analysers)      -- analysers = {
+doc/configs.md:12465:9   - Unknown word (languagetool)   -- languagetool = {
+doc/configs.md:12605:17  - Unknown word (Tiltfile)       -- autocmd BufRead Tiltfile setf=tiltfile
+doc/configs.md:12605:31  - Unknown word (tiltfile)       -- BufRead Tiltfile setf=tiltfile
+doc/configs.md:1260:7    - Unknown word (mktemp)            -- (cd $(mktemp -d) \
+doc/configs.md:12638:36  - Unknown word (Typst)          -- language service for Typst [taɪpst]. You can also
+doc/configs.md:12638:43  - Unknown word (taɪpst)         -- language service for Typst [taɪpst]. You can also call
+doc/configs.md:126:4     - Unknown word (haxe)           -- - [haxe_language_server](#haxe
+doc/configs.md:12774:49  - Unknown word (typespec)       -- installed together with the typespec compiler via `npm`:
+doc/configs.md:12798:22  - Unknown word (tspconfig)      -- util.root_pattern("tspconfig.yaml", ".git")
+doc/configs.md:129:4     - Unknown word (hhvm)           -- - [hhvm](#hhvm)
+doc/configs.md:12:4      - Unknown word (ansiblels)  -- - [ansiblels](#ansiblels)
+doc/configs.md:13031:36  - Unknown word (Uiua)           -- language server of the Uiua interpreter.
+doc/configs.md:13066:21  - Unknown word (Ungrammar)      -- Language Server for Ungrammar.
+doc/configs.md:131:4     - Unknown word (hlasm)          -- - [hlasm](#hlasm)
+doc/configs.md:13363:5   - Unknown word (VDMJ)           -- The VDMJ language server can
+doc/configs.md:13396:15  - Unknown word (vdmpp)          -- { "vdmsl", "vdmpp", "vdmrt" }
+doc/configs.md:13396:24  - Unknown word (vdmrt)          -- "vdmsl", "vdmpp", "vdmrt" }
+doc/configs.md:13396:6   - Unknown word (vdmsl)          -- { "vdmsl", "vdmpp", "vdmrt"
+doc/configs.md:133:4     - Unknown word (hoon)           -- - [hoon_ls](#hoon_ls)
+doc/configs.md:13406:33  - Unknown word (stdpath)        -- = "path.join(vim.fn.stdpath 'cache', 'vdm-lsp.log
+doc/configs.md:13406:5   - Unknown word (logfile)        -- logfile = "path.join(vim.fn
+doc/configs.md:13407:5   - Unknown word (mavenrepo)      -- mavenrepo = "$HOME/.m2/repository
+doc/configs.md:13491:21  - Unknown word (Veryl)          -- Language server for Veryl
+doc/configs.md:1358:10   - Unknown word (Bitbake)           -- Official Bitbake Language Server for
+doc/configs.md:1358:42   - Unknown word (Yocto)             -- Language Server for the Yocto Project.
+doc/configs.md:135:4     - Unknown word (htmx)           -- - [htmx](#htmx)
+doc/configs.md:13612:59  - Unknown word (autoload)       -- runtime", "nvim", ".git", "autoload", "plugin" },
+doc/configs.md:13616:5   - Unknown word (iskeyword)      -- iskeyword = "@,48-57,_,192-25
+doc/configs.md:13619:11  - Unknown word (Runtimepath)    -- fromRuntimepath = true,
+doc/configs.md:13620:11  - Unknown word (Vimruntime)     -- fromVimruntime = true
+doc/configs.md:13622:5   - Unknown word (vimruntime)     -- vimruntime = ""
+doc/configs.md:13639:21  - Unknown word (Visualforce)    -- Language server for Visualforce.
+doc/configs.md:13642:14  - Unknown word (salesforcedx)   -- [forcedotcom/salesforcedx-vscode](https://github
+doc/configs.md:13642:2   - Unknown word (forcedotcom)    -- [forcedotcom/salesforcedx-vscode
+doc/configs.md:13706:11  - Unknown word (vlang)          -- { "v", "vlang" }
+doc/configs.md:13771:29  - Unknown word (yourusernamehere) -- global_ts = '/home/[yourusernamehere]/.npm/lib/node_modules
+doc/configs.md:137:4     - Unknown word (hyprls)         -- - [hyprls](#hyprls)
+doc/configs.md:138:4     - Unknown word (idris)          -- - [idris2_lsp](#idris2_lsp)
+doc/configs.md:13945:7   - Unknown word (vetur)            -- vetur = {
+doc/configs.md:139:4     - Unknown word (intelephense)   -- - [intelephense](#intelephense)
+doc/configs.md:13:4      - Unknown word (antlersls)  -- - [antlersls](#antlersls)
+doc/configs.md:14052:43  - Unknown word (yammls)           -- is special-cased in yammls, see the following upstream
+doc/configs.md:14144:22  - Unknown word (YARA)             -- An YLS plugin adding YARA linting capabilities
+doc/configs.md:14146:18  - Unknown word (yara)             -- This plugin runs yara.compile on every save
+doc/configs.md:1442:46   - Unknown word (CBQN)              -- the shared library of [CBQN](https://github.com
+doc/configs.md:1442:85   - Unknown word (libcbqn)           -- github.com/dzaima/CBQN) `libcbqn.so`.
+doc/configs.md:1443:188  - Unknown word (ldconfig)          -- cache by executing `sudo ldconfig`.
+doc/configs.md:1445:71   - Unknown word (DYLD)              -- LIBRARY_PATH` (Linux) or `DYLD_LIBRARY_PATH` (macOS
+doc/configs.md:145:4     - Unknown word (jqls)           -- - [jqls](#jqls)
+doc/configs.md:146:4     - Unknown word (jsonls)         -- - [jsonls](#jsonls)
+doc/configs.md:1483:2    - Unknown word (brightscript)      -- `brightscript` can be installed via
+doc/configs.md:1485:16   - Unknown word (brighterscript)    -- npm install -g brighterscript
+doc/configs.md:148:4     - Unknown word (julials)        -- - [julials](#julials)
+doc/configs.md:150:4     - Unknown word (koka)           -- - [koka](#koka)
+doc/configs.md:152:4     - Unknown word (kulala)         -- - [kulala_ls](#kulala_ls)
+doc/configs.md:154:4     - Unknown word (leanls)         -- - [leanls](#leanls)
+doc/configs.md:155:4     - Unknown word (lelwel)         -- - [lelwel_ls](#lelwel_ls)
+doc/configs.md:156:4     - Unknown word (lemminx)        -- - [lemminx](#lemminx)
+doc/configs.md:1572:18   - Unknown word (buckconfig)        -- root_pattern(".buckconfig")
+doc/configs.md:158:4     - Unknown word (ltex)           -- - [ltex](#ltex)
+doc/configs.md:1616:23   - Unknown word (bufbuild)          -- go install github.com/bufbuild/buf-language-server
+doc/configs.md:164:4     - Unknown word (marko)          -- - [marko-js](#marko-js)
+doc/configs.md:168:4     - Unknown word (mesonlsp)       -- - [mesonlsp](#mesonlsp)
+doc/configs.md:172:4     - Unknown word (mlir)           -- - [mlir_lsp_server](#mlir_lsp
+doc/configs.md:173:9     - Unknown word (pdll)           -- - [mlir_pdll_lsp_server](#mlir_pdll
+doc/configs.md:176:4     - Unknown word (motoko)         -- - [motoko_lsp](#motoko_lsp)
+doc/configs.md:1772:6    - Unknown word (scarb)             -- { "scarb-cairo-language-server
+doc/configs.md:1786:17   - Unknown word (Scarb)             -- root_pattern("Scarb.toml", "cairo_project
+doc/configs.md:178:4     - Unknown word (msbuild)        -- - [msbuild_project_tools_server
+doc/configs.md:1809:25   - Unknown word (frounding)         -- excludeArgs = { "-frounding-math"} ;
+doc/configs.md:180:4     - Unknown word (nelua)          -- - [nelua_lsp](#nelua_lsp)
+doc/configs.md:181:4     - Unknown word (neocmake)       -- - [neocmake](#neocmake)
+doc/configs.md:182:4     - Unknown word (nextls)         -- - [nextls](#nextls)
+doc/configs.md:1832:18   - Unknown word (objc)              -- { "c", "cpp", "objc", "objcpp", "cuda"
+doc/configs.md:1832:26   - Unknown word (objcpp)            -- c", "cpp", "objc", "objcpp", "cuda" }
+doc/configs.md:1832:36   - Unknown word (cuda)              -- "objc", "objcpp", "cuda" }
+doc/configs.md:187:4     - Unknown word (nimls)          -- - [nimls](#nimls)
+doc/configs.md:188:4     - Unknown word (nixd)           -- - [nixd](#nixd)
+doc/configs.md:1897:2    - Unknown word (Circom)            -- [Circom Language Server](https
+doc/configs.md:18:4      - Unknown word (astro)      -- - [astro](#astro)
+doc/configs.md:191:4     - Unknown word (nushell)        -- - [nushell](#nushell)
+doc/configs.md:192:4     - Unknown word (nxls)           -- - [nxls](#nxls)
+doc/configs.md:1936:18   - Unknown word (myproject)         -- ln -s /path/to/myproject/build/compile_commands
+doc/configs.md:193:4     - Unknown word (ocamlls)        -- - [ocamlls](#ocamlls)
+doc/configs.md:1948:3    - Unknown word (Clangd)            -- - ClangdShowSymbolInfo: Show
+doc/configs.md:194:4     - Unknown word (ocamllsp)       -- - [ocamllsp](#ocamllsp)
+doc/configs.md:196:4     - Unknown word (omnisharp)      -- - [omnisharp](#omnisharp)
+doc/configs.md:197:4     - Unknown word (opencl)         -- - [opencl_ls](#opencl_ls)
+doc/configs.md:198:4     - Unknown word (openedge)       -- - [openedge_ls](#openedge_ls)
+doc/configs.md:199:4     - Unknown word (openscad)       -- - [openscad_ls](#openscad_ls)
+doc/configs.md:19:4      - Unknown word (autotools)  -- - [autotools_ls](#autotools_ls)
+doc/configs.md:2004:6    - Unknown word (clar)              -- { "clar", "clarity" }
+doc/configs.md:202:4     - Unknown word (pasls)          -- - [pasls](#pasls)
+doc/configs.md:203:4     - Unknown word (pbls)           -- - [pbls](#pbls)
+doc/configs.md:204:4     - Unknown word (perlls)         -- - [perlls](#perlls)
+doc/configs.md:205:4     - Unknown word (perlnavigator)  -- - [perlnavigator](#perlnavigator)
+doc/configs.md:206:4     - Unknown word (perlpls)        -- - [perlpls](#perlpls)
+doc/configs.md:208:4     - Unknown word (phan)           -- - [phan](#phan)
+doc/configs.md:209:4     - Unknown word (phpactor)       -- - [phpactor](#phpactor)
+doc/configs.md:210:4     - Unknown word (pico)           -- - [pico8_ls](#pico8_ls)
+doc/configs.md:211:4     - Unknown word (pkgbuild)       -- - [pkgbuild_language_server](#pkgbuild
+doc/configs.md:215:4     - Unknown word (prismals)       -- - [prismals](#prismals)
+doc/configs.md:217:4     - Unknown word (prosemd)        -- - [prosemd_lsp](#prosemd_lsp)
+doc/configs.md:218:4     - Unknown word (protols)        -- - [protols](#protols)
+doc/configs.md:2193:21   - Unknown word (Contextive)        -- Language Server for Contextive.
+doc/configs.md:222:4     - Unknown word (purescriptls)   -- - [purescriptls](#purescriptls)
+doc/configs.md:223:4     - Unknown word (pylsp)          -- - [pylsp](#pylsp)
+doc/configs.md:224:4     - Unknown word (pylyzer)        -- - [pylyzer](#pylyzer)
+doc/configs.md:228:4     - Unknown word (qmlls)          -- - [qmlls](#qmlls)
+doc/configs.md:232:4     - Unknown word (raku)           -- - [raku_navigator](#raku_navigator
+doc/configs.md:2354:43   - Unknown word (bufdir)            -- package.json", ".git") or bufdir
+doc/configs.md:235:4     - Unknown word (regols)         -- - [regols](#regols)
+doc/configs.md:2387:17   - Unknown word (langservers)       -- npm i -g vscode-langservers-extracted
+doc/configs.md:238:4     - Unknown word (rescriptls)     -- - [rescriptls](#rescriptls)
+doc/configs.md:240:4     - Unknown word (rnix)           -- - [rnix](#rnix)
+doc/configs.md:241:4     - Unknown word (robotframework) -- - [robotframework_ls](#robotframework
+doc/configs.md:244:4     - Unknown word (rubocop)        -- - [rubocop](#rubocop)
+doc/configs.md:24:4      - Unknown word (basedpyright) -- - [basedpyright](#basedpyright)
+doc/configs.md:252:4     - Unknown word (scry)           -- - [scry](#scry)
+doc/configs.md:255:4     - Unknown word (sixtyfps)       -- - [sixtyfps](#sixtyfps)
+doc/configs.md:256:4     - Unknown word (slangd)         -- - [slangd](#slangd)
+doc/configs.md:257:4     - Unknown word (slint)          -- - [slint_lsp](#slint_lsp)
+doc/configs.md:25:4      - Unknown word (bashls)       -- - [bashls](#bashls)
+doc/configs.md:262:4     - Unknown word (solang)         -- - [solang](#solang)
+doc/configs.md:263:4     - Unknown word (solargraph)     -- - [solargraph](#solargraph)
+doc/configs.md:2650:21   - Unknown word (Dafny)             -- Support for the Dafny language server.
+doc/configs.md:2688:25   - Unknown word (cuelang)           -- Dagger's lsp server for cuelang.
+doc/configs.md:268:4     - Unknown word (somesass)       -- - [somesass_ls](#somesass_ls)
+doc/configs.md:26:4      - Unknown word (bazelrc)      -- - [bazelrc_lsp](#bazelrc_lsp)
+doc/configs.md:2701:6    - Unknown word (cuelsp)            -- { "cuelsp" }
+doc/configs.md:270:4     - Unknown word (sourcekit)      -- - [sourcekit](#sourcekit)
+doc/configs.md:271:4     - Unknown word (sourcery)       -- - [sourcery](#sourcery)
+doc/configs.md:273:4     - Unknown word (spyglassmc)     -- - [spyglassmc_language_server](#spyglassmc
+doc/configs.md:274:4     - Unknown word (sqlls)          -- - [sqlls](#sqlls)
+doc/configs.md:2752:17   - Unknown word (pubspec)           -- root_pattern("pubspec.yaml")
+doc/configs.md:275:4     - Unknown word (sqls)           -- - [sqls](#sqls)
+doc/configs.md:276:4     - Unknown word (standardrb)     -- - [standardrb](#standardrb)
+doc/configs.md:277:4     - Unknown word (starlark)       -- - [starlark_rust](#starlark_rust
+doc/configs.md:278:4     - Unknown word (starpls)        -- - [starpls](#starpls)
+doc/configs.md:279:4     - Unknown word (statix)         -- - [statix](#statix)
+doc/configs.md:27:4      - Unknown word (beancount)    -- - [beancount](#beancount)
+doc/configs.md:2815:20   - Unknown word (debcopyright)      -- { "debcontrol", "debcopyright", "debchangelog", "make
+doc/configs.md:2815:36   - Unknown word (debchangelog)      -- debcontrol", "debcopyright", "debchangelog", "make", "yaml" }
+doc/configs.md:2815:6    - Unknown word (debcontrol)        -- { "debcontrol", "debcopyright", "debchangel
+doc/configs.md:2828:14   - Unknown word (delphilsp)         -- Note, the '*.delphilsp.json' file is required
+doc/configs.md:283:4     - Unknown word (superhtml)      -- - [superhtml](#superhtml)
+doc/configs.md:285:4     - Unknown word (svlangserver)   -- - [svlangserver](#svlangserver)
+doc/configs.md:286:4     - Unknown word (svls)           -- - [svls](#svls)
+doc/configs.md:287:10    - Unknown word (mesonls)        -- - [swift_mesonls](#swift_mesonls)
+doc/configs.md:2894:28   - Unknown word (codefences)        -- appropriately highlight codefences returned from denols
+doc/configs.md:2911:3    - Unknown word (Denols)            -- - DenolsCache: Cache a module
+doc/configs.md:291:4     - Unknown word (taplo)          -- - [taplo](#taplo)
+doc/configs.md:292:4     - Unknown word (tblgen)         -- - [tblgen_lsp_server](#tblgen
+doc/configs.md:294:4     - Unknown word (templ)          -- - [templ](#templ)
+doc/configs.md:296:4     - Unknown word (terraformls)    -- - [terraformls](#terraformls)
+doc/configs.md:297:4     - Unknown word (texlab)         -- - [texlab](#texlab)
+doc/configs.md:298:4     - Unknown word (textlsp)        -- - [textlsp](#textlsp)
+doc/configs.md:299:4     - Unknown word (tflint)         -- - [tflint](#tflint)
+doc/configs.md:301:4     - Unknown word (thriftls)       -- - [thriftls](#thriftls)
+doc/configs.md:3033:75   - Unknown word (caterva)           -- for LaTeX, ConTeXt et caterva. It provides
+doc/configs.md:303:4     - Unknown word (tinymist)       -- - [tinymist](#tinymist)
+doc/configs.md:3054:13   - Unknown word (plaintex)          -- { "tex", "plaintex", "context" }
+doc/configs.md:306:4     - Unknown word (ttags)          -- - [ttags](#ttags)
+doc/configs.md:3087:14   - Unknown word (htmldjango)        -- { "html", "htmldjango" }
+doc/configs.md:30:4      - Unknown word (bitbake)      -- - [bitbake_language_server](#bitbake
+doc/configs.md:310:4     - Unknown word (typeprof)       -- - [typeprof](#typeprof)
+doc/configs.md:312:4     - Unknown word (typst)          -- - [typst_lsp](#typst_lsp)
+doc/configs.md:313:4     - Unknown word (uiua)           -- - [uiua](#uiua)
+doc/configs.md:314:4     - Unknown word (ungrammar)      -- - [ungrammar_languageserver](#ungrammar
+doc/configs.md:316:4     - Unknown word (unocss)         -- - [unocss](#unocss)
+doc/configs.md:317:4     - Unknown word (uvls)           -- - [uvls](#uvls)
+doc/configs.md:3194:34   - Unknown word (opam)              -- can be installed via `opam`
+doc/configs.md:3214:14   - Unknown word (tptp)              -- { "smt2", "tptp", "p", "cnf", "icnf
+doc/configs.md:3214:34   - Unknown word (icnf)              -- tptp", "p", "cnf", "icnf", "zf" }
+doc/configs.md:322:4     - Unknown word (vdmj)           -- - [vdmj](#vdmj)
+doc/configs.md:323:4     - Unknown word (verible)        -- - [verible](#verible)
+doc/configs.md:324:4     - Unknown word (veridian)       -- - [veridian](#veridian)
+doc/configs.md:325:4     - Unknown word (veryl)          -- - [veryl_ls](#veryl_ls)
+doc/configs.md:326:4     - Unknown word (vhdl)           -- - [vhdl_ls](#vhdl_ls)
+doc/configs.md:327:4     - Unknown word (vimls)          -- - [vimls](#vimls)
+doc/configs.md:328:4     - Unknown word (visualforce)    -- - [visualforce_ls](#visualforce_ls
+doc/configs.md:331:4     - Unknown word (vscoqtop)       -- - [vscoqtop](#vscoqtop)
+doc/configs.md:332:4     - Unknown word (vtsls)          -- - [vtsls](#vtsls)
+doc/configs.md:333:4     - Unknown word (vuels)          -- - [vuels](#vuels)
+doc/configs.md:334:4     - Unknown word (wgsl)           -- - [wgsl_analyzer](#wgsl_analyzer
+doc/configs.md:335:4     - Unknown word (yamlls)         -- - [yamlls](#yamlls)
+doc/configs.md:33:4      - Unknown word (bqnlsp)       -- - [bqnlsp](#bqnlsp)
+doc/configs.md:3405:33   - Unknown word (hanzi)             -- symbols_only_follow_by_hanzi = false
+doc/configs.md:3439:6    - Unknown word (earthfile)         -- { "earthfile" }
+doc/configs.md:3451:21   - Unknown word (Ecsact)            -- Language server for Ecsact.
+doc/configs.md:347:21    - Unknown word (Agda)           -- Language Server for Agda.
+doc/configs.md:3502:19   - Unknown word (autocommand)       -- of the `FileType` autocommand, and the `filetype`
+doc/configs.md:353:1     - Unknown word (require'lspconfig) -- require'lspconfig'.agda_ls.setup{}
+doc/configs.md:3573:16   - Unknown word (eelixir)           -- { "elixir", "eelixir", "heex", "surface"
+doc/configs.md:3573:27   - Unknown word (heex)              -- elixir", "eelixir", "heex", "surface" }
+doc/configs.md:3658:17   - Unknown word (rebar)             -- root_pattern('rebar.config', 'erlang.mk
+doc/configs.md:3705:17   - Unknown word (olrtg)            -- npm install -g @olrtg/emmet-language-server
+doc/configs.md:3723:13   - Unknown word (eruby)            -- { "css", "eruby", "html", "htmldjango
+doc/configs.md:3852:1    - Unknown word (Esbonio)          -- Esbonio is a language server
+doc/configs.md:3872:21   - Unknown word (virtualenv)       -- cmd = { '/path/to/virtualenv/bin/python', '-m',
+doc/configs.md:38:4      - Unknown word (bufls)        -- - [bufls](#bufls)
+doc/configs.md:4094:81   - Unknown word (flsproject)       -- working directory named `flsproject.fnl`.
+doc/configs.md:4207:18   - Unknown word (flowconfig)       -- root_pattern(".flowconfig")
+doc/configs.md:430:6     - Unknown word (anakinls)          -- { "anakinls" }
+doc/configs.md:4323:52   - Unknown word (FSAC)             -- provided by FsAutoComplete (FSAC).
+doc/configs.md:4335:168  - Unknown word (adelarsq)         -- fsharp/vim-fsharp), and [adelarsq/neofsharp.vim](https
+doc/configs.md:4335:177  - Unknown word (neofsharp)        -- fsharp), and [adelarsq/neofsharp.vim](https://github
+doc/configs.md:4372:44   - Unknown word (failwith)         -- ceStubGenerationMethodBody = 'failwith "Not Implemented"',
+doc/configs.md:43:4      - Unknown word (ccls)         -- - [ccls](#ccls)
+doc/configs.md:444:7     - Unknown word (pyflakes)          -- pyflakes_errors = { "ImportStarNotPerm
+doc/configs.md:4555:18   - Unknown word (gdshaderinc)      -- { "gdshader", "gdshaderinc" }
+doc/configs.md:4585:17   - Unknown word (lhaskell)         -- { "haskell", "lhaskell" }
+doc/configs.md:4589:49   - Unknown word (bazel)            -- "hie-bios", "BUILD.bazel", "cabal.config", "package
+doc/configs.md:4597:23   - Unknown word (VHDL)             -- language server for VHDL, using ghdl as its backend
+doc/configs.md:4599:22   - Unknown word (pyghdl)           -- ghdl-ls` is part of pyghdl, for installation instruction
+doc/configs.md:45:4      - Unknown word (circom)       -- - [circom-lsp](#circom-lsp)
+doc/configs.md:464:15    - Unknown word (ngserver)          -- local cmd = {"ngserver", "--stdio", "--tsProbeLocati
+doc/configs.md:4709:32   - Unknown word (WGSL)             -- language features for WGSL (WebGPU Shading Language
+doc/configs.md:4846:21   - Unknown word (GLSL)             -- Language server for GLSL
+doc/configs.md:4867:22   - Unknown word (tesc)             -- { "glsl", "vert", "tesc", "tese", "frag", "geom
+doc/configs.md:4867:30   - Unknown word (tese)             -- glsl", "vert", "tesc", "tese", "frag", "geom", "comp
+doc/configs.md:489:65    - Unknown word (htmlangular)       -- "typescript.tsx", "htmlangular" }
+doc/configs.md:4937:23   - Unknown word (nametake)         -- go install github.com/nametake/golangci-lint-langserver
+doc/configs.md:4957:12   - Unknown word (gomod)            -- { "go", "gomod" }
+doc/configs.md:4992:21   - Unknown word (gowork)           -- { "go", "gomod", "gowork", "gotmpl" }
+doc/configs.md:4992:31   - Unknown word (gotmpl)           -- "gomod", "gowork", "gotmpl" }
+doc/configs.md:5010:66   - Unknown word (gradlew)          -- vscode-gradle using `./gradlew installDist` and point
+doc/configs.md:5081:40   - Unknown word (YRCX)             -- client_BaDkMgx4X19X9UxxYRCXZo"
+doc/configs.md:5125:31   - Unknown word (graphqlrc)        -- root_pattern('.git', '.graphqlrc*', '.graphql.config
+doc/configs.md:5176:175  - Unknown word (guix)             -- the provided channel guix.scm in the repo:
+doc/configs.md:5176:61   - Unknown word (Guix)             -- lsp-server is using Guix. Unfortunately it is
+doc/configs.md:5183:95   - Unknown word (modeline)         -- file type using `:help modeline` or adding https://gitlab
+doc/configs.md:51:4      - Unknown word (codeqlls)     -- - [codeqlls](#codeqlls)
+doc/configs.md:5262:5    - Unknown word (Haxe)             -- The Haxe language server can
+doc/configs.md:5266:17   - Unknown word (vshaxe)           -- npx lix run vshaxe-build -t language-server
+doc/configs.md:5280:56   - Unknown word (HXML)             -- configured with the HXML compiler arguments
+doc/configs.md:5281:26   - Unknown word (hxml)             -- contained in the first `.hxml` file found in your
+doc/configs.md:52:4      - Unknown word (coffeesense)  -- - [coffeesense](#coffeesense)
+doc/configs.md:5355:14   - Unknown word (verilog)          -- { "vhdl", "verilog", "systemverilog" }
+doc/configs.md:5355:25   - Unknown word (systemverilog)    -- "vhdl", "verilog", "systemverilog" }
+doc/configs.md:53:4      - Unknown word (contextive)   -- - [contextive](#contextive)
+doc/configs.md:5415:28   - Unknown word (HHVM)             -- below for how to setup HHVM & typechecker:
+doc/configs.md:5437:18   - Unknown word (hhconfig)         -- root_pattern(".hhconfig")
+doc/configs.md:5449:5    - Unknown word (hlint)            -- hlintOn = bool;
+doc/configs.md:5455:65   - Unknown word (floskell)         -- brittany", alternate "floskell");
+doc/configs.md:5487:35   - Unknown word (HLASM)            -- how to configure the HLASM language server, see
+doc/configs.md:5508:18   - Unknown word (hlasmplugin)      -- root_pattern(".hlasmplugin")
+doc/configs.md:5547:6    - Unknown word (lspinfo)          -- - `lspinfo` :
+doc/configs.md:5559:34   - Unknown word (cabalfmt)         -- cabalFormattingProvider = "cabalfmt",
+doc/configs.md:5574:23   - Unknown word (Hoon)             -- language server for Hoon.
+doc/configs.md:5578:25   - Unknown word (urbit)            -- Start a fake ~zod with `urbit -F zod`.
+doc/configs.md:5579:34   - Unknown word (Urbit)            -- language server at the Urbit Dojo prompt with: `
+doc/configs.md:5700:153  - Unknown word (gohtml)           -- ejs", "erb", "eruby", "gohtml", "gohtmltmpl", "haml
+doc/configs.md:5700:163  - Unknown word (gohtmltmpl)       -- "eruby", "gohtml", "gohtmltmpl", "haml", "handlebars
+doc/configs.md:5700:177  - Unknown word (haml)             -- gohtml", "gohtmltmpl", "haml", "handlebars", "hbs
+doc/configs.md:5700:6    - Unknown word (aspnetcorerazor)  -- { "aspnetcorerazor", "astro", "astro-markdown
+doc/configs.md:5751:23   - Unknown word (ewen)             -- go install github.com/ewen-lbh/hyprls/cmd/hyprls
+doc/configs.md:5770:6    - Unknown word (hyprlang)         -- { "hyprlang" }
+doc/configs.md:5786:5    - Unknown word (Idris)            -- The Idris 2 language server.
+doc/configs.md:58:4      - Unknown word (cssls)        -- - [cssls](#cssls)
+doc/configs.md:5939:77   - Unknown word (gotos)            -- completion, imports, gotos and formatting and some
+doc/configs.md:5951:55   - Unknown word (JDTLS)            -- jvm arguments with the JDTLS_JVM_ARGS environment
+doc/configs.md:5956:25   - Unknown word (javaagent)        -- export JDTLS_JVM_ARGS="-javaagent:$HOME/.local/share/java
+doc/configs.md:59:4      - Unknown word (cssmodules)   -- - [cssmodules_ls](#cssmodules_ls)
+doc/configs.md:6011:21   - Unknown word (getcwd)           -- } or vim.fn.getcwd()
+doc/configs.md:602:34    - Unknown word (jorje)             -- path = '/path/to/apex-jorje-lsp.jar',
+doc/configs.md:6054:20   - Unknown word (minijinja)        -- jinja-lsp enhances minijinja development experience
+doc/configs.md:6108:13   - Unknown word (GOPATH)           -- cp $(go env GOPATH)/bin/jq-lsp /usr/local
+doc/configs.md:6113:40   - Unknown word (setfiletype)      -- BufRead,BufNewFile *.jq setfiletype jq\]\])
+doc/configs.md:619:6     - Unknown word (apexcode)          -- { "apexcode" }
+doc/configs.md:6203:45   - Unknown word (Jsonnet)          -- Protocol (LSP) server for Jsonnet.
+doc/configs.md:6225:17   - Unknown word (libsonnet)        -- { "jsonnet", "libsonnet" }
+doc/configs.md:6233:17   - Unknown word (jsonnetfile)      -- root_pattern("jsonnetfile.json")
+doc/configs.md:6278:1432  - Unknown word (runlinter)       -- depot_path)\n server.runlinter = true\n    run(server
+doc/configs.md:6278:222  - Unknown word (joinpath)         -- ls_install_path = joinpath(\n get(DEPOT
+doc/configs.md:6278:346  - Unknown word (pushfirst)        -- lspconfig"\n )\n    pushfirst!(LOAD_PATH, ls_install
+doc/configs.md:6278:416  - Unknown word (popfirst)        -- LanguageServer\n popfirst!(LOAD_PATH)\n depot
+doc/configs.md:627:17    - Unknown word (sfdx)              -- root_pattern('sfdx-project.json')
+doc/configs.md:6327:1    - Unknown word (Koka)            -- Koka is a functional programming
+doc/configs.md:6340:37   - Unknown word (lsstdio)         -- language-server", "--lsstdio" }
+doc/configs.md:6360:12   - Unknown word (fwcd)            -- but by fwcd.
+doc/configs.md:6475:17   - Unknown word (leanpkg)         -- root_pattern("leanpkg.toml") or root_pattern
+doc/configs.md:64:4      - Unknown word (dafny)        -- - [dafny](#dafny)
+doc/configs.md:6520:17   - Unknown word (lakefile)        -- root_pattern("lakefile.toml", "lakefile.lean
+doc/configs.md:6568:208  - Unknown word (xattr)           -- Gatekeeper quarantine with `xattr -d com.apple.quarantine
+doc/configs.md:6650:27   - Unknown word (sweave)          -- support org files or R sweave, users can define a
+doc/configs.md:6671:64   - Unknown word (rnoweb)          -- "plaintex", "rst", "rnoweb", "tex", "pandoc",
+doc/configs.md:6671:81   - Unknown word (pandoc)          -- , "rnoweb", "tex", "pandoc", "quarto", "rmd",
+doc/configs.md:6685:20   - Unknown word (bibtex)          -- enabled = { "bibtex", "gitcommit", "markdown
+doc/configs.md:6685:89   - Unknown word (rsweave)         -- restructuredtext", "rsweave", "latex", "quarto"
+doc/configs.md:66:4      - Unknown word (dartls)       -- - [dartls](#dartls)
+doc/configs.md:6714:34   - Unknown word (luarc)           -- uv.fs_stat(path..'/.luarc.json') or vim.uv.fs
+doc/configs.md:671:53    - Unknown word (FQBN)              -- Board Name  FQBN Core
+doc/configs.md:6729:19   - Unknown word (VIMRUNTIME)      -- vim.env.VIMRUNTIME
+doc/configs.md:6734:31   - Unknown word (runtimepath)     -- or pull in all of 'runtimepath'. NOTE: this is a lot
+doc/configs.md:67:4      - Unknown word (dcmls)        -- - [dcmls](#dcmls)
+doc/configs.md:684:9     - Unknown word (fqbn)              -- default_fqbn: arduino:avr:uno
+doc/configs.md:6875:7    - Unknown word (asmsyntax)       -- vim.g.asmsyntax = 'asm68k'
+doc/configs.md:68:4      - Unknown word (debputy)      -- - [debputy](#debputy)
+doc/configs.md:6950:53   - Unknown word (Marko's)         -- Protocol to improve Marko's developer experience
+doc/configs.md:6:1       - Unknown word (Nvim)       -- Nvim by running `:help lspconfig
+doc/configs.md:70:4      - Unknown word (denols)       -- - [denols](#denols)
+doc/configs.md:7149:39   - Unknown word (coursier)        -- make sure to have [coursier](https://get-coursier
+doc/configs.md:71:4      - Unknown word (dhall)        -- - [dhall_lsp_server](#dhall_lsp
+doc/configs.md:7274:34   - Unknown word (MLIR)            -- Server for the LLVM MLIR language
+doc/configs.md:72:4      - Unknown word (diagnosticls) -- - [diagnosticls](#diagnosticls)
+doc/configs.md:7309:34   - Unknown word (PDLL)            -- Server for the LLVM PDLL language
+doc/configs.md:7340:25   - Unknown word (metamath)        -- Language Server for the metamath-zero theorem prover
+doc/configs.md:7378:159  - Unknown word (metaprogramming) -- systems programming and metaprogramming features.
+doc/configs.md:7411:25   - Unknown word (Motoko)          -- Language server for the Motoko programming language
+doc/configs.md:74:4      - Unknown word (djlsp)        -- - [djlsp](#djlsp)
+doc/configs.md:7528:35   - Unknown word (muttrc)          -- server for (neo)mutt's muttrc. It can be installed
+doc/configs.md:7549:16   - Unknown word (neomuttrc)       -- { "muttrc", "neomuttrc" }
+doc/configs.md:7573:4    - Unknown word (vimscript)       -- in vimscript:
+doc/configs.md:7575:31   - Unknown word (setf)            -- BufNewFile,BufRead *.nelua setf nelua
+doc/configs.md:759:13    - Unknown word (vmasm)             -- { "asm", "vmasm" }
+doc/configs.md:7620:55   - Unknown word (neocmakelsp)     -- built-in snippets. `neocmakelsp` only provides completions
+doc/configs.md:76:4      - Unknown word (dockerls)     -- - [dockerls](#dockerls)
+doc/configs.md:772:48    - Unknown word (sgconfig)          -- projects that have `sgconfig.y[a]ml` in their root
+doc/configs.md:7748:72   - Unknown word (autostarting)    -- (a prerequisite for autostarting a server),
+doc/configs.md:7780:75   - Unknown word (oxalica)         -- profile install github:oxalica/nil` to install.
+doc/configs.md:77:4      - Unknown word (dolmenls)     -- - [dolmenls](#dolmenls)
+doc/configs.md:7819:16   - Unknown word (nimlangserver)   -- nimble install nimlangserver
+doc/configs.md:7853:2    - Unknown word (nimlsp)          -- `nimlsp` can be installed via
+doc/configs.md:78:4      - Unknown word (dotls)        -- - [dotls](#dotls)
+doc/configs.md:7992:6    - Unknown word (ttcn)            -- { "ttcn" }
+doc/configs.md:79:4      - Unknown word (dprint)       -- - [dprint](#dprint)
+doc/configs.md:8004:1    - Unknown word (Nushell)         -- Nushell built-in language server
+doc/configs.md:806:17    - Unknown word (astrojs)           -- npm install -g @astrojs/language-server
+doc/configs.md:8125:25   - Unknown word (ocamlinterface)  -- "ocaml", "menhir", "ocamlinterface", "ocamllex", "reason
+doc/configs.md:8125:43   - Unknown word (ocamllex)        -- "ocamlinterface", "ocamllex", "reason", "dune"
+doc/configs.md:8203:65   - Unknown word (rulesets)        -- analyzers, code fixes and rulesets.
+doc/configs.md:82:4      - Unknown word (earthlyls)    -- - [earthlyls](#earthlyls)
+doc/configs.md:83:4      - Unknown word (ecsact)       -- - [ecsact](#ecsact)
+doc/configs.md:8466:8    - Unknown word (FPCDIR)          -- export FPCDIR='/usr/lib/fpc/src'
+doc/configs.md:8467:31   - Unknown word (ppcx)            -- '/usr/lib/fpc/3.2.2/ppcx64' # Path to the Free
+doc/configs.md:8468:8    - Unknown word (LAZARUSDIR)      -- export LAZARUSDIR='/usr/lib/lazarus'
+doc/configs.md:8469:8    - Unknown word (FPCTARGET)       -- export FPCTARGET=''
+doc/configs.md:8470:8    - Unknown word (FPCTARGETCPU)    -- export FPCTARGETCPU='x86_64' #
+doc/configs.md:8504:23   - Unknown word (protoc)          -- Prerequisites: Ensure protoc is on your $PATH.
+doc/configs.md:8555:99   - Unknown word (nostdio)         -- "--port 13603", "--nostdio 0" }
+doc/configs.md:85:4      - Unknown word (elixirls)     -- - [elixirls](#elixirls)
+doc/configs.md:8602:101  - Unknown word (perltidy)        -- perlnavigator` at your `perltidy` and `perlcritic` configurati
+doc/configs.md:8602:116  - Unknown word (perlcritic)      -- your `perltidy` and `perlcritic` configurations.
+doc/configs.md:86:4      - Unknown word (elmls)        -- - [elmls](#elmls)
+doc/configs.md:8779:31   - Unknown word (PICO)            -- language support for the PICO-8 dialect of Lua.
+doc/configs.md:8812:39   - Unknown word (Msys)            -- for ArchLinux/Windows Msys2's PKGBUILD.
+doc/configs.md:8812:47   - Unknown word (PKGBUILD)        -- ArchLinux/Windows Msys2's PKGBUILD.
+doc/configs.md:8924:46   - Unknown word (pwsh)            -- languageserver is started in `pwsh` (PowerShell Core).
+doc/configs.md:8941:59   - Unknown word (PSES)            -- NoProfile', '-Command', "c:/PSES/Start-EditorServices
+doc/configs.md:8:4       - Unknown word (agda)       -- - [agda_ls](#agda_ls)
+doc/configs.md:9033:6    - Unknown word (swipl)           -- { "swipl", "-g", "use_module
+doc/configs.md:9221:49   - Unknown word (hiera)           -- ".puppet-lint.rc", "hiera.yaml", ".git")
+doc/configs.md:9233:6    - Unknown word (purescript)      -- The `purescript-language-server` can
+doc/configs.md:9257:77   - Unknown word (spago)           -- json', 'shell.nix', 'spago.dhall', 'spago.yaml
+doc/configs.md:9271:49   - Unknown word (pycodestyle)     -- set the `pylsp.plugins.pycodestyle.ignore` option:
+doc/configs.md:9287:36   - Unknown word (pyls)            -- a community fork of `pyls`.
+doc/configs.md:92:4      - Unknown word (erlangls)     -- - [erlangls](#erlangls)
+doc/configs.md:9366:36   - Unknown word (featureset)      -- an extremely limited featureset. It currently only supports
+doc/configs.md:93:4      - Unknown word (esbonio)      -- - [esbonio](#esbonio)
+doc/configs.md:9463:6    - Unknown word (qmljs)           -- { "qmljs" }
+doc/configs.md:9545:19   - Unknown word (CRAN)            -- It is released on CRAN and can be easily installed
+doc/configs.md:9586:14   - Unknown word (raco)            -- Install via `raco`: `raco pkg install
+doc/configs.md:9618:3    - Unknown word (Raku)            -- A Raku language server
+doc/configs.md:9697:14   - Unknown word (Rego)            -- A linter for Rego, with support for running
+doc/configs.md:9701:23   - Unknown word (Styra)           -- go install github.com/StyraInc/regal@latest
+doc/configs.md:9719:6    - Unknown word (rego)            -- { "rego" }
+doc/configs.md:9739:23   - Unknown word (kitagry)         -- go install github.com/kitagry/regols@latest
+doc/configs.md:9851:36   - Unknown word (remarkrc)        -- given the following `.remarkrc.json`:
+doc/configs.md:9995:9    - Unknown word (rustup)          -- cmd = {"rustup", "run", "nightly",
+doc/configs.txt:11770:29  - Unknown word (sugarss)         -- css", "less", "scss", "sugarss", "vue", "wxss" }
+doc/configs.txt:1296:19   - Unknown word (biomejs)         -- npm install [-g] @biomejs/biome
+doc/configs.txt:2640:7    - Unknown word (loglevel)        -- loglevel = "debug",
+doc/configs.txt:267:16    - Unknown word (nomicfoundation) -- - [solidity_ls_nomicfoundation](#solidity_ls_nomicfoundation
+doc/configs.txt:5700:313  - Unknown word (nunjucks)        -- "mustache", "njk", "nunjucks", "php", "razor", "slim
+doc/lspconfig.txt:227:16    - Unknown word (newindex)    -- The `configs.__newindex` metamethod consumes
+doc/lspconfig.txt:28:10     - Unknown word (checkhealth) -- 5. Run `:checkhealth lsp` to see the status
+doc/lspconfig.txt:34:35     - Unknown word (metamethod)  -- exposes a `setup{}` metamethod which makes it easy
+doc/lspconfig.txt:425:10    - Unknown word (Nvim's)      -- All bugs Nvim's built-in client should
+doc/lspconfig.txt:490:26    - Unknown word (healthcheck) -- LspInfo is provided by a healthcheck instead: >
+doc/lspconfig.txt:496:24    - Unknown word (norl)        -- vim:tw=78:ts=8:ft=help:norl:
 flake.nix:12:31     - Unknown word (pkgs)       -- devShells = forEachSystem (pkgs: {
 flake.nix:17:16     - Unknown word (luajit)     -- pkgs.luajitPackages.vusted
 flake.nix:17:31     - Unknown word (vusted)     -- pkgs.luajitPackages.vusted
-lua/lspconfig.lua:12:11     - Unknown word (inconfig)   -- ---@field inconfig? boolean need shown
+lua/lspconfig.lua:12:11     - Unknown word (inconfig)   -- ---@field inconfig? boolean should display
 lua/lspconfig.lua:26:3      - Unknown word (sumneko)    -- sumneko_lua = {
 lua/lspconfig.lua:43:7      - Unknown word (sname)      -- for sname, alias in pairs(aliases
 lua/lspconfig/async.lua:21:24     - Unknown word (jobstart)   -- local jobid = vim.fn.jobstart(cmd, {
 lua/lspconfig/async.lua:21:9      - Unknown word (jobid)      -- local jobid = vim.fn.jobstart(cmd
-lua/lspconfig/configs.lua:122:13    - Unknown word (bufname)    -- local bufname = api.nvim_buf_get_name
-lua/lspconfig/configs.lua:143:26    - Unknown word (fnameescape) -- pattern = fn.fnameescape(root_dir) .. '/*',
-lua/lspconfig/configs.lua:158:46    - Unknown word (bufs)        -- ipairs(api.nvim_list_bufs()) do
-lua/lspconfig/configs.lua:169:48    - Unknown word (lspconfig's) -- this is the root from lspconfig's perspective, as we use
+lua/lspconfig/configs.lua:125:13    - Unknown word (bufname)    -- local bufname = api.nvim_buf_get_name
+lua/lspconfig/configs.lua:146:26    - Unknown word (fnameescape) -- pattern = fn.fnameescape(root_dir) .. '/*',
+lua/lspconfig/configs.lua:161:46    - Unknown word (bufs)        -- ipairs(api.nvim_list_bufs()) do
+lua/lspconfig/configs.lua:172:48    - Unknown word (lspconfig's) -- this is the root from lspconfig's perspective, as we use
 lua/lspconfig/configs.lua:22:21     - Unknown word (exepath)    -- cmd[1] = vim.fn.exepath(cmd[1])
-lua/lspconfig/configs.lua:68:39     - Unknown word (augroup)    -- group = api.nvim_create_augroup('lspconfig', { clear
-lua/lspconfig/manager.lua:141:39    - Unknown word (realpath)   -- config.cmd_cwd and uv.fs_realpath(root_dir) then
+lua/lspconfig/configs.lua:71:39     - Unknown word (augroup)    -- group = api.nvim_create_augroup('lspconfig', { clear
+lua/lspconfig/configs/apex_ls.lua:13:13     - Unknown word (Ddebug)     -- '-Ddebug.internal.errors=true
+lua/lspconfig/configs/apex_ls.lua:16:13     - Unknown word (Dlwc)       -- '-Dlwc.typegeneration.disabled
+lua/lspconfig/configs/apex_ls.lua:16:18     - Unknown word (typegeneration) -- '-Dlwc.typegeneration.disabled=true',
+lua/lspconfig/configs/basedpyright.lua:69:7      - Unknown word (nargs)      -- nargs = 1,
+lua/lspconfig/configs/bqnlsp.lua:7:18      - Unknown word (macunix)    -- if vim.fn.has 'macunix' and not cmd_env.DYLD
+lua/lspconfig/configs/codeqlls.lua:9:35      - Unknown word (qlpack)     -- util.root_pattern 'qlpack.yml',
+lua/lspconfig/configs/earthlyls.lua:7:35      - Unknown word (Earthfile)  -- util.root_pattern 'Earthfile',
+lua/lspconfig/configs/elmls.lua:9:13      - Unknown word (ashkan)     -- -- TODO(ashkan) if we comment this
+lua/lspconfig/configs/eslint.lua:110:23    - Unknown word (fnamemodify) -- name = vim.fn.fnamemodify(new_root_dir, ':t')
+lua/lspconfig/configs/eslint.lua:115:16    - Unknown word (filereadable) -- vim.fn.filereadable(new_root_dir .. '/eslint
+lua/lspconfig/configs/eslint.lua:137:15    - Unknown word (sysname)      -- local sysname = vim.uv.os_uname()
+lua/lspconfig/configs/glint.lua:26:9      - Unknown word (glintrc)    -- '.glintrc.yml',
+lua/lspconfig/configs/gopls.lua:12:58     - Unknown word (GOMODCACHE) -- command { 'go', 'env', 'GOMODCACHE' }
+lua/lspconfig/configs/hls.lua:27:13     - Unknown word (chanid)     -- local chanid = vim.fn.jobstart({
+lua/lspconfig/configs/hls.lua:28:14     - Unknown word (jobwait)    -- vim.fn.jobwait { chanid }
+lua/lspconfig/configs/idris2_lsp.lua:7:37      - Unknown word (ipkg)       -- util.root_pattern '*.ipkg',
+lua/lspconfig/configs/intelephense.lua:29:9      - Unknown word (licence)    -- licenceKey = Optional licence
+lua/lspconfig/configs/jdtls.lua:50:32     - Unknown word (codeaction) -- function on_textdocument_codeaction(err, actions, ctx)
+lua/lspconfig/configs/jdtls.lua:52:15     - Unknown word (steelsojka) -- -- TODO: (steelsojka) Handle more than one
+lua/lspconfig/configs/jdtls.lua:67:29     - Unknown word (applyedit)  -- function on_workspace_applyedit(err, workspace_edit
+lua/lspconfig/configs/jdtls.lua:74:12     - Unknown word (echohl)     -- command 'echohl ModeMsg'
+lua/lspconfig/configs/jsonnet_ls.lua:24:33     - Unknown word (JSONNET)    -- not new_config.cmd_env.JSONNET_PATH then
+lua/lspconfig/configs/julials.lua:11:19     - Unknown word (activateenvironment) -- 'method julia/activateenvironment is not supported by
+lua/lspconfig/configs/lean3ls.lua:13:18     - Unknown word (endpos)     -- local _, endpos = fname:find '/lean
+lua/lspconfig/configs/lua_ls.lua:6:5       - Unknown word (luacheckrc) -- '.luacheckrc',
+lua/lspconfig/configs/markdown_oxide.lua:4:76      - Unknown word (moxide)     -- git', '.obsidian', '.moxide.toml')(fname)
+lua/lspconfig/configs/ocamllsp.lua:12:37     - Unknown word (ftype)      -- language_id = function(_, ftype)
+lua/lspconfig/configs/omnisharp.lua:52:70     - Unknown word (getpid)     -- hostPID', tostring(vim.fn.getpid()) })
+lua/lspconfig/configs/omnisharp.lua:76:37     - Unknown word (deepcopy)   -- config.capabilities = vim.deepcopy(new_config.capabilities
+lua/lspconfig/configs/openedge_ls.lua:19:43     - Unknown word (Dorg)       -- config.cmd + 1] = '-Dorg.slf4j.simpleLogger.defaultLog
+lua/lspconfig/configs/please.lua:7:36      - Unknown word (plzconfig)  -- util.root_pattern '.plzconfig',
+lua/lspconfig/configs/reason_ls.lua:7:35      - Unknown word (bsconfig)   -- util.root_pattern('bsconfig.json', '.git'),
+lua/lspconfig/configs/remark_ls.lua:15:9      - Unknown word (remarkignore) -- '.remarkignore'
+lua/lspconfig/configs/rust_analyzer.lua:24:34     - Unknown word (RUSTUP)     -- rustup_home = os.getenv 'RUSTUP_HOME' or util.path.join
+lua/lspconfig/configs/scheme_langserver.lua:4:4       - Unknown word (Akku)       -- 'Akku.manifest',
+lua/lspconfig/configs/shopify_theme_ls.lua:4:5       - Unknown word (shopifyignore) -- '.shopifyignore',
+lua/lspconfig/configs/spyglassmc_language_server.lua:7:40      - Unknown word (mcmeta)     -- util.root_pattern 'pack.mcmeta',
+lua/lspconfig/configs/sqlls.lua:7:36      - Unknown word (sqllsrc)    -- util.root_pattern '.sqllsrc.json',
+lua/lspconfig/configs/stylelint_lsp.lua:4:5       - Unknown word (stylelintrc) -- '.stylelintrc',
+lua/lspconfig/configs/svlangserver.lua:13:35     - Unknown word (cword)      -- = { vim.fn.expand '<cword>' },
+lua/lspconfig/configs/texlab.lua:14:10     - Unknown word (Unconfigured) -- [3] = 'Unconfigured',
+lua/lspconfig/configs/texlab.lua:159:44    - Unknown word (latexmkrc)    -- root_pattern('.git', '.latexmkrc', '.texlabroot', 'texlabroot
+lua/lspconfig/configs/texlab.lua:159:58    - Unknown word (texlabroot)   -- git', '.latexmkrc', '.texlabroot', 'texlabroot', 'Tectonic
+lua/lspconfig/configs/textlsp.lua:13:69     - Unknown word (enaled)     -- page. LanguageTool is enaled here
+lua/lspconfig/configs/vdmj.lua:114:9     - Unknown word (Dlsp)       -- '-Dlsp.log.filename=' .. config
+lua/lspconfig/configs/vdmj.lua:24:9      - Unknown word (subdirs)    -- local subdirs = function(file)
+lua/lspconfig/configs/vdmj.lua:35:37     - Unknown word (startpath)  -- find_vscode_ancestor(startpath)
+lua/lspconfig/configs/zk.lua:29:15     - Unknown word (bufpath)     -- local bufpath = vim.api.nvim_buf_get
+lua/lspconfig/configs/zk.lua:5:15      - Unknown word (isdirectory) -- if vim.fn.isdirectory(vim.fs.joinpath(dir
+lua/lspconfig/health.lua:117:39    - Unknown word (helptag)    -- vim.tbl_map(function(helptag)
+lua/lspconfig/health.lua:136:34    - Unknown word (realpath)   -- vim.fs.normalize(uv.fs_realpath(fname) or fn.fnamemodify
+lua/lspconfig/health.lua:15:7      - Unknown word (helptags)   -- local helptags = {
+lua/lspconfig/health.lua:204:44    - Unknown word (getbufvar)  -- filetype = bufnr and vim.fn.getbufvar(bufnr, '&filetype')
+lua/lspconfig/health.lua:20:21     - Unknown word (blankspace) -- local function trim_blankspace(cmd)
+lua/lspconfig/health.lua:242:10    - Unknown word (matchadd)   -- vim.fn.matchadd(
+lua/lspconfig/health.lua:252:11    - Unknown word (justimk)    -- -- TODO(justimk): enhance :checkhealth
+lua/lspconfig/health.lua:252:30    - Unknown word (checkhealth's) -- TODO(justimk): enhance :checkhealth's highlighting instead
+lua/lspconfig/health.lua:261:22    - Unknown word (lspdocs)       -- local function check_lspdocs(buf_clients, other_matching
+lua/lspconfig/health.lua:292:13    - Unknown word (nnoremap)      -- vim.cmd [[nnoremap <buffer> q <c-w>q]]
+lua/lspconfig/health.lua:38:16     - Unknown word (fmtpath)    -- local function fmtpath(p)
+lua/lspconfig/health.lua:39:10     - Unknown word (startswith) -- if vim.startswith(p, 'Running') then
+lua/lspconfig/health.lua:44:20     - Unknown word (endswith)   -- return r .. (vim.endswith(r, '~') and ' ' or
 lua/lspconfig/manager.lua:247:20    - Unknown word (buftype)    -- if vim.bo[bufnr].buftype == 'nofile' then
 lua/lspconfig/manager.lua:247:32    - Unknown word (nofile)     -- bo[bufnr].buftype == 'nofile' then
-lua/lspconfig/server_configurations/apex_ls.lua:13:13     - Unknown word (Ddebug)     -- '-Ddebug.internal.errors=true
-lua/lspconfig/server_configurations/apex_ls.lua:16:13     - Unknown word (Dlwc)       -- '-Dlwc.typegeneration.disabled
-lua/lspconfig/server_configurations/apex_ls.lua:16:18     - Unknown word (typegeneration) -- '-Dlwc.typegeneration.disabled=true',
-lua/lspconfig/server_configurations/basedpyright.lua:69:7      - Unknown word (nargs)      -- nargs = 1,
-lua/lspconfig/server_configurations/bqnlsp.lua:7:18      - Unknown word (macunix)    -- if vim.fn.has 'macunix' and not cmd_env.DYLD
-lua/lspconfig/server_configurations/codeqlls.lua:9:35      - Unknown word (qlpack)     -- util.root_pattern 'qlpack.yml',
-lua/lspconfig/server_configurations/earthlyls.lua:7:35      - Unknown word (Earthfile)  -- util.root_pattern 'Earthfile',
-lua/lspconfig/server_configurations/elmls.lua:9:13      - Unknown word (ashkan)     -- -- TODO(ashkan) if we comment this
-lua/lspconfig/server_configurations/eslint.lua:110:23    - Unknown word (fnamemodify) -- name = vim.fn.fnamemodify(new_root_dir, ':t')
-lua/lspconfig/server_configurations/eslint.lua:115:16    - Unknown word (filereadable) -- vim.fn.filereadable(new_root_dir .. '/eslint
-lua/lspconfig/server_configurations/eslint.lua:137:15    - Unknown word (sysname)      -- local sysname = vim.loop.os_uname
-lua/lspconfig/server_configurations/glint.lua:26:9      - Unknown word (glintrc)    -- '.glintrc.yml',
-lua/lspconfig/server_configurations/gopls.lua:12:58     - Unknown word (GOMODCACHE) -- command { 'go', 'env', 'GOMODCACHE' }
-lua/lspconfig/server_configurations/hls.lua:27:13     - Unknown word (chanid)     -- local chanid = vim.fn.jobstart({
-lua/lspconfig/server_configurations/hls.lua:28:14     - Unknown word (jobwait)    -- vim.fn.jobwait { chanid }
-lua/lspconfig/server_configurations/idris2_lsp.lua:7:37      - Unknown word (ipkg)       -- util.root_pattern '*.ipkg',
-lua/lspconfig/server_configurations/intelephense.lua:29:9      - Unknown word (licence)    -- licenceKey = Optional licence
-lua/lspconfig/server_configurations/jdtls.lua:50:32     - Unknown word (codeaction) -- function on_textdocument_codeaction(err, actions, ctx)
-lua/lspconfig/server_configurations/jdtls.lua:52:15     - Unknown word (steelsojka) -- -- TODO: (steelsojka) Handle more than one
-lua/lspconfig/server_configurations/jdtls.lua:67:29     - Unknown word (applyedit)  -- function on_workspace_applyedit(err, workspace_edit
-lua/lspconfig/server_configurations/jdtls.lua:74:12     - Unknown word (echohl)     -- command 'echohl ModeMsg'
-lua/lspconfig/server_configurations/jsonnet_ls.lua:24:33     - Unknown word (JSONNET)    -- not new_config.cmd_env.JSONNET_PATH then
-lua/lspconfig/server_configurations/lean3ls.lua:13:18     - Unknown word (endpos)     -- local _, endpos = fname:find '/lean
-lua/lspconfig/server_configurations/markdown_oxide.lua:4:76      - Unknown word (moxide)     -- git', '.obsidian', '.moxide.toml')(fname)
-lua/lspconfig/server_configurations/ocamllsp.lua:12:37     - Unknown word (ftype)      -- language_id = function(_, ftype)
-lua/lspconfig/server_configurations/omnisharp.lua:52:70     - Unknown word (getpid)     -- hostPID', tostring(vim.fn.getpid()) })
-lua/lspconfig/server_configurations/omnisharp.lua:76:37     - Unknown word (deepcopy)   -- config.capabilities = vim.deepcopy(new_config.capabilities
-lua/lspconfig/server_configurations/openedge_ls.lua:19:43     - Unknown word (Dorg)       -- config.cmd + 1] = '-Dorg.slf4j.simpleLogger.defaultLog
-lua/lspconfig/server_configurations/please.lua:7:36      - Unknown word (plzconfig)  -- util.root_pattern '.plzconfig',
-lua/lspconfig/server_configurations/reason_ls.lua:7:35      - Unknown word (bsconfig)   -- util.root_pattern('bsconfig.json', '.git'),
-lua/lspconfig/server_configurations/remark_ls.lua:15:9      - Unknown word (remarkignore) -- '.remarkignore'
-lua/lspconfig/server_configurations/rust_analyzer.lua:24:34     - Unknown word (RUSTUP)     -- rustup_home = os.getenv 'RUSTUP_HOME' or util.path.join
-lua/lspconfig/server_configurations/scheme_langserver.lua:4:4       - Unknown word (Akku)       -- 'Akku.manifest',
-lua/lspconfig/server_configurations/shopify_theme_ls.lua:4:5       - Unknown word (shopifyignore) -- '.shopifyignore',
-lua/lspconfig/server_configurations/spyglassmc_language_server.lua:7:40      - Unknown word (mcmeta)     -- util.root_pattern 'pack.mcmeta',
-lua/lspconfig/server_configurations/sqlls.lua:7:36      - Unknown word (sqllsrc)    -- util.root_pattern '.sqllsrc.json',
-lua/lspconfig/server_configurations/stylelint_lsp.lua:4:5       - Unknown word (stylelintrc) -- '.stylelintrc',
-lua/lspconfig/server_configurations/svlangserver.lua:13:35     - Unknown word (cword)      -- = { vim.fn.expand '<cword>' },
-lua/lspconfig/server_configurations/texlab.lua:14:10     - Unknown word (Unconfigured) -- [3] = 'Unconfigured',
-lua/lspconfig/server_configurations/texlab.lua:159:44    - Unknown word (latexmkrc)    -- root_pattern('.git', '.latexmkrc', '.texlabroot', 'texlabroot
-lua/lspconfig/server_configurations/texlab.lua:159:58    - Unknown word (texlabroot)   -- git', '.latexmkrc', '.texlabroot', 'texlabroot', 'Tectonic
-lua/lspconfig/server_configurations/textlsp.lua:13:69     - Unknown word (enaled)     -- page. LanguageTool is enaled here
-lua/lspconfig/server_configurations/vdmj.lua:114:9     - Unknown word (Dlsp)       -- '-Dlsp.log.filename=' .. config
-lua/lspconfig/server_configurations/vdmj.lua:24:9      - Unknown word (subdirs)    -- local subdirs = function(file)
-lua/lspconfig/server_configurations/vdmj.lua:35:37     - Unknown word (startpath)  -- find_vscode_ancestor(startpath)
-lua/lspconfig/server_configurations/zk.lua:29:15     - Unknown word (bufpath)     -- local bufpath = vim.api.nvim_buf_get
-lua/lspconfig/server_configurations/zk.lua:5:15      - Unknown word (isdirectory) -- if vim.fn.isdirectory(vim.fs.joinpath(dir
-lua/lspconfig/ui/lspinfo.lua:110:39    - Unknown word (helptag)    -- vim.tbl_map(function(helptag)
-lua/lspconfig/ui/lspinfo.lua:12:7      - Unknown word (helptags)   -- local helptags = {
-lua/lspconfig/ui/lspinfo.lua:17:21     - Unknown word (blankspace) -- local function trim_blankspace(cmd)
-lua/lspconfig/ui/lspinfo.lua:197:27    - Unknown word (breakindent) -- windows.default_options.breakindent = true
-lua/lspconfig/ui/lspinfo.lua:198:27    - Unknown word (breakindentopt) -- windows.default_options.breakindentopt = 'shift:25'
-lua/lspconfig/ui/lspinfo.lua:199:27    - Unknown word (showbreak)      -- windows.default_options.showbreak = 'NONE'
-lua/lspconfig/ui/lspinfo.lua:203:10    - Unknown word (bufhidden)      -- vim.bo.bufhidden = 'wipe'
-lua/lspconfig/ui/lspinfo.lua:289:20    - Unknown word (autocmds)       -- api.nvim_clear_autocmds { group = augroup, buffer
-lua/lspconfig/ui/lspinfo.lua:295:57    - Unknown word (nowait)         -- close, { buffer = bufnr, nowait = true })
-lua/lspconfig/ui/lspinfo.lua:295:7     - Unknown word (keymap)         -- vim.keymap.set('n', '<ESC>', close
-lua/lspconfig/ui/lspinfo.lua:304:10    - Unknown word (matchadd)       -- vim.fn.matchadd(
-lua/lspconfig/ui/lspinfo.lua:360:25    - Unknown word (concealcursor)  -- vim.wo[info.win_id].concealcursor = 'niv'
-lua/lspconfig/ui/lspinfo.lua:361:25    - Unknown word (conceallevel)   -- vim.wo[info.win_id].conceallevel = 2
-lua/lspconfig/ui/windows.lua:109:36    - Unknown word (winhl)      -- set_option(win_id, 'winhl', 'FloatBorder:LspInfoBorder
-lua/lspconfig/ui/windows.lua:119:36    - Unknown word (cursorcolumn) -- set_option(win_id, 'cursorcolumn', false)
-lua/lspconfig/ui/windows.lua:121:35    - Unknown word (shiftwidth)   -- buf_set_option(bufnr, 'shiftwidth', 2)
-lua/lspconfig/ui/windows.lua:1:57      - Unknown word (vnim)       -- modified from plenary.vnim by
-lua/lspconfig/ui/windows.lua:2:7       - Unknown word (Devries)    -- -- TJ Devries. It is not a stable
-lua/lspconfig/ui/windows.lua:59:41     - Unknown word (percentags) -- that takes up certain percentags of the current screen
-lua/lspconfig/util.lua:199:41    - Unknown word (rootdir)    -- path until we find the rootdir.
-lua/lspconfig/util.lua:297:47    - Unknown word (worktrees)  -- directories and git files (worktrees)
-lua/lspconfig/util.lua:391:45    - Unknown word (servername) -- client_by_name(bufnr, servername)
-lua/lspconfig/util.lua:392:10    - Unknown word (glepnir)    -- --TODO(glepnir): remove this for loop
-lua/lspconfig/util.lua:77:50     - Unknown word (customlist) -- "-nargs=* -complete=customlist,v:lua.something" into
-lua/lspconfig/util.lua:94:81     - Unknown word (fargs)      -- name][1](unpack(info.fargs))
+lua/lspconfig/util.lua:198:41    - Unknown word (rootdir)    -- path until we find the rootdir.
+lua/lspconfig/util.lua:296:47    - Unknown word (worktrees)  -- directories and git files (worktrees)
+lua/lspconfig/util.lua:390:45    - Unknown word (servername) -- client_by_name(bufnr, servername)
+lua/lspconfig/util.lua:391:10    - Unknown word (glepnir)    -- --TODO(glepnir): remove this for loop
+lua/lspconfig/util.lua:76:50     - Unknown word (customlist) -- "-nargs=* -complete=customlist,v:lua.something" into
+lua/lspconfig/util.lua:7:7       - Unknown word (iswin)      -- local iswin = uv.os_uname().version
+lua/lspconfig/util.lua:93:81     - Unknown word (fargs)      -- name][1](unpack(info.fargs))
 nvim-lspconfig-scm-1.rockspec:1:17      - Unknown word (SPECREV)    -- local _MODREV, _SPECREV = 'scm', '-1'
 nvim-lspconfig-scm-1.rockspec:1:8       - Unknown word (MODREV)     -- local _MODREV, _SPECREV = 'scm',
 nvim-lspconfig-scm-1.rockspec:3:1       - Unknown word (rockspec)   -- rockspec_format = "3.0"
-plugin/lspconfig.lua:156:26    - Unknown word (tabnew)      -- vim.cmd(string.format('tabnew %s', lsp.get_log_path
-plugin/lspconfig.lua:62:14     - Unknown word (scriptnames) -- -- script in scriptnames to be executed is lspconfig
-scripts/docgen.lua:153:36    - Unknown word (DOCGEN)     -- tempdir = os.getenv 'DOCGEN_TEMPDIR' or uv.fs_mkdtemp
-scripts/docgen.lua:274:9     - Unknown word (copyfile)   -- uv.fs_copyfile('doc/server_configurations
-scripts/docgen.lua:50:29     - Unknown word (indentlvl)  -- function make_section(indentlvl, sep, parts)
+plugin/lspconfig.lua:142:26    - Unknown word (tabnew)      -- vim.cmd(string.format('tabnew %s', lsp.get_log_path
+plugin/lspconfig.lua:52:14     - Unknown word (scriptnames) -- -- script in scriptnames to be executed is lspconfig
+scripts/docgen.lua:156:36    - Unknown word (DOCGEN)     -- tempdir = os.getenv 'DOCGEN_TEMPDIR' or uv.fs_mkdtemp
+scripts/docgen.lua:25:19     - Unknown word (spairs)     -- for k, v in vim.spairs(t) do
+scripts/docgen.lua:277:9     - Unknown word (copyfile)   -- uv.fs_copyfile('doc/configs.md', 'doc
+scripts/docgen.lua:61:29     - Unknown word (indentlvl)  -- function make_section(indentlvl, sep, parts)
 scripts/docgen.sh:2:71      - Unknown word (docgen)     -- PWD' +'luafile scripts/docgen.lua' +q
 test/lspconfig_spec.lua:14:13     - Unknown word (doesnt)     -- it('doesnt escape if not needed
 test/lspconfig_spec.lua:157:26    - Unknown word (subpaths)   -- it('strips zipfile subpaths', function()
