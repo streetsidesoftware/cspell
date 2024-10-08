@@ -8,13 +8,13 @@ import { pathRepoTestFixtures } from '../../test-util/index.mjs';
 import { extendExpect } from '../../test-util/test.matchers.mjs';
 import type { Uri, UriInstance } from './IUri.js';
 import {
-    uriFrom,
     fromFilePath,
     fromStdinFilePath,
     isUri,
     normalizeDriveLetter,
     parse,
     toUri,
+    uriFrom,
     uriToFilePath,
 } from './Uri.js';
 

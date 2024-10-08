@@ -1,6 +1,7 @@
 import { opConcatMap, opMap, pipe } from '@cspell/cspell-pipe/sync';
 import type { TextDocumentOffset, TextOffset } from '@cspell/cspell-types';
 
+import type { Uri } from './IUri.js';
 import { binarySearch } from './search.js';
 import {
     regExAccents,
@@ -12,7 +13,6 @@ import {
     regExWords,
     regExWordsAndDigits,
 } from './textRegex.js';
-import type { Uri } from './IUri.js';
 import { toUri } from './Uri.js';
 import { scanMap } from './util.js';
 
