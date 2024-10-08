@@ -9,7 +9,7 @@ import { determineTextDocumentSettings } from './textValidation/determineTextDoc
 import type { DocumentValidatorOptions } from './textValidation/index.js';
 import { DocumentValidator } from './textValidation/index.js';
 import { isError } from './util/errors.js';
-import type { Uri } from './util/Uri.js';
+import type { Uri } from './util/IUri.js';
 import { toUri } from './util/Uri.js';
 import type { ValidateTextOptions, ValidationIssue } from './validator.js';
 

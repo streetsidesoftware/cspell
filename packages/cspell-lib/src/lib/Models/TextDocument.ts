@@ -1,13 +1,13 @@
 import assert from 'node:assert';
 
-import { toFileURL, toURL } from '@cspell/url';
 import { TextDocument as VsTextDocument } from 'vscode-languageserver-textdocument';
 
 import { getFileSystem } from '../fileSystem.js';
 import { getLanguagesForBasename } from '../fileTypes.js';
-import * as Uri from '../util/Uri.js';
+import type { DocumentUri } from '../util/IUri.js';
+import { basename, documentUriToURL, toUri } from '../util/Uri.js';
 
-export type DocumentUri = Uri.Uri | URL | string;
+export { documentUriToURL } from '../util/Uri.js';
 
 export interface Position {
     line: number;
@@ -204,8 +204,8 @@ export function createTextDocument({
     version,
 }: CreateTextDocumentParams): TextDocument {
     version = version ?? 1;
-    uri = Uri.toUri(uri);
-    languageId = languageId ?? getLanguagesForBasename(Uri.basename(uri));
+    uri = toUri(uri);
+    languageId = languageId ?? getLanguagesForBasename(basename(uri));
     languageId = languageId.length === 0 ? 'text' : languageId;
     return new TextDocumentImpl(uri, content, languageId, locale, version);
 }
@@ -224,16 +224,10 @@ function isTextDocumentImpl(doc: TextDocument | unknown): doc is TextDocumentImp
 }
 
 export async function loadTextDocument(filename: string | DocumentUri, languageId?: string): Promise<TextDocument> {
-    const uri = Uri.toUri(filename);
+    const uri = toUri(filename);
     const url = new URL(uri.toString());
     const file = await getFileSystem().readFile(url);
     return createTextDocument({ uri, languageId, content: file.getText() });
 }
 
 export const isTextDocument: (doc: TextDocument | unknown) => doc is TextDocument = isTextDocumentImpl;
-
-export function documentUriToURL(uri: DocumentUri): URL {
-    return toURL(
-        uri instanceof URL ? uri : typeof uri === 'string' ? toFileURL(uri) : new URL(Uri.from(uri).toString()),
-    );
-}

@@ -12,7 +12,7 @@ import {
     regExWords,
     regExWordsAndDigits,
 } from './textRegex.js';
-import type { Uri } from './Uri.js';
+import type { Uri } from './IUri.js';
 import { toUri } from './Uri.js';
 import { scanMap } from './util.js';
 

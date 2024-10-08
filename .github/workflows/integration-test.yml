@@ -176,7 +176,7 @@ jobs:
 
       - name: Cache Integration Run
         id: step-cache-run
-        uses: actions/cache@v4
+        uses: actions/cache@v4.0.2
         with:
           key: integration-run--${{ env.REF_BRANCH }}-${{ steps.repo-hash.outputs.value }}-${{ fromJSON(steps.step-repo-info.outputs.repo-info).commit }}-1
           # Store the patch files to update the integration perf data
@@ -186,34 +186,34 @@ jobs:
       - uses: ./.github/actions/echo
         with:
           value: |
-            Run Cache: ${{ steps.step-cache-run.outputs.cache-hit && 'Hit' || 'Miss' }}
+            Run Cache: ${{ steps.step-cache-run.outputs == 'true' && 'Hit' || 'Miss' }}
 
       - name: Setup Env
-        if: ${{ !steps.step-cache-run.outputs.cache-hit }}
+        if: ${{ steps.step-cache-run.outputs.cache-hit != 'true' }}
         uses: ./.github/actions/setup
         with:
           node-version: ${{ matrix.node-version }}
 
       - id: step-cache-build
-        if: ${{ !steps.step-cache-run.outputs.cache-hit }}
+        if: ${{ steps.step-cache-run.outputs.cache-hit != 'true' }}
         uses: ./.github/actions/build-for-integrations
 
       - uses: ./.github/actions/echo
-        if: ${{ !steps.step-cache-run.outputs.cache-hit }}
+        if: ${{ steps.step-cache-run.outputs.cache-hit != 'true' }}
         with:
           value: |
-            Run Cache: ${{ steps.step-cache-run.outputs.cache-hit && 'Hit' || 'Miss' }}
+            Run Cache: ${{ steps.step-cache-run.outputs.cache-hit == 'true' && 'Hit' || 'Miss' }}
 
       - name: Cache Integration Test Repository Files
-        if: ${{ !steps.step-cache-run.outputs.cache-hit }}
-        uses: actions/cache@v4
+        if: ${{ steps.step-cache-run.outputs.cache-hit != 'true' }}
+        uses: actions/cache@v4.0.2
         with:
           key: int-repo-temp-files-${{ matrix.repo }}-${{ fromJSON(steps.step-repo-info.outputs.repo-info).commit }}
           path: |
             integration-tests/repositories/temp/${{ matrix.repo }}
 
       - name: Run Integration Tests ${{ matrix.repo }}
-        if: ${{ !steps.step-cache-run.outputs.cache-hit }}
+        if: ${{ steps.step-cache-run.outputs.cache-hit != 'true' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: >
@@ -222,7 +222,7 @@ jobs:
           && pnpm run integration-tests -- ${{ matrix.repo }}
 
       - name: store perf run
-        if: ${{ !steps.step-cache-run.outputs.cache-hit }}
+        if: ${{ steps.step-cache-run.outputs.cache-hit != 'true' }}
         uses: actions/upload-artifact@v4
         with:
           name: perf-repo-${{ steps.step-normalize-repo-name.outputs.REPO_NAME }}
