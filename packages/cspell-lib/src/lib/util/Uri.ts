@@ -1,24 +1,11 @@
 import assert from 'node:assert';
 import { pathToFileURL } from 'node:url';
 
-import { toFilePathOrHref, toFileURL } from '@cspell/url';
+import { toFilePathOrHref, toFileURL, toURL } from '@cspell/url';
 import { isUrlLike } from 'cspell-io';
 import { URI, Utils } from 'vscode-uri';
 
-import { DocumentUri, documentUriToURL } from '../Models/TextDocument.js';
-
-export interface Uri {
-    readonly scheme: string;
-    readonly path: string;
-    readonly authority?: string;
-    readonly fragment?: string;
-    readonly query?: string;
-}
-
-export interface UriInstance extends Uri {
-    toString(): string;
-    toJSON(): unknown;
-}
+import type { DocumentUri, Uri, UriInstance } from './IUri.js';
 
 interface HRef {
     href: string;
@@ -97,7 +84,7 @@ export function resolvePath(uri: Uri, ...paths: string[]): UriInstance {
     return UriImpl.from(Utils.resolvePath(URI.from(uri), ...paths));
 }
 
-export function from(uri: Uri, ...parts: Partial<Uri>[]): UriInstance {
+export function uriFrom(uri: Uri, ...parts: Partial<Uri>[]): UriInstance {
     return UriImpl.from(uri, ...parts);
 }
 
@@ -198,6 +185,12 @@ function parseStdinUri(uri: string): Uri {
         query: decodeURI(query),
         fragment: decodeURI(hash),
     };
+}
+
+export function documentUriToURL(uri: DocumentUri): URL {
+    return toURL(
+        uri instanceof URL ? uri : typeof uri === 'string' ? toFileURL(uri) : new URL(uriFrom(uri).toString()),
+    );
 }
 
 export const __testing__ = {

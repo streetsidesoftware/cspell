@@ -6,9 +6,9 @@ import { URI } from 'vscode-uri';
 
 import { pathRepoTestFixtures } from '../../test-util/index.mjs';
 import { extendExpect } from '../../test-util/test.matchers.mjs';
-import type { Uri, UriInstance } from './Uri.js';
+import type { Uri, UriInstance } from './IUri.js';
 import {
-    from,
+    uriFrom,
     fromFilePath,
     fromStdinFilePath,
     isUri,
@@ -70,7 +70,7 @@ describe('Uri', () => {
     });
 
     const uriFilename = URI.file(__filename);
-    const uriStdinFilename = from(uriFilename, { scheme: 'stdin' });
+    const uriStdinFilename = uriFrom(uriFilename, { scheme: 'stdin' });
     const stdinFilename = uriStdinFilename.toString();
 
     test.each`
@@ -111,8 +111,8 @@ describe('Uri', () => {
         ${j(toUri('stdin://relative/file/path'))}                           | ${{ ...u, scheme: 'stdin', path: 'relative/file/path' }}
         ${toUri('stdin://relative/file/path').toString()}                   | ${'stdin://relative/file/path'}
         ${toUri('stdin:///absolute-file-path').toString()}                  | ${'stdin:///absolute-file-path'}
-        ${j(from(URI.file(__filename)))}                                    | ${{ ...u, scheme: 'file', path: eqCI(normalizePath(__filename)) }}
-        ${j(from(URI.file(__filename), { scheme: 'stdin' }))}               | ${{ ...u, scheme: 'stdin', path: eqCI(normalizePath(__filename)) }}
+        ${j(uriFrom(URI.file(__filename)))}                                 | ${{ ...u, scheme: 'file', path: eqCI(normalizePath(__filename)) }}
+        ${j(uriFrom(URI.file(__filename), { scheme: 'stdin' }))}            | ${{ ...u, scheme: 'stdin', path: eqCI(normalizePath(__filename)) }}
     `('uri assumptions $uri', ({ uri, expected }) => {
         expect(uri).toEqual(expected);
     });

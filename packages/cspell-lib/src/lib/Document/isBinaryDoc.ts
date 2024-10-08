@@ -1,5 +1,5 @@
 import { getLanguagesForBasename, isGenerated } from '../fileTypes.js';
-import type { Uri } from '../util/Uri.js';
+import type { Uri } from '../util/IUri.js';
 import { basename, toUri } from '../util/Uri.js';
 import type { Document } from './Document.js';
 import { normalizeLanguageIds } from './normalizeLanguageIds.js';
