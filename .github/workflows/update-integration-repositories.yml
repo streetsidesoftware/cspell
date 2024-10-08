@@ -98,7 +98,7 @@ jobs:
 
       - name: Cached Results
         run: |
-          echo Build Cache: ${{ steps.step-cache-build.outputs.cache-hit && 'Hit' || 'Miss' }}
+          echo Build Cache: ${{ steps.step-cache-build.outputs.cache-hit == 'true' && 'Hit' || 'Miss' }}
 
       - name: pnpm CI
         run: pnpm i
@@ -110,7 +110,7 @@ jobs:
           cat /home/runner/.pnpm/_logs/*.log
 
       - name: Check Build
-        if: ${{ !steps.step-cache-build.outputs.cache-hit }}
+        if: ${{ steps.step-cache-build.outputs.cache-hit != 'true' }}
         run: exit 1
 
       - name: Run Integration Tests ${{ matrix.repo }}
