@@ -3,6 +3,10 @@ on:
   pull_request:
     types:
       - closed
+permissions:
+  pull-requests: write
+  contents: write
+  actions: write
 
 jobs:
   cleanup:
