@@ -55,6 +55,13 @@ export default tsEslint.config(
                 },
             ],
             'n/no-missing-require': 'warn',
+            'n/no-extraneous-require': [
+                'error',
+                {
+                    allowModules: ['@site/static'],
+                    // convertPath: { '@site/static/**': ['@site/static', './static'] },
+                },
+            ],
         },
     },
     {
