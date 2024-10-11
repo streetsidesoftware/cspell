@@ -1,5 +1,5 @@
 import * as path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import getStdin from 'get-stdin';
 import { afterEach, describe, expect, test, vi } from 'vitest';
@@ -119,7 +119,7 @@ describe('fileHelper', () => {
         ${'not_found'}         | ${__dirname} | ${path.join(__dirname, 'not_found')}
         ${'not_found'}         | ${undefined} | ${path.resolve('not_found')}
         ${'stdin'}             | ${undefined} | ${'stdin://'}
-        ${'stdin://source.ts'} | ${undefined} | ${'stdin://' + path.resolve('source.ts')}
+        ${'stdin://source.ts'} | ${undefined} | ${pathToFileURL('source.ts').href.replace(/^file:/, 'stdin:')}
     `('resolveFilename $filename $cwd', async ({ filename, cwd, expected }) => {
         expect(resolveFilename(filename, cwd)).toBe(expected);
     });
