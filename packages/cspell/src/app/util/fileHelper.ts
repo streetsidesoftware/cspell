@@ -11,11 +11,12 @@ import { fileToDocument, isBinaryFile as isUriBinaryFile } from 'cspell-lib';
 import getStdin from 'get-stdin';
 
 import { asyncAwait, asyncFlatten, asyncMap, asyncPipe, mergeAsyncIterables } from './async.js';
-import { FileProtocol, STDIN, STDINProtocol, UTF8 } from './constants.js';
+import { FileUrlPrefix, STDIN, STDINProtocol, STDINUrlPrefix, UTF8 } from './constants.js';
 import { IOError, toApplicationError, toError } from './errors.js';
 import type { GlobOptions } from './glob.js';
 import { globP } from './glob.js';
 import { readStdin } from './stdin.js';
+import { isStdinUrl, resolveStdinUrl } from './stdinUrl.js';
 import { clean } from './util.js';
 
 export interface ConfigInfo {
@@ -67,7 +68,7 @@ export function fileInfoToDocument(
     languageId = languageId || undefined;
     locale = locale || undefined;
 
-    const uri = filenameToUrlString(filename);
+    const uri = filenameToUrl(filename);
 
     if (uri.href.startsWith(STDINProtocol)) {
         return clean({
@@ -81,18 +82,17 @@ export function fileInfoToDocument(
     return fileToDocument(uri.href, text, languageId, locale);
 }
 
-export function filenameToUrlString(filename: string, cwd = '.'): URL {
+export function filenameToUrl(filename: string, cwd = '.'): URL {
     const cwdURL = toFileDirURL(cwd);
     if (filename === STDIN) return new URL('stdin:///');
-    if (filename.startsWith(STDINProtocol)) {
-        const filePath = filename.slice(STDINProtocol.length);
-        return toFileURL(filePath, cwdURL);
+    if (isStdinUrl(filename)) {
+        return new URL(resolveStdinUrl(filename, cwd));
     }
     return toFileURL(filename, cwdURL);
 }
 
 export function filenameToUri(filename: string, cwd?: string): URL {
-    return toURL(filenameToUrlString(filename, cwd));
+    return toURL(filenameToUrl(filename, cwd));
 }
 
 export function isBinaryFile(filename: string, cwd?: string): boolean {
@@ -107,15 +107,15 @@ export interface ReadFileInfoResult extends FileInfo {
 
 export function resolveFilename(filename: string, cwd?: string): string {
     cwd = cwd || process.cwd();
-    if (filename === STDIN) return STDINProtocol;
-    if (filename.startsWith(FileProtocol)) {
-        const url = new URL(filename.slice(FileProtocol.length), pathToFileURL(cwd + path.sep));
+    if (filename === STDIN) return STDINUrlPrefix;
+    if (filename.startsWith(FileUrlPrefix)) {
+        const url = new URL(filename.slice(FileUrlPrefix.length), pathToFileURL(cwd + path.sep));
         return fileURLToPath(url);
     }
-    const scheme = filename.startsWith(STDINProtocol) ? STDINProtocol : '';
-    const pathname = filename.slice(scheme.length);
-
-    return scheme + path.resolve(cwd, pathname);
+    if (isStdinUrl(filename)) {
+        return resolveStdinUrl(filename, cwd);
+    }
+    return path.resolve(cwd, filename);
 }
 
 export function readFileInfo(
@@ -149,9 +149,7 @@ export function readFile(filename: string, encoding: BufferEncoding = UTF8): Pro
 export async function findFiles(globPatterns: string[], options: GlobOptions): Promise<string[]> {
     const stdin: string[] = [];
     const globPats = globPatterns.filter((filename) =>
-        filename !== STDIN && !filename.startsWith(STDINProtocol) && !filename.startsWith(FileProtocol)
-            ? true
-            : (stdin.push(filename), false),
+        !isStdin(filename) && !filename.startsWith(FileUrlPrefix) ? true : (stdin.push(filename), false),
     );
     const globResults = globPats.length ? await globP(globPats, options) : [];
     const cwd = options.cwd || process.cwd();
@@ -205,7 +203,12 @@ export async function readFileListFile(listFile: string): Promise<string[]> {
     }
 }
 
+function isStdin(filename: string): boolean {
+    return filename === STDIN || isStdinUrl(filename);
+}
+
 export async function isFile(filename: string): Promise<boolean> {
+    if (isStdin(filename)) return true;
     try {
         const stat = await fsp.stat(filename);
         return stat.isFile();
