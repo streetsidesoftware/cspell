@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>8.15.1 (2024-10-11)</small>
+
+* fix: Sign Published Packages (#6350) ([633b060](https://github.com/streetsidesoftware/cspell-cli/commit/633b060)), closes [#6350](https://github.com/streetsidesoftware/cspell-cli/issues/6350)
+
 ## 8.15.0 (2024-10-11)
 
 * chore: bump eslint-plugin-unicorn from 55.0.0 to 56.0.0 (#6332) ([67d1e92](https://github.com/streetsidesoftware/cspell-cli/commit/67d1e92)), closes [#6332](https://github.com/streetsidesoftware/cspell-cli/issues/6332)
