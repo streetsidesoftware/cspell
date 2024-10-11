@@ -31,4 +31,6 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.PUBLISH_NPM}}
           DIST_TAG: ${{ contains(env.VERSION, 'alpha') && '--dist-tag next' || '' }}
+          NPM_CONFIG_PROVENANCE: true
+
         run: pnpm lerna publish from-package --no-push --no-private --yes ${{ env.DIST_TAG }}
