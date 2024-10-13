@@ -42,9 +42,11 @@ export {
     loadPnP,
     mergeInDocSettings,
     mergeSettings,
+    readConfigFile,
     readRawSettings,
     readSettings,
     readSettingsFiles,
+    resolveConfigFileImports,
     searchForConfig,
     sectionCSpell,
 } from './Settings/index.js';

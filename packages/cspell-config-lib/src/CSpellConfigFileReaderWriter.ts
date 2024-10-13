@@ -1,6 +1,8 @@
 import { extname } from 'node:path/posix';
 
-import type { CSpellConfigFile, ICSpellConfigFile } from './CSpellConfigFile.js';
+import type { ICSpellConfigFile } from './CSpellConfigFile.js';
+import { CSpellConfigFile } from './CSpellConfigFile.js';
+import { CSpellConfigFileInMemory } from './CSpellConfigFile/index.js';
 import type { FileLoaderMiddleware } from './FileLoader.js';
 import type { IO } from './IO.js';
 import { getDeserializer, getLoader, getSerializer } from './middlewareHelper.js';
@@ -17,6 +19,7 @@ export interface CSpellConfigFileReaderWriter {
     clearCachedFiles(): void;
     setUntrustedExtensions(ext: readonly string[]): this;
     setTrustedUrls(urls: readonly (URL | string)[]): this;
+    toCSpellConfigFile(configFile: ICSpellConfigFile): CSpellConfigFile;
     /**
      * Untrusted extensions are extensions that are not trusted to be loaded from a file system.
      * Extension are case insensitive and should include the leading dot.
@@ -66,6 +69,12 @@ export class CSpellConfigFileReaderWriterImpl implements CSpellConfigFileReaderW
 
         const loader = getLoader(this.loaders);
         return loader({ url: toURL(uri), context: { deserialize: this.getDeserializer(), io: this.io } });
+    }
+
+    toCSpellConfigFile(configFile: ICSpellConfigFile): CSpellConfigFile {
+        return configFile instanceof CSpellConfigFile
+            ? configFile
+            : new CSpellConfigFileInMemory(configFile.url, configFile.settings);
     }
 
     getDeserializer(): DeserializerNext {

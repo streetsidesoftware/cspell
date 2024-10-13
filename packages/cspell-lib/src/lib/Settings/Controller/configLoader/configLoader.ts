@@ -3,8 +3,8 @@ import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import type { CSpellUserSettings, ImportFileRef, Source } from '@cspell/cspell-types';
-import type { CSpellConfigFile, CSpellConfigFileReaderWriter, IO, TextFile } from 'cspell-config-lib';
-import { createReaderWriter, CSpellConfigFileInMemory } from 'cspell-config-lib';
+import { CSpellConfigFile, CSpellConfigFileReaderWriter, ICSpellConfigFile, IO, TextFile } from 'cspell-config-lib';
+import { createReaderWriter } from 'cspell-config-lib';
 import { isUrlLike, toFileURL } from 'cspell-io';
 import { URI, Utils as UriUtils } from 'vscode-uri';
 
@@ -155,6 +155,13 @@ export interface IConfigLoader {
     createCSpellConfigFile(filename: URL | string, settings: CSpellUserSettings): CSpellConfigFile;
 
     /**
+     * Convert a ICSpellConfigFile into a CSpellConfigFile.
+     * If cfg is a CSpellConfigFile, it is returned as is.
+     * @param cfg - configuration file to convert.
+     */
+    toCSpellConfigFile(cfg: ICSpellConfigFile): CSpellConfigFile;
+
+    /**
      * Unsubscribe from any events and dispose of any resources including caches.
      */
     dispose(): void;
@@ -204,7 +211,7 @@ export class ConfigLoader implements IConfigLoader {
     protected cachedConfigFiles = new Map<string, CSpellConfigFile>();
     protected cachedPendingConfigFile = new AutoResolveCache<string, Promise<CSpellConfigFile | Error>>();
     protected cachedMergedConfig = new WeakMap<CSpellConfigFile, CacheMergeConfigFileWithImports>();
-    protected cachedCSpellConfigFileInMemory = new WeakMap<CSpellUserSettings, Map<string, CSpellConfigFileInMemory>>();
+    protected cachedCSpellConfigFileInMemory = new WeakMap<CSpellUserSettings, Map<string, CSpellConfigFile>>();
     protected globalSettings: CSpellSettingsI | undefined;
     protected cspellConfigFileReaderWriter: CSpellConfigFileReaderWriter;
     protected configSearch: ConfigSearch;
@@ -435,10 +442,11 @@ export class ConfigLoader implements IConfigLoader {
     }
 
     public mergeConfigFileWithImports(
-        cfgFile: CSpellConfigFile,
+        cfg: CSpellConfigFile | ICSpellConfigFile,
         pnpSettings: PnPSettingsOptional | undefined,
         referencedBy?: string[] | undefined,
     ): Promise<CSpellSettingsI> {
+        const cfgFile = this.toCSpellConfigFile(cfg);
         const cached = this.cachedMergedConfig.get(cfgFile);
         if (cached && cached.pnpSettings === pnpSettings && cached.referencedBy === referencedBy) {
             return cached.result;
@@ -540,8 +548,19 @@ export class ConfigLoader implements IConfigLoader {
     }
 
     createCSpellConfigFile(filename: URL | string, settings: CSpellUserSettings): CSpellConfigFile {
-        const map = autoResolveWeak(this.cachedCSpellConfigFileInMemory, settings, () => new Map());
-        return autoResolve(map, filename, () => new CSpellConfigFileInMemory(toFileURL(filename), settings));
+        const map = autoResolveWeak(
+            this.cachedCSpellConfigFileInMemory,
+            settings,
+            () => new Map<string, CSpellConfigFile>(),
+        );
+        return autoResolve(map, filename, () =>
+            this.cspellConfigFileReaderWriter.toCSpellConfigFile({ url: toFileURL(filename), settings }),
+        );
+    }
+
+    toCSpellConfigFile(cfg: ICSpellConfigFile): CSpellConfigFile {
+        if (cfg instanceof CSpellConfigFile) return cfg;
+        return this.createCSpellConfigFile(cfg.url, cfg.settings);
     }
 
     dispose() {

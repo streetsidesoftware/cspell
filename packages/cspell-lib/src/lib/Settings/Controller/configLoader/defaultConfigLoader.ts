@@ -1,5 +1,5 @@
 import type { CSpellSettings } from '@cspell/cspell-types';
-import type { CSpellConfigFile } from 'cspell-config-lib';
+import type { CSpellConfigFile, ICSpellConfigFile } from 'cspell-config-lib';
 
 import { toError } from '../../../util/errors.js';
 import { toFileUrl } from '../../../util/url.js';
@@ -56,6 +56,12 @@ export async function readConfigFile(filename: string | URL, relativeTo?: string
     return result;
 }
 
+export async function resolveConfigFileImports(
+    configFile: CSpellConfigFile | ICSpellConfigFile,
+): Promise<CSpellSettingsI> {
+    return gcl().mergeConfigFileWithImports(configFile, configFile.settings);
+}
+
 /**
  * Might throw if the settings have not yet been loaded.
  * @deprecated use {@link getGlobalSettingsAsync} instead.
@@ -83,9 +89,11 @@ export function clearCachedSettingsFiles(): void {
 export function getDefaultConfigLoader(): IConfigLoader {
     return getDefaultConfigLoaderInternal();
 }
+
 function cachedFiles() {
     return gcl()._cachedFiles;
 }
+
 export async function readRawSettings(filename: string | URL, relativeTo?: string | URL): Promise<CSpellSettingsWST> {
     try {
         const cfg = await readConfigFile(filename, relativeTo);

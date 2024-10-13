@@ -2,7 +2,7 @@ import * as path from 'node:path';
 
 import type { Issue } from '@cspell/cspell-types';
 
-import type { LinterCliOptions, LinterOptions } from '../options.js';
+import type { CSpellConfigFile, LinterCliOptions, LinterOptions } from '../options.js';
 import type { GlobSrcInfo } from '../util/glob.js';
 import { calcExcludeGlobInfo } from '../util/glob.js';
 import type { FinalizedReporter } from '../util/reporters.js';
@@ -18,7 +18,7 @@ export class LintRequest {
     readonly uniqueFilter: (issue: Issue) => boolean;
     readonly locale: string;
 
-    readonly configFile: string | undefined;
+    readonly configFile: string | CSpellConfigFile | undefined;
     readonly excludes: GlobSrcInfo[];
     readonly root: string;
     readonly showContext: number;

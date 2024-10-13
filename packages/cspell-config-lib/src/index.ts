@@ -1,4 +1,5 @@
 export { createReaderWriter } from './createReaderWriter.js';
+export type { ICSpellConfigFile } from './CSpellConfigFile.js';
 export { CSpellConfigFile } from './CSpellConfigFile.js';
 export {
     CSpellConfigFileInMemory,

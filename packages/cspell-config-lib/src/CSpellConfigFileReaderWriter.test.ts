@@ -4,7 +4,7 @@ import type { CSpellSettings } from '@cspell/cspell-types';
 import { describe, expect, test, vi } from 'vitest';
 
 import { CSpellConfigFile } from './CSpellConfigFile.js';
-import { CSpellConfigFileJavaScript } from './CSpellConfigFile/index.js';
+import { CSpellConfigFileInMemory, CSpellConfigFileJavaScript } from './CSpellConfigFile/index.js';
 import { CSpellConfigFileReaderWriterImpl } from './CSpellConfigFileReaderWriter.js';
 import type { IO } from './IO.js';
 import { defaultLoaders } from './loaders/index.js';
@@ -16,8 +16,8 @@ const oc = <T>(obj: T) => expect.objectContaining(obj);
 
 describe('CSpellConfigFileReaderWriter', () => {
     test.each`
-        uri                       | content                   | expected
-        ${'file:///package.json'} | ${json({ name: 'name' })} | ${oc({ url: new URL('file:///package.json'), settings: {} })}
+        uri                       | content                                               | expected
+        ${'file:///package.json'} | ${json({ name: 'name', cspell: { words: ['one'] } })} | ${oc({ url: new URL('file:///package.json'), settings: { words: ['one'] } })}
     `('readConfig', async ({ uri, content, expected }) => {
         const io: IO = {
             readFile: vi.fn((url) => Promise.resolve({ url, content })),
@@ -135,6 +135,34 @@ describe('CSpellConfigFileReaderWriter', () => {
         expect(rw.untrustedExtensions).toEqual(['.json', '.js']);
 
         await expect(rw.readConfig(uri)).resolves.toEqual(expected);
+    });
+
+    test.each`
+        url                      | content
+        ${'file:///cspell.json'} | ${json({ name: 'name', words: ['one'] })}
+    `('toCSpellConfigFile $url', async ({ url, content }) => {
+        const io: IO = {
+            readFile: vi.fn((url) => Promise.resolve({ url, content })),
+            writeFile: vi.fn(),
+        };
+        url = new URL(url);
+        const settings = JSON.parse(content) as CSpellSettings;
+        const rw = new CSpellConfigFileReaderWriterImpl(io, defaultDeserializers, defaultLoaders);
+        const config = await rw.readConfig(url);
+        expect(config).toBeInstanceOf(CSpellConfigFile);
+        expect(config.url).toEqual(url);
+        expect(config.settings).toEqual(settings);
+
+        expect(rw.toCSpellConfigFile(config)).toBe(config);
+
+        const config2 = rw.toCSpellConfigFile({ url, settings });
+        expect(config2).toBeInstanceOf(CSpellConfigFile);
+        expect(config2).not.toEqual(config);
+
+        // At the moment, we do not try to associate the settings with the right loader.
+        expect(config2).toBeInstanceOf(CSpellConfigFileInMemory);
+
+        expect(config2.settings).toEqual(settings);
     });
 });
 
