@@ -2,7 +2,7 @@ import { promises as fsp } from 'node:fs';
 import * as path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
-import { toFileDirURL, toFileURL } from '@cspell/url';
+import { toFileDirURL, toFilePathOrHref, toFileURL } from '@cspell/url';
 import type { BufferEncoding } from 'cspell-io';
 import { readFileText as cioReadFile, toURL } from 'cspell-io';
 import type { CSpellUserSettings, Document, Issue } from 'cspell-lib';
@@ -10,6 +10,7 @@ import * as cspell from 'cspell-lib';
 import { fileToDocument, isBinaryFile as isUriBinaryFile } from 'cspell-lib';
 import getStdin from 'get-stdin';
 
+import { CSpellConfigFile } from '../options.js';
 import { asyncAwait, asyncFlatten, asyncMap, asyncPipe, mergeAsyncIterables } from './async.js';
 import { FileUrlPrefix, STDIN, STDINProtocol, STDINUrlPrefix, UTF8 } from './constants.js';
 import { IOError, toApplicationError, toError } from './errors.js';
@@ -31,13 +32,36 @@ export interface FileConfigInfo {
     languageIds: string[];
 }
 
-export async function readConfig(configFile: string | undefined, root: string | undefined): Promise<ConfigInfo> {
+export async function readConfig(
+    configFile: string | CSpellConfigFile | undefined,
+    root: string | undefined,
+): Promise<ConfigInfo> {
     if (configFile) {
-        const config = (await cspell.loadConfig(configFile)) || {};
-        return { source: configFile, config };
+        const cfgFile = typeof configFile === 'string' ? await readConfigHandleError(configFile) : configFile;
+        const config = await cspell.resolveConfigFileImports(cfgFile);
+        const source = toFilePathOrHref(cfgFile.url);
+        return { source, config };
     }
     const config = await cspell.searchForConfig(root);
     return { source: config?.__importRef?.filename || 'None found', config: config || {} };
+}
+
+export function readConfigFile(filename: string | URL): Promise<CSpellConfigFile> {
+    return cspell.readConfigFile(filename);
+}
+
+async function readConfigHandleError(filename: string | URL): Promise<CSpellConfigFile> {
+    try {
+        return await readConfigFile(filename);
+    } catch (e) {
+        const settings: cspell.CSpellSettingsWithSourceTrace = {
+            __importRef: {
+                filename: filename.toString(),
+                error: e as Error,
+            },
+        };
+        return { url: filenameToUrl(filename), settings };
+    }
 }
 
 export interface FileInfo {
@@ -82,7 +106,8 @@ export function fileInfoToDocument(
     return fileToDocument(uri.href, text, languageId, locale);
 }
 
-export function filenameToUrl(filename: string, cwd = '.'): URL {
+export function filenameToUrl(filename: string | URL, cwd = '.'): URL {
+    if (filename instanceof URL) return filename;
     const cwdURL = toFileDirURL(cwd);
     if (filename === STDIN) return new URL('stdin:///');
     if (isStdinUrl(filename)) {

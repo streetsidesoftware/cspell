@@ -43,6 +43,9 @@
                 "autoAttachChildProcesses": true,
                 "skipFiles": ["<node_internals>/**", "**/node_modules/**"],
                 "program": "${workspaceRoot:cspell-monorepo}/node_modules/vitest/vitest.mjs",
+                "env": {
+                    "NODE_OPTIONS": "--enable-source-maps"
+                },
                 "args": [
                     "run",
                     "--testTimeout=600000",

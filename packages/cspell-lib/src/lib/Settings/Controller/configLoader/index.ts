@@ -14,7 +14,9 @@ export {
     getGlobalSettings,
     getGlobalSettingsAsync,
     loadConfig,
+    readConfigFile,
     readRawSettings,
+    resolveConfigFileImports,
     resolveSettingsImports,
     searchForConfig,
 } from './defaultConfigLoader.js';

@@ -1,6 +1,8 @@
+import { CSpellSettings } from '@cspell/cspell-types';
+
 import type { CacheOptions } from './util/cache/index.js';
 
-export interface LinterOptions extends BaseOptions, Omit<CacheOptions, 'version'> {
+export interface LinterOptions extends Omit<BaseOptions, 'config'>, Omit<CacheOptions, 'version'> {
     /**
      * Display verbose information
      */
@@ -93,10 +95,16 @@ export interface LinterOptions extends BaseOptions, Omit<CacheOptions, 'version'
      * configuration.
      */
     reporter?: string[];
+
     /**
      * Load and parse documents, but do not spell check.
      */
     skipValidation?: boolean;
+
+    /**
+     * Path to configuration file.
+     */
+    config?: string | CSpellConfigFile;
 }
 
 export interface TraceOptions extends BaseOptions {
@@ -153,6 +161,8 @@ export interface SuggestionOptions extends BaseOptions {
 export interface LegacyOptions {
     local?: string;
 }
+
+export type LegacyFixes = Pick<BaseOptions, 'locale'>;
 
 export interface BaseOptions {
     /**
@@ -265,10 +275,15 @@ export interface LinterCliOptions extends LinterOptions {
     issueTemplate?: string;
 }
 
-export function fixLegacy<T extends BaseOptions>(opts: T & LegacyOptions): Omit<T & LegacyOptions, 'local'> {
+export function fixLegacy<T extends LegacyFixes>(opts: T & LegacyOptions): Omit<T & LegacyOptions, 'local'> {
     const { local, ...rest } = opts;
     if (local && !rest.locale) {
         rest.locale = local;
     }
     return rest;
+}
+
+export interface CSpellConfigFile {
+    url: URL;
+    settings: CSpellSettings;
 }
