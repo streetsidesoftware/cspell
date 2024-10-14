@@ -3,9 +3,9 @@ Repository: wireapp/wire-webapp
 Url: https://github.com/wireapp/wire-webapp.git
 Args: '["src/script/**/*.{js,ts,tsx,md}"]'
 Summary:
-  files: 1227
-  filesWithIssues: 644
-  issues: 2724
+  files: 1228
+  filesWithIssues: 645
+  issues: 2728
   errors: 0
 Errors: []
 
@@ -498,7 +498,7 @@ issues:
   - "src/script/calling/CallState.ts:25:60       wireapp     U       as CALL_STATE} from '@wireapp/avs';"
   - "src/script/calling/CallState.ts:26:30       wireapp     U       WebAppEvents} from '@wireapp/webapp-events';"
   - "src/script/calling/CallState.ts:28:54       caculate    U       indowPosition} from 'Util/DOM/caculateChildWindowPosition'"
-  - "src/script/calling/CallState.ts:83:105      ESTAB       U       == CALL_STATE.MEDIA_ESTAB));"
+  - "src/script/calling/CallState.ts:86:105      ESTAB       U       == CALL_STATE.MEDIA_ESTAB));"
   - "src/script/calling/enum/CallMessageType.ts:22:17        CONFSTART       U       CONF_START = 'CONFSTART',"
   - "src/script/calling/enum/CallMessageType.ts:23:15        CONFEND         U       CONF_END = 'CONFEND',"
   - "src/script/calling/enum/CallMessageType.ts:24:3         CONFKEY         U       CONFKEY = 'CONFKEY',"
@@ -572,6 +572,7 @@ issues:
   - "src/script/components/calling/CallingCell/CallingCell.tsx:123:48        ESTAB       U       == CALL_STATE.MEDIA_ESTAB;"
   - "src/script/components/calling/CallingCell/CallingControls/CallingControls.tsx:21:26         tsyringe    U       import {container} from 'tsyringe';"
   - "src/script/components/calling/CallingCell/CallingHeader/CallingHeader.tsx:20:26         wireapp     U       import {TabIndex} from '@wireapp/react-ui-kit/lib/types"
+  - "src/script/components/calling/CallingCell/CallingHeader/CallingHeader.tsx:22:47         wireapp     U       IconButtonVariant} from '@wireapp/react-ui-kit';"
   - "src/script/components/calling/CallingOverlayContainer.tsx:22:26         tsyringe    U       import {container} from 'tsyringe';"
   - "src/script/components/calling/CallParticipantsListItem/CallParticipantItemContent/CallParticipantItemContent.tsx:22:26          wireapp         U       import {TabIndex} from '@wireapp/react-ui-kit/lib/types"
   - "src/script/components/calling/CallParticipantsListItem/CallParticipantItemContent/CallParticipantItemContent.tsx:66:34          UNFOCUSABLE     U       tabIndex={TabIndex.UNFOCUSABLE}"
@@ -1522,8 +1523,8 @@ issues:
   - "src/script/event/EventRepository.ts:68:38       MILLIS              U       EVENT_LIFETIME: TIME_IN_MILLIS.SECOND * 30,"
   - "src/script/event/EventRepository.ts:130:26      Connectivitity      U       private readonly updateConnectivitityStatus = (state: ConnectionSta"
   - "src/script/event/EventRepository.ts:206:24      Connectivitity      U       this.updateConnectivitityStatus(connectionState"
-  - "src/script/event/EventRepository.ts:404:17      Outated             U       208, // Outated event decyption error"
-  - "src/script/event/EventRepository.ts:404:31      decyption           U       8, // Outated event decyption error (see https://github"
+  - "src/script/event/EventRepository.ts:410:17      Outated             U       208, // Outated event decyption error"
+  - "src/script/event/EventRepository.ts:410:31      decyption           U       8, // Outated event decyption error (see https://github"
   - "src/script/event/EventService.ts:20:36          wireapp     U       CONVERSATION_EVENT} from '@wireapp/api-client/lib/event"
   - "src/script/event/EventService.ts:21:29          wireapp     U       QualifiedId} from '@wireapp/api-client/lib/user"
   - "src/script/event/EventService.ts:22:14          Dexie       U       import type {Dexie} from 'dexie';"
@@ -1970,8 +1971,9 @@ issues:
   - "src/script/page/LeftSidebar/panels/Conversations/Conversations.tsx:23:26        tsyringe        U       import {container} from 'tsyringe';"
   - "src/script/page/LeftSidebar/panels/Conversations/Conversations.tsx:25:56        wireapp         U       useMatchMedia} from '@wireapp/react-ui-kit';"
   - "src/script/page/LeftSidebar/panels/Conversations/Conversations.tsx:26:30        wireapp         U       WebAppEvents} from '@wireapp/webapp-events';"
-  - "src/script/page/LeftSidebar/panels/Conversations/Conversations.tsx:230:64       favorited       U       ddEventListener('conversation-favorited', openFavorites);"
-  - "src/script/page/LeftSidebar/panels/Conversations/Conversations.tsx:232:69       favorited       U       veEventListener('conversation-favorited', openFavorites);"
+  - "src/script/page/LeftSidebar/panels/Conversations/Conversations.tsx:192:76       UNCOLLAPSE      U       EventName.UI.SIDEBAR_UNCOLLAPSE,"
+  - "src/script/page/LeftSidebar/panels/Conversations/Conversations.tsx:236:64       favorited       U       ddEventListener('conversation-favorited', openFavorites);"
+  - "src/script/page/LeftSidebar/panels/Conversations/Conversations.tsx:238:69       favorited       U       veEventListener('conversation-favorited', openFavorites);"
   - "src/script/page/LeftSidebar/panels/Conversations/ConversationsList.test.tsx:21:57       wireapp     U       CONVERSATION_TYPE} from '@wireapp/api-client/lib/conversation"
   - "src/script/page/LeftSidebar/panels/Conversations/ConversationsList.test.tsx:104:11      unser       U       const unserNames = ['Alice', 'Bob"
   - "src/script/page/LeftSidebar/panels/Conversations/ConversationsList.test.tsx:105:27      unser       U       const conversations = unserNames.map(create1to1Conversati"
@@ -2090,7 +2092,7 @@ issues:
   - "src/script/page/RightSidebar/ConversationDetails/ConversationDetails.tsx:26:26          wireapp     U       import {HideIcon} from '@wireapp/react-ui-kit';"
   - "src/script/page/RightSidebar/ConversationDetails/ConversationDetails.tsx:27:30          wireapp     U       WebAppEvents} from '@wireapp/webapp-events';"
   - "src/script/page/RightSidebar/ConversationDetails/utils/getConversationActions.ts:22:30          wireapp     U       WebAppEvents} from '@wireapp/webapp-events';"
-  - "src/script/page/RightSidebar/ConversationDetails/utils/getConversationActions.ts:119:39         Leavable    U       conversationEntity.isLeavable() && roleRepository"
+  - "src/script/page/RightSidebar/ConversationDetails/utils/getConversationActions.ts:145:39         Leavable    U       conversationEntity.isLeavable() && roleRepository"
   - "src/script/page/RightSidebar/GroupParticipantService/GroupParticipantService.tsx:22:26          wireapp     U       import {TabIndex} from '@wireapp/react-ui-kit/lib/types"
   - "src/script/page/RightSidebar/GroupParticipantUser/GroupParticipantUser.tsx:22:60        wireapp     U       DefaultRole} from '@wireapp/api-client/lib/conversation"
   - "src/script/page/RightSidebar/GroupParticipantUser/GroupParticipantUser.tsx:23:26        wireapp     U       import {TabIndex} from '@wireapp/react-ui-kit/lib/types"
@@ -2392,6 +2394,8 @@ issues:
   - "src/script/tracking/Countly.helpers.ts:54:11        Countly     U       const isCountlyEnabled ="
   - "src/script/tracking/Countly.helpers.ts:55:7         COUNTLY     U       !!COUNTLY_API_KEY && allowedBackendUrls"
   - "src/script/tracking/Countly.helpers.ts:57:12        Countly     U       return isCountlyEnabled;"
+  - "src/script/tracking/EventName.ts:41:13          UNCOLLAPSE      U       SIDEBAR_UNCOLLAPSE: 'ui.sidebar_uncollapse"
+  - "src/script/tracking/EventName.ts:41:37          uncollapse      U       UNCOLLAPSE: 'ui.sidebar_uncollapse',"
   - "src/script/tracking/EventTrackingRepository.ts:21:26        tsyringe            U       import {container} from 'tsyringe';"
   - "src/script/tracking/EventTrackingRepository.ts:23:30        wireapp             U       WebAppEvents} from '@wireapp/webapp-events';"
   - "src/script/tracking/EventTrackingRepository.ts:35:5         Countly             U       isCountlyEnabledAtCurrentEnvironment"
@@ -2523,16 +2527,16 @@ issues:
   - "src/script/util/DebugUtil.ts:36:8           keyboardjs          U       import keyboardjs from 'keyboardjs';"
   - "src/script/util/DebugUtil.ts:36:25          keyboardjs          U       import keyboardjs from 'keyboardjs';"
   - "src/script/util/DebugUtil.ts:38:26          tsyringe            U       import {container} from 'tsyringe';"
-  - "src/script/util/DebugUtil.ts:43:17          MILLIS              U       import {TIME_IN_MILLIS} from './TimeUtil';"
-  - "src/script/util/DebugUtil.ts:67:56          Countly             U       rReporting} from '../tracking/Countly.helpers';"
-  - "src/script/util/DebugUtil.ts:86:19          Dexie               U       public readonly Dexie: typeof Dexie;"
-  - "src/script/util/DebugUtil.ts:86:33          Dexie               U       readonly Dexie: typeof Dexie;"
-  - "src/script/util/DebugUtil.ts:98:10          Dexie               U       this.Dexie = Dexie;"
-  - "src/script/util/DebugUtil.ts:98:18          Dexie               U       this.Dexie = Dexie;"
-  - "src/script/util/DebugUtil.ts:113:5          keyboardjs          U       keyboardjs.bind(['command+shift"
-  - "src/script/util/DebugUtil.ts:298:7          finalise            U       finaliseRegardlessAfter: new"
-  - "src/script/util/DebugUtil.ts:298:62         MILLIS              U       Date.now() + TIME_IN_MILLIS.YEAR).toISOString()"
-  - "src/script/util/DebugUtil.ts:321:20         programatically     U       * will allow to programatically add text in the message"
+  - "src/script/util/DebugUtil.ts:44:17          MILLIS              U       import {TIME_IN_MILLIS} from './TimeUtil';"
+  - "src/script/util/DebugUtil.ts:68:56          Countly             U       rReporting} from '../tracking/Countly.helpers';"
+  - "src/script/util/DebugUtil.ts:87:19          Dexie               U       public readonly Dexie: typeof Dexie;"
+  - "src/script/util/DebugUtil.ts:87:33          Dexie               U       readonly Dexie: typeof Dexie;"
+  - "src/script/util/DebugUtil.ts:99:10          Dexie               U       this.Dexie = Dexie;"
+  - "src/script/util/DebugUtil.ts:99:18          Dexie               U       this.Dexie = Dexie;"
+  - "src/script/util/DebugUtil.ts:114:5          keyboardjs          U       keyboardjs.bind(['command+shift"
+  - "src/script/util/DebugUtil.ts:299:7          finalise            U       finaliseRegardlessAfter: new"
+  - "src/script/util/DebugUtil.ts:299:62         MILLIS              U       Date.now() + TIME_IN_MILLIS.YEAR).toISOString()"
+  - "src/script/util/DebugUtil.ts:322:20         programatically     U       * will allow to programatically add text in the message"
   - "src/script/util/DOM/overlayedObserver.test.ts:20:9          overlayed       U       import {overlayedObserver} from './overlayedObs"
   - "src/script/util/DOM/overlayedObserver.test.ts:20:36         overlayed       U       overlayedObserver} from './overlayedObserver';"
   - "src/script/util/DOM/overlayedObserver.test.ts:22:11         overlayed       U       describe('overlayedObserver', () => {"

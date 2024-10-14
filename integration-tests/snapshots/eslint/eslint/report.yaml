@@ -3,9 +3,9 @@ Repository: eslint/eslint
 Url: https://github.com/eslint/eslint
 Args: '[".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]'
 Summary:
-  files: 2016
-  filesWithIssues: 322
-  issues: 1716
+  files: 2017
+  filesWithIssues: 324
+  issues: 1718
   errors: 0
 Errors: []
 
@@ -60,7 +60,7 @@ issues:
   - "docs/src/extend/selectors.md:140:405        Fpath       U       so: `[value=/some\\u002Fpath/]`."
   - "docs/src/extend/shareable-configs-deprecated.md:19:55       myconfig    U       such as `eslint-config-myconfig`."
   - "docs/src/integrate/nodejs-api.md:209:35         omittable       U       parameter `options` is omittable."
-  - "docs/src/integrate/nodejs-api.md:532:35         Fvar            U       new SourceCode(\"\\uFEFFvar foo = bar;\", ast);"
+  - "docs/src/integrate/nodejs-api.md:542:35         Fvar            U       new SourceCode(\"\\uFEFFvar foo = bar;\", ast);"
   - "docs/src/maintain/manage-issues.md:32:4         Triaging    U       ## Triaging Process"
   - "docs/src/maintain/manage-releases.md:107:103        eslintbot       U       token is tied to the `eslintbot` npm account and needs"
   - "docs/src/maintain/overview.md:33:6          Stackaid    U       * [**Stackaid.us**](https://simulation"
@@ -303,16 +303,16 @@ issues:
   - "tests/lib/config/flat-config-array.js:2127:30       doesnt (doesn't)    U       \"doesnt-exist/match\": \"error"
   - "tests/lib/config/flat-config-schema.js:19:50        reults      U       expectedResult] The expected reults of merging first and"
   - "tests/lib/config/flat-config-schema.js:46:20        emtpy       U       it(\"returns an emtpy object if both values"
-  - "tests/lib/eslint/eslint.js:1318:43      myjs                    U       files: [\"**/*.myjs\"],"
-  - "tests/lib/eslint/eslint.js:1899:61      doesnotexist            U       lintFiles([\"subdir1\", \"doesnotexist/*.js\"]);"
-  - "tests/lib/eslint/eslint.js:1979:62      doesexist               U       await eslint.lintFiles([\"doesexist/*.js\"]);"
-  - "tests/lib/eslint/eslint.js:2622:75      unignoring              U       unignored without also unignoring all files in them\","
-  - "tests/lib/eslint/eslint.js:2637:51      jsfmt                   U       \"!tests/format/**/jsfmt.spec.js\""
-  - "tests/lib/eslint/eslint.js:5684:44      mcts                    U       \"eslint.config.mcts\": configFileContent"
-  - "tests/lib/eslint/eslint.js:7482:35      dignore                 U       cwd: `${root}-dignore`,"
-  - "tests/lib/eslint/eslint.js:8898:35      previos                 U       make sure that the previos assertion checks the"
-  - "tests/lib/eslint/eslint.js:8951:55      intenationally          U       cacheFilePath, \"[]\"); // intenationally invalid to additionally"
-  - "tests/lib/eslint/eslint.js:9121:55      occured (occurred)      U       the previous run that occured after the cache was"
+  - "tests/lib/eslint/eslint.js:1378:43      myjs                    U       files: [\"**/*.myjs\"],"
+  - "tests/lib/eslint/eslint.js:1959:61      doesnotexist            U       lintFiles([\"subdir1\", \"doesnotexist/*.js\"]);"
+  - "tests/lib/eslint/eslint.js:2039:62      doesexist               U       await eslint.lintFiles([\"doesexist/*.js\"]);"
+  - "tests/lib/eslint/eslint.js:2682:75      unignoring              U       unignored without also unignoring all files in them\","
+  - "tests/lib/eslint/eslint.js:2697:51      jsfmt                   U       \"!tests/format/**/jsfmt.spec.js\""
+  - "tests/lib/eslint/eslint.js:5744:44      mcts                    U       \"eslint.config.mcts\": configFileContent"
+  - "tests/lib/eslint/eslint.js:7597:35      dignore                 U       cwd: `${root}-dignore`,"
+  - "tests/lib/eslint/eslint.js:9013:35      previos                 U       make sure that the previos assertion checks the"
+  - "tests/lib/eslint/eslint.js:9066:55      intenationally          U       cacheFilePath, \"[]\"); // intenationally invalid to additionally"
+  - "tests/lib/eslint/eslint.js:9236:55      occured (occurred)      U       the previous run that occured after the cache was"
   - "tests/lib/eslint/legacy-eslint.js:2536:24       succesfully (successfully)      U       it(\"should succesfully execute with a rule"
   - "tests/lib/linter/linter.js:3287:1       consolexlog         U       consolexlog(\"test2\");"
   - "tests/lib/linter/linter.js:3431:84      rulename            U       this is 2, since the rulename is very likely to be"
@@ -890,7 +890,7 @@ issuesSummary:
   - "text: nodeca, count: 1, files: 1,"
   - "text: NONBLANK, count: 2, files: 1,"
   - "text: nonblock, count: 10, files: 4,"
-  - "text: nonconstructor, count: 13, files: 8,"
+  - "text: nonconstructor, count: 15, files: 10,"
   - "text: Nonconstructor, count: 2, files: 1,"
   - "text: noneval, count: 1, files: 1,"
   - "text: nonew, count: 2, files: 1,"

@@ -3,7 +3,7 @@ Repository: vitest-dev/vitest
 Url: "https://github.com/vitest-dev/vitest"
 Args: ["--issues-summary-report","--locale=en,en-GB","."]
 Lines:
- CSpell: Files checked: 1800, Issues found: 1310 in 315 files.
+ CSpell: Files checked: 1813, Issues found: 1337 in 315 files.
  exit code: 1
 LICENSE:3:28      - Unknown word (Vitest)     -- Copyright (c) 2021-Present Vitest Team
 README.md:111:5     - Unknown word (patak)      -- - [@patak-dev](https://github
@@ -25,8 +25,8 @@ docs/api/expect.md:1364:28   - Unknown word (closeto)             -- expect.clos
 docs/api/expect.md:1562:39   - Unknown word (addequalitytesters)  -- addEqualityTesters {#expect-addequalitytesters}
 docs/api/expect.md:586:11    - Unknown word (applefruits) -- expect('applefruits').toMatch('fruit')
 docs/api/expect.md:773:26    - Unknown word (tomatchfilesnapshot) -- toMatchFileSnapshot {#tomatchfilesnapshot}
-docs/api/index.md:1005:22   - Unknown word (ontestfinished) -- ## onTestFinished {#ontestfinished}
-docs/api/index.md:999:123   - Unknown word (runnning)   -- the test has finished runnning.
+docs/api/index.md:1004:123  - Unknown word (runnning)   -- the test has finished runnning.
+docs/api/index.md:1010:22   - Unknown word (ontestfinished) -- ## onTestFinished {#ontestfinished}
 docs/api/mock.md:63:7      - Unknown word (Nellies)    -- const NelliesBucket = mockFn(0)
 docs/api/vi.md:438:39    - Unknown word (methonds)   -- possible to spy on exported methonds in [Browser Mode](/guide
 docs/api/vi.md:454:21    - Unknown word (stubenv)    -- ### vi.stubEnv {#vi-stubenv}
@@ -66,10 +66,10 @@ docs/guide/browser/assertion-api.md:67:293    - Unknown word (retriable)  -- pur
 docs/guide/browser/commands.md:130:120   - Unknown word (simillar)   -- class-frame). It has a simillar API to the `page`, but
 docs/guide/browser/context.md:36:3      - Unknown word (unhover)    -- unhover: (element: Element,
 docs/guide/browser/index.md:28:1      - Unknown word (bunx)       -- bunx vitest init browser
-docs/guide/browser/index.md:314:123   - Unknown word (headlessly) -- UI but have tests run headlessly, you can install the
-docs/guide/browser/index.md:431:6     - Unknown word (solidjs)    -- - [`@solidjs/testing-library`](https
-docs/guide/browser/index.md:470:4     - Unknown word (baed)       -- // baed on @testing-library
-docs/guide/browser/index.md:504:59    - Unknown word (Marko)      -- render(Greeting, { name: 'Marko' })
+docs/guide/browser/index.md:318:123   - Unknown word (headlessly) -- UI but have tests run headlessly, you can install the
+docs/guide/browser/index.md:435:6     - Unknown word (solidjs)    -- - [`@solidjs/testing-library`](https
+docs/guide/browser/index.md:474:4     - Unknown word (baed)       -- // baed on @testing-library
+docs/guide/browser/index.md:508:59    - Unknown word (Marko)      -- render(Greeting, { name: 'Marko' })
 docs/guide/browser/interactivity-api.md:119:24    - Unknown word (dblclick)   -- Playwright `locator.dblclick` API](https://playwright
 docs/guide/browser/interactivity-api.md:132:65    - Unknown word (tripleclick) -- Since there is no `tripleclick` in browser api, this
 docs/guide/browser/interactivity-api.md:171:36    - Unknown word (conteneditable) -- the `input/textarea/conteneditable` field. This will remove
@@ -185,13 +185,13 @@ packages/browser/src/node/providers/playwright.ts:148:20    - Unknown word (fram
 packages/browser/src/node/providers/playwright.ts:172:16    - Unknown word (requestfailed) -- page.on('requestfailed', (request) => {
 packages/browser/src/node/server.ts:197:38    - Unknown word (cdps)       -- cachedHandler = this.state.cdps.get(sessionId)
 packages/coverage-istanbul/package.json:54:6      - Unknown word (magicast)   -- "magicast": "^0.3.4",
-packages/coverage-istanbul/src/provider.ts:28:15     - Unknown word (Instrumenter) -- import { type Instrumenter, createInstrumenter
-packages/coverage-istanbul/src/provider.ts:86:3      - Unknown word (instrumenter) -- instrumenter!: Instrumenter
+packages/coverage-istanbul/src/provider.ts:13:15     - Unknown word (Instrumenter) -- import { type Instrumenter, createInstrumenter
+packages/coverage-istanbul/src/provider.ts:25:3      - Unknown word (instrumenter) -- instrumenter!: Instrumenter
 packages/coverage-v8/package.json:57:7      - Unknown word (ampproject) -- "@ampproject/remapping": "^2.3.0
 packages/coverage-v8/package.json:58:7      - Unknown word (bcoe)       -- "@bcoe/v8-coverage": "^0.2
-packages/coverage-v8/src/provider.ts:10:22     - Unknown word (Covs)       -- import { mergeProcessCovs } from '@bcoe/v8-coverage
-packages/coverage-v8/src/provider.ts:401:16    - Unknown word (vitenode)   -- this.ctx.vitenode.fetchCache,
-packages/coverage-v8/src/provider.ts:91:28     - Unknown word (paramtypes) -- ts_metadata\("design:paramtypes", \[[^\]]*\]\),*/g
+packages/coverage-v8/src/provider.ts:152:16    - Unknown word (vitenode)   -- this.ctx.vitenode.fetchCache,
+packages/coverage-v8/src/provider.ts:37:28     - Unknown word (paramtypes) -- ts_metadata\("design:paramtypes", \[[^\]]*\]\),*/g
+packages/coverage-v8/src/provider.ts:5:22      - Unknown word (Covs)       -- import { mergeProcessCovs } from '@bcoe/v8-coverage
 packages/expect/rollup.config.js:43:5      - Unknown word (onwarn)     -- onwarn,
 packages/expect/src/jest-expect.ts:88:72     - Unknown word (ssfi)       -- error, utils.flag(this, 'ssfi'))
 packages/expect/src/jest-utils.ts:705:58    - Unknown word (irrelavant) -- subset to avoid showing irrelavant toMatchObject diff
@@ -260,82 +260,92 @@ packages/vite-node/src/source-map-handler.ts:493:24    - Unknown word (reformatt
 packages/vite-node/src/source-map.ts:11:5      - Unknown word (SOURCEMAPPING) -- let SOURCEMAPPING_URL = 'sourceMa'
 packages/vite-node/src/source-map.ts:12:23     - Unknown word (pping)         -- SOURCEMAPPING_URL += 'ppingURL'
 packages/vite-node/src/source-map.ts:67:26     - Unknown word (CAAA)          -- map.mappings = `AAAA,CAAA${map.mappings}`
-packages/vite-node/src/types.ts:136:11    - Unknown word (dumpped)    -- * Read dumpped module from filesystem
+packages/vite-node/src/types.ts:137:11    - Unknown word (dumpped)    -- * Read dumpped module from filesystem
 packages/vite-node/src/utils.ts:16:20     - Unknown word (Regext)     -- const driveOppositeRegext = driveOpposite
 packages/vite-node/src/utils.ts:174:32    - Unknown word (Fnpd)       -- pkgData = cache.get(getFnpdCacheKey(basedir))
 packages/vite-node/src/utils.ts:196:11    - Unknown word (fnpd)       -- return `fnpd_${basedir}`
-packages/vitest/LICENSE.md:1070:12   - Unknown word (Gjervig)        -- By: Terkel Gjervig
-packages/vitest/LICENSE.md:1071:13   - Unknown word (terkelg)        -- Repository: terkelg/prompts
-packages/vitest/LICENSE.md:1167:4    - Unknown word (sisteransi)     -- ## sisteransi
-packages/vitest/LICENSE.md:117:12    - Unknown word (Haverbeke)  -- By: Marijn Haverbeke, Ingvar Stepanyan, Adrian
-packages/vitest/LICENSE.md:117:23    - Unknown word (Ingvar)     -- By: Marijn Haverbeke, Ingvar Stepanyan, Adrian Heine
-packages/vitest/LICENSE.md:117:30    - Unknown word (Stepanyan)  -- Marijn Haverbeke, Ingvar Stepanyan, Adrian Heine
-packages/vitest/LICENSE.md:117:5     - Unknown word (Marijn)     -- By: Marijn Haverbeke, Ingvar Stepanyan
-packages/vitest/LICENSE.md:1278:5    - Unknown word (Superchupu)     -- By: Superchupu
-packages/vitest/LICENSE.md:1283:31   - Unknown word (Gurriarán)      -- Copyright (c) 2024 Madeline Gurriarán
-packages/vitest/LICENSE.md:1330:10   - Unknown word (Luer)           -- By: Jake Luer, Keith Cirkel, David
-packages/vitest/LICENSE.md:1330:111  - Unknown word (Tice)           -- Grant Snodgrass, Jeremy Tice, Edward Betts, dvlsg
-packages/vitest/LICENSE.md:1330:124  - Unknown word (Betts)          -- Jeremy Tice, Edward Betts, dvlsg, Amila Welihinda
-packages/vitest/LICENSE.md:1330:131  - Unknown word (dvlsg)          -- Tice, Edward Betts, dvlsg, Amila Welihinda, Jake
-packages/vitest/LICENSE.md:1330:170  - Unknown word (Miroslav)       -- Welihinda, Jake Champion, Miroslav Bajtoš
-packages/vitest/LICENSE.md:1330:179  - Unknown word (Bajtoš)         -- Jake Champion, Miroslav Bajtoš
-packages/vitest/LICENSE.md:1330:22   - Unknown word (Cirkel)         -- By: Jake Luer, Keith Cirkel, David Losert, Aleksey
-packages/vitest/LICENSE.md:1330:36   - Unknown word (Losert)         -- Keith Cirkel, David Losert, Aleksey Shvayka, Lucas
-packages/vitest/LICENSE.md:1330:44   - Unknown word (Aleksey)        -- Cirkel, David Losert, Aleksey Shvayka, Lucas Fernandes
-packages/vitest/LICENSE.md:1330:52   - Unknown word (Shvayka)        -- David Losert, Aleksey Shvayka, Lucas Fernandes da
-packages/vitest/LICENSE.md:1331:38   - Unknown word (chaijs)         -- ssh://git@github.com/chaijs/type-detect.git
-packages/vitest/LICENSE.md:1402:16   - Unknown word (Stangvik)       -- By: Einar Otto Stangvik
-packages/vitest/LICENSE.md:1402:5    - Unknown word (Einar)          -- By: Einar Otto Stangvik
-packages/vitest/LICENSE.md:1406:22   - Unknown word (Arnout)         -- Copyright (c) 2013 Arnout Kazemier and contributors
-packages/vitest/LICENSE.md:1406:29   - Unknown word (Kazemier)       -- Copyright (c) 2013 Arnout Kazemier and contributors
-packages/vitest/LICENSE.md:1407:28   - Unknown word (Pinca)          -- Copyright (c) 2016 Luigi Pinca and contributors
-packages/vitest/LICENSE.md:1428:4    - Unknown word (yocto)          -- ## yocto-queue
-packages/vitest/LICENSE.md:146:12    - Unknown word (Sorhus)     -- By: Sindre Sorhus
-packages/vitest/LICENSE.md:146:5     - Unknown word (Sindre)     -- By: Sindre Sorhus
-packages/vitest/LICENSE.md:147:13    - Unknown word (sindresorhus) -- Repository: sindresorhus/ansi-escapes
-packages/vitest/LICENSE.md:226:42    - Unknown word (Shanker)      -- Brian Woodward, Elan Shanker, Eugene Sharygin, hemanth
-packages/vitest/LICENSE.md:226:58    - Unknown word (Sharygin)     -- Elan Shanker, Eugene Sharygin, hemanth.hm
-packages/vitest/LICENSE.md:226:68    - Unknown word (hemanth)      -- Shanker, Eugene Sharygin, hemanth.hm
-packages/vitest/LICENSE.md:226:9     - Unknown word (Schlinkert)   -- By: Jon Schlinkert, Brian Woodward, Elan
-packages/vitest/LICENSE.md:284:12    - Unknown word (Shumada)      -- By: Andrii Shumada, Robert Herhold
-packages/vitest/LICENSE.md:284:28    - Unknown word (Herhold)      -- Andrii Shumada, Robert Herhold
-packages/vitest/LICENSE.md:284:5     - Unknown word (Andrii)       -- By: Andrii Shumada, Robert Herhold
-packages/vitest/LICENSE.md:345:4     - Unknown word (eastasianwidth) -- ## eastasianwidth
-packages/vitest/LICENSE.md:347:12    - Unknown word (Komagata)       -- By: Masaki Komagata
-packages/vitest/LICENSE.md:347:5     - Unknown word (Masaki)         -- By: Masaki Komagata
-packages/vitest/LICENSE.md:348:30    - Unknown word (komagata)       -- Repository: git://github.com/komagata/eastasianwidth.git
-packages/vitest/LICENSE.md:354:13    - Unknown word (Bynens)         -- By: Mathias Bynens
-packages/vitest/LICENSE.md:588:4     - Unknown word (fdir)           -- ## fdir
-packages/vitest/LICENSE.md:590:5     - Unknown word (thecodrr)       -- By: thecodrr
-packages/vitest/LICENSE.md:593:27    - Unknown word (Atta)           -- Copyright 2023 Abdullah Atta
-packages/vitest/LICENSE.md:605:25    - Unknown word (Rivai)          -- Jon Schlinkert, Edo Rivai, Paul Miller, Rouven
-packages/vitest/LICENSE.md:605:45    - Unknown word (Rouven)         -- Rivai, Paul Miller, Rouven Weßling
-packages/vitest/LICENSE.md:605:52    - Unknown word (Weßling)        -- Paul Miller, Rouven Weßling
-packages/vitest/LICENSE.md:606:13    - Unknown word (jonschlinkert)  -- Repository: jonschlinkert/fill-range
-packages/vitest/LICENSE.md:651:12    - Unknown word (Giammarchi)     -- By: Andrea Giammarchi
-packages/vitest/LICENSE.md:691:12    - Unknown word (Osame)          -- By: Hiroki Osame
-packages/vitest/LICENSE.md:692:13    - Unknown word (privatenumber)  -- Repository: privatenumber/get-tsconfig
-packages/vitest/LICENSE.md:718:7     - Unknown word (fullwidth)      -- ## is-fullwidth-code-point
-packages/vitest/LICENSE.md:737:21    - Unknown word (Olsten)         -- By: Jon Schlinkert, Olsten Larck, Rouven Weßling
-packages/vitest/LICENSE.md:737:28    - Unknown word (Larck)          -- Jon Schlinkert, Olsten Larck, Rouven Weßling
-packages/vitest/LICENSE.md:766:11    - Unknown word (Lydell)         -- By: Simon Lydell
-packages/vitest/LICENSE.md:767:13    - Unknown word (lydell)         -- Repository: lydell/js-tokens
-packages/vitest/LICENSE.md:796:13    - Unknown word (lukeed)         -- Repository: lukeed/kleur
-packages/vitest/LICENSE.md:887:107   - Unknown word (Matté)          -- Elan Shanker, Fabrício Matté, Martin Kolárik, Olsten
-packages/vitest/LICENSE.md:887:121   - Unknown word (Kolárik)        -- Fabrício Matté, Martin Kolárik, Olsten Larck, Paul
-packages/vitest/LICENSE.md:887:161   - Unknown word (Byrer)          -- Larck, Paul Miller, Tom Byrer, Tyler Akins, Peter
-packages/vitest/LICENSE.md:887:174   - Unknown word (Akins)          -- Miller, Tom Byrer, Tyler Akins, Peter Bright, Kuba
-packages/vitest/LICENSE.md:887:195   - Unknown word (Kuba)           -- Akins, Peter Bright, Kuba Juszczyk
-packages/vitest/LICENSE.md:887:200   - Unknown word (Juszczyk)       -- Peter Bright, Kuba Juszczyk
-packages/vitest/LICENSE.md:887:21    - Unknown word (Amila)          -- By: Jon Schlinkert, Amila Welihinda, Bogdan Chadkin
-packages/vitest/LICENSE.md:887:27    - Unknown word (Welihinda)      -- Jon Schlinkert, Amila Welihinda, Bogdan Chadkin, Brian
-packages/vitest/LICENSE.md:887:38    - Unknown word (Bogdan)         -- Schlinkert, Amila Welihinda, Bogdan Chadkin, Brian Woodward
-packages/vitest/LICENSE.md:887:45    - Unknown word (Chadkin)        -- Amila Welihinda, Bogdan Chadkin, Brian Woodward, Devon
-packages/vitest/LICENSE.md:887:76    - Unknown word (Govett)         -- Brian Woodward, Devon Govett, Elan Shanker, Fabr
-packages/vitest/LICENSE.md:887:98    - Unknown word (Fabrício)       -- Govett, Elan Shanker, Fabrício Matté, Martin Kolárik
-packages/vitest/LICENSE.md:933:13    - Unknown word (unjs)           -- Repository: unjs/mlly
-packages/vitest/LICENSE.md:937:17    - Unknown word (Pooya)          -- > Copyright (c) Pooya Parsa <pooya@pi0.io
-packages/vitest/LICENSE.md:937:23    - Unknown word (Parsa)          -- Copyright (c) Pooya Parsa <pooya@pi0.io>
+packages/vitest/LICENSE.md:1087:28   - Unknown word (teambition)     -- Repository: git@github.com:teambition/merge2.git
+packages/vitest/LICENSE.md:1091:27   - Unknown word (Teambition)     -- Copyright (c) 2014-2020 Teambition
+packages/vitest/LICENSE.md:1115:107  - Unknown word (Matté)          -- Elan Shanker, Fabrício Matté, Martin Kolárik, Olsten
+packages/vitest/LICENSE.md:1115:121  - Unknown word (Kolárik)        -- Fabrício Matté, Martin Kolárik, Olsten Larck, Paul
+packages/vitest/LICENSE.md:1115:161  - Unknown word (Byrer)          -- Larck, Paul Miller, Tom Byrer, Tyler Akins, Peter
+packages/vitest/LICENSE.md:1115:174  - Unknown word (Akins)          -- Miller, Tom Byrer, Tyler Akins, Peter Bright, Kuba
+packages/vitest/LICENSE.md:1115:195  - Unknown word (Kuba)           -- Akins, Peter Bright, Kuba Juszczyk
+packages/vitest/LICENSE.md:1115:200  - Unknown word (Juszczyk)       -- Peter Bright, Kuba Juszczyk
+packages/vitest/LICENSE.md:1115:21   - Unknown word (Amila)          -- By: Jon Schlinkert, Amila Welihinda, Bogdan Chadkin
+packages/vitest/LICENSE.md:1115:27   - Unknown word (Welihinda)      -- Jon Schlinkert, Amila Welihinda, Bogdan Chadkin, Brian
+packages/vitest/LICENSE.md:1115:38   - Unknown word (Bogdan)         -- Schlinkert, Amila Welihinda, Bogdan Chadkin, Brian Woodward
+packages/vitest/LICENSE.md:1115:45   - Unknown word (Chadkin)        -- Amila Welihinda, Bogdan Chadkin, Brian Woodward, Devon
+packages/vitest/LICENSE.md:1115:76   - Unknown word (Govett)         -- Brian Woodward, Devon Govett, Elan Shanker, Fabr
+packages/vitest/LICENSE.md:1115:98   - Unknown word (Fabrício)       -- Govett, Elan Shanker, Fabrício Matté, Martin Kolárik
+packages/vitest/LICENSE.md:1161:13   - Unknown word (unjs)           -- Repository: unjs/mlly
+packages/vitest/LICENSE.md:1165:17   - Unknown word (Pooya)          -- > Copyright (c) Pooya Parsa <pooya@pi0.io
+packages/vitest/LICENSE.md:1165:23   - Unknown word (Parsa)          -- Copyright (c) Pooya Parsa <pooya@pi0.io>
+packages/vitest/LICENSE.md:1298:12   - Unknown word (Gjervig)        -- By: Terkel Gjervig
+packages/vitest/LICENSE.md:1299:13   - Unknown word (terkelg)        -- Repository: terkelg/prompts
+packages/vitest/LICENSE.md:1327:12   - Unknown word (Aboukhadijeh)   -- By: Feross Aboukhadijeh
+packages/vitest/LICENSE.md:1327:5    - Unknown word (Feross)         -- By: Feross Aboukhadijeh
+packages/vitest/LICENSE.md:1328:30   - Unknown word (feross)         -- Repository: git://github.com/feross/queue-microtask.git
+packages/vitest/LICENSE.md:1399:4    - Unknown word (reusify)        -- ## reusify
+packages/vitest/LICENSE.md:1480:4    - Unknown word (sisteransi)     -- ## sisteransi
+packages/vitest/LICENSE.md:1620:10   - Unknown word (Luer)           -- By: Jake Luer, Keith Cirkel, David
+packages/vitest/LICENSE.md:1620:111  - Unknown word (Tice)           -- Grant Snodgrass, Jeremy Tice, Edward Betts, dvlsg
+packages/vitest/LICENSE.md:1620:124  - Unknown word (Betts)          -- Jeremy Tice, Edward Betts, dvlsg, Amila Welihinda
+packages/vitest/LICENSE.md:1620:131  - Unknown word (dvlsg)          -- Tice, Edward Betts, dvlsg, Amila Welihinda, Jake
+packages/vitest/LICENSE.md:1620:170  - Unknown word (Miroslav)       -- Welihinda, Jake Champion, Miroslav Bajtoš
+packages/vitest/LICENSE.md:1620:179  - Unknown word (Bajtoš)         -- Jake Champion, Miroslav Bajtoš
+packages/vitest/LICENSE.md:1620:22   - Unknown word (Cirkel)         -- By: Jake Luer, Keith Cirkel, David Losert, Aleksey
+packages/vitest/LICENSE.md:1620:36   - Unknown word (Losert)         -- Keith Cirkel, David Losert, Aleksey Shvayka, Lucas
+packages/vitest/LICENSE.md:1620:44   - Unknown word (Aleksey)        -- Cirkel, David Losert, Aleksey Shvayka, Lucas Fernandes
+packages/vitest/LICENSE.md:1620:52   - Unknown word (Shvayka)        -- David Losert, Aleksey Shvayka, Lucas Fernandes da
+packages/vitest/LICENSE.md:1621:38   - Unknown word (chaijs)         -- ssh://git@github.com/chaijs/type-detect.git
+packages/vitest/LICENSE.md:1692:16   - Unknown word (Stangvik)       -- By: Einar Otto Stangvik
+packages/vitest/LICENSE.md:1692:5    - Unknown word (Einar)          -- By: Einar Otto Stangvik
+packages/vitest/LICENSE.md:1696:22   - Unknown word (Arnout)         -- Copyright (c) 2013 Arnout Kazemier and contributors
+packages/vitest/LICENSE.md:1696:29   - Unknown word (Kazemier)       -- Copyright (c) 2013 Arnout Kazemier and contributors
+packages/vitest/LICENSE.md:1697:28   - Unknown word (Pinca)          -- Copyright (c) 2016 Luigi Pinca and contributors
+packages/vitest/LICENSE.md:1718:4    - Unknown word (yocto)          -- ## yocto-queue
+packages/vitest/LICENSE.md:201:12    - Unknown word (Haverbeke)   -- By: Marijn Haverbeke, Ingvar Stepanyan, Adrian
+packages/vitest/LICENSE.md:201:23    - Unknown word (Ingvar)      -- By: Marijn Haverbeke, Ingvar Stepanyan, Adrian Heine
+packages/vitest/LICENSE.md:201:30    - Unknown word (Stepanyan)   -- Marijn Haverbeke, Ingvar Stepanyan, Adrian Heine
+packages/vitest/LICENSE.md:201:5     - Unknown word (Marijn)      -- By: Marijn Haverbeke, Ingvar Stepanyan
+packages/vitest/LICENSE.md:230:12    - Unknown word (Sorhus)      -- By: Sindre Sorhus
+packages/vitest/LICENSE.md:230:5     - Unknown word (Sindre)      -- By: Sindre Sorhus
+packages/vitest/LICENSE.md:231:13    - Unknown word (sindresorhus) -- Repository: sindresorhus/ansi-escapes
+packages/vitest/LICENSE.md:310:42    - Unknown word (Shanker)      -- Brian Woodward, Elan Shanker, Eugene Sharygin, hemanth
+packages/vitest/LICENSE.md:310:58    - Unknown word (Sharygin)     -- Elan Shanker, Eugene Sharygin, hemanth.hm
+packages/vitest/LICENSE.md:310:68    - Unknown word (hemanth)      -- Shanker, Eugene Sharygin, hemanth.hm
+packages/vitest/LICENSE.md:310:9     - Unknown word (Schlinkert)   -- By: Jon Schlinkert, Brian Woodward, Elan
+packages/vitest/LICENSE.md:368:12    - Unknown word (Shumada)      -- By: Andrii Shumada, Robert Herhold
+packages/vitest/LICENSE.md:368:28    - Unknown word (Herhold)      -- Andrii Shumada, Robert Herhold
+packages/vitest/LICENSE.md:368:5     - Unknown word (Andrii)       -- By: Andrii Shumada, Robert Herhold
+packages/vitest/LICENSE.md:429:4     - Unknown word (eastasianwidth) -- ## eastasianwidth
+packages/vitest/LICENSE.md:431:12    - Unknown word (Komagata)       -- By: Masaki Komagata
+packages/vitest/LICENSE.md:431:5     - Unknown word (Masaki)         -- By: Masaki Komagata
+packages/vitest/LICENSE.md:432:30    - Unknown word (komagata)       -- Repository: git://github.com/komagata/eastasianwidth.git
+packages/vitest/LICENSE.md:438:13    - Unknown word (Bynens)         -- By: Mathias Bynens
+packages/vitest/LICENSE.md:60:16     - Unknown word (scandir)    -- ## @nodelib/fs.scandir
+packages/vitest/LICENSE.md:60:5      - Unknown word (nodelib)    -- ## @nodelib/fs.scandir
+packages/vitest/LICENSE.md:66:23     - Unknown word (Malinochkin) -- Copyright (c) Denis Malinochkin
+packages/vitest/LICENSE.md:675:13    - Unknown word (mrmlnc)         -- Repository: mrmlnc/fast-glob
+packages/vitest/LICENSE.md:701:4     - Unknown word (fastq)          -- ## fastq
+packages/vitest/LICENSE.md:703:12    - Unknown word (Collina)        -- By: Matteo Collina
+packages/vitest/LICENSE.md:724:25    - Unknown word (Rivai)          -- Jon Schlinkert, Edo Rivai, Paul Miller, Rouven
+packages/vitest/LICENSE.md:724:45    - Unknown word (Rouven)         -- Rivai, Paul Miller, Rouven Weßling
+packages/vitest/LICENSE.md:724:52    - Unknown word (Weßling)        -- Paul Miller, Rouven Weßling
+packages/vitest/LICENSE.md:725:13    - Unknown word (jonschlinkert)  -- Repository: jonschlinkert/fill-range
+packages/vitest/LICENSE.md:770:12    - Unknown word (Giammarchi)     -- By: Andrea Giammarchi
+packages/vitest/LICENSE.md:810:12    - Unknown word (Osame)          -- By: Hiroki Osame
+packages/vitest/LICENSE.md:811:13    - Unknown word (privatenumber)  -- Repository: privatenumber/get-tsconfig
+packages/vitest/LICENSE.md:839:37    - Unknown word (Bublitz)        -- Elan Shanker, Blaine Bublitz
+packages/vitest/LICENSE.md:840:13    - Unknown word (gulpjs)         -- Repository: gulpjs/glob-parent
+packages/vitest/LICENSE.md:860:7     - Unknown word (extglob)        -- ## is-extglob
+packages/vitest/LICENSE.md:889:7     - Unknown word (fullwidth)      -- ## is-fullwidth-code-point
+packages/vitest/LICENSE.md:937:21    - Unknown word (Olsten)         -- By: Jon Schlinkert, Olsten Larck, Rouven Weßling
+packages/vitest/LICENSE.md:937:28    - Unknown word (Larck)          -- Jon Schlinkert, Olsten Larck, Rouven Weßling
+packages/vitest/LICENSE.md:966:11    - Unknown word (Lydell)         -- By: Simon Lydell
+packages/vitest/LICENSE.md:967:13    - Unknown word (lydell)         -- Repository: lydell/js-tokens
+packages/vitest/LICENSE.md:996:13    - Unknown word (lukeed)         -- Repository: lukeed/kleur
 packages/vitest/package.json:166:6     - Unknown word (tinyexec)   -- "tinyexec": "^0.3.0",
 packages/vitest/src/constants.ts:1:28      - Unknown word (jsdocs)     -- changed, update also jsdocs and docs
 packages/vitest/src/create/browser/creator.ts:506:27    - Unknown word (ourselved)  -- TODO: can we do this ourselved?
@@ -348,13 +358,11 @@ packages/vitest/src/node/plugins/index.ts:67:12     - Unknown word (reassignable
 packages/vitest/src/node/reporters/base.ts:254:11    - Unknown word (TESTNAME)   -- const TESTNAME_PATTERN = this.ctx.configOver
 packages/vitest/src/node/reporters/json.ts:16:11     - Unknown word (Callsite)   -- interface Callsite {
 packages/vitest/src/node/reporters/junit.ts:86:24     - Unknown word (apos)       -- .replace(/'/g, '&apos;')
-packages/vitest/src/node/reporters/reported-tasks.ts:22:18     - Unknown word (assosiacted) -- * The project assosiacted with the test or suite
+packages/vitest/src/node/reporters/reported-tasks.ts:21:18     - Unknown word (assosiacted) -- * The project assosiacted with the test or suite
 packages/vitest/src/node/sequencers/BaseSequencer.ts:15:43     - Unknown word (sequelizers) -- be extended by other sequelizers
 packages/vitest/src/node/types/config.ts:806:96    - Unknown word (synchronus) -- debug a code with normal synchronus terminal console logging
 packages/vitest/src/node/types/config.ts:831:29    - Unknown word (alongisde)  -- Run typechecking tests alongisde regular tests.
 packages/vitest/src/node/watch-filter.ts:222:11    - Unknown word (cursort)    -- const cursortPos
-packages/vitest/src/node/workspace/fast-glob-pattern.ts:11:21     - Unknown word (Malinochkin) -- Copyright (c) Denis Malinochkin
-packages/vitest/src/node/workspace/fast-glob-pattern.ts:50:15     - Unknown word (extglob)     -- if (options.extglob !== false && GLOB_EXTENSION
 packages/vitest/src/node/workspace/resolveWorkspace.ts:155:17    - Unknown word (Workpace)   -- const relativeWorkpaceConfigPath = relative
 packages/vitest/src/runtime/external-executor.ts:159:19    - Unknown word (Syntetic)   -- private wrapCoreSynteticModule(
 packages/vitest/src/runtime/external-executor.ts:287:16    - Unknown word (deadend)    -- const _deadend: never = type
@@ -365,8 +373,8 @@ packages/vitest/src/typecheck/collect.ts:238:12    - Unknown word (quasis)     -
 packages/vitest/src/types/jsdom-options.ts:14:118    - Unknown word (subresources) -- sent while fetching subresources.
 packages/vitest/src/types/jsdom-options.ts:16:70     - Unknown word (KHTML)        -- AppleWebKit/537.36 (KHTML, like Gecko) jsdom/
 packages/vitest/src/types/mocker.ts:3:6       - Unknown word (Promisable) -- type Promisable<T> = T | Promise<T>
-packages/vitest/src/utils/coverage.ts:36:35     - Unknown word (Proxified)  -- configurationFile: unknown // ProxifiedModule from magicast
-packages/vitest/src/utils/coverage.ts:393:15    - Unknown word (magicast's) -- // Reduce magicast's verbose errors to readable
+packages/vitest/src/utils/coverage.ts:398:35    - Unknown word (Proxified)  -- configurationFile: unknown // ProxifiedModule from magicast
+packages/vitest/src/utils/coverage.ts:604:15    - Unknown word (magicast's) -- // Reduce magicast's verbose errors to readable
 packages/vitest/src/utils/modules.ts:13:8      - Unknown word (cnpm)       -- // cnpm
 packages/web-worker/README.md:12:41     - Unknown word (sharedworker) -- MySharedWorker from './worker?sharedworker'`
 packages/web-worker/README.md:55:25     - Unknown word (ponyfill)     -- clone`: `'native' | 'ponyfill' | 'none'`. Defines
