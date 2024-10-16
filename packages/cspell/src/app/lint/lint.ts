@@ -530,7 +530,10 @@ async function determineGlobs(configInfo: ConfigInfo, cfg: LintRequest): Promise
     const cliExcludeGlobs = extractPatterns(cfg.excludes).map((p) => p.glob as Glob);
     const normalizedExcludes = normalizeGlobsToRoot(cliExcludeGlobs, cfg.root, true);
     const includeGlobs = combinedGlobs.filter((g) => !g.startsWith('!'));
-    const excludeGlobs = [...combinedGlobs.filter((g) => g.startsWith('!')), ...normalizedExcludes];
+    const excludeGlobs = [
+        ...combinedGlobs.filter((g) => g.startsWith('!')).map((g) => g.slice(1)),
+        ...normalizedExcludes,
+    ];
     const fileGlobs: string[] = includeGlobs;
 
     const appGlobs = { allGlobs, gitIgnore, fileGlobs, excludeGlobs, normalizedExcludes };
