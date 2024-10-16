@@ -3,7 +3,7 @@ Repository: wireapp/wire-webapp
 Url: "https://github.com/wireapp/wire-webapp.git"
 Args: ["src/script/**/*.{js,ts,tsx,md}"]
 Lines:
- CSpell: Files checked: 1227, Issues found: 2724 in 644 files.
+ CSpell: Files checked: 1228, Issues found: 2728 in 645 files.
  exit code: 1
 src/script/Config.ts:20:25     - Unknown word (wireapp)    -- import {Runtime} from '@wireapp/commons';
 src/script/Config.ts:83:31     - Unknown word (acces)      -- DataDog client api keys acces */
@@ -364,7 +364,7 @@ src/script/calling/CallState.ts:23:26     - Unknown word (tsyringe)   -- import 
 src/script/calling/CallState.ts:25:60     - Unknown word (wireapp)    -- as CALL_STATE} from '@wireapp/avs';
 src/script/calling/CallState.ts:26:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
 src/script/calling/CallState.ts:28:54     - Unknown word (caculate)   -- indowPosition} from 'Util/DOM/caculateChildWindowPosition'
-src/script/calling/CallState.ts:83:105    - Unknown word (ESTAB)      -- == CALL_STATE.MEDIA_ESTAB));
+src/script/calling/CallState.ts:86:105    - Unknown word (ESTAB)      -- == CALL_STATE.MEDIA_ESTAB));
 src/script/calling/CallingRepository.test.ts:123:38    - Unknown word (senderdomain) -- senderUserId = {domain: 'senderdomain', id: 'senderid'};
 src/script/calling/CallingRepository.test.ts:123:58    - Unknown word (senderid)     -- senderdomain', id: 'senderid'};
 src/script/calling/CallingRepository.test.ts:129:9     - Unknown word (CONV)         -- CONV_TYPE.CONFERENCE,
@@ -1069,6 +1069,7 @@ src/script/components/calling/CallingCell/CallingCell.tsx:23:26     - Unknown wo
 src/script/components/calling/CallingCell/CallingCell.tsx:25:71     - Unknown word (wireapp)    -- as CALL_STATE} from '@wireapp/avs';
 src/script/components/calling/CallingCell/CallingControls/CallingControls.tsx:21:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 src/script/components/calling/CallingCell/CallingHeader/CallingHeader.tsx:20:26     - Unknown word (wireapp)    -- import {TabIndex} from '@wireapp/react-ui-kit/lib/types
+src/script/components/calling/CallingCell/CallingHeader/CallingHeader.tsx:22:47     - Unknown word (wireapp)    -- IconButtonVariant} from '@wireapp/react-ui-kit';
 src/script/components/calling/CallingOverlayContainer.tsx:22:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 src/script/components/calling/ChooseScreen.tsx:22:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 src/script/components/calling/DetachedCallingCell/DetachedCallingCell.tsx:20:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
@@ -1516,8 +1517,8 @@ src/script/event/EventRepository.ts:29:26     - Unknown word (tsyringe)   -- imp
 src/script/event/EventRepository.ts:31:65     - Unknown word (wireapp)    -- ProcessedEventPayload} from '@wireapp/core';
 src/script/event/EventRepository.ts:32:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
 src/script/event/EventRepository.ts:36:17     - Unknown word (MILLIS)     -- import {TIME_IN_MILLIS} from 'Util/TimeUtil
-src/script/event/EventRepository.ts:404:17    - Unknown word (Outated)        -- 208, // Outated event decyption error
-src/script/event/EventRepository.ts:404:31    - Unknown word (decyption)      -- 8, // Outated event decyption error (see https://github
+src/script/event/EventRepository.ts:410:17    - Unknown word (Outated)        -- 208, // Outated event decyption error
+src/script/event/EventRepository.ts:410:31    - Unknown word (decyption)      -- 8, // Outated event decyption error (see https://github
 src/script/event/EventRepository.ts:68:38     - Unknown word (MILLIS)     -- EVENT_LIFETIME: TIME_IN_MILLIS.SECOND * 30,
 src/script/event/EventService.ts:20:36     - Unknown word (wireapp)    -- CONVERSATION_EVENT} from '@wireapp/api-client/lib/event
 src/script/event/EventService.ts:21:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
@@ -1943,8 +1944,9 @@ src/script/page/LeftSidebar/panels/Conversations/ConversationHeader/Conversation
 src/script/page/LeftSidebar/panels/Conversations/ConversationTab/ConversationFolderTab.tsx:123:47    - Unknown word (conv)       -- unreadConversations.some(conv => conv.id === conversation
 src/script/page/LeftSidebar/panels/Conversations/ConversationTab/ConversationFolderTab.tsx:123:55    - Unknown word (conv)       -- eadConversations.some(conv => conv.id === conversation
 src/script/page/LeftSidebar/panels/Conversations/ConversationTabs/ConversationTabs.tsx:20:87     - Unknown word (wireapp)    -- rnalLinkIcon, Tooltip} from '@wireapp/react-ui-kit';
-src/script/page/LeftSidebar/panels/Conversations/Conversations.tsx:230:64    - Unknown word (favorited)  -- ddEventListener('conversation-favorited', openFavorites);
-src/script/page/LeftSidebar/panels/Conversations/Conversations.tsx:232:69    - Unknown word (favorited)  -- veEventListener('conversation-favorited', openFavorites);
+src/script/page/LeftSidebar/panels/Conversations/Conversations.tsx:192:76    - Unknown word (UNCOLLAPSE) -- EventName.UI.SIDEBAR_UNCOLLAPSE,
+src/script/page/LeftSidebar/panels/Conversations/Conversations.tsx:236:64    - Unknown word (favorited)  -- ddEventListener('conversation-favorited', openFavorites);
+src/script/page/LeftSidebar/panels/Conversations/Conversations.tsx:238:69    - Unknown word (favorited)  -- veEventListener('conversation-favorited', openFavorites);
 src/script/page/LeftSidebar/panels/Conversations/Conversations.tsx:23:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 src/script/page/LeftSidebar/panels/Conversations/Conversations.tsx:25:56     - Unknown word (wireapp)    -- useMatchMedia} from '@wireapp/react-ui-kit';
 src/script/page/LeftSidebar/panels/Conversations/Conversations.tsx:26:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
@@ -2061,7 +2063,7 @@ src/script/page/RightSidebar/ConversationDetails/ConversationDetails.tsx:26:26  
 src/script/page/RightSidebar/ConversationDetails/ConversationDetails.tsx:27:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
 src/script/page/RightSidebar/ConversationDetails/components/ConversationDetailsHeader/ConversationDetailsHeader.test.tsx:21:35     - Unknown word (wireapp)    -- CONVERSATION_TYPE} from '@wireapp/api-client/lib/conversation
 src/script/page/RightSidebar/ConversationDetails/components/ConversationDetailsOptions/ConversationDetailsOptions.tsx:22:30     - Unknown word (wireapp)    -- RECEIPT_MODE} from '@wireapp/api-client/lib/conversation
-src/script/page/RightSidebar/ConversationDetails/utils/getConversationActions.ts:119:39    - Unknown word (Leavable)   -- conversationEntity.isLeavable() && roleRepository
+src/script/page/RightSidebar/ConversationDetails/utils/getConversationActions.ts:145:39    - Unknown word (Leavable)   -- conversationEntity.isLeavable() && roleRepository
 src/script/page/RightSidebar/ConversationDetails/utils/getConversationActions.ts:22:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
 src/script/page/RightSidebar/GroupParticipantService/GroupParticipantService.tsx:22:26     - Unknown word (wireapp)    -- import {TabIndex} from '@wireapp/react-ui-kit/lib/types
 src/script/page/RightSidebar/GroupParticipantUser/GroupParticipantUser.tsx:22:60     - Unknown word (wireapp)    -- DefaultRole} from '@wireapp/api-client/lib/conversation
@@ -2377,6 +2379,8 @@ src/script/tracking/Countly.helpers.ts:53:30     - Unknown word (COUNTLY)    -- 
 src/script/tracking/Countly.helpers.ts:54:11     - Unknown word (Countly)    -- const isCountlyEnabled =
 src/script/tracking/Countly.helpers.ts:55:7      - Unknown word (COUNTLY)    -- !!COUNTLY_API_KEY && allowedBackendUrls
 src/script/tracking/Countly.helpers.ts:57:12     - Unknown word (Countly)    -- return isCountlyEnabled;
+src/script/tracking/EventName.ts:41:13     - Unknown word (UNCOLLAPSE) -- SIDEBAR_UNCOLLAPSE: 'ui.sidebar_uncollapse
+src/script/tracking/EventName.ts:41:37     - Unknown word (uncollapse) -- UNCOLLAPSE: 'ui.sidebar_uncollapse',
 src/script/tracking/EventTrackingRepository.ts:123:47    - Unknown word (countly)       -- startProductReporting(this.countlyDeviceId);
 src/script/tracking/EventTrackingRepository.ts:128:74    - Unknown word (countly)       -- changed from ${this.countlyDeviceId} to ${newId
 src/script/tracking/EventTrackingRepository.ts:129:12    - Unknown word (countly)       -- this.countlyDeviceId = newId;
@@ -2521,26 +2525,26 @@ src/script/util/DOM/overlayedObserver.ts:67:3      - Unknown word (overlayed)  -
 src/script/util/DOM/overlayedObserver.ts:75:3      - Unknown word (overlayed)  -- overlayedElements.set(element
 src/script/util/DataDog.ts:57:12     - Unknown word (datadoghq)  -- site: 'datadoghq.eu',
 src/script/util/DataDog.ts:87:31     - Unknown word (wireapp)    -- log.message.match(/@wireapp\/webapp\/avs/)) {
-src/script/util/DebugUtil.ts:113:5     - Unknown word (keyboardjs) -- keyboardjs.bind(['command+shift
+src/script/util/DebugUtil.ts:114:5     - Unknown word (keyboardjs) -- keyboardjs.bind(['command+shift
 src/script/util/DebugUtil.ts:20:34     - Unknown word (wireapp)    -- ConnectionStatus} from '@wireapp/api-client/lib/connection
 src/script/util/DebugUtil.ts:21:38     - Unknown word (wireapp)    -- ConversationProtocol} from '@wireapp/api-client/lib/conversation
 src/script/util/DebugUtil.ts:22:35     - Unknown word (wireapp)    -- MemberLeaveReason} from '@wireapp/api-client/lib/conversation
-src/script/util/DebugUtil.ts:298:62    - Unknown word (MILLIS)     -- Date.now() + TIME_IN_MILLIS.YEAR).toISOString()
-src/script/util/DebugUtil.ts:298:7     - Unknown word (finalise)   -- finaliseRegardlessAfter: new
+src/script/util/DebugUtil.ts:299:62    - Unknown word (MILLIS)     -- Date.now() + TIME_IN_MILLIS.YEAR).toISOString()
+src/script/util/DebugUtil.ts:299:7     - Unknown word (finalise)   -- finaliseRegardlessAfter: new
 src/script/util/DebugUtil.ts:29:10     - Unknown word (wireapp)    -- } from '@wireapp/api-client/lib/event
 src/script/util/DebugUtil.ts:30:53     - Unknown word (wireapp)    -- NotificationList} from '@wireapp/api-client/lib/notification
-src/script/util/DebugUtil.ts:321:20    - Unknown word (programatically) -- * will allow to programatically add text in the message
+src/script/util/DebugUtil.ts:322:20    - Unknown word (programatically) -- * will allow to programatically add text in the message
 src/script/util/DebugUtil.ts:35:20     - Unknown word (dexie)      -- import Dexie from 'dexie';
 src/script/util/DebugUtil.ts:35:8      - Unknown word (Dexie)      -- import Dexie from 'dexie';
 src/script/util/DebugUtil.ts:36:25     - Unknown word (keyboardjs) -- import keyboardjs from 'keyboardjs';
 src/script/util/DebugUtil.ts:36:8      - Unknown word (keyboardjs) -- import keyboardjs from 'keyboardjs';
 src/script/util/DebugUtil.ts:38:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
-src/script/util/DebugUtil.ts:43:17     - Unknown word (MILLIS)     -- import {TIME_IN_MILLIS} from './TimeUtil';
-src/script/util/DebugUtil.ts:67:56     - Unknown word (Countly)    -- rReporting} from '../tracking/Countly.helpers';
-src/script/util/DebugUtil.ts:86:19     - Unknown word (Dexie)      -- public readonly Dexie: typeof Dexie;
-src/script/util/DebugUtil.ts:86:33     - Unknown word (Dexie)      -- readonly Dexie: typeof Dexie;
-src/script/util/DebugUtil.ts:98:10     - Unknown word (Dexie)      -- this.Dexie = Dexie;
-src/script/util/DebugUtil.ts:98:18     - Unknown word (Dexie)      -- this.Dexie = Dexie;
+src/script/util/DebugUtil.ts:44:17     - Unknown word (MILLIS)     -- import {TIME_IN_MILLIS} from './TimeUtil';
+src/script/util/DebugUtil.ts:68:56     - Unknown word (Countly)    -- rReporting} from '../tracking/Countly.helpers';
+src/script/util/DebugUtil.ts:87:19     - Unknown word (Dexie)      -- public readonly Dexie: typeof Dexie;
+src/script/util/DebugUtil.ts:87:33     - Unknown word (Dexie)      -- readonly Dexie: typeof Dexie;
+src/script/util/DebugUtil.ts:99:10     - Unknown word (Dexie)      -- this.Dexie = Dexie;
+src/script/util/DebugUtil.ts:99:18     - Unknown word (Dexie)      -- this.Dexie = Dexie;
 src/script/util/EmojiUtil.ts:20:8      - Unknown word (emojies)    -- import emojies from 'emoji-picker-react
 src/script/util/EmojiUtil.ts:46:38     - Unknown word (emojies)    -- mojiesFlatten = Object.values(emojies).flat();
 src/script/util/EmojiUtil.ts:46:7      - Unknown word (emojies)    -- const emojiesFlatten = Object.values
