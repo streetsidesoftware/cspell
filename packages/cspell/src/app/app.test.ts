@@ -200,6 +200,8 @@ describe('Validate cli', () => {
         ${'reporter'}                                  | ${['-r', pathFix('features/reporter'), '-c', pathFix('features/reporter/cspell.config.yaml')]} | ${undefined}       | ${false} | ${true}  | ${false}
         ${'issue-4811 **/README.md'}                   | ${['-r', pIssues('issue-4811'), '--no-progress', '**/README.md']}                              | ${undefined}       | ${true}  | ${false} | ${false}
         ${'issue-4811'}                                | ${['-r', pIssues('issue-4811'), '--no-progress', '.']}                                         | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
+        ${'issue-6373 .'}                              | ${['-r', pathFix('issue-6373'), '--no-progress', '.']}                                         | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
+        ${'issue-6373'}                                | ${['-r', pathFix('issue-6373'), '--no-progress']}                                              | ${undefined}       | ${true}  | ${false} | ${false}
         ${'verify globRoot works'}                     | ${['-r', pathFix('globRoot'), '.']}                                                            | ${undefined}       | ${true}  | ${false} | ${false}
     `('app $msg Expect Error: $errorCheck', async ({ testArgs, errorCheck, eError, eLog, eInfo }: TestCase) => {
         chalk.level = 1;
@@ -226,8 +228,8 @@ describe('Validate cli', () => {
         chalk.level = 1;
         const commander = getCommander();
         const args = argv(...testArgs);
-        const result = app.run(commander, args);
-        await (!errorCheck ? expect(result).resolves.toBeUndefined() : expect(result).rejects.toThrow(errorCheck));
+        const result = await asyncResult(app.run(commander, args));
+        expect(result).toEqual(errorCheck);
 
         eError ? expect(error).toHaveBeenCalled() : expect(error).not.toHaveBeenCalled();
 
@@ -425,4 +427,12 @@ function makeLogger() {
 
 function escapeRegExp(s: string): string {
     return s.replaceAll(/[$()*+.?[\\\]^{|}]/g, '\\$&').replaceAll('-', '\\x2d');
+}
+
+async function asyncResult<T>(p: Promise<T>): Promise<T | Error> {
+    try {
+        return await p;
+    } catch (e) {
+        return e as Error;
+    }
 }
