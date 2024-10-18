@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>8.15.4 (2024-10-18)</small>
+
+* chore: Update Integration Test Performance Data (#6389) ([7ece6a7](https://github.com/streetsidesoftware/cspell-dicts/commit/7ece6a7)), closes [#6389](https://github.com/streetsidesoftware/cspell-dicts/issues/6389)
+
 ## <small>8.15.3 (2024-10-16)</small>
 
 * chore: Update Integration Test Performance Data (#6377) ([7ff6781](https://github.com/streetsidesoftware/cspell-dicts/commit/7ff6781)), closes [#6377](https://github.com/streetsidesoftware/cspell-dicts/issues/6377)
