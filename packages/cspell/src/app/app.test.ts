@@ -202,6 +202,7 @@ describe('Validate cli', () => {
         ${'issue-4811'}                                | ${['-r', pIssues('issue-4811'), '--no-progress', '.']}                                         | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
         ${'issue-6373 .'}                              | ${['-r', pathFix('issue-6373'), '--no-progress', '.']}                                         | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
         ${'issue-6373'}                                | ${['-r', pathFix('issue-6373'), '--no-progress']}                                              | ${undefined}       | ${true}  | ${false} | ${false}
+        ${'issue-6353'}                                | ${['-r', pathFix('issue-6353'), '--no-progress']}                                              | ${undefined}       | ${true}  | ${false} | ${true}
         ${'verify globRoot works'}                     | ${['-r', pathFix('globRoot'), '.']}                                                            | ${undefined}       | ${true}  | ${false} | ${false}
     `('app $msg Expect Error: $errorCheck', async ({ testArgs, errorCheck, eError, eLog, eInfo }: TestCase) => {
         chalk.level = 1;

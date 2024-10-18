@@ -553,7 +553,13 @@ async function determineFilesToCheck(
 
         // Get Exclusions from the config files.
         const { root } = cfg;
-        const globsToExclude = [...(configInfo.config.ignorePaths || []), ...excludeGlobs];
+        const globsToExcludeRaw = [...(configInfo.config.ignorePaths || []), ...excludeGlobs];
+        const globsToExclude = globsToExcludeRaw.filter((g) => !globPattern(g).startsWith('!'));
+        if (globsToExclude.length !== globsToExcludeRaw.length) {
+            const globs = globsToExcludeRaw.map((g) => globPattern(g)).filter((g) => g.startsWith('!'));
+            const msg = `Negative glob exclusions are not supported: ${globs.join(', ')}`;
+            reporter.info(msg, MessageTypes.Warning);
+        }
         const globMatcher = buildGlobMatcher(globsToExclude, root, true);
         const ignoreGlobs = extractGlobsFromMatcher(globMatcher);
         // cspell:word nodir
@@ -743,4 +749,8 @@ async function writeDictionaryLog() {
     const filename = getEnvironmentVariable('CSPELL_ENABLE_DICTIONARY_LOG_FILE') || 'cspell-dictionary-log.csv';
 
     await writeFileOrStream(filename, data);
+}
+
+function globPattern(g: Glob) {
+    return typeof g === 'string' ? g : g.glob;
 }
