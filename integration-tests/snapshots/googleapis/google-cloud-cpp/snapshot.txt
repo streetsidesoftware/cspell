@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 19683, Issues found: 101389 in 12670 files.
+ CSpell: Files checked: 19686, Issues found: 101425 in 12670 files.
  exit code: 1
 ARCHITECTURE.md:158:48    - Unknown word (googlemock) -- implementation using `googlemock`
 ARCHITECTURE.md:29:61     - Unknown word (retryable)  -- RPCs that fail with a retryable error,
@@ -400,6 +400,9 @@ external/googleapis/protolists/aiplatform.list:27:59     - Unknown word (trainin
 external/googleapis/protolists/aiplatform.list:81:52     - Unknown word (genai)       -- cloud/aiplatform/v1:genai_tuning_service.proto
 external/googleapis/protolists/artifactregistry.list:10:61     - Unknown word (vpcsc)      -- artifactregistry/v1:vpcsc_config.proto
 external/googleapis/protolists/backupdr.list:3:58      - Unknown word (reportlog)  -- backupdr/logging/v1:reportlog.proto
+external/googleapis/protolists/backupdr.list:5:50      - Unknown word (backupplan) -- google/cloud/backupdr/v1:backupplan.proto
+external/googleapis/protolists/backupdr.list:6:50      - Unknown word (backupplanassociation) -- google/cloud/backupdr/v1:backupplanassociation.proto
+external/googleapis/protolists/backupdr.list:7:50      - Unknown word (backupvault)           -- google/cloud/backupdr/v1:backupvault.proto
 external/googleapis/protolists/baremetalsolution.list:7:59      - Unknown word (osimage)    -- baremetalsolution/v2:osimage.proto
 external/googleapis/protolists/bigquery.list:4:63      - Unknown word (datapolicy) -- bigquery/datapolicies/v1:datapolicy.proto
 external/googleapis/protolists/connectors.list:1:52      - Unknown word (authconfig) -- cloud/connectors/v1:authconfig.proto
@@ -413,8 +416,8 @@ external/googleapis/protolists/dataplex.list:7:50      - Unknown word (datascans
 external/googleapis/protolists/deploy.list:2:48      - Unknown word (automationrun) -- google/cloud/deploy/v1:automationrun_payload.proto
 external/googleapis/protolists/deploy.list:4:48      - Unknown word (customtargettype) -- google/cloud/deploy/v1:customtargettype_notification_payload
 external/googleapis/protolists/deploy.list:5:48      - Unknown word (deliverypipeline) -- google/cloud/deploy/v1:deliverypipeline_notification_payload
-external/googleapis/protolists/deploy.list:6:48      - Unknown word (deploypolicy)     -- google/cloud/deploy/v1:deploypolicy_notification_payload
-external/googleapis/protolists/deploy.list:7:48      - Unknown word (jobrun)           -- google/cloud/deploy/v1:jobrun_notification_payload
+external/googleapis/protolists/deploy.list:6:48      - Unknown word (deploypolicy)     -- google/cloud/deploy/v1:deploypolicy_evaluation_payload.proto
+external/googleapis/protolists/deploy.list:8:48      - Unknown word (jobrun)           -- google/cloud/deploy/v1:jobrun_notification_payload
 external/googleapis/protolists/gkehub.list:1:48      - Unknown word (configmanagement) -- google/cloud/gkehub/v1/configmanagement:configmanagement.proto
 external/googleapis/protolists/gkehub.list:2:48      - Unknown word (multiclusteringress) -- google/cloud/gkehub/v1/multiclusteringress:multiclusteringress
 external/googleapis/protolists/grafeas.list:11:36     - Unknown word (intoto)     -- googleapis//grafeas/v1:intoto_provenance.proto
@@ -554,6 +557,7 @@ google/cloud/asset/doc/main.dox:7:18      - Unknown word (Anthos)     -- all you
 google/cloud/asset/v1/asset_client.h:1551:21   - Unknown word (ainotebooks) -- /// * constraints/ainotebooks.accessMode
 google/cloud/assuredworkloads/assured_workloads_client.h:19:39     - Unknown word (ASSUREDWORKLOADS) -- CLOUD_CPP_GOOGLE_CLOUD_ASSUREDWORKLOADS_ASSURED_WORKLOADS_CLIENT
 google/cloud/automl/v1/auto_ml_client.h:1283:63   - Unknown word (parametrs)  -- Deploying with different parametrs
+google/cloud/backupdr/v1/backup_dr_client.h:1376:92   - Unknown word (datasource) -- backupVault}/dataSources/{datasource}/backups/{backup}'
 google/cloud/backupdr/v1/backup_dr_client.h:19:39     - Unknown word (BACKUPDR)   -- CLOUD_CPP_GOOGLE_CLOUD_BACKUPDR_V1_BACKUP_DR_CLIENT
 google/cloud/baremetalsolution/bare_metal_solution_client.h:19:39     - Unknown word (BAREMETALSOLUTION) -- CLOUD_CPP_GOOGLE_CLOUD_BAREMETALSOLUTION_BARE_METAL_SOLUTION
 google/cloud/baremetalsolution/v2/bare_metal_solution_client.cc:1031:64   - Unknown word (nfsshare)   -- std::string const& new_nfsshare_id,
@@ -754,6 +758,7 @@ google/cloud/confidentialcomputing/v1/confidential_computing_client.h:19:39     
 google/cloud/config/v1/config_client.cc:254:37    - Unknown word (Statefile)  -- :cloud::config::v1::Statefile>
 google/cloud/contactcenterinsights/contact_center_insights_client.h:19:39     - Unknown word (CONTACTCENTERINSIGHTS) -- CLOUD_CPP_GOOGLE_CLOUD_CONTACTCENTERINSIGHTS_CONTACT_CENTER_INSIGHTS
 google/cloud/contactcenterinsights/quickstart/quickstart.cc:29:13     - Unknown word (ccai)       -- namespace ccai = ::google::cloud::contactcen
+google/cloud/contactcenterinsights/v1/contact_center_insights_client.h:245:50    - Unknown word (updateable) -- subset of the following updateable fields can be
 google/cloud/container/v1/cluster_manager_client.h:1503:31   - Unknown word (ABAC)       -- Enables or disables the ABAC authorization mechanism
 google/cloud/container/v1/cluster_manager_client.h:1506:8    - Unknown word (abac)       -- /// abac. Specified in the format
 google/cloud/container/v1/cluster_manager_client.h:216:11    - Unknown word (Kubelet)    -- /// the Kubelet creates routes for each
@@ -778,10 +783,10 @@ google/cloud/dataproc/v1/cluster_controller_client.h:737:48    - Unknown word (m
 google/cloud/datastore/quickstart/quickstart.cc:35:18     - Unknown word (sampletask) -- path.set_name("sampletask1");
 google/cloud/datastream/datastream_client.h:19:39     - Unknown word (DATASTREAM) -- CLOUD_CPP_GOOGLE_CLOUD_DATASTREAM_DATASTREAM_CLIENT_H
 google/cloud/deploy/doc/environment-variables.dox:14:40     - Unknown word (clouddeploy) -- (which defaults to "clouddeploy.googleapis.com")
-google/cloud/deploy/v1/cloud_deploy_client.cc:1014:24   - Unknown word (Automations) -- CloudDeployClient::ListAutomations(std::string const& parent
-google/cloud/deploy/v1/cloud_deploy_client.cc:695:72    - Unknown word (Rollouts)   -- CloudDeployClient::ListRollouts(
-google/cloud/deploy/v1/cloud_deploy_client.h:3131:8    - Unknown word (automations) -- /// automations. Format must be
-google/cloud/deploy/v1/internal/cloud_deploy_connection_impl.cc:1276:15   - Unknown word (rollouts)   -- r.rollouts().size());
+google/cloud/deploy/v1/cloud_deploy_client.cc:1177:24   - Unknown word (Automations) -- CloudDeployClient::ListAutomations(std::string const& parent
+google/cloud/deploy/v1/cloud_deploy_client.cc:858:72    - Unknown word (Rollouts)   -- CloudDeployClient::ListRollouts(
+google/cloud/deploy/v1/cloud_deploy_client.h:3616:8    - Unknown word (automations) -- /// automations. Format must be
+google/cloud/deploy/v1/internal/cloud_deploy_connection_impl.cc:1598:15   - Unknown word (rollouts)   -- r.rollouts().size());
 google/cloud/developerconnect/v1/developer_connect_client.h:19:39     - Unknown word (DEVELOPERCONNECT) -- CLOUD_CPP_GOOGLE_CLOUD_DEVELOPERCONNECT_V1_DEVELOPER_CONNECT
 google/cloud/dialogflow_cx/doc/main.dox:6:50      - Unknown word (chatbots)   -- interfaces (for example, chatbots, and voice-powered apps
 google/cloud/dialogflow_cx/entity_types_client.h:491:29    - Unknown word (entitytypes) -- Imports the specified entitytypes into the agent.
@@ -1100,7 +1105,7 @@ google/cloud/storage/bucket_metadata_test.cc:265:55    - Unknown word (Nearline)
 google/cloud/storage/bucket_metadata_test.cc:78:34     - Unknown word (NEARLINE)   -- terminalStorageClass": "NEARLINE",
 google/cloud/storage/client.h:3840:8    - Unknown word (tmpobject)  -- auto tmpobject_name_gen = [&num_tmp
 google/cloud/storage/client_options.cc:125:26    - Unknown word (iamapi)     -- (emulator) return "/iamapi";
-google/cloud/storage/client_options.h:308:33    - Unknown word (prefx)      -- ClientOptions& add_user_agent_prefx(std::string const& v
+google/cloud/storage/client_options.h:310:33    - Unknown word (prefx)      -- ClientOptions& add_user_agent_prefx(std::string const& v
 google/cloud/storage/client_options_test.cc:497:27    - Unknown word (Projec)     -- F(ClientOptionsTest, ProjecIdtWithEnv) {
 google/cloud/storage/client_options_test.cc:50:38     - Unknown word (TESTBENCH)  -- endpoint_("CLOUD_STORAGE_TESTBENCH_ENDPOINT", {}),
 google/cloud/storage/client_sign_policy_document_test.cc:133:55    - Unknown word (Ymxv)       -- blob = "dGVzdC1zaWduZWQtYmxvYg==";
@@ -1246,7 +1251,6 @@ google/cloud/vision/quickstart/quickstart.cc:21:45     - Unknown word (wakeupcat
 google/cloud/vmmigration/mocks/mock_vm_migration_connection.h:19:39     - Unknown word (VMMIGRATION) -- CLOUD_CPP_GOOGLE_CLOUD_VMMIGRATION_MOCKS_MOCK_VM_MIGRATION
 google/cloud/vmmigration/v1/internal/vm_migration_auth_decorator.cc:624:29    - Unknown word (Cutover)    -- VmMigrationAuth::AsyncCreateCutoverJob(
 google/cloud/vmmigration/v1/internal/vm_migration_connection_impl.cc:2131:15   - Unknown word (cutover)    -- r.cutover_jobs().size());
-google/cloud/vmmigration/v1/vm_migration_client.h:1397:7    - Unknown word (updateable) -- /// updateable version.
 google/cloud/vmmigration/v1/vm_migration_client.h:576:32    - Unknown word (onprem)     -- remote source is the onprem vCenter (remote in the
 google/cloud/vmwareengine/v1/internal/vmware_engine_auth_decorator.cc:819:54    - Unknown word (Peerings)   -- vmwareengine::v1::ListNetworkPeeringsResponse>
 google/cloud/vmwareengine/v1/internal/vmware_engine_auth_decorator.h:19:39     - Unknown word (VMWAREENGINE) -- CLOUD_CPP_GOOGLE_CLOUD_VMWAREENGINE_V1_INTERNAL_VMWARE_ENGINE
