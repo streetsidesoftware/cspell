@@ -3,9 +3,9 @@ Repository: googleapis/google-cloud-cpp
 Url: https://github.com/googleapis/google-cloud-cpp.git
 Args: '["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]'
 Summary:
-  files: 19683
+  files: 19686
   filesWithIssues: 12670
-  issues: 101389
+  issues: 101425
   errors: 0
 Errors: []
 
@@ -403,7 +403,10 @@ issues:
   - "external/googleapis/protolists/aiplatform.list:81:52        genai           U       cloud/aiplatform/v1:genai_tuning_service.proto"
   - "external/googleapis/protolists/aiplatform.list:133:52       tensorboard     U       cloud/aiplatform/v1:tensorboard.proto"
   - "external/googleapis/protolists/artifactregistry.list:10:61          vpcsc       U       artifactregistry/v1:vpcsc_config.proto"
-  - "external/googleapis/protolists/backupdr.list:3:58           reportlog       U       backupdr/logging/v1:reportlog.proto"
+  - "external/googleapis/protolists/backupdr.list:3:58           reportlog                   U       backupdr/logging/v1:reportlog.proto"
+  - "external/googleapis/protolists/backupdr.list:5:50           backupplan                  U       google/cloud/backupdr/v1:backupplan.proto"
+  - "external/googleapis/protolists/backupdr.list:6:50           backupplanassociation       U       google/cloud/backupdr/v1:backupplanassociation.proto"
+  - "external/googleapis/protolists/backupdr.list:7:50           backupvault                 U       google/cloud/backupdr/v1:backupvault.proto"
   - "external/googleapis/protolists/baremetalsolution.list:7:59          osimage     U       baremetalsolution/v2:osimage.proto"
   - "external/googleapis/protolists/bigquery.list:4:63           datapolicy      U       bigquery/datapolicies/v1:datapolicy.proto"
   - "external/googleapis/protolists/connectors.list:1:52         authconfig      U       cloud/connectors/v1:authconfig.proto"
@@ -417,8 +420,8 @@ issues:
   - "external/googleapis/protolists/deploy.list:2:48         automationrun       U       google/cloud/deploy/v1:automationrun_payload.proto"
   - "external/googleapis/protolists/deploy.list:4:48         customtargettype    U       google/cloud/deploy/v1:customtargettype_notification_payload"
   - "external/googleapis/protolists/deploy.list:5:48         deliverypipeline    U       google/cloud/deploy/v1:deliverypipeline_notification_payload"
-  - "external/googleapis/protolists/deploy.list:6:48         deploypolicy        U       google/cloud/deploy/v1:deploypolicy_notification_payload"
-  - "external/googleapis/protolists/deploy.list:7:48         jobrun              U       google/cloud/deploy/v1:jobrun_notification_payload"
+  - "external/googleapis/protolists/deploy.list:6:48         deploypolicy        U       google/cloud/deploy/v1:deploypolicy_evaluation_payload.proto"
+  - "external/googleapis/protolists/deploy.list:8:48         jobrun              U       google/cloud/deploy/v1:jobrun_notification_payload"
   - "external/googleapis/protolists/gkehub.list:1:48         configmanagement        U       google/cloud/gkehub/v1/configmanagement:configmanagement.proto"
   - "external/googleapis/protolists/gkehub.list:2:48         multiclusteringress     U       google/cloud/gkehub/v1/multiclusteringress:multiclusteringress"
   - "external/googleapis/protolists/grafeas.list:8:36        dsse        U       googleapis//grafeas/v1:dsse_attestation.proto"
@@ -557,7 +560,8 @@ issues:
   - "google/cloud/asset/v1/asset_client.h:1551:21        ainotebooks     U       /// * constraints/ainotebooks.accessMode"
   - "google/cloud/assuredworkloads/assured_workloads_client.h:19:39          ASSUREDWORKLOADS    U       CLOUD_CPP_GOOGLE_CLOUD_ASSUREDWORKLOADS_ASSURED_WORKLOADS_CLIENT"
   - "google/cloud/automl/v1/auto_ml_client.h:1283:63     parametrs       U       Deploying with different parametrs"
-  - "google/cloud/backupdr/v1/backup_dr_client.h:19:39       BACKUPDR    U       CLOUD_CPP_GOOGLE_CLOUD_BACKUPDR_V1_BACKUP_DR_CLIENT"
+  - "google/cloud/backupdr/v1/backup_dr_client.h:19:39       BACKUPDR        U       CLOUD_CPP_GOOGLE_CLOUD_BACKUPDR_V1_BACKUP_DR_CLIENT"
+  - "google/cloud/backupdr/v1/backup_dr_client.h:1376:92     datasource      U       backupVault}/dataSources/{datasource}/backups/{backup}'"
   - "google/cloud/baremetalsolution/bare_metal_solution_client.h:19:39       BAREMETALSOLUTION       U       CLOUD_CPP_GOOGLE_CLOUD_BAREMETALSOLUTION_BARE_METAL_SOLUTION"
   - "google/cloud/baremetalsolution/v2/bare_metal_solution_client.cc:1031:64     nfsshare    U       std::string const& new_nfsshare_id,"
   - "google/cloud/baremetalsolution/v2/bare_metal_solution_client.h:1622:22      cooloff         U       /// Skips volume's cooloff and deletes it now."
@@ -758,6 +762,7 @@ issues:
   - "google/cloud/config/v1/config_client.cc:254:37      Statefile       U       :cloud::config::v1::Statefile>"
   - "google/cloud/contactcenterinsights/contact_center_insights_client.h:19:39       CONTACTCENTERINSIGHTS       U       CLOUD_CPP_GOOGLE_CLOUD_CONTACTCENTERINSIGHTS_CONTACT_CENTER_INSIGHTS"
   - "google/cloud/contactcenterinsights/quickstart/quickstart.cc:29:13       ccai    U       namespace ccai = ::google::cloud::contactcen"
+  - "google/cloud/contactcenterinsights/v1/contact_center_insights_client.h:245:50       updateable      U       subset of the following updateable fields can be"
   - "google/cloud/container/v1/cluster_manager_client.h:216:11       Kubelet     U       /// the Kubelet creates routes for each"
   - "google/cloud/container/v1/cluster_manager_client.h:1503:31      ABAC        U       Enables or disables the ABAC authorization mechanism"
   - "google/cloud/container/v1/cluster_manager_client.h:1506:8       abac        U       /// abac. Specified in the format"
@@ -782,10 +787,10 @@ issues:
   - "google/cloud/datastore/quickstart/quickstart.cc:35:18       sampletask      U       path.set_name(\"sampletask1\");"
   - "google/cloud/datastream/datastream_client.h:19:39       DATASTREAM      U       CLOUD_CPP_GOOGLE_CLOUD_DATASTREAM_DATASTREAM_CLIENT_H"
   - "google/cloud/deploy/doc/environment-variables.dox:14:40         clouddeploy     U       (which defaults to \"clouddeploy.googleapis.com\")"
-  - "google/cloud/deploy/v1/cloud_deploy_client.cc:695:72        Rollouts        U       CloudDeployClient::ListRollouts("
-  - "google/cloud/deploy/v1/cloud_deploy_client.cc:1014:24       Automations     U       CloudDeployClient::ListAutomations(std::string const& parent"
-  - "google/cloud/deploy/v1/cloud_deploy_client.h:3131:8         automations     U       /// automations. Format must be"
-  - "google/cloud/deploy/v1/internal/cloud_deploy_connection_impl.cc:1276:15     rollouts    U       r.rollouts().size());"
+  - "google/cloud/deploy/v1/cloud_deploy_client.cc:858:72        Rollouts        U       CloudDeployClient::ListRollouts("
+  - "google/cloud/deploy/v1/cloud_deploy_client.cc:1177:24       Automations     U       CloudDeployClient::ListAutomations(std::string const& parent"
+  - "google/cloud/deploy/v1/cloud_deploy_client.h:3616:8         automations     U       /// automations. Format must be"
+  - "google/cloud/deploy/v1/internal/cloud_deploy_connection_impl.cc:1598:15     rollouts    U       r.rollouts().size());"
   - "google/cloud/developerconnect/v1/developer_connect_client.h:19:39       DEVELOPERCONNECT    U       CLOUD_CPP_GOOGLE_CLOUD_DEVELOPERCONNECT_V1_DEVELOPER_CONNECT"
   - "google/cloud/dialogflow_cx/doc/main.dox:6:50        chatbots    U       interfaces (for example, chatbots, and voice-powered apps"
   - "google/cloud/dialogflow_cx/entity_types_client.h:491:29         entitytypes     U       Imports the specified entitytypes into the agent."
@@ -1105,7 +1110,7 @@ issues:
   - "google/cloud/storage/client_options_test.cc:50:38       TESTBENCH       U       endpoint_(\"CLOUD_STORAGE_TESTBENCH_ENDPOINT\", {}),"
   - "google/cloud/storage/client_options_test.cc:497:27      Projec          U       F(ClientOptionsTest, ProjecIdtWithEnv) {"
   - "google/cloud/storage/client_options.cc:125:26       iamapi      U       (emulator) return \"/iamapi\";"
-  - "google/cloud/storage/client_options.h:308:33        prefx       U       ClientOptions& add_user_agent_prefx(std::string const& v"
+  - "google/cloud/storage/client_options.h:310:33        prefx       U       ClientOptions& add_user_agent_prefx(std::string const& v"
   - "google/cloud/storage/client_sign_policy_document_test.cc:133:55         Ymxv    U       blob = \"dGVzdC1zaWduZWQtYmxvYg==\";"
   - "google/cloud/storage/client_sign_url_test.cc:87:41          Bobject     U       actual, HasSubstr(\"test%2Bobject\"));"
   - "google/cloud/storage/client_sign_url_test.cc:184:40         Fauto       U       erviceaccount.com%2F20190201%2Fauto%2Fstorage%2Fgoog4_request"
@@ -1250,8 +1255,7 @@ issues:
   - "google/cloud/vmmigration/mocks/mock_vm_migration_connection.h:19:39         VMMIGRATION     U       CLOUD_CPP_GOOGLE_CLOUD_VMMIGRATION_MOCKS_MOCK_VM_MIGRATION"
   - "google/cloud/vmmigration/v1/internal/vm_migration_auth_decorator.cc:624:29      Cutover     U       VmMigrationAuth::AsyncCreateCutoverJob("
   - "google/cloud/vmmigration/v1/internal/vm_migration_connection_impl.cc:2131:15        cutover     U       r.cutover_jobs().size());"
-  - "google/cloud/vmmigration/v1/vm_migration_client.h:576:32        onprem          U       remote source is the onprem vCenter (remote in the"
-  - "google/cloud/vmmigration/v1/vm_migration_client.h:1397:7        updateable      U       /// updateable version."
+  - "google/cloud/vmmigration/v1/vm_migration_client.h:576:32        onprem      U       remote source is the onprem vCenter (remote in the"
   - "google/cloud/vmwareengine/v1/internal/vmware_engine_auth_decorator.cc:819:54        Peerings    U       vmwareengine::v1::ListNetworkPeeringsResponse>"
   - "google/cloud/vmwareengine/v1/internal/vmware_engine_auth_decorator.h:19:39          VMWAREENGINE    U       CLOUD_CPP_GOOGLE_CLOUD_VMWAREENGINE_V1_INTERNAL_VMWARE_ENGINE"
   - "google/cloud/vmwareengine/v1/internal/vmware_engine_connection_impl.cc:2482:23      peerings    U       r.network_peerings().size());"
