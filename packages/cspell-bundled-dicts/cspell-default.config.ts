@@ -154,6 +154,7 @@ const settings: AdvancedCSpellSettings = {
         '@cspell/dict-lorem-ipsum/cspell-ext.json',
         '@cspell/dict-lua/cspell-ext.json',
         '@cspell/dict-makefile/cspell-ext.json',
+        '@cspell/dict-markdown/cspell-ext.json',
         '@cspell/dict-monkeyc/cspell-ext.json',
         '@cspell/dict-node/cspell-ext.json',
         '@cspell/dict-npm/cspell-ext.json',
