@@ -176,7 +176,7 @@ jobs:
 
       - name: Cache Integration Run
         id: step-cache-run
-        uses: actions/cache@v4.1.1
+        uses: actions/cache@v4.1.2
         with:
           key: integration-run--${{ env.REF_BRANCH }}-${{ steps.repo-hash.outputs.value }}-${{ fromJSON(steps.step-repo-info.outputs.repo-info).commit }}-1
           # Store the patch files to update the integration perf data
@@ -206,7 +206,7 @@ jobs:
 
       - name: Cache Integration Test Repository Files
         if: ${{ steps.step-cache-run.outputs.cache-hit != 'true' }}
-        uses: actions/cache@v4.1.1
+        uses: actions/cache@v4.1.2
         with:
           key: int-repo-temp-files-${{ matrix.repo }}-${{ fromJSON(steps.step-repo-info.outputs.repo-info).commit }}
           path: |
