@@ -135,8 +135,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/cspell
       tinyglobby:
-        specifier: ^0.2.9
-        version: 0.2.9
+        specifier: ^0.2.10
+        version: 0.2.10
 
   examples/invoke-cspell:
     dependencies:
@@ -259,8 +259,8 @@ importers:
         specifier: ^7.6.3
         version: 7.6.3
       tinyglobby:
-        specifier: ^0.2.9
-        version: 0.2.9
+        specifier: ^0.2.10
+        version: 0.2.10
     devDependencies:
       '@types/file-entry-cache':
         specifier: ^5.0.4
@@ -1098,7 +1098,7 @@ importers:
         version: link:../../../packages/cspell-types
       ts-loader:
         specifier: ^9.5.1
-        version: 9.5.1(typescript@5.6.3)(webpack@5.95.0(@swc/core@1.7.26)(webpack-cli@5.1.4))
+        version: 9.5.1(typescript@5.6.3)(webpack@5.95.0)
       webpack:
         specifier: ^5.95.0
         version: 5.95.0(@swc/core@1.7.26)(webpack-cli@5.1.4)
@@ -9266,8 +9266,8 @@ packages:
   tinyexec@0.3.1:
     resolution: {integrity: sha512-WiCJLEECkO18gwqIp6+hJg0//p23HXp4S+gGtAKu3mI2F2/sXC4FvHvXvB0zJVVaTPhx1/tOwdbRsa1sOBIKqQ==}
 
-  tinyglobby@0.2.9:
-    resolution: {integrity: sha512-8or1+BGEdk1Zkkw2ii16qSS7uVrQJPre5A9o/XkWPATkk23FZh/15BKFxPnlTy6vkljZxLqYCzzBMj30ZrSvjw==}
+  tinyglobby@0.2.10:
+    resolution: {integrity: sha512-Zc+8eJlFMvgatPZTl6A9L/yht8QqdmUNtURHaKZLmKBE12hNPSrqNkUp2cs3M/UKmNVVAMFQYSjYIVHDjW5zew==}
     engines: {node: '>=12.0.0'}
 
   tinypool@1.0.1:
@@ -12560,7 +12560,7 @@ snapshots:
       semver: 7.6.3
       slash: 5.1.0
       strong-log-transformer: 2.1.0
-      tinyglobby: 0.2.9
+      tinyglobby: 0.2.10
       tinyrainbow: 1.2.0
       write-file-atomic: 5.0.1
       write-json-file: 6.0.0
@@ -12622,7 +12622,7 @@ snapshots:
       ssri: 11.0.0
       tar: 6.2.1
       temp-dir: 3.0.0
-      tinyglobby: 0.2.9
+      tinyglobby: 0.2.10
       tinyrainbow: 1.2.0
     transitivePeerDependencies:
       - '@lerna-lite/exec'
@@ -13885,17 +13885,17 @@ snapshots:
       '@webassemblyjs/ast': 1.12.1
       '@xtuc/long': 4.2.2
 
-  '@webpack-cli/configtest@2.1.1(webpack-cli@5.1.4(webpack@5.95.0))(webpack@5.95.0(@swc/core@1.7.26)(webpack-cli@5.1.4))':
+  '@webpack-cli/configtest@2.1.1(webpack-cli@5.1.4)(webpack@5.95.0)':
     dependencies:
       webpack: 5.95.0(@swc/core@1.7.26)(webpack-cli@5.1.4)
       webpack-cli: 5.1.4(webpack@5.95.0)
 
-  '@webpack-cli/info@2.0.2(webpack-cli@5.1.4(webpack@5.95.0))(webpack@5.95.0(@swc/core@1.7.26)(webpack-cli@5.1.4))':
+  '@webpack-cli/info@2.0.2(webpack-cli@5.1.4)(webpack@5.95.0)':
     dependencies:
       webpack: 5.95.0(@swc/core@1.7.26)(webpack-cli@5.1.4)
       webpack-cli: 5.1.4(webpack@5.95.0)
 
-  '@webpack-cli/serve@2.0.5(webpack-cli@5.1.4(webpack@5.95.0))(webpack@5.95.0(@swc/core@1.7.26)(webpack-cli@5.1.4))':
+  '@webpack-cli/serve@2.0.5(webpack-cli@5.1.4)(webpack@5.95.0)':
     dependencies:
       webpack: 5.95.0(@swc/core@1.7.26)(webpack-cli@5.1.4)
       webpack-cli: 5.1.4(webpack@5.95.0)
@@ -14937,7 +14937,7 @@ snapshots:
       file-entry-cache: 9.1.0
       get-stdin: 9.0.0
       semver: 7.6.3
-      tinyglobby: 0.2.9
+      tinyglobby: 0.2.10
 
   css-declaration-sorter@7.2.0(postcss@8.4.47):
     dependencies:
@@ -20413,17 +20413,6 @@ snapshots:
 
   temp-dir@3.0.0: {}
 
-  terser-webpack-plugin@5.3.10(@swc/core@1.7.26)(webpack@5.95.0(@swc/core@1.7.26)(webpack-cli@5.1.4)):
-    dependencies:
-      '@jridgewell/trace-mapping': 0.3.25
-      jest-worker: 27.5.1
-      schema-utils: 3.3.0
-      serialize-javascript: 6.0.2
-      terser: 5.36.0
-      webpack: 5.95.0(@swc/core@1.7.26)(webpack-cli@5.1.4)
-    optionalDependencies:
-      '@swc/core': 1.7.26
-
   terser-webpack-plugin@5.3.10(@swc/core@1.7.26)(webpack@5.95.0(@swc/core@1.7.26)):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.25
@@ -20432,6 +20421,17 @@ snapshots:
       serialize-javascript: 6.0.2
       terser: 5.36.0
       webpack: 5.95.0(@swc/core@1.7.26)
+    optionalDependencies:
+      '@swc/core': 1.7.26
+
+  terser-webpack-plugin@5.3.10(@swc/core@1.7.26)(webpack@5.95.0):
+    dependencies:
+      '@jridgewell/trace-mapping': 0.3.25
+      jest-worker: 27.5.1
+      schema-utils: 3.3.0
+      serialize-javascript: 6.0.2
+      terser: 5.36.0
+      webpack: 5.95.0(@swc/core@1.7.26)(webpack-cli@5.1.4)
     optionalDependencies:
       '@swc/core': 1.7.26
 
@@ -20472,7 +20472,7 @@ snapshots:
 
   tinyexec@0.3.1: {}
 
-  tinyglobby@0.2.9:
+  tinyglobby@0.2.10:
     dependencies:
       fdir: 6.4.2(picomatch@4.0.2)
       picomatch: 4.0.2
@@ -20533,7 +20533,7 @@ snapshots:
       tslib: 2.8.0
       typescript: 5.6.3
 
-  ts-loader@9.5.1(typescript@5.6.3)(webpack@5.95.0(@swc/core@1.7.26)(webpack-cli@5.1.4)):
+  ts-loader@9.5.1(typescript@5.6.3)(webpack@5.95.0):
     dependencies:
       chalk: 4.1.2
       enhanced-resolve: 5.17.1
@@ -21046,9 +21046,9 @@ snapshots:
   webpack-cli@5.1.4(webpack@5.95.0):
     dependencies:
       '@discoveryjs/json-ext': 0.5.7
-      '@webpack-cli/configtest': 2.1.1(webpack-cli@5.1.4(webpack@5.95.0))(webpack@5.95.0(@swc/core@1.7.26)(webpack-cli@5.1.4))
-      '@webpack-cli/info': 2.0.2(webpack-cli@5.1.4(webpack@5.95.0))(webpack@5.95.0(@swc/core@1.7.26)(webpack-cli@5.1.4))
-      '@webpack-cli/serve': 2.0.5(webpack-cli@5.1.4(webpack@5.95.0))(webpack@5.95.0(@swc/core@1.7.26)(webpack-cli@5.1.4))
+      '@webpack-cli/configtest': 2.1.1(webpack-cli@5.1.4)(webpack@5.95.0)
+      '@webpack-cli/info': 2.0.2(webpack-cli@5.1.4)(webpack@5.95.0)
+      '@webpack-cli/serve': 2.0.5(webpack-cli@5.1.4)(webpack@5.95.0)
       colorette: 2.0.20
       commander: 10.0.1
       cross-spawn: 7.0.3
@@ -21169,7 +21169,7 @@ snapshots:
       neo-async: 2.6.2
       schema-utils: 3.3.0
       tapable: 2.2.1
-      terser-webpack-plugin: 5.3.10(@swc/core@1.7.26)(webpack@5.95.0(@swc/core@1.7.26)(webpack-cli@5.1.4))
+      terser-webpack-plugin: 5.3.10(@swc/core@1.7.26)(webpack@5.95.0)
       watchpack: 2.4.2
       webpack-sources: 3.2.3
     optionalDependencies:
