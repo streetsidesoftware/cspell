@@ -65,6 +65,11 @@ export interface ParseDictionaryOptions {
      * Specify the separator for splitting words.
      */
     splitSeparator: RegExp | string;
+
+    /**
+     * Do not normalize the compound character.
+     */
+    keepOptionalCompoundCharacter: boolean;
 }
 
 const RegExpSplit = /[\s,;]/g;
@@ -82,6 +87,7 @@ const _defaultOptions: ParseDictionaryOptions = {
     split: false,
     splitKeepBoth: false,
     splitSeparator: RegExpSplit,
+    keepOptionalCompoundCharacter: false,
 };
 
 export const defaultParseDictionaryOptions: ParseDictionaryOptions = Object.freeze(_defaultOptions);
@@ -109,6 +115,7 @@ export function createDictionaryLineParserMapper(options?: Partial<ParseDictiona
         splitKeepBoth = _defaultOptions.splitKeepBoth,
         stripCaseAndAccentsKeepDuplicate = _defaultOptions.stripCaseAndAccentsKeepDuplicate,
         stripCaseAndAccentsOnForbidden = _defaultOptions.stripCaseAndAccentsOnForbidden,
+        keepOptionalCompoundCharacter = _defaultOptions.keepOptionalCompoundCharacter,
     } = _options;
 
     let { stripCaseAndAccents = _defaultOptions.stripCaseAndAccents, split = _defaultOptions.split } = _options;
@@ -236,6 +243,10 @@ export function createDictionaryLineParserMapper(options?: Partial<ParseDictiona
         }
     }
 
+    const mapCompounds: Operator<string>[] = keepOptionalCompoundCharacter
+        ? []
+        : [opConcatMap(mapOptionalPrefix), opConcatMap(mapOptionalSuffix)];
+
     const processLines = opPipe(
         opFilter(isString),
         splitLines,
@@ -243,8 +254,7 @@ export function createDictionaryLineParserMapper(options?: Partial<ParseDictiona
         splitWords,
         opMap(trim),
         opFilter(filterEmptyLines),
-        opConcatMap(mapOptionalPrefix),
-        opConcatMap(mapOptionalSuffix),
+        ...mapCompounds,
         opConcatMap(mapNormalize),
         opMap(removeDoublePrefix),
     );
@@ -290,7 +300,7 @@ export function parseLinesToDictionary(lines: Iterable<string>, options?: Partia
     });
 }
 
-export function parseDictionary(text: string | string[], options?: Partial<ParseDictionaryOptions>): ITrie {
+export function parseDictionary(text: string | Iterable<string>, options?: Partial<ParseDictionaryOptions>): ITrie {
     return parseLinesToDictionary(typeof text === 'string' ? text.split('\n') : text, options);
 }
 

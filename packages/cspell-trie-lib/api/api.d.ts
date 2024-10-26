@@ -656,6 +656,10 @@ interface ParseDictionaryOptions {
      * Specify the separator for splitting words.
      */
     splitSeparator: RegExp | string;
+    /**
+     * Do not normalize the compound character.
+     */
+    keepOptionalCompoundCharacter: boolean;
 }
 /**
  * Normalizes a dictionary words based upon prefix / suffixes.

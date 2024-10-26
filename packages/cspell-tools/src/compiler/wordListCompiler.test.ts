@@ -28,7 +28,7 @@ const samples = path.join(testHelper.packageRoot, '../Samples/dicts');
 const sampleDictEnUS = path.join(samples, 'hunspell', 'en_US.dic');
 const sampleDictEn = path.join(samples, 'en_US.txt');
 
-const wordListHeader = __testing__.wordListHeader;
+const { wordListHeader, removeDuplicates } = __testing__;
 
 const consoleSpy = spyOnConsole();
 const consoleOutput = consoleSpy.consoleOutput;
@@ -38,6 +38,7 @@ const allowedSplitWords = defaultAllowedSplitWords;
 const readOptions: SourceReaderOptions = {
     splitWords: false,
     allowedSplitWords,
+    storeSplitWordsAsCompounds: undefined,
 };
 
 describe('Validate the wordListCompiler', () => {
@@ -202,6 +203,26 @@ describe('Validate Larger Dictionary', () => {
         const results2 = [...iteratorTrieWords(trie2)];
         expect(results2).toEqual(results);
     }, 60_000);
+});
+
+describe('', () => {
+    test.each`
+        words                      | expected
+        ${'hello'}                 | ${['hello']}
+        ${'hello|HELLO'}           | ${['hello']}
+        ${'hello|*hello*|*HELLO*'} | ${['*hello*']}
+        ${'HELLO|*hello*|*HELLO*'} | ${['*hello*']}
+        ${'HELLO|*HELLO*'}         | ${['*HELLO*']}
+        ${'Hello|*Hello*'}         | ${['*Hello*']}
+        ${'hello|+hello+'}         | ${['*hello*']}
+        ${'hello|hello+'}          | ${['hello*']}
+        ${'hello|+hello'}          | ${['*hello']}
+        ${'hello|hello+|+hello'}   | ${['*hello*']}
+    `('removeDuplicate $words', ({ words, expected }) => {
+        words = typeof words === 'string' ? words.split('|') : words;
+        const result = [...removeDuplicates(words)];
+        expect(result).toEqual(expected);
+    });
 });
 
 async function compileTrie(words: Iterable<string>, destFilename: string, options: CompileTrieOptions): Promise<void> {

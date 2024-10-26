@@ -265,6 +265,7 @@ async function readFileSource(fileSource: FileSource, sourceOptions: CompileSour
         keepRawCase = sourceOptions.keepRawCase || false,
         split = sourceOptions.split || false,
         maxDepth,
+        storeSplitWordsAsCompounds,
     } = fileSource;
 
     const legacy = split === 'legacy';
@@ -282,6 +283,7 @@ async function readFileSource(fileSource: FileSource, sourceOptions: CompileSour
         splitWords,
         keepCase: keepRawCase,
         allowedSplitWords,
+        storeSplitWordsAsCompounds,
     };
 
     logWithTimestamp(`Reading ${path.basename(filename)}`);
@@ -317,5 +319,6 @@ function logProgress<T>(freq = 100_000): (iter: Iterable<T>) => Iterable<T> {
 async function createExcludeFilter(excludeWordsFrom: FilePath[] | undefined): Promise<(word: string) => boolean> {
     if (!excludeWordsFrom || !excludeWordsFrom.length) return () => true;
     const excludeWords = await createWordsCollectionFromFiles(excludeWordsFrom);
-    return (word: string) => !excludeWords.has(word);
+
+    return (word: string) => !excludeWords.has(word, word.toUpperCase() !== word);
 }

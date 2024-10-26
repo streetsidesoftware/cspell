@@ -1,6 +1,6 @@
 export interface WordsCollection {
     size: number;
-    has(words: string): boolean;
+    has(words: string, caseSensitive: boolean): boolean;
     type?: string;
 }
 

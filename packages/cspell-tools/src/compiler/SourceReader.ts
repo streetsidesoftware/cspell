@@ -22,6 +22,8 @@ export interface SourceReaderOptions {
     keepCase?: boolean;
 
     allowedSplitWords: AllowedSplitWordsCollection;
+
+    storeSplitWordsAsCompounds: boolean | undefined;
 }
 
 export type AnnotatedWord = string;
@@ -62,8 +64,8 @@ function splitLines(lines: Iterable<string>, options: SourceReaderOptions): Iter
 }
 
 async function textFileReader(reader: Reader, options: SourceReaderOptions): Promise<SourceReader> {
-    const { legacy, splitWords: split, allowedSplitWords } = options;
-    const words = [...parseFileLines(reader, { legacy, split, allowedSplitWords })];
+    const { legacy, splitWords: split, allowedSplitWords, storeSplitWordsAsCompounds } = options;
+    const words = [...parseFileLines(reader.lines, { legacy, split, allowedSplitWords, storeSplitWordsAsCompounds })];
 
     return {
         size: words.length,

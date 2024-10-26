@@ -17,14 +17,14 @@ const sc = (m: string) => expect.stringContaining(m);
 describe('Validate the iterateWordsFromFile', () => {
     test('streamWordsFromFile: hunspell', async () => {
         const reader = await createReader(path.join(samples, 'hunspell', 'example.aff'), readerOptions);
-        const results = [...reader];
+        const results = [...reader.lines];
         // this might break if the processing order of hunspell changes.
         expect(results).toEqual(s('hello rework reworked tried try work worked', ' '));
     });
 
     test('stream words from trie', async () => {
         const reader = await createReader(path.join(samples, 'cities.trie.gz'), readerOptions);
-        const results = [...reader];
+        const results = [...reader.lines];
         expect(results.join('|')).toBe(
             'amsterdam|angeles|city|delhi|francisco|london|los|los angeles' +
                 '|mexico|mexico city|new|new amsterdam|new delhi|new york|paris|san|san francisco|york',
@@ -39,7 +39,7 @@ describe('Validate the iterateWordsFromFile', () => {
         ${'hunspell/example.aff'} | ${{}}                    | ${'hello|rework|reworked|tried|try|work|worked'}
     `('stream words from text $file $options', async ({ file, options, expected }) => {
         const reader = await createReader(path.resolve(samples, file), options);
-        const results = [...reader];
+        const results = [...reader.lines];
         expect(results.join('|')).toBe(expected);
     });
 

@@ -14,6 +14,7 @@ const samples = helper.resolveSample('dicts');
 const readerOptions: SourceReaderOptions = {
     splitWords: false,
     allowedSplitWords: defaultAllowedSplitWords,
+    storeSplitWordsAsCompounds: undefined,
 };
 
 describe('Validate the iterateWordsFromFile', () => {

@@ -1,19 +1,22 @@
+import { parseDictionary } from 'cspell-trie-lib';
+
 import type { FilePath } from '../config/config.js';
 import { createReader } from './Reader.js';
+import { DictionaryReader, Reader } from './readers/ReaderOptions.js';
 import type { AllowedSplitWordsCollection, ExcludeWordsCollection, WordsCollection } from './WordsCollection.js';
 import { defaultAllowedSplitWords, defaultExcludeWordsCollection } from './WordsCollection.js';
 
 class AllowedSplitWordsImpl implements AllowedSplitWordsCollection {
-    private words: WordsCollection;
+    private collection: WordsCollection;
     readonly size: number;
 
     constructor(collection: WordsCollection) {
-        this.words = collection;
+        this.collection = collection;
         this.size = collection.size;
     }
 
-    public has(word: string) {
-        return !this.size || this.words.has(word);
+    public has(word: string, caseSensitive: boolean) {
+        return !this.size || this.collection.has(word, caseSensitive);
     }
 }
 
@@ -32,9 +35,33 @@ export function createAllowedSplitWords(words: Iterable<string> | undefined): Al
     return new AllowedSplitWordsImpl(createWordsCollection(words));
 }
 
-async function readFile(filename: string) {
-    const reader = await createReader(filename, {});
-    return [...reader];
+function buildHasFn(dict: { hasWord: (word: string, caseSensitive: boolean) => boolean }) {
+    function has(word: string, caseSensitive: boolean) {
+        const r = dict.hasWord(word, true);
+        if (r || caseSensitive) return r;
+        const lc = word.toLowerCase();
+        if (lc == word) return false;
+        return dict.hasWord(lc, true);
+    }
+
+    return has;
+}
+
+async function readFile(filename: string): Promise<Reader> {
+    return await createReader(filename, {});
+}
+
+function readersToCollection(readers: Reader[]): WordsCollection {
+    const dictReaders = readers.filter(isDictionaryReader).map(dictReaderToCollection);
+    const nonDictCollection = lineReadersToCollection(readers.filter((a) => !isDictionaryReader(a)));
+    const collections = [...dictReaders, nonDictCollection];
+
+    const collection = {
+        size: collections.reduce((s, a) => s + a.size, 0),
+        has: (word: string, caseSensitive: boolean) => collections.some((a) => a.has(word, caseSensitive)),
+    };
+
+    return collection;
 }
 
 const cache = new WeakMap<FilePath[], WordsCollection>();
@@ -47,7 +74,7 @@ export async function createWordsCollectionFromFiles(files: FilePath | FilePath[
 
     const sources = await Promise.all(files.map((file) => readFile(file)));
 
-    const collection = createWordsCollection(sources.flat());
+    const collection = readersToCollection(sources);
 
     cache.set(files, collection);
     return collection;
@@ -60,20 +87,22 @@ export function createWordsCollection(words: Iterable<string>): WordsCollection 
         .map((a) => a.trim())
         .filter((a) => !!a)
         .filter((a) => !a.startsWith('#'));
-    return new Set(arrWords);
+    const setOfWords = new Set(arrWords);
+    const has = buildHasFn({ hasWord: (word: string) => setOfWords.has(word) });
+    return { size: setOfWords.size, has };
 }
 
 class ExcludeWordsCollectionImpl implements ExcludeWordsCollection {
-    private words: WordsCollection;
+    private collection: WordsCollection;
     readonly size: number;
 
     constructor(collection: WordsCollection) {
-        this.words = collection;
+        this.collection = collection;
         this.size = collection.size;
     }
 
-    public has(word: string) {
-        return this.words.has(word);
+    public has(word: string, caseSensitive: boolean) {
+        return this.collection.has(word, caseSensitive);
     }
 }
 
@@ -88,4 +117,24 @@ export async function createExcludeWordsCollectionFromFiles(
 
 export function createExcludeWordsCollection(words: Iterable<string> | undefined): ExcludeWordsCollection {
     return new ExcludeWordsCollectionImpl(words ? createWordsCollection(words) : new Set());
+}
+
+function isDictionaryReader(reader: Reader | DictionaryReader): reader is DictionaryReader {
+    return 'hasWord' in reader && !!reader.hasWord;
+}
+
+function dictReaderToCollection(reader: DictionaryReader): WordsCollection {
+    return { size: reader.size, has: buildHasFn(reader) };
+}
+
+function lineReadersToCollection(readers: Reader[]): WordsCollection {
+    function* words() {
+        for (const reader of readers) {
+            yield* reader.lines;
+        }
+    }
+
+    const dict = parseDictionary(words(), { stripCaseAndAccents: false });
+
+    return { size: dict.size, has: buildHasFn(dict) };
 }

@@ -18,7 +18,7 @@ export function legacyLineToWords(
     const words = pipe(
         wordGroups,
         opConcatMap((a) => a.split(regExpSpaceOrDash)),
-        opConcatMap((a) => splitCamelCaseIfAllowed(a, allowedSplitWords, keepCase)),
+        opConcatMap((a) => splitCamelCaseIfAllowed(a, allowedSplitWords, keepCase, '')),
         opMap((a) => a.trim()),
         opFilter((a) => !!a),
         opFilter((s) => !regExpRepeatChars.test(s)),

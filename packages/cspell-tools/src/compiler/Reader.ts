@@ -1,4 +1,4 @@
-import type { BaseReader, Reader, ReaderOptions } from './readers/ReaderOptions.js';
+import type { BaseReader, DictionaryReader, Reader, ReaderOptions } from './readers/ReaderOptions.js';
 import { readHunspellFiles } from './readers/readHunspellFiles.js';
 import { regHunspellFile } from './readers/regHunspellFile.js';
 import { textFileReader } from './readers/textFileReader.js';
@@ -17,7 +17,7 @@ const readers: ReaderSelector[] = [
     { test: regHunspellFile, method: readHunspellFiles },
 ];
 
-function findMatchingReader(filename: string, options: ReaderOptions): Promise<BaseReader> {
+function findMatchingReader(filename: string, options: ReaderOptions): Promise<BaseReader | DictionaryReader> {
     for (const reader of readers) {
         if (reader.test.test(filename)) {
             return reader.method(filename, options);

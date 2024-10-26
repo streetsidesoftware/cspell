@@ -38,7 +38,8 @@
               },
               "type": "array"
             }
-          ]
+          ],
+          "description": "Words in the `allowedSplitWords` are considered correct and can be used as a basis for splitting compound words.\n\nIf entries can be split so that all the words in the entry are allowed, then only the individual words are added, otherwise the entire entry is added. This is to prevent misspellings in CamelCase words from being introduced into the dictionary."
         },
         "keepRawCase": {
           "default": false,
@@ -64,6 +65,11 @@
           ],
           "default": false,
           "description": "Split lines into words."
+        },
+        "storeSplitWordsAsCompounds": {
+          "default": false,
+          "description": "Words that have been split using the `allowedSplitWords` are added to the dictionary as compoundable words. These words are prefixed / suffixed with `*`.",
+          "type": "boolean"
         }
       },
       "required": [
@@ -89,7 +95,8 @@
               },
               "type": "array"
             }
-          ]
+          ],
+          "description": "Words in the `allowedSplitWords` are considered correct and can be used as a basis for splitting compound words.\n\nIf entries can be split so that all the words in the entry are allowed, then only the individual words are added, otherwise the entire entry is added. This is to prevent misspellings in CamelCase words from being introduced into the dictionary."
         },
         "filename": {
           "$ref": "#/definitions/FilePath"
@@ -115,6 +122,11 @@
           ],
           "default": false,
           "description": "Split lines into words."
+        },
+        "storeSplitWordsAsCompounds": {
+          "default": false,
+          "description": "Words that have been split using the `allowedSplitWords` are added to the dictionary as compoundable words. These words are prefixed / suffixed with `*`.",
+          "type": "boolean"
         }
       },
       "required": [
@@ -270,6 +282,11 @@
       ],
       "default": false,
       "description": "Split lines into words."
+    },
+    "storeSplitWordsAsCompounds": {
+      "default": false,
+      "description": "Words that have been split using the `allowedSplitWords` are added to the dictionary as compoundable words. These words are prefixed / suffixed with `*`.",
+      "type": "boolean"
     },
     "targets": {
       "description": "Optional Target Dictionaries to create.",

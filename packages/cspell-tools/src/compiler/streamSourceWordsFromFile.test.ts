@@ -17,6 +17,7 @@ describe('Validate the iterateWordsFromFile', () => {
         const reader = await streamSourceWordsFromFile(path.join(samples, 'hunspell/example.aff'), {
             splitWords: false,
             allowedSplitWords,
+            storeSplitWordsAsCompounds: undefined,
         });
         const results = [...reader];
         // this might break if the processing order of hunspell changes.
@@ -27,6 +28,7 @@ describe('Validate the iterateWordsFromFile', () => {
         const reader = await streamSourceWordsFromFile(path.join(samples, 'cities.trie.gz'), {
             splitWords: false,
             allowedSplitWords,
+            storeSplitWordsAsCompounds: undefined,
         });
         const results = [...reader];
         expect(results.join('|')).toBe(

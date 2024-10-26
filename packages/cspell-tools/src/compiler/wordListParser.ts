@@ -11,6 +11,7 @@ export function normalizeTargetWords(options: CompileOptions): Operator<string> 
     const lineParser = createDictionaryLineParser({
         stripCaseAndAccents: options.generateNonStrict,
         stripCaseAndAccentsOnForbidden: true,
+        keepOptionalCompoundCharacter: true,
     });
     const operations: Operator<string>[] = [
         opFilter<string>((a) => !!a),
@@ -77,6 +78,13 @@ export interface ParseFileOptions {
     legacy?: boolean;
 
     allowedSplitWords: AllowedSplitWordsCollection;
+
+    /**
+     * Words that have been split using the `allowedSplitWords` are added to the dictionary as compoundable words.
+     * These words are prefixed / suffixed with `*`.
+     * @default undefined
+     */
+    storeSplitWordsAsCompounds: boolean | undefined;
 }
 
 type ParseFileOptionsRequired = Required<ParseFileOptions>;
@@ -90,6 +98,7 @@ const _defaultOptions: ParseFileOptionsRequired = {
     splitKeepBoth: false,
     // splitSeparator: regExpSplit,
     allowedSplitWords: { has: () => true, size: 0 },
+    storeSplitWordsAsCompounds: undefined,
 };
 
 export const defaultParseDictionaryOptions: ParseFileOptionsRequired = Object.freeze(_defaultOptions);
@@ -106,12 +115,16 @@ export const setOfCSpellDirectiveFlags = ['no-split', 'split', 'keep-case', 'no-
  */
 export function createParseFileLineMapper(options?: Partial<ParseFileOptions>): Operator<string> {
     const _options = options || _defaultOptions;
-    const { splitKeepBoth = _defaultOptions.splitKeepBoth, allowedSplitWords = _defaultOptions.allowedSplitWords } =
-        _options;
+    const {
+        splitKeepBoth = _defaultOptions.splitKeepBoth,
+        allowedSplitWords = _defaultOptions.allowedSplitWords,
+        storeSplitWordsAsCompounds,
+    } = _options;
 
     let { legacy = _defaultOptions.legacy } = _options;
 
     let { split = _defaultOptions.split, keepCase = legacy ? false : _defaultOptions.keepCase } = _options;
+    const compoundFix = storeSplitWordsAsCompounds ? '+' : '';
 
     function isString(line: unknown | string): line is string {
         return typeof line === 'string';
@@ -193,6 +206,10 @@ export function createParseFileLineMapper(options?: Partial<ParseFileOptions>): 
         return lines;
     }
 
+    function splitWordIntoWords(word: string): string[] {
+        return splitCamelCaseIfAllowed(word, allowedSplitWords, keepCase, compoundFix);
+    }
+
     function* splitWords(lines: Iterable<string>): Iterable<string> {
         for (const line of lines) {
             if (legacy) {
@@ -201,9 +218,7 @@ export function createParseFileLineMapper(options?: Partial<ParseFileOptions>): 
             }
             if (split) {
                 const words = splitLine(line);
-                yield* !allowedSplitWords.size
-                    ? words
-                    : words.flatMap((word) => splitCamelCaseIfAllowed(word, allowedSplitWords, keepCase));
+                yield* !allowedSplitWords.size ? words : words.flatMap((word) => splitWordIntoWords(word));
                 if (!splitKeepBoth) continue;
             }
             yield line.replaceAll(/["]/g, '');

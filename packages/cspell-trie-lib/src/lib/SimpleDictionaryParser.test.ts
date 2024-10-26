@@ -73,6 +73,16 @@ describe('Validate SimpleDictionaryParser', () => {
         expect(result).toEqual(expected);
     });
 
+    test.each`
+        content      | options                                    | expected
+        ${'*hello*'} | ${{}}                                      | ${['hello', 'hello+', '+hello', '+hello+']}
+        ${'*hello*'} | ${{ keepOptionalCompoundCharacter: true }} | ${['*hello*']}
+    `('compounds $content', ({ content, options, expected }) => {
+        const trie = parseDictionaryLegacy(content, options);
+        const result = [...trie.words()];
+        expect(result.sort()).toEqual(expected.sort());
+    });
+
     test('preserve cases', () => {
         const words = ['!forbid', '+End', '+Middle+', 'Begin', 'Begin+', 'Café', 'End'];
         const trie = parseDictionaryLegacy(words.join('\n'), { stripCaseAndAccents: false });

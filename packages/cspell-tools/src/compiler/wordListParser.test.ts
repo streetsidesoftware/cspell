@@ -7,6 +7,8 @@ import type { ParseFileOptions } from './wordListParser.js';
 import { normalizeTargetWords, parseFileLines } from './wordListParser.js';
 import { defaultAllowedSplitWords } from './WordsCollection.js';
 
+const alwaysAllowSplit = { size: 10, has: () => true };
+
 describe('Validate the wordListCompiler', () => {
     beforeEach(() => {
         vi.resetAllMocks();
@@ -57,11 +59,23 @@ describe('Validate the wordListCompiler', () => {
         const r = [...parseFileLines(content, options)];
         expect(r).toEqual(expectedResult);
     });
+
+    test.each`
+        content         | options                                                                                       | expectedResult
+        ${'AppleSauce'} | ${pf({ split: true })}                                                                        | ${s('AppleSauce')}
+        ${'AppleSauce'} | ${pf({ split: true, allowedSplitWords: alwaysAllowSplit })}                                   | ${s('apple|sauce')}
+        ${'AppleSauce'} | ${pf({ split: true, allowedSplitWords: alwaysAllowSplit, legacy: true })}                     | ${s('apple|sauce')}
+        ${'AppleSauce'} | ${pf({ split: true, allowedSplitWords: alwaysAllowSplit, storeSplitWordsAsCompounds: true })} | ${s('apple+|+sauce')}
+    `('parseFileLines split $content $options', ({ content, options, expectedResult }) => {
+        const r = [...parseFileLines(content, options)];
+        expect(r).toEqual(expectedResult);
+    });
 });
 
 function pf(...opts: Partial<ParseFileOptions>[]): ParseFileOptions {
     const opt: ParseFileOptions = {
         allowedSplitWords: defaultAllowedSplitWords,
+        storeSplitWordsAsCompounds: undefined,
     };
     for (const op of opts) {
         Object.assign(opt, op);

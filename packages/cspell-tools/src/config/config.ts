@@ -167,7 +167,23 @@ export interface CompileSourceOptions {
      */
     keepRawCase?: boolean | undefined;
 
+    /**
+     * Words in the `allowedSplitWords` are considered correct and can be used
+     * as a basis for splitting compound words.
+     *
+     * If entries can be split so that all the words in the entry are allowed,
+     * then only the individual words are added, otherwise the entire entry is added.
+     * This is to prevent misspellings in CamelCase words from being introduced into the
+     * dictionary.
+     */
     allowedSplitWords?: FilePath | FilePath[] | undefined;
+
+    /**
+     * Words that have been split using the `allowedSplitWords` are added to the dictionary as compoundable words.
+     * These words are prefixed / suffixed with `*`.
+     * @default false
+     */
+    storeSplitWordsAsCompounds?: boolean | undefined;
 }
 
 export const configFileSchemaURL =
