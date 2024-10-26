@@ -677,7 +677,7 @@ declare function createDictionaryLineParserMapper(options?: Partial<ParseDiction
  */
 declare function parseDictionaryLines(lines: Iterable<string> | string, options?: Partial<ParseDictionaryOptions>): Iterable<string>;
 declare function parseDictionaryLegacy(text: string | string[], options?: Partial<ParseDictionaryOptions>): Trie;
-declare function parseDictionary(text: string | string[], options?: Partial<ParseDictionaryOptions>): ITrie;
+declare function parseDictionary(text: string | Iterable<string>, options?: Partial<ParseDictionaryOptions>): ITrie;
 
 /**
  * Builds an optimized Trie from a Iterable<string>. It attempts to reduce the size of the trie
