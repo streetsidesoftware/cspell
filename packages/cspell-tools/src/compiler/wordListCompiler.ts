@@ -36,7 +36,9 @@ export async function compileWordList(
 function normalize(lines: Iterable<string>, options: CompileOptions): Iterable<string> {
     const filter = normalizeTargetWords(options);
 
-    const iter = pipe(removeDuplicates(lines), filter);
+    const cleanLines = options.removeDuplicates ? removeDuplicates(lines) : lines;
+
+    const iter = pipe(cleanLines, filter);
     if (!options.sort) return iter;
 
     const result = new Set(iter);

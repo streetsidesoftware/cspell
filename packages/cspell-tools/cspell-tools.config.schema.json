@@ -183,6 +183,11 @@
           "description": "Name of target, used as the basis of target file name.",
           "type": "string"
         },
+        "removeDuplicates": {
+          "default": false,
+          "description": "Remove duplicate words, favor lower case words over mixed case words. Combine compound prefixes where possible.",
+          "type": "boolean"
+        },
         "sort": {
           "default": true,
           "description": "Sort the words in the resulting dictionary. Does not apply to `trie` based formats.",
@@ -260,6 +265,11 @@
     "maxDepth": {
       "description": "Maximum number of nested Hunspell Rules to apply. This is needed for recursive dictionaries like Hebrew.",
       "type": "number"
+    },
+    "removeDuplicates": {
+      "default": false,
+      "description": "Remove duplicate words, favor lower case words over mixed case words. Combine compound prefixes where possible.",
+      "type": "boolean"
     },
     "rootDir": {
       "description": "Specify the directory where all relative paths will resolved against. By default, all relative paths are relative to the location of the config file.",

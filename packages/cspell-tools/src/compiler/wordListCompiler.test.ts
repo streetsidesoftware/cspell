@@ -250,8 +250,13 @@ function legacyNormalizeWords(lines: Iterable<string>): Iterable<string> {
     );
 }
 
-function compileOpt(sort: boolean, generateNonStrict = true, dictionaryDirectives?: string[]): CompileOptions {
-    return { sort, generateNonStrict, dictionaryDirectives };
+function compileOpt(
+    sort: boolean,
+    generateNonStrict = true,
+    dictionaryDirectives: string[] | undefined = undefined,
+    removeDuplicates = false,
+): CompileOptions {
+    return { sort, generateNonStrict, dictionaryDirectives, removeDuplicates };
 }
 
 // const cities = `\
