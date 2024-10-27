@@ -117,6 +117,7 @@ const settings = {
     enableFiletypes: ['svelte', 'julia'],
     import: [
         '@cspell/dict-ada/cspell-ext.json',
+        '@cspell/dict-al/cspell-ext.json',
         '@cspell/dict-aws/cspell-ext.json',
         '@cspell/dict-bash/cspell-ext.json',
         '@cspell/dict-companies/cspell-ext.json',
