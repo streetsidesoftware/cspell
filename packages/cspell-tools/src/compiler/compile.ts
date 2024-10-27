@@ -50,6 +50,7 @@ export async function compile(request: CompileRequest, options?: CompileOptions)
     const targetOptions: CompileTargetConfig = {
         sort: request.sort,
         generateNonStrict: request.generateNonStrict,
+        removeDuplicates: request.removeDuplicates,
     };
     const conditional = options?.conditionalBuild || false;
     const checksumFile = resolveChecksumFile(request.checksumFile || conditional, rootDir);
@@ -108,6 +109,7 @@ export async function compileTarget(
     const { format, sources, trieBase, sort = true, generateNonStrict = false, excludeWordsFrom } = target;
     const targetDirectory = path.resolve(rootDir, target.targetDirectory ?? cwd ?? process.cwd());
     const dictionaryDirectives = target.dictionaryDirectives ?? compileOptions.dictionaryDirectives;
+    const removeDuplicates = target.removeDuplicates ?? false;
 
     const excludeFilter = await createExcludeFilter(excludeWordsFrom);
 
@@ -129,6 +131,7 @@ export async function compileTarget(
         generateNonStrict,
         filter: excludeFilter,
         dictionaryDirectives,
+        // removeDuplicates, // Add this in if we use it.
     });
     const checksumRoot = (checksumFile && path.dirname(checksumFile)) || rootDir;
 
@@ -151,10 +154,16 @@ export async function compileTarget(
                   trie4: format === 'trie4',
                   generateNonStrict: generateNonStrictTrie,
                   dictionaryDirectives: undefined,
+                  //   removeDuplicates, // Add this in if we use it.
               });
           }
         : async (words: Iterable<string>, dst: string) => {
-              return compileWordList(pipe(words, normalizer), dst, { sort, generateNonStrict, dictionaryDirectives });
+              return compileWordList(pipe(words, normalizer), dst, {
+                  sort,
+                  generateNonStrict,
+                  dictionaryDirectives,
+                  removeDuplicates,
+              });
           };
 
     await processFiles(action, filesToProcess, filename);
@@ -265,6 +274,7 @@ async function readFileSource(fileSource: FileSource, sourceOptions: CompileSour
         keepRawCase = sourceOptions.keepRawCase || false,
         split = sourceOptions.split || false,
         maxDepth,
+        storeSplitWordsAsCompounds,
     } = fileSource;
 
     const legacy = split === 'legacy';
@@ -282,6 +292,7 @@ async function readFileSource(fileSource: FileSource, sourceOptions: CompileSour
         splitWords,
         keepCase: keepRawCase,
         allowedSplitWords,
+        storeSplitWordsAsCompounds,
     };
 
     logWithTimestamp(`Reading ${path.basename(filename)}`);
@@ -317,5 +328,6 @@ function logProgress<T>(freq = 100_000): (iter: Iterable<T>) => Iterable<T> {
 async function createExcludeFilter(excludeWordsFrom: FilePath[] | undefined): Promise<(word: string) => boolean> {
     if (!excludeWordsFrom || !excludeWordsFrom.length) return () => true;
     const excludeWords = await createWordsCollectionFromFiles(excludeWordsFrom);
-    return (word: string) => !excludeWords.has(word);
+
+    return (word: string) => !excludeWords.has(word, word.toUpperCase() !== word);
 }

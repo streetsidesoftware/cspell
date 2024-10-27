@@ -36,11 +36,108 @@ export async function compileWordList(
 function normalize(lines: Iterable<string>, options: CompileOptions): Iterable<string> {
     const filter = normalizeTargetWords(options);
 
-    const iter = pipe(lines, filter);
+    const cleanLines = options.removeDuplicates ? removeDuplicates(lines) : lines;
+
+    const iter = pipe(cleanLines, filter);
     if (!options.sort) return iter;
 
     const result = new Set(iter);
     return [...result].sort();
+}
+
+function stripCompoundAFix(word: string): string {
+    return word.replaceAll('*', '').replaceAll('+', '');
+}
+
+function* removeDuplicates(words: Iterable<string>): Iterable<string> {
+    const wordSet = new Set(words);
+    const wordForms = new Map<string, string[]>();
+    for (const word of wordSet) {
+        const lc = stripCompoundAFix(word.toLowerCase());
+        const forms = wordForms.get(lc) ?? [];
+        forms.push(word);
+        wordForms.set(lc, forms);
+    }
+
+    for (const forms of wordForms.values()) {
+        if (forms.length <= 1) {
+            yield* forms;
+            continue;
+        }
+        const mForms = removeDuplicateForms(forms);
+        if (mForms.size <= 1) {
+            yield* mForms.values();
+            continue;
+        }
+        // Handle upper / lower mix.
+        const words = [...mForms.keys()];
+        const lc = words[0].toLowerCase();
+        const lcForm = mForms.get(lc);
+        if (!lcForm) {
+            yield* mForms.values();
+            continue;
+        }
+        mForms.delete(lc);
+        yield lcForm;
+        for (const form of mForms.values()) {
+            if (form.toLowerCase() === lcForm) continue;
+            yield form;
+        }
+    }
+}
+
+/**
+ * solo
+ * optional_prefix*
+ * optional_suffix*
+ * required_prefix+
+ * required_suffix+
+ */
+
+enum Flags {
+    base = 0,
+    noPfx = 1 << 0,
+    noSfx = 1 << 1,
+    pfx = 1 << 2,
+    sfx = 1 << 3,
+    noFix = noPfx | noSfx,
+    midFix = pfx | sfx,
+}
+
+function applyFlags(word: string, flags: number): string {
+    if (flags === Flags.noFix) return word;
+    if (flags === (Flags.noFix | Flags.midFix)) return '*' + word + '*';
+    const p = flags & Flags.pfx ? (flags & Flags.noPfx ? '*' : '+') : '';
+    const s = flags & Flags.sfx ? (flags & Flags.noSfx ? '*' : '+') : '';
+    return s + word + p;
+}
+
+function removeDuplicateForms(forms: Iterable<string>): Map<string, string> {
+    function flags(word: string, flag: number = 0) {
+        let f = Flags.base;
+        const isOptPrefix = word.endsWith('*');
+        const isPrefix = !isOptPrefix && word.endsWith('+');
+        const isAnyPrefix = isPrefix || isOptPrefix;
+        const isOptSuffix = word.startsWith('*');
+        const isSuffix = !isOptSuffix && word.startsWith('+');
+        const isAnySuffix = isSuffix || isOptSuffix;
+        f |= isAnyPrefix ? Flags.pfx : 0;
+        f |= !isPrefix ? Flags.noPfx : 0;
+        f |= isAnySuffix ? Flags.sfx : 0;
+        f |= !isSuffix ? Flags.noSfx : 0;
+        return flag | f;
+    }
+
+    const m = new Map<string, number>();
+    for (const form of forms) {
+        const k = stripCompoundAFix(form);
+        m.set(k, flags(form, m.get(k)));
+    }
+    return new Map(
+        [...m.entries()].map(([form, flag]) => {
+            return [form, applyFlags(form, flag)];
+        }),
+    );
 }
 
 function createWordListTarget(destFilename: string): (seq: Iterable<string>) => Promise<void> {
@@ -107,4 +204,5 @@ function createTrieTarget(destFilename: string, options: TrieOptions): (words: I
 
 export const __testing__ = {
     wordListHeader,
+    removeDuplicates,
 };

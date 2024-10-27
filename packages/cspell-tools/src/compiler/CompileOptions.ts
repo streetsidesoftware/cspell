@@ -28,4 +28,11 @@ export interface CompileOptions {
      *
      */
     dictionaryDirectives?: string[] | undefined;
+
+    /**
+     * Remove duplicate words, favor lower case words over mixed case words.
+     * Combine compound prefixes where possible.
+     * @default false
+     */
+    removeDuplicates?: boolean;
 }

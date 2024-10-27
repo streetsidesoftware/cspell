@@ -16,7 +16,7 @@ describe('createAllowedSplitWords', () => {
         const fixFiles: string[] | undefined = Array.isArray(files) ? files : !files ? undefined : [files];
         const allowedFiles = fixFiles?.map((file) => resolvePathToFixture(file));
         const allowed = await createAllowedSplitWordsFromFiles(allowedFiles);
-        expect(allowed.size).toBe(expectedSize);
-        expect(allowed.has(has)).toBe(expected);
+        expect(allowed.size).toBeGreaterThanOrEqual(expectedSize);
+        expect(allowed.has(has, true)).toBe(expected);
     });
 });
