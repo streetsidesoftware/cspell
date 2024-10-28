@@ -3,7 +3,7 @@ Repository: wireapp/wire-webapp
 Url: "https://github.com/wireapp/wire-webapp.git"
 Args: ["src/script/**/*.{js,ts,tsx,md}"]
 Lines:
- CSpell: Files checked: 1230, Issues found: 2752 in 647 files.
+ CSpell: Files checked: 1234, Issues found: 2755 in 648 files.
  exit code: 1
 src/script/Config.ts:20:25     - Unknown word (wireapp)    -- import {Runtime} from '@wireapp/commons';
 src/script/Config.ts:83:31     - Unknown word (acces)      -- DataDog client api keys acces */
@@ -844,12 +844,14 @@ src/script/components/MessagesList/Message/ContentMessage/asset/TextMessageRende
 src/script/components/MessagesList/Message/ContentMessage/asset/TextMessageRenderer/TextMessageRenderer.test.tsx:41:54     - Unknown word (buttton)    -- message-mention" role="buttton" data-uie-name="label
 src/script/components/MessagesList/Message/ContentMessage/asset/TextMessageRenderer/TextMessageRenderer.tsx:144:11    - Unknown word (clickabled) -- //clickabled elements directly.
 src/script/components/MessagesList/Message/ContentMessage/asset/TextMessageRenderer/TextMessageRenderer.tsx:146:48    - Unknown word (noninteractive) -- next-line jsx-a11y/no-noninteractive-element-interactions
-src/script/components/MessagesList/Message/ContentMessage/asset/VideoAsset.tsx:163:34    - Unknown word (UNFOCUSABLE) -- tabIndex={TabIndex.UNFOCUSABLE}
-src/script/components/MessagesList/Message/ContentMessage/asset/VideoAsset.tsx:194:69    - Unknown word (seekbar)     -- asset__controls__bottom__seekbar"
-src/script/components/MessagesList/Message/ContentMessage/asset/VideoAsset.tsx:195:55    - Unknown word (seekbar)     -- uie-name="status-video-seekbar"
+src/script/components/MessagesList/Message/ContentMessage/asset/VideoAsset.tsx:216:34    - Unknown word (UNFOCUSABLE) -- tabIndex={TabIndex.UNFOCUSABLE}
 src/script/components/MessagesList/Message/ContentMessage/asset/VideoAsset.tsx:22:26     - Unknown word (wireapp)    -- import {TabIndex} from '@wireapp/react-ui-kit/lib/types
-src/script/components/MessagesList/Message/ContentMessage/asset/VideoAsset.tsx:24:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
-src/script/components/MessagesList/Message/ContentMessage/asset/VideoAsset.tsx:26:28     - Unknown word (wireapp)    -- {useTimeout} from '@wireapp/react-ui-kit';
+src/script/components/MessagesList/Message/ContentMessage/asset/VideoAsset.tsx:252:69    - Unknown word (seekbar)     -- asset__controls__bottom__seekbar"
+src/script/components/MessagesList/Message/ContentMessage/asset/VideoAsset.tsx:253:55    - Unknown word (seekbar)     -- uie-name="status-video-seekbar"
+src/script/components/MessagesList/Message/ContentMessage/asset/VideoAsset.tsx:25:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
+src/script/components/MessagesList/Message/ContentMessage/asset/VideoAsset.tsx:27:51     - Unknown word (wireapp)    -- useTimeout} from '@wireapp/react-ui-kit';
+src/script/components/MessagesList/Message/ContentMessage/asset/VideoAsset.tsx:28:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
+src/script/components/MessagesList/Message/ContentMessage/asset/VideoAsset.tsx:93:67     - Unknown word (synchorous) -- check codecs), but it's synchorous, which is helpful for
 src/script/components/MessagesList/Message/ContentMessage/asset/controls/AudioSeekBar.tsx:119:35    - Unknown word (seekbar)    -- uie-name="status-audio-seekbar"
 src/script/components/MessagesList/Message/ContentMessage/asset/index.tsx:20:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
 src/script/components/MessagesList/Message/ContentMessage/asset/useAssetTransfer.ts:22:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
@@ -1275,15 +1277,15 @@ src/script/conversation/ConversationRepository.ts:2892:50   - Unknown word (unar
 src/script/conversation/ConversationRepository.ts:2896:64   - Unknown word (unarchived)     -- conversationEntity.id}' unarchived by trigger '${trigger
 src/script/conversation/ConversationRepository.ts:28:10     - Unknown word (wireapp)    -- } from '@wireapp/api-client/lib/conversation
 src/script/conversation/ConversationRepository.ts:33:10     - Unknown word (wireapp)    -- } from '@wireapp/api-client/lib/conversation
-src/script/conversation/ConversationRepository.ts:3464:45   - Unknown word (Finalisation)   -- injectJoinedAfterMigrationFinalisationMessage = (conversation
-src/script/conversation/ConversationRepository.ts:3466:34   - Unknown word (Finalisation)   -- joinedAfterMLSMigrationFinalisationEvent = EventBuilder
-src/script/conversation/ConversationRepository.ts:3466:95   - Unknown word (Finalisation)   -- buildJoinedAfterMLSMigrationFinalisation(
-src/script/conversation/ConversationRepository.ts:3470:73   - Unknown word (Finalisation)   -- joinedAfterMLSMigrationFinalisationEvent);
-src/script/conversation/ConversationRepository.ts:3473:38   - Unknown word (Finalisation)   -- readonly injectMLSMigrationFinalisationOngoingCallMessage =
+src/script/conversation/ConversationRepository.ts:3477:45   - Unknown word (Finalisation)   -- injectJoinedAfterMigrationFinalisationMessage = (conversation
+src/script/conversation/ConversationRepository.ts:3479:34   - Unknown word (Finalisation)   -- joinedAfterMLSMigrationFinalisationEvent = EventBuilder
+src/script/conversation/ConversationRepository.ts:3479:95   - Unknown word (Finalisation)   -- buildJoinedAfterMLSMigrationFinalisation(
+src/script/conversation/ConversationRepository.ts:3483:73   - Unknown word (Finalisation)   -- joinedAfterMLSMigrationFinalisationEvent);
+src/script/conversation/ConversationRepository.ts:3486:38   - Unknown word (Finalisation)   -- readonly injectMLSMigrationFinalisationOngoingCallMessage =
 src/script/conversation/ConversationRepository.ts:34:37     - Unknown word (wireapp)    -- CONVERSATION_TYPING} from '@wireapp/api-client/lib/conversation
-src/script/conversation/ConversationRepository.ts:3740:60   - Unknown word (Conv)           -- pushClients -> setClientsForConv avs api whenever
-src/script/conversation/ConversationRepository.ts:3810:14   - Unknown word (Unarchived)     -- const wasUnarchived = previouslyArchived
-src/script/conversation/ConversationRepository.ts:3811:12   - Unknown word (Unarchived)     -- if (wasUnarchived) {
+src/script/conversation/ConversationRepository.ts:3753:60   - Unknown word (Conv)           -- pushClients -> setClientsForConv avs api whenever
+src/script/conversation/ConversationRepository.ts:3823:14   - Unknown word (Unarchived)     -- const wasUnarchived = previouslyArchived
+src/script/conversation/ConversationRepository.ts:3824:12   - Unknown word (Unarchived)     -- if (wasUnarchived) {
 src/script/conversation/ConversationRepository.ts:453:9     - Unknown word (teamid)       -- teamid: this.teamState.team
 src/script/conversation/ConversationRepository.ts:47:10     - Unknown word (wireapp)    -- } from '@wireapp/api-client/lib/event
 src/script/conversation/ConversationRepository.ts:48:35     - Unknown word (wireapp)    -- BackendErrorLabel} from '@wireapp/api-client/lib/http
@@ -1945,29 +1947,30 @@ src/script/page/LeftSidebar/panels/Conversations/ConnectionRequests/ConnectionRe
 src/script/page/LeftSidebar/panels/Conversations/ConnectionRequests/ConnectionRequests.tsx:51:30     - Unknown word (UNFOCUSABLE) -- li tabIndex={TabIndex.UNFOCUSABLE} data-uie-name="connection
 src/script/page/LeftSidebar/panels/Conversations/ConversationHeader/ConversationHeader.tsx:24:64     - Unknown word (wireapp)    -- SearchIcon} from '@wireapp/react-ui-kit';
 src/script/page/LeftSidebar/panels/Conversations/ConversationHeader/ConversationHeader.tsx:25:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
+src/script/page/LeftSidebar/panels/Conversations/ConversationSidebar/ConversationSidebar.tsx:20:41     - Unknown word (wireapp)    -- IconButton} from '@wireapp/react-ui-kit';
 src/script/page/LeftSidebar/panels/Conversations/ConversationTab/ConversationFolderTab.tsx:123:47    - Unknown word (conv)       -- unreadConversations.some(conv => conv.id === conversation
 src/script/page/LeftSidebar/panels/Conversations/ConversationTab/ConversationFolderTab.tsx:123:55    - Unknown word (conv)       -- eadConversations.some(conv => conv.id === conversation
-src/script/page/LeftSidebar/panels/Conversations/ConversationTabs/ConversationTabs.tsx:20:87     - Unknown word (wireapp)    -- rnalLinkIcon, Tooltip} from '@wireapp/react-ui-kit';
-src/script/page/LeftSidebar/panels/Conversations/Conversations.tsx:186:76    - Unknown word (UNCOLLAPSE) -- EventName.UI.SIDEBAR_UNCOLLAPSE,
-src/script/page/LeftSidebar/panels/Conversations/Conversations.tsx:230:64    - Unknown word (favorited)  -- ddEventListener('conversation-favorited', openFavorites);
-src/script/page/LeftSidebar/panels/Conversations/Conversations.tsx:232:69    - Unknown word (favorited)  -- veEventListener('conversation-favorited', openFavorites);
+src/script/page/LeftSidebar/panels/Conversations/ConversationTabs/ConversationTabs.tsx:20:90     - Unknown word (wireapp)    -- SupportIcon} from '@wireapp/react-ui-kit';
+src/script/page/LeftSidebar/panels/Conversations/Conversations.tsx:201:76    - Unknown word (UNCOLLAPSE) -- EventName.UI.SIDEBAR_UNCOLLAPSE,
 src/script/page/LeftSidebar/panels/Conversations/Conversations.tsx:23:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
-src/script/page/LeftSidebar/panels/Conversations/Conversations.tsx:25:56     - Unknown word (wireapp)    -- useMatchMedia} from '@wireapp/react-ui-kit';
+src/script/page/LeftSidebar/panels/Conversations/Conversations.tsx:240:64    - Unknown word (favorited)  -- ddEventListener('conversation-favorited', openFavorites);
+src/script/page/LeftSidebar/panels/Conversations/Conversations.tsx:242:69    - Unknown word (favorited)  -- veEventListener('conversation-favorited', openFavorites);
+src/script/page/LeftSidebar/panels/Conversations/Conversations.tsx:25:31     - Unknown word (wireapp)    -- useMatchMedia} from '@wireapp/react-ui-kit';
 src/script/page/LeftSidebar/panels/Conversations/Conversations.tsx:26:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
-src/script/page/LeftSidebar/panels/Conversations/ConversationsList.test.tsx:101:11    - Unknown word (unser)      -- const unserNames = ['Alice', 'Bob
-src/script/page/LeftSidebar/panels/Conversations/ConversationsList.test.tsx:102:27    - Unknown word (unser)      -- const conversations = unserNames.map(create1to1Conversati
-src/script/page/LeftSidebar/panels/Conversations/ConversationsList.test.tsx:106:5     - Unknown word (unser)      -- unserNames.forEach(userName
 src/script/page/LeftSidebar/panels/Conversations/ConversationsList.test.tsx:21:57     - Unknown word (wireapp)    -- CONVERSATION_TYPE} from '@wireapp/api-client/lib/conversation
+src/script/page/LeftSidebar/panels/Conversations/ConversationsList.test.tsx:89:11     - Unknown word (unser)      -- const unserNames = ['Alice', 'Bob
+src/script/page/LeftSidebar/panels/Conversations/ConversationsList.test.tsx:90:27     - Unknown word (unser)      -- const conversations = unserNames.map(create1to1Conversati
+src/script/page/LeftSidebar/panels/Conversations/ConversationsList.test.tsx:94:5      - Unknown word (unser)      -- unserNames.forEach(userName
 src/script/page/LeftSidebar/panels/Conversations/EmptyConversationList/EmptyConversationList.styles.ts:51:14     - Unknown word (seperator)  -- export const seperator: CSSObject = {
-src/script/page/LeftSidebar/panels/Conversations/EmptyConversationList/EmptyConversationList.tsx:102:22    - Unknown word (seperator)  -- <span css={seperator}>{t('conversationButtonSepara
 src/script/page/LeftSidebar/panels/Conversations/EmptyConversationList/EmptyConversationList.tsx:22:58     - Unknown word (wireapp)    -- LinkVariant} from '@wireapp/react-ui-kit';
 src/script/page/LeftSidebar/panels/Conversations/EmptyConversationList/EmptyConversationList.tsx:23:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
-src/script/page/LeftSidebar/panels/Conversations/EmptyConversationList/EmptyConversationList.tsx:28:58     - Unknown word (seperator)  -- paragraphBold, paragraphGray, seperator, wrapper} from './EmptyConver
-src/script/page/LeftSidebar/panels/Conversations/EmptyConversationList/EmptyConversationList.tsx:58:22     - Unknown word (seperator)  -- <span css={seperator}>{t('conversationButtonSepara
-src/script/page/LeftSidebar/panels/Conversations/Helpers.test.tsx:103:66    - Unknown word (Têam)       -- name()).toEqual('Wêb Têam');
-src/script/page/LeftSidebar/panels/Conversations/Helpers.test.tsx:34:56     - Unknown word (Virgile)    -- generateConversation({name: 'Virgile'});
-src/script/page/LeftSidebar/panels/Conversations/Helpers.test.tsx:36:56     - Unknown word (Bardia)     -- generateConversation({name: 'Bardia'});
-src/script/page/LeftSidebar/panels/Conversations/Helpers.test.tsx:38:60     - Unknown word (Têam)       -- erateConversation({name: 'Wêb Têam'});
+src/script/page/LeftSidebar/panels/Conversations/EmptyConversationList/EmptyConversationList.tsx:27:58     - Unknown word (seperator)  -- paragraphBold, paragraphGray, seperator, wrapper} from './EmptyConver
+src/script/page/LeftSidebar/panels/Conversations/EmptyConversationList/EmptyConversationList.tsx:47:22     - Unknown word (seperator)  -- <span css={seperator}>{t('conversationButtonSepara
+src/script/page/LeftSidebar/panels/Conversations/EmptyConversationList/EmptyConversationList.tsx:91:22     - Unknown word (seperator)  -- <span css={seperator}>{t('conversationButtonSepara
+src/script/page/LeftSidebar/panels/Conversations/Helpers.test.tsx:104:66    - Unknown word (Têam)       -- name()).toEqual('Wêb Têam');
+src/script/page/LeftSidebar/panels/Conversations/Helpers.test.tsx:35:56     - Unknown word (Virgile)    -- generateConversation({name: 'Virgile'});
+src/script/page/LeftSidebar/panels/Conversations/Helpers.test.tsx:37:56     - Unknown word (Bardia)     -- generateConversation({name: 'Bardia'});
+src/script/page/LeftSidebar/panels/Conversations/Helpers.test.tsx:39:60     - Unknown word (Têam)       -- erateConversation({name: 'Wêb Têam'});
 src/script/page/LeftSidebar/panels/Conversations/useFoldersStore.ts:20:23     - Unknown word (zustand)    -- import {create} from 'zustand';
 src/script/page/LeftSidebar/panels/Conversations/useSidebarStore.ts:20:23     - Unknown word (zustand)    -- import {create} from 'zustand';
 src/script/page/LeftSidebar/panels/Conversations/useSidebarStore.ts:21:43     - Unknown word (zustand)    -- createJSONStorage} from 'zustand/middleware';
@@ -2063,10 +2066,10 @@ src/script/page/RightSidebar/AddParticipants/AddParticipants.tsx:26:39     - Unk
 src/script/page/RightSidebar/ConversationDetails/ConversationDetails.test.tsx:21:35     - Unknown word (wireapp)    -- CONVERSATION_TYPE} from '@wireapp/api-client/lib/conversation
 src/script/page/RightSidebar/ConversationDetails/ConversationDetails.tsx:22:30     - Unknown word (wireapp)    -- RECEIPT_MODE} from '@wireapp/api-client/lib/conversation
 src/script/page/RightSidebar/ConversationDetails/ConversationDetails.tsx:23:26     - Unknown word (wireapp)    -- import {TabIndex} from '@wireapp/react-ui-kit/lib/types
-src/script/page/RightSidebar/ConversationDetails/ConversationDetails.tsx:26:26     - Unknown word (wireapp)    -- import {HideIcon} from '@wireapp/react-ui-kit';
-src/script/page/RightSidebar/ConversationDetails/ConversationDetails.tsx:27:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
 src/script/page/RightSidebar/ConversationDetails/components/ConversationDetailsHeader/ConversationDetailsHeader.test.tsx:21:35     - Unknown word (wireapp)    -- CONVERSATION_TYPE} from '@wireapp/api-client/lib/conversation
-src/script/page/RightSidebar/ConversationDetails/components/ConversationDetailsOptions/ConversationDetailsOptions.tsx:22:30     - Unknown word (wireapp)    -- RECEIPT_MODE} from '@wireapp/api-client/lib/conversation
+src/script/page/RightSidebar/ConversationDetails/components/ConversationDetailsOptions/ConversationDetailsOptions.tsx:20:30     - Unknown word (wireapp)    -- RECEIPT_MODE} from '@wireapp/api-client/lib/conversation
+src/script/page/RightSidebar/ConversationDetails/components/ConversationDetailsOptions/ConversationDetailsOptions.tsx:23:26     - Unknown word (wireapp)    -- import {HideIcon} from '@wireapp/react-ui-kit';
+src/script/page/RightSidebar/ConversationDetails/components/ConversationDetailsOptions/ConversationDetailsOptions.tsx:24:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
 src/script/page/RightSidebar/ConversationDetails/utils/getConversationActions.ts:145:39    - Unknown word (Leavable)   -- conversationEntity.isLeavable() && roleRepository
 src/script/page/RightSidebar/ConversationDetails/utils/getConversationActions.ts:22:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
 src/script/page/RightSidebar/GroupParticipantService/GroupParticipantService.tsx:22:26     - Unknown word (wireapp)    -- import {TabIndex} from '@wireapp/react-ui-kit/lib/types
@@ -2376,13 +2379,13 @@ src/script/telemetry/app_init/AppInitStatistics.ts:22:30     - Unknown word (wir
 src/script/telemetry/app_init/AppInitTimings.ts:21:17     - Unknown word (MILLIS)     -- import {TIME_IN_MILLIS} from 'Util/TimeUtil
 src/script/telemetry/app_init/AppInitTimings.ts:52:52     - Unknown word (MILLIS)     -- appLoaded / TIME_IN_MILLIS.SECOND;
 src/script/tracking/Countly.helpers.ts:25:35     - Unknown word (Countly)    -- Logger = getLogger('CountlyHelpers');
-src/script/tracking/Countly.helpers.ts:38:10     - Unknown word (COUNTLY)    -- const {COUNTLY_ENABLE_LOGGING} = Config
+src/script/tracking/Countly.helpers.ts:38:10     - Unknown word (COUNTLY)    -- const {COUNTLY_ENABLE_LOGGING, COUNTLY
+src/script/tracking/Countly.helpers.ts:38:34     - Unknown word (COUNTLY)    -- COUNTLY_ENABLE_LOGGING, COUNTLY_FORCE_REPORTING} = Config
+src/script/tracking/Countly.helpers.ts:41:7      - Unknown word (COUNTLY)    -- if (COUNTLY_FORCE_REPORTING) {
 src/script/tracking/Countly.helpers.ts:44:101    - Unknown word (COUNTLY)    -- Countly logging is ${COUNTLY_ENABLE_LOGGING ? 'enabled
 src/script/tracking/Countly.helpers.ts:44:80     - Unknown word (Countly)    -- environment: ${name}. Countly logging is ${COUNTLY
 src/script/tracking/Countly.helpers.ts:49:19     - Unknown word (Countly)    -- export function isCountlyEnabledAtCurrentEnvironment
 src/script/tracking/Countly.helpers.ts:54:10     - Unknown word (COUNTLY)    -- const {COUNTLY_API_KEY, COUNTLY_ALLOWED
-src/script/tracking/Countly.helpers.ts:54:27     - Unknown word (COUNTLY)    -- const {COUNTLY_API_KEY, COUNTLY_ALLOWED_BACKEND, BACKEND
-src/script/tracking/Countly.helpers.ts:56:30     - Unknown word (COUNTLY)    -- allowedBackendUrls = COUNTLY_ALLOWED_BACKEND?.split
 src/script/tracking/Countly.helpers.ts:57:11     - Unknown word (Countly)    -- const isCountlyEnabled =
 src/script/tracking/Countly.helpers.ts:60:12     - Unknown word (Countly)    -- return isCountlyEnabled;
 src/script/tracking/EventName.ts:41:13     - Unknown word (UNCOLLAPSE) -- SIDEBAR_UNCOLLAPSE: 'ui.sidebar_uncollapse
