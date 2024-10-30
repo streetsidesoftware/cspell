@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>8.15.5 (2024-10-30)</small>
+
+* ci: Workflow Bot -- Update ALL Dependencies (main) (#6442) ([70f43cc](https://github.com/streetsidesoftware/cspell-cli/commit/70f43cc)), closes [#6442](https://github.com/streetsidesoftware/cspell-cli/issues/6442)
+
 ## <small>8.15.4 (2024-10-18)</small>
 
 * chore: Update Integration Test Performance Data (#6389) ([7ece6a7](https://github.com/streetsidesoftware/cspell-cli/commit/7ece6a7)), closes [#6389](https://github.com/streetsidesoftware/cspell-cli/issues/6389)
