@@ -65,8 +65,13 @@ function* removeDuplicates(words: Iterable<string>): Iterable<string> {
             continue;
         }
         const mForms = removeDuplicateForms(forms);
+        // if (forms.some((a) => /^[*+]?col[*+]?$/.test(a))) {
+        //     console.warn('Found col %o', { forms, mForms });
+        // }
         if (mForms.size <= 1) {
-            yield* mForms.values();
+            for (const form of mForms.values()) {
+                yield* form;
+            }
             continue;
         }
         // Handle upper / lower mix.
@@ -74,14 +79,20 @@ function* removeDuplicates(words: Iterable<string>): Iterable<string> {
         const lc = words[0].toLowerCase();
         const lcForm = mForms.get(lc);
         if (!lcForm) {
-            yield* mForms.values();
+            for (const form of mForms.values()) {
+                yield* form;
+            }
             continue;
         }
         mForms.delete(lc);
-        yield lcForm;
-        for (const form of mForms.values()) {
-            if (form.toLowerCase() === lcForm) continue;
-            yield form;
+        const sLcForms = new Set(lcForm);
+        yield* lcForm;
+        if (sLcForms.has('*' + lc + '*')) continue;
+        for (const forms of mForms.values()) {
+            for (const form of forms) {
+                if (sLcForms.has(form.toLowerCase())) continue;
+                yield form;
+            }
         }
     }
 }
@@ -96,39 +107,51 @@ function* removeDuplicates(words: Iterable<string>): Iterable<string> {
 
 enum Flags {
     base = 0,
-    noPfx = 1 << 0,
-    noSfx = 1 << 1,
+    none = 1 << 0,
+    both = 1 << 1,
     pfx = 1 << 2,
     sfx = 1 << 3,
-    noFix = noPfx | noSfx,
-    midFix = pfx | sfx,
+    all = none | both | pfx | sfx,
 }
 
-function applyFlags(word: string, flags: number): string {
-    if (flags === Flags.noFix) return word;
-    if (flags === (Flags.noFix | Flags.midFix)) return '*' + word + '*';
-    const p = flags & Flags.pfx ? (flags & Flags.noPfx ? '*' : '+') : '';
-    const s = flags & Flags.sfx ? (flags & Flags.noSfx ? '*' : '+') : '';
-    return s + word + p;
+function applyFlags(word: string, flags: Flags): string[] {
+    if (flags === Flags.none) return [word];
+    if (flags === Flags.all) return ['*' + word + '*'];
+    if (flags === Flags.both) return ['+' + word + '+'];
+    if (flags === Flags.pfx) return [word + '+'];
+    if (flags === Flags.sfx) return ['+' + word];
+
+    if (flags === (Flags.none | Flags.sfx)) return ['*' + word];
+    if (flags === (Flags.none | Flags.pfx)) return [word + '*'];
+    if (flags === (Flags.none | Flags.pfx | Flags.sfx)) return [word + '*', '*' + word];
+    if (flags === (Flags.none | Flags.both)) return [word, '+' + word + '+'];
+    if (flags === (Flags.none | Flags.both | Flags.sfx)) return [word, '+' + word + '*'];
+    if (flags === (Flags.none | Flags.both | Flags.pfx)) return [word, '*' + word + '+'];
+    if (flags === (Flags.both | Flags.pfx)) return ['*' + word + '+'];
+    if (flags === (Flags.both | Flags.sfx)) return ['+' + word + '*'];
+    if (flags === (Flags.both | Flags.pfx | Flags.sfx)) return ['+' + word + '*', '*' + word + '+'];
+    return ['+' + word, word + '+'];
 }
 
-function removeDuplicateForms(forms: Iterable<string>): Map<string, string> {
-    function flags(word: string, flag: number = 0) {
-        let f = Flags.base;
-        const isOptPrefix = word.endsWith('*');
-        const isPrefix = !isOptPrefix && word.endsWith('+');
-        const isAnyPrefix = isPrefix || isOptPrefix;
-        const isOptSuffix = word.startsWith('*');
-        const isSuffix = !isOptSuffix && word.startsWith('+');
-        const isAnySuffix = isSuffix || isOptSuffix;
-        f |= isAnyPrefix ? Flags.pfx : 0;
-        f |= !isPrefix ? Flags.noPfx : 0;
-        f |= isAnySuffix ? Flags.sfx : 0;
-        f |= !isSuffix ? Flags.noSfx : 0;
-        return flag | f;
+function removeDuplicateForms(forms: Iterable<string>): Map<string, string[]> {
+    function flags(word: string, flag: Flags = 0) {
+        const canBePrefix = word.endsWith('*');
+        const mustBePrefix = !canBePrefix && word.endsWith('+');
+        const isPrefix = canBePrefix || mustBePrefix;
+        const canBeSuffix = word.startsWith('*');
+        const mustBeSuffix = !canBeSuffix && word.startsWith('+');
+        const isSuffix = canBeSuffix || mustBeSuffix;
+        if (canBePrefix && canBeSuffix) return flag | Flags.all;
+        if (mustBePrefix && mustBeSuffix) return flag | Flags.both;
+        if (!isPrefix && !isSuffix) return flag | Flags.none;
+        flag |= isPrefix && !isSuffix ? Flags.pfx : 0;
+        flag |= isSuffix && !isPrefix ? Flags.sfx : 0;
+        flag |= canBePrefix && !mustBeSuffix ? Flags.none : 0;
+        flag |= canBeSuffix && !mustBePrefix ? Flags.none : 0;
+        return flag;
     }
 
-    const m = new Map<string, number>();
+    const m = new Map<string, Flags>();
     for (const form of forms) {
         const k = stripCompoundAFix(form);
         m.set(k, flags(form, m.get(k)));
