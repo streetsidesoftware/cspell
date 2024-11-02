@@ -207,17 +207,22 @@ describe('Validate Larger Dictionary', () => {
 
 describe('', () => {
     test.each`
-        words                      | expected
-        ${'hello'}                 | ${['hello']}
-        ${'hello|HELLO'}           | ${['hello']}
-        ${'hello|*hello*|*HELLO*'} | ${['*hello*']}
-        ${'HELLO|*hello*|*HELLO*'} | ${['*hello*']}
-        ${'HELLO|*HELLO*'}         | ${['*HELLO*']}
-        ${'Hello|*Hello*'}         | ${['*Hello*']}
-        ${'hello|+hello+'}         | ${['*hello*']}
-        ${'hello|hello+'}          | ${['hello*']}
-        ${'hello|+hello'}          | ${['*hello']}
-        ${'hello|hello+|+hello'}   | ${['*hello*']}
+        words                            | expected
+        ${'hello'}                       | ${['hello']}
+        ${'hello|HELLO'}                 | ${['hello']}
+        ${'hello|*hello*|*HELLO*'}       | ${['*hello*']}
+        ${'HELLO|*hello*|*HELLO*'}       | ${['*hello*']}
+        ${'HELLO|*HELLO*'}               | ${['*HELLO*']}
+        ${'Hello|*Hello*'}               | ${['*Hello*']}
+        ${'hello|+hello+'}               | ${['hello', '+hello+']}
+        ${'hello|hello+'}                | ${['hello*']}
+        ${'hello|+hello'}                | ${['*hello']}
+        ${'hello|hello+|+hello|+hello+'} | ${['*hello*']}
+        ${'hello|hello+|+hello|hello*'}  | ${['hello*', '*hello']}
+        ${'hello|hello+|+hello+'}        | ${['hello', '*hello+']}
+        ${'hello|+hello|+hello+'}        | ${['hello', '+hello*']}
+        ${'hello|hello+|+hello'}         | ${['hello*', '*hello']}
+        ${'*col*|+col|col+'}             | ${['*col*']}
     `('removeDuplicate $words', ({ words, expected }) => {
         words = typeof words === 'string' ? words.split('|') : words;
         const result = [...removeDuplicates(words)];
