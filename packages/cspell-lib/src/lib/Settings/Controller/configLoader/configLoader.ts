@@ -453,7 +453,12 @@ export class ConfigLoader implements IConfigLoader {
         }
         // console.warn('missing cache %o', cfgFile.url.href);
 
-        const result = this._mergeConfigFileWithImports(cfgFile, pnpSettings, referencedBy);
+        const pnp: PnPSettingsOptional = {
+            usePnP: cfg.settings.usePnP ?? pnpSettings?.usePnP ?? !!process.versions.pnp,
+            pnpFiles: cfg.settings.pnpFiles ?? pnpSettings?.pnpFiles,
+        };
+
+        const result = this._mergeConfigFileWithImports(cfgFile, pnp, referencedBy);
         this.cachedMergedConfig.set(cfgFile, { pnpSettings, referencedBy, result });
         return result;
     }

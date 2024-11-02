@@ -7,16 +7,14 @@
   "scripts": {
     "prepare-cspell-action": "pnpm run prepare-yarn3",
     "prepare-yarn3": "pnpm run prepare-yarn3-med && pnpm run prepare-yarn3-sci",
-    "prepare-yarn3-med": "cd test-yarn3-med && yarn",
-    "prepare-yarn3-sci": "cd test-yarn3-sci && yarn",
+    "prepare-yarn3-med": "cd test-yarn3-med && corepack yarn",
+    "prepare-yarn3-sci": "cd test-yarn3-sci && corepack yarn",
     "test": "pnpm run test-yarn3 ",
     "test-yarn3": "pnpm run test-yarn3-med && pnpm run test-yarn3-sci",
-    "test-yarn3-med": "cd test-yarn3-med && yarn && yarn test",
-    "test-yarn3-sci": "cd test-yarn3-sci && yarn && yarn test"
+    "test-yarn3-med": "cd test-yarn3-med && corepack yarn && corepack yarn test",
+    "test-yarn3-sci": "cd test-yarn3-sci && corepack yarn && corepack yarn test"
   },
-  "devDependencies": {
-    "yarn": "^1.22.22"
-  },
+  "devDependencies": {},
   "author": "",
   "license": "MIT"
 }
