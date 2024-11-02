@@ -2,6 +2,7 @@ import { opCombine, opCombine as opPipe, type Operator, opFilter, opMap } from '
 import { createDictionaryLineParser } from 'cspell-trie-lib';
 import { uniqueFilter } from 'hunspell-reader';
 
+import { defaultCompileSourceOptions } from '../config/configDefaults.js';
 import type { CompileOptions } from './CompileOptions.js';
 import { legacyLineToWords } from './legacyLineToWords.js';
 import { splitCamelCaseIfAllowed } from './splitCamelCaseIfAllowed.js';
@@ -85,21 +86,30 @@ export interface ParseFileOptions {
      * @default undefined
      */
     storeSplitWordsAsCompounds: boolean | undefined;
+
+    /**
+     * Controls the minimum length of a compound word when storing words using `storeSplitWordsAsCompounds`.
+     * The compound words are prefixed / suffixed with `*`, to allow them to be combined with other compound words.
+     * If the length is too low, then the dictionary will consider many misspelled words as correct.
+     * @default 4
+     */
+    minCompoundLength: number | undefined;
 }
 
 type ParseFileOptionsRequired = Required<ParseFileOptions>;
 
 const commentCharacter = '#';
 
-const _defaultOptions: ParseFileOptionsRequired = {
+const _defaultOptions = {
     keepCase: true,
     legacy: false,
     split: false,
     splitKeepBoth: false,
     // splitSeparator: regExpSplit,
     allowedSplitWords: { has: () => true, size: 0 },
-    storeSplitWordsAsCompounds: undefined,
-};
+    storeSplitWordsAsCompounds: defaultCompileSourceOptions.storeSplitWordsAsCompounds,
+    minCompoundLength: defaultCompileSourceOptions.minCompoundLength,
+} as const satisfies ParseFileOptionsRequired;
 
 export const defaultParseDictionaryOptions: ParseFileOptionsRequired = Object.freeze(_defaultOptions);
 
@@ -119,6 +129,7 @@ export function createParseFileLineMapper(options?: Partial<ParseFileOptions>): 
         splitKeepBoth = _defaultOptions.splitKeepBoth,
         allowedSplitWords = _defaultOptions.allowedSplitWords,
         storeSplitWordsAsCompounds,
+        minCompoundLength = _defaultOptions.minCompoundLength,
     } = _options;
 
     let { legacy = _defaultOptions.legacy } = _options;
@@ -207,7 +218,7 @@ export function createParseFileLineMapper(options?: Partial<ParseFileOptions>): 
     }
 
     function splitWordIntoWords(word: string): string[] {
-        return splitCamelCaseIfAllowed(word, allowedSplitWords, keepCase, compoundFix);
+        return splitCamelCaseIfAllowed(word, allowedSplitWords, keepCase, compoundFix, minCompoundLength);
     }
 
     function* splitWords(lines: Iterable<string>): Iterable<string> {
@@ -260,6 +271,6 @@ export function createParseFileLineMapper(options?: Partial<ParseFileOptions>): 
  * @param _options - defines prefixes used when parsing lines.
  * @returns words that have been normalized.
  */
-export function parseFileLines(lines: Iterable<string> | string, options: Partial<ParseFileOptions>): Iterable<string> {
+export function parseFileLines(lines: Iterable<string> | string, options: ParseFileOptions): Iterable<string> {
     return createParseFileLineMapper(options)(typeof lines === 'string' ? [lines] : lines);
 }

@@ -76,6 +76,7 @@ function pf(...opts: Partial<ParseFileOptions>[]): ParseFileOptions {
     const opt: ParseFileOptions = {
         allowedSplitWords: defaultAllowedSplitWords,
         storeSplitWordsAsCompounds: undefined,
+        minCompoundLength: undefined,
     };
     for (const op of opts) {
         Object.assign(opt, op);

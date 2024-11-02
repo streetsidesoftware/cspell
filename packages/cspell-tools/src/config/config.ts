@@ -186,11 +186,19 @@ export interface CompileSourceOptions {
     allowedSplitWords?: FilePath | FilePath[] | undefined;
 
     /**
-     * Words that have been split using the `allowedSplitWords` are added to the dictionary as compoundable words.
+     * Camel case words that have been split using the `allowedSplitWords` are added to the dictionary as compoundable words.
      * These words are prefixed / suffixed with `*`.
      * @default false
      */
     storeSplitWordsAsCompounds?: boolean | undefined;
+
+    /**
+     * Controls the minimum length of a compound word when storing words using `storeSplitWordsAsCompounds`.
+     * The compound words are prefixed / suffixed with `*`, to allow them to be combined with other compound words.
+     * If the length is too low, then the dictionary will consider many misspelled words as correct.
+     * @default 4
+     */
+    minCompoundLength?: number | undefined;
 }
 
 export const configFileSchemaURL =
