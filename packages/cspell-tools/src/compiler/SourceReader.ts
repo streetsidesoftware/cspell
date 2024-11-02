@@ -1,6 +1,7 @@
+import { RequireFields } from '../types.js';
 import { createReader } from './Reader.js';
 import type { Reader } from './readers/ReaderOptions.js';
-import { parseFileLines } from './wordListParser.js';
+import { parseFileLines, ParseFileOptions } from './wordListParser.js';
 import type { AllowedSplitWordsCollection } from './WordsCollection.js';
 
 export interface SourceReaderOptions {
@@ -67,15 +68,16 @@ function splitLines(lines: Iterable<string>, options: SourceReaderOptions): Iter
 
 async function textFileReader(reader: Reader, options: SourceReaderOptions): Promise<SourceReader> {
     const { legacy, splitWords: split, allowedSplitWords, storeSplitWordsAsCompounds, minCompoundLength } = options;
-    const words = [
-        ...parseFileLines(reader.lines, {
-            legacy,
-            split,
-            allowedSplitWords,
-            storeSplitWordsAsCompounds,
-            minCompoundLength,
-        }),
-    ];
+    const parseOptions = {
+        legacy,
+        split,
+        splitKeepBoth: undefined,
+        keepCase: undefined,
+        allowedSplitWords,
+        storeSplitWordsAsCompounds,
+        minCompoundLength,
+    } as const satisfies RequireFields<ParseFileOptions>;
+    const words = [...parseFileLines(reader.lines, parseOptions)];
 
     return {
         size: words.length,

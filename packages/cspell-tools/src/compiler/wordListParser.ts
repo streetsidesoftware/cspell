@@ -271,6 +271,6 @@ export function createParseFileLineMapper(options?: Partial<ParseFileOptions>): 
  * @param _options - defines prefixes used when parsing lines.
  * @returns words that have been normalized.
  */
-export function parseFileLines(lines: Iterable<string> | string, options: Partial<ParseFileOptions>): Iterable<string> {
+export function parseFileLines(lines: Iterable<string> | string, options: ParseFileOptions): Iterable<string> {
     return createParseFileLineMapper(options)(typeof lines === 'string' ? [lines] : lines);
 }
