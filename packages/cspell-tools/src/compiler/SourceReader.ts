@@ -24,6 +24,8 @@ export interface SourceReaderOptions {
     allowedSplitWords: AllowedSplitWordsCollection;
 
     storeSplitWordsAsCompounds: boolean | undefined;
+
+    minCompoundLength?: number | undefined;
 }
 
 export type AnnotatedWord = string;

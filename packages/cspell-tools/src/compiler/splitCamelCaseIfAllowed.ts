@@ -9,6 +9,7 @@ export function splitCamelCaseIfAllowed(
     allowedWords: AllowedSplitWordsCollection,
     keepCase: boolean,
     compoundPrefix: string,
+    minCompoundLength: number,
 ): string[] {
     const split = [...splitCamelCase(word)];
     if (split.length == 1) return adjustCases(split, allowedWords, keepCase);
@@ -20,7 +21,7 @@ export function splitCamelCaseIfAllowed(
         ? adjusted
         : adjusted.map((w, i) => {
               const { px, sx } = wordIndexes[i];
-              const canCompound = w.length > 2;
+              const canCompound = w.length >= minCompoundLength;
               const lc = w.toLowerCase();
               const p = canCompound && isSingleLetter(px) ? compoundPrefix : '';
               const s = canCompound && isSingleLetter(sx) ? compoundPrefix : '';

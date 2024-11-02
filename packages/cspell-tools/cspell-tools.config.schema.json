@@ -53,6 +53,11 @@
           "description": "Maximum number of nested Hunspell Rules to apply. This is needed for recursive dictionaries like Hebrew.",
           "type": "number"
         },
+        "minCompoundLength": {
+          "default": 4,
+          "description": "Controls the minimum length of a compound word when storing words using `storeSplitWordsAsCompounds`. The compound words are prefixed / suffixed with `*`, to allow them to be combined with other compound words. If the length is too low, then the dictionary will consider many misspelled words as correct.",
+          "type": "number"
+        },
         "split": {
           "anyOf": [
             {
@@ -68,7 +73,7 @@
         },
         "storeSplitWordsAsCompounds": {
           "default": false,
-          "description": "Words that have been split using the `allowedSplitWords` are added to the dictionary as compoundable words. These words are prefixed / suffixed with `*`.",
+          "description": "Camel case words that have been split using the `allowedSplitWords` are added to the dictionary as compoundable words. These words are prefixed / suffixed with `*`.",
           "type": "boolean"
         }
       },
@@ -110,6 +115,11 @@
           "description": "Maximum number of nested Hunspell Rules to apply. This is needed for recursive dictionaries like Hebrew.",
           "type": "number"
         },
+        "minCompoundLength": {
+          "default": 4,
+          "description": "Controls the minimum length of a compound word when storing words using `storeSplitWordsAsCompounds`. The compound words are prefixed / suffixed with `*`, to allow them to be combined with other compound words. If the length is too low, then the dictionary will consider many misspelled words as correct.",
+          "type": "number"
+        },
         "split": {
           "anyOf": [
             {
@@ -125,7 +135,7 @@
         },
         "storeSplitWordsAsCompounds": {
           "default": false,
-          "description": "Words that have been split using the `allowedSplitWords` are added to the dictionary as compoundable words. These words are prefixed / suffixed with `*`.",
+          "description": "Camel case words that have been split using the `allowedSplitWords` are added to the dictionary as compoundable words. These words are prefixed / suffixed with `*`.",
           "type": "boolean"
         }
       },
@@ -266,6 +276,11 @@
       "description": "Maximum number of nested Hunspell Rules to apply. This is needed for recursive dictionaries like Hebrew.",
       "type": "number"
     },
+    "minCompoundLength": {
+      "default": 4,
+      "description": "Controls the minimum length of a compound word when storing words using `storeSplitWordsAsCompounds`. The compound words are prefixed / suffixed with `*`, to allow them to be combined with other compound words. If the length is too low, then the dictionary will consider many misspelled words as correct.",
+      "type": "number"
+    },
     "removeDuplicates": {
       "default": false,
       "description": "Remove duplicate words, favor lower case words over mixed case words. Combine compound prefixes where possible.",
@@ -295,7 +310,7 @@
     },
     "storeSplitWordsAsCompounds": {
       "default": false,
-      "description": "Words that have been split using the `allowedSplitWords` are added to the dictionary as compoundable words. These words are prefixed / suffixed with `*`.",
+      "description": "Camel case words that have been split using the `allowedSplitWords` are added to the dictionary as compoundable words. These words are prefixed / suffixed with `*`.",
       "type": "boolean"
     },
     "targets": {

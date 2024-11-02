@@ -275,6 +275,7 @@ async function readFileSource(fileSource: FileSource, sourceOptions: CompileSour
         split = sourceOptions.split || false,
         maxDepth,
         storeSplitWordsAsCompounds,
+        minCompoundLength,
     } = fileSource;
 
     const legacy = split === 'legacy';
@@ -293,6 +294,7 @@ async function readFileSource(fileSource: FileSource, sourceOptions: CompileSour
         keepCase: keepRawCase,
         allowedSplitWords,
         storeSplitWordsAsCompounds,
+        minCompoundLength,
     };
 
     logWithTimestamp(`Reading ${path.basename(filename)}`);
