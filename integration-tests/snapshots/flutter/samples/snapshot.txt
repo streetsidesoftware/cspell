@@ -3,7 +3,7 @@ Repository: flutter/samples
 Url: "https://github.com/flutter/samples"
 Args: ["--issues-summary-report","--locale=en,en-GB,lorem","--exclude=**/*.{pbxproj,xcworkspace,xcworkspacedata,xcscheme,xcconfig,plist}","."]
 Lines:
- CSpell: Files checked: 2786, Issues found: 10732 in 1066 files.
+ CSpell: Files checked: 2786, Issues found: 10419 in 975 files.
  exit code: 1
 AUTHORS:7:1       - Unknown word (Abhijeeth)  -- Abhijeeth Padarthi <rkinabhi@gmail
 AUTHORS:7:11      - Unknown word (Padarthi)   -- Abhijeeth Padarthi <rkinabhi@gmail.com
@@ -705,17 +705,13 @@ ai_recipe_generation/linux/flutter/CMakeLists.txt:20:1      - Unknown word (endf
 ai_recipe_generation/linux/flutter/CMakeLists.txt:29:39     - Unknown word (libflutter)  -- LIBRARY "${EPHEMERAL_DIR}/libflutter_linux_gtk.so")
 ai_recipe_generation/linux/flutter/CMakeLists.txt:33:45     - Unknown word (icudtl)      -- FILE "${EPHEMERAL_DIR}/icudtl.dat" PARENT_SCOPE)
 ai_recipe_generation/linux/flutter/CMakeLists.txt:35:43     - Unknown word (libapp)      -- PROJECT_DIR}/build/lib/libapp.so" PARENT_SCOPE)
-ai_recipe_generation/linux/flutter/generated_plugin_registrant.cc:12:5      - Unknown word (autoptr)    -- g_autoptr(FlPluginRegistrar) file
 ai_recipe_generation/linux/flutter/generated_plugins.cmake:19:1      - Unknown word (endforeach) -- endforeach(plugin)
 ai_recipe_generation/linux/flutter/generated_plugins.cmake:24:1      - Unknown word (endforeach) -- endforeach(ffi_plugin)
-ai_recipe_generation/linux/main.cc:4:5       - Unknown word (autoptr)    -- g_autoptr(MyApplication) app
 ai_recipe_generation/linux/my_application.cc:30:3      - Unknown word (gboolean)   -- gboolean use_header_bar = TRUE
 ai_recipe_generation/linux/my_application.cc:34:11     - Unknown word (gchar)      -- const gchar* wm_name = gdk_x11_screen
-ai_recipe_generation/linux/my_application.cc:53:5      - Unknown word (autoptr)    -- g_autoptr(FlDartProject) project
 ai_recipe_generation/linux/my_application.cc:66:78     - Unknown word (gchar)      -- GApplication* application, gchar*** arguments, int* exit
 ai_recipe_generation/linux/my_application.cc:66:8      - Unknown word (gboolean)   -- static gboolean my_application_local
 ai_recipe_generation/linux/my_application.cc:69:39     - Unknown word (strdupv)    -- entrypoint_arguments = g_strdupv(*arguments + 1);
-ai_recipe_generation/linux/my_application.cc:71:5      - Unknown word (autoptr)    -- g_autoptr(GError) error = nullptr
 ai_recipe_generation/linux/my_application.cc:87:55     - Unknown word (strfreev)   -- entrypoint_arguments, g_strfreev);
 ai_recipe_generation/linux/my_application.cc:91:59     - Unknown word (klass)      -- MyApplicationClass* klass) {
 ai_recipe_generation/linux/my_application.cc:92:23     - Unknown word (klass)      -- G_APPLICATION_CLASS(klass)->activate = my_application
@@ -741,8 +737,6 @@ ai_recipe_generation/windows/CMakeLists.txt:15:7      - Unknown word (MULTICONFI
 ai_recipe_generation/windows/CMakeLists.txt:33:18     - Unknown word (DUNICODE)    -- add_definitions(-DUNICODE -D_UNICODE)
 ai_recipe_generation/windows/CMakeLists.txt:46:1      - Unknown word (endfunction) -- endfunction()
 ai_recipe_generation/windows/flutter/CMakeLists.txt:23:45     - Unknown word (icudtl)     -- FILE "${EPHEMERAL_DIR}/icudtl.dat" PARENT_SCOPE)
-ai_recipe_generation/windows/flutter/generated_plugin_registrant.cc:14:8      - Unknown word (Firestore)  -- CloudFirestorePluginCApiRegisterWithRegistra
-ai_recipe_generation/windows/flutter/generated_plugin_registrant.cc:15:45     - Unknown word (Firestore)  -- GetRegistrarForPlugin("CloudFirestorePluginCApi"));
 ai_recipe_generation/windows/flutter/generated_plugins.cmake:21:1      - Unknown word (endforeach) -- endforeach(plugin)
 ai_recipe_generation/windows/flutter/generated_plugins.cmake:26:1      - Unknown word (endforeach) -- endforeach(ffi_plugin)
 ai_recipe_generation/windows/flutter/generated_plugins.cmake:6:9       - Unknown word (firestore)  -- cloud_firestore
@@ -774,26 +768,20 @@ ai_recipe_generation/windows/runner/Runner.rc:82:2      - Unknown word (FILEFLAG
 ai_recipe_generation/windows/runner/Runner.rc:84:2      - Unknown word (FILEOS)         -- FILEOS VOS__WINDOWS32
 ai_recipe_generation/windows/runner/Runner.rc:86:2      - Unknown word (FILESUBTYPE)    -- FILESUBTYPE 0x0L
 ai_recipe_generation/windows/runner/Runner.rc:9:23      - Unknown word (TEXTINCLUDE) -- Generated from the TEXTINCLUDE 2 resource.
-ai_recipe_generation/windows/runner/flutter_window.cpp:65:13     - Unknown word (FONTCHANGE) -- case WM_FONTCHANGE:
 ai_recipe_generation/windows/runner/main.cpp:18:29     - Unknown word (COINIT)     -- CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 ai_recipe_generation/windows/runner/main.cpp:18:36     - Unknown word (APARTMENTTHREADED) -- oInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 ai_recipe_generation/windows/runner/main.cpp:8:28      - Unknown word (HINSTANCE)  -- APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE
-ai_recipe_generation/windows/runner/main.cpp:8:5       - Unknown word (APIENTRY)   -- int APIENTRY wWinMain(_In_ HINSTANCE
 ai_recipe_generation/windows/runner/main.cpp:8:57      - Unknown word (HINSTANCE)  -- HINSTANCE instance, _In_opt_ HINSTANCE prev,
 ai_recipe_generation/windows/runner/resource.h:10:9      - Unknown word (APSTUDIO)   -- #ifndef APSTUDIO_READONLY_SYMBOLS
 ai_recipe_generation/windows/runner/resource.h:14:19     - Unknown word (SYMED)      -- #define _APS_NEXT_SYMED_VALUE 101
 ai_recipe_generation/windows/runner/resource.h:9:8       - Unknown word (APSTUDIO)   -- #ifdef APSTUDIO_INVOKED
-ai_recipe_generation/windows/runner/utils.cpp:13:29     - Unknown word (CONOUT)     -- freopen_s(&unused, "CONOUT$", "w", stdout)) {
-ai_recipe_generation/windows/runner/utils.cpp:16:29     - Unknown word (CONOUT)     -- freopen_s(&unused, "CONOUT$", "w", stderr)) {
-ai_recipe_generation/windows/runner/win32_window.cpp:101:18    - Unknown word (lpsz)            -- window_class.lpszMenuName = nullptr;
-ai_recipe_generation/windows/runner/win32_window.cpp:102:18    - Unknown word (lpfn)            -- window_class.lpfnWndProc = Win32Window
-ai_recipe_generation/windows/runner/win32_window.cpp:133:3     - Unknown word (HMONITOR)        -- HMONITOR monitor = MonitorFromPoint
+ai_recipe_generation/windows/runner/win32_window.cpp:101:18    - Unknown word (lpsz)       -- window_class.lpszMenuName = nullptr;
+ai_recipe_generation/windows/runner/win32_window.cpp:102:18    - Unknown word (lpfn)       -- window_class.lpfnWndProc = Win32Window
+ai_recipe_generation/windows/runner/win32_window.cpp:133:3     - Unknown word (HMONITOR)   -- HMONITOR monitor = MonitorFromPoint
 ai_recipe_generation/windows/runner/win32_window.cpp:133:61    - Unknown word (DEFAULTTONEAREST) -- target_point, MONITOR_DEFAULTTONEAREST);
 ai_recipe_generation/windows/runner/win32_window.cpp:138:39    - Unknown word (OVERLAPPEDWINDOW) -- class, title.c_str(), WS_OVERLAPPEDWINDOW,
-ai_recipe_generation/windows/runner/win32_window.cpp:153:40    - Unknown word (SHOWNORMAL)       -- ShowWindow(window_handle_, SW_SHOWNORMAL);
 ai_recipe_generation/windows/runner/win32_window.cpp:15:9      - Unknown word (DWMWA)      -- #ifndef DWMWA_USE_IMMERSIVE_DARK_MODE
 ai_recipe_generation/windows/runner/win32_window.cpp:161:21    - Unknown word (NCCREATE)         -- if (message == WM_NCCREATE) {
-ai_recipe_generation/windows/runner/win32_window.cpp:162:43    - Unknown word (CREATESTRUCT)     -- struct = reinterpret_cast<CREATESTRUCT*>(lparam);
 ai_recipe_generation/windows/runner/win32_window.cpp:163:30    - Unknown word (GWLP)             -- SetWindowLongPtr(window, GWLP_USERDATA,
 ai_recipe_generation/windows/runner/win32_window.cpp:16:9      - Unknown word (DWMWA)      -- #define DWMWA_USE_IMMERSIVE_DARK_MODE
 ai_recipe_generation/windows/runner/win32_window.cpp:190:13    - Unknown word (DPICHANGED)       -- case WM_DPICHANGED: {
@@ -806,8 +794,6 @@ ai_recipe_generation/windows/runner/win32_window.cpp:285:35    - Unknown word (D
 ai_recipe_generation/windows/runner/win32_window.cpp:91:5      - Unknown word (WNDCLASS)   -- WNDCLASS window_class{};
 ai_recipe_generation/windows/runner/win32_window.cpp:93:18     - Unknown word (lpsz)       -- window_class.lpszClassName = kWindowClassName
 ai_recipe_generation/windows/runner/win32_window.cpp:94:29     - Unknown word (HREDRAW)    -- window_class.style = CS_HREDRAW | CS_VREDRAW;
-ai_recipe_generation/windows/runner/win32_window.cpp:94:42     - Unknown word (VREDRAW)    -- style = CS_HREDRAW | CS_VREDRAW;
-ai_recipe_generation/windows/runner/win32_window.cpp:99:42     - Unknown word (MAKEINTRESOURCE) -- window_class.hInstance, MAKEINTRESOURCE(IDI_APP_ICON));
 ai_recipe_generation/windows/runner/win32_window.h:77:57     - Unknown word (NCCREATE)   -- pump. Handles the WM_NCCREATE message which
 analysis_defaults/lib/flutter.yaml:17:5      - Unknown word (unawaited)  -- unawaited_futures: true
 android_splash_screen/android/app/build.gradle:58:49     - Unknown word (stdlib)     -- jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version
@@ -917,17 +903,13 @@ animations/linux/flutter/CMakeLists.txt:20:1      - Unknown word (endfunction) -
 animations/linux/flutter/CMakeLists.txt:29:39     - Unknown word (libflutter)  -- LIBRARY "${EPHEMERAL_DIR}/libflutter_linux_gtk.so")
 animations/linux/flutter/CMakeLists.txt:33:45     - Unknown word (icudtl)      -- FILE "${EPHEMERAL_DIR}/icudtl.dat" PARENT_SCOPE)
 animations/linux/flutter/CMakeLists.txt:35:43     - Unknown word (libapp)      -- PROJECT_DIR}/build/lib/libapp.so" PARENT_SCOPE)
-animations/linux/flutter/generated_plugin_registrant.cc:12:5      - Unknown word (autoptr)    -- g_autoptr(FlPluginRegistrar) window
 animations/linux/flutter/generated_plugins.cmake:19:1      - Unknown word (endforeach) -- endforeach(plugin)
 animations/linux/flutter/generated_plugins.cmake:24:1      - Unknown word (endforeach) -- endforeach(ffi_plugin)
-animations/linux/main.cc:4:5       - Unknown word (autoptr)    -- g_autoptr(MyApplication) app
 animations/linux/my_application.cc:30:3      - Unknown word (gboolean)   -- gboolean use_header_bar = TRUE
 animations/linux/my_application.cc:34:11     - Unknown word (gchar)      -- const gchar* wm_name = gdk_x11_screen
-animations/linux/my_application.cc:53:5      - Unknown word (autoptr)    -- g_autoptr(FlDartProject) project
 animations/linux/my_application.cc:66:78     - Unknown word (gchar)      -- GApplication* application, gchar*** arguments, int* exit
 animations/linux/my_application.cc:66:8      - Unknown word (gboolean)   -- static gboolean my_application_local
 animations/linux/my_application.cc:69:39     - Unknown word (strdupv)    -- entrypoint_arguments = g_strdupv(*arguments + 1);
-animations/linux/my_application.cc:71:5      - Unknown word (autoptr)    -- g_autoptr(GError) error = nullptr
 animations/linux/my_application.cc:87:55     - Unknown word (strfreev)   -- entrypoint_arguments, g_strfreev);
 animations/linux/my_application.cc:91:59     - Unknown word (klass)      -- MyApplicationClass* klass) {
 animations/linux/my_application.cc:92:23     - Unknown word (klass)      -- G_APPLICATION_CLASS(klass)->activate = my_application
@@ -981,26 +963,20 @@ animations/windows/runner/Runner.rc:82:2      - Unknown word (FILEFLAGS)      --
 animations/windows/runner/Runner.rc:84:2      - Unknown word (FILEOS)         -- FILEOS VOS__WINDOWS32
 animations/windows/runner/Runner.rc:86:2      - Unknown word (FILESUBTYPE)    -- FILESUBTYPE 0x0L
 animations/windows/runner/Runner.rc:9:23      - Unknown word (TEXTINCLUDE) -- Generated from the TEXTINCLUDE 2 resource.
-animations/windows/runner/flutter_window.cpp:65:13     - Unknown word (FONTCHANGE) -- case WM_FONTCHANGE:
 animations/windows/runner/main.cpp:18:29     - Unknown word (COINIT)     -- CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 animations/windows/runner/main.cpp:18:36     - Unknown word (APARTMENTTHREADED) -- oInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 animations/windows/runner/main.cpp:8:28      - Unknown word (HINSTANCE)  -- APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE
-animations/windows/runner/main.cpp:8:5       - Unknown word (APIENTRY)   -- int APIENTRY wWinMain(_In_ HINSTANCE
 animations/windows/runner/main.cpp:8:57      - Unknown word (HINSTANCE)  -- HINSTANCE instance, _In_opt_ HINSTANCE prev,
 animations/windows/runner/resource.h:10:9      - Unknown word (APSTUDIO)   -- #ifndef APSTUDIO_READONLY_SYMBOLS
 animations/windows/runner/resource.h:14:19     - Unknown word (SYMED)      -- #define _APS_NEXT_SYMED_VALUE 101
 animations/windows/runner/resource.h:9:8       - Unknown word (APSTUDIO)   -- #ifdef APSTUDIO_INVOKED
-animations/windows/runner/utils.cpp:13:29     - Unknown word (CONOUT)     -- freopen_s(&unused, "CONOUT$", "w", stdout)) {
-animations/windows/runner/utils.cpp:16:29     - Unknown word (CONOUT)     -- freopen_s(&unused, "CONOUT$", "w", stderr)) {
-animations/windows/runner/win32_window.cpp:101:18    - Unknown word (lpsz)            -- window_class.lpszMenuName = nullptr;
-animations/windows/runner/win32_window.cpp:102:18    - Unknown word (lpfn)            -- window_class.lpfnWndProc = Win32Window
-animations/windows/runner/win32_window.cpp:133:3     - Unknown word (HMONITOR)        -- HMONITOR monitor = MonitorFromPoint
+animations/windows/runner/win32_window.cpp:101:18    - Unknown word (lpsz)       -- window_class.lpszMenuName = nullptr;
+animations/windows/runner/win32_window.cpp:102:18    - Unknown word (lpfn)       -- window_class.lpfnWndProc = Win32Window
+animations/windows/runner/win32_window.cpp:133:3     - Unknown word (HMONITOR)   -- HMONITOR monitor = MonitorFromPoint
 animations/windows/runner/win32_window.cpp:133:61    - Unknown word (DEFAULTTONEAREST) -- target_point, MONITOR_DEFAULTTONEAREST);
 animations/windows/runner/win32_window.cpp:138:39    - Unknown word (OVERLAPPEDWINDOW) -- class, title.c_str(), WS_OVERLAPPEDWINDOW,
-animations/windows/runner/win32_window.cpp:153:40    - Unknown word (SHOWNORMAL)       -- ShowWindow(window_handle_, SW_SHOWNORMAL);
 animations/windows/runner/win32_window.cpp:15:9      - Unknown word (DWMWA)      -- #ifndef DWMWA_USE_IMMERSIVE_DARK_MODE
 animations/windows/runner/win32_window.cpp:161:21    - Unknown word (NCCREATE)         -- if (message == WM_NCCREATE) {
-animations/windows/runner/win32_window.cpp:162:43    - Unknown word (CREATESTRUCT)     -- struct = reinterpret_cast<CREATESTRUCT*>(lparam);
 animations/windows/runner/win32_window.cpp:163:30    - Unknown word (GWLP)             -- SetWindowLongPtr(window, GWLP_USERDATA,
 animations/windows/runner/win32_window.cpp:16:9      - Unknown word (DWMWA)      -- #define DWMWA_USE_IMMERSIVE_DARK_MODE
 animations/windows/runner/win32_window.cpp:190:13    - Unknown word (DPICHANGED)       -- case WM_DPICHANGED: {
@@ -1013,8 +989,6 @@ animations/windows/runner/win32_window.cpp:285:35    - Unknown word (DWMWA)     
 animations/windows/runner/win32_window.cpp:91:5      - Unknown word (WNDCLASS)   -- WNDCLASS window_class{};
 animations/windows/runner/win32_window.cpp:93:18     - Unknown word (lpsz)       -- window_class.lpszClassName = kWindowClassName
 animations/windows/runner/win32_window.cpp:94:29     - Unknown word (HREDRAW)    -- window_class.style = CS_HREDRAW | CS_VREDRAW;
-animations/windows/runner/win32_window.cpp:94:42     - Unknown word (VREDRAW)    -- style = CS_HREDRAW | CS_VREDRAW;
-animations/windows/runner/win32_window.cpp:99:42     - Unknown word (MAKEINTRESOURCE) -- window_class.hInstance, MAKEINTRESOURCE(IDI_APP_ICON));
 animations/windows/runner/win32_window.h:77:57     - Unknown word (NCCREATE)   -- pump. Handles the WM_NCCREATE message which
 asset_transformation/README.md:8:29      - Unknown word (pubspec)    -- `assets` section in pubspec.yaml to get started
 asset_transformation/android/build.gradle:1:1       - Unknown word (allprojects) -- allprojects {
@@ -1060,7 +1034,6 @@ asset_transformation/linux/flutter/CMakeLists.txt:33:45     - Unknown word (icud
 asset_transformation/linux/flutter/CMakeLists.txt:35:43     - Unknown word (libapp)      -- PROJECT_DIR}/build/lib/libapp.so" PARENT_SCOPE)
 asset_transformation/linux/flutter/generated_plugins.cmake:18:1      - Unknown word (endforeach) -- endforeach(plugin)
 asset_transformation/linux/flutter/generated_plugins.cmake:23:1      - Unknown word (endforeach) -- endforeach(ffi_plugin)
-asset_transformation/linux/main.cc:4:5       - Unknown word (autoptr)    -- g_autoptr(MyApplication) app
 asset_transformation/linux/my_application.cc:105:55    - Unknown word (strfreev)   -- entrypoint_arguments, g_strfreev);
 asset_transformation/linux/my_application.cc:109:59    - Unknown word (klass)      -- MyApplicationClass* klass) {
 asset_transformation/linux/my_application.cc:110:23    - Unknown word (klass)      -- G_APPLICATION_CLASS(klass)->activate = my_application
@@ -1069,11 +1042,9 @@ asset_transformation/linux/my_application.cc:112:23    - Unknown word (klass)   
 asset_transformation/linux/my_application.cc:113:23    - Unknown word (klass)      -- G_APPLICATION_CLASS(klass)->shutdown = my_application
 asset_transformation/linux/my_application.cc:30:3      - Unknown word (gboolean)   -- gboolean use_header_bar = TRUE
 asset_transformation/linux/my_application.cc:34:11     - Unknown word (gchar)      -- const gchar* wm_name = gdk_x11_screen
-asset_transformation/linux/my_application.cc:53:5      - Unknown word (autoptr)    -- g_autoptr(FlDartProject) project
 asset_transformation/linux/my_application.cc:66:78     - Unknown word (gchar)      -- GApplication* application, gchar*** arguments, int* exit
 asset_transformation/linux/my_application.cc:66:8      - Unknown word (gboolean)   -- static gboolean my_application_local
 asset_transformation/linux/my_application.cc:69:39     - Unknown word (strdupv)    -- entrypoint_arguments = g_strdupv(*arguments + 1);
-asset_transformation/linux/my_application.cc:71:5      - Unknown word (autoptr)    -- g_autoptr(GError) error = nullptr
 asset_transformation/macos/Runner/Base.lproj/MainMenu.xib:2:155     - Unknown word (Autolayout) -- opertyAccessControl="none" useAutolayout="YES" customObjectInstantitat
 asset_transformation/macos/Runner/Base.lproj/MainMenu.xib:2:184     - Unknown word (Instantitation) -- eAutolayout="YES" customObjectInstantitationMethod="direct">
 asset_transformation/macos/Runner/Base.lproj/MainMenu.xib:333:79    - Unknown word (autorecalculates) -- henApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenC
@@ -1120,26 +1091,20 @@ asset_transformation/windows/runner/Runner.rc:82:2      - Unknown word (FILEFLAG
 asset_transformation/windows/runner/Runner.rc:84:2      - Unknown word (FILEOS)         -- FILEOS VOS__WINDOWS32
 asset_transformation/windows/runner/Runner.rc:86:2      - Unknown word (FILESUBTYPE)    -- FILESUBTYPE 0x0L
 asset_transformation/windows/runner/Runner.rc:9:23      - Unknown word (TEXTINCLUDE) -- Generated from the TEXTINCLUDE 2 resource.
-asset_transformation/windows/runner/flutter_window.cpp:65:13     - Unknown word (FONTCHANGE) -- case WM_FONTCHANGE:
 asset_transformation/windows/runner/main.cpp:18:29     - Unknown word (COINIT)     -- CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 asset_transformation/windows/runner/main.cpp:18:36     - Unknown word (APARTMENTTHREADED) -- oInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 asset_transformation/windows/runner/main.cpp:8:28      - Unknown word (HINSTANCE)  -- APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE
-asset_transformation/windows/runner/main.cpp:8:5       - Unknown word (APIENTRY)   -- int APIENTRY wWinMain(_In_ HINSTANCE
 asset_transformation/windows/runner/main.cpp:8:57      - Unknown word (HINSTANCE)  -- HINSTANCE instance, _In_opt_ HINSTANCE prev,
 asset_transformation/windows/runner/resource.h:10:9      - Unknown word (APSTUDIO)   -- #ifndef APSTUDIO_READONLY_SYMBOLS
 asset_transformation/windows/runner/resource.h:14:19     - Unknown word (SYMED)      -- #define _APS_NEXT_SYMED_VALUE 101
 asset_transformation/windows/runner/resource.h:9:8       - Unknown word (APSTUDIO)   -- #ifdef APSTUDIO_INVOKED
-asset_transformation/windows/runner/utils.cpp:13:29     - Unknown word (CONOUT)     -- freopen_s(&unused, "CONOUT$", "w", stdout)) {
-asset_transformation/windows/runner/utils.cpp:16:29     - Unknown word (CONOUT)     -- freopen_s(&unused, "CONOUT$", "w", stderr)) {
-asset_transformation/windows/runner/win32_window.cpp:101:18    - Unknown word (lpsz)            -- window_class.lpszMenuName = nullptr;
-asset_transformation/windows/runner/win32_window.cpp:102:18    - Unknown word (lpfn)            -- window_class.lpfnWndProc = Win32Window
-asset_transformation/windows/runner/win32_window.cpp:133:3     - Unknown word (HMONITOR)        -- HMONITOR monitor = MonitorFromPoint
+asset_transformation/windows/runner/win32_window.cpp:101:18    - Unknown word (lpsz)       -- window_class.lpszMenuName = nullptr;
+asset_transformation/windows/runner/win32_window.cpp:102:18    - Unknown word (lpfn)       -- window_class.lpfnWndProc = Win32Window
+asset_transformation/windows/runner/win32_window.cpp:133:3     - Unknown word (HMONITOR)   -- HMONITOR monitor = MonitorFromPoint
 asset_transformation/windows/runner/win32_window.cpp:133:61    - Unknown word (DEFAULTTONEAREST) -- target_point, MONITOR_DEFAULTTONEAREST);
 asset_transformation/windows/runner/win32_window.cpp:138:39    - Unknown word (OVERLAPPEDWINDOW) -- class, title.c_str(), WS_OVERLAPPEDWINDOW,
-asset_transformation/windows/runner/win32_window.cpp:153:40    - Unknown word (SHOWNORMAL)       -- ShowWindow(window_handle_, SW_SHOWNORMAL);
 asset_transformation/windows/runner/win32_window.cpp:15:9      - Unknown word (DWMWA)      -- #ifndef DWMWA_USE_IMMERSIVE_DARK_MODE
 asset_transformation/windows/runner/win32_window.cpp:161:21    - Unknown word (NCCREATE)         -- if (message == WM_NCCREATE) {
-asset_transformation/windows/runner/win32_window.cpp:162:43    - Unknown word (CREATESTRUCT)     -- struct = reinterpret_cast<CREATESTRUCT*>(lparam);
 asset_transformation/windows/runner/win32_window.cpp:163:30    - Unknown word (GWLP)             -- SetWindowLongPtr(window, GWLP_USERDATA,
 asset_transformation/windows/runner/win32_window.cpp:16:9      - Unknown word (DWMWA)      -- #define DWMWA_USE_IMMERSIVE_DARK_MODE
 asset_transformation/windows/runner/win32_window.cpp:190:13    - Unknown word (DPICHANGED)       -- case WM_DPICHANGED: {
@@ -1152,8 +1117,6 @@ asset_transformation/windows/runner/win32_window.cpp:285:35    - Unknown word (D
 asset_transformation/windows/runner/win32_window.cpp:91:5      - Unknown word (WNDCLASS)   -- WNDCLASS window_class{};
 asset_transformation/windows/runner/win32_window.cpp:93:18     - Unknown word (lpsz)       -- window_class.lpszClassName = kWindowClassName
 asset_transformation/windows/runner/win32_window.cpp:94:29     - Unknown word (HREDRAW)    -- window_class.style = CS_HREDRAW | CS_VREDRAW;
-asset_transformation/windows/runner/win32_window.cpp:94:42     - Unknown word (VREDRAW)    -- style = CS_HREDRAW | CS_VREDRAW;
-asset_transformation/windows/runner/win32_window.cpp:99:42     - Unknown word (MAKEINTRESOURCE) -- window_class.hInstance, MAKEINTRESOURCE(IDI_APP_ICON));
 asset_transformation/windows/runner/win32_window.h:77:57     - Unknown word (NCCREATE)   -- pump. Handles the WM_NCCREATE message which
 code_sharing/Makefile:23:20     - Unknown word (codesharingserver) -- docker build . -t codesharingserver
 code_sharing/README.md:29:5      - Unknown word (pubspec)    -- pubspec.yaml
@@ -1192,14 +1155,11 @@ code_sharing/client/linux/flutter/CMakeLists.txt:33:45     - Unknown word (icudt
 code_sharing/client/linux/flutter/CMakeLists.txt:35:43     - Unknown word (libapp)      -- PROJECT_DIR}/build/lib/libapp.so" PARENT_SCOPE)
 code_sharing/client/linux/flutter/generated_plugins.cmake:18:1      - Unknown word (endforeach) -- endforeach(plugin)
 code_sharing/client/linux/flutter/generated_plugins.cmake:23:1      - Unknown word (endforeach) -- endforeach(ffi_plugin)
-code_sharing/client/linux/main.cc:4:5       - Unknown word (autoptr)    -- g_autoptr(MyApplication) app
 code_sharing/client/linux/my_application.cc:30:3      - Unknown word (gboolean)   -- gboolean use_header_bar = TRUE
 code_sharing/client/linux/my_application.cc:34:11     - Unknown word (gchar)      -- const gchar* wm_name = gdk_x11_screen
-code_sharing/client/linux/my_application.cc:53:5      - Unknown word (autoptr)    -- g_autoptr(FlDartProject) project
 code_sharing/client/linux/my_application.cc:66:78     - Unknown word (gchar)      -- GApplication* application, gchar*** arguments, int* exit
 code_sharing/client/linux/my_application.cc:66:8      - Unknown word (gboolean)   -- static gboolean my_application_local
 code_sharing/client/linux/my_application.cc:69:39     - Unknown word (strdupv)    -- entrypoint_arguments = g_strdupv(*arguments + 1);
-code_sharing/client/linux/my_application.cc:71:5      - Unknown word (autoptr)    -- g_autoptr(GError) error = nullptr
 code_sharing/client/linux/my_application.cc:87:55     - Unknown word (strfreev)   -- entrypoint_arguments, g_strfreev);
 code_sharing/client/linux/my_application.cc:91:59     - Unknown word (klass)      -- MyApplicationClass* klass) {
 code_sharing/client/linux/my_application.cc:92:23     - Unknown word (klass)      -- G_APPLICATION_CLASS(klass)->activate = my_application
@@ -1246,26 +1206,20 @@ code_sharing/client/windows/runner/Runner.rc:82:2      - Unknown word (FILEFLAGS
 code_sharing/client/windows/runner/Runner.rc:84:2      - Unknown word (FILEOS)         -- FILEOS VOS__WINDOWS32
 code_sharing/client/windows/runner/Runner.rc:86:2      - Unknown word (FILESUBTYPE)    -- FILESUBTYPE 0x0L
 code_sharing/client/windows/runner/Runner.rc:9:23      - Unknown word (TEXTINCLUDE) -- Generated from the TEXTINCLUDE 2 resource.
-code_sharing/client/windows/runner/flutter_window.cpp:60:13     - Unknown word (FONTCHANGE) -- case WM_FONTCHANGE:
 code_sharing/client/windows/runner/main.cpp:18:29     - Unknown word (COINIT)     -- CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 code_sharing/client/windows/runner/main.cpp:18:36     - Unknown word (APARTMENTTHREADED) -- oInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 code_sharing/client/windows/runner/main.cpp:8:28      - Unknown word (HINSTANCE)  -- APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE
-code_sharing/client/windows/runner/main.cpp:8:5       - Unknown word (APIENTRY)   -- int APIENTRY wWinMain(_In_ HINSTANCE
 code_sharing/client/windows/runner/main.cpp:8:57      - Unknown word (HINSTANCE)  -- HINSTANCE instance, _In_opt_ HINSTANCE prev,
 code_sharing/client/windows/runner/resource.h:10:9      - Unknown word (APSTUDIO)   -- #ifndef APSTUDIO_READONLY_SYMBOLS
 code_sharing/client/windows/runner/resource.h:14:19     - Unknown word (SYMED)      -- #define _APS_NEXT_SYMED_VALUE 101
 code_sharing/client/windows/runner/resource.h:9:8       - Unknown word (APSTUDIO)   -- #ifdef APSTUDIO_INVOKED
-code_sharing/client/windows/runner/utils.cpp:13:29     - Unknown word (CONOUT)     -- freopen_s(&unused, "CONOUT$", "w", stdout)) {
-code_sharing/client/windows/runner/utils.cpp:16:29     - Unknown word (CONOUT)     -- freopen_s(&unused, "CONOUT$", "w", stderr)) {
-code_sharing/client/windows/runner/win32_window.cpp:101:18    - Unknown word (lpsz)            -- window_class.lpszMenuName = nullptr;
-code_sharing/client/windows/runner/win32_window.cpp:102:18    - Unknown word (lpfn)            -- window_class.lpfnWndProc = Win32Window
-code_sharing/client/windows/runner/win32_window.cpp:133:3     - Unknown word (HMONITOR)        -- HMONITOR monitor = MonitorFromPoint
+code_sharing/client/windows/runner/win32_window.cpp:101:18    - Unknown word (lpsz)       -- window_class.lpszMenuName = nullptr;
+code_sharing/client/windows/runner/win32_window.cpp:102:18    - Unknown word (lpfn)       -- window_class.lpfnWndProc = Win32Window
+code_sharing/client/windows/runner/win32_window.cpp:133:3     - Unknown word (HMONITOR)   -- HMONITOR monitor = MonitorFromPoint
 code_sharing/client/windows/runner/win32_window.cpp:133:61    - Unknown word (DEFAULTTONEAREST) -- target_point, MONITOR_DEFAULTTONEAREST);
 code_sharing/client/windows/runner/win32_window.cpp:138:39    - Unknown word (OVERLAPPEDWINDOW) -- class, title.c_str(), WS_OVERLAPPEDWINDOW,
-code_sharing/client/windows/runner/win32_window.cpp:153:40    - Unknown word (SHOWNORMAL)       -- ShowWindow(window_handle_, SW_SHOWNORMAL);
 code_sharing/client/windows/runner/win32_window.cpp:15:9      - Unknown word (DWMWA)      -- #ifndef DWMWA_USE_IMMERSIVE_DARK_MODE
 code_sharing/client/windows/runner/win32_window.cpp:161:21    - Unknown word (NCCREATE)         -- if (message == WM_NCCREATE) {
-code_sharing/client/windows/runner/win32_window.cpp:162:43    - Unknown word (CREATESTRUCT)     -- struct = reinterpret_cast<CREATESTRUCT*>(lparam);
 code_sharing/client/windows/runner/win32_window.cpp:163:30    - Unknown word (GWLP)             -- SetWindowLongPtr(window, GWLP_USERDATA,
 code_sharing/client/windows/runner/win32_window.cpp:16:9      - Unknown word (DWMWA)      -- #define DWMWA_USE_IMMERSIVE_DARK_MODE
 code_sharing/client/windows/runner/win32_window.cpp:190:13    - Unknown word (DPICHANGED)       -- case WM_DPICHANGED: {
@@ -1278,8 +1232,6 @@ code_sharing/client/windows/runner/win32_window.cpp:285:35    - Unknown word (DW
 code_sharing/client/windows/runner/win32_window.cpp:91:5      - Unknown word (WNDCLASS)   -- WNDCLASS window_class{};
 code_sharing/client/windows/runner/win32_window.cpp:93:18     - Unknown word (lpsz)       -- window_class.lpszClassName = kWindowClassName
 code_sharing/client/windows/runner/win32_window.cpp:94:29     - Unknown word (HREDRAW)    -- window_class.style = CS_HREDRAW | CS_VREDRAW;
-code_sharing/client/windows/runner/win32_window.cpp:94:42     - Unknown word (VREDRAW)    -- style = CS_HREDRAW | CS_VREDRAW;
-code_sharing/client/windows/runner/win32_window.cpp:99:42     - Unknown word (MAKEINTRESOURCE) -- window_class.hInstance, MAKEINTRESOURCE(IDI_APP_ICON));
 code_sharing/client/windows/runner/win32_window.h:77:57     - Unknown word (NCCREATE)   -- pump. Handles the WM_NCCREATE message which
 code_sharing/server/README.md:32:21     - Unknown word (myserver)   -- $ docker build . -t myserver
 code_sharing/server/README.md:33:31     - Unknown word (myserver)   -- run -it -p 8080:8080 myserver
@@ -6540,10 +6492,8 @@ compass_app/app/linux/flutter/CMakeLists.txt:20:1      - Unknown word (endfuncti
 compass_app/app/linux/flutter/CMakeLists.txt:29:39     - Unknown word (libflutter)  -- LIBRARY "${EPHEMERAL_DIR}/libflutter_linux_gtk.so")
 compass_app/app/linux/flutter/CMakeLists.txt:33:45     - Unknown word (icudtl)      -- FILE "${EPHEMERAL_DIR}/icudtl.dat" PARENT_SCOPE)
 compass_app/app/linux/flutter/CMakeLists.txt:35:43     - Unknown word (libapp)      -- PROJECT_DIR}/build/lib/libapp.so" PARENT_SCOPE)
-compass_app/app/linux/flutter/generated_plugin_registrant.cc:12:5      - Unknown word (autoptr)    -- g_autoptr(FlPluginRegistrar) url
 compass_app/app/linux/flutter/generated_plugins.cmake:19:1      - Unknown word (endforeach) -- endforeach(plugin)
 compass_app/app/linux/flutter/generated_plugins.cmake:24:1      - Unknown word (endforeach) -- endforeach(ffi_plugin)
-compass_app/app/linux/main.cc:4:5       - Unknown word (autoptr)    -- g_autoptr(MyApplication) app
 compass_app/app/linux/my_application.cc:105:55    - Unknown word (strfreev)   -- entrypoint_arguments, g_strfreev);
 compass_app/app/linux/my_application.cc:109:59    - Unknown word (klass)      -- MyApplicationClass* klass) {
 compass_app/app/linux/my_application.cc:110:23    - Unknown word (klass)      -- G_APPLICATION_CLASS(klass)->activate = my_application
@@ -6552,11 +6502,9 @@ compass_app/app/linux/my_application.cc:112:23    - Unknown word (klass)      --
 compass_app/app/linux/my_application.cc:113:23    - Unknown word (klass)      -- G_APPLICATION_CLASS(klass)->shutdown = my_application
 compass_app/app/linux/my_application.cc:30:3      - Unknown word (gboolean)   -- gboolean use_header_bar = TRUE
 compass_app/app/linux/my_application.cc:34:11     - Unknown word (gchar)      -- const gchar* wm_name = gdk_x11_screen
-compass_app/app/linux/my_application.cc:53:5      - Unknown word (autoptr)    -- g_autoptr(FlDartProject) project
 compass_app/app/linux/my_application.cc:66:78     - Unknown word (gchar)      -- GApplication* application, gchar*** arguments, int* exit
 compass_app/app/linux/my_application.cc:66:8      - Unknown word (gboolean)   -- static gboolean my_application_local
 compass_app/app/linux/my_application.cc:69:39     - Unknown word (strdupv)    -- entrypoint_arguments = g_strdupv(*arguments + 1);
-compass_app/app/linux/my_application.cc:71:5      - Unknown word (autoptr)    -- g_autoptr(GError) error = nullptr
 compass_app/app/macos/Flutter/GeneratedPluginRegistrant.swift:11:8      - Unknown word (sqflite)    -- import sqflite_darwin
 compass_app/app/macos/Flutter/GeneratedPluginRegistrant.swift:17:3      - Unknown word (Sqflite)    -- SqflitePlugin.register(with
 compass_app/app/macos/Flutter/GeneratedPluginRegistrant.swift:17:63     - Unknown word (Sqflite)    -- registrar(forPlugin: "SqflitePlugin"))
@@ -6626,26 +6574,20 @@ compass_app/app/windows/runner/Runner.rc:82:2      - Unknown word (FILEFLAGS)   
 compass_app/app/windows/runner/Runner.rc:84:2      - Unknown word (FILEOS)         -- FILEOS VOS__WINDOWS32
 compass_app/app/windows/runner/Runner.rc:86:2      - Unknown word (FILESUBTYPE)    -- FILESUBTYPE 0x0L
 compass_app/app/windows/runner/Runner.rc:9:23      - Unknown word (TEXTINCLUDE) -- Generated from the TEXTINCLUDE 2 resource.
-compass_app/app/windows/runner/flutter_window.cpp:65:13     - Unknown word (FONTCHANGE) -- case WM_FONTCHANGE:
 compass_app/app/windows/runner/main.cpp:18:29     - Unknown word (COINIT)     -- CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 compass_app/app/windows/runner/main.cpp:18:36     - Unknown word (APARTMENTTHREADED) -- oInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 compass_app/app/windows/runner/main.cpp:8:28      - Unknown word (HINSTANCE)  -- APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE
-compass_app/app/windows/runner/main.cpp:8:5       - Unknown word (APIENTRY)   -- int APIENTRY wWinMain(_In_ HINSTANCE
 compass_app/app/windows/runner/main.cpp:8:57      - Unknown word (HINSTANCE)  -- HINSTANCE instance, _In_opt_ HINSTANCE prev,
 compass_app/app/windows/runner/resource.h:10:9      - Unknown word (APSTUDIO)   -- #ifndef APSTUDIO_READONLY_SYMBOLS
 compass_app/app/windows/runner/resource.h:14:19     - Unknown word (SYMED)      -- #define _APS_NEXT_SYMED_VALUE 101
 compass_app/app/windows/runner/resource.h:9:8       - Unknown word (APSTUDIO)   -- #ifdef APSTUDIO_INVOKED
-compass_app/app/windows/runner/utils.cpp:13:29     - Unknown word (CONOUT)     -- freopen_s(&unused, "CONOUT$", "w", stdout)) {
-compass_app/app/windows/runner/utils.cpp:16:29     - Unknown word (CONOUT)     -- freopen_s(&unused, "CONOUT$", "w", stderr)) {
-compass_app/app/windows/runner/win32_window.cpp:101:18    - Unknown word (lpsz)            -- window_class.lpszMenuName = nullptr;
-compass_app/app/windows/runner/win32_window.cpp:102:18    - Unknown word (lpfn)            -- window_class.lpfnWndProc = Win32Window
-compass_app/app/windows/runner/win32_window.cpp:133:3     - Unknown word (HMONITOR)        -- HMONITOR monitor = MonitorFromPoint
+compass_app/app/windows/runner/win32_window.cpp:101:18    - Unknown word (lpsz)       -- window_class.lpszMenuName = nullptr;
+compass_app/app/windows/runner/win32_window.cpp:102:18    - Unknown word (lpfn)       -- window_class.lpfnWndProc = Win32Window
+compass_app/app/windows/runner/win32_window.cpp:133:3     - Unknown word (HMONITOR)   -- HMONITOR monitor = MonitorFromPoint
 compass_app/app/windows/runner/win32_window.cpp:133:61    - Unknown word (DEFAULTTONEAREST) -- target_point, MONITOR_DEFAULTTONEAREST);
 compass_app/app/windows/runner/win32_window.cpp:138:39    - Unknown word (OVERLAPPEDWINDOW) -- class, title.c_str(), WS_OVERLAPPEDWINDOW,
-compass_app/app/windows/runner/win32_window.cpp:153:40    - Unknown word (SHOWNORMAL)       -- ShowWindow(window_handle_, SW_SHOWNORMAL);
 compass_app/app/windows/runner/win32_window.cpp:15:9      - Unknown word (DWMWA)      -- #ifndef DWMWA_USE_IMMERSIVE_DARK_MODE
 compass_app/app/windows/runner/win32_window.cpp:161:21    - Unknown word (NCCREATE)         -- if (message == WM_NCCREATE) {
-compass_app/app/windows/runner/win32_window.cpp:162:43    - Unknown word (CREATESTRUCT)     -- struct = reinterpret_cast<CREATESTRUCT*>(lparam);
 compass_app/app/windows/runner/win32_window.cpp:163:30    - Unknown word (GWLP)             -- SetWindowLongPtr(window, GWLP_USERDATA,
 compass_app/app/windows/runner/win32_window.cpp:16:9      - Unknown word (DWMWA)      -- #define DWMWA_USE_IMMERSIVE_DARK_MODE
 compass_app/app/windows/runner/win32_window.cpp:190:13    - Unknown word (DPICHANGED)       -- case WM_DPICHANGED: {
@@ -6658,8 +6600,6 @@ compass_app/app/windows/runner/win32_window.cpp:285:35    - Unknown word (DWMWA)
 compass_app/app/windows/runner/win32_window.cpp:91:5      - Unknown word (WNDCLASS)   -- WNDCLASS window_class{};
 compass_app/app/windows/runner/win32_window.cpp:93:18     - Unknown word (lpsz)       -- window_class.lpszClassName = kWindowClassName
 compass_app/app/windows/runner/win32_window.cpp:94:29     - Unknown word (HREDRAW)    -- window_class.style = CS_HREDRAW | CS_VREDRAW;
-compass_app/app/windows/runner/win32_window.cpp:94:42     - Unknown word (VREDRAW)    -- style = CS_HREDRAW | CS_VREDRAW;
-compass_app/app/windows/runner/win32_window.cpp:99:42     - Unknown word (MAKEINTRESOURCE) -- window_class.hInstance, MAKEINTRESOURCE(IDI_APP_ICON));
 compass_app/app/windows/runner/win32_window.h:77:57     - Unknown word (NCCREATE)   -- pump. Handles the WM_NCCREATE message which
 compass_app/server/lib/config/constants.dart:22:24     - Unknown word (Sofie)      -- static const name = 'Sofie';
 compass_app/server/lib/model/activity/activity.dart:28:36     - Unknown word (Mendenhall) -- Matanuska Glacier or Mendenhall Glacier'
@@ -6702,17 +6642,13 @@ context_menus/linux/flutter/CMakeLists.txt:20:1      - Unknown word (endfunction
 context_menus/linux/flutter/CMakeLists.txt:29:39     - Unknown word (libflutter)  -- LIBRARY "${EPHEMERAL_DIR}/libflutter_linux_gtk.so")
 context_menus/linux/flutter/CMakeLists.txt:33:45     - Unknown word (icudtl)      -- FILE "${EPHEMERAL_DIR}/icudtl.dat" PARENT_SCOPE)
 context_menus/linux/flutter/CMakeLists.txt:35:43     - Unknown word (libapp)      -- PROJECT_DIR}/build/lib/libapp.so" PARENT_SCOPE)
-context_menus/linux/flutter/generated_plugin_registrant.cc:12:5      - Unknown word (autoptr)    -- g_autoptr(FlPluginRegistrar) url
 context_menus/linux/flutter/generated_plugins.cmake:19:1      - Unknown word (endforeach) -- endforeach(plugin)
 context_menus/linux/flutter/generated_plugins.cmake:24:1      - Unknown word (endforeach) -- endforeach(ffi_plugin)
-context_menus/linux/main.cc:4:5       - Unknown word (autoptr)    -- g_autoptr(MyApplication) app
 context_menus/linux/my_application.cc:30:3      - Unknown word (gboolean)   -- gboolean use_header_bar = TRUE
 context_menus/linux/my_application.cc:34:11     - Unknown word (gchar)      -- const gchar* wm_name = gdk_x11_screen
-context_menus/linux/my_application.cc:53:5      - Unknown word (autoptr)    -- g_autoptr(FlDartProject) project
 context_menus/linux/my_application.cc:66:78     - Unknown word (gchar)      -- GApplication* application, gchar*** arguments, int* exit
 context_menus/linux/my_application.cc:66:8      - Unknown word (gboolean)   -- static gboolean my_application_local
 context_menus/linux/my_application.cc:69:39     - Unknown word (strdupv)    -- entrypoint_arguments = g_strdupv(*arguments + 1);
-context_menus/linux/my_application.cc:71:5      - Unknown word (autoptr)    -- g_autoptr(GError) error = nullptr
 context_menus/linux/my_application.cc:87:55     - Unknown word (strfreev)   -- entrypoint_arguments, g_strfreev);
 context_menus/linux/my_application.cc:91:59     - Unknown word (klass)      -- MyApplicationClass* klass) {
 context_menus/linux/my_application.cc:92:23     - Unknown word (klass)      -- G_APPLICATION_CLASS(klass)->activate = my_application
@@ -6769,26 +6705,20 @@ context_menus/windows/runner/Runner.rc:82:2      - Unknown word (FILEFLAGS)     
 context_menus/windows/runner/Runner.rc:84:2      - Unknown word (FILEOS)         -- FILEOS VOS__WINDOWS32
 context_menus/windows/runner/Runner.rc:86:2      - Unknown word (FILESUBTYPE)    -- FILESUBTYPE 0x0L
 context_menus/windows/runner/Runner.rc:9:23      - Unknown word (TEXTINCLUDE) -- Generated from the TEXTINCLUDE 2 resource.
-context_menus/windows/runner/flutter_window.cpp:60:13     - Unknown word (FONTCHANGE) -- case WM_FONTCHANGE:
 context_menus/windows/runner/main.cpp:18:29     - Unknown word (COINIT)     -- CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 context_menus/windows/runner/main.cpp:18:36     - Unknown word (APARTMENTTHREADED) -- oInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 context_menus/windows/runner/main.cpp:8:28      - Unknown word (HINSTANCE)  -- APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE
-context_menus/windows/runner/main.cpp:8:5       - Unknown word (APIENTRY)   -- int APIENTRY wWinMain(_In_ HINSTANCE
 context_menus/windows/runner/main.cpp:8:57      - Unknown word (HINSTANCE)  -- HINSTANCE instance, _In_opt_ HINSTANCE prev,
 context_menus/windows/runner/resource.h:10:9      - Unknown word (APSTUDIO)   -- #ifndef APSTUDIO_READONLY_SYMBOLS
 context_menus/windows/runner/resource.h:14:19     - Unknown word (SYMED)      -- #define _APS_NEXT_SYMED_VALUE 101
 context_menus/windows/runner/resource.h:9:8       - Unknown word (APSTUDIO)   -- #ifdef APSTUDIO_INVOKED
-context_menus/windows/runner/utils.cpp:13:29     - Unknown word (CONOUT)     -- freopen_s(&unused, "CONOUT$", "w", stdout)) {
-context_menus/windows/runner/utils.cpp:16:29     - Unknown word (CONOUT)     -- freopen_s(&unused, "CONOUT$", "w", stderr)) {
-context_menus/windows/runner/win32_window.cpp:101:18    - Unknown word (lpsz)            -- window_class.lpszMenuName = nullptr;
-context_menus/windows/runner/win32_window.cpp:102:18    - Unknown word (lpfn)            -- window_class.lpfnWndProc = Win32Window
-context_menus/windows/runner/win32_window.cpp:133:3     - Unknown word (HMONITOR)        -- HMONITOR monitor = MonitorFromPoint
+context_menus/windows/runner/win32_window.cpp:101:18    - Unknown word (lpsz)       -- window_class.lpszMenuName = nullptr;
+context_menus/windows/runner/win32_window.cpp:102:18    - Unknown word (lpfn)       -- window_class.lpfnWndProc = Win32Window
+context_menus/windows/runner/win32_window.cpp:133:3     - Unknown word (HMONITOR)   -- HMONITOR monitor = MonitorFromPoint
 context_menus/windows/runner/win32_window.cpp:133:61    - Unknown word (DEFAULTTONEAREST) -- target_point, MONITOR_DEFAULTTONEAREST);
 context_menus/windows/runner/win32_window.cpp:138:39    - Unknown word (OVERLAPPEDWINDOW) -- class, title.c_str(), WS_OVERLAPPEDWINDOW,
-context_menus/windows/runner/win32_window.cpp:153:40    - Unknown word (SHOWNORMAL)       -- ShowWindow(window_handle_, SW_SHOWNORMAL);
 context_menus/windows/runner/win32_window.cpp:15:9      - Unknown word (DWMWA)      -- #ifndef DWMWA_USE_IMMERSIVE_DARK_MODE
 context_menus/windows/runner/win32_window.cpp:161:21    - Unknown word (NCCREATE)         -- if (message == WM_NCCREATE) {
-context_menus/windows/runner/win32_window.cpp:162:43    - Unknown word (CREATESTRUCT)     -- struct = reinterpret_cast<CREATESTRUCT*>(lparam);
 context_menus/windows/runner/win32_window.cpp:163:30    - Unknown word (GWLP)             -- SetWindowLongPtr(window, GWLP_USERDATA,
 context_menus/windows/runner/win32_window.cpp:16:9      - Unknown word (DWMWA)      -- #define DWMWA_USE_IMMERSIVE_DARK_MODE
 context_menus/windows/runner/win32_window.cpp:190:13    - Unknown word (DPICHANGED)       -- case WM_DPICHANGED: {
@@ -6801,8 +6731,6 @@ context_menus/windows/runner/win32_window.cpp:285:35    - Unknown word (DWMWA)  
 context_menus/windows/runner/win32_window.cpp:91:5      - Unknown word (WNDCLASS)   -- WNDCLASS window_class{};
 context_menus/windows/runner/win32_window.cpp:93:18     - Unknown word (lpsz)       -- window_class.lpszClassName = kWindowClassName
 context_menus/windows/runner/win32_window.cpp:94:29     - Unknown word (HREDRAW)    -- window_class.style = CS_HREDRAW | CS_VREDRAW;
-context_menus/windows/runner/win32_window.cpp:94:42     - Unknown word (VREDRAW)    -- style = CS_HREDRAW | CS_VREDRAW;
-context_menus/windows/runner/win32_window.cpp:99:42     - Unknown word (MAKEINTRESOURCE) -- window_class.hInstance, MAKEINTRESOURCE(IDI_APP_ICON));
 context_menus/windows/runner/win32_window.h:77:57     - Unknown word (NCCREATE)   -- pump. Handles the WM_NCCREATE message which
 deeplink_store_example/README.md:1:3       - Unknown word (deeplink)   -- # deeplink_store_example
 deeplink_store_example/README.md:5:43      - Unknown word (deeplinks)  -- Android and iOS to support deeplinks.
@@ -6850,16 +6778,13 @@ deeplink_store_example/linux/flutter/CMakeLists.txt:33:45     - Unknown word (ic
 deeplink_store_example/linux/flutter/CMakeLists.txt:35:43     - Unknown word (libapp)      -- PROJECT_DIR}/build/lib/libapp.so" PARENT_SCOPE)
 deeplink_store_example/linux/flutter/generated_plugins.cmake:18:1      - Unknown word (endforeach) -- endforeach(plugin)
 deeplink_store_example/linux/flutter/generated_plugins.cmake:23:1      - Unknown word (endforeach) -- endforeach(ffi_plugin)
-deeplink_store_example/linux/main.cc:4:5       - Unknown word (autoptr)    -- g_autoptr(MyApplication) app
 deeplink_store_example/linux/my_application.cc:30:3      - Unknown word (gboolean)   -- gboolean use_header_bar = TRUE
 deeplink_store_example/linux/my_application.cc:34:11     - Unknown word (gchar)      -- const gchar* wm_name = gdk_x11_screen
 deeplink_store_example/linux/my_application.cc:43:43     - Unknown word (deeplink)   -- set_title(header_bar, "deeplink_store_example");
 deeplink_store_example/linux/my_application.cc:47:35     - Unknown word (deeplink)   -- window_set_title(window, "deeplink_store_example");
-deeplink_store_example/linux/my_application.cc:53:5      - Unknown word (autoptr)    -- g_autoptr(FlDartProject) project
 deeplink_store_example/linux/my_application.cc:66:78     - Unknown word (gchar)      -- GApplication* application, gchar*** arguments, int* exit
 deeplink_store_example/linux/my_application.cc:66:8      - Unknown word (gboolean)   -- static gboolean my_application_local
 deeplink_store_example/linux/my_application.cc:69:39     - Unknown word (strdupv)    -- entrypoint_arguments = g_strdupv(*arguments + 1);
-deeplink_store_example/linux/my_application.cc:71:5      - Unknown word (autoptr)    -- g_autoptr(GError) error = nullptr
 deeplink_store_example/linux/my_application.cc:87:55     - Unknown word (strfreev)   -- entrypoint_arguments, g_strfreev);
 deeplink_store_example/linux/my_application.cc:91:59     - Unknown word (klass)      -- MyApplicationClass* klass) {
 deeplink_store_example/linux/my_application.cc:92:23     - Unknown word (klass)      -- G_APPLICATION_CLASS(klass)->activate = my_application
@@ -6921,27 +6846,21 @@ deeplink_store_example/windows/runner/Runner.rc:95:36     - Unknown word (deepli
 deeplink_store_example/windows/runner/Runner.rc:97:40     - Unknown word (deeplink)       -- OriginalFilename", "deeplink_store_example.exe"
 deeplink_store_example/windows/runner/Runner.rc:98:35     - Unknown word (deeplink)       -- VALUE "ProductName", "deeplink_store_example" "\0"
 deeplink_store_example/windows/runner/Runner.rc:9:23      - Unknown word (TEXTINCLUDE) -- Generated from the TEXTINCLUDE 2 resource.
-deeplink_store_example/windows/runner/flutter_window.cpp:60:13     - Unknown word (FONTCHANGE) -- case WM_FONTCHANGE:
 deeplink_store_example/windows/runner/main.cpp:18:29     - Unknown word (COINIT)     -- CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 deeplink_store_example/windows/runner/main.cpp:18:36     - Unknown word (APARTMENTTHREADED) -- oInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 deeplink_store_example/windows/runner/main.cpp:30:24     - Unknown word (deeplink)          -- if (!window.Create(L"deeplink_store_example", origin
 deeplink_store_example/windows/runner/main.cpp:8:28      - Unknown word (HINSTANCE)  -- APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE
-deeplink_store_example/windows/runner/main.cpp:8:5       - Unknown word (APIENTRY)   -- int APIENTRY wWinMain(_In_ HINSTANCE
 deeplink_store_example/windows/runner/main.cpp:8:57      - Unknown word (HINSTANCE)  -- HINSTANCE instance, _In_opt_ HINSTANCE prev,
 deeplink_store_example/windows/runner/resource.h:10:9      - Unknown word (APSTUDIO)   -- #ifndef APSTUDIO_READONLY_SYMBOLS
 deeplink_store_example/windows/runner/resource.h:14:19     - Unknown word (SYMED)      -- #define _APS_NEXT_SYMED_VALUE 101
 deeplink_store_example/windows/runner/resource.h:9:8       - Unknown word (APSTUDIO)   -- #ifdef APSTUDIO_INVOKED
-deeplink_store_example/windows/runner/utils.cpp:13:29     - Unknown word (CONOUT)     -- freopen_s(&unused, "CONOUT$", "w", stdout)) {
-deeplink_store_example/windows/runner/utils.cpp:16:29     - Unknown word (CONOUT)     -- freopen_s(&unused, "CONOUT$", "w", stderr)) {
-deeplink_store_example/windows/runner/win32_window.cpp:101:18    - Unknown word (lpsz)            -- window_class.lpszMenuName = nullptr;
-deeplink_store_example/windows/runner/win32_window.cpp:102:18    - Unknown word (lpfn)            -- window_class.lpfnWndProc = Win32Window
-deeplink_store_example/windows/runner/win32_window.cpp:133:3     - Unknown word (HMONITOR)        -- HMONITOR monitor = MonitorFromPoint
+deeplink_store_example/windows/runner/win32_window.cpp:101:18    - Unknown word (lpsz)       -- window_class.lpszMenuName = nullptr;
+deeplink_store_example/windows/runner/win32_window.cpp:102:18    - Unknown word (lpfn)       -- window_class.lpfnWndProc = Win32Window
+deeplink_store_example/windows/runner/win32_window.cpp:133:3     - Unknown word (HMONITOR)   -- HMONITOR monitor = MonitorFromPoint
 deeplink_store_example/windows/runner/win32_window.cpp:133:61    - Unknown word (DEFAULTTONEAREST) -- target_point, MONITOR_DEFAULTTONEAREST);
 deeplink_store_example/windows/runner/win32_window.cpp:138:39    - Unknown word (OVERLAPPEDWINDOW) -- class, title.c_str(), WS_OVERLAPPEDWINDOW,
-deeplink_store_example/windows/runner/win32_window.cpp:153:40    - Unknown word (SHOWNORMAL)       -- ShowWindow(window_handle_, SW_SHOWNORMAL);
 deeplink_store_example/windows/runner/win32_window.cpp:15:9      - Unknown word (DWMWA)      -- #ifndef DWMWA_USE_IMMERSIVE_DARK_MODE
 deeplink_store_example/windows/runner/win32_window.cpp:161:21    - Unknown word (NCCREATE)         -- if (message == WM_NCCREATE) {
-deeplink_store_example/windows/runner/win32_window.cpp:162:43    - Unknown word (CREATESTRUCT)     -- struct = reinterpret_cast<CREATESTRUCT*>(lparam);
 deeplink_store_example/windows/runner/win32_window.cpp:163:30    - Unknown word (GWLP)             -- SetWindowLongPtr(window, GWLP_USERDATA,
 deeplink_store_example/windows/runner/win32_window.cpp:16:9      - Unknown word (DWMWA)      -- #define DWMWA_USE_IMMERSIVE_DARK_MODE
 deeplink_store_example/windows/runner/win32_window.cpp:190:13    - Unknown word (DPICHANGED)       -- case WM_DPICHANGED: {
@@ -6954,8 +6873,6 @@ deeplink_store_example/windows/runner/win32_window.cpp:285:35    - Unknown word 
 deeplink_store_example/windows/runner/win32_window.cpp:91:5      - Unknown word (WNDCLASS)   -- WNDCLASS window_class{};
 deeplink_store_example/windows/runner/win32_window.cpp:93:18     - Unknown word (lpsz)       -- window_class.lpszClassName = kWindowClassName
 deeplink_store_example/windows/runner/win32_window.cpp:94:29     - Unknown word (HREDRAW)    -- window_class.style = CS_HREDRAW | CS_VREDRAW;
-deeplink_store_example/windows/runner/win32_window.cpp:94:42     - Unknown word (VREDRAW)    -- style = CS_HREDRAW | CS_VREDRAW;
-deeplink_store_example/windows/runner/win32_window.cpp:99:42     - Unknown word (MAKEINTRESOURCE) -- window_class.hInstance, MAKEINTRESOURCE(IDI_APP_ICON));
 deeplink_store_example/windows/runner/win32_window.h:77:57     - Unknown word (NCCREATE)   -- pump. Handles the WM_NCCREATE message which
 desktop_photo_search/codelab_rebuild.yaml:100:81    - Unknown word (miniaturizable)   -- YES" closable="YES" miniaturizable="YES" resizable="YES
 desktop_photo_search/codelab_rebuild.yaml:102:171   - Unknown word (titlebar)         -- animationBehavior="default" titlebarAppearsTransparent="YES
@@ -6987,20 +6904,13 @@ desktop_photo_search/fluent_ui/linux/flutter/CMakeLists.txt:20:1      - Unknown 
 desktop_photo_search/fluent_ui/linux/flutter/CMakeLists.txt:29:39     - Unknown word (libflutter)  -- LIBRARY "${EPHEMERAL_DIR}/libflutter_linux_gtk.so")
 desktop_photo_search/fluent_ui/linux/flutter/CMakeLists.txt:33:45     - Unknown word (icudtl)      -- FILE "${EPHEMERAL_DIR}/icudtl.dat" PARENT_SCOPE)
 desktop_photo_search/fluent_ui/linux/flutter/CMakeLists.txt:35:43     - Unknown word (libapp)      -- PROJECT_DIR}/build/lib/libapp.so" PARENT_SCOPE)
-desktop_photo_search/fluent_ui/linux/flutter/generated_plugin_registrant.cc:15:5      - Unknown word (autoptr)    -- g_autoptr(FlPluginRegistrar) file
-desktop_photo_search/fluent_ui/linux/flutter/generated_plugin_registrant.cc:18:5      - Unknown word (autoptr)    -- g_autoptr(FlPluginRegistrar) menubar
-desktop_photo_search/fluent_ui/linux/flutter/generated_plugin_registrant.cc:21:5      - Unknown word (autoptr)    -- g_autoptr(FlPluginRegistrar) url
-desktop_photo_search/fluent_ui/linux/flutter/generated_plugin_registrant.cc:24:5      - Unknown word (autoptr)    -- g_autoptr(FlPluginRegistrar) window
 desktop_photo_search/fluent_ui/linux/flutter/generated_plugins.cmake:22:1      - Unknown word (endforeach) -- endforeach(plugin)
 desktop_photo_search/fluent_ui/linux/flutter/generated_plugins.cmake:27:1      - Unknown word (endforeach) -- endforeach(ffi_plugin)
-desktop_photo_search/fluent_ui/linux/main.cc:4:5       - Unknown word (autoptr)    -- g_autoptr(MyApplication) app
 desktop_photo_search/fluent_ui/linux/my_application.cc:30:3      - Unknown word (gboolean)   -- gboolean use_header_bar = TRUE
 desktop_photo_search/fluent_ui/linux/my_application.cc:34:11     - Unknown word (gchar)      -- const gchar* wm_name = gdk_x11_screen
-desktop_photo_search/fluent_ui/linux/my_application.cc:53:5      - Unknown word (autoptr)    -- g_autoptr(FlDartProject) project
 desktop_photo_search/fluent_ui/linux/my_application.cc:66:78     - Unknown word (gchar)      -- GApplication* application, gchar*** arguments, int* exit
 desktop_photo_search/fluent_ui/linux/my_application.cc:66:8      - Unknown word (gboolean)   -- static gboolean my_application_local
 desktop_photo_search/fluent_ui/linux/my_application.cc:69:39     - Unknown word (strdupv)    -- entrypoint_arguments = g_strdupv(*arguments + 1);
-desktop_photo_search/fluent_ui/linux/my_application.cc:71:5      - Unknown word (autoptr)    -- g_autoptr(GError) error = nullptr
 desktop_photo_search/fluent_ui/linux/my_application.cc:87:55     - Unknown word (strfreev)   -- entrypoint_arguments, g_strfreev);
 desktop_photo_search/fluent_ui/linux/my_application.cc:91:59     - Unknown word (klass)      -- MyApplicationClass* klass) {
 desktop_photo_search/fluent_ui/linux/my_application.cc:92:23     - Unknown word (klass)      -- G_APPLICATION_CLASS(klass)->activate = my_application
@@ -7092,26 +7002,20 @@ desktop_photo_search/fluent_ui/windows/runner/Runner.rc:82:2      - Unknown word
 desktop_photo_search/fluent_ui/windows/runner/Runner.rc:84:2      - Unknown word (FILEOS)         -- FILEOS VOS__WINDOWS32
 desktop_photo_search/fluent_ui/windows/runner/Runner.rc:86:2      - Unknown word (FILESUBTYPE)    -- FILESUBTYPE 0x0L
 desktop_photo_search/fluent_ui/windows/runner/Runner.rc:9:23      - Unknown word (TEXTINCLUDE) -- Generated from the TEXTINCLUDE 2 resource.
-desktop_photo_search/fluent_ui/windows/runner/flutter_window.cpp:65:13     - Unknown word (FONTCHANGE) -- case WM_FONTCHANGE:
 desktop_photo_search/fluent_ui/windows/runner/main.cpp:18:29     - Unknown word (COINIT)     -- CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 desktop_photo_search/fluent_ui/windows/runner/main.cpp:18:36     - Unknown word (APARTMENTTHREADED) -- oInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 desktop_photo_search/fluent_ui/windows/runner/main.cpp:8:28      - Unknown word (HINSTANCE)  -- APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE
-desktop_photo_search/fluent_ui/windows/runner/main.cpp:8:5       - Unknown word (APIENTRY)   -- int APIENTRY wWinMain(_In_ HINSTANCE
 desktop_photo_search/fluent_ui/windows/runner/main.cpp:8:57      - Unknown word (HINSTANCE)  -- HINSTANCE instance, _In_opt_ HINSTANCE prev,
 desktop_photo_search/fluent_ui/windows/runner/resource.h:10:9      - Unknown word (APSTUDIO)   -- #ifndef APSTUDIO_READONLY_SYMBOLS
 desktop_photo_search/fluent_ui/windows/runner/resource.h:14:19     - Unknown word (SYMED)      -- #define _APS_NEXT_SYMED_VALUE 101
 desktop_photo_search/fluent_ui/windows/runner/resource.h:9:8       - Unknown word (APSTUDIO)   -- #ifdef APSTUDIO_INVOKED
-desktop_photo_search/fluent_ui/windows/runner/utils.cpp:13:29     - Unknown word (CONOUT)     -- freopen_s(&unused, "CONOUT$", "w", stdout)) {
-desktop_photo_search/fluent_ui/windows/runner/utils.cpp:16:29     - Unknown word (CONOUT)     -- freopen_s(&unused, "CONOUT$", "w", stderr)) {
-desktop_photo_search/fluent_ui/windows/runner/win32_window.cpp:101:18    - Unknown word (lpsz)            -- window_class.lpszMenuName = nullptr;
-desktop_photo_search/fluent_ui/windows/runner/win32_window.cpp:102:18    - Unknown word (lpfn)            -- window_class.lpfnWndProc = Win32Window
-desktop_photo_search/fluent_ui/windows/runner/win32_window.cpp:133:3     - Unknown word (HMONITOR)        -- HMONITOR monitor = MonitorFromPoint
+desktop_photo_search/fluent_ui/windows/runner/win32_window.cpp:101:18    - Unknown word (lpsz)       -- window_class.lpszMenuName = nullptr;
+desktop_photo_search/fluent_ui/windows/runner/win32_window.cpp:102:18    - Unknown word (lpfn)       -- window_class.lpfnWndProc = Win32Window
+desktop_photo_search/fluent_ui/windows/runner/win32_window.cpp:133:3     - Unknown word (HMONITOR)   -- HMONITOR monitor = MonitorFromPoint
 desktop_photo_search/fluent_ui/windows/runner/win32_window.cpp:133:61    - Unknown word (DEFAULTTONEAREST) -- target_point, MONITOR_DEFAULTTONEAREST);
 desktop_photo_search/fluent_ui/windows/runner/win32_window.cpp:138:39    - Unknown word (OVERLAPPEDWINDOW) -- class, title.c_str(), WS_OVERLAPPEDWINDOW,
-desktop_photo_search/fluent_ui/windows/runner/win32_window.cpp:153:40    - Unknown word (SHOWNORMAL)       -- ShowWindow(window_handle_, SW_SHOWNORMAL);
 desktop_photo_search/fluent_ui/windows/runner/win32_window.cpp:15:9      - Unknown word (DWMWA)      -- #ifndef DWMWA_USE_IMMERSIVE_DARK_MODE
 desktop_photo_search/fluent_ui/windows/runner/win32_window.cpp:161:21    - Unknown word (NCCREATE)         -- if (message == WM_NCCREATE) {
-desktop_photo_search/fluent_ui/windows/runner/win32_window.cpp:162:43    - Unknown word (CREATESTRUCT)     -- struct = reinterpret_cast<CREATESTRUCT*>(lparam);
 desktop_photo_search/fluent_ui/windows/runner/win32_window.cpp:163:30    - Unknown word (GWLP)             -- SetWindowLongPtr(window, GWLP_USERDATA,
 desktop_photo_search/fluent_ui/windows/runner/win32_window.cpp:16:9      - Unknown word (DWMWA)      -- #define DWMWA_USE_IMMERSIVE_DARK_MODE
 desktop_photo_search/fluent_ui/windows/runner/win32_window.cpp:190:13    - Unknown word (DPICHANGED)       -- case WM_DPICHANGED: {
@@ -7124,8 +7028,6 @@ desktop_photo_search/fluent_ui/windows/runner/win32_window.cpp:285:35    - Unkno
 desktop_photo_search/fluent_ui/windows/runner/win32_window.cpp:91:5      - Unknown word (WNDCLASS)   -- WNDCLASS window_class{};
 desktop_photo_search/fluent_ui/windows/runner/win32_window.cpp:93:18     - Unknown word (lpsz)       -- window_class.lpszClassName = kWindowClassName
 desktop_photo_search/fluent_ui/windows/runner/win32_window.cpp:94:29     - Unknown word (HREDRAW)    -- window_class.style = CS_HREDRAW | CS_VREDRAW;
-desktop_photo_search/fluent_ui/windows/runner/win32_window.cpp:94:42     - Unknown word (VREDRAW)    -- style = CS_HREDRAW | CS_VREDRAW;
-desktop_photo_search/fluent_ui/windows/runner/win32_window.cpp:99:42     - Unknown word (MAKEINTRESOURCE) -- window_class.hInstance, MAKEINTRESOURCE(IDI_APP_ICON));
 desktop_photo_search/fluent_ui/windows/runner/win32_window.h:77:57     - Unknown word (NCCREATE)   -- pump. Handles the WM_NCCREATE message which
 desktop_photo_search/material/README.md:26:18     - Unknown word (Yehuda)     -- This sample uses Yehuda Kremer's [MSIX pub package
 desktop_photo_search/material/README.md:26:25     - Unknown word (Kremer's)   -- This sample uses Yehuda Kremer's [MSIX pub package] to
@@ -7146,20 +7048,13 @@ desktop_photo_search/material/linux/flutter/CMakeLists.txt:20:1      - Unknown w
 desktop_photo_search/material/linux/flutter/CMakeLists.txt:29:39     - Unknown word (libflutter)  -- LIBRARY "${EPHEMERAL_DIR}/libflutter_linux_gtk.so")
 desktop_photo_search/material/linux/flutter/CMakeLists.txt:33:45     - Unknown word (icudtl)      -- FILE "${EPHEMERAL_DIR}/icudtl.dat" PARENT_SCOPE)
 desktop_photo_search/material/linux/flutter/CMakeLists.txt:35:43     - Unknown word (libapp)      -- PROJECT_DIR}/build/lib/libapp.so" PARENT_SCOPE)
-desktop_photo_search/material/linux/flutter/generated_plugin_registrant.cc:15:5      - Unknown word (autoptr)    -- g_autoptr(FlPluginRegistrar) file
-desktop_photo_search/material/linux/flutter/generated_plugin_registrant.cc:18:5      - Unknown word (autoptr)    -- g_autoptr(FlPluginRegistrar) menubar
-desktop_photo_search/material/linux/flutter/generated_plugin_registrant.cc:21:5      - Unknown word (autoptr)    -- g_autoptr(FlPluginRegistrar) url
-desktop_photo_search/material/linux/flutter/generated_plugin_registrant.cc:24:5      - Unknown word (autoptr)    -- g_autoptr(FlPluginRegistrar) window
 desktop_photo_search/material/linux/flutter/generated_plugins.cmake:22:1      - Unknown word (endforeach) -- endforeach(plugin)
 desktop_photo_search/material/linux/flutter/generated_plugins.cmake:27:1      - Unknown word (endforeach) -- endforeach(ffi_plugin)
-desktop_photo_search/material/linux/main.cc:4:5       - Unknown word (autoptr)    -- g_autoptr(MyApplication) app
 desktop_photo_search/material/linux/my_application.cc:30:3      - Unknown word (gboolean)   -- gboolean use_header_bar = TRUE
 desktop_photo_search/material/linux/my_application.cc:34:11     - Unknown word (gchar)      -- const gchar* wm_name = gdk_x11_screen
-desktop_photo_search/material/linux/my_application.cc:53:5      - Unknown word (autoptr)    -- g_autoptr(FlDartProject) project
 desktop_photo_search/material/linux/my_application.cc:66:78     - Unknown word (gchar)      -- GApplication* application, gchar*** arguments, int* exit
 desktop_photo_search/material/linux/my_application.cc:66:8      - Unknown word (gboolean)   -- static gboolean my_application_local
 desktop_photo_search/material/linux/my_application.cc:69:39     - Unknown word (strdupv)    -- entrypoint_arguments = g_strdupv(*arguments + 1);
-desktop_photo_search/material/linux/my_application.cc:71:5      - Unknown word (autoptr)    -- g_autoptr(GError) error = nullptr
 desktop_photo_search/material/linux/my_application.cc:87:55     - Unknown word (strfreev)   -- entrypoint_arguments, g_strfreev);
 desktop_photo_search/material/linux/my_application.cc:91:59     - Unknown word (klass)      -- MyApplicationClass* klass) {
 desktop_photo_search/material/linux/my_application.cc:92:23     - Unknown word (klass)      -- G_APPLICATION_CLASS(klass)->activate = my_application
@@ -7252,26 +7147,20 @@ desktop_photo_search/material/windows/runner/Runner.rc:82:2      - Unknown word 
 desktop_photo_search/material/windows/runner/Runner.rc:84:2      - Unknown word (FILEOS)         -- FILEOS VOS__WINDOWS32
 desktop_photo_search/material/windows/runner/Runner.rc:86:2      - Unknown word (FILESUBTYPE)    -- FILESUBTYPE 0x0L
 desktop_photo_search/material/windows/runner/Runner.rc:9:23      - Unknown word (TEXTINCLUDE) -- Generated from the TEXTINCLUDE 2 resource.
-desktop_photo_search/material/windows/runner/flutter_window.cpp:65:13     - Unknown word (FONTCHANGE) -- case WM_FONTCHANGE:
 desktop_photo_search/material/windows/runner/main.cpp:18:29     - Unknown word (COINIT)     -- CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 desktop_photo_search/material/windows/runner/main.cpp:18:36     - Unknown word (APARTMENTTHREADED) -- oInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 desktop_photo_search/material/windows/runner/main.cpp:8:28      - Unknown word (HINSTANCE)  -- APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE
-desktop_photo_search/material/windows/runner/main.cpp:8:5       - Unknown word (APIENTRY)   -- int APIENTRY wWinMain(_In_ HINSTANCE
 desktop_photo_search/material/windows/runner/main.cpp:8:57      - Unknown word (HINSTANCE)  -- HINSTANCE instance, _In_opt_ HINSTANCE prev,
 desktop_photo_search/material/windows/runner/resource.h:10:9      - Unknown word (APSTUDIO)   -- #ifndef APSTUDIO_READONLY_SYMBOLS
 desktop_photo_search/material/windows/runner/resource.h:14:19     - Unknown word (SYMED)      -- #define _APS_NEXT_SYMED_VALUE 101
 desktop_photo_search/material/windows/runner/resource.h:9:8       - Unknown word (APSTUDIO)   -- #ifdef APSTUDIO_INVOKED
-desktop_photo_search/material/windows/runner/utils.cpp:13:29     - Unknown word (CONOUT)     -- freopen_s(&unused, "CONOUT$", "w", stdout)) {
-desktop_photo_search/material/windows/runner/utils.cpp:16:29     - Unknown word (CONOUT)     -- freopen_s(&unused, "CONOUT$", "w", stderr)) {
-desktop_photo_search/material/windows/runner/win32_window.cpp:101:18    - Unknown word (lpsz)            -- window_class.lpszMenuName = nullptr;
-desktop_photo_search/material/windows/runner/win32_window.cpp:102:18    - Unknown word (lpfn)            -- window_class.lpfnWndProc = Win32Window
-desktop_photo_search/material/windows/runner/win32_window.cpp:133:3     - Unknown word (HMONITOR)        -- HMONITOR monitor = MonitorFromPoint
+desktop_photo_search/material/windows/runner/win32_window.cpp:101:18    - Unknown word (lpsz)       -- window_class.lpszMenuName = nullptr;
+desktop_photo_search/material/windows/runner/win32_window.cpp:102:18    - Unknown word (lpfn)       -- window_class.lpfnWndProc = Win32Window
+desktop_photo_search/material/windows/runner/win32_window.cpp:133:3     - Unknown word (HMONITOR)   -- HMONITOR monitor = MonitorFromPoint
 desktop_photo_search/material/windows/runner/win32_window.cpp:133:61    - Unknown word (DEFAULTTONEAREST) -- target_point, MONITOR_DEFAULTTONEAREST);
 desktop_photo_search/material/windows/runner/win32_window.cpp:138:39    - Unknown word (OVERLAPPEDWINDOW) -- class, title.c_str(), WS_OVERLAPPEDWINDOW,
-desktop_photo_search/material/windows/runner/win32_window.cpp:153:40    - Unknown word (SHOWNORMAL)       -- ShowWindow(window_handle_, SW_SHOWNORMAL);
 desktop_photo_search/material/windows/runner/win32_window.cpp:15:9      - Unknown word (DWMWA)      -- #ifndef DWMWA_USE_IMMERSIVE_DARK_MODE
 desktop_photo_search/material/windows/runner/win32_window.cpp:161:21    - Unknown word (NCCREATE)         -- if (message == WM_NCCREATE) {
-desktop_photo_search/material/windows/runner/win32_window.cpp:162:43    - Unknown word (CREATESTRUCT)     -- struct = reinterpret_cast<CREATESTRUCT*>(lparam);
 desktop_photo_search/material/windows/runner/win32_window.cpp:163:30    - Unknown word (GWLP)             -- SetWindowLongPtr(window, GWLP_USERDATA,
 desktop_photo_search/material/windows/runner/win32_window.cpp:16:9      - Unknown word (DWMWA)      -- #define DWMWA_USE_IMMERSIVE_DARK_MODE
 desktop_photo_search/material/windows/runner/win32_window.cpp:190:13    - Unknown word (DPICHANGED)       -- case WM_DPICHANGED: {
@@ -7284,8 +7173,6 @@ desktop_photo_search/material/windows/runner/win32_window.cpp:285:35    - Unknow
 desktop_photo_search/material/windows/runner/win32_window.cpp:91:5      - Unknown word (WNDCLASS)   -- WNDCLASS window_class{};
 desktop_photo_search/material/windows/runner/win32_window.cpp:93:18     - Unknown word (lpsz)       -- window_class.lpszClassName = kWindowClassName
 desktop_photo_search/material/windows/runner/win32_window.cpp:94:29     - Unknown word (HREDRAW)    -- window_class.style = CS_HREDRAW | CS_VREDRAW;
-desktop_photo_search/material/windows/runner/win32_window.cpp:94:42     - Unknown word (VREDRAW)    -- style = CS_HREDRAW | CS_VREDRAW;
-desktop_photo_search/material/windows/runner/win32_window.cpp:99:42     - Unknown word (MAKEINTRESOURCE) -- window_class.hInstance, MAKEINTRESOURCE(IDI_APP_ICON));
 desktop_photo_search/material/windows/runner/win32_window.h:77:57     - Unknown word (NCCREATE)   -- pump. Handles the WM_NCCREATE message which
 dynamic_theme/android/build.gradle:1:1       - Unknown word (allprojects) -- allprojects {
 dynamic_theme/android/gradle.properties:1:12      - Unknown word (jvmargs)    -- org.gradle.jvmargs=-Xmx4G
@@ -7323,10 +7210,8 @@ dynamic_theme/linux/flutter/CMakeLists.txt:20:1      - Unknown word (endfunction
 dynamic_theme/linux/flutter/CMakeLists.txt:29:39     - Unknown word (libflutter)  -- LIBRARY "${EPHEMERAL_DIR}/libflutter_linux_gtk.so")
 dynamic_theme/linux/flutter/CMakeLists.txt:33:45     - Unknown word (icudtl)      -- FILE "${EPHEMERAL_DIR}/icudtl.dat" PARENT_SCOPE)
 dynamic_theme/linux/flutter/CMakeLists.txt:35:43     - Unknown word (libapp)      -- PROJECT_DIR}/build/lib/libapp.so" PARENT_SCOPE)
-dynamic_theme/linux/flutter/generated_plugin_registrant.cc:12:5      - Unknown word (autoptr)    -- g_autoptr(FlPluginRegistrar) url
 dynamic_theme/linux/flutter/generated_plugins.cmake:19:1      - Unknown word (endforeach) -- endforeach(plugin)
 dynamic_theme/linux/flutter/generated_plugins.cmake:24:1      - Unknown word (endforeach) -- endforeach(ffi_plugin)
-dynamic_theme/linux/main.cc:4:5       - Unknown word (autoptr)    -- g_autoptr(MyApplication) app
 dynamic_theme/linux/my_application.cc:105:55    - Unknown word (strfreev)   -- entrypoint_arguments, g_strfreev);
 dynamic_theme/linux/my_application.cc:109:59    - Unknown word (klass)      -- MyApplicationClass* klass) {
 dynamic_theme/linux/my_application.cc:110:23    - Unknown word (klass)      -- G_APPLICATION_CLASS(klass)->activate = my_application
@@ -7335,11 +7220,9 @@ dynamic_theme/linux/my_application.cc:112:23    - Unknown word (klass)      -- G
 dynamic_theme/linux/my_application.cc:113:23    - Unknown word (klass)      -- G_APPLICATION_CLASS(klass)->shutdown = my_application
 dynamic_theme/linux/my_application.cc:30:3      - Unknown word (gboolean)   -- gboolean use_header_bar = TRUE
 dynamic_theme/linux/my_application.cc:34:11     - Unknown word (gchar)      -- const gchar* wm_name = gdk_x11_screen
-dynamic_theme/linux/my_application.cc:53:5      - Unknown word (autoptr)    -- g_autoptr(FlDartProject) project
 dynamic_theme/linux/my_application.cc:66:78     - Unknown word (gchar)      -- GApplication* application, gchar*** arguments, int* exit
 dynamic_theme/linux/my_application.cc:66:8      - Unknown word (gboolean)   -- static gboolean my_application_local
 dynamic_theme/linux/my_application.cc:69:39     - Unknown word (strdupv)    -- entrypoint_arguments = g_strdupv(*arguments + 1);
-dynamic_theme/linux/my_application.cc:71:5      - Unknown word (autoptr)    -- g_autoptr(GError) error = nullptr
 dynamic_theme/macos/Podfile:13:117    - Unknown word (xcconfig)   -- 'Flutter-Generated.xcconfig'), __FILE__)
 dynamic_theme/macos/Podfile:22:107    - Unknown word (xcconfig)   -- deleting Flutter-Generated.xcconfig, then run \"flutter
 dynamic_theme/macos/Podfile:25:73     - Unknown word (podhelper)  -- flutter_tools', 'bin', 'podhelper'), flutter_root)
@@ -7386,26 +7269,20 @@ dynamic_theme/windows/runner/Runner.rc:82:2      - Unknown word (FILEFLAGS)     
 dynamic_theme/windows/runner/Runner.rc:84:2      - Unknown word (FILEOS)         -- FILEOS VOS__WINDOWS32
 dynamic_theme/windows/runner/Runner.rc:86:2      - Unknown word (FILESUBTYPE)    -- FILESUBTYPE 0x0L
 dynamic_theme/windows/runner/Runner.rc:9:23      - Unknown word (TEXTINCLUDE) -- Generated from the TEXTINCLUDE 2 resource.
-dynamic_theme/windows/runner/flutter_window.cpp:65:13     - Unknown word (FONTCHANGE) -- case WM_FONTCHANGE:
 dynamic_theme/windows/runner/main.cpp:18:29     - Unknown word (COINIT)     -- CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 dynamic_theme/windows/runner/main.cpp:18:36     - Unknown word (APARTMENTTHREADED) -- oInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 dynamic_theme/windows/runner/main.cpp:8:28      - Unknown word (HINSTANCE)  -- APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE
-dynamic_theme/windows/runner/main.cpp:8:5       - Unknown word (APIENTRY)   -- int APIENTRY wWinMain(_In_ HINSTANCE
 dynamic_theme/windows/runner/main.cpp:8:57      - Unknown word (HINSTANCE)  -- HINSTANCE instance, _In_opt_ HINSTANCE prev,
 dynamic_theme/windows/runner/resource.h:10:9      - Unknown word (APSTUDIO)   -- #ifndef APSTUDIO_READONLY_SYMBOLS
 dynamic_theme/windows/runner/resource.h:14:19     - Unknown word (SYMED)      -- #define _APS_NEXT_SYMED_VALUE 101
 dynamic_theme/windows/runner/resource.h:9:8       - Unknown word (APSTUDIO)   -- #ifdef APSTUDIO_INVOKED
-dynamic_theme/windows/runner/utils.cpp:13:29     - Unknown word (CONOUT)     -- freopen_s(&unused, "CONOUT$", "w", stdout)) {
-dynamic_theme/windows/runner/utils.cpp:16:29     - Unknown word (CONOUT)     -- freopen_s(&unused, "CONOUT$", "w", stderr)) {
-dynamic_theme/windows/runner/win32_window.cpp:101:18    - Unknown word (lpsz)            -- window_class.lpszMenuName = nullptr;
-dynamic_theme/windows/runner/win32_window.cpp:102:18    - Unknown word (lpfn)            -- window_class.lpfnWndProc = Win32Window
-dynamic_theme/windows/runner/win32_window.cpp:133:3     - Unknown word (HMONITOR)        -- HMONITOR monitor = MonitorFromPoint
+dynamic_theme/windows/runner/win32_window.cpp:101:18    - Unknown word (lpsz)       -- window_class.lpszMenuName = nullptr;
+dynamic_theme/windows/runner/win32_window.cpp:102:18    - Unknown word (lpfn)       -- window_class.lpfnWndProc = Win32Window
+dynamic_theme/windows/runner/win32_window.cpp:133:3     - Unknown word (HMONITOR)   -- HMONITOR monitor = MonitorFromPoint
 dynamic_theme/windows/runner/win32_window.cpp:133:61    - Unknown word (DEFAULTTONEAREST) -- target_point, MONITOR_DEFAULTTONEAREST);
 dynamic_theme/windows/runner/win32_window.cpp:138:39    - Unknown word (OVERLAPPEDWINDOW) -- class, title.c_str(), WS_OVERLAPPEDWINDOW,
-dynamic_theme/windows/runner/win32_window.cpp:153:40    - Unknown word (SHOWNORMAL)       -- ShowWindow(window_handle_, SW_SHOWNORMAL);
 dynamic_theme/windows/runner/win32_window.cpp:15:9      - Unknown word (DWMWA)      -- #ifndef DWMWA_USE_IMMERSIVE_DARK_MODE
 dynamic_theme/windows/runner/win32_window.cpp:161:21    - Unknown word (NCCREATE)         -- if (message == WM_NCCREATE) {
-dynamic_theme/windows/runner/win32_window.cpp:162:43    - Unknown word (CREATESTRUCT)     -- struct = reinterpret_cast<CREATESTRUCT*>(lparam);
 dynamic_theme/windows/runner/win32_window.cpp:163:30    - Unknown word (GWLP)             -- SetWindowLongPtr(window, GWLP_USERDATA,
 dynamic_theme/windows/runner/win32_window.cpp:16:9      - Unknown word (DWMWA)      -- #define DWMWA_USE_IMMERSIVE_DARK_MODE
 dynamic_theme/windows/runner/win32_window.cpp:190:13    - Unknown word (DPICHANGED)       -- case WM_DPICHANGED: {
@@ -7418,8 +7295,6 @@ dynamic_theme/windows/runner/win32_window.cpp:285:35    - Unknown word (DWMWA)  
 dynamic_theme/windows/runner/win32_window.cpp:91:5      - Unknown word (WNDCLASS)   -- WNDCLASS window_class{};
 dynamic_theme/windows/runner/win32_window.cpp:93:18     - Unknown word (lpsz)       -- window_class.lpszClassName = kWindowClassName
 dynamic_theme/windows/runner/win32_window.cpp:94:29     - Unknown word (HREDRAW)    -- window_class.style = CS_HREDRAW | CS_VREDRAW;
-dynamic_theme/windows/runner/win32_window.cpp:94:42     - Unknown word (VREDRAW)    -- style = CS_HREDRAW | CS_VREDRAW;
-dynamic_theme/windows/runner/win32_window.cpp:99:42     - Unknown word (MAKEINTRESOURCE) -- window_class.hInstance, MAKEINTRESOURCE(IDI_APP_ICON));
 dynamic_theme/windows/runner/win32_window.h:77:57     - Unknown word (NCCREATE)   -- pump. Handles the WM_NCCREATE message which
 experimental/date_planner/ios/Runner/Assets.xcassets/LaunchImage.imageset/README.md:5:129     - Unknown word (xcassets)    -- selecting `Runner/Assets.xcassets` in the Project Navigator
 experimental/date_planner/ios/Runner/Assets.xcassets/LaunchImage.imageset/README.md:5:90      - Unknown word (xcworkspace) -- with `open ios/Runner.xcworkspace`, selecting `Runner
@@ -7525,22 +7400,17 @@ experimental/federated_plugin/federated_plugin/example/windows/runner/Runner.rc:
 experimental/federated_plugin/federated_plugin/example/windows/runner/Runner.rc:84:2      - Unknown word (FILEOS)         -- FILEOS VOS__WINDOWS32
 experimental/federated_plugin/federated_plugin/example/windows/runner/Runner.rc:86:2      - Unknown word (FILESUBTYPE)    -- FILESUBTYPE 0x0L
 experimental/federated_plugin/federated_plugin/example/windows/runner/Runner.rc:9:23      - Unknown word (TEXTINCLUDE) -- Generated from the TEXTINCLUDE 2 resource.
-experimental/federated_plugin/federated_plugin/example/windows/runner/flutter_window.cpp:55:13     - Unknown word (FONTCHANGE) -- case WM_FONTCHANGE:
 experimental/federated_plugin/federated_plugin/example/windows/runner/main.cpp:18:29     - Unknown word (COINIT)     -- CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 experimental/federated_plugin/federated_plugin/example/windows/runner/main.cpp:18:36     - Unknown word (APARTMENTTHREADED) -- oInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 experimental/federated_plugin/federated_plugin/example/windows/runner/main.cpp:8:28      - Unknown word (HINSTANCE)  -- APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE
-experimental/federated_plugin/federated_plugin/example/windows/runner/main.cpp:8:5       - Unknown word (APIENTRY)   -- int APIENTRY wWinMain(_In_ HINSTANCE
 experimental/federated_plugin/federated_plugin/example/windows/runner/main.cpp:8:57      - Unknown word (HINSTANCE)  -- HINSTANCE instance, _In_opt_ HINSTANCE prev,
 experimental/federated_plugin/federated_plugin/example/windows/runner/resource.h:10:9      - Unknown word (APSTUDIO)   -- #ifndef APSTUDIO_READONLY_SYMBOLS
 experimental/federated_plugin/federated_plugin/example/windows/runner/resource.h:14:19     - Unknown word (SYMED)      -- #define _APS_NEXT_SYMED_VALUE 101
 experimental/federated_plugin/federated_plugin/example/windows/runner/resource.h:9:8       - Unknown word (APSTUDIO)   -- #ifdef APSTUDIO_INVOKED
-experimental/federated_plugin/federated_plugin/example/windows/runner/utils.cpp:13:29     - Unknown word (CONOUT)     -- freopen_s(&unused, "CONOUT$", "w", stdout)) {
-experimental/federated_plugin/federated_plugin/example/windows/runner/utils.cpp:16:29     - Unknown word (CONOUT)     -- freopen_s(&unused, "CONOUT$", "w", stderr)) {
-experimental/federated_plugin/federated_plugin/example/windows/runner/win32_window.cpp:115:3     - Unknown word (HMONITOR)        -- HMONITOR monitor = MonitorFromPoint
+experimental/federated_plugin/federated_plugin/example/windows/runner/win32_window.cpp:115:3     - Unknown word (HMONITOR)   -- HMONITOR monitor = MonitorFromPoint
 experimental/federated_plugin/federated_plugin/example/windows/runner/win32_window.cpp:115:61    - Unknown word (DEFAULTTONEAREST) -- target_point, MONITOR_DEFAULTTONEAREST);
 experimental/federated_plugin/federated_plugin/example/windows/runner/win32_window.cpp:120:39    - Unknown word (OVERLAPPEDWINDOW) -- class, title.c_str(), WS_OVERLAPPEDWINDOW | WS_VISIBLE,
 experimental/federated_plugin/federated_plugin/example/windows/runner/win32_window.cpp:137:21    - Unknown word (NCCREATE)         -- if (message == WM_NCCREATE) {
-experimental/federated_plugin/federated_plugin/example/windows/runner/win32_window.cpp:138:43    - Unknown word (CREATESTRUCT)     -- struct = reinterpret_cast<CREATESTRUCT*>(lparam);
 experimental/federated_plugin/federated_plugin/example/windows/runner/win32_window.cpp:139:30    - Unknown word (GWLP)             -- SetWindowLongPtr(window, GWLP_USERDATA,
 experimental/federated_plugin/federated_plugin/example/windows/runner/win32_window.cpp:166:13    - Unknown word (DPICHANGED)       -- case WM_DPICHANGED: {
 experimental/federated_plugin/federated_plugin/example/windows/runner/win32_window.cpp:172:35    - Unknown word (NOZORDER)         -- newHeight, SWP_NOZORDER | SWP_NOACTIVATE);
@@ -7550,10 +7420,8 @@ experimental/federated_plugin/federated_plugin/example/windows/runner/win32_wind
 experimental/federated_plugin/federated_plugin/example/windows/runner/win32_window.cpp:73:5      - Unknown word (WNDCLASS)   -- WNDCLASS window_class{};
 experimental/federated_plugin/federated_plugin/example/windows/runner/win32_window.cpp:75:18     - Unknown word (lpsz)       -- window_class.lpszClassName = kWindowClassName
 experimental/federated_plugin/federated_plugin/example/windows/runner/win32_window.cpp:76:29     - Unknown word (HREDRAW)    -- window_class.style = CS_HREDRAW | CS_VREDRAW;
-experimental/federated_plugin/federated_plugin/example/windows/runner/win32_window.cpp:76:42     - Unknown word (VREDRAW)    -- style = CS_HREDRAW | CS_VREDRAW;
-experimental/federated_plugin/federated_plugin/example/windows/runner/win32_window.cpp:81:42     - Unknown word (MAKEINTRESOURCE) -- window_class.hInstance, MAKEINTRESOURCE(IDI_APP_ICON));
-experimental/federated_plugin/federated_plugin/example/windows/runner/win32_window.cpp:83:18     - Unknown word (lpsz)            -- window_class.lpszMenuName = nullptr;
-experimental/federated_plugin/federated_plugin/example/windows/runner/win32_window.cpp:84:18     - Unknown word (lpfn)            -- window_class.lpfnWndProc = Win32Window
+experimental/federated_plugin/federated_plugin/example/windows/runner/win32_window.cpp:83:18     - Unknown word (lpsz)       -- window_class.lpszMenuName = nullptr;
+experimental/federated_plugin/federated_plugin/example/windows/runner/win32_window.cpp:84:18     - Unknown word (lpfn)       -- window_class.lpfnWndProc = Win32Window
 experimental/federated_plugin/federated_plugin/example/windows/runner/win32_window.h:76:57     - Unknown word (NCCREATE)   -- pump. Handles the WM_NCCREATE message which
 experimental/federated_plugin/federated_plugin/example/windows/runner/win32_window.h:79:6      - Unknown word (responsponds) -- // responsponds to changes in DPI. All
 experimental/federated_plugin/federated_plugin/ios/federated_plugin.podspec:21:16     - Unknown word (xcconfig)   -- s.pod_target_xcconfig = { 'DEFINES_MODULE
@@ -8012,7 +7880,6 @@ experimental/pedometer/pubspec.yaml:66:26     - Unknown word (Schyler)    -- - a
 experimental/pedometer/pubspec.yaml:67:26     - Unknown word (Schyler)    -- - asset: fonts/Schyler-Italic.ttf
 experimental/pedometer/src/dart-sdk/include/dart_api.h:1034:9    - Unknown word (turnidge)    -- /* TODO(turnidge): Document behavior
 experimental/pedometer/src/dart-sdk/include/dart_api.h:1083:9    - Unknown word (turnidge)    -- /* TODO(turnidge): Document behavior
-experimental/pedometer/src/dart-sdk/include/dart_api.h:10:6      - Unknown word (mainpage)   -- /** \mainpage Dart Embedding API Reference
 experimental/pedometer/src/dart-sdk/include/dart_api.h:1200:67   - Unknown word (fucntion)    -- be taken after this fucntion
 experimental/pedometer/src/dart-sdk/include/dart_api.h:1244:9    - Unknown word (turnidge)    -- /* TODO(turnidge): We don't want users
 experimental/pedometer/src/dart-sdk/include/dart_api.h:1338:9    - Unknown word (turnidge)    -- /* TODO(turnidge): Consider moving this
@@ -8048,7 +7915,6 @@ experimental/pedometer/src/dart-sdk/include/dart_api.h:607:13    - Unknown word 
 experimental/pedometer/src/dart-sdk/include/dart_api.h:818:58    - Unknown word (vmservice)   -- that is used by the vmservice isolate
 experimental/pedometer/src/dart-sdk/include/dart_api.h:822:27    - Unknown word (vmservice)   -- the embedder has no vmservice isolate assets, the
 experimental/pedometer/src/dart-sdk/include/dart_api.h:882:23    - Unknown word (vmservice)   -- it requires the vmservice assets archive.
-experimental/pedometer/src/dart-sdk/include/dart_api_dl.h:13:6      - Unknown word (mainpage)   -- /** \mainpage Dynamically Linked Dart
 experimental/pedometer/src/dart-sdk/include/dart_api_dl.h:32:42     - Unknown word (sybols)     -- compile-time errors if the sybols in those files are updated
 experimental/pedometer/src/dart-sdk/include/dart_api_dl.h:85:13     - Unknown word (Finalizable) -- F(Dart_NewFinalizableHandle, Dart_FinalizableHandle
 experimental/pedometer/src/dart-sdk/include/dart_api_dl.h:85:37     - Unknown word (Finalizable) -- NewFinalizableHandle, Dart_FinalizableHandle,
@@ -8058,7 +7924,6 @@ experimental/pedometer/src/dart-sdk/include/dart_api_dl.h:90:16     - Unknown wo
 experimental/pedometer/src/dart-sdk/include/dart_native_api.h:103:55    - Unknown word (finalizers) -- message was enqueued, and finalizers for external
 experimental/pedometer/src/dart-sdk/include/dart_native_api.h:159:9     - Unknown word (turnidge)   -- /* TODO(turnidge): Currently handle_concurrent
 experimental/pedometer/src/dart-sdk/include/dart_native_api.h:182:9     - Unknown word (turnidge)   -- * TODO(turnidge): Document.
-experimental/pedometer/src/dart-sdk/include/dart_tools_api.h:10:6      - Unknown word (mainpage)   -- /** \mainpage Dart Tools Embedding
 experimental/pedometer/src/dart-sdk/include/dart_tools_api.h:141:9     - Unknown word (invokation) -- * next invokation of the callback.
 experimental/pedometer/src/dart-sdk/include/dart_tools_api.h:172:33    - Unknown word (sucessfully) -- Whether the call was sucessfully performed.
 experimental/pedometer/src/health_connect/CMakeLists.txt:22:16     - Unknown word (DELAYLOAD)  -- LINK_FLAGS "/DELAYLOAD:jvm.dll")
@@ -8137,22 +8002,12 @@ experimental/pedometer/src/health_connect/health_connect.c:293:9     - Unknown w
 experimental/pedometer/src/health_connect/health_connect.c:29:8      - Unknown word (androidx)   -- "androidx/health/connect/client
 experimental/pedometer/src/health_connect/health_connect.c:34:17     - Unknown word (Landroid)   -- "(Landroid/content/Context;Ljava
 experimental/pedometer/src/health_connect/health_connect.c:34:42     - Unknown word (Ljava)      -- Landroid/content/Context;Ljava/util/List;)Z");
-experimental/pedometer/src/health_connect/health_connect.c:3970:22   - Unknown word (APPWIDGET)  -- jfieldID _f_Context__APPWIDGET_SERVICE = NULL;
-experimental/pedometer/src/health_connect/health_connect.c:3972:24   - Unknown word (APPWIDGET)  -- JniResult get_Context__APPWIDGET_SERVICE() {
-experimental/pedometer/src/health_connect/health_connect.c:3977:46   - Unknown word (APPWIDGET)  -- Context, &_f_Context__APPWIDGET_SERVICE,
-experimental/pedometer/src/health_connect/health_connect.c:3978:22   - Unknown word (APPWIDGET)  -- "APPWIDGET_SERVICE", "Ljava/lang
-experimental/pedometer/src/health_connect/health_connect.c:3980:39   - Unknown word (APPWIDGET)  -- Context, _f_Context__APPWIDGET_SERVICE);
 experimental/pedometer/src/health_connect/health_connect.c:4306:22   - Unknown word (EUICC)      -- jfieldID _f_Context__EUICC_SERVICE = NULL;
 experimental/pedometer/src/health_connect/health_connect.c:4308:24   - Unknown word (EUICC)      -- JniResult get_Context__EUICC_SERVICE() {
 experimental/pedometer/src/health_connect/health_connect.c:4313:46   - Unknown word (EUICC)      -- Context, &_f_Context__EUICC_SERVICE, "EUICC_SERVICE
 experimental/pedometer/src/health_connect/health_connect.c:4313:62   - Unknown word (EUICC)      -- Context__EUICC_SERVICE, "EUICC_SERVICE",
 experimental/pedometer/src/health_connect/health_connect.c:4316:65   - Unknown word (EUICC)      -- _f_Context__EUICC_SERVICE);
 experimental/pedometer/src/health_connect/health_connect.c:43:1      - Unknown word (jmethod)    -- jmethodID _m_HealthConnectClient
-experimental/pedometer/src/health_connect/health_connect.c:4432:22   - Unknown word (KEYGUARD)   -- jfieldID _f_Context__KEYGUARD_SERVICE = NULL;
-experimental/pedometer/src/health_connect/health_connect.c:4434:24   - Unknown word (KEYGUARD)   -- JniResult get_Context__KEYGUARD_SERVICE() {
-experimental/pedometer/src/health_connect/health_connect.c:4439:46   - Unknown word (KEYGUARD)   -- Context, &_f_Context__KEYGUARD_SERVICE,
-experimental/pedometer/src/health_connect/health_connect.c:4440:22   - Unknown word (KEYGUARD)   -- "KEYGUARD_SERVICE", "Ljava/lang
-experimental/pedometer/src/health_connect/health_connect.c:4442:39   - Unknown word (KEYGUARD)   -- Context, _f_Context__KEYGUARD_SERVICE);
 experimental/pedometer/src/health_connect/health_connect.c:45:54     - Unknown word (jobject)    -- Companion__getOrCreate(jobject self_,
 experimental/pedometer/src/health_connect/health_connect.c:46:54     - Unknown word (jobject)    -- jobject context,
 experimental/pedometer/src/health_connect/health_connect.c:477:24    - Unknown word (Landroid)   -- "(Landroid/content/Context;Ljava
@@ -8291,16 +8146,11 @@ experimental/varfont_shader_puzzle/linux/flutter/CMakeLists.txt:33:45     - Unkn
 experimental/varfont_shader_puzzle/linux/flutter/CMakeLists.txt:35:43     - Unknown word (libapp)      -- PROJECT_DIR}/build/lib/libapp.so" PARENT_SCOPE)
 experimental/varfont_shader_puzzle/linux/flutter/generated_plugins.cmake:18:1      - Unknown word (endforeach) -- endforeach(plugin)
 experimental/varfont_shader_puzzle/linux/flutter/generated_plugins.cmake:23:1      - Unknown word (endforeach) -- endforeach(ffi_plugin)
-experimental/varfont_shader_puzzle/linux/main.cc:4:5       - Unknown word (autoptr)    -- g_autoptr(MyApplication) app
 experimental/varfont_shader_puzzle/linux/my_application.cc:30:3      - Unknown word (gboolean)   -- gboolean use_header_bar = TRUE
 experimental/varfont_shader_puzzle/linux/my_application.cc:34:11     - Unknown word (gchar)      -- const gchar* wm_name = gdk_x11_screen
-experimental/varfont_shader_puzzle/linux/my_application.cc:43:43     - Unknown word (varfont)    -- set_title(header_bar, "varfont_shader_puzzle");
-experimental/varfont_shader_puzzle/linux/my_application.cc:47:35     - Unknown word (varfont)    -- window_set_title(window, "varfont_shader_puzzle");
-experimental/varfont_shader_puzzle/linux/my_application.cc:53:5      - Unknown word (autoptr)    -- g_autoptr(FlDartProject) project
 experimental/varfont_shader_puzzle/linux/my_application.cc:66:78     - Unknown word (gchar)      -- GApplication* application, gchar*** arguments, int* exit
 experimental/varfont_shader_puzzle/linux/my_application.cc:66:8      - Unknown word (gboolean)   -- static gboolean my_application_local
 experimental/varfont_shader_puzzle/linux/my_application.cc:69:39     - Unknown word (strdupv)    -- entrypoint_arguments = g_strdupv(*arguments + 1);
-experimental/varfont_shader_puzzle/linux/my_application.cc:71:5      - Unknown word (autoptr)    -- g_autoptr(GError) error = nullptr
 experimental/varfont_shader_puzzle/linux/my_application.cc:87:55     - Unknown word (strfreev)   -- entrypoint_arguments, g_strfreev);
 experimental/varfont_shader_puzzle/linux/my_application.cc:91:59     - Unknown word (klass)      -- MyApplicationClass* klass) {
 experimental/varfont_shader_puzzle/linux/my_application.cc:92:23     - Unknown word (klass)      -- G_APPLICATION_CLASS(klass)->activate = my_application
@@ -8381,27 +8231,20 @@ experimental/varfont_shader_puzzle/windows/runner/Runner.rc:95:36     - Unknown 
 experimental/varfont_shader_puzzle/windows/runner/Runner.rc:97:40     - Unknown word (varfont)        -- OriginalFilename", "varfont_shader_puzzle.exe"
 experimental/varfont_shader_puzzle/windows/runner/Runner.rc:98:35     - Unknown word (varfont)        -- VALUE "ProductName", "varfont_shader_puzzle" "\0"
 experimental/varfont_shader_puzzle/windows/runner/Runner.rc:9:23      - Unknown word (TEXTINCLUDE) -- Generated from the TEXTINCLUDE 2 resource.
-experimental/varfont_shader_puzzle/windows/runner/flutter_window.cpp:65:13     - Unknown word (FONTCHANGE) -- case WM_FONTCHANGE:
 experimental/varfont_shader_puzzle/windows/runner/main.cpp:18:29     - Unknown word (COINIT)     -- CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 experimental/varfont_shader_puzzle/windows/runner/main.cpp:18:36     - Unknown word (APARTMENTTHREADED) -- oInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
-experimental/varfont_shader_puzzle/windows/runner/main.cpp:30:24     - Unknown word (varfont)           -- if (!window.Create(L"varfont_shader_puzzle", origin
 experimental/varfont_shader_puzzle/windows/runner/main.cpp:8:28      - Unknown word (HINSTANCE)  -- APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE
-experimental/varfont_shader_puzzle/windows/runner/main.cpp:8:5       - Unknown word (APIENTRY)   -- int APIENTRY wWinMain(_In_ HINSTANCE
 experimental/varfont_shader_puzzle/windows/runner/main.cpp:8:57      - Unknown word (HINSTANCE)  -- HINSTANCE instance, _In_opt_ HINSTANCE prev,
 experimental/varfont_shader_puzzle/windows/runner/resource.h:10:9      - Unknown word (APSTUDIO)   -- #ifndef APSTUDIO_READONLY_SYMBOLS
 experimental/varfont_shader_puzzle/windows/runner/resource.h:14:19     - Unknown word (SYMED)      -- #define _APS_NEXT_SYMED_VALUE 101
 experimental/varfont_shader_puzzle/windows/runner/resource.h:9:8       - Unknown word (APSTUDIO)   -- #ifdef APSTUDIO_INVOKED
-experimental/varfont_shader_puzzle/windows/runner/utils.cpp:13:29     - Unknown word (CONOUT)     -- freopen_s(&unused, "CONOUT$", "w", stdout)) {
-experimental/varfont_shader_puzzle/windows/runner/utils.cpp:16:29     - Unknown word (CONOUT)     -- freopen_s(&unused, "CONOUT$", "w", stderr)) {
-experimental/varfont_shader_puzzle/windows/runner/win32_window.cpp:101:18    - Unknown word (lpsz)            -- window_class.lpszMenuName = nullptr;
-experimental/varfont_shader_puzzle/windows/runner/win32_window.cpp:102:18    - Unknown word (lpfn)            -- window_class.lpfnWndProc = Win32Window
-experimental/varfont_shader_puzzle/windows/runner/win32_window.cpp:133:3     - Unknown word (HMONITOR)        -- HMONITOR monitor = MonitorFromPoint
+experimental/varfont_shader_puzzle/windows/runner/win32_window.cpp:101:18    - Unknown word (lpsz)       -- window_class.lpszMenuName = nullptr;
+experimental/varfont_shader_puzzle/windows/runner/win32_window.cpp:102:18    - Unknown word (lpfn)       -- window_class.lpfnWndProc = Win32Window
+experimental/varfont_shader_puzzle/windows/runner/win32_window.cpp:133:3     - Unknown word (HMONITOR)   -- HMONITOR monitor = MonitorFromPoint
 experimental/varfont_shader_puzzle/windows/runner/win32_window.cpp:133:61    - Unknown word (DEFAULTTONEAREST) -- target_point, MONITOR_DEFAULTTONEAREST);
 experimental/varfont_shader_puzzle/windows/runner/win32_window.cpp:138:39    - Unknown word (OVERLAPPEDWINDOW) -- class, title.c_str(), WS_OVERLAPPEDWINDOW,
-experimental/varfont_shader_puzzle/windows/runner/win32_window.cpp:153:40    - Unknown word (SHOWNORMAL)       -- ShowWindow(window_handle_, SW_SHOWNORMAL);
 experimental/varfont_shader_puzzle/windows/runner/win32_window.cpp:15:9      - Unknown word (DWMWA)      -- #ifndef DWMWA_USE_IMMERSIVE_DARK_MODE
 experimental/varfont_shader_puzzle/windows/runner/win32_window.cpp:161:21    - Unknown word (NCCREATE)         -- if (message == WM_NCCREATE) {
-experimental/varfont_shader_puzzle/windows/runner/win32_window.cpp:162:43    - Unknown word (CREATESTRUCT)     -- struct = reinterpret_cast<CREATESTRUCT*>(lparam);
 experimental/varfont_shader_puzzle/windows/runner/win32_window.cpp:163:30    - Unknown word (GWLP)             -- SetWindowLongPtr(window, GWLP_USERDATA,
 experimental/varfont_shader_puzzle/windows/runner/win32_window.cpp:16:9      - Unknown word (DWMWA)      -- #define DWMWA_USE_IMMERSIVE_DARK_MODE
 experimental/varfont_shader_puzzle/windows/runner/win32_window.cpp:190:13    - Unknown word (DPICHANGED)       -- case WM_DPICHANGED: {
@@ -8414,8 +8257,6 @@ experimental/varfont_shader_puzzle/windows/runner/win32_window.cpp:285:35    - U
 experimental/varfont_shader_puzzle/windows/runner/win32_window.cpp:91:5      - Unknown word (WNDCLASS)   -- WNDCLASS window_class{};
 experimental/varfont_shader_puzzle/windows/runner/win32_window.cpp:93:18     - Unknown word (lpsz)       -- window_class.lpszClassName = kWindowClassName
 experimental/varfont_shader_puzzle/windows/runner/win32_window.cpp:94:29     - Unknown word (HREDRAW)    -- window_class.style = CS_HREDRAW | CS_VREDRAW;
-experimental/varfont_shader_puzzle/windows/runner/win32_window.cpp:94:42     - Unknown word (VREDRAW)    -- style = CS_HREDRAW | CS_VREDRAW;
-experimental/varfont_shader_puzzle/windows/runner/win32_window.cpp:99:42     - Unknown word (MAKEINTRESOURCE) -- window_class.hInstance, MAKEINTRESOURCE(IDI_APP_ICON));
 experimental/varfont_shader_puzzle/windows/runner/win32_window.h:77:57     - Unknown word (NCCREATE)   -- pump. Handles the WM_NCCREATE message which
 experimental/web_dashboard/README.md:10:1      - Unknown word (Firestore)  -- Firestore](https://firebase.google
 experimental/web_dashboard/README.md:27:1      - Unknown word (Skia)       -- Skia / CanvasKit mode:
@@ -8510,17 +8351,13 @@ form_app/linux/flutter/CMakeLists.txt:20:1      - Unknown word (endfunction) -- 
 form_app/linux/flutter/CMakeLists.txt:29:39     - Unknown word (libflutter)  -- LIBRARY "${EPHEMERAL_DIR}/libflutter_linux_gtk.so")
 form_app/linux/flutter/CMakeLists.txt:33:45     - Unknown word (icudtl)      -- FILE "${EPHEMERAL_DIR}/icudtl.dat" PARENT_SCOPE)
 form_app/linux/flutter/CMakeLists.txt:35:43     - Unknown word (libapp)      -- PROJECT_DIR}/build/lib/libapp.so" PARENT_SCOPE)
-form_app/linux/flutter/generated_plugin_registrant.cc:12:5      - Unknown word (autoptr)    -- g_autoptr(FlPluginRegistrar) window
 form_app/linux/flutter/generated_plugins.cmake:19:1      - Unknown word (endforeach) -- endforeach(plugin)
 form_app/linux/flutter/generated_plugins.cmake:24:1      - Unknown word (endforeach) -- endforeach(ffi_plugin)
-form_app/linux/main.cc:4:5       - Unknown word (autoptr)    -- g_autoptr(MyApplication) app
 form_app/linux/my_application.cc:30:3      - Unknown word (gboolean)   -- gboolean use_header_bar = TRUE
 form_app/linux/my_application.cc:34:11     - Unknown word (gchar)      -- const gchar* wm_name = gdk_x11_screen
-form_app/linux/my_application.cc:53:5      - Unknown word (autoptr)    -- g_autoptr(FlDartProject) project
 form_app/linux/my_application.cc:66:78     - Unknown word (gchar)      -- GApplication* application, gchar*** arguments, int* exit
 form_app/linux/my_application.cc:66:8      - Unknown word (gboolean)   -- static gboolean my_application_local
 form_app/linux/my_application.cc:69:39     - Unknown word (strdupv)    -- entrypoint_arguments = g_strdupv(*arguments + 1);
-form_app/linux/my_application.cc:71:5      - Unknown word (autoptr)    -- g_autoptr(GError) error = nullptr
 form_app/linux/my_application.cc:87:55     - Unknown word (strfreev)   -- entrypoint_arguments, g_strfreev);
 form_app/linux/my_application.cc:91:59     - Unknown word (klass)      -- MyApplicationClass* klass) {
 form_app/linux/my_application.cc:92:23     - Unknown word (klass)      -- G_APPLICATION_CLASS(klass)->activate = my_application
@@ -8572,26 +8409,20 @@ form_app/windows/runner/Runner.rc:82:2      - Unknown word (FILEFLAGS)      -- F
 form_app/windows/runner/Runner.rc:84:2      - Unknown word (FILEOS)         -- FILEOS VOS__WINDOWS32
 form_app/windows/runner/Runner.rc:86:2      - Unknown word (FILESUBTYPE)    -- FILESUBTYPE 0x0L
 form_app/windows/runner/Runner.rc:9:23      - Unknown word (TEXTINCLUDE) -- Generated from the TEXTINCLUDE 2 resource.
-form_app/windows/runner/flutter_window.cpp:65:13     - Unknown word (FONTCHANGE) -- case WM_FONTCHANGE:
 form_app/windows/runner/main.cpp:18:29     - Unknown word (COINIT)     -- CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 form_app/windows/runner/main.cpp:18:36     - Unknown word (APARTMENTTHREADED) -- oInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 form_app/windows/runner/main.cpp:8:28      - Unknown word (HINSTANCE)  -- APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE
-form_app/windows/runner/main.cpp:8:5       - Unknown word (APIENTRY)   -- int APIENTRY wWinMain(_In_ HINSTANCE
 form_app/windows/runner/main.cpp:8:57      - Unknown word (HINSTANCE)  -- HINSTANCE instance, _In_opt_ HINSTANCE prev,
 form_app/windows/runner/resource.h:10:9      - Unknown word (APSTUDIO)   -- #ifndef APSTUDIO_READONLY_SYMBOLS
 form_app/windows/runner/resource.h:14:19     - Unknown word (SYMED)      -- #define _APS_NEXT_SYMED_VALUE 101
 form_app/windows/runner/resource.h:9:8       - Unknown word (APSTUDIO)   -- #ifdef APSTUDIO_INVOKED
-form_app/windows/runner/utils.cpp:13:29     - Unknown word (CONOUT)     -- freopen_s(&unused, "CONOUT$", "w", stdout)) {
-form_app/windows/runner/utils.cpp:16:29     - Unknown word (CONOUT)     -- freopen_s(&unused, "CONOUT$", "w", stderr)) {
-form_app/windows/runner/win32_window.cpp:101:18    - Unknown word (lpsz)            -- window_class.lpszMenuName = nullptr;
-form_app/windows/runner/win32_window.cpp:102:18    - Unknown word (lpfn)            -- window_class.lpfnWndProc = Win32Window
-form_app/windows/runner/win32_window.cpp:133:3     - Unknown word (HMONITOR)        -- HMONITOR monitor = MonitorFromPoint
+form_app/windows/runner/win32_window.cpp:101:18    - Unknown word (lpsz)       -- window_class.lpszMenuName = nullptr;
+form_app/windows/runner/win32_window.cpp:102:18    - Unknown word (lpfn)       -- window_class.lpfnWndProc = Win32Window
+form_app/windows/runner/win32_window.cpp:133:3     - Unknown word (HMONITOR)   -- HMONITOR monitor = MonitorFromPoint
 form_app/windows/runner/win32_window.cpp:133:61    - Unknown word (DEFAULTTONEAREST) -- target_point, MONITOR_DEFAULTTONEAREST);
 form_app/windows/runner/win32_window.cpp:138:39    - Unknown word (OVERLAPPEDWINDOW) -- class, title.c_str(), WS_OVERLAPPEDWINDOW,
-form_app/windows/runner/win32_window.cpp:153:40    - Unknown word (SHOWNORMAL)       -- ShowWindow(window_handle_, SW_SHOWNORMAL);
 form_app/windows/runner/win32_window.cpp:15:9      - Unknown word (DWMWA)      -- #ifndef DWMWA_USE_IMMERSIVE_DARK_MODE
 form_app/windows/runner/win32_window.cpp:161:21    - Unknown word (NCCREATE)         -- if (message == WM_NCCREATE) {
-form_app/windows/runner/win32_window.cpp:162:43    - Unknown word (CREATESTRUCT)     -- struct = reinterpret_cast<CREATESTRUCT*>(lparam);
 form_app/windows/runner/win32_window.cpp:163:30    - Unknown word (GWLP)             -- SetWindowLongPtr(window, GWLP_USERDATA,
 form_app/windows/runner/win32_window.cpp:16:9      - Unknown word (DWMWA)      -- #define DWMWA_USE_IMMERSIVE_DARK_MODE
 form_app/windows/runner/win32_window.cpp:190:13    - Unknown word (DPICHANGED)       -- case WM_DPICHANGED: {
@@ -8604,8 +8435,6 @@ form_app/windows/runner/win32_window.cpp:285:35    - Unknown word (DWMWA)       
 form_app/windows/runner/win32_window.cpp:91:5      - Unknown word (WNDCLASS)   -- WNDCLASS window_class{};
 form_app/windows/runner/win32_window.cpp:93:18     - Unknown word (lpsz)       -- window_class.lpszClassName = kWindowClassName
 form_app/windows/runner/win32_window.cpp:94:29     - Unknown word (HREDRAW)    -- window_class.style = CS_HREDRAW | CS_VREDRAW;
-form_app/windows/runner/win32_window.cpp:94:42     - Unknown word (VREDRAW)    -- style = CS_HREDRAW | CS_VREDRAW;
-form_app/windows/runner/win32_window.cpp:99:42     - Unknown word (MAKEINTRESOURCE) -- window_class.hInstance, MAKEINTRESOURCE(IDI_APP_ICON));
 form_app/windows/runner/win32_window.h:77:57     - Unknown word (NCCREATE)   -- pump. Handles the WM_NCCREATE message which
 game_template/README.md:268:14    - Unknown word (flutterfire) -- 3. [Install `flutterfire` CLI](https://firebase
 game_template/README.md:270:59    - Unknown word (pubspec)     -- directory containing `pubspec.yaml`),
@@ -8704,21 +8533,17 @@ game_template/linux/flutter/CMakeLists.txt:29:39     - Unknown word (libflutter)
 game_template/linux/flutter/CMakeLists.txt:33:45     - Unknown word (icudtl)      -- FILE "${EPHEMERAL_DIR}/icudtl.dat" PARENT_SCOPE)
 game_template/linux/flutter/CMakeLists.txt:35:43     - Unknown word (libapp)      -- PROJECT_DIR}/build/lib/libapp.so" PARENT_SCOPE)
 game_template/linux/flutter/generated_plugin_registrant.cc:12:32     - Unknown word (audioplayers) -- autoptr(FlPluginRegistrar) audioplayers_linux_registrar =
-game_template/linux/flutter/generated_plugin_registrant.cc:12:5      - Unknown word (autoptr)    -- g_autoptr(FlPluginRegistrar) audioplaye
 game_template/linux/flutter/generated_plugin_registrant.cc:13:62     - Unknown word (Audioplayers) -- for_plugin(registry, "AudioplayersLinuxPlugin");
 game_template/linux/flutter/generated_plugin_registrant.cc:14:3      - Unknown word (audioplayers) -- audioplayers_linux_plugin_register
 game_template/linux/flutter/generated_plugin_registrant.cc:14:53     - Unknown word (audioplayers) -- register_with_registrar(audioplayers_linux_registrar);
 game_template/linux/flutter/generated_plugins.cmake:19:1      - Unknown word (endforeach)   -- endforeach(plugin)
 game_template/linux/flutter/generated_plugins.cmake:24:1      - Unknown word (endforeach)   -- endforeach(ffi_plugin)
 game_template/linux/flutter/generated_plugins.cmake:6:3       - Unknown word (audioplayers) -- audioplayers_linux
-game_template/linux/main.cc:4:5       - Unknown word (autoptr)    -- g_autoptr(MyApplication) app
 game_template/linux/my_application.cc:30:3      - Unknown word (gboolean)   -- gboolean use_header_bar = TRUE
 game_template/linux/my_application.cc:34:11     - Unknown word (gchar)      -- const gchar* wm_name = gdk_x11_screen
-game_template/linux/my_application.cc:53:5      - Unknown word (autoptr)    -- g_autoptr(FlDartProject) project
 game_template/linux/my_application.cc:66:78     - Unknown word (gchar)      -- GApplication* application, gchar*** arguments, int* exit
 game_template/linux/my_application.cc:66:8      - Unknown word (gboolean)   -- static gboolean my_application_local
 game_template/linux/my_application.cc:69:39     - Unknown word (strdupv)    -- entrypoint_arguments = g_strdupv(*arguments + 1);
-game_template/linux/my_application.cc:71:5      - Unknown word (autoptr)    -- g_autoptr(GError) error = nullptr
 game_template/linux/my_application.cc:87:55     - Unknown word (strfreev)   -- entrypoint_arguments, g_strfreev);
 game_template/linux/my_application.cc:91:59     - Unknown word (klass)      -- MyApplicationClass* klass) {
 game_template/linux/my_application.cc:92:23     - Unknown word (klass)      -- G_APPLICATION_CLASS(klass)->activate = my_application
@@ -8780,26 +8605,20 @@ game_template/windows/runner/Runner.rc:82:2      - Unknown word (FILEFLAGS)     
 game_template/windows/runner/Runner.rc:84:2      - Unknown word (FILEOS)         -- FILEOS VOS__WINDOWS32
 game_template/windows/runner/Runner.rc:86:2      - Unknown word (FILESUBTYPE)    -- FILESUBTYPE 0x0L
 game_template/windows/runner/Runner.rc:9:23      - Unknown word (TEXTINCLUDE) -- Generated from the TEXTINCLUDE 2 resource.
-game_template/windows/runner/flutter_window.cpp:60:13     - Unknown word (FONTCHANGE) -- case WM_FONTCHANGE:
 game_template/windows/runner/main.cpp:18:29     - Unknown word (COINIT)     -- CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 game_template/windows/runner/main.cpp:18:36     - Unknown word (APARTMENTTHREADED) -- oInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 game_template/windows/runner/main.cpp:8:28      - Unknown word (HINSTANCE)  -- APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE
-game_template/windows/runner/main.cpp:8:5       - Unknown word (APIENTRY)   -- int APIENTRY wWinMain(_In_ HINSTANCE
 game_template/windows/runner/main.cpp:8:57      - Unknown word (HINSTANCE)  -- HINSTANCE instance, _In_opt_ HINSTANCE prev,
 game_template/windows/runner/resource.h:10:9      - Unknown word (APSTUDIO)   -- #ifndef APSTUDIO_READONLY_SYMBOLS
 game_template/windows/runner/resource.h:14:19     - Unknown word (SYMED)      -- #define _APS_NEXT_SYMED_VALUE 101
 game_template/windows/runner/resource.h:9:8       - Unknown word (APSTUDIO)   -- #ifdef APSTUDIO_INVOKED
-game_template/windows/runner/utils.cpp:13:29     - Unknown word (CONOUT)     -- freopen_s(&unused, "CONOUT$", "w", stdout)) {
-game_template/windows/runner/utils.cpp:16:29     - Unknown word (CONOUT)     -- freopen_s(&unused, "CONOUT$", "w", stderr)) {
-game_template/windows/runner/win32_window.cpp:101:18    - Unknown word (lpsz)            -- window_class.lpszMenuName = nullptr;
-game_template/windows/runner/win32_window.cpp:102:18    - Unknown word (lpfn)            -- window_class.lpfnWndProc = Win32Window
-game_template/windows/runner/win32_window.cpp:133:3     - Unknown word (HMONITOR)        -- HMONITOR monitor = MonitorFromPoint
+game_template/windows/runner/win32_window.cpp:101:18    - Unknown word (lpsz)       -- window_class.lpszMenuName = nullptr;
+game_template/windows/runner/win32_window.cpp:102:18    - Unknown word (lpfn)       -- window_class.lpfnWndProc = Win32Window
+game_template/windows/runner/win32_window.cpp:133:3     - Unknown word (HMONITOR)   -- HMONITOR monitor = MonitorFromPoint
 game_template/windows/runner/win32_window.cpp:133:61    - Unknown word (DEFAULTTONEAREST) -- target_point, MONITOR_DEFAULTTONEAREST);
 game_template/windows/runner/win32_window.cpp:138:39    - Unknown word (OVERLAPPEDWINDOW) -- class, title.c_str(), WS_OVERLAPPEDWINDOW,
-game_template/windows/runner/win32_window.cpp:153:40    - Unknown word (SHOWNORMAL)       -- ShowWindow(window_handle_, SW_SHOWNORMAL);
 game_template/windows/runner/win32_window.cpp:15:9      - Unknown word (DWMWA)      -- #ifndef DWMWA_USE_IMMERSIVE_DARK_MODE
 game_template/windows/runner/win32_window.cpp:161:21    - Unknown word (NCCREATE)         -- if (message == WM_NCCREATE) {
-game_template/windows/runner/win32_window.cpp:162:43    - Unknown word (CREATESTRUCT)     -- struct = reinterpret_cast<CREATESTRUCT*>(lparam);
 game_template/windows/runner/win32_window.cpp:163:30    - Unknown word (GWLP)             -- SetWindowLongPtr(window, GWLP_USERDATA,
 game_template/windows/runner/win32_window.cpp:16:9      - Unknown word (DWMWA)      -- #define DWMWA_USE_IMMERSIVE_DARK_MODE
 game_template/windows/runner/win32_window.cpp:190:13    - Unknown word (DPICHANGED)       -- case WM_DPICHANGED: {
@@ -8812,8 +8631,6 @@ game_template/windows/runner/win32_window.cpp:285:35    - Unknown word (DWMWA)  
 game_template/windows/runner/win32_window.cpp:91:5      - Unknown word (WNDCLASS)   -- WNDCLASS window_class{};
 game_template/windows/runner/win32_window.cpp:93:18     - Unknown word (lpsz)       -- window_class.lpszClassName = kWindowClassName
 game_template/windows/runner/win32_window.cpp:94:29     - Unknown word (HREDRAW)    -- window_class.style = CS_HREDRAW | CS_VREDRAW;
-game_template/windows/runner/win32_window.cpp:94:42     - Unknown word (VREDRAW)    -- style = CS_HREDRAW | CS_VREDRAW;
-game_template/windows/runner/win32_window.cpp:99:42     - Unknown word (MAKEINTRESOURCE) -- window_class.hInstance, MAKEINTRESOURCE(IDI_APP_ICON));
 game_template/windows/runner/win32_window.h:77:57     - Unknown word (NCCREATE)   -- pump. Handles the WM_NCCREATE message which
 gemini_tasks/android/build.gradle:1:1       - Unknown word (allprojects) -- allprojects {
 gemini_tasks/android/gradle.properties:1:12      - Unknown word (jvmargs)    -- org.gradle.jvmargs=-Xmx4G
@@ -8851,10 +8668,8 @@ gemini_tasks/linux/flutter/CMakeLists.txt:20:1      - Unknown word (endfunction)
 gemini_tasks/linux/flutter/CMakeLists.txt:29:39     - Unknown word (libflutter)  -- LIBRARY "${EPHEMERAL_DIR}/libflutter_linux_gtk.so")
 gemini_tasks/linux/flutter/CMakeLists.txt:33:45     - Unknown word (icudtl)      -- FILE "${EPHEMERAL_DIR}/icudtl.dat" PARENT_SCOPE)
 gemini_tasks/linux/flutter/CMakeLists.txt:35:43     - Unknown word (libapp)      -- PROJECT_DIR}/build/lib/libapp.so" PARENT_SCOPE)
-gemini_tasks/linux/flutter/generated_plugin_registrant.cc:12:5      - Unknown word (autoptr)    -- g_autoptr(FlPluginRegistrar) url
 gemini_tasks/linux/flutter/generated_plugins.cmake:19:1      - Unknown word (endforeach) -- endforeach(plugin)
 gemini_tasks/linux/flutter/generated_plugins.cmake:24:1      - Unknown word (endforeach) -- endforeach(ffi_plugin)
-gemini_tasks/linux/main.cc:4:5       - Unknown word (autoptr)    -- g_autoptr(MyApplication) app
 gemini_tasks/linux/my_application.cc:105:55    - Unknown word (strfreev)   -- entrypoint_arguments, g_strfreev);
 gemini_tasks/linux/my_application.cc:109:59    - Unknown word (klass)      -- MyApplicationClass* klass) {
 gemini_tasks/linux/my_application.cc:110:23    - Unknown word (klass)      -- G_APPLICATION_CLASS(klass)->activate = my_application
@@ -8863,11 +8678,9 @@ gemini_tasks/linux/my_application.cc:112:23    - Unknown word (klass)      -- G_
 gemini_tasks/linux/my_application.cc:113:23    - Unknown word (klass)      -- G_APPLICATION_CLASS(klass)->shutdown = my_application
 gemini_tasks/linux/my_application.cc:30:3      - Unknown word (gboolean)   -- gboolean use_header_bar = TRUE
 gemini_tasks/linux/my_application.cc:34:11     - Unknown word (gchar)      -- const gchar* wm_name = gdk_x11_screen
-gemini_tasks/linux/my_application.cc:53:5      - Unknown word (autoptr)    -- g_autoptr(FlDartProject) project
 gemini_tasks/linux/my_application.cc:66:78     - Unknown word (gchar)      -- GApplication* application, gchar*** arguments, int* exit
 gemini_tasks/linux/my_application.cc:66:8      - Unknown word (gboolean)   -- static gboolean my_application_local
 gemini_tasks/linux/my_application.cc:69:39     - Unknown word (strdupv)    -- entrypoint_arguments = g_strdupv(*arguments + 1);
-gemini_tasks/linux/my_application.cc:71:5      - Unknown word (autoptr)    -- g_autoptr(GError) error = nullptr
 gemini_tasks/macos/Podfile:13:117    - Unknown word (xcconfig)   -- 'Flutter-Generated.xcconfig'), __FILE__)
 gemini_tasks/macos/Podfile:22:107    - Unknown word (xcconfig)   -- deleting Flutter-Generated.xcconfig, then run \"flutter
 gemini_tasks/macos/Podfile:25:73     - Unknown word (podhelper)  -- flutter_tools', 'bin', 'podhelper'), flutter_root)
@@ -8914,26 +8727,20 @@ gemini_tasks/windows/runner/Runner.rc:82:2      - Unknown word (FILEFLAGS)      
 gemini_tasks/windows/runner/Runner.rc:84:2      - Unknown word (FILEOS)         -- FILEOS VOS__WINDOWS32
 gemini_tasks/windows/runner/Runner.rc:86:2      - Unknown word (FILESUBTYPE)    -- FILESUBTYPE 0x0L
 gemini_tasks/windows/runner/Runner.rc:9:23      - Unknown word (TEXTINCLUDE) -- Generated from the TEXTINCLUDE 2 resource.
-gemini_tasks/windows/runner/flutter_window.cpp:65:13     - Unknown word (FONTCHANGE) -- case WM_FONTCHANGE:
 gemini_tasks/windows/runner/main.cpp:18:29     - Unknown word (COINIT)     -- CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 gemini_tasks/windows/runner/main.cpp:18:36     - Unknown word (APARTMENTTHREADED) -- oInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 gemini_tasks/windows/runner/main.cpp:8:28      - Unknown word (HINSTANCE)  -- APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE
-gemini_tasks/windows/runner/main.cpp:8:5       - Unknown word (APIENTRY)   -- int APIENTRY wWinMain(_In_ HINSTANCE
 gemini_tasks/windows/runner/main.cpp:8:57      - Unknown word (HINSTANCE)  -- HINSTANCE instance, _In_opt_ HINSTANCE prev,
 gemini_tasks/windows/runner/resource.h:10:9      - Unknown word (APSTUDIO)   -- #ifndef APSTUDIO_READONLY_SYMBOLS
 gemini_tasks/windows/runner/resource.h:14:19     - Unknown word (SYMED)      -- #define _APS_NEXT_SYMED_VALUE 101
 gemini_tasks/windows/runner/resource.h:9:8       - Unknown word (APSTUDIO)   -- #ifdef APSTUDIO_INVOKED
-gemini_tasks/windows/runner/utils.cpp:13:29     - Unknown word (CONOUT)     -- freopen_s(&unused, "CONOUT$", "w", stdout)) {
-gemini_tasks/windows/runner/utils.cpp:16:29     - Unknown word (CONOUT)     -- freopen_s(&unused, "CONOUT$", "w", stderr)) {
-gemini_tasks/windows/runner/win32_window.cpp:101:18    - Unknown word (lpsz)            -- window_class.lpszMenuName = nullptr;
-gemini_tasks/windows/runner/win32_window.cpp:102:18    - Unknown word (lpfn)            -- window_class.lpfnWndProc = Win32Window
-gemini_tasks/windows/runner/win32_window.cpp:133:3     - Unknown word (HMONITOR)        -- HMONITOR monitor = MonitorFromPoint
+gemini_tasks/windows/runner/win32_window.cpp:101:18    - Unknown word (lpsz)       -- window_class.lpszMenuName = nullptr;
+gemini_tasks/windows/runner/win32_window.cpp:102:18    - Unknown word (lpfn)       -- window_class.lpfnWndProc = Win32Window
+gemini_tasks/windows/runner/win32_window.cpp:133:3     - Unknown word (HMONITOR)   -- HMONITOR monitor = MonitorFromPoint
 gemini_tasks/windows/runner/win32_window.cpp:133:61    - Unknown word (DEFAULTTONEAREST) -- target_point, MONITOR_DEFAULTTONEAREST);
 gemini_tasks/windows/runner/win32_window.cpp:138:39    - Unknown word (OVERLAPPEDWINDOW) -- class, title.c_str(), WS_OVERLAPPEDWINDOW,
-gemini_tasks/windows/runner/win32_window.cpp:153:40    - Unknown word (SHOWNORMAL)       -- ShowWindow(window_handle_, SW_SHOWNORMAL);
 gemini_tasks/windows/runner/win32_window.cpp:15:9      - Unknown word (DWMWA)      -- #ifndef DWMWA_USE_IMMERSIVE_DARK_MODE
 gemini_tasks/windows/runner/win32_window.cpp:161:21    - Unknown word (NCCREATE)         -- if (message == WM_NCCREATE) {
-gemini_tasks/windows/runner/win32_window.cpp:162:43    - Unknown word (CREATESTRUCT)     -- struct = reinterpret_cast<CREATESTRUCT*>(lparam);
 gemini_tasks/windows/runner/win32_window.cpp:163:30    - Unknown word (GWLP)             -- SetWindowLongPtr(window, GWLP_USERDATA,
 gemini_tasks/windows/runner/win32_window.cpp:16:9      - Unknown word (DWMWA)      -- #define DWMWA_USE_IMMERSIVE_DARK_MODE
 gemini_tasks/windows/runner/win32_window.cpp:190:13    - Unknown word (DPICHANGED)       -- case WM_DPICHANGED: {
@@ -8946,8 +8753,6 @@ gemini_tasks/windows/runner/win32_window.cpp:285:35    - Unknown word (DWMWA)   
 gemini_tasks/windows/runner/win32_window.cpp:91:5      - Unknown word (WNDCLASS)   -- WNDCLASS window_class{};
 gemini_tasks/windows/runner/win32_window.cpp:93:18     - Unknown word (lpsz)       -- window_class.lpszClassName = kWindowClassName
 gemini_tasks/windows/runner/win32_window.cpp:94:29     - Unknown word (HREDRAW)    -- window_class.style = CS_HREDRAW | CS_VREDRAW;
-gemini_tasks/windows/runner/win32_window.cpp:94:42     - Unknown word (VREDRAW)    -- style = CS_HREDRAW | CS_VREDRAW;
-gemini_tasks/windows/runner/win32_window.cpp:99:42     - Unknown word (MAKEINTRESOURCE) -- window_class.hInstance, MAKEINTRESOURCE(IDI_APP_ICON));
 gemini_tasks/windows/runner/win32_window.h:77:57     - Unknown word (NCCREATE)   -- pump. Handles the WM_NCCREATE message which
 google_maps/android/app/build.gradle:70:49     - Unknown word (stdlib)     -- jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version
 google_maps/android/build.gradle:14:1      - Unknown word (allprojects) -- allprojects {
@@ -9099,17 +8904,13 @@ infinite_list/linux/flutter/CMakeLists.txt:20:1      - Unknown word (endfunction
 infinite_list/linux/flutter/CMakeLists.txt:29:39     - Unknown word (libflutter)  -- LIBRARY "${EPHEMERAL_DIR}/libflutter_linux_gtk.so")
 infinite_list/linux/flutter/CMakeLists.txt:33:45     - Unknown word (icudtl)      -- FILE "${EPHEMERAL_DIR}/icudtl.dat" PARENT_SCOPE)
 infinite_list/linux/flutter/CMakeLists.txt:35:43     - Unknown word (libapp)      -- PROJECT_DIR}/build/lib/libapp.so" PARENT_SCOPE)
-infinite_list/linux/flutter/generated_plugin_registrant.cc:12:5      - Unknown word (autoptr)    -- g_autoptr(FlPluginRegistrar) window
 infinite_list/linux/flutter/generated_plugins.cmake:19:1      - Unknown word (endforeach) -- endforeach(plugin)
 infinite_list/linux/flutter/generated_plugins.cmake:24:1      - Unknown word (endforeach) -- endforeach(ffi_plugin)
-infinite_list/linux/main.cc:4:5       - Unknown word (autoptr)    -- g_autoptr(MyApplication) app
 infinite_list/linux/my_application.cc:30:3      - Unknown word (gboolean)   -- gboolean use_header_bar = TRUE
 infinite_list/linux/my_application.cc:34:11     - Unknown word (gchar)      -- const gchar* wm_name = gdk_x11_screen
-infinite_list/linux/my_application.cc:53:5      - Unknown word (autoptr)    -- g_autoptr(FlDartProject) project
 infinite_list/linux/my_application.cc:66:78     - Unknown word (gchar)      -- GApplication* application, gchar*** arguments, int* exit
 infinite_list/linux/my_application.cc:66:8      - Unknown word (gboolean)   -- static gboolean my_application_local
 infinite_list/linux/my_application.cc:69:39     - Unknown word (strdupv)    -- entrypoint_arguments = g_strdupv(*arguments + 1);
-infinite_list/linux/my_application.cc:71:5      - Unknown word (autoptr)    -- g_autoptr(GError) error = nullptr
 infinite_list/linux/my_application.cc:87:55     - Unknown word (strfreev)   -- entrypoint_arguments, g_strfreev);
 infinite_list/linux/my_application.cc:91:59     - Unknown word (klass)      -- MyApplicationClass* klass) {
 infinite_list/linux/my_application.cc:92:23     - Unknown word (klass)      -- G_APPLICATION_CLASS(klass)->activate = my_application
@@ -9163,26 +8964,20 @@ infinite_list/windows/runner/Runner.rc:82:2      - Unknown word (FILEFLAGS)     
 infinite_list/windows/runner/Runner.rc:84:2      - Unknown word (FILEOS)         -- FILEOS VOS__WINDOWS32
 infinite_list/windows/runner/Runner.rc:86:2      - Unknown word (FILESUBTYPE)    -- FILESUBTYPE 0x0L
 infinite_list/windows/runner/Runner.rc:9:23      - Unknown word (TEXTINCLUDE) -- Generated from the TEXTINCLUDE 2 resource.
-infinite_list/windows/runner/flutter_window.cpp:65:13     - Unknown word (FONTCHANGE) -- case WM_FONTCHANGE:
 infinite_list/windows/runner/main.cpp:18:29     - Unknown word (COINIT)     -- CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 infinite_list/windows/runner/main.cpp:18:36     - Unknown word (APARTMENTTHREADED) -- oInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 infinite_list/windows/runner/main.cpp:8:28      - Unknown word (HINSTANCE)  -- APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE
-infinite_list/windows/runner/main.cpp:8:5       - Unknown word (APIENTRY)   -- int APIENTRY wWinMain(_In_ HINSTANCE
 infinite_list/windows/runner/main.cpp:8:57      - Unknown word (HINSTANCE)  -- HINSTANCE instance, _In_opt_ HINSTANCE prev,
 infinite_list/windows/runner/resource.h:10:9      - Unknown word (APSTUDIO)   -- #ifndef APSTUDIO_READONLY_SYMBOLS
 infinite_list/windows/runner/resource.h:14:19     - Unknown word (SYMED)      -- #define _APS_NEXT_SYMED_VALUE 101
 infinite_list/windows/runner/resource.h:9:8       - Unknown word (APSTUDIO)   -- #ifdef APSTUDIO_INVOKED
-infinite_list/windows/runner/utils.cpp:13:29     - Unknown word (CONOUT)     -- freopen_s(&unused, "CONOUT$", "w", stdout)) {
-infinite_list/windows/runner/utils.cpp:16:29     - Unknown word (CONOUT)     -- freopen_s(&unused, "CONOUT$", "w", stderr)) {
-infinite_list/windows/runner/win32_window.cpp:101:18    - Unknown word (lpsz)            -- window_class.lpszMenuName = nullptr;
-infinite_list/windows/runner/win32_window.cpp:102:18    - Unknown word (lpfn)            -- window_class.lpfnWndProc = Win32Window
-infinite_list/windows/runner/win32_window.cpp:133:3     - Unknown word (HMONITOR)        -- HMONITOR monitor = MonitorFromPoint
+infinite_list/windows/runner/win32_window.cpp:101:18    - Unknown word (lpsz)       -- window_class.lpszMenuName = nullptr;
+infinite_list/windows/runner/win32_window.cpp:102:18    - Unknown word (lpfn)       -- window_class.lpfnWndProc = Win32Window
+infinite_list/windows/runner/win32_window.cpp:133:3     - Unknown word (HMONITOR)   -- HMONITOR monitor = MonitorFromPoint
 infinite_list/windows/runner/win32_window.cpp:133:61    - Unknown word (DEFAULTTONEAREST) -- target_point, MONITOR_DEFAULTTONEAREST);
 infinite_list/windows/runner/win32_window.cpp:138:39    - Unknown word (OVERLAPPEDWINDOW) -- class, title.c_str(), WS_OVERLAPPEDWINDOW,
-infinite_list/windows/runner/win32_window.cpp:153:40    - Unknown word (SHOWNORMAL)       -- ShowWindow(window_handle_, SW_SHOWNORMAL);
 infinite_list/windows/runner/win32_window.cpp:15:9      - Unknown word (DWMWA)      -- #ifndef DWMWA_USE_IMMERSIVE_DARK_MODE
 infinite_list/windows/runner/win32_window.cpp:161:21    - Unknown word (NCCREATE)         -- if (message == WM_NCCREATE) {
-infinite_list/windows/runner/win32_window.cpp:162:43    - Unknown word (CREATESTRUCT)     -- struct = reinterpret_cast<CREATESTRUCT*>(lparam);
 infinite_list/windows/runner/win32_window.cpp:163:30    - Unknown word (GWLP)             -- SetWindowLongPtr(window, GWLP_USERDATA,
 infinite_list/windows/runner/win32_window.cpp:16:9      - Unknown word (DWMWA)      -- #define DWMWA_USE_IMMERSIVE_DARK_MODE
 infinite_list/windows/runner/win32_window.cpp:190:13    - Unknown word (DPICHANGED)       -- case WM_DPICHANGED: {
@@ -9195,8 +8990,6 @@ infinite_list/windows/runner/win32_window.cpp:285:35    - Unknown word (DWMWA)  
 infinite_list/windows/runner/win32_window.cpp:91:5      - Unknown word (WNDCLASS)   -- WNDCLASS window_class{};
 infinite_list/windows/runner/win32_window.cpp:93:18     - Unknown word (lpsz)       -- window_class.lpszClassName = kWindowClassName
 infinite_list/windows/runner/win32_window.cpp:94:29     - Unknown word (HREDRAW)    -- window_class.style = CS_HREDRAW | CS_VREDRAW;
-infinite_list/windows/runner/win32_window.cpp:94:42     - Unknown word (VREDRAW)    -- style = CS_HREDRAW | CS_VREDRAW;
-infinite_list/windows/runner/win32_window.cpp:99:42     - Unknown word (MAKEINTRESOURCE) -- window_class.hInstance, MAKEINTRESOURCE(IDI_APP_ICON));
 infinite_list/windows/runner/win32_window.h:77:57     - Unknown word (NCCREATE)   -- pump. Handles the WM_NCCREATE message which
 ios_app_clip/README.md:19:17     - Unknown word (xcworkspace) -- 1. `open Runner.xcworkspace`
 ios_app_clip/README.md:31:16     - Unknown word (Gitter)      -- * [The Flutter Gitter channel](https://gitter
@@ -9254,17 +9047,13 @@ isolate_example/linux/flutter/CMakeLists.txt:20:1      - Unknown word (endfuncti
 isolate_example/linux/flutter/CMakeLists.txt:29:39     - Unknown word (libflutter)  -- LIBRARY "${EPHEMERAL_DIR}/libflutter_linux_gtk.so")
 isolate_example/linux/flutter/CMakeLists.txt:33:45     - Unknown word (icudtl)      -- FILE "${EPHEMERAL_DIR}/icudtl.dat" PARENT_SCOPE)
 isolate_example/linux/flutter/CMakeLists.txt:35:43     - Unknown word (libapp)      -- PROJECT_DIR}/build/lib/libapp.so" PARENT_SCOPE)
-isolate_example/linux/flutter/generated_plugin_registrant.cc:12:5      - Unknown word (autoptr)    -- g_autoptr(FlPluginRegistrar) window
 isolate_example/linux/flutter/generated_plugins.cmake:19:1      - Unknown word (endforeach) -- endforeach(plugin)
 isolate_example/linux/flutter/generated_plugins.cmake:24:1      - Unknown word (endforeach) -- endforeach(ffi_plugin)
-isolate_example/linux/main.cc:4:5       - Unknown word (autoptr)    -- g_autoptr(MyApplication) app
 isolate_example/linux/my_application.cc:30:3      - Unknown word (gboolean)   -- gboolean use_header_bar = TRUE
 isolate_example/linux/my_application.cc:34:11     - Unknown word (gchar)      -- const gchar* wm_name = gdk_x11_screen
-isolate_example/linux/my_application.cc:53:5      - Unknown word (autoptr)    -- g_autoptr(FlDartProject) project
 isolate_example/linux/my_application.cc:66:78     - Unknown word (gchar)      -- GApplication* application, gchar*** arguments, int* exit
 isolate_example/linux/my_application.cc:66:8      - Unknown word (gboolean)   -- static gboolean my_application_local
 isolate_example/linux/my_application.cc:69:39     - Unknown word (strdupv)    -- entrypoint_arguments = g_strdupv(*arguments + 1);
-isolate_example/linux/my_application.cc:71:5      - Unknown word (autoptr)    -- g_autoptr(GError) error = nullptr
 isolate_example/linux/my_application.cc:87:55     - Unknown word (strfreev)   -- entrypoint_arguments, g_strfreev);
 isolate_example/linux/my_application.cc:91:59     - Unknown word (klass)      -- MyApplicationClass* klass) {
 isolate_example/linux/my_application.cc:92:23     - Unknown word (klass)      -- G_APPLICATION_CLASS(klass)->activate = my_application
@@ -9316,26 +9105,20 @@ isolate_example/windows/runner/Runner.rc:82:2      - Unknown word (FILEFLAGS)   
 isolate_example/windows/runner/Runner.rc:84:2      - Unknown word (FILEOS)         -- FILEOS VOS__WINDOWS32
 isolate_example/windows/runner/Runner.rc:86:2      - Unknown word (FILESUBTYPE)    -- FILESUBTYPE 0x0L
 isolate_example/windows/runner/Runner.rc:9:23      - Unknown word (TEXTINCLUDE) -- Generated from the TEXTINCLUDE 2 resource.
-isolate_example/windows/runner/flutter_window.cpp:65:13     - Unknown word (FONTCHANGE) -- case WM_FONTCHANGE:
 isolate_example/windows/runner/main.cpp:18:29     - Unknown word (COINIT)     -- CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 isolate_example/windows/runner/main.cpp:18:36     - Unknown word (APARTMENTTHREADED) -- oInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 isolate_example/windows/runner/main.cpp:8:28      - Unknown word (HINSTANCE)  -- APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE
-isolate_example/windows/runner/main.cpp:8:5       - Unknown word (APIENTRY)   -- int APIENTRY wWinMain(_In_ HINSTANCE
 isolate_example/windows/runner/main.cpp:8:57      - Unknown word (HINSTANCE)  -- HINSTANCE instance, _In_opt_ HINSTANCE prev,
 isolate_example/windows/runner/resource.h:10:9      - Unknown word (APSTUDIO)   -- #ifndef APSTUDIO_READONLY_SYMBOLS
 isolate_example/windows/runner/resource.h:14:19     - Unknown word (SYMED)      -- #define _APS_NEXT_SYMED_VALUE 101
 isolate_example/windows/runner/resource.h:9:8       - Unknown word (APSTUDIO)   -- #ifdef APSTUDIO_INVOKED
-isolate_example/windows/runner/utils.cpp:13:29     - Unknown word (CONOUT)     -- freopen_s(&unused, "CONOUT$", "w", stdout)) {
-isolate_example/windows/runner/utils.cpp:16:29     - Unknown word (CONOUT)     -- freopen_s(&unused, "CONOUT$", "w", stderr)) {
-isolate_example/windows/runner/win32_window.cpp:101:18    - Unknown word (lpsz)            -- window_class.lpszMenuName = nullptr;
-isolate_example/windows/runner/win32_window.cpp:102:18    - Unknown word (lpfn)            -- window_class.lpfnWndProc = Win32Window
-isolate_example/windows/runner/win32_window.cpp:133:3     - Unknown word (HMONITOR)        -- HMONITOR monitor = MonitorFromPoint
+isolate_example/windows/runner/win32_window.cpp:101:18    - Unknown word (lpsz)       -- window_class.lpszMenuName = nullptr;
+isolate_example/windows/runner/win32_window.cpp:102:18    - Unknown word (lpfn)       -- window_class.lpfnWndProc = Win32Window
+isolate_example/windows/runner/win32_window.cpp:133:3     - Unknown word (HMONITOR)   -- HMONITOR monitor = MonitorFromPoint
 isolate_example/windows/runner/win32_window.cpp:133:61    - Unknown word (DEFAULTTONEAREST) -- target_point, MONITOR_DEFAULTTONEAREST);
 isolate_example/windows/runner/win32_window.cpp:138:39    - Unknown word (OVERLAPPEDWINDOW) -- class, title.c_str(), WS_OVERLAPPEDWINDOW,
-isolate_example/windows/runner/win32_window.cpp:153:40    - Unknown word (SHOWNORMAL)       -- ShowWindow(window_handle_, SW_SHOWNORMAL);
 isolate_example/windows/runner/win32_window.cpp:15:9      - Unknown word (DWMWA)      -- #ifndef DWMWA_USE_IMMERSIVE_DARK_MODE
 isolate_example/windows/runner/win32_window.cpp:161:21    - Unknown word (NCCREATE)         -- if (message == WM_NCCREATE) {
-isolate_example/windows/runner/win32_window.cpp:162:43    - Unknown word (CREATESTRUCT)     -- struct = reinterpret_cast<CREATESTRUCT*>(lparam);
 isolate_example/windows/runner/win32_window.cpp:163:30    - Unknown word (GWLP)             -- SetWindowLongPtr(window, GWLP_USERDATA,
 isolate_example/windows/runner/win32_window.cpp:16:9      - Unknown word (DWMWA)      -- #define DWMWA_USE_IMMERSIVE_DARK_MODE
 isolate_example/windows/runner/win32_window.cpp:190:13    - Unknown word (DPICHANGED)       -- case WM_DPICHANGED: {
@@ -9348,8 +9131,6 @@ isolate_example/windows/runner/win32_window.cpp:285:35    - Unknown word (DWMWA)
 isolate_example/windows/runner/win32_window.cpp:91:5      - Unknown word (WNDCLASS)   -- WNDCLASS window_class{};
 isolate_example/windows/runner/win32_window.cpp:93:18     - Unknown word (lpsz)       -- window_class.lpszClassName = kWindowClassName
 isolate_example/windows/runner/win32_window.cpp:94:29     - Unknown word (HREDRAW)    -- window_class.style = CS_HREDRAW | CS_VREDRAW;
-isolate_example/windows/runner/win32_window.cpp:94:42     - Unknown word (VREDRAW)    -- style = CS_HREDRAW | CS_VREDRAW;
-isolate_example/windows/runner/win32_window.cpp:99:42     - Unknown word (MAKEINTRESOURCE) -- window_class.hInstance, MAKEINTRESOURCE(IDI_APP_ICON));
 isolate_example/windows/runner/win32_window.h:77:57     - Unknown word (NCCREATE)   -- pump. Handles the WM_NCCREATE message which
 jsonexample/README.md:1:5       - Unknown word (jsonexample) -- ## `jsonexample` sample retired
 jsonexample/README.md:3:6       - Unknown word (jsonexample) -- The `jsonexample` sample has reached
@@ -9392,17 +9173,13 @@ material_3_demo/linux/flutter/CMakeLists.txt:20:1      - Unknown word (endfuncti
 material_3_demo/linux/flutter/CMakeLists.txt:29:39     - Unknown word (libflutter)  -- LIBRARY "${EPHEMERAL_DIR}/libflutter_linux_gtk.so")
 material_3_demo/linux/flutter/CMakeLists.txt:33:45     - Unknown word (icudtl)      -- FILE "${EPHEMERAL_DIR}/icudtl.dat" PARENT_SCOPE)
 material_3_demo/linux/flutter/CMakeLists.txt:35:43     - Unknown word (libapp)      -- PROJECT_DIR}/build/lib/libapp.so" PARENT_SCOPE)
-material_3_demo/linux/flutter/generated_plugin_registrant.cc:12:5      - Unknown word (autoptr)    -- g_autoptr(FlPluginRegistrar) url
 material_3_demo/linux/flutter/generated_plugins.cmake:19:1      - Unknown word (endforeach) -- endforeach(plugin)
 material_3_demo/linux/flutter/generated_plugins.cmake:24:1      - Unknown word (endforeach) -- endforeach(ffi_plugin)
-material_3_demo/linux/main.cc:4:5       - Unknown word (autoptr)    -- g_autoptr(MyApplication) app
 material_3_demo/linux/my_application.cc:30:3      - Unknown word (gboolean)   -- gboolean use_header_bar = TRUE
 material_3_demo/linux/my_application.cc:34:11     - Unknown word (gchar)      -- const gchar* wm_name = gdk_x11_screen
-material_3_demo/linux/my_application.cc:53:5      - Unknown word (autoptr)    -- g_autoptr(FlDartProject) project
 material_3_demo/linux/my_application.cc:66:78     - Unknown word (gchar)      -- GApplication* application, gchar*** arguments, int* exit
 material_3_demo/linux/my_application.cc:66:8      - Unknown word (gboolean)   -- static gboolean my_application_local
 material_3_demo/linux/my_application.cc:69:39     - Unknown word (strdupv)    -- entrypoint_arguments = g_strdupv(*arguments + 1);
-material_3_demo/linux/my_application.cc:71:5      - Unknown word (autoptr)    -- g_autoptr(GError) error = nullptr
 material_3_demo/linux/my_application.cc:87:55     - Unknown word (strfreev)   -- entrypoint_arguments, g_strfreev);
 material_3_demo/linux/my_application.cc:91:59     - Unknown word (klass)      -- MyApplicationClass* klass) {
 material_3_demo/linux/my_application.cc:92:23     - Unknown word (klass)      -- G_APPLICATION_CLASS(klass)->activate = my_application
@@ -9458,26 +9235,20 @@ material_3_demo/windows/runner/Runner.rc:82:2      - Unknown word (FILEFLAGS)   
 material_3_demo/windows/runner/Runner.rc:84:2      - Unknown word (FILEOS)         -- FILEOS VOS__WINDOWS32
 material_3_demo/windows/runner/Runner.rc:86:2      - Unknown word (FILESUBTYPE)    -- FILESUBTYPE 0x0L
 material_3_demo/windows/runner/Runner.rc:9:23      - Unknown word (TEXTINCLUDE) -- Generated from the TEXTINCLUDE 2 resource.
-material_3_demo/windows/runner/flutter_window.cpp:60:13     - Unknown word (FONTCHANGE) -- case WM_FONTCHANGE:
 material_3_demo/windows/runner/main.cpp:18:29     - Unknown word (COINIT)     -- CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 material_3_demo/windows/runner/main.cpp:18:36     - Unknown word (APARTMENTTHREADED) -- oInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 material_3_demo/windows/runner/main.cpp:8:28      - Unknown word (HINSTANCE)  -- APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE
-material_3_demo/windows/runner/main.cpp:8:5       - Unknown word (APIENTRY)   -- int APIENTRY wWinMain(_In_ HINSTANCE
 material_3_demo/windows/runner/main.cpp:8:57      - Unknown word (HINSTANCE)  -- HINSTANCE instance, _In_opt_ HINSTANCE prev,
 material_3_demo/windows/runner/resource.h:10:9      - Unknown word (APSTUDIO)   -- #ifndef APSTUDIO_READONLY_SYMBOLS
 material_3_demo/windows/runner/resource.h:14:19     - Unknown word (SYMED)      -- #define _APS_NEXT_SYMED_VALUE 101
 material_3_demo/windows/runner/resource.h:9:8       - Unknown word (APSTUDIO)   -- #ifdef APSTUDIO_INVOKED
-material_3_demo/windows/runner/utils.cpp:13:29     - Unknown word (CONOUT)     -- freopen_s(&unused, "CONOUT$", "w", stdout)) {
-material_3_demo/windows/runner/utils.cpp:16:29     - Unknown word (CONOUT)     -- freopen_s(&unused, "CONOUT$", "w", stderr)) {
-material_3_demo/windows/runner/win32_window.cpp:101:18    - Unknown word (lpsz)            -- window_class.lpszMenuName = nullptr;
-material_3_demo/windows/runner/win32_window.cpp:102:18    - Unknown word (lpfn)            -- window_class.lpfnWndProc = Win32Window
-material_3_demo/windows/runner/win32_window.cpp:133:3     - Unknown word (HMONITOR)        -- HMONITOR monitor = MonitorFromPoint
+material_3_demo/windows/runner/win32_window.cpp:101:18    - Unknown word (lpsz)       -- window_class.lpszMenuName = nullptr;
+material_3_demo/windows/runner/win32_window.cpp:102:18    - Unknown word (lpfn)       -- window_class.lpfnWndProc = Win32Window
+material_3_demo/windows/runner/win32_window.cpp:133:3     - Unknown word (HMONITOR)   -- HMONITOR monitor = MonitorFromPoint
 material_3_demo/windows/runner/win32_window.cpp:133:61    - Unknown word (DEFAULTTONEAREST) -- target_point, MONITOR_DEFAULTTONEAREST);
 material_3_demo/windows/runner/win32_window.cpp:138:39    - Unknown word (OVERLAPPEDWINDOW) -- class, title.c_str(), WS_OVERLAPPEDWINDOW,
-material_3_demo/windows/runner/win32_window.cpp:153:40    - Unknown word (SHOWNORMAL)       -- ShowWindow(window_handle_, SW_SHOWNORMAL);
 material_3_demo/windows/runner/win32_window.cpp:15:9      - Unknown word (DWMWA)      -- #ifndef DWMWA_USE_IMMERSIVE_DARK_MODE
 material_3_demo/windows/runner/win32_window.cpp:161:21    - Unknown word (NCCREATE)         -- if (message == WM_NCCREATE) {
-material_3_demo/windows/runner/win32_window.cpp:162:43    - Unknown word (CREATESTRUCT)     -- struct = reinterpret_cast<CREATESTRUCT*>(lparam);
 material_3_demo/windows/runner/win32_window.cpp:163:30    - Unknown word (GWLP)             -- SetWindowLongPtr(window, GWLP_USERDATA,
 material_3_demo/windows/runner/win32_window.cpp:16:9      - Unknown word (DWMWA)      -- #define DWMWA_USE_IMMERSIVE_DARK_MODE
 material_3_demo/windows/runner/win32_window.cpp:190:13    - Unknown word (DPICHANGED)       -- case WM_DPICHANGED: {
@@ -9490,8 +9261,6 @@ material_3_demo/windows/runner/win32_window.cpp:285:35    - Unknown word (DWMWA)
 material_3_demo/windows/runner/win32_window.cpp:91:5      - Unknown word (WNDCLASS)   -- WNDCLASS window_class{};
 material_3_demo/windows/runner/win32_window.cpp:93:18     - Unknown word (lpsz)       -- window_class.lpszClassName = kWindowClassName
 material_3_demo/windows/runner/win32_window.cpp:94:29     - Unknown word (HREDRAW)    -- window_class.style = CS_HREDRAW | CS_VREDRAW;
-material_3_demo/windows/runner/win32_window.cpp:94:42     - Unknown word (VREDRAW)    -- style = CS_HREDRAW | CS_VREDRAW;
-material_3_demo/windows/runner/win32_window.cpp:99:42     - Unknown word (MAKEINTRESOURCE) -- window_class.hInstance, MAKEINTRESOURCE(IDI_APP_ICON));
 material_3_demo/windows/runner/win32_window.h:77:57     - Unknown word (NCCREATE)   -- pump. Handles the WM_NCCREATE message which
 navigation_and_routing/android/build.gradle:13:1      - Unknown word (allprojects) -- allprojects {
 navigation_and_routing/android/build.gradle:1:1       - Unknown word (buildscript) -- buildscript {
@@ -9532,18 +9301,13 @@ navigation_and_routing/linux/flutter/CMakeLists.txt:20:1      - Unknown word (en
 navigation_and_routing/linux/flutter/CMakeLists.txt:29:39     - Unknown word (libflutter)  -- LIBRARY "${EPHEMERAL_DIR}/libflutter_linux_gtk.so")
 navigation_and_routing/linux/flutter/CMakeLists.txt:33:45     - Unknown word (icudtl)      -- FILE "${EPHEMERAL_DIR}/icudtl.dat" PARENT_SCOPE)
 navigation_and_routing/linux/flutter/CMakeLists.txt:35:43     - Unknown word (libapp)      -- PROJECT_DIR}/build/lib/libapp.so" PARENT_SCOPE)
-navigation_and_routing/linux/flutter/generated_plugin_registrant.cc:13:5      - Unknown word (autoptr)    -- g_autoptr(FlPluginRegistrar) url
-navigation_and_routing/linux/flutter/generated_plugin_registrant.cc:16:5      - Unknown word (autoptr)    -- g_autoptr(FlPluginRegistrar) window
 navigation_and_routing/linux/flutter/generated_plugins.cmake:20:1      - Unknown word (endforeach) -- endforeach(plugin)
 navigation_and_routing/linux/flutter/generated_plugins.cmake:25:1      - Unknown word (endforeach) -- endforeach(ffi_plugin)
-navigation_and_routing/linux/main.cc:4:5       - Unknown word (autoptr)    -- g_autoptr(MyApplication) app
 navigation_and_routing/linux/my_application.cc:30:3      - Unknown word (gboolean)   -- gboolean use_header_bar = TRUE
 navigation_and_routing/linux/my_application.cc:34:11     - Unknown word (gchar)      -- const gchar* wm_name = gdk_x11_screen
-navigation_and_routing/linux/my_application.cc:53:5      - Unknown word (autoptr)    -- g_autoptr(FlDartProject) project
 navigation_and_routing/linux/my_application.cc:66:78     - Unknown word (gchar)      -- GApplication* application, gchar*** arguments, int* exit
 navigation_and_routing/linux/my_application.cc:66:8      - Unknown word (gboolean)   -- static gboolean my_application_local
 navigation_and_routing/linux/my_application.cc:69:39     - Unknown word (strdupv)    -- entrypoint_arguments = g_strdupv(*arguments + 1);
-navigation_and_routing/linux/my_application.cc:71:5      - Unknown word (autoptr)    -- g_autoptr(GError) error = nullptr
 navigation_and_routing/linux/my_application.cc:87:55     - Unknown word (strfreev)   -- entrypoint_arguments, g_strfreev);
 navigation_and_routing/linux/my_application.cc:91:59     - Unknown word (klass)      -- MyApplicationClass* klass) {
 navigation_and_routing/linux/my_application.cc:92:23     - Unknown word (klass)      -- G_APPLICATION_CLASS(klass)->activate = my_application
@@ -9595,26 +9359,20 @@ navigation_and_routing/windows/runner/Runner.rc:82:2      - Unknown word (FILEFL
 navigation_and_routing/windows/runner/Runner.rc:84:2      - Unknown word (FILEOS)         -- FILEOS VOS__WINDOWS32
 navigation_and_routing/windows/runner/Runner.rc:86:2      - Unknown word (FILESUBTYPE)    -- FILESUBTYPE 0x0L
 navigation_and_routing/windows/runner/Runner.rc:9:23      - Unknown word (TEXTINCLUDE) -- Generated from the TEXTINCLUDE 2 resource.
-navigation_and_routing/windows/runner/flutter_window.cpp:65:13     - Unknown word (FONTCHANGE) -- case WM_FONTCHANGE:
 navigation_and_routing/windows/runner/main.cpp:18:29     - Unknown word (COINIT)     -- CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 navigation_and_routing/windows/runner/main.cpp:18:36     - Unknown word (APARTMENTTHREADED) -- oInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 navigation_and_routing/windows/runner/main.cpp:8:28      - Unknown word (HINSTANCE)  -- APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE
-navigation_and_routing/windows/runner/main.cpp:8:5       - Unknown word (APIENTRY)   -- int APIENTRY wWinMain(_In_ HINSTANCE
 navigation_and_routing/windows/runner/main.cpp:8:57      - Unknown word (HINSTANCE)  -- HINSTANCE instance, _In_opt_ HINSTANCE prev,
 navigation_and_routing/windows/runner/resource.h:10:9      - Unknown word (APSTUDIO)   -- #ifndef APSTUDIO_READONLY_SYMBOLS
 navigation_and_routing/windows/runner/resource.h:14:19     - Unknown word (SYMED)      -- #define _APS_NEXT_SYMED_VALUE 101
 navigation_and_routing/windows/runner/resource.h:9:8       - Unknown word (APSTUDIO)   -- #ifdef APSTUDIO_INVOKED
-navigation_and_routing/windows/runner/utils.cpp:13:29     - Unknown word (CONOUT)     -- freopen_s(&unused, "CONOUT$", "w", stdout)) {
-navigation_and_routing/windows/runner/utils.cpp:16:29     - Unknown word (CONOUT)     -- freopen_s(&unused, "CONOUT$", "w", stderr)) {
-navigation_and_routing/windows/runner/win32_window.cpp:101:18    - Unknown word (lpsz)            -- window_class.lpszMenuName = nullptr;
-navigation_and_routing/windows/runner/win32_window.cpp:102:18    - Unknown word (lpfn)            -- window_class.lpfnWndProc = Win32Window
-navigation_and_routing/windows/runner/win32_window.cpp:133:3     - Unknown word (HMONITOR)        -- HMONITOR monitor = MonitorFromPoint
+navigation_and_routing/windows/runner/win32_window.cpp:101:18    - Unknown word (lpsz)       -- window_class.lpszMenuName = nullptr;
+navigation_and_routing/windows/runner/win32_window.cpp:102:18    - Unknown word (lpfn)       -- window_class.lpfnWndProc = Win32Window
+navigation_and_routing/windows/runner/win32_window.cpp:133:3     - Unknown word (HMONITOR)   -- HMONITOR monitor = MonitorFromPoint
 navigation_and_routing/windows/runner/win32_window.cpp:133:61    - Unknown word (DEFAULTTONEAREST) -- target_point, MONITOR_DEFAULTTONEAREST);
 navigation_and_routing/windows/runner/win32_window.cpp:138:39    - Unknown word (OVERLAPPEDWINDOW) -- class, title.c_str(), WS_OVERLAPPEDWINDOW,
-navigation_and_routing/windows/runner/win32_window.cpp:153:40    - Unknown word (SHOWNORMAL)       -- ShowWindow(window_handle_, SW_SHOWNORMAL);
 navigation_and_routing/windows/runner/win32_window.cpp:15:9      - Unknown word (DWMWA)      -- #ifndef DWMWA_USE_IMMERSIVE_DARK_MODE
 navigation_and_routing/windows/runner/win32_window.cpp:161:21    - Unknown word (NCCREATE)         -- if (message == WM_NCCREATE) {
-navigation_and_routing/windows/runner/win32_window.cpp:162:43    - Unknown word (CREATESTRUCT)     -- struct = reinterpret_cast<CREATESTRUCT*>(lparam);
 navigation_and_routing/windows/runner/win32_window.cpp:163:30    - Unknown word (GWLP)             -- SetWindowLongPtr(window, GWLP_USERDATA,
 navigation_and_routing/windows/runner/win32_window.cpp:16:9      - Unknown word (DWMWA)      -- #define DWMWA_USE_IMMERSIVE_DARK_MODE
 navigation_and_routing/windows/runner/win32_window.cpp:190:13    - Unknown word (DPICHANGED)       -- case WM_DPICHANGED: {
@@ -9627,8 +9385,6 @@ navigation_and_routing/windows/runner/win32_window.cpp:285:35    - Unknown word 
 navigation_and_routing/windows/runner/win32_window.cpp:91:5      - Unknown word (WNDCLASS)   -- WNDCLASS window_class{};
 navigation_and_routing/windows/runner/win32_window.cpp:93:18     - Unknown word (lpsz)       -- window_class.lpszClassName = kWindowClassName
 navigation_and_routing/windows/runner/win32_window.cpp:94:29     - Unknown word (HREDRAW)    -- window_class.style = CS_HREDRAW | CS_VREDRAW;
-navigation_and_routing/windows/runner/win32_window.cpp:94:42     - Unknown word (VREDRAW)    -- style = CS_HREDRAW | CS_VREDRAW;
-navigation_and_routing/windows/runner/win32_window.cpp:99:42     - Unknown word (MAKEINTRESOURCE) -- window_class.hInstance, MAKEINTRESOURCE(IDI_APP_ICON));
 navigation_and_routing/windows/runner/win32_window.h:77:57     - Unknown word (NCCREATE)   -- pump. Handles the WM_NCCREATE message which
 place_tracker/README.md:52:2      - Unknown word (objc)       -- @objc class AppDelegate: FlutterApp
 place_tracker/README.md:89:16     - Unknown word (Gitter)     -- * [The Flutter Gitter channel](https://gitter
@@ -9799,17 +9555,13 @@ provider_counter/linux/flutter/CMakeLists.txt:20:1      - Unknown word (endfunct
 provider_counter/linux/flutter/CMakeLists.txt:29:39     - Unknown word (libflutter)  -- LIBRARY "${EPHEMERAL_DIR}/libflutter_linux_gtk.so")
 provider_counter/linux/flutter/CMakeLists.txt:33:45     - Unknown word (icudtl)      -- FILE "${EPHEMERAL_DIR}/icudtl.dat" PARENT_SCOPE)
 provider_counter/linux/flutter/CMakeLists.txt:35:43     - Unknown word (libapp)      -- PROJECT_DIR}/build/lib/libapp.so" PARENT_SCOPE)
-provider_counter/linux/flutter/generated_plugin_registrant.cc:12:5      - Unknown word (autoptr)    -- g_autoptr(FlPluginRegistrar) window
 provider_counter/linux/flutter/generated_plugins.cmake:19:1      - Unknown word (endforeach) -- endforeach(plugin)
 provider_counter/linux/flutter/generated_plugins.cmake:24:1      - Unknown word (endforeach) -- endforeach(ffi_plugin)
-provider_counter/linux/main.cc:4:5       - Unknown word (autoptr)    -- g_autoptr(MyApplication) app
 provider_counter/linux/my_application.cc:30:3      - Unknown word (gboolean)   -- gboolean use_header_bar = TRUE
 provider_counter/linux/my_application.cc:34:11     - Unknown word (gchar)      -- const gchar* wm_name = gdk_x11_screen
-provider_counter/linux/my_application.cc:53:5      - Unknown word (autoptr)    -- g_autoptr(FlDartProject) project
 provider_counter/linux/my_application.cc:66:78     - Unknown word (gchar)      -- GApplication* application, gchar*** arguments, int* exit
 provider_counter/linux/my_application.cc:66:8      - Unknown word (gboolean)   -- static gboolean my_application_local
 provider_counter/linux/my_application.cc:69:39     - Unknown word (strdupv)    -- entrypoint_arguments = g_strdupv(*arguments + 1);
-provider_counter/linux/my_application.cc:71:5      - Unknown word (autoptr)    -- g_autoptr(GError) error = nullptr
 provider_counter/linux/my_application.cc:87:55     - Unknown word (strfreev)   -- entrypoint_arguments, g_strfreev);
 provider_counter/linux/my_application.cc:91:59     - Unknown word (klass)      -- MyApplicationClass* klass) {
 provider_counter/linux/my_application.cc:92:23     - Unknown word (klass)      -- G_APPLICATION_CLASS(klass)->activate = my_application
@@ -9861,26 +9613,20 @@ provider_counter/windows/runner/Runner.rc:82:2      - Unknown word (FILEFLAGS)  
 provider_counter/windows/runner/Runner.rc:84:2      - Unknown word (FILEOS)         -- FILEOS VOS__WINDOWS32
 provider_counter/windows/runner/Runner.rc:86:2      - Unknown word (FILESUBTYPE)    -- FILESUBTYPE 0x0L
 provider_counter/windows/runner/Runner.rc:9:23      - Unknown word (TEXTINCLUDE) -- Generated from the TEXTINCLUDE 2 resource.
-provider_counter/windows/runner/flutter_window.cpp:60:13     - Unknown word (FONTCHANGE) -- case WM_FONTCHANGE:
 provider_counter/windows/runner/main.cpp:18:29     - Unknown word (COINIT)     -- CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 provider_counter/windows/runner/main.cpp:18:36     - Unknown word (APARTMENTTHREADED) -- oInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 provider_counter/windows/runner/main.cpp:8:28      - Unknown word (HINSTANCE)  -- APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE
-provider_counter/windows/runner/main.cpp:8:5       - Unknown word (APIENTRY)   -- int APIENTRY wWinMain(_In_ HINSTANCE
 provider_counter/windows/runner/main.cpp:8:57      - Unknown word (HINSTANCE)  -- HINSTANCE instance, _In_opt_ HINSTANCE prev,
 provider_counter/windows/runner/resource.h:10:9      - Unknown word (APSTUDIO)   -- #ifndef APSTUDIO_READONLY_SYMBOLS
 provider_counter/windows/runner/resource.h:14:19     - Unknown word (SYMED)      -- #define _APS_NEXT_SYMED_VALUE 101
 provider_counter/windows/runner/resource.h:9:8       - Unknown word (APSTUDIO)   -- #ifdef APSTUDIO_INVOKED
-provider_counter/windows/runner/utils.cpp:13:29     - Unknown word (CONOUT)     -- freopen_s(&unused, "CONOUT$", "w", stdout)) {
-provider_counter/windows/runner/utils.cpp:16:29     - Unknown word (CONOUT)     -- freopen_s(&unused, "CONOUT$", "w", stderr)) {
-provider_counter/windows/runner/win32_window.cpp:101:18    - Unknown word (lpsz)            -- window_class.lpszMenuName = nullptr;
-provider_counter/windows/runner/win32_window.cpp:102:18    - Unknown word (lpfn)            -- window_class.lpfnWndProc = Win32Window
-provider_counter/windows/runner/win32_window.cpp:133:3     - Unknown word (HMONITOR)        -- HMONITOR monitor = MonitorFromPoint
+provider_counter/windows/runner/win32_window.cpp:101:18    - Unknown word (lpsz)       -- window_class.lpszMenuName = nullptr;
+provider_counter/windows/runner/win32_window.cpp:102:18    - Unknown word (lpfn)       -- window_class.lpfnWndProc = Win32Window
+provider_counter/windows/runner/win32_window.cpp:133:3     - Unknown word (HMONITOR)   -- HMONITOR monitor = MonitorFromPoint
 provider_counter/windows/runner/win32_window.cpp:133:61    - Unknown word (DEFAULTTONEAREST) -- target_point, MONITOR_DEFAULTTONEAREST);
 provider_counter/windows/runner/win32_window.cpp:138:39    - Unknown word (OVERLAPPEDWINDOW) -- class, title.c_str(), WS_OVERLAPPEDWINDOW,
-provider_counter/windows/runner/win32_window.cpp:153:40    - Unknown word (SHOWNORMAL)       -- ShowWindow(window_handle_, SW_SHOWNORMAL);
 provider_counter/windows/runner/win32_window.cpp:15:9      - Unknown word (DWMWA)      -- #ifndef DWMWA_USE_IMMERSIVE_DARK_MODE
 provider_counter/windows/runner/win32_window.cpp:161:21    - Unknown word (NCCREATE)         -- if (message == WM_NCCREATE) {
-provider_counter/windows/runner/win32_window.cpp:162:43    - Unknown word (CREATESTRUCT)     -- struct = reinterpret_cast<CREATESTRUCT*>(lparam);
 provider_counter/windows/runner/win32_window.cpp:163:30    - Unknown word (GWLP)             -- SetWindowLongPtr(window, GWLP_USERDATA,
 provider_counter/windows/runner/win32_window.cpp:16:9      - Unknown word (DWMWA)      -- #define DWMWA_USE_IMMERSIVE_DARK_MODE
 provider_counter/windows/runner/win32_window.cpp:190:13    - Unknown word (DPICHANGED)       -- case WM_DPICHANGED: {
@@ -9893,8 +9639,6 @@ provider_counter/windows/runner/win32_window.cpp:285:35    - Unknown word (DWMWA
 provider_counter/windows/runner/win32_window.cpp:91:5      - Unknown word (WNDCLASS)   -- WNDCLASS window_class{};
 provider_counter/windows/runner/win32_window.cpp:93:18     - Unknown word (lpsz)       -- window_class.lpszClassName = kWindowClassName
 provider_counter/windows/runner/win32_window.cpp:94:29     - Unknown word (HREDRAW)    -- window_class.style = CS_HREDRAW | CS_VREDRAW;
-provider_counter/windows/runner/win32_window.cpp:94:42     - Unknown word (VREDRAW)    -- style = CS_HREDRAW | CS_VREDRAW;
-provider_counter/windows/runner/win32_window.cpp:99:42     - Unknown word (MAKEINTRESOURCE) -- window_class.hInstance, MAKEINTRESOURCE(IDI_APP_ICON));
 provider_counter/windows/runner/win32_window.h:77:57     - Unknown word (NCCREATE)   -- pump. Handles the WM_NCCREATE message which
 provider_shopper/android/build.gradle:13:1      - Unknown word (allprojects) -- allprojects {
 provider_shopper/android/build.gradle:1:1       - Unknown word (buildscript) -- buildscript {
@@ -9933,17 +9677,13 @@ provider_shopper/linux/flutter/CMakeLists.txt:20:1      - Unknown word (endfunct
 provider_shopper/linux/flutter/CMakeLists.txt:29:39     - Unknown word (libflutter)  -- LIBRARY "${EPHEMERAL_DIR}/libflutter_linux_gtk.so")
 provider_shopper/linux/flutter/CMakeLists.txt:33:45     - Unknown word (icudtl)      -- FILE "${EPHEMERAL_DIR}/icudtl.dat" PARENT_SCOPE)
 provider_shopper/linux/flutter/CMakeLists.txt:35:43     - Unknown word (libapp)      -- PROJECT_DIR}/build/lib/libapp.so" PARENT_SCOPE)
-provider_shopper/linux/flutter/generated_plugin_registrant.cc:12:5      - Unknown word (autoptr)    -- g_autoptr(FlPluginRegistrar) window
 provider_shopper/linux/flutter/generated_plugins.cmake:19:1      - Unknown word (endforeach) -- endforeach(plugin)
 provider_shopper/linux/flutter/generated_plugins.cmake:24:1      - Unknown word (endforeach) -- endforeach(ffi_plugin)
-provider_shopper/linux/main.cc:4:5       - Unknown word (autoptr)    -- g_autoptr(MyApplication) app
 provider_shopper/linux/my_application.cc:30:3      - Unknown word (gboolean)   -- gboolean use_header_bar = TRUE
 provider_shopper/linux/my_application.cc:34:11     - Unknown word (gchar)      -- const gchar* wm_name = gdk_x11_screen
-provider_shopper/linux/my_application.cc:53:5      - Unknown word (autoptr)    -- g_autoptr(FlDartProject) project
 provider_shopper/linux/my_application.cc:66:78     - Unknown word (gchar)      -- GApplication* application, gchar*** arguments, int* exit
 provider_shopper/linux/my_application.cc:66:8      - Unknown word (gboolean)   -- static gboolean my_application_local
 provider_shopper/linux/my_application.cc:69:39     - Unknown word (strdupv)    -- entrypoint_arguments = g_strdupv(*arguments + 1);
-provider_shopper/linux/my_application.cc:71:5      - Unknown word (autoptr)    -- g_autoptr(GError) error = nullptr
 provider_shopper/linux/my_application.cc:87:55     - Unknown word (strfreev)   -- entrypoint_arguments, g_strfreev);
 provider_shopper/linux/my_application.cc:91:59     - Unknown word (klass)      -- MyApplicationClass* klass) {
 provider_shopper/linux/my_application.cc:92:23     - Unknown word (klass)      -- G_APPLICATION_CLASS(klass)->activate = my_application
@@ -9998,26 +9738,20 @@ provider_shopper/windows/runner/Runner.rc:82:2      - Unknown word (FILEFLAGS)  
 provider_shopper/windows/runner/Runner.rc:84:2      - Unknown word (FILEOS)         -- FILEOS VOS__WINDOWS32
 provider_shopper/windows/runner/Runner.rc:86:2      - Unknown word (FILESUBTYPE)    -- FILESUBTYPE 0x0L
 provider_shopper/windows/runner/Runner.rc:9:23      - Unknown word (TEXTINCLUDE) -- Generated from the TEXTINCLUDE 2 resource.
-provider_shopper/windows/runner/flutter_window.cpp:65:13     - Unknown word (FONTCHANGE) -- case WM_FONTCHANGE:
 provider_shopper/windows/runner/main.cpp:18:29     - Unknown word (COINIT)     -- CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 provider_shopper/windows/runner/main.cpp:18:36     - Unknown word (APARTMENTTHREADED) -- oInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 provider_shopper/windows/runner/main.cpp:8:28      - Unknown word (HINSTANCE)  -- APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE
-provider_shopper/windows/runner/main.cpp:8:5       - Unknown word (APIENTRY)   -- int APIENTRY wWinMain(_In_ HINSTANCE
 provider_shopper/windows/runner/main.cpp:8:57      - Unknown word (HINSTANCE)  -- HINSTANCE instance, _In_opt_ HINSTANCE prev,
 provider_shopper/windows/runner/resource.h:10:9      - Unknown word (APSTUDIO)   -- #ifndef APSTUDIO_READONLY_SYMBOLS
 provider_shopper/windows/runner/resource.h:14:19     - Unknown word (SYMED)      -- #define _APS_NEXT_SYMED_VALUE 101
 provider_shopper/windows/runner/resource.h:9:8       - Unknown word (APSTUDIO)   -- #ifdef APSTUDIO_INVOKED
-provider_shopper/windows/runner/utils.cpp:13:29     - Unknown word (CONOUT)     -- freopen_s(&unused, "CONOUT$", "w", stdout)) {
-provider_shopper/windows/runner/utils.cpp:16:29     - Unknown word (CONOUT)     -- freopen_s(&unused, "CONOUT$", "w", stderr)) {
-provider_shopper/windows/runner/win32_window.cpp:101:18    - Unknown word (lpsz)            -- window_class.lpszMenuName = nullptr;
-provider_shopper/windows/runner/win32_window.cpp:102:18    - Unknown word (lpfn)            -- window_class.lpfnWndProc = Win32Window
-provider_shopper/windows/runner/win32_window.cpp:133:3     - Unknown word (HMONITOR)        -- HMONITOR monitor = MonitorFromPoint
+provider_shopper/windows/runner/win32_window.cpp:101:18    - Unknown word (lpsz)       -- window_class.lpszMenuName = nullptr;
+provider_shopper/windows/runner/win32_window.cpp:102:18    - Unknown word (lpfn)       -- window_class.lpfnWndProc = Win32Window
+provider_shopper/windows/runner/win32_window.cpp:133:3     - Unknown word (HMONITOR)   -- HMONITOR monitor = MonitorFromPoint
 provider_shopper/windows/runner/win32_window.cpp:133:61    - Unknown word (DEFAULTTONEAREST) -- target_point, MONITOR_DEFAULTTONEAREST);
 provider_shopper/windows/runner/win32_window.cpp:138:39    - Unknown word (OVERLAPPEDWINDOW) -- class, title.c_str(), WS_OVERLAPPEDWINDOW,
-provider_shopper/windows/runner/win32_window.cpp:153:40    - Unknown word (SHOWNORMAL)       -- ShowWindow(window_handle_, SW_SHOWNORMAL);
 provider_shopper/windows/runner/win32_window.cpp:15:9      - Unknown word (DWMWA)      -- #ifndef DWMWA_USE_IMMERSIVE_DARK_MODE
 provider_shopper/windows/runner/win32_window.cpp:161:21    - Unknown word (NCCREATE)         -- if (message == WM_NCCREATE) {
-provider_shopper/windows/runner/win32_window.cpp:162:43    - Unknown word (CREATESTRUCT)     -- struct = reinterpret_cast<CREATESTRUCT*>(lparam);
 provider_shopper/windows/runner/win32_window.cpp:163:30    - Unknown word (GWLP)             -- SetWindowLongPtr(window, GWLP_USERDATA,
 provider_shopper/windows/runner/win32_window.cpp:16:9      - Unknown word (DWMWA)      -- #define DWMWA_USE_IMMERSIVE_DARK_MODE
 provider_shopper/windows/runner/win32_window.cpp:190:13    - Unknown word (DPICHANGED)       -- case WM_DPICHANGED: {
@@ -10030,8 +9764,6 @@ provider_shopper/windows/runner/win32_window.cpp:285:35    - Unknown word (DWMWA
 provider_shopper/windows/runner/win32_window.cpp:91:5      - Unknown word (WNDCLASS)   -- WNDCLASS window_class{};
 provider_shopper/windows/runner/win32_window.cpp:93:18     - Unknown word (lpsz)       -- window_class.lpszClassName = kWindowClassName
 provider_shopper/windows/runner/win32_window.cpp:94:29     - Unknown word (HREDRAW)    -- window_class.style = CS_HREDRAW | CS_VREDRAW;
-provider_shopper/windows/runner/win32_window.cpp:94:42     - Unknown word (VREDRAW)    -- style = CS_HREDRAW | CS_VREDRAW;
-provider_shopper/windows/runner/win32_window.cpp:99:42     - Unknown word (MAKEINTRESOURCE) -- window_class.hInstance, MAKEINTRESOURCE(IDI_APP_ICON));
 provider_shopper/windows/runner/win32_window.h:77:57     - Unknown word (NCCREATE)   -- pump. Handles the WM_NCCREATE message which
 simple_shader/android/app/build.gradle:70:49     - Unknown word (stdlib)     -- jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version
 simple_shader/android/build.gradle:14:1      - Unknown word (allprojects) -- allprojects {
@@ -10065,14 +9797,11 @@ simple_shader/linux/flutter/CMakeLists.txt:33:45     - Unknown word (icudtl)    
 simple_shader/linux/flutter/CMakeLists.txt:35:43     - Unknown word (libapp)      -- PROJECT_DIR}/build/lib/libapp.so" PARENT_SCOPE)
 simple_shader/linux/flutter/generated_plugins.cmake:18:1      - Unknown word (endforeach) -- endforeach(plugin)
 simple_shader/linux/flutter/generated_plugins.cmake:23:1      - Unknown word (endforeach) -- endforeach(ffi_plugin)
-simple_shader/linux/main.cc:4:5       - Unknown word (autoptr)    -- g_autoptr(MyApplication) app
 simple_shader/linux/my_application.cc:30:3      - Unknown word (gboolean)   -- gboolean use_header_bar = TRUE
 simple_shader/linux/my_application.cc:34:11     - Unknown word (gchar)      -- const gchar* wm_name = gdk_x11_screen
-simple_shader/linux/my_application.cc:53:5      - Unknown word (autoptr)    -- g_autoptr(FlDartProject) project
 simple_shader/linux/my_application.cc:66:78     - Unknown word (gchar)      -- GApplication* application, gchar*** arguments, int* exit
 simple_shader/linux/my_application.cc:66:8      - Unknown word (gboolean)   -- static gboolean my_application_local
 simple_shader/linux/my_application.cc:69:39     - Unknown word (strdupv)    -- entrypoint_arguments = g_strdupv(*arguments + 1);
-simple_shader/linux/my_application.cc:71:5      - Unknown word (autoptr)    -- g_autoptr(GError) error = nullptr
 simple_shader/linux/my_application.cc:87:55     - Unknown word (strfreev)   -- entrypoint_arguments, g_strfreev);
 simple_shader/linux/my_application.cc:91:59     - Unknown word (klass)      -- MyApplicationClass* klass) {
 simple_shader/linux/my_application.cc:92:23     - Unknown word (klass)      -- G_APPLICATION_CLASS(klass)->activate = my_application
@@ -10121,26 +9850,20 @@ simple_shader/windows/runner/Runner.rc:82:2      - Unknown word (FILEFLAGS)     
 simple_shader/windows/runner/Runner.rc:84:2      - Unknown word (FILEOS)         -- FILEOS VOS__WINDOWS32
 simple_shader/windows/runner/Runner.rc:86:2      - Unknown word (FILESUBTYPE)    -- FILESUBTYPE 0x0L
 simple_shader/windows/runner/Runner.rc:9:23      - Unknown word (TEXTINCLUDE) -- Generated from the TEXTINCLUDE 2 resource.
-simple_shader/windows/runner/flutter_window.cpp:60:13     - Unknown word (FONTCHANGE) -- case WM_FONTCHANGE:
 simple_shader/windows/runner/main.cpp:18:29     - Unknown word (COINIT)     -- CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 simple_shader/windows/runner/main.cpp:18:36     - Unknown word (APARTMENTTHREADED) -- oInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 simple_shader/windows/runner/main.cpp:8:28      - Unknown word (HINSTANCE)  -- APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE
-simple_shader/windows/runner/main.cpp:8:5       - Unknown word (APIENTRY)   -- int APIENTRY wWinMain(_In_ HINSTANCE
 simple_shader/windows/runner/main.cpp:8:57      - Unknown word (HINSTANCE)  -- HINSTANCE instance, _In_opt_ HINSTANCE prev,
 simple_shader/windows/runner/resource.h:10:9      - Unknown word (APSTUDIO)   -- #ifndef APSTUDIO_READONLY_SYMBOLS
 simple_shader/windows/runner/resource.h:14:19     - Unknown word (SYMED)      -- #define _APS_NEXT_SYMED_VALUE 101
 simple_shader/windows/runner/resource.h:9:8       - Unknown word (APSTUDIO)   -- #ifdef APSTUDIO_INVOKED
-simple_shader/windows/runner/utils.cpp:13:29     - Unknown word (CONOUT)     -- freopen_s(&unused, "CONOUT$", "w", stdout)) {
-simple_shader/windows/runner/utils.cpp:16:29     - Unknown word (CONOUT)     -- freopen_s(&unused, "CONOUT$", "w", stderr)) {
-simple_shader/windows/runner/win32_window.cpp:101:18    - Unknown word (lpsz)            -- window_class.lpszMenuName = nullptr;
-simple_shader/windows/runner/win32_window.cpp:102:18    - Unknown word (lpfn)            -- window_class.lpfnWndProc = Win32Window
-simple_shader/windows/runner/win32_window.cpp:133:3     - Unknown word (HMONITOR)        -- HMONITOR monitor = MonitorFromPoint
+simple_shader/windows/runner/win32_window.cpp:101:18    - Unknown word (lpsz)       -- window_class.lpszMenuName = nullptr;
+simple_shader/windows/runner/win32_window.cpp:102:18    - Unknown word (lpfn)       -- window_class.lpfnWndProc = Win32Window
+simple_shader/windows/runner/win32_window.cpp:133:3     - Unknown word (HMONITOR)   -- HMONITOR monitor = MonitorFromPoint
 simple_shader/windows/runner/win32_window.cpp:133:61    - Unknown word (DEFAULTTONEAREST) -- target_point, MONITOR_DEFAULTTONEAREST);
 simple_shader/windows/runner/win32_window.cpp:138:39    - Unknown word (OVERLAPPEDWINDOW) -- class, title.c_str(), WS_OVERLAPPEDWINDOW,
-simple_shader/windows/runner/win32_window.cpp:153:40    - Unknown word (SHOWNORMAL)       -- ShowWindow(window_handle_, SW_SHOWNORMAL);
 simple_shader/windows/runner/win32_window.cpp:15:9      - Unknown word (DWMWA)      -- #ifndef DWMWA_USE_IMMERSIVE_DARK_MODE
 simple_shader/windows/runner/win32_window.cpp:161:21    - Unknown word (NCCREATE)         -- if (message == WM_NCCREATE) {
-simple_shader/windows/runner/win32_window.cpp:162:43    - Unknown word (CREATESTRUCT)     -- struct = reinterpret_cast<CREATESTRUCT*>(lparam);
 simple_shader/windows/runner/win32_window.cpp:163:30    - Unknown word (GWLP)             -- SetWindowLongPtr(window, GWLP_USERDATA,
 simple_shader/windows/runner/win32_window.cpp:16:9      - Unknown word (DWMWA)      -- #define DWMWA_USE_IMMERSIVE_DARK_MODE
 simple_shader/windows/runner/win32_window.cpp:190:13    - Unknown word (DPICHANGED)       -- case WM_DPICHANGED: {
@@ -10153,8 +9876,6 @@ simple_shader/windows/runner/win32_window.cpp:285:35    - Unknown word (DWMWA)  
 simple_shader/windows/runner/win32_window.cpp:91:5      - Unknown word (WNDCLASS)   -- WNDCLASS window_class{};
 simple_shader/windows/runner/win32_window.cpp:93:18     - Unknown word (lpsz)       -- window_class.lpszClassName = kWindowClassName
 simple_shader/windows/runner/win32_window.cpp:94:29     - Unknown word (HREDRAW)    -- window_class.style = CS_HREDRAW | CS_VREDRAW;
-simple_shader/windows/runner/win32_window.cpp:94:42     - Unknown word (VREDRAW)    -- style = CS_HREDRAW | CS_VREDRAW;
-simple_shader/windows/runner/win32_window.cpp:99:42     - Unknown word (MAKEINTRESOURCE) -- window_class.hInstance, MAKEINTRESOURCE(IDI_APP_ICON));
 simple_shader/windows/runner/win32_window.h:77:57     - Unknown word (NCCREATE)   -- pump. Handles the WM_NCCREATE message which
 simplistic_calculator/analysis_options.yaml:3:15      - Unknown word (typer)      -- # Files under typer/ are partially completed
 simplistic_calculator/analysis_options.yaml:6:7       - Unknown word (typer)      -- - typer/**
@@ -10194,17 +9915,13 @@ simplistic_calculator/linux/flutter/CMakeLists.txt:20:1      - Unknown word (end
 simplistic_calculator/linux/flutter/CMakeLists.txt:29:39     - Unknown word (libflutter)  -- LIBRARY "${EPHEMERAL_DIR}/libflutter_linux_gtk.so")
 simplistic_calculator/linux/flutter/CMakeLists.txt:33:45     - Unknown word (icudtl)      -- FILE "${EPHEMERAL_DIR}/icudtl.dat" PARENT_SCOPE)
 simplistic_calculator/linux/flutter/CMakeLists.txt:35:43     - Unknown word (libapp)      -- PROJECT_DIR}/build/lib/libapp.so" PARENT_SCOPE)
-simplistic_calculator/linux/flutter/generated_plugin_registrant.cc:12:5      - Unknown word (autoptr)    -- g_autoptr(FlPluginRegistrar) window
 simplistic_calculator/linux/flutter/generated_plugins.cmake:19:1      - Unknown word (endforeach) -- endforeach(plugin)
 simplistic_calculator/linux/flutter/generated_plugins.cmake:24:1      - Unknown word (endforeach) -- endforeach(ffi_plugin)
-simplistic_calculator/linux/main.cc:4:5       - Unknown word (autoptr)    -- g_autoptr(MyApplication) app
 simplistic_calculator/linux/my_application.cc:30:3      - Unknown word (gboolean)   -- gboolean use_header_bar = TRUE
 simplistic_calculator/linux/my_application.cc:34:11     - Unknown word (gchar)      -- const gchar* wm_name = gdk_x11_screen
-simplistic_calculator/linux/my_application.cc:53:5      - Unknown word (autoptr)    -- g_autoptr(FlDartProject) project
 simplistic_calculator/linux/my_application.cc:66:78     - Unknown word (gchar)      -- GApplication* application, gchar*** arguments, int* exit
 simplistic_calculator/linux/my_application.cc:66:8      - Unknown word (gboolean)   -- static gboolean my_application_local
 simplistic_calculator/linux/my_application.cc:69:39     - Unknown word (strdupv)    -- entrypoint_arguments = g_strdupv(*arguments + 1);
-simplistic_calculator/linux/my_application.cc:71:5      - Unknown word (autoptr)    -- g_autoptr(GError) error = nullptr
 simplistic_calculator/linux/my_application.cc:87:55     - Unknown word (strfreev)   -- entrypoint_arguments, g_strfreev);
 simplistic_calculator/linux/my_application.cc:91:59     - Unknown word (klass)      -- MyApplicationClass* klass) {
 simplistic_calculator/linux/my_application.cc:92:23     - Unknown word (klass)      -- G_APPLICATION_CLASS(klass)->activate = my_application
@@ -10258,26 +9975,20 @@ simplistic_calculator/windows/runner/Runner.rc:82:2      - Unknown word (FILEFLA
 simplistic_calculator/windows/runner/Runner.rc:84:2      - Unknown word (FILEOS)         -- FILEOS VOS__WINDOWS32
 simplistic_calculator/windows/runner/Runner.rc:86:2      - Unknown word (FILESUBTYPE)    -- FILESUBTYPE 0x0L
 simplistic_calculator/windows/runner/Runner.rc:9:23      - Unknown word (TEXTINCLUDE) -- Generated from the TEXTINCLUDE 2 resource.
-simplistic_calculator/windows/runner/flutter_window.cpp:60:13     - Unknown word (FONTCHANGE) -- case WM_FONTCHANGE:
 simplistic_calculator/windows/runner/main.cpp:18:29     - Unknown word (COINIT)     -- CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 simplistic_calculator/windows/runner/main.cpp:18:36     - Unknown word (APARTMENTTHREADED) -- oInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 simplistic_calculator/windows/runner/main.cpp:8:28      - Unknown word (HINSTANCE)  -- APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE
-simplistic_calculator/windows/runner/main.cpp:8:5       - Unknown word (APIENTRY)   -- int APIENTRY wWinMain(_In_ HINSTANCE
 simplistic_calculator/windows/runner/main.cpp:8:57      - Unknown word (HINSTANCE)  -- HINSTANCE instance, _In_opt_ HINSTANCE prev,
 simplistic_calculator/windows/runner/resource.h:10:9      - Unknown word (APSTUDIO)   -- #ifndef APSTUDIO_READONLY_SYMBOLS
 simplistic_calculator/windows/runner/resource.h:14:19     - Unknown word (SYMED)      -- #define _APS_NEXT_SYMED_VALUE 101
 simplistic_calculator/windows/runner/resource.h:9:8       - Unknown word (APSTUDIO)   -- #ifdef APSTUDIO_INVOKED
-simplistic_calculator/windows/runner/utils.cpp:13:29     - Unknown word (CONOUT)     -- freopen_s(&unused, "CONOUT$", "w", stdout)) {
-simplistic_calculator/windows/runner/utils.cpp:16:29     - Unknown word (CONOUT)     -- freopen_s(&unused, "CONOUT$", "w", stderr)) {
-simplistic_calculator/windows/runner/win32_window.cpp:101:18    - Unknown word (lpsz)            -- window_class.lpszMenuName = nullptr;
-simplistic_calculator/windows/runner/win32_window.cpp:102:18    - Unknown word (lpfn)            -- window_class.lpfnWndProc = Win32Window
-simplistic_calculator/windows/runner/win32_window.cpp:133:3     - Unknown word (HMONITOR)        -- HMONITOR monitor = MonitorFromPoint
+simplistic_calculator/windows/runner/win32_window.cpp:101:18    - Unknown word (lpsz)       -- window_class.lpszMenuName = nullptr;
+simplistic_calculator/windows/runner/win32_window.cpp:102:18    - Unknown word (lpfn)       -- window_class.lpfnWndProc = Win32Window
+simplistic_calculator/windows/runner/win32_window.cpp:133:3     - Unknown word (HMONITOR)   -- HMONITOR monitor = MonitorFromPoint
 simplistic_calculator/windows/runner/win32_window.cpp:133:61    - Unknown word (DEFAULTTONEAREST) -- target_point, MONITOR_DEFAULTTONEAREST);
 simplistic_calculator/windows/runner/win32_window.cpp:138:39    - Unknown word (OVERLAPPEDWINDOW) -- class, title.c_str(), WS_OVERLAPPEDWINDOW,
-simplistic_calculator/windows/runner/win32_window.cpp:153:40    - Unknown word (SHOWNORMAL)       -- ShowWindow(window_handle_, SW_SHOWNORMAL);
 simplistic_calculator/windows/runner/win32_window.cpp:15:9      - Unknown word (DWMWA)      -- #ifndef DWMWA_USE_IMMERSIVE_DARK_MODE
 simplistic_calculator/windows/runner/win32_window.cpp:161:21    - Unknown word (NCCREATE)         -- if (message == WM_NCCREATE) {
-simplistic_calculator/windows/runner/win32_window.cpp:162:43    - Unknown word (CREATESTRUCT)     -- struct = reinterpret_cast<CREATESTRUCT*>(lparam);
 simplistic_calculator/windows/runner/win32_window.cpp:163:30    - Unknown word (GWLP)             -- SetWindowLongPtr(window, GWLP_USERDATA,
 simplistic_calculator/windows/runner/win32_window.cpp:16:9      - Unknown word (DWMWA)      -- #define DWMWA_USE_IMMERSIVE_DARK_MODE
 simplistic_calculator/windows/runner/win32_window.cpp:190:13    - Unknown word (DPICHANGED)       -- case WM_DPICHANGED: {
@@ -10290,8 +10001,6 @@ simplistic_calculator/windows/runner/win32_window.cpp:285:35    - Unknown word (
 simplistic_calculator/windows/runner/win32_window.cpp:91:5      - Unknown word (WNDCLASS)   -- WNDCLASS window_class{};
 simplistic_calculator/windows/runner/win32_window.cpp:93:18     - Unknown word (lpsz)       -- window_class.lpszClassName = kWindowClassName
 simplistic_calculator/windows/runner/win32_window.cpp:94:29     - Unknown word (HREDRAW)    -- window_class.style = CS_HREDRAW | CS_VREDRAW;
-simplistic_calculator/windows/runner/win32_window.cpp:94:42     - Unknown word (VREDRAW)    -- style = CS_HREDRAW | CS_VREDRAW;
-simplistic_calculator/windows/runner/win32_window.cpp:99:42     - Unknown word (MAKEINTRESOURCE) -- window_class.hInstance, MAKEINTRESOURCE(IDI_APP_ICON));
 simplistic_calculator/windows/runner/win32_window.h:77:57     - Unknown word (NCCREATE)   -- pump. Handles the WM_NCCREATE message which
 simplistic_editor/android/app/build.gradle:70:49     - Unknown word (stdlib)     -- jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version
 simplistic_editor/android/build.gradle:14:1      - Unknown word (allprojects) -- allprojects {
@@ -10325,14 +10034,11 @@ simplistic_editor/linux/flutter/CMakeLists.txt:33:45     - Unknown word (icudtl)
 simplistic_editor/linux/flutter/CMakeLists.txt:35:43     - Unknown word (libapp)      -- PROJECT_DIR}/build/lib/libapp.so" PARENT_SCOPE)
 simplistic_editor/linux/flutter/generated_plugins.cmake:18:1      - Unknown word (endforeach) -- endforeach(plugin)
 simplistic_editor/linux/flutter/generated_plugins.cmake:23:1      - Unknown word (endforeach) -- endforeach(ffi_plugin)
-simplistic_editor/linux/main.cc:4:5       - Unknown word (autoptr)    -- g_autoptr(MyApplication) app
 simplistic_editor/linux/my_application.cc:30:3      - Unknown word (gboolean)   -- gboolean use_header_bar = TRUE
 simplistic_editor/linux/my_application.cc:34:11     - Unknown word (gchar)      -- const gchar* wm_name = gdk_x11_screen
-simplistic_editor/linux/my_application.cc:53:5      - Unknown word (autoptr)    -- g_autoptr(FlDartProject) project
 simplistic_editor/linux/my_application.cc:66:78     - Unknown word (gchar)      -- GApplication* application, gchar*** arguments, int* exit
 simplistic_editor/linux/my_application.cc:66:8      - Unknown word (gboolean)   -- static gboolean my_application_local
 simplistic_editor/linux/my_application.cc:69:39     - Unknown word (strdupv)    -- entrypoint_arguments = g_strdupv(*arguments + 1);
-simplistic_editor/linux/my_application.cc:71:5      - Unknown word (autoptr)    -- g_autoptr(GError) error = nullptr
 simplistic_editor/linux/my_application.cc:87:55     - Unknown word (strfreev)   -- entrypoint_arguments, g_strfreev);
 simplistic_editor/linux/my_application.cc:91:59     - Unknown word (klass)      -- MyApplicationClass* klass) {
 simplistic_editor/linux/my_application.cc:92:23     - Unknown word (klass)      -- G_APPLICATION_CLASS(klass)->activate = my_application
@@ -10382,26 +10088,20 @@ simplistic_editor/windows/runner/Runner.rc:82:2      - Unknown word (FILEFLAGS) 
 simplistic_editor/windows/runner/Runner.rc:84:2      - Unknown word (FILEOS)         -- FILEOS VOS__WINDOWS32
 simplistic_editor/windows/runner/Runner.rc:86:2      - Unknown word (FILESUBTYPE)    -- FILESUBTYPE 0x0L
 simplistic_editor/windows/runner/Runner.rc:9:23      - Unknown word (TEXTINCLUDE) -- Generated from the TEXTINCLUDE 2 resource.
-simplistic_editor/windows/runner/flutter_window.cpp:60:13     - Unknown word (FONTCHANGE) -- case WM_FONTCHANGE:
 simplistic_editor/windows/runner/main.cpp:18:29     - Unknown word (COINIT)     -- CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 simplistic_editor/windows/runner/main.cpp:18:36     - Unknown word (APARTMENTTHREADED) -- oInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 simplistic_editor/windows/runner/main.cpp:8:28      - Unknown word (HINSTANCE)  -- APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE
-simplistic_editor/windows/runner/main.cpp:8:5       - Unknown word (APIENTRY)   -- int APIENTRY wWinMain(_In_ HINSTANCE
 simplistic_editor/windows/runner/main.cpp:8:57      - Unknown word (HINSTANCE)  -- HINSTANCE instance, _In_opt_ HINSTANCE prev,
 simplistic_editor/windows/runner/resource.h:10:9      - Unknown word (APSTUDIO)   -- #ifndef APSTUDIO_READONLY_SYMBOLS
 simplistic_editor/windows/runner/resource.h:14:19     - Unknown word (SYMED)      -- #define _APS_NEXT_SYMED_VALUE 101
 simplistic_editor/windows/runner/resource.h:9:8       - Unknown word (APSTUDIO)   -- #ifdef APSTUDIO_INVOKED
-simplistic_editor/windows/runner/utils.cpp:13:29     - Unknown word (CONOUT)     -- freopen_s(&unused, "CONOUT$", "w", stdout)) {
-simplistic_editor/windows/runner/utils.cpp:16:29     - Unknown word (CONOUT)     -- freopen_s(&unused, "CONOUT$", "w", stderr)) {
-simplistic_editor/windows/runner/win32_window.cpp:101:18    - Unknown word (lpsz)            -- window_class.lpszMenuName = nullptr;
-simplistic_editor/windows/runner/win32_window.cpp:102:18    - Unknown word (lpfn)            -- window_class.lpfnWndProc = Win32Window
-simplistic_editor/windows/runner/win32_window.cpp:133:3     - Unknown word (HMONITOR)        -- HMONITOR monitor = MonitorFromPoint
+simplistic_editor/windows/runner/win32_window.cpp:101:18    - Unknown word (lpsz)       -- window_class.lpszMenuName = nullptr;
+simplistic_editor/windows/runner/win32_window.cpp:102:18    - Unknown word (lpfn)       -- window_class.lpfnWndProc = Win32Window
+simplistic_editor/windows/runner/win32_window.cpp:133:3     - Unknown word (HMONITOR)   -- HMONITOR monitor = MonitorFromPoint
 simplistic_editor/windows/runner/win32_window.cpp:133:61    - Unknown word (DEFAULTTONEAREST) -- target_point, MONITOR_DEFAULTTONEAREST);
 simplistic_editor/windows/runner/win32_window.cpp:138:39    - Unknown word (OVERLAPPEDWINDOW) -- class, title.c_str(), WS_OVERLAPPEDWINDOW,
-simplistic_editor/windows/runner/win32_window.cpp:153:40    - Unknown word (SHOWNORMAL)       -- ShowWindow(window_handle_, SW_SHOWNORMAL);
 simplistic_editor/windows/runner/win32_window.cpp:15:9      - Unknown word (DWMWA)      -- #ifndef DWMWA_USE_IMMERSIVE_DARK_MODE
 simplistic_editor/windows/runner/win32_window.cpp:161:21    - Unknown word (NCCREATE)         -- if (message == WM_NCCREATE) {
-simplistic_editor/windows/runner/win32_window.cpp:162:43    - Unknown word (CREATESTRUCT)     -- struct = reinterpret_cast<CREATESTRUCT*>(lparam);
 simplistic_editor/windows/runner/win32_window.cpp:163:30    - Unknown word (GWLP)             -- SetWindowLongPtr(window, GWLP_USERDATA,
 simplistic_editor/windows/runner/win32_window.cpp:16:9      - Unknown word (DWMWA)      -- #define DWMWA_USE_IMMERSIVE_DARK_MODE
 simplistic_editor/windows/runner/win32_window.cpp:190:13    - Unknown word (DPICHANGED)       -- case WM_DPICHANGED: {
@@ -10414,8 +10114,6 @@ simplistic_editor/windows/runner/win32_window.cpp:285:35    - Unknown word (DWMW
 simplistic_editor/windows/runner/win32_window.cpp:91:5      - Unknown word (WNDCLASS)   -- WNDCLASS window_class{};
 simplistic_editor/windows/runner/win32_window.cpp:93:18     - Unknown word (lpsz)       -- window_class.lpszClassName = kWindowClassName
 simplistic_editor/windows/runner/win32_window.cpp:94:29     - Unknown word (HREDRAW)    -- window_class.style = CS_HREDRAW | CS_VREDRAW;
-simplistic_editor/windows/runner/win32_window.cpp:94:42     - Unknown word (VREDRAW)    -- style = CS_HREDRAW | CS_VREDRAW;
-simplistic_editor/windows/runner/win32_window.cpp:99:42     - Unknown word (MAKEINTRESOURCE) -- window_class.hInstance, MAKEINTRESOURCE(IDI_APP_ICON));
 simplistic_editor/windows/runner/win32_window.h:77:57     - Unknown word (NCCREATE)   -- pump. Handles the WM_NCCREATE message which
 testing_app/README.md:39:96     - Unknown word (mgmt)       -- integration_test/state_mgmt_test.dart`
 testing_app/README.md:48:10     - Unknown word (genhtml)    -- - Run `genhtml coverage/lcov.info
@@ -10456,14 +10154,11 @@ testing_app/linux/flutter/CMakeLists.txt:33:45     - Unknown word (icudtl)      
 testing_app/linux/flutter/CMakeLists.txt:35:43     - Unknown word (libapp)      -- PROJECT_DIR}/build/lib/libapp.so" PARENT_SCOPE)
 testing_app/linux/flutter/generated_plugins.cmake:18:1      - Unknown word (endforeach) -- endforeach(plugin)
 testing_app/linux/flutter/generated_plugins.cmake:23:1      - Unknown word (endforeach) -- endforeach(ffi_plugin)
-testing_app/linux/main.cc:4:5       - Unknown word (autoptr)    -- g_autoptr(MyApplication) app
 testing_app/linux/my_application.cc:30:3      - Unknown word (gboolean)   -- gboolean use_header_bar = TRUE
 testing_app/linux/my_application.cc:34:11     - Unknown word (gchar)      -- const gchar* wm_name = gdk_x11_screen
-testing_app/linux/my_application.cc:53:5      - Unknown word (autoptr)    -- g_autoptr(FlDartProject) project
 testing_app/linux/my_application.cc:66:78     - Unknown word (gchar)      -- GApplication* application, gchar*** arguments, int* exit
 testing_app/linux/my_application.cc:66:8      - Unknown word (gboolean)   -- static gboolean my_application_local
 testing_app/linux/my_application.cc:69:39     - Unknown word (strdupv)    -- entrypoint_arguments = g_strdupv(*arguments + 1);
-testing_app/linux/my_application.cc:71:5      - Unknown word (autoptr)    -- g_autoptr(GError) error = nullptr
 testing_app/linux/my_application.cc:87:55     - Unknown word (strfreev)   -- entrypoint_arguments, g_strfreev);
 testing_app/linux/my_application.cc:91:59     - Unknown word (klass)      -- MyApplicationClass* klass) {
 testing_app/linux/my_application.cc:92:23     - Unknown word (klass)      -- G_APPLICATION_CLASS(klass)->activate = my_application
@@ -10515,26 +10210,20 @@ testing_app/windows/runner/Runner.rc:82:2      - Unknown word (FILEFLAGS)      -
 testing_app/windows/runner/Runner.rc:84:2      - Unknown word (FILEOS)         -- FILEOS VOS__WINDOWS32
 testing_app/windows/runner/Runner.rc:86:2      - Unknown word (FILESUBTYPE)    -- FILESUBTYPE 0x0L
 testing_app/windows/runner/Runner.rc:9:23      - Unknown word (TEXTINCLUDE) -- Generated from the TEXTINCLUDE 2 resource.
-testing_app/windows/runner/flutter_window.cpp:60:13     - Unknown word (FONTCHANGE) -- case WM_FONTCHANGE:
 testing_app/windows/runner/main.cpp:18:29     - Unknown word (COINIT)     -- CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 testing_app/windows/runner/main.cpp:18:36     - Unknown word (APARTMENTTHREADED) -- oInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 testing_app/windows/runner/main.cpp:8:28      - Unknown word (HINSTANCE)  -- APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE
-testing_app/windows/runner/main.cpp:8:5       - Unknown word (APIENTRY)   -- int APIENTRY wWinMain(_In_ HINSTANCE
 testing_app/windows/runner/main.cpp:8:57      - Unknown word (HINSTANCE)  -- HINSTANCE instance, _In_opt_ HINSTANCE prev,
 testing_app/windows/runner/resource.h:10:9      - Unknown word (APSTUDIO)   -- #ifndef APSTUDIO_READONLY_SYMBOLS
 testing_app/windows/runner/resource.h:14:19     - Unknown word (SYMED)      -- #define _APS_NEXT_SYMED_VALUE 101
 testing_app/windows/runner/resource.h:9:8       - Unknown word (APSTUDIO)   -- #ifdef APSTUDIO_INVOKED
-testing_app/windows/runner/utils.cpp:13:29     - Unknown word (CONOUT)     -- freopen_s(&unused, "CONOUT$", "w", stdout)) {
-testing_app/windows/runner/utils.cpp:16:29     - Unknown word (CONOUT)     -- freopen_s(&unused, "CONOUT$", "w", stderr)) {
-testing_app/windows/runner/win32_window.cpp:101:18    - Unknown word (lpsz)            -- window_class.lpszMenuName = nullptr;
-testing_app/windows/runner/win32_window.cpp:102:18    - Unknown word (lpfn)            -- window_class.lpfnWndProc = Win32Window
-testing_app/windows/runner/win32_window.cpp:133:3     - Unknown word (HMONITOR)        -- HMONITOR monitor = MonitorFromPoint
+testing_app/windows/runner/win32_window.cpp:101:18    - Unknown word (lpsz)       -- window_class.lpszMenuName = nullptr;
+testing_app/windows/runner/win32_window.cpp:102:18    - Unknown word (lpfn)       -- window_class.lpfnWndProc = Win32Window
+testing_app/windows/runner/win32_window.cpp:133:3     - Unknown word (HMONITOR)   -- HMONITOR monitor = MonitorFromPoint
 testing_app/windows/runner/win32_window.cpp:133:61    - Unknown word (DEFAULTTONEAREST) -- target_point, MONITOR_DEFAULTTONEAREST);
 testing_app/windows/runner/win32_window.cpp:138:39    - Unknown word (OVERLAPPEDWINDOW) -- class, title.c_str(), WS_OVERLAPPEDWINDOW,
-testing_app/windows/runner/win32_window.cpp:153:40    - Unknown word (SHOWNORMAL)       -- ShowWindow(window_handle_, SW_SHOWNORMAL);
 testing_app/windows/runner/win32_window.cpp:15:9      - Unknown word (DWMWA)      -- #ifndef DWMWA_USE_IMMERSIVE_DARK_MODE
 testing_app/windows/runner/win32_window.cpp:161:21    - Unknown word (NCCREATE)         -- if (message == WM_NCCREATE) {
-testing_app/windows/runner/win32_window.cpp:162:43    - Unknown word (CREATESTRUCT)     -- struct = reinterpret_cast<CREATESTRUCT*>(lparam);
 testing_app/windows/runner/win32_window.cpp:163:30    - Unknown word (GWLP)             -- SetWindowLongPtr(window, GWLP_USERDATA,
 testing_app/windows/runner/win32_window.cpp:16:9      - Unknown word (DWMWA)      -- #define DWMWA_USE_IMMERSIVE_DARK_MODE
 testing_app/windows/runner/win32_window.cpp:190:13    - Unknown word (DPICHANGED)       -- case WM_DPICHANGED: {
@@ -10547,8 +10236,6 @@ testing_app/windows/runner/win32_window.cpp:285:35    - Unknown word (DWMWA)    
 testing_app/windows/runner/win32_window.cpp:91:5      - Unknown word (WNDCLASS)   -- WNDCLASS window_class{};
 testing_app/windows/runner/win32_window.cpp:93:18     - Unknown word (lpsz)       -- window_class.lpszClassName = kWindowClassName
 testing_app/windows/runner/win32_window.cpp:94:29     - Unknown word (HREDRAW)    -- window_class.style = CS_HREDRAW | CS_VREDRAW;
-testing_app/windows/runner/win32_window.cpp:94:42     - Unknown word (VREDRAW)    -- style = CS_HREDRAW | CS_VREDRAW;
-testing_app/windows/runner/win32_window.cpp:99:42     - Unknown word (MAKEINTRESOURCE) -- window_class.hInstance, MAKEINTRESOURCE(IDI_APP_ICON));
 testing_app/windows/runner/win32_window.h:77:57     - Unknown word (NCCREATE)   -- pump. Handles the WM_NCCREATE message which
 tool/android_ci_script.sh:40:7      - Unknown word (gradlew)    -- ./gradlew --stacktrace assembleDebug
 tool/android_ci_script.sh:41:7      - Unknown word (gradlew)    -- ./gradlew --stacktrace assembleRelease
