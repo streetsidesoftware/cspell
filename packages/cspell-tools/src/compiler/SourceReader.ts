@@ -66,8 +66,16 @@ function splitLines(lines: Iterable<string>, options: SourceReaderOptions): Iter
 }
 
 async function textFileReader(reader: Reader, options: SourceReaderOptions): Promise<SourceReader> {
-    const { legacy, splitWords: split, allowedSplitWords, storeSplitWordsAsCompounds } = options;
-    const words = [...parseFileLines(reader.lines, { legacy, split, allowedSplitWords, storeSplitWordsAsCompounds })];
+    const { legacy, splitWords: split, allowedSplitWords, storeSplitWordsAsCompounds, minCompoundLength } = options;
+    const words = [
+        ...parseFileLines(reader.lines, {
+            legacy,
+            split,
+            allowedSplitWords,
+            storeSplitWordsAsCompounds,
+            minCompoundLength,
+        }),
+    ];
 
     return {
         size: words.length,
