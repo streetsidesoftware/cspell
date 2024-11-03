@@ -1,0 +1,18 @@
+{
+  "name": "example-yarn",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CSpell Examples with Yarn",
+  "scripts": {
+    "preinstall": "pnpm setup-yarn",
+    "setup-yarn": "pnpm setup-yarn:cspell-eslint-plugin",
+    "setup-yarn:cspell-eslint-plugin": "cd cspell-eslint-plugin && yarn",
+    "test": "pnpm test:cspell-eslint-plugin",
+    "test:cspell-eslint-plugin": "cd cspell-eslint-plugin && yarn test",
+    "update": "pnpm update:cspell-eslint-plugin",
+    "update:cspell-eslint-plugin": "cd cspell-eslint-plugin && yarn update"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT"
+}
