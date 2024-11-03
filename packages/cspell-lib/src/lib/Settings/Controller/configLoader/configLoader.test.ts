@@ -589,7 +589,7 @@ describe('Validate search/load config files', () => {
 
     test('config needing PnP', async () => {
         const uriTestPackages = path.join(root, 'test-packages/yarn');
-        const uriYarn2TestMedCspell = path.join(uriTestPackages, 'yarn2/test-yarn3-med/cspell.json');
+        const uriYarn2TestMedCspell = path.join(uriTestPackages, 'yarn2/test-yarn-med/cspell.json');
         const result = await loadConfig(uriYarn2TestMedCspell, {});
         expect(result.dictionaries).toEqual(['medical terms']);
     });
