@@ -173,6 +173,7 @@ export default tsEslint.config(
             'docs/_site/**',
             'docs/docsV2/**',
             'docs/types/cspell-types/**',
+            'examples/yarn/**',
             'integration-tests/repositories/**',
             'package-lock.json',
             'packages/*/dist/**',
