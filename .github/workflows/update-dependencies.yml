@@ -58,8 +58,8 @@ jobs:
         with:
           ref: ${{ env.REF_BRANCH }}
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4.0.0
+      - name: Enable Corepack
+        run: corepack enable
 
       - name: Use Node.js
         uses: actions/setup-node@v4
@@ -73,6 +73,10 @@ jobs:
 
       - name: Install
         run: pnpm install
+
+      - name: Update Yarn
+        run: |
+          pnpm run update-yarn
 
       - name: Has changes
         run: |

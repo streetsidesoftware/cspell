@@ -3,16 +3,16 @@
   "version": "1.0.0",
   "license": "MIT",
   "private": true,
-  "packageManager": "yarn@4.5.1",
+  "packageManager": "yarn@4.5.1+sha512.341db9396b6e289fecc30cd7ab3af65060e05ebff4b3b47547b278b9e67b08f485ecd8c79006b405446262142c7a38154445ef7f17c1d5d1de7d90bf9ce7054d",
   "scripts": {
     "lint": "eslint .",
-    "test": "yarn update && yarn lint",
-    "update": "yarn add --dev @cspell/dict-medicalterms@latest @cspell/cspell-types@latest @cspell/eslint-plugin@latest"
+    "test": "yarn lint",
+    "update:dep": "yarn add --dev @cspell/dict-medicalterms@latest @cspell/cspell-types@latest @cspell/eslint-plugin@latest"
   },
   "devDependencies": {
-    "@cspell/cspell-types": "^8.15.6",
+    "@cspell/cspell-types": "^8.15.7",
     "@cspell/dict-medicalterms": "^4.1.5",
-    "@cspell/eslint-plugin": "^8.15.6",
+    "@cspell/eslint-plugin": "^8.15.7",
     "@eslint/js": "^9.14.0",
     "eslint": "^9.14.0",
     "globals": "^15.11.0"
