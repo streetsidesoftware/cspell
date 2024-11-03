@@ -56,7 +56,7 @@ runs:
       uses: streetsidesoftware/action-set-output@v1
       with:
         value: >-
-          build-${{ hashFiles(
+          build-${{ runner.os }}-${{ hashFiles(
             '*-lock.yaml',
             'integration-tests/src/**/*.ts',
             'integration-tests/tsconfig*.json',
