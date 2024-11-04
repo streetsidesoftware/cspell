@@ -56,7 +56,7 @@
     "bt": "pnpm build && pnpm test",
     "build": "pnpm build:schema && pnpm build:src",
     "build:src": "tsc -b ./tsconfig.json -f",
-    "build:schema": "pnpm build-options-schema",
+    "build:schema": "echo skipping schema build",
     "build:schema:old": "ts-json-schema-generator --no-top-ref --expose none --path src/common/options.cts --type Options  -o  ./assets/options.schema.json",
     "watch": "tsc -b ./tsconfig.json --watch -f",
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
