@@ -40,12 +40,12 @@
       "type": "object"
     },
     "CacheStrategy": {
-      "description": "The Strategy to use to detect if a file has changed.\n- `metadata` - uses the file system timestamp and size to detect changes (fastest).\n- `content` - uses a hash of the file content to check file changes (slower - more accurate).",
+      "description": "The Strategy to use to detect if a file has changed.\n- `content` - uses a hash of the file content to check file changes (slower - more accurate).\n- `metadata` - uses the file system timestamp and size to detect changes (fastest, may not work in CI).",
       "enum": [
-        "metadata",
-        "content"
+        "content",
+        "metadata"
       ],
-      "markdownDescription": "The Strategy to use to detect if a file has changed.\n- `metadata` - uses the file system timestamp and size to detect changes (fastest).\n- `content` - uses a hash of the file content to check file changes (slower - more accurate).",
+      "markdownDescription": "The Strategy to use to detect if a file has changed.\n- `content` - uses a hash of the file content to check file changes (slower - more accurate).\n- `metadata` - uses the file system timestamp and size to detect changes (fastest, may not work in CI).",
       "type": "string"
     },
     "CharacterSet": {

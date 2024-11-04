@@ -25,21 +25,21 @@ const F = false;
 
 describe('Validate calcCacheSettings', () => {
     test.each`
-        config                 | options                         | root             | expected                                | comment
-        ${{}}                  | ${{}}                           | ${process.cwd()} | ${cco()}                                | ${''}
-        ${{}}                  | ${{}}                           | ${__dirname}     | ${cco(F, r(__dirname, '.cspellcache'))} | ${''}
-        ${{}}                  | ${{}}                           | ${'.'}           | ${cco()}                                | ${''}
-        ${{}}                  | ${co()}                         | ${'.'}           | ${cco()}                                | ${''}
-        ${{}}                  | ${co(U, '.')}                   | ${'.'}           | ${cco()}                                | ${'Location is a directory'}
-        ${{}}                  | ${co(U, __filename)}            | ${'.'}           | ${cco(F, __filename)}                   | ${'Location is a file'}
-        ${cs(T)}               | ${co()}                         | ${'.'}           | ${cco(T)}                               | ${'Use cache in config but not command-line'}
-        ${cs(F)}               | ${co()}                         | ${'.'}           | ${cco(F)}                               | ${'cfg: true, cli: -'}
-        ${cs(F)}               | ${co(T)}                        | ${'.'}           | ${cco(T)}                               | ${'cfg: false, cli: true'}
-        ${{}}                  | ${co(T)}                        | ${'.'}           | ${cco(T)}                               | ${'cfg: -, cli: true'}
-        ${{}}                  | ${{ cacheStrategy: 'content' }} | ${'.'}           | ${cco(F, U, 'content')}                 | ${'override default strategy'}
-        ${{}}                  | ${co(T, U, 'content')}          | ${'.'}           | ${cco(T, U, 'content')}                 | ${'override strategy'}
-        ${cs(U, U, 'content')} | ${co(T, U, 'metadata')}         | ${'.'}           | ${cco(T, U, 'metadata')}                | ${'override config strategy'}
-        ${cs(T, U, 'content')} | ${{ version }}                  | ${'.'}           | ${cco(T, U, 'content')}                 | ${'override default strategy'}
+        config                  | options                          | root             | expected                                | comment
+        ${{}}                   | ${{}}                            | ${process.cwd()} | ${cco()}                                | ${''}
+        ${{}}                   | ${{}}                            | ${__dirname}     | ${cco(F, r(__dirname, '.cspellcache'))} | ${''}
+        ${{}}                   | ${{}}                            | ${'.'}           | ${cco()}                                | ${''}
+        ${{}}                   | ${co()}                          | ${'.'}           | ${cco()}                                | ${''}
+        ${{}}                   | ${co(U, '.')}                    | ${'.'}           | ${cco()}                                | ${'Location is a directory'}
+        ${{}}                   | ${co(U, __filename)}             | ${'.'}           | ${cco(F, __filename)}                   | ${'Location is a file'}
+        ${cs(T)}                | ${co()}                          | ${'.'}           | ${cco(T)}                               | ${'Use cache in config but not command-line'}
+        ${cs(F)}                | ${co()}                          | ${'.'}           | ${cco(F)}                               | ${'cfg: true, cli: -'}
+        ${cs(F)}                | ${co(T)}                         | ${'.'}           | ${cco(T)}                               | ${'cfg: false, cli: true'}
+        ${{}}                   | ${co(T)}                         | ${'.'}           | ${cco(T)}                               | ${'cfg: -, cli: true'}
+        ${{}}                   | ${{ cacheStrategy: 'metadata' }} | ${'.'}           | ${cco(F, U, 'metadata')}                | ${'override default strategy'}
+        ${{}}                   | ${co(T, U, 'metadata')}          | ${'.'}           | ${cco(T, U, 'metadata')}                | ${'override strategy'}
+        ${cs(U, U, 'metadata')} | ${co(T, U, 'content')}           | ${'.'}           | ${cco(T, U, 'content')}                 | ${'override config strategy'}
+        ${cs(T, U, 'metadata')} | ${{ version }}                   | ${'.'}           | ${cco(T, U, 'metadata')}                | ${'override default strategy'}
     `('calcCacheSettings $comment - $config $options $root', async ({ config, options, root, expected }) => {
         if (!options.version) {
             options.version = version;

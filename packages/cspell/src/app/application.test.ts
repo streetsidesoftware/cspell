@@ -239,15 +239,15 @@ describe('Linter File Caching', () => {
 
     const NoCache: LinterOptions = { cache: false };
     const Config: LinterOptions = { cacheFormat: 'legacy' };
-    const WithCache: LinterOptions = { cache: true, cacheStrategy: 'metadata', cacheFormat: 'legacy' };
+    const WithCache: LinterOptions = { cache: true, cacheStrategy: 'content', cacheFormat: 'legacy' };
     // const WithCacheUniversal: LinterOptions = { cache: true, cacheStrategy: 'metadata' };
     const WithCacheReset: LinterOptions = {
         cache: true,
-        cacheStrategy: 'metadata',
+        cacheStrategy: 'content',
         cacheReset: true,
         cacheFormat: 'legacy',
     };
-    const CacheContent: LinterOptions = { cache: true, cacheStrategy: 'content', cacheFormat: 'legacy' };
+    const CacheMetadata: LinterOptions = { cache: true, cacheStrategy: 'metadata', cacheFormat: 'legacy' };
 
     test.each`
         runs                                                                                                                           | root            | comment
@@ -257,7 +257,7 @@ describe('Linter File Caching', () => {
         ${[run(['*.md'], WithCache, fc(1, 0)), run(['*.md'], WithCache, fc(1, 1)), run(['*.md'], WithCache, fc(1, 1))]}                | ${fr('cached')} | ${'Single .md file cached three runs'}
         ${[run(['*.md'], WithCache, fc(1, 0)), run(['*.{md,ts}'], WithCache, fc(2, 1)), run(['*.{md,ts}'], WithCache, fc(2, 2))]}      | ${fr('cached')} | ${'cached changing glob three runs'}
         ${[run(['*.md'], WithCache, fc(1, 0)), run(['*.{md,ts}'], WithCache, fc(2, 1)), run(['*.{md,ts}'], WithCacheReset, fc(2, 0))]} | ${fr('cached')} | ${'cached changing glob three runs'}
-        ${[run(['*.md'], WithCache, fc(1, 0)), run(['*.{md,ts}'], WithCache, fc(2, 1)), run(['*.{md,ts}'], CacheContent, fc(2, 0))]}   | ${fr('cached')} | ${'with cache rebuild'}
+        ${[run(['*.md'], WithCache, fc(1, 0)), run(['*.{md,ts}'], WithCache, fc(2, 1)), run(['*.{md,ts}'], CacheMetadata, fc(2, 0))]}   | ${fr('cached')} | ${'with cache rebuild'}
         ${[run(['*.md'], WithCache, fc(1, 0)), run(['*.{md,ts}'], WithCacheReset, fc(2, 0)), run(['*.{md,ts}'], WithCache, fc(2, 2))]} | ${fr('cached')} | ${'cached changing glob three runs'}
     `('lint caching with $root $comment', async ({ runs, root }: TestCase) => {
         const reporter = new InMemoryReporter();

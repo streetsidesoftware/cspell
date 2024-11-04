@@ -25,9 +25,9 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
   mod
 ));
 
-// ../../node_modules/.pnpm/commander@12.1.0/node_modules/commander/lib/error.js
+// ../../node_modules/commander/lib/error.js
 var require_error = __commonJS({
-  "../../node_modules/.pnpm/commander@12.1.0/node_modules/commander/lib/error.js"(exports2) {
+  "../../node_modules/commander/lib/error.js"(exports2) {
     var CommanderError2 = class extends Error {
       /**
        * Constructs the CommanderError class
@@ -60,9 +60,9 @@ var require_error = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/commander@12.1.0/node_modules/commander/lib/argument.js
+// ../../node_modules/commander/lib/argument.js
 var require_argument = __commonJS({
-  "../../node_modules/.pnpm/commander@12.1.0/node_modules/commander/lib/argument.js"(exports2) {
+  "../../node_modules/commander/lib/argument.js"(exports2) {
     var { InvalidArgumentError: InvalidArgumentError2 } = require_error();
     var Argument2 = class {
       /**
@@ -187,9 +187,9 @@ var require_argument = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/commander@12.1.0/node_modules/commander/lib/help.js
+// ../../node_modules/commander/lib/help.js
 var require_help = __commonJS({
-  "../../node_modules/.pnpm/commander@12.1.0/node_modules/commander/lib/help.js"(exports2) {
+  "../../node_modules/commander/lib/help.js"(exports2) {
     var { humanReadableArgName } = require_argument();
     var Help2 = class {
       constructor() {
@@ -601,9 +601,9 @@ var require_help = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/commander@12.1.0/node_modules/commander/lib/option.js
+// ../../node_modules/commander/lib/option.js
 var require_option = __commonJS({
-  "../../node_modules/.pnpm/commander@12.1.0/node_modules/commander/lib/option.js"(exports2) {
+  "../../node_modules/commander/lib/option.js"(exports2) {
     var { InvalidArgumentError: InvalidArgumentError2 } = require_error();
     var Option2 = class {
       /**
@@ -873,9 +873,9 @@ var require_option = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/commander@12.1.0/node_modules/commander/lib/suggestSimilar.js
+// ../../node_modules/commander/lib/suggestSimilar.js
 var require_suggestSimilar = __commonJS({
-  "../../node_modules/.pnpm/commander@12.1.0/node_modules/commander/lib/suggestSimilar.js"(exports2) {
+  "../../node_modules/commander/lib/suggestSimilar.js"(exports2) {
     var maxDistance = 3;
     function editDistance(a, b) {
       if (Math.abs(a.length - b.length) > maxDistance)
@@ -953,9 +953,9 @@ var require_suggestSimilar = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/commander@12.1.0/node_modules/commander/lib/command.js
+// ../../node_modules/commander/lib/command.js
 var require_command = __commonJS({
-  "../../node_modules/.pnpm/commander@12.1.0/node_modules/commander/lib/command.js"(exports2) {
+  "../../node_modules/commander/lib/command.js"(exports2) {
     var EventEmitter = require("node:events").EventEmitter;
     var childProcess = require("node:child_process");
     var path = require("node:path");
@@ -2996,9 +2996,9 @@ Expecting one of '${allowedValues.join("', '")}'`);
   }
 });
 
-// ../../node_modules/.pnpm/commander@12.1.0/node_modules/commander/index.js
+// ../../node_modules/commander/index.js
 var require_commander = __commonJS({
-  "../../node_modules/.pnpm/commander@12.1.0/node_modules/commander/index.js"(exports2) {
+  "../../node_modules/commander/index.js"(exports2) {
     var { Argument: Argument2 } = require_argument();
     var { Command: Command2 } = require_command();
     var { CommanderError: CommanderError2, InvalidArgumentError: InvalidArgumentError2 } = require_error();
@@ -3018,7 +3018,7 @@ var require_commander = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/commander@12.1.0/node_modules/commander/esm.mjs
+// ../../node_modules/commander/esm.mjs
 var import_index = __toESM(require_commander(), 1);
 var {
   program,
@@ -3038,7 +3038,7 @@ var {
 // src/perfChart.ts
 var import_node_fs = require("node:fs");
 
-// ../../node_modules/.pnpm/csv-parse@5.5.6/node_modules/csv-parse/lib/api/CsvError.js
+// ../../node_modules/csv-parse/lib/api/CsvError.js
 var CsvError = class _CsvError extends Error {
   constructor(code, message, options, ...contexts) {
     if (Array.isArray(message)) message = message.join(" ").trim();
@@ -3056,12 +3056,12 @@ var CsvError = class _CsvError extends Error {
   }
 };
 
-// ../../node_modules/.pnpm/csv-parse@5.5.6/node_modules/csv-parse/lib/utils/is_object.js
+// ../../node_modules/csv-parse/lib/utils/is_object.js
 var is_object = function(obj) {
   return typeof obj === "object" && obj !== null && !Array.isArray(obj);
 };
 
-// ../../node_modules/.pnpm/csv-parse@5.5.6/node_modules/csv-parse/lib/api/normalize_columns_array.js
+// ../../node_modules/csv-parse/lib/api/normalize_columns_array.js
 var normalize_columns_array = function(columns) {
   const normalizedColumns = [];
   for (let i = 0, l = columns.length; i < l; i++) {
@@ -3090,7 +3090,7 @@ var normalize_columns_array = function(columns) {
   return normalizedColumns;
 };
 
-// ../../node_modules/.pnpm/csv-parse@5.5.6/node_modules/csv-parse/lib/utils/ResizeableBuffer.js
+// ../../node_modules/csv-parse/lib/utils/ResizeableBuffer.js
 var ResizeableBuffer = class {
   constructor(size = 100) {
     this.size = size;
@@ -3154,7 +3154,7 @@ var ResizeableBuffer = class {
 };
 var ResizeableBuffer_default = ResizeableBuffer;
 
-// ../../node_modules/.pnpm/csv-parse@5.5.6/node_modules/csv-parse/lib/api/init_state.js
+// ../../node_modules/csv-parse/lib/api/init_state.js
 var np = 12;
 var cr = 13;
 var nl = 10;
@@ -3203,14 +3203,14 @@ var init_state = function(options) {
   };
 };
 
-// ../../node_modules/.pnpm/csv-parse@5.5.6/node_modules/csv-parse/lib/utils/underscore.js
+// ../../node_modules/csv-parse/lib/utils/underscore.js
 var underscore = function(str) {
   return str.replace(/([A-Z])/g, function(_, match) {
     return "_" + match.toLowerCase();
   });
 };
 
-// ../../node_modules/.pnpm/csv-parse@5.5.6/node_modules/csv-parse/lib/api/normalize_options.js
+// ../../node_modules/csv-parse/lib/api/normalize_options.js
 var normalize_options = function(opts) {
   const options = {};
   for (const opt in opts) {
@@ -3610,7 +3610,7 @@ var normalize_options = function(opts) {
   return options;
 };
 
-// ../../node_modules/.pnpm/csv-parse@5.5.6/node_modules/csv-parse/lib/api/index.js
+// ../../node_modules/csv-parse/lib/api/index.js
 var isRecordEmpty = function(record) {
   return record.every((field) => field == null || field.toString && field.toString().trim() === "");
 };
@@ -4283,7 +4283,7 @@ var transform = function(original_options = {}) {
   };
 };
 
-// ../../node_modules/.pnpm/csv-parse@5.5.6/node_modules/csv-parse/lib/sync.js
+// ../../node_modules/csv-parse/lib/sync.js
 var parse = function(data, opts = {}) {
   if (typeof data === "string") {
     data = Buffer.from(data);
@@ -4306,7 +4306,7 @@ var parse = function(data, opts = {}) {
   return records;
 };
 
-// ../../node_modules/.pnpm/thistogram@1.1.1/node_modules/thistogram/dist/drawingCharacters.js
+// ../../node_modules/thistogram/dist/drawingCharacters.js
 var BoxSymbol;
 (function(BoxSymbol2) {
   BoxSymbol2[BoxSymbol2["topLeft"] = 0] = "topLeft";
@@ -4324,7 +4324,7 @@ var BoxSymbol;
 var boxSymbols = ["\u250F", "\u2513", "\u251B", "\u2517", "\u2503", "\u2501", "\u2523", "\u252B", "\u253B", "\u2533", "\u254B"];
 var histoCharsBottomToTop = ["\u2581", "\u2582", "\u2583", "\u2584", "\u2585", "\u2586", "\u2587", "\u2588"];
 
-// ../../node_modules/.pnpm/thistogram@1.1.1/node_modules/thistogram/dist/bars.js
+// ../../node_modules/thistogram/dist/bars.js
 function simpleHistogram(data, min, max, barChars = histoCharsBottomToTop) {
   const [minVal, maxVal] = minMaxRange(data, min, max);
   const range = maxVal - minVal || 1;
@@ -4369,7 +4369,7 @@ function minMaxRange(values, min, max) {
   return r;
 }
 
-// ../../node_modules/.pnpm/thistogram@1.1.1/node_modules/thistogram/dist/histogram.js
+// ../../node_modules/thistogram/dist/histogram.js
 var valueMinMaxSymbols = [
   "\u25CF",
   boxSymbols[BoxSymbol.leftT],
@@ -4377,7 +4377,7 @@ var valueMinMaxSymbols = [
   boxSymbols[BoxSymbol.rightT]
 ];
 
-// ../../node_modules/.pnpm/thistogram@1.1.1/node_modules/thistogram/dist/stats.js
+// ../../node_modules/thistogram/dist/stats.js
 function calcStandardDeviation(values) {
   const variance = calcVariance(values);
   return Math.sqrt(variance);
