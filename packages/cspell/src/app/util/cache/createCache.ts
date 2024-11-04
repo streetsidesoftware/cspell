@@ -53,7 +53,7 @@ export async function calcCacheSettings(
         path.resolve(root, cacheOptions.cacheLocation ?? cs.cacheLocation ?? DEFAULT_CACHE_LOCATION),
     );
 
-    const cacheStrategy = cacheOptions.cacheStrategy ?? cs.cacheStrategy ?? 'metadata';
+    const cacheStrategy = cacheOptions.cacheStrategy ?? cs.cacheStrategy ?? 'content';
     const cacheFormat = cacheOptions.cacheFormat ?? cs.cacheFormat ?? 'universal';
     const optionals: Partial<CreateCacheSettings> = {};
     if (cacheOptions.cacheReset) {

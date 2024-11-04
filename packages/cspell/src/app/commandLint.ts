@@ -135,10 +135,9 @@ export function commandLint(prog: Command): Command {
         .option('--no-cache', 'Do not use cache.')
         .option('--cache-reset', 'Reset the cache file.')
         .addOption(
-            crOpt('--cache-strategy <strategy>', 'Strategy to use for detecting changed files.').choices([
-                'metadata',
-                'content',
-            ]),
+            crOpt('--cache-strategy <strategy>', 'Strategy to use for detecting changed files.')
+                .choices(['content', 'metadata'])
+                .default('content'),
         )
         .option(
             '--cache-location <path>',
