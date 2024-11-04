@@ -3,9 +3,9 @@ Repository: eslint/eslint
 Url: https://github.com/eslint/eslint
 Args: '[".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]'
 Summary:
-  files: 2017
+  files: 2024
   filesWithIssues: 324
-  issues: 1720
+  issues: 1721
   errors: 0
 Errors: []
 
@@ -211,7 +211,7 @@ issues:
   - "lib/rules/dot-notation.js:138:63        quasis      U       node, node.property.quasis[0].value.cooked);"
   - "lib/rules/for-direction.js:73:65        nochange    U       if sub return -1, if nochange, return 0"
   - "lib/rules/func-name-matching.js:13:7        esutils     U       const esutils = require(\"esutils\""
-  - "lib/rules/id-match.js:240:45        righthand       U       // prevent checking righthand side of destructured"
+  - "lib/rules/id-match.js:246:45        righthand       U       // prevent checking righthand side of destructured"
   - "lib/rules/indent-legacy.js:4:48         nodeca      U       ported and modified from nodeca."
   - "lib/rules/lines-around-comment.js:23:22         Nums    U       function getEmptyLineNums(lines) {"
   - "lib/rules/logical-assignment-operators.js:115:4         falsiness       U       * falsiness checks: !value, !Boolean"
@@ -274,7 +274,8 @@ issues:
   - "README.md:281:1         Strek               U       Strek"
   - "README.md:290:5         teamend             U       <!--teamend-->"
   - "README.md:293:5         sponsorsstart       U       <!--sponsorsstart-->"
-  - "README.md:302:564       Workleap            U       f99fe2465f&v=4\" alt=\"Workleap\" height=\"64\"></a></p"
+  - "README.md:302:124       SERP                U       fea3074/logo.png\" alt=\"SERP Triumph\" height=\"64"
+  - "README.md:302:715       Workleap            U       f99fe2465f&v=4\" alt=\"Workleap\" height=\"64\"></a></p"
   - "README.md:307:5         sponsorsend         U       <!--sponsorsend-->"
   - "templates/blogpost.md.ejs:18:10         linkify     U       function linkify(line) {"
   - "tests/fixtures/code-path-analysis/try--try-finally-4.js:43:156      Expressio       U       Expression\\nIdentifier (bar)\\nExpressio"
@@ -352,7 +353,7 @@ issues:
   - "tests/lib/rules/id-blacklist.js:141:51      myarray         U       \"date\", \"mydate\", \"myarray\", \"new\", \"var\"]"
   - "tests/lib/rules/id-blacklist.js:196:47      writability     U       myGlobal } = foo);\", // writability doesn't affect the logic"
   - "tests/lib/rules/id-length.js:50:22          lalala          U       { code: \"var lalala = Foo(42)\", options"
-  - "tests/lib/rules/id-length.js:655:29         NOTMATCHED      U       code: \"function NOTMATCHED_send() {};\","
+  - "tests/lib/rules/id-length.js:699:29         NOTMATCHED      U       code: \"function NOTMATCHED_send() {};\","
   - "tests/lib/rules/id-match.js:25:30       Matthieu        U       code: \"__foo = \\\"Matthieu\\\"\","
   - "tests/lib/rules/id-match.js:34:20       firstname       U       code: \"firstname = \\\"Matthieu\\\"\","
   - "tests/lib/rules/id-match.js:46:34       Larcher         U       code: \"last_Name = \\\"Larcher\\\"\","
@@ -987,6 +988,7 @@ issuesSummary:
   - "text: scripturl, count: 4, files: 2,"
   - "text: sdfdsf, count: 2, files: 1,"
   - "text: Segs, count: 4, files: 1,"
+  - "text: SERP, count: 1, files: 1,"
   - "text: serviceworker, count: 1, files: 1,"
   - "text: setupindex, count: 4, files: 1,"
   - "text: shtylman, count: 1, files: 1,"

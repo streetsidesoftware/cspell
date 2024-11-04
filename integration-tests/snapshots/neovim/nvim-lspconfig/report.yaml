@@ -5,7 +5,7 @@ Args: '["**"]'
 Summary:
   files: 366
   filesWithIssues: 356
-  issues: 4449
+  issues: 4450
   errors: 0
 Errors: []
 
@@ -526,7 +526,7 @@ issues:
   - "lua/lspconfig/health.lua:55:21          jobwait             U       local rv = vim.fn.jobwait({ chanid }, 300)"
   - "lua/lspconfig/health.lua:56:10          jobstop             U       vim.fn.jobstop(chanid)"
   - "lua/lspconfig/health.lua:87:16          fmtpath             U       local function fmtpath(p)"
-  - "lua/lspconfig/health.lua:88:10          startswith          U       if vim.startswith(p, 'Running') then"
+  - "lua/lspconfig/health.lua:88:10          startswith          U       if vim.startswith(p, 'Running') or vim"
   - "lua/lspconfig/health.lua:91:9           isdir               U       local isdir = 0 ~= vim.fn.isdirectory"
   - "lua/lspconfig/health.lua:179:39         helptag             U       vim.tbl_map(function(helptag)"
   - "lua/lspconfig/health.lua:194:34         realpath            U       vim.fs.normalize(uv.fs_realpath(fname) or fn.fnamemodify"
@@ -535,7 +535,7 @@ issues:
   - "lua/lspconfig/health.lua:289:11         justimk             U       -- TODO(justimk): enhance :checkhealth"
   - "lua/lspconfig/health.lua:289:30         checkhealth's       U       TODO(justimk): enhance :checkhealth's highlighting instead"
   - "lua/lspconfig/health.lua:298:22         lspdocs             U       local function check_lspdocs(buf_clients, other_matching"
-  - "lua/lspconfig/health.lua:329:13         nnoremap            U       vim.cmd [[nnoremap <buffer> q <c-w>q]]"
+  - "lua/lspconfig/health.lua:328:13         nnoremap            U       vim.cmd [[nnoremap <buffer> q <c-w>q]]"
   - "lua/lspconfig/manager.lua:247:20        buftype     U       if vim.bo[bufnr].buftype == 'nofile' then"
   - "lua/lspconfig/manager.lua:247:32        nofile      U       bo[bufnr].buftype == 'nofile' then"
   - "lua/lspconfig/util.lua:7:7          iswin           U       local iswin = uv.os_uname().version"
