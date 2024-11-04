@@ -17,7 +17,7 @@ runs:
       with:
         registry-url: 'https://registry.npmjs.org'
         node-version: ${{ inputs.node-version }}
-        # cache: 'pnpm'
+        cache: 'pnpm'
 
     - name: Install
       run: pnpm i
