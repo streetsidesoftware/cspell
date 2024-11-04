@@ -337,6 +337,7 @@ export interface PnPSettings {
  * The Strategy to use to detect if a file has changed.
  * - `content` - uses a hash of the file content to check file changes (slower - more accurate).
  * - `metadata` - uses the file system timestamp and size to detect changes (fastest, may not work in CI).
+ * @default 'content'
  */
 export type CacheStrategy = 'content' | 'metadata';
 
