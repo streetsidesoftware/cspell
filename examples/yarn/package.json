@@ -8,9 +8,9 @@
     "setup-yarn": "pnpm setup-yarn:cspell-eslint-plugin",
     "setup-yarn:cspell-eslint-plugin": "cd cspell-eslint-plugin && corepack yarn install",
     "test": "pnpm test:cspell-eslint-plugin",
-    "test:cspell-eslint-plugin": "cd cspell-eslint-plugin && yarn test",
+    "test:cspell-eslint-plugin": "cd cspell-eslint-plugin && corepack yarn test",
     "update-yarn": "pnpm update:cspell-eslint-plugin",
-    "update:cspell-eslint-plugin": "cd cspell-eslint-plugin && corepack use yarn@stable && yarn update:dep"
+    "update:cspell-eslint-plugin": "cd cspell-eslint-plugin && corepack use yarn@stable && corepack yarn update:dep"
   },
   "keywords": [],
   "author": "",
