@@ -90,7 +90,7 @@ describe('validate normalizeVersion', () => {
 function cco(
     useCache = false,
     cacheLocation = '.cspellcache',
-    cacheStrategy: CreateCacheSettings['cacheStrategy'] = 'metadata',
+    cacheStrategy: CreateCacheSettings['cacheStrategy'] = 'content',
     cacheFormat: CreateCacheSettings['cacheFormat'] = 'universal',
 ): CreateCacheSettings {
     if (cacheLocation) {
