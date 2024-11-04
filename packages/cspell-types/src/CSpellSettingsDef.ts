@@ -370,7 +370,7 @@ export interface CacheSettings {
      * Format of the cache file.
      * - `legacy` - use absolute paths in the cache file
      * - `universal` - use a sharable format.
-     * @default 'legacy'
+     * @default 'universal'
      */
     cacheFormat?: CacheFormat | undefined;
 }
