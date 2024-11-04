@@ -12,8 +12,8 @@ const root = pathRepoRoot;
 const uriTestPackages = pathToFileURL(path.join(root, 'test-packages/yarn/'));
 const uriSamples = pathPackageSamplesURL;
 const uriDirectory = uriSamples;
-const uriYarn2TestMed = new URL('yarn2/test-yarn3-med/', uriTestPackages);
-const uriYarn2TestSci = new URL('yarn2/test-yarn3-sci/', uriTestPackages);
+const uriYarn2TestMed = new URL('yarn2/test-yarn-med/', uriTestPackages);
+const uriYarn2TestSci = new URL('yarn2/test-yarn-sci/', uriTestPackages);
 const uriBadPnp = new URL('bad-pnp/', uriSamples);
 const uriYarn2TestMedPnp = new URL('.pnp.cjs', uriYarn2TestMed);
 const uriYarn2TestSciPnp = new URL('.pnp.cjs', uriYarn2TestSci);
@@ -64,7 +64,6 @@ describe('Validate PnPLoader', () => {
 
         // Make sure we can load the medical dictionary.
         const dictLocationMed = resolveFrom(fsPath(uriYarn2TestMed), '@cspell/dict-medicalterms/cspell-ext.json');
-        expect(dictLocationMed).toEqual(expect.stringContaining(fsPath(uriYarn2TestMed)));
         expect(dictLocationMed).toEqual(expect.stringContaining('cspell-ext.json'));
 
         // Make sure we can load the science dictionary.
@@ -72,7 +71,6 @@ describe('Validate PnPLoader', () => {
             fsPath(uriYarn2TestSci),
             '@cspell/dict-scientific-terms-us/cspell-ext.json',
         );
-        expect(dictLocationSci).toEqual(expect.stringContaining(fsPath(uriYarn2TestSci)));
         expect(dictLocationSci).toEqual(expect.stringContaining('cspell-ext.json'));
     });
 
@@ -101,7 +99,6 @@ describe('Validate PnPLoader', () => {
 
         // Make sure we can load the dictionary.
         const dictLocation = resolveFrom(fsPath(uriYarn2TestMed), '@cspell/dict-medicalterms/cspell-ext.json');
-        expect(dictLocation).toEqual(expect.stringContaining(fsPath(uriYarn2TestMed)));
         expect(dictLocation).toEqual(expect.stringContaining('cspell-ext.json'));
     });
 

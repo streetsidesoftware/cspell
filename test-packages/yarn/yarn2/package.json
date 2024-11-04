@@ -5,14 +5,20 @@
   "description": "Tests for dictionaries included by a Yarn 2 repository",
   "main": "index.js",
   "scripts": {
-    "prepare-cspell-action": "pnpm run prepare-yarn3",
-    "prepare-yarn3": "pnpm run prepare-yarn3-med && pnpm run prepare-yarn3-sci",
-    "prepare-yarn3-med": "cd test-yarn3-med && corepack yarn",
-    "prepare-yarn3-sci": "cd test-yarn3-sci && corepack yarn",
-    "test": "pnpm run test-yarn3 ",
-    "test-yarn3": "pnpm run test-yarn3-med && pnpm run test-yarn3-sci",
-    "test-yarn3-med": "cd test-yarn3-med && corepack yarn && corepack yarn test",
-    "test-yarn3-sci": "cd test-yarn3-sci && corepack yarn && corepack yarn test"
+    "preinstall": "corepack enable && pnpm setup-yarn",
+    "setup-yarn": "pnpm run setup-yarn-med && pnpm run setup-yarn-sci && pnpm run setup-eslint-plugin",
+    "setup-eslint-plugin": "cd test-eslint-plugin && corepack yarn",
+    "setup-yarn-med": "cd test-yarn-med && corepack yarn",
+    "setup-yarn-sci": "cd test-yarn-sci && corepack yarn",
+    "test": "pnpm run test-yarn ",
+    "test-yarn": "pnpm run test-yarn-med && pnpm run test-yarn-sci && pnpm run test-eslint-plugin",
+    "test-eslint-plugin": "cd test-eslint-plugin && corepack yarn test",
+    "test-yarn-med": "cd test-yarn-med && corepack yarn test",
+    "test-yarn-sci": "cd test-yarn-sci && corepack yarn test",
+    "update:eslint-plugin": "cd test-eslint-plugin && corepack use yarn@stable && corepack yarn update:dep",
+    "update:yarn-med": "cd test-yarn-med && corepack use yarn@stable && corepack yarn update:dep",
+    "update:yarn-sci": "cd test-yarn-sci && corepack use yarn@stable && corepack yarn update:dep",
+    "update-yarn": "pnpm update:eslint-plugin && pnpm update:yarn-med && pnpm update:yarn-sci"
   },
   "author": "",
   "license": "MIT"

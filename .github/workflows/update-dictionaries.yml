@@ -51,8 +51,8 @@ jobs:
         with:
           ref: ${{ env.REF_BRANCH }}
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4.0.0
+      - name: Enable Corepack
+        run: corepack enable
 
       - name: Use Node.js
         uses: actions/setup-node@v4
@@ -154,8 +154,8 @@ jobs:
         with:
           ref: ${{ env.REF_BRANCH }}
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4.0.0
+      - name: Enable Corepack
+        run: corepack enable
 
       - name: Patch
         run: |
@@ -254,8 +254,8 @@ jobs:
         with:
           ref: ${{ env.REF_BRANCH }}
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4.0.0
+      - name: Enable Corepack
+        run: corepack enable
 
       - name: Patch
         run: |
@@ -313,8 +313,8 @@ jobs:
         with:
           ref: ${{ env.REF_BRANCH }}
 
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4.0.0
+      - name: Enable Corepack
+        run: corepack enable
 
       - name: Use Node.js ${{ env.NODE_VERSION }}
         uses: actions/setup-node@v4
