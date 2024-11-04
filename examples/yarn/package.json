@@ -6,7 +6,7 @@
   "scripts": {
     "preinstall": "pnpm setup-yarn",
     "setup-yarn": "pnpm setup-yarn:cspell-eslint-plugin",
-    "setup-yarn:cspell-eslint-plugin": "cd cspell-eslint-plugin && yarn",
+    "setup-yarn:cspell-eslint-plugin": "cd cspell-eslint-plugin && corepack yarn install",
     "test": "pnpm test:cspell-eslint-plugin",
     "test:cspell-eslint-plugin": "cd cspell-eslint-plugin && yarn test",
     "update-yarn": "pnpm update:cspell-eslint-plugin",
