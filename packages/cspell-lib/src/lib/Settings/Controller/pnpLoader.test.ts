@@ -64,16 +64,14 @@ describe('Validate PnPLoader', () => {
 
         // Make sure we can load the medical dictionary.
         const dictLocationMed = resolveFrom(fsPath(uriYarn2TestMed), '@cspell/dict-medicalterms/cspell-ext.json');
-        expect(dictLocationMed).toEqual(expect.stringContaining(fsPath(uriYarn2TestMed)));
-        expect(dictLocationMed).toEqual(expect.stringContaining('cspell-ext.json'));
+        expect(dictLocationMed).toEqual(expect.stringContaining('dict-medicalterms/cspell-ext.json'));
 
         // Make sure we can load the science dictionary.
         const dictLocationSci = resolveFrom(
             fsPath(uriYarn2TestSci),
             '@cspell/dict-scientific-terms-us/cspell-ext.json',
         );
-        expect(dictLocationSci).toEqual(expect.stringContaining(fsPath(uriYarn2TestSci)));
-        expect(dictLocationSci).toEqual(expect.stringContaining('cspell-ext.json'));
+        expect(dictLocationSci).toEqual(expect.stringContaining('dict-scientific-terms-us/cspell-ext.json'));
     });
 
     test('pnpLoader clear cache', async () => {
@@ -101,8 +99,7 @@ describe('Validate PnPLoader', () => {
 
         // Make sure we can load the dictionary.
         const dictLocation = resolveFrom(fsPath(uriYarn2TestMed), '@cspell/dict-medicalterms/cspell-ext.json');
-        expect(dictLocation).toEqual(expect.stringContaining(fsPath(uriYarn2TestMed)));
-        expect(dictLocation).toEqual(expect.stringContaining('cspell-ext.json'));
+        expect(dictLocation).toEqual(expect.stringContaining('dict-medicalterms/cspell-ext.json'));
     });
 
     test('pnpLoader multiple clear cache', async () => {
