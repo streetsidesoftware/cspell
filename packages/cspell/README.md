@@ -170,7 +170,8 @@ Options:
   --no-cache                   Do not use cache.
   --cache-reset                Reset the cache file.
   --cache-strategy <strategy>  Strategy to use for detecting changed files.
-                               (choices: "metadata", "content")
+                               (choices: "content", "metadata", default:
+                               "content")
   --cache-location <path>      Path to the cache file or directory. (default:
                                ".cspellcache")
   --dot                        Include files and directories starting with `.`
