@@ -3,7 +3,7 @@ Repository: wireapp/wire-webapp
 Url: "https://github.com/wireapp/wire-webapp.git"
 Args: ["src/script/**/*.{js,ts,tsx,md}"]
 Lines:
- CSpell: Files checked: 1234, Issues found: 2742 in 640 files.
+ CSpell: Files checked: 1276, Issues found: 2744 in 647 files.
  exit code: 1
 src/script/Config.ts:20:25     - Unknown word (wireapp)    -- import {Runtime} from '@wireapp/commons';
 src/script/Config.ts:83:31     - Unknown word (acces)      -- DataDog client api keys acces */
@@ -631,6 +631,15 @@ src/script/components/Avatar/UserAvatar/UserAvatar.test.tsx:22:30     - Unknown 
 src/script/components/Avatar/UserAvatar/UserAvatar.tsx:22:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 src/script/components/Avatar/UserAvatar/UserAvatar.tsx:24:50     - Unknown word (wireapp)    -- AvailabilityType} from '@wireapp/protocol-messaging'
 src/script/components/Avatar/UserAvatar/UserAvatar.tsx:25:23     - Unknown word (wireapp)    -- import {COLOR} from '@wireapp/react-ui-kit';
+src/script/components/Badge/components/UserBlockedBadge/UserBlockedBadge.styles.ts:27:30     - Unknown word (xsmall)     -- fontSize: 'var(--font-size-xsmall)',
+src/script/components/Badge/components/UserStatusBadges/UserStatusBadges.tsx:22:25     - Unknown word (wireapp)    -- import {Tooltip} from '@wireapp/react-ui-kit';
+src/script/components/Badge/components/VerificationBadges/VerificationBadges.tsx:215:69    - Unknown word (Identifer)  -- rificationBadgeContext, StringIdentifer> = {
+src/script/components/Badge/components/VerificationBadges/VerificationBadges.tsx:23:38     - Unknown word (wireapp)    -- ConversationProtocol} from '@wireapp/api-client/lib/conversation
+src/script/components/Badge/components/VerificationBadges/VerificationBadges.tsx:24:38     - Unknown word (wireapp)    -- stringifyQualifiedId} from '@wireapp/core/lib/util/qualifiedIdUtil
+src/script/components/Badge/components/VerificationBadges/VerificationBadges.tsx:25:26     - Unknown word (wireapp)    -- import {TabIndex} from '@wireapp/react-ui-kit/lib/types
+src/script/components/Badge/components/VerificationBadges/VerificationBadges.tsx:26:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
+src/script/components/Badge/components/VerificationBadges/VerificationBadges.tsx:35:10     - Unknown word (wireapp)    -- } from '@wireapp/react-ui-kit';
+src/script/components/Badge/components/VerificationBadges/VerificationBadges.tsx:46:15     - Unknown word (Identifer)  -- import {StringIdentifer, t} from 'Util/LocalizerUtil
 src/script/components/ConfigToolbar/ConfigToolbar.tsx:22:25     - Unknown word (keyboardjs) -- import keyboardjs from 'keyboardjs';
 src/script/components/ConfigToolbar/ConfigToolbar.tsx:22:8      - Unknown word (keyboardjs) -- import keyboardjs from 'keyboardjs';
 src/script/components/ConfigToolbar/ConfigToolbar.tsx:23:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
@@ -653,14 +662,11 @@ src/script/components/Conversation/ReadOnlyConversationMessage/ReadOnlyConversat
 src/script/components/Conversation/ReadOnlyConversationMessage/ReadOnlyConversationMessage.test.tsx:22:35     - Unknown word (wireapp)    -- CONVERSATION_TYPE} from '@wireapp/api-client/lib/conversation
 src/script/components/Conversation/ReadOnlyConversationMessage/ReadOnlyConversationMessage.tsx:24:35     - Unknown word (wireapp)    -- LinkVariant} from '@wireapp/react-ui-kit';
 src/script/components/Conversation/utils/checkFileSharingPermission.ts:20:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
-src/script/components/CopyToClipboardButton.tsx:22:39     - Unknown word (wireapp)    -- ButtonVariant} from '@wireapp/react-ui-kit';
-src/script/components/DetachedWindow/DetachedWindow.tsx:24:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
-src/script/components/DetachedWindow/DetachedWindow.tsx:26:37     - Unknown word (wireapp)    -- StyledApp, THEME_ID} from '@wireapp/react-ui-kit';
-src/script/components/DragableClickWrapper.tsx:22:25     - Unknown word (wireapp)    -- import {Runtime} from '@wireapp/commons';
-src/script/components/DragableClickWrapper.tsx:24:11     - Unknown word (Dragable)   -- interface DragableClickWrapperProps {
-src/script/components/DragableClickWrapper.tsx:29:38     - Unknown word (Dragable)   -- ragableClickWrapper: React.FC<DragableClickWrapperProps> =
-src/script/components/DragableClickWrapper.tsx:29:7      - Unknown word (Dragable)   -- const DragableClickWrapper: React.FC
-src/script/components/DragableClickWrapper.tsx:65:9      - Unknown word (Dragable)   -- export {DragableClickWrapper};
+src/script/components/ConversationListCell/ConversationListCell.tsx:177:61    - Unknown word (UNFOCUSABLE) -- FOCUSABLE : TabIndex.UNFOCUSABLE}
+src/script/components/ConversationListCell/ConversationListCell.tsx:226:83    - Unknown word (UNFOCUSABLE) -- FOCUSABLE : TabIndex.UNFOCUSABLE}
+src/script/components/ConversationListCell/ConversationListCell.tsx:29:26     - Unknown word (wireapp)    -- import {TabIndex} from '@wireapp/react-ui-kit/lib/types
+src/script/components/CopyToClipboardButton/CopyToClipboardButton.tsx:22:39     - Unknown word (wireapp)    -- ButtonVariant} from '@wireapp/react-ui-kit';
+src/script/components/DraggableClickWrapper/DraggableClickWrapper.tsx:22:25     - Unknown word (wireapp)    -- import {Runtime} from '@wireapp/commons';
 src/script/components/DropFileArea/DropFileArea.test.tsx:28:22     - Unknown word (chucknorris) -- const pngFileName = 'chucknorris.png';
 src/script/components/FadingScrollbar/FadingScrollbar.tsx:30:3      - Unknown word (fadein)     -- fadein: {step: config.ANIMATION
 src/script/components/FadingScrollbar/FadingScrollbar.tsx:35:64     - Unknown word (thiselementdoesnotexist) -- document.createElement('thiselementdoesnotexist'));
@@ -725,6 +731,11 @@ src/script/components/Image/Image.tsx:24:26     - Unknown word (tsyringe)   -- i
 src/script/components/Image/Image.tsx:72:11     - Unknown word (Unmouted)   -- const isUnmouted = useRef(false);
 src/script/components/Image/Image.tsx:89:17     - Unknown word (Unmouted)   -- if (isUnmouted.current) {
 src/script/components/Image/Image.tsx:90:55     - Unknown word (umounted)   -- a component that is umounted
+src/script/components/InViewport/InViewport.tsx:22:43     - Unknown word (overlayed)  -- layedObserver} from 'Util/DOM/overlayedObserver';
+src/script/components/InViewport/InViewport.tsx:22:9      - Unknown word (overlayed)  -- import {overlayedObserver} from 'Util
+src/script/components/InViewport/InViewport.tsx:31:36     - Unknown word (overlayed)  -- check if the element is overlayed by something else. Can
+src/script/components/InViewport/InViewport.tsx:61:9      - Unknown word (overlayed)  -- overlayedObserver.removeElement
+src/script/components/InViewport/InViewport.tsx:99:7      - Unknown word (overlayed)  -- overlayedObserver.trackElement
 src/script/components/InputBar/InputBar.test.tsx:81:9      - Unknown word (Giphy)      -- openGiphy: jest.fn(),
 src/script/components/InputBar/InputBar.tsx:107:7     - Unknown word (Giphy)      -- openGiphy,
 src/script/components/InputBar/InputBar.tsx:173:13    - Unknown word (Giphy)      -- const showGiphyButton = textValue.length
@@ -842,11 +853,11 @@ src/script/components/MessagesList/Message/ContentMessage/asset/TextMessageRende
 src/script/components/MessagesList/Message/ContentMessage/asset/TextMessageRenderer/TextMessageRenderer.test.tsx:41:54     - Unknown word (buttton)    -- message-mention" role="buttton" data-uie-name="label
 src/script/components/MessagesList/Message/ContentMessage/asset/TextMessageRenderer/TextMessageRenderer.tsx:144:11    - Unknown word (clickabled) -- //clickabled elements directly.
 src/script/components/MessagesList/Message/ContentMessage/asset/TextMessageRenderer/TextMessageRenderer.tsx:146:48    - Unknown word (noninteractive) -- next-line jsx-a11y/no-noninteractive-element-interactions
-src/script/components/MessagesList/Message/ContentMessage/asset/VideoAsset.tsx:216:34    - Unknown word (UNFOCUSABLE) -- tabIndex={TabIndex.UNFOCUSABLE}
+src/script/components/MessagesList/Message/ContentMessage/asset/VideoAsset.tsx:224:34    - Unknown word (UNFOCUSABLE) -- tabIndex={TabIndex.UNFOCUSABLE}
 src/script/components/MessagesList/Message/ContentMessage/asset/VideoAsset.tsx:22:26     - Unknown word (wireapp)    -- import {TabIndex} from '@wireapp/react-ui-kit/lib/types
-src/script/components/MessagesList/Message/ContentMessage/asset/VideoAsset.tsx:252:69    - Unknown word (seekbar)     -- asset__controls__bottom__seekbar"
-src/script/components/MessagesList/Message/ContentMessage/asset/VideoAsset.tsx:253:55    - Unknown word (seekbar)     -- uie-name="status-video-seekbar"
 src/script/components/MessagesList/Message/ContentMessage/asset/VideoAsset.tsx:25:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
+src/script/components/MessagesList/Message/ContentMessage/asset/VideoAsset.tsx:260:69    - Unknown word (seekbar)     -- asset__controls__bottom__seekbar"
+src/script/components/MessagesList/Message/ContentMessage/asset/VideoAsset.tsx:261:55    - Unknown word (seekbar)     -- uie-name="status-video-seekbar"
 src/script/components/MessagesList/Message/ContentMessage/asset/VideoAsset.tsx:27:51     - Unknown word (wireapp)    -- useTimeout} from '@wireapp/react-ui-kit';
 src/script/components/MessagesList/Message/ContentMessage/asset/VideoAsset.tsx:28:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
 src/script/components/MessagesList/Message/ContentMessage/asset/VideoAsset.tsx:93:67     - Unknown word (synchorous) -- check codecs), but it's synchorous, which is helpful for
@@ -940,9 +951,6 @@ src/script/components/MessagesList/utils/messagesGroup.ts:79:29     - Unknown wo
 src/script/components/MessagesList/utils/messagesGroup.ts:90:49     - Unknown word (MILLIS)     -- INTERVAL = 30 * TIME_IN_MILLIS.SECOND;
 src/script/components/MessagesList/utils/messagesGroup.ts:92:77     - Unknown word (MILLIS)     -- entMessageTimestamp / TIME_IN_MILLIS.SECOND);
 src/script/components/MessagesList/utils/messagesGroup.ts:93:73     - Unknown word (MILLIS)     -- rstMessageTimestamp / TIME_IN_MILLIS.SECOND);
-src/script/components/ModalComponent.tsx:145:83    - Unknown word (noninteractive) -- key-events,jsx-a11y/no-noninteractive-element-interactions
-src/script/components/ModalComponent.tsx:164:30    - Unknown word (UNFOCUSABLE)    -- tabIndex={TabIndex.UNFOCUSABLE}
-src/script/components/ModalComponent.tsx:23:26     - Unknown word (wireapp)    -- import {TabIndex} from '@wireapp/react-ui-kit/lib/types
 src/script/components/Modals/DetailViewModal/DetailViewModalFooter.tsx:117:13    - Unknown word (Reactable)  -- {isMsgReactable && !isSelfUserRemoved
 src/script/components/Modals/DetailViewModal/DetailViewModalFooter.tsx:129:28    - Unknown word (Replyable)  -- {messageEntity.isReplyable() && !isSelfUserRemoved
 src/script/components/Modals/DetailViewModal/DetailViewModalFooter.tsx:155:48    - Unknown word (Reactable)  -- isDownloadable() && !isMsgReactable && (
@@ -965,16 +973,27 @@ src/script/components/Modals/GroupCreation/GroupCreationModal.tsx:30:30     - Un
 src/script/components/Modals/InviteModal/InviteModal.test.tsx:32:21     - Unknown word (janek)      -- const userName = 'janek';
 src/script/components/Modals/InviteModal/InviteModal.tsx:22:25     - Unknown word (wireapp)    -- import {Runtime} from '@wireapp/commons';
 src/script/components/Modals/LegalHoldModal/LegalHoldModal.test.tsx:21:34     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
-src/script/components/Modals/LegalHoldModal/LegalHoldModal.tsx:204:25    - Unknown word (prekey)     -- response.last_prekey,
+src/script/components/Modals/LegalHoldModal/LegalHoldModal.tsx:205:25    - Unknown word (prekey)     -- response.last_prekey,
 src/script/components/Modals/LegalHoldModal/LegalHoldModal.tsx:22:39     - Unknown word (wireapp)    -- LegalHoldMemberStatus} from '@wireapp/api-client/lib/team
 src/script/components/Modals/LegalHoldModal/LegalHoldModal.tsx:22:67     - Unknown word (legalhold)  -- api-client/lib/team/legalhold/';
-src/script/components/Modals/PrimaryModal/PrimaryModal.tsx:24:32     - Unknown word (wireapp)    -- ValidationUtil} from '@wireapp/commons';
-src/script/components/Modals/PrimaryModal/PrimaryModal.tsx:25:96     - Unknown word (wireapp)    -- ErrorMessage} from '@wireapp/react-ui-kit';
-src/script/components/Modals/PrimaryModal/PrimaryModal.tsx:342:31    - Unknown word (pswd)       -- id="modal_pswd"
-src/script/components/Modals/PrimaryModal/PrimaryModal.tsx:361:31    - Unknown word (pswd)       -- id="modal_pswd_confirmation"
-src/script/components/Modals/PrimaryModal/PrimaryModal.tsx:382:41    - Unknown word (pswd)       -- label htmlFor="modal_pswd" className="visually
-src/script/components/Modals/PrimaryModal/PrimaryModal.tsx:387:31    - Unknown word (pswd)       -- id="modal_pswd"
-src/script/components/Modals/PrimaryModal/PrimaryModal.tsx:412:36    - Unknown word (pswd)       -- htmlFor="modal_pswd"
+src/script/components/Modals/ModalComponent/ModalComponent.tsx:107:83    - Unknown word (noninteractive) -- key-events,jsx-a11y/no-noninteractive-element-interactions
+src/script/components/Modals/ModalComponent/ModalComponent.tsx:126:30    - Unknown word (UNFOCUSABLE)    -- tabIndex={TabIndex.UNFOCUSABLE}
+src/script/components/Modals/ModalComponent/ModalComponent.tsx:23:26     - Unknown word (wireapp)    -- import {TabIndex} from '@wireapp/react-ui-kit/lib/types
+src/script/components/Modals/PrimaryModal/CheckboxOption/CheckboxOption.tsx:22:41     - Unknown word (wireapp)    -- CheckboxLabel} from '@wireapp/react-ui-kit';
+src/script/components/Modals/PrimaryModal/GuestLinkPasswordForm/GuestLinkPasswordForm.tsx:22:32     - Unknown word (wireapp)    -- ValidationUtil} from '@wireapp/commons';
+src/script/components/Modals/PrimaryModal/GuestLinkPasswordForm/GuestLinkPasswordForm.tsx:23:43     - Unknown word (wireapp)    -- ErrorMessage} from '@wireapp/react-ui-kit';
+src/script/components/Modals/PrimaryModal/GuestLinkPasswordForm/GuestLinkPasswordForm.tsx:75:21     - Unknown word (pswd)       -- id="modal_pswd"
+src/script/components/Modals/PrimaryModal/GuestLinkPasswordForm/GuestLinkPasswordForm.tsx:94:21     - Unknown word (pswd)       -- id="modal_pswd_confirmation"
+src/script/components/Modals/PrimaryModal/JoinGuestLinkPasswordForm/JoinGuestLinkPasswordForm.tsx:22:41     - Unknown word (wireapp)    -- Link, Text} from '@wireapp/react-ui-kit';
+src/script/components/Modals/PrimaryModal/JoinGuestLinkPasswordForm/JoinGuestLinkPasswordForm.tsx:43:47     - Unknown word (pswd)       -- labelStyles} htmlFor="modal_pswd">
+src/script/components/Modals/PrimaryModal/JoinGuestLinkPasswordForm/JoinGuestLinkPasswordForm.tsx:49:19     - Unknown word (pswd)       -- id="modal_pswd"
+src/script/components/Modals/PrimaryModal/PasswordAdvancedSecurityForm/PasswordAdvancedSecurityForm.tsx:22:23     - Unknown word (wireapp)    -- import {Input} from '@wireapp/react-ui-kit';
+src/script/components/Modals/PrimaryModal/PasswordAdvancedSecurityForm/PasswordAdvancedSecurityForm.tsx:46:19     - Unknown word (pswd)       -- id="modal_pswd_with_rules"
+src/script/components/Modals/PrimaryModal/PasswordForm/PasswordForm.tsx:32:29     - Unknown word (pswd)       -- label htmlFor="modal_pswd" className="visually
+src/script/components/Modals/PrimaryModal/PasswordForm/PasswordForm.tsx:37:19     - Unknown word (pswd)       -- id="modal_pswd"
+src/script/components/Modals/PrimaryModal/PrimaryModal.tsx:22:32     - Unknown word (wireapp)    -- ValidationUtil} from '@wireapp/commons';
+src/script/components/Modals/PrimaryModal/PrimaryModal.tsx:23:30     - Unknown word (wireapp)    -- ErrorMessage} from '@wireapp/react-ui-kit';
+src/script/components/Modals/PrimaryModal/PrimaryModalLoading/PrimaryModalLoading.tsx:20:25     - Unknown word (wireapp)    -- import {Loading} from '@wireapp/react-ui-kit';
 src/script/components/Modals/PrimaryModal/PrimaryModalState.tsx:54:42     - Unknown word (Moda)       -- rentModalContent: (nextCurrentModaContent: ModalContent
 src/script/components/Modals/PrimaryModal/PrimaryModalState.tsx:89:41     - Unknown word (Moda)       -- rrentModalContent: nextCurrentModaContent =>
 src/script/components/Modals/PrimaryModal/PrimaryModalState.tsx:90:62     - Unknown word (Moda)       -- rrentModalContent: nextCurrentModaContent})),
@@ -994,9 +1013,9 @@ src/script/components/Modals/UserModal/UserModal.test.tsx:21:29     - Unknown wo
 src/script/components/Modals/UserModal/UserModal.tsx:22:26     - Unknown word (wireapp)    -- import {TabIndex} from '@wireapp/react-ui-kit/lib/types
 src/script/components/Modals/UserModal/UserModal.tsx:24:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 src/script/components/Modals/UserModal/UserModal.tsx:26:35     - Unknown word (wireapp)    -- LinkVariant} from '@wireapp/react-ui-kit';
-src/script/components/ParticipantItemContent/ParticipantItemContent.tsx:101:26    - Unknown word (subline)    -- className="subline"
-src/script/components/PasswordGeneratorButton.test.tsx:41:68     - Unknown word (charachters) -- random password with 15 charachters when clicked', () =
-src/script/components/PasswordGeneratorButton.tsx:22:39     - Unknown word (wireapp)    -- ButtonVariant} from '@wireapp/react-ui-kit';
+src/script/components/ParticipantItemContent/ParticipantItemContent.tsx:100:26    - Unknown word (subline)    -- className="subline"
+src/script/components/PasswordGeneratorButton/PasswordGeneratorButton.test.tsx:41:68     - Unknown word (charachters) -- random password with 15 charachters when clicked', () =
+src/script/components/PasswordGeneratorButton/PasswordGeneratorButton.tsx:20:39     - Unknown word (wireapp)    -- ButtonVariant} from '@wireapp/react-ui-kit';
 src/script/components/Radio/RadioGroup.tsx:22:26     - Unknown word (wireapp)    -- import {TabIndex} from '@wireapp/react-ui-kit/lib/types
 src/script/components/RichTextEditor/plugins/AutoFocusPlugin.tsx:47:13     - Unknown word (Pageup)     -- const isPageupDownKeyPressed = isPageUpDownK
 src/script/components/RichTextEditor/plugins/AutoFocusPlugin.tsx:49:11     - Unknown word (Pageup)     -- if (isPageupDownKeyPressed) {
@@ -1006,7 +1025,7 @@ src/script/components/RichTextEditor/plugins/EmojiPickerPlugin/EmojiPickerPlugin
 src/script/components/RichTextEditor/plugins/InlineEmojiReplacementPlugin/inlineReplacements.ts:199:22    - Unknown word (haha)       -- tags: ['happy', 'haha'],
 src/script/components/RichTextEditor/plugins/MentionsPlugin/MentionSuggestionsItem.tsx:22:26     - Unknown word (wireapp)    -- import {TabIndex} from '@wireapp/react-ui-kit/lib/types
 src/script/components/RichTextEditor/plugins/TypeaheadMenuPlugin.tsx:24:56     - Unknown word (instanciated) -- when the component is instanciated (the last one by default
-src/script/components/SelectText.tsx:22:26     - Unknown word (wireapp)    -- import {TabIndex} from '@wireapp/react-ui-kit/lib/types
+src/script/components/SelectText/SelectText.tsx:22:26     - Unknown word (wireapp)    -- import {TabIndex} from '@wireapp/react-ui-kit/lib/types
 src/script/components/ServiceList/components/ServiceListItem/ServiceListItem.tsx:20:26     - Unknown word (wireapp)    -- import {TabIndex} from '@wireapp/react-ui-kit/lib/types
 src/script/components/TextInput/TextInput.tsx:22:34     - Unknown word (wireapp)    -- CheckIcon, COLOR} from '@wireapp/react-ui-kit';
 src/script/components/TitleBar/TitleBar.test.tsx:21:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
@@ -1023,11 +1042,18 @@ src/script/components/TitleBar/TitleBar.tsx:381:11    - Unknown word (Identifer)
 src/script/components/TitleBar/TitleBar.tsx:39:15     - Unknown word (Identifer)  -- import {StringIdentifer, t} from 'Util/LocalizerUtil
 src/script/components/TitleBar/TitleBar.tsx:402:53    - Unknown word (Identifer)  -- join('And')}` as StringIdentifer;
 src/script/components/TitleBar/TitleBar.tsx:41:17     - Unknown word (MILLIS)     -- import {TIME_IN_MILLIS} from 'Util/TimeUtil
-src/script/components/UserBadges/UserStatusBadges.tsx:22:25     - Unknown word (wireapp)    -- import {Tooltip} from '@wireapp/react-ui-kit';
-src/script/components/UserBlockedBadge/UserBlockedBadge.styles.ts:27:30     - Unknown word (xsmall)     -- fontSize: 'var(--font-size-xsmall)',
-src/script/components/UserDevices.tsx:22:38     - Unknown word (wireapp)    -- ClientClassification} from '@wireapp/api-client/lib/client
-src/script/components/UserDevices.tsx:74:10     - Unknown word (legalhold)  -- const [legalholdDevices, otherDevices
-src/script/components/UserDevices.tsx:78:10     - Unknown word (legalhold)  -- return legalholdDevices.concat(otherDevices
+src/script/components/UserDevices/UserDevices.tsx:22:38     - Unknown word (wireapp)    -- ClientClassification} from '@wireapp/api-client/lib/client
+src/script/components/UserDevices/UserDevices.tsx:47:10     - Unknown word (legalhold)  -- const [legalholdDevices, otherDevices
+src/script/components/UserDevices/UserDevices.tsx:51:10     - Unknown word (legalhold)  -- return legalholdDevices.concat(otherDevices
+src/script/components/UserDevices/components/DeviceCard/DeviceCard.test.tsx:21:38     - Unknown word (wireapp)    -- ClientClassification} from '@wireapp/api-client/lib/client
+src/script/components/UserDevices/components/DeviceCard/DeviceCard.tsx:20:38     - Unknown word (wireapp)    -- ClientClassification} from '@wireapp/api-client/lib/client
+src/script/components/UserDevices/components/DeviceDetails/DeviceDetails.tsx:23:14     - Unknown word (Dexie)      -- import type {DexieError} from 'dexie';
+src/script/components/UserDevices/components/DeviceDetails/DeviceDetails.tsx:23:32     - Unknown word (dexie)      -- type {DexieError} from 'dexie';
+src/script/components/UserDevices/components/DeviceDetails/DeviceDetails.tsx:24:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
+src/script/components/UserDevices/components/DeviceDetails/DeviceDetails.tsx:26:39     - Unknown word (wireapp)    -- ButtonVariant} from '@wireapp/react-ui-kit';
+src/script/components/UserDevices/components/DeviceDetails/DeviceDetails.tsx:91:22     - Unknown word (Dexie)      -- .catch((error: DexieError) => logger.warn
+src/script/components/UserDevices/components/SelfFingerprint/SelfFingerprint.tsx:24:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
+src/script/components/UserDevices/components/SelfFingerprint/SelfFingerprint.tsx:26:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
 src/script/components/UserList/UserList.tsx:23:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 src/script/components/UserList/UserList.tsx:40:13     - Unknown word (Userlist)   -- export enum UserlistMode {
 src/script/components/UserList/UserList.tsx:41:14     - Unknown word (Userlist)   -- COMPACT = 'UserlistMode.COMPACT',
@@ -1041,15 +1067,8 @@ src/script/components/UserList/components/UserListItem/UserListItem.tsx:30:9    
 src/script/components/UserList/components/UserListItem/UserListItem.tsx:47:9      - Unknown word (Userlist)   -- mode: UserlistMode;
 src/script/components/UserList/components/UserListItem/UserListItem.tsx:64:10     - Unknown word (Userlist)   -- mode = UserlistMode.DEFAULT,
 src/script/components/UserList/components/UserListItem/UserListItem.tsx:80:33     - Unknown word (Userlist)   -- isOthersMode = mode === UserlistMode.OTHERS;
-src/script/components/UserSearchableList.tsx:22:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
-src/script/components/UserSearchableList.tsx:23:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
-src/script/components/VerificationBadge/VerificationBadges.tsx:214:69    - Unknown word (Identifer)  -- rificationBadgeContext, StringIdentifer> = {
-src/script/components/VerificationBadge/VerificationBadges.tsx:23:38     - Unknown word (wireapp)    -- ConversationProtocol} from '@wireapp/api-client/lib/conversation
-src/script/components/VerificationBadge/VerificationBadges.tsx:24:38     - Unknown word (wireapp)    -- stringifyQualifiedId} from '@wireapp/core/lib/util/qualifiedIdUtil
-src/script/components/VerificationBadge/VerificationBadges.tsx:25:26     - Unknown word (wireapp)    -- import {TabIndex} from '@wireapp/react-ui-kit/lib/types
-src/script/components/VerificationBadge/VerificationBadges.tsx:26:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
-src/script/components/VerificationBadge/VerificationBadges.tsx:35:10     - Unknown word (wireapp)    -- } from '@wireapp/react-ui-kit';
-src/script/components/VerificationBadge/VerificationBadges.tsx:46:15     - Unknown word (Identifer)  -- import {StringIdentifer, t} from 'Util/LocalizerUtil
+src/script/components/UserSearchableList/UserSearchableList.tsx:22:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
+src/script/components/UserSearchableList/UserSearchableList.tsx:23:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 src/script/components/ZoomableImage/ZoomableImage.tsx:22:45     - Unknown word (Zoomable)   -- imageStyle} from './ZoomableImage.style';
 src/script/components/ZoomableImage/ZoomableImage.tsx:69:6      - Unknown word (Zoomable)   -- type ZoomableImageProps = HTMLProps
 src/script/components/ZoomableImage/ZoomableImage.tsx:71:14     - Unknown word (Zoomable)   -- export const ZoomableImage = (props: ZoomableImageP
@@ -1073,6 +1092,8 @@ src/script/components/calling/CallingCell/CallingHeader/CallingHeader.tsx:22:47 
 src/script/components/calling/CallingOverlayContainer.tsx:22:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 src/script/components/calling/ChooseScreen.tsx:22:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 src/script/components/calling/DetachedCallingCell/DetachedCallingCell.tsx:20:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
+src/script/components/calling/DetachedCallingCell/components/DetachedWindow/DetachedWindow.tsx:24:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
+src/script/components/calling/DetachedCallingCell/components/DetachedWindow/DetachedWindow.tsx:26:37     - Unknown word (wireapp)    -- StyledApp, THEME_ID} from '@wireapp/react-ui-kit';
 src/script/components/calling/FullscreenVideoCall.styles.ts:38:52     - Unknown word (inversed)   -- accent-color-highlight-inversed);
 src/script/components/calling/FullscreenVideoCall.tsx:22:45     - Unknown word (wireapp)    -- tConversationRoleName} from '@wireapp/api-client/lib/conversation
 src/script/components/calling/FullscreenVideoCall.tsx:23:26     - Unknown word (wireapp)    -- import {TabIndex} from '@wireapp/react-ui-kit/lib/types
@@ -1100,9 +1121,6 @@ src/script/components/calling/chooseScreen.test.tsx:21:26     - Unknown word (ts
 src/script/components/calling/fullscreenVideoCall.test.tsx:33:13     - Unknown word (wireapp)    -- jest.mock('@wireapp/react-ui-kit', () =
 src/script/components/calling/fullscreenVideoCall.test.tsx:34:28     - Unknown word (wireapp)    -- jest.requireActual('@wireapp/react-ui-kit') as any
 src/script/components/calling/fullscreenVideoCall.test.tsx:64:11     - Unknown word (screeninput) -- screeninput: ko.observable(''),
-src/script/components/list/ConversationListCell.tsx:177:61    - Unknown word (UNFOCUSABLE) -- FOCUSABLE : TabIndex.UNFOCUSABLE}
-src/script/components/list/ConversationListCell.tsx:226:83    - Unknown word (UNFOCUSABLE) -- FOCUSABLE : TabIndex.UNFOCUSABLE}
-src/script/components/list/ConversationListCell.tsx:29:26     - Unknown word (wireapp)    -- import {TabIndex} from '@wireapp/react-ui-kit/lib/types
 src/script/components/panel/ConversationProtocolDetails/ConversationProtocolDetails.test.tsx:21:38     - Unknown word (wireapp)    -- ConversationProtocol} from '@wireapp/api-client/lib/conversation
 src/script/components/panel/ConversationProtocolDetails/ConversationProtocolDetails.test.tsx:23:29     - Unknown word (wireapp)     -- Ciphersuite} from '@wireapp/core';
 src/script/components/panel/ConversationProtocolDetails/ConversationProtocolDetails.test.tsx:23:9      - Unknown word (Ciphersuite) -- import {Ciphersuite} from '@wireapp/core
@@ -1129,20 +1147,6 @@ src/script/components/panel/UserActions.tsx:28:30     - Unknown word (wireapp)  
 src/script/components/panel/UserDetails.tsx:25:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
 src/script/components/toggle/ReceiptModeToggle.test.tsx:21:30     - Unknown word (wireapp)    -- RECEIPT_MODE} from '@wireapp/api-client/lib/conversation
 src/script/components/toggle/ReceiptModeToggle.tsx:22:30     - Unknown word (wireapp)    -- RECEIPT_MODE} from '@wireapp/api-client/lib/conversation
-src/script/components/userDevices/DeviceCard.test.tsx:21:38     - Unknown word (wireapp)    -- ClientClassification} from '@wireapp/api-client/lib/client
-src/script/components/userDevices/DeviceCard.tsx:20:38     - Unknown word (wireapp)    -- ClientClassification} from '@wireapp/api-client/lib/client
-src/script/components/userDevices/DeviceDetails.tsx:23:14     - Unknown word (Dexie)      -- import type {DexieError} from 'dexie';
-src/script/components/userDevices/DeviceDetails.tsx:23:32     - Unknown word (dexie)      -- type {DexieError} from 'dexie';
-src/script/components/userDevices/DeviceDetails.tsx:24:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
-src/script/components/userDevices/DeviceDetails.tsx:26:39     - Unknown word (wireapp)    -- ButtonVariant} from '@wireapp/react-ui-kit';
-src/script/components/userDevices/DeviceDetails.tsx:91:22     - Unknown word (Dexie)      -- .catch((error: DexieError) => logger.warn
-src/script/components/userDevices/SelfFingerprint.tsx:24:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
-src/script/components/userDevices/SelfFingerprint.tsx:26:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
-src/script/components/utils/InViewport.tsx:22:43     - Unknown word (overlayed)  -- layedObserver} from 'Util/DOM/overlayedObserver';
-src/script/components/utils/InViewport.tsx:22:9      - Unknown word (overlayed)  -- import {overlayedObserver} from 'Util
-src/script/components/utils/InViewport.tsx:31:36     - Unknown word (overlayed)  -- check if the element is overlayed by something else. Can
-src/script/components/utils/InViewport.tsx:61:9      - Unknown word (overlayed)  -- overlayedObserver.removeElement
-src/script/components/utils/InViewport.tsx:99:7      - Unknown word (overlayed)  -- overlayedObserver.trackElement
 src/script/connection/ConnectionEntity.ts:20:34     - Unknown word (wireapp)    -- ConnectionStatus} from '@wireapp/api-client/lib/connection
 src/script/connection/ConnectionEntity.ts:21:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
 src/script/connection/ConnectionMapper.test.ts:20:46     - Unknown word (wireapp)    -- ConnectionStatus} from '@wireapp/api-client/lib/connection
@@ -1943,7 +1947,10 @@ src/script/page/LeftSidebar/panels/Conversations/ConversationHeader/Conversation
 src/script/page/LeftSidebar/panels/Conversations/ConversationSidebar/ConversationSidebar.tsx:20:41     - Unknown word (wireapp)    -- IconButton} from '@wireapp/react-ui-kit';
 src/script/page/LeftSidebar/panels/Conversations/ConversationTab/ConversationFolderTab.tsx:123:47    - Unknown word (conv)       -- unreadConversations.some(conv => conv.id === conversation
 src/script/page/LeftSidebar/panels/Conversations/ConversationTab/ConversationFolderTab.tsx:123:55    - Unknown word (conv)       -- eadConversations.some(conv => conv.id === conversation
-src/script/page/LeftSidebar/panels/Conversations/ConversationTabs/ConversationTabs.tsx:20:90     - Unknown word (wireapp)    -- SupportIcon} from '@wireapp/react-ui-kit';
+src/script/page/LeftSidebar/panels/Conversations/ConversationTabs/ConversationTabs.tsx:20:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
+src/script/page/LeftSidebar/panels/Conversations/ConversationTabs/ConversationTabs.tsx:22:90     - Unknown word (wireapp)    -- SupportIcon} from '@wireapp/react-ui-kit';
+src/script/page/LeftSidebar/panels/Conversations/ConversationTabs/TeamCreation/TeamCreationBanner.tsx:22:51     - Unknown word (wireapp)    -- IconButton} from '@wireapp/react-ui-kit';
+src/script/page/LeftSidebar/panels/Conversations/ConversationTabs/TeamCreation/TeamCreationBanner.tsx:45:23     - Unknown word (subline)    -- <div className="subline" css={teamUpgradeBannerConten
 src/script/page/LeftSidebar/panels/Conversations/Conversations.tsx:201:76    - Unknown word (UNCOLLAPSE) -- EventName.UI.SIDEBAR_UNCOLLAPSE,
 src/script/page/LeftSidebar/panels/Conversations/Conversations.tsx:23:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 src/script/page/LeftSidebar/panels/Conversations/Conversations.tsx:240:64    - Unknown word (favorited)  -- ddEventListener('conversation-favorited', openFavorites);
@@ -2076,12 +2083,7 @@ src/script/page/RightSidebar/MessageDetails/UserReactions.tsx:22:34     - Unknow
 src/script/page/RightSidebar/Notifications/Notifications.test.tsx:61:41     - Unknown word (ative)      -- correct new value on the ative conversation', () =
 src/script/page/RightSidebar/Notifications/Notifications.tsx:22:26     - Unknown word (wireapp)    -- import {TabIndex} from '@wireapp/react-ui-kit/lib/types
 src/script/page/RightSidebar/PanelHeader/PanelHeader.tsx:22:26     - Unknown word (wireapp)    -- import {TabIndex} from '@wireapp/react-ui-kit/lib/types
-src/script/page/RightSidebar/PanelHeader/PanelHeader.tsx:25:48     - Unknown word (Dragable)   -- lickWrapper} from 'Components/DragableClickWrapper';
-src/script/page/RightSidebar/PanelHeader/PanelHeader.tsx:25:9      - Unknown word (Dragable)   -- import {DragableClickWrapper} from 'Components
 src/script/page/RightSidebar/PanelHeader/PanelHeader.tsx:72:77     - Unknown word (libray)     -- transition group animation libray
-src/script/page/RightSidebar/PanelHeader/PanelHeader.tsx:83:10     - Unknown word (Dragable)   -- <DragableClickWrapper onClick
-src/script/page/RightSidebar/PanelHeader/PanelHeader.tsx:87:11     - Unknown word (Dragable)   -- </DragableClickWrapper>
-src/script/page/RightSidebar/PanelHeader/PanelHeader.tsx:96:8      - Unknown word (Dragable)   -- <DragableClickWrapper onClick
 src/script/page/RightSidebar/RightSidebar.tsx:24:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 src/script/page/RightSidebar/RightSidebar.tsx:26:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
 src/script/page/RightSidebar/TimedMessages/TimedMessages.tsx:22:26     - Unknown word (wireapp)    -- import {TabIndex} from '@wireapp/react-ui-kit/lib/types

@@ -3,7 +3,7 @@ Repository: Azure/azure-rest-api-specs
 Url: "https://github.com/Azure/azure-rest-api-specs.git"
 Args: ["--config=cSpell.json","**/*.{md,ts,js}"]
 Lines:
- CSpell: Files checked: 2441, Issues found: 3089 in 886 files.
+ CSpell: Files checked: 2478, Issues found: 3122 in 905 files.
  exit code: 1
 CONTRIBUTING.md:24:6      - Unknown word (tocstop)    -- <!-- tocstop -->
 CONTRIBUTING.md:79:3      - Unknown word (Poli)       -- - PoliCheck -
@@ -77,6 +77,23 @@ documentation/typespec-rest-api-dev-process.md:144:57    - Unknown word (parters
 documentation/typespec-rest-api-dev-process.md:86:104    - Unknown word (follwoing)  -- resource-manager` folders follwoing the naming conventions
 documentation/x-ms-examples.md:105:29    - Unknown word (testrg)     -- resourceGroupName": "testrg123",
 documentation/x-ms-examples.md:106:30    - Unknown word (testacc)    -- storageAccountName": "testacc6141",
+eng/common/TestResources/New-TestResources.ps1.md:162:38    - Unknown word (approrpiate) -- Azure DevOps CI (with approrpiate variables configured
+eng/common/TestResources/New-TestResources.ps1.md:379:69    - Unknown word (Applicaiton) -- AAD to obtain the 'TestApplicaitonOid'
+eng/common/TestResources/New-TestResources.ps1.md:40:19     - Unknown word (resouces)   -- Deploys live test resouces specified in test-resources
+eng/common/TestResources/New-TestResources.ps1.md:465:26    - Unknown word (usgovvirginia) -- AzureUSGovernment -\> 'usgovvirginia'
+eng/common/TestResources/New-TestResources.ps1.md:466:24    - Unknown word (chinaeast)     -- AzureChinaCloud -\> 'chinaeast2'
+eng/common/TestResources/New-TestResources.ps1.md:569:39    - Unknown word (TEAMPROJECTID) -- null -ne $env:SYSTEM_TEAMPROJECTID)
+eng/common/TestResources/New-TestResources.ps1.md:591:74    - Unknown word (DPAPI)         -- Data Protection API (DPAPI).
+eng/common/TestResources/New-TestResources.ps1.md:705:10    - Unknown word (proga)         -- Aliases: proga
+eng/common/TestResources/README.md:51:38     - Unknown word (myusername) -- RESOURCE_GROUP} = 'rg-myusername'
+eng/common/TestResources/README.md:96:53     - Unknown word (PEMPK)      -- ConfidentialLedgerPrincipalPEMPK'] = Format-X509Certificate
+eng/common/TestResources/Update-TestResources.ps1.md:44:48     - Unknown word (userkeyvault) -- ResourceGroupName rg-userkeyvault -Subscription fa9c6
+eng/common/testproxy/onboarding/README.md:67:14     - Unknown word (aztables)   -- - [`sdk/data/aztables/assets.json`](https
+eng/common/testproxy/scripts/resolve-asset-conflict/README.md:30:8      - Unknown word (Reqs)       -- ### PreReqs
+eng/common/testproxy/scripts/resolve-asset-conflict/README.md:32:16     - Unknown word (pshell)     -- - Must have []`pshell 6+`](https://learn.microsoft
+eng/common/testproxy/scripts/resolve-asset-conflict/README.md:49:14     - Unknown word (testproxy)  -- ./eng/common/testproxy/scripts/resolve-asset
+eng/common/testproxy/scripts/tag-merge/README.md:40:39     - Unknown word (Dscg)       -- for-python/.assets/eDscgL1p9G/python |>git status
+eng/common/testproxy/scripts/tag-merge/README.md:71:45     - Unknown word (mergeprogress) -- detected the presence of a .mergeprogress file within folder C
 eng/tools/specs-model/eslint.config.js:10:8      - Unknown word (tseslint)   -- import tseslint from "typescript-eslint
 eng/tools/typespec-validation/src/rules/folder-structure.ts:14:72     - Unknown word (revparse)   -- gitOperation(folder).revparse("--show-toplevel"))
 profiles/ResourceSchemas.md:11:5      - Unknown word (azureresourceschema) -- azureresourceschema:
@@ -203,6 +220,7 @@ specification/computeschedule/resource-manager/readme.az.md:9:17      - Unknown 
 specification/confidentialledger/data-plane/readme.md:102:37    - Unknown word (codetransparency) -- package-2024-01-11-preview-codetransparency
 specification/confidentialledger/data-plane/readme.md:10:169    - Unknown word (identityservice) -- preview/2023-01-18-preview/identityservice.json` for the most up
 specification/confidentialledger/data-plane/readme.md:99:53     - Unknown word (mccfgov)         -- preview/2023-06-01-preview/mccfgov.json
+specification/connectedcache/resource-manager/readme.md:5:45      - Unknown word (connectedcache) -- configuration file for connectedcache.
 specification/connectedvmware/resource-manager/readme.azureresourceschema.md:9:17      - Unknown word (connectedvmware) -- - tag: schema-connectedvmware-2020-10-01-preview
 specification/consumption/resource-manager/readme.md:257:20    - Unknown word (jianyexi)   -- approved-by: "@jianyexi"
 specification/containerregistry/resource-manager/readme.md:456:106   - Unknown word (Workitems)  -- the next API verison. Workitems 24979281, 24778096,
@@ -252,8 +270,9 @@ specification/dns/resource-manager/readme.go.md:14:38     - Unknown word (armdns
 specification/dnsresolver/resource-manager/readme.az.md:8:27      - Unknown word (dnsresolver) -- namespace: azure.mgmt.dnsresolver
 specification/dnsresolver/resource-manager/readme.md:41:50     - Unknown word (dnsresolverpolicy) -- preview/2023-07-01-preview/dnsresolverpolicy.json
 specification/domainservices/resource-manager/readme.md:39:35     - Unknown word (oucontainer) -- AAD/stable/2022-12-01/oucontainer.json
-specification/edge/resource-manager/Microsoft.Edge/edge/readme.az.md:9:17      - Unknown word (edgeupdates) -- extensions: edgeupdates
-specification/edge/resource-manager/Microsoft.Edge/sites/readme.az.md:9:17      - Unknown word (edgesites)  -- extensions: edgesites
+specification/edge/resource-manager/Microsoft.Edge/edge/readme.az.md:9:17      - Unknown word (commonedgesitemanageroperations) -- extensions: commonedgesitemanageroperations
+specification/edge/resource-manager/Microsoft.Edge/sites/readme.az.md:9:17      - Unknown word (sitemanager) -- extensions: sitemanager
+specification/edge/resource-manager/Microsoft.Edge/sites/readme.md:1:3       - Unknown word (edgesites)  -- # edgesites
 specification/edgemarketplace/resource-manager/readme.az.md:7:17      - Unknown word (edgemarketplace) -- extensions: edgemarketplace
 specification/edgeorder/resource-manager/readme.az.md:7:17      - Unknown word (edgeorder)  -- extensions: edgeorder
 specification/edgeorderpartner/resource-manager/readme.md:39:57     - Unknown word (edgeorderpartner) -- preview/2020-12-01-preview/edgeorderpartner.json
@@ -314,9 +333,9 @@ specification/loadtestservice/resource-manager/readme.md:83:67     - Unknown wor
 specification/logic/resource-manager/readme.go.md:14:40     - Unknown word (armlogic)   -- resourcemanager/logic/armlogic
 specification/logz/resource-manager/readme.go.md:14:39     - Unknown word (armlogz)    -- resourcemanager/logz/armlogz
 specification/m365securityandcompliance/resource-manager/readme.go.md:9:18      - Unknown word (securityandcompliance) -- namespace: m365securityandcompliance
-specification/machinelearningservices/resource-manager/readme.md:307:155   - Unknown word (datareferences) -- registries/{registryName}/datareferences/{name}/versions/{version
-specification/machinelearningservices/resource-manager/readme.md:54:65     - Unknown word (commandjob) -- other job type like commandjob, sweepjob etc.
-specification/machinelearningservices/resource-manager/readme.md:54:77     - Unknown word (sweepjob)   -- type like commandjob, sweepjob etc.
+specification/machinelearningservices/resource-manager/readme.md:184:65    - Unknown word (commandjob) -- other job type like commandjob, sweepjob etc.
+specification/machinelearningservices/resource-manager/readme.md:184:77    - Unknown word (sweepjob)   -- type like commandjob, sweepjob etc.
+specification/machinelearningservices/resource-manager/readme.md:437:155   - Unknown word (datareferences) -- registries/{registryName}/datareferences/{name}/versions/{version
 specification/maintenance/resource-manager/readme.az.md:17:26     - Unknown word (applyupdate) -- group: maintenance applyupdate
 specification/managednetwork/resource-manager/readme.cli.md:11:37     - Unknown word (scopeassignments) -- microsoft.managednetwork/scopeassignments([/][^/]*)?$": "managed
 specification/managednetwork/resource-manager/readme.cli.md:12:12     - Unknown word (managednetworkgroups) -- "^.*[/]managednetworkgroups([/][^/]*)?$": "managed
@@ -330,8 +349,12 @@ specification/maps/resource-manager/readme.go.md:14:39     - Unknown word (armma
 specification/mariadb/resource-manager/readme.go.md:14:42     - Unknown word (armmariadb) -- resourcemanager/mariadb/armmariadb
 specification/marketplacecatalog/resource-manager/Keys/readme.md:4:45      - Unknown word (discoverykeys) -- configuration file for discoverykeys.
 specification/marketplacenotifications/resource-manager/readme.azureresourceschema.md:9:17      - Unknown word (marketplacenotifications) -- - tag: schema-marketplacenotifications-2021-03-03
+specification/migrate/resource-manager/Microsoft.Migrate/AssessmentProjects/readme.go.md:9:14      - Unknown word (migrationassessment) -- namespace: migrationassessment
+specification/migrate/resource-manager/Microsoft.Migrate/MigrateProjects/readme.go.md:9:14      - Unknown word (migrationhub) -- namespace: migrationhub
+specification/migrate/resource-manager/Microsoft.Migrate/MigrateProjects/readme.md:38:21     - Unknown word (hubmigrate) -- - stable/2020-05-01/hubmigrate.json
+specification/migrate/resource-manager/Microsoft.Migrate/MordernizeProjects/readme.go.md:9:14      - Unknown word (migrationmodernization) -- namespace: migrationmodernization
+specification/migrate/resource-manager/Microsoft.OffAzure/readme.go.md:9:14      - Unknown word (migrationdiscovery) -- namespace: migrationdiscovery
 specification/migrate/resource-manager/readme.go.md:14:42     - Unknown word (armmigrate) -- resourcemanager/migrate/armmigrate
-specification/migrate/resource-manager/readme.md:18:18     - Unknown word (hubmigrate) -- - tag: package-hubmigrate-2020-05
 specification/migrate/resource-manager/readme.md:20:18     - Unknown word (migrateengine) -- - tag: package-migrateengine-2022-05
 specification/migrate/resource-manager/readme.md:358:21    - Unknown word (Mordernize)    -- - Microsoft.Migrate/MordernizeProjects/preview/202
 specification/migrateprojects/resource-manager/readme.nodejs.md:9:27      - Unknown word (migrateprojects) -- package-name: azure-arm-migrateprojects
@@ -363,7 +386,7 @@ specification/mysql/resource-manager/readme.go.md:31:18     - Unknown word (flex
 specification/mysql/resource-manager/readme.go.md:47:1      - Unknown word (rpname)          -- rpname: mysql
 specification/mysql/resource-manager/readme.go.md:48:12     - Unknown word (mysqlflexibleservers) -- namespace: mysqlflexibleservers
 specification/mysql/resource-manager/readme.md:314:48    - Unknown word (detecion)   -- used to update thread detecion configuration, which
-specification/mysql/resource-manager/readme.md:521:68    - Unknown word (reponse)    -- included in get operation reponse body
+specification/mysql/resource-manager/readme.md:557:68    - Unknown word (reponse)    -- included in get operation reponse body
 specification/netapp/resource-manager/readme.go.md:14:41     - Unknown word (armnetapp)  -- resourcemanager/netapp/armnetapp
 specification/network/resource-manager/readme.cli.md:104:14    - Unknown word (routefilters)  -- - split: routefilters
 specification/network/resource-manager/readme.cli.md:111:14    - Unknown word (routefilterrules) -- - split: routefilterrules
@@ -510,7 +533,7 @@ specification/search/data-plane/Azure.Search/readme.md:546:1     - Unknown word 
 specification/search/data-plane/Azure.Search/readme.md:610:33    - Unknown word (fasterxml)  -- replace(/(import com.fasterxml.jackson.annotation.JsonProper
 specification/search/resource-manager/readme.go.md:14:41     - Unknown word (armsearch)  -- resourcemanager/search/armsearch
 specification/security/resource-manager/readme.csharp.md:32:40     - Unknown word (securitycenter) -- csharp-sdks-folder)/securitycenter/Microsoft.Azure.Management
-specification/security/resource-manager/readme.md:117:48    - Unknown word (Recommedations) -- stable/2024-08-01/customRecommedations.json
+specification/security/resource-manager/readme.md:127:48    - Unknown word (Recommedations) -- stable/2024-08-01/customRecommedations.json
 specification/servicebus/resource-manager/readme.md:41:51     - Unknown word (migrationconfigs) -- preview/2021-01-01-preview/migrationconfigs.json
 specification/servicebus/resource-manager/readme.md:42:51     - Unknown word (networksets)      -- preview/2021-01-01-preview/networksets.json
 specification/servicefabric/resource-manager/readme.md:108:54    - Unknown word (managedcluster) -- preview/2020-01-01-preview/managedcluster.json
@@ -555,7 +578,6 @@ specification/voiceservices/resource-manager/readme.csharp.md:14:40     - Unknow
 specification/web/resource-manager/readme.md:1579:25   - Unknown word (cowlishaw)  -- approved-by: "@mark.cowlishaw"
 specification/webpubsub/data-plane/readme.md:138:31    - Unknown word (webpubsubservice) -- name: azure-messaging-webpubsubservice
 specification/windowsiot/resource-manager/readme.az.md:7:15      - Unknown word (windowsiotservices) -- extensions: windowsiotservices
-specification/workloads/resource-manager/Microsoft.Workloads/SAPDiscoverySites/readme.az.md:13:54     - Unknown word (migrationdiscovery)    -- output-folder)/azext_migrationdiscovery/vendored_sdks/migrationdiscov
 specification/workloads/resource-manager/Microsoft.Workloads/SAPDiscoverySites/readme.az.md:9:17      - Unknown word (migrationdiscoverysap) -- extensions: migrationdiscoverysap
 specification/workloads/resource-manager/Microsoft.Workloads/SAPVirtualInstance/readme.az.md:9:17      - Unknown word (sapvirtualinstance) -- extensions: sapvirtualinstance
 specification/workloads/resource-manager/Microsoft.Workloads/SAPVirtualInstance/readme.python.md:10:26     - Unknown word (workloadssapvirtualinstance) -- package-name: azure-mgmt-workloadssapvirtualinstance

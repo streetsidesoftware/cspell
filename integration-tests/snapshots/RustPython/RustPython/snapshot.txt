@@ -1537,28 +1537,28 @@ vm/src/stdlib/sys.rs:964:9     - Unknown word (releaselevel)              -- rel
 vm/src/stdlib/sys.rs:974:13    - Unknown word (releaselevel)              -- releaselevel: version::RELEASELEVEL
 vm/src/stdlib/sys.rs:974:36    - Unknown word (RELEASELEVEL)              -- releaselevel: version::RELEASELEVEL,
 vm/src/stdlib/thread.rs:29:69     - Unknown word (illumos)    -- solaris", target_os = "illumos"))] {
-vm/src/stdlib/time.rs:102:30    - Unknown word (emscripten) -- not(any(target_os = "emscripten", target_os = "wasi
-vm/src/stdlib/time.rs:111:30    - Unknown word (emscripten) -- not(any(target_os = "emscripten", target_os = "wasi
-vm/src/stdlib/time.rs:128:30    - Unknown word (emscripten) -- not(any(target_os = "emscripten", target_os = "wasi
-vm/src/stdlib/time.rs:23:19     - Unknown word (dstbias)    -- // pub static dstbias: std::ffi::c_int;
-vm/src/stdlib/time.rs:253:11    - Unknown word (CFMT)       -- const CFMT: &str = "%a %b %e %H
-vm/src/stdlib/time.rs:258:45    - Unknown word (CFMT)       -- time = instant.format(CFMT).to_string();
-vm/src/stdlib/time.rs:265:27    - Unknown word (CFMT)       -- Ok(instant.format(CFMT).to_string())
-vm/src/stdlib/time.rs:305:22    - Unknown word (emscripten) -- target_os = "emscripten",
-vm/src/stdlib/time.rs:321:65    - Unknown word (emscripten) -- wasm32", target_os = "emscripten")))]
-vm/src/stdlib/time.rs:322:24    - Unknown word (muldiv)     -- pub(super) fn time_muldiv(ticks: i64, mul: i6
-vm/src/stdlib/time.rs:323:13    - Unknown word (intpart)    -- let intpart = ticks / div;
-vm/src/stdlib/time.rs:326:10    - Unknown word (intpart)    -- (intpart * mul + remaining) as
-vm/src/stdlib/time.rs:341:18    - Unknown word (muldiv)     -- time_muldiv(t.tms_utime, SEC_TO
-vm/src/stdlib/time.rs:341:62    - Unknown word (muldiv)     -- TO_NS, freq) + time_muldiv(t.tms_stime, SEC_TO
-vm/src/stdlib/time.rs:365:22    - Unknown word (illumos)    -- target_os = "illumos",
-vm/src/stdlib/time.rs:473:22    - Unknown word (illumos)    -- target_os = "illumos",
-vm/src/stdlib/time.rs:481:22    - Unknown word (illumos)    -- target_os = "illumos",
-vm/src/stdlib/time.rs:643:22    - Unknown word (illumos)    -- target_os = "illumos",
-vm/src/stdlib/time.rs:654:48    - Unknown word (gethrvtime) -- nanos(unsafe { libc::gethrvtime() }))
-vm/src/stdlib/time.rs:658:22    - Unknown word (illumos)    -- target_os = "illumos",
-vm/src/stdlib/time.rs:696:28    - Unknown word (muldiv)     -- use super::decl::{time_muldiv, MS_TO_NS, SEC_TO_NS
-vm/src/stdlib/time.rs:749:38    - Unknown word (muldiv)     -- Duration::from_nanos(time_muldiv(
+vm/src/stdlib/time.rs:103:30    - Unknown word (emscripten) -- not(any(target_os = "emscripten", target_os = "wasi
+vm/src/stdlib/time.rs:112:30    - Unknown word (emscripten) -- not(any(target_os = "emscripten", target_os = "wasi
+vm/src/stdlib/time.rs:129:30    - Unknown word (emscripten) -- not(any(target_os = "emscripten", target_os = "wasi
+vm/src/stdlib/time.rs:24:19     - Unknown word (dstbias)    -- // pub static dstbias: std::ffi::c_int;
+vm/src/stdlib/time.rs:255:11    - Unknown word (CFMT)       -- const CFMT: &str = "%a %b %e %H
+vm/src/stdlib/time.rs:260:45    - Unknown word (CFMT)       -- time = instant.format(CFMT).to_string();
+vm/src/stdlib/time.rs:267:27    - Unknown word (CFMT)       -- Ok(instant.format(CFMT).to_string())
+vm/src/stdlib/time.rs:307:22    - Unknown word (emscripten) -- target_os = "emscripten",
+vm/src/stdlib/time.rs:323:65    - Unknown word (emscripten) -- wasm32", target_os = "emscripten")))]
+vm/src/stdlib/time.rs:324:24    - Unknown word (muldiv)     -- pub(super) fn time_muldiv(ticks: i64, mul: i6
+vm/src/stdlib/time.rs:325:13    - Unknown word (intpart)    -- let intpart = ticks / div;
+vm/src/stdlib/time.rs:328:10    - Unknown word (intpart)    -- (intpart * mul + remaining) as
+vm/src/stdlib/time.rs:343:18    - Unknown word (muldiv)     -- time_muldiv(t.tms_utime, SEC_TO
+vm/src/stdlib/time.rs:343:62    - Unknown word (muldiv)     -- TO_NS, freq) + time_muldiv(t.tms_stime, SEC_TO
+vm/src/stdlib/time.rs:367:22    - Unknown word (illumos)    -- target_os = "illumos",
+vm/src/stdlib/time.rs:475:22    - Unknown word (illumos)    -- target_os = "illumos",
+vm/src/stdlib/time.rs:483:22    - Unknown word (illumos)    -- target_os = "illumos",
+vm/src/stdlib/time.rs:645:22    - Unknown word (illumos)    -- target_os = "illumos",
+vm/src/stdlib/time.rs:656:48    - Unknown word (gethrvtime) -- nanos(unsafe { libc::gethrvtime() }))
+vm/src/stdlib/time.rs:660:22    - Unknown word (illumos)    -- target_os = "illumos",
+vm/src/stdlib/time.rs:698:28    - Unknown word (muldiv)     -- use super::decl::{time_muldiv, MS_TO_NS, SEC_TO_NS
+vm/src/stdlib/time.rs:751:38    - Unknown word (muldiv)     -- Duration::from_nanos(time_muldiv(
 vm/src/stdlib/typing.rs:151:34    - Unknown word (gigity)     -- println!("gigity");
 vm/src/stdlib/typing.rs:18:37     - Unknown word (pycodecs)   -- module = vm.import("_pycodecs", None, 0)?;
 vm/src/stdlib/winapi.rs:167:60    - Unknown word (STARTUPINFOEXW) -- :System::Threading::STARTUPINFOEXW =

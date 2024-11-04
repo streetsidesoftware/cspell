@@ -3,7 +3,7 @@ Repository: MicrosoftDocs/PowerShell-Docs
 Url: "https://github.com/MicrosoftDocs/PowerShell-Docs.git"
 Args: ["--config=../../../cspell-power-shell-docs.config.yaml","**"]
 Lines:
- CSpell: Files checked: 2692, Issues found: 5262 in 1232 files.
+ CSpell: Files checked: 2692, Issues found: 5259 in 1218 files.
  exit code: 1
 CODE_OF_CONDUCT.md:10:38     - Unknown word (opensource) -- reach out at [aka.ms/opensource/moderation-support]
 LICENSE.md:122:56    - Unknown word (sublicensable)   -- worldwide, royalty-free, non-sublicensable,
@@ -117,7 +117,6 @@ reference/5.1/Microsoft.PowerShell.Core/About/about_Arithmetic_Operators.md:243:
 reference/5.1/Microsoft.PowerShell.Core/About/about_Arithmetic_Operators.md:246:16    - Unknown word (maxvalue)   -- PS> [Decimal]::maxvalue + 1
 reference/5.1/Microsoft.PowerShell.Core/About/about_Arithmetic_Operators.md:358:30    - Unknown word (filefilefile) -- 3 # result = "filefilefile"
 reference/5.1/Microsoft.PowerShell.Core/About/about_Arrays.md:345:20    - Unknown word (Longlength) -- **Count** alias. **Longlength** is useful if the array
-reference/5.1/Microsoft.PowerShell.Core/About/about_Arrays.md:787:51    - Unknown word (Instrinsic) -- members, see [about_Instrinsic_Members][08].
 reference/5.1/Microsoft.PowerShell.Core/About/about_Arrays.md:982:59    - Unknown word (nosuchkey)  -- string, int]]::new()['nosuchkey']
 reference/5.1/Microsoft.PowerShell.Core/About/about_Arrays.md:985:64    - Unknown word (nosuchkey)  -- int]]::new().Item('nosuchkey')
 reference/5.1/Microsoft.PowerShell.Core/About/about_Arrays.md:986:43    - Unknown word (nosuchkey)  -- Item": "The given key 'nosuchkey' was not present in
@@ -174,7 +173,6 @@ reference/5.1/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:281:2
 reference/5.1/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:289:53    - Unknown word (logfiles)   -- txt` file in the `C:\logfiles` directory and
 reference/5.1/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:293:19    - Unknown word (logfiles)   -- New-Item -Path c:\logfiles -Name log2.txt -Type
 reference/5.1/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:298:45    - Unknown word (logfiles)   -- log2.txt` in the `C:\logfiles` directory and adds
-reference/5.1/Microsoft.PowerShell.Core/About/about_For.md:352:60    - Unknown word (filenamess) -- sorted array of original filenamess at the
 reference/5.1/Microsoft.PowerShell.Core/About/about_Format.ps1xml.md:130:2     - Unknown word (Parms)      -- $Parms = @{
 reference/5.1/Microsoft.PowerShell.Core/About/about_Format.ps1xml.md:135:16    - Unknown word (Parms)      -- Select-String @Parms
 reference/5.1/Microsoft.PowerShell.Core/About/about_Format.ps1xml.md:434:45    - Unknown word (mygciview)  -- custom view is named **mygciview** and adds the
@@ -208,6 +206,16 @@ reference/5.1/Microsoft.PowerShell.Core/About/about_Language_Modes.md:313:5     
 reference/5.1/Microsoft.PowerShell.Core/About/about_Language_Modes.md:314:5     - Unknown word (wmisearcher)           -- - `[wmisearcher]`
 reference/5.1/Microsoft.PowerShell.Core/About/about_Modules.md:70:11     - Unknown word (autoloading) -- ## Module autoloading
 reference/5.1/Microsoft.PowerShell.Core/About/about_Modules.md:76:8      - Unknown word (autoloading) -- Module autoloading allows you to use commands
+reference/5.1/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:29:12     - Unknown word (kibibyte)   -- | `kb`   | kibibyte (1024<sup>1</sup>) multiplier
+reference/5.1/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:30:12     - Unknown word (mebibyte)   -- | `mb`   | mebibyte (1024<sup>2</sup>) multiplier
+reference/5.1/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:31:12     - Unknown word (gigibyte)   -- | `gb`   | gigibyte (1024<sup>3</sup>) multiplier
+reference/5.1/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:32:12     - Unknown word (teribyte)   -- | `tb`   | teribyte (1024<sup>4</sup>) multiplier
+reference/5.1/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:33:12     - Unknown word (petibyte)   -- | `pb`   | petibyte (1024<sup>5</sup>) multiplier
+reference/5.1/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:71:12     - Unknown word (kibibyte)   -- | `kb`   | kibibyte (1024<sup>1</sup>) multiplier
+reference/5.1/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:72:12     - Unknown word (mebibyte)   -- | `mb`   | mebibyte (1024<sup>2</sup>) multiplier
+reference/5.1/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:73:12     - Unknown word (gigibyte)   -- | `gb`   | gigibyte (1024<sup>3</sup>) multiplier
+reference/5.1/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:74:12     - Unknown word (teribyte)   -- | `tb`   | teribyte (1024<sup>4</sup>) multiplier
+reference/5.1/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:75:12     - Unknown word (petibyte)   -- | `pb`   | petibyte (1024<sup>5</sup>) multiplier
 reference/5.1/Microsoft.PowerShell.Core/About/about_Operator_Precedence.md:88:14     - Unknown word (coalese)    -- | `??` (null-coalese operator)
 reference/5.1/Microsoft.PowerShell.Core/About/about_Operators.md:130:28    - Unknown word (Nosuch)     -- example, `(Get-Item /Nosuch); $?` unexpectedly yields
 reference/5.1/Microsoft.PowerShell.Core/About/about_Operators.md:277:15    - Unknown word (executionpolicy) -- PS> $c = "get-executionpolicy"
@@ -290,9 +298,9 @@ reference/5.1/Microsoft.PowerShell.Core/About/about_Scripts.md:193:14    - Unkno
 reference/5.1/Microsoft.PowerShell.Core/About/about_Scripts.md:193:39    - Unknown word (erroraction) -- pssession $computername -erroraction SilentlyContinue
 reference/5.1/Microsoft.PowerShell.Core/About/about_Scripts.md:341:25    - Unknown word (juneb)       -- Directory: C:\Users\juneb\Documents\WindowsPowerShell
 reference/5.1/Microsoft.PowerShell.Core/About/about_Session_Configurations.md:179:1     - Unknown word (ugin)       -- ugin
-reference/5.1/Microsoft.PowerShell.Core/About/about_Signing.md:195:37    - Unknown word (codesigning) -- cert:\CurrentUser\my -codesigning
-reference/5.1/Microsoft.PowerShell.Core/About/about_Signing.md:233:2     - Unknown word (cmdletbinding) -- [cmdletbinding()]
-reference/5.1/Microsoft.PowerShell.Core/About/about_Signing.md:278:2     - Unknown word (Certmgr)       -- `Certmgr.exe` to export your
+reference/5.1/Microsoft.PowerShell.Core/About/about_Signing.md:204:37    - Unknown word (codesigning) -- cert:\CurrentUser\my -codesigning
+reference/5.1/Microsoft.PowerShell.Core/About/about_Signing.md:242:2     - Unknown word (cmdletbinding) -- [cmdletbinding()]
+reference/5.1/Microsoft.PowerShell.Core/About/about_Signing.md:287:2     - Unknown word (Certmgr)       -- `Certmgr.exe` to export your
 reference/5.1/Microsoft.PowerShell.Core/About/about_Special_Characters.md:104:53    - Unknown word (nbetween)   -- create a blank line`n`nbetween the words."
 reference/5.1/Microsoft.PowerShell.Core/About/about_Special_Characters.md:155:37    - Unknown word (vbetween)   -- There is a vertical tab`vbetween the words."
 reference/5.1/Microsoft.PowerShell.Core/About/about_Split.md:462:34    - Unknown word (simplematch) -- test" -split ".", 0, "simplematch"
@@ -417,7 +425,6 @@ reference/5.1/Microsoft.PowerShell.Core/Import-Module.md:295:57    - Unknown wor
 reference/5.1/Microsoft.PowerShell.Core/Import-Module.md:519:76    - Unknown word (RSDGF)      -- remote computer named RSDGF03. The session
 reference/5.1/Microsoft.PowerShell.Core/Import-Module.md:522:2     - Unknown word (RSDGF)      -- `RSDGF03` computer.
 reference/5.1/Microsoft.PowerShell.Core/Import-Module.md:533:36    - Unknown word (RSDGF)      -- CimSession -ComputerName RSDGF03
-reference/5.1/Microsoft.PowerShell.Core/Invoke-Command.md:1261:23   - Unknown word (Autiomation) -- **System.Management.Autiomation.Remoting.PSSessionOption
 reference/5.1/Microsoft.PowerShell.Core/New-Module.md:228:11    - Unknown word (Manoj)      -- $m.hello("Manoj")
 reference/5.1/Microsoft.PowerShell.Core/New-ModuleManifest.md:211:8     - Unknown word (JKBC)       -- 'JKBC'
 reference/5.1/Microsoft.PowerShell.Core/New-PSSession.md:151:58    - Unknown word (Corpnet)    -- ComputerName Server1.Domain44.Corpnet.Fabrikam.com -Credential
@@ -619,7 +626,6 @@ reference/5.1/Microsoft.PowerShell.Management/Stop-Computer.md:280:16    - Unkno
 reference/5.1/Microsoft.PowerShell.Management/Stop-Computer.md:83:66     - Unknown word (Dcom)       -- Impersonation Anonymous -DcomAuthentication PacketIntegrity
 reference/5.1/Microsoft.PowerShell.Management/Stop-Computer.md:87:76     - Unknown word (Dcom)       -- impersonation and the **DcomAuthentication**
 reference/5.1/Microsoft.PowerShell.Management/Stop-Process.md:78:50     - Unknown word (namein)     -- includes the process namein addition to its ID,
-reference/5.1/Microsoft.PowerShell.Management/Suspend-Service.md:43:27     - Unknown word (usingthe)   -- resumed, such as by usingthe `Resume-Service` cmdlet
 reference/5.1/Microsoft.PowerShell.Management/Suspend-Service.md:64:13     - Unknown word (lanman)     -- starts with lanman. To suspend the services
 reference/5.1/Microsoft.PowerShell.Management/Test-Connection.md:21:28     - Unknown word (Dcom)       -- Connection [-AsJob] [-DcomAuthentication <Authentication
 reference/5.1/Microsoft.PowerShell.Management/Test-Connection.md:261:6     - Unknown word (Dcom)       -- ### -DcomAuthentication
@@ -707,7 +713,6 @@ reference/5.1/Microsoft.PowerShell.Utility/New-Object.md:104:2     - Unknown wor
 reference/5.1/Microsoft.PowerShell.Utility/New-Variable.md:48:21     - Unknown word (zipcode)    -- New-Variable -Name "zipcode" -Value 98033
 reference/5.1/Microsoft.PowerShell.Utility/New-Variable.md:51:39     - Unknown word (zipcode)    -- creates a variable named zipcode and assigns it the value
 reference/5.1/Microsoft.PowerShell.Utility/Out-File.md:100:26    - Unknown word (Procs)      -- process objects in `$Procs` to the file **Process
-reference/5.1/Microsoft.PowerShell.Utility/Out-File.md:141:32    - Unknown word (operartors) -- and the redirection operartors (`>` and `>>`) to 2
 reference/5.1/Microsoft.PowerShell.Utility/Out-File.md:150:26    - Unknown word (logfile)    -- $logFile = "$pwd\logfile.txt"
 reference/5.1/Microsoft.PowerShell.Utility/Out-File.md:93:2      - Unknown word (Procs)      -- $Procs = Get-Process
 reference/5.1/Microsoft.PowerShell.Utility/Out-File.md:94:48     - Unknown word (Procs)      -- Process.txt -InputObject $Procs -Encoding ASCII -Width
@@ -733,7 +738,6 @@ reference/5.1/Microsoft.PowerShell.Utility/Show-Command.md:330:4     - Unknown w
 reference/5.1/Microsoft.PowerShell.Utility/Tee-Object.md:70:65     - Unknown word (processname) -- proc | Select-Object processname,handles
 reference/5.1/Microsoft.PowerShell.Utility/Trace-Command.md:352:4     - Unknown word (trcm)             -- - `trcm`
 reference/5.1/Microsoft.PowerShell.Utility/Trace-Command.md:47:30     - Unknown word (parameterbinding) -- Command -Name metadata,parameterbinding,cmdlet -Expression
-reference/5.1/Microsoft.PowerShell.Utility/Update-TypeData.md:202:27    - Unknown word (currnet)    -- last command gets the currnet date and displays it
 reference/5.1/Microsoft.PowerShell.Utility/Update-TypeData.md:550:3     - Unknown word (Noteproperty) -- - Noteproperty
 reference/5.1/Microsoft.PowerShell.Utility/Wait-Debugger.md:38:11     - Unknown word (dbgtest)    -- The file `dbgtest.ps1` contains a function
 reference/5.1/Microsoft.PowerShell.Utility/Wait-Debugger.md:67:17     - Unknown word (dbgtest)    -- At D:\temp\test\dbgtest.ps1:13 char:9
@@ -749,7 +753,6 @@ reference/5.1/Microsoft.WSMan.Management/About/about_WSMan_Provider.md:264:57   
 reference/5.1/Microsoft.WSMan.Management/About/about_WSMan_Provider.md:270:21    - Unknown word (testparametername) -- -ParamName testparametername `
 reference/5.1/Microsoft.WSMan.Management/About/about_WSMan_Provider.md:271:22    - Unknown word (testparametervalue) -- -ParamValue testparametervalue
 reference/5.1/Microsoft.WSMan.Management/About/about_WSMan_Provider.md:561:35    - Unknown word (PCWSTR)             -- represents the XML as a **PCWSTR** memory buffer.
-reference/5.1/Microsoft.WSMan.Management/Disconnect-WSMan.md:44:4      - Unknown word (Outpue)     -- ```Outpue
 reference/5.1/Microsoft.WSMan.Management/Get-WSManInstance.md:217:10    - Unknown word (UBPO)       -- Aliases: UBPO, Base
 reference/5.1/Microsoft.WSMan.Management/Get-WSManInstance.md:485:31    - Unknown word (objectandepr) -- values: object, epr, objectandepr
 reference/5.1/Microsoft.WSMan.Management/Invoke-WSManAction.md:108:28    - Unknown word (startservice)     -- WSManAction -Action startservice -ResourceURI wmicimv
@@ -904,7 +907,6 @@ reference/7.2/Microsoft.PowerShell.Core/About/about_Arithmetic_Operators.md:358:
 reference/7.2/Microsoft.PowerShell.Core/About/about_Arrays.md:1002:64   - Unknown word (nosuchkey)  -- int]]::new().Item('nosuchkey')
 reference/7.2/Microsoft.PowerShell.Core/About/about_Arrays.md:1003:72   - Unknown word (nosuchkey)  -- Item": "The given key 'nosuchkey'
 reference/7.2/Microsoft.PowerShell.Core/About/about_Arrays.md:345:20    - Unknown word (Longlength) -- **Count** alias. **Longlength** is useful if the array
-reference/7.2/Microsoft.PowerShell.Core/About/about_Arrays.md:787:51    - Unknown word (Instrinsic) -- members, see [about_Instrinsic_Members][08].
 reference/7.2/Microsoft.PowerShell.Core/About/about_Arrays.md:999:59    - Unknown word (nosuchkey)  -- string, int]]::new()['nosuchkey']
 reference/7.2/Microsoft.PowerShell.Core/About/about_Calculated_Properties.md:219:18    - Unknown word (formatstring) -- formatstring='O'
 reference/7.2/Microsoft.PowerShell.Core/About/about_Calculated_Properties.md:255:21    - Unknown word (Metacontent)  -- '' {'Metacontent'}
@@ -967,7 +969,6 @@ reference/7.2/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:295:5
 reference/7.2/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:299:19    - Unknown word (logfiles)   -- New-Item -Path c:\logfiles -Name log2.txt -Type
 reference/7.2/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:304:45    - Unknown word (logfiles)   -- log2.txt` in the `C:\logfiles` directory and adds
 reference/7.2/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:418:4     - Unknown word (bigendianutf) -- - `bigendianutf32`: Encodes in UTF-
-reference/7.2/Microsoft.PowerShell.Core/About/about_For.md:352:60    - Unknown word (filenamess) -- sorted array of original filenamess at the
 reference/7.2/Microsoft.PowerShell.Core/About/about_Format.ps1xml.md:326:45    - Unknown word (mygciview)  -- custom view is named **mygciview** and adds the
 reference/7.2/Microsoft.PowerShell.Core/About/about_Format.ps1xml.md:343:9     - Unknown word (mygciview)  -- name, **mygciview**, and format the table
 reference/7.2/Microsoft.PowerShell.Core/About/about_Format.ps1xml.md:358:30    - Unknown word (Mygciview)  -- Export-FormatData -Path ./Mygciview.Format.ps1xml
@@ -978,7 +979,6 @@ reference/7.2/Microsoft.PowerShell.Core/About/about_Function_Provider.md:132:42 
 reference/7.2/Microsoft.PowerShell.Core/About/about_Functions.md:194:4     - Unknown word (allpix)     -- $allpix = Get-ChildItem -Path
 reference/7.2/Microsoft.PowerShell.Core/About/about_Functions.md:195:4     - Unknown word (allpix)     -- $allpix | Where-Object {$_.LastWriteT
 reference/7.2/Microsoft.PowerShell.Core/About/about_Functions_Advanced_Parameters.md:742:50    - Unknown word (dynamicparameters) -- tab completion. Like **dynamicparameters**, the
-reference/7.2/Microsoft.PowerShell.Core/About/about_Functions_Argument_Completion.md:265:37    - Unknown word (pswh)       -- toryCompleter(ContainingFile="pswh.exe", Depth=2)]
 reference/7.2/Microsoft.PowerShell.Core/About/about_Group_Policy_Settings.md:59:10     - Unknown word (gpedit)     -- editor (`gpedit.msc`).
 reference/7.2/Microsoft.PowerShell.Core/About/about_Hash_Tables.md:130:11    - Unknown word (orderedhash) -- [ordered]$orderedhash = @{}
 reference/7.2/Microsoft.PowerShell.Core/About/about_Hash_Tables.md:133:19    - Unknown word (orderedhash) -- 1 |  [ordered]$orderedhash = @{}
@@ -1018,7 +1018,16 @@ reference/7.2/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:257:6   
 reference/7.2/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:259:4     - Unknown word (usgb)       -- + 1usgb
 reference/7.2/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:261:23    - Unknown word (usgb)       -- The numeric constant 1usgb is not valid.
 reference/7.2/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:266:56    - Unknown word (gbus)       -- invalid syntax like `1gbus` will be
-reference/7.2/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:327:71    - Unknown word (casies)     -- BigInteger]` using special casies to
+reference/7.2/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:37:12     - Unknown word (kibibyte)   -- | `kb`   | kibibyte (1024<sup>1</sup>) multiplier
+reference/7.2/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:38:12     - Unknown word (mebibyte)   -- | `mb`   | mebibyte (1024<sup>2</sup>) multiplier
+reference/7.2/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:39:12     - Unknown word (gigibyte)   -- | `gb`   | gigibyte (1024<sup>3</sup>) multiplier
+reference/7.2/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:40:12     - Unknown word (teribyte)   -- | `tb`   | teribyte (1024<sup>4</sup>) multiplier
+reference/7.2/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:41:12     - Unknown word (petibyte)   -- | `pb`   | petibyte (1024<sup>5</sup>) multiplier
+reference/7.2/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:79:12     - Unknown word (kibibyte)   -- | `kb`   | kibibyte (1024<sup>1</sup>) multiplier
+reference/7.2/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:80:12     - Unknown word (mebibyte)   -- | `mb`   | mebibyte (1024<sup>2</sup>) multiplier
+reference/7.2/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:81:12     - Unknown word (gigibyte)   -- | `gb`   | gigibyte (1024<sup>3</sup>) multiplier
+reference/7.2/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:82:12     - Unknown word (teribyte)   -- | `tb`   | teribyte (1024<sup>4</sup>) multiplier
+reference/7.2/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:83:12     - Unknown word (petibyte)   -- | `pb`   | petibyte (1024<sup>5</sup>) multiplier
 reference/7.2/Microsoft.PowerShell.Core/About/about_Operator_Precedence.md:88:14     - Unknown word (coalese)    -- | `??` (null-coalese operator)
 reference/7.2/Microsoft.PowerShell.Core/About/about_Operators.md:254:15    - Unknown word (executionpolicy) -- PS> $c = "get-executionpolicy"
 reference/7.2/Microsoft.PowerShell.Core/About/about_Operators.md:256:5     - Unknown word (executionpolicy) -- get-executionpolicy
@@ -1073,7 +1082,6 @@ reference/7.2/Microsoft.PowerShell.Core/About/about_Pwsh.md:288:3     - Unknown 
 reference/7.2/Microsoft.PowerShell.Core/About/about_Pwsh.md:312:24    - Unknown word (noni)           -- -NonInteractive | -noni
 reference/7.2/Microsoft.PowerShell.Core/About/about_Pwsh.md:343:33    - Unknown word (myproject)      -- pwsh -SettingsFile c:\myproject\powershell.config.json
 reference/7.2/Microsoft.PowerShell.Core/About/about_Pwsh.md:345:23    - Unknown word (sshs)           -- # -SSHServerMode | -sshs
-reference/7.2/Microsoft.PowerShell.Core/About/about_Pwsh.md:358:41    - Unknown word (exectuable)     -- version of this PowerShell exectuable. Additional parameters
 reference/7.2/Microsoft.PowerShell.Core/About/about_Pwsh.md:5:244     - Unknown word (noni)       -- nol, -NonInteractive, -noni, -NoProfile, -nop,
 reference/7.2/Microsoft.PowerShell.Core/About/about_Pwsh.md:5:335     - Unknown word (sshs)       -- settings, -SSHServerMode, -sshs, -STA, -Version, -v
 reference/7.2/Microsoft.PowerShell.Core/About/about_Redirection.md:80:10     - Unknown word (fakepath)   -- dir C:\, fakepath 2>&1 > .\dir.log
@@ -1119,9 +1127,9 @@ reference/7.2/Microsoft.PowerShell.Core/About/about_Scripts.md:193:14    - Unkno
 reference/7.2/Microsoft.PowerShell.Core/About/about_Scripts.md:193:39    - Unknown word (erroraction) -- pssession $computername -erroraction SilentlyContinue
 reference/7.2/Microsoft.PowerShell.Core/About/about_Scripts.md:345:25    - Unknown word (juneb)       -- Directory: C:\Users\juneb\Documents\WindowsPowerShell
 reference/7.2/Microsoft.PowerShell.Core/About/about_Session_Configurations.md:178:1     - Unknown word (ugin)       -- ugin
-reference/7.2/Microsoft.PowerShell.Core/About/about_Signing.md:197:37    - Unknown word (codesigning) -- cert:\CurrentUser\my -codesigning
-reference/7.2/Microsoft.PowerShell.Core/About/about_Signing.md:234:2     - Unknown word (cmdletbinding) -- [cmdletbinding()]
-reference/7.2/Microsoft.PowerShell.Core/About/about_Signing.md:279:2     - Unknown word (Certmgr)       -- `Certmgr.exe` to export your
+reference/7.2/Microsoft.PowerShell.Core/About/about_Signing.md:206:37    - Unknown word (codesigning) -- cert:\CurrentUser\my -codesigning
+reference/7.2/Microsoft.PowerShell.Core/About/about_Signing.md:243:2     - Unknown word (cmdletbinding) -- [cmdletbinding()]
+reference/7.2/Microsoft.PowerShell.Core/About/about_Signing.md:288:2     - Unknown word (Certmgr)       -- `Certmgr.exe` to export your
 reference/7.2/Microsoft.PowerShell.Core/About/about_Special_Characters.md:133:53    - Unknown word (nbetween)   -- create a blank line`n`nbetween the words."
 reference/7.2/Microsoft.PowerShell.Core/About/about_Special_Characters.md:203:37    - Unknown word (vbetween)   -- There is a vertical tab`vbetween the words."
 reference/7.2/Microsoft.PowerShell.Core/About/about_Splatting.md:256:29    - Unknown word (Vnet)       -- VirtualNetworkName = "myVnet"
@@ -1209,7 +1217,6 @@ reference/7.2/Microsoft.PowerShell.Core/Import-Module.md:314:57    - Unknown wor
 reference/7.2/Microsoft.PowerShell.Core/Import-Module.md:538:76    - Unknown word (RSDGF)      -- remote computer named RSDGF03. The session
 reference/7.2/Microsoft.PowerShell.Core/Import-Module.md:541:2     - Unknown word (RSDGF)      -- `RSDGF03` computer.
 reference/7.2/Microsoft.PowerShell.Core/Import-Module.md:552:36    - Unknown word (RSDGF)      -- CimSession -ComputerName RSDGF03
-reference/7.2/Microsoft.PowerShell.Core/Invoke-Command.md:1431:23   - Unknown word (Autiomation) -- **System.Management.Autiomation.Remoting.PSSessionOption
 reference/7.2/Microsoft.PowerShell.Core/New-Module.md:228:11    - Unknown word (Manoj)      -- $m.hello("Manoj")
 reference/7.2/Microsoft.PowerShell.Core/New-ModuleManifest.md:224:8     - Unknown word (JKBC)       -- 'JKBC'
 reference/7.2/Microsoft.PowerShell.Core/New-PSSession.md:185:58    - Unknown word (Corpnet)    -- ComputerName Server1.Domain44.Corpnet.Fabrikam.com -Credential
@@ -1333,7 +1340,6 @@ reference/7.2/Microsoft.PowerShell.Management/Set-Service.md:197:44    - Unknown
 reference/7.2/Microsoft.PowerShell.Management/Set-Service.md:197:80    - Unknown word (CCLCSWLOCRRC)               -- SWRPWPDTLOCRSDRCWDWO;;;BA)(A;;CCLCSWLOCRRC;;;SU)"
 reference/7.2/Microsoft.PowerShell.Management/Split-Path.md:418:65    - Unknown word (Normpath)   -- would use **Dirname**, **Normpath**, **Realpath**, **Join
 reference/7.2/Microsoft.PowerShell.Management/Split-Path.md:418:79    - Unknown word (Realpath)   -- Dirname**, **Normpath**, **Realpath**, **Join**,
-reference/7.2/Microsoft.PowerShell.Management/Split-Path.md:77:26     - Unknown word (returs)     -- parameters, `Split-Path` returs the parent part of the
 reference/7.2/Microsoft.PowerShell.Management/Start-Process.md:146:2     - Unknown word (nohup)      -- `nohup`. The following example
 reference/7.2/Microsoft.PowerShell.Management/Start-Process.md:147:56    - Unknown word (nohup)      -- launching session. The `nohup` command collects output
 reference/7.2/Microsoft.PowerShell.Management/Start-Process.md:148:2     - Unknown word (nohup)      -- `nohup.out` in the current
@@ -1342,7 +1348,6 @@ reference/7.2/Microsoft.PowerShell.Management/Start-Process.md:152:15    - Unkno
 reference/7.2/Microsoft.PowerShell.Management/Start-Process.md:152:28    - Unknown word (noprofile)  -- Process nohup 'pwsh -noprofile -c "1..120 | % { Write
 reference/7.2/Microsoft.PowerShell.Management/Start-Process.md:540:8     - Unknown word (Proces)     -- `Start-Proces gedit` to launch the
 reference/7.2/Microsoft.PowerShell.Management/Start-Process.md:66:26     - Unknown word (myfile)     -- Start-Process -FilePath "myfile.txt" -WorkingDirectory
-reference/7.2/Microsoft.PowerShell.Management/Suspend-Service.md:45:27     - Unknown word (usingthe)   -- resumed, such as by usingthe `Resume-Service` cmdlet
 reference/7.2/Microsoft.PowerShell.Management/Suspend-Service.md:66:13     - Unknown word (lanman)     -- starts with lanman. To suspend the services
 reference/7.2/Microsoft.PowerShell.Management/Test-Connection.md:154:24    - Unknown word (Traceroute) -- Example 6: Use the Traceroute parameter
 reference/7.2/Microsoft.PowerShell.Management/Test-Connection.md:156:37    - Unknown word (Traceroute) -- PowerShell 6.0, the **Traceroute** parameter maps a route
@@ -1420,8 +1425,7 @@ reference/7.2/Microsoft.PowerShell.Utility/Import-PSSession.md:182:1     - Unkno
 reference/7.2/Microsoft.PowerShell.Utility/Invoke-Expression.md:78:40     - Unknown word (testscript) -- Command "C:\ps-test\testscript.ps1"
 reference/7.2/Microsoft.PowerShell.Utility/Invoke-Expression.md:79:13     - Unknown word (testscript) -- "C:\ps-test\testscript.ps1" | Invoke-Expression
 reference/7.2/Microsoft.PowerShell.Utility/Invoke-RestMethod.md:140:74    - Unknown word (sourcetype) -- table index,host,source,sourcetype,_raw"
-reference/7.2/Microsoft.PowerShell.Utility/Invoke-RestMethod.md:247:1     - Unknown word (standardards) -- standardards-defined value format
-reference/7.2/Microsoft.PowerShell.Utility/Invoke-RestMethod.md:766:81    - Unknown word (Passthru)     -- pipeline, add the **Passthru**
+reference/7.2/Microsoft.PowerShell.Utility/Invoke-RestMethod.md:766:81    - Unknown word (Passthru)   -- pipeline, add the **Passthru**
 reference/7.2/Microsoft.PowerShell.Utility/Invoke-RestMethod.md:808:87    - Unknown word (redirections) -- when present, across redirections.
 reference/7.2/Microsoft.PowerShell.Utility/Invoke-WebRequest.md:131:21    - Unknown word (jdoe)       -- User = 'jdoe'
 reference/7.2/Microsoft.PowerShell.Utility/Invoke-WebRequest.md:165:44    - Unknown word (docspage)   -- StreamWriter]::new('.\docspage.html', $false, $Response
@@ -1439,7 +1443,6 @@ reference/7.2/Microsoft.PowerShell.Utility/New-Object.md:104:2     - Unknown wor
 reference/7.2/Microsoft.PowerShell.Utility/New-Variable.md:48:21     - Unknown word (zipcode)    -- New-Variable -Name "zipcode" -Value 98033
 reference/7.2/Microsoft.PowerShell.Utility/New-Variable.md:51:39     - Unknown word (zipcode)    -- creates a variable named zipcode and assigns it the value
 reference/7.2/Microsoft.PowerShell.Utility/Out-File.md:100:26    - Unknown word (Procs)      -- process objects in `$Procs` to the file **Process
-reference/7.2/Microsoft.PowerShell.Utility/Out-File.md:141:32    - Unknown word (operartors) -- and the redirection operartors (`>` and `>>`) to 2
 reference/7.2/Microsoft.PowerShell.Utility/Out-File.md:150:26    - Unknown word (logfile)    -- $logFile = "$pwd\logfile.txt"
 reference/7.2/Microsoft.PowerShell.Utility/Out-File.md:197:4     - Unknown word (bigendianutf) -- - `bigendianutf32`: Encodes in UTF-
 reference/7.2/Microsoft.PowerShell.Utility/Out-File.md:93:2      - Unknown word (Procs)      -- $Procs = Get-Process
@@ -1467,7 +1470,6 @@ reference/7.2/Microsoft.PowerShell.Utility/Show-Command.md:333:6     - Unknown w
 reference/7.2/Microsoft.PowerShell.Utility/Tee-Object.md:70:65     - Unknown word (processname) -- proc | Select-Object processname,handles
 reference/7.2/Microsoft.PowerShell.Utility/Trace-Command.md:47:30     - Unknown word (parameterbinding) -- Command -Name metadata,parameterbinding,cmdlet -Expression
 reference/7.2/Microsoft.PowerShell.Utility/Trace-Command.md:87:57     - Unknown word (echoargs)         -- ParameterBinding { TestExe -echoargs $a 'c" "d' e" "f }
-reference/7.2/Microsoft.PowerShell.Utility/Update-TypeData.md:204:27    - Unknown word (currnet)    -- last command gets the currnet date and displays it
 reference/7.2/Microsoft.PowerShell.Utility/Update-TypeData.md:558:3     - Unknown word (Noteproperty) -- - Noteproperty
 reference/7.2/Microsoft.PowerShell.Utility/Wait-Debugger.md:38:11     - Unknown word (dbgtest)    -- The file `dbgtest.ps1` contains a function
 reference/7.2/Microsoft.PowerShell.Utility/Wait-Debugger.md:67:17     - Unknown word (dbgtest)    -- At D:\temp\test\dbgtest.ps1:13 char:9
@@ -1481,7 +1483,6 @@ reference/7.2/Microsoft.WSMan.Management/About/about_WSMan_Provider.md:266:57   
 reference/7.2/Microsoft.WSMan.Management/About/about_WSMan_Provider.md:272:21    - Unknown word (testparametername) -- -ParamName testparametername `
 reference/7.2/Microsoft.WSMan.Management/About/about_WSMan_Provider.md:273:22    - Unknown word (testparametervalue) -- -ParamValue testparametervalue
 reference/7.2/Microsoft.WSMan.Management/About/about_WSMan_Provider.md:563:35    - Unknown word (PCWSTR)             -- represents the XML as a **PCWSTR** memory buffer.
-reference/7.2/Microsoft.WSMan.Management/Disconnect-WSMan.md:46:4      - Unknown word (Outpue)     -- ```Outpue
 reference/7.2/Microsoft.WSMan.Management/Get-WSManInstance.md:217:10    - Unknown word (UBPO)       -- Aliases: UBPO, Base
 reference/7.2/Microsoft.WSMan.Management/Get-WSManInstance.md:485:31    - Unknown word (objectandepr) -- values: object, epr, objectandepr
 reference/7.2/Microsoft.WSMan.Management/Invoke-WSManAction.md:108:28    - Unknown word (startservice)     -- WSManAction -Action startservice -ResourceURI wmicimv
@@ -1607,7 +1608,6 @@ reference/7.4/Microsoft.PowerShell.Core/About/about_Arithmetic_Operators.md:358:
 reference/7.4/Microsoft.PowerShell.Core/About/about_Arrays.md:1002:64   - Unknown word (nosuchkey)  -- int]]::new().Item('nosuchkey')
 reference/7.4/Microsoft.PowerShell.Core/About/about_Arrays.md:1003:72   - Unknown word (nosuchkey)  -- Item": "The given key 'nosuchkey'
 reference/7.4/Microsoft.PowerShell.Core/About/about_Arrays.md:345:20    - Unknown word (Longlength) -- **Count** alias. **Longlength** is useful if the array
-reference/7.4/Microsoft.PowerShell.Core/About/about_Arrays.md:787:51    - Unknown word (Instrinsic) -- members, see [about_Instrinsic_Members][08].
 reference/7.4/Microsoft.PowerShell.Core/About/about_Arrays.md:999:59    - Unknown word (nosuchkey)  -- string, int]]::new()['nosuchkey']
 reference/7.4/Microsoft.PowerShell.Core/About/about_Calculated_Properties.md:219:18    - Unknown word (formatstring) -- formatstring='O'
 reference/7.4/Microsoft.PowerShell.Core/About/about_Calculated_Properties.md:255:21    - Unknown word (Metacontent)  -- '' {'Metacontent'}
@@ -1671,7 +1671,6 @@ reference/7.4/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:295:5
 reference/7.4/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:299:19    - Unknown word (logfiles)   -- New-Item -Path c:\logfiles -Name log2.txt -Type
 reference/7.4/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:304:45    - Unknown word (logfiles)   -- log2.txt` in the `C:\logfiles` directory and adds
 reference/7.4/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:418:4     - Unknown word (bigendianutf) -- - `bigendianutf32`: Encodes in UTF-
-reference/7.4/Microsoft.PowerShell.Core/About/about_For.md:352:60    - Unknown word (filenamess) -- sorted array of original filenamess at the
 reference/7.4/Microsoft.PowerShell.Core/About/about_Format.ps1xml.md:326:45    - Unknown word (mygciview)  -- custom view is named **mygciview** and adds the
 reference/7.4/Microsoft.PowerShell.Core/About/about_Format.ps1xml.md:343:9     - Unknown word (mygciview)  -- name, **mygciview**, and format the table
 reference/7.4/Microsoft.PowerShell.Core/About/about_Format.ps1xml.md:358:30    - Unknown word (Mygciview)  -- Export-FormatData -Path ./Mygciview.Format.ps1xml
@@ -1682,7 +1681,6 @@ reference/7.4/Microsoft.PowerShell.Core/About/about_Function_Provider.md:132:42 
 reference/7.4/Microsoft.PowerShell.Core/About/about_Functions.md:221:4     - Unknown word (allpix)     -- $allpix = Get-ChildItem -Path
 reference/7.4/Microsoft.PowerShell.Core/About/about_Functions.md:222:4     - Unknown word (allpix)     -- $allpix | Where-Object {$_.LastWriteT
 reference/7.4/Microsoft.PowerShell.Core/About/about_Functions_Advanced_Parameters.md:742:50    - Unknown word (dynamicparameters) -- tab completion. Like **dynamicparameters**, the
-reference/7.4/Microsoft.PowerShell.Core/About/about_Functions_Argument_Completion.md:265:37    - Unknown word (pswh)       -- toryCompleter(ContainingFile="pswh.exe", Depth=2)]
 reference/7.4/Microsoft.PowerShell.Core/About/about_Group_Policy_Settings.md:59:10     - Unknown word (gpedit)     -- editor (`gpedit.msc`).
 reference/7.4/Microsoft.PowerShell.Core/About/about_Hash_Tables.md:130:11    - Unknown word (orderedhash) -- [ordered]$orderedhash = @{}
 reference/7.4/Microsoft.PowerShell.Core/About/about_Hash_Tables.md:133:19    - Unknown word (orderedhash) -- 1 |  [ordered]$orderedhash = @{}
@@ -1723,7 +1721,16 @@ reference/7.4/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:257:6   
 reference/7.4/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:259:4     - Unknown word (usgb)       -- + 1usgb
 reference/7.4/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:261:23    - Unknown word (usgb)       -- The numeric constant 1usgb is not valid.
 reference/7.4/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:266:56    - Unknown word (gbus)       -- invalid syntax like `1gbus` will be
-reference/7.4/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:327:71    - Unknown word (casies)     -- BigInteger]` using special casies to
+reference/7.4/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:37:12     - Unknown word (kibibyte)   -- | `kb`   | kibibyte (1024<sup>1</sup>) multiplier
+reference/7.4/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:38:12     - Unknown word (mebibyte)   -- | `mb`   | mebibyte (1024<sup>2</sup>) multiplier
+reference/7.4/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:39:12     - Unknown word (gigibyte)   -- | `gb`   | gigibyte (1024<sup>3</sup>) multiplier
+reference/7.4/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:40:12     - Unknown word (teribyte)   -- | `tb`   | teribyte (1024<sup>4</sup>) multiplier
+reference/7.4/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:41:12     - Unknown word (petibyte)   -- | `pb`   | petibyte (1024<sup>5</sup>) multiplier
+reference/7.4/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:79:12     - Unknown word (kibibyte)   -- | `kb`   | kibibyte (1024<sup>1</sup>) multiplier
+reference/7.4/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:80:12     - Unknown word (mebibyte)   -- | `mb`   | mebibyte (1024<sup>2</sup>) multiplier
+reference/7.4/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:81:12     - Unknown word (gigibyte)   -- | `gb`   | gigibyte (1024<sup>3</sup>) multiplier
+reference/7.4/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:82:12     - Unknown word (teribyte)   -- | `tb`   | teribyte (1024<sup>4</sup>) multiplier
+reference/7.4/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:83:12     - Unknown word (petibyte)   -- | `pb`   | petibyte (1024<sup>5</sup>) multiplier
 reference/7.4/Microsoft.PowerShell.Core/About/about_Operator_Precedence.md:88:14     - Unknown word (coalese)    -- | `??` (null-coalese operator)
 reference/7.4/Microsoft.PowerShell.Core/About/about_Operators.md:254:15    - Unknown word (executionpolicy) -- PS> $c = "get-executionpolicy"
 reference/7.4/Microsoft.PowerShell.Core/About/about_Operators.md:256:5     - Unknown word (executionpolicy) -- get-executionpolicy
@@ -1781,7 +1788,6 @@ reference/7.4/Microsoft.PowerShell.Core/About/about_Pwsh.md:334:3     - Unknown 
 reference/7.4/Microsoft.PowerShell.Core/About/about_Pwsh.md:358:24    - Unknown word (noni)           -- -NonInteractive | -noni
 reference/7.4/Microsoft.PowerShell.Core/About/about_Pwsh.md:394:33    - Unknown word (myproject)      -- pwsh -SettingsFile c:\myproject\powershell.config.json
 reference/7.4/Microsoft.PowerShell.Core/About/about_Pwsh.md:396:23    - Unknown word (sshs)           -- # -SSHServerMode | -sshs
-reference/7.4/Microsoft.PowerShell.Core/About/about_Pwsh.md:409:41    - Unknown word (exectuable)     -- version of this PowerShell exectuable. Additional parameters
 reference/7.4/Microsoft.PowerShell.Core/About/about_Pwsh.md:5:268     - Unknown word (noni)       -- nol, -NonInteractive, -noni, -NoProfile, -nop,
 reference/7.4/Microsoft.PowerShell.Core/About/about_Pwsh.md:5:359     - Unknown word (sshs)       -- settings, -SSHServerMode, -sshs, -STA, -Version, -v
 reference/7.4/Microsoft.PowerShell.Core/About/about_Redirection.md:239:24    - Unknown word (xzvf)       -- curl -s -L $uri | tar -xzvf - -C .
@@ -1830,9 +1836,9 @@ reference/7.4/Microsoft.PowerShell.Core/About/about_Scripts.md:193:14    - Unkno
 reference/7.4/Microsoft.PowerShell.Core/About/about_Scripts.md:193:39    - Unknown word (erroraction) -- pssession $computername -erroraction SilentlyContinue
 reference/7.4/Microsoft.PowerShell.Core/About/about_Scripts.md:345:25    - Unknown word (juneb)       -- Directory: C:\Users\juneb\Documents\WindowsPowerShell
 reference/7.4/Microsoft.PowerShell.Core/About/about_Session_Configurations.md:178:1     - Unknown word (ugin)       -- ugin
-reference/7.4/Microsoft.PowerShell.Core/About/about_Signing.md:197:37    - Unknown word (codesigning) -- cert:\CurrentUser\my -codesigning
-reference/7.4/Microsoft.PowerShell.Core/About/about_Signing.md:234:2     - Unknown word (cmdletbinding) -- [cmdletbinding()]
-reference/7.4/Microsoft.PowerShell.Core/About/about_Signing.md:279:2     - Unknown word (Certmgr)       -- `Certmgr.exe` to export your
+reference/7.4/Microsoft.PowerShell.Core/About/about_Signing.md:206:37    - Unknown word (codesigning) -- cert:\CurrentUser\my -codesigning
+reference/7.4/Microsoft.PowerShell.Core/About/about_Signing.md:243:2     - Unknown word (cmdletbinding) -- [cmdletbinding()]
+reference/7.4/Microsoft.PowerShell.Core/About/about_Signing.md:288:2     - Unknown word (Certmgr)       -- `Certmgr.exe` to export your
 reference/7.4/Microsoft.PowerShell.Core/About/about_Special_Characters.md:133:53    - Unknown word (nbetween)   -- create a blank line`n`nbetween the words."
 reference/7.4/Microsoft.PowerShell.Core/About/about_Special_Characters.md:203:37    - Unknown word (vbetween)   -- There is a vertical tab`vbetween the words."
 reference/7.4/Microsoft.PowerShell.Core/About/about_Splatting.md:256:29    - Unknown word (Vnet)       -- VirtualNetworkName = "myVnet"
@@ -1922,7 +1928,6 @@ reference/7.4/Microsoft.PowerShell.Core/Import-Module.md:314:57    - Unknown wor
 reference/7.4/Microsoft.PowerShell.Core/Import-Module.md:538:76    - Unknown word (RSDGF)      -- remote computer named RSDGF03. The session
 reference/7.4/Microsoft.PowerShell.Core/Import-Module.md:541:2     - Unknown word (RSDGF)      -- `RSDGF03` computer.
 reference/7.4/Microsoft.PowerShell.Core/Import-Module.md:552:36    - Unknown word (RSDGF)      -- CimSession -ComputerName RSDGF03
-reference/7.4/Microsoft.PowerShell.Core/Invoke-Command.md:1471:23   - Unknown word (Autiomation) -- **System.Management.Autiomation.Remoting.PSSessionOption
 reference/7.4/Microsoft.PowerShell.Core/New-Module.md:228:11    - Unknown word (Manoj)      -- $m.hello("Manoj")
 reference/7.4/Microsoft.PowerShell.Core/New-ModuleManifest.md:224:8     - Unknown word (JKBC)       -- 'JKBC'
 reference/7.4/Microsoft.PowerShell.Core/New-PSSession.md:185:58    - Unknown word (Corpnet)    -- ComputerName Server1.Domain44.Corpnet.Fabrikam.com -Credential
@@ -2050,7 +2055,6 @@ reference/7.4/Microsoft.PowerShell.Management/Set-Service.md:197:44    - Unknown
 reference/7.4/Microsoft.PowerShell.Management/Set-Service.md:197:80    - Unknown word (CCLCSWLOCRRC)               -- SWRPWPDTLOCRSDRCWDWO;;;BA)(A;;CCLCSWLOCRRC;;;SU)"
 reference/7.4/Microsoft.PowerShell.Management/Split-Path.md:418:65    - Unknown word (Normpath)   -- would use **Dirname**, **Normpath**, **Realpath**, **Join
 reference/7.4/Microsoft.PowerShell.Management/Split-Path.md:418:79    - Unknown word (Realpath)   -- Dirname**, **Normpath**, **Realpath**, **Join**,
-reference/7.4/Microsoft.PowerShell.Management/Split-Path.md:77:26     - Unknown word (returs)     -- parameters, `Split-Path` returs the parent part of the
 reference/7.4/Microsoft.PowerShell.Management/Start-Process.md:144:2     - Unknown word (nohup)        -- `nohup`. The following example
 reference/7.4/Microsoft.PowerShell.Management/Start-Process.md:145:56    - Unknown word (nohup)        -- launching session. The `nohup` command collects output
 reference/7.4/Microsoft.PowerShell.Management/Start-Process.md:146:2     - Unknown word (nohup)        -- `nohup.out` in the current
@@ -2059,7 +2063,6 @@ reference/7.4/Microsoft.PowerShell.Management/Start-Process.md:150:15    - Unkno
 reference/7.4/Microsoft.PowerShell.Management/Start-Process.md:150:28    - Unknown word (noprofile)    -- Process nohup 'pwsh -noprofile -c "1..120 | % { Write
 reference/7.4/Microsoft.PowerShell.Management/Start-Process.md:19:79     - Unknown word (pscredential) -- string[]>] [-Credential <pscredential>]
 reference/7.4/Microsoft.PowerShell.Management/Start-Process.md:64:26     - Unknown word (myfile)       -- Start-Process -FilePath "myfile.txt" -WorkingDirectory
-reference/7.4/Microsoft.PowerShell.Management/Suspend-Service.md:45:27     - Unknown word (usingthe)   -- resumed, such as by usingthe `Resume-Service` cmdlet
 reference/7.4/Microsoft.PowerShell.Management/Suspend-Service.md:66:13     - Unknown word (lanman)     -- starts with lanman. To suspend the services
 reference/7.4/Microsoft.PowerShell.Management/Test-Connection.md:155:24    - Unknown word (Traceroute) -- Example 6: Use the Traceroute parameter
 reference/7.4/Microsoft.PowerShell.Management/Test-Connection.md:157:37    - Unknown word (Traceroute) -- PowerShell 6.0, the **Traceroute** parameter maps a route
@@ -2137,8 +2140,7 @@ reference/7.4/Microsoft.PowerShell.Utility/Import-PSSession.md:182:1     - Unkno
 reference/7.4/Microsoft.PowerShell.Utility/Invoke-Expression.md:78:40     - Unknown word (testscript) -- Command "C:\ps-test\testscript.ps1"
 reference/7.4/Microsoft.PowerShell.Utility/Invoke-Expression.md:79:13     - Unknown word (testscript) -- "C:\ps-test\testscript.ps1" | Invoke-Expression
 reference/7.4/Microsoft.PowerShell.Utility/Invoke-RestMethod.md:154:74    - Unknown word (sourcetype) -- table index,host,source,sourcetype,_raw"
-reference/7.4/Microsoft.PowerShell.Utility/Invoke-RestMethod.md:261:1     - Unknown word (standardards) -- standardards-defined value format
-reference/7.4/Microsoft.PowerShell.Utility/Invoke-RestMethod.md:895:81    - Unknown word (Passthru)     -- pipeline, add the **Passthru**
+reference/7.4/Microsoft.PowerShell.Utility/Invoke-RestMethod.md:895:81    - Unknown word (Passthru)   -- pipeline, add the **Passthru**
 reference/7.4/Microsoft.PowerShell.Utility/Invoke-RestMethod.md:902:75    - Unknown word (redirections) -- resolved URI after any redirections. When you
 reference/7.4/Microsoft.PowerShell.Utility/Invoke-RestMethod.md:941:87    - Unknown word (redirections) -- when present, across redirections.
 reference/7.4/Microsoft.PowerShell.Utility/Invoke-RestMethod.md:963:71    - Unknown word (redirections) -- of the request across redirections.
@@ -2161,7 +2163,6 @@ reference/7.4/Microsoft.PowerShell.Utility/New-Variable.md:48:21     - Unknown w
 reference/7.4/Microsoft.PowerShell.Utility/New-Variable.md:51:39     - Unknown word (zipcode)    -- creates a variable named zipcode and assigns it the value
 reference/7.4/Microsoft.PowerShell.Utility/Out-File.md:101:39    - Unknown word (Procs)      -- stored in the variable, `$Procs`. `Out-File` uses the
 reference/7.4/Microsoft.PowerShell.Utility/Out-File.md:103:26    - Unknown word (Procs)      -- process objects in `$Procs` to the file **Process
-reference/7.4/Microsoft.PowerShell.Utility/Out-File.md:144:32    - Unknown word (operartors) -- and the redirection operartors (`>` and `>>`) to 2
 reference/7.4/Microsoft.PowerShell.Utility/Out-File.md:153:26    - Unknown word (logfile)    -- $logFile = "$pwd\logfile.txt"
 reference/7.4/Microsoft.PowerShell.Utility/Out-File.md:202:4     - Unknown word (bigendianutf) -- - `bigendianutf32`: Encodes in UTF-
 reference/7.4/Microsoft.PowerShell.Utility/Out-File.md:96:2      - Unknown word (Procs)      -- $Procs = Get-Process
@@ -2189,7 +2190,6 @@ reference/7.4/Microsoft.PowerShell.Utility/Show-Command.md:333:6     - Unknown w
 reference/7.4/Microsoft.PowerShell.Utility/Tee-Object.md:70:65     - Unknown word (processname) -- proc | Select-Object processname,handles
 reference/7.4/Microsoft.PowerShell.Utility/Trace-Command.md:47:30     - Unknown word (parameterbinding) -- Command -Name metadata,parameterbinding,cmdlet -Expression
 reference/7.4/Microsoft.PowerShell.Utility/Trace-Command.md:86:57     - Unknown word (echoargs)         -- ParameterBinding { TestExe -echoargs $a 'c" "d' e" "f }
-reference/7.4/Microsoft.PowerShell.Utility/Update-TypeData.md:204:27    - Unknown word (currnet)    -- last command gets the currnet date and displays it
 reference/7.4/Microsoft.PowerShell.Utility/Update-TypeData.md:558:3     - Unknown word (Noteproperty) -- - Noteproperty
 reference/7.4/Microsoft.PowerShell.Utility/Wait-Debugger.md:38:11     - Unknown word (dbgtest)    -- The file `dbgtest.ps1` contains a function
 reference/7.4/Microsoft.PowerShell.Utility/Wait-Debugger.md:67:17     - Unknown word (dbgtest)    -- At D:\temp\test\dbgtest.ps1:13 char:9
@@ -2203,7 +2203,6 @@ reference/7.4/Microsoft.WSMan.Management/About/about_WSMan_Provider.md:266:57   
 reference/7.4/Microsoft.WSMan.Management/About/about_WSMan_Provider.md:272:21    - Unknown word (testparametername) -- -ParamName testparametername `
 reference/7.4/Microsoft.WSMan.Management/About/about_WSMan_Provider.md:273:22    - Unknown word (testparametervalue) -- -ParamValue testparametervalue
 reference/7.4/Microsoft.WSMan.Management/About/about_WSMan_Provider.md:563:35    - Unknown word (PCWSTR)             -- represents the XML as a **PCWSTR** memory buffer.
-reference/7.4/Microsoft.WSMan.Management/Disconnect-WSMan.md:46:4      - Unknown word (Outpue)     -- ```Outpue
 reference/7.4/Microsoft.WSMan.Management/Get-WSManInstance.md:217:10    - Unknown word (UBPO)       -- Aliases: UBPO, Base
 reference/7.4/Microsoft.WSMan.Management/Get-WSManInstance.md:485:31    - Unknown word (objectandepr) -- values: object, epr, objectandepr
 reference/7.4/Microsoft.WSMan.Management/Invoke-WSManAction.md:108:28    - Unknown word (startservice)     -- WSManAction -Action startservice -ResourceURI wmicimv
@@ -2327,7 +2326,6 @@ reference/7.5/Microsoft.PowerShell.Core/About/about_Arithmetic_Operators.md:358:
 reference/7.5/Microsoft.PowerShell.Core/About/about_Arrays.md:1002:64   - Unknown word (nosuchkey)  -- int]]::new().Item('nosuchkey')
 reference/7.5/Microsoft.PowerShell.Core/About/about_Arrays.md:1003:72   - Unknown word (nosuchkey)  -- Item": "The given key 'nosuchkey'
 reference/7.5/Microsoft.PowerShell.Core/About/about_Arrays.md:345:20    - Unknown word (Longlength) -- **Count** alias. **Longlength** is useful if the array
-reference/7.5/Microsoft.PowerShell.Core/About/about_Arrays.md:787:51    - Unknown word (Instrinsic) -- members, see [about_Instrinsic_Members][08].
 reference/7.5/Microsoft.PowerShell.Core/About/about_Arrays.md:999:59    - Unknown word (nosuchkey)  -- string, int]]::new()['nosuchkey']
 reference/7.5/Microsoft.PowerShell.Core/About/about_Calculated_Properties.md:219:18    - Unknown word (formatstring) -- formatstring='O'
 reference/7.5/Microsoft.PowerShell.Core/About/about_Calculated_Properties.md:255:21    - Unknown word (Metacontent)  -- '' {'Metacontent'}
@@ -2391,7 +2389,6 @@ reference/7.5/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:295:5
 reference/7.5/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:299:19    - Unknown word (logfiles)   -- New-Item -Path c:\logfiles -Name log2.txt -Type
 reference/7.5/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:304:45    - Unknown word (logfiles)   -- log2.txt` in the `C:\logfiles` directory and adds
 reference/7.5/Microsoft.PowerShell.Core/About/about_FileSystem_Provider.md:418:4     - Unknown word (bigendianutf) -- - `bigendianutf32`: Encodes in UTF-
-reference/7.5/Microsoft.PowerShell.Core/About/about_For.md:352:60    - Unknown word (filenamess) -- sorted array of original filenamess at the
 reference/7.5/Microsoft.PowerShell.Core/About/about_Format.ps1xml.md:326:45    - Unknown word (mygciview)  -- custom view is named **mygciview** and adds the
 reference/7.5/Microsoft.PowerShell.Core/About/about_Format.ps1xml.md:343:9     - Unknown word (mygciview)  -- name, **mygciview**, and format the table
 reference/7.5/Microsoft.PowerShell.Core/About/about_Format.ps1xml.md:358:30    - Unknown word (Mygciview)  -- Export-FormatData -Path ./Mygciview.Format.ps1xml
@@ -2402,7 +2399,6 @@ reference/7.5/Microsoft.PowerShell.Core/About/about_Function_Provider.md:132:42 
 reference/7.5/Microsoft.PowerShell.Core/About/about_Functions.md:221:4     - Unknown word (allpix)     -- $allpix = Get-ChildItem -Path
 reference/7.5/Microsoft.PowerShell.Core/About/about_Functions.md:222:4     - Unknown word (allpix)     -- $allpix | Where-Object {$_.LastWriteT
 reference/7.5/Microsoft.PowerShell.Core/About/about_Functions_Advanced_Parameters.md:742:50    - Unknown word (dynamicparameters) -- tab completion. Like **dynamicparameters**, the
-reference/7.5/Microsoft.PowerShell.Core/About/about_Functions_Argument_Completion.md:265:37    - Unknown word (pswh)       -- toryCompleter(ContainingFile="pswh.exe", Depth=2)]
 reference/7.5/Microsoft.PowerShell.Core/About/about_Group_Policy_Settings.md:59:10     - Unknown word (gpedit)     -- editor (`gpedit.msc`).
 reference/7.5/Microsoft.PowerShell.Core/About/about_Hash_Tables.md:130:11    - Unknown word (orderedhash) -- [ordered]$orderedhash = @{}
 reference/7.5/Microsoft.PowerShell.Core/About/about_Hash_Tables.md:133:19    - Unknown word (orderedhash) -- 1 |  [ordered]$orderedhash = @{}
@@ -2443,7 +2439,16 @@ reference/7.5/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:257:6   
 reference/7.5/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:259:4     - Unknown word (usgb)       -- + 1usgb
 reference/7.5/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:261:23    - Unknown word (usgb)       -- The numeric constant 1usgb is not valid.
 reference/7.5/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:266:56    - Unknown word (gbus)       -- invalid syntax like `1gbus` will be
-reference/7.5/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:327:71    - Unknown word (casies)     -- BigInteger]` using special casies to
+reference/7.5/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:37:12     - Unknown word (kibibyte)   -- | `kb`   | kibibyte (1024<sup>1</sup>) multiplier
+reference/7.5/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:38:12     - Unknown word (mebibyte)   -- | `mb`   | mebibyte (1024<sup>2</sup>) multiplier
+reference/7.5/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:39:12     - Unknown word (gigibyte)   -- | `gb`   | gigibyte (1024<sup>3</sup>) multiplier
+reference/7.5/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:40:12     - Unknown word (teribyte)   -- | `tb`   | teribyte (1024<sup>4</sup>) multiplier
+reference/7.5/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:41:12     - Unknown word (petibyte)   -- | `pb`   | petibyte (1024<sup>5</sup>) multiplier
+reference/7.5/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:79:12     - Unknown word (kibibyte)   -- | `kb`   | kibibyte (1024<sup>1</sup>) multiplier
+reference/7.5/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:80:12     - Unknown word (mebibyte)   -- | `mb`   | mebibyte (1024<sup>2</sup>) multiplier
+reference/7.5/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:81:12     - Unknown word (gigibyte)   -- | `gb`   | gigibyte (1024<sup>3</sup>) multiplier
+reference/7.5/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:82:12     - Unknown word (teribyte)   -- | `tb`   | teribyte (1024<sup>4</sup>) multiplier
+reference/7.5/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:83:12     - Unknown word (petibyte)   -- | `pb`   | petibyte (1024<sup>5</sup>) multiplier
 reference/7.5/Microsoft.PowerShell.Core/About/about_Operator_Precedence.md:88:14     - Unknown word (coalese)    -- | `??` (null-coalese operator)
 reference/7.5/Microsoft.PowerShell.Core/About/about_Operators.md:254:15    - Unknown word (executionpolicy) -- PS> $c = "get-executionpolicy"
 reference/7.5/Microsoft.PowerShell.Core/About/about_Operators.md:256:5     - Unknown word (executionpolicy) -- get-executionpolicy
@@ -2500,7 +2505,6 @@ reference/7.5/Microsoft.PowerShell.Core/About/about_Pwsh.md:335:3     - Unknown 
 reference/7.5/Microsoft.PowerShell.Core/About/about_Pwsh.md:359:24    - Unknown word (noni)           -- -NonInteractive | -noni
 reference/7.5/Microsoft.PowerShell.Core/About/about_Pwsh.md:395:33    - Unknown word (myproject)      -- pwsh -SettingsFile c:\myproject\powershell.config.json
 reference/7.5/Microsoft.PowerShell.Core/About/about_Pwsh.md:397:23    - Unknown word (sshs)           -- # -SSHServerMode | -sshs
-reference/7.5/Microsoft.PowerShell.Core/About/about_Pwsh.md:410:41    - Unknown word (exectuable)     -- version of this PowerShell exectuable. Additional parameters
 reference/7.5/Microsoft.PowerShell.Core/About/about_Pwsh.md:5:268     - Unknown word (noni)       -- nol, -NonInteractive, -noni, -NoProfile, -nop,
 reference/7.5/Microsoft.PowerShell.Core/About/about_Pwsh.md:5:359     - Unknown word (sshs)       -- settings, -SSHServerMode, -sshs, -STA, -Version, -v
 reference/7.5/Microsoft.PowerShell.Core/About/about_Redirection.md:239:24    - Unknown word (xzvf)       -- curl -s -L $uri | tar -xzvf - -C .
@@ -2549,9 +2553,9 @@ reference/7.5/Microsoft.PowerShell.Core/About/about_Scripts.md:193:14    - Unkno
 reference/7.5/Microsoft.PowerShell.Core/About/about_Scripts.md:193:39    - Unknown word (erroraction) -- pssession $computername -erroraction SilentlyContinue
 reference/7.5/Microsoft.PowerShell.Core/About/about_Scripts.md:345:25    - Unknown word (juneb)       -- Directory: C:\Users\juneb\Documents\WindowsPowerShell
 reference/7.5/Microsoft.PowerShell.Core/About/about_Session_Configurations.md:178:1     - Unknown word (ugin)       -- ugin
-reference/7.5/Microsoft.PowerShell.Core/About/about_Signing.md:197:37    - Unknown word (codesigning) -- cert:\CurrentUser\my -codesigning
-reference/7.5/Microsoft.PowerShell.Core/About/about_Signing.md:234:2     - Unknown word (cmdletbinding) -- [cmdletbinding()]
-reference/7.5/Microsoft.PowerShell.Core/About/about_Signing.md:279:2     - Unknown word (Certmgr)       -- `Certmgr.exe` to export your
+reference/7.5/Microsoft.PowerShell.Core/About/about_Signing.md:206:37    - Unknown word (codesigning) -- cert:\CurrentUser\my -codesigning
+reference/7.5/Microsoft.PowerShell.Core/About/about_Signing.md:243:2     - Unknown word (cmdletbinding) -- [cmdletbinding()]
+reference/7.5/Microsoft.PowerShell.Core/About/about_Signing.md:288:2     - Unknown word (Certmgr)       -- `Certmgr.exe` to export your
 reference/7.5/Microsoft.PowerShell.Core/About/about_Special_Characters.md:133:53    - Unknown word (nbetween)   -- create a blank line`n`nbetween the words."
 reference/7.5/Microsoft.PowerShell.Core/About/about_Special_Characters.md:203:37    - Unknown word (vbetween)   -- There is a vertical tab`vbetween the words."
 reference/7.5/Microsoft.PowerShell.Core/About/about_Splatting.md:256:29    - Unknown word (Vnet)       -- VirtualNetworkName = "myVnet"
@@ -2641,7 +2645,6 @@ reference/7.5/Microsoft.PowerShell.Core/Import-Module.md:314:57    - Unknown wor
 reference/7.5/Microsoft.PowerShell.Core/Import-Module.md:538:76    - Unknown word (RSDGF)      -- remote computer named RSDGF03. The session
 reference/7.5/Microsoft.PowerShell.Core/Import-Module.md:541:2     - Unknown word (RSDGF)      -- `RSDGF03` computer.
 reference/7.5/Microsoft.PowerShell.Core/Import-Module.md:552:36    - Unknown word (RSDGF)      -- CimSession -ComputerName RSDGF03
-reference/7.5/Microsoft.PowerShell.Core/Invoke-Command.md:1471:23   - Unknown word (Autiomation) -- **System.Management.Autiomation.Remoting.PSSessionOption
 reference/7.5/Microsoft.PowerShell.Core/New-Module.md:228:11    - Unknown word (Manoj)      -- $m.hello("Manoj")
 reference/7.5/Microsoft.PowerShell.Core/New-ModuleManifest.md:224:8     - Unknown word (JKBC)       -- 'JKBC'
 reference/7.5/Microsoft.PowerShell.Core/New-PSSession.md:185:58    - Unknown word (Corpnet)    -- ComputerName Server1.Domain44.Corpnet.Fabrikam.com -Credential
@@ -2769,7 +2772,6 @@ reference/7.5/Microsoft.PowerShell.Management/Set-Service.md:197:44    - Unknown
 reference/7.5/Microsoft.PowerShell.Management/Set-Service.md:197:80    - Unknown word (CCLCSWLOCRRC)               -- SWRPWPDTLOCRSDRCWDWO;;;BA)(A;;CCLCSWLOCRRC;;;SU)"
 reference/7.5/Microsoft.PowerShell.Management/Split-Path.md:418:65    - Unknown word (Normpath)   -- would use **Dirname**, **Normpath**, **Realpath**, **Join
 reference/7.5/Microsoft.PowerShell.Management/Split-Path.md:418:79    - Unknown word (Realpath)   -- Dirname**, **Normpath**, **Realpath**, **Join**,
-reference/7.5/Microsoft.PowerShell.Management/Split-Path.md:77:26     - Unknown word (returs)     -- parameters, `Split-Path` returs the parent part of the
 reference/7.5/Microsoft.PowerShell.Management/Start-Process.md:144:2     - Unknown word (nohup)        -- `nohup`. The following example
 reference/7.5/Microsoft.PowerShell.Management/Start-Process.md:145:56    - Unknown word (nohup)        -- launching session. The `nohup` command collects output
 reference/7.5/Microsoft.PowerShell.Management/Start-Process.md:146:2     - Unknown word (nohup)        -- `nohup.out` in the current
@@ -2778,7 +2780,6 @@ reference/7.5/Microsoft.PowerShell.Management/Start-Process.md:150:15    - Unkno
 reference/7.5/Microsoft.PowerShell.Management/Start-Process.md:150:28    - Unknown word (noprofile)    -- Process nohup 'pwsh -noprofile -c "1..120 | % { Write
 reference/7.5/Microsoft.PowerShell.Management/Start-Process.md:19:79     - Unknown word (pscredential) -- string[]>] [-Credential <pscredential>]
 reference/7.5/Microsoft.PowerShell.Management/Start-Process.md:64:26     - Unknown word (myfile)       -- Start-Process -FilePath "myfile.txt" -WorkingDirectory
-reference/7.5/Microsoft.PowerShell.Management/Suspend-Service.md:45:27     - Unknown word (usingthe)   -- resumed, such as by usingthe `Resume-Service` cmdlet
 reference/7.5/Microsoft.PowerShell.Management/Suspend-Service.md:66:13     - Unknown word (lanman)     -- starts with lanman. To suspend the services
 reference/7.5/Microsoft.PowerShell.Management/Test-Connection.md:155:24    - Unknown word (Traceroute) -- Example 6: Use the Traceroute parameter
 reference/7.5/Microsoft.PowerShell.Management/Test-Connection.md:157:37    - Unknown word (Traceroute) -- PowerShell 6.0, the **Traceroute** parameter maps a route
@@ -2856,8 +2857,7 @@ reference/7.5/Microsoft.PowerShell.Utility/Import-PSSession.md:182:1     - Unkno
 reference/7.5/Microsoft.PowerShell.Utility/Invoke-Expression.md:78:40     - Unknown word (testscript) -- Command "C:\ps-test\testscript.ps1"
 reference/7.5/Microsoft.PowerShell.Utility/Invoke-Expression.md:79:13     - Unknown word (testscript) -- "C:\ps-test\testscript.ps1" | Invoke-Expression
 reference/7.5/Microsoft.PowerShell.Utility/Invoke-RestMethod.md:154:74    - Unknown word (sourcetype) -- table index,host,source,sourcetype,_raw"
-reference/7.5/Microsoft.PowerShell.Utility/Invoke-RestMethod.md:261:1     - Unknown word (standardards) -- standardards-defined value format
-reference/7.5/Microsoft.PowerShell.Utility/Invoke-RestMethod.md:895:81    - Unknown word (Passthru)     -- pipeline, add the **Passthru**
+reference/7.5/Microsoft.PowerShell.Utility/Invoke-RestMethod.md:895:81    - Unknown word (Passthru)   -- pipeline, add the **Passthru**
 reference/7.5/Microsoft.PowerShell.Utility/Invoke-RestMethod.md:902:75    - Unknown word (redirections) -- resolved URI after any redirections. When you
 reference/7.5/Microsoft.PowerShell.Utility/Invoke-RestMethod.md:936:87    - Unknown word (redirections) -- when present, across redirections.
 reference/7.5/Microsoft.PowerShell.Utility/Invoke-RestMethod.md:958:71    - Unknown word (redirections) -- of the request across redirections.
@@ -2880,7 +2880,6 @@ reference/7.5/Microsoft.PowerShell.Utility/New-Variable.md:48:21     - Unknown w
 reference/7.5/Microsoft.PowerShell.Utility/New-Variable.md:51:39     - Unknown word (zipcode)    -- creates a variable named zipcode and assigns it the value
 reference/7.5/Microsoft.PowerShell.Utility/Out-File.md:101:39    - Unknown word (Procs)      -- stored in the variable, `$Procs`. `Out-File` uses the
 reference/7.5/Microsoft.PowerShell.Utility/Out-File.md:103:26    - Unknown word (Procs)      -- process objects in `$Procs` to the file **Process
-reference/7.5/Microsoft.PowerShell.Utility/Out-File.md:144:32    - Unknown word (operartors) -- and the redirection operartors (`>` and `>>`) to 2
 reference/7.5/Microsoft.PowerShell.Utility/Out-File.md:153:26    - Unknown word (logfile)    -- $logFile = "$pwd\logfile.txt"
 reference/7.5/Microsoft.PowerShell.Utility/Out-File.md:202:4     - Unknown word (bigendianutf) -- - `bigendianutf32`: Encodes in UTF-
 reference/7.5/Microsoft.PowerShell.Utility/Out-File.md:96:2      - Unknown word (Procs)      -- $Procs = Get-Process
@@ -2907,7 +2906,6 @@ reference/7.5/Microsoft.PowerShell.Utility/Show-Command.md:333:6     - Unknown w
 reference/7.5/Microsoft.PowerShell.Utility/Tee-Object.md:70:65     - Unknown word (processname) -- proc | Select-Object processname,handles
 reference/7.5/Microsoft.PowerShell.Utility/Trace-Command.md:47:30     - Unknown word (parameterbinding) -- Command -Name metadata,parameterbinding,cmdlet -Expression
 reference/7.5/Microsoft.PowerShell.Utility/Trace-Command.md:86:57     - Unknown word (echoargs)         -- ParameterBinding { TestExe -echoargs $a 'c" "d' e" "f }
-reference/7.5/Microsoft.PowerShell.Utility/Update-TypeData.md:204:27    - Unknown word (currnet)    -- last command gets the currnet date and displays it
 reference/7.5/Microsoft.PowerShell.Utility/Update-TypeData.md:558:3     - Unknown word (Noteproperty) -- - Noteproperty
 reference/7.5/Microsoft.PowerShell.Utility/Wait-Debugger.md:38:11     - Unknown word (dbgtest)    -- The file `dbgtest.ps1` contains a function
 reference/7.5/Microsoft.PowerShell.Utility/Wait-Debugger.md:67:17     - Unknown word (dbgtest)    -- At D:\temp\test\dbgtest.ps1:13 char:9
@@ -2921,7 +2919,6 @@ reference/7.5/Microsoft.WSMan.Management/About/about_WSMan_Provider.md:266:57   
 reference/7.5/Microsoft.WSMan.Management/About/about_WSMan_Provider.md:272:21    - Unknown word (testparametername) -- -ParamName testparametername `
 reference/7.5/Microsoft.WSMan.Management/About/about_WSMan_Provider.md:273:22    - Unknown word (testparametervalue) -- -ParamValue testparametervalue
 reference/7.5/Microsoft.WSMan.Management/About/about_WSMan_Provider.md:563:35    - Unknown word (PCWSTR)             -- represents the XML as a **PCWSTR** memory buffer.
-reference/7.5/Microsoft.WSMan.Management/Disconnect-WSMan.md:46:4      - Unknown word (Outpue)     -- ```Outpue
 reference/7.5/Microsoft.WSMan.Management/Get-WSManInstance.md:217:10    - Unknown word (UBPO)       -- Aliases: UBPO, Base
 reference/7.5/Microsoft.WSMan.Management/Get-WSManInstance.md:485:31    - Unknown word (objectandepr) -- values: object, epr, objectandepr
 reference/7.5/Microsoft.WSMan.Management/Invoke-WSManAction.md:108:28    - Unknown word (startservice)     -- WSManAction -Action startservice -ResourceURI wmicimv
