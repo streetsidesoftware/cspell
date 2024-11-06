@@ -18,6 +18,8 @@ const parsers: Record<string, Linter.Parser | undefined> = {
     '.ts': typeScriptParser,
 };
 
+// cspell:ignore configg cityssm
+
 type ValidTestCase = RuleTester.ValidTestCase;
 type Options = Partial<RuleOptions>;
 
@@ -32,6 +34,8 @@ const KnownErrors: TestCaseError[] = [
     ce('Unknown word: "bestbusiness"', 0),
     ce('Unknown word: "muawhahaha"', 0),
     ce('Unknown word: "uuuug"', 0),
+    ce('Unknown word: "configg"', 8),
+    ce('Unknown word: "cityssm"', 8),
     ce('Unknown word: "grrr"', 8),
     ce('Unknown word: "GRRRRRR"', 1),
     ce('Unknown word: "UUUUUG"', 3),
@@ -59,6 +63,8 @@ ruleTester.run('cspell', Rule.rules.spellchecker, {
         readSample('sample.js'),
         readSample('sample.ts'),
         readSample('sampleESM.mjs'),
+        readFix('simple/sample.ts'),
+        readFix('simple/sampleESM.mjs'),
         readFix('with-errors/strings.ts', { checkStrings: false, checkStringTemplates: false }),
         readFix('with-errors/imports.ts'),
         readFix('with-errors/sampleESM.mjs', {
@@ -200,6 +206,11 @@ ruleTester.run('cspell', Rule.rules.spellchecker, {
         readInvalid('issue-4870/sample.js', ['Unknown word: "friendz"'], {
             cspell: { allowCompoundWords: true },
         }),
+        readInvalid(
+            'simple/sample.ts',
+            ['Unknown word: "configg"', 'Unknown word: "configg"', 'Unknown word: "cityssm"'],
+            { ignoreImports: false },
+        ),
     ],
 });
 

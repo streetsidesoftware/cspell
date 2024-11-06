@@ -2,7 +2,7 @@ import type { Linter } from 'eslint';
 
 import { plugin } from './cspell-eslint-plugin.cjs';
 
-const config: Linter.FlatConfig = {
+const config: Linter.Config = {
     plugins: {
         '@cspell': plugin,
     },

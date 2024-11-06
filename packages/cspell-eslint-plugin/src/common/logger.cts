@@ -34,10 +34,9 @@ export class Logger {
         if (!this.enabled) return;
         if (!this.logToFile) return console.log(...p);
         const message = new Date().toISOString() + ' ' + prefixLines(format(...p), '  ') + '\n';
-        this.useAsync
+        return this.useAsync
             ? fs.appendFile(this.logFile, message, (err) => err && console.error(err))
             : fs.appendFileSync(this.logFile, message);
-        return;
     }
 
     log = this._log.bind(this);

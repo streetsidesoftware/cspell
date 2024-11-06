@@ -64,7 +64,9 @@
     "coverage": "echo coverage",
     "test-watch": "pnpm run test -- --watch",
     "test-yaml": "npx mocha --timeout 10000 \"dist/**/yaml.test.mjs\"",
-    "test": "npx mocha --timeout 10000 \"dist/**/*.test.mjs\""
+    "test-eslint": "npx mocha --timeout 10000 \"dist/**/*.test.mjs\"",
+    "test-samples": "pnpm -r --filter @internal/eslint-plugin-fixtures-simple test",
+    "test": "pnpm run test-eslint && pnpm run test-samples"
   },
   "repository": {
     "type": "git",

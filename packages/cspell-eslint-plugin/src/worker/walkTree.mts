@@ -1,4 +1,4 @@
-import type { ASTNode } from './ASTNode.cjs';
+import type { ASTNode } from './ASTNode.mjs';
 import type { ASTPath, ASTPathElement, Key } from './ASTPath.mjs';
 
 // const logger = getDefaultLogger();
@@ -55,7 +55,8 @@ function walk(root: ASTNode, enter: CallBack) {
             if (Array.isArray(v)) {
                 for (let i = 0; i < v.length; ++i) {
                     const vv = v[i];
-                    isNode(vv) && walkNodes(fx, vv as ASTNode, node, key, i);
+                    if (!isNode(vv)) continue;
+                    walkNodes(fx, vv as ASTNode, node, key, i);
                 }
             } else if (isNode(v)) {
                 walkNodes(fx, v, node, key, undefined);
