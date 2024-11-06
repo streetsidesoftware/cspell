@@ -1,4 +1,4 @@
-"use strict"
+'use strict';
 
 const fs = require('fs');
 const commander = require('commander');
@@ -11,9 +11,9 @@ This is some help.
  * run code
  */
 export function command(cmd) {
-  const prompt = "Enter your name:";
+    const prompt = 'Enter your name:';
 
-  return prompt;
+    return prompt;
 }
 
 command(commander);
