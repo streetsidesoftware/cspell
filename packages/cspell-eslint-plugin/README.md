@@ -98,7 +98,7 @@ interface Options {
    */
   generateSuggestions: boolean;
   /**
-   * Ignore import and require names
+   * Ignore import, require names, and export from names
    * @default true
    */
   ignoreImports?: boolean;

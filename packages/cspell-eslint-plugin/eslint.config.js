@@ -1,3 +1,4 @@
+// ts-check
 import eslint from '@eslint/js';
 import nodePlugin from 'eslint-plugin-n';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
@@ -75,21 +76,14 @@ export default tsEslint.config(
                 },
             ],
             'node/no-unsupported-features/es-syntax': 'off',
-            // 'import/no-unresolved': 'off',
+            'import/no-unresolved': 'off',
             '@typescript-eslint/consistent-type-imports': 'error',
-        },
-    },
-    {
-        files: ['**/*.ts', '**/*.mts', '**/*.cts'],
-        rules: {
-            'node/no-missing-import': [
-                'off',
+            'n/no-missing-import': [
+                'error',
                 {
-                    tryExtensions: ['.js', '.d.ts', '.ts'],
+                    allowModules: ['estree'],
                 },
             ],
-            'node/no-unsupported-features/es-syntax': 'off',
-            'import/no-unresolved': 'off',
         },
     },
     {

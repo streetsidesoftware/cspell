@@ -7,7 +7,7 @@ import type { Program } from 'estree';
 import { createSyncFn } from 'synckit';
 
 import { getDefaultLogger } from '../common/logger.cjs';
-import type { Issue, SpellCheckFn } from '../worker/types.cjs';
+import type { Issue, SpellCheckFn } from '../worker/types.mjs';
 import { normalizeOptions } from './defaultCheckOptions.cjs';
 
 type ESlintPlugin = ESLint.Plugin;
@@ -16,7 +16,6 @@ const optionsSchema = JSON.parse(readFileSync(pathJoin(__dirname, '../../assets/
 
 const schema = optionsSchema as unknown as Rule.RuleMetaData['schema'];
 
-// eslint-disable-next-line n/no-missing-require
 const spellCheck = createSyncFn<SpellCheckFn>(require.resolve('../worker/worker.mjs'));
 
 interface ExtendedSuggestion {

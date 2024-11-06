@@ -12,16 +12,16 @@ import {
     getDictionary,
     refreshDictionaryCache,
 } from 'cspell-lib';
-import type { Comment, Identifier, ImportSpecifier, Literal, Node, TemplateElement } from 'estree';
+import type { Comment, ExportSpecifier, Identifier, ImportSpecifier, Literal, Node, TemplateElement } from 'estree';
 
 import { getDefaultLogger } from '../common/logger.cjs';
 import type { CustomWordListFile, ScopeSelectorList, WorkerOptions } from '../common/options.cjs';
-import type { ASTNode, JSXText, NodeType } from './ASTNode.cjs';
+import type { ASTNode, JSXText, NodeType } from './ASTNode.mjs';
 import type { ASTPath, Key } from './ASTPath.mjs';
 import { defaultCheckedScopes } from './customScopes.mjs';
 import type { ScopeItem } from './scope.mjs';
 import { AstPathScope, AstScopeMatcher, astScopeToString, mapNodeToScope, scopeItem } from './scope.mjs';
-import type { Issue, SpellCheckResults, Suggestions } from './types.cjs';
+import type { Issue, SpellCheckResults, Suggestions } from './types.mjs';
 import { walkTree } from './walkTree.mjs';
 
 const defaultSettings: CSpellSettings = {
@@ -81,7 +81,7 @@ export async function spellCheck(
         if (!options.checkStrings) return;
         if (typeof node.value === 'string') {
             debugNode(path, node.value);
-            if (options.ignoreImports && isImportOrRequired(node)) return;
+            if (options.ignoreImports && (isImportOrRequired(node) || isExportNamedDeclaration(node))) return;
             if (options.ignoreImportProperties && isImportedProperty(node)) return;
             checkNodeText(path, node.value);
         }
@@ -106,7 +106,7 @@ export async function spellCheck(
     }
 
     function checkIdentifier(path: ASTPath) {
-        const node: Identifier | ASTNode = path.node;
+        const node: ASTNode = path.node;
         if (node.type !== 'Identifier') return;
         debugNode(path, node.name);
         if (options.ignoreImports) {
@@ -121,6 +121,13 @@ export async function spellCheck(
                 }
                 return;
             } else if (options.ignoreImportProperties && isImportedProperty(node)) {
+                return;
+            }
+            if (isExportIdentifier(node)) {
+                importedIdentifiers.add(node.name);
+                if (isLocalExportIdentifierUnique(node)) {
+                    checkNodeText(path, node.name);
+                }
                 return;
             }
         }
@@ -147,7 +154,7 @@ export async function spellCheck(
 
         const scope: string[] = calcScope(path);
         const result = validator.checkText(range, text, scope);
-        result.forEach((issue) => reportIssue(issue, node.type));
+        result.forEach((issue) => reportIssue(issue, node));
     }
 
     function calcScope(_path: ASTPath): string[] {
@@ -164,6 +171,12 @@ export async function spellCheck(
                 parent.type === 'ImportDefaultSpecifier') &&
             parent.local === node
         );
+    }
+
+    function isExportIdentifier(node: ASTNode): boolean {
+        const parent = getExportParent(node);
+        if (node.type !== 'Identifier' || !parent) return false;
+        return parent.type === 'ExportSpecifier' && parent.exported === node;
     }
 
     function isRawImportIdentifier(node: ASTNode): boolean {
@@ -183,9 +196,22 @@ export async function spellCheck(
         return imported.range?.[0] !== local.range?.[0] && imported.range?.[1] !== local.range?.[1];
     }
 
+    function isLocalExportIdentifierUnique(node: ASTNode): boolean {
+        const parent = getExportParent(node);
+        if (!parent) return true;
+        const { exported, local } = parent;
+        if (exported.type === 'Identifier' && exported.name !== (local as Identifier).name) return true;
+        return exported.range?.[0] !== local.range?.[0] && exported.range?.[1] !== local.range?.[1];
+    }
+
     function getImportParent(node: ASTNode): ImportSpecifier | undefined {
         const parent = node.parent;
         return parent?.type === 'ImportSpecifier' ? parent : undefined;
+    }
+
+    function getExportParent(node: ASTNode): ExportSpecifier | undefined {
+        const parent = node.parent;
+        return parent?.type === 'ExportSpecifier' ? parent : undefined;
     }
 
     function skipCheckForRawImportIdentifiers(node: ASTNode): boolean {
@@ -203,13 +229,14 @@ export async function spellCheck(
         return node.parent?.type === 'MemberExpression';
     }
 
-    function reportIssue(issue: ValidationIssue, nodeType: NodeType): void {
+    function reportIssue(issue: ValidationIssue, node: ASTNode): void {
+        const nodeType = node.type;
         const word = issue.text;
         const start = issue.offset;
         const end = issue.offset + (issue.length || issue.text.length);
         const suggestions = normalizeSuggestions(issue.suggestionsEx, nodeType);
         const severity = issue.isFlagged ? 'Forbidden' : 'Unknown';
-        issues.push({ word, start, end, nodeType, suggestions, severity });
+        issues.push({ word, start, end, nodeType, node, suggestions, severity });
     }
 
     type NodeTypes = Node['type'] | Comment['type'] | 'JSXText';
@@ -312,6 +339,10 @@ export async function spellCheck(
 
     function isImportOrRequired(node: ASTNode) {
         return isRequireCall(node.parent) || (node.parent?.type === 'ImportDeclaration' && node.parent.source === node);
+    }
+
+    function isExportNamedDeclaration(node: ASTNode) {
+        return node.parent?.type === 'ExportNamedDeclaration' && node.parent.source === node;
     }
 
     function debugNode(path: ASTPath, value: unknown) {

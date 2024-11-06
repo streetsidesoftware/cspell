@@ -1,7 +1,7 @@
 import type { Node } from 'estree';
 
 import type { WorkerOptions } from '../common/options.cjs';
-import type { NodeType } from './ASTNode.cjs';
+import type { ASTNode, NodeType } from './ASTNode.mjs';
 
 interface ExtendedSuggestion {
     /**
@@ -27,6 +27,7 @@ export interface Issue {
     severity: 'Forbidden' | 'Unknown' | 'Hint';
     suggestions: Suggestions;
     nodeType: NodeType;
+    node: ASTNode | undefined;
 }
 
 export interface SpellCheckResults {
