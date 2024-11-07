@@ -214,7 +214,7 @@ describe('', () => {
         ${'HELLO|*hello*|*HELLO*'}       | ${['*hello*']}
         ${'HELLO|*HELLO*'}               | ${['*HELLO*']}
         ${'Hello|*Hello*'}               | ${['*Hello*']}
-        ${'hello|+hello+'}               | ${['hello', '+hello+']}
+        ${'hello|+hello+'}               | ${['*hello*' /* this is on purpose */]}
         ${'hello|hello+'}                | ${['hello*']}
         ${'hello|+hello'}                | ${['*hello']}
         ${'hello|hello+|+hello|+hello+'} | ${['*hello*']}

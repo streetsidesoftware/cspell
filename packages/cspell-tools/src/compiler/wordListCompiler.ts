@@ -124,7 +124,11 @@ function applyFlags(word: string, flags: Flags): string[] {
     if (flags === (Flags.none | Flags.sfx)) return ['*' + word];
     if (flags === (Flags.none | Flags.pfx)) return [word + '*'];
     if (flags === (Flags.none | Flags.pfx | Flags.sfx)) return [word + '*', '*' + word];
-    if (flags === (Flags.none | Flags.both)) return [word, '+' + word + '+'];
+    if (flags === (Flags.none | Flags.both)) {
+        // the "correct" answer is [word, '+' + word + '+']
+        // but practically it makes sense to allow all combinations.
+        return ['*' + word + '*'];
+    }
     if (flags === (Flags.none | Flags.both | Flags.sfx)) return [word, '+' + word + '*'];
     if (flags === (Flags.none | Flags.both | Flags.pfx)) return [word, '*' + word + '+'];
     if (flags === (Flags.both | Flags.pfx)) return ['*' + word + '+'];
