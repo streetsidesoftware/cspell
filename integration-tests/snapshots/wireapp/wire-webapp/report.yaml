@@ -3,9 +3,9 @@ Repository: wireapp/wire-webapp
 Url: https://github.com/wireapp/wire-webapp.git
 Args: '["src/script/**/*.{js,ts,tsx,md}"]'
 Summary:
-  files: 1276
-  filesWithIssues: 647
-  issues: 2744
+  files: 1277
+  filesWithIssues: 648
+  issues: 2749
   errors: 0
 Errors: []
 
@@ -131,10 +131,11 @@ issues:
   - "src/script/auth/page/ConversationJoin.tsx:165:10        Submiting       U       setIsSubmitingName(true);"
   - "src/script/auth/page/ConversationJoin.tsx:185:12        Submiting       U       setIsSubmitingName(false);"
   - "src/script/auth/page/ConversationJoinComponents.tsx:40:10       wireapp         U       } from '@wireapp/react-ui-kit';"
-  - "src/script/auth/page/ConversationJoinComponents.tsx:56:5        Submiting       U       isSubmitingName: boolean;"
-  - "src/script/auth/page/ConversationJoinComponents.tsx:143:5       Submiting       U       isSubmitingName,"
-  - "src/script/auth/page/ConversationJoinComponents.tsx:184:20      Submiting       U       {isSubmitingName ? ("
-  - "src/script/auth/page/ConversationJoinComponents.tsx:190:65      Submiting       U       | !isValidName || isSubmitingName}"
+  - "src/script/auth/page/ConversationJoinComponents.tsx:58:5        Submiting       U       isSubmitingName: boolean;"
+  - "src/script/auth/page/ConversationJoinComponents.tsx:145:5       Submiting       U       isSubmitingName,"
+  - "src/script/auth/page/ConversationJoinComponents.tsx:197:36      subline         U       <span className=\"subline\">"
+  - "src/script/auth/page/ConversationJoinComponents.tsx:220:20      Submiting       U       {isSubmitingName ? ("
+  - "src/script/auth/page/ConversationJoinComponents.tsx:226:65      Submiting       U       | !isValidName || isSubmitingName || !isTermOfUseAccepted"
   - "src/script/auth/page/ConversationJoinInvalid.tsx:24:39          wireapp     U       ContainerXS, H2, Text} from '@wireapp/react-ui-kit';"
   - "src/script/auth/page/CreateAccount.tsx:25:89        wireapp     U       H1, IsMobile} from '@wireapp/react-ui-kit';"
   - "src/script/auth/page/CreatePersonalAccount.tsx:27:25        wireapp     U       import {Runtime} from '@wireapp/commons';"
@@ -701,8 +702,9 @@ issues:
   - "src/script/components/Giphy/Giphy.tsx:190:40        giphs       U       data-uie-name=\"do-open-giphs\""
   - "src/script/components/Giphy/Giphy.tsx:237:18        gifs        U       {gifs.map(gif => ("
   - "src/script/components/Giphy/index.tsx:20:18         Giphy       U       export * from './Giphy';"
-  - "src/script/components/HistoryExport/HistoryExport.tsx:22:26         tsyringe    U       import {container} from 'tsyringe';"
-  - "src/script/components/HistoryExport/HistoryExport.tsx:24:48         wireapp     U       uttonVariant, FlexBox} from '@wireapp/react-ui-kit';"
+  - "src/script/components/HistoryExport/HistoryExport.tsx:23:26         tsyringe    U       import {container} from 'tsyringe';"
+  - "src/script/components/HistoryExport/HistoryExport.tsx:25:48         wireapp     U       uttonVariant, FlexBox} from '@wireapp/react-ui-kit';"
+  - "src/script/components/HistoryExport/HistoryExport.tsx:26:30         wireapp     U       WebAppEvents} from '@wireapp/webapp-events';"
   - "src/script/components/HistoryImport/BackupFileUpload.tsx:22:26          wireapp         U       import {TabIndex} from '@wireapp/react-ui-kit/lib/types"
   - "src/script/components/HistoryImport/BackupFileUpload.tsx:24:39          wireapp         U       ButtonVariant} from '@wireapp/react-ui-kit';"
   - "src/script/components/HistoryImport/BackupFileUpload.tsx:52:30          UNFOCUSABLE     U       tabIndex={TabIndex.UNFOCUSABLE}"
@@ -2096,7 +2098,7 @@ issues:
   - "src/script/page/RightSidebar/ConversationDetails/ConversationDetails.tsx:22:30          wireapp     U       RECEIPT_MODE} from '@wireapp/api-client/lib/conversation"
   - "src/script/page/RightSidebar/ConversationDetails/ConversationDetails.tsx:23:26          wireapp     U       import {TabIndex} from '@wireapp/react-ui-kit/lib/types"
   - "src/script/page/RightSidebar/ConversationDetails/utils/getConversationActions.ts:22:30          wireapp     U       WebAppEvents} from '@wireapp/webapp-events';"
-  - "src/script/page/RightSidebar/ConversationDetails/utils/getConversationActions.ts:145:39         Leavable    U       conversationEntity.isLeavable() && roleRepository"
+  - "src/script/page/RightSidebar/ConversationDetails/utils/getConversationActions.ts:146:39         Leavable    U       conversationEntity.isLeavable() && roleRepository"
   - "src/script/page/RightSidebar/GroupParticipantService/GroupParticipantService.tsx:22:26          wireapp     U       import {TabIndex} from '@wireapp/react-ui-kit/lib/types"
   - "src/script/page/RightSidebar/GroupParticipantUser/GroupParticipantUser.tsx:22:60        wireapp     U       DefaultRole} from '@wireapp/api-client/lib/conversation"
   - "src/script/page/RightSidebar/GroupParticipantUser/GroupParticipantUser.tsx:23:26        wireapp     U       import {TabIndex} from '@wireapp/react-ui-kit/lib/types"
@@ -2483,6 +2485,9 @@ issues:
   - "src/script/util/ArrayUtil.ts:37:54          referencial     U       matching function in case referencial equality is not enough"
   - "src/script/util/ArrayUtil.ts:122:16         Arrayify        U       export const deArrayify = <T>(value: T[] | T"
   - "src/script/util/ArrayUtil.ts:124:14         uniquify        U       export const uniquify = <T>(elements: T[]"
+  - "src/script/util/AvailabilityStatus.tsx:22:30        wireapp         U       Availability} from '@wireapp/protocol-messaging'"
+  - "src/script/util/AvailabilityStatus.tsx:26:15        Identifer       U       import {StringIdentifer} from 'Util/LocalizerUtil"
+  - "src/script/util/AvailabilityStatus.tsx:63:75        Identifer       U       Availability.Type, StringIdentifer> = {"
   - "src/script/util/BackupUtil.ts:24:9          encrpted    U       const encrptedFileFormat = new TextEncoder"
   - "src/script/util/BackupUtil.ts:26:23         encrpted    U       for (let i = 0; i < encrptedFileFormat.length; i"
   - "src/script/util/BackupUtil.ts:28:11         encrpted    U       const encrptedFileByte = encrptedFileFormat"
