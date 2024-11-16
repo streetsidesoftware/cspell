@@ -1,0 +1,26 @@
+diff --git a/lib/rules/no-unused-expressions.js b/lib/rules/no-unused-expressions.js
+index fd1437c1606a56cbce147d040d601d0acef3d24a..1ac2d6e45fbb04f93d9cccdc5265bb38c3701aca 100644
+--- a/lib/rules/no-unused-expressions.js
++++ b/lib/rules/no-unused-expressions.js
+@@ -76,7 +76,7 @@ module.exports = {
+             allowTernary,
+             allowTaggedTemplates,
+             enforceForJSX
+-        }] = context.options;
++        } = {}] = context.options;
+ 
+         /**
+          * Has AST suggesting a directive.
+diff --git a/lib/rules/no-warning-comments.js b/lib/rules/no-warning-comments.js
+index 628f5a2ac513303cc3fe2cc9adcbf1ae54128747..a42e8318e028c6a3717afceef3c949bf8eab5827 100644
+--- a/lib/rules/no-warning-comments.js
++++ b/lib/rules/no-warning-comments.js
+@@ -64,7 +64,7 @@ module.exports = {
+ 
+     create(context) {
+         const sourceCode = context.sourceCode;
+-        const [{ decoration, location, terms: warningTerms }] = context.options;
++        const [{ decoration, location, terms: warningTerms } = this.meta.defaultOptions[0]] = context.options;
+         const escapedDecoration = escapeRegExp(decoration ? decoration.join("") : "");
+         const selfConfigRegEx = /\bno-warning-comments\b/u;
+ 
