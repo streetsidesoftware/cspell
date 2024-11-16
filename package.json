@@ -81,7 +81,10 @@
     "CI/CD"
   ],
   "pnpm": {
-    "overrides": {}
+    "overrides": {},
+    "patchedDependencies": {
+      "eslint@9.15.0": "patches/eslint@9.15.0.patch"
+    }
   },
   "author": "Jason Dent",
   "license": "MIT",
@@ -94,7 +97,7 @@
   },
   "devDependencies": {
     "@cspell/eslint-plugin": "workspace:*",
-    "@eslint/js": "^9.14.0",
+    "@eslint/js": "^9.15.0",
     "@internal/scripts": "workspace:*",
     "@lerna-lite/cli": "^3.10.0",
     "@lerna-lite/publish": "^3.10.0",
@@ -108,17 +111,17 @@
     "@swc-node/register": "^1.10.9",
     "@tsconfig/node18": "^18.2.4",
     "@types/node": "^18.19.64",
-    "@vitest/coverage-istanbul": "^2.1.4",
+    "@vitest/coverage-istanbul": "^2.1.5",
     "conventional-changelog-conventionalcommits": "^8.0.0",
-    "eslint": "^9.14.0",
-    "eslint-plugin-n": "^17.13.1",
+    "eslint": "^9.15.0",
+    "eslint-plugin-n": "^17.13.2",
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "eslint-plugin-unicorn": "^56.0.0",
     "inject-markdown": "^3.1.4",
     "nyc": "^17.1.0",
     "perf-insight": "^1.2.0",
     "prettier": "^3.3.3",
-    "rollup": "^4.25.0",
+    "rollup": "^4.27.2",
     "rollup-plugin-dts": "^6.1.1",
     "shx": "^0.3.4",
     "ts-jest": "^29.2.5",
@@ -128,6 +131,6 @@
     "typescript": "~5.6.3",
     "typescript-eslint": "^8.14.0",
     "vite": "^5.4.11",
-    "vitest": "^2.1.4"
+    "vitest": "^2.1.5"
   }
 }
