@@ -5,7 +5,7 @@ Args: '["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGEL
 Summary:
   files: 19702
   filesWithIssues: 8855
-  issues: 56176
+  issues: 56174
   errors: 0
 Errors: []
 
@@ -195,7 +195,6 @@ issues:
   - "doc/adr/2019-01-04-error-reporting-with-statusor.md:13:43       badbit      U       report errors (e.g., [badbit][badbit-link] in the"
   - "doc/adr/2019-03-26-binary-distributions.md:10:75        dpkg            U       might want to use (e.g., dpkg,"
   - "doc/adr/2019-03-26-binary-distributions.md:16:60        packageable     U       make our code easily packageable by others"
-  - "doc/compile-time-configuration.md:18:43         ccmake      U       developers can use [ccmake], or run `cmake -L`"
   - "doc/compile-time-configuration.md:70:29         DBUILD      U       tests are enabled via `-DBUILD_TESTING=ON`. You can"
   - "doc/compile-time-configuration.md:87:10         cxxopt      U       - Add `--cxxopt=-std=c++14` and `--host"
   - "doc/compile-time-configuration.md:89:40         bazelrc     U       options in your Bazel `.bazelrc` file."
@@ -974,7 +973,6 @@ issues:
   - "google/cloud/testing_util/BUILD.bazel:34:36         GETRUSAGE       U       GOOGLE_CLOUD_CPP_HAVE_GETRUSAGE\","
   - "google/cloud/testing_util/BUILD.bazel:35:36         RUSAGE          U       GOOGLE_CLOUD_CPP_HAVE_RUSAGE_THREAD\","
   - "google/cloud/testing_util/CMakeLists.txt:71:25          getrusage       U       check_cxx_symbol_exists(getrusage sys/resource.h"
-  - "google/cloud/testing_util/opentelemetry_matchers.h:342:19       snapshotted     U       * The context is snapshotted when the future is returned"
   - "google/cloud/testing_util/status_matchers_test.cc:158:65        ello    U       kUnknown, HasSubstr(\"ello\")));"
   - "google/cloud/testing_util/validate_metadata.cc:115:37       dbolduc     U       is recursive because dbolduc could not figure out"
   - "google/cloud/texttospeech/mocks/mock_text_to_speech_connection.h:19:39          TEXTTOSPEECH    U       CLOUD_CPP_GOOGLE_CLOUD_TEXTTOSPEECH_MOCKS_MOCK_TEXT_TO_SPEECH"

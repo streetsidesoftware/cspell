@@ -3,7 +3,7 @@ Repository: slint-ui/slint
 Url: "https://github.com/slint-ui/slint"
 Args: ["--config=../../../../repositories/config/slint/cspell.config.yaml","--issues-summary-report","."]
 Lines:
- CSpell: Files checked: 1922, Issues found: 3777 in 705 files.
+ CSpell: Files checked: 1922, Issues found: 3677 in 698 files.
  exit code: 1
 CMakeLists.txt:17:14     - Unknown word (TOPLEVEL)   -- set(SLINT_IS_TOPLEVEL_BUILD TRUE)
 CMakeLists.txt:27:31     - Unknown word (dylib's)    -- macOS, the slint_cpp.dylib's install_name uses @rpath
@@ -41,13 +41,7 @@ api/cpp/CMakeLists.txt:154:88    - Unknown word (dylib)       -- SONAME libslint
 api/cpp/CMakeLists.txt:162:49    - Unknown word (bigobj)      -- options(Slint INTERFACE /bigobj)
 api/cpp/CMakeLists.txt:172:5     - Unknown word (endforeach)  -- endforeach()
 api/cpp/CMakeLists.txt:181:39    - Unknown word (println)     -- APPEND features "esp-println/${IDF_TARGET}")
-api/cpp/CMakeLists.txt:211:45    - Unknown word (qmake)       -- build don't rely on qmake being in PATH but use
-api/cpp/CMakeLists.txt:215:27    - Unknown word (qmake)       -- if(NOT TARGET Qt::qmake)
-api/cpp/CMakeLists.txt:220:48    - Unknown word (qmake)       -- BACKEND_QT AND TARGET Qt::qmake)
-api/cpp/CMakeLists.txt:225:13    - Unknown word (QMAKE)       -- QMAKE=$<TARGET_PROPERTY:Qt
-api/cpp/CMakeLists.txt:225:41    - Unknown word (qmake)       -- TARGET_PROPERTY:Qt::qmake,LOCATION>
 api/cpp/CMakeLists.txt:243:34    - Unknown word (cupertino)   -- SLINT_STYLE_DEFAULT "cupertino")
-api/cpp/CMakeLists.txt:244:53    - Unknown word (qmake)       -- BACKEND_QT AND TARGET Qt::qmake)
 api/cpp/CMakeLists.txt:252:40    - Unknown word (STREQUAL)    -- AND NOT SLINT_STYLE STREQUAL "native")
 api/cpp/CMakeLists.txt:258:34    - Unknown word (buildroot)   -- environments such as buildroot set PKG_CONFIG_SYSROOT
 api/cpp/CMakeLists.txt:272:22    - Unknown word (CLANGCC)     -- find_program(CLANGCC clang)
@@ -964,8 +958,6 @@ docs/src/content/docs/faq.mdx:49:165    - Unknown word (Yocto's)    -- out of th
 docs/src/content/docs/faq.mdx:49:5      - Unknown word (Yocto)      -- - Yocto based distributions
 docs/src/content/docs/faq.mdx:51:6      - Unknown word (Torizon)    -- - [TorizonCore](https://www.torizon
 docs/src/content/docs/faq.mdx:57:66     - Unknown word (linebuffer) -- Slint into a frame- or linebuffer.
-docs/src/content/docs/guide/animation.md:32:50     - Unknown word (easings)    -- the following. See [`easings.net`](https://easings
-docs/src/content/docs/guide/animation.md:68:47     - Unknown word (Easings)    -- also be found on the `Easings` tab of the `gallery
 docs/src/content/docs/guide/development/debugging_techniques.md:23:29     - Unknown word (Femto)      -- Currently, only the FemtoVG and Skia renderers
 docs/src/content/docs/guide/development/localization.md:114:69    - Unknown word (msginit)    -- tool like Gettext's `msginit` to start a new `.po
 docs/src/content/docs/guide/development/localization.md:131:57    - Unknown word (msgfmt)     -- software/gettext/)'s `msgfmt` command line tool to
@@ -998,8 +990,6 @@ docs/src/content/docs/misc/backends_and_renderers.md:146:42    - Unknown word (x
 docs/src/content/docs/misc/backends_and_renderers.md:21:7      - Unknown word (linuxkms)   -- 3. linuxkms
 docs/src/content/docs/misc/backends_and_renderers.md:30:3      - Unknown word (linuxkms)   -- | linuxkms | Linux's KMS/DRI
 docs/src/content/docs/misc/backends_and_renderers.md:71:5      - Unknown word (Femto)      -- ### FemtoVG Renderer
-docs/src/content/docs/reference/builtins/animations.md:37:50     - Unknown word (easings)    -- the following. See [`easings.net`](https://easings
-docs/src/content/docs/reference/builtins/animations.md:73:47     - Unknown word (Easings)    -- also be found on the `Easings` tab of the `gallery
 docs/src/content/docs/std-widgets/lineedit.md:19:61     - Unknown word (programatically) -- well as editing text programatically (default value: `false
 docs/src/content/docs/std-widgets/overview.md:17:33     - Unknown word (cupertino)  -- selected style e.g. fluent, cupertino, material, or qt.
 docs/src/content/docs/std-widgets/style.md:16:59     - Unknown word (Cupertino)  -- cupertino-dark`| The **Cupertino** variants emulate the
@@ -1226,8 +1216,6 @@ examples/ffmpeg/player/audio.rs:165:5     - Unknown word (resampler)  -- resampl
 examples/ffmpeg/player/audio.rs:196:13    - Unknown word (resampler)  -- let resampler = ffmpeg_next::software
 examples/ffmpeg/player/audio.rs:211:13    - Unknown word (resampler)  -- resampler,
 examples/ffmpeg/player/audio.rs:225:22    - Unknown word (resampler)  -- self.resampler.run(&decoded_frame,
-examples/gallery/gallery.pot:100:10    - Unknown word (Easings)    -- msgctxt "EasingsPage"
-examples/gallery/gallery.pot:104:13    - Unknown word (easings)    -- #: ui/pages/easings_page.slint:102
 examples/gallery/gallery.pot:127:54    - Unknown word (starteds)   -- the docs and getting starteds from the Github "
 examples/gallery/gallery.pot:15:16     - Unknown word (nplurals)   -- "Plural-Forms: nplurals=1; plural=0;\n"
 examples/gallery/gallery.pot:18:1      - Unknown word (msgctxt)    -- msgctxt "App"
@@ -1236,16 +1224,6 @@ examples/gallery/gallery.pot:23:1      - Unknown word (msgctxt)    -- msgctxt "M
 examples/gallery/gallery.pot:28:1      - Unknown word (msgctxt)    -- msgctxt "Menu"
 examples/gallery/gallery.pot:33:1      - Unknown word (msgctxt)    -- msgctxt "Menu"
 examples/gallery/gallery.pot:38:1      - Unknown word (msgctxt)    -- msgctxt "Menu"
-examples/gallery/gallery.pot:44:8      - Unknown word (Easings)    -- msgid "Easings"
-examples/gallery/gallery.pot:89:13     - Unknown word (easings)    -- #: ui/pages/easings_page.slint:55
-examples/gallery/gallery.pot:90:10     - Unknown word (Easings)    -- msgctxt "EasingsPage"
-examples/gallery/gallery.pot:91:8      - Unknown word (Easings)    -- msgid "Easings"
-examples/gallery/gallery.pot:94:13     - Unknown word (easings)    -- #: ui/pages/easings_page.slint:56
-examples/gallery/gallery.pot:95:10     - Unknown word (Easings)    -- msgctxt "EasingsPage"
-examples/gallery/gallery.pot:99:13     - Unknown word (easings)    -- #: ui/pages/easings_page.slint:66
-examples/gallery/gallery.slint:20:145    - Unknown word (Easings)    -- TextEdit"), @tr("Menu" => "Easings"), @tr("Menu" => "About
-examples/gallery/gallery.slint:27:42     - Unknown word (Easings)    -- current-item == 4) : EasingsPage {}
-examples/gallery/gallery.slint:5:35      - Unknown word (Easings)    -- AboutPage, ControlsPage, EasingsPage, ListViewPage, TableViewP
 examples/gallery/index.html:104:27    - Unknown word (cupertino)  -- defaultStyle = 'cupertino';
 examples/gallery/index.html:14:22     - Unknown word (cupertino)  -- SLINT_STYLE=cupertino wasm-pack build --release
 examples/gallery/index.html:14:72     - Unknown word (cupertino)  -- release --out-dir pkg/cupertino --target web
@@ -1255,16 +1233,12 @@ examples/gallery/ui/pages/about_page.slint:11:75     - Unknown word (starteds)  
 examples/gallery/ui/pages/controls_page.slint:30:45     - Unknown word (thumbsup)   -- icon: @image-url("../../thumbsup.png");
 examples/gallery/ui/pages/controls_page.slint:36:45     - Unknown word (thumbsup)   -- icon: @image-url("../../thumbsup.png");
 examples/gallery/ui/pages/controls_page.slint:53:45     - Unknown word (thumbsup)   -- icon: @image-url("../../thumbsup.png");
-examples/gallery/ui/pages/easings_page.slint:53:18     - Unknown word (Easings)    -- export component EasingsPage inherits Page {
-examples/gallery/ui/pages/easings_page.slint:55:17     - Unknown word (Easings)    -- title: @tr("Easings");
 examples/gallery/ui/pages/list_view_page.slint:64:51     - Unknown word (thumbsup)   -- source: @image-url("../../thumbsup.png");
 examples/gallery/ui/pages/list_view_page.slint:81:136    - Unknown word (consetetur) -- amet")},{text: @tr("consetetur")},
 examples/gallery/ui/pages/list_view_page.slint:82:136    - Unknown word (consetetur) -- amet")},{text: @tr("consetetur")},
 examples/gallery/ui/pages/list_view_page.slint:83:136    - Unknown word (consetetur) -- amet")},{text: @tr("consetetur")},
 examples/gallery/ui/pages/list_view_page.slint:84:136    - Unknown word (consetetur) -- amet")},{text: @tr("consetetur")},
 examples/gallery/ui/pages/list_view_page.slint:85:136    - Unknown word (consetetur) -- amet")},{text: @tr("consetetur")},
-examples/gallery/ui/pages/pages.slint:6:10      - Unknown word (Easings)    -- export { EasingsPage } from "easings
-examples/gallery/ui/pages/pages.slint:6:30      - Unknown word (easings)    -- EasingsPage } from "easings_page.slint";
 examples/gallery/update_translations.sh:10:8      - Unknown word (msgmerge)   -- do msgmerge $po/gallery.po gallery
 examples/gallery/update_translations.sh:11:5      - Unknown word (msgfmt)     -- msgfmt $po/gallery.po -o $po
 examples/gstreamer-player/README.md:10:10     - Unknown word (gstreamer's) -- * We use gstreamer's test source instead
@@ -1493,12 +1467,10 @@ examples/opengl_texture/main.cpp:75:14     - Unknown word (Integerv)   -- glGetI
 examples/opengl_texture/main.cpp:96:14     - Unknown word (Integerv)   -- glGetIntegerv(GL_UNPACK_ALIGNMENT
 examples/opengl_texture/main.cpp:98:14     - Unknown word (Integerv)   -- glGetIntegerv(GL_UNPACK_ROW_LENGTH
 examples/opengl_texture/main.rs:174:23    - Unknown word (highp)      -- precision highp float;
-examples/opengl_texture/main.rs:402:37    - Unknown word (GLAPI)      -- opengl_api(slint::OpenGLAPI::GLES(None))
 examples/opengl_underlay/main.cpp:112:14    - Unknown word (Programiv)  -- glGetProgramiv(program, GL_LINK_STATUS
 examples/opengl_underlay/main.cpp:116:18    - Unknown word (Programiv)  -- glGetProgramiv(program, GL_INFO_LOG
 examples/opengl_underlay/main.cpp:22:10     - Unknown word (Shaderiv)   -- glGetShaderiv(shader_id, GL_COMPILE
 examples/opengl_underlay/main.cpp:25:14     - Unknown word (Shaderiv)   -- glGetShaderiv(shader_id, GL_INFO_LOG
-examples/opengl_underlay/main.rs:180:37    - Unknown word (GLAPI)      -- opengl_api(slint::OpenGLAPI::GLES(None))
 examples/opengl_underlay/main.rs:215:33    - Unknown word (webgl)      -- let webgl1_context = canvas
 examples/opengl_underlay/main.rs:222:64    - Unknown word (webgl)      -- from_webgl2_context(webgl1_context)
 examples/opengl_underlay/main.rs:35:23     - Unknown word (mediump)    -- precision mediump float;
@@ -1849,13 +1821,8 @@ internal/backends/selector/build.rs:14:69     - Unknown word (qttype)     -- scr
 internal/backends/selector/lib.rs:10:36     - Unknown word (linuxkms)   -- feature = "i-slint-backend-linuxkms"
 internal/backends/selector/lib.rs:121:44    - Unknown word (linuxkms)   -- feature = "i-slint-backend-linuxkms", target_os = "linux
 internal/backends/selector/lib.rs:132:37    - Unknown word (linuxkms)   -- ("LinuxKMS", create_linuxkms_backend as fn() -> Result
-internal/backends/selector/lib.rs:21:23     - Unknown word (GLAPI)      -- use i_slint_core::OpenGLAPI;
 internal/backends/selector/lib.rs:36:11     - Unknown word (linuxkms)   -- fn create_linuxkms_backend() -> Result
 internal/backends/selector/lib.rs:47:29     - Unknown word (linuxkms)   -- use i_slint_backend_linuxkms as default_backend;
-internal/backends/selector/lib.rs:54:28     - Unknown word (GLAPI)      -- opengl_api: Option<OpenGLAPI>,
-internal/backends/selector/lib.rs:65:54     - Unknown word (GLAPI)      -- self, opengl_api: OpenGLAPI) -> Self {
-internal/backends/selector/lib.rs:82:31     - Unknown word (GLAPI)      -- use i_slint_core::OpenGLAPI;
-internal/backends/selector/lib.rs:87:34     - Unknown word (GLAPI)      -- with_opengl_api(OpenGLAPI::GL(None))
 internal/backends/testing/build.rs:13:14     - Unknown word (dont)       -- .dont_use_cow(true);
 internal/backends/testing/build.rs:9:26      - Unknown word (systest)    -- .join("slint_systest.proto");
 internal/backends/testing/lib.rs:19:9      - Unknown word (systest)    -- pub mod systest;
@@ -1913,33 +1880,17 @@ internal/backends/winit/event_loop.rs:405:21    - Unknown word (preedit)    -- p
 internal/backends/winit/event_loop.rs:406:21    - Unknown word (preedit)    -- preedit_selection: preedit_selection
 internal/backends/winit/event_loop.rs:406:40    - Unknown word (preedit)    -- preedit_selection: preedit_selection.map(|e| e
 internal/backends/winit/event_loop.rs:62:52     - Unknown word (binfmt)     -- metadata("/proc/sys/fs/binfmt_misc/WSLInterop").is
-internal/backends/winit/lib.rs:13:23     - Unknown word (GLAPI)      -- use i_slint_core::OpenGLAPI;
-internal/backends/winit/lib.rs:180:28    - Unknown word (GLAPI)              -- opengl_api: Option<OpenGLAPI>,
-internal/backends/winit/lib.rs:195:54    - Unknown word (GLAPI)              -- self, opengl_api: OpenGLAPI) -> Self {
 internal/backends/winit/lib.rs:22:5      - Unknown word (winitwindowadapter) -- mod winitwindowadapter;
 internal/backends/winit/lib.rs:402:30    - Unknown word (entrancy)           -- // To prevent re-entrancy issues that might happen
-internal/backends/winit/lib.rs:48:53     - Unknown word (GLAPI)              -- :PlatformError, OpenGLAPI};
 internal/backends/winit/lib.rs:589:5     - Unknown word (testui)             -- mod testui {
-internal/backends/winit/lib.rs:63:36     - Unknown word (GLAPI)              -- opengl_api: Option<OpenGLAPI>,
 internal/backends/winit/renderer/femtovg.rs:17:5      - Unknown word (glcontext)  -- mod glcontext;
-internal/backends/winit/renderer/femtovg.rs:45:93     - Unknown word (GLAPI)      -- opengl_api: Option<OpenGLAPI>,
-internal/backends/winit/renderer/femtovg.rs:8:49      - Unknown word (GLAPI)      -- :PlatformError, OpenGLAPI};
-internal/backends/winit/renderer/femtovg/glcontext.rs:126:38    - Unknown word (GLAPI)      -- opengl_api.unwrap_or(OpenGLAPI::GLES(Some(APIVersion
-internal/backends/winit/renderer/femtovg/glcontext.rs:128:17    - Unknown word (GLAPI)      -- OpenGLAPI::GL(version) => {
-internal/backends/winit/renderer/femtovg/glcontext.rs:137:17    - Unknown word (GLAPI)      -- OpenGLAPI::GLES(version) => {
-internal/backends/winit/renderer/femtovg/glcontext.rs:13:66     - Unknown word (GLAPI)      -- :PlatformError, OpenGLAPI};
 internal/backends/winit/renderer/femtovg/glcontext.rs:220:62    - Unknown word (nsview)     -- window handle to adjust nsview layer contents placement
-internal/backends/winit/renderer/femtovg/glcontext.rs:61:32     - Unknown word (GLAPI)      -- opengl_api: Option<OpenGLAPI>,
 internal/backends/winit/renderer/femtovg/glcontext.rs:79:24     - Unknown word (accum)      -- it.reduce(|accum, config| {
 internal/backends/winit/renderer/femtovg/glcontext.rs:81:24     - Unknown word (accum)      -- & !accum.supports_transparency
 internal/backends/winit/renderer/femtovg/glcontext.rs:83:65     - Unknown word (accum)      -- config.num_samples() < accum.num_samples() {
 internal/backends/winit/renderer/femtovg/glcontext.rs:86:21     - Unknown word (accum)      -- accum
-internal/backends/winit/renderer/skia.rs:58:32     - Unknown word (GLAPI)      -- opengl_api: Option<OpenGLAPI>,
-internal/backends/winit/renderer/skia.rs:9:23      - Unknown word (GLAPI)      -- use i_slint_core::OpenGLAPI;
 internal/backends/winit/renderer/sw.rs:102:52    - Unknown word (softbuffer) -- format!("Error retrieving softbuffer rendering buffer: {e
-internal/backends/winit/renderer/sw.rs:11:45     - Unknown word (GLAPI)      -- graphics::Rgb8Pixel, OpenGLAPI};
 internal/backends/winit/renderer/sw.rs:158:56    - Unknown word (softbuffer) -- format!("Error presenting softbuffer buffer: {e}"))?;
-internal/backends/winit/renderer/sw.rs:176:33    - Unknown word (GLAPI)      -- opengl_api: Option<OpenGLAPI>,
 internal/backends/winit/renderer/sw.rs:187:50    - Unknown word (softbuffer) -- format!("Error creating softbuffer context: {e}"))?;
 internal/backends/winit/renderer/sw.rs:190:14    - Unknown word (softbuffer) -- |softbuffer_error| format!("Error
 internal/backends/winit/renderer/sw.rs:24:48     - Unknown word (Zeroable)   -- bytemuck::Pod, bytemuck::Zeroable)]
@@ -1952,9 +1903,6 @@ internal/backends/winit/wasm_input_helper.rs:236:21    - Unknown word (preedit) 
 internal/backends/winit/wasm_input_helper.rs:300:60    - Unknown word (Backtab)           -- => return Some(Key::Backtab.into()),
 internal/backends/winit/wasm_input_helper.rs:64:30     - Unknown word (autocapitalize) -- input.set_attribute("autocapitalize", "none").unwrap();
 internal/backends/winit/winitwindowadapter.rs:1097:38   - Unknown word (propgate)   -- don't ignore error, propgate to caller
-internal/backends/winit/winitwindowadapter.rs:247:28    - Unknown word (GLAPI)      -- opengl_api: Option<OpenGLAPI>,
-internal/backends/winit/winitwindowadapter.rs:286:32    - Unknown word (GLAPI)      -- opengl_api: Option<OpenGLAPI>,
-internal/backends/winit/winitwindowadapter.rs:38:41     - Unknown word (GLAPI)      -- self as corelib, OpenGLAPI};
 internal/backends/winit/winitwindowadapter.rs:724:38    - Unknown word (propgate)   -- don't ignore error, propgate to caller
 internal/backends/winit/winitwindowadapter.rs:794:46    - Unknown word (propgate)   -- don't ignore error, propgate to caller
 internal/backends/winit/winitwindowadapter.rs:877:50    - Unknown word (propgate)   -- don't ignore error, propgate to caller
@@ -2241,26 +2189,15 @@ internal/compiler/lookup/named_colors.rs:93:15     - Unknown word (lightslategre
 internal/compiler/lookup/named_colors.rs:94:15     - Unknown word (lightsteelblue)       -- ("lightsteelblue", parse_color_literal
 internal/compiler/lookup/named_colors.rs:95:15     - Unknown word (lightyellow)          -- ("lightyellow", parse_color_literal
 internal/compiler/lookup/named_colors.rs:97:15     - Unknown word (limegreen)            -- ("limegreen", parse_color_literal
-internal/compiler/namedreference.rs:158:11    - Unknown word (Smol)        -- name: SmolStr,
-internal/compiler/namedreference.rs:186:35    - Unknown word (snapshotter) -- fn snapshot(&self, snapshotter: &mut crate::typeloader
-internal/compiler/namedreference.rs:186:72    - Unknown word (Snapshotter) -- mut crate::typeloader::Snapshotter) -> Self {
-internal/compiler/namedreference.rs:188:28    - Unknown word (snapshotter) -- Rc::downgrade(&snapshotter.use_element(&el))
-internal/compiler/namedreference.rs:199:52    - Unknown word (Smol)        -- enceContainer(RefCell<HashMap<SmolStr, Rc<NamedReferenceInner
-internal/compiler/namedreference.rs:214:46    - Unknown word (Snapshotter) -- mut crate::typeloader::Snapshotter,
-internal/compiler/namedreference.rs:214:9     - Unknown word (snapshotter) -- snapshotter: &mut crate::typeloader
-internal/compiler/namedreference.rs:45:35     - Unknown word (snapshotter) -- fn snapshot(&self, snapshotter: &mut crate::typeloader
-internal/compiler/namedreference.rs:45:72     - Unknown word (Snapshotter) -- mut crate::typeloader::Snapshotter) -> Self {
-internal/compiler/namedreference.rs:46:48     - Unknown word (snapshotter) -- new(self.0.snapshot(snapshotter)))
+internal/compiler/namedreference.rs:158:11    - Unknown word (Smol)       -- name: SmolStr,
+internal/compiler/namedreference.rs:199:52    - Unknown word (Smol)       -- enceContainer(RefCell<HashMap<SmolStr, Rc<NamedReferenceInner
 internal/compiler/namedreference.rs:8:15      - Unknown word (Smol)       -- use smol_str::SmolStr;
 internal/compiler/object_tree.rs:1521:36   - Unknown word (smolstr)    -- borrow().base_type.to_smolstr() == "ListView" {
 internal/compiler/object_tree.rs:25:23     - Unknown word (smolstr)    -- use smol_str::{format_smolstr, SmolStr, ToSmolStr
 internal/compiler/object_tree.rs:25:32     - Unknown word (Smol)       -- str::{format_smolstr, SmolStr, ToSmolStr};
 internal/compiler/object_tree.rs:25:43     - Unknown word (Smol)       -- smolstr, SmolStr, ToSmolStr};
-internal/compiler/object_tree.rs:2649:35   - Unknown word (snapshotter) -- fn snapshot(&self, snapshotter: &mut crate::typeloader
-internal/compiler/object_tree.rs:2649:72   - Unknown word (Snapshotter) -- mut crate::typeloader::Snapshotter) -> Self {
-internal/compiler/object_tree.rs:2657:40   - Unknown word (snapshotter) -- Weak::upgrade(&snapshotter.use_component(l))
-internal/compiler/object_tree.rs:2712:14   - Unknown word (layoutinfo)  -- "layoutinfo-v",
-internal/compiler/object_tree.rs:2717:14   - Unknown word (layoutinfo)  -- "layoutinfo-h",
+internal/compiler/object_tree.rs:2712:14   - Unknown word (layoutinfo) -- "layoutinfo-v",
+internal/compiler/object_tree.rs:2717:14   - Unknown word (layoutinfo) -- "layoutinfo-h",
 internal/compiler/object_tree.rs:344:13    - Unknown word (Smol)       -- pub id: SmolStr,
 internal/compiler/object_tree.rs:412:40    - Unknown word (smolstr)    -- qualified_id = format_smolstr!("{}::{}", c.id, qualified
 internal/compiler/object_tree.rs:461:5     - Unknown word (Constexpr)  -- Constexpr,
@@ -2582,15 +2519,7 @@ internal/compiler/tests/typeloader/incpath/bug_3674_alias_from_invalid_import.sl
 internal/compiler/tests/typeloader/incpath/bug_3674_alias_from_invalid_import.slint:6:63      - Unknown word (idontexist) -- find requested import "idontexist.slint" in the include
 internal/compiler/tests/typeloader/incpath/should_fail2.slint:9:15      - Unknown word (bhal)       -- width: eh.bhal;
 internal/compiler/tests/typeloader/some_rust_file.rs:6:50      - Unknown word (incpath)    -- from "dependency_from_incpath.slint";
-internal/compiler/typeloader.rs:103:5     - Unknown word (snapshotter) -- snapshotter.snapshot_type_loader
-internal/compiler/typeloader.rs:117:64    - Unknown word (snapshotted) -- loader after it was snapshotted as well.
-internal/compiler/typeloader.rs:122:13    - Unknown word (snapshotter) -- let mut snapshotter = Snapshotter {
-internal/compiler/typeloader.rs:122:27    - Unknown word (Snapshotter) -- let mut snapshotter = Snapshotter {
-internal/compiler/typeloader.rs:129:22    - Unknown word (snapshotter) -- let mut result = snapshotter.snapshot_type_loader
-internal/compiler/typeloader.rs:131:5     - Unknown word (snapshotter) -- snapshotter.create_document(doc
 internal/compiler/typeloader.rs:1446:14   - Unknown word (splitn)      -- .splitn(2, '/')
-internal/compiler/typeloader.rs:146:19    - Unknown word (Snapshotter) -- pub(crate) struct Snapshotter {
-internal/compiler/typeloader.rs:158:6     - Unknown word (Snapshotter) -- impl Snapshotter {
 internal/compiler/typeloader.rs:15:13     - Unknown word (fileaccess) -- use crate::{fileaccess, langtype, layout, parser
 internal/compiler/typeloader.rs:15:25     - Unknown word (langtype)   -- crate::{fileaccess, langtype, layout, parser};
 internal/compiler/typeloader.rs:1648:13   - Unknown word (incdir)      -- let mut incdir = test_source_path.clone
@@ -2606,7 +2535,6 @@ internal/compiler/typeloader.rs:1924:31   - Unknown word (libfile)     -- Librar
 internal/compiler/typeloader.rs:1953:11   - Unknown word (libfile)     -- ("libfile.slint".into(), test
 internal/compiler/typeloader.rs:1967:21   - Unknown word (libfile)     -- import { C } from "@libfile.slint/unknown.slint
 internal/compiler/typeloader.rs:1995:69   - Unknown word (libfile)     -- requested import \"@libfile.slint/unknown.slint
-internal/compiler/typeloader.rs:2007:9    - Unknown word (snapshotting) -- fn test_snapshotting() {
 internal/compiler/typeloader.rs:4:16      - Unknown word (Smol)       -- use smol_str::{SmolStr, ToSmolStr};
 internal/compiler/typeloader.rs:4:27      - Unknown word (Smol)       -- smol_str::{SmolStr, ToSmolStr};
 internal/compiler/typeloader.rs:60:24     - Unknown word (Smol)       -- pub external_name: SmolStr,
@@ -2616,23 +2544,15 @@ internal/compiler/typeloader.rs:74:42     - Unknown word (importident) -- normal
 internal/compiler/typeloader.rs:74:79     - Unknown word (smolstr)     -- ExternalName().text().to_smolstr().trim());
 internal/compiler/typeloader.rs:76:35     - Unknown word (importident) -- internal_name = match importident.InternalName() {
 internal/compiler/typeloader.rs:77:83     - Unknown word (smolstr)     -- name_ident.text().to_smolstr().trim()),
-internal/compiler/typeloader.rs:96:13     - Unknown word (snapshotter) -- let mut snapshotter = Snapshotter {
-internal/compiler/typeloader.rs:96:27     - Unknown word (Snapshotter) -- let mut snapshotter = Snapshotter {
 internal/compiler/typeregister.rs:100:35    - Unknown word (Smol)       -- .map(|s| (SmolStr::new_static(s), Type
 internal/compiler/typeregister.rs:111:22    - Unknown word (Smol)       -- (SmolStr::new_static("x")
 internal/compiler/typeregister.rs:228:67    - Unknown word (Constexpr)  -- PropertyVisibility::Constexpr)),
 internal/compiler/typeregister.rs:232:75    - Unknown word (Constexpr)  -- PropertyVisibility::Constexpr),
 internal/compiler/typeregister.rs:246:37    - Unknown word (Constexpr)  -- PropertyVisibility::Constexpr,
 internal/compiler/typeregister.rs:251:37    - Unknown word (Constexpr)  -- PropertyVisibility::Constexpr,
-internal/compiler/typeregister.rs:336:35    - Unknown word (snapshotter) -- fn snapshot(&self, snapshotter: &mut typeloader::Snapshotter
-internal/compiler/typeregister.rs:336:65    - Unknown word (Snapshotter) -- snapshotter: &mut typeloader::Snapshotter) -> Self {
-internal/compiler/typeregister.rs:342:43    - Unknown word (snapshotter) -- (k, v)| (k.clone(), snapshotter.snapshot_element_type
-internal/compiler/typeregister.rs:345:38    - Unknown word (snapshotter) -- property_animation_type: snapshotter
-internal/compiler/typeregister.rs:347:25    - Unknown word (snapshotter) -- empty_type: snapshotter.snapshot_element_type
-internal/compiler/typeregister.rs:352:27    - Unknown word (snapshotter) -- .map(|tr| snapshotter.snapshot_type_register
-internal/compiler/typeregister.rs:359:32    - Unknown word (smolstr)     -- self.types.insert(t.to_smolstr(), t);
-internal/compiler/typeregister.rs:428:59    - Unknown word (smolstr)     -- $pub_field).replace_smolstr("_", "-"), map_type
-internal/compiler/typeregister.rs:466:41    - Unknown word (Constexpr)   -- PropertyVisibility::Constexpr;
+internal/compiler/typeregister.rs:359:32    - Unknown word (smolstr)    -- self.types.insert(t.to_smolstr(), t);
+internal/compiler/typeregister.rs:428:59    - Unknown word (smolstr)    -- $pub_field).replace_smolstr("_", "-"), map_type
+internal/compiler/typeregister.rs:466:41    - Unknown word (Constexpr)  -- PropertyVisibility::Constexpr;
 internal/compiler/typeregister.rs:59:57     - Unknown word (smolstr)    -- stringify!($Name).replace_smolstr("_", "-"),
 internal/compiler/typeregister.rs:6:23      - Unknown word (smolstr)    -- use smol_str::{format_smolstr, SmolStr, StrExt, ToSmolStr
 internal/compiler/typeregister.rs:6:32      - Unknown word (Smol)       -- str::{format_smolstr, SmolStr, StrExt, ToSmolStr
@@ -2789,7 +2709,6 @@ internal/compiler/widgets/qt/std-widgets.slint:17:36     - Unknown word (progres
 internal/compiler/widgets/qt/std-widgets.slint:22:42     - Unknown word (datepicker)        -- tePickerPopup, Date } from "./datepicker.slint";
 internal/compiler/widgets/qt/time-picker.slint:9:43      - Unknown word (standardbutton) -- ndardButton } from "../common/standardbutton.slint";
 internal/core/accessibility.rs:47:1      - Unknown word (bitflags)   -- bitflags! {
-internal/core/api.rs:297:14    - Unknown word (GLAPI)      -- pub enum OpenGLAPI {
 internal/core/api.rs:565:21    - Unknown word (unmaximize) -- /// Maximize or unmaximize the window.
 internal/core/api.rs:575:21    - Unknown word (unminimze)  -- /// Minimize or unminimze the window.
 internal/core/api.rs:938:34    - Unknown word (functors)   -- woken up, any queued up functors will be invoked.
@@ -2846,7 +2765,6 @@ internal/core/items/text.rs:498:9     - Unknown word (preedit)    -- pub preedit
 internal/core/items/text.rs:499:32    - Unknown word (preedit)    -- selection within the preedit (cursor and anchor)
 internal/core/items/text.rs:500:5     - Unknown word (preedit)    -- preedit_selection: Property
 internal/core/items/text.rs:859:22    - Unknown word (preedit)    -- self.preedit_text.set(event.preedit
-internal/core/lib.rs:88:19     - Unknown word (GLAPI)      -- pub use api::{OpenGLAPI, SlintRenderer};
 internal/core/model.rs:1481:8    - Unknown word (modeliter)  -- fn modeliter_in_bounds() {
 internal/core/model/adapters.rs:1127:36   - Unknown word (opsom)      -- SharedString::from("opsom"));
 internal/core/model/adapters.rs:124:49    - Unknown word (Mustermann) -- to_string(), last: "Mustermann".to_string() },
@@ -3060,14 +2978,12 @@ internal/renderers/skia/d3d_surface.rs:19:48     - Unknown word (UNORM)       --
 internal/renderers/skia/d3d_surface.rs:19:55     - Unknown word (DXGI)        -- FORMAT_R8G8B8A8_UNORM, DXGI_SAMPLE_DESC},
 internal/renderers/skia/d3d_surface.rs:20:25     - Unknown word (IDXGI)       -- CreateDXGIFactory2, IDXGIFactory4, IDXGISwapChain
 internal/renderers/skia/d3d_surface.rs:20:40     - Unknown word (IDXGI)       -- eDXGIFactory2, IDXGIFactory4, IDXGISwapChain3, DXGI_ADAPTER
-internal/renderers/skia/d3d_surface.rs:258:33    - Unknown word (GLAPI)       -- opengl_api: Option<OpenGLAPI>,
 internal/renderers/skia/d3d_surface.rs:267:17    - Unknown word (HRESULT)     -- HRESULT,
 internal/renderers/skia/d3d_surface.rs:275:13    - Unknown word (dxgi)        -- let dxgi_factory: IDXGIFactory
 internal/renderers/skia/d3d_surface.rs:285:46    - Unknown word (dxgi)        -- adapter = match unsafe { dxgi_factory.EnumAdapters
 internal/renderers/skia/d3d_surface.rs:338:26    - Unknown word (dxgi)        -- unsafe { dxgi_factory.EnumAdapters
 internal/renderers/skia/d3d_surface.rs:39:66     - Unknown word (UNORM)       -- DXGI_FORMAT_R8G8B8A8_UNORM;
 internal/renderers/skia/d3d_surface.rs:43:17     - Unknown word (IDXGI)       -- swap_chain: IDXGISwapChain3,
-internal/renderers/skia/d3d_surface.rs:4:29      - Unknown word (GLAPI)      -- slint_core::api::{OpenGLAPI, PhysicalSize as PhysicalWind
 internal/renderers/skia/d3d_surface.rs:59:24     - Unknown word (IDXGI)       -- dxgi_factory: &IDXGIFactory4,
 internal/renderers/skia/d3d_surface.rs:59:9      - Unknown word (dxgi)        -- dxgi_factory: &IDXGIFactory
 internal/renderers/skia/d3d_surface.rs:83:13     - Unknown word (dxgi)        -- dxgi_factory.CreateSwapChainForHwn
@@ -3085,15 +3001,10 @@ internal/renderers/skia/itemrenderer.rs:691:29    - Unknown word (skpath)     --
 internal/renderers/skia/itemrenderer.rs:696:29    - Unknown word (skpath)     -- skpath.quad_to(
 internal/renderers/skia/itemrenderer.rs:773:43    - Unknown word (Premul)     -- skia_safe::AlphaType::Premul,
 internal/renderers/skia/itemrenderer.rs:880:43    - Unknown word (Premul)     -- skia_safe::AlphaType::Premul,
-internal/renderers/skia/lib.rs:100:32    - Unknown word (GLAPI)        -- opengl_api: Option<OpenGLAPI>,
 internal/renderers/skia/lib.rs:231:16    - Unknown word (vivante)      -- // the vivante drivers using zwp_linux
-internal/renderers/skia/lib.rs:23:31     - Unknown word (GLAPI)      -- slint_core::{Brush, OpenGLAPI};
-internal/renderers/skia/lib.rs:243:32    - Unknown word (GLAPI)        -- opengl_api: Option<OpenGLAPI>,
 internal/renderers/skia/lib.rs:32:5      - Unknown word (itemrenderer) -- mod itemrenderer;
 internal/renderers/skia/lib.rs:33:5      - Unknown word (textlayout)   -- mod textlayout;
-internal/renderers/skia/lib.rs:643:32    - Unknown word (GLAPI)        -- opengl_api: Option<OpenGLAPI>,
 internal/renderers/skia/lib.rs:688:53    - Unknown word (upcasting)    -- return self to allow upcasting.
-internal/renderers/skia/lib.rs:68:28     - Unknown word (GLAPI)        -- opengl_api: Option<OpenGLAPI>,
 internal/renderers/skia/metal_surface.rs:110:9     - Unknown word (autoreleasepool) -- autoreleasepool(|| {
 internal/renderers/skia/metal_surface.rs:138:43    - Unknown word (BGRA)            -- skia_safe::ColorType::BGRA8888,
 internal/renderers/skia/metal_surface.rs:166:45    - Unknown word (BGRA)            -- the storage size of BGRA8Unorm is 32 bits (four
@@ -3106,36 +3017,26 @@ internal/renderers/skia/metal_surface.rs:175:36    - Unknown word (Snorm)       
 internal/renderers/skia/metal_surface.rs:178:31    - Unknown word (BGRA)            -- | MTLPixelFormat::BGRA8Unorm
 internal/renderers/skia/metal_surface.rs:179:31    - Unknown word (BGRA)            -- | MTLPixelFormat::BGRA8Unorm_sRGB => 32,
 internal/renderers/skia/metal_surface.rs:184:37    - Unknown word (Snorm)           -- MTLPixelFormat::RGBA16Snorm
-internal/renderers/skia/metal_surface.rs:40:33     - Unknown word (GLAPI)      -- opengl_api: Option<OpenGLAPI>,
 internal/renderers/skia/metal_surface.rs:63:48     - Unknown word (BGRA)       -- format(MTLPixelFormat::BGRA8Unorm);
 internal/renderers/skia/metal_surface.rs:63:53     - Unknown word (Unorm)      -- MTLPixelFormat::BGRA8Unorm);
-internal/renderers/skia/metal_surface.rs:6:29      - Unknown word (GLAPI)      -- slint_core::api::{OpenGLAPI, PhysicalSize as PhysicalWind
-internal/renderers/skia/opengl_surface.rs:150:32    - Unknown word (GLAPI)      -- opengl_api: Option<OpenGLAPI>,
-internal/renderers/skia/opengl_surface.rs:15:65     - Unknown word (GLAPI)      -- PhysicalWindowSize, OpenGLAPI};
 internal/renderers/skia/opengl_surface.rs:188:17    - Unknown word (fboid)      -- let fboid = unsafe { gl.get_parameter
 internal/renderers/skia/opengl_surface.rs:191:17    - Unknown word (fboid)      -- fboid: fboid.try_into().map
 internal/renderers/skia/opengl_surface.rs:191:24    - Unknown word (fboid)      -- fboid: fboid.try_into().map_err(
-internal/renderers/skia/opengl_surface.rs:243:32    - Unknown word (GLAPI)      -- opengl_api: Option<OpenGLAPI>,
 internal/renderers/skia/opengl_surface.rs:296:26    - Unknown word (accum)      -- .reduce(|accum, config| {
 internal/renderers/skia/opengl_surface.rs:298:28    - Unknown word (accum)      -- & !accum.supports_transparency
 internal/renderers/skia/opengl_surface.rs:300:69    - Unknown word (accum)      -- config.num_samples() < accum.num_samples() {
 internal/renderers/skia/opengl_surface.rs:303:25    - Unknown word (accum)      -- accum
-internal/renderers/skia/opengl_surface.rs:310:38    - Unknown word (GLAPI)      -- opengl_api.unwrap_or(OpenGLAPI::GLES(Some(APIVersion
-internal/renderers/skia/opengl_surface.rs:35:32     - Unknown word (GLAPI)      -- opengl_api: Option<OpenGLAPI>,
 internal/renderers/skia/software_surface.rs:25:8      - Unknown word (Softbuffer) -- struct SoftbufferRenderBuffer {
 internal/renderers/skia/software_surface.rs:35:23     - Unknown word (Softbuffer) -- impl RenderBuffer for SoftbufferRenderBuffer {
 internal/renderers/skia/software_surface.rs:57:50     - Unknown word (softbuffer) -- format!("Error resizing softbuffer surface: {e}"))?;
-internal/renderers/skia/software_surface.rs:5:23      - Unknown word (GLAPI)      -- use i_slint_core::OpenGLAPI;
 internal/renderers/skia/software_surface.rs:61:52     - Unknown word (softbuffer) -- format!("Error retrieving softbuffer rendering buffer: {e
 internal/renderers/skia/software_surface.rs:66:35     - Unknown word (BGRA)       -- skia_safe::ColorType::BGRA8888,
 internal/renderers/skia/software_surface.rs:72:52     - Unknown word (softbuffer) -- format!("Error presenting softbuffer buffer after skia rendering
-internal/renderers/skia/software_surface.rs:88:33     - Unknown word (GLAPI)      -- opengl_api: Option<OpenGLAPI>,
 internal/renderers/skia/software_surface.rs:91:50     - Unknown word (softbuffer) -- format!("Error creating softbuffer context: {e}"))?;
 internal/renderers/skia/software_surface.rs:94:73     - Unknown word (softbuffer) -- window_handle).map_err(|softbuffer_error| {
 internal/renderers/skia/software_surface.rs:99:22     - Unknown word (Softbuffer) -- Box::new(SoftbufferRenderBuffer { _context
 internal/renderers/skia/textlayout.rs:272:24    - Unknown word (Rects)      -- // SkParagraph::getRectsForRange() does not report
 internal/renderers/skia/textlayout.rs:326:28    - Unknown word (rects)      -- let boxes = layout.get_rects_for_range(
-internal/renderers/skia/vulkan_surface.rs:163:33    - Unknown word (GLAPI)      -- opengl_api: Option<OpenGLAPI>,
 internal/renderers/skia/vulkan_surface.rs:173:17    - Unknown word (xlib)       -- khr_xlib_surface: true,
 internal/renderers/skia/vulkan_surface.rs:17:35     - Unknown word (Swapchain)  -- swapchain::{Surface, Swapchain, SwapchainCreateInfo
 internal/renderers/skia/vulkan_surface.rs:17:46     - Unknown word (Swapchain)  -- Surface, Swapchain, SwapchainCreateInfo, SwapchainPresentIn
@@ -3160,7 +3061,6 @@ internal/renderers/skia/vulkan_surface.rs:53:25     - Unknown word (swapchain)  
 internal/renderers/skia/vulkan_surface.rs:70:47     - Unknown word (macthing)   -- vke| format!("Error macthing Vulkan surface capabilities
 internal/renderers/skia/vulkan_surface.rs:71:66     - Unknown word (UNORM)      -- format::Format::B8G8R8A8_UNORM.into();
 internal/renderers/skia/vulkan_surface.rs:73:13     - Unknown word (Swapchain)  -- Swapchain::new(
-internal/renderers/skia/vulkan_surface.rs:8:29      - Unknown word (GLAPI)      -- slint_core::api::{OpenGLAPI, PhysicalSize as PhysicalWind
 logo/README.md:45:116    - Unknown word (whitebg)    -- the versions with ***whitebg***.
 logo/README.md:52:14     - Unknown word (CMYK)       -- * For Print: CMYK = 75,45,0,0,
 logo/README.md:53:19     - Unknown word (Pantone)    -- * For Spot Color (Pantone): PMS 2727 C.
