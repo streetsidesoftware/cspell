@@ -3,7 +3,7 @@ Repository: slint-ui/slint
 Url: "https://github.com/slint-ui/slint"
 Args: ["--config=../../../../repositories/config/slint/cspell.config.yaml","--issues-summary-report","."]
 Lines:
- CSpell: Files checked: 2197, Issues found: 4086 in 754 files.
+ CSpell: Files checked: 2107, Issues found: 3999 in 749 files.
  exit code: 1
 CMakeLists.txt:17:14     - Unknown word (TOPLEVEL)   -- set(SLINT_IS_TOPLEVEL_BUILD TRUE)
 CMakeLists.txt:27:31     - Unknown word (dylib's)    -- macOS, the slint_cpp.dylib's install_name uses @rpath
@@ -500,12 +500,6 @@ api/rs/slint/lib.rs:358:39    - Unknown word (bindtextdomain) -- internally call
 api/rs/slint/mcu.md:44:5      - Unknown word (libm)       -- * `libm`: We select this feature
 api/rs/slint/tests/spawn_local.rs:16:20     - Unknown word (unpark)     -- self.0.unpark();
 demos/energy-monitor/index.html:10:97     - Unknown word (chrono)     -- features slint/default,chrono` in this directory.
-demos/energy-monitor/src/lib.rs:13:5      - Unknown word (slint)      -- slint::include_modules!()
-demos/energy-monitor/src/lib.rs:16:5      - Unknown word (slint)      -- use slint::*;
-demos/energy-monitor/src/lib.rs:21:22     - Unknown word (chrono)     -- #[cfg(feature = "chrono")]
-demos/energy-monitor/src/lib.rs:39:62     - Unknown word (chrono)     -- support"), feature = "chrono"))]
-demos/energy-monitor/src/lib.rs:78:22     - Unknown word (slint)      -- fn android_main(app: slint::android::AndroidApp
-demos/energy-monitor/src/lib.rs:79:5      - Unknown word (slint)      -- slint::android::init(app)
 demos/energy-monitor/ui/images.slint:14:25     - Unknown word (spyrosoft)  -- in property <image> spyrosoft-logo: @image-url("assets
 demos/energy-monitor/ui/images.slint:14:60     - Unknown word (spyrosoft)  -- @image-url("assets/spyrosoft-logo.svg");
 demos/energy-monitor/ui/mid_main.slint:95:13     - Unknown word (opend)      -- opend => {
@@ -778,62 +772,16 @@ demos/printerdemo/ui/scan_page.slint:57:62     - Unknown word (YCMB)       -- ),
 demos/printerdemo/ui/settings_page.slint:83:62     - Unknown word (YCMB)       -- ), @tr("RGB"), @tr("YCMB")];
 demos/printerdemo/zephyr/CMakeLists.txt:10:10     - Unknown word (STREQUAL)   -- if(BOARD STREQUAL "native_sim/native/
 demos/printerdemo/zephyr/CMakeLists.txt:12:37     - Unknown word (Zbuild)     -- LIBRARY_CARGO_FLAGS "-Zbuild-std=core,alloc")
-demos/printerdemo/zephyr/CMakeLists.txt:12:9      - Unknown word (SLINT)      -- set(SLINT_LIBRARY_CARGO_FLAGS
 demos/printerdemo/zephyr/CMakeLists.txt:13:14     - Unknown word (STREQUAL)   -- elseif(BOARD STREQUAL "mimxrt1170_evk@B/mimxrt
 demos/printerdemo/zephyr/CMakeLists.txt:13:24     - Unknown word (mimxrt)     -- elseif(BOARD STREQUAL "mimxrt1170_evk@B/mimxrt117
 demos/printerdemo/zephyr/CMakeLists.txt:13:41     - Unknown word (mimxrt)     -- STREQUAL "mimxrt1170_evk@B/mimxrt1176/cm7")
 demos/printerdemo/zephyr/CMakeLists.txt:14:28     - Unknown word (thumbv)     -- set(Rust_CARGO_TARGET "thumbv7em-none-eabi")
 demos/printerdemo/zephyr/CMakeLists.txt:14:43     - Unknown word (eabi)       -- TARGET "thumbv7em-none-eabi")
-demos/printerdemo/zephyr/CMakeLists.txt:16:11     - Unknown word (rustc)      -- # See rustc --print target-list
 demos/printerdemo/zephyr/CMakeLists.txt:21:11     - Unknown word (STREQUAL)   -- if(SHIELD STREQUAL "rk055hdmipi4ma0")
 demos/printerdemo/zephyr/CMakeLists.txt:21:26     - Unknown word (hdmipi)     -- SHIELD STREQUAL "rk055hdmipi4ma0")
 demos/printerdemo/zephyr/CMakeLists.txt:22:79     - Unknown word (hdmipi)     -- boards/shields/rk055hdmipi4ma0/rk055hdmipi4ma0
 demos/printerdemo/zephyr/CMakeLists.txt:22:95     - Unknown word (hdmipi)     -- rk055hdmipi4ma0/rk055hdmipi4ma0.overlay")
-demos/printerdemo/zephyr/CMakeLists.txt:26:9      - Unknown word (slint)      -- project(slint_zephyr_printer_demo
-demos/printerdemo/zephyr/CMakeLists.txt:28:5      - Unknown word (SLINT)      -- set(SLINT_FEATURE_FREESTANDING
-demos/printerdemo/zephyr/CMakeLists.txt:29:5      - Unknown word (SLINT)      -- set(SLINT_FEATURE_RENDERER_SOFTWARE
-demos/printerdemo/zephyr/CMakeLists.txt:30:13     - Unknown word (SLINT)      -- set(DEFAULT_SLINT_EMBED_RESOURCES "embed
-demos/printerdemo/zephyr/CMakeLists.txt:38:27     - Unknown word (slint)      -- subdirectory(../../.. slint_build)
-demos/printerdemo/zephyr/CMakeLists.txt:41:32     - Unknown word (slint)      -- sources(app PRIVATE src/slint-zephyr.cpp src/main
-demos/printerdemo/zephyr/CMakeLists.txt:42:35     - Unknown word (Slint)      -- libraries(app PRIVATE Slint::Slint)
-demos/printerdemo/zephyr/CMakeLists.txt:42:42     - Unknown word (Slint)      -- libraries(app PRIVATE Slint::Slint)
-demos/printerdemo/zephyr/CMakeLists.txt:44:1      - Unknown word (slint)      -- slint_target_sources(app
-demos/printerdemo/zephyr/CMakeLists.txt:44:32     - Unknown word (printerdemo) -- target_sources(app ../ui/printerdemo.slint)
-demos/printerdemo/zephyr/CMakeLists.txt:44:44     - Unknown word (slint)       -- app ../ui/printerdemo.slint)
-demos/printerdemo/zephyr/README.md:17:18     - Unknown word (rustup)     -- # Install via rustup
-demos/printerdemo/zephyr/README.md:21:4      - Unknown word (rustup)     -- rustup toolchain install nightly
-demos/printerdemo/zephyr/README.md:22:4      - Unknown word (rustup)     -- rustup default nightly
-demos/printerdemo/zephyr/README.md:29:9      - Unknown word (Slint)      -- # If Slint source is already checked
-demos/printerdemo/zephyr/README.md:30:15     - Unknown word (venv)       -- python3 -m venv ../.venv
-demos/printerdemo/zephyr/README.md:30:24     - Unknown word (venv)       -- python3 -m venv ../.venv
-demos/printerdemo/zephyr/README.md:31:15     - Unknown word (venv)       -- source ../.venv/bin/activate
-demos/printerdemo/zephyr/README.md:33:25     - Unknown word (Slint)      -- If you do not have Slint source yet:
-demos/printerdemo/zephyr/README.md:34:10     - Unknown word (slint)      -- mkdir slint-zephyr
-demos/printerdemo/zephyr/README.md:35:15     - Unknown word (venv)       -- python3 -m venv slint-zephyr/.venv
-demos/printerdemo/zephyr/README.md:35:20     - Unknown word (slint)      -- python3 -m venv slint-zephyr/.venv
-demos/printerdemo/zephyr/README.md:35:34     - Unknown word (venv)       -- m venv slint-zephyr/.venv
-demos/printerdemo/zephyr/README.md:36:11     - Unknown word (slint)      -- source slint-zephyr/.venv/bin/activate
-demos/printerdemo/zephyr/README.md:45:86     - Unknown word (Slint)      -- Zephyr source next to the Slint source):
-demos/printerdemo/zephyr/README.md:45:9      - Unknown word (Slint)      -- # If Slint source is already checked
-demos/printerdemo/zephyr/README.md:47:28     - Unknown word (printerdemo) -- west init -l --mf demos/printerdemo/zephyr/west.yaml ./slint
-demos/printerdemo/zephyr/README.md:47:59     - Unknown word (slint)       -- rinterdemo/zephyr/west.yaml ./slint
-demos/printerdemo/zephyr/README.md:49:88     - Unknown word (slint)       -- and Zephyr source into slint-zephyr):
-demos/printerdemo/zephyr/README.md:50:74     - Unknown word (printerdemo) -- mr zephyr --mf demos/printerdemo/zephyr/west.yaml slint
-demos/printerdemo/zephyr/README.md:66:21     - Unknown word (zephyrproject) -- pip install -r ~/zephyrproject/zephyr/scripts/requirements
-demos/printerdemo/zephyr/README.md:73:87     - Unknown word (comands)       -- execute the following comands:
-demos/printerdemo/zephyr/README.md:77:58     - Unknown word (printerdemo)   -- p always slint/demos/printerdemo/zephyr
 demos/printerdemo/zephyr/README.md:7:15      - Unknown word (Espressif)  -- 1. Unlike the Espressif integration, we don
-demos/printerdemo/zephyr/README.md:7:95      - Unknown word (Slint)      -- integration as part of the Slint C++ API. In part, this
-demos/printerdemo/zephyr/README.md:87:151    - Unknown word (HDMIPI)        -- index.html) with a [RK055HDMIPI4MA0 MIPI display](https
-demos/printerdemo/zephyr/README.md:87:162    - Unknown word (MIPI)          -- with a [RK055HDMIPI4MA0 MIPI display](https://docs
-demos/printerdemo/zephyr/README.md:87:41     - Unknown word (MIMXRT)        -- been tested on the [NXP MIMXRT1170-EVKB](https://docs
-demos/printerdemo/zephyr/README.md:87:52     - Unknown word (EVKB)          -- the [NXP MIMXRT1170-EVKB](https://docs.zephyrproject
-demos/printerdemo/zephyr/README.md:91:105    - Unknown word (hdmipi)        -- zephyr -- -DSHIELD=rk055hdmipi4ma0 -DCMAKE_BUILD_TYPE
-demos/printerdemo/zephyr/README.md:91:117    - Unknown word (DCMAKE)        -- DSHIELD=rk055hdmipi4ma0 -DCMAKE_BUILD_TYPE=Release
-demos/printerdemo/zephyr/README.md:91:15     - Unknown word (mimxrt)        -- west build -b mimxrt1170_evk@B/mimxrt117
-demos/printerdemo/zephyr/README.md:91:32     - Unknown word (mimxrt)        -- -b mimxrt1170_evk@B/mimxrt1176/cm7 -p always slint
-demos/printerdemo/zephyr/README.md:91:69     - Unknown word (printerdemo)   -- p always slint/demos/printerdemo/zephyr -- -DSHIELD=rk
-demos/printerdemo/zephyr/README.md:91:92     - Unknown word (DSHIELD)       -- printerdemo/zephyr -- -DSHIELD=rk055hdmipi4ma0 -DCMAKE
 demos/printerdemo/zephyr/VERSION:3:1       - Unknown word (PATCHLEVEL) -- PATCHLEVEL = 0
 demos/printerdemo/zephyr/VERSION:5:1       - Unknown word (EXTRAVERSION) -- EXTRAVERSION =
 demos/printerdemo/zephyr/boards/mimxrt1170_evk_mimxrt1176_cm7.conf:10:13     - Unknown word (ELCDIF)     -- CONFIG_MCUX_ELCDIF_PXP_ROTATE_90=y
@@ -1172,37 +1120,10 @@ docs/src/misc/light-theme.jsonc:474:35    - Unknown word (wordlike)   -- "keywor
 docs/src/misc/light-theme.jsonc:548:31    - Unknown word (uintptr)    -- "storage.type.uintptr.go",
 docs/src/misc/light-theme.jsonc:614:66    - Unknown word (enummember) -- constant", "variable.other.enummember"],
 docs/src/utils/_templates/release-artifacts.md:5:47      - Unknown word (follwing)   -- release contains the follwing pre-packed builds of
-docs/src/utils/slint-docs-highlight.html:15:42     - Unknown word (Flickable)  -- Close Colors CubicTo Flickable FocusScope GridLayout
-docs/src/utils/slint-docs-highlight.html:20:14     - Unknown word (slint)      -- name: 'slint',
 docs/src/utils/slint-docs-highlight.html:2:112     - Unknown word (mdbook)     -- rustdoc, sphinx and mdbook documentation.
-docs/src/utils/slint-docs-highlight.html:2:59      - Unknown word (slint)      -- highlighting of the `.slint` snippets in the generated
-docs/src/utils/slint-docs-highlight.html:2:92      - Unknown word (rustdoc)    -- snippets in the generated rustdoc, sphinx and mdbook documentat
-docs/src/utils/slint-docs-highlight.html:3:50      - Unknown word (slint)      -- the `--html-in-header slint-docs-highlight.html
-docs/src/utils/slint-docs-highlight.html:3:87      - Unknown word (rustdoc)    -- highlight.html` option of rustdoc, is included via _templates
 docs/src/utils/slint-docs-highlight.html:4:35      - Unknown word (mdbook)     -- and via head.hbs in mdbook.
-docs/src/utils/slint-docs-highlight.html:53:21     - Unknown word (slint)      -- for (let tag of ["slint", "slint,no-preview
-docs/src/utils/slint-docs-highlight.html:59:83     - Unknown word (rustdoc)    -- generator"]')?.content == "rustdoc";
-docs/src/utils/slint-docs-highlight.html:61:60     - Unknown word (rustdoc)    -- leave the others to rustdoc
-docs/src/utils/slint-docs-highlight.html:66:22     - Unknown word (rustdoc)    -- // Some of the rustdoc selectors require the
 docs/src/utils/slint-docs-highlight.html:81:20     - Unknown word (fnname)     -- ["title", "fnname"], // Foo :=
 docs/src/utils/slint-docs-highlight.html:92:27     - Unknown word (mdbook)     -- // For use with the mdbook Tutorial
-docs/src/utils/slint-docs-highlight.html:9:22      - Unknown word (slint)      -- function highlight_slint(hljs) {
-docs/src/utils/slint-docs-preview.html:108:20    - Unknown word (rustdoc)    -- // resolved by rustdoc. This helper locates
-docs/src/utils/slint-docs-preview.html:20:49     - Unknown word (slint)      -- error_string } = await slint.compile_from_string
-docs/src/utils/slint-docs-preview.html:2:47      - Unknown word (slint)      -- add preview of the `.slint` snippets in the generated
-docs/src/utils/slint-docs-preview.html:2:80      - Unknown word (rustdoc)    -- snippets in the generated rustdoc documentation.
-docs/src/utils/slint-docs-preview.html:3:50      - Unknown word (slint)      -- the `--html-in-header slint-docs-preview.html` option
-docs/src/utils/slint-docs-preview.html:3:85      - Unknown word (rustdoc)    -- preview.html` option of rustdoc.
-docs/src/utils/slint-docs-preview.html:49:20     - Unknown word (rustdoc)    -- // between rustdoc and sphinx, so match
-docs/src/utils/slint-docs-preview.html:7:19      - Unknown word (slint)      -- //import * as slint from 'https://releases
-docs/src/utils/slint-docs-preview.html:92:20     - Unknown word (winit)      -- // The winit event loop, when targeting
-docs/src/utils/slint-docs-preview.html:98:50     - Unknown word (rustdoc)    -- code.language-slint", ".rustdoc pre.language-slint"
-docs/src/utils/slint-docs-preview.html:9:17      - Unknown word (slint)      -- import * as slint from 'https://snapshots
-docs/src/utils/utils.ts:75:37     - Unknown word (slint)      -- href: "/master/docs/slint/guide/language/types
-docs/src/utils/utils.ts:80:37     - Unknown word (slint)      -- href: "/master/docs/slint/guide/language/types
-docs/src/utils/utils.ts:85:37     - Unknown word (slint)      -- href: "/master/docs/slint/guide/language/types
-docs/src/utils/utils.ts:90:37     - Unknown word (slint)      -- href: "/master/docs/slint/guide/language/types
-docs/src/utils/utils.ts:95:37     - Unknown word (slint)      -- href: "/master/docs/slint/guide/language/types
 docs/tsconfig.json:2:21      - Unknown word (tsconfigs)  -- "extends": "astro/tsconfigs/strict",
 docs/writing-style-guide.md:22:16     - Unknown word (pround)     -- Use: "We're pround to announce ..."
 docs/writing-style-guide.md:28:48     - Unknown word (instrunctions) -- reading this to get instrunctions, there's no need to
@@ -1474,11 +1395,6 @@ examples/gstreamer-player/main.rs:59:18     - Unknown word (appsink)      -- sou
 examples/gstreamer-player/main.rs:61:5      - Unknown word (appsink)      -- appsink.set_callbacks(
 examples/gstreamer-player/main.rs:63:31     - Unknown word (appsink)      -- .new_sample(move |appsink| {
 examples/gstreamer-player/main.rs:72:39     - Unknown word (gstreamer)    -- let slint_frame = try_gstreamer_video_frame_to_pixel
-examples/imagefilter/README.md:10:10     - Unknown word (slint)       -- | [`main.slint`](./ui/main.slint)
-examples/imagefilter/README.md:12:21     - Unknown word (imagefilter) -- ![Screenshot of the imagefilter example](https://slint
-examples/imagefilter/README.md:3:6       - Unknown word (imagefilter) -- ### `imagefilter`
-examples/imagefilter/README.md:6:26      - Unknown word (Slint)       -- feed the result into Slint.
-examples/imagefilter/README.md:8:5       - Unknown word (slint)       -- | `.slint` Design |  Rust Source
 examples/imagefilter/assets/cat.jpg.license:1:30      - Unknown word (zaimoku)    -- FileCopyrightText: 2013 zaimoku_woodpile <https://www
 examples/iot-dashboard/iot-dashboard.slint:10:19     - Unknown word (Edelhirsch) -- ** Copyright 2021 Edelhirsch Software GmbH. All rights
 examples/iot-dashboard/iot-dashboard.slint:376:27    - Unknown word (qskinny)    -- // Deviation from qskinny: Show a darker color
@@ -1714,9 +1630,6 @@ examples/slide_puzzle/slide_puzzle.slint:385:87    - Unknown word (Belappetit) -
 examples/sprite-sheet/demo.slint:18:18     - Unknown word (Boing)      -- model: ["Boing Ball", "Static"];
 examples/sprite-sheet/demo.slint:19:25     - Unknown word (Boing)      -- current-value: "Boing Ball";
 examples/sprite-sheet/demo.slint:31:29     - Unknown word (Boing)      -- cb.current-value == "Boing Ball":  ball := SpriteSheet
-examples/todo-mvc/README.md:7:5       - Unknown word (slint)      -- | `.slint` Design | Rust Source
-examples/todo-mvc/README.md:7:65      - Unknown word (Slint)      -- wasm Preview | Open in SlintPad |
-examples/todo-mvc/README.md:9:11      - Unknown word (slint)      -- | [`index.slint`](./ui/index.slint)
 examples/todo-mvc/ui/widgets/selection_list_view.slint:10:19     - Unknown word (serde)      -- @rust-attr(derive(serde::Serialize, serde::Deserializ
 examples/todo-mvc/ui/widgets/selection_list_view.slint:10:37     - Unknown word (serde)      -- derive(serde::Serialize, serde::Deserialize))
 examples/todo-mvc/ui/widgets/state_layer.slint:50:9      - Unknown word (hoverd)     -- hoverd when root.has-hover
