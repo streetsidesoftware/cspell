@@ -20,12 +20,7 @@ import {
     VfsDirEntry,
     VfsStat,
 } from '../VFileSystem.js';
-import type {
-    VFileSystemProvider,
-    VProviderFileSystem,
-    VProviderFileSystemReadDirectoryOptions,
-    VProviderFileSystemReadFileOptions,
-} from '../VirtualFS.js';
+import type { VFileSystemProvider, VProviderFileSystem } from '../VirtualFS.js';
 
 export function cspellIOToFsProvider(cspellIO: CSpellIO): VFileSystemProvider {
     const capabilities = FSCapabilityFlags.Stat | FSCapabilityFlags.ReadWrite | FSCapabilityFlags.ReadDir;
@@ -40,7 +35,7 @@ export function cspellIOToFsProvider(cspellIO: CSpellIO): VFileSystemProvider {
     const fs: VProviderFileSystem = {
         providerInfo: { name },
         stat: (url) => cspellIO.getStat(url),
-        readFile: (url, options?: VProviderFileSystemReadFileOptions) => cspellIO.readFile(url, options),
+        readFile: (url, options) => cspellIO.readFile(url, options),
         readDirectory: (url) => cspellIO.readDirectory(url),
         writeFile: (file) => cspellIO.writeFile(file.url, file.content),
         dispose: () => undefined,
