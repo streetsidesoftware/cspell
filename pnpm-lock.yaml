@@ -432,8 +432,8 @@ importers:
         specifier: ^5.0.6
         version: 5.0.6
       '@cspell/dict-software-terms':
-        specifier: ^4.1.15
-        version: 4.1.15
+        specifier: ^4.1.16
+        version: 4.1.16
       '@cspell/dict-sql':
         specifier: ^2.1.8
         version: 2.1.8
@@ -1120,7 +1120,7 @@ importers:
         version: link:../../../packages/cspell-types
       ts-loader:
         specifier: ^9.5.1
-        version: 9.5.1(typescript@5.6.3)(webpack@5.96.1)
+        version: 9.5.1(typescript@5.6.3)(webpack@5.96.1(@swc/core@1.7.26)(webpack-cli@5.1.4))
       webpack:
         specifier: ^5.96.1
         version: 5.96.1(@swc/core@1.7.26)(webpack-cli@5.1.4)
@@ -2338,8 +2338,8 @@ packages:
   '@cspell/dict-scala@5.0.6':
     resolution: {integrity: sha512-tl0YWAfjUVb4LyyE4JIMVE8DlLzb1ecHRmIWc4eT6nkyDqQgHKzdHsnusxFEFMVLIQomgSg0Zz6hJ5S1E4W4ww==}
 
-  '@cspell/dict-software-terms@4.1.15':
-    resolution: {integrity: sha512-mxX6jIDA6u7BkR2NkxycA+hf41LsaaQTN/9a6hY2UK9vwNS1cAgAIxUr7YDGU3kZ3sqg58XOYX/KFw/PJtMRmQ==}
+  '@cspell/dict-software-terms@4.1.16':
+    resolution: {integrity: sha512-3KHpurStLRLZhZYRqD3r6stWmC0BFFBdh8/pIbj204R5pIJOVUNjmcruvufaTAyuoNEeITpy54UUsYKO03YM6w==}
 
   '@cspell/dict-sql@2.1.8':
     resolution: {integrity: sha512-dJRE4JV1qmXTbbGm6WIcg1knmR6K5RXnQxF4XHs5HA3LAjc/zf77F95i5LC+guOGppVF6Hdl66S2UyxT+SAF3A==}
@@ -11256,7 +11256,7 @@ snapshots:
       '@cspell/dict-ruby': 5.0.7
       '@cspell/dict-rust': 4.0.10
       '@cspell/dict-scala': 5.0.6
-      '@cspell/dict-software-terms': 4.1.15
+      '@cspell/dict-software-terms': 4.1.16
       '@cspell/dict-sql': 2.1.8
       '@cspell/dict-svelte': 1.0.5
       '@cspell/dict-swift': 2.0.4
@@ -11397,7 +11397,7 @@ snapshots:
 
   '@cspell/dict-scala@5.0.6': {}
 
-  '@cspell/dict-software-terms@4.1.15': {}
+  '@cspell/dict-software-terms@4.1.16': {}
 
   '@cspell/dict-sql@2.1.8': {}
 
@@ -14167,17 +14167,17 @@ snapshots:
       '@webassemblyjs/ast': 1.14.1
       '@xtuc/long': 4.2.2
 
-  '@webpack-cli/configtest@2.1.1(webpack-cli@5.1.4)(webpack@5.96.1)':
+  '@webpack-cli/configtest@2.1.1(webpack-cli@5.1.4(webpack@5.96.1))(webpack@5.96.1(@swc/core@1.7.26)(webpack-cli@5.1.4))':
     dependencies:
       webpack: 5.96.1(@swc/core@1.7.26)(webpack-cli@5.1.4)
       webpack-cli: 5.1.4(webpack@5.96.1)
 
-  '@webpack-cli/info@2.0.2(webpack-cli@5.1.4)(webpack@5.96.1)':
+  '@webpack-cli/info@2.0.2(webpack-cli@5.1.4(webpack@5.96.1))(webpack@5.96.1(@swc/core@1.7.26)(webpack-cli@5.1.4))':
     dependencies:
       webpack: 5.96.1(@swc/core@1.7.26)(webpack-cli@5.1.4)
       webpack-cli: 5.1.4(webpack@5.96.1)
 
-  '@webpack-cli/serve@2.0.5(webpack-cli@5.1.4)(webpack@5.96.1)':
+  '@webpack-cli/serve@2.0.5(webpack-cli@5.1.4(webpack@5.96.1))(webpack@5.96.1(@swc/core@1.7.26)(webpack-cli@5.1.4))':
     dependencies:
       webpack: 5.96.1(@swc/core@1.7.26)(webpack-cli@5.1.4)
       webpack-cli: 5.1.4(webpack@5.96.1)
@@ -20757,6 +20757,17 @@ snapshots:
 
   temp-dir@3.0.0: {}
 
+  terser-webpack-plugin@5.3.10(@swc/core@1.7.26)(webpack@5.96.1(@swc/core@1.7.26)(webpack-cli@5.1.4)):
+    dependencies:
+      '@jridgewell/trace-mapping': 0.3.25
+      jest-worker: 27.5.1
+      schema-utils: 3.3.0
+      serialize-javascript: 6.0.2
+      terser: 5.36.0
+      webpack: 5.96.1(@swc/core@1.7.26)(webpack-cli@5.1.4)
+    optionalDependencies:
+      '@swc/core': 1.7.26
+
   terser-webpack-plugin@5.3.10(@swc/core@1.7.26)(webpack@5.96.1(@swc/core@1.7.26)):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.25
@@ -20765,17 +20776,6 @@ snapshots:
       serialize-javascript: 6.0.2
       terser: 5.36.0
       webpack: 5.96.1(@swc/core@1.7.26)
-    optionalDependencies:
-      '@swc/core': 1.7.26
-
-  terser-webpack-plugin@5.3.10(@swc/core@1.7.26)(webpack@5.96.1):
-    dependencies:
-      '@jridgewell/trace-mapping': 0.3.25
-      jest-worker: 27.5.1
-      schema-utils: 3.3.0
-      serialize-javascript: 6.0.2
-      terser: 5.36.0
-      webpack: 5.96.1(@swc/core@1.7.26)(webpack-cli@5.1.4)
     optionalDependencies:
       '@swc/core': 1.7.26
 
@@ -20877,7 +20877,7 @@ snapshots:
       tslib: 2.8.1
       typescript: 5.6.3
 
-  ts-loader@9.5.1(typescript@5.6.3)(webpack@5.96.1):
+  ts-loader@9.5.1(typescript@5.6.3)(webpack@5.96.1(@swc/core@1.7.26)(webpack-cli@5.1.4)):
     dependencies:
       chalk: 4.1.2
       enhanced-resolve: 5.17.1
@@ -21392,9 +21392,9 @@ snapshots:
   webpack-cli@5.1.4(webpack@5.96.1):
     dependencies:
       '@discoveryjs/json-ext': 0.5.7
-      '@webpack-cli/configtest': 2.1.1(webpack-cli@5.1.4)(webpack@5.96.1)
-      '@webpack-cli/info': 2.0.2(webpack-cli@5.1.4)(webpack@5.96.1)
-      '@webpack-cli/serve': 2.0.5(webpack-cli@5.1.4)(webpack@5.96.1)
+      '@webpack-cli/configtest': 2.1.1(webpack-cli@5.1.4(webpack@5.96.1))(webpack@5.96.1(@swc/core@1.7.26)(webpack-cli@5.1.4))
+      '@webpack-cli/info': 2.0.2(webpack-cli@5.1.4(webpack@5.96.1))(webpack@5.96.1(@swc/core@1.7.26)(webpack-cli@5.1.4))
+      '@webpack-cli/serve': 2.0.5(webpack-cli@5.1.4(webpack@5.96.1))(webpack@5.96.1(@swc/core@1.7.26)(webpack-cli@5.1.4))
       colorette: 2.0.20
       commander: 10.0.1
       cross-spawn: 7.0.5
@@ -21521,7 +21521,7 @@ snapshots:
       neo-async: 2.6.2
       schema-utils: 3.3.0
       tapable: 2.2.1
-      terser-webpack-plugin: 5.3.10(@swc/core@1.7.26)(webpack@5.96.1)
+      terser-webpack-plugin: 5.3.10(@swc/core@1.7.26)(webpack@5.96.1(@swc/core@1.7.26)(webpack-cli@5.1.4))
       watchpack: 2.4.2
       webpack-sources: 3.2.3
     optionalDependencies:
