@@ -3,7 +3,7 @@ import assert from 'node:assert';
 import { renameFileReference, renameFileResource, urlOrReferenceToUrl } from '../common/index.js';
 import type { DirEntry, FileReference, FileResource } from '../models/index.js';
 import type { FSCapabilityFlags } from '../VFileSystem.js';
-import type { VFileSystemProvider, VProviderFileSystem } from '../VirtualFS.js';
+import type { VFileSystemProvider, VProviderFileSystem, VProviderFileSystemReadFileOptions } from '../VirtualFS.js';
 import { fsCapabilities, VFSErrorUnsupportedRequest } from './WrappedProviderFs.js';
 
 type UrlOrReference = URL | FileReference;
@@ -132,9 +132,9 @@ function remapFS(
             return stat;
         },
 
-        readFile: async (url) => {
+        readFile: async (url, options?: VProviderFileSystemReadFileOptions) => {
             const url2 = mapUrlOrReferenceToPrivate(url);
-            const file = await fs.readFile(url2);
+            const file = await fs.readFile(url2, options);
             return mapFileResourceToPublic(file);
         },
 

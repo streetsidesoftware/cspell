@@ -15,9 +15,11 @@ export async function fetchHead(request: string | URL): Promise<Headers> {
     }
 }
 
-export async function fetchURL(url: URL): Promise<Buffer> {
+export async function fetchURL(url: URL, signal?: AbortSignal): Promise<Buffer> {
     try {
-        const response = await fetch(url);
+        // eslint-disable-next-line n/no-unsupported-features/node-builtins
+        const request = signal ? new Request(url, { signal }) : url;
+        const response = await fetch(request);
         if (!response.ok) {
             throw FetchUrlError.create(url, response.status);
         }

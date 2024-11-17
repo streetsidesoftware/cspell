@@ -670,6 +670,9 @@ importers:
       typescript:
         specifier: ~5.6.3
         version: 5.6.3
+      vitest-fetch-mock:
+        specifier: ^0.4.2
+        version: 0.4.2(vitest@2.1.5(@types/node@22.9.0)(terser@5.36.0))
 
   packages/cspell-json-reporter:
     dependencies:
@@ -1120,7 +1123,7 @@ importers:
         version: link:../../../packages/cspell-types
       ts-loader:
         specifier: ^9.5.1
-        version: 9.5.1(typescript@5.6.3)(webpack@5.96.1(@swc/core@1.7.26)(webpack-cli@5.1.4))
+        version: 9.5.1(typescript@5.6.3)(webpack@5.96.1)
       webpack:
         specifier: ^5.96.1
         version: 5.96.1(@swc/core@1.7.26)(webpack-cli@5.1.4)
@@ -9832,6 +9835,12 @@ packages:
       terser:
         optional: true
 
+  vitest-fetch-mock@0.4.2:
+    resolution: {integrity: sha512-MuN/TCAvvUs9sLMdOPKqdXEUOD0E5cNW/LN7Tro3KkrLBsvUaH7iQWcznNUU4ml+GqX6ZbNguDmFQ2tliKqhCg==}
+    engines: {node: '>=18.0.0'}
+    peerDependencies:
+      vitest: '>=2.0.0'
+
   vitest@2.1.5:
     resolution: {integrity: sha512-P4ljsdpuzRTPI/kbND2sDZ4VmieerR2c9szEZpjc+98Z9ebvnXmM5+0tHEKqYZumXqlvnmfWsjeFOjXVriDG7A==}
     engines: {node: ^18.0.0 || >=20.0.0}
@@ -14167,17 +14176,17 @@ snapshots:
       '@webassemblyjs/ast': 1.14.1
       '@xtuc/long': 4.2.2
 
-  '@webpack-cli/configtest@2.1.1(webpack-cli@5.1.4(webpack@5.96.1))(webpack@5.96.1(@swc/core@1.7.26)(webpack-cli@5.1.4))':
+  '@webpack-cli/configtest@2.1.1(webpack-cli@5.1.4)(webpack@5.96.1)':
     dependencies:
       webpack: 5.96.1(@swc/core@1.7.26)(webpack-cli@5.1.4)
       webpack-cli: 5.1.4(webpack@5.96.1)
 
-  '@webpack-cli/info@2.0.2(webpack-cli@5.1.4(webpack@5.96.1))(webpack@5.96.1(@swc/core@1.7.26)(webpack-cli@5.1.4))':
+  '@webpack-cli/info@2.0.2(webpack-cli@5.1.4)(webpack@5.96.1)':
     dependencies:
       webpack: 5.96.1(@swc/core@1.7.26)(webpack-cli@5.1.4)
       webpack-cli: 5.1.4(webpack@5.96.1)
 
-  '@webpack-cli/serve@2.0.5(webpack-cli@5.1.4(webpack@5.96.1))(webpack@5.96.1(@swc/core@1.7.26)(webpack-cli@5.1.4))':
+  '@webpack-cli/serve@2.0.5(webpack-cli@5.1.4)(webpack@5.96.1)':
     dependencies:
       webpack: 5.96.1(@swc/core@1.7.26)(webpack-cli@5.1.4)
       webpack-cli: 5.1.4(webpack@5.96.1)
@@ -20757,17 +20766,6 @@ snapshots:
 
   temp-dir@3.0.0: {}
 
-  terser-webpack-plugin@5.3.10(@swc/core@1.7.26)(webpack@5.96.1(@swc/core@1.7.26)(webpack-cli@5.1.4)):
-    dependencies:
-      '@jridgewell/trace-mapping': 0.3.25
-      jest-worker: 27.5.1
-      schema-utils: 3.3.0
-      serialize-javascript: 6.0.2
-      terser: 5.36.0
-      webpack: 5.96.1(@swc/core@1.7.26)(webpack-cli@5.1.4)
-    optionalDependencies:
-      '@swc/core': 1.7.26
-
   terser-webpack-plugin@5.3.10(@swc/core@1.7.26)(webpack@5.96.1(@swc/core@1.7.26)):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.25
@@ -20776,6 +20774,17 @@ snapshots:
       serialize-javascript: 6.0.2
       terser: 5.36.0
       webpack: 5.96.1(@swc/core@1.7.26)
+    optionalDependencies:
+      '@swc/core': 1.7.26
+
+  terser-webpack-plugin@5.3.10(@swc/core@1.7.26)(webpack@5.96.1):
+    dependencies:
+      '@jridgewell/trace-mapping': 0.3.25
+      jest-worker: 27.5.1
+      schema-utils: 3.3.0
+      serialize-javascript: 6.0.2
+      terser: 5.36.0
+      webpack: 5.96.1(@swc/core@1.7.26)(webpack-cli@5.1.4)
     optionalDependencies:
       '@swc/core': 1.7.26
 
@@ -20877,7 +20886,7 @@ snapshots:
       tslib: 2.8.1
       typescript: 5.6.3
 
-  ts-loader@9.5.1(typescript@5.6.3)(webpack@5.96.1(@swc/core@1.7.26)(webpack-cli@5.1.4)):
+  ts-loader@9.5.1(typescript@5.6.3)(webpack@5.96.1):
     dependencies:
       chalk: 4.1.2
       enhanced-resolve: 5.17.1
@@ -21297,6 +21306,24 @@ snapshots:
       - supports-color
       - terser
 
+  vite-node@2.1.5(@types/node@22.9.0)(terser@5.36.0):
+    dependencies:
+      cac: 6.7.14
+      debug: 4.3.7(supports-color@8.1.1)
+      es-module-lexer: 1.5.4
+      pathe: 1.1.2
+      vite: 5.4.11(@types/node@22.9.0)(terser@5.36.0)
+    transitivePeerDependencies:
+      - '@types/node'
+      - less
+      - lightningcss
+      - sass
+      - sass-embedded
+      - stylus
+      - sugarss
+      - supports-color
+      - terser
+
   vite@5.4.11(@types/node@18.19.64)(terser@5.36.0):
     dependencies:
       esbuild: 0.21.5
@@ -21306,6 +21333,20 @@ snapshots:
       '@types/node': 18.19.64
       fsevents: 2.3.3
       terser: 5.36.0
+
+  vite@5.4.11(@types/node@22.9.0)(terser@5.36.0):
+    dependencies:
+      esbuild: 0.21.5
+      postcss: 8.4.49
+      rollup: 4.27.2
+    optionalDependencies:
+      '@types/node': 22.9.0
+      fsevents: 2.3.3
+      terser: 5.36.0
+
+  vitest-fetch-mock@0.4.2(vitest@2.1.5(@types/node@22.9.0)(terser@5.36.0)):
+    dependencies:
+      vitest: 2.1.5(@types/node@22.9.0)(terser@5.36.0)
 
   vitest@2.1.5(@types/node@18.19.64)(terser@5.36.0):
     dependencies:
@@ -21331,6 +21372,41 @@ snapshots:
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 18.19.64
+    transitivePeerDependencies:
+      - less
+      - lightningcss
+      - msw
+      - sass
+      - sass-embedded
+      - stylus
+      - sugarss
+      - supports-color
+      - terser
+
+  vitest@2.1.5(@types/node@22.9.0)(terser@5.36.0):
+    dependencies:
+      '@vitest/expect': 2.1.5
+      '@vitest/mocker': 2.1.5(vite@5.4.11(@types/node@18.19.64)(terser@5.36.0))
+      '@vitest/pretty-format': 2.1.5
+      '@vitest/runner': 2.1.5
+      '@vitest/snapshot': 2.1.5
+      '@vitest/spy': 2.1.5
+      '@vitest/utils': 2.1.5
+      chai: 5.1.2
+      debug: 4.3.7(supports-color@8.1.1)
+      expect-type: 1.1.0
+      magic-string: 0.30.12
+      pathe: 1.1.2
+      std-env: 3.8.0
+      tinybench: 2.9.0
+      tinyexec: 0.3.1
+      tinypool: 1.0.2
+      tinyrainbow: 1.2.0
+      vite: 5.4.11(@types/node@22.9.0)(terser@5.36.0)
+      vite-node: 2.1.5(@types/node@22.9.0)(terser@5.36.0)
+      why-is-node-running: 2.3.0
+    optionalDependencies:
+      '@types/node': 22.9.0
     transitivePeerDependencies:
       - less
       - lightningcss
@@ -21392,9 +21468,9 @@ snapshots:
   webpack-cli@5.1.4(webpack@5.96.1):
     dependencies:
       '@discoveryjs/json-ext': 0.5.7
-      '@webpack-cli/configtest': 2.1.1(webpack-cli@5.1.4(webpack@5.96.1))(webpack@5.96.1(@swc/core@1.7.26)(webpack-cli@5.1.4))
-      '@webpack-cli/info': 2.0.2(webpack-cli@5.1.4(webpack@5.96.1))(webpack@5.96.1(@swc/core@1.7.26)(webpack-cli@5.1.4))
-      '@webpack-cli/serve': 2.0.5(webpack-cli@5.1.4(webpack@5.96.1))(webpack@5.96.1(@swc/core@1.7.26)(webpack-cli@5.1.4))
+      '@webpack-cli/configtest': 2.1.1(webpack-cli@5.1.4)(webpack@5.96.1)
+      '@webpack-cli/info': 2.0.2(webpack-cli@5.1.4)(webpack@5.96.1)
+      '@webpack-cli/serve': 2.0.5(webpack-cli@5.1.4)(webpack@5.96.1)
       colorette: 2.0.20
       commander: 10.0.1
       cross-spawn: 7.0.5
@@ -21521,7 +21597,7 @@ snapshots:
       neo-async: 2.6.2
       schema-utils: 3.3.0
       tapable: 2.2.1
-      terser-webpack-plugin: 5.3.10(@swc/core@1.7.26)(webpack@5.96.1(@swc/core@1.7.26)(webpack-cli@5.1.4))
+      terser-webpack-plugin: 5.3.10(@swc/core@1.7.26)(webpack@5.96.1)
       watchpack: 2.4.2
       webpack-sources: 3.2.3
     optionalDependencies:

@@ -8,6 +8,7 @@ const samples = ['This is a bit of text'];
 
 const sampleText = 'a Ā 𐀀 文 🦄';
 const sampleText2 = [...sampleText].reverse().join('');
+const encoderUTF8 = new TextEncoder();
 
 describe('encode-decode', () => {
     test.each`
@@ -117,9 +118,11 @@ describe('encode-decode', () => {
 });
 
 function ab(data: string | Buffer | ArrayBufferView, encoding?: BufferEncoding): ArrayBufferView {
-    return typeof data === 'string'
-        ? Buffer.from(data, encoding)
-        : data instanceof Buffer
-          ? Buffer.from(data)
-          : Buffer.from(arrayBufferViewToBuffer(data));
+    if (typeof data === 'string') {
+        if (!encoding || encoding === 'utf8' || encoding === 'utf-8') {
+            return encoderUTF8.encode(data);
+        }
+        return Buffer.from(data, encoding);
+    }
+    return data instanceof Buffer ? Buffer.from(data) : Buffer.from(arrayBufferViewToBuffer(data));
 }

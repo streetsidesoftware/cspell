@@ -1,7 +1,7 @@
 import { assert } from '../errors/assert.js';
 import type { BufferEncoding } from '../models/BufferEncoding.js';
 import type { FileReference, FileResource, TextFileResource } from '../models/FileResource.js';
-import { decode, isGZipped } from './encode-decode.js';
+import { decode, encodeString, isGZipped } from './encode-decode.js';
 
 export class CFileResource implements TextFileResource {
     private _text?: string;
@@ -31,6 +31,14 @@ export class CFileResource implements TextFileResource {
         const text = typeof this.content === 'string' ? this.content : decode(this.content, encoding ?? this.encoding);
         this._text = text;
         return text;
+    }
+
+    getBytes(): Uint8Array {
+        const arrayBufferview =
+            typeof this.content === 'string' ? encodeString(this.content, this.encoding) : this.content;
+        return arrayBufferview instanceof Uint8Array
+            ? arrayBufferview
+            : new Uint8Array(arrayBufferview.buffer, arrayBufferview.byteOffset, arrayBufferview.byteLength);
     }
 
     public toJson() {

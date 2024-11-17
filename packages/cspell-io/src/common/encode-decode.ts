@@ -11,7 +11,7 @@ const decoderUTF8 = new TextDecoder('utf8');
 const decoderUTF16LE = new TextDecoder('utf-16le');
 const decoderUTF16BE = createTextDecoderUtf16BE();
 
-// const encoderUTF8 = new TextEncoder();
+const encoderUTF8 = new TextEncoder();
 // const encoderUTF16LE = new TextEncoder('utf-16le');
 
 export function decodeUtf16LE(data: ArrayBufferView): string {
@@ -71,6 +71,11 @@ export function decode(data: ArrayBufferView, encoding?: BufferEncodingExt): str
 
 export function encodeString(str: string, encoding?: BufferEncodingExt, bom?: boolean): ArrayBufferView {
     switch (encoding) {
+        case undefined:
+        case 'utf-8':
+        case 'utf8': {
+            return encoderUTF8.encode(str);
+        }
         case 'utf-16be':
         case 'utf16be': {
             return encodeUtf16BE(str, bom);

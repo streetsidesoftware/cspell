@@ -146,7 +146,7 @@ function fsPassThroughCore(fs: (url: URL) => WrappedProviderFs): Required<VFileS
         providerInfo: { name: 'default' },
         hasProvider: true,
         stat: async (url) => gfs(url, 'stat').stat(url),
-        readFile: async (url) => gfs(url, 'readFile').readFile(url),
+        readFile: async (url, options) => gfs(url, 'readFile').readFile(url, options),
         writeFile: async (file) => gfs(file, 'writeFile').writeFile(file),
         readDirectory: async (url) =>
             gfs(url, 'readDirectory')

@@ -42,8 +42,16 @@ export interface VirtualFS extends Disposable {
     enableLogging(value?: boolean): void;
 }
 
+export interface OptionAbort {
+    signal?: AbortSignal;
+}
+
+export type VProviderFileSystemReadFileOptions = OptionAbort;
+
+export type VProviderFileSystemReadDirectoryOptions = OptionAbort;
+
 export interface VProviderFileSystem extends Disposable {
-    readFile(url: UrlOrReference): Promise<FileResource>;
+    readFile(url: UrlOrReference, options?: VProviderFileSystemReadFileOptions): Promise<FileResource>;
     writeFile(file: FileResource): Promise<FileReference>;
     /**
      * Information about the provider.

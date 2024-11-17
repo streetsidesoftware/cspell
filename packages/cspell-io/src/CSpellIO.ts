@@ -2,14 +2,21 @@ import type { BufferEncoding } from './models/BufferEncoding.js';
 import type { FileReference, TextFileResource, UrlOrFilename, UrlOrReference } from './models/FileResource.js';
 import type { DirEntry, Stats } from './models/index.js';
 
+export interface ReadFileOptions {
+    signal?: AbortSignal;
+    encoding?: BufferEncoding;
+}
+
+export type ReadFileOptionsOrEncoding = ReadFileOptions | BufferEncoding;
+
 export interface CSpellIO {
     /**
      * Read a file
      * @param urlOrFilename - uri of the file to read
-     * @param encoding - optional encoding.
+     * @param options - optional options for reading the file.
      * @returns A TextFileResource.
      */
-    readFile(urlOrFilename: UrlOrReference, encoding?: BufferEncoding): Promise<TextFileResource>;
+    readFile(urlOrFilename: UrlOrReference, options?: ReadFileOptionsOrEncoding): Promise<TextFileResource>;
     /**
      * Read a file in Sync mode.
      * Note: `http` requests will fail.
@@ -98,4 +105,12 @@ export interface CSpellIO {
     //  * @param relativeTo -
     //  */
     // resolveUrl(urlOrFilename: UrlOrFilename, relativeTo: UrlOrFilename): URL;
+}
+
+export function toReadFileOptions(options?: ReadFileOptionsOrEncoding): ReadFileOptions | undefined {
+    if (!options) return options;
+    if (typeof options === 'string') {
+        return { encoding: options };
+    }
+    return options;
 }
