@@ -1,5 +1,5 @@
 import type { BufferEncoding } from '../models/BufferEncoding.js';
-import type { FileReference, UrlOrReference } from '../models/FileResource.js';
+import type { FileReference, FileResourceRequest, UrlOrReference } from '../models/FileResource.js';
 import { toFileURL } from '../node/file/url.js';
 
 export class CFileReference implements FileReference {
@@ -81,4 +81,14 @@ export function isFileReference(ref: UrlOrReference): ref is FileReference {
 
 export function renameFileReference(ref: FileReference, newUrl: URL): FileReference {
     return new CFileReference(newUrl, ref.encoding, ref.baseFilename, ref.gz);
+}
+
+export function toFileResourceRequest(
+    file: UrlOrReference,
+    encoding?: BufferEncoding,
+    signal?: AbortSignal,
+): FileResourceRequest {
+    const fileReference = typeof file === 'string' ? toFileURL(file) : file;
+    if (fileReference instanceof URL) return { url: fileReference, encoding, signal };
+    return { url: fileReference.url, encoding: encoding ?? fileReference.encoding, signal };
 }

@@ -17,6 +17,11 @@ export interface FileSystemProviderInfo {
     name: string;
 }
 
+export interface ReadFileOptions {
+    signal?: AbortSignal;
+    encoding?: BufferEncoding;
+}
+
 export interface VFileSystemCore {
     /**
      * Read a file.
@@ -24,7 +29,14 @@ export interface VFileSystemCore {
      * @param encoding - optional encoding
      * @returns A FileResource, the content will not be decoded. Use `.getText()` to get the decoded text.
      */
-    readFile(url: UrlOrReference, encoding?: BufferEncoding): Promise<TextFileResource>;
+    readFile(url: UrlOrReference, encoding: BufferEncoding): Promise<TextFileResource>;
+    /**
+     * Read a file.
+     * @param url - URL to read
+     * @param options - options for reading the file.
+     * @returns A FileResource, the content will not be decoded. Use `.getText()` to get the decoded text.
+     */
+    readFile(url: UrlOrReference, options?: ReadFileOptions | BufferEncoding): Promise<TextFileResource>;
     /**
      * Write a file
      * @param file - the file to write

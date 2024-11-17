@@ -23,6 +23,23 @@ export interface FileReference {
     readonly gz?: boolean | undefined;
 }
 
+export interface FileResourceRequest {
+    /**
+     * The URL of the File
+     */
+    readonly url: URL;
+
+    /**
+     * The encoding to use when reading the file.
+     */
+    readonly encoding?: BufferEncoding | undefined;
+
+    /**
+     * The signal to use to abort the request.
+     */
+    readonly signal?: AbortSignal | undefined;
+}
+
 export interface FileResource extends FileReference {
     /**
      * The contents of the file
@@ -38,6 +55,11 @@ export interface TextFileResource extends FileResource {
      *   If the content is a string, then the encoding is ignored.
      */
     getText(encoding?: BufferEncoding): string;
+
+    /**
+     * Get the bytes of the file.
+     */
+    getBytes(): Uint8Array;
 }
 
 export type UrlOrFilename = string | URL;

@@ -14,12 +14,18 @@ import {
     FileSystemProviderInfo,
     FSCapabilities,
     FSCapabilityFlags,
+    ReadFileOptions,
     UrlOrReference,
     VFileSystemCore,
     VfsDirEntry,
     VfsStat,
 } from '../VFileSystem.js';
-import { VFileSystemProvider, VProviderFileSystem } from '../VirtualFS.js';
+import type {
+    VFileSystemProvider,
+    VProviderFileSystem,
+    VProviderFileSystemReadDirectoryOptions,
+    VProviderFileSystemReadFileOptions,
+} from '../VirtualFS.js';
 
 export function cspellIOToFsProvider(cspellIO: CSpellIO): VFileSystemProvider {
     const capabilities = FSCapabilityFlags.Stat | FSCapabilityFlags.ReadWrite | FSCapabilityFlags.ReadDir;
@@ -34,7 +40,7 @@ export function cspellIOToFsProvider(cspellIO: CSpellIO): VFileSystemProvider {
     const fs: VProviderFileSystem = {
         providerInfo: { name },
         stat: (url) => cspellIO.getStat(url),
-        readFile: (url) => cspellIO.readFile(url),
+        readFile: (url, options?: VProviderFileSystemReadFileOptions) => cspellIO.readFile(url, options),
         readDirectory: (url) => cspellIO.readDirectory(url),
         writeFile: (file) => cspellIO.writeFile(file.url, file.content),
         dispose: () => undefined,
@@ -145,13 +151,17 @@ export class WrappedProviderFs implements VFileSystemCore {
         }
     }
 
-    async readFile(urlRef: UrlOrReference, encoding?: BufferEncoding): Promise<TextFileResource> {
+    async readFile(
+        urlRef: UrlOrReference,
+        optionsOrEncoding?: BufferEncoding | ReadFileOptions,
+    ): Promise<TextFileResource> {
         const traceID = performance.now();
         const url = urlOrReferenceToUrl(urlRef);
         this.logEvent('readFile', 'start', traceID, url);
         try {
             checkCapabilityOrThrow(this.fs, this.capabilities, FSCapabilityFlags.Read, 'readFile', url);
-            return createTextFileResource(await this.fs.readFile(urlRef), encoding);
+            const readOptions = toOptions(optionsOrEncoding);
+            return createTextFileResource(await this.fs.readFile(urlRef, readOptions), readOptions?.encoding);
         } catch (e) {
             this.logEvent('readFile', 'error', traceID, url, e instanceof Error ? e.message : '');
             throw wrapError(e);
@@ -281,4 +291,8 @@ export function chopUrl(url: URL | undefined): string {
 }
 export function rPad(str: string, len: number, ch = ' '): string {
     return str.padEnd(len, ch);
+}
+
+function toOptions(val: BufferEncoding | ReadFileOptions | undefined): ReadFileOptions | undefined {
+    return typeof val === 'string' ? { encoding: val } : val;
 }

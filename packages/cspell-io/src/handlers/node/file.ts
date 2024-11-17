@@ -97,9 +97,9 @@ const supportedFetchProtocols: Record<string, true | undefined> = { 'http:': tru
  */
 const handleRequestFsReadFileHttp = RequestFsReadFile.createRequestHandler(
     (req: RequestFsReadFile, next) => {
-        const { url } = req.params;
+        const { url, signal, encoding } = req.params;
         if (!(url.protocol in supportedFetchProtocols)) return next(req);
-        return createResponse(fetchURL(url).then((content) => CFileResource.from({ ...req.params, content })));
+        return createResponse(fetchURL(url, signal).then((content) => CFileResource.from({ url, encoding, content })));
     },
     undefined,
     'Node: Read Http(s) file.',

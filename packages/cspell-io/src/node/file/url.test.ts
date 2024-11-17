@@ -2,7 +2,7 @@ import * as path from 'node:path';
 
 import { describe, expect, test } from 'vitest';
 
-import { basename, isUrlLike, toFileURL, toURL, urlBasename, urlDirname } from './url.js';
+import { basename, isSupportedURL, isUrlLike, isZipped, toFileURL, toURL, urlBasename, urlDirname } from './url.js';
 
 const root = path.join(__dirname, '../..');
 const oc = <T>(obj: T) => expect.objectContaining(obj);
@@ -19,6 +19,28 @@ describe('util', () => {
         ${'vsls:/cspell.config.yaml'}                                                                       | ${true}
     `('isUrlLike $file', ({ file, expected }) => {
         expect(isUrlLike(file)).toBe(expected);
+    });
+
+    test.each`
+        file                                                                                                | expected
+        ${'samples/cities.txt'}                                                                             | ${false}
+        ${'samples/cities.txt.gz'}                                                                          | ${true}
+        ${'https://github.com/streetsidesoftware/cspell/raw/main/packages/cspell-io/samples/cities.txt'}    | ${false}
+        ${'https://github.com/streetsidesoftware/cspell/raw/main/packages/cspell-io/samples/cities.txt.gz'} | ${true}
+        ${'vsls:/cspell.config.yaml'}                                                                       | ${false}
+        ${new URL('https://github.com/samples/cities.txt')}                                                 | ${false}
+        ${new URL('https://github.com/samples/cities.txt.gz')}                                              | ${true}
+    `('isZipped $file', ({ file, expected }) => {
+        expect(isZipped(file)).toBe(expected);
+    });
+
+    test.each`
+        file                                                                                                | expected
+        ${'https://github.com/streetsidesoftware/cspell/raw/main/packages/cspell-io/samples/cities.txt.gz'} | ${true}
+        ${'vsls:/cspell.config.yaml'}                                                                       | ${false}
+        ${import.meta.url}                                                                                  | ${true}
+    `('isSupportedURL $file', ({ file, expected }) => {
+        expect(isSupportedURL(new URL(file))).toBe(expected);
     });
 
     test.each`

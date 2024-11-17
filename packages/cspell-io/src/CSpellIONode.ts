@@ -1,9 +1,10 @@
 import { isServiceResponseSuccess, ServiceBus } from '@cspell/cspell-service-bus';
 
-import { isFileReference, toFileReference } from './common/CFileReference.js';
+import { isFileReference, toFileReference, toFileResourceRequest } from './common/CFileReference.js';
 import { CFileResource } from './common/CFileResource.js';
 import { compareStats } from './common/stat.js';
-import type { CSpellIO } from './CSpellIO.js';
+import type { CSpellIO, ReadFileOptionsOrEncoding } from './CSpellIO.js';
+import { toReadFileOptions } from './CSpellIO.js';
 import { ErrorNotImplemented } from './errors/errors.js';
 import { registerHandlers } from './handlers/node/file.js';
 import type {
@@ -31,8 +32,9 @@ export class CSpellIONode implements CSpellIO {
         registerHandlers(serviceBus);
     }
 
-    readFile(urlOrFilename: UrlOrReference, encoding?: BufferEncoding): Promise<TextFileResource> {
-        const ref = toFileReference(urlOrFilename, encoding);
+    readFile(urlOrFilename: UrlOrReference, options?: ReadFileOptionsOrEncoding): Promise<TextFileResource> {
+        const readOptions = toReadFileOptions(options);
+        const ref = toFileResourceRequest(urlOrFilename, readOptions?.encoding, readOptions?.signal);
         const res = this.serviceBus.dispatch(RequestFsReadFile.create(ref));
         if (!isServiceResponseSuccess(res)) {
             throw genError(res.error, 'readFile');
