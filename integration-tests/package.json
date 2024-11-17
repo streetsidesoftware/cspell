@@ -18,6 +18,7 @@
     "clean-dist": "shx rm -rf dist coverage \"*.tsbuildInfo\"",
     "clean-repos": "shx rm -rf repositories/temp temp",
     "clean-build": "pnpm run clean && pnpm run build",
+    "add-repo": "node tester.js add -t $(gh auth token)",
     "integration-tests": "node tester.js check -f",
     "test-vitest": "vitest run",
     "update-snapshots-only": "node tester.js check --update-snapshots",
