@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: [".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 2025, Issues found: 1723 in 325 files.
+ CSpell: Files checked: 2030, Issues found: 1723 in 325 files.
  exit code: 1
 Makefile.js:128:88    - Unknown word (ined)       -- followed by the string "ined".
 Makefile.js:343:12    - Unknown word (gensite)    -- target.gensite();
@@ -56,11 +56,11 @@ docs/src/assets/scss/docs.scss:124:216   - Unknown word (Cpath)      -- fill='%2
 docs/src/assets/scss/docs.scss:124:339   - Unknown word (Crect)      -- linejoin='round'/%3E%3Crect x='1.5' y='1' width
 docs/src/assets/scss/docs.scss:124:44    - Unknown word (Csvg)       -- data:image/svg+xml,%3Csvg width='45' height='
 docs/src/assets/scss/docs.scss:160:6     - Unknown word (anchorjs)   -- .anchorjs-link {
-docs/src/assets/scss/syntax-highlighter.scss:105:222   - Unknown word (Cpolygon)   -- fill%3D'%23f14c4c'%3E%3Cpolygon%20points%3D'5.5%2C0
-docs/src/assets/scss/syntax-highlighter.scss:105:63    - Unknown word (Fwww)       -- xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg
-docs/src/assets/scss/syntax-highlighter.scss:105:83    - Unknown word (Fsvg)       -- Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200
-docs/src/assets/scss/syntax-highlighter.scss:164:39    - Unknown word (nums)       -- variant-numeric: tabular-nums;
-docs/src/assets/scss/syntax-highlighter.scss:83:8      - Unknown word (atrule)     -- .token.atrule,
+docs/src/assets/scss/syntax-highlighter.scss:101:222   - Unknown word (Cpolygon)   -- fill%3D'%23f14c4c'%3E%3Cpolygon%20points%3D'5.5%2C0
+docs/src/assets/scss/syntax-highlighter.scss:101:63    - Unknown word (Fwww)       -- xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg
+docs/src/assets/scss/syntax-highlighter.scss:101:83    - Unknown word (Fsvg)       -- Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200
+docs/src/assets/scss/syntax-highlighter.scss:160:39    - Unknown word (nums)       -- variant-numeric: tabular-nums;
+docs/src/assets/scss/syntax-highlighter.scss:79:8      - Unknown word (atrule)     -- .token.atrule,
 docs/src/assets/scss/tokens/typography.scss:63:10     - Unknown word (Twemoji)    -- "Twemoji Country Flags",
 docs/src/contribute/governance.md:35:51     - Unknown word (triaging)   -- least one hour per week triaging issues and reviewing
 docs/src/contribute/governance.md:85:35     - Unknown word (committership) -- important to recognize that committership is a privilege, not
@@ -80,7 +80,7 @@ docs/src/extend/plugin-migration-flat-config.md:254:17    - Unknown word (xdescr
 docs/src/extend/selectors.md:140:405   - Unknown word (Fpath)      -- so: `[value=/some\u002Fpath/]`.
 docs/src/extend/shareable-configs-deprecated.md:19:55     - Unknown word (myconfig)   -- such as `eslint-config-myconfig`.
 docs/src/integrate/nodejs-api.md:209:35    - Unknown word (omittable)  -- parameter `options` is omittable.
-docs/src/integrate/nodejs-api.md:542:35    - Unknown word (Fvar)       -- new SourceCode("\uFEFFvar foo = bar;", ast);
+docs/src/integrate/nodejs-api.md:546:35    - Unknown word (Fvar)       -- new SourceCode("\uFEFFvar foo = bar;", ast);
 docs/src/maintain/manage-issues.md:32:4      - Unknown word (Triaging)   -- ## Triaging Process
 docs/src/maintain/manage-releases.md:107:103   - Unknown word (eslintbot)  -- token is tied to the `eslintbot` npm account and needs
 docs/src/maintain/overview.md:33:6      - Unknown word (Stackaid)   -- * [**Stackaid.us**](https://simulation
@@ -210,7 +210,7 @@ knip.jsonc:27:19     - Unknown word (wdio)       -- "@wdio/cli",
 lib/cli-engine/formatters/html.js:247:66    - Unknown word (noopener)   -- target="_blank" rel="noopener noreferrer">${ruleId
 lib/cli-engine/formatters/html.js:247:75    - Unknown word (noreferrer) -- blank" rel="noopener noreferrer">${ruleId ? ruleId
 lib/cli-engine/formatters/html.js:46:48     - Unknown word (Neue)       -- family: Arial, "Helvetica Neue", Helvetica, sans-serif
-lib/cli-engine/lint-result-cache.js:14:58     - Unknown word (jsonify)    -- stable-stringify-without-jsonify");
+lib/cli-engine/lint-result-cache.js:13:58     - Unknown word (jsonify)    -- stable-stringify-without-jsonify");
 lib/cli.js:28:38     - Unknown word (humanwhocodes) -- ModuleImporter } = require("@humanwhocodes/module-importer");
 lib/config/flat-config-schema.js:255:42    - Unknown word (incompat)   -- messageTemplate = "eslintrc-incompat";
 lib/eslint/eslint-helpers.js:164:36    - Unknown word (humanfs)    -- hfs } = await import("@humanfs/node");
@@ -219,19 +219,19 @@ lib/eslint/eslint-helpers.js:467:74    - Unknown word (loeader)    -- configLoad
 lib/eslint/eslint-helpers.js:510:56    - Unknown word (subsubdir)  -- the form of "subdir/subsubdir".
 lib/eslint/eslint-helpers.js:516:54    - Unknown word (subd)       -- pattern is passed (e.g., "subd*"). We want
 lib/eslint/eslint-helpers.js:619:34    - Unknown word (unconfigured) -- ignored"|"external"|"unconfigured"} configStatus A status
-lib/languages/js/index.js:110:47    - Unknown word (FEENSTRA)   -- NO EVENT SHALL JOEL FEENSTRA BE LIABLE FOR ANY
-lib/languages/js/index.js:93:37     - Unknown word (Feenstra)   -- Copyright (c) 2013, Joel Feenstra
+lib/languages/js/index.js:169:37    - Unknown word (Feenstra)   -- Copyright (c) 2013, Joel Feenstra
+lib/languages/js/index.js:186:47    - Unknown word (FEENSTRA)   -- NO EVENT SHALL JOEL FEENSTRA BE LIABLE FOR ANY
 lib/linter/code-path-analysis/code-path-state.js:1256:46   - Unknown word (circuting)  -- path due to the short-circuting, so we are just seeding
 lib/linter/code-path-analysis/code-path-state.js:1730:23   - Unknown word (Segs)       -- const prevSegsOfLeavingSegment = [headOfLeav
 lib/linter/code-path-analysis/code-path-state.js:351:34    - Unknown word (expresion)  -- The end of the update expresion. This may change during
 lib/linter/code-path-analysis/debug-helpers.js:95:44     - Unknown word (Graphvis)   -- can be visualized with Graphvis.
-lib/linter/linter.js:44:7      - Unknown word (jslang)     -- const jslang = require("../languages
+lib/linter/linter.js:45:7      - Unknown word (jslang)     -- const jslang = require("../languages
 lib/rule-tester/rule-tester.js:256:42    - Unknown word (errorize)   -- ast The root node to errorize `start`/`end` properties
 lib/rule-tester/rule-tester.js:866:27    - Unknown word (Didnt)      -- function assertASTDidntChange(beforeAST, afterAST
-lib/rules/dot-notation.js:138:63    - Unknown word (quasis)     -- node, node.property.quasis[0].value.cooked);
+lib/rules/dot-notation.js:141:63    - Unknown word (quasis)     -- node, node.property.quasis[0].value.cooked);
 lib/rules/for-direction.js:73:65     - Unknown word (nochange)   -- if sub return -1, if nochange, return 0
 lib/rules/func-name-matching.js:13:7      - Unknown word (esutils)    -- const esutils = require("esutils"
-lib/rules/id-match.js:246:45    - Unknown word (righthand)  -- // prevent checking righthand side of destructured
+lib/rules/id-match.js:243:45    - Unknown word (righthand)  -- // prevent checking righthand side of destructured
 lib/rules/indent-legacy.js:4:48      - Unknown word (nodeca)     -- ported and modified from nodeca.
 lib/rules/lines-around-comment.js:23:22     - Unknown word (Nums)       -- function getEmptyLineNums(lines) {
 lib/rules/logical-assignment-operators.js:115:4     - Unknown word (falsiness)  -- * falsiness checks:   !value, !Boolean
@@ -239,15 +239,15 @@ lib/rules/max-len.js:262:30    - Unknown word (accululated) -- * @returns {Objec
 lib/rules/no-caller.js:38:106    - Unknown word (calle)      -- propertyName.match(/^calle[er]$/u)) {
 lib/rules/no-constant-binary-expression.js:34:59     - Unknown word (nullishness) -- statically knowable constant nullishness. Meaning,
 lib/rules/no-constant-binary-expression.js:43:21     - Unknown word (Nullishness) -- function hasConstantNullishness(scope, node, nonNullish
-lib/rules/no-else-return.js:351:19    - Unknown word (consequents) -- const consequents = [];
+lib/rules/no-else-return.js:352:19    - Unknown word (consequents) -- const consequents = [];
 lib/rules/no-extend-native.js:120:87    - Unknown word (Propert)    -- callee, "Object", /^definePropert(?:y|ies)$/u)
 lib/rules/no-extra-parens.js:260:52    - Unknown word (newed)          -- constructor function is newed-up with parens
 lib/rules/no-extra-parens.js:2:27      - Unknown word (parenthesising) -- fileoverview Disallow parenthesising higher precedence subexpressi
 lib/rules/no-extra-parens.js:559:28    - Unknown word (logicals)       -- * Evaluate binary logicals
 lib/rules/no-extra-parens.js:565:19    - Unknown word (prec)           -- const prec = precedence(node);
 lib/rules/no-implicit-coercion.js:14:39     - Unknown word (ndex)       -- PATTERN = /^(?:i|lastI)ndexOf$/u;
-lib/rules/no-inline-comments.js:61:17     - Unknown word (postamble)  -- postamble = endLine.slice(node
-lib/rules/no-inline-comments.js:63:19     - Unknown word (Postamble)  -- isPostambleEmpty = !postamble;
+lib/rules/no-inline-comments.js:59:17     - Unknown word (postamble)  -- postamble = endLine.slice(node
+lib/rules/no-inline-comments.js:61:19     - Unknown word (Postamble)  -- isPostambleEmpty = !postamble;
 lib/rules/no-invalid-regexp.js:13:21     - Unknown word (dgimsuvy)   -- const validFlags = "dgimsuvy";
 lib/rules/no-mixed-requires.js:78:66     - Unknown word (iojs)       -- per nodejs v0.12.2 and iojs v0.7.1
 lib/rules/no-new-native-nonconstructor.js:32:18     - Unknown word (Nonconstructor) -- noNewNonconstructor: "`{{name}}` cannot
@@ -263,7 +263,7 @@ lib/rules/object-shorthand.js:102:34    - Unknown word (Longform)   -- expectedL
 lib/rules/object-shorthand.js:102:54    - Unknown word (longform)   -- eralMethodLongform: "Expected longform method syntax for string
 lib/rules/space-unary-ops.js:133:28    - Unknown word (Doesnt)     -- function verifyWordDoesntHaveSpaces(node, firstToken
 lib/rules/space-unary-ops.js:246:32    - Unknown word (Dont)       -- function verifyNonWordsDontHaveSpaces(node, firstToken
-lib/rules/use-isnan.js:130:25    - Unknown word (Suggestable) -- const isSuggestable = fixableOperators.has
+lib/rules/use-isnan.js:133:25    - Unknown word (Suggestable) -- const isSuggestable = fixableOperators.has
 lib/rules/utils/ast-utils.js:404:40    - Unknown word (samely)     -- a.b` and `a?.b` are samely.
 lib/services/processor-service.js:94:8      - Unknown word (Postprocesses) -- * Postprocesses the given messages synchronou
 lib/shared/text-table.js:36:11     - Unknown word (hsep)       -- const hsep = "  ";
@@ -294,10 +294,10 @@ tests/lib/cli-engine/cli-engine.js:6682:52   - Unknown word (extendees)         
 tests/lib/cli-engine/formatters/html.js:528:130   - Unknown word (apos)       -- Unexpected &lt;&amp;&quot;&apos;&gt; foo.", ruleId:
 tests/lib/cli.js:1923:53   - Unknown word (oldx)          -- = `--flag test_only_oldx --config ${configPath
 tests/lib/cli.js:413:60    - Unknown word (fakeformatter) -- await cli.execute(`-f fakeformatter ${filePath} ${flag}
-tests/lib/config/flat-config-array.js:1726:43   - Unknown word (truex)       -- foo: "truex"
-tests/lib/config/flat-config-array.js:220:22    - Unknown word (noniterable) -- it("should allow noniterable baseConfig objects"
-tests/lib/config/flat-config-array.js:2268:29   - Unknown word (foox)        -- foox: [1, "bar"]
-tests/lib/config/flat-config-array.js:2290:30   - Unknown word (doesnt)      -- "doesnt-exist/match": "error
+tests/lib/config/flat-config-array.js:1753:43   - Unknown word (truex)       -- foo: "truex"
+tests/lib/config/flat-config-array.js:221:22    - Unknown word (noniterable) -- it("should allow noniterable baseConfig objects"
+tests/lib/config/flat-config-array.js:2301:29   - Unknown word (foox)        -- foox: [1, "bar"]
+tests/lib/config/flat-config-array.js:2323:30   - Unknown word (doesnt)      -- "doesnt-exist/match": "error
 tests/lib/config/flat-config-schema.js:19:50     - Unknown word (reults)     -- expectedResult] The expected reults of merging first and
 tests/lib/config/flat-config-schema.js:46:20     - Unknown word (emtpy)      -- it("returns an emtpy object if both values
 tests/lib/eslint/eslint.js:1409:43   - Unknown word (myjs)       -- files: ["**/*.myjs"],
@@ -311,11 +311,11 @@ tests/lib/eslint/eslint.js:9168:35   - Unknown word (previos)      -- make sure 
 tests/lib/eslint/eslint.js:9221:55   - Unknown word (intenationally) -- cacheFilePath, "[]"); // intenationally invalid to additionally
 tests/lib/eslint/eslint.js:9391:55   - Unknown word (occured)        -- the previous run that occured after the cache was
 tests/lib/eslint/legacy-eslint.js:2536:24   - Unknown word (succesfully) -- it("should succesfully execute with a rule
-tests/lib/linter/linter.js:16568:52  - Unknown word (intentionaly)   -- // intentionaly mutates objects and
-tests/lib/linter/linter.js:3291:1    - Unknown word (consolexlog) -- consolexlog("test2");
-tests/lib/linter/linter.js:3435:84   - Unknown word (rulename)    -- this is 2, since the rulename is very likely to be
-tests/lib/linter/linter.js:5431:31   - Unknown word (suppresed)   -- it("should report one suppresed problem when noInlineConfig
-tests/lib/linter/linter.js:7127:19   - Unknown word (postprocessors) -- describe("postprocessors", () => {
+tests/lib/linter/linter.js:16897:52  - Unknown word (intentionaly)   -- // intentionaly mutates objects and
+tests/lib/linter/linter.js:3463:1    - Unknown word (consolexlog) -- consolexlog("test2");
+tests/lib/linter/linter.js:3607:84   - Unknown word (rulename)    -- this is 2, since the rulename is very likely to be
+tests/lib/linter/linter.js:5603:31   - Unknown word (suppresed)   -- it("should report one suppresed problem when noInlineConfig
+tests/lib/linter/linter.js:7345:19   - Unknown word (postprocessors) -- describe("postprocessors", () => {
 tests/lib/linter/report-translator.js:339:32    - Unknown word (fooo)       -- text: "fooo\nbar"
 tests/lib/linter/report-translator.js:396:34    - Unknown word (ncdar)      -- text: "o\ncdar"
 tests/lib/linter/rules.js:29:29     - Unknown word (michaelficarra) -- const ruleId = "michaelficarra";
