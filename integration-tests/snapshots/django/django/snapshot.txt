@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["--issues-summary-report","**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2796, Issues found: 8035 in 903 files.
+ CSpell: Files checked: 2796, Issues found: 8056 in 905 files.
  exit code: 1
 django/__init__.py:12:26     - Unknown word (urlresolvers) -- Set the thread-local urlresolvers script prefix if `set
 django/apps/registry.py:134:40    - Unknown word (unconfigured) -- not ready" is due to unconfigured settings, accessing
@@ -23,8 +23,14 @@ django/conf/global_settings.py:65:44     - Unknown word (Sorani)     -- noop("Ce
 django/conf/locale/__init__.py:105:24    - Unknown word (Deutsch)      -- "name_local": "Deutsch",
 django/conf/locale/__init__.py:111:24    - Unknown word (dolnoserbski) -- "name_local": "dolnoserbski",
 django/conf/locale/__init__.py:117:24    - Unknown word (Ελληνικά)     -- "name_local": "Ελληνικά",
+django/conf/locale/__init__.py:147:24    - Unknown word (español)      -- "name_local": "español",
+django/conf/locale/__init__.py:153:24    - Unknown word (español)      -- "name_local": "español de Argentina",
+django/conf/locale/__init__.py:159:24    - Unknown word (español)      -- "name_local": "español de Colombia",
+django/conf/locale/__init__.py:165:24    - Unknown word (español)      -- "name_local": "español de Mexico",
+django/conf/locale/__init__.py:171:24    - Unknown word (español)      -- "name_local": "español de Nicaragua",
 django/conf/locale/__init__.py:183:24    - Unknown word (eesti)        -- "name_local": "eesti",
 django/conf/locale/__init__.py:195:24    - Unknown word (فارسی)        -- "name_local": "فارسی",
+django/conf/locale/__init__.py:207:24    - Unknown word (français)     -- "name_local": "français",
 django/conf/locale/__init__.py:213:24    - Unknown word (frysk)        -- "name_local": "frysk",
 django/conf/locale/__init__.py:219:24    - Unknown word (Gaeilge)      -- "name_local": "Gaeilge",
 django/conf/locale/__init__.py:21:24     - Unknown word (العربيّة)   -- "name_local": "العربيّة",
@@ -71,6 +77,7 @@ django/conf/locale/__init__.py:459:24    - Unknown word (Português)      -- "na
 django/conf/locale/__init__.py:45:24     - Unknown word (беларуская)   -- "name_local": "беларуская",
 django/conf/locale/__init__.py:465:24    - Unknown word (Português)      -- "name_local": "Português Brasileiro",
 django/conf/locale/__init__.py:465:34    - Unknown word (Brasileiro)     -- name_local": "Português Brasileiro",
+django/conf/locale/__init__.py:471:24    - Unknown word (Română)         -- "name_local": "Română",
 django/conf/locale/__init__.py:477:24    - Unknown word (Русский)        -- "name_local": "Русский",
 django/conf/locale/__init__.py:483:24    - Unknown word (slovensky)      -- "name_local": "slovensky",
 django/conf/locale/__init__.py:489:24    - Unknown word (Slovenščina)    -- "name_local": "Slovenščina",
@@ -3648,11 +3655,13 @@ tests/auth_tests/test_tokens.py:66:42     - Unknown word (tokentestuser)   -- ob
 tests/auth_tests/test_tokens.py:66:80     - Unknown word (testpw)          -- test2@example.com", "testpw")
 tests/auth_tests/test_tokens.py:89:42     - Unknown word (tokentestuser)   -- objects.create_user("tokentestuser", "test2@example.com
 tests/auth_tests/test_tokens.py:89:80     - Unknown word (testpw)          -- test2@example.com", "testpw")
+tests/auth_tests/test_validators.py:340:36    - Unknown word (René)       -- usernames = ["joe", "René", "ᴮᴵᴳᴮᴵᴿᴰ", "أحمد"
 tests/auth_tests/test_validators.py:340:44    - Unknown word (ᴮᴵᴳᴮᴵᴿᴰ)    -- usernames = ["joe", "René", "ᴮᴵᴳᴮᴵᴿᴰ", "أحمد"]
 tests/auth_tests/test_validators.py:340:55    - Unknown word (أحمد)       -- "René", "ᴮᴵᴳᴮᴵᴿᴰ", "أحمد"]
 tests/auth_tests/test_validators.py:344:14    - Unknown word (zerowidth)  -- "zerowidth\u200Bspace",
 tests/auth_tests/test_validators.py:345:14    - Unknown word (nonbreaking) -- "nonbreaking\u00A0space",
 tests/auth_tests/test_validators.py:347:14    - Unknown word (trailingnewline) -- "trailingnewline\u000A",
+tests/auth_tests/test_validators.py:362:14    - Unknown word (Éric)            -- "Éric",
 tests/auth_tests/test_validators.py:364:14    - Unknown word (أحمد)            -- "أحمد",
 tests/auth_tests/test_validators.py:365:14    - Unknown word (trailingnewline) -- "trailingnewline\n",
 tests/auth_tests/test_views.py:116:22    - Unknown word (uidb)       -- "uidb64": "aaaaaaa",
@@ -3707,7 +3716,9 @@ tests/backends/mysql/test_creation.py:40:55     - Unknown word (keepdb)     -- s
 tests/backends/mysql/test_creation.py:41:70     - Unknown word (keepdb)     -- autoclobber=False, keepdb=True)
 tests/backends/mysql/test_creation.py:80:34     - Unknown word (mysqldump)  -- "mysqldump",
 tests/backends/mysql/test_schema.py:15:19     - Unknown word (hablas)     -- ("¿Tú hablas inglés?", "'¿Tú hablas
+tests/backends/mysql/test_schema.py:15:26     - Unknown word (inglés)     -- ("¿Tú hablas inglés?", "'¿Tú hablas ingl
 tests/backends/mysql/test_schema.py:15:42     - Unknown word (hablas)     -- hablas inglés?", "'¿Tú hablas inglés?'"),
+tests/backends/mysql/test_schema.py:15:49     - Unknown word (inglés)     -- inglés?", "'¿Tú hablas inglés?'"),
 tests/backends/oracle/test_creation.py:105:72    - Unknown word (sqls)       -- = creation.tblspace_sqls
 tests/backends/oracle/test_creation.py:54:59     - Unknown word (keepdb)     -- test_db(verbosity=0, keepdb=False)
 tests/backends/oracle/test_creation.py:55:65     - Unknown word (keepdb)     -- error is ignored when keepdb is on
@@ -3758,6 +3769,7 @@ tests/backends/tests.py:303:29    - Unknown word (executemany) -- create_squares
 tests/backends/tests.py:323:24    - Unknown word (executemany) -- cursor.executemany(query, args)
 tests/backends/tests.py:388:46    - Unknown word (Agnelline)   -- name="Mary", last_name="Agnelline").save()
 tests/backends/tests.py:408:53    - Unknown word (Agnelline)   -- fetchall()), [("Mary", "Agnelline"), ("Peter", "Parker
+tests/backends/tests.py:413:49    - Unknown word (françois)    -- dict["PASSWORD"] = "françois"
 tests/backends/tests.py:599:34    - Unknown word (MYISAM)      -- MySQL+InnoDB and MySQL+MYISAM (something we currently
 tests/backends/tests.py:942:9     - Unknown word (SQLPK)       -- class MySQLPKZeroTests(TestCase):
 tests/backends/tests.py:950:22    - Unknown word (autoval)     -- def test_zero_as_autoval(self):
@@ -4242,6 +4254,7 @@ tests/file_storage/test_generate_filename.py:228:24    - Unknown word (AWSS)    
 tests/file_storage/tests.py:1017:14   - Unknown word (stringio)   -- def test_stringio(self):
 tests/file_storage/tests.py:1024:34   - Unknown word (stringio)   -- storage.save("tests/stringio", output)
 tests/file_storage/tests.py:1143:63   - Unknown word (umasks)     -- only partially supports umasks and chmod."
+tests/file_storage/tests.py:1232:55   - Unknown word (español)    -- unicode.txt", ContentFile("español"))
 tests/file_storage/tests.py:304:19    - Unknown word (doesnt)     -- def test_save_doesnt_close(self):
 tests/file_storage/tests.py:589:73    - Unknown word (Trac)       -- than underscores, like Trac.
 tests/file_storage/tests.py:742:27    - Unknown word (longext)    -- name = "file_name.longext"
@@ -4259,6 +4272,7 @@ tests/file_uploads/views.py:59:23     - Unknown word (largefile)  -- obj.testfil
 tests/file_uploads/views.py:59:39     - Unknown word (largefile)  -- save(largefile.name, largefile)
 tests/files/tests.py:230:14    - Unknown word (noname)     -- def test_noname_file_default_name(self
 tests/files/tests.py:233:14    - Unknown word (noname)     -- def test_noname_file_get_size(self)
+tests/files/tests.py:254:44    - Unknown word (español)    -- assertIsInstance(ContentFile("español").read(), str)
 tests/files/tests.py:36:34     - Unknown word (Cómo)       -- UploadedFile(name="¿Cómo?", content_type="text
 tests/files/tests.py:390:9     - Unknown word (brokenimg)  -- brokenimg.png is not a valid image
 tests/files/tests.py:391:24    - Unknown word (brokenimg)  -- $ echo "123" > brokenimg.png
@@ -4562,6 +4576,8 @@ tests/forms_tests/widget_tests/test_textarea.py:51:48     - Unknown word (ampers
 tests/forms_tests/widget_tests/test_textinput.py:50:30     - Unknown word (ampersanded) -- 'some "quoted" & ampersanded value',
 tests/forms_tests/widget_tests/test_textinput.py:53:55     - Unknown word (ampersanded) -- quot;quoted&quot; &amp; ampersanded value">'
 tests/forms_tests/widget_tests/test_textinput.py:72:17     - Unknown word (Žćžšđ)       -- "ŠĐĆŽćžšđ",
+tests/forms_tests/widget_tests/test_widget.py:12:47     - Unknown word (español)    -- widget.format_value("español"), "español")
+tests/forms_tests/widget_tests/test_widget.py:12:59     - Unknown word (español)    -- format_value("español"), "español")
 tests/generic_inline_admin/tests.py:273:40    - Unknown word (phonenumber) -- generic_inline_admin-phonenumber-content_type-object
 tests/generic_relations/models.py:123:60    - Unknown word (manualpk)   -- related_query_name="manualpk")
 tests/generic_relations/test_forms.py:123:70    - Unknown word (Panthera)   -- "Lion", latin_name="Panthera leo")
@@ -7185,6 +7201,7 @@ tests/staticfiles_tests/test_storage.py:48:68     - Unknown word (asvar)      --
 tests/staticfiles_tests/test_storage.py:618:14    - Unknown word (collectstatistic) -- def test_collectstatistic_no_post_process_replaced
 tests/staticfiles_tests/test_templatetags.py:12:60     - Unknown word (Fchars)     -- , "/static/special%3Fchars%26quoted.html"
 tests/string_lookup/tests.py:49:24     - Unknown word (Bjorn)      -- fx = Foo(name="Bjorn", friend="François"
+tests/string_lookup/tests.py:49:40     - Unknown word (François)   -- name="Bjorn", friend="François")
 tests/string_lookup/tests.py:53:25     - Unknown word (textfields) -- def test_queries_on_textfields(self):
 tests/swappable_models/tests.py:34:45     - Unknown word (alternatearticle) -- swappable_models", "alternatearticle"), apps_models)
 tests/swappable_models/tests.py:38:45     - Unknown word (alternatearticle) -- swappable_models", "alternatearticle"), apps_models)
@@ -7194,6 +7211,8 @@ tests/syndication_tests/feeds.py:52:18     - Unknown word (scomments)  -- return
 tests/syndication_tests/tests.py:714:50    - Unknown word (feedurl)    -- client.get("/syndication/feedurl/")
 tests/syndication_tests/urls.py:35:23     - Unknown word (feedurl)    -- path("syndication/feedurl/", feeds.TestFeedUrlFeed
 tests/template_backends/test_django.py:110:48    - Unknown word (reraised)   -- tag modules should be reraised with a helpful message
+tests/template_backends/test_dummy.py:107:45    - Unknown word (Jérôme)     -- template.render({"name": "Jérôme"})
+tests/template_backends/test_dummy.py:108:42    - Unknown word (Jérôme)     -- assertEqual(content, "Hello Jérôme!\n")
 tests/template_backends/test_jinja2.py:145:47    - Unknown word (Sandboxed)  -- environment": "jinja2.sandbox.SandboxedEnvironment"}
 tests/template_tests/broken_tag.py:1:20      - Unknown word (Xtemplate)  -- from django import Xtemplate # NOQA
 tests/template_tests/filter_tests/test_add.py:20:33     - Unknown word (napis)      -- "add02": '{{ i|add:"napis" }}'})
@@ -7339,6 +7358,7 @@ tests/template_tests/syntax_tests/i18n/test_filters.py:41:45     - Unknown word 
 tests/template_tests/syntax_tests/i18n/test_filters.py:41:62     - Unknown word (nizozemsky) -- Dutch Nederlands False nizozemsky")
 tests/template_tests/syntax_tests/i18n/test_filters.py:59:26     - Unknown word (italiano)   -- "it: Italian/italiano/italsky bidi=False;
 tests/template_tests/syntax_tests/i18n/test_filters.py:59:35     - Unknown word (italsky)    -- it: Italian/italiano/italsky bidi=False; "
+tests/template_tests/syntax_tests/i18n/test_filters.py:60:25     - Unknown word (français)   -- "fr: French/français/francouzsky bidi=False
 tests/template_tests/syntax_tests/i18n/test_filters.py:60:34     - Unknown word (francouzsky) -- fr: French/français/francouzsky bidi=False; ",
 tests/template_tests/syntax_tests/i18n/test_get_language_info.py:24:46     - Unknown word (Deutsch)    -- output, "de: German/Deutsch bidi=False")
 tests/template_tests/syntax_tests/i18n/test_get_language_info.py:49:46     - Unknown word (Deutsch)    -- output, "de: German/Deutsch/německy bidi=False"
@@ -7347,6 +7367,7 @@ tests/template_tests/syntax_tests/i18n/test_get_language_info_list.py:25:34     
 tests/template_tests/syntax_tests/i18n/test_get_language_info_list.py:25:69     - Unknown word (norsk)      -- False; no: Norwegian/norsk bidi=False; "
 tests/template_tests/syntax_tests/i18n/test_get_language_info_list.py:62:26     - Unknown word (italiano)   -- "it: Italian/italiano/italsky bidi=False;
 tests/template_tests/syntax_tests/i18n/test_get_language_info_list.py:62:35     - Unknown word (italsky)    -- it: Italian/italiano/italsky bidi=False; "
+tests/template_tests/syntax_tests/i18n/test_get_language_info_list.py:63:25     - Unknown word (français)   -- "fr: French/français/francouzsky bidi=False
 tests/template_tests/syntax_tests/i18n/test_get_language_info_list.py:63:34     - Unknown word (francouzsky) -- fr: French/français/francouzsky bidi=False; ",
 tests/template_tests/syntax_tests/i18n/test_translate.py:102:35    - Unknown word (SEITE)      -- assertEqual(output, "SEITE NICHT GEFUNDEN")
 tests/template_tests/syntax_tests/i18n/test_translate.py:102:41    - Unknown word (NICHT)      -- assertEqual(output, "SEITE NICHT GEFUNDEN")
