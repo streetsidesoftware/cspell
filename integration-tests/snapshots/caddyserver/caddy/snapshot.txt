@@ -3,7 +3,7 @@ Repository: caddyserver/caddy
 Url: "https://github.com/caddyserver/caddy.git"
 Args: ["**/*.go"]
 Lines:
- CSpell: Files checked: 279, Issues found: 3559 in 255 files.
+ CSpell: Files checked: 279, Issues found: 3531 in 254 files.
  exit code: 1
 admin.go:1064:20   - Unknown word (Redir)       -- return errInternalRedir
 admin.go:1340:6    - Unknown word (loggable)    -- type loggableURLArray []*url.URL
@@ -1233,7 +1233,6 @@ modules/caddyhttp/encode/caddyfile.go:31:46     - Unknown word (caddyhttp)     -
 modules/caddyhttp/encode/caddyfile.go:33:22     - Unknown word (Caddyfile)     -- err := enc.UnmarshalCaddyfile(h.Dispenser)
 modules/caddyhttp/encode/caddyfile.go:40:13     - Unknown word (Caddyfile)     -- // UnmarshalCaddyfile sets up the handler
 modules/caddyhttp/encode/caddyfile.go:40:48     - Unknown word (Caddyfile)     -- up the handler from Caddyfile tokens. Syntax:
-modules/caddyhttp/encode/caddyfile.go:44:8      - Unknown word (zstd)          -- // zstd
 modules/caddyhttp/encode/caddyfile.go:56:42     - Unknown word (caddyfile)     -- UnmarshalCaddyfile(d *caddyfile.Dispenser) error {
 modules/caddyhttp/encode/caddyfile.go:63:13     - Unknown word (Errf)          -- return d.Errf("finding encoder module
 modules/caddyhttp/encode/caddyfile.go:67:13     - Unknown word (Errf)          -- return d.Errf("module %s is not an
@@ -1263,11 +1262,6 @@ modules/caddyhttp/encode/encode.go:74:18     - Unknown word (Iface)       -- for
 modules/caddyhttp/encode/encode.go:75:28     - Unknown word (Iface)       -- enc.addEncoding(modIface.(Encoding))
 modules/caddyhttp/encode/encode.go:87:18     - Unknown word (caddyhttp)   -- enc.Matcher = &caddyhttp.ResponseMatcher{
 modules/caddyhttp/encode/encode.go:99:19     - Unknown word (opentype)    -- "application/opentype*",
-modules/caddyhttp/encode/encode_test.go:25:34     - Unknown word (zstd)       -- "deflate, gzip, br, zstd",
-modules/caddyhttp/encode/encode_test.go:26:24     - Unknown word (zstd)       -- prefer: []string{"zstd", "br", "gzip"},
-modules/caddyhttp/encode/encode_test.go:27:24     - Unknown word (zstd)       -- expected: []string{"zstd", "br", "gzip", "deflate
-modules/caddyhttp/encode/encode_test.go:31:24     - Unknown word (zstd)       -- accept: "deflate, zstd",
-modules/caddyhttp/encode/encode_test.go:32:24     - Unknown word (zstd)       -- prefer: []string{"zstd", "br", "gzip"},
 modules/caddyhttp/encode/gzip/gzip.go:15:9      - Unknown word (caddygzip)  -- package caddygzip
 modules/caddyhttp/encode/gzip/gzip.go:21:14     - Unknown word (klauspost)  -- "github.com/klauspost/compress/gzip"
 modules/caddyhttp/encode/gzip/gzip.go:23:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
@@ -1288,40 +1282,24 @@ modules/caddyhttp/encode/gzip/gzip_precompressed.go:5:43      - Unknown word (ca
 modules/caddyhttp/encode/zstd/zstd.go:106:4     - Unknown word (caddyfile)   -- _ caddyfile.Unmarshaler = (*Zstd
 modules/caddyhttp/encode/zstd/zstd.go:15:9      - Unknown word (caddyzstd)  -- package caddyzstd
 modules/caddyhttp/encode/zstd/zstd.go:20:14     - Unknown word (klauspost)  -- "github.com/klauspost/compress/zstd"
-modules/caddyhttp/encode/zstd/zstd.go:20:33     - Unknown word (zstd)       -- com/klauspost/compress/zstd"
 modules/caddyhttp/encode/zstd/zstd.go:22:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
 modules/caddyhttp/encode/zstd/zstd.go:23:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/caddyconfig
 modules/caddyhttp/encode/zstd/zstd.go:23:35     - Unknown word (caddyconfig) -- caddyserver/caddy/v2/caddyconfig/caddyfile"
 modules/caddyhttp/encode/zstd/zstd.go:23:47     - Unknown word (caddyfile)   -- caddy/v2/caddyconfig/caddyfile"
 modules/caddyhttp/encode/zstd/zstd.go:24:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/modules/caddyhttp
 modules/caddyhttp/encode/zstd/zstd.go:24:43     - Unknown word (caddyhttp)   -- caddyserver/caddy/v2/modules/caddyhttp/encode"
-modules/caddyhttp/encode/zstd/zstd.go:28:23     - Unknown word (Zstd)        -- caddy.RegisterModule(Zstd{})
 modules/caddyhttp/encode/zstd/zstd.go:31:20     - Unknown word (Zstandard)   -- // Zstd can create Zstandard encoders.
-modules/caddyhttp/encode/zstd/zstd.go:31:4      - Unknown word (Zstd)        -- // Zstd can create Zstandard
-modules/caddyhttp/encode/zstd/zstd.go:32:6      - Unknown word (Zstd)        -- type Zstd struct {
-modules/caddyhttp/encode/zstd/zstd.go:36:58     - Unknown word (zstd)        -- constants value from zstd.SpeedFastest to zstd
-modules/caddyhttp/encode/zstd/zstd.go:36:79     - Unknown word (zstd)        -- zstd.SpeedFastest to zstd.SpeedBestCompression
-modules/caddyhttp/encode/zstd/zstd.go:37:8      - Unknown word (zstd)        -- level zstd.EncoderLevel
-modules/caddyhttp/encode/zstd/zstd.go:41:7      - Unknown word (Zstd)        -- func (Zstd) CaddyModule() caddy
-modules/caddyhttp/encode/zstd/zstd.go:43:23     - Unknown word (zstd)        -- ID: "http.encoders.zstd",
-modules/caddyhttp/encode/zstd/zstd.go:44:41     - Unknown word (Zstd)        -- Module { return new(Zstd) },
 modules/caddyhttp/encode/zstd/zstd.go:48:13     - Unknown word (Caddyfile)   -- // UnmarshalCaddyfile sets up the handler
 modules/caddyhttp/encode/zstd/zstd.go:48:48     - Unknown word (Caddyfile)   -- up the handler from Caddyfile tokens.
 modules/caddyhttp/encode/zstd/zstd.go:49:25     - Unknown word (Caddyfile)   -- func (z *Zstd) UnmarshalCaddyfile(d *caddyfile.Dispenser
 modules/caddyhttp/encode/zstd/zstd.go:49:38     - Unknown word (caddyfile)   -- UnmarshalCaddyfile(d *caddyfile.Dispenser) error {
 modules/caddyhttp/encode/zstd/zstd.go:56:12     - Unknown word (Errf)        -- return d.Errf("unexpected compression
 modules/caddyhttp/encode/zstd/zstd.go:88:29     - Unknown word (Zstandard)   -- NewEncoder returns a new Zstandard writer.
-modules/caddyhttp/encode/zstd/zstd_precompressed.go:12:4      - Unknown word (Zstd)        -- // ZstdPrecompressed provides
 modules/caddyhttp/encode/zstd/zstd_precompressed.go:12:79     - Unknown word (zstandard)   -- files precompressed with zstandard encoding.
-modules/caddyhttp/encode/zstd/zstd_precompressed.go:13:6      - Unknown word (Zstd)        -- type ZstdPrecompressed struct
-modules/caddyhttp/encode/zstd/zstd_precompressed.go:14:2      - Unknown word (Zstd)        -- Zstd
-modules/caddyhttp/encode/zstd/zstd_precompressed.go:18:7      - Unknown word (Zstd)        -- func (ZstdPrecompressed) CaddyModule
 modules/caddyhttp/encode/zstd/zstd_precompressed.go:1:9       - Unknown word (caddyzstd)  -- package caddyzstd
-modules/caddyhttp/encode/zstd/zstd_precompressed.go:20:28     - Unknown word (zstd)        -- "http.precompressed.zstd",
 modules/caddyhttp/encode/zstd/zstd_precompressed.go:4:14      - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
 modules/caddyhttp/encode/zstd/zstd_precompressed.go:5:14      - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/modules/caddyhttp
 modules/caddyhttp/encode/zstd/zstd_precompressed.go:5:43      - Unknown word (caddyhttp)   -- caddyserver/caddy/v2/modules/caddyhttp/encode"
-modules/caddyhttp/encode/zstd/zstd_precompressed.go:9:23      - Unknown word (Zstd)        -- caddy.RegisterModule(ZstdPrecompressed{})
 modules/caddyhttp/errors.go:100:12    - Unknown word (gosec)                     -- //nolint:gosec
 modules/caddyhttp/errors.go:100:5     - Unknown word (nolint)                    -- //nolint:gosec
 modules/caddyhttp/errors.go:101:15    - Unknown word (weakrand)                  -- b[i] = dict[weakrand.Int63()%int64(len(dict
@@ -1411,14 +1389,9 @@ modules/caddyhttp/fileserver/caddyfile.go:44:8      - Unknown word (fsrv)       
 modules/caddyhttp/fileserver/caddyfile.go:48:9      - Unknown word (fsrv)          -- return fsrv, err
 modules/caddyhttp/fileserver/caddyfile.go:66:32     - Unknown word (Caddyfiles)    -- finalize setup of hidden Caddyfiles.
 modules/caddyhttp/fileserver/caddyfile.go:67:47     - Unknown word (caddyfile)     -- UnmarshalCaddyfile(d *caddyfile.Dispenser) error {
-modules/caddyhttp/fileserver/command.go:106:3     - Unknown word (zstd)           -- zstd, err := caddy.GetModule
-modules/caddyhttp/fileserver/command.go:106:47    - Unknown word (zstd)           -- GetModule("http.encoders.zstd")
 modules/caddyhttp/fileserver/command.go:116:31    - Unknown word (caddyconfig)    -- handlers = append(handlers, caddyconfig.JSONModuleObject(encode
 modules/caddyhttp/fileserver/command.go:118:13    - Unknown word (caddyconfig)    -- "zstd": caddyconfig.JSON(zstd.New(), nil
-modules/caddyhttp/fileserver/command.go:118:30    - Unknown word (zstd)           -- zstd": caddyconfig.JSON(zstd.New(), nil),
-modules/caddyhttp/fileserver/command.go:118:6     - Unknown word (zstd)           -- "zstd": caddyconfig.JSON(zstd
 modules/caddyhttp/fileserver/command.go:119:13    - Unknown word (caddyconfig)    -- "gzip": caddyconfig.JSON(gzip.New(), nil
-modules/caddyhttp/fileserver/command.go:121:22    - Unknown word (zstd)           -- Prefer: []string{"zstd", "gzip"},
 modules/caddyhttp/fileserver/command.go:126:14    - Unknown word (caddytpl)       -- handler := caddytpl.Templates{FileRoot:
 modules/caddyhttp/fileserver/command.go:127:31    - Unknown word (caddyconfig)    -- handlers = append(handlers, caddyconfig.JSONModuleObject(handler
 modules/caddyhttp/fileserver/command.go:133:28    - Unknown word (caddyhttp)      -- logic mirrors modules/caddyhttp/fileserver/caddyfile
@@ -2419,7 +2392,6 @@ modules/caddyhttp/server_test.go:54:2      - Unknown word (wrec)       -- wrec :
 modules/caddyhttp/server_test.go:63:28     - Unknown word (wrec)       -- logRequest(accLog, req, wrec, &duration, repl, bodyReader
 modules/caddyhttp/server_test.go:82:2      - Unknown word (wrec)       -- wrec := NewResponseRecorder
 modules/caddyhttp/server_test.go:91:28     - Unknown word (wrec)       -- logRequest(accLog, req, wrec, &duration, repl, bodyReader
-modules/caddyhttp/standard/imports.go:10:62     - Unknown word (zstd)        -- modules/caddyhttp/encode/zstd"
 modules/caddyhttp/standard/imports.go:16:55     - Unknown word (proxyprotocol) -- v2/modules/caddyhttp/proxyprotocol"
 modules/caddyhttp/standard/imports.go:18:55     - Unknown word (requestbody)   -- v2/modules/caddyhttp/requestbody"
 modules/caddyhttp/standard/imports.go:20:68     - Unknown word (fastcgi)       -- caddyhttp/reverseproxy/fastcgi"
