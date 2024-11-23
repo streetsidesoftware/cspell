@@ -97,7 +97,6 @@ const settings = {
             ignoreRegExpList: ['MARKDOWN-link-reference', 'MARKDOWN-link-footer', 'MARKDOWN-link', 'MARKDOWN-anchor'],
         },
     ],
-    enableFiletypes: ['svelte', 'julia'],
     import: [
         '@cspell/dict-ada/cspell-ext.json',
         '@cspell/dict-al/cspell-ext.json',
