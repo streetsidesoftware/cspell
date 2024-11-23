@@ -41,7 +41,6 @@ const settings: AdvancedCSpellSettings = {
             pattern: /(?<=<a\s+id=")[^"\s]+/g,
         },
     ],
-
     languageSettings: [
         {
             languageId: 'javascript,javascriptreact',
@@ -100,7 +99,6 @@ const settings: AdvancedCSpellSettings = {
             ignoreRegExpList: ['MARKDOWN-link-reference', 'MARKDOWN-link-footer', 'MARKDOWN-link', 'MARKDOWN-anchor'],
         },
     ],
-    enableFiletypes: ['svelte', 'julia'],
     import: [
         '@cspell/dict-ada/cspell-ext.json',
         '@cspell/dict-al/cspell-ext.json',
