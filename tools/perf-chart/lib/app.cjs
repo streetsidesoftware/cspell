@@ -3038,7 +3038,7 @@ var {
 // src/perfChart.ts
 var import_node_fs = require("node:fs");
 
-// ../../node_modules/.pnpm/csv-parse@5.5.6/node_modules/csv-parse/lib/api/CsvError.js
+// ../../node_modules/.pnpm/csv-parse@5.6.0/node_modules/csv-parse/lib/api/CsvError.js
 var CsvError = class _CsvError extends Error {
   constructor(code, message, options, ...contexts) {
     if (Array.isArray(message)) message = message.join(" ").trim();
@@ -3056,12 +3056,12 @@ var CsvError = class _CsvError extends Error {
   }
 };
 
-// ../../node_modules/.pnpm/csv-parse@5.5.6/node_modules/csv-parse/lib/utils/is_object.js
+// ../../node_modules/.pnpm/csv-parse@5.6.0/node_modules/csv-parse/lib/utils/is_object.js
 var is_object = function(obj) {
   return typeof obj === "object" && obj !== null && !Array.isArray(obj);
 };
 
-// ../../node_modules/.pnpm/csv-parse@5.5.6/node_modules/csv-parse/lib/api/normalize_columns_array.js
+// ../../node_modules/.pnpm/csv-parse@5.6.0/node_modules/csv-parse/lib/api/normalize_columns_array.js
 var normalize_columns_array = function(columns) {
   const normalizedColumns = [];
   for (let i = 0, l = columns.length; i < l; i++) {
@@ -3090,7 +3090,7 @@ var normalize_columns_array = function(columns) {
   return normalizedColumns;
 };
 
-// ../../node_modules/.pnpm/csv-parse@5.5.6/node_modules/csv-parse/lib/utils/ResizeableBuffer.js
+// ../../node_modules/.pnpm/csv-parse@5.6.0/node_modules/csv-parse/lib/utils/ResizeableBuffer.js
 var ResizeableBuffer = class {
   constructor(size = 100) {
     this.size = size;
@@ -3154,7 +3154,7 @@ var ResizeableBuffer = class {
 };
 var ResizeableBuffer_default = ResizeableBuffer;
 
-// ../../node_modules/.pnpm/csv-parse@5.5.6/node_modules/csv-parse/lib/api/init_state.js
+// ../../node_modules/.pnpm/csv-parse@5.6.0/node_modules/csv-parse/lib/api/init_state.js
 var np = 12;
 var cr = 13;
 var nl = 10;
@@ -3190,7 +3190,10 @@ var init_state = function(options) {
     recordHasError: false,
     record_length: 0,
     recordDelimiterMaxLength: options.record_delimiter.length === 0 ? 0 : Math.max(...options.record_delimiter.map((v) => v.length)),
-    trimChars: [Buffer.from(" ", options.encoding)[0], Buffer.from("	", options.encoding)[0]],
+    trimChars: [
+      Buffer.from(" ", options.encoding)[0],
+      Buffer.from("	", options.encoding)[0]
+    ],
     wasQuoting: false,
     wasRowDelimiter: false,
     timchars: [
@@ -3203,14 +3206,14 @@ var init_state = function(options) {
   };
 };
 
-// ../../node_modules/.pnpm/csv-parse@5.5.6/node_modules/csv-parse/lib/utils/underscore.js
+// ../../node_modules/.pnpm/csv-parse@5.6.0/node_modules/csv-parse/lib/utils/underscore.js
 var underscore = function(str) {
   return str.replace(/([A-Z])/g, function(_, match) {
     return "_" + match.toLowerCase();
   });
 };
 
-// ../../node_modules/.pnpm/csv-parse@5.5.6/node_modules/csv-parse/lib/api/normalize_options.js
+// ../../node_modules/.pnpm/csv-parse@5.6.0/node_modules/csv-parse/lib/api/normalize_options.js
 var normalize_options = function(opts) {
   const options = {};
   for (const opt in opts) {
@@ -3221,20 +3224,28 @@ var normalize_options = function(opts) {
   } else if (options.encoding === null || options.encoding === false) {
     options.encoding = null;
   } else if (typeof options.encoding !== "string" && options.encoding !== null) {
-    throw new CsvError("CSV_INVALID_OPTION_ENCODING", [
-      "Invalid option encoding:",
-      "encoding must be a string or null to return a buffer,",
-      `got ${JSON.stringify(options.encoding)}`
-    ], options);
+    throw new CsvError(
+      "CSV_INVALID_OPTION_ENCODING",
+      [
+        "Invalid option encoding:",
+        "encoding must be a string or null to return a buffer,",
+        `got ${JSON.stringify(options.encoding)}`
+      ],
+      options
+    );
   }
   if (options.bom === void 0 || options.bom === null || options.bom === false) {
     options.bom = false;
   } else if (options.bom !== true) {
-    throw new CsvError("CSV_INVALID_OPTION_BOM", [
-      "Invalid option bom:",
-      "bom must be true,",
-      `got ${JSON.stringify(options.bom)}`
-    ], options);
+    throw new CsvError(
+      "CSV_INVALID_OPTION_BOM",
+      [
+        "Invalid option bom:",
+        "bom must be true,",
+        `got ${JSON.stringify(options.bom)}`
+      ],
+      options
+    );
   }
   options.cast_function = null;
   if (options.cast === void 0 || options.cast === null || options.cast === false || options.cast === "") {
@@ -3243,11 +3254,15 @@ var normalize_options = function(opts) {
     options.cast_function = options.cast;
     options.cast = true;
   } else if (options.cast !== true) {
-    throw new CsvError("CSV_INVALID_OPTION_CAST", [
-      "Invalid option cast:",
-      "cast must be true or a function,",
-      `got ${JSON.stringify(options.cast)}`
-    ], options);
+    throw new CsvError(
+      "CSV_INVALID_OPTION_CAST",
+      [
+        "Invalid option cast:",
+        "cast must be true or a function,",
+        `got ${JSON.stringify(options.cast)}`
+      ],
+      options
+    );
   }
   if (options.cast_date === void 0 || options.cast_date === null || options.cast_date === false || options.cast_date === "") {
     options.cast_date = false;
@@ -3257,11 +3272,15 @@ var normalize_options = function(opts) {
       return !isNaN(date) ? new Date(date) : value;
     };
   } else if (typeof options.cast_date !== "function") {
-    throw new CsvError("CSV_INVALID_OPTION_CAST_DATE", [
-      "Invalid option cast_date:",
-      "cast_date must be true or a function,",
-      `got ${JSON.stringify(options.cast_date)}`
-    ], options);
+    throw new CsvError(
+      "CSV_INVALID_OPTION_CAST_DATE",
+      [
+        "Invalid option cast_date:",
+        "cast_date must be true or a function,",
+        `got ${JSON.stringify(options.cast_date)}`
+      ],
+      options
+    );
   }
   options.cast_first_line_to_header = null;
   if (options.columns === true) {
@@ -3274,25 +3293,37 @@ var normalize_options = function(opts) {
   } else if (options.columns === void 0 || options.columns === null || options.columns === false) {
     options.columns = false;
   } else {
-    throw new CsvError("CSV_INVALID_OPTION_COLUMNS", [
-      "Invalid option columns:",
-      "expect an array, a function or true,",
-      `got ${JSON.stringify(options.columns)}`
-    ], options);
+    throw new CsvError(
+      "CSV_INVALID_OPTION_COLUMNS",
+      [
+        "Invalid option columns:",
+        "expect an array, a function or true,",
+        `got ${JSON.stringify(options.columns)}`
+      ],
+      options
+    );
   }
   if (options.group_columns_by_name === void 0 || options.group_columns_by_name === null || options.group_columns_by_name === false) {
     options.group_columns_by_name = false;
   } else if (options.group_columns_by_name !== true) {
-    throw new CsvError("CSV_INVALID_OPTION_GROUP_COLUMNS_BY_NAME", [
-      "Invalid option group_columns_by_name:",
-      "expect an boolean,",
-      `got ${JSON.stringify(options.group_columns_by_name)}`
-    ], options);
+    throw new CsvError(
+      "CSV_INVALID_OPTION_GROUP_COLUMNS_BY_NAME",
+      [
+        "Invalid option group_columns_by_name:",
+        "expect an boolean,",
+        `got ${JSON.stringify(options.group_columns_by_name)}`
+      ],
+      options
+    );
   } else if (options.columns === false) {
-    throw new CsvError("CSV_INVALID_OPTION_GROUP_COLUMNS_BY_NAME", [
-      "Invalid option group_columns_by_name:",
-      "the `columns` mode must be activated."
-    ], options);
+    throw new CsvError(
+      "CSV_INVALID_OPTION_GROUP_COLUMNS_BY_NAME",
+      [
+        "Invalid option group_columns_by_name:",
+        "the `columns` mode must be activated."
+      ],
+      options
+    );
   }
   if (options.comment === void 0 || options.comment === null || options.comment === false || options.comment === "") {
     options.comment = null;
@@ -3301,30 +3332,43 @@ var normalize_options = function(opts) {
       options.comment = Buffer.from(options.comment, options.encoding);
     }
     if (!Buffer.isBuffer(options.comment)) {
-      throw new CsvError("CSV_INVALID_OPTION_COMMENT", [
-        "Invalid option comment:",
-        "comment must be a buffer or a string,",
-        `got ${JSON.stringify(options.comment)}`
-      ], options);
+      throw new CsvError(
+        "CSV_INVALID_OPTION_COMMENT",
+        [
+          "Invalid option comment:",
+          "comment must be a buffer or a string,",
+          `got ${JSON.stringify(options.comment)}`
+        ],
+        options
+      );
     }
   }
   if (options.comment_no_infix === void 0 || options.comment_no_infix === null || options.comment_no_infix === false) {
     options.comment_no_infix = false;
   } else if (options.comment_no_infix !== true) {
-    throw new CsvError("CSV_INVALID_OPTION_COMMENT", [
-      "Invalid option comment_no_infix:",
-      "value must be a boolean,",
-      `got ${JSON.stringify(options.comment_no_infix)}`
-    ], options);
+    throw new CsvError(
+      "CSV_INVALID_OPTION_COMMENT",
+      [
+        "Invalid option comment_no_infix:",
+        "value must be a boolean,",
+        `got ${JSON.stringify(options.comment_no_infix)}`
+      ],
+      options
+    );
   }
   const delimiter_json = JSON.stringify(options.delimiter);
-  if (!Array.isArray(options.delimiter)) options.delimiter = [options.delimiter];
+  if (!Array.isArray(options.delimiter))
+    options.delimiter = [options.delimiter];
   if (options.delimiter.length === 0) {
-    throw new CsvError("CSV_INVALID_OPTION_DELIMITER", [
-      "Invalid option delimiter:",
-      "delimiter must be a non empty string or buffer or array of string|buffer,",
-      `got ${delimiter_json}`
-    ], options);
+    throw new CsvError(
+      "CSV_INVALID_OPTION_DELIMITER",
+      [
+        "Invalid option delimiter:",
+        "delimiter must be a non empty string or buffer or array of string|buffer,",
+        `got ${delimiter_json}`
+      ],
+      options
+    );
   }
   options.delimiter = options.delimiter.map(function(delimiter) {
     if (delimiter === void 0 || delimiter === null || delimiter === false) {
@@ -3334,11 +3378,15 @@ var normalize_options = function(opts) {
       delimiter = Buffer.from(delimiter, options.encoding);
     }
     if (!Buffer.isBuffer(delimiter) || delimiter.length === 0) {
-      throw new CsvError("CSV_INVALID_OPTION_DELIMITER", [
-        "Invalid option delimiter:",
-        "delimiter must be a non empty string or buffer or array of string|buffer,",
-        `got ${delimiter_json}`
-      ], options);
+      throw new CsvError(
+        "CSV_INVALID_OPTION_DELIMITER",
+        [
+          "Invalid option delimiter:",
+          "delimiter must be a non empty string or buffer or array of string|buffer,",
+          `got ${delimiter_json}`
+        ],
+        options
+      );
     }
     return delimiter;
   });
@@ -3351,7 +3399,9 @@ var normalize_options = function(opts) {
   }
   if (options.escape !== null) {
     if (!Buffer.isBuffer(options.escape)) {
-      throw new Error(`Invalid Option: escape must be a buffer, a string or a boolean, got ${JSON.stringify(options.escape)}`);
+      throw new Error(
+        `Invalid Option: escape must be a buffer, a string or a boolean, got ${JSON.stringify(options.escape)}`
+      );
     }
   }
   if (options.from === void 0 || options.from === null) {
@@ -3362,10 +3412,14 @@ var normalize_options = function(opts) {
     }
     if (Number.isInteger(options.from)) {
       if (options.from < 0) {
-        throw new Error(`Invalid Option: from must be a positive integer, got ${JSON.stringify(opts.from)}`);
+        throw new Error(
+          `Invalid Option: from must be a positive integer, got ${JSON.stringify(opts.from)}`
+        );
       }
     } else {
-      throw new Error(`Invalid Option: from must be an integer, got ${JSON.stringify(options.from)}`);
+      throw new Error(
+        `Invalid Option: from must be an integer, got ${JSON.stringify(options.from)}`
+      );
     }
   }
   if (options.from_line === void 0 || options.from_line === null) {
@@ -3376,10 +3430,14 @@ var normalize_options = function(opts) {
     }
     if (Number.isInteger(options.from_line)) {
       if (options.from_line <= 0) {
-        throw new Error(`Invalid Option: from_line must be a positive integer greater than 0, got ${JSON.stringify(opts.from_line)}`);
+        throw new Error(
+          `Invalid Option: from_line must be a positive integer greater than 0, got ${JSON.stringify(opts.from_line)}`
+        );
       }
     } else {
-      throw new Error(`Invalid Option: from_line must be an integer, got ${JSON.stringify(opts.from_line)}`);
+      throw new Error(
+        `Invalid Option: from_line must be an integer, got ${JSON.stringify(opts.from_line)}`
+      );
     }
   }
   if (options.ignore_last_delimiters === void 0 || options.ignore_last_delimiters === null) {
@@ -3390,22 +3448,32 @@ var normalize_options = function(opts) {
       options.ignore_last_delimiters = false;
     }
   } else if (typeof options.ignore_last_delimiters !== "boolean") {
-    throw new CsvError("CSV_INVALID_OPTION_IGNORE_LAST_DELIMITERS", [
-      "Invalid option `ignore_last_delimiters`:",
-      "the value must be a boolean value or an integer,",
-      `got ${JSON.stringify(options.ignore_last_delimiters)}`
-    ], options);
+    throw new CsvError(
+      "CSV_INVALID_OPTION_IGNORE_LAST_DELIMITERS",
+      [
+        "Invalid option `ignore_last_delimiters`:",
+        "the value must be a boolean value or an integer,",
+        `got ${JSON.stringify(options.ignore_last_delimiters)}`
+      ],
+      options
+    );
   }
   if (options.ignore_last_delimiters === true && options.columns === false) {
-    throw new CsvError("CSV_IGNORE_LAST_DELIMITERS_REQUIRES_COLUMNS", [
-      "The option `ignore_last_delimiters`",
-      "requires the activation of the `columns` option"
-    ], options);
+    throw new CsvError(
+      "CSV_IGNORE_LAST_DELIMITERS_REQUIRES_COLUMNS",
+      [
+        "The option `ignore_last_delimiters`",
+        "requires the activation of the `columns` option"
+      ],
+      options
+    );
   }
   if (options.info === void 0 || options.info === null || options.info === false) {
     options.info = false;
   } else if (options.info !== true) {
-    throw new Error(`Invalid Option: info must be true, got ${JSON.stringify(options.info)}`);
+    throw new Error(
+      `Invalid Option: info must be true, got ${JSON.stringify(options.info)}`
+    );
   }
   if (options.max_record_size === void 0 || options.max_record_size === null || options.max_record_size === false) {
     options.max_record_size = 0;
@@ -3413,7 +3481,9 @@ var normalize_options = function(opts) {
   } else if (typeof options.max_record_size === "string" && /\d+/.test(options.max_record_size)) {
     options.max_record_size = parseInt(options.max_record_size);
   } else {
-    throw new Error(`Invalid Option: max_record_size must be a positive integer, got ${JSON.stringify(options.max_record_size)}`);
+    throw new Error(
+      `Invalid Option: max_record_size must be a positive integer, got ${JSON.stringify(options.max_record_size)}`
+    );
   }
   if (options.objname === void 0 || options.objname === null || options.objname === false) {
     options.objname = void 0;
@@ -3431,30 +3501,42 @@ var normalize_options = function(opts) {
     }
   } else if (typeof options.objname === "number") {
   } else {
-    throw new Error(`Invalid Option: objname must be a string or a buffer, got ${options.objname}`);
+    throw new Error(
+      `Invalid Option: objname must be a string or a buffer, got ${options.objname}`
+    );
   }
   if (options.objname !== void 0) {
     if (typeof options.objname === "number") {
       if (options.columns !== false) {
-        throw Error("Invalid Option: objname index cannot be combined with columns or be defined as a field");
+        throw Error(
+          "Invalid Option: objname index cannot be combined with columns or be defined as a field"
+        );
       }
     } else {
       if (options.columns === false) {
-        throw Error("Invalid Option: objname field must be combined with columns or be defined as an index");
+        throw Error(
+          "Invalid Option: objname field must be combined with columns or be defined as an index"
+        );
       }
     }
   }
   if (options.on_record === void 0 || options.on_record === null) {
     options.on_record = void 0;
   } else if (typeof options.on_record !== "function") {
-    throw new CsvError("CSV_INVALID_OPTION_ON_RECORD", [
-      "Invalid option `on_record`:",
-      "expect a function,",
-      `got ${JSON.stringify(options.on_record)}`
-    ], options);
+    throw new CsvError(
+      "CSV_INVALID_OPTION_ON_RECORD",
+      [
+        "Invalid option `on_record`:",
+        "expect a function,",
+        `got ${JSON.stringify(options.on_record)}`
+      ],
+      options
+    );
   }
   if (options.on_skip !== void 0 && options.on_skip !== null && typeof options.on_skip !== "function") {
-    throw new Error(`Invalid Option: on_skip must be a function, got ${JSON.stringify(options.on_skip)}`);
+    throw new Error(
+      `Invalid Option: on_skip must be a function, got ${JSON.stringify(options.on_skip)}`
+    );
   }
   if (options.quote === null || options.quote === false || options.quote === "") {
     options.quote = null;
@@ -3465,47 +3547,67 @@ var normalize_options = function(opts) {
       options.quote = Buffer.from(options.quote, options.encoding);
     }
     if (!Buffer.isBuffer(options.quote)) {
-      throw new Error(`Invalid Option: quote must be a buffer or a string, got ${JSON.stringify(options.quote)}`);
+      throw new Error(
+        `Invalid Option: quote must be a buffer or a string, got ${JSON.stringify(options.quote)}`
+      );
     }
   }
   if (options.raw === void 0 || options.raw === null || options.raw === false) {
     options.raw = false;
   } else if (options.raw !== true) {
-    throw new Error(`Invalid Option: raw must be true, got ${JSON.stringify(options.raw)}`);
+    throw new Error(
+      `Invalid Option: raw must be true, got ${JSON.stringify(options.raw)}`
+    );
   }
   if (options.record_delimiter === void 0) {
     options.record_delimiter = [];
   } else if (typeof options.record_delimiter === "string" || Buffer.isBuffer(options.record_delimiter)) {
     if (options.record_delimiter.length === 0) {
-      throw new CsvError("CSV_INVALID_OPTION_RECORD_DELIMITER", [
-        "Invalid option `record_delimiter`:",
-        "value must be a non empty string or buffer,",
-        `got ${JSON.stringify(options.record_delimiter)}`
-      ], options);
+      throw new CsvError(
+        "CSV_INVALID_OPTION_RECORD_DELIMITER",
+        [
+          "Invalid option `record_delimiter`:",
+          "value must be a non empty string or buffer,",
+          `got ${JSON.stringify(options.record_delimiter)}`
+        ],
+        options
+      );
     }
     options.record_delimiter = [options.record_delimiter];
   } else if (!Array.isArray(options.record_delimiter)) {
-    throw new CsvError("CSV_INVALID_OPTION_RECORD_DELIMITER", [
-      "Invalid option `record_delimiter`:",
-      "value must be a string, a buffer or array of string|buffer,",
-      `got ${JSON.stringify(options.record_delimiter)}`
-    ], options);
+    throw new CsvError(
+      "CSV_INVALID_OPTION_RECORD_DELIMITER",
+      [
+        "Invalid option `record_delimiter`:",
+        "value must be a string, a buffer or array of string|buffer,",
+        `got ${JSON.stringify(options.record_delimiter)}`
+      ],
+      options
+    );
   }
   options.record_delimiter = options.record_delimiter.map(function(rd, i) {
     if (typeof rd !== "string" && !Buffer.isBuffer(rd)) {
-      throw new CsvError("CSV_INVALID_OPTION_RECORD_DELIMITER", [
-        "Invalid option `record_delimiter`:",
-        "value must be a string, a buffer or array of string|buffer",
-        `at index ${i},`,
-        `got ${JSON.stringify(rd)}`
-      ], options);
+      throw new CsvError(
+        "CSV_INVALID_OPTION_RECORD_DELIMITER",
+        [
+          "Invalid option `record_delimiter`:",
+          "value must be a string, a buffer or array of string|buffer",
+          `at index ${i},`,
+          `got ${JSON.stringify(rd)}`
+        ],
+        options
+      );
     } else if (rd.length === 0) {
-      throw new CsvError("CSV_INVALID_OPTION_RECORD_DELIMITER", [
-        "Invalid option `record_delimiter`:",
-        "value must be a non empty string or buffer",
-        `at index ${i},`,
-        `got ${JSON.stringify(rd)}`
-      ], options);
+      throw new CsvError(
+        "CSV_INVALID_OPTION_RECORD_DELIMITER",
+        [
+          "Invalid option `record_delimiter`:",
+          "value must be a non empty string or buffer",
+          `at index ${i},`,
+          `got ${JSON.stringify(rd)}`
+        ],
+        options
+      );
     }
     if (typeof rd === "string") {
       rd = Buffer.from(rd, options.encoding);
@@ -3516,58 +3618,78 @@ var normalize_options = function(opts) {
   } else if (options.relax_column_count === void 0 || options.relax_column_count === null) {
     options.relax_column_count = false;
   } else {
-    throw new Error(`Invalid Option: relax_column_count must be a boolean, got ${JSON.stringify(options.relax_column_count)}`);
+    throw new Error(
+      `Invalid Option: relax_column_count must be a boolean, got ${JSON.stringify(options.relax_column_count)}`
+    );
   }
   if (typeof options.relax_column_count_less === "boolean") {
   } else if (options.relax_column_count_less === void 0 || options.relax_column_count_less === null) {
     options.relax_column_count_less = false;
   } else {
-    throw new Error(`Invalid Option: relax_column_count_less must be a boolean, got ${JSON.stringify(options.relax_column_count_less)}`);
+    throw new Error(
+      `Invalid Option: relax_column_count_less must be a boolean, got ${JSON.stringify(options.relax_column_count_less)}`
+    );
   }
   if (typeof options.relax_column_count_more === "boolean") {
   } else if (options.relax_column_count_more === void 0 || options.relax_column_count_more === null) {
     options.relax_column_count_more = false;
   } else {
-    throw new Error(`Invalid Option: relax_column_count_more must be a boolean, got ${JSON.stringify(options.relax_column_count_more)}`);
+    throw new Error(
+      `Invalid Option: relax_column_count_more must be a boolean, got ${JSON.stringify(options.relax_column_count_more)}`
+    );
   }
   if (typeof options.relax_quotes === "boolean") {
   } else if (options.relax_quotes === void 0 || options.relax_quotes === null) {
     options.relax_quotes = false;
   } else {
-    throw new Error(`Invalid Option: relax_quotes must be a boolean, got ${JSON.stringify(options.relax_quotes)}`);
+    throw new Error(
+      `Invalid Option: relax_quotes must be a boolean, got ${JSON.stringify(options.relax_quotes)}`
+    );
   }
   if (typeof options.skip_empty_lines === "boolean") {
   } else if (options.skip_empty_lines === void 0 || options.skip_empty_lines === null) {
     options.skip_empty_lines = false;
   } else {
-    throw new Error(`Invalid Option: skip_empty_lines must be a boolean, got ${JSON.stringify(options.skip_empty_lines)}`);
+    throw new Error(
+      `Invalid Option: skip_empty_lines must be a boolean, got ${JSON.stringify(options.skip_empty_lines)}`
+    );
   }
   if (typeof options.skip_records_with_empty_values === "boolean") {
   } else if (options.skip_records_with_empty_values === void 0 || options.skip_records_with_empty_values === null) {
     options.skip_records_with_empty_values = false;
   } else {
-    throw new Error(`Invalid Option: skip_records_with_empty_values must be a boolean, got ${JSON.stringify(options.skip_records_with_empty_values)}`);
+    throw new Error(
+      `Invalid Option: skip_records_with_empty_values must be a boolean, got ${JSON.stringify(options.skip_records_with_empty_values)}`
+    );
   }
   if (typeof options.skip_records_with_error === "boolean") {
   } else if (options.skip_records_with_error === void 0 || options.skip_records_with_error === null) {
     options.skip_records_with_error = false;
   } else {
-    throw new Error(`Invalid Option: skip_records_with_error must be a boolean, got ${JSON.stringify(options.skip_records_with_error)}`);
+    throw new Error(
+      `Invalid Option: skip_records_with_error must be a boolean, got ${JSON.stringify(options.skip_records_with_error)}`
+    );
   }
   if (options.rtrim === void 0 || options.rtrim === null || options.rtrim === false) {
     options.rtrim = false;
   } else if (options.rtrim !== true) {
-    throw new Error(`Invalid Option: rtrim must be a boolean, got ${JSON.stringify(options.rtrim)}`);
+    throw new Error(
+      `Invalid Option: rtrim must be a boolean, got ${JSON.stringify(options.rtrim)}`
+    );
   }
   if (options.ltrim === void 0 || options.ltrim === null || options.ltrim === false) {
     options.ltrim = false;
   } else if (options.ltrim !== true) {
-    throw new Error(`Invalid Option: ltrim must be a boolean, got ${JSON.stringify(options.ltrim)}`);
+    throw new Error(
+      `Invalid Option: ltrim must be a boolean, got ${JSON.stringify(options.ltrim)}`
+    );
   }
   if (options.trim === void 0 || options.trim === null || options.trim === false) {
     options.trim = false;
   } else if (options.trim !== true) {
-    throw new Error(`Invalid Option: trim must be a boolean, got ${JSON.stringify(options.trim)}`);
+    throw new Error(
+      `Invalid Option: trim must be a boolean, got ${JSON.stringify(options.trim)}`
+    );
   }
   if (options.trim === true && opts.ltrim !== false) {
     options.ltrim = true;
@@ -3587,10 +3709,14 @@ var normalize_options = function(opts) {
     }
     if (Number.isInteger(options.to)) {
       if (options.to <= 0) {
-        throw new Error(`Invalid Option: to must be a positive integer greater than 0, got ${JSON.stringify(opts.to)}`);
+        throw new Error(
+          `Invalid Option: to must be a positive integer greater than 0, got ${JSON.stringify(opts.to)}`
+        );
       }
     } else {
-      throw new Error(`Invalid Option: to must be an integer, got ${JSON.stringify(opts.to)}`);
+      throw new Error(
+        `Invalid Option: to must be an integer, got ${JSON.stringify(opts.to)}`
+      );
     }
   }
   if (options.to_line === void 0 || options.to_line === null) {
@@ -3601,18 +3727,24 @@ var normalize_options = function(opts) {
     }
     if (Number.isInteger(options.to_line)) {
       if (options.to_line <= 0) {
-        throw new Error(`Invalid Option: to_line must be a positive integer greater than 0, got ${JSON.stringify(opts.to_line)}`);
+        throw new Error(
+          `Invalid Option: to_line must be a positive integer greater than 0, got ${JSON.stringify(opts.to_line)}`
+        );
       }
     } else {
-      throw new Error(`Invalid Option: to_line must be an integer, got ${JSON.stringify(opts.to_line)}`);
+      throw new Error(
+        `Invalid Option: to_line must be an integer, got ${JSON.stringify(opts.to_line)}`
+      );
     }
   }
   return options;
 };
 
-// ../../node_modules/.pnpm/csv-parse@5.5.6/node_modules/csv-parse/lib/api/index.js
+// ../../node_modules/.pnpm/csv-parse@5.6.0/node_modules/csv-parse/lib/api/index.js
 var isRecordEmpty = function(record) {
-  return record.every((field) => field == null || field.toString && field.toString().trim() === "");
+  return record.every(
+    (field) => field == null || field.toString && field.toString().trim() === ""
+  );
 };
 var cr2 = 13;
 var nl2 = 10;
@@ -3621,11 +3753,11 @@ var boms = {
   // Buffer.from("\ufeff")
   // Buffer.from([239, 187, 191])
   // Buffer.from('EFBBBF', 'hex')
-  "utf8": Buffer.from([239, 187, 191]),
+  utf8: Buffer.from([239, 187, 191]),
   // Note, the following are equals:
   // Buffer.from "\ufeff", 'utf16le
   // Buffer.from([255, 254])
-  "utf16le": Buffer.from([255, 254])
+  utf16le: Buffer.from([255, 254])
 };
 var transform = function(original_options = {}) {
   const info = {
@@ -3665,7 +3797,20 @@ var transform = function(original_options = {}) {
     },
     // Central parser implementation
     parse: function(nextBuf, end, push, close) {
-      const { bom, comment_no_infix, encoding, from_line, ltrim, max_record_size, raw, relax_quotes, rtrim, skip_empty_lines, to, to_line } = this.options;
+      const {
+        bom,
+        comment_no_infix,
+        encoding,
+        from_line,
+        ltrim,
+        max_record_size,
+        raw,
+        relax_quotes,
+        rtrim,
+        skip_empty_lines,
+        to,
+        to_line
+      } = this.options;
       let { comment, escape, quote, record_delimiter } = this.options;
       const { bomSkipped, previousBuf, rawBuffer, escapeIsQuote } = this.state;
       let buf;
@@ -3695,7 +3840,10 @@ var transform = function(original_options = {}) {
               const bomLength = boms[encoding2].length;
               this.state.bufBytesStart += bomLength;
               buf = buf.slice(bomLength);
-              this.options = normalize_options({ ...this.original_options, encoding: encoding2 });
+              this.options = normalize_options({
+                ...this.original_options,
+                encoding: encoding2
+              });
               ({ comment, escape, quote } = this.options);
               break;
             }
@@ -3719,7 +3867,10 @@ var transform = function(original_options = {}) {
           return;
         }
         if (this.state.quoting === false && record_delimiter.length === 0) {
-          const record_delimiterCount = this.__autoDiscoverRecordDelimiter(buf, pos);
+          const record_delimiterCount = this.__autoDiscoverRecordDelimiter(
+            buf,
+            pos
+          );
           if (record_delimiterCount) {
             record_delimiter = this.options.record_delimiter;
           }
@@ -3752,7 +3903,11 @@ var transform = function(original_options = {}) {
               const nextChr = buf[pos + quote.length];
               const isNextChrTrimable = rtrim && this.__isCharTrimable(buf, pos + quote.length);
               const isNextChrComment = comment !== null && this.__compareBytes(comment, buf, pos + quote.length, nextChr);
-              const isNextChrDelimiter = this.__isDelimiter(buf, pos + quote.length, nextChr);
+              const isNextChrDelimiter = this.__isDelimiter(
+                buf,
+                pos + quote.length,
+                nextChr
+              );
               const isNextChrRecordDelimiter = record_delimiter.length === 0 ? this.__autoDiscoverRecordDelimiter(buf, pos + quote.length) : this.__isRecordDelimiter(nextChr, buf, pos + quote.length);
               if (escape !== null && this.__isEscape(buf, pos, chr) && this.__isQuote(buf, pos + escape.length)) {
                 pos += escape.length - 1;
@@ -3763,13 +3918,18 @@ var transform = function(original_options = {}) {
                 continue;
               } else if (relax_quotes === false) {
                 const err = this.__error(
-                  new CsvError("CSV_INVALID_CLOSING_QUOTE", [
-                    "Invalid Closing Quote:",
-                    `got "${String.fromCharCode(nextChr)}"`,
-                    `at line ${this.info.lines}`,
-                    "instead of delimiter, record delimiter, trimable character",
-                    "(if activated) or comment"
-                  ], this.options, this.__infoField())
+                  new CsvError(
+                    "CSV_INVALID_CLOSING_QUOTE",
+                    [
+                      "Invalid Closing Quote:",
+                      `got "${String.fromCharCode(nextChr)}"`,
+                      `at line ${this.info.lines}`,
+                      "instead of delimiter, record delimiter, trimable character",
+                      "(if activated) or comment"
+                    ],
+                    this.options,
+                    this.__infoField()
+                  )
                 );
                 if (err !== void 0) return err;
               } else {
@@ -3782,15 +3942,23 @@ var transform = function(original_options = {}) {
               if (this.state.field.length !== 0) {
                 if (relax_quotes === false) {
                   const info2 = this.__infoField();
-                  const bom2 = Object.keys(boms).map((b) => boms[b].equals(this.state.field.toString()) ? b : false).filter(Boolean)[0];
+                  const bom2 = Object.keys(boms).map(
+                    (b) => boms[b].equals(this.state.field.toString()) ? b : false
+                  ).filter(Boolean)[0];
                   const err = this.__error(
-                    new CsvError("INVALID_OPENING_QUOTE", [
-                      "Invalid Opening Quote:",
-                      `a quote is found on field ${JSON.stringify(info2.column)} at line ${info2.lines}, value is ${JSON.stringify(this.state.field.toString(encoding))}`,
-                      bom2 ? `(${bom2} bom)` : void 0
-                    ], this.options, info2, {
-                      field: this.state.field
-                    })
+                    new CsvError(
+                      "INVALID_OPENING_QUOTE",
+                      [
+                        "Invalid Opening Quote:",
+                        `a quote is found on field ${JSON.stringify(info2.column)} at line ${info2.lines}, value is ${JSON.stringify(this.state.field.toString(encoding))}`,
+                        bom2 ? `(${bom2} bom)` : void 0
+                      ],
+                      this.options,
+                      info2,
+                      {
+                        field: this.state.field
+                      }
+                    )
                   );
                   if (err !== void 0) return err;
                 }
@@ -3802,9 +3970,13 @@ var transform = function(original_options = {}) {
             }
           }
           if (this.state.quoting === false) {
-            const recordDelimiterLength = this.__isRecordDelimiter(chr, buf, pos);
+            const recordDelimiterLength = this.__isRecordDelimiter(
+              chr,
+              buf,
+              pos
+            );
             if (recordDelimiterLength !== 0) {
-              const skipCommentLine = this.state.commenting && (this.state.wasQuoting === false && this.state.record.length === 0 && this.state.field.length === 0);
+              const skipCommentLine = this.state.commenting && this.state.wasQuoting === false && this.state.record.length === 0 && this.state.field.length === 0;
               if (skipCommentLine) {
                 this.info.comment_lines++;
               } else {
@@ -3859,12 +4031,17 @@ var transform = function(original_options = {}) {
         if (this.state.commenting === false) {
           if (max_record_size !== 0 && this.state.record_length + this.state.field.length > max_record_size) {
             return this.__error(
-              new CsvError("CSV_MAX_RECORD_SIZE", [
-                "Max Record Size:",
-                "record exceed the maximum number of tolerated bytes",
-                `of ${max_record_size}`,
-                `at line ${this.info.lines}`
-              ], this.options, this.__infoField())
+              new CsvError(
+                "CSV_MAX_RECORD_SIZE",
+                [
+                  "Max Record Size:",
+                  "record exceed the maximum number of tolerated bytes",
+                  `of ${max_record_size}`,
+                  `at line ${this.info.lines}`
+                ],
+                this.options,
+                this.__infoField()
+              )
             );
           }
         }
@@ -3874,11 +4051,16 @@ var transform = function(original_options = {}) {
           this.state.field.append(chr);
         } else if (rtrim === true && !this.__isCharTrimable(buf, pos)) {
           return this.__error(
-            new CsvError("CSV_NON_TRIMABLE_CHAR_AFTER_CLOSING_QUOTE", [
-              "Invalid Closing Quote:",
-              "found non trimable byte after quote",
-              `at line ${this.info.lines}`
-            ], this.options, this.__infoField())
+            new CsvError(
+              "CSV_NON_TRIMABLE_CHAR_AFTER_CLOSING_QUOTE",
+              [
+                "Invalid Closing Quote:",
+                "found non trimable byte after quote",
+                `at line ${this.info.lines}`
+              ],
+              this.options,
+              this.__infoField()
+            )
           );
         } else {
           if (lappend === false) {
@@ -3890,10 +4072,15 @@ var transform = function(original_options = {}) {
       if (end === true) {
         if (this.state.quoting === true) {
           const err = this.__error(
-            new CsvError("CSV_QUOTE_NOT_CLOSED", [
-              "Quote Not Closed:",
-              `the parsing is finished with an opening quote at line ${this.info.lines}`
-            ], this.options, this.__infoField())
+            new CsvError(
+              "CSV_QUOTE_NOT_CLOSED",
+              [
+                "Quote Not Closed:",
+                `the parsing is finished with an opening quote at line ${this.info.lines}`
+              ],
+              this.options,
+              this.__infoField()
+            )
           );
           if (err !== void 0) return err;
         } else {
@@ -3919,7 +4106,18 @@ var transform = function(original_options = {}) {
       }
     },
     __onRecord: function(push) {
-      const { columns, group_columns_by_name, encoding, info: info2, from, relax_column_count, relax_column_count_less, relax_column_count_more, raw, skip_records_with_empty_values } = this.options;
+      const {
+        columns,
+        group_columns_by_name,
+        encoding,
+        info: info2,
+        from,
+        relax_column_count,
+        relax_column_count_less,
+        relax_column_count_more,
+        raw,
+        skip_records_with_empty_values
+      } = this.options;
       const { enabled, record } = this.state;
       if (enabled === false) {
         return this.__resetRecord();
@@ -3936,20 +4134,32 @@ var transform = function(original_options = {}) {
         this.state.expectedRecordLength = recordLength;
       }
       if (recordLength !== this.state.expectedRecordLength) {
-        const err = columns === false ? new CsvError("CSV_RECORD_INCONSISTENT_FIELDS_LENGTH", [
-          "Invalid Record Length:",
-          `expect ${this.state.expectedRecordLength},`,
-          `got ${recordLength} on line ${this.info.lines}`
-        ], this.options, this.__infoField(), {
-          record
-        }) : new CsvError("CSV_RECORD_INCONSISTENT_COLUMNS", [
-          "Invalid Record Length:",
-          `columns length is ${columns.length},`,
-          // rename columns
-          `got ${recordLength} on line ${this.info.lines}`
-        ], this.options, this.__infoField(), {
-          record
-        });
+        const err = columns === false ? new CsvError(
+          "CSV_RECORD_INCONSISTENT_FIELDS_LENGTH",
+          [
+            "Invalid Record Length:",
+            `expect ${this.state.expectedRecordLength},`,
+            `got ${recordLength} on line ${this.info.lines}`
+          ],
+          this.options,
+          this.__infoField(),
+          {
+            record
+          }
+        ) : new CsvError(
+          "CSV_RECORD_INCONSISTENT_COLUMNS",
+          [
+            "Invalid Record Length:",
+            `columns length is ${columns.length},`,
+            // rename columns
+            `got ${recordLength} on line ${this.info.lines}`
+          ],
+          this.options,
+          this.__infoField(),
+          {
+            record
+          }
+        );
         if (relax_column_count === true || relax_column_count_less === true && recordLength < this.state.expectedRecordLength || relax_column_count_more === true && recordLength > this.state.expectedRecordLength) {
           this.info.invalid_field_length++;
           this.state.error = err;
@@ -4039,13 +4249,19 @@ var transform = function(original_options = {}) {
         const headers = firstLineToHeaders === void 0 ? record : firstLineToHeaders.call(null, record);
         if (!Array.isArray(headers)) {
           return this.__error(
-            new CsvError("CSV_INVALID_COLUMN_MAPPING", [
-              "Invalid Column Mapping:",
-              "expect an array from column function,",
-              `got ${JSON.stringify(headers)}`
-            ], this.options, this.__infoField(), {
-              headers
-            })
+            new CsvError(
+              "CSV_INVALID_COLUMN_MAPPING",
+              [
+                "Invalid Column Mapping:",
+                "expect an array from column function,",
+                `got ${JSON.stringify(headers)}`
+              ],
+              this.options,
+              this.__infoField(),
+              {
+                headers
+              }
+            )
           );
         }
         const normalizedHeaders = normalize_columns_array(headers);
@@ -4248,7 +4464,10 @@ var transform = function(original_options = {}) {
       if (skip_records_with_error) {
         this.state.recordHasError = true;
         if (this.options.on_skip !== void 0) {
-          this.options.on_skip(err, raw ? this.state.rawBuffer.toString(encoding) : void 0);
+          this.options.on_skip(
+            err,
+            raw ? this.state.rawBuffer.toString(encoding) : void 0
+          );
         }
         return void 0;
       } else {
@@ -4283,7 +4502,7 @@ var transform = function(original_options = {}) {
   };
 };
 
-// ../../node_modules/.pnpm/csv-parse@5.5.6/node_modules/csv-parse/lib/sync.js
+// ../../node_modules/.pnpm/csv-parse@5.6.0/node_modules/csv-parse/lib/sync.js
 var parse = function(data, opts = {}) {
   if (typeof data === "string") {
     data = Buffer.from(data);
@@ -4291,8 +4510,7 @@ var parse = function(data, opts = {}) {
   const records = opts && opts.objname ? {} : [];
   const parser = transform(opts);
   const push = (record) => {
-    if (parser.options.objname === void 0)
-      records.push(record);
+    if (parser.options.objname === void 0) records.push(record);
     else {
       records[record[0]] = record[1];
     }
