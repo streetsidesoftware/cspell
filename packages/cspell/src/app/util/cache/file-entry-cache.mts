@@ -3,6 +3,11 @@ import fileEntryCache from 'file-entry-cache';
 
 export type { FileDescriptor, FileEntryCache } from 'file-entry-cache';
 
-export function createFromFile(pathToCache: string, useChecksum?: boolean): FileEntryCache {
-    return fileEntryCache.createFromFile(pathToCache, useChecksum);
+export interface FileEntryCacheOptions {
+    useCheckSum?: boolean;
+    currentWorkingDirectory?: string;
+}
+
+export function createFromFile(pathToCache: string, options: FileEntryCacheOptions): FileEntryCache {
+    return fileEntryCache.createFromFile(pathToCache, options.useCheckSum, options.currentWorkingDirectory);
 }
