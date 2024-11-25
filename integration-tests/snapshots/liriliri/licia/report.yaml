@@ -4,13 +4,13 @@ Url: https://github.com/liriliri/licia.git
 Args: '["**/*.*"]'
 Summary:
   files: 1430
-  filesWithIssues: 82
-  issues: 335
+  filesWithIssues: 83
+  issues: 341
   errors: 0
 Errors: []
 
 issues:
-  - "CHANGELOG.md:326:26         unenumerable    U       feat(allKeys): support unenumerable and symbol"
+  - "CHANGELOG.md:330:26         unenumerable    U       feat(allKeys): support unenumerable and symbol"
   - "demo/MediaQuery.demo.html:7:20          unmatch     U       mediaQuery.on('unmatch', () => console.log"
   - "demo/MediaQuery.demo.html:7:49          unmatch     U       () => console.log('unmatch'));"
   - "demo/scrollTo.demo.html:52:40       arrrived    U       console.log('Section 2 arrrived!');"
@@ -46,9 +46,9 @@ issues:
   - "DOC_CN.md:12967:20      mcake           U       stripAnsi('\\u001b[4mcake\\u001b[0m'); // -> 'cake"
   - "DOC_CN.md:12989:16      Flicia          U       stripBom('\\uFEFFlicia'); // -> 'licia'"
   - "DOC_CN.md:13033:22      mred            U       stripColor('\\u001b[31mred\\u001b[39m'); // ->"
-  - "DOC_CN.md:13761:43      mouseup         U       getElementById('test'), 'mouseup');"
-  - "DOC_CN.md:14377:38      Hwcqx           U       456, 789]); // -> '2HwcqxB'"
-  - "DOC_CN.md:14379:14      Hwcqx           U       vlq.decode('2HwcqxB'); // -> [123, 456"
+  - "DOC_CN.md:13769:43      mouseup         U       getElementById('test'), 'mouseup');"
+  - "DOC_CN.md:14385:38      Hwcqx           U       456, 789]); // -> '2HwcqxB'"
+  - "DOC_CN.md:14387:14      Hwcqx           U       vlq.decode('2HwcqxB'); // -> [123, 456"
   - "DOC.md:756:1        Interconnectable    U       Interconnectable Message channel."
   - "DOC.md:1586:9       lastname            U       lastname: 'Su',"
   - "DOC.md:1587:9       firstname           U       firstname: 'RedHood'"
@@ -82,11 +82,11 @@ issues:
   - "DOC.md:12976:20     mcake               U       stripAnsi('\\u001b[4mcake\\u001b[0m'); // -> 'cake"
   - "DOC.md:12998:16     Flicia              U       stripBom('\\uFEFFlicia'); // -> 'licia'"
   - "DOC.md:13042:22     mred                U       stripColor('\\u001b[31mred\\u001b[39m'); // ->"
-  - "DOC.md:13770:43     mouseup             U       getElementById('test'), 'mouseup');"
-  - "DOC.md:14198:9      Uppercased          U       |return|Uppercased string|"
-  - "DOC.md:14386:38     Hwcqx               U       456, 789]); // -> '2HwcqxB'"
-  - "DOC.md:14388:14     Hwcqx               U       vlq.decode('2HwcqxB'); // -> [123, 456"
-  - "DOC.md:14519:9      Workerized          U       |return|Workerized Function|"
+  - "DOC.md:13780:43     mouseup             U       getElementById('test'), 'mouseup');"
+  - "DOC.md:14208:9      Uppercased          U       |return|Uppercased string|"
+  - "DOC.md:14396:38     Hwcqx               U       456, 789]); // -> '2HwcqxB'"
+  - "DOC.md:14398:14     Hwcqx               U       vlq.decode('2HwcqxB'); // -> [123, 456"
+  - "DOC.md:14529:9      Workerized          U       |return|Workerized Function|"
   - "docker-compose.yml:13:11        cpus    U       cpus: '1.5'"
   - "i18n/allKeys.md:16:2        unenumerable    U       |unenumerable=false|包含不可枚举键名|"
   - "i18n/fetch.md:5:17          pollyfill       U       注意：这并不是 fetch 的 pollyfill。"
@@ -342,6 +342,12 @@ issues:
   - "test/stringifyAll.js:171:24         Inifinity       U       expect(obj.negativeInifinity).to.equal(Number.NEGATIVE"
   - "test/stripAnsi.js:1:16          mcake       U       test(['\\u001b[4mcake\\u001b[0m', 'cake'])"
   - "test/stripColor.js:1:17         mred    U       test(['\\u001b[31mred\\u001b[39m', 'red'])"
+  - "test/table.js:84:46         runzisu     U       0│0:00.01│login -fp runzisu│"
+  - "test/table.js:88:52         runzisu     U       :00.01', 'login -fp runzisu']"
+  - "test/table.js:94:48         runzisu     U       0:00.01 login -fp runzisu`,"
+  - "test/table.js:105:52        runzisu     U       :00.01', 'login -fp runzisu']"
+  - "test/table.js:110:39        VIRT        U       USER PR NI VIRT RES SHR S %CPU %MEM"
+  - "test/table.js:127:14        VIRT        U       'VIRT',"
   - "test/through.js:11:51       ifmmp       U       'ascii')).to.equal('ifmmp');"
   - "test/vlq.js:2:48        Hwcqx       U       , 789])).to.equal('2HwcqxB');"
   - "test/vlq.js:4:21        Hwcqx       U       expect(vlq.decode('2HwcqxB')).to.eql([123, 45"

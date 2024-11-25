@@ -3,9 +3,9 @@ Repository: googleapis/google-cloud-cpp
 Url: https://github.com/googleapis/google-cloud-cpp.git
 Args: '["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]'
 Summary:
-  files: 19702
-  filesWithIssues: 8855
-  issues: 56175
+  files: 19744
+  filesWithIssues: 8857
+  issues: 56179
   errors: 0
 Errors: []
 
@@ -173,8 +173,8 @@ issues:
   - "ci/verify_quickstart/CMakeLists.txt:42:16       DCMAKE          U       \"-DCMAKE_PREFIX_PATH=${CMAKE"
   - "ci/verify_quickstart/CMakeLists.txt:48:9        VCPKG           U       if (VCPKG_TARGET_TRIPLET)"
   - "ci/verify_quickstart/CMakeLists.txt:50:16       DVCPKG          U       \"-DVCPKG_TARGET_TRIPLET=${VCPKG"
-  - "ci/verify_quickstart/CMakeLists.txt:103:22      STREQUAL        U       if (\"${feature}\" STREQUAL \"storage_grpc\")"
-  - "ci/verify_quickstart/CMakeLists.txt:108:10      vcpkg           U       # In vcpkg we cannot use `_` in"
+  - "ci/verify_quickstart/CMakeLists.txt:106:22      STREQUAL        U       if (\"${feature}\" STREQUAL \"storage-grpc\" OR \""
+  - "ci/verify_quickstart/CMakeLists.txt:112:10      vcpkg           U       # In vcpkg we cannot use `_` in"
   - "cmake/templates/config.pc.in:18:1           includedir      U       includedir=@GOOGLE_CLOUD_CPP_PC"
   - "cmake/templates/config.pc.in:18:33          INCLUDEDIR      U       GOOGLE_CLOUD_CPP_PC_INCLUDEDIR@"
   - "cmake/templates/config.pc.in:26:1           Cflags          U       Cflags: -I${includedir} @GOOGLE"
@@ -403,9 +403,9 @@ issues:
   - "generator/integration_tests/golden/v1/golden_kitchen_sink_client.h:286:43       cloudresourcemanager    U       organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"
   - "generator/integration_tests/golden/v1/golden_kitchen_sink_client.h:651:62       bidir                   U       read-write RPCs (aka bidir streaming)"
   - "generator/integration_tests/golden/v1/golden_thing_admin_client.h:220:8         copybrief       U       /// @copybrief CreateDatabase"
+  - "generator/integration_tests/golden/v1/internal/deprecated_option_defaults.cc:40:8           goldenrestonly      U       \"goldenrestonly.googleapis.com\");"
   - "generator/integration_tests/golden/v1/internal/golden_kitchen_sink_option_defaults.cc:40:8          goldenkitchensink       U       \"goldenkitchensink.googleapis.com\");"
   - "generator/integration_tests/golden/v1/internal/golden_kitchen_sink_stub_factory.cc:51:16        iampolicy       U       auto service_iampolicy_stub = google::iam:"
-  - "generator/integration_tests/golden/v1/internal/golden_rest_only_option_defaults.cc:40:8         goldenrestonly      U       \"goldenrestonly.googleapis.com\");"
   - "generator/integration_tests/golden/v1/internal/request_id_auth_decorator.cc:72:43       Foos    U       :requestid::v1::ListFoosResponse> RequestIdServiceAuth"
   - "generator/integration_tests/golden/v1/internal/request_id_connection_impl.cc:187:64         foos    U       requestid::v1::Foo> result(r.foos().size());"
   - "generator/integration_tests/tests/golden_thing_admin_idempotency_policy_test.cc:26:11       gtab    U       namespace gtab = ::google::test::admin"
