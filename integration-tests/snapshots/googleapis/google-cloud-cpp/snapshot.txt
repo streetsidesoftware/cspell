@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 19702, Issues found: 56175 in 8855 files.
+ CSpell: Files checked: 19744, Issues found: 56179 in 8857 files.
  exit code: 1
 ARCHITECTURE.md:158:48    - Unknown word (googlemock) -- implementation using `googlemock`
 ARCHITECTURE.md:29:61     - Unknown word (retryable)  -- RPCs that fail with a retryable error,
@@ -176,8 +176,8 @@ ci/verify_current_targets/CMakeLists.txt:56:47     - Unknown word (ARGN)       -
 ci/verify_current_targets/CMakeLists.txt:58:1      - Unknown word (endfunction) -- endfunction ()
 ci/verify_current_targets/CMakeLists.txt:62:1      - Unknown word (endforeach)  -- endforeach ()
 ci/verify_current_targets/CMakeLists.txt:89:26     - Unknown word (protos)      -- cloud_dialogflow_v2_protos"
-ci/verify_quickstart/CMakeLists.txt:103:22    - Unknown word (STREQUAL)   -- if ("${feature}" STREQUAL "storage_grpc")
-ci/verify_quickstart/CMakeLists.txt:108:10    - Unknown word (vcpkg)      -- # In vcpkg we cannot use `_` in
+ci/verify_quickstart/CMakeLists.txt:106:22    - Unknown word (STREQUAL)   -- if ("${feature}" STREQUAL "storage-grpc" OR "
+ci/verify_quickstart/CMakeLists.txt:112:10    - Unknown word (vcpkg)      -- # In vcpkg we cannot use `_` in
 ci/verify_quickstart/CMakeLists.txt:22:35     - Unknown word (DFEATURES)  -- FATAL_ERROR "Missing -DFEATURES argument, for example
 ci/verify_quickstart/CMakeLists.txt:42:16     - Unknown word (DCMAKE)     -- "-DCMAKE_PREFIX_PATH=${CMAKE
 ci/verify_quickstart/CMakeLists.txt:48:9      - Unknown word (VCPKG)      -- if (VCPKG_TARGET_TRIPLET)
@@ -399,9 +399,9 @@ generator/integration_tests/backup.proto:27:40     - Unknown word (genproto)   -
 generator/integration_tests/golden/v1/golden_kitchen_sink_client.h:286:43    - Unknown word (cloudresourcemanager) -- organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity
 generator/integration_tests/golden/v1/golden_kitchen_sink_client.h:651:62    - Unknown word (bidir)                -- read-write RPCs (aka bidir streaming)
 generator/integration_tests/golden/v1/golden_thing_admin_client.h:220:8     - Unknown word (copybrief)  -- /// @copybrief CreateDatabase
+generator/integration_tests/golden/v1/internal/deprecated_option_defaults.cc:40:8      - Unknown word (goldenrestonly) -- "goldenrestonly.googleapis.com");
 generator/integration_tests/golden/v1/internal/golden_kitchen_sink_option_defaults.cc:40:8      - Unknown word (goldenkitchensink) -- "goldenkitchensink.googleapis.com");
 generator/integration_tests/golden/v1/internal/golden_kitchen_sink_stub_factory.cc:51:16     - Unknown word (iampolicy)  -- auto service_iampolicy_stub = google::iam:
-generator/integration_tests/golden/v1/internal/golden_rest_only_option_defaults.cc:40:8      - Unknown word (goldenrestonly) -- "goldenrestonly.googleapis.com");
 generator/integration_tests/golden/v1/internal/request_id_auth_decorator.cc:72:43     - Unknown word (Foos)       -- :requestid::v1::ListFoosResponse> RequestIdServiceAuth
 generator/integration_tests/golden/v1/internal/request_id_connection_impl.cc:187:64    - Unknown word (foos)       -- requestid::v1::Foo> result(r.foos().size());
 generator/integration_tests/tests/golden_thing_admin_idempotency_policy_test.cc:26:11     - Unknown word (gtab)       -- namespace gtab = ::google::test::admin

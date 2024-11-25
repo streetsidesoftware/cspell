@@ -3,18 +3,20 @@ Repository: vitest-dev/vitest
 Url: "https://github.com/vitest-dev/vitest"
 Args: ["--issues-summary-report","--locale=en,en-GB","."]
 Lines:
- CSpell: Files checked: 1861, Issues found: 1316 in 316 files.
+ CSpell: Files checked: 1870, Issues found: 1326 in 318 files.
  exit code: 1
 LICENSE:3:28      - Unknown word (Vitest)     -- Copyright (c) 2021-Present Vitest Team
 README.md:111:5     - Unknown word (patak)      -- - [@patak-dev](https://github
 README.md:118:82    - Unknown word (Matias)     -- github.com/antfu), [Matias Capeletto](https://github
 README.md:118:89    - Unknown word (Capeletto)  -- com/antfu), [Matias Capeletto](https://github.com
 README.md:95:5      - Unknown word (Patak)      -- ### Patak Sponsors
-docs/advanced/api.md:101:4     - Unknown word (recieve)    -- To recieve the values in the test
-docs/advanced/api.md:101:85    - Unknown word (entrypont)  -- method from `vitest` entrypont:
+docs/advanced/api.md:105:4     - Unknown word (recieve)    -- To recieve the values in the test
+docs/advanced/api.md:105:85    - Unknown word (entrypont)  -- method from `vitest` entrypont:
+docs/advanced/api.md:143:43    - Unknown word (testproject) -- Version>2.2.0</Version> {#testproject}
+docs/advanced/api.md:242:28    - Unknown word (dynamicaly)  -- values can be provided dynamicaly. Provided value in tests
+docs/advanced/guide/tests.md:11:87     - Unknown word (immidiatly) -- installed and runs tests immidiatly
 docs/advanced/pool.md:63:208    - Unknown word (birpc)      -- use WebSockets with `birpc` you can write something
 docs/advanced/pool.md:66:16     - Unknown word (Birpc)      -- import { createBirpc } from 'birpc'
-docs/advanced/reporters.md:389:28    - Unknown word (assosiated) -- TestProject` is a project assosiated with the module. Every
 docs/advanced/reporters.md:66:7      - Unknown word (twoslash)   -- ```ts twoslash
 docs/api/assert.md:1054:75   - Unknown word (konacha)    -- } }, 'tea.green', 'konacha')
 docs/api/assert.md:1117:59   - Unknown word (Dont)       -- baz: 3 }, ['foo', 'iDontExist', 'baz'])
@@ -79,6 +81,7 @@ docs/guide/browser/interactivity-api.md:295:98    - Unknown word (compatiblity) 
 docs/guide/browser/locators.md:10:111    - Unknown word (Ivya)       -- class-locator) called [Ivya](https://npmjs.com/ivya
 docs/guide/browser/locators.md:206:11    - Unknown word (Incredibles) -- <img alt="Incredibles 2 Poster" src="/incredibles
 docs/guide/browser/locators.md:206:39    - Unknown word (incredibles) -- Incredibles 2 Poster" src="/incredibles-2.png" />
+docs/guide/browser/locators.md:231:61    - Unknown word (assosiated)  -- element that has an assosiated label.
 docs/guide/browser/locators.md:587:11    - Unknown word (fullpath)    -- // path - fullpath to the screenshot
 docs/guide/browser/locators.md:599:4     - Unknown word (multilple)   -- If multilple elements match the selector
 docs/guide/browser/locators.md:68:47     - Unknown word (sensetive)  -- matched exactly: case-sensetive and whole-string. Disabled
@@ -106,7 +109,7 @@ docs/guide/mocking.md:85:46     - Unknown word (Testman)    -- test message', fr
 docs/guide/profiling-test-performance.md:185:4     - Unknown word (Speedscope)  -- - [Speedscope](https://www.speedscope
 docs/guide/profiling-test-performance.md:86:106    - Unknown word (heapprofile) -- test-runner-profile/*.heapprofile` files generated. See
 docs/guide/profiling-test-performance.md:86:67     - Unknown word (cpuprofile) -- test-runner-profile/*.cpuprofile` and `test-runner-profile
-docs/guide/reporters.md:471:72    - Unknown word (overriden)  -- folder, but can be overriden with `--outputFile`
+docs/guide/reporters.md:516:72    - Unknown word (overriden)  -- folder, but can be overriden with `--outputFile`
 docs/guide/test-context.md:194:17    - Unknown word (fixure)     -- // mark the fixure as "injected" to allow
 docs/guide/testing-types.md:120:20    - Unknown word (answr)      -- assertType<string>(answr) //
 docs/guide/testing-types.md:80:37     - Unknown word (typeargs)   -- expected" objects vs typeargs
@@ -347,7 +350,7 @@ packages/vitest/LICENSE.md:907:98    - Unknown word (Fabrício)       -- Govett,
 packages/vitest/LICENSE.md:953:13    - Unknown word (unjs)           -- Repository: unjs/mlly
 packages/vitest/LICENSE.md:957:17    - Unknown word (Pooya)          -- > Copyright (c) Pooya Parsa <pooya@pi0.io
 packages/vitest/LICENSE.md:957:23    - Unknown word (Parsa)          -- Copyright (c) Pooya Parsa <pooya@pi0.io>
-packages/vitest/package.json:167:6     - Unknown word (tinyexec)   -- "tinyexec": "^0.3.1",
+packages/vitest/package.json:168:6     - Unknown word (tinyexec)   -- "tinyexec": "^0.3.1",
 packages/vitest/src/constants.ts:1:28      - Unknown word (jsdocs)     -- changed, update also jsdocs and docs
 packages/vitest/src/create/browser/creator.ts:506:27    - Unknown word (ourselved)  -- TODO: can we do this ourselved?
 packages/vitest/src/integrations/chai/index.ts:1:7       - Unknown word (failes)     -- // CI failes only for this file,
@@ -356,16 +359,20 @@ packages/vitest/src/integrations/mock/date.ts:5:24      - Unknown word (Lauer)  
 packages/vitest/src/integrations/mock/timers.ts:161:85    - Unknown word (avaiable)   -- when it's not globally avaiable and it throws an internal
 packages/vitest/src/node/git.ts:78:40     - Unknown word (cdup)       -- rev-parse', '--show-cdup']
 packages/vitest/src/node/plugins/index.ts:67:12     - Unknown word (reassignable) -- // reassignable when running in worker
+packages/vitest/src/node/project.ts:178:27    - Unknown word (Overriden)  -- return this._serializeOverridenConfig()
 packages/vitest/src/node/reporters/json.ts:17:11     - Unknown word (Callsite)   -- interface Callsite {
-packages/vitest/src/node/reporters/junit.ts:86:24     - Unknown word (apos)       -- .replace(/'/g, '&apos;')
-packages/vitest/src/node/reporters/reported-tasks.ts:21:18     - Unknown word (assosiacted) -- * The project assosiacted with the test or suite
+packages/vitest/src/node/reporters/junit.ts:97:24     - Unknown word (apos)       -- .replace(/'/g, '&apos;')
+packages/vitest/src/node/reporters/reported-tasks.ts:20:18     - Unknown word (assosiacted) -- * The project assosiacted with the test or suite
+packages/vitest/src/node/reporters/summary.ts:250:28    - Unknown word (visibe)     -- Keep finished tests visibe in summary for a while
+packages/vitest/src/node/reporters/summary.ts:260:31    - Unknown word (immediatelly) -- Remove finished test immediatelly.
 packages/vitest/src/node/sequencers/BaseSequencer.ts:15:43     - Unknown word (sequelizers) -- be extended by other sequelizers
 packages/vitest/src/node/types/config.ts:816:96    - Unknown word (synchronus) -- debug a code with normal synchronus terminal console logging
 packages/vitest/src/node/types/config.ts:841:29    - Unknown word (alongisde)  -- Run typechecking tests alongisde regular tests.
 packages/vitest/src/node/viteLogger.ts:139:47    - Unknown word (analysizable) -- Vite for statically not analysizable dynamimc import
 packages/vitest/src/node/viteLogger.ts:139:60    - Unknown word (dynamimc)     -- statically not analysizable dynamimc import
 packages/vitest/src/node/watch-filter.ts:222:11    - Unknown word (cursort)    -- const cursortPos
-packages/vitest/src/node/workspace/resolveWorkspace.ts:133:17    - Unknown word (Workpace)   -- const relativeWorkpaceConfigPath = relative
+packages/vitest/src/node/workspace/resolveWorkspace.ts:159:25    - Unknown word (Workpace)   -- const relativeWorkpaceConfigPath = workspaceConfigPa
+packages/vitest/src/node/workspace/resolveWorkspace.ts:67:60     - Unknown word (workespace) -- resolve it relative to the workespace file or vite root (like
 packages/vitest/src/runtime/external-executor.ts:159:19    - Unknown word (Syntetic)   -- private wrapCoreSynteticModule(
 packages/vitest/src/runtime/external-executor.ts:287:16    - Unknown word (deadend)    -- const _deadend: never = type
 packages/vitest/src/runtime/utils.ts:57:8      - Unknown word (cnpm)       -- // cnpm
@@ -483,7 +490,7 @@ test/cli/test/stacktraces.test.ts:11:19     - Unknown word (warnining)  -- // To
 test/cli/test/stacktraces.test.ts:55:24     - Unknown word (framestack) -- // expect to print framestack of foo.js
 test/config/fixtures/browser-custom-html/browser-custom.test.ts:7:7       - Unknown word (importmap)  -- test('importmap is injected', () =>
 test/config/test/console-color.test.ts:17:41     - Unknown word (mtrue)      -- stdout).toContain('\x1B[33mtrue\x1B[39m\n')
-test/core/package.json:29:6      - Unknown word (sweetalert) -- "sweetalert2": "^11.6.16",
+test/core/package.json:31:6      - Unknown word (sweetalert) -- "sweetalert2": "^11.6.16",
 test/core/src/mocks/external/default-cjs.cjs:1:33      - Unknown word (pseudoesm)  -- exports = require('./cjs-pseudoesm.cjs')
 test/core/src/wasm/wasm-bindgen-no-cyclic/index_bg.js:105:49    - Unknown word (wbindgen)   -- assStringToWasm0(name, wasm.__wbindgen_malloc, wasm.__wbindgen
 test/core/src/wasm/wasm-bindgen-no-cyclic/package.json:5:15      - Unknown word (bindgen)    -- "The wasm-bindgen Developers"
@@ -491,10 +498,10 @@ test/core/test/expect.test.ts:213:61    - Unknown word (Tatooine)   -- Skywalker
 test/core/test/expect.test.ts:417:50    - Unknown word (inequal)    -- given iterator within inequal objects', () => {
 test/core/test/fixtures/timers.suite.ts:1456:41   - Unknown word (immediates) -- isChildProcess)('includes immediates and ticks', () => {
 test/core/test/isolate.test.ts:6:12      - Unknown word (fooooo)     -- expect(g.fooooo).toBe(undefined)
-test/core/test/jest-expect.test.ts:1265:168  - Unknown word (Atreides)   -- Jessica', lastName: 'Atreides', colors: ['red', 'green
-test/core/test/jest-expect.test.ts:1265:58   - Unknown word (Harkonnen)  -- Vladimir', lastName: 'Harkonnen', family: 'House Harkonnen
+test/core/test/jest-expect.test.ts:1271:168  - Unknown word (Atreides)   -- Jessica', lastName: 'Atreides', colors: ['red', 'green
+test/core/test/jest-expect.test.ts:1271:58   - Unknown word (Harkonnen)  -- Vladimir', lastName: 'Harkonnen', family: 'House Harkonnen
 test/core/test/mocked.test.ts:228:68    - Unknown word (expecetd)   -- async callback works as expecetd', async () => {
-test/core/test/sequencers.test.ts:30:10     - Unknown word (workspaced) -- function workspaced(files: string[]) {
+test/core/test/sequencers.test.ts:28:10     - Unknown word (workspaced) -- function workspaced(files: string[]) {
 test/core/test/snapshot-custom-serializer.test.ts:47:7      - Unknown word (throwning)  -- test('throwning snapshot', () => {
 test/core/test/test-extend.test.ts:358:11    - Unknown word (asynchonous) -- describe('asynchonous setup/teardown', ()
 test/core/test/utils.spec.ts:230:23    - Unknown word (Cashe)      -- test.each(modules)('Cashe for %s is reseted (
@@ -502,7 +509,7 @@ test/core/test/utils.spec.ts:230:39    - Unknown word (reseted)    -- modules)('
 test/core/test/vi.spec.ts:100:8     - Unknown word (hypotetical) -- // hypotetical library to be tested
 test/core/test/vi.spec.ts:110:27    - Unknown word (infered)     -- argument types are infered
 test/coverage-test/fixtures/configs/vitest.config.multi-transform.ts:28:15     - Unknown word (transfor)   -- const transforMode = `transformMode
-test/reporters/src/data.ts:154:23    - Unknown word (merror)     -- content: '[33merror[39m',
+test/reporters/src/data.ts:185:23    - Unknown word (merror)     -- content: '[33merror[39m',
 test/reporters/tests/html.test.ts:19:19     - Unknown word (Gzipeed)    -- const metaJsonGzipeed = fs.readFileSync(resolve
 test/typescript/test-d/test.test-d.ts:50:16     - Unknown word (wolk)       -- expectTypeOf({ wolk: 'true' }).toHaveProperty
 test/typescript/test/runner.test.ts:45:7      - Unknown word (typecheks)  -- it('typecheks with custom tsconfig
@@ -513,4 +520,3 @@ test/vite-node/test/sourcemap.test.ts:31:18     - Unknown word (AAAO)       -- m
 test/vite-node/test/sourcemap.test.ts:31:45     - Unknown word (SAAO)       -- SAAS,IAAI,KAAqB;AACvC,SAAO,qDAAqD;AAC9D;iHAAA'
 test/vite-node/test/sourcemap.test.ts:31:64     - Unknown word (HAAA)       -- AACvC,SAAO,qDAAqD;AAC9D;iHAAA',
 test/vite-node/test/sourcemap.test.ts:52:55     - Unknown word (isnot)      -- sourcemap in the string isnot removed', () => {
-test/workspaces/globalTest.ts:8:16      - Unknown word (Overriden)  -- globalSetupOverriden: boolean
