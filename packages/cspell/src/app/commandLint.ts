@@ -4,6 +4,7 @@ import { Option as CommanderOption } from 'commander';
 import * as App from './application.mjs';
 import type { LinterCliOptions } from './options.js';
 import { DEFAULT_CACHE_LOCATION } from './util/cache/index.js';
+import { canUseColor } from './util/canUseColor.js';
 import { CheckFailed } from './util/errors.js';
 import { unindent } from './util/unindent.js';
 
@@ -176,6 +177,7 @@ export function commandLint(prog: Command): Command {
             if (options.skipValidation) {
                 options.cache = false;
             }
+            options.color ??= canUseColor(options.color);
             App.parseApplicationFeatureFlags(options.flag);
             const { mustFindFiles, fileList, files, file } = options;
             const result = await App.lint(fileGlobs, options);
