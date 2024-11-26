@@ -201,6 +201,13 @@ export interface BaseOptions {
      * Flags are of the form key:value
      */
     flag?: string[];
+
+    /**
+     * Use color in the output.
+     * `true` to force color, `false` to turn off color.
+     * `undefined` to use color if the output is a TTY.
+     */
+    color?: boolean;
 }
 
 export interface LinterCliOptions extends LinterOptions {
