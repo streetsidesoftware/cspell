@@ -73,8 +73,8 @@ Options:
   --gitignore-root <path>      Prevent searching for .gitignore files past
                                root.
   --validate-directives        Validate in-document CSpell directives.
-  --no-color                   Turn off color.
   --color                      Force color.
+  --no-color                   Turn off color.
   --no-default-configuration   Do not load the default configuration and
                                dictionaries.
   --debug                      Output information useful for debugging
