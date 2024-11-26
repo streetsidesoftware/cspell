@@ -165,6 +165,7 @@ function isSlow(elapsedTmeMs: number | undefined): number | undefined {
 export interface ReporterOptions
     extends Pick<
         LinterCliOptions,
+        | 'color'
         | 'debug'
         | 'issues'
         | 'issuesSummaryReport'
@@ -195,6 +196,8 @@ export function getReporter(options: ReporterOptions, config?: CSpellReporterCon
         elapsedTimeMs: 0,
         perf: Object.create(null) as SpellCheckFilePerf,
     };
+    const noColor = options.color === false;
+    const forceColor = options.color === true;
     const uniqueIssues = config?.unique || false;
     const defaultIssueTemplate = options.wordsOnly
         ? templateIssueWordsOnly
@@ -217,13 +220,15 @@ export function getReporter(options: ReporterOptions, config?: CSpellReporterCon
 
     const console = config?.console || customConsole;
 
+    const colorLevel = noColor ? 0 : forceColor ? 2 : console.stdoutChannel.getColorLevel();
+
     const stdio: IO = {
         ...console.stdoutChannel,
-        chalk: new Chalk({ level: console.stdoutChannel.getColorLevel() }),
+        chalk: new Chalk({ level: colorLevel }),
     };
     const stderr: IO = {
         ...console.stderrChannel,
-        chalk: new Chalk({ level: console.stderrChannel.getColorLevel() }),
+        chalk: new Chalk({ level: colorLevel }),
     };
 
     const consoleError = (msg: string) => stderr.writeLine(msg);

@@ -665,8 +665,8 @@ exports[`Validate cli > app 'lint --help --issue-template' Expect Error: 'output
   "  --gitignore-root <path>      Prevent searching for .gitignore files past",
   "                               root.",
   "  --validate-directives        Validate in-document CSpell directives.",
-  "  --no-color                   Turn off color.",
   "  --color                      Force color.",
+  "  --no-color                   Turn off color.",
   "  --no-default-configuration   Do not load the default configuration and",
   "                               dictionaries.",
   "  --debug                      Output information useful for debugging",
@@ -809,8 +809,8 @@ exports[`Validate cli > app 'lint --help --verbose' Expect Error: 'outputHelp' 1
   "  --gitignore-root <path>      Prevent searching for .gitignore files past",
   "                               root.",
   "  --validate-directives        Validate in-document CSpell directives.",
-  "  --no-color                   Turn off color.",
   "  --color                      Force color.",
+  "  --no-color                   Turn off color.",
   "  --no-default-configuration   Do not load the default configuration and",
   "                               dictionaries.",
   "  --debug                      Output information useful for debugging",
@@ -946,8 +946,8 @@ exports[`Validate cli > app 'lint --help' Expect Error: 'outputHelp' 1`] = `
   "  --gitignore-root <path>      Prevent searching for .gitignore files past",
   "                               root.",
   "  --validate-directives        Validate in-document CSpell directives.",
-  "  --no-color                   Turn off color.",
   "  --color                      Force color.",
+  "  --no-color                   Turn off color.",
   "  --no-default-configuration   Do not load the default configuration and",
   "                               dictionaries.",
   "  --debug                      Output information useful for debugging",
@@ -1081,8 +1081,8 @@ exports[`Validate cli > app 'no-args' Expect Error: 'outputHelp' 1`] = `
   "  --gitignore-root <path>      Prevent searching for .gitignore files past",
   "                               root.",
   "  --validate-directives        Validate in-document CSpell directives.",
-  "  --no-color                   Turn off color.",
   "  --color                      Force color.",
+  "  --no-color                   Turn off color.",
   "  --no-default-configuration   Do not load the default configuration and",
   "                               dictionaries.",
   "  --debug                      Output information useful for debugging",
@@ -1670,8 +1670,8 @@ exports[`Validate cli > app 'trace help' Expect Error: 'outputHelp' 1`] = `
   "  --stdin                     Read words from stdin.",
   "  --all                       Show all dictionaries.",
   "  --only-found                Show only dictionaries that have the words.",
+  "  --color                     Force color.",
   "  --no-color                  Turn off color.",
-  "  --color                     Force color",
   "  --no-default-configuration  Do not load the default configuration and",
   "                              dictionaries.",
   "  -h, --help                  display help for command",
@@ -1732,6 +1732,27 @@ notinanydictionaryx - workspace*           ../../cspell-dict.txt
 "
 `;
 
+exports[`Validate cli > app 'typos --color' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app 'typos --color' Expect Error: [Function CheckFailed] 2`] = `
+"log	code.ts:1:26 - Unknown word (Orangges)
+log
+log	test.md:5:3 - Forbidden word (blacklist) fix: (denylist)
+log
+log	test.md:6:3 - Forbidden word (whitelist) fix: (allowlist)
+log
+log	test.md:7:3 - Forbidden word (rad) fix: (cool)
+log
+log	test.md:9:13 - Forbidden word (english) fix: (English)
+log
+log	test.md:9:38 - Forbidden word (Blacklisted) fix: (Denylisted)
+log
+error	CSpell: Files checked: 3, Issues found: 6 in 2 files.
+error"
+`;
+
+exports[`Validate cli > app 'typos --color' Expect Error: [Function CheckFailed] 3`] = `""`;
+
 exports[`Validate cli > app 'typos --issue-template' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli > app 'typos --issue-template' Expect Error: [Function CheckFailed] 2`] = `
@@ -1752,6 +1773,27 @@ error"
 `;
 
 exports[`Validate cli > app 'typos --issue-template' Expect Error: [Function CheckFailed] 3`] = `""`;
+
+exports[`Validate cli > app 'typos --no-color' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app 'typos --no-color' Expect Error: [Function CheckFailed] 2`] = `
+"log	code.ts:1:26 - Unknown word (Orangges)
+log
+log	test.md:5:3 - Forbidden word (blacklist) fix: (denylist)
+log
+log	test.md:6:3 - Forbidden word (whitelist) fix: (allowlist)
+log
+log	test.md:7:3 - Forbidden word (rad) fix: (cool)
+log
+log	test.md:9:13 - Forbidden word (english) fix: (English)
+log
+log	test.md:9:38 - Forbidden word (Blacklisted) fix: (Denylisted)
+log
+error	CSpell: Files checked: 3, Issues found: 6 in 2 files.
+error"
+`;
+
+exports[`Validate cli > app 'typos --no-color' Expect Error: [Function CheckFailed] 3`] = `""`;
 
 exports[`Validate cli > app 'typos --no-show-suggestions' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
@@ -3541,6 +3583,60 @@ hello - svelte               node_modules/@cspell/dict-svelte/dict/svelte.txt
 hello - swift                node_modules/@cspell/dict-swift/swift.txt.gz
 hello - terraform            node_modules/@cspell/.../dict/terraform.txt
 hello - typescript           node_modules/@cspell/.../dict/typescript.txt
+hello - web-services*        node_modules/@cspell/.../dict/webServices.txt
+hello - workspace*           ../../cspell-dict.txt
+"
+`;
+
+exports[`Validate cli > app success 'trace hello --color' run with [ 'trace', 'hello', '--color' ] 1`] = `[]`;
+
+exports[`Validate cli > app success 'trace hello --color' run with [ 'trace', 'hello', '--color' ] 2`] = `
+"[1m[4mWord[24m[22m  [1m[4mF[24m[22m [1m[4mDictionary[24m[22m           [1m[4mDictionary Location[24m[22m
+[32mhello[39m [2m-[22m [93m[flagWords]*[39m         [37mFrom Settings \`flagWords\`[39m
+[32mhello[39m [2m-[22m [93m[ignoreWords]*[39m       [37mFrom Settings \`ignoreWords\`[39m
+[32mhello[39m [2m-[22m [93m[suggestWords]*[39m      [37mFrom Settings \`suggestWords\`[39m
+[32mhello[39m [2m-[22m [93m[words]*[39m             [37mFrom Settings \`words\`[39m
+[32mhello[39m [2m-[22m [93maws*[39m                 [37mnode_modules/@cspell/dict-aws/dict/aws.txt[39m
+[32mhello[39m [2m-[22m [93mcompanies*[39m           [37mnode_modules/@cspell/.../dict/companies.txt[39m
+[32mhello[39m [2m-[22m [93mcomputing-acronyms*[39m  [37mnode_modules/.../dict/computing-acronyms.txt[39m
+[32mhello[39m [97m*[39m [38;5;179mcpp [39m                 [37mnode_modules/@cspell/dict-cpp/dict/cpp.txt[39m
+[32mhello[39m [97m*[39m [93mcryptocurrencies*[39m    [37mnode_modules/@cspell/.../dict/cryptocurrencies.txt[39m
+[32mhello[39m [97m*[39m [93men_us*[39m               [37mnode_modules/@cspell/dict-en_us/en_US.trie.gz[39m
+[32mhello[39m [2m-[22m [93men-common-misspelli*[39m [37mnode_modules/@cspell/.../dict-en.yaml[39m
+[32mhello[39m [97m*[39m [38;5;179men-gb [39m               [37mnode_modules/@cspell/dict-en-gb/en_GB.trie.gz[39m
+[32mhello[39m [2m-[22m [93mfiletypes*[39m           [37mnode_modules/.../dict-filetypes/filetypes.txt.gz[39m
+[32mhello[39m [97m*[39m [38;5;179mgolang [39m              [37mnode_modules/@cspell/dict-golang/dict/go.txt[39m
+[32mhello[39m [97m*[39m [38;5;179mnode [39m                [37mnode_modules/@cspell/dict-node/dict/node.txt[39m
+[32mhello[39m [2m-[22m [93mpublic-licenses*[39m     [37mnode_modules/@cspell/.../public-licenses.txt.gz[39m
+[32mhello[39m [2m-[22m [93msoftware-term-sugge*[39m [37mnode_modules/@cspell/.../cspell-corrections.yaml[39m
+[32mhello[39m [2m-[22m [93msoftwareTerms*[39m       [37mnode_modules/@cspell/.../dict/softwareTerms.txt[39m
+[32mhello[39m [2m-[22m [93mweb-services*[39m        [37mnode_modules/@cspell/.../dict/webServices.txt[39m
+[32mhello[39m [2m-[22m [93mworkspace*[39m           [37m../../cspell-dict.txt[39m
+"
+`;
+
+exports[`Validate cli > app success 'trace hello --no-color' run with [ 'trace', 'hello', '--no-color' ] 1`] = `[]`;
+
+exports[`Validate cli > app success 'trace hello --no-color' run with [ 'trace', 'hello', '--no-color' ] 2`] = `
+"Word  F Dictionary           Dictionary Location
+hello - [flagWords]*         From Settings \`flagWords\`
+hello - [ignoreWords]*       From Settings \`ignoreWords\`
+hello - [suggestWords]*      From Settings \`suggestWords\`
+hello - [words]*             From Settings \`words\`
+hello - aws*                 node_modules/@cspell/dict-aws/dict/aws.txt
+hello - companies*           node_modules/@cspell/.../dict/companies.txt
+hello - computing-acronyms*  node_modules/.../dict/computing-acronyms.txt
+hello * cpp                  node_modules/@cspell/dict-cpp/dict/cpp.txt
+hello * cryptocurrencies*    node_modules/@cspell/.../dict/cryptocurrencies.txt
+hello * en_us*               node_modules/@cspell/dict-en_us/en_US.trie.gz
+hello - en-common-misspelli* node_modules/@cspell/.../dict-en.yaml
+hello * en-gb                node_modules/@cspell/dict-en-gb/en_GB.trie.gz
+hello - filetypes*           node_modules/.../dict-filetypes/filetypes.txt.gz
+hello * golang               node_modules/@cspell/dict-golang/dict/go.txt
+hello * node                 node_modules/@cspell/dict-node/dict/node.txt
+hello - public-licenses*     node_modules/@cspell/.../public-licenses.txt.gz
+hello - software-term-sugge* node_modules/@cspell/.../cspell-corrections.yaml
+hello - softwareTerms*       node_modules/@cspell/.../dict/softwareTerms.txt
 hello - web-services*        node_modules/@cspell/.../dict/webServices.txt
 hello - workspace*           ../../cspell-dict.txt
 "

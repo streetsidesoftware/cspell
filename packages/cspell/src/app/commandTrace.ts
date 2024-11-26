@@ -6,6 +6,7 @@ import { console } from './console.js';
 import { isDictionaryPathFormat } from './emitters/DictionaryPathFormat.js';
 import { emitTraceResults } from './emitters/traceEmitter.js';
 import type { TraceOptions } from './options.js';
+import { canUseColor } from './util/canUseColor.js';
 import { CheckFailed } from './util/errors.js';
 
 // interface InitOptions extends Options {}
@@ -44,8 +45,8 @@ export function commandTrace(prog: Command): Command {
         .option('--stdin', 'Read words from stdin.')
         .option('--all', 'Show all dictionaries.')
         .addOption(new CommanderOption('--only-found', 'Show only dictionaries that have the words.').conflicts('all'))
-        .option('--no-color', 'Turn off color.')
-        .option('--color', 'Force color')
+        .addOption(new CommanderOption('--color', 'Force color.').default(undefined))
+        .addOption(new CommanderOption('--no-color', 'Turn off color.').default(undefined))
         .addOption(
             new CommanderOption(
                 '--default-configuration',
@@ -67,6 +68,7 @@ export function commandTrace(prog: Command): Command {
                 : 'long';
 
             let prefix = '';
+            const useColor = canUseColor(options.color);
             for await (const results of App.trace(words, options)) {
                 const byWord = groupBy(results, (r) => r.word);
                 for (const split of results.splits) {
@@ -77,6 +79,7 @@ export function commandTrace(prog: Command): Command {
                         dictionaryPathFormat,
                         prefix,
                         showWordFound: results.splits.length > 1,
+                        color: useColor,
                     });
                     prefix = '\n';
                     numFound += results.reduce((n, r) => n + (r.found ? 1 : 0), 0);

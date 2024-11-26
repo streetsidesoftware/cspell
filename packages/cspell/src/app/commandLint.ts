@@ -4,6 +4,7 @@ import { Option as CommanderOption } from 'commander';
 import * as App from './application.mjs';
 import type { LinterCliOptions } from './options.js';
 import { DEFAULT_CACHE_LOCATION } from './util/cache/index.js';
+import { canUseColor } from './util/canUseColor.js';
 import { CheckFailed } from './util/errors.js';
 import { unindent } from './util/unindent.js';
 
@@ -149,8 +150,8 @@ export function commandLint(prog: Command): Command {
         .option('--gitignore-root <path>', 'Prevent searching for .gitignore files past root.', collect)
         .option('--validate-directives', 'Validate in-document CSpell directives.')
         .addOption(crOpt('--no-validate-directives', 'Do not validate in-document CSpell directives.').hideHelp())
-        .option('--no-color', 'Turn off color.')
-        .option('--color', 'Force color.')
+        .addOption(crOpt('--color', 'Force color.').default(undefined))
+        .addOption(crOpt('--no-color', 'Turn off color.').default(undefined))
         .addOption(crOpt('--default-configuration', 'Load the default configuration and dictionaries.').hideHelp())
         .addOption(crOpt('--no-default-configuration', 'Do not load the default configuration and dictionaries.'))
         .option('--debug', 'Output information useful for debugging cspell.json files.')
@@ -176,6 +177,7 @@ export function commandLint(prog: Command): Command {
             if (options.skipValidation) {
                 options.cache = false;
             }
+            options.color ??= canUseColor(options.color);
             App.parseApplicationFeatureFlags(options.flag);
             const { mustFindFiles, fileList, files, file } = options;
             const result = await App.lint(fileGlobs, options);
