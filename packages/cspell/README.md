@@ -182,8 +182,8 @@ Options:
   --gitignore-root <path>      Prevent searching for .gitignore files past
                                root.
   --validate-directives        Validate in-document CSpell directives.
-  --no-color                   Turn off color.
   --color                      Force color.
+  --no-color                   Turn off color.
   --no-default-configuration   Do not load the default configuration and
                                dictionaries.
   --debug                      Output information useful for debugging
@@ -273,8 +273,8 @@ Options:
   --stdin                     Read words from stdin.
   --all                       Show all dictionaries.
   --only-found                Show only dictionaries that have the words.
+  --color                     Force color.
   --no-color                  Turn off color.
-  --color                     Force color
   --no-default-configuration  Do not load the default configuration and
                               dictionaries.
   -h, --help                  display help for command
