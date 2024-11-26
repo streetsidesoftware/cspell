@@ -5,56 +5,32 @@
 export type { FileDescriptor } from './file-entry-cache.mjs';
 import { mkdirSync } from 'node:fs';
 import * as path from 'node:path';
-import { isMainThread } from 'node:worker_threads';
 
 import type { FileEntryCache as FecFileEntryCache } from './file-entry-cache.mjs';
-import * as fec from './file-entry-cache.mjs';
+import { createFromFile as fecCreateFromFile } from './file-entry-cache.mjs';
 
-export type FileEntryCache = FecFileEntryCache;
+export type FileEntryCache = Pick<FecFileEntryCache, 'reconcile' | 'destroy' | 'getFileDescriptor'>;
 
 export function createFromFile(pathToCache: string, useCheckSum: boolean, useRelative: boolean): FileEntryCache {
     const absPathToCache = path.resolve(pathToCache);
     const relDir = path.dirname(absPathToCache);
     mkdirSync(relDir, { recursive: true });
-    const create = wrap(() => fec.createFromFile(absPathToCache, useCheckSum));
-    const feCache = create();
+    const feCache = fecCreateFromFile(absPathToCache, { useCheckSum, currentWorkingDirectory: relDir });
     const cacheWrapper: FileEntryCache = {
-        get cache() {
-            return feCache.cache;
-        },
-        getHash(buffer: Buffer): string {
-            return feCache.getHash(buffer);
-        },
-        hasFileChanged: wrap((cwd, file: string) => {
-            // console.log(file);
-            return feCache.hasFileChanged(resolveFile(cwd, file));
-        }),
-        analyzeFiles: wrap((cwd, files?: string[]) => {
-            return feCache.analyzeFiles(resolveFiles(cwd, files));
-        }),
-
-        getFileDescriptor: wrap((cwd, file: string) => {
-            return feCache.getFileDescriptor(resolveFile(cwd, file));
-        }),
-        getUpdatedFiles: wrap((cwd, files?: string[]) => {
-            return feCache.getUpdatedFiles(resolveFiles(cwd, files));
-        }),
-        normalizeEntries: wrap((cwd, files?: string[]) => {
-            return feCache.normalizeEntries(resolveFiles(cwd, files));
-        }),
-        removeEntry: wrap((cwd, file: string) => {
-            // console.log(file);
-            return feCache.removeEntry(resolveFile(cwd, file));
-        }),
-        deleteCacheFile(): void {
-            feCache.deleteCacheFile();
+        getFileDescriptor: (file: string) => {
+            const r = resolveFile(process.cwd(), file);
+            const d = feCache.getFileDescriptor(r, { useCheckSum, currentWorkingDirectory: relDir });
+            // if (d.changed) {
+            //     console.log(`File changed: ${r} %o`, d);
+            // }
+            return d;
         },
         destroy(): void {
             feCache.destroy();
         },
-        reconcile: wrap((_cwd, noPrune?: boolean) => {
-            feCache.reconcile(noPrune);
-        }),
+        reconcile: () => {
+            feCache.reconcile();
+        },
     };
 
     return cacheWrapper;
@@ -63,22 +39,6 @@ export function createFromFile(pathToCache: string, useCheckSum: boolean, useRel
         if (!useRelative) return normalizePath(file);
         const r = path.relative(relDir, path.resolve(cwd, file));
         return normalizePath(r);
-    }
-
-    function resolveFiles(cwd: string, files: string[] | undefined): string[] | undefined {
-        return files?.map((file) => resolveFile(cwd, file));
-    }
-
-    function wrap<P extends unknown[], T>(fn: (cwd: string, ...params: P) => T): (...params: P) => T {
-        return (...params: P) => {
-            const cwd = process.cwd();
-            try {
-                isMainThread && process.chdir(relDir);
-                return fn(cwd, ...params);
-            } finally {
-                isMainThread && process.chdir(cwd);
-            }
-        };
     }
 }
 
