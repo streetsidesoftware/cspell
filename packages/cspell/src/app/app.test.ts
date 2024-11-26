@@ -193,6 +193,8 @@ describe('Validate cli', () => {
         ${'Explicit file://'}                          | ${['-r', pathFix('misc'), 'file://star-not.md']}                                               | ${undefined}       | ${true}  | ${false} | ${false}
         ${'Explicit not found file://'}                | ${['-r', pathFix('misc'), 'file://not-fond.md']}                                               | ${app.CheckFailed} | ${true}  | ${false} | ${false}
         ${'typos'}                                     | ${['-r', pathFix('features/typos'), '--no-progress', '.']}                                     | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
+        ${'typos --color'}                             | ${['-r', pathFix('features/typos'), '--no-progress', '--color', '.']}                          | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
+        ${'typos --no-color'}                          | ${['-r', pathFix('features/typos'), '--no-progress', '--no-color', '.']}                       | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
         ${'typos --no-show-suggestions'}               | ${['-r', pathFix('features/typos'), '--no-progress', '--no-show-suggestions', '.']}            | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
         ${'typos --show-suggestions'}                  | ${['-r', pathFix('features/typos'), '--no-progress', '--show-suggestions', '**']}              | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
         ${'typos --issue-template'}                    | ${['-r', pathFix('features/typos'), '--no-progress', '.', '--issue-template', '$text']}        | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
@@ -272,6 +274,8 @@ describe('Validate cli', () => {
     test.each`
         msg                           | testArgs
         ${'trace hello --all'}        | ${['trace', 'hello', '--all']}
+        ${'trace hello --color'}      | ${['trace', 'hello', '--color']}
+        ${'trace hello --no-color'}   | ${['trace', 'hello', '--no-color']}
         ${'trace hello --only-found'} | ${['trace', 'hello', '--only-found']}
         ${'trace café'}               | ${['trace', 'café'.normalize('NFD')]}
         ${'trace hello'}              | ${['trace', '--locale=en-gb', 'hello']}

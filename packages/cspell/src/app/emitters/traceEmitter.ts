@@ -21,6 +21,7 @@ export interface EmitTraceOptions {
     iPath?: PathInterface;
     prefix?: string;
     showWordFound?: boolean;
+    color?: boolean | undefined;
 }
 
 const maxWidth = 120;
@@ -47,6 +48,11 @@ export function calcTraceResultsReport(
     results: TraceResult[],
     options: EmitTraceOptions,
 ): { table: string; errors: string } {
+    if (options.color === true) {
+        chalk.level = 2;
+    } else if (options.color === false) {
+        chalk.level = 0;
+    }
     const col = new Intl.Collator();
     results.sort((a, b) => col.compare(a.dictName, b.dictName));
 

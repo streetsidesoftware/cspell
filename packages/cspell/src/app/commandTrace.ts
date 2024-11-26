@@ -44,8 +44,8 @@ export function commandTrace(prog: Command): Command {
         .option('--stdin', 'Read words from stdin.')
         .option('--all', 'Show all dictionaries.')
         .addOption(new CommanderOption('--only-found', 'Show only dictionaries that have the words.').conflicts('all'))
-        .option('--no-color', 'Turn off color.')
-        .option('--color', 'Force color')
+        .addOption(new CommanderOption('--color', 'Force color.').default(undefined))
+        .addOption(new CommanderOption('--no-color', 'Turn off color.').default(undefined))
         .addOption(
             new CommanderOption(
                 '--default-configuration',
@@ -77,6 +77,7 @@ export function commandTrace(prog: Command): Command {
                         dictionaryPathFormat,
                         prefix,
                         showWordFound: results.splits.length > 1,
+                        color: options.color,
                     });
                     prefix = '\n';
                     numFound += results.reduce((n, r) => n + (r.found ? 1 : 0), 0);
