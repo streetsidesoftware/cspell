@@ -11,6 +11,8 @@ describe('lineValidatorFactory', () => {
         word                     | expected
         ${'one'}                 | ${[]}
         ${'three etc.'}          | ${[]}
+        ${'flip-flop'}           | ${[oc({ text: 'flip-flop', isFlagged: true })]}
+        ${'one flip-flop.'}      | ${[oc({ text: 'flip-flop', isFlagged: true })]}
         ${'one two three etc'}   | ${[oc({ text: 'etc' })]}
         ${'three four five one'} | ${[oc({ text: 'five' })]}
         ${'lion'}                | ${[oc({ text: 'lion', suggestionsEx: [oc({ word: 'tiger', isPreferred: true })] })]}
@@ -26,8 +28,8 @@ let dict: SpellingDictionary | undefined;
 
 function getDict(): SpellingDictionary {
     if (dict) return dict;
-    const words = 'one two three four etc. a.b.c'.split(/\s/g);
-    const suggestions = 'apple:pear lion:tiger'.split(/\s/g);
+    const words = 'one two three four etc. a.b.c !flip-flop'.split(' ');
+    const suggestions = 'apple:pear lion:tiger'.split(' ');
     const d = createCollection(
         [
             createSpellingDictionary(words, 'words', 'tests'),

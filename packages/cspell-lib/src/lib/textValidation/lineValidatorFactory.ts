@@ -272,6 +272,29 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
             });
         }
 
+        function checkForFlaggedWord(possibleWord: TextOffsetRO): ValidationIssue | undefined {
+            if (isWordFlagged(possibleWord)) {
+                const vr: ValidationIssueRO = {
+                    ...possibleWord,
+                    line: lineSegment.line,
+                    isFlagged: true,
+                };
+                return vr;
+            }
+            if (possibleWord.text.endsWith('.')) {
+                const pw = { ...possibleWord, text: possibleWord.text.slice(0, -1) };
+                if (isWordFlagged(pw)) {
+                    const vr: ValidationIssueRO = {
+                        ...pw,
+                        line: lineSegment.line,
+                        isFlagged: true,
+                    };
+                    return vr;
+                }
+            }
+            return undefined;
+        }
+
         function checkPossibleWords(possibleWord: TextOffsetRO): ValidationIssue[] {
             const known = setOfKnownIssues.get(possibleWord.text);
             if (known) {
@@ -285,14 +308,8 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
         }
 
         function _checkPossibleWords(possibleWord: TextOffsetRO): ValidationIssue[] {
-            if (isWordFlagged(possibleWord)) {
-                const vr: ValidationIssueRO = {
-                    ...possibleWord,
-                    line: lineSegment.line,
-                    isFlagged: true,
-                };
-                return [vr];
-            }
+            const flagged = checkForFlaggedWord(possibleWord);
+            if (flagged) return [flagged];
 
             const mismatches: ValidationIssue[] = [];
             for (const wo of extractWordsFromTextOffset(possibleWord)) {
