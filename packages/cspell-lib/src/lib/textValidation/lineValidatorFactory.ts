@@ -159,7 +159,7 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
         const line = lineSegment.line;
 
         function isWordTooShort(word: TextOffsetRO, ignoreSuffix = false): boolean {
-            if (word.text.length >= minWordLength) return false;
+            if (word.text.length >= minWordLength * 2 || [...word.text].length >= minWordLength) return false;
             const offset = word.offset - line.offset;
             assert.equal(line.text.slice(offset, offset + word.text.length), word.text);
             const prefix = [...line.text.slice(Math.max(0, offset - 2), offset)];
