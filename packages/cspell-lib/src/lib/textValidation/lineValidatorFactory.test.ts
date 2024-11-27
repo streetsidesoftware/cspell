@@ -7,6 +7,8 @@ import { textValidatorFactory } from './lineValidatorFactory.js';
 const oc = <T>(obj: T) => expect.objectContaining(obj);
 
 describe('lineValidatorFactory', () => {
+    // cspell:ignore 𐀀𐃘
+
     test.each`
         word                     | expected
         ${'one'}                 | ${[]}
