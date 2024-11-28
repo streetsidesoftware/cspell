@@ -13,14 +13,14 @@ describe('isRandomString', () => {
         ${'Hello'}                                                                                                | ${false}
         ${'expectCategorizeStringStrToBeExpected'}                                                                | ${false}
         ${'expect categorizeString str .toBe expected'}                                                           | ${false}
-        ${'H4sIAAAAAAAAA72d3ZLjNpK276X6O6ztFX4l+WxnPN5whD3jsGd3DzomHGqJVa21StLqp9uOibn3LwgIKiD5AkyQ7Dpyu0QmkmQy'} | ${true}
+        ${'H4sIAAAAAAAAA72d3ZLjNpK276X6O6ztFX4l_WxnPN5whD3jsGd3DzomHGqJVa21StLqp9uOibn3LwgIKiD5AkyQ7Dpyu0QmkmQy'} | ${true}
         ${'izfrNTmQLnfsLzi2Wb9xPz2Qj9fQYGgeug3N2MkDuVHwpPcgkhHkJgCQuuvT+qZI'}                                     | ${true}
         ${'sampleOldFalsePositivesBase64'}                                                                        | ${false}
         ${'residencyStandard2DMultisampleBlockShape'}                                                             | ${false}
         ${'myNameSpace1/MyNameSpace2/mynamespace3/myserviceName'}                                                 | ${false}
         ${'PxTransform12transformInvERKS0_'}                                                                      | ${false}
         ${'_ZNK5physx11PxTransform12transformInvERKNS_6PxVec3E'}                                                  | ${false}
-        ${'_ZNK5physx11PxERKNS_6PxVec3E'}                                                                         | ${true}
+        ${'_ZNK5physx11PxERKNS_6PxVec3E'}                                                                         | ${false}
     `('isRandomString $str', ({ str, expected }) => {
         expect(isRandomString(str)).toBe(expected);
     });
@@ -28,22 +28,23 @@ describe('isRandomString', () => {
 
     // cspell:disable
     test.each`
-        str                                                                                                       | expected
-        ${''}                                                                                                     | ${0}
-        ${'hello'}                                                                                                | ${0.2}
-        ${'café'}                                                                                                 | ${0.25}
-        ${'café'.normalize('NFD')}                                                                                | ${0.2}
-        ${'Hello'}                                                                                                | ${0.4}
-        ${'expectCategorizeStringStrToBeExpected'}                                                                | ${0.35}
-        ${'expect categorizeString str .toBe expected'}                                                           | ${0.33}
-        ${'H4sIAAAAAAAAA72d3ZLjNpK276X6O6ztFX4l+WxnPN5whD3jsGd3DzomHGqJVa21StLqp9uOibn3LwgIKiD5AkyQ7Dpyu0QmkmQy'} | ${0.66}
-        ${'izfrNTmQLnfsLzi2Wb9xPz2Qj9fQYGgeug3N2MkDuVHwpPcgkhHkJgCQuuvT+qZI'}                                     | ${0.65}
-        ${'sampleOldFalsePositivesBase64'}                                                                        | ${0.34}
-        ${'residencyStandard2DMultisampleBlockShape'}                                                             | ${0.25}
-        ${'myNameSpace1/MyNameSpace2/mynamespace3/myserviceName'}                                                 | ${0.4}
-        ${'PxTransform12transformInvERKS0_'}                                                                      | ${0.35}
-        ${'_ZNK5physx11PxTransform12transformInvERKNS_6PxVec3E'}                                                  | ${0.43}
-        ${'_ZNK5physx11PxERKNS_6PxVec3E'}                                                                         | ${0.57}
+        str                                                                                                      | expected
+        ${''}                                                                                                    | ${0}
+        ${'hello'}                                                                                               | ${0.2}
+        ${'café'}                                                                                                | ${0.25}
+        ${'café'.normalize('NFD')}                                                                               | ${0.2}
+        ${'Hello'}                                                                                               | ${0.4}
+        ${'expectCategorizeStringStrToBeExpected'}                                                               | ${0.35}
+        ${'expect categorizeString str .toBe expected'}                                                          | ${0.33}
+        ${'H4sIAAAAAAAAA72d3ZLjNpK276X6O6ztFX4lWxnPN5whD3jsGd3DzomHGqJVa21StLqp9uOibn3LwgIKiD5AkyQ7Dpyu0QmkmQy'} | ${0.65}
+        ${'izfrNTmQLnfsLzi2Wb9xPz2Qj9fQYGgeug3N2MkDuVHwpPcgkhHkJgCQuuvT+qZI'}                                    | ${0.65}
+        ${'sampleOldFalsePositivesBase64'}                                                                       | ${0.34}
+        ${'residencyStandard2DMultisampleBlockShape'}                                                            | ${0.25}
+        ${'myNameSpace1/MyNameSpace2/mynamespace3/myserviceName'}                                                | ${0.4}
+        ${'PxTransform12transformInvERKS0_'}                                                                     | ${0.32}
+        ${'_ZNK5physx11PxTransform12transformInvERKNS_6PxVec3E'}                                                 | ${0.39}
+        ${'_ZNK5physx11PxERKNS_6PxVec3E'}                                                                        | ${0.5}
+        ${'To_EntityDto_And_To_DrivedEntityDto'}                                                                 | ${0.45}
     `('isRandomString $str', ({ str, expected }) => {
         expect(scoreRandomString(str))
             .greaterThanOrEqual(expected)
