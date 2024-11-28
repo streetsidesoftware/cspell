@@ -3,6 +3,7 @@ import * as Path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { Octokit } from '@octokit/rest';
+import { eraseEndLine } from 'ansi-escapes';
 import chalk from 'chalk';
 import { simpleGit } from 'simple-git';
 
@@ -85,7 +86,11 @@ export async function checkoutRepositoryAsync(
     if (!fs.existsSync(path)) {
         try {
             const repoInfo = await fetchRepositoryInfoForRepo(url);
-            const c = await cloneRepo(logger, url, path, !branch || branch === repoInfo.defaultBranch);
+            const cloneOptions: CloneOptions = {
+                commit: commit || branch || repoInfo.defaultBranch,
+                depth: 1,
+            };
+            const c = await cloneRepoFast(logger, url, path, cloneOptions);
             if (!c) {
                 return false;
             }
@@ -108,7 +113,7 @@ export async function checkoutRepositoryAsync(
     return true;
 }
 
-async function cloneRepo(
+async function _cloneRepo(
     { log, error }: Logger,
     url: string,
     path: string,
@@ -186,4 +191,55 @@ function getOctokit(auth?: string | undefined): Octokit {
     auth = auth || process.env['GITHUB_TOKEN'] || undefined;
     const options = auth ? { auth } : undefined;
     return new Octokit(options);
+}
+
+interface CloneOptions {
+    commit: string;
+    depth?: number;
+}
+
+/**
+ * Clone a repository
+ * ```sh
+ * mkdir <repo-name>
+ * cd <repo-name>
+ * git init
+ * git remote add origin <repository-url>
+ * git fetch origin <commit-hash> --depth=1
+ * git checkout FETCH_HEAD
+ * ```
+ * @param logger
+ * @param url
+ * @param path
+ * @param options
+ * @returns
+ */
+async function cloneRepoFast(logger: Logger, url: string, path: string, options: CloneOptions): Promise<boolean> {
+    const { log, error } = logger;
+    const stdOut = logger.output || log;
+    log(`Cloning ${url}`);
+    await mkdirp(path);
+    const gitOptions = [];
+    if (options.depth) {
+        gitOptions.push(`--depth=${options.depth}`);
+    }
+    try {
+        const git = simpleGit({
+            baseDir: path,
+            progress({ method, stage, progress }) {
+                stdOut(`\r${method} ${stage} stage ${progress}% complete${eraseEndLine}`);
+            },
+        });
+        log(`Init ${url}`);
+        await git.init().addRemote('origin', url);
+        log(`Fetch ${url}`);
+        await git.fetch('origin', options.commit, gitOptions);
+        log(`Checkout ${url}`);
+        await git.checkout('FETCH_HEAD');
+        log(`Cloned: ${url} with options: ${gitOptions.join(' ')}`);
+    } catch (e) {
+        error(e);
+        return false;
+    }
+    return true;
 }

@@ -41,15 +41,44 @@ export function prefix(pfx: string, text: string): string {
     return text
         .split('\n')
         .map((line) => pfx + line)
-        .join('\n');
+        .join('\n')
+        .replaceAll('\r\n', '\n')
+        .replaceAll('\r', '\r' + pfx);
+}
+
+let lastPrefix = '';
+let pending = false;
+
+function clearLastPrefix() {
+    if (pending) {
+        process.stdout.write('\r\n');
+        pending = false;
+    }
+    lastPrefix = '';
+}
+
+function setLastPrefix(pfx: string) {
+    if (pending && lastPrefix !== pfx) {
+        process.stdout.write('\r\n');
+    }
+    pending = true;
+    lastPrefix = pfx;
+}
+
+export function outputWithPrefix(pfx: string, text: string, ...params: unknown[]): void {
+    setLastPrefix(pfx);
+    const s = text ? format(text, ...params) : '';
+    process.stdout.write(prefix(pfx, s).replaceAll('\n', '\r\n'));
 }
 
 export function logWithPrefix(pfx: string, text: string, ...params: unknown[]): void {
+    clearLastPrefix();
     const s = text ? format(text, ...params) : '';
     console.log(prefix(pfx, s));
 }
 
 export function errorWithPrefix(pfx: string, text: string, ...params: unknown[]): void {
+    clearLastPrefix();
     const s = text ? format(text, ...params) : '';
     console.error(prefix(pfx, red(s)));
 }
