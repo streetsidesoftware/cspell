@@ -7,20 +7,21 @@ import { textValidatorFactory } from './lineValidatorFactory.js';
 const oc = <T>(obj: T) => expect.objectContaining(obj);
 
 describe('lineValidatorFactory', () => {
-    // cspell:ignore 𐀀𐃘 izfrNTmQLnfsLzi2Wb9x izfr Lnfs
+    // cspell:ignore 𐀀𐃘 izfrNTmQLnfsLzi2Wb9x izfr Lnfs Drived
 
     test.each`
-        text                                 | expected
-        ${'one'}                             | ${[]}
-        ${'three etc.'}                      | ${[]}
-        ${'three etc. 𐀀𐃘'}                   | ${[]}
-        ${'three etc. izfrNTmQLnfsLzi2Wb9x'} | ${[]}
-        ${'three etc. izfrNTmQLnfsLzi2Wb9'}  | ${[oc({ text: 'izfr' }), oc({ text: 'Lnfs' }), oc({ text: 'Lzi' })]}
-        ${'flip-flop'}                       | ${[oc({ text: 'flip-flop', isFlagged: true })]}
-        ${'one flip-flop.'}                  | ${[oc({ text: 'flip-flop', isFlagged: true })]}
-        ${'one two three etc'}               | ${[oc({ text: 'etc' })]}
-        ${'three four five one'}             | ${[oc({ text: 'five' })]}
-        ${'lion'}                            | ${[oc({ text: 'lion', suggestionsEx: [oc({ word: 'tiger', isPreferred: true })] })]}
+        text                                     | expected
+        ${'one'}                                 | ${[]}
+        ${'three etc.'}                          | ${[]}
+        ${'three etc. 𐀀𐃘'}                       | ${[]}
+        ${'three etc. izfrNTmQLnfsLzi2Wb9x'}     | ${[]}
+        ${'To_EntityDto_And_To_DrivedEntityDto'} | ${[oc({ text: 'Drived' })]}
+        ${'three etc. izfrNTmQLnfsLzi2Wb9'}      | ${[oc({ text: 'izfr' }), oc({ text: 'Lnfs' }), oc({ text: 'Lzi' })]}
+        ${'flip-flop'}                           | ${[oc({ text: 'flip-flop', isFlagged: true })]}
+        ${'one flip-flop.'}                      | ${[oc({ text: 'flip-flop', isFlagged: true })]}
+        ${'one two three etc'}                   | ${[oc({ text: 'etc' })]}
+        ${'three four five one'}                 | ${[oc({ text: 'five' })]}
+        ${'lion'}                                | ${[oc({ text: 'lion', suggestionsEx: [oc({ word: 'tiger', isPreferred: true })] })]}
     `('textValidatorFactory $text', ({ text, expected }) => {
         const dict = getDict();
         const tv = textValidatorFactory(dict, { ignoreCase: true, minWordLength: 3, minRandomLength: 20 });
@@ -33,7 +34,7 @@ let dict: SpellingDictionary | undefined;
 
 function getDict(): SpellingDictionary {
     if (dict) return dict;
-    const words = 'one two three four etc. a.b.c !flip-flop'.split(' ');
+    const words = 'one two three four etc. a.b.c !flip-flop To EntityDto And To EntityDto'.split(' ');
     const suggestions = 'apple:pear lion:tiger'.split(' ');
     const d = createCollection(
         [
