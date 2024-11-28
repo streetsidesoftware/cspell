@@ -27,6 +27,7 @@ export function categorizeString(s: string): string {
         .replaceAll(/\p{Lu}+/gu, '2')
         .replaceAll(/\p{Ll}+/gu, '1')
         .replaceAll(/\p{M}/gu, '4')
+        .replaceAll('_', '')
         .replaceAll(/[-_.']+/g, '3');
     return n;
 }
