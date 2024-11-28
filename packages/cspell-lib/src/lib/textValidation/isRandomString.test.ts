@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { categorizeString, isRandomString } from './isRandomString.js';
+import { categorizeString, isRandomString, scoreRandomString } from './isRandomString.js';
 
 describe('isRandomString', () => {
     // cspell:disable
@@ -23,6 +23,31 @@ describe('isRandomString', () => {
         ${'_ZNK5physx11PxERKNS_6PxVec3E'}                                                                         | ${true}
     `('isRandomString $str', ({ str, expected }) => {
         expect(isRandomString(str)).toBe(expected);
+    });
+    // cspell:enable
+
+    // cspell:disable
+    test.each`
+        str                                                                                                       | expected
+        ${''}                                                                                                     | ${0}
+        ${'hello'}                                                                                                | ${0.2}
+        ${'café'}                                                                                                 | ${0.25}
+        ${'café'.normalize('NFD')}                                                                                | ${0.2}
+        ${'Hello'}                                                                                                | ${0.4}
+        ${'expectCategorizeStringStrToBeExpected'}                                                                | ${0.35}
+        ${'expect categorizeString str .toBe expected'}                                                           | ${0.33}
+        ${'H4sIAAAAAAAAA72d3ZLjNpK276X6O6ztFX4l+WxnPN5whD3jsGd3DzomHGqJVa21StLqp9uOibn3LwgIKiD5AkyQ7Dpyu0QmkmQy'} | ${0.66}
+        ${'izfrNTmQLnfsLzi2Wb9xPz2Qj9fQYGgeug3N2MkDuVHwpPcgkhHkJgCQuuvT+qZI'}                                     | ${0.65}
+        ${'sampleOldFalsePositivesBase64'}                                                                        | ${0.34}
+        ${'residencyStandard2DMultisampleBlockShape'}                                                             | ${0.25}
+        ${'myNameSpace1/MyNameSpace2/mynamespace3/myserviceName'}                                                 | ${0.4}
+        ${'PxTransform12transformInvERKS0_'}                                                                      | ${0.35}
+        ${'_ZNK5physx11PxTransform12transformInvERKNS_6PxVec3E'}                                                  | ${0.43}
+        ${'_ZNK5physx11PxERKNS_6PxVec3E'}                                                                         | ${0.57}
+    `('isRandomString $str', ({ str, expected }) => {
+        expect(scoreRandomString(str))
+            .greaterThanOrEqual(expected)
+            .lessThanOrEqual(expected + 0.01);
     });
     // cspell:enable
 
