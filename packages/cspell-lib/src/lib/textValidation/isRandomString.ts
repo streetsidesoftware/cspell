@@ -1,4 +1,4 @@
-const maxRadio = 0.5;
+const maxRadio = 0.6;
 
 /**
  * Try to detect if a string is a random string of characters or is it camel case / snake case words.
