@@ -7,10 +7,13 @@ import { textValidatorFactory } from './lineValidatorFactory.js';
 const oc = <T>(obj: T) => expect.objectContaining(obj);
 
 describe('lineValidatorFactory', () => {
+    // cspell:ignore 𐀀𐃘
+
     test.each`
         word                     | expected
         ${'one'}                 | ${[]}
         ${'three etc.'}          | ${[]}
+        ${'three etc. 𐀀𐃘'}       | ${[]}
         ${'flip-flop'}           | ${[oc({ text: 'flip-flop', isFlagged: true })]}
         ${'one flip-flop.'}      | ${[oc({ text: 'flip-flop', isFlagged: true })]}
         ${'one two three etc'}   | ${[oc({ text: 'etc' })]}
@@ -18,7 +21,7 @@ describe('lineValidatorFactory', () => {
         ${'lion'}                | ${[oc({ text: 'lion', suggestionsEx: [oc({ word: 'tiger', isPreferred: true })] })]}
     `('textValidatorFactory', ({ word, expected }) => {
         const dict = getDict();
-        const tv = textValidatorFactory(dict, { ignoreCase: true, minWordLength: 1 });
+        const tv = textValidatorFactory(dict, { ignoreCase: true, minWordLength: 3 });
         const r = [...tv.validate({ text: word, range: [10, 10 + word.length] })];
         expect(r).toEqual(expected);
     });

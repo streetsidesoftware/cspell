@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: [".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 2030, Issues found: 1723 in 325 files.
+ CSpell: Files checked: 2030, Issues found: 1721 in 325 files.
  exit code: 1
 Makefile.js:128:88    - Unknown word (ined)       -- followed by the string "ined".
 Makefile.js:343:12    - Unknown word (gensite)    -- target.gensite();
@@ -333,8 +333,6 @@ tests/lib/rules/brace-style.js:32:44     - Unknown word (Varint)     -- glyph.id
 tests/lib/rules/brace-style.js:451:77    - Unknown word (nqux)       -- \nbaz();\n}\nelse {\nqux();\n}",
 tests/lib/rules/capitalized-comments.js:344:22    - Unknown word (über)       -- code: "//über",
 tests/lib/rules/capitalized-comments.js:345:24    - Unknown word (Über)       -- output: "//Über",
-tests/lib/rules/capitalized-comments.js:380:23    - Unknown word (𐳡𐳡𐳡)     -- code: "/* 𐳡𐳡𐳡 */", // right-to-left
-tests/lib/rules/capitalized-comments.js:381:25    - Unknown word (𐲡𐳡𐳡)     -- output: "/* 𐲡𐳡𐳡 */",
 tests/lib/rules/capitalized-comments.js:563:39    - Unknown word (Mtavruli)   -- "// Გ", // Georgian Mtavruli Capital Letter Gan
 tests/lib/rules/capitalized-comments.js:573:31    - Unknown word (Warang)     -- code: "// 𑢢", // Warang Citi Capital Letter
 tests/lib/rules/capitalized-comments.js:573:38    - Unknown word (Citi)       -- "// 𑢢", // Warang Citi Capital Letter Wi (U
