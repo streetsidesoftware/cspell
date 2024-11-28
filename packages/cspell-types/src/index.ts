@@ -83,6 +83,7 @@ export type {
     VersionLegacy,
     WorkspaceTrustSettings,
 } from './CSpellSettingsDef.js';
+export { defaultCSpellSettings } from './defaultConfigSettings.js';
 export { defineConfig } from './defineConfig.js';
 export type {
     CustomDictionaryPath,

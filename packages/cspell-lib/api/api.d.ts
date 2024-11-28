@@ -674,6 +674,8 @@ interface ValidationOptions extends IncludeExcludeOptions {
     allowCompoundWords?: boolean;
     /** ignore case when checking words against dictionary or ignore words list */
     ignoreCase: boolean;
+    ignoreRandomStrings?: boolean | undefined;
+    minRandomLength?: number | undefined;
 }
 interface IncludeExcludeOptions {
     ignoreRegExpList?: RegExp[];

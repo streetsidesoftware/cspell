@@ -5,6 +5,8 @@ export function settingsToValidateOptions(settings: CSpellSettingsInternalFinali
     const opt: ValidationOptions = {
         ...settings,
         ignoreCase: !(settings.caseSensitive ?? false),
+        ignoreRandomStrings: settings.ignoreRandomStrings,
+        minRandomLength: settings.minRandomLength,
     };
     return opt;
 }

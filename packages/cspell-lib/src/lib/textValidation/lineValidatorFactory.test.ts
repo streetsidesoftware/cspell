@@ -7,22 +7,24 @@ import { textValidatorFactory } from './lineValidatorFactory.js';
 const oc = <T>(obj: T) => expect.objectContaining(obj);
 
 describe('lineValidatorFactory', () => {
-    // cspell:ignore 𐀀𐃘
+    // cspell:ignore 𐀀𐃘 izfrNTmQLnfsLzi2Wb9x izfr Lnfs
 
     test.each`
-        word                     | expected
-        ${'one'}                 | ${[]}
-        ${'three etc.'}          | ${[]}
-        ${'three etc. 𐀀𐃘'}       | ${[]}
-        ${'flip-flop'}           | ${[oc({ text: 'flip-flop', isFlagged: true })]}
-        ${'one flip-flop.'}      | ${[oc({ text: 'flip-flop', isFlagged: true })]}
-        ${'one two three etc'}   | ${[oc({ text: 'etc' })]}
-        ${'three four five one'} | ${[oc({ text: 'five' })]}
-        ${'lion'}                | ${[oc({ text: 'lion', suggestionsEx: [oc({ word: 'tiger', isPreferred: true })] })]}
-    `('textValidatorFactory', ({ word, expected }) => {
+        text                                 | expected
+        ${'one'}                             | ${[]}
+        ${'three etc.'}                      | ${[]}
+        ${'three etc. 𐀀𐃘'}                   | ${[]}
+        ${'three etc. izfrNTmQLnfsLzi2Wb9x'} | ${[]}
+        ${'three etc. izfrNTmQLnfsLzi2Wb9'}  | ${[oc({ text: 'izfr' }), oc({ text: 'Lnfs' }), oc({ text: 'Lzi' })]}
+        ${'flip-flop'}                       | ${[oc({ text: 'flip-flop', isFlagged: true })]}
+        ${'one flip-flop.'}                  | ${[oc({ text: 'flip-flop', isFlagged: true })]}
+        ${'one two three etc'}               | ${[oc({ text: 'etc' })]}
+        ${'three four five one'}             | ${[oc({ text: 'five' })]}
+        ${'lion'}                            | ${[oc({ text: 'lion', suggestionsEx: [oc({ word: 'tiger', isPreferred: true })] })]}
+    `('textValidatorFactory $text', ({ text, expected }) => {
         const dict = getDict();
-        const tv = textValidatorFactory(dict, { ignoreCase: true, minWordLength: 3 });
-        const r = [...tv.validate({ text: word, range: [10, 10 + word.length] })];
+        const tv = textValidatorFactory(dict, { ignoreCase: true, minWordLength: 3, minRandomLength: 20 });
+        const r = [...tv.validate({ text: text, range: [10, 10 + text.length] })];
         expect(r).toEqual(expected);
     });
 });

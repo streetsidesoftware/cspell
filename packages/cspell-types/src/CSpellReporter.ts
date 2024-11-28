@@ -143,6 +143,20 @@ export interface ReporterConfigurationBase {
      * @default 4
      */
     minWordLength?: number;
+
+    /**
+     * Ignore sequences of characters that look like random strings.
+     *
+     * @default true
+     */
+    ignoreRandomStrings?: boolean;
+
+    /**
+     * The minimum length of a random string to be ignored.
+     *
+     * @default 40
+     */
+    minRandomLength?: number;
 }
 
 interface ReporterCommandLineOptions {
