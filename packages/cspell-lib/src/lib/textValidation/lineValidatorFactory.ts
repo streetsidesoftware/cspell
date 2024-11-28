@@ -2,6 +2,7 @@ import assert from 'node:assert';
 
 import { opConcatMap, opFilter, pipe } from '@cspell/cspell-pipe/sync';
 import type { ParsedText } from '@cspell/cspell-types';
+import { defaultCSpellSettings } from '@cspell/cspell-types';
 import type { CachingDictionary, SearchOptions, SpellingDictionary } from 'cspell-dictionary';
 import { createCachingDictionary } from 'cspell-dictionary';
 
@@ -27,6 +28,7 @@ import type {
     ValidationIssueRO,
     ValidationOptions,
 } from './ValidationTypes.js';
+import { isRandomString } from './isRandomString.js';
 
 interface LineValidator {
     fn: LineValidatorFn;
@@ -52,6 +54,8 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
         flagWords = [],
         allowCompoundWords = false,
         ignoreCase = true,
+        ignoreRandomStrings = defaultCSpellSettings.ignoreRandomStrings,
+        minRandomLength = defaultCSpellSettings.minRandomLength,
     } = options;
     const hasWordOptions: SearchOptions = {
         ignoreCase,
@@ -340,8 +344,14 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
             return mismatches;
         }
 
+        function isNotRandom(textOff: TextOffsetRO): boolean {
+            if (textOff.text.length < minRandomLength || !ignoreRandomStrings) return true;
+            return !isRandomString(textOff.text);
+        }
+
         const checkedPossibleWords: Iterable<ValidationIssue> = pipe(
             extractPossibleWordsFromTextOffset(lineSegment.segment),
+            opFilter(isNotRandom),
             opFilter(filterAlreadyChecked),
             opConcatMap(checkPossibleWords),
         );
