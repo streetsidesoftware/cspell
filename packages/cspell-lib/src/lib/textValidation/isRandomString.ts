@@ -1,4 +1,4 @@
-const maxRadio = 0.55;
+const maxRadio = 0.5;
 
 /**
  * Try to detect if a string is a random string of characters or is it camel case / snake case words.
@@ -24,8 +24,8 @@ export function categorizeString(s: string): string {
         .replaceAll(/\d+/g, '0')
         .replaceAll(/\p{Ll}\p{M}+/gu, 'a')
         .replaceAll(/\p{Lu}\p{M}+/gu, 'A')
+        .replaceAll(/\p{Lu}?\p{Ll}+/gu, '1')
         .replaceAll(/\p{Lu}+/gu, '2')
-        .replaceAll(/\p{Ll}+/gu, '1')
         .replaceAll(/\p{M}/gu, '4')
         .replaceAll('_', '')
         .replaceAll(/[-_.']+/g, '3');
