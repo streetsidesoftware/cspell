@@ -3,7 +3,7 @@ Repository: vitest-dev/vitest
 Url: "https://github.com/vitest-dev/vitest"
 Args: ["--issues-summary-report","--locale=en,en-GB","."]
 Lines:
- CSpell: Files checked: 1870, Issues found: 1326 in 318 files.
+ CSpell: Files checked: 1883, Issues found: 1340 in 319 files.
  exit code: 1
 LICENSE:3:28      - Unknown word (Vitest)     -- Copyright (c) 2021-Present Vitest Team
 README.md:111:5     - Unknown word (patak)      -- - [@patak-dev](https://github
@@ -15,9 +15,9 @@ docs/advanced/api.md:105:85    - Unknown word (entrypont)  -- method from `vites
 docs/advanced/api.md:143:43    - Unknown word (testproject) -- Version>2.2.0</Version> {#testproject}
 docs/advanced/api.md:242:28    - Unknown word (dynamicaly)  -- values can be provided dynamicaly. Provided value in tests
 docs/advanced/guide/tests.md:11:87     - Unknown word (immidiatly) -- installed and runs tests immidiatly
-docs/advanced/pool.md:63:208    - Unknown word (birpc)      -- use WebSockets with `birpc` you can write something
-docs/advanced/pool.md:66:16     - Unknown word (Birpc)      -- import { createBirpc } from 'birpc'
-docs/advanced/reporters.md:66:7      - Unknown word (twoslash)   -- ```ts twoslash
+docs/advanced/pool.md:80:208    - Unknown word (birpc)      -- use WebSockets with `birpc` you can write something
+docs/advanced/pool.md:83:16     - Unknown word (Birpc)      -- import { createBirpc } from 'birpc'
+docs/advanced/reporters.md:64:7      - Unknown word (twoslash)   -- ```ts twoslash
 docs/api/assert.md:1054:75   - Unknown word (konacha)    -- } }, 'tea.green', 'konacha')
 docs/api/assert.md:1117:59   - Unknown word (Dont)       -- baz: 3 }, ['foo', 'iDontExist', 'baz'])
 docs/api/assert.md:285:37    - Unknown word (occured)    -- message: 'error was occured' }
@@ -33,51 +33,52 @@ docs/api/expect.md:917:63    - Unknown word (tohavebeencalledexactlyoncewith) --
 docs/api/index.md:1108:123  - Unknown word (runnning)   -- the test has finished runnning.
 docs/api/index.md:1114:22   - Unknown word (ontestfinished) -- ## onTestFinished {#ontestfinished}
 docs/api/mock.md:77:7      - Unknown word (Nellies)    -- const NelliesBucket = mockFn(0)
-docs/api/vi.md:472:21    - Unknown word (stubenv)    -- ### vi.stubEnv {#vi-stubenv}
-docs/api/vi.md:476:126   - Unknown word (unstub)     -- value by calling `vi.unstubAllEnvs`.
-docs/api/vi.md:506:27    - Unknown word (unstuballenvs) -- vi.unstubAllEnvs {#vi-unstuballenvs}
-docs/api/vi.md:564:30    - Unknown word (unstuballglobals) -- unstubAllGlobals {#vi-unstuballglobals}
-docs/api/vi.md:595:15    - Unknown word (descibes)         -- This sections descibes how to work with [fake
-docs/api/vi.md:663:63    - Unknown word (advancetimerstonextframe) -- .1.0</Version> {#vi-advancetimerstonextframe}
-docs/api/vi.md:827:26    - Unknown word (isfaketimers)             -- vi.isFakeTimers {#vi-isfaketimers}
-docs/config/index.md:1167:93   - Unknown word (marko)           -- .vue', '.svelte', '.marko', '.astro']`
-docs/config/index.md:1305:42   - Unknown word (reportonfailure) -- reportOnFailure {#coverage-reportonfailure}
-docs/config/index.md:160:233   - Unknown word (rebundling) -- it directly or force rebundling with `deps.optimizer
-docs/config/index.md:1693:40   - Unknown word (provideroptions) -- providerOptions {#browser-provideroptions}
-docs/config/index.md:1754:44   - Unknown word (screenshotdirectory) -- screenshotDirectory {#browser-screenshotdirectory}
-docs/config/index.md:1761:43   - Unknown word (screenshotfailures)  -- screenshotFailures {#browser-screenshotfailures}
-docs/config/index.md:1768:44   - Unknown word (orchestratorscripts) -- orchestratorScripts {#browser-orchestratorscripts}
-docs/config/index.md:1808:38   - Unknown word (testerscripts)       -- testerScripts {#browser-testerscripts}
-docs/config/index.md:1845:18   - Unknown word (unstubenvs)          -- ### unstubEnvs {#unstubenvs}
-docs/config/index.md:1852:21   - Unknown word (unstubglobals)       -- ### unstubGlobals {#unstubglobals}
-docs/config/index.md:1859:25   - Unknown word (testtransformmode)   -- testTransformMode {#testtransformmode}
-docs/config/index.md:1893:47   - Unknown word (snapshotserializers) -- NonProjectOption /> {#snapshotserializers}
-docs/config/index.md:2109:37   - Unknown word (setupfiles)          -- setupFiles {#sequence-setupfiles}
-docs/config/index.md:2199:18   - Unknown word (chaiconfig)          -- ### chaiConfig {#chaiconfig}
-docs/config/index.md:2267:40   - Unknown word (onstacktrace)        -- NonProjectOption /> {#onstacktrace}
-docs/config/index.md:301:14    - Unknown word (Arrayable)  -- - **Type:** `Arrayable<BenchmarkBuiltinReporters
-docs/config/index.md:380:28    - Unknown word (unplugin)   -- are already using [`unplugin-auto-import`](https
-docs/config/index.md:520:22    - Unknown word (poolmatchglobs) -- ## poolMatchGlobs {#poolmatchglobs}
-docs/config/index.md:603:231   - Unknown word (chdir)          -- APIs such as `process.chdir()`. Some libraries written
-docs/config/index.md:622:22    - Unknown word (doesnt)         -- fs.writeFileSync('/doesnt exist')
-docs/config/index.md:639:39    - Unknown word (pooloptions)    -- NonProjectOption /> {#pooloptions}
-docs/config/index.md:77:34     - Unknown word (Dumpped)    -- { dumpModules?, loadDumppedModules? }`
-docs/config/index.md:910:43    - Unknown word (fileparallelism) -- NonProjectOption /> {#fileparallelism}
-docs/config/index.md:922:38    - Unknown word (maxworkers)      -- NonProjectOption /> {#maxworkers}
-docs/config/index.md:928:38    - Unknown word (minworkers)      -- NonProjectOption /> {#minworkers}
-docs/guide/browser/assertion-api.md:67:293    - Unknown word (retriable)  -- purpose, Vitest provides retriable assertions out of the
+docs/api/vi.md:467:21    - Unknown word (stubenv)    -- ### vi.stubEnv {#vi-stubenv}
+docs/api/vi.md:471:126   - Unknown word (unstub)     -- value by calling `vi.unstubAllEnvs`.
+docs/api/vi.md:501:27    - Unknown word (unstuballenvs) -- vi.unstubAllEnvs {#vi-unstuballenvs}
+docs/api/vi.md:559:30    - Unknown word (unstuballglobals) -- unstubAllGlobals {#vi-unstuballglobals}
+docs/api/vi.md:590:15    - Unknown word (descibes)         -- This sections descibes how to work with [fake
+docs/api/vi.md:658:63    - Unknown word (advancetimerstonextframe) -- .1.0</Version> {#vi-advancetimerstonextframe}
+docs/api/vi.md:822:26    - Unknown word (isfaketimers)             -- vi.isFakeTimers {#vi-isfaketimers}
+docs/config/index.md:1038:43   - Unknown word (fileparallelism) -- NonProjectOption /> {#fileparallelism}
+docs/config/index.md:1050:38   - Unknown word (maxworkers)      -- NonProjectOption /> {#maxworkers}
+docs/config/index.md:1056:38   - Unknown word (minworkers)      -- NonProjectOption /> {#minworkers}
+docs/config/index.md:1301:93   - Unknown word (marko)           -- .vue', '.svelte', '.marko', '.astro']`
+docs/config/index.md:1439:42   - Unknown word (reportonfailure) -- reportOnFailure {#coverage-reportonfailure}
+docs/config/index.md:164:34    - Unknown word (Dumpped)    -- { dumpModules?, loadDumppedModules? }`
+docs/config/index.md:1789:64   - Unknown word (testerhtmlpath)  -- /Version> {#browser-testerhtmlpath}
+docs/config/index.md:1826:40   - Unknown word (provideroptions) -- providerOptions {#browser-provideroptions}
+docs/config/index.md:1881:44   - Unknown word (screenshotdirectory) -- screenshotDirectory {#browser-screenshotdirectory}
+docs/config/index.md:1888:43   - Unknown word (screenshotfailures)  -- screenshotFailures {#browser-screenshotfailures}
+docs/config/index.md:1895:44   - Unknown word (orchestratorscripts) -- orchestratorScripts {#browser-orchestratorscripts}
+docs/config/index.md:1935:38   - Unknown word (testerscripts)       -- testerScripts {#browser-testerscripts}
+docs/config/index.md:1972:18   - Unknown word (unstubenvs)          -- ### unstubEnvs {#unstubenvs}
+docs/config/index.md:1979:21   - Unknown word (unstubglobals)       -- ### unstubGlobals {#unstubglobals}
+docs/config/index.md:1986:25   - Unknown word (testtransformmode)   -- testTransformMode {#testtransformmode}
+docs/config/index.md:2020:47   - Unknown word (snapshotserializers) -- NonProjectOption /> {#snapshotserializers}
+docs/config/index.md:2236:37   - Unknown word (setupfiles)          -- setupFiles {#sequence-setupfiles}
+docs/config/index.md:2326:18   - Unknown word (chaiconfig)          -- ### chaiConfig {#chaiconfig}
+docs/config/index.md:2394:40   - Unknown word (onstacktrace)        -- NonProjectOption /> {#onstacktrace}
+docs/config/index.md:247:233   - Unknown word (rebundling) -- it directly or force rebundling with `deps.optimizer
+docs/config/index.md:388:14    - Unknown word (Arrayable)  -- - **Type:** `Arrayable<BenchmarkBuiltinReporters
+docs/config/index.md:465:28    - Unknown word (unplugin)   -- are already using [`unplugin-auto-import`](https
+docs/config/index.md:626:22    - Unknown word (poolmatchglobs) -- ## poolMatchGlobs {#poolmatchglobs}
+docs/config/index.md:731:231   - Unknown word (chdir)          -- APIs such as `process.chdir()`. Some libraries written
+docs/config/index.md:750:22    - Unknown word (doesnt)         -- fs.writeFileSync('/doesnt exist')
+docs/config/index.md:767:39    - Unknown word (pooloptions)    -- NonProjectOption /> {#pooloptions}
+docs/guide/browser/assertion-api.md:49:293    - Unknown word (retriable)  -- purpose, Vitest provides retriable assertions out of the
 docs/guide/browser/commands.md:130:120   - Unknown word (simillar)   -- class-frame). It has a simillar API to the `page`, but
 docs/guide/browser/context.md:37:3      - Unknown word (unhover)    -- unhover: (element: Element,
-docs/guide/browser/index.md:28:1      - Unknown word (bunx)       -- bunx vitest init browser
-docs/guide/browser/index.md:320:123   - Unknown word (headlessly) -- UI but have tests run headlessly, you can install the
-docs/guide/browser/index.md:437:6     - Unknown word (solidjs)    -- - [`@solidjs/testing-library`](https
-docs/guide/browser/index.md:476:4     - Unknown word (baed)       -- // baed on @testing-library
-docs/guide/browser/index.md:510:59    - Unknown word (Marko)      -- render(Greeting, { name: 'Marko' })
-docs/guide/browser/interactivity-api.md:119:24    - Unknown word (dblclick)   -- Playwright `locator.dblclick` API](https://playwright
-docs/guide/browser/interactivity-api.md:132:65    - Unknown word (tripleclick) -- Since there is no `tripleclick` in browser api, this
-docs/guide/browser/interactivity-api.md:171:36    - Unknown word (conteneditable) -- the `input/textarea/conteneditable` field. This will remove
-docs/guide/browser/interactivity-api.md:191:243   - Unknown word (selectall)      -- keyboard) (e.g., `{Shift}{selectall}`).
-docs/guide/browser/interactivity-api.md:295:98    - Unknown word (compatiblity)   -- because it exists only for compatiblity with the `userEvent
+docs/guide/browser/index.md:32:1      - Unknown word (bunx)       -- bunx vitest init browser
+docs/guide/browser/index.md:373:123   - Unknown word (headlessly) -- UI but have tests run headlessly, you can install the
+docs/guide/browser/index.md:491:6     - Unknown word (solidjs)    -- - [`@solidjs/testing-library`](https
+docs/guide/browser/index.md:530:4     - Unknown word (baed)       -- // baed on @testing-library
+docs/guide/browser/index.md:564:59    - Unknown word (Marko)      -- render(Greeting, { name: 'Marko' })
+docs/guide/browser/interactivity-api.md:107:24    - Unknown word (dblclick)   -- Playwright `locator.dblclick` API](https://playwright
+docs/guide/browser/interactivity-api.md:120:65    - Unknown word (tripleclick) -- Since there is no `tripleclick` in browser api, this
+docs/guide/browser/interactivity-api.md:159:36    - Unknown word (conteneditable) -- the `input/textarea/conteneditable` field. This will remove
+docs/guide/browser/interactivity-api.md:179:243   - Unknown word (selectall)      -- keyboard) (e.g., `{Shift}{selectall}`).
+docs/guide/browser/interactivity-api.md:283:98    - Unknown word (compatiblity)   -- because it exists only for compatiblity with the `userEvent
 docs/guide/browser/locators.md:10:111    - Unknown word (Ivya)       -- class-locator) called [Ivya](https://npmjs.com/ivya
 docs/guide/browser/locators.md:206:11    - Unknown word (Incredibles) -- <img alt="Incredibles 2 Poster" src="/incredibles
 docs/guide/browser/locators.md:206:39    - Unknown word (incredibles) -- Incredibles 2 Poster" src="/incredibles-2.png" />
@@ -85,33 +86,33 @@ docs/guide/browser/locators.md:231:61    - Unknown word (assosiated)  -- element
 docs/guide/browser/locators.md:587:11    - Unknown word (fullpath)    -- // path - fullpath to the screenshot
 docs/guide/browser/locators.md:599:4     - Unknown word (multilple)   -- If multilple elements match the selector
 docs/guide/browser/locators.md:68:47     - Unknown word (sensetive)  -- matched exactly: case-sensetive and whole-string. Disabled
-docs/guide/cli.md:48:5      - Unknown word (lintstagedrc) -- // .lintstagedrc.js
+docs/guide/cli.md:47:9      - Unknown word (lintstagedrc) -- ```js [.lintstagedrc.js]
 docs/guide/comparisons.md:11:46     - Unknown word (sodatea)    -- Jest in Vite setups. [@sodatea](https://bsky.app/profile
 docs/guide/comparisons.md:31:140    - Unknown word (Vitesse)    -- their App's UI using [Vitesse](https://github.com
 docs/guide/comparisons.md:45:52     - Unknown word (remcovaes)  -- Vite project, use [@remcovaes/web-test-runner-vite
-docs/guide/coverage.md:112:24    - Unknown word (println)    -- this.contentWriter.println('Start of custom coverage
-docs/guide/coverage.md:196:5     - Unknown word (ìstanbul)   -- - [`ìstanbul`](https://github.com
-docs/guide/index.md:266:4     - Unknown word (unocss)     -- - [unocss](https://github.com
-docs/guide/index.md:271:4     - Unknown word (vitesse)    -- - [vitesse](https://github.com
-docs/guide/index.md:274:4     - Unknown word (vueuse)     -- - [vueuse](https://github.com
-docs/guide/index.md:275:4     - Unknown word (milkdown)   -- - [milkdown](https://github.com
-docs/guide/index.md:276:4     - Unknown word (gridjs)     -- - [gridjs-svelte](https://github
-docs/guide/index.md:278:4     - Unknown word (bytemd)     -- - [bytemd](https://github.com
-docs/guide/index.md:282:4     - Unknown word (neodrag)    -- - [neodrag](https://github.com
-docs/guide/index.md:284:4     - Unknown word (iconify)    -- - [iconify](https://github.com
-docs/guide/index.md:285:4     - Unknown word (tdesign)    -- - [tdesign-vue-next](https://github
+docs/guide/coverage.md:110:24    - Unknown word (println)    -- this.contentWriter.println('Start of custom coverage
+docs/guide/coverage.md:192:5     - Unknown word (ìstanbul)   -- - [`ìstanbul`](https://github.com
+docs/guide/index.md:264:4     - Unknown word (unocss)     -- - [unocss](https://github.com
+docs/guide/index.md:269:4     - Unknown word (vitesse)    -- - [vitesse](https://github.com
+docs/guide/index.md:272:4     - Unknown word (vueuse)     -- - [vueuse](https://github.com
+docs/guide/index.md:273:4     - Unknown word (milkdown)   -- - [milkdown](https://github.com
+docs/guide/index.md:274:4     - Unknown word (gridjs)     -- - [gridjs-svelte](https://github
+docs/guide/index.md:276:4     - Unknown word (bytemd)     -- - [bytemd](https://github.com
+docs/guide/index.md:280:4     - Unknown word (neodrag)    -- - [neodrag](https://github.com
+docs/guide/index.md:282:4     - Unknown word (iconify)    -- - [iconify](https://github.com
+docs/guide/index.md:283:4     - Unknown word (tdesign)    -- - [tdesign-vue-next](https://github
 docs/guide/index.md:9:25      - Unknown word (veetest)    -- Vitest (pronounced as _"veetest"_) is a next generation
 docs/guide/migration.md:369:27    - Unknown word (Pinia)      -- beforeEach(() => setActivePinia(createTestingPinia(
 docs/guide/migration.md:63:32     - Unknown word (examplejs)  -- ignored: ['!node_modules/examplejs'] // [!code ++]
 docs/guide/mocking.md:148:3     - Unknown word (unobserve)  -- unobserve: vi.fn(),
-docs/guide/mocking.md:486:34    - Unknown word (Unhandle)   -- onfiguring the server with `onUnhandleRequest: 'error'` ensures
+docs/guide/mocking.md:482:34    - Unknown word (Unhandle)   -- onfiguring the server with `onUnhandleRequest: 'error'` ensures
 docs/guide/mocking.md:85:46     - Unknown word (Testman)    -- test message', from: 'Testman' },
 docs/guide/profiling-test-performance.md:185:4     - Unknown word (Speedscope)  -- - [Speedscope](https://www.speedscope
 docs/guide/profiling-test-performance.md:86:106    - Unknown word (heapprofile) -- test-runner-profile/*.heapprofile` files generated. See
 docs/guide/profiling-test-performance.md:86:67     - Unknown word (cpuprofile) -- test-runner-profile/*.cpuprofile` and `test-runner-profile
 docs/guide/reporters.md:516:72    - Unknown word (overriden)  -- folder, but can be overriden with `--outputFile`
-docs/guide/test-context.md:194:17    - Unknown word (fixure)     -- // mark the fixure as "injected" to allow
-docs/guide/testing-types.md:120:20    - Unknown word (answr)      -- assertType<string>(answr) //
+docs/guide/test-context.md:193:17    - Unknown word (fixure)     -- // mark the fixure as "injected" to allow
+docs/guide/testing-types.md:120:20    - Unknown word (answr)      -- assertType<string>(answr)
 docs/guide/testing-types.md:80:37     - Unknown word (typeargs)   -- expected" objects vs typeargs
 docs/guide/testing-types.md:94:60     - Unknown word (typearg)    -- compiler needs to infer the typearg for the `.toEqualTypeOf
 docs/package.json:23:7      - Unknown word (shikijs)    -- "@shikijs/vitepress-twoslash"
@@ -171,10 +172,10 @@ packages/browser/jest-dom.d.ts:662:34    - Unknown word (tobepartiallychecked)  
 packages/browser/jest-dom.d.ts:705:34    - Unknown word (tohaveerrormessage)           -- testing-library/jest-dom#tohaveerrormessage](https://github.com
 packages/browser/jest-dom.d.ts:72:34     - Unknown word (tobeempty)         -- testing-library/jest-dom#tobeempty](https://github.com
 packages/browser/jest-dom.d.ts:86:34     - Unknown word (tobeemptydomelement) -- testing-library/jest-dom#tobeemptydomelement](https://github.com
-packages/browser/package.json:103:7     - Unknown word (wdio)         -- "@wdio/protocols": "^8.40.
-packages/browser/package.json:106:6     - Unknown word (ivya)         -- "ivya": "^1.1.1",
-packages/browser/package.json:79:6      - Unknown word (safaridriver) -- "safaridriver": {
-packages/browser/package.json:94:6      - Unknown word (tinyrainbow)  -- "tinyrainbow": "^1.2.0",
+packages/browser/package.json:106:7     - Unknown word (wdio)         -- "@wdio/protocols": "^8.40.
+packages/browser/package.json:109:6     - Unknown word (ivya)         -- "ivya": "^1.1.1",
+packages/browser/package.json:82:6      - Unknown word (safaridriver) -- "safaridriver": {
+packages/browser/package.json:97:6      - Unknown word (tinyrainbow)  -- "tinyrainbow": "^1.2.0",
 packages/browser/src/client/public/error-catcher.js:19:17     - Unknown word (Unhandler)  -- function throwUnhandlerError(e) {
 packages/browser/src/client/public/esm-client-injector.js:46:36     - Unknown word (gmix)       -- !/^(?!.*?(.).*?\1)[gmixXsuUAJ]+$/.test(m[3]
 packages/browser/src/client/tester/dialog.ts:3:11      - Unknown word (formated)   -- const formatedParams = params.map(p
@@ -186,8 +187,8 @@ packages/browser/src/node/commands/keyboard.ts:77:115    - Unknown word (Backquo
 packages/browser/src/node/plugin.ts:337:33    - Unknown word (nastry)     -- loupe bundle has a nastry require('util') call
 packages/browser/src/node/pool.ts:129:14    - Unknown word (paralellize) -- // TODO: paralellize tests instead of running
 packages/browser/src/node/pool.ts:3:13      - Unknown word (nodeos)     -- import * as nodeos from 'node:os'
-packages/browser/src/node/providers/playwright.ts:148:20    - Unknown word (frameattached) -- page.on('frameattached', (frame) => {
-packages/browser/src/node/providers/playwright.ts:172:16    - Unknown word (requestfailed) -- page.on('requestfailed', (request) => {
+packages/browser/src/node/providers/playwright.ts:152:20    - Unknown word (frameattached) -- page.on('frameattached', (frame) => {
+packages/browser/src/node/providers/playwright.ts:176:16    - Unknown word (requestfailed) -- page.on('requestfailed', (request) => {
 packages/browser/src/node/server.ts:218:38    - Unknown word (cdps)       -- cachedHandler = this.state.cdps.get(sessionId)
 packages/browser/src/node/serverTester.ts:63:11     - Unknown word (indexhtml)  -- const indexhtml = await server.vite
 packages/coverage-istanbul/package.json:54:6      - Unknown word (magicast)   -- "magicast": "^0.3.5",
@@ -203,7 +204,6 @@ packages/expect/src/jest-expect.ts:88:72     - Unknown word (ssfi)       -- erro
 packages/expect/src/jest-utils.ts:705:58    - Unknown word (irrelavant) -- subset to avoid showing irrelavant toMatchObject diff
 packages/expect/src/state.ts:13:9      - Unknown word (assymetric) -- const assymetricMatchers = Object.create
 packages/expect/src/types.ts:48:3      - Unknown word (dont)       -- dontThrow?: () => void
-packages/expect/src/utils.ts:59:14     - Unknown word (Fullfilled) -- then(onFullfilled, onRejected) {
 packages/mocker/EXPORTS.md:58:71     - Unknown word (automatially) -- mocker should kick in automatially:
 packages/mocker/EXPORTS.md:97:11     - Unknown word (Contructors)  -- globalContructors: {
 packages/mocker/src/browser/index.ts:12:14     - Unknown word (Resul)      -- ResolveMockResul,
@@ -268,30 +268,30 @@ packages/vite-node/src/types.ts:137:11    - Unknown word (dumpped)    -- * Read 
 packages/vite-node/src/utils.ts:16:20     - Unknown word (Regext)     -- const driveOppositeRegext = driveOpposite
 packages/vite-node/src/utils.ts:176:32    - Unknown word (Fnpd)       -- pkgData = cache.get(getFnpdCacheKey(basedir))
 packages/vite-node/src/utils.ts:198:11    - Unknown word (fnpd)       -- return `fnpd_${basedir}`
-packages/vitest/LICENSE.md:1090:12   - Unknown word (Gjervig)        -- By: Terkel Gjervig
-packages/vitest/LICENSE.md:1091:13   - Unknown word (terkelg)        -- Repository: terkelg/prompts
-packages/vitest/LICENSE.md:1119:12   - Unknown word (Aboukhadijeh)   -- By: Feross Aboukhadijeh
-packages/vitest/LICENSE.md:1119:5    - Unknown word (Feross)         -- By: Feross Aboukhadijeh
-packages/vitest/LICENSE.md:1120:30   - Unknown word (feross)         -- Repository: git://github.com/feross/queue-microtask.git
-packages/vitest/LICENSE.md:1191:4    - Unknown word (reusify)        -- ## reusify
-packages/vitest/LICENSE.md:1272:4    - Unknown word (sisteransi)     -- ## sisteransi
-packages/vitest/LICENSE.md:1412:10   - Unknown word (Luer)           -- By: Jake Luer, Keith Cirkel, David
-packages/vitest/LICENSE.md:1412:111  - Unknown word (Tice)           -- Grant Snodgrass, Jeremy Tice, Edward Betts, dvlsg
-packages/vitest/LICENSE.md:1412:124  - Unknown word (Betts)          -- Jeremy Tice, Edward Betts, dvlsg, Amila Welihinda
-packages/vitest/LICENSE.md:1412:131  - Unknown word (dvlsg)          -- Tice, Edward Betts, dvlsg, Amila Welihinda, Jake
-packages/vitest/LICENSE.md:1412:170  - Unknown word (Miroslav)       -- Welihinda, Jake Champion, Miroslav Bajtoš
-packages/vitest/LICENSE.md:1412:179  - Unknown word (Bajtoš)         -- Jake Champion, Miroslav Bajtoš
-packages/vitest/LICENSE.md:1412:22   - Unknown word (Cirkel)         -- By: Jake Luer, Keith Cirkel, David Losert, Aleksey
-packages/vitest/LICENSE.md:1412:36   - Unknown word (Losert)         -- Keith Cirkel, David Losert, Aleksey Shvayka, Lucas
-packages/vitest/LICENSE.md:1412:44   - Unknown word (Aleksey)        -- Cirkel, David Losert, Aleksey Shvayka, Lucas Fernandes
-packages/vitest/LICENSE.md:1412:52   - Unknown word (Shvayka)        -- David Losert, Aleksey Shvayka, Lucas Fernandes da
-packages/vitest/LICENSE.md:1413:38   - Unknown word (chaijs)         -- ssh://git@github.com/chaijs/type-detect.git
-packages/vitest/LICENSE.md:1484:16   - Unknown word (Stangvik)       -- By: Einar Otto Stangvik
-packages/vitest/LICENSE.md:1484:5    - Unknown word (Einar)          -- By: Einar Otto Stangvik
-packages/vitest/LICENSE.md:1488:22   - Unknown word (Arnout)         -- Copyright (c) 2013 Arnout Kazemier and contributors
-packages/vitest/LICENSE.md:1488:29   - Unknown word (Kazemier)       -- Copyright (c) 2013 Arnout Kazemier and contributors
-packages/vitest/LICENSE.md:1489:28   - Unknown word (Pinca)          -- Copyright (c) 2016 Luigi Pinca and contributors
-packages/vitest/LICENSE.md:1510:4    - Unknown word (yocto)          -- ## yocto-queue
+packages/vitest/LICENSE.md:1056:12   - Unknown word (Gjervig)        -- By: Terkel Gjervig
+packages/vitest/LICENSE.md:1057:13   - Unknown word (terkelg)        -- Repository: terkelg/prompts
+packages/vitest/LICENSE.md:1085:12   - Unknown word (Aboukhadijeh)   -- By: Feross Aboukhadijeh
+packages/vitest/LICENSE.md:1085:5    - Unknown word (Feross)         -- By: Feross Aboukhadijeh
+packages/vitest/LICENSE.md:1086:30   - Unknown word (feross)         -- Repository: git://github.com/feross/queue-microtask.git
+packages/vitest/LICENSE.md:1140:4    - Unknown word (reusify)        -- ## reusify
+packages/vitest/LICENSE.md:1197:4    - Unknown word (sisteransi)     -- ## sisteransi
+packages/vitest/LICENSE.md:1337:10   - Unknown word (Luer)           -- By: Jake Luer, Keith Cirkel, David
+packages/vitest/LICENSE.md:1337:111  - Unknown word (Tice)           -- Grant Snodgrass, Jeremy Tice, Edward Betts, dvlsg
+packages/vitest/LICENSE.md:1337:124  - Unknown word (Betts)          -- Jeremy Tice, Edward Betts, dvlsg, Amila Welihinda
+packages/vitest/LICENSE.md:1337:131  - Unknown word (dvlsg)          -- Tice, Edward Betts, dvlsg, Amila Welihinda, Jake
+packages/vitest/LICENSE.md:1337:170  - Unknown word (Miroslav)       -- Welihinda, Jake Champion, Miroslav Bajtoš
+packages/vitest/LICENSE.md:1337:179  - Unknown word (Bajtoš)         -- Jake Champion, Miroslav Bajtoš
+packages/vitest/LICENSE.md:1337:22   - Unknown word (Cirkel)         -- By: Jake Luer, Keith Cirkel, David Losert, Aleksey
+packages/vitest/LICENSE.md:1337:36   - Unknown word (Losert)         -- Keith Cirkel, David Losert, Aleksey Shvayka, Lucas
+packages/vitest/LICENSE.md:1337:44   - Unknown word (Aleksey)        -- Cirkel, David Losert, Aleksey Shvayka, Lucas Fernandes
+packages/vitest/LICENSE.md:1337:52   - Unknown word (Shvayka)        -- David Losert, Aleksey Shvayka, Lucas Fernandes da
+packages/vitest/LICENSE.md:1338:38   - Unknown word (chaijs)         -- ssh://git@github.com/chaijs/type-detect.git
+packages/vitest/LICENSE.md:1409:16   - Unknown word (Stangvik)       -- By: Einar Otto Stangvik
+packages/vitest/LICENSE.md:1409:5    - Unknown word (Einar)          -- By: Einar Otto Stangvik
+packages/vitest/LICENSE.md:1413:22   - Unknown word (Arnout)         -- Copyright (c) 2013 Arnout Kazemier and contributors
+packages/vitest/LICENSE.md:1413:29   - Unknown word (Kazemier)       -- Copyright (c) 2013 Arnout Kazemier and contributors
+packages/vitest/LICENSE.md:1414:28   - Unknown word (Pinca)          -- Copyright (c) 2016 Luigi Pinca and contributors
+packages/vitest/LICENSE.md:1435:4    - Unknown word (yocto)          -- ## yocto-queue
 packages/vitest/LICENSE.md:201:12    - Unknown word (Haverbeke)   -- By: Marijn Haverbeke, Ingvar Stepanyan, Adrian
 packages/vitest/LICENSE.md:201:23    - Unknown word (Ingvar)      -- By: Marijn Haverbeke, Ingvar Stepanyan, Adrian Heine
 packages/vitest/LICENSE.md:201:30    - Unknown word (Stepanyan)   -- Marijn Haverbeke, Ingvar Stepanyan, Adrian Heine
@@ -347,27 +347,29 @@ packages/vitest/LICENSE.md:907:38    - Unknown word (Bogdan)         -- Schlinke
 packages/vitest/LICENSE.md:907:45    - Unknown word (Chadkin)        -- Amila Welihinda, Bogdan Chadkin, Brian Woodward, Devon
 packages/vitest/LICENSE.md:907:76    - Unknown word (Govett)         -- Brian Woodward, Devon Govett, Elan Shanker, Fabr
 packages/vitest/LICENSE.md:907:98    - Unknown word (Fabrício)       -- Govett, Elan Shanker, Fabrício Matté, Martin Kolárik
-packages/vitest/LICENSE.md:953:13    - Unknown word (unjs)           -- Repository: unjs/mlly
-packages/vitest/LICENSE.md:957:17    - Unknown word (Pooya)          -- > Copyright (c) Pooya Parsa <pooya@pi0.io
-packages/vitest/LICENSE.md:957:23    - Unknown word (Parsa)          -- Copyright (c) Pooya Parsa <pooya@pi0.io>
-packages/vitest/package.json:168:6     - Unknown word (tinyexec)   -- "tinyexec": "^0.3.1",
+packages/vitest/LICENSE.md:936:13    - Unknown word (unjs)           -- Repository: unjs/mlly
+packages/vitest/LICENSE.md:940:17    - Unknown word (Pooya)          -- > Copyright (c) Pooya Parsa <pooya@pi0.io
+packages/vitest/LICENSE.md:940:23    - Unknown word (Parsa)          -- Copyright (c) Pooya Parsa <pooya@pi0.io>
+packages/vitest/package.json:167:6     - Unknown word (tinyexec)   -- "tinyexec": "^0.3.1",
 packages/vitest/src/constants.ts:1:28      - Unknown word (jsdocs)     -- changed, update also jsdocs and docs
 packages/vitest/src/create/browser/creator.ts:506:27    - Unknown word (ourselved)  -- TODO: can we do this ourselved?
 packages/vitest/src/integrations/chai/index.ts:1:7       - Unknown word (failes)     -- // CI failes only for this file,
 packages/vitest/src/integrations/chai/poll.ts:10:71     - Unknown word (thow)       -- poll method doesn't thow an error
 packages/vitest/src/integrations/mock/date.ts:5:24      - Unknown word (Lauer)      -- Copyright (c) 2014 Bob Lauer
 packages/vitest/src/integrations/mock/timers.ts:161:85    - Unknown word (avaiable)   -- when it's not globally avaiable and it throws an internal
+packages/vitest/src/node/core.ts:1165:28   - Unknown word (sepcifies)  -- Key is file and val sepcifies whether we have matched
+packages/vitest/src/node/errors.ts:30:12     - Unknown word (Recieved)   -- super('Recieved line number filters
 packages/vitest/src/node/git.ts:78:40     - Unknown word (cdup)       -- rev-parse', '--show-cdup']
 packages/vitest/src/node/plugins/index.ts:67:12     - Unknown word (reassignable) -- // reassignable when running in worker
-packages/vitest/src/node/project.ts:178:27    - Unknown word (Overriden)  -- return this._serializeOverridenConfig()
+packages/vitest/src/node/project.ts:186:27    - Unknown word (Overriden)  -- return this._serializeOverridenConfig()
 packages/vitest/src/node/reporters/json.ts:17:11     - Unknown word (Callsite)   -- interface Callsite {
 packages/vitest/src/node/reporters/junit.ts:97:24     - Unknown word (apos)       -- .replace(/'/g, '&apos;')
 packages/vitest/src/node/reporters/reported-tasks.ts:20:18     - Unknown word (assosiacted) -- * The project assosiacted with the test or suite
 packages/vitest/src/node/reporters/summary.ts:250:28    - Unknown word (visibe)     -- Keep finished tests visibe in summary for a while
 packages/vitest/src/node/reporters/summary.ts:260:31    - Unknown word (immediatelly) -- Remove finished test immediatelly.
 packages/vitest/src/node/sequencers/BaseSequencer.ts:15:43     - Unknown word (sequelizers) -- be extended by other sequelizers
-packages/vitest/src/node/types/config.ts:816:96    - Unknown word (synchronus) -- debug a code with normal synchronus terminal console logging
-packages/vitest/src/node/types/config.ts:841:29    - Unknown word (alongisde)  -- Run typechecking tests alongisde regular tests.
+packages/vitest/src/node/types/config.ts:818:96    - Unknown word (synchronus) -- debug a code with normal synchronus terminal console logging
+packages/vitest/src/node/types/config.ts:843:29    - Unknown word (alongisde)  -- Run typechecking tests alongisde regular tests.
 packages/vitest/src/node/viteLogger.ts:139:47    - Unknown word (analysizable) -- Vite for statically not analysizable dynamimc import
 packages/vitest/src/node/viteLogger.ts:139:60    - Unknown word (dynamimc)     -- statically not analysizable dynamimc import
 packages/vitest/src/node/watch-filter.ts:222:11    - Unknown word (cursort)    -- const cursortPos
@@ -379,7 +381,7 @@ packages/vitest/src/runtime/utils.ts:57:8      - Unknown word (cnpm)       -- //
 packages/vitest/src/runtime/vm/commonjs-executor.ts:278:24    - Unknown word (wrapp)      -- // TODO: should we wrapp module to rethrow context
 packages/vitest/src/runtime/vm/types.ts:40:10     - Unknown word (contextified) -- * The contextified object as returned by
 packages/vitest/src/runtime/vm/utils.ts:22:18     - Unknown word (Kets)       -- const defaultKets = Object.keys(mod.default
-packages/vitest/src/typecheck/collect.ts:240:12    - Unknown word (quasis)     -- for (let quasisIndex = 0; quasisIndex
+packages/vitest/src/typecheck/collect.ts:248:12    - Unknown word (quasis)     -- for (let quasisIndex = 0; quasisIndex
 packages/vitest/src/types/jsdom-options.ts:14:118    - Unknown word (subresources) -- sent while fetching subresources.
 packages/vitest/src/types/jsdom-options.ts:16:70     - Unknown word (KHTML)        -- AppleWebKit/537.36 (KHTML, like Gecko) jsdom/
 packages/vitest/src/types/mocker.ts:3:6       - Unknown word (Promisable) -- type Promisable<T> = T | Promise<T>
@@ -486,6 +488,8 @@ test/cli/fixtures/stacktraces/vite.config.ts:5:24      - Unknown word (imba)    
 test/cli/fixtures/vitest.config.js:1:43      - Unknown word (accidentaly) -- the main one is not accidentaly inherited by the tests
 test/cli/test/fails.test.ts:14:30     - Unknown word (snapshop)   -- update: file === 'inline-snapshop-inside-loop.test.ts
 test/cli/test/fails.test.ts:28:34     - Unknown word (coverag)    -- report coverage when "coverag.reportOnFailure: true
+test/cli/test/location-filters.test.ts:81:36     - Unknown word (doesn)      -- fixturePath}/:a/file/that/doesn-t/exit:10`,
+test/cli/test/location-filters.test.ts:89:9      - Unknown word (erorrs)     -- test('erorrs if includeTaskLocation
 test/cli/test/stacktraces.test.ts:11:19     - Unknown word (warnining)  -- // To prevent the warnining coming up in snapshots
 test/cli/test/stacktraces.test.ts:55:24     - Unknown word (framestack) -- // expect to print framestack of foo.js
 test/config/fixtures/browser-custom-html/browser-custom.test.ts:7:7       - Unknown word (importmap)  -- test('importmap is injected', () =>

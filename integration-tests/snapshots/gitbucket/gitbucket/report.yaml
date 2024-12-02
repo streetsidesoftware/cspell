@@ -34,7 +34,7 @@ issues:
   - "build.sbt:81:5          Wconf               U       \"-Wconf:cat=unused&src=twirl"
   - "build.sbt:86:13         Xsource             U       Seq(\"-Xsource:3-cross\")"
   - "build.sbt:91:11         javac               U       compile / javacOptions ++= Seq(\"-target"
-  - "build.sbt:92:26         Dlogback            U       Jetty / javaOptions += \"-Dlogback.configurationFile=/logback"
+  - "build.sbt:92:30         Dlogback            U       Container / javaOptions += \"-Dlogback.configurationFile=/logback"
   - "build.sbt:96:25         Dgitbucket          U       Test / javaOptions += \"-Dgitbucket.home=target/gitbucket"
   - "build.sbt:241:11        takezoe             U       <id>takezoe</id>"
   - "build.sbt:242:13        Naoki               U       <name>Naoki Takezoe</name>"
