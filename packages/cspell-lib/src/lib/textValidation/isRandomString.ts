@@ -15,8 +15,25 @@ export function isRandomString(s: string, maxNoiseToLengthRatio = maxRadio): boo
  * @returns true if the string is considered random;
  */
 export function scoreRandomString(s: string): number {
+    if (!s.length) return 0;
     const n = categorizeString(s);
-    return (s.length && n.length / s.length) || 0;
+    return (n.length / s.length) * 0.75 + (1 - scoreLongWordRatio(s)) * 0.25 + nonLetterRatio(s) * 0.25;
+}
+
+export function scoreLongWordRatio(s: string): number {
+    return sumWordLengths(s) / s.length;
+}
+
+function sumWordLengths(s: string): number {
+    let total = 0;
+    for (const w of s.matchAll(/\p{Lu}\p{Ll}{3,}|\p{Ll}{4,}|\p{Lu}{4,}/gu)) {
+        total += w[0].length;
+    }
+    return total;
+}
+
+function nonLetterRatio(s: string): number {
+    return s.replaceAll(/\p{L}/gu, '').length / s.length;
 }
 
 export function categorizeString(s: string): string {
