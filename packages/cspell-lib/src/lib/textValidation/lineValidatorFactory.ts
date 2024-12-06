@@ -331,11 +331,14 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
             if (!mismatches.length) return mismatches;
             const hexSequences = !ignoreRandomStrings
                 ? []
-                : extractHexSequences(possibleWord.text, MIN_HEX_SEQUENCE_LENGTH).filter(
-                      // Only consider hex sequences that are all upper case or all lower case and contain a `-` or a digit.
-                      (w) =>
-                          (w.text === w.text.toLowerCase() || w.text === w.text.toUpperCase()) && /[\d-]/.test(w.text),
-                  );
+                : extractHexSequences(possibleWord.text, MIN_HEX_SEQUENCE_LENGTH)
+                      .filter(
+                          // Only consider hex sequences that are all upper case or all lower case and contain a `-` or a digit.
+                          (w) =>
+                              (w.text === w.text.toLowerCase() || w.text === w.text.toUpperCase()) &&
+                              /[\d-]/.test(w.text),
+                      )
+                      .map((w) => ((w.offset += possibleWord.offset), w));
             if (hexSequences.length) {
                 mismatches = filterExcludedTextOffsets(mismatches, hexSequences);
             }

@@ -70,16 +70,18 @@ describe('isRandomString', () => {
 
     // cspell:disable
     test.each`
-        str                                                            | expected
-        ${''}                                                          | ${[]}
-        ${'hello'}                                                     | ${[]}
-        ${'1LogRecord_1a46bc9a3adab542be80be9671d2ff82e'}              | ${['1a46bc9a3adab542be80be9671d2ff82e']}
-        ${'1LogRecord1a46bc9a3adab542be80be9671d2ff82e'}               | ${[]}
-        ${'1LogRecord_1a46-bc9a-3ada-b542-be80-be96-71d2-ff82e'}       | ${['1a46-bc9a-3ada-b542-be80-be96-71d2-ff82e']}
-        ${'1LogRecord-1a46-bc9a-3ada-b542-be80-be96-71d2-ff82e'}       | ${['1a46-bc9a-3ada-b542-be80-be96-71d2-ff82e']}
-        ${'1LogRecord-1a46-bc9a-3ada-b542-be80-be96-71d2-ff82e-hello'} | ${['1a46-bc9a-3ada-b542-be80-be96-71d2-ff82e']}
-        ${'1LogRecord-1a46-bc9a-3ada-b542-be80-be96-71d2-ff82e_hello'} | ${['1a46-bc9a-3ada-b542-be80-be96-71d2-ff82e']}
-        ${'1LogRecord-1a46-bc9a-3ada-b542-be80-be96-71d2-ff82e-apple'} | ${['1a46-bc9a-3ada-b542-be80-be96-71d2-ff82e']}
+        str                                                               | expected
+        ${''}                                                             | ${[]}
+        ${'hello'}                                                        | ${[]}
+        ${'1LogRecord_1a46bc9a3adab542be80be9671d2ff82e'}                 | ${['1a46bc9a3adab542be80be9671d2ff82e']}
+        ${'1LogRecord1a46bc9a3adab542be80be9671d2ff82e'}                  | ${[]}
+        ${'1LogRecord_1a46-bc9a-3ada-b542-be80-be96-71d2-ff82e'}          | ${['1a46-bc9a-3ada-b542-be80-be96-71d2-ff82e']}
+        ${'1LogRecord-1a46-bc9a-3ada-b542-be80-be96-71d2-ff82e'}          | ${['1a46-bc9a-3ada-b542-be80-be96-71d2-ff82e']}
+        ${'1LogRecord-1a46-bc9a-3ada-b542-be80-be96-71d2-ff82e-hello'}    | ${['1a46-bc9a-3ada-b542-be80-be96-71d2-ff82e']}
+        ${'1LogRecord-1a46-bc9a-3ada-b542-be80-be96-71d2-ff82e_hello'}    | ${['1a46-bc9a-3ada-b542-be80-be96-71d2-ff82e']}
+        ${'1LogRecord-1a46-bc9a-3ada-b542-be80-be96-71d2-ff82e-apple'}    | ${['1a46-bc9a-3ada-b542-be80-be96-71d2-ff82e']}
+        ${'constraint_opclasses("schema_charmodel_field_8b338dea_like")'} | ${['8b338dea']}
+        ${'self.assertIn("schema_relationmodel_field_id_395fbb08_like")'} | ${['395fbb08']}
     `('extractHexSequences $str', ({ str, expected }) => {
         expect(extractHexSequences(str).map((a) => a.text)).toEqual(expected);
     });

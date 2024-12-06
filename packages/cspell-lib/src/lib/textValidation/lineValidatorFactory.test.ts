@@ -30,19 +30,21 @@ describe('lineValidatorFactory', () => {
         expect(r).toEqual(expected);
     });
 
-    // cspell:ignore adab AFDA eefcb
+    // cspell:ignore adab AFDA eefcb opclasses charmodel relationmodel
 
     test.each`
-        text                                                  | expected
-        ${'three etc. izfrNTmQLnfsLzi2Wb9x'}                  | ${[]}
-        ${'1LogRecord_1a46bc9a3adab542be80be9671d2ff82e'}     | ${[]}
-        ${'NS_CONST_VERSION_253D4AFDA959234B48A478B956C3C'}   | ${[]}
-        ${'PowerShell.Management_eefcb906-b326-4e99-9f54-8b'} | ${[]}
-        ${'To_EntityDto_And_To_DrivedEntityDto'}              | ${[oc({ text: 'Drived' })]}
+        text                                                              | expected
+        ${'three etc. izfrNTmQLnfsLzi2Wb9x'}                              | ${[]}
+        ${'1LogRecord_1a46bc9a3adab542be80be9671d2ff82e'}                 | ${[]}
+        ${'NS_CONST_VERSION_253D4AFDA959234B48A478B956C3C'}               | ${[]}
+        ${'PowerShell.Management_eefcb906-b326-4e99-9f54-8b'}             | ${[]}
+        ${'To_EntityDto_And_To_DrivedEntityDto'}                          | ${['Drived']}
+        ${'constraint_opclasses("schema_charmodel_field_8b338dea_like")'} | ${['opclasses', 'charmodel']}
+        ${'self.assertIn("schema_relationmodel_field_id_395fbb08_like")'} | ${['relationmodel']}
     `('textValidatorFactory $text', ({ text, expected }) => {
         const dict = getDict();
         const tv = textValidatorFactory(dict, { ignoreCase: true, minWordLength: 3, minRandomLength: 20 });
-        const r = [...tv.validate({ text: text, range: [10, 10 + text.length] })];
+        const r = [...tv.validate({ text: text, range: [10, 10 + text.length] })].map((a) => a.text);
         expect(r).toEqual(expected);
     });
 });
@@ -57,6 +59,8 @@ function getDict(): SpellingDictionary {
         PowerShell Management
         CONST VERSION
         LogRecord
+        constraint schema field like
+        self assert
     `
         .split(/\s+/)
         .filter((a) => !!a);
