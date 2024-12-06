@@ -30,7 +30,7 @@ describe('lineValidatorFactory', () => {
         expect(r).toEqual(expected);
     });
 
-    // cspell:ignore adab AFDA eefcb opclasses charmodel relationmodel
+    // cspell:ignore adab AFDA eefcb opclasses charmodel relationmodel deadfee
 
     test.each`
         text                                                              | expected
@@ -40,6 +40,7 @@ describe('lineValidatorFactory', () => {
         ${'PowerShell.Management_eefcb906-b326-4e99-9f54-8b'}             | ${[]}
         ${'To_EntityDto_And_To_DrivedEntityDto'}                          | ${['Drived']}
         ${'constraint_opclasses("schema_charmodel_field_8b338dea_like")'} | ${['opclasses', 'charmodel']}
+        ${'constraint_opclasses("schema_charmodel_field_8deadfee_like")'} | ${['opclasses', 'charmodel', 'deadfee']}
         ${'self.assertIn("schema_relationmodel_field_id_395fbb08_like")'} | ${['relationmodel']}
     `('textValidatorFactory $text', ({ text, expected }) => {
         const dict = getDict();
@@ -61,6 +62,7 @@ function getDict(): SpellingDictionary {
         LogRecord
         constraint schema field like
         self assert
+        !deadfee
     `
         .split(/\s+/)
         .filter((a) => !!a);
