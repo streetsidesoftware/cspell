@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { categorizeString, isRandomString, scoreRandomString } from './isRandomString.js';
+import { categorizeString, extractHexSequences, isRandomString, scoreRandomString } from './isRandomString.js';
 
 describe('isRandomString', () => {
     // cspell:disable
@@ -20,7 +20,7 @@ describe('isRandomString', () => {
         ${'myNameSpace1/MyNameSpace2/mynamespace3/myserviceName'}                                                 | ${false}
         ${'PxTransform12transformInvERKS0_'}                                                                      | ${false}
         ${'_ZNK5physx11PxTransform12transformInvERKNS_6PxVec3E'}                                                  | ${false}
-        ${'_ZNK5physx11PxERKNS_6PxVec3E'}                                                                         | ${true}
+        ${'_ZNK5physx11PxERKNS_6PxVec3E'}                                                                         | ${false}
     `('isRandomString $str', ({ str, expected }) => {
         expect(isRandomString(str)).toBe(expected);
     });
@@ -30,22 +30,22 @@ describe('isRandomString', () => {
     test.each`
         str                                                                                                      | expected
         ${''}                                                                                                    | ${0}
-        ${'hello'}                                                                                               | ${0.15}
-        ${'café'}                                                                                                | ${0.18}
-        ${'café'.normalize('NFD')}                                                                               | ${0.25}
-        ${'Hello'}                                                                                               | ${0.15}
+        ${'hello'}                                                                                               | ${0.2}
+        ${'café'}                                                                                                | ${0.25}
+        ${'café'.normalize('NFD')}                                                                               | ${0.2}
+        ${'Hello'}                                                                                               | ${0.2}
         ${'expectCategorizeStringStrToBeExpected'}                                                               | ${0.18}
-        ${'expect categorizeString str .toBe expected'}                                                          | ${0.31}
-        ${'H4sIAAAAAAAAA72d3ZLjNpK276X6O6ztFX4lWxnPN5whD3jsGd3DzomHGqJVa21StLqp9uOibn3LwgIKiD5AkyQ7Dpyu0QmkmQy'} | ${0.63}
-        ${'izfrNTmQLnfsLzi2Wb9xPz2Qj9fQYGgeug3N2MkDuVHwpPcgkhHkJgCQuuvT+qZI'}                                    | ${0.57}
-        ${'sampleOldFalsePositivesBase64'}                                                                       | ${0.21}
-        ${'residencyStandard2DMultisampleBlockShape'}                                                            | ${0.15}
-        ${'myNameSpace1/MyNameSpace2/mynamespace3/myserviceName'}                                                | ${0.29}
-        ${'PxTransform12transformInvERKS0_'}                                                                     | ${0.27}
-        ${'_ZNK5physx11PxTransform12transformInvERKNS_6PxVec3E'}                                                 | ${0.37}
-        ${'_ZNK5physx11PxERKNS_6PxVec3E'}                                                                        | ${0.51}
-        ${'To_EntityDto_And_To_DrivedEntityDto'}                                                                 | ${0.32}
-        ${'MAX_BUFFER_SIZE'}                                                                                     | ${0.26}
+        ${'expect categorizeString str .toBe expected'}                                                          | ${0.28}
+        ${'H4sIAAAAAAAAA72d3ZLjNpK276X6O6ztFX4lWxnPN5whD3jsGd3DzomHGqJVa21StLqp9uOibn3LwgIKiD5AkyQ7Dpyu0QmkmQy'} | ${0.53}
+        ${'izfrNTmQLnfsLzi2Wb9xPz2Qj9fQYGgeug3N2MkDuVHwpPcgkhHkJgCQuuvT+qZI'}                                    | ${0.51}
+        ${'sampleOldFalsePositivesBase64'}                                                                       | ${0.2}
+        ${'residencyStandard2DMultisampleBlockShape'}                                                            | ${0.17}
+        ${'myNameSpace1/MyNameSpace2/mynamespace3/myserviceName'}                                                | ${0.28}
+        ${'PxTransform12transformInvERKS0_'}                                                                     | ${0.22}
+        ${'_ZNK5physx11PxTransform12transformInvERKNS_6PxVec3E'}                                                 | ${0.29}
+        ${'_ZNK5physx11PxERKNS_6PxVec3E'}                                                                        | ${0.39}
+        ${'To_EntityDto_And_To_DrivedEntityDto'}                                                                 | ${0.22}
+        ${'MAX_BUFFER_SIZE'}                                                                                     | ${0.2}
     `('isRandomString $str', ({ str, expected }) => {
         expect(scoreRandomString(str))
             .greaterThanOrEqual(expected)
@@ -65,6 +65,23 @@ describe('isRandomString', () => {
         ${'izfrNTmQLnfsLzi2Wb9xPz2Qj9fQYGgeug3N2MkDuVHwpPcgkhHkJgCQuuvT+qZI'}                                     | ${'121211010110101210201121111212+12'}
     `('categorizeString $str', ({ str, expected }) => {
         expect(categorizeString(str)).toBe(expected);
+    });
+    // cspell:enable
+
+    // cspell:disable
+    test.each`
+        str                                                            | expected
+        ${''}                                                          | ${[]}
+        ${'hello'}                                                     | ${[]}
+        ${'1LogRecord_1a46bc9a3adab542be80be9671d2ff82e'}              | ${['1a46bc9a3adab542be80be9671d2ff82e']}
+        ${'1LogRecord1a46bc9a3adab542be80be9671d2ff82e'}               | ${[]}
+        ${'1LogRecord_1a46-bc9a-3ada-b542-be80-be96-71d2-ff82e'}       | ${['1a46-bc9a-3ada-b542-be80-be96-71d2-ff82e']}
+        ${'1LogRecord-1a46-bc9a-3ada-b542-be80-be96-71d2-ff82e'}       | ${['1a46-bc9a-3ada-b542-be80-be96-71d2-ff82e']}
+        ${'1LogRecord-1a46-bc9a-3ada-b542-be80-be96-71d2-ff82e-hello'} | ${['1a46-bc9a-3ada-b542-be80-be96-71d2-ff82e']}
+        ${'1LogRecord-1a46-bc9a-3ada-b542-be80-be96-71d2-ff82e_hello'} | ${['1a46-bc9a-3ada-b542-be80-be96-71d2-ff82e']}
+        ${'1LogRecord-1a46-bc9a-3ada-b542-be80-be96-71d2-ff82e-apple'} | ${['1a46-bc9a-3ada-b542-be80-be96-71d2-ff82e']}
+    `('extractHexSequences $str', ({ str, expected }) => {
+        expect(extractHexSequences(str).map((a) => a.text)).toEqual(expected);
     });
     // cspell:enable
 });
