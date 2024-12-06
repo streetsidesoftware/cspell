@@ -17,6 +17,7 @@ import {
 import { regExpCamelCaseWordBreaksWithEnglishSuffix } from '../util/textRegex.js';
 import { split } from '../util/wordSplitter.js';
 import { defaultMinWordLength } from './defaultConstants.js';
+import { extractHexSequences, isRandomString } from './isRandomString.js';
 import { isWordValidWithEscapeRetry } from './isWordValid.js';
 import { mapRangeBackToOriginalPos } from './parsedText.js';
 import type {
@@ -28,7 +29,6 @@ import type {
     ValidationIssueRO,
     ValidationOptions,
 } from './ValidationTypes.js';
-import { isRandomString } from './isRandomString.js';
 
 interface LineValidator {
     fn: LineValidatorFn;
@@ -47,6 +47,8 @@ interface KnownIssuesForWord {
     possibleWord: TextOffsetRO;
     issues: ValidationIssue[];
 }
+
+const MIN_HEX_SEQUENCE_LENGTH = 8;
 
 export function lineValidatorFactory(sDict: SpellingDictionary, options: ValidationOptions): LineValidator {
     const {
@@ -315,7 +317,7 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
             const flagged = checkForFlaggedWord(possibleWord);
             if (flagged) return [flagged];
 
-            const mismatches: ValidationIssue[] = [];
+            let mismatches: ValidationIssue[] = [];
             for (const wo of extractWordsFromTextOffset(possibleWord)) {
                 if (setOfKnownSuccessfulWords.has(wo.text)) continue;
                 const issue = wo as ValidationIssue;
@@ -325,6 +327,17 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
                 for (const w of checkFullWord(issue)) {
                     mismatches.push(w);
                 }
+            }
+            if (!mismatches.length) return mismatches;
+            const hexSequences = !ignoreRandomStrings
+                ? []
+                : extractHexSequences(possibleWord.text, MIN_HEX_SEQUENCE_LENGTH).filter(
+                      // Only consider hex sequences that are all upper case or all lower case and contain a `-` or a digit.
+                      (w) =>
+                          (w.text === w.text.toLowerCase() || w.text === w.text.toUpperCase()) && /[\d-]/.test(w.text),
+                  );
+            if (hexSequences.length) {
+                mismatches = filterExcludedTextOffsets(mismatches, hexSequences);
             }
             if (mismatches.length) {
                 // Try the more expensive word splitter
@@ -337,8 +350,12 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
                         const v = checkWord({ ...w, text: m[1], line: lineSegment.line });
                         return v.isFlagged || !v.isFound;
                     });
-                if (nonMatching.length < mismatches.length) {
-                    return nonMatching.map((w) => ({ ...w, line: lineSegment.line })).map(annotateIsFlagged);
+                const filtered = filterExcludedTextOffsets(
+                    nonMatching.map((w) => ({ ...w, line: lineSegment.line })),
+                    hexSequences,
+                );
+                if (filtered.length < mismatches.length) {
+                    return filtered.map(annotateIsFlagged);
                 }
             }
             return mismatches;
@@ -396,4 +413,28 @@ export function textValidatorFactory(dict: SpellingDictionary, options: Validati
         validate,
         lineValidator,
     };
+}
+
+function filterExcludedTextOffsets(issues: ValidationIssue[], excluded: TextOffsetRO[]): ValidationIssue[] {
+    if (!excluded.length) return issues;
+    const keep: ValidationIssue[] = [];
+    let i = 0;
+    let j = 0;
+    for (i = 0; i < issues.length && j < excluded.length; i++) {
+        const issue = issues[i];
+        while (j < excluded.length && excluded[j].offset + excluded[j].text.length <= issue.offset) {
+            j++;
+        }
+        if (j >= excluded.length) {
+            break;
+        }
+        if (issue.offset < excluded[j].offset) {
+            keep.push(issue);
+        }
+    }
+    if (i < issues.length) {
+        keep.push(...issues.slice(i));
+    }
+
+    return keep;
 }
