@@ -354,11 +354,11 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
                         return v.isFlagged || !v.isFound;
                     });
                 const filtered = filterExcludedTextOffsets(
-                    nonMatching.map((w) => ({ ...w, line: lineSegment.line })),
+                    nonMatching.map((w) => ({ ...w, line: lineSegment.line })).map(annotateIsFlagged),
                     hexSequences,
                 );
                 if (filtered.length < mismatches.length) {
-                    return filtered.map(annotateIsFlagged);
+                    return filtered;
                 }
             }
             return mismatches;
@@ -431,7 +431,7 @@ function filterExcludedTextOffsets(issues: ValidationIssue[], excluded: TextOffs
         if (j >= excluded.length) {
             break;
         }
-        if (issue.offset < excluded[j].offset) {
+        if (issue.isFlagged || issue.offset < excluded[j].offset) {
             keep.push(issue);
         }
     }
