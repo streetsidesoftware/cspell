@@ -30,6 +30,7 @@ exports[`Validate the cspell API > Verify API exports 1`] = `
     "gitignoreRoot": "gitignoreRoot",
     "globRoot": "globRoot",
     "ignorePaths": "ignorePaths",
+    "ignoreRandomStrings": "ignoreRandomStrings",
     "ignoreRegExpList": "ignoreRegExpList",
     "ignoreWords": "ignoreWords",
     "import": "import",
@@ -40,6 +41,7 @@ exports[`Validate the cspell API > Verify API exports 1`] = `
     "loadDefaultConfiguration": "loadDefaultConfiguration",
     "maxDuplicateProblems": "maxDuplicateProblems",
     "maxNumberOfProblems": "maxNumberOfProblems",
+    "minRandomLength": "minRandomLength",
     "minWordLength": "minWordLength",
     "name": "name",
     "noConfigSearch": "noConfigSearch",
@@ -173,6 +175,10 @@ exports[`Validate the cspell API > Verify API exports 1`] = `
   "createSpellingDictionaryCollection": [Function],
   "createTextDocument": [Function],
   "currentSettingsFileVersion": "0.2",
+  "defaultCSpellSettings": {
+    "ignoreRandomStrings": true,
+    "minRandomLength": 40,
+  },
   "defaultConfigFilenames": [
     "package.json",
     ".cspell.json",
