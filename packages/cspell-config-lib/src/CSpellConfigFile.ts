@@ -80,6 +80,19 @@ function addUniqueWordsToListAndSort(list: string[], toAdd: string[]): void {
     }
 }
 
+export function satisfiesCSpellConfigFile(obj: unknown): obj is ICSpellConfigFile {
+    const r: boolean =
+        obj instanceof CSpellConfigFile ||
+        (!!obj &&
+            typeof obj === 'object' &&
+            'url' in obj &&
+            obj.url instanceof URL &&
+            'settings' in obj &&
+            !!obj.settings &&
+            typeof obj.settings === 'object');
+    return r;
+}
+
 export const __testing__ = {
     addUniqueWordsToListAndSort,
 };
