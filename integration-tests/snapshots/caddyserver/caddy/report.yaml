@@ -5,7 +5,7 @@ Args: '["**/*.go"]'
 Summary:
   files: 279
   filesWithIssues: 254
-  issues: 3533
+  issues: 3532
   errors: 0
 Errors: []
 
@@ -125,7 +125,6 @@ issues:
   - "caddyconfig/caddyfile/parse_test.go:669:13      foofoobarbar    U       expect: \"foofoobarbar\","
   - "caddyconfig/caddyfile/parse_test.go:681:13      foobarfoobar    U       expect: \"foobarfoobar\","
   - "caddyconfig/caddyfile/parse_test.go:693:13      foobarbaz       U       expect: \"foobarbaz\","
-  - "caddyconfig/caddyfile/parse_test.go:697:23      baz             U       expect: \"foo$FOOBARbaz\", // should not chain"
   - "caddyconfig/caddyfile/parse_test.go:831:22      Caddyfile       U       // Make the derived Caddyfile that expects (common"
   - "caddyconfig/caddyfile/parse.go:15:9         caddyfile       U       package caddyfile"
   - "caddyconfig/caddyfile/parse.go:27:14        caddyserver     U       \"github.com/caddyserver/caddy/v2\""

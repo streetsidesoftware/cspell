@@ -5,7 +5,7 @@ Args: '["--issues-summary-report","**/*.{md,py}"]'
 Summary:
   files: 2813
   filesWithIssues: 909
-  issues: 8094
+  issues: 8084
   errors: 0
 Errors: []
 
@@ -4298,8 +4298,6 @@ issues:
   - "tests/files/tests.py:391:24         brokenimg       U       $ echo \"123\" > brokenimg.png"
   - "tests/files/tests.py:393:61         brokenimg       U       dirname(__file__), \"brokenimg.png\")"
   - "tests/files/tests.py:448:23         CIFS            U       filesystem is CIFS, or when relabel is"
-  - "tests/files/tests.py:503:38         quux            U       write(b\"foo bar baz quux\\n\")"
-  - "tests/files/tests.py:509:38         quux            U       write(b\"foo bar baz quux\\n\")"
   - "tests/filtered_relation/tests.py:303:23         multijoin       U       def test_with_m2m_multijoin(self):"
   - "tests/fixtures_regress/tests.py:1:3         Unittests           U       # Unittests for fixtures."
   - "tests/fixtures_regress/tests.py:94:41       anatinus            U       name=\"Ornithorhynchus anatinus\","
@@ -5270,7 +5268,6 @@ issues:
   - "tests/httpwrappers/tests.py:425:25      unichr              U       # '\\xde\\x9e' == unichr(1950).encode()"
   - "tests/httpwrappers/tests.py:449:23      isnt (isn't)        U       def test_iterator_isnt_rewound(self):"
   - "tests/httpwrappers/tests.py:464:18      привет              U       r.write(\"привет\")"
-  - "tests/httpwrappers/tests.py:486:48      nbaz                U       content, b\"foo\\nbar\\nbaz\\n\")"
   - "tests/httpwrappers/tests.py:541:33      Mundo               U       (None, b\"Ol\\xc3\\xa1 Mundo\"),"
   - "tests/httpwrappers/tests.py:542:56      Mundo               U       utf-8\", b\"Ol\\xc3\\xa1 Mundo\"),"
   - "tests/httpwrappers/tests.py:543:57      Mundo               U       iso-8859-1\", b\"Ol\\xe1 Mundo\"),"
@@ -6883,9 +6880,6 @@ issues:
   - "tests/redirects_tests/tests.py:65:23        shortcircuits       U       def test_redirect_shortcircuits_non_404_response(self"
   - "tests/requests_tests/tests.py:59:24         Bsome                   U       expected = \"/%3Bsome/%3Fawful/%3Dpath/foo"
   - "tests/requests_tests/tests.py:59:32         Fawful                  U       expected = \"/%3Bsome/%3Fawful/%3Dpath/foo:bar/?;some"
-  - "tests/requests_tests/tests.py:67:45         quux                    U       QUERY_STRING\"] = \"baz#quux\""
-  - "tests/requests_tests/tests.py:68:67         quux                    U       path(), \"/foo%23bar?baz#quux\")"
-  - "tests/requests_tests/tests.py:69:79         quux                    U       prefix/foo%23bar?baz#quux\")"
   - "tests/requests_tests/tests.py:73:26         somepath                U       request.path = \"/somepath/\""
   - "tests/requests_tests/tests.py:79:62         somepath                U       <HttpRequest: GET '/somepath/'>\")"
   - "tests/requests_tests/tests.py:91:14         wsgirequest             U       def test_wsgirequest(self):"
@@ -7817,9 +7811,6 @@ issues:
   - "tests/utils_tests/test_itercompat.py:5:19           itercompat      U       from django.utils.itercompat import is_iterable"
   - "tests/utils_tests/test_itercompat.py:11:27          itercompat      U       \"django.utils.itercompat.is_iterable() is deprecated"
   - "tests/utils_tests/test_lazyobject.py:62:22          falsey          U       def test_getattr_falsey(self):"
-  - "tests/utils_tests/test_lazyobject.py:430:37         quux            U       attr in [\"bar\", \"baz\", \"quux\"]:"
-  - "tests/utils_tests/test_lazyobject.py:448:14         quux            U       self.quux = \"quux\""
-  - "tests/utils_tests/test_lazyobject.py:448:22         quux            U       self.quux = \"quux\""
   - "tests/utils_tests/test_lazyobject.py:499:27         categoryinfo    U       lazy_category.categoryinfo"
   - "tests/utils_tests/test_lorem_ipsum.py:12:36         amet                U       lorem ipsum dolor sit amet consectetur adipisicing"
   - "tests/utils_tests/test_lorem_ipsum.py:12:41         consectetur         U       ipsum dolor sit amet consectetur adipisicing elit sed"
@@ -7976,7 +7967,6 @@ issues:
   - "tests/validation/tests.py:215:70        fsad            U       10.10\", generic_ip=\"fsad\""
   - "tests/validators/tests.py:202:6         rdar                    U       \"rdar://1234\","
   - "tests/validators/tests.py:204:14        shouldfail              U       \"http:// shouldfail.com\","
-  - "tests/validators/tests.py:206:33        quux                    U       foo.bar/foo(bar)baz quux\","
   - "tests/validators/tests.py:237:6         xample                  U       \"xample.com\","
   - "tests/validators/tests.py:289:48        उदाहरण                  U       domain.with.idn.tld.उदाहरण.परीक्षा\", None),"
   - "tests/validators/tests.py:289:55        परीक्षा                 U       with.idn.tld.उदाहरण.परीक्षा\", None),"
@@ -9665,7 +9655,6 @@ issuesSummary:
   - "text: natus, count: 1, files: 1,"
   - "text: nazwa, count: 1, files: 1,"
   - "text: nbár, count: 1, files: 1,"
-  - "text: nbaz, count: 1, files: 1,"
   - "text: nbfield, count: 6, files: 2,"
   - "text: nbmf, count: 2, files: 1,"
   - "text: nbmt, count: 2, files: 1,"
@@ -10081,7 +10070,6 @@ issuesSummary:
   - "text: quidem, count: 1, files: 1,"
   - "text: quis, count: 3, files: 2,"
   - "text: quisquam, count: 1, files: 1,"
-  - "text: quux, count: 9, files: 4,"
   - "text: qwer, count: 1, files: 1,"
   - "text: Qwghlm, count: 3, files: 1,"
   - "text: Radiohead, count: 5, files: 1,"

@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: [".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 2030, Issues found: 1721 in 325 files.
+ CSpell: Files checked: 2030, Issues found: 1642 in 303 files.
  exit code: 1
 Makefile.js:128:88    - Unknown word (ined)       -- followed by the string "ined".
 Makefile.js:343:12    - Unknown word (gensite)    -- target.gensite();
@@ -85,14 +85,12 @@ docs/src/maintain/manage-issues.md:32:4      - Unknown word (Triaging)   -- ## T
 docs/src/maintain/manage-releases.md:107:103   - Unknown word (eslintbot)  -- token is tied to the `eslintbot` npm account and needs
 docs/src/maintain/overview.md:33:6      - Unknown word (Stackaid)   -- * [**Stackaid.us**](https://simulation
 docs/src/pages/flags.md:39:5      - Unknown word (endfor)     -- {%- endfor -%}
-docs/src/rules/accessor-pairs.md:267:7     - Unknown word (Quux)       -- const Quux = class {
 docs/src/rules/arrow-body-style.md:50:12     - Unknown word (retv)       -- let bar = (retv, name) => {
 docs/src/rules/brace-style.md:25:54     - Unknown word (Stroustrup) -- brace style is called Stroustrup, in which the `else
 docs/src/rules/brace-style.md:36:26     - Unknown word (Allman)     -- Another style is called [Allman](https://en.wikipedia
 docs/src/rules/brace-style.md:60:5      - Unknown word (stroustrup) -- * `"stroustrup"` enforces Stroustrup
 docs/src/rules/brace-style.md:61:5      - Unknown word (allman)     -- * `"allman"` enforces Allman style
 docs/src/rules/capitalized-comments.md:274:84    - Unknown word (blockignore) -- { "ignorePattern": "blockignore" } }] */
-docs/src/rules/comma-dangle.md:13:11     - Unknown word (quux)       -- qux: "quux",
 docs/src/rules/complexity.md:177:37    - Unknown word (Cabe)       -- default) - Classic McCabe cyclomatic complexity
 docs/src/rules/function-paren-newline.md:338:5     - Unknown word (barbaz)     -- var barbaz = function(
 docs/src/rules/id-denylist.md:7:102     - Unknown word (Karlton)    -- naming things." — Phil Karlton
@@ -102,7 +100,6 @@ docs/src/rules/indent-legacy.md:401:8     - Unknown word (boop)       -- qux, bo
 docs/src/rules/key-spacing.md:194:5     - Unknown word (bcde)       -- bcde: 42,
 docs/src/rules/key-spacing.md:216:5     - Unknown word (ijkl)       -- ijkl: 'Non-consecutive lines
 docs/src/rules/max-lines-per-function.md:31:45     - Unknown word (dbname)     -- return m("tr", {key: db.dbname}, [
-docs/src/rules/no-dupe-else-if.md:63:5      - Unknown word (quuux)      -- quuux();
 docs/src/rules/no-dupe-keys.md:56:5      - Unknown word (quxx)       -- quxx: "qux"
 docs/src/rules/no-empty-character-class.md:40:13     - Unknown word (abcefg)     -- regex.test("abcefg"); // false, the nested
 docs/src/rules/no-eq-null.md:61:41     - Unknown word (eqnull)     -- rule corresponds to `eqnull` rule of JSHint.
@@ -330,7 +327,6 @@ tests/lib/rules/array-element-newline.js:45:78     - Unknown word (nosomething) 
 tests/lib/rules/arrow-body-style.js:27:38     - Unknown word (nretv)      -- = (retv, name) => {\nretv[name] = true;\nreturn
 tests/lib/rules/brace-style.js:103:35    - Unknown word (fontstack)  -- code: "if (tag === 1) fontstack.name = pbf.readString
 tests/lib/rules/brace-style.js:32:44     - Unknown word (Varint)     -- glyph.id = pbf.readVarint();\nelse if (tag ==
-tests/lib/rules/brace-style.js:451:77    - Unknown word (nqux)       -- \nbaz();\n}\nelse {\nqux();\n}",
 tests/lib/rules/capitalized-comments.js:344:22    - Unknown word (über)       -- code: "//über",
 tests/lib/rules/capitalized-comments.js:345:24    - Unknown word (Über)       -- output: "//Über",
 tests/lib/rules/capitalized-comments.js:563:39    - Unknown word (Mtavruli)   -- "// Გ", // Georgian Mtavruli Capital Letter Gan
@@ -351,7 +347,6 @@ tests/lib/rules/id-length.js:699:29    - Unknown word (NOTMATCHED) -- code: "fun
 tests/lib/rules/id-match.js:25:30     - Unknown word (Matthieu)   -- code: "__foo = \"Matthieu\"",
 tests/lib/rules/id-match.js:34:20     - Unknown word (firstname)  -- code: "firstname = \"Matthieu\"",
 tests/lib/rules/id-match.js:46:34     - Unknown word (Larcher)    -- code: "last_Name = \"Larcher\"",
-tests/lib/rules/indent-legacy.js:1553:41   - Unknown word (tqux)       -- t\t\t \t\t\t  \t   \tqux();\n" +
 tests/lib/rules/indent-legacy.js:1667:18   - Unknown word (barqux)     -- " barqux, bazqux);",
 tests/lib/rules/indent-legacy.js:1667:26   - Unknown word (bazqux)     -- " barqux, bazqux);",
 tests/lib/rules/indent-legacy.js:329:16    - Unknown word (otherdata)  -- " otherdata.forEach(function(zero
