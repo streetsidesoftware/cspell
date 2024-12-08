@@ -4,8 +4,8 @@ Url: https://github.com/eslint/eslint
 Args: '[".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]'
 Summary:
   files: 2030
-  filesWithIssues: 325
-  issues: 1721
+  filesWithIssues: 303
+  issues: 1642
   errors: 0
 Errors: []
 
@@ -65,14 +65,12 @@ issues:
   - "docs/src/maintain/manage-releases.md:107:103        eslintbot       U       token is tied to the `eslintbot` npm account and needs"
   - "docs/src/maintain/overview.md:33:6          Stackaid    U       * [**Stackaid.us**](https://simulation"
   - "docs/src/pages/flags.md:39:5        endfor      U       {%- endfor -%}"
-  - "docs/src/rules/accessor-pairs.md:267:7          Quux    U       const Quux = class {"
   - "docs/src/rules/arrow-body-style.md:50:12        retv    U       let bar = (retv, name) => {"
   - "docs/src/rules/brace-style.md:25:54         Stroustrup      U       brace style is called Stroustrup, in which the `else"
   - "docs/src/rules/brace-style.md:36:26         Allman          U       Another style is called [Allman](https://en.wikipedia"
   - "docs/src/rules/brace-style.md:60:5          stroustrup      U       * `\"stroustrup\"` enforces Stroustrup"
   - "docs/src/rules/brace-style.md:61:5          allman          U       * `\"allman\"` enforces Allman style"
   - "docs/src/rules/capitalized-comments.md:274:84       blockignore     U       { \"ignorePattern\": \"blockignore\" } }] */"
-  - "docs/src/rules/comma-dangle.md:13:11        quux    U       qux: \"quux\","
   - "docs/src/rules/complexity.md:177:37         Cabe    U       default) - Classic McCabe cyclomatic complexity"
   - "docs/src/rules/function-paren-newline.md:338:5          barbaz      U       var barbaz = function("
   - "docs/src/rules/id-denylist.md:7:102         Karlton     U       naming things.\" — Phil Karlton"
@@ -82,7 +80,6 @@ issues:
   - "docs/src/rules/key-spacing.md:194:5         bcde    U       bcde: 42,"
   - "docs/src/rules/key-spacing.md:216:5         ijkl    U       ijkl: 'Non-consecutive lines"
   - "docs/src/rules/max-lines-per-function.md:31:45          dbname      U       return m(\"tr\", {key: db.dbname}, ["
-  - "docs/src/rules/no-dupe-else-if.md:63:5          quuux       U       quuux();"
   - "docs/src/rules/no-dupe-keys.md:56:5         quxx    U       quxx: \"qux\""
   - "docs/src/rules/no-empty-character-class.md:40:13        abcefg      U       regex.test(\"abcefg\"); // false, the nested"
   - "docs/src/rules/no-eq-null.md:61:41          eqnull      U       rule corresponds to `eqnull` rule of JSHint."
@@ -335,7 +332,6 @@ issues:
   - "tests/lib/rules/arrow-body-style.js:27:38       nretv       U       = (retv, name) => {\\nretv[name] = true;\\nreturn"
   - "tests/lib/rules/brace-style.js:32:44        Varint          U       glyph.id = pbf.readVarint();\\nelse if (tag =="
   - "tests/lib/rules/brace-style.js:103:35       fontstack       U       code: \"if (tag === 1) fontstack.name = pbf.readString"
-  - "tests/lib/rules/brace-style.js:451:77       nqux            U       \\nbaz();\\n}\\nelse {\\nqux();\\n}\","
   - "tests/lib/rules/capitalized-comments.js:344:22      über        U       code: \"//über\","
   - "tests/lib/rules/capitalized-comments.js:345:24      Über        U       output: \"//Über\","
   - "tests/lib/rules/capitalized-comments.js:563:39      Mtavruli    U       \"// Გ\", // Georgian Mtavruli Capital Letter Gan"
@@ -358,7 +354,6 @@ issues:
   - "tests/lib/rules/id-match.js:46:34       Larcher         U       code: \"last_Name = \\\"Larcher\\\"\","
   - "tests/lib/rules/indent-legacy.js:329:16         otherdata       U       \" otherdata.forEach(function(zero"
   - "tests/lib/rules/indent-legacy.js:940:46         xfilter         U       function create (id, xfilter, rawType,\\n\" +"
-  - "tests/lib/rules/indent-legacy.js:1553:41        tqux            U       t\\t\\t \\t\\t\\t \\t \\tqux();\\n\" +"
   - "tests/lib/rules/indent-legacy.js:1667:18        barqux          U       \" barqux, bazqux);\","
   - "tests/lib/rules/indent-legacy.js:1667:26        bazqux          U       \" barqux, bazqux);\","
   - "tests/lib/rules/indent.js:409:17        lmnn        U       lmnn = [{"
@@ -909,7 +904,6 @@ issuesSummary:
   - "text: npmjs, count: 1, files: 1,"
   - "text: nqaz, count: 2, files: 1,"
   - "text: NQSP, count: 1, files: 1,"
-  - "text: nqux, count: 10, files: 2,"
   - "text: nqwe, count: 1, files: 1,"
   - "text: nretv, count: 3, files: 1,"
   - "text: nrvtbfux, count: 1, files: 1,"
@@ -966,9 +960,6 @@ issuesSummary:
   - "text: pushd, count: 1, files: 1,"
   - "text: quasis, count: 30, files: 17,"
   - "text: quotmark, count: 5, files: 1,"
-  - "text: quuux, count: 13, files: 7,"
-  - "text: quux, count: 45, files: 21,"
-  - "text: Quux, count: 1, files: 1,"
   - "text: quxx, count: 22, files: 8,"
   - "text: regexdash, count: 1, files: 1,"
   - "text: removeend, count: 1, files: 1,"
@@ -1046,7 +1037,6 @@ issuesSummary:
   - "text: toggleindex, count: 4, files: 2,"
   - "text: togglenav, count: 2, files: 1,"
   - "text: toint, count: 1, files: 1,"
-  - "text: tqux, count: 10, files: 2,"
   - "text: Traceur, count: 1, files: 1,"
   - "text: triaging, count: 5, files: 2,"
   - "text: Triaging, count: 5, files: 1,"
