@@ -11,7 +11,7 @@ import { createGenerator } from 'ts-json-schema-generator';
 const importDir = new URL('.', import.meta.url);
 const rootUrl = new URL('..', importDir);
 const typesDirUrl = new URL('src/common', rootUrl);
-const outFile = 'assets/options.schema.json';
+const outFileTs = 'src/generated/schema.cts';
 const typesDir = fileURLToPath(typesDirUrl);
 
 /** @type {import('ts-json-schema-generator').Config} */
@@ -58,9 +58,9 @@ async function run() {
 
     const schema = createGenerator(config).createSchema(config.type);
     const stringify = config.sortProps ? safeStableStringify : JSON.stringify;
-    const schemaString = stringify(schema, undefined, 2)?.replaceAll('\u200B', '');
+    const schemaString = stringify(schema, undefined, 2)?.replaceAll('\u200B', '') + '\n';
 
-    await writeFile(new URL(outFile, rootUrl), schemaString);
+    await writeFile(new URL(outFileTs, rootUrl), 'export const optionsSchema = ' + schemaString);
 }
 
 run();
