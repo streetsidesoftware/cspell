@@ -1,6 +1,11 @@
 usePnP: true
 import:
-  - ../cspell.json
   - '@cspell/dict-medicalterms/cspell-ext.json'
 words:
   - medicalterms
+  - corepack
+ignorePaths:
+  - '.yarn'
+  - '.pnp.js'
+  - '.php.cjs'
+  - 'yarn.lock'
