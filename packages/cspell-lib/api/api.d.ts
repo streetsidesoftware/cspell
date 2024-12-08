@@ -650,7 +650,7 @@ interface SuggestionOptions extends FromSuggestOptions {
     includeDefaultConfig?: boolean;
 }
 declare function suggestionsForWords(words: Iterable<string> | AsyncIterable<string>, options?: SuggestionOptions, settings?: CSpellSettings): AsyncIterable<SuggestionsForWordResult>;
-declare function suggestionsForWord(word: string, options?: SuggestionOptions, settings?: CSpellSettings): Promise<SuggestionsForWordResult>;
+declare function suggestionsForWord(word: string, options?: SuggestionOptions, settings?: CSpellSettings | ICSpellConfigFile): Promise<SuggestionsForWordResult>;
 declare class SuggestionError extends Error {
     readonly code: string;
     constructor(message: string, code: string);
@@ -761,6 +761,7 @@ declare class DocumentValidator {
     readonly options: DocumentValidatorOptions;
     readonly perfTiming: PerfTimings;
     skipValidation: boolean;
+    static create(doc: TextDocument, options: DocumentValidatorOptions, settingsOrConfigFile: CSpellUserSettings | ICSpellConfigFile): Promise<DocumentValidator>;
     /**
      * @param doc - Document to validate
      * @param config - configuration to use (not finalized).
@@ -925,14 +926,14 @@ interface SpellCheckFileResult {
  * @param options - options to control checking
  * @param settings - default settings to use.
  */
-declare function spellCheckFile(file: string | Uri | URL, options: SpellCheckFileOptions, settings: CSpellUserSettings): Promise<SpellCheckFileResult>;
+declare function spellCheckFile(file: string | Uri | URL, options: SpellCheckFileOptions, settingsOrConfigFile: CSpellUserSettings | ICSpellConfigFile): Promise<SpellCheckFileResult>;
 /**
  * Spell Check a Document.
  * @param document - document to be checked. If `document.text` is `undefined` the file will be loaded
  * @param options - options to control checking
  * @param settings - default settings to use.
  */
-declare function spellCheckDocument(document: Document | DocumentWithText, options: SpellCheckFileOptions, settings: CSpellUserSettings): Promise<SpellCheckFileResult>;
+declare function spellCheckDocument(document: Document | DocumentWithText, options: SpellCheckFileOptions, settingsOrConfigFile: CSpellUserSettings | ICSpellConfigFile): Promise<SpellCheckFileResult>;
 interface DetermineFinalDocumentSettingsResult {
     document: DocumentWithText;
     settings: CSpellSettingsWithSourceTrace;
@@ -964,8 +965,8 @@ interface TraceOptions {
 interface TraceWordResult extends Array<TraceResult> {
     splits: readonly WordSplits[];
 }
-declare function traceWords(words: string[], settings: CSpellSettings, options: TraceOptions | undefined): Promise<TraceResult[]>;
-declare function traceWordsAsync(words: Iterable<string> | AsyncIterable<string>, settings: CSpellSettings, options: TraceOptions | undefined): AsyncIterableIterator<TraceWordResult>;
+declare function traceWords(words: string[], settings: CSpellSettings | ICSpellConfigFile, options: TraceOptions | undefined): Promise<TraceResult[]>;
+declare function traceWordsAsync(words: Iterable<string> | AsyncIterable<string>, settingsOrConfig: CSpellSettings | ICSpellConfigFile, options: TraceOptions | undefined): AsyncIterableIterator<TraceWordResult>;
 
 type Console = typeof console;
 interface Logger {
