@@ -37,6 +37,7 @@ export default tsEslint.config(
             'tools/*/lib/**',
             '**/node_modules/**',
             '**/.docusaurus/**',
+            'src/generated/**',
             'docs/_site/**',
             'docs/docsV2/**',
             'docs/types/cspell-types/**',

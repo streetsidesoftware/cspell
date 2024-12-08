@@ -1,20 +1,15 @@
 // cspell:ignore TSESTree
-import { readFileSync } from 'node:fs';
-import { join as pathJoin } from 'node:path';
 
 import type { ESLint, Rule } from 'eslint';
 import type { Program } from 'estree';
 import { createSyncFn } from 'synckit';
 
 import { getDefaultLogger } from '../common/logger.cjs';
+import { optionsSchema as schema } from '../generated/schema.cjs';
 import type { Issue, SpellCheckFn } from '../worker/types.mjs';
 import { normalizeOptions } from './defaultCheckOptions.cjs';
 
 type ESlintPlugin = ESLint.Plugin;
-
-const optionsSchema = JSON.parse(readFileSync(pathJoin(__dirname, '../../assets/options.schema.json'), 'utf8'));
-
-const schema = optionsSchema as unknown as Rule.RuleMetaData['schema'];
 
 const spellCheck = createSyncFn<SpellCheckFn>(require.resolve('../worker/worker.mjs'));
 
