@@ -1,9 +1,16 @@
 import assert from 'node:assert';
 
 import type { CSpellSettings, LocaleId } from '@cspell/cspell-types';
+import { ICSpellConfigFile, satisfiesCSpellConfigFile } from 'cspell-config-lib';
 
 import type { LanguageId } from './fileTypes.js';
-import { finalizeSettings, getDefaultSettings, getGlobalSettingsAsync, mergeSettings } from './Settings/index.js';
+import {
+    finalizeSettings,
+    getDefaultSettings,
+    getGlobalSettingsAsync,
+    mergeSettings,
+    resolveConfigFileImports,
+} from './Settings/index.js';
 import {
     calcSettingsForLanguageId,
     isValidLocaleIntlFormat,
@@ -99,8 +106,9 @@ export async function* suggestionsForWords(
     options?: SuggestionOptions,
     settings?: CSpellSettings,
 ): AsyncIterable<SuggestionsForWordResult> {
+    const cspellSettings = satisfiesCSpellConfigFile(settings) ? await resolveConfigFileImports(settings) : settings;
     for await (const word of words) {
-        yield await suggestionsForWord(word, options, settings);
+        yield await suggestionsForWord(word, options, cspellSettings);
     }
 }
 
@@ -114,12 +122,13 @@ function cacheSuggestionsForWord(
     return (word) => cache.get(word, (word) => _suggestionsForWord(word, options, settings));
 }
 
-export function suggestionsForWord(
+export async function suggestionsForWord(
     word: string,
     options: SuggestionOptions = emptySuggestionOptions,
-    settings: CSpellSettings = emptyCSpellSettings,
+    settings: CSpellSettings | ICSpellConfigFile = emptyCSpellSettings,
 ): Promise<SuggestionsForWordResult> {
-    return memorizeSuggestions(options, settings)(word);
+    const cspellSettings = satisfiesCSpellConfigFile(settings) ? await resolveConfigFileImports(settings) : settings;
+    return memorizeSuggestions(options, cspellSettings)(word);
 }
 
 async function _suggestionsForWord(

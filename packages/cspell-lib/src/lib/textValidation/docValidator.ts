@@ -11,6 +11,7 @@ import type {
 } from '@cspell/cspell-types';
 import { IssueType } from '@cspell/cspell-types';
 import { toFilePathOrHref, toFileURL } from '@cspell/url';
+import { ICSpellConfigFile, satisfiesCSpellConfigFile } from 'cspell-config-lib';
 
 import { getGlobMatcherForExcluding } from '../globs/getGlobMatcher.js';
 import type { CSpellSettingsInternal, CSpellSettingsInternalFinalized } from '../Models/CSpellSettingsInternalDef.js';
@@ -23,6 +24,7 @@ import {
     finalizeSettings,
     loadConfig,
     mergeSettings,
+    resolveConfigFileImports,
     resolveSettingsImports,
     searchForConfig,
 } from '../Settings/index.js';
@@ -86,6 +88,19 @@ export class DocumentValidator {
     readonly options: DocumentValidatorOptions;
     readonly perfTiming: PerfTimings = {};
     public skipValidation: boolean;
+
+    static async create(
+        doc: TextDocument,
+        options: DocumentValidatorOptions,
+        settingsOrConfigFile: CSpellUserSettings | ICSpellConfigFile,
+    ): Promise<DocumentValidator> {
+        const settings = satisfiesCSpellConfigFile(settingsOrConfigFile)
+            ? await resolveConfigFileImports(settingsOrConfigFile)
+            : settingsOrConfigFile;
+        const validator = new DocumentValidator(doc, options, settings);
+        await validator.prepare();
+        return validator;
+    }
 
     /**
      * @param doc - Document to validate

@@ -1,4 +1,5 @@
 import type { CSpellSettingsWithSourceTrace, CSpellUserSettings } from '@cspell/cspell-types';
+import { ICSpellConfigFile, satisfiesCSpellConfigFile } from 'cspell-config-lib';
 
 import type { Document, DocumentWithText } from './Document/index.js';
 import { isBinaryDoc } from './Document/isBinaryDoc.js';
@@ -62,12 +63,12 @@ export interface SpellCheckFileResult {
 export function spellCheckFile(
     file: string | Uri | URL,
     options: SpellCheckFileOptions,
-    settings: CSpellUserSettings,
+    settingsOrConfigFile: CSpellUserSettings | ICSpellConfigFile,
 ): Promise<SpellCheckFileResult> {
     const doc: Document = {
         uri: toUri(file).toString(),
     };
-    return spellCheckDocument(doc, options, settings);
+    return spellCheckDocument(doc, options, settingsOrConfigFile);
 }
 
 /**
@@ -79,13 +80,16 @@ export function spellCheckFile(
 export async function spellCheckDocument(
     document: Document | DocumentWithText,
     options: SpellCheckFileOptions,
-    settings: CSpellUserSettings,
+    settingsOrConfigFile: CSpellUserSettings | ICSpellConfigFile,
 ): Promise<SpellCheckFileResult> {
+    const settingsUsed = satisfiesCSpellConfigFile(settingsOrConfigFile)
+        ? settingsOrConfigFile.settings
+        : settingsOrConfigFile;
     if (isBinaryDoc(document)) {
         return {
             document,
             options,
-            settingsUsed: settings,
+            settingsUsed,
             localConfigFilepath: undefined,
             issues: [],
             checked: false,
@@ -99,14 +103,14 @@ export async function spellCheckDocument(
             return {
                 document,
                 options,
-                settingsUsed: settings,
+                settingsUsed,
                 localConfigFilepath: undefined,
                 issues: [],
                 checked: false,
                 errors: undefined,
             };
         }
-        const result = await spellCheckFullDocument(doc, options, settings);
+        const result = await spellCheckFullDocument(doc, options, settingsOrConfigFile);
         const perf = result.perf || {};
         perf.loadTimeMs = timer.elapsed;
         result.perf = perf;
@@ -116,7 +120,7 @@ export async function spellCheckDocument(
         return {
             document,
             options,
-            settingsUsed: settings,
+            settingsUsed,
             localConfigFilepath: undefined,
             issues: [],
             checked: false,
@@ -128,7 +132,7 @@ export async function spellCheckDocument(
 async function spellCheckFullDocument(
     document: DocumentWithText,
     options: SpellCheckFileOptions,
-    settings: CSpellUserSettings,
+    settingsOrConfigFile: CSpellUserSettings | ICSpellConfigFile,
 ): Promise<SpellCheckFileResult> {
     // if (options.skipValidation) {
     //     return {
@@ -149,8 +153,9 @@ async function spellCheckFullDocument(
 
     const doc = documentToTextDocument(document);
     const docValOptions: DocumentValidatorOptions = options;
-    const docValidator = new DocumentValidator(doc, docValOptions, settings);
-    await docValidator.prepare().finally(() => timerPrepare.end());
+    const docValidator = await DocumentValidator.create(doc, docValOptions, settingsOrConfigFile).finally(() =>
+        timerPrepare.end(),
+    );
     Object.assign(perf, Object.fromEntries(Object.entries(docValidator.perfTiming).map(([k, v]) => ['_' + k, v])));
 
     const prep = docValidator._getPreparations();
@@ -159,7 +164,11 @@ async function spellCheckFullDocument(
         return {
             document,
             options,
-            settingsUsed: prep?.localConfig || settings,
+            settingsUsed:
+                prep?.localConfig ||
+                (satisfiesCSpellConfigFile(settingsOrConfigFile)
+                    ? settingsOrConfigFile.settings
+                    : settingsOrConfigFile),
             localConfigFilepath: prep?.localConfigFilepath,
             issues: [],
             checked: false,
