@@ -1,10 +1,11 @@
 import type { CSpellSettings, DictionaryId, LocaleId } from '@cspell/cspell-types';
+import { ICSpellConfigFile, satisfiesCSpellConfigFile } from 'cspell-config-lib';
 import { genSequence } from 'gensequence';
 
 import type { LanguageId } from './fileTypes.js';
 import type { CSpellSettingsInternal } from './Models/CSpellSettingsInternalDef.js';
 import { toInternalSettings } from './Settings/CSpellSettingsServer.js';
-import { finalizeSettings, mergeSettings } from './Settings/index.js';
+import { finalizeSettings, mergeSettings, resolveConfigFileImports } from './Settings/index.js';
 import { calcSettingsForLanguageId } from './Settings/LanguageSettings.js';
 import type { SpellingDictionaryCollection } from './SpellingDictionary/index.js';
 import { getDictionaryInternal, refreshDictionaryCache } from './SpellingDictionary/index.js';
@@ -31,7 +32,7 @@ export interface TraceWordResult extends Array<TraceResult> {
 
 export async function traceWords(
     words: string[],
-    settings: CSpellSettings,
+    settings: CSpellSettings | ICSpellConfigFile,
     options: TraceOptions | undefined,
 ): Promise<TraceResult[]> {
     const results = await util.asyncIterableToArray(traceWordsAsync(words, settings, options));
@@ -45,10 +46,14 @@ export async function traceWords(
 
 export async function* traceWordsAsync(
     words: Iterable<string> | AsyncIterable<string>,
-    settings: CSpellSettings,
+    settingsOrConfig: CSpellSettings | ICSpellConfigFile,
     options: TraceOptions | undefined,
 ): AsyncIterableIterator<TraceWordResult> {
     const { languageId, locale: language, ignoreCase = true, allowCompoundWords } = options || {};
+
+    const settings = satisfiesCSpellConfigFile(settingsOrConfig)
+        ? await resolveConfigFileImports(settingsOrConfig)
+        : settingsOrConfig;
 
     async function finalize(config: CSpellSettings): Promise<{
         activeDictionaries: DictionaryId[];

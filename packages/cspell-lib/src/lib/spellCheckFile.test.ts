@@ -1,8 +1,10 @@
+import fs from 'node:fs/promises';
 import * as Path from 'node:path';
 import { posix } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import type { CSpellSettingsWithSourceTrace, CSpellUserSettings } from '@cspell/cspell-types';
+import { ICSpellConfigFile } from 'cspell-config-lib';
 import { describe, expect, test } from 'vitest';
 
 import { pathPackageSamples, pathRepoTestFixtures } from '../test-util/index.mjs';
@@ -35,20 +37,21 @@ describe('Validate Spell Checking Files', () => {
     }
 
     test.each`
-        filename             | settings                    | options                                         | expected
-        ${'src/not_found.c'} | ${{}}                       | ${{}}                                           | ${{ checked: false, errors: [errNoEnt('src/not_found.c')] }}
-        ${'src/sample.c'}    | ${{}}                       | ${{}}                                           | ${{ checked: true, issues: [], localConfigFilepath: es('.cspell.json'), errors: undefined }}
-        ${'src/sample.c'}    | ${{}}                       | ${{ noConfigSearch: true }}                     | ${{ checked: true, localConfigFilepath: undefined, errors: undefined }}
-        ${'src/README.md'}   | ${{}}                       | ${{}}                                           | ${{ checked: true, issues: [], localConfigFilepath: es('.cspell.json'), errors: undefined }}
-        ${__filename}        | ${{}}                       | ${{ noConfigSearch: true }}                     | ${{ checked: true, localConfigFilepath: undefined, errors: undefined }}
-        ${'src/sample.c'}    | ${{ noConfigSearch: true }} | ${{}}                                           | ${{ checked: true, localConfigFilepath: undefined, errors: undefined }}
-        ${__filename}        | ${{}}                       | ${{ configFile: rpS('../cspell.config.json') }} | ${{ checked: true, localConfigFilepath: es('../cspell.config.json'), errors: undefined }}
-        ${__filename}        | ${{ noConfigSearch: true }} | ${{ configFile: rpS('../cspell.config.json') }} | ${{ checked: true, localConfigFilepath: es('../cspell.config.json'), errors: undefined }}
-        ${'src/sample.c'}    | ${{ noConfigSearch: true }} | ${{ noConfigSearch: false }}                    | ${{ checked: true, localConfigFilepath: es('.cspell.json'), errors: undefined }}
-        ${'src/sample.c'}    | ${{}}                       | ${{}}                                           | ${{ document: expect.anything(), errors: undefined }}
-        ${'src/sample.c'}    | ${{}}                       | ${{ configFile: rpS('../cSpell.json') }}        | ${{ checked: false, localConfigFilepath: es('../cSpell.json'), errors: [eFailed(rpS('../cSpell.json'))] }}
-        ${'src/not_found.c'} | ${{}}                       | ${{}}                                           | ${{ checked: false, errors: [errNoEnt('src/not_found.c')] }}
-        ${__filename}        | ${{}}                       | ${{}}                                           | ${{ checked: true, localConfigFilepath: es('../cspell.config.json'), errors: undefined }}
+        filename             | settings                                  | options                                         | expected
+        ${'src/not_found.c'} | ${{}}                                     | ${{}}                                           | ${{ checked: false, errors: [errNoEnt('src/not_found.c')] }}
+        ${'src/sample.c'}    | ${{}}                                     | ${{}}                                           | ${{ checked: true, issues: [], localConfigFilepath: es('.cspell.json'), errors: undefined }}
+        ${'src/sample.c'}    | ${{}}                                     | ${{ noConfigSearch: true }}                     | ${{ checked: true, localConfigFilepath: undefined, errors: undefined }}
+        ${'src/README.md'}   | ${{}}                                     | ${{}}                                           | ${{ checked: true, issues: [], localConfigFilepath: es('.cspell.json'), errors: undefined }}
+        ${__filename}        | ${{}}                                     | ${{ noConfigSearch: true }}                     | ${{ checked: true, localConfigFilepath: undefined, errors: undefined }}
+        ${__filename}        | ${toConfigFile({ noConfigSearch: true })} | ${{}}                                           | ${{ checked: true, localConfigFilepath: undefined, errors: undefined }}
+        ${'src/sample.c'}    | ${{ noConfigSearch: true }}               | ${{}}                                           | ${{ checked: true, localConfigFilepath: undefined, errors: undefined }}
+        ${__filename}        | ${{}}                                     | ${{ configFile: rpS('../cspell.config.json') }} | ${{ checked: true, localConfigFilepath: es('../cspell.config.json'), errors: undefined }}
+        ${__filename}        | ${{ noConfigSearch: true }}               | ${{ configFile: rpS('../cspell.config.json') }} | ${{ checked: true, localConfigFilepath: es('../cspell.config.json'), errors: undefined }}
+        ${'src/sample.c'}    | ${{ noConfigSearch: true }}               | ${{ noConfigSearch: false }}                    | ${{ checked: true, localConfigFilepath: es('.cspell.json'), errors: undefined }}
+        ${'src/sample.c'}    | ${{}}                                     | ${{}}                                           | ${{ document: expect.anything(), errors: undefined }}
+        ${'src/sample.c'}    | ${{}}                                     | ${{ configFile: rpS('../cSpell.json') }}        | ${{ checked: false, localConfigFilepath: es('../cSpell.json'), errors: [eFailed(rpS('../cSpell.json'))] }}
+        ${'src/not_found.c'} | ${{}}                                     | ${{}}                                           | ${{ checked: false, errors: [errNoEnt('src/not_found.c')] }}
+        ${__filename}        | ${{}}                                     | ${{}}                                           | ${{ checked: true, localConfigFilepath: es('../cspell.config.json'), errors: undefined }}
     `(
         'spellCheckFile $filename $settings $options',
         async ({ filename, settings, options, expected }: TestSpellCheckFile) => {
@@ -89,7 +92,7 @@ describe('Validate Determine settings', () => {
     );
 });
 
-describe('Validate Spell Checking Documents', () => {
+describe('Validate Spell Checking Documents', async () => {
     interface TestSpellCheckFile {
         uri: string;
         text: string | undefined;
@@ -124,6 +127,8 @@ describe('Validate Spell Checking Documents', () => {
     function i(...words: string[]): Partial<Issue>[] {
         return words.map((text) => ({ text })).map((i) => expect.objectContaining(i));
     }
+
+    const sampleConfigFile = await readConfigFile(rpS('../cspell.config.json'));
 
     // cspell:ignore texxt eslintcache
     test.each`
@@ -161,9 +166,11 @@ describe('Validate Spell Checking Documents', () => {
             expect(r).toEqual(oc(expected));
         },
     );
+
     test.each`
-        uri                                                 | text  | settings | options | expected
-        ${f(tf('issues/issue-1775/hunspell/utf_info.hxx'))} | ${''} | ${{}}    | ${{}}   | ${{ checked: true, errors: undefined }}
+        uri                                                 | text  | settings            | options                     | expected
+        ${f(tf('issues/issue-1775/hunspell/utf_info.hxx'))} | ${''} | ${{}}               | ${{}}                       | ${{ checked: true, errors: undefined }}
+        ${f(__filename)}                                    | ${''} | ${sampleConfigFile} | ${{ noConfigSearch: true }} | ${{ checked: true, localConfigFilepath: undefined, errors: undefined }}
     `(
         'spellCheckFile fixtures $uri $settings $options',
         async ({ uri, text, settings, options, expected }: TestSpellCheckFile) => {
@@ -321,4 +328,20 @@ function filterKeys<T extends object, K extends keyof T>(obj: T, keys: K[]): Pic
         }
     }
     return result;
+}
+
+function toConfigFile(settings: CSpellUserSettings, url = 'cspell.json') {
+    return {
+        url: new URL(url, import.meta.url),
+        settings,
+    };
+}
+
+async function readConfigFile(filename: string): Promise<ICSpellConfigFile> {
+    const url = pathToFileURL(filename);
+    const settings = JSON.parse(await fs.readFile(url, 'utf8'));
+    return {
+        url: new URL(url),
+        settings,
+    };
 }
