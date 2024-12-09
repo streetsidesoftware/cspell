@@ -3,7 +3,7 @@ Repository: flutter/samples
 Url: "https://github.com/flutter/samples"
 Args: ["--issues-summary-report","--locale=en,en-GB,lorem","--exclude=**/*.{pbxproj,xcworkspace,xcworkspacedata,xcscheme,xcconfig,plist}","."]
 Lines:
- CSpell: Files checked: 2689, Issues found: 10247 in 969 files.
+ CSpell: Files checked: 2690, Issues found: 10247 in 970 files.
  exit code: 1
 AUTHORS:7:1       - Unknown word (Abhijeeth)  -- Abhijeeth Padarthi <rkinabhi@gmail
 AUTHORS:7:11      - Unknown word (Padarthi)   -- Abhijeeth Padarthi <rkinabhi@gmail.com
@@ -27,6 +27,11 @@ CONTRIBUTING.md:239:55    - Unknown word (ericwindmill)    -- folks (particularl
 CONTRIBUTING.md:23:13     - Unknown word (repoistory) -- in your own repoistory. You can maintain your
 CONTRIBUTING.md:62:44     - Unknown word (ericwindmill) -- on the issue and tag @ericwindmill with questions.
 LICENSE:30:21     - Unknown word (Vaibhav)    -- Copyright (c) 2014, Vaibhav Singh (design) and Rosetta
+README.md:10:5      - Unknown word (Quickstarts) -- ### Quickstarts
+README.md:67:58     - Unknown word (MVVM)        -- application that implements MVVM architecture.
+README.md:68:5      - Unknown word (deeplink)    -- * [`deeplink_store_example`] - A
+README.md:83:5      - Unknown word (Quickstarts) -- * **Quickstarts** provide a starting
+README.md:88:46     - Unknown word (quickstarts) -- this repository are quickstarts.
 add_to_app/README.md:36:15     - Unknown word (Cocoapods)  -- ## Installing Cocoapods
 add_to_app/README.md:38:60     - Unknown word (Cocoapods)  -- the latest version of Cocoapods. To make
 add_to_app/README.md:42:18     - Unknown word (cocoapods)  -- sudo gem install cocoapods
@@ -6287,14 +6292,10 @@ compass_app/app/lib/ui/booking/widgets/booking_header.dart:42:20     - Unknown w
 compass_app/app/lib/ui/booking/widgets/booking_header.dart:71:20     - Unknown word (Dimens)          -- right: Dimens.of(context).paddingScreenHori
 compass_app/app/lib/ui/booking/widgets/booking_screen.dart:11:32     - Unknown word (viewmodel)       -- view_models/booking_viewmodel.dart';
 compass_app/app/lib/ui/booking/widgets/booking_screen.dart:9:33      - Unknown word (applocalization) -- ./core/localization/applocalization.dart';
-compass_app/app/lib/ui/core/themes/dimens.dart:30:16     - Unknown word (dimens)     -- static final dimensDesktop = DimensDesktop
-compass_app/app/lib/ui/core/themes/dimens.dart:30:32     - Unknown word (Dimens)     -- final dimensDesktop = DimensDesktop();
-compass_app/app/lib/ui/core/themes/dimens.dart:31:16     - Unknown word (dimens)     -- static final dimensMobile = DimensMobile
-compass_app/app/lib/ui/core/themes/dimens.dart:31:31     - Unknown word (Dimens)     -- final dimensMobile = DimensMobile();
-compass_app/app/lib/ui/core/themes/dimens.dart:34:11     - Unknown word (Dimens)     -- factory Dimens.of(BuildContext context
-compass_app/app/lib/ui/core/themes/dimens.dart:36:18     - Unknown word (dimens)     -- > 600 => dimensDesktop,
-compass_app/app/lib/ui/core/themes/dimens.dart:37:14     - Unknown word (dimens)     -- _ => dimensMobile,
-compass_app/app/lib/ui/core/themes/dimens.dart:7:14      - Unknown word (Dimens)     -- sealed class Dimens {
+compass_app/app/lib/ui/core/themes/dimens.dart:32:16     - Unknown word (Dimens)     -- static final Dimens desktop = _DimensDesktop
+compass_app/app/lib/ui/core/themes/dimens.dart:32:34     - Unknown word (Dimens)     -- final Dimens desktop = _DimensDesktop();
+compass_app/app/lib/ui/core/themes/dimens.dart:33:16     - Unknown word (Dimens)     -- static final Dimens mobile = _DimensMobile
+compass_app/app/lib/ui/core/themes/dimens.dart:7:22      - Unknown word (Dimens)     -- abstract final class Dimens {
 compass_app/app/lib/ui/core/themes/dimens.dart:8:9       - Unknown word (Dimens)     -- const Dimens();
 compass_app/app/lib/ui/core/ui/search_bar.dart:10:19     - Unknown word (dimens)          -- import '../themes/dimens.dart';
 compass_app/app/lib/ui/core/ui/search_bar.dart:44:31     - Unknown word (Dimens)          -- horizontal: Dimens.paddingHorizontal,
@@ -6318,8 +6319,7 @@ compass_app/app/lib/ui/home/widgets/home_title.dart:79:18     - Unknown word (LT
 compass_app/app/lib/ui/home/widgets/home_title.dart:9:46      - Unknown word (viewmodel)  -- logout/view_models/logout_viewmodel.dart';
 compass_app/app/lib/ui/results/widgets/results_screen.dart:10:27     - Unknown word (dimens)          -- import '../../core/themes/dimens.dart';
 compass_app/app/lib/ui/results/widgets/results_screen.dart:134:16    - Unknown word (Dimens)          -- top: Dimens.of(context).paddingScreenVert
-compass_app/app/lib/ui/results/widgets/results_screen.dart:135:19    - Unknown word (Dimens)          -- bottom: Dimens.dimensMobile.paddingScreenVer
-compass_app/app/lib/ui/results/widgets/results_screen.dart:135:26    - Unknown word (dimens)          -- bottom: Dimens.dimensMobile.paddingScreenVertical
+compass_app/app/lib/ui/results/widgets/results_screen.dart:135:19    - Unknown word (Dimens)          -- bottom: Dimens.mobile.paddingScreenVertical
 compass_app/app/lib/ui/results/widgets/results_screen.dart:13:32     - Unknown word (viewmodel)       -- view_models/results_viewmodel.dart';
 compass_app/app/lib/ui/results/widgets/results_screen.dart:86:26     - Unknown word (Dimens)          -- padding: Dimens.of(context).edgeInsetsScreenH
 compass_app/app/lib/ui/results/widgets/results_screen.dart:9:33      - Unknown word (applocalization) -- ./core/localization/applocalization.dart';
@@ -6393,9 +6393,9 @@ compass_app/app/macos/Runner/Base.lproj/MainMenu.xib:339:18    - Unknown word (a
 compass_app/app/macos/Runner/Base.lproj/MainMenu.xib:339:40    - Unknown word (autoresizing)     -- autoresizingMask key="autoresizingMask"/>
 compass_app/app/pubspec.yaml:31:3      - Unknown word (mocktail)   -- mocktail_image_network: ^1.2
 compass_app/app/pubspec.yaml:32:3      - Unknown word (mocktail)   -- mocktail: ^1.0.4
-compass_app/app/test/data/services/api/api_client_test.dart:34:13     - Unknown word (activites)  -- final activites = [kActivity];
-compass_app/app/test/data/services/api/api_client_test.dart:37:9      - Unknown word (activites)  -- activites,
-compass_app/app/test/data/services/api/api_client_test.dart:41:33     - Unknown word (activites)  -- expect(result.asOk.value, activites);
+compass_app/app/test/data/services/api/api_client_test.dart:35:13     - Unknown word (activites)  -- final activites = [kActivity];
+compass_app/app/test/data/services/api/api_client_test.dart:38:9      - Unknown word (activites)  -- activites,
+compass_app/app/test/data/services/api/api_client_test.dart:42:33     - Unknown word (activites)  -- expect(result.asOk.value, activites);
 compass_app/app/test/ui/activities/activities_screen_test.dart:6:66      - Unknown word (viewmodel)  -- view_models/activities_viewmodel.dart';
 compass_app/app/test/ui/auth/login_screen_test.dart:5:61      - Unknown word (viewmodel)  -- login/view_models/login_viewmodel.dart';
 compass_app/app/test/ui/auth/logout_button_test.dart:6:63      - Unknown word (viewmodel)  -- logout/view_models/logout_viewmodel.dart';

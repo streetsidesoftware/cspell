@@ -3,10 +3,10 @@ Repository: RustPython/RustPython
 Url: "https://github.com/RustPython/RustPython.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 621, Issues found: 1538 in 194 files.
+ CSpell: Files checked: 621, Issues found: 1556 in 194 files.
  exit code: 1
-Cargo.toml:174:1     - Unknown word (rustix)     -- rustix = { version = "0.38
-Cargo.toml:83:62     - Unknown word (redoxer)    -- to compile/check with redoxer
+Cargo.toml:172:1     - Unknown word (rustix)     -- rustix = { version = "0.38
+Cargo.toml:82:62     - Unknown word (redoxer)    -- to compile/check with redoxer
 DEVELOPMENT.md:131:26    - Unknown word (subcrates)  -- src`: using the other subcrates to bring rustpython
 Dockerfile.bin:13:5      - Unknown word (RUSTPYTHONPATH) -- ENV RUSTPYTHONPATH /usr/lib/rustpython
 LICENSE-logo:139:15    - Unknown word (sublicensable) -- non-sublicensable, non-exclusive, irrevocable
@@ -620,29 +620,30 @@ scripts/release-wapm.sh:6:14      - Unknown word (WAPM)       -- FEATURES_FOR_WA
 scripts/release-wapm.sh:8:18      - Unknown word (RUSTPYTHONPATH) -- export BUILDTIME_RUSTPYTHONPATH="/lib/rustpython"
 src/interpreter.rs:110:22    - Unknown word (RUSTPYTHONPATH) -- // BUILDTIME_RUSTPYTHONPATH should be set when distributi
 src/interpreter.rs:111:53    - Unknown word (RUSTPYTHONPATH) -- option_env!("BUILDTIME_RUSTPYTHONPATH") {
-src/lib.rs:122:13    - Unknown word (getpip)     -- let get_getpip = rustpython_vm::py
-src/lib.rs:131:59    - Unknown word (getpip)     -- vm.ctx.new_code(get_getpip), scope.clone())?;
-src/lib.rs:131:9     - Unknown word (getpip)     -- let getpip_code = vm.run_code_obj
-src/lib.rs:132:58    - Unknown word (getpip)     -- builtins::PyStrRef = getpip_code
-src/lib.rs:132:9     - Unknown word (getpip)     -- let getpip_code: rustpython_vm
+src/lib.rs:119:13    - Unknown word (getpip)     -- let get_getpip = rustpython_vm::py
+src/lib.rs:128:59    - Unknown word (getpip)     -- vm.ctx.new_code(get_getpip), vm.new_scope_with
+src/lib.rs:128:9     - Unknown word (getpip)     -- let getpip_code = vm.run_code_obj
+src/lib.rs:129:58    - Unknown word (getpip)     -- builtins::PyStrRef = getpip_code
+src/lib.rs:129:9     - Unknown word (getpip)     -- let getpip_code: rustpython_vm
 src/lib.rs:13:81     - Unknown word (otherthing) -- pass", module_name = "otherthing"));
-src/lib.rs:181:79    - Unknown word (RUSTPYTHONPATH) -- Lib directory to your RUSTPYTHONPATH \
-src/settings.rs:135:46    - Unknown word (pycs)       -- name("check-hash-based-pycs")
-src/settings.rs:136:41    - Unknown word (pycs)       -- long("check-hash-based-pycs")
-src/settings.rs:152:66    - Unknown word (PYTHONUNBUFFERED) -- effect on stdin; also PYTHONUNBUFFERED=x",
-src/settings.rs:187:46    - Unknown word (RUSTPYTHONPATH)   -- list.extend(get_paths("RUSTPYTHONPATH"));
-src/settings.rs:221:49    - Unknown word (PYTHONNOUSERSITE) -- environment && env::var_os("PYTHONNOUSERSITE").is_some())
-src/settings.rs:231:49    - Unknown word (PYTHONDONTWRITEBYTECODE) -- environment && env::var_os("PYTHONDONTWRITEBYTECODE").is_some())
-src/settings.rs:235:44    - Unknown word (PYTHONINTMAXSTRDIGITS)   -- environment && env::var_os("PYTHONINTMAXSTRDIGITS").is_some() {
-src/settings.rs:236:55    - Unknown word (PYTHONINTMAXSTRDIGITS)   -- digits = match env::var("PYTHONINTMAXSTRDIGITS").unwrap().parse()
-src/settings.rs:239:77    - Unknown word (PYTHONINTMAXSTRDIGITS)   -- int_max_str_digits: PYTHONINTMAXSTRDIGITS: invalid limit; must
-src/settings.rs:246:49    - Unknown word (PYTHONSAFEPATH)          -- environment && env::var_os("PYTHONSAFEPATH").is_some())
-src/settings.rs:252:37    - Unknown word (pycs)                    -- of("check-hash-based-pycs")
-src/settings.rs:254:46    - Unknown word (pycs)                    -- settings.check_hash_pycs_mode);
-src/settings.rs:259:18    - Unknown word (xoptions)                -- settings.xoptions.extend(xopts.map(|s
-src/settings.rs:287:49    - Unknown word (PYTHONWARNDEFAULTENCODING) -- environment && env::var_os("PYTHONWARNDEFAULTENCODING").is_some())
-src/settings.rs:344:37    - Unknown word (PYTHONHASHSEED)            -- seed = match env::var("PYTHONHASHSEED") {
-src/settings.rs:350:42    - Unknown word (PYTHONHASHSEED)            -- Fatal Python init error: PYTHONHASHSEED must be \"random\" or
+src/lib.rs:170:79    - Unknown word (RUSTPYTHONPATH) -- Lib directory to your RUSTPYTHONPATH \
+src/settings.rs:155:46    - Unknown word (pycs)       -- name("check-hash-based-pycs")
+src/settings.rs:156:41    - Unknown word (pycs)       -- long("check-hash-based-pycs")
+src/settings.rs:173:55    - Unknown word (PYTHONUNBUFFERED) -- effect on stdin; also PYTHONUNBUFFERED=x",
+src/settings.rs:206:46    - Unknown word (RUSTPYTHONPATH)   -- list.extend(get_paths("RUSTPYTHONPATH"));
+src/settings.rs:230:59    - Unknown word (PYTHONNOUSERSITE) -- flag("no-user-site", "PYTHONNOUSERSITE"));
+src/settings.rs:232:66    - Unknown word (PYTHONDONTWRITEBYTECODE) -- dont-write-bytecode", "PYTHONDONTWRITEBYTECODE");
+src/settings.rs:233:71    - Unknown word (PYTHONSAFEPATH)          -- bool_flag("safe-path", "PYTHONSAFEPATH");
+src/settings.rs:235:57    - Unknown word (PYTHONUNBUFFERED)        -- flag("unbuffered", "PYTHONUNBUFFERED");
+src/settings.rs:237:44    - Unknown word (PYTHONINTMAXSTRDIGITS)   -- environment && env::var_os("PYTHONINTMAXSTRDIGITS").is_some() {
+src/settings.rs:238:55    - Unknown word (PYTHONINTMAXSTRDIGITS)   -- digits = match env::var("PYTHONINTMAXSTRDIGITS").unwrap().parse()
+src/settings.rs:241:77    - Unknown word (PYTHONINTMAXSTRDIGITS)   -- int_max_str_digits: PYTHONINTMAXSTRDIGITS: invalid limit; must
+src/settings.rs:247:25    - Unknown word (pycs)                    -- settings.check_hash_pycs_mode = matches
+src/settings.rs:248:37    - Unknown word (pycs)                    -- of("check-hash-based-pycs")
+src/settings.rs:280:14    - Unknown word (xoptions)                -- settings.xoptions.extend(xopts);
+src/settings.rs:282:53    - Unknown word (PYTHONWARNDEFAULTENCODING) -- encoding |= bool_env_var("PYTHONWARNDEFAULTENCODING");
+src/settings.rs:331:37    - Unknown word (PYTHONHASHSEED)            -- seed = match env::var("PYTHONHASHSEED") {
+src/settings.rs:337:42    - Unknown word (PYTHONHASHSEED)            -- Fatal Python init error: PYTHONHASHSEED must be \"random\" or
 stdlib/Cargo.toml:102:1     - Unknown word (rustix)     -- rustix = { workspace = true
 stdlib/Cargo.toml:133:28    - Unknown word (Ndis)       -- 2_NetworkManagement_Ndis",
 stdlib/Cargo.toml:52:1      - Unknown word (puruspe)    -- puruspe = "0.2.4"
@@ -895,7 +896,7 @@ stdlib/src/termios.rs:66:62     - Unknown word (TIOCLINUX)       -- TIOCGSOFTCAR
 stdlib/src/termios.rs:66:73     - Unknown word (TIOCSSOFTCAR)    -- TIOCINQ, TIOCLINUX, TIOCSSOFTCAR, XTABS,
 stdlib/src/termios.rs:66:9      - Unknown word (TCSETSW)         -- TCSETSW, TCXONC, TIOCGSERIAL
 stdlib/src/termios.rs:86:22     - Unknown word (illumos)         -- target_os = "illumos",
-vm/Cargo.toml:94:1      - Unknown word (rustix)     -- rustix = { workspace = true
+vm/Cargo.toml:95:1      - Unknown word (rustix)     -- rustix = { workspace = true
 vm/src/anystr.rs:183:9     - Unknown word (splitw)     -- splitw: SW,
 vm/src/anystr.rs:199:13    - Unknown word (splitw)     -- splitw(self, maxsplit, vm)
 vm/src/buffer.rs:456:24    - Unknown word (primint)    -- macro_rules! make_pack_primint {
@@ -982,7 +983,7 @@ vm/src/builtins/traceback.rs:29:60     - Unknown word (lasti)      -- >, frame: 
 vm/src/builtins/traceback.rs:33:13     - Unknown word (lasti)      -- lasti,
 vm/src/builtins/traceback.rs:44:11     - Unknown word (lasti)      -- fn tb_lasti(&self) -> u32 {
 vm/src/builtins/traceback.rs:45:14     - Unknown word (lasti)      -- self.lasti
-vm/src/builtins/tuple.rs:307:39    - Unknown word (tuplesubclass) -- just return tup, or tuplesubclass(tup), which'll copy
+vm/src/builtins/tuple.rs:336:39    - Unknown word (tuplesubclass) -- just return tup, or tuplesubclass(tup), which'll copy
 vm/src/builtins/type.rs:454:51    - Unknown word (stablized)  -- intrinsics::likely once it is stablized
 vm/src/codecs.rs:158:18    - Unknown word (surrogatepass) -- "surrogatepass_errors" => surrogatepass
 vm/src/codecs.rs:158:43    - Unknown word (surrogatepass) -- surrogatepass_errors" => surrogatepass_errors as EMPTY,
@@ -1035,9 +1036,9 @@ vm/src/frame.rs:91:6      - Unknown word (Lasti)      -- type Lasti = atomic::At
 vm/src/frame.rs:93:6      - Unknown word (Lasti)      -- type Lasti = std::cell::Cell<u
 vm/src/frame.rs:998:21    - Unknown word (aiterable)  -- let aiterable = self.pop_value();
 vm/src/frame.rs:999:53    - Unknown word (aiterable)  -- call_special_method(&aiterable, identifier!(vm, __aiter
-vm/src/function/argument.rs:120:13    - Unknown word (kwargc)     -- let kwargc = kwarg_names.len()
-vm/src/function/argument.rs:121:36    - Unknown word (kwargc)     -- posargc = total_argc - kwargc;
-vm/src/function/argument.rs:278:53    - Unknown word (keyqord)    -- error(format!("Required keyqord only argument {name
+vm/src/function/argument.rs:121:13    - Unknown word (kwargc)     -- let kwargc = kwarg_names.len()
+vm/src/function/argument.rs:122:36    - Unknown word (kwargc)     -- posargc = total_argc - kwargc;
+vm/src/function/argument.rs:279:53    - Unknown word (keyqord)    -- error(format!("Required keyqord only argument {name
 vm/src/function/builtin.rs:74:26     - Unknown word (sizedness)  -- requirements of zero-sizedness apply, see that documentation
 vm/src/function/protocol.rs:108:13    - Unknown word (iterfn)     -- let iterfn = {
 vm/src/function/protocol.rs:110:17    - Unknown word (iterfn)     -- let iterfn = cls.mro_find_map(
@@ -1069,9 +1070,9 @@ vm/src/protocol/sequence.rs:157:30    - Unknown word (apear)      -- / if both a
 vm/src/protocol/sequence.rs:231:59    - Unknown word (unsliceable) -- format!("'{}' object is unsliceable", self.obj.class())
 vm/src/stdlib/ast.rs:380:26    - Unknown word (BDFL)       -- const CO_FUTURE_BARRY_AS_BDFL: i32 = 0x400000;
 vm/src/stdlib/ast.rs:395:26    - Unknown word (BDFL)       -- CO_FUTURE_BARRY_AS_BDFL
-vm/src/stdlib/builtins.rs:434:26    - Unknown word (normalish)  -- // everything is normalish, we can just rely on
-vm/src/stdlib/builtins.rs:584:45    - Unknown word (iret)       -- iterator).next(vm).map(|iret| match iret {
-vm/src/stdlib/builtins.rs:584:57    - Unknown word (iret)       -- vm).map(|iret| match iret {
+vm/src/stdlib/builtins.rs:436:26    - Unknown word (normalish)  -- // everything is normalish, we can just rely on
+vm/src/stdlib/builtins.rs:586:45    - Unknown word (iret)       -- iterator).next(vm).map(|iret| match iret {
+vm/src/stdlib/builtins.rs:586:57    - Unknown word (iret)       -- vm).map(|iret| match iret {
 vm/src/stdlib/codecs.rs:351:17    - Unknown word (pycodecs)   -- fn delegate_pycodecs(
 vm/src/stdlib/codecs.rs:358:38    - Unknown word (pycodecs)   -- module = vm.import("_pycodecs", 0)?;
 vm/src/stdlib/codecs.rs:363:27    - Unknown word (pycodecs)   -- macro_rules! delegate_pycodecs {
@@ -1193,12 +1194,25 @@ vm/src/stdlib/errno.rs:664:30    - Unknown word (illumos)               -- cfg(a
 vm/src/stdlib/errno.rs:667:24    - Unknown word (errnos)                -- // MacOSX specific errnos
 vm/src/stdlib/imp.rs:53:48     - Unknown word (unimportable) -- present but marked as unimportable, stops search).
 vm/src/stdlib/imp.rs:89:25     - Unknown word (pycs)         -- fn check_hash_based_pycs(vm: &VirtualMachine
-vm/src/stdlib/imp.rs:91:51     - Unknown word (pycs)         -- settings.check_hash_pycs_mode.clone())
-vm/src/stdlib/io.rs:2569:21   - Unknown word (ndecoded)   -- let ndecoded = decoder_decode(input
-vm/src/stdlib/io.rs:2570:20   - Unknown word (ndecoded)   -- if ndecoded.chars <= num_to_skip
-vm/src/stdlib/io.rs:2574:40   - Unknown word (ndecoded)   -- num_to_skip -= ndecoded;
-vm/src/stdlib/io.rs:2594:25   - Unknown word (ndecoded)   -- let mut ndecoded = Utf8size::default
-vm/src/stdlib/io.rs:2600:21   - Unknown word (ndecoded)   -- ndecoded += n;
+vm/src/stdlib/imp.rs:91:51     - Unknown word (pycs)         -- settings.check_hash_pycs_mode.to_string())
+vm/src/stdlib/io.rs:2604:21   - Unknown word (ndecoded)   -- let ndecoded = decoder_decode(input
+vm/src/stdlib/io.rs:2605:20   - Unknown word (ndecoded)   -- if ndecoded.chars <= num_to_skip
+vm/src/stdlib/io.rs:2609:40   - Unknown word (ndecoded)   -- num_to_skip -= ndecoded;
+vm/src/stdlib/io.rs:2629:25   - Unknown word (ndecoded)   -- let mut ndecoded = Utf8size::default
+vm/src/stdlib/io.rs:2635:21   - Unknown word (ndecoded)   -- ndecoded += n;
+vm/src/stdlib/io.rs:3169:12   - Unknown word (afaict)     -- // afaict, this is used for nothing
+vm/src/stdlib/io.rs:3171:9    - Unknown word (pendingcr)  -- pendingcr: bool,
+vm/src/stdlib/io.rs:3173:9    - Unknown word (seennl)     -- seennl: SeenNewline,
+vm/src/stdlib/io.rs:3205:17   - Unknown word (pendingcr)  -- pendingcr: false,
+vm/src/stdlib/io.rs:3206:17   - Unknown word (seennl)     -- seennl: SeenNewline::empty
+vm/src/stdlib/io.rs:3220:76   - Unknown word (nldecoder)  -- reentrant call inside nldecoder".to_owned()))
+vm/src/stdlib/io.rs:3229:68   - Unknown word (nldecoder)  -- operation on uninitialized nldecoder".to_owned())
+vm/src/stdlib/io.rs:3248:44   - Unknown word (pendingcr)  -- (flag << 1) | (data.pendingcr as u64);
+vm/src/stdlib/io.rs:3256:18   - Unknown word (pendingcr)  -- data.pendingcr = flag & 1 != 0;
+vm/src/stdlib/io.rs:3266:18   - Unknown word (seennl)     -- data.seennl = SeenNewline::empty
+vm/src/stdlib/io.rs:3267:18   - Unknown word (pendingcr)  -- data.pendingcr = false;
+vm/src/stdlib/io.rs:3277:27   - Unknown word (seennl)     -- Ok(match data.seennl.bits() {
+vm/src/stdlib/io.rs:3328:22   - Unknown word (seennl)     -- if (self.seennl == SeenNewline::LF
 vm/src/stdlib/itertools.rs:1252:12   - Unknown word (teedata)    -- // teedata a python class
 vm/src/stdlib/itertools.rs:90:59     - Unknown word (leat)       -- from("function takes at leat 1 arguments (0 given
 vm/src/stdlib/marshal.rs:52:21     - Unknown word (pycomplex)  -- ref pycomplex @ PyComplex => {
@@ -1239,32 +1253,32 @@ vm/src/stdlib/nt.rs:319:49    - Unknown word (backslashed) -- backslashed.len(),
 vm/src/stdlib/nt.rs:321:77    - Unknown word (backslashed) -- OsString::from_wide(&backslashed)),
 vm/src/stdlib/nt.rs:336:13    - Unknown word (wpath)       -- let wpath = path.to_widecstring
 vm/src/stdlib/nt.rs:341:42    - Unknown word (wpath)       -- GetDiskFreeSpaceExW(wpath.as_ptr(), &mut _free
-vm/src/stdlib/os.rs:1053:19   - Unknown word (modif)      -- let (acc, modif) = match (args.times
-vm/src/stdlib/os.rs:1098:36   - Unknown word (modif)      -- impl(args.path, acc, modif, args.dir_fd, args.follow
-vm/src/stdlib/os.rs:1104:9    - Unknown word (modif)      -- modif: Duration,
-vm/src/stdlib/os.rs:1119:42   - Unknown word (modif)      -- times = [ts(acc), ts(modif)];
-vm/src/stdlib/os.rs:1122:27   - Unknown word (utimensat)  -- libc::utimensat(
-vm/src/stdlib/os.rs:1147:76   - Unknown word (modif)      -- tv(acc).into(), &tv(modif).into())
+vm/src/stdlib/os.rs:1062:19   - Unknown word (modif)      -- let (acc, modif) = match (args.times
+vm/src/stdlib/os.rs:1107:36   - Unknown word (modif)      -- impl(args.path, acc, modif, args.dir_fd, args.follow
+vm/src/stdlib/os.rs:1113:9    - Unknown word (modif)      -- modif: Duration,
+vm/src/stdlib/os.rs:1128:42   - Unknown word (modif)      -- times = [ts(acc), ts(modif)];
+vm/src/stdlib/os.rs:1131:27   - Unknown word (utimensat)  -- libc::utimensat(
+vm/src/stdlib/os.rs:1156:76   - Unknown word (modif)      -- tv(acc).into(), &tv(modif).into())
 vm/src/stdlib/os.rs:29:42     - Unknown word (rustix)     -- IntoPyException for rustix::io::Errno {
-vm/src/stdlib/os.rs:762:34    - Unknown word (atim)       -- atime = (stat.st_atim.tv_sec, stat.st_atim
-vm/src/stdlib/os.rs:762:55    - Unknown word (atim)       -- atim.tv_sec, stat.st_atim.tv_nsec);
-vm/src/stdlib/os.rs:763:34    - Unknown word (mtim)       -- mtime = (stat.st_mtim.tv_sec, stat.st_mtim
-vm/src/stdlib/os.rs:763:55    - Unknown word (mtim)       -- mtim.tv_sec, stat.st_mtim.tv_nsec);
-vm/src/stdlib/os.rs:764:34    - Unknown word (ctim)       -- ctime = (stat.st_ctim.tv_sec, stat.st_ctim
-vm/src/stdlib/os.rs:764:55    - Unknown word (ctim)       -- ctim.tv_sec, stat.st_ctim.tv_nsec);
-vm/src/stdlib/os.rs:916:8     - Unknown word (getcwdb)    -- fn getcwdb(vm: &VirtualMachine
-vm/src/stdlib/posix.rs:1836:26   - Unknown word (illumos)    -- target_os = "illumos",
-vm/src/stdlib/posix.rs:1900:26   - Unknown word (illumos)    -- target_os = "illumos",
-vm/src/stdlib/posix.rs:1918:12   - Unknown word (VDISABLE)   -- PC_VDISABLE = libc::_PC_VDISABLE
-vm/src/stdlib/posix.rs:1923:26   - Unknown word (illumos)    -- target_os = "illumos",
-vm/src/stdlib/posix.rs:1936:26   - Unknown word (illumos)    -- target_os = "illumos",
-vm/src/stdlib/posix.rs:1949:26   - Unknown word (illumos)    -- target_os = "illumos",
-vm/src/stdlib/posix.rs:2053:12   - Unknown word (GETGR)      -- SC_GETGR_R_SIZE_MAX = libc::
-vm/src/stdlib/posix.rs:2054:12   - Unknown word (GETPW)      -- SC_GETPW_R_SIZE_MAX = libc::
-vm/src/stdlib/posix.rs:2067:12   - Unknown word (NPROCESSORS) -- SC_NPROCESSORS_CONF = libc::_SC_NPROCESSORS
-vm/src/stdlib/posix.rs:2068:12   - Unknown word (NPROCESSORS) -- SC_NPROCESSORS_ONLN = libc::_SC_NPROCESSORS
-vm/src/stdlib/posix.rs:2068:24   - Unknown word (ONLN)        -- SC_NPROCESSORS_ONLN = libc::_SC_NPROCESSORS
-vm/src/stdlib/posix.rs:2083:12   - Unknown word (RTSIG)       -- SC_RTSIG_MAX = libc::_SC_RTSIG
+vm/src/stdlib/os.rs:763:34    - Unknown word (atim)       -- atime = (stat.st_atim.tv_sec, stat.st_atim
+vm/src/stdlib/os.rs:763:55    - Unknown word (atim)       -- atim.tv_sec, stat.st_atim.tv_nsec);
+vm/src/stdlib/os.rs:764:34    - Unknown word (mtim)       -- mtime = (stat.st_mtim.tv_sec, stat.st_mtim
+vm/src/stdlib/os.rs:764:55    - Unknown word (mtim)       -- mtim.tv_sec, stat.st_mtim.tv_nsec);
+vm/src/stdlib/os.rs:765:34    - Unknown word (ctim)       -- ctime = (stat.st_ctim.tv_sec, stat.st_ctim
+vm/src/stdlib/os.rs:765:55    - Unknown word (ctim)       -- ctim.tv_sec, stat.st_ctim.tv_nsec);
+vm/src/stdlib/os.rs:917:8     - Unknown word (getcwdb)    -- fn getcwdb(vm: &VirtualMachine
+vm/src/stdlib/posix.rs:1829:26   - Unknown word (illumos)    -- target_os = "illumos",
+vm/src/stdlib/posix.rs:1893:26   - Unknown word (illumos)    -- target_os = "illumos",
+vm/src/stdlib/posix.rs:1911:12   - Unknown word (VDISABLE)   -- PC_VDISABLE = libc::_PC_VDISABLE
+vm/src/stdlib/posix.rs:1916:26   - Unknown word (illumos)    -- target_os = "illumos",
+vm/src/stdlib/posix.rs:1929:26   - Unknown word (illumos)    -- target_os = "illumos",
+vm/src/stdlib/posix.rs:1942:26   - Unknown word (illumos)    -- target_os = "illumos",
+vm/src/stdlib/posix.rs:2046:12   - Unknown word (GETGR)      -- SC_GETGR_R_SIZE_MAX = libc::
+vm/src/stdlib/posix.rs:2047:12   - Unknown word (GETPW)      -- SC_GETPW_R_SIZE_MAX = libc::
+vm/src/stdlib/posix.rs:2060:12   - Unknown word (NPROCESSORS) -- SC_NPROCESSORS_CONF = libc::_SC_NPROCESSORS
+vm/src/stdlib/posix.rs:2061:12   - Unknown word (NPROCESSORS) -- SC_NPROCESSORS_ONLN = libc::_SC_NPROCESSORS
+vm/src/stdlib/posix.rs:2061:24   - Unknown word (ONLN)        -- SC_NPROCESSORS_ONLN = libc::_SC_NPROCESSORS
+vm/src/stdlib/posix.rs:2076:12   - Unknown word (RTSIG)       -- SC_RTSIG_MAX = libc::_SC_RTSIG
 vm/src/stdlib/posix.rs:77:16     - Unknown word (GRND)       -- use libc::{GRND_NONBLOCK, GRND_RANDOM
 vm/src/stdlib/posix.rs:77:31     - Unknown word (GRND)       -- libc::{GRND_NONBLOCK, GRND_RANDOM};
 vm/src/stdlib/posix.rs:892:22    - Unknown word (emscripten) -- target_os = "emscripten",
@@ -1369,23 +1383,27 @@ vm/src/vm/mod.rs:232:37    - Unknown word (rustpythonpath) -- Some(s.as_str()) =
 vm/src/vm/mod.rs:238:26    - Unknown word (RUSTPYTHONPATH) -- "Neither RUSTPYTHONPATH nor PYTHONPATH is set
 vm/src/vm/mod.rs:240:18    - Unknown word (RUSTPYTHONPATH) -- "RUSTPYTHONPATH or PYTHONPATH is set
 vm/src/vm/mod.rs:242:18    - Unknown word (RUSTPYTHONPATH) -- "RUSTPYTHONPATH or PYTHONPATH is set
-vm/src/vm/mod.rs:749:17    - Unknown word (excs)           -- let mut excs = self.exceptions.borrow
-vm/src/vm/mod.rs:750:41    - Unknown word (excs)           -- std::mem::take(&mut *excs);
-vm/src/vm/mod.rs:751:9     - Unknown word (excs)           -- excs.prev = Some(Box::new
-vm/src/vm/mod.rs:752:9     - Unknown word (excs)           -- excs.exc = exc
-vm/src/vm/mod.rs:756:17    - Unknown word (excs)           -- let mut excs = self.exceptions.borrow
-vm/src/vm/setting.rs:142:13    - Unknown word (xoptions)                  -- xoptions: vec![],
-vm/src/vm/setting.rs:151:24    - Unknown word (pycs)                      -- check_hash_pycs_mode: "default".to_owned
+vm/src/vm/mod.rs:54:28     - Unknown word (Pycs)       -- use setting::{CheckHashPycsMode, Settings};
+vm/src/vm/mod.rs:771:17    - Unknown word (excs)           -- let mut excs = self.exceptions.borrow
+vm/src/vm/mod.rs:772:41    - Unknown word (excs)           -- std::mem::take(&mut *excs);
+vm/src/vm/mod.rs:773:9     - Unknown word (excs)           -- excs.prev = Some(Box::new
+vm/src/vm/mod.rs:774:9     - Unknown word (excs)           -- excs.exc = exc
+vm/src/vm/mod.rs:778:17    - Unknown word (excs)           -- let mut excs = self.exceptions.borrow
+vm/src/vm/setting.rs:119:19    - Unknown word (Pycs)                      -- pub enum CheckHashPycsMode {
+vm/src/vm/setting.rs:150:13    - Unknown word (xoptions)                  -- xoptions: vec![],
+vm/src/vm/setting.rs:159:24    - Unknown word (pycs)                      -- check_hash_pycs_mode: CheckHashPycsMode
+vm/src/vm/setting.rs:159:44    - Unknown word (Pycs)                      -- pycs_mode: CheckHashPycsMode::Default,
 vm/src/vm/setting.rs:18:9      - Unknown word (PYTHONHASHSEED) -- /// PYTHONHASHSEED=x
 vm/src/vm/setting.rs:39:10     - Unknown word (Xfoo)           -- /// -Xfoo[=bar]
 vm/src/vm/setting.rs:40:9      - Unknown word (xoptions)       -- pub xoptions: Vec<(String, Option
 vm/src/vm/setting.rs:42:10     - Unknown word (Wfoo)           -- /// -Wfoo
 vm/src/vm/setting.rs:51:35     - Unknown word (PYTHONWARNDEFAULTENCODING) -- warn_default_encoding, PYTHONWARNDEFAULTENCODING
 vm/src/vm/setting.rs:75:13     - Unknown word (PYTHONUNBUFFERED)          -- /// -u, PYTHONUNBUFFERED=x
-vm/src/vm/setting.rs:82:28     - Unknown word (pycs)                      -- --check-hash-based-pycs
-vm/src/vm/setting.rs:83:20     - Unknown word (pycs)                      -- pub check_hash_pycs_mode: String,
-vm/src/vm/setting.rs:95:37     - Unknown word (RUSTPYTHONPATH)            -- Environment PYTHONPATH (and RUSTPYTHONPATH)
-vm/src/vm/setting.rs:99:17     - Unknown word (platlibdir)                -- // wchar_t *platlibdir;
+vm/src/vm/setting.rs:81:28     - Unknown word (pycs)                      -- --check-hash-based-pycs
+vm/src/vm/setting.rs:82:20     - Unknown word (pycs)                      -- pub check_hash_pycs_mode: CheckHashPycsMode
+vm/src/vm/setting.rs:82:40     - Unknown word (Pycs)                      -- pycs_mode: CheckHashPycsMode,
+vm/src/vm/setting.rs:94:37     - Unknown word (RUSTPYTHONPATH)            -- Environment PYTHONPATH (and RUSTPYTHONPATH)
+vm/src/vm/setting.rs:98:17     - Unknown word (platlibdir)                -- // wchar_t *platlibdir;
 vm/src/vm/vm_new.rs:171:28    - Unknown word (ternop)     -- pub fn new_unsupported_ternop_error(
 vm/src/vm/vm_object.rs:18:34     - Unknown word (emscripten) -- not(any(target_os = "emscripten", target_os = "wasi
 vm/src/vm/vm_object.rs:28:34     - Unknown word (emscripten) -- not(any(target_os = "emscripten", target_os = "wasi
