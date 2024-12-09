@@ -3,12 +3,11 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 19744, Issues found: 56113 in 8857 files.
+ CSpell: Files checked: 19746, Issues found: 56131 in 8858 files.
  exit code: 1
 ARCHITECTURE.md:158:48    - Unknown word (googlemock) -- implementation using `googlemock`
 ARCHITECTURE.md:29:61     - Unknown word (retryable)  -- RPCs that fail with a retryable error,
 BUILD.bazel:151:20    - Unknown word (ctype)      -- name = "enable-ctype-cord-workaround",
-BUILD.bazel:15:14     - Unknown word (skylib)     -- load("@bazel_skylib//rules:common_settings
 BUILD.bazel:53:5      - Unknown word (testonly)   -- testonly = True,
 CMakeLists.txt:100:6     - Unknown word (ccache)     -- # If ccache is installed use it
 CMakeLists.txt:101:32    - Unknown word (CCACHE)     -- GOOGLE_CLOUD_CPP_ENABLE_CCACHE "Automatically use ccache
@@ -44,7 +43,8 @@ bazel/gapic.bzl:75:26     - Unknown word (googletest)     -- "@com_google_google
 bazel/googleapis.modules.patch:10:2      - Unknown word (genrule)    -- genrule(
 bazel/library_names.bzl:16:16     - Unknown word (startswith) -- if library.startswith("compute_"):
 bazel/library_names.bzl:22:24     - Unknown word (removeprefix) -- return library.removeprefix("compute_") + "_mock
-bazel/workspace0.bzl:148:17    - Unknown word (boringssl)  -- name = "boringssl",
+bazel/workspace0.bzl:159:17    - Unknown word (boringssl)  -- name = "boringssl",
+bazel/workspace0.bzl:83:23     - Unknown word (skylib)     -- name = "bazel_skylib",
 bazel/workspace3.bzl:39:7      - Unknown word (Googletest) -- # Googletest dependencies
 ci/check-include-guards.gawk:26:1      - Unknown word (BEGINFILE)  -- BEGINFILE {
 ci/check-include-guards.gawk:32:16     - Unknown word (toupper)    -- guard_body=toupper(FILENAME)
@@ -307,23 +307,23 @@ docfx/public_docs.cc:38:66     - Unknown word (structabsl)    -- namespaceabsl",
 examples/BUILD.bazel:84:14     - Unknown word (GENDIR)     -- "-I$(GENDIR)/examples",
 examples/CMakeLists.txt:33:9      - Unknown word (Findg)      -- include(FindgRPC)
 examples/gcs2cbt.cc:253:13    - Unknown word (cbta)       -- namespace cbta = ::google::cloud::bigtable
-external/googleapis/CMakeLists.txt:101:18    - Unknown word (latlng)         -- "google/type/latlng.proto"
-external/googleapis/CMakeLists.txt:108:18    - Unknown word (timeofday)      -- "google/type/timeofday.proto")
-external/googleapis/CMakeLists.txt:124:16    - Unknown word (Protos)         -- include(CompileProtos)
-external/googleapis/CMakeLists.txt:134:27    - Unknown word (protolist)      -- google_cloud_cpp_load_protolist(protos "${file}")
-external/googleapis/CMakeLists.txt:211:20    - Unknown word (SOVERSION)      -- SOVERSION ${PROJECT_VERSION_MAJOR
-external/googleapis/CMakeLists.txt:351:23    - Unknown word (protodeps)      -- google_cloud_cpp_load_protodeps(cloud_common_deps "protodeps
-external/googleapis/CMakeLists.txt:367:41    - Unknown word (BINDIR)         -- DESTINATION ${CMAKE_INSTALL_BINDIR}
-external/googleapis/CMakeLists.txt:371:13    - Unknown word (NAMELINK)       -- NAMELINK_COMPONENT google_cloud
-external/googleapis/CMakeLists.txt:421:6     - Unknown word (libcares)       -- "libcares")
+external/googleapis/CMakeLists.txt:102:18    - Unknown word (latlng)         -- "google/type/latlng.proto"
+external/googleapis/CMakeLists.txt:109:18    - Unknown word (timeofday)      -- "google/type/timeofday.proto")
+external/googleapis/CMakeLists.txt:125:16    - Unknown word (Protos)         -- include(CompileProtos)
+external/googleapis/CMakeLists.txt:135:27    - Unknown word (protolist)      -- google_cloud_cpp_load_protolist(protos "${file}")
+external/googleapis/CMakeLists.txt:212:20    - Unknown word (SOVERSION)      -- SOVERSION ${PROJECT_VERSION_MAJOR
+external/googleapis/CMakeLists.txt:355:23    - Unknown word (protodeps)      -- google_cloud_cpp_load_protodeps(cloud_common_deps "protodeps
+external/googleapis/CMakeLists.txt:371:41    - Unknown word (BINDIR)         -- DESTINATION ${CMAKE_INSTALL_BINDIR}
+external/googleapis/CMakeLists.txt:375:13    - Unknown word (NAMELINK)       -- NAMELINK_COMPONENT google_cloud
+external/googleapis/CMakeLists.txt:425:6     - Unknown word (libcares)       -- "libcares")
 external/googleapis/CMakeLists.txt:56:17     - Unknown word (httpbody)   -- "google/api/httpbody.proto"
 external/googleapis/CMakeLists.txt:82:32     - Unknown word (iamcredentials) -- google/iam/credentials/v1/iamcredentials.proto"
-external/googleapis/CMakeLists.txt:87:13     - Unknown word (longrunning)    -- "google/longrunning/operations.proto"
-external/googleapis/CMakeLists.txt:96:18     - Unknown word (dayofweek)      -- "google/type/dayofweek.proto"
+external/googleapis/CMakeLists.txt:88:13     - Unknown word (longrunning)    -- "google/longrunning/operations.proto"
+external/googleapis/CMakeLists.txt:97:18     - Unknown word (dayofweek)      -- "google/type/dayofweek.proto"
 external/googleapis/protodeps/binaryauthorization.deps:8:25      - Unknown word (grafeas)    -- com_google_googleapis//grafeas/v1:grafeas_proto
-external/googleapis/protolists/aiplatform.list:133:52    - Unknown word (tensorboard) -- cloud/aiplatform/v1:tensorboard.proto
+external/googleapis/protolists/aiplatform.list:134:52    - Unknown word (tensorboard) -- cloud/aiplatform/v1:tensorboard.proto
 external/googleapis/protolists/aiplatform.list:27:59     - Unknown word (trainingjob) -- aiplatform/v1/schema/trainingjob/definition:automl_image
-external/googleapis/protolists/aiplatform.list:81:52     - Unknown word (genai)       -- cloud/aiplatform/v1:genai_tuning_service.proto
+external/googleapis/protolists/aiplatform.list:82:52     - Unknown word (genai)       -- cloud/aiplatform/v1:genai_tuning_service.proto
 external/googleapis/protolists/artifactregistry.list:13:61     - Unknown word (vpcsc)      -- artifactregistry/v1:vpcsc_config.proto
 external/googleapis/protolists/backupdr.list:3:58      - Unknown word (reportlog)  -- backupdr/logging/v1:reportlog.proto
 external/googleapis/protolists/backupdr.list:5:50      - Unknown word (backupplan) -- google/cloud/backupdr/v1:backupplan.proto
@@ -338,7 +338,7 @@ external/googleapis/protolists/datacatalog.list:10:53     - Unknown word (policy
 external/googleapis/protolists/datacatalog.list:11:53     - Unknown word (policytagmanagerserialization) -- cloud/datacatalog/v1:policytagmanagerserialization.proto
 external/googleapis/protolists/datacatalog.list:8:57      - Unknown word (fileset)    -- cloud/datacatalog/v1:gcs_fileset_spec.proto
 external/googleapis/protolists/datamigration.list:4:50      - Unknown word (conversionworkspace) -- google/cloud/clouddms/v1:conversionworkspace_resources.proto
-external/googleapis/protolists/dataplex.list:7:50      - Unknown word (datascans)  -- google/cloud/dataplex/v1:datascans.proto
+external/googleapis/protolists/dataplex.list:8:50      - Unknown word (datascans)  -- google/cloud/dataplex/v1:datascans.proto
 external/googleapis/protolists/deploy.list:2:48      - Unknown word (automationrun) -- google/cloud/deploy/v1:automationrun_payload.proto
 external/googleapis/protolists/deploy.list:4:48      - Unknown word (customtargettype) -- google/cloud/deploy/v1:customtargettype_notification_payload
 external/googleapis/protolists/deploy.list:5:48      - Unknown word (deliverypipeline) -- google/cloud/deploy/v1:deliverypipeline_notification_payload
@@ -396,7 +396,7 @@ generator/internal/codegen_utils_test.cc:473:45    - Unknown word (uhoh)        
 generator/internal/codegen_utils_test.cc:476:43    - Unknown word (wordthatiswaytoolong)                -- atCommentBlockTestParams{"foo wordthatiswaytoolong", 0, "", 0, 5,
 generator/internal/codegen_utils_test.cc:62:22     - Unknown word (baaaaa)     -- EXPECT_EQ("foo_bar_baaaaa", CamelCaseToSnakeCase
 generator/internal/codegen_utils_test.cc:62:59     - Unknown word (BAAAAA)     -- CamelCaseToSnakeCase("fooBarBAAAAA"));
-generator/internal/descriptor_utils.cc:300:32    - Unknown word (scikit)     -- environment would specify the scikit-learn version as follows
+generator/internal/descriptor_utils.cc:287:32    - Unknown word (scikit)     -- environment would specify the scikit-learn version as follows
 generator/internal/discovery_proto_export_file_test.cc:50:36     - Unknown word (IWYU)       -- However, it is not IWYU friendly. Including
 generator/internal/discovery_to_proto.cc:577:13    - Unknown word (sdhart)     -- // TODO(sdhart): figure out if we can
 generator/internal/discovery_to_proto.cc:577:68    - Unknown word (nhlomann)   -- more error info from nhlomann as
@@ -431,10 +431,11 @@ google/cloud/aiplatform/doc/environment-variables.dox:113:21    - Unknown word (
 google/cloud/aiplatform/doc/environment-variables.dox:115:16    - Unknown word (Tensorboard) -- used by `MakeTensorboardServiceConnection()`
 google/cloud/aiplatform/samples/samples.cc:162:34    - Unknown word (generativeai)           -- "gs://generativeai-downloads/images/scones
 google/cloud/aiplatform/samples/samples.cc:30:13     - Unknown word (generativeaionvertexai) -- // [START generativeaionvertexai_gemini_generate_from
+google/cloud/aiplatform/v1/dataset_client.h:1689:38   - Unknown word (CCAI)       -- conversation data to CCAI Insights.
 google/cloud/aiplatform/v1/dataset_client.h:19:39     - Unknown word (AIPLATFORM) -- CLOUD_CPP_GOOGLE_CLOUD_AIPLATFORM_V1_DATASET_CLIENT_H
-google/cloud/aiplatform/v1/endpoint_client.h:728:7     - Unknown word (Undeploys)  -- /// Undeploys a Model from an Endpoint
-google/cloud/aiplatform/v1/endpoint_client.h:737:60    - Unknown word (undeployed) -- DeployedModel is being undeployed from the
-google/cloud/aiplatform/v1/endpoint_client.h:741:19    - Unknown word (unassigns)  -- /// this field unassigns any traffic to it.
+google/cloud/aiplatform/v1/endpoint_client.h:849:7     - Unknown word (Undeploys)  -- /// Undeploys a Model from an Endpoint
+google/cloud/aiplatform/v1/endpoint_client.h:858:60    - Unknown word (undeployed) -- DeployedModel is being undeployed from the
+google/cloud/aiplatform/v1/endpoint_client.h:862:19    - Unknown word (unassigns)  -- /// this field unassigns any traffic to it.
 google/cloud/aiplatform/v1/internal/tensorboard_auth_decorator.cc:101:45    - Unknown word (Tensorboards) -- aiplatform::v1::ListTensorboardsResponse>
 google/cloud/aiplatform/v1/internal/tensorboard_connection_impl.cc:306:15    - Unknown word (tensorboards) -- r.tensorboards().size());
 google/cloud/aiplatform/v1/internal/vizier_connection_impl.cc:421:48    - Unknown word (Metatdata)  -- CheckTrialEarlyStoppingStateMetatdata>()) {
@@ -442,7 +443,7 @@ google/cloud/aiplatform/v1/llm_utility_client.h:159:50    - Unknown word (Codey)
 google/cloud/aiplatform/v1/notebook_client.h:40:55     - Unknown word (Colab)      -- Notebook service (a.k.a. Colab on Workbench).
 google/cloud/aiplatform/v1/prediction_client.h:642:29    - Unknown word (multimodal) -- Generate content with multimodal inputs.
 google/cloud/aiplatform/v1/schedule_client.h:41:25     - Unknown word (shceudled)  -- periodically launch shceudled runs to make API calls
-google/cloud/aiplatform/v1/schedule_client.h:571:55    - Unknown word (unstarted)  -- updated Schedule. All unstarted runs before the
+google/cloud/aiplatform/v1/schedule_client.h:576:55    - Unknown word (unstarted)  -- updated Schedule. All unstarted runs before the
 google/cloud/aiplatform/v1/vizier_client.h:43:37     - Unknown word (hyperparameters) -- tuning machine learning hyperparameters and searching over deep
 google/cloud/alloydb/v1/alloy_db_admin_client.h:19:39     - Unknown word (ALLOYDB)    -- CLOUD_CPP_GOOGLE_CLOUD_ALLOYDB_V1_ALLOY_DB_ADMIN_CLIENT
 google/cloud/apigeeconnect/connection_client.h:19:39     - Unknown word (APIGEECONNECT) -- CLOUD_CPP_GOOGLE_CLOUD_APIGEECONNECT_CONNECTION_CLIENT_H
@@ -612,6 +613,7 @@ google/cloud/contentwarehouse/v1/synonym_set_client.h:157:43    - Unknown word (
 google/cloud/credentials.h:219:28    - Unknown word (cryptographical) -- account, as well as the cryptographical materials (a RSA private
 google/cloud/datacatalog/doc/environment-variables.dox:18:40     - Unknown word (datalineage) -- (which defaults to "datalineage.googleapis.com")
 google/cloud/datacatalog/v1/data_catalog_client.cc:579:42    - Unknown word (Unstar)     -- cloud::datacatalog::v1::UnstarEntryResponse>
+google/cloud/datacatalog/v1/data_catalog_client.h:2804:7    - Unknown word (hierarchicahlly) -- /// hierarchicahlly through the ancestors
 google/cloud/datafusion/v1/data_fusion_client.h:19:39     - Unknown word (DATAFUSION) -- CLOUD_CPP_GOOGLE_CLOUD_DATAFUSION_V1_DATA_FUSION_CLIENT
 google/cloud/dataplex/content_client.h:19:39     - Unknown word (DATAPLEX)   -- CLOUD_CPP_GOOGLE_CLOUD_DATAPLEX_CONTENT_CLIENT_H
 google/cloud/dataproc/v1/cluster_controller_client.h:737:48    - Unknown word (mycluster)  -- ACTIVE AND clusterName = mycluster
@@ -623,9 +625,6 @@ google/cloud/deploy/v1/cloud_deploy_client.cc:858:72    - Unknown word (Rollouts
 google/cloud/deploy/v1/cloud_deploy_client.h:3616:8    - Unknown word (automations) -- /// automations. Format must be
 google/cloud/deploy/v1/internal/cloud_deploy_connection_impl.cc:1598:15   - Unknown word (rollouts)   -- r.rollouts().size());
 google/cloud/dialogflow_cx/doc/main.dox:6:50      - Unknown word (chatbots)   -- interfaces (for example, chatbots, and voice-powered apps
-google/cloud/dialogflow_es/generators_client.h:101:63    - Unknown word (fomula)     -- with the regression fomula
-google/cloud/dialogflow_es/generators_client.h:104:48    - Unknown word (resposible) -- provided, the caller is resposible for
-google/cloud/dialogflow_es/sessions_client.h:99:16     - Unknown word (CCAI)       -- /// or other CCAI products now or in the
 google/cloud/discoveryengine/v1/completion_client.h:19:39     - Unknown word (DISCOVERYENGINE) -- CLOUD_CPP_GOOGLE_CLOUD_DISCOVERYENGINE_V1_COMPLETION_CLIENT
 google/cloud/discoveryengine/v1/internal/site_search_engine_auth_decorator.cc:249:35    - Unknown word (Recrawl)    -- SearchEngineServiceAuth::AsyncRecrawlUris(
 google/cloud/discoveryengine/v1/site_search_engine_client.h:902:25    - Unknown word (recrawl)    -- / Request on-demand recrawl for a list of URIs.
@@ -834,8 +833,9 @@ google/cloud/spanner/samples/graph_samples.cc:118:33    - Unknown word (Kollam) 
 google/cloud/spanner/samples/postgresql_samples.cc:197:56    - Unknown word (Trentor)    -- cloud::spanner::Value("Trentor")}}),
 google/cloud/spanner/samples/postgresql_samples.cc:317:44    - Unknown word (singerid)   -- SingerId will be folded to "singerid"
 google/cloud/spanner/samples/postgresql_samples.cc:438:40    - Unknown word (TIMESTAMPTZ) -- 11-03T09:35:01UTC'::TIMESTAMPTZ as timestamp
-google/cloud/spanner/samples/samples.cc:3738:8    - Unknown word (songinfo)   -- auto songinfo = SongInfo(
-google/cloud/spanner/samples/samples.cc:4519:28   - Unknown word (partitionable) -- For a SQL query to be partitionable, it has to satisfy some
+google/cloud/spanner/samples/samples.cc:1319:20   - Unknown word (MRCMEK)     -- void CopyBackupWithMRCMEK(
+google/cloud/spanner/samples/samples.cc:4014:8    - Unknown word (songinfo)   -- auto songinfo = SongInfo(
+google/cloud/spanner/samples/samples.cc:4795:28   - Unknown word (partitionable) -- For a SQL query to be partitionable, it has to satisfy some
 google/cloud/spanner/value.h:125:9     - Unknown word (Nullness)   -- * @par Nullness
 google/cloud/sql/doc/environment-variables.dox:14:40     - Unknown word (sqladmin)   -- (which defaults to "sqladmin.googleapis.com")
 google/cloud/sql/v1/internal/sql_instances_rest_connection_impl.cc:145:40    - Unknown word (Reencrypt)  -- cesServiceRestConnectionImpl::Reencrypt(
