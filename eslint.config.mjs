@@ -168,6 +168,7 @@ export default tsEslint.config(
             '**/lib-bundled/**',
             '**/node_modules/**',
             '**/src/**/*.cjs',
+            '**/src/generated/**',
             '**/temp/**',
             '**/webpack*.js',
             'docs/_site/**',
