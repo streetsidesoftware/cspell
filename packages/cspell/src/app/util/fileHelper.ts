@@ -1,6 +1,6 @@
 import { promises as fsp } from 'node:fs';
 import * as path from 'node:path';
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { fileURLToPath } from 'node:url';
 
 import { toFileDirURL, toFilePathOrHref, toFileURL } from '@cspell/url';
 import type { BufferEncoding } from 'cspell-io';
@@ -134,7 +134,7 @@ export function resolveFilename(filename: string, cwd?: string): string {
     cwd = cwd || process.cwd();
     if (filename === STDIN) return STDINUrlPrefix;
     if (filename.startsWith(FileUrlPrefix)) {
-        const url = new URL(filename.slice(FileUrlPrefix.length), pathToFileURL(cwd + path.sep));
+        const url = new URL(filename.slice(FileUrlPrefix.length), toFileDirURL(cwd));
         return fileURLToPath(url);
     }
     if (isStdinUrl(filename)) {

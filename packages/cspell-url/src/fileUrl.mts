@@ -16,7 +16,7 @@ export function isFileURL(url: URL | string): boolean {
  * @returns path or href
  */
 export function toFilePathOrHref(url: URL | string): string {
-    return isFileURL(url) ? toFilePath(url) : url.toString();
+    return isFileURL(url) && url.toString().startsWith('file:///') ? toFilePath(url) : url.toString();
 }
 
 function toFilePath(url: string | URL): string {

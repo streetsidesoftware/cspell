@@ -1,7 +1,6 @@
 import { createRequire } from 'node:module';
 import * as os from 'node:os';
 import * as path from 'node:path';
-import { pathToFileURL } from 'node:url';
 import { fileURLToPath } from 'node:url';
 
 import { resolveGlobal } from '@cspell/cspell-resolver';
@@ -18,6 +17,7 @@ import {
     isFileURL,
     isURLLike,
     resolveFileWithURL,
+    toFileDirURL,
     toFilePathOrHref,
     toFileUrl,
     toURL,
@@ -41,6 +41,8 @@ export interface ResolveFileResult {
 }
 
 const regExpStartsWidthNodeModules = /^node_modules[/\\]/;
+
+const debugMode = true;
 
 export class FileResolver {
     constructor(
@@ -174,12 +176,15 @@ export class FileResolver {
 
     tryCreateRequire = (filename: string | URL, relativeTo: string | URL): ResolveFileResult | undefined => {
         if (filename instanceof URL) return undefined;
-        const rel = !isURLLike(relativeTo) || isFileURL(relativeTo) ? relativeTo : pathToFileURL('./');
-        const require = createRequire(rel);
+        const rel = !isURLLike(relativeTo) || isFileURL(relativeTo) ? relativeTo : toFileDirURL('./');
         try {
+            const require = createRequire(rel);
             const r = require.resolve(filename);
             return { filename: r, relativeTo: rel.toString(), found: true, method: 'tryCreateRequire' };
-        } catch {
+        } catch (error) {
+            if (debugMode) {
+                console.error('Error in tryCreateRequire: %o', { filename, rel, relativeTo, error: `${error}` });
+            }
             return undefined;
         }
     };

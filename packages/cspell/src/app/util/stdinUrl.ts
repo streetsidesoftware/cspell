@@ -1,6 +1,6 @@
 import assert from 'node:assert';
-import Path from 'node:path';
-import { pathToFileURL } from 'node:url';
+
+import { toFileURL } from '@cspell/url';
 
 import { STDINProtocol } from './constants.js';
 
@@ -23,6 +23,6 @@ export function resolveStdinUrl(url: string, cwd: string): string {
         .slice(STDINProtocol.length)
         .replace(/^\/\//, '')
         .replace(/^\/([a-z]:)/i, '$1');
-    const fileUrl = pathToFileURL(Path.resolve(cwd, path));
+    const fileUrl = toFileURL(path, cwd);
     return fileUrl.toString().replace(/^file:/, STDINProtocol) + (path ? '' : '/');
 }

@@ -178,6 +178,8 @@ export function urlToUrlRelative(urlFrom: URL, urlTo: URL): string {
 export const regExpWindowsPath = /^[\\/]([a-zA-Z]:[\\/])/;
 export const regExpEncodedColon = /%3[aA]/g;
 
+const badUncLocalhostUrl = /^(\/+[a-zA-Z])\$/;
+
 /**
  * Ensure that a windows file url is correctly formatted with a capitol letter for the drive.
  *
@@ -187,14 +189,28 @@ export const regExpEncodedColon = /%3[aA]/g;
 export function normalizeWindowsUrl(url: URL | string): URL {
     url = typeof url === 'string' ? new URL(url) : url;
     if (url.protocol === 'file:') {
-        const pathname = url.pathname
-            .replaceAll(regExpEncodedColon, ':')
-            .replace(regExpWindowsPath, (d) => d.toUpperCase());
+        let pathname = url.pathname.replaceAll('%3A', ':').replaceAll('%3a', ':').replaceAll('%24', '$');
+        if (!url.host) {
+            pathname = pathname.replace(badUncLocalhostUrl, '$1:');
+        }
+        pathname = pathname.replace(regExpWindowsPath, (d) => d.toUpperCase());
         if (pathname !== url.pathname) {
             url = new URL(url);
             url.pathname = pathname;
-            return url;
+            return fixUncUrl(url);
         }
+    }
+    return fixUncUrl(url);
+}
+
+/**
+ * There is a bug is NodeJS that sometimes causes UNC paths converted to a URL to be prefixed with `file:////`.
+ * @param url - URL to check.
+ * @returns fixed URL if needed.
+ */
+export function fixUncUrl(url: URL): URL {
+    if (url.href.startsWith('file:////')) {
+        return new URL(url.href.replace(/^file:\/{4}/, 'file://'));
     }
     return url;
 }

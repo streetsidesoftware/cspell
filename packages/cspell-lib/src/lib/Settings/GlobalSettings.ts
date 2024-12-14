@@ -1,8 +1,7 @@
-import { pathToFileURL } from 'node:url';
-
 import type { CSpellSettings, CSpellSettingsWithSourceTrace } from '@cspell/cspell-types';
 import type { CSpellConfigFile } from 'cspell-config-lib';
 import { CSpellConfigFileInMemory, CSpellConfigFileJson } from 'cspell-config-lib';
+import { toFileURL } from 'cspell-io';
 
 import { getSourceDirectoryUrl, toFilePathOrHref } from '../util/url.js';
 import { GlobalConfigStore } from './cfgStore.js';
@@ -24,7 +23,7 @@ export async function getRawGlobalSettings(): Promise<CSpellSettingsWST> {
 export async function getGlobalConfig(): Promise<CSpellConfigFile> {
     const name = 'CSpell Configstore';
     const configPath = getGlobalConfigPath();
-    let urlGlobal = configPath ? pathToFileURL(configPath) : new URL('global-config.json', getSourceDirectoryUrl());
+    let urlGlobal = configPath ? toFileURL(configPath) : new URL('global-config.json', getSourceDirectoryUrl());
 
     const source: CSpellSettingsWST['source'] = {
         name,
@@ -39,7 +38,7 @@ export async function getGlobalConfig(): Promise<CSpellConfigFile> {
 
     if (found && found.config && found.filename) {
         const cfg = found.config;
-        urlGlobal = pathToFileURL(found.filename);
+        urlGlobal = toFileURL(found.filename);
 
         // Only populate globalConf is there are values.
         if (cfg && Object.keys(cfg).length) {

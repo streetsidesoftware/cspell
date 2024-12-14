@@ -1,11 +1,11 @@
 import * as path from 'node:path';
-import { pathToFileURL } from 'node:url';
 import { format } from 'node:util';
 
 import { isAsyncIterable, operators, opFilter, pipeAsync } from '@cspell/cspell-pipe';
 import { opMap, pipe } from '@cspell/cspell-pipe/sync';
 import type { CSpellSettings, Glob, Issue, RunResult, TextDocumentOffset, TextOffset } from '@cspell/cspell-types';
 import { MessageTypes } from '@cspell/cspell-types';
+import { toFileURL } from '@cspell/url';
 import chalk from 'chalk';
 import { _debug as cspellDictionaryDebug } from 'cspell-dictionary';
 import { findRepoRoot, GitIgnore } from 'cspell-gitignore';
@@ -591,7 +591,7 @@ async function determineFilesToCheck(
     }
 
     function isExcluded(filename: string, globMatcherExclude: GlobMatcher) {
-        if (cspellIsBinaryFile(pathToFileURL(filename))) {
+        if (cspellIsBinaryFile(toFileURL(filename))) {
             return true;
         }
         const { root } = cfg;
