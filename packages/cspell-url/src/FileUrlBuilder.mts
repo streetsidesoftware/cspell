@@ -22,7 +22,6 @@ import {
 
 const isWindowsPathRegEx = regExpWindowsPathDriveLetter;
 const isWindowsPathname = regExpWindowsPath;
-const startsWithSlash = /^[\\/]/;
 
 export const percentRegEx = /%/g;
 export const backslashRegEx = /\\/g;
