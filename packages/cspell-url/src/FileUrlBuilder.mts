@@ -2,7 +2,12 @@ import assert from 'node:assert';
 import Path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
-import { pathWindowsDriveLetterToUpper, regExpWindowsPathDriveLetter, toFilePathOrHref } from './fileUrl.mjs';
+import {
+    isWindows,
+    pathWindowsDriveLetterToUpper,
+    regExpWindowsPathDriveLetter,
+    toFilePathOrHref,
+} from './fileUrl.mjs';
 import {
     addTrailingSlash,
     isUrlLike,
@@ -11,8 +16,6 @@ import {
     urlParent,
     urlToUrlRelative,
 } from './url.mjs';
-
-export const isWindows = process.platform === 'win32';
 
 const isWindowsPathRegEx = regExpWindowsPathDriveLetter;
 const isWindowsPathname = regExpWindowsPath;
