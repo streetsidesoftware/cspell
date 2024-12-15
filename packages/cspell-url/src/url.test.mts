@@ -20,6 +20,8 @@ describe('url', () => {
         ${'https://github.com/streetsidesoftware/cspell/raw/main/packages/cspell-io/samples/cities.txt'}    | ${true}
         ${'https://github.com/streetsidesoftware/cspell/raw/main/packages/cspell-io/samples/cities.txt.gz'} | ${true}
         ${'vsls:/cspell.config.yaml'}                                                                       | ${true}
+        ${'file://localhost/c$/Users/'}                                                                     | ${true}
+        ${'file://synology/home/'}                                                                          | ${true}
     `('isUrlLike $file', ({ file, expected }) => {
         expect(isUrlLike(file)).toBe(expected);
     });
@@ -33,7 +35,11 @@ describe('url', () => {
         ${'stdin:sample.py'}                                                 | ${'file:///'}                                      | ${'stdin:sample.py'}
         ${'vsls:/cspell.config.yaml'}                                        | ${'file:///'}                                      | ${'vsls:/cspell.config.yaml'}
         ${'**/*.json'}                                                       | ${'file:///User/test/project/'}                    | ${'file:///User/test/project/**/*.json'}
+        ${'**/*.json'}                                                       | ${'file:///User/test/project/data.txt'}            | ${'file:///User/test/project/**/*.json'}
         ${'**/*{.json,.jsonc,.yml}'}                                         | ${'file:///User/test/project/'}                    | ${'file:///User/test/project/**/*%7B.json,.jsonc,.yml%7D'}
+        ${'**/*.json'}                                                       | ${'file://localhost/c$/Users/'}                    | ${'file:///C:/Users/**/*.json'}
+        ${'**/*.json'}                                                       | ${'file://strongman/c$/Users/'}                    | ${'file://strongman/c$/Users/**/*.json'}
+        ${'**/*.json'}                                                       | ${'file://synology/home/README.md'}                | ${'file://synology/home/**/*.json'}
     `('toUrl $url $rootUrl', ({ url, rootUrl, expected }) => {
         expect(toURL(url, rootUrl)).toEqual(new URL(expected));
     });
@@ -48,6 +54,8 @@ describe('url', () => {
         ${'https://github.com/streetsidesoftware/cspell/raw/main/packages/cspell-io/samples/cities.txt'}    | ${'cities.txt'}
         ${'https://github.com/streetsidesoftware/cspell/raw/main/packages/cspell-io/samples/cities.txt.gz'} | ${'cities.txt.gz'}
         ${'https://github.com/streetsidesoftware/cspell/raw/main/packages/cspell-io/samples/code/'}         | ${'code/'}
+        ${'file://localhost/c$/Users/README.md'}                                                            | ${'README.md'}
+        ${'file://synology/home/README.md'}                                                                 | ${'README.md'}
     `('basename $file', async ({ file, expected }) => {
         expect(basenameOfUrlPathname(file)).toEqual(expected);
     });
@@ -62,6 +70,8 @@ describe('url', () => {
         ${'stdin:github.com/streetsidesoftware/samples/'}             | ${'stdin:github.com/streetsidesoftware/'}
         ${'vsls:/cspell.config.yaml'}                                 | ${'vsls:/'}
         ${'vsls:/path/file.txt'}                                      | ${'vsls:/path/'}
+        ${'file://localhost/c$/Users/README.md'}                      | ${'file:///C:/Users/'}
+        ${'file://synology/home/README.md'}                           | ${'file://synology/home/'}
     `('urlParent $url', ({ url, expected }) => {
         expect(urlParent(url).href).toEqual(new URL(expected).href);
     });
@@ -75,6 +85,8 @@ describe('url', () => {
         ${'data:application/text'}                                    | ${true}
         ${'https://github.com/streetsidesoftware/samples/cities.txt'} | ${true}
         ${'vs-code:///remote/file/sample.ts'}                         | ${true}
+        ${'file://localhost/c$/Users/'}                               | ${true}
+        ${'file://synology/home/'}                                    | ${true}
     `('isUrlLike $url', ({ url, expected }) => {
         expect(isUrlLike(url)).toEqual(expected);
     });
@@ -89,23 +101,27 @@ describe('url', () => {
         ${'data:application/text'}                         | ${'data:application/text'}
         ${'https://github.com/streetsidesoftware/samples'} | ${'https://github.com/streetsidesoftware/samples/'}
         ${'vs-code:///remote/file/sample.ts'}              | ${'vs-code:///remote/file/sample.ts/'}
+        ${'file://localhost/c$/Users'}                     | ${'file://C:/Users/'}
+        ${'file://synology/home'}                          | ${'file://synology/home/'}
     `('addTrailingSlash $url', ({ url, expected }) => {
         expect(addTrailingSlash(toURL(url))).toEqual(new URL(expected));
     });
 
     test.each`
-        urlFrom                                            | urlTo                                              | expected
-        ${'file:///'}                                      | ${'file:///'}                                      | ${''}
-        ${'file:///samples/code/'}                         | ${'file:///samples/code/src/file.cpp'}             | ${'src/file.cpp'}
-        ${'file:///samples/code/package.json'}             | ${'file:///samples/code/src/file.cpp'}             | ${'src/file.cpp'}
-        ${'file:///samples/code/'}                         | ${'file:///samples/code/'}                         | ${''}
-        ${'file:///samples/code/'}                         | ${'file:///samples/code'}                          | ${'../code'}
-        ${'file:///samples/code'}                          | ${'file:///samples/code/'}                         | ${'code/'}
-        ${'stdin:sample'}                                  | ${'stdin:sample'}                                  | ${''}
-        ${'stdin:/sample'}                                 | ${'stdin:/sample'}                                 | ${''}
-        ${'data:application/text'}                         | ${'data:application/text'}                         | ${''}
-        ${'https://github.com/streetsidesoftware/samples'} | ${'https://github.com/streetsidesoftware/samples'} | ${''}
-        ${'vs-code:///remote/file/sample.ts'}              | ${'vs-code:///remote/file/sample.ts'}              | ${''}
+        urlFrom                                             | urlTo                                              | expected
+        ${'file:///'}                                       | ${'file:///'}                                      | ${''}
+        ${'file:///samples/code/'}                          | ${'file:///samples/code/src/file.cpp'}             | ${'src/file.cpp'}
+        ${'file:///samples/code/package.json'}              | ${'file:///samples/code/src/file.cpp'}             | ${'src/file.cpp'}
+        ${'file:///samples/code/'}                          | ${'file:///samples/code/'}                         | ${''}
+        ${'file:///samples/code/'}                          | ${'file:///samples/code'}                          | ${'../code'}
+        ${'file:///samples/code'}                           | ${'file:///samples/code/'}                         | ${'code/'}
+        ${'stdin:sample'}                                   | ${'stdin:sample'}                                  | ${''}
+        ${'stdin:/sample'}                                  | ${'stdin:/sample'}                                 | ${''}
+        ${'data:application/text'}                          | ${'data:application/text'}                         | ${''}
+        ${'https://github.com/streetsidesoftware/samples'}  | ${'https://github.com/streetsidesoftware/samples'} | ${''}
+        ${'vs-code:///remote/file/sample.ts'}               | ${'vs-code:///remote/file/sample.ts'}              | ${''}
+        ${'file://localhost/c$/Users/me/project/README.md'} | ${'file://localhost/c$/Users/me/code/README.md'}   | ${'../code/README.md'}
+        ${'file://synology/home/project/README.md'}         | ${'file://synology/home/code/README.md'}           | ${'../code/README.md'}
     `('urlRelative $urlFrom $urlTo', ({ urlFrom, urlTo, expected }) => {
         expect(urlRelative(urlFrom, urlTo)).toEqual(expected);
         const rel = urlRelative(toURL(urlFrom), toURL(urlTo));
@@ -117,17 +133,21 @@ describe('url', () => {
     });
 
     test.each`
-        url                              | expected
-        ${'file:///path/to/my/file.txt'} | ${'file.txt'}
-        ${'stdin:sample'}                | ${''}
+        url                                                 | expected
+        ${'file:///path/to/my/file.txt'}                    | ${'file.txt'}
+        ${'stdin:sample'}                                   | ${''}
+        ${'file://localhost/c$/Users/me/project/README.md'} | ${'README.md'}
+        ${'file://synology/home/project/README.md'}         | ${'README.md'}
     `('urlFilename $url', ({ url, expected }) => {
         url = new URL(url);
         expect(urlFilename(url)).toBe(expected);
     });
 
     test.each`
-        url                              | expected
-        ${'file:///path/to/my/file.txt'} | ${'file.txt'}
+        url                                                 | expected
+        ${'file:///path/to/my/file.txt'}                    | ${'file.txt'}
+        ${'file://localhost/c$/Users/me/project/README.md'} | ${'README.md'}
+        ${'file://synology/home/project/README.md'}         | ${'README.md'}
     `('urlFilename & urlRemoveFilename $url', ({ url, expected }) => {
         url = new URL(url);
         expect(urlFilename(url)).toBe(expected);
@@ -142,6 +162,9 @@ describe('url', () => {
         ${'file:///d:/path/to/my/file.txt'}   | ${'file:///D:/path/to/my/file.txt'}
         ${'file:///d%3a/path/to/my/file.txt'} | ${'file:///D:/path/to/my/file.txt'}
         ${'file:///d%3A/path/to/my/file.txt'} | ${'file:///D:/path/to/my/file.txt'}
+        ${'file://localhost/c%24/Users/me/'}  | ${'file:///C:/Users/me/'}
+        ${'file://synology/home/'}            | ${'file://synology/home/'}
+        ${'file:////synology/home/'}          | ${'file://synology/home/'}
     `('normalizeWindowsUrl  $url', ({ url, expected }) => {
         url = new URL(url);
         expect(normalizeWindowsUrl(url).href).toBe(expected);

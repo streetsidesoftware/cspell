@@ -1,4 +1,4 @@
-import { pathToFileURL } from 'node:url';
+import { toFileDirURL, toFileURL } from '@cspell/url';
 
 export class CwdUrlResolver {
     #lastPath: string;
@@ -8,7 +8,7 @@ export class CwdUrlResolver {
 
     constructor() {
         this.#cwd = process.cwd();
-        this.#cwdUrl = pathToFileURL(this.#cwd);
+        this.#cwdUrl = toFileDirURL(this.#cwd);
         this.#lastPath = this.#cwd;
         this.#lastUrl = this.#cwdUrl;
     }
@@ -17,12 +17,12 @@ export class CwdUrlResolver {
         if (path === this.#lastPath) return this.#lastUrl;
         if (path === this.#cwd) return this.#cwdUrl;
         this.#lastPath = path;
-        this.#lastUrl = pathToFileURL(path);
+        this.#lastUrl = toFileURL(path);
         return this.#lastUrl;
     }
 
     reset(cwd: string = process.cwd()) {
         this.#cwd = cwd;
-        this.#cwdUrl = pathToFileURL(this.#cwd);
+        this.#cwdUrl = toFileDirURL(this.#cwd);
     }
 }

@@ -1,7 +1,4 @@
-import path from 'node:path';
-import { pathToFileURL } from 'node:url';
-
-import { toFilePathOrHref, toFileURL } from '@cspell/url';
+import { toFileDirURL, toFilePathOrHref, toFileURL } from '@cspell/url';
 
 import { srcDirectory } from '../pkg-info.mjs';
 
@@ -21,7 +18,7 @@ export {
  * @returns URL for the source directory
  */
 export function getSourceDirectoryUrl(): URL {
-    const srcDirectoryURL = pathToFileURL(path.join(srcDirectory, '/'));
+    const srcDirectoryURL = toFileDirURL(srcDirectory);
     return srcDirectoryURL;
 }
 
@@ -35,7 +32,7 @@ export function relativeTo(path: string, relativeTo?: URL | string): URL {
 }
 
 export function cwdURL(): URL {
-    return pathToFileURL('./');
+    return toFileDirURL('./');
 }
 
 export function toFileUrl(file: string | URL): URL {

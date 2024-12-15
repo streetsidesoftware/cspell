@@ -1,6 +1,6 @@
 import assert from 'node:assert';
 import path from 'node:path';
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { fileURLToPath } from 'node:url';
 
 import type { CSpellUserSettings, ImportFileRef, Source } from '@cspell/cspell-types';
 import { CSpellConfigFile, CSpellConfigFileReaderWriter, ICSpellConfigFile, IO, TextFile } from 'cspell-config-lib';
@@ -21,6 +21,7 @@ import {
     addTrailingSlash,
     cwdURL,
     resolveFileWithURL,
+    toFileDirURL,
     toFilePathOrHref,
     toFileUrl,
     windowsDriveLetterToUpper,
@@ -224,7 +225,7 @@ export class ConfigLoader implements IConfigLoader {
         pnpSettings?: PnPSettingsOptional,
     ): Promise<CSpellSettingsI> {
         await this.onReady;
-        const ref = await this.resolveFilename(filename, relativeTo || pathToFileURL('./'));
+        const ref = await this.resolveFilename(filename, relativeTo || toFileDirURL('./'));
         const entry = this.importSettings(ref, pnpSettings || defaultPnPSettings, []);
         return entry.onReady;
     }
@@ -233,7 +234,7 @@ export class ConfigLoader implements IConfigLoader {
         filenameOrURL: string | URL,
         relativeTo?: string | URL,
     ): Promise<CSpellConfigFile | Error> {
-        const ref = await this.resolveFilename(filenameOrURL.toString(), relativeTo || pathToFileURL('./'));
+        const ref = await this.resolveFilename(filenameOrURL.toString(), relativeTo || toFileDirURL('./'));
         const url = toFileURL(ref.filename);
         const href = url.href;
         if (ref.error) return new ImportError(`Failed to read config file: "${ref.filename}"`, ref.error);

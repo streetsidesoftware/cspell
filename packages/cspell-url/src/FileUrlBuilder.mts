@@ -2,7 +2,15 @@ import assert from 'node:assert';
 import Path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
-import { pathWindowsDriveLetterToUpper, regExpWindowsPathDriveLetter, toFilePathOrHref } from './fileUrl.mjs';
+import {
+    isFileURL,
+    isWindows,
+    isWindowsFileUrl,
+    isWindowsPathnameWithDriveLatter,
+    pathWindowsDriveLetterToUpper,
+    regExpWindowsPathDriveLetter,
+    toFilePathOrHref,
+} from './fileUrl.mjs';
 import {
     addTrailingSlash,
     isUrlLike,
@@ -11,8 +19,6 @@ import {
     urlParent,
     urlToUrlRelative,
 } from './url.mjs';
-
-export const isWindows = process.platform === 'win32';
 
 const isWindowsPathRegEx = regExpWindowsPathDriveLetter;
 const isWindowsPathname = regExpWindowsPath;
@@ -127,18 +133,26 @@ export class FileUrlBuilder {
      */
     #toFileURL(filenameOrUrl: string | URL, relativeTo?: string | URL): URL {
         if (typeof filenameOrUrl !== 'string') return filenameOrUrl;
-        if (isUrlLike(filenameOrUrl)) return new URL(filenameOrUrl);
+        if (isUrlLike(filenameOrUrl)) return normalizeWindowsUrl(new URL(filenameOrUrl));
         relativeTo ??= this.cwd;
         isWindows && (filenameOrUrl = filenameOrUrl.replaceAll('\\', '/'));
+        if (this.isAbsolute(filenameOrUrl) && isFileURL(relativeTo)) {
+            const pathname = this.normalizeFilePathForUrl(filenameOrUrl);
+            if (isWindowsFileUrl(relativeTo) && !isWindowsPathnameWithDriveLatter(pathname)) {
+                const relFilePrefix = relativeTo.toString().slice(0, 10);
+                return normalizeWindowsUrl(new URL(relFilePrefix + pathname));
+            }
+            return normalizeWindowsUrl(new URL('file://' + pathname));
+        }
         if (isUrlLike(relativeTo)) {
             const pathname = this.normalizeFilePathForUrl(filenameOrUrl);
-            return new URL(pathname, relativeTo);
+            return normalizeWindowsUrl(new URL(pathname, relativeTo));
         }
         // Resolve removes the trailing slash, so we need to add it back.
         const appendSlash = filenameOrUrl.endsWith('/') ? '/' : '';
         const pathname =
             this.normalizeFilePathForUrl(this.path.resolve(relativeTo.toString(), filenameOrUrl)) + appendSlash;
-        return this.pathToFileURL(pathname, this.cwd);
+        return normalizeWindowsUrl(new URL('file://' + pathname));
     }
 
     /**
@@ -158,7 +172,7 @@ export class FileUrlBuilder {
     }
 
     #urlToFilePathOrHref(url: URL): string {
-        if (url.protocol !== ProtocolFile) return url.href;
+        if (url.protocol !== ProtocolFile || url.hostname) return url.href;
         const p =
             this.path === Path
                 ? toFilePathOrHref(url)

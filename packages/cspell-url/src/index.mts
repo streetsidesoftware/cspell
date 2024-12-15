@@ -6,10 +6,12 @@ export { FileUrlBuilder } from './FileUrlBuilder.mjs';
 export {
     addTrailingSlash,
     basenameOfUrlPathname,
+    fixUncUrl,
     hasProtocol,
     isNotUrlLike,
     isURL,
     isUrlLike,
+    normalizeWindowsUrl,
     toURL,
     urlDirname,
     urlParent,

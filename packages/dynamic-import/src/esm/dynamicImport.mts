@@ -1,7 +1,7 @@
 import { statSync } from 'node:fs';
-import { sep as pathSep } from 'node:path';
-import { pathToFileURL } from 'node:url';
+import { resolve as resolvePath } from 'node:path';
 
+import { toFileDirURL, toFileURL } from '@cspell/url';
 import { resolve } from 'import-meta-resolve';
 
 const isWindowsPath = /^[a-z]:\\/i;
@@ -55,7 +55,7 @@ export function importResolveModuleName(moduleName: string | URL, paths: (string
                 typeof parent === 'string'
                     ? parent.startsWith('file://')
                         ? new URL(parent)
-                        : pathToFileURL(parent + pathSep)
+                        : dirToUrl(parent)
                     : parent;
             const resolvedURL = new URL(resolve(modulesNameToImport.toString(), url.toString()));
             try {
@@ -77,7 +77,7 @@ export function importResolveModuleName(moduleName: string | URL, paths: (string
 }
 
 function normalizeModuleName(moduleName: string | URL) {
-    return typeof moduleName === 'string' && isWindowsPath.test(moduleName) ? pathToFileURL(moduleName) : moduleName;
+    return typeof moduleName === 'string' && isWindowsPath.test(moduleName) ? toFileURL(moduleName) : moduleName;
 }
 
 interface NodeError extends Error {
@@ -91,4 +91,9 @@ function toError(e: unknown): NodeError {
 
 function isError(e: unknown): e is NodeError {
     return e instanceof Error;
+}
+
+function dirToUrl(dir: string): URL {
+    const abs = resolvePath(dir);
+    return toFileDirURL(abs);
 }

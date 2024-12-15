@@ -5,7 +5,7 @@ import { describe, expect, test } from 'vitest';
 
 import { urlBasename } from './dataUrl.mjs';
 import { normalizeFilePathForUrl, toFileDirURL, toFileURL } from './defaultFileUrlBuilder.mjs';
-import { pathWindowsDriveLetterToUpper, toFilePathOrHref } from './fileUrl.mjs';
+import { isWindows, isWindowsFileUrl, pathWindowsDriveLetterToUpper, toFilePathOrHref } from './fileUrl.mjs';
 import { FileUrlBuilder } from './FileUrlBuilder.mjs';
 import { isUrlLike, normalizeWindowsUrl, toURL, urlParent } from './url.mjs';
 
@@ -129,8 +129,20 @@ describe('util', () => {
         ${'data:application/json'}   | ${'data:application/json'}
         ${'stdin:file.txt'}          | ${'stdin:file.txt'}
         ${'stdin:/path/to/dir'}      | ${'stdin:/path/to/dir'}
-    `('windowsDriveLetterToUpper $path', ({ path, expected }) => {
+    `('pathWindowsDriveLetterToUpper $path', ({ path, expected }) => {
         expect(pathWindowsDriveLetterToUpper(path)).toEqual(expected);
+    });
+
+    test.each`
+        url                               | expected
+        ${'d:\\user\\data\\file.md'}      | ${false}
+        ${'file:///c:/user/data/file.md'} | ${true}
+        ${'data:application/json'}        | ${false}
+        ${'stdin:file.txt'}               | ${false}
+        ${'stdin:/path/to/dir'}           | ${false}
+        ${import.meta.url}                | ${isWindows}
+    `('isWindowsFileUrl $url', ({ url, expected }) => {
+        expect(isWindowsFileUrl(url)).toEqual(expected);
     });
 });
 

@@ -1,5 +1,5 @@
 import Path from 'node:path';
-import url from 'node:url';
+import url, { fileURLToPath, pathToFileURL } from 'node:url';
 
 import { describe, expect, test } from 'vitest';
 
@@ -25,6 +25,21 @@ describe('FileUrlBuilder', () => {
         const toUrl = builder.pathToFileURL(toPath);
         const result = builder.relative(fromUrl, toUrl);
         expect(result).toEqual(expected);
+    });
+
+    test.each`
+        file                                   | relativeTo                             | path          | expected
+        ${'.'}                                 | ${undefined}                           | ${undefined}  | ${pathToFileURL('./').href}
+        ${'README.md'}                         | ${process.cwd()}                       | ${undefined}  | ${pathToFileURL('README.md').href}
+        ${import.meta.url}                     | ${process.cwd()}                       | ${Path.win32} | ${import.meta.url}
+        ${'deeper/'}                           | ${'file:///E:/user/Test/project/'}     | ${Path.win32} | ${'file:///E:/user/Test/project/deeper/'}
+        ${'file://host/E$/user/test/project/'} | ${undefined}                           | ${Path.win32} | ${'file://host/E$/user/test/project/'}
+        ${'../sibling'}                        | ${'file://host/E$/user/test/project/'} | ${Path.win32} | ${'file://host/E$/user/test/sibling'}
+        ${fileURLToPath(import.meta.url)}      | ${'file://host/E$/user/test/project/'} | ${Path.win32} | ${import.meta.url}
+    `('toFileURL $file $relativeTo', ({ file, relativeTo, path, expected }) => {
+        const builder = new FileUrlBuilder({ path });
+        const url = builder.toFileURL(file, relativeTo);
+        expect(url.href).toBe(expected);
     });
 
     test.each`

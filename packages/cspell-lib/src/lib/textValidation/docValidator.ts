@@ -1,5 +1,4 @@
 import assert from 'node:assert';
-import { pathToFileURL } from 'node:url';
 
 import { opConcatMap, opMap, pipeSync } from '@cspell/cspell-pipe/sync';
 import type {
@@ -140,7 +139,7 @@ export class DocumentValidator {
         const { options, settings: rawSettings } = this;
 
         const resolveImportsRelativeTo = toFileURL(
-            options.resolveImportsRelativeTo || pathToFileURL('./virtual.settings.json'),
+            options.resolveImportsRelativeTo || toFileURL('./virtual.settings.json'),
         );
 
         const settings = rawSettings.import?.length

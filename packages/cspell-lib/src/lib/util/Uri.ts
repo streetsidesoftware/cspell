@@ -1,7 +1,6 @@
 import assert from 'node:assert';
-import { pathToFileURL } from 'node:url';
 
-import { toFilePathOrHref, toFileURL, toURL } from '@cspell/url';
+import { toFileDirURL, toFilePathOrHref, toFileURL, toURL } from '@cspell/url';
 import { isUrlLike } from 'cspell-io';
 import { URI, Utils } from 'vscode-uri';
 
@@ -26,7 +25,7 @@ export function toUri(uriOrFile: string | Uri | URL): UriInstance {
 const isWindows = process.platform === 'win32';
 const hasDriveLetter = /^[a-zA-Z]:[\\/]/;
 
-const rootUrl = pathToFileURL('/');
+const rootUrl = toFileDirURL('/');
 
 export function uriToFilePath(uri: DocumentUri): string {
     let url = documentUriToURL(uri);
