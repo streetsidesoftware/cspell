@@ -6,6 +6,10 @@ export const isWindows = process.platform === 'win32';
 
 const windowsUrlPathRegExp = /^\/[a-zA-Z]:\//;
 
+export function isWindowsPathnameWithDriveLatter(pathname: string): boolean {
+    return windowsUrlPathRegExp.test(pathname);
+}
+
 /**
  * @param url - URL or string to check if it is a file URL.
  * @returns true if the URL is a file URL.
@@ -28,7 +32,7 @@ function toFilePath(url: string | URL): string {
         // Fix drive letter if necessary.
         if (isWindows) {
             const u = new URL(url);
-            if (!windowsUrlPathRegExp.test(u.pathname)) {
+            if (!isWindowsPathnameWithDriveLatter(u.pathname)) {
                 const cwdUrl = pathToFileURL(process.cwd());
                 if (cwdUrl.hostname) {
                     return fileURLToPath(new URL(u.pathname, cwdUrl));
@@ -49,4 +53,15 @@ export const regExpWindowsPathDriveLetter = /^([a-zA-Z]):[\\/]/;
 
 export function pathWindowsDriveLetterToUpper(absoluteFilePath: string): string {
     return absoluteFilePath.replace(regExpWindowsPathDriveLetter, (s) => s.toUpperCase());
+}
+
+const regExpWindowsFileUrl = /^file:\/\/\/[a-zA-Z]:\//;
+
+/**
+ * Test if a url is a file url with a windows path. It does check for UNC paths.
+ * @param url - the url
+ * @returns true if the url is a file url with a windows path with a drive letter.
+ */
+export function isWindowsFileUrl(url: URL | string): boolean {
+    return regExpWindowsFileUrl.test(url.toString());
 }

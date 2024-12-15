@@ -42,7 +42,7 @@ export interface ResolveFileResult {
 
 const regExpStartsWidthNodeModules = /^node_modules[/\\]/;
 
-const debugMode = true;
+const debugMode = false;
 
 export class FileResolver {
     constructor(

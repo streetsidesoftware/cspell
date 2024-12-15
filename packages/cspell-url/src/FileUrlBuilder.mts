@@ -3,7 +3,10 @@ import Path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 import {
+    isFileURL,
     isWindows,
+    isWindowsFileUrl,
+    isWindowsPathnameWithDriveLatter,
     pathWindowsDriveLetterToUpper,
     regExpWindowsPathDriveLetter,
     toFilePathOrHref,
@@ -19,6 +22,7 @@ import {
 
 const isWindowsPathRegEx = regExpWindowsPathDriveLetter;
 const isWindowsPathname = regExpWindowsPath;
+const startsWithSlash = /^[\\/]/;
 
 export const percentRegEx = /%/g;
 export const backslashRegEx = /\\/g;
@@ -133,8 +137,12 @@ export class FileUrlBuilder {
         if (isUrlLike(filenameOrUrl)) return normalizeWindowsUrl(new URL(filenameOrUrl));
         relativeTo ??= this.cwd;
         isWindows && (filenameOrUrl = filenameOrUrl.replaceAll('\\', '/'));
-        if (this.path.isAbsolute(filenameOrUrl)) {
+        if (this.isAbsolute(filenameOrUrl) && isFileURL(relativeTo)) {
             const pathname = this.normalizeFilePathForUrl(filenameOrUrl);
+            if (isWindowsFileUrl(relativeTo) && !isWindowsPathnameWithDriveLatter(pathname)) {
+                const relFilePrefix = relativeTo.toString().slice(0, 10);
+                return normalizeWindowsUrl(new URL(relFilePrefix + pathname));
+            }
             return normalizeWindowsUrl(new URL('file://' + pathname));
         }
         if (isUrlLike(relativeTo)) {
