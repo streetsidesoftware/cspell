@@ -3,9 +3,9 @@ Repository: googleapis/google-cloud-cpp
 Url: https://github.com/googleapis/google-cloud-cpp.git
 Args: '["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]'
 Summary:
-  files: 19746
-  filesWithIssues: 8858
-  issues: 56131
+  files: 19742
+  filesWithIssues: 8855
+  issues: 56057
   errors: 0
 Errors: []
 
@@ -380,8 +380,8 @@ issues:
   - "generator/generator_config.textproto:2446:3         Eventarc        U       # Eventarc"
   - "generator/generator_config.textproto:2463:3         Filestore       U       # Filestore"
   - "generator/generator_config.textproto:2506:7         Multicloud      U       # GKE Multicloud"
-  - "generator/generator_config.textproto:2746:12        Metastore       U       # Dataproc Metastore"
-  - "generator/generator_config.textproto:3686:12        Hmac            U       \"CreateHmacKey\","
+  - "generator/generator_config.textproto:2748:12        Metastore       U       # Dataproc Metastore"
+  - "generator/generator_config.textproto:3688:12        Hmac            U       \"CreateHmacKey\","
   - "generator/integration_tests/backup.proto:27:40          genproto    U       \"google.golang.org/genproto/googleapis/test/admin"
   - "generator/integration_tests/golden/v1/golden_kitchen_sink_client.h:286:43       cloudresourcemanager    U       organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"
   - "generator/integration_tests/golden/v1/golden_kitchen_sink_client.h:651:62       bidir                   U       read-write RPCs (aka bidir streaming)"
@@ -838,8 +838,8 @@ issues:
   - "google/cloud/spanner/samples/postgresql_samples.cc:438:40       TIMESTAMPTZ     U       11-03T09:35:01UTC'::TIMESTAMPTZ as timestamp"
   - "google/cloud/spanner/samples/README.md:22:2         bazelbuild      U       [bazelbuild/bazel#10621](https:"
   - "google/cloud/spanner/samples/samples.cc:1319:20     MRCMEK              U       void CopyBackupWithMRCMEK("
-  - "google/cloud/spanner/samples/samples.cc:4014:8      songinfo            U       auto songinfo = SongInfo("
-  - "google/cloud/spanner/samples/samples.cc:4795:28     partitionable       U       For a SQL query to be partitionable, it has to satisfy some"
+  - "google/cloud/spanner/samples/samples.cc:4017:8      songinfo            U       auto songinfo = SongInfo("
+  - "google/cloud/spanner/samples/samples.cc:4798:28     partitionable       U       For a SQL query to be partitionable, it has to satisfy some"
   - "google/cloud/spanner/value.h:125:9          Nullness    U       * @par Nullness"
   - "google/cloud/sql/doc/environment-variables.dox:14:40        sqladmin    U       (which defaults to \"sqladmin.googleapis.com\")"
   - "google/cloud/sql/v1/internal/sql_instances_rest_connection_impl.cc:145:40       Reencrypt       U       cesServiceRestConnectionImpl::Reencrypt("
@@ -872,6 +872,7 @@ issues:
   - "google/cloud/storage/doc/setup-test-resources.md:99:1           KEYID       U       KEYID=... # e.g cloud-cpp"
   - "google/cloud/storage/doc/setup-test-resources.md:100:12         keyrings    U       gcloud kms keyrings create ${KR} --location"
   - "google/cloud/storage/doc/setup-test-resources.md:118:37         HMAC        U       Service Account for HMAC Keys"
+  - "google/cloud/storage/doc/storage-grpc.dox:110:14        GRPCPP      U       -DgRPC_BUILD_GRPCPP_OTEL_PLUGIN=ON"
   - "google/cloud/storage/doc/storage-main.dox:49:87         Quickstarts     U       introduction#quickstarts 'GCS Quickstarts'"
   - "google/cloud/storage/doc/storage-mocking.dox:15:57          readobject      U       samples.cc mock successful readobject"
   - "google/cloud/storage/doc/storage-mocking.dox:29:57          writeobject     U       samples.cc mock successful writeobject"

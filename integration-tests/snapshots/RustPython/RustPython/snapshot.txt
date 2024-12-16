@@ -620,13 +620,13 @@ scripts/release-wapm.sh:6:14      - Unknown word (WAPM)       -- FEATURES_FOR_WA
 scripts/release-wapm.sh:8:18      - Unknown word (RUSTPYTHONPATH) -- export BUILDTIME_RUSTPYTHONPATH="/lib/rustpython"
 src/interpreter.rs:110:22    - Unknown word (RUSTPYTHONPATH) -- // BUILDTIME_RUSTPYTHONPATH should be set when distributi
 src/interpreter.rs:111:53    - Unknown word (RUSTPYTHONPATH) -- option_env!("BUILDTIME_RUSTPYTHONPATH") {
-src/lib.rs:119:13    - Unknown word (getpip)     -- let get_getpip = rustpython_vm::py
-src/lib.rs:128:59    - Unknown word (getpip)     -- vm.ctx.new_code(get_getpip), vm.new_scope_with
-src/lib.rs:128:9     - Unknown word (getpip)     -- let getpip_code = vm.run_code_obj
-src/lib.rs:129:58    - Unknown word (getpip)     -- builtins::PyStrRef = getpip_code
-src/lib.rs:129:9     - Unknown word (getpip)     -- let getpip_code: rustpython_vm
+src/lib.rs:120:13    - Unknown word (getpip)     -- let get_getpip = rustpython_vm::py
+src/lib.rs:129:59    - Unknown word (getpip)     -- vm.ctx.new_code(get_getpip), vm.new_scope_with
+src/lib.rs:129:9     - Unknown word (getpip)     -- let getpip_code = vm.run_code_obj
+src/lib.rs:130:58    - Unknown word (getpip)     -- builtins::PyStrRef = getpip_code
+src/lib.rs:130:9     - Unknown word (getpip)     -- let getpip_code: rustpython_vm
 src/lib.rs:13:81     - Unknown word (otherthing) -- pass", module_name = "otherthing"));
-src/lib.rs:170:79    - Unknown word (RUSTPYTHONPATH) -- Lib directory to your RUSTPYTHONPATH \
+src/lib.rs:171:79    - Unknown word (RUSTPYTHONPATH) -- Lib directory to your RUSTPYTHONPATH \
 src/settings.rs:155:46    - Unknown word (pycs)       -- name("check-hash-based-pycs")
 src/settings.rs:156:41    - Unknown word (pycs)       -- long("check-hash-based-pycs")
 src/settings.rs:173:55    - Unknown word (PYTHONUNBUFFERED) -- effect on stdin; also PYTHONUNBUFFERED=x",
