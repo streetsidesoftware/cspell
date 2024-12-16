@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>8.17.1 (2024-12-16)</small>
+
+* chore: Update Integration Test Performance Data (#6681) ([4b19439](https://github.com/streetsidesoftware/cspell-cli/commit/4b19439)), closes [#6681](https://github.com/streetsidesoftware/cspell-cli/issues/6681)
+
 ## 8.17.0 (2024-12-15)
 
 * chore: Update Integration Test Performance Data (#6676) ([f9cb45f](https://github.com/streetsidesoftware/cspell-cli/commit/f9cb45f)), closes [#6676](https://github.com/streetsidesoftware/cspell-cli/issues/6676)
