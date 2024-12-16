@@ -4,8 +4,8 @@ Url: https://github.com/neovim/nvim-lspconfig.git
 Args: '["**"]'
 Summary:
   files: 370
-  filesWithIssues: 360
-  issues: 4531
+  filesWithIssues: 335
+  issues: 4415
   errors: 0
 Errors: []
 
@@ -424,11 +424,10 @@ issues:
   - "doc/configs.md:11478:2      forcedotcom             U       [forcedotcom/salesforcedx-vscode"
   - "doc/configs.md:11478:14     salesforcedx            U       [forcedotcom/salesforcedx-vscode](https://github"
   - "doc/configs.md:11533:11     vlang                   U       { \"v\", \"vlang\" }"
-  - "doc/configs.md:11595:29     yourusernamehere        U       global_ts = '/home/[yourusernamehere]/.npm/lib/node_modules"
-  - "doc/configs.md:11739:7      vetur                   U       vetur = {"
-  - "doc/configs.md:11837:43     yammls                  U       is special-cased in yammls, see the following upstream"
-  - "doc/configs.md:11913:22     YARA                    U       An YLS plugin adding YARA linting capabilities"
-  - "doc/configs.md:11915:18     yara                    U       This plugin runs yara.compile on every save"
+  - "doc/configs.md:11733:7      vetur                   U       vetur = {"
+  - "doc/configs.md:11831:43     yammls                  U       is special-cased in yammls, see the following upstream"
+  - "doc/configs.md:11907:22     YARA                    U       An YLS plugin adding YARA linting capabilities"
+  - "doc/configs.md:11909:18     yara                    U       This plugin runs yara.compile on every save"
   - "doc/configs.txt:275:16      nomicfoundation     U       - [solidity_ls_nomicfoundation](#solidity_ls_nomicfoundation"
   - "doc/configs.txt:779:17      astrojs             U       npm install -g @astrojs/language-server"
   - "doc/configs.txt:1223:19     biomejs             U       npm install [-g] @biomejs/biome"
@@ -439,9 +438,9 @@ issues:
   - "doc/lspconfig.txt:34:35         metamethod      U       exposes a `setup{}` metamethod which makes it easy"
   - "doc/lspconfig.txt:230:16        newindex        U       The `configs.__newindex` metamethod consumes"
   - "doc/lspconfig.txt:258:30        fname           U       root_dir = function(fname)"
-  - "doc/lspconfig.txt:434:10        Nvim's          U       All bugs Nvim's built-in client should"
-  - "doc/lspconfig.txt:497:26        healthcheck     U       LspInfo is provided by a healthcheck instead: >vim"
-  - "doc/lspconfig.txt:503:24        norl            U       vim:tw=78:ts=8:ft=help:norl:"
+  - "doc/lspconfig.txt:450:10        Nvim's          U       All bugs Nvim's built-in client should"
+  - "doc/lspconfig.txt:513:26        healthcheck     U       LspInfo is provided by a healthcheck instead: >vim"
+  - "doc/lspconfig.txt:519:24        norl            U       vim:tw=78:ts=8:ft=help:norl:"
   - "flake.nix:12:31         pkgs        U       devShells = forEachSystem (pkgs: {"
   - "flake.nix:17:16         luajit      U       pkgs.luajitPackages.vusted"
   - "flake.nix:17:31         vusted      U       pkgs.luajitPackages.vusted"
@@ -462,7 +461,7 @@ issues:
   - "lua/lspconfig/configs/apex_ls.lua:16:13         Dlwc                U       '-Dlwc.typegeneration.disabled"
   - "lua/lspconfig/configs/apex_ls.lua:16:18         typegeneration      U       '-Dlwc.typegeneration.disabled=true',"
   - "lua/lspconfig/configs/basedpyright.lua:69:7         nargs       U       nargs = 1,"
-  - "lua/lspconfig/configs/bqnlsp.lua:7:18           macunix     U       if vim.fn.has 'macunix' and not cmd_env.DYLD"
+  - "lua/lspconfig/configs/bqnlsp.lua:5:18           macunix     U       if vim.fn.has 'macunix' and not cmd_env.DYLD"
   - "lua/lspconfig/configs/buck2.lua:8:34        buckconfig      U       util.root_pattern '.buckconfig'(fname)"
   - "lua/lspconfig/configs/cairo_ls.lua:8:35         Scarb       U       util.root_pattern('Scarb.toml', 'cairo_project"
   - "lua/lspconfig/configs/codeqlls.lua:9:35         qlpack      U       util.root_pattern 'qlpack.yml',"
@@ -484,8 +483,8 @@ issues:
   - "lua/lspconfig/configs/jdtls.lua:52:15       steelsojka      U       -- TODO: (steelsojka) Handle more than one"
   - "lua/lspconfig/configs/jdtls.lua:67:29       applyedit       U       function on_workspace_applyedit(err, workspace_edit"
   - "lua/lspconfig/configs/jdtls.lua:74:12       echohl          U       command 'echohl ModeMsg'"
-  - "lua/lspconfig/configs/jsonnet_ls.lua:18:33          jsonnetfile     U       return util.root_pattern 'jsonnetfile.json'(fname) or util"
-  - "lua/lspconfig/configs/jsonnet_ls.lua:24:33          JSONNET         U       not new_config.cmd_env.JSONNET_PATH then"
+  - "lua/lspconfig/configs/jsonnet_ls.lua:18:33          jsonnetfile     U       return util.root_pattern 'jsonnetfile.json'(fname)"
+  - "lua/lspconfig/configs/jsonnet_ls.lua:25:33          JSONNET         U       not new_config.cmd_env.JSONNET_PATH then"
   - "lua/lspconfig/configs/julials.lua:11:19         activateenvironment     U       'method julia/activateenvironment is not supported by"
   - "lua/lspconfig/configs/lean3ls.lua:13:18         endpos      U       local _, endpos = fname:find '/lean"
   - "lua/lspconfig/configs/lean3ls.lua:19:33         leanpkg     U       return util.root_pattern 'leanpkg.toml'(fname)"
@@ -545,11 +544,9 @@ issues:
   - "lua/lspconfig/util.lua:6:7          iswin           U       local iswin = vim.loop.os_uname"
   - "lua/lspconfig/util.lua:75:50        customlist      U       \"-nargs=* -complete=customlist,v:lua.something\" into"
   - "lua/lspconfig/util.lua:92:81        fargs           U       name][1](unpack(info.fargs))"
-  - "lua/lspconfig/util.lua:148:41       rootdir         U       path until we find the rootdir."
-  - "lua/lspconfig/util.lua:241:47       worktrees       U       directories and git files (worktrees)"
-  - "lua/lspconfig/util.lua:242:11       gitpath         U       local gitpath = M.path.join(path,"
-  - "lua/lspconfig/util.lua:320:45       servername      U       client_by_name(bufnr, servername)"
-  - "lua/lspconfig/util.lua:321:10       glepnir         U       --TODO(glepnir): remove this for loop"
+  - "lua/lspconfig/util.lua:134:41       rootdir         U       path until we find the rootdir."
+  - "lua/lspconfig/util.lua:289:45       servername      U       client_by_name(bufnr, servername)"
+  - "lua/lspconfig/util.lua:290:10       glepnir         U       --TODO(glepnir): remove this for loop"
   - "nvim-lspconfig-scm-1.rockspec:1:8           MODREV      U       local _MODREV, _SPECREV = 'scm',"
   - "nvim-lspconfig-scm-1.rockspec:1:17          SPECREV     U       local _MODREV, _SPECREV = 'scm', '-1'"
   - "nvim-lspconfig-scm-1.rockspec:3:1           rockspec    U       rockspec_format = \"3.0\""
@@ -565,5 +562,4 @@ issues:
   - "scripts/docgen.lua:173:36       DOCGEN          U       tempdir = os.getenv 'DOCGEN_TEMPDIR' or vim.loop"
   - "scripts/docgen.lua:291:15       copyfile        U       vim.loop.fs_copyfile('doc/configs.md', 'doc"
   - "scripts/docgen.sh:2:71          docgen      U       PWD' +'luafile scripts/docgen.lua' +q"
-  - "test/lspconfig_spec.lua:14:13       doesnt (doesn't)    U       it('doesnt escape if not needed"
-  - "test/lspconfig_spec.lua:74:26       subpaths            U       it('strips zipfile subpaths', function()"
+  - "test/lspconfig_spec.lua:46:26       subpaths    U       it('strips zipfile subpaths', function()"

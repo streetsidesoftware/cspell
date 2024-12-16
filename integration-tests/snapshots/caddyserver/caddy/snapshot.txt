@@ -1208,9 +1208,10 @@ modules/caddyhttp/encode/brotli/brotli_precompressed.go:1:9       - Unknown word
 modules/caddyhttp/encode/brotli/brotli_precompressed.go:4:14      - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
 modules/caddyhttp/encode/brotli/brotli_precompressed.go:5:14      - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/modules/caddyhttp
 modules/caddyhttp/encode/brotli/brotli_precompressed.go:5:43      - Unknown word (caddyhttp)   -- caddyserver/caddy/v2/modules/caddyhttp/encode"
-modules/caddyhttp/encode/caddyfile.go:104:14    - Unknown word (Errf)          -- return d.Errf("module %s is not an
-modules/caddyhttp/encode/caddyfile.go:109:29    - Unknown word (caddyconfig)   -- EncodingsRaw[name] = caddyconfig.JSON(encoding, nil)
-modules/caddyhttp/encode/caddyfile.go:121:7     - Unknown word (caddyfile)     -- var _ caddyfile.Unmarshaler = (*Encode
+modules/caddyhttp/encode/caddyfile.go:107:13    - Unknown word (Errf)          -- return d.Errf("finding encoder module
+modules/caddyhttp/encode/caddyfile.go:111:13    - Unknown word (Errf)          -- return d.Errf("module %s is not an
+modules/caddyhttp/encode/caddyfile.go:116:27    - Unknown word (caddyconfig)   -- EncodingsRaw[arg] = caddyconfig.JSON(encoding, nil)
+modules/caddyhttp/encode/caddyfile.go:127:7     - Unknown word (caddyfile)     -- var _ caddyfile.Unmarshaler = (*Encode
 modules/caddyhttp/encode/caddyfile.go:20:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
 modules/caddyhttp/encode/caddyfile.go:21:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/caddyconfig
 modules/caddyhttp/encode/caddyfile.go:21:35     - Unknown word (caddyconfig) -- caddyserver/caddy/v2/caddyconfig"
@@ -1231,28 +1232,27 @@ modules/caddyhttp/encode/caddyfile.go:33:22     - Unknown word (Caddyfile)     -
 modules/caddyhttp/encode/caddyfile.go:40:13     - Unknown word (Caddyfile)     -- // UnmarshalCaddyfile sets up the handler
 modules/caddyhttp/encode/caddyfile.go:40:48     - Unknown word (Caddyfile)     -- up the handler from Caddyfile tokens. Syntax:
 modules/caddyhttp/encode/caddyfile.go:56:42     - Unknown word (caddyfile)     -- UnmarshalCaddyfile(d *caddyfile.Dispenser) error {
-modules/caddyhttp/encode/caddyfile.go:63:13     - Unknown word (Errf)          -- return d.Errf("finding encoder module
-modules/caddyhttp/encode/caddyfile.go:67:13     - Unknown word (Errf)          -- return d.Errf("module %s is not an
-modules/caddyhttp/encode/caddyfile.go:72:27     - Unknown word (caddyconfig)   -- EncodingsRaw[arg] = caddyconfig.JSON(encoding, nil)
-modules/caddyhttp/encode/caddyfile.go:76:38     - Unknown word (caddyhttp)     -- seMatchers := make(map[string]caddyhttp.ResponseMatcher)
-modules/caddyhttp/encode/caddyfile.go:89:11     - Unknown word (caddyhttp)     -- err := caddyhttp.ParseNamedResponseMatcher
-modules/caddyhttp/encode/caddyfile.go:98:16     - Unknown word (caddyfile)     -- unm, err := caddyfile.UnmarshalModule(d, modID
+modules/caddyhttp/encode/caddyfile.go:62:38     - Unknown word (caddyhttp)     -- seMatchers := make(map[string]caddyhttp.ResponseMatcher)
+modules/caddyhttp/encode/caddyfile.go:75:11     - Unknown word (caddyhttp)     -- err := caddyhttp.ParseNamedResponseMatcher
+modules/caddyhttp/encode/caddyfile.go:84:16     - Unknown word (caddyfile)     -- unm, err := caddyfile.UnmarshalModule(d, modID
+modules/caddyhttp/encode/caddyfile.go:90:14     - Unknown word (Errf)          -- return d.Errf("module %s is not an
+modules/caddyhttp/encode/caddyfile.go:95:29     - Unknown word (caddyconfig)   -- EncodingsRaw[name] = caddyconfig.JSON(encoding, nil)
 modules/caddyhttp/encode/encode.go:105:26    - Unknown word (fontobject)  -- "application/vnd.ms-fontobject*",
 modules/caddyhttp/encode/encode.go:109:21    - Unknown word (opentype)    -- "application/x-opentype*",
 modules/caddyhttp/encode/encode.go:153:75    - Unknown word (caddyhttp)   -- *http.Request, next caddyhttp.Handler) error {
 modules/caddyhttp/encode/encode.go:19:65     - Unknown word (Httpgzip)   -- Copyright (c) 2015 The Httpgzip Authors.
 modules/caddyhttp/encode/encode.go:212:28    - Unknown word (caddyhttp)   -- rww, ok := wrappedRW.(*caddyhttp.ResponseWriterWrapper
-modules/caddyhttp/encode/encode.go:278:11    - Unknown word (bodyclose)   -- //nolint:bodyclose
-modules/caddyhttp/encode/encode.go:278:4     - Unknown word (nolint)      -- //nolint:bodyclose
-modules/caddyhttp/encode/encode.go:329:4     - Unknown word (deallocates) -- // deallocates any active resources
+modules/caddyhttp/encode/encode.go:294:11    - Unknown word (bodyclose)   -- //nolint:bodyclose
+modules/caddyhttp/encode/encode.go:294:4     - Unknown word (nolint)      -- //nolint:bodyclose
 modules/caddyhttp/encode/encode.go:33:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
 modules/caddyhttp/encode/encode.go:34:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/modules/caddyhttp
 modules/caddyhttp/encode/encode.go:34:43     - Unknown word (caddyhttp)   -- caddyserver/caddy/v2/modules/caddyhttp"
-modules/caddyhttp/encode/encode.go:414:2     - Unknown word (prefs)       -- prefs := []encodingPreference
-modules/caddyhttp/encode/encode.go:450:18    - Unknown word (prefs)       -- prefs = append(prefs, encodingPreference
-modules/caddyhttp/encode/encode.go:450:3     - Unknown word (prefs)       -- prefs = append(prefs, encodingPrefe
-modules/caddyhttp/encode/encode.go:458:13    - Unknown word (prefs)       -- sort.Slice(prefs, func(i, j int) bool
-modules/caddyhttp/encode/encode.go:459:15    - Unknown word (prefs)       -- if math.Abs(prefs[i].q-prefs[j].q) <
+modules/caddyhttp/encode/encode.go:351:4     - Unknown word (deallocates) -- // deallocates any active resources
+modules/caddyhttp/encode/encode.go:436:2     - Unknown word (prefs)       -- prefs := []encodingPreference
+modules/caddyhttp/encode/encode.go:472:18    - Unknown word (prefs)       -- prefs = append(prefs, encodingPreference
+modules/caddyhttp/encode/encode.go:472:3     - Unknown word (prefs)       -- prefs = append(prefs, encodingPrefe
+modules/caddyhttp/encode/encode.go:480:13    - Unknown word (prefs)       -- sort.Slice(prefs, func(i, j int) bool
+modules/caddyhttp/encode/encode.go:481:15    - Unknown word (prefs)       -- if math.Abs(prefs[i].q-prefs[j].q) <
 modules/caddyhttp/encode/encode.go:53:59     - Unknown word (Mmatcher)    -- against this ResponseMmatcher.
 modules/caddyhttp/encode/encode.go:55:11     - Unknown word (caddyhttp)   -- Matcher *caddyhttp.ResponseMatcher `json
 modules/caddyhttp/encode/encode.go:74:18     - Unknown word (Iface)       -- for modName, modIface := range mods.(map[string
@@ -1346,16 +1346,16 @@ modules/caddyhttp/fileserver/browsetplcontext_test.go:82:6      - Unknown word (
 modules/caddyhttp/fileserver/browsetplcontext_test.go:84:25     - Unknown word (مجلد)       -- Link: "../", Text: "مجلد-1"},
 modules/caddyhttp/fileserver/caddyfile.go:130:17    - Unknown word (Errf)          -- return d.Errf("unknown sort option
 modules/caddyhttp/fileserver/caddyfile.go:144:15    - Unknown word (Errf)          -- return d.Errf("unknown subdirective
-modules/caddyhttp/fileserver/caddyfile.go:154:15    - Unknown word (Errf)          -- return d.Errf("getting module named
-modules/caddyhttp/fileserver/caddyfile.go:159:15    - Unknown word (Errf)          -- return d.Errf("module %s is not a
-modules/caddyhttp/fileserver/caddyfile.go:164:38    - Unknown word (caddyconfig)   -- PrecompressedRaw[d.Val()] = caddyconfig.JSON(precompress, nil
-modules/caddyhttp/fileserver/caddyfile.go:173:22    - Unknown word (caddyhttp)     -- fsrv.StatusCode = caddyhttp.WeakString(d.Val())
-modules/caddyhttp/fileserver/caddyfile.go:196:13    - Unknown word (Errf)          -- return d.Errf("unknown subdirective
-modules/caddyhttp/fileserver/caddyfile.go:204:23    - Unknown word (httpcaddyfile) -- requires having an httpcaddyfile.Helper to function,
-modules/caddyhttp/fileserver/caddyfile.go:204:73    - Unknown word (Caddyfiles)    -- function, to setup hidden Caddyfiles.
-modules/caddyhttp/fileserver/caddyfile.go:206:42    - Unknown word (Caddyfiles)    -- Caddyfile (and any imported Caddyfiles).
-modules/caddyhttp/fileserver/caddyfile.go:210:5     - Unknown word (Caddyfiles)    -- // Caddyfiles function.
-modules/caddyhttp/fileserver/caddyfile.go:211:22    - Unknown word (Caddyfiles)    -- if configFiles := h.Caddyfiles(); len(configFiles)
+modules/caddyhttp/fileserver/caddyfile.go:158:15    - Unknown word (Errf)          -- return d.Errf("getting module named
+modules/caddyhttp/fileserver/caddyfile.go:163:15    - Unknown word (Errf)          -- return d.Errf("module %s is not a
+modules/caddyhttp/fileserver/caddyfile.go:168:37    - Unknown word (caddyconfig)   -- PrecompressedRaw[format] = caddyconfig.JSON(precompress, nil
+modules/caddyhttp/fileserver/caddyfile.go:175:22    - Unknown word (caddyhttp)     -- fsrv.StatusCode = caddyhttp.WeakString(d.Val())
+modules/caddyhttp/fileserver/caddyfile.go:198:13    - Unknown word (Errf)          -- return d.Errf("unknown subdirective
+modules/caddyhttp/fileserver/caddyfile.go:206:23    - Unknown word (httpcaddyfile) -- requires having an httpcaddyfile.Helper to function,
+modules/caddyhttp/fileserver/caddyfile.go:206:73    - Unknown word (Caddyfiles)    -- function, to setup hidden Caddyfiles.
+modules/caddyhttp/fileserver/caddyfile.go:208:42    - Unknown word (Caddyfiles)    -- Caddyfile (and any imported Caddyfiles).
+modules/caddyhttp/fileserver/caddyfile.go:212:5     - Unknown word (Caddyfiles)    -- // Caddyfiles function.
+modules/caddyhttp/fileserver/caddyfile.go:213:22    - Unknown word (Caddyfiles)    -- if configFiles := h.Caddyfiles(); len(configFiles)
 modules/caddyhttp/fileserver/caddyfile.go:22:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
 modules/caddyhttp/fileserver/caddyfile.go:23:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/caddyconfig
 modules/caddyhttp/fileserver/caddyfile.go:23:35     - Unknown word (caddyconfig) -- caddyserver/caddy/v2/caddyconfig"
@@ -1369,7 +1369,7 @@ modules/caddyhttp/fileserver/caddyfile.go:26:14     - Unknown word (caddyserver)
 modules/caddyhttp/fileserver/caddyfile.go:26:43     - Unknown word (caddyhttp)     -- caddyserver/caddy/v2/modules/caddyhttp"
 modules/caddyhttp/fileserver/caddyfile.go:27:43     - Unknown word (caddyhttp)     -- caddyserver/caddy/v2/modules/caddyhttp/encode"
 modules/caddyhttp/fileserver/caddyfile.go:28:43     - Unknown word (caddyhttp)     -- caddyserver/caddy/v2/modules/caddyhttp/rewrite"
-modules/caddyhttp/fileserver/caddyfile.go:327:7     - Unknown word (caddyfile)     -- var _ caddyfile.Unmarshaler = (*FileServer
+modules/caddyhttp/fileserver/caddyfile.go:329:7     - Unknown word (caddyfile)     -- var _ caddyfile.Unmarshaler = (*FileServer
 modules/caddyhttp/fileserver/caddyfile.go:32:2      - Unknown word (httpcaddyfile) -- httpcaddyfile.RegisterHandlerDirective
 modules/caddyhttp/fileserver/caddyfile.go:32:61     - Unknown word (Caddyfile)     -- "file_server", parseCaddyfile)
 modules/caddyhttp/fileserver/caddyfile.go:33:2      - Unknown word (httpcaddyfile) -- httpcaddyfile.RegisterDirective("try

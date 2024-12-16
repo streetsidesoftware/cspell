@@ -4,8 +4,8 @@ Url: https://github.com/eslint/eslint
 Args: '[".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]'
 Summary:
   files: 2038
-  filesWithIssues: 303
-  issues: 1642
+  filesWithIssues: 304
+  issues: 1646
   errors: 0
 Errors: []
 
@@ -229,6 +229,9 @@ issues:
   - "lib/rules/no-mixed-requires.js:78:66        iojs    U       per nodejs v0.12.2 and iojs v0.7.1"
   - "lib/rules/no-new-native-nonconstructor.js:32:18         Nonconstructor      U       noNewNonconstructor: \"`{{name}}` cannot"
   - "lib/rules/no-trailing-spaces.js:60:13       NONBLANK    U       NONBLANK = `${BLANK_CLASS}+$"
+  - "lib/rules/no-unused-vars.js:1037:52     dectructured    U       unused variables in dectructured object with single property"
+  - "lib/rules/no-unused-vars.js:1037:105    decalartion     U       property in variable decalartion and function parameter"
+  - "lib/rules/no-unused-vars.js:1409:30     varible         U       // remove unused varible that is in a sequence"
   - "lib/rules/no-useless-backreference.js:75:40         bref        U       \"Backreference '{{ bref }}' will be ignored"
   - "lib/rules/no-useless-backreference.js:115:41        bref's      U       // group is bref's ancestor => bref is"
   - "lib/rules/no-useless-escape.js:32:47        nrvtbfux        U       ESCAPES = union(new Set(\"\\\\nrvtbfux\"), astUtils.LINEBREAKS"
@@ -315,8 +318,8 @@ issues:
   - "tests/lib/linter/linter.js:3463:1       consolexlog         U       consolexlog(\"test2\");"
   - "tests/lib/linter/linter.js:3607:84      rulename            U       this is 2, since the rulename is very likely to be"
   - "tests/lib/linter/linter.js:5603:31      suppresed           U       it(\"should report one suppresed problem when noInlineConfig"
-  - "tests/lib/linter/linter.js:7345:19      postprocessors      U       describe(\"postprocessors\", () => {"
-  - "tests/lib/linter/linter.js:16897:52     intentionaly        U       // intentionaly mutates objects and"
+  - "tests/lib/linter/linter.js:7361:19      postprocessors      U       describe(\"postprocessors\", () => {"
+  - "tests/lib/linter/linter.js:16929:52     intentionaly        U       // intentionaly mutates objects and"
   - "tests/lib/linter/report-translator.js:339:32        fooo        U       text: \"fooo\\nbar\""
   - "tests/lib/linter/report-translator.js:396:34        ncdar       U       text: \"o\\ncdar\""
   - "tests/lib/linter/rules.js:29:29         michaelficarra      U       const ruleId = \"michaelficarra\";"
@@ -389,7 +392,7 @@ issues:
   - "tests/lib/rules/no-tabs.js:60:19        tsdfdsf     U       \" //\\tsdfdsf \\n\" +"
   - "tests/lib/rules/no-undefined.js:38:10       ndefined    U       \"ndefined\","
   - "tests/lib/rules/no-unexpected-multiline.js:313:22       gimuygimuygimuy     U       /bar/gimuygimuygimuy.test(baz)"
-  - "tests/lib/rules/no-unused-vars.js:1042:32       fooz    U       code: \"/* global a$fooz,$foo */\\na$fooz;\","
+  - "tests/lib/rules/no-unused-vars.js:1284:32       fooz    U       code: \"/* global a$fooz,$foo */\\na$fooz;\","
   - "tests/lib/rules/no-warning-comments.js:37:92        aeiou       U       options: [{ terms: [\"[aeiou]\"], location: \"anywhere"
   - "tests/lib/rules/no-warning-comments.js:153:30       litera      U       code: \"// regex [litera|$]\","
   - "tests/lib/rules/object-shorthand.js:22:7        LONGFORM    U       const LONGFORM_PROPERTY_ERROR = { messageId"
@@ -646,7 +649,9 @@ issuesSummary:
   - "text: customformat, count: 1, files: 1,"
   - "text: Cypro, count: 1, files: 1,"
   - "text: dbname, count: 3, files: 1,"
+  - "text: decalartion, count: 1, files: 1,"
   - "text: decrementcurrent, count: 2, files: 1,"
+  - "text: dectructured, count: 1, files: 1,"
   - "text: destructures, count: 1, files: 1,"
   - "text: devel, count: 4, files: 1,"
   - "text: Dfnp, count: 1, files: 1,"
@@ -1062,6 +1067,7 @@ issuesSummary:
   - "text: urlset, count: 2, files: 1,"
   - "text: Uyghur, count: 1, files: 1,"
   - "text: validthis, count: 5, files: 1,"
+  - "text: varible, count: 2, files: 1,"
   - "text: Varint, count: 1, files: 1,"
   - "text: verif, count: 3, files: 1,"
   - "text: verifsint, count: 4, files: 1,"

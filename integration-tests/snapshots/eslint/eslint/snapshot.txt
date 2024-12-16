@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: [".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 2038, Issues found: 1642 in 303 files.
+ CSpell: Files checked: 2038, Issues found: 1646 in 304 files.
  exit code: 1
 Makefile.js:128:88    - Unknown word (ined)       -- followed by the string "ined".
 Makefile.js:343:12    - Unknown word (gensite)    -- target.gensite();
@@ -249,6 +249,9 @@ lib/rules/no-invalid-regexp.js:13:21     - Unknown word (dgimsuvy)   -- const va
 lib/rules/no-mixed-requires.js:78:66     - Unknown word (iojs)       -- per nodejs v0.12.2 and iojs v0.7.1
 lib/rules/no-new-native-nonconstructor.js:32:18     - Unknown word (Nonconstructor) -- noNewNonconstructor: "`{{name}}` cannot
 lib/rules/no-trailing-spaces.js:60:13     - Unknown word (NONBLANK)   -- NONBLANK = `${BLANK_CLASS}+$
+lib/rules/no-unused-vars.js:1037:105  - Unknown word (decalartion)  -- property in variable decalartion and function parameter
+lib/rules/no-unused-vars.js:1037:52   - Unknown word (dectructured) -- unused variables in dectructured object with single property
+lib/rules/no-unused-vars.js:1409:30   - Unknown word (varible)      -- // remove unused varible that is in a sequence
 lib/rules/no-useless-backreference.js:115:41    - Unknown word (bref's)     -- // group is bref's ancestor => bref is
 lib/rules/no-useless-backreference.js:75:40     - Unknown word (bref)       -- "Backreference '{{ bref }}' will be ignored
 lib/rules/no-useless-escape.js:32:47     - Unknown word (nrvtbfux)   -- ESCAPES = union(new Set("\\nrvtbfux"), astUtils.LINEBREAKS
@@ -307,11 +310,11 @@ tests/lib/eslint/eslint.js:9168:35   - Unknown word (previos)      -- make sure 
 tests/lib/eslint/eslint.js:9221:55   - Unknown word (intenationally) -- cacheFilePath, "[]"); // intenationally invalid to additionally
 tests/lib/eslint/eslint.js:9391:55   - Unknown word (occured)        -- the previous run that occured after the cache was
 tests/lib/eslint/legacy-eslint.js:2536:24   - Unknown word (succesfully) -- it("should succesfully execute with a rule
-tests/lib/linter/linter.js:16897:52  - Unknown word (intentionaly)   -- // intentionaly mutates objects and
+tests/lib/linter/linter.js:16929:52  - Unknown word (intentionaly)   -- // intentionaly mutates objects and
 tests/lib/linter/linter.js:3463:1    - Unknown word (consolexlog) -- consolexlog("test2");
 tests/lib/linter/linter.js:3607:84   - Unknown word (rulename)    -- this is 2, since the rulename is very likely to be
 tests/lib/linter/linter.js:5603:31   - Unknown word (suppresed)   -- it("should report one suppresed problem when noInlineConfig
-tests/lib/linter/linter.js:7345:19   - Unknown word (postprocessors) -- describe("postprocessors", () => {
+tests/lib/linter/linter.js:7361:19   - Unknown word (postprocessors) -- describe("postprocessors", () => {
 tests/lib/linter/report-translator.js:339:32    - Unknown word (fooo)       -- text: "fooo\nbar"
 tests/lib/linter/report-translator.js:396:34    - Unknown word (ncdar)      -- text: "o\ncdar"
 tests/lib/linter/rules.js:29:29     - Unknown word (michaelficarra) -- const ruleId = "michaelficarra";
@@ -384,7 +387,7 @@ tests/lib/rules/no-tabs.js:24:17     - Unknown word (sdfdsf)     -- " //   sdfds
 tests/lib/rules/no-tabs.js:60:19     - Unknown word (tsdfdsf)    -- " //\tsdfdsf \n" +
 tests/lib/rules/no-undefined.js:38:10     - Unknown word (ndefined)   -- "ndefined",
 tests/lib/rules/no-unexpected-multiline.js:313:22    - Unknown word (gimuygimuygimuy) -- /bar/gimuygimuygimuy.test(baz)
-tests/lib/rules/no-unused-vars.js:1042:32   - Unknown word (fooz)       -- code: "/* global a$fooz,$foo */\na$fooz;",
+tests/lib/rules/no-unused-vars.js:1284:32   - Unknown word (fooz)       -- code: "/* global a$fooz,$foo */\na$fooz;",
 tests/lib/rules/no-warning-comments.js:153:30    - Unknown word (litera)     -- code: "// regex [litera|$]",
 tests/lib/rules/no-warning-comments.js:37:92     - Unknown word (aeiou)      -- options: [{ terms: ["[aeiou]"], location: "anywhere
 tests/lib/rules/object-shorthand.js:222:30    - Unknown word (afoob)      -- code: "var x = { afoob: function() {}  }",
