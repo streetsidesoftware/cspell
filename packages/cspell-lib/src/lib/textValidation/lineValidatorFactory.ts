@@ -287,7 +287,7 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
                 };
                 return vr;
             }
-            if (possibleWord.text.endsWith('.')) {
+            if (possibleWord.text.endsWith('.') && possibleWord.text.length > 1) {
                 const pw = { ...possibleWord, text: possibleWord.text.slice(0, -1) };
                 if (isWordFlagged(pw)) {
                     const vr: ValidationIssueRO = {
