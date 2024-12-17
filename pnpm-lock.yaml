@@ -111,8 +111,8 @@ importers:
         specifier: ^8.18.1
         version: 8.18.1(eslint@9.17.0(jiti@2.1.0))(typescript@5.7.2)
       vite:
-        specifier: ^5.4.11
-        version: 5.4.11(@types/node@18.19.68)(terser@5.37.0)
+        specifier: ^6.0.3
+        version: 6.0.3(@types/node@18.19.68)(jiti@2.1.0)(terser@5.37.0)(yaml@2.6.1)
       vitest:
         specifier: ^2.1.8
         version: 2.1.8(@types/node@18.19.68)(terser@5.37.0)
@@ -10284,6 +10284,46 @@ packages:
       terser:
         optional: true
 
+  vite@6.0.3:
+    resolution: {integrity: sha512-Cmuo5P0ENTN6HxLSo6IHsjCLn/81Vgrp81oaiFFMRa8gGDj5xEjIcEpf2ZymZtZR8oU0P2JX5WuUp/rlXcHkAw==}
+    engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
+    hasBin: true
+    peerDependencies:
+      '@types/node': ^18.0.0 || ^20.0.0 || >=22.0.0
+      jiti: '>=1.21.0'
+      less: '*'
+      lightningcss: ^1.21.0
+      sass: '*'
+      sass-embedded: '*'
+      stylus: '*'
+      sugarss: '*'
+      terser: ^5.16.0
+      tsx: ^4.8.1
+      yaml: ^2.4.2
+    peerDependenciesMeta:
+      '@types/node':
+        optional: true
+      jiti:
+        optional: true
+      less:
+        optional: true
+      lightningcss:
+        optional: true
+      sass:
+        optional: true
+      sass-embedded:
+        optional: true
+      stylus:
+        optional: true
+      sugarss:
+        optional: true
+      terser:
+        optional: true
+      tsx:
+        optional: true
+      yaml:
+        optional: true
+
   vitest-fetch-mock@0.4.2:
     resolution: {integrity: sha512-MuN/TCAvvUs9sLMdOPKqdXEUOD0E5cNW/LN7Tro3KkrLBsvUaH7iQWcznNUU4ml+GqX6ZbNguDmFQ2tliKqhCg==}
     engines: {node: '>=18.0.0'}
@@ -12661,7 +12701,7 @@ snapshots:
 
   '@docusaurus/react-loadable@6.0.0(react@18.3.1)':
     dependencies:
-      '@types/react': 19.0.1
+      '@types/react': 18.3.17
       react: 18.3.1
 
   '@docusaurus/remark-plugin-npm2yarn@3.6.3':
@@ -14757,6 +14797,14 @@ snapshots:
       magic-string: 0.30.17
     optionalDependencies:
       vite: 5.4.11(@types/node@18.19.68)(terser@5.37.0)
+
+  '@vitest/mocker@2.1.8(vite@5.4.11(@types/node@22.10.2)(terser@5.37.0))':
+    dependencies:
+      '@vitest/spy': 2.1.8
+      estree-walker: 3.0.3
+      magic-string: 0.30.17
+    optionalDependencies:
+      vite: 5.4.11(@types/node@22.10.2)(terser@5.37.0)
 
   '@vitest/pretty-format@2.1.8':
     dependencies:
@@ -22275,6 +22323,18 @@ snapshots:
       fsevents: 2.3.3
       terser: 5.37.0
 
+  vite@6.0.3(@types/node@18.19.68)(jiti@2.1.0)(terser@5.37.0)(yaml@2.6.1):
+    dependencies:
+      esbuild: 0.24.0
+      postcss: 8.4.49
+      rollup: 4.28.1
+    optionalDependencies:
+      '@types/node': 18.19.68
+      fsevents: 2.3.3
+      jiti: 2.1.0
+      terser: 5.37.0
+      yaml: 2.6.1
+
   vitest-fetch-mock@0.4.2(vitest@2.1.8(@types/node@22.10.2)(terser@5.37.0)):
     dependencies:
       vitest: 2.1.8(@types/node@22.10.2)(terser@5.37.0)
@@ -22317,7 +22377,7 @@ snapshots:
   vitest@2.1.8(@types/node@22.10.2)(terser@5.37.0):
     dependencies:
       '@vitest/expect': 2.1.8
-      '@vitest/mocker': 2.1.8(vite@5.4.11(@types/node@18.19.68)(terser@5.37.0))
+      '@vitest/mocker': 2.1.8(vite@5.4.11(@types/node@22.10.2)(terser@5.37.0))
       '@vitest/pretty-format': 2.1.8
       '@vitest/runner': 2.1.8
       '@vitest/snapshot': 2.1.8
