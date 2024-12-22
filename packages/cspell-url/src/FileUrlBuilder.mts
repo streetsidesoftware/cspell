@@ -31,10 +31,33 @@ export const tabRegEx = /\t/g;
 export const questionRegex = /\?/g;
 export const hashRegex = /#/g;
 
+export interface ParsedPath {
+    /**
+     * The root of the path such as '/' or 'c:\'
+     */
+    root: string;
+    /**
+     * The full directory path such as '/home/user/dir' or 'c:\path\dir'
+     */
+    dir: string;
+    /**
+     * The file name including extension (if any) such as 'index.html'
+     */
+    base: string;
+    /**
+     * The file extension (if any) such as '.html'
+     */
+    ext: string;
+    /**
+     * The file name without extension (if any) such as 'index'
+     */
+    name: string;
+}
+
 export interface PathInterface {
     sep: string;
     resolve(...paths: string[]): string;
-    parse(path: string): Path.ParsedPath;
+    parse(path: string): ParsedPath;
     normalize(path: string): string;
     relative(from: string, to: string): string;
     isAbsolute(path: string): boolean;

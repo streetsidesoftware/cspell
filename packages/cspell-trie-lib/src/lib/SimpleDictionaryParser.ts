@@ -1,4 +1,5 @@
-import { opCombine as opPipe, opConcatMap, type Operator, opFilter, opMap } from '@cspell/cspell-pipe/sync';
+import type { Operator } from '@cspell/cspell-pipe/sync';
+import { opCombine as opPipe, opConcatMap, opFilter, opMap } from '@cspell/cspell-pipe/sync';
 
 import { buildITrieFromWords } from './buildITrie.js';
 import {
