@@ -1,0 +1,32 @@
+{
+  "name": "test-cspell-lib-tsup",
+  "version": "7.0.0",
+  "description": "Pure testing package for cspell-lib.",
+  "bin": {
+    "test-bin": "test-bin.mjs"
+  },
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
+    "build": "pnpm build:tsup",
+    "build:tsup": "tsup",
+    "clean-build": "pnpm run clean && pnpm run build",
+    "test": "node ./test-bin.mjs"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "cspell-lib": "workspace:*"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "cspell": {
+    "words": [
+      "outfile",
+      "tsbuild"
+    ]
+  },
+  "keywords": []
+}
