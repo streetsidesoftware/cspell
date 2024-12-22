@@ -15,11 +15,11 @@
   "license": "MIT",
   "type": "module",
   "sideEffects": false,
-  "module": "./dist/index.mjs",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.mjs"
+      "import": "./dist/index.js"
     }
   },
   "files": [
@@ -34,13 +34,14 @@
     "!**/*.map"
   ],
   "scripts": {
-    "build": "tsc -p .",
+    "build": "tsup-node",
     "build:clean": "pnpm clean && pnpm build",
     "clean": "shx rm -rf dist coverage",
     "clean-build": "pnpm build:clean",
     "coverage": "vitest run --coverage",
     "test-watch": "vitest",
-    "test": "vitest run",
+    "test:build": "tsc -p .",
+    "test": "pnpm test:build && vitest run",
     "test:perf": "insight --file \"dist/perf/**/*.perf.{mjs,js}\" -t 1000",
     "test:perf:ts": "insight --register ts-node/esm --file \"src/perf/**/*.perf.{mts,ts}\" -t 1000",
     "test:perf:prof": "NODE_ENV=production node --cpu-prof ../../node_modules/perf-insight/bin.mjs --file \"dist/perf/**/*.perf.{mjs,js}\" -t 1000",

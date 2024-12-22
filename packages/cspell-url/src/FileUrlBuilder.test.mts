@@ -4,7 +4,7 @@ import url, { fileURLToPath, pathToFileURL } from 'node:url';
 import { describe, expect, test } from 'vitest';
 
 import { pathWindowsDriveLetterToUpper } from './fileUrl.mjs';
-import { FileUrlBuilder } from './FileUrlBuilder.mjs';
+import { FileUrlBuilder, ParsedPath } from './FileUrlBuilder.mjs';
 
 describe('FileUrlBuilder', () => {
     test('FileUrlBuilder', () => {
@@ -81,5 +81,11 @@ describe('FileUrlBuilder', () => {
     `('urlToFilePathOrHref $filePath', ({ filePath, expected }) => {
         const builder = new FileUrlBuilder();
         expect(builder.urlToFilePathOrHref(builder.toFileURL(filePath))).toEqual(expected);
+    });
+
+    test('ParsedPath matches Path.ParsedPath', () => {
+        const pp: ParsedPath = Path.parse('e:/path/to/file.txt');
+        const pp2: Path.ParsedPath = pp;
+        expect(pp2).toEqual(pp);
     });
 });
