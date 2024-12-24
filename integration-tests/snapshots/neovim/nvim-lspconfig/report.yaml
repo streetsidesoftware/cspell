@@ -5,7 +5,7 @@ Args: '["**"]'
 Summary:
   files: 371
   filesWithIssues: 335
-  issues: 4424
+  issues: 4404
   errors: 0
 Errors: []
 
@@ -416,7 +416,6 @@ issues:
   - "doc/configs.md:11367:5      logfile                 U       logfile = \"/home/user/.cache"
   - "doc/configs.md:11368:5      mavenrepo               U       mavenrepo = \"/home/user/.m2/repository"
   - "doc/configs.md:11436:21     Veryl                   U       Language server for Veryl"
-  - "doc/configs.md:11539:59     autoload                U       runtime\", \"nvim\", \".git\", \"autoload\", \"plugin\" },"
   - "doc/configs.md:11543:5      iskeyword               U       iskeyword = \"@,48-57,_,192-25"
   - "doc/configs.md:11546:11     Runtimepath             U       fromRuntimepath = true,"
   - "doc/configs.md:11547:11     Vimruntime              U       fromVimruntime = true"
@@ -452,7 +451,6 @@ issues:
   - "lua/lspconfig/async.lua:21:24       jobstart    U       local jobid = vim.fn.jobstart(cmd, {"
   - "lua/lspconfig/configs.lua:26:21         exepath         U       cmd[1] = vim.fn.exepath(cmd[1])"
   - "lua/lspconfig/configs.lua:75:39         augroup         U       group = api.nvim_create_augroup('lspconfig', { clear"
-  - "lua/lspconfig/configs.lua:129:13        bufname         U       local bufname = api.nvim_buf_get_name"
   - "lua/lspconfig/configs.lua:150:26        fnameescape     U       pattern = fn.fnameescape(root_dir) .. '/*',"
   - "lua/lspconfig/configs.lua:165:46        bufs            U       ipairs(api.nvim_list_bufs()) do"
   - "lua/lspconfig/configs.lua:176:48        lspconfig's     U       this is the root from lspconfig's perspective, as we use"
@@ -544,7 +542,6 @@ issues:
   - "lua/lspconfig/util.lua:6:7          iswin           U       local iswin = vim.loop.os_uname"
   - "lua/lspconfig/util.lua:75:50        customlist      U       \"-nargs=* -complete=customlist,v:lua.something\" into"
   - "lua/lspconfig/util.lua:92:81        fargs           U       name][1](unpack(info.fargs))"
-  - "lua/lspconfig/util.lua:258:45       servername      U       client_by_name(bufnr, servername)"
   - "lua/lspconfig/util.lua:259:10       glepnir         U       --TODO(glepnir): remove this for loop"
   - "nvim-lspconfig-scm-1.rockspec:1:8           MODREV      U       local _MODREV, _SPECREV = 'scm',"
   - "nvim-lspconfig-scm-1.rockspec:1:17          SPECREV     U       local _MODREV, _SPECREV = 'scm', '-1'"

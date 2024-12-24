@@ -5,7 +5,7 @@ Args: '["**"]'
 Summary:
   files: 412
   filesWithIssues: 397
-  issues: 1923
+  issues: 1918
   errors: 0
 Errors: []
 
@@ -130,7 +130,6 @@ issues:
   - "doc/licenses.md:125:68      paranamer               U       | com.thoughtworks.paranamer # paranamer # 2.8 |"
   - "doc/licenses.md:128:54      brouillard              U       none specified) | fr.brouillard.oss.security.xhub #"
   - "doc/release.md:41:58        sonatype    U       publish artifacts to the sonatype OSS repository:"
-  - "doc/validation.md:28:139        fieldname       U       set to `span#error-<fieldname>`."
   - "project/plugins.sbt:9:47        scoverage       U       scoverage\" % \"sbt-scoverage\" % \"2.2.2\")"
   - "README.md:1:14          Gitter      U       GitBucket [![Gitter chat](https://badges"
   - "src/main/java/gitbucket/core/util/PatchUtil.java:89:17          lhrt    U       RawText lhrt = new RawText(lastHunk"
@@ -184,12 +183,10 @@ issues:
   - "src/main/scala/gitbucket/core/service/SystemSettingsService.scala:50:58         Starttls    U       props.setProperty(SmtpStarttls, x.toString))"
   - "src/main/scala/gitbucket/core/service/WebHookService.scala:47:23        informations    U       /** get All WebHook informations of repository */"
   - "src/main/scala/gitbucket/core/service/WebHookService.scala:289:15       itcp            U       val itcp = new org.apache.http"
-  - "src/main/scala/gitbucket/core/servlet/InitializeListener.scala:175:14       datasource      U       // Close datasource"
   - "src/main/scala/gitbucket/core/ssh/PublicKeyAuthenticator.scala:44:13        Publickey       U       extends PublickeyAuthenticator"
   - "src/main/scala/gitbucket/core/util/DatabaseConfig.scala:23:45       MVCC        U       jdbc:h2:${DatabaseHome};MVCC=true\""
   - "src/main/scala/gitbucket/core/util/DatabaseConfig.scala:59:12       liqui       U       lazy val liquiDriver: AbstractJdbcDatabase"
   - "src/main/scala/gitbucket/core/util/FileUtil.scala:11:20         Tika    U       val tika = new Tika()"
-  - "src/main/scala/gitbucket/core/util/HttpClientUtil.scala:39:21       Inet    U       val ipAddress = InetAddress.getByName(address"
   - "src/main/scala/gitbucket/core/util/JDBCUtil.scala:194:46        FKTABLE     U       hildTableName = rs.getString(\"FKTABLE_NAME\").toUpperCase"
   - "src/main/scala/gitbucket/core/util/JDBCUtil.scala:215:21        tsort       U       val ordered = tsort(edges).toSeq"
   - "src/main/scala/gitbucket/core/util/JDBCUtil.scala:223:19        Preds       U       def tsort(toPreds: Map[A, Set[A]], done"

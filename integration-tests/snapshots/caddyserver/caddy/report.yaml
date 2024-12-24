@@ -5,12 +5,11 @@ Args: '["**/*.go"]'
 Summary:
   files: 279
   filesWithIssues: 254
-  issues: 3553
+  issues: 3545
   errors: 0
 Errors: []
 
 issues:
-  - "admin_test.go:30:8          myserver        U       \"myserver\": {"
   - "admin_test.go:34:8          yourserver      U       \"yourserver\": {"
   - "admin.go:43:14          caddyserver     U       \"github.com/caddyserver/certmagic\""
   - "admin.go:43:26          certmagic       U       github.com/caddyserver/certmagic\""
@@ -692,7 +691,6 @@ issues:
   - "caddytest/integration/caddyfile_test.go:52:7        caddyfile               U       `, \"caddyfile\")"
   - "caddytest/integration/caddyfile_test.go:63:2        caddytest               U       caddytest.AssertLoadError(t,"
   - "caddytest/integration/caddyfile_test.go:71:4        caddyfile               U       \"caddyfile\","
-  - "caddytest/integration/caddyfile_test.go:78:11       clientname              U       Name: \"clientname\","
   - "caddytest/integration/caddyfile_test.go:79:11       caddytest               U       Value: \"caddytest\","
   - "caddytest/integration/caddyfile_test.go:102:7       caddyfile               U       `, \"caddyfile\")"
   - "caddytest/integration/caddyfile_test.go:128:7       caddyfile               U       `, \"caddyfile\")"
@@ -3039,12 +3037,6 @@ issues:
   - "modules/caddytls/connpolicy.go:695:46       caddyconfig         U       append(ca.VerifiersRaw, caddyconfig.JSONModuleObject(unm"
   - "modules/caddytls/connpolicy.go:705:14       caddyconfig         U       ca.CARaw = caddyconfig.JSONModuleObject(fileMod"
   - "modules/caddytls/connpolicy.go:716:6        ders                U       var ders []string"
-  - "modules/caddytls/connpolicy.go:734:7        clientauth          U       func (clientauth *ClientAuthentication"
-  - "modules/caddytls/connpolicy.go:735:9        clientauth          U       if len(clientauth.CARaw) > 0 && (len(clientauth"
-  - "modules/caddytls/connpolicy.go:735:39       clientauth          U       clientauth.CARaw) > 0 && (len(clientauth.TrustedCACerts) > 0"
-  - "modules/caddytls/connpolicy.go:735:77       clientauth          U       TrustedCACerts) > 0 || len(clientauth.TrustedCACertPEMFiles"
-  - "modules/caddytls/connpolicy.go:740:9        clientauth          U       if len(clientauth.TrustedCACertPEMFiles"
-  - "modules/caddytls/connpolicy.go:785:46       clientauth's        U       sets up cfg to enforce clientauth's configuration."
   - "modules/caddytls/connpolicy.go:928:13       Certloaders         U       trustedLeafCertloaders := []LeafCertificateLoader"
   - "modules/caddytls/connpolicy.go:930:14       Certloaders         U       trustedLeafCertloaders = append(trustedLeafCertloade"
   - "modules/caddytls/connpolicy.go:930:46       Certloaders         U       = append(trustedLeafCertloaders, loader.(LeafCertificateLoade"

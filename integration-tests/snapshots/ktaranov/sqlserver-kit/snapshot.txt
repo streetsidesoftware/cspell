@@ -3,7 +3,7 @@ Repository: ktaranov/sqlserver-kit
 Url: "https://github.com/ktaranov/sqlserver-kit.git"
 Args: ["--issues-summary-report","**","--exclude=**/Backup/**"]
 Lines:
- CSpell: Files checked: 489, Issues found: 11020 in 428 files.
+ CSpell: Files checked: 489, Issues found: 10915 in 428 files.
  exit code: 1
 ADS/README.md:30:15     - Unknown word (Dacpac)     -- | [SQL Server Dacpac]
 ADS/README.md:30:181    - Unknown word (wizarding)  -- Provides an easy-to-use wizarding experience to deploy
@@ -962,7 +962,6 @@ Extended_Events/TrackApiCursor.sql:45:60     - Unknown word (Missle)     -- name
 Extended_Events/TrackApiCursor.sql:91:115    - Unknown word (xfer)       -- [attach_activity_id_xfer]
 Extended_Events/TrackApiCursor.sql:91:57     - Unknown word (xfer)       -- "attach_activity_id_xfer"]/value)[1]', 'varchar
 Extended_Events/TrackDBFileChange.sql:19:10     - Unknown word (evts)       -- ) AS evts(event_data)
-Extended_Events/TrackDBFileChange.sql:46:8      - Unknown word (metadatafile) -- , metadatafile='C:\XE\TrackDBFileChange
 Extended_Events/TrackDBFileChange.sql:4:15      - Unknown word (Brimhall)   -- Author: Jason Brimhall
 Extended_Events/TrackTFChange.sql:35:96     - Unknown word (appname)    -- 'varchar(max)') AS appname
 Extended_Events/TrackTFChange.sql:37:13     - Unknown word (evnt)       -- FROM(SELECT evnt.query('.') AS event
@@ -1285,8 +1284,8 @@ PowerShell/CsvSqlimport.ps1:1149:69   - Unknown word (percentcomplete)  -- $resu
 PowerShell/CsvSqlimport.ps1:1150:114  - Unknown word (timetaken)        -- totalrows, $percent, $timetaken))
 PowerShell/CsvSqlimport.ps1:1150:92   - Unknown word (totalrows)        -- } seconds", $script:totalrows, $percent, $timetaken
 PowerShell/CsvSqlimport.ps1:1152:29   - Unknown word (totalrows)        -- Write-Host "$($script:totalrows) rows copied in $([math
-PowerShell/CsvSqlimport.ps1:1185:140  - Unknown word (totalrows)       -- after row $($script:totalrows)."
-PowerShell/CsvSqlimport.ps1:1189:10   - Unknown word (tablexists)      -- if ($tablexists -eq $false) {
+PowerShell/CsvSqlimport.ps1:1185:140  - Unknown word (totalrows)        -- after row $($script:totalrows)."
+PowerShell/CsvSqlimport.ps1:1189:10   - Unknown word (tablexists)       -- if ($tablexists -eq $false) {
 PowerShell/CsvSqlimport.ps1:118:19    - Unknown word (Maire)         -- Author: Chrissy LeMaire (@cl), netnerds.net
 PowerShell/CsvSqlimport.ps1:118:32    - Unknown word (netnerds)      -- Chrissy LeMaire (@cl), netnerds.net
 PowerShell/CsvSqlimport.ps1:118:9     - Unknown word (Chrissy)       -- Author: Chrissy LeMaire (@cl), netnerds
@@ -1324,11 +1323,8 @@ PowerShell/CsvSqlimport.ps1:242:108   - Unknown word (dbattributes)    -- Databa
 PowerShell/CsvSqlimport.ps1:243:4     - Unknown word (newparams)       -- $newparams.Add("Database", $Database
 PowerShell/CsvSqlimport.ps1:244:11    - Unknown word (newparams)       -- return $newparams
 PowerShell/CsvSqlimport.ps1:255:23    - Unknown word (sqlservera)      -- Parse-OleQuery -Csv sqlservera -Query $query -FirstRowColumn
-PowerShell/CsvSqlimport.ps1:279:5     - Unknown word (datasource)      -- $datasource = Split-Path $csv[0
-PowerShell/CsvSqlimport.ps1:286:52    - Unknown word (datasource)      -- provider;Data Source=$datasource;Extended Properties
 PowerShell/CsvSqlimport.ps1:286:6     - Unknown word (connstring)      -- $connstring = "Provider=$provider
 PowerShell/CsvSqlimport.ps1:288:6     - Unknown word (connstring)      -- $connstring = "Provider=Microsoft
-PowerShell/CsvSqlimport.ps1:288:66    - Unknown word (datasource)      -- OLEDB.4.0;Data Source=$datasource;Extended Properties
 PowerShell/CsvSqlimport.ps1:291:44    - Unknown word (Dbconnection)    -- System.Data.OleDb.OleDbconnection $connstring
 PowerShell/CsvSqlimport.ps1:291:58    - Unknown word (connstring)      -- OleDb.OleDbconnection $connstring
 PowerShell/CsvSqlimport.ps1:311:31    - Unknown word (sqlservera)      -- SqlDatabases -SqlServer sqlservera -SqlCredential $SqlCredential
@@ -1360,7 +1356,6 @@ PowerShell/CsvSqlimport.ps1:411:27    - Unknown word (tablecmd)        -- void]$
 PowerShell/CsvSqlimport.ps1:412:5     - Unknown word (tablelist)       -- $tablelist = $datatable.rows.name
 PowerShell/CsvSqlimport.ps1:413:13    - Unknown word (tablecmd)        -- $null = $tablecmd.Dispose()
 PowerShell/CsvSqlimport.ps1:416:12    - Unknown word (tablelist)       -- return $tablelist
-PowerShell/CsvSqlimport.ps1:427:34    - Unknown word (myfile)          -- Get-Columns -Csv .\myfile.csv -Delimiter ","
 PowerShell/CsvSqlimport.ps1:443:4     - Unknown word (columnparser)    -- $columnparser = New-Object Microsoft
 PowerShell/CsvSqlimport.ps1:444:4     - Unknown word (columnparser)    -- $columnparser.TextFieldType = "Delimited
 PowerShell/CsvSqlimport.ps1:445:4     - Unknown word (columnparser)    -- $columnparser.SetDelimiters($Delimiter
@@ -1370,16 +1365,11 @@ PowerShell/CsvSqlimport.ps1:449:17    - Unknown word (rawcolumns)      -- $colum
 PowerShell/CsvSqlimport.ps1:452:28    - Unknown word (rawcolumns)      -- foreach ($number in 1..$rawcolumns.count ) { $columns
 PowerShell/CsvSqlimport.ps1:455:4     - Unknown word (columnparser)    -- $columnparser.Close()
 PowerShell/CsvSqlimport.ps1:463:70    - Unknown word (datatypes)       -- parsed for potential datatypes.
-PowerShell/CsvSqlimport.ps1:466:34    - Unknown word (myfile)          -- Get-Columns -Csv .\myfile.csv -Delimiter ","
-PowerShell/CsvSqlimport.ps1:484:4     - Unknown word (datatext)        -- $datatext = $columnparser.ReadFields
-PowerShell/CsvSqlimport.ps1:487:11    - Unknown word (datatext)        -- return $datatext
 PowerShell/CsvSqlimport.ps1:48:58     - Unknown word (datatypes)     -- it will created.  SQL datatypes are determined from
 PowerShell/CsvSqlimport.ps1:490:17    - Unknown word (Schemaini)       -- Function Write-Schemaini {
 PowerShell/CsvSqlimport.ps1:49:54     - Unknown word (Datatypes)     -- if -FirstRowColumns). Datatypes used are: bigint, numeric
-PowerShell/CsvSqlimport.ps1:501:40    - Unknown word (myfile)          -- Columns -Csv C:\temp\myfile.csv -Delimiter ","
 PowerShell/CsvSqlimport.ps1:502:29    - Unknown word (Schemaini)       -- movedschemainis = Write-Schemaini -Csv  C:\temp\myfile
 PowerShell/CsvSqlimport.ps1:502:5     - Unknown word (movedschemainis) -- $movedschemainis = Write-Schemaini -Csv
-PowerShell/CsvSqlimport.ps1:502:53    - Unknown word (myfile)          -- Schemaini -Csv  C:\temp\myfile.csv -Columns $columns
 PowerShell/CsvSqlimport.ps1:502:95    - Unknown word (columntext)      -- columns -ColumnText $columntext -Delimiter "," -FirstRowColum
 PowerShell/CsvSqlimport.ps1:506:5     - Unknown word (housingdata)     -- [housingdata.csv]
 PowerShell/CsvSqlimport.ps1:51:38     - Unknown word (datatypes)     -- automatically generated table datatypes do not work for you
@@ -1499,9 +1489,7 @@ PowerShell/CsvSqlimport.ps1:947:64    - Unknown word (columnid)          -- sqlc
 PowerShell/CsvSqlimport.ps1:948:43    - Unknown word (olecolumns)        -- ColumnMappings.Add($olecolumns[$columnid], $sqlcolumns
 PowerShell/CsvSqlimport.ps1:948:55    - Unknown word (columnid)          -- lumnMappings.Add($olecolumns[$columnid], $sqlcolumns.rows[
 PowerShell/CsvSqlimport.ps1:948:84    - Unknown word (columnid)          -- , $sqlcolumns.rows[$columnid].ItemArray[0])
-PowerShell/CsvSqlimport.ps1:953:5     - Unknown word (datasource)        -- $datasource = Split-Path $file
 PowerShell/CsvSqlimport.ps1:955:5     - Unknown word (oleconnstring)     -- $oleconnstring = "Provider=$provider
-PowerShell/CsvSqlimport.ps1:955:54    - Unknown word (datasource)        -- provider;Data Source=$datasource;Extended Properties
 PowerShell/CsvSqlimport.ps1:958:9     - Unknown word (Dbconnection)      -- # OleDbconnection formatted name (file
 PowerShell/CsvSqlimport.ps1:961:19    - Unknown word (Dbconnection)      -- # Setup the OleDbconnection
 PowerShell/CsvSqlimport.ps1:962:47    - Unknown word (Dbconnection)      -- System.Data.OleDb.OleDbconnection
@@ -1517,8 +1505,8 @@ PowerShell/CsvSqlimport.ps1:980:7     - Unknown word (resultcount)       -- $res
 PowerShell/CsvSqlimport.ps1:981:45    - Unknown word (resultcount)       -- Attempting to fetch $resultcount rows"
 PowerShell/CsvSqlimport.ps1:988:8     - Unknown word (sqlcount)          -- $sqlcount = "select count(*) from
 PowerShell/CsvSqlimport.ps1:990:8     - Unknown word (olecmd)            -- $olecmd = New-Object System
-PowerShell/CsvSqlimport.ps1:991:29    - Unknown word (oleconn)          -- olecmd.Connection = $oleconn
-PowerShell/CsvSqlimport.ps1:991:8     - Unknown word (olecmd)           -- $olecmd.Connection = $oleconn
+PowerShell/CsvSqlimport.ps1:991:29    - Unknown word (oleconn)           -- olecmd.Connection = $oleconn
+PowerShell/CsvSqlimport.ps1:991:8     - Unknown word (olecmd)            -- $olecmd.Connection = $oleconn
 PowerShell/CsvSqlimport.ps1:992:30    - Unknown word (sqlcount)         -- olecmd.CommandText = $sqlcount
 PowerShell/CsvSqlimport.ps1:993:8     - Unknown word (resultcount)      -- $resultcount = [int]($olecmd.ExecuteScalar
 PowerShell/Disable_CEIP.ps1:13:31     - Unknown word (SEIP)       -- Server list where disable SEIP services
@@ -1564,10 +1552,7 @@ PowerShell/Export-SQLTableToCSV.ps1:289:39    - Unknown word (Shema)           -
 PowerShell/Export-SQLTableToCSV.ps1:311:56    - Unknown word (Sqlcmd)          -- eCountOrderByColumns = Invoke-Sqlcmd -ServerInstance $ServerName
 PowerShell/Export-SQLTableToCSV.ps1:338:47    - Unknown word (Sqlcmd)          -- invokeOrderByColumns = Invoke-Sqlcmd -ServerInstance $ServerName
 PowerShell/Export-SQLTableToCSV.ps1:360:17    - Unknown word (Ordr)            -- $OrdrByColumns + '" queryout
-PowerShell/Export-SQLTableToCSV.ps1:360:36    - Unknown word (queryout)        -- $OrdrByColumns + '" queryout "' + $CSVPath + '['
-PowerShell/Export-SQLTableToCSV.ps1:369:76    - Unknown word (queryout)        -- ColumnsToHeaders + '" queryout "' + $CSVPath + '['
 PowerShell/Export-SQLTableToCSV.ps1:412:30    - Unknown word (Sqlcmd)          -- Invoke-Sqlcmd -ServerInstance $ServerName
-PowerShell/Export-SQLTableToCSV.ps1:446:89    - Unknown word (queryout)        -- , '+ $lob +') as x" queryout "'+ $FormatFilePath
 PowerShell/Export-SQLTableToCSV.ps1:485:69    - Unknown word (NIIGAZ)          -- NL-04 -DatabaseName NIIGAZ -MinRowCount 1 -MaxRowCount
 PowerShell/Export-SQLTableToCSV.ps1:49:11     - Unknown word (Konstantin) -- Author: Konstantin Taranov k@taranov.pro
 PowerShell/Export-SQLTableToCSV.ps1:49:22     - Unknown word (Taranov)    -- Author: Konstantin Taranov k@taranov.pro
@@ -1976,7 +1961,6 @@ PowerShell/SQL_Server_Test_backups.ps1:38:17     - Unknown word (Nullor)        
 PowerShell/SQL_Server_Test_backups.ps1:43:15     - Unknown word (SQLPS)            -- Import-Module SQLPS -DisableNameChecking
 PowerShell/SQL_Server_Test_backups.ps1:66:90     - Unknown word (sspi)             -- integrated security=sspi;"
 PowerShell/SQL_Server_Test_backups.ps1:67:74     - Unknown word (connectionstring) -- SqlClient.SqlConnection") $connectionstring
-PowerShell/SQL_Server_Test_backups.ps1:68:64     - Unknown word (serverconnection) -- SQLServer.Management.common.serverconnection") $sqlconnection
 PowerShell/SQL_Server_Test_backups.ps1:68:84     - Unknown word (sqlconnection)    -- serverconnection") $sqlconnection
 PowerShell/SQL_Server_Test_backups.ps1:6:111     - Unknown word (randommultiplier) -- testservername "localhost" -randommultiplier 0.1 -loggingdbname
 PowerShell/SQL_Server_Test_backups.ps1:6:133     - Unknown word (loggingdbname)    -- randommultiplier 0.1 -loggingdbname "BackupTest"
@@ -2027,7 +2011,6 @@ PowerShell/Scripting_Out_SQL_Server_Data_As_Insert_Statements.ps1:57:23     - Un
 PowerShell/Scripting_Out_SQL_Server_Data_As_Insert_Statements.ps1:59:56     - Unknown word (SQLPS)            -- DisableNameChecking #load the SQLPS functionality
 PowerShell/Scripting_Out_SQL_Server_Data_As_Insert_Statements.ps1:70:6      - Unknown word (Sqlencrypted)     -- $Sqlencrypted = Get-Content $SqlEncryptedPa
 PowerShell/Scripting_Out_SQL_Server_Data_As_Insert_Statements.ps1:72:73     - Unknown word (Sqlencrypted)     -- PsCredential($SqlUserName, $Sqlencrypted)
-PowerShell/Scripting_Out_SQL_Server_Data_As_Insert_Statements.ps1:93:61     - Unknown word (Datasource)       -- t find the instance $Datasource" }
 PowerShell/Send-SqlDataToExcel.ps1:102:100   - Unknown word (Xrange)      -- ShowPercent, Yrange, Xrange and SeriesHeader for
 PowerShell/Send-SqlDataToExcel.ps1:102:92    - Unknown word (Yrange)      -- ShowCategory, ShowPercent, Yrange, Xrange and SeriesHeader
 PowerShell/Send-SqlDataToExcel.ps1:123:45    - Unknown word (paramaters)  -- block is given three paramaters; an object containing
@@ -2045,7 +2028,6 @@ PowerShell/Send-SqlDataToExcel.ps1:163:108   - Unknown word (Gpwinners)   -- xls
 PowerShell/Send-SqlDataToExcel.ps1:163:119   - Unknown word (autosize)    -- WorkSheetname Gpwinners -autosize -ColumnChart
 PowerShell/Send-SqlDataToExcel.ps1:163:98    - Unknown word (Sheetname)   -- ".\demo3.xlsx" -WorkSheetname Gpwinners -autosize
 PowerShell/Send-SqlDataToExcel.ps1:165:173   - Unknown word (ODFBC)       -- made rather than an ODFBC connection string
-PowerShell/Send-SqlDataToExcel.ps1:170:44    - Unknown word (datasource)  -- uses an Existing ODBC datasource name "LR" which maps
 PowerShell/Send-SqlDataToExcel.ps1:170:88    - Unknown word (lightroom)   -- which maps to an adobe lightroom database and gets a
 PowerShell/Send-SqlDataToExcel.ps1:225:18    - Unknown word (Barchart)    -- [Switch]$Barchart,
 PowerShell/Send-SqlDataToExcel.ps1:237:18    - Unknown word (Passthru)    -- [Switch]$Passthru
@@ -2064,7 +2046,6 @@ PowerShell/Set_Extended_Events_Sessions_to_AutoStart.ps1:57:17     - Unknown wor
 PowerShell/Set_Extended_Events_Sessions_to_AutoStart.ps1:66:36     - Unknown word (childitem)    -- $XEStore = get-childitem -path SQLSERVER:\XEvent
 PowerShell/Set_Extended_Events_Sessions_to_AutoStart.ps1:9:17      - Unknown word (Sewell)     -- Author: Rob Sewell
 PowerShell/Shred-XElogs.ps1:111:112   - Unknown word (SSPI)          -- Integrated Security=SSPI;Initial Catalog=AdventureWork
-PowerShell/Shred-XElogs.ps1:111:81    - Unknown word (domainname)    -- Data Source=MyDevServer.domainname;Integrated Security
 PowerShell/Shred-XElogs.ps1:121:33    - Unknown word (logicalreads)  -- ColumnMappings.Add("logicalreads",$dt.Columns.ColumnName
 PowerShell/Shred-XElogs.ps1:122:33    - Unknown word (physicalreads) -- ColumnMappings.Add("physicalreads",$dt.Columns.ColumnName
 PowerShell/Shred-XElogs.ps1:13:13     - Unknown word (Aakash)     -- Author: Aakash Patel
@@ -2676,7 +2657,6 @@ SQL Server DBCC List.md:33:87     - Unknown word (loginid)         -- rolename, 
 SQL Server DBCC List.md:35:31     - Unknown word (tabid)           -- autopilot (typeid, dbid, tabid, indid, pages [,flag
 SQL Server DBCC List.md:35:38     - Unknown word (indid)           -- typeid, dbid, tabid, indid, pages [,flag])
 SQL Server DBCC List.md:37:6      - Unknown word (balancefactor)   -- DBCC balancefactor (variance_percent)
-SQL Server DBCC List.md:39:6      - Unknown word (bufcount)        -- DBCC bufcount [(number_of_buffers
 SQL Server DBCC List.md:41:105    - Unknown word (ioerr)           -- io | kept | rlock | ioerr | hashed ]]])
 SQL Server DBCC List.md:41:55     - Unknown word (printopt)        -- objid [, number [, printopt={0|1|2} ] [, dirty
 SQL Server DBCC List.md:41:97     - Unknown word (rlock)           -- dirty | io | kept | rlock | ioerr | hashed ]]
@@ -2811,8 +2791,6 @@ SQL Server Name Convention and T-SQL Programming Style.md:31:134    - Unknown wo
 SQL Server Name Convention and T-SQL Programming Style.md:328:108   - Unknown word (sqlcmd)            -- batching scripts run throw `sqlcmd` or another tools.
 SQL Server Name Convention and T-SQL Programming Style.md:328:66    - Unknown word (neccesary)         -- line break. This is neccesary for batching scripts
 SQL Server Name Convention and T-SQL Programming Style.md:32:134    - Unknown word (myschema)   -- | [a-z][0-9]   | `myschema`
-SQL Server Name Convention and T-SQL Programming Style.md:336:105   - Unknown word (autocommit)        -- transactions] over [autocommit].
-SQL Server Name Convention and T-SQL Programming Style.md:337:89    - Unknown word (autocommit)        -- SELECT` statement, use [autocommit].
 SQL Server Name Convention and T-SQL Programming Style.md:344:216   - Unknown word (realise)           -- restore one database, then realise you don’t have log backups
 SQL Server Name Convention and T-SQL Programming Style.md:346:40    - Unknown word (trafic)            -- tables to reduce network trafic, decrease query complexity
 SQL Server Name Convention and T-SQL Programming Style.md:441:83    - Unknown word (DFLT)              -- table. The [`ANSI_NULL_DFLT_ON`](https://docs.microsoft
@@ -3047,7 +3025,6 @@ SQL Server Trace Flag.md:127:6     - Unknown word (TRACESTATUS)  -- DBCC TRACEST
 SQL Server Trace Flag.md:1339:39   - Unknown word (Khen)             -- flag is also covered in Khen2005, p400, but with
 SQL Server Trace Flag.md:133:6     - Unknown word (TRACESTATUS)  -- DBCC TRACESTATUS ();
 SQL Server Trace Flag.md:1377:24   - Unknown word (SNAC)             -- Function: When you use SNAC to connect to an instance
-SQL Server Trace Flag.md:1428:24   - Unknown word (dataserver)       -- Function: Boot the SQL dataserver with TCP_NODELAY enabled
 SQL Server Trace Flag.md:1428:44   - Unknown word (NODELAY)          -- dataserver with TCP_NODELAY enabled<br />
 SQL Server Trace Flag.md:1445:11   - Unknown word (Khen)             -- Function: Khen2005, page 385 (paraphrased
 SQL Server Trace Flag.md:145:102   - Unknown word (SHOWONRULES)  -- undocumented DBCC commands SHOWONRULES and SHOWOFFRULES.
@@ -3098,7 +3075,6 @@ SQL Server Trace Flag.md:2871:98   - Unknown word (SQLPAL)               -- Serv
 SQL Server Trace Flag.md:2886:51   - Unknown word (Elmore)               -- Campbell, Bob Ward, Keith Elmore and I many years ago
 SQL Server Trace Flag.md:2946:24   - Unknown word (INPUTBUFFER)          -- You can also use [DBCC INPUTBUFFER](https://docs.microsoft
 SQL Server Trace Flag.md:2954:24   - Unknown word (OUTPUTBUFFER)         -- You can also use [DBCC OUTPUTBUFFER](https://docs.microsoft
-SQL Server Trace Flag.md:2969:134  - Unknown word (serverfile)           -- add this to your RUN_serverfile. This will generate
 SQL Server Trace Flag.md:299:183   - Unknown word (TRACEOFF)     -- DBCC TRACEON] and [DBCC TRACEOFF].<br />
 SQL Server Trace Flag.md:3064:373  - Unknown word (cursoropen)           -- interesting info about sp_cursoropen<br />
 SQL Server Trace Flag.md:3064:75   - Unknown word (alonger)              -- FORWARD_ONLY cursor takes alonger time to run in Microsoft
@@ -3138,7 +3114,7 @@ SQL Server Trace Flag.md:3704:79   - Unknown word (LOADDB)               -- high
 SQL Server Trace Flag.md:3738:83   - Unknown word (sqlcmd)               -- error” condition in the sqlcmd tool. The CU also included
 SQL Server Trace Flag.md:373:29    - Unknown word (bucketization)    -- Function: Force server side bucketization.
 SQL Server Trace Flag.md:3744:11   - Unknown word (Khen)                 -- Function: Khen2005, p2: “For SQL Server
-SQL Server Trace Flag.md:3754:32   - Unknown word (behaviour)           -- Changes CPU Affinity behaviour<br />
+SQL Server Trace Flag.md:3754:32   - Unknown word (behaviour)            -- Changes CPU Affinity behaviour<br />
 SQL Server Trace Flag.md:375:104   - Unknown word (bucketization)    -- flag forces server side bucketization.<br />
 SQL Server Trace Flag.md:38:69     - Unknown word (QUERYTRACEON) -- Performing Query Using QUERYTRACEON](https://www.mssqltips
 SQL Server Trace Flag.md:3942:8    - Unknown word (TECHNET)             -- Link: [TECHNET List Of SQL Server Trace
@@ -3253,7 +3229,6 @@ SQL Server Trace Flag.md:77:8      - Unknown word (Sterrett)     -- - John Sterr
 SQL Server Trace Flag.md:78:3      - Unknown word (Pavel)        -- - Pavel Málek ([t](https://twitter
 SQL Server Trace Flag.md:78:9      - Unknown word (Málek)        -- - Pavel Málek ([t](https://twitter
 SQL Server Trace Flag.md:79:10     - Unknown word (Pruski)       -- - Andrew Pruski ([b](https://dbafromthecold
-SQL Server Trace Flag.md:817:59    - Unknown word (dataserver)       -- logging for the entire SQL dataserver<br />
 SQL Server Trace Flag.md:81:11     - Unknown word (Kukula)       -- - Andrzej Kukula
 SQL Server Trace Flag.md:81:3      - Unknown word (Andrzej)      -- - Andrzej Kukula
 SQL Server Trace Flag.md:823:101   - Unknown word (actuall)          -- post! The flag # may actuall by 671.<br />
@@ -3354,7 +3329,6 @@ SQL Server Version.md:2048:91   - Unknown word (addalias)      -- message if you
 SQL Server Version.md:2050:114  - Unknown word (Sqldiag)       -- message when you run the Sqldiag.exe utility after you
 SQL Server Version.md:2069:113  - Unknown word (BROWSETABLE)   -- SELECT query and the NO_BROWSETABLE option is set to ON
 SQL Server Version.md:2079:98   - Unknown word (loginread)     -- could not spawn process_loginread thread" error message
-SQL Server Version.md:2098:75   - Unknown word (NETWORKIO)     -- stops responding with a NETWORKIO (0x800) waittype in
 SQL Server Version.md:2098:93   - Unknown word (waittype)      -- a NETWORKIO (0x800) waittype in SQL Server Enterprise
 SQL Server Version.md:2100:46   - Unknown word (CHECKDB)       -- .0 | 872842 FIX: A CHECKDB statement reports a
 SQL Server Version.md:2106:83   - Unknown word (readmail)      -- parameter of the xp_readmail extended stored procedure
@@ -3767,16 +3741,12 @@ Scripts/Azure SQL Database Diagnostic Information Queries.sql:1235:14   - Unknow
 Scripts/Azure SQL Database Diagnostic Information Queries.sql:199:46    - Unknown word (NUMA)       -- PLE) value for each NUMA node in current instance
 Scripts/Azure SQL Database Diagnostic Information Queries.sql:201:23    - Unknown word (cntr)       -- instance_name, cntr_value AS [Page Life
 Scripts/Azure SQL Database Diagnostic Information Queries.sql:216:78    - Unknown word (cntr)       -- ) AS [Object Name], cntr_value AS [Memory Grants
-Scripts/Azure SQL Database Diagnostic Information Queries.sql:227:28    - Unknown word (CACHESTORE) -- Look for high value for CACHESTORE_SQLCP (Ad-hoc query
 Scripts/Azure SQL Database Diagnostic Information Queries.sql:227:39    - Unknown word (SQLCP)      -- value for CACHESTORE_SQLCP (Ad-hoc query plans
 Scripts/Azure SQL Database Diagnostic Information Queries.sql:235:16    - Unknown word (SQLBUFFERPOOL) -- -- MEMORYCLERK_SQLBUFFERPOOL was new for SQL Server
 Scripts/Azure SQL Database Diagnostic Information Queries.sql:235:4     - Unknown word (MEMORYCLERK) -- -- MEMORYCLERK_SQLBUFFERPOOL was new
 Scripts/Azure SQL Database Diagnostic Information Queries.sql:237:15    - Unknown word (SQLCP)         -- -- CACHESTORE_SQLCP SQL Plans
-Scripts/Azure SQL Database Diagnostic Information Queries.sql:237:4     - Unknown word (CACHESTORE)    -- -- CACHESTORE_SQLCP SQL Plans
-Scripts/Azure SQL Database Diagnostic Information Queries.sql:239:34    - Unknown word (CACHESTORE)    -- for high values for CACHESTORE_SQLCP
 Scripts/Azure SQL Database Diagnostic Information Queries.sql:239:45    - Unknown word (SQLCP)         -- values for CACHESTORE_SQLCP
 Scripts/Azure SQL Database Diagnostic Information Queries.sql:243:15    - Unknown word (OBJCP)         -- -- CACHESTORE_OBJCP Object Plans
-Scripts/Azure SQL Database Diagnostic Information Queries.sql:243:4     - Unknown word (CACHESTORE)    -- -- CACHESTORE_OBJCP Object Plans
 Scripts/Azure SQL Database Diagnostic Information Queries.sql:250:33    - Unknown word (cacheobjtype)  -- AS [Object Type], cp.cacheobjtype AS [Cache Object Type
 Scripts/Azure SQL Database Diagnostic Information Queries.sql:254:10    - Unknown word (cacheobjtype)  -- WHERE cp.cacheobjtype = N'Compiled Plan'
 Scripts/Azure SQL Database Diagnostic Information Queries.sql:256:8     - Unknown word (usecounts)     -- AND cp.usecounts = 1
@@ -3863,7 +3833,6 @@ Scripts/Benchmark_TSQL.R:163:41    - Unknown word (RUNTIMESTAMP)      -- @timest
 Scripts/Benchmark_TSQL.R:164:70    - Unknown word (FINISHTIMESTAMP)   -- AS DATETIME2(7)) AS FINISHTIMESTAMP,
 Scripts/Benchmark_TSQL.R:165:65    - Unknown word (timestart)         -- durationAccuracy__, @timestart, CAST(__datetimeFun
 Scripts/Benchmark_TSQL.R:166:53    - Unknown word (TSQLSTATEMENT)     -- tsqlStatement, ";' AS TSQLSTATEMENT,
-Scripts/Benchmark_TSQL.R:167:49    - Unknown word (CLEARCACHE)        -- , clearCache, "' AS CLEARCACHE,
 Scripts/Benchmark_TSQL.R:168:52    - Unknown word (PRINTSTEPINFO)     -- printStepInfo, "' AS PRINTSTEPINFO,
 Scripts/Benchmark_TSQL.R:169:55    - Unknown word (DURATIONACCURACY)  -- durationAccuracy, "' AS DURATIONACCURACY,
 Scripts/Benchmark_TSQL.R:170:67    - Unknown word (ORIGINALLOGIN)     -- OriginalLogin, "' AS ORIGINALLOGIN
@@ -3880,7 +3849,6 @@ Scripts/Benchmark_TSQL.R:251:18    - Unknown word (STARTTIMESTAMP)    -- , START
 Scripts/Benchmark_TSQL.R:252:18    - Unknown word (RUNTIMESTAMP)      -- , RUNTIMESTAMP AS RunTimeStamp
 Scripts/Benchmark_TSQL.R:253:18    - Unknown word (FINISHTIMESTAMP)   -- , FINISHTIMESTAMP AS FinishTimeStamp
 Scripts/Benchmark_TSQL.R:255:18    - Unknown word (TSQLSTATEMENT)     -- , TSQLSTATEMENT AS TsqlStatement
-Scripts/Benchmark_TSQL.R:256:18    - Unknown word (CLEARCACHE)        -- , CLEARCACHE AS ClearCache
 Scripts/Benchmark_TSQL.R:257:18    - Unknown word (PRINTSTEPINFO)     -- , PRINTSTEPINFO AS PrintStepInfo
 Scripts/Benchmark_TSQL.R:258:18    - Unknown word (DURATIONACCURACY)  -- , DURATIONACCURACY AS DurationAccuracy
 Scripts/Benchmark_TSQL.R:259:18    - Unknown word (ORIGINALLOGIN)     -- , ORIGINALLOGIN AS OriginalLogin
@@ -4800,7 +4768,6 @@ Scripts/Queries_with_parallelism.sql:41:5      - Unknown word (usecounts)  -- us
 Scripts/Queries_with_parallelism.sql:7:46      - Unknown word (usecount)   -- = 50	-- Set minimum usecount to ignore rarely-used
 Scripts/QueryActiveDirectory.sql:22:18     - Unknown word (ADSDSOOBJECT) -- FROM OPENROWSET('ADSDSOOBJECT','adsdatasource','SELECT
 Scripts/QueryActiveDirectory.sql:22:33     - Unknown word (adsdatasource) -- OPENROWSET('ADSDSOOBJECT','adsdatasource','SELECT displayName
-Scripts/QueryActiveDirectory.sql:23:15     - Unknown word (mydomain)      -- FROM ''LDAP://mydomainFQDN.com/ou=mySubOU,ou
 Scripts/QueryActiveDirectory.sql:23:57     - Unknown word (mychilddomain) -- mySubOU,ou=myTopOU,dc=mychilddomain,dc=myTLdomain,dc=com
 Scripts/QueryActiveDirectory.sql:24:25     - Unknown word (nbsp)          -- WHERE objectClass =&amp;nbsp;''User'' ')
 Scripts/QueryActiveDirectory.sql:28:133    - Unknown word (datasrc)         -- provider=N'ADsDSOObject', @datasrc=N'adsdatasource'
@@ -4811,7 +4778,6 @@ Scripts/QueryActiveDirectory.sql:31:20     - Unknown word (addlinkedsrvlogin) --
 Scripts/QueryActiveDirectory.sql:31:39     - Unknown word (rmtsrvname)        -- sp_addlinkedsrvlogin @rmtsrvname = N'AD', @locallogin
 Scripts/QueryActiveDirectory.sql:31:60     - Unknown word (locallogin)        -- rmtsrvname = N'AD', @locallogin = NULL , @useself =
 Scripts/QueryActiveDirectory.sql:31:81     - Unknown word (useself)           -- locallogin = NULL , @useself = N'True'
-Scripts/QueryActiveDirectory.sql:37:15     - Unknown word (mydomain)          -- FROM ''LDAP://mydomainFQDN.com/ou=mySubOU,ou
 Scripts/QueryActiveDirectory.sql:37:57     - Unknown word (mychilddomain)     -- mySubOU,ou=myTopOU,dc=mychilddomain,dc=myTLdomain,dc=com
 Scripts/QueryActiveDirectory.sql:38:25     - Unknown word (nbsp)              -- WHERE objectClass =&amp;nbsp;''User'' ')
 Scripts/QueryActiveDirectory.sql:42:20     - Unknown word (dropserver)        -- EXEC master.dbo.sp_dropserver @server=N'AD', @droplogins
@@ -4980,19 +4946,15 @@ Scripts/SQL Managed Instance Diagnostic Information Queries.sql:662:18    - Unkn
 Scripts/SQL Managed Instance Diagnostic Information Queries.sql:662:8     - Unknown word (BUFFERMGR)         -- N'XE_BUFFERMGR_ALLPROCESSED_EVENT'
 Scripts/SQL Managed Instance Diagnostic Information Queries.sql:826:23    - Unknown word (cntr)              -- instance_name, cntr_value AS [Page Life
 Scripts/SQL Managed Instance Diagnostic Information Queries.sql:841:78    - Unknown word (cntr)              -- ) AS [Object Name], cntr_value AS [Memory Grants
-Scripts/SQL Managed Instance Diagnostic Information Queries.sql:852:28    - Unknown word (CACHESTORE)        -- Look for high value for CACHESTORE_SQLCP (Ad-hoc query
 Scripts/SQL Managed Instance Diagnostic Information Queries.sql:852:39    - Unknown word (SQLCP)             -- value for CACHESTORE_SQLCP (Ad-hoc query plans
 Scripts/SQL Managed Instance Diagnostic Information Queries.sql:85:19     - Unknown word (Polybase)   -- SERVERPROPERTY('IsPolybaseInstalled') AS [IsPolybaseInst
 Scripts/SQL Managed Instance Diagnostic Information Queries.sql:85:45     - Unknown word (Polybase)   -- IsPolybaseInstalled') AS [IsPolybaseInstalled],
 Scripts/SQL Managed Instance Diagnostic Information Queries.sql:860:16    - Unknown word (SQLBUFFERPOOL)     -- -- MEMORYCLERK_SQLBUFFERPOOL was new for SQL Server
 Scripts/SQL Managed Instance Diagnostic Information Queries.sql:860:4     - Unknown word (MEMORYCLERK)       -- -- MEMORYCLERK_SQLBUFFERPOOL was new
 Scripts/SQL Managed Instance Diagnostic Information Queries.sql:862:15    - Unknown word (SQLCP)             -- -- CACHESTORE_SQLCP SQL Plans
-Scripts/SQL Managed Instance Diagnostic Information Queries.sql:862:4     - Unknown word (CACHESTORE)        -- -- CACHESTORE_SQLCP SQL Plans
-Scripts/SQL Managed Instance Diagnostic Information Queries.sql:864:34    - Unknown word (CACHESTORE)        -- for high values for CACHESTORE_SQLCP
 Scripts/SQL Managed Instance Diagnostic Information Queries.sql:864:45    - Unknown word (SQLCP)             -- values for CACHESTORE_SQLCP
 Scripts/SQL Managed Instance Diagnostic Information Queries.sql:866:17    - Unknown word (FREESYSTEMCACHE)   -- -- Running DBCC FREESYSTEMCACHE ('SQL Plans') periodically
 Scripts/SQL Managed Instance Diagnostic Information Queries.sql:868:15    - Unknown word (OBJCP)             -- -- CACHESTORE_OBJCP Object Plans
-Scripts/SQL Managed Instance Diagnostic Information Queries.sql:868:4     - Unknown word (CACHESTORE)        -- -- CACHESTORE_OBJCP Object Plans
 Scripts/SQL Managed Instance Diagnostic Information Queries.sql:878:33    - Unknown word (cacheobjtype)      -- AS [Object Type], cp.cacheobjtype AS [Cache Object Type
 Scripts/SQL Managed Instance Diagnostic Information Queries.sql:882:10    - Unknown word (cacheobjtype)      -- WHERE cp.cacheobjtype = N'Compiled Plan'
 Scripts/SQL Managed Instance Diagnostic Information Queries.sql:884:8     - Unknown word (usecounts)         -- AND cp.usecounts = 1
@@ -5089,14 +5051,10 @@ Scripts/SQL Server 2005 Diagnostic Information Queries.sql:587:48    - Unknown w
 Scripts/SQL Server 2005 Diagnostic Information Queries.sql:670:46    - Unknown word (NUMA)           -- PLE) value for each NUMA node in current instance
 Scripts/SQL Server 2005 Diagnostic Information Queries.sql:670:96    - Unknown word (NUMA)           -- (Query 27) (PLE by NUMA Node)
 Scripts/SQL Server 2005 Diagnostic Information Queries.sql:679:42    - Unknown word (NUMA)           -- return one row for non-NUMA systems.
-Scripts/SQL Server 2005 Diagnostic Information Queries.sql:697:28    - Unknown word (CACHESTORE)     -- Look for high value for CACHESTORE_SQLCP (Ad-hoc query
 Scripts/SQL Server 2005 Diagnostic Information Queries.sql:697:39    - Unknown word (SQLCP)          -- value for CACHESTORE_SQLCP (Ad-hoc query plans
 Scripts/SQL Server 2005 Diagnostic Information Queries.sql:704:15    - Unknown word (SQLCP)          -- -- CACHESTORE_SQLCP SQL Plans
-Scripts/SQL Server 2005 Diagnostic Information Queries.sql:704:4     - Unknown word (CACHESTORE)     -- -- CACHESTORE_SQLCP SQL Plans
-Scripts/SQL Server 2005 Diagnostic Information Queries.sql:706:34    - Unknown word (CACHESTORE)     -- for high values for CACHESTORE_SQLCP
 Scripts/SQL Server 2005 Diagnostic Information Queries.sql:706:45    - Unknown word (SQLCP)          -- values for CACHESTORE_SQLCP
 Scripts/SQL Server 2005 Diagnostic Information Queries.sql:708:15    - Unknown word (OBJCP)          -- -- CACHESTORE_OBJCP Object Plans
-Scripts/SQL Server 2005 Diagnostic Information Queries.sql:708:4     - Unknown word (CACHESTORE)     -- -- CACHESTORE_OBJCP Object Plans
 Scripts/SQL Server 2005 Diagnostic Information Queries.sql:715:33    - Unknown word (cacheobjtype)   -- AS [Object Type], cp.cacheobjtype AS [Cache Object Type
 Scripts/SQL Server 2005 Diagnostic Information Queries.sql:719:10    - Unknown word (cacheobjtype)   -- WHERE cp.cacheobjtype = N'Compiled Plan'
 Scripts/SQL Server 2005 Diagnostic Information Queries.sql:721:8     - Unknown word (usecounts)      -- AND cp.usecounts = 1
@@ -5200,14 +5158,10 @@ Scripts/SQL Server 2008 Diagnostic Information Queries.sql:641:22    - Unknown w
 Scripts/SQL Server 2008 Diagnostic Information Queries.sql:641:48    - Unknown word (CKPT)           -- NEW_LOG', N'WAIT_XTP_CKPT_CLOSE', N'XE_DISPATCHER
 Scripts/SQL Server 2008 Diagnostic Information Queries.sql:772:46    - Unknown word (NUMA)           -- PLE) value for each NUMA node in current instance
 Scripts/SQL Server 2008 Diagnostic Information Queries.sql:772:96    - Unknown word (NUMA)           -- (Query 32) (PLE by NUMA Node)
-Scripts/SQL Server 2008 Diagnostic Information Queries.sql:799:28    - Unknown word (CACHESTORE)     -- Look for high value for CACHESTORE_SQLCP (Ad-hoc query
 Scripts/SQL Server 2008 Diagnostic Information Queries.sql:799:39    - Unknown word (SQLCP)          -- value for CACHESTORE_SQLCP (Ad-hoc query plans
 Scripts/SQL Server 2008 Diagnostic Information Queries.sql:806:15    - Unknown word (SQLCP)          -- -- CACHESTORE_SQLCP SQL Plans
-Scripts/SQL Server 2008 Diagnostic Information Queries.sql:806:4     - Unknown word (CACHESTORE)     -- -- CACHESTORE_SQLCP SQL Plans
-Scripts/SQL Server 2008 Diagnostic Information Queries.sql:808:34    - Unknown word (CACHESTORE)     -- for high values for CACHESTORE_SQLCP
 Scripts/SQL Server 2008 Diagnostic Information Queries.sql:808:45    - Unknown word (SQLCP)          -- values for CACHESTORE_SQLCP
 Scripts/SQL Server 2008 Diagnostic Information Queries.sql:810:15    - Unknown word (OBJCP)          -- -- CACHESTORE_OBJCP Object Plans
-Scripts/SQL Server 2008 Diagnostic Information Queries.sql:810:4     - Unknown word (CACHESTORE)     -- -- CACHESTORE_OBJCP Object Plans
 Scripts/SQL Server 2008 Diagnostic Information Queries.sql:817:33    - Unknown word (cacheobjtype)   -- AS [Object Type], cp.cacheobjtype AS [Cache Object Type
 Scripts/SQL Server 2008 Diagnostic Information Queries.sql:821:10    - Unknown word (cacheobjtype)   -- WHERE cp.cacheobjtype = N'Compiled Plan'
 Scripts/SQL Server 2008 Diagnostic Information Queries.sql:823:8     - Unknown word (usecounts)      -- AND cp.usecounts = 1
@@ -5309,29 +5263,21 @@ Scripts/SQL Server 2008 R2 Diagnostic Information Queries.sql:704:22    - Unknow
 Scripts/SQL Server 2008 R2 Diagnostic Information Queries.sql:704:48    - Unknown word (CKPT)           -- NEW_LOG', N'WAIT_XTP_CKPT_CLOSE', N'XE_DISPATCHER
 Scripts/SQL Server 2008 R2 Diagnostic Information Queries.sql:835:46    - Unknown word (NUMA)           -- PLE) value for each NUMA node in current instance
 Scripts/SQL Server 2008 R2 Diagnostic Information Queries.sql:835:96    - Unknown word (NUMA)           -- (Query 36) (PLE by NUMA Node)
-Scripts/SQL Server 2008 R2 Diagnostic Information Queries.sql:862:28    - Unknown word (CACHESTORE)     -- Look for high value for CACHESTORE_SQLCP (Ad-hoc query
 Scripts/SQL Server 2008 R2 Diagnostic Information Queries.sql:862:39    - Unknown word (SQLCP)          -- value for CACHESTORE_SQLCP (Ad-hoc query plans
 Scripts/SQL Server 2008 R2 Diagnostic Information Queries.sql:869:15    - Unknown word (SQLCP)          -- -- CACHESTORE_SQLCP SQL Plans
-Scripts/SQL Server 2008 R2 Diagnostic Information Queries.sql:869:4     - Unknown word (CACHESTORE)     -- -- CACHESTORE_SQLCP SQL Plans
-Scripts/SQL Server 2008 R2 Diagnostic Information Queries.sql:871:34    - Unknown word (CACHESTORE)     -- for high values for CACHESTORE_SQLCP
 Scripts/SQL Server 2008 R2 Diagnostic Information Queries.sql:871:45    - Unknown word (SQLCP)          -- values for CACHESTORE_SQLCP
 Scripts/SQL Server 2008 R2 Diagnostic Information Queries.sql:873:15    - Unknown word (OBJCP)          -- -- CACHESTORE_OBJCP Object Plans
-Scripts/SQL Server 2008 R2 Diagnostic Information Queries.sql:873:4     - Unknown word (CACHESTORE)     -- -- CACHESTORE_OBJCP Object Plans
 Scripts/SQL Server 2008 R2 Diagnostic Information Queries.sql:880:33    - Unknown word (cacheobjtype)   -- AS [Object Type], cp.cacheobjtype AS [Cache Object Type
 Scripts/SQL Server 2008 R2 Diagnostic Information Queries.sql:884:10    - Unknown word (cacheobjtype)   -- WHERE cp.cacheobjtype = N'Compiled Plan'
 Scripts/SQL Server 2008 R2 Diagnostic Information Queries.sql:886:8     - Unknown word (usecounts)      -- AND cp.usecounts = 1
 Scripts/SQL Server 2008 R2 Diagnostic Information Queries.sql:892:17    - Unknown word (FREESYSTEMCACHE) -- -- Running DBCC FREESYSTEMCACHE ('SQL Plans') periodically
-Scripts/SQL Server 2012 Diagnostic Information Queries.sql:1168:28   - Unknown word (CACHESTORE)        -- Look for high value for CACHESTORE_SQLCP (Ad-hoc query
 Scripts/SQL Server 2012 Diagnostic Information Queries.sql:1168:39   - Unknown word (SQLCP)             -- value for CACHESTORE_SQLCP (Ad-hoc query plans
 Scripts/SQL Server 2012 Diagnostic Information Queries.sql:1176:16   - Unknown word (SQLBUFFERPOOL)     -- -- MEMORYCLERK_SQLBUFFERPOOL was new for SQL Server
 Scripts/SQL Server 2012 Diagnostic Information Queries.sql:1176:4    - Unknown word (MEMORYCLERK)       -- -- MEMORYCLERK_SQLBUFFERPOOL was new
-Scripts/SQL Server 2012 Diagnostic Information Queries.sql:1178:15   - Unknown word (SQLCP)            -- -- CACHESTORE_SQLCP SQL Plans
-Scripts/SQL Server 2012 Diagnostic Information Queries.sql:1178:4    - Unknown word (CACHESTORE)        -- -- CACHESTORE_SQLCP SQL Plans
-Scripts/SQL Server 2012 Diagnostic Information Queries.sql:1180:34   - Unknown word (CACHESTORE)       -- for high values for CACHESTORE_SQLCP
-Scripts/SQL Server 2012 Diagnostic Information Queries.sql:1180:45   - Unknown word (SQLCP)            -- values for CACHESTORE_SQLCP
+Scripts/SQL Server 2012 Diagnostic Information Queries.sql:1178:15   - Unknown word (SQLCP)             -- -- CACHESTORE_SQLCP SQL Plans
+Scripts/SQL Server 2012 Diagnostic Information Queries.sql:1180:45   - Unknown word (SQLCP)             -- values for CACHESTORE_SQLCP
 Scripts/SQL Server 2012 Diagnostic Information Queries.sql:1182:17   - Unknown word (FREESYSTEMCACHE)  -- -- Running DBCC FREESYSTEMCACHE ('SQL Plans') periodically
 Scripts/SQL Server 2012 Diagnostic Information Queries.sql:1184:15   - Unknown word (OBJCP)            -- -- CACHESTORE_OBJCP Object Plans
-Scripts/SQL Server 2012 Diagnostic Information Queries.sql:1184:4    - Unknown word (CACHESTORE)       -- -- CACHESTORE_OBJCP Object Plans
 Scripts/SQL Server 2012 Diagnostic Information Queries.sql:1191:33   - Unknown word (cacheobjtype)     -- AS [Object Type], cp.cacheobjtype AS [Cache Object Type
 Scripts/SQL Server 2012 Diagnostic Information Queries.sql:1195:10   - Unknown word (cacheobjtype)     -- WHERE cp.cacheobjtype = N'Compiled Plan'
 Scripts/SQL Server 2012 Diagnostic Information Queries.sql:1197:8    - Unknown word (usecounts)        -- AND cp.usecounts = 1
@@ -5412,17 +5358,13 @@ Scripts/SQL Server 2012 Diagnostic Information Queries.sql:976:68    - Unknown w
 Scripts/SQL Server 2012 Diagnostic Information Queries.sql:977:46    - Unknown word (TASKSHUTDOWN)      -- WAITFOR', N'WAITFOR_TASKSHUTDOWN', N'WAIT_XTP_HOST_WAIT
 Scripts/SQL Server 2012 Diagnostic Information Queries.sql:978:22    - Unknown word (CKPT)              -- N'WAIT_XTP_OFFLINE_CKPT_NEW_LOG', N'WAIT_XTP
 Scripts/SQL Server 2012 Diagnostic Information Queries.sql:978:48    - Unknown word (CKPT)              -- NEW_LOG', N'WAIT_XTP_CKPT_CLOSE', N'XE_DISPATCHER
-Scripts/SQL Server 2014 Diagnostic Information Queries.sql:1160:28   - Unknown word (CACHESTORE)        -- Look for high value for CACHESTORE_SQLCP (Ad-hoc query
 Scripts/SQL Server 2014 Diagnostic Information Queries.sql:1160:39   - Unknown word (SQLCP)             -- value for CACHESTORE_SQLCP (Ad-hoc query plans
 Scripts/SQL Server 2014 Diagnostic Information Queries.sql:1168:16   - Unknown word (SQLBUFFERPOOL)     -- -- MEMORYCLERK_SQLBUFFERPOOL was new for SQL Server
 Scripts/SQL Server 2014 Diagnostic Information Queries.sql:1168:4    - Unknown word (MEMORYCLERK)       -- -- MEMORYCLERK_SQLBUFFERPOOL was new
 Scripts/SQL Server 2014 Diagnostic Information Queries.sql:1170:15   - Unknown word (SQLCP)             -- -- CACHESTORE_SQLCP SQL Plans
-Scripts/SQL Server 2014 Diagnostic Information Queries.sql:1170:4    - Unknown word (CACHESTORE)        -- -- CACHESTORE_SQLCP SQL Plans
-Scripts/SQL Server 2014 Diagnostic Information Queries.sql:1172:34   - Unknown word (CACHESTORE)        -- for high values for CACHESTORE_SQLCP
 Scripts/SQL Server 2014 Diagnostic Information Queries.sql:1172:45   - Unknown word (SQLCP)             -- values for CACHESTORE_SQLCP
 Scripts/SQL Server 2014 Diagnostic Information Queries.sql:1174:17   - Unknown word (FREESYSTEMCACHE)   -- -- Running DBCC FREESYSTEMCACHE ('SQL Plans') periodically
 Scripts/SQL Server 2014 Diagnostic Information Queries.sql:1176:15   - Unknown word (OBJCP)             -- -- CACHESTORE_OBJCP Object Plans
-Scripts/SQL Server 2014 Diagnostic Information Queries.sql:1176:4    - Unknown word (CACHESTORE)        -- -- CACHESTORE_OBJCP Object Plans
 Scripts/SQL Server 2014 Diagnostic Information Queries.sql:1183:33   - Unknown word (cacheobjtype)      -- AS [Object Type], cp.cacheobjtype AS [Cache Object Type
 Scripts/SQL Server 2014 Diagnostic Information Queries.sql:1187:10   - Unknown word (cacheobjtype)      -- WHERE cp.cacheobjtype = N'Compiled Plan'
 Scripts/SQL Server 2014 Diagnostic Information Queries.sql:1189:8    - Unknown word (usecounts)         -- AND cp.usecounts = 1
@@ -5510,17 +5452,13 @@ Scripts/SQL Server 2014 Diagnostic Information Queries.sql:968:68    - Unknown w
 Scripts/SQL Server 2014 Diagnostic Information Queries.sql:969:46    - Unknown word (TASKSHUTDOWN)      -- WAITFOR', N'WAITFOR_TASKSHUTDOWN', N'WAIT_XTP_HOST_WAIT
 Scripts/SQL Server 2014 Diagnostic Information Queries.sql:970:22    - Unknown word (CKPT)              -- N'WAIT_XTP_OFFLINE_CKPT_NEW_LOG', N'WAIT_XTP
 Scripts/SQL Server 2014 Diagnostic Information Queries.sql:970:48    - Unknown word (CKPT)              -- NEW_LOG', N'WAIT_XTP_CKPT_CLOSE', N'XE_DISPATCHER
-Scripts/SQL Server 2016 Diagnostic Information Queries.sql:1182:28   - Unknown word (CACHESTORE)        -- Look for high value for CACHESTORE_SQLCP (Ad-hoc query
 Scripts/SQL Server 2016 Diagnostic Information Queries.sql:1182:39   - Unknown word (SQLCP)             -- value for CACHESTORE_SQLCP (Ad-hoc query plans
 Scripts/SQL Server 2016 Diagnostic Information Queries.sql:1190:16   - Unknown word (SQLBUFFERPOOL)     -- -- MEMORYCLERK_SQLBUFFERPOOL was new for SQL Server
 Scripts/SQL Server 2016 Diagnostic Information Queries.sql:1190:4    - Unknown word (MEMORYCLERK)       -- -- MEMORYCLERK_SQLBUFFERPOOL was new
 Scripts/SQL Server 2016 Diagnostic Information Queries.sql:1192:15   - Unknown word (SQLCP)             -- -- CACHESTORE_SQLCP SQL Plans
-Scripts/SQL Server 2016 Diagnostic Information Queries.sql:1192:4    - Unknown word (CACHESTORE)        -- -- CACHESTORE_SQLCP SQL Plans
-Scripts/SQL Server 2016 Diagnostic Information Queries.sql:1194:34   - Unknown word (CACHESTORE)        -- for high values for CACHESTORE_SQLCP
 Scripts/SQL Server 2016 Diagnostic Information Queries.sql:1194:45   - Unknown word (SQLCP)             -- values for CACHESTORE_SQLCP
 Scripts/SQL Server 2016 Diagnostic Information Queries.sql:1196:17   - Unknown word (FREESYSTEMCACHE)   -- -- Running DBCC FREESYSTEMCACHE ('SQL Plans') periodically
 Scripts/SQL Server 2016 Diagnostic Information Queries.sql:1198:15   - Unknown word (OBJCP)             -- -- CACHESTORE_OBJCP Object Plans
-Scripts/SQL Server 2016 Diagnostic Information Queries.sql:1198:4    - Unknown word (CACHESTORE)        -- -- CACHESTORE_OBJCP Object Plans
 Scripts/SQL Server 2016 Diagnostic Information Queries.sql:1205:33   - Unknown word (cacheobjtype)      -- AS [Object Type], cp.cacheobjtype AS [Cache Object Type
 Scripts/SQL Server 2016 Diagnostic Information Queries.sql:1209:10   - Unknown word (cacheobjtype)      -- WHERE cp.cacheobjtype = N'Compiled Plan'
 Scripts/SQL Server 2016 Diagnostic Information Queries.sql:1211:8    - Unknown word (usecounts)         -- AND cp.usecounts = 1
@@ -5653,17 +5591,13 @@ Scripts/SQL Server 2016 SP1 Diagnostic Information Queries.sql:1010:22   - Unkno
 Scripts/SQL Server 2016 SP1 Diagnostic Information Queries.sql:1010:48   - Unknown word (CKPT)              -- NEW_LOG', N'WAIT_XTP_CKPT_CLOSE', N'WAIT_XTP_RECOVERY
 Scripts/SQL Server 2016 SP1 Diagnostic Information Queries.sql:1011:18   - Unknown word (ALLPROCESSED)      -- N'XE_BUFFERMGR_ALLPROCESSED_EVENT', N'XE_DISPATCHER
 Scripts/SQL Server 2016 SP1 Diagnostic Information Queries.sql:1011:8    - Unknown word (BUFFERMGR)         -- N'XE_BUFFERMGR_ALLPROCESSED_EVENT'
-Scripts/SQL Server 2016 SP1 Diagnostic Information Queries.sql:1201:28   - Unknown word (CACHESTORE)        -- Look for high value for CACHESTORE_SQLCP (Ad-hoc query
 Scripts/SQL Server 2016 SP1 Diagnostic Information Queries.sql:1201:39   - Unknown word (SQLCP)             -- value for CACHESTORE_SQLCP (Ad-hoc query plans
 Scripts/SQL Server 2016 SP1 Diagnostic Information Queries.sql:1209:16   - Unknown word (SQLBUFFERPOOL)     -- -- MEMORYCLERK_SQLBUFFERPOOL was new for SQL Server
 Scripts/SQL Server 2016 SP1 Diagnostic Information Queries.sql:1209:4    - Unknown word (MEMORYCLERK)       -- -- MEMORYCLERK_SQLBUFFERPOOL was new
 Scripts/SQL Server 2016 SP1 Diagnostic Information Queries.sql:1211:15   - Unknown word (SQLCP)             -- -- CACHESTORE_SQLCP SQL Plans
-Scripts/SQL Server 2016 SP1 Diagnostic Information Queries.sql:1211:4    - Unknown word (CACHESTORE)        -- -- CACHESTORE_SQLCP SQL Plans
-Scripts/SQL Server 2016 SP1 Diagnostic Information Queries.sql:1213:34   - Unknown word (CACHESTORE)        -- for high values for CACHESTORE_SQLCP
 Scripts/SQL Server 2016 SP1 Diagnostic Information Queries.sql:1213:45   - Unknown word (SQLCP)             -- values for CACHESTORE_SQLCP
 Scripts/SQL Server 2016 SP1 Diagnostic Information Queries.sql:1215:17   - Unknown word (FREESYSTEMCACHE)   -- -- Running DBCC FREESYSTEMCACHE ('SQL Plans') periodically
 Scripts/SQL Server 2016 SP1 Diagnostic Information Queries.sql:1217:15   - Unknown word (OBJCP)             -- -- CACHESTORE_OBJCP Object Plans
-Scripts/SQL Server 2016 SP1 Diagnostic Information Queries.sql:1217:4    - Unknown word (CACHESTORE)        -- -- CACHESTORE_OBJCP Object Plans
 Scripts/SQL Server 2016 SP1 Diagnostic Information Queries.sql:1227:33   - Unknown word (cacheobjtype)      -- AS [Object Type], cp.cacheobjtype AS [Cache Object Type
 Scripts/SQL Server 2016 SP1 Diagnostic Information Queries.sql:1231:10   - Unknown word (cacheobjtype)      -- WHERE cp.cacheobjtype = N'Compiled Plan'
 Scripts/SQL Server 2016 SP1 Diagnostic Information Queries.sql:1233:8    - Unknown word (usecounts)         -- AND cp.usecounts = 1
@@ -5752,17 +5686,13 @@ Scripts/SQL Server 2016 SP1 Diagnostic Information Queries.sql:998:19    - Unkno
 Scripts/SQL Server 2016 SP1 Diagnostic Information Queries.sql:998:52    - Unknown word (SESSIONCOMMIT)     -- TARGETSTATE', N'PREEMPTIVE_XE_SESSIONCOMMIT',
 Scripts/SQL Server 2016 SP1 Diagnostic Information Queries.sql:999:19    - Unknown word (TARGETINIT)        -- N'PREEMPTIVE_XE_TARGETINIT', N'PREEMPTIVE_XE_TARGETFINAL
 Scripts/SQL Server 2016 SP1 Diagnostic Information Queries.sql:999:48    - Unknown word (TARGETFINALIZE)    -- TARGETINIT', N'PREEMPTIVE_XE_TARGETFINALIZE',
-Scripts/SQL Server 2016 SP2 Diagnostic Information Queries.sql:1166:28   - Unknown word (CACHESTORE)        -- Look for high value for CACHESTORE_SQLCP (Ad-hoc query
 Scripts/SQL Server 2016 SP2 Diagnostic Information Queries.sql:1166:39   - Unknown word (SQLCP)             -- value for CACHESTORE_SQLCP (Ad-hoc query plans
 Scripts/SQL Server 2016 SP2 Diagnostic Information Queries.sql:1174:16   - Unknown word (SQLBUFFERPOOL)     -- -- MEMORYCLERK_SQLBUFFERPOOL was new for SQL Server
 Scripts/SQL Server 2016 SP2 Diagnostic Information Queries.sql:1174:4    - Unknown word (MEMORYCLERK)       -- -- MEMORYCLERK_SQLBUFFERPOOL was new
 Scripts/SQL Server 2016 SP2 Diagnostic Information Queries.sql:1176:15   - Unknown word (SQLCP)             -- -- CACHESTORE_SQLCP SQL Plans
-Scripts/SQL Server 2016 SP2 Diagnostic Information Queries.sql:1176:4    - Unknown word (CACHESTORE)        -- -- CACHESTORE_SQLCP SQL Plans
-Scripts/SQL Server 2016 SP2 Diagnostic Information Queries.sql:1178:34   - Unknown word (CACHESTORE)        -- for high values for CACHESTORE_SQLCP
 Scripts/SQL Server 2016 SP2 Diagnostic Information Queries.sql:1178:45   - Unknown word (SQLCP)             -- values for CACHESTORE_SQLCP
 Scripts/SQL Server 2016 SP2 Diagnostic Information Queries.sql:1180:17   - Unknown word (FREESYSTEMCACHE)   -- -- Running DBCC FREESYSTEMCACHE ('SQL Plans') periodically
 Scripts/SQL Server 2016 SP2 Diagnostic Information Queries.sql:1182:15   - Unknown word (OBJCP)             -- -- CACHESTORE_OBJCP Object Plans
-Scripts/SQL Server 2016 SP2 Diagnostic Information Queries.sql:1182:4    - Unknown word (CACHESTORE)        -- -- CACHESTORE_OBJCP Object Plans
 Scripts/SQL Server 2016 SP2 Diagnostic Information Queries.sql:1192:33   - Unknown word (cacheobjtype)      -- AS [Object Type], cp.cacheobjtype AS [Cache Object Type
 Scripts/SQL Server 2016 SP2 Diagnostic Information Queries.sql:1196:10   - Unknown word (cacheobjtype)      -- WHERE cp.cacheobjtype = N'Compiled Plan'
 Scripts/SQL Server 2016 SP2 Diagnostic Information Queries.sql:1198:8    - Unknown word (usecounts)         -- AND cp.usecounts = 1
@@ -5890,17 +5820,13 @@ Scripts/SQL Server 2017 Diagnostic Information Queries.sql:1010:22   - Unknown w
 Scripts/SQL Server 2017 Diagnostic Information Queries.sql:1010:48   - Unknown word (CKPT)              -- NEW_LOG', N'WAIT_XTP_CKPT_CLOSE', N'WAIT_XTP_RECOVERY
 Scripts/SQL Server 2017 Diagnostic Information Queries.sql:1011:18   - Unknown word (ALLPROCESSED)      -- N'XE_BUFFERMGR_ALLPROCESSED_EVENT', N'XE_DISPATCHER
 Scripts/SQL Server 2017 Diagnostic Information Queries.sql:1011:8    - Unknown word (BUFFERMGR)         -- N'XE_BUFFERMGR_ALLPROCESSED_EVENT'
-Scripts/SQL Server 2017 Diagnostic Information Queries.sql:1201:28   - Unknown word (CACHESTORE)        -- Look for high value for CACHESTORE_SQLCP (Ad-hoc query
 Scripts/SQL Server 2017 Diagnostic Information Queries.sql:1201:39   - Unknown word (SQLCP)             -- value for CACHESTORE_SQLCP (Ad-hoc query plans
 Scripts/SQL Server 2017 Diagnostic Information Queries.sql:1209:16   - Unknown word (SQLBUFFERPOOL)     -- -- MEMORYCLERK_SQLBUFFERPOOL was new for SQL Server
 Scripts/SQL Server 2017 Diagnostic Information Queries.sql:1209:4    - Unknown word (MEMORYCLERK)       -- -- MEMORYCLERK_SQLBUFFERPOOL was new
 Scripts/SQL Server 2017 Diagnostic Information Queries.sql:1211:15   - Unknown word (SQLCP)             -- -- CACHESTORE_SQLCP SQL Plans
-Scripts/SQL Server 2017 Diagnostic Information Queries.sql:1211:4    - Unknown word (CACHESTORE)        -- -- CACHESTORE_SQLCP SQL Plans
-Scripts/SQL Server 2017 Diagnostic Information Queries.sql:1213:34   - Unknown word (CACHESTORE)        -- for high values for CACHESTORE_SQLCP
 Scripts/SQL Server 2017 Diagnostic Information Queries.sql:1213:45   - Unknown word (SQLCP)             -- values for CACHESTORE_SQLCP
 Scripts/SQL Server 2017 Diagnostic Information Queries.sql:1215:17   - Unknown word (FREESYSTEMCACHE)   -- -- Running DBCC FREESYSTEMCACHE ('SQL Plans') periodically
 Scripts/SQL Server 2017 Diagnostic Information Queries.sql:1217:15   - Unknown word (OBJCP)             -- -- CACHESTORE_OBJCP Object Plans
-Scripts/SQL Server 2017 Diagnostic Information Queries.sql:1217:4    - Unknown word (CACHESTORE)        -- -- CACHESTORE_OBJCP Object Plans
 Scripts/SQL Server 2017 Diagnostic Information Queries.sql:1227:33   - Unknown word (cacheobjtype)      -- AS [Object Type], cp.cacheobjtype AS [Cache Object Type
 Scripts/SQL Server 2017 Diagnostic Information Queries.sql:1231:10   - Unknown word (cacheobjtype)      -- WHERE cp.cacheobjtype = N'Compiled Plan'
 Scripts/SQL Server 2017 Diagnostic Information Queries.sql:1233:8    - Unknown word (usecounts)         -- AND cp.usecounts = 1
@@ -6044,17 +5970,13 @@ Scripts/SQL Server 2019 Diagnostic Information Queries.sql:1035:22   - Unknown w
 Scripts/SQL Server 2019 Diagnostic Information Queries.sql:1035:48   - Unknown word (CKPT)              -- NEW_LOG', N'WAIT_XTP_CKPT_CLOSE', N'WAIT_XTP_RECOVERY
 Scripts/SQL Server 2019 Diagnostic Information Queries.sql:1036:18   - Unknown word (ALLPROCESSED)      -- N'XE_BUFFERMGR_ALLPROCESSED_EVENT', N'XE_DISPATCHER
 Scripts/SQL Server 2019 Diagnostic Information Queries.sql:1036:8    - Unknown word (BUFFERMGR)         -- N'XE_BUFFERMGR_ALLPROCESSED_EVENT'
-Scripts/SQL Server 2019 Diagnostic Information Queries.sql:1226:28   - Unknown word (CACHESTORE)        -- Look for high value for CACHESTORE_SQLCP (Ad-hoc query
 Scripts/SQL Server 2019 Diagnostic Information Queries.sql:1226:39   - Unknown word (SQLCP)             -- value for CACHESTORE_SQLCP (Ad-hoc query plans
 Scripts/SQL Server 2019 Diagnostic Information Queries.sql:1234:16   - Unknown word (SQLBUFFERPOOL)     -- -- MEMORYCLERK_SQLBUFFERPOOL was new for SQL Server
 Scripts/SQL Server 2019 Diagnostic Information Queries.sql:1234:4    - Unknown word (MEMORYCLERK)       -- -- MEMORYCLERK_SQLBUFFERPOOL was new
 Scripts/SQL Server 2019 Diagnostic Information Queries.sql:1236:15   - Unknown word (SQLCP)             -- -- CACHESTORE_SQLCP - SQL Plans
-Scripts/SQL Server 2019 Diagnostic Information Queries.sql:1236:4    - Unknown word (CACHESTORE)        -- -- CACHESTORE_SQLCP - SQL Plans
-Scripts/SQL Server 2019 Diagnostic Information Queries.sql:1238:34   - Unknown word (CACHESTORE)        -- for high values for CACHESTORE_SQLCP
 Scripts/SQL Server 2019 Diagnostic Information Queries.sql:1238:45   - Unknown word (SQLCP)             -- values for CACHESTORE_SQLCP
 Scripts/SQL Server 2019 Diagnostic Information Queries.sql:1240:17   - Unknown word (FREESYSTEMCACHE)   -- -- Running DBCC FREESYSTEMCACHE ('SQL Plans') periodically
 Scripts/SQL Server 2019 Diagnostic Information Queries.sql:1242:15   - Unknown word (OBJCP)             -- -- CACHESTORE_OBJCP - Object Plans
-Scripts/SQL Server 2019 Diagnostic Information Queries.sql:1242:4    - Unknown word (CACHESTORE)        -- -- CACHESTORE_OBJCP - Object Plans
 Scripts/SQL Server 2019 Diagnostic Information Queries.sql:1252:33   - Unknown word (cacheobjtype)      -- AS [Object Type], cp.cacheobjtype AS [Cache Object Type
 Scripts/SQL Server 2019 Diagnostic Information Queries.sql:1256:10   - Unknown word (cacheobjtype)      -- WHERE cp.cacheobjtype = N'Compiled Plan'
 Scripts/SQL Server 2019 Diagnostic Information Queries.sql:1258:8    - Unknown word (usecounts)         -- AND cp.usecounts = 1
@@ -6342,12 +6264,10 @@ Scripts/ShredDeadlockGraph_Sample1.xml:31:3      - Unknown word (inputbuf)      
 Scripts/ShredDeadlockGraph_Sample1.xml:35:10     - Unknown word (hobtid)             -- <keylock hobtid="72057594049658880"
 Scripts/ShredDeadlockGraph_Sample1.xml:35:2      - Unknown word (keylock)            -- <keylock hobtid="72057594049
 Scripts/ShredDeadlockGraph_Sample1.xml:35:47     - Unknown word (objectname)         -- 49658880" dbid="21" objectname="Sandbox.dbo.Tally"
-Scripts/ShredDeadlockGraph_Sample1.xml:35:78     - Unknown word (indexname)          -- "Sandbox.dbo.Tally" indexname="PK_Tally" id="lock
 Scripts/ShredDeadlockGraph_Sample1.xml:42:3      - Unknown word (keylock)            -- </keylock>
 Scripts/ShredDeadlockGraph_Sample1.xml:43:10     - Unknown word (hobtid)             -- <keylock hobtid="72057594038976512"
 Scripts/ShredDeadlockGraph_Sample1.xml:43:2      - Unknown word (keylock)            -- <keylock hobtid="72057594038
 Scripts/ShredDeadlockGraph_Sample1.xml:43:47     - Unknown word (objectname)         -- 38976512" dbid="21" objectname="Sandbox.dbo.Tally_sm
-Scripts/ShredDeadlockGraph_Sample1.xml:43:81     - Unknown word (indexname)          -- Sandbox.dbo.Tally_sm" indexname="PK_Tally_sm" id="lock
 Scripts/ShredDeadlockGraph_Sample1.xml:4:119     - Unknown word (waittime)     -- 880 (010008207756)" waittime="9564" ownerId="181
 Scripts/ShredDeadlockGraph_Sample1.xml:4:152     - Unknown word (transactionname) -- 4" ownerId="181040" transactionname="user_transaction" lasttranst
 Scripts/ShredDeadlockGraph_Sample1.xml:4:187     - Unknown word (lasttranstarted) -- actionname="user_transaction" lasttranstarted="2011-05-15T00:12:5
@@ -6610,7 +6530,6 @@ Scripts/SplitFileGroup.sql:36:96     - Unknown word (origianl)   -- be emptied f
 Scripts/SplitFileGroup.sql:38:61     - Unknown word (MAXSIZE)    -- the filegroup, setting MAXSIZE and FILEGROWTH to the
 Scripts/SplitFileGroup.sql:38:73     - Unknown word (FILEGROWTH) -- setting MAXSIZE and FILEGROWTH to the values
 Scripts/SplitFileGroup.sql:40:17     - Unknown word (SHRINKFILE) -- 7) issue a DBCC SHRINKFILE, specifying the new
-Scripts/SplitFileGroup.sql:47:59     - Unknown word (datafiles)  -- data to have multiple datafiles and move the
 Scripts/SplitFileGroup.sql:61:32     - Unknown word (adquate)    -- script DOES NOT check for adquate file space.
 Scripts/SplitFileGroup.sql:83:10     - Unknown word (numfiles)   -- DECLARE @numfiles INT = <FileCountAfterSplit
 Scripts/SplitFileGroup.sql:84:10     - Unknown word (maxsize)    -- DECLARE @maxsizeMB INT = <MaxFileSize
@@ -7147,12 +7066,10 @@ Solution/Ola_Maintenance_Solution/DatabaseBackup.sql:1312:42   - Unknown word (s
 Solution/Ola_Maintenance_Solution/DatabaseBackup.sql:1314:97   - Unknown word (sqbutility)    -- ReturnCode = [master].dbo.sqbutility 1032, N''' + REPLACE
 Solution/Ola_Maintenance_Solution/DatabaseBackup.sql:1361:135  - Unknown word (FILEGROUPS)    -- rrentCommand03 + ' READ_WRITE_FILEGROUPS'
 Solution/Ola_Maintenance_Solution/DatabaseBackup.sql:1398:84   - Unknown word (BLOCKSIZE)     -- CurrentCommand03 + ', BLOCKSIZE = ' + CAST(@BlockSize
-Solution/Ola_Maintenance_Solution/DatabaseBackup.sql:1399:86   - Unknown word (BUFFERCOUNT)   -- CurrentCommand03 + ', BUFFERCOUNT = ' + CAST(@BufferCount
 Solution/Ola_Maintenance_Solution/DatabaseBackup.sql:1400:90   - Unknown word (MAXTRANSFERSIZE) -- CurrentCommand03 + ', MAXTRANSFERSIZE = ' + CAST(@MaxTransferSize
 Solution/Ola_Maintenance_Solution/DatabaseBackup.sql:1440:84   - Unknown word (BLOCKSIZE)       -- CurrentCommand03 + ', BLOCKSIZE = ' + CAST(@BlockSize
 Solution/Ola_Maintenance_Solution/DatabaseBackup.sql:1442:137  - Unknown word (filegroups)      -- entCommand03 + ', @read_write_filegroups = 1'
 Solution/Ola_Maintenance_Solution/DatabaseBackup.sql:1443:92   - Unknown word (compressionlevel) -- CurrentCommand03 + ', @compressionlevel = ' + CAST(@CompressionLevel
-Solution/Ola_Maintenance_Solution/DatabaseBackup.sql:1444:87   - Unknown word (buffercount)      -- CurrentCommand03 + ', @buffercount = ' + CAST(@BufferCount
 Solution/Ola_Maintenance_Solution/DatabaseBackup.sql:1445:91   - Unknown word (maxtransfersize)  -- CurrentCommand03 + ', @maxtransfersize = ' + CAST(@MaxTransferSize
 Solution/Ola_Maintenance_Solution/DatabaseBackup.sql:1450:95   - Unknown word (cryptlevel)       -- CurrentCommand03 + ', @cryptlevel = ' + CASE
 Solution/Ola_Maintenance_Solution/DatabaseBackup.sql:1462:89   - Unknown word (encryptionkey)    -- CurrentCommand03 + ', @encryptionkey = N''' + REPLACE(@EncryptionK
@@ -7363,12 +7280,10 @@ Solution/Ola_Maintenance_Solution/MaintenanceSolution.sql:1621:42   - Unknown wo
 Solution/Ola_Maintenance_Solution/MaintenanceSolution.sql:1623:97   - Unknown word (sqbutility)    -- ReturnCode = [master].dbo.sqbutility 1032, N''' + REPLACE
 Solution/Ola_Maintenance_Solution/MaintenanceSolution.sql:1670:135  - Unknown word (FILEGROUPS)    -- rrentCommand03 + ' READ_WRITE_FILEGROUPS'
 Solution/Ola_Maintenance_Solution/MaintenanceSolution.sql:1707:84   - Unknown word (BLOCKSIZE)     -- CurrentCommand03 + ', BLOCKSIZE = ' + CAST(@BlockSize
-Solution/Ola_Maintenance_Solution/MaintenanceSolution.sql:1708:86   - Unknown word (BUFFERCOUNT)   -- CurrentCommand03 + ', BUFFERCOUNT = ' + CAST(@BufferCount
 Solution/Ola_Maintenance_Solution/MaintenanceSolution.sql:1709:90   - Unknown word (MAXTRANSFERSIZE) -- CurrentCommand03 + ', MAXTRANSFERSIZE = ' + CAST(@MaxTransferSize
 Solution/Ola_Maintenance_Solution/MaintenanceSolution.sql:1749:84   - Unknown word (BLOCKSIZE)       -- CurrentCommand03 + ', BLOCKSIZE = ' + CAST(@BlockSize
 Solution/Ola_Maintenance_Solution/MaintenanceSolution.sql:1751:137  - Unknown word (filegroups)      -- entCommand03 + ', @read_write_filegroups = 1'
 Solution/Ola_Maintenance_Solution/MaintenanceSolution.sql:1752:92   - Unknown word (compressionlevel) -- CurrentCommand03 + ', @compressionlevel = ' + CAST(@CompressionLevel
-Solution/Ola_Maintenance_Solution/MaintenanceSolution.sql:1753:87   - Unknown word (buffercount)      -- CurrentCommand03 + ', @buffercount = ' + CAST(@BufferCount
 Solution/Ola_Maintenance_Solution/MaintenanceSolution.sql:1754:91   - Unknown word (maxtransfersize)  -- CurrentCommand03 + ', @maxtransfersize = ' + CAST(@MaxTransferSize
 Solution/Ola_Maintenance_Solution/MaintenanceSolution.sql:1759:95   - Unknown word (cryptlevel)       -- CurrentCommand03 + ', @cryptlevel = ' + CASE
 Solution/Ola_Maintenance_Solution/MaintenanceSolution.sql:1771:89   - Unknown word (encryptionkey)    -- CurrentCommand03 + ', @encryptionkey = N''' + REPLACE(@EncryptionK
@@ -9236,7 +9151,6 @@ Stored_Procedure/dbo.sp_sqltrace.sql:228:18    - Unknown word (setfilter)     --
 Stored_Procedure/dbo.sp_sqltrace.sql:22:21     - Unknown word (sqlutil)    -- * Updated in $/WWW/sqlutil
 Stored_Procedure/dbo.sp_sqltrace.sql:237:14    - Unknown word (sqlos)         -- ADD EVENT sqlos.wait_info
 Stored_Procedure/dbo.sp_sqltrace.sql:241:14    - Unknown word (sqlos)         -- ADD EVENT sqlos.wait_info_external
-Stored_Procedure/dbo.sp_sqltrace.sql:247:7     - Unknown word (METADATAFILE)  -- METADATAFILE = N' + QUOTENAME(@file
 Stored_Procedure/dbo.sp_sqltrace.sql:250:63    - Unknown word (eventsessname) -- STATE = START;', '***', @eventsessname);
 Stored_Procedure/dbo.sp_sqltrace.sql:259:21    - Unknown word (setstatus)     -- EXEC sp_trace_setstatus @trace_id, 1;
 Stored_Procedure/dbo.sp_sqltrace.sql:261:21    - Unknown word (setstatus)     -- EXEC sp_trace_setstatus @trace_id, 0;
@@ -9311,8 +9225,6 @@ Stored_Procedure/dbo.usp_BulkUpload.sql:105:13    - Unknown word (FORMATFILE)   
 Stored_Procedure/dbo.usp_BulkUpload.sql:106:13    - Unknown word (FORMATFILE)      -- IF @FORMATFILE = '' AND @skipTempDB
 Stored_Procedure/dbo.usp_BulkUpload.sql:106:89    - Unknown word (FORMATFILE)      -- skipTempDB = 1 then @FORMATFILE must be in xml or fmt
 Stored_Procedure/dbo.usp_BulkUpload.sql:113:107   - Unknown word (alredy)          -- the procedure it is alredy done with QUOTENAME
-Stored_Procedure/dbo.usp_BulkUpload.sql:122:13    - Unknown word (ERRORFILE)       -- IF @ERRORFILE = '' SET @ERRORFILE
-Stored_Procedure/dbo.usp_BulkUpload.sql:122:33    - Unknown word (ERRORFILE)       -- ERRORFILE = '' SET @ERRORFILE = @path + @tableFullName
 Stored_Procedure/dbo.usp_BulkUpload.sql:14:18     - Unknown word (BATCHSIZE)  -- , @BATCHSIZE integer
 Stored_Procedure/dbo.usp_BulkUpload.sql:153:7     - Unknown word (colum)           -- __columTS__
 Stored_Procedure/dbo.usp_BulkUpload.sql:158:53    - Unknown word (colum)           -- REPLACE(@tsqlCommand, '__columTS__', CASE WHEN @columnTypeS
@@ -9333,7 +9245,6 @@ Stored_Procedure/dbo.usp_BulkUpload.sql:193:9     - Unknown word (KEEPNULLS)    
 Stored_Procedure/dbo.usp_BulkUpload.sql:195:9     - Unknown word (LASTROW)         -- __LASTROW__
 Stored_Procedure/dbo.usp_BulkUpload.sql:197:9     - Unknown word (MAXERRORS)       -- __MAXERRORS__
 Stored_Procedure/dbo.usp_BulkUpload.sql:198:9     - Unknown word (TABLOCK)         -- __TABLOCK__
-Stored_Procedure/dbo.usp_BulkUpload.sql:199:8     - Unknown word (ERRORFILE)       -- ,ERRORFILE = ''__ERRORFILE__''
 Stored_Procedure/dbo.usp_BulkUpload.sql:19:18     - Unknown word (FIRSTROW)        -- , @FIRSTROW integer
 Stored_Procedure/dbo.usp_BulkUpload.sql:218:9     - Unknown word (BATCHSIZE)       -- __BATCHSIZE__
 Stored_Procedure/dbo.usp_BulkUpload.sql:219:7     - Unknown word (FIELDTERMINATOR) -- FIELDTERMINATOR = ''__FIELDTERMINATOR
@@ -9357,7 +9268,6 @@ Stored_Procedure/dbo.usp_BulkUpload.sql:258:53    - Unknown word (MAXERRORS)    
 Stored_Procedure/dbo.usp_BulkUpload.sql:264:150   - Unknown word (Deubg)           -- Null}' + @crlf + '--End Deubg*********/')
 Stored_Procedure/dbo.usp_BulkUpload.sql:26:18     - Unknown word (TABLOCK)         -- , @TABLOCK bit
 Stored_Procedure/dbo.usp_BulkUpload.sql:279:44    - Unknown word (Deubg)           -- PRINT @crlf + '--End Deubg*********/';
-Stored_Procedure/dbo.usp_BulkUpload.sql:27:18     - Unknown word (ERRORFILE)       -- , @ERRORFILE nvarchar
 Stored_Procedure/dbo.usp_BulkUpload.sql:28:18     - Unknown word (MAXERRORS)       -- , @MAXERRORS integer
 Stored_Procedure/dbo.usp_BulkUpload.sql:29:18     - Unknown word (FORMATFILE)      -- , @FORMATFILE varchar(4
 Stored_Procedure/dbo.usp_BulkUpload.sql:47:12     - Unknown word (BATCHSIZE)       -- [ [ , ] BATCHSIZE = batch_size ]
@@ -9373,7 +9283,6 @@ Stored_Procedure/dbo.usp_BulkUpload.sql:59:12     - Unknown word (LASTROW)      
 Stored_Procedure/dbo.usp_BulkUpload.sql:60:12     - Unknown word (MAXERRORS)       -- [ [ , ] MAXERRORS = max_errors ]
 Stored_Procedure/dbo.usp_BulkUpload.sql:63:12     - Unknown word (ROWTERMINATOR)   -- [ [ , ] ROWTERMINATOR = 'row_terminator'
 Stored_Procedure/dbo.usp_BulkUpload.sql:64:12     - Unknown word (TABLOCK)         -- [ [ , ] TABLOCK ]
-Stored_Procedure/dbo.usp_BulkUpload.sql:65:12     - Unknown word (ERRORFILE)       -- [ [ , ] ERRORFILE = 'file_name' ]
 Stored_Procedure/dbo.usp_BulkUpload.sql:68:88     - Unknown word (KEEPIDENTITY)    -- useIdentity = 1 and KEEPIDENTITY property
 Stored_Procedure/dbo.usp_BulkUpload.sql:93:33     - Unknown word (Indentity)       -- DECLARE @ParamDefinitionIndentity nvarchar(500) = N
 Stored_Procedure/dbo.usp_CopyLogins.sql:219:12    - Unknown word (addsrvrolemember) -- Exec sp_addsrvrolemember @rolename = @RoleName
@@ -9842,11 +9751,9 @@ Stored_Procedure/dbo.usp_SetFileGrowth.sql:248:10    - Unknown word (cmdexec)   
 Stored_Procedure/dbo.usp_SetFileGrowth.sql:266:23    - Unknown word (netsend)         -- @notify_level_netsend=2,
 Stored_Procedure/dbo.usp_SetFileGrowth.sql:273:17    - Unknown word (netsend)         -- @notify_netsend_operator_name=N'',
 Stored_Procedure/dbo.usp_SetFileGrowth.sql:279:22    - Unknown word (jobschedule)     -- EXEC msdb.dbo.sp_add_jobschedule @job_name=N'usp_SetFileGrowth
-Stored_Procedure/dbo.usp_SetFileGrowth.sql:27:53     - Unknown word (datafiles)    -- autogrow values for datafiles and logfiles depending
 Stored_Procedure/dbo.usp_SetFileGrowth.sql:27:67     - Unknown word (logfiles)     -- values for datafiles and logfiles depending on the file
 Stored_Procedure/dbo.usp_SetFileGrowth.sql:283:15    - Unknown word (subday)          -- @freq_subday_type=8,
 Stored_Procedure/dbo.usp_SetFileGrowth.sql:284:15    - Unknown word (subday)          -- @freq_subday_interval=6,
-Stored_Procedure/dbo.usp_SetFileGrowth.sql:2:70      - Unknown word (datafiles)  -- growth values for every datafiles and logfiles (SQL 2
 Stored_Procedure/dbo.usp_SetFileGrowth.sql:2:84      - Unknown word (logfiles)   -- every datafiles and logfiles (SQL 2005 and above
 Stored_Procedure/dbo.usp_SetFileGrowth.sql:31:28     - Unknown word (HERVOUET)     -- Author : Samuel HERVOUET
 Stored_Procedure/dbo.usp_SetFileGrowth.sql:33:61     - Unknown word (datafilesize) -- dbo.usp_SetFileGrowth @datafilesize_lowerlimit
@@ -9859,19 +9766,14 @@ Stored_Procedure/dbo.usp_SetFileGrowth.sql:39:63     - Unknown word (logfilesize
 Stored_Procedure/dbo.usp_SetFileGrowth.sql:39:75     - Unknown word (upperlimit)   -- ,@logfilesize_upperlimit
 Stored_Procedure/dbo.usp_SetFileGrowth.sql:40:63     - Unknown word (logfile)      -- ,@logfile_growth_target_lower
 Stored_Procedure/dbo.usp_SetFileGrowth.sql:41:63     - Unknown word (logfile)      -- ,@logfile_growth_target_medium
-Stored_Procedure/dbo.usp_SetFileGrowth.sql:44:29     - Unknown word (Datafiles)    -- For Datafiles less than 400 MB, set
-Stored_Procedure/dbo.usp_SetFileGrowth.sql:45:29     - Unknown word (Datafiles)    -- For Datafiles between 400 MB and
-Stored_Procedure/dbo.usp_SetFileGrowth.sql:46:29     - Unknown word (Datafiles)    -- For Datafiles greater than 2000 MB
 Stored_Procedure/dbo.usp_SetFileGrowth.sql:49:29     - Unknown word (Logfiles)     -- For Logfiles less than 1000 MB, set
 Stored_Procedure/dbo.usp_SetFileGrowth.sql:50:29     - Unknown word (Logfiles)     -- For Logfiles between 1000 MB and
 Stored_Procedure/dbo.usp_SetFileGrowth.sql:51:29     - Unknown word (Logfiles)     -- For Logfiles greater than 5000 MB
-Stored_Procedure/dbo.usp_SetFileGrowth.sql:54:42     - Unknown word (Datafiles)    -- Set autogrow for Datafiles AND Logfiles as explained
 Stored_Procedure/dbo.usp_SetFileGrowth.sql:54:56     - Unknown word (Logfiles)     -- autogrow for Datafiles AND Logfiles as explained in the
 Stored_Procedure/dbo.usp_SetFileGrowth.sql:61:10     - Unknown word (datafilesize) -- DECLARE @datafilesize_lowerlimit INT
 Stored_Procedure/dbo.usp_SetFileGrowth.sql:61:23     - Unknown word (lowerlimit)   -- DECLARE @datafilesize_lowerlimit INT
 Stored_Procedure/dbo.usp_SetFileGrowth.sql:62:23     - Unknown word (upperlimit)   -- DECLARE @datafilesize_upperlimit INT
 Stored_Procedure/dbo.usp_SetFileGrowth.sql:67:10     - Unknown word (logfilesize)  -- DECLARE @logfilesize_lowerlimit INT
-Stored_Procedure/dbo.usp_SetFileGrowth.sql:90:8      - Unknown word (Datafiles)    -- PRINT 'Datafiles size lower limit
 Stored_Procedure/dbo.usp_SetFileGrowth.sql:96:8      - Unknown word (Logfiles)     -- PRINT 'Logfiles size lower limit
 Stored_Procedure/dbo.usp_String_Search.sql:188:188   - Unknown word (COLUMNPROPERTY) -- CONVERT (VARCHAR (11), COLUMNPROPERTY (C.[object_id], C.name
 Stored_Procedure/dbo.usp_String_Search.sql:188:92    - Unknown word (COLUMNPROPERTY) -- CONVERT (VARCHAR (11), COLUMNPROPERTY (C.[object_id], C.name
@@ -9898,9 +9800,6 @@ Stored_Procedure/dbo.usp_UnusedInputParameters.sql:73:6      - Unknown word (SQL
 Stored_Procedure/dbo.usp_UnusedInputParameters.sql:78:32     - Unknown word (SQLM)        -- JOIN sys.sql_modules SQLM ON SQLM.[object_id]
 Stored_Procedure/dbo.usp_UnusedInputParameters.sql:78:40     - Unknown word (SQLM)        -- sql_modules SQLM ON SQLM.[object_id] = P.[object
 Stored_Procedure/dbo.usp_UnusedInputParameters.sql:87:9      - Unknown word (XSQLM)       -- XSQLM.[definition] + NCHAR
-Stored_Procedure/dbo.usp_bcpTableUnload.sql:124:28    - Unknown word (queryout)       -- '" queryout "' +  @filePath + '
-Stored_Procedure/dbo.usp_bcpTableUnload.sql:133:40    - Unknown word (queryout)       -- '''''" queryout "' + @path + @tableFullName
-Stored_Procedure/dbo.usp_bcpTableUnload.sql:173:226   - Unknown word (queryout)       -- ''', __LOB__) as x" queryout "__path____filename
 Stored_Procedure/dbo.usp_bcpTableUnload.sql:188:32    - Unknown word (Deubg)          -- debug = 1 PRINT '--End Deubg*********/';
 Stored_Procedure/dbo.usp_bcpTableUnload.sql:18:53     - Unknown word (formatfile) -- VARCHAR(4) = 'xml' -- formatfile = @schemaName.@tableName
 Stored_Procedure/dbo.usp_bcpTableUnload.sql:18:97     - Unknown word (formatfile) -- schemaName.@tableName.fmt, -x formatfile = @schemaName.@tableName
@@ -9914,7 +9813,6 @@ Stored_Procedure/dbo.usp_bcpTableUnloadBatchMode.sql:47:17     - Unknown word (r
 Stored_Procedure/dbo.usp_bcpTableUnloadBatchMode.sql:60:28     - Unknown word (Deubg)      -- debug = 1 PRINT '--End Deubg*********/'
 Stored_Procedure/dbo.usp_bcpUnloadSelect.sql:18:43     - Unknown word (DATABASENAME) -- use full table names: DATABASENAME.SCHEMANAME.TABLENAME
 Stored_Procedure/dbo.usp_bcpUnloadSelect.sql:18:56     - Unknown word (SCHEMANAME)   -- names: DATABASENAME.SCHEMANAME.TABLENAME
-Stored_Procedure/dbo.usp_bcpUnloadSelect.sql:54:76     - Unknown word (queryout)     -- sqlCommand, @crlf, ' ') + '" queryout "' + @filePath +
 Stored_Procedure/dbo.usp_bcpUnloadSelect.sql:63:44     - Unknown word (Deubg)        -- PRINT @crlf + '--End Deubg*********/';
 Stored_Procedure/dbo.usp_checkAllDatabases.sql:30:66     - Unknown word (INFOMSGS)   -- databaseName + ') WITH NO_INFOMSGS;';
 Stored_Procedure/dbo.usp_checkAllDatabases.sql:3:15      - Unknown word (Stedman)    -- Author: Steve Stedman
@@ -9924,7 +9822,6 @@ Stored_Procedure/dbo.usp_generateIdentifier.sql:4:1       - Unknown word (Descti
 Stored_Procedure/dbo.usp_generateIdentifier.sql:59:22     - Unknown word (preseed)                    -- declare @preseed int = @seed;
 Stored_Procedure/dbo.usp_who5.sql:105:5     - Unknown word (ARITHABORT) -- SET ARITHABORT OFF
 Stored_Procedure/dbo.usp_who5.sql:106:5     - Unknown word (ARITHIGNORE) -- SET ARITHIGNORE ON
-Stored_Procedure/dbo.usp_who5.sql:1204:52   - Unknown word (PRECONNECT)  -- session IN (N'PENDING', N'PRECONNECT', N'RUNNABLE', N'SPINLOOP
 Stored_Procedure/dbo.usp_who5.sql:1204:80   - Unknown word (SPINLOOP)    -- PRECONNECT', N'RUNNABLE', N'SPINLOOP', N'SUSPENDED') THEN
 Stored_Procedure/dbo.usp_who5.sql:1281:47   - Unknown word (mssqlsystemresource) -- database_id = 32767 THEN N'mssqlsystemresource (Hidden Resource Database
 Stored_Procedure/dbo.usp_who5.sql:1334:45   - Unknown word (mssqlsystemresource) -- database_id = 32767 THEN N'mssqlsystemresource (Hidden Resource Database
@@ -10435,7 +10332,7 @@ Utilities/README.md:154:198   - Unknown word (Hinsenkamp) -- 2013-02-24 | Thomas
 Utilities/README.md:154:8     - Unknown word (Scripter)   -- | [SQL Scripter](#sql-scripter)
 Utilities/README.md:155:191   - Unknown word (Miljan)     -- | 2016-05-02 | Miljan Radovic          |
 Utilities/README.md:155:198   - Unknown word (Radovic)    -- 2016-05-02 | Miljan Radovic |
-Utilities/README.md:1662:12   - Unknown word (SSAS)           -- - Monitor SSAS, SSRS, & SSIS health
+Utilities/README.md:1662:12   - Unknown word (SSAS)            -- - Monitor SSAS, SSRS, & SSIS health
 Utilities/README.md:1662:18   - Unknown word (SSRS)           -- - Monitor SSAS, SSRS, & SSIS health with
 Utilities/README.md:173:20    - Unknown word (Veiwer)     -- | [ApexSQL Trigger Veiwer](#apexsql-trigger-viewer
 Utilities/README.md:189:191   - Unknown word (Cardett)    -- | 2015-03-18 | Cardett Associates      |
@@ -10505,7 +10402,6 @@ Utilities/README.md:238:4     - Unknown word (Liquibase)   -- | [Liquibase](#liq
 Utilities/README.md:239:129   - Unknown word (Batis)       -- Mac | [MG]     | [My Batis]
 Utilities/README.md:239:194   - Unknown word (Batis)       -- | 2018-03-20 | My Batis | [Apache
 Utilities/README.md:239:7     - Unknown word (Batis)       -- | [My Batis](#my-batis)
-Utilities/README.md:2462:104  - Unknown word (datasource)     -- by ApexSQL Diff as a datasource
 Utilities/README.md:2510:12   - Unknown word (SSAS)           -- - Monitor SSAS, SSIS and SSRS performance
 Utilities/README.md:2510:27   - Unknown word (SSRS)           -- Monitor SSAS, SSIS and SSRS performance
 Utilities/README.md:252:194   - Unknown word (Treeo)       -- | ?          | SQLTreeo |
@@ -10686,8 +10582,8 @@ Utilities/README.md:369:191   - Unknown word (Alaa)             -- | 2015-12-15 
 Utilities/README.md:369:200   - Unknown word (Fatma)            -- 15-12-15 | Alaa Ben Fatma |
 Utilities/README.md:36:126    - Unknown word (tablediff)  -- | [I]      | [tablediff Utility]
 Utilities/README.md:36:4      - Unknown word (tablediff)  -- | [tablediff Utility](#tablediff
-Utilities/README.md:3706:6    - Unknown word (Defence)       -- ## DbDefence
-Utilities/README.md:3708:19   - Unknown word (Defence)       -- Download page: [DbDefence]<br/>
+Utilities/README.md:3706:6    - Unknown word (Defence)        -- ## DbDefence
+Utilities/README.md:3708:19   - Unknown word (Defence)        -- Download page: [DbDefence]<br/>
 Utilities/README.md:370:126   - Unknown word (SQLDB)            -- | [S]      | [SQLDBSearch]
 Utilities/README.md:370:199   - Unknown word (Bouarroudj)       -- | Mohamed Bouarroudj |            |
 Utilities/README.md:370:4     - Unknown word (SQLDB)            -- | [SQLDBSearch](#sqldbsearch
@@ -10823,7 +10719,6 @@ Utilities/README.md:4780:4    - Unknown word (Mogwai)        -- ## MogwaiERDesig
 Utilities/README.md:4782:17   - Unknown word (Mogwai)        -- Download page: [MogwaiERDesignerNG]<br/>
 Utilities/README.md:4785:15   - Unknown word (Sertic)        -- Author: Mirko Sertic<br/>
 Utilities/README.md:4785:9    - Unknown word (Mirko)         -- Author: Mirko Sertic<br/>
-Utilities/README.md:478:27    - Unknown word (queryout)        -- Except when used with the queryout option, the utility
 Utilities/README.md:4796:4    - Unknown word (Xcase)         -- ## Xcase
 Utilities/README.md:4798:17   - Unknown word (Xcase)         -- Download page: [Xcase]<br/>
 Utilities/README.md:47:126    - Unknown word (Dbeaver)    -- Linux,Mac | [MS]     | [Dbeaver]

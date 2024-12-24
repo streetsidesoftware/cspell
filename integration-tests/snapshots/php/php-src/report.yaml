@@ -4,8 +4,8 @@ Url: https://github.com/php/php-src.git
 Args: '["--config=${repoConfig}/cspell.json","**/*.{md,c,h,php}"]'
 Summary:
   files: 2213
-  filesWithIssues: 1518
-  issues: 26088
+  filesWithIssues: 1517
+  issues: 26070
   errors: 0
 Errors: []
 
@@ -1243,9 +1243,6 @@ issues:
   - "ext/curl/curl_arginfo.h:1052:60     GSASL               U       GSASL\", CURL_VERSION_GSASL, CONST_PERSISTENT);"
   - "ext/curl/curl_arginfo.h:1097:26     CURLWS              U       REGISTER_LONG_CONSTANT(\"CURLWS_RAW_MODE\", CURLWS_RAW"
   - "ext/curl/curl_arginfo.h:1097:44     CURLWS              U       CONSTANT(\"CURLWS_RAW_MODE\", CURLWS_RAW_MODE, CONST_PERSISTENT"
-  - "ext/curl/curl_file.stub.php:10:20       postname    U       public string $postname = \"\";"
-  - "ext/curl/curl_file.stub.php:33:20       postname    U       public string $postname;"
-  - "ext/curl/curl_file.stub.php:36:55       postname    U       string $data, string $postname, string $mime = \"application"
   - "ext/curl/curl_private.h:119:14      easyh       U       zend_llist easyh;"
   - "ext/curl/curl.stub.php:11:12        CURLOPT                 U       * @cvalue CURLOPT_AUTOREFERER"
   - "ext/curl/curl.stub.php:11:20        AUTOREFERER             U       * @cvalue CURLOPT_AUTOREFERER"
@@ -1344,8 +1341,6 @@ issues:
   - "ext/curl/curl.stub.php:427:15       TIMECONDITION           U       const CURLOPT_TIMECONDITION = UNKNOWN;"
   - "ext/curl/curl.stub.php:435:20       TIMEVALUE               U       * @cvalue CURLOPT_TIMEVALUE"
   - "ext/curl/curl.stub.php:437:15       TIMEVALUE               U       const CURLOPT_TIMEVALUE = UNKNOWN;"
-  - "ext/curl/curl.stub.php:440:20       TRANSFERTEXT            U       * @cvalue CURLOPT_TRANSFERTEXT"
-  - "ext/curl/curl.stub.php:442:15       TRANSFERTEXT            U       const CURLOPT_TRANSFERTEXT = UNKNOWN;"
   - "ext/curl/curl.stub.php:465:20       USERPWD                 U       * @cvalue CURLOPT_USERPWD"
   - "ext/curl/curl.stub.php:467:15       USERPWD                 U       const CURLOPT_USERPWD = UNKNOWN;"
   - "ext/curl/curl.stub.php:475:20       WRITEFUNCTION           U       * @cvalue CURLOPT_WRITEFUNCTION"
@@ -1382,8 +1377,6 @@ issues:
   - "ext/curl/curl.stub.php:918:16       LASTONE                 U       const CURLINFO_LASTONE = UNKNOWN;"
   - "ext/curl/curl.stub.php:921:21       NAMELOOKUP              U       * @cvalue CURLINFO_NAMELOOKUP_TIME"
   - "ext/curl/curl.stub.php:923:16       NAMELOOKUP              U       const CURLINFO_NAMELOOKUP_TIME = UNKNOWN;"
-  - "ext/curl/curl.stub.php:926:21       PRETRANSFER             U       * @cvalue CURLINFO_PRETRANSFER_TIME"
-  - "ext/curl/curl.stub.php:928:16       PRETRANSFER             U       const CURLINFO_PRETRANSFER_TIME = UNKNOWN;"
   - "ext/curl/curl.stub.php:971:25       VERIFYRESULT            U       cvalue CURLINFO_SSL_VERIFYRESULT"
   - "ext/curl/curl.stub.php:973:20       VERIFYRESULT            U       const CURLINFO_SSL_VERIFYRESULT = UNKNOWN;"
   - "ext/curl/curl.stub.php:976:21       STARTTRANSFER           U       * @cvalue CURLINFO_STARTTRANSFER_TIME"
@@ -1458,8 +1451,6 @@ issues:
   - "ext/curl/curl.stub.php:1280:16      GSSNEGOTIATE            U       const CURLAUTH_GSSNEGOTIATE = UNKNOWN;"
   - "ext/curl/curl.stub.php:1288:21      NTLM                    U       * @cvalue CURLAUTH_NTLM"
   - "ext/curl/curl.stub.php:1290:16      NTLM                    U       const CURLAUTH_NTLM = UNKNOWN;"
-  - "ext/curl/curl.stub.php:1295:26      CONNECTCODE             U       cvalue CURLINFO_HTTP_CONNECTCODE"
-  - "ext/curl/curl.stub.php:1297:21      CONNECTCODE             U       const CURLINFO_HTTP_CONNECTCODE = UNKNOWN;"
   - "ext/curl/curl.stub.php:1305:20      PROXYAUTH               U       * @cvalue CURLOPT_PROXYAUTH"
   - "ext/curl/curl.stub.php:1307:15      PROXYAUTH               U       const CURLOPT_PROXYAUTH = UNKNOWN;"
   - "ext/curl/curl.stub.php:1322:21      HTTPAUTH                U       * @cvalue CURLINFO_HTTPAUTH_AVAIL"
@@ -1705,12 +1696,8 @@ issues:
   - "ext/curl/curl.stub.php:3026:16      APPCONNECT              U       const CURLINFO_APPCONNECT_TIME_T = UNKNOWN;"
   - "ext/curl/curl.stub.php:3034:21      NAMELOOKUP              U       * @cvalue CURLINFO_NAMELOOKUP_TIME_T"
   - "ext/curl/curl.stub.php:3036:16      NAMELOOKUP              U       const CURLINFO_NAMELOOKUP_TIME_T = UNKNOWN;"
-  - "ext/curl/curl.stub.php:3039:21      PRETRANSFER             U       * @cvalue CURLINFO_PRETRANSFER_TIME_T"
-  - "ext/curl/curl.stub.php:3041:16      PRETRANSFER             U       const CURLINFO_PRETRANSFER_TIME_T = UNKNOWN;"
   - "ext/curl/curl.stub.php:3049:21      STARTTRANSFER           U       * @cvalue CURLINFO_STARTTRANSFER_TIME_T"
   - "ext/curl/curl.stub.php:3051:16      STARTTRANSFER           U       const CURLINFO_STARTTRANSFER_TIME_T = UNKNOWN;"
-  - "ext/curl/curl.stub.php:3060:21      POSTTRANSFER            U       * @cvalue CURLINFO_POSTTRANSFER_TIME_T"
-  - "ext/curl/curl.stub.php:3062:16      POSTTRANSFER            U       const CURLINFO_POSTTRANSFER_TIME_T = UNKNOWN;"
   - "ext/curl/curl.stub.php:3093:27      BUFFERSIZE              U       cvalue CURLOPT_UPLOAD_BUFFERSIZE"
   - "ext/curl/curl.stub.php:3095:22      BUFFERSIZE              U       const CURLOPT_UPLOAD_BUFFERSIZE = UNKNOWN;"
   - "ext/curl/curl.stub.php:3109:12      CURLALTSVC              U       * @cvalue CURLALTSVC_H1"
@@ -22782,15 +22769,10 @@ issues:
   - "ext/zip/php_zip.stub.php:795:71         compflags           U       index, int $method, int $compflags = 0): bool {}"
   - "ext/zip/zip_stream.c:13:13          Piere       U       | Author: Piere-Alain Joye <pierre@php"
   - "ext/zip/zip_stream.c:13:19          Alain       U       | Author: Piere-Alain Joye <pierre@php.net"
-  - "ext/zip/zip_stream.c:215:33         zipio       U       stream_ops php_stream_zipio_seek_ops = {"
-  - "ext/zip/zip_stream.c:227:33         zipio       U       stream_ops php_stream_zipio_ops = {"
-  - "ext/zip/zip_stream.c:260:43         zipio       U       stream_alloc(&php_stream_zipio_seek_ops, self, NULL"
-  - "ext/zip/zip_stream.c:264:43         zipio       U       stream_alloc(&php_stream_zipio_ops, self, NULL, mode"
   - "ext/zip/zip_stream.c:328:9          tmpzval     U       zval *tmpzval;"
   - "ext/zip/zip_stream.c:330:27         tmpzval     U       context && NULL != (tmpzval = php_stream_context"
   - "ext/zip/zip_stream.c:331:17         tmpzval     U       if (Z_TYPE_P(tmpzval) != IS_STRING || zip"
   - "ext/zip/zip_stream.c:331:82         tmpzval     U       password(za, Z_STRVAL_P(tmpzval))) {"
-  - "ext/zip/zip_stream.c:346:43         zipio       U       stream_alloc(&php_stream_zipio_seek_ops, self, NULL"
   - "ext/zlib/php_zlib.h:14:24       hrich       U       | Stefan R�hrich <sr@linux.de>"
   - "ext/zlib/php_zlib.h:64:9        ZLIBG       U       #define ZLIBG(v) ZEND_MODULE_GLOBALS"
   - "ext/zlib/php_zlib.h:67:40       gzio        U       stream_ops php_stream_gzio_ops;"
