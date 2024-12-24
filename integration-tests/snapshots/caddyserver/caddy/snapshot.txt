@@ -3,7 +3,7 @@ Repository: caddyserver/caddy
 Url: "https://github.com/caddyserver/caddy.git"
 Args: ["**/*.go"]
 Lines:
- CSpell: Files checked: 279, Issues found: 3553 in 254 files.
+ CSpell: Files checked: 279, Issues found: 3545 in 254 files.
  exit code: 1
 admin.go:1064:20   - Unknown word (Redir)       -- return errInternalRedir
 admin.go:1340:6    - Unknown word (loggable)    -- type loggableURLArray []*url.URL
@@ -31,7 +31,6 @@ admin.go:507:56    - Unknown word (certmagic)   -- interface{ SetConfig(cfg *cer
 admin.go:575:23    - Unknown word (stdlib)      -- / convert logger to stdlib so it can be used by
 admin.go:839:23    - Unknown word (Redir)       -- if err == errInternalRedir {
 admin.go:940:38    - Unknown word (xxhash)      -- hash.Hash { return xxhash.New() }
-admin_test.go:30:8      - Unknown word (myserver)   -- "myserver": {
 admin_test.go:34:8      - Unknown word (yourserver) -- "yourserver": {
 caddy.go:1028:33   - Unknown word (devel)       -- = "" || simple == "(devel)" {
 caddy.go:1089:32   - Unknown word (caddyserver) -- ImportPath = "github.com/caddyserver/caddy/v2"
@@ -693,7 +692,6 @@ caddytest/integration/caddyfile_test.go:71:4      - Unknown word (caddyfile)   -
 caddytest/integration/caddyfile_test.go:747:10    - Unknown word (internalerr)       -- error /internalerr* "Internal Server Error
 caddytest/integration/caddyfile_test.go:770:10    - Unknown word (threehundred)      -- error /threehundred* "Moved Permanently
 caddytest/integration/caddyfile_test.go:771:10    - Unknown word (internalerr)       -- error /internalerr* "Internal Server Error
-caddytest/integration/caddyfile_test.go:78:11     - Unknown word (clientname)  -- Name: "clientname",
 caddytest/integration/caddyfile_test.go:797:20    - Unknown word (Caddyfile)         -- expectedError: `Caddyfile:2: parsed 'handle' as
 caddytest/integration/caddyfile_test.go:79:11     - Unknown word (caddytest)   -- Value: "caddytest",
 caddytest/integration/caddyfile_test.go:804:20    - Unknown word (Caddyfile)         -- expectedError: `Caddyfile:2: parsed 'reverse_proxy
@@ -3019,12 +3017,6 @@ modules/caddytls/connpolicy.go:693:41    - Unknown word (caddytls)      -- modul
 modules/caddytls/connpolicy.go:695:46    - Unknown word (caddyconfig)   -- append(ca.VerifiersRaw, caddyconfig.JSONModuleObject(unm
 modules/caddytls/connpolicy.go:705:14    - Unknown word (caddyconfig)   -- ca.CARaw = caddyconfig.JSONModuleObject(fileMod
 modules/caddytls/connpolicy.go:716:6     - Unknown word (ders)          -- var ders []string
-modules/caddytls/connpolicy.go:734:7     - Unknown word (clientauth)    -- func (clientauth *ClientAuthentication
-modules/caddytls/connpolicy.go:735:39    - Unknown word (clientauth)    -- clientauth.CARaw) > 0 && (len(clientauth.TrustedCACerts) > 0
-modules/caddytls/connpolicy.go:735:77    - Unknown word (clientauth)    -- TrustedCACerts) > 0 || len(clientauth.TrustedCACertPEMFiles
-modules/caddytls/connpolicy.go:735:9     - Unknown word (clientauth)    -- if len(clientauth.CARaw) > 0 && (len(clientauth
-modules/caddytls/connpolicy.go:740:9     - Unknown word (clientauth)    -- if len(clientauth.TrustedCACertPEMFiles
-modules/caddytls/connpolicy.go:785:46    - Unknown word (clientauth's)  -- sets up cfg to enforce clientauth's configuration.
 modules/caddytls/connpolicy.go:83:7      - Unknown word (Iface)       -- modIface, err := ctx.LoadModule
 modules/caddytls/connpolicy.go:87:32     - Unknown word (Iface)       -- handshakeContext = modIface.(HandshakeContext)
 modules/caddytls/connpolicy.go:928:13    - Unknown word (Certloaders)   -- trustedLeafCertloaders := []LeafCertificateLoader

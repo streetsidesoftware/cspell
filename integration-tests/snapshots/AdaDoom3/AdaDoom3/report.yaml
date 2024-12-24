@@ -5,7 +5,7 @@ Args: '["**/*.*"]'
 Summary:
   files: 103
   filesWithIssues: 98
-  issues: 2718
+  issues: 2708
   errors: 0
 Errors: []
 
@@ -1420,7 +1420,6 @@ issues:
   - "Engine/neo-world-graphics.adb:860:112       SFLOAT                              U       VK_FORMAT_R32G32B32_SFLOAT,"
   - "Engine/neo-world-graphics.adb:884:26        sepcial                             U       -- Fetch our sepcial \"handle\" used to Id"
   - "Engine/neo-world-graphics.adb:941:61        subresource                         U       subresourceRange => (aspectMask"
-  - "Engine/neo-world-graphics.adb:1032:33       rebuffer                            U       Line (\"Attempted to rebuffer material \" & Path);"
   - "Engine/neo-world-graphics.adb:1107:45       Swapchain                           U       royFramebuffer (Device, Frame.Swapchain_Buffer, null);"
   - "Engine/neo-world-graphics.adb:1122:10       Swapchain                           U       -- Swapchain"
   - "Engine/neo-world-graphics.adb:1130:8        Syncronization (Synchronization)    U       -- Syncronization"
@@ -1585,15 +1584,12 @@ issues:
   - "Engine/neo-world-network.adb:509:35         demofile                U       Write (&swlen, 4, clc.demofile);"
   - "Engine/neo-world-network.adb:510:55         demofile                U       headerBytes, len, clc.demofile );"
   - "Engine/neo-world-network.adb:520:9          Recieve (Receive)       U       -- Recieve"
-  - "Engine/neo-world-network.adb:535:18         inet                    U       #include&lt;arpa/inet.h&gt;"
   - "Engine/neo-world-network.adb:538:9          BUFLEN                  U       #define BUFLEN 512 //Max length of"
   - "Engine/neo-world-network.adb:543:2          perror                  U       perror(s);"
   - "Engine/neo-world-network.adb:549:9          sockaddr                U       struct sockaddr_in si_me, si_other;"
   - "Engine/neo-world-network.adb:552:11         BUFLEN                  U       char buf[BUFLEN];"
-  - "Engine/neo-world-network.adb:555:19         INET                    U       if ((s=socket(AF_INET, SOCK_DGRAM, IPPROTO"
   - "Engine/neo-world-network.adb:555:30         DGRAM                   U       socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == -"
   - "Engine/neo-world-network.adb:555:37         IPPROTO                 U       AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == -1)"
-  - "Engine/neo-world-network.adb:563:24         INET                    U       si_me.sin_family = AF_INET;"
   - "Engine/neo-world-network.adb:564:19         htons                   U       si_me.sin_port = htons(PORT);"
   - "Engine/neo-world-network.adb:565:26         htonl                   U       me.sin_addr.s_addr = htonl(INADDR_ANY);"
   - "Engine/neo-world-network.adb:565:32         INADDR                  U       addr.s_addr = htonl(INADDR_ANY);"
@@ -1603,7 +1599,6 @@ issues:
   - "Engine/neo-world-network.adb:580:36         BUFLEN                  U       len = recvfrom(s, buf, BUFLEN, 0, (struct sockaddr"
   - "Engine/neo-world-network.adb:580:55         sockaddr                U       BUFLEN, 0, (struct sockaddr *) &amp;si_other, &amp"
   - "Engine/neo-world-network.adb:582:14         recvfrom                U       die(&quot;recvfrom()&quot;);"
-  - "Engine/neo-world-network.adb:586:52         inet                    U       from %s:%d\\n&quot;, inet_ntoa(si_other.sin_addr"
   - "Engine/neo-world-network.adb:586:57         ntoa                    U       %s:%d\\n&quot;, inet_ntoa(si_other.sin_addr),"
   - "Engine/neo-world-network.adb:586:82         ntohs                   U       si_other.sin_addr), ntohs(si_other.sin_port))"
   - "Engine/neo-world-network.adb:590:7          sendto                  U       if (sendto(s, buf, recv_len, 0"
@@ -1618,12 +1613,7 @@ issues:
   - "Engine/neo-world-network.adb:666:16         Netchan                 U       -- Netchan_TransmitNextFragment"
   - "Engine/neo-world-network.adb:666:55         netchan                 U       ransmitNextFragment( &client->netchan );"
   - "Engine/neo-world-network.adb:671:89         Netchan                 U       properly initialized in SV_Netchan_TransmitNextFragment"
-  - "Engine/neo-world-network.adb:675:38         netbuf                  U       netchan_buffer_t *netbuf;"
-  - "Engine/neo-world-network.adb:677:20         netbuf                  U       -- netbuf = client->netchan_start"
-  - "Engine/neo-world-network.adb:678:48         netbuf                  U       Netchan_Encode( client, &netbuf->msg );"
-  - "Engine/neo-world-network.adb:679:56         netbuf                  U       Transmit( &client->netchan, netbuf->msg.cursize, netbuf"
   - "Engine/neo-world-network.adb:679:68         cursize                 U       netchan, netbuf->msg.cursize, netbuf->msg.data )"
-  - "Engine/neo-world-network.adb:679:77         netbuf                  U       netbuf->msg.cursize, netbuf->msg.data );"
   - "Engine/neo-world-network.adb:692:36         MSGLEN                  U       byte msg_buf[MAX_MSGLEN];"
   - "Engine/neo-world-network.adb:698:29         gentity                 U       if ( client->gentity && client->gentity-"
   - "Engine/neo-world-network.adb:698:48         gentity                 U       >gentity && client->gentity->r.svFlags & SVF_BOT"

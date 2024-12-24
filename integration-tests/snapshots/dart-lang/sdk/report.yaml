@@ -4,8 +4,8 @@ Url: https://github.com/dart-lang/sdk
 Args: '["--issues-summary-report","--locale=en,en-GB","--exclude=tools/dom/**/*.json","--exclude=pkg/*/test/**","--exclude=**/*_data.*","--exclude=runtime/vm/**","--exclude=sdk/lib/html/**","--exclude=benchmarks/**","--exclude=**/*_test.*","--exclude=*/**/*.{json,yaml,yml}","--exclude=tests/corelib/regexp/**","--exclude=**/{third_party,assets}/**","**/*.{dart,md}"]'
 Summary:
   files: 10026
-  filesWithIssues: 1949
-  issues: 8921
+  filesWithIssues: 1947
+  issues: 8901
   errors: 0
 Errors: []
 
@@ -179,7 +179,6 @@ issues:
   - "pkg/_fe_analyzer_shared/lib/src/parser/parser_impl.dart:602:15      kallentu            U       // TODO(kallentu): Handle incorrect ordering"
   - "pkg/_fe_analyzer_shared/lib/src/parser/parser_impl.dart:1297:28     metadatum           U       metadata> ::= (‘@’ <metadatum>)*"
   - "pkg/_fe_analyzer_shared/lib/src/parser/parser_impl.dart:3718:34     dartbug             U       unless it's a late field (dartbug.com/40805)."
-  - "pkg/_fe_analyzer_shared/lib/src/parser/parser_impl.dart:4142:19     fieldname           U       // `this.<fieldname>=` is expected."
   - "pkg/_fe_analyzer_shared/lib/src/parser/parser_impl.dart:5760:15     srawlins            U       // TODO(srawlins): Add tests in analyzer"
   - "pkg/_fe_analyzer_shared/lib/src/parser/parser_impl.dart:5837:13     brianwilkerson      U       // TODO(brianwilkerson): If the next token"
   - "pkg/_fe_analyzer_shared/lib/src/parser/parser_impl.dart:8264:17     typeref             U       // found <typeref> `?` <identifier>"
@@ -650,7 +649,6 @@ issues:
   - "pkg/dart2js_info/bin/src/diff.dart:173:38       Siggi       U       Improve this output. Siggi has good suggestions"
   - "pkg/dart2js_info/bin/src/inject_text.dart:16:44         orignal     U       spans, but excludes the orignal text"
   - "pkg/dart2js_info/bin/src/live_code_size_analysis.dart:101:61        dumpinfo    U       stamp in the code and dumpinfo and"
-  - "pkg/dart2js_info/bin/src/to_binary.dart:33:9        outstream       U       var outstream = File(outputFilename"
   - "pkg/dart2js_info/lib/deferred_library_check.dart:23:15          zardoz      U       /// - zardoz"
   - "pkg/dart2js_info/lib/info.dart:29:57        treeshaken      U       compiler this component was treeshaken."
   - "pkg/dart2js_info/lib/proto_info_codec.dart:21:13        lorenvs     U       // TODO(lorenvs): Implement this conversion"
@@ -758,7 +756,6 @@ issues:
   - "pkg/dartdev/lib/src/processes.dart:276:7        csrss       U       // \"csrss.exe\",\"888\",\"Services"
   - "pkg/dartdev/lib/src/processes.dart:277:7        wininit     U       // \"wininit.exe\",\"628\",\"Services"
   - "pkg/dartdev/lib/src/resident_frontend_utils.dart:43:21          forgetten       U       /// the compiler be forgetten. The forgotten compiler"
-  - "pkg/dartdev/lib/src/templates/server_shelf.dart:92:22       myserver    U       $ docker build . -t myserver"
   - "pkg/dartdev/lib/src/templates/web.dart:38:35        webdev      U       pub global activate webdev\\n'"
   - "pkg/dartdev/lib/src/utils.dart:31:7         retval      U       int retval = 0;"
   - "pkg/dds/dds_protocol.md:24:9        Perfetto    U       - [getPerfettoVMTimeline](#getperfettovmtime"
@@ -1068,7 +1065,6 @@ issues:
   - "pkg/native_stack_traces/lib/src/macho.dart:342:20       CIGAM       U       static const _MH_CIGAM = 0xcefaedfe;"
   - "pkg/pkg.dart:21:9           sloc    U       var sloc = _calcLines(dir) /"
   - "pkg/record_use/README.md:31:20          leroyjenkins    U       @RecordMetadata('leroyjenkins')"
-  - "pkg/record_use/README.md:76:9           myfile          U       uri: 'myfile.dart',"
   - "pkg/record_use/test_data/drop_dylib_recording/README.md:8:66        dylib       U       record-use build bin/drop_dylib_recording_all.dart"
   - "pkg/reload_test/lib/ddc_helpers.dart:132:56         subapps     U       not support multiple subapps, so only \""
   - "pkg/reload_test/lib/ddc_helpers.dart:378:31         subapp      U       uuid that identifies a subapp. Unused for this framework"
@@ -1421,7 +1417,6 @@ issues:
   - "runtime/tools/dartfuzz/dartfuzz_api_table.dart:85:19        CLAMPEDLIST                         U       DartType.UINT8CLAMPEDLIST: uint8ClampedListLibs"
   - "runtime/tools/dartfuzz/dartfuzz_api_table.dart:117:34       STRINGBUFFER                        U       isEmpty', [DartType.STRINGBUFFER, DartType.VOID], false"
   - "runtime/tools/dartfuzz/dartfuzz_api_table.dart:247:30       RANGEERROR                          U       DartLib('end', [DartType.RANGEERROR, DartType.VOID], false"
-  - "runtime/tools/dartfuzz/dartfuzz_api_table.dart:1062:30      INDEXERROR                          U       DartLib('end', [DartType.INDEXERROR, DartType.VOID], false"
   - "runtime/tools/dartfuzz/dartfuzz_api_table.dart:1895:33      FORMATEXCEPTION                     U       'offset', [DartType.FORMATEXCEPTION, DartType.VOID], false"
   - "runtime/tools/dartfuzz/dartfuzz_api_table.dart:2010:34      STATEERROR                          U       message', [DartType.STATEERROR, DartType.VOID], false"
   - "runtime/tools/dartfuzz/dartfuzz_api_table.dart:2026:35      ARGUMENTERROR                       U       toString', [DartType.ARGUMENTERROR, DartType.VOID], true"
@@ -2634,7 +2629,6 @@ issuesSummary:
   - "text: FFFFFFFFFFFFFFFFGGGGGGGGGGGGGGGG, count: 1, files: 1,"
   - "text: ffiapi, count: 2, files: 2,"
   - "text: ffigen, count: 8, files: 3,"
-  - "text: fieldname, count: 1, files: 1,"
   - "text: fieldset, count: 1, files: 1,"
   - "text: FIELDSET, count: 2, files: 1,"
   - "text: figcaption, count: 1, files: 1,"
@@ -2835,7 +2829,6 @@ issuesSummary:
   - "text: indexables, count: 6, files: 4,"
   - "text: Indexables, count: 5, files: 1,"
   - "text: indexeddb, count: 1, files: 1,"
-  - "text: INDEXERROR, count: 11, files: 3,"
   - "text: indirectsymoff, count: 1, files: 1,"
   - "text: indx, count: 5, files: 1,"
   - "text: inexhaustive, count: 1, files: 1,"
@@ -3127,12 +3120,10 @@ issuesSummary:
   - "text: Multitests, count: 3, files: 3,"
   - "text: muncollected, count: 5, files: 1,"
   - "text: mycomputer, count: 2, files: 1,"
-  - "text: myfile, count: 3, files: 2,"
   - "text: myfunction, count: 2, files: 1,"
   - "text: mylib, count: 3, files: 3,"
   - "text: mylibrary, count: 2, files: 1,"
   - "text: mypkg, count: 1, files: 1,"
-  - "text: myserver, count: 2, files: 1,"
   - "text: mysuite, count: 2, files: 1,"
   - "text: mytestsuite, count: 4, files: 1,"
   - "text: mytimeline, count: 2, files: 1,"
@@ -3309,7 +3300,6 @@ issuesSummary:
   - "text: outdent, count: 5, files: 1,"
   - "text: outform, count: 1, files: 1,"
   - "text: Outputter, count: 2, files: 1,"
-  - "text: outstream, count: 3, files: 1,"
   - "text: ovalue, count: 2, files: 1,"
   - "text: Overallocate, count: 1, files: 1,"
   - "text: overapproximates, count: 1, files: 1,"

@@ -5,7 +5,7 @@ Args: '["--config=${repoConfig}/cspell.json","**/*.{md,c,h,html}"]'
 Summary:
   files: 583
   filesWithIssues: 577
-  issues: 32851
+  issues: 32833
   errors: 0
 Errors: []
 
@@ -3971,7 +3971,6 @@ issues:
   - "ATTIC/src/system/bbsgetty/bbsgetty.h:82:11          GTAB                    U       #define D_GTAB 0x10 /* gettydefs"
   - "ATTIC/src/system/bbsgetty/bbsgetty.h:82:26          gettydefs               U       define D_GTAB 0x10 /* gettydefs-like LINETYPE processing"
   - "ATTIC/src/system/bbsgetty/bbsgetty.h:83:11          GETL                    U       #define D_GETL 0x20 /* get login"
-  - "ATTIC/src/system/bbsgetty/bbsgetty.h:200:13         autorate                U       extern char autorate[256];"
   - "ATTIC/src/system/bbsgetty/bbsgetty.h:224:12         nohangup                U       extern int nohangup;"
   - "ATTIC/src/system/bbsgetty/bbsgetty.h:227:12         lockedbaud              U       extern int lockedbaud;"
   - "ATTIC/src/system/bbsgetty/bbsgetty.h:228:12         reportedlinespeed       U       extern int reportedlinespeed;"
@@ -4180,7 +4179,6 @@ issues:
   - "ATTIC/src/system/daemons/statd/statd.c:387:1        readbaudstats       U       readbaudstats ()"
   - "ATTIC/src/system/daemons/statd/statd.c:419:1        writebaudstats      U       writebaudstats ()"
   - "ATTIC/src/system/daemons/statd/statd.c:455:17       BAUDSTAT            U       debug2 (\"FOUND BAUDSTAT: %ld\\n\", baud);"
-  - "ATTIC/src/system/daemons/statd/statd.c:752:42       saverate            U       savecount + 1) % sysvar->saverate;"
   - "ATTIC/src/system/events/bbsshutdown/bbsshutdown.c:3:16          bbsshutdown         U       ** FILE: bbsshutdown.c"
   - "ATTIC/src/system/events/bbsshutdown/bbsshutdown.c:10:16         Bbsshutdown         U       ** Bbsshutdown does exactly this: forces"
   - "ATTIC/src/system/events/bbsshutdown/bbsshutdown.c:11:19         onsole              U       ** (C)onsole lines (defined in /bbs"
@@ -4311,7 +4309,6 @@ issues:
   - "ATTIC/src/tools/updown/download.c:121:19        xferlist        U       prompt (DNLHDR, xferlist[firstentry].filename"
   - "ATTIC/src/tools/updown/download.c:146:37        xfertagged      U       DNLFTR, msg_getunit (YES, xfertagged));"
   - "ATTIC/src/tools/updown/download.c:147:47        numtagged       U       NUMFILES, xfertagged ? 0 : numtagged);"
-  - "ATTIC/src/tools/updown/download.c:196:10        filesleft       U       int filesleft = 0, i;"
   - "ATTIC/src/tools/updown/download.c:208:54        cmdok           U       AUDIT) && xferlist[i].cmdok[0]){"
   - "ATTIC/src/tools/updown/download.c:222:20        auditsok        U       if (xferlist[i].auditsok[0] && xferlist[i].auditdok"
   - "ATTIC/src/tools/updown/download.c:222:47        auditdok        U       auditsok[0] && xferlist[i].auditdok[0]) {"

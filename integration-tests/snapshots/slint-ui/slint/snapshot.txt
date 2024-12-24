@@ -3,7 +3,7 @@ Repository: slint-ui/slint
 Url: "https://github.com/slint-ui/slint"
 Args: ["--config=../../../../repositories/config/slint/cspell.config.yaml","--issues-summary-report","."]
 Lines:
- CSpell: Files checked: 1954, Issues found: 3709 in 680 files.
+ CSpell: Files checked: 1954, Issues found: 3681 in 677 files.
  exit code: 1
 CMakeLists.txt:17:14     - Unknown word (TOPLEVEL)   -- set(SLINT_IS_TOPLEVEL_BUILD TRUE)
 CMakeLists.txt:27:31     - Unknown word (dylib's)    -- macOS, the slint_cpp.dylib's install_name uses @rpath
@@ -704,11 +704,6 @@ demos/printerdemo/ui/fonts/convert.sh:8:24      - Unknown word (pyftsubset) -- Y
 demos/printerdemo/ui/fonts/convert.sh:8:46      - Unknown word (fonttools)  -- pyftsubset` from the `fonttools`. That's available via
 demos/printerdemo/ui/fonts/convert.sh:8:93      - Unknown word (fonttools)  -- available via `brew install fonttools`,
 demos/printerdemo/ui/fonts/convert.sh:9:28      - Unknown word (fonttools)  -- sudo apt-get install fonttools`.
-demos/printerdemo/ui/home_page.slint:53:39     - Unknown word (subpage)    -- property <SubPage> current-subpage: SubPage.None;
-demos/printerdemo/ui/home_page.slint:70:35     - Unknown word (subpage)    -- clicked => { root.current-subpage = action.id; }
-demos/printerdemo/ui/home_page.slint:75:26     - Unknown word (subpage)    -- root.current-subpage = SubPage.Print;
-demos/printerdemo/ui/home_page.slint:83:32     - Unknown word (subpage)    -- back => { root.current-subpage = SubPage.None; }
-demos/printerdemo/ui/home_page.slint:84:25     - Unknown word (subpage)    -- x: root.current-subpage == SubPage.Print ?
 demos/printerdemo/ui/images/cat.jpg.license:1:30      - Unknown word (zaimoku)    -- FileCopyrightText: 2013 zaimoku_woodpile <https://www
 demos/printerdemo/ui/printer_queue.slint:19:38     - Unknown word (Adressliste) -- "waiting", title: "Adressliste.docx", owner: "info
 demos/printerdemo/ui/printerdemo.slint:13:17     - Unknown word (Noto)       -- import "./fonts/NotoSans-Regular.ttf";
@@ -773,11 +768,6 @@ demos/printerdemo_mcu/esp-idf/sdkconfig.defaults:4:8       - Unknown word (ESPTO
 demos/printerdemo_mcu/esp-idf/sdkconfig.defaults:8:8       - Unknown word (SPIRAM)     -- CONFIG_SPIRAM=y
 demos/printerdemo_mcu/esp-idf/sdkconfig.defaults:9:8       - Unknown word (SPIRAM)     -- CONFIG_SPIRAM_MODE_OCT=y
 demos/printerdemo_mcu/ui/README:1:36      - Unknown word (Grimme)     -- designed by Matthias Grimme.
-demos/printerdemo_mcu/ui/home_page.slint:49:35     - Unknown word (subpage)    -- property <int> current-subpage: 0;
-demos/printerdemo_mcu/ui/home_page.slint:58:35     - Unknown word (subpage)    -- clicked => { root.current-subpage = idx + 1; }
-demos/printerdemo_mcu/ui/home_page.slint:75:32     - Unknown word (subpage)    -- back => { root.current-subpage = 0 }
-demos/printerdemo_mcu/ui/home_page.slint:76:25     - Unknown word (subpage)    -- x: root.current-subpage == 2 ? 0 : parent.width
-demos/printerdemo_mcu/ui/home_page.slint:81:32     - Unknown word (subpage)    -- back => { root.current-subpage = 0 }
 demos/printerdemo_mcu/ui/printer_queue.slint:24:46     - Unknown word (Adressliste) -- JobStatus.Waiting, title: "Adressliste.docx", owner: "info
 demos/printerdemo_mcu/ui/scan_page.slint:43:48     - Unknown word (YCMB)       -- Grayscale", "RGB", "YCMB"];
 demos/weather-demo/README.md:11:48     - Unknown word (Felgo)      -- application made by [Felgo](https://felgo.com/
@@ -1092,7 +1082,6 @@ examples/cpp/platform_native/README.md:6:4       - Unknown word (appview)    -- 
 examples/cpp/platform_native/README.md:8:4       - Unknown word (appview)    -- - appview.cpp is the implementation
 examples/cpp/platform_native/README.md:9:4       - Unknown word (windowadapter) -- - windowadapter_win.h contains the glue
 examples/cpp/platform_native/appview.cpp:12:15     - Unknown word (windowadapter) -- # include "windowadapter_win.h"
-examples/cpp/platform_native/main.cpp:17:14     - Unknown word (hbutton)    -- HWND hbutton = CreateWindow(
 examples/cpp/platform_native/main.cpp:22:18     - Unknown word (HMENU)      -- (HMENU)THE_BUTTON_ID, /* unique
 examples/cpp/platform_native/main.cpp:23:70     - Unknown word (hinst)      -- GetModuleHandle(0) gets the hinst */
 examples/cpp/platform_native/main.cpp:30:22     - Unknown word (LOWORD)     -- UINT width = LOWORD(lp);
@@ -1152,16 +1141,6 @@ examples/ffmpeg/README.md:25:15     - Unknown word (VCPKG)      -- - Make sure `
 examples/ffmpeg/README.md:25:44     - Unknown word (vcpkg)      -- ROOT` is set to where `vcpkg` is installed
 examples/ffmpeg/README.md:26:16     - Unknown word (VCPKG)      -- - Make sure `%VCPKG_ROOT%\installed\x64
 examples/ffmpeg/README.md:9:42      - Unknown word (alsa)       -- to install ffmpeg and alsa. For example on Debian
-examples/ffmpeg/main.rs:13:21     - Unknown word (rescaler)   -- let mut to_rgba_rescaler: Option<Rescaler> =
-examples/ffmpeg/main.rs:13:38     - Unknown word (Rescaler)   -- rgba_rescaler: Option<Rescaler> = None;
-examples/ffmpeg/main.rs:23:29     - Unknown word (rescaler)   -- let rebuild_rescaler =
-examples/ffmpeg/main.rs:24:29     - Unknown word (rescaler)   -- to_rgba_rescaler.as_ref().map_or(true
-examples/ffmpeg/main.rs:24:70     - Unknown word (rescaler)   -- map_or(true, |existing_rescaler| {
-examples/ffmpeg/main.rs:25:34     - Unknown word (rescaler)   -- existing_rescaler.input().format != new
-examples/ffmpeg/main.rs:64:8      - Unknown word (Rescaler)   -- struct Rescaler(ffmpeg_next::software
-examples/ffmpeg/main.rs:65:35     - Unknown word (Rescaler)   -- std::marker::Send for Rescaler {}
-examples/ffmpeg/main.rs:67:72     - Unknown word (Rescaler)   -- util::frame::Video) -> Rescaler {
-examples/ffmpeg/main.rs:68:5      - Unknown word (Rescaler)   -- Rescaler(
 examples/ffmpeg/player.rs:114:13    - Unknown word (demuxer)    -- demuxer_thread: Some(demuxer
 examples/ffmpeg/player.rs:114:34    - Unknown word (demuxer)    -- demuxer_thread: Some(demuxer_thread),
 examples/ffmpeg/player.rs:19:5      - Unknown word (demuxer)    -- demuxer_thread: Option<std:
@@ -1409,8 +1388,6 @@ examples/mcu-board-support/stm32h735g.rs:85:33     - Unknown word (SYSCFG)     -
 examples/mcu-board-support/stm32h735g.rs:87:20     - Unknown word (ccdr)       -- assert_eq!(ccdr.clocks.hclk(), 200.MHz
 examples/mcu-board-support/stm32h735g.rs:87:32     - Unknown word (hclk)       -- assert_eq!(ccdr.clocks.hclk(), 200.MHz::<1, 1>(
 examples/mcu-board-support/stm32h735g.rs:89:45     - Unknown word (ccdr)       -- Delay::new(cp.SYST, ccdr.clocks);
-examples/mcu-board-support/stm32h735g.rs:91:27     - Unknown word (icache)     -- cp.SCB.invalidate_icache();
-examples/mcu-board-support/stm32h735g.rs:92:23     - Unknown word (icache)     -- cp.SCB.enable_icache();
 examples/mcu-board-support/stm32h735g.rs:93:23     - Unknown word (dcache)     -- cp.SCB.enable_dcache(&mut cp.CPUID);
 examples/mcu-board-support/stm32h735g.rs:93:38     - Unknown word (CPUID)      -- enable_dcache(&mut cp.CPUID);
 examples/mcu-board-support/stm32h735g.rs:96:13     - Unknown word (gpioa)      -- let gpioa = dp.GPIOA.split(ccdr
@@ -1816,9 +1793,6 @@ internal/backends/selector/lib.rs:59:44     - Unknown word (linuxkms)   -- featu
 internal/backends/testing/build.rs:13:14     - Unknown word (dont)       -- .dont_use_cow(true);
 internal/backends/testing/build.rs:9:26      - Unknown word (systest)    -- .join("slint_systest.proto");
 internal/backends/testing/lib.rs:19:9      - Unknown word (systest)    -- pub mod systest;
-internal/backends/testing/search_api.rs:347:12    - Unknown word (mybutton)   -- /// mybutton := PushButton { } /
-internal/backends/testing/search_api.rs:382:12    - Unknown word (mybutton)   -- /// mybutton := PushButton { }
-internal/backends/testing/search_api.rs:420:12    - Unknown word (mybutton)   -- /// mybutton := PushButton { }
 internal/backends/testing/search_api.rs:676:30    - Unknown word (multipled)  -- the opacity property multipled with any opacity specified
 internal/backends/testing/search_api.rs:696:103   - Unknown word (spinboxes)  -- On widgets such as spinboxes, this
 internal/backends/testing/search_api.rs:707:103   - Unknown word (spinboxes)  -- On widgets such as spinboxes, this
@@ -3226,8 +3200,6 @@ tests/cases/elements/toucharea.slint:165:14    - Unknown word (moveother)       
 tests/cases/elements/toucharea.slint:166:57    - Unknown word (moveotherdownleftclickupleftmoveother) -- event_test().as_str(), "moveotherdownleftclickupleftmoveother");
 tests/cases/elements/toucharea.slint:169:47    - Unknown word (toucharea)                             -- anywhere, release on a toucharea
 tests/cases/elements/toucharea.slint:173:57    - Unknown word (moveotherupleft)                       -- event_test().as_str(), "moveotherupleft"); // no "clicked"
-tests/cases/elements/toucharea.slint:184:57    - Unknown word (downleft)                              -- event_test().as_str(), "downleft(ctrl)clickupleft(shift
-tests/cases/elements/toucharea.slint:184:71    - Unknown word (clickupleft)                           -- str(), "downleft(ctrl)clickupleft(shift)moveother(shift
 tests/cases/elements/toucharea.slint:184:89    - Unknown word (moveother)                             -- ctrl)clickupleft(shift)moveother(shift)");
 tests/cases/elements/toucharea.slint:199:57    - Unknown word (moveother)                             -- event_test().as_str(), "moveother");
 tests/cases/elements/toucharea.slint:201:57    - Unknown word (moveotherdownleft)                     -- event_test().as_str(), "moveotherdownleft");

@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: [".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 2038, Issues found: 1646 in 304 files.
+ CSpell: Files checked: 2038, Issues found: 1635 in 303 files.
  exit code: 1
 Makefile.js:128:88    - Unknown word (ined)       -- followed by the string "ined".
 Makefile.js:344:12    - Unknown word (gensite)    -- target.gensite();
@@ -167,7 +167,6 @@ docs/src/static/sitemap.njk:11:14     - Unknown word (lastmod)    -- <lastmod>{{
 docs/src/static/sitemap.njk:12:14     - Unknown word (changefreq) -- <changefreq>{{ page.data.changeFreq
 docs/src/static/sitemap.njk:7:2       - Unknown word (urlset)     -- <urlset xmlns="http://www.sitemaps
 docs/src/use/command-line-interface.md:301:68    - Unknown word (levn)       -- configuration specified with [levn](https://github.com
-docs/src/use/command-line-interface.md:452:5     - Unknown word (myfile)     -- cat myfile.js | npx eslint --stdin
 docs/src/use/command-line-interface.md:548:17    - Unknown word (customformat) -- npx eslint -f ./customformat.js file.js
 docs/src/use/configure/configuration-files-deprecated.md:39:25     - Unknown word (myfiletotest) -- eslint -c myconfig.json myfiletotest.js
 docs/src/use/configure/debug.md:28:44     - Unknown word (nzakas)     -- config from C:\Users\nzakas\projects\eslint\eslint
@@ -190,9 +189,7 @@ docs/src/use/getting-started.md:101:268   - Unknown word (npmjs)      -- "eslint
 docs/src/use/getting-started.md:50:12     - Unknown word (yourfile)   -- npx eslint yourfile.js
 docs/src/use/integrations.md:22:8      - Unknown word (Syntastic)  -- * [Syntastic](https://github.com
 docs/src/use/integrations.md:23:11     - Unknown word (Flycheck)   -- * Emacs: [Flycheck](http://www.flycheck
-docs/src/use/integrations.md:50:4      - Unknown word (overcommit) -- * [overcommit Git hook manager](https
 docs/src/use/migrate-to-8.0.0.md:228:20    - Unknown word (cliengine)  -- ## <a name="remove-cliengine"></a> The `CLIEngine
-docs/src/use/migrate-to-9.0.0.md:487:21    - Unknown word (sourcecode) -- ## <a name="removed-sourcecode-getcomments"></a> Removed
 docs/src/use/migrate-to-9.0.0.md:487:32    - Unknown word (getcomments) -- "removed-sourcecode-getcomments"></a> Removed `sourceCode
 docs/src/use/migrate-to-9.0.0.md:495:30    - Unknown word (currentsegments) -- name="removed-codepath-currentsegments"></a> Removed `CodePath
 docs/src/use/migrating-from-jscs.md:12:111    - Unknown word (jscsrs)     -- .jscsrc.yaml`, or `.jscsrs.js`. In ESLint, the
@@ -395,7 +392,6 @@ tests/lib/rules/object-shorthand.js:22:7      - Unknown word (LONGFORM)   -- con
 tests/lib/rules/prefer-arrow-callback.js:232:27    - Unknown word (amet)       -- dolor sit amet. */ {
 tests/lib/rules/prefer-object-spread.js:212:112   - Unknown word (butwhy)     -- {}, { superNested: 'butwhy' })))",
 tests/lib/rules/prefer-object-spread.js:699:39    - Unknown word (somethingelse) -- import { Something as somethingelse } from 'foo';
-tests/lib/rules/prefer-regex-literals.js:1625:65   - Unknown word (blahblah)   -- instanceof RegExp(String.raw`blahblah`, 'g') ? typeof new
 tests/lib/rules/prefer-regex-literals.js:1657:36   - Unknown word (someregular) -- code: "[   new RegExp(`someregular`)]",
 tests/lib/rules/prefer-regex-literals.js:1685:191  - Unknown word (notregbutstring) -- new RegExp('abc') : 'notregbutstring'",
 tests/lib/rules/prefer-regex-literals.js:2633:62   - Unknown word (avalue)          -- condition2) new RegExp('avalue').test(str);",

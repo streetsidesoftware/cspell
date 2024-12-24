@@ -3,7 +3,7 @@ Repository: php/php-src
 Url: "https://github.com/php/php-src.git"
 Args: ["--config=../../../../config/repositories/php/php-src/cspell.json","**/*.{md,c,h,php}"]
 Lines:
- CSpell: Files checked: 2213, Issues found: 26088 in 1518 files.
+ CSpell: Files checked: 2213, Issues found: 26070 in 1517 files.
  exit code: 1
 CODING_STANDARDS.md:101:23    - Unknown word (intvl)      -- // Could be 'date_intvl_create_from_date_str
 CODING_STANDARDS.md:110:8     - Unknown word (setclientencoding) -- pg_setclientencoding
@@ -2521,8 +2521,8 @@ ext/curl/curl.stub.php:1163:17   - Unknown word (TIMECOND)             -- * @cva
 ext/curl/curl.stub.php:1163:26   - Unknown word (IFMODSINCE)           -- cvalue CURL_TIMECOND_IFMODSINCE
 ext/curl/curl.stub.php:1165:12   - Unknown word (TIMECOND)             -- const CURL_TIMECOND_IFMODSINCE = UNKNOWN
 ext/curl/curl.stub.php:1165:21   - Unknown word (IFMODSINCE)           -- const CURL_TIMECOND_IFMODSINCE = UNKNOWN;
-ext/curl/curl.stub.php:1168:17   - Unknown word (TIMECOND)            -- * @cvalue CURL_TIMECOND_IFUNMODSINCE
-ext/curl/curl.stub.php:1168:26   - Unknown word (IFUNMODSINCE)        -- cvalue CURL_TIMECOND_IFUNMODSINCE
+ext/curl/curl.stub.php:1168:17   - Unknown word (TIMECOND)             -- * @cvalue CURL_TIMECOND_IFUNMODSINCE
+ext/curl/curl.stub.php:1168:26   - Unknown word (IFUNMODSINCE)         -- cvalue CURL_TIMECOND_IFUNMODSINCE
 ext/curl/curl.stub.php:1170:12   - Unknown word (TIMECOND)            -- const CURL_TIMECOND_IFUNMODSINCE = UNKNOWN
 ext/curl/curl.stub.php:1170:21   - Unknown word (IFUNMODSINCE)        -- const CURL_TIMECOND_IFUNMODSINCE = UNKNOWN;
 ext/curl/curl.stub.php:1173:26   - Unknown word (LASTMOD)             -- cvalue CURL_TIMECOND_LASTMOD
@@ -2561,8 +2561,6 @@ ext/curl/curl.stub.php:1280:16   - Unknown word (GSSNEGOTIATE)        -- const C
 ext/curl/curl.stub.php:1288:21   - Unknown word (NTLM)                -- * @cvalue CURLAUTH_NTLM
 ext/curl/curl.stub.php:128:20    - Unknown word (FTPLISTONLY)    -- * @cvalue CURLOPT_FTPLISTONLY
 ext/curl/curl.stub.php:1290:16   - Unknown word (NTLM)                -- const CURLAUTH_NTLM = UNKNOWN;
-ext/curl/curl.stub.php:1295:26   - Unknown word (CONNECTCODE)         -- cvalue CURLINFO_HTTP_CONNECTCODE
-ext/curl/curl.stub.php:1297:21   - Unknown word (CONNECTCODE)         -- const CURLINFO_HTTP_CONNECTCODE = UNKNOWN;
 ext/curl/curl.stub.php:1305:20   - Unknown word (PROXYAUTH)           -- * @cvalue CURLOPT_PROXYAUTH
 ext/curl/curl.stub.php:1307:15   - Unknown word (PROXYAUTH)           -- const CURLOPT_PROXYAUTH = UNKNOWN;
 ext/curl/curl.stub.php:130:15    - Unknown word (FTPLISTONLY)    -- const CURLOPT_FTPLISTONLY = UNKNOWN;
@@ -2584,13 +2582,13 @@ ext/curl/curl.stub.php:1382:7    - Unknown word (CURLFTPSSL)          -- const C
 ext/curl/curl.stub.php:1385:12   - Unknown word (CURLFTPSSL)          -- * @cvalue CURLFTPSSL_CONTROL
 ext/curl/curl.stub.php:1387:7    - Unknown word (CURLFTPSSL)          -- const CURLFTPSSL_CONTROL = UNKNOWN;
 ext/curl/curl.stub.php:138:28    - Unknown word (EPRT)           -- cvalue CURLOPT_FTP_USE_EPRT
-ext/curl/curl.stub.php:1390:12   - Unknown word (CURLFTPSSL)         -- * @cvalue CURLFTPSSL_NONE
+ext/curl/curl.stub.php:1390:12   - Unknown word (CURLFTPSSL)          -- * @cvalue CURLFTPSSL_NONE
 ext/curl/curl.stub.php:13:15     - Unknown word (AUTOREFERER) -- const CURLOPT_AUTOREFERER = UNKNOWN;
 ext/curl/curl.stub.php:13:7      - Unknown word (CURLOPT)     -- const CURLOPT_AUTOREFERER = UNKNOWN
 ext/curl/curl.stub.php:140:23    - Unknown word (EPRT)           -- const CURLOPT_FTP_USE_EPRT = UNKNOWN;
-ext/curl/curl.stub.php:1412:20   - Unknown word (MAXFILESIZE)        -- * @cvalue CURLOPT_MAXFILESIZE_LARGE
-ext/curl/curl.stub.php:1414:15   - Unknown word (MAXFILESIZE)        -- const CURLOPT_MAXFILESIZE_LARGE = UNKNOWN;
-ext/curl/curl.stub.php:1426:12   - Unknown word (CURLFTPAUTH)        -- * @cvalue CURLFTPAUTH_DEFAULT
+ext/curl/curl.stub.php:1412:20   - Unknown word (MAXFILESIZE)         -- * @cvalue CURLOPT_MAXFILESIZE_LARGE
+ext/curl/curl.stub.php:1414:15   - Unknown word (MAXFILESIZE)         -- const CURLOPT_MAXFILESIZE_LARGE = UNKNOWN;
+ext/curl/curl.stub.php:1426:12   - Unknown word (CURLFTPAUTH)         -- * @cvalue CURLFTPAUTH_DEFAULT
 ext/curl/curl.stub.php:1428:7    - Unknown word (CURLFTPAUTH)        -- const CURLFTPAUTH_DEFAULT = UNKNOWN;
 ext/curl/curl.stub.php:1431:12   - Unknown word (CURLFTPAUTH)        -- * @cvalue CURLFTPAUTH_SSL
 ext/curl/curl.stub.php:1433:7    - Unknown word (CURLFTPAUTH)        -- const CURLFTPAUTH_SSL = UNKNOWN;
@@ -2652,11 +2650,11 @@ ext/curl/curl.stub.php:170:15    - Unknown word (HTTPHEADER)     -- const CURLOP
 ext/curl/curl.stub.php:1723:12   - Unknown word (CURLPAUSE)          -- * @cvalue CURLPAUSE_ALL
 ext/curl/curl.stub.php:1725:7    - Unknown word (CURLPAUSE)          -- const CURLPAUSE_ALL = UNKNOWN;
 ext/curl/curl.stub.php:1728:12   - Unknown word (CURLPAUSE)          -- * @cvalue CURLPAUSE_CONT
-ext/curl/curl.stub.php:1730:7    - Unknown word (CURLPAUSE)         -- const CURLPAUSE_CONT = UNKNOWN;
-ext/curl/curl.stub.php:1733:12   - Unknown word (CURLPAUSE)         -- * @cvalue CURLPAUSE_RECV
+ext/curl/curl.stub.php:1730:7    - Unknown word (CURLPAUSE)          -- const CURLPAUSE_CONT = UNKNOWN;
+ext/curl/curl.stub.php:1733:12   - Unknown word (CURLPAUSE)          -- * @cvalue CURLPAUSE_RECV
 ext/curl/curl.stub.php:173:20    - Unknown word (HTTPPROXYTUNNEL) -- * @cvalue CURLOPT_HTTPPROXYTUNNEL
-ext/curl/curl.stub.php:1753:17   - Unknown word (READFUNC)          -- * @cvalue CURL_READFUNC_PAUSE
-ext/curl/curl.stub.php:1755:12   - Unknown word (READFUNC)          -- const CURL_READFUNC_PAUSE = UNKNOWN;
+ext/curl/curl.stub.php:1753:17   - Unknown word (READFUNC)           -- * @cvalue CURL_READFUNC_PAUSE
+ext/curl/curl.stub.php:1755:12   - Unknown word (READFUNC)           -- const CURL_READFUNC_PAUSE = UNKNOWN;
 ext/curl/curl.stub.php:1758:17   - Unknown word (WRITEFUNC)         -- * @cvalue CURL_WRITEFUNC_PAUSE
 ext/curl/curl.stub.php:175:15    - Unknown word (HTTPPROXYTUNNEL) -- const CURLOPT_HTTPPROXYTUNNEL = UNKNOWN;
 ext/curl/curl.stub.php:1760:12   - Unknown word (WRITEFUNC)         -- const CURL_WRITEFUNC_PAUSE = UNKNOWN;
@@ -2721,10 +2719,10 @@ ext/curl/curl.stub.php:2044:19   - Unknown word (KNOWNHOSTS)        -- const CUR
 ext/curl/curl.stub.php:2047:12   - Unknown word (CURLKHMATCH)       -- * @cvalue CURLKHMATCH_OK
 ext/curl/curl.stub.php:2049:7    - Unknown word (CURLKHMATCH)       -- const CURLKHMATCH_OK = UNKNOWN;
 ext/curl/curl.stub.php:2052:12   - Unknown word (CURLKHMATCH)       -- * @cvalue CURLKHMATCH_MISMATCH
-ext/curl/curl.stub.php:2054:7    - Unknown word (CURLKHMATCH)      -- const CURLKHMATCH_MISMATCH = UNKNOWN;
-ext/curl/curl.stub.php:2057:12   - Unknown word (CURLKHMATCH)      -- * @cvalue CURLKHMATCH_MISSING
-ext/curl/curl.stub.php:2069:21   - Unknown word (RTSP)             -- * @cvalue CURLINFO_RTSP_CLIENT_CSEQ
-ext/curl/curl.stub.php:2069:33   - Unknown word (CSEQ)             -- CURLINFO_RTSP_CLIENT_CSEQ
+ext/curl/curl.stub.php:2054:7    - Unknown word (CURLKHMATCH)       -- const CURLKHMATCH_MISMATCH = UNKNOWN;
+ext/curl/curl.stub.php:2057:12   - Unknown word (CURLKHMATCH)       -- * @cvalue CURLKHMATCH_MISSING
+ext/curl/curl.stub.php:2069:21   - Unknown word (RTSP)              -- * @cvalue CURLINFO_RTSP_CLIENT_CSEQ
+ext/curl/curl.stub.php:2069:33   - Unknown word (CSEQ)              -- CURLINFO_RTSP_CLIENT_CSEQ
 ext/curl/curl.stub.php:2071:16   - Unknown word (RTSP)             -- const CURLINFO_RTSP_CLIENT_CSEQ = UNKNOWN
 ext/curl/curl.stub.php:2071:28   - Unknown word (CSEQ)             -- CURLINFO_RTSP_CLIENT_CSEQ = UNKNOWN;
 ext/curl/curl.stub.php:2074:21   - Unknown word (RTSP)             -- * @cvalue CURLINFO_RTSP_CSEQ_RECV
@@ -2801,11 +2799,11 @@ ext/curl/curl.stub.php:2576:15   - Unknown word (PINNEDPUBLICKEY)  -- const CURL
 ext/curl/curl.stub.php:258:20    - Unknown word (POSTQUOTE)       -- * @cvalue CURLOPT_POSTQUOTE
 ext/curl/curl.stub.php:2590:22   - Unknown word (SMBS)             -- * @cvalue CURLPROTO_SMBS
 ext/curl/curl.stub.php:2592:17   - Unknown word (SMBS)             -- const CURLPROTO_SMBS = UNKNOWN;
-ext/curl/curl.stub.php:2606:24   - Unknown word (VERIFYSTATUS)    -- @cvalue CURLOPT_SSL_VERIFYSTATUS
-ext/curl/curl.stub.php:2608:19   - Unknown word (VERIFYSTATUS)    -- const CURLOPT_SSL_VERIFYSTATUS = UNKNOWN;
+ext/curl/curl.stub.php:2606:24   - Unknown word (VERIFYSTATUS)     -- @cvalue CURLOPT_SSL_VERIFYSTATUS
+ext/curl/curl.stub.php:2608:19   - Unknown word (VERIFYSTATUS)     -- const CURLOPT_SSL_VERIFYSTATUS = UNKNOWN;
 ext/curl/curl.stub.php:260:15    - Unknown word (POSTQUOTE)       -- const CURLOPT_POSTQUOTE = UNKNOWN;
-ext/curl/curl.stub.php:2617:24   - Unknown word (FALSESTART)      -- @cvalue CURLOPT_SSL_FALSESTART
-ext/curl/curl.stub.php:2619:19   - Unknown word (FALSESTART)      -- const CURLOPT_SSL_FALSESTART = UNKNOWN;
+ext/curl/curl.stub.php:2617:24   - Unknown word (FALSESTART)       -- @cvalue CURLOPT_SSL_FALSESTART
+ext/curl/curl.stub.php:2619:19   - Unknown word (FALSESTART)       -- const CURLOPT_SSL_FALSESTART = UNKNOWN;
 ext/curl/curl.stub.php:2629:20   - Unknown word (PIPEWAIT)        -- * @cvalue CURLOPT_PIPEWAIT
 ext/curl/curl.stub.php:2631:15   - Unknown word (PIPEWAIT)        -- const CURLOPT_PIPEWAIT = UNKNOWN;
 ext/curl/curl.stub.php:263:20    - Unknown word (PREQUOTE)        -- * @cvalue CURLOPT_PREQUOTE
@@ -2858,12 +2856,8 @@ ext/curl/curl.stub.php:3024:21   - Unknown word (APPCONNECT)      -- * @cvalue C
 ext/curl/curl.stub.php:3026:16   - Unknown word (APPCONNECT)      -- const CURLINFO_APPCONNECT_TIME_T = UNKNOWN;
 ext/curl/curl.stub.php:3034:21   - Unknown word (NAMELOOKUP)      -- * @cvalue CURLINFO_NAMELOOKUP_TIME_T
 ext/curl/curl.stub.php:3036:16   - Unknown word (NAMELOOKUP)      -- const CURLINFO_NAMELOOKUP_TIME_T = UNKNOWN;
-ext/curl/curl.stub.php:3039:21   - Unknown word (PRETRANSFER)     -- * @cvalue CURLINFO_PRETRANSFER_TIME_T
-ext/curl/curl.stub.php:3041:16   - Unknown word (PRETRANSFER)     -- const CURLINFO_PRETRANSFER_TIME_T = UNKNOWN;
 ext/curl/curl.stub.php:3049:21   - Unknown word (STARTTRANSFER)   -- * @cvalue CURLINFO_STARTTRANSFER_TIME_T
 ext/curl/curl.stub.php:3051:16   - Unknown word (STARTTRANSFER)   -- const CURLINFO_STARTTRANSFER_TIME_T = UNKNOWN;
-ext/curl/curl.stub.php:3060:21   - Unknown word (POSTTRANSFER)    -- * @cvalue CURLINFO_POSTTRANSFER_TIME_T
-ext/curl/curl.stub.php:3062:16   - Unknown word (POSTTRANSFER)    -- const CURLINFO_POSTTRANSFER_TIME_T = UNKNOWN;
 ext/curl/curl.stub.php:3093:27   - Unknown word (BUFFERSIZE)      -- cvalue CURLOPT_UPLOAD_BUFFERSIZE
 ext/curl/curl.stub.php:3095:22   - Unknown word (BUFFERSIZE)      -- const CURLOPT_UPLOAD_BUFFERSIZE = UNKNOWN;
 ext/curl/curl.stub.php:3109:12   - Unknown word (CURLALTSVC)      -- * @cvalue CURLALTSVC_H1
@@ -2926,10 +2920,10 @@ ext/curl/curl.stub.php:34:15     - Unknown word (CAPATH)         -- const CURLOP
 ext/curl/curl.stub.php:3507:28   - Unknown word (VERIFYHOST)      -- cvalue CURLOPT_DOH_SSL_VERIFYHOST
 ext/curl/curl.stub.php:3512:28   - Unknown word (VERIFYPEER)      -- cvalue CURLOPT_DOH_SSL_VERIFYPEER
 ext/curl/curl.stub.php:3517:28   - Unknown word (VERIFYSTATUS)    -- cvalue CURLOPT_DOH_SSL_VERIFYSTATUS
-ext/curl/curl.stub.php:3519:23   - Unknown word (VERIFYSTATUS)   -- const CURLOPT_DOH_SSL_VERIFYSTATUS = UNKNOWN;
-ext/curl/curl.stub.php:3522:25   - Unknown word (GSASL)          -- cvalue CURL_VERSION_GSASL
-ext/curl/curl.stub.php:3524:20   - Unknown word (GSASL)          -- const CURL_VERSION_GSASL = UNKNOWN;
-ext/curl/curl.stub.php:3548:20   - Unknown word (MAXLIFETIME)    -- * @cvalue CURLOPT_MAXLIFETIME_CONN
+ext/curl/curl.stub.php:3519:23   - Unknown word (VERIFYSTATUS)    -- const CURLOPT_DOH_SSL_VERIFYSTATUS = UNKNOWN;
+ext/curl/curl.stub.php:3522:25   - Unknown word (GSASL)           -- cvalue CURL_VERSION_GSASL
+ext/curl/curl.stub.php:3524:20   - Unknown word (GSASL)           -- const CURL_VERSION_GSASL = UNKNOWN;
+ext/curl/curl.stub.php:3548:20   - Unknown word (MAXLIFETIME)     -- * @cvalue CURLOPT_MAXLIFETIME_CONN
 ext/curl/curl.stub.php:3550:15   - Unknown word (MAXLIFETIME)    -- const CURLOPT_MAXLIFETIME_CONN = UNKNOWN;
 ext/curl/curl.stub.php:3558:20   - Unknown word (PREREQFUNCTION) -- * @cvalue CURLOPT_PREREQFUNCTION
 ext/curl/curl.stub.php:3560:15   - Unknown word (PREREQFUNCTION) -- const CURLOPT_PREREQFUNCTION = UNKNOWN;
@@ -2967,8 +2961,6 @@ ext/curl/curl.stub.php:425:20    - Unknown word (TIMECONDITION)    -- * @cvalue 
 ext/curl/curl.stub.php:427:15    - Unknown word (TIMECONDITION)    -- const CURLOPT_TIMECONDITION = UNKNOWN;
 ext/curl/curl.stub.php:435:20    - Unknown word (TIMEVALUE)        -- * @cvalue CURLOPT_TIMEVALUE
 ext/curl/curl.stub.php:437:15    - Unknown word (TIMEVALUE)        -- const CURLOPT_TIMEVALUE = UNKNOWN;
-ext/curl/curl.stub.php:440:20    - Unknown word (TRANSFERTEXT)     -- * @cvalue CURLOPT_TRANSFERTEXT
-ext/curl/curl.stub.php:442:15    - Unknown word (TRANSFERTEXT)     -- const CURLOPT_TRANSFERTEXT = UNKNOWN;
 ext/curl/curl.stub.php:465:20    - Unknown word (USERPWD)          -- * @cvalue CURLOPT_USERPWD
 ext/curl/curl.stub.php:467:15    - Unknown word (USERPWD)          -- const CURLOPT_USERPWD = UNKNOWN;
 ext/curl/curl.stub.php:475:20    - Unknown word (WRITEFUNCTION)    -- * @cvalue CURLOPT_WRITEFUNCTION
@@ -3015,8 +3007,6 @@ ext/curl/curl.stub.php:916:21    - Unknown word (LASTONE)              -- * @cva
 ext/curl/curl.stub.php:918:16    - Unknown word (LASTONE)              -- const CURLINFO_LASTONE = UNKNOWN;
 ext/curl/curl.stub.php:921:21    - Unknown word (NAMELOOKUP)           -- * @cvalue CURLINFO_NAMELOOKUP_TIME
 ext/curl/curl.stub.php:923:16    - Unknown word (NAMELOOKUP)           -- const CURLINFO_NAMELOOKUP_TIME = UNKNOWN;
-ext/curl/curl.stub.php:926:21    - Unknown word (PRETRANSFER)          -- * @cvalue CURLINFO_PRETRANSFER_TIME
-ext/curl/curl.stub.php:928:16    - Unknown word (PRETRANSFER)          -- const CURLINFO_PRETRANSFER_TIME = UNKNOWN;
 ext/curl/curl.stub.php:93:20     - Unknown word (FAILONERROR)    -- * @cvalue CURLOPT_FAILONERROR
 ext/curl/curl.stub.php:95:15     - Unknown word (FAILONERROR)    -- const CURLOPT_FAILONERROR = UNKNOWN;
 ext/curl/curl.stub.php:971:25    - Unknown word (VERIFYRESULT)         -- cvalue CURLINFO_SSL_VERIFYRESULT
@@ -3060,9 +3050,6 @@ ext/curl/curl_arginfo.h:920:47    - Unknown word (CURLPX)          -- CURLPX_BAD
 ext/curl/curl_arginfo.h:923:26    - Unknown word (CURLPX)          -- REGISTER_LONG_CONSTANT("CURLPX_CLOSED", CURLPX_CLOSED
 ext/curl/curl_arginfo.h:965:38    - Unknown word (REQACK)          -- CONSTANT("CURLPX_RECV_REQACK", CURLPX_RECV_REQACK
 ext/curl/curl_arginfo.h:965:59    - Unknown word (REQACK)          -- REQACK", CURLPX_RECV_REQACK, CONST_PERSISTENT);
-ext/curl/curl_file.stub.php:10:20     - Unknown word (postname)   -- public string $postname = "";
-ext/curl/curl_file.stub.php:33:20     - Unknown word (postname)   -- public string $postname;
-ext/curl/curl_file.stub.php:36:55     - Unknown word (postname)   -- string $data, string $postname, string $mime = "application
 ext/curl/curl_private.h:119:14    - Unknown word (easyh)      -- zend_llist easyh;
 ext/curl/interface.c:1035:6    - Unknown word (NTLMWB)      -- {"NTLMWB", CURL_VERSION_NTLM
 ext/curl/interface.c:1049:28   - Unknown word (ALTSVC)      -- ALTSVC", CURL_VERSION_ALTSVC},
@@ -24058,15 +24045,10 @@ ext/zip/php_zip_arginfo.h:982:24    - Unknown word (ENCRNOTSUPP) -- zend_string 
 ext/zip/php_zip_arginfo.h:982:73    - Unknown word (ENCRNOTSUPP) -- string_init_interned("ER_ENCRNOTSUPP", sizeof("ER_ENCRNOTSUPP
 ext/zip/zip_stream.c:13:13     - Unknown word (Piere)      -- | Author: Piere-Alain Joye <pierre@php
 ext/zip/zip_stream.c:13:19     - Unknown word (Alain)      -- | Author: Piere-Alain Joye <pierre@php.net
-ext/zip/zip_stream.c:215:33    - Unknown word (zipio)      -- stream_ops php_stream_zipio_seek_ops = {
-ext/zip/zip_stream.c:227:33    - Unknown word (zipio)      -- stream_ops php_stream_zipio_ops = {
-ext/zip/zip_stream.c:260:43    - Unknown word (zipio)      -- stream_alloc(&php_stream_zipio_seek_ops, self, NULL
-ext/zip/zip_stream.c:264:43    - Unknown word (zipio)      -- stream_alloc(&php_stream_zipio_ops, self, NULL, mode
 ext/zip/zip_stream.c:328:9     - Unknown word (tmpzval)    -- zval *tmpzval;
 ext/zip/zip_stream.c:330:27    - Unknown word (tmpzval)    -- context && NULL != (tmpzval = php_stream_context
 ext/zip/zip_stream.c:331:17    - Unknown word (tmpzval)    -- if (Z_TYPE_P(tmpzval) != IS_STRING || zip
 ext/zip/zip_stream.c:331:82    - Unknown word (tmpzval)    -- password(za, Z_STRVAL_P(tmpzval))) {
-ext/zip/zip_stream.c:346:43    - Unknown word (zipio)      -- stream_alloc(&php_stream_zipio_seek_ops, self, NULL
 ext/zlib/php_zlib.h:14:24     - Unknown word (hrich)      -- | Stefan R�hrich <sr@linux.de>
 ext/zlib/php_zlib.h:64:9      - Unknown word (ZLIBG)      -- #define ZLIBG(v) ZEND_MODULE_GLOBALS
 ext/zlib/php_zlib.h:67:40     - Unknown word (gzio)       -- stream_ops php_stream_gzio_ops;

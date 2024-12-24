@@ -4,8 +4,8 @@ Url: https://github.com/flutter/samples
 Args: '["--issues-summary-report","--locale=en,en-GB,lorem","--exclude=**/*.{pbxproj,xcworkspace,xcworkspacedata,xcscheme,xcconfig,plist}","."]'
 Summary:
   files: 2690
-  filesWithIssues: 970
-  issues: 10240
+  filesWithIssues: 969
+  issues: 10229
   errors: 0
 Errors: []
 
@@ -26,7 +26,6 @@ issues:
   - "add_to_app/android_view/android_view/app/build.gradle:48:21         androidx            U       implementation 'androidx.vectordrawable:vectordrawable"
   - "add_to_app/android_view/android_view/app/build.gradle:48:30         vectordrawable      U       implementation 'androidx.vectordrawable:vectordrawable:1.2."
   - "add_to_app/android_view/android_view/app/build.gradle:48:45         vectordrawable      U       androidx.vectordrawable:vectordrawable:1.2.0'"
-  - "add_to_app/android_view/android_view/app/build.gradle:49:50         livedata            U       lifecycle:lifecycle-livedata-ktx:2.8.4'"
   - "add_to_app/android_view/android_view/app/build.gradle:50:50         viewmodel           U       lifecycle:lifecycle-viewmodel-ktx:2.8.4'"
   - "add_to_app/android_view/android_view/app/build.gradle:53:30         recyclerview        U       implementation \"androidx.recyclerview:recyclerview:1.3.2\""
   - "add_to_app/android_view/android_view/app/build.gradle:53:43         recyclerview        U       androidx.recyclerview:recyclerview:1.3.2\""
@@ -49,14 +48,12 @@ issues:
   - "add_to_app/android_view/android_view/app/lint-baseline.xml:73:55        appcompat           U       implementation &apos;androidx.appcompat:appcompat:1.2.0&apos"
   - "add_to_app/android_view/android_view/app/lint-baseline.xml:73:65        appcompat           U       apos;androidx.appcompat:appcompat:1.2.0&apos;\""
   - "add_to_app/android_view/android_view/app/lint-baseline.xml:73:81        apos                U       appcompat:appcompat:1.2.0&apos;\""
-  - "add_to_app/android_view/android_view/app/lint-baseline.xml:83:66        livedata            U       lifecycle:lifecycle-livedata-ktx than 2.2.0 is available"
   - "add_to_app/android_view/android_view/app/lint-baseline.xml:84:41        apos                U       implementation &apos;com.google.android.material"
   - "add_to_app/android_view/android_view/app/lint-baseline.xml:94:66        viewmodel           U       lifecycle:lifecycle-viewmodel-ktx than 2.2.0 is available"
   - "add_to_app/android_view/android_view/app/lint-baseline.xml:95:55        constraintlayout    U       implementation &apos;androidx.constraintlayout:constraintlayout:2."
   - "add_to_app/android_view/android_view/app/lint-baseline.xml:95:72        constraintlayout    U       androidx.constraintlayout:constraintlayout:2.0.4&apos;\""
   - "add_to_app/android_view/android_view/app/lint-baseline.xml:106:55       vectordrawable      U       implementation &apos;androidx.vectordrawable:vectordrawable:1.1."
   - "add_to_app/android_view/android_view/app/lint-baseline.xml:106:70       vectordrawable      U       androidx.vectordrawable:vectordrawable:1.1.0&apos;\""
-  - "add_to_app/android_view/android_view/app/lint-baseline.xml:117:75       livedata            U       lifecycle:lifecycle-livedata-ktx:2.2.0&apos;\""
   - "add_to_app/android_view/android_view/app/lint-baseline.xml:127:46       recyclerview        U       version of androidx.recyclerview:recyclerview than 1"
   - "add_to_app/android_view/android_view/app/lint-baseline.xml:127:59       recyclerview        U       androidx.recyclerview:recyclerview than 1.1.0 is available"
   - "add_to_app/android_view/android_view/app/lint-baseline.xml:128:75       viewmodel           U       lifecycle:lifecycle-viewmodel-ktx:2.2.0&apos;\""
@@ -156,7 +153,6 @@ issues:
   - "add_to_app/books/android_books/app/build.gradle:25:37       Proguard            U       proguardFiles getDefaultProguardFile('proguard-android"
   - "add_to_app/books/android_books/app/build.gradle:25:51       proguard            U       getDefaultProguardFile('proguard-android-optimize.txt"
   - "add_to_app/books/android_books/app/build.gradle:25:85       proguard            U       android-optimize.txt'), 'proguard-rules.pro'"
-  - "add_to_app/books/android_books/app/build.gradle:40:25       squareup            U       implementation \"com.squareup.okhttp3:okhttp:4.7."
   - "add_to_app/books/android_books/app/build.gradle:40:34       okhttp              U       implementation \"com.squareup.okhttp3:okhttp:4.7.2\""
   - "add_to_app/books/android_books/app/build.gradle:40:42       okhttp              U       com.squareup.okhttp3:okhttp:4.7.2\""
   - "add_to_app/books/android_books/app/build.gradle:41:49       stdlib              U       jetbrains.kotlin:kotlin-stdlib:$kotlin_version\""
@@ -1091,8 +1087,6 @@ issues:
   - "code_sharing/README.md:39:5         pubspec     U       pubspec.yaml"
   - "code_sharing/README.md:58:6         pubspec     U       pubspec.yaml"
   - "code_sharing/README.md:70:6         pubspec     U       pubspec.yaml"
-  - "code_sharing/server/README.md:32:21         myserver    U       $ docker build . -t myserver"
-  - "code_sharing/server/README.md:33:31         myserver    U       run -it -p 8080:8080 myserver"
   - "code_sharing/shared/test/shared_test.dart:8:19          derialization       U       test('Increment derialization', () {"
   - "code_sharing/shared/test/shared_test.dart:14:15         derialization       U       test('Count derialization', () {"
   - "compass_app/app/android/build.gradle:1:1            allprojects     U       allprojects {"
@@ -7516,8 +7510,6 @@ issues:
   - "experimental/pedometer/lib/health_connect.dart:23414:15     Nanos           U       Instant plusNanos("
   - "experimental/pedometer/lib/pedometer_bindings_generated.dart:371:21         Oneway              U       late final _sel_isOneway1 = _registerName1(\"isOneway"
   - "experimental/pedometer/lib/pedometer_bindings_generated.dart:371:49         Oneway              U       = _registerName1(\"isOneway\");"
-  - "experimental/pedometer/lib/pedometer_bindings_generated.dart:666:19         subdata             U       late final _sel_subdataWithRange_1 = _registerName"
-  - "experimental/pedometer/lib/pedometer_bindings_generated.dart:666:56         subdata             U       1 = _registerName1(\"subdataWithRange:\");"
   - "experimental/pedometer/lib/pedometer_bindings_generated.dart:711:21         NSURL               U       late final _class_NSURL1 = _getClass1(\"NSURL"
   - "experimental/pedometer/lib/pedometer_bindings_generated.dart:711:42         NSURL               U       NSURL1 = _getClass1(\"NSURL\");"
   - "experimental/pedometer/lib/pedometer_bindings_generated.dart:1307:28        Nonretained         U       final _sel_valueWithNonretainedObject_1 ="
@@ -7628,8 +7620,6 @@ issues:
   - "experimental/pedometer/lib/pedometer_bindings_generated.dart:32542:46       byteaddr            U       encodeBytes_length_1, byteaddr, length);"
   - "experimental/pedometer/lib/pedometer_bindings_generated.dart:32572:37       lengthp             U       Pointer<ffi.UnsignedLong> lengthp) {"
   - "experimental/pedometer/lib/pedometer_bindings_generated.dart:32866:9        particpatory        U       /// - particpatory (error based)"
-  - "experimental/pedometer/lib/pedometer_bindings_generated.dart:33051:10       subdata             U       NSData subdataWithRange_(_NSRange range"
-  - "experimental/pedometer/lib/pedometer_bindings_generated.dart:33053:46       subdata             U       msgSend_25(_id, _lib._sel_subdataWithRange_1, range);"
   - "experimental/pedometer/lib/pedometer_bindings_generated.dart:33607:80       IDNA                U       option to add (or skip) IDNA- and percent-encoding"
   - "experimental/pedometer/lib/pedometer_bindings_generated.dart:33627:105      IDNA                U       option to add (or skip) IDNA- and percent-encoding"
   - "experimental/pedometer/lib/pedometer_bindings_generated.dart:34571:27       Nonretained         U       static NSValue valueWithNonretainedObject_("
@@ -10105,7 +10095,6 @@ issues:
   - "tool/ios_ci_script.sh:22:20         xcworkspace     U       # $2 = name of the xcworkspace"
   - "tool/ios_ci_script.sh:33:56         xcpretty        U       CONFIGURATION=Debug | xcpretty"
   - "tool/ios_ci_script.sh:39:39         xcpretty        U       generic/platform=iOS | xcpretty"
-  - "tool/ios_ci_script.sh:49:9          precache        U       flutter precache --no-web --no-linux"
   - "tool/ios_ci_script.sh:54:31         xcframework     U       build ios-framework --xcframework --output=\"$(pwd)/.."
   - "tool/ios_ci_script.sh:66:46         xcworkspace     U       ios_books\" \"IosBooks.xcworkspace\" \"IosBooks\""
   - "tool/ios_ci_script.sh:67:61         xcworkspace     U       fullscreen\" \"IOSFullScreen.xcworkspace\" \"IOSFullScreen\""
@@ -11819,7 +11808,6 @@ issuesSummary:
   - "text: linecap, count: 1, files: 1,"
   - "text: lipica, count: 1, files: 1,"
   - "text: Lipica, count: 3, files: 1,"
-  - "text: livedata, count: 3, files: 2,"
   - "text: Ljava, count: 10, files: 2,"
   - "text: Ljubljanica, count: 1, files: 1,"
   - "text: Lkotlin, count: 10, files: 2,"
@@ -12121,7 +12109,6 @@ issuesSummary:
   - "text: mykonos, count: 6, files: 2,"
   - "text: Mykonos, count: 9, files: 2,"
   - "text: Mýrdal, count: 1, files: 1,"
-  - "text: myserver, count: 2, files: 1,"
   - "text: Mývatn, count: 3, files: 1,"
   - "text: nacatamal, count: 1, files: 1,"
   - "text: Nacional, count: 2, files: 1,"
@@ -12491,7 +12478,6 @@ issuesSummary:
   - "text: Prabang's, count: 1, files: 1,"
   - "text: Prasat, count: 1, files: 1,"
   - "text: Prbyu, count: 4, files: 2,"
-  - "text: precache, count: 1, files: 1,"
   - "text: precomposed, count: 5, files: 1,"
   - "text: predjama, count: 1, files: 1,"
   - "text: Predjama, count: 3, files: 1,"
@@ -12866,7 +12852,6 @@ issuesSummary:
   - "text: spyhopping, count: 1, files: 1,"
   - "text: sqflite, count: 1, files: 1,"
   - "text: Sqflite, count: 2, files: 1,"
-  - "text: squareup, count: 1, files: 1,"
   - "text: Sree, count: 1, files: 1,"
   - "text: srei, count: 1, files: 1,"
   - "text: Srei, count: 3, files: 1,"
@@ -12896,7 +12881,6 @@ issuesSummary:
   - "text: suaasat, count: 1, files: 1,"
   - "text: Subacuático, count: 1, files: 1,"
   - "text: subarray, count: 4, files: 1,"
-  - "text: subdata, count: 4, files: 1,"
   - "text: subflow, count: 5, files: 1,"
   - "text: subflows, count: 2, files: 1,"
   - "text: SUBLANG, count: 24, files: 24,"

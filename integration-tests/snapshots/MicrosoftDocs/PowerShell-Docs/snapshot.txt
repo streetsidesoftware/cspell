@@ -3,7 +3,7 @@ Repository: MicrosoftDocs/PowerShell-Docs
 Url: "https://github.com/MicrosoftDocs/PowerShell-Docs.git"
 Args: ["--config=../../../cspell-power-shell-docs.config.yaml","**"]
 Lines:
- CSpell: Files checked: 2232, Issues found: 4130 in 948 files.
+ CSpell: Files checked: 2232, Issues found: 4092 in 944 files.
  exit code: 1
 CODE_OF_CONDUCT.md:10:38     - Unknown word (opensource) -- reach out at [aka.ms/opensource/moderation-support]
 LICENSE.md:122:56    - Unknown word (sublicensable)   -- worldwide, royalty-free, non-sublicensable,
@@ -85,7 +85,6 @@ reference/5.1/Microsoft.PowerShell.Core/About/about_Arithmetic_Operators.md:229:
 reference/5.1/Microsoft.PowerShell.Core/About/about_Arithmetic_Operators.md:229:42    - Unknown word (gettype)    -- [uint32]::maxvalue).gettype().fullname
 reference/5.1/Microsoft.PowerShell.Core/About/about_Arithmetic_Operators.md:243:16    - Unknown word (maxvalue)   -- PS> [Decimal]::maxvalue
 reference/5.1/Microsoft.PowerShell.Core/About/about_Arithmetic_Operators.md:246:16    - Unknown word (maxvalue)   -- PS> [Decimal]::maxvalue + 1
-reference/5.1/Microsoft.PowerShell.Core/About/about_Arithmetic_Operators.md:358:30    - Unknown word (filefilefile) -- 3 # result = "filefilefile"
 reference/5.1/Microsoft.PowerShell.Core/About/about_Arrays.md:345:20    - Unknown word (Longlength) -- **Count** alias. **Longlength** is useful if the array
 reference/5.1/Microsoft.PowerShell.Core/About/about_Arrays.md:982:59    - Unknown word (nosuchkey)  -- string, int]]::new()['nosuchkey']
 reference/5.1/Microsoft.PowerShell.Core/About/about_Arrays.md:985:64    - Unknown word (nosuchkey)  -- int]]::new().Item('nosuchkey')
@@ -217,8 +216,6 @@ reference/5.1/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:1011
 reference/5.1/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:1027:18   - Unknown word (hexdump)    -- when piped into `hexdump.ps1` created above.
 reference/5.1/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:1032:33   - Unknown word (hexdump)    -- powershell.exe -File .\hexdump.ps1
 reference/5.1/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:1047:33   - Unknown word (hexdump)    -- powershell.exe -File .\hexdump.ps1
-reference/5.1/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:528:24    - Unknown word (nofile)     -- Get-ChildItem -Path C:\nofile.txt
-reference/5.1/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:542:24    - Unknown word (nofile)     -- Get-ChildItem -Path C:\nofile.txt
 reference/5.1/Microsoft.PowerShell.Core/About/about_Profiles.md:208:28    - Unknown word (cmdletname) -- function Get-CmdletAlias ($cmdletname) {
 reference/5.1/Microsoft.PowerShell.Core/About/about_Profiles.md:210:55    - Unknown word (cmdletname) -- .Definition -like "$cmdletname"} |
 reference/5.1/Microsoft.PowerShell.Core/About/about_Profiles.md:219:4     - Unknown word (hosttime)   -- $hosttime = (Get-ChildItem -Path
@@ -494,10 +491,7 @@ reference/5.1/Microsoft.PowerShell.Management/New-Item.md:89:41     - Unknown wo
 reference/5.1/Microsoft.PowerShell.Management/New-Item.md:93:29     - Unknown word (logfiles)   -- Item -Path "c:\" -Name "logfiles" -ItemType "directory
 reference/5.1/Microsoft.PowerShell.Management/New-ItemProperty.md:100:11    - Unknown word (multistring) -- $newValue.multistring
 reference/5.1/Microsoft.PowerShell.Management/New-ItemProperty.md:114:11    - Unknown word (multistring) -- $newValue.multistring[0]
-reference/5.1/Microsoft.PowerShell.Management/New-Service.md:100:16    - Unknown word (myservice)   -- `'"d:\my share\myservice.exe" arg1 arg2'`. These
 reference/5.1/Microsoft.PowerShell.Management/New-Service.md:62:57     - Unknown word (testservice) -- Service -Filter "Name='testservice'"
-reference/5.1/Microsoft.PowerShell.Management/New-Service.md:96:64     - Unknown word (myservice)   -- example, `d:\my share\myservice.exe` should be specified
-reference/5.1/Microsoft.PowerShell.Management/New-Service.md:97:16     - Unknown word (myservice)   -- `'"d:\my share\myservice.exe"'`.
 reference/5.1/Microsoft.PowerShell.Management/Register-WmiEvent.md:74:28     - Unknown word (instancecreationevent) -- Query = "select * from __instancecreationevent within 5 where targetinstance
 reference/5.1/Microsoft.PowerShell.Management/Register-WmiEvent.md:74:65     - Unknown word (targetinstance)        -- ecreationevent within 5 where targetinstance isa 'win32_process'
 reference/5.1/Microsoft.PowerShell.Management/Remove-Computer.md:61:24     - Unknown word (Domaincredential) -- Remove-Computer -UnjoinDomaincredential Domain01\Admin01 -PassThru
@@ -518,7 +512,6 @@ reference/5.1/Microsoft.PowerShell.Management/Set-WmiInstance.md:322:69    - Unk
 reference/5.1/Microsoft.PowerShell.Management/Set-WmiInstance.md:605:4     - Unknown word (swmi)       -- - `swmi`
 reference/5.1/Microsoft.PowerShell.Management/Split-Path.md:383:65    - Unknown word (Normpath)   -- would use **Dirname**, **Normpath**, **Realpath**, **Join
 reference/5.1/Microsoft.PowerShell.Management/Split-Path.md:383:79    - Unknown word (Realpath)   -- Dirname**, **Normpath**, **Realpath**, **Join**,
-reference/5.1/Microsoft.PowerShell.Management/Start-Process.md:65:26     - Unknown word (myfile)     -- Start-Process -FilePath "myfile.txt" -WorkingDirectory
 reference/5.1/Microsoft.PowerShell.Management/Start-Transaction.md:112:23    - Unknown word (rollbackpreference) -- Start-Transaction (-rollbackpreference never)
 reference/5.1/Microsoft.PowerShell.Management/Start-Transaction.md:238:14    - Unknown word (hkcu)               -- Set-Location hkcu:\software
 reference/5.1/Microsoft.PowerShell.Management/Start-Transaction.md:55:14     - Unknown word (hkcu)       -- Set-Location hkcu:\software
@@ -594,8 +587,6 @@ reference/5.1/Microsoft.PowerShell.Utility/Measure-Object.md:137:42    - Unknown
 reference/5.1/Microsoft.PowerShell.Utility/New-Object.md:102:2     - Unknown word (Objshell)   -- $Objshell = New-Object -COMObject
 reference/5.1/Microsoft.PowerShell.Utility/New-Object.md:103:2     - Unknown word (objshell)   -- $objshell | Get-Member
 reference/5.1/Microsoft.PowerShell.Utility/New-Object.md:104:2     - Unknown word (objshell)   -- $objshell.ToggleDesktop()
-reference/5.1/Microsoft.PowerShell.Utility/New-Variable.md:48:21     - Unknown word (zipcode)    -- New-Variable -Name "zipcode" -Value 98033
-reference/5.1/Microsoft.PowerShell.Utility/New-Variable.md:51:39     - Unknown word (zipcode)    -- creates a variable named zipcode and assigns it the value
 reference/5.1/Microsoft.PowerShell.Utility/Out-File.md:100:26    - Unknown word (Procs)      -- process objects in `$Procs` to the file **Process
 reference/5.1/Microsoft.PowerShell.Utility/Out-File.md:150:26    - Unknown word (logfile)    -- $logFile = "$pwd\logfile.txt"
 reference/5.1/Microsoft.PowerShell.Utility/Out-File.md:93:2      - Unknown word (Procs)      -- $Procs = Get-Process
@@ -741,7 +732,6 @@ reference/7.4/Microsoft.PowerShell.Core/About/about_Arithmetic_Operators.md:229:
 reference/7.4/Microsoft.PowerShell.Core/About/about_Arithmetic_Operators.md:229:42    - Unknown word (gettype)    -- [uint32]::maxvalue).gettype().fullname
 reference/7.4/Microsoft.PowerShell.Core/About/about_Arithmetic_Operators.md:243:16    - Unknown word (maxvalue)   -- PS> [Decimal]::maxvalue
 reference/7.4/Microsoft.PowerShell.Core/About/about_Arithmetic_Operators.md:246:16    - Unknown word (maxvalue)   -- PS> [Decimal]::maxvalue + 1
-reference/7.4/Microsoft.PowerShell.Core/About/about_Arithmetic_Operators.md:358:30    - Unknown word (filefilefile) -- 3 # result = "filefilefile"
 reference/7.4/Microsoft.PowerShell.Core/About/about_Arrays.md:1002:64   - Unknown word (nosuchkey)  -- int]]::new().Item('nosuchkey')
 reference/7.4/Microsoft.PowerShell.Core/About/about_Arrays.md:1003:72   - Unknown word (nosuchkey)  -- Item": "The given key 'nosuchkey'
 reference/7.4/Microsoft.PowerShell.Core/About/about_Arrays.md:345:20    - Unknown word (Longlength) -- **Count** alias. **Longlength** is useful if the array
@@ -893,8 +883,6 @@ reference/7.4/Microsoft.PowerShell.Core/About/about_Pipelines.md:441:41    - Unk
 reference/7.4/Microsoft.PowerShell.Core/About/about_Pipelines.md:444:42    - Unknown word (xzvf)       -- uri).Content | tar -xzvf - -C .
 reference/7.4/Microsoft.PowerShell.Core/About/about_PowerShell_Config.md:406:10    - Unknown word (Transcripting) -- - `EnableTranscripting` - When this setting
 reference/7.4/Microsoft.PowerShell.Core/About/about_PowerShell_Config.md:419:16    - Unknown word (Transcripting) -- "EnableTranscripting": true,
-reference/7.4/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:578:24    - Unknown word (nofile)     -- Get-ChildItem -Path C:\nofile.txt
-reference/7.4/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:592:24    - Unknown word (nofile)     -- Get-ChildItem -Path C:\nofile.txt
 reference/7.4/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:903:2     - Unknown word (hexdump)    -- `hexdump.ps1` to illustrate the
 reference/7.4/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:917:18    - Unknown word (hexdump)    -- when piped into `hexdump.ps1` created above.
 reference/7.4/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:921:23    - Unknown word (hexdump)    -- café' | pwsh -File ./hexdump.ps1
@@ -1115,9 +1103,6 @@ reference/7.4/Microsoft.PowerShell.Management/New-Item.md:89:41     - Unknown wo
 reference/7.4/Microsoft.PowerShell.Management/New-Item.md:93:29     - Unknown word (logfiles)   -- Item -Path "c:\" -Name "logfiles" -ItemType "directory
 reference/7.4/Microsoft.PowerShell.Management/New-ItemProperty.md:100:11    - Unknown word (multistring) -- $newValue.multistring
 reference/7.4/Microsoft.PowerShell.Management/New-ItemProperty.md:114:11    - Unknown word (multistring) -- $newValue.multistring[0]
-reference/7.4/Microsoft.PowerShell.Management/New-Service.md:106:64    - Unknown word (myservice)                  -- example, `d:\my share\myservice.exe` should be specified
-reference/7.4/Microsoft.PowerShell.Management/New-Service.md:107:16    - Unknown word (myservice)                  -- `'"d:\my share\myservice.exe"'`.
-reference/7.4/Microsoft.PowerShell.Management/New-Service.md:110:16    - Unknown word (myservice)                  -- `'"d:\my share\myservice.exe" arg1 arg2'`. These
 reference/7.4/Microsoft.PowerShell.Management/New-Service.md:64:57     - Unknown word (testservice) -- Service -Filter "Name='testservice'"
 reference/7.4/Microsoft.PowerShell.Management/New-Service.md:84:16     - Unknown word (CCLCSWRPWPDTLOCRRC) -- $SDDL = "D:(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSD
 reference/7.4/Microsoft.PowerShell.Management/New-Service.md:84:44     - Unknown word (CCDCLCSWRPWPDTLOCRSDRCWDWO) -- CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)(A;;CCLCSWLOCRRC
@@ -1141,7 +1126,6 @@ reference/7.4/Microsoft.PowerShell.Management/Start-Process.md:146:2     - Unkno
 reference/7.4/Microsoft.PowerShell.Management/Start-Process.md:149:46    - Unknown word (nohup)      -- appends output to ./nohup.out
 reference/7.4/Microsoft.PowerShell.Management/Start-Process.md:150:15    - Unknown word (nohup)      -- Start-Process nohup 'pwsh -noprofile -c
 reference/7.4/Microsoft.PowerShell.Management/Start-Process.md:150:28    - Unknown word (noprofile)  -- Process nohup 'pwsh -noprofile -c "1..120 | % { Write
-reference/7.4/Microsoft.PowerShell.Management/Start-Process.md:64:26     - Unknown word (myfile)     -- Start-Process -FilePath "myfile.txt" -WorkingDirectory
 reference/7.4/Microsoft.PowerShell.Management/Suspend-Service.md:66:13     - Unknown word (lanman)     -- starts with lanman. To suspend the services
 reference/7.4/Microsoft.PowerShell.Management/Test-Connection.md:23:4      - Unknown word (Dont)       -- [-DontFragment] [-Quiet] [
 reference/7.4/Microsoft.PowerShell.Management/Test-Connection.md:298:6     - Unknown word (Dont)       -- ### -DontFragment
@@ -1224,8 +1208,6 @@ reference/7.4/Microsoft.PowerShell.Utility/Measure-Object.md:137:42    - Unknown
 reference/7.4/Microsoft.PowerShell.Utility/New-Object.md:102:2     - Unknown word (Objshell)   -- $Objshell = New-Object -COMObject
 reference/7.4/Microsoft.PowerShell.Utility/New-Object.md:103:2     - Unknown word (objshell)   -- $objshell | Get-Member
 reference/7.4/Microsoft.PowerShell.Utility/New-Object.md:104:2     - Unknown word (objshell)   -- $objshell.ToggleDesktop()
-reference/7.4/Microsoft.PowerShell.Utility/New-Variable.md:48:21     - Unknown word (zipcode)    -- New-Variable -Name "zipcode" -Value 98033
-reference/7.4/Microsoft.PowerShell.Utility/New-Variable.md:51:39     - Unknown word (zipcode)    -- creates a variable named zipcode and assigns it the value
 reference/7.4/Microsoft.PowerShell.Utility/Out-File.md:101:39    - Unknown word (Procs)      -- stored in the variable, `$Procs`. `Out-File` uses the
 reference/7.4/Microsoft.PowerShell.Utility/Out-File.md:103:26    - Unknown word (Procs)      -- process objects in `$Procs` to the file **Process
 reference/7.4/Microsoft.PowerShell.Utility/Out-File.md:153:26    - Unknown word (logfile)    -- $logFile = "$pwd\logfile.txt"
@@ -1347,7 +1329,6 @@ reference/7.5/Microsoft.PowerShell.Core/About/about_Arithmetic_Operators.md:230:
 reference/7.5/Microsoft.PowerShell.Core/About/about_Arithmetic_Operators.md:230:32    - Unknown word (maxvalue)   -- minvalue + [uint32]::maxvalue).GetType().FullName
 reference/7.5/Microsoft.PowerShell.Core/About/about_Arithmetic_Operators.md:244:16    - Unknown word (maxvalue)   -- PS> [Decimal]::maxvalue
 reference/7.5/Microsoft.PowerShell.Core/About/about_Arithmetic_Operators.md:247:16    - Unknown word (maxvalue)   -- PS> [Decimal]::maxvalue + 1
-reference/7.5/Microsoft.PowerShell.Core/About/about_Arithmetic_Operators.md:359:30    - Unknown word (filefilefile) -- 3 # result = "filefilefile"
 reference/7.5/Microsoft.PowerShell.Core/About/about_Arrays.md:1000:59   - Unknown word (nosuchkey)  -- string, int]]::new()['nosuchkey']
 reference/7.5/Microsoft.PowerShell.Core/About/about_Arrays.md:1003:64   - Unknown word (nosuchkey)  -- int]]::new().Item('nosuchkey')
 reference/7.5/Microsoft.PowerShell.Core/About/about_Arrays.md:1004:72   - Unknown word (nosuchkey)  -- Item": "The given key 'nosuchkey'
@@ -1490,8 +1471,6 @@ reference/7.5/Microsoft.PowerShell.Core/About/about_Pipelines.md:441:41    - Unk
 reference/7.5/Microsoft.PowerShell.Core/About/about_Pipelines.md:444:42    - Unknown word (xzvf)       -- uri).Content | tar -xzvf - -C .
 reference/7.5/Microsoft.PowerShell.Core/About/about_PowerShell_Config.md:407:10    - Unknown word (Transcripting) -- - `EnableTranscripting` - When this setting
 reference/7.5/Microsoft.PowerShell.Core/About/about_PowerShell_Config.md:420:16    - Unknown word (Transcripting) -- "EnableTranscripting": true,
-reference/7.5/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:578:24    - Unknown word (nofile)     -- Get-ChildItem -Path C:\nofile.txt
-reference/7.5/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:592:24    - Unknown word (nofile)     -- Get-ChildItem -Path C:\nofile.txt
 reference/7.5/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:903:2     - Unknown word (hexdump)    -- `hexdump.ps1` to illustrate the
 reference/7.5/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:917:18    - Unknown word (hexdump)    -- when piped into `hexdump.ps1` created above.
 reference/7.5/Microsoft.PowerShell.Core/About/about_Preference_Variables.md:921:23    - Unknown word (hexdump)    -- café' | pwsh -File ./hexdump.ps1
@@ -1683,9 +1662,6 @@ reference/7.5/Microsoft.PowerShell.Management/Join-Path.md:262:41    - Unknown w
 reference/7.5/Microsoft.PowerShell.Management/Join-Path.md:262:53    - Unknown word (Realpath)   -- Dirname`, `Normpath`, `Realpath`, `Join`, or other path
 reference/7.5/Microsoft.PowerShell.Management/New-Item.md:89:41     - Unknown word (Logfiles)   -- creates a directory named "Logfiles" in the `C:` drive.
 reference/7.5/Microsoft.PowerShell.Management/New-Item.md:93:29     - Unknown word (Logfiles)   -- Item -Path "c:\" -Name "Logfiles" -ItemType "directory
-reference/7.5/Microsoft.PowerShell.Management/New-Service.md:106:64    - Unknown word (myservice)                  -- example, `d:\my share\myservice.exe` should be specified
-reference/7.5/Microsoft.PowerShell.Management/New-Service.md:107:16    - Unknown word (myservice)                  -- `'"d:\my share\myservice.exe"'`.
-reference/7.5/Microsoft.PowerShell.Management/New-Service.md:110:16    - Unknown word (myservice)                  -- `'"d:\my share\myservice.exe" arg1 arg2'`. These
 reference/7.5/Microsoft.PowerShell.Management/New-Service.md:64:57     - Unknown word (testservice) -- Service -Filter "Name='testservice'"
 reference/7.5/Microsoft.PowerShell.Management/New-Service.md:84:16     - Unknown word (CCLCSWRPWPDTLOCRRC) -- $SDDL = "D:(A;;CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSD
 reference/7.5/Microsoft.PowerShell.Management/New-Service.md:84:44     - Unknown word (CCDCLCSWRPWPDTLOCRSDRCWDWO) -- CCLCSWRPWPDTLOCRRC;;;SY)(A;;CCDCLCSWRPWPDTLOCRSDRCWDWO;;;BA)(A;;CCLCSWLOCRRC
@@ -1709,7 +1685,6 @@ reference/7.5/Microsoft.PowerShell.Management/Start-Process.md:146:2     - Unkno
 reference/7.5/Microsoft.PowerShell.Management/Start-Process.md:149:46    - Unknown word (nohup)      -- appends output to ./nohup.out
 reference/7.5/Microsoft.PowerShell.Management/Start-Process.md:150:15    - Unknown word (nohup)      -- Start-Process nohup 'pwsh -noprofile -c
 reference/7.5/Microsoft.PowerShell.Management/Start-Process.md:150:28    - Unknown word (noprofile)  -- Process nohup 'pwsh -noprofile -c "1..120 | % { Write
-reference/7.5/Microsoft.PowerShell.Management/Start-Process.md:64:26     - Unknown word (myfile)     -- Start-Process -FilePath "myfile.txt" -WorkingDirectory
 reference/7.5/Microsoft.PowerShell.Management/Suspend-Service.md:66:13     - Unknown word (lanman)     -- starts with lanman. To suspend the services
 reference/7.5/Microsoft.PowerShell.Management/Test-Connection.md:23:4      - Unknown word (Dont)       -- [-DontFragment] [-Quiet] [
 reference/7.5/Microsoft.PowerShell.Management/Test-Connection.md:298:6     - Unknown word (Dont)       -- ### -DontFragment
@@ -1792,8 +1767,6 @@ reference/7.5/Microsoft.PowerShell.Utility/Measure-Object.md:137:42    - Unknown
 reference/7.5/Microsoft.PowerShell.Utility/New-Object.md:102:2     - Unknown word (Objshell)   -- $Objshell = New-Object -COMObject
 reference/7.5/Microsoft.PowerShell.Utility/New-Object.md:103:2     - Unknown word (objshell)   -- $objshell | Get-Member
 reference/7.5/Microsoft.PowerShell.Utility/New-Object.md:104:2     - Unknown word (objshell)   -- $objshell.ToggleDesktop()
-reference/7.5/Microsoft.PowerShell.Utility/New-Variable.md:48:21     - Unknown word (zipcode)    -- New-Variable -Name "zipcode" -Value 98033
-reference/7.5/Microsoft.PowerShell.Utility/New-Variable.md:51:39     - Unknown word (zipcode)    -- creates a variable named zipcode and assigns it the value
 reference/7.5/Microsoft.PowerShell.Utility/Out-File.md:101:39    - Unknown word (Procs)      -- stored in the variable, `$Procs`. `Out-File` uses the
 reference/7.5/Microsoft.PowerShell.Utility/Out-File.md:103:26    - Unknown word (Procs)      -- process objects in `$Procs` to the file **Process
 reference/7.5/Microsoft.PowerShell.Utility/Out-File.md:153:26    - Unknown word (logfile)    -- $logFile = "$pwd\logfile.txt"
@@ -2452,7 +2425,6 @@ reference/docs-conceptual/developer/cmdlet/confirmation-messages.md:54:38     - 
 reference/docs-conceptual/developer/cmdlet/confirmation-messages.md:54:55     - Unknown word (Displayproperty) -- Cmdlet.Shouldprocess%2A?Displayproperty=Fullname](/dotnet/api
 reference/docs-conceptual/developer/cmdlet/creating-a-cmdlet-that-modifies-the-system.md:57:31     - Unknown word (Verbslifecycle) -- Management.Automation.Verbslifecycle](/dotnet/api/System
 reference/docs-conceptual/developer/cmdlet/creating-a-cmdlet-that-modifies-the-system.md:93:31     - Unknown word (Confirmimpact)  -- Management.Automation.Confirmimpact.Low](/dotnet/api/system
-reference/docs-conceptual/developer/cmdlet/creating-a-cmdlet-to-access-a-data-store.md:118:407   - Unknown word (myfile)                 -- example "MyFile" and "myfile" would both be returned
 reference/docs-conceptual/developer/cmdlet/creating-a-cmdlet-to-access-a-data-store.md:13:120    - Unknown word (Icontentcmdletprovider) -- Automation.Provider.Icontentcmdletprovider](/dotnet/api/System
 reference/docs-conceptual/developer/cmdlet/creating-a-cmdlet-to-access-a-data-store.md:17:244    - Unknown word (Verbscommon)            -- Management.Automation.Verbscommon](/dotnet/api/System
 reference/docs-conceptual/developer/cmdlet/creating-a-cmdlet-to-access-a-data-store.md:19:396    - Unknown word (Regularexpressions)     -- such as [System.Text.Regularexpressions.Regex](/dotnet/api/System
@@ -2723,7 +2695,6 @@ reference/docs-conceptual/developer/format/view-element-format.md:80:94     - Un
 reference/docs-conceptual/developer/format/viewselectedby-element-format.md:22:13     - Unknown word (Nameof)     -- <TypeName>Nameof.NetType</TypeName>
 reference/docs-conceptual/developer/format/viewselectedby-element-format.md:61:56     - Unknown word (Serviceprocess) -- specify the [System.Serviceprocess.Servicecontroller](
 reference/docs-conceptual/developer/format/viewselectedby-element-format.md:61:71     - Unknown word (Servicecontroller) -- System.Serviceprocess.Servicecontroller](/dotnet/api/System
-reference/docs-conceptual/developer/format/wide-view-basic.md:40:111    - Unknown word (Servicename)       -- viceprocess.Servicecontroller.Servicename](/dotnet/api/System
 reference/docs-conceptual/developer/format/wide-view-basic.md:40:78     - Unknown word (Serviceprocess)    -- value of the [System.Serviceprocess.Servicecontroller.Servicename
 reference/docs-conceptual/developer/format/wide-view-basic.md:40:93     - Unknown word (Servicecontroller) -- System.Serviceprocess.Servicecontroller.Servicename](/dotnet
 reference/docs-conceptual/developer/format/wide-view-basic.md:66:106    - Unknown word (Displayproperty)   -- viceprocess.Servicecontroller?Displayproperty=Fullname](/dotnet/api
@@ -3709,11 +3680,6 @@ reference/docs-conceptual/learn/deep-dives/everything-about-pscustomobject.md:20
 reference/docs-conceptual/learn/deep-dives/everything-about-pscustomobject.md:273:51    - Unknown word (Redditor)   -- way to do this from Redditor `u/markekraus`. He talks
 reference/docs-conceptual/learn/deep-dives/everything-about-pscustomobject.md:273:63    - Unknown word (markekraus) -- this from Redditor `u/markekraus`. He talks about this
 reference/docs-conceptual/learn/deep-dives/everything-about-shouldprocess.md:38:51     - Unknown word (importantfile) -- 9 AM              0 importantfile.txt
-reference/docs-conceptual/learn/deep-dives/everything-about-shouldprocess.md:39:51     - Unknown word (myfile)        -- 8 AM              0 myfile1.txt
-reference/docs-conceptual/learn/deep-dives/everything-about-shouldprocess.md:40:51     - Unknown word (myfile)        -- 9 AM              0 myfile2.txt
-reference/docs-conceptual/learn/deep-dives/everything-about-shouldprocess.md:42:33     - Unknown word (myfile)        -- Remove-Item -Path .\myfile1.txt -WhatIf
-reference/docs-conceptual/learn/deep-dives/everything-about-shouldprocess.md:43:68     - Unknown word (myfile)        -- on target "C:\Temp\myfile1.txt".
-reference/docs-conceptual/learn/deep-dives/everything-about-shouldprocess.md:51:68     - Unknown word (myfile)        -- on target "C:\Temp\myfile1.txt".
 reference/docs-conceptual/learn/deep-dives/everything-about-shouldprocess.md:53:68     - Unknown word (importantfile) -- on target "C:\Temp\importantfile.txt".
 reference/docs-conceptual/learn/deep-dives/everything-about-shouldprocess.md:547:33    - Unknown word (Shoud)         -- specifies `-Confirm` then `ShoudProcess()` honors the
 reference/docs-conceptual/learn/deep-dives/everything-about-string-substitutions.md:237:11    - Unknown word (Redditor)   -- Thank you Redditor `u/real_parbold` for
@@ -3987,10 +3953,6 @@ reference/docs-conceptual/whats-new/differences-from-windows-powershell.md:1216:
 reference/docs-conceptual/whats-new/differences-from-windows-powershell.md:349:26    - Unknown word (inputformat) -- short hand to match `-inputformat`, which now needs to
 reference/docs-conceptual/whats-new/differences-from-windows-powershell.md:732:5     - Unknown word (Childitem)   -- Get-Childitem -Path c:\NotReal
 reference/docs-conceptual/windows-powershell/ise/object-model/Other-Useful-Scripting-Objects.md:27:40     - Unknown word (Mycommand)  -- ortedConsoleApplications.Add('Mycommand')
-reference/docs-conceptual/windows-powershell/ise/object-model/The-ISEFile-Object.md:127:2     - Unknown word (myfile)     -- $myfile = $psISE.CurrentFile
-reference/docs-conceptual/windows-powershell/ise/object-model/The-ISEFile-Object.md:128:2     - Unknown word (myfile)     -- $myfile.IsSaved
-reference/docs-conceptual/windows-powershell/ise/object-model/The-ISEFile-Object.md:38:2      - Unknown word (myfile)     -- $myfile = $psISE.CurrentFile
-reference/docs-conceptual/windows-powershell/ise/object-model/The-ISEFile-Object.md:39:2      - Unknown word (myfile)     -- $myfile.Encoding
 reference/docs-conceptual/windows-powershell/ise/object-model/The-ISEFile-Object.md:62:2      - Unknown word (fullpath)   -- $fullpath = "c:\temp\newname.txt
 reference/docs-conceptual/windows-powershell/ise/object-model/The-ISEFile-Object.md:62:22     - Unknown word (newname)    -- fullpath = "c:\temp\newname.txt"
 reference/docs-conceptual/windows-powershell/ise/object-model/The-ISEFileCollection-Object.md:49:2      - Unknown word (firstfile)  -- $firstfile = $psISE.CurrentPowerShellTab
