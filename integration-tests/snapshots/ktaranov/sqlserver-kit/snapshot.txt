@@ -3722,22 +3722,22 @@ Sample_Databases/README.md:76:84     - Unknown word (Itzik)         -- books/sou
 Sample_Databases/README.md:77:115    - Unknown word (Ozar)          -- database/) (by Brent Ozar)
 Sample_Databases/README.md:78:5      - Unknown word (Babby)         -- - [BabbyNames Database](https
 Sample_Databases/README.md:79:16     - Unknown word (Sakila)        -- - [SQL Server Sakila DB](https://www.jooq
-Scripts/Adding_Trace_Flags_To_Startup_Parameters.sql:109:52    - Unknown word (regwrite)      -- master.sys.xp_instance_regwrite @RegHive, @RegKey,
+Scripts/Adding_Trace_Flags_To_Startup_Parameters.sql:106:52    - Unknown word (regdeletevalue) -- master.sys.xp_instance_regdeletevalue @RegHive, @RegKey,
+Scripts/Adding_Trace_Flags_To_Startup_Parameters.sql:107:40    - Unknown word (regdeletevalue) -- master.sys.xp_instance_regdeletevalue ''' + @RegHive + ''
 Scripts/Adding_Trace_Flags_To_Startup_Parameters.sql:10:1      - Unknown word (HKLM)       -- HKLM\Software\Microsoft\MSSQLSERVE
-Scripts/Adding_Trace_Flags_To_Startup_Parameters.sql:110:40    - Unknown word (regwrite)      -- master.sys.xp_instance_regwrite ''' + @RegHive + ''
-Scripts/Adding_Trace_Flags_To_Startup_Parameters.sql:120:52    - Unknown word (regdeletevalue) -- master.sys.xp_instance_regdeletevalue @RegHive, @RegKey,
-Scripts/Adding_Trace_Flags_To_Startup_Parameters.sql:121:40    - Unknown word (regdeletevalue) -- master.sys.xp_instance_regdeletevalue ''' + @RegHive + ''
 Scripts/Adding_Trace_Flags_To_Startup_Parameters.sql:13:1      - Unknown word (HKLM)       -- HKLM\Software\Microsoft\MSSQLSERVE
-Scripts/Adding_Trace_Flags_To_Startup_Parameters.sql:28:10     - Unknown word (SQLCMD)     -- @SQLCMD VARCHAR(MAX),
-Scripts/Adding_Trace_Flags_To_Startup_Parameters.sql:59:29     - Unknown word (regenumvalues) -- master.sys.xp_instance_regenumvalues @RegHive, @RegKey;
-Scripts/Adding_Trace_Flags_To_Startup_Parameters.sql:66:24     - Unknown word (TRACEOFF)      -- SELECT @SQLCMD = 'DBCC TRACEOFF(' +
-Scripts/Adding_Trace_Flags_To_Startup_Parameters.sql:66:9      - Unknown word (SQLCMD)        -- SELECT @SQLCMD = 'DBCC TRACEOFF('
+Scripts/Adding_Trace_Flags_To_Startup_Parameters.sql:27:10     - Unknown word (SQLCMD)     -- @SQLCMD VARCHAR(MAX),
+Scripts/Adding_Trace_Flags_To_Startup_Parameters.sql:50:29     - Unknown word (regenumvalues) -- master.sys.xp_instance_regenumvalues @RegHive, @RegKey;
+Scripts/Adding_Trace_Flags_To_Startup_Parameters.sql:55:24     - Unknown word (TRACEOFF)      -- SELECT @SQLCMD = 'DBCC TRACEOFF(' +
+Scripts/Adding_Trace_Flags_To_Startup_Parameters.sql:55:9      - Unknown word (SQLCMD)        -- SELECT @SQLCMD = 'DBCC TRACEOFF('
+Scripts/Adding_Trace_Flags_To_Startup_Parameters.sql:61:27     - Unknown word (SQLCMD)        -- DebugLevel = 0 EXEC (@SQLCMD);
+Scripts/Adding_Trace_Flags_To_Startup_Parameters.sql:62:35     - Unknown word (SQLCMD)        -- Disable TFs Command: "' + @SQLCMD + '"';
+Scripts/Adding_Trace_Flags_To_Startup_Parameters.sql:64:24     - Unknown word (TRACEON)       -- SELECT @SQLCMD = 'DBCC TRACEON(' +
+Scripts/Adding_Trace_Flags_To_Startup_Parameters.sql:64:9      - Unknown word (SQLCMD)        -- SELECT @SQLCMD = 'DBCC TRACEON(' +
 Scripts/Adding_Trace_Flags_To_Startup_Parameters.sql:6:10      - Unknown word (TRACEON)    -- Use DBCC TRACEON/TRACEOFF to enable or
 Scripts/Adding_Trace_Flags_To_Startup_Parameters.sql:6:18      - Unknown word (TRACEOFF)   -- Use DBCC TRACEON/TRACEOFF to enable or disable
-Scripts/Adding_Trace_Flags_To_Startup_Parameters.sql:72:27     - Unknown word (SQLCMD)        -- DebugLevel = 0 EXEC (@SQLCMD);
-Scripts/Adding_Trace_Flags_To_Startup_Parameters.sql:73:35     - Unknown word (SQLCMD)        -- Disable TFs Command: "' + @SQLCMD + '"';
-Scripts/Adding_Trace_Flags_To_Startup_Parameters.sql:76:24     - Unknown word (TRACEON)       -- SELECT @SQLCMD = 'DBCC TRACEON(' +
-Scripts/Adding_Trace_Flags_To_Startup_Parameters.sql:76:9      - Unknown word (SQLCMD)        -- SELECT @SQLCMD = 'DBCC TRACEON(' +
+Scripts/Adding_Trace_Flags_To_Startup_Parameters.sql:96:52     - Unknown word (regwrite)      -- master.sys.xp_instance_regwrite @RegHive, @RegKey,
+Scripts/Adding_Trace_Flags_To_Startup_Parameters.sql:97:40     - Unknown word (regwrite)      -- master.sys.xp_instance_regwrite ''' + @RegHive + ''
 Scripts/AutoGuessingForeignKeyConstraints.sql:2:16      - Unknown word (Hutmacher)  -- Author: Daniel Hutmacher
 Scripts/Auto_Generate_Database_Documentation.sql:122:24    - Unknown word (OBJECTPROPERTYEX) -- WHERE OBJECTPROPERTYEX(c.[object_id], 'IsMSShipped
 Scripts/Auto_Generate_Database_Documentation.sql:123:28    - Unknown word (OBJECTPROPERTYEX) -- AND OBJECTPROPERTYEX(c.[object_id], 'IsUserTable
