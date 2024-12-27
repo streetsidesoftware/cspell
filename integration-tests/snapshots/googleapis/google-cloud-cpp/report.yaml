@@ -4,8 +4,8 @@ Url: https://github.com/googleapis/google-cloud-cpp.git
 Args: '["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]'
 Summary:
   files: 19742
-  filesWithIssues: 8828
-  issues: 54549
+  filesWithIssues: 8824
+  issues: 54458
   errors: 0
 Errors: []
 
@@ -110,7 +110,6 @@ issues:
   - "ci/etc/expected_install_directories:725:24      edgecontainer               U       include/google/cloud/edgecontainer"
   - "ci/etc/expected_install_directories:730:24      edgenetwork                 U       include/google/cloud/edgenetwork"
   - "ci/etc/expected_install_directories:734:24      essentialcontacts           U       include/google/cloud/essentialcontacts"
-  - "ci/etc/expected_install_directories:747:24      filestore                   U       include/google/cloud/filestore"
   - "ci/etc/expected_install_directories:760:24      gkebackup                   U       include/google/cloud/gkebackup"
   - "ci/etc/expected_install_directories:764:24      gkeconnect                  U       include/google/cloud/gkeconnect"
   - "ci/etc/expected_install_directories:769:24      gkehub                      U       include/google/cloud/gkehub"
@@ -367,7 +366,6 @@ issues:
   - "generator/generator_config.textproto:2003:3         Dialogflow      U       # Dialogflow CX"
   - "generator/generator_config.textproto:2009:47        DIALOGFLOW      U       var: \"GOOGLE_CLOUD_CPP_DIALOGFLOW_ENVIRONMENT_ENDPOINT"
   - "generator/generator_config.textproto:2446:3         Eventarc        U       # Eventarc"
-  - "generator/generator_config.textproto:2463:3         Filestore       U       # Filestore"
   - "generator/generator_config.textproto:2506:7         Multicloud      U       # GKE Multicloud"
   - "generator/generator_config.textproto:3688:12        Hmac            U       \"CreateHmacKey\","
   - "generator/integration_tests/backup.proto:27:40          genproto    U       \"google.golang.org/genproto/googleapis/test/admin"
@@ -615,7 +613,6 @@ issues:
   - "google/cloud/essentialcontacts/v1/essential_contacts_client.h:19:39         ESSENTIALCONTACTS       U       CLOUD_CPP_GOOGLE_CLOUD_ESSENTIALCONTACTS_V1_ESSENTIAL_CONTACTS"
   - "google/cloud/eventarc/doc/environment-variables.dox:13:21       EVENTARC                U       - `GOOGLE_CLOUD_CPP_EVENTARC_ENDPOINT=...` overrides"
   - "google/cloud/eventarc/doc/environment-variables.dox:18:40       eventarcpublishing      U       (which defaults to \"eventarcpublishing.googleapis.com\")"
-  - "google/cloud/filestore/doc/environment-variables.dox:13:27          FILESTORE       U       GOOGLE_CLOUD_CPP_CLOUD_FILESTORE_MANAGER_ENDPOINT=.."
   - "google/cloud/functions/doc/environment-variables.dox:14:40          cloudfunctions      U       (which defaults to \"cloudfunctions.googleapis.com\")"
   - "google/cloud/future_generic_then_test.cc:509:62         functort    U       exceptions raised by the functort to the"
   - "google/cloud/gkebackup/v1/backup_for_gke_client.h:19:39         GKEBACKUP       U       CLOUD_CPP_GOOGLE_CLOUD_GKEBACKUP_V1_BACKUP_FOR_GKE_CLIENT"
