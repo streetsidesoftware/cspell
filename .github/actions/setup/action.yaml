@@ -8,6 +8,11 @@ inputs:
 runs:
   using: 'composite'
   steps:
+    - name: Install Corepack
+      run: |
+        corepack install
+      shell: bash
+
     - name: Use Node.js ${{ inputs.node-version }}
       uses: actions/setup-node@v4
       with:
