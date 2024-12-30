@@ -132,6 +132,7 @@ const settings: AdvancedCSpellSettings = {
         '@cspell/dict-java/cspell-ext.json',
         '@cspell/dict-julia/cspell-ext.json',
         '@cspell/dict-k8s/cspell-ext.json',
+        '@cspell/dict-kotlin/cspell-ext.json',
         '@cspell/dict-latex/cspell-ext.json',
         '@cspell/dict-lorem-ipsum/cspell-ext.json',
         '@cspell/dict-lua/cspell-ext.json',
@@ -158,4 +159,4 @@ const settings: AdvancedCSpellSettings = {
     ],
 };
 
-export = settings;
+export default settings;

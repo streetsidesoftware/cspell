@@ -1,4 +1,3 @@
-"use strict";
 const settings = {
     version: '0.2',
     name: 'cspell default settings .js',
@@ -130,6 +129,7 @@ const settings = {
         '@cspell/dict-java/cspell-ext.json',
         '@cspell/dict-julia/cspell-ext.json',
         '@cspell/dict-k8s/cspell-ext.json',
+        '@cspell/dict-kotlin/cspell-ext.json',
         '@cspell/dict-latex/cspell-ext.json',
         '@cspell/dict-lorem-ipsum/cspell-ext.json',
         '@cspell/dict-lua/cspell-ext.json',
@@ -155,4 +155,4 @@ const settings = {
         '@cspell/dict-vue/cspell-ext.json',
     ],
 };
-module.exports = settings;
+export default settings;
