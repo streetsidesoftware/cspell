@@ -42,6 +42,8 @@ jobs:
 
       - name: Install and Build
         uses: ./.github/actions/install-build
+        with:
+          node-version: 18.x # using 18 for now since there are coverage issues with newer versions
 
       - run: pnpm run coverage
 
