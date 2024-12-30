@@ -46,6 +46,7 @@ jobs:
           - 18.x
           - 20.x
           - 22.x
+          - 23.x
 
         os:
           - ubuntu-latest
@@ -67,7 +68,7 @@ jobs:
     strategy:
       matrix:
         node-version:
-          - 18.x
+          - 22.x
 
         os:
           - windows-latest
@@ -90,8 +91,7 @@ jobs:
     strategy:
       matrix:
         node-version:
-          - 18.x
-          # - 20.x
+          - 22.x
 
         os:
           - ubuntu-latest
@@ -123,8 +123,10 @@ jobs:
       matrix:
         node-version:
           # List of supported node versions (latest is tested in `test-os`)
+          - 18.x
           - 20.x
           - 22.x
+          - 23.x
 
         os:
           - ubuntu-latest
@@ -136,10 +138,10 @@ jobs:
         include:
           - os: windows-latest
             use_cspell_cache: ''
-            node-version: 18.x
+            node-version: 22.x
           # - os: macos-latest
           #   use_cspell_cache: ""
-          #   node-version: 18.x
+          #   node-version: 22.x
 
     steps:
       - uses: actions/checkout@v4

@@ -24,7 +24,7 @@ jobs:
       - name: Setup and Build
         uses: ./.github/actions/install-build-cache
         with:
-          node-version: 18.x
+          node-version: 22.x
 
       - name: Lint
         run: pnpm run lint
