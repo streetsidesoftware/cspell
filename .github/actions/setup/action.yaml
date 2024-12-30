@@ -8,10 +8,8 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - name: Install Corepack
-      run: |
-        corepack install
-      shell: bash
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v4
 
     - name: Use Node.js ${{ inputs.node-version }}
       uses: actions/setup-node@v4
