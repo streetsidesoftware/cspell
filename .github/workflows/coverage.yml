@@ -36,7 +36,7 @@ permissions:
   contents: read
 
 env:
-  NODE_OPTIONS: "--enable-source-maps"
+  NODE_OPTIONS: '--enable-source-maps'
   NODE_VERSION: ${{ inputs.NODE_VERSION || '18.x' }} # using 18 for now since there are coverage issues with newer versions
 
 jobs:
