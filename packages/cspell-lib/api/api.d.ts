@@ -10,6 +10,7 @@ export { SpellingDictionary, SpellingDictionaryCollection, SuggestOptions, Sugge
 import { WeightMap } from 'cspell-trie-lib';
 export { CompoundWordsMethod } from 'cspell-trie-lib';
 import { CSpellConfigFile, ICSpellConfigFile } from 'cspell-config-lib';
+export { CSpellConfigFile, ICSpellConfigFile } from 'cspell-config-lib';
 
 /**
  * Clear the cached files and other cached data.

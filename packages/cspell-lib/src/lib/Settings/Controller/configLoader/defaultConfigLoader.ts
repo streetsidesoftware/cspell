@@ -10,6 +10,8 @@ import type { PnPSettingsOptional } from './PnPSettings.js';
 import { defaultPnPSettings } from './PnPSettings.js';
 import type { CSpellSettingsI, CSpellSettingsWST } from './types.js';
 
+export type { CSpellConfigFile, ICSpellConfigFile } from 'cspell-config-lib';
+
 const gcl = getDefaultConfigLoaderInternal;
 /**
  *

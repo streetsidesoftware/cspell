@@ -7,6 +7,7 @@ export {
     sectionCSpell,
 } from './configLoader.js';
 export { defaultConfigFilenames } from './configLocations.js';
+export type { CSpellConfigFile, ICSpellConfigFile } from './defaultConfigLoader.js';
 export {
     clearCachedSettingsFiles,
     getCachedFileSize,
