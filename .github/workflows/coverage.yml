@@ -31,13 +31,13 @@ on:
       NODE_VERSION:
         description: 'Node Version'
         required: true
-        default: '18.x'
+        default: '22.x'
 permissions:
   contents: read
 
 env:
-  NODE_OPTIONS: '--enable-source-maps'
-  NODE_VERSION: ${{ inputs.NODE_VERSION || '18.x' }} # using 18 for now since there are coverage issues with newer versions
+  NODE_OPTIONS: '--enable-source-maps' # coverage report is wrong if this in not set.
+  NODE_VERSION: ${{ inputs.NODE_VERSION || '22.x' }}
 
 jobs:
   coverage:
