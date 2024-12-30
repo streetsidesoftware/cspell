@@ -17,10 +17,15 @@ export type {
 export { createTextDocument, updateTextDocument } from './Models/TextDocument.js';
 export type { PerfTimer } from './perf/index.js';
 export { createPerfTimer } from './perf/index.js';
+export type {
+    ConfigurationDependencies,
+    CSpellConfigFile,
+    ICSpellConfigFile,
+    ImportFileRefWithError,
+} from './Settings/index.js';
 export {
     calcOverrideSettings,
     checkFilenameMatchesGlob,
-    type ConfigurationDependencies,
     createConfigLoader,
     currentSettingsFileVersion,
     defaultConfigFilenames,
@@ -37,7 +42,6 @@ export {
     getGlobalSettingsAsync,
     getSources,
     ImportError,
-    type ImportFileRefWithError,
     loadConfig,
     loadPnP,
     mergeInDocSettings,

@@ -1,6 +1,7 @@
 export { calcOverrideSettings } from './calcOverrideSettings.js';
 export { checkFilenameMatchesGlob } from './checkFilenameMatchesGlob.js';
 export { currentSettingsFileVersion, ENV_CSPELL_GLOB_ROOT } from './constants.js';
+export type { CSpellConfigFile, ICSpellConfigFile } from './Controller/configLoader/index.js';
 export {
     clearCachedSettingsFiles,
     createConfigLoader,
