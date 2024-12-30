@@ -3,7 +3,7 @@ Repository: slint-ui/slint
 Url: "https://github.com/slint-ui/slint"
 Args: ["--config=../../../../repositories/config/slint/cspell.config.yaml","--issues-summary-report","."]
 Lines:
- CSpell: Files checked: 1954, Issues found: 3681 in 677 files.
+ CSpell: Files checked: 1954, Issues found: 3861 in 698 files.
  exit code: 1
 CMakeLists.txt:17:14     - Unknown word (TOPLEVEL)   -- set(SLINT_IS_TOPLEVEL_BUILD TRUE)
 CMakeLists.txt:27:31     - Unknown word (dylib's)    -- macOS, the slint_cpp.dylib's install_name uses @rpath
@@ -111,6 +111,8 @@ api/cpp/CMakeLists.txt:65:1      - Unknown word (endfunction) -- endfunction()
 api/cpp/CMakeLists.txt:74:12     - Unknown word (TOUPPER)     -- string(TOUPPER "${renderer}" cmake
 api/cpp/CMakeLists.txt:81:1      - Unknown word (endfunction) -- endfunction()
 api/cpp/CMakeLists.txt:88:74     - Unknown word (interpeter)  -- support for the Slint interpeter to load .slint files
+api/cpp/README.md:79:40     - Unknown word (cortexa)    -- sdk/environment-setup-cortexa53-crypto-poky-linux
+api/cpp/README.md:83:54     - Unknown word (DCMAKE)     -- -unknown-linux-gnu -DCMAKE_INSTALL_PREFIX=/slint
 api/cpp/cbindgen.rs:1012:13   - Unknown word (linuxkms)   -- backend_linuxkms
 api/cpp/cbindgen.rs:1013:13   - Unknown word (linuxkms)   -- backend_linuxkms_noseat
 api/cpp/cbindgen.rs:1013:22   - Unknown word (noseat)     -- backend_linuxkms_noseat
@@ -145,22 +147,50 @@ api/cpp/docs/Pipfile:17:1      - Unknown word (furo)       -- furo = ">=2022.12.
 api/cpp/docs/Pipfile:18:1      - Unknown word (sphinxcontrib) -- sphinxcontrib-jquery = ">=4.1"
 api/cpp/docs/Pipfile:18:15     - Unknown word (jquery)        -- sphinxcontrib-jquery = ">=4.1"
 api/cpp/docs/Pipfile:5:9       - Unknown word (pypi)       -- name = "pypi"
+api/cpp/docs/cmake.md:162:22    - Unknown word (iconfigure) -- Then you're ready to iconfigure your CMake project you
+api/cpp/docs/cmake.md:41:99     - Unknown word (DCMAKE)     -- Alternatively you can pass `-DCMAKE_PREFIX_PATH=/path/to
 api/cpp/docs/cmake_reference.md:21:94     - Unknown word (mycomponentlib) -- . Any import from `@mycomponentlib/` will
+api/cpp/docs/cmake_reference.md:29:19     - Unknown word (mycomponentlib) -- LIBRARY_PATHS mycomponentlib=/path/to/customcomponents
+api/cpp/docs/cmake_reference.md:29:43     - Unknown word (customcomponents) -- mycomponentlib=/path/to/customcomponents
+api/cpp/docs/cmake_reference.md:41:163    - Unknown word (minimises)        -- disk at run-time. This minimises build times, but requires
+api/cpp/docs/cmake_reference.md:49:25     - Unknown word (initialised)      -- This target property is initialised from the global `DEFAULT
+api/cpp/docs/generated_code.md:140:61    - Unknown word (toupper)    -- end(), arg.begin(), toupper);
 api/cpp/docs/index.rst:55:4      - Unknown word (thirdparty) -- thirdparty.md
 api/cpp/docs/mcu/esp-idf/troubleshoot.md:40:106    - Unknown word (libgcc)     -- of `__udivdi3'; .../libgcc.a(_udivdi3.o): first
 api/cpp/docs/mcu/esp-idf/troubleshoot.md:40:116    - Unknown word (udivdi)     -- udivdi3'; .../libgcc.a(_udivdi3.o): first defined here
+api/cpp/docs/mcu/esp-idf/troubleshoot.md:40:52     - Unknown word (udivdi)     -- cb1e-cgu.05:(.text.__udivdi3+0x0): multiple definition
 api/cpp/docs/mcu/esp-idf/troubleshoot.md:40:92     - Unknown word (udivdi)     -- multiple definition of `__udivdi3'; .../libgcc.a(_udivdi
-api/cpp/docs/mcu/esp_idf.md:111:47    - Unknown word (menuconfig)  -- editor with `idf.py menuconfig`:
-api/cpp/docs/mcu/esp_idf.md:11:16     - Unknown word (Espressif)   -- * Install the [Espressif IoT Development Framework
-api/cpp/docs/mcu/esp_idf.md:15:297    - Unknown word (Espressif)   -- Rust toolchains for Espressif SoCs with Xtensa and
-api/cpp/docs/mcu/esp_idf.md:3:3       - Unknown word (Espressif's) -- # Espressif's IoT Development Framework
-api/cpp/docs/mcu/esp_idf.md:5:96      - Unknown word (Espressif)   -- slint/slint) for the [Espressif IoT Development Framework
+api/cpp/docs/mcu/esp_idf.md:108:24    - Unknown word (SRCS)       -- idf_component_register(SRCS "slint-hello-world.cpp
+api/cpp/docs/mcu/esp_idf.md:111:47    - Unknown word (menuconfig) -- editor with `idf.py menuconfig`:
+api/cpp/docs/mcu/esp_idf.md:114:102   - Unknown word (PSRAM)      -- how to [Configure the PSRAM](https://docs.espressif
+api/cpp/docs/mcu/esp_idf.md:117:39    - Unknown word (sdkconfig)  -- check in a default sdkconfig tweaked from your board
+api/cpp/docs/mcu/esp_idf.md:131:5     - Unknown word (toctree)    -- ```{toctree}
+api/cpp/docs/mcu/esp_idf.md:26:16     - Unknown word (chipset)    -- 2. Select your chipset with `idf.py set-target
+api/cpp/docs/mcu/esp_idf.md:26:91     - Unknown word (chipset)    -- re using an `ESP32S3` chipset, run
+api/cpp/docs/mcu/esp_idf.md:61:36     - Unknown word (disp)       -- display_config_t bsp_disp_cfg = {
+api/cpp/docs/mcu/esp_idf.md:64:26     - Unknown word (disp)       -- bsp_display_new(&bsp_disp_cfg, &panel_handle,
+api/cpp/docs/mcu/generic.md:31:5      - Unknown word (DSLINT)     -- | `-DSLINT_FEATURE_FREESTANDING
+api/cpp/docs/mcu/generic.md:32:5      - Unknown word (DBUILD)     -- | `-DBUILD_SHARED_LIBS=OFF`
+api/cpp/docs/mcu/generic.md:33:5      - Unknown word (DSLINT)     -- | `-DSLINT_FEATURE_RENDERER_SOFTWARE
+api/cpp/docs/mcu/generic.md:34:5      - Unknown word (DDEFAULT)   -- | `-DDEFAULT_SLINT_EMBED_RESOURCES
+api/cpp/docs/mcu/generic.md:40:27     - Unknown word (thumbv)     -- -DRust_CARGO_TARGET=thumbv7em-none-eabihf -DSLINT
+api/cpp/docs/mcu/generic.md:40:42     - Unknown word (eabihf)     -- TARGET=thumbv7em-none-eabihf -DSLINT_FEATURE_FREESTANDING
+api/cpp/docs/mcu/generic.md:40:50     - Unknown word (DSLINT)     -- thumbv7em-none-eabihf -DSLINT_FEATURE_FREESTANDING
+api/cpp/docs/mcu/generic.md:41:32     - Unknown word (DSLINT)     -- DBUILD_SHARED_LIBS=OFF -DSLINT_FEATURE_RENDERER_SOFTWARE
+api/cpp/docs/mcu/generic.md:41:8      - Unknown word (DBUILD)     -- -DBUILD_SHARED_LIBS=OFF -DSLINT
+api/cpp/docs/mcu/generic.md:42:8      - Unknown word (DDEFAULT)   -- -DDEFAULT_SLINT_EMBED_RESOURCES
 api/cpp/docs/mcu/intro.md:11:41     - Unknown word (targetting) -- section](esp_idf.md), when targetting MCUs with Espressif
-api/cpp/docs/mcu/intro.md:11:62     - Unknown word (Espressif's) -- targetting MCUs with Espressif's IoT Development Framework
-api/cpp/docs/mcu/intro.md:12:37     - Unknown word (targetting)  -- section](stm32.md), when targetting MCUs in STMicroelectronics
+api/cpp/docs/mcu/intro.md:12:37     - Unknown word (targetting) -- section](stm32.md), when targetting MCUs in STMicroelectronics
+api/cpp/docs/mcu/stm32.md:47:5      - Unknown word (toctree)    -- ```{toctree}
+api/cpp/docs/mcu/stm32.md:6:83      - Unknown word (LTDC)       -- the `BSP_LCD` and `HAL_LTDC` APIs to render
 api/cpp/docs/mcu/stm32/generic.md:12:51     - Unknown word (LTDC)       -- needed. This includes LTDC and typically the FMC
 api/cpp/docs/mcu/stm32/generic.md:13:19     - Unknown word (framebuffers) -- to place the framebuffers in RAM.
+api/cpp/docs/mcu/stm32/generic.md:23:35     - Unknown word (thumbv)       -- extract `Slint-cpp-VERSION-thumbv7em-none-eabihf.tar.gz
+api/cpp/docs/mcu/stm32/generic.md:23:50     - Unknown word (eabihf)       -- VERSION-thumbv7em-none-eabihf.tar.gz`, replace `VERSION
+api/cpp/docs/mcu/stm32/generic.md:25:57     - Unknown word (appmain)      -- project, for example `appmain.cpp`, with an `appmain
+api/cpp/docs/mcu/stm32/generic.md:25:80     - Unknown word (appmain)      -- appmain.cpp`, with an `appmain` function and call it
 api/cpp/docs/mcu/stm32/generic.md:63:14     - Unknown word (appmain)      -- 14. In your `appmain` function, initialize
+api/cpp/docs/mcu/stm32/generic.md:76:21     - Unknown word (appmain)      -- extern "C" void appmain() {
 api/cpp/esp-idf/slint/CMakeLists.txt:15:33     - Unknown word (imac)       -- rust_target "riscv32imac-esp-espidf")
 api/cpp/esp-idf/slint/CMakeLists.txt:15:42     - Unknown word (espidf)     -- target "riscv32imac-esp-espidf")
 api/cpp/esp-idf/slint/CMakeLists.txt:17:33     - Unknown word (imafc)      -- rust_target "riscv32imafc-esp-espidf")
@@ -168,7 +198,6 @@ api/cpp/esp-idf/slint/CMakeLists.txt:17:43     - Unknown word (espidf)     -- ta
 api/cpp/esp-idf/slint/CMakeLists.txt:19:41     - Unknown word (espidf)     -- target "riscv32imc-esp-espidf")
 api/cpp/esp-idf/slint/CMakeLists.txt:27:33     - Unknown word (Zbuild)     -- LIBRARY_CARGO_FLAGS "-Zbuild-std=core,alloc")
 api/cpp/esp-idf/slint/CMakeLists.txt:5:5       - Unknown word (SRCS)       -- SRCS "src/slint-esp.cpp"
-api/cpp/esp-idf/slint/README.md:9:81      - Unknown word (Espressif)  -- slint.dev/) for the [Espressif IoT Development Framework
 api/cpp/esp-idf/slint/cmake/FindSlint.cmake:14:52     - Unknown word (behaviour)  -- be set to affect the behaviour:
 api/cpp/esp-idf/slint/cmake/FindSlint.cmake:18:47     - Unknown word (thumbv)     -- you'd set this to `thumbv7em-none-eabihf`. If
 api/cpp/esp-idf/slint/cmake/FindSlint.cmake:18:62     - Unknown word (eabihf)     -- this to `thumbv7em-none-eabihf`. If not set, this module
@@ -232,6 +261,8 @@ api/cpp/tests/CMakeLists.txt:45:16     - Unknown word (eventloop)  -- slint_test
 api/cpp/tests/CMakeLists.txt:46:32     - Unknown word (eventloop)  -- link_libraries(test_eventloop PRIVATE Threads::Threads
 api/cpp/tests/CMakeLists.txt:59:21     - Unknown word (eventloop)  -- slint_test(platform_eventloop)
 api/cpp/tests/CMakeLists.txt:60:37     - Unknown word (eventloop)  -- libraries(test_platform_eventloop PRIVATE Threads::Threads
+api/node/README.md:279:45    - Unknown word (defing)     -- be created either by defing of an object literal
+api/node/README.md:315:56    - Unknown word (usign)      -- set as string or by usign the value from the exported
 api/node/__test__/api.spec.mts:277:44    - Unknown word (fileloader) -- dirname, "resources/test-fileloader.slint"),
 api/node/__test__/compiler.spec.mts:247:14    - Unknown word (testsource) -- "testsource.slint",
 api/node/__test__/compiler.spec.mts:259:20    - Unknown word (testsource) -- fileName: "testsource.slint",
@@ -268,6 +299,10 @@ api/node/__test__/js_value_conversion.spec.mts:864:68    - Unknown word (florian
 api/node/__test__/models.spec.mts:46:32     - Unknown word (Mustermann) -- first: "Max", last: "Mustermann" },
 api/node/__test__/models.spec.mts:47:34     - Unknown word (Tisch)      -- first: "Roman", last: "Tisch" },
 api/node/__test__/tsconfig.json:3:20      - Unknown word (nodenext)   -- "module": "nodenext",
+api/node/cover.md:173:14    - Unknown word (conent)     -- 4. Clear the conent of`index.ts` and add
+api/node/cover.md:324:45    - Unknown word (defing)     -- be created either by defing of an object literal
+api/node/cover.md:360:56    - Unknown word (usign)      -- set as string or by usign the value from the exported
+api/node/cover.md:395:1     - Unknown word (componen)   -- componen instance. Each global
 api/node/package.json:44:114    - Unknown word (thirdparty) -- cargo about generate thirdparty.hbs -o docs/thirdparty
 api/node/package.json:44:137    - Unknown word (thirdparty) -- thirdparty.hbs -o docs/thirdparty.html",
 api/node/rust/interpreter/component_compiler.rs:10:16     - Unknown word (Itertools)  -- use itertools::Itertools;
@@ -297,6 +332,8 @@ api/node/typescript/index.ts:882:54    - Unknown word (Musterfrau) -- first: "Mi
 api/node/typescript/index.ts:887:19    - Unknown word (Musterfrau) -- * // prints "Musterfrau, Minnie"
 api/node/typescript/index.ts:936:96    - Unknown word (bindtextdomain) -- internally calls the [bindtextdomain](https://man7.org/linux
 api/python/README.md:23:5      - Unknown word (Pipenv)     -- * [Pipenv](https://pipenv.pypa
+api/python/README.md:44:1      - Unknown word (pipenv)     -- pipenv update
+api/python/README.md:45:1      - Unknown word (pipenv)     -- pipenv run python main.py
 api/python/README.md:50:60     - Unknown word (pipenv)     -- your Python project: `pipenv install slint`
 api/python/README.md:88:17     - Unknown word (pipenv)     -- 4. Run it with `pipenv run python main.py`
 api/python/brush.rs:127:3     - Unknown word (pyclass)    -- #[pyclass]
@@ -514,8 +551,28 @@ api/rs/slint/android.rs:79:90     - Unknown word (xbuild)     -- with others, su
 api/rs/slint/lib.rs:287:23    - Unknown word (smol)       -- / Futures from the [smol](https://docs.rs/smol
 api/rs/slint/lib.rs:366:39    - Unknown word (bindtextdomain) -- internally calls the [`bindtextdomain`](https://man7.org/linux
 api/rs/slint/lib.rs:6:13      - Unknown word (docsrs)     -- #![cfg_attr(docsrs, feature(doc_cfg, doc
+api/rs/slint/mcu.md:129:77    - Unknown word (impementation) -- you can query in your impementation.
+api/rs/slint/mcu.md:285:22    - Unknown word (usize)         -- const DISPLAY_WIDTH: usize = 320;
+api/rs/slint/mcu.md:286:23    - Unknown word (usize)         -- const DISPLAY_HEIGHT: usize = 240;
+api/rs/slint/mcu.md:32:91     - Unknown word (libm)       -- unsafe-single-threaded libm renderer-software"
+api/rs/slint/mcu.md:335:65    - Unknown word (pixelcolor)    -- primitives::Rectangle, pixelcolor::raw::RawU16};
+api/rs/slint/mcu.md:344:12    - Unknown word (pixelcolor)    -- # pub mod pixelcolor {
+api/rs/slint/mcu.md:350:74    - Unknown word (pixelcolor)    -- embedded_graphics_core::pixelcolor::Rgb565; }
+api/rs/slint/mcu.md:356:52    - Unknown word (pixelcolor)    -- embedded_graphics_core::pixelcolor::Rgb565>>
+api/rs/slint/mcu.md:362:15    - Unknown word (usize)         -- line: usize,
+api/rs/slint/mcu.md:363:33    - Unknown word (usize)         -- range: core::ops::Range<usize>,
+api/rs/slint/mcu.md:385:22    - Unknown word (usize)         -- const DISPLAY_WIDTH: usize = 320;
 api/rs/slint/mcu.md:44:5      - Unknown word (libm)       -- * `libm`: We select this feature
+api/rs/slint/mcu.md:44:61     - Unknown word (libm)       -- enable the use of the [libm](https://crates.io/crates
+api/rs/slint/mcu.md:73:54     - Unknown word (libm)       -- unsafe-single-threaded", "libm", "renderer-software
 api/rs/slint/tests/spawn_local.rs:16:20     - Unknown word (unpark)     -- self.0.unpark();
+api/rs/slint/type-mappings.md:52:19     - Unknown word (serde)      -- @rust-attr(derive(serde::Serialize, serde::Deserializ
+api/rs/slint/type-mappings.md:52:37     - Unknown word (serde)      -- derive(serde::Serialize, serde::Deserialize))
+api/rs/slint/type-mappings.md:61:10     - Unknown word (serde)      -- #[derive(serde::Serialize, serde::Deserializ
+api/rs/slint/type-mappings.md:61:28     - Unknown word (serde)      -- derive(serde::Serialize, serde::Deserialize)]
+demos/README.md:57:17     - Unknown word (DCMAKE)     -- cmake -GNinja -DCMAKE_PREFIX_PATH="<path to
+demos/energy-monitor/README.md:21:5      - Unknown word (Microcontrolers) -- ### Microcontrolers (MCU)
+demos/energy-monitor/README.md:45:87     - Unknown word (chrono)          -- features slint/default,chrono
 demos/energy-monitor/index.html:10:97     - Unknown word (chrono)     -- features slint/default,chrono` in this directory.
 demos/energy-monitor/ui/images.slint:14:25     - Unknown word (spyrosoft)  -- in property <image> spyrosoft-logo: @image-url("assets
 demos/energy-monitor/ui/images.slint:14:60     - Unknown word (spyrosoft)  -- @image-url("assets/spyrosoft-logo.svg");
@@ -685,6 +742,8 @@ demos/printerdemo/printerdemo.pot:38:1      - Unknown word (msgctxt)    -- msgct
 demos/printerdemo/printerdemo.pot:494:8     - Unknown word (YCMB)       -- msgid "YCMB"
 demos/printerdemo/python/Pipfile:7:9       - Unknown word (pypi)       -- name = "pypi"
 demos/printerdemo/python/README.md:11:5      - Unknown word (Pipenv)     -- * [Pipenv](https://pipenv.pypa
+demos/printerdemo/python/README.md:16:1      - Unknown word (pipenv)     -- pipenv update
+demos/printerdemo/python/README.md:22:1      - Unknown word (pipenv)     -- pipenv run python main.py
 demos/printerdemo/ui/README:1:36      - Unknown word (Grimme)     -- designed by Matthias Grimme.
 demos/printerdemo/ui/common.slint:263:32    - Unknown word (hashover)   -- function textColor(hashover: bool) -> color {
 demos/printerdemo/ui/common.slint:267:23    - Unknown word (hashover)   -- // if hashover {
@@ -722,7 +781,22 @@ demos/printerdemo/zephyr/CMakeLists.txt:21:11     - Unknown word (STREQUAL)   --
 demos/printerdemo/zephyr/CMakeLists.txt:21:26     - Unknown word (hdmipi)     -- SHIELD STREQUAL "rk055hdmipi4ma0")
 demos/printerdemo/zephyr/CMakeLists.txt:22:79     - Unknown word (hdmipi)     -- boards/shields/rk055hdmipi4ma0/rk055hdmipi4ma0
 demos/printerdemo/zephyr/CMakeLists.txt:22:95     - Unknown word (hdmipi)     -- rk055hdmipi4ma0/rk055hdmipi4ma0.overlay")
-demos/printerdemo/zephyr/README.md:7:15      - Unknown word (Espressif)  -- 1. Unlike the Espressif integration, we don
+demos/printerdemo/zephyr/README.md:30:15     - Unknown word (venv)       -- python3 -m venv ../.venv
+demos/printerdemo/zephyr/README.md:30:24     - Unknown word (venv)       -- python3 -m venv ../.venv
+demos/printerdemo/zephyr/README.md:31:15     - Unknown word (venv)       -- source ../.venv/bin/activate
+demos/printerdemo/zephyr/README.md:35:15     - Unknown word (venv)       -- python3 -m venv slint-zephyr/.venv
+demos/printerdemo/zephyr/README.md:35:34     - Unknown word (venv)       -- m venv slint-zephyr/.venv
+demos/printerdemo/zephyr/README.md:66:21     - Unknown word (zephyrproject) -- pip install -r ~/zephyrproject/zephyr/scripts/requirements
+demos/printerdemo/zephyr/README.md:73:87     - Unknown word (comands)       -- execute the following comands:
+demos/printerdemo/zephyr/README.md:87:151    - Unknown word (HDMIPI)        -- index.html) with a [RK055HDMIPI4MA0 MIPI display](https
+demos/printerdemo/zephyr/README.md:87:162    - Unknown word (MIPI)          -- with a [RK055HDMIPI4MA0 MIPI display](https://docs
+demos/printerdemo/zephyr/README.md:87:41     - Unknown word (MIMXRT)        -- been tested on the [NXP MIMXRT1170-EVKB](https://docs
+demos/printerdemo/zephyr/README.md:87:52     - Unknown word (EVKB)          -- the [NXP MIMXRT1170-EVKB](https://docs.zephyrproject
+demos/printerdemo/zephyr/README.md:91:105    - Unknown word (hdmipi)        -- zephyr -- -DSHIELD=rk055hdmipi4ma0 -DCMAKE_BUILD_TYPE
+demos/printerdemo/zephyr/README.md:91:117    - Unknown word (DCMAKE)        -- DSHIELD=rk055hdmipi4ma0 -DCMAKE_BUILD_TYPE=Release
+demos/printerdemo/zephyr/README.md:91:15     - Unknown word (mimxrt)        -- west build -b mimxrt1170_evk@B/mimxrt117
+demos/printerdemo/zephyr/README.md:91:32     - Unknown word (mimxrt)        -- -b mimxrt1170_evk@B/mimxrt1176/cm7 -p always slint
+demos/printerdemo/zephyr/README.md:91:92     - Unknown word (DSHIELD)       -- printerdemo/zephyr -- -DSHIELD=rk055hdmipi4ma0 -DCMAKE
 demos/printerdemo/zephyr/VERSION:3:1       - Unknown word (PATCHLEVEL) -- PATCHLEVEL = 0
 demos/printerdemo/zephyr/VERSION:5:1       - Unknown word (EXTRAVERSION) -- EXTRAVERSION =
 demos/printerdemo/zephyr/boards/mimxrt1170_evk_mimxrt1176_cm7.conf:10:13     - Unknown word (ELCDIF)     -- CONFIG_MCUX_ELCDIF_PXP_ROTATE_90=y
@@ -967,25 +1041,75 @@ docs/astro/src/utils/slint-docs-highlight.html:2:112     - Unknown word (mdbook)
 docs/astro/src/utils/slint-docs-highlight.html:4:35      - Unknown word (mdbook)     -- and via head.hbs in mdbook.
 docs/astro/src/utils/slint-docs-highlight.html:81:20     - Unknown word (fnname)     -- ["title", "fnname"], // Foo :=
 docs/astro/src/utils/slint-docs-highlight.html:92:27     - Unknown word (mdbook)     -- // For use with the mdbook Tutorial
+docs/building.md:152:22    - Unknown word (cppbuild)      -- mkdir cppbuild && cd cppbuild
+docs/building.md:152:7     - Unknown word (cppbuild)      -- mkdir cppbuild && cd cppbuild
+docs/building.md:195:42    - Unknown word (gnueabihf)     -- armv7-unknown-linux-gnueabihf --workspace --exclude
+docs/building.md:195:95    - Unknown word (pyslint)       -- slint-node --exclude pyslint --release
+docs/building.md:196:32    - Unknown word (gnueabihf)     -- armv7-unknown-linux-gnueabihf/release/printerdemo
+docs/building.md:267:8     - Unknown word (Typesense)     -- We use Typesense for document search
+docs/building.md:271:25    - Unknown word (Typesense)     -- Typesense Server: The Typesense Server will hold the
+docs/building.md:271:3     - Unknown word (Typesense)     -- * Typesense Server: The Typesense
+docs/building.md:272:22    - Unknown word (Typesense)     -- Accessibility: The Typesense server must be accessible
+docs/building.md:273:39    - Unknown word (Typesense)     -- is needed to run the Typesense Docsearch Scraper.
+docs/building.md:32:55     - Unknown word (emscripten) -- | `wasm32-unknown-emscripten`
+docs/building.md:335:51    - Unknown word (TYPESENSE)     -- sh -a API_KEY -b -r TYPESENSE_CLOUD_HOST_NAME
+docs/building.md:42:29     - Unknown word (libxcb)     -- libxcb-shape0-dev` `libxcb-xfixes0-dev` on debian
+docs/building.md:42:36     - Unknown word (xfixes)     -- shape0-dev` `libxcb-xfixes0-dev` on debian based
+docs/building.md:42:9      - Unknown word (libxcb)     -- - xcb (`libxcb-shape0-dev` `libxcb
+docs/building.md:43:15     - Unknown word (libxkbcommon) -- - xkbcommon (`libxkbcommon-dev` on debian based
+docs/building.md:44:24     - Unknown word (libfontconfig) -- fontconfig library (`libfontconfig-dev` on debian based
+docs/building.md:46:114    - Unknown word (libasound)     -- `libavdevice-dev` `libasound2-dev` `pkg-config`
+docs/building.md:46:27     - Unknown word (libavcodec)    -- FFMPEG library `clang` `libavcodec-dev` `libavformat-dev
+docs/building.md:46:44     - Unknown word (libavformat)   -- clang` `libavcodec-dev` `libavformat-dev` `libavutil-dev
+docs/building.md:46:62     - Unknown word (libavutil)     -- `libavformat-dev` `libavutil-dev` `libavfilter-dev
+docs/building.md:46:78     - Unknown word (libavfilter)   -- dev` `libavutil-dev` `libavfilter-dev` `libavdevice-dev
+docs/building.md:46:96     - Unknown word (libavdevice)   -- `libavfilter-dev` `libavdevice-dev` `libasound2-dev
+docs/building.md:49:12     - Unknown word (xcbcommon)     -- `xcb` and `xcbcommon` aren't needed if you
+docs/building.md:60:50     - Unknown word (winget)        -- Tools are installed: `winget install Microsoft.VisualStudi
+docs/building.md:73:60     - Unknown word (libavutil)     -- bin` `*\ffmpeg\include\libavutil` `*\ffmpeg\lib`
+docs/development.md:134:32    - Unknown word (stoppping)  -- run through without stoppping. If there are merge
+docs/development.md:176:66    - Unknown word (gitk)       -- desktop.github.com) or [gitk](https://git-scm.com
+docs/development.md:33:36     - Unknown word (corelib)    -- small as possible. **`corelib-macros`** contains some
+docs/install_qt.md:33:57     - Unknown word (qtbase)     -- modules, you just need `qtbase` (for QtWidgets) and
+docs/install_qt.md:33:86     - Unknown word (qtsvg)      -- for QtWidgets) and `qtsvg` for the SVG plugin
+docs/install_qt.md:40:102    - Unknown word (DYLD)       -- need to modify the `DYLD_FRAMEWORK_PATH`
+docs/readme.md:7:63      - Unknown word (langauge)   -- that builds the Slint langauge docs
 docs/site/index.html:172:167   - Unknown word (lightimg)   -- index-light.svg" data-lightimg="https://slint.dev/assets
 docs/site/index.html:172:95    - Unknown word (darkimg)    -- ross-index.svg" data-darkimg="https://slint.dev/assets
 docs/site/index.html:208:86    - Unknown word (LVGL)       -- alternative-to-lvgl.html">LVGL</a></dd>
 docs/site/index.html:211:96    - Unknown word (Toolkits)   -- rust-gui.html">Rust GUI Toolkits</a></dd>
+docs/testing.md:121:4     - Unknown word (Doctests)   -- ## Doctests
+docs/testing.md:124:15    - Unknown word (doctests)   -- cargo test -p doctests
+docs/testing.md:127:5     - Unknown word (doctests)   -- The doctests extracts the ```` `
+docs/testing.md:15:4      - Unknown word (ingore)     -- ```ingore
+docs/testing.md:34:10     - Unknown word (frontends)  -- language frontends.
+docs/testing.md:64:38     - Unknown word (usefull)    -- same module. This is usefull to test the rust api
+docs/testing.md:74:39     - Unknown word (builod)     -- the build.rs, with the builod-time feature:
+docs/torizon.md:19:32     - Unknown word (armhf)      -- Compiled for ARM 32-bit as `armhf` and compiled for ARM
+editors/README.md:124:1     - Unknown word (Textobject)         -- Textobject queries: ✓
 editors/README.md:143:79    - Unknown word (vimrc)              -- configuration file (e.g. `vimrc`) to
+editors/README.md:147:1     - Unknown word (autocmd)            -- autocmd BufEnter *.slint :setlocal
+editors/README.md:147:27    - Unknown word (setlocal)           -- autocmd BufEnter *.slint :setlocal filetype=slint
+editors/README.md:173:5     - Unknown word (easist)             -- The easist way to use the language
 editors/README.md:173:79    - Unknown word (nvim)               -- Neovim is via the `neovim/nvim-lspconfig`
 editors/README.md:173:84    - Unknown word (lspconfig)          -- via the `neovim/nvim-lspconfig`
 editors/README.md:174:19    - Unknown word (nvim)               -- and `williamboman/nvim-lsp-installer` plugins
 editors/README.md:174:6     - Unknown word (williamboman)       -- and `williamboman/nvim-lsp-installer`
+editors/README.md:177:70    - Unknown word (triggger)           -- and running, you can triggger the live preview
 editors/README.md:181:19    - Unknown word (nvim)               -- Also, if you use `nvim-treesitter` you can
+editors/README.md:191:68    - Unknown word (sublimelsp)         -- install the LSP package (sublimelsp/LSP)
 editors/README.md:212:37    - Unknown word (kizeevov)           -- plugin is developed by @kizeevov._
 editors/README.md:39:17     - Unknown word (ksyntaxhighlighter) -- The file [slint.ksyntaxhighlighter.xml](kate/slint.ksyntaxhighli
+editors/README.md:49:29     - Unknown word (ksyntaxhighlighter) -- Windows, download [slint.ksyntaxhighlighter.xml](./slint.ksyntaxhighlight
 editors/README.md:49:92     - Unknown word (USERPROFILE)        -- syntaxhighlighter.xml) into `%USERPROFILE%\AppData\Local\org.kde
+editors/README.md:61:49     - Unknown word (USERPROFILE)        -- .cargo/bin", "%{ENV:USERPROFILE}/.cargo/bin"],
 editors/kate/slint.ksyntaxhighlighter.xml:106:11    - Unknown word (Datas)       -- </itemDatas>
 editors/kate/slint.ksyntaxhighlighter.xml:113:13    - Unknown word (casesensitive) -- <keywords casesensitive="1" />
 editors/kate/slint.ksyntaxhighlighter.xml:6:125     - Unknown word (cstyle)      -- text/slint" indenter="cstyle" license="GPL" author
 editors/kate/slint.ksyntaxhighlighter.xml:6:36      - Unknown word (kateversion) -- "Slint" version="1" kateversion="5.0" section="Sources
 editors/kate/slint.ksyntaxhighlighter.xml:95:9      - Unknown word (Datas)       -- <itemDatas>
 editors/sublime/Slint.sublime-syntax:49:17     - Unknown word (blackslashes) -- # Note that blackslashes don't need to be escaped
+editors/tree-sitter-slint/README.md:18:23     - Unknown word (nvim)       -- In `neovim` with the `nvim-treesitter` plugin this
 editors/tree-sitter-slint/corpus/lookup.txt:136:18    - Unknown word (mult)       -- (mult_prec_operator)
 editors/tree-sitter-slint/corpus/lookup.txt:136:23    - Unknown word (prec)       -- (mult_prec_operator)
 editors/tree-sitter-slint/corpus/lookup.txt:143:18    - Unknown word (prec)       -- (add_prec_operator)
@@ -1034,6 +1158,7 @@ examples/7guis/crud.rs:22:49     - Unknown word (Mustermann) -- to_string(), las
 examples/7guis/crud.rs:23:51     - Unknown word (Tisch)      -- to_string(), last: "Tisch".to_string() },
 examples/7guis/tempconv.slint:6:15      - Unknown word (Conv)       -- component TempConv inherits Window {
 examples/README.md:18:245    - Unknown word (manipulationsand) -- image crate to do image manipulationsand feed the result into
+examples/README.md:85:17     - Unknown word (DCMAKE)           -- cmake -GNinja -DCMAKE_PREFIX_PATH="<path to
 examples/bash/README.md:17:24     - Unknown word (sysinfo)    -- `sysinfo_linux.sh`/`sysinfo_macos.sh`: show how
 examples/bash/README.md:17:5      - Unknown word (sysinfo)    -- * `sysinfo_linux.sh`/`sysinfo_macos
 examples/bash/README.md:22:54     - Unknown word (Noto)       -- u1f4bb.svg` from the Noto Emoji font from
@@ -1123,6 +1248,7 @@ examples/cpp/platform_qt/main.cpp:62:19     - Unknown word (quintptr)   -- auto 
 examples/cpp/platform_qt/main.cpp:69:62     - Unknown word (xlib)       -- NativeWindowHandle::from_x11_xlib(wid, wid, x11_display
 examples/cpp/platform_qt/main.cpp:74:61     - Unknown word (xlib)       -- system (tried wayland, xlib, and xcb)";
 examples/cpp/qt_viewer/CMakeLists.txt:17:15     - Unknown word (AUTOUIC)    -- set(CMAKE_AUTOUIC ON)
+examples/cpp/qt_viewer/README.md:7:75      - Unknown word (qwidget)    -- :ComponentInstance::qwidget` and embed
 examples/cpp/qt_viewer/interface.ui:66:32     - Unknown word (stdset)     -- property name="sizeHint" stdset="0">
 examples/cpp/qt_viewer/qt_viewer.cpp:59:34     - Unknown word (qwidget)    -- QWidget *wid = instance->qwidget();
 examples/fancy-switches/README.md:8:35      - Unknown word (Shmelt)     -- SunMoonSwitch was based on a [Shmelt studios tutorial](https
@@ -1136,10 +1262,17 @@ examples/fancy_demo/main.slint:501:350   - Unknown word (obcaecat)   -- pariatur
 examples/fancy_demo/main.slint:501:359   - Unknown word (cupiditat)  -- Excepteur sint obcaecat cupiditat non proident, sunt in
 examples/fancy_demo/main.slint:501:56    - Unknown word (adipisici)  -- sit amet, consectetur adipisici elit, sed eiusmod tempor
 examples/fancy_demo/main.slint:547:75    - Unknown word (egui)       -- on the demo from the egui framework";
-examples/ffmpeg/README.md:24:5      - Unknown word (vcpkg)      -- - `vcpkg install ffmpeg --triplet
-examples/ffmpeg/README.md:25:15     - Unknown word (VCPKG)      -- - Make sure `VCPKG_ROOT` is set to where
-examples/ffmpeg/README.md:25:44     - Unknown word (vcpkg)      -- ROOT` is set to where `vcpkg` is installed
-examples/ffmpeg/README.md:26:16     - Unknown word (VCPKG)      -- - Make sure `%VCPKG_ROOT%\installed\x64
+examples/ffmpeg/README.md:12:105    - Unknown word (libasound)   -- dev libavdevice-dev libasound2-dev pkg-config
+examples/ffmpeg/README.md:12:28     - Unknown word (libavcodec) -- apt-get install clang libavcodec-dev libavformat-dev
+examples/ffmpeg/README.md:12:43     - Unknown word (libavformat) -- clang libavcodec-dev libavformat-dev libavutil-dev libavfilter
+examples/ffmpeg/README.md:12:59     - Unknown word (libavutil)   -- dev libavformat-dev libavutil-dev libavfilter-dev
+examples/ffmpeg/README.md:12:73     - Unknown word (libavfilter) -- libavformat-dev libavutil-dev libavfilter-dev libavdevice-dev
+examples/ffmpeg/README.md:12:89     - Unknown word (libavdevice) -- dev libavfilter-dev libavdevice-dev libasound2-dev pkg
+examples/ffmpeg/README.md:23:13     - Unknown word (vcpkg)       -- - install [vcpkg](https://github.com
+examples/ffmpeg/README.md:24:5      - Unknown word (vcpkg)       -- - `vcpkg install ffmpeg --triplet
+examples/ffmpeg/README.md:25:15     - Unknown word (VCPKG)       -- - Make sure `VCPKG_ROOT` is set to where
+examples/ffmpeg/README.md:25:44     - Unknown word (vcpkg)       -- ROOT` is set to where `vcpkg` is installed
+examples/ffmpeg/README.md:26:16     - Unknown word (VCPKG)       -- - Make sure `%VCPKG_ROOT%\installed\x64
 examples/ffmpeg/README.md:9:42      - Unknown word (alsa)       -- to install ffmpeg and alsa. For example on Debian
 examples/ffmpeg/player.rs:114:13    - Unknown word (demuxer)    -- demuxer_thread: Some(demuxer
 examples/ffmpeg/player.rs:114:34    - Unknown word (demuxer)    -- demuxer_thread: Some(demuxer_thread),
@@ -1177,6 +1310,16 @@ examples/gallery/update_translations.sh:11:5      - Unknown word (msgfmt)     --
 examples/gstreamer-player/README.md:10:10     - Unknown word (gstreamer's) -- * We use gstreamer's test source instead
 examples/gstreamer-player/README.md:14:27     - Unknown word (gstreamer)   -- will need to have the gstreamer libraries used by gstreamer
 examples/gstreamer-player/README.md:14:55     - Unknown word (gstreamer)   -- gstreamer libraries used by gstreamer-rs installed.
+examples/gstreamer-player/README.md:21:19     - Unknown word (libgstreamer) -- $ apt-get install libgstreamer1.0-dev libgstreamer
+examples/gstreamer-player/README.md:21:39     - Unknown word (libgstreamer) -- libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev
+examples/gstreamer-player/README.md:22:33     - Unknown word (gstreamer)    -- gstreamer1.0-plugins-base gstreamer1.0-plugins-good \
+examples/gstreamer-player/README.md:22:7      - Unknown word (gstreamer)    -- gstreamer1.0-plugins-base gstreamer
+examples/gstreamer-player/README.md:24:20     - Unknown word (libav)        -- gstreamer1.0-libav libgstrtspserver-1.
+examples/gstreamer-player/README.md:24:26     - Unknown word (libgstrtspserver) -- gstreamer1.0-libav libgstrtspserver-1.0-dev libges-1.0-dev
+examples/gstreamer-player/README.md:24:51     - Unknown word (libges)           -- libgstrtspserver-1.0-dev libges-1.0-dev
+examples/gstreamer-player/README.md:30:45     - Unknown word (devel)            -- gstreamer-plugins-bad-devel gstreamer-devel gstreamer
+examples/gstreamer-player/README.md:30:61     - Unknown word (devel)            -- bad-devel gstreamer-devel gstreamer-plugins-base
+examples/gstreamer-player/README.md:30:90     - Unknown word (devel)            -- gstreamer-plugins-base-devel \
 examples/gstreamer-player/README.md:5:52      - Unknown word (gstreamer)  -- demonstrates a way to use gstreamer (with Rust bindings
 examples/gstreamer-player/README.md:8:14      - Unknown word (functionaly) -- * Play/Pause functionaly has not been implemented
 examples/gstreamer-player/main.rs:10:8      - Unknown word (gstreamer)  -- fn try_gstreamer_video_frame_to_pixel
@@ -1197,7 +1340,34 @@ examples/iot-dashboard/iot-dashboard.slint:598:52    - Unknown word (datapoints)
 examples/iot-dashboard/iot-dashboard.slint:603:52    - Unknown word (datapoints) -- parent.viewbox-height - datapoints.values.b / 100 * parent
 examples/iot-dashboard/iot-dashboard.slint:605:60    - Unknown word (datapoints) -- parent.viewbox-height - datapoints.values.b / 100 * parent
 examples/iot-dashboard/main.slint:10:19     - Unknown word (Edelhirsch) -- ** Copyright 2021 Edelhirsch Software GmbH. All rights
+examples/mcu-board-support/README.md:107:14    - Unknown word (THUMBV)     -- CARGO_TARGET_THUMBV6M_NONE_EABI_LINKER=
+examples/mcu-board-support/README.md:107:221   - Unknown word (thumbv)     -- pico-st7789 --target=thumbv6m-none-eabi --release
+examples/mcu-board-support/README.md:107:235   - Unknown word (eabi)       -- target=thumbv6m-none-eabi --release
+examples/mcu-board-support/README.md:107:28    - Unknown word (EABI)       -- TARGET_THUMBV6M_NONE_EABI_LINKER="flip-link" CARGO
+examples/mcu-board-support/README.md:107:65    - Unknown word (THUMBV)     -- flip-link" CARGO_TARGET_THUMBV6M_NONE_EABI_RUNNER=
+examples/mcu-board-support/README.md:107:79    - Unknown word (EABI)       -- TARGET_THUMBV6M_NONE_EABI_RUNNER="probe-rs run
+examples/mcu-board-support/README.md:125:29    - Unknown word (eabi)       -- target=thumbv6m-none-eabi",
+examples/mcu-board-support/README.md:171:62    - Unknown word (eabi)       -- target/thumbv6m-none-eabi/release-with-debug/printerdem
+examples/mcu-board-support/README.md:186:229   - Unknown word (eabihf)     -- target=thumbv7em-none-eabihf --release
+examples/mcu-board-support/README.md:186:48    - Unknown word (THUMBV)     -- LEVEL=s CARGO_TARGET_THUMBV7EM_NONE_EABIHF_RUNNER
+examples/mcu-board-support/README.md:186:63    - Unknown word (EABIHF)     -- TARGET_THUMBV7EM_NONE_EABIHF_RUNNER="probe-rs run
 examples/mcu-board-support/README.md:196:22    - Unknown word (esplash)    -- When flashing, with `esplash`, you will be prompted
+examples/mcu-board-support/README.md:56:104    - Unknown word (thumbv)     -- pico-st7789 --target=thumbv6m-none-eabi --release
+examples/mcu-board-support/README.md:56:118    - Unknown word (eabi)       -- target=thumbv6m-none-eabi --release
+examples/mcu-board-support/README.md:65:58     - Unknown word (bootsel)    -- Raspberry Pi Pico: push the "bootsel" white button on the
+examples/mcu-board-support/README.md:68:71     - Unknown word (bootsel)    -- while pressing the "bootsel" button.
+examples/mcu-board-support/README.md:72:1      - Unknown word (udisksctl)  -- udisksctl mount -b /dev/sda1
+examples/mcu-board-support/README.md:74:22     - Unknown word (thumbv)     -- elf2uf2-rs -d target/thumbv6m-none-eabi/release
+examples/mcu-board-support/README.md:74:36     - Unknown word (eabi)       -- target/thumbv6m-none-eabi/release/printerdemo
+examples/mcu-board-support/README.md:82:105    - Unknown word (thumbv)     -- pico2-st7789 --target=thumbv8m.main-none-eabihf
+examples/mcu-board-support/README.md:82:124    - Unknown word (eabihf)     -- target=thumbv8m.main-none-eabihf --release
+examples/mcu-board-support/README.md:85:54     - Unknown word (picotool)   -- flashed conveniently with [picotool](https://github.com
+examples/mcu-board-support/README.md:87:58     - Unknown word (bootsel)    -- Raspberry Pi Pico: push the "bootsel" white button on the
+examples/mcu-board-support/README.md:90:70     - Unknown word (bootsel)    -- while pressing the "bootsel" button):
+examples/mcu-board-support/README.md:94:1      - Unknown word (udisksctl)  -- udisksctl mount -b /dev/sda1
+examples/mcu-board-support/README.md:96:1      - Unknown word (picotool)   -- picotool load -u -v -x -t elf
+examples/mcu-board-support/README.md:96:38     - Unknown word (thumbv)     -- -v -x -t elf target/thumbv8m.main-none-eabihf/release
+examples/mcu-board-support/README.md:96:57     - Unknown word (eabihf)     -- target/thumbv8m.main-none-eabihf/release/printerdemo
 examples/mcu-board-support/esp32_s2_kaluga_1.rs:67:32     - Unknown word (TIMG)       -- Disable the RTC and TIMG watchdog timers
 examples/mcu-board-support/esp32_s2_kaluga_1.rs:68:44     - Unknown word (LPWR)       -- Rtc::new(peripherals.LPWR);
 examples/mcu-board-support/esp32_s2_kaluga_1.rs:69:13     - Unknown word (rwdt)       -- rtc.rwdt.disable();
@@ -1412,6 +1582,7 @@ examples/mcu-board-support/stm32h735g/memory.x:25:20     - Unknown word (OSPI)  
 examples/mcu-board-support/stm32h735g/memory.x:28:25     - Unknown word (LOADADDR)   -- __si_slint_assets = LOADADDR(.slint_assets);
 examples/mcu-board-support/stm32h735g/memory.x:9:3       - Unknown word (OSPI)       -- OSPI_ROM : ORIGIN = 0x90
 examples/memory/Pipfile:7:9       - Unknown word (pypi)       -- name = "pypi"
+examples/memory/icons/README.md:10:20     - Unknown word (rsvg)       -- for f in *.svg; do rsvg-convert -a -w 128 -h
 examples/opengl_texture/main.cpp:100:14    - Unknown word (Integerv)   -- glGetIntegerv(GL_UNPACK_SKIP_PIXELS
 examples/opengl_texture/main.cpp:104:16    - Unknown word (Storei)     -- glPixelStorei(GL_UNPACK_ALIGNMENT
 examples/opengl_texture/main.cpp:105:14    - Unknown word (Parameteri) -- glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE
@@ -1457,6 +1628,9 @@ examples/todo-mvc/ui/widgets/selection_list_view.slint:10:37     - Unknown word 
 examples/todo-mvc/ui/widgets/state_layer.slint:50:9      - Unknown word (hoverd)     -- hoverd when root.has-hover
 examples/todo/ui/todo.slint:7:19      - Unknown word (serde)      -- @rust-attr(derive(serde::Serialize, serde::Deserializ
 examples/todo/ui/todo.slint:7:37      - Unknown word (serde)      -- derive(serde::Serialize, serde::Deserialize))
+examples/uefi-demo/README.md:26:11     - Unknown word (distro)     -- varies by distro):
+examples/uefi-demo/README.md:29:56     - Unknown word (ovmf)       -- bios /usr/share/edk2-ovmf/x64/OVMF.fd -kernel
+examples/uefi-demo/README.md:29:65     - Unknown word (OVMF)       -- share/edk2-ovmf/x64/OVMF.fd -kernel target/x
 examples/uefi-demo/README.md:32:15     - Unknown word (OVMF)       -- **NOTE:** the OVMF are not support mouse
 examples/uefi-demo/demo.slint:101:53    - Unknown word (Asuras)     -- "Abydos"}, { text: "Asuras" }, { text: "Athos"
 examples/uefi-demo/demo.slint:102:34    - Unknown word (Celestis)   -- { text: "Celestis" }, { text: "Chulak
@@ -1790,6 +1964,10 @@ internal/backends/selector/lib.rs:34:11     - Unknown word (linuxkms)   -- fn cr
 internal/backends/selector/lib.rs:48:29     - Unknown word (linuxkms)   -- use i_slint_backend_linuxkms as default_backend;
 internal/backends/selector/lib.rs:49:53     - Unknown word (linuxkms)   -- NAME: &'static str = "linuxkms";
 internal/backends/selector/lib.rs:59:44     - Unknown word (linuxkms)   -- feature = "i-slint-backend-linuxkms", target_os = "linux
+internal/backends/testing/README.md:150:18    - Unknown word (behaviour)  -- To simulate this behaviour, [`ElementHandle`] provides
+internal/backends/testing/README.md:48:26     - Unknown word (faciliate)  -- re developing APIs to faciliate the creation of automated
+internal/backends/testing/README.md:65:78     - Unknown word (faciliate)  -- in this crate is to faciliate locating, mutation,
+internal/backends/testing/README.md:68:32     - Unknown word (somehwere)  -- example below assumes that somehwere in the UI you have declared
 internal/backends/testing/build.rs:13:14     - Unknown word (dont)       -- .dont_use_cow(true);
 internal/backends/testing/build.rs:9:26      - Unknown word (systest)    -- .join("slint_systest.proto");
 internal/backends/testing/lib.rs:19:9      - Unknown word (systest)    -- pub mod systest;
@@ -3565,6 +3743,7 @@ tools/docsnapper/main.rs:12:16     - Unknown word (Itertools)  -- use itertools:
 tools/docsnapper/main.rs:296:15    - Unknown word (slintfoo)   -- r#"```slintfoo
 tools/figma_import/src/figmatypes.rs:78:103    - Unknown word (tempty)     -- that and consider it is tempty
 tools/figma_import/src/main.rs:33:5      - Unknown word (figmatypes) -- mod figmatypes;
+tools/lsp/README.md:21:46     - Unknown word (develoment) -- Or, to install the develoment version:
 tools/lsp/common/component_catalog.rs:137:4     - Unknown word (libraryize) -- fn libraryize_url(document_cache:
 tools/lsp/common/component_catalog.rs:174:19    - Unknown word (libraryize) -- let url = libraryize_url(document_cache,
 tools/lsp/common/component_catalog.rs:218:23    - Unknown word (libraryize) -- let library_url = libraryize_url(document_cache,
@@ -3661,17 +3840,18 @@ tools/updater/experiments/lookup_changes.rs:34:48     - Unknown word (Smol)     
 tools/updater/main.rs:13:15     - Unknown word (Smol)       -- use smol_str::SmolStr;
 tools/updater/main.rs:172:27    - Unknown word (Smol)       -- property_name: Option<SmolStr>,
 tools/updater/main.rs:205:36    - Unknown word (Smol)       -- .unwrap_or(SmolStr::default()),
+tools/viewer/README.md:69:4      - Unknown word (carefull)   -- Be carefull to use single quote
 tools/viewer/main.rs:10:16     - Unknown word (Itertools)  -- use itertools::Itertools;
-tools/viewer/main.rs:122:54    - Unknown word (fswatch)    -- reload { Some(start_fswatch_thread(args.clone()
-tools/viewer/main.rs:122:9     - Unknown word (fswatcher)  -- let fswatcher = if args.auto_reload
-tools/viewer/main.rs:123:41    - Unknown word (fswatcher)  -- init_compiler(&args, fswatcher);
+tools/viewer/main.rs:149:54    - Unknown word (fswatch)    -- reload { Some(start_fswatch_thread(args.clone()
+tools/viewer/main.rs:149:9     - Unknown word (fswatcher)  -- let fswatcher = if args.auto_reload
 tools/viewer/main.rs:14:17     - Unknown word (Smol)       -- use smol_str::ToSmolStr;
-tools/viewer/main.rs:202:5     - Unknown word (fswatcher)  -- fswatcher: Option<Arc<Mutex<notify
-tools/viewer/main.rs:219:28    - Unknown word (fswatcher)  -- let Some(watcher) = fswatcher {
-tools/viewer/main.rs:293:10    - Unknown word (fswatch)    -- fn start_fswatch_thread(args: Cli) -
-tools/viewer/main.rs:318:28    - Unknown word (fswatcher)  -- fn reload(args: Cli, fswatcher: Arc<Mutex<notify::Recommende
-tools/viewer/main.rs:377:38    - Unknown word (smolstr)    -- let s = s.to_smolstr();
-tools/viewer/main.rs:411:42    - Unknown word (smolstr)    -- let k = k.to_smolstr();
+tools/viewer/main.rs:150:41    - Unknown word (fswatcher)  -- init_compiler(&args, fswatcher);
+tools/viewer/main.rs:201:5     - Unknown word (fswatcher)  -- fswatcher: Option<Arc<Mutex<notify
+tools/viewer/main.rs:218:28    - Unknown word (fswatcher)  -- let Some(watcher) = fswatcher {
+tools/viewer/main.rs:292:10    - Unknown word (fswatch)    -- fn start_fswatch_thread(args: Cli) -
+tools/viewer/main.rs:317:28    - Unknown word (fswatcher)  -- fn reload(args: Cli, fswatcher: Arc<Mutex<notify::Recommende
+tools/viewer/main.rs:376:38    - Unknown word (smolstr)    -- let s = s.to_smolstr();
+tools/viewer/main.rs:410:42    - Unknown word (smolstr)    -- let k = k.to_smolstr();
 xtask/src/cppdocs.rs:119:27    - Unknown word (thirdparty) -- "api/cpp/docs/thirdparty.hbs",
 xtask/src/cppdocs.rs:121:34    - Unknown word (thirdparty) -- docs_build_dir.join("thirdparty.md").to_str().unwrap
 xtask/src/cppdocs.rs:93:17     - Unknown word (linuxkms)   -- backend_linuxkms: true,

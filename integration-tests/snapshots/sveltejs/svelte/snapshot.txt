@@ -3,7 +3,7 @@ Repository: sveltejs/svelte
 Url: "https://github.com/sveltejs/svelte.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 7110, Issues found: 3528 in 476 files.
+ CSpell: Files checked: 7122, Issues found: 3535 in 478 files.
  exit code: 1
 CONTRIBUTING.md:22:5      - Unknown word (Triaging)   -- ### Triaging issues and pull requests
 benchmarking/benchmarks/reactivity/index.js:11:2      - Unknown word (sbench)     -- sbench_create_0to1,
@@ -378,8 +378,8 @@ packages/svelte/package.json:122:103   - Unknown word (treeshakeability) -- node
 packages/svelte/package.json:132:7     - Unknown word (jridgewell)       -- "@jridgewell/trace-mapping": "^0
 packages/svelte/package.json:149:7     - Unknown word (ampproject)       -- "@ampproject/remapping": "^2.3.0
 packages/svelte/package.json:155:6     - Unknown word (axobject)         -- "axobject-query": "^4.1.0",
-packages/svelte/package.json:157:6     - Unknown word (esrap)            -- "esrap": "^1.3.2",
-packages/svelte/package.json:161:6     - Unknown word (zimmerframe)      -- "zimmerframe": "^1.1.2"
+packages/svelte/package.json:158:6     - Unknown word (esrap)            -- "esrap": "^1.3.2",
+packages/svelte/package.json:162:6     - Unknown word (zimmerframe)      -- "zimmerframe": "^1.1.2"
 packages/svelte/scripts/check-treeshakeability.js:21:15     - Unknown word (importee)   -- resolveId(importee) {
 packages/svelte/scripts/check-treeshakeability.js:32:3      - Unknown word (onwarn)     -- onwarn: (warning, handle)
 packages/svelte/scripts/check-treeshakeability.js:42:20     - Unknown word (errr)       -- throw new Error('errr what');
@@ -1661,8 +1661,10 @@ packages/svelte/src/compiler/phases/1-parse/utils/entities.js:999:3     - Unknow
 packages/svelte/src/compiler/phases/1-parse/utils/fuzzymatch.js:6:25      - Unknown word (fuzzymatch) -- export default function fuzzymatch(name, names) {
 packages/svelte/src/compiler/phases/2-analyze/css/css-prune.js:260:18    - Unknown word (combinators) -- // TODO other combinators
 packages/svelte/src/compiler/phases/2-analyze/css/css-prune.js:267:29    - Unknown word (unscopeable) -- a `:global(...)` or unscopeable selector, or
+packages/svelte/src/compiler/phases/2-analyze/css/utils.js:28:28     - Unknown word (deopt)      -- and we don't want to deopt on `condition`
+packages/svelte/src/compiler/phases/2-analyze/css/utils.js:34:29     - Unknown word (cslx)       -- will be processed by cslx, in which case falsy
 packages/svelte/src/compiler/phases/2-analyze/index.js:618:18    - Unknown word (nonstate)   -- // warn on any nonstate declarations that are
-packages/svelte/src/compiler/phases/2-analyze/visitors/Attribute.js:77:7      - Unknown word (unhoisted)  -- const unhoisted = { hoisted: false
+packages/svelte/src/compiler/phases/2-analyze/visitors/Attribute.js:90:7      - Unknown word (unhoisted)  -- const unhoisted = { hoisted: false
 packages/svelte/src/compiler/phases/2-analyze/visitors/RegularElement.js:38:72     - Unknown word (qirk)       -- stripped because of a qirk:
 packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y.js:353:3     - Unknown word (impp)       -- 'impp'
 packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y.js:384:21    - Unknown word (webauthn)   -- if (tokens[0] === 'webauthn') {
@@ -1687,15 +1689,15 @@ packages/svelte/src/compiler/utils/mapped_code.js:134:6     - Unknown word (unsw
 packages/svelte/src/html-tree-validation.js:120:5     - Unknown word (bgsound)    -- 'bgsound',
 packages/svelte/src/internal/client/dev/inspect.js:22:43     - Unknown word (occured)    -- known that an error occured, but we don't stop execution
 packages/svelte/src/internal/client/dev/ownership.js:53:14     - Unknown word (bondaries)  -- // of the bondaries/component context heuristic
-packages/svelte/src/internal/client/dev/tracing.js:103:29    - Unknown word (cran)       -- console.log(`${label()} %cran outside of an effect
+packages/svelte/src/internal/client/dev/tracing.js:105:29    - Unknown word (cran)       -- console.log(`${label()} %cran outside of an effect
 packages/svelte/src/internal/client/dom/blocks/await.js:126:68    - Unknown word (microtick)  -- since it's on the next microtick
 packages/svelte/src/internal/client/dom/blocks/each.js:156:86    - Unknown word (treeshaken) -- let` or else it isn't treeshaken out */
 packages/svelte/src/internal/client/dom/blocks/svelte-element.js:74:18     - Unknown word (Noone)      -- // Assumption: Noone changes the namespace
 packages/svelte/src/internal/client/dom/elements/actions.js:18:8      - Unknown word (inited)     -- var inited = false;
-packages/svelte/src/internal/client/dom/elements/attributes.js:427:16    - Unknown word (contructor) -- // Do not use contructor.name here as that's
+packages/svelte/src/internal/client/dom/elements/attributes.js:432:16    - Unknown word (contructor) -- // Do not use contructor.name here as that's
 packages/svelte/src/internal/client/dom/elements/bindings/input.js:27:14     - Unknown word (numberlike) -- value = is_numberlike_input(input) ? to_number
 packages/svelte/src/internal/client/dom/elements/bindings/this.js:41:78     - Unknown word (nullfiy)    -- context changes), then nullfiy the binding at
-packages/svelte/src/internal/client/dom/elements/class.js:80:6      - Unknown word (peformance) -- // peformance issues vs simply making
+packages/svelte/src/internal/client/dom/elements/class.js:83:6      - Unknown word (peformance) -- // peformance issues vs simply making
 packages/svelte/src/internal/client/dom/elements/misc.js:54:66     - Unknown word (possiblity) -- get noticed of it (no possiblity of stopPropagation)
 packages/svelte/src/internal/client/proxy.js:32:12     - Unknown word (proxyable)  -- // if non-proxyable, or is already a proxy
 packages/svelte/src/internal/client/reactivity/props.js:430:51    - Unknown word (synchronisation) -- value)); // force a synchronisation immediately
@@ -1879,6 +1881,7 @@ packages/svelte/tests/runtime-legacy/samples/transition-js-slot-5-cancelled-over
 packages/svelte/tests/runtime-runes/samples/binding-interop/Runes.svelte:26:62     - Unknown word (coincidently) -- effect so they don't coincidently update with the others
 packages/svelte/tests/runtime-runes/samples/class-state-derived-private/main.svelte:6:7       - Unknown word (embiggened) -- get embiggened() {
 packages/svelte/tests/runtime-runes/samples/class-state-raw/main.svelte:4:34      - Unknown word (Froozen)    -- someLibFunctionCreatingFroozenObject(value) {
+packages/svelte/tests/runtime-runes/samples/clsx/_config.js:5:26      - Unknown word (owbekl)     -- div class="foo svelte-owbekl"></div>
 packages/svelte/tests/runtime-runes/samples/component-dont-fuse-whitespace/_config.js:4:39      - Unknown word (dont)       -- before the render tag dont fuse this text with
 packages/svelte/tests/runtime-runes/samples/deferred-events-consistency-2/_config.js:5:40      - Unknown word (suide)      -- testable in our test suide: click() will synchronously
 packages/svelte/tests/runtime-runes/samples/derived-unowned-3/_config.js:18:54     - Unknown word (nneighba)   -- button>Toggle</button>\nneighba\nneighba`
