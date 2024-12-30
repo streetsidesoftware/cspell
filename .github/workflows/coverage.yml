@@ -26,9 +26,18 @@ on:
       - '.github/workflows/coverage.yml'
       - '!docs/**'
       - '!website/**'
-
+  workflow_dispatch:
+    inputs:
+      NODE_VERSION:
+        description: 'Node Version'
+        required: true
+        default: '18.x'
 permissions:
   contents: read
+
+env:
+  NODE_OPTIONS: "--enable-source-maps"
+  NODE_VERSION: ${{ inputs.NODE_VERSION || '18.x' }} # using 18 for now since there are coverage issues with newer versions
 
 jobs:
   coverage:
@@ -43,7 +52,7 @@ jobs:
       - name: Install and Build
         uses: ./.github/actions/install-build
         with:
-          node-version: 18.x # using 18 for now since there are coverage issues with newer versions
+          node-version: ${{ env.NODE_VERSION }}
 
       - run: pnpm run coverage
 
