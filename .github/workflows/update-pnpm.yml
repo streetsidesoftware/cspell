@@ -1,0 +1,59 @@
+name: ' 🔗 Update PNPM'
+
+on:
+  workflow_dispatch:
+    inputs:
+      base:
+        description: The Base Ref to apply the diff
+        required: false
+        default: 'main'
+
+  schedule:
+    - cron: '0 12 * * 1'
+
+permissions:
+  contents: read
+
+jobs:
+  update-pnpm:
+    if: github.repository_owner == 'streetsidesoftware'
+    runs-on: ubuntu-latest
+    env:
+      NEW_BRANCH: update-pnpm-${{ inputs.base || 'main' }}
+      REF_BRANCH: ${{ inputs.base || 'main' }}
+      PR_TYPE: ci
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ env.REF_BRANCH }}
+
+      - name: Setup
+        uses: ./public/setup-node-pnpm
+
+      - name: Update PNPM
+        run: |
+          corepack use pnpm@latest
+
+      - name: Gen Body
+        id: git-body
+        uses: ./public/pr-body
+        with:
+          title: Update ALL Dependencies ${{ env.REF_BRANCH }}
+          path: package.json
+
+      - name: PR
+        uses: ./.github/actions/pr
+        with:
+          commit-message: 'ci: Workflow Bot -- Update PNPM'
+          branch: ${{ env.NEW_BRANCH }}
+          base: ${{ env.REF_BRANCH }}
+          title: 'ci: Workflow Bot -- Update PNPM (${{ env.REF_BRANCH }})'
+          body: ${{ steps.git-body.outputs.body }}
+          app_id: ${{ secrets.AUTOMATION_APP_ID }}
+          app_private_key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
+
+      - name: Summary
+        uses: streetsidesoftware/actions/public/summary@v1
+        with:
+          text: ${{ steps.git-body.outputs.body }}
