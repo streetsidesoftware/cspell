@@ -110,6 +110,7 @@ const settings: AdvancedCSpellSettings = {
         '@cspell/dict-csharp/cspell-ext.json',
         '@cspell/dict-css/cspell-ext.json',
         '@cspell/dict-dart/cspell-ext.json',
+        '@cspell/dict-data-science/cspell-ext.json',
         '@cspell/dict-django/cspell-ext.json',
         '@cspell/dict-docker/cspell-ext.json',
         '@cspell/dict-dotnet/cspell-ext.json',
