@@ -5,7 +5,7 @@ Args: '[".","--config=../../../config/eslint/cspell.config.yaml","--issues-summa
 Summary:
   files: 2038
   filesWithIssues: 302
-  issues: 1637
+  issues: 1638
   errors: 0
 Errors: []
 
@@ -74,6 +74,7 @@ issues:
   - "docs/src/rules/function-paren-newline.md:338:5          barbaz      U       var barbaz = function("
   - "docs/src/rules/id-denylist.md:7:102         Karlton     U       naming things.\" — Phil Karlton"
   - "docs/src/rules/id-length.md:91:10       foobaz      U       function foobaz({ a: prop }) { }"
+  - "docs/src/rules/id-match.md:162:9        categoryid      U       const { categoryid_Default = 1 } = query"
   - "docs/src/rules/indent-legacy.md:28:16       Crockford       U       * Four spaces: Crockford"
   - "docs/src/rules/indent-legacy.md:401:8       boop            U       qux, boop) {"
   - "docs/src/rules/key-spacing.md:194:5         bcde    U       bcde: 42,"
@@ -111,8 +112,8 @@ issues:
   - "docs/src/rules/no-script-url.md:29:41       scripturl       U       rule corresponds to `scripturl` rule of JSHint."
   - "docs/src/rules/no-unexpected-multiline.md:14:78         Schlueter       U       once described by Isaac Schlueter, a newline character"
   - "docs/src/rules/no-unused-vars.md:57:31          destructures    U       function definition destructures an array, unused entries"
-  - "docs/src/rules/no-unused-vars.md:177:67         gnored          U       varsIgnorePattern\": \"[iI]gnored\" }` option:"
-  - "docs/src/rules/no-unused-vars.md:432:12         mymethod        U       static mymethod() {"
+  - "docs/src/rules/no-unused-vars.md:176:67         gnored          U       varsIgnorePattern\": \"[iI]gnored\" }` option:"
+  - "docs/src/rules/no-unused-vars.md:431:12         mymethod        U       static mymethod() {"
   - "docs/src/rules/nonblock-statement-body-position.md:2:8          nonblock    U       title: nonblock-statement-body-position"
   - "docs/src/rules/object-property-newline.md:74:12         bazz                                            U       + bar: \"bazz\","
   - "docs/src/rules/object-property-newline.md:128:6         Officiële                                       U       'Officiële website van de Europese"
@@ -271,7 +272,7 @@ issues:
   - "README.md:290:5         teamend             U       <!--teamend-->"
   - "README.md:293:5         sponsorsstart       U       <!--sponsorsstart-->"
   - "README.md:302:124       SERP                U       fea3074/logo.png\" alt=\"SERP Triumph\" height=\"64"
-  - "README.md:302:715       Workleap            U       f99fe2465f&v=4\" alt=\"Workleap\" height=\"64\"></a></p"
+  - "README.md:302:664       Workleap            U       com/u/53535748\" alt=\"Workleap\" height=\"64\"></a></p"
   - "README.md:307:5         sponsorsend         U       <!--sponsorsend-->"
   - "templates/blogpost.md.ejs:18:10         linkify     U       function linkify(line) {"
   - "tests/fixtures/code-path-analysis/try--try-finally-4.js:43:156      Expressio       U       Expression\\nIdentifier (bar)\\nExpressio"
@@ -612,6 +613,7 @@ issuesSummary:
   - "text: calle, count: 1, files: 1,"
   - "text: carbonads, count: 5, files: 1,"
   - "text: carrays, count: 5, files: 1,"
+  - "text: categoryid, count: 1, files: 1,"
   - "text: cauli, count: 1, files: 1,"
   - "text: changefreq, count: 2, files: 1,"
   - "text: CHARCLASS, count: 2, files: 1,"

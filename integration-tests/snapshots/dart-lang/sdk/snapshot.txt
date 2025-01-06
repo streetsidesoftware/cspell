@@ -3,7 +3,7 @@ Repository: dart-lang/sdk
 Url: "https://github.com/dart-lang/sdk"
 Args: ["--issues-summary-report","--locale=en,en-GB","--exclude=tools/dom/**/*.json","--exclude=pkg/*/test/**","--exclude=**/*_data.*","--exclude=runtime/vm/**","--exclude=sdk/lib/html/**","--exclude=benchmarks/**","--exclude=**/*_test.*","--exclude=*/**/*.{json,yaml,yml}","--exclude=tests/corelib/regexp/**","--exclude=**/{third_party,assets}/**","**/*.{dart,md}"]
 Lines:
- CSpell: Files checked: 10026, Issues found: 8898 in 1947 files.
+ CSpell: Files checked: 10056, Issues found: 8897 in 1947 files.
  exit code: 1
 CONTRIBUTING.md:105:27    - Unknown word (presubmit)  -- CL. They can run the presubmit tests on your behalf
 CONTRIBUTING.md:112:52    - Unknown word (Tryjobs)    -- progress by looking at the "Tryjobs" panel in your review
@@ -211,7 +211,7 @@ pkg/analysis_server/doc/implementation/startup.md:4:30      - Unknown word (dart
 pkg/analysis_server/doc/process/running_in_vs_code.md:56:57     - Unknown word (instrum)    -- ationLogFile": "logs/analyzer.instrum.txt",
 pkg/analysis_server/lib/src/analysis_server.dart:593:13    - Unknown word (dantup)     -- // TODO(dantup): This is currently
 pkg/analysis_server/lib/src/context_manager.dart:43:9      - Unknown word (michalt)    -- // TODO(michalt): This is a temporary
-pkg/analysis_server/lib/src/context_manager.dart:899:13    - Unknown word (mfairhurst) -- // TODO(mfairhurst): Optimize this, or
+pkg/analysis_server/lib/src/context_manager.dart:898:13    - Unknown word (mfairhurst) -- // TODO(mfairhurst): Optimize this, or
 pkg/analysis_server/lib/src/domain_analysis_flags.dart:5:9       - Unknown word (devoncarew) -- // TODO(devoncarew): See #31456 for the
 pkg/analysis_server/lib/src/lsp/completion_utils.dart:98:9      - Unknown word (keertip)    -- // TODO(keertip): Move over completions
 pkg/analysis_server/lib/src/lsp/handlers/custom/editable_arguments/editable_arguments_mixin.dart:99:47     - Unknown word (editability) -- has an existing value, editability is based only on that
@@ -221,7 +221,6 @@ pkg/analysis_server/lib/src/lsp/handlers/handler_code_actions.dart:310:27    - U
 pkg/analysis_server/lib/src/lsp/handlers/handler_code_lens.dart:46:46     - Unknown word (propogate)  -- but if any errors, propogate the first error.
 pkg/analysis_server/lib/src/lsp/handlers/handler_definition.dart:253:48    - Unknown word (becaues)    -- when there are multiple becaues it may include other
 pkg/analysis_server/lib/src/lsp/handlers/handler_document_color_presentation.dart:58:9      - Unknown word (AARRGGBB)   -- /// 0xAARRGGBB as used by the dart
-pkg/analysis_server/lib/src/lsp/mapping.dart:1734:12   - Unknown word (Cpabilities) -- /// [clientCpabilities] should be for the client
 pkg/analysis_server/lib/src/lsp/semantic_tokens/legend.dart:15:41     - Unknown word (bitmasks)   -- looking up indexes and bitmasks of [SemanticTokenTypes
 pkg/analysis_server/lib/src/lsp/server_capabilities_computer.dart:265:12    - Unknown word (hashcode)   -- // the hashcode of their registration
 pkg/analysis_server/lib/src/lsp/server_capabilities_computer.dart:274:25    - Unknown word (Jsons)      -- var newRegistrationsJsons = newRegistrationsMap
@@ -238,9 +237,9 @@ pkg/analysis_server/lib/src/plugin2/generator.dart:19:26     - Unknown word (ent
 pkg/analysis_server/lib/src/plugin2/generator.dart:57:58     - Unknown word (retreive)   -- spells out where to retreive plugin package
 pkg/analysis_server/lib/src/server/driver.dart:213:15    - Unknown word (jcollins)   -- // TODO(jcollins): implement a full map
 pkg/analysis_server/lib/src/server/message_scheduler.dart:171:25    - Unknown word (occured)    -- 'An error occured while parsing cancel
-pkg/analysis_server/lib/src/services/completion/dart/candidate_suggestion.dart:479:23    - Unknown word (suggesing)  -- /// Whether this is suggesing an element that is not
-pkg/analysis_server/lib/src/services/completion/dart/candidate_suggestion.dart:77:11     - Unknown word (identation) -- /// The identation to be used for a multi
-pkg/analysis_server/lib/src/services/completion/dart/completion_manager.dart:81:41     - Unknown word (initallly)  -- number of suggestions initallly computed was
+pkg/analysis_server/lib/src/services/completion/dart/candidate_suggestion.dart:481:23    - Unknown word (suggesing)  -- /// Whether this is suggesing an element that is not
+pkg/analysis_server/lib/src/services/completion/dart/candidate_suggestion.dart:80:11     - Unknown word (identation) -- /// The identation to be used for a multi
+pkg/analysis_server/lib/src/services/completion/dart/completion_manager.dart:84:41     - Unknown word (initallly)  -- number of suggestions initallly computed was greater
 pkg/analysis_server/lib/src/services/completion/dart/in_scope_completion_pass.dart:1073:63   - Unknown word (declatation) -- of a local variable declatation
 pkg/analysis_server/lib/src/services/completion/dart/in_scope_completion_pass.dart:398:28    - Unknown word (puctuation) -- / are a selector or puctuation.
 pkg/analysis_server/lib/src/services/completion/postfix/postfix_completion.dart:418:33    - Unknown word (sourcer)    -- Function(Expression) sourcer, {
@@ -319,8 +318,8 @@ pkg/analyzer/lib/src/dart/ast/ast.dart:11992:18  - Unknown word (opertator)  -- 
 pkg/analyzer/lib/src/dart/ast/ast.dart:8427:25   - Unknown word (thie)       -- / Returns `null` is thie expression is a closure
 pkg/analyzer/lib/src/dart/constant/evaluation.dart:2369:12   - Unknown word (superinitializer) -- /// If a superinitializer was encountered, the
 pkg/analyzer/lib/src/dart/constant/evaluation.dart:277:26    - Unknown word (superconstructor) -- // No explicit superconstructor invocation found, so
-pkg/analyzer/lib/src/dart/element/element.dart:2481:25   - Unknown word (libray)     -- 'Exactly one of librayName/libraryUri should
-pkg/analyzer/lib/src/dart/element/element.dart:3057:62   - Unknown word (disambiguiate) -- in [identifier] to disambiguiate
+pkg/analyzer/lib/src/dart/element/element.dart:2488:25   - Unknown word (libray)     -- 'Exactly one of librayName/libraryUri should
+pkg/analyzer/lib/src/dart/element/element.dart:3064:62   - Unknown word (disambiguiate) -- in [identifier] to disambiguiate
 pkg/analyzer/lib/src/dart/element/least_upper_bound.dart:45:11     - Unknown word (leafp)      -- // TODO(leafp): Use matchTypes or
 pkg/analyzer/lib/src/dart/element/type_algebra.dart:388:9     - Unknown word (substitutor) -- var substitutor = this;
 pkg/analyzer/lib/src/dart/element/type_system.dart:780:31    - Unknown word (malbounded) -- then the whole type is malbounded and an error should
@@ -355,7 +354,6 @@ pkg/analyzer/lib/src/manifest/manifest_values.dart:65:28     - Unknown word (ste
 pkg/analyzer/lib/src/manifest/manifest_values.dart:71:21     - Unknown word (leanback)           -- 'android.software.leanback',
 pkg/analyzer/lib/src/summary/format.dart:125:49    - Unknown word (ADEC)       -- finish(fbBuilder), "ADEC");
 pkg/analyzer/lib/src/summary/format.dart:1367:49   - Unknown word (ADUI)       -- finish(fbBuilder), "ADUI");
-pkg/analyzer/lib/src/summary/format.dart:1925:49   - Unknown word (UICF)       -- finish(fbBuilder), "UICF");
 pkg/analyzer/lib/src/summary/format.dart:426:49    - Unknown word (ADRU)       -- finish(fbBuilder), "ADRU");
 pkg/analyzer/lib/src/summary/idl.dart:25:8      - Unknown word (Prelinked)  -- /// - "Prelinked" refers to information
 pkg/analyzer/lib/src/summary/idl.dart:36:35     - Unknown word (prelinked)  -- expect "linked" and "prelinked" dependencies to be
@@ -1550,16 +1548,16 @@ sdk/lib/_http/http_date.dart:13:50     - Unknown word (asctime)    -- date | rfc
 sdk/lib/_http/http_date.dart:14:21     - Unknown word (wkday)      -- // rfc1123-date = wkday "," SP date1 SP time
 sdk/lib/_http/http_date.dart:88:16     - Unknown word (wkdays)     -- const List wkdays = ["Mon", "Tue", "Wed
 sdk/lib/_http/http_headers.dart:1064:29   - Unknown word (httponly)   -- } else if (name == "httponly") {
-sdk/lib/_http/http_impl.dart:1513:44   - Unknown word (TTFB)       -- requestEvent('Waiting (TTFB)');
-sdk/lib/_http/http_impl.dart:2277:29   - Unknown word (Creds)      -- ProxyCredentials? proxyCreds; // Credentials used
-sdk/lib/_http/http_impl.dart:2376:21   - Unknown word (nextnonce)  -- var nextnonce = header.parameters
+sdk/lib/_http/http_impl.dart:1521:44   - Unknown word (TTFB)       -- requestEvent('Waiting (TTFB)');
+sdk/lib/_http/http_impl.dart:2285:29   - Unknown word (Creds)      -- ProxyCredentials? proxyCreds; // Credentials used
+sdk/lib/_http/http_impl.dart:2384:21   - Unknown word (nextnonce)  -- var nextnonce = header.parameters
 sdk/lib/_http/http_impl.dart:276:9     - Unknown word (ajohnsen)   -- // TODO(ajohnsen): Use other way of getting
-sdk/lib/_http/http_impl.dart:3015:15   - Unknown word (sgjesse)    -- // TODO(sgjesse): Keep a map of these
-sdk/lib/_http/http_impl.dart:3443:43   - Unknown word (serverconnections) -- serviceTypePath => 'io/http/serverconnections';
-sdk/lib/_http/http_impl.dart:3529:59   - Unknown word (nosniff)           -- Content-Type-Options', 'nosniff');
-sdk/lib/_http/http_impl.dart:3721:20   - Unknown word (userinfo)          -- String userinfo = proxy.substring(0
-sdk/lib/_http/http_impl.dart:4049:12   - Unknown word (cnonce)            -- String cnonce = "";
-sdk/lib/_http/http_impl.dart:905:55    - Unknown word (creds)      -- scheme, realm).then((credsAvailable) {
+sdk/lib/_http/http_impl.dart:3023:15   - Unknown word (sgjesse)    -- // TODO(sgjesse): Keep a map of these
+sdk/lib/_http/http_impl.dart:3451:43   - Unknown word (serverconnections) -- serviceTypePath => 'io/http/serverconnections';
+sdk/lib/_http/http_impl.dart:3537:59   - Unknown word (nosniff)           -- Content-Type-Options', 'nosniff');
+sdk/lib/_http/http_impl.dart:3729:20   - Unknown word (userinfo)          -- String userinfo = proxy.substring(0
+sdk/lib/_http/http_impl.dart:4057:12   - Unknown word (cnonce)            -- String cnonce = "";
+sdk/lib/_http/http_impl.dart:913:55    - Unknown word (creds)      -- scheme, realm).then((credsAvailable) {
 sdk/lib/_http/http_parser.dart:20:6      - Unknown word (Loopup)     -- // Loopup-map for the following
 sdk/lib/_http/http_session.dart:7:34      - Unknown word (DARTSESSID) -- _DART_SESSION_ID = "DARTSESSID";
 sdk/lib/_http/http_testing.dart:8:44      - Unknown word (publically) -- should never be exported publically.
