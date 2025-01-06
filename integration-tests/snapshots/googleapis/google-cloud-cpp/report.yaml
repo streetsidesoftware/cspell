@@ -5,7 +5,7 @@ Args: '["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGEL
 Summary:
   files: 19742
   filesWithIssues: 8824
-  issues: 54458
+  issues: 54318
   errors: 0
 Errors: []
 
@@ -406,8 +406,7 @@ issues:
   - "generator/internal/routing.h:78:7           actools     U       * go/actools-dynamic-routing-proposal"
   - "generator/internal/scaffold_generator_test.cc:437:38        CXXLD       U       actual, HasSubstr(\"\\t$(CXXLD) \"));"
   - "generator/internal/scaffold_generator_test.cc:471:37        Bazelrc     U       ScaffoldGenerator, QuickstartBazelrc) {"
-  - "generator/internal/scaffold_generator.cc:790:7          tsch            U       | csh/tsch | `setenv"
-  - "generator/internal/scaffold_generator.cc:1029:8         CXXLDFLAGS      U       CLIENT_CXXLDFLAGS := $$(shell pkg-config"
+  - "generator/internal/scaffold_generator.cc:1012:8         CXXLDFLAGS      U       CLIENT_CXXLDFLAGS := $$(shell pkg-config"
   - "generator/internal/service_code_generator.h:191:46      autopopulated       U       of the methods has an autopopulated `request_id`-like"
   - "generator/templates/WORKSPACE.bazel:19:21       Starlark    U       # Add the necessary Starlark functions to fetch google"
   - "google/cloud/accessapproval/access_approval_client.h:19:39          ACCESSAPPROVAL      U       CLOUD_CPP_GOOGLE_CLOUD_ACCESSAPPROVAL_ACCESS_APPROVAL_CLIENT"
@@ -753,11 +752,12 @@ issues:
   - "google/cloud/spanner/admin/integration_tests/backup_extra_integration_test.cc:483:64        rreq    U       RestoreDatabaseRequest rreq;"
   - "google/cloud/spanner/admin/integration_tests/backup_integration_test.cc:153:69      lreq    U       ListBackupOperationsRequest lreq;"
   - "google/cloud/spanner/admin/integration_tests/database_admin_integration_test.cc:533:52      ceci    U       kKeyRing, \"ceci-n-est-pas-une-cle\")"
-  - "google/cloud/spanner/benchmarks/README.md:78:49         mrcb        U       experiment=read-string | tee mrcb-read-string.csv"
-  - "google/cloud/spanner/benchmarks/README.md:104:9         ggplot      U       require(ggplot2) # may require install"
-  - "google/cloud/spanner/benchmarks/README.md:110:11        rbind       U       df <- rbind(df, t);"
-  - "google/cloud/spanner/benchmarks/README.md:118:1         ggsave      U       ggsave('read-data-types.png"
-  - "google/cloud/spanner/benchmarks/README.md:140:29        srtp        U       experiment=read | tee srtp-read.csv"
+  - "google/cloud/spanner/benchmarks/README.md:52:45         principa    U       these benchmarks. The principa should have (at least"
+  - "google/cloud/spanner/benchmarks/README.md:71:49         mrcb        U       experiment=read-string | tee mrcb-read-string.csv"
+  - "google/cloud/spanner/benchmarks/README.md:97:9          ggplot      U       require(ggplot2) # may require install"
+  - "google/cloud/spanner/benchmarks/README.md:103:11        rbind       U       df <- rbind(df, t);"
+  - "google/cloud/spanner/benchmarks/README.md:111:1         ggsave      U       ggsave('read-data-types.png"
+  - "google/cloud/spanner/benchmarks/README.md:133:29        srtp        U       experiment=read | tee srtp-read.csv"
   - "google/cloud/spanner/client_test.cc:338:68      epdp        U       tePartitionedDmlParams const& epdp) {"
   - "google/cloud/spanner/client_test.cc:575:12      STREQ       U       EXPECT_STREQ(e, \"Read() error\");"
   - "google/cloud/spanner/database_admin_client_test.cc:32:11        gsad    U       namespace gsad = ::google::spanner"
@@ -893,7 +893,7 @@ issues:
   - "google/cloud/storage/oauth2/service_account_credentials_test.cc:90:48       Ajwt        U       Aoauth%3Agrant-type%3Ajwt-bearer\";"
   - "google/cloud/storage/policy_document_test.cc:160:8          asdfasdfasdf    U       \"asdfasdfasdf\", \"asdfasdfasdf\"};"
   - "google/cloud/storage/policy_document_test.cc:201:14         rsaposttest     U       \"rsaposttest, access_id=foo@foo.com"
-  - "google/cloud/storage/quickstart/README.md:126:20        Tbits       U       workloads (several Tbits/s of upload and/or download"
+  - "google/cloud/storage/quickstart/README.md:109:20        Tbits       U       workloads (several Tbits/s of upload and/or download"
   - "google/cloud/storage/testing/mock_generic_stub.h:30:17          Googlemock      U       * Implements a Googlemock for the (generated)"
   - "google/cloud/storage/tests/object_read_large_integration_test.cc:42:39          statm       U       ifstream(\"/proc/self/statm\");"
   - "google/cloud/storage/tests/signed_url_conformance_test.cc:152:41        bucketboundhostname         U       cketBoundHostname(test_params.bucketboundhostname());"
