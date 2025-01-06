@@ -230,6 +230,7 @@ jobs:
 
   integration-tests-summary:
     permissions:
+      contents: write
       pull-requests: write
     needs:
       - integration-tests
@@ -298,12 +299,11 @@ jobs:
 
       - name: Create PR
         if: github.ref_name == 'main'
-        uses: streetsidesoftware/actions/.github/actions/pr@v1
+        uses: peter-evans/create-pull-request@v7
         with:
           commit-message: 'chore: ${{ steps.pr-body.outputs.title }}'
           branch: update-perf-main
           base: main
           title: 'chore: ${{ steps.pr-body.outputs.title }}'
           body: ${{ steps.pr-body.outputs.body }}
-          app_id: ${{ secrets.AUTOMATION_APP_ID }}
-          app_private_key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
+          token: ${{ secrets.GITHUB_TOKEN }}
