@@ -146,6 +146,7 @@ const settings = {
         '@cspell/dict-r/cspell-ext.json',
         '@cspell/dict-ruby/cspell-ext.json',
         '@cspell/dict-rust/cspell-ext.json',
+        '@cspell/dict-shell/cspell-ext.json',
         '@cspell/dict-scala/cspell-ext.json',
         '@cspell/dict-sql/cspell-ext.json',
         '@cspell/dict-software-terms/cspell-ext.json',
