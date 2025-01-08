@@ -1,8 +1,6 @@
 <!--- cspell:disable --->
 
 [<img alt="Contributor Jason3S" src="https://avatars.githubusercontent.com/u/3740137?v=4&size=128" width=64>](https://github.com/Jason3S)
-[<img alt="Contributor street-side-software-automation[bot]" src="https://avatars.githubusercontent.com/u/50543896?v=4&size=128" width=64>](https://github.com/apps/street-side-software-automation)
-[<img alt="Contributor dependabot[bot]" src="https://avatars.githubusercontent.com/in/29110?v=4&size=128" width=64>](https://github.com/apps/dependabot)
 [<img alt="Contributor nschonni" src="https://avatars.githubusercontent.com/u/1297909?v=4&size=128" width=64>](https://github.com/nschonni)
 [<img alt="Contributor Jason-Rev" src="https://avatars.githubusercontent.com/u/4850573?v=4&size=128" width=64>](https://github.com/Jason-Rev)
 [<img alt="Contributor amanoji" src="https://avatars.githubusercontent.com/u/17751138?v=4&size=128" width=64>](https://github.com/amanoji)
@@ -12,7 +10,6 @@
 [<img alt="Contributor zo" src="https://avatars.githubusercontent.com/u/518711?v=4&size=128" width=64>](https://github.com/zo)
 [<img alt="Contributor dsanders11" src="https://avatars.githubusercontent.com/u/5820654?v=4&size=128" width=64>](https://github.com/dsanders11)
 [<img alt="Contributor coliff" src="https://avatars.githubusercontent.com/u/1212885?v=4&size=128" width=64>](https://github.com/coliff)
-[<img alt="Contributor github-actions[bot]" src="https://avatars.githubusercontent.com/in/15368?v=4&size=128" width=64>](https://github.com/apps/github-actions)
 [<img alt="Contributor dakotaJang" src="https://avatars.githubusercontent.com/u/22528264?v=4&size=128" width=64>](https://github.com/dakotaJang)
 [<img alt="Contributor bisubus" src="https://avatars.githubusercontent.com/u/2905949?v=4&size=128" width=64>](https://github.com/bisubus)
 [<img alt="Contributor aimagic" src="https://avatars.githubusercontent.com/u/40253639?v=4&size=128" width=64>](https://github.com/aimagic)
