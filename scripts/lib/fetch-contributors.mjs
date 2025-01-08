@@ -38,7 +38,7 @@ export async function fetchContributors(token) {
     let contributors = [];
 
     for (let page = 1; page < 5; page++) {
-        const c = await fetchPage(page);
+        const c = (await fetchPage(page)).filter((c) => c.type === 'User');
         contributors.push(...c);
         if (c.length < perPage) {
             break;

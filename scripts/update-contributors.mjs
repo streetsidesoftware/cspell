@@ -3,7 +3,7 @@
 import { execSync } from 'node:child_process';
 import { writeFile } from 'node:fs/promises';
 
-import { fetchContributors } from './fetch-contributors.mjs';
+import { fetchContributors } from './lib/fetch-contributors.mjs';
 
 const token = process.argv[2] || (await getToken());
 
