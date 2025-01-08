@@ -244,20 +244,15 @@ function augmentCommandHelp(context: AddHelpTextContext) {
     const showHidden = !!opts.verbose;
     const hiddenHelp: string[] = [];
     const help = command.createHelp();
+    help.helpWidth = process.stdout.columns || 80;
     const hiddenOptions = command.options.filter((opt) => opt.hidden && showHidden);
     const flagColWidth = Math.max(...command.options.map((opt) => opt.flags.length), 0);
-    const indent = flagColWidth + 4;
+    // const indent = flagColWidth + 4;
     for (const options of hiddenOptions) {
         if (!hiddenHelp.length) {
             hiddenHelp.push('\nHidden Options:');
         }
-        hiddenHelp.push(
-            help.wrap(
-                `  ${options.flags.padEnd(flagColWidth)}  ${options.description}`,
-                process.stdout.columns || 80,
-                indent,
-            ),
-        );
+        hiddenHelp.push(help.formatItem(options.flags, flagColWidth, options.description, help));
     }
     output.push(...hiddenHelp, advanced);
     return helpIssueTemplate(opts) + output.join('\n');
