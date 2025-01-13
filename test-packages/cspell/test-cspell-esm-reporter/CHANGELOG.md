@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>8.17.2 (2025-01-13)</small>
+
+* fix: Dump stack on error when verbose (#6782) ([df0026c](https://github.com/streetsidesoftware/cspell-cli/commit/df0026c)), closes [#6782](https://github.com/streetsidesoftware/cspell-cli/issues/6782)
+
 ## <small>8.17.1 (2024-12-16)</small>
 
 * chore: Update Integration Test Performance Data (#6681) ([4b19439](https://github.com/streetsidesoftware/cspell-cli/commit/4b19439)), closes [#6681](https://github.com/streetsidesoftware/cspell-cli/issues/6681)
