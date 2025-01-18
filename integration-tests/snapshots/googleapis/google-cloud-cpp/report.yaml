@@ -4,8 +4,8 @@ Url: https://github.com/googleapis/google-cloud-cpp.git
 Args: '["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]'
 Summary:
   files: 19742
-  filesWithIssues: 7395
-  issues: 43153
+  filesWithIssues: 7389
+  issues: 43323
   errors: 0
 Errors: []
 
@@ -65,7 +65,6 @@ issues:
   - "ci/etc/expected_install_directories:9:22        servicecontrol              U       /include/google/api/servicecontrol"
   - "ci/etc/expected_install_directories:12:22       servicemanagement           U       /include/google/api/servicemanagement"
   - "ci/etc/expected_install_directories:14:22       serviceusage                U       /include/google/api/serviceusage"
-  - "ci/etc/expected_install_directories:16:18       appengine                   U       ./include/google/appengine"
   - "ci/etc/expected_install_directories:28:24       accesscontextmanager        U       include/google/cloud/accesscontextmanager"
   - "ci/etc/expected_install_directories:33:24       advisorynotifications       U       include/google/cloud/advisorynotifications"
   - "ci/etc/expected_install_directories:37:24       aiplatform                  U       include/google/cloud/aiplatform"
@@ -186,8 +185,6 @@ issues:
   - "doc/contributor/howto-guide-declare-a-library-ga.md:95:36       quickstarts     U       the GA targets in the quickstarts"
   - "doc/contributor/howto-guide-find-missing-service-protos.md:35:44        protolists      U       external/googleapis/protolists/*.list' | \\"
   - "doc/contributor/howto-guide-find-missing-service-protos.md:91:33        protofiles      U       we build the list of protofiles that are listed in"
-  - "doc/contributor/howto-guide-forks-and-pull-requests.md:3:37         Googlers    U       document because many Googlers do not use GitHub on"
-  - "doc/contributor/howto-guide-forks-and-pull-requests.md:115:14       Googler     U       If you are a Googler, when you submit your"
   - "doc/contributor/howto-guide-setup-cmake-environment.md:63:48        buildsystems    U       $HOME/vcpkg/scripts/buildsystems/vcpkg.cmake"
   - "doc/contributor/howto-guide-setup-cmake-environment.md:84:23        ctest           U       env -C build-out/home ctest --output-on-failure"
   - "doc/contributor/howto-guide-setup-development-workstation.md:56:17          libc                U       gcc g++ libc-ares-dev libc-ares2"
@@ -307,6 +304,7 @@ issues:
   - "external/googleapis/protodeps/binaryauthorization.deps:8:25         grafeas     U       com_google_googleapis//grafeas/v1:grafeas_proto"
   - "external/googleapis/protolists/aiplatform.list:27:59        trainingjob     U       aiplatform/v1/schema/trainingjob/definition:automl_image"
   - "external/googleapis/protolists/aiplatform.list:82:52        genai           U       cloud/aiplatform/v1:genai_tuning_service.proto"
+  - "external/googleapis/protolists/aiplatform.list:134:52       tensorboard     U       cloud/aiplatform/v1:tensorboard.proto"
   - "external/googleapis/protolists/artifactregistry.list:13:61          vpcsc       U       artifactregistry/v1:vpcsc_config.proto"
   - "external/googleapis/protolists/backupdr.list:3:58           reportlog                   U       backupdr/logging/v1:reportlog.proto"
   - "external/googleapis/protolists/backupdr.list:5:50           backupplan                  U       google/cloud/backupdr/v1:backupplan.proto"
@@ -397,6 +395,8 @@ issues:
   - "google/cloud/accessapproval/README.md:29:10         cerr    U       std::cerr << \"Usage: \" << argv"
   - "google/cloud/accessapproval/README.md:39:10         cout    U       std::cout << a->DebugString()"
   - "google/cloud/advisorynotifications/v1/advisory_notifications_client.h:19:39         ADVISORYNOTIFICATIONS       U       CLOUD_CPP_GOOGLE_CLOUD_ADVISORYNOTIFICATIONS_V1_ADVISORY_NOTIFICATIONS"
+  - "google/cloud/aiplatform/doc/environment-variables.dox:113:21        TENSORBOARD     U       - `GOOGLE_CLOUD_CPP_TENSORBOARD_SERVICE_ENDPOINT=.."
+  - "google/cloud/aiplatform/doc/environment-variables.dox:115:16        Tensorboard     U       used by `MakeTensorboardServiceConnection()`"
   - "google/cloud/aiplatform/samples/samples.cc:30:13        generativeaionvertexai      U       // [START generativeaionvertexai_gemini_generate_from"
   - "google/cloud/aiplatform/samples/samples.cc:162:34       generativeai                U       \"gs://generativeai-downloads/images/scones"
   - "google/cloud/aiplatform/v1/dataset_client.h:19:39       AIPLATFORM      U       CLOUD_CPP_GOOGLE_CLOUD_AIPLATFORM_V1_DATASET_CLIENT_H"
@@ -407,7 +407,6 @@ issues:
   - "google/cloud/aiplatform/v1/internal/tensorboard_auth_decorator.cc:101:45        Tensorboards    U       aiplatform::v1::ListTensorboardsResponse>"
   - "google/cloud/aiplatform/v1/internal/tensorboard_connection_impl.cc:306:15       tensorboards    U       r.tensorboards().size());"
   - "google/cloud/aiplatform/v1/internal/vizier_connection_impl.cc:421:48        Metatdata       U       CheckTrialEarlyStoppingStateMetatdata>()) {"
-  - "google/cloud/aiplatform/v1/llm_utility_client.h:159:50      Codey       U       like chat models, or Codey models."
   - "google/cloud/aiplatform/v1/prediction_client.h:642:29       multimodal      U       Generate content with multimodal inputs."
   - "google/cloud/aiplatform/v1/schedule_client.h:41:25          shceudled       U       periodically launch shceudled runs to make API calls"
   - "google/cloud/aiplatform/v1/schedule_client.h:576:55         unstarted       U       updated Schedule. All unstarted runs before the"
@@ -669,7 +668,6 @@ issues:
   - "google/cloud/publicca/v1/internal/public_certificate_authority_auth_decorator.h:19:39       PUBLICCA    U       CLOUD_CPP_GOOGLE_CLOUD_PUBLICCA_V1_INTERNAL_PUBLIC_CERTIFICAT"
   - "google/cloud/pubsub/benchmarks/README.md:19:5           acked       U       not acked by Cloud Pub/Sub) goes"
   - "google/cloud/pubsub/doc/override-retry-policies.dox:85:50       pubusb      U       retry policies for `pubusb::Subscriber`:"
-  - "google/cloud/pubsub/integration_tests/subscription_admin_integration_test.cc:112:47         appspot     U       /\" + project_id + \".appspot.com/push\";"
   - "google/cloud/pubsub/internal/batch_callback_wrapper.h:74:13         Modack      U       Span StartModackSpan("
   - "google/cloud/pubsub/internal/exactly_once_policies_test.cc:28:38        ooops       U       StatusCode::kInternal, \"ooops\"),"
   - "google/cloud/pubsub/internal/extend_leases_with_retry.cc:62:30          modack      U       interface for making a modack rpc."
