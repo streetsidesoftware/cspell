@@ -8,6 +8,9 @@ dictionaryDefinitions:
 dictionaries:
   - google-custom-words
   - google
+  - data-science
+  - data-science-models
+  - data-science-tools
 
 ignorePaths:
   - '**/{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}'
@@ -32,7 +35,12 @@ languageSettings:
   - languageId: python
     allowCompoundWords: false
 
+overrides:
+  - filename: '**/*.inc'
+    languageId: cpp
+
 ignoreWords:
   - tparam
   - NOLINT
   - endcode
+  - '-W'

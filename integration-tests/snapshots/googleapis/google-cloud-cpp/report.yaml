@@ -4,8 +4,8 @@ Url: https://github.com/googleapis/google-cloud-cpp.git
 Args: '["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]'
 Summary:
   files: 19742
-  filesWithIssues: 7389
-  issues: 43323
+  filesWithIssues: 7385
+  issues: 43274
   errors: 0
 Errors: []
 
@@ -410,7 +410,6 @@ issues:
   - "google/cloud/aiplatform/v1/prediction_client.h:642:29       multimodal      U       Generate content with multimodal inputs."
   - "google/cloud/aiplatform/v1/schedule_client.h:41:25          shceudled       U       periodically launch shceudled runs to make API calls"
   - "google/cloud/aiplatform/v1/schedule_client.h:576:55         unstarted       U       updated Schedule. All unstarted runs before the"
-  - "google/cloud/aiplatform/v1/vizier_client.h:43:37        hyperparameters     U       tuning machine learning hyperparameters and searching over deep"
   - "google/cloud/apigeeconnect/connection_client.h:19:39        APIGEECONNECT       U       CLOUD_CPP_GOOGLE_CLOUD_APIGEECONNECT_CONNECTION_CLIENT_H"
   - "google/cloud/appengine/v1/firewall_client.h:43:5        Processesing    U       /// Processesing stops at the first rule"
   - "google/cloud/artifactregistry/artifact_registry_client.h:19:39          ARTIFACTREGISTRY    U       CLOUD_CPP_GOOGLE_CLOUD_ARTIFACTREGISTRY_ARTIFACT_REGISTRY_CLIENT"
@@ -426,7 +425,6 @@ issues:
   - "google/cloud/beyondcorp/appgateways/v1/app_gateways_client.h:19:50          APPGATEWAYS     U       GOOGLE_CLOUD_BEYONDCORP_APPGATEWAYS_V1_APP_GATEWAYS_CLIENT"
   - "google/cloud/bigquery/analyticshub/v1/analytics_hub_client.h:19:48          ANALYTICSHUB    U       GOOGLE_CLOUD_BIGQUERY_ANALYTICSHUB_V1_ANALYTICS_HUB_CLIENT"
   - "google/cloud/bigquery/datatransfer/v1/data_transfer_client.cc:296:35        Unenroll    U       DataTransferServiceClient::UnenrollDataSources("
-  - "google/cloud/bigquery/README.md:49:3        constexpr       U       constexpr int kMaxReadStreams"
   - "google/cloud/bigquery/v2/minimal/benchmarks/benchmark_test.cc:109:49        useast      U       size=10\", \"--location=useast\", \"--parent-job-id="
   - "google/cloud/bigquery/v2/minimal/benchmarks/benchmark.cc:143:14         nsamples    U       auto const nsamples = result.operations"
   - "google/cloud/bigquery/v2/minimal/benchmarks/benchmarks_config.cc:50:39          ODBCTESTDATASET     U       query\":\"insert into ODBCTESTDATASET.ODBCTESTTABLE_INSERT"
@@ -502,10 +500,7 @@ issues:
   - "google/cloud/bigtable/internal/legacy_row_reader_test.cc:89:14          preconfigured       U       // Returns a preconfigured set of parsers, so expectatio"
   - "google/cloud/bigtable/internal/readrowsparser_acceptance_tests.inc:409:19       alue                U       value: \"alue-VAL\""
   - "google/cloud/bigtable/internal/readrowsparser_acceptance_tests.inc:571:24       Multiqualifier      U       TEST_F(AcceptanceTest, MultiqualifierSplits) {"
-  - "google/cloud/bigtable/internal/readrowsparser_acceptance_tests.inc:623:38       Multisplit          U       AcceptanceTest, MultiqualifierMultisplit) {"
   - "google/cloud/bigtable/internal/readrowsparser.h:15:57       READROWSPARSER      U       CLOUD_BIGTABLE_INTERNAL_READROWSPARSER_H"
-  - "google/cloud/bigtable/internal/rpc_policy_parameters.inc:20:26          BIGTABLEINSTANCEADMIN       U       ifndef GOOGLE_CLOUD_CPP_BIGTABLEINSTANCEADMIN_DEFAULT_INITIAL_DELAY"
-  - "google/cloud/bigtable/internal/rpc_policy_parameters.inc:46:26          BIGTABLETABLEADMIN          U       ifndef GOOGLE_CLOUD_CPP_BIGTABLETABLEADMIN_DEFAULT_INITIAL_DELAY"
   - "google/cloud/bigtable/metadata_update_policy_test.cc:76:55          gccl    U       header(), HasSubstr(\"gccl/\"));"
   - "google/cloud/bigtable/mutations.h:159:15        vexpressed      U       * in seconds,vexpressed as a `std::ratio<>`"
   - "google/cloud/bigtable/row_range_test.cc:149:31      fooa        U       TRUE(range.Contains(\"fooa\"));"
@@ -536,8 +531,7 @@ issues:
   - "google/cloud/cloudquotas/v1/cloud_quotas_client.h:19:39         CLOUDQUOTAS     U       CLOUD_CPP_GOOGLE_CLOUD_CLOUDQUOTAS_V1_CLOUD_QUOTAS_CLIENT"
   - "google/cloud/cloudquotas/v1/cloud_quotas_client.h:42:27         preferencess    U       Create/Update quota preferencess that declare the preferred"
   - "google/cloud/commerce/consumer/procurement/v1/internal/consumer_procurement_option_defaults.cc:42:8         cloudcommerceconsumerprocurement    U       \"cloudcommerceconsumerprocurement.googleapis.com\");"
-  - "google/cloud/composer/v1/environments_client.h:364:8        numpy       U       /// numpy, the `updateMask` parameter"
-  - "google/cloud/composer/v1/environments_client.h:365:47       pypi        U       config.softwareConfig.pypiPackages.scikit-learn"
+  - "google/cloud/composer/v1/environments_client.h:365:47       pypi    U       config.softwareConfig.pypiPackages.scikit-learn"
   - "google/cloud/compute/autoscalers/v1/autoscalers_client.cc:28:1          Autoscalers     U       AutoscalersClient::AutoscalersClient"
   - "google/cloud/compute/autoscalers/v1/autoscalers_client.h:19:47          AUTOSCALERS     U       GOOGLE_CLOUD_COMPUTE_AUTOSCALERS_V1_AUTOSCALERS_CLIENT"
   - "google/cloud/compute/BUILD.bazel:36:26          rfind       U       name = sample[sample.rfind(\"/\") + 1:].replace("
@@ -571,7 +565,6 @@ issues:
   - "google/cloud/deploy/v1/cloud_deploy_client.cc:1177:24       Automations     U       CloudDeployClient::ListAutomations(std::string const& parent"
   - "google/cloud/deploy/v1/cloud_deploy_client.h:3616:8         automations     U       /// automations. Format must be"
   - "google/cloud/deploy/v1/internal/cloud_deploy_connection_impl.cc:1598:15     rollouts    U       r.rollouts().size());"
-  - "google/cloud/dialogflow_cx/doc/main.dox:6:50        chatbots    U       interfaces (for example, chatbots, and voice-powered apps"
   - "google/cloud/discoveryengine/v1/completion_client.h:19:39       DISCOVERYENGINE     U       CLOUD_CPP_GOOGLE_CLOUD_DISCOVERYENGINE_V1_COMPLETION_CLIENT"
   - "google/cloud/discoveryengine/v1/internal/site_search_engine_auth_decorator.cc:249:35        Recrawl     U       SearchEngineServiceAuth::AsyncRecrawlUris("
   - "google/cloud/discoveryengine/v1/site_search_engine_client.h:902:25      recrawl     U       / Request on-demand recrawl for a list of URIs."
@@ -613,9 +606,6 @@ issues:
   - "google/cloud/internal/curl_rest_client_integration_test.cc:113:21       httbin      U       // TODO(#8396): httbin.org doesn't send back"
   - "google/cloud/internal/curl_wrappers_test.cc:53:14       Casse       U       struct TestCasse {"
   - "google/cloud/internal/detect_gcp_test.cc:43:43          Loogle      U       testing::Values(\"Loogle\", \"Test\", \"Google K"
-  - "google/cloud/internal/diagnostics_pop.inc:17:2          elif    U       #elif __clang__"
-  - "google/cloud/internal/diagnostics_pop.inc:19:9          GNUC    U       #elif __GNUC__"
-  - "google/cloud/internal/disable_deprecation_warnings.inc:19:36        Wdeprecated     U       diagnostic ignored \"-Wdeprecated-declarations\""
   - "google/cloud/internal/external_account_token_source_aws_test.cc:99:21       Imdsv       U       auto constexpr kTestImdsv2Url = \"http://169.2"
   - "google/cloud/internal/external_account_token_source_aws_test.cc:100:48      imdsv       U       SessionToken = \"test-imdsv2-token\";"
   - "google/cloud/internal/external_account_token_source_aws_test.cc:105:47      Imds        U       okenSourceAwsInfo MakeTestInfoImdsV1() {"
