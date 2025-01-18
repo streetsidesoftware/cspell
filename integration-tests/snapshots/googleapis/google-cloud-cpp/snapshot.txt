@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 19742, Issues found: 43153 in 7395 files.
+ CSpell: Files checked: 19742, Issues found: 43323 in 7389 files.
  exit code: 1
 ARCHITECTURE.md:158:48    - Unknown word (googlemock) -- implementation using `googlemock`
 ARCHITECTURE.md:29:61     - Unknown word (retryable)  -- RPCs that fail with a retryable error,
@@ -98,7 +98,6 @@ ci/etc/expected_install_directories:12:22     - Unknown word (servicemanagement)
 ci/etc/expected_install_directories:130:33    - Unknown word (datapolicies)          -- google/cloud/bigquery/datapolicies
 ci/etc/expected_install_directories:14:22     - Unknown word (serviceusage)      -- /include/google/api/serviceusage
 ci/etc/expected_install_directories:152:24    - Unknown word (bigquerycontrol)       -- include/google/cloud/bigquerycontrol
-ci/etc/expected_install_directories:16:18     - Unknown word (appengine)         -- ./include/google/appengine
 ci/etc/expected_install_directories:170:24    - Unknown word (binaryauthorization)   -- include/google/cloud/binaryauthorization
 ci/etc/expected_install_directories:175:24    - Unknown word (certificatemanager)    -- include/google/cloud/certificatemanager
 ci/etc/expected_install_directories:193:24    - Unknown word (cloudcontrolspartner)  -- include/google/cloud/cloudcontrolspartner
@@ -185,8 +184,6 @@ doc/contributor/howto-guide-declare-a-library-ga.md:47:1      - Unknown word (ma
 doc/contributor/howto-guide-declare-a-library-ga.md:95:36     - Unknown word (quickstarts) -- the GA targets in the quickstarts
 doc/contributor/howto-guide-find-missing-service-protos.md:35:44     - Unknown word (protolists) -- external/googleapis/protolists/*.list' | \
 doc/contributor/howto-guide-find-missing-service-protos.md:91:33     - Unknown word (protofiles) -- we build the list of protofiles that are listed in
-doc/contributor/howto-guide-forks-and-pull-requests.md:115:14    - Unknown word (Googler)    -- If you are a Googler, when you submit your
-doc/contributor/howto-guide-forks-and-pull-requests.md:3:37      - Unknown word (Googlers)   -- document because many Googlers do not use GitHub on
 doc/contributor/howto-guide-setup-cmake-environment.md:63:48     - Unknown word (buildsystems) -- $HOME/vcpkg/scripts/buildsystems/vcpkg.cmake
 doc/contributor/howto-guide-setup-cmake-environment.md:84:23     - Unknown word (ctest)        -- env -C build-out/home ctest --output-on-failure
 doc/contributor/howto-guide-setup-development-workstation.md:137:11    - Unknown word (cloudcxxrc) -- ) >$HOME/.cloudcxxrc
@@ -302,6 +299,7 @@ external/googleapis/CMakeLists.txt:82:32     - Unknown word (iamcredentials) -- 
 external/googleapis/CMakeLists.txt:88:13     - Unknown word (longrunning)    -- "google/longrunning/operations.proto"
 external/googleapis/CMakeLists.txt:97:18     - Unknown word (dayofweek)      -- "google/type/dayofweek.proto"
 external/googleapis/protodeps/binaryauthorization.deps:8:25      - Unknown word (grafeas)    -- com_google_googleapis//grafeas/v1:grafeas_proto
+external/googleapis/protolists/aiplatform.list:134:52    - Unknown word (tensorboard) -- cloud/aiplatform/v1:tensorboard.proto
 external/googleapis/protolists/aiplatform.list:27:59     - Unknown word (trainingjob) -- aiplatform/v1/schema/trainingjob/definition:automl_image
 external/googleapis/protolists/aiplatform.list:82:52     - Unknown word (genai)       -- cloud/aiplatform/v1:genai_tuning_service.proto
 external/googleapis/protolists/artifactregistry.list:13:61     - Unknown word (vpcsc)      -- artifactregistry/v1:vpcsc_config.proto
@@ -395,6 +393,8 @@ google/cloud/accessapproval/access_approval_client.h:19:39     - Unknown word (A
 google/cloud/accessapproval/doc/main.dox:3:2       - Unknown word (mainpage)   -- @mainpage Access Approval API
 google/cloud/accessapproval/doc/options.dox:2:2       - Unknown word (defgroup)   -- @defgroup google-cloud-accessapproval
 google/cloud/advisorynotifications/v1/advisory_notifications_client.h:19:39     - Unknown word (ADVISORYNOTIFICATIONS) -- CLOUD_CPP_GOOGLE_CLOUD_ADVISORYNOTIFICATIONS_V1_ADVISORY_NOTIFICATIONS
+google/cloud/aiplatform/doc/environment-variables.dox:113:21    - Unknown word (TENSORBOARD) -- - `GOOGLE_CLOUD_CPP_TENSORBOARD_SERVICE_ENDPOINT=..
+google/cloud/aiplatform/doc/environment-variables.dox:115:16    - Unknown word (Tensorboard) -- used by `MakeTensorboardServiceConnection()`
 google/cloud/aiplatform/samples/samples.cc:162:34    - Unknown word (generativeai)           -- "gs://generativeai-downloads/images/scones
 google/cloud/aiplatform/samples/samples.cc:30:13     - Unknown word (generativeaionvertexai) -- // [START generativeaionvertexai_gemini_generate_from
 google/cloud/aiplatform/v1/dataset_client.h:1689:38   - Unknown word (CCAI)       -- conversation data to CCAI Insights.
@@ -405,7 +405,6 @@ google/cloud/aiplatform/v1/endpoint_client.h:862:19    - Unknown word (unassigns
 google/cloud/aiplatform/v1/internal/tensorboard_auth_decorator.cc:101:45    - Unknown word (Tensorboards) -- aiplatform::v1::ListTensorboardsResponse>
 google/cloud/aiplatform/v1/internal/tensorboard_connection_impl.cc:306:15    - Unknown word (tensorboards) -- r.tensorboards().size());
 google/cloud/aiplatform/v1/internal/vizier_connection_impl.cc:421:48    - Unknown word (Metatdata)  -- CheckTrialEarlyStoppingStateMetatdata>()) {
-google/cloud/aiplatform/v1/llm_utility_client.h:159:50    - Unknown word (Codey)      -- like chat models, or Codey models.
 google/cloud/aiplatform/v1/prediction_client.h:642:29    - Unknown word (multimodal) -- Generate content with multimodal inputs.
 google/cloud/aiplatform/v1/schedule_client.h:41:25     - Unknown word (shceudled)  -- periodically launch shceudled runs to make API calls
 google/cloud/aiplatform/v1/schedule_client.h:576:55    - Unknown word (unstarted)  -- updated Schedule. All unstarted runs before the
@@ -666,7 +665,6 @@ google/cloud/privilegedaccessmanager/v1/internal/privileged_access_manager_auth_
 google/cloud/publicca/v1/internal/public_certificate_authority_auth_decorator.h:19:39     - Unknown word (PUBLICCA)   -- CLOUD_CPP_GOOGLE_CLOUD_PUBLICCA_V1_INTERNAL_PUBLIC_CERTIFICAT
 google/cloud/pubsub/benchmarks/README.md:19:5      - Unknown word (acked)      -- not acked by Cloud Pub/Sub) goes
 google/cloud/pubsub/doc/override-retry-policies.dox:85:50     - Unknown word (pubusb)     -- retry policies for `pubusb::Subscriber`:
-google/cloud/pubsub/integration_tests/subscription_admin_integration_test.cc:112:47    - Unknown word (appspot)    -- /" + project_id + ".appspot.com/push";
 google/cloud/pubsub/internal/batch_callback_wrapper.h:74:13     - Unknown word (Modack)     -- Span StartModackSpan(
 google/cloud/pubsub/internal/exactly_once_policies_test.cc:28:38     - Unknown word (ooops)      -- StatusCode::kInternal, "ooops"),
 google/cloud/pubsub/internal/extend_leases_with_retry.cc:120:5     - Unknown word (enccode)    -- * @enccode
