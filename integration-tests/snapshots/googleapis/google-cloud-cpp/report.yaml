@@ -5,7 +5,7 @@ Args: '["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGEL
 Summary:
   files: 19742
   filesWithIssues: 7385
-  issues: 43274
+  issues: 43026
   errors: 0
 Errors: []
 
@@ -304,7 +304,6 @@ issues:
   - "external/googleapis/protodeps/binaryauthorization.deps:8:25         grafeas     U       com_google_googleapis//grafeas/v1:grafeas_proto"
   - "external/googleapis/protolists/aiplatform.list:27:59        trainingjob     U       aiplatform/v1/schema/trainingjob/definition:automl_image"
   - "external/googleapis/protolists/aiplatform.list:82:52        genai           U       cloud/aiplatform/v1:genai_tuning_service.proto"
-  - "external/googleapis/protolists/aiplatform.list:134:52       tensorboard     U       cloud/aiplatform/v1:tensorboard.proto"
   - "external/googleapis/protolists/artifactregistry.list:13:61          vpcsc       U       artifactregistry/v1:vpcsc_config.proto"
   - "external/googleapis/protolists/backupdr.list:3:58           reportlog                   U       backupdr/logging/v1:reportlog.proto"
   - "external/googleapis/protolists/backupdr.list:5:50           backupplan                  U       google/cloud/backupdr/v1:backupplan.proto"
@@ -395,8 +394,6 @@ issues:
   - "google/cloud/accessapproval/README.md:29:10         cerr    U       std::cerr << \"Usage: \" << argv"
   - "google/cloud/accessapproval/README.md:39:10         cout    U       std::cout << a->DebugString()"
   - "google/cloud/advisorynotifications/v1/advisory_notifications_client.h:19:39         ADVISORYNOTIFICATIONS       U       CLOUD_CPP_GOOGLE_CLOUD_ADVISORYNOTIFICATIONS_V1_ADVISORY_NOTIFICATIONS"
-  - "google/cloud/aiplatform/doc/environment-variables.dox:113:21        TENSORBOARD     U       - `GOOGLE_CLOUD_CPP_TENSORBOARD_SERVICE_ENDPOINT=.."
-  - "google/cloud/aiplatform/doc/environment-variables.dox:115:16        Tensorboard     U       used by `MakeTensorboardServiceConnection()`"
   - "google/cloud/aiplatform/samples/samples.cc:30:13        generativeaionvertexai      U       // [START generativeaionvertexai_gemini_generate_from"
   - "google/cloud/aiplatform/samples/samples.cc:162:34       generativeai                U       \"gs://generativeai-downloads/images/scones"
   - "google/cloud/aiplatform/v1/dataset_client.h:19:39       AIPLATFORM      U       CLOUD_CPP_GOOGLE_CLOUD_AIPLATFORM_V1_DATASET_CLIENT_H"
