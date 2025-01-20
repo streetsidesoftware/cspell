@@ -3,9 +3,9 @@ Repository: sveltejs/svelte
 Url: https://github.com/sveltejs/svelte.git
 Args: '["**"]'
 Summary:
-  files: 7145
+  files: 7163
   filesWithIssues: 483
-  issues: 3561
+  issues: 3560
   errors: 0
 Errors: []
 
@@ -384,7 +384,7 @@ issues:
   - "packages/svelte/package.json:132:7          jridgewell          U       \"@jridgewell/trace-mapping\": \"^0"
   - "packages/svelte/package.json:149:7          ampproject          U       \"@ampproject/remapping\": \"^2.3.0"
   - "packages/svelte/package.json:155:6          axobject            U       \"axobject-query\": \"^4.1.0\","
-  - "packages/svelte/package.json:158:6          esrap               U       \"esrap\": \"^1.4.2\","
+  - "packages/svelte/package.json:158:6          esrap               U       \"esrap\": \"^1.4.3\","
   - "packages/svelte/package.json:162:6          zimmerframe         U       \"zimmerframe\": \"^1.1.2\""
   - "packages/svelte/scripts/check-treeshakeability.js:21:15         importee    U       resolveId(importee) {"
   - "packages/svelte/scripts/check-treeshakeability.js:32:3          onwarn      U       onwarn: (warning, handle)"
@@ -1670,7 +1670,7 @@ issues:
   - "packages/svelte/src/compiler/phases/2-analyze/css/utils.js:28:28        deopt       U       and we don't want to deopt on `condition`"
   - "packages/svelte/src/compiler/phases/2-analyze/css/utils.js:34:29        cslx        U       will be processed by cslx, in which case falsy"
   - "packages/svelte/src/compiler/phases/2-analyze/index.js:618:18       nonstate    U       // warn on any nonstate declarations that are"
-  - "packages/svelte/src/compiler/phases/2-analyze/visitors/Attribute.js:90:7        unhoisted       U       const unhoisted = { hoisted: false"
+  - "packages/svelte/src/compiler/phases/2-analyze/visitors/Attribute.js:87:7        unhoisted       U       const unhoisted = { hoisted: false"
   - "packages/svelte/src/compiler/phases/2-analyze/visitors/RegularElement.js:38:72          qirk    U       stripped because of a qirk:"
   - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y.js:353:3         impp            U       'impp'"
   - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y.js:384:21        webauthn        U       if (tokens[0] === 'webauthn') {"
@@ -1681,11 +1681,11 @@ issues:
   - "packages/svelte/src/compiler/phases/3-transform/client/visitors/AssignmentExpression.js:40:7        callees     U       const callees = {"
   - "packages/svelte/src/compiler/phases/3-transform/client/visitors/BindDirective.js:46:11          unthunk     U       set = b.unthunk("
   - "packages/svelte/src/compiler/phases/3-transform/client/visitors/ConstTag.js:49:11       optimise    U       // TODO optimise the simple `{ x } ="
-  - "packages/svelte/src/compiler/phases/3-transform/client/visitors/RegularElement.js:653:20        noone's     U       // We assume that noone's going to redefine the"
+  - "packages/svelte/src/compiler/phases/3-transform/client/visitors/RegularElement.js:635:20        noone's     U       // We assume that noone's going to redefine the"
   - "packages/svelte/src/compiler/phases/3-transform/client/visitors/shared/declarations.js:31:30        unsub       U       call = b.call('$.store_unsub', call, b.literal(`"
-  - "packages/svelte/src/compiler/phases/3-transform/client/visitors/shared/element.js:44:67         readded     U       it isn't removed and readded on every update"
-  - "packages/svelte/src/compiler/phases/3-transform/client/visitors/shared/element.js:142:65        toogle      U       something like `$.class_toogle(element, class_name"
-  - "packages/svelte/src/compiler/phases/3-transform/client/visitors/SvelteElement.js:82:46          computeds       U       ...lets); // create computeds in the outer context"
+  - "packages/svelte/src/compiler/phases/3-transform/client/visitors/shared/element.js:46:67         readded     U       it isn't removed and readded on every update"
+  - "packages/svelte/src/compiler/phases/3-transform/client/visitors/shared/element.js:137:65        toogle      U       something like `$.class_toogle(element, class_name"
+  - "packages/svelte/src/compiler/phases/3-transform/client/visitors/SvelteElement.js:78:46          computeds       U       ...lets); // create computeds in the outer context"
   - "packages/svelte/src/compiler/phases/3-transform/utils.js:237:76         spaceand    U       text node with a single spaceand keep whitespace"
   - "packages/svelte/src/compiler/phases/patterns.js:21:43       aeiou       U       starts_with_vowel = /^[aeiou]/;"
   - "packages/svelte/src/compiler/types/template.d.ts:26:41          mrow    U       for e.g. `<math>` or `<mrow>`"
@@ -1708,10 +1708,10 @@ issues:
   - "packages/svelte/src/internal/client/dom/elements/misc.js:54:66          possiblity (possibility)    U       get noticed of it (no possiblity of stopPropagation)"
   - "packages/svelte/src/internal/client/proxy.js:32:12          proxyable       U       // if non-proxyable, or is already a proxy"
   - "packages/svelte/src/internal/client/reactivity/props.js:432:51      synchronisation     U       value)); // force a synchronisation immediately"
-  - "packages/svelte/src/internal/client/reactivity/sources.js:215:66        overfiring      U       - this way we avoid overfiring."
+  - "packages/svelte/src/internal/client/reactivity/sources.js:209:66        overfiring      U       - this way we avoid overfiring."
   - "packages/svelte/src/internal/client/runtime.js:136:90       depedencies             U       to avoid duplicating depedencies inside a reaction *"
-  - "packages/svelte/src/internal/client/runtime.js:552:13       beacuse (because)       U       // That's beacuse that source was changed"
-  - "packages/svelte/src/internal/client/runtime.js:1379:29      noone (no one)          U       value; // let's hope noone modifies this global"
+  - "packages/svelte/src/internal/client/runtime.js:596:13       beacuse (because)       U       // That's beacuse that source was changed"
+  - "packages/svelte/src/internal/client/runtime.js:1412:29      noone (no one)          U       value; // let's hope noone modifies this global"
   - "packages/svelte/src/internal/client/timing.js:12:5          bunder      U       // bunder will eval and remove"
   - "packages/svelte/src/internal/server/index.js:25:23          FDEF        U       [\\s'\">/=\\u{FDD0}-\\u{FDEF}\\u{FFFE}\\u{FFFF}\\u{"
   - "packages/svelte/src/internal/server/index.js:25:31          FFFE        U       \\u{FDD0}-\\u{FDEF}\\u{FFFE}\\u{FFFF}\\u{1FFFE}\\u"
@@ -1846,8 +1846,8 @@ issues:
   - "packages/svelte/tests/runtime-legacy/samples/css-vars-escape/_config.js:5:85        uhoh    U       onload=&quot;alert('uhoh')&quot; data-nothing"
   - "packages/svelte/tests/runtime-legacy/samples/deconflict-globals/_config.js:9:34         bestest     U       hereby declare Svelte the bestest framework.</p>"
   - "packages/svelte/tests/runtime-legacy/samples/destructured-assignment-pattern-with-object-pattern/main.svelte:2:8            hoge    U       const hoge = {};"
-  - "packages/svelte/tests/runtime-legacy/samples/destructuring-assignment-array/_config.js:7:8          Compté          U       <li>Compté</li>"
-  - "packages/svelte/tests/runtime-legacy/samples/destructuring-assignment-array/_config.js:9:8          Abondance       U       <li>Abondance</li>"
+  - "packages/svelte/tests/runtime-legacy/samples/destructuring-assignment-array/_config.js:8:8          Compté          U       <li>Compté</li>"
+  - "packages/svelte/tests/runtime-legacy/samples/destructuring-assignment-array/_config.js:10:8         Abondance       U       <li>Abondance</li>"
   - "packages/svelte/tests/runtime-legacy/samples/dynamic-element-class-directive/_config.js:5:23        vsuzn       U       <div class=\"svelte-1vsuzn0 active\">foo</div>"
   - "packages/svelte/tests/runtime-legacy/samples/dynamic-element-svg-implicit-namespace/main.svelte:3:5         optimisations       U       // optimisations we might apply"
   - "packages/svelte/tests/runtime-legacy/samples/each-block-destructured-default/_config.js:11:19       lotor       U       species: 'P. lotor',"
@@ -1897,8 +1897,8 @@ issues:
   - "packages/svelte/tests/runtime-runes/samples/derived-unowned-3/_config.js:27:54          nzeeba      U       button>Toggle</button>\\nzeeba\\nzeeba`"
   - "packages/svelte/tests/runtime-runes/samples/derived-unowned-3/main.svelte:13:44         zeeba       U       this.data.name === 'zeeba' ? 'neighba' : 'zeeba"
   - "packages/svelte/tests/runtime-runes/samples/derived-unowned-3/main.svelte:13:54         neighba     U       name === 'zeeba' ? 'neighba' : 'zeeba';"
-  - "packages/svelte/tests/runtime-runes/samples/derived-unowned-5/_config.js:10:44          Zeeba       U       target.innerHTML, `<div>Zeeba Neighba</div>`);"
-  - "packages/svelte/tests/runtime-runes/samples/derived-unowned-5/_config.js:10:50          Neighba     U       innerHTML, `<div>Zeeba Neighba</div>`);"
+  - "packages/svelte/tests/runtime-runes/samples/derived-unowned-5/_config.js:11:44          Zeeba       U       target.innerHTML, `<div>Zeeba Neighba</div>`);"
+  - "packages/svelte/tests/runtime-runes/samples/derived-unowned-5/_config.js:11:50          Neighba     U       innerHTML, `<div>Zeeba Neighba</div>`);"
   - "packages/svelte/tests/runtime-runes/samples/destructure-async-assignments/main.svelte:48:13         mult            U       let mult = (a, b) => (a * b)"
   - "packages/svelte/tests/runtime-runes/samples/destructure-async-assignments/main.svelte:57:12         anotherprop     U       ({ anotherprop: p = await Promise.resolve"
   - "packages/svelte/tests/runtime-runes/samples/directives-with-member-access/main.svelte:14:31         Relatedly       U       other words a number. Relatedly, people should not do"

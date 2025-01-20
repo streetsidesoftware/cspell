@@ -3,12 +3,12 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: [".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 2038, Issues found: 1636 in 302 files.
+ CSpell: Files checked: 2041, Issues found: 1637 in 302 files.
  exit code: 1
 Makefile.js:128:88    - Unknown word (ined)       -- followed by the string "ined".
-Makefile.js:344:12    - Unknown word (gensite)    -- target.gensite();
+Makefile.js:359:12    - Unknown word (gensite)    -- target.gensite();
 Makefile.js:78:10     - Unknown word (MULTIFILES) -- PERF_MULTIFILES_TARGET_DIR = path.join
-Makefile.js:882:18    - Unknown word (Multifiles) -- function downloadMultifilesTestTarget(cb) {
+Makefile.js:900:18    - Unknown word (Multifiles) -- function downloadMultifilesTestTarget(cb) {
 README.md:214:5     - Unknown word (teamstart)  -- <!--teamstart-->
 README.md:222:87    - Unknown word (Zakas's)    -- 5" alt="Nicholas C. Zakas's Avatar"><br />
 README.md:227:77    - Unknown word (Francesco)  -- 5" height="75" alt="Francesco Trotta's Avatar"><br
@@ -28,6 +28,7 @@ README.md:281:1     - Unknown word (Strek)         -- Strek
 README.md:290:5     - Unknown word (teamend)       -- <!--teamend-->
 README.md:293:5     - Unknown word (sponsorsstart) -- <!--sponsorsstart-->
 README.md:302:124   - Unknown word (SERP)          -- fea3074/logo.png" alt="SERP Triumph" height="64
+README.md:303:796   - Unknown word (Neko)          -- com/u/11081491" alt="Neko" height="32"></a> <a
 README.md:307:5     - Unknown word (sponsorsend)   -- <!--sponsorsend-->
 docs/README.md:45:51     - Unknown word (openjsf)    -- ESLint contributors, [www.openjsf.org](https://www.openjsf
 docs/package.json:31:32     - Unknown word (syntaxhighlight) -- 1ty/eleventy-plugin-syntaxhighlight": "^5.0.0",
@@ -165,15 +166,15 @@ docs/src/static/feed.njk:5:4       - Unknown word (eleventy)   -- "eleventyExclu
 docs/src/static/sitemap.njk:11:14     - Unknown word (lastmod)    -- <lastmod>{{ page.date.toISOString
 docs/src/static/sitemap.njk:12:14     - Unknown word (changefreq) -- <changefreq>{{ page.data.changeFreq
 docs/src/static/sitemap.njk:7:2       - Unknown word (urlset)     -- <urlset xmlns="http://www.sitemaps
-docs/src/use/command-line-interface.md:305:15    - Unknown word (succeds)    -- comment: "succeds, yay!",
-docs/src/use/command-line-interface.md:358:68    - Unknown word (levn)       -- configuration specified with [levn](https://github.com
-docs/src/use/command-line-interface.md:652:21    - Unknown word (customformat) -- args: ["-f", "./customformat.js", "file.js"]
+docs/src/use/command-line-interface.md:306:15    - Unknown word (succeds)    -- comment: "succeds, yay!",
+docs/src/use/command-line-interface.md:359:68    - Unknown word (levn)       -- configuration specified with [levn](https://github.com
+docs/src/use/command-line-interface.md:653:21    - Unknown word (customformat) -- args: ["-f", "./customformat.js", "file.js"]
 docs/src/use/configure/configuration-files-deprecated.md:39:25     - Unknown word (myfiletotest) -- eslint -c myconfig.json myfiletotest.js
 docs/src/use/configure/debug.md:31:44     - Unknown word (nzakas)     -- config from C:\Users\nzakas\projects\eslint\eslint
 docs/src/use/configure/ignore-deprecated.md:100:200   - Unknown word (jshintignore) -- example, you can use `.jshintignore` file because it has
 docs/src/use/configure/ignore-deprecated.md:120:14    - Unknown word (mypackage)    -- "name": "mypackage",
-docs/src/use/configure/ignore.md:68:4      - Unknown word (Unignoring) -- ## Unignoring Files and Directories
-docs/src/use/configure/ignore.md:70:165    - Unknown word (mylibrary)  -- unignores `node_modules/mylibrary`:
+docs/src/use/configure/ignore.md:71:4      - Unknown word (Unignoring) -- ## Unignoring Files and Directories
+docs/src/use/configure/ignore.md:73:165    - Unknown word (mylibrary)  -- unignores `node_modules/mylibrary`:
 docs/src/use/configure/language-options-deprecated.md:38:4      - Unknown word (prototypejs) -- * `prototypejs` - Prototype.js global
 docs/src/use/configure/language-options-deprecated.md:42:4      - Unknown word (applescript) -- * `applescript` - AppleScript global
 docs/src/use/configure/language-options-deprecated.md:43:22     - Unknown word (Nashorn)     -- `nashorn` - Java 8 Nashorn global variables.
@@ -186,7 +187,7 @@ docs/src/use/configure/plugins-deprecated.md:41:152    - Unknown word (pluginnam
 docs/src/use/core-concepts/glossary.md:146:81    - Unknown word (dprint)     -- //prettier.io) and [dprint](https://dprint.dev
 docs/src/use/core-concepts/glossary.md:77:17     - Unknown word (estools)    -- See [github.com/estools/esquery](https://github
 docs/src/use/getting-started.md:47:13     - Unknown word (yourfile)   -- args: ["yourfile.js"]
-docs/src/use/getting-started.md:94:268    - Unknown word (npmjs)      -- "eslint-config" on [npmjs.com](https://www.npmjs
+docs/src/use/getting-started.md:70:274    - Unknown word (npmjs)      -- "eslint-config" on [npmjs.com](https://www.npmjs
 docs/src/use/integrations.md:22:8      - Unknown word (Syntastic)  -- * [Syntastic](https://github.com
 docs/src/use/integrations.md:23:11     - Unknown word (Flycheck)   -- * Emacs: [Flycheck](http://www.flycheck
 docs/src/use/migrate-to-8.0.0.md:228:20    - Unknown word (cliengine)  -- ## <a name="remove-cliengine"></a> The `CLIEngine
@@ -264,11 +265,11 @@ lib/rules/use-isnan.js:132:25    - Unknown word (Suggestable) -- const isSuggest
 lib/rules/utils/ast-utils.js:404:40    - Unknown word (samely)     -- a.b` and `a?.b` are samely.
 lib/services/processor-service.js:94:8      - Unknown word (Postprocesses) -- * Postprocesses the given messages synchronou
 lib/shared/text-table.js:36:11     - Unknown word (hsep)       -- const hsep = "  ";
-package.json:140:7     - Unknown word (trunkio)    -- "@trunkio/launcher": "^1.3.0"
-package.json:161:6     - Unknown word (eslump)     -- "eslump": "^3.0.0",
-package.json:176:6     - Unknown word (metascraper) -- "metascraper": "^5.25.7",
+package.json:142:7     - Unknown word (trunkio)    -- "@trunkio/launcher": "^1.3.0"
+package.json:163:6     - Unknown word (eslump)     -- "eslump": "^3.0.0",
+package.json:178:6     - Unknown word (metascraper) -- "metascraper": "^5.25.7",
 package.json:54:81     - Unknown word (flter)      -- ignore=!docs/**/*.js -a --flter=eslint && trunk check
-package.json:55:20     - Unknown word (attw)       -- "lint:types": "attw --pack",
+package.json:56:20     - Unknown word (attw)       -- "lint:types": "attw --pack",
 templates/blogpost.md.ejs:18:10     - Unknown word (linkify)    -- function linkify(line) {
 tests/fixtures/code-path-analysis/try--try-finally-4.js:43:156    - Unknown word (Expressio)  -- Expression\nIdentifier (bar)\nExpressio
 tests/fixtures/config-hierarchy/file-structure.json:19:10     - Unknown word (subbroken)  -- "subbroken": {
@@ -290,10 +291,10 @@ tests/lib/cli-engine/cli-engine.js:6682:52   - Unknown word (extendees)         
 tests/lib/cli-engine/formatters/html.js:528:130   - Unknown word (apos)       -- Unexpected &lt;&amp;&quot;&apos;&gt; foo.", ruleId:
 tests/lib/cli.js:1923:53   - Unknown word (oldx)          -- = `--flag test_only_oldx --config ${configPath
 tests/lib/cli.js:413:60    - Unknown word (fakeformatter) -- await cli.execute(`-f fakeformatter ${filePath} ${flag}
-tests/lib/config/flat-config-array.js:1753:43   - Unknown word (truex)       -- foo: "truex"
+tests/lib/config/flat-config-array.js:1803:43   - Unknown word (truex)       -- foo: "truex"
 tests/lib/config/flat-config-array.js:221:22    - Unknown word (noniterable) -- it("should allow noniterable baseConfig objects"
-tests/lib/config/flat-config-array.js:2301:29   - Unknown word (foox)        -- foox: [1, "bar"]
-tests/lib/config/flat-config-array.js:2323:30   - Unknown word (doesnt)      -- "doesnt-exist/match": "error
+tests/lib/config/flat-config-array.js:2351:29   - Unknown word (foox)        -- foox: [1, "bar"]
+tests/lib/config/flat-config-array.js:2373:30   - Unknown word (doesnt)      -- "doesnt-exist/match": "error
 tests/lib/config/flat-config-schema.js:19:50     - Unknown word (reults)     -- expectedResult] The expected reults of merging first and
 tests/lib/config/flat-config-schema.js:46:20     - Unknown word (emtpy)      -- it("returns an emtpy object if both values
 tests/lib/eslint/eslint.js:1416:43   - Unknown word (myjs)       -- files: ["**/*.myjs"],
@@ -307,11 +308,11 @@ tests/lib/eslint/eslint.js:9144:35   - Unknown word (previos)      -- make sure 
 tests/lib/eslint/eslint.js:9197:55   - Unknown word (intenationally) -- cacheFilePath, "[]"); // intenationally invalid to additionally
 tests/lib/eslint/eslint.js:9367:55   - Unknown word (occured)        -- the previous run that occured after the cache was
 tests/lib/eslint/legacy-eslint.js:2536:24   - Unknown word (succesfully) -- it("should succesfully execute with a rule
-tests/lib/linter/linter.js:16929:52  - Unknown word (intentionaly)   -- // intentionaly mutates objects and
-tests/lib/linter/linter.js:3463:1    - Unknown word (consolexlog) -- consolexlog("test2");
-tests/lib/linter/linter.js:3607:84   - Unknown word (rulename)    -- this is 2, since the rulename is very likely to be
-tests/lib/linter/linter.js:5603:31   - Unknown word (suppresed)   -- it("should report one suppresed problem when noInlineConfig
-tests/lib/linter/linter.js:7361:19   - Unknown word (postprocessors) -- describe("postprocessors", () => {
+tests/lib/linter/linter.js:17066:52  - Unknown word (intentionaly)   -- // intentionaly mutates objects and
+tests/lib/linter/linter.js:3462:1    - Unknown word (consolexlog) -- consolexlog("test2");
+tests/lib/linter/linter.js:3606:84   - Unknown word (rulename)    -- this is 2, since the rulename is very likely to be
+tests/lib/linter/linter.js:5602:31   - Unknown word (suppresed)   -- it("should report one suppresed problem when noInlineConfig
+tests/lib/linter/linter.js:7360:19   - Unknown word (postprocessors) -- describe("postprocessors", () => {
 tests/lib/linter/report-translator.js:339:32    - Unknown word (fooo)       -- text: "fooo\nbar"
 tests/lib/linter/report-translator.js:396:34    - Unknown word (ncdar)      -- text: "o\ncdar"
 tests/lib/linter/rules.js:29:29     - Unknown word (michaelficarra) -- const ruleId = "michaelficarra";
