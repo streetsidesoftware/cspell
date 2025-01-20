@@ -2148,11 +2148,12 @@ modules/caddyhttp/reverseproxy/httptransport_test.go:9:35      - Unknown word (c
 modules/caddyhttp/reverseproxy/httptransport_test.go:9:47      - Unknown word (caddyfile)   -- caddy/v2/caddyconfig/caddyfile"
 modules/caddyhttp/reverseproxy/metrics.go:24:41     - Unknown word (promauto)   -- oxyMetrics.upstreamsHealthy = promauto.NewGaugeVec(prometheus
 modules/caddyhttp/reverseproxy/metrics.go:9:50      - Unknown word (promauto)   -- client_golang/prometheus/promauto"
-modules/caddyhttp/reverseproxy/reverseproxy.go:1069:28   - Unknown word (stdlib)      -- no extra logging from stdlib
-modules/caddyhttp/reverseproxy/reverseproxy.go:1077:12   - Unknown word (bodyclose)   -- //nolint:bodyclose
-modules/caddyhttp/reverseproxy/reverseproxy.go:1077:5    - Unknown word (nolint)      -- //nolint:bodyclose
-modules/caddyhttp/reverseproxy/reverseproxy.go:1253:46   - Unknown word (stdlib)      -- borrowed from the Go stdlib reverse proxy,
-modules/caddyhttp/reverseproxy/reverseproxy.go:1272:30   - Unknown word (behaviour)   -- breaks reverseproxy behaviour, overriding how the
+modules/caddyhttp/reverseproxy/reverseproxy.go:1001:48   - Unknown word (behaviour)   -- default finalize/copy behaviour
+modules/caddyhttp/reverseproxy/reverseproxy.go:1082:28   - Unknown word (stdlib)      -- no extra logging from stdlib
+modules/caddyhttp/reverseproxy/reverseproxy.go:1090:12   - Unknown word (bodyclose)   -- //nolint:bodyclose
+modules/caddyhttp/reverseproxy/reverseproxy.go:1090:5    - Unknown word (nolint)      -- //nolint:bodyclose
+modules/caddyhttp/reverseproxy/reverseproxy.go:1266:46   - Unknown word (stdlib)      -- borrowed from the Go stdlib reverse proxy,
+modules/caddyhttp/reverseproxy/reverseproxy.go:1285:30   - Unknown word (behaviour)   -- breaks reverseproxy behaviour, overriding how the
 modules/caddyhttp/reverseproxy/reverseproxy.go:170:22    - Unknown word (roundtrips)  -- // after successful roundtrips. The first handler that
 modules/caddyhttp/reverseproxy/reverseproxy.go:182:19    - Unknown word (caddyhttp)   -- HandleResponse []caddyhttp.ResponseHandler `json
 modules/caddyhttp/reverseproxy/reverseproxy.go:198:48    - Unknown word (Caddyfile)   -- response matchers from the Caddyfile while adapting
@@ -2185,10 +2186,9 @@ modules/caddyhttp/reverseproxy/reverseproxy.go:585:16    - Unknown word (succ)  
 modules/caddyhttp/reverseproxy/reverseproxy.go:61:34     - Unknown word (hostport)    -- reverse_proxy.upstream.hostport}` | The host:port of
 modules/caddyhttp/reverseproxy/reverseproxy.go:646:26    - Unknown word (gunicorn)    -- with "slow clients" (gunicorn, etc.) - this obviously
 modules/caddyhttp/reverseproxy/reverseproxy.go:648:47    - Unknown word (slowloris)   -- more susceptible to slowloris
-modules/caddyhttp/reverseproxy/reverseproxy.go:828:4     - Unknown word (nolint)      -- //nolint:errcheck
-modules/caddyhttp/reverseproxy/reverseproxy.go:879:35    - Unknown word (Loggable)    -- request", caddyhttp.LoggableHTTPRequest{
-modules/caddyhttp/reverseproxy/reverseproxy.go:893:36    - Unknown word (Loggable)    -- headers", caddyhttp.LoggableHTTPHeader{
-modules/caddyhttp/reverseproxy/reverseproxy.go:996:48    - Unknown word (behaviour)   -- default finalize/copy behaviour
+modules/caddyhttp/reverseproxy/reverseproxy.go:831:4     - Unknown word (nolint)      -- //nolint:errcheck
+modules/caddyhttp/reverseproxy/reverseproxy.go:882:35    - Unknown word (Loggable)    -- request", caddyhttp.LoggableHTTPRequest{
+modules/caddyhttp/reverseproxy/reverseproxy.go:898:36    - Unknown word (Loggable)    -- headers", caddyhttp.LoggableHTTPHeader{
 modules/caddyhttp/reverseproxy/selectionpolicies.go:100:13    - Unknown word (Caddyfile)   -- // UnmarshalCaddyfile sets up the module from
 modules/caddyhttp/reverseproxy/selectionpolicies.go:100:47    - Unknown word (Caddyfile)   -- sets up the module from Caddyfile tokens.
 modules/caddyhttp/reverseproxy/selectionpolicies.go:101:61    - Unknown word (caddyfile)   -- UnmarshalCaddyfile(d *caddyfile.Dispenser) error {
