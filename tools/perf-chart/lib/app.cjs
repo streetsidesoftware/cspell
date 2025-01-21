@@ -25,9 +25,9 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
   mod
 ));
 
-// ../../node_modules/.pnpm/commander@13.0.0/node_modules/commander/lib/error.js
+// ../../node_modules/.pnpm/commander@13.1.0/node_modules/commander/lib/error.js
 var require_error = __commonJS({
-  "../../node_modules/.pnpm/commander@13.0.0/node_modules/commander/lib/error.js"(exports2) {
+  "../../node_modules/.pnpm/commander@13.1.0/node_modules/commander/lib/error.js"(exports2) {
     var CommanderError2 = class extends Error {
       /**
        * Constructs the CommanderError class
@@ -60,9 +60,9 @@ var require_error = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/commander@13.0.0/node_modules/commander/lib/argument.js
+// ../../node_modules/.pnpm/commander@13.1.0/node_modules/commander/lib/argument.js
 var require_argument = __commonJS({
-  "../../node_modules/.pnpm/commander@13.0.0/node_modules/commander/lib/argument.js"(exports2) {
+  "../../node_modules/.pnpm/commander@13.1.0/node_modules/commander/lib/argument.js"(exports2) {
     var { InvalidArgumentError: InvalidArgumentError2 } = require_error();
     var Argument2 = class {
       /**
@@ -187,9 +187,9 @@ var require_argument = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/commander@13.0.0/node_modules/commander/lib/help.js
+// ../../node_modules/.pnpm/commander@13.1.0/node_modules/commander/lib/help.js
 var require_help = __commonJS({
-  "../../node_modules/.pnpm/commander@13.0.0/node_modules/commander/lib/help.js"(exports2) {
+  "../../node_modules/.pnpm/commander@13.1.0/node_modules/commander/lib/help.js"(exports2) {
     var { humanReadableArgName } = require_argument();
     var Help2 = class {
       constructor() {
@@ -756,9 +756,9 @@ ${itemIndentStr}`);
   }
 });
 
-// ../../node_modules/.pnpm/commander@13.0.0/node_modules/commander/lib/option.js
+// ../../node_modules/.pnpm/commander@13.1.0/node_modules/commander/lib/option.js
 var require_option = __commonJS({
-  "../../node_modules/.pnpm/commander@13.0.0/node_modules/commander/lib/option.js"(exports2) {
+  "../../node_modules/.pnpm/commander@13.1.0/node_modules/commander/lib/option.js"(exports2) {
     var { InvalidArgumentError: InvalidArgumentError2 } = require_error();
     var Option2 = class {
       /**
@@ -1021,20 +1021,35 @@ var require_option = __commonJS({
       const flagParts = flags.split(/[ |,]+/).concat("guard");
       if (shortFlagExp.test(flagParts[0])) shortFlag = flagParts.shift();
       if (longFlagExp.test(flagParts[0])) longFlag = flagParts.shift();
-      if (/^-[^-][^-]/.test(flagParts[0]))
+      if (!shortFlag && shortFlagExp.test(flagParts[0]))
+        shortFlag = flagParts.shift();
+      if (!shortFlag && longFlagExp.test(flagParts[0])) {
+        shortFlag = longFlag;
+        longFlag = flagParts.shift();
+      }
+      if (flagParts[0].startsWith("-")) {
+        const unsupportedFlag = flagParts[0];
+        const baseError = `option creation failed due to '${unsupportedFlag}' in option flags '${flags}'`;
+        if (/^-[^-][^-]/.test(unsupportedFlag))
+          throw new Error(
+            `${baseError}
+- a short flag is a single dash and a single character
+  - either use a single dash and a single character (for a short flag)
+  - or use a double dash for a long option (and can have two, like '--ws, --workspace')`
+          );
+        if (shortFlagExp.test(unsupportedFlag))
+          throw new Error(`${baseError}
+- too many short flags`);
+        if (longFlagExp.test(unsupportedFlag))
+          throw new Error(`${baseError}
+- too many long flags`);
+        throw new Error(`${baseError}
+- unrecognised flag format`);
+      }
+      if (shortFlag === void 0 && longFlag === void 0)
         throw new Error(
-          `invalid Option flags, short option is dash and single character: '${flags}'`
+          `option creation failed due to no flags found in '${flags}'.`
         );
-      if (shortFlag && shortFlagExp.test(flagParts[0]))
-        throw new Error(
-          `invalid Option flags, more than one short flag: '${flags}'`
-        );
-      if (longFlag && longFlagExp.test(flagParts[0]))
-        throw new Error(
-          `invalid Option flags, more than one long flag: '${flags}'`
-        );
-      if (!(shortFlag || longFlag) || flagParts[0].startsWith("-"))
-        throw new Error(`invalid Option flags: '${flags}'`);
       return { shortFlag, longFlag };
     }
     exports2.Option = Option2;
@@ -1042,9 +1057,9 @@ var require_option = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/commander@13.0.0/node_modules/commander/lib/suggestSimilar.js
+// ../../node_modules/.pnpm/commander@13.1.0/node_modules/commander/lib/suggestSimilar.js
 var require_suggestSimilar = __commonJS({
-  "../../node_modules/.pnpm/commander@13.0.0/node_modules/commander/lib/suggestSimilar.js"(exports2) {
+  "../../node_modules/.pnpm/commander@13.1.0/node_modules/commander/lib/suggestSimilar.js"(exports2) {
     var maxDistance = 3;
     function editDistance(a, b) {
       if (Math.abs(a.length - b.length) > maxDistance)
@@ -1122,9 +1137,9 @@ var require_suggestSimilar = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/commander@13.0.0/node_modules/commander/lib/command.js
+// ../../node_modules/.pnpm/commander@13.1.0/node_modules/commander/lib/command.js
 var require_command = __commonJS({
-  "../../node_modules/.pnpm/commander@13.0.0/node_modules/commander/lib/command.js"(exports2) {
+  "../../node_modules/.pnpm/commander@13.1.0/node_modules/commander/lib/command.js"(exports2) {
     var EventEmitter = require("node:events").EventEmitter;
     var childProcess = require("node:child_process");
     var path = require("node:path");
@@ -1762,7 +1777,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
        * @example
        * program
        *     .option('-p, --pepper', 'add pepper')
-       *     .option('-p, --pizza-type <TYPE>', 'type of pizza') // required option-argument
+       *     .option('--pt, --pizza-type <TYPE>', 'type of pizza') // required option-argument
        *     .option('-c, --cheese [CHEESE]', 'add extra cheese', 'mozzarella') // optional option-argument with default
        *     .option('-t, --tip <VALUE>', 'add tip to purchase cost', parseFloat) // custom parse function
        *
@@ -3281,9 +3296,9 @@ Expecting one of '${allowedValues.join("', '")}'`);
   }
 });
 
-// ../../node_modules/.pnpm/commander@13.0.0/node_modules/commander/index.js
+// ../../node_modules/.pnpm/commander@13.1.0/node_modules/commander/index.js
 var require_commander = __commonJS({
-  "../../node_modules/.pnpm/commander@13.0.0/node_modules/commander/index.js"(exports2) {
+  "../../node_modules/.pnpm/commander@13.1.0/node_modules/commander/index.js"(exports2) {
     var { Argument: Argument2 } = require_argument();
     var { Command: Command2 } = require_command();
     var { CommanderError: CommanderError2, InvalidArgumentError: InvalidArgumentError2 } = require_error();
@@ -3303,7 +3318,7 @@ var require_commander = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/commander@13.0.0/node_modules/commander/esm.mjs
+// ../../node_modules/.pnpm/commander@13.1.0/node_modules/commander/esm.mjs
 var import_index = __toESM(require_commander(), 1);
 var {
   program,
