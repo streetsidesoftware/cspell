@@ -37,15 +37,20 @@ export class IOError extends ApplicationError {
 
 export function toError(e: unknown): NodeError {
     if (isError(e)) return e;
+    if (isErrorLike(e)) {
+        const ex: NodeError = new Error(e.message, { cause: e });
+        if (e.code !== undefined) ex.code = e.code;
+        return ex;
+    }
     const message = format(e);
-    return {
-        name: 'error',
-        message,
-        toString: () => message,
-    };
+    return new Error(message);
 }
 
 export function isError(e: unknown): e is NodeError {
+    return e instanceof Error;
+}
+
+export function isErrorLike(e: unknown): e is NodeError {
     if (e instanceof Error) return true;
     if (!e || typeof e !== 'object') return false;
     const ex = <Error>e;

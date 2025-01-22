@@ -4,7 +4,7 @@ import path from 'node:path';
 
 import type { CacheSettings, CSpellSettings } from '@cspell/cspell-types';
 
-import { isError } from '../errors.js';
+import { isErrorLike } from '../errors.js';
 import type { CacheOptions } from './CacheOptions.js';
 import type { CSpellLintResultCache } from './CSpellLintResultCache.js';
 import { DiskCache } from './DiskCache.js';
@@ -75,7 +75,7 @@ async function resolveCacheLocation(cacheLocation: string): Promise<string> {
         if (s.isFile()) return cacheLocation;
         return path.join(cacheLocation, DEFAULT_CACHE_LOCATION);
     } catch (err) {
-        if (isError(err) && err.code === 'ENOENT') {
+        if (isErrorLike(err) && err.code === 'ENOENT') {
             return cacheLocation;
         }
         throw err;

@@ -57,6 +57,11 @@ const urlIssues = new URL('issues/', pathRepoTestFixturesURL);
 const oc = <T>(obj: T) => expect.objectContaining(obj);
 const sm = (m: string | RegExp) => expect.stringMatching(m);
 
+function expectError(err: string | Error) {
+    const message = typeof err === 'string' ? err : err.message;
+    return expect.objectContaining({ message });
+}
+
 vi.mock('../../../util/logger');
 
 const mockedLogError = vi.mocked(logError);
@@ -488,9 +493,9 @@ describe('Validate search/load config files', () => {
 
     test.each`
         file                            | expectedConfig
-        ${samplesSrc}                   | ${readError(samplesSrc).error}
-        ${s('bug-fixes')}               | ${readError(s('bug-fixes')).error}
-        ${s('js-config/cspell-bad.js')} | ${readError(s('js-config/cspell-bad.js')).error}
+        ${samplesSrc}                   | ${expectError(readError(samplesSrc).error)}
+        ${s('bug-fixes')}               | ${expectError(readError(s('bug-fixes')).error)}
+        ${s('js-config/cspell-bad.js')} | ${expectError(readError(s('js-config/cspell-bad.js')).error)}
     `('readConfigFile with error $file', async ({ file, expectedConfig }: TestLoadConfig) => {
         await expect(readConfigFile(file)).rejects.toEqual(expectedConfig);
         expect(mockedLogWarning).toHaveBeenCalledTimes(0);
@@ -502,9 +507,9 @@ describe('Validate search/load config files', () => {
         ${samplesSrc}                   | ${readError(samplesSrc).error}
         ${s('bug-fixes')}               | ${readError(s('bug-fixes')).error}
         ${s('js-config/cspell-bad.js')} | ${readError(s('js-config/cspell-bad.js')).error}
-    `('ReadRawSettings with error $file', async ({ file, expectedConfig }: TestLoadConfig) => {
+    `('ReadRawSettings with error $file', async ({ file, expectedConfig }) => {
         const result = await readRawSettings(file);
-        expect(result).toEqual(oc({ __importRef: oc({ error: expectedConfig }) }));
+        expect(result).toEqual(oc({ __importRef: oc({ error: expectError(expectedConfig) }) }));
         expect(mockedLogWarning).toHaveBeenCalledTimes(0);
         expect(mockedLogError).toHaveBeenCalledTimes(0);
     });
@@ -517,9 +522,9 @@ describe('Validate search/load config files', () => {
 
     test.each`
         file                                          | relativeTo   | expectedConfig
-        ${samplesSrc}                                 | ${undefined} | ${readError(samplesSrc).error}
-        ${s('bug-fixes')}                             | ${undefined} | ${readError(s('bug-fixes')).error}
-        ${s('bug-fixes/not-found/cspell.json')}       | ${undefined} | ${readError(s('bug-fixes/not-found/cspell.json')).error}
+        ${samplesSrc}                                 | ${undefined} | ${expectError(readError(samplesSrc).error)}
+        ${s('bug-fixes')}                             | ${undefined} | ${expectError(readError(s('bug-fixes')).error)}
+        ${s('bug-fixes/not-found/cspell.json')}       | ${undefined} | ${expectError(readError(s('bug-fixes/not-found/cspell.json')).error)}
         ${s('dot-config/.config/cspell.config.yaml')} | ${undefined} | ${oc(cf(s('dot-config/.config/cspell.config.yaml'), oc({ name: 'Nested in .config' })))}
         ${rp('cspell.config.json')}                   | ${undefined} | ${oc(cf(rp('cspell.config.json'), oc({ id: 'cspell-package-config' })))}
         ${s('linked/cspell.config.js')}               | ${undefined} | ${cf(s('linked/cspell.config.js'), oc({ description: 'cspell.config.js file in samples/linked' }))}
@@ -768,7 +773,7 @@ describe('ConfigLoader with VirtualFS', () => {
 
         expect(configFile).toBeInstanceOf(Error);
         assert(configFile instanceof Error);
-        expect(configFile.cause).toEqual(new Error(`Untrusted URL: "${location?.href}"`));
+        expect(configFile.cause).toEqual(expectError(`Untrusted URL: "${location?.href}"`));
     });
 });
 

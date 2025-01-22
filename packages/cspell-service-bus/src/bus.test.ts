@@ -3,6 +3,7 @@ import { describe, expect, test } from 'vitest';
 import { createServiceBus } from './bus.js';
 import { createIsRequestHandler } from './createRequestHandler.js';
 import type { Dispatcher } from './Dispatcher.js';
+import { ErrorServiceRequestDepthExceeded, ErrorUnhandledRequest, UnhandledHandlerError } from './errors.js';
 import type { Handler } from './handlers.js';
 import type { ServiceRequest, ServiceResponse } from './request.js';
 import { createResponse as response, ServiceRequestCls } from './request.js';
@@ -95,9 +96,9 @@ describe('Service Bus', () => {
         ${FibRequestFactory.create({ fib: 7 })}                | ${response(13)}
         ${StringLengthRequestFactory.create({ str: 'hello' })} | ${response(5)}
         ${new StringToUpperRequest('hello')}                   | ${response('HELLO')}
-        ${new DoNotHandleRequest()}                            | ${{ error: new Error('Unhandled Request: Do Not Handle') }}
-        ${new RetryAgainRequest()}                             | ${{ error: new Error('Service Request Depth 10 Exceeded: Retry Again Request') }}
-        ${new ServiceRequestCls('throw', undefined)}           | ${{ error: new Error('Unhandled Error in Handler: handlerThrowErrorOnRequest') }}
+        ${new DoNotHandleRequest()}                            | ${{ error: new ErrorUnhandledRequest(new DoNotHandleRequest()) }}
+        ${new RetryAgainRequest()}                             | ${{ error: new ErrorServiceRequestDepthExceeded(new RetryAgainRequest(), 10) }}
+        ${new ServiceRequestCls('throw', undefined)}           | ${{ error: new UnhandledHandlerError('handlerThrowErrorOnRequest', undefined, 'error') }}
     `('serviceBus handle request: $request.type', ({ request, expected }) => {
         expect(bus.dispatch(request)).toEqual(expected);
     });

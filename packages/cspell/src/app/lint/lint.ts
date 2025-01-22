@@ -174,7 +174,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         const fileInfo = prefetch?.fileInfo || (await readFileInfo(filename, undefined, true));
         if (fileInfo.errorCode) {
             if (fileInfo.errorCode !== 'EISDIR' && cfg.options.mustFindFiles) {
-                const err = toError(`File not found: "${filename}"`);
+                const err = new LinterError(`File not found: "${filename}"`);
                 reporter.error('Linter:', err);
                 result.errors += 1;
             }
@@ -753,4 +753,14 @@ async function writeDictionaryLog() {
 
 function globPattern(g: Glob) {
     return typeof g === 'string' ? g : g.glob;
+}
+
+export class LinterError extends Error {
+    constructor(message: string) {
+        super(message);
+    }
+
+    toString() {
+        return this.message;
+    }
 }
