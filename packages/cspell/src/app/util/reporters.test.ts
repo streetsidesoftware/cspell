@@ -2,6 +2,7 @@ import type { CSpellReporter, ReporterSettings } from '@cspell/cspell-types';
 import { MessageTypes } from '@cspell/cspell-types';
 import { describe, expect, test, vi } from 'vitest';
 
+import { ApplicationError } from './errors.js';
 import { InMemoryReporter } from './InMemoryReporter.js';
 import { loadReporters, mergeReporters } from './reporters.js';
 
@@ -42,7 +43,7 @@ describe('mergeReporters', () => {
 
     test.each`
         reporter                                   | expected
-        ${['@cspell/cspell-json-reporter', false]} | ${new Error('Failed to load reporter @cspell/cspell-json-reporter: cspell-json-reporter settings must be an object')}
+        ${['@cspell/cspell-json-reporter', false]} | ${new ApplicationError('Failed to load reporter @cspell/cspell-json-reporter: cspell-json-reporter settings must be an object')}
         ${['@cspell/cspell-unknown-reporter']}     | ${oc({ message: sc("Failed to load reporter @cspell/cspell-unknown-reporter: Cannot find package '@cspell/cspell-unknown-reporter' imported from") })}
         ${'@cspell/cspell-unknown-reporter'}       | ${oc({ message: sc("Failed to load reporter @cspell/cspell-unknown-reporter: Cannot find package '@cspell/cspell-unknown-reporter'") })}
     `('loadReporters fail $reporter', async ({ reporter, expected }) => {

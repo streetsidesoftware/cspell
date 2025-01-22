@@ -1,6 +1,7 @@
 import { Chalk } from 'chalk';
 import { describe, expect, test } from 'vitest';
 
+import { ApplicationError } from './app.mjs';
 import type { ReporterIssue } from './cli-reporter.js';
 import { __testing__, checkTemplate } from './cli-reporter.js';
 
@@ -40,10 +41,10 @@ describe('cli-reporter', () => {
         template                                     | expected
         ${''}                                        | ${true}
         ${'{red $filename}'}                         | ${true}
-        ${'{red $filename'}                          | ${new Error('Chalk template literal is missing 1 closing bracket (`}`)')}
-        ${'{hello $filename}'}                       | ${new Error('Unknown Chalk style: hello')}
-        ${'{green.bold.underline $file}'}            | ${new Error(`Unresolved template variable: '$file'`)}
-        ${'{green.bold.underline $file}:$rows:$col'} | ${new Error(`Unresolved template variables: '$file', '$rows'`)}
+        ${'{red $filename'}                          | ${new ApplicationError('Chalk template literal is missing 1 closing bracket (`}`)')}
+        ${'{hello $filename}'}                       | ${new ApplicationError('Unknown Chalk style: hello')}
+        ${'{green.bold.underline $file}'}            | ${new ApplicationError(`Unresolved template variable: '$file'`)}
+        ${'{green.bold.underline $file}:$rows:$col'} | ${new ApplicationError(`Unresolved template variables: '$file', '$rows'`)}
     `('checkTemplate $template', ({ template, expected }) => {
         const r = checkTemplate(template);
         expect(r).toEqual(expected);

@@ -76,8 +76,8 @@ describe('SystemServiceBus Behavior', () => {
         ${RequestFsReadFile.create({ uri: 'file://my_file.txt' })}                      | ${{ value: 'read file: file://my_file.txt' }}
         ${RequestFsReadFile.create({ uri: 'https://www.example.com/my_file.txt' })}     | ${{ value: 'fetch http: https://www.example.com/my_file.txt' }}
         ${RequestFsReadFile.create({ uri: 'https://www.example.com/my_dict.trie.gz' })} | ${{ value: 'Inflate: fetch http: https://www.example.com/my_dict.trie.gz' }}
-        ${{ type: 'zlib:compress' }}                                                    | ${{ error: new Error('Unhandled Request: zlib:compress') }}
-    `('dispatch requests', ({ request, expected }) => {
+        ${{ type: 'zlib:compress' }}                                                    | ${{ error: expect.objectContaining({ message: 'Unhandled Request: zlib:compress' }) }}
+    `('dispatch requests $request', ({ request, expected }) => {
         expect(serviceBus.dispatch(request)).toEqual(expected);
     });
 });

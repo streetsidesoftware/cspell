@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { ApplicationError, CheckFailed, IOError, isError, toApplicationError, toError } from './errors.js';
+import { ApplicationError, CheckFailed, IOError, isErrorLike, toError } from './errors.js';
 
 const oc = <T>(obj: T) => expect.objectContaining(obj);
 
@@ -24,33 +24,34 @@ describe('errors', () => {
         ${null}                              | ${false}
         ${'hello'}                           | ${false}
     `('isError $error', ({ error, expected }) => {
-        expect(isError(error)).toBe(expected);
+        expect(isErrorLike(error)).toBe(expected);
     });
 
     test.each`
         error                                                                 | expected
-        ${new CheckFailed('CheckFailed')}                                     | ${new Error('CheckFailed')}
-        ${new ApplicationError('App Error')}                                  | ${new Error('App Error')}
-        ${{ message: 'msg', name: 'error' }}                                  | ${oc({ message: 'msg', name: 'error' })}
-        ${'hello'}                                                            | ${oc({ name: 'error', message: 'hello' })}
-        ${null}                                                               | ${oc({ name: 'error', message: 'null' })}
-        ${undefined}                                                          | ${oc({ name: 'error', message: 'undefined' })}
-        ${42}                                                                 | ${oc({ name: 'error', message: '42' })}
-        ${{}}                                                                 | ${oc({ name: 'error', message: '{}' })}
-        ${new IOError('io', { name: 'err', message: 'msg', code: 'ENOENT' })} | ${new Error('io')}
+        ${new CheckFailed('CheckFailed')}                                     | ${new CheckFailed('CheckFailed')}
+        ${new ApplicationError('App Error')}                                  | ${new ApplicationError('App Error')}
+        ${{ message: 'msg', name: 'error' }}                                  | ${oc({ message: 'msg' })}
+        ${'hello'}                                                            | ${oc({ message: 'hello' })}
+        ${null}                                                               | ${oc({ message: 'null' })}
+        ${undefined}                                                          | ${oc({ message: 'undefined' })}
+        ${42}                                                                 | ${oc({ message: '42' })}
+        ${{}}                                                                 | ${oc({ message: '{}' })}
+        ${new IOError('io', { name: 'err', message: 'msg', code: 'ENOENT' })} | ${new IOError('io', { name: 'err', message: 'msg', code: 'ENOENT' })}
     `('toError $error', ({ error, expected }) => {
         expect(toError(error)).toEqual(expected);
     });
 
     test.each`
         error                                | expected
-        ${new CheckFailed('CheckFailed')}    | ${new Error('CheckFailed')}
-        ${new ApplicationError('App Error')} | ${new Error('App Error')}
+        ${new CheckFailed('CheckFailed')}    | ${new CheckFailed('CheckFailed')}
+        ${new ApplicationError('App Error')} | ${new ApplicationError('App Error')}
         ${{ message: 'msg', name: 'error' }} | ${new Error('msg')}
         ${'hello'}                           | ${new Error('hello')}
         ${{}}                                | ${new Error('{}')}
     `('toError $error', ({ error, expected }) => {
-        expect(toApplicationError(error)).toEqual(expected);
+        const e = toError(error);
+        expect(e).toEqual(expected);
     });
 
     test('IOError', () => {

@@ -11,6 +11,10 @@ import {
     StringToUpperRequest,
 } from './index.mjs';
 
+function expectError(message: string) {
+    return { error: expect.objectContaining({ message }) };
+}
+
 describe('Service Bus', () => {
     const bus = createBus();
 
@@ -21,9 +25,9 @@ describe('Service Bus', () => {
         ${FibRequestFactory.create({ fib: 7 })}                | ${createResponse(13)}
         ${StringLengthRequestFactory.create({ str: 'hello' })} | ${createResponse(5)}
         ${new StringToUpperRequest('hello')}                   | ${createResponse('HELLO')}
-        ${new DoNotHandleRequest()}                            | ${{ error: new Error('Unhandled Request: Do Not Handle') }}
-        ${new RetryAgainRequest()}                             | ${{ error: new Error('Service Request Depth 10 Exceeded: Retry Again Request') }}
-        ${new ServiceRequestCls('throw', undefined)}           | ${{ error: new Error('Unhandled Error in Handler: handlerThrowErrorOnRequest') }}
+        ${new DoNotHandleRequest()}                            | ${expectError('Unhandled Request: Do Not Handle')}
+        ${new RetryAgainRequest()}                             | ${expectError('Service Request Depth 10 Exceeded: Retry Again Request')}
+        ${new ServiceRequestCls('throw', undefined)}           | ${expectError('Unhandled Error in Handler: handlerThrowErrorOnRequest')}
     `('serviceBus handle request: $request.type', ({ request, expected }) => {
         expect(bus.dispatch(request)).toEqual(expected);
     });

@@ -12,7 +12,6 @@ import { extendExpect } from '../test-util/test.matchers.mjs';
 import type { Document } from './Document/index.js';
 import { fileToDocument, fileToTextDocument } from './Document/resolveDocument.js';
 import type { CSpellSettingsInternal } from './Models/CSpellSettingsInternalDef.js';
-import { ImportError } from './Settings/Controller/ImportError.js';
 import type { SpellCheckFileOptions, SpellCheckFileResult } from './spellCheckFile.js';
 import { determineFinalDocumentSettings, spellCheckDocument, spellCheckFile } from './spellCheckFile.js';
 import * as Uri from './util/Uri.js';
@@ -278,7 +277,7 @@ function tf(file: string) {
 }
 
 function err(msg: string): Error {
-    return new ImportError(msg);
+    return new Error(msg);
 }
 
 function errNoEnt(file: string): Error {
