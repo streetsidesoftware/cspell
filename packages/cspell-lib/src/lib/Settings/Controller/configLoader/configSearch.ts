@@ -9,9 +9,14 @@ import { findUpFromUrl } from '../../../util/findUpFromUrl.js';
 type Href = string;
 
 export class ConfigSearch {
-    private searchCache = new Map<Href, Promise<URL | undefined>>();
-    private searchDirCache = new Map<Href, Promise<URL | undefined>>();
-    private searchPlacesByProtocol: Map<string, string[]>;
+    /**
+     * Cache of search results.
+     */
+    #searchCache = new Map<Href, Promise<URL | undefined>>();
+    /**
+     * The scanner to use to search for config files.
+     */
+    #scanner: DirConfigScanner;
 
     /**
      * @param searchPlaces - The list of file names to search for.
@@ -19,75 +24,100 @@ export class ConfigSearch {
      * @param fs - The file system to use.
      */
     constructor(
-        readonly searchPlaces: readonly string[],
-        readonly allowedExtensionsByProtocol: Map<string, readonly string[]>,
-        private fs: VFileSystem,
+        searchPlaces: readonly string[],
+        allowedExtensionsByProtocol: Map<string, readonly string[]>,
+        fs: VFileSystem,
     ) {
-        this.searchPlacesByProtocol = setupSearchPlacesByProtocol(searchPlaces, allowedExtensionsByProtocol);
-        this.searchPlaces = this.searchPlacesByProtocol.get('*') || searchPlaces;
+        this.#scanner = new DirConfigScanner(searchPlaces, allowedExtensionsByProtocol, fs);
     }
 
     searchForConfig(searchFromURL: URL): Promise<URL | undefined> {
-        const dirUrl = new URL('.', searchFromURL);
-        const searchHref = dirUrl.href;
-        const searchCache = this.searchCache;
-        const cached = searchCache.get(searchHref);
-        if (cached) {
-            return cached;
-        }
-
-        const toPatchCache: URL[] = [];
-        const pFoundUrl = this.findUpConfigPath(dirUrl, storeVisit);
-        this.searchCache.set(searchHref, pFoundUrl);
-        const searchDirCache = this.searchDirCache;
-
-        const patch = async () => {
-            try {
-                await pFoundUrl;
-                for (const dir of toPatchCache) {
-                    searchDirCache.set(dir.href, searchDirCache.get(dir.href) || pFoundUrl);
-                    searchCache.set(dir.href, searchCache.get(dir.href) || pFoundUrl);
-                }
-
-                const result = searchCache.get(searchHref) || pFoundUrl;
-                searchCache.set(searchHref, result);
-            } catch {
-                // ignore
-            }
-        };
-
-        patch();
-        return pFoundUrl;
-
-        function storeVisit(dir: URL) {
-            toPatchCache.push(dir);
-        }
+        const dirUrl = searchFromURL.pathname.endsWith('/') ? searchFromURL : new URL('.', searchFromURL);
+        return this.#findUp(dirUrl);
     }
 
     clearCache() {
-        this.searchCache.clear();
-        this.searchDirCache.clear();
+        this.#searchCache.clear();
+        this.#scanner.clearCache();
     }
 
-    private findUpConfigPath(cwd: URL, visit: (dir: URL) => void): Promise<URL | undefined> {
-        const searchDirCache = this.searchDirCache;
-        const cached = searchDirCache.get(cwd.href);
-        if (cached) return cached;
+    #findUp(fromDir: URL): Promise<URL | undefined> {
+        const searchDirCache = this.#searchCache;
+        const cached = searchDirCache.get(fromDir.href);
+        if (cached) {
+            return cached;
+        }
+        const visited: URL[] = [];
+        let result: Promise<URL | undefined> | undefined = undefined;
+        const predicate = (dir: URL) => {
+            visit(dir);
+            return this.#scanner.scanDirForConfigFile(dir);
+        };
+        result = findUpFromUrl(predicate, fromDir, { type: 'file' });
+        searchDirCache.set(fromDir.href, result);
+        visited.forEach((dir) => searchDirCache.set(dir.href, result));
+        return result;
 
-        return findUpFromUrl((dir) => this.hasConfig(dir, visit), cwd, { type: 'file' });
+        /**
+         * Record directories that are visited while walking up the directory tree.
+         * This will help speed up future searches.
+         * @param dir - the directory that was visited.
+         */
+        function visit(dir: URL) {
+            if (!result) {
+                visited.push(dir);
+                return;
+            }
+            searchDirCache.set(dir.href, searchDirCache.get(dir.href) || result);
+        }
+    }
+}
+
+/**
+ * A Scanner that searches for a config file in a directory. It caches the results to speed up future requests.
+ */
+export class DirConfigScanner {
+    #searchDirCache = new Map<Href, Promise<URL | undefined>>();
+    #searchPlacesByProtocol: Map<string, string[]>;
+    #searchPlaces: readonly string[];
+
+    /**
+     * @param searchPlaces - The list of file names to search for.
+     * @param allowedExtensionsByProtocol - Map of allowed extensions by protocol, '*' is used to match all protocols.
+     * @param fs - The file system to use.
+     */
+    constructor(
+        searchPlaces: readonly string[],
+        readonly allowedExtensionsByProtocol: Map<string, readonly string[]>,
+        private fs: VFileSystem,
+    ) {
+        this.#searchPlacesByProtocol = setupSearchPlacesByProtocol(searchPlaces, allowedExtensionsByProtocol);
+        this.#searchPlaces = this.#searchPlacesByProtocol.get('*') || searchPlaces;
     }
 
-    private hasConfig(dir: URL, visited: (dir: URL) => void): Promise<URL | undefined> {
-        const cached = this.searchDirCache.get(dir.href);
-        if (cached) return cached;
-        visited(dir);
+    clearCache() {
+        this.#searchDirCache.clear();
+    }
 
-        const result = this.hasConfigDir(dir);
-        this.searchDirCache.set(dir.href, result);
+    /**
+     *
+     * @param dir - the directory to search for a config file.
+     * @param visited - a callback to be called for each directory visited.
+     * @returns A promise that resolves to the url of the config file or `undefined`.
+     */
+    scanDirForConfigFile(dir: URL): Promise<URL | undefined> {
+        const searchDirCache = this.#searchDirCache;
+        const href = dir.href;
+        const cached = searchDirCache.get(href);
+        if (cached) {
+            return cached;
+        }
+        const result = this.#scanDirForConfig(dir);
+        searchDirCache.set(href, result);
         return result;
     }
 
-    private createHasFileDirSearch(): (file: URL) => Promise<boolean> {
+    #createHasFileDirSearch(): (file: URL) => Promise<boolean> {
         const dirInfoCache = createAutoResolveCache<Href, Promise<Map<string, VfsDirEntry>>>();
 
         const hasFile = async (filename: URL): Promise<boolean> => {
@@ -102,7 +132,7 @@ export class ConfigSearch {
                 if (!found?.isDirectory() && !found?.isSymbolicLink()) return false;
             }
             const dirUrlHref = dir.href;
-            const dirInfo = await dirInfoCache.get(dirUrlHref, async () => await this.readDir(dir));
+            const dirInfo = await dirInfoCache.get(dirUrlHref, async () => await this.#readDir(dir));
 
             const name = urlBasename(filename);
             const found = dirInfo.get(name);
@@ -112,7 +142,7 @@ export class ConfigSearch {
         return hasFile;
     }
 
-    private async readDir(dir: URL): Promise<Map<string, VfsDirEntry>> {
+    async #readDir(dir: URL): Promise<Map<string, VfsDirEntry>> {
         try {
             const dirInfo = await this.fs.readDirectory(dir);
             return new Map(dirInfo.map((ent) => [ent.name, ent]));
@@ -121,7 +151,7 @@ export class ConfigSearch {
         }
     }
 
-    private createHasFileStatCheck(): (file: URL) => Promise<boolean> {
+    #createHasFileStatCheck(): (file: URL) => Promise<boolean> {
         const hasFile = async (filename: URL): Promise<boolean> => {
             const stat = await this.fs.stat(filename).catch(() => undefined);
             return !!stat?.isFile();
@@ -130,12 +160,17 @@ export class ConfigSearch {
         return hasFile;
     }
 
-    private async hasConfigDir(dir: URL): Promise<URL | undefined> {
+    /**
+     * Scan the directory for the first matching config file.
+     * @param dir - url of the directory to scan.
+     * @returns A promise that resolves to the url of the config file or `undefined`.
+     */
+    async #scanDirForConfig(dir: URL): Promise<URL | undefined> {
         const hasFile = this.fs.getCapabilities(dir).readDirectory
-            ? this.createHasFileDirSearch()
-            : this.createHasFileStatCheck();
+            ? this.#createHasFileDirSearch()
+            : this.#createHasFileStatCheck();
 
-        const searchPlaces = this.searchPlacesByProtocol.get(dir.protocol) || this.searchPlaces;
+        const searchPlaces = this.#searchPlacesByProtocol.get(dir.protocol) || this.#searchPlaces;
 
         for (const searchPlace of searchPlaces) {
             const file = new URL(searchPlace, dir);
@@ -145,6 +180,7 @@ export class ConfigSearch {
                 if (await checkPackageJson(this.fs, file)) return file;
             }
         }
+
         return undefined;
     }
 }
