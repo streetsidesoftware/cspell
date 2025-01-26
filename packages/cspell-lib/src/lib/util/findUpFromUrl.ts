@@ -11,7 +11,7 @@ export interface FindUpURLOptions {
     fs?: FindUpFileSystem;
 }
 
-type FindUpPredicate = (dir: URL) => URL | undefined | Promise<URL | undefined>;
+export type FindUpPredicate = (dir: URL) => URL | undefined | Promise<URL | undefined>;
 
 export async function findUpFromUrl(
     name: string | string[] | FindUpPredicate,
