@@ -5,7 +5,7 @@ Args: '["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGEL
 Summary:
   files: 19773
   filesWithIssues: 7389
-  issues: 43062
+  issues: 43065
   errors: 0
 Errors: []
 
@@ -550,7 +550,8 @@ issues:
   - "google/cloud/containeranalysis/doc/environment-variables.dox:19:16          Grafeas     U       used by `MakeGrafeasConnection()`."
   - "google/cloud/contentwarehouse/CMakeLists.txt:35:30          CONTENTWAREHOUSE    U       GOOGLE_CLOUD_CPP_CONTENTWAREHOUSE_TEST_LOCATION_ID)"
   - "google/cloud/contentwarehouse/v1/synonym_set_client.h:157:43        Synonymset      U       FOUND exception if the Synonymset"
-  - "google/cloud/credentials.h:230:28       cryptographical     U       account, as well as the cryptographical materials (a RSA private"
+  - "google/cloud/credentials.h:125:33       unvalidated         U       library. Providing an unvalidated credential configuration"
+  - "google/cloud/credentials.h:238:28       cryptographical     U       account, as well as the cryptographical materials (a RSA private"
   - "google/cloud/datacatalog/doc/environment-variables.dox:18:40        datalineage     U       (which defaults to \"datalineage.googleapis.com\")"
   - "google/cloud/datacatalog/v1/data_catalog_client.cc:579:42       Unstar      U       cloud::datacatalog::v1::UnstarEntryResponse>"
   - "google/cloud/datacatalog/v1/data_catalog_client.h:2804:7        hierarchicahlly     U       /// hierarchicahlly through the ancestors"
@@ -666,7 +667,7 @@ issues:
   - "google/cloud/pubsub/samples/CMakeLists.txt:94:37        TESTDATA    U       GOOGLE_CLOUD_CPP_PUBSUB_TESTDATA=${CMAKE_CURRENT_SOURCE"
   - "google/cloud/pubsub/samples/samples.cc:1095:67      avsc    U       directory + \"schema.avsc\";"
   - "google/cloud/pubsub/samples/schema_samples.cc:278:19        Rolledback      U       std::cout << \"Rolledback schema. Created a new"
-  - "google/cloud/pubsub/samples/topic_admin_samples.cc:687:51       mikeprieto      U       cloud_storage_topic_id, \"mikeprieto-bucket\", \"text\","
+  - "google/cloud/pubsub/samples/topic_admin_samples.cc:834:51       mikeprieto      U       cloud_storage_topic_id, \"mikeprieto-bucket\", \"text\","
   - "google/cloud/pubsublite/admin_client.h:19:39        PUBSUBLITE      U       CLOUD_CPP_GOOGLE_CLOUD_PUBSUBLITE_ADMIN_CLIENT_H"
   - "google/cloud/pubsublite/CMakeLists.txt:94:14        multipartition      U       internal/multipartition_publisher.cc"
   - "google/cloud/pubsublite/integration_tests/publisher_integration_test.cc:132:36      abcded      U       MessageBuilder{}.SetData(\"abcded-\" + std::to_string(i"
@@ -748,9 +749,9 @@ issues:
   - "google/cloud/spanner/samples/postgresql_samples.cc:317:44       singerid        U       SingerId will be folded to \"singerid\""
   - "google/cloud/spanner/samples/postgresql_samples.cc:438:40       TIMESTAMPTZ     U       11-03T09:35:01UTC'::TIMESTAMPTZ as timestamp"
   - "google/cloud/spanner/samples/README.md:22:2         bazelbuild      U       [bazelbuild/bazel#10621](https:"
-  - "google/cloud/spanner/samples/samples.cc:1319:20     MRCMEK              U       void CopyBackupWithMRCMEK("
-  - "google/cloud/spanner/samples/samples.cc:4017:8      songinfo            U       auto songinfo = SongInfo("
-  - "google/cloud/spanner/samples/samples.cc:4798:28     partitionable       U       For a SQL query to be partitionable, it has to satisfy some"
+  - "google/cloud/spanner/samples/samples.cc:1321:20     MRCMEK              U       void CopyBackupWithMRCMEK("
+  - "google/cloud/spanner/samples/samples.cc:4019:8      songinfo            U       auto songinfo = SongInfo("
+  - "google/cloud/spanner/samples/samples.cc:4800:28     partitionable       U       For a SQL query to be partitionable, it has to satisfy some"
   - "google/cloud/spanner/value.h:125:9          Nullness    U       * @par Nullness"
   - "google/cloud/sql/doc/environment-variables.dox:14:40        sqladmin    U       (which defaults to \"sqladmin.googleapis.com\")"
   - "google/cloud/sql/v1/internal/sql_instances_rest_connection_impl.cc:545:53       Ssrs    U       :SqlInstancesAcquireSsrsLeaseResponse>"
