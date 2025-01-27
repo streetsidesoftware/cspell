@@ -314,7 +314,7 @@ exec git diff --cached --name-only | npx cspell --no-summary --no-progress --no-
 
 ## Requirements
 
-cspell needs Node 14 and above.
+CSpell needs Node 18 and above.
 
 ## How it works
 
