@@ -245,7 +245,7 @@ jobs:
           retention-days: 1
 
   update-snapshots:
-    if: ${{ needs.check-dictionaries.outputs.patch }}
+    if: ${{ inputs.force || needs.check-dictionaries.outputs.patch }}
     runs-on: ubuntu-latest
     needs:
       - calc-ref
@@ -265,6 +265,7 @@ jobs:
         run: corepack enable
 
       - name: Patch
+        if: ${{ env.PATCH }}
         run: |
           echo "$PATCH" | git apply
 
