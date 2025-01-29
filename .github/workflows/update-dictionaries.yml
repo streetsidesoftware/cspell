@@ -6,7 +6,12 @@ on:
       base:
         description: The Base Ref to apply the diff
         required: false
-        default: 'main'
+        default: main
+      force:
+        description: Force the update of integration snapshots even if the dictionaries are not updated.
+        required: false
+        default: false
+        type: boolean
 
   schedule:
     - cron: '0 7 * * *'
@@ -17,6 +22,7 @@ permissions:
 env:
   NEW_BRANCH: "update-dictionaries-${{ inputs.base || 'main' }}"
   REF_BRANCH: ${{ inputs.base || 'main' }}
+  NODE_VERSION: '22.x'
 
 jobs:
   calc-ref:
@@ -119,7 +125,7 @@ jobs:
       patch: ${{ needs.check-dictionaries.outputs.patch }}
 
   integrations:
-    if: ${{ needs.check-dictionaries.outputs.patch }}
+    if: ${{ inputs.force || needs.check-dictionaries.outputs.patch }}
     runs-on: ubuntu-latest
     needs:
       - load-integrations
@@ -158,6 +164,7 @@ jobs:
         run: corepack enable
 
       - name: Patch
+        if: ${{ env.PATCH }}
         run: |
           echo "$PATCH" | git apply
 
