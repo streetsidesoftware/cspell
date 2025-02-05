@@ -110,15 +110,12 @@ jobs:
     runs-on: ${{ matrix.os }}
     needs:
       - build-windows
-    env:
-      # TODO: remove this when the integrity keys are fixed.
-      COREPACK_INTEGRITY_KEYS: 0
 
     strategy:
       fail-fast: false
       matrix:
         node-version:
-          - 22.x
+          - 23.x
 
         os:
           - windows-latest
