@@ -1,4 +1,4 @@
-name: setup_node
+name: setup_node_and_install_dependencies
 description: Setup Node, install Pnpm, and install dependencies.
 inputs:
   node-version:
@@ -12,7 +12,7 @@ runs:
       uses: pnpm/action-setup@v4
 
     - name: Use Node.js ${{ inputs.node-version }}
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v4.1.0
       with:
         registry-url: 'https://registry.npmjs.org'
         node-version: ${{ inputs.node-version }}

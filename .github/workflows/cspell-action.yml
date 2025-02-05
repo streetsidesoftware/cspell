@@ -15,15 +15,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Enable Corepack
-        run: corepack enable
-
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          cache: pnpm
-
-      - run: pnpm -v
+      - name: Setup Node and Pnpm
+        uses: ./.github/actions/setup-node
 
       - run: pnpm run prepare-cspell-action
       - uses: streetsidesoftware/cspell-action@v6

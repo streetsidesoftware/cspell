@@ -16,15 +16,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Enable Corepack
-        run: corepack enable
-
-      - name: Use Node.js
-        uses: actions/setup-node@v4
-        with:
-          cache: pnpm
-
-      - run: pnpm -v
+      - name: Setup Node and Pnpm
+        uses: ./.github/actions/setup-node
 
       - # It is necessary to run `pnpm i` in order install some dictionaries.
         name: prepare-cspell-action

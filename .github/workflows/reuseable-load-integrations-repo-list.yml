@@ -54,16 +54,10 @@ jobs:
         with:
           ref: ${{ env.REF_BRANCH }}
 
-      - name: Enable Corepack
-        run: corepack enable
-
-      - name: Use Node.js ${{ env.NODE_VERSION }}
-        uses: actions/setup-node@v4
+      - name: Setup Node and Pnpm
+        uses: ./.github/actions/setup-node
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'pnpm'
-
-      - run: pnpm -v
 
       - run: pnpm i
 
