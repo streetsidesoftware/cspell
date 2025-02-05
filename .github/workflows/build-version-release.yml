@@ -66,8 +66,8 @@ jobs:
         with:
           token: ${{ env.GITHUB_TOKEN }} # needed to trigger workflows
 
-      - name: Enable Corepack
-        run: corepack enable
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
 
       - name: Use Node.js
         uses: actions/setup-node@v4.1.0
@@ -75,6 +75,9 @@ jobs:
           node-version: 18
           registry-url: 'https://registry.npmjs.org'
           cache: pnpm
+
+      - name: Enable Corepack
+        run: corepack enable
 
       - name: Version
         run: |

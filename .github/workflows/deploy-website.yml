@@ -21,13 +21,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Enable Corepack
-        run: corepack enable
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
 
       - uses: actions/setup-node@v4.1.0
         with:
           node-version: 20.x
           cache: pnpm
+
+      - name: Enable Corepack
+        run: corepack enable
 
       - name: Build website
         run: |
