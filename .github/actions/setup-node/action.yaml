@@ -1,5 +1,5 @@
 name: setup_node
-description: Setup Node, install Pnpm, and install dependencies.
+description: Setup Node, and install Pnpm
 inputs:
   node-version:
     required: false
@@ -23,8 +23,4 @@ runs:
         npm i -g --force corepack
         corepack enable
         corepack install
-      shell: bash
-
-    - name: Install
-      run: pnpm i
       shell: bash
