@@ -77,16 +77,10 @@ jobs:
         with:
           ref: ${{ env.REF_BRANCH }}
 
-      - name: Enable Corepack
-        run: corepack enable
-
-      - name: Use Node.js ${{ env.NODE_VERSION }}
-        uses: actions/setup-node@v4.1.0
+      - name: Setup Node and Pnpm
+        uses: ./.github/actions/setup-node
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'pnpm'
-
-      - run: pnpm -v
 
       - name: Cache Build
         id: step-cache-build
@@ -167,14 +161,10 @@ jobs:
         with:
           ref: ${{ env.REF_BRANCH }}
 
-      - name: Enable Corepack
-        run: corepack enable
-
-      - name: Use Node.js ${{ env.NODE_VERSION }}
-        uses: actions/setup-node@v4.1.0
+      - name: Setup Node and Pnpm
+        uses: ./.github/actions/setup-node
         with:
           node-version: ${{ env.NODE_VERSION }}
-          cache: 'pnpm'
 
       - name: restore repos
         uses: actions/download-artifact@v4
