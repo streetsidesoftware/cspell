@@ -8,22 +8,10 @@ inputs:
 runs:
   using: 'composite'
   steps:
-    - name: Setup pnpm
-      uses: pnpm/action-setup@v4
-
-    - name: Use Node.js ${{ inputs.node-version }}
-      uses: actions/setup-node@v4.1.0
+    - name: Setup Node and Pnpm
+      uses: ./.github/actions/setup-node
       with:
-        registry-url: 'https://registry.npmjs.org'
         node-version: ${{ inputs.node-version }}
-        cache: 'pnpm'
-
-    - name: Enable Corepack
-      run: |
-        npm i -g --force corepack
-        corepack enable
-        corepack install
-      shell: bash
 
     - name: Install
       run: pnpm i
