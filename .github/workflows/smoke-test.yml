@@ -91,9 +91,6 @@ jobs:
           use_cspell_cache: ${{ matrix.use_cspell_cache }}
 
   build-windows:
-    env:
-      # TODO: remove this when the integrity keys are fixed.
-      COREPACK_INTEGRITY_KEYS: 0
     runs-on: windows-latest
     steps:
       - name: Checkout
@@ -105,6 +102,7 @@ jobs:
         with:
           show-summary: true
           use-setup: true
+          node-version: 23.x
 
   smoke-test-windows:
     runs-on: ${{ matrix.os }}
