@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: [".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 2042, Issues found: 1641 in 303 files.
+ CSpell: Files checked: 2049, Issues found: 1640 in 303 files.
  exit code: 1
 Makefile.js:128:88    - Unknown word (ined)       -- followed by the string "ined".
 Makefile.js:359:12    - Unknown word (gensite)    -- target.gensite();
@@ -28,7 +28,6 @@ README.md:290:1     - Unknown word (Strek)         -- Strek
 README.md:299:5     - Unknown word (teamend)       -- <!--teamend-->
 README.md:302:5     - Unknown word (sponsorsstart) -- <!--sponsorsstart-->
 README.md:310:105   - Unknown word (Qlty)          -- d157d/logo.png" alt="Qlty Software" height="9
-README.md:311:124   - Unknown word (SERP)          -- fea3074/logo.png" alt="SERP Triumph" height="64
 README.md:312:796   - Unknown word (Neko)          -- com/u/11081491" alt="Neko" height="32"></a> <a
 README.md:316:5     - Unknown word (sponsorsend)   -- <!--sponsorsend-->
 docs/README.md:45:51     - Unknown word (openjsf)    -- ESLint contributors, [www.openjsf.org](https://www.openjsf
@@ -84,7 +83,7 @@ docs/src/integrate/nodejs-api.md:546:35    - Unknown word (Fvar)       -- new So
 docs/src/maintain/manage-issues.md:32:4      - Unknown word (Triaging)   -- ## Triaging Process
 docs/src/maintain/manage-releases.md:107:103   - Unknown word (eslintbot)  -- token is tied to the `eslintbot` npm account and needs
 docs/src/maintain/overview.md:33:6      - Unknown word (Stackaid)   -- * [**Stackaid.us**](https://simulation
-docs/src/pages/flags.md:41:5      - Unknown word (endfor)     -- {%- endfor -%}
+docs/src/pages/flags.md:49:5      - Unknown word (endfor)     -- {%- endfor -%}
 docs/src/rules/arrow-body-style.md:51:14     - Unknown word (retv)       -- const bar = (retv, name) => {
 docs/src/rules/brace-style.md:25:54     - Unknown word (Stroustrup) -- brace style is called Stroustrup, in which the `else
 docs/src/rules/brace-style.md:36:26     - Unknown word (Allman)     -- Another style is called [Allman](https://en.wikipedia
@@ -291,7 +290,7 @@ tests/lib/cli-engine/cli-engine.js:621:44    - Unknown word (foothis)    -- outp
 tests/lib/cli-engine/cli-engine.js:6454:87   - Unknown word (myconf)              -- config node_modules/myconf/.eslintrc.json',",
 tests/lib/cli-engine/cli-engine.js:6682:52   - Unknown word (extendees)           -- config file and linear extendees.", () => {
 tests/lib/cli-engine/formatters/html.js:528:130   - Unknown word (apos)       -- Unexpected &lt;&amp;&quot;&apos;&gt; foo.", ruleId:
-tests/lib/cli.js:1923:53   - Unknown word (oldx)          -- = `--flag test_only_oldx --config ${configPath
+tests/lib/cli.js:1930:53   - Unknown word (oldx)          -- = `--flag test_only_oldx --config ${configPath
 tests/lib/cli.js:413:60    - Unknown word (fakeformatter) -- await cli.execute(`-f fakeformatter ${filePath} ${flag}
 tests/lib/config/flat-config-array.js:1803:43   - Unknown word (truex)       -- foo: "truex"
 tests/lib/config/flat-config-array.js:221:22    - Unknown word (noniterable) -- it("should allow noniterable baseConfig objects"
@@ -299,18 +298,18 @@ tests/lib/config/flat-config-array.js:2351:29   - Unknown word (foox)        -- 
 tests/lib/config/flat-config-array.js:2373:30   - Unknown word (doesnt)      -- "doesnt-exist/match": "error
 tests/lib/config/flat-config-schema.js:19:50     - Unknown word (reults)     -- expectedResult] The expected reults of merging first and
 tests/lib/config/flat-config-schema.js:46:20     - Unknown word (emtpy)      -- it("returns an emtpy object if both values
-tests/lib/eslint/eslint.js:1416:43   - Unknown word (myjs)       -- files: ["**/*.myjs"],
-tests/lib/eslint/eslint.js:1999:61   - Unknown word (doesnotexist) -- lintFiles(["subdir1", "doesnotexist/*.js"]);
-tests/lib/eslint/eslint.js:2079:62   - Unknown word (doesexist)    -- await eslint.lintFiles(["doesexist/*.js"]);
-tests/lib/eslint/eslint.js:2722:75   - Unknown word (unignoring)   -- unignored without also unignoring all files in them",
-tests/lib/eslint/eslint.js:2737:51   - Unknown word (jsfmt)        -- "!tests/format/**/jsfmt.spec.js"
-tests/lib/eslint/eslint.js:5902:44   - Unknown word (mcts)         -- "eslint.config.mcts": configFileContent
-tests/lib/eslint/eslint.js:7728:35   - Unknown word (dignore)      -- cwd: `${root}-dignore`,
-tests/lib/eslint/eslint.js:9144:35   - Unknown word (previos)      -- make sure that the previos assertion checks the
-tests/lib/eslint/eslint.js:9197:55   - Unknown word (intenationally) -- cacheFilePath, "[]"); // intenationally invalid to additionally
-tests/lib/eslint/eslint.js:9367:55   - Unknown word (occured)        -- the previous run that occured after the cache was
+tests/lib/eslint/eslint.js:1470:43   - Unknown word (myjs)       -- files: ["**/*.myjs"],
+tests/lib/eslint/eslint.js:2053:61   - Unknown word (doesnotexist) -- lintFiles(["subdir1", "doesnotexist/*.js"]);
+tests/lib/eslint/eslint.js:2133:62   - Unknown word (doesexist)    -- await eslint.lintFiles(["doesexist/*.js"]);
+tests/lib/eslint/eslint.js:2776:75   - Unknown word (unignoring)   -- unignored without also unignoring all files in them",
+tests/lib/eslint/eslint.js:2791:51   - Unknown word (jsfmt)        -- "!tests/format/**/jsfmt.spec.js"
+tests/lib/eslint/eslint.js:5956:44   - Unknown word (mcts)         -- "eslint.config.mcts": configFileContent
+tests/lib/eslint/eslint.js:7786:35   - Unknown word (dignore)      -- cwd: `${root}-dignore`,
+tests/lib/eslint/eslint.js:9202:35   - Unknown word (previos)      -- make sure that the previos assertion checks the
+tests/lib/eslint/eslint.js:9255:55   - Unknown word (intenationally) -- cacheFilePath, "[]"); // intenationally invalid to additionally
+tests/lib/eslint/eslint.js:9425:55   - Unknown word (occured)        -- the previous run that occured after the cache was
 tests/lib/eslint/legacy-eslint.js:2536:24   - Unknown word (succesfully) -- it("should succesfully execute with a rule
-tests/lib/linter/linter.js:17066:52  - Unknown word (intentionaly)   -- // intentionaly mutates objects and
+tests/lib/linter/linter.js:17116:52  - Unknown word (intentionaly)   -- // intentionaly mutates objects and
 tests/lib/linter/linter.js:3462:1    - Unknown word (consolexlog) -- consolexlog("test2");
 tests/lib/linter/linter.js:3606:84   - Unknown word (rulename)    -- this is 2, since the rulename is very likely to be
 tests/lib/linter/linter.js:5602:31   - Unknown word (suppresed)   -- it("should report one suppresed problem when noInlineConfig

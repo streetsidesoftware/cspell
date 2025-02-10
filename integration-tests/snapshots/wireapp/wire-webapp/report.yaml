@@ -3,9 +3,9 @@ Repository: wireapp/wire-webapp
 Url: https://github.com/wireapp/wire-webapp.git
 Args: '["src/script/**/*.{js,ts,tsx,md}"]'
 Summary:
-  files: 1401
-  filesWithIssues: 684
-  issues: 2822
+  files: 1421
+  filesWithIssues: 690
+  issues: 2828
   errors: 0
 Errors: []
 
@@ -679,16 +679,16 @@ issues:
   - "src/script/components/calling/VideoControls/VideoControls.tsx:22:26         wireapp             U       import {TabIndex} from '@wireapp/react-ui-kit/lib/types"
   - "src/script/components/calling/VideoControls/VideoControls.tsx:24:26         tsyringe            U       import {container} from 'tsyringe';"
   - "src/script/components/calling/VideoControls/VideoControls.tsx:26:27         wireapp             U       import {CALL_TYPE} from '@wireapp/avs';"
-  - "src/script/components/calling/VideoControls/VideoControls.tsx:27:69         wireapp             U       iseHandIcon, MoreIcon} from '@wireapp/react-ui-kit';"
+  - "src/script/components/calling/VideoControls/VideoControls.tsx:27:69         wireapp             U       RaiseHandIcon} from '@wireapp/react-ui-kit';"
   - "src/script/components/calling/VideoControls/VideoControls.tsx:28:30         wireapp             U       WebAppEvents} from '@wireapp/webapp-events';"
-  - "src/script/components/calling/VideoControls/VideoControls.tsx:64:10         bluroff             U       OFF = 'bluroff',"
-  - "src/script/components/calling/VideoControls/VideoControls.tsx:65:9          bluron              U       ON = 'bluron',"
-  - "src/script/components/calling/VideoControls/VideoControls.tsx:204:22        Callaudio           U       label: t('videoCallaudioInputMicrophone'),"
-  - "src/script/components/calling/VideoControls/VideoControls.tsx:222:22        Callaudio           U       label: t('videoCallaudioOutputSpeaker'),"
-  - "src/script/components/calling/VideoControls/VideoControls.tsx:261:20        Callbackground      U       label: t('videoCallbackgroundBlurHeadline'),"
-  - "src/script/components/calling/VideoControls/VideoControls.tsx:266:24        Callbackground      U       label: t('videoCallbackgroundBlur'),"
-  - "src/script/components/calling/VideoControls/VideoControls.tsx:272:24        Callbackground      U       label: t('videoCallbackgroundNotBlurred'),"
-  - "src/script/components/calling/VideoControls/VideoControls.tsx:282:22        Callvideo           U       label: t('videoCallvideoInputCamera'),"
+  - "src/script/components/calling/VideoControls/VideoControls.tsx:63:10         bluroff             U       OFF = 'bluroff',"
+  - "src/script/components/calling/VideoControls/VideoControls.tsx:64:9          bluron              U       ON = 'bluron',"
+  - "src/script/components/calling/VideoControls/VideoControls.tsx:198:22        Callaudio           U       label: t('videoCallaudioInputMicrophone'),"
+  - "src/script/components/calling/VideoControls/VideoControls.tsx:216:22        Callaudio           U       label: t('videoCallaudioOutputSpeaker'),"
+  - "src/script/components/calling/VideoControls/VideoControls.tsx:255:20        Callbackground      U       label: t('videoCallbackgroundBlurHeadline'),"
+  - "src/script/components/calling/VideoControls/VideoControls.tsx:260:24        Callbackground      U       label: t('videoCallbackgroundBlur'),"
+  - "src/script/components/calling/VideoControls/VideoControls.tsx:266:24        Callbackground      U       label: t('videoCallbackgroundNotBlurred'),"
+  - "src/script/components/calling/VideoControls/VideoControls.tsx:276:22        Callvideo           U       label: t('videoCallvideoInputCamera'),"
   - "src/script/components/calling/VideoControls/VideoControlsSelect/VideoControlsSelect.tsx:22:24       wireapp     U       import {Select} from '@wireapp/react-ui-kit';"
   - "src/script/components/ConfigToolbar/ConfigToolbar.tsx:22:8          keyboardjs      U       import keyboardjs from 'keyboardjs';"
   - "src/script/components/ConfigToolbar/ConfigToolbar.tsx:22:25         keyboardjs      U       import keyboardjs from 'keyboardjs';"
@@ -878,8 +878,14 @@ issues:
   - "src/script/components/MessagesList/Message/CallTimeoutMessage.tsx:51:43         NOONE (NO ONE)      U       value={reason === REASON.NOONE_JOINED ? 'no-one-joined"
   - "src/script/components/MessagesList/Message/CallTimeoutMessage.tsx:55:33         NOONE (NO ONE)      U       b>{reason === REASON.NOONE_JOINED ? t('callNoOneJoined"
   - "src/script/components/MessagesList/Message/ContentMessage/asset/AssetLoader.tsx:22:26       wireapp     U       import {TabIndex} from '@wireapp/react-ui-kit/lib/types"
-  - "src/script/components/MessagesList/Message/ContentMessage/asset/AudioAsset.tsx:23:26        tsyringe    U       import {container} from 'tsyringe';"
-  - "src/script/components/MessagesList/Message/ContentMessage/asset/AudioAsset.tsx:140:55       seekbar     U       uie-name=\"status-audio-seekbar\""
+  - "src/script/components/MessagesList/Message/ContentMessage/asset/AudioAsset/AudioAsset.tsx:23:26         tsyringe    U       import {container} from 'tsyringe';"
+  - "src/script/components/MessagesList/Message/ContentMessage/asset/AudioAsset/AudioAsset.tsx:140:55        seekbar     U       uie-name=\"status-audio-seekbar\""
+  - "src/script/components/MessagesList/Message/ContentMessage/asset/AudioAsset/AudioAssetPlaceholder/AudioAssetPlaceholder.styles.ts:73:30          xsmall      U       fontSize: 'var(--font-size-xsmall)',"
+  - "src/script/components/MessagesList/Message/ContentMessage/asset/AudioAsset/AudioAssetPlaceholder/AudioAssetPlaceholder.tsx:20:26        wireapp     U       import {PlayIcon} from '@wireapp/react-ui-kit';"
+  - "src/script/components/MessagesList/Message/ContentMessage/asset/AudioAsset/AudioAssetSeekBar/AudioAssetSeekBar.tsx:38:80        seekbar     U       uie-name=\"status-audio-seekbar\" disabled={disabled"
+  - "src/script/components/MessagesList/Message/ContentMessage/asset/AudioAsset/AudioAssetSeekBar/AudioSeekBarV2/AudioSeekBarV2.tsx:54:35        seekbar     U       uie-name=\"status-audio-seekbar\""
+  - "src/script/components/MessagesList/Message/ContentMessage/asset/AudioAsset/AudioAssetTimer/AudioAssetTimer.styles.ts:32:30          xsmall      U       fontSize: 'var(--font-size-xsmall)',"
+  - "src/script/components/MessagesList/Message/ContentMessage/asset/AudioAsset/AudioPlayButton/AudioPlayButton.tsx:22:48        wireapp     U       PauseIcon, PlayIcon} from '@wireapp/react-ui-kit';"
   - "src/script/components/MessagesList/Message/ContentMessage/asset/controls/AudioSeekBar.tsx:119:35        seekbar     U       uie-name=\"status-audio-seekbar\""
   - "src/script/components/MessagesList/Message/ContentMessage/asset/FileAssetComponent.tsx:23:26        tsyringe    U       import {container} from 'tsyringe';"
   - "src/script/components/MessagesList/Message/ContentMessage/asset/FileAssetComponent.tsx:77:89        DECRPYT     U       TransferState.DOWNLOAD_FAILED_DECRPYT;"
@@ -1348,7 +1354,7 @@ issues:
   - "src/script/conversation/ConversationVerificationStateHandler/MLS/MLSStateHandler.ts:21:29       wireapp     U       QualifiedId} from '@wireapp/api-client/lib/user"
   - "src/script/conversation/ConversationVerificationStateHandler/MLS/MLSStateHandler.ts:22:39       wireapp     U       eiConversationState} from '@wireapp/core/lib/messagingProtocols"
   - "src/script/conversation/ConversationVerificationStateHandler/MLS/MLSStateHandler.ts:23:62       wireapp     U       stringifyQualifiedId} from '@wireapp/core/lib/util/qualifiedIdUtil"
-  - "src/script/conversation/ConversationVerificationStateHandler/MLS/MLSStateHandler.ts:236:15      wireapp     U       // Example: wireapp://%40hans.wurst@elna"
+  - "src/script/conversation/ConversationVerificationStateHandler/MLS/MLSStateHandler.ts:241:15      wireapp     U       // Example: wireapp://%40hans.wurst@elna"
   - "src/script/conversation/ConversationVerificationStateHandler/Proteus/ProteusStateHandler.ts:20:34       wireapp     U       QualifiedId} from '@wireapp/api-client/lib/user"
   - "src/script/conversation/ConversationVerificationStateHandler/Proteus/ProteusStateHandler.ts:22:26       tsyringe    U       import {container} from 'tsyringe';"
   - "src/script/conversation/ConversationVerificationStateHandler/Proteus/ProteusStateHandler.ts:24:30       wireapp     U       WebAppEvents} from '@wireapp/webapp-events';"
