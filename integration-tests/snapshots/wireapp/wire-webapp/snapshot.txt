@@ -3,7 +3,7 @@ Repository: wireapp/wire-webapp
 Url: "https://github.com/wireapp/wire-webapp.git"
 Args: ["src/script/**/*.{js,ts,tsx,md}"]
 Lines:
- CSpell: Files checked: 1401, Issues found: 2822 in 684 files.
+ CSpell: Files checked: 1421, Issues found: 2828 in 690 files.
  exit code: 1
 src/script/Config.ts:20:25     - Unknown word (wireapp)    -- import {Runtime} from '@wireapp/commons';
 src/script/Config.ts:86:31     - Unknown word (acces)      -- DataDog client api keys acces */
@@ -904,8 +904,14 @@ src/script/components/MessagesList/Message/ContentMessage/Warnings/PartialFailur
 src/script/components/MessagesList/Message/ContentMessage/Warnings/PartialFailureToSend/PartialFailureToSend.tsx:56:84     - Unknown word (Qulified)   -- qualifiedId, currentQulifiedId));
 src/script/components/MessagesList/Message/ContentMessage/Warnings/PartialFailureToSend/PartialFailureToSend.tsx:60:48     - Unknown word (Qulified)   -- unknownUsers.push(currentQulifiedId);
 src/script/components/MessagesList/Message/ContentMessage/asset/AssetLoader.tsx:22:26     - Unknown word (wireapp)    -- import {TabIndex} from '@wireapp/react-ui-kit/lib/types
-src/script/components/MessagesList/Message/ContentMessage/asset/AudioAsset.tsx:140:55    - Unknown word (seekbar)    -- uie-name="status-audio-seekbar"
-src/script/components/MessagesList/Message/ContentMessage/asset/AudioAsset.tsx:23:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
+src/script/components/MessagesList/Message/ContentMessage/asset/AudioAsset/AudioAsset.tsx:140:55    - Unknown word (seekbar)    -- uie-name="status-audio-seekbar"
+src/script/components/MessagesList/Message/ContentMessage/asset/AudioAsset/AudioAsset.tsx:23:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
+src/script/components/MessagesList/Message/ContentMessage/asset/AudioAsset/AudioAssetPlaceholder/AudioAssetPlaceholder.styles.ts:73:30     - Unknown word (xsmall)     -- fontSize: 'var(--font-size-xsmall)',
+src/script/components/MessagesList/Message/ContentMessage/asset/AudioAsset/AudioAssetPlaceholder/AudioAssetPlaceholder.tsx:20:26     - Unknown word (wireapp)    -- import {PlayIcon} from '@wireapp/react-ui-kit';
+src/script/components/MessagesList/Message/ContentMessage/asset/AudioAsset/AudioAssetSeekBar/AudioAssetSeekBar.tsx:38:80     - Unknown word (seekbar)    -- uie-name="status-audio-seekbar" disabled={disabled
+src/script/components/MessagesList/Message/ContentMessage/asset/AudioAsset/AudioAssetSeekBar/AudioSeekBarV2/AudioSeekBarV2.tsx:54:35     - Unknown word (seekbar)    -- uie-name="status-audio-seekbar"
+src/script/components/MessagesList/Message/ContentMessage/asset/AudioAsset/AudioAssetTimer/AudioAssetTimer.styles.ts:32:30     - Unknown word (xsmall)     -- fontSize: 'var(--font-size-xsmall)',
+src/script/components/MessagesList/Message/ContentMessage/asset/AudioAsset/AudioPlayButton/AudioPlayButton.tsx:22:48     - Unknown word (wireapp)    -- PauseIcon, PlayIcon} from '@wireapp/react-ui-kit';
 src/script/components/MessagesList/Message/ContentMessage/asset/FileAssetComponent.tsx:133:40    - Unknown word (nocase)     -- li className="label-nocase-xs" data-uie-name="file
 src/script/components/MessagesList/Message/ContentMessage/asset/FileAssetComponent.tsx:23:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 src/script/components/MessagesList/Message/ContentMessage/asset/FileAssetComponent.tsx:77:89     - Unknown word (DECRPYT)    -- TransferState.DOWNLOAD_FAILED_DECRPYT;
@@ -1181,19 +1187,19 @@ src/script/components/calling/Pagination/Pagination.tsx:24:60     - Unknown word
 src/script/components/calling/VideoControls/EmojisBar/EmojisBar.styles.ts:22:23     - Unknown word (wireapp)    -- import {media} from '@wireapp/react-ui-kit';
 src/script/components/calling/VideoControls/VideoControls.styles.ts:22:23     - Unknown word (wireapp)    -- import {media} from '@wireapp/react-ui-kit';
 src/script/components/calling/VideoControls/VideoControls.styles.ts:58:52     - Unknown word (inversed)   -- accent-color-highlight-inversed);
-src/script/components/calling/VideoControls/VideoControls.tsx:204:22    - Unknown word (Callaudio)  -- label: t('videoCallaudioInputMicrophone'),
-src/script/components/calling/VideoControls/VideoControls.tsx:222:22    - Unknown word (Callaudio)  -- label: t('videoCallaudioOutputSpeaker'),
+src/script/components/calling/VideoControls/VideoControls.tsx:198:22    - Unknown word (Callaudio)  -- label: t('videoCallaudioInputMicrophone'),
+src/script/components/calling/VideoControls/VideoControls.tsx:216:22    - Unknown word (Callaudio)  -- label: t('videoCallaudioOutputSpeaker'),
 src/script/components/calling/VideoControls/VideoControls.tsx:22:26     - Unknown word (wireapp)    -- import {TabIndex} from '@wireapp/react-ui-kit/lib/types
 src/script/components/calling/VideoControls/VideoControls.tsx:24:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
-src/script/components/calling/VideoControls/VideoControls.tsx:261:20    - Unknown word (Callbackground) -- label: t('videoCallbackgroundBlurHeadline'),
-src/script/components/calling/VideoControls/VideoControls.tsx:266:24    - Unknown word (Callbackground) -- label: t('videoCallbackgroundBlur'),
+src/script/components/calling/VideoControls/VideoControls.tsx:255:20    - Unknown word (Callbackground) -- label: t('videoCallbackgroundBlurHeadline'),
+src/script/components/calling/VideoControls/VideoControls.tsx:260:24    - Unknown word (Callbackground) -- label: t('videoCallbackgroundBlur'),
+src/script/components/calling/VideoControls/VideoControls.tsx:266:24    - Unknown word (Callbackground) -- label: t('videoCallbackgroundNotBlurred'),
 src/script/components/calling/VideoControls/VideoControls.tsx:26:27     - Unknown word (wireapp)    -- import {CALL_TYPE} from '@wireapp/avs';
-src/script/components/calling/VideoControls/VideoControls.tsx:272:24    - Unknown word (Callbackground) -- label: t('videoCallbackgroundNotBlurred'),
-src/script/components/calling/VideoControls/VideoControls.tsx:27:69     - Unknown word (wireapp)    -- iseHandIcon, MoreIcon} from '@wireapp/react-ui-kit';
-src/script/components/calling/VideoControls/VideoControls.tsx:282:22    - Unknown word (Callvideo)      -- label: t('videoCallvideoInputCamera'),
+src/script/components/calling/VideoControls/VideoControls.tsx:276:22    - Unknown word (Callvideo)      -- label: t('videoCallvideoInputCamera'),
+src/script/components/calling/VideoControls/VideoControls.tsx:27:69     - Unknown word (wireapp)    -- RaiseHandIcon} from '@wireapp/react-ui-kit';
 src/script/components/calling/VideoControls/VideoControls.tsx:28:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
-src/script/components/calling/VideoControls/VideoControls.tsx:64:10     - Unknown word (bluroff)    -- OFF = 'bluroff',
-src/script/components/calling/VideoControls/VideoControls.tsx:65:9      - Unknown word (bluron)     -- ON = 'bluron',
+src/script/components/calling/VideoControls/VideoControls.tsx:63:10     - Unknown word (bluroff)    -- OFF = 'bluroff',
+src/script/components/calling/VideoControls/VideoControls.tsx:64:9      - Unknown word (bluron)     -- ON = 'bluron',
 src/script/components/calling/VideoControls/VideoControlsSelect/VideoControlsSelect.tsx:22:24     - Unknown word (wireapp)    -- import {Select} from '@wireapp/react-ui-kit';
 src/script/components/calling/chooseScreen.test.tsx:21:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 src/script/components/calling/fullscreenVideoCall.test.tsx:23:38     - Unknown word (wireapp)    -- useMatchMedia, QUERY} from '@wireapp/react-ui-kit';
@@ -1407,8 +1413,8 @@ src/script/conversation/ConversationVerificationStateHandler/MLS/MLSStateHandler
 src/script/conversation/ConversationVerificationStateHandler/MLS/MLSStateHandler.ts:20:35     - Unknown word (wireapp)    -- CONVERSATION_TYPE} from '@wireapp/api-client/lib/conversation
 src/script/conversation/ConversationVerificationStateHandler/MLS/MLSStateHandler.ts:21:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
 src/script/conversation/ConversationVerificationStateHandler/MLS/MLSStateHandler.ts:22:39     - Unknown word (wireapp)    -- eiConversationState} from '@wireapp/core/lib/messagingProtocols
-src/script/conversation/ConversationVerificationStateHandler/MLS/MLSStateHandler.ts:236:15    - Unknown word (wireapp)    -- // Example: wireapp://%40hans.wurst@elna
 src/script/conversation/ConversationVerificationStateHandler/MLS/MLSStateHandler.ts:23:62     - Unknown word (wireapp)    -- stringifyQualifiedId} from '@wireapp/core/lib/util/qualifiedIdUtil
+src/script/conversation/ConversationVerificationStateHandler/MLS/MLSStateHandler.ts:241:15    - Unknown word (wireapp)    -- // Example: wireapp://%40hans.wurst@elna
 src/script/conversation/ConversationVerificationStateHandler/Proteus/ProteusStateHandler.ts:20:34     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
 src/script/conversation/ConversationVerificationStateHandler/Proteus/ProteusStateHandler.ts:22:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 src/script/conversation/ConversationVerificationStateHandler/Proteus/ProteusStateHandler.ts:24:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
