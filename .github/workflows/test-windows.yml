@@ -1,0 +1,45 @@
+name: ' 🧪 Test Windows'
+on:
+  workflow_dispatch:
+  pull_request:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'docs/**'
+
+permissions:
+  contents: read
+
+jobs:
+  test-os:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      matrix:
+        node-version:
+          - 18.x
+          - 20.x
+          - 22.x
+          - 23.x
+
+        os:
+          - windows-latest
+          # - macos-latest # Smoke test is enough for now.
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4.2.0
+        with:
+          registry-url: 'https://registry.npmjs.org'
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+
+      - name: Enable Corepack
+        run: |
+          npm i -g --force corepack
+          corepack enable
+          pnpm -v
+        shell: bash
