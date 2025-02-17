@@ -3,9 +3,9 @@ Repository: googleapis/google-cloud-cpp
 Url: https://github.com/googleapis/google-cloud-cpp.git
 Args: '["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]'
 Summary:
-  files: 19819
-  filesWithIssues: 7404
-  issues: 43147
+  files: 19818
+  filesWithIssues: 7403
+  issues: 43143
   errors: 0
 Errors: []
 
@@ -780,8 +780,7 @@ issues:
   - "google/cloud/storage/doc/setup-test-resources.md:99:1           KEYID       U       KEYID=... # e.g cloud-cpp"
   - "google/cloud/storage/doc/setup-test-resources.md:100:12         keyrings    U       gcloud kms keyrings create ${KR} --location"
   - "google/cloud/storage/doc/setup-test-resources.md:118:37         HMAC        U       Service Account for HMAC Keys"
-  - "google/cloud/storage/doc/storage-grpc.dox:110:14        GRPCPP      U       -DgRPC_BUILD_GRPCPP_OTEL_PLUGIN=ON"
-  - "google/cloud/storage/doc/storage-main.dox:49:87         Quickstarts     U       introduction#quickstarts 'GCS Quickstarts'"
+  - "google/cloud/storage/doc/storage-main.dox:48:87         Quickstarts     U       introduction#quickstarts 'GCS Quickstarts'"
   - "google/cloud/storage/doc/storage-mocking.dox:15:57          readobject      U       samples.cc mock successful readobject"
   - "google/cloud/storage/doc/storage-mocking.dox:29:57          writeobject     U       samples.cc mock successful writeobject"
   - "google/cloud/storage/examples/CMakeLists.txt:36:20          autoclass       U       storage_bucket_autoclass_samples.cc"
@@ -921,10 +920,10 @@ issues:
   - "protos/google/cloud/compute/v1/internal/common_003.proto:633:6          IRDMA           U       // IRDMA: IRDMA"
   - "protos/google/cloud/compute/v1/internal/common_003.proto:634:6          MRDMA           U       // MRDMA: MRDMA"
   - "protos/google/cloud/compute/v1/internal/common_003.proto:700:59         Preemptible     U       standard instances. Preemptible instances"
-  - "protos/google/cloud/compute/v1/internal/common_003.proto:736:27         cpus            U       optional int32 min_node_cpus = 4 [json_name = \"minNodeCpus"
-  - "protos/google/cloud/compute/v1/internal/common_003.proto:736:57         Cpus            U       json_name = \"minNodeCpus\"];"
-  - "protos/google/cloud/compute/v1/internal/common_003.proto:745:43         preemptible     U       behavior is MIGRATE. For preemptible instances, the default"
-  - "protos/google/cloud/compute/v1/internal/common_003.proto:823:53         Vtpm            U       [json_name = \"enableVtpm\"];"
+  - "protos/google/cloud/compute/v1/internal/common_003.proto:742:27         cpus            U       optional int32 min_node_cpus = 4 [json_name = \"minNodeCpus"
+  - "protos/google/cloud/compute/v1/internal/common_003.proto:742:57         Cpus            U       json_name = \"minNodeCpus\"];"
+  - "protos/google/cloud/compute/v1/internal/common_003.proto:751:43         preemptible     U       behavior is MIGRATE. For preemptible instances, the default"
+  - "protos/google/cloud/compute/v1/internal/common_003.proto:829:53         Vtpm            U       [json_name = \"enableVtpm\"];"
   - "protos/google/cloud/compute/v1/internal/common_004.proto:60:63          NETLB       U       which should be VM or NETLB. This is"
   - "protos/google/cloud/compute/v1/internal/common_006.proto:108:17         ssds    U       local_ssds = 2 [json_name = \"localSsds"
   - "protos/google/cloud/compute/v1/internal/common_006.proto:108:45         Ssds    U       [json_name = \"localSsds\"];"
@@ -934,16 +933,16 @@ issues:
   - "protos/google/cloud/compute/v1/internal/common_007.proto:90:51          emailid             U       federation. * `user:{emailid}`: An email address"
   - "protos/google/cloud/compute/v1/internal/common_008.proto:142:22         STOCKOUT    U       // REGION_RESOURCE_STOCKOUT (ERROR): Shown only"
   - "protos/google/cloud/compute/v1/internal/common_008.proto:143:26         stockout    U       there is a resource stockout in the chosen region"
-  - "protos/google/cloud/compute/v1/internal/common_012.proto:87:57          PORTMAP     U       created with GCE_VM_IP_PORTMAP endpoint type."
-  - "protos/google/cloud/compute/v1/internal/common_012.proto:243:15         appname     U       // foo1-dot-appname.appspot.com/v1 and foo"
+  - "protos/google/cloud/compute/v1/internal/common_012.proto:87:68          PORTMAP     U       created with GCE_VM_IP_PORTMAP"
+  - "protos/google/cloud/compute/v1/internal/common_012.proto:247:15         appname     U       // foo1-dot-appname.appspot.com/v1 and foo"
   - "protos/google/cloud/compute/v1/internal/common_013.proto:82:10          multipoint      U       // The multipoint bit of the BFD packet"
   - "protos/google/cloud/compute/v1/internal/common_013.proto:471:42         keepalive       U       seconds between BGP keepalive messages that are sent"
   - "protos/google/cloud/compute/v1/internal/common_013.proto:560:24         nexthop         U       optional string ipv4_nexthop_address = 23 [json_name"
   - "protos/google/cloud/compute/v1/internal/common_013.proto:560:63         Nexthop         U       3 [json_name = \"ipv4NexthopAddress\"];"
   - "protos/google/cloud/compute/v1/internal/common_013.proto:666:46         fdff            U       address (ULA) range from fdff:1::/64 with a mask length"
-  - "protos/google/cloud/compute/v1/internal/common_013.proto:1207:36        Nics            U       VM endpoints (i.e., Nics) that can use NAT."
+  - "protos/google/cloud/compute/v1/internal/common_013.proto:1206:36        Nics            U       VM endpoints (i.e., Nics) that can use NAT."
   - "protos/google/cloud/compute/v1/internal/common_015.proto:105:60         tollerate       U       workloads that cannot tollerate"
-  - "protos/google/cloud/compute/v1/internal/common_018.proto:40:44          VCPU    U       machine resources such as VCPU or MEMORY, listed in"
+  - "protos/google/cloud/compute/v1/internal/common_018.proto:43:55          VCPU    U       machine resources such as VCPU or MEMORY, listed in"
   - "protos/google/cloud/compute/v1/internal/common_019.proto:131:61         hostnames           U       They must be valid hostnames with"
   - "protos/google/cloud/compute/v1/internal/common_019.proto:318:16         Proxys              U       // TargetHttpProxys. Setting this true for"
   - "protos/google/cloud/compute/v1/internal/common_019.proto:380:18         retriable           U       // timeouts. - retriable-4xx: a retry is attempted"
@@ -964,7 +963,7 @@ issues:
   - "protos/google/cloud/compute/v1/internal/common_034.proto:32:8           sctp            U       // sctp) or the IP protocol"
   - "protos/google/cloud/compute/v1/internal/common_034.proto:117:17         myproject       U       // - projects/myproject/global/networks/my-network"
   - "protos/google/cloud/compute/v1/internal/common_038.proto:64:65          Policyfor       U       Always compute#firewallPolicyfor"
-  - "protos/google/cloud/compute/v1/internal/common_038.proto:137:6          listsof         U       // listsof FirewallPolicies"
+  - "protos/google/cloud/compute/v1/internal/common_038.proto:141:6          listsof         U       // listsof FirewallPolicies"
   - "protos/google/cloud/compute/v1/internal/common_041.proto:199:45         applifed            U       specified here will be applifed before those specified"
   - "protos/google/cloud/compute/v1/internal/common_041.proto:201:17         Loadbalancers       U       // applies to Loadbalancers that have their loadBalancing"
   - "protos/google/cloud/compute/v1/internal/common_041.proto:269:33         discontiguous       U       can be contiguous or discontiguous. For external forwarding"
@@ -988,7 +987,7 @@ issues:
   - "protos/google/cloud/compute/v1/internal/common_070.proto:92:24          peeringdb       U       / [Output Only] The peeringdb identifier for this"
   - "protos/google/cloud/compute/v1/internal/common_070.proto:93:13          netfac          U       // with a netfac type in peeringdb)."
   - "protos/google/cloud/compute/v1/internal/common_078.proto:36:4           loadbalancers       U       // loadbalancers."
-  - "protos/google/cloud/compute/v1/internal/common_083.proto:152:6          SUBINTERFACES       U       // SUBINTERFACES_ALLOWED:"
+  - "protos/google/cloud/compute/v1/internal/common_083.proto:150:6          SUBINTERFACES       U       // SUBINTERFACES_ALLOWED:"
   - "protos/google/cloud/compute/v1/internal/common_086.proto:78:75          RPCLB       U       This must be a valid gRPCLB"
   - "protos/google/cloud/compute/v1/internal/common_086.proto:88:75          Nanos       U       seconds to 3600 seconds. Nanos"
   - "protos/google/cloud/compute/v1/internal/common_091.proto:24:69          netblock    U       aggregated IP prefix or netblock"
