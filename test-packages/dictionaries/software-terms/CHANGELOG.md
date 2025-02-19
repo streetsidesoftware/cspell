@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## <small>8.17.4 (2025-02-19)</small>
+
+* ci: Workflow Bot -- Update ALL Dependencies (main) (#6920) ([e92597c](https://github.com/streetsidesoftware/cspell-dicts/commit/e92597c)), closes [#6920](https://github.com/streetsidesoftware/cspell-dicts/issues/6920)
+
 ## <small>8.17.3 (2025-01-28)</small>
 
 * chore: fix labeler ([ea51ed4](https://github.com/streetsidesoftware/cspell-dicts/commit/ea51ed4))
