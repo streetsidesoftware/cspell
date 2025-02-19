@@ -32,7 +32,8 @@ const defaultExcludeGlobs = ['node_modules/**'];
  */
 export async function globP(pattern: string | string[], options?: GlobOptions): Promise<string[]> {
     const cwd = options?.root || options?.cwd || process.cwd();
-    const ignore = typeof options?.ignore === 'string' ? [options.ignore] : options?.ignore;
+    const ignoreRaw = typeof options?.ignore === 'string' ? [options.ignore] : options?.ignore;
+    const ignore = ignoreRaw?.filter((g) => !g.startsWith('../'));
     const onlyFiles = options?.nodir;
     const dot = options?.dot;
     const patterns = typeof pattern === 'string' ? [pattern] : pattern;
@@ -44,6 +45,7 @@ export async function globP(pattern: string | string[], options?: GlobOptions): 
         absolute: true,
         followSymbolicLinks: false,
         expandDirectories: false,
+        // debug: true,
     });
 
     const compare = new Intl.Collator('en').compare;
