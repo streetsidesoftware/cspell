@@ -39,11 +39,6 @@ jobs:
         run: (Get-Command corepack.cmd).Path
         shell: pwsh
 
-      - name: Clear hosted toolcache for corepack
-        if: runner.os == 'Windows'
-        run: Remove-Item -Recurse -Force (Get-Command corepack.cmd).Path
-        shell: pwsh
-
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
 
@@ -53,6 +48,20 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
           node-version: ${{ matrix.node-version }}
           cache: 'pnpm'
+
+      - name: Where is corepack
+        run: where corepack
+        shell: bash
+
+      - name: Where is corepack power shell
+        if: runner.os == 'Windows'
+        run: (Get-Command corepack.cmd).Path
+        shell: pwsh
+
+      - name: Clear hosted toolcache for corepack
+        if: runner.os == 'Windows'
+        run: Remove-Item -Recurse -Force (Get-Command corepack.cmd).Path
+        shell: pwsh
 
       - name: Enable Corepack
         run: |
