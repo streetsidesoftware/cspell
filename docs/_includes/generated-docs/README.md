@@ -57,6 +57,7 @@ Some videos related to CSpell and the [Code Spell Checker](https://marketplace.v
 
   This will add the `cspell-cli` command, which is an alias of the `cspell` command.
 
+<!--
 ## Live Discussions
 
 Join us on:
@@ -64,6 +65,7 @@ Join us on:
 [<img src="./assets/images/zulip-icon-circle.svg" width="32">](https://cspell.zulipchat.com/)
 
 [cspell.zulipchat.com](https://cspell.zulipchat.com/)
+-->
 
 ## RFCs
 
