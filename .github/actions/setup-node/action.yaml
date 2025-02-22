@@ -23,14 +23,20 @@ runs:
       run: (Get-Command corepack.cmd).Path
       shell: pwsh
 
-    - name: Clear hosted toolcache for corepack
+    - name: Clear hosted tool-cache for corepack
+      # See: [actions/setup-node/issues/1222](https://github.com/actions/setup-node/issues/1222#issuecomment-2673608477)
       if: runner.os == 'Windows'
       run: Remove-Item -Recurse -Force (Get-Command corepack.cmd).Path
       shell: pwsh
 
-    - name: Enable Corepack
+    - name: Install Corepack
+      # See: [actions/setup-node/issues/1222](https://github.com/actions/setup-node/issues/1222)
       run: |
         npm i -g --force corepack
+      shell: bash
+
+    - name: Enable Corepack
+      run: |
         corepack enable
         pnpm -v
       shell: bash

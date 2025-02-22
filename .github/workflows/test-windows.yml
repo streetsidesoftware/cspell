@@ -58,7 +58,7 @@ jobs:
         run: (Get-Command corepack.cmd).Path
         shell: pwsh
 
-      - name: Clear hosted toolcache for corepack
+      - name: Clear hosted tool-cache for corepack
         if: runner.os == 'Windows'
         run: Remove-Item -Recurse -Force (Get-Command corepack.cmd).Path
         shell: pwsh
