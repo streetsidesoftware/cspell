@@ -30,6 +30,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Where is corepack
+        run: where corepack
+        shell: bash
+
+      - name: Where is corepack power shell
+        if: runner.os == 'Windows'
+        run: (Get-Command corepack.exe).Path
+        shell: pwsh
+
       - name: Clear hosted toolcache for corepack
         if: runner.os == 'Windows'
         run: Remove-Item -Recurse -Force "C:\hostedtoolcache\windows\node\$nodeVersion\x64\corepack*"
