@@ -41,7 +41,7 @@ jobs:
 
       - name: Clear hosted toolcache for corepack
         if: runner.os == 'Windows'
-        run: Remove-Item -Recurse -Force "C:\hostedtoolcache\windows\node\$nodeVersion\x64\corepack*"
+        run: Remove-Item -Recurse -Force (Get-Command corepack.cmd).Path
         shell: pwsh
 
       - name: Setup pnpm
