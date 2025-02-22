@@ -30,6 +30,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Clear hosted toolcache for corepack
+        if: runner.os == 'Windows'
+        run: Remove-Item -Recurse -Force "C:\hostedtoolcache\windows\node\$nodeVersion\x64\corepack*"
+        shell: pwsh
+
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
 
