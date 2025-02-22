@@ -865,6 +865,12 @@ importers:
         specifier: ^2.3.0
         version: 2.3.0
 
+  packages/cspell-tools-alias:
+    dependencies:
+      '@cspell/cspell-tools':
+        specifier: workspace:*
+        version: link:../cspell-tools
+
   packages/cspell-trie:
     dependencies:
       commander:
@@ -12784,7 +12790,7 @@ snapshots:
 
   '@docusaurus/react-loadable@6.0.0(react@18.3.1)':
     dependencies:
-      '@types/react': 19.0.10
+      '@types/react': 18.3.18
       react: 18.3.1
 
   '@docusaurus/remark-plugin-npm2yarn@3.7.0':

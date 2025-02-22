@@ -57,7 +57,7 @@
     "test-build-docs": "cd doc-generator && pnpm i && pnpm run test-build-docs",
     "test-integrations": "cd ./integration-tests && pnpm run integration-tests",
     "test-schema": "node ./test-packages/cspell-types/validate-schema/validate-schema.mjs",
-    "update-packages": "pnpm run update-packages-src && pnpm run update-packages-docs",
+    "update-packages": "pnpm run update-packages-src && pnpm run update-packages-docs && pnpm update-package-json",
     "update-packages-docs": "cd website && pnpm run update-packages",
     "update-packages-src": "pnpm -r up",
     "update-yarn": "pnpm -r run update-yarn",
