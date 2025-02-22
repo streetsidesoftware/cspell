@@ -4,8 +4,8 @@ Url: https://github.com/eslint/eslint
 Args: '[".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]'
 Summary:
   files: 2058
-  filesWithIssues: 303
-  issues: 1641
+  filesWithIssues: 302
+  issues: 1623
   errors: 0
 Errors: []
 
@@ -238,8 +238,6 @@ issues:
   - "lib/rules/no-useless-escape.js:33:52        Stvw            U       new Set(\"\\\\bcdDfnpPrsStvwWxu0123456789]\");"
   - "lib/rules/no-useless-escape.js:34:17        CHARCLASS       U       const REGEX_NON_CHARCLASS_ESCAPES = union(REGEX"
   - "lib/rules/no-useless-escape.js:40:13        CLASSSET        U       const REGEX_CLASSSET_CHARACTER_ESCAPES ="
-  - "lib/rules/object-shorthand.js:103:34        Longform    U       expectedLiteralMethodLongform: \"Expected longform"
-  - "lib/rules/object-shorthand.js:103:54        longform    U       eralMethodLongform: \"Expected longform method syntax for string"
   - "lib/rules/space-unary-ops.js:133:28         Doesnt (Doesn't)    U       function verifyWordDoesntHaveSpaces(node, firstToken"
   - "lib/rules/space-unary-ops.js:246:32         Dont                U       function verifyNonWordsDontHaveSpaces(node, firstToken"
   - "lib/rules/use-isnan.js:132:25       Suggestable     U       const isSuggestable = fixableOperators.has"
@@ -395,7 +393,6 @@ issues:
   - "tests/lib/rules/no-unused-vars.js:1284:32       fooz    U       code: \"/* global a$fooz,$foo */\\na$fooz;\","
   - "tests/lib/rules/no-warning-comments.js:37:92        aeiou       U       options: [{ terms: [\"[aeiou]\"], location: \"anywhere"
   - "tests/lib/rules/no-warning-comments.js:153:30       litera      U       code: \"// regex [litera|$]\","
-  - "tests/lib/rules/object-shorthand.js:22:7        LONGFORM    U       const LONGFORM_PROPERTY_ERROR = { messageId"
   - "tests/lib/rules/object-shorthand.js:222:30      afoob       U       code: \"var x = { afoob: function() {} }\","
   - "tests/lib/rules/prefer-arrow-callback.js:232:27         amet    U       dolor sit amet. */ {"
   - "tests/lib/rules/prefer-object-spread.js:212:112     butwhy              U       {}, { superNested: 'butwhy' })))\","
@@ -816,9 +813,6 @@ issuesSummary:
   - "text: lmnn, count: 1, files: 1,"
   - "text: loeader, count: 1, files: 1,"
   - "text: logicals, count: 1, files: 1,"
-  - "text: longform, count: 5, files: 1,"
-  - "text: Longform, count: 8, files: 2,"
-  - "text: LONGFORM, count: 5, files: 1,"
   - "text: longlonglong, count: 5, files: 1,"
   - "text: loopage, count: 5, files: 1,"
   - "text: loopfunc, count: 4, files: 1,"
