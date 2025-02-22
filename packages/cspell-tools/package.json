@@ -9,6 +9,7 @@
   "type": "module",
   "sideEffects": false,
   "bin": {
+    "cspell-tools": "bin.mjs",
     "cspell-tools-cli": "bin.mjs"
   },
   "scripts": {
@@ -34,6 +35,17 @@
     "List",
     "Compiler"
   ],
+  "exports": {
+    ".": {
+      "import": "./dist/app.js"
+    },
+    "./bin": {
+      "import": "./bin.mjs"
+    },
+    "./bin.mjs": {
+      "import": "./bin.mjs"
+    }
+  },
   "files": [
     "bin.mjs",
     "dist",

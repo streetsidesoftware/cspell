@@ -1,0 +1,50 @@
+{
+  "name": "cspell-tools",
+  "version": "8.17.4",
+  "description": "Tools to assist with the development of cSpell. Alias of @cspell/cspell-tools",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "type": "module",
+  "sideEffects": false,
+  "bin": {
+    "cspell-tools": "bin.mjs"
+  },
+  "scripts": {
+    "test": "pnpm test-shasum",
+    "test-shasum": "./bin.mjs shasum package.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/streetsidesoftware/cspell.git",
+    "directory": "packages/cspell-tools-cli"
+  },
+  "keywords": [
+    "cSpell",
+    "Word",
+    "List",
+    "Compiler"
+  ],
+  "files": [
+    "bin.mjs",
+    "!**/*.tsbuildInfo",
+    "!**/__mocks__",
+    "!**/*.test.*",
+    "!**/*.spec.*",
+    "!**/*.map"
+  ],
+  "author": "Jason Dent",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/cspell/labels/cspell-tools"
+  },
+  "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-tools#readme",
+  "dependencies": {
+    "@cspell/cspell-tools": "workspace:*"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "module": "bin.mjs"
+}
