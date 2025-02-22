@@ -36,7 +36,7 @@ jobs:
 
       - name: Where is corepack power shell
         if: runner.os == 'Windows'
-        run: (Get-Command corepack.exe).Path
+        run: (Get-Command corepack.cmd).Path
         shell: pwsh
 
       - name: Clear hosted toolcache for corepack
