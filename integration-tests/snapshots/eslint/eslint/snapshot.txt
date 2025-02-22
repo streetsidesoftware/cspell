@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: [".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 2058, Issues found: 1641 in 303 files.
+ CSpell: Files checked: 2058, Issues found: 1623 in 302 files.
  exit code: 1
 Makefile.js:128:88    - Unknown word (ined)       -- followed by the string "ined".
 Makefile.js:359:12    - Unknown word (gensite)    -- target.gensite();
@@ -258,8 +258,6 @@ lib/rules/no-useless-escape.js:33:45     - Unknown word (Dfnp)       -- ESCAPES 
 lib/rules/no-useless-escape.js:33:52     - Unknown word (Stvw)       -- new Set("\\bcdDfnpPrsStvwWxu0123456789]");
 lib/rules/no-useless-escape.js:34:17     - Unknown word (CHARCLASS)  -- const REGEX_NON_CHARCLASS_ESCAPES = union(REGEX
 lib/rules/no-useless-escape.js:40:13     - Unknown word (CLASSSET)   -- const REGEX_CLASSSET_CHARACTER_ESCAPES =
-lib/rules/object-shorthand.js:103:34    - Unknown word (Longform)   -- expectedLiteralMethodLongform: "Expected longform
-lib/rules/object-shorthand.js:103:54    - Unknown word (longform)   -- eralMethodLongform: "Expected longform method syntax for string
 lib/rules/space-unary-ops.js:133:28    - Unknown word (Doesnt)     -- function verifyWordDoesntHaveSpaces(node, firstToken
 lib/rules/space-unary-ops.js:246:32    - Unknown word (Dont)       -- function verifyNonWordsDontHaveSpaces(node, firstToken
 lib/rules/use-isnan.js:132:25    - Unknown word (Suggestable) -- const isSuggestable = fixableOperators.has
@@ -391,7 +389,6 @@ tests/lib/rules/no-unused-vars.js:1284:32   - Unknown word (fooz)       -- code:
 tests/lib/rules/no-warning-comments.js:153:30    - Unknown word (litera)     -- code: "// regex [litera|$]",
 tests/lib/rules/no-warning-comments.js:37:92     - Unknown word (aeiou)      -- options: [{ terms: ["[aeiou]"], location: "anywhere
 tests/lib/rules/object-shorthand.js:222:30    - Unknown word (afoob)      -- code: "var x = { afoob: function() {}  }",
-tests/lib/rules/object-shorthand.js:22:7      - Unknown word (LONGFORM)   -- const LONGFORM_PROPERTY_ERROR = { messageId
 tests/lib/rules/prefer-arrow-callback.js:232:27    - Unknown word (amet)       -- dolor sit amet. */ {
 tests/lib/rules/prefer-object-spread.js:212:112   - Unknown word (butwhy)     -- {}, { superNested: 'butwhy' })))",
 tests/lib/rules/prefer-object-spread.js:699:39    - Unknown word (somethingelse) -- import { Something as somethingelse } from 'foo';
