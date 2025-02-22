@@ -11,17 +11,22 @@ runs:
     - name: Setup pnpm
       uses: pnpm/action-setup@v4
 
-    - name: Clear hosted toolcache for corepack
-      if: runner.os == 'Windows'
-      run: Remove-Item -Recurse -Force "C:\hostedtoolcache\windows\node\$nodeVersion\x64\corepack*"
-      shell: pwsh
-
     - name: Use Node.js ${{ inputs.node-version }}
       uses: actions/setup-node@v4.2.0
       with:
         registry-url: 'https://registry.npmjs.org'
         node-version: ${{ inputs.node-version }}
         cache: 'pnpm'
+
+    - name: Where is corepack power shell
+      if: runner.os == 'Windows'
+      run: (Get-Command corepack.cmd).Path
+      shell: pwsh
+
+    - name: Clear hosted toolcache for corepack
+      if: runner.os == 'Windows'
+      run: Remove-Item -Recurse -Force (Get-Command corepack.cmd).Path
+      shell: pwsh
 
     - name: Enable Corepack
       run: |
