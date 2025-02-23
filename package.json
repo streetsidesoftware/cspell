@@ -9,7 +9,7 @@
     "cspell": "bin.mjs",
     "cspell-tools": "cspell-tools.mjs"
   },
-  "packageManager": "pnpm@9.15.0+sha512.76e2379760a4328ec4415815bcd6628dee727af3779aaa4c914e3944156c4299921a89f976381ee107d41f12cfa4b66681ca9c718f0668fa0831ed4c6d8ba56c",
+  "packageManager": "pnpm@10.4.1+sha512.c753b6c3ad7afa13af388fa6d808035a008e30ea9993f58c6663e2bc5ff21679aa834db094987129aa4d488b86df57f7b634981b2f827cdcacc698cc0cfb88af",
   "private": true,
   "scripts": {
     "bt": "pnpm run build && pnpm run test",
@@ -81,7 +81,9 @@
     "CI/CD"
   ],
   "pnpm": {
-    "overrides": {},
+    "overrides": {
+      "esbuild@<=0.24.2": ">=0.25.0"
+    },
     "patchedDependencies": {}
   },
   "author": "Jason Dent",
