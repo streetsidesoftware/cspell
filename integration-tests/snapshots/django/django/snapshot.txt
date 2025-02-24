@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["--issues-summary-report","**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2833, Issues found: 8203 in 908 files.
+ CSpell: Files checked: 2833, Issues found: 8205 in 908 files.
  exit code: 1
 django/__init__.py:12:26     - Unknown word (urlresolvers) -- Set the thread-local urlresolvers script prefix if `set
 django/apps/registry.py:134:40    - Unknown word (unconfigured) -- not ready" is due to unconfigured settings, accessing
@@ -287,6 +287,7 @@ django/contrib/auth/models.py:310:30    - Unknown word (ahas)       -- if await 
 django/contrib/auth/models.py:364:23    - Unknown word (auser)      -- return await _auser_get_permissions(self
 django/contrib/auth/models.py:376:23    - Unknown word (auser)      -- return await _auser_get_permissions(self
 django/contrib/auth/models.py:399:15    - Unknown word (ahas)       -- async def ahas_perm(self, perm, obj
+django/contrib/auth/password_validation.py:225:16    - Unknown word (unhexed)    -- passwords (unhexed, lowercased and deduplicated
 django/contrib/auth/password_validation.py:29:13     - Unknown word (klass)      -- klass = import_string(validator
 django/contrib/auth/password_validation.py:36:27     - Unknown word (klass)      -- validators.append(klass(**validator.get("OPTIONS
 django/contrib/auth/urls.py:27:17     - Unknown word (uidb)       -- "reset/<uidb64>/<token>/",
@@ -308,7 +309,7 @@ django/contrib/gis/db/backends/base/features.py:95:25     - Unknown word (aggr) 
 django/contrib/gis/db/backends/base/features.py:99:28     - Unknown word (aggr)          -- def supports_make_line_aggr(self):
 django/contrib/gis/db/backends/base/models.py:36:10     - Unknown word (semimajor)  -- (semimajor axis, semiminor axis
 django/contrib/gis/db/backends/base/models.py:36:26     - Unknown word (semiminor)  -- (semimajor axis, semiminor axis, and inverse flattening
-django/contrib/gis/db/backends/base/operations.py:136:43    - Unknown word (spatialrefsys) -- connection.features.has_spatialrefsys_table:
+django/contrib/gis/db/backends/base/operations.py:137:43    - Unknown word (spatialrefsys) -- connection.features.has_spatialrefsys_table:
 django/contrib/gis/db/backends/base/operations.py:13:5      - Unknown word (spatialite) -- spatialite = False
 django/contrib/gis/db/backends/mysql/base.py:10:27     - Unknown word (SQLGIS)     -- SchemaEditorClass = MySQLGISSchemaEditor
 django/contrib/gis/db/backends/mysql/base.py:6:23      - Unknown word (SQLGIS)     -- from .schema import MySQLGISSchemaEditor
@@ -325,11 +326,11 @@ django/contrib/gis/db/backends/oracle/models.py:48:25     - Unknown word (MDSYS)
 django/contrib/gis/db/backends/oracle/models.py:53:5      - Unknown word (wktext)     -- wktext = models.CharField(max
 django/contrib/gis/db/backends/oracle/models.py:65:21     - Unknown word (wktext)     -- return self.wktext
 django/contrib/gis/db/backends/oracle/operations.py:117:20    - Unknown word (SDOD)               -- "dwithin": SDODWithin(),
-django/contrib/gis/db/backends/oracle/operations.py:140:30    - Unknown word (clob)               -- convert_extent(self, clob):
-django/contrib/gis/db/backends/oracle/operations.py:141:12    - Unknown word (clob)               -- if clob:
-django/contrib/gis/db/backends/oracle/operations.py:145:48    - Unknown word (clob)               -- GEOSGeometry(memoryview(clob.read()))
-django/contrib/gis/db/backends/oracle/operations.py:170:17    - Unknown word (MDSYS)              -- return "MDSYS.SDO_GEOMETRY"
-django/contrib/gis/db/backends/oracle/operations.py:208:21    - Unknown word (unionagg)           -- agg_name = "unionagg" if agg_name.lower(
+django/contrib/gis/db/backends/oracle/operations.py:141:30    - Unknown word (clob)               -- convert_extent(self, clob):
+django/contrib/gis/db/backends/oracle/operations.py:142:12    - Unknown word (clob)               -- if clob:
+django/contrib/gis/db/backends/oracle/operations.py:146:48    - Unknown word (clob)               -- GEOSGeometry(memoryview(clob.read()))
+django/contrib/gis/db/backends/oracle/operations.py:171:17    - Unknown word (MDSYS)              -- return "MDSYS.SDO_GEOMETRY"
+django/contrib/gis/db/backends/oracle/operations.py:209:21    - Unknown word (unionagg)           -- agg_name = "unionagg" if agg_name.lower(
 django/contrib/gis/db/backends/oracle/operations.py:29:7      - Unknown word (SDOD)       -- class SDODWithin(SpatialOperator
 django/contrib/gis/db/backends/oracle/operations.py:45:20     - Unknown word (OVERLAPBDYDISJOINT) -- "TOUCH|OVERLAPBDYDISJOINT|OVERLAPBDYINTERSECT
 django/contrib/gis/db/backends/oracle/operations.py:46:30     - Unknown word (ANYINTERACT)        -- "CONTAINS|COVERS|ANYINTERACT|ON"
@@ -437,8 +438,8 @@ django/contrib/gis/db/backends/spatialite/schema.py:5:7       - Unknown word (Sp
 django/contrib/gis/db/models/aggregates.py:37:65     - Unknown word (SDOAGGRTYPE) -- t wrap filters with SDOAGGRTYPE().
 django/contrib/gis/db/models/aggregates.py:41:27     - Unknown word (SDOAGGRTYPE) -- function="SDOAGGRTYPE",
 django/contrib/gis/db/models/aggregates.py:56:22     - Unknown word (Geospatial)  -- "Geospatial aggregates only allowed
-django/contrib/gis/db/models/functions.py:228:31    - Unknown word (GMLGEOMETRY) -- else "SDO_UTIL.TO_GMLGEOMETRY"
-django/contrib/gis/db/models/functions.py:353:15    - Unknown word (Spatia)      -- # SpatiaLite returns NULL instead
+django/contrib/gis/db/models/functions.py:229:31    - Unknown word (GMLGEOMETRY) -- else "SDO_UTIL.TO_GMLGEOMETRY"
+django/contrib/gis/db/models/functions.py:354:15    - Unknown word (Spatia)      -- # SpatiaLite returns NULL instead
 django/contrib/gis/db/models/proxy.py:13:24     - Unknown word (klass)      -- def __init__(self, klass, field, load_func=None
 django/contrib/gis/db/models/proxy.py:18:15     - Unknown word (klass)      -- self._klass = klass
 django/contrib/gis/db/models/proxy.py:18:23     - Unknown word (klass)      -- self._klass = klass
@@ -1617,14 +1618,14 @@ django/db/models/fields/composite.py:32:69     - Unknown word (attnames)   -- fo
 django/db/models/fields/composite.py:35:25     - Unknown word (attnames)   -- attnames = self.attnames
 django/db/models/fields/composite.py:35:9      - Unknown word (attnames)   -- attnames = self.attnames
 django/db/models/fields/composite.py:36:22     - Unknown word (attnames)   -- length = len(attnames)
-django/db/models/fields/json.py:244:40    - Unknown word (uffff)      -- "JSON_EXISTS(%s, q'\uffff%s\uffff')"
-django/db/models/fields/json.py:244:48    - Unknown word (uffff)      -- EXISTS(%s, q'\uffff%s\uffff')"
-django/db/models/fields/json.py:341:7     - Unknown word (JSONI)      -- class JSONIContains(CaseInsensitiveMixin
-django/db/models/fields/json.py:351:27    - Unknown word (JSONI)      -- JSONField.register_lookup(JSONIContains)
-django/db/models/fields/json.py:385:36    - Unknown word (uffff)      -- "JSON_VALUE(%s, q'\uffff%s\uffff'),"
-django/db/models/fields/json.py:385:44    - Unknown word (uffff)      -- VALUE(%s, q'\uffff%s\uffff'),"
-django/db/models/fields/json.py:386:36    - Unknown word (uffff)      -- "JSON_QUERY(%s, q'\uffff%s\uffff' DISALLOW SCALARS
-django/db/models/fields/json.py:434:65    - Unknown word (MDEV)       -- and ->> operators (see MDEV-13594).
+django/db/models/fields/json.py:249:40    - Unknown word (uffff)      -- "JSON_EXISTS(%s, q'\uffff%s\uffff')"
+django/db/models/fields/json.py:249:48    - Unknown word (uffff)      -- EXISTS(%s, q'\uffff%s\uffff')"
+django/db/models/fields/json.py:346:7     - Unknown word (JSONI)      -- class JSONIContains(CaseInsensitiveMixin
+django/db/models/fields/json.py:356:27    - Unknown word (JSONI)      -- JSONField.register_lookup(JSONIContains)
+django/db/models/fields/json.py:390:36    - Unknown word (uffff)      -- "JSON_VALUE(%s, q'\uffff%s\uffff'),"
+django/db/models/fields/json.py:390:44    - Unknown word (uffff)      -- VALUE(%s, q'\uffff%s\uffff'),"
+django/db/models/fields/json.py:391:36    - Unknown word (uffff)      -- "JSON_QUERY(%s, q'\uffff%s\uffff' DISALLOW SCALARS
+django/db/models/fields/json.py:439:65    - Unknown word (MDEV)       -- and ->> operators (see MDEV-13594).
 django/db/models/fields/related.py:1284:51   - Unknown word (klass)      -- intermediary_model(field, klass):
 django/db/models/fields/related.py:1290:33   - Unknown word (klass)      -- model = resolve_relation(klass, field.remote_field
 django/db/models/fields/related.py:1291:23   - Unknown word (klass)      -- name = "%s_%s" % (klass._meta.object_name, field
@@ -1963,9 +1964,9 @@ django/templatetags/i18n.py:77:14     - Unknown word (asvar)      -- self.asvar 
 django/templatetags/i18n.py:77:22     - Unknown word (asvar)      -- self.asvar = asvar
 django/templatetags/i18n.py:97:17     - Unknown word (asvar)      -- if self.asvar:
 django/templatetags/i18n.py:98:26     - Unknown word (asvar)      -- context[self.asvar] = value
-django/templatetags/tz.py:14:7      - Unknown word (datetimeobject) -- class datetimeobject(datetime):
-django/templatetags/tz.py:56:32     - Unknown word (exceptionsm)    -- Filters must never raise exceptionsm, so catch everything
-django/templatetags/tz.py:75:14     - Unknown word (datetimeobject) -- result = datetimeobject(
+django/templatetags/tz.py:12:7      - Unknown word (datetimeobject) -- class datetimeobject(datetime):
+django/templatetags/tz.py:54:32     - Unknown word (exceptionsm)    -- Filters must never raise exceptionsm, so catch everything
+django/templatetags/tz.py:73:14     - Unknown word (datetimeobject) -- result = datetimeobject(
 django/test/client.py:1453:36   - Unknown word (asgi)          -- urlconf = getattr(response.asgi_request, "urlconf",
 django/test/client.py:1490:36   - Unknown word (ahandle)       -- response = await self._ahandle_redirects(
 django/test/client.py:1520:36   - Unknown word (ahandle)       -- response = await self._ahandle_redirects(
@@ -2478,57 +2479,57 @@ docs/_ext/djangodocs.py:54:46     - Unknown word (Cmdoption)    -- django-admin-
 docs/_ext/djangodocs.py:59:25     - Unknown word (djangohtml)   -- app.set_translator("djangohtml", DjangoHTMLTranslator
 docs/_ext/djangodocs.py:93:25     - Unknown word (versionmodified) -- node = addnodes.versionmodified()
 docs/_ext/github_links.py:35:22     - Unknown word (asname)     -- if alias.asname:
-docs/conf.py:104:12    - Unknown word (toctree)           -- # The root toctree document.
-docs/conf.py:140:1     - Unknown word (extlinks)          -- extlinks = {
-docs/conf.py:150:5     - Unknown word (extlinks)          -- extlinks["cve"] = ("https://www
-docs/conf.py:179:12    - Unknown word (sectionauthor)     -- # If true, sectionauthor and moduleauthor directives
-docs/conf.py:179:30    - Unknown word (moduleauthor)      -- true, sectionauthor and moduleauthor directives will be shown
-docs/conf.py:184:19    - Unknown word (trac)              -- pygments_style = "trac"
-docs/conf.py:188:1     - Unknown word (intersphinx)       -- intersphinx_mapping = {
-docs/conf.py:195:1     - Unknown word (intersphinx)       -- intersphinx_cache_limit = 90  #
-docs/conf.py:19:15     - Unknown word (doctree)    -- # pickle.dump(doctree, f, pickle.HIGHEST_PROTOCOL
-docs/conf.py:204:15    - Unknown word (djangodocs)        -- html_theme = "djangodocs"
-docs/conf.py:259:13    - Unknown word (sourcelink)        -- # html_show_sourcelink = True
-docs/conf.py:25:5      - Unknown word (setrecursionlimit) -- sys.setrecursionlimit(2000)
-docs/conf.py:270:12    - Unknown word (opensearch)        -- # html_use_opensearch = ''
-docs/conf.py:276:1     - Unknown word (htmlhelp)          -- htmlhelp_basename = "Djangodoc
-docs/conf.py:276:22    - Unknown word (Djangodoc)         -- htmlhelp_basename = "Djangodoc"
-docs/conf.py:278:1     - Unknown word (modindex)          -- modindex_common_prefix = ["django
-docs/conf.py:291:17    - Unknown word (xelatex)           -- latex_engine = "xelatex"
-docs/conf.py:292:11    - Unknown word (xindy)             -- latex_use_xindy = False
-docs/conf.py:295:6     - Unknown word (fontpkg)           -- "fontpkg": r"""
-docs/conf.py:296:10    - Unknown word (setmainfont)       -- \setmainfont{Symbola}
-docs/conf.py:296:22    - Unknown word (Symbola)           -- \setmainfont{Symbola}
-docs/conf.py:299:10    - Unknown word (usepackage)        -- \usepackage[UTF8]{ctex}
-docs/conf.py:299:27    - Unknown word (ctex)              -- \usepackage[UTF8]{ctex}
-docs/conf.py:304:10    - Unknown word (usepackage)        -- \usepackage{newunicodechar}
-docs/conf.py:305:29    - Unknown word (ensuremath)        -- \newunicodechar{π}{\ensuremath{\pi}}
-docs/conf.py:306:29    - Unknown word (ensuremath)        -- \newunicodechar{≤}{\ensuremath{\le}}
-docs/conf.py:307:29    - Unknown word (ensuremath)        -- \newunicodechar{≥}{\ensuremath{\ge}}
-docs/conf.py:308:29    - Unknown word (ensuremath)        -- \newunicodechar{♥}{\ensuremath{\heartsuit}}
-docs/conf.py:308:41    - Unknown word (heartsuit)         -- ewunicodechar{♥}{\ensuremath{\heartsuit}}
-docs/conf.py:309:29    - Unknown word (ensuremath)        -- \newunicodechar{…}{\ensuremath{\ldots}}
-docs/conf.py:335:14    - Unknown word (pagerefs)          -- # latex_show_pagerefs = False
-docs/conf.py:35:71     - Unknown word (directoy)          -- import it after the _ext directoy
-docs/conf.py:364:19    - Unknown word (startdocname)      -- # List of tuples (startdocname, targetname, title,
-docs/conf.py:364:33    - Unknown word (targetname)        -- tuples (startdocname, targetname, title, author, dir
-docs/conf.py:365:26    - Unknown word (toctree)           -- description, category, toctree_only)
-docs/conf.py:395:15    - Unknown word (djangodocs)        -- epub_theme = "djangodocs-epub"
-docs/conf.py:429:8     - Unknown word (tocdepth)          -- # epub_tocdepth = 3
-docs/conf.py:432:8     - Unknown word (tocdup)            -- # epub_tocdup = True
-docs/conf.py:434:33    - Unknown word (includehidden)     -- between 'default' and 'includehidden'.
-docs/conf.py:435:8     - Unknown word (tocscope)          -- # epub_tocscope = 'default'
-docs/conf.py:47:6      - Unknown word (djangodocs)        -- "djangodocs",
-docs/conf.py:48:17     - Unknown word (extlinks)          -- "sphinx.ext.extlinks",
-docs/conf.py:49:17     - Unknown word (intersphinx)       -- "sphinx.ext.intersphinx",
-docs/conf.py:50:17     - Unknown word (autosectionlabel)  -- "sphinx.ext.autosectionlabel",
-docs/conf.py:54:3      - Unknown word (Autosection)       -- # AutosectionLabel settings.
-docs/conf.py:57:1      - Unknown word (autosectionlabel)  -- autosectionlabel_prefix_document = True
-docs/conf.py:58:1      - Unknown word (autosectionlabel)  -- autosectionlabel_maxdepth = 2
-docs/conf.py:60:3      - Unknown word (Linkcheck)         -- # Linkcheck settings.
-docs/conf.py:61:1      - Unknown word (linkcheck)         -- linkcheck_ignore = [
-docs/conf.py:85:24     - Unknown word (sphinxcontrib)     -- extensions.append("sphinxcontrib.spelling")
-docs/conf.py:91:41     - Unknown word (wordlist)          -- filename = "spelling_wordlist"
+docs/conf.py:103:12    - Unknown word (toctree)           -- # The root toctree document.
+docs/conf.py:139:1     - Unknown word (extlinks)          -- extlinks = {
+docs/conf.py:149:5     - Unknown word (extlinks)          -- extlinks["cve"] = ("https://www
+docs/conf.py:178:12    - Unknown word (sectionauthor)     -- # If true, sectionauthor and moduleauthor directives
+docs/conf.py:178:30    - Unknown word (moduleauthor)      -- true, sectionauthor and moduleauthor directives will be shown
+docs/conf.py:183:19    - Unknown word (trac)              -- pygments_style = "trac"
+docs/conf.py:187:1     - Unknown word (intersphinx)       -- intersphinx_mapping = {
+docs/conf.py:18:15     - Unknown word (doctree)    -- # pickle.dump(doctree, f, pickle.HIGHEST_PROTOCOL
+docs/conf.py:194:1     - Unknown word (intersphinx)       -- intersphinx_cache_limit = 90  #
+docs/conf.py:203:15    - Unknown word (djangodocs)        -- html_theme = "djangodocs"
+docs/conf.py:24:5      - Unknown word (setrecursionlimit) -- sys.setrecursionlimit(2000)
+docs/conf.py:258:13    - Unknown word (sourcelink)        -- # html_show_sourcelink = True
+docs/conf.py:269:12    - Unknown word (opensearch)        -- # html_use_opensearch = ''
+docs/conf.py:275:1     - Unknown word (htmlhelp)          -- htmlhelp_basename = "Djangodoc
+docs/conf.py:275:22    - Unknown word (Djangodoc)         -- htmlhelp_basename = "Djangodoc"
+docs/conf.py:277:1     - Unknown word (modindex)          -- modindex_common_prefix = ["django
+docs/conf.py:290:17    - Unknown word (xelatex)           -- latex_engine = "xelatex"
+docs/conf.py:291:11    - Unknown word (xindy)             -- latex_use_xindy = False
+docs/conf.py:294:6     - Unknown word (fontpkg)           -- "fontpkg": r"""
+docs/conf.py:295:10    - Unknown word (setmainfont)       -- \setmainfont{Symbola}
+docs/conf.py:295:22    - Unknown word (Symbola)           -- \setmainfont{Symbola}
+docs/conf.py:298:10    - Unknown word (usepackage)        -- \usepackage[UTF8]{ctex}
+docs/conf.py:298:27    - Unknown word (ctex)              -- \usepackage[UTF8]{ctex}
+docs/conf.py:303:10    - Unknown word (usepackage)        -- \usepackage{newunicodechar}
+docs/conf.py:304:29    - Unknown word (ensuremath)        -- \newunicodechar{π}{\ensuremath{\pi}}
+docs/conf.py:305:29    - Unknown word (ensuremath)        -- \newunicodechar{≤}{\ensuremath{\le}}
+docs/conf.py:306:29    - Unknown word (ensuremath)        -- \newunicodechar{≥}{\ensuremath{\ge}}
+docs/conf.py:307:29    - Unknown word (ensuremath)        -- \newunicodechar{♥}{\ensuremath{\heartsuit}}
+docs/conf.py:307:41    - Unknown word (heartsuit)         -- ewunicodechar{♥}{\ensuremath{\heartsuit}}
+docs/conf.py:308:29    - Unknown word (ensuremath)        -- \newunicodechar{…}{\ensuremath{\ldots}}
+docs/conf.py:334:14    - Unknown word (pagerefs)          -- # latex_show_pagerefs = False
+docs/conf.py:34:71     - Unknown word (directoy)          -- import it after the _ext directoy
+docs/conf.py:363:19    - Unknown word (startdocname)      -- # List of tuples (startdocname, targetname, title,
+docs/conf.py:363:33    - Unknown word (targetname)        -- tuples (startdocname, targetname, title, author, dir
+docs/conf.py:364:26    - Unknown word (toctree)           -- description, category, toctree_only)
+docs/conf.py:394:15    - Unknown word (djangodocs)        -- epub_theme = "djangodocs-epub"
+docs/conf.py:428:8     - Unknown word (tocdepth)          -- # epub_tocdepth = 3
+docs/conf.py:431:8     - Unknown word (tocdup)            -- # epub_tocdup = True
+docs/conf.py:433:33    - Unknown word (includehidden)     -- between 'default' and 'includehidden'.
+docs/conf.py:434:8     - Unknown word (tocscope)          -- # epub_tocscope = 'default'
+docs/conf.py:46:6      - Unknown word (djangodocs)        -- "djangodocs",
+docs/conf.py:47:17     - Unknown word (extlinks)          -- "sphinx.ext.extlinks",
+docs/conf.py:48:17     - Unknown word (intersphinx)       -- "sphinx.ext.intersphinx",
+docs/conf.py:49:17     - Unknown word (autosectionlabel)  -- "sphinx.ext.autosectionlabel",
+docs/conf.py:53:3      - Unknown word (Autosection)       -- # AutosectionLabel settings.
+docs/conf.py:56:1      - Unknown word (autosectionlabel)  -- autosectionlabel_prefix_document = True
+docs/conf.py:57:1      - Unknown word (autosectionlabel)  -- autosectionlabel_maxdepth = 2
+docs/conf.py:59:3      - Unknown word (Linkcheck)         -- # Linkcheck settings.
+docs/conf.py:60:1      - Unknown word (linkcheck)         -- linkcheck_ignore = [
+docs/conf.py:84:24     - Unknown word (sphinxcontrib)     -- extensions.append("sphinxcontrib.spelling")
+docs/conf.py:90:41     - Unknown word (wordlist)          -- filename = "spelling_wordlist"
 scripts/manage_translations.py:138:19    - Unknown word (Transifex)   -- """Return the Transifex resource name"""
 scripts/manage_translations.py:13:36     - Unknown word (transifex)  -- fetch translations from transifex.com
 scripts/manage_translations.py:177:57    - Unknown word (djangojs)    -- locale=["en"], domain="djangojs")
@@ -3681,15 +3682,16 @@ tests/auth_tests/test_tokens.py:66:42     - Unknown word (tokentestuser)   -- ob
 tests/auth_tests/test_tokens.py:66:80     - Unknown word (testpw)          -- test2@example.com", "testpw")
 tests/auth_tests/test_tokens.py:89:42     - Unknown word (tokentestuser)   -- objects.create_user("tokentestuser", "test2@example.com
 tests/auth_tests/test_tokens.py:89:80     - Unknown word (testpw)          -- test2@example.com", "testpw")
-tests/auth_tests/test_validators.py:340:36    - Unknown word (René)       -- usernames = ["joe", "René", "ᴮᴵᴳᴮᴵᴿᴰ", "أحمد"
-tests/auth_tests/test_validators.py:340:44    - Unknown word (ᴮᴵᴳᴮᴵᴿᴰ)    -- usernames = ["joe", "René", "ᴮᴵᴳᴮᴵᴿᴰ", "أحمد"]
-tests/auth_tests/test_validators.py:340:55    - Unknown word (أحمد)       -- "René", "ᴮᴵᴳᴮᴵᴿᴰ", "أحمد"]
-tests/auth_tests/test_validators.py:344:14    - Unknown word (zerowidth)  -- "zerowidth\u200Bspace",
-tests/auth_tests/test_validators.py:345:14    - Unknown word (nonbreaking) -- "nonbreaking\u00A0space",
-tests/auth_tests/test_validators.py:347:14    - Unknown word (trailingnewline) -- "trailingnewline\u000A",
-tests/auth_tests/test_validators.py:362:14    - Unknown word (Éric)            -- "Éric",
-tests/auth_tests/test_validators.py:364:14    - Unknown word (أحمد)            -- "أحمد",
-tests/auth_tests/test_validators.py:365:14    - Unknown word (trailingnewline) -- "trailingnewline\n",
+tests/auth_tests/test_validators.py:278:36    - Unknown word (asdfjkl)    -- hexed_passwords = ["asdfjkl:", "&#2336:"]
+tests/auth_tests/test_validators.py:349:36    - Unknown word (René)       -- usernames = ["joe", "René", "ᴮᴵᴳᴮᴵᴿᴰ", "أحمد"
+tests/auth_tests/test_validators.py:349:44    - Unknown word (ᴮᴵᴳᴮᴵᴿᴰ)    -- usernames = ["joe", "René", "ᴮᴵᴳᴮᴵᴿᴰ", "أحمد"]
+tests/auth_tests/test_validators.py:349:55    - Unknown word (أحمد)       -- "René", "ᴮᴵᴳᴮᴵᴿᴰ", "أحمد"]
+tests/auth_tests/test_validators.py:353:14    - Unknown word (zerowidth)  -- "zerowidth\u200Bspace",
+tests/auth_tests/test_validators.py:354:14    - Unknown word (nonbreaking) -- "nonbreaking\u00A0space",
+tests/auth_tests/test_validators.py:356:14    - Unknown word (trailingnewline) -- "trailingnewline\u000A",
+tests/auth_tests/test_validators.py:371:14    - Unknown word (Éric)            -- "Éric",
+tests/auth_tests/test_validators.py:373:14    - Unknown word (أحمد)            -- "أحمد",
+tests/auth_tests/test_validators.py:374:14    - Unknown word (trailingnewline) -- "trailingnewline\n",
 tests/auth_tests/test_views.py:116:22    - Unknown word (uidb)       -- "uidb64": "aaaaaaa",
 tests/auth_tests/test_views.py:1267:21   - Unknown word (doesnt)         -- def test_logout_doesnt_cache(self):
 tests/auth_tests/test_views.py:1547:53   - Unknown word (rsaquo)         -- admin.username}</a>\n&rsaquo; Change password"
@@ -4005,22 +4007,22 @@ tests/db_functions/comparison/test_coalesce.py:9:56      - Unknown word (elit)  
 tests/db_functions/comparison/test_coalesce.py:9:69      - Unknown word (eiusmod)     -- adipiscing elit, sed do eiusmod
 tests/db_functions/comparison/test_nullif.py:14:57     - Unknown word (smithj)     -- John Smith", alias="smithj")
 tests/db_functions/comparison/test_nullif.py:24:19     - Unknown word (smithj)     -- ("smithj",),
-tests/db_functions/datetime/test_extract_trunc.py:166:27    - Unknown word (greaterthan) -- def test_extract_year_greaterthan_lookup(self):
-tests/db_functions/datetime/test_extract_trunc.py:1679:9    - Unknown word (melb)        -- melb = zoneinfo.ZoneInfo
-tests/db_functions/datetime/test_extract_trunc.py:1683:17   - Unknown word (melb)        -- day_melb=Extract("start_datetime
-tests/db_functions/datetime/test_extract_trunc.py:1683:62   - Unknown word (melb)        -- datetime", "day", tzinfo=melb),
-tests/db_functions/datetime/test_extract_trunc.py:1684:59   - Unknown word (melb)        -- datetime", "week", tzinfo=melb),
-tests/db_functions/datetime/test_extract_trunc.py:1685:13   - Unknown word (isoyear)     -- isoyear=ExtractIsoYear("start
-tests/db_functions/datetime/test_extract_trunc.py:1685:61   - Unknown word (melb)        -- start_datetime", tzinfo=melb),
-tests/db_functions/datetime/test_extract_trunc.py:1704:36   - Unknown word (isoyear)     -- assertEqual(utc_model.isoyear, 2015)
-tests/db_functions/datetime/test_extract_trunc.py:1722:37   - Unknown word (isoyear)     -- assertEqual(melb_model.isoyear, 2015)
-tests/db_functions/datetime/test_extract_trunc.py:1737:13   - Unknown word (nera)        -- ust_nera = zoneinfo.ZoneInfo
-tests/db_functions/datetime/test_extract_trunc.py:1737:48   - Unknown word (Nera)        -- zoneinfo.ZoneInfo("Asia/Ust-Nera")
-tests/db_functions/datetime/test_extract_trunc.py:1741:62   - Unknown word (nera)        -- datetime", tzinfo=ust_nera),
-tests/db_functions/datetime/test_extract_trunc.py:1748:36   - Unknown word (nera)        -- timezone.override(ust_nera):
-tests/db_functions/datetime/test_extract_trunc.py:1749:17   - Unknown word (nera)        -- ust_nera_model = qs.get()
-tests/db_functions/datetime/test_extract_trunc.py:1751:30   - Unknown word (nera)        -- self.assertEqual(ust_nera_model.hour, 9)
-tests/db_functions/datetime/test_extract_trunc.py:191:27    - Unknown word (lessthan)    -- def test_extract_year_lessthan_lookup(self):
+tests/db_functions/datetime/test_extract_trunc.py:165:27    - Unknown word (greaterthan) -- def test_extract_year_greaterthan_lookup(self):
+tests/db_functions/datetime/test_extract_trunc.py:1694:9    - Unknown word (melb)        -- melb = zoneinfo.ZoneInfo
+tests/db_functions/datetime/test_extract_trunc.py:1698:17   - Unknown word (melb)        -- day_melb=Extract("start_datetime
+tests/db_functions/datetime/test_extract_trunc.py:1698:62   - Unknown word (melb)        -- datetime", "day", tzinfo=melb),
+tests/db_functions/datetime/test_extract_trunc.py:1699:59   - Unknown word (melb)        -- datetime", "week", tzinfo=melb),
+tests/db_functions/datetime/test_extract_trunc.py:1700:13   - Unknown word (isoyear)     -- isoyear=ExtractIsoYear("start
+tests/db_functions/datetime/test_extract_trunc.py:1700:61   - Unknown word (melb)        -- start_datetime", tzinfo=melb),
+tests/db_functions/datetime/test_extract_trunc.py:1719:36   - Unknown word (isoyear)     -- assertEqual(utc_model.isoyear, 2015)
+tests/db_functions/datetime/test_extract_trunc.py:1737:37   - Unknown word (isoyear)     -- assertEqual(melb_model.isoyear, 2015)
+tests/db_functions/datetime/test_extract_trunc.py:1752:13   - Unknown word (nera)        -- ust_nera = zoneinfo.ZoneInfo
+tests/db_functions/datetime/test_extract_trunc.py:1752:48   - Unknown word (Nera)        -- zoneinfo.ZoneInfo("Asia/Ust-Nera")
+tests/db_functions/datetime/test_extract_trunc.py:1756:62   - Unknown word (nera)        -- datetime", tzinfo=ust_nera),
+tests/db_functions/datetime/test_extract_trunc.py:1763:36   - Unknown word (nera)        -- timezone.override(ust_nera):
+tests/db_functions/datetime/test_extract_trunc.py:1764:17   - Unknown word (nera)        -- ust_nera_model = qs.get()
+tests/db_functions/datetime/test_extract_trunc.py:1766:30   - Unknown word (nera)        -- self.assertEqual(ust_nera_model.hour, 9)
+tests/db_functions/datetime/test_extract_trunc.py:190:27    - Unknown word (lessthan)    -- def test_extract_year_lessthan_lookup(self):
 tests/db_functions/datetime/test_now.py:12:27     - Unknown word (amet)       -- Lorem ipsum dolor sit amet, consectetur adipiscing
 tests/db_functions/datetime/test_now.py:12:33     - Unknown word (consectetur) -- ipsum dolor sit amet, consectetur adipiscing elit, sed
 tests/db_functions/datetime/test_now.py:12:45     - Unknown word (adipiscing)  -- sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -4298,19 +4300,19 @@ tests/file_storage/test_generate_filename.py:10:7      - Unknown word (AWSS)    
 tests/file_storage/test_generate_filename.py:216:24    - Unknown word (awss)       -- def test_filefield_awss3_storage(self):
 tests/file_storage/test_generate_filename.py:222:19    - Unknown word (AWSS)       -- storage = AWSS3Storage()
 tests/file_storage/test_generate_filename.py:228:24    - Unknown word (AWSS)       -- expected_key = AWSS3Storage.prefix + folder
-tests/file_storage/tests.py:1073:63   - Unknown word (umasks)     -- only partially supports umasks and chmod."
-tests/file_storage/tests.py:1162:55   - Unknown word (español)    -- unicode.txt", ContentFile("español"))
-tests/file_storage/tests.py:297:19    - Unknown word (doesnt)     -- def test_save_doesnt_close(self):
-tests/file_storage/tests.py:582:73    - Unknown word (Trac)       -- than underscores, like Trac.
-tests/file_storage/tests.py:672:27    - Unknown word (longext)    -- name = "file_name.longext"
-tests/file_storage/tests.py:696:34    - Unknown word (stringio)   -- storage.save("tests/stringio", output)
-tests/file_storage/tests.py:697:52    - Unknown word (stringio)   -- storage.exists("tests/stringio"))
-tests/file_storage/tests.py:699:39    - Unknown word (stringio)   -- storage.open("tests/stringio") as f:
-tests/file_storage/tests.py:710:60    - Unknown word (AUFS)       -- filename length (e.g. AUFS has 242).
-tests/file_storage/tests.py:716:23    - Unknown word (pathconf)   -- return os.pathconf(dir_to_test, "PC_NAME
-tests/file_storage/tests.py:838:31    - Unknown word (longext)    -- filename = "short.longext"
-tests/file_storage/tests.py:947:14    - Unknown word (stringio)   -- def test_stringio(self):
-tests/file_storage/tests.py:954:34    - Unknown word (stringio)   -- storage.save("tests/stringio", output)
+tests/file_storage/tests.py:1094:63   - Unknown word (umasks)     -- only partially supports umasks and chmod."
+tests/file_storage/tests.py:1183:55   - Unknown word (español)    -- unicode.txt", ContentFile("español"))
+tests/file_storage/tests.py:306:19    - Unknown word (doesnt)     -- def test_save_doesnt_close(self):
+tests/file_storage/tests.py:591:73    - Unknown word (Trac)       -- than underscores, like Trac.
+tests/file_storage/tests.py:693:27    - Unknown word (longext)    -- name = "file_name.longext"
+tests/file_storage/tests.py:717:34    - Unknown word (stringio)   -- storage.save("tests/stringio", output)
+tests/file_storage/tests.py:718:52    - Unknown word (stringio)   -- storage.exists("tests/stringio"))
+tests/file_storage/tests.py:720:39    - Unknown word (stringio)   -- storage.open("tests/stringio") as f:
+tests/file_storage/tests.py:731:60    - Unknown word (AUFS)       -- filename length (e.g. AUFS has 242).
+tests/file_storage/tests.py:737:23    - Unknown word (pathconf)   -- return os.pathconf(dir_to_test, "PC_NAME
+tests/file_storage/tests.py:859:31    - Unknown word (longext)    -- filename = "short.longext"
+tests/file_storage/tests.py:968:14    - Unknown word (stringio)   -- def test_stringio(self):
+tests/file_storage/tests.py:975:34    - Unknown word (stringio)   -- storage.save("tests/stringio", output)
 tests/file_uploads/tests.py:377:49    - Unknown word (monkeybusiness) -- uploader We have to do some monkeybusiness here to construct
 tests/file_uploads/tests.py:688:14    - Unknown word (fileuploads)    -- def test_fileuploads_closed_at_request_end
 tests/file_uploads/views.py:57:5      - Unknown word (largefile)  -- largefile = request.FILES["file
@@ -4660,18 +4662,18 @@ tests/generic_relations_regress/tests.py:72:9      - Unknown word (oddrel)     -
 tests/generic_relations_regress/tests.py:73:48     - Unknown word (oddrel)     -- create(content_object=oddrel)
 tests/generic_relations_regress/tests.py:83:14     - Unknown word (textlink)   -- def test_textlink_filter(self):
 tests/generic_relations_regress/tests.py:87:41     - Unknown word (tlinks)     -- OddRelation2.objects.filter(tlinks__value="value"), [oddrel
-tests/generic_views/test_dates.py:195:45    - Unknown word (sortedbynamedec) -- client.get("/dates/books/sortedbynamedec/")
-tests/generic_views/test_dates.py:255:31    - Unknown word (Testement)       -- name="The New New Testement", pages=600, pubdate
+tests/generic_views/test_dates.py:193:45    - Unknown word (sortedbynamedec) -- client.get("/dates/books/sortedbynamedec/")
+tests/generic_views/test_dates.py:253:31    - Unknown word (Testement)       -- name="The New New Testement", pages=600, pubdate
 tests/generic_views/test_dates.py:26:27     - Unknown word (Bolaño)     -- name="Roberto Bolaño", slug="roberto-bolano
 tests/generic_views/test_dates.py:26:50     - Unknown word (bolano)     -- Bolaño", slug="roberto-bolano"
-tests/generic_views/test_dates.py:310:50    - Unknown word (sortedbypageandnamedec) -- get("/dates/books/2006/sortedbypageandnamedec/")
-tests/generic_views/test_dates.py:429:51    - Unknown word (Testement)              -- create(name="The New New Testement", pages=600, pubdate
-tests/generic_views/test_dates.py:594:51    - Unknown word (Testement)              -- create(name="The New New Testement", pages=600, pubdate
-tests/generic_views/test_dates.py:726:51    - Unknown word (Testement)              -- create(name="The New New Testement", pages=600, pubdate
-tests/generic_views/test_dates.py:842:57    - Unknown word (byslug)                 -- dates/books/2006/may/01/byslug/dreaming-in-code/")
-tests/generic_views/test_dates.py:855:31    - Unknown word (Testement)              -- name="The New New Testement", slug="new-new", pages
-tests/generic_views/test_dates.py:884:55    - Unknown word (nopk)                   -- dates/books/2008/oct/01/nopk/")
-tests/generic_views/test_dates.py:904:41    - Unknown word (numqueries)             -- object_custom_queryset_numqueries(self):
+tests/generic_views/test_dates.py:308:50    - Unknown word (sortedbypageandnamedec) -- get("/dates/books/2006/sortedbypageandnamedec/")
+tests/generic_views/test_dates.py:425:51    - Unknown word (Testement)              -- create(name="The New New Testement", pages=600, pubdate
+tests/generic_views/test_dates.py:584:51    - Unknown word (Testement)              -- create(name="The New New Testement", pages=600, pubdate
+tests/generic_views/test_dates.py:714:51    - Unknown word (Testement)              -- create(name="The New New Testement", pages=600, pubdate
+tests/generic_views/test_dates.py:824:57    - Unknown word (byslug)                 -- dates/books/2006/may/01/byslug/dreaming-in-code/")
+tests/generic_views/test_dates.py:837:31    - Unknown word (Testement)              -- name="The New New Testement", slug="new-new", pages
+tests/generic_views/test_dates.py:866:55    - Unknown word (nopk)                   -- dates/books/2008/oct/01/nopk/")
+tests/generic_views/test_dates.py:886:41    - Unknown word (numqueries)             -- object_custom_queryset_numqueries(self):
 tests/generic_views/test_detail.py:101:29    - Unknown word (bypkignoreslug) -- "/detail/author/bypkignoreslug/%s-scott-rosenberg/
 tests/generic_views/test_detail.py:110:29    - Unknown word (bypkandslug)    -- "/detail/author/bypkandslug/%s-roberto-bolano/"
 tests/generic_views/test_detail.py:110:52    - Unknown word (bolano)         -- bypkandslug/%s-roberto-bolano/" % self.author1.pk
@@ -4988,27 +4990,27 @@ tests/gis_tests/geoapp/test_functions.py:263:29    - Unknown word (spatialite) -
 tests/gis_tests/geoapp/test_functions.py:352:43    - Unknown word (tobytes)    -- FromWKB(Value(g.wkb.tobytes())),
 tests/gis_tests/geoapp/test_functions.py:353:43    - Unknown word (tobytes)    -- FromWKB(Value(g.wkb.tobytes()), srid=4326),
 tests/gis_tests/geoapp/test_functions.py:556:9     - Unknown word (ptown)      -- ptown = City.objects.annotate
-tests/gis_tests/geoapp/test_functions.py:617:15    - Unknown word (yfac)       -- xfac, yfac = 2, 3
-tests/gis_tests/geoapp/test_functions.py:617:9     - Unknown word (xfac)       -- xfac, yfac = 2, 3
-tests/gis_tests/geoapp/test_functions.py:618:55    - Unknown word (Spatia)     -- precision tolerance is for SpatiaLite
-tests/gis_tests/geoapp/test_functions.py:619:71    - Unknown word (xfac)       -- functions.Scale("mpoly", xfac, yfac))
-tests/gis_tests/geoapp/test_functions.py:619:77    - Unknown word (yfac)       -- Scale("mpoly", xfac, yfac))
-tests/gis_tests/geoapp/test_functions.py:624:56    - Unknown word (xfac)       -- assertAlmostEqual(c1[0] * xfac, c2[0], tol)
-tests/gis_tests/geoapp/test_functions.py:625:56    - Unknown word (yfac)       -- assertAlmostEqual(c1[1] * yfac, c2[1], tol)
-tests/gis_tests/geoapp/test_functions.py:642:28    - Unknown word (Marino)     -- # Boundary for San Marino, courtesy of Bjorn Sandvik
-tests/gis_tests/geoapp/test_functions.py:642:48    - Unknown word (Bjorn)      -- Marino, courtesy of Bjorn Sandvik of thematicmapping
-tests/gis_tests/geoapp/test_functions.py:642:54    - Unknown word (Sandvik)    -- Marino, courtesy of Bjorn Sandvik of thematicmapping.org
-tests/gis_tests/geoapp/test_functions.py:642:65    - Unknown word (thematicmapping) -- of Bjorn Sandvik of thematicmapping.org
-tests/gis_tests/geoapp/test_functions.py:654:42    - Unknown word (Marino)          -- objects.create(name="San Marino", mpoly=fromstr(wkt
-tests/gis_tests/geoapp/test_functions.py:662:48    - Unknown word (Marino)          -- country"."name" = 'San Marino';
-tests/gis_tests/geoapp/test_functions.py:667:32    - Unknown word (Marino)          -- .get(name="San Marino")
-tests/gis_tests/geoapp/test_functions.py:675:48    - Unknown word (Marino)          -- country"."name" = 'San Marino';
-tests/gis_tests/geoapp/test_functions.py:737:15    - Unknown word (yfac)            -- xfac, yfac = 5, -23
-tests/gis_tests/geoapp/test_functions.py:737:9     - Unknown word (xfac)            -- xfac, yfac = 5, -23
-tests/gis_tests/geoapp/test_functions.py:739:53    - Unknown word (xfac)            -- functions.Translate("mpoly", xfac, yfac)
-tests/gis_tests/geoapp/test_functions.py:739:59    - Unknown word (yfac)            -- Translate("mpoly", xfac, yfac)
-tests/gis_tests/geoapp/test_functions.py:745:52    - Unknown word (Spatia)          -- low precision is for SpatiaLite
-tests/gis_tests/geoapp/test_functions.py:768:15    - Unknown word (Spatia)          -- # SpatiaLite).
+tests/gis_tests/geoapp/test_functions.py:652:15    - Unknown word (yfac)       -- xfac, yfac = 2, 3
+tests/gis_tests/geoapp/test_functions.py:652:9     - Unknown word (xfac)       -- xfac, yfac = 2, 3
+tests/gis_tests/geoapp/test_functions.py:653:55    - Unknown word (Spatia)     -- precision tolerance is for SpatiaLite
+tests/gis_tests/geoapp/test_functions.py:654:71    - Unknown word (xfac)       -- functions.Scale("mpoly", xfac, yfac))
+tests/gis_tests/geoapp/test_functions.py:654:77    - Unknown word (yfac)       -- Scale("mpoly", xfac, yfac))
+tests/gis_tests/geoapp/test_functions.py:659:56    - Unknown word (xfac)       -- assertAlmostEqual(c1[0] * xfac, c2[0], tol)
+tests/gis_tests/geoapp/test_functions.py:660:56    - Unknown word (yfac)       -- assertAlmostEqual(c1[1] * yfac, c2[1], tol)
+tests/gis_tests/geoapp/test_functions.py:677:28    - Unknown word (Marino)     -- # Boundary for San Marino, courtesy of Bjorn Sandvik
+tests/gis_tests/geoapp/test_functions.py:677:48    - Unknown word (Bjorn)      -- Marino, courtesy of Bjorn Sandvik of thematicmapping
+tests/gis_tests/geoapp/test_functions.py:677:54    - Unknown word (Sandvik)    -- Marino, courtesy of Bjorn Sandvik of thematicmapping.org
+tests/gis_tests/geoapp/test_functions.py:677:65    - Unknown word (thematicmapping) -- of Bjorn Sandvik of thematicmapping.org
+tests/gis_tests/geoapp/test_functions.py:689:42    - Unknown word (Marino)          -- objects.create(name="San Marino", mpoly=fromstr(wkt
+tests/gis_tests/geoapp/test_functions.py:697:48    - Unknown word (Marino)          -- country"."name" = 'San Marino';
+tests/gis_tests/geoapp/test_functions.py:702:32    - Unknown word (Marino)          -- .get(name="San Marino")
+tests/gis_tests/geoapp/test_functions.py:710:48    - Unknown word (Marino)          -- country"."name" = 'San Marino';
+tests/gis_tests/geoapp/test_functions.py:772:15    - Unknown word (yfac)            -- xfac, yfac = 5, -23
+tests/gis_tests/geoapp/test_functions.py:772:9     - Unknown word (xfac)            -- xfac, yfac = 5, -23
+tests/gis_tests/geoapp/test_functions.py:774:53    - Unknown word (xfac)            -- functions.Translate("mpoly", xfac, yfac)
+tests/gis_tests/geoapp/test_functions.py:774:59    - Unknown word (yfac)            -- Translate("mpoly", xfac, yfac)
+tests/gis_tests/geoapp/test_functions.py:780:52    - Unknown word (Spatia)          -- low precision is for SpatiaLite
+tests/gis_tests/geoapp/test_functions.py:803:15    - Unknown word (Spatia)          -- # SpatiaLite).
 tests/gis_tests/geoapp/test_regress.py:32:17     - Unknown word (Åland)      -- name = "Åland Islands"
 tests/gis_tests/geoapp/test_regress.py:42:43     - Unknown word (aggr)       -- essDBFeature("supports_extent_aggr")
 tests/gis_tests/geoapp/test_regress.py:54:56     - Unknown word (Spatia)     -- converted properly, even on SpatiaLite. See #16408."
@@ -6342,15 +6344,15 @@ tests/migrations/test_state.py:1668:38   - Unknown word (rels)                 -
 tests/migrations/test_state.py:1669:34   - Unknown word (rels)                 -- assertEqual(comment_rels["supervisor"], new_field
 tests/migrations/test_state.py:1829:15   - Unknown word (searchablelocation)   -- ["searchablelocation_ptr", "name", "bus_routes
 tests/migrations/test_state.py:1842:60   - Unknown word (searchablelocation)   -- bases, ("migrations.searchablelocation",))
-tests/migrations/test_writer.py:1087:47   - Unknown word (keepends)   -- output.splitlines(keepends=True)[0], r"^[^#\s]
-tests/migrations/test_writer.py:1116:14   - Unknown word (enumfield)  -- # an enumfield that takes the enum
+tests/migrations/test_writer.py:1094:47   - Unknown word (keepends)   -- output.splitlines(keepends=True)[0], r"^[^#\s]
+tests/migrations/test_writer.py:1123:14   - Unknown word (enumfield)  -- # an enumfield that takes the enum
 tests/migrations/test_writer.py:323:37    - Unknown word (föobár)     -- assertSerializedEqual("föobár")
 tests/migrations/test_writer.py:331:41    - Unknown word (nbár)       -- assertSerializedEqual("föo\nbár")
 tests/migrations/test_writer.py:339:38    - Unknown word (lalalala)   -- assertSerializedEqual({"lalalala": ["yeah", "no", "maybe
-tests/migrations/test_writer.py:683:32    - Unknown word (someapp)    -- SettingsReference("someapp.model", "AUTH_USER_MODEL
-tests/migrations/test_writer.py:850:24    - Unknown word (frozensets) -- def test_serialize_frozensets(self):
+tests/migrations/test_writer.py:690:32    - Unknown word (someapp)    -- SettingsReference("someapp.model", "AUTH_USER_MODEL
+tests/migrations/test_writer.py:857:24    - Unknown word (frozensets) -- def test_serialize_frozensets(self):
 tests/model_fields/models.py:162:5     - Unknown word (nbfield)    -- nbfield = models.BooleanField
-tests/model_fields/models.py:444:5     - Unknown word (floatf)     -- floatf = models.FloatField
+tests/model_fields/models.py:458:5     - Unknown word (floatf)     -- floatf = models.FloatField
 tests/model_fields/models.py:79:7      - Unknown word (Choiceful)  -- class Choiceful(models.Model):
 tests/model_fields/test_booleanfield.py:116:28    - Unknown word (doesnt)     -- def test_boolean_field_doesnt_accept_empty_input(self
 tests/model_fields/test_booleanfield.py:126:9     - Unknown word (nullboolean) -- nullboolean = NullBooleanModel(nbfield
@@ -6369,13 +6371,13 @@ tests/model_fields/test_datetimefield.py:34:48     - Unknown word (datetim)    -
 tests/model_fields/test_datetimefield.py:38:34     - Unknown word (datetim)    -- assertEqual(obj.dt, datetim)
 tests/model_fields/test_durationfield.py:55:70     - Unknown word (durationmodel) -- model": "model_fields.durationmodel", '
 tests/model_fields/test_integerfield.py:273:51    - Unknown word (intput)     -- raises_error_on_invalid_intput(self):
-tests/model_fields/test_jsonfield.py:172:60    - Unknown word (jsonmodel)  -- model": "model_fields.jsonmodel", "pk": null}]'
-tests/model_fields/test_jsonfield.py:199:42    - Unknown word (nullablejsonmodel) -- model="model_fields.nullablejsonmodel">'
-tests/model_fields/test_jsonfield.py:834:21    - Unknown word (uffff'seq)         -- "escape\uffff'seq'\uffffue\uffff'nce"
-tests/model_fields/test_jsonfield.py:834:32    - Unknown word (uffffue)           -- "escape\uffff'seq'\uffffue\uffff'nce",
-tests/model_fields/test_jsonfield.py:834:40    - Unknown word (uffff'nce)         -- escape\uffff'seq'\uffffue\uffff'nce",
-tests/model_fields/test_jsonfield.py:856:47    - Unknown word (uffff'ca)          -- a,t{{{ch}}}e?d$\"'es\uffff'ca\uffff'pe",
-tests/model_fields/test_jsonfield.py:856:56    - Unknown word (uffff'pe)          -- }e?d$\"'es\uffff'ca\uffff'pe",
+tests/model_fields/test_jsonfield.py:178:60    - Unknown word (jsonmodel)  -- model": "model_fields.jsonmodel", "pk": null}]'
+tests/model_fields/test_jsonfield.py:205:42    - Unknown word (nullablejsonmodel) -- model="model_fields.nullablejsonmodel">'
+tests/model_fields/test_jsonfield.py:852:21    - Unknown word (uffff'seq)         -- "escape\uffff'seq'\uffffue\uffff'nce"
+tests/model_fields/test_jsonfield.py:852:32    - Unknown word (uffffue)           -- "escape\uffff'seq'\uffffue\uffff'nce",
+tests/model_fields/test_jsonfield.py:852:40    - Unknown word (uffff'nce)         -- escape\uffff'seq'\uffffue\uffff'nce",
+tests/model_fields/test_jsonfield.py:874:47    - Unknown word (uffff'ca)          -- a,t{{{ch}}}e?d$\"'es\uffff'ca\uffff'pe",
+tests/model_fields/test_jsonfield.py:874:56    - Unknown word (uffff'pe)          -- }e?d$\"'es\uffff'ca\uffff'pe",
 tests/model_fields/test_uuid.py:239:33    - Unknown word (uuidmodel)  -- model": "model_fields.uuidmodel", "pk": null}]'
 tests/model_fields/test_uuid.py:243:33    - Unknown word (nullableuuidmodel) -- model": "model_fields.nullableuuidmodel", "pk": null}]'
 tests/model_fields/test_uuid.py:330:34    - Unknown word (uuidchild)         -- assertIsInstance(gc.uuidchild_ptr_id, uuid.UUID)
@@ -7012,8 +7014,8 @@ tests/requests_tests/tests.py:59:32     - Unknown word (Fawful)     -- expected 
 tests/requests_tests/tests.py:73:26     - Unknown word (somepath)   -- request.path = "/somepath/"
 tests/requests_tests/tests.py:79:62     - Unknown word (somepath)   -- <HttpRequest: GET '/somepath/'>")
 tests/requests_tests/tests.py:91:14     - Unknown word (wsgirequest) -- def test_wsgirequest(self):
-tests/responses/test_cookie.py:62:58     - Unknown word (usegmt)     -- 22(future_datetime, usegmt=True),
-tests/responses/test_cookie.py:63:76     - Unknown word (usegmt)     -- datetime.replace(second=7), usegmt=True),
+tests/responses/test_cookie.py:58:58     - Unknown word (usegmt)     -- 22(future_datetime, usegmt=True),
+tests/responses/test_cookie.py:59:76     - Unknown word (usegmt)     -- datetime.replace(second=7), usegmt=True),
 tests/responses/test_fileresponse.py:112:26    - Unknown word (nosuchfile) -- (__file__ + "nosuchfile", ["application/octet
 tests/responses/test_fileresponse.py:114:33    - Unknown word (pynosuchfile) -- ("test_fileresponse.pynosuchfile", ["application/octet
 tests/responses/test_fileresponse.py:237:16    - Unknown word (mkfifo)       -- os.mkfifo(pipe_file)
@@ -7069,16 +7071,16 @@ tests/schema/tests.py:365:48    - Unknown word (repointing) -- out of FK order, 
 tests/schema/tests.py:3746:37   - Unknown word (Celine)        -- objects.create(name="Celine", height=None, weight
 tests/schema/tests.py:3877:30   - Unknown word (doesnt)        -- test_remove_db_index_doesnt_remove_custom_indexes
 tests/schema/tests.py:4748:34   - Unknown word (doesnt)        -- alter_field_default_doesnt_perform_queries(self
-tests/schema/tests.py:5240:25   - Unknown word (simplemodel)   -- "schema_simplemodel_field1_f07a3d6a",
-tests/schema/tests.py:5241:25   - Unknown word (simplemodel)   -- "schema_simplemodel_field1_f07a3d6a_like
-tests/schema/tests.py:5253:25   - Unknown word (simplemodel)   -- "schema_simplemodel_field1_f07a3d6a",
-tests/schema/tests.py:5254:25   - Unknown word (simplemodel)   -- "schema_simplemodel_field1_f07a3d6a_like
-tests/schema/tests.py:5266:25   - Unknown word (simplemodel)   -- "schema_simplemodel_field1_f07a3d6a",
-tests/schema/tests.py:5329:27   - Unknown word (dtob)          -- self.assertNotIn("dtob_auto_now", columns)
-tests/schema/tests.py:5330:27   - Unknown word (dtob)          -- self.assertNotIn("dtob_auto_now_add", columns
-tests/schema/tests.py:5356:9    - Unknown word (dtob)          -- dtob_auto_now = DateTimeField
-tests/schema/tests.py:5357:49   - Unknown word (dtob)          -- attributes_from_name("dtob_auto_now")
-tests/schema/tests.py:5357:9    - Unknown word (dtob)          -- dtob_auto_now.set_attributes
+tests/schema/tests.py:5258:25   - Unknown word (simplemodel)   -- "schema_simplemodel_field1_f07a3d6a",
+tests/schema/tests.py:5259:25   - Unknown word (simplemodel)   -- "schema_simplemodel_field1_f07a3d6a_like
+tests/schema/tests.py:5271:25   - Unknown word (simplemodel)   -- "schema_simplemodel_field1_f07a3d6a",
+tests/schema/tests.py:5272:25   - Unknown word (simplemodel)   -- "schema_simplemodel_field1_f07a3d6a_like
+tests/schema/tests.py:5284:25   - Unknown word (simplemodel)   -- "schema_simplemodel_field1_f07a3d6a",
+tests/schema/tests.py:5347:27   - Unknown word (dtob)          -- self.assertNotIn("dtob_auto_now", columns)
+tests/schema/tests.py:5348:27   - Unknown word (dtob)          -- self.assertNotIn("dtob_auto_now_add", columns
+tests/schema/tests.py:5374:9    - Unknown word (dtob)          -- dtob_auto_now = DateTimeField
+tests/schema/tests.py:5375:49   - Unknown word (dtob)          -- attributes_from_name("dtob_auto_now")
+tests/schema/tests.py:5375:9    - Unknown word (dtob)          -- dtob_auto_now.set_attributes
 tests/schema/tests.py:737:38    - Unknown word (TINYINT)    -- BooleanField are stored as TINYINT(1) on MySQL.
 tests/schema/tests.py:822:30    - Unknown word (mediumblob) -- test_add_binaryfield_mediumblob(self):
 tests/select_for_update/tests.py:157:44    - Unknown word (eucountry)  -- ['select_for_update_eucountry"."country_ptr_id']
