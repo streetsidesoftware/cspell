@@ -3,9 +3,9 @@ Repository: flutter/samples
 Url: https://github.com/flutter/samples
 Args: '["--issues-summary-report","--locale=en,en-GB,lorem","--exclude=**/*.{pbxproj,xcworkspace,xcworkspacedata,xcscheme,xcconfig,plist}","."]'
 Summary:
-  files: 2684
+  files: 2693
   filesWithIssues: 964
-  issues: 10150
+  issues: 10153
   errors: 0
 Errors: []
 
@@ -8300,9 +8300,9 @@ issues:
   - "material_3_demo/ios/Runner/Base.lproj/Main.storyboard:2:192         Autolayout      U       opertyAccessControl=\"none\" useAutolayout=\"YES\" useTraitCollections"
   - "material_3_demo/ios/Runner/Base.lproj/Main.storyboard:18:26         autoresizing    U       <autoresizingMask key=\"autoresizingMask"
   - "material_3_demo/ios/Runner/Base.lproj/Main.storyboard:18:48         autoresizing    U       autoresizingMask key=\"autoresizingMask\" widthSizable=\"YES"
-  - "material_3_demo/lib/component_screen.dart:2442:26       Uncontained     U       child: Text('Uncontained Carousel'),"
-  - "material_3_demo/lib/component_screen.dart:2461:26       Uncontained     U       child: Text('Uncontained Carousel with snapping"
-  - "material_3_demo/lib/constants.dart:53:3         seagrapes       U       seagrapes("
+  - "material_3_demo/lib/src/component_screen.dart:2442:26       Uncontained     U       child: Text('Uncontained Carousel'),"
+  - "material_3_demo/lib/src/component_screen.dart:2461:26       Uncontained     U       child: Text('Uncontained Carousel with snapping"
+  - "material_3_demo/lib/src/constants.dart:53:3         seagrapes       U       seagrapes("
   - "material_3_demo/linux/CMakeLists.txt:17:19          RPATH           U       set(CMAKE_INSTALL_RPATH \"$ORIGIN/lib\")"
   - "material_3_demo/linux/CMakeLists.txt:44:51          Werror          U       TARGET} PRIVATE -Wall -Werror)"
   - "material_3_demo/linux/CMakeLists.txt:46:74          NDEBUG          U       NOT:$<CONFIG:Debug>>:NDEBUG>\")"
@@ -9985,18 +9985,21 @@ issues:
   - "tool/android_ci_script.sh:78:32         Ptarget     U       app:assembleRelease -Ptarget=${APP_DIR}/test/perf"
   - "tool/android_ci_script.sh:81:52         ccbec       U       project test-lab-project-ccbec"
   - "tool/flutter_ci_script_beta.sh:28:6         deeplink            U       \"deeplink_store_example\""
-  - "tool/flutter_ci_script_beta.sh:38:12        domesticmouse       U       # TODO(domesticmouse): Angle brackets will"
-  - "tool/flutter_ci_script_beta.sh:41:19        varfont             U       \"experimental/varfont_shader_puzzle\""
-  - "tool/flutter_ci_script_beta.sh:43:19        firestore           U       \"flutter_maps_firestore\""
-  - "tool/flutter_ci_script_beta.sh:63:6         veggieseasons       U       \"veggieseasons\""
-  - "tool/flutter_ci_script_beta.sh:66:12        ewindmill           U       # TODO(ewindmill): dart:html is deprecated"
+  - "tool/flutter_ci_script_beta.sh:32:12        ewindmill           U       # TODO(ewindmill): package:html needs"
+  - "tool/flutter_ci_script_beta.sh:39:12        domesticmouse       U       # TODO(domesticmouse): Angle brackets will"
+  - "tool/flutter_ci_script_beta.sh:42:19        varfont             U       \"experimental/varfont_shader_puzzle\""
+  - "tool/flutter_ci_script_beta.sh:44:19        firestore           U       \"flutter_maps_firestore\""
+  - "tool/flutter_ci_script_beta.sh:62:12        ewindmill           U       # TODO(ewindmill): 'scribble' is deprecated"
+  - "tool/flutter_ci_script_beta.sh:65:6         veggieseasons       U       \"veggieseasons\""
+  - "tool/flutter_ci_script_beta.sh:68:12        ewindmill           U       # TODO(ewindmill): dart:html is deprecated"
   - "tool/flutter_ci_script_master.sh:28:6           deeplink            U       \"deeplink_store_example\""
-  - "tool/flutter_ci_script_master.sh:38:12          domesticmouse       U       # TODO(domesticmouse): Angle brackets will"
-  - "tool/flutter_ci_script_master.sh:41:19          varfont             U       \"experimental/varfont_shader_puzzle\""
-  - "tool/flutter_ci_script_master.sh:43:19          firestore           U       \"flutter_maps_firestore\""
-  - "tool/flutter_ci_script_master.sh:62:12          ewindmill           U       # TODO(ewindmill): 'scribble' is deprecated"
-  - "tool/flutter_ci_script_master.sh:65:6           veggieseasons       U       \"veggieseasons\""
-  - "tool/flutter_ci_script_master.sh:68:12          ewindmill           U       # TODO(ewindmill): dart:html is deprecated"
+  - "tool/flutter_ci_script_master.sh:32:12          ewindmill           U       # TODO(ewindmill): package:html needs"
+  - "tool/flutter_ci_script_master.sh:39:12          domesticmouse       U       # TODO(domesticmouse): Angle brackets will"
+  - "tool/flutter_ci_script_master.sh:42:19          varfont             U       \"experimental/varfont_shader_puzzle\""
+  - "tool/flutter_ci_script_master.sh:44:19          firestore           U       \"flutter_maps_firestore\""
+  - "tool/flutter_ci_script_master.sh:63:12          ewindmill           U       # TODO(ewindmill): 'scribble' is deprecated"
+  - "tool/flutter_ci_script_master.sh:66:6           veggieseasons       U       \"veggieseasons\""
+  - "tool/flutter_ci_script_master.sh:69:12          ewindmill           U       # TODO(ewindmill): dart:html is deprecated"
   - "tool/flutter_ci_script_shared.sh:23:36          pubspec     U       grep -q \"flutter:\" \"pubspec.yaml\"; then"
   - "tool/flutter_ci_script_stable.sh:28:6           deeplink            U       \"deeplink_store_example\""
   - "tool/flutter_ci_script_stable.sh:40:19          varfont             U       \"experimental/varfont_shader_puzzle\""
@@ -10974,7 +10977,7 @@ issuesSummary:
   - "text: Etosha, count: 3, files: 1,"
   - "text: EUICC, count: 9, files: 2,"
   - "text: evenodd, count: 2, files: 1,"
-  - "text: ewindmill, count: 4, files: 3,"
+  - "text: ewindmill, count: 7, files: 3,"
   - "text: exampleuser, count: 2, files: 2,"
   - "text: Exotique, count: 1, files: 1,"
   - "text: experiemental, count: 1, files: 1,"

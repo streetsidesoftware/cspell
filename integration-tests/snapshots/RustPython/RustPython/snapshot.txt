@@ -3,9 +3,9 @@ Repository: RustPython/RustPython
 Url: "https://github.com/RustPython/RustPython.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 622, Issues found: 1560 in 194 files.
+ CSpell: Files checked: 628, Issues found: 1572 in 194 files.
  exit code: 1
-Cargo.toml:172:1     - Unknown word (rustix)     -- rustix = { version = "0.38
+Cargo.toml:173:1     - Unknown word (rustix)     -- rustix = { version = "0.38
 Cargo.toml:82:62     - Unknown word (redoxer)    -- to compile/check with redoxer
 DEVELOPMENT.md:131:26    - Unknown word (subcrates)  -- src`: using the other subcrates to bring rustpython
 Dockerfile.bin:13:5      - Unknown word (RUSTPYTHONPATH) -- ENV RUSTPYTHONPATH /usr/lib/rustpython
@@ -647,9 +647,9 @@ src/settings.rs:280:14    - Unknown word (xoptions)                -- settings.x
 src/settings.rs:282:53    - Unknown word (PYTHONWARNDEFAULTENCODING) -- encoding |= bool_env_var("PYTHONWARNDEFAULTENCODING");
 src/settings.rs:331:37    - Unknown word (PYTHONHASHSEED)            -- seed = match env::var("PYTHONHASHSEED") {
 src/settings.rs:337:42    - Unknown word (PYTHONHASHSEED)            -- Fatal Python init error: PYTHONHASHSEED must be \"random\" or
-stdlib/Cargo.toml:102:1     - Unknown word (rustix)     -- rustix = { workspace = true
-stdlib/Cargo.toml:133:28    - Unknown word (Ndis)       -- 2_NetworkManagement_Ndis",
-stdlib/Cargo.toml:52:1      - Unknown word (puruspe)    -- puruspe = "0.3.0"
+stdlib/Cargo.toml:101:1     - Unknown word (rustix)     -- rustix = { workspace = true
+stdlib/Cargo.toml:132:28    - Unknown word (Ndis)       -- 2_NetworkManagement_Ndis",
+stdlib/Cargo.toml:52:1      - Unknown word (puruspe)    -- puruspe = "0.4.0"
 stdlib/src/binascii.rs:105:15    - Unknown word (CRCTAB)     -- const CRCTAB_HQX: [u16; 256] = [
 stdlib/src/binascii.rs:137:45    - Unknown word (CRCTAB)     -- crc << 8) & 0xFF00) ^ CRCTAB_HQX[((crc >> 8) as u
 stdlib/src/binascii.rs:331:28    - Unknown word (roken)      -- // roken case from broken python
@@ -707,19 +707,20 @@ stdlib/src/math.rs:499:13    - Unknown word (puruspe)    -- puruspe::gamma(x)
 stdlib/src/math.rs:511:13    - Unknown word (puruspe)    -- puruspe::ln_gamma(x)
 stdlib/src/math.rs:567:39    - Unknown word (ufrexp)     -- m, exp) = float_ops::ufrexp(value);
 stdlib/src/math.rs:639:17    - Unknown word (xsave)      -- let xsave = x;
-stdlib/src/math.rs:660:22    - Unknown word (nonfinite)  -- // a nonfinite x could arise either
-stdlib/src/math.rs:663:20    - Unknown word (summands)   -- // summands
-stdlib/src/math.rs:664:20    - Unknown word (xsave)      -- if xsave.is_finite() {
-stdlib/src/math.rs:667:20    - Unknown word (xsave)      -- if xsave.is_infinite() {
-stdlib/src/math.rs:668:32    - Unknown word (xsave)      -- inf_sum += xsave;
-stdlib/src/math.rs:670:32    - Unknown word (xsave)      -- special_sum += xsave;
-stdlib/src/math.rs:876:17    - Unknown word (absx)       -- let absx = x.abs();
-stdlib/src/math.rs:877:17    - Unknown word (absy)       -- let absy = y.abs();
-stdlib/src/math.rs:878:27    - Unknown word (absx)       -- let modulus = absx % absy;
-stdlib/src/math.rs:878:34    - Unknown word (absy)       -- let modulus = absx % absy;
-stdlib/src/math.rs:880:21    - Unknown word (absy)       -- let c = absy - modulus;
-stdlib/src/math.rs:884:50    - Unknown word (absx)       -- - 2.0 * fmod(0.5 * (absx - modulus), absy),
-stdlib/src/math.rs:884:67    - Unknown word (absy)       -- * (absx - modulus), absy),
+stdlib/src/math.rs:662:26    - Unknown word (nonfinite)  -- // a nonfinite x could arise either
+stdlib/src/math.rs:665:24    - Unknown word (summands)   -- // summands
+stdlib/src/math.rs:666:24    - Unknown word (xsave)      -- if xsave.is_finite() {
+stdlib/src/math.rs:671:24    - Unknown word (xsave)      -- if xsave.is_infinite() {
+stdlib/src/math.rs:672:36    - Unknown word (xsave)      -- inf_sum += xsave;
+stdlib/src/math.rs:674:36    - Unknown word (xsave)      -- special_sum += xsave;
+stdlib/src/math.rs:905:17    - Unknown word (absx)       -- let absx = x.abs();
+stdlib/src/math.rs:906:17    - Unknown word (absy)       -- let absy = y.abs();
+stdlib/src/math.rs:907:27    - Unknown word (absx)       -- let modulus = absx % absy;
+stdlib/src/math.rs:907:34    - Unknown word (absy)       -- let modulus = absx % absy;
+stdlib/src/math.rs:909:21    - Unknown word (absy)       -- let c = absy - modulus;
+stdlib/src/math.rs:913:50    - Unknown word (absx)       -- - 2.0 * fmod(0.5 * (absx - modulus), absy),
+stdlib/src/math.rs:913:67    - Unknown word (absy)       -- * (absx - modulus), absy),
+stdlib/src/math.rs:956:8     - Unknown word (sumprod)    -- fn sumprod(
 stdlib/src/mmap.rs:115:14    - Unknown word (DODUMP)     -- MADV_DODUMP, MADV_DOFORK, MADV_DONTDUMP
 stdlib/src/mmap.rs:115:27    - Unknown word (DOFORK)     -- MADV_DODUMP, MADV_DOFORK, MADV_DONTDUMP, MADV
 stdlib/src/mmap.rs:115:40    - Unknown word (DONTDUMP)   -- DODUMP, MADV_DOFORK, MADV_DONTDUMP, MADV_DONTFORK, MADV
@@ -966,16 +967,16 @@ vm/src/builtins/slice.rs:209:15    - Unknown word (XXPRIME)    -- const XXPRIME_
 vm/src/builtins/slice.rs:214:15    - Unknown word (XXPRIME)    -- const XXPRIME_5: PyUHash = if cfg
 vm/src/builtins/slice.rs:225:23    - Unknown word (XXPRIME)    -- let mut acc = XXPRIME_5;
 vm/src/builtins/slice.rs:231:54    - Unknown word (XXPRIME)    -- add(lane.wrapping_mul(XXPRIME_2));
-vm/src/builtins/str.rs:1582:21   - Unknown word (Ωppercases) -- ("Greek Ωppercases ...", "greek ωppercases
-vm/src/builtins/str.rs:1582:45   - Unknown word (ωppercases) -- ppercases ...", "greek ωppercases ..."),
-vm/src/builtins/str.rs:1583:21   - Unknown word (ῼitlecases) -- ("Greek ῼitlecases ...", "greek ῳitlecases
-vm/src/builtins/str.rs:1583:45   - Unknown word (ῳitlecases) -- itlecases ...", "greek ῳitlecases ..."),
-vm/src/builtins/str.rs:1594:16   - Unknown word (Titlecased) -- "A Titlecased Line",
-vm/src/builtins/str.rs:1595:17   - Unknown word (Titlecased) -- "A\nTitlecased Line",
-vm/src/builtins/str.rs:1596:16   - Unknown word (Titlecased) -- "A Titlecased, Line",
-vm/src/builtins/str.rs:1597:20   - Unknown word (Ωppercases) -- "Greek Ωppercases ...",
-vm/src/builtins/str.rs:1598:20   - Unknown word (ῼitlecases) -- "Greek ῼitlecases ...",
-vm/src/builtins/str.rs:1741:33   - Unknown word (rmatch)     -- (offset, _) in self.rmatch_indices(|c: char| c
+vm/src/builtins/str.rs:1667:33   - Unknown word (rmatch)     -- (offset, _) in self.rmatch_indices(|c: char| c
+vm/src/builtins/str.rs:1724:21   - Unknown word (Ωppercases) -- ("Greek Ωppercases ...", "greek ωppercases
+vm/src/builtins/str.rs:1724:45   - Unknown word (ωppercases) -- ppercases ...", "greek ωppercases ..."),
+vm/src/builtins/str.rs:1725:21   - Unknown word (ῼitlecases) -- ("Greek ῼitlecases ...", "greek ῳitlecases
+vm/src/builtins/str.rs:1725:45   - Unknown word (ῳitlecases) -- itlecases ...", "greek ῳitlecases ..."),
+vm/src/builtins/str.rs:1736:16   - Unknown word (Titlecased) -- "A Titlecased Line",
+vm/src/builtins/str.rs:1737:17   - Unknown word (Titlecased) -- "A\nTitlecased Line",
+vm/src/builtins/str.rs:1738:16   - Unknown word (Titlecased) -- "A Titlecased, Line",
+vm/src/builtins/str.rs:1739:20   - Unknown word (Ωppercases) -- "Greek Ωppercases ...",
+vm/src/builtins/str.rs:1740:20   - Unknown word (ῼitlecases) -- "Greek ῼitlecases ...",
 vm/src/builtins/str.rs:454:48    - Unknown word (cmpxchg)    -- len, we don't need a cmpxchg loop, since it'll always
 vm/src/builtins/str.rs:775:18    - Unknown word (titlecased) -- /// Return a titlecased version of the string
 vm/src/builtins/super.rs:239:4     - Unknown word (supercheck) -- fn supercheck(ty: PyTypeRef, obj:
@@ -996,7 +997,7 @@ vm/src/codecs.rs:159:45    - Unknown word (surrogateescape) -- surrogateescape_e
 vm/src/codecs.rs:171:15    - Unknown word (surrogatepass)   -- ("surrogatepass", methods[6].build_function
 vm/src/codecs.rs:172:15    - Unknown word (surrogateescape) -- ("surrogateescape", methods[7].build_function
 vm/src/codecs.rs:562:4     - Unknown word (surrogatepass)   -- fn surrogatepass_errors(err: PyObjectRef
-vm/src/codecs.rs:677:4     - Unknown word (surrogateescape) -- fn surrogateescape_errors(err: PyObjectRef
+vm/src/codecs.rs:682:4     - Unknown word (surrogateescape) -- fn surrogateescape_errors(err: PyObjectRef
 vm/src/coroutine.rs:100:35    - Unknown word (lasti)      -- value = if self.frame.lasti() > 0 {
 vm/src/coroutine.rs:28:12     - Unknown word (Coro)       -- pub struct Coro {
 vm/src/coroutine.rs:50:6      - Unknown word (Coro)       -- impl Coro {
@@ -1015,11 +1016,11 @@ vm/src/exceptions.rs:64:19     - Unknown word (excepthook) -- if let Ok(exceptho
 vm/src/exceptions.rs:64:57     - Unknown word (excepthook) -- sys_module.get_attr("excepthook", vm) {
 vm/src/exceptions.rs:66:34     - Unknown word (excepthook) -- if let Err(eh_exc) = excepthook.call((exc_type, exc
 vm/src/exceptions.rs:67:55     - Unknown word (excepthook) -- eh_exc, "Error in sys.excepthook:");
-vm/src/exceptions.rs:851:13    - Unknown word (excs)       -- let excs = &ctx.exceptions;
-vm/src/exceptions.rs:853:44    - Unknown word (excs)       -- eException::extend_class(ctx, excs.base_exception_type
-vm/src/exceptions.rs:856:54    - Unknown word (excs)       -- PyBaseExceptionGroup, ctx, excs.base_exception_group
-vm/src/exceptions.rs:857:61    - Unknown word (excs)       -- readonly_getset("message", excs.base_exception_group
-vm/src/exceptions.rs:858:67    - Unknown word (excs)       -- getset("exceptions", excs.base_exception_group
+vm/src/exceptions.rs:853:13    - Unknown word (excs)       -- let excs = &ctx.exceptions;
+vm/src/exceptions.rs:855:44    - Unknown word (excs)       -- eException::extend_class(ctx, excs.base_exception_type
+vm/src/exceptions.rs:858:54    - Unknown word (excs)       -- PyBaseExceptionGroup, ctx, excs.base_exception_group
+vm/src/exceptions.rs:859:61    - Unknown word (excs)       -- readonly_getset("message", excs.base_exception_group
+vm/src/exceptions.rs:860:67    - Unknown word (excs)       -- getset("exceptions", excs.base_exception_group
 vm/src/frame.rs:1022:27   - Unknown word (Coro)       -- // _PyCoro_GetAwaitableIter in
 vm/src/frame.rs:105:64    - Unknown word (lasti)      -- duplicate of FrameState.lasti, but it's faster to
 vm/src/frame.rs:108:16    - Unknown word (Lasti)      -- pub lasti: Lasti,
@@ -1049,7 +1050,7 @@ vm/src/function/protocol.rs:110:17    - Unknown word (iterfn)     -- let iterfn 
 vm/src/function/protocol.rs:111:16    - Unknown word (iterfn)     -- if iterfn.is_none() && !cls.has
 vm/src/function/protocol.rs:79:5      - Unknown word (iterfn)     -- iterfn: Option<crate::types
 vm/src/function/protocol.rs:95:43     - Unknown word (iterfn)     -- PyIter::new(match self.iterfn {
-vm/src/import.rs:197:27    - Unknown word (lasti)      -- traceback.lasti,
+vm/src/import.rs:196:27    - Unknown word (lasti)      -- traceback.lasti,
 vm/src/object/core.rs:1300:35   - Unknown word (dfghjkl)    -- obj = ctx.new_bytes(b"dfghjkl".to_vec());
 vm/src/object/traverse.rs:29:50     - Unknown word (Pyef)       -- a `PyObjectRef` or `Pyef<T>` in `traverse()`
 vm/src/object/traverse_object.rs:47:56     - Unknown word (maintaince) -- pointer* to a struct for maintaince weak ref, so no ownership
@@ -1082,7 +1083,11 @@ vm/src/stdlib/codecs.rs:358:38    - Unknown word (pycodecs)   -- module = vm.imp
 vm/src/stdlib/codecs.rs:363:27    - Unknown word (pycodecs)   -- macro_rules! delegate_pycodecs {
 vm/src/stdlib/codecs.rs:368:22    - Unknown word (pycodecs)   -- delegate_pycodecs(&FUNC, stringify!($name
 vm/src/stdlib/codecs.rs:374:18    - Unknown word (pycodecs)   -- delegate_pycodecs!(mbcs_encode, args,
-vm/src/stdlib/ctypes.rs:47:46     - Unknown word (Ldfguz)     -- CHARS: &str = "cbBhHiIlLdfguzZPqQ?";
+vm/src/stdlib/ctypes.rs:131:46    - Unknown word (Ldfguz)     -- CHARS: &str = "cbBhHiIlLdfguzZPqQ?";
+vm/src/stdlib/ctypes.rs:206:33    - Unknown word (HRESULT)    -- pyfunction(name = "_check_HRESULT")]
+vm/src/stdlib/ctypes.rs:207:18    - Unknown word (hresult)    -- pub fn check_hresult(_self: PyObjectRef,
+vm/src/stdlib/ctypes.rs:77:24     - Unknown word (HRESULT)    -- pub const FUNCFLAG_HRESULT: u32 = 0x2;
+vm/src/stdlib/ctypes.rs:79:24     - Unknown word (PYTHONAPI)  -- pub const FUNCFLAG_PYTHONAPI: u32 = 0x4;
 vm/src/stdlib/errno.rs:30:13     - Unknown word (WSABASEERR) -- WSABASEERR, WSADESCRIPTION_LEN
 vm/src/stdlib/errno.rs:30:25     - Unknown word (WSADESCRIPTION) -- WSABASEERR, WSADESCRIPTION_LEN, WSAEACCES, WSAEADDRINUSE
 vm/src/stdlib/errno.rs:30:45     - Unknown word (WSAEACCES)      -- WSADESCRIPTION_LEN, WSAEACCES, WSAEADDRINUSE, WSAEADDRNOTAV
@@ -1343,37 +1348,43 @@ vm/src/stdlib/sys.rs:964:9     - Unknown word (releaselevel)              -- rel
 vm/src/stdlib/sys.rs:974:13    - Unknown word (releaselevel)              -- releaselevel: version::RELEASELEVEL
 vm/src/stdlib/sys.rs:974:36    - Unknown word (RELEASELEVEL)              -- releaselevel: version::RELEASELEVEL,
 vm/src/stdlib/thread.rs:29:69     - Unknown word (illumos)    -- solaris", target_os = "illumos"))] {
-vm/src/stdlib/time.rs:103:30    - Unknown word (emscripten) -- not(any(target_os = "emscripten", target_os = "wasi
-vm/src/stdlib/time.rs:112:30    - Unknown word (emscripten) -- not(any(target_os = "emscripten", target_os = "wasi
-vm/src/stdlib/time.rs:129:30    - Unknown word (emscripten) -- not(any(target_os = "emscripten", target_os = "wasi
+vm/src/stdlib/time.rs:106:30    - Unknown word (emscripten) -- not(any(target_os = "emscripten", target_os = "wasi
+vm/src/stdlib/time.rs:115:30    - Unknown word (emscripten) -- not(any(target_os = "emscripten", target_os = "wasi
+vm/src/stdlib/time.rs:132:30    - Unknown word (emscripten) -- not(any(target_os = "emscripten", target_os = "wasi
 vm/src/stdlib/time.rs:24:19     - Unknown word (dstbias)    -- // pub static dstbias: std::ffi::c_int;
-vm/src/stdlib/time.rs:255:11    - Unknown word (CFMT)       -- const CFMT: &str = "%a %b %e %H
-vm/src/stdlib/time.rs:260:45    - Unknown word (CFMT)       -- time = instant.format(CFMT).to_string();
-vm/src/stdlib/time.rs:267:27    - Unknown word (CFMT)       -- Ok(instant.format(CFMT).to_string())
-vm/src/stdlib/time.rs:307:22    - Unknown word (emscripten) -- target_os = "emscripten",
-vm/src/stdlib/time.rs:323:65    - Unknown word (emscripten) -- wasm32", target_os = "emscripten")))]
-vm/src/stdlib/time.rs:324:24    - Unknown word (muldiv)     -- pub(super) fn time_muldiv(ticks: i64, mul: i6
-vm/src/stdlib/time.rs:325:13    - Unknown word (intpart)    -- let intpart = ticks / div;
-vm/src/stdlib/time.rs:328:10    - Unknown word (intpart)    -- (intpart * mul + remaining) as
-vm/src/stdlib/time.rs:343:18    - Unknown word (muldiv)     -- time_muldiv(t.tms_utime, SEC_TO
-vm/src/stdlib/time.rs:343:62    - Unknown word (muldiv)     -- TO_NS, freq) + time_muldiv(t.tms_stime, SEC_TO
-vm/src/stdlib/time.rs:367:22    - Unknown word (illumos)    -- target_os = "illumos",
-vm/src/stdlib/time.rs:475:22    - Unknown word (illumos)    -- target_os = "illumos",
-vm/src/stdlib/time.rs:483:22    - Unknown word (illumos)    -- target_os = "illumos",
-vm/src/stdlib/time.rs:645:22    - Unknown word (illumos)    -- target_os = "illumos",
-vm/src/stdlib/time.rs:656:48    - Unknown word (gethrvtime) -- nanos(unsafe { libc::gethrvtime() }))
-vm/src/stdlib/time.rs:660:22    - Unknown word (illumos)    -- target_os = "illumos",
-vm/src/stdlib/time.rs:698:28    - Unknown word (muldiv)     -- use super::decl::{time_muldiv, MS_TO_NS, SEC_TO_NS
-vm/src/stdlib/time.rs:751:38    - Unknown word (muldiv)     -- Duration::from_nanos(time_muldiv(
+vm/src/stdlib/time.rs:301:11    - Unknown word (CFMT)       -- const CFMT: &str = "%a %b %e %H
+vm/src/stdlib/time.rs:306:45    - Unknown word (CFMT)       -- time = instant.format(CFMT).to_string();
+vm/src/stdlib/time.rs:313:27    - Unknown word (CFMT)       -- Ok(instant.format(CFMT).to_string())
+vm/src/stdlib/time.rs:353:22    - Unknown word (emscripten) -- target_os = "emscripten",
+vm/src/stdlib/time.rs:369:65    - Unknown word (emscripten) -- wasm32", target_os = "emscripten")))]
+vm/src/stdlib/time.rs:370:24    - Unknown word (muldiv)     -- pub(super) fn time_muldiv(ticks: i64, mul: i6
+vm/src/stdlib/time.rs:371:13    - Unknown word (intpart)    -- let intpart = ticks / div;
+vm/src/stdlib/time.rs:374:10    - Unknown word (intpart)    -- (intpart * mul + remaining) as
+vm/src/stdlib/time.rs:389:18    - Unknown word (muldiv)     -- time_muldiv(t.tms_utime, SEC_TO
+vm/src/stdlib/time.rs:389:62    - Unknown word (muldiv)     -- TO_NS, freq) + time_muldiv(t.tms_stime, SEC_TO
+vm/src/stdlib/time.rs:413:22    - Unknown word (illumos)    -- target_os = "illumos",
+vm/src/stdlib/time.rs:521:22    - Unknown word (illumos)    -- target_os = "illumos",
+vm/src/stdlib/time.rs:529:22    - Unknown word (illumos)    -- target_os = "illumos",
+vm/src/stdlib/time.rs:691:22    - Unknown word (illumos)    -- target_os = "illumos",
+vm/src/stdlib/time.rs:702:48    - Unknown word (gethrvtime) -- nanos(unsafe { libc::gethrvtime() }))
+vm/src/stdlib/time.rs:706:22    - Unknown word (illumos)    -- target_os = "illumos",
+vm/src/stdlib/time.rs:744:28    - Unknown word (muldiv)     -- use super::decl::{time_muldiv, MS_TO_NS, SEC_TO_NS
+vm/src/stdlib/time.rs:797:38    - Unknown word (muldiv)     -- Duration::from_nanos(time_muldiv(
 vm/src/stdlib/typing.rs:164:34    - Unknown word (gigity)     -- println!("gigity");
 vm/src/stdlib/typing.rs:18:37     - Unknown word (pycodecs)   -- module = vm.import("_pycodecs", None, 0)?;
-vm/src/stdlib/winapi.rs:167:60    - Unknown word (STARTUPINFOEXW) -- :System::Threading::STARTUPINFOEXW =
 vm/src/stdlib/winapi.rs:17:15     - Unknown word (PCWSTR)     -- core::PCWSTR,
-vm/src/stdlib/winapi.rs:195:22    - Unknown word (getenvironment) -- .map(|m| getenvironment(m, vm))
-vm/src/stdlib/winapi.rs:275:8     - Unknown word (getenvironment) -- fn getenvironment(env: ArgMapping, vm
-vm/src/stdlib/winapi.rs:427:65    - Unknown word (PCWSTR)         -- LibraryLoader::LoadLibraryW(PCWSTR::from_raw(path.as_ptr
-vm/src/stdlib/winapi.rs:54:42     - Unknown word (STARTF)     -- REALTIME_PRIORITY_CLASS, STARTF_USESHOWWINDOW, STARTF
-vm/src/stdlib/winapi.rs:54:64     - Unknown word (STARTF)     -- STARTF_USESHOWWINDOW, STARTF_USESTDHANDLES,
+vm/src/stdlib/winapi.rs:199:60    - Unknown word (STARTUPINFOEXW) -- :System::Threading::STARTUPINFOEXW =
+vm/src/stdlib/winapi.rs:227:22    - Unknown word (getenvironment) -- .map(|m| getenvironment(m, vm))
+vm/src/stdlib/winapi.rs:322:8     - Unknown word (getenvironment) -- fn getenvironment(env: ArgMapping, vm
+vm/src/stdlib/winapi.rs:32:13     - Unknown word (LCMAP)      -- LCMAP_FULLWIDTH, LCMAP_HALFWIDTH
+vm/src/stdlib/winapi.rs:32:30     - Unknown word (LCMAP)      -- LCMAP_FULLWIDTH, LCMAP_HALFWIDTH, LCMAP_HIRAGANA
+vm/src/stdlib/winapi.rs:32:47     - Unknown word (LCMAP)      -- FULLWIDTH, LCMAP_HALFWIDTH, LCMAP_HIRAGANA, LCMAP_KATAKANA
+vm/src/stdlib/winapi.rs:32:63     - Unknown word (LCMAP)      -- HALFWIDTH, LCMAP_HIRAGANA, LCMAP_KATAKANA,
+vm/src/stdlib/winapi.rs:33:13     - Unknown word (LCMAP)      -- LCMAP_LINGUISTIC_CASING, LCMAP
+vm/src/stdlib/winapi.rs:474:65    - Unknown word (PCWSTR)         -- LibraryLoader::LoadLibraryW(PCWSTR::from_raw(path.as_ptr
+vm/src/stdlib/winapi.rs:504:36    - Unknown word (PCWSTR)         -- windows_sys::core::PCWSTR::from(name as _),
+vm/src/stdlib/winapi.rs:64:42     - Unknown word (STARTF)     -- REALTIME_PRIORITY_CLASS, STARTF_USESHOWWINDOW, STARTF
+vm/src/stdlib/winapi.rs:64:64     - Unknown word (STARTF)     -- STARTF_USESHOWWINDOW, STARTF_USESTDHANDLES,
 vm/src/types/slot.rs:138:28    - Unknown word (TPFLAGS)    -- CPython default: Py_TPFLAGS_HAVE_STACKLESS_EXTENSION
 vm/src/types/slot.rs:138:66    - Unknown word (TPFLAGS)    -- STACKLESS_EXTENSION | Py_TPFLAGS_HAVE_VERSION_TAG
 vm/src/types/slot.rs:142:43    - Unknown word (Subclassable) -- types created in Python. Subclassable and are a
@@ -1427,11 +1438,12 @@ vm/sre_engine/src/engine.rs:565:33    - Unknown word (gctx)       -- gctx.advanc
 vm/sre_engine/src/engine.rs:630:33    - Unknown word (atcode)     -- let atcode = SreAtCode::try_from
 vm/sre_engine/src/engine.rs:631:46    - Unknown word (atcode)     -- if at(req, &ctx, atcode) {
 vm/sre_engine/src/engine.rs:873:23    - Unknown word (coro)       -- continue 'coro;
-vm/sre_engine/tests/tests.rs:107:31    - Unknown word (r'ababc)    -- pattern p = re.compile(r'ababc+')
-vm/sre_engine/tests/tests.rs:111:38    - Unknown word (ababc)      -- mut state) = p.state("!ababc");
-vm/sre_engine/tests/tests.rs:121:37    - Unknown word (pythonpython) -- mut state) = p.state("pythonpython");
-vm/sre_engine/tests/tests.rs:141:37    - Unknown word (eeea)         -- mut state) = p.state("eeea");
-vm/sre_engine/tests/tests.rs:64:37     - Unknown word (axxzaz)     -- mut state) = p.state("axxzaz");
+vm/sre_engine/tests/tests.rs:108:31    - Unknown word (r'ababc)    -- pattern p = re.compile(r'ababc+')
+vm/sre_engine/tests/tests.rs:110:50    - Unknown word (ababc)      -- Pattern { pattern: "ababc+", code: &[14, 14,
+vm/sre_engine/tests/tests.rs:112:38    - Unknown word (ababc)      -- mut state) = p.state("!ababc");
+vm/sre_engine/tests/tests.rs:122:37    - Unknown word (pythonpython) -- mut state) = p.state("pythonpython");
+vm/sre_engine/tests/tests.rs:142:37    - Unknown word (eeea)         -- mut state) = p.state("eeea");
+vm/sre_engine/tests/tests.rs:65:37     - Unknown word (axxzaz)     -- mut state) = p.state("axxzaz");
 wapm.toml:11:25     - Unknown word (wasip)      -- source = "target/wasm32-wasip1/release/rustpython
 wasm/README.md:1:16      - Unknown word (webassembly) -- # Compiling to webassembly
 wasm/demo/package.json:34:21     - Unknown word (Liddle)     -- "author": "Ryan Liddle",
