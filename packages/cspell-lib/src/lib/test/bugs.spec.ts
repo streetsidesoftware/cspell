@@ -15,23 +15,19 @@ const timeout = 10_000;
 
 describe('Validate Against Bug Fixes', () => {
     function t(filename: string) {
-        test(
-            `validate ${filename}`,
-            async () => {
-                const fullFilename = path.resolve(samples, filename);
-                const ext = path.extname(filename);
-                const text = await fsp.readFile(fullFilename, 'utf8');
-                const languageIds = cspell.getLanguagesForExt(ext);
-                const settings = cspell.mergeSettings(
-                    await cspell.getDefaultBundledSettingsAsync(),
-                    await cspell.readSettings(configFile),
-                );
-                const fileSettings = cspell.combineTextAndLanguageSettings(settings, text, languageIds);
-                const result = await cspell.validateText(text, fileSettings);
-                expect(result).toMatchSnapshot();
-            },
-            { timeout },
-        );
+        test(`validate ${filename}`, { timeout }, async () => {
+            const fullFilename = path.resolve(samples, filename);
+            const ext = path.extname(filename);
+            const text = await fsp.readFile(fullFilename, 'utf8');
+            const languageIds = cspell.getLanguagesForExt(ext);
+            const settings = cspell.mergeSettings(
+                await cspell.getDefaultBundledSettingsAsync(),
+                await cspell.readSettings(configFile),
+            );
+            const fileSettings = cspell.combineTextAndLanguageSettings(settings, text, languageIds);
+            const result = await cspell.validateText(text, fileSettings);
+            expect(result).toMatchSnapshot();
+        });
     }
 
     files.forEach(t);

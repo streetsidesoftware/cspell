@@ -34,140 +34,109 @@ describe('Validate the Application', () => {
         vi.resetAllMocks();
     });
 
-    test(
-        'Tests running the application',
-        () => {
-            const files = ['text.txt'];
-            const options = sampleOptions;
-            const reporter = new InMemoryReporter();
-            const lint = App.lint(files, options, reporter);
-            return lint.then((result) => {
-                expect(reporter.errorCount).toBe(0);
-                expect(reporter.infoCount).toBeGreaterThan(0);
-                expect(reporter.debugCount).toBe(0);
-                expect(reporter.runResult).toEqual(result);
-                expect(result.files).toBe(1);
-                return;
-            });
-        },
-        testOptions,
-    );
+    test('Tests running the application', testOptions, async () => {
+        const files = ['text.txt'];
+        const options = sampleOptions;
+        const reporter = new InMemoryReporter();
+        const lint = App.lint(files, options, reporter);
+        const result = await lint;
+        expect(reporter.errorCount).toBe(0);
+        expect(reporter.infoCount).toBeGreaterThan(0);
+        expect(reporter.debugCount).toBe(0);
+        expect(reporter.runResult).toEqual(result);
+        expect(result.files).toBe(1);
+        return;
+    });
 
-    test(
-        'Tests running the application verbose',
-        () => {
-            const files = ['text.txt'];
-            const options = { ...sampleOptions, verbose: true };
-            const reporter = new InMemoryReporter();
-            const lint = App.lint(files, options, reporter);
-            return lint.then((result) => {
-                expect(reporter.errorCount).toBe(0);
-                expect(reporter.infoCount).toBeGreaterThan(0);
-                expect(reporter.debugCount).toBe(0);
-                expect(reporter.runResult).toEqual(result);
-                expect(result.files).toBe(1);
-                return;
-            });
-        },
-        testOptions,
-    );
+    test('Tests running the application verbose', testOptions, async () => {
+        const files = ['text.txt'];
+        const options = { ...sampleOptions, verbose: true };
+        const reporter = new InMemoryReporter();
+        const lint = App.lint(files, options, reporter);
+        const result = await lint;
+        expect(reporter.errorCount).toBe(0);
+        expect(reporter.infoCount).toBeGreaterThan(0);
+        expect(reporter.debugCount).toBe(0);
+        expect(reporter.runResult).toEqual(result);
+        expect(result.files).toBe(1);
+        return;
+    });
 
-    test(
-        'Tests running the application words only',
-        () => {
-            const files = ['text.txt'];
-            const options = { ...sampleOptions, wordsOnly: true, unique: true };
-            const reporter = new InMemoryReporter();
-            const lint = App.lint(files, options, reporter);
-            return lint.then((result) => {
-                expect(reporter.errorCount).toBe(0);
-                expect(reporter.infoCount).toBeGreaterThan(0);
-                expect(reporter.debugCount).toBe(0);
-                expect(reporter.runResult).toEqual(result);
-                expect(result.files).toBe(1);
-                return;
-            });
-        },
-        testOptions,
-    );
+    test('Tests running the application words only', testOptions, async () => {
+        const files = ['text.txt'];
+        const options = { ...sampleOptions, wordsOnly: true, unique: true };
+        const reporter = new InMemoryReporter();
+        const lint = App.lint(files, options, reporter);
+        const result = await lint;
+        expect(reporter.errorCount).toBe(0);
+        expect(reporter.infoCount).toBeGreaterThan(0);
+        expect(reporter.debugCount).toBe(0);
+        expect(reporter.runResult).toEqual(result);
+        expect(result.files).toBe(1);
+        return;
+    });
 
-    test(
-        'Tests running the trace command',
-        async () => {
-            const result = await trace(['apple'], {});
-            expect(result.length).toBeGreaterThan(2);
+    test('Tests running the trace command', testOptions, async () => {
+        const result = await trace(['apple'], {});
+        expect(result.length).toBeGreaterThan(2);
 
-            const foundIn = result.filter((r) => r.found);
-            expect(foundIn).toContainEqual(
+        const foundIn = result.filter((r) => r.found);
+        expect(foundIn).toContainEqual(
+            expect.objectContaining({
+                dictName: 'en_us',
+                dictSource: expect.stringContaining('en_US.trie.gz'),
+            }),
+        );
+        expect(foundIn.map((d) => d.dictName)).toEqual(expect.arrayContaining(['en-gb', 'en_us', 'companies']));
+    });
+
+    test('Tests running the trace command with missing dictionary', testOptions, async () => {
+        const result = await trace(['apple'], { config: 'samples/cspell-missing-dict.json' });
+        expect(result.length).toBeGreaterThan(2);
+        expect(result).toContainEqual(
+            expect.objectContaining({
+                dictName: 'missing-dictionary',
+                dictSource: expect.stringContaining('missing.txt'),
+            }),
+        );
+        const errors = result.filter((r) => r.errors).map((r) => r.errors);
+        expect(errors).toContainEqual(
+            expect.arrayContaining([
                 expect.objectContaining({
-                    dictName: 'en_us',
-                    dictSource: expect.stringContaining('en_US.trie.gz'),
+                    message: expect.stringContaining('failed to load'),
                 }),
-            );
-            expect(foundIn.map((d) => d.dictName)).toEqual(expect.arrayContaining(['en-gb', 'en_us', 'companies']));
-        },
-        testOptions,
-    );
+            ]),
+        );
+    });
 
-    test(
-        'Tests running the trace command with missing dictionary',
-        async () => {
-            const result = await trace(['apple'], { config: 'samples/cspell-missing-dict.json' });
-            expect(result.length).toBeGreaterThan(2);
-            expect(result).toContainEqual(
-                expect.objectContaining({
-                    dictName: 'missing-dictionary',
-                    dictSource: expect.stringContaining('missing.txt'),
-                }),
-            );
-            const errors = result.filter((r) => r.errors).map((r) => r.errors);
-            expect(errors).toContainEqual(
-                expect.arrayContaining([
-                    expect.objectContaining({
-                        message: expect.stringContaining('failed to load'),
-                    }),
-                ]),
-            );
-        },
-        testOptions,
-    );
+    test('Tests checkText', testOptions, async () => {
+        const result = await App.checkText('samples/latex/sample2.tex', {});
+        expect(result.items.length).toBeGreaterThan(50);
+        expect(result.items.map((i) => i.text).join('')).toBe(result.text);
+    });
 
-    test(
-        'Tests checkText',
-        async () => {
-            const result = await App.checkText('samples/latex/sample2.tex', {});
-            expect(result.items.length).toBeGreaterThan(50);
-            expect(result.items.map((i) => i.text).join('')).toBe(result.text);
-        },
-        testOptions,
-    );
+    test('running the application from stdin', testOptions, async () => {
+        const files = ['stdin'];
+        const options = { ...sampleOptions, wordsOnly: true, unique: true, debug: true };
+        const reporter = new InMemoryReporter();
 
-    test(
-        'running the application from stdin',
-        async () => {
-            const files = ['stdin'];
-            const options = { ...sampleOptions, wordsOnly: true, unique: true, debug: true };
-            const reporter = new InMemoryReporter();
-
-            // cspell:ignore texxt
-            const text = `
+        // cspell:ignore texxt
+        const text = `
                 This is some texxt to test out reding from stdin.
                 cspell:ignore badspellingintext
                 We can ignore values within the text: badspellingintext
             `;
-            vi.mocked(getStdin).mockImplementation((async () => text) as typeof getStdin);
+        vi.mocked(getStdin).mockImplementation((async () => text) as typeof getStdin);
 
-            const lint = App.lint(files, options, reporter);
-            const result = await lint;
-            expect(result.files).toBe(1);
-            expect(reporter.errorCount).toBe(0);
-            expect(reporter.infoCount).toBeGreaterThan(0);
-            expect(reporter.debugCount).toBeGreaterThan(0);
-            expect(reporter.issues.map((i) => i.text)).toEqual(['texxt']);
-            expect(reporter.runResult).toEqual(result);
-        },
-        testOptions,
-    );
+        const lint = App.lint(files, options, reporter);
+        const result = await lint;
+        expect(result.files).toBe(1);
+        expect(reporter.errorCount).toBe(0);
+        expect(reporter.infoCount).toBeGreaterThan(0);
+        expect(reporter.debugCount).toBeGreaterThan(0);
+        expect(reporter.issues.map((i) => i.text)).toEqual(['texxt']);
+        expect(reporter.runResult).toEqual(result);
+    });
 });
 
 async function trace(words: string[], options: TraceOptions) {

@@ -8,60 +8,50 @@ import { validateText } from '../validator.js';
 const timeout = 10_000;
 
 describe('Validate English', () => {
-    test(
-        'Tests suggestions',
-        async () => {
-            const ext = '.txt';
-            const languageIds = cspell.getLanguagesForExt(ext);
-            const settings = await cspell.getDefaultBundledSettingsAsync();
-            // cspell:ignore jansons
-            const text = '{ "name": "Jansons"}';
-            const fileSettings = cspell.combineTextAndLanguageSettings(settings, text, languageIds);
-            const finalSettings = cspell.finalizeSettings(fileSettings);
-            const dict = await getDictionary.getDictionary(finalSettings);
+    test('Tests suggestions', { timeout }, async () => {
+        const ext = '.txt';
+        const languageIds = cspell.getLanguagesForExt(ext);
+        const settings = await cspell.getDefaultBundledSettingsAsync();
+        // cspell:ignore jansons
+        const text = '{ "name": "Jansons"}';
+        const fileSettings = cspell.combineTextAndLanguageSettings(settings, text, languageIds);
+        const finalSettings = cspell.finalizeSettings(fileSettings);
+        const dict = await getDictionary.getDictionary(finalSettings);
 
-            const startTime = process.hrtime();
-            // cspell:ignore installsallnecessary
-            const results = dict.suggest(
-                'installsallnecessary',
-                createSuggestOptions(5, cspell.CompoundWordsMethod.SEPARATE_WORDS, 3),
-            );
-            const elapsed = elapsedTimeMsFrom(startTime);
-            console.log(`Elapsed time ${elapsed.toFixed(2)}ms`);
-            const sugs = results.map((a) => a.word);
-            expect(sugs).toEqual(expect.arrayContaining(['installs all necessary']));
-        },
-        { timeout },
-    );
+        const startTime = process.hrtime();
+        // cspell:ignore installsallnecessary
+        const results = dict.suggest(
+            'installsallnecessary',
+            createSuggestOptions(5, cspell.CompoundWordsMethod.SEPARATE_WORDS, 3),
+        );
+        const elapsed = elapsedTimeMsFrom(startTime);
+        console.log(`Elapsed time ${elapsed.toFixed(2)}ms`);
+        const sugs = results.map((a) => a.word);
+        expect(sugs).toEqual(expect.arrayContaining(['installs all necessary']));
+    });
 
-    test(
-        'validate some text',
-        async () => {
-            const ext = '.txt';
-            const languageIds = cspell.getLanguagesForExt(ext);
-            const settings = { ...(await cspell.getDefaultBundledSettingsAsync()), words: ['é', 'î'] };
-            const text = `
+    test('validate some text', { timeout }, async () => {
+        const ext = '.txt';
+        const languageIds = cspell.getLanguagesForExt(ext);
+        const settings = { ...(await cspell.getDefaultBundledSettingsAsync()), words: ['é', 'î'] };
+        const text = `
         Here are some words.
         thing and cpp are words.
         é'thing and î'cpp are ok.
         `;
-            const fileSettings = cspell.combineTextAndLanguageSettings(settings, text, languageIds);
-            const finalSettings = cspell.finalizeSettings(fileSettings);
+        const fileSettings = cspell.combineTextAndLanguageSettings(settings, text, languageIds);
+        const finalSettings = cspell.finalizeSettings(fileSettings);
 
-            const r = await validateText(text, finalSettings);
-            expect(r).toEqual([]);
-        },
-        { timeout },
-    );
+        const r = await validateText(text, finalSettings);
+        expect(r).toEqual([]);
+    });
 
     // cspell:ignore latviešu
-    test(
-        'validate some json',
-        async () => {
-            const ext = '.json';
-            const languageIds = cspell.getLanguagesForExt(ext);
-            const settings = { ...(await cspell.getDefaultBundledSettingsAsync()) };
-            const text = `
+    test('validate some json', { timeout }, async () => {
+        const ext = '.json';
+        const languageIds = cspell.getLanguagesForExt(ext);
+        const settings = { ...(await cspell.getDefaultBundledSettingsAsync()) };
+        const text = `
         {
             'bidi': False,
             'code': 'lv',
@@ -70,23 +60,19 @@ describe('Validate English', () => {
         }
         `.normalize('NFD');
 
-            const fileSettings = cspell.combineTextAndLanguageSettings(settings, text, languageIds);
-            const finalSettings = cspell.finalizeSettings(fileSettings);
+        const fileSettings = cspell.combineTextAndLanguageSettings(settings, text, languageIds);
+        const finalSettings = cspell.finalizeSettings(fileSettings);
 
-            const r = await validateText(text, finalSettings);
-            expect(r.map((t) => t.text)).toEqual(['latviešu'.normalize('NFD')]);
-        },
-        { timeout },
-    );
+        const r = await validateText(text, finalSettings);
+        expect(r.map((t) => t.text)).toEqual(['latviešu'.normalize('NFD')]);
+    });
 
-    test(
-        'validate compound words',
-        async () => {
-            const ext = '.py';
-            const languageIds = cspell.getLanguagesForExt(ext);
-            const settings = { ...(await cspell.getDefaultBundledSettingsAsync()) };
-            // cspell:ignore setsid isinstance
-            const text = `
+    test('validate compound words', { timeout }, async () => {
+        const ext = '.py';
+        const languageIds = cspell.getLanguagesForExt(ext);
+        const settings = { ...(await cspell.getDefaultBundledSettingsAsync()) };
+        // cspell:ignore setsid isinstance
+        const text = `
         setsid = 'R'
 
         def to_roman(number):
@@ -105,14 +91,12 @@ describe('Validate English', () => {
             return setsid + r
         `;
 
-            const fileSettings = cspell.combineTextAndLanguageSettings(settings, text, languageIds);
-            const finalSettings = cspell.finalizeSettings(fileSettings);
+        const fileSettings = cspell.combineTextAndLanguageSettings(settings, text, languageIds);
+        const finalSettings = cspell.finalizeSettings(fileSettings);
 
-            const r = await validateText(text, finalSettings);
-            expect(r.map((a) => a.text)).toEqual(['setsid', 'setsid']);
-        },
-        { timeout },
-    );
+        const r = await validateText(text, finalSettings);
+        expect(r.map((a) => a.text)).toEqual(['setsid', 'setsid']);
+    });
 });
 
 function elapsedTimeMsFrom(relativeTo: [number, number]): number {
