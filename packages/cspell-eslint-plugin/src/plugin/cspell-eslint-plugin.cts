@@ -5,6 +5,7 @@ import type { Program } from 'estree';
 import { createSyncFn } from 'synckit';
 
 import { getDefaultLogger } from '../common/logger.cjs';
+import type { Options } from '../common/options.cjs';
 import { optionsSchema as schema } from '../generated/schema.cjs';
 import type { Issue, SpellCheckFn } from '../worker/types.mjs';
 import { normalizeOptions } from './defaultCheckOptions.cjs';
@@ -37,7 +38,7 @@ const messages = {
 type Messages = typeof messages;
 type MessageIds = keyof Messages;
 
-const ruleMeta: Rule.RuleMetaData = {
+const ruleMeta: Rule.RuleModule['meta'] = {
     docs: {
         description: 'CSpell spellchecker',
         category: 'Possible Errors',
@@ -59,7 +60,7 @@ function nullFix(): null {
 function create(context: Rule.RuleContext): Rule.RuleListener {
     const logger = getDefaultLogger();
     const log = logger.log;
-    const options = normalizeOptions(context.options[0], context.cwd || context.getCwd());
+    const options = normalizeOptions(context.options[0] as Options, context.cwd || context.getCwd());
     const autoFix = options.autoFix;
     isDebugMode = options.debugMode ?? isDebugMode;
     logger.enabled = options.debugMode ?? (logger.enabled || isDebugMode);
