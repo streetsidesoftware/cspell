@@ -83,10 +83,18 @@ const str = 'goedemorgen'; // <- will NOT be flagged as an error.
 
 _Ignore_ allows you the specify a list of words you want to ignore within the document.
 
+- `/* cSpell: ignore */`
+- `/* spell-checker: ignore */`
+- `/* spellchecker: ignore */`
+
 ```javascript
 // cSpell:ignore zaallano, wooorrdd
 // cSpell:ignore zzooommmmmmmm
 const wackyWord = ['zaallano', 'wooorrdd', 'zzooommmmmmmm'];
+
+// spell-checker: ignore ieeees
+/* spellchecker: ignore beees,treeees */
+const moreWords = ['ieeees', 'beees', 'treeees'];
 ```
 
 **Note:** words defined with `ignore` will be ignored for the entire file.
