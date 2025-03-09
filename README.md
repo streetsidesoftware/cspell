@@ -23,7 +23,7 @@ The CSpell mono-repo, a spell checker for code.
 
 ## Documentation
 
-[Documentation - CSpell](https://streetsidesoftware.github.io/cspell/)
+[Documentation - CSpell](https://cspell.org/docs/getting-started)
 
 ## Third-Party Video Presentations
 
