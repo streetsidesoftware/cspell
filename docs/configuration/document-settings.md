@@ -12,7 +12,7 @@ nav_order: 11
 It is possible to add spell check settings into your source code.
 This is to help with file specific issues that may not be applicable to the entire project.
 
-All settings are prefixed with `cSpell:` or `spell-checker:`.
+All settings are prefixed with `cSpell:`, `spell-checker:`, or `spellchecker:`.
 
 - `disable` -- turn off the spell checker for a section of code.
 - `enable` -- turn the spell checker back on after it has been turned off.
