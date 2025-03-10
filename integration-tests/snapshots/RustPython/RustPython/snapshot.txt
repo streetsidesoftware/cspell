@@ -3,7 +3,7 @@ Repository: RustPython/RustPython
 Url: "https://github.com/RustPython/RustPython.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 628, Issues found: 1580 in 197 files.
+ CSpell: Files checked: 628, Issues found: 1648 in 197 files.
  exit code: 1
 Cargo.toml:172:1     - Unknown word (rustix)     -- rustix = { version = "0.38
 Cargo.toml:81:62     - Unknown word (redoxer)    -- to compile/check with redoxer
@@ -597,17 +597,75 @@ extra_tests/test_snippets.py:27:5      - Unknown word (pushd)      -- def pushd(
 jit/src/instructions.rs:260:36    - Unknown word (brnz)       -- self.builder.ins().brnz(val, then_block, &[
 jit/src/instructions.rs:417:68    - Unknown word (ifcout)     -- self.builder.ins().iadd_ifcout(a, b);
 jit/src/instructions.rs:418:44    - Unknown word (trapif)     -- self.builder.ins().trapif(
-jit/src/instructions.rs:441:55    - Unknown word (ushr)       -- self.builder.ins().ushr_imm(b, 63);
-jit/src/instructions.rs:442:44    - Unknown word (trapnz)     -- self.builder.ins().trapnz(
-jit/src/instructions.rs:448:48    - Unknown word (ishl)       -- self.builder.ins().ishl(a, b)
-jit/src/instructions.rs:450:48    - Unknown word (sshr)       -- self.builder.ins().sshr(a, b)
-jit/src/instructions.rs:472:60    - Unknown word (fmul)       -- Float(self.builder.ins().fmul(a, b))
-jit/src/instructions.rs:499:68    - Unknown word (fmul)       -- Float(self.builder.ins().fmul(operand_one, operand
-jit/src/instructions.rs:552:79    - Unknown word (ifbout)     -- t special-case isub_ifbout
-jit/src/instructions.rs:553:55    - Unknown word (ifbout)     -- self.builder.ins().isub_ifbout(a, b);
-jit/src/instructions.rs:556:17    - Unknown word (trapif)     -- // .trapif(IntCC::Overflow, carry
-jit/src/instructions.rs:559:52    - Unknown word (ifcout)     -- self.builder.ins().iadd_ifcout(a, neg_b);
-jit/src/instructions.rs:562:14    - Unknown word (trapif)     -- .trapif(IntCC::Overflow, carry
+jit/src/instructions.rs:454:55    - Unknown word (ushr)       -- self.builder.ins().ushr_imm(b, 63);
+jit/src/instructions.rs:455:44    - Unknown word (trapnz)     -- self.builder.ins().trapnz(
+jit/src/instructions.rs:461:48    - Unknown word (ishl)       -- self.builder.ins().ishl(a, b)
+jit/src/instructions.rs:463:48    - Unknown word (sshr)       -- self.builder.ins().sshr(a, b)
+jit/src/instructions.rs:485:60    - Unknown word (fmul)       -- Float(self.builder.ins().fmul(a, b))
+jit/src/instructions.rs:512:68    - Unknown word (fmul)       -- Float(self.builder.ins().fmul(operand_one, operand
+jit/src/instructions.rs:565:79    - Unknown word (ifbout)     -- t special-case isub_ifbout
+jit/src/instructions.rs:566:55    - Unknown word (ifbout)     -- self.builder.ins().isub_ifbout(a, b);
+jit/src/instructions.rs:569:17    - Unknown word (trapif)     -- // .trapif(IntCC::Overflow, carry
+jit/src/instructions.rs:572:52    - Unknown word (ifcout)     -- self.builder.ins().iadd_ifcout(a, neg_b);
+jit/src/instructions.rs:575:14    - Unknown word (trapif)     -- .trapif(IntCC::Overflow, carry
+jit/src/instructions.rs:622:13    - Unknown word (paramsc)    -- let paramsc1 = self.builder.block
+jit/src/instructions.rs:623:13    - Unknown word (basec)      -- let basec1 = paramsc1[0];
+jit/src/instructions.rs:623:22    - Unknown word (paramsc)    -- let basec1 = paramsc1[0];
+jit/src/instructions.rs:624:13    - Unknown word (expc)       -- let expc1 = paramsc1[1];
+jit/src/instructions.rs:624:21    - Unknown word (paramsc)    -- let expc1 = paramsc1[1];
+jit/src/instructions.rs:627:78    - Unknown word (basec)      -- FloatCC::Equal, zero_f64, basec1);
+jit/src/instructions.rs:631:45    - Unknown word (expc)       -- :SignedGreaterThan, expc1, zero_i64);
+jit/src/instructions.rs:635:14    - Unknown word (brnz)       -- .brnz(is_zero_to_positive
+jit/src/instructions.rs:636:49    - Unknown word (basec)      -- jump(check_block2, &[basec1, expc1]);
+jit/src/instructions.rs:636:57    - Unknown word (expc)       -- check_block2, &[basec1, expc1]);
+jit/src/instructions.rs:642:13    - Unknown word (paramsc)    -- let paramsc2 = self.builder.block
+jit/src/instructions.rs:643:13    - Unknown word (basec)      -- let basec2 = paramsc2[0];
+jit/src/instructions.rs:643:22    - Unknown word (paramsc)    -- let basec2 = paramsc2[0];
+jit/src/instructions.rs:644:13    - Unknown word (expc)       -- let expc2 = paramsc2[1];
+jit/src/instructions.rs:649:42    - Unknown word (expc)       -- IntCC::SignedLessThan, expc2, zero_i64);
+jit/src/instructions.rs:652:14    - Unknown word (brnz)       -- .brnz(is_neg, handle_neg_exp
+jit/src/instructions.rs:652:45    - Unknown word (basec)      -- neg, handle_neg_exp, &[basec2, expc2]);
+jit/src/instructions.rs:662:13    - Unknown word (resc)       -- let resc3 = self.builder.ins
+jit/src/instructions.rs:665:28    - Unknown word (brnz)       -- self.builder.ins().brnz(is_one, exit_block,
+jit/src/instructions.rs:666:55    - Unknown word (resc)       -- loop_block, &[basec3, resc3, expc3]);
+jit/src/instructions.rs:672:13    - Unknown word (paramshn)   -- let paramshn = self.builder.block
+jit/src/instructions.rs:673:13    - Unknown word (basehn)     -- let basehn = paramshn[0];
+jit/src/instructions.rs:673:22    - Unknown word (paramshn)   -- let basehn = paramshn[0];
+jit/src/instructions.rs:674:13    - Unknown word (exphn)      -- let exphn = paramshn[1];
+jit/src/instructions.rs:674:21    - Unknown word (paramshn)   -- let exphn = paramshn[1];
+jit/src/instructions.rs:676:61    - Unknown word (basehn)     -- ins().fdiv(one_f64, basehn);
+jit/src/instructions.rs:677:47    - Unknown word (exphn)      -- self.builder.ins().ineg(exphn);
+jit/src/instructions.rs:686:13    - Unknown word (paramslb)   -- let paramslb = self.builder.block
+jit/src/instructions.rs:687:13    - Unknown word (baselb)     -- let baselb = paramslb[0];
+jit/src/instructions.rs:687:22    - Unknown word (paramslb)   -- let baselb = paramslb[0];
+jit/src/instructions.rs:688:13    - Unknown word (reslb)      -- let reslb = paramslb[1];
+jit/src/instructions.rs:688:21    - Unknown word (paramslb)   -- let reslb = paramslb[1];
+jit/src/instructions.rs:689:13    - Unknown word (explb)      -- let explb = paramslb[2];
+jit/src/instructions.rs:689:21    - Unknown word (paramslb)   -- let explb = paramslb[2];
+jit/src/instructions.rs:691:61    - Unknown word (explb)      -- .icmp(IntCC::Equal, explb, zero);
+jit/src/instructions.rs:692:28    - Unknown word (brnz)       -- self.builder.ins().brnz(is_zero, exit_block
+jit/src/instructions.rs:692:56    - Unknown word (reslb)      -- zero, exit_block, &[reslb]);
+jit/src/instructions.rs:695:37    - Unknown word (baselb)     -- jump(continue_block, &[baselb, reslb, explb]);
+jit/src/instructions.rs:695:45    - Unknown word (reslb)      -- continue_block, &[baselb, reslb, explb]);
+jit/src/instructions.rs:695:52    - Unknown word (explb)      -- block, &[baselb, reslb, explb]);
+jit/src/instructions.rs:699:33    - Unknown word (loob)       -- Always jumps back to loob_block
+jit/src/instructions.rs:701:13    - Unknown word (paramscb)   -- let paramscb = self.builder.block
+jit/src/instructions.rs:702:13    - Unknown word (basecb)     -- let basecb = paramscb[0];
+jit/src/instructions.rs:702:22    - Unknown word (paramscb)   -- let basecb = paramscb[0];
+jit/src/instructions.rs:703:13    - Unknown word (rescb)      -- let rescb = paramscb[1];
+jit/src/instructions.rs:703:21    - Unknown word (paramscb)   -- let rescb = paramscb[1];
+jit/src/instructions.rs:704:13    - Unknown word (expcb)      -- let expcb = paramscb[2];
+jit/src/instructions.rs:704:21    - Unknown word (paramscb)   -- let expcb = paramscb[2];
+jit/src/instructions.rs:705:50    - Unknown word (expcb)      -- builder.ins().band_imm(expcb, 1);
+jit/src/instructions.rs:707:45    - Unknown word (fmul)       -- self.builder.ins().fmul(rescb, basecb);
+jit/src/instructions.rs:707:50    - Unknown word (rescb)      -- self.builder.ins().fmul(rescb, basecb);
+jit/src/instructions.rs:707:57    - Unknown word (basecb)     -- builder.ins().fmul(rescb, basecb);
+jit/src/instructions.rs:708:72    - Unknown word (rescb)      -- is_odd, mul_result, rescb);
+jit/src/instructions.rs:709:47    - Unknown word (fmul)       -- self.builder.ins().fmul(basecb, basecb);
+jit/src/instructions.rs:709:52    - Unknown word (basecb)     -- self.builder.ins().fmul(basecb, basecb);
+jit/src/instructions.rs:709:60    - Unknown word (basecb)     -- builder.ins().fmul(basecb, basecb);
+jit/src/instructions.rs:710:42    - Unknown word (sshr)       -- self.builder.ins().sshr_imm(expcb, 1);
+jit/src/instructions.rs:710:51    - Unknown word (expcb)      -- builder.ins().sshr_imm(expcb, 1);
 pdc.sh:33:1      - Unknown word (RUSTPYTHONPATH) -- RUSTPYTHONPATH=Lib
 pdc.sh:34:8      - Unknown word (RUSTPYTHONPATH) -- export RUSTPYTHONPATH
 pylib/build.rs:15:44     - Unknown word (RUSTPYTHONPATH) -- expect("failed to resolve RUSTPYTHONPATH during build time")
@@ -651,7 +709,7 @@ src/settings.rs:284:53    - Unknown word (PYTHONWARNDEFAULTENCODING) -- encoding
 src/settings.rs:333:37    - Unknown word (PYTHONHASHSEED)            -- seed = match env::var("PYTHONHASHSEED") {
 src/settings.rs:339:42    - Unknown word (PYTHONHASHSEED)            -- Fatal Python init error: PYTHONHASHSEED must be \"random\" or
 stdlib/Cargo.toml:100:1     - Unknown word (rustix)     -- rustix = { workspace = true
-stdlib/Cargo.toml:131:28    - Unknown word (Ndis)       -- 2_NetworkManagement_Ndis",
+stdlib/Cargo.toml:125:28    - Unknown word (Ndis)       -- 2_NetworkManagement_Ndis",
 stdlib/Cargo.toml:50:1      - Unknown word (puruspe)    -- puruspe = "0.4.0"
 stdlib/src/binascii.rs:105:15    - Unknown word (CRCTAB)     -- const CRCTAB_HQX: [u16; 256] = [
 stdlib/src/binascii.rs:137:45    - Unknown word (CRCTAB)     -- crc << 8) & 0xFF00) ^ CRCTAB_HQX[((crc >> 8) as u
@@ -791,53 +849,62 @@ stdlib/src/select.rs:563:66    - Unknown word (CLOEXEC)        -- epoll::CreateF
 stdlib/src/select.rs:61:24     - Unknown word (WSAFDIs)    -- use WinSock::__WSAFDIsSet;
 stdlib/src/select.rs:62:20     - Unknown word (WSAFDIs)    -- unsafe { __WSAFDIsSet(fd as _, set) !=
 stdlib/src/select.rs:662:29    - Unknown word (rustix)         -- Err(rustix::io::Errno::INTR) =
-stdlib/src/socket.rs:115:47    - Unknown word (NETROM)           -- SOL_AX25, SOL_IPX, SOL_NETROM, SOL_ROSE};
-stdlib/src/socket.rs:119:15    - Unknown word (SETFIB)           -- use c::SO_SETFIB;
-stdlib/src/socket.rs:124:78    - Unknown word (ISOTP)            -- FLAG, CAN_ERR_MASK, CAN_ISOTP, CAN_J1939,
-stdlib/src/socket.rs:1329:13   - Unknown word (ancdata)          -- ancdata: OptionalArg,
-stdlib/src/socket.rs:1356:41   - Unknown word (ancdata)          -- OptionalArg::Present(ancdata) = ancdata {
-stdlib/src/socket.rs:1356:52   - Unknown word (ancdata)          -- :Present(ancdata) = ancdata {
-stdlib/src/socket.rs:1358:22   - Unknown word (ancdata)          -- &ancdata,
-stdlib/src/socket.rs:1414:21   - Unknown word (pmhdr)            -- let mut pmhdr: *mut libc::cmsghdr
-stdlib/src/socket.rs:1416:20   - Unknown word (pmhdr)            -- if pmhdr.is_null() {
-stdlib/src/socket.rs:141:20    - Unknown word (VRRP)             -- use c::IPPROTO_VRRP;
-stdlib/src/socket.rs:1423:46   - Unknown word (pmhdr)            -- because we know that pmhdr is valid, and we initialized
-stdlib/src/socket.rs:1426:23   - Unknown word (pmhdr)            -- (*pmhdr).cmsg_level = *lvl;
-stdlib/src/socket.rs:1427:23   - Unknown word (pmhdr)            -- (*pmhdr).cmsg_type = *typ;
-stdlib/src/socket.rs:1429:31   - Unknown word (nonoverlapping)   -- ptr::copy_nonoverlapping(data.as_ptr(), libc
-stdlib/src/socket.rs:152:12    - Unknown word (EXCLUSIVEADDRUSE) -- SO_EXCLUSIVEADDRUSE,
-stdlib/src/socket.rs:1696:25   - Unknown word (abstractpath)     -- if let Some(abstractpath) = addr.as_abstract
-stdlib/src/socket.rs:1697:49   - Unknown word (abstractpath)     -- ctx.new_bytes([b"\0", abstractpath].concat()).into();
-stdlib/src/socket.rs:172:54    - Unknown word (ASSOCLEN)         -- ENCRYPT, ALG_SET_AEAD_ASSOCLEN, ALG_SET_AEAD_AUTHSIZE
-stdlib/src/socket.rs:175:70    - Unknown word (DNRTMSG)          -- NETLINK_CRYPTO, NETLINK_DNRTMSG, NETLINK_FIREWALL,
-stdlib/src/socket.rs:176:33    - Unknown word (NFLOG)            -- NETLINK_IP6_FW, NETLINK_NFLOG, NETLINK_ROUTE, NETLINK
-stdlib/src/socket.rs:176:81    - Unknown word (XFRM)             -- NETLINK_USERSOCK, NETLINK_XFRM, SO_PASSSEC,
-stdlib/src/socket.rs:215:28    - Unknown word (ATMPVC)           -- AF_ALG, AF_ASH, AF_ATMPVC, AF_ATMSVC, AF_AX25
-stdlib/src/socket.rs:216:44    - Unknown word (NETROM)           -- NETBEUI, AF_NETLINK, AF_NETROM, AF_PACKET, AF_PPPOX
-stdlib/src/socket.rs:2177:46   - Unknown word (Luid)             -- name(&entry.InterfaceLuid).map_err(|err| err.into
-stdlib/src/socket.rs:2185:17   - Unknown word (luid)             -- luid: &winapi::shared::ifdef
-stdlib/src/socket.rs:2185:51   - Unknown word (LUID)             -- :shared::ifdef::NET_LUID,
-stdlib/src/socket.rs:2189:47   - Unknown word (Luid)             -- netioapi::ConvertInterfaceLuidToNameW(luid, buf.as
-stdlib/src/socket.rs:2189:59   - Unknown word (luid)             -- ConvertInterfaceLuidToNameW(luid, buf.as_mut_ptr(), buf
-stdlib/src/socket.rs:219:90    - Unknown word (QUICKACK)         -- ACCEPT, TCP_LINGER2, TCP_QUICKACK,
-stdlib/src/socket.rs:2384:38   - Unknown word (gaierror)         -- SocketError::GaiError => gaierror(vm),
-stdlib/src/socket.rs:306:24    - Unknown word (CSCOV)            -- const UDPLITE_SEND_CSCOV: i32 = 10;
-stdlib/src/socket.rs:315:24    - Unknown word (CSCOV)            -- const UDPLITE_RECV_CSCOV: i32 = 11;
-stdlib/src/socket.rs:343:32    - Unknown word (loongarch)        -- target_arch = "loongarch64",
-stdlib/src/socket.rs:347:32    - Unknown word (riscv)            -- target_arch = "riscv64",
-stdlib/src/socket.rs:393:32    - Unknown word (loongarch)        -- target_arch = "loongarch64",
-stdlib/src/socket.rs:397:32    - Unknown word (riscv)            -- target_arch = "riscv64",
-stdlib/src/socket.rs:43:16     - Unknown word (EXCLUSIVEADDRUSE) -- SO_EXCLUSIVEADDRUSE, getprotobyname, getservbynam
-stdlib/src/socket.rs:445:15    - Unknown word (RECVTOS)          -- use c::IP_RECVTOS;
-stdlib/src/socket.rs:543:22    - Unknown word (CLOEXEC)          -- use c::{MSG_CMSG_CLOEXEC, MSG_NOSIGNAL};
-stdlib/src/socket.rs:580:18    - Unknown word (CLOEXEC)          -- use c::{SOCK_CLOEXEC, SOCK_NONBLOCK};
-stdlib/src/socket.rs:676:11    - Unknown word (BDADDR)           -- const BDADDR_ANY: &str = "00:00:
-stdlib/src/socket.rs:685:11    - Unknown word (BDADDR)           -- const BDADDR_LOCAL: &str = "00:0
-stdlib/src/socket.rs:68:49     - Unknown word (WSAEBADF)         -- SOMAXCONN, TCP_NODELAY, WSAEBADF, WSAECONNRESET, WSAENOTSOCK
-stdlib/src/socket.rs:691:30    - Unknown word (ICLFXBM)          -- IPPROTO_CBT, IPPROTO_ICLFXBM, IPPROTO_IGP, IPPROTO
-stdlib/src/socket.rs:714:8     - Unknown word (gaierror)         -- fn gaierror(vm: &VirtualMachine
-stdlib/src/socket.rs:717:14    - Unknown word (gaierror)         -- "gaierror",
-stdlib/src/socket.rs:72:52     - Unknown word (Ndis)             -- :NetworkManagement::Ndis::IF_MAX_STRING_SIZE
+stdlib/src/socket.rs:119:47    - Unknown word (NETROM)             -- SOL_AX25, SOL_IPX, SOL_NETROM, SOL_ROSE};
+stdlib/src/socket.rs:123:15    - Unknown word (SETFIB)             -- use c::SO_SETFIB;
+stdlib/src/socket.rs:128:78    - Unknown word (ISOTP)              -- FLAG, CAN_ERR_MASK, CAN_ISOTP, CAN_J1939,
+stdlib/src/socket.rs:1333:13   - Unknown word (ancdata)            -- ancdata: OptionalArg,
+stdlib/src/socket.rs:1360:41   - Unknown word (ancdata)            -- OptionalArg::Present(ancdata) = ancdata {
+stdlib/src/socket.rs:1360:52   - Unknown word (ancdata)            -- :Present(ancdata) = ancdata {
+stdlib/src/socket.rs:1362:22   - Unknown word (ancdata)            -- &ancdata,
+stdlib/src/socket.rs:1418:21   - Unknown word (pmhdr)              -- let mut pmhdr: *mut libc::cmsghdr
+stdlib/src/socket.rs:1420:20   - Unknown word (pmhdr)              -- if pmhdr.is_null() {
+stdlib/src/socket.rs:1427:46   - Unknown word (pmhdr)              -- because we know that pmhdr is valid, and we initialized
+stdlib/src/socket.rs:1430:23   - Unknown word (pmhdr)              -- (*pmhdr).cmsg_level = *lvl;
+stdlib/src/socket.rs:1431:23   - Unknown word (pmhdr)              -- (*pmhdr).cmsg_type = *typ;
+stdlib/src/socket.rs:1433:31   - Unknown word (nonoverlapping)     -- ptr::copy_nonoverlapping(data.as_ptr(), libc
+stdlib/src/socket.rs:145:20    - Unknown word (VRRP)               -- use c::IPPROTO_VRRP;
+stdlib/src/socket.rs:156:12    - Unknown word (EXCLUSIVEADDRUSE)   -- SO_EXCLUSIVEADDRUSE,
+stdlib/src/socket.rs:1700:25   - Unknown word (abstractpath)       -- if let Some(abstractpath) = addr.as_abstract
+stdlib/src/socket.rs:1701:49   - Unknown word (abstractpath)       -- ctx.new_bytes([b"\0", abstractpath].concat()).into();
+stdlib/src/socket.rs:176:54    - Unknown word (ASSOCLEN)           -- ENCRYPT, ALG_SET_AEAD_ASSOCLEN, ALG_SET_AEAD_AUTHSIZE
+stdlib/src/socket.rs:179:70    - Unknown word (DNRTMSG)            -- NETLINK_CRYPTO, NETLINK_DNRTMSG, NETLINK_FIREWALL,
+stdlib/src/socket.rs:180:33    - Unknown word (NFLOG)              -- NETLINK_IP6_FW, NETLINK_NFLOG, NETLINK_ROUTE, NETLINK
+stdlib/src/socket.rs:180:81    - Unknown word (XFRM)               -- NETLINK_USERSOCK, NETLINK_XFRM, SO_PASSSEC,
+stdlib/src/socket.rs:2177:56   - Unknown word (Ndis)               -- :NetworkManagement::Ndis::NET_LUID_LH;
+stdlib/src/socket.rs:2177:66   - Unknown word (LUID)               -- NetworkManagement::Ndis::NET_LUID_LH;
+stdlib/src/socket.rs:2182:46   - Unknown word (Luid)               -- name(&entry.InterfaceLuid).map_err(|err| err.into
+stdlib/src/socket.rs:2189:25   - Unknown word (luid)               -- fn get_name(luid: &NET_LUID_LH) -> io
+stdlib/src/socket.rs:2189:36   - Unknown word (LUID)               -- get_name(luid: &NET_LUID_LH) -> io::Result<widestring
+stdlib/src/socket.rs:2192:47   - Unknown word (Luid)               -- IpHelper::ConvertInterfaceLuidToNameW(luid, buf.as
+stdlib/src/socket.rs:2192:59   - Unknown word (luid)               -- ConvertInterfaceLuidToNameW(luid, buf.as_mut_ptr(), buf
+stdlib/src/socket.rs:219:28    - Unknown word (ATMPVC)             -- AF_ALG, AF_ASH, AF_ATMPVC, AF_ATMSVC, AF_AX25
+stdlib/src/socket.rs:220:44    - Unknown word (NETROM)             -- NETBEUI, AF_NETLINK, AF_NETROM, AF_PACKET, AF_PPPOX
+stdlib/src/socket.rs:223:90    - Unknown word (QUICKACK)           -- ACCEPT, TCP_LINGER2, TCP_QUICKACK,
+stdlib/src/socket.rs:2387:38   - Unknown word (gaierror)           -- SocketError::GaiError => gaierror(vm),
+stdlib/src/socket.rs:310:24    - Unknown word (CSCOV)              -- const UDPLITE_SEND_CSCOV: i32 = 10;
+stdlib/src/socket.rs:319:24    - Unknown word (CSCOV)              -- const UDPLITE_RECV_CSCOV: i32 = 11;
+stdlib/src/socket.rs:347:32    - Unknown word (loongarch)          -- target_arch = "loongarch64",
+stdlib/src/socket.rs:351:32    - Unknown word (riscv)              -- target_arch = "riscv64",
+stdlib/src/socket.rs:397:32    - Unknown word (loongarch)          -- target_arch = "loongarch64",
+stdlib/src/socket.rs:401:32    - Unknown word (riscv)              -- target_arch = "riscv64",
+stdlib/src/socket.rs:449:15    - Unknown word (RECVTOS)            -- use c::IP_RECVTOS;
+stdlib/src/socket.rs:547:22    - Unknown word (CLOEXEC)            -- use c::{MSG_CMSG_CLOEXEC, MSG_NOSIGNAL};
+stdlib/src/socket.rs:584:18    - Unknown word (CLOEXEC)            -- use c::{SOCK_CLOEXEC, SOCK_NONBLOCK};
+stdlib/src/socket.rs:61:49     - Unknown word (WSAEBADF)   -- SOMAXCONN, TCP_NODELAY, WSAEBADF, WSAECONNRESET, WSAENOTSOCK
+stdlib/src/socket.rs:65:32     - Unknown word (EXCLUSIVEADDRUSE) -- SO_REUSEADDR as SO_EXCLUSIVEADDRUSE, getprotobyname, getservbynam
+stdlib/src/socket.rs:680:11    - Unknown word (BDADDR)             -- const BDADDR_ANY: &str = "00:00:
+stdlib/src/socket.rs:689:11    - Unknown word (BDADDR)             -- const BDADDR_LOCAL: &str = "00:0
+stdlib/src/socket.rs:695:30    - Unknown word (ICLFXBM)            -- IPPROTO_CBT, IPPROTO_ICLFXBM, IPPROTO_IGP, IPPROTO
+stdlib/src/socket.rs:70:13     - Unknown word (WSAEINVAL)        -- WSAEINVAL as EAI_BADFLAGS, WSAESOCKTNOS
+stdlib/src/socket.rs:70:40     - Unknown word (WSAESOCKTNOSUPPORT) -- WSAEINVAL as EAI_BADFLAGS, WSAESOCKTNOSUPPORT as EAI_SOCKTYPE,
+stdlib/src/socket.rs:718:8     - Unknown word (gaierror)           -- fn gaierror(vm: &VirtualMachine
+stdlib/src/socket.rs:71:13     - Unknown word (WSAHOST)            -- WSAHOST_NOT_FOUND as EAI_NODATA
+stdlib/src/socket.rs:71:46     - Unknown word (WSAHOST)            -- FOUND as EAI_NODATA, WSAHOST_NOT_FOUND as EAI_NONAME
+stdlib/src/socket.rs:721:14    - Unknown word (gaierror)           -- "gaierror",
+stdlib/src/socket.rs:72:13     - Unknown word (WSANO)              -- WSANO_RECOVERY as EAI_FAIL
+stdlib/src/socket.rs:72:41     - Unknown word (WSATRY)             -- RECOVERY as EAI_FAIL, WSATRY_AGAIN as EAI_AGAIN,
+stdlib/src/socket.rs:73:13     - Unknown word (WSATYPE)            -- WSATYPE_NOT_FOUND as EAI_SERVICE
+stdlib/src/socket.rs:76:52     - Unknown word (Ndis)               -- :NetworkManagement::Ndis::IF_MAX_STRING_SIZE
 stdlib/src/ssl.rs:1395:63   - Unknown word (cacerts)    -- system/etc/security/cacerts";
 stdlib/src/ssl.rs:146:15    - Unknown word (ECDH)       -- const HAS_ECDH: bool = false;
 stdlib/src/ssl.rs:498:43    - Unknown word (SSLV)       -- options |= SslOptions::NO_SSLV2;
@@ -1383,14 +1450,14 @@ vm/src/stdlib/typing.rs:18:37     - Unknown word (pycodecs)   -- module = vm.imp
 vm/src/stdlib/winapi.rs:18:15     - Unknown word (PCWSTR)     -- core::PCWSTR,
 vm/src/stdlib/winapi.rs:199:60    - Unknown word (STARTUPINFOEXW) -- :System::Threading::STARTUPINFOEXW =
 vm/src/stdlib/winapi.rs:227:22    - Unknown word (getenvironment) -- .map(|m| getenvironment(m, vm))
-vm/src/stdlib/winapi.rs:322:8     - Unknown word (getenvironment) -- fn getenvironment(env: ArgMapping, vm
+vm/src/stdlib/winapi.rs:318:8     - Unknown word (getenvironment) -- fn getenvironment(env: ArgMapping, vm
 vm/src/stdlib/winapi.rs:32:13     - Unknown word (LCMAP)      -- LCMAP_FULLWIDTH, LCMAP_HALFWIDTH
 vm/src/stdlib/winapi.rs:32:30     - Unknown word (LCMAP)      -- LCMAP_FULLWIDTH, LCMAP_HALFWIDTH, LCMAP_HIRAGANA
 vm/src/stdlib/winapi.rs:32:47     - Unknown word (LCMAP)      -- FULLWIDTH, LCMAP_HALFWIDTH, LCMAP_HIRAGANA, LCMAP_KATAKANA
 vm/src/stdlib/winapi.rs:32:63     - Unknown word (LCMAP)      -- HALFWIDTH, LCMAP_HIRAGANA, LCMAP_KATAKANA,
 vm/src/stdlib/winapi.rs:33:13     - Unknown word (LCMAP)      -- LCMAP_LINGUISTIC_CASING, LCMAP
-vm/src/stdlib/winapi.rs:474:65    - Unknown word (PCWSTR)         -- LibraryLoader::LoadLibraryW(PCWSTR::from_raw(path.as_ptr
-vm/src/stdlib/winapi.rs:504:36    - Unknown word (PCWSTR)         -- windows_sys::core::PCWSTR::from(name as _),
+vm/src/stdlib/winapi.rs:471:65    - Unknown word (PCWSTR)         -- LibraryLoader::LoadLibraryW(PCWSTR::from_raw(path.as_ptr
+vm/src/stdlib/winapi.rs:501:36    - Unknown word (PCWSTR)         -- windows_sys::core::PCWSTR::from(name as _),
 vm/src/stdlib/winapi.rs:64:42     - Unknown word (STARTF)     -- REALTIME_PRIORITY_CLASS, STARTF_USESHOWWINDOW, STARTF
 vm/src/stdlib/winapi.rs:64:64     - Unknown word (STARTF)     -- STARTF_USESHOWWINDOW, STARTF_USESTDHANDLES,
 vm/src/types/slot.rs:138:28    - Unknown word (TPFLAGS)    -- CPython default: Py_TPFLAGS_HAVE_STACKLESS_EXTENSION
@@ -1511,7 +1578,8 @@ wasm/lib/src/js_module.rs:503:58    - Unknown word (jsresult)   -- convert::pyre
 wasm/lib/src/js_module.rs:511:58    - Unknown word (jsresult)   -- convert::pyresult_to_jsresult(vm, res)
 wasm/lib/src/js_module.rs:578:62    - Unknown word (awaitpromise) -- non-None value to an awaitpromise".to_owned(),
 wasm/lib/src/vm_class.rs:343:34    - Unknown word (jsresult)   -- convert::pyresult_to_jsresult(vm, result)
-wasm/notebook/package.json:36:21     - Unknown word (Liddle)     -- "author": "Ryan Liddle",
+wasm/notebook/package.json:18:10     - Unknown word (lezer)      -- "lezer-loader": "^0.3.0",
+wasm/notebook/package.json:34:21     - Unknown word (Liddle)     -- "author": "Ryan Liddle",
 wasm/notebook/package.json:9:10      - Unknown word (katex)      -- "katex": "^0.12.0",
 wasm/notebook/src/index.js:142:5     - Unknown word (pyvm)       -- let pyvm = null;
 wasm/notebook/src/index.js:171:9     - Unknown word (pyvm)       -- if (pyvm) {

@@ -3,7 +3,7 @@ Repository: slint-ui/slint
 Url: "https://github.com/slint-ui/slint"
 Args: ["--config=../../../../repositories/config/slint/cspell.config.yaml","--issues-summary-report","."]
 Lines:
- CSpell: Files checked: 2080, Issues found: 3656 in 685 files.
+ CSpell: Files checked: 2084, Issues found: 3693 in 696 files.
  exit code: 1
 CMakeLists.txt:17:14     - Unknown word (TOPLEVEL)   -- set(SLINT_IS_TOPLEVEL_BUILD TRUE)
 CMakeLists.txt:27:31     - Unknown word (dylib's)    -- macOS, the slint_cpp.dylib's install_name uses @rpath
@@ -37,83 +37,83 @@ REUSE.toml:63:13     - Unknown word (sdkconfig)    -- "demos/**/sdkconfig**",
 REUSE.toml:88:29     - Unknown word (webp)         -- astro/src/assets/**.webp",
 REUSE.toml:89:45     - Unknown word (webp)         -- assets/getting-started/**.webp",
 about.toml:27:8      - Unknown word (noassertion) -- filter-noassertion = true
-api/cpp/CMakeLists.txt:108:140   - Unknown word (libseat)     -- fullscreen on Linux. Requires libseat. If you don't have libseat
-api/cpp/CMakeLists.txt:108:167   - Unknown word (libseat)     -- libseat. If you don't have libseat, select `backend-linuxkms
-api/cpp/CMakeLists.txt:108:192   - Unknown word (linuxkms)    -- libseat, select `backend-linuxkms-noseat` instead. (Experimenta
-api/cpp/CMakeLists.txt:108:201   - Unknown word (noseat)      -- select `backend-linuxkms-noseat` instead. (Experimental
-api/cpp/CMakeLists.txt:108:40    - Unknown word (linuxkms)    -- dependent_feature(backend-linuxkms "Enable support for
-api/cpp/CMakeLists.txt:109:40    - Unknown word (linuxkms)    -- dependent_feature(backend-linuxkms-noseat "Enable support
-api/cpp/CMakeLists.txt:109:49    - Unknown word (noseat)      -- feature(backend-linuxkms-noseat "Enable support for
-api/cpp/CMakeLists.txt:127:29    - Unknown word (staticlib)   -- set(rustc_lib_type "staticlib")
-api/cpp/CMakeLists.txt:140:19    - Unknown word (hostbuild)   -- corrosion_set_hostbuild(slint-compiler)
-api/cpp/CMakeLists.txt:150:14    - Unknown word (jemalloc)    -- # Enable jemalloc, except when cross-compiling
-api/cpp/CMakeLists.txt:151:18    - Unknown word (CROSSCOMPILING) -- if(NOT CMAKE_CROSSCOMPILING)
-api/cpp/CMakeLists.txt:152:46    - Unknown word (jemalloc)       -- slint_compiler_features "jemalloc")
-api/cpp/CMakeLists.txt:163:69    - Unknown word (rpath)          -- set install_name to rpath, so that the installed
-api/cpp/CMakeLists.txt:165:89    - Unknown word (RPATH)          -- could set CMAKE_BUILD_RPATH to
-api/cpp/CMakeLists.txt:166:75    - Unknown word (rpath)          -- would have the correct rpath set, binaries
-api/cpp/CMakeLists.txt:167:88    - Unknown word (RPATH)          -- would not and the BUILD_RPATH
-api/cpp/CMakeLists.txt:169:28    - Unknown word (TOPLEVEL)       -- (APPLE AND SLINT_IS_TOPLEVEL_BUILD AND BUILD_SHARED
-api/cpp/CMakeLists.txt:171:105   - Unknown word (dylib)          -- @rpath/libslint_cpp.dylib,-current_version,${PROJECT
-api/cpp/CMakeLists.txt:171:36    - Unknown word (rustflags)      -- corrosion_add_target_local_rustflags(slint_cpp -Clink-arg
-api/cpp/CMakeLists.txt:171:86    - Unknown word (rpath)          -- arg=-Wl,-install_name,@rpath/libslint_cpp.dylib,
-api/cpp/CMakeLists.txt:171:92    - Unknown word (libslint)       -- install_name,@rpath/libslint_cpp.dylib,-current_version
-api/cpp/CMakeLists.txt:173:71    - Unknown word (SONAME)         -- PROPERTIES IMPORTED_NO_SONAME 0)
-api/cpp/CMakeLists.txt:174:68    - Unknown word (SONAME)         -- PROPERTIES IMPORTED_SONAME libslint_cpp.dylib)
-api/cpp/CMakeLists.txt:174:75    - Unknown word (libslint)       -- PROPERTIES IMPORTED_SONAME libslint_cpp.dylib)
-api/cpp/CMakeLists.txt:174:88    - Unknown word (dylib)          -- SONAME libslint_cpp.dylib)
-api/cpp/CMakeLists.txt:182:49    - Unknown word (bigobj)         -- options(Slint INTERFACE /bigobj)
-api/cpp/CMakeLists.txt:192:5     - Unknown word (endforeach)     -- endforeach()
-api/cpp/CMakeLists.txt:201:39    - Unknown word (println)        -- APPEND features "esp-println/${IDF_TARGET}")
-api/cpp/CMakeLists.txt:272:40    - Unknown word (STREQUAL)       -- AND NOT SLINT_STYLE STREQUAL "native")
-api/cpp/CMakeLists.txt:278:34    - Unknown word (buildroot)      -- environments such as buildroot set PKG_CONFIG_SYSROOT
-api/cpp/CMakeLists.txt:292:22    - Unknown word (CLANGCC)        -- find_program(CLANGCC clang)
-api/cpp/CMakeLists.txt:293:22    - Unknown word (CLANGCXX)       -- find_program(CLANGCXX clang++)
-api/cpp/CMakeLists.txt:294:12    - Unknown word (CLANGCC)        -- if(CLANGCC AND NOT DEFINED ENV
-api/cpp/CMakeLists.txt:294:40    - Unknown word (CLANGCC)        -- AND NOT DEFINED ENV{CLANGCC})
-api/cpp/CMakeLists.txt:299:17    - Unknown word (CLANGCC)        -- CLANGCC=${CLANGCC}
-api/cpp/CMakeLists.txt:299:27    - Unknown word (CLANGCC)        -- CLANGCC=${CLANGCC}
-api/cpp/CMakeLists.txt:302:12    - Unknown word (CLANGCXX)       -- if(CLANGCXX AND NOT DEFINED ENV
-api/cpp/CMakeLists.txt:302:41    - Unknown word (CLANGCXX)       -- AND NOT DEFINED ENV{CLANGCXX})
-api/cpp/CMakeLists.txt:307:17    - Unknown word (CLANGCXX)       -- CLANGCXX=${CLANGCXX}
-api/cpp/CMakeLists.txt:307:28    - Unknown word (CLANGCXX)       -- CLANGCXX=${CLANGCXX}
-api/cpp/CMakeLists.txt:314:65    - Unknown word (Yocto)          -- bet. Unfortunately in Yocto environments, CC will
-api/cpp/CMakeLists.txt:315:51    - Unknown word (CFLAGS)         -- The same applies to CFLAGS, which may contain target
-api/cpp/CMakeLists.txt:319:71    - Unknown word (CFLAGS)         -- clang or gcc and empty CFLAGS_<host triplet>
-api/cpp/CMakeLists.txt:320:18    - Unknown word (CROSSCOMPILING) -- if(CMAKE_CROSSCOMPILING AND Rust_CARGO_HOST
-api/cpp/CMakeLists.txt:341:21    - Unknown word (CFLAGS)         -- CFLAGS_${cargo_host_target
-api/cpp/CMakeLists.txt:352:5     - Unknown word (endforeach)     -- endforeach()
-api/cpp/CMakeLists.txt:364:61    - Unknown word (pathdata)       -- generated_include/slint_pathdata_internal.h
-api/cpp/CMakeLists.txt:368:61    - Unknown word (sharedvector)   -- generated_include/slint_sharedvector_internal.h
-api/cpp/CMakeLists.txt:37:12     - Unknown word (TOUPPER)    -- string(TOUPPER "${cargo_feature}" cmake
-api/cpp/CMakeLists.txt:383:5     - Unknown word (endforeach)     -- endforeach()
-api/cpp/CMakeLists.txt:428:31    - Unknown word (RELWITHDEBINFO) -- IMPORTED_LOCATION_RELWITHDEBINFO IMPORTED_LOCATION_MINSIZEREL
-api/cpp/CMakeLists.txt:428:64    - Unknown word (MINSIZEREL)     -- WITHDEBINFO IMPORTED_LOCATION_MINSIZEREL
-api/cpp/CMakeLists.txt:429:22    - Unknown word (IMPLIB)         -- IMPORTED_IMPLIB IMPORTED_IMPLIB_DEBUG
-api/cpp/CMakeLists.txt:429:38    - Unknown word (IMPLIB)         -- IMPORTED_IMPLIB IMPORTED_IMPLIB_DEBUG IMPORTED_IMPLIB
-api/cpp/CMakeLists.txt:429:60    - Unknown word (IMPLIB)         -- IMPLIB_DEBUG IMPORTED_IMPLIB_RELEASE
-api/cpp/CMakeLists.txt:430:22    - Unknown word (IMPLIB)         -- IMPORTED_IMPLIB_RELWITHDEBINFO IMPORTED
-api/cpp/CMakeLists.txt:430:29    - Unknown word (RELWITHDEBINFO) -- IMPORTED_IMPLIB_RELWITHDEBINFO IMPORTED_IMPLIB_MINSIZEREL
-api/cpp/CMakeLists.txt:430:53    - Unknown word (IMPLIB)         -- RELWITHDEBINFO IMPORTED_IMPLIB_MINSIZEREL)
-api/cpp/CMakeLists.txt:430:60    - Unknown word (MINSIZEREL)     -- ELWITHDEBINFO IMPORTED_IMPLIB_MINSIZEREL)
-api/cpp/CMakeLists.txt:437:9     - Unknown word (endforeach)     -- endforeach()
-api/cpp/CMakeLists.txt:439:38    - Unknown word (SONAME)         -- Corrosion sets IMPORTED_NO_SONAME and for macOS we reset
-api/cpp/CMakeLists.txt:440:28    - Unknown word (SONAME)         -- # and set IMPORTED_SONAME. Make sure to propagate
-api/cpp/CMakeLists.txt:442:34    - Unknown word (SONAME)         -- foreach(prop IMPORTED_NO_SONAME IMPORTED_SONAME)
-api/cpp/CMakeLists.txt:447:9     - Unknown word (endforeach)     -- endforeach()
-api/cpp/CMakeLists.txt:456:5     - Unknown word (endfunction)    -- endfunction()
-api/cpp/CMakeLists.txt:475:5     - Unknown word (CPACK)          -- set(CPACK_PACKAGE_NAME "Slint
-api/cpp/CMakeLists.txt:476:5     - Unknown word (CPACK)          -- set(CPACK_PACKAGE_VENDOR "Slint
-api/cpp/CMakeLists.txt:477:5     - Unknown word (CPACK)          -- set(CPACK_VERBATIM_VARIABLES true
-api/cpp/CMakeLists.txt:478:5     - Unknown word (CPACK)          -- set(CPACK_PACKAGE_VERSION_MAJOR
-api/cpp/CMakeLists.txt:479:5     - Unknown word (CPACK)          -- set(CPACK_PACKAGE_VERSION_MINOR
-api/cpp/CMakeLists.txt:485:11    - Unknown word (NSIS)           -- set(CPACK_NSIS_DEFINES "ManifestDPIAware
-api/cpp/CMakeLists.txt:509:27    - Unknown word (STREQUAL)       -- NOT Rust_CARGO_TARGET STREQUAL Rust_CARGO_HOST_TARGET
-api/cpp/CMakeLists.txt:50:1      - Unknown word (endfunction) -- endfunction()
-api/cpp/CMakeLists.txt:54:12     - Unknown word (TOUPPER)     -- string(TOUPPER "${cargo_feature}" cmake
-api/cpp/CMakeLists.txt:67:1      - Unknown word (endfunction) -- endfunction()
-api/cpp/CMakeLists.txt:76:12     - Unknown word (TOUPPER)     -- string(TOUPPER "${renderer}" cmake
-api/cpp/CMakeLists.txt:83:1      - Unknown word (endfunction) -- endfunction()
+api/cpp/CMakeLists.txt:112:140   - Unknown word (libseat)     -- fullscreen on Linux. Requires libseat. If you don't have libseat
+api/cpp/CMakeLists.txt:112:167   - Unknown word (libseat)     -- libseat. If you don't have libseat, select `backend-linuxkms
+api/cpp/CMakeLists.txt:112:192   - Unknown word (linuxkms)    -- libseat, select `backend-linuxkms-noseat` instead. (Experimenta
+api/cpp/CMakeLists.txt:112:201   - Unknown word (noseat)      -- select `backend-linuxkms-noseat` instead. (Experimental
+api/cpp/CMakeLists.txt:112:40    - Unknown word (linuxkms)    -- dependent_feature(backend-linuxkms "Enable support for
+api/cpp/CMakeLists.txt:113:40    - Unknown word (linuxkms)    -- dependent_feature(backend-linuxkms-noseat "Enable support
+api/cpp/CMakeLists.txt:113:49    - Unknown word (noseat)      -- feature(backend-linuxkms-noseat "Enable support for
+api/cpp/CMakeLists.txt:131:29    - Unknown word (staticlib)   -- set(rustc_lib_type "staticlib")
+api/cpp/CMakeLists.txt:144:19    - Unknown word (hostbuild)   -- corrosion_set_hostbuild(slint-compiler)
+api/cpp/CMakeLists.txt:154:14    - Unknown word (jemalloc)    -- # Enable jemalloc, except when cross-compiling
+api/cpp/CMakeLists.txt:155:18    - Unknown word (CROSSCOMPILING) -- if(NOT CMAKE_CROSSCOMPILING)
+api/cpp/CMakeLists.txt:156:46    - Unknown word (jemalloc)       -- slint_compiler_features "jemalloc")
+api/cpp/CMakeLists.txt:167:69    - Unknown word (rpath)          -- set install_name to rpath, so that the installed
+api/cpp/CMakeLists.txt:169:89    - Unknown word (RPATH)          -- could set CMAKE_BUILD_RPATH to
+api/cpp/CMakeLists.txt:170:75    - Unknown word (rpath)          -- would have the correct rpath set, binaries
+api/cpp/CMakeLists.txt:171:88    - Unknown word (RPATH)          -- would not and the BUILD_RPATH
+api/cpp/CMakeLists.txt:173:28    - Unknown word (TOPLEVEL)       -- (APPLE AND SLINT_IS_TOPLEVEL_BUILD AND BUILD_SHARED
+api/cpp/CMakeLists.txt:175:105   - Unknown word (dylib)          -- @rpath/libslint_cpp.dylib,-current_version,${PROJECT
+api/cpp/CMakeLists.txt:175:36    - Unknown word (rustflags)      -- corrosion_add_target_local_rustflags(slint_cpp -Clink-arg
+api/cpp/CMakeLists.txt:175:86    - Unknown word (rpath)          -- arg=-Wl,-install_name,@rpath/libslint_cpp.dylib,
+api/cpp/CMakeLists.txt:175:92    - Unknown word (libslint)       -- install_name,@rpath/libslint_cpp.dylib,-current_version
+api/cpp/CMakeLists.txt:177:71    - Unknown word (SONAME)         -- PROPERTIES IMPORTED_NO_SONAME 0)
+api/cpp/CMakeLists.txt:178:68    - Unknown word (SONAME)         -- PROPERTIES IMPORTED_SONAME libslint_cpp.dylib)
+api/cpp/CMakeLists.txt:178:75    - Unknown word (libslint)       -- PROPERTIES IMPORTED_SONAME libslint_cpp.dylib)
+api/cpp/CMakeLists.txt:178:88    - Unknown word (dylib)          -- SONAME libslint_cpp.dylib)
+api/cpp/CMakeLists.txt:186:49    - Unknown word (bigobj)         -- options(Slint INTERFACE /bigobj)
+api/cpp/CMakeLists.txt:196:5     - Unknown word (endforeach)     -- endforeach()
+api/cpp/CMakeLists.txt:205:39    - Unknown word (println)        -- APPEND features "esp-println/${IDF_TARGET}")
+api/cpp/CMakeLists.txt:276:40    - Unknown word (STREQUAL)       -- AND NOT SLINT_STYLE STREQUAL "native")
+api/cpp/CMakeLists.txt:282:34    - Unknown word (buildroot)      -- environments such as buildroot set PKG_CONFIG_SYSROOT
+api/cpp/CMakeLists.txt:296:22    - Unknown word (CLANGCC)        -- find_program(CLANGCC clang)
+api/cpp/CMakeLists.txt:297:22    - Unknown word (CLANGCXX)       -- find_program(CLANGCXX clang++)
+api/cpp/CMakeLists.txt:298:12    - Unknown word (CLANGCC)        -- if(CLANGCC AND NOT DEFINED ENV
+api/cpp/CMakeLists.txt:298:40    - Unknown word (CLANGCC)        -- AND NOT DEFINED ENV{CLANGCC})
+api/cpp/CMakeLists.txt:303:17    - Unknown word (CLANGCC)        -- CLANGCC=${CLANGCC}
+api/cpp/CMakeLists.txt:303:27    - Unknown word (CLANGCC)        -- CLANGCC=${CLANGCC}
+api/cpp/CMakeLists.txt:306:12    - Unknown word (CLANGCXX)       -- if(CLANGCXX AND NOT DEFINED ENV
+api/cpp/CMakeLists.txt:306:41    - Unknown word (CLANGCXX)       -- AND NOT DEFINED ENV{CLANGCXX})
+api/cpp/CMakeLists.txt:311:17    - Unknown word (CLANGCXX)       -- CLANGCXX=${CLANGCXX}
+api/cpp/CMakeLists.txt:311:28    - Unknown word (CLANGCXX)       -- CLANGCXX=${CLANGCXX}
+api/cpp/CMakeLists.txt:318:65    - Unknown word (Yocto)          -- bet. Unfortunately in Yocto environments, CC will
+api/cpp/CMakeLists.txt:319:51    - Unknown word (CFLAGS)         -- The same applies to CFLAGS, which may contain target
+api/cpp/CMakeLists.txt:323:71    - Unknown word (CFLAGS)         -- clang or gcc and empty CFLAGS_<host triplet>
+api/cpp/CMakeLists.txt:324:18    - Unknown word (CROSSCOMPILING) -- if(CMAKE_CROSSCOMPILING AND Rust_CARGO_HOST
+api/cpp/CMakeLists.txt:345:21    - Unknown word (CFLAGS)         -- CFLAGS_${cargo_host_target
+api/cpp/CMakeLists.txt:356:5     - Unknown word (endforeach)     -- endforeach()
+api/cpp/CMakeLists.txt:368:61    - Unknown word (pathdata)       -- generated_include/slint_pathdata_internal.h
+api/cpp/CMakeLists.txt:372:61    - Unknown word (sharedvector)   -- generated_include/slint_sharedvector_internal.h
+api/cpp/CMakeLists.txt:387:5     - Unknown word (endforeach)     -- endforeach()
+api/cpp/CMakeLists.txt:41:12     - Unknown word (TOUPPER)    -- string(TOUPPER "${cargo_feature}" cmake
+api/cpp/CMakeLists.txt:432:31    - Unknown word (RELWITHDEBINFO) -- IMPORTED_LOCATION_RELWITHDEBINFO IMPORTED_LOCATION_MINSIZEREL
+api/cpp/CMakeLists.txt:432:64    - Unknown word (MINSIZEREL)     -- WITHDEBINFO IMPORTED_LOCATION_MINSIZEREL
+api/cpp/CMakeLists.txt:433:22    - Unknown word (IMPLIB)         -- IMPORTED_IMPLIB IMPORTED_IMPLIB_DEBUG
+api/cpp/CMakeLists.txt:433:38    - Unknown word (IMPLIB)         -- IMPORTED_IMPLIB IMPORTED_IMPLIB_DEBUG IMPORTED_IMPLIB
+api/cpp/CMakeLists.txt:433:60    - Unknown word (IMPLIB)         -- IMPLIB_DEBUG IMPORTED_IMPLIB_RELEASE
+api/cpp/CMakeLists.txt:434:22    - Unknown word (IMPLIB)         -- IMPORTED_IMPLIB_RELWITHDEBINFO IMPORTED
+api/cpp/CMakeLists.txt:434:29    - Unknown word (RELWITHDEBINFO) -- IMPORTED_IMPLIB_RELWITHDEBINFO IMPORTED_IMPLIB_MINSIZEREL
+api/cpp/CMakeLists.txt:434:53    - Unknown word (IMPLIB)         -- RELWITHDEBINFO IMPORTED_IMPLIB_MINSIZEREL)
+api/cpp/CMakeLists.txt:434:60    - Unknown word (MINSIZEREL)     -- ELWITHDEBINFO IMPORTED_IMPLIB_MINSIZEREL)
+api/cpp/CMakeLists.txt:441:9     - Unknown word (endforeach)     -- endforeach()
+api/cpp/CMakeLists.txt:443:38    - Unknown word (SONAME)         -- Corrosion sets IMPORTED_NO_SONAME and for macOS we reset
+api/cpp/CMakeLists.txt:444:28    - Unknown word (SONAME)         -- # and set IMPORTED_SONAME. Make sure to propagate
+api/cpp/CMakeLists.txt:446:34    - Unknown word (SONAME)         -- foreach(prop IMPORTED_NO_SONAME IMPORTED_SONAME)
+api/cpp/CMakeLists.txt:451:9     - Unknown word (endforeach)     -- endforeach()
+api/cpp/CMakeLists.txt:460:5     - Unknown word (endfunction)    -- endfunction()
+api/cpp/CMakeLists.txt:479:5     - Unknown word (CPACK)          -- set(CPACK_PACKAGE_NAME "Slint
+api/cpp/CMakeLists.txt:480:5     - Unknown word (CPACK)          -- set(CPACK_PACKAGE_VENDOR "Slint
+api/cpp/CMakeLists.txt:481:5     - Unknown word (CPACK)          -- set(CPACK_VERBATIM_VARIABLES true
+api/cpp/CMakeLists.txt:482:5     - Unknown word (CPACK)          -- set(CPACK_PACKAGE_VERSION_MAJOR
+api/cpp/CMakeLists.txt:483:5     - Unknown word (CPACK)          -- set(CPACK_PACKAGE_VERSION_MINOR
+api/cpp/CMakeLists.txt:489:11    - Unknown word (NSIS)           -- set(CPACK_NSIS_DEFINES "ManifestDPIAware
+api/cpp/CMakeLists.txt:513:27    - Unknown word (STREQUAL)       -- NOT Rust_CARGO_TARGET STREQUAL Rust_CARGO_HOST_TARGET
+api/cpp/CMakeLists.txt:54:1      - Unknown word (endfunction) -- endfunction()
+api/cpp/CMakeLists.txt:58:12     - Unknown word (TOUPPER)     -- string(TOUPPER "${cargo_feature}" cmake
+api/cpp/CMakeLists.txt:71:1      - Unknown word (endfunction) -- endfunction()
+api/cpp/CMakeLists.txt:80:12     - Unknown word (TOUPPER)     -- string(TOUPPER "${renderer}" cmake
+api/cpp/CMakeLists.txt:87:1      - Unknown word (endfunction) -- endfunction()
 api/cpp/README.md:79:40     - Unknown word (cortexa)    -- sdk/environment-setup-cortexa53-crypto-poky-linux
 api/cpp/README.md:83:54     - Unknown word (DCMAKE)     -- -unknown-linux-gnu -DCMAKE_INSTALL_PREFIX=/slint
 api/cpp/cbindgen.rs:1020:13   - Unknown word (linuxkms)   -- backend_linuxkms
@@ -210,6 +210,7 @@ api/cpp/esp-idf/slint/cmake/FindSlint.cmake:44:60     - Unknown word (espidf)   
 api/cpp/esp-idf/slint/cmake/FindSlint.cmake:46:51     - Unknown word (imafc)      -- ARCHITECTURE "riscv32imafc-esp-espidf")
 api/cpp/esp-idf/slint/cmake/FindSlint.cmake:46:61     - Unknown word (espidf)     -- RCHITECTURE "riscv32imafc-esp-espidf")
 api/cpp/esp-idf/slint/cmake/FindSlint.cmake:48:59     - Unknown word (espidf)     -- ARCHITECTURE "riscv32imc-esp-espidf")
+api/cpp/esp-idf/slint/include/slint-esp.h:34:32     - Unknown word (sdkconfig)  -- default depends on the sdkconfig, but you can use either
 api/cpp/esp-idf/slint/src/slint-esp.cpp:143:88    - Unknown word (lvgl)       -- to polling like esp_lvgl_port.
 api/cpp/esp-idf/slint/src/slint-esp.cpp:144:16    - Unknown word (LVGL)       -- // LVGL polls in 5ms intervals
 api/cpp/esp-idf/slint/src/slint-esp.cpp:200:28    - Unknown word (LOGI)       -- // ESP_LOGI(TAG, "x: %i, y: %i"
@@ -892,20 +893,54 @@ demos/usecases/esp-idf/sdkconfig.defaults:74:20     - Unknown word (SPRINTF)    
 demos/usecases/esp-idf/sdkconfig.defaults:7:10      - Unknown word (SPIRAM)     -- # CONFIG_SPIRAM_MODE_HEX=y
 demos/usecases/esp-idf/sdkconfig.defaults:8:10      - Unknown word (SPIRAM)     -- # CONFIG_SPIRAM_SPEED_200M=y
 demos/usecases/rust/index.html:33:29     - Unknown word (usecases)   -- import init from './pkg/usecases_lib.js';
-demos/usecases/rust/src/lib.rs:114:25    - Unknown word (Aurindam)   -- title: "Aurindam Jana".into(),
-demos/usecases/rust/src/lib.rs:90:25     - Unknown word (Aurindam)   -- title: "Aurindam Jana".into(),
-demos/usecases/ui/app.slint:17:19     - Unknown word (usecases)   -- title: "Slint usecases";
+demos/usecases/rust/src/lib.rs:115:25    - Unknown word (Aurindam)   -- title: "Aurindam Jana".into(),
+demos/usecases/rust/src/lib.rs:35:18     - Unknown word (Usecases)   -- app.global::<UsecasesPalette>().set_use_material
+demos/usecases/rust/src/lib.rs:91:25     - Unknown word (Aurindam)   -- title: "Aurindam Jana".into(),
+demos/usecases/ui/app.slint:16:10     - Unknown word (Usecases)   -- export { UsecasesPalette } from "widgets
+demos/usecases/ui/app.slint:21:19     - Unknown word (usecases)   -- title: "Slint usecases";
+demos/usecases/ui/app.slint:22:17     - Unknown word (Usecases)   -- background: UsecasesPalette.use-material
+demos/usecases/ui/app.slint:9:42      - Unknown word (Usecases)   -- rdListViewItem, DialogGlobal, UsecasesPalette } from "widgets
 demos/usecases/ui/assets.slint:19:26     - Unknown word (useres)     -- out property <image> useres: @image-url("assets
-demos/usecases/ui/views/header_view.slint:17:12     - Unknown word (spaceer)    -- // spaceer
-demos/usecases/ui/views/mail_view.slint:134:21    - Unknown word (Aurindam)   -- title: "Aurindam Jana",
-demos/usecases/ui/views/mail_view.slint:153:21    - Unknown word (Aurindam)   -- title: "Aurindam Jana",
-demos/usecases/ui/views/mail_view.slint:28:56     - Unknown word (useres)     -- "3972", icon: Icons.useres },
+demos/usecases/ui/views/header_view.slint:12:21     - Unknown word (Usecases)   -- background: UsecasesPalette.use-material
+demos/usecases/ui/views/header_view.slint:15:22     - Unknown word (Usecases)   -- padding: UsecasesPalette.use-material
+demos/usecases/ui/views/header_view.slint:23:16     - Unknown word (spaceer)    -- // spaceer
+demos/usecases/ui/views/header_view.slint:6:10      - Unknown word (Usecases)   -- import { UsecasesPalette } from "../widgets
+demos/usecases/ui/views/mail_view.slint:110:22    - Unknown word (Usecases)   -- padding: UsecasesPalette.use-material
+demos/usecases/ui/views/mail_view.slint:148:21    - Unknown word (Aurindam)   -- title: "Aurindam Jana",
+demos/usecases/ui/views/mail_view.slint:167:21    - Unknown word (Aurindam)   -- title: "Aurindam Jana",
+demos/usecases/ui/views/mail_view.slint:30:56     - Unknown word (useres)     -- "3972", icon: Icons.useres },
+demos/usecases/ui/views/mail_view.slint:49:17     - Unknown word (Usecases)   -- background: UsecasesPalette.use-material
+demos/usecases/ui/views/mail_view.slint:50:19     - Unknown word (Usecases)   -- border-color: UsecasesPalette.use-material
+demos/usecases/ui/views/mail_view.slint:67:28     - Unknown word (Usecases)   -- border-radius: UsecasesPalette.use-material
+demos/usecases/ui/views/mail_view.slint:8:10      - Unknown word (Usecases)   -- import { UsecasesPalette } from "../widgets
+demos/usecases/ui/views/main_view.slint:8:10      - Unknown word (Usecases)   -- import { UsecasesPalette } from "../widgets
+demos/usecases/ui/widgets.slint:39:10     - Unknown word (Usecases)   -- export { UsecasesPalette } from "widgets
+demos/usecases/ui/widgets/bar_chart.slint:20:25     - Unknown word (Usecases)   -- background: UsecasesPalette.bar-gradient
+demos/usecases/ui/widgets/bar_chart.slint:4:10      - Unknown word (Usecases)   -- import { UsecasesPalette } from "styling
+demos/usecases/ui/widgets/container.slint:22:41     - Unknown word (Usecases)   -- state-layer.background: UsecasesPalette.state-pressed
+demos/usecases/ui/widgets/container.slint:25:41     - Unknown word (Usecases)   -- state-layer.background: UsecasesPalette.state-hover;
+demos/usecases/ui/widgets/container.slint:28:41     - Unknown word (Usecases)   -- state-layer.background: UsecasesPalette.state-selected
+demos/usecases/ui/widgets/container.slint:5:10      - Unknown word (Usecases)   -- import { UsecasesPalette } from "styling
+demos/usecases/ui/widgets/dialog.slint:18:21     - Unknown word (Usecases)   -- background: UsecasesPalette.modal-background
+demos/usecases/ui/widgets/dialog.slint:4:10      - Unknown word (Usecases)   -- import { UsecasesPalette } from "styling
+demos/usecases/ui/widgets/extended_line_edit.slint:103:41    - Unknown word (Usecases)   -- length> style-min-height: UsecasesPalette.use-material
+demos/usecases/ui/widgets/extended_line_edit.slint:147:24    - Unknown word (Usecases)   -- border-radius: UsecasesPalette.use-material
+demos/usecases/ui/widgets/extended_line_edit.slint:148:21    - Unknown word (Usecases)   -- background: UsecasesPalette.use-material
+demos/usecases/ui/widgets/extended_line_edit.slint:149:41    - Unknown word (Usecases)   -- width: root.has-focus && UsecasesPalette.use-material
+demos/usecases/ui/widgets/extended_line_edit.slint:5:10      - Unknown word (Usecases)   -- import { UsecasesPalette } from "styling
 demos/usecases/ui/widgets/extended_line_edit.slint:60:46     - Unknown word (preedit)    -- == "" && text-input.preedit-text == "") ? root.placeholde
 demos/usecases/ui/widgets/extended_line_edit.slint:79:33     - Unknown word (cpos)       -- cursor-position-changed(cpos) => {
 demos/usecases/ui/widgets/extended_line_edit.slint:80:17     - Unknown word (cpos)       -- if (cpos.x + self.computed_x
 demos/usecases/ui/widgets/extended_line_edit.slint:81:37     - Unknown word (cpos)       -- self.computed_x = - cpos.x + root.margin;
 demos/usecases/ui/widgets/extended_line_edit.slint:82:24     - Unknown word (cpos)       -- } else if (cpos.x + self.computed_x
 demos/usecases/ui/widgets/extended_line_edit.slint:83:50     - Unknown word (cpos)       -- computed_x = parent.width - cpos.x - root.margin - self
+demos/usecases/ui/widgets/navigation_list_view.slint:18:41     - Unknown word (Usecases)   -- length> style-min-height: UsecasesPalette.use-material
+demos/usecases/ui/widgets/navigation_list_view.slint:26:28     - Unknown word (Usecases)   -- border-radius: UsecasesPalette.use-material
+demos/usecases/ui/widgets/navigation_list_view.slint:5:10      - Unknown word (Usecases)   -- import { UsecasesPalette } from "styling
+demos/usecases/ui/widgets/navigation_list_view.slint:62:36     - Unknown word (Usecases)   -- background.background: UsecasesPalette.state-selected
+demos/usecases/ui/widgets/navigation_list_view.slint:63:25     - Unknown word (Usecases)   -- foreground: UsecasesPalette.accent-text;
+demos/usecases/ui/widgets/styling.slint:31:15     - Unknown word (Usecases)   -- export global UsecasesPalette {
+demos/usecases/ui/widgets/value_display.slint:4:10      - Unknown word (Usecases)   -- import { UsecasesPalette, CosmicFontSettings
 demos/weather-demo/README.md:11:48     - Unknown word (Felgo)      -- application made by [Felgo](https://felgo.com/
 demos/weather-demo/README.md:31:58     - Unknown word (hspace)     -- png" height="415px" hspace="5" />
 demos/weather-demo/src/weather/dummyweathercontroller.rs:21:46     - Unknown word (dummyweather) -- std::include_str!("./dummyweather.json");
@@ -2228,14 +2263,14 @@ internal/compiler/generator/cpp.rs:1055:34   - Unknown word (glyphsets)  -- arra
 internal/compiler/generator/cpp.rs:33:66     - Unknown word (compl)      -- char32_t", "class", "compl", "concept", "const
 internal/compiler/generator/cpp.rs:34:14     - Unknown word (consteval)  -- "consteval", "constexpr", "constinit
 internal/compiler/generator/cpp.rs:34:40     - Unknown word (constinit)  -- consteval", "constexpr", "constinit", "const_cast", "continue
-internal/compiler/generator/cpp.rs:3834:32   - Unknown word (textinput)  -- format!("slint_textinput_set_selection_offsets
-internal/compiler/generator/cpp.rs:3861:46   - Unknown word (fontmetrics) -- slint_cpp_text_item_fontmetrics(&{window}.handle(),
+internal/compiler/generator/cpp.rs:3835:32   - Unknown word (textinput)  -- format!("slint_textinput_set_selection_offsets
+internal/compiler/generator/cpp.rs:3862:46   - Unknown word (fontmetrics) -- slint_cpp_text_item_fontmetrics(&{window}.handle(),
 internal/compiler/generator/cpp.rs:39:37     - Unknown word (reflexpr)   -- protected", "public", "reflexpr", "register", "reinterpret
-internal/compiler/generator/cpp.rs:4071:17   - Unknown word (strs)        -- let all_strs = ms.iter().flatten
-internal/compiler/generator/cpp.rs:4072:17   - Unknown word (strs)        -- let all_strs_len = all_strs.clone
-internal/compiler/generator/cpp.rs:4072:32   - Unknown word (strs)        -- let all_strs_len = all_strs.clone().count();
-internal/compiler/generator/cpp.rs:4076:34   - Unknown word (strs)        -- array_size: Some(all_strs_len),
-internal/compiler/generator/cpp.rs:4079:21   - Unknown word (strs)        -- all_strs.map(|s| format_smolstr
+internal/compiler/generator/cpp.rs:4072:17   - Unknown word (strs)        -- let all_strs = ms.iter().flatten
+internal/compiler/generator/cpp.rs:4073:17   - Unknown word (strs)        -- let all_strs_len = all_strs.clone
+internal/compiler/generator/cpp.rs:4073:32   - Unknown word (strs)        -- let all_strs_len = all_strs.clone().count();
+internal/compiler/generator/cpp.rs:4077:34   - Unknown word (strs)        -- array_size: Some(all_strs_len),
+internal/compiler/generator/cpp.rs:4080:21   - Unknown word (strs)        -- all_strs.map(|s| format_smolstr
 internal/compiler/generator/cpp.rs:996:17    - Unknown word (charmap)    -- let charmap_var = format_smolstr
 internal/compiler/generator/cpp.rs:996:75    - Unknown word (charmap)    -- embedded_resource_{}_charmap", resource.id);
 internal/compiler/generator/cpp.rs:997:17    - Unknown word (charmap)    -- let charmap_size = character_map
@@ -2637,7 +2672,7 @@ internal/compiler/widgets/material/groupbox.slint:28:28     - Unknown word (Robo
 internal/compiler/widgets/material/std-widgets-impl.slint:25:49     - Unknown word (Roboto)     -- default-font-family: "Roboto";
 internal/compiler/widgets/material/std-widgets.slint:18:36     - Unknown word (progressindicator) -- ProgressIndicator } from "progressindicator.slint";
 internal/compiler/widgets/material/std-widgets.slint:23:42     - Unknown word (datepicker)        -- tePickerPopup, Date } from "./datepicker.slint";
-internal/compiler/widgets/material/tabwidget.slint:79:28     - Unknown word (Roboto)     -- // FIXME after Roboto font can be loaded
+internal/compiler/widgets/material/tabwidget.slint:80:28     - Unknown word (Roboto)     -- // FIXME after Roboto font can be loaded
 internal/compiler/widgets/qt/datepicker.slint:7:43      - Unknown word (standardbutton) -- ndardButton } from "../common/standardbutton.slint";
 internal/compiler/widgets/qt/datepicker.slint:9:49      - Unknown word (datepicker)     -- ePickerBase } from "../common/datepicker_base.slint";
 internal/compiler/widgets/qt/std-widgets.slint:17:36     - Unknown word (progressindicator) -- ProgressIndicator } from "progressindicator.slint";
@@ -2749,19 +2784,19 @@ internal/core/properties/properties_animations.rs:529:42    - Unknown word (frac
 internal/core/properties/properties_animations.rs:571:13    - Unknown word (fractual)   -- // (fractual) end of animation
 internal/core/sharedvector.rs:670:31    - Unknown word (sharedvector) -- serialize_deserialize_sharedvector() {
 internal/core/slice.rs:11:50     - Unknown word (repr)       -- same as `&'a [T]`  but `repr(C)`
-internal/core/software_renderer.rs:1695:41   - Unknown word (fract)      -- let fract_x = normalize(
-internal/core/software_renderer.rs:1698:74   - Unknown word (fract)      -- delta32 * off_x as i32 + fract_x;
-internal/core/software_renderer.rs:1699:41   - Unknown word (fract)      -- let fract_y =
-internal/core/software_renderer.rs:1701:74   - Unknown word (fract)      -- delta32 * off_y as i32 + fract_y;
+internal/core/software_renderer.rs:1693:41   - Unknown word (fract)      -- let fract_x = normalize(
+internal/core/software_renderer.rs:1696:74   - Unknown word (fract)      -- delta32 * off_x as i32 + fract_x;
+internal/core/software_renderer.rs:1697:41   - Unknown word (fract)      -- let fract_y =
+internal/core/software_renderer.rs:1699:74   - Unknown word (fract)      -- delta32 * off_y as i32 + fract_y;
 internal/core/software_renderer/draw_functions.rs:119:17    - Unknown word (fract)      -- let col_fract = col.fract();
-internal/core/software_renderer/draw_functions.rs:660:64    - Unknown word (Zeroable)   -- bytemuck::Pod, bytemuck::Zeroable)]
-internal/core/software_renderer/draw_functions.rs:678:8     - Unknown word (premultiply) -- fn premultiply(col: Color) -> Self
-internal/core/software_renderer/draw_functions.rs:746:79    - Unknown word (Zeroable)    -- bytemuck::Pod, bytemuck::Zeroable)]
+internal/core/software_renderer/draw_functions.rs:666:64    - Unknown word (Zeroable)   -- bytemuck::Pod, bytemuck::Zeroable)]
+internal/core/software_renderer/draw_functions.rs:684:8     - Unknown word (premultiply) -- fn premultiply(col: Color) -> Self
+internal/core/software_renderer/draw_functions.rs:752:79    - Unknown word (Zeroable)    -- bytemuck::Pod, bytemuck::Zeroable)]
 internal/core/software_renderer/draw_functions.rs:82:17     - Unknown word (fract)      -- let row_fract = row.fract();
 internal/core/software_renderer/draw_functions.rs:82:29     - Unknown word (fract)      -- let row_fract = row.fract();
 internal/core/software_renderer/draw_functions.rs:93:65     - Unknown word (fract)      -- as usize * bpp, pos.fract(), row_fract);
 internal/core/software_renderer/draw_functions.rs:93:78     - Unknown word (fract)      -- bpp, pos.fract(), row_fract);
-internal/core/software_renderer/fixed.rs:29:12     - Unknown word (fract)      -- pub fn fract(self) -> u8
+internal/core/software_renderer/fixed.rs:32:12     - Unknown word (fract)      -- pub fn fract(self) -> u8
 internal/core/software_renderer/fonts.rs:132:25    - Unknown word (vectorfont)  -- if let Some(vectorfont) = systemfonts::match
 internal/core/software_renderer/fonts.rs:133:24    - Unknown word (vectorfont)  -- return vectorfont.into();
 internal/core/software_renderer/fonts.rs:26:12     - Unknown word (Renderable) -- pub struct RenderableGlyph {
@@ -3603,16 +3638,18 @@ tools/lsp/main.rs:44:24     - Unknown word (Jemalloc)   -- use tikv_jemallocator
 tools/lsp/main.rs:48:16     - Unknown word (Jemalloc)   -- static GLOBAL: Jemalloc = Jemalloc;
 tools/lsp/main.rs:48:27     - Unknown word (Jemalloc)   -- static GLOBAL: Jemalloc = Jemalloc;
 tools/lsp/preview/native.rs:307:23    - Unknown word (nsapp)      -- menu_bar.init_for_nsapp();
-tools/lsp/preview/ui.rs:1792:25   - Unknown word (Sometype)   -- type_name: "Sometype".into(),
-tools/lsp/preview/ui.rs:1815:42   - Unknown word (BBBX)       -- test_property("bbb", "BBBX"),
-tools/lsp/preview/ui.rs:1837:44   - Unknown word (BBBX)       -- value.code.as_str(), "BBBX");
+tools/lsp/preview/ui.rs:1908:25   - Unknown word (Sometype)   -- type_name: "Sometype".into(),
+tools/lsp/preview/ui.rs:1931:42   - Unknown word (BBBX)       -- test_property("bbb", "BBBX"),
+tools/lsp/preview/ui.rs:1953:44   - Unknown word (BBBX)       -- value.code.as_str(), "BBBX");
 tools/lsp/preview/ui.rs:8:41      - Unknown word (langtype)   -- compiler::{expression_tree, langtype, literals};
 tools/lsp/preview/ui.rs:9:16      - Unknown word (Itertools)  -- use itertools::Itertools;
 tools/lsp/ui/api.slint:132:42    - Unknown word (dataonly)   -- // Used by preview dataonly!
 tools/lsp/ui/api.slint:133:46    - Unknown word (dataonly)   -- // Used in preview dataonly!
 tools/lsp/ui/components/selection-popup.slint:221:19    - Unknown word (lightgray)  -- border-color: lightgray;
 tools/lsp/ui/components/selection-popup.slint:454:33    - Unknown word (unhover)    -- unhover when !ta.has-hover
+tools/lsp/ui/components/spreadsheet-dialog.slint:8:34      - Unknown word (windowglobal) -- WindowGlobal } from "../windowglobal.slint";
 tools/lsp/ui/components/styling.slint:48:26     - Unknown word (eightbit)   -- in property <length> eightbit-int-size: 40px;
+tools/lsp/ui/main.slint:19:31     - Unknown word (windowglobal) -- WindowGlobal } from "windowglobal.slint";
 tools/lsp/util.rs:139:9     - Unknown word (qualname)   -- let qualname = object_tree::QualifiedTypeN
 tools/lsp/util.rs:142:43    - Unknown word (qualname)   -- type_for_child_element(&qualname.to_string(), tr).ok
 tools/slintpad/package.json:46:21     - Unknown word (ctrf)       -- "playwright-ctrf-json-reporter": "0.

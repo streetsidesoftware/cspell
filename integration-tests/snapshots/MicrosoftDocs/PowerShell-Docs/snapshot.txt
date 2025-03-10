@@ -3,7 +3,7 @@ Repository: MicrosoftDocs/PowerShell-Docs
 Url: "https://github.com/MicrosoftDocs/PowerShell-Docs.git"
 Args: ["--config=../../../cspell-power-shell-docs.config.yaml","**"]
 Lines:
- CSpell: Files checked: 2709, Issues found: 4590 in 1078 files.
+ CSpell: Files checked: 2707, Issues found: 4584 in 1076 files.
  exit code: 1
 CODE_OF_CONDUCT.md:38:38     - Unknown word (opensource) -- reach out at [aka.ms/opensource/moderation-support]
 LICENSE.md:122:56    - Unknown word (sublicensable)   -- worldwide, royalty-free, non-sublicensable,
@@ -392,8 +392,10 @@ reference/5.1/Microsoft.PowerShell.Core/Register-PSSessionConfiguration.md:128:6
 reference/5.1/Microsoft.PowerShell.Core/Remove-PSSession.md:108:7     - Unknown word (Serv)       -- with `Serv`.
 reference/5.1/Microsoft.PowerShell.Core/Remove-PSSnapin.md:158:4     - Unknown word (rsnp)       -- - `rsnp`
 reference/5.1/Microsoft.PowerShell.Core/Resume-Job.md:399:4     - Unknown word (rujb)       -- - `rujb`
-reference/5.1/Microsoft.PowerShell.Core/Save-Help.md:141:64    - Unknown word (Fileshare)  -- files in the `\\Server01\Fileshare01` folder.
-reference/5.1/Microsoft.PowerShell.Core/Save-Help.md:150:20    - Unknown word (Fileshare)  -- in the `\\Server01\Fileshare01` folder.
+reference/5.1/Microsoft.PowerShell.Core/Save-Help.md:102:2     - Unknown word (cimsession) -- $cimsession = New-CimSession -ComputerNam
+reference/5.1/Microsoft.PowerShell.Core/Save-Help.md:103:32    - Unknown word (cimsession) -- Module -CimSession $cimsession -Name "DhcpServer"
+reference/5.1/Microsoft.PowerShell.Core/Save-Help.md:136:31    - Unknown word (Fileshare)  -- files in the `\\Server01\Fileshare01` folder.
+reference/5.1/Microsoft.PowerShell.Core/Save-Help.md:145:20    - Unknown word (Fileshare)  -- in the `\\Server01\Fileshare01` folder.
 reference/5.1/Microsoft.PowerShell.Core/Save-Help.md:165:13    - Unknown word (Fileshare)  -- `\\Server01\Fileshare01` folder.
 reference/5.1/Microsoft.PowerShell.Core/Start-Job.md:583:4     - Unknown word (sajb)       -- - `sajb`
 reference/5.1/Microsoft.PowerShell.Core/Stop-Job.md:412:4     - Unknown word (spjb)       -- - `spjb`
@@ -504,7 +506,7 @@ reference/5.1/Microsoft.PowerShell.Management/Undo-Transaction.md:63:14     - Un
 reference/5.1/Microsoft.PowerShell.Security/Get-AuthenticodeSignature.md:59:63     - Unknown word (makexml)    -- ps1, sign-file.ps1, makexml.ps1
 reference/5.1/Microsoft.PowerShell.Security/Get-AuthenticodeSignature.md:88:79     - Unknown word (Pathor)     -- AsByteStream) -SourcePathorExtension ps1
 reference/5.1/Microsoft.PowerShell.Security/Protect-CmsMessage.md:78:14     - Unknown word (KEYEXCHANGE) -- KeySpec = AT_KEYEXCHANGE
-reference/5.1/Microsoft.PowerShell.Security/Set-AuthenticodeSignature.md:94:46     - Unknown word (Mysign)     -- Certificate -FilePath C:\Test\Mysign.pfx
+reference/5.1/Microsoft.PowerShell.Security/Set-AuthenticodeSignature.md:93:46     - Unknown word (Mysign)     -- Certificate -FilePath C:\Test\Mysign.pfx
 reference/5.1/Microsoft.PowerShell.Utility/Add-Type.md:315:40    - Unknown word (beginprint) -- n <= 0 then () else beginprint_endline (string_of_int
 reference/5.1/Microsoft.PowerShell.Utility/Add-Type.md:315:51    - Unknown word (endline)    -- then () else beginprint_endline (string_of_int n);loop
 reference/5.1/Microsoft.PowerShell.Utility/Convert-String.md:31:42     - Unknown word (Akers)      -- , "David Ahs", "Kim Akers" | Convert-String -Example
@@ -622,16 +624,16 @@ reference/5.1/PSDiagnostics/Start-Trace.md:43:28     - Unknown word (bincirc)   
 reference/5.1/PSDiagnostics/Start-Trace.md:48:49     - Unknown word (wsmtraceproviders) -- env:windir\system32\wsmtraceproviders.txt"
 reference/5.1/PSDiagnostics/Start-Trace.md:94:3      - Unknown word (bincirc)           -- - bincirc - binary with circular
 reference/5.1/PSDiagnostics/Stop-Trace.md:38:26     - Unknown word (wsmlog)     -- Trace -SessionName 'wsmlog'
-reference/5.1/PSReadLine/About/about_PSReadLine.md:135:4     - Unknown word (asplaintext) -- - `asplaintext`
-reference/5.1/PSReadLine/About/about_PSReadLine.md:137:4     - Unknown word (apikey)      -- - `apikey`
-reference/5.1/PSReadLine/About/about_PSReadLine.md:174:79    - Unknown word (ysdfayf)     -- AsPlainText) -Secret2 sdv87ysdfayf798hfasd8f7ha # '-Secret
-reference/5.1/PSReadLine/About/about_PSReadLine.md:174:89    - Unknown word (hfasd)       -- Secret2 sdv87ysdfayf798hfasd8f7ha # '-Secret2' has
-reference/5.1/PSReadLine/About/about_PSReadLine.md:215:6     - Unknown word (PGPASS)      -- $env:PGPASS = gcloud auth print
+reference/5.1/PSReadLine/About/about_PSReadLine.md:136:4     - Unknown word (asplaintext) -- - `asplaintext`
+reference/5.1/PSReadLine/About/about_PSReadLine.md:138:4     - Unknown word (apikey)      -- - `apikey`
+reference/5.1/PSReadLine/About/about_PSReadLine.md:175:79    - Unknown word (ysdfayf)     -- AsPlainText) -Secret2 sdv87ysdfayf798hfasd8f7ha # '-Secret
+reference/5.1/PSReadLine/About/about_PSReadLine.md:175:89    - Unknown word (hfasd)       -- Secret2 sdv87ysdfayf798hfasd8f7ha # '-Secret2' has
+reference/5.1/PSReadLine/About/about_PSReadLine.md:216:6     - Unknown word (PGPASS)      -- $env:PGPASS = gcloud auth print
 reference/5.1/PSReadLine/About/about_PSReadLine_Functions.md:338:13    - Unknown word (Rubout)     -- ### UnixWordRubout
 reference/5.1/PSReadLine/About/about_PSReadLine_Functions.md:431:15    - Unknown word (Begining)   -- ### ViInsertAtBegining
-reference/5.1/PSReadLine/About/about_PSReadLine_Release_Notes.md:148:61    - Unknown word (apikey)      -- by changing `key` to `apikey` to reduce false positives
-reference/5.1/PSReadLine/About/about_PSReadLine_Release_Notes.md:181:8     - Unknown word (xtermjs)     -- - Add `xtermjs` keybindings
-reference/5.1/PSReadLine/About/about_PSReadLine_Release_Notes.md:60:5      - Unknown word (Autoadjusts) -- - Autoadjusts the size based on the
+reference/5.1/PSReadLine/About/about_PSReadLine_Release_Notes.md:157:61    - Unknown word (apikey)      -- by changing `key` to `apikey` to reduce
+reference/5.1/PSReadLine/About/about_PSReadLine_Release_Notes.md:191:8     - Unknown word (xtermjs)     -- - Add `xtermjs` keybindings
+reference/5.1/PSReadLine/About/about_PSReadLine_Release_Notes.md:67:5      - Unknown word (Autoadjusts) -- - Autoadjusts the size based on the
 reference/5.1/PSScheduledJob/About/about_Scheduled_Jobs_Advanced.md:214:53    - Unknown word (Parms)      -- splatting to create `$JobParms` which are parameter
 reference/5.1/PSScheduledJob/About/about_Scheduled_Jobs_Advanced.md:217:39    - Unknown word (Parms)      -- ScheduledJob` uses `@JobParms` to create a scheduled
 reference/5.1/PSScheduledJob/About/about_Scheduled_Jobs_Advanced.md:222:5     - Unknown word (Parms)      -- $JobParms = @{
@@ -1022,9 +1024,11 @@ reference/7.4/Microsoft.PowerShell.Core/Register-PSSessionConfiguration.md:127:1
 reference/7.4/Microsoft.PowerShell.Core/Register-PSSessionConfiguration.md:132:55    - Unknown word (FASA)       -- P(AU;FA;GA;;;WD)(AU;FASA;GWGX;;;WD)"
 reference/7.4/Microsoft.PowerShell.Core/Register-PSSessionConfiguration.md:132:60    - Unknown word (GWGX)       -- FA;GA;;;WD)(AU;FASA;GWGX;;;WD)"
 reference/7.4/Microsoft.PowerShell.Core/Remove-PSSession.md:108:7     - Unknown word (Serv)       -- with `Serv`.
-reference/7.4/Microsoft.PowerShell.Core/Save-Help.md:143:64    - Unknown word (Fileshare)  -- files in the `\\Server01\Fileshare01` folder.
-reference/7.4/Microsoft.PowerShell.Core/Save-Help.md:152:20    - Unknown word (Fileshare)  -- in the `\\Server01\Fileshare01` folder.
-reference/7.4/Microsoft.PowerShell.Core/Save-Help.md:167:13    - Unknown word (Fileshare)  -- `\\Server01\Fileshare01` folder.
+reference/7.4/Microsoft.PowerShell.Core/Save-Help.md:105:2     - Unknown word (cimsession) -- $cimsession = New-CimSession -ComputerNam
+reference/7.4/Microsoft.PowerShell.Core/Save-Help.md:106:32    - Unknown word (cimsession) -- Module -CimSession $cimsession -Name "DhcpServer"
+reference/7.4/Microsoft.PowerShell.Core/Save-Help.md:139:31    - Unknown word (Fileshare)  -- files in the `\\Server01\Fileshare01` folder.
+reference/7.4/Microsoft.PowerShell.Core/Save-Help.md:148:20    - Unknown word (Fileshare)  -- in the `\\Server01\Fileshare01` folder.
+reference/7.4/Microsoft.PowerShell.Core/Save-Help.md:168:13    - Unknown word (Fileshare)  -- `\\Server01\Fileshare01` folder.
 reference/7.4/Microsoft.PowerShell.Core/Start-Job.md:694:6     - Unknown word (sajb)       -- - `sajb`
 reference/7.4/Microsoft.PowerShell.Core/Stop-Job.md:413:6     - Unknown word (spjb)       -- - `spjb`
 reference/7.4/Microsoft.PowerShell.Core/Switch-Process.md:12:43     - Unknown word (execv)      -- the cmdlet calls the `execv()` function to provide
@@ -1102,7 +1106,7 @@ reference/7.4/Microsoft.PowerShell.Management/Test-Path.md:488:52    - Unknown w
 reference/7.4/Microsoft.PowerShell.Security/Get-AuthenticodeSignature.md:61:63     - Unknown word (makexml)    -- ps1, sign-file.ps1, makexml.ps1
 reference/7.4/Microsoft.PowerShell.Security/Get-AuthenticodeSignature.md:90:79     - Unknown word (Pathor)     -- AsByteStream) -SourcePathorExtension ps1
 reference/7.4/Microsoft.PowerShell.Security/Protect-CmsMessage.md:80:14     - Unknown word (KEYEXCHANGE) -- KeySpec = AT_KEYEXCHANGE
-reference/7.4/Microsoft.PowerShell.Security/Set-AuthenticodeSignature.md:87:46     - Unknown word (Mysign)     -- Certificate -FilePath C:\Test\Mysign.pfx
+reference/7.4/Microsoft.PowerShell.Security/Set-AuthenticodeSignature.md:86:46     - Unknown word (Mysign)     -- Certificate -FilePath C:\Test\Mysign.pfx
 reference/7.4/Microsoft.PowerShell.Utility/ConvertFrom-StringData.md:203:1     - Unknown word (Vincentio)  -- Vincentio = Heaven doth with us
 reference/7.4/Microsoft.PowerShell.Utility/ConvertFrom-StringData.md:203:133   - Unknown word (twere)      -- not go forth of us, 'twere all alike\nAs if we
 reference/7.4/Microsoft.PowerShell.Utility/ConvertTo-Html.md:76:72     - Unknown word (pslog)      -- ConvertTo-Html | Out-File pslog.htm
@@ -1234,16 +1238,16 @@ reference/7.4/PSDiagnostics/Start-Trace.md:46:28     - Unknown word (bincirc)   
 reference/7.4/PSDiagnostics/Start-Trace.md:51:49     - Unknown word (wsmtraceproviders) -- env:windir\system32\wsmtraceproviders.txt"
 reference/7.4/PSDiagnostics/Start-Trace.md:97:3      - Unknown word (bincirc)           -- - bincirc - binary with circular
 reference/7.4/PSDiagnostics/Stop-Trace.md:40:26     - Unknown word (wsmlog)     -- Trace -SessionName 'wsmlog'
-reference/7.4/PSReadLine/About/about_PSReadLine.md:172:4     - Unknown word (asplaintext) -- - `asplaintext`
-reference/7.4/PSReadLine/About/about_PSReadLine.md:174:4     - Unknown word (apikey)      -- - `apikey`
-reference/7.4/PSReadLine/About/about_PSReadLine.md:211:79    - Unknown word (ysdfayf)     -- AsPlainText) -Secret2 sdv87ysdfayf798hfasd8f7ha # '-Secret
-reference/7.4/PSReadLine/About/about_PSReadLine.md:211:89    - Unknown word (hfasd)       -- Secret2 sdv87ysdfayf798hfasd8f7ha # '-Secret2' has
-reference/7.4/PSReadLine/About/about_PSReadLine.md:252:6     - Unknown word (PGPASS)      -- $env:PGPASS = gcloud auth print
+reference/7.4/PSReadLine/About/about_PSReadLine.md:173:4     - Unknown word (asplaintext) -- - `asplaintext`
+reference/7.4/PSReadLine/About/about_PSReadLine.md:175:4     - Unknown word (apikey)      -- - `apikey`
+reference/7.4/PSReadLine/About/about_PSReadLine.md:212:79    - Unknown word (ysdfayf)     -- AsPlainText) -Secret2 sdv87ysdfayf798hfasd8f7ha # '-Secret
+reference/7.4/PSReadLine/About/about_PSReadLine.md:212:89    - Unknown word (hfasd)       -- Secret2 sdv87ysdfayf798hfasd8f7ha # '-Secret2' has
+reference/7.4/PSReadLine/About/about_PSReadLine.md:253:6     - Unknown word (PGPASS)      -- $env:PGPASS = gcloud auth print
 reference/7.4/PSReadLine/About/about_PSReadLine_Functions.md:433:13    - Unknown word (Rubout)     -- ### UnixWordRubout
 reference/7.4/PSReadLine/About/about_PSReadLine_Functions.md:560:15    - Unknown word (Begining)   -- ### ViInsertAtBegining
-reference/7.4/PSReadLine/About/about_PSReadLine_Release_Notes.md:148:61    - Unknown word (apikey)      -- by changing `key` to `apikey` to reduce false positives
-reference/7.4/PSReadLine/About/about_PSReadLine_Release_Notes.md:181:8     - Unknown word (xtermjs)     -- - Add `xtermjs` keybindings
-reference/7.4/PSReadLine/About/about_PSReadLine_Release_Notes.md:60:5      - Unknown word (Autoadjusts) -- - Autoadjusts the size based on the
+reference/7.4/PSReadLine/About/about_PSReadLine_Release_Notes.md:157:61    - Unknown word (apikey)      -- by changing `key` to `apikey` to reduce
+reference/7.4/PSReadLine/About/about_PSReadLine_Release_Notes.md:191:8     - Unknown word (xtermjs)     -- - Add `xtermjs` keybindings
+reference/7.4/PSReadLine/About/about_PSReadLine_Release_Notes.md:67:5      - Unknown word (Autoadjusts) -- - Autoadjusts the size based on the
 reference/7.5/CimCmdlets/Get-CimAssociatedInstance.md:256:54    - Unknown word (DMTF)       -- this parameter, the DMTF standard resource URI
 reference/7.5/CimCmdlets/Get-CimAssociatedInstance.md:329:6     - Unknown word (gcai)       -- - `gcai`
 reference/7.5/CimCmdlets/Get-CimClass.md:315:6     - Unknown word (gcls)       -- - `gcls`
@@ -1600,9 +1604,11 @@ reference/7.5/Microsoft.PowerShell.Core/Receive-PSSession.md:900:6     - Unknown
 reference/7.5/Microsoft.PowerShell.Core/Register-PSSessionConfiguration.md:128:55    - Unknown word (FASA)       -- P(AU;FA;GA;;;WD)(AU;FASA;GWGX;;;WD)"
 reference/7.5/Microsoft.PowerShell.Core/Register-PSSessionConfiguration.md:128:60    - Unknown word (GWGX)       -- FA;GA;;;WD)(AU;FASA;GWGX;;;WD)"
 reference/7.5/Microsoft.PowerShell.Core/Remove-PSSession.md:108:7     - Unknown word (Serv)       -- with `Serv`.
-reference/7.5/Microsoft.PowerShell.Core/Save-Help.md:146:64    - Unknown word (Fileshare)  -- files in the `\\Server01\Fileshare01` folder.
-reference/7.5/Microsoft.PowerShell.Core/Save-Help.md:155:20    - Unknown word (Fileshare)  -- in the `\\Server01\Fileshare01` folder.
-reference/7.5/Microsoft.PowerShell.Core/Save-Help.md:170:13    - Unknown word (Fileshare)  -- `\\Server01\Fileshare01` folder.
+reference/7.5/Microsoft.PowerShell.Core/Save-Help.md:105:2     - Unknown word (cimsession) -- $cimsession = New-CimSession -ComputerNam
+reference/7.5/Microsoft.PowerShell.Core/Save-Help.md:106:32    - Unknown word (cimsession) -- Module -CimSession $cimsession -Name "DhcpServer"
+reference/7.5/Microsoft.PowerShell.Core/Save-Help.md:139:31    - Unknown word (Fileshare)  -- files in the `\\Server01\Fileshare01` folder.
+reference/7.5/Microsoft.PowerShell.Core/Save-Help.md:148:20    - Unknown word (Fileshare)  -- in the `\\Server01\Fileshare01` folder.
+reference/7.5/Microsoft.PowerShell.Core/Save-Help.md:168:13    - Unknown word (Fileshare)  -- `\\Server01\Fileshare01` folder.
 reference/7.5/Microsoft.PowerShell.Core/Start-Job.md:696:6     - Unknown word (sajb)       -- - `sajb`
 reference/7.5/Microsoft.PowerShell.Core/Stop-Job.md:413:6     - Unknown word (spjb)       -- - `spjb`
 reference/7.5/Microsoft.PowerShell.Core/Switch-Process.md:12:43     - Unknown word (execv)      -- the cmdlet calls the `execv()` function to provide
@@ -1668,7 +1674,7 @@ reference/7.5/Microsoft.PowerShell.Management/Test-Path.md:491:52    - Unknown w
 reference/7.5/Microsoft.PowerShell.Security/Get-AuthenticodeSignature.md:59:63     - Unknown word (makexml)    -- ps1, sign-file.ps1, makexml.ps1
 reference/7.5/Microsoft.PowerShell.Security/Get-AuthenticodeSignature.md:92:11     - Unknown word (Pathor)     -- SourcePathorExtension = "ps1"
 reference/7.5/Microsoft.PowerShell.Security/Protect-CmsMessage.md:80:14     - Unknown word (KEYEXCHANGE) -- KeySpec = AT_KEYEXCHANGE
-reference/7.5/Microsoft.PowerShell.Security/Set-AuthenticodeSignature.md:87:46     - Unknown word (Mysign)     -- Certificate -FilePath C:\Test\Mysign.pfx
+reference/7.5/Microsoft.PowerShell.Security/Set-AuthenticodeSignature.md:86:46     - Unknown word (Mysign)     -- Certificate -FilePath C:\Test\Mysign.pfx
 reference/7.5/Microsoft.PowerShell.Utility/ConvertFrom-StringData.md:203:1     - Unknown word (Vincentio)  -- Vincentio = Heaven doth with us
 reference/7.5/Microsoft.PowerShell.Utility/ConvertFrom-StringData.md:203:133   - Unknown word (twere)      -- not go forth of us, 'twere all alike\nAs if we
 reference/7.5/Microsoft.PowerShell.Utility/ConvertTo-Html.md:76:72     - Unknown word (pslog)      -- ConvertTo-Html | Out-File pslog.htm
@@ -1773,15 +1779,16 @@ reference/7.5/PSDiagnostics/Start-Trace.md:46:28     - Unknown word (bincirc)   
 reference/7.5/PSDiagnostics/Start-Trace.md:51:49     - Unknown word (wsmtraceproviders) -- env:windir\system32\wsmtraceproviders.txt"
 reference/7.5/PSDiagnostics/Start-Trace.md:97:3      - Unknown word (bincirc)           -- - bincirc - binary with circular
 reference/7.5/PSDiagnostics/Stop-Trace.md:40:26     - Unknown word (wsmlog)     -- Trace -SessionName 'wsmlog'
-reference/7.5/PSReadLine/About/about_PSReadLine.md:172:4     - Unknown word (asplaintext) -- - `asplaintext`
-reference/7.5/PSReadLine/About/about_PSReadLine.md:174:4     - Unknown word (apikey)      -- - `apikey`
-reference/7.5/PSReadLine/About/about_PSReadLine.md:211:79    - Unknown word (ysdfayf)     -- AsPlainText) -Secret2 sdv87ysdfayf798hfasd8f7ha # '-Secret
-reference/7.5/PSReadLine/About/about_PSReadLine.md:211:89    - Unknown word (hfasd)       -- Secret2 sdv87ysdfayf798hfasd8f7ha # '-Secret2' has
-reference/7.5/PSReadLine/About/about_PSReadLine.md:252:6     - Unknown word (PGPASS)      -- $env:PGPASS = gcloud auth print
+reference/7.5/PSReadLine/About/about_PSReadLine.md:173:4     - Unknown word (asplaintext) -- - `asplaintext`
+reference/7.5/PSReadLine/About/about_PSReadLine.md:175:4     - Unknown word (apikey)      -- - `apikey`
+reference/7.5/PSReadLine/About/about_PSReadLine.md:212:79    - Unknown word (ysdfayf)     -- AsPlainText) -Secret2 sdv87ysdfayf798hfasd8f7ha # '-Secret
+reference/7.5/PSReadLine/About/about_PSReadLine.md:212:89    - Unknown word (hfasd)       -- Secret2 sdv87ysdfayf798hfasd8f7ha # '-Secret2' has
+reference/7.5/PSReadLine/About/about_PSReadLine.md:253:6     - Unknown word (PGPASS)      -- $env:PGPASS = gcloud auth print
 reference/7.5/PSReadLine/About/about_PSReadLine_Functions.md:433:13    - Unknown word (Rubout)     -- ### UnixWordRubout
-reference/7.5/PSReadLine/About/about_PSReadLine_Release_Notes.md:148:61    - Unknown word (apikey)      -- by changing `key` to `apikey` to reduce false positives
-reference/7.5/PSReadLine/About/about_PSReadLine_Release_Notes.md:181:8     - Unknown word (xtermjs)     -- - Add `xtermjs` keybindings
-reference/7.5/PSReadLine/About/about_PSReadLine_Release_Notes.md:60:5      - Unknown word (Autoadjusts) -- - Autoadjusts the size based on the
+reference/7.5/PSReadLine/About/about_PSReadLine_Functions.md:560:15    - Unknown word (Begining)   -- ### ViInsertAtBegining
+reference/7.5/PSReadLine/About/about_PSReadLine_Release_Notes.md:157:61    - Unknown word (apikey)      -- by changing `key` to `apikey` to reduce
+reference/7.5/PSReadLine/About/about_PSReadLine_Release_Notes.md:191:8     - Unknown word (xtermjs)     -- - Add `xtermjs` keybindings
+reference/7.5/PSReadLine/About/about_PSReadLine_Release_Notes.md:67:5      - Unknown word (Autoadjusts) -- - Autoadjusts the size based on the
 reference/7.6/CimCmdlets/Get-CimAssociatedInstance.md:256:54    - Unknown word (DMTF)       -- this parameter, the DMTF standard resource URI
 reference/7.6/CimCmdlets/Get-CimAssociatedInstance.md:329:6     - Unknown word (gcai)       -- - `gcai`
 reference/7.6/CimCmdlets/Get-CimClass.md:315:6     - Unknown word (gcls)       -- - `gcls`
@@ -2138,9 +2145,11 @@ reference/7.6/Microsoft.PowerShell.Core/Receive-PSSession.md:901:6     - Unknown
 reference/7.6/Microsoft.PowerShell.Core/Register-PSSessionConfiguration.md:128:55    - Unknown word (FASA)       -- P(AU;FA;GA;;;WD)(AU;FASA;GWGX;;;WD)"
 reference/7.6/Microsoft.PowerShell.Core/Register-PSSessionConfiguration.md:128:60    - Unknown word (GWGX)       -- FA;GA;;;WD)(AU;FASA;GWGX;;;WD)"
 reference/7.6/Microsoft.PowerShell.Core/Remove-PSSession.md:108:7     - Unknown word (Serv)       -- with `Serv`.
-reference/7.6/Microsoft.PowerShell.Core/Save-Help.md:143:64    - Unknown word (Fileshare)  -- files in the `\\Server01\Fileshare01` folder.
-reference/7.6/Microsoft.PowerShell.Core/Save-Help.md:152:20    - Unknown word (Fileshare)  -- in the `\\Server01\Fileshare01` folder.
-reference/7.6/Microsoft.PowerShell.Core/Save-Help.md:167:13    - Unknown word (Fileshare)  -- `\\Server01\Fileshare01` folder.
+reference/7.6/Microsoft.PowerShell.Core/Save-Help.md:105:2     - Unknown word (cimsession) -- $cimsession = New-CimSession -ComputerNam
+reference/7.6/Microsoft.PowerShell.Core/Save-Help.md:106:32    - Unknown word (cimsession) -- Module -CimSession $cimsession -Name "DhcpServer"
+reference/7.6/Microsoft.PowerShell.Core/Save-Help.md:139:31    - Unknown word (Fileshare)  -- files in the `\\Server01\Fileshare01` folder.
+reference/7.6/Microsoft.PowerShell.Core/Save-Help.md:148:20    - Unknown word (Fileshare)  -- in the `\\Server01\Fileshare01` folder.
+reference/7.6/Microsoft.PowerShell.Core/Save-Help.md:168:13    - Unknown word (Fileshare)  -- `\\Server01\Fileshare01` folder.
 reference/7.6/Microsoft.PowerShell.Core/Start-Job.md:694:6     - Unknown word (sajb)       -- - `sajb`
 reference/7.6/Microsoft.PowerShell.Core/Stop-Job.md:413:6     - Unknown word (spjb)       -- - `spjb`
 reference/7.6/Microsoft.PowerShell.Core/Switch-Process.md:12:43     - Unknown word (execv)      -- the cmdlet calls the `execv()` function to provide
@@ -2206,7 +2215,7 @@ reference/7.6/Microsoft.PowerShell.Management/Test-Path.md:490:52    - Unknown w
 reference/7.6/Microsoft.PowerShell.Security/Get-AuthenticodeSignature.md:61:63     - Unknown word (makexml)    -- ps1, sign-file.ps1, makexml.ps1
 reference/7.6/Microsoft.PowerShell.Security/Get-AuthenticodeSignature.md:90:79     - Unknown word (Pathor)     -- AsByteStream) -SourcePathorExtension ps1
 reference/7.6/Microsoft.PowerShell.Security/Protect-CmsMessage.md:80:14     - Unknown word (KEYEXCHANGE) -- KeySpec = AT_KEYEXCHANGE
-reference/7.6/Microsoft.PowerShell.Security/Set-AuthenticodeSignature.md:87:46     - Unknown word (Mysign)     -- Certificate -FilePath C:\Test\Mysign.pfx
+reference/7.6/Microsoft.PowerShell.Security/Set-AuthenticodeSignature.md:86:46     - Unknown word (Mysign)     -- Certificate -FilePath C:\Test\Mysign.pfx
 reference/7.6/Microsoft.PowerShell.Utility/ConvertFrom-StringData.md:203:1     - Unknown word (Vincentio)  -- Vincentio = Heaven doth with us
 reference/7.6/Microsoft.PowerShell.Utility/ConvertFrom-StringData.md:203:133   - Unknown word (twere)      -- not go forth of us, 'twere all alike\nAs if we
 reference/7.6/Microsoft.PowerShell.Utility/ConvertTo-Html.md:76:72     - Unknown word (pslog)      -- ConvertTo-Html | Out-File pslog.htm
@@ -2312,15 +2321,16 @@ reference/7.6/PSDiagnostics/Start-Trace.md:46:28     - Unknown word (bincirc)   
 reference/7.6/PSDiagnostics/Start-Trace.md:51:49     - Unknown word (wsmtraceproviders) -- env:windir\system32\wsmtraceproviders.txt"
 reference/7.6/PSDiagnostics/Start-Trace.md:97:3      - Unknown word (bincirc)           -- - bincirc - binary with circular
 reference/7.6/PSDiagnostics/Stop-Trace.md:40:26     - Unknown word (wsmlog)     -- Trace -SessionName 'wsmlog'
-reference/7.6/PSReadLine/About/about_PSReadLine.md:172:4     - Unknown word (asplaintext) -- - `asplaintext`
-reference/7.6/PSReadLine/About/about_PSReadLine.md:174:4     - Unknown word (apikey)      -- - `apikey`
-reference/7.6/PSReadLine/About/about_PSReadLine.md:211:79    - Unknown word (ysdfayf)     -- AsPlainText) -Secret2 sdv87ysdfayf798hfasd8f7ha # '-Secret
-reference/7.6/PSReadLine/About/about_PSReadLine.md:211:89    - Unknown word (hfasd)       -- Secret2 sdv87ysdfayf798hfasd8f7ha # '-Secret2' has
-reference/7.6/PSReadLine/About/about_PSReadLine.md:252:6     - Unknown word (PGPASS)      -- $env:PGPASS = gcloud auth print
+reference/7.6/PSReadLine/About/about_PSReadLine.md:173:4     - Unknown word (asplaintext) -- - `asplaintext`
+reference/7.6/PSReadLine/About/about_PSReadLine.md:175:4     - Unknown word (apikey)      -- - `apikey`
+reference/7.6/PSReadLine/About/about_PSReadLine.md:212:79    - Unknown word (ysdfayf)     -- AsPlainText) -Secret2 sdv87ysdfayf798hfasd8f7ha # '-Secret
+reference/7.6/PSReadLine/About/about_PSReadLine.md:212:89    - Unknown word (hfasd)       -- Secret2 sdv87ysdfayf798hfasd8f7ha # '-Secret2' has
+reference/7.6/PSReadLine/About/about_PSReadLine.md:253:6     - Unknown word (PGPASS)      -- $env:PGPASS = gcloud auth print
 reference/7.6/PSReadLine/About/about_PSReadLine_Functions.md:433:13    - Unknown word (Rubout)     -- ### UnixWordRubout
-reference/7.6/PSReadLine/About/about_PSReadLine_Release_Notes.md:148:61    - Unknown word (apikey)      -- by changing `key` to `apikey` to reduce false positives
-reference/7.6/PSReadLine/About/about_PSReadLine_Release_Notes.md:181:8     - Unknown word (xtermjs)     -- - Add `xtermjs` keybindings
-reference/7.6/PSReadLine/About/about_PSReadLine_Release_Notes.md:60:5      - Unknown word (Autoadjusts) -- - Autoadjusts the size based on the
+reference/7.6/PSReadLine/About/about_PSReadLine_Functions.md:560:15    - Unknown word (Begining)   -- ### ViInsertAtBegining
+reference/7.6/PSReadLine/About/about_PSReadLine_Release_Notes.md:157:61    - Unknown word (apikey)      -- by changing `key` to `apikey` to reduce
+reference/7.6/PSReadLine/About/about_PSReadLine_Release_Notes.md:191:8     - Unknown word (xtermjs)     -- - Add `xtermjs` keybindings
+reference/7.6/PSReadLine/About/about_PSReadLine_Release_Notes.md:67:5      - Unknown word (Autoadjusts) -- - Autoadjusts the size based on the
 reference/docs-conceptual/community/2020-updates.md:103:156   - Unknown word (fsackur)        -- compiled-cmdlets) (thanks @fsackur)
 reference/docs-conceptual/community/2020-updates.md:104:143   - Unknown word (joshduffney)    -- functions) (thanks @joshduffney)
 reference/docs-conceptual/community/2020-updates.md:122:3     - Unknown word (doctordns)      -- | doctordns |     1      |
@@ -4469,23 +4479,7 @@ reference/index.yml:151:45    - Unknown word (stackoverflow)    -- hubs/powershe
 reference/index.yml:166:14    - Unknown word (Spiceworks)       -- - title: Spiceworks
 reference/index.yml:167:31    - Unknown word (Spiceworks)       -- imageSrc: ./media/index/Spiceworks_48px_color.png
 reference/index.yml:72:44     - Unknown word (psscriptanalyzer) -- powershell/utility-modules/psscriptanalyzer/overview?view=ps-modules
-reference/media/index/av_colors_128.svg:21:33     - Unknown word (evenodd)    -- opacity="0.8" fill-rule="evenodd" clip-rule="evenodd
-reference/media/index/av_colors_128.svg:3:74      - Unknown word (xlink)      -- org/2000/svg" xmlns:xlink="http://www.w3.org/
-reference/media/index/av_colors_128.svg:6:19      - Unknown word (evenodd)    -- <path fill-rule="evenodd" clip-rule="evenodd
-reference/media/index/av_colors_128.svg:6:39      - Unknown word (evenodd)    -- evenodd" clip-rule="evenodd" fill="#EC008C" d="M
-reference/media/index/av_colors_128.svg:9:19      - Unknown word (evenodd)    -- <path fill-rule="evenodd" clip-rule="evenodd
-reference/media/index/av_colors_128.svg:9:39      - Unknown word (evenodd)    -- evenodd" clip-rule="evenodd" fill="#00A3C9" d="M
 reference/media/index/avatar_128.svg:3:74      - Unknown word (xlink)      -- org/2000/svg" xmlns:xlink="http://www.w3.org/
-reference/media/index/powershell_128.svg:12:21     - Unknown word (SVGID)      -- <linearGradient id="SVGID_2_" gradientUnits="userSpaceO
-reference/media/index/powershell_128.svg:16:18     - Unknown word (evenodd)    -- <path fill-rule="evenodd" clip-rule="evenodd
-reference/media/index/powershell_128.svg:16:38     - Unknown word (evenodd)    -- evenodd" clip-rule="evenodd" fill="url(#SVGID_2
-reference/media/index/powershell_128.svg:16:58     - Unknown word (SVGID)      -- evenodd" fill="url(#SVGID_2_)" d="M29.634,20H
-reference/media/index/powershell_128.svg:19:18     - Unknown word (evenodd)    -- <path fill-rule="evenodd" clip-rule="evenodd
-reference/media/index/powershell_128.svg:3:74      - Unknown word (xlink)      -- org/2000/svg" xmlns:xlink="http://www.w3.org/
-reference/media/index/powershell_128.svg:5:21      - Unknown word (SVGID)      -- <linearGradient id="SVGID_1_" gradientUnits="userSpaceO
-reference/media/index/powershell_128.svg:9:18      - Unknown word (evenodd)    -- <path fill-rule="evenodd" clip-rule="evenodd
-reference/media/index/powershell_128.svg:9:38      - Unknown word (evenodd)    -- evenodd" clip-rule="evenodd" fill="url(#SVGID_1
-reference/media/index/powershell_128.svg:9:58      - Unknown word (SVGID)      -- evenodd" fill="url(#SVGID_1_)" d="M9.491,109c
 reference/media/index/ps_black_128.svg:13:32     - Unknown word (evenodd)    -- opacity="0.8" fill-rule="evenodd" clip-rule="evenodd
 reference/media/index/ps_black_128.svg:13:52     - Unknown word (evenodd)    -- evenodd" clip-rule="evenodd" fill="url(#SVGID_1
 reference/media/index/ps_black_128.svg:13:72     - Unknown word (SVGID)      -- evenodd" fill="url(#SVGID_1_)" d="M9.033,109c
@@ -4525,7 +4519,7 @@ reference/media/shared/large-yellow-circle-1f7e1.svg:6:72      - Unknown word (e
 reference/media/shared/large-yellow-circle-1f7e1.svg:7:72      - Unknown word (evenodd)    -- 100d43c" fill-rule="evenodd"></path>
 reference/media/shared/large-yellow-circle-1f7e1.svg:8:72      - Unknown word (evenodd)    -- 100d43c" fill-rule="evenodd"></path>
 reference/module/index.md:14:36     - Unknown word (windowsserver) -- FilterColumn1: powershell-7.4,windowsserver2025-ps
-reference/module/index.md:15:21     - Unknown word (azps)          -- quickFilterColumn2: azps-13.2.0,sqlserver-ps
+reference/module/index.md:15:21     - Unknown word (azps)          -- quickFilterColumn2: azps-13.3.0,sqlserver-ps
 reference/module/index.md:16:42     - Unknown word (systemcenter)  -- graph-powershell-1.0,systemcenter-ps-2022
 tests/Pester/Update-Help.Tests.ps1:134:89    - Unknown word (updatablehelp) -- $PSScriptRoot\..\..\updatablehelp\5.1\$moduleName"
 tests/Pester/Update-Help.Tests.ps1:24:34     - Unknown word (PSHOME)     -- HelpInstallationPath = "$PSHOME\en-US"
