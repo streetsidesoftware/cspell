@@ -3,7 +3,7 @@ Repository: caddyserver/caddy
 Url: "https://github.com/caddyserver/caddy.git"
 Args: ["**/*.go"]
 Lines:
- CSpell: Files checked: 282, Issues found: 3666 in 256 files.
+ CSpell: Files checked: 282, Issues found: 3640 in 256 files.
  exit code: 1
 admin.go:1064:20   - Unknown word (Redir)       -- return errInternalRedir
 admin.go:1340:6    - Unknown word (loggable)    -- type loggableURLArray []*url.URL
@@ -528,11 +528,8 @@ caddyconfig/httpcaddyfile/tlsapp.go:174:19    - Unknown word (certmagic)     -- 
 caddyconfig/httpcaddyfile/tlsapp.go:176:49    - Unknown word (certmagic)     -- issuers, issuerVal.Value.(certmagic.Issuer))
 caddyconfig/httpcaddyfile/tlsapp.go:201:46    - Unknown word (caddyconfig)   -- append(ap.ManagersRaw, caddyconfig.JSONModuleObject(certManager
 caddyconfig/httpcaddyfile/tlsapp.go:241:49    - Unknown word (Caddyfile)     -- a poor mapping from Caddyfile to JSON but that's
-caddyconfig/httpcaddyfile/tlsapp.go:244:38    - Unknown word (Tailscale)     -- as desired (see the Tailscale listener plugin), so
 caddyconfig/httpcaddyfile/tlsapp.go:27:14     - Unknown word (caddyserver)   -- "github.com/caddyserver/certmagic"
 caddyconfig/httpcaddyfile/tlsapp.go:27:26     - Unknown word (certmagic)     -- github.com/caddyserver/certmagic"
-caddyconfig/httpcaddyfile/tlsapp.go:280:35    - Unknown word (Tailscale)     -- not create Issuers for Tailscale domains; they will be
-caddyconfig/httpcaddyfile/tlsapp.go:281:11    - Unknown word (Tailscale)     -- if isTailscaleDomain(s) {
 caddyconfig/httpcaddyfile/tlsapp.go:284:10    - Unknown word (certmagic)     -- if !certmagic.SubjectQualifiesForCert
 caddyconfig/httpcaddyfile/tlsapp.go:287:22    - Unknown word (certmagic)     -- // we don't use certmagic.SubjectQualifiesForPublicCert
 caddyconfig/httpcaddyfile/tlsapp.go:28:14     - Unknown word (mholt)         -- "github.com/mholt/acmez/v3/acme"
@@ -576,9 +573,6 @@ caddyconfig/httpcaddyfile/tlsapp.go:595:26    - Unknown word (TLSALPN)       -- 
 caddyconfig/httpcaddyfile/tlsapp.go:595:49    - Unknown word (TLSALPN)       -- TLSALPN = new(caddytls.TLSALPNChallengeConfig)
 caddyconfig/httpcaddyfile/tlsapp.go:705:60    - Unknown word (hostnames)     -- if only one has any hostnames
 caddyconfig/httpcaddyfile/tlsapp.go:706:57    - Unknown word (hostnames)     -- the one without any hostnames,
-caddyconfig/httpcaddyfile/tlsapp.go:803:43    - Unknown word (tailscale)     -- public certs OR are tailscale domains.
-caddyconfig/httpcaddyfile/tlsapp.go:806:53    - Unknown word (Tailscale)     -- fiesForPublicCert(ap, i) || isTailscaleDomain(i)
-caddyconfig/httpcaddyfile/tlsapp.go:810:8     - Unknown word (Tailscale)     -- func isTailscaleDomain(name string) bool
 caddyconfig/httpcaddyfile/tlsapp.go:90:28     - Unknown word (caddytls)      -- tlsApp.Automation = new(caddytls.AutomationConfig)
 caddyconfig/httpcaddyfile/tlsapp.go:95:57     - Unknown word (arent)         -- wildcard in them, and arent HTTP
 caddyconfig/httpcaddyfile/tlsapp_test.go:1:9       - Unknown word (httpcaddyfile) -- package httpcaddyfile
@@ -1121,28 +1115,18 @@ modules/caddyhttp/autohttps.go:283:17    - Unknown word (redir)       -- if _, o
 modules/caddyhttp/autohttps.go:285:6     - Unknown word (redir)       -- redirDomains[d] = append(redirDomai
 modules/caddyhttp/autohttps.go:28:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/modules/caddytls
 modules/caddyhttp/autohttps.go:28:43     - Unknown word (caddytls)    -- caddyserver/caddy/v2/modules/caddytls"
-modules/caddyhttp/autohttps.go:294:16    - Unknown word (tailscale)   -- var internal, tailscale []string
-modules/caddyhttp/autohttps.go:297:9     - Unknown word (Tailscale)   -- if !isTailscaleDomain(d) {
-modules/caddyhttp/autohttps.go:300:21    - Unknown word (Tailscale)   -- // unless it's a Tailscale domain, because we don
-modules/caddyhttp/autohttps.go:329:16    - Unknown word (tailscale)   -- // we handle tailscale domains specially, and
 modules/caddyhttp/autohttps.go:330:43    - Unknown word (certmagic)   -- self-signed certs); certmagic does not consider public
 modules/caddyhttp/autohttps.go:336:34    - Unknown word (certmagic)   -- usingDefaultIssuersAndIsIP := certmagic.SubjectIsIP(ident)
 modules/caddyhttp/autohttps.go:338:12    - Unknown word (certmagic)   -- return !certmagic.SubjectQualifiesForPublicCert
-modules/caddyhttp/autohttps.go:340:8     - Unknown word (Tailscale)   -- if isTailscaleDomain(d) {
-modules/caddyhttp/autohttps.go:341:23    - Unknown word (tailscale)   -- tailscale = append(tailscale, d)
-modules/caddyhttp/autohttps.go:341:4     - Unknown word (tailscale)   -- tailscale = append(tailscale,
-modules/caddyhttp/autohttps.go:348:53    - Unknown word (tailscale)   -- mationPolicies(ctx, internal, tailscale)
 modules/caddyhttp/autohttps.go:34:15     - Unknown word (hostnames)   -- // qualifying hostnames are available from the
 modules/caddyhttp/autohttps.go:385:25    - Unknown word (Redir)       -- redirRoute := app.makeRedirRoute(addr.StartPort
 modules/caddyhttp/autohttps.go:397:30    - Unknown word (hostnames)   -- demand TLS means that hostnames may be used which are
 modules/caddyhttp/autohttps.go:413:33    - Unknown word (Redir)       -- append(routes, app.makeRedirRoute(uint(app.httpsPort
 modules/caddyhttp/autohttps.go:43:9      - Unknown word (Redir)       -- DisableRedir bool `json:"disable
 modules/caddyhttp/autohttps.go:478:21    - Unknown word (Redir)       -- func (app *App) makeRedirRoute(redirToPort uint
-modules/caddyhttp/autohttps.go:534:20    - Unknown word (Tailscale)   -- var ts caddytls.Tailscale
 modules/caddyhttp/autohttps.go:540:12    - Unknown word (reprovision) -- // must reprovision the automation policy
 modules/caddyhttp/autohttps.go:62:33     - Unknown word (hostnames)   -- certificates for qualifying hostnames. However, if
 modules/caddyhttp/autohttps.go:668:44    - Unknown word (Caddyfile)   -- consider the case of a Caddyfile
-modules/caddyhttp/autohttps.go:691:19    - Unknown word (Tailscale)   -- var ts caddytls.Tailscale
 modules/caddyhttp/autohttps.go:725:4     - Unknown word (reprovisioned) -- // reprovisioned. acmeIssuer must not
 modules/caddyhttp/autohttps.go:742:28    - Unknown word (TLSALPN)       -- acmeIssuer.Challenges.TLSALPN == nil {
 modules/caddyhttp/autohttps.go:743:26    - Unknown word (TLSALPN)       -- acmeIssuer.Challenges.TLSALPN = new(caddytls.TLSALPNChallen
@@ -2948,7 +2932,6 @@ modules/caddytls/capools_test.go:96:37     - Unknown word (Caddyfile)     -- Inl
 modules/caddytls/capools_test.go:99:37     - Unknown word (Caddyfile)     -- InlineCAPool.UnmarshalCaddyfile() = %v, want %v", icp
 modules/caddytls/certmanagers.go:12:14     - Unknown word (caddyserver) -- "github.com/caddyserver/certmagic"
 modules/caddytls/certmanagers.go:12:26     - Unknown word (certmagic)   -- github.com/caddyserver/certmagic"
-modules/caddytls/certmanagers.go:13:14     - Unknown word (tailscale)   -- "github.com/tailscale/tscert"
 modules/caddytls/certmanagers.go:13:24     - Unknown word (tscert)      -- github.com/tailscale/tscert"
 modules/caddytls/certmanagers.go:179:13    - Unknown word (Caddyfile)   -- // UnmarshalCaddyfile deserializes Caddyfile
 modules/caddytls/certmanagers.go:179:36    - Unknown word (Caddyfile)   -- marshalCaddyfile deserializes Caddyfile tokens into ts.
@@ -2962,22 +2945,13 @@ modules/caddytls/certmanagers.go:201:4     - Unknown word (certmagic)   -- _ cer
 modules/caddytls/certmanagers.go:203:4     - Unknown word (caddyfile)   -- _ caddyfile.Unmarshaler = (*Tailscale
 modules/caddytls/certmanagers.go:205:4     - Unknown word (certmagic)   -- _ certmagic.Manager = (*HTTPCertGette
 modules/caddytls/certmanagers.go:207:4     - Unknown word (caddyfile)   -- _ caddyfile.Unmarshaler = (*HTTPCertGette
-modules/caddytls/certmanagers.go:22:23     - Unknown word (Tailscale)   -- caddy.RegisterModule(Tailscale{})
-modules/caddytls/certmanagers.go:26:4      - Unknown word (Tailscale)   -- // Tailscale is a module that can
-modules/caddytls/certmanagers.go:26:67     - Unknown word (Tailscale)   -- certificates from the local Tailscale process.
-modules/caddytls/certmanagers.go:27:6      - Unknown word (Tailscale)   -- type Tailscale struct {
-modules/caddytls/certmanagers.go:32:7      - Unknown word (Tailscale)   -- func (Tailscale) CaddyModule() caddy
-modules/caddytls/certmanagers.go:34:29     - Unknown word (tailscale)   -- tls.get_certificate.tailscale",
 modules/caddytls/certmanagers.go:54:9      - Unknown word (tscert)      -- return tscert.GetCertificateWithContext
-modules/caddytls/certmanagers.go:59:59     - Unknown word (tailscale)   -- ToLower(hello.ServerName), tailscaleDomainAliasEnding) {
 modules/caddytls/certmanagers.go:62:17     - Unknown word (tscert)      -- status, err := tscert.GetStatus(ctx)
 modules/caddytls/certmanagers.go:67:6      - Unknown word (certmagic)   -- if certmagic.MatchWildcard(hello
 modules/caddytls/certmanagers.go:74:13     - Unknown word (Caddyfile)   -- // UnmarshalCaddyfile deserializes Caddyfile
 modules/caddytls/certmanagers.go:74:36     - Unknown word (Caddyfile)   -- marshalCaddyfile deserializes Caddyfile tokens into ts.
-modules/caddytls/certmanagers.go:76:8      - Unknown word (tailscale)   -- // ... tailscale
 modules/caddytls/certmanagers.go:77:27     - Unknown word (Caddyfile)   -- Tailscale) UnmarshalCaddyfile(d *caddyfile.Dispenser
 modules/caddytls/certmanagers.go:77:40     - Unknown word (caddyfile)   -- UnmarshalCaddyfile(d *caddyfile.Dispenser) error {
-modules/caddytls/certmanagers.go:85:4      - Unknown word (tailscale)   -- // tailscaleDomainAliasEnding is
 modules/caddytls/certselection.go:122:13    - Unknown word (Caddyfile)   -- // UnmarshalCaddyfile sets up the CustomCertSelecti
 modules/caddytls/certselection.go:122:66    - Unknown word (Caddyfile)   -- ustomCertSelectionPolicy from Caddyfile tokens. Syntax:
 modules/caddytls/certselection.go:131:46    - Unknown word (Caddyfile)   -- CertSelectionPolicy) UnmarshalCaddyfile(d *caddyfile.Dispenser
