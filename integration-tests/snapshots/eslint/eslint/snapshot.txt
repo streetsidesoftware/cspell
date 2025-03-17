@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: [".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 2054, Issues found: 1624 in 299 files.
+ CSpell: Files checked: 2054, Issues found: 1604 in 297 files.
  exit code: 1
 Makefile.js:128:88    - Unknown word (ined)       -- followed by the string "ined".
 Makefile.js:359:12    - Unknown word (gensite)    -- target.gensite();
@@ -75,7 +75,7 @@ docs/src/extend/custom-formatters.md:274:9     - Unknown word (eslintformatter) 
 docs/src/extend/custom-parsers.md:124:31    - Unknown word (myparser)   -- packages: ["eslint-parser-myparser"],
 docs/src/extend/custom-rule-tutorial.md:179:4     - Unknown word (endraw)     -- {% endraw %}
 docs/src/extend/custom-rule-tutorial.md:91:127    - Unknown word (fixability) -- documentation, and fixability. In this case, the rule
-docs/src/extend/plugin-migration-flat-config.md:254:17    - Unknown word (xdescribe)  -- xdescribe: true
+docs/src/extend/plugin-migration-flat-config.md:246:17    - Unknown word (xdescribe)  -- xdescribe: true
 docs/src/extend/selectors.md:140:405   - Unknown word (Fpath)      -- so: `[value=/some\u002Fpath/]`.
 docs/src/extend/shareable-configs-deprecated.md:19:55     - Unknown word (myconfig)   -- such as `eslint-config-myconfig`.
 docs/src/integrate/nodejs-api.md:209:35    - Unknown word (omittable)  -- parameter `options` is omittable.
@@ -188,7 +188,7 @@ docs/src/use/configure/migration-guide.md:148:31    - Unknown word (someplugin) 
 docs/src/use/configure/plugins-deprecated.md:41:152    - Unknown word (pluginname) -- require('eslint-plugin-pluginname')` in the config file
 docs/src/use/core-concepts/glossary.md:77:17     - Unknown word (estools)    -- See [github.com/estools/esquery](https://github
 docs/src/use/getting-started.md:47:13     - Unknown word (yourfile)   -- args: ["yourfile.js"]
-docs/src/use/getting-started.md:70:274    - Unknown word (npmjs)      -- "eslint-config" on [npmjs.com](https://www.npmjs
+docs/src/use/getting-started.md:69:239    - Unknown word (npmjs)      -- "eslint-config" on [npmjs.com](https://www.npmjs
 docs/src/use/integrations.md:22:8      - Unknown word (Syntastic)  -- * [Syntastic](https://github.com
 docs/src/use/integrations.md:23:11     - Unknown word (Flycheck)   -- * Emacs: [Flycheck](http://www.flycheck
 docs/src/use/migrate-to-8.0.0.md:228:20    - Unknown word (cliengine)  -- ## <a name="remove-cliengine"></a> The `CLIEngine
@@ -202,7 +202,6 @@ docs/src/use/migrating-from-jscs.md:71:4      - Unknown word (mdcs)       -- | `
 docs/src/use/migrating-to-2.0.0.md:347:45    - Unknown word (FEFF)       -- parse(text.replace(/^\uFEFF/, ""), options);
 docs/src/use/migrating-to-3.0.0.md:47:229    - Unknown word (lifed)      -- Explorer 8 was end-of-lifed](https://www.microsoft
 docs/src/use/migrating-to-5.0.0.md:114:68    - Unknown word (lintable)   -- line does not match any lintable files.
-knip.jsonc:27:19     - Unknown word (wdio)       -- "@wdio/cli",
 lib/cli-engine/formatters/html.js:247:66    - Unknown word (noopener)   -- target="_blank" rel="noopener noreferrer">${ruleId
 lib/cli-engine/formatters/html.js:247:75    - Unknown word (noreferrer) -- blank" rel="noopener noreferrer">${ruleId ? ruleId
 lib/cli-engine/formatters/html.js:46:48     - Unknown word (Neue)       -- family: Arial, "Helvetica Neue", Helvetica, sans-serif
@@ -223,7 +222,7 @@ lib/linter/code-path-analysis/code-path-state.js:351:34    - Unknown word (expre
 lib/linter/code-path-analysis/debug-helpers.js:95:44     - Unknown word (Graphvis)   -- can be visualized with Graphvis.
 lib/linter/linter.js:45:7      - Unknown word (jslang)     -- const jslang = require("../languages
 lib/rule-tester/rule-tester.js:256:42    - Unknown word (errorize)   -- ast The root node to errorize `start`/`end` properties
-lib/rule-tester/rule-tester.js:866:27    - Unknown word (Didnt)      -- function assertASTDidntChange(beforeAST, afterAST
+lib/rule-tester/rule-tester.js:865:27    - Unknown word (Didnt)      -- function assertASTDidntChange(beforeAST, afterAST
 lib/rules/dot-notation.js:142:63    - Unknown word (quasis)     -- node, node.property.quasis[0].value.cooked);
 lib/rules/for-direction.js:73:65     - Unknown word (nochange)   -- if sub return -1, if nochange, return 0
 lib/rules/func-name-matching.js:13:7      - Unknown word (esutils)    -- const esutils = require("esutils"
@@ -264,9 +263,9 @@ lib/rules/use-isnan.js:132:25    - Unknown word (Suggestable) -- const isSuggest
 lib/rules/utils/ast-utils.js:404:40    - Unknown word (samely)     -- a.b` and `a?.b` are samely.
 lib/services/processor-service.js:94:8      - Unknown word (Postprocesses) -- * Postprocesses the given messages synchronou
 lib/shared/text-table.js:36:11     - Unknown word (hsep)       -- const hsep = "  ";
-package.json:150:7     - Unknown word (trunkio)    -- "@trunkio/launcher": "^1.3.0"
-package.json:171:6     - Unknown word (eslump)     -- "eslump": "^3.0.0",
-package.json:186:6     - Unknown word (metascraper) -- "metascraper": "^5.25.7",
+package.json:151:7     - Unknown word (trunkio)    -- "@trunkio/launcher": "^1.3.0"
+package.json:169:6     - Unknown word (eslump)     -- "eslump": "^3.0.0",
+package.json:184:6     - Unknown word (metascraper) -- "metascraper": "^5.25.7",
 package.json:61:81     - Unknown word (flter)      -- ignore=!docs/**/*.js -a --flter=eslint && trunk check
 package.json:63:20     - Unknown word (attw)       -- "lint:types": "attw --pack",
 templates/blogpost.md.ejs:18:10     - Unknown word (linkify)    -- function linkify(line) {
@@ -320,8 +319,8 @@ tests/lib/linter/source-code-fixer.js:63:19     - Unknown word (removestart) -- 
 tests/lib/linter/source-code-fixer.js:70:19     - Unknown word (removemiddle) -- message: "removemiddle",
 tests/lib/linter/source-code-fixer.js:77:19     - Unknown word (removeend)    -- message: "removeend",
 tests/lib/options.js:358:71    - Unknown word (morerules)  -- trcOptions.parse("--rulesdir /morerules");
-tests/lib/rule-tester/rule-tester.js:2925:33   - Unknown word (outpt)      -- outpt: "var baz;"
-tests/lib/rule-tester/rule-tester.js:3653:15   - Unknown word (Subclassing) -- describe("Subclassing", () => {
+tests/lib/rule-tester/rule-tester.js:2935:33   - Unknown word (outpt)      -- outpt: "var baz;"
+tests/lib/rule-tester/rule-tester.js:3663:15   - Unknown word (Subclassing) -- describe("Subclassing", () => {
 tests/lib/rules/array-bracket-spacing.js:51:76     - Unknown word (n'quxx)     -- { 'bar': 'baz' }], \n'quxx': 1 \n}]", options:
 tests/lib/rules/array-element-newline.js:45:78     - Unknown word (nosomething) -- ,\nfunction bar() {\nosomething();\n}\n];",
 tests/lib/rules/arrow-body-style.js:27:38     - Unknown word (nretv)      -- = (retv, name) => {\nretv[name] = true;\nreturn
@@ -405,8 +404,8 @@ tests/lib/rules/semi.js:194:66    - Unknown word (mylib)      -- named2 } from '
 tests/lib/rules/sort-keys.js:261:24    - Unknown word (abce)       -- // abce
 tests/lib/rules/spaced-comment.js:115:54    - Unknown word (xmldoc)     -- comment\n//----\n/// xmldoc style comment\n//!<
 tests/lib/rules/spaced-comment.js:649:23    - Unknown word (endregionfoo) -- code: "//#endregionfoo",
-tests/lib/rules/utils/ast-utils.js:1091:17   - Unknown word (ncde)       -- "ab\ncde\n": [[1, 0], [1, 1]
-tests/lib/rules/utils/ast-utils.js:1550:19   - Unknown word (invalidtoken) -- [["123invalidtoken", "("], false],
+tests/lib/rules/utils/ast-utils.js:1086:17   - Unknown word (ncde)       -- "ab\ncde\n": [[1, 0], [1, 1]
+tests/lib/rules/utils/ast-utils.js:1544:19   - Unknown word (invalidtoken) -- [["123invalidtoken", "("], false],
 tests/lib/rules/valid-typeof.js:91:40     - Unknown word (umdefined)  -- if (typeof bar === 'umdefined') {}",
 tests/lib/shared/string-utils.js:37:9      - Unknown word (uppercases) -- it("uppercases the first letter of
 tests/lib/types/types.test.ts:642:7     - Unknown word (eslinter)   -- const eslinter = new ESLinter();
@@ -537,9 +536,3 @@ tests/tools/eslint-fuzzer.js:124:50    - Unknown word (foos)       -- message: "
 tools/check-emfile-handling.js:30:10     - Unknown word (Sonoma)     -- * MacOS Sonoma v14.4 has a limit of
 tools/fuzzer-runner.js:50:42     - Unknown word (elapseds)   -- rules [:bar] :percent, :elapseds elapsed, eta :etas,
 tools/update-readme.js:39:32     - Unknown word (Prerendered) -- returns {Promise<string>}} Prerendered sponsors markdown.
-wdio.conf.js:125:16    - Unknown word (sumologic)  -- * - @wdio/sumologic-reporter
-wdio.conf.js:178:48    - Unknown word (specfile)   -- to retry the entire specfile when it fails as a whole
-wdio.conf.js:184:31    - Unknown word (specfiles)  -- Whether or not retried specfiles should be retried immediately
-wdio.conf.js:225:76    - Unknown word (initialise) -- spawned and can be used to initialise specific service
-wdio.conf.js:249:34    - Unknown word (initialising) -- executed just before initialising the webdriver session
-wdio.conf.js:319:39    - Unknown word (informations) -- Object} result.retries informations to spec related retries

@@ -3,7 +3,7 @@ Repository: slint-ui/slint
 Url: "https://github.com/slint-ui/slint"
 Args: ["--config=../../../../repositories/config/slint/cspell.config.yaml","--issues-summary-report","."]
 Lines:
- CSpell: Files checked: 2084, Issues found: 3693 in 696 files.
+ CSpell: Files checked: 2087, Issues found: 3732 in 698 files.
  exit code: 1
 CMakeLists.txt:17:14     - Unknown word (TOPLEVEL)   -- set(SLINT_IS_TOPLEVEL_BUILD TRUE)
 CMakeLists.txt:27:31     - Unknown word (dylib's)    -- macOS, the slint_cpp.dylib's install_name uses @rpath
@@ -140,11 +140,13 @@ api/cpp/cmake/SlintMacro.cmake:57:48     - Unknown word (GENEX)      -- target_p
 api/cpp/cmake/SlintMacro.cmake:58:38     - Unknown word (STREQUAL)   -- scale_factor_arg "$<IF:$<STREQUAL:${scale_factor_target
 api/cpp/cmake/SlintMacro.cmake:60:48     - Unknown word (GENEX)      -- translations_prop "$<TARGET_GENEX_EVAL:${target},$<TARGET
 api/cpp/cmake/SlintMacro.cmake:61:45     - Unknown word (STREQUAL)   -- translations_arg "$<IF:$<STREQUAL:${bundle_translations
-api/cpp/cmake/SlintMacro.cmake:66:13     - Unknown word (endforeach) -- endforeach()
-api/cpp/cmake/SlintMacro.cmake:74:19     - Unknown word (depfile)    -- --depfile ${CMAKE_CURRENT_BINARY
-api/cpp/cmake/SlintMacro.cmake:85:13     - Unknown word (DEPFILE)    -- DEPFILE ${CMAKE_CURRENT_BINARY
-api/cpp/cmake/SlintMacro.cmake:90:5      - Unknown word (endforeach) -- endforeach()
-api/cpp/cmake/SlintMacro.cmake:92:1      - Unknown word (endfunction) -- endfunction()
+api/cpp/cmake/SlintMacro.cmake:63:47     - Unknown word (GENEX)      -- domain_prop "$<TARGET_GENEX_EVAL:${target},$<TARGET
+api/cpp/cmake/SlintMacro.cmake:64:44     - Unknown word (STREQUAL)   -- ranslation_domain_arg "$<IF:$<STREQUAL:${translation_domain
+api/cpp/cmake/SlintMacro.cmake:69:13     - Unknown word (endforeach) -- endforeach()
+api/cpp/cmake/SlintMacro.cmake:77:19     - Unknown word (depfile)    -- --depfile ${CMAKE_CURRENT_BINARY
+api/cpp/cmake/SlintMacro.cmake:88:13     - Unknown word (DEPFILE)    -- DEPFILE ${CMAKE_CURRENT_BINARY
+api/cpp/cmake/SlintMacro.cmake:93:5      - Unknown word (endforeach) -- endforeach()
+api/cpp/cmake/SlintMacro.cmake:95:1      - Unknown word (endfunction) -- endfunction()
 api/cpp/cmake/SlintMacro.cmake:9:55      - Unknown word (AFAICT)     -- does not work in 3.26 AFAICT.
 api/cpp/docs/Pipfile:17:1      - Unknown word (furo)       -- furo = ">=2022.12.7"
 api/cpp/docs/Pipfile:18:1      - Unknown word (sphinxcontrib) -- sphinxcontrib-jquery = ">=4.1"
@@ -854,6 +856,7 @@ demos/usecases/cpp/main.cpp:56:33     - Unknown word (Aurindam)   -- CardListVie
 demos/usecases/esp-idf/CMakeLists.txt:13:22     - Unknown word (fdiagnostics) -- add_compile_options(-fdiagnostics-color=always)
 demos/usecases/esp-idf/CMakeLists.txt:15:19     - Unknown word (usecases)     -- project(slint_esp_usecases_mcu LANGUAGES CXX)
 demos/usecases/esp-idf/README.md:6:10      - Unknown word (usecases)   -- cd demos/usecases/esp-idf
+demos/usecases/esp-idf/main/CMakeLists.txt:13:30     - Unknown word (usecases)   -- SLINT_TRANSLATION_DOMAIN usecases
 demos/usecases/esp-idf/main/CMakeLists.txt:6:5       - Unknown word (SRCS)       -- SRCS "main.cpp"
 demos/usecases/esp-idf/main/CMakeLists.txt:8:41      - Unknown word (noglib)     -- p4_function_ev_board_noglib slint
 demos/usecases/esp-idf/main/idf_component.yml:7:3       - Unknown word (espressif)  -- espressif/esp32_p4_function_ev
@@ -892,23 +895,52 @@ demos/usecases/esp-idf/sdkconfig.defaults:73:20     - Unknown word (MALLOC)     
 demos/usecases/esp-idf/sdkconfig.defaults:74:20     - Unknown word (SPRINTF)    -- CONFIG_LV_USE_CLIB_SPRINTF=y
 demos/usecases/esp-idf/sdkconfig.defaults:7:10      - Unknown word (SPIRAM)     -- # CONFIG_SPIRAM_MODE_HEX=y
 demos/usecases/esp-idf/sdkconfig.defaults:8:10      - Unknown word (SPIRAM)     -- # CONFIG_SPIRAM_SPEED_200M=y
+demos/usecases/lang/de/LC_MESSAGES/usecases.po:101:9     - Unknown word (Entwürfe)    -- msgstr "Entwürfe"
+demos/usecases/lang/de/LC_MESSAGES/usecases.po:106:9     - Unknown word (Gesendet)    -- msgstr "Gesendet"
+demos/usecases/lang/de/LC_MESSAGES/usecases.po:116:9     - Unknown word (Mülleimer)   -- msgstr "Mülleimer"
+demos/usecases/lang/de/LC_MESSAGES/usecases.po:121:9     - Unknown word (Archiv)      -- msgstr "Archiv"
+demos/usecases/lang/de/LC_MESSAGES/usecases.po:126:9     - Unknown word (Soziales)    -- msgstr "Soziales"
+demos/usecases/lang/de/LC_MESSAGES/usecases.po:131:9     - Unknown word (Neuigkeiten) -- msgstr "Neuigkeiten"
+demos/usecases/lang/de/LC_MESSAGES/usecases.po:136:9     - Unknown word (Foren)       -- msgstr "Foren"
+demos/usecases/lang/de/LC_MESSAGES/usecases.po:141:17    - Unknown word (diesen)      -- msgstr "Schalte diesen Thread stumm"
+demos/usecases/lang/de/LC_MESSAGES/usecases.po:141:31    - Unknown word (stumm)       -- Schalte diesen Thread stumm"
+demos/usecases/lang/de/LC_MESSAGES/usecases.po:141:9     - Unknown word (Schalte)     -- msgstr "Schalte diesen Thread stumm
+demos/usecases/lang/de/LC_MESSAGES/usecases.po:146:9     - Unknown word (Senden)      -- msgstr "Senden"
+demos/usecases/lang/de/LC_MESSAGES/usecases.po:156:9     - Unknown word (Übersicht)   -- msgstr "Übersicht"
+demos/usecases/lang/de/LC_MESSAGES/usecases.po:15:16     - Unknown word (nplurals)   -- "Plural-Forms: nplurals=2; plural=(n != 1);
+demos/usecases/lang/de/LC_MESSAGES/usecases.po:16:15     - Unknown word (Poedit)     -- "X-Generator: Poedit 3.5\n"
+demos/usecases/lang/de/LC_MESSAGES/usecases.po:19:1      - Unknown word (msgctxt)    -- msgctxt "WeatherViewAdapter
+demos/usecases/lang/de/LC_MESSAGES/usecases.po:24:1      - Unknown word (msgctxt)    -- msgctxt "WeatherViewAdapter
+demos/usecases/lang/de/LC_MESSAGES/usecases.po:26:14     - Unknown word (bewölkt)    -- msgstr "Sehr bewölkt"
+demos/usecases/lang/de/LC_MESSAGES/usecases.po:26:9      - Unknown word (Sehr)       -- msgstr "Sehr bewölkt"
+demos/usecases/lang/de/LC_MESSAGES/usecases.po:29:1      - Unknown word (msgctxt)    -- msgctxt "WeatherViewAdapter
+demos/usecases/lang/de/LC_MESSAGES/usecases.po:34:1      - Unknown word (msgctxt)    -- msgctxt "WeatherViewAdapter
+demos/usecases/lang/de/LC_MESSAGES/usecases.po:39:1      - Unknown word (msgctxt)    -- msgctxt "WeatherViewAdapter
+demos/usecases/lang/de/LC_MESSAGES/usecases.po:46:9      - Unknown word (Nutzung)    -- msgstr "Nutzung"
+demos/usecases/lang/de/LC_MESSAGES/usecases.po:51:9      - Unknown word (Täglich)    -- msgstr "Täglich"
+demos/usecases/lang/de/LC_MESSAGES/usecases.po:61:9      - Unknown word (Wöchentlich) -- msgstr "Wöchentlich"
+demos/usecases/lang/de/LC_MESSAGES/usecases.po:66:9      - Unknown word (Übersicht)   -- msgstr "Übersicht"
+demos/usecases/lang/de/LC_MESSAGES/usecases.po:76:9      - Unknown word (Nutzung)     -- msgstr "Nutzung"
+demos/usecases/lang/de/LC_MESSAGES/usecases.po:81:9      - Unknown word (Englisch)    -- msgstr "Englisch"
+demos/usecases/lang/de/LC_MESSAGES/usecases.po:86:9      - Unknown word (Deutsch)     -- msgstr "Deutsch"
+demos/usecases/lang/de/LC_MESSAGES/usecases.po:91:9      - Unknown word (Dunkelmodus) -- msgstr "Dunkelmodus"
+demos/usecases/lang/de/LC_MESSAGES/usecases.po:96:9      - Unknown word (Eingang)     -- msgstr "Eingang"
 demos/usecases/rust/index.html:33:29     - Unknown word (usecases)   -- import init from './pkg/usecases_lib.js';
-demos/usecases/rust/src/lib.rs:115:25    - Unknown word (Aurindam)   -- title: "Aurindam Jana".into(),
-demos/usecases/rust/src/lib.rs:35:18     - Unknown word (Usecases)   -- app.global::<UsecasesPalette>().set_use_material
-demos/usecases/rust/src/lib.rs:91:25     - Unknown word (Aurindam)   -- title: "Aurindam Jana".into(),
+demos/usecases/rust/src/lib.rs:121:25    - Unknown word (Aurindam)   -- title: "Aurindam Jana".into(),
+demos/usecases/rust/src/lib.rs:41:18     - Unknown word (Usecases)   -- app.global::<UsecasesPalette>().set_use_material
+demos/usecases/rust/src/lib.rs:97:25     - Unknown word (Aurindam)   -- title: "Aurindam Jana".into(),
 demos/usecases/ui/app.slint:16:10     - Unknown word (Usecases)   -- export { UsecasesPalette } from "widgets
 demos/usecases/ui/app.slint:21:19     - Unknown word (usecases)   -- title: "Slint usecases";
 demos/usecases/ui/app.slint:22:17     - Unknown word (Usecases)   -- background: UsecasesPalette.use-material
 demos/usecases/ui/app.slint:9:42      - Unknown word (Usecases)   -- rdListViewItem, DialogGlobal, UsecasesPalette } from "widgets
 demos/usecases/ui/assets.slint:19:26     - Unknown word (useres)     -- out property <image> useres: @image-url("assets
-demos/usecases/ui/views/header_view.slint:12:21     - Unknown word (Usecases)   -- background: UsecasesPalette.use-material
-demos/usecases/ui/views/header_view.slint:15:22     - Unknown word (Usecases)   -- padding: UsecasesPalette.use-material
-demos/usecases/ui/views/header_view.slint:23:16     - Unknown word (spaceer)    -- // spaceer
+demos/usecases/ui/views/header_view.slint:13:21     - Unknown word (Usecases)   -- background: UsecasesPalette.use-material
+demos/usecases/ui/views/header_view.slint:16:22     - Unknown word (Usecases)   -- padding: UsecasesPalette.use-material
 demos/usecases/ui/views/header_view.slint:6:10      - Unknown word (Usecases)   -- import { UsecasesPalette } from "../widgets
 demos/usecases/ui/views/mail_view.slint:110:22    - Unknown word (Usecases)   -- padding: UsecasesPalette.use-material
 demos/usecases/ui/views/mail_view.slint:148:21    - Unknown word (Aurindam)   -- title: "Aurindam Jana",
 demos/usecases/ui/views/mail_view.slint:167:21    - Unknown word (Aurindam)   -- title: "Aurindam Jana",
-demos/usecases/ui/views/mail_view.slint:30:56     - Unknown word (useres)     -- "3972", icon: Icons.useres },
+demos/usecases/ui/views/mail_view.slint:30:61     - Unknown word (useres)     -- "3972", icon: Icons.useres },
 demos/usecases/ui/views/mail_view.slint:49:17     - Unknown word (Usecases)   -- background: UsecasesPalette.use-material
 demos/usecases/ui/views/mail_view.slint:50:19     - Unknown word (Usecases)   -- border-color: UsecasesPalette.use-material
 demos/usecases/ui/views/mail_view.slint:67:28     - Unknown word (Usecases)   -- border-radius: UsecasesPalette.use-material
@@ -941,6 +973,13 @@ demos/usecases/ui/widgets/navigation_list_view.slint:62:36     - Unknown word (U
 demos/usecases/ui/widgets/navigation_list_view.slint:63:25     - Unknown word (Usecases)   -- foreground: UsecasesPalette.accent-text;
 demos/usecases/ui/widgets/styling.slint:31:15     - Unknown word (Usecases)   -- export global UsecasesPalette {
 demos/usecases/ui/widgets/value_display.slint:4:10      - Unknown word (Usecases)   -- import { UsecasesPalette, CosmicFontSettings
+demos/usecases/update_translations.sh:10:21     - Unknown word (usecases)   -- do msgmerge $po/usecases.po usecases.pot -o
+demos/usecases/update_translations.sh:10:33     - Unknown word (usecases)   -- msgmerge $po/usecases.po usecases.pot -o $po/usecases
+demos/usecases/update_translations.sh:10:53     - Unknown word (usecases)   -- usecases.pot -o $po/usecases.po
+demos/usecases/update_translations.sh:10:8      - Unknown word (msgmerge)   -- do msgmerge $po/usecases.po usecases
+demos/usecases/update_translations.sh:11:5      - Unknown word (msgfmt)     -- msgfmt $po/usecases.po -o
+demos/usecases/update_translations.sh:7:76      - Unknown word (usecases)   -- slint-tr-extractor -- -d usecases -o usecases.pot
+demos/usecases/update_translations.sh:7:88      - Unknown word (usecases)   -- extractor -- -d usecases -o usecases.pot
 demos/weather-demo/README.md:11:48     - Unknown word (Felgo)      -- application made by [Felgo](https://felgo.com/
 demos/weather-demo/README.md:31:58     - Unknown word (hspace)     -- png" height="415px" hspace="5" />
 demos/weather-demo/src/weather/dummyweathercontroller.rs:21:46     - Unknown word (dummyweather) -- std::include_str!("./dummyweather.json");
