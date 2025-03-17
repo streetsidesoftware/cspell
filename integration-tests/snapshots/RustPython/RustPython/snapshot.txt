@@ -3,7 +3,7 @@ Repository: RustPython/RustPython
 Url: "https://github.com/RustPython/RustPython.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 628, Issues found: 1648 in 197 files.
+ CSpell: Files checked: 628, Issues found: 1653 in 197 files.
  exit code: 1
 Cargo.toml:172:1     - Unknown word (rustix)     -- rustix = { version = "0.38
 Cargo.toml:81:62     - Unknown word (redoxer)    -- to compile/check with redoxer
@@ -1381,47 +1381,52 @@ vm/src/stdlib/sre.rs:347:19    - Unknown word (subx)       -- Self::subx(zelf, s
 vm/src/stdlib/sre.rs:36:14     - Unknown word (iscased)    -- fn ascii_iscased(ch: i32) -> bool {
 vm/src/stdlib/sre.rs:404:12    - Unknown word (subx)       -- fn subx(
 vm/src/stdlib/sre.rs:40:16     - Unknown word (iscased)    -- fn unicode_iscased(ch: i32) -> bool {
-vm/src/stdlib/sys.rs:107:8     - Unknown word (platlibdir) -- fn platlibdir(_vm: &VirtualMachine
-vm/src/stdlib/sys.rs:1082:14   - Unknown word (ABIFLAGS)                  -- sys::ABIFLAGS,
-vm/src/stdlib/sys.rs:108:33    - Unknown word (PLATLIBDIR) -- option_env!("RUSTPYTHON_PLATLIBDIR").unwrap_or("lib")
-vm/src/stdlib/sys.rs:154:38    - Unknown word (PYVENV)     -- Ok(var) = env::var("__PYVENV_LAUNCHER__") {
-vm/src/stdlib/sys.rs:276:9     - Unknown word (xoptions)   -- fn _xoptions(vm: &VirtualMachine
-vm/src/stdlib/sys.rs:279:48    - Unknown word (xoptions)   -- in &vm.state.settings.xoptions {
-vm/src/stdlib/sys.rs:331:28    - Unknown word (excepthook) -- pyfunction(name = "__excepthook__")]
-vm/src/stdlib/sys.rs:333:8     - Unknown word (excepthook) -- fn excepthook(
-vm/src/stdlib/sys.rs:347:38    - Unknown word (PYTHONBREAKPOINT) -- var = std::env::var("PYTHONBREAKPOINT")
-vm/src/stdlib/sys.rs:361:19    - Unknown word (unimportable)     -- let print_unimportable_module_warn = || {
-vm/src/stdlib/sys.rs:364:35    - Unknown word (unimportable)     -- format!("Ignoring unimportable $PYTHONBREAKPOINT:
-vm/src/stdlib/sys.rs:364:49    - Unknown word (PYTHONBREAKPOINT) -- Ignoring unimportable $PYTHONBREAKPOINT: \"{env_var}\"",),
-vm/src/stdlib/sys.rs:375:31    - Unknown word (unimportable)     -- _ => return print_unimportable_module_warn(),
-vm/src/stdlib/sys.rs:387:30    - Unknown word (unimportable)     -- return print_unimportable_module_warn();
-vm/src/stdlib/sys.rs:393:24    - Unknown word (unimportable)     -- _ => print_unimportable_module_warn(),
-vm/src/stdlib/sys.rs:39:22     - Unknown word (abiflags)   -- #[pyattr(name = "abiflags")]
-vm/src/stdlib/sys.rs:40:22     - Unknown word (ABIFLAGS)   -- pub(crate) const ABIFLAGS: &str = "";
-vm/src/stdlib/sys.rs:458:10    - Unknown word (surrogateescape)  -- "surrogateescape".to_owned()
-vm/src/stdlib/sys.rs:464:10    - Unknown word (surrogatepass)    -- "surrogatepass".to_owned()
-vm/src/stdlib/sys.rs:494:28    - Unknown word (OSVERSIONINFOEXW) -- GetVersionExW, OSVERSIONINFOEXW, OSVERSIONINFOW,
-vm/src/stdlib/sys.rs:494:46    - Unknown word (OSVERSIONINFOW)   -- VersionExW, OSVERSIONINFOEXW, OSVERSIONINFOW,
-vm/src/stdlib/sys.rs:497:26    - Unknown word (OSVERSIONINFOEXW) -- let mut version: OSVERSIONINFOEXW = unsafe { std::mem
-vm/src/stdlib/sys.rs:498:59    - Unknown word (OSVERSIONINFOEXW) -- std::mem::size_of::<OSVERSIONINFOEXW>() as u32;
-vm/src/stdlib/sys.rs:500:17    - Unknown word (osvi)             -- let osvi = &mut version as *mut
-vm/src/stdlib/sys.rs:500:45    - Unknown word (OSVERSIONINFOEXW) -- mut version as *mut OSVERSIONINFOEXW as *mut OSVERSIONINFOW
-vm/src/stdlib/sys.rs:500:70    - Unknown word (OSVERSIONINFOW)   -- OSVERSIONINFOEXW as *mut OSVERSIONINFOW;
-vm/src/stdlib/sys.rs:501:59    - Unknown word (OSVERSIONINFOW)   -- accepts a pointer of OSVERSIONINFOW, but windows-sys crate
-vm/src/stdlib/sys.rs:503:27    - Unknown word (osvi)             -- GetVersionExW(osvi)
-vm/src/stdlib/sys.rs:715:15    - Unknown word (Asyncgen)         -- struct SetAsyncgenHooksArgs {
-vm/src/stdlib/sys.rs:723:12    - Unknown word (asyncgen)         -- fn set_asyncgen_hooks(args: SetAsyncgenHooksA
-vm/src/stdlib/sys.rs:723:36    - Unknown word (Asyncgen)         -- asyncgen_hooks(args: SetAsyncgenHooksArgs, vm: &VirtualMachine
-vm/src/stdlib/sys.rs:756:32    - Unknown word (asyncgen)         -- pyclass(no_attr, name = "asyncgen_hooks")]
-vm/src/stdlib/sys.rs:758:25    - Unknown word (Asyncgen)         -- pub(super) struct PyAsyncgenHooks {
-vm/src/stdlib/sys.rs:764:12    - Unknown word (Asyncgen)         -- impl PyAsyncgenHooks {}
-vm/src/stdlib/sys.rs:767:12    - Unknown word (asyncgen)         -- fn get_asyncgen_hooks(vm: &VirtualMachine
-vm/src/stdlib/sys.rs:767:53    - Unknown word (Asyncgen)         -- VirtualMachine) -> PyAsyncgenHooks {
-vm/src/stdlib/sys.rs:814:18    - Unknown word (PYTHONSAFEPATH)   -- /// -P, `PYTHONSAFEPATH`
-vm/src/stdlib/sys.rs:816:39    - Unknown word (PYTHONWARNDEFAULTENCODING) -- warn_default_encoding, PYTHONWARNDEFAULTENCODING
-vm/src/stdlib/sys.rs:962:9     - Unknown word (releaselevel)              -- releaselevel: &'static str,
-vm/src/stdlib/sys.rs:972:13    - Unknown word (releaselevel)              -- releaselevel: version::RELEASELEVEL
-vm/src/stdlib/sys.rs:972:36    - Unknown word (RELEASELEVEL)              -- releaselevel: version::RELEASELEVEL,
+vm/src/stdlib/sys.rs:1042:9    - Unknown word (releaselevel)              -- releaselevel: &'static str,
+vm/src/stdlib/sys.rs:1052:13   - Unknown word (releaselevel)              -- releaselevel: version::RELEASELEVEL
+vm/src/stdlib/sys.rs:1052:36   - Unknown word (RELEASELEVEL)              -- releaselevel: version::RELEASELEVEL,
+vm/src/stdlib/sys.rs:1162:14   - Unknown word (ABIFLAGS)                  -- sys::ABIFLAGS,
+vm/src/stdlib/sys.rs:118:8     - Unknown word (platlibdir) -- fn platlibdir(_vm: &VirtualMachine
+vm/src/stdlib/sys.rs:119:33    - Unknown word (PLATLIBDIR) -- option_env!("RUSTPYTHON_PLATLIBDIR").unwrap_or("lib")
+vm/src/stdlib/sys.rs:165:38    - Unknown word (PYVENV)     -- Ok(var) = env::var("__PYVENV_LAUNCHER__") {
+vm/src/stdlib/sys.rs:287:9     - Unknown word (xoptions)   -- fn _xoptions(vm: &VirtualMachine
+vm/src/stdlib/sys.rs:290:48    - Unknown word (xoptions)   -- in &vm.state.settings.xoptions {
+vm/src/stdlib/sys.rs:342:28    - Unknown word (excepthook) -- pyfunction(name = "__excepthook__")]
+vm/src/stdlib/sys.rs:344:8     - Unknown word (excepthook) -- fn excepthook(
+vm/src/stdlib/sys.rs:358:38    - Unknown word (PYTHONBREAKPOINT) -- var = std::env::var("PYTHONBREAKPOINT")
+vm/src/stdlib/sys.rs:372:19    - Unknown word (unimportable)     -- let print_unimportable_module_warn = || {
+vm/src/stdlib/sys.rs:375:35    - Unknown word (unimportable)     -- format!("Ignoring unimportable $PYTHONBREAKPOINT:
+vm/src/stdlib/sys.rs:375:49    - Unknown word (PYTHONBREAKPOINT) -- Ignoring unimportable $PYTHONBREAKPOINT: \"{env_var}\"",),
+vm/src/stdlib/sys.rs:386:31    - Unknown word (unimportable)     -- _ => return print_unimportable_module_warn(),
+vm/src/stdlib/sys.rs:398:30    - Unknown word (unimportable)     -- return print_unimportable_module_warn();
+vm/src/stdlib/sys.rs:404:24    - Unknown word (unimportable)     -- _ => print_unimportable_module_warn(),
+vm/src/stdlib/sys.rs:469:10    - Unknown word (surrogateescape)  -- "surrogateescape".to_owned()
+vm/src/stdlib/sys.rs:475:10    - Unknown word (surrogatepass)    -- "surrogatepass".to_owned()
+vm/src/stdlib/sys.rs:50:22     - Unknown word (abiflags)   -- #[pyattr(name = "abiflags")]
+vm/src/stdlib/sys.rs:51:22     - Unknown word (ABIFLAGS)   -- pub(crate) const ABIFLAGS: &str = "";
+vm/src/stdlib/sys.rs:524:17    - Unknown word (verblock)         -- let verblock_size =
+vm/src/stdlib/sys.rs:526:16    - Unknown word (verblock)         -- if verblock_size == 0 {
+vm/src/stdlib/sys.rs:531:21    - Unknown word (verblock)         -- let mut verblock = vec![0u8; verblock
+vm/src/stdlib/sys.rs:531:42    - Unknown word (verblock)         -- verblock = vec![0u8; verblock_size as usize];
+vm/src/stdlib/sys.rs:535:17    - Unknown word (verblock)         -- verblock_size,
+vm/src/stdlib/sys.rs:577:28    - Unknown word (OSVERSIONINFOEXW) -- GetVersionExW, OSVERSIONINFOEXW, OSVERSIONINFOW,
+vm/src/stdlib/sys.rs:577:46    - Unknown word (OSVERSIONINFOW)   -- VersionExW, OSVERSIONINFOEXW, OSVERSIONINFOW,
+vm/src/stdlib/sys.rs:580:26    - Unknown word (OSVERSIONINFOEXW) -- let mut version: OSVERSIONINFOEXW = unsafe { std::mem
+vm/src/stdlib/sys.rs:581:59    - Unknown word (OSVERSIONINFOEXW) -- std::mem::size_of::<OSVERSIONINFOEXW>() as u32;
+vm/src/stdlib/sys.rs:583:17    - Unknown word (osvi)             -- let osvi = &mut version as *mut
+vm/src/stdlib/sys.rs:583:45    - Unknown word (OSVERSIONINFOEXW) -- mut version as *mut OSVERSIONINFOEXW as *mut OSVERSIONINFOW
+vm/src/stdlib/sys.rs:583:70    - Unknown word (OSVERSIONINFOW)   -- OSVERSIONINFOEXW as *mut OSVERSIONINFOW;
+vm/src/stdlib/sys.rs:584:59    - Unknown word (OSVERSIONINFOW)   -- accepts a pointer of OSVERSIONINFOW, but windows-sys crate
+vm/src/stdlib/sys.rs:586:27    - Unknown word (osvi)             -- GetVersionExW(osvi)
+vm/src/stdlib/sys.rs:795:15    - Unknown word (Asyncgen)         -- struct SetAsyncgenHooksArgs {
+vm/src/stdlib/sys.rs:803:12    - Unknown word (asyncgen)         -- fn set_asyncgen_hooks(args: SetAsyncgenHooksA
+vm/src/stdlib/sys.rs:803:36    - Unknown word (Asyncgen)         -- asyncgen_hooks(args: SetAsyncgenHooksArgs, vm: &VirtualMachine
+vm/src/stdlib/sys.rs:836:32    - Unknown word (asyncgen)         -- pyclass(no_attr, name = "asyncgen_hooks")]
+vm/src/stdlib/sys.rs:838:25    - Unknown word (Asyncgen)         -- pub(super) struct PyAsyncgenHooks {
+vm/src/stdlib/sys.rs:844:12    - Unknown word (Asyncgen)         -- impl PyAsyncgenHooks {}
+vm/src/stdlib/sys.rs:847:12    - Unknown word (asyncgen)         -- fn get_asyncgen_hooks(vm: &VirtualMachine
+vm/src/stdlib/sys.rs:847:53    - Unknown word (Asyncgen)         -- VirtualMachine) -> PyAsyncgenHooks {
+vm/src/stdlib/sys.rs:894:18    - Unknown word (PYTHONSAFEPATH)   -- /// -P, `PYTHONSAFEPATH`
+vm/src/stdlib/sys.rs:896:39    - Unknown word (PYTHONWARNDEFAULTENCODING) -- warn_default_encoding, PYTHONWARNDEFAULTENCODING
 vm/src/stdlib/thread.rs:29:69     - Unknown word (illumos)    -- solaris", target_os = "illumos"))] {
 vm/src/stdlib/time.rs:106:30    - Unknown word (emscripten) -- not(any(target_os = "emscripten", target_os = "wasi
 vm/src/stdlib/time.rs:115:30    - Unknown word (emscripten) -- not(any(target_os = "emscripten", target_os = "wasi

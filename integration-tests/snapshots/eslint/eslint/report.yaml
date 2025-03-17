@@ -4,8 +4,8 @@ Url: https://github.com/eslint/eslint
 Args: '[".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]'
 Summary:
   files: 2054
-  filesWithIssues: 299
-  issues: 1624
+  filesWithIssues: 297
+  issues: 1604
   errors: 0
 Errors: []
 
@@ -55,7 +55,7 @@ issues:
   - "docs/src/extend/custom-parsers.md:124:31        myparser    U       packages: [\"eslint-parser-myparser\"],"
   - "docs/src/extend/custom-rule-tutorial.md:91:127      fixability      U       documentation, and fixability. In this case, the rule"
   - "docs/src/extend/custom-rule-tutorial.md:179:4       endraw          U       {% endraw %}"
-  - "docs/src/extend/plugin-migration-flat-config.md:254:17      xdescribe       U       xdescribe: true"
+  - "docs/src/extend/plugin-migration-flat-config.md:246:17      xdescribe       U       xdescribe: true"
   - "docs/src/extend/selectors.md:140:405        Fpath       U       so: `[value=/some\\u002Fpath/]`."
   - "docs/src/extend/shareable-configs-deprecated.md:19:55       myconfig    U       such as `eslint-config-myconfig`."
   - "docs/src/integrate/nodejs-api.md:209:35         omittable       U       parameter `options` is omittable."
@@ -168,7 +168,7 @@ issues:
   - "docs/src/use/configure/plugins-deprecated.md:41:152         pluginname      U       require('eslint-plugin-pluginname')` in the config file"
   - "docs/src/use/core-concepts/glossary.md:77:17        estools     U       See [github.com/estools/esquery](https://github"
   - "docs/src/use/getting-started.md:47:13       yourfile    U       args: [\"yourfile.js\"]"
-  - "docs/src/use/getting-started.md:70:274      npmjs       U       \"eslint-config\" on [npmjs.com](https://www.npmjs"
+  - "docs/src/use/getting-started.md:69:239      npmjs       U       \"eslint-config\" on [npmjs.com](https://www.npmjs"
   - "docs/src/use/integrations.md:22:8           Syntastic       U       * [Syntastic](https://github.com"
   - "docs/src/use/integrations.md:23:11          Flycheck        U       * Emacs: [Flycheck](http://www.flycheck"
   - "docs/src/use/migrate-to-8.0.0.md:228:20         cliengine       U       ## <a name=\"remove-cliengine\"></a> The `CLIEngine"
@@ -182,7 +182,6 @@ issues:
   - "docs/src/use/migrating-to-2.0.0.md:347:45       FEFF    U       parse(text.replace(/^\\uFEFF/, \"\"), options);"
   - "docs/src/use/migrating-to-3.0.0.md:47:229       lifed       U       Explorer 8 was end-of-lifed](https://www.microsoft"
   - "docs/src/use/migrating-to-5.0.0.md:114:68       lintable    U       line does not match any lintable files."
-  - "knip.jsonc:27:19        wdio    U       \"@wdio/cli\","
   - "lib/cli-engine/formatters/html.js:46:48         Neue            U       family: Arial, \"Helvetica Neue\", Helvetica, sans-serif"
   - "lib/cli-engine/formatters/html.js:247:66        noopener        U       target=\"_blank\" rel=\"noopener noreferrer\">${ruleId"
   - "lib/cli-engine/formatters/html.js:247:75        noreferrer      U       blank\" rel=\"noopener noreferrer\">${ruleId ? ruleId"
@@ -203,7 +202,7 @@ issues:
   - "lib/linter/code-path-analysis/debug-helpers.js:95:44        Graphvis    U       can be visualized with Graphvis."
   - "lib/linter/linter.js:45:7           jslang      U       const jslang = require(\"../languages"
   - "lib/rule-tester/rule-tester.js:256:42       errorize            U       ast The root node to errorize `start`/`end` properties"
-  - "lib/rule-tester/rule-tester.js:866:27       Didnt (Didn't)      U       function assertASTDidntChange(beforeAST, afterAST"
+  - "lib/rule-tester/rule-tester.js:865:27       Didnt (Didn't)      U       function assertASTDidntChange(beforeAST, afterAST"
   - "lib/rules/dot-notation.js:142:63        quasis      U       node, node.property.quasis[0].value.cooked);"
   - "lib/rules/for-direction.js:73:65        nochange    U       if sub return -1, if nochange, return 0"
   - "lib/rules/func-name-matching.js:13:7        esutils     U       const esutils = require(\"esutils\""
@@ -250,9 +249,9 @@ issues:
   - "Makefile.js:899:18      Multifiles      U       function downloadMultifilesTestTarget(cb) {"
   - "package.json:61:81          flter           U       ignore=!docs/**/*.js -a --flter=eslint && trunk check"
   - "package.json:63:20          attw            U       \"lint:types\": \"attw --pack\","
-  - "package.json:150:7          trunkio         U       \"@trunkio/launcher\": \"^1.3.0\""
-  - "package.json:171:6          eslump          U       \"eslump\": \"^3.0.0\","
-  - "package.json:186:6          metascraper     U       \"metascraper\": \"^5.25.7\","
+  - "package.json:151:7          trunkio         U       \"@trunkio/launcher\": \"^1.3.0\""
+  - "package.json:169:6          eslump          U       \"eslump\": \"^3.0.0\","
+  - "package.json:184:6          metascraper     U       \"metascraper\": \"^5.25.7\","
   - "README.md:236:5         teamstart           U       <!--teamstart-->"
   - "README.md:244:87        Zakas's             U       5\" alt=\"Nicholas C. Zakas's Avatar\"><br />"
   - "README.md:249:77        Francesco           U       5\" height=\"75\" alt=\"Francesco Trotta's Avatar\"><br"
@@ -325,8 +324,8 @@ issues:
   - "tests/lib/linter/source-code-fixer.js:70:19         removemiddle    U       message: \"removemiddle\","
   - "tests/lib/linter/source-code-fixer.js:77:19         removeend       U       message: \"removeend\","
   - "tests/lib/options.js:358:71         morerules       U       trcOptions.parse(\"--rulesdir /morerules\");"
-  - "tests/lib/rule-tester/rule-tester.js:2925:33        outpt           U       outpt: \"var baz;\""
-  - "tests/lib/rule-tester/rule-tester.js:3653:15        Subclassing     U       describe(\"Subclassing\", () => {"
+  - "tests/lib/rule-tester/rule-tester.js:2935:33        outpt           U       outpt: \"var baz;\""
+  - "tests/lib/rule-tester/rule-tester.js:3663:15        Subclassing     U       describe(\"Subclassing\", () => {"
   - "tests/lib/rules/array-bracket-spacing.js:51:76          n'quxx      U       { 'bar': 'baz' }], \\n'quxx': 1 \\n}]\", options:"
   - "tests/lib/rules/array-element-newline.js:45:78          nosomething     U       ,\\nfunction bar() {\\nosomething();\\n}\\n];\","
   - "tests/lib/rules/arrow-body-style.js:27:38       nretv       U       = (retv, name) => {\\nretv[name] = true;\\nreturn"
@@ -410,8 +409,8 @@ issues:
   - "tests/lib/rules/sort-keys.js:261:24         abce    U       // abce"
   - "tests/lib/rules/spaced-comment.js:115:54        xmldoc          U       comment\\n//----\\n/// xmldoc style comment\\n//!<"
   - "tests/lib/rules/spaced-comment.js:649:23        endregionfoo    U       code: \"//#endregionfoo\","
-  - "tests/lib/rules/utils/ast-utils.js:1091:17      ncde            U       \"ab\\ncde\\n\": [[1, 0], [1, 1]"
-  - "tests/lib/rules/utils/ast-utils.js:1550:19      invalidtoken    U       [[\"123invalidtoken\", \"(\"], false],"
+  - "tests/lib/rules/utils/ast-utils.js:1086:17      ncde            U       \"ab\\ncde\\n\": [[1, 0], [1, 1]"
+  - "tests/lib/rules/utils/ast-utils.js:1544:19      invalidtoken    U       [[\"123invalidtoken\", \"(\"], false],"
   - "tests/lib/rules/valid-typeof.js:91:40       umdefined       U       if (typeof bar === 'umdefined') {}\","
   - "tests/lib/shared/string-utils.js:37:9           uppercases      U       it(\"uppercases the first letter of"
   - "tests/lib/types/types.test.ts:642:7         eslinter    U       const eslinter = new ESLinter();"
@@ -542,12 +541,6 @@ issues:
   - "tools/check-emfile-handling.js:30:10        Sonoma      U       * MacOS Sonoma v14.4 has a limit of"
   - "tools/fuzzer-runner.js:50:42        elapseds    U       rules [:bar] :percent, :elapseds elapsed, eta :etas,"
   - "tools/update-readme.js:39:32        Prerendered     U       returns {Promise<string>}} Prerendered sponsors markdown."
-  - "wdio.conf.js:125:16         sumologic       U       * - @wdio/sumologic-reporter"
-  - "wdio.conf.js:178:48         specfile        U       to retry the entire specfile when it fails as a whole"
-  - "wdio.conf.js:184:31         specfiles       U       Whether or not retried specfiles should be retried immediately"
-  - "wdio.conf.js:225:76         initialise      U       spawned and can be used to initialise specific service"
-  - "wdio.conf.js:249:34         initialising    U       executed just before initialising the webdriver session"
-  - "wdio.conf.js:319:39         informations    U       Object} result.retries informations to spec related retries"
 
 issuesSummary:
   - "text: abce, count: 1, files: 1,"
@@ -764,9 +757,6 @@ issuesSummary:
   - "text: incompat, count: 1, files: 1,"
   - "text: incrementcurrent, count: 2, files: 1,"
   - "text: ined, count: 1, files: 1,"
-  - "text: informations, count: 1, files: 1,"
-  - "text: initialise, count: 1, files: 1,"
-  - "text: initialising, count: 1, files: 1,"
   - "text: inof, count: 3, files: 1,"
   - "text: inspectable, count: 1, files: 1,"
   - "text: intenationally, count: 6, files: 2,"
@@ -983,8 +973,6 @@ issuesSummary:
   - "text: someregular, count: 2, files: 1,"
   - "text: somethingelse, count: 4, files: 1,"
   - "text: Sonoma, count: 1, files: 1,"
-  - "text: specfile, count: 1, files: 1,"
-  - "text: specfiles, count: 1, files: 1,"
   - "text: SPMSP, count: 1, files: 1,"
   - "text: sponsorsend, count: 3, files: 2,"
   - "text: sponsorsstart, count: 3, files: 2,"
@@ -1007,7 +995,6 @@ issuesSummary:
   - "text: succeds, count: 1, files: 1,"
   - "text: succesfully, count: 5, files: 1,"
   - "text: Suggestable, count: 4, files: 1,"
-  - "text: sumologic, count: 1, files: 1,"
   - "text: supernew, count: 3, files: 1,"
   - "text: suppresed, count: 2, files: 1,"
   - "text: SVGCSS, count: 1, files: 1,"
@@ -1068,7 +1055,6 @@ issuesSummary:
   - "text: vsdoc, count: 1, files: 1,"
   - "text: Warang, count: 2, files: 1,"
   - "text: warnable, count: 3, files: 1,"
-  - "text: wdio, count: 14, files: 4,"
   - "text: Whoh, count: 1, files: 1,"
   - "text: withstmt, count: 2, files: 1,"
   - "text: writability, count: 2, files: 2,"
