@@ -123,11 +123,11 @@ importers:
   doc-generator:
     dependencies:
       typedoc:
-        specifier: ^0.27.9
-        version: 0.27.9(typescript@5.8.2)
+        specifier: ^0.28.0
+        version: 0.28.0(typescript@5.8.2)
       typedoc-plugin-markdown:
         specifier: 4.4.2
-        version: 4.4.2(typedoc@0.27.9(typescript@5.8.2))
+        version: 4.4.2(typedoc@0.28.0(typescript@5.8.2))
 
   examples/dynamic-dictionaries:
     dependencies:
@@ -1393,13 +1393,13 @@ importers:
         version: 3.7.0(@swc/core@1.7.26)(acorn@8.14.1)(esbuild@0.25.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       docusaurus-plugin-typedoc:
         specifier: ^1.2.3
-        version: 1.2.3(typedoc-plugin-markdown@4.4.2(typedoc@0.27.9(typescript@5.8.2)))
+        version: 1.2.3(typedoc-plugin-markdown@4.4.2(typedoc@0.28.0(typescript@5.8.2)))
       typedoc:
-        specifier: ^0.27.9
-        version: 0.27.9(typescript@5.8.2)
+        specifier: ^0.28.0
+        version: 0.28.0(typescript@5.8.2)
       typedoc-plugin-markdown:
         specifier: 4.4.2
-        version: 4.4.2(typedoc@0.27.9(typescript@5.8.2))
+        version: 4.4.2(typedoc@0.28.0(typescript@5.8.2))
       typescript:
         specifier: ~5.8.2
         version: 5.8.2
@@ -3050,8 +3050,8 @@ packages:
     resolution: {integrity: sha512-JubJ5B2pJ4k4yGxaNLdbjrnk9d/iDz6/q8wOilpIowd6PJPgaxCuHBnBszq7Ce2TyMrywm5r4PnKm6V3iiZF+g==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@gerrit0/mini-shiki@1.27.2':
-    resolution: {integrity: sha512-GeWyHz8ao2gBiUW4OJnQDxXQnFgZQwwQk05t/CVVgNBN7/rK8XZ7xY6YhLVv9tH3VppWWmr9DCl3MwemB/i+Og==}
+  '@gerrit0/mini-shiki@3.2.1':
+    resolution: {integrity: sha512-HbzRC6MKB6U8kQhczz0APKPIzFHTrcqhaC7es2EXInq1SpjPVnpVSIsBe6hNoLWqqCx1n5VKiPXq6PfXnHZKOQ==}
 
   '@hapi/hoek@9.3.0':
     resolution: {integrity: sha512-/c6rf4UJlmHlC9b5BaNvzAcFv7HZ2QHaV0D4/HNlBdvFnvQq8RI4kYdhyPCl7Xj+oWvTWQ8ujhqS53LIgAe6KQ==}
@@ -3711,11 +3711,11 @@ packages:
   '@sec-ant/readable-stream@0.4.1':
     resolution: {integrity: sha512-831qok9r2t8AlxLko40y2ebgSDhenenCatLVeW/uBtnHPyhHOvG0C7TvfgecV+wHzIm5KUICgzmVpWS+IMEAeg==}
 
-  '@shikijs/engine-oniguruma@1.29.2':
-    resolution: {integrity: sha512-7iiOx3SG8+g1MnlzZVDYiaeHe7Ez2Kf2HrJzdmGwkRisT7r4rak0e655AcM/tF9JG/kg5fMNYlLLKglbN7gBqA==}
+  '@shikijs/engine-oniguruma@3.2.1':
+    resolution: {integrity: sha512-wZZAkayEn6qu2+YjenEoFqj0OyQI64EWsNR6/71d1EkG4sxEOFooowKivsWPpaWNBu3sxAG+zPz5kzBL/SsreQ==}
 
-  '@shikijs/types@1.29.2':
-    resolution: {integrity: sha512-VJjK0eIijTZf0QSTODEXCqinjBn0joAHQ+aPSBzrv4O2d/QSbsMw+ZeSRx03kV34Hy7NzUvV/7NqfYGRLrASmw==}
+  '@shikijs/types@3.2.1':
+    resolution: {integrity: sha512-/NTWAk4KE2M8uac0RhOsIhYQf4pdU0OywQuYDGIGAJ6Mjunxl2cGiuLkvu4HLCMn+OTTLRWkjZITp+aYJv60yA==}
 
   '@shikijs/vscode-textmate@10.0.2':
     resolution: {integrity: sha512-83yeghZ2xxin3Nj8z1NMd/NCuca+gsYXswywDy5bHvwlWL8tpTQmzGeUuHd9FC3E/SBEMvzJRwWEOz5gGes9Qg==}
@@ -10046,9 +10046,9 @@ packages:
     peerDependencies:
       typedoc: 0.27.x
 
-  typedoc@0.27.9:
-    resolution: {integrity: sha512-/z585740YHURLl9DN2jCWe6OW7zKYm6VoQ93H0sxZ1cwHQEQrUn5BJrEnkWhfzUdyO+BLGjnKUZ9iz9hKloFDw==}
-    engines: {node: '>= 18'}
+  typedoc@0.28.0:
+    resolution: {integrity: sha512-UU+xxZXrpnUhEulBYRwY2afoYFC24J2fTFovOs3llj2foGShCoKVQL6cQCfQ+sBAOdiFn2dETpZ9xhah+CL3RQ==}
+    engines: {node: '>= 18', pnpm: '>= 10'}
     hasBin: true
     peerDependencies:
       typescript: 5.0.x || 5.1.x || 5.2.x || 5.3.x || 5.4.x || 5.5.x || 5.6.x || 5.7.x || 5.8.x
@@ -12648,7 +12648,7 @@ snapshots:
 
   '@docusaurus/react-loadable@6.0.0(react@19.0.0)':
     dependencies:
-      '@types/react': 19.0.11
+      '@types/react': 18.3.18
       react: 19.0.0
 
   '@docusaurus/remark-plugin-npm2yarn@3.7.0':
@@ -13062,10 +13062,10 @@ snapshots:
       '@eslint/core': 0.12.0
       levn: 0.4.1
 
-  '@gerrit0/mini-shiki@1.27.2':
+  '@gerrit0/mini-shiki@3.2.1':
     dependencies:
-      '@shikijs/engine-oniguruma': 1.29.2
-      '@shikijs/types': 1.29.2
+      '@shikijs/engine-oniguruma': 3.2.1
+      '@shikijs/types': 3.2.1
       '@shikijs/vscode-textmate': 10.0.2
 
   '@hapi/hoek@9.3.0': {}
@@ -14020,12 +14020,12 @@ snapshots:
 
   '@sec-ant/readable-stream@0.4.1': {}
 
-  '@shikijs/engine-oniguruma@1.29.2':
+  '@shikijs/engine-oniguruma@3.2.1':
     dependencies:
-      '@shikijs/types': 1.29.2
+      '@shikijs/types': 3.2.1
       '@shikijs/vscode-textmate': 10.0.2
 
-  '@shikijs/types@1.29.2':
+  '@shikijs/types@3.2.1':
     dependencies:
       '@shikijs/vscode-textmate': 10.0.2
       '@types/hast': 3.0.4
@@ -16149,9 +16149,9 @@ snapshots:
     dependencies:
       esutils: 2.0.3
 
-  docusaurus-plugin-typedoc@1.2.3(typedoc-plugin-markdown@4.4.2(typedoc@0.27.9(typescript@5.8.2))):
+  docusaurus-plugin-typedoc@1.2.3(typedoc-plugin-markdown@4.4.2(typedoc@0.28.0(typescript@5.8.2))):
     dependencies:
-      typedoc-plugin-markdown: 4.4.2(typedoc@0.27.9(typescript@5.8.2))
+      typedoc-plugin-markdown: 4.4.2(typedoc@0.28.0(typescript@5.8.2))
 
   dom-converter@0.2.0:
     dependencies:
@@ -21945,13 +21945,13 @@ snapshots:
 
   typedarray@0.0.6: {}
 
-  typedoc-plugin-markdown@4.4.2(typedoc@0.27.9(typescript@5.8.2)):
+  typedoc-plugin-markdown@4.4.2(typedoc@0.28.0(typescript@5.8.2)):
     dependencies:
-      typedoc: 0.27.9(typescript@5.8.2)
+      typedoc: 0.28.0(typescript@5.8.2)
 
-  typedoc@0.27.9(typescript@5.8.2):
+  typedoc@0.28.0(typescript@5.8.2):
     dependencies:
-      '@gerrit0/mini-shiki': 1.27.2
+      '@gerrit0/mini-shiki': 3.2.1
       lunr: 2.3.9
       markdown-it: 14.1.0
       minimatch: 9.0.5
