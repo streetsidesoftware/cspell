@@ -24,13 +24,12 @@ on:
       - 'test-packages/**/tsconfig.json'
       - 'test-fixtures/**'
       - 'tsconfig*.json'
-      - '!docs/**'
       - '!website/**'
   push:
     branches:
       - main
     paths-ignore:
-      - 'docs/**'
+      - 'website/**'
 
 permissions:
   contents: read
