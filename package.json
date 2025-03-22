@@ -14,7 +14,7 @@
   "scripts": {
     "bt": "pnpm run build && pnpm run test",
     "build-dev": "pnpm run --filter \\!website build-dev",
-    "build-cspell-types-docs": "cd doc-generator && pnpm i && pnpm run build-cspell-types-docs",
+    "build-cspell-types-docs": "cd website && pnpm i && pnpm run gen-docs",
     "build-integration-tests": "cd ./integration-tests && pnpm i",
     "build-schema": "pnpm -r run build-schema",
     "build": "pnpm -r --stream --workspace-concurrency=2 run build",
@@ -54,7 +54,7 @@
     "test:bin-spell-cache-content": "node ./bin.mjs -c cspell.test.json --cache --cache-strategy content --cache-location temp/.cspellcache-content",
     "test:bin-spell-cache-metadata": "node ./bin.mjs -c cspell.test.json --cache --cache-strategy metadata --cache-location temp/.cspellcache-meta",
     "test:bin-trace": "node ./bin.mjs trace test",
-    "test-build-docs": "cd doc-generator && pnpm i && pnpm run test-build-docs",
+    "test-build-docs": "cd website && pnpm run build",
     "test-integrations": "cd ./integration-tests && pnpm run integration-tests",
     "test-schema": "node ./test-packages/cspell-types/validate-schema/validate-schema.mjs",
     "update-packages": "pnpm run update-packages-src && pnpm run update-packages-docs && pnpm update-package-json",

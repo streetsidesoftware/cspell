@@ -26,6 +26,7 @@ jobs:
 
       - name: Build Docs
         run: |
+          pnpm ib
           pnpm run build-cspell-types-docs
 
       - name: PR
