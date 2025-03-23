@@ -1,11 +1,10 @@
 ---
 title: CSpell
-nav\_order: 1
+nav_order: 1
+mdx.format: md
 description: 'CSpell - A spell checker for code!'
 permalink: /
 ---
-
-<!--- @@inject: ../../../README.md --->
 
 # CSpell
 
@@ -28,13 +27,13 @@ The CSpell mono-repo, a spell checker for code.
 
 ## Documentation
 
-[Documentation - CSpell](https://streetsidesoftware.github.io/cspell/)
+[Documentation - CSpell](https://cspell.org/docs/getting-started)
 
 ## Third-Party Video Presentations
 
 Some videos related to CSpell and the [Code Spell Checker](https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker) for VS Code.
 
-- [Spell Checking Documentation in DevOps Pipelines](https://www.youtube.com/watch?v=w8gGi3aeVpc)
+- [Spell Checking Documentation in DevOps Pipelines](https://www.youtube.com/watch?v=w8gGi3aeVpc) by Houssem Dellai
 - [Don't Worry About Spelling...VS Code Can Do It For You!!](https://www.youtube.com/watch?v=MfxFMFMsBP4) by [James Q Quick](https://www.youtube.com/@JamesQQuick)
 - [Spell Checking In VSCode - VSCode Pro Tips](https://www.youtube.com/watch?v=_GwpPJgH1Gw)
 - [Spell Check in VS Code with Code Spell Checker - Extension Highlight](https://www.youtube.com/watch?v=ZxNnOjWetH4)
@@ -64,11 +63,15 @@ Some videos related to CSpell and the [Code Spell Checker](https://marketplace.v
 
   This will add the `cspell-cli` command, which is an alias of the `cspell` command.
 
+<!--
 ## Live Discussions
 
 Join us on:
 
+[<img src="./assets/images/zulip-icon-circle.svg" width="32">](https://cspell.zulipchat.com/)
+
 [cspell.zulipchat.com](https://cspell.zulipchat.com/)
+-->
 
 ## RFCs
 
@@ -101,4 +104,18 @@ Tidelift will coordinate the fix and disclosure.
 | cspell | 5.x     | 12.x    | Paid support only[^1] | -           | 2022-10-01          |
 | cspell | 4.x     | 10.x    | Paid support only[^1] | -           | 2022-05-01          |
 
-<!--- @@inject-end: ../../../README.md --->
+[^1]: [Support - Street Side Software](https://streetsidesoftware.com/support/#maintenance-agreements)
+
+## Contributing
+
+Contributions are welcome! See our [contribution notes](https://github.com/streetsidesoftware/cspell/blob/main/CONTRIBUTING.md). **Note:** To add or remove words in a dictionary, visit [cspell-dicts](https://github.com/streetsidesoftware/cspell-dicts/issues).
+
+🙏 _**Special thanks to all of our amazing contributors!**_ 🥰
+
+---
+
+<p align="center">Brought to you by<a href="https://streetsidesoftware.com" title="Street Side Software"><img width="16" alt="Street Side Software Logo" src="https://i.imgur.com/CyduuVY.png" /> Street Side Software</a></p>
+
+<!---
+cspell:ignore Houssem Dellai
+--->
