@@ -1,7 +1,11 @@
 {
-    "extends": "../../../tsconfig.cjs.json",
+    "extends": "../../../tsconfig.base.json",
     "compilerOptions": {
+        "types": ["node"],
+        "lib": ["es2020", "DOM"],
+        "module": "CommonJS",
         "outDir": "dist",
+        "skipLibCheck": true,
         "moduleResolution": "Node"
     },
     "include": ["src"]
