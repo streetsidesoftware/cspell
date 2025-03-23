@@ -11,9 +11,9 @@ const timeout = 20_000;
 
 describe('stat', () => {
     test.each`
-        url                                                                                 | expected
-        ${'https://raw.githubusercontent.com/streetsidesoftware/cspell/main/tsconfig.json'} | ${oc({ eTag: sc('W/') })}
-        ${__filename}                                                                       | ${oc({ mtimeMs: expect.any(Number) })}
+        url                                                                                      | expected
+        ${'https://raw.githubusercontent.com/streetsidesoftware/cspell/main/tsconfig.base.json'} | ${oc({ eTag: sc('W/') })}
+        ${__filename}                                                                            | ${oc({ mtimeMs: expect.any(Number) })}
     `(
         'getStat $url',
         async ({ url, expected }) => {

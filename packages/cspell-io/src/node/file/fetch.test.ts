@@ -36,7 +36,7 @@ describe('fetch', () => {
         ${'https://example.com/'}
         ${'https://raw.githubusercontent.com/streetsidesoftware/cspell/main/packages/cspell-io/samples/cities.txt'}
         ${'https://raw.githubusercontent.com/streetsidesoftware/cspell/main/packages/cspell-io/samples/cities.txt.gz'}
-        ${'https://raw.githubusercontent.com/streetsidesoftware/cspell/main/tsconfig.json'}
+        ${'https://raw.githubusercontent.com/streetsidesoftware/cspell/main/tsconfig.base.json'}
     `('fetchHead $url', async ({ url }) => {
         const response = await fetchHead(url);
         // console.log('%o', toObj(response));

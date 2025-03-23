@@ -231,9 +231,9 @@ describe('VirtualFs', () => {
     });
 
     test.each`
-        url                                                                              | expected
-        ${'https://raw.gitubusrcotent.com/streetsidesoftware/cspell/main/tsconfig.json'} | ${oc({ code: 'ENOTFOUND' })}
-        ${ps(__dirname, 'not-found.nf')}                                                 | ${oc({ code: 'ENOENT' })}
+        url                                                                                   | expected
+        ${'https://raw.gitubusrcotent.com/streetsidesoftware/cspell/main/tsconfig.base.json'} | ${oc({ code: 'ENOTFOUND' })}
+        ${ps(__dirname, 'not-found.nf')}                                                      | ${oc({ code: 'ENOENT' })}
     `('getStat with error $url', { timeout: 30_000 }, async ({ url, expected }) => {
         url = toFileURL(url);
         const fs = getDefaultVFileSystem();

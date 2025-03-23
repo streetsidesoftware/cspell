@@ -131,9 +131,9 @@ describe('CSpellIONode', () => {
     });
 
     test.each`
-        url                                                                                 | expected
-        ${'https://raw.githubusercontent.com/streetsidesoftware/cspell/main/tsconfig.json'} | ${oc({ eTag: sc('W/') })}
-        ${__filename}                                                                       | ${oc({ mtimeMs: expect.any(Number) })}
+        url                                                                                      | expected
+        ${'https://raw.githubusercontent.com/streetsidesoftware/cspell/main/tsconfig.base.json'} | ${oc({ eTag: sc('W/') })}
+        ${__filename}                                                                            | ${oc({ mtimeMs: expect.any(Number) })}
     `('getStat $url', { timeout: 30_000 }, async ({ url, expected }) => {
         const cspellIo = new CSpellIONode();
         const r = await cspellIo.getStat(url);
@@ -141,9 +141,9 @@ describe('CSpellIONode', () => {
     });
 
     test.each`
-        url                                                                              | expected
-        ${'https://raw.gitubusrcotent.com/streetsidesoftware/cspell/main/tsconfig.json'} | ${oc({ code: 'ENOTFOUND' })}
-        ${ps(__dirname, 'not-found.nf')}                                                 | ${oc({ code: 'ENOENT' })}
+        url                                                                                   | expected
+        ${'https://raw.gitubusrcotent.com/streetsidesoftware/cspell/main/tsconfig.base.json'} | ${oc({ code: 'ENOTFOUND' })}
+        ${ps(__dirname, 'not-found.nf')}                                                      | ${oc({ code: 'ENOENT' })}
     `('getStat with error $url', { timeout: 30_000 }, async ({ url, expected }) => {
         const cspellIo = new CSpellIONode();
         const r = cspellIo.getStat(url);
@@ -160,9 +160,9 @@ describe('CSpellIONode', () => {
     });
 
     test.each`
-        url                                                                                 | expected
-        ${'https://raw.githubusercontent.com/streetsidesoftware/cspell/main/tsconfig.json'} | ${'The URL must be of scheme file'}
-        ${ps(__dirname, 'not-found.nf')}                                                    | ${oc({ code: 'ENOENT' })}
+        url                                                                                      | expected
+        ${'https://raw.githubusercontent.com/streetsidesoftware/cspell/main/tsconfig.base.json'} | ${'The URL must be of scheme file'}
+        ${ps(__dirname, 'not-found.nf')}                                                         | ${oc({ code: 'ENOENT' })}
     `('getStatSync with error $url', async ({ url, expected }) => {
         const cspellIo = new CSpellIONode();
         expect(() => cspellIo.getStatSync(url)).toThrow(expected);
