@@ -1,18 +1,16 @@
-import type { Glob, AdvancedCSpellSettingsWithSourceTrace, CSpellSettingsWithSourceTrace, DictionaryDefinitionAugmented, DictionaryDefinitionCustom, DictionaryDefinitionInline, DictionaryDefinitionPreferred, Parser, CSpellSettings, CSpellUserSettings, ImportFileRef, PnPSettings, Issue, TextOffset, LocaleId, MappedText, ParsedText, TextDocumentOffset } from '@cspell/cspell-types';
+import { Glob, AdvancedCSpellSettingsWithSourceTrace, DictionaryDefinitionPreferred, DictionaryDefinitionCustom, DictionaryDefinitionAugmented, DictionaryDefinitionInline, Parser, CSpellUserSettings, ImportFileRef, PnPSettings, CSpellSettingsWithSourceTrace, TextOffset, Issue, LocaleId, CSpellSettings, MappedText, ParsedText, TextDocumentOffset } from '@cspell/cspell-types';
 export * from '@cspell/cspell-types';
-import * as ___cspell_io from 'cspell-io';
-import type { VFileSystem } from 'cspell-io';
-export { FSCapabilityFlags, asyncIterableToArray, readFileText as readFile, readFileTextSync as readFileSync, writeToFile, writeToFileIterable, writeToFileIterableP } from 'cspell-io';
-export type { VFileSystemProvider, VirtualFS } from 'cspell-io';
-import type { FileTypeId } from '@cspell/filetypes';
+import * as cspell_io from 'cspell-io';
+import { VFileSystem } from 'cspell-io';
+export { FSCapabilityFlags, VFileSystemProvider, VirtualFS, asyncIterableToArray, readFileText as readFile, readFileTextSync as readFileSync, writeToFile, writeToFileIterable, writeToFileIterableP } from 'cspell-io';
+import { FileTypeId } from '@cspell/filetypes';
 export { findMatchingFileTypes as getLanguageIdsForBaseFilename, getFileTypesForExt as getLanguagesForExt } from '@cspell/filetypes';
-import type { SpellingDictionaryCollection, SuggestionResult, SuggestOptions, CachingDictionary } from 'cspell-dictionary';
-export { createSpellingDictionary, createCollection as createSpellingDictionaryCollection } from 'cspell-dictionary';
-export type { SpellingDictionary, SpellingDictionaryCollection, SuggestOptions, SuggestionCollector, SuggestionResult } from 'cspell-dictionary';
-import type { WeightMap } from 'cspell-trie-lib';
+import { SpellingDictionaryCollection, SuggestionResult, SuggestOptions, CachingDictionary } from 'cspell-dictionary';
+export { SpellingDictionary, SpellingDictionaryCollection, SuggestOptions, SuggestionCollector, SuggestionResult, createSpellingDictionary, createCollection as createSpellingDictionaryCollection } from 'cspell-dictionary';
+import { WeightMap } from 'cspell-trie-lib';
 export { CompoundWordsMethod } from 'cspell-trie-lib';
-import type { CSpellConfigFile, ICSpellConfigFile } from 'cspell-config-lib';
-export type { CSpellConfigFile, ICSpellConfigFile } from 'cspell-config-lib';
+import { CSpellConfigFile, ICSpellConfigFile } from 'cspell-config-lib';
+export { CSpellConfigFile, ICSpellConfigFile } from 'cspell-config-lib';
 
 /**
  * Clear the cached files and other cached data.
@@ -37,13 +35,7 @@ interface Uri {
     readonly fragment?: string;
     readonly query?: string;
 }
-interface UriInstance extends Uri {
-    toString(): string;
-    toJSON(): unknown;
-}
 type DocumentUri = Uri | URL | string;
-
-
 
 interface Document {
     uri: UriString;
@@ -56,17 +48,7 @@ interface DocumentWithText extends Document {
     text: string;
 }
 
-
-
 declare function isBinaryFile(filename: Uri | URL | string, languageId?: string | string[], text?: string): boolean;
-
-
-
-
-
-
-
-
 
 interface Position {
     line: number;
@@ -149,22 +131,10 @@ interface TextDocumentContentChangeEvent {
 declare function createTextDocument({ uri, content, languageId, locale, version, }: CreateTextDocumentParams): TextDocument;
 declare function updateTextDocument(doc: TextDocument, edits: TextDocumentContentChangeEvent[], version?: number): TextDocument;
 
-
-
-
-
-
 declare function fileToDocument(file: string): Document;
 declare function fileToDocument(file: string, text: string, languageId?: string, locale?: string): DocumentWithText;
 declare function fileToDocument(file: string, text?: string, languageId?: string, locale?: string): Document | DocumentWithText;
 declare function fileToTextDocument(file: string): Promise<TextDocument>;
-
-
-
-
-//# sourceMappingURL=index.d.ts.map
-
-
 
 type ExclusionFunction = (fileUri: string) => boolean;
 type FileExclusionFunction = (file: string) => boolean;
@@ -228,18 +198,7 @@ declare class UnknownFeatureFlagError extends Error {
 }
 declare function getSystemFeatureFlags(): FeatureFlags;
 
-
-
-
-
-
-
-
-declare function getVirtualFS(): ___cspell_io.VirtualFS;
-
-
-
-//# sourceMappingURL=fileTypes.d.ts.map
+declare function getVirtualFS(): cspell_io.VirtualFS;
 
 /**
  * The keys of an object where the values cannot be undefined.
@@ -253,24 +212,6 @@ type OptionalKeys<T> = Exclude<{
 type OptionalOrUndefined<T> = {
     [P in keyof T]: P extends OptionalKeys<T> ? T[P] | undefined : T[P];
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 declare const SymbolCSpellSettingsInternal: unique symbol;
 interface CSpellSettingsInternal extends Omit<AdvancedCSpellSettingsWithSourceTrace, 'dictionaryDefinitions'> {
@@ -298,42 +239,9 @@ interface DictionaryFileDefinitionInternal extends Readonly<DictionaryDefinition
     readonly __source?: string | undefined;
 }
 
-
-
-
-
-
-
-
 declare function refreshDictionaryCache(maxAge?: number): Promise<void>;
 
-
-
-
-
-
-
-
-
-
-
-//# sourceMappingURL=SpellingDictionary.d.ts.map
-
-
-
-
-
 type LoadOptions = DictionaryDefinitionInternal;
-
-
-//# sourceMappingURL=index.d.ts.map
-
-
-
-
-
-
-
 
 declare class SpellingDictionaryLoadError extends Error {
     readonly uri: string;
@@ -343,9 +251,6 @@ declare class SpellingDictionaryLoadError extends Error {
     constructor(uri: string, options: LoadOptions, cause: Error, message: string);
 }
 declare function isSpellingDictionaryLoadError(e: Error): e is SpellingDictionaryLoadError;
-
-
-
 
 /**
  * Load a dictionary collection defined by the settings.
@@ -363,17 +268,6 @@ interface PerfTimer {
 }
 type TimeNowFn = () => number;
 declare function createPerfTimer(name: string, onEnd?: (elapsed: number, name: string) => void, timeNowFn?: TimeNowFn): PerfTimer;
-
-
-//# sourceMappingURL=index.d.ts.map
-
-
-
-
-
-
-
-
 
 type CSpellSettingsWST$1 = AdvancedCSpellSettingsWithSourceTrace;
 type CSpellSettingsWSTO = OptionalOrUndefined<AdvancedCSpellSettingsWithSourceTrace>;
@@ -401,13 +295,7 @@ interface ConfigurationDependencies {
 }
 declare function extractDependencies(settings: CSpellSettingsWSTO | CSpellSettingsI$1): ConfigurationDependencies;
 
-
-
-
-
 declare function calcOverrideSettings(settings: CSpellSettingsWSTO, filename: string): CSpellSettingsI$1;
-
-
 
 /**
  * @param filename - filename
@@ -418,8 +306,6 @@ declare function checkFilenameMatchesExcludeGlob(filename: string, globs: Glob |
 
 declare const currentSettingsFileVersion = "0.2";
 declare const ENV_CSPELL_GLOB_ROOT = "CSPELL_GLOB_ROOT";
-
-
 
 interface ResolveFileResult {
     /**
@@ -441,37 +327,10 @@ declare function resolveFile(filename: string | URL, relativeTo: string | URL, f
 
 type LoaderResult = URL | undefined;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 type PnPSettingsOptional = OptionalOrUndefined<PnPSettings>;
-
-
-
 
 type CSpellSettingsWST = CSpellSettingsWithSourceTrace;
 type CSpellSettingsI = CSpellSettingsInternal;
-
-
-
-
-
-
-
-
-
-
 
 declare const sectionCSpell = "cSpell";
 declare const defaultFileName = "cspell.json";
@@ -536,18 +395,6 @@ declare function createConfigLoader(fs?: VFileSystem): IConfigLoader;
 
 declare const defaultConfigFilenames: readonly string[];
 
-
-
-
-
-
-
-
-
-
-
-
-
 /**
  *
  * @param searchFrom the directory / file to start searching from.
@@ -578,16 +425,10 @@ declare function getCachedFileSize(): number;
 declare function getDefaultConfigLoader(): IConfigLoader;
 declare function readRawSettings(filename: string | URL, relativeTo?: string | URL): Promise<CSpellSettingsWST>;
 
-
-
-
 declare function extractImportErrors(settings: CSpellSettingsWST): ImportFileRefWithError[];
 interface ImportFileRefWithError extends ImportFileRef {
     error: Error;
 }
-
-
-
 
 /**
  * Read / import a cspell configuration file.
@@ -611,8 +452,6 @@ declare function readSettings(filename: string | URL, pnpSettings: PnPSettingsOp
 declare function readSettings(filename: string | URL, relativeTo: string | URL): Promise<CSpellSettingsI>;
 declare function readSettings(filename: string | URL, relativeTo: string | URL, pnpSettings: PnPSettingsOptional): Promise<CSpellSettingsI>;
 
-
-
 /**
  *
  * @param filenames - settings files to read
@@ -621,26 +460,13 @@ declare function readSettings(filename: string | URL, relativeTo: string | URL, 
  */
 declare function readSettingsFiles(filenames: string[]): Promise<CSpellSettingsI>;
 
-
-
-//# sourceMappingURL=index.d.ts.map
-
 declare class ImportError extends Error {
     readonly cause: Error | undefined;
     constructor(msg: string, cause?: Error | unknown);
 }
 
-
 declare function getDefaultSettings(useDefaultDictionaries?: boolean): Promise<CSpellSettingsInternal>;
 declare function getDefaultBundledSettingsAsync(): Promise<CSpellSettingsInternal>;
-
-
-
-
-
-//# sourceMappingURL=index.d.ts.map
-
-
 
 interface ListGlobalImportsResult {
     filename: string;
@@ -686,11 +512,6 @@ interface ResolveSettingsResult {
     settings: CSpellSettingsWithSourceTrace;
 }
 
-
-
-
-
-
 //# sourceMappingURL=index.link.d.ts.map
 
 type index_link_d_AddPathsToGlobalImportsResults = AddPathsToGlobalImportsResults;
@@ -705,11 +526,6 @@ declare namespace index_link_d {
   export { index_link_d_addPathsToGlobalImports as addPathsToGlobalImports, index_link_d_listGlobalImports as listGlobalImports, index_link_d_removePathsFromGlobalImports as removePathsFromGlobalImports };
   export type { index_link_d_AddPathsToGlobalImportsResults as AddPathsToGlobalImportsResults, index_link_d_ListGlobalImportsResult as ListGlobalImportsResult, index_link_d_ListGlobalImportsResults as ListGlobalImportsResults, index_link_d_RemovePathsFromGlobalImportsResult as RemovePathsFromGlobalImportsResult, index_link_d_ResolveSettingsResult as ResolveSettingsResult };
 }
-
-
-
-
-
 
 declare function combineTextAndLanguageSettings(settings: CSpellUserSettings, text: string | undefined, languageId: string | string[]): CSpellSettingsInternal;
 
@@ -733,26 +549,16 @@ interface ExtendedSuggestion {
     cost?: number;
 }
 
-
-
-
-
 interface ValidationResult extends TextOffset, Pick<Issue, 'message' | 'issueType'> {
     line: TextOffset;
     isFlagged?: boolean | undefined;
     isFound?: boolean | undefined;
 }
 
-
-
-
 interface ValidationIssue extends ValidationResult {
     suggestions?: string[] | undefined;
     suggestionsEx?: ExtendedSuggestion[] | undefined;
 }
-
-
-
 
 type Href = string;
 interface DictionaryTraceResult {
@@ -783,16 +589,6 @@ interface WordSplits {
 interface TraceResult$1 extends Array<DictionaryTraceResult> {
     splits?: readonly WordSplits[];
 }
-
-
-
-
-
-
-
-
-
-
 
 interface WordSuggestion extends SuggestionResult {
     /**
@@ -871,43 +667,6 @@ interface MatchRange {
     startPos: number;
     endPos: number;
 }
-interface MatchRangeWithText extends MatchRange {
-    text: string;
-}
-interface MatchRangeOptionalText extends MatchRange {
-    text?: string;
-}
-declare function findMatchingRanges(pattern: RegExp, text: string): MatchRangeOptionalText[];
-declare function unionRanges(ranges: MatchRange[]): SortedMatchRangeArray;
-declare function findMatchingRangesForPatterns(patterns: RegExp[], text: string): MatchRange[];
-/**
- * Create a new set of positions that have the excluded position ranges removed.
- */
-declare function excludeRanges(includeRanges: MatchRange[], excludeRanges: MatchRange[]): MatchRange[];
-declare function extractRangeText(text: string, ranges: MatchRange[]): MatchRangeWithText[];
-interface SortedMatchRangeArray {
-    values: MatchRange[];
-}
-
-type TextRange_MatchRange = MatchRange;
-type TextRange_MatchRangeOptionalText = MatchRangeOptionalText;
-type TextRange_MatchRangeWithText = MatchRangeWithText;
-declare const TextRange_excludeRanges: typeof excludeRanges;
-declare const TextRange_extractRangeText: typeof extractRangeText;
-declare const TextRange_findMatchingRanges: typeof findMatchingRanges;
-declare const TextRange_findMatchingRangesForPatterns: typeof findMatchingRangesForPatterns;
-declare const TextRange_unionRanges: typeof unionRanges;
-declare namespace TextRange {
-  export { TextRange_excludeRanges as excludeRanges, TextRange_extractRangeText as extractRangeText, TextRange_findMatchingRanges as findMatchingRanges, TextRange_findMatchingRangesForPatterns as findMatchingRangesForPatterns, TextRange_unionRanges as unionRanges };
-  export type { TextRange_MatchRange as MatchRange, TextRange_MatchRangeOptionalText as MatchRangeOptionalText, TextRange_MatchRangeWithText as MatchRangeWithText };
-}
-
-
-
-
-
-
-
 
 type TextOffsetRO = Readonly<TextOffset>;
 interface ValidationOptions extends IncludeExcludeOptions {
@@ -920,10 +679,6 @@ interface ValidationOptions extends IncludeExcludeOptions {
     ignoreCase: boolean;
     ignoreRandomStrings?: boolean | undefined;
     minRandomLength?: number | undefined;
-}
-interface CheckOptions extends ValidationOptions {
-    allowCompoundWords: boolean;
-    ignoreCase: boolean;
 }
 interface IncludeExcludeOptions {
     ignoreRegExpList?: RegExp[];
@@ -943,15 +698,6 @@ interface MappedTextValidationResult extends MappedText {
 }
 type TextValidatorFn = (text: MappedText) => Iterable<MappedTextValidationResult>;
 
-
-
-
-
-
-
-
-
-
 interface LineValidator {
     fn: LineValidatorFn;
     dict: CachingDictionary;
@@ -960,10 +706,6 @@ interface TextValidator {
     validate: TextValidatorFn;
     lineValidator: LineValidator;
 }
-
-
-
-
 
 type Offset = number;
 type SimpleRange = readonly [Offset, Offset];
@@ -987,27 +729,6 @@ interface ValidateTextOptions {
      */
     skipValidation?: boolean;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 interface DocumentValidatorOptions extends ValidateTextOptions {
     /**
@@ -1125,11 +846,6 @@ interface ShouldCheckDocumentResult {
 }
 declare function shouldCheckDocument(doc: TextDocumentRef, options: DocumentValidatorOptions, settings: CSpellUserSettings): Promise<ShouldCheckDocumentResult>;
 
-
-
-
-
-
 /**
  * Annotate text with issues and include / exclude zones.
  * @param text - the text to annotate.
@@ -1164,53 +880,11 @@ interface CheckTextOptions extends DocumentValidatorOptions {
  */
 declare function checkTextDocument(doc: TextDocument | Document, options: CheckTextOptions, settings?: CSpellUserSettings): Promise<CheckTextInfo>;
 
-
-
-
-
-
-
-
-
-
-
-
 /**
  * @deprecated
  * @deprecationMessage Use spellCheckDocument
  */
 declare function validateText(text: string, settings: CSpellUserSettings, options?: ValidateTextOptions): Promise<ValidationIssue[]>;
-
-
-
-
-
-
-
-
-
-
-
-
-//# sourceMappingURL=index.d.ts.map
-
-
-
-
-
-
-//# sourceMappingURL=validator.d.ts.map
-
-
-
-
-
-
-
-
-
-
-
 
 interface SpellCheckFileOptions extends ValidateTextOptions {
     /**
@@ -1281,14 +955,6 @@ interface DetermineFinalDocumentSettingsResult {
  */
 declare function determineFinalDocumentSettings(document: DocumentWithText, settings: CSpellUserSettings): Promise<DetermineFinalDocumentSettingsResult>;
 
-
-
-
-
-
-
-
-
 interface TraceResult extends DictionaryTraceResult {
     /** True if the dictionary is currently active. */
     dictActive: boolean;
@@ -1324,11 +990,6 @@ declare function setLogger(logger: Logger): Logger;
 declare function getLogger(): Logger;
 
 declare function stringToRegExp(pattern: string | RegExp, defaultFlags?: string, forceFlags?: string): RegExp | undefined;
-
-
-
-
-
 
 declare function splitCamelCaseWordWithOffset(wo: TextOffset): TextOffset[];
 /**
@@ -1437,26 +1098,6 @@ declare namespace textApi_d {
     textApi_d_ucFirst as ucFirst,
   };
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//# sourceMappingURL=index.d.ts.map
 
 export { DocumentValidator, ENV_CSPELL_GLOB_ROOT, exclusionHelper_d as ExclusionHelper, FeatureFlags, ImportError, IncludeExcludeFlag, index_link_d as Link, SpellingDictionaryLoadError, SuggestionError, textApi_d as Text, UnknownFeatureFlagError, calcOverrideSettings, checkFilenameMatchesExcludeGlob as checkFilenameMatchesGlob, checkText, checkTextDocument, clearCachedFiles, clearCaches, combineTextAndLanguageSettings, combineTextAndLanguageSettings as constructSettingsForText, createConfigLoader, createPerfTimer, createTextDocument, currentSettingsFileVersion, defaultConfigFilenames, defaultFileName, defaultFileName as defaultSettingsFilename, determineFinalDocumentSettings, extractDependencies, extractImportErrors, fileToDocument, fileToTextDocument, finalizeSettings, getCachedFileSize, getDefaultBundledSettingsAsync, getDefaultConfigLoader, getDefaultSettings, getDictionary, getGlobalSettings, getGlobalSettingsAsync, getLogger, getSources, getSystemFeatureFlags, getVirtualFS, isBinaryFile, isSpellingDictionaryLoadError, loadConfig, loadPnP, mergeInDocSettings, mergeSettings, readConfigFile, readRawSettings, readSettings, readSettingsFiles, refreshDictionaryCache, resolveConfigFileImports, resolveFile, searchForConfig, sectionCSpell, setLogger, shouldCheckDocument, spellCheckDocument, spellCheckFile, suggestionsForWord, suggestionsForWords, traceWords, traceWordsAsync, updateTextDocument, validateText };
 export type { CheckTextInfo, ConfigurationDependencies, CreateTextDocumentParams, DetermineFinalDocumentSettingsResult, Document, DocumentValidatorOptions, ExcludeFilesGlobMap, ExclusionFunction, FeatureFlag, ImportFileRefWithError$1 as ImportFileRefWithError, IncludeExcludeOptions, Logger, PerfTimer, SpellCheckFileOptions, SpellCheckFilePerf, SpellCheckFileResult, SuggestedWord, SuggestionOptions, SuggestionsForWordResult, TextDocument, TextDocumentLine, TextDocumentRef, TextInfoItem, TraceOptions, TraceResult, TraceWordResult, ValidationIssue };
