@@ -54,7 +54,7 @@
     "test:bin-spell-cache-content": "node ./bin.mjs -c cspell.test.json --cache --cache-strategy content --cache-location temp/.cspellcache-content",
     "test:bin-spell-cache-metadata": "node ./bin.mjs -c cspell.test.json --cache --cache-strategy metadata --cache-location temp/.cspellcache-meta",
     "test:bin-trace": "node ./bin.mjs trace test",
-    "test-build-docs": "cd website && pnpm run build",
+    "test-build-docs": "cd website && pnpm run build:site",
     "test-integrations": "cd ./integration-tests && pnpm run integration-tests",
     "test-schema": "node ./test-packages/cspell-types/validate-schema/validate-schema.mjs",
     "update-packages": "pnpm run update-packages-src && pnpm run update-packages-docs && pnpm update-package-json",
