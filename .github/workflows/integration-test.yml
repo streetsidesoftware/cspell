@@ -10,7 +10,7 @@ on:
       - 'package.json'
       - '*-lock.yaml'
       - '.github/workflows/integration-test.yml'
-      - '!docs/**'
+      - '!website/**'
   push:
     branches:
       - main
@@ -24,7 +24,7 @@ on:
       - 'package.json'
       - '*-lock.yaml'
       - '.github/workflows/integration-test.yml'
-      - '!docs/**'
+      - '!website/**'
   # Run on demand
   workflow_dispatch:
     inputs:

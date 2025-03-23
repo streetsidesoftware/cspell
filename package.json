@@ -14,14 +14,14 @@
   "scripts": {
     "bt": "pnpm run build && pnpm run test",
     "build-dev": "pnpm run --filter \\!website build-dev",
-    "build-cspell-types-docs": "cd doc-generator && pnpm i && pnpm run build-cspell-types-docs",
+    "build-cspell-types-docs": "cd website && pnpm i && pnpm run gen-docs",
     "build-integration-tests": "cd ./integration-tests && pnpm i",
     "build-schema": "pnpm -r run build-schema",
     "build": "pnpm -r --stream --workspace-concurrency=2 run build",
     "build:readme": "pnpm build:readme:packages && pnpm build:readme:root && pnpm docs:inject",
     "build:readme:packages": "pnpm -r build:readme",
     "build:readme:root": "inject-markdown README.md \"packages/*/README.md\" && prettier -w README.md \"packages/*/README.md\"",
-    "docs:inject": "inject-markdown \"docs/**/*.md\" && pnpm lint-docs",
+    "docs:inject": "inject-markdown \"website/**/*.md\" && pnpm lint-docs",
     "check-spelling": "npx cspell -c cspell.test.all.json",
     "clean-build": "pnpm run clean && pnpm -r --stream --workspace-concurrency=2 run build",
     "clean-dist": "shx rm -rf \"packages/*/dist\"",
@@ -35,8 +35,8 @@
     "ibt": "pnpm run ib && pnpm test",
     "install-website": "pnpm run website-install",
     "lint-ci": "eslint . && prettier -c .",
-    "lint-docs-ci": "prettier -c \"docs/\"",
-    "lint-docs": "prettier -w \"docs/\"",
+    "lint-docs-ci": "prettier -c \"website/\"",
+    "lint-docs": "prettier -w \"website/\"",
     "lint": "pnpm run eslint-fix && prettier -w .",
     "prepare-cspell-action": "pnpm i && pnpm -r --filter @cspell/cspell-bundled-dicts... run build",
     "pre-pub": "pnpm run clean-dist && pnpm run ibt",
@@ -54,7 +54,7 @@
     "test:bin-spell-cache-content": "node ./bin.mjs -c cspell.test.json --cache --cache-strategy content --cache-location temp/.cspellcache-content",
     "test:bin-spell-cache-metadata": "node ./bin.mjs -c cspell.test.json --cache --cache-strategy metadata --cache-location temp/.cspellcache-meta",
     "test:bin-trace": "node ./bin.mjs trace test",
-    "test-build-docs": "cd doc-generator && pnpm i && pnpm run test-build-docs",
+    "test-build-docs": "cd website && pnpm run build:site",
     "test-integrations": "cd ./integration-tests && pnpm run integration-tests",
     "test-schema": "node ./test-packages/cspell-types/validate-schema/validate-schema.mjs",
     "update-packages": "pnpm run update-packages-src && pnpm run update-packages-docs && pnpm update-package-json",
@@ -82,7 +82,11 @@
   ],
   "pnpm": {
     "overrides": {},
-    "patchedDependencies": {}
+    "patchedDependencies": {},
+    "onlyBuiltDependencies": [
+      "@swc/core",
+      "esbuild"
+    ]
   },
   "author": "Jason Dent",
   "license": "MIT",

@@ -12,7 +12,6 @@ on:
       - 'packages/**/*.mts'
       - 'packages/**/package.json'
       - '.github/workflows/coverage.yml'
-      - '!docs/**'
       - '!website/**'
   push:
     branches:
@@ -24,7 +23,6 @@ on:
       - '**/*.mts'
       - '**/*.js'
       - '.github/workflows/coverage.yml'
-      - '!docs/**'
       - '!website/**'
   workflow_dispatch:
     inputs:

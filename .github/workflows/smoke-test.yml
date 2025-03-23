@@ -16,13 +16,12 @@ on:
       - 'packages/**/package.json'
       - 'packages/**/tsconfig.json'
       - 'tsconfig*.json'
-      - '!docs/**'
       - '!website/**'
   push:
     branches:
       - main
     paths-ignore:
-      - 'docs/**'
+      - 'website/**'
 
 permissions:
   contents: read
