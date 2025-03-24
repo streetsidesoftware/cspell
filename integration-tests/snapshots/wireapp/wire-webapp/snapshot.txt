@@ -3,7 +3,7 @@ Repository: wireapp/wire-webapp
 Url: "https://github.com/wireapp/wire-webapp.git"
 Args: ["src/script/**/*.{js,ts,tsx,md}"]
 Lines:
- CSpell: Files checked: 1540, Issues found: 2909 in 728 files.
+ CSpell: Files checked: 1580, Issues found: 2936 in 737 files.
  exit code: 1
 src/script/Config.ts:20:25     - Unknown word (wireapp)    -- import {Runtime} from '@wireapp/commons';
 src/script/Config.ts:89:31     - Unknown word (acces)      -- DataDog client api keys acces */
@@ -90,7 +90,7 @@ src/script/assets/AssetRepository.ts:166:59    - Unknown word (DECRPYT)    -- Tr
 src/script/assets/AssetRepository.ts:177:43    - Unknown word (Exif)       -- rippedImage = await stripImageExifData(image);
 src/script/assets/AssetRepository.ts:20:52     - Unknown word (wireapp)    -- AssetRetentionPolicy} from '@wireapp/api-client/lib/asset
 src/script/assets/AssetRepository.ts:23:37     - Unknown word (tsyringe)   -- container, singleton} from 'tsyringe';
-src/script/assets/AssetRepository.ts:25:49     - Unknown word (wireapp)    -- LegalHoldStatus} from '@wireapp/protocol-messaging'
+src/script/assets/AssetRepository.ts:25:49     - Unknown word (pydio)      -- LegalHoldStatus} from '@pydio/protocol-messaging'
 src/script/assets/AssetRepository.ts:41:19     - Unknown word (Exif)       -- import {stripImageExifData} from '../util/ImageUtil
 src/script/assets/AssetTransferState.ts:27:19     - Unknown word (DECRPYT)    -- DOWNLOAD_FAILED_DECRPYT = 'download-failed-decrypt
 src/script/audio/AudioRepository.test.ts:20:33     - Unknown word (wireapp)    -- AudioPreference} from '@wireapp/api-client/lib/user
@@ -613,7 +613,8 @@ src/script/calling/enum/CallMessageType.ts:34:18     - Unknown word (HANDRAISED)
 src/script/calling/enum/CallMessageType.ts:35:18     - Unknown word (REMOTEMUTE) -- REMOTE_MUTE = 'REMOTEMUTE',
 src/script/calling/enum/LeaveCallReason.ts:27:42     - Unknown word (manualy)    -- CONVERSATION = 'user_manualy_left_conversation',
 src/script/calling/enum/LeaveCallReason.ts:27:8      - Unknown word (MANUALY)    -- USER_MANUALY_LEFT_CONVERSATION =
-src/script/cells/CellsRepository.ts:20:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
+src/script/cells/CellsRepository.ts:20:37     - Unknown word (tsyringe)   -- container, singleton} from 'tsyringe';
+src/script/cells/CellsRepository.ts:27:3      - Unknown word (pydio)      -- pydio: {
 src/script/client/ClientEntity.ts:20:50     - Unknown word (wireapp)    -- ClientType} from '@wireapp/api-client/lib/client
 src/script/client/ClientEntity.ts:33:9      - Unknown word (secp)       -- ecdsa_secp521r1_sha512: 'P521'
 src/script/client/ClientEntity.ts:34:9      - Unknown word (secp)       -- ecdsa_secp384r1_sha384: 'P384'
@@ -657,14 +658,14 @@ src/script/components/AppContainer/hooks/useTheme.test.ts:34:47     - Unknown wo
 src/script/components/AppContainer/hooks/useTheme.ts:20:39     - Unknown word (wireapp)    -- WebappProperties} from '@wireapp/api-client/lib/user
 src/script/components/AppContainer/hooks/useTheme.ts:22:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
 src/script/components/AppNotification/AppNotification.tsx:23:31     - Unknown word (sonner)     -- toast, Toaster} from 'sonner';
-src/script/components/AvailabilityIcon/Availability.styles.tsx:22:50     - Unknown word (wireapp)    -- AvailabilityProp} from '@wireapp/protocol-messaging'
-src/script/components/AvailabilityIcon/Availability.tsx:22:50     - Unknown word (wireapp)    -- AvailabilityProp} from '@wireapp/protocol-messaging'
+src/script/components/AvailabilityIcon/Availability.styles.tsx:21:50     - Unknown word (pydio)      -- AvailabilityProp} from '@pydio/protocol-messaging'
+src/script/components/AvailabilityIcon/Availability.tsx:22:50     - Unknown word (pydio)      -- AvailabilityProp} from '@pydio/protocol-messaging'
 src/script/components/Avatar/Avatar.test.tsx:63:11     - Unknown word (behaviour)  -- * This behaviour exists in the message
 src/script/components/Avatar/Avatar.tsx:41:23     - Unknown word (xxxs)       -- XXX_SMALL = 'avatar-xxxs',
 src/script/components/Avatar/AvatarImage.tsx:24:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
-src/script/components/Avatar/UserAvatar/UserAvatar.test.tsx:22:30     - Unknown word (wireapp)    -- Availability} from '@wireapp/protocol-messaging'
-src/script/components/Avatar/UserAvatar/UserAvatar.tsx:22:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
-src/script/components/Avatar/UserAvatar/UserAvatar.tsx:24:50     - Unknown word (wireapp)    -- AvailabilityType} from '@wireapp/protocol-messaging'
+src/script/components/Avatar/UserAvatar/UserAvatar.test.tsx:20:30     - Unknown word (pydio)      -- Availability} from '@pydio/protocol-messaging'
+src/script/components/Avatar/UserAvatar/UserAvatar.tsx:22:50     - Unknown word (pydio)      -- AvailabilityType} from '@pydio/protocol-messaging'
+src/script/components/Avatar/UserAvatar/UserAvatar.tsx:23:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 src/script/components/Avatar/UserAvatar/UserAvatar.tsx:25:23     - Unknown word (wireapp)    -- import {COLOR} from '@wireapp/react-ui-kit';
 src/script/components/Badge/components/UserBlockedBadge/UserBlockedBadge.styles.ts:27:30     - Unknown word (xsmall)     -- fontSize: 'var(--font-size-xsmall)',
 src/script/components/Badge/components/UserStatusBadges/UserStatusBadges.tsx:22:25     - Unknown word (wireapp)    -- import {Tooltip} from '@wireapp/react-ui-kit';
@@ -679,17 +680,18 @@ src/script/components/CellsGlobalView/CellsGlobalView.tsx:22:26     - Unknown wo
 src/script/components/CellsGlobalView/CellsHeader/CellsHeader.tsx:24:47     - Unknown word (Seach)      -- './CellsSearch/CellsSeach';
 src/script/components/CellsGlobalView/CellsHeader/CellsRefresh/CellsRefresh.tsx:20:51     - Unknown word (wireapp)    -- ReloadIcon} from '@wireapp/react-ui-kit';
 src/script/components/CellsGlobalView/CellsHeader/CellsSearch/CellsSeach.tsx:22:52     - Unknown word (wireapp)    -- SearchIcon} from '@wireapp/react-ui-kit';
-src/script/components/CellsGlobalView/CellsTable/CellsImagePreviewModal/CellsImagePreviewModal.tsx:111:12    - Unknown word (Zoomable)   -- <ZoomableImage key={modalId} src
+src/script/components/CellsGlobalView/CellsTable/CellsImagePreviewModal/CellsImagePreviewModal.tsx:107:12    - Unknown word (Zoomable)   -- <ZoomableImage key={modalId} src
 src/script/components/CellsGlobalView/CellsTable/CellsImagePreviewModal/CellsImagePreviewModal.tsx:25:41     - Unknown word (Zoomable)   -- omableImage} from 'Components/ZoomableImage';
 src/script/components/CellsGlobalView/CellsTable/CellsImagePreviewModal/CellsImagePreviewModal.tsx:25:9      - Unknown word (Zoomable)   -- import {ZoomableImage} from 'Components
-src/script/components/CellsGlobalView/CellsTable/CellsImagePreviewModal/CellsImagePreviewModal.tsx:93:77     - Unknown word (fadein)     -- modal-show', {'modal-fadein': isImageVisible})}
+src/script/components/CellsGlobalView/CellsTable/CellsImagePreviewModal/CellsImagePreviewModal.tsx:89:77     - Unknown word (fadein)     -- modal-show', {'modal-fadein': isImageVisible})}
 src/script/components/CellsGlobalView/CellsTable/CellsShareFileModal/CellsShareFileModal.tsx:20:38     - Unknown word (wireapp)    -- Label, Switch} from '@wireapp/react-ui-kit';
-src/script/components/CellsGlobalView/CellsTable/CellsShareFileModal/useCellPublicLink.ts:49:71     - Unknown word (PYDIO)      -- Config.getConfig().CELLS_PYDIO_URL + link.LinkUrl}
+src/script/components/CellsGlobalView/CellsTable/CellsShareFileModal/useCellPublicLink.ts:49:71     - Unknown word (PYDIO)      -- Config.getConfig().CELLS_PYDIO_URL + link.LinkUrl,
+src/script/components/CellsGlobalView/CellsTable/CellsShareFileModal/useCellPublicLink.ts:77:71     - Unknown word (PYDIO)      -- Config.getConfig().CELLS_PYDIO_URL + link.LinkUrl,
 src/script/components/CellsGlobalView/CellsTable/CellsTableNameColumn/CellsTableNameColumn.tsx:20:26     - Unknown word (wireapp)    -- import {PlayIcon} from '@wireapp/react-ui-kit';
 src/script/components/CellsGlobalView/CellsTable/CellsTableRowOptions/CellsTableRowOptions.tsx:22:26     - Unknown word (wireapp)    -- import {MoreIcon} from '@wireapp/react-ui-kit';
 src/script/components/CellsGlobalView/useGetAllCellsFiles/transformNodesToCellsFiles.ts:22:17     - Unknown word (MILLIS)     -- import {TIME_IN_MILLIS} from 'Util/TimeUtil
-src/script/components/CellsGlobalView/useGetAllCellsFiles/transformNodesToCellsFiles.ts:57:57     - Unknown word (MILLIS)     -- as number) * TIME_IN_MILLIS.SECOND;
-src/script/components/CellsGlobalView/useGetAllCellsFiles/transformNodesToCellsFiles.ts:65:68     - Unknown word (usermeta)   -- meta.Namespace === 'usermeta-owner')?.JsonValue;
+src/script/components/CellsGlobalView/useGetAllCellsFiles/transformNodesToCellsFiles.ts:62:57     - Unknown word (MILLIS)     -- as number) * TIME_IN_MILLIS.SECOND;
+src/script/components/CellsGlobalView/useGetAllCellsFiles/transformNodesToCellsFiles.ts:70:68     - Unknown word (usermeta)   -- meta.Namespace === 'usermeta-owner')?.JsonValue;
 src/script/components/ConfigToolbar/ConfigToolbar.tsx:22:25     - Unknown word (keyboardjs) -- import keyboardjs from 'keyboardjs';
 src/script/components/ConfigToolbar/ConfigToolbar.tsx:22:8      - Unknown word (keyboardjs) -- import keyboardjs from 'keyboardjs';
 src/script/components/ConfigToolbar/ConfigToolbar.tsx:23:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
@@ -698,15 +700,30 @@ src/script/components/ConfigToolbar/ConfigToolbar.tsx:47:5      - Unknown word (
 src/script/components/ConfigToolbar/ConfigToolbar.tsx:50:7      - Unknown word (keyboardjs) -- keyboardjs.unbind(['command+shift
 src/script/components/ConnectRequests/ConnectionRequests.tsx:22:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 src/script/components/ConnectRequests/ConnectionRequests.tsx:24:85     - Unknown word (wireapp)    -- useMatchMedia} from '@wireapp/react-ui-kit';
-src/script/components/Conversation/Conversation.tsx:226:13    - Unknown word (Giphy)      -- const openGiphy = (text: string) =>
 src/script/components/Conversation/Conversation.tsx:22:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
+src/script/components/Conversation/Conversation.tsx:232:13    - Unknown word (Giphy)      -- const openGiphy = (text: string) =>
 src/script/components/Conversation/Conversation.tsx:24:31     - Unknown word (wireapp)    -- useMatchMedia} from '@wireapp/react-ui-kit';
 src/script/components/Conversation/Conversation.tsx:27:33     - Unknown word (Giphy)      -- Giphy} from 'Components/Giphy';
 src/script/components/Conversation/Conversation.tsx:27:9      - Unknown word (Giphy)      -- import {Giphy} from 'Components/Giphy
-src/script/components/Conversation/Conversation.tsx:571:16    - Unknown word (giphy)      -- <Giphy giphyRepository={repositories
-src/script/components/Conversation/Conversation.tsx:571:46    - Unknown word (giphy)      -- giphyRepository={repositories.giphy} inputValue={inputValue
-src/script/components/Conversation/Conversation.tsx:94:12     - Unknown word (Giphy)      -- const [isGiphyModalOpen, setIsGiphyModalOpen
-src/script/components/Conversation/Conversation.tsx:94:33     - Unknown word (Giphy)      -- isGiphyModalOpen, setIsGiphyModalOpen] = useState
+src/script/components/Conversation/Conversation.tsx:591:16    - Unknown word (giphy)      -- <Giphy giphyRepository={repositories
+src/script/components/Conversation/Conversation.tsx:591:46    - Unknown word (giphy)      -- giphyRepository={repositories.giphy} inputValue={inputValue
+src/script/components/Conversation/Conversation.tsx:98:12     - Unknown word (Giphy)      -- const [isGiphyModalOpen, setIsGiphyModalOpen
+src/script/components/Conversation/Conversation.tsx:98:33     - Unknown word (Giphy)      -- isGiphyModalOpen, setIsGiphyModalOpen] = useState
+src/script/components/Conversation/ConversationCells/CellsHeader/CellsRefresh/CellsRefresh.tsx:20:51     - Unknown word (wireapp)    -- ReloadIcon} from '@wireapp/react-ui-kit';
+src/script/components/Conversation/ConversationCells/CellsHeader/CellsSearch/CellsSearch.tsx:22:52     - Unknown word (wireapp)    -- SearchIcon} from '@wireapp/react-ui-kit';
+src/script/components/Conversation/ConversationCells/CellsTable/CellsFileShareModal/CellsFileShareModal.tsx:20:38     - Unknown word (wireapp)    -- Label, Switch} from '@wireapp/react-ui-kit';
+src/script/components/Conversation/ConversationCells/CellsTable/CellsFileShareModal/useCellPublicLink.ts:49:71     - Unknown word (PYDIO)      -- Config.getConfig().CELLS_PYDIO_URL + link.LinkUrl,
+src/script/components/Conversation/ConversationCells/CellsTable/CellsFileShareModal/useCellPublicLink.ts:77:71     - Unknown word (PYDIO)      -- Config.getConfig().CELLS_PYDIO_URL + link.LinkUrl,
+src/script/components/Conversation/ConversationCells/CellsTable/CellsImagePreviewModal/CellsImagePreviewModal.tsx:107:12    - Unknown word (Zoomable)   -- <ZoomableImage key={modalId} src
+src/script/components/Conversation/ConversationCells/CellsTable/CellsImagePreviewModal/CellsImagePreviewModal.tsx:25:41     - Unknown word (Zoomable)   -- omableImage} from 'Components/ZoomableImage';
+src/script/components/Conversation/ConversationCells/CellsTable/CellsImagePreviewModal/CellsImagePreviewModal.tsx:25:9      - Unknown word (Zoomable)   -- import {ZoomableImage} from 'Components
+src/script/components/Conversation/ConversationCells/CellsTable/CellsImagePreviewModal/CellsImagePreviewModal.tsx:89:77     - Unknown word (fadein)     -- modal-show', {'modal-fadein': isImageVisible})}
+src/script/components/Conversation/ConversationCells/CellsTable/CellsTableNameColumn/CellsTableNameColumn.tsx:20:26     - Unknown word (wireapp)    -- import {PlayIcon} from '@wireapp/react-ui-kit';
+src/script/components/Conversation/ConversationCells/CellsTable/CellsTableRowOptions/CellsTableRowOptions.tsx:22:26     - Unknown word (wireapp)    -- import {MoreIcon} from '@wireapp/react-ui-kit';
+src/script/components/Conversation/ConversationCells/ConversationCells.tsx:22:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
+src/script/components/Conversation/ConversationCells/useGetAllCellsFiles/transformNodesToCellsFiles.ts:22:17     - Unknown word (MILLIS)     -- import {TIME_IN_MILLIS} from 'Util/TimeUtil
+src/script/components/Conversation/ConversationCells/useGetAllCellsFiles/transformNodesToCellsFiles.ts:62:57     - Unknown word (MILLIS)     -- as number) * TIME_IN_MILLIS.SECOND;
+src/script/components/Conversation/ConversationCells/useGetAllCellsFiles/transformNodesToCellsFiles.ts:70:68     - Unknown word (usermeta)   -- meta.Namespace === 'usermeta-owner')?.JsonValue;
 src/script/components/Conversation/ConversationFileDropzone/FileDropzone/FileDropzoneOverlay/FileDropzoneOverlay.tsx:20:26     - Unknown word (wireapp)    -- import {SaveIcon} from '@wireapp/react-ui-kit';
 src/script/components/Conversation/ReadOnlyConversationMessage/ReadOnlyConversationMessage.test.tsx:105:66    - Unknown word (pakages)    -- that don't have any key pakages available", () => {
 src/script/components/Conversation/ReadOnlyConversationMessage/ReadOnlyConversationMessage.test.tsx:21:34     - Unknown word (wireapp)    -- ConnectionStatus} from '@wireapp/api-client/lib/connection
@@ -736,10 +753,7 @@ src/script/components/FadingScrollbar/FadingScrollbar.tsx:64:32     - Unknown wo
 src/script/components/FadingScrollbar/FadingScrollbar.tsx:78:39     - Unknown word (fadein)                  -- startAnimation(animation: 'fadein' | 'fadeout', element
 src/script/components/FadingScrollbar/FadingScrollbar.tsx:84:60     - Unknown word (fadein)                  -- => startAnimation('fadein', element);
 src/script/components/FileCard/FileCardCloseButton/FileCardCloseButton.tsx:20:27     - Unknown word (wireapp)    -- import {CloseIcon} from '@wireapp/react-ui-kit';
-src/script/components/FileCard/FileCardIcon/FileCardIcon.tsx:22:30     - Unknown word (wireapp)    -- SVGIconProps} from '@wireapp/react-ui-kit/lib/Icon
-src/script/components/FileCard/FileCardIcon/FileCardIcon.tsx:36:10     - Unknown word (wireapp)    -- } from '@wireapp/react-ui-kit';
-src/script/components/FileCard/FileCardIcon/getFileTypeFromExtension/getFileTypeFromExtension.ts:26:40     - Unknown word (flac)       -- wav', 'ogg', 'm4a', 'flac', 'aac', 'wma', 'aiff
-src/script/components/FileCard/FileCardIcon/getFileTypeFromExtension/getFileTypeFromExtension.ts:38:6      - Unknown word (sparql)     -- 'sparql',
+src/script/components/FileCard/FileCardIcon/FileCardIcon.tsx:20:27     - Unknown word (wireapp)    -- import {AlertIcon} from '@wireapp/react-ui-kit';
 src/script/components/Giphy/GifImage.test.tsx:22:36     - Unknown word (Giphy)      -- GifImage} from 'Components/Giphy/GifImage';
 src/script/components/Giphy/GifImage.tsx:35:22     - Unknown word (giphy)      -- alt={title || 'giphy image'}
 src/script/components/Giphy/Giphy.test.tsx:24:48     - Unknown word (Giphy)      -- from '../../extension/GiphyRepository';
@@ -802,27 +816,26 @@ src/script/components/InViewport/InViewport.tsx:61:9      - Unknown word (overla
 src/script/components/InViewport/InViewport.tsx:99:7      - Unknown word (overlayed)  -- overlayedObserver.trackElement
 src/script/components/InputBar/FilePreviews/FilePreviews.tsx:20:32     - Unknown word (formkit)    -- useAutoAnimate} from '@formkit/auto-animate/react'
 src/script/components/InputBar/FilePreviews/FilePreviews.tsx:21:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
-src/script/components/InputBar/FilePreviews/ImagePreviewCard/ImagePreviewCard.tsx:20:27     - Unknown word (wireapp)    -- import {AlertIcon} from '@wireapp/react-ui-kit';
-src/script/components/InputBar/FilePreviews/VideoPreviewCard/VideoPreviewCard.tsx:20:27     - Unknown word (wireapp)    -- import {AlertIcon} from '@wireapp/react-ui-kit';
 src/script/components/InputBar/FilePreviews/common/FilePreviewErrorMoreButton/FilePreviewErrorMoreButton.tsx:22:26     - Unknown word (wireapp)    -- import {MoreIcon} from '@wireapp/react-ui-kit';
 src/script/components/InputBar/FilePreviews/common/FilePreviewPlayButton/FilePreviewPlayButton.tsx:20:26     - Unknown word (wireapp)    -- import {PlayIcon} from '@wireapp/react-ui-kit';
-src/script/components/InputBar/InputBar.test.tsx:83:9      - Unknown word (Giphy)      -- openGiphy: jest.fn(),
-src/script/components/InputBar/InputBar.tsx:203:11    - Unknown word (Messsage)   -- cancelMesssageEditing,
-src/script/components/InputBar/InputBar.tsx:226:9     - Unknown word (giphy)      -- const giphy = useGiphy({
-src/script/components/InputBar/InputBar.tsx:228:23    - Unknown word (GIPHY)      -- maxLength: CONFIG.GIPHY_TEXT_LENGTH,
-src/script/components/InputBar/InputBar.tsx:233:11    - Unknown word (Messsage)   -- cancelMesssageEditing,
+src/script/components/InputBar/FilePreviews/common/MediaFilePreviewCard/MediaFilePreviewCard.tsx:22:27     - Unknown word (wireapp)    -- import {AlertIcon} from '@wireapp/react-ui-kit';
+src/script/components/InputBar/InputBar.test.tsx:85:9      - Unknown word (Giphy)      -- openGiphy: jest.fn(),
+src/script/components/InputBar/InputBar.tsx:206:11    - Unknown word (Messsage)   -- cancelMesssageEditing,
+src/script/components/InputBar/InputBar.tsx:232:9     - Unknown word (giphy)      -- const giphy = useGiphy({
+src/script/components/InputBar/InputBar.tsx:234:23    - Unknown word (GIPHY)      -- maxLength: CONFIG.GIPHY_TEXT_LENGTH,
+src/script/components/InputBar/InputBar.tsx:239:11    - Unknown word (Messsage)   -- cancelMesssageEditing,
 src/script/components/InputBar/InputBar.tsx:25:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 src/script/components/InputBar/InputBar.tsx:27:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
-src/script/components/InputBar/InputBar.tsx:303:38    - Unknown word (giphy)      -- showGiphyButton={giphy.showGiphyButton}
-src/script/components/InputBar/InputBar.tsx:308:33    - Unknown word (giphy)      -- onGifClick={giphy.handleGifClick}
-src/script/components/InputBar/InputBar.tsx:39:17     - Unknown word (MILLIS)     -- import {TIME_IN_MILLIS} from 'Util/TimeUtil
-src/script/components/InputBar/InputBar.tsx:52:12     - Unknown word (Giphy)      -- import {useGiphy} from './useGiphy/useGiphy
-src/script/components/InputBar/InputBar.tsx:52:30     - Unknown word (Giphy)      -- useGiphy} from './useGiphy/useGiphy';
-src/script/components/InputBar/InputBar.tsx:52:39     - Unknown word (Giphy)      -- from './useGiphy/useGiphy';
-src/script/components/InputBar/InputBar.tsx:70:25     - Unknown word (MILLIS)     -- PING_TIMEOUT: TIME_IN_MILLIS.SECOND * 2,
-src/script/components/InputBar/InputBar.tsx:71:3      - Unknown word (GIPHY)      -- GIPHY_TEXT_LENGTH: 256,
-src/script/components/InputBar/InputBar.tsx:79:16     - Unknown word (Giphy)      -- readonly openGiphy: (inputValue: string
-src/script/components/InputBar/InputBar.tsx:96:7      - Unknown word (Giphy)      -- openGiphy,
+src/script/components/InputBar/InputBar.tsx:318:38    - Unknown word (giphy)      -- showGiphyButton={giphy.showGiphyButton}
+src/script/components/InputBar/InputBar.tsx:323:33    - Unknown word (giphy)      -- onGifClick={giphy.handleGifClick}
+src/script/components/InputBar/InputBar.tsx:40:17     - Unknown word (MILLIS)     -- import {TIME_IN_MILLIS} from 'Util/TimeUtil
+src/script/components/InputBar/InputBar.tsx:53:12     - Unknown word (Giphy)      -- import {useGiphy} from './useGiphy/useGiphy
+src/script/components/InputBar/InputBar.tsx:53:30     - Unknown word (Giphy)      -- useGiphy} from './useGiphy/useGiphy';
+src/script/components/InputBar/InputBar.tsx:53:39     - Unknown word (Giphy)      -- from './useGiphy/useGiphy';
+src/script/components/InputBar/InputBar.tsx:71:25     - Unknown word (MILLIS)     -- PING_TIMEOUT: TIME_IN_MILLIS.SECOND * 2,
+src/script/components/InputBar/InputBar.tsx:72:3      - Unknown word (GIPHY)      -- GIPHY_TEXT_LENGTH: 256,
+src/script/components/InputBar/InputBar.tsx:81:16     - Unknown word (Giphy)      -- readonly openGiphy: (inputValue: string
+src/script/components/InputBar/InputBar.tsx:99:7      - Unknown word (Giphy)      -- openGiphy,
 src/script/components/InputBar/InputBarControls/AssetUploadButton/AssetUploadButton.test.tsx:24:39     - Unknown word (chucknorris) -- new File(['(⌐□_□)'], 'chucknorris.png', {type: 'image
 src/script/components/InputBar/InputBarControls/AssetUploadButton/AssetUploadButton.tsx:22:26     - Unknown word (wireapp)    -- import {TabIndex} from '@wireapp/react-ui-kit/lib/types
 src/script/components/InputBar/InputBarControls/AssetUploadButton/AssetUploadButton.tsx:64:30     - Unknown word (UNFOCUSABLE) -- tabIndex={TabIndex.UNFOCUSABLE}
@@ -845,12 +858,12 @@ src/script/components/InputBar/InputBarControls/GiphyButton/GiphyButton.tsx:38:2
 src/script/components/InputBar/InputBarControls/ImageUploadButton/ImageUploadButton.test.tsx:26:39     - Unknown word (chucknorris) -- new File(['(⌐□_□)'], 'chucknorris.png', {type: 'image
 src/script/components/InputBar/InputBarControls/ImageUploadButton/ImageUploadButton.tsx:22:26     - Unknown word (wireapp)    -- import {TabIndex} from '@wireapp/react-ui-kit/lib/types
 src/script/components/InputBar/InputBarControls/ImageUploadButton/ImageUploadButton.tsx:62:30     - Unknown word (UNFOCUSABLE) -- tabIndex={TabIndex.UNFOCUSABLE}
-src/script/components/InputBar/InputBarControls/InputBarControls.tsx:101:15    - Unknown word (Giphy)       -- showGiphyButton={showGiphyButton
-src/script/components/InputBar/InputBarControls/InputBarControls.tsx:101:32    - Unknown word (Giphy)       -- showGiphyButton={showGiphyButton}
+src/script/components/InputBar/InputBarControls/InputBarControls.tsx:103:15    - Unknown word (Giphy)       -- showGiphyButton={showGiphyButton
+src/script/components/InputBar/InputBarControls/InputBarControls.tsx:103:32    - Unknown word (Giphy)       -- showGiphyButton={showGiphyButton}
 src/script/components/InputBar/InputBarControls/InputBarControls.tsx:24:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
-src/script/components/InputBar/InputBarControls/InputBarControls.tsx:41:7      - Unknown word (Giphy)      -- showGiphyButton: boolean;
-src/script/components/InputBar/InputBarControls/InputBarControls.tsx:65:7      - Unknown word (Giphy)      -- showGiphyButton,
-src/script/components/InputBar/InputBarControls/InputBarControls.tsx:92:18     - Unknown word (Filesharing) -- disableFilesharing={!isFileSharingSendingEnabled
+src/script/components/InputBar/InputBarControls/InputBarControls.tsx:42:7      - Unknown word (Giphy)      -- showGiphyButton: boolean;
+src/script/components/InputBar/InputBarControls/InputBarControls.tsx:68:7      - Unknown word (Giphy)      -- showGiphyButton,
+src/script/components/InputBar/InputBarControls/InputBarControls.tsx:94:18     - Unknown word (Filesharing) -- disableFilesharing={!isFileSharingSendingEnabled
 src/script/components/InputBar/InputBarControls/MessageTimerButton/MessageTimerButton.test.tsx:104:30    - Unknown word (MILLIS)     -- const duration = TIME_IN_MILLIS.MINUTE * minutes;
 src/script/components/InputBar/InputBarControls/MessageTimerButton/MessageTimerButton.test.tsx:132:30    - Unknown word (MILLIS)     -- const duration = TIME_IN_MILLIS.MINUTE * minutes;
 src/script/components/InputBar/InputBarControls/MessageTimerButton/MessageTimerButton.test.tsx:159:30    - Unknown word (MILLIS)     -- const duration = TIME_IN_MILLIS.MINUTE * minutes;
@@ -903,14 +916,14 @@ src/script/components/InputBar/useGiphy/useGiphy.ts:71:47     - Unknown word (GI
 src/script/components/InputBar/useGiphy/useGiphy.ts:74:54     - Unknown word (GIPHY)      -- WebAppEvents.EXTENSIONS.GIPHY.SEND);
 src/script/components/InputBar/useGiphy/useGiphy.ts:76:24     - Unknown word (Messsage)   -- , [sendGiphy, cancelMesssageEditing]);
 src/script/components/InputBar/useMessageHandling/useMessageEditing/useMessageEditing.ts:24:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
-src/script/components/InputBar/useMessageHandling/useMessageHandling.ts:109:15    - Unknown word (Messsage)   -- const cancelMesssageEditingWithDraftReset
-src/script/components/InputBar/useMessageHandling/useMessageHandling.ts:137:15    - Unknown word (Messsage)   -- cancelMesssageEditingWithDraftReset
-src/script/components/InputBar/useMessageHandling/useMessageHandling.ts:150:13    - Unknown word (Messsage)   -- cancelMesssageEditingWithDraftReset
-src/script/components/InputBar/useMessageHandling/useMessageHandling.ts:161:28    - Unknown word (Replyable)  -- if (messageEntity?.isReplyable() && messageEntity
-src/script/components/InputBar/useMessageHandling/useMessageHandling.ts:189:13    - Unknown word (Messsage)   -- cancelMesssageEditingWithDraftReset
-src/script/components/InputBar/useMessageHandling/useMessageHandling.ts:193:48    - Unknown word (Messsage)   -- replyMessageEntity, cancelMesssageEditingWithDraftReset
+src/script/components/InputBar/useMessageHandling/useMessageHandling.ts:112:15    - Unknown word (Messsage)   -- const cancelMesssageEditingWithDraftReset
+src/script/components/InputBar/useMessageHandling/useMessageHandling.ts:141:15    - Unknown word (Messsage)   -- cancelMesssageEditingWithDraftReset
+src/script/components/InputBar/useMessageHandling/useMessageHandling.ts:154:13    - Unknown word (Messsage)   -- cancelMesssageEditingWithDraftReset
+src/script/components/InputBar/useMessageHandling/useMessageHandling.ts:165:28    - Unknown word (Replyable)  -- if (messageEntity?.isReplyable() && messageEntity
+src/script/components/InputBar/useMessageHandling/useMessageHandling.ts:193:13    - Unknown word (Messsage)   -- cancelMesssageEditingWithDraftReset
+src/script/components/InputBar/useMessageHandling/useMessageHandling.ts:197:48    - Unknown word (Messsage)   -- replyMessageEntity, cancelMesssageEditingWithDraftReset
 src/script/components/InputBar/useMessageHandling/useMessageHandling.ts:25:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
-src/script/components/InputBar/useMessageHandling/useMessageHandling.ts:79:20     - Unknown word (Replyable)  -- if (reply?.isReplyable()) {
+src/script/components/InputBar/useMessageHandling/useMessageHandling.ts:82:20     - Unknown word (Replyable)  -- if (reply?.isReplyable()) {
 src/script/components/InputBar/useMessageHandling/useMessageReply/useMessageReply.ts:24:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
 src/script/components/InputBar/usePing/usePing.ts:27:17     - Unknown word (MILLIS)     -- import {TIME_IN_MILLIS} from 'Util/TimeUtil
 src/script/components/InputBar/usePing/usePing.ts:44:65     - Unknown word (MILLIS)     -- sPingDisabled(false), TIME_IN_MILLIS.SECOND * 2);
@@ -1066,7 +1079,7 @@ src/script/components/MessagesList/Message/SystemMessage/SystemMessage.tsx:26:32
 src/script/components/MessagesList/Message/SystemMessage/SystemMessage.tsx:29:21     - Unknown word (Finalisation) -- import {MLSMigrationFinalisationOngoingCallMessage} from
 src/script/components/MessagesList/Message/SystemMessage/SystemMessage.tsx:29:97     - Unknown word (Finalisation) -- message/MLSMigrationFinalisationOngoingCallMessage';
 src/script/components/MessagesList/Message/SystemMessage/SystemMessage.tsx:77:49     - Unknown word (Finalisation) -- JoinedAfterMLSMigrationFinalisationMessage) {
-src/script/components/MessagesList/Message/VerificationMessage.test.tsx:23:33     - Unknown word (wireapp)    -- QualifiedUserId} from '@wireapp/protocol-messaging'
+src/script/components/MessagesList/Message/VerificationMessage.test.tsx:20:33     - Unknown word (pydio)      -- QualifiedUserId} from '@pydio/protocol-messaging'
 src/script/components/MessagesList/Message/VerificationMessage.tsx:24:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
 src/script/components/MessagesList/Message/index.tsx:141:54    - Unknown word (mesages)    -- for non content type mesages
 src/script/components/MessagesList/Message/index.tsx:161:44    - Unknown word (noninteractive) -- next-line jsx-a11y/no-noninteractive-element-interactions
@@ -1076,7 +1089,7 @@ src/script/components/MessagesList/Message/util/index.ts:25:84     - Unknown wor
 src/script/components/MessagesList/MessageList.tsx:22:26     - Unknown word (wireapp)    -- import {TabIndex} from '@wireapp/react-ui-kit/lib/types
 src/script/components/MessagesList/MessageList.tsx:278:28    - Unknown word (UNFOCUSABLE) -- tabIndex={TabIndex.UNFOCUSABLE}
 src/script/components/MessagesList/MessageList.tsx:58:18     - Unknown word (convesation) -- invitePeople: (convesation: Conversation) => void
-src/script/components/MessagesList/UploadAssets/components/UploadAssetItem/UploadAssetItem.tsx:22:32     - Unknown word (wireapp)    -- GenericMessage} from '@wireapp/protocol-messaging'
+src/script/components/MessagesList/UploadAssets/components/UploadAssetItem/UploadAssetItem.tsx:22:32     - Unknown word (pydio)      -- GenericMessage} from '@pydio/protocol-messaging'
 src/script/components/MessagesList/utils/messagesFilter.ts:20:36     - Unknown word (wireapp)    -- CONVERSATION_EVENT} from '@wireapp/api-client/lib/event
 src/script/components/MessagesList/utils/messagesFilter.ts:49:16     - Unknown word (Dont)       -- // Dont show duplicated group
 src/script/components/MessagesList/utils/messagesFilter.ts:55:16     - Unknown word (Dont)       -- // Dont show duplicated member
@@ -1165,7 +1178,7 @@ src/script/components/TitleBar/TitleBar.test.tsx:25:25     - Unknown word (wirea
 src/script/components/TitleBar/TitleBar.test.tsx:26:26     - Unknown word (wireapp)    -- import * as uiKit from '@wireapp/react-ui-kit';
 src/script/components/TitleBar/TitleBar.test.tsx:27:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
 src/script/components/TitleBar/TitleBar.test.tsx:43:13     - Unknown word (wireapp)    -- jest.mock('@wireapp/react-ui-kit', () =
-src/script/components/TitleBar/TitleBar.tsx:183:84    - Unknown word (MILLIS)     -- ?.remove(), TIME_IN_MILLIS.SECOND);
+src/script/components/TitleBar/TitleBar.tsx:185:84    - Unknown word (MILLIS)     -- ?.remove(), TIME_IN_MILLIS.SECOND);
 src/script/components/TitleBar/TitleBar.tsx:22:26     - Unknown word (wireapp)    -- import {TabIndex} from '@wireapp/react-ui-kit/lib/types
 src/script/components/TitleBar/TitleBar.tsx:25:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 src/script/components/TitleBar/TitleBar.tsx:27:69     - Unknown word (wireapp)    -- useMatchMedia} from '@wireapp/react-ui-kit';
@@ -1205,8 +1218,8 @@ src/script/components/ZoomableImage/ZoomableImage.tsx:71:38     - Unknown word (
 src/script/components/ZoomableImage/index.ts:20:18     - Unknown word (Zoomable)   -- export * from './ZoomableImage';
 src/script/components/calling/CallParticipantsListItem/CallParticipantItemContent/CallParticipantItemContent.tsx:22:26     - Unknown word (wireapp)    -- import {TabIndex} from '@wireapp/react-ui-kit/lib/types
 src/script/components/calling/CallParticipantsListItem/CallParticipantItemContent/CallParticipantItemContent.tsx:65:34     - Unknown word (UNFOCUSABLE) -- tabIndex={TabIndex.UNFOCUSABLE}
-src/script/components/calling/CallParticipantsListItem/CallParticipantsListItem.test.tsx:148:54    - Unknown word (unestablishd) -- text if user is in unestablishd audio state', () =>
-src/script/components/calling/CallParticipantsListItem/CallParticipantsListItem.test.tsx:22:30     - Unknown word (wireapp)    -- Availability} from '@wireapp/protocol-messaging'
+src/script/components/calling/CallParticipantsListItem/CallParticipantsListItem.test.tsx:147:54    - Unknown word (unestablishd) -- text if user is in unestablishd audio state', () =>
+src/script/components/calling/CallParticipantsListItem/CallParticipantsListItem.test.tsx:20:30     - Unknown word (pydio)      -- Availability} from '@pydio/protocol-messaging'
 src/script/components/calling/CallParticipantsListItem/CallParticipantsListItem.tsx:22:26     - Unknown word (wireapp)    -- import {TabIndex} from '@wireapp/react-ui-kit/lib/types
 src/script/components/calling/CallParticipantsListItem/CallParticipantsListItemHandRaiseIcon.tsx:22:15     - Unknown word (Millis)     -- import {TimeInMillis} from '@wireapp/commons
 src/script/components/calling/CallParticipantsListItem/CallParticipantsListItemHandRaiseIcon.tsx:22:30     - Unknown word (wireapp)    -- TimeInMillis} from '@wireapp/commons/lib/util/TimeUtil
@@ -1290,9 +1303,9 @@ src/script/components/panel/ConversationProtocolDetails/ConversationProtocolDeta
 src/script/components/panel/ConversationProtocolDetails/ConversationProtocolDetails.tsx:25:9      - Unknown word (Ciphersuite) -- import {Ciphersuite} from '@wireapp/core
 src/script/components/panel/ConversationProtocolDetails/ConversationProtocolDetails.tsx:68:14     - Unknown word (Ciphersuite) -- {Ciphersuite[cipherSuite]}
 src/script/components/panel/EnrichedFields.test.tsx:21:31     - Unknown word (wireapp)    -- type {RichInfo} from '@wireapp/api-client/lib/user
-src/script/components/panel/EnrichedFields.tsx:22:36     - Unknown word (wireapp)    -- RichInfoField} from '@wireapp/api-client/lib/user
-src/script/components/panel/EnrichedFields.tsx:23:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
-src/script/components/panel/EnrichedFields.tsx:25:30     - Unknown word (wireapp)    -- Availability} from '@wireapp/protocol-messaging'
+src/script/components/panel/EnrichedFields.tsx:22:30     - Unknown word (pydio)      -- Availability} from '@pydio/protocol-messaging'
+src/script/components/panel/EnrichedFields.tsx:23:36     - Unknown word (wireapp)    -- RichInfoField} from '@wireapp/api-client/lib/user
+src/script/components/panel/EnrichedFields.tsx:24:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 src/script/components/panel/SingleAction/SingleAction.tsx:20:48     - Unknown word (wireapp)    -- uttonVariant, FlexBox} from '@wireapp/react-ui-kit';
 src/script/components/panel/UserActions.test.tsx:21:34     - Unknown word (wireapp)    -- ConnectionStatus} from '@wireapp/api-client/lib/connection
 src/script/components/panel/UserActions.test.tsx:22:57     - Unknown word (wireapp)    -- CONVERSATION_TYPE} from '@wireapp/api-client/lib/conversation
@@ -1333,12 +1346,12 @@ src/script/conversation/ConversationAccessPermission.test.ts:20:63     - Unknown
 src/script/conversation/ConversationAccessPermission.ts:138:53    - Unknown word (sigfigs)    -- feature with the correct sigfigs
 src/script/conversation/ConversationAccessPermission.ts:20:63     - Unknown word (wireapp)    -- CONVERSATION_ACCESS} from '@wireapp/api-client/lib/conversation
 src/script/conversation/ConversationCellState.test.ts:20:35     - Unknown word (wireapp)    -- CONVERSATION_TYPE} from '@wireapp/api-client/lib/conversation
-src/script/conversation/ConversationEphemeralHandler.ts:20:73     - Unknown word (wireapp)    -- CONVERSATION_EVENT} from '@wireapp/api-client/lib/event
-src/script/conversation/ConversationEphemeralHandler.ts:23:38     - Unknown word (wireapp)    -- LinkPreview} from '@wireapp/protocol-messaging'
-src/script/conversation/ConversationEphemeralHandler.ts:28:17     - Unknown word (MILLIS)     -- import {TIME_IN_MILLIS} from 'Util/TimeUtil
-src/script/conversation/ConversationEphemeralHandler.ts:53:30     - Unknown word (MILLIS)     -- INTERVAL_TIME: TIME_IN_MILLIS.SECOND,
-src/script/conversation/ConversationEphemeralHandler.ts:55:22     - Unknown word (MILLIS)     -- MAX: TIME_IN_MILLIS.YEAR,
-src/script/conversation/ConversationEphemeralHandler.ts:56:22     - Unknown word (MILLIS)     -- MIN: TIME_IN_MILLIS.SECOND,
+src/script/conversation/ConversationEphemeralHandler.ts:20:38     - Unknown word (pydio)      -- LinkPreview} from '@pydio/protocol-messaging'
+src/script/conversation/ConversationEphemeralHandler.ts:21:73     - Unknown word (wireapp)    -- CONVERSATION_EVENT} from '@wireapp/api-client/lib/event
+src/script/conversation/ConversationEphemeralHandler.ts:27:17     - Unknown word (MILLIS)     -- import {TIME_IN_MILLIS} from 'Util/TimeUtil
+src/script/conversation/ConversationEphemeralHandler.ts:52:30     - Unknown word (MILLIS)     -- INTERVAL_TIME: TIME_IN_MILLIS.SECOND,
+src/script/conversation/ConversationEphemeralHandler.ts:54:22     - Unknown word (MILLIS)     -- MAX: TIME_IN_MILLIS.YEAR,
+src/script/conversation/ConversationEphemeralHandler.ts:55:22     - Unknown word (MILLIS)     -- MIN: TIME_IN_MILLIS.SECOND,
 src/script/conversation/ConversationFilter.test.ts:118:16    - Unknown word (Florian)    -- name: 'Florian@Staging11',
 src/script/conversation/ConversationFilter.test.ts:142:47    - Unknown word (Florian)    -- versationEntity.name()).toBe('Florian@Staging11');
 src/script/conversation/ConversationFilter.test.ts:24:10     - Unknown word (wireapp)    -- } from '@wireapp/api-client/lib/conversation
@@ -1358,8 +1371,8 @@ src/script/conversation/ConversationMapper.test.ts:31:30     - Unknown word (wir
 src/script/conversation/ConversationMapper.test.ts:32:34     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
 src/script/conversation/ConversationMapper.test.ts:59:25     - Unknown word (Emtpy)      -- const functionCallEmtpyArray = () => ConversationMapp
 src/script/conversation/ConversationMapper.test.ts:61:26     - Unknown word (Emtpy)      -- expect(functionCallEmtpyArray).toThrow(BaseError
-src/script/conversation/ConversationMapper.ts:29:10     - Unknown word (wireapp)    -- } from '@wireapp/api-client/lib/conversation
-src/script/conversation/ConversationMapper.ts:33:33     - Unknown word (wireapp)    -- LegalHoldStatus} from '@wireapp/protocol-messaging'
+src/script/conversation/ConversationMapper.ts:20:33     - Unknown word (pydio)      -- LegalHoldStatus} from '@pydio/protocol-messaging'
+src/script/conversation/ConversationMapper.ts:30:10     - Unknown word (wireapp)    -- } from '@wireapp/api-client/lib/conversation
 src/script/conversation/ConversationRepository.test.ts:1070:9    - Unknown word (deos)       -- it('deos not mark mls 1:1 conversation
 src/script/conversation/ConversationRepository.test.ts:1298:21   - Unknown word (René)       -- group_b.name('René, Benny, Gregor, Lipis
 src/script/conversation/ConversationRepository.test.ts:1298:34   - Unknown word (Gregor)     -- b.name('René, Benny, Gregor, Lipis');
@@ -1417,6 +1430,7 @@ src/script/conversation/ConversationRepository.ts:1985:23   - Unknown word (conv
 src/script/conversation/ConversationRepository.ts:1992:8    - Unknown word (Initialising)   -- `Initialising 1:1 conversation ${conversati
 src/script/conversation/ConversationRepository.ts:203:39    - Unknown word (MILLIS)       -- NFIRMATION_THRESHOLD: TIME_IN_MILLIS.WEEK,
 src/script/conversation/ConversationRepository.ts:2055:93   - Unknown word (choosen)        -- proteus protocol was now choosen as common,
+src/script/conversation/ConversationRepository.ts:20:71     - Unknown word (pydio)      -- LegalHoldStatus} from '@pydio/protocol-messaging'
 src/script/conversation/ConversationRepository.ts:2123:16   - Unknown word (inccessible)    -- for (const inccessibleConversation of not_found
 src/script/conversation/ConversationRepository.ts:2127:60   - Unknown word (inccessible)    -- getConversationById(inccessibleConversation);
 src/script/conversation/ConversationRepository.ts:2131:48   - Unknown word (inccessible)    -- deleteConversationLocally(inccessibleConversation, true);
@@ -1431,25 +1445,25 @@ src/script/conversation/ConversationRepository.ts:2583:32   - Unknown word (core
 src/script/conversation/ConversationRepository.ts:2716:117  - Unknown word (ciphersuite)    -- new fields (groupId, ciphersuite, epoch and new protocol
 src/script/conversation/ConversationRepository.ts:2764:85   - Unknown word (ciphersuite)    -- related fields (groupId, ciphersuite, epoch and new protocol
 src/script/conversation/ConversationRepository.ts:2771:64   - Unknown word (ciphersuite)    -- new fields (groupId, ciphersuite, epoch and new protocol
-src/script/conversation/ConversationRepository.ts:28:10     - Unknown word (wireapp)    -- } from '@wireapp/api-client/lib/conversation
 src/script/conversation/ConversationRepository.ts:2923:50   - Unknown word (unarchived)     -- the conversation was unarchived
 src/script/conversation/ConversationRepository.ts:2927:64   - Unknown word (unarchived)     -- conversationEntity.id}' unarchived by trigger '${trigger
-src/script/conversation/ConversationRepository.ts:33:10     - Unknown word (wireapp)    -- } from '@wireapp/api-client/lib/conversation
-src/script/conversation/ConversationRepository.ts:34:37     - Unknown word (wireapp)    -- CONVERSATION_TYPING} from '@wireapp/api-client/lib/conversation
+src/script/conversation/ConversationRepository.ts:29:10     - Unknown word (wireapp)    -- } from '@wireapp/api-client/lib/conversation
+src/script/conversation/ConversationRepository.ts:34:10     - Unknown word (wireapp)    -- } from '@wireapp/api-client/lib/conversation
 src/script/conversation/ConversationRepository.ts:3513:45   - Unknown word (Finalisation)   -- injectJoinedAfterMigrationFinalisationMessage = (conversation
 src/script/conversation/ConversationRepository.ts:3515:34   - Unknown word (Finalisation)   -- joinedAfterMLSMigrationFinalisationEvent = EventBuilder
 src/script/conversation/ConversationRepository.ts:3515:95   - Unknown word (Finalisation)   -- buildJoinedAfterMLSMigrationFinalisation(
 src/script/conversation/ConversationRepository.ts:3519:73   - Unknown word (Finalisation)   -- joinedAfterMLSMigrationFinalisationEvent);
 src/script/conversation/ConversationRepository.ts:3522:38   - Unknown word (Finalisation)   -- readonly injectMLSMigrationFinalisationOngoingCallMessage =
+src/script/conversation/ConversationRepository.ts:35:37     - Unknown word (wireapp)    -- CONVERSATION_TYPING} from '@wireapp/api-client/lib/conversation
 src/script/conversation/ConversationRepository.ts:3791:60   - Unknown word (Conv)           -- pushClients -> setClientsForConv avs api whenever
 src/script/conversation/ConversationRepository.ts:3861:14   - Unknown word (Unarchived)     -- const wasUnarchived = previouslyArchived
 src/script/conversation/ConversationRepository.ts:3862:12   - Unknown word (Unarchived)     -- if (wasUnarchived) {
 src/script/conversation/ConversationRepository.ts:454:9     - Unknown word (teamid)       -- teamid: this.teamState.team
-src/script/conversation/ConversationRepository.ts:47:10     - Unknown word (wireapp)    -- } from '@wireapp/api-client/lib/event
-src/script/conversation/ConversationRepository.ts:48:35     - Unknown word (wireapp)    -- BackendErrorLabel} from '@wireapp/api-client/lib/http
-src/script/conversation/ConversationRepository.ts:55:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
+src/script/conversation/ConversationRepository.ts:48:10     - Unknown word (wireapp)    -- } from '@wireapp/api-client/lib/event
+src/script/conversation/ConversationRepository.ts:49:35     - Unknown word (wireapp)    -- BackendErrorLabel} from '@wireapp/api-client/lib/http
 src/script/conversation/ConversationRepository.ts:563:75    - Unknown word (metat)        -- users & conversations metat data`, error);
 src/script/conversation/ConversationRepository.ts:565:16    - Unknown word (MILLIS)       -- }, TIME_IN_MILLIS.HOUR * 3);
+src/script/conversation/ConversationRepository.ts:56:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 src/script/conversation/ConversationRepository.ts:658:10    - Unknown word (Converstions) -- localConverstions: ConversationDatabaseData
 src/script/conversation/ConversationRepository.ts:666:53    - Unknown word (refetched)    -- proteus 1:1 (so it's never refetched) conversation and remove
 src/script/conversation/ConversationRepository.ts:685:47    - Unknown word (Converstions) -- KnownLocalConversation = localConverstions.find(({qualified_id
@@ -1495,34 +1509,36 @@ src/script/conversation/ConversationVerificationStateHandler/shared/conversation
 src/script/conversation/EventBuilder.test.ts:20:34     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
 src/script/conversation/EventBuilder.ts:160:36    - Unknown word (Finalisation) -- JoinedAfterMLSMigrationFinalisationEvent = BaseEvent &
 src/script/conversation/EventBuilder.ts:163:25    - Unknown word (Finalisation) -- export type MLSMigrationFinalisationOngoingCallEvent = BaseEvent
-src/script/conversation/EventBuilder.ts:20:35     - Unknown word (wireapp)    -- MemberLeaveReason} from '@wireapp/api-client/lib/conversation
+src/script/conversation/EventBuilder.ts:20:45     - Unknown word (pydio)      -- LegalHoldStatus} from '@pydio/protocol-messaging'
 src/script/conversation/EventBuilder.ts:219:23    - Unknown word (NOONE)        -- {reason: AVS_REASON.NOONE_JOINED | AVS_REASON
-src/script/conversation/EventBuilder.ts:25:10     - Unknown word (wireapp)    -- } from '@wireapp/api-client/lib/event
+src/script/conversation/EventBuilder.ts:21:35     - Unknown word (wireapp)    -- MemberLeaveReason} from '@wireapp/api-client/lib/conversation
 src/script/conversation/EventBuilder.ts:264:28    - Unknown word (Finalisation) -- JoinedAfterMLSMigrationFinalisationEvent
 src/script/conversation/EventBuilder.ts:265:17    - Unknown word (Finalisation) -- | MLSMigrationFinalisationOngoingCallEvent
-src/script/conversation/EventBuilder.ts:26:34     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
-src/script/conversation/EventBuilder.ts:27:33     - Unknown word (wireapp)    -- AddUsersFailure} from '@wireapp/core/lib/conversation
-src/script/conversation/EventBuilder.ts:28:30     - Unknown word (wireapp)    -- ReactionType} from '@wireapp/core/lib/conversation
+src/script/conversation/EventBuilder.ts:26:10     - Unknown word (wireapp)    -- } from '@wireapp/api-client/lib/event
+src/script/conversation/EventBuilder.ts:27:34     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
+src/script/conversation/EventBuilder.ts:28:33     - Unknown word (wireapp)    -- AddUsersFailure} from '@wireapp/core/lib/conversation
+src/script/conversation/EventBuilder.ts:29:30     - Unknown word (wireapp)    -- ReactionType} from '@wireapp/core/lib/conversation
 src/script/conversation/EventBuilder.ts:352:24    - Unknown word (NOONE)        -- reason: AVS_REASON.NOONE_JOINED | AVS_REASON
 src/script/conversation/EventBuilder.ts:610:31    - Unknown word (Finalisation) -- buildJoinedAfterMLSMigrationFinalisation(
 src/script/conversation/EventMapper.test.ts:115:27    - Unknown word (ugpawm)     -- token: 'aV0TGxF3ugpawm3wAYPmew==',
 src/script/conversation/EventMapper.test.ts:115:37    - Unknown word (Pmew)       -- 'aV0TGxF3ugpawm3wAYPmew==',
-src/script/conversation/EventMapper.test.ts:20:47     - Unknown word (wireapp)    -- LinkPreview, Mention} from '@wireapp/protocol-messaging'
-src/script/conversation/EventMapper.ts:20:88     - Unknown word (wireapp)    -- onProtocolUpdateEvent} from '@wireapp/api-client/lib/event
-src/script/conversation/EventMapper.ts:21:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
-src/script/conversation/EventMapper.ts:23:38     - Unknown word (wireapp)    -- LinkPreview, Mention} from '@wireapp/protocol-messaging'
-src/script/conversation/EventMapper.ts:342:62    - Unknown word (Finalisation) -- apEventJoinedAfterMLSMigrationFinalisation();
-src/script/conversation/EventMapper.ts:445:25    - Unknown word (Reactable)    -- if (messageEntity.isReactable()) {
-src/script/conversation/EventMapper.ts:60:100    - Unknown word (Finalisation) -- JoinedAfterMLSMigrationFinalisationMessage';
-src/script/conversation/EventMapper.ts:60:32     - Unknown word (Finalisation) -- JoinedAfterMLSMigrationFinalisationMessage} from '../entity
-src/script/conversation/EventMapper.ts:70:21     - Unknown word (Finalisation) -- import {MLSMigrationFinalisationOngoingCallMessage} from
-src/script/conversation/EventMapper.ts:70:89     - Unknown word (Finalisation) -- message/MLSMigrationFinalisationOngoingCallMessage';
-src/script/conversation/MessageRepository.test.ts:20:34     - Unknown word (wireapp)    -- ConnectionStatus} from '@wireapp/api-client/lib/connection
-src/script/conversation/MessageRepository.test.ts:21:35     - Unknown word (wireapp)    -- CONVERSATION_TYPE} from '@wireapp/api-client/lib/conversation
-src/script/conversation/MessageRepository.test.ts:22:38     - Unknown word (wireapp)    -- ConversationProtocol} from '@wireapp/api-client/lib/conversation
-src/script/conversation/MessageRepository.test.ts:23:37     - Unknown word (wireapp)    -- MessageSendingState} from '@wireapp/core/lib/conversation
+src/script/conversation/EventMapper.test.ts:20:47     - Unknown word (pydio)      -- LinkPreview, Mention} from '@pydio/protocol-messaging'
+src/script/conversation/EventMapper.ts:20:38     - Unknown word (pydio)      -- LinkPreview, Mention} from '@pydio/protocol-messaging'
+src/script/conversation/EventMapper.ts:21:88     - Unknown word (wireapp)    -- onProtocolUpdateEvent} from '@wireapp/api-client/lib/event
+src/script/conversation/EventMapper.ts:22:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
+src/script/conversation/EventMapper.ts:341:62    - Unknown word (Finalisation) -- apEventJoinedAfterMLSMigrationFinalisation();
+src/script/conversation/EventMapper.ts:444:25    - Unknown word (Reactable)    -- if (messageEntity.isReactable()) {
+src/script/conversation/EventMapper.ts:59:100    - Unknown word (Finalisation) -- JoinedAfterMLSMigrationFinalisationMessage';
+src/script/conversation/EventMapper.ts:59:32     - Unknown word (Finalisation) -- JoinedAfterMLSMigrationFinalisationMessage} from '../entity
+src/script/conversation/EventMapper.ts:69:21     - Unknown word (Finalisation) -- import {MLSMigrationFinalisationOngoingCallMessage} from
+src/script/conversation/EventMapper.ts:69:89     - Unknown word (Finalisation) -- message/MLSMigrationFinalisationOngoingCallMessage';
+src/script/conversation/MessageRepository.test.ts:20:33     - Unknown word (pydio)      -- LegalHoldStatus} from '@pydio/protocol-messaging'
+src/script/conversation/MessageRepository.test.ts:21:34     - Unknown word (wireapp)    -- ConnectionStatus} from '@wireapp/api-client/lib/connection
+src/script/conversation/MessageRepository.test.ts:22:35     - Unknown word (wireapp)    -- CONVERSATION_TYPE} from '@wireapp/api-client/lib/conversation
+src/script/conversation/MessageRepository.test.ts:23:38     - Unknown word (wireapp)    -- ConversationProtocol} from '@wireapp/api-client/lib/conversation
 src/script/conversation/MessageRepository.test.ts:243:26    - Unknown word (selfid)     -- userIds: {'': {selfid: [], user1: []}},
-src/script/conversation/MessageRepository.test.ts:25:25     - Unknown word (wireapp)    -- import {Account} from '@wireapp/core';
+src/script/conversation/MessageRepository.test.ts:24:37     - Unknown word (wireapp)    -- MessageSendingState} from '@wireapp/core/lib/conversation
+src/script/conversation/MessageRepository.test.ts:26:25     - Unknown word (wireapp)    -- import {Account} from '@wireapp/core';
 src/script/conversation/MessageRepository.test.ts:283:9     - Unknown word (unverifies) -- it('unverifies device if fingerprint
 src/script/conversation/MessageRepository.test.ts:347:11    - Unknown word (haha)       -- ['haha', [userId]],
 src/script/conversation/MessageRepository.test.ts:351:25    - Unknown word (haha)       -- const reaction = 'haha';
@@ -1540,17 +1556,18 @@ src/script/conversation/MessageRepository.ts:1565:37   - Unknown word (Segmentat
 src/script/conversation/MessageRepository.ts:1580:9    - Unknown word (segmentations) -- segmentations = {
 src/script/conversation/MessageRepository.ts:1581:14   - Unknown word (segmentations) -- ...segmentations,
 src/script/conversation/MessageRepository.ts:1586:76   - Unknown word (segmentations) -- EventName.CONTRIBUTED, segmentations);
-src/script/conversation/MessageRepository.ts:20:82     - Unknown word (wireapp)    -- QualifiedUserClients} from '@wireapp/api-client/lib/conversation
-src/script/conversation/MessageRepository.ts:21:35     - Unknown word (wireapp)    -- BackendErrorLabel} from '@wireapp/api-client/lib/http
-src/script/conversation/MessageRepository.ts:22:55     - Unknown word (wireapp)    -- uestCancellationError} from '@wireapp/api-client/lib/user
-src/script/conversation/MessageRepository.ts:30:10     - Unknown word (wireapp)    -- } from '@wireapp/core/lib/conversation
+src/script/conversation/MessageRepository.ts:20:67     - Unknown word (pydio)      -- GenericMessage} from '@pydio/protocol-messaging'
+src/script/conversation/MessageRepository.ts:21:82     - Unknown word (wireapp)    -- QualifiedUserClients} from '@wireapp/api-client/lib/conversation
+src/script/conversation/MessageRepository.ts:22:35     - Unknown word (wireapp)    -- BackendErrorLabel} from '@wireapp/api-client/lib/http
+src/script/conversation/MessageRepository.ts:23:55     - Unknown word (wireapp)    -- uestCancellationError} from '@wireapp/api-client/lib/user
+src/script/conversation/MessageRepository.ts:31:10     - Unknown word (wireapp)    -- } from '@wireapp/core/lib/conversation
 src/script/conversation/MessageRepository.ts:353:24    - Unknown word (explicitely)   -- // We set the id explicitely in order to be able
-src/script/conversation/MessageRepository.ts:37:10     - Unknown word (wireapp)    -- } from '@wireapp/core/lib/conversation
+src/script/conversation/MessageRepository.ts:38:10     - Unknown word (wireapp)    -- } from '@wireapp/core/lib/conversation
 src/script/conversation/MessageRepository.ts:394:49    - Unknown word (explicitely)   -- ), // We set the id explicitely in order to be able
 src/script/conversation/MessageRepository.ts:442:24    - Unknown word (giphy)         -- * @param url URL of giphy image
-src/script/conversation/MessageRepository.ts:44:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 src/script/conversation/MessageRepository.ts:454:26    - Unknown word (Giphy)         -- tag = t('extensionsGiphyRandom');
 src/script/conversation/MessageRepository.ts:458:38    - Unknown word (Giphy)         -- textMessage = t('extensionsGiphyMessage', {tag: tag as
+src/script/conversation/MessageRepository.ts:45:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 src/script/conversation/MessageRepository.ts:500:34    - Unknown word (messsage)      -- originalId Id of the messsage currently in db, necessary
 src/script/conversation/MessageRepository.ts:526:43    - Unknown word (Remotedata)    -- await this.sendAssetRemotedata(conversation, file,
 src/script/conversation/MessageRepository.ts:538:69    - Unknown word (MILLIS)        -- uploadStarted) / TIME_IN_MILLIS.SECOND;
@@ -1579,19 +1596,19 @@ src/script/conversation/linkPreviews/index.ts:22:11     - Unknown word (Arrayify
 src/script/conversation/linkPreviews/index.ts:41:3      - Unknown word (permanant)  -- permanantUrl: string;
 src/script/conversation/linkPreviews/index.ts:54:57     - Unknown word (Popout)     -- string; supportsCallingPopoutWindow?: boolean};
 src/script/conversation/userClientsUtils.ts:20:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
-src/script/cryptography/CryptographyMapper.test.ts:110:19    - Unknown word (Millis)     -- durationInMillis: duration * 1000,
-src/script/cryptography/CryptographyMapper.test.ts:20:36     - Unknown word (wireapp)    -- CONVERSATION_EVENT} from '@wireapp/api-client/lib/event
-src/script/cryptography/CryptographyMapper.test.ts:21:36     - Unknown word (wireapp)    -- GenericMessageType} from '@wireapp/core/lib/conversation
-src/script/cryptography/CryptographyMapper.test.ts:39:10     - Unknown word (wireapp)    -- } from '@wireapp/protocol-messaging'
-src/script/cryptography/CryptographyMapper.test.ts:604:9     - Unknown word (sessid)     -- sessid: 'asd2',
-src/script/cryptography/CryptographyMapper.ts:24:10     - Unknown word (wireapp)    -- } from '@wireapp/api-client/lib/event
-src/script/cryptography/CryptographyMapper.ts:25:36     - Unknown word (wireapp)    -- GenericMessageType} from '@wireapp/core/lib/conversation
-src/script/cryptography/CryptographyMapper.ts:26:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
-src/script/cryptography/CryptographyMapper.ts:375:53    - Unknown word (Millis)     -- audioData.durationInMillis
-src/script/cryptography/CryptographyMapper.ts:376:38    - Unknown word (Millis)     -- audioData.durationInMillis) / TIME_IN_MILLIS.SECOND
-src/script/cryptography/CryptographyMapper.ts:376:56    - Unknown word (MILLIS)     -- durationInMillis) / TIME_IN_MILLIS.SECOND
-src/script/cryptography/CryptographyMapper.ts:54:10     - Unknown word (wireapp)    -- } from '@wireapp/protocol-messaging'
-src/script/cryptography/CryptographyMapper.ts:58:17     - Unknown word (MILLIS)     -- import {TIME_IN_MILLIS} from 'Util/TimeUtil
+src/script/cryptography/CryptographyMapper.test.ts:109:19    - Unknown word (Millis)     -- durationInMillis: duration * 1000,
+src/script/cryptography/CryptographyMapper.test.ts:35:10     - Unknown word (pydio)      -- } from '@pydio/protocol-messaging'
+src/script/cryptography/CryptographyMapper.test.ts:36:36     - Unknown word (wireapp)    -- CONVERSATION_EVENT} from '@wireapp/api-client/lib/event
+src/script/cryptography/CryptographyMapper.test.ts:37:36     - Unknown word (wireapp)    -- GenericMessageType} from '@wireapp/core/lib/conversation
+src/script/cryptography/CryptographyMapper.test.ts:603:9     - Unknown word (sessid)     -- sessid: 'asd2',
+src/script/cryptography/CryptographyMapper.ts:374:53    - Unknown word (Millis)     -- audioData.durationInMillis
+src/script/cryptography/CryptographyMapper.ts:375:38    - Unknown word (Millis)     -- audioData.durationInMillis) / TIME_IN_MILLIS.SECOND
+src/script/cryptography/CryptographyMapper.ts:375:56    - Unknown word (MILLIS)     -- durationInMillis) / TIME_IN_MILLIS.SECOND
+src/script/cryptography/CryptographyMapper.ts:46:10     - Unknown word (pydio)      -- } from '@pydio/protocol-messaging'
+src/script/cryptography/CryptographyMapper.ts:51:10     - Unknown word (wireapp)    -- } from '@wireapp/api-client/lib/event
+src/script/cryptography/CryptographyMapper.ts:52:36     - Unknown word (wireapp)    -- GenericMessageType} from '@wireapp/core/lib/conversation
+src/script/cryptography/CryptographyMapper.ts:53:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
+src/script/cryptography/CryptographyMapper.ts:57:17     - Unknown word (MILLIS)     -- import {TIME_IN_MILLIS} from 'Util/TimeUtil
 src/script/cryptography/CryptographyRepository.ts:20:46     - Unknown word (wireapp)    -- BackendPreKey} from '@wireapp/api-client/lib/auth
 src/script/cryptography/CryptographyRepository.ts:21:34     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
 src/script/cryptography/CryptographyRepository.ts:22:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
@@ -1608,12 +1625,13 @@ src/script/entity/Conversation.test.ts:678:39    - Unknown word (TSFI)       -- 
 src/script/entity/Conversation.test.ts:681:60    - Unknown word (otherdomain) -- Conversation(createUuid(), 'otherdomain.test');
 src/script/entity/Conversation.test.ts:896:27    - Unknown word (wireapp)     -- /** @type {import('@wireapp/api-client/lib/connection
 src/script/entity/Conversation.ts:144:21    - Unknown word (Leavable)   -- public readonly isLeavable: ko.PureComputed<boolean
-src/script/entity/Conversation.ts:26:10     - Unknown word (wireapp)    -- } from '@wireapp/api-client/lib/conversation
-src/script/entity/Conversation.ts:27:30     - Unknown word (wireapp)    -- RECEIPT_MODE} from '@wireapp/api-client/lib/conversation
-src/script/entity/Conversation.ts:28:38     - Unknown word (wireapp)    -- ConversationProtocol} from '@wireapp/api-client/lib/conversation
-src/script/entity/Conversation.ts:29:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
-src/script/entity/Conversation.ts:32:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
-src/script/entity/Conversation.ts:35:33     - Unknown word (wireapp)    -- LegalHoldStatus} from '@wireapp/protocol-messaging'
+src/script/entity/Conversation.ts:20:33     - Unknown word (pydio)      -- LegalHoldStatus} from '@pydio/protocol-messaging'
+src/script/entity/Conversation.ts:27:10     - Unknown word (wireapp)    -- } from '@wireapp/api-client/lib/conversation
+src/script/entity/Conversation.ts:28:30     - Unknown word (wireapp)    -- RECEIPT_MODE} from '@wireapp/api-client/lib/conversation
+src/script/entity/Conversation.ts:29:38     - Unknown word (wireapp)    -- ConversationProtocol} from '@wireapp/api-client/lib/conversation
+src/script/entity/Conversation.ts:30:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
+src/script/entity/Conversation.ts:33:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
+src/script/entity/Conversation.ts:36:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
 src/script/entity/Conversation.ts:394:12    - Unknown word (Leavable)   -- this.isLeavable = ko.pureComputed((
 src/script/entity/Conversation.ts:719:57    - Unknown word (incomming)  -- active, push message to incomming message and update the
 src/script/entity/User/User.ts:121:16    - Unknown word (scim)       -- SCIM: 'scim',
@@ -1621,10 +1639,10 @@ src/script/entity/User/User.ts:121:9     - Unknown word (SCIM)       -- SCIM: 's
 src/script/entity/User/User.ts:125:38    - Unknown word (MILLIS)     -- EXPIRATION_INTERVAL: TIME_IN_MILLIS.MINUTE,
 src/script/entity/User/User.ts:126:39    - Unknown word (MILLIS)     -- EXPIRATION_THRESHOLD: TIME_IN_MILLIS.SECOND * 10,
 src/script/entity/User/User.ts:127:27    - Unknown word (MILLIS)     -- LIFETIME: TIME_IN_MILLIS.DAY,
-src/script/entity/User/User.ts:20:34     - Unknown word (wireapp)    -- ConnectionStatus} from '@wireapp/api-client/lib/connection
-src/script/entity/User/User.ts:21:38     - Unknown word (wireapp)    -- ConversationProtocol} from '@wireapp/api-client/lib/conversation
-src/script/entity/User/User.ts:22:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
-src/script/entity/User/User.ts:26:30     - Unknown word (wireapp)    -- Availability} from '@wireapp/protocol-messaging'
+src/script/entity/User/User.ts:20:30     - Unknown word (pydio)      -- Availability} from '@pydio/protocol-messaging'
+src/script/entity/User/User.ts:21:34     - Unknown word (wireapp)    -- ConnectionStatus} from '@wireapp/api-client/lib/connection
+src/script/entity/User/User.ts:22:38     - Unknown word (wireapp)    -- ConversationProtocol} from '@wireapp/api-client/lib/conversation
+src/script/entity/User/User.ts:23:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
 src/script/entity/User/User.ts:27:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
 src/script/entity/User/User.ts:32:17     - Unknown word (MILLIS)     -- import {TIME_IN_MILLIS} from 'Util/TimeUtil
 src/script/entity/User/User.ts:331:64    - Unknown word (MILLIS)     -- remainingTime / TIME_IN_MILLIS.MINUTE);
@@ -1637,33 +1655,33 @@ src/script/entity/message/DecryptErrorMessage.ts:20:31     - Unknown word (wirea
 src/script/entity/message/DeleteConversationMessage.ts:20:28     - Unknown word (wireapp)    -- {TEAM_EVENT} from '@wireapp/api-client/lib/event
 src/script/entity/message/E2EIVerificationMessage.ts:20:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
 src/script/entity/message/FailedToAddUsersMessage.ts:20:33     - Unknown word (wireapp)    -- AddUsersFailure} from '@wireapp/core/lib/conversation
-src/script/entity/message/FileAsset.ts:22:45     - Unknown word (wireapp)    -- ProtobufAsset} from '@wireapp/protocol-messaging'
+src/script/entity/message/FileAsset.ts:20:45     - Unknown word (pydio)      -- ProtobufAsset} from '@pydio/protocol-messaging'
 src/script/entity/message/JoinedAfterMLSMigrationFinalisationMessage.ts:26:37     - Unknown word (Finalisation) -- JoinedAfterMLSMigrationFinalisationMessage extends SystemMessage
 src/script/entity/message/JoinedAfterMLSMigrationFinalisationMessage.ts:31:43     - Unknown word (Finalisation) -- rsationJoinedAfterMLSMigrationFinalisation',
-src/script/entity/message/LegalHoldMessage.ts:20:33     - Unknown word (wireapp)    -- LegalHoldStatus} from '@wireapp/protocol-messaging'
+src/script/entity/message/LegalHoldMessage.ts:20:33     - Unknown word (pydio)      -- LegalHoldStatus} from '@pydio/protocol-messaging'
 src/script/entity/message/LegalHoldMessage.ts:35:33     - Unknown word (LEGALHOLD)  -- super_type = SuperType.LEGALHOLD;
-src/script/entity/message/LinkPreview.ts:20:29     - Unknown word (wireapp)    -- type {ITweet} from '@wireapp/protocol-messaging'
+src/script/entity/message/LinkPreview.ts:20:29     - Unknown word (pydio)      -- type {ITweet} from '@pydio/protocol-messaging'
 src/script/entity/message/MLSMigrationFinalisationOngoingCallMessage.ts:25:26     - Unknown word (Finalisation) -- export class MLSMigrationFinalisationOngoingCallMessage extends
 src/script/entity/message/MLSMigrationFinalisationOngoingCallMessage.ts:29:47     - Unknown word (Finalisation) -- conversationMLSMigrationFinalisationOngoingCall');
 src/script/entity/message/MemberMessage.ts:20:35     - Unknown word (wireapp)    -- MemberLeaveReason} from '@wireapp/api-client/lib/conversation
 src/script/entity/message/MemberMessage.ts:21:36     - Unknown word (wireapp)    -- CONVERSATION_EVENT} from '@wireapp/api-client/lib/event
 src/script/entity/message/MemberMessage.ts:22:34     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
-src/script/entity/message/Message.ts:157:58    - Unknown word (MILLIS)     -- timestamp() / TIME_IN_MILLIS.SECOND);
-src/script/entity/message/Message.ts:162:58    - Unknown word (MILLIS)     -- timestamp() / TIME_IN_MILLIS.SECOND);
-src/script/entity/message/Message.ts:20:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
-src/script/entity/message/Message.ts:23:38     - Unknown word (wireapp)    -- LegalHoldStatus} from '@wireapp/protocol-messaging'
-src/script/entity/message/Message.ts:26:90     - Unknown word (MILLIS)     -- fromUnixTime, TIME_IN_MILLIS} from 'Util/TimeUtil
-src/script/entity/message/Message.ts:309:29    - Unknown word (undecryptable) -- Check if message is an undecryptable message.
-src/script/entity/message/Message.ts:337:42    - Unknown word (LEGALHOLD)     -- super_type === SuperType.LEGALHOLD;
-src/script/entity/message/Message.ts:393:5     - Unknown word (Reactable)     -- isReactable(): this is ContentMessage
-src/script/entity/message/Message.ts:407:5     - Unknown word (Replyable)     -- isReplyable(): boolean {
+src/script/entity/message/Message.ts:156:58    - Unknown word (MILLIS)     -- timestamp() / TIME_IN_MILLIS.SECOND);
+src/script/entity/message/Message.ts:161:58    - Unknown word (MILLIS)     -- timestamp() / TIME_IN_MILLIS.SECOND);
+src/script/entity/message/Message.ts:20:38     - Unknown word (pydio)      -- LegalHoldStatus} from '@pydio/protocol-messaging'
+src/script/entity/message/Message.ts:21:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
+src/script/entity/message/Message.ts:25:90     - Unknown word (MILLIS)     -- fromUnixTime, TIME_IN_MILLIS} from 'Util/TimeUtil
+src/script/entity/message/Message.ts:308:29    - Unknown word (undecryptable) -- Check if message is an undecryptable message.
+src/script/entity/message/Message.ts:336:42    - Unknown word (LEGALHOLD)     -- super_type === SuperType.LEGALHOLD;
+src/script/entity/message/Message.ts:392:5     - Unknown word (Reactable)     -- isReactable(): this is ContentMessage
+src/script/entity/message/Message.ts:406:5     - Unknown word (Replyable)     -- isReplyable(): boolean {
 src/script/entity/message/MessageTimerUpdateMessage.ts:20:36     - Unknown word (wireapp)    -- CONVERSATION_EVENT} from '@wireapp/api-client/lib/event
 src/script/entity/message/ProtocolUpdateMessage.ts:20:38     - Unknown word (wireapp)    -- ConversationProtocol} from '@wireapp/api-client/lib/conversation
 src/script/entity/message/ReceiptModeUpdateMessage.ts:20:36     - Unknown word (wireapp)    -- CONVERSATION_EVENT} from '@wireapp/api-client/lib/event
 src/script/entity/message/RenameMessage.ts:20:36     - Unknown word (wireapp)    -- CONVERSATION_EVENT} from '@wireapp/api-client/lib/event
 src/script/entity/message/RenameMessage.ts:21:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 src/script/entity/message/Text.ts:20:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
-src/script/entity/message/VerificationMessage.ts:22:33     - Unknown word (wireapp)    -- QualifiedUserId} from '@wireapp/protocol-messaging'
+src/script/entity/message/VerificationMessage.ts:20:33     - Unknown word (pydio)      -- QualifiedUserId} from '@pydio/protocol-messaging'
 src/script/ephemeral/EphemeralTimings.ts:20:17     - Unknown word (MILLIS)     -- import {TIME_IN_MILLIS} from 'Util/TimeUtil
 src/script/ephemeral/EphemeralTimings.ts:24:13     - Unknown word (MILLIS)     -- TIME_IN_MILLIS.SECOND * 10,
 src/script/ephemeral/EphemeralTimings.ts:25:13     - Unknown word (MILLIS)     -- TIME_IN_MILLIS.MINUTE * 5,
@@ -1685,16 +1703,16 @@ src/script/event/EventRepository.ts:36:17     - Unknown word (MILLIS)     -- imp
 src/script/event/EventRepository.ts:412:17    - Unknown word (Outated)        -- 208, // Outated event decyption error
 src/script/event/EventRepository.ts:412:31    - Unknown word (decyption)      -- 8, // Outated event decyption error (see https://github
 src/script/event/EventRepository.ts:68:38     - Unknown word (MILLIS)     -- EVENT_LIFETIME: TIME_IN_MILLIS.SECOND * 30,
-src/script/event/EventService.ts:20:36     - Unknown word (wireapp)    -- CONVERSATION_EVENT} from '@wireapp/api-client/lib/event
-src/script/event/EventService.ts:21:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
-src/script/event/EventService.ts:22:14     - Unknown word (Dexie)      -- import type {Dexie} from 'dexie';
-src/script/event/EventService.ts:22:27     - Unknown word (dexie)      -- import type {Dexie} from 'dexie';
-src/script/event/EventService.ts:23:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
-src/script/event/EventService.ts:246:28    - Unknown word (Dexie)      -- ? await (events as Dexie.Collection<any, any
-src/script/event/EventService.ts:25:40     - Unknown word (wireapp)    -- ProtobufAsset} from '@wireapp/protocol-messaging'
-src/script/event/EventService.ts:41:24     - Unknown word (Dexie)      -- type DexieCollection = Dexie.Collection<any, any
-src/script/event/EventService.ts:41:6      - Unknown word (Dexie)      -- type DexieCollection = Dexie.Collection
-src/script/event/EventService.ts:42:24     - Unknown word (Dexie)      -- export type DBEvents = DexieCollection | EventRecord
+src/script/event/EventService.ts:20:40     - Unknown word (pydio)      -- ProtobufAsset} from '@pydio/protocol-messaging'
+src/script/event/EventService.ts:21:36     - Unknown word (wireapp)    -- CONVERSATION_EVENT} from '@wireapp/api-client/lib/event
+src/script/event/EventService.ts:22:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
+src/script/event/EventService.ts:23:14     - Unknown word (Dexie)      -- import type {Dexie} from 'dexie';
+src/script/event/EventService.ts:23:27     - Unknown word (dexie)      -- import type {Dexie} from 'dexie';
+src/script/event/EventService.ts:245:28    - Unknown word (Dexie)      -- ? await (events as Dexie.Collection<any, any
+src/script/event/EventService.ts:24:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
+src/script/event/EventService.ts:40:24     - Unknown word (Dexie)      -- type DexieCollection = Dexie.Collection<any, any
+src/script/event/EventService.ts:40:6      - Unknown word (Dexie)      -- type DexieCollection = Dexie.Collection
+src/script/event/EventService.ts:41:24     - Unknown word (Dexie)      -- export type DBEvents = DexieCollection | EventRecord
 src/script/event/EventSource.ts:20:36     - Unknown word (wireapp)    -- NotificationSource} from '@wireapp/core/lib/notification
 src/script/event/EventTypeHandling.ts:20:55     - Unknown word (wireapp)    -- ConversationEvent} from '@wireapp/api-client/lib/event
 src/script/event/EventValidator.test.ts:20:37     - Unknown word (wireapp)    -- CONVERSATION_TYPING} from '@wireapp/api-client/lib/conversation
@@ -1703,15 +1721,15 @@ src/script/event/EventValidator.ts:20:48     - Unknown word (wireapp)    -- USER
 src/script/event/NotificationService.ts:20:39     - Unknown word (wireapp)    -- NotificationList} from '@wireapp/api-client/lib/notification
 src/script/event/NotificationService.ts:21:30     - Unknown word (wireapp)    -- DatabaseKeys} from '@wireapp/core/lib/notification
 src/script/event/NotificationService.ts:22:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
-src/script/event/preprocessor/EventStorageMiddleware/EventStorageMiddleware.test.ts:20:40     - Unknown word (wireapp)    -- ProtobufAsset} from '@wireapp/protocol-messaging'
+src/script/event/preprocessor/EventStorageMiddleware/EventStorageMiddleware.test.ts:20:40     - Unknown word (pydio)      -- ProtobufAsset} from '@pydio/protocol-messaging'
 src/script/event/preprocessor/EventStorageMiddleware/EventStorageMiddleware.ts:103:21    - Unknown word (Partof)     -- const usersNotPartofConversation = qualifiedUserId
 src/script/event/preprocessor/EventStorageMiddleware/EventStorageMiddleware.ts:113:19    - Unknown word (Partof)     -- if (usersNotPartofConversation) {
 src/script/event/preprocessor/EventStorageMiddleware/EventStorageMiddleware.ts:20:36     - Unknown word (wireapp)    -- CONVERSATION_EVENT} from '@wireapp/api-client/lib/event
 src/script/event/preprocessor/EventStorageMiddleware/EventStorageMiddleware.ts:21:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
-src/script/event/preprocessor/EventStorageMiddleware/eventHandlers/assetEventHandler.ts:20:40     - Unknown word (wireapp)    -- ProtobufAsset} from '@wireapp/protocol-messaging'
+src/script/event/preprocessor/EventStorageMiddleware/eventHandlers/assetEventHandler.ts:20:40     - Unknown word (pydio)      -- ProtobufAsset} from '@pydio/protocol-messaging'
 src/script/event/preprocessor/EventStorageMiddleware/types.ts:20:35     - Unknown word (wireapp)    -- ConversationEvent} from '@wireapp/api-client/lib/event
-src/script/event/preprocessor/QuoteDecoderMiddleware.test.ts:20:23     - Unknown word (wireapp)    -- import {Quote} from '@wireapp/protocol-messaging'
-src/script/event/preprocessor/QuoteDecoderMiddleware.ts:20:23     - Unknown word (wireapp)    -- import {Quote} from '@wireapp/protocol-messaging'
+src/script/event/preprocessor/QuoteDecoderMiddleware.test.ts:20:23     - Unknown word (pydio)      -- import {Quote} from '@pydio/protocol-messaging'
+src/script/event/preprocessor/QuoteDecoderMiddleware.ts:20:23     - Unknown word (pydio)      -- import {Quote} from '@pydio/protocol-messaging'
 src/script/event/preprocessor/ReceiptsMiddleware.test.ts:63:13     - Unknown word (originale)  -- const originaleEvent = {from: createUuid
 src/script/event/preprocessor/ReceiptsMiddleware.test.ts:64:50     - Unknown word (originale)  -- loadEvents.mockResolvedValue([originaleEvent]);
 src/script/event/preprocessor/ReceiptsMiddleware.ts:20:30     - Unknown word (wireapp)    -- RECEIPT_MODE} from '@wireapp/api-client/lib/conversation
@@ -1808,10 +1826,10 @@ src/script/integration/IntegrationService.ts:20:40     - Unknown word (wireapp) 
 src/script/integration/IntegrationService.ts:21:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 src/script/integration/ServiceEntity.ts:20:54     - Unknown word (wireapp)    -- APIClientUserAsset} from '@wireapp/api-client/lib/user
 src/script/integration/ServiceTag.ts:34:3      - Unknown word (LIFETSTYLE) -- LIFETSTYLE = 'lifestyle',
-src/script/legal-hold/LegalHoldEvaluator.test.ts:20:36     - Unknown word (wireapp)    -- GenericMessageType} from '@wireapp/core/lib/conversation
-src/script/legal-hold/LegalHoldEvaluator.test.ts:22:55     - Unknown word (wireapp)    -- LegalHoldStatus, Text} from '@wireapp/protocol-messaging'
-src/script/legal-hold/LegalHoldEvaluator.ts:20:36     - Unknown word (wireapp)    -- CONVERSATION_EVENT} from '@wireapp/api-client/lib/event
-src/script/legal-hold/LegalHoldEvaluator.ts:22:33     - Unknown word (wireapp)    -- LegalHoldStatus} from '@wireapp/protocol-messaging'
+src/script/legal-hold/LegalHoldEvaluator.test.ts:20:55     - Unknown word (pydio)      -- LegalHoldStatus, Text} from '@pydio/protocol-messaging'
+src/script/legal-hold/LegalHoldEvaluator.test.ts:21:36     - Unknown word (wireapp)    -- GenericMessageType} from '@wireapp/core/lib/conversation
+src/script/legal-hold/LegalHoldEvaluator.ts:20:33     - Unknown word (pydio)      -- LegalHoldStatus} from '@pydio/protocol-messaging'
+src/script/legal-hold/LegalHoldEvaluator.ts:21:36     - Unknown word (wireapp)    -- CONVERSATION_EVENT} from '@wireapp/api-client/lib/event
 src/script/lifecycle/newVersionHandler.ts:21:17     - Unknown word (MILLIS)     -- import {TIME_IN_MILLIS} from 'Util/TimeUtil
 src/script/lifecycle/newVersionHandler.ts:32:32     - Unknown word (MILLIS)     -- CHECK_INTERVAL = TIME_IN_MILLIS.HOUR * 3;
 src/script/lifecycle/updateRemoteConfigs.ts:20:28     - Unknown word (wireapp)    -- {TaskParams} from '@wireapp/core/lib/util/RecurringTaskSc
@@ -1828,12 +1846,19 @@ src/script/main/app.ts:26:38     - Unknown word (wireapp)    -- as CoreEvents} f
 src/script/main/app.ts:30:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 src/script/main/app.ts:32:25     - Unknown word (wireapp)    -- import {Runtime} from '@wireapp/commons';
 src/script/main/app.ts:33:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
+src/script/main/app.ts:347:15    - Unknown word (Pydio)        -- const cellPydioApiKey = Config.getConfig
+src/script/main/app.ts:347:54    - Unknown word (PYDIO)        -- Config.getConfig().CELLS_PYDIO_API_KEY;
+src/script/main/app.ts:351:15    - Unknown word (Pydio)        -- ? cellPydioApiKey
+src/script/main/app.ts:352:18    - Unknown word (Pydio)        -- : `${cellPydioApiKey}:${selfUser.qualifiedId
+src/script/main/app.ts:355:7     - Unknown word (pydio)        -- pydio: {
+src/script/main/app.ts:357:43    - Unknown word (PYDIO)        -- Config.getConfig().CELLS_PYDIO_SEGMENT,
+src/script/main/app.ts:358:39    - Unknown word (PYDIO)        -- Config.getConfig().CELLS_PYDIO_URL,
 src/script/main/app.ts:42:17     - Unknown word (MILLIS)     -- import {TIME_IN_MILLIS} from 'Util/TimeUtil
-src/script/main/app.ts:519:15    - Unknown word (initialise)   -- await initialiseSelfAndTeamConversations
-src/script/main/app.ts:522:46    - Unknown word (Finalisation) -- oinConversationsAfterMigrationFinalisation({
-src/script/main/app.ts:525:71    - Unknown word (Finalisation) -- injectJoinedAfterMigrationFinalisationMessage,
-src/script/main/app.ts:534:44    - Unknown word (initialising) -- logger.error(`Failed when initialising mls conversation with
-src/script/main/app.ts:560:28    - Unknown word (initialise)   -- await selfRepository.initialisePeriodicSelfSupportedProtocols
+src/script/main/app.ts:545:15    - Unknown word (initialise)   -- await initialiseSelfAndTeamConversations
+src/script/main/app.ts:548:46    - Unknown word (Finalisation) -- oinConversationsAfterMigrationFinalisation({
+src/script/main/app.ts:551:71    - Unknown word (Finalisation) -- injectJoinedAfterMigrationFinalisationMessage,
+src/script/main/app.ts:560:44    - Unknown word (initialising) -- logger.error(`Failed when initialising mls conversation with
+src/script/main/app.ts:586:28    - Unknown word (initialise)   -- await selfRepository.initialisePeriodicSelfSupportedProtocols
 src/script/main/app.ts:84:45     - Unknown word (Giphy)      -- from '../extension/GiphyRepository';
 src/script/main/app.ts:84:9      - Unknown word (Giphy)      -- import {GiphyRepository} from '..
 src/script/main/app.ts:85:42     - Unknown word (Giphy)      -- from '../extension/GiphyService';
@@ -1932,9 +1957,9 @@ src/script/media/VideoBackgroundBlur.ts:26:27     - Unknown word (mediapipe)  --
 src/script/media/VideoBackgroundBlur.ts:26:61     - Unknown word (tflite)     -- models/selfie_segmenter.tflite',
 src/script/media/VideoBackgroundBlur.ts:77:23     - Unknown word (Fileset)    -- const video = await FilesetResolver.forVisionTasks
 src/script/media/VideoBackgroundBlur.ts:77:60     - Unknown word (mediapipe)  -- forVisionTasks('/min/mediapipe/wasm');
-src/script/message/MentionEntity.ts:20:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
-src/script/message/MentionEntity.ts:22:35     - Unknown word (wireapp)    -- IMention, Mention} from '@wireapp/protocol-messaging'
-src/script/message/QuoteEntity.ts:20:23     - Unknown word (wireapp)    -- import {Quote} from '@wireapp/protocol-messaging'
+src/script/message/MentionEntity.ts:20:35     - Unknown word (pydio)      -- IMention, Mention} from '@pydio/protocol-messaging'
+src/script/message/MentionEntity.ts:21:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
+src/script/message/QuoteEntity.ts:20:23     - Unknown word (pydio)      -- import {Quote} from '@pydio/protocol-messaging'
 src/script/message/SuperType.ts:30:3      - Unknown word (LEGALHOLD)  -- LEGALHOLD = 'legal-hold',
 src/script/mls/MLSConversations.test.ts:115:13    - Unknown word (initialise) -- await initialiseSelfAndTeamConversations
 src/script/mls/MLSConversations.test.ts:138:13    - Unknown word (initialise) -- await initialiseSelfAndTeamConversations
@@ -2043,19 +2068,20 @@ src/script/mls/MLSMigration/migrationStatus.ts:48:3      - Unknown word (FINALIS
 src/script/mls/MLSMigration/migrationStatus.ts:57:41     - Unknown word (Finalise)   -- sMigrationEnded = hasMigrationFinaliseRegardlessAfterDateArrived
 src/script/mls/MLSMigration/migrationStatus.ts:64:31     - Unknown word (FINALISED)  -- return MLSMigrationStatus.FINALISED;
 src/script/mls/isMLSSupportedByEnvironment.ts:20:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
-src/script/notification/NotificationRepository.test.ts:20:34     - Unknown word (wireapp)    -- ConnectionStatus} from '@wireapp/api-client/lib/connection
-src/script/notification/NotificationRepository.test.ts:21:35     - Unknown word (wireapp)    -- CONVERSATION_TYPE} from '@wireapp/api-client/lib/conversation
-src/script/notification/NotificationRepository.test.ts:22:36     - Unknown word (wireapp)    -- CONVERSATION_EVENT} from '@wireapp/api-client/lib/event
-src/script/notification/NotificationRepository.test.ts:23:40     - Unknown word (wireapp)    -- otificationPreference} from '@wireapp/api-client/lib/user
-src/script/notification/NotificationRepository.test.ts:25:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
-src/script/notification/NotificationRepository.test.ts:27:25     - Unknown word (wireapp)    -- import {Runtime} from '@wireapp/commons';
+src/script/notification/NotificationRepository.test.ts:20:30     - Unknown word (pydio)      -- Availability} from '@pydio/protocol-messaging'
+src/script/notification/NotificationRepository.test.ts:21:34     - Unknown word (wireapp)    -- ConnectionStatus} from '@wireapp/api-client/lib/connection
+src/script/notification/NotificationRepository.test.ts:22:35     - Unknown word (wireapp)    -- CONVERSATION_TYPE} from '@wireapp/api-client/lib/conversation
+src/script/notification/NotificationRepository.test.ts:23:36     - Unknown word (wireapp)    -- CONVERSATION_EVENT} from '@wireapp/api-client/lib/event
+src/script/notification/NotificationRepository.test.ts:24:40     - Unknown word (wireapp)    -- otificationPreference} from '@wireapp/api-client/lib/user
+src/script/notification/NotificationRepository.test.ts:26:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
+src/script/notification/NotificationRepository.test.ts:28:25     - Unknown word (wireapp)    -- import {Runtime} from '@wireapp/commons';
 src/script/notification/NotificationRepository.test.ts:788:51    - Unknown word (Gregor)     -- Text(createUuid(), '@Gregor can you take a look
 src/script/notification/NotificationRepository.ts:103:24    - Unknown word (MILLIS)     -- TIMEOUT: TIME_IN_MILLIS.SECOND * 5,
-src/script/notification/NotificationRepository.ts:20:34     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
-src/script/notification/NotificationRepository.ts:21:58     - Unknown word (wireapp)    -- WebappProperties} from '@wireapp/api-client/lib/user
-src/script/notification/NotificationRepository.ts:24:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
-src/script/notification/NotificationRepository.ts:26:25     - Unknown word (wireapp)    -- import {Runtime} from '@wireapp/commons';
-src/script/notification/NotificationRepository.ts:27:30     - Unknown word (wireapp)    -- Availability} from '@wireapp/protocol-messaging'
+src/script/notification/NotificationRepository.ts:20:30     - Unknown word (pydio)      -- Availability} from '@pydio/protocol-messaging'
+src/script/notification/NotificationRepository.ts:21:34     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
+src/script/notification/NotificationRepository.ts:22:58     - Unknown word (wireapp)    -- WebappProperties} from '@wireapp/api-client/lib/user
+src/script/notification/NotificationRepository.ts:25:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
+src/script/notification/NotificationRepository.ts:27:25     - Unknown word (wireapp)    -- import {Runtime} from '@wireapp/commons';
 src/script/notification/NotificationRepository.ts:28:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
 src/script/notification/NotificationRepository.ts:35:33     - Unknown word (MILLIS)     -- formatDuration, TIME_IN_MILLIS} from 'Util/TimeUtil
 src/script/notification/PreferenceNotificationRepository.test.ts:20:28     - Unknown word (wireapp)    -- {USER_EVENT} from '@wireapp/api-client/lib/event
@@ -2216,7 +2242,7 @@ src/script/page/MainContent/panels/preferences/accountPreferences/AccountSecurit
 src/script/page/MainContent/panels/preferences/accountPreferences/AccountSecuritySection.tsx:26:25     - Unknown word (wireapp)    -- import {Runtime} from '@wireapp/commons';
 src/script/page/MainContent/panels/preferences/accountPreferences/AccountSecuritySection.tsx:27:35     - Unknown word (wireapp)    -- LinkVariant} from '@wireapp/react-ui-kit';
 src/script/page/MainContent/panels/preferences/accountPreferences/AccountSecuritySection.tsx:28:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
-src/script/page/MainContent/panels/preferences/accountPreferences/AvailabilityButtons.tsx:26:30     - Unknown word (wireapp)    -- Availability} from '@wireapp/protocol-messaging'
+src/script/page/MainContent/panels/preferences/accountPreferences/AvailabilityButtons.tsx:23:30     - Unknown word (pydio)      -- Availability} from '@pydio/protocol-messaging'
 src/script/page/MainContent/panels/preferences/accountPreferences/AvailabilityButtons.tsx:27:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
 src/script/page/MainContent/panels/preferences/accountPreferences/AvatarInput.tsx:159:30    - Unknown word (UNFOCUSABLE) -- tabIndex={TabIndex.UNFOCUSABLE}
 src/script/page/MainContent/panels/preferences/accountPreferences/AvatarInput.tsx:22:26     - Unknown word (wireapp)    -- import {TabIndex} from '@wireapp/react-ui-kit/lib/types
@@ -2241,6 +2267,8 @@ src/script/page/MainContent/panels/preferences/avPreferences/DeviceSelect.tsx:24
 src/script/page/MainContent/panels/preferences/avPreferences/SaveCallLogs.tsx:22:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 src/script/page/MainContent/panels/preferences/avPreferences/SaveCallLogs.tsx:24:39     - Unknown word (wireapp)    -- ButtonVariant} from '@wireapp/react-ui-kit';
 src/script/page/MainContent/panels/preferences/components/PreferencesPage.tsx:22:69     - Unknown word (wireapp)    -- useMatchMedia} from '@wireapp/react-ui-kit';
+src/script/page/MainContent/panels/preferences/useCameraReloadOnCallEnd.test.ts:23:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
+src/script/page/MainContent/panels/preferences/useCameraReloadOnCallEnd.ts:24:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
 src/script/page/RightSidebar/AddParticipants/AddParticipants.tsx:22:38     - Unknown word (wireapp)    -- ConversationProtocol} from '@wireapp/api-client/lib/conversation
 src/script/page/RightSidebar/AddParticipants/AddParticipants.tsx:23:26     - Unknown word (wireapp)    -- import {TabIndex} from '@wireapp/react-ui-kit/lib/types
 src/script/page/RightSidebar/AddParticipants/AddParticipants.tsx:26:39     - Unknown word (wireapp)    -- ButtonVariant} from '@wireapp/react-ui-kit';
@@ -2412,10 +2440,6 @@ src/script/service/APIClientSingleton.ts:20:26     - Unknown word (tsyringe)   -
 src/script/service/APIClientSingleton.ts:22:31     - Unknown word (Unconfigured) -- APIClient as APIClientUnconfigured} from '@wireapp/api
 src/script/service/APIClientSingleton.ts:22:52     - Unknown word (wireapp)      -- APIClientUnconfigured} from '@wireapp/api-client';
 src/script/service/APIClientSingleton.ts:27:41     - Unknown word (Unconfigured) -- APIClient extends APIClientUnconfigured {
-src/script/service/APIClientSingleton.ts:36:9      - Unknown word (pydio)        -- pydio: {
-src/script/service/APIClientSingleton.ts:37:44     - Unknown word (PYDIO)        -- Config.getConfig().CELLS_PYDIO_API_KEY,
-src/script/service/APIClientSingleton.ts:38:45     - Unknown word (PYDIO)        -- Config.getConfig().CELLS_PYDIO_SEGMENT,
-src/script/service/APIClientSingleton.ts:39:41     - Unknown word (PYDIO)        -- Config.getConfig().CELLS_PYDIO_URL,
 src/script/service/CoreSingleton.ts:20:37     - Unknown word (tsyringe)   -- container, singleton} from 'tsyringe';
 src/script/service/CoreSingleton.ts:22:25     - Unknown word (wireapp)    -- import {Account} from '@wireapp/core';
 src/script/service/CoreSingleton.ts:64:9      - Unknown word (Prekeys)    -- nbPrekeys: 100,
@@ -2477,11 +2501,11 @@ src/script/storage/StorageService.ts:42:6      - Unknown word (DEXIE)      -- en
 src/script/storage/StorageService.ts:49:15     - Unknown word (Dexie)      -- public db?: DexieDatabase;
 src/script/storage/StorageService.ts:89:30     - Unknown word (Dexie)      -- private _initCrudHooks(db: DexieDatabase): void {
 src/script/storage/record/ClientRecord.ts:20:43     - Unknown word (wireapp)    -- ClientClassification} from '@wireapp/api-client/lib/client
-src/script/storage/record/ConversationRecord.ts:26:10     - Unknown word (wireapp)    -- } from '@wireapp/api-client/lib/conversation
-src/script/storage/record/ConversationRecord.ts:27:30     - Unknown word (wireapp)    -- RECEIPT_MODE} from '@wireapp/api-client/lib/conversation
-src/script/storage/record/ConversationRecord.ts:28:38     - Unknown word (wireapp)    -- ConversationProtocol} from '@wireapp/api-client/lib/conversation
-src/script/storage/record/ConversationRecord.ts:29:34     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
-src/script/storage/record/ConversationRecord.ts:31:33     - Unknown word (wireapp)    -- LegalHoldStatus} from '@wireapp/protocol-messaging'
+src/script/storage/record/ConversationRecord.ts:20:33     - Unknown word (pydio)      -- LegalHoldStatus} from '@pydio/protocol-messaging'
+src/script/storage/record/ConversationRecord.ts:27:10     - Unknown word (wireapp)    -- } from '@wireapp/api-client/lib/conversation
+src/script/storage/record/ConversationRecord.ts:28:30     - Unknown word (wireapp)    -- RECEIPT_MODE} from '@wireapp/api-client/lib/conversation
+src/script/storage/record/ConversationRecord.ts:29:38     - Unknown word (wireapp)    -- ConversationProtocol} from '@wireapp/api-client/lib/conversation
+src/script/storage/record/ConversationRecord.ts:30:34     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
 src/script/storage/record/CryptoboxRecord.ts:20:18     - Unknown word (Cryptobox)  -- export interface CryptoboxRecord {
 src/script/storage/record/CryptoboxRecord.ts:23:3      - Unknown word (serialised) -- serialised: string;
 src/script/storage/record/EventRecord.ts:20:43     - Unknown word (wireapp)    -- QualifiedUserClients} from '@wireapp/api-client/lib/conversation
@@ -2514,14 +2538,15 @@ src/script/team/TeamMemberEntity.ts:26:3      - Unknown word (legalhold)  -- leg
 src/script/team/TeamMemberEntity.ts:31:10     - Unknown word (legalhold)  -- this.legalholdStatus = undefined;
 src/script/team/TeamRepository.test.ts:20:38     - Unknown word (wireapp)    -- ConversationProtocol} from '@wireapp/api-client/lib/conversation
 src/script/team/TeamRepository.test.ts:21:44     - Unknown word (wireapp)    -- FeatureStatus} from '@wireapp/api-client/lib/team
-src/script/team/TeamRepository.ts:20:61     - Unknown word (wireapp)    -- ConversationRolesList} from '@wireapp/api-client/lib/conversation
+src/script/team/TeamRepository.ts:20:30     - Unknown word (pydio)      -- Availability} from '@pydio/protocol-messaging'
+src/script/team/TeamRepository.ts:21:61     - Unknown word (wireapp)    -- ConversationRolesList} from '@wireapp/api-client/lib/conversation
 src/script/team/TeamRepository.ts:227:22    - Unknown word (MILLIS)     -- every: TIME_IN_MILLIS.DAY,
 src/script/team/TeamRepository.ts:250:22    - Unknown word (MILLIS)     -- every: TIME_IN_MILLIS.MINUTE * 5,
-src/script/team/TeamRepository.ts:27:10     - Unknown word (wireapp)    -- } from '@wireapp/api-client/lib/event
-src/script/team/TeamRepository.ts:28:28     - Unknown word (wireapp)    -- {TEAM_EVENT} from '@wireapp/api-client/lib/event
-src/script/team/TeamRepository.ts:29:57     - Unknown word (wireapp)    -- FeatureStatus} from '@wireapp/api-client/lib/team
-src/script/team/TeamRepository.ts:30:38     - Unknown word (wireapp)    -- PermissionsData} from '@wireapp/api-client/lib/team
-src/script/team/TeamRepository.ts:34:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
+src/script/team/TeamRepository.ts:28:10     - Unknown word (wireapp)    -- } from '@wireapp/api-client/lib/event
+src/script/team/TeamRepository.ts:29:28     - Unknown word (wireapp)    -- {TEAM_EVENT} from '@wireapp/api-client/lib/event
+src/script/team/TeamRepository.ts:30:57     - Unknown word (wireapp)    -- FeatureStatus} from '@wireapp/api-client/lib/team
+src/script/team/TeamRepository.ts:31:38     - Unknown word (wireapp)    -- PermissionsData} from '@wireapp/api-client/lib/team
+src/script/team/TeamRepository.ts:35:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 src/script/team/TeamRepository.ts:44:17     - Unknown word (MILLIS)     -- import {TIME_IN_MILLIS} from 'Util/TimeUtil
 src/script/team/TeamRepository.ts:468:26    - Unknown word (Detete)     -- await this.onMemberDetete();
 src/script/team/TeamRepository.ts:474:14    - Unknown word (conv)       -- data: {conv: conversationId},
@@ -2578,11 +2603,11 @@ src/script/tracking/Telemetry.helpers.ts:41:7      - Unknown word (COUNTLY)    -
 src/script/tracking/Telemetry.helpers.ts:44:101    - Unknown word (COUNTLY)    -- Countly logging is ${COUNTLY_ENABLE_LOGGING ? 'enabled
 src/script/tracking/Telemetry.helpers.ts:44:80     - Unknown word (Countly)    -- environment: ${name}. Countly logging is ${COUNTLY
 src/script/tracking/Telemetry.helpers.ts:54:10     - Unknown word (COUNTLY)    -- const {COUNTLY_API_KEY, COUNTLY_ALLOWED
-src/script/ui/AvailabilityContextMenu.ts:22:30     - Unknown word (wireapp)    -- Availability} from '@wireapp/protocol-messaging'
+src/script/ui/AvailabilityContextMenu.ts:20:30     - Unknown word (pydio)      -- Availability} from '@pydio/protocol-messaging'
 src/script/ui/AvailabilityContextMenu.ts:23:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
 src/script/ui/ContextMenu.tsx:108:54    - Unknown word (begings)    -- such as 10 seconds etc begings with digit which is
 src/script/ui/ContextMenu.tsx:128:90    - Unknown word (trigerer)   -- the menu and focus the trigerer
-src/script/ui/ContextMenu.tsx:25:30     - Unknown word (wireapp)    -- Availability} from '@wireapp/protocol-messaging'
+src/script/ui/ContextMenu.tsx:22:30     - Unknown word (pydio)      -- Availability} from '@pydio/protocol-messaging'
 src/script/ui/ContextMenu.tsx:26:37     - Unknown word (wireapp)    -- StyledApp, THEME_ID} from '@wireapp/react-ui-kit';
 src/script/ui/Shortcut.ts:153:33    - Unknown word (graveaccent) -- macos: 'command + alt + graveaccent', // KeyboardJS fires
 src/script/ui/Shortcut.ts:162:49    - Unknown word (graveaccent) -- platformSpecificShortcut, 'graveaccent')) {
@@ -2603,8 +2628,8 @@ src/script/user/AppLockRepository.ts:21:37     - Unknown word (tsyringe)   -- co
 src/script/user/AppLockRepository.ts:97:21     - Unknown word (Applock)    -- title: t('ApplockDisableHeadline'),
 src/script/user/AppLockState.ts:20:31     - Unknown word (wireapp)    -- FeatureStatus} from '@wireapp/api-client/lib/team
 src/script/user/AppLockState.ts:22:37     - Unknown word (tsyringe)   -- container, singleton} from 'tsyringe';
-src/script/user/AvailabilityMapper.ts:20:30     - Unknown word (wireapp)    -- Availability} from '@wireapp/protocol-messaging'
-src/script/user/AvailabilityModal.ts:20:30     - Unknown word (wireapp)    -- Availability} from '@wireapp/protocol-messaging'
+src/script/user/AvailabilityMapper.ts:20:30     - Unknown word (pydio)      -- Availability} from '@pydio/protocol-messaging'
+src/script/user/AvailabilityModal.ts:20:30     - Unknown word (pydio)      -- Availability} from '@pydio/protocol-messaging'
 src/script/user/AvailabilityModal.ts:38:20     - Unknown word (dont)       -- action: (dontShowAgain?: boolean)
 src/script/user/AvailabilityModal.ts:39:17     - Unknown word (dont)       -- if (dontShowAgain) {
 src/script/user/AvailabilityModal.ts:47:39     - Unknown word (Dont)       -- t('modalAvailabilityDontShowAgain'),
@@ -2613,23 +2638,25 @@ src/script/user/RichProfileRepository.ts:21:37     - Unknown word (tsyringe)   -
 src/script/user/UserFilter.ts:20:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
 src/script/user/UserGuards.ts:20:42     - Unknown word (wireapp)    -- SelfAPIUser} from '@wireapp/api-client/lib/self
 src/script/user/UserHandleGenerator.ts:20:22     - Unknown word (speakingurl) -- import getSlug from 'speakingurl';
-src/script/user/UserMapper.test.ts:20:42     - Unknown word (wireapp)    -- UserAssetType} from '@wireapp/api-client/lib/user
-src/script/user/UserMapper.test.ts:22:30     - Unknown word (wireapp)    -- Availability} from '@wireapp/protocol-messaging'
-src/script/user/UserMapper.test.ts:68:39     - Unknown word (TSFI)       -- Federation @SF.Separation @TSFI.UserInterface @S0.2
-src/script/user/UserMapper.test.ts:76:35     - Unknown word (otherdomain) -- qualified_id: {domain: 'otherdomain.test', id: 'id'},
+src/script/user/UserMapper.test.ts:20:30     - Unknown word (pydio)      -- Availability} from '@pydio/protocol-messaging'
+src/script/user/UserMapper.test.ts:21:42     - Unknown word (wireapp)    -- UserAssetType} from '@wireapp/api-client/lib/user
+src/script/user/UserMapper.test.ts:67:39     - Unknown word (TSFI)       -- Federation @SF.Separation @TSFI.UserInterface @S0.2
+src/script/user/UserMapper.test.ts:75:35     - Unknown word (otherdomain) -- qualified_id: {domain: 'otherdomain.test', id: 'id'},
 src/script/user/UserPermission.ts:20:22     - Unknown word (wireapp)    -- import {Role} from '@wireapp/api-client/lib/team
 src/script/user/UserPermission.ts:21:38     - Unknown word (wireapp)    -- PermissionsData} from '@wireapp/api-client/lib/team
-src/script/user/UserRepository.test.ts:21:38     - Unknown word (wireapp)    -- ConversationProtocol} from '@wireapp/api-client/lib/conversation
-src/script/user/UserRepository.test.ts:22:30     - Unknown word (wireapp)    -- RECEIPT_MODE} from '@wireapp/api-client/lib/conversation
-src/script/user/UserRepository.test.ts:23:45     - Unknown word (wireapp)    -- UserUpdateEvent} from '@wireapp/api-client/lib/event
-src/script/user/UserRepository.test.ts:24:44     - Unknown word (wireapp)    -- APIClientUser} from '@wireapp/api-client/lib/user
-src/script/user/UserRepository.test.ts:28:30     - Unknown word (wireapp)    -- Availability} from '@wireapp/protocol-messaging'
-src/script/user/UserRepository.ts:20:48     - Unknown word (wireapp)    -- PublicClient} from '@wireapp/api-client/lib/client
-src/script/user/UserRepository.ts:21:38     - Unknown word (wireapp)    -- ConversationProtocol} from '@wireapp/api-client/lib/conversation
-src/script/user/UserRepository.ts:28:10     - Unknown word (wireapp)    -- } from '@wireapp/api-client/lib/event
-src/script/user/UserRepository.ts:29:47     - Unknown word (wireapp)    -- TraceState} from '@wireapp/api-client/lib/http
-src/script/user/UserRepository.ts:30:35     - Unknown word (wireapp)    -- BackendErrorLabel} from '@wireapp/api-client/lib/http
-src/script/user/UserRepository.ts:40:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
+src/script/user/UserRepository.test.ts:21:30     - Unknown word (pydio)      -- Availability} from '@pydio/protocol-messaging'
+src/script/user/UserRepository.test.ts:22:38     - Unknown word (wireapp)    -- ConversationProtocol} from '@wireapp/api-client/lib/conversation
+src/script/user/UserRepository.test.ts:23:30     - Unknown word (wireapp)    -- RECEIPT_MODE} from '@wireapp/api-client/lib/conversation
+src/script/user/UserRepository.test.ts:24:45     - Unknown word (wireapp)    -- UserUpdateEvent} from '@wireapp/api-client/lib/event
+src/script/user/UserRepository.test.ts:25:44     - Unknown word (wireapp)    -- APIClientUser} from '@wireapp/api-client/lib/user
+src/script/user/UserRepository.test.ts:29:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
+src/script/user/UserRepository.ts:20:30     - Unknown word (pydio)      -- Availability} from '@pydio/protocol-messaging'
+src/script/user/UserRepository.ts:21:48     - Unknown word (wireapp)    -- PublicClient} from '@wireapp/api-client/lib/client
+src/script/user/UserRepository.ts:22:38     - Unknown word (wireapp)    -- ConversationProtocol} from '@wireapp/api-client/lib/conversation
+src/script/user/UserRepository.ts:29:10     - Unknown word (wireapp)    -- } from '@wireapp/api-client/lib/event
+src/script/user/UserRepository.ts:30:47     - Unknown word (wireapp)    -- TraceState} from '@wireapp/api-client/lib/http
+src/script/user/UserRepository.ts:31:35     - Unknown word (wireapp)    -- BackendErrorLabel} from '@wireapp/api-client/lib/http
+src/script/user/UserRepository.ts:41:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 src/script/user/UserRepository.ts:530:12    - Unknown word (prekey)     -- last_prekey,
 src/script/user/UserRepository.ts:537:12    - Unknown word (prekey)     -- last_prekey,
 src/script/user/UserService.ts:20:38     - Unknown word (wireapp)    -- ConversationProtocol} from '@wireapp/api-client/lib/conversation
@@ -2641,9 +2668,9 @@ src/script/user/UserState.ts:48:35     - Unknown word (MILLIS)     -- {rateLimit
 src/script/util/ArrayUtil.ts:122:16    - Unknown word (Arrayify)    -- export const deArrayify = <T>(value: T[] | T
 src/script/util/ArrayUtil.ts:124:14    - Unknown word (uniquify)    -- export const uniquify = <T>(elements: T[]
 src/script/util/ArrayUtil.ts:37:54     - Unknown word (referencial) -- matching function in case referencial equality is not enough
-src/script/util/AvailabilityStatus.tsx:22:30     - Unknown word (wireapp)    -- Availability} from '@wireapp/protocol-messaging'
-src/script/util/AvailabilityStatus.tsx:62:18     - Unknown word (Transaltion) -- type AvailabilityTransaltionValues = `availability
-src/script/util/AvailabilityStatus.tsx:64:81     - Unknown word (Transaltion) -- vailability.Type, AvailabilityTransaltionValues> = {
+src/script/util/AvailabilityStatus.tsx:21:30     - Unknown word (pydio)      -- Availability} from '@pydio/protocol-messaging'
+src/script/util/AvailabilityStatus.tsx:61:18     - Unknown word (Transaltion) -- type AvailabilityTransaltionValues = `availability
+src/script/util/AvailabilityStatus.tsx:63:81     - Unknown word (Transaltion) -- vailability.Type, AvailabilityTransaltionValues> = {
 src/script/util/BackupUtil.ts:24:9      - Unknown word (encrpted)   -- const encrptedFileFormat = new TextEncoder
 src/script/util/BackupUtil.ts:26:23     - Unknown word (encrpted)   -- for (let i = 0; i < encrptedFileFormat.length; i
 src/script/util/BackupUtil.ts:28:11     - Unknown word (encrpted)   -- const encrptedFileByte = encrptedFileFormat
@@ -2890,10 +2917,10 @@ src/script/view_model/CallingViewModel.mocks.ts:55:60     - Unknown word (conv) 
 src/script/view_model/CallingViewModel.test.ts:20:34     - Unknown word (wireapp)    -- TYPE, STATE} from '@wireapp/avs';
 src/script/view_model/CallingViewModel.test.ts:49:36     - Unknown word (ESTAB)      -- joinedCall.state(STATE.MEDIA_ESTAB);
 src/script/view_model/CallingViewModel.test.ts:78:36     - Unknown word (ESTAB)      -- joinedCall.state(STATE.MEDIA_ESTAB);
-src/script/view_model/CallingViewModel.ts:20:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
-src/script/view_model/CallingViewModel.ts:23:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
-src/script/view_model/CallingViewModel.ts:25:71     - Unknown word (wireapp)    -- as CALL_STATE} from '@wireapp/avs';
-src/script/view_model/CallingViewModel.ts:26:30     - Unknown word (wireapp)    -- Availability} from '@wireapp/protocol-messaging'
+src/script/view_model/CallingViewModel.ts:20:30     - Unknown word (pydio)      -- Availability} from '@pydio/protocol-messaging'
+src/script/view_model/CallingViewModel.ts:21:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
+src/script/view_model/CallingViewModel.ts:24:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
+src/script/view_model/CallingViewModel.ts:26:71     - Unknown word (wireapp)    -- as CALL_STATE} from '@wireapp/avs';
 src/script/view_model/CallingViewModel.ts:27:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
 src/script/view_model/CallingViewModel.ts:315:50    - Unknown word (screeninput) -- evicesHandler.currentDeviceId.screeninput(deviceId);
 src/script/view_model/CallingViewModel.ts:331:56    - Unknown word (screeninput) -- evicesHandler.currentDeviceId.screeninput(deviceId);
