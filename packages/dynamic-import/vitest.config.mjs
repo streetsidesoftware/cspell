@@ -3,6 +3,8 @@ import { defineConfig } from 'vitest/config';
 
 import viteConfig from '../../vitest.config.mjs';
 
+// @ts-check
+
 export default mergeConfig(
     viteConfig,
     defineConfig({

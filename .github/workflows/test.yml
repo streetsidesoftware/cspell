@@ -50,39 +50,23 @@ jobs:
         os:
           - ubuntu-latest
 
+        include:
+          - os: windows-latest
+            version: 23.x
+
     steps:
       - uses: actions/checkout@v4
 
-      - name: Setup And Test
-        uses: ./.github/actions/setup-and-test
+      - name: Install and Build
+        uses: ./.github/actions/install-build
         with:
           node-version: ${{ matrix.node-version }}
+
+      - name: Test
+        run: pnpm test
 
       # Ensure the repository is clean after build & test
       - run: git --no-pager diff --exit-code
-
-  test-os:
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        node-version:
-          - 23.x
-
-        os:
-          - windows-latest
-          # - macos-latest # Smoke test is enough for now.
-
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: Setup And Test
-        uses: ./.github/actions/setup-and-test
-        with:
-          node-version: ${{ matrix.node-version }}
-
-      # Ensure the repository is clean after build & test
-      - run: git --no-pager diff --compact-summary --exit-code
 
   test-full-build:
     runs-on: ${{ matrix.os }}
@@ -113,7 +97,7 @@ jobs:
 
       - run: pnpm i
       - run: pnpm run build
-      - run: pnpm --workspace-concurrency 1 test
+      - run: pnpm test
 
   smoke-test:
     runs-on: ${{ matrix.os }}

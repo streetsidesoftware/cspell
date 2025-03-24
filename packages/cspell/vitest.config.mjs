@@ -5,6 +5,8 @@ import { defineConfig } from 'vitest/config';
 
 import viteConfig from '../../vitest.config.mjs';
 
+// @ts-check
+
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 export default mergeConfig(
