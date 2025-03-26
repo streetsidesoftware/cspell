@@ -1,6 +1,6 @@
 import * as path from 'node:path';
 
-import { findUp } from 'find-up-simple';
+import { findRepoRoot } from './findRepoRoot.js';
 
 interface ParsedPath {
     /**
@@ -25,6 +25,9 @@ interface ParsedPath {
     name: string;
 }
 
+/**
+ * @deprecated to be removed in the next major version.
+ */
 export interface PathInterface {
     dirname(path: string): string;
     isAbsolute(p: string): boolean;
@@ -89,14 +92,6 @@ export function factoryPathHelper(path: PathInterface): PathHelper {
         return p.root;
     }
 
-    async function findRepoRoot(directory: string): Promise<string | undefined> {
-        const foundDir = (await findUp('.git', { cwd: directory, type: 'directory' })) || '';
-        const foundFile = (await findUp('.git', { cwd: directory, type: 'file' })) || '';
-        const found = foundDir.length >= foundFile.length ? foundDir : foundFile;
-        if (!found) return undefined;
-        return path.dirname(found);
-    }
-
     function isParentOf(parent: string, child: string): boolean {
         const rel = path.relative(parent, child);
         return !!rel && !path.isAbsolute(rel) && rel[0] !== '.';
@@ -133,21 +128,16 @@ const defaultHelper = factoryPathHelper(path);
  * Parse a directory and return its root
  * @param directory - directory to parse.
  * @returns root directory
+ * @deprecated to be removed in the next major version.
  */
 export const directoryRoot = defaultHelper.directoryRoot;
-
-/**
- * Find the git repository root directory.
- * @param directory - directory to search up from.
- * @returns resolves to `.git` root or undefined
- */
-export const findRepoRoot = defaultHelper.findRepoRoot;
 
 /**
  * Checks to see if the child directory is nested under the parent directory.
  * @param parent - parent directory
  * @param child - possible child directory
  * @returns true iff child is a child of parent.
+ * @deprecated to be removed in the next major version.
  */
 export const isParentOf = defaultHelper.isParentOf;
 
@@ -156,6 +146,7 @@ export const isParentOf = defaultHelper.isParentOf;
  * @param parent - parent directory
  * @param child - child directory
  * @returns true iff child is the same as the parent or nested in the parent.
+ * @deprecated to be removed in the next major version.
  */
 export const contains = defaultHelper.contains;
 
@@ -164,6 +155,7 @@ export const contains = defaultHelper.contains;
  * @param path - the path to make relative
  * @param rootPath - a root of path
  * @returns the normalized relative path or undefined if rootPath is not a parent.
+ * @deprecated to be removed in the next major version.
  */
 export const makeRelativeTo = defaultHelper.makeRelativeTo;
 
@@ -171,6 +163,7 @@ export const makeRelativeTo = defaultHelper.makeRelativeTo;
  * Normalize a path to have only forward slashes.
  * @param path - path to normalize
  * @returns a normalized string.
+ * @deprecated to be removed in the next major version.
  */
 export const normalizePath = defaultHelper.normalizePath;
 

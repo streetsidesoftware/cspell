@@ -3,7 +3,8 @@ import { win32 } from 'node:path';
 
 import { describe, expect, test } from 'vitest';
 
-import { contains, directoryRoot, factoryPathHelper, findRepoRoot, isParentOf, makeRelativeTo } from './helpers.js';
+import { findRepoRoot } from './findRepoRoot.js';
+import { contains, directoryRoot, factoryPathHelper, isParentOf, makeRelativeTo } from './helpers.js';
 
 const pkg = path.resolve(__dirname, '..');
 const gitRoot = path.resolve(pkg, '../..');
@@ -20,7 +21,7 @@ describe('helpers', () => {
 
     test.each`
         dir          | expected
-        ${__dirname} | ${path.join(__dirname, '../../..')}
+        ${__dirname} | ${path.join(__dirname, '../../..') + '/'}
         ${'/'}       | ${undefined}
     `('findRepoRoot $dir', async ({ dir, expected }) => {
         const f = await findRepoRoot(dir);

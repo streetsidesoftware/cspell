@@ -1,7 +1,7 @@
 import * as path from 'node:path';
 
+import { findRepoRoot } from './findRepoRoot.js';
 import { GitIgnore } from './GitIgnore.js';
-import { findRepoRoot } from './helpers.js';
 
 type OptionParser = (params: string[]) => string[];
 
