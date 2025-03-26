@@ -36,6 +36,7 @@ describe('GitIgnoreServer', () => {
         ${__dirname}             | ${undefined}      | ${[gitRoot, pkg]}
         ${__dirname}             | ${[packages]}     | ${[pkg]}
         ${__dirname}             | ${[pkg, gitRoot]} | ${[pkg]}
+        ${dirUrl.href}           | ${[pkgUrl.href]}  | ${[pkg]}
         ${p(samples, 'ignored')} | ${undefined}      | ${[gitRoot, pkg, samples]}
         ${p(pkgCSpellLib)}       | ${[pkg]}          | ${[gitRoot, pkgCSpellLib]}
         ${p(pkgCSpellLib)}       | ${[packages]}     | ${[pkgCSpellLib]}

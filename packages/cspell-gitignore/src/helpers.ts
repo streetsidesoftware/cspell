@@ -182,7 +182,3 @@ export const DefaultPathHelper: PathHelper = {
     makeRelativeTo,
     normalizePath,
 };
-
-export function isDefined<T>(v: T | undefined | null): v is T {
-    return v !== undefined && v !== null;
-}

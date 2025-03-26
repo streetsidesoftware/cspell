@@ -1,8 +1,9 @@
-import * as path from 'node:path';
+import { toFileDirURL, toFileURL, urlDirname } from '@cspell/url';
+import type { VFileSystem } from 'cspell-io';
 
 import type { IsIgnoredExResult } from './GitIgnoreFile.js';
 import { GitIgnoreHierarchy, loadGitIgnore } from './GitIgnoreFile.js';
-import { contains } from './helpers.js';
+import { isParentOf } from './utils.js';
 
 /**
  * Class to cache and process `.gitignore` file queries.
@@ -12,37 +13,43 @@ export class GitIgnore {
     private knownGitIgnoreHierarchies = new Map<string, Promise<GitIgnoreHierarchy>>();
     private _roots: Set<string>;
     private _sortedRoots: string[];
+    private _vfs: VFileSystem | undefined;
 
     /**
      * @param roots - (search roots) an optional array of root paths to prevent searching for `.gitignore` files above the root.
      *   If a file is under multiple roots, the closest root will apply. If a file is not under any root, then
      *   the search for `.gitignore` will go all the way to the system root of the file.
      */
-    constructor(roots: string[] = []) {
+    constructor(roots: (string | URL)[] = [], vfs?: VFileSystem) {
+        this._vfs = vfs;
         this._sortedRoots = resolveAndSortRoots(roots);
         this._roots = new Set(this._sortedRoots);
     }
 
-    findResolvedGitIgnoreHierarchy(directory: string): GitIgnoreHierarchy | undefined {
-        return this.resolvedGitIgnoreHierarchies.get(directory);
+    findResolvedGitIgnoreHierarchy(directory: string | URL): GitIgnoreHierarchy | undefined {
+        return this.resolvedGitIgnoreHierarchies.get(toFileDirURL(directory).href);
     }
 
-    isIgnoredQuick(file: string): boolean | undefined {
-        const gh = this.findResolvedGitIgnoreHierarchy(path.dirname(file));
-        return gh?.isIgnored(file);
+    isIgnoredQuick(file: string | URL): boolean | undefined {
+        const uFile = toFileURL(file);
+        const gh = this.findResolvedGitIgnoreHierarchy(getDir(uFile));
+        return gh?.isIgnored(uFile);
     }
 
-    async isIgnored(file: string): Promise<boolean> {
-        const gh = await this.findGitIgnoreHierarchy(path.dirname(file));
-        return gh.isIgnored(file);
+    async isIgnored(file: string | URL): Promise<boolean> {
+        const uFile = toFileURL(file);
+        const gh = await this.findGitIgnoreHierarchy(getDir(uFile));
+        return gh.isIgnored(uFile);
     }
 
-    async isIgnoredEx(file: string): Promise<IsIgnoredExResult | undefined> {
-        const gh = await this.findGitIgnoreHierarchy(path.dirname(file));
-        return gh.isIgnoredEx(file);
+    async isIgnoredEx(file: string | URL): Promise<IsIgnoredExResult | undefined> {
+        const uFile = toFileURL(file);
+        const gh = await this.findGitIgnoreHierarchy(getDir(uFile));
+        return gh.isIgnoredEx(uFile);
     }
 
-    async findGitIgnoreHierarchy(directory: string): Promise<GitIgnoreHierarchy> {
+    async findGitIgnoreHierarchy(directory: string | URL): Promise<GitIgnoreHierarchy> {
+        directory = toFileDirURL(directory).href;
         const known = this.knownGitIgnoreHierarchies.get(directory);
         if (known) {
             return known;
@@ -77,8 +84,8 @@ export class GitIgnore {
         return this._sortedRoots;
     }
 
-    addRoots(roots: string[]): void {
-        const rootsToAdd = roots.map((p) => path.resolve(p)).filter((r) => !this._roots.has(r));
+    addRoots(roots: (string | URL)[]): void {
+        const rootsToAdd = roots.map((r) => toFileDirURL(r).href).filter((r) => !this._roots.has(r));
         if (!rootsToAdd.length) return;
 
         rootsToAdd.forEach((r) => this._roots.add(r));
@@ -86,7 +93,8 @@ export class GitIgnore {
         this.cleanCachedEntries();
     }
 
-    peekGitIgnoreHierarchy(directory: string): Promise<GitIgnoreHierarchy> | undefined {
+    peekGitIgnoreHierarchy(directory: string | URL): Promise<GitIgnoreHierarchy> | undefined {
+        directory = toFileDirURL(directory).href;
         return this.knownGitIgnoreHierarchies.get(directory);
     }
 
@@ -100,12 +108,15 @@ export class GitIgnore {
         this.resolvedGitIgnoreHierarchies.clear();
     }
 
-    private async _findGitIgnoreHierarchy(directory: string): Promise<GitIgnoreHierarchy> {
+    private async _findGitIgnoreHierarchy(directory: string | URL): Promise<GitIgnoreHierarchy> {
+        directory = toFileDirURL(directory);
         const root = this.determineRoot(directory);
-        const parent = path.dirname(directory);
+        const parent = urlDirname(directory);
         const parentHierarchy =
-            parent !== directory && contains(root, parent) ? await this.findGitIgnoreHierarchy(parent) : undefined;
-        const git = await loadGitIgnore(directory);
+            parent.href !== directory.href && isParentOf(root, parent)
+                ? await this.findGitIgnoreHierarchy(parent)
+                : undefined;
+        const git = await loadGitIgnore(directory, this._vfs);
         if (!git) {
             return parentHierarchy || new GitIgnoreHierarchy([]);
         }
@@ -113,21 +124,31 @@ export class GitIgnore {
         return new GitIgnoreHierarchy(chain);
     }
 
-    private determineRoot(directory: string): string {
+    private determineRoot(directory: string | URL): string {
+        const uDir = toFileDirURL(directory);
         const roots = this.roots;
         for (let i = roots.length - 1; i >= 0; --i) {
             const r = roots[i];
-            if (contains(r, directory)) return r;
+            if (uDir.href.startsWith(r)) return r;
         }
-        return path.parse(directory).root;
+        return new URL('/', uDir).href;
     }
 }
 
-function resolveAndSortRoots(roots: string[]): string[] {
-    const sortedRoots = roots.map((a) => path.resolve(a));
+/**
+ * Convert the roots into urls strings.
+ * @param roots
+ * @returns
+ */
+function resolveAndSortRoots(roots: (string | URL)[]): string[] {
+    const sortedRoots = roots.map((a) => toFileDirURL(a).href);
     sortRoots(sortedRoots);
     Object.freeze(sortedRoots);
     return sortedRoots;
+}
+
+function getDir(file: string | URL): URL {
+    return urlDirname(toFileURL(file));
 }
 
 /**
@@ -135,7 +156,7 @@ function resolveAndSortRoots(roots: string[]): string[] {
  * @param roots - array to be sorted
  */
 function sortRoots(roots: string[]): string[] {
-    roots.sort((a, b) => a.length - b.length);
+    roots.sort((a, b) => a.length - b.length || a.localeCompare(b));
     return roots;
 }
 
