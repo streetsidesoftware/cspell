@@ -21,11 +21,11 @@ describe('helpers', () => {
 
     test.each`
         dir          | expected
-        ${__dirname} | ${path.join(__dirname, '../../..') + '/'}
+        ${__dirname} | ${path.join(__dirname, '../../..')}
         ${'/'}       | ${undefined}
     `('findRepoRoot $dir', async ({ dir, expected }) => {
         const f = await findRepoRoot(dir);
-        expect(f).toEqual(expected);
+        expect(f ? path.join(f, '.') : f).toEqual(expected);
     });
 
     test.each`
