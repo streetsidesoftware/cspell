@@ -6,6 +6,7 @@ import {
     isUrlLike,
     normalizeWindowsUrl,
     toURL,
+    urlDir,
     urlFilename,
     urlParent,
     urlRelative,
@@ -72,8 +73,28 @@ describe('url', () => {
         ${'vsls:/path/file.txt'}                                      | ${'vsls:/path/'}
         ${'file://localhost/c$/Users/README.md'}                      | ${'file:///C:/Users/'}
         ${'file://synology/home/README.md'}                           | ${'file://synology/home/'}
+        ${'stdin:'}                                                   | ${'stdin:'}
+        ${'stdin://host'}                                             | ${'stdin://host'}
     `('urlParent $url', ({ url, expected }) => {
         expect(urlParent(url).href).toEqual(new URL(expected).href);
+    });
+
+    test.each`
+        url                                                           | expected
+        ${'file:///'}                                                 | ${'file:///'}
+        ${'file:///samples/cities.txt'}                               | ${'file:///samples/'}
+        ${'file:///samples/code/'}                                    | ${'file:///samples/code/'}
+        ${'https://github.com/streetsidesoftware/samples/cities.txt'} | ${'https://github.com/streetsidesoftware/samples/'}
+        ${'stdin:/github.com/streetsidesoftware/samples/'}            | ${'stdin:/github.com/streetsidesoftware/samples/'}
+        ${'stdin:github.com/streetsidesoftware/samples/'}             | ${'stdin:github.com/streetsidesoftware/samples/'}
+        ${'vsls:/cspell.config.yaml'}                                 | ${'vsls:/'}
+        ${'vsls:/path/file.txt'}                                      | ${'vsls:/path/'}
+        ${'file://localhost/c$/Users/README.md'}                      | ${'file:///C:/Users/'}
+        ${'file://synology/home/README.md'}                           | ${'file://synology/home/'}
+        ${'stdin:'}                                                   | ${'stdin:'}
+        ${'stdin://host'}                                             | ${'stdin://host'}
+    `('urlParent $url', ({ url, expected }) => {
+        expect(urlDir(url).href).toEqual(new URL(expected).href);
     });
 
     test.each`

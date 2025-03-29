@@ -276,7 +276,7 @@ export function getReporter(options: ReporterOptions, config?: CSpellReporterCon
         const errorText = formatWithOptions(
             { colors: stderr.stream.hasColors?.() },
             stderr.chalk.red(message),
-            error.toString(),
+            debug ? error : error.toString(),
         );
         errorCollection?.push(errorText);
         consoleError(errorText);
