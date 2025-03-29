@@ -8,6 +8,7 @@ import { __testing__, GitIgnoreFile, GitIgnoreHierarchy, loadGitIgnore } from '.
 
 const { mustBeHierarchical } = __testing__;
 
+const urlRepoRoot = new URL('../../..', import.meta.url);
 const __dirname = fileURLToPath(new URL('./', import.meta.url));
 const pathPackage = path.resolve(__dirname, '..');
 const pathRepo = path.join(path.resolve(pathPackage, '../..'), './');
@@ -31,11 +32,24 @@ describe('GitIgnoreFile', () => {
         ${path.join(__dirname, 'hello#')}                | ${true}
         ${path.join(__dirname, '#tag')}                  | ${false}
         ${path.join(__dirname, 'src/hidden#/source.py')} | ${true}
+        ${'stdin:text.txt'}                              | ${false}
     `('isIgnored $file', ({ file, expected }) => {
         const gif = sampleGitIgnoreFile();
         expect(gif.isIgnored(file)).toBe(expected);
         const gifWin = sampleGitIgnoreFileWin();
         expect(gifWin.isIgnored(file)).toBe(expected);
+    });
+
+    test.each`
+        dir            | expected
+        ${__dirname}   | ${undefined}
+        ${'stdin:'}    | ${undefined}
+        ${'stdin:/'}   | ${undefined}
+        ${urlRepoRoot} | ${new URL('.gitignore', urlRepoRoot).href}
+        ${pathRepo}    | ${new URL('.gitignore', urlRepoRoot).href}
+    `('loadGitIgnoreFile', async ({ dir, expected }) => {
+        const gif = await loadGitIgnore(dir);
+        expect(gif?.gitignore?.toString()).toEqual(expected);
     });
 
     test('loadGitIgnoreFile .gitignore', async () => {
