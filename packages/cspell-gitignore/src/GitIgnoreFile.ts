@@ -115,6 +115,7 @@ export class GitIgnoreHierarchy {
 
 export async function loadGitIgnore(dir: string | URL, vfs?: VFileSystem): Promise<GitIgnoreFile | undefined> {
     dir = toFileDirURL(dir);
+    if (!dir.pathname.startsWith('/')) return undefined;
     vfs ??= getDefaultVirtualFs().getFS(dir);
     const file = new URL('.gitignore', dir);
     try {

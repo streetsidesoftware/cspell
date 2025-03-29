@@ -131,7 +131,7 @@ export class GitIgnore {
             const r = roots[i];
             if (uDir.href.startsWith(r)) return r;
         }
-        return new URL('/', uDir).href;
+        return uDir.pathname.startsWith('/') ? new URL('/', uDir).href : uDir.href;
     }
 }
 

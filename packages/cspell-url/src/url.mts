@@ -23,9 +23,9 @@ export function urlParent(url: string | URL): URL {
     }
     const hasTrailingSlash = url.pathname.endsWith('/');
     if (!url.pathname.startsWith('/')) {
+        if (!url.pathname) return url;
         const parts = url.pathname.split('/').slice(0, hasTrailingSlash ? -2 : -1);
-        let pathname = parts.join('/');
-        pathname = (pathname && pathname + '/') || '';
+        const pathname = parts.join('/') + '/';
         return new URL(url.protocol + (url.host ? '//' + url.host : '') + pathname + url.search + url.hash);
     }
     return new URL(hasTrailingSlash ? '..' : '.', url);
@@ -39,6 +39,26 @@ export function urlParent(url: string | URL): URL {
  * @returns a URL
  */
 export const urlDirname = urlParent;
+
+/**
+ * Remove the file portion of the URL and return the directory portion.
+ * If the URL pathname ends with a `/`, it is considered a directory and the URL is returned as is.
+ * @param url - url to extract the dirname from.
+ */
+export function urlDir(url: string | URL): URL {
+    url = toURL(url);
+    if (url.protocol === 'data:') {
+        return url;
+    }
+    if (url.pathname.endsWith('/')) return url;
+    if (!url.pathname.startsWith('/')) {
+        if (!url.pathname) return url;
+        const parts = url.pathname.split('/').slice(0, -1);
+        const pathname = parts.join('/') + '/';
+        return new URL(url.protocol + (url.host ? '//' + url.host : '') + pathname + url.search + url.hash);
+    }
+    return new URL('.', url);
+}
 
 /**
  * return the basename (last portion of the URL pathname) of a path. It does NOT remove the trailing slash.

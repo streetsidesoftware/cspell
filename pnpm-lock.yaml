@@ -1274,6 +1274,12 @@ importers:
         specifier: workspace:*
         version: link:../../../packages/cspell
 
+  test-packages/cspell/test-cspell-stdin:
+    dependencies:
+      cspell:
+        specifier: workspace:*
+        version: link:../../../packages/cspell
+
   test-packages/dictionaries/companies:
     devDependencies:
       '@cspell/cspell-tools':
@@ -12641,7 +12647,7 @@ snapshots:
 
   '@docusaurus/react-loadable@6.0.0(react@19.0.0)':
     dependencies:
-      '@types/react': 19.0.12
+      '@types/react': 18.3.20
       react: 19.0.0
 
   '@docusaurus/remark-plugin-npm2yarn@3.7.0':
