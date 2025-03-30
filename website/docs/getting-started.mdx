@@ -96,6 +96,28 @@ For now choose to use either JSON or Yaml. Below are examples of each that inclu
             - '/project-words.txt'
         ```
     </TabItem>
+    <TabItem value="commonjs" label="cspell.config.cjs">
+        ```javascript
+        'use strict';
+
+        /** @type { import("@cspell/cspell-types").CSpellUserSettings } */
+        const cspell = {
+            $schema: 'https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json',
+            version: '0.2',
+            dictionaryDefinitions: [
+                {
+                    name: 'project-words',
+                    path: './project-words.txt',
+                    addWords: true,
+                }
+            ],
+            dictionaries: ['project-words'],
+            ignorePaths: ['node_modules', '/project-words.txt'],
+        };
+
+        module.exports = cspell;
+        ```
+    </TabItem>
 </Tabs>
 
 These configuration files do three things:
