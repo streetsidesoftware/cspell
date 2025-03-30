@@ -46,7 +46,19 @@ Steps:
 
 ## 1. Create a configuration file.
 
-CSpell can use JSON, Yaml, and JavaScript files for configuration. It automatically searches for one of the following: `cspell.json`, `cspell.config.yaml`, `cspell.config.cjs`.
+CSpell can use JSON, Yaml, and JavaScript files for configuration. It automatically searches for one of the following:
+
+* `.cspell.json`
+* `cspell.json`
+* `.cSpell.json`
+* `cSpell.json`
+* `cspell.config.js`
+* `cspell.config.cjs`
+* `cspell.config.json`
+* `cspell.config.yaml`
+* `cspell.config.yml`
+* `cspell.yaml`
+* `cspell.yml`
 
 For now choose to use either JSON or Yaml. Below are examples of each that include a custom dictionary definition. Both of them are equivalent. If you have both, CSpell will look for the `.json` file first.
 
