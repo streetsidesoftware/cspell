@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 19814, Issues found: 43359 in 7435 files.
+ CSpell: Files checked: 19817, Issues found: 43363 in 7435 files.
  exit code: 1
 ARCHITECTURE.md:158:48    - Unknown word (googlemock) -- implementation using `googlemock`
 ARCHITECTURE.md:29:61     - Unknown word (retryable)  -- RPCs that fail with a retryable error,
@@ -42,6 +42,7 @@ bazel/gapic.bzl:40:17     - Unknown word (srcs)           -- name = "srcs",
 bazel/gapic.bzl:45:17     - Unknown word (hdrs)           -- name = "hdrs",
 bazel/gapic.bzl:75:26     - Unknown word (googletest)     -- "@com_google_googletest//:gtest",
 bazel/googleapis.modules.patch:10:2      - Unknown word (genrule)    -- genrule(
+bazel/googleapis.modules.patch:23:21     - Unknown word (SRCS)       -- if test -z \"$(SRCS)\"; then
 bazel/library_names.bzl:16:16     - Unknown word (startswith) -- if library.startswith("compute_"):
 bazel/library_names.bzl:22:24     - Unknown word (removeprefix) -- return library.removeprefix("compute_") + "_mock
 bazel/workspace0.bzl:159:17    - Unknown word (boringssl)  -- name = "boringssl",
@@ -339,7 +340,6 @@ external/googleapis/protolists/tasks.list:1:47      - Unknown word (cloudtasks) 
 generator/BUILD.bazel:119:39    - Unknown word (commandlineflag) -- google_absl//absl/flags:commandlineflag",
 generator/CMakeLists.txt:161:22    - Unknown word (libprotoc)  -- protobuf::libprotoc
 generator/CMakeLists.txt:187:23    - Unknown word (PROTOS)     -- PROTOS generator_config.proto
-generator/CMakeLists.txt:189:33    - Unknown word (SRCS)       -- protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS generator
 generator/CMakeLists.txt:189:44    - Unknown word (HDRS)       -- cpp(PROTO_SRCS PROTO_HDRS generator_config.proto
 generator/CMakeLists.txt:291:26    - Unknown word (everytime)  -- build all the tests everytime they create a new package
 generator/generator_config.proto:41:35     - Unknown word (gcpxx)      -- to true generate the `gcpxxV1` alias for our inline
