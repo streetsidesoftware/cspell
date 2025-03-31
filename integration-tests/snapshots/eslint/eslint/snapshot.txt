@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: [".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 2056, Issues found: 1605 in 298 files.
+ CSpell: Files checked: 2060, Issues found: 1603 in 299 files.
  exit code: 1
 Makefile.js:1018:18   - Unknown word (Multifiles) -- function downloadMultifilesTestTarget(cb) {
 Makefile.js:143:82    - Unknown word (ined)       -- followed by the string "ined".
@@ -167,10 +167,8 @@ docs/src/static/feed.njk:5:4       - Unknown word (eleventy)   -- "eleventyExclu
 docs/src/static/sitemap.njk:11:14     - Unknown word (lastmod)    -- <lastmod>{{ page.date.toISOString
 docs/src/static/sitemap.njk:12:14     - Unknown word (changefreq) -- <changefreq>{{ page.data.changeFreq
 docs/src/static/sitemap.njk:7:2       - Unknown word (urlset)     -- <urlset xmlns="http://www.sitemaps
-docs/src/use/command-line-interface.md:228:16    - Unknown word (primarely)  -- This option is primarely intended for use in
-docs/src/use/command-line-interface.md:304:15    - Unknown word (succeds)    -- comment: "succeds, yay!",
-docs/src/use/command-line-interface.md:357:70    - Unknown word (levn)       -- configuration specified with [levn](https://github.com
-docs/src/use/command-line-interface.md:651:21    - Unknown word (customformat) -- args: ["-f", "./customformat.js", "file.js"]
+docs/src/use/command-line-interface.md:363:70    - Unknown word (levn)       -- configuration specified with [levn](https://github.com
+docs/src/use/command-line-interface.md:657:21    - Unknown word (customformat) -- args: ["-f", "./customformat.js", "file.js"]
 docs/src/use/configure/configuration-files-deprecated.md:39:25     - Unknown word (myfiletotest) -- eslint -c myconfig.json myfiletotest.js
 docs/src/use/configure/debug.md:30:44     - Unknown word (nzakas)     -- config from C:\Users\nzakas\projects\eslint\eslint
 docs/src/use/configure/ignore-deprecated.md:100:200   - Unknown word (jshintignore) -- example, you can use `.jshintignore` file because it has
@@ -218,7 +216,6 @@ lib/languages/js/index.js:163:31    - Unknown word (Feenstra)   -- Copyright (c)
 lib/languages/js/index.js:180:41    - Unknown word (FEENSTRA)   -- NO EVENT SHALL JOEL FEENSTRA BE LIABLE FOR ANY
 lib/linter/code-path-analysis/code-path-state.js:1246:37   - Unknown word (circuting)  -- path due to the short-circuting, so we are just seeding
 lib/linter/code-path-analysis/code-path-state.js:1725:14   - Unknown word (Segs)       -- const prevSegsOfLeavingSegment = [headOfLeav
-lib/linter/code-path-analysis/code-path-state.js:338:28    - Unknown word (expresion)  -- The end of the update expresion. This may change during
 lib/linter/code-path-analysis/debug-helpers.js:109:41    - Unknown word (Graphvis)   -- can be visualized with Graphvis.
 lib/linter/linter.js:47:7      - Unknown word (jslang)     -- const jslang = require("../languages
 lib/rule-tester/rule-tester.js:258:42    - Unknown word (errorize)   -- ast The root node to errorize `start`/`end` properties
@@ -249,7 +246,6 @@ lib/rules/no-new-native-nonconstructor.js:33:9      - Unknown word (Nonconstruct
 lib/rules/no-trailing-spaces.js:79:4      - Unknown word (NONBLANK)   -- NONBLANK = `${BLANK_CLASS}+$
 lib/rules/no-unused-vars.js:1155:37   - Unknown word (dectructured) -- unused variables in dectructured object with single property
 lib/rules/no-unused-vars.js:1155:90   - Unknown word (decalartion)  -- property in variable decalartion and function parameter
-lib/rules/no-unused-vars.js:1604:21   - Unknown word (varible)      -- // remove unused varible that is in a sequence
 lib/rules/no-useless-backreference.js:127:20    - Unknown word (bref's)     -- // group is bref's ancestor => bref is
 lib/rules/no-useless-backreference.js:83:31     - Unknown word (bref)       -- "Backreference '{{ bref }}' will be ignored
 lib/rules/no-useless-escape.js:34:47     - Unknown word (nrvtbfux)   -- ESCAPES = union(new Set("\\nrvtbfux"), astUtils.LINEBREAKS
@@ -269,6 +265,7 @@ package.json:182:6     - Unknown word (metascraper) -- "metascraper": "^5.25.7",
 package.json:61:81     - Unknown word (flter)      -- ignore=!docs/**/*.js -a --flter=eslint && trunk check
 package.json:63:20     - Unknown word (attw)       -- "lint:types": "attw --pack",
 templates/blogpost.md.ejs:18:10     - Unknown word (linkify)    -- function linkify(line) {
+tests/bin/eslint.js:506:36    - Unknown word (eslintsuppressions) -- SUPPRESSIONS_PATH = ".temp-eslintsuppressions";
 tests/fixtures/bad-examples.md:115:35    - Unknown word (errorr)     -- restricted-syntax: ["errorr", "ArrayPattern"] *
 tests/fixtures/code-path-analysis/try--try-finally-4.js:43:156    - Unknown word (Expressio)  -- Expression\nIdentifier (bar)\nExpressio
 tests/fixtures/config-hierarchy/file-structure.json:19:10     - Unknown word (subbroken)  -- "subbroken": {
@@ -296,10 +293,10 @@ tests/lib/config/flat-config-array.js:2534:9    - Unknown word (foox)        -- 
 tests/lib/config/flat-config-array.js:2560:10   - Unknown word (doesnt)      -- "doesnt-exist/match": "error
 tests/lib/config/flat-config-schema.js:21:50     - Unknown word (reults)     -- expectedResult] The expected reults of merging first and
 tests/lib/config/flat-config-schema.js:47:17     - Unknown word (emtpy)      -- it("returns an emtpy object if both values
-tests/lib/eslint/eslint.js:10005:20  - Unknown word (dignore)      -- cwd: `${root}-dignore`,
-tests/lib/eslint/eslint.js:11653:26  - Unknown word (previos)      -- make sure that the previos assertion checks the
-tests/lib/eslint/eslint.js:11734:46  - Unknown word (intenationally) -- cacheFilePath, "[]"); // intenationally invalid to additionally
-tests/lib/eslint/eslint.js:11964:46  - Unknown word (occured)        -- the previous run that occured after the cache was
+tests/lib/eslint/eslint.js:10231:20  - Unknown word (dignore)      -- cwd: `${root}-dignore`,
+tests/lib/eslint/eslint.js:11879:26  - Unknown word (previos)      -- make sure that the previos assertion checks the
+tests/lib/eslint/eslint.js:11960:46  - Unknown word (intenationally) -- cacheFilePath, "[]"); // intenationally invalid to additionally
+tests/lib/eslint/eslint.js:12190:46  - Unknown word (occured)        -- the previous run that occured after the cache was
 tests/lib/eslint/eslint.js:1753:22   - Unknown word (myjs)       -- files: ["**/*.myjs"],
 tests/lib/eslint/eslint.js:2444:9    - Unknown word (doesnotexist) -- "doesnotexist/*.js",
 tests/lib/eslint/eslint.js:2543:47   - Unknown word (doesexist)    -- await eslint.lintFiles(["doesexist/*.js"]);
@@ -408,7 +405,7 @@ tests/lib/rules/utils/ast-utils.js:1251:8    - Unknown word (ncde)       -- "ab\
 tests/lib/rules/utils/ast-utils.js:2028:10   - Unknown word (invalidtoken) -- [["123invalidtoken", "("], false],
 tests/lib/rules/valid-typeof.js:90:31     - Unknown word (umdefined)  -- if (typeof bar === 'umdefined') {}",
 tests/lib/shared/string-utils.js:40:6      - Unknown word (uppercases) -- it("uppercases the first letter of
-tests/lib/types/types.test.ts:808:7     - Unknown word (eslinter)   -- const eslinter = new ESLinter();
+tests/lib/types/types.test.ts:817:7     - Unknown word (eslinter)   -- const eslinter = new ESLinter();
 tests/performance/jshint.js:10347:35  - Unknown word (Ashkenas)                 -- c) 2009-2013 Jeremy Ashkenas, DocumentCloud Inc.
 tests/performance/jshint.js:10491:15  - Unknown word (foldl)                    -- // or `foldl`. Delegates to **ECMAScript
 tests/performance/jshint.js:10533:67  - Unknown word (foldr)                    -- reduce, also known as `foldr`.

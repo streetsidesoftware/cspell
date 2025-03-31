@@ -3,9 +3,9 @@ Repository: eslint/eslint
 Url: https://github.com/eslint/eslint
 Args: '[".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]'
 Summary:
-  files: 2056
-  filesWithIssues: 298
-  issues: 1605
+  files: 2060
+  filesWithIssues: 299
+  issues: 1603
   errors: 0
 Errors: []
 
@@ -147,10 +147,8 @@ issues:
   - "docs/src/static/sitemap.njk:7:2         urlset          U       <urlset xmlns=\"http://www.sitemaps"
   - "docs/src/static/sitemap.njk:11:14       lastmod         U       <lastmod>{{ page.date.toISOString"
   - "docs/src/static/sitemap.njk:12:14       changefreq      U       <changefreq>{{ page.data.changeFreq"
-  - "docs/src/use/command-line-interface.md:228:16       primarely               U       This option is primarely intended for use in"
-  - "docs/src/use/command-line-interface.md:304:15       succeds (succeeds)      U       comment: \"succeds, yay!\","
-  - "docs/src/use/command-line-interface.md:357:70       levn                    U       configuration specified with [levn](https://github.com"
-  - "docs/src/use/command-line-interface.md:651:21       customformat            U       args: [\"-f\", \"./customformat.js\", \"file.js\"]"
+  - "docs/src/use/command-line-interface.md:363:70       levn            U       configuration specified with [levn](https://github.com"
+  - "docs/src/use/command-line-interface.md:657:21       customformat    U       args: [\"-f\", \"./customformat.js\", \"file.js\"]"
   - "docs/src/use/configure/configuration-files-deprecated.md:39:25          myfiletotest    U       eslint -c myconfig.json myfiletotest.js"
   - "docs/src/use/configure/debug.md:30:44       nzakas      U       config from C:\\Users\\nzakas\\projects\\eslint\\eslint"
   - "docs/src/use/configure/ignore-deprecated.md:100:200     jshintignore    U       example, you can use `.jshintignore` file because it has"
@@ -196,7 +194,6 @@ issues:
   - "lib/eslint/eslint-helpers.js:612:34         unconfigured    U       ignored\"|\"external\"|\"unconfigured\"} configStatus A status"
   - "lib/languages/js/index.js:163:31        Feenstra    U       Copyright (c) 2013, Joel Feenstra"
   - "lib/languages/js/index.js:180:41        FEENSTRA    U       NO EVENT SHALL JOEL FEENSTRA BE LIABLE FOR ANY"
-  - "lib/linter/code-path-analysis/code-path-state.js:338:28         expresion       U       The end of the update expresion. This may change during"
   - "lib/linter/code-path-analysis/code-path-state.js:1246:37        circuting       U       path due to the short-circuting, so we are just seeding"
   - "lib/linter/code-path-analysis/code-path-state.js:1725:14        Segs            U       const prevSegsOfLeavingSegment = [headOfLeav"
   - "lib/linter/code-path-analysis/debug-helpers.js:109:41       Graphvis    U       can be visualized with Graphvis."
@@ -229,7 +226,6 @@ issues:
   - "lib/rules/no-trailing-spaces.js:79:4        NONBLANK    U       NONBLANK = `${BLANK_CLASS}+$"
   - "lib/rules/no-unused-vars.js:1155:37     dectructured    U       unused variables in dectructured object with single property"
   - "lib/rules/no-unused-vars.js:1155:90     decalartion     U       property in variable decalartion and function parameter"
-  - "lib/rules/no-unused-vars.js:1604:21     varible         U       // remove unused varible that is in a sequence"
   - "lib/rules/no-useless-backreference.js:83:31         bref        U       \"Backreference '{{ bref }}' will be ignored"
   - "lib/rules/no-useless-backreference.js:127:20        bref's      U       // group is bref's ancestor => bref is"
   - "lib/rules/no-useless-escape.js:34:47        nrvtbfux        U       ESCAPES = union(new Set(\"\\\\nrvtbfux\"), astUtils.LINEBREAKS"
@@ -274,6 +270,7 @@ issues:
   - "README.md:326:796       Neko                U       com/u/11081491\" alt=\"Neko\" height=\"32\"></a> <a"
   - "README.md:331:5         sponsorsend         U       <!--sponsorsend-->"
   - "templates/blogpost.md.ejs:18:10         linkify     U       function linkify(line) {"
+  - "tests/bin/eslint.js:506:36      eslintsuppressions      U       SUPPRESSIONS_PATH = \".temp-eslintsuppressions\";"
   - "tests/fixtures/bad-examples.md:115:35       errorr      U       restricted-syntax: [\"errorr\", \"ArrayPattern\"] *"
   - "tests/fixtures/code-path-analysis/try--try-finally-4.js:43:156      Expressio       U       Expression\\nIdentifier (bar)\\nExpressio"
   - "tests/fixtures/config-hierarchy/file-structure.json:19:10       subbroken       U       \"subbroken\": {"
@@ -307,10 +304,10 @@ issues:
   - "tests/lib/eslint/eslint.js:3297:63      unignoring              U       unignored without also unignoring all files in them\","
   - "tests/lib/eslint/eslint.js:3311:27      jsfmt                   U       \"!tests/format/**/jsfmt.spec.js\","
   - "tests/lib/eslint/eslint.js:7504:23      mcts                    U       \"eslint.config.mcts\": configFileContent"
-  - "tests/lib/eslint/eslint.js:10005:20     dignore                 U       cwd: `${root}-dignore`,"
-  - "tests/lib/eslint/eslint.js:11653:26     previos                 U       make sure that the previos assertion checks the"
-  - "tests/lib/eslint/eslint.js:11734:46     intenationally          U       cacheFilePath, \"[]\"); // intenationally invalid to additionally"
-  - "tests/lib/eslint/eslint.js:11964:46     occured (occurred)      U       the previous run that occured after the cache was"
+  - "tests/lib/eslint/eslint.js:10231:20     dignore                 U       cwd: `${root}-dignore`,"
+  - "tests/lib/eslint/eslint.js:11879:26     previos                 U       make sure that the previos assertion checks the"
+  - "tests/lib/eslint/eslint.js:11960:46     intenationally          U       cacheFilePath, \"[]\"); // intenationally invalid to additionally"
+  - "tests/lib/eslint/eslint.js:12190:46     occured (occurred)      U       the previous run that occured after the cache was"
   - "tests/lib/eslint/legacy-eslint.js:3017:15       succesfully (successfully)      U       it(\"should succesfully execute with a rule"
   - "tests/lib/linter/linter.js:3643:1       consolexlog         U       consolexlog(\"test2\");"
   - "tests/lib/linter/linter.js:3803:75      rulename            U       this is 2, since the rulename is very likely to be"
@@ -413,7 +410,7 @@ issues:
   - "tests/lib/rules/utils/ast-utils.js:2028:10      invalidtoken    U       [[\"123invalidtoken\", \"(\"], false],"
   - "tests/lib/rules/valid-typeof.js:90:31       umdefined       U       if (typeof bar === 'umdefined') {}\","
   - "tests/lib/shared/string-utils.js:40:6           uppercases      U       it(\"uppercases the first letter of"
-  - "tests/lib/types/types.test.ts:808:7         eslinter    U       const eslinter = new ESLinter();"
+  - "tests/lib/types/types.test.ts:817:7         eslinter    U       const eslinter = new ESLinter();"
   - "tests/performance/jshint.js:91:14           shtylman                    U       // TODO(shtylman)"
   - "tests/performance/jshint.js:540:8           SVGCSS                      U       SVGCSSRule: false,"
   - "tests/performance/jshint.js:594:8           SVGH                        U       SVGHKernElement: false,"
@@ -653,7 +650,7 @@ issuesSummary:
   - "text: doesexist, count: 1, files: 1,"
   - "text: doesnotexist, count: 5, files: 1,"
   - "text: doesnt, count: 3, files: 1,"
-  - "text: Doesnt, count: 3, files: 1,"
+  - "text: Doesnt, count: 4, files: 2,"
   - "text: doesntexist, count: 3, files: 3,"
   - "text: dojox, count: 1, files: 1,"
   - "text: dont, count: 11, files: 4,"
@@ -676,12 +673,12 @@ issuesSummary:
   - "text: eslintbot, count: 2, files: 2,"
   - "text: eslinter, count: 1, files: 1,"
   - "text: eslintformatter, count: 1, files: 1,"
+  - "text: eslintsuppressions, count: 2, files: 1,"
   - "text: eslump, count: 5, files: 2,"
   - "text: estools, count: 1, files: 1,"
   - "text: esutils, count: 8, files: 3,"
   - "text: Europese, count: 1, files: 1,"
   - "text: exportee, count: 1, files: 1,"
-  - "text: expresion, count: 1, files: 1,"
   - "text: Expresion, count: 2, files: 1,"
   - "text: Expressio, count: 1, files: 1,"
   - "text: extendees, count: 4, files: 2,"
@@ -937,7 +934,6 @@ issuesSummary:
   - "text: prereg, count: 5, files: 1,"
   - "text: Prerendered, count: 1, files: 1,"
   - "text: previos, count: 2, files: 2,"
-  - "text: primarely, count: 1, files: 1,"
   - "text: Propert, count: 2, files: 2,"
   - "text: prototypejs, count: 5, files: 2,"
   - "text: PSEP, count: 1, files: 1,"
@@ -992,7 +988,6 @@ issuesSummary:
   - "text: subsubbroken, count: 3, files: 3,"
   - "text: subsubdir, count: 21, files: 7,"
   - "text: subsubsubdir, count: 3, files: 3,"
-  - "text: succeds, count: 1, files: 1,"
   - "text: succesfully, count: 5, files: 1,"
   - "text: Suggestable, count: 4, files: 1,"
   - "text: supernew, count: 3, files: 1,"
@@ -1045,7 +1040,6 @@ issuesSummary:
   - "text: urlset, count: 2, files: 1,"
   - "text: Uyghur, count: 1, files: 1,"
   - "text: validthis, count: 5, files: 1,"
-  - "text: varible, count: 2, files: 1,"
   - "text: Varint, count: 1, files: 1,"
   - "text: verif, count: 3, files: 1,"
   - "text: verifsint, count: 4, files: 1,"

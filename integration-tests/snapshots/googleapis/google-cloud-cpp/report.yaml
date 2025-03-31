@@ -3,9 +3,9 @@ Repository: googleapis/google-cloud-cpp
 Url: https://github.com/googleapis/google-cloud-cpp.git
 Args: '["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]'
 Summary:
-  files: 19814
+  files: 19817
   filesWithIssues: 7435
-  issues: 43359
+  issues: 43363
   errors: 0
 Errors: []
 
@@ -32,6 +32,7 @@ issues:
   - "bazel/gapic.bzl:45:17       hdrs                U       name = \"hdrs\","
   - "bazel/gapic.bzl:75:26       googletest          U       \"@com_google_googletest//:gtest\","
   - "bazel/googleapis.modules.patch:10:2         genrule     U       genrule("
+  - "bazel/googleapis.modules.patch:23:21        SRCS        U       if test -z \\\"$(SRCS)\\\"; then"
   - "bazel/library_names.bzl:16:16       startswith      U       if library.startswith(\"compute_\"):"
   - "bazel/library_names.bzl:22:24       removeprefix    U       return library.removeprefix(\"compute_\") + \"_mock"
   - "bazel/workspace0.bzl:83:23          skylib          U       name = \"bazel_skylib\","
@@ -342,7 +343,6 @@ issues:
   - "generator/BUILD.bazel:119:39        commandlineflag     U       google_absl//absl/flags:commandlineflag\","
   - "generator/CMakeLists.txt:161:22         libprotoc                   U       protobuf::libprotoc"
   - "generator/CMakeLists.txt:187:23         PROTOS                      U       PROTOS generator_config.proto"
-  - "generator/CMakeLists.txt:189:33         SRCS                        U       protobuf_generate_cpp(PROTO_SRCS PROTO_HDRS generator"
   - "generator/CMakeLists.txt:189:44         HDRS                        U       cpp(PROTO_SRCS PROTO_HDRS generator_config.proto"
   - "generator/CMakeLists.txt:291:26         everytime (every time)      U       build all the tests everytime they create a new package"
   - "generator/generator_config.proto:41:35          gcpxx       U       to true generate the `gcpxxV1` alias for our inline"
