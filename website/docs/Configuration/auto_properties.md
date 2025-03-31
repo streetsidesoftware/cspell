@@ -34,6 +34,7 @@ format: md
 | [globRoot](#settings-globroot)                                 | [`FSPathResolvable`](#fspathresolvable)                                   | The root to use for glob patterns found in this configuration.                                                                                                       |
 | [id](#settings-id)                                             | `string`                                                                  | Optional identifier.                                                                                                                                                 |
 | [ignorePaths](#settings-ignorepaths)                           | [`Glob`](#glob)&ZeroWidthSpace;`[]`                                       | Glob patterns of files to be ignored.                                                                                                                                |
+| [ignoreRandomStrings](#settings-ignorerandomstrings)           | `boolean`                                                                 | Ignore sequences of characters that look like random strings.                                                                                                        |
 | [ignoreRegExpList](#settings-ignoreregexplist)                 | [`RegExpPatternList`](#regexppatternlist)                                 | List of regular expression patterns or pattern names to exclude from spell checking.                                                                                 |
 | [ignoreWords](#settings-ignorewords)                           | `string`&ZeroWidthSpace;`[]`                                              | List of words to be ignored. An ignored word will not show up as an error, even if it is                                                                             |
 | [import](#settings-import)                                     | [`FsPath`](#fspath)<br />[`FsPath`](#fspath)&ZeroWidthSpace;`[]`          | Allows this configuration to inherit configuration for one or more other files.                                                                                      |
@@ -44,6 +45,7 @@ format: md
 | [loadDefaultConfiguration](#settings-loaddefaultconfiguration) | `boolean`                                                                 | By default, the bundled dictionary configurations are loaded. Explicitly setting this to `false`                                                                     |
 | [maxDuplicateProblems](#settings-maxduplicateproblems)         | `number`                                                                  | The maximum number of times the same word can be flagged as an error in a file.                                                                                      |
 | [maxNumberOfProblems](#settings-maxnumberofproblems)           | `number`                                                                  | The maximum number of problems to report in a file.                                                                                                                  |
+| [minRandomLength](#settings-minrandomlength)                   | `number`                                                                  | The minimum length of a random string to be ignored.                                                                                                                 |
 | [minWordLength](#settings-minwordlength)                       | `number`                                                                  | The minimum length of a word before checking it against a dictionary.                                                                                                |
 | [name](#settings-name)                                         | `string`                                                                  | Optional name of configuration.                                                                                                                                      |
 | [noConfigSearch](#settings-noconfigsearch)                     | `boolean`                                                                 | Prevents searching for local configuration when checking individual documents.                                                                                       |
@@ -659,6 +661,31 @@ Glob patterns are relative to the  [globRoot](#globroot)  of the configuration f
 
 ---
 
+#### `ignoreRandomStrings` {#settings-ignorerandomstrings}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+Ignore sequences of characters that look like random strings.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`boolean`
+
+</dd>
+</dl>
+
+
+
+
+---
+
 #### `ignoreRegExpList` {#settings-ignoreregexplist}
 
 
@@ -934,6 +961,31 @@ The maximum number of times the same word can be flagged as an error in a file.
 <dd>
 
 The maximum number of problems to report in a file.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`number`
+
+</dd>
+</dl>
+
+
+
+
+---
+
+#### `minRandomLength` {#settings-minrandomlength}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+The minimum length of a random string to be ignored.
 
 </dd>
 
@@ -1697,8 +1749,8 @@ Store the results of processed files in order to only operate on the changed one
 <dd>
 
 The Strategy to use to detect if a file has changed.
-- `metadata` - uses the file system timestamp and size to detect changes (fastest).
 - `content` - uses a hash of the file content to check file changes (slower - more accurate).
+- `metadata` - uses the file system timestamp and size to detect changes (fastest, may not work in CI).
 
 </dd>
 
@@ -6235,6 +6287,7 @@ This is a written language locale like: `en`, `en-GB`, `fr`, `es`, `de` or `en,f
 | [filename](#overridesettings-filename)                                 | [`Glob`](#glob)<br />[`Glob`](#glob)&ZeroWidthSpace;`[]`                  | Glob pattern or patterns to match against.                                                                                                                           |
 | [flagWords](#overridesettings-flagwords)                               | `string`&ZeroWidthSpace;`[]`                                              | List of words to always be considered incorrect. Words found in `flagWords` override `words`.                                                                        |
 | [id](#overridesettings-id)                                             | `string`                                                                  | Optional identifier.                                                                                                                                                 |
+| [ignoreRandomStrings](#overridesettings-ignorerandomstrings)           | `boolean`                                                                 | Ignore sequences of characters that look like random strings.                                                                                                        |
 | [ignoreRegExpList](#overridesettings-ignoreregexplist)                 | [`RegExpPatternList`](#regexppatternlist)                                 | List of regular expression patterns or pattern names to exclude from spell checking.                                                                                 |
 | [ignoreWords](#overridesettings-ignorewords)                           | `string`&ZeroWidthSpace;`[]`                                              | List of words to be ignored. An ignored word will not show up as an error, even if it is                                                                             |
 | [includeRegExpList](#overridesettings-includeregexplist)               | [`RegExpPatternList`](#regexppatternlist)                                 | List of regular expression patterns or defined pattern names to match for spell checking.                                                                            |
@@ -6244,6 +6297,7 @@ This is a written language locale like: `en`, `en-GB`, `fr`, `es`, `de` or `en,f
 | [loadDefaultConfiguration](#overridesettings-loaddefaultconfiguration) | `boolean`                                                                 | By default, the bundled dictionary configurations are loaded. Explicitly setting this to `false`                                                                     |
 | [maxDuplicateProblems](#overridesettings-maxduplicateproblems)         | `number`                                                                  | The maximum number of times the same word can be flagged as an error in a file.                                                                                      |
 | [maxNumberOfProblems](#overridesettings-maxnumberofproblems)           | `number`                                                                  | The maximum number of problems to report in a file.                                                                                                                  |
+| [minRandomLength](#overridesettings-minrandomlength)                   | `number`                                                                  | The minimum length of a random string to be ignored.                                                                                                                 |
 | [minWordLength](#overridesettings-minwordlength)                       | `number`                                                                  | The minimum length of a word before checking it against a dictionary.                                                                                                |
 | [name](#overridesettings-name)                                         | `string`                                                                  | Optional name of configuration.                                                                                                                                      |
 | [noSuggestDictionaries](#overridesettings-nosuggestdictionaries)       | [`DictionaryReference`](#dictionaryreference)&ZeroWidthSpace;`[]`         | Optional list of dictionaries that will not be used for suggestions.                                                                                                 |
@@ -6632,6 +6686,31 @@ Optional identifier.
 
 ---
 
+#### `ignoreRandomStrings` {#overridesettings-ignorerandomstrings}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+Ignore sequences of characters that look like random strings.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`boolean`
+
+</dd>
+</dl>
+
+
+
+
+---
+
 #### `ignoreRegExpList` {#overridesettings-ignoreregexplist}
 
 
@@ -6874,6 +6953,31 @@ The maximum number of times the same word can be flagged as an error in a file.
 <dd>
 
 The maximum number of problems to report in a file.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`number`
+
+</dd>
+</dl>
+
+
+
+
+---
+
+#### `minRandomLength` {#overridesettings-minrandomlength}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+The minimum length of a random string to be ignored.
 
 </dd>
 
