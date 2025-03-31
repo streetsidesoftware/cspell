@@ -163,8 +163,9 @@ For now choose to use either JSON or Yaml. Below are examples of each that inclu
         ```javascript
         'use strict';
 
-        /** @type { import("@cspell/cspell-types").CSpellUserSettings } */
-        const cspell = {
+        const { defineConfig } = require('@cspell/cspell-types');
+
+        module.exports = defineConfig({
             $schema: 'https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json',
             version: '0.2',
             dictionaryDefinitions: [
@@ -176,9 +177,7 @@ For now choose to use either JSON or Yaml. Below are examples of each that inclu
             ],
             dictionaries: ['project-words'],
             ignorePaths: ['node_modules', '/project-words.txt'],
-        };
-
-        module.exports = cspell;
+        });
         ```
     </TabItem>
     <TabItem value="package.json" label="package.json">
@@ -201,6 +200,7 @@ For now choose to use either JSON or Yaml. Below are examples of each that inclu
         }
         ```
     </TabItem>
+
 </Tabs>
 
 These configuration files do three things:
