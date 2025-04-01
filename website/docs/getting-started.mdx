@@ -141,21 +141,21 @@ For now choose to use either JSON or Yaml. Below are examples of each that inclu
         ```javascript
         'use strict';
 
-        import { defineConfig } from "cspell";
+        import { defineConfig } from 'cspell';
 
         export default defineConfig({
         $schema:
             "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
-        version: "0.2",
-        dictionaryDefinitions: [
-            {
-            name: "project-words",
-            path: "./project-words.txt",
-            addWords: true,
-            },
-        ],
-        dictionaries: ["project-words"],
-        ignorePaths: ["node_modules", "/project-words.txt"],
+            version: '0.2',
+            dictionaryDefinitions: [
+                {
+                    name: 'project-words',
+                    path: './project-words.txt',
+                    addWords: true,
+                },
+            ],
+            dictionaries: ['project-words'],
+            ignorePaths: ['node_modules', '/project-words.txt'],
         });
         ```
     </TabItem>
