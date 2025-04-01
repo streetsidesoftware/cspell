@@ -46,7 +46,60 @@ Steps:
 
 ## 1. Create a configuration file.
 
-CSpell can use JSON, Yaml, and JavaScript files for configuration. It automatically searches for one of the following: `cspell.json`, `cspell.config.yaml`, `cspell.config.cjs`.
+CSpell can use JSON, Yaml, and JavaScript files for configuration. It automatically searches for one of the following:
+
+{/** @see https://github.com/streetsidesoftware/cspell/blob/main/packages/cspell-lib/src/lib/Settings/Controller/configLoader/configLocations.ts */}
+
+- `package.json`
+- `.cspell.json`
+- `cspell.json`
+- `.cSpell.json`
+- `cSpell.json`
+- `.cspell.jsonc`
+- `cspell.jsonc`
+- `.cspell.yaml`
+- `cspell.yaml`
+- `.cspell.yml`
+- `cspell.yml`
+- `.cspell.config.json`
+- `cspell.config.json`
+- `.cspell.config.jsonc`
+- `cspell.config.jsonc`
+- `.cspell.config.yaml`
+- `cspell.config.yaml`
+- `.cspell.config.yml`
+- `cspell.config.yml`
+- `.cspell.config.mjs`
+- `cspell.config.mjs`
+- `.cspell.config.cjs`
+- `cspell.config.cjs`
+- `.cspell.config.js`
+- `cspell.config.js`
+- `.config/.cspell.json`
+- `.config/cspell.json`
+- `.config/.cSpell.json`
+- `.config/cSpell.json`
+- `.config/.cspell.jsonc`
+- `.config/cspell.jsonc`
+- `.config/cspell.yaml`
+- `.config/cspell.yml`
+- `.config/.cspell.config.json`
+- `.config/cspell.config.json`
+- `.config/.cspell.config.jsonc`
+- `.config/cspell.config.jsonc`
+- `.config/.cspell.config.yaml`
+- `.config/cspell.config.yaml`
+- `.config/.cspell.config.yml`
+- `.config/cspell.config.yml`
+- `.config/.cspell.config.mjs`
+- `.config/cspell.config.mjs`
+- `.config/.cspell.config.cjs`
+- `.config/cspell.config.cjs`
+- `.config/.cspell.config.js`
+- `.config/cspell.config.js`
+- `.vscode/.cspell.json`
+- `.vscode/cSpell.json`
+- `.vscode/cspell.json`
 
 For now choose to use either JSON or Yaml. Below are examples of each that include a custom dictionary definition. Both of them are equivalent. If you have both, CSpell will look for the `.json` file first.
 
@@ -75,8 +128,8 @@ For now choose to use either JSON or Yaml. Below are examples of each that inclu
         version: '0.2'
         dictionaryDefinitions:
             - name: project-words
-            path: './project-words.txt'
-            addWords: true
+              path: './project-words.txt'
+              addWords: true
         dictionaries:
             - project-words
         ignorePaths:
@@ -84,6 +137,64 @@ For now choose to use either JSON or Yaml. Below are examples of each that inclu
             - '/project-words.txt'
         ```
     </TabItem>
+    <TabItem value="esm" label="cspell.config.mjs">
+        ```javascript
+        import { defineConfig } from 'cspell';
+
+        export default defineConfig({
+            version: '0.2',
+            dictionaryDefinitions: [
+                {
+                    name: 'project-words',
+                    path: './project-words.txt',
+                    addWords: true,
+                },
+            ],
+            dictionaries: ['project-words'],
+            ignorePaths: ['node_modules', '/project-words.txt'],
+        });
+        ```
+    </TabItem>
+    <TabItem value="commonjs" label="cspell.config.cjs">
+        ```javascript
+        'use strict';
+
+        const { defineConfig } = require('@cspell/cspell-types');
+
+        module.exports = defineConfig({
+            version: '0.2',
+            dictionaryDefinitions: [
+                {
+                    name: 'project-words',
+                    path: './project-words.txt',
+                    addWords: true,
+                }
+            ],
+            dictionaries: ['project-words'],
+            ignorePaths: ['node_modules', '/project-words.txt'],
+        });
+        ```
+    </TabItem>
+    <TabItem value="package.json" label="package.json">
+        ```json
+        {
+            ...
+            "cspell": {
+                "version": "0.2",
+                "dictionaryDefinitions": [
+                    {
+                        "name": "project-words",
+                        "path": "./project-words.txt",
+                        "addWords": true
+                    }
+                ],
+                "dictionaries": ["project-words"],
+                "ignorePaths": ["node_modules", "/project-words.txt"]
+            }
+        }
+        ```
+    </TabItem>
+
 </Tabs>
 
 These configuration files do three things:
