@@ -269,7 +269,7 @@ export class DocumentValidator {
             if (!line || line.offset + line.text.length <= offset) {
                 line = document.lineAt(offset);
             }
-            return { text, offset, line, length, isFlagged, isFound, suggestionsEx };
+            return { text, offset, line: {text: line.text, offset: line.offset, position: document.positionAt(offset)}, length, isFlagged, isFound, suggestionsEx };
         }
         const issues = [...pipeSync(segmenter(parsedText), opConcatMap(textValidator.validate), opMap(mapToIssue))];
 
