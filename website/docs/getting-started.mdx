@@ -144,8 +144,6 @@ For now choose to use either JSON or Yaml. Below are examples of each that inclu
         import { defineConfig } from 'cspell';
 
         export default defineConfig({
-        $schema:
-            "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
             version: '0.2',
             dictionaryDefinitions: [
                 {
@@ -166,7 +164,6 @@ For now choose to use either JSON or Yaml. Below are examples of each that inclu
         const { defineConfig } = require('@cspell/cspell-types');
 
         module.exports = defineConfig({
-            $schema: 'https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json',
             version: '0.2',
             dictionaryDefinitions: [
                 {
@@ -185,7 +182,6 @@ For now choose to use either JSON or Yaml. Below are examples of each that inclu
         {
             ...
             "cspell": {
-                "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
                 "version": "0.2",
                 "dictionaryDefinitions": [
                     {
