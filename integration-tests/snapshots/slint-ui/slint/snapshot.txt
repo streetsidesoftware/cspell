@@ -3,7 +3,7 @@ Repository: slint-ui/slint
 Url: "https://github.com/slint-ui/slint"
 Args: ["--config=../../../../repositories/config/slint/cspell.config.yaml","--issues-summary-report","."]
 Lines:
- CSpell: Files checked: 2130, Issues found: 3994 in 712 files.
+ CSpell: Files checked: 2130, Issues found: 3985 in 712 files.
  exit code: 1
 CMakeLists.txt:17:14     - Unknown word (TOPLEVEL)   -- set(SLINT_IS_TOPLEVEL_BUILD TRUE)
 CMakeLists.txt:27:31     - Unknown word (dylib's)    -- macOS, the slint_cpp.dylib's install_name uses @rpath
@@ -1627,8 +1627,6 @@ examples/mcu-board-support/esp32_s3_box.rs:86:15     - Unknown word (mosi)      
 examples/mcu-board-support/esp32_s3_box/cargo-config.toml:6:1       - Unknown word (rustflags)  -- rustflags = [
 examples/mcu-board-support/esp32_s3_box/cargo-config.toml:8:22      - Unknown word (nostartfiles) -- "-C", "link-arg=-nostartfiles",
 examples/mcu-board-support/esp32_s3_box/cargo-config.toml:9:26      - Unknown word (Tlinkall)     -- -C", "link-arg=-Wl,-Tlinkall.x",
-examples/mcu-board-support/pico2_st7789.rs:104:19    - Unknown word (XOSC)       -- rp_pico2::XOSC_CRYSTAL_FREQ,
-examples/mcu-board-support/pico2_st7789.rs:105:13    - Unknown word (XOSC)       -- pac.XOSC,
 examples/mcu-board-support/pico2_st7789.rs:136:13    - Unknown word (sclk)       -- let spi_sclk = pins.gpio10.into_function
 examples/mcu-board-support/pico2_st7789.rs:137:13    - Unknown word (mosi)       -- let spi_mosi = pins.gpio11.into_function
 examples/mcu-board-support/pico2_st7789.rs:140:44    - Unknown word (mosi)       -- :new(pac.SPI1, (spi_mosi, spi_miso, spi_sclk
@@ -1644,8 +1642,6 @@ examples/mcu-board-support/pico2_st7789.rs:505:26    - Unknown word (xchg)      
 examples/mcu-board-support/pico2_st7789.rs:506:26    - Unknown word (xchg)       -- let z2 = xchg!(CMD_Z2_READ);
 examples/mcu-board-support/pico2_st7789.rs:515:29    - Unknown word (xchg)       -- let y = xchg!(CMD_Y_READ);
 examples/mcu-board-support/pico2_st7789.rs:516:29    - Unknown word (xchg)       -- let x = xchg!(CMD_X_READ);
-examples/mcu-board-support/pico2_st7789.rs:578:19    - Unknown word (XOSC)       -- rp_pico2::XOSC_CRYSTAL_FREQ,
-examples/mcu-board-support/pico2_st7789.rs:579:13    - Unknown word (XOSC)       -- pac.XOSC,
 examples/mcu-board-support/pico2_st7789.rs:589:13    - Unknown word (sclk)       -- let spi_sclk = pins.gpio10.into_function
 examples/mcu-board-support/pico2_st7789.rs:590:13    - Unknown word (mosi)       -- let spi_mosi = pins.gpio11.into_function
 examples/mcu-board-support/pico2_st7789.rs:593:58    - Unknown word (mosi)       -- :new(pac.SPI1, (spi_mosi, spi_miso, spi_sclk
@@ -1669,12 +1665,9 @@ examples/mcu-board-support/pico2_st7789/rp_pico2.rs:721:33    - Unknown word (vb
 examples/mcu-board-support/pico2_st7789/rp_pico2.rs:723:15    - Unknown word (vbus)       -- name: vbus_detect,
 examples/mcu-board-support/pico2_st7789/rp_pico2.rs:77:12     - Unknown word (UART)       -- /// | `UART0 TX`   | [crate::Gp
 examples/mcu-board-support/pico2_st7789/rp_pico2.rs:77:37     - Unknown word (Uart)       -- TX` | [crate::Gp0Uart0Tx] |
-examples/mcu-board-support/pico2_st7789/rp_pico2.rs:821:11    - Unknown word (XOSC)       -- pub const XOSC_CRYSTAL_FREQ: u32 =
 examples/mcu-board-support/pico2_st7789/rp_pico2.rs:85:17     - Unknown word (UART)       -- /// UART Function alias for pin
 examples/mcu-board-support/pico2_st7789/rp_pico2.rs:86:21     - Unknown word (Uart)       -- FunctionUart, PullNone: Gp0Uart0Tx
 examples/mcu-board-support/pico2_st7789/rp_pico2.rs:86:40     - Unknown word (Uart)       -- FunctionUart, PullNone: Gp0Uart0Tx,
-examples/mcu-board-support/pico_st7789.rs:102:18    - Unknown word (XOSC)       -- rp_pico::XOSC_CRYSTAL_FREQ,
-examples/mcu-board-support/pico_st7789.rs:103:13    - Unknown word (XOSC)       -- pac.XOSC,
 examples/mcu-board-support/pico_st7789.rs:134:13    - Unknown word (sclk)       -- let spi_sclk = pins.gpio10.into_function
 examples/mcu-board-support/pico_st7789.rs:135:13    - Unknown word (mosi)       -- let spi_mosi = pins.gpio11.into_function
 examples/mcu-board-support/pico_st7789.rs:138:44    - Unknown word (mosi)       -- :new(pac.SPI1, (spi_mosi, spi_miso, spi_sclk
@@ -1690,8 +1683,6 @@ examples/mcu-board-support/pico_st7789.rs:509:26    - Unknown word (xchg)       
 examples/mcu-board-support/pico_st7789.rs:510:26    - Unknown word (xchg)       -- let z2 = xchg!(CMD_Z2_READ);
 examples/mcu-board-support/pico_st7789.rs:519:29    - Unknown word (xchg)       -- let y = xchg!(CMD_Y_READ);
 examples/mcu-board-support/pico_st7789.rs:520:29    - Unknown word (xchg)       -- let x = xchg!(CMD_X_READ);
-examples/mcu-board-support/pico_st7789.rs:582:18    - Unknown word (XOSC)       -- rp_pico::XOSC_CRYSTAL_FREQ,
-examples/mcu-board-support/pico_st7789.rs:583:13    - Unknown word (XOSC)       -- pac.XOSC,
 examples/mcu-board-support/pico_st7789.rs:593:13    - Unknown word (sclk)       -- let spi_sclk = pins.gpio10.into_function
 examples/mcu-board-support/pico_st7789.rs:594:13    - Unknown word (mosi)       -- let spi_mosi = pins.gpio11.into_function
 examples/mcu-board-support/pico_st7789.rs:597:58    - Unknown word (mosi)       -- :new(pac.SPI1, (spi_mosi, spi_miso, spi_sclk

@@ -5,7 +5,7 @@ Args: '["--config=${commonRoot}/config/slint/cspell.config.yaml","--issues-summa
 Summary:
   files: 2130
   filesWithIssues: 712
-  issues: 3994
+  issues: 3985
   errors: 0
 Errors: []
 
@@ -2092,8 +2092,6 @@ issues:
   - "examples/mcu-board-support/pico_st7789.rs:14:5          defmt       U       use defmt_rtt as _;"
   - "examples/mcu-board-support/pico_st7789.rs:15:21         Llff        U       use embedded_alloc::LlffHeap as Heap;"
   - "examples/mcu-board-support/pico_st7789.rs:77:28         baudrate    U       borrowed.0.set_baudrate(125_000_000u32.Hz()"
-  - "examples/mcu-board-support/pico_st7789.rs:102:18        XOSC        U       rp_pico::XOSC_CRYSTAL_FREQ,"
-  - "examples/mcu-board-support/pico_st7789.rs:103:13        XOSC        U       pac.XOSC,"
   - "examples/mcu-board-support/pico_st7789.rs:134:13        sclk        U       let spi_sclk = pins.gpio10.into_function"
   - "examples/mcu-board-support/pico_st7789.rs:135:13        mosi        U       let spi_mosi = pins.gpio11.into_function"
   - "examples/mcu-board-support/pico_st7789.rs:138:44        mosi        U       :new(pac.SPI1, (spi_mosi, spi_miso, spi_sclk"
@@ -2107,8 +2105,6 @@ issues:
   - "examples/mcu-board-support/pico_st7789.rs:510:26        xchg        U       let z2 = xchg!(CMD_Z2_READ);"
   - "examples/mcu-board-support/pico_st7789.rs:519:29        xchg        U       let y = xchg!(CMD_Y_READ);"
   - "examples/mcu-board-support/pico_st7789.rs:520:29        xchg        U       let x = xchg!(CMD_X_READ);"
-  - "examples/mcu-board-support/pico_st7789.rs:582:18        XOSC        U       rp_pico::XOSC_CRYSTAL_FREQ,"
-  - "examples/mcu-board-support/pico_st7789.rs:583:13        XOSC        U       pac.XOSC,"
   - "examples/mcu-board-support/pico_st7789.rs:593:13        sclk        U       let spi_sclk = pins.gpio10.into_function"
   - "examples/mcu-board-support/pico_st7789.rs:594:13        mosi        U       let spi_mosi = pins.gpio11.into_function"
   - "examples/mcu-board-support/pico_st7789.rs:597:58        mosi        U       :new(pac.SPI1, (spi_mosi, spi_miso, spi_sclk"
@@ -2120,8 +2116,6 @@ issues:
   - "examples/mcu-board-support/pico2_st7789.rs:14:5         defmt       U       use defmt_rtt as _;"
   - "examples/mcu-board-support/pico2_st7789.rs:15:21        Llff        U       use embedded_alloc::LlffHeap as Heap;"
   - "examples/mcu-board-support/pico2_st7789.rs:79:28        baudrate    U       borrowed.0.set_baudrate(125_000_000u32.Hz()"
-  - "examples/mcu-board-support/pico2_st7789.rs:104:19       XOSC        U       rp_pico2::XOSC_CRYSTAL_FREQ,"
-  - "examples/mcu-board-support/pico2_st7789.rs:105:13       XOSC        U       pac.XOSC,"
   - "examples/mcu-board-support/pico2_st7789.rs:136:13       sclk        U       let spi_sclk = pins.gpio10.into_function"
   - "examples/mcu-board-support/pico2_st7789.rs:137:13       mosi        U       let spi_mosi = pins.gpio11.into_function"
   - "examples/mcu-board-support/pico2_st7789.rs:140:44       mosi        U       :new(pac.SPI1, (spi_mosi, spi_miso, spi_sclk"
@@ -2135,8 +2129,6 @@ issues:
   - "examples/mcu-board-support/pico2_st7789.rs:506:26       xchg        U       let z2 = xchg!(CMD_Z2_READ);"
   - "examples/mcu-board-support/pico2_st7789.rs:515:29       xchg        U       let y = xchg!(CMD_Y_READ);"
   - "examples/mcu-board-support/pico2_st7789.rs:516:29       xchg        U       let x = xchg!(CMD_X_READ);"
-  - "examples/mcu-board-support/pico2_st7789.rs:578:19       XOSC        U       rp_pico2::XOSC_CRYSTAL_FREQ,"
-  - "examples/mcu-board-support/pico2_st7789.rs:579:13       XOSC        U       pac.XOSC,"
   - "examples/mcu-board-support/pico2_st7789.rs:589:13       sclk        U       let spi_sclk = pins.gpio10.into_function"
   - "examples/mcu-board-support/pico2_st7789.rs:590:13       mosi        U       let spi_mosi = pins.gpio11.into_function"
   - "examples/mcu-board-support/pico2_st7789.rs:593:58       mosi        U       :new(pac.SPI1, (spi_mosi, spi_miso, spi_sclk"
@@ -2162,7 +2154,6 @@ issues:
   - "examples/mcu-board-support/pico2_st7789/rp_pico2.rs:133:12      UART    U       /// | `UART0 CTS` | [crate::Gp"
   - "examples/mcu-board-support/pico2_st7789/rp_pico2.rs:721:33      vbus    U       GPIO 24 is connected to vbus_detect of the Raspberry"
   - "examples/mcu-board-support/pico2_st7789/rp_pico2.rs:723:15      vbus    U       name: vbus_detect,"
-  - "examples/mcu-board-support/pico2_st7789/rp_pico2.rs:821:11      XOSC    U       pub const XOSC_CRYSTAL_FREQ: u32 ="
   - "examples/mcu-board-support/profiler.rs:1:1\tNo issues found"
   - "examples/mcu-board-support/README.md:56:104         thumbv          U       pico-st7789 --target=thumbv6m-none-eabi --release"
   - "examples/mcu-board-support/README.md:56:118         eabi            U       target=thumbv6m-none-eabi --release"
@@ -6625,7 +6616,6 @@ issuesSummary:
   - "text: Xlib, count: 8, files: 2,"
   - "text: xmark, count: 4, files: 3,"
   - "text: xoffset, count: 1, files: 1,"
-  - "text: XOSC, count: 9, files: 3,"
   - "text: xpanstep, count: 1, files: 1,"
   - "text: xreadonly, count: 4, files: 1,"
   - "text: xrel, count: 2, files: 1,"
