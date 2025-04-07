@@ -10,7 +10,14 @@ import { basename, documentUriToURL, toUri } from '../util/Uri.js';
 export { documentUriToURL } from '../util/Uri.js';
 
 export interface Position {
+    /**
+     * The line number (zero-based).
+     */
     line: number;
+    /**
+     * The zero based offset from the beginning of the line.
+     * Note: surrogate pairs are counted as two characters.
+     */
     character: number;
 }
 
