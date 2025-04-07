@@ -4,8 +4,8 @@ Url: https://github.com/caddyserver/caddy.git
 Args: '["**/*.go"]'
 Summary:
   files: 283
-  filesWithIssues: 257
-  issues: 3668
+  filesWithIssues: 256
+  issues: 3657
   errors: 0
 Errors: []
 
@@ -64,8 +64,6 @@ issues:
   - "caddy.go:765:20         pidfile             U       err := os.Remove(pidfile)"
   - "caddy.go:768:17         pidfile             U       zap.String(\"pidfile\", pidfile),"
   - "caddy.go:768:27         pidfile             U       zap.String(\"pidfile\", pidfile),"
-  - "caddy.go:925:47         ldflags             U       during `go build` with `-ldflags`:"
-  - "caddy.go:927:5          ldflags             U       // -ldflags '-X github.com/caddyserver"
   - "caddy.go:927:28         caddyserver         U       ldflags '-X github.com/caddyserver/caddy/v2.CustomVersion"
   - "caddy.go:941:28         devel               U       this function returns \"(devel)\" because Go uses that"
   - "caddy.go:1038:33        devel               U       = \"\" || simple == \"(devel)\" {"
@@ -940,8 +938,7 @@ issues:
   - "cmd/storagefuncs.go:29:14       caddyserver     U       \"github.com/caddyserver/caddy/v2\""
   - "cmd/storagefuncs.go:82:11       certmagic       U       var stor certmagic.Storage"
   - "cmd/storagefuncs.go:154:11      certmagic       U       var stor certmagic.Storage"
-  - "cmd/x509rootsfallback.go:15:9           caddycmd        U       package caddycmd"
-  - "cmd/x509rootsfallback.go:30:21          goimports       U       // between gci and goimports when in main.go."
+  - "cmd/x509rootsfallback.go:15:9           caddycmd    U       package caddycmd"
   - "context_test.go:28:11       godoc       U       // This godoc comment will appear"
   - "context_test.go:60:11       godoc       U       // This godoc comment will appear"
   - "context_test.go:93:11       godoc       U       // This godoc comment will appear"
@@ -2640,7 +2637,6 @@ issues:
   - "modules/caddyhttp/tracing/tracer.go:9:43        autoprop            U       contrib/propagators/autoprop\""
   - "modules/caddyhttp/tracing/tracer.go:10:43       otlptrace           U       otel/exporters/otlp/otlptrace/otlptracegrpc\""
   - "modules/caddyhttp/tracing/tracer.go:10:53       otlptracegrpc       U       exporters/otlp/otlptrace/otlptracegrpc\""
-  - "modules/caddyhttp/tracing/tracer.go:13:2        sdktrace            U       sdktrace \"go.opentelemetry.io"
   - "modules/caddyhttp/tracing/tracer.go:14:2        semconv             U       semconv \"go.opentelemetry.io"
   - "modules/caddyhttp/tracing/tracer.go:14:36       semconv             U       opentelemetry.io/otel/semconv/v1.17.0\""
   - "modules/caddyhttp/tracing/tracer.go:18:14       caddyserver         U       \"github.com/caddyserver/caddy/v2\""
@@ -2649,8 +2645,6 @@ issues:
   - "modules/caddyhttp/tracing/tracer.go:30:7        caddyhttp           U       next caddyhttp.Handler"
   - "modules/caddyhttp/tracing/tracer.go:62:24       otlptracegrpc       U       traceExporter, err := otlptracegrpc.New(ctx)"
   - "modules/caddyhttp/tracing/tracer.go:67:19       autoprop            U       ot.propagators = autoprop.NewTextMapPropagator"
-  - "modules/caddyhttp/tracing/tracer.go:70:3        sdktrace            U       sdktrace.WithBatcher(traceExporter"
-  - "modules/caddyhttp/tracing/tracer.go:71:3        sdktrace            U       sdktrace.WithResource(res),"
   - "modules/caddyhttp/tracing/tracer.go:74:15       otelhttp            U       ot.handler = otelhttp.NewHandler(http.HandlerFunc"
   - "modules/caddyhttp/tracing/tracer.go:76:3        otelhttp            U       otelhttp.WithTracerProvider(tracerProv"
   - "modules/caddyhttp/tracing/tracer.go:77:3        otelhttp            U       otelhttp.WithPropagators(ot.propagator"
@@ -2660,11 +2654,6 @@ issues:
   - "modules/caddyhttp/tracing/tracer.go:97:29       caddyhttp           U       extra, ok := ctx.Value(caddyhttp.ExtraLogFieldsCtxKey"
   - "modules/caddyhttp/tracing/tracer.go:128:3       semconv             U       semconv.WebEngineName(webEngineName"
   - "modules/caddyhttp/tracing/tracer.go:129:3       semconv             U       semconv.WebEngineVersion(webEngineVer"
-  - "modules/caddyhttp/tracing/tracerprovider.go:8:2         sdktrace    U       sdktrace \"go.opentelemetry.io"
-  - "modules/caddyhttp/tracing/tracerprovider.go:18:26       sdktrace    U       tracerProvider *sdktrace.TracerProvider"
-  - "modules/caddyhttp/tracing/tracerprovider.go:23:52       sdktrace    U       getTracerProvider(opts ...sdktrace.TracerProviderOption"
-  - "modules/caddyhttp/tracing/tracerprovider.go:23:84       sdktrace    U       TracerProviderOption) *sdktrace.TracerProvider {"
-  - "modules/caddyhttp/tracing/tracerprovider.go:30:22       sdktrace    U       t.tracerProvider = sdktrace.NewTracerProvider("
   - "modules/caddyhttp/vars.go:15:9          caddyhttp       U       package caddyhttp"
   - "modules/caddyhttp/vars.go:27:14         caddyserver     U       \"github.com/caddyserver/caddy/v2\""
   - "modules/caddyhttp/vars.go:28:14         caddyserver     U       \"github.com/caddyserver/caddy/v2/caddyconfig"
