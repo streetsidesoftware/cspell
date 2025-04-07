@@ -3,7 +3,7 @@ Repository: pycontribs/jira
 Url: "https://github.com/pycontribs/jira.git"
 Args: ["**/*.*"]
 Lines:
- CSpell: Files checked: 80, Issues found: 441 in 40 files.
+ CSpell: Files checked: 79, Issues found: 436 in 39 files.
  exit code: 1
 AUTHORS.rst:3:21      - Unknown word (Contribs)   -- Development Team (PyContribs)
 AUTHORS.rst:5:7       - Unknown word (Speakmon)   -- - Ben Speakmon <ben.speakmon@gmail
@@ -80,10 +80,10 @@ docs/index.rst:29:9      - Unknown word (genindex)   -- * :ref:`genindex`
 docs/index.rst:5:4       - Unknown word (toctree)    -- .. toctree::
 docs/installation.rst:11:78     - Unknown word (virtualenv) -- strongly recommend using a `virtualenv <https://virtualenv
 docs/installation.rst:15:15     - Unknown word (venv)       -- python -m venv jira_python
-docs/installation.rst:42:12     - Unknown word (ipython)    -- - :py:mod:`ipython` - The `IPython enhanced
-docs/installation.rst:43:12     - Unknown word (filemagic)  -- - :py:mod:`filemagic` - This library handles
-docs/installation.rst:43:150    - Unknown word (libmagic)      -- system that provides libmagic; Mac and Unix will almost
-docs/installation.rst:43:59     - Unknown word (autodetection) -- handles content-type autodetection for things like image
+docs/installation.rst:40:12     - Unknown word (ipython)    -- - :py:mod:`ipython` - The `IPython enhanced
+docs/installation.rst:41:12     - Unknown word (filemagic)  -- - :py:mod:`filemagic` - This library handles
+docs/installation.rst:41:150    - Unknown word (libmagic)      -- system that provides libmagic; Mac and Unix will almost
+docs/installation.rst:41:59     - Unknown word (autodetection) -- handles content-type autodetection for things like image
 docs/jirashell.rst:44:18     - Unknown word (aggregateprogress) -- issue.fields.aggregateprogress issue.fields
 docs/jirashell.rst:44:62     - Unknown word (customfield)       -- issue.fields.customfield_11531
 docs/jirashell.rst:45:18     - Unknown word (aggregatetimeestimate) -- issue.fields.aggregatetimeestimate issue.fields
@@ -101,7 +101,7 @@ examples/maintenance.py:58:12     - Unknown word (projectcategories) -- for s in
 examples/maintenance.py:79:12     - Unknown word (notificationschemes) -- for s in j.notificationschemes():
 examples/maintenance.py:82:8      - Unknown word (ssbarnea)            -- # TODO(ssbarnea): "Default Issue Security
 jira/client.py:1085:66   - Unknown word (applicationlink) -- rest/applinks/latest/applicationlink'
-jira/client.py:1154:22   - Unknown word (multipartencoded) -- def generate_multipartencoded_request_args() -> (
+jira/client.py:1154:22   - Unknown word (multipartencoded) -- def generate_multipartencoded_request_args() -> tuple
 jira/client.py:1170:15   - Unknown word (Retryable)        -- class RetryableMultipartEncoder(PrepareReques
 jira/client.py:1312:45   - Unknown word (favourite)        -- Optional[str]): either "favourite" or "my", the type of
 jira/client.py:153:56    - Unknown word (reraises)   -- exception is raised, this reraises.
@@ -117,7 +117,7 @@ jira/client.py:4773:52   - Unknown word (reindexing)       -- indexing. Returns 
 jira/client.py:4786:61   - Unknown word (stoptheworld)     -- if background else "stoptheworld"
 jira/client.py:4826:78   - Unknown word (statuscode)       -- else it returns the statuscode of the Response or False
 jira/client.py:4830:60   - Unknown word (runbackup)        -- rest/backup/1/export/runbackup"
-jira/client.py:4856:52   - Unknown word (getprogress)      -- url + "/rest/obm/1.0/getprogress?_=%i" % epoch_time
+jira/client.py:4856:53   - Unknown word (getprogress)      -- url + f"/rest/obm/1.0/getprogress?_={epoch_time:i}"
 jira/client.py:4887:9    - Unknown word (perc)             -- perc_search = re.search(r
 jira/client.py:4904:35   - Unknown word (webdav)           -- self.server_url + "/webdav/backupmanager/" + remote
 jira/client.py:4904:42   - Unknown word (backupmanager)    -- server_url + "/webdav/backupmanager/" + remote_file
@@ -139,29 +139,30 @@ jira/resources.py:1304:14   - Unknown word (categorised)              -- "catego
 jira/resources.py:763:18    - Unknown word (duedate)    -- self.duedate: str | None = None
 jira/resources.py:773:18    - Unknown word (statuscategorychangedate) -- self.statuscategorychangedate: str | None = None
 jira/resources.py:895:42    - Unknown word (browsable)                -- URL of the issue, the browsable one not the REST one
-pyproject.toml:103:9     - Unknown word (mypy)       -- "./.mypy_cache",
-pyproject.toml:125:7     - Unknown word (setuptools) -- [tool.setuptools]
-pyproject.toml:140:3     - Unknown word (Setuptools) -- # Setuptools config
-pyproject.toml:145:1     - Unknown word (minversion) -- minversion = "6.0"
-pyproject.toml:146:1     - Unknown word (testpaths)  -- testpaths = ["tests"]
-pyproject.toml:148:1     - Unknown word (addopts)    -- addopts = '''-p no:xdist --durations
-pyproject.toml:149:16    - Unknown word (junitxml)   -- --junitxml=build/results.xml
-pyproject.toml:153:1     - Unknown word (rsyncdirs)  -- rsyncdirs = ". jira demo docs
-pyproject.toml:154:1     - Unknown word (rsyncignore) -- rsyncignore = ".git"
-pyproject.toml:160:1     - Unknown word (filterwarnings) -- filterwarnings = ["ignore::pytest.PytestWarn
-pyproject.toml:187:13    - Unknown word (pydocstyle)     -- "E", # pydocstyle
-pyproject.toml:189:13    - Unknown word (pyflakes)       -- "F", # pyflakes
-pyproject.toml:190:13    - Unknown word (isort)          -- "I", # isort
-pyproject.toml:191:13    - Unknown word (pyupgrade)      -- "UP", # pyupgrade
-pyproject.toml:27:6      - Unknown word (defusedxml) -- "defusedxml",
-pyproject.toml:61:6      - Unknown word (furo)       -- "furo",
-pyproject.toml:77:13     - Unknown word (instafail)  -- "pytest-instafail",
-pyproject.toml:80:13     - Unknown word (xdist)      -- "pytest-xdist>=2.2",
-pyproject.toml:87:6      - Unknown word (yanc)       -- "yanc>=0.3.3", # GPL
-pyproject.toml:94:7      - Unknown word (codespell)  -- [tool.codespell]
-tests/conftest.py:106:5     - Unknown word (rndstr)     -- def rndstr():
-tests/conftest.py:110:5     - Unknown word (rndpassword) -- def rndpassword():
-tests/conftest.py:121:5     - Unknown word (hashify)     -- def hashify(some_string, max_len
+pyproject.toml:105:7     - Unknown word (mypy)       -- "./.mypy_cache",
+pyproject.toml:157:1     - Unknown word (addopts)    -- addopts = '''-p no:xdist --durations
+pyproject.toml:159:1     - Unknown word (filterwarnings) -- filterwarnings = ["ignore::pytest.PytestWarn
+pyproject.toml:161:1     - Unknown word (minversion)     -- minversion = "6.0"
+pyproject.toml:164:1     - Unknown word (rsyncdirs)      -- rsyncdirs = ". jira demo docs
+pyproject.toml:165:1     - Unknown word (rsyncignore)    -- rsyncignore = ".git"
+pyproject.toml:166:1     - Unknown word (testpaths)      -- testpaths = ["tests"]
+pyproject.toml:197:10    - Unknown word (pydocstyle)     -- "E", # pydocstyle
+pyproject.toml:199:10    - Unknown word (pyflakes)       -- "F", # pyflakes
+pyproject.toml:200:10    - Unknown word (isort)          -- "I", # isort
+pyproject.toml:201:11    - Unknown word (pyupgrade)      -- "UP", # pyupgrade
+pyproject.toml:247:7     - Unknown word (tomlsort)       -- [tool.tomlsort]
+pyproject.toml:24:4      - Unknown word (defusedxml) -- "defusedxml",
+pyproject.toml:258:4     - Unknown word (secretstorage)  -- "secretstorage", # linux specific dependency
+pyproject.toml:259:4     - Unknown word (jeepney)        -- "jeepney", # linux specific dependency
+pyproject.toml:2:18      - Unknown word (setuptools) -- build-backend = "setuptools.build_meta"
+pyproject.toml:48:4      - Unknown word (furo)       -- "furo"
+pyproject.toml:66:11     - Unknown word (instafail)  -- "pytest-instafail",
+pyproject.toml:69:11     - Unknown word (xdist)      -- "pytest-xdist>=2.2",
+pyproject.toml:75:4      - Unknown word (yanc)       -- "yanc>=0.3.3", # GPL
+pyproject.toml:95:7      - Unknown word (codespell)  -- [tool.codespell]
+tests/conftest.py:104:5     - Unknown word (rndstr)     -- def rndstr():
+tests/conftest.py:108:5     - Unknown word (rndpassword) -- def rndpassword():
+tests/conftest.py:119:5     - Unknown word (hashify)     -- def hashify(some_string, max_len
 tests/resources/test_dashboard.py:29:55     - Unknown word (issuekey)   -- column_names = "issuetype|issuekey|summary|priority|status
 tests/resources/test_dashboard.py:83:66     - Unknown word (loggedin)   -- uthenticated` corresponds to `loggedin`.
 tests/resources/test_issue.py:108:32    - Unknown word (fielddict)  -- test_create_issue_with_fielddict(self):
@@ -178,7 +179,6 @@ tests/resources/test_pinned_comment.py:18:14     - Unknown word (pincomments) --
 tests/resources/test_project.py:196:9     - Unknown word (actornames) -- actornames = {actor.name: actor
 tests/resources/test_remote_link.py:6:73      - Unknown word (googlicious) -- google.com", "title": "googlicious!"}
 tests/resources/test_sprint.py:117:13    - Unknown word (serialised) -- serialised_sprint = updated_issue
-tests/ruff.toml:1:14      - Unknown word (pyproject)  -- extend = "../pyproject.toml"
 tests/test_client.py:129:13    - Unknown word (abogus)     -- slug = "abogus123"
 tests/test_client.py:193:18    - Unknown word (unclobbered) -- def test_headers_unclobbered_update(options_arg,
 tests/test_client.py:362:69    - Unknown word (caplog)      -- request, mock_jira_client, caplog):
@@ -189,25 +189,23 @@ tests/test_shell.py:27:19     - Unknown word (βρέθηκε)    -- text="Δεν
 tests/tests.py:130:31    - Unknown word (headingcolour) -- key="jira.lf.text.headingcolour"
 tests/tests.py:41:29     - Unknown word (woopsydoodle) -- self.jira.find("woopsydoodle/{0}", "666")
 tests/tests.py:422:26    - Unknown word (kall)          -- actual_calls = [[kall[1], kall[2]] for kall
-tox.ini:102:13    - Unknown word (pathlib)           -- 'import pathlib; '\
-tox.ini:116:21    - Unknown word (sdist)             -- # build wheel and sdist using PEP-517
-tox.ini:117:35    - Unknown word (shutil)            -- -c 'import os.path, shutil, sys; \
-tox.ini:119:11    - Unknown word (isdir)             -- os.path.isdir(dist_dir) or sys.exit
-tox.ini:121:10    - Unknown word (rmtree)            -- shutil.rmtree(dist_dir)'
-tox.ini:14:8      - Unknown word (basepython) -- ignore_basepython_conflict = True
-tox.ini:16:1      - Unknown word (skipdist)   -- skipdist = True
-tox.ini:27:1      - Unknown word (usedevelop) -- usedevelop = True
-tox.ini:34:1      - Unknown word (sitepackages) -- sitepackages=False
-tox.ini:39:23     - Unknown word (posargs)      -- python -m pytest {posargs}
-tox.ini:41:21     - Unknown word (toxinidir)    -- PIP_CONSTRAINT={toxinidir}/constraints.txt
-tox.ini:42:14     - Unknown word (envdir)       -- PIP_LOG={envdir}/pip.log
-tox.ini:45:5      - Unknown word (PYTHONWARNINGS) -- PYTHONWARNINGS=ignore:DEPRECATION:
-tox.ini:53:1      - Unknown word (passenv)        -- passenv =
-tox.ini:63:26     - Unknown word (getpass)        -- For Windows users, getpass.get_user() needs USERNAME
-tox.ini:6:1       - Unknown word (envlist)    -- envlist =
-tox.ini:80:31     - Unknown word (autoupdate)     -- envpython} -m pre_commit autoupdate
-tox.ini:80:6      - Unknown word (envpython)      -- {envpython} -m pre_commit autoupdate
-tox.ini:90:5      - Unknown word (PYTHONHTTPSVERIFY) -- PYTHONHTTPSVERIFY=0
-tox.ini:95:9      - Unknown word (nitpicky)          -- --nitpicky --fail-on-warning \
-tox.ini:97:12     - Unknown word (toxworkdir)        -- -d "{toxworkdir}/docs_doctree" \
-tox.ini:97:29     - Unknown word (doctree)           -- d "{toxworkdir}/docs_doctree" \
+tox.ini:112:38    - Unknown word (shutil)              -- -c 'import os.path, shutil, sys; \
+tox.ini:114:15    - Unknown word (isdir)               -- os.path.isdir(dist_dir) or sys.exit
+tox.ini:116:14    - Unknown word (rmtree)              -- shutil.rmtree(dist_dir)'
+tox.ini:131:5     - Unknown word (DYLD)                -- DYLD_FALLBACK_LIBRARY_PATH
+tox.ini:139:9     - Unknown word (nitpicky)            -- --nitpicky --fail-on-warning \
+tox.ini:141:12    - Unknown word (toxworkdir)          -- -d "{toxworkdir}/docs_doctree" \
+tox.ini:141:29    - Unknown word (doctree)             -- d "{toxworkdir}/docs_doctree" \
+tox.ini:144:15    - Unknown word (pathlib)             -- 'import pathlib; ' \
+tox.ini:146:1     - Unknown word (skipdist)            -- skipdist = False
+tox.ini:156:16    - Unknown word (autoupdate)          -- pre-commit autoupdate
+tox.ini:19:5      - Unknown word (devel)      -- devel: and ansible devel branch
+tox.ini:36:12     - Unknown word (REQPASS)    -- PYTEST_REQPASS
+tox.ini:38:5      - Unknown word (PYTHONBREAKPOINT) -- PYTHONBREAKPOINT
+tox.ini:39:5      - Unknown word (PYTHONIOENCODING) -- PYTHONIOENCODING
+tox.ini:40:5      - Unknown word (PYTHONPYCACHEPREFIX) -- PYTHONPYCACHEPREFIX
+tox.ini:44:5      - Unknown word (SETUPTOOLS)          -- SETUPTOOLS_SCM_DEBUG
+tox.ini:60:41     - Unknown word (pyproject)           -- PROCESS_START = {tox_root}/pyproject.toml
+tox.ini:74:29     - Unknown word (posargs)             -- coverage run -m pytest {posargs: \
+tox.ini:76:9      - Unknown word (showlocals)          -- --showlocals \
+tox.ini:77:9      - Unknown word (doctest)             -- --doctest-modules \
