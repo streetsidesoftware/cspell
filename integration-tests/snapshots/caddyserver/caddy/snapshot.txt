@@ -3,7 +3,7 @@ Repository: caddyserver/caddy
 Url: "https://github.com/caddyserver/caddy.git"
 Args: ["**/*.go"]
 Lines:
- CSpell: Files checked: 283, Issues found: 3668 in 257 files.
+ CSpell: Files checked: 283, Issues found: 3657 in 256 files.
  exit code: 1
 admin.go:1064:20   - Unknown word (Redir)       -- return errInternalRedir
 admin.go:1340:6    - Unknown word (loggable)    -- type loggableURLArray []*url.URL
@@ -65,9 +65,7 @@ caddy.go:765:20    - Unknown word (pidfile)     -- err := os.Remove(pidfile)
 caddy.go:768:17    - Unknown word (pidfile)     -- zap.String("pidfile", pidfile),
 caddy.go:768:27    - Unknown word (pidfile)     -- zap.String("pidfile", pidfile),
 caddy.go:85:15     - Unknown word (certmagic)   -- storage certmagic.Storage
-caddy.go:925:47    - Unknown word (ldflags)     -- during `go build` with `-ldflags`:
 caddy.go:927:28    - Unknown word (caddyserver) -- ldflags '-X github.com/caddyserver/caddy/v2.CustomVersion
-caddy.go:927:5     - Unknown word (ldflags)     -- // -ldflags '-X github.com/caddyserver
 caddy.go:941:28    - Unknown word (devel)       -- this function returns "(devel)" because Go uses that
 caddyconfig/caddyfile/adapter.go:130:17    - Unknown word (Errf)        -- return nil, d.Errf("getting module named
 caddyconfig/caddyfile/adapter.go:135:17    - Unknown word (Errf)        -- return nil, d.Errf("module %s is not a
@@ -936,7 +934,6 @@ cmd/storagefuncs.go:27:26     - Unknown word (certmagic)   -- github.com/caddyse
 cmd/storagefuncs.go:29:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
 cmd/storagefuncs.go:82:11     - Unknown word (certmagic)   -- var stor certmagic.Storage
 cmd/x509rootsfallback.go:15:9      - Unknown word (caddycmd)   -- package caddycmd
-cmd/x509rootsfallback.go:30:21     - Unknown word (goimports)  -- // between gci and goimports when in main.go.
 context.go:25:14     - Unknown word (caddyserver) -- "github.com/caddyserver/certmagic"
 context.go:25:26     - Unknown word (certmagic)   -- github.com/caddyserver/certmagic"
 context.go:29:23     - Unknown word (zapslog)     -- go.uber.org/zap/exp/zapslog"
@@ -2634,7 +2631,6 @@ modules/caddyhttp/tracing/tracer.go:10:43     - Unknown word (otlptrace)  -- ote
 modules/caddyhttp/tracing/tracer.go:10:53     - Unknown word (otlptracegrpc) -- exporters/otlp/otlptrace/otlptracegrpc"
 modules/caddyhttp/tracing/tracer.go:128:3     - Unknown word (semconv)       -- semconv.WebEngineName(webEngineName
 modules/caddyhttp/tracing/tracer.go:129:3     - Unknown word (semconv)       -- semconv.WebEngineVersion(webEngineVer
-modules/caddyhttp/tracing/tracer.go:13:2      - Unknown word (sdktrace)      -- sdktrace "go.opentelemetry.io
 modules/caddyhttp/tracing/tracer.go:14:2      - Unknown word (semconv)       -- semconv "go.opentelemetry.io
 modules/caddyhttp/tracing/tracer.go:14:36     - Unknown word (semconv)       -- opentelemetry.io/otel/semconv/v1.17.0"
 modules/caddyhttp/tracing/tracer.go:18:14     - Unknown word (caddyserver)   -- "github.com/caddyserver/caddy/v2"
@@ -2643,8 +2639,6 @@ modules/caddyhttp/tracing/tracer.go:19:43     - Unknown word (caddyhttp)     -- 
 modules/caddyhttp/tracing/tracer.go:30:7      - Unknown word (caddyhttp)     -- next caddyhttp.Handler
 modules/caddyhttp/tracing/tracer.go:62:24     - Unknown word (otlptracegrpc) -- traceExporter, err := otlptracegrpc.New(ctx)
 modules/caddyhttp/tracing/tracer.go:67:19     - Unknown word (autoprop)      -- ot.propagators = autoprop.NewTextMapPropagator
-modules/caddyhttp/tracing/tracer.go:70:3      - Unknown word (sdktrace)      -- sdktrace.WithBatcher(traceExporter
-modules/caddyhttp/tracing/tracer.go:71:3      - Unknown word (sdktrace)      -- sdktrace.WithResource(res),
 modules/caddyhttp/tracing/tracer.go:74:15     - Unknown word (otelhttp)      -- ot.handler = otelhttp.NewHandler(http.HandlerFunc
 modules/caddyhttp/tracing/tracer.go:76:3      - Unknown word (otelhttp)      -- otelhttp.WithTracerProvider(tracerProv
 modules/caddyhttp/tracing/tracer.go:77:3      - Unknown word (otelhttp)      -- otelhttp.WithPropagators(ot.propagator
@@ -2655,11 +2649,6 @@ modules/caddyhttp/tracing/tracer.go:95:3      - Unknown word (caddyhttp)     -- 
 modules/caddyhttp/tracing/tracer.go:97:29     - Unknown word (caddyhttp)     -- extra, ok := ctx.Value(caddyhttp.ExtraLogFieldsCtxKey
 modules/caddyhttp/tracing/tracer.go:9:43      - Unknown word (autoprop)   -- contrib/propagators/autoprop"
 modules/caddyhttp/tracing/tracer_test.go:7:14      - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
-modules/caddyhttp/tracing/tracerprovider.go:18:26     - Unknown word (sdktrace)   -- tracerProvider *sdktrace.TracerProvider
-modules/caddyhttp/tracing/tracerprovider.go:23:52     - Unknown word (sdktrace)   -- getTracerProvider(opts ...sdktrace.TracerProviderOption
-modules/caddyhttp/tracing/tracerprovider.go:23:84     - Unknown word (sdktrace)   -- TracerProviderOption) *sdktrace.TracerProvider {
-modules/caddyhttp/tracing/tracerprovider.go:30:22     - Unknown word (sdktrace)   -- t.tracerProvider = sdktrace.NewTracerProvider(
-modules/caddyhttp/tracing/tracerprovider.go:8:2       - Unknown word (sdktrace)   -- sdktrace "go.opentelemetry.io
 modules/caddyhttp/vars.go:143:13    - Unknown word (Caddyfile)   -- // UnmarshalCaddyfile implements caddyfile
 modules/caddyhttp/vars.go:143:34    - Unknown word (caddyfile)   -- UnmarshalCaddyfile implements caddyfile.Unmarshaler.
 modules/caddyhttp/vars.go:144:32    - Unknown word (Caddyfile)   -- VarsMatcher) UnmarshalCaddyfile(d *caddyfile.Dispenser
