@@ -51,7 +51,14 @@ interface DocumentWithText extends Document {
 declare function isBinaryFile(filename: Uri | URL | string, languageId?: string | string[], text?: string): boolean;
 
 interface Position {
+    /**
+     * The line number (zero-based).
+     */
     line: number;
+    /**
+     * The zero based offset from the beginning of the line.
+     * Note: surrogate pairs are counted as two characters.
+     */
     character: number;
 }
 /**
