@@ -44,7 +44,7 @@ ruleTester.run('cspell', Rule.rules.spellchecker, {
             [
                 unknownWord('readstring', 8),
                 unknownWord('resetmemorycategory'),
-                unknownWord('retargeting', 8),
+                // unknownWord('retargeting', 8), was added to the dictionary
                 unknownWord('rrotate', 8),
                 unknownWord('rshift', 8),
             ],
