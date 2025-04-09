@@ -33,6 +33,10 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 env:
   NODE_OPTIONS: '--enable-source-maps' # coverage report is wrong if this in not set.
   NODE_VERSION: ${{ inputs.NODE_VERSION || '22.x' }}
