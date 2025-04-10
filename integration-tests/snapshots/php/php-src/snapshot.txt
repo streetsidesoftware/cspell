@@ -3,7 +3,7 @@ Repository: php/php-src
 Url: "https://github.com/php/php-src.git"
 Args: ["--config=../../../../config/repositories/php/php-src/cspell.json","**/*.{md,c,h,php}"]
 Lines:
- CSpell: Files checked: 2222, Issues found: 26548 in 1525 files.
+ CSpell: Files checked: 2222, Issues found: 26680 in 1528 files.
  exit code: 1
 CODING_STANDARDS.md:101:23    - Unknown word (intvl)      -- // Could be 'date_intvl_create_from_date_str
 CODING_STANDARDS.md:110:8     - Unknown word (setclientencoding) -- pg_setclientencoding
@@ -840,6 +840,7 @@ Zend/zend_operators.h:591:12    - Unknown word (llresult)   -- long long llresul
 Zend/zend_operators.h:592:55    - Unknown word (llresult)   -- ongLongAdd(Z_LVAL_P(op1), 1, &llresult)))) {
 Zend/zend_operators.h:902:22    - Unknown word (streq)      -- return zendi_smart_streq(s1, s2);
 Zend/zend_portability.h:15:15     - Unknown word (Andi)       -- | Authors: Andi Gutmans <andi@php.net
+Zend/zend_portability.h:289:51    - Unknown word (Ofast)      -- attribute__((optimize("Ofast")))
 Zend/zend_portability.h:485:14    - Unknown word (THREEWAY)   -- #define ZEND_THREEWAY_COMPARE(a, b) ((a)
 Zend/zend_portability.h:515:22    - Unknown word (msan)       -- include <sanitizer/msan_interface.h>
 Zend/zend_portability.h:516:10    - Unknown word (MSAN)       -- # define MSAN_UNPOISON(value) __msan
@@ -3708,10 +3709,14 @@ ext/dba/dba_qdbm.c:164:2     - Unknown word (dpoptimize) -- dpoptimize(dba->dbf,
 ext/dba/dba_qdbm.c:172:2     - Unknown word (dpsync)     -- dpsync(dba->dbf);
 ext/dba/dba_qdbm.c:178:17    - Unknown word (dpversion)  -- return estrdup(dpversion);
 ext/dba/dba_qdbm.c:40:10     - Unknown word (dpopen)     -- dbf = dpopen(ZSTR_VAL(info->path
+ext/dba/dba_qdbm.c:40:42     - Unknown word (OREADER)    -- VAL(info->path), DP_OREADER, 0);
 ext/dba/dba_qdbm.c:43:10     - Unknown word (dpopen)     -- dbf = dpopen(ZSTR_VAL(info->path
+ext/dba/dba_qdbm.c:43:42     - Unknown word (OWRITER)    -- VAL(info->path), DP_OWRITER, 0);
 ext/dba/dba_qdbm.c:46:10     - Unknown word (dpopen)     -- dbf = dpopen(ZSTR_VAL(info->path
+ext/dba/dba_qdbm.c:46:42     - Unknown word (OWRITER)    -- VAL(info->path), DP_OWRITER | DP_OCREAT, 0);
 ext/dba/dba_qdbm.c:46:55     - Unknown word (OCREAT)     -- path), DP_OWRITER | DP_OCREAT, 0);
 ext/dba/dba_qdbm.c:49:10     - Unknown word (dpopen)     -- dbf = dpopen(ZSTR_VAL(info->path
+ext/dba/dba_qdbm.c:49:42     - Unknown word (OWRITER)    -- VAL(info->path), DP_OWRITER | DP_OCREAT | DP_OTRUNC
 ext/dba/dba_qdbm.c:49:55     - Unknown word (OCREAT)     -- path), DP_OWRITER | DP_OCREAT | DP_OTRUNC, 0);
 ext/dba/dba_qdbm.c:49:67     - Unknown word (OTRUNC)     -- OWRITER | DP_OCREAT | DP_OTRUNC, 0);
 ext/dba/dba_qdbm.c:62:20     - Unknown word (dperrmsg)   -- *error = (char *) dperrmsg(dpecode);
@@ -4349,7 +4354,9 @@ ext/dom/lexbor/lexbor/css/property/const.h:420:19    - Unknown word (OLDLACE)   
 ext/dom/lexbor/lexbor/css/property/const.h:420:56    - Unknown word (OLDLACE)              -- = LXB_CSS_VALUE_OLDLACE,
 ext/dom/lexbor/lexbor/css/property/const.h:422:19    - Unknown word (OLIVEDRAB)            -- LXB_CSS_COLOR_OLIVEDRAB = LXB_CSS
 ext/dom/lexbor/lexbor/css/property/const.h:422:56    - Unknown word (OLIVEDRAB)            -- = LXB_CSS_VALUE_OLIVEDRAB,
-ext/dom/lexbor/lexbor/css/property/const.h:426:19    - Unknown word (PALEGOLDENROD)        -- LXB_CSS_COLOR_PALEGOLDENROD = LXB_CSS_VALUE
+ext/dom/lexbor/lexbor/css/property/const.h:424:19    - Unknown word (ORANGERED)            -- LXB_CSS_COLOR_ORANGERED = LXB_CSS
+ext/dom/lexbor/lexbor/css/property/const.h:424:56    - Unknown word (ORANGERED)           -- = LXB_CSS_VALUE_ORANGERED,
+ext/dom/lexbor/lexbor/css/property/const.h:426:19    - Unknown word (PALEGOLDENROD)       -- LXB_CSS_COLOR_PALEGOLDENROD = LXB_CSS_VALUE
 ext/dom/lexbor/lexbor/css/property/const.h:426:56    - Unknown word (PALEGOLDENROD)       -- = LXB_CSS_VALUE_PALEGOLDENROD,
 ext/dom/lexbor/lexbor/css/property/const.h:427:19    - Unknown word (PALEGREEN)           -- LXB_CSS_COLOR_PALEGREEN = LXB_CSS
 ext/dom/lexbor/lexbor/css/property/const.h:427:56    - Unknown word (PALEGREEN)           -- = LXB_CSS_VALUE_PALEGREEN,
@@ -4604,6 +4611,7 @@ ext/dom/lexbor/lexbor/css/value/const.h:169:19    - Unknown word (MISTYROSE)    
 ext/dom/lexbor/lexbor/css/value/const.h:171:19    - Unknown word (NAVAJOWHITE)          -- LXB_CSS_VALUE_NAVAJOWHITE = 0x0098,
 ext/dom/lexbor/lexbor/css/value/const.h:173:19    - Unknown word (OLDLACE)              -- LXB_CSS_VALUE_OLDLACE = 0x00
 ext/dom/lexbor/lexbor/css/value/const.h:175:19    - Unknown word (OLIVEDRAB)            -- LXB_CSS_VALUE_OLIVEDRAB = 0x009c
+ext/dom/lexbor/lexbor/css/value/const.h:177:19    - Unknown word (ORANGERED)            -- LXB_CSS_VALUE_ORANGERED = 0x009e
 ext/dom/lexbor/lexbor/css/value/const.h:179:19    - Unknown word (PALEGOLDENROD)        -- LXB_CSS_VALUE_PALEGOLDENROD = 0x00a0,
 ext/dom/lexbor/lexbor/css/value/const.h:180:19    - Unknown word (PALEGREEN)            -- LXB_CSS_VALUE_PALEGREEN = 0x00a1
 ext/dom/lexbor/lexbor/css/value/const.h:181:19    - Unknown word (PALETURQUOISE)        -- LXB_CSS_VALUE_PALETURQUOISE = 0x00a2,
@@ -4630,7 +4638,7 @@ ext/dom/lexbor/lexbor/css/value/const.h:236:19    - Unknown word (ACCENTCOLOR)  
 ext/dom/lexbor/lexbor/css/value/const.h:237:19    - Unknown word (ACCENTCOLORTEXT)      -- LXB_CSS_VALUE_ACCENTCOLORTEXT = 0x00da,
 ext/dom/lexbor/lexbor/css/value/const.h:246:19    - Unknown word (OKLCH)                -- LXB_CSS_VALUE_OKLCH = 0x
 ext/dom/lexbor/lexbor/css/value/const.h:2:33      - Unknown word (Borisov)    -- Copyright (C) 2023 Alexander Borisov
-ext/dom/lexbor/lexbor/css/value/const.h:303:19    - Unknown word (FANGSONG)             -- LXB_CSS_VALUE_FANGSONG = 0x011c
+ext/dom/lexbor/lexbor/css/value/const.h:303:19    - Unknown word (FANGSONG)            -- LXB_CSS_VALUE_FANGSONG = 0x011c
 ext/dom/lexbor/lexbor/css/value/const.h:4:22      - Unknown word (Borisov)    -- * Author: Alexander Borisov <borisov@lexbor.com
 ext/dom/lexbor/lexbor/css/value/const.h:71:19     - Unknown word (ALICEBLUE)  -- LXB_CSS_VALUE_ALICEBLUE = 0x0034
 ext/dom/lexbor/lexbor/css/value/const.h:72:19     - Unknown word (ANTIQUEWHITE) -- LXB_CSS_VALUE_ANTIQUEWHITE = 0x0035,
@@ -4757,7 +4765,9 @@ ext/dom/lexbor/lexbor/css/value/res.h:176:22    - Unknown word (oldlace)        
 ext/dom/lexbor/lexbor/css/value/res.h:176:49    - Unknown word (OLDLACE)              -- oldlace", 7, LXB_CSS_VALUE_OLDLACE},
 ext/dom/lexbor/lexbor/css/value/res.h:178:22    - Unknown word (olivedrab)            -- {(lxb_char_t *) "olivedrab", 9, LXB_CSS_VALUE_OLIVEDRAB
 ext/dom/lexbor/lexbor/css/value/res.h:178:51    - Unknown word (OLIVEDRAB)            -- olivedrab", 9, LXB_CSS_VALUE_OLIVEDRAB},
-ext/dom/lexbor/lexbor/css/value/res.h:182:22    - Unknown word (palegoldenrod)        -- {(lxb_char_t *) "palegoldenrod", 13, LXB_CSS_VALUE
+ext/dom/lexbor/lexbor/css/value/res.h:180:22    - Unknown word (orangered)            -- {(lxb_char_t *) "orangered", 9, LXB_CSS_VALUE_ORANGERED
+ext/dom/lexbor/lexbor/css/value/res.h:180:51    - Unknown word (ORANGERED)           -- orangered", 9, LXB_CSS_VALUE_ORANGERED},
+ext/dom/lexbor/lexbor/css/value/res.h:182:22    - Unknown word (palegoldenrod)       -- {(lxb_char_t *) "palegoldenrod", 13, LXB_CSS_VALUE
 ext/dom/lexbor/lexbor/css/value/res.h:182:56    - Unknown word (PALEGOLDENROD)       -- , 13, LXB_CSS_VALUE_PALEGOLDENROD},
 ext/dom/lexbor/lexbor/css/value/res.h:183:22    - Unknown word (palegreen)           -- {(lxb_char_t *) "palegreen", 9, LXB_CSS_VALUE_PALEGREEN
 ext/dom/lexbor/lexbor/css/value/res.h:183:51    - Unknown word (PALEGREEN)           -- palegreen", 9, LXB_CSS_VALUE_PALEGREEN},
@@ -4810,10 +4820,10 @@ ext/dom/lexbor/lexbor/css/value/res.h:411:42    - Unknown word (MISTYROSE)      
 ext/dom/lexbor/lexbor/css/value/res.h:411:7     - Unknown word (mistyrose)           -- {"mistyrose", (void *) LXB_CSS_VALUE
 ext/dom/lexbor/lexbor/css/value/res.h:414:45    - Unknown word (MEDIUMPURPLE)        -- void *) LXB_CSS_VALUE_MEDIUMPURPLE, 12, 99},
 ext/dom/lexbor/lexbor/css/value/res.h:414:7     - Unknown word (mediumpurple)        -- {"mediumpurple", (void *) LXB_CSS_VALUE
-ext/dom/lexbor/lexbor/css/value/res.h:424:45    - Unknown word (MEDIUMORCHID)        -- void *) LXB_CSS_VALUE_MEDIUMORCHID, 12, 0},
+ext/dom/lexbor/lexbor/css/value/res.h:424:45    - Unknown word (MEDIUMORCHID)       -- void *) LXB_CSS_VALUE_MEDIUMORCHID, 12, 0},
 ext/dom/lexbor/lexbor/css/value/res.h:424:7     - Unknown word (mediumorchid)        -- {"mediumorchid", (void *) LXB_CSS_VALUE
 ext/dom/lexbor/lexbor/css/value/res.h:434:43    - Unknown word (DARKORANGE)         -- void *) LXB_CSS_VALUE_DARKORANGE, 10, 143},
-ext/dom/lexbor/lexbor/css/value/res.h:434:7     - Unknown word (darkorange)          -- {"darkorange", (void *) LXB_CSS_VALUE
+ext/dom/lexbor/lexbor/css/value/res.h:434:7     - Unknown word (darkorange)         -- {"darkorange", (void *) LXB_CSS_VALUE
 ext/dom/lexbor/lexbor/css/value/res.h:435:43    - Unknown word (LIGHTCORAL)         -- void *) LXB_CSS_VALUE_LIGHTCORAL, 10, 145},
 ext/dom/lexbor/lexbor/css/value/res.h:435:7     - Unknown word (lightcoral)         -- {"lightcoral", (void *) LXB_CSS_VALUE
 ext/dom/lexbor/lexbor/css/value/res.h:441:42    - Unknown word (ROYALBLUE)          -- void *) LXB_CSS_VALUE_ROYALBLUE, 9, 179},
@@ -4869,8 +4879,8 @@ ext/dom/lexbor/lexbor/css/value/res.h:524:47    - Unknown word (LIGHTSLATEGRAY) 
 ext/dom/lexbor/lexbor/css/value/res.h:524:7     - Unknown word (lightslategray)     -- {"lightslategray", (void *) LXB_CSS_VALUE
 ext/dom/lexbor/lexbor/css/value/res.h:532:44    - Unknown word (FORESTGREEN)        -- void *) LXB_CSS_VALUE_FORESTGREEN, 11, 0},
 ext/dom/lexbor/lexbor/css/value/res.h:532:7     - Unknown word (forestgreen)        -- {"forestgreen", (void *) LXB_CSS_VALUE
-ext/dom/lexbor/lexbor/css/value/res.h:533:42    - Unknown word (BURLYWOOD)          -- void *) LXB_CSS_VALUE_BURLYWOOD, 9, 0},
-ext/dom/lexbor/lexbor/css/value/res.h:533:7     - Unknown word (burlywood)          -- {"burlywood", (void *) LXB_CSS_VALUE
+ext/dom/lexbor/lexbor/css/value/res.h:533:42    - Unknown word (BURLYWOOD)         -- void *) LXB_CSS_VALUE_BURLYWOOD, 9, 0},
+ext/dom/lexbor/lexbor/css/value/res.h:533:7     - Unknown word (burlywood)         -- {"burlywood", (void *) LXB_CSS_VALUE
 ext/dom/lexbor/lexbor/css/value/res.h:534:47    - Unknown word (BLANCHEDALMOND)    -- void *) LXB_CSS_VALUE_BLANCHEDALMOND, 14, 0},
 ext/dom/lexbor/lexbor/css/value/res.h:534:7     - Unknown word (blanchedalmond)    -- {"blanchedalmond", (void *) LXB_CSS_VALUE
 ext/dom/lexbor/lexbor/css/value/res.h:535:48    - Unknown word (MEDIUMVIOLETRED)   -- void *) LXB_CSS_VALUE_MEDIUMVIOLETRED, 15, 0},
@@ -4995,6 +5005,8 @@ ext/dom/lexbor/lexbor/css/value/res.h:758:42    - Unknown word (DARKGREEN)      
 ext/dom/lexbor/lexbor/css/value/res.h:758:7     - Unknown word (darkgreen)           -- {"darkgreen", (void *) LXB_CSS_VALUE
 ext/dom/lexbor/lexbor/css/value/res.h:75:22     - Unknown word (antiquewhite) -- {(lxb_char_t *) "antiquewhite", 12, LXB_CSS_VALUE
 ext/dom/lexbor/lexbor/css/value/res.h:75:55     - Unknown word (ANTIQUEWHITE) -- , 12, LXB_CSS_VALUE_ANTIQUEWHITE},
+ext/dom/lexbor/lexbor/css/value/res.h:771:42    - Unknown word (ORANGERED)           -- void *) LXB_CSS_VALUE_ORANGERED, 9, 0}
+ext/dom/lexbor/lexbor/css/value/res.h:771:7     - Unknown word (orangered)           -- {"orangered", (void *) LXB_CSS_VALUE
 ext/dom/lexbor/lexbor/css/value/res.h:82:22     - Unknown word (blanchedalmond) -- {(lxb_char_t *) "blanchedalmond", 14, LXB_CSS_VALUE
 ext/dom/lexbor/lexbor/css/value/res.h:82:57     - Unknown word (BLANCHEDALMOND) -- , 14, LXB_CSS_VALUE_BLANCHEDALMOND},
 ext/dom/lexbor/lexbor/css/value/res.h:84:22     - Unknown word (blueviolet)     -- {(lxb_char_t *) "blueviolet", 10, LXB_CSS_VALUE
@@ -7649,6 +7661,7 @@ ext/fileinfo/libmagic/softmagic.c:1556:8    - Unknown word (eoffset)     -- ms->
 ext/fileinfo/libmagic/softmagic.c:1558:21   - Unknown word (eoffset)     -- ms->offset = ms->eoffset + offset;
 ext/fileinfo/libmagic/softmagic.c:157:18    - Unknown word (FMTDEBUG)   -- #if defined(FILE_FMTDEBUG) && defined(HAVE_FMTCHECK
 ext/fileinfo/libmagic/softmagic.c:1600:11   - Unknown word (eoffset)     -- uint32_t eoffset, offset = ms->offset
+ext/fileinfo/libmagic/softmagic.c:1604:10   - Unknown word (oneed)       -- int rv, oneed_separator, in_type,
 ext/fileinfo/libmagic/softmagic.c:1642:35   - Unknown word (OPSIGNED)    -- sgn = m->in_op & FILE_OPSIGNED;
 ext/fileinfo/libmagic/softmagic.c:1678:14   - Unknown word (BEID)        -- case FILE_BEID3:
 ext/fileinfo/libmagic/softmagic.c:1683:14   - Unknown word (LEID)        -- case FILE_LEID3:
@@ -7662,7 +7675,9 @@ ext/fileinfo/libmagic/softmagic.c:1762:13   - Unknown word (MELONG)      -- case
 ext/fileinfo/libmagic/softmagic.c:1850:12   - Unknown word (MEDATE)      -- case FILE_MEDATE:
 ext/fileinfo/libmagic/softmagic.c:1851:12   - Unknown word (LDATE)       -- case FILE_LDATE:
 ext/fileinfo/libmagic/softmagic.c:1854:12   - Unknown word (MELDATE)     -- case FILE_MELDATE:
+ext/fileinfo/libmagic/softmagic.c:1956:3    - Unknown word (oneed)       -- oneed_separator = *need_separator
 ext/fileinfo/libmagic/softmagic.c:1962:3    - Unknown word (eoffset)     -- eoffset = ms->eoffset;
+ext/fileinfo/libmagic/softmagic.c:1974:25   - Unknown word (oneed)       -- *need_separator = oneed_separator;
 ext/fileinfo/libmagic/softmagic.c:2106:12   - Unknown word (MSDOSDATE)   -- case FILE_MSDOSDATE:
 ext/fileinfo/libmagic/softmagic.c:2107:12   - Unknown word (LEMSDOSDATE) -- case FILE_LEMSDOSDATE:
 ext/fileinfo/libmagic/softmagic.c:2108:12   - Unknown word (BEMSDOSDATE) -- case FILE_BEMSDOSDATE:
@@ -8660,10 +8675,14 @@ ext/gd/libgd/gdft.c:594:2     - Unknown word (tweencolorkey)       -- tweencolor
 ext/gd/libgd/gdft.c:594:24    - Unknown word (tweencolorkey)       -- tweencolorkey_t *b = (tweencolorkey_t *) key;
 ext/gd/libgd/gdft.c:601:10    - Unknown word (fgcolor)             -- fg = a->fgcolor = b->fgcolor;
 ext/gd/libgd/gdft.c:641:15    - Unknown word (gdft)                -- static char * gdft_draw_bitmap (gdCache
+ext/gd/libgd/gdft.c:645:6     - Unknown word (opixel)              -- int opixel;
 ext/gd/libgd/gdft.c:673:35    - Unknown word (Giuliano)            -- mode_mono fix from Giuliano Pochini */
 ext/gd/libgd/gdft.c:673:44    - Unknown word (Pochini)             -- mono fix from Giuliano Pochini */
 ext/gd/libgd/gdft.c:691:51    - Unknown word (Nabb)                -- clipping rectangle, Matt McNabb */
 ext/gd/libgd/gdft.c:69:9      - Unknown word (FONTCACHESIZE) -- #define FONTCACHESIZE 6
+ext/gd/libgd/gdft.c:703:7     - Unknown word (opixel)              -- opixel = *tpixel;
+ext/gd/libgd/gdft.c:704:31    - Unknown word (opixel)              -- gdTrueColorGetAlpha(opixel) != gdAlphaTransparent
+ext/gd/libgd/gdft.c:705:32    - Unknown word (opixel)              -- tpixel = gdAlphaBlend (opixel,
 ext/gd/libgd/gdft.c:72:9      - Unknown word (TWEENCOLORCACHESIZE) -- #define TWEENCOLORCACHESIZE 32
 ext/gd/libgd/gdft.c:743:34    - Unknown word (Giuliano)            -- mode_mono fix from Giuliano Pochini */
 ext/gd/libgd/gdft.c:743:43    - Unknown word (Pochini)             -- mono fix from Giuliano Pochini */
@@ -8838,6 +8857,7 @@ ext/gmp/gmp_arginfo.h:321:51    - Unknown word (MPIR)       -- GMP_MPIR_VERSION"
 ext/gmp/php_gmp.h:34:6      - Unknown word (randstate)  -- gmp_randstate_t rand_state;
 ext/gmp/php_gmp.h:38:9      - Unknown word (GMPG)       -- #define GMPG(v) ZEND_MODULE_GLOBALS
 ext/gmp/php_gmp_int.h:32:12     - Unknown word (MPIR)       -- /* GMP and MPIR use different datatypes
+ext/hash/hash.c:1038:19   - Unknown word (opad)         -- /* Convert K1 to opad -- 0x6A = 0x36 ^ 0x
 ext/hash/hash.c:1404:15   - Unknown word (znew)         -- zend_object *znew = php_hashcontext_create
 ext/hash/hash.c:1405:63   - Unknown word (znew)         -- hashcontext_from_object(znew);
 ext/hash/hash.c:1409:10   - Unknown word (znew)         -- return znew;
@@ -8849,6 +8869,7 @@ ext/hash/hash.c:695:52    - Unknown word (zhash)        -- ZEND_NUM_ARGS(), "OS"
 ext/hash/hash.c:699:45    - Unknown word (zhash)        -- from_object(Z_OBJ_P(zhash));
 ext/hash/hash.c:749:8     - Unknown word (zhash)        -- zval *zhash, *zcontext = NULL;
 ext/hash/hash.c:757:55    - Unknown word (zhash)        -- NUM_ARGS(), "OP|r!", &zhash, php_hashcontext_ce
+ext/hash/hash.c:802:19    - Unknown word (opad)         -- /* Convert K to opad -- 0x6A = 0x36 ^ 0x
 ext/hash/hash.c:898:19    - Unknown word (hkdf)         -- PHP_FUNCTION(hash_hkdf)
 ext/hash/hash.c:92:31     - Unknown word (Castagnoli's) -- , "crc32c", 34}, /* Castagnoli's CRC, used by iSCSI,
 ext/hash/hash.c:92:70     - Unknown word (Btrfs)        -- used by iSCSI, SCTP, Btrfs, ext4, etc */
@@ -9599,6 +9620,11 @@ ext/iconv/iconv.c:148:53    - Unknown word (pretval)    -- iconv_substr(smart_st
 ext/iconv/iconv.c:150:178   - Unknown word (lfchars)    -- line_len, const char *lfchars, php_iconv_enc_scheme
 ext/iconv/iconv.c:150:58    - Unknown word (pretval)    -- mime_encode(smart_str *pretval, const char *fname,
 ext/iconv/iconv.c:152:58    - Unknown word (pretval)    -- mime_decode(smart_str *pretval, const char *str, size
+ext/iconv/iconv.c:2354:20   - Unknown word (ocnt)       -- size_t ocnt, prev_ocnt, icnt, tcnt;
+ext/iconv/iconv.c:2354:9    - Unknown word (ocnt)       -- size_t ocnt, prev_ocnt, icnt, tcnt
+ext/iconv/iconv.c:2365:17   - Unknown word (ocnt)       -- out_buf_size = ocnt = prev_ocnt = initial
+ext/iconv/iconv.c:2365:29   - Unknown word (ocnt)       -- buf_size = ocnt = prev_ocnt = initial_out_buf_size
+ext/iconv/iconv.c:2375:63   - Unknown word (ocnt)       -- *)&pt, &tcnt, &pd, &ocnt) == (size_t)-1) {
 ext/iconv/iconv.c:426:38    - Unknown word (TRANSLIT)   -- & strcmp("//IGNORE//TRANSLIT", charset+clen-18)
 ext/iconv/iconv.c:547:50    - Unknown word (pretval)    -- iconv_strlen(size_t *pretval, const char *str, size
 ext/iconv/iconv.c:754:14    - Unknown word (haystk)     -- const char *haystk, size_t haystk_nbytes
@@ -10072,6 +10098,10 @@ ext/intl/intl_common.h:35:10     - Unknown word (eurealloc)  -- # define eureall
 ext/intl/intl_convert.c:86:12     - Unknown word (eumalloc)   -- dst_buf = eumalloc( dst_len + 1 );
 ext/intl/intl_cppshims.h:15:14     - Unknown word (CPPSHIMS)   -- #ifndef INTL_CPPSHIMS_H
 ext/intl/intl_cppshims.h:16:14     - Unknown word (CPPSHIMS)   -- #define INTL_CPPSHIMS_H
+ext/intl/intl_data.h:33:31     - Unknown word (oclass)     -- INTL_METHOD_INIT_VARS(oclass, obj)		\
+ext/intl/intl_data.h:35:2      - Unknown word (oclass)     -- oclass##_object* obj
+ext/intl/intl_data.h:42:34     - Unknown word (oclass)     -- METHOD_FETCH_OBJECT(oclass, obj)									\
+ext/intl/intl_data.h:43:12     - Unknown word (oclass)     -- obj = Z_##oclass##_P( object );
 ext/intl/intl_error.c:129:16    - Unknown word (strpprintf) -- errMessage = strpprintf(0, "%s: %s", err->custom
 ext/intl/intl_error.c:133:16    - Unknown word (strpprintf) -- errMessage = strpprintf(0, "%s", uErrorName
 ext/intl/intl_error.h:41:16     - Unknown word (synchonize) -- // Wrappers to synchonize object's and global
@@ -11088,6 +11118,11 @@ ext/intl/uchar/uchar_arginfo.h:3841:22   - Unknown word (MIDNUMLET)    -- ZVAL_L
 ext/intl/uchar/uchar_arginfo.h:3841:44   - Unknown word (MIDNUMLET)    -- MIDNUMLET_value, U_WB_MIDNUMLET);
 ext/intl/uchar/uchar_arginfo.h:3842:24   - Unknown word (MIDNUMLET)    -- zend_string *const_WB_MIDNUMLET_name = zend_string_init
 ext/intl/uchar/uchar_arginfo.h:3842:71   - Unknown word (MIDNUMLET)    -- string_init_interned("WB_MIDNUMLET", sizeof("WB_MIDNUMLET
+ext/intl/uchar/uchar_arginfo.h:3918:16   - Unknown word (OLETTER)      -- zval const_SB_OLETTER_value;
+ext/intl/uchar/uchar_arginfo.h:3919:22   - Unknown word (OLETTER)      -- ZVAL_LONG(&const_SB_OLETTER_value, U_SB_OLETTER
+ext/intl/uchar/uchar_arginfo.h:3919:42   - Unknown word (OLETTER)      -- OLETTER_value, U_SB_OLETTER);
+ext/intl/uchar/uchar_arginfo.h:3920:24   - Unknown word (OLETTER)      -- zend_string *const_SB_OLETTER_name = zend_string_init
+ext/intl/uchar/uchar_arginfo.h:3920:69   - Unknown word (OLETTER)      -- string_init_interned("SB_OLETTER", sizeof("SB_OLETTER
 ext/intl/uchar/uchar_arginfo.h:4074:16   - Unknown word (INSEPERABLE)  -- zval const_LB_INSEPERABLE_value;
 ext/intl/uchar/uchar_arginfo.h:4075:22   - Unknown word (INSEPERABLE)  -- ZVAL_LONG(&const_LB_INSEPERABLE_value, U_LB_INSEPERABLE
 ext/intl/uchar/uchar_arginfo.h:4075:46   - Unknown word (INSEPERABLE)  -- INSEPERABLE_value, U_LB_INSEPERABLE);
@@ -14548,6 +14583,8 @@ ext/openssl/openssl_backend_common.c:478:4     - Unknown word (mdtype)          
 ext/openssl/openssl_backend_common.c:481:4     - Unknown word (mdtype)          -- mdtype = (EVP_MD *) EVP_md
 ext/openssl/openssl_backend_common.c:485:4     - Unknown word (mdtype)          -- mdtype = (EVP_MD *) EVP_md
 ext/openssl/openssl_backend_common.c:490:4     - Unknown word (mdtype)          -- mdtype = (EVP_MD *) EVP_md
+ext/openssl/openssl_backend_common.c:575:2     - Unknown word (OSSL)            -- OSSL_PROVIDER_load(NULL,
+ext/openssl/openssl_backend_common.c:576:2     - Unknown word (OSSL)            -- OSSL_PROVIDER_load(NULL,
 ext/openssl/openssl_backend_common.c:703:25    - Unknown word (digestbyname)    -- (!(mdtype = EVP_get_digestbyname(method))) {
 ext/openssl/openssl_backend_common.c:724:14    - Unknown word (Heimes)          -- * Christian Heimes
 ext/openssl/openssl_backend_common.c:779:12    - Unknown word (EDIPARTY)        -- * GEN_EDIPARTY, GEN_DIRNAME, GEN_IPADD
@@ -14586,13 +14623,23 @@ ext/openssl/openssl_backend_v3.c:351:29    - Unknown word (cofactor)   -- OPENSS
 ext/openssl/openssl_backend_v3.c:352:55    - Unknown word (COFACTOR)   -- OSSL_PKEY_PARAM_EC_COFACTOR, cofactor) ||
 ext/openssl/openssl_backend_v3.c:352:65    - Unknown word (cofactor)   -- PKEY_PARAM_EC_COFACTOR, cofactor) ||
 ext/openssl/openssl_backend_v3.c:353:51    - Unknown word (cofactor)   -- group, point_g, order, cofactor)) {
+ext/openssl/openssl_backend_v3.c:36:2      - Unknown word (OSSL)       -- OSSL_PARAM *params = NULL
+ext/openssl/openssl_backend_v3.c:37:2      - Unknown word (OSSL)       -- OSSL_PARAM_BLD *bld = OSSL
+ext/openssl/openssl_backend_v3.c:37:24     - Unknown word (OSSL)       -- OSSL_PARAM_BLD *bld = OSSL_PARAM_BLD_new();
 ext/openssl/openssl_backend_v3.c:436:10    - Unknown word (cofactor)   -- BN_free(cofactor);
 ext/openssl/openssl_backend_v3.c:46:28     - Unknown word (iqmp)       -- OPENSSL_PKEY_SET_BN(data, iqmp);
+ext/openssl/openssl_backend_v3.c:52:2      - Unknown word (OSSL)       -- OSSL_PARAM_BLD_push_BN(bld
+ext/openssl/openssl_backend_v3.c:52:30     - Unknown word (OSSL)       -- PARAM_BLD_push_BN(bld, OSSL_PKEY_PARAM_RSA_N, n
 ext/openssl/openssl_backend_v3.c:555:36    - Unknown word (KEYMGMT)    -- id(pkey) != EVP_PKEY_KEYMGMT) {
 ext/openssl/openssl_backend_v3.c:69:6      - Unknown word (iqmp)       -- if (iqmp) {
 ext/openssl/openssl_backend_v3.c:70:65     - Unknown word (iqmp)       -- PARAM_RSA_COEFFICIENT1, iqmp);
 ext/openssl/openssl_backend_v3.c:95:10     - Unknown word (iqmp)       -- BN_free(iqmp);
+ext/openssl/openssl_pwhash.c:101:15    - Unknown word (OSSL)       -- oldthreads = OSSL_get_max_threads(NULL
+ext/openssl/openssl_pwhash.c:102:6     - Unknown word (OSSL)       -- if (OSSL_set_max_threads(NULL
+ext/openssl/openssl_pwhash.c:106:37    - Unknown word (OSSL)       -- PARAM_construct_uint32(OSSL_KDF_PARAM_THREADS,
+ext/openssl/openssl_pwhash.c:106:9     - Unknown word (OSSL)       -- *p++ = OSSL_PARAM_construct_uint
 ext/openssl/openssl_pwhash.c:268:29    - Unknown word (pasword)    -- Algo already checked in pasword_needs_rehash implementation
+ext/openssl/openssl_pwhash.c:95:2      - Unknown word (OSSL)       -- OSSL_PARAM params[7], *p
 ext/openssl/openssl_pwhash.stub.php:16:24     - Unknown word (PWHASH)     -- @cvalue PHP_OPENSSL_PWHASH_MEMLIMIT
 ext/openssl/openssl_pwhash.stub.php:16:31     - Unknown word (MEMLIMIT)   -- cvalue PHP_OPENSSL_PWHASH_MEMLIMIT
 ext/openssl/openssl_pwhash.stub.php:21:24     - Unknown word (PWHASH)     -- @cvalue PHP_OPENSSL_PWHASH_ITERLIMIT
@@ -15176,6 +15223,10 @@ ext/pcntl/pcntl_arginfo.h:614:18    - Unknown word (FORKX)          -- #if defin
 ext/pcntl/pcntl_arginfo.h:686:13    - Unknown word (ECAPMODE)       -- #if defined(ECAPMODE)
 ext/pcntl/pcntl_arginfo.h:687:32    - Unknown word (ECAPMODE)       -- LONG_CONSTANT("PCNTL_ECAPMODE", ECAPMODE, CONST_PERSISTENT
 ext/pcntl/pcntl_arginfo.h:687:43    - Unknown word (ECAPMODE)       -- CONSTANT("PCNTL_ECAPMODE", ECAPMODE, CONST_PERSISTENT);
+ext/pcntl/php_signal.c:26:23     - Unknown word (oact)       -- struct sigaction act,oact;
+ext/pcntl/php_signal.c:51:31     - Unknown word (oact)       -- sigaction(signo, &act, &oact);
+ext/pcntl/php_signal.c:54:9      - Unknown word (oact)       -- return oact.sa_sigaction;
+ext/pcntl/php_signal.c:56:9      - Unknown word (oact)       -- return oact.sa_handler;
 ext/pcre/pcre2lib/config.h:101:21    - Unknown word (VARLOOKBEHIND) -- /* The value of MAX_VARLOOKBEHIND specifies the default
 ext/pcre/pcre2lib/config.h:103:13    - Unknown word (VARLOOKBEHIND) -- #ifndef MAX_VARLOOKBEHIND
 ext/pcre/pcre2lib/config.h:104:13    - Unknown word (VARLOOKBEHIND) -- #define MAX_VARLOOKBEHIND 255
@@ -15219,11 +15270,16 @@ ext/pcre/pcre2lib/pcre2.h:479:22    - Unknown word (STACKRECURSE)    -- define P
 ext/pcre/pcre2lib/pcre2.h:483:22    - Unknown word (HEAPLIMIT)       -- define PCRE2_CONFIG_HEAPLIMIT 12
 ext/pcre/pcre2lib/pcre2.h:496:15    - Unknown word (DOTSTAR)         -- #define PCRE2_DOTSTAR_ANCHOR 66
 ext/pcre/pcre2lib/pcre2.h:497:15    - Unknown word (DOTSTAR)         -- #define PCRE2_DOTSTAR_ANCHOR_OFF 67
+ext/pcre/pcre2lib/pcre2.h:526:20    - Unknown word (ovector)         -- the offset vector (ovector). */
 ext/pcre/pcre2lib/pcre2.h:569:66    - Unknown word (bumpalong)       -- 1u /* Set for each bumpalong */
+ext/pcre/pcre2lib/pcre2.h:614:17    - Unknown word (ovector)         -- PCRE2_SIZE *ovector; /* Pointer
+ext/pcre/pcre2lib/pcre2.h:614:58    - Unknown word (ovector)         -- Pointer to current ovector */ \
 ext/pcre/pcre2lib/pcre2.h:615:17    - Unknown word (oveccount)       -- uint32_t oveccount; /* Count of
+ext/pcre/pcre2lib/pcre2.h:615:61    - Unknown word (ovector)         -- Count of pairs set in ovector */ \
 ext/pcre/pcre2lib/pcre2.h:616:17    - Unknown word (subscount)       -- uint32_t subscount; /* Substitution
 ext/pcre/pcre2lib/pcre2.h:658:17    - Unknown word (varlookbehind)   -- pcre2_set_max_varlookbehind(pcre2_compile_context
 ext/pcre/pcre2lib/pcre2.h:759:24    - Unknown word (heapframes)      -- pcre2_get_match_data_heapframes_size(pcre2_match_data
+ext/pcre/pcre2lib/pcre2.h:761:13    - Unknown word (ovector)         -- pcre2_get_ovector_count(pcre2_match_data
 ext/pcre/pcre2lib/pcre2.h:925:30    - Unknown word (heapframes)      -- pcre2_get_match_data_heapframes_size PCRE2_SUFFIX(pcre
 ext/pcre/pcre2lib/pcre2.h:925:81    - Unknown word (heapframes)      -- pcre2_get_match_data_heapframes_size_)
 ext/pcre/pcre2lib/pcre2.h:961:23    - Unknown word (varlookbehind)   -- define pcre2_set_max_varlookbehind PCRE2_SUFFIX
@@ -16503,9 +16559,16 @@ ext/pcre/pcre2lib/pcre2_dfa_match.c:3178:58   - Unknown word (KETRMIN)      -- s
 ext/pcre/pcre2lib/pcre2_dfa_match.c:3182:56   - Unknown word (KETRMAX)      -- end_subpattern == OP_KETRMAX ||
 ext/pcre/pcre2lib/pcre2_dfa_match.c:3183:56   - Unknown word (KETRMIN)      -- end_subpattern == OP_KETRMIN)?
 ext/pcre/pcre2lib/pcre2_dfa_match.c:3227:38   - Unknown word (FIRSTCU)      -- while (p < pp) if (NOT_FIRSTCU(*p++)) charcount--;
+ext/pcre/pcre2lib/pcre2_dfa_match.c:325:9     - Unknown word (OVEC)        -- #define OVEC_UNIT (sizeof(PCRE2
 ext/pcre/pcre2lib/pcre2_dfa_match.c:3288:17   - Unknown word (allowemptypartial) -- mb->allowemptypartial /* or pattern
+ext/pcre/pcre2lib/pcre2_dfa_match.c:329:13    - Unknown word (OVEC)        -- #define RWS_OVEC_RSIZE (1000*OVEC_UNIT
+ext/pcre/pcre2lib/pcre2_dfa_match.c:329:31    - Unknown word (OVEC)        -- RWS_OVEC_RSIZE (1000*OVEC_UNIT) /* Ovector
+ext/pcre/pcre2lib/pcre2_dfa_match.c:329:52    - Unknown word (Ovector)     -- OVEC_UNIT) /* Ovector for recursion */
 ext/pcre/pcre2lib/pcre2_dfa_match.c:3302:7    - Unknown word (ENDANCHORED)       -- PCRE2_ENDANCHORED is set, the match fails
 ext/pcre/pcre2lib/pcre2_dfa_match.c:3305:44   - Unknown word (ENDANCHORED)       -- mb->poptions) & PCRE2_ENDANCHORED) != 0 &&
+ext/pcre/pcre2lib/pcre2_dfa_match.c:330:13    - Unknown word (OVEC)        -- #define RWS_OVEC_OSIZE (2*OVEC_UNIT
+ext/pcre/pcre2lib/pcre2_dfa_match.c:330:28    - Unknown word (OVEC)        -- define RWS_OVEC_OSIZE  (2*OVEC_UNIT) /* Ovector
+ext/pcre/pcre2lib/pcre2_dfa_match.c:330:52    - Unknown word (Ovector)     -- OVEC_UNIT) /* Ovector in other cases */
 ext/pcre/pcre2lib/pcre2_dfa_match.c:3328:3    - Unknown word (gcontext)          -- gcontext points to a match
 ext/pcre/pcre2lib/pcre2_dfa_match.c:3350:12   - Unknown word (bumpalong)         -- PCRE2_SPTR bumpalong_limit;
 ext/pcre/pcre2lib/pcre2_dfa_match.c:3403:42   - Unknown word (WSSIZE)            -- return PCRE2_ERROR_DFA_WSSIZE;
@@ -16529,12 +16592,16 @@ ext/pcre/pcre2lib/pcre2_dfa_match.c:3939:61   - Unknown word (bumpalong)        
 ext/pcre/pcre2lib/pcre2_dfa_match.c:3961:36   - Unknown word (INCTEST)           -- uint32_t pp = UCHAR21INCTEST(p);
 ext/pcre/pcre2lib/pcre2_dfa_match.c:3975:18   - Unknown word (caseful)           -- /* The caseful case */
 ext/pcre/pcre2lib/pcre2_dfa_match.c:3982:26   - Unknown word (INCTEST)           -- if (UCHAR21INCTEST(p) == req_cu) { p--
+ext/pcre/pcre2lib/pcre2_dfa_match.c:4023:17   - Unknown word (ovector)           -- match_data->ovector, /* offset
 ext/pcre/pcre2lib/pcre2_dfa_match.c:4024:27   - Unknown word (oveccount)         -- uint32_t)match_data->oveccount * 2,  /* actual size
 ext/pcre/pcre2lib/pcre2_dfa_match.c:4035:50   - Unknown word (oveccount)         -- PARTIAL && match_data->oveccount > 0)
+ext/pcre/pcre2lib/pcre2_dfa_match.c:4037:19   - Unknown word (ovector)           -- match_data->ovector[0] = (PCRE2_SIZE)(start
+ext/pcre/pcre2lib/pcre2_dfa_match.c:4038:19   - Unknown word (ovector)           -- match_data->ovector[1] = (PCRE2_SIZE)(end
 ext/pcre/pcre2lib/pcre2_dfa_match.c:4082:26   - Unknown word (HASCRORLF)         -- (re->flags & PCRE2_HASCRORLF) == 0 &&
 ext/pcre/pcre2lib/pcre2_dfa_match.c:4088:11   - Unknown word (Bumpalong)         -- } /* "Bumpalong" loop */
 ext/pcre/pcre2lib/pcre2_dfa_match.c:414:3     - Unknown word (rwsptr)      -- rwsptr pointer to block
 ext/pcre/pcre2lib/pcre2_dfa_match.c:415:3     - Unknown word (ovecsize)    -- ovecsize space needed for an
+ext/pcre/pcre2lib/pcre2_dfa_match.c:415:34    - Unknown word (ovector)     -- space needed for an ovector
 ext/pcre/pcre2lib/pcre2_dfa_match.c:418:16    - Unknown word (rwsptr)      -- Returns: 0 rwsptr has been updated
 ext/pcre/pcre2lib/pcre2_dfa_match.c:423:29    - Unknown word (rwsptr)      -- workspace(RWS_anchor **rwsptr, unsigned int ovecsize
 ext/pcre/pcre2lib/pcre2_dfa_match.c:423:50    - Unknown word (ovecsize)    -- rwsptr, unsigned int ovecsize, dfa_match_block *mb
@@ -16566,14 +16633,14 @@ ext/pcre/pcre2lib/pcre2_dfa_match.c:816:9     - Unknown word (coptable)    -- if
 ext/pcre/pcre2lib/pcre2_dfa_match.c:820:40    - Unknown word (coptable)    -- GETCHARLEN(d, (code + coptable[codevalue]), dlen);
 ext/pcre/pcre2lib/pcre2_dfa_match.c:823:27    - Unknown word (TYPESTAR)    -- if (codevalue >= OP_TYPESTAR)
 ext/pcre/pcre2lib/pcre2_dfa_match.c:830:19    - Unknown word (ANYNL)       -- case OP_ANYNL: codevalue += OP_ANYNL
-ext/pcre/pcre2lib/pcre2_dfa_match.c:830:42    - Unknown word (ANYNL)       -- ANYNL: codevalue += OP_ANYNL_EXTRA; break;
-ext/pcre/pcre2lib/pcre2_dfa_match.c:831:19    - Unknown word (EXTUNI)      -- case OP_EXTUNI: codevalue += OP_EXTUNI
-ext/pcre/pcre2lib/pcre2_dfa_match.c:831:43    - Unknown word (EXTUNI)      -- EXTUNI: codevalue += OP_EXTUNI_EXTRA; break;
-ext/pcre/pcre2lib/pcre2_dfa_match.c:854:24    - Unknown word (KETRPOS)     -- state. Note that KETRPOS will always be encountered
-ext/pcre/pcre2lib/pcre2_dfa_match.c:859:48    - Unknown word (ATSTART)     -- set, or PCRE2_NOTEMPTY_ATSTART is set and we are at
-ext/pcre/pcre2lib/pcre2_dfa_match.c:864:15    - Unknown word (KETRMIN)     -- case OP_KETRMIN:
-ext/pcre/pcre2lib/pcre2_dfa_match.c:865:15    - Unknown word (KETRMAX)     -- case OP_KETRMAX:
-ext/pcre/pcre2lib/pcre2_dfa_match.c:866:15    - Unknown word (KETRPOS)     -- case OP_KETRPOS:
+ext/pcre/pcre2lib/pcre2_dfa_match.c:830:42    - Unknown word (ANYNL)      -- ANYNL: codevalue += OP_ANYNL_EXTRA; break;
+ext/pcre/pcre2lib/pcre2_dfa_match.c:831:19    - Unknown word (EXTUNI)     -- case OP_EXTUNI: codevalue += OP_EXTUNI
+ext/pcre/pcre2lib/pcre2_dfa_match.c:831:43    - Unknown word (EXTUNI)     -- EXTUNI: codevalue += OP_EXTUNI_EXTRA; break;
+ext/pcre/pcre2lib/pcre2_dfa_match.c:854:24    - Unknown word (KETRPOS)    -- state. Note that KETRPOS will always be encountered
+ext/pcre/pcre2lib/pcre2_dfa_match.c:859:48    - Unknown word (ATSTART)    -- set, or PCRE2_NOTEMPTY_ATSTART is set and we are at
+ext/pcre/pcre2lib/pcre2_dfa_match.c:864:15    - Unknown word (KETRMIN)    -- case OP_KETRMIN:
+ext/pcre/pcre2lib/pcre2_dfa_match.c:865:15    - Unknown word (KETRMAX)    -- case OP_KETRMAX:
+ext/pcre/pcre2lib/pcre2_dfa_match.c:866:15    - Unknown word (KETRPOS)    -- case OP_KETRPOS:
 ext/pcre/pcre2lib/pcre2_dfa_match.c:86:25     - Unknown word (ENDANCHORED) -- PCRE2_ANCHORED|PCRE2_ENDANCHORED|PCRE2_NOTBOL|PCRE2_NOTEOL
 ext/pcre/pcre2lib/pcre2_dfa_match.c:879:47    - Unknown word (ATSTART)    -- moptions & PCRE2_NOTEMPTY_ATSTART) == 0 ||
 ext/pcre/pcre2lib/pcre2_dfa_match.c:87:19     - Unknown word (ATSTART)     -- PCRE2_NOTEMPTY_ATSTART|PCRE2_NO_UTF_CHECK|PCRE
@@ -16971,7 +17038,9 @@ ext/pcre/pcre2lib/pcre2_intmodedep.h:547:9     - Unknown word (PUTINC)          
 ext/pcre/pcre2lib/pcre2_intmodedep.h:57:8      - Unknown word (CHMAX)      -- #undef CHMAX_255
 ext/pcre/pcre2lib/pcre2_intmodedep.h:581:16    - Unknown word (varlookbehind)   -- uint32_t max_varlookbehind;
 ext/pcre/pcre2lib/pcre2_intmodedep.h:64:8      - Unknown word (GETCHARINC) -- #undef GETCHARINC
+ext/pcre/pcre2lib/pcre2_intmodedep.h:657:42    - Unknown word (ovector)         -- data structure. Define ovector as large as it can ever
 ext/pcre/pcre2lib/pcre2_intmodedep.h:65:8      - Unknown word (GETCHARINCTEST) -- #undef GETCHARINCTEST
+ext/pcre/pcre2lib/pcre2_intmodedep.h:660:18    - Unknown word (ovector)         -- as the offset of ovector plus a pair of elements
 ext/pcre/pcre2lib/pcre2_intmodedep.h:660:59    - Unknown word (capturable)      -- of elements for each capturable string, so
 ext/pcre/pcre2lib/pcre2_intmodedep.h:663:22    - Unknown word (heapframe)       -- match. (See also the heapframe structure below.) *
 ext/pcre/pcre2lib/pcre2_intmodedep.h:665:8     - Unknown word (heapframe)       -- struct heapframe; /* Forward reference
@@ -16980,6 +17049,7 @@ ext/pcre/pcre2lib/pcre2_intmodedep.h:672:21    - Unknown word (heapframes)      
 ext/pcre/pcre2lib/pcre2_intmodedep.h:673:20    - Unknown word (heapframes)      -- PCRE2_SIZE heapframes_size; /* Malloc-ed
 ext/pcre/pcre2lib/pcre2_intmodedep.h:678:20    - Unknown word (matchedby)       -- uint8_t matchedby; /* Type of match
 ext/pcre/pcre2lib/pcre2_intmodedep.h:680:20    - Unknown word (oveccount)       -- uint16_t oveccount; /* Number of
+ext/pcre/pcre2lib/pcre2_intmodedep.h:682:20    - Unknown word (ovector)         -- PCRE2_SIZE ovector[131072]; /* Must be
 ext/pcre/pcre2lib/pcre2_intmodedep.h:76:12     - Unknown word (FIRSTCU)        -- #undef NOT_FIRSTCU
 ext/pcre/pcre2lib/pcre2_intmodedep.h:773:12    - Unknown word (bracount)        -- uint32_t bracount; /* Count
 ext/pcre/pcre2lib/pcre2_intmodedep.h:780:12    - Unknown word (nltype)          -- uint32_t nltype; /*
@@ -16988,6 +17058,7 @@ ext/pcre/pcre2lib/pcre2_intmodedep.h:783:25    - Unknown word (ECLASS)          
 ext/pcre/pcre2lib/pcre2_intmodedep.h:785:16    - Unknown word (varyopt)         -- uint32_t req_varyopt; /* "After
 ext/pcre/pcre2lib/pcre2_intmodedep.h:786:16    - Unknown word (varlookbehind)   -- uint32_t max_varlookbehind; /* Limit for variable
 ext/pcre/pcre2lib/pcre2_intmodedep.h:789:12    - Unknown word (pruneorskip)     -- BOOL had_pruneorskip; /* (*PRUNE
+ext/pcre/pcre2lib/pcre2_intmodedep.h:818:68    - Unknown word (ovector)         -- in a vector, with the ovector item
 ext/pcre/pcre2lib/pcre2_intmodedep.h:81:8      - Unknown word (PUTINC)         -- #undef PUTINC
 ext/pcre/pcre2lib/pcre2_intmodedep.h:824:16    - Unknown word (heapframe)       -- typedef struct heapframe {
 ext/pcre/pcre2lib/pcre2_intmodedep.h:827:6     - Unknown word (RRMATCH)         -- to RRMATCH(), but which do not
@@ -16997,6 +17068,7 @@ ext/pcre/pcre2lib/pcre2_intmodedep.h:847:7     - Unknown word (occu)            
 ext/pcre/pcre2lib/pcre2_intmodedep.h:851:15    - Unknown word (occu)            -- PCRE2_UCHAR occu[6]; /* Used for
 ext/pcre/pcre2lib/pcre2_intmodedep.h:853:15    - Unknown word (occu)            -- PCRE2_UCHAR occu[2]; /* Used for
 ext/pcre/pcre2lib/pcre2_intmodedep.h:857:15    - Unknown word (occu)            -- PCRE2_UCHAR occu[1]; /* Used for
+ext/pcre/pcre2lib/pcre2_intmodedep.h:864:37    - Unknown word (ovector)         -- exactly the right size ovector for the number of capturing
 ext/pcre/pcre2lib/pcre2_intmodedep.h:876:3     - Unknown word (heapframe)       -- } heapframe;
 ext/pcre/pcre2lib/pcre2_intmodedep.h:892:9     - Unknown word (HEAPFRAME)       -- #define HEAPFRAME_ALIGNMENT offsetof(heapframe
 ext/pcre/pcre2lib/pcre2_intmodedep.h:903:8     - Unknown word (hitend)          -- BOOL hitend;
@@ -17138,7 +17210,11 @@ ext/pcre/pcre2lib/pcre2_jit_match.c:162:5     - Unknown word (oveccount)  -- if 
 ext/pcre/pcre2lib/pcre2_jit_match.c:186:13    - Unknown word (matchedby)  -- match_data->matchedby = PCRE2_MATCHEDBY_JIT
 ext/pcre/pcre2lib/pcre2_jit_match.c:186:31    - Unknown word (MATCHEDBY)  -- data->matchedby = PCRE2_MATCHEDBY_JIT;
 ext/pcre/pcre2lib/pcre2_jit_match.c:191:10    - Unknown word (unpoison)   -- __msan_unpoison(match_data->ovector
+ext/pcre/pcre2lib/pcre2_jit_match.c:191:31    - Unknown word (ovector)    -- unpoison(match_data->ovector, 2 * rc * sizeof(match
 ext/pcre/pcre2lib/pcre2_jit_match.c:191:5     - Unknown word (msan)       -- __msan_unpoison(match_data
+ext/pcre/pcre2lib/pcre2_jit_match.c:191:68    - Unknown word (ovector)    -- sizeof(match_data->ovector[0]));
+ext/pcre/pcre2lib/pcre2_jit_match.c:84:58     - Unknown word (ovector)    -- value is the number of ovector pairs filled
+ext/pcre/pcre2lib/pcre2_jit_match.c:85:39     - Unknown word (ovector)    -- = 0 => success, but ovector is not big enough
 ext/pcre/pcre2lib/pcre2_jit_misc.c:107:53    - Unknown word (gcontext)   -- pcre2_general_context *gcontext)
 ext/pcre/pcre2lib/pcre2_jit_misc.c:110:7     - Unknown word (gcontext)   -- (void)gcontext; /* Suppress warning
 ext/pcre/pcre2lib/pcre2_jit_misc.c:112:18    - Unknown word (gcontext)   -- SLJIT_UNUSED_ARG(gcontext);
@@ -17345,7 +17421,7 @@ ext/pcre/pcre2lib/pcre2_match.c:1211:9    - Unknown word (Lmax)              -- 
 ext/pcre/pcre2lib/pcre2_match.c:1216:13   - Unknown word (EXACTI)            -- case OP_EXACTI:
 ext/pcre/pcre2lib/pcre2_match.c:1217:12   - Unknown word (Lmax)              -- Lmin = Lmax = GET2(Fecode, 1);
 ext/pcre/pcre2lib/pcre2_match.c:1217:5    - Unknown word (Lmin)              -- Lmin = Lmax = GET2(Fecode
-ext/pcre/pcre2lib/pcre2_match.c:1222:13   - Unknown word (POSUPTOI)          -- case OP_POSUPTOI:
+ext/pcre/pcre2lib/pcre2_match.c:1222:13   - Unknown word (POSUPTOI)         -- case OP_POSUPTOI:
 ext/pcre/pcre2lib/pcre2_match.c:1223:5    - Unknown word (reptype)          -- reptype = REPTYPE_POS;
 ext/pcre/pcre2lib/pcre2_match.c:1224:5    - Unknown word (Lmin)             -- Lmin = 0;
 ext/pcre/pcre2lib/pcre2_match.c:1225:5    - Unknown word (Lmax)             -- Lmax = GET2(Fecode, 1);
@@ -17427,7 +17503,7 @@ ext/pcre/pcre2lib/pcre2_match.c:1635:48   - Unknown word (NOTSTARI)         -- >
 ext/pcre/pcre2lib/pcre2_match.c:1635:61   - Unknown word (NOTSTAR)          -- NOTSTARI)? OP_NOTSTARI: OP_NOTSTAR);
 ext/pcre/pcre2lib/pcre2_match.c:1643:5    - Unknown word (GETCHARINCTEST)   -- GETCHARINCTEST(Lc, Fecode);
 ext/pcre/pcre2lib/pcre2_match.c:1645:52   - Unknown word (caseful)          -- for the caseless and caseful cases, for speed,
-ext/pcre/pcre2lib/pcre2_match.c:1653:19   - Unknown word (NOTSTARI)         -- if (Fop >= OP_NOTSTARI) /* Caseless */
+ext/pcre/pcre2lib/pcre2_match.c:1653:19   - Unknown word (NOTSTARI)        -- if (Fop >= OP_NOTSTARI) /* Caseless */
 ext/pcre/pcre2lib/pcre2_match.c:175:1     - Unknown word (localised)    -- localised backtracking memory
 ext/pcre/pcre2lib/pcre2_match.c:175:56    - Unknown word (Lxxx)         -- These are #defined with Lxxx names at the point
 ext/pcre/pcre2lib/pcre2_match.c:1801:8    - Unknown word (Caseful)         -- /* Caseful comparisons */
@@ -17438,6 +17514,7 @@ ext/pcre/pcre2lib/pcre2_match.c:187:31    - Unknown word (rdepth)       -- Frdep
 ext/pcre/pcre2lib/pcre2_match.c:187:9     - Unknown word (Frdepth)      -- #define Frdepth F->rdepth
 ext/pcre/pcre2lib/pcre2_match.c:190:31    - Unknown word (occu)         -- Foccu F->occu
 ext/pcre/pcre2lib/pcre2_match.c:190:9     - Unknown word (Foccu)        -- #define Foccu F->occu
+ext/pcre/pcre2lib/pcre2_match.c:192:31    - Unknown word (ovector)      -- Fovector F->ovector
 ext/pcre/pcre2lib/pcre2_match.c:192:9     - Unknown word (Fovector)     -- #define Fovector F->ovector
 ext/pcre/pcre2lib/pcre2_match.c:1949:39   - Unknown word (caseful)         -- either the matching is caseful, or the characters are
 ext/pcre/pcre2lib/pcre2_match.c:1957:9    - Unknown word (Lbyte)           -- #define Lbyte_map_address F->temp
@@ -17515,7 +17592,7 @@ ext/pcre/pcre2lib/pcre2_match.c:2490:9    - Unknown word (CHMAX)           -- if
 ext/pcre/pcre2lib/pcre2_match.c:2502:10   - Unknown word (CHMAX)           -- if (!CHMAX_255(fc) || (mb->ctypes
 ext/pcre/pcre2lib/pcre2_match.c:2514:9    - Unknown word (CHMAX)           -- if (CHMAX_255(fc) && (mb->ctypes
 ext/pcre/pcre2lib/pcre2_match.c:2526:10   - Unknown word (CHMAX)           -- if (!CHMAX_255(fc) || (mb->ctypes
-ext/pcre/pcre2lib/pcre2_match.c:2538:9    - Unknown word (CHMAX)           -- if (CHMAX_255(fc) && (mb->ctypes
+ext/pcre/pcre2lib/pcre2_match.c:2538:9    - Unknown word (CHMAX)          -- if (CHMAX_255(fc) && (mb->ctypes
 ext/pcre/pcre2lib/pcre2_match.c:2555:13   - Unknown word (ANYNL)          -- case OP_ANYNL:
 ext/pcre/pcre2lib/pcre2_match.c:259:31    - Unknown word (Feptr)        -- a conditional group. Feptr will be pointing to
 ext/pcre/pcre2lib/pcre2_match.c:2699:57   - Unknown word (SCRIPTX)        -- ucd_script_sets) + UCD_SCRIPTX_PROP(prop), Fecode[
@@ -17524,6 +17601,7 @@ ext/pcre/pcre2lib/pcre2_match.c:273:12    - Unknown word (heapframe)    -- do_ca
 ext/pcre/pcre2lib/pcre2_match.c:2760:17   - Unknown word (UCNC)           -- case PT_UCNC:
 ext/pcre/pcre2lib/pcre2_match.c:2767:17   - Unknown word (BIDICL)         -- case PT_BIDICL:
 ext/pcre/pcre2lib/pcre2_match.c:2768:18   - Unknown word (BIDICLASS)      -- if ((UCD_BIDICLASS_PROP(prop) == Fecode
+ext/pcre/pcre2lib/pcre2_match.c:277:21    - Unknown word (ovector)      -- PCRE2_SIZE *callout_ovector;
 ext/pcre/pcre2lib/pcre2_match.c:2796:13   - Unknown word (EXTUNI)         -- case OP_EXTUNI:
 ext/pcre/pcre2lib/pcre2_match.c:2805:20   - Unknown word (extuni)         -- Feptr = PRIV(extuni)(fc, Feptr, mb->start
 ext/pcre/pcre2lib/pcre2_match.c:280:16    - Unknown word (Fecode)       -- *lengthptr = (*Fecode == OP_CALLOUT)?
@@ -17533,15 +17611,18 @@ ext/pcre/pcre2lib/pcre2_match.c:2824:9    - Unknown word (Lpropvalue)     -- #de
 ext/pcre/pcre2lib/pcre2_match.c:2839:13   - Unknown word (TYPEPOSSTAR)    -- case OP_TYPEPOSSTAR:
 ext/pcre/pcre2lib/pcre2_match.c:2846:13   - Unknown word (TYPEPOSPLUS)    -- case OP_TYPEPOSPLUS:
 ext/pcre/pcre2lib/pcre2_match.c:2853:13   - Unknown word (TYPEPOSQUERY)   -- case OP_TYPEPOSQUERY:
+ext/pcre/pcre2lib/pcre2_match.c:285:68    - Unknown word (ovector)      -- worked directly with the ovector
 ext/pcre/pcre2lib/pcre2_match.c:2860:13   - Unknown word (TYPEPOSUPTO)    -- case OP_TYPEPOSUPTO:
 ext/pcre/pcre2lib/pcre2_match.c:2867:13   - Unknown word (TYPESTAR)       -- case OP_TYPESTAR:
 ext/pcre/pcre2lib/pcre2_match.c:2868:13   - Unknown word (TYPEMINSTAR)    -- case OP_TYPEMINSTAR:
 ext/pcre/pcre2lib/pcre2_match.c:2873:25   - Unknown word (TYPESTAR)       -- fc = *Fecode++ - OP_TYPESTAR;
+ext/pcre/pcre2lib/pcre2_match.c:287:1     - Unknown word (ovector)      -- ovector is in the backtracking
 ext/pcre/pcre2lib/pcre2_match.c:2881:5    - Unknown word (Lctype)         -- Lctype = *Fecode++;      /
 ext/pcre/pcre2lib/pcre2_match.c:2884:30   - Unknown word (Lctype)         -- Lctype == OP_PROP || Lctype == OP_NOTPROP)
 ext/pcre/pcre2lib/pcre2_match.c:2884:9    - Unknown word (Lctype)         -- if (Lctype == OP_PROP || Lctype
 ext/pcre/pcre2lib/pcre2_match.c:2887:7    - Unknown word (Lpropvalue)     -- Lpropvalue = *Fecode++;
 ext/pcre/pcre2lib/pcre2_match.c:2903:25   - Unknown word (Lctype)         -- BOOL notmatch = Lctype == OP_NOTPROP;
+ext/pcre/pcre2lib/pcre2_match.c:290:21    - Unknown word (ovector)      -- if for the extended ovector, and we ensure that
 ext/pcre/pcre2lib/pcre2_match.c:292:20    - Unknown word (Fovector)     -- references such as Fovector[-2] are use directly
 ext/pcre/pcre2lib/pcre2_match.c:2933:38   - Unknown word (Lpropvalue)     -- UCD_CATEGORY(fc) == Lpropvalue) == notmatch)
 ext/pcre/pcre2lib/pcre2_match.c:2947:38   - Unknown word (Lpropvalue)     -- UCD_CHARTYPE(fc) == Lpropvalue) == notmatch)
@@ -17612,7 +17693,7 @@ ext/pcre/pcre2lib/pcre2_match.c:4706:18   - Unknown word (gotspace)       -- BOO
 ext/pcre/pcre2lib/pcre2_match.c:4716:29   - Unknown word (gotspace)       -- HSPACE_CASES: gotspace = TRUE; break;
 ext/pcre/pcre2lib/pcre2_match.c:4717:24   - Unknown word (gotspace)       -- default: gotspace = FALSE; break;
 ext/pcre/pcre2lib/pcre2_match.c:4719:17   - Unknown word (gotspace)       -- if (gotspace == (Lctype == OP_NOT
-ext/pcre/pcre2lib/pcre2_match.c:4728:18   - Unknown word (gotspace)       -- BOOL gotspace;
+ext/pcre/pcre2lib/pcre2_match.c:4728:18   - Unknown word (gotspace)      -- BOOL gotspace;
 ext/pcre/pcre2lib/pcre2_match.c:478:18    - Unknown word (INCTEST)      -- if (UCHAR21INCTEST(p) != UCHAR21INCTEST
 ext/pcre/pcre2lib/pcre2_match.c:478:39    - Unknown word (INCTEST)      -- INCTEST(p) != UCHAR21INCTEST(eptr)) return -1;
 ext/pcre/pcre2lib/pcre2_match.c:5124:8    - Unknown word (REFI)          -- OP_REFI opcodes are used for
@@ -17700,7 +17781,7 @@ ext/pcre/pcre2lib/pcre2_match.c:5741:9    - Unknown word (Lsaved)        -- #def
 ext/pcre/pcre2lib/pcre2_match.c:5742:9    - Unknown word (Ltrue)         -- #define Ltrue_end_extra F->temp
 ext/pcre/pcre2lib/pcre2_match.c:5767:26   - Unknown word (DNCREF)        -- if (*ecode != OP_DNCREF) RRETURN(MATCH_NOMATCH
 ext/pcre/pcre2lib/pcre2_match.c:578:9     - Unknown word (RRETURN)           -- #define RRETURN(ra) \
-ext/pcre/pcre2lib/pcre2_match.c:5794:31   - Unknown word (DNCREF)        -- else if (*ecode == OP_DNCREF)
+ext/pcre/pcre2lib/pcre2_match.c:5794:31   - Unknown word (DNCREF)       -- else if (*ecode == OP_DNCREF)
 ext/pcre/pcre2lib/pcre2_match.c:5802:7    - Unknown word (Lextra)       -- Lextra_size = extra_size;
 ext/pcre/pcre2lib/pcre2_match.c:5805:5    - Unknown word (Lsaved)       -- Lsaved_end_subject = mb->end
 ext/pcre/pcre2lib/pcre2_match.c:5806:5    - Unknown word (Ltrue)        -- Ltrue_end_extra = mb->true
@@ -17803,6 +17884,7 @@ ext/pcre/pcre2lib/pcre2_match.c:935:59    - Unknown word (endanchored)       -- 
 ext/pcre/pcre2lib/pcre2_match.c:937:9     - Unknown word (RRETURN)           -- RRETURN(MATCH_NOMATCH);
 ext/pcre/pcre2lib/pcre2_match.c:941:53    - Unknown word (endanchnored)      -- Failed ACCEPT not at end (endanchnored set)\n");
 ext/pcre/pcre2lib/pcre2_match.c:94:15     - Unknown word (KETRPOS)     -- #define MATCH_KETRPOS (-998)
+ext/pcre/pcre2lib/pcre2_match.c:961:68    - Unknown word (ovectors)          -- the external and frame ovectors. */
 ext/pcre/pcre2lib/pcre2_match.c:963:45    - Unknown word (oveccount)         -- bracket + 1 > match_data->oveccount)?
 ext/pcre/pcre2lib/pcre2_match.c:964:19    - Unknown word (oveccount)         -- match_data->oveccount : top_bracket + 1);
 ext/pcre/pcre2lib/pcre2_match.c:967:39    - Unknown word (RRETURN)           -- MATCH; /* Note: NOT RRETURN */
@@ -17815,7 +17897,11 @@ ext/pcre/pcre2lib/pcre2_match.c:980:31    - Unknown word (NLBLOCK)           -- 
 ext/pcre/pcre2lib/pcre2_match.c:982:11    - Unknown word (hitend)            -- mb->hitend = TRUE;
 ext/pcre/pcre2lib/pcre2_match_data.c:104:19    - Unknown word (heapframes) -- if (match_data->heapframes != NULL)
 ext/pcre/pcre2lib/pcre2_match_data.c:105:41    - Unknown word (heapframes) -- memctl.free(match_data->heapframes,
+ext/pcre/pcre2lib/pcre2_match_data.c:129:27    - Unknown word (ovector)    -- Get pointer to ovector *
+ext/pcre/pcre2lib/pcre2_match_data.c:133:11    - Unknown word (ovector)    -- pcre2_get_ovector_pointer(pcre2_match
 ext/pcre/pcre2lib/pcre2_match_data.c:178:19    - Unknown word (heapframes) -- * Get heapframes size
+ext/pcre/pcre2lib/pcre2_match_data.c:51:36     - Unknown word (ovector)    -- match data block given ovector size  *
+ext/pcre/pcre2lib/pcre2_match_data.c:54:47     - Unknown word (ovector)    -- imposed on the number of ovector pairs. A maximum is
 ext/pcre/pcre2lib/pcre2_match_data.c:55:21     - Unknown word (oveccount)  -- imposed because the oveccount field in a match data
 ext/pcre/pcre2lib/pcre2_match_data.c:55:62     - Unknown word (uintt)      -- match data block is uintt6_t. */
 ext/pcre/pcre2lib/pcre2_match_data.c:58:34     - Unknown word (oveccount)  -- data_create(uint32_t oveccount, pcre2_general_context
@@ -17823,6 +17909,7 @@ ext/pcre/pcre2lib/pcre2_match_data.c:58:68     - Unknown word (gcontext)   -- pc
 ext/pcre/pcre2lib/pcre2_match_data.c:61:20     - Unknown word (oveccount)  -- if (oveccount < 1) oveccount = 1;
 ext/pcre/pcre2lib/pcre2_match_data.c:61:5      - Unknown word (oveccount)  -- if (oveccount < 1) oveccount = 1;
 ext/pcre/pcre2lib/pcre2_match_data.c:62:5      - Unknown word (oveccount)  -- if (oveccount > UINT16_MAX) oveccount
+ext/pcre/pcre2lib/pcre2_match_data.c:64:30     - Unknown word (ovector)    -- offsetof(pcre2_match_data, ovector) + 2*oveccount*sizeof
 ext/pcre/pcre2lib/pcre2_match_data.c:65:19     - Unknown word (gcontext)   -- (pcre2_memctl *)gcontext);
 ext/pcre/pcre2lib/pcre2_match_data.c:69:8      - Unknown word (heapframes) -- yield->heapframes = NULL;
 ext/pcre/pcre2lib/pcre2_match_data.c:70:8      - Unknown word (heapframes) -- yield->heapframes_size = 0;
@@ -17836,6 +17923,7 @@ ext/pcre/pcre2lib/pcre2_newline.c:64:26     - Unknown word (NLTYPE)     -- the n
 ext/pcre/pcre2lib/pcre2_newline.c:64:40     - Unknown word (NLTYPE)     -- type is NLTYPE_ANY or NLTYPE_ANYCRLF. The case of
 ext/pcre/pcre2lib/pcre2_pattern_info.c:143:19    - Unknown word (DEPTHLIMIT)    -- case PCRE2_INFO_DEPTHLIMIT:
 ext/pcre/pcre2lib/pcre2_pattern_info.c:168:33    - Unknown word (heapframe)     -- *)where) = offsetof(heapframe, ovector) +
+ext/pcre/pcre2lib/pcre2_pattern_info.c:168:44    - Unknown word (ovector)       -- offsetof(heapframe, ovector) +
 ext/pcre/pcre2lib/pcre2_pattern_info.c:172:19    - Unknown word (HASBACKSLASHC) -- case PCRE2_INFO_HASBACKSLASHC:
 ext/pcre/pcre2lib/pcre2_pattern_info.c:173:45    - Unknown word (HASBKC)        -- (re->flags & PCRE2_HASBKC) != 0;
 ext/pcre/pcre2lib/pcre2_pattern_info.c:176:19    - Unknown word (HASCRORLF)     -- case PCRE2_INFO_HASCRORLF:
@@ -18260,11 +18348,11 @@ ext/pcre/pcre2lib/pcre2_study.c:719:13    - Unknown word (NOTMINQUERYI)  -- case
 ext/pcre/pcre2lib/pcre2_study.c:721:13    - Unknown word (POSQUERYI)     -- case OP_POSQUERYI:
 ext/pcre/pcre2lib/pcre2_study.c:722:13    - Unknown word (NOTPOSQUERY)   -- case OP_NOTPOSQUERY:
 ext/pcre/pcre2lib/pcre2_study.c:723:13    - Unknown word (NOTPOSQUERYI)  -- case OP_NOTPOSQUERYI:
-ext/pcre/pcre2lib/pcre2_substitute.c:1022:26   - Unknown word (CHECKMEMCPY)     -- (!replacement_only) CHECKMEMCPY(subject + start_offset
-ext/pcre/pcre2lib/pcre2_substitute.c:1024:7    - Unknown word (oveccount)       -- scb.oveccount = rc;
-ext/pcre/pcre2lib/pcre2_substitute.c:1055:16   - Unknown word (repend)          -- if (ptr >= repend)
-ext/pcre/pcre2lib/pcre2_substitute.c:1058:7    - Unknown word (repend)          -- repend = ptrstack[--ptrstackptr
-ext/pcre/pcre2lib/pcre2_substitute.c:1067:45   - Unknown word (repend)          -- CHAR_BACKSLASH && ptr < repend - 1 && ptr[1] == CHAR
+ext/pcre/pcre2lib/pcre2_substitute.c:1022:26   - Unknown word (CHECKMEMCPY)    -- (!replacement_only) CHECKMEMCPY(subject + start_offset
+ext/pcre/pcre2lib/pcre2_substitute.c:1024:7    - Unknown word (oveccount)      -- scb.oveccount = rc;
+ext/pcre/pcre2lib/pcre2_substitute.c:1055:16   - Unknown word (repend)         -- if (ptr >= repend)
+ext/pcre/pcre2lib/pcre2_substitute.c:1058:7    - Unknown word (repend)         -- repend = ptrstack[--ptrstackptr
+ext/pcre/pcre2lib/pcre2_substitute.c:1067:45   - Unknown word (repend)         -- CHAR_BACKSLASH && ptr < repend - 1 && ptr[1] == CHAR
 ext/pcre/pcre2lib/pcre2_substitute.c:1214:30   - Unknown word (BADSUBSTITUTION) -- rc = PCRE2_ERROR_BADSUBSTITUTION;
 ext/pcre/pcre2lib/pcre2_substitute.c:1236:30   - Unknown word (REPMISSINGBRACE) -- rc = PCRE2_ERROR_REPMISSINGBRACE;
 ext/pcre/pcre2lib/pcre2_substitute.c:139:24    - Unknown word (BADREPESCAPE) -- rc = PCRE2_ERROR_BADREPESCAPE;
@@ -18309,8 +18397,10 @@ ext/pcre/pcre2lib/pcre2_substitute.c:682:3     - Unknown word (CHECKCASECPY)    
 ext/pcre/pcre2lib/pcre2_substitute.c:696:9     - Unknown word (CHECKCASECPY)    -- #define CHECKCASECPY_CALLOUT(length_) \
 ext/pcre/pcre2lib/pcre2_substitute.c:697:3     - Unknown word (CHECKCASECPY)    -- CHECKCASECPY_BASE(length_, { \
 ext/pcre/pcre2lib/pcre2_substitute.c:739:69    - Unknown word (rlength)         -- replacement, PCRE2_SIZE rlength,
+ext/pcre/pcre2lib/pcre2_substitute.c:744:10    - Unknown word (ovector)         -- uint32_t ovector_count;
 ext/pcre/pcre2lib/pcre2_substitute.c:745:10    - Unknown word (goptions)        -- uint32_t goptions = 0;
 ext/pcre/pcre2lib/pcre2_substitute.c:755:12    - Unknown word (repend)          -- PCRE2_SPTR repend = NULL;
+ext/pcre/pcre2lib/pcre2_substitute.c:758:13    - Unknown word (ovector)         -- PCRE2_SIZE *ovector;
 ext/pcre/pcre2lib/pcre2_substitute.c:759:12    - Unknown word (ovecsave)        -- PCRE2_SIZE ovecsave[3];
 ext/pcre/pcre2lib/pcre2_substitute.c:771:1     - Unknown word (ovecsave)        -- ovecsave[0] = ovecsave[1] = ovecsave
 ext/pcre/pcre2lib/pcre2_substitute.c:771:15    - Unknown word (ovecsave)        -- ovecsave[0] = ovecsave[1] = ovecsave[2] = PCRE
@@ -18327,8 +18417,11 @@ ext/pcre/pcre2lib/pcre2_substitute.c:832:3     - Unknown word (gcontext)        
 ext/pcre/pcre2lib/pcre2_substitute.c:835:48    - Unknown word (oveccount)       -- bracket + 1 < match_data->oveccount)?
 ext/pcre/pcre2lib/pcre2_substitute.c:836:41    - Unknown word (oveccount)       -- bracket + 1 : match_data->oveccount;
 ext/pcre/pcre2lib/pcre2_substitute.c:837:61    - Unknown word (oveccount)       -- data_create(match_data->oveccount,
+ext/pcre/pcre2lib/pcre2_substitute.c:840:70    - Unknown word (ovector)         -- offsetof(pcre2_match_data, ovector)
 ext/pcre/pcre2lib/pcre2_substitute.c:842:24    - Unknown word (heapframes)      -- internal_match_data->heapframes = NULL;
 ext/pcre/pcre2lib/pcre2_substitute.c:843:24    - Unknown word (heapframes)      -- internal_match_data->heapframes_size = 0;
+ext/pcre/pcre2lib/pcre2_substitute.c:847:13    - Unknown word (ovector)         -- /* Remember ovector details */
+ext/pcre/pcre2lib/pcre2_substitute.c:849:1     - Unknown word (ovector)         -- ovector = pcre2_get_ovector
 ext/pcre/pcre2lib/pcre2_substitute.c:902:24    - Unknown word (CHECKMEMCPY)     -- (!replacement_only) CHECKMEMCPY(subject, start_offset
 ext/pcre/pcre2lib/pcre2_substitute.c:921:70    - Unknown word (goptions)        -- start_offset, options|goptions,
 ext/pcre/pcre2lib/pcre2_substitute.c:938:9     - Unknown word (goptions)        -- if (goptions == 0 || start_offset
@@ -18339,6 +18432,8 @@ ext/pcre/pcre2lib/pcre2_substitute.c:989:66    - Unknown word (bumpalong)       
 ext/pcre/pcre2lib/pcre2_substitute.c:994:7     - Unknown word (ovecsave)        -- if (ovecsave[0] == ovector[0] &&
 ext/pcre/pcre2lib/pcre2_substitute.c:998:33    - Unknown word (ATSTART)         -- goptions = PCRE2_NOTEMPTY_ATSTART | PCRE2_ANCHORED;
 ext/pcre/pcre2lib/pcre2_substitute.c:998:7     - Unknown word (goptions)        -- goptions = PCRE2_NOTEMPTY_ATSTART
+ext/pcre/pcre2lib/pcre2_substring.c:116:45    - Unknown word (ovector)    -- _ERROR_UNAVAILABLE: ovector too small
+ext/pcre/pcre2lib/pcre2_substring.c:129:50    - Unknown word (ovector)    -- subject + match_data->ovector[stringnumber*2],
 ext/pcre/pcre2lib/pcre2_substring.c:165:5     - Unknown word (failrc)     -- int failrc, entrysize;
 ext/pcre/pcre2lib/pcre2_substring.c:166:17    - Unknown word (matchedby)  -- if (match_data->matchedby == PCRE2_MATCHEDBY_DFA
 ext/pcre/pcre2lib/pcre2_substring.c:166:36    - Unknown word (MATCHEDBY)  -- >matchedby == PCRE2_MATCHEDBY_DFA_INTERPRETER)
@@ -18353,6 +18448,7 @@ ext/pcre/pcre2lib/pcre2_substring.c:339:35    - Unknown word (oveccount)  -- str
 ext/pcre/pcre2lib/pcre2_substring.c:366:3     - Unknown word (lengthsptr) -- lengthsptr set to point to
 ext/pcre/pcre2lib/pcre2_substring.c:376:16    - Unknown word (lengthsptr) -- PCRE2_SIZE **lengthsptr)
 ext/pcre/pcre2lib/pcre2_substring.c:380:13    - Unknown word (lensp)      -- PCRE2_SIZE *lensp;
+ext/pcre/pcre2lib/pcre2_substring.c:387:54    - Unknown word (Ovector)    -- data->oveccount; /* Ovector too small */
 ext/pcre/pcre2lib/pcre2_substring.c:392:5     - Unknown word (lengthsptr) -- if (lengthsptr != NULL) size += sizeof
 ext/pcre/pcre2lib/pcre2_substring.c:404:1     - Unknown word (lensp)      -- lensp = (PCRE2_SIZE *)((char
 ext/pcre/pcre2lib/pcre2_substring.c:406:5     - Unknown word (lengthsptr) -- if (lengthsptr == NULL)
@@ -18360,11 +18456,14 @@ ext/pcre/pcre2lib/pcre2_substring.c:408:23    - Unknown word (lensp)      -- sp 
 ext/pcre/pcre2lib/pcre2_substring.c:409:3     - Unknown word (lensp)      -- lensp = NULL;
 ext/pcre/pcre2lib/pcre2_substring.c:413:17    - Unknown word (lensp)      -- *lengthsptr = lensp;
 ext/pcre/pcre2lib/pcre2_substring.c:413:4     - Unknown word (lengthsptr) -- *lengthsptr = lensp;
+ext/pcre/pcre2lib/pcre2_substring.c:68:64     - Unknown word (ovector)    -- UNAVAILABLE: no group is in ovector
+ext/pcre/pcre2lib/pcre2_substring.c:69:63     - Unknown word (ovector)    -- all named groups in ovector are unset
 ext/pcre/pcre2lib/pcre2_substring.c:77:5      - Unknown word (failrc)     -- int failrc, entrysize;
 ext/pcre/pcre2lib/pcre2_substring.c:78:17     - Unknown word (matchedby)  -- if (match_data->matchedby == PCRE2_MATCHEDBY_DFA
 ext/pcre/pcre2lib/pcre2_substring.c:78:36     - Unknown word (MATCHEDBY)  -- >matchedby == PCRE2_MATCHEDBY_DFA_INTERPRETER)
 ext/pcre/pcre2lib/pcre2_substring.c:83:1      - Unknown word (failrc)     -- failrc = PCRE2_ERROR_UNAVAILABLE
 ext/pcre/pcre2lib/pcre2_substring.c:87:23     - Unknown word (oveccount)  -- if (n < match_data->oveccount)
+ext/pcre/pcre2lib/pcre2_substring.c:89:21     - Unknown word (ovector)    -- if (match_data->ovector[n*2] != PCRE2_UNSET
 ext/pcre/pcre2lib/pcre2_substring.c:91:5      - Unknown word (failrc)     -- failrc = PCRE2_ERROR_UNSET
 ext/pcre/pcre2lib/pcre2_substring.c:94:8      - Unknown word (failrc)     -- return failrc;
 ext/pcre/pcre2lib/pcre2_tables.c:123:40    - Unknown word (ucptables)  -- See also the pcre2_ucptables.c file, which is generated
@@ -18889,10 +18988,11 @@ ext/pcre/pcre2lib/pcre2_ucptables.c:380:16    - Unknown word (nushu)            
 ext/pcre/pcre2lib/pcre2_ucptables.c:381:16    - Unknown word (nyiakengpuachuehmong)    -- #define STRING_nyiakengpuachuehmong0 STR_n STR_y STR_i STR
 ext/pcre/pcre2lib/pcre2_ucptables.c:382:16    - Unknown word (ogam)                    -- #define STRING_ogam0 STR_o STR_g STR_a STR
 ext/pcre/pcre2lib/pcre2_ucptables.c:384:16    - Unknown word (olchiki)                 -- #define STRING_olchiki0 STR_o STR_l STR_c STR
+ext/pcre/pcre2lib/pcre2_ucptables.c:385:16    - Unknown word (olck)                    -- #define STRING_olck0 STR_o STR_l STR_c STR
 ext/pcre/pcre2lib/pcre2_ucptables.c:386:16    - Unknown word (oldhungarian)            -- #define STRING_oldhungarian0 STR_o STR_l STR_d STR
 ext/pcre/pcre2lib/pcre2_ucptables.c:388:16    - Unknown word (oldnortharabian)         -- #define STRING_oldnortharabian0 STR_o STR_l STR_d STR
 ext/pcre/pcre2lib/pcre2_ucptables.c:389:16    - Unknown word (oldpermic)               -- #define STRING_oldpermic0 STR_o STR_l STR_d STR
-ext/pcre/pcre2lib/pcre2_ucptables.c:390:16    - Unknown word (oldpersian)              -- #define STRING_oldpersian0 STR_o STR_l STR_d STR
+ext/pcre/pcre2lib/pcre2_ucptables.c:390:16    - Unknown word (oldpersian)             -- #define STRING_oldpersian0 STR_o STR_l STR_d STR
 ext/pcre/pcre2lib/pcre2_ucptables.c:391:16    - Unknown word (oldsogdian)             -- #define STRING_oldsogdian0 STR_o STR_l STR_d STR
 ext/pcre/pcre2lib/pcre2_ucptables.c:392:16    - Unknown word (oldsoutharabian)        -- #define STRING_oldsoutharabian0 STR_o STR_l STR_d STR
 ext/pcre/pcre2lib/pcre2_ucptables.c:393:16    - Unknown word (oldturkic)              -- #define STRING_oldturkic0 STR_o STR_l STR_d STR
@@ -19210,11 +19310,12 @@ ext/pcre/pcre2lib/pcre2_ucptables.c:892:10    - Unknown word (nushu)            
 ext/pcre/pcre2lib/pcre2_ucptables.c:893:10    - Unknown word (nyiakengpuachuehmong)    -- STRING_nyiakengpuachuehmong0
 ext/pcre/pcre2lib/pcre2_ucptables.c:894:10    - Unknown word (ogam)                    -- STRING_ogam0
 ext/pcre/pcre2lib/pcre2_ucptables.c:896:10    - Unknown word (olchiki)                 -- STRING_olchiki0
+ext/pcre/pcre2lib/pcre2_ucptables.c:897:10    - Unknown word (olck)                    -- STRING_olck0
 ext/pcre/pcre2lib/pcre2_ucptables.c:898:10    - Unknown word (oldhungarian)            -- STRING_oldhungarian0
 ext/pcre/pcre2lib/pcre2_ucptables.c:89:16     - Unknown word (bidibn)               -- #define STRING_bidibn0 STR_b STR_i STR_d STR
 ext/pcre/pcre2lib/pcre2_ucptables.c:900:10    - Unknown word (oldnortharabian)         -- STRING_oldnortharabian0
 ext/pcre/pcre2lib/pcre2_ucptables.c:901:10    - Unknown word (oldpermic)               -- STRING_oldpermic0
-ext/pcre/pcre2lib/pcre2_ucptables.c:902:10    - Unknown word (oldpersian)              -- STRING_oldpersian0
+ext/pcre/pcre2lib/pcre2_ucptables.c:902:10    - Unknown word (oldpersian)             -- STRING_oldpersian0
 ext/pcre/pcre2lib/pcre2_ucptables.c:903:10    - Unknown word (oldsogdian)             -- STRING_oldsogdian0
 ext/pcre/pcre2lib/pcre2_ucptables.c:904:10    - Unknown word (oldsoutharabian)        -- STRING_oldsoutharabian0
 ext/pcre/pcre2lib/pcre2_ucptables.c:905:10    - Unknown word (oldturkic)              -- STRING_oldturkic0
@@ -19301,11 +19402,14 @@ ext/pcre/pcre2lib/pcre2_xclass.c:455:47    - Unknown word (ECLASS)     -- past-t
 ext/pcre/pcre2lib/pcre2_xclass.c:462:6     - Unknown word (eclass)     -- PRIV(eclass)(uint32_t c, PCRE2_SPTR
 ext/pcre/pcre2lib/pcre2_xclass.c:487:52    - Unknown word (ECLASS)     -- reach the end of the ECLASS. */
 ext/pcre/php_pcre.c:120:20    - Unknown word (BADUTFOFFSET) -- case PCRE2_ERROR_BADUTFOFFSET:
+ext/pcre/php_pcre.c:1256:40   - Unknown word (ovector)      -- offsets = pcre2_get_ovector_pointer(match_data)
 ext/pcre/php_pcre.c:1366:72   - Unknown word (ATSTART)      -- we set PCRE2_NOTEMPTY_ATSTART and try
 ext/pcre/php_pcre.c:1371:42   - Unknown word (ATSTART)      -- CHECK | PCRE2_NOTEMPTY_ATSTART | PCRE2_ANCHORED, match
 ext/pcre/php_pcre.c:1379:45   - Unknown word (ATSTART)      -- previously set PCRE2_NOTEMPTY_ATSTART after a null match,
+ext/pcre/php_pcre.c:1644:40   - Unknown word (ovector)      -- offsets = pcre2_get_ovector_pointer(match_data)
 ext/pcre/php_pcre.c:1766:72   - Unknown word (ATSTART)      -- we set PCRE2_NOTEMPTY_ATSTART and try
 ext/pcre/php_pcre.c:1771:42   - Unknown word (ATSTART)      -- CHECK | PCRE2_NOTEMPTY_ATSTART | PCRE2_ANCHORED, match
+ext/pcre/php_pcre.c:1893:40   - Unknown word (ovector)      -- offsets = pcre2_get_ovector_pointer(match_data)
 ext/pcre/php_pcre.c:206:7     - Unknown word (gctx)         -- if (!gctx) {
 ext/pcre/php_pcre.c:207:3     - Unknown word (gctx)         -- gctx = pcre2_general_context
 ext/pcre/php_pcre.c:208:8     - Unknown word (gctx)         -- if (!gctx) {
@@ -19315,6 +19419,7 @@ ext/pcre/php_pcre.c:2320:6    - Unknown word (zcount)       -- if (zcount) {
 ext/pcre/php_pcre.c:2321:28   - Unknown word (zcount)       -- TRY_ASSIGN_REF_LONG(zcount, replace_count);
 ext/pcre/php_pcre.c:2331:8    - Unknown word (zcount)       -- zval *zcount = NULL;
 ext/pcre/php_pcre.c:2340:16   - Unknown word (zcount)       -- Z_PARAM_ZVAL(zcount)
+ext/pcre/php_pcre.c:2598:40   - Unknown word (ovector)      -- offsets = pcre2_get_ovector_pointer(match_data)
 ext/pcre/php_pcre.c:3056:26   - Unknown word (decref)       -- PHPAPI void php_pcre_pce_decref(pcre_cache_entry *pce
 ext/pcre/php_pcre.c:402:18    - Unknown word (VALGRIND)     -- #ifdef HAVE_PCRE_VALGRIND_SUPPORT
 ext/pcre/php_pcre.c:403:36    - Unknown word (Valgrind)     -- print_table_row(2, "PCRE Valgrind Support", "enabled"
@@ -20651,9 +20756,14 @@ ext/reflection/php_reflection.c:760:48    - Unknown word (ASTVAL)      -- zend_a
 ext/reflection/php_reflection.c:989:8     - Unknown word (DEINDIRECT)  -- ZVAL_DEINDIRECT(prop);
 ext/session/mod_mm.c:439:19    - Unknown word (ehash)      -- ps_sd **ohash, **ehash;
 ext/session/mod_mm.c:451:2     - Unknown word (ehash)      -- ehash = data->hash + data
+ext/session/mod_mm.c:85:10     - Unknown word (ohash)      -- ps_sd **ohash, **ehash;
 ext/session/mod_mm.c:85:19     - Unknown word (ehash)      -- ps_sd **ohash, **ehash;
 ext/session/mod_mm.c:96:2      - Unknown word (ehash)      -- ehash = data->hash + data
+ext/session/mod_mm.c:97:27     - Unknown word (ohash)      -- ohash = data->hash; ohash < ehash; ohash++) {
 ext/session/mod_mm.c:97:35     - Unknown word (ehash)      -- data->hash; ohash < ehash; ohash++) {
+ext/session/mod_mm.c:97:42     - Unknown word (ohash)      -- hash; ohash < ehash; ohash++) {
+ext/session/mod_mm.c:97:7      - Unknown word (ohash)      -- for (ohash = data->hash; ohash
+ext/session/mod_mm.c:98:14     - Unknown word (ohash)      -- for (ps = *ohash; ps; ps = next) {
 ext/session/mod_user.c:63:29     - Unknown word (cheked)     -- TODO Why are exception cheked? */
 ext/session/mod_user.c:70:29     - Unknown word (cheked)     -- TODO Why are exception cheked? */
 ext/session/mod_user_class.c:13:14     - Unknown word (Arpad)      -- | Author: Arpad Ray <arpad@php.net>
@@ -22360,6 +22470,9 @@ ext/spl/spl_array.c:1354:2    - Unknown word (zflags)     -- zflags = var_tmp_va
 ext/spl/spl_array.c:1355:27   - Unknown word (zflags)     -- php_var_unserialize(zflags, &p, s + buf_len, &var
 ext/spl/spl_array.c:1355:75   - Unknown word (zflags)     -- var_hash) || Z_TYPE_P(zflags) != IS_LONG) {
 ext/spl/spl_array.c:1360:19   - Unknown word (zflags)     -- flags = Z_LVAL_P(zflags);
+ext/spl/spl_array.c:1734:12   - Unknown word (opos)       -- zend_long opos, position;
+ext/spl/spl_array.c:1744:2    - Unknown word (opos)       -- opos = position;
+ext/spl/spl_array.c:1756:109  - Unknown word (opos)       -- " is out of range", opos);
 ext/spl/spl_directory.c:1482:34   - Unknown word (LPERMS)      -- intern->file_name, FS_LPERMS, return_value);
 ext/spl/spl_directory.c:1571:18   - Unknown word (strpprintf)  -- RETURN_NEW_STR(strpprintf(0, "%s%c%s", ZSTR_VAL
 ext/spl/spl_directory.c:1578:8    - Unknown word (Cronstructs) -- /* {{{ Cronstructs a new dir iterator from
@@ -23233,7 +23346,12 @@ ext/standard/filters.c:204:16    - Unknown word (erem)                       -- 
 ext/standard/filters.c:229:116   - Unknown word (lbchars)                    -- line_len, const char *lbchars, size_t lbchars_len
 ext/standard/filters.c:229:132   - Unknown word (lbchars)                    -- char *lbchars, size_t lbchars_len, int lbchars_dup
 ext/standard/filters.c:233:8     - Unknown word (erem)                       -- inst->erem_len = 0;
+ext/standard/filters.c:259:9     - Unknown word (ocnt)                       -- size_t ocnt;
+ext/standard/filters.c:263:2     - Unknown word (ocnt)                       -- ocnt = *out_left_p;
 ext/standard/filters.c:266:16    - Unknown word (erem)                       -- switch (inst->erem_len) {
+ext/standard/filters.c:273:9     - Unknown word (ocnt)                       -- if (ocnt < inst->lbchars_len
+ext/standard/filters.c:278:5     - Unknown word (ocnt)                       -- ocnt -= inst->lbchars_len
+ext/standard/filters.c:281:8     - Unknown word (ocnt)                       -- if (ocnt < 4) {
 ext/standard/filters.c:285:33    - Unknown word (erem)                       -- b64_tbl_enc[(inst->erem[0] >> 2)];
 ext/standard/filters.c:29:33     - Unknown word (nopqrstuvwxyzabcdefghijklm) -- const char rot13_to[] = "nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM
 ext/standard/filters.c:29:59     - Unknown word (NOPQRSTUVWXYZABCDEFGHIJKLM) -- nopqrstuvwxyzabcdefghijklmNOPQRSTUVWXYZABCDEFGHIJKLM";
@@ -23484,6 +23602,8 @@ ext/standard/image.c:605:24    - Unknown word (Rsiz)       -- php_read2(stream);
 ext/standard/image.c:606:40    - Unknown word (Xsiz)       -- php_read4(stream); /* Xsiz */
 ext/standard/image.c:607:41    - Unknown word (Ysiz)       -- php_read4(stream); /* Ysiz */
 ext/standard/image.c:60:8      - Unknown word (gfxinfo)    -- struct gfxinfo {
+ext/standard/image.c:614:26    - Unknown word (Osiz)       -- read4(stream); /* XTOsiz */
+ext/standard/image.c:615:26    - Unknown word (Osiz)       -- read4(stream); /* YTOsiz */
 ext/standard/image.c:69:15     - Unknown word (gfxinfo)    -- static struct gfxinfo *php_handle_gif (php
 ext/standard/image.c:71:9      - Unknown word (gfxinfo)    -- struct gfxinfo *result = NULL;
 ext/standard/image.c:722:17    - Unknown word (URATIONAL)  -- #define TAG_FMT_URATIONAL 5
@@ -23591,6 +23711,9 @@ ext/standard/math.c:600:16    - Unknown word (zbase)      -- Z_PARAM_ZVAL(zbase)
 ext/standard/math.c:601:16    - Unknown word (zexp)       -- Z_PARAM_ZVAL(zexp)
 ext/standard/math.c:604:29    - Unknown word (zbase)      -- function(return_value, zbase, zexp);
 ext/standard/math.c:604:36    - Unknown word (zexp)       -- return_value, zbase, zexp);
+ext/standard/math.c:754:28    - Unknown word (onum)       -- long num = 0, digit, onum;
+ext/standard/math.c:776:3     - Unknown word (onum)       -- onum = num;
+ext/standard/math.c:778:13    - Unknown word (onum)       -- if (num > onum)
 ext/standard/math.c:803:6     - Unknown word (cutlim)     -- int cutlim;
 ext/standard/math.c:821:2     - Unknown word (cutlim)     -- cutlim = ZEND_LONG_MAX % base
 ext/standard/math.c:845:47    - Unknown word (cutlim)     -- num == cutoff && c <= cutlim)) {
@@ -23640,10 +23763,15 @@ ext/standard/net.c:287:9     - Unknown word (newuni)     -- zval newuni;
 ext/standard/net.c:288:16    - Unknown word (newuni)     -- array_init(&newuni);
 ext/standard/net.c:289:83    - Unknown word (newuni)     -- sizeof("unicast") - 1, &newuni);
 ext/standard/net.c:40:12     - Unknown word (intrin)     -- # include <intrin.h>
+ext/standard/pack.c:1007:22   - Unknown word (opos)       -- ZSTR_VAL(buf)[opos] = cc;
 ext/standard/pack.c:920:47    - Unknown word (padt)       -- char pads = ' '; char padt = '\t'; char padc =
 ext/standard/pack.c:920:65    - Unknown word (padc)       -- char padt = '\t'; char padc = '\r'; char padl =
 ext/standard/pack.c:934:37    - Unknown word (padt)       -- input[inputpos + len] != padt
 ext/standard/pack.c:935:37    - Unknown word (padc)       -- input[inputpos + len] != padc
+ext/standard/pack.c:978:23    - Unknown word (opos)       -- zend_long ipos, opos;
+ext/standard/pack.c:998:19    - Unknown word (opos)       -- for (ipos = opos = 0; opos < len; opos
+ext/standard/pack.c:998:29    - Unknown word (opos)       -- for (ipos = opos = 0; opos < len; opos++) {
+ext/standard/pack.c:998:41    - Unknown word (opos)       -- opos = 0; opos < len; opos++) {
 ext/standard/password.c:137:8     - Unknown word (znew)       -- zval *znew_cost;
 ext/standard/password.c:147:18    - Unknown word (znew)       -- if (options && (znew_cost = zend_hash_str
 ext/standard/password.c:148:28    - Unknown word (znew)       -- cost = zval_get_long(znew_cost);
@@ -24674,6 +24802,10 @@ main/output.c:546:32    - Unknown word (rconflicts) -- HASH_PACKED_FOREACH_PTR(r
 main/php.h:13:15     - Unknown word (Andi)       -- | Authors: Andi Gutmans <andi@php.net
 main/php.h:331:13    - Unknown word (memnistr)   -- #define php_memnistr zend_memnistr
 main/php.h:331:27    - Unknown word (memnistr)   -- define php_memnistr zend_memnistr
+main/php_compat.h:46:19     - Unknown word (ovector)    -- #define pcre2_get_ovector_pointer_8 php_pcre2
+main/php_compat.h:46:51     - Unknown word (ovector)    -- pointer_8 php_pcre2_get_ovector_pointer
+main/php_compat.h:47:19     - Unknown word (ovector)    -- #define pcre2_get_ovector_count_8 php_pcre2_get
+main/php_compat.h:47:49     - Unknown word (ovector)    -- count_8 php_pcre2_get_ovector_count
 main/php_ini.c:440:8     - Unknown word (phprc)      -- char phprc_path[MAXPATHLEN];
 main/php_ini.c:443:26    - Unknown word (PHPRC)      -- env_location = getenv("PHPRC");
 main/php_ini.c:447:9     - Unknown word (dummybuf)   -- char dummybuf;

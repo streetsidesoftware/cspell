@@ -3,7 +3,7 @@ Repository: alexiosc/megistos
 Url: "https://github.com/alexiosc/megistos.git"
 Args: ["--config=../../../../config/repositories/alexiosc/megistos/cspell.json","**/*.{md,c,h,html}"]
 Lines:
- CSpell: Files checked: 583, Issues found: 32833 in 577 files.
+ CSpell: Files checked: 583, Issues found: 33038 in 577 files.
  exit code: 1
 ATTIC/doc/examples/mod_dialog.c:18:5      - Unknown word (sameas)     -- if (sameas (margv [6], "OK") |
 ATTIC/doc/examples/mod_dialog.c:9:29      - Unknown word (FOOVT)      -- dialog_run ("foo", FOOVT, FOOLT, inp_buffer)
@@ -237,6 +237,7 @@ ATTIC/mbk/mbk_account.h:163:9     - Unknown word (FILSNG)     -- #define FILSNG 
 ATTIC/mbk/mbk_account.h:164:9     - Unknown word (FLIPLR)     -- #define FLIPLR 157
 ATTIC/mbk/mbk_account.h:167:9     - Unknown word (MNTHLY)     -- #define MNTHLY 160
 ATTIC/mbk/mbk_account.h:168:9     - Unknown word (OPSWHO)     -- #define OPSWHO 161
+ATTIC/mbk/mbk_account.h:169:9     - Unknown word (OUIDERR)    -- #define OUIDERR 162
 ATTIC/mbk/mbk_account.h:16:9      - Unknown word (MKPWDF)     -- #define MKPWDF 9
 ATTIC/mbk/mbk_account.h:170:9     - Unknown word (PSWOTH)     -- #define PSWOTH 163
 ATTIC/mbk/mbk_account.h:17:9      - Unknown word (LIPSKO)     -- #define LIPSKO 10
@@ -302,6 +303,7 @@ ATTIC/mbk/mbk_bbsdialog.h:27:9      - Unknown word (LISTMFTR)   -- #define LISTM
 ATTIC/mbk/mbk_bbsdialog.h:29:9      - Unknown word (TOGON)      -- #define TOGON 22
 ATTIC/mbk/mbk_bbsdialog.h:30:9      - Unknown word (TOGOFF)     -- #define TOGOFF 23
 ATTIC/mbk/mbk_bbsdialog.h:7:11      - Unknown word (BBSDIALOG)  -- #ifndef __BBSDIALOG_UNAMBIGUOUS__
+ATTIC/mbk/mbk_bjack.h:100:13    - Unknown word (OFORCEFOLD) -- #define BJM_OFORCEFOLD 93
 ATTIC/mbk/mbk_bjack.h:101:13    - Unknown word (YFORCESTAY) -- #define BJM_YFORCESTAY 94
 ATTIC/mbk/mbk_bjack.h:102:13    - Unknown word (OFORCESTAY) -- #define BJM_OFORCESTAY 95
 ATTIC/mbk/mbk_bjack.h:103:13    - Unknown word (SMTHE)      -- #define BJM_SMTHE 96
@@ -309,6 +311,7 @@ ATTIC/mbk/mbk_bjack.h:104:13    - Unknown word (SFTHE)      -- #define BJM_SFTHE
 ATTIC/mbk/mbk_bjack.h:105:13    - Unknown word (SWON)       -- #define BJM_SWON 98
 ATTIC/mbk/mbk_bjack.h:106:13    - Unknown word (PWON)       -- #define BJM_PWON 99
 ATTIC/mbk/mbk_bjack.h:110:13    - Unknown word (PLNOINTELE) -- #define BJM_PLNOINTELE 103
+ATTIC/mbk/mbk_bjack.h:111:13    - Unknown word (OFORCEOFF)  -- #define BJM_OFORCEOFF 104
 ATTIC/mbk/mbk_bjack.h:11:13     - Unknown word (EPAUSEWARN) -- #define BJV_EPAUSEWARN 4
 ATTIC/mbk/mbk_bjack.h:14:20     - Unknown word (NOCHARGE)   -- #define BJV_SYSOPS_NOCHARGE 7
 ATTIC/mbk/mbk_bjack.h:15:20     - Unknown word (PERC)       -- #define BJV_SYSTEM_PERC 8
@@ -330,8 +333,11 @@ ATTIC/mbk/mbk_bjack.h:43:13     - Unknown word (OBETCRED)   -- #define BJM_OBETC
 ATTIC/mbk/mbk_bjack.h:44:13     - Unknown word (MINBET)     -- #define BJM_MINBET 37
 ATTIC/mbk/mbk_bjack.h:47:13     - Unknown word (TOOLOW)     -- #define BJM_TOOLOW 40
 ATTIC/mbk/mbk_bjack.h:50:13     - Unknown word (YRAISE)     -- #define BJM_YRAISE 43
+ATTIC/mbk/mbk_bjack.h:51:13     - Unknown word (ORAISE)     -- #define BJM_ORAISE 44
 ATTIC/mbk/mbk_bjack.h:54:13     - Unknown word (YCALL)      -- #define BJM_YCALL 47
+ATTIC/mbk/mbk_bjack.h:55:13     - Unknown word (OCALL)      -- #define BJM_OCALL 48
 ATTIC/mbk/mbk_bjack.h:56:13     - Unknown word (YFOLD)      -- #define BJM_YFOLD 49
+ATTIC/mbk/mbk_bjack.h:57:13     - Unknown word (OFOLD)      -- #define BJM_OFOLD 50
 ATTIC/mbk/mbk_bjack.h:58:13     - Unknown word (SEEPOT)     -- #define BJM_SEEPOT 51
 ATTIC/mbk/mbk_bjack.h:59:13     - Unknown word (YTURN)      -- #define BJM_YTURN 52
 ATTIC/mbk/mbk_bjack.h:60:13     - Unknown word (OTURN)      -- #define BJM_OTURN 53
@@ -349,13 +355,17 @@ ATTIC/mbk/mbk_bjack.h:76:13     - Unknown word (YSTAY)      -- #define BJM_YSTAY
 ATTIC/mbk/mbk_bjack.h:79:13     - Unknown word (OSTAY)      -- #define BJM_OSTAY 72
 ATTIC/mbk/mbk_bjack.h:7:11      - Unknown word (BJACK)      -- #ifndef __BJACK_UNAMBIGUOUS__
 ATTIC/mbk/mbk_bjack.h:80:13     - Unknown word (YWIN)       -- #define BJM_YWIN 73
+ATTIC/mbk/mbk_bjack.h:81:13     - Unknown word (OWIN)       -- #define BJM_OWIN 74
 ATTIC/mbk/mbk_bjack.h:82:13     - Unknown word (NOMOREPL)   -- #define BJM_NOMOREPL 75
 ATTIC/mbk/mbk_bjack.h:83:13     - Unknown word (YJOIN)      -- #define BJM_YJOIN 76
+ATTIC/mbk/mbk_bjack.h:84:13     - Unknown word (OJOIN)      -- #define BJM_OJOIN 77
 ATTIC/mbk/mbk_bjack.h:85:13     - Unknown word (NOGAME)     -- #define BJM_NOGAME 78
 ATTIC/mbk/mbk_bjack.h:86:13     - Unknown word (YGETCRED)   -- #define BJM_YGETCRED 79
+ATTIC/mbk/mbk_bjack.h:87:13     - Unknown word (OGETCRED)   -- #define BJM_OGETCRED 80
 ATTIC/mbk/mbk_bjack.h:88:13     - Unknown word (MULTJOIN)   -- #define BJM_MULTJOIN 81
 ATTIC/mbk/mbk_bjack.h:89:13     - Unknown word (YOFF)       -- #define BJM_YOFF 82
 ATTIC/mbk/mbk_bjack.h:8:13      - Unknown word (WDOGEXP)    -- #define BJV_WDOGEXP 1
+ATTIC/mbk/mbk_bjack.h:90:13     - Unknown word (OOFF)       -- #define BJM_OOFF 83
 ATTIC/mbk/mbk_bjack.h:95:13     - Unknown word (STARTNOW)   -- #define BJM_STARTNOW 88
 ATTIC/mbk/mbk_bjack.h:99:13     - Unknown word (YFORCEFOLD) -- #define BJM_YFORCEFOLD 92
 ATTIC/mbk/mbk_bulletins.h:101:9     - Unknown word (ASKREAD)    -- #define ASKREAD 94
@@ -1030,6 +1040,7 @@ ATTIC/mbk/mbk_files.h:197:9     - Unknown word (OOPTVT)     -- #define OOPTVT 19
 ATTIC/mbk/mbk_files.h:198:9     - Unknown word (OOPTLT)     -- #define OOPTLT 191
 ATTIC/mbk/mbk_files.h:19:9      - Unknown word (DEFREB)     -- #define DEFREB 12
 ATTIC/mbk/mbk_files.h:208:9     - Unknown word (OOPTLTA)    -- #define OOPTLTA 201
+ATTIC/mbk/mbk_files.h:209:9     - Unknown word (OOPTREC)    -- #define OOPTREC 202
 ATTIC/mbk/mbk_files.h:20:9      - Unknown word (DEFUAUD)    -- #define DEFUAUD 13
 ATTIC/mbk/mbk_files.h:212:9     - Unknown word (OLDLASK)    -- #define OLDLASK 205
 ATTIC/mbk/mbk_files.h:213:9     - Unknown word (OLDLNEX)    -- #define OLDLNEX 206
@@ -1046,6 +1057,8 @@ ATTIC/mbk/mbk_files.h:224:9     - Unknown word (OFILFT)     -- #define OFILFT 21
 ATTIC/mbk/mbk_files.h:225:9     - Unknown word (OLUNOS)     -- #define OLUNOS 218
 ATTIC/mbk/mbk_files.h:226:9     - Unknown word (OAPPQ)      -- #define OAPPQ 219
 ATTIC/mbk/mbk_files.h:227:9     - Unknown word (OAPPR)      -- #define OAPPR 220
+ATTIC/mbk/mbk_files.h:228:9     - Unknown word (OAPPASK)    -- #define OAPPASK 221
+ATTIC/mbk/mbk_files.h:229:9     - Unknown word (OAPPERR)    -- #define OAPPERR 222
 ATTIC/mbk/mbk_files.h:230:9     - Unknown word (OAPPOK)     -- #define OAPPOK 223
 ATTIC/mbk/mbk_files.h:231:9     - Unknown word (OAPPSCN)    -- #define OAPPSCN 224
 ATTIC/mbk/mbk_files.h:232:9     - Unknown word (OAPPNUN)    -- #define OAPPNUN 225
@@ -1060,7 +1073,9 @@ ATTIC/mbk/mbk_files.h:240:9     - Unknown word (OLRNASK)    -- #define OLRNASK 2
 ATTIC/mbk/mbk_files.h:241:9     - Unknown word (OLRNNMN)    -- #define OLRNNMN 234
 ATTIC/mbk/mbk_files.h:242:9     - Unknown word (OLRNERR)    -- #define OLRNERR 235
 ATTIC/mbk/mbk_files.h:243:9     - Unknown word (OLRNOK)     -- #define OLRNOK 236
+ATTIC/mbk/mbk_files.h:244:9     - Unknown word (ODESASK)    -- #define ODESASK 237
 ATTIC/mbk/mbk_files.h:245:9     - Unknown word (ODESOS)     -- #define ODESOS 238
+ATTIC/mbk/mbk_files.h:246:9     - Unknown word (ODESERR)    -- #define ODESERR 239
 ATTIC/mbk/mbk_files.h:247:9     - Unknown word (ODESFIL)    -- #define ODESFIL 240
 ATTIC/mbk/mbk_files.h:248:9     - Unknown word (OLONASK)    -- #define OLONASK 241
 ATTIC/mbk/mbk_files.h:249:9     - Unknown word (OLONOS)     -- #define OLONOS 242
@@ -1069,7 +1084,12 @@ ATTIC/mbk/mbk_files.h:250:9     - Unknown word (OLONERR)    -- #define OLONERR 2
 ATTIC/mbk/mbk_files.h:251:9     - Unknown word (OLONINF)    -- #define OLONINF 244
 ATTIC/mbk/mbk_files.h:252:9     - Unknown word (OLONCONT)   -- #define OLONCONT 245
 ATTIC/mbk/mbk_files.h:253:9     - Unknown word (OLONCND)    -- #define OLONCND 246
+ATTIC/mbk/mbk_files.h:254:9     - Unknown word (ODELASK)    -- #define ODELASK 247
+ATTIC/mbk/mbk_files.h:255:9     - Unknown word (ODELERR)    -- #define ODELERR 248
+ATTIC/mbk/mbk_files.h:256:9     - Unknown word (ODELNUM)    -- #define ODELNUM 249
 ATTIC/mbk/mbk_files.h:257:9     - Unknown word (ODELOS)     -- #define ODELOS 250
+ATTIC/mbk/mbk_files.h:258:9     - Unknown word (ODELMOD)    -- #define ODELMOD 251
+ATTIC/mbk/mbk_files.h:259:9     - Unknown word (ODELINF)    -- #define ODELINF 252
 ATTIC/mbk/mbk_files.h:25:9      - Unknown word (RDMESIZ)    -- #define RDMESIZ 18
 ATTIC/mbk/mbk_files.h:260:9     - Unknown word (ODELMNU)    -- #define ODELMNU 253
 ATTIC/mbk/mbk_files.h:261:9     - Unknown word (ODELOK)     -- #define ODELOK 254
@@ -1122,6 +1142,7 @@ ATTIC/mbk/mbk_files.h:314:9     - Unknown word (REMZER)     -- #define REMZER 30
 ATTIC/mbk/mbk_files.h:317:9     - Unknown word (UPLNAG)     -- #define UPLNAG 310
 ATTIC/mbk/mbk_files.h:318:9     - Unknown word (UPLXLNF)    -- #define UPLXLNF 311
 ATTIC/mbk/mbk_files.h:319:9     - Unknown word (UPLXLNB)    -- #define UPLXLNB 312
+ATTIC/mbk/mbk_files.h:31:9      - Unknown word (OTHRFLS)    -- #define OTHRFLS 24
 ATTIC/mbk/mbk_files.h:320:9     - Unknown word (UPLXLBF)    -- #define UPLXLBF 313
 ATTIC/mbk/mbk_files.h:321:9     - Unknown word (UPLNCR)     -- #define UPLNCR 314
 ATTIC/mbk/mbk_files.h:322:9     - Unknown word (UPLSHDS)    -- #define UPLSHDS 315
@@ -2338,6 +2359,7 @@ ATTIC/src/modules/account/account.c:65:4      - Unknown word (customisable) -- *
 ATTIC/src/modules/account/account.c:666:12    - Unknown word (othruseracc)     -- ruacc = &othruseracc;
 ATTIC/src/modules/account/account.c:697:7     - Unknown word (postcredits)     -- usr_postcredits (userid, num, CRD_FREE
 ATTIC/src/modules/account/account.c:702:12    - Unknown word (injbuf)          -- char injbuf[16384];
+ATTIC/src/modules/account/account.c:704:19    - Unknown word (othrshm)         -- sprompt_other (othrshm, injbuf, CXFINJ, uacc
 ATTIC/src/modules/account/account.c:706:12    - Unknown word (injoth)          -- if (usr_injoth (&othruseronl, injbuf
 ATTIC/src/modules/account/account.c:706:21    - Unknown word (othruseronl)     -- if (usr_injoth (&othruseronl, injbuf, 0))
 ATTIC/src/modules/account/account.c:718:16    - Unknown word (cofdate)         -- int nod = cofdate (today ()) - cofdate
@@ -3139,6 +3161,7 @@ ATTIC/src/modules/files/files.c:122:9     - Unknown word (maxkeyw)    -- int max
 ATTIC/src/modules/files/files.c:123:9     - Unknown word (accmtsd)    -- int accmtsd;
 ATTIC/src/modules/files/files.c:125:9     - Unknown word (sldcmax)    -- int sldcmax;
 ATTIC/src/modules/files/files.c:127:9     - Unknown word (sldcsmn)    -- int sldcsmn;
+ATTIC/src/modules/files/files.c:129:9     - Unknown word (othrfls)    -- char *othrfls;
 ATTIC/src/modules/files/files.c:144:9     - Unknown word (srlstln)    -- int srlstln;
 ATTIC/src/modules/files/files.c:149:9     - Unknown word (peffic)     -- int peffic;
 ATTIC/src/modules/files/files.c:241:2     - Unknown word (initlibsubstvars) -- initlibsubstvars ();	/* Initialise substitutio
@@ -3427,6 +3450,7 @@ ATTIC/src/modules/gallups/gedit/gedit.c:30:9      - Unknown word (inputli)    --
 ATTIC/src/modules/gallups/gsc/analyze.c:59:13     - Unknown word (glps)       -- # include "glps-bcc.h"
 ATTIC/src/modules/gallups/gsc/analyze.c:88:11     - Unknown word (gallupsinfo) -- ginfo = &gallupsinfo;
 ATTIC/src/modules/gallups/gsc/compiler.c:109:35    - Unknown word (nlcnt)      -- escape = 0, scanend = 0, nlcnt = 0, res = 0;
+ATTIC/src/modules/gallups/gsc/compiler.c:162:21    - Unknown word (ostr)       -- /* copy from str to ostr any text beginning from
 ATTIC/src/modules/gallups/gsc/compiler.c:241:9     - Unknown word (doerror)    -- #define doerror(frm,f...) errormsg(
 ATTIC/src/modules/gallups/gsc/compiler.c:264:1     - Unknown word (dowarning)  -- dowarning (char *frm, ...)
 ATTIC/src/modules/gallups/gsc/compiler.c:444:43    - Unknown word (twince)     -- options encountered twince");
@@ -3664,6 +3688,7 @@ ATTIC/src/modules/telecon/accesses.c:217:1     - Unknown word (setusrax)    -- s
 ATTIC/src/modules/telecon/accesses.c:217:54    - Unknown word (flagson)     -- userid, char sex, int flagson, int flagsoff)
 ATTIC/src/modules/telecon/accesses.c:222:9     - Unknown word (makechanusr) -- usr = makechanusr (userid, flagson);
 ATTIC/src/modules/telecon/accesses.c:232:7     - Unknown word (writechanusr) -- if (!writechanusr (channel, usr)) {
+ATTIC/src/modules/telecon/accesses.c:239:3     - Unknown word (othruseraux)  -- othruseraux.access = usr->flags
 ATTIC/src/modules/telecon/accesses.c:91:1      - Unknown word (getdefusrax) -- getdefusrax (char *channel, char
 ATTIC/src/modules/telecon/accesses.c:93:16     - Unknown word (tlcuser)     -- static struct tlcuser usr;
 ATTIC/src/modules/telecon/accesses.c:98:24     - Unknown word (MAINCHAN)    -- if (!strcmp (channel, MAINCHAN))
@@ -3696,12 +3721,14 @@ ATTIC/src/modules/telecon/actions.c:97:14     - Unknown word (inpptr)      -- st
 ATTIC/src/modules/telecon/actions.h:125:8     - Unknown word (Gaction)     -- struct Gaction {
 ATTIC/src/modules/telecon/actions.h:192:7     - Unknown word (ACCS)        -- "A%03dACCS {%s} T\n"
 ATTIC/src/modules/telecon/actions.h:197:9     - Unknown word (SMPL)        -- #define SMPL \
+ATTIC/src/modules/telecon/actions.h:200:9     - Unknown word (OTHR)        -- #define OTHR \
 ATTIC/src/modules/telecon/actions.h:206:9     - Unknown word (TRGT)        -- #define TRGT \
 ATTIC/src/modules/telecon/actions.h:209:9     - Unknown word (SCRT)        -- #define SCRT \
 ATTIC/src/modules/telecon/actions.h:212:9     - Unknown word (ADVB)        -- #define ADVB \
 ATTIC/src/modules/telecon/actions.h:215:9     - Unknown word (GNRC)        -- #define GNRC \
 ATTIC/src/modules/telecon/actions.h:54:22     - Unknown word (SODAG)       -- define ACTIONTYPES "SODAG"
 ATTIC/src/modules/telecon/actions.h:54:9      - Unknown word (ACTIONTYPES) -- #define ACTIONTYPES "SODAG"
+ATTIC/src/modules/telecon/actions.h:87:8      - Unknown word (Oaction)     -- struct Oaction {
 ATTIC/src/modules/telecon/broadcast.c:103:34    - Unknown word (INTELECON)       -- othruseronl.flags & OLF_INTELECON))
 ATTIC/src/modules/telecon/broadcast.c:121:1     - Unknown word (broadcastchn)    -- broadcastchn (char *curchannel, char
 ATTIC/src/modules/telecon/broadcast.c:134:12    - Unknown word (fxprompt)        -- static int fxprompt;
@@ -3986,6 +4013,7 @@ ATTIC/src/system/bbsgetty/gettydefs.c:100:22    - Unknown word (ISANE)      -- t
 ATTIC/src/system/bbsgetty/gettydefs.c:101:22    - Unknown word (OSANE)      -- termio->c_oflag |= OSANE;
 ATTIC/src/system/bbsgetty/gettydefs.c:102:22    - Unknown word (CSANE)      -- termio->c_cflag |= CSANE;
 ATTIC/src/system/bbsgetty/gettydefs.c:103:22    - Unknown word (LSANE)      -- termio->c_lflag |= LSANE;
+ATTIC/src/system/bbsgetty/gettydefs.c:121:37    - Unknown word (omodes)     -- val = findsym (field, omodes)) != FAIL) {
 ATTIC/src/system/bbsgetty/gettydefs.c:127:37    - Unknown word (lmodes)     -- val = findsym (field, lmodes)) != FAIL) {
 ATTIC/src/system/bbsgetty/gettydefs.c:64:35     - Unknown word (ITERMIOS)   -- termios itermios = DEFAULT_ITERMIOS; /* Pre-connection termios
 ATTIC/src/system/bbsgetty/gettydefs.c:65:35     - Unknown word (FTERMIOS)   -- termios ftermios = DEFAULT_FTERMIOS; /* Post-connection
@@ -4589,6 +4617,7 @@ src/libmegistos/output.c:440:13    - Unknown word (homestg)      -- char homestg
 src/libmegistos/output.c:612:11    - Unknown word (oldprotect)   -- int oldprotect = out_flags & OFL_PROTECTVARS
 src/libmegistos/output.c:66:24     - Unknown word (protectvars) -- Fixed bug involving protectvars in printfile().
 src/libmegistos/output.c:948:4     - Unknown word (usersex)      -- sv_usersex ()
+src/libmegistos/output.h:362:21    - Unknown word (othruser)   -- other user's (::othruser) setup. If the other
 src/libmegistos/output.h:430:56    - Unknown word (getu)       -- a message using msg_getu() and sprint(). Then
 src/libmegistos/prompts.c:106:17    - Unknown word (nobot)      -- #define msg_get_nobot(num) msg_getl_bot((num
 src/libmegistos/prompts.c:125:10    - Unknown word (langfp)     -- FILE *langfp;

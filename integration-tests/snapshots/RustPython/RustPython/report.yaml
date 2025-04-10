@@ -4,8 +4,8 @@ Url: https://github.com/RustPython/RustPython.git
 Args: '["**"]'
 Summary:
   files: 671
-  filesWithIssues: 124
-  issues: 828
+  filesWithIssues: 125
+  issues: 838
   errors: 0
 Errors: []
 
@@ -948,10 +948,19 @@ issues:
   - "src/settings.rs:254:74      PYTHONINTMAXSTRDIGITS       U       int_max_str_digits: PYTHONINTMAXSTRDIGITS: invalid limit; must"
   - "src/shell.rs:1:1\tNo issues found"
   - "src/shell/helper.rs:1:1\tNo issues found"
-  - "stdlib/build.rs:1:1\tNo issues found"
+  - "stdlib/build.rs:2:44        osslconf    U       rustc-check-cfg=cfg(osslconf, values(\"OPENSSL_NO"
+  - "stdlib/build.rs:6:9         ossl        U       let ossl_vers = ["
+  - "stdlib/build.rs:7:27        ossl        U       (0x1_00_01_00_0, \"ossl101\"),"
+  - "stdlib/build.rs:8:27        ossl        U       (0x1_00_02_00_0, \"ossl102\"),"
+  - "stdlib/build.rs:9:27        ossl        U       (0x1_01_00_00_0, \"ossl110\"),"
+  - "stdlib/build.rs:10:27       ossl        U       (0x1_01_00_07_0, \"ossl110g\"),"
+  - "stdlib/build.rs:37:39       osslconf    U       println!(\"cargo:rustc-cfg=osslconf=\\\"{conf}\\\"\");"
   - "stdlib/Cargo.toml:103:1         rustix      U       rustix = { workspace = true"
   - "stdlib/src/array.rs:1:1\tNo issues found"
   - "stdlib/src/binascii.rs:331:28       roken           U       // roken case from broken python"
+  - "stdlib/src/binascii.rs:386:21       odatalen        U       let mut odatalen = 0;"
+  - "stdlib/src/binascii.rs:455:17       odatalen        U       odatalen += delta;"
+  - "stdlib/src/binascii.rs:458:51       odatalen        U       Vec::with_capacity(odatalen);"
   - "stdlib/src/binascii.rs:570:8        rlecode         U       fn rlecode_hqx(s: ArgAsciiBuffer"
   - "stdlib/src/binascii.rs:605:8        rledecode       U       fn rledecode_hqx(s: ArgAsciiBuffer"
   - "stdlib/src/bisect.rs:1:1\tNo issues found"

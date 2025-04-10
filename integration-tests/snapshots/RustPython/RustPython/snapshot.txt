@@ -3,7 +3,7 @@ Repository: RustPython/RustPython
 Url: "https://github.com/RustPython/RustPython.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 671, Issues found: 828 in 124 files.
+ CSpell: Files checked: 671, Issues found: 838 in 125 files.
  exit code: 1
 Cargo.toml:106:28    - Unknown word (nsis)       -- package.metadata.packager.nsis]
 Cargo.toml:189:1     - Unknown word (rustix)     -- rustix = { version = "0.38
@@ -654,7 +654,17 @@ src/settings.rs:67:49     - Unknown word (PYTHONDONTWRITEBYTECODE) -- files on i
 src/settings.rs:84:58     - Unknown word (PYTHONNOUSERSITE)        -- directory to sys.path; also PYTHONNOUSERSITE=x
 src/settings.rs:87:51     - Unknown word (PYTHONUNBUFFERED)        -- effect on stdin; also PYTHONUNBUFFERED=x
 stdlib/Cargo.toml:103:1     - Unknown word (rustix)     -- rustix = { workspace = true
+stdlib/build.rs:10:27     - Unknown word (ossl)       -- (0x1_01_00_07_0, "ossl110g"),
+stdlib/build.rs:2:44      - Unknown word (osslconf)   -- rustc-check-cfg=cfg(osslconf, values("OPENSSL_NO
+stdlib/build.rs:37:39     - Unknown word (osslconf)   -- println!("cargo:rustc-cfg=osslconf=\"{conf}\"");
+stdlib/build.rs:6:9       - Unknown word (ossl)       -- let ossl_vers = [
+stdlib/build.rs:7:27      - Unknown word (ossl)       -- (0x1_00_01_00_0, "ossl101"),
+stdlib/build.rs:8:27      - Unknown word (ossl)       -- (0x1_00_02_00_0, "ossl102"),
+stdlib/build.rs:9:27      - Unknown word (ossl)       -- (0x1_01_00_00_0, "ossl110"),
 stdlib/src/binascii.rs:331:28    - Unknown word (roken)      -- // roken case from broken python
+stdlib/src/binascii.rs:386:21    - Unknown word (odatalen)   -- let mut odatalen = 0;
+stdlib/src/binascii.rs:455:17    - Unknown word (odatalen)   -- odatalen += delta;
+stdlib/src/binascii.rs:458:51    - Unknown word (odatalen)   -- Vec::with_capacity(odatalen);
 stdlib/src/binascii.rs:570:8     - Unknown word (rlecode)    -- fn rlecode_hqx(s: ArgAsciiBuffer
 stdlib/src/binascii.rs:605:8     - Unknown word (rledecode)  -- fn rledecode_hqx(s: ArgAsciiBuffer
 stdlib/src/gc.rs:43:12     - Unknown word (refererts)  -- fn get_refererts(_args: FuncArgs, vm
