@@ -5,7 +5,7 @@ Args: '["**/*.*"]'
 Summary:
   files: 103
   filesWithIssues: 98
-  issues: 2698
+  issues: 2683
   errors: 0
 Errors: []
 
@@ -2324,8 +2324,6 @@ issues:
   - "Tools/stk_track.py:63:6         mathutils               U       from mathutils import *"
   - "Tools/stk_track.py:92:7         Interp                  U       #dInterp = {IpoCurve.InterpTypes"
   - "Tools/stk_track.py:92:26        Interp                  U       dInterp = {IpoCurve.InterpTypes.BEZIER:"
-  - "Tools/stk_track.py:92:38        BEZIER                  U       IpoCurve.InterpTypes.BEZIER: \"bezier\","
-  - "Tools/stk_track.py:92:54        bezier                  U       InterpTypes.BEZIER: \"bezier\","
   - "Tools/stk_track.py:93:26        Interp                  U       IpoCurve.InterpTypes.LINEAR:"
   - "Tools/stk_track.py:94:26        Interp                  U       IpoCurve.InterpTypes.CONST:"
   - "Tools/stk_track.py:96:38        EXTRAP                  U       IpoCurve.ExtendTypes.EXTRAP: \"extrap\","
@@ -2337,20 +2335,8 @@ issues:
   - "Tools/stk_track.py:108:7        fcurves                 U       # fcurves[0].extrapolation"
   - "Tools/stk_track.py:109:20       LINEART                 U       # CONSTANT, LINEART"
   - "Tools/stk_track.py:110:7        fcurves                 U       # fcurves[0].keyframe_points["
-  - "Tools/stk_track.py:111:28       BEZIER                  U       CONSTANT, LINEAR, BEZIER"
-  - "Tools/stk_track.py:136:27       bezier                  U       # If any point is bezier we'll export as Bezier"
-  - "Tools/stk_track.py:136:50       Bezier                  U       bezier we'll export as Bezier"
-  - "Tools/stk_track.py:139:36       BEZIER                  U       bez.interpolation=='BEZIER':"
-  - "Tools/stk_track.py:140:34       bezier                  U       interpolation = \"bezier\""
   - "Tools/stk_track.py:143:35       randians                U       Rotations are stored in randians"
   - "Tools/stk_track.py:150:26       Interp                  U       #(name, dInterp[curve.interpolation"
-  - "Tools/stk_track.py:155:32       bezier                  U       if interpolation==\"bezier\":"
-  - "Tools/stk_track.py:156:40       BEZIER                  U       bez.interpolation=='BEZIER':"
-  - "Tools/stk_track.py:162:48       bezier                  U       point with linear IPO in bezier curve"
-  - "Tools/stk_track.py:169:101      Bezier                  U       a mix of mixture of Bezier and \" +"
-  - "Tools/stk_track.py:170:89       Bezier                  U       convert everything to Bezier for best results\")"
-  - "Tools/stk_track.py:180:10       Bezier                  U       def writeBezierCurve(f, curve, speed"
-  - "Tools/stk_track.py:187:39       BEZIER                  U       splines[0].type != 'BEZIER':"
   - "Tools/stk_track.py:215:43       mudpot                  U       texture == 'stk_animated_mudpot_a.png':"
   - "Tools/stk_track.py:264:62       xmlcharrefreplace       U       \").encode('ascii', 'xmlcharrefreplace').decode(\"ascii\")"
   - "Tools/stk_track.py:291:8        XYZH                    U       def getXYZHString(obj):"
@@ -2451,7 +2437,6 @@ issues:
   - "Tools/stk_track.py:1505:9       curvename               U       curvename = getObjectProperty"
   - "Tools/stk_track.py:1505:47      cannonpath              U       getObjectProperty(start, \"cannonpath\", \"\")"
   - "Tools/stk_track.py:1517:16      curvename               U       if len(curvename) > 0:"
-  - "Tools/stk_track.py:1518:18      Bezier                  U       writeBezierCurve(f, bpy.data.objects"
   - "Tools/stk_track.py:1518:50      curvename               U       f, bpy.data.objects[curvename], \\"
   - "Tools/stk_track.py:1519:56      cannonspeed             U       getObjectProperty(start, \"cannonspeed\", 50.0), \"const\" )"
   - "Tools/stk_track.py:1533:19      neighbours              U       # list of neighbours."
