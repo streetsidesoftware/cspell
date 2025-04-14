@@ -3,7 +3,7 @@ Repository: caddyserver/caddy
 Url: "https://github.com/caddyserver/caddy.git"
 Args: ["**/*.go"]
 Lines:
- CSpell: Files checked: 283, Issues found: 3657 in 256 files.
+ CSpell: Files checked: 282, Issues found: 3653 in 255 files.
  exit code: 1
 admin.go:1064:20   - Unknown word (Redir)       -- return errInternalRedir
 admin.go:1340:6    - Unknown word (loggable)    -- type loggableURLArray []*url.URL
@@ -3088,12 +3088,9 @@ modules/caddytls/distributedstek/distributedstek.go:57:2      - Unknown word (st
 modules/caddytls/distributedstek/distributedstek.go:65:13     - Unknown word (stek)            -- ID: "tls.stek.distributed",
 modules/caddytls/distributedstek/distributedstek.go:96:39     - Unknown word (caddytls)        -- Initialize(config *caddytls.SessionTicketService
 modules/caddytls/distributedstek/distributedstek.go:98:4      - Unknown word (stek)            -- s.stekConfig = config
-modules/caddytls/ech.go:1064:25   - Unknown word (VCHAR)       -- // > non-special is VCHAR minus DQUOTE, ";",
-modules/caddytls/ech.go:1064:37   - Unknown word (DQUOTE)      -- special is VCHAR minus DQUOTE, ";", "(", ")", and
 modules/caddytls/ech.go:10:2      - Unknown word (weakrand)   -- weakrand "math/rand/v2"
 modules/caddytls/ech.go:111:28    - Unknown word (nolint)      -- outerNames []string //nolint:prealloc // (FALSE POSITIVE
 modules/caddytls/ech.go:111:35    - Unknown word (prealloc)    -- outerNames []string //nolint:prealloc // (FALSE POSITIVE
-modules/caddytls/ech.go:1150:12   - Unknown word (TLSESNI)     -- const draftTLSESNI22 = 0xfe0d
 modules/caddytls/ech.go:16:14     - Unknown word (caddyserver) -- "github.com/caddyserver/certmagic"
 modules/caddytls/ech.go:16:26     - Unknown word (certmagic)   -- github.com/caddyserver/certmagic"
 modules/caddytls/ech.go:17:25     - Unknown word (circl)       -- github.com/cloudflare/circl/hpke"
@@ -3128,36 +3125,35 @@ modules/caddytls/ech.go:583:2     - Unknown word (libdns)      -- libdns.RecordS
 modules/caddytls/ech.go:631:17    - Unknown word (certmagic)   -- nameservers := certmagic.RecursiveNameservers
 modules/caddytls/ech.go:635:16    - Unknown word (certmagic)   -- zone, err := certmagic.FindZoneByFQDN(ctx,
 modules/caddytls/ech.go:643:14    - Unknown word (libdns)      -- relName := libdns.RelativeName(domain
-modules/caddytls/ech.go:710:18    - Unknown word (SVCB)        -- // HTTPS and SVCB RRs: RFC 9460 (https
-modules/caddytls/ech.go:734:20    - Unknown word (esni)        -- // [draft-ietf-tls-esni-22](https://www.ietf
-modules/caddytls/ech.go:746:5     - Unknown word (Hpke)        -- // HpkeKeyConfig fields:
-modules/caddytls/ech.go:748:2     - Unknown word (KEMID)       -- KEMID hpke.KEM
-modules/caddytls/ech.go:775:33    - Unknown word (Tariq)       -- from github.com/OmarTariq612/goech with modifications
-modules/caddytls/ech.go:775:42    - Unknown word (goech)       -- github.com/OmarTariq612/goech with modifications.
-modules/caddytls/ech.go:776:43    - Unknown word (Tariq)       -- Copyright (c) 2023 Omar Tariq AbdEl-Raziq
-modules/caddytls/ech.go:776:55    - Unknown word (Raziq)       -- 23 Omar Tariq AbdEl-Raziq
-modules/caddytls/ech.go:784:28    - Unknown word (TLSESNI)     -- echCfg.Version != draftTLSESNI22 {
-modules/caddytls/ech.go:785:66    - Unknown word (TLSESNI)     -- be %d: got %d", draftTLSESNI22, echCfg.Version)
-modules/caddytls/ech.go:796:41    - Unknown word (KEMID)       -- 6((*uint16)(&echCfg.KEMID)) ||
-modules/caddytls/ech.go:804:13    - Unknown word (KEMID)       -- if !echCfg.KEMID.IsValid() {
-modules/caddytls/ech.go:805:50    - Unknown word (KEMID)       -- KEM ID: %d", echCfg.KEMID)
-modules/caddytls/ech.go:828:4     - Unknown word (KDFID)       -- KDFID: hpke.KDF(hpkeKDF)
-modules/caddytls/ech.go:829:4     - Unknown word (AEADID)      -- AEADID: hpke.AEAD(hpkeAEAD
-modules/caddytls/ech.go:869:27    - Unknown word (KDFID)       -- AddUint16(uint16(cs.KDFID))
-modules/caddytls/ech.go:870:27    - Unknown word (AEADID)      -- AddUint16(uint16(cs.AEADID))
-modules/caddytls/ech.go:930:16    - Unknown word (weakrand)    -- num := uint8(weakrand.N(uint8Range)) //nolint
-modules/caddytls/ech.go:930:42    - Unknown word (nolint)      -- weakrand.N(uint8Range)) //nolint:gosec
-modules/caddytls/ech.go:930:49    - Unknown word (gosec)       -- uint8Range)) //nolint:gosec
-modules/caddytls/ech.go:938:33    - Unknown word (subkeys)     -- to see if any of the subkeys use this config ID
+modules/caddytls/ech.go:670:55    - Unknown word (svcb)        -- ServiceBinding); ok && svcb.Scheme == "https" {
+modules/caddytls/ech.go:670:8     - Unknown word (svcb)        -- if svcb, ok := rec.(libdns.ServiceBin
+modules/caddytls/ech.go:671:30    - Unknown word (svcb)        -- svcb.Target == "" || svcb.Target == "." {
+modules/caddytls/ech.go:671:9     - Unknown word (svcb)        -- if svcb.Target == "" || svcb
+modules/caddytls/ech.go:672:18    - Unknown word (svcb)        -- httpsRec = svcb
+modules/caddytls/ech.go:701:18    - Unknown word (SVCB)        -- // HTTPS and SVCB RRs: RFC 9460 (https
+modules/caddytls/ech.go:725:20    - Unknown word (esni)        -- // [draft-ietf-tls-esni-22](https://www.ietf
+modules/caddytls/ech.go:737:5     - Unknown word (Hpke)        -- // HpkeKeyConfig fields:
+modules/caddytls/ech.go:739:2     - Unknown word (KEMID)       -- KEMID hpke.KEM
+modules/caddytls/ech.go:766:33    - Unknown word (Tariq)       -- from github.com/OmarTariq612/goech with modifications
+modules/caddytls/ech.go:766:42    - Unknown word (goech)       -- github.com/OmarTariq612/goech with modifications.
+modules/caddytls/ech.go:767:43    - Unknown word (Tariq)       -- Copyright (c) 2023 Omar Tariq AbdEl-Raziq
+modules/caddytls/ech.go:767:55    - Unknown word (Raziq)       -- 23 Omar Tariq AbdEl-Raziq
+modules/caddytls/ech.go:775:28    - Unknown word (TLSESNI)     -- echCfg.Version != draftTLSESNI22 {
+modules/caddytls/ech.go:776:66    - Unknown word (TLSESNI)     -- be %d: got %d", draftTLSESNI22, echCfg.Version)
+modules/caddytls/ech.go:787:41    - Unknown word (KEMID)       -- 6((*uint16)(&echCfg.KEMID)) ||
+modules/caddytls/ech.go:795:13    - Unknown word (KEMID)       -- if !echCfg.KEMID.IsValid() {
+modules/caddytls/ech.go:796:50    - Unknown word (KEMID)       -- KEM ID: %d", echCfg.KEMID)
+modules/caddytls/ech.go:819:4     - Unknown word (KDFID)       -- KDFID: hpke.KDF(hpkeKDF)
+modules/caddytls/ech.go:820:4     - Unknown word (AEADID)      -- AEADID: hpke.AEAD(hpkeAEAD
+modules/caddytls/ech.go:860:27    - Unknown word (KDFID)       -- AddUint16(uint16(cs.KDFID))
+modules/caddytls/ech.go:861:27    - Unknown word (AEADID)      -- AddUint16(uint16(cs.AEADID))
+modules/caddytls/ech.go:921:16    - Unknown word (weakrand)    -- num := uint8(weakrand.N(uint8Range)) //nolint
+modules/caddytls/ech.go:921:42    - Unknown word (nolint)      -- weakrand.N(uint8Range)) //nolint:gosec
+modules/caddytls/ech.go:921:49    - Unknown word (gosec)       -- uint8Range)) //nolint:gosec
+modules/caddytls/ech.go:929:33    - Unknown word (subkeys)     -- to see if any of the subkeys use this config ID
 modules/caddytls/ech.go:93:13     - Unknown word (Iface)       -- for _, modIface := range mods.(map[string
 modules/caddytls/ech.go:94:77     - Unknown word (Iface)       -- Publication[i].publishers, modIface.(ECHPublisher))
-modules/caddytls/ech.go:993:40    - Unknown word (DQUOTE)      -- fmt.Errorf("illegal DQUOTE at position %d", j)
-modules/caddytls/ech_test.go:15:12     - Unknown word (alpn)       -- input: `alpn="h2,h3" no-default-alpn
-modules/caddytls/ech_test.go:15:36     - Unknown word (alpn)       -- alpn="h2,h3" no-default-alpn ipv6hint=2001:db8::
-modules/caddytls/ech_test.go:17:6      - Unknown word (alpn)       -- "alpn": {"h2",
-modules/caddytls/ech_test.go:18:17     - Unknown word (alpn)       -- "no-default-alpn": {},
-modules/caddytls/ech_test.go:1:9       - Unknown word (caddytls)   -- package caddytls
-modules/caddytls/ech_test.go:38:12     - Unknown word (alpn)       -- input: `alpn=h3,h2 tls-supported
+modules/caddytls/ech.go:975:12    - Unknown word (TLSESNI)     -- const draftTLSESNI22 = 0xfe0d
 modules/caddytls/fileloader.go:15:9      - Unknown word (caddytls)   -- package caddytls
 modules/caddytls/fileloader.go:23:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
 modules/caddytls/folderloader.go:15:9      - Unknown word (caddytls)   -- package caddytls

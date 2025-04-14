@@ -3,7 +3,7 @@ Repository: RustPython/RustPython
 Url: "https://github.com/RustPython/RustPython.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 671, Issues found: 838 in 125 files.
+ CSpell: Files checked: 672, Issues found: 781 in 108 files.
  exit code: 1
 Cargo.toml:106:28    - Unknown word (nsis)       -- package.metadata.packager.nsis]
 Cargo.toml:189:1     - Unknown word (rustix)     -- rustix = { version = "0.38
@@ -50,32 +50,21 @@ benches/benchmarks/pystone.py:19:51     - Unknown word (Arndt)      -- version 1
 benches/benchmarks/pystone.py:52:40     - Unknown word (Discr)      -- self, PtrComp = None, Discr = 0, EnumComp = 0,
 benches/benchmarks/pystone.py:55:14     - Unknown word (Discr)      -- self.Discr = Discr
 benches/benchmarks/pystone.py:55:22     - Unknown word (Discr)      -- self.Discr = Discr
-benches/benchmarks/pystone.py:5:2       - Unknown word (PYSTONE)    -- "PYSTONE" Benchmark Program
 benches/benchmarks/pystone.py:61:42     - Unknown word (Discr)      -- Record(self.PtrComp, self.Discr, self.EnumComp,
-benches/benchmarks/pystone.py:7:57      - Unknown word (Pystone)    -- corresponds to C/1.1 plus 2 Pystone fixes)
 benches/benchmarks/pystone.py:95:12     - Unknown word (Discr)      -- PtrGlb.Discr = Ident1
 benches/benchmarks/pystone.py:98:26     - Unknown word (DHRYSTONE)  -- PtrGlb.StringComp = "DHRYSTONE PROGRAM, SOME STRING
 benches/benchmarks/pystone.py:99:19     - Unknown word (DHRYSTONE)  -- String1Loc = "DHRYSTONE PROGRAM, 1'ST STRING
 benches/benchmarks/pystone.py:9:29      - Unknown word (Weicker)    -- Reinhold P. Weicker, CACM Vol 27, No 1
 benches/benchmarks/pystone.py:9:39      - Unknown word (CACM)       -- Reinhold P. Weicker,  CACM Vol 27, No 10, 10/8
-benches/execution.rs:107:17    - Unknown word (pystone)    -- if let Some(pystone_contents) = benches
-benches/execution.rs:107:53    - Unknown word (pystone)    -- contents) = benches.remove("pystone.py") {
-benches/execution.rs:108:17    - Unknown word (pystone)    -- let mut pystone_group = c.benchmark
-benches/execution.rs:21:10     - Unknown word (rustpy)     -- fn bench_rustpy_code(b: &mut Bencher
-benches/execution.rs:44:15     - Unknown word (rustpy)     -- bench_rustpy_code(b, name, contents
-benches/execution.rs:69:18     - Unknown word (pystone)    -- pub fn benchmark_pystone(group: &mut BenchmarkGroup
-benches/execution.rs:80:19     - Unknown word (rustpy)     -- bench_rustpy_code(b, "pystone", code
-benches/execution.rs:80:35     - Unknown word (pystone)    -- bench_rustpy_code(b, "pystone", code_str)
-benches/microbenchmarks.rs:107:10    - Unknown word (rustpy)     -- fn bench_rustpy_code(group: &mut BenchmarkGro
-benches/microbenchmarks.rs:172:11    - Unknown word (rustpy)     -- bench_rustpy_code(&mut group, &benchmark
-common/src/boxvec.rs:251:23    - Unknown word (nonoverlapping) -- ptr::copy_nonoverlapping(other.as_ptr(), dst
-common/src/boxvec.rs:2:8       - Unknown word (unresizable) -- //! An unresizable vector backed by a
-common/src/float_ops.rs:5:8       - Unknown word (ufrexp)     -- pub fn ufrexp(value: f64) -> (f64
-common/src/hash.rs:100:35    - Unknown word (ufrexp)     -- = super::float_ops::ufrexp(value);
 common/src/lock/cell_lock.rs:131:23    - Unknown word (upgradably) -- deadlock("upgradably+sharedly ", "RwLock
 common/src/lock/cell_lock.rs:131:34    - Unknown word (sharedly)   -- deadlock("upgradably+sharedly ", "RwLock")
 common/src/lock/cell_lock.rs:180:35    - Unknown word (sharedly)   -- deadlock("recursively+sharedly ", "RwLock")
 common/src/lock/cell_lock.rs:72:23     - Unknown word (sharedly)   -- deadlock("sharedly ", "RwLock")
+compiler/codegen/src/compile.rs:2188:13   - Unknown word (nkwd)       -- let nkwd_patterns = kwd_patterns
+compiler/codegen/src/compile.rs:2191:23   - Unknown word (nkwd)       -- if n_attrs != nkwd_patterns {
+compiler/codegen/src/compile.rs:2194:26   - Unknown word (nkwd)       -- n_attrs, nkwd_patterns
+compiler/codegen/src/compile.rs:2484:13   - Unknown word (nrots)      -- let nrots = nstores + 1 + pc.on
+compiler/codegen/src/compile.rs:2487:40   - Unknown word (nrots)      -- pattern_helper_rotate(nrots)?;
 compiler/codegen/src/snapshots/rustpython_compiler_core__compile__tests__nested_double_async_with.snap:29:42     - Unknown word (woohoo)     -- LoadNameAny (6, woohoo)
 compiler/codegen/src/snapshots/rustpython_compiler_core__compile__tests__nested_double_async_with.snap:3:184     - Unknown word (woohoo)     -- async with woohoo():\n
 compiler/src/lib.rs:94:27     - Unknown word (hackily)    -- TODO: do this less hackily; ruff's parser should
@@ -546,7 +535,6 @@ extra_tests/snippets/testutils.py:69:43     - Unknown word (klass)      -- lambd
 extra_tests/snippets/testutils.py:69:53     - Unknown word (isisntance) -- isinstance(obj, klass), ['isisntance(', _typed(obj), ','
 extra_tests/snippets/testutils.py:69:85     - Unknown word (klass)      -- , _typed(obj), ',', klass, ')'])
 extra_tests/test_snippets.py:27:5      - Unknown word (pushd)      -- def pushd(path):
-flamegraph.svg:1:589     - Unknown word (flamegraph) -- valid input provided to flamegraph</text></svg>
 installer-config/installer.nsi:108:37    - Unknown word (MANUPRODUCTKEY)         -- LANGDLL_REGISTRY_KEY "${MANUPRODUCTKEY}"
 installer-config/installer.nsi:114:2     - Unknown word (insertmacro)            -- !insertmacro MUI_PAGE_WELCOME
 installer-config/installer.nsi:119:4     - Unknown word (insertmacro)            -- !insertmacro MUI_PAGE_LICENSE "$
@@ -661,23 +649,8 @@ stdlib/build.rs:6:9       - Unknown word (ossl)       -- let ossl_vers = [
 stdlib/build.rs:7:27      - Unknown word (ossl)       -- (0x1_00_01_00_0, "ossl101"),
 stdlib/build.rs:8:27      - Unknown word (ossl)       -- (0x1_00_02_00_0, "ossl102"),
 stdlib/build.rs:9:27      - Unknown word (ossl)       -- (0x1_01_00_00_0, "ossl110"),
-stdlib/src/binascii.rs:331:28    - Unknown word (roken)      -- // roken case from broken python
-stdlib/src/binascii.rs:386:21    - Unknown word (odatalen)   -- let mut odatalen = 0;
-stdlib/src/binascii.rs:455:17    - Unknown word (odatalen)   -- odatalen += delta;
-stdlib/src/binascii.rs:458:51    - Unknown word (odatalen)   -- Vec::with_capacity(odatalen);
-stdlib/src/binascii.rs:570:8     - Unknown word (rlecode)    -- fn rlecode_hqx(s: ArgAsciiBuffer
-stdlib/src/binascii.rs:605:8     - Unknown word (rledecode)  -- fn rledecode_hqx(s: ArgAsciiBuffer
 stdlib/src/gc.rs:43:12     - Unknown word (refererts)  -- fn get_refererts(_args: FuncArgs, vm
-stdlib/src/math.rs:560:39    - Unknown word (ufrexp)     -- m, exp) = float_ops::ufrexp(value);
-stdlib/src/math.rs:658:24    - Unknown word (summands)   -- // summands
 vm/Cargo.toml:98:1      - Unknown word (rustix)     -- rustix = { workspace = true
-vm/src/buffer.rs:456:24    - Unknown word (primint)    -- macro_rules! make_pack_primint {
-vm/src/buffer.rs:505:11    - Unknown word (primint)    -- make_pack_primint!(i8);
-vm/src/buffer.rs:506:11    - Unknown word (primint)    -- make_pack_primint!(u8);
-vm/src/buffer.rs:507:11    - Unknown word (primint)    -- make_pack_primint!(i16);
-vm/src/buffer.rs:508:11    - Unknown word (primint)    -- make_pack_primint!(u16);
-vm/src/builtins/frame.rs:57:10     - Unknown word (lasti)      -- fn f_lasti(&self) -> u32 {
-vm/src/builtins/frame.rs:58:14     - Unknown word (lasti)      -- self.lasti()
 vm/src/builtins/function/jitfunc.rs:114:14    - Unknown word (Jitting)    -- "Jitting function requires return
 vm/src/builtins/function/jitfunc.rs:89:14     - Unknown word (Jitting)    -- "Jitting function requires arguments
 vm/src/builtins/memory.rs:641:18    - Unknown word (fortain)    -- // TODO: fortain order
@@ -690,29 +663,9 @@ vm/src/builtins/str.rs:2269:20   - Unknown word (ῼitlecases) -- "Greek ῼitle
 vm/src/builtins/str.rs:577:48    - Unknown word (cmpxchg)    -- len, we don't need a cmpxchg loop, since it'll always
 vm/src/builtins/super.rs:273:26    - Unknown word (cmeth)      -- def cmeth(cls, arg):\n
 vm/src/builtins/super.rs:274:30    - Unknown word (cmeth)      -- super().cmeth(arg)\n";
-vm/src/builtins/traceback.rs:14:9      - Unknown word (lasti)      -- pub lasti: u32,
-vm/src/builtins/traceback.rs:29:60     - Unknown word (lasti)      -- >, frame: FrameRef, lasti: u32, lineno: LineNumber
-vm/src/builtins/traceback.rs:33:13     - Unknown word (lasti)      -- lasti,
-vm/src/builtins/traceback.rs:44:11     - Unknown word (lasti)      -- fn tb_lasti(&self) -> u32 {
-vm/src/builtins/traceback.rs:45:14     - Unknown word (lasti)      -- self.lasti
-vm/src/coroutine.rs:100:35    - Unknown word (lasti)      -- value = if self.frame.lasti() > 0 {
-vm/src/exceptions.rs:214:17    - Unknown word (rtext)      -- let rtext = text.as_str().trim
-vm/src/exceptions.rs:215:26    - Unknown word (rtext)      -- let l_text = rtext.trim_start_matches(
-vm/src/exceptions.rs:216:27    - Unknown word (rtext)      -- let spaces = (rtext.len() - l_text.len(
-vm/src/frame.rs:106:64    - Unknown word (lasti)      -- duplicate of FrameState.lasti, but it's faster to
-vm/src/frame.rs:109:16    - Unknown word (Lasti)      -- pub lasti: Lasti,
-vm/src/frame.rs:109:9     - Unknown word (lasti)      -- pub lasti: Lasti,
-vm/src/frame.rs:151:13    - Unknown word (lasti)      -- lasti: 0,
-vm/src/frame.rs:161:13    - Unknown word (lasti)      -- lasti: Lasti::new(0),
-vm/src/frame.rs:161:20    - Unknown word (Lasti)      -- lasti: Lasti::new(0),
-vm/src/frame.rs:307:16    - Unknown word (Lasti)      -- lasti: &'a Lasti,
-vm/src/frame.rs:88:5      - Unknown word (lasti)      -- lasti: u32,
-vm/src/frame.rs:92:6      - Unknown word (Lasti)      -- type Lasti = atomic::AtomicU32
-vm/src/frame.rs:94:6      - Unknown word (Lasti)      -- type Lasti = std::cell::Cell<u
 vm/src/function/argument.rs:121:13    - Unknown word (kwargc)     -- let kwargc = kwarg_names.len()
 vm/src/function/argument.rs:122:36    - Unknown word (kwargc)     -- posargc = total_argc - kwargc;
 vm/src/function/builtin.rs:69:26     - Unknown word (sizedness)  -- requirements of zero-sizedness apply, see that documentation
-vm/src/import.rs:196:27    - Unknown word (lasti)      -- traceback.lasti,
 vm/src/object/traverse_object.rs:47:56     - Unknown word (maintaince) -- pointer* to a struct for maintaince weak ref, so no ownership
 vm/src/object/traverse_object.rs:67:56     - Unknown word (maintaince) -- pointer* to a struct for maintaince weak ref, so no ownership
 vm/src/protocol/buffer.rs:389:22    - Unknown word (fortain)    -- // TODO: support fortain order
@@ -734,9 +687,6 @@ wasm/demo/snippets/import_pypi.py:19:58     - Unknown word (fmter)      -- hi, m
 wasm/demo/snippets/import_pypi.py:6:8       - Unknown word (asyncweb)   -- import asyncweb
 wasm/demo/snippets/import_pypi.py:7:8       - Unknown word (whlimport)  -- import whlimport
 wasm/demo/snippets/import_pypi.py:9:1       - Unknown word (whlimport)  -- whlimport.setup()
-wasm/demo/src/index.js:16:12     - Unknown word (rustpy)     -- .then((rustpy) => {
-wasm/demo/src/index.js:17:14     - Unknown word (rustpy)     -- rp = rustpy;
-wasm/demo/src/index.js:19:21     - Unknown word (rustpy)     -- window.rp = rustpy;
 wasm/lib/Cargo.toml:12:26     - Unknown word (rlib)       -- crate-type = ["cdylib", "rlib"]
 wasm/lib/Lib/_microdistlib.py:127:14    - Unknown word (distname)   -- rs = distname
 wasm/lib/Lib/_microdistlib.py:129:25    - Unknown word (distname)   -- rs = '%s %s' % (distname, ', '.join(['%s %s'
@@ -765,7 +715,6 @@ wasm/lib/Lib/whlimport.py:53:12     - Unknown word (asyncweb)     -- deps = asyn
 wasm/lib/Lib/whlimport.py:53:27     - Unknown word (asyncweb)     -- deps = asyncweb.spawn(asyncweb.wait_all(_load_package
 wasm/lib/Lib/whlimport.py:64:12     - Unknown word (microdistlib) -- pkg = _microdistlib.parse_requirement(pkg
 wasm/lib/Lib/whlimport.py:9:9       - Unknown word (microdistlib) -- import _microdistlib
-wasm/lib/src/js_module.rs:578:62    - Unknown word (awaitpromise) -- non-None value to an awaitpromise".to_owned(),
 wasm/notebook/package.json:18:10     - Unknown word (lezer)      -- "lezer-loader": "^0.3.0",
 wasm/notebook/package.json:34:21     - Unknown word (Liddle)     -- "author": "Ryan Liddle",
 wasm/notebook/package.json:9:10      - Unknown word (katex)      -- "katex": "^0.12.0",
@@ -776,9 +725,6 @@ wasm/notebook/src/index.js:173:9     - Unknown word (pyvm)       -- pyvm = null;
 wasm/notebook/src/index.js:175:5     - Unknown word (pyvm)       -- pyvm = rp.vmStore.init('notebook
 wasm/notebook/src/index.js:20:10     - Unknown word (iomd)       -- import { iomdParser } from './parse
 wasm/notebook/src/index.js:230:22    - Unknown word (iomd)       -- let parsedCode = iomdParser(mainCode);
-wasm/notebook/src/index.js:37:12     - Unknown word (rustpy)     -- .then((rustpy) => {
-wasm/notebook/src/index.js:38:14     - Unknown word (rustpy)     -- rp = rustpy;
-wasm/notebook/src/index.js:40:21     - Unknown word (rustpy)     -- window.rp = rustpy;
 wasm/notebook/src/index.js:9:25      - Unknown word (stex)       -- import 'codemirror/mode/stex/stex';
 wasm/notebook/src/index.js:9:30      - Unknown word (stex)       -- codemirror/mode/stex/stex';
 wasm/notebook/src/parse.js:19:17     - Unknown word (iomd)       -- export function iomdParser(fullIomd) {
@@ -840,6 +786,3 @@ whats_left.py:74:22     - Unknown word (testcapi)   -- '_testbuffer', '_testcapi
 whats_left.py:74:35     - Unknown word (testimportmultiple) -- testbuffer', '_testcapi', '_testimportmultiple', '_testinternalcapi
 whats_left.py:74:58     - Unknown word (testinternalcapi)   -- testimportmultiple', '_testinternalcapi', '_testmultiphase'
 whats_left.py:74:98     - Unknown word (testlimitedcapi)    -- _testmultiphase', '_testlimitedcapi'
-wtf8/src/lib.rs:518:51    - Unknown word (lossily)    -- string and converts it lossily to UTF-8.
-wtf8/src/lib.rs:760:8     - Unknown word (whooops)    -- // whooops! using WTF-8 for interchange
-wtf8/src/lib.rs:844:9     - Unknown word (Lossily)    -- /// Lossily converts the string
