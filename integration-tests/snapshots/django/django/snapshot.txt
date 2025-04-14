@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["--issues-summary-report","**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2833, Issues found: 8282 in 911 files.
+ CSpell: Files checked: 2833, Issues found: 8281 in 911 files.
  exit code: 1
 django/__init__.py:12:26     - Unknown word (urlresolvers) -- Set the thread-local urlresolvers script prefix if `set
 django/apps/registry.py:134:40    - Unknown word (unconfigured) -- not ready" is due to unconfigured settings, accessing
@@ -1068,8 +1068,8 @@ django/core/files/locks.py:86:28     - Unknown word (osfhandle)      -- hfile = 
 django/core/files/locks.py:92:28     - Unknown word (osfhandle)      -- hfile = msvcrt.get_osfhandle(_fd(f))
 django/core/files/move.py:54:22     - Unknown word (WRONLY)     -- os.O_WRONLY
 django/core/files/move.py:55:24     - Unknown word (CREAT)      -- | os.O_CREAT
-django/core/files/move.py:73:37     - Unknown word (CIFS)       -- Certain filesystems (e.g. CIFS) fail to copy the file
-django/core/files/move.py:89:24     - Unknown word (winerror)   -- if getattr(e, "winerror", 0) != 32:
+django/core/files/move.py:74:37     - Unknown word (CIFS)       -- Certain filesystems (e.g. CIFS) fail to copy the file
+django/core/files/move.py:90:24     - Unknown word (winerror)   -- if getattr(e, "winerror", 0) != 32:
 django/core/files/storage/base.py:40:35     - Unknown word (overriden)  -- get_available_name` is overriden and validation is lost
 django/core/files/storage/filesystem.py:107:44    - Unknown word (CREAT)      -- The combination of O_CREAT and O_EXCL makes os
 django/core/files/storage/filesystem.py:110:30    - Unknown word (WRONLY)     -- os.O_WRONLY
@@ -1698,11 +1698,11 @@ django/db/models/options.py:1002:25   - Unknown word (klass)      -- seen |= set
 django/db/models/options.py:537:33    - Unknown word (longwinded) -- The third filter is a longwinded way of checking f.related
 django/db/models/options.py:996:13    - Unknown word (klass)      -- for klass in self.model.__mro
 django/db/models/options.py:999:36    - Unknown word (klass)      -- for name, value in klass.__dict__.items()
-django/db/models/query.py:2420:11   - Unknown word (aprefetch)  -- async def aprefetch_related_objects(model
-django/db/models/query.py:2632:35   - Unknown word (attnames)   -- init_list: the field attnames fetched from the database
-django/db/models/query.py:2633:57   - Unknown word (attnames)   -- isn't the same as all attnames of the
-django/db/models/query.py:2653:24   - Unknown word (attnames)   -- model_init_attnames = (
-django/db/models/query.py:2657:51   - Unknown word (attnames)   -- attname in model_init_attnames if attname in attname
+django/db/models/query.py:2429:11   - Unknown word (aprefetch)  -- async def aprefetch_related_objects(model
+django/db/models/query.py:2641:35   - Unknown word (attnames)   -- init_list: the field attnames fetched from the database
+django/db/models/query.py:2642:57   - Unknown word (attnames)   -- isn't the same as all attnames of the
+django/db/models/query.py:2662:24   - Unknown word (attnames)   -- model_init_attnames = (
+django/db/models/query.py:2666:51   - Unknown word (attnames)   -- attname in model_init_attnames if attname in attname
 django/db/models/query.py:547:27    - Unknown word (aprefetch)  -- await aprefetch_related_objects(
 django/db/models/query.py:555:23    - Unknown word (aprefetch)  -- await aprefetch_related_objects(
 django/db/models/query.py:765:30    - Unknown word (childmost)  -- insert into the childmost table.
@@ -1717,33 +1717,33 @@ django/db/models/sql/compiler.py:107:63    - Unknown word (somecol)    -- name')
 django/db/models/sql/compiler.py:110:48    - Unknown word (somecol)    -- objects.annotate(Count('somecol')).values('name')
 django/db/models/sql/compiler.py:114:31    - Unknown word (somecol)    -- .annotate(Count('somecol')).values('pk')
 django/db/models/sql/compiler.py:117:63    - Unknown word (somecol)    -- name').annotate(Count('somecol')).values('pk')
-django/db/models/sql/compiler.py:1447:49   - Unknown word (popleft)    -- klass_info = queue.popleft()
-django/db/models/sql/compiler.py:1519:25   - Unknown word (convs)      -- for j, (convs, col) in cols_converters
-django/db/models/sql/compiler.py:1520:42   - Unknown word (convs)      -- converters[i + j] = (convs, col)
-django/db/models/sql/compiler.py:1537:23   - Unknown word (convs)      -- for pos, (convs, expression) in converters
-django/db/models/sql/compiler.py:1539:34   - Unknown word (convs)      -- for converter in convs:
-django/db/models/sql/compiler.py:1777:24   - Unknown word (sqls)       -- # tuple like ([sqls], [[params]s]) for each
-django/db/models/sql/compiler.py:2009:9    - Unknown word (innerq)     -- innerq = self.query.clone(
-django/db/models/sql/compiler.py:2010:9    - Unknown word (innerq)     -- innerq.__class__ = Query
-django/db/models/sql/compiler.py:2011:9    - Unknown word (innerq)     -- innerq.clear_select_clause
-django/db/models/sql/compiler.py:2013:9    - Unknown word (innerq)     -- innerq.select = [pk.get_col
-django/db/models/sql/compiler.py:2014:9    - Unknown word (outerq)     -- outerq = Query(self.query.model
-django/db/models/sql/compiler.py:2018:27   - Unknown word (innerq)     -- sql, params = innerq.get_compiler(connection
-django/db/models/sql/compiler.py:2020:9    - Unknown word (outerq)     -- outerq.add_filter("pk__in"
-django/db/models/sql/compiler.py:2021:29   - Unknown word (outerq)     -- return self._as_sql(outerq)
+django/db/models/sql/compiler.py:1448:49   - Unknown word (popleft)    -- klass_info = queue.popleft()
+django/db/models/sql/compiler.py:1520:25   - Unknown word (convs)      -- for j, (convs, col) in cols_converters
+django/db/models/sql/compiler.py:1521:42   - Unknown word (convs)      -- converters[i + j] = (convs, col)
+django/db/models/sql/compiler.py:1538:23   - Unknown word (convs)      -- for pos, (convs, expression) in converters
+django/db/models/sql/compiler.py:1540:34   - Unknown word (convs)      -- for converter in convs:
+django/db/models/sql/compiler.py:1778:24   - Unknown word (sqls)       -- # tuple like ([sqls], [[params]s]) for each
+django/db/models/sql/compiler.py:2010:9    - Unknown word (innerq)     -- innerq = self.query.clone(
+django/db/models/sql/compiler.py:2011:9    - Unknown word (innerq)     -- innerq.__class__ = Query
+django/db/models/sql/compiler.py:2012:9    - Unknown word (innerq)     -- innerq.clear_select_clause
+django/db/models/sql/compiler.py:2014:9    - Unknown word (innerq)     -- innerq.select = [pk.get_col
+django/db/models/sql/compiler.py:2015:9    - Unknown word (outerq)     -- outerq = Query(self.query.model
+django/db/models/sql/compiler.py:2019:27   - Unknown word (innerq)     -- sql, params = innerq.get_compiler(connection
+django/db/models/sql/compiler.py:2021:9    - Unknown word (outerq)     -- outerq.add_filter("pk__in"
+django/db/models/sql/compiler.py:2022:29   - Unknown word (outerq)     -- return self._as_sql(outerq)
 django/db/models/sql/compiler.py:234:13    - Unknown word (klass)      -- - a klass_info structure,
 django/db/models/sql/compiler.py:240:13    - Unknown word (klass)      -- The klass_info structure contains
-django/db/models/sql/compiler.py:467:23    - Unknown word (combinated) -- # combinated queries might define
-django/db/models/sql/compiler.py:514:37    - Unknown word (orderbycol) -- col_alias = f"__orderbycol{order_by_idx}"
+django/db/models/sql/compiler.py:468:23    - Unknown word (combinated) -- # combinated queries might define
+django/db/models/sql/compiler.py:515:37    - Unknown word (orderbycol) -- col_alias = f"__orderbycol{order_by_idx}"
 django/db/models/sql/compiler.py:55:23     - Unknown word (klass)      -- # The select, klass_info, and annotations
-django/db/models/sql/compiler.py:613:54    - Unknown word (resultset)  -- always including an empty resultset query to force
+django/db/models/sql/compiler.py:614:54    - Unknown word (resultset)  -- always including an empty resultset query to force
 django/db/models/sql/compiler.py:61:14     - Unknown word (klass)      -- self.klass_info = None
-django/db/models/sql/compiler.py:746:22    - Unknown word (sqls)       -- ordering_sqls = []
-django/db/models/sql/compiler.py:749:26    - Unknown word (sqls)       -- ordering_sqls.append(ordering_sql
+django/db/models/sql/compiler.py:747:22    - Unknown word (sqls)       -- ordering_sqls = []
 django/db/models/sql/compiler.py:74:27     - Unknown word (klass)      -- self.select, self.klass_info, self.annotation
-django/db/models/sql/compiler.py:751:59    - Unknown word (sqls)       -- ", ".join(ordering_sqls)])
-django/db/models/sql/compiler.py:966:36    - Unknown word (subparams)  -- subselect, subparams = select_clone.as_sql
-django/db/models/sql/compiler.py:970:43    - Unknown word (subparams)  -- sub_params.extend(subparams)
+django/db/models/sql/compiler.py:750:26    - Unknown word (sqls)       -- ordering_sqls.append(ordering_sql
+django/db/models/sql/compiler.py:752:59    - Unknown word (sqls)       -- ", ".join(ordering_sqls)])
+django/db/models/sql/compiler.py:967:36    - Unknown word (subparams)  -- subselect, subparams = select_clone.as_sql
+django/db/models/sql/compiler.py:971:43    - Unknown word (subparams)  -- sub_params.extend(subparams)
 django/db/models/sql/constants.py:26:1      - Unknown word (LOUTER)      -- LOUTER = "LEFT OUTER JOIN"
 django/db/models/sql/constants.py:9:3       - Unknown word (Namedtuples) -- # Namedtuples for sql.* internal use
 django/db/models/sql/datastructures.py:174:25    - Unknown word (LOUTER)     -- new.join_type = LOUTER
@@ -4845,39 +4845,37 @@ tests/gis_tests/gdal_tests/test_ds.py:65:9      - Unknown word (nfeat)      -- n
 tests/gis_tests/gdal_tests/test_ds.py:71:78     - Unknown word (QGIS)       -- # Got extent from QGIS
 tests/gis_tests/gdal_tests/test_ds.py:76:9      - Unknown word (nfeat)      -- nfeat=3,
 tests/gis_tests/gdal_tests/test_ds.py:90:83     - Unknown word (QGIS)       -- # Got extent from QGIS
-tests/gis_tests/gdal_tests/test_geom.py:1031:44   - Unknown word (CIRCULARSTRING) -- assertEqual(curve.geom_name, "CIRCULARSTRING")
-tests/gis_tests/gdal_tests/test_geom.py:1034:14   - Unknown word (CIRCULARSTRING) -- "CIRCULARSTRING (-0.797 0.466,-0.61
-tests/gis_tests/gdal_tests/test_geom.py:1053:14   - Unknown word (circularstring) -- def test_circularstring_has_linestring_features
-tests/gis_tests/gdal_tests/test_geom.py:1054:29   - Unknown word (CIRCULARSTRING) -- geom = OGRGeometry("CIRCULARSTRING ZM (1 5 0 1, 6 2 0
-tests/gis_tests/gdal_tests/test_geom.py:1067:14   - Unknown word (curvepolygon)   -- def test_curvepolygon_has_polygon_features
-tests/gis_tests/gdal_tests/test_geom.py:1069:14   - Unknown word (CURVEPOLYGON)   -- "CURVEPOLYGON ZM (CIRCULARSTRING ZM
-tests/gis_tests/gdal_tests/test_geom.py:1069:31   - Unknown word (CIRCULARSTRING) -- "CURVEPOLYGON ZM (CIRCULARSTRING ZM (0 0 0 0, 4 0 0
-tests/gis_tests/gdal_tests/test_geom.py:125:27    - Unknown word (jsons)      -- # Loading jsons to prevent decimal difference
-tests/gis_tests/gdal_tests/test_geom.py:14:30     - Unknown word (libgeos)    -- django.contrib.gis.geos.libgeos import geos_version
-tests/gis_tests/gdal_tests/test_geom.py:151:13    - Unknown word (mgeom)      -- mgeom1 = OGRGeometry(mp.wkt
-tests/gis_tests/gdal_tests/test_geom.py:152:33    - Unknown word (mgeom)      -- self.assertEqual(4, mgeom1.geom_type)
-tests/gis_tests/gdal_tests/test_geom.py:153:44    - Unknown word (mgeom)      -- assertEqual("MULTIPOINT", mgeom1.geom_name)
-tests/gis_tests/gdal_tests/test_geom.py:154:13    - Unknown word (mgeom)      -- mgeom2 = OGRGeometry("MULTIPOINT
-tests/gis_tests/gdal_tests/test_geom.py:155:13    - Unknown word (mgeom)      -- mgeom3 = OGRGeometry("MULTIPOINT
-tests/gis_tests/gdal_tests/test_geom.py:167:35    - Unknown word (linestrings) -- ls in self.geometries.linestrings:
-tests/gis_tests/gdal_tests/test_geom.py:181:18    - Unknown word (tmpx)        -- x = [tmpx for tmpx, tmpy in ls
-tests/gis_tests/gdal_tests/test_geom.py:181:27    - Unknown word (tmpx)        -- x = [tmpx for tmpx, tmpy in ls.coords]
-tests/gis_tests/gdal_tests/test_geom.py:181:33    - Unknown word (tmpy)        -- x = [tmpx for tmpx, tmpy in ls.coords]
-tests/gis_tests/gdal_tests/test_geom.py:182:18    - Unknown word (tmpy)        -- y = [tmpy for tmpx, tmpy in ls
-tests/gis_tests/gdal_tests/test_geom.py:182:27    - Unknown word (tmpx)        -- y = [tmpy for tmpx, tmpy in ls.coords]
-tests/gis_tests/gdal_tests/test_geom.py:182:33    - Unknown word (tmpy)        -- y = [tmpy for tmpx, tmpy in ls.coords]
-tests/gis_tests/gdal_tests/test_geom.py:208:35    - Unknown word (linearrings) -- rr in self.geometries.linearrings:
-tests/gis_tests/gdal_tests/test_geom.py:263:14    - Unknown word (closepolygons) -- def test_closepolygons(self):
-tests/gis_tests/gdal_tests/test_geom.py:304:13    - Unknown word (klone)         -- klone = mpoly.clone()
-tests/gis_tests/gdal_tests/test_geom.py:305:38    - Unknown word (klone)         -- assertEqual(sr.wkt, klone.srs.wkt)
-tests/gis_tests/gdal_tests/test_geom.py:372:9     - Unknown word (prec)          -- prec = -1
-tests/gis_tests/gdal_tests/test_geom.py:374:50    - Unknown word (prec)          -- sertAlmostEqual(trans.x, p.x, prec)
-tests/gis_tests/gdal_tests/test_geom.py:375:50    - Unknown word (prec)          -- sertAlmostEqual(trans.y, p.y, prec)
-tests/gis_tests/gdal_tests/test_geom.py:384:9     - Unknown word (prec)          -- prec = -1
-tests/gis_tests/gdal_tests/test_geom.py:388:61    - Unknown word (prec)          -- x[0], ls_orig.x[0], prec)
-tests/gis_tests/gdal_tests/test_geom.py:425:46    - Unknown word (sdiff)         -- OGRGeometry(self.geometries.sdiff_geoms[i].wkt)
-tests/gis_tests/gdal_tests/test_geom.py:883:42    - Unknown word (libgeos)       -- django.contrib.gis.geos.libgeos.geos_version", lambda
-tests/gis_tests/gdal_tests/test_geom.py:992:29    - Unknown word (CIRCULARSTRING) -- geom = OGRGeometry("CIRCULARSTRING (-0.797 0.466,-0.48
+tests/gis_tests/gdal_tests/test_geom.py:1022:44   - Unknown word (CIRCULARSTRING) -- assertEqual(curve.geom_name, "CIRCULARSTRING")
+tests/gis_tests/gdal_tests/test_geom.py:1025:14   - Unknown word (CIRCULARSTRING) -- "CIRCULARSTRING (-0.797 0.466,-0.61
+tests/gis_tests/gdal_tests/test_geom.py:1044:14   - Unknown word (circularstring) -- def test_circularstring_has_linestring_features
+tests/gis_tests/gdal_tests/test_geom.py:1045:29   - Unknown word (CIRCULARSTRING) -- geom = OGRGeometry("CIRCULARSTRING ZM (1 5 0 1, 6 2 0
+tests/gis_tests/gdal_tests/test_geom.py:1058:14   - Unknown word (curvepolygon)   -- def test_curvepolygon_has_polygon_features
+tests/gis_tests/gdal_tests/test_geom.py:1060:14   - Unknown word (CURVEPOLYGON)   -- "CURVEPOLYGON ZM (CIRCULARSTRING ZM
+tests/gis_tests/gdal_tests/test_geom.py:1060:31   - Unknown word (CIRCULARSTRING) -- "CURVEPOLYGON ZM (CIRCULARSTRING ZM (0 0 0 0, 4 0 0
+tests/gis_tests/gdal_tests/test_geom.py:123:27    - Unknown word (jsons)      -- # Loading jsons to prevent decimal difference
+tests/gis_tests/gdal_tests/test_geom.py:149:13    - Unknown word (mgeom)      -- mgeom1 = OGRGeometry(mp.wkt
+tests/gis_tests/gdal_tests/test_geom.py:150:33    - Unknown word (mgeom)      -- self.assertEqual(4, mgeom1.geom_type)
+tests/gis_tests/gdal_tests/test_geom.py:151:44    - Unknown word (mgeom)      -- assertEqual("MULTIPOINT", mgeom1.geom_name)
+tests/gis_tests/gdal_tests/test_geom.py:152:13    - Unknown word (mgeom)      -- mgeom2 = OGRGeometry("MULTIPOINT
+tests/gis_tests/gdal_tests/test_geom.py:153:13    - Unknown word (mgeom)      -- mgeom3 = OGRGeometry("MULTIPOINT
+tests/gis_tests/gdal_tests/test_geom.py:165:35    - Unknown word (linestrings) -- ls in self.geometries.linestrings:
+tests/gis_tests/gdal_tests/test_geom.py:179:18    - Unknown word (tmpx)        -- x = [tmpx for tmpx, tmpy in ls
+tests/gis_tests/gdal_tests/test_geom.py:179:27    - Unknown word (tmpx)        -- x = [tmpx for tmpx, tmpy in ls.coords]
+tests/gis_tests/gdal_tests/test_geom.py:179:33    - Unknown word (tmpy)        -- x = [tmpx for tmpx, tmpy in ls.coords]
+tests/gis_tests/gdal_tests/test_geom.py:180:18    - Unknown word (tmpy)        -- y = [tmpy for tmpx, tmpy in ls
+tests/gis_tests/gdal_tests/test_geom.py:180:27    - Unknown word (tmpx)        -- y = [tmpy for tmpx, tmpy in ls.coords]
+tests/gis_tests/gdal_tests/test_geom.py:180:33    - Unknown word (tmpy)        -- y = [tmpy for tmpx, tmpy in ls.coords]
+tests/gis_tests/gdal_tests/test_geom.py:206:35    - Unknown word (linearrings) -- rr in self.geometries.linearrings:
+tests/gis_tests/gdal_tests/test_geom.py:261:14    - Unknown word (closepolygons) -- def test_closepolygons(self):
+tests/gis_tests/gdal_tests/test_geom.py:302:13    - Unknown word (klone)         -- klone = mpoly.clone()
+tests/gis_tests/gdal_tests/test_geom.py:303:38    - Unknown word (klone)         -- assertEqual(sr.wkt, klone.srs.wkt)
+tests/gis_tests/gdal_tests/test_geom.py:370:9     - Unknown word (prec)          -- prec = -1
+tests/gis_tests/gdal_tests/test_geom.py:372:50    - Unknown word (prec)          -- sertAlmostEqual(trans.x, p.x, prec)
+tests/gis_tests/gdal_tests/test_geom.py:373:50    - Unknown word (prec)          -- sertAlmostEqual(trans.y, p.y, prec)
+tests/gis_tests/gdal_tests/test_geom.py:382:9     - Unknown word (prec)          -- prec = -1
+tests/gis_tests/gdal_tests/test_geom.py:386:61    - Unknown word (prec)          -- x[0], ls_orig.x[0], prec)
+tests/gis_tests/gdal_tests/test_geom.py:423:46    - Unknown word (sdiff)         -- OGRGeometry(self.geometries.sdiff_geoms[i].wkt)
+tests/gis_tests/gdal_tests/test_geom.py:983:29    - Unknown word (CIRCULARSTRING) -- geom = OGRGeometry("CIRCULARSTRING (-0.797 0.466,-0.48
 tests/gis_tests/gdal_tests/test_raster.py:104:35    - Unknown word (geotransforms) -- geotransform in error_geotransforms:
 tests/gis_tests/gdal_tests/test_raster.py:128:9     - Unknown word (rast)          -- rast = GDALRaster(
 tests/gis_tests/gdal_tests/test_raster.py:16:21     - Unknown word (textrasters) -- from ..data.rasters.textrasters import JSON_RASTER
@@ -5120,53 +5118,53 @@ tests/gis_tests/geogapp/tests.py:51:41     - Unknown word (htown)      -- object
 tests/gis_tests/geogapp/tests.py:52:38     - Unknown word (htown)      -- duplicate = CityUnique(point=htown.point)
 tests/gis_tests/geogapp/tests.py:79:9      - Unknown word (htown)      -- htown = City.objects.get(name
 tests/gis_tests/geogapp/tests.py:80:47     - Unknown word (htown)      -- filter(point__exact=htown.point)
-tests/gis_tests/geos_tests/test_geos.py:102:48    - Unknown word (hasm)       -- GEOSGeometry(hexewkb_4d).hasm, True)
-tests/gis_tests/geos_tests/test_geos.py:1128:14   - Unknown word (threed)      -- def test_threed(self):
-tests/gis_tests/geos_tests/test_geos.py:1329:9    - Unknown word (prec)        -- prec = -1
-tests/gis_tests/geos_tests/test_geos.py:1331:50   - Unknown word (prec)        -- sertAlmostEqual(trans.x, p.x, prec)
-tests/gis_tests/geos_tests/test_geos.py:1332:50   - Unknown word (prec)        -- sertAlmostEqual(trans.y, p.y, prec)
-tests/gis_tests/geos_tests/test_geos.py:1355:24   - Unknown word (nosrid)      -- def test_transform_nosrid(self):
-tests/gis_tests/geos_tests/test_geos.py:1398:9    - Unknown word (tgeoms)      -- tgeoms = get_geoms(self.geometries
-tests/gis_tests/geos_tests/test_geos.py:1399:9    - Unknown word (tgeoms)      -- tgeoms.extend(get_geoms(self
-tests/gis_tests/geos_tests/test_geos.py:1400:9    - Unknown word (tgeoms)      -- tgeoms.extend(get_geoms(self
-tests/gis_tests/geos_tests/test_geos.py:1401:9    - Unknown word (tgeoms)      -- tgeoms.extend(get_geoms(self
-tests/gis_tests/geos_tests/test_geos.py:1402:9    - Unknown word (tgeoms)      -- tgeoms.append(Point(srid=4
-tests/gis_tests/geos_tests/test_geos.py:1419:9    - Unknown word (pnts)        -- pnts = [Point(5, 5), Point
-tests/gis_tests/geos_tests/test_geos.py:1420:20   - Unknown word (pnts)        -- for pnt in pnts:
-tests/gis_tests/geos_tests/test_geos.py:1468:14   - Unknown word (linearref)   -- def test_linearref(self):
-tests/gis_tests/geos_tests/test_geos.py:1582:25   - Unknown word (CAPI)        -- (b"3.0.0rc4-CAPI-1.3.3", (3, 0, 0)),
-tests/gis_tests/geos_tests/test_geos.py:1583:22   - Unknown word (CAPI)        -- (b"3.0.0-CAPI-1.4.1", (3, 0, 0)),
-tests/gis_tests/geos_tests/test_geos.py:1584:25   - Unknown word (CAPI)        -- (b"3.4.0dev-CAPI-1.8.0", (3, 4, 0)),
-tests/gis_tests/geos_tests/test_geos.py:1585:25   - Unknown word (CAPI)        -- (b"3.4.0dev-CAPI-1.8.0 r0", (3, 4, 0
-tests/gis_tests/geos_tests/test_geos.py:1586:22   - Unknown word (CAPI)        -- (b"3.6.2-CAPI-1.10.2 4d2925d6", (
-tests/gis_tests/geos_tests/test_geos.py:1591:46   - Unknown word (libgeos)     -- django.contrib.gis.geos.libgeos.geos_version",
-tests/gis_tests/geos_tests/test_geos.py:160:9     - Unknown word (srids)      -- srids = (-1, 32140)
-tests/gis_tests/geos_tests/test_geos.py:161:21    - Unknown word (srids)      -- for srid in srids:
-tests/gis_tests/geos_tests/test_geos.py:1623:37   - Unknown word (SRUD)        -- GEOSGeometry.from_ewkt("SRUD=1;POINT(1 1)")
-tests/gis_tests/geos_tests/test_geos.py:174:27    - Unknown word (jsons)      -- # Loading jsons to prevent decimal difference
-tests/gis_tests/geos_tests/test_geos.py:241:49    - Unknown word (srids)      -- equivalence with different srids."
+tests/gis_tests/geos_tests/test_geos.py:1112:14   - Unknown word (threed)      -- def test_threed(self):
+tests/gis_tests/geos_tests/test_geos.py:1307:9    - Unknown word (prec)        -- prec = -1
+tests/gis_tests/geos_tests/test_geos.py:1309:50   - Unknown word (prec)        -- sertAlmostEqual(trans.x, p.x, prec)
+tests/gis_tests/geos_tests/test_geos.py:1310:50   - Unknown word (prec)        -- sertAlmostEqual(trans.y, p.y, prec)
+tests/gis_tests/geos_tests/test_geos.py:1333:24   - Unknown word (nosrid)      -- def test_transform_nosrid(self):
+tests/gis_tests/geos_tests/test_geos.py:1376:9    - Unknown word (tgeoms)      -- tgeoms = get_geoms(self.geometries
+tests/gis_tests/geos_tests/test_geos.py:1377:9    - Unknown word (tgeoms)      -- tgeoms.extend(get_geoms(self
+tests/gis_tests/geos_tests/test_geos.py:1378:9    - Unknown word (tgeoms)      -- tgeoms.extend(get_geoms(self
+tests/gis_tests/geos_tests/test_geos.py:1379:9    - Unknown word (tgeoms)      -- tgeoms.extend(get_geoms(self
+tests/gis_tests/geos_tests/test_geos.py:1380:9    - Unknown word (tgeoms)      -- tgeoms.append(Point(srid=4
+tests/gis_tests/geos_tests/test_geos.py:1397:9    - Unknown word (pnts)        -- pnts = [Point(5, 5), Point
+tests/gis_tests/geos_tests/test_geos.py:1398:20   - Unknown word (pnts)        -- for pnt in pnts:
+tests/gis_tests/geos_tests/test_geos.py:1446:14   - Unknown word (linearref)   -- def test_linearref(self):
+tests/gis_tests/geos_tests/test_geos.py:144:9     - Unknown word (srids)      -- srids = (-1, 32140)
+tests/gis_tests/geos_tests/test_geos.py:145:21    - Unknown word (srids)      -- for srid in srids:
+tests/gis_tests/geos_tests/test_geos.py:1560:25   - Unknown word (CAPI)        -- (b"3.0.0rc4-CAPI-1.3.3", (3, 0, 0)),
+tests/gis_tests/geos_tests/test_geos.py:1561:22   - Unknown word (CAPI)        -- (b"3.0.0-CAPI-1.4.1", (3, 0, 0)),
+tests/gis_tests/geos_tests/test_geos.py:1562:25   - Unknown word (CAPI)        -- (b"3.4.0dev-CAPI-1.8.0", (3, 4, 0)),
+tests/gis_tests/geos_tests/test_geos.py:1563:25   - Unknown word (CAPI)        -- (b"3.4.0dev-CAPI-1.8.0 r0", (3, 4, 0
+tests/gis_tests/geos_tests/test_geos.py:1564:22   - Unknown word (CAPI)        -- (b"3.6.2-CAPI-1.10.2 4d2925d6", (
+tests/gis_tests/geos_tests/test_geos.py:1569:46   - Unknown word (libgeos)     -- django.contrib.gis.geos.libgeos.geos_version",
+tests/gis_tests/geos_tests/test_geos.py:158:27    - Unknown word (jsons)      -- # Loading jsons to prevent decimal difference
+tests/gis_tests/geos_tests/test_geos.py:1601:37   - Unknown word (SRUD)        -- GEOSGeometry.from_ewkt("SRUD=1;POINT(1 1)")
+tests/gis_tests/geos_tests/test_geos.py:225:49    - Unknown word (srids)      -- equivalence with different srids."
 tests/gis_tests/geos_tests/test_geos.py:26:30     - Unknown word (libgeos)    -- django.contrib.gis.geos.libgeos import geos_version
-tests/gis_tests/geos_tests/test_geos.py:322:42    - Unknown word (libgeos)    -- django.contrib.gis.geos.libgeos.geos_version", lambda
-tests/gis_tests/geos_tests/test_geos.py:331:14    - Unknown word (hasm)       -- def test_hasm(self):
-tests/gis_tests/geos_tests/test_geos.py:333:33    - Unknown word (hasm)       -- self.assertTrue(pnt_xym.hasm)
-tests/gis_tests/geos_tests/test_geos.py:334:13    - Unknown word (xyzm)       -- pnt_xyzm = fromstr("POINT (5
-tests/gis_tests/geos_tests/test_geos.py:335:29    - Unknown word (xyzm)       -- self.assertTrue(pnt_xyzm.hasm)
-tests/gis_tests/geos_tests/test_geos.py:335:34    - Unknown word (hasm)       -- assertTrue(pnt_xyzm.hasm)
-tests/gis_tests/geos_tests/test_geos.py:337:42    - Unknown word (libgeos)    -- django.contrib.gis.geos.libgeos.geos_version", lambda
-tests/gis_tests/geos_tests/test_geos.py:338:14    - Unknown word (hasm)       -- def test_hasm_geos_version(self):
-tests/gis_tests/geos_tests/test_geos.py:430:37    - Unknown word (linestrings) -- line in self.geometries.linestrings:
-tests/gis_tests/geos_tests/test_geos.py:543:35    - Unknown word (linearrings) -- rr in self.geometries.linearrings:
-tests/gis_tests/geos_tests/test_geos.py:752:25    - Unknown word (tset)        -- tset = (5, 23)
-tests/gis_tests/geos_tests/test_geos.py:754:25    - Unknown word (tset)        -- tset = (5, 23, 8)
-tests/gis_tests/geos_tests/test_geos.py:755:29    - Unknown word (tset)        -- cs[i] = tset
-tests/gis_tests/geos_tests/test_geos.py:758:40    - Unknown word (tset)        -- for j in range(len(tset)):
-tests/gis_tests/geos_tests/test_geos.py:759:33    - Unknown word (tset)        -- cs[i] = tset
-tests/gis_tests/geos_tests/test_geos.py:824:42    - Unknown word (sdiff)       -- fromstr(self.geometries.sdiff_geoms[i].wkt)
-tests/gis_tests/geos_tests/test_geos.py:837:56    - Unknown word (quadsegs)    -- point for the number of quadsegs.
-tests/gis_tests/geos_tests/test_geos.py:839:32    - Unknown word (quadsegs)    -- g.buffer(bg.width, quadsegs=1.1)
-tests/gis_tests/geos_tests/test_geos.py:847:56    - Unknown word (quadsegs)    -- point for the number of quadsegs.
-tests/gis_tests/geos_tests/test_geos.py:849:43    - Unknown word (quadsegs)    -- with_style(bg.width, quadsegs=1.1)
-tests/gis_tests/geos_tests/test_geos.py:884:22    - Unknown word (quadsegs)    -- "quadsegs",
+tests/gis_tests/geos_tests/test_geos.py:306:42    - Unknown word (libgeos)    -- django.contrib.gis.geos.libgeos.geos_version", lambda
+tests/gis_tests/geos_tests/test_geos.py:315:14    - Unknown word (hasm)       -- def test_hasm(self):
+tests/gis_tests/geos_tests/test_geos.py:317:33    - Unknown word (hasm)       -- self.assertTrue(pnt_xym.hasm)
+tests/gis_tests/geos_tests/test_geos.py:318:13    - Unknown word (xyzm)       -- pnt_xyzm = fromstr("POINT (5
+tests/gis_tests/geos_tests/test_geos.py:319:29    - Unknown word (xyzm)       -- self.assertTrue(pnt_xyzm.hasm)
+tests/gis_tests/geos_tests/test_geos.py:319:34    - Unknown word (hasm)       -- assertTrue(pnt_xyzm.hasm)
+tests/gis_tests/geos_tests/test_geos.py:321:42    - Unknown word (libgeos)    -- django.contrib.gis.geos.libgeos.geos_version", lambda
+tests/gis_tests/geos_tests/test_geos.py:322:14    - Unknown word (hasm)       -- def test_hasm_geos_version(self):
+tests/gis_tests/geos_tests/test_geos.py:324:29    - Unknown word (hasm)       -- msg = "GEOSGeometry.hasm requires GEOS >= 3.
+tests/gis_tests/geos_tests/test_geos.py:414:37    - Unknown word (linestrings) -- line in self.geometries.linestrings:
+tests/gis_tests/geos_tests/test_geos.py:527:35    - Unknown word (linearrings) -- rr in self.geometries.linearrings:
+tests/gis_tests/geos_tests/test_geos.py:736:25    - Unknown word (tset)        -- tset = (5, 23)
+tests/gis_tests/geos_tests/test_geos.py:738:25    - Unknown word (tset)        -- tset = (5, 23, 8)
+tests/gis_tests/geos_tests/test_geos.py:739:29    - Unknown word (tset)        -- cs[i] = tset
+tests/gis_tests/geos_tests/test_geos.py:742:40    - Unknown word (tset)        -- for j in range(len(tset)):
+tests/gis_tests/geos_tests/test_geos.py:743:33    - Unknown word (tset)        -- cs[i] = tset
+tests/gis_tests/geos_tests/test_geos.py:808:42    - Unknown word (sdiff)       -- fromstr(self.geometries.sdiff_geoms[i].wkt)
+tests/gis_tests/geos_tests/test_geos.py:821:56    - Unknown word (quadsegs)    -- point for the number of quadsegs.
+tests/gis_tests/geos_tests/test_geos.py:823:32    - Unknown word (quadsegs)    -- g.buffer(bg.width, quadsegs=1.1)
+tests/gis_tests/geos_tests/test_geos.py:831:56    - Unknown word (quadsegs)    -- point for the number of quadsegs.
+tests/gis_tests/geos_tests/test_geos.py:833:43    - Unknown word (quadsegs)    -- with_style(bg.width, quadsegs=1.1)
+tests/gis_tests/geos_tests/test_geos.py:868:22    - Unknown word (quadsegs)    -- "quadsegs",
 tests/gis_tests/geos_tests/test_geos_mutation.py:1:27      - Unknown word (Aryeh)      -- Copyright (c) 2008-2009 Aryeh Leib Taurog, all rights
 tests/gis_tests/geos_tests/test_geos_mutation.py:1:33      - Unknown word (Leib)       -- (c) 2008-2009 Aryeh Leib Taurog, all rights reserved
 tests/gis_tests/geos_tests/test_geos_mutation.py:1:38      - Unknown word (Taurog)     -- 008-2009 Aryeh Leib Taurog, all rights reserved
@@ -5766,41 +5764,42 @@ tests/mail/tests.py:1270:37   - Unknown word (xample)          -- "To Example <t
 tests/mail/tests.py:1303:50   - Unknown word (exampl)          -- very long" * 4, "to@exampl€.com"),
 tests/mail/tests.py:1307:32   - Unknown word (exampl)          -- " long <to@xn--exampl-nc1c.com>",
 tests/mail/tests.py:133:28    - Unknown word (reparsing)  -- django_message and reparsing the result.
-tests/mail/tests.py:1689:14   - Unknown word (Chère)           -- "Chère maman", "Je t'aime tr
-tests/mail/tests.py:1689:20   - Unknown word (maman)           -- "Chère maman", "Je t'aime très fort
-tests/mail/tests.py:1689:32   - Unknown word (t'aime)          -- "Chère maman", "Je t'aime très fort", "from@example
-tests/mail/tests.py:1694:47   - Unknown word (Chère)           -- message["subject"], "Chère maman")
-tests/mail/tests.py:1694:53   - Unknown word (maman)           -- message["subject"], "Chère maman")
-tests/mail/tests.py:1695:55   - Unknown word (maman)           -- ?utf-8?q?Ch=C3=A8re_maman?=", message.as_bytes
-tests/mail/tests.py:1696:53   - Unknown word (t'aime)          -- message.get_content(), "Je t'aime très fort")
-tests/mail/tests.py:1707:27   - Unknown word (южных)           -- "Subject", "В южных морях " * 60, "from
-tests/mail/tests.py:1707:33   - Unknown word (морях)           -- "Subject", "В южных морях " * 60, "from@example
+tests/mail/tests.py:1689:14   - Unknown word (Chère)           -- "Chère maman",
+tests/mail/tests.py:1689:20   - Unknown word (maman)           -- "Chère maman",
+tests/mail/tests.py:1690:17   - Unknown word (t'aime)          -- "Je t'aime très fort\n",
+tests/mail/tests.py:1697:47   - Unknown word (Chère)           -- message["subject"], "Chère maman")
+tests/mail/tests.py:1697:53   - Unknown word (maman)           -- message["subject"], "Chère maman")
+tests/mail/tests.py:1698:55   - Unknown word (maman)           -- ?utf-8?q?Ch=C3=A8re_maman?=", message.as_bytes
+tests/mail/tests.py:1699:53   - Unknown word (t'aime)          -- message.get_content(), "Je t'aime très fort\n")
+tests/mail/tests.py:1710:27   - Unknown word (южных)           -- "Subject", "В южных морях " * 60, "from
+tests/mail/tests.py:1710:33   - Unknown word (морях)           -- "Subject", "В южных морях " * 60, "from@example
 tests/mail/tests.py:186:68    - Unknown word (surrogateescape) -- payload supporting `surrogateescape`.
 tests/mail/tests.py:190:59    - Unknown word (surrogateescape) -- provided charset and `surrogateescape` is
-tests/mail/tests.py:2045:28   - Unknown word (locmen)          -- Make sure that the locmen backend populates the
+tests/mail/tests.py:2048:28   - Unknown word (locmen)          -- Make sure that the locmen backend populates the
 tests/mail/tests.py:209:45    - Unknown word (surrogateescape) -- decode("ascii", errors="surrogateescape")
-tests/mail/tests.py:2224:17   - Unknown word (AIOSMTPD)        -- @skipUnless(HAS_AIOSMTPD, "No aiosmtpd library
-tests/mail/tests.py:2224:31   - Unknown word (aiosmtpd)        -- skipUnless(HAS_AIOSMTPD, "No aiosmtpd library detected.")
-tests/mail/tests.py:2253:17   - Unknown word (AIOSMTPD)        -- @skipUnless(HAS_AIOSMTPD, "No aiosmtpd library
-tests/mail/tests.py:2253:31   - Unknown word (aiosmtpd)        -- skipUnless(HAS_AIOSMTPD, "No aiosmtpd library detected.")
-tests/mail/tests.py:2528:31   - Unknown word (discussão)       -- from_email="lists@discussão.example.org",
-tests/mail/tests.py:2530:27   - Unknown word (discussão)       -- bcc=["monitor@discussão.example.org"],
-tests/mail/tests.py:2532:26   - Unknown word (Gestor)          -- "From": "Gestor de listas <lists@discuss
-tests/mail/tests.py:2532:36   - Unknown word (listas)          -- "From": "Gestor de listas <lists@discussão.example
-tests/mail/tests.py:2532:50   - Unknown word (discussão)       -- Gestor de listas <lists@discussão.example.org>",
-tests/mail/tests.py:2533:24   - Unknown word (Discussão)       -- "To": "Discussão Django <django@discuss
-tests/mail/tests.py:2533:49   - Unknown word (discussão)       -- Discussão Django <django@discussão.example.org>",
-tests/mail/tests.py:2539:60   - Unknown word (discusso)        -- mail_from"], "lists@xn--discusso-xza.example.org")
-tests/mail/tests.py:2542:57   - Unknown word (discusso)        -- example.com", "monitor@xn--discusso-xza.example.org"],
-tests/mail/tests.py:2545:23   - Unknown word (reencode)        -- def test_does_not_reencode_idna(self):
-tests/mail/tests.py:2556:26   - Unknown word (βόλος)           -- from_email='"βόλος" <from@xn--fa-hia.example
-tests/mail/tests.py:2558:34   - Unknown word (nxasmm)          -- cc=['"ශ්‍රී" <cc@xn--nxasmm1c.example.com>'],
-tests/mail/tests.py:2559:20   - Unknown word (نامه)            -- bcc=['"نامه‌ای." <bcc@xn--mgba3gch
-tests/mail/tests.py:2559:39   - Unknown word (mgba)            -- "نامه‌ای." <bcc@xn--mgba3gch31f060k.example.com
-tests/mail/tests.py:2569:25   - Unknown word (nxasmm)          -- "cc@xn--nxasmm1c.example.com",
-tests/mail/tests.py:2570:26   - Unknown word (mgba)            -- "bcc@xn--mgba3gch31f060k.example.com
-tests/mail/tests.py:2575:17   - Unknown word (AIOSMTPD)        -- @skipUnless(HAS_AIOSMTPD, "No aiosmtpd library
-tests/mail/tests.py:2575:31   - Unknown word (aiosmtpd)        -- skipUnless(HAS_AIOSMTPD, "No aiosmtpd library detected.")
+tests/mail/tests.py:2205:26   - Unknown word (CRNL)            -- # Convert SMTP's CRNL to NL, to simplify content
+tests/mail/tests.py:2228:17   - Unknown word (AIOSMTPD)        -- @skipUnless(HAS_AIOSMTPD, "No aiosmtpd library
+tests/mail/tests.py:2228:31   - Unknown word (aiosmtpd)        -- skipUnless(HAS_AIOSMTPD, "No aiosmtpd library detected.")
+tests/mail/tests.py:2257:17   - Unknown word (AIOSMTPD)        -- @skipUnless(HAS_AIOSMTPD, "No aiosmtpd library
+tests/mail/tests.py:2257:31   - Unknown word (aiosmtpd)        -- skipUnless(HAS_AIOSMTPD, "No aiosmtpd library detected.")
+tests/mail/tests.py:2532:31   - Unknown word (discussão)       -- from_email="lists@discussão.example.org",
+tests/mail/tests.py:2534:27   - Unknown word (discussão)       -- bcc=["monitor@discussão.example.org"],
+tests/mail/tests.py:2536:26   - Unknown word (Gestor)          -- "From": "Gestor de listas <lists@discuss
+tests/mail/tests.py:2536:36   - Unknown word (listas)          -- "From": "Gestor de listas <lists@discussão.example
+tests/mail/tests.py:2536:50   - Unknown word (discussão)       -- Gestor de listas <lists@discussão.example.org>",
+tests/mail/tests.py:2537:24   - Unknown word (Discussão)       -- "To": "Discussão Django <django@discuss
+tests/mail/tests.py:2537:49   - Unknown word (discussão)       -- Discussão Django <django@discussão.example.org>",
+tests/mail/tests.py:2543:60   - Unknown word (discusso)        -- mail_from"], "lists@xn--discusso-xza.example.org")
+tests/mail/tests.py:2546:57   - Unknown word (discusso)        -- example.com", "monitor@xn--discusso-xza.example.org"],
+tests/mail/tests.py:2549:23   - Unknown word (reencode)        -- def test_does_not_reencode_idna(self):
+tests/mail/tests.py:2560:26   - Unknown word (βόλος)           -- from_email='"βόλος" <from@xn--fa-hia.example
+tests/mail/tests.py:2562:34   - Unknown word (nxasmm)          -- cc=['"ශ්‍රී" <cc@xn--nxasmm1c.example.com>'],
+tests/mail/tests.py:2563:20   - Unknown word (نامه)            -- bcc=['"نامه‌ای." <bcc@xn--mgba3gch
+tests/mail/tests.py:2563:39   - Unknown word (mgba)            -- "نامه‌ای." <bcc@xn--mgba3gch31f060k.example.com
+tests/mail/tests.py:2573:25   - Unknown word (nxasmm)          -- "cc@xn--nxasmm1c.example.com",
+tests/mail/tests.py:2574:26   - Unknown word (mgba)            -- "bcc@xn--mgba3gch31f060k.example.com
+tests/mail/tests.py:2579:17   - Unknown word (AIOSMTPD)        -- @skipUnless(HAS_AIOSMTPD, "No aiosmtpd library
+tests/mail/tests.py:2579:31   - Unknown word (aiosmtpd)        -- skipUnless(HAS_AIOSMTPD, "No aiosmtpd library detected.")
 tests/mail/tests.py:43:10     - Unknown word (aiosmtpd)   -- from aiosmtpd.controller import Controller
 tests/mail/tests.py:45:9      - Unknown word (AIOSMTPD)   -- HAS_AIOSMTPD = True
 tests/mail/tests.py:47:9      - Unknown word (AIOSMTPD)   -- HAS_AIOSMTPD = False
@@ -6941,78 +6940,78 @@ tests/queries/tests.py:2592:38   - Unknown word (unpickable)       -- one of cac
 tests/queries/tests.py:2593:41   - Unknown word (Unpickleable)     -- result_cache[0].error = UnpickleableError()
 tests/queries/tests.py:2594:32   - Unknown word (Unpickleable)     -- with self.assertRaises(UnpickleableError):
 tests/queries/tests.py:2640:14   - Unknown word (emptyqueryset)    -- def test_emptyqueryset_values(self):
-tests/queries/tests.py:2948:20   - Unknown word (resultset)        -- def test_empty_resultset_sql(self):
-tests/queries/tests.py:3155:9    - Unknown word (objectas)         -- objectas = []
-tests/queries/tests.py:3156:9    - Unknown word (objectbs)         -- objectbs = []
-tests/queries/tests.py:3157:9    - Unknown word (objectcs)         -- objectcs = []
-tests/queries/tests.py:3162:13   - Unknown word (objectas)         -- objectas.append(o)
-tests/queries/tests.py:3164:23   - Unknown word (objectas)         -- ("un", 1, objectas[0]),
-tests/queries/tests.py:3165:25   - Unknown word (objectas)         -- ("deux", 2, objectas[0]),
-tests/queries/tests.py:3166:26   - Unknown word (objectas)         -- ("trois", 3, objectas[2]),
-tests/queries/tests.py:3168:27   - Unknown word (objecta)          -- for name, number, objecta in b_info:
-tests/queries/tests.py:3169:48   - Unknown word (objecta)          -- name=name, num=number, objecta=objecta)
-tests/queries/tests.py:3169:56   - Unknown word (objecta)          -- num=number, objecta=objecta)
-tests/queries/tests.py:3171:13   - Unknown word (objectbs)         -- objectbs.append(o)
-tests/queries/tests.py:3172:40   - Unknown word (objectbs)         -- "ein", objectas[2], objectbs[2]), ("zwei", objectas
-tests/queries/tests.py:3172:56   - Unknown word (zwei)             -- 2], objectbs[2]), ("zwei", objectas[1], objectbs
-tests/queries/tests.py:3172:76   - Unknown word (objectbs)         -- zwei", objectas[1], objectbs[1])]
-tests/queries/tests.py:3173:19   - Unknown word (objecta)          -- for name, objecta, objectb in c_info:
-tests/queries/tests.py:3173:28   - Unknown word (objectb)          -- for name, objecta, objectb in c_info:
-tests/queries/tests.py:3174:36   - Unknown word (objecta)          -- ObjectC(name=name, objecta=objecta, objectb=objectb
-tests/queries/tests.py:3174:53   - Unknown word (objectb)          -- name, objecta=objecta, objectb=objectb)
-tests/queries/tests.py:3174:61   - Unknown word (objectb)          -- objecta=objecta, objectb=objectb)
-tests/queries/tests.py:3176:13   - Unknown word (objectcs)         -- objectcs.append(o)
-tests/queries/tests.py:3185:16   - Unknown word (objectb)          -- Q2 = Q(objectb__name="deux")
-tests/queries/tests.py:3190:16   - Unknown word (objectb)          -- Q2 = Q(objectb__name="deux", objectb
-tests/queries/tests.py:3195:16   - Unknown word (objectc)          -- Q2 = Q(objectc__objectb__name="deux
-tests/queries/tests.py:3200:25   - Unknown word (objectc)          -- Q2 = Q(objecta__objectc__name="ein")
-tests/queries/tests.py:3203:18   - Unknown word (BACB)             -- def test_BAB_BACB(self):
-tests/queries/tests.py:3205:25   - Unknown word (objectc)          -- Q2 = Q(objecta__objectc__objectb__name="trois
-tests/queries/tests.py:3209:37   - Unknown word (objectc)          -- objecta__name="one", objectc__objecta__name="two
-tests/queries/tests.py:3211:22   - Unknown word (objectc)          -- objecta__objectc__name="ein",
-tests/queries/tests.py:3284:14   - Unknown word (nontech)          -- alex_nontech_employers = (
-tests/queries/tests.py:3290:43   - Unknown word (nontech)          -- assertSequenceEqual(alex_nontech_employers, [google,
-tests/queries/tests.py:3367:10   - Unknown word (regressiontests)  -- Some regressiontests for ticket #17600. Some
-tests/queries/tests.py:3476:24   - Unknown word (onetoonecategory) -- first__onetoonecategory=F("second__onetoonecategory
-tests/queries/tests.py:3556:42   - Unknown word (namedcategory)    -- DumbCategory.objects.exclude(namedcategory__name__in=["nonexistent
-tests/queries/tests.py:3690:9    - Unknown word (qset)             -- qset = ModelA.objects.filter
-tests/queries/tests.py:3691:31   - Unknown word (qset)             -- self.assertEqual(list(qset), [self.a1])
-tests/queries/tests.py:3695:30   - Unknown word (qset)             -- self.assertEqual(str(qset.query).count("INNER
-tests/queries/tests.py:3877:14   - Unknown word (revfk)            -- def test_revfk_noreuse(self):
-tests/queries/tests.py:3877:20   - Unknown word (noreuse)          -- def test_revfk_noreuse(self):
-tests/queries/tests.py:3883:16   - Unknown word (trimmable)        -- When a trimmable join is specified in
-tests/queries/tests.py:3890:9    - Unknown word (hogward)          -- hogward = School.objects.create
-tests/queries/tests.py:3892:44   - Unknown word (hogward)          -- objects.create(school=hogward)
-tests/queries/tests.py:3893:41   - Unknown word (hogward)          -- objects.create(school=hogward, name="Potion")
-tests/queries/tests.py:3907:9    - Unknown word (basea)            -- basea = BaseA.objects.create
-tests/queries/tests.py:3914:43   - Unknown word (basea)            -- assertSequenceEqual(qs, [basea])
-tests/queries/tests.py:4025:36   - Unknown word (fexpression)      -- disjunction_promotion_fexpression(self):
-tests/queries/tests.py:4208:40   - Unknown word (childobjecta)     -- ObjectC.objects.create(childobjecta=cls.coa)
-tests/queries/tests.py:4245:37   - Unknown word (childobjecta)     -- ObjectC.objects.exclude(childobjecta__in=[self.coa, self
-tests/queries/tests.py:4298:58   - Unknown word (childobjecta)     -- ObjectC.objects.exclude(childobjecta=self.oa), out_c)
-tests/queries/tests.py:4334:49   - Unknown word (pointera)         -- Connection.objects.order_by("-pointera__connection", "pk")
-tests/queries/tests.py:4341:43   - Unknown word (jackstaff)        -- objects.create(name="jackstaff")
-tests/queries/tests.py:4342:9    - Unknown word (jackstaff)        -- jackstaff = StaffUser.objects
-tests/queries/tests.py:4343:43   - Unknown word (jillstaff)        -- objects.create(name="jillstaff")
-tests/queries/tests.py:4344:9    - Unknown word (jillstaff)        -- jillstaff = StaffUser.objects
-tests/queries/tests.py:4345:44   - Unknown word (jackstaff)        -- objects.create(creator=jackstaff, owner=jillstaff, title
-tests/queries/tests.py:4345:61   - Unknown word (jillstaff)        -- creator=jackstaff, owner=jillstaff, title="task")
-tests/queries/tests.py:4400:9    - Unknown word (tblname)          -- tblname = connection.ops.quote
-tests/queries/tests.py:4401:47   - Unknown word (tblname)          -- LEFT OUTER JOIN %s" % tblname, str(qs.query))
-tests/queries/tests.py:4412:45   - Unknown word (categoryitem)     -- ecialCategory.objects.exclude(categoryitem__id=c1.pk).order_by
-tests/queries/tests.py:4416:44   - Unknown word (categoryitem)     -- pecialCategory.objects.filter(categoryitem__id=c1.pk), [sc1]
-tests/queries/tests.py:4424:13   - Unknown word (custompktag)      -- cp1.custompktag_set.add(cpt1)
-tests/queries/tests.py:4425:58   - Unknown word (custompktag)      -- CustomPk.objects.filter(custompktag=cpt1), [cp1])
-tests/queries/tests.py:4455:46   - Unknown word (modelc)           -- 0.0, field_b1=True, modelc_fk=c1, modela_fk=a1
-tests/queries/tests.py:4455:60   - Unknown word (modela)           -- True, modelc_fk=c1, modela_fk=a1
-tests/queries/tests.py:4463:40   - Unknown word (modelc)           -- / F("ticket23605b__modelc_fk__field_c0")
-tests/queries/tests.py:4475:60   - Unknown word (modelc)           -- b0__gte=1000000 / F("modelc_fk__field_c0"))
-tests/queries/tests.py:4540:13   - Unknown word (modela)           -- modela_fk=a1,
-tests/queries/tests.py:4543:13   - Unknown word (modelc)           -- modelc_fk=c1,
+tests/queries/tests.py:2954:20   - Unknown word (resultset)        -- def test_empty_resultset_sql(self):
+tests/queries/tests.py:3161:9    - Unknown word (objectas)         -- objectas = []
+tests/queries/tests.py:3162:9    - Unknown word (objectbs)         -- objectbs = []
+tests/queries/tests.py:3163:9    - Unknown word (objectcs)         -- objectcs = []
+tests/queries/tests.py:3168:13   - Unknown word (objectas)         -- objectas.append(o)
+tests/queries/tests.py:3170:23   - Unknown word (objectas)         -- ("un", 1, objectas[0]),
+tests/queries/tests.py:3171:25   - Unknown word (objectas)         -- ("deux", 2, objectas[0]),
+tests/queries/tests.py:3172:26   - Unknown word (objectas)         -- ("trois", 3, objectas[2]),
+tests/queries/tests.py:3174:27   - Unknown word (objecta)          -- for name, number, objecta in b_info:
+tests/queries/tests.py:3175:48   - Unknown word (objecta)          -- name=name, num=number, objecta=objecta)
+tests/queries/tests.py:3175:56   - Unknown word (objecta)          -- num=number, objecta=objecta)
+tests/queries/tests.py:3177:13   - Unknown word (objectbs)         -- objectbs.append(o)
+tests/queries/tests.py:3178:40   - Unknown word (objectbs)         -- "ein", objectas[2], objectbs[2]), ("zwei", objectas
+tests/queries/tests.py:3178:56   - Unknown word (zwei)             -- 2], objectbs[2]), ("zwei", objectas[1], objectbs
+tests/queries/tests.py:3178:76   - Unknown word (objectbs)         -- zwei", objectas[1], objectbs[1])]
+tests/queries/tests.py:3179:19   - Unknown word (objecta)          -- for name, objecta, objectb in c_info:
+tests/queries/tests.py:3179:28   - Unknown word (objectb)          -- for name, objecta, objectb in c_info:
+tests/queries/tests.py:3180:36   - Unknown word (objecta)          -- ObjectC(name=name, objecta=objecta, objectb=objectb
+tests/queries/tests.py:3180:53   - Unknown word (objectb)          -- name, objecta=objecta, objectb=objectb)
+tests/queries/tests.py:3180:61   - Unknown word (objectb)          -- objecta=objecta, objectb=objectb)
+tests/queries/tests.py:3182:13   - Unknown word (objectcs)         -- objectcs.append(o)
+tests/queries/tests.py:3191:16   - Unknown word (objectb)          -- Q2 = Q(objectb__name="deux")
+tests/queries/tests.py:3196:16   - Unknown word (objectb)          -- Q2 = Q(objectb__name="deux", objectb
+tests/queries/tests.py:3201:16   - Unknown word (objectc)          -- Q2 = Q(objectc__objectb__name="deux
+tests/queries/tests.py:3206:25   - Unknown word (objectc)          -- Q2 = Q(objecta__objectc__name="ein")
+tests/queries/tests.py:3209:18   - Unknown word (BACB)             -- def test_BAB_BACB(self):
+tests/queries/tests.py:3211:25   - Unknown word (objectc)          -- Q2 = Q(objecta__objectc__objectb__name="trois
+tests/queries/tests.py:3215:37   - Unknown word (objectc)          -- objecta__name="one", objectc__objecta__name="two
+tests/queries/tests.py:3217:22   - Unknown word (objectc)          -- objecta__objectc__name="ein",
+tests/queries/tests.py:3290:14   - Unknown word (nontech)          -- alex_nontech_employers = (
+tests/queries/tests.py:3296:43   - Unknown word (nontech)          -- assertSequenceEqual(alex_nontech_employers, [google,
+tests/queries/tests.py:3373:10   - Unknown word (regressiontests)  -- Some regressiontests for ticket #17600. Some
+tests/queries/tests.py:3482:24   - Unknown word (onetoonecategory) -- first__onetoonecategory=F("second__onetoonecategory
+tests/queries/tests.py:3562:42   - Unknown word (namedcategory)    -- DumbCategory.objects.exclude(namedcategory__name__in=["nonexistent
+tests/queries/tests.py:3696:9    - Unknown word (qset)             -- qset = ModelA.objects.filter
+tests/queries/tests.py:3697:31   - Unknown word (qset)             -- self.assertEqual(list(qset), [self.a1])
+tests/queries/tests.py:3701:30   - Unknown word (qset)             -- self.assertEqual(str(qset.query).count("INNER
+tests/queries/tests.py:3883:14   - Unknown word (revfk)            -- def test_revfk_noreuse(self):
+tests/queries/tests.py:3883:20   - Unknown word (noreuse)          -- def test_revfk_noreuse(self):
+tests/queries/tests.py:3889:16   - Unknown word (trimmable)        -- When a trimmable join is specified in
+tests/queries/tests.py:3896:9    - Unknown word (hogward)          -- hogward = School.objects.create
+tests/queries/tests.py:3898:44   - Unknown word (hogward)          -- objects.create(school=hogward)
+tests/queries/tests.py:3899:41   - Unknown word (hogward)          -- objects.create(school=hogward, name="Potion")
+tests/queries/tests.py:3913:9    - Unknown word (basea)            -- basea = BaseA.objects.create
+tests/queries/tests.py:3920:43   - Unknown word (basea)            -- assertSequenceEqual(qs, [basea])
+tests/queries/tests.py:4031:36   - Unknown word (fexpression)      -- disjunction_promotion_fexpression(self):
+tests/queries/tests.py:4214:40   - Unknown word (childobjecta)     -- ObjectC.objects.create(childobjecta=cls.coa)
+tests/queries/tests.py:4251:37   - Unknown word (childobjecta)     -- ObjectC.objects.exclude(childobjecta__in=[self.coa, self
+tests/queries/tests.py:4304:58   - Unknown word (childobjecta)     -- ObjectC.objects.exclude(childobjecta=self.oa), out_c)
+tests/queries/tests.py:4340:49   - Unknown word (pointera)         -- Connection.objects.order_by("-pointera__connection", "pk")
+tests/queries/tests.py:4347:43   - Unknown word (jackstaff)        -- objects.create(name="jackstaff")
+tests/queries/tests.py:4348:9    - Unknown word (jackstaff)        -- jackstaff = StaffUser.objects
+tests/queries/tests.py:4349:43   - Unknown word (jillstaff)        -- objects.create(name="jillstaff")
+tests/queries/tests.py:4350:9    - Unknown word (jillstaff)        -- jillstaff = StaffUser.objects
+tests/queries/tests.py:4351:44   - Unknown word (jackstaff)        -- objects.create(creator=jackstaff, owner=jillstaff, title
+tests/queries/tests.py:4351:61   - Unknown word (jillstaff)        -- creator=jackstaff, owner=jillstaff, title="task")
+tests/queries/tests.py:4406:9    - Unknown word (tblname)          -- tblname = connection.ops.quote
+tests/queries/tests.py:4407:47   - Unknown word (tblname)          -- LEFT OUTER JOIN %s" % tblname, str(qs.query))
+tests/queries/tests.py:4418:45   - Unknown word (categoryitem)     -- ecialCategory.objects.exclude(categoryitem__id=c1.pk).order_by
+tests/queries/tests.py:4422:44   - Unknown word (categoryitem)     -- pecialCategory.objects.filter(categoryitem__id=c1.pk), [sc1]
+tests/queries/tests.py:4430:13   - Unknown word (custompktag)      -- cp1.custompktag_set.add(cpt1)
+tests/queries/tests.py:4431:58   - Unknown word (custompktag)      -- CustomPk.objects.filter(custompktag=cpt1), [cp1])
+tests/queries/tests.py:4461:46   - Unknown word (modelc)           -- 0.0, field_b1=True, modelc_fk=c1, modela_fk=a1
+tests/queries/tests.py:4461:60   - Unknown word (modela)           -- True, modelc_fk=c1, modela_fk=a1
+tests/queries/tests.py:4469:40   - Unknown word (modelc)           -- / F("ticket23605b__modelc_fk__field_c0")
+tests/queries/tests.py:4481:60   - Unknown word (modelc)           -- b0__gte=1000000 / F("modelc_fk__field_c0"))
 tests/queries/tests.py:4546:13   - Unknown word (modela)           -- modela_fk=a1,
 tests/queries/tests.py:4549:13   - Unknown word (modelc)           -- modelc_fk=c1,
 tests/queries/tests.py:4552:13   - Unknown word (modela)           -- modela_fk=a1,
+tests/queries/tests.py:4555:13   - Unknown word (modelc)           -- modelc_fk=c1,
 tests/queries/tests.py:4558:13   - Unknown word (modela)           -- modela_fk=a1,
+tests/queries/tests.py:4564:13   - Unknown word (modela)           -- modela_fk=a1,
 tests/queries/tests.py:496:26    - Unknown word (LOUTER)       -- self.assertNotIn(LOUTER, [x.join_type for x
 tests/queries/tests.py:510:39    - Unknown word (LOUTER)       -- if x.join_type == LOUTER and qs.query.alias_refcount
 tests/queryset_pickle/models.py:60:9      - Unknown word (somefield)  -- somefield = models.IntegerField
@@ -7165,19 +7164,19 @@ tests/schema/tests.py:5376:49   - Unknown word (dtob)          -- attributes_fro
 tests/schema/tests.py:5376:9    - Unknown word (dtob)          -- dtob_auto_now.set_attributes
 tests/schema/tests.py:737:38    - Unknown word (TINYINT)    -- BooleanField are stored as TINYINT(1) on MySQL.
 tests/schema/tests.py:822:30    - Unknown word (mediumblob) -- test_add_binaryfield_mediumblob(self):
-tests/select_for_update/tests.py:157:44    - Unknown word (eucountry)  -- ['select_for_update_eucountry"."country_ptr_id']
-tests/select_for_update/tests.py:159:44    - Unknown word (eucountry)  -- ["select_for_update_eucountry"]
-tests/select_for_update/tests.py:176:36    - Unknown word (eucountry)  -- 'select_for_update_eucountry"."country_ptr_id',
-tests/select_for_update/tests.py:180:44    - Unknown word (eucountry)  -- ["select_for_update_eucountry", "select_for_update
-tests/select_for_update/tests.py:194:36    - Unknown word (eucity)     -- 'select_for_update_eucity"."id',
-tests/select_for_update/tests.py:195:36    - Unknown word (eucountry)  -- 'select_for_update_eucountry"."country_ptr_id',
-tests/select_for_update/tests.py:198:44    - Unknown word (eucity)     -- ["select_for_update_eucity", "select_for_update
-tests/select_for_update/tests.py:215:36    - Unknown word (eucity)     -- 'select_for_update_eucity"."id',
-tests/select_for_update/tests.py:219:44    - Unknown word (eucity)     -- ["select_for_update_eucity", "select_for_update
-tests/select_for_update/tests.py:373:14    - Unknown word (unsuported) -- def test_unsuported_no_key_raises_error
-tests/select_for_update/tests.py:43:48     - Unknown word (Liberchies) -- objects.create(name="Liberchies", country=self.country
-tests/select_for_update/tests.py:44:48     - Unknown word (Samois)     -- objects.create(name="Samois-sur-Seine", country
-tests/select_for_update/tests.py:517:45    - Unknown word (Grappeli)   -- objects.create(name="Grappeli", born=self.city1, died
+tests/select_for_update/tests.py:168:44    - Unknown word (eucountry)  -- ['select_for_update_eucountry"."country_ptr_id']
+tests/select_for_update/tests.py:170:44    - Unknown word (eucountry)  -- ["select_for_update_eucountry"]
+tests/select_for_update/tests.py:187:36    - Unknown word (eucountry)  -- 'select_for_update_eucountry"."country_ptr_id',
+tests/select_for_update/tests.py:191:44    - Unknown word (eucountry)  -- ["select_for_update_eucountry", "select_for_update
+tests/select_for_update/tests.py:205:36    - Unknown word (eucity)     -- 'select_for_update_eucity"."id',
+tests/select_for_update/tests.py:206:36    - Unknown word (eucountry)  -- 'select_for_update_eucountry"."country_ptr_id',
+tests/select_for_update/tests.py:209:44    - Unknown word (eucity)     -- ["select_for_update_eucity", "select_for_update
+tests/select_for_update/tests.py:226:36    - Unknown word (eucity)     -- 'select_for_update_eucity"."id',
+tests/select_for_update/tests.py:230:44    - Unknown word (eucity)     -- ["select_for_update_eucity", "select_for_update
+tests/select_for_update/tests.py:384:14    - Unknown word (unsuported) -- def test_unsuported_no_key_raises_error
+tests/select_for_update/tests.py:45:48     - Unknown word (Liberchies) -- objects.create(name="Liberchies", country=self.country
+tests/select_for_update/tests.py:46:48     - Unknown word (Samois)     -- objects.create(name="Samois-sur-Seine", country
+tests/select_for_update/tests.py:528:45    - Unknown word (Grappeli)   -- objects.create(name="Grappeli", born=self.city1, died
 tests/select_related/models.py:31:7      - Unknown word (Klass)      -- class Klass(models.Model):
 tests/select_related/models.py:38:31     - Unknown word (Klass)      -- = models.ForeignKey(Klass, models.CASCADE)
 tests/select_related/models.py:38:5      - Unknown word (klass)      -- klass = models.ForeignKey

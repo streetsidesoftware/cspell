@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: [".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 2060, Issues found: 1579 in 298 files.
+ CSpell: Files checked: 2060, Issues found: 1590 in 300 files.
  exit code: 1
 Makefile.js:1018:18   - Unknown word (Multifiles) -- function downloadMultifilesTestTarget(cb) {
 Makefile.js:143:82    - Unknown word (ined)       -- followed by the string "ined".
@@ -230,6 +230,7 @@ lib/rules/no-caller.js:41:27     - Unknown word (calle)      -- propertyName.mat
 lib/rules/no-constant-binary-expression.js:55:59     - Unknown word (nullishness) -- statically knowable constant nullishness. Meaning,
 lib/rules/no-constant-binary-expression.js:64:21     - Unknown word (Nullishness) -- function hasConstantNullishness(scope, node, nonNullish
 lib/rules/no-else-return.js:396:10    - Unknown word (consequents) -- const consequents = [];
+lib/rules/no-empty-function.js:165:14    - Unknown word (etters)     -- if (/(g|s)etters|methods$/iu.test(kind
 lib/rules/no-extend-native.js:125:14    - Unknown word (Propert)    -- /^definePropert(?:y|ies)$/u,
 lib/rules/no-extra-parens.js:2:27      - Unknown word (parenthesising) -- fileoverview Disallow parenthesising higher precedence subexpressi
 lib/rules/no-extra-parens.js:346:46    - Unknown word (newed)          -- constructor function is newed-up with parens
@@ -371,6 +372,8 @@ tests/lib/rules/no-invalid-regexp.js:78:29     - Unknown word (Tangsa)      -- R
 tests/lib/rules/no-invalid-regexp.js:79:29     - Unknown word (Tnsa)        -- RegExp('\\\\p{Script=Tnsa}', 'u')",
 tests/lib/rules/no-invalid-regexp.js:81:29     - Unknown word (Vith)        -- RegExp('\\\\p{Script=Vith}', 'u')",
 tests/lib/rules/no-invalid-regexp.js:82:29     - Unknown word (Vithkuqi)    -- RegExp('\\\\p{Script=Vithkuqi}', 'u')",
+tests/lib/rules/no-loop-func.js:825:8     - Unknown word (Unconfigured) -- // UnconfiguredGlobalType is not defined
+tests/lib/rules/no-loop-func.js:841:52    - Unknown word (unconfig)     -- configItem: ConfiguredType, unconfigItem: UnconfiguredType
 tests/lib/rules/no-prototype-builtins.js:291:43    - Unknown word (Expresion)  -- OwnProperty is part of a ChainExpresion
 tests/lib/rules/no-prototype-builtins.js:48:28     - Unknown word (Enumerabl)  -- code: "foo?.['propertyIsEnumerabl']('bar')",
 tests/lib/rules/no-restricted-imports.js:806:27    - Unknown word (subimports) -- message: "some foo subimports are restricted",
@@ -403,7 +406,7 @@ tests/lib/rules/utils/ast-utils.js:1251:8    - Unknown word (ncde)       -- "ab\
 tests/lib/rules/utils/ast-utils.js:2028:10   - Unknown word (invalidtoken) -- [["123invalidtoken", "("], false],
 tests/lib/rules/valid-typeof.js:90:31     - Unknown word (umdefined)  -- if (typeof bar === 'umdefined') {}",
 tests/lib/shared/string-utils.js:40:6      - Unknown word (uppercases) -- it("uppercases the first letter of
-tests/lib/types/types.test.ts:817:7     - Unknown word (eslinter)   -- const eslinter = new ESLinter();
+tests/lib/types/types.test.ts:905:7     - Unknown word (eslinter)   -- const eslinter = new ESLinter();
 tests/performance/jshint.js:10347:35  - Unknown word (Ashkenas)                 -- c) 2009-2013 Jeremy Ashkenas, DocumentCloud Inc.
 tests/performance/jshint.js:10491:15  - Unknown word (foldl)                    -- // or `foldl`. Delegates to **ECMAScript
 tests/performance/jshint.js:10533:67  - Unknown word (foldr)                    -- reduce, also known as `foldr`.

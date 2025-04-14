@@ -4,8 +4,8 @@ Url: https://github.com/eslint/eslint
 Args: '[".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]'
 Summary:
   files: 2060
-  filesWithIssues: 298
-  issues: 1579
+  filesWithIssues: 300
+  issues: 1590
   errors: 0
 Errors: []
 
@@ -210,6 +210,7 @@ issues:
   - "lib/rules/no-constant-binary-expression.js:55:59        nullishness     U       statically knowable constant nullishness. Meaning,"
   - "lib/rules/no-constant-binary-expression.js:64:21        Nullishness     U       function hasConstantNullishness(scope, node, nonNullish"
   - "lib/rules/no-else-return.js:396:10      consequents     U       const consequents = [];"
+  - "lib/rules/no-empty-function.js:165:14       etters      U       if (/(g|s)etters|methods$/iu.test(kind"
   - "lib/rules/no-extend-native.js:125:14        Propert     U       /^definePropert(?:y|ies)$/u,"
   - "lib/rules/no-extra-parens.js:2:27           parenthesising      U       fileoverview Disallow parenthesising higher precedence subexpressi"
   - "lib/rules/no-extra-parens.js:346:46         newed               U       constructor function is newed-up with parens"
@@ -376,6 +377,8 @@ issues:
   - "tests/lib/rules/no-invalid-regexp.js:79:29          Tnsa            U       RegExp('\\\\\\\\p{Script=Tnsa}', 'u')\","
   - "tests/lib/rules/no-invalid-regexp.js:81:29          Vith            U       RegExp('\\\\\\\\p{Script=Vith}', 'u')\","
   - "tests/lib/rules/no-invalid-regexp.js:82:29          Vithkuqi        U       RegExp('\\\\\\\\p{Script=Vithkuqi}', 'u')\","
+  - "tests/lib/rules/no-loop-func.js:825:8       Unconfigured    U       // UnconfiguredGlobalType is not defined"
+  - "tests/lib/rules/no-loop-func.js:841:52      unconfig        U       configItem: ConfiguredType, unconfigItem: UnconfiguredType"
   - "tests/lib/rules/no-prototype-builtins.js:48:28          Enumerabl       U       code: \"foo?.['propertyIsEnumerabl']('bar')\","
   - "tests/lib/rules/no-prototype-builtins.js:291:43         Expresion       U       OwnProperty is part of a ChainExpresion"
   - "tests/lib/rules/no-restricted-imports.js:806:27         subimports      U       message: \"some foo subimports are restricted\","
@@ -408,7 +411,7 @@ issues:
   - "tests/lib/rules/utils/ast-utils.js:2028:10      invalidtoken    U       [[\"123invalidtoken\", \"(\"], false],"
   - "tests/lib/rules/valid-typeof.js:90:31       umdefined       U       if (typeof bar === 'umdefined') {}\","
   - "tests/lib/shared/string-utils.js:40:6           uppercases      U       it(\"uppercases the first letter of"
-  - "tests/lib/types/types.test.ts:817:7         eslinter    U       const eslinter = new ESLinter();"
+  - "tests/lib/types/types.test.ts:905:7         eslinter    U       const eslinter = new ESLinter();"
   - "tests/performance/jshint.js:91:14           shtylman                    U       // TODO(shtylman)"
   - "tests/performance/jshint.js:540:8           SVGCSS                      U       SVGCSSRule: false,"
   - "tests/performance/jshint.js:594:8           SVGH                        U       SVGHKernElement: false,"
@@ -674,6 +677,7 @@ issuesSummary:
   - "text: eslump, count: 5, files: 2,"
   - "text: estools, count: 1, files: 1,"
   - "text: esutils, count: 8, files: 3,"
+  - "text: etters, count: 1, files: 1,"
   - "text: Europese, count: 1, files: 1,"
   - "text: exportee, count: 1, files: 1,"
   - "text: Expresion, count: 2, files: 1,"
@@ -1025,7 +1029,9 @@ issuesSummary:
   - "text: unactivate, count: 1, files: 1,"
   - "text: unbegun, count: 1, files: 1,"
   - "text: Unbegun, count: 1, files: 1,"
-  - "text: unconfigured, count: 3, files: 2,"
+  - "text: unconfig, count: 3, files: 1,"
+  - "text: unconfigured, count: 5, files: 3,"
+  - "text: Unconfigured, count: 5, files: 1,"
   - "text: undefimed, count: 1, files: 1,"
   - "text: undefs, count: 4, files: 1,"
   - "text: Unie, count: 1, files: 1,"
