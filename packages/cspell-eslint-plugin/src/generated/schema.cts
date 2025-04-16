@@ -109,6 +109,11 @@ export const optionsSchema = {
                 "markdownDescription": "Optional description of the contents / purpose of the dictionary.",
                 "type": "string"
               },
+              "ignoreForbiddenWords": {
+                "description": "Some dictionaries may contain forbidden words to prevent compounding from generating words that are not valid in the language. These are often words that are used in other languages or might be generated through compounding. This setting allows flagged words to be ignored when checking the dictionary. The effect is similar to the word not being in the dictionary.",
+                "markdownDescription": "Some dictionaries may contain forbidden words to prevent compounding from generating\nwords that are not valid in the language. These are often\nwords that are used in other languages or might be generated through compounding.\nThis setting allows flagged words to be ignored when checking the dictionary.\nThe effect is similar to the word not being in the dictionary.",
+                "type": "boolean"
+              },
               "name": {
                 "description": "This is the name of a dictionary.\n\nName Format:\n- Must contain at least 1 number or letter.\n- Spaces are allowed.\n- Leading and trailing space will be removed.\n- Names ARE case-sensitive.\n- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`.",
                 "markdownDescription": "This is the name of a dictionary.\n\nName Format:\n- Must contain at least 1 number or letter.\n- Spaces are allowed.\n- Leading and trailing space will be removed.\n- Names ARE case-sensitive.\n- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`.",

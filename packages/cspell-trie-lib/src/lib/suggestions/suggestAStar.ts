@@ -1,14 +1,16 @@
 import type { TrieCost, WeightMap } from '../distance/weightedMaps.js';
-import type { ITrieNode, TrieOptions } from '../ITrieNode/index.js';
+import type { ITrieNode, TrieOptionsRO } from '../ITrieNode/index.js';
 import { CompoundWordsMethod, JOIN_SEPARATOR, WORD_SEPARATOR } from '../ITrieNode/walker/index.js';
 import type { TrieData } from '../TrieData.js';
 import { PairingHeap } from '../utils/PairingHeap.js';
 import { opCosts } from './constants.js';
-import type { SuggestionOptions } from './genSuggestionsOptions.js';
+import type { SuggestionOptionsRO } from './genSuggestionsOptions.js';
 import { createSuggestionOptions } from './genSuggestionsOptions.js';
 import { visualLetterMaskMap } from './orthography.js';
 import { suggestionCollector } from './suggestCollector.js';
 import type { SuggestionGenerator, SuggestionResult } from './SuggestionTypes.js';
+
+type RO<T> = Readonly<T>;
 
 type Cost = number;
 // type BranchIdx = number;
@@ -48,7 +50,7 @@ function comparePath(a: PNode, b: PNode): number {
     return a.c / (a.i + 1) - b.c / (b.i + 1) + (b.i - a.i);
 }
 
-export function suggestAStar(trie: TrieData, word: string, options: SuggestionOptions = {}): SuggestionResult[] {
+export function suggestAStar(trie: TrieData, word: string, options: SuggestionOptionsRO = {}): SuggestionResult[] {
     const opts = createSuggestionOptions(options);
     const collector = suggestionCollector(word, opts);
     collector.collect(getSuggestionsAStar(trie, word, opts));
@@ -58,7 +60,7 @@ export function suggestAStar(trie: TrieData, word: string, options: SuggestionOp
 export function* getSuggestionsAStar(
     trie: TrieData,
     srcWord: string,
-    options: SuggestionOptions = {},
+    options: SuggestionOptionsRO = {},
 ): SuggestionGenerator {
     const { compoundMethod, changeLimit, ignoreCase, weightMap } = createSuggestionOptions(options);
     const visMap = visualLetterMaskMap;
@@ -293,7 +295,7 @@ function insLetters(p: PNode, weightMap: WeightMap, _letters: string[], storePat
     });
 }
 
-function repLetters(pNode: PNode, weightMap: WeightMap, letters: string[], storePath: FnStorePath) {
+function repLetters(pNode: RO<PNode>, weightMap: WeightMap, letters: string[], storePath: FnStorePath) {
     const node = pNode.n;
     const pt = pNode.t;
     const cost0 = pNode.c;
@@ -324,7 +326,7 @@ function createCostTrie(): CostTrie {
     return { c: [], t: Object.create(null) };
 }
 
-function getCostTrie(t: CostTrie, s: string) {
+function getCostTrie(t: RO<CostTrie>, s: string) {
     if (s.length == 1) {
         return (t.t[s] ??= createCostTrie());
     }
@@ -338,9 +340,9 @@ function getCostTrie(t: CostTrie, s: string) {
     return tt;
 }
 
-function pNodeToWord(p: PNode): string {
+function pNodeToWord(p: RO<PNode>): string {
     const parts: string[] = [];
-    let n: PNode | undefined = p;
+    let n: RO<PNode> | undefined = p;
     while (n) {
         parts.push(n.s);
         n = n.p;
@@ -349,15 +351,17 @@ function pNodeToWord(p: PNode): string {
     return parts.join('');
 }
 
-function specialChars(options: TrieOptions): Record<string, true | undefined> {
+function specialChars(options: TrieOptionsRO): Record<string, true | undefined> {
     const charSet: Record<string, true | undefined> = Object.create(null);
     for (const c of Object.values(options)) {
-        charSet[c] = true;
+        if (typeof c === 'string') {
+            charSet[c] = true;
+        }
     }
     return charSet;
 }
 
-function orderNodes(p: PNode): PNode[] {
+function orderNodes(p: RO<PNode>): PNode[] {
     const nodes: PNode[] = [];
     let n: PNode | undefined = p;
     while (n) {
@@ -367,7 +371,7 @@ function orderNodes(p: PNode): PNode[] {
     return nodes.reverse();
 }
 
-function editHistory(p: PNode) {
+function editHistory(p: RO<PNode>) {
     const nodes = orderNodes(p);
     return nodes.map((n) => ({ i: n.i, c: n.c, a: n.a, s: n.s }));
 }
@@ -398,14 +402,14 @@ function prefixLines(content: string, prefix: string): string {
         .join('\n');
 }
 
-function serializeCostTrie(p: PNode): string {
+function serializeCostTrie(p: RO<PNode>): string {
     while (p.p) {
         p = p.p;
     }
     return _serializeCostTrie(p.t);
 }
 
-function _serializeCostTrie(t: CostTrie): string {
+function _serializeCostTrie(t: RO<CostTrie>): string {
     const lines: string[] = [];
     lines.push(`:: [${t.c.join(',')}]`);
     for (const [letter, child] of Object.entries(t.t)) {

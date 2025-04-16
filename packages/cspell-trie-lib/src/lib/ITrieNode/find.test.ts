@@ -1,7 +1,9 @@
 import { describe, expect, test } from 'vitest';
 
 import { parseDictionaryLegacy } from '../SimpleDictionaryParser.js';
+import { FastTrieBlobBuilder } from '../TrieBlob/FastTrieBlobBuilder.js';
 import type { TrieData } from '../TrieData.js';
+import { TrieRoot } from '../TrieNode/TrieNode.js';
 import { TrieNodeTrie } from '../TrieNode/TrieNodeTrie.js';
 import { __testing__, createFindOptions, findLegacyCompound, findWord } from './find.js';
 import type { PartialFindOptions } from './FindOptions.js';
@@ -10,7 +12,13 @@ import { FindFullResult } from './ITrieNode.js';
 const findLegacyCompoundWord = __testing__.findLegacyCompoundWord;
 
 describe('Validate findWord', () => {
-    const trie = dictionary().getRoot();
+    const trie = dictionaryTrieNodeTrie().getRoot();
+    const trieBlob = dictionaryTrieBlob().getRoot();
+
+    const cModeC = { compoundMode: 'compound' };
+    const mCaseT = { matchCase: true };
+    const mCaseF = { matchCase: false };
+    const ckForbidT = { checkForbidden: true };
 
     // cspell:ignore bluemsg
     test.each`
@@ -22,9 +30,27 @@ describe('Validate findWord', () => {
         ${'bluemsg'}   | ${{ matchCase: false, compoundMode: 'compound' }} | ${{ found: 'bluemsg', compoundUsed: true, forbidden: false, caseMatched: true }}
         ${'code'}      | ${{ matchCase: true, compoundMode: 'none' }}      | ${{ found: 'code', compoundUsed: false, forbidden: false, caseMatched: true }}
         ${'code'}      | ${{ matchCase: true, compoundMode: 'compound' }}  | ${{ found: 'code', compoundUsed: false, forbidden: undefined, caseMatched: true }}
+        ${'apple'}     | ${{ ...mCaseT, ...cModeC }}                       | ${{ found: 'apple', compoundUsed: false, forbidden: undefined, caseMatched: true }}
+        ${'apple'}     | ${{ ...mCaseT, ...cModeC, ...ckForbidT }}         | ${{ found: 'apple', compoundUsed: false, forbidden: true, caseMatched: true }}
     `('find exact words preserve case "$word" $opts', ({ word, opts, expected }) => {
         // Code is not allowed as a full word.
         expect(findWord(trie, word, opts)).toEqual(expected);
+    });
+
+    test.each`
+        word           | opts                                              | expected
+        ${'blueerror'} | ${{ matchCase: true, compoundMode: 'none' }}      | ${{ found: false, compoundUsed: false, forbidden: true, caseMatched: true }}
+        ${'blueerror'} | ${{ matchCase: true, compoundMode: 'compound' }}  | ${{ found: false, compoundUsed: true, forbidden: undefined, caseMatched: true }}
+        ${'blueCode'}  | ${{ matchCase: true, compoundMode: 'compound' }}  | ${{ found: 'blueCode', compoundUsed: true, forbidden: true, caseMatched: true }}
+        ${'bluecode'}  | ${{ ...mCaseF, ...cModeC }}                       | ${{ found: 'bluecode', compoundUsed: true, forbidden: true, caseMatched: false }}
+        ${'bluemsg'}   | ${{ matchCase: false, compoundMode: 'compound' }} | ${{ found: 'bluemsg', compoundUsed: true, forbidden: false, caseMatched: true }}
+        ${'code'}      | ${{ matchCase: true, compoundMode: 'none' }}      | ${{ found: 'code', compoundUsed: false, forbidden: false, caseMatched: true }}
+        ${'code'}      | ${{ matchCase: true, compoundMode: 'compound' }}  | ${{ found: 'code', compoundUsed: false, forbidden: undefined, caseMatched: true }}
+        ${'apple'}     | ${{ ...mCaseT, ...cModeC }}                       | ${{ found: 'apple', compoundUsed: false, forbidden: undefined, caseMatched: true }}
+        ${'apple'}     | ${{ ...mCaseT, ...cModeC, ...ckForbidT }}         | ${{ found: 'apple', compoundUsed: false, forbidden: true, caseMatched: true }}
+    `('find exact words preserve case "$word" $opts', ({ word, opts, expected }) => {
+        // Code is not allowed as a full word.
+        expect(findWord(trieBlob, word, opts)).toEqual(expected);
     });
 
     const ncf = { checkForbidden: false };
@@ -157,7 +183,7 @@ describe('Validate Legacy Compound lookup', () => {
         ${'codeerrors'} | ${true}     | ${true}
         ${'cafecode'}   | ${true}     | ${true}
     `('compound words "$word" compoundLen: $compoundLen', ({ word, compoundLen, expected }) => {
-        const trie = dictionary();
+        const trie = dictionaryTrieNodeTrie();
         function has(word: string, minLegacyCompoundLength: true | number): boolean {
             const len = minLegacyCompoundLength !== true ? minLegacyCompoundLength : 3;
             const findOptions = createFindOptions({ legacyMinCompoundLength: len });
@@ -197,7 +223,7 @@ function frCompoundFound(found: string | false, r: PartialFindFullResult = {}): 
 }
 
 // cspell:ignore blueerror bluecode
-function dictionary(): TrieData {
+function dictionaryTrieRoot(): TrieRoot {
     // camel case dictionary
     const trie = parseDictionaryLegacy(`
         café*
@@ -217,8 +243,19 @@ function dictionary(): TrieData {
         !blueerror
         ~!bluecode
         !blueCode
+        apple
+        !apple
     `);
-    return new TrieNodeTrie(trie.root);
+    return trie.root;
+}
+
+function dictionaryTrieNodeTrie(): TrieData {
+    return new TrieNodeTrie(dictionaryTrieRoot());
+}
+
+function dictionaryTrieBlob(): TrieData {
+    const ft = FastTrieBlobBuilder.fromTrieRoot(dictionaryTrieRoot());
+    return ft.toTrieBlob();
 }
 
 const sampleWords = [

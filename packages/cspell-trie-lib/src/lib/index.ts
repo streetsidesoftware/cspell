@@ -13,7 +13,7 @@ export { decodeTrie } from './decodeTrie.js';
 export type { WeightMap } from './distance/index.js';
 export { createWeightedMap, editDistance, editDistanceWeighted } from './distance/index.js';
 export { type ExportOptions, importTrie, serializeTrie } from './io/importExport.js';
-export type { ITrie } from './ITrie.js';
+export type { FindWordOptions, ITrie } from './ITrie.js';
 export { mapDictionaryInformationToWeightMap } from './mappers/mapDictionaryInfoToWeightMap.js';
 export type { SuggestionCostMapDef } from './models/suggestionCostsDef.js';
 export {
@@ -24,7 +24,7 @@ export {
 } from './SimpleDictionaryParser.js';
 export type { MaxCost, SuggestionCollector, SuggestionResult } from './suggestCollector.js';
 export { impersonateCollector, suggestionCollector } from './suggestCollector.js';
-export type { FindWordOptions, PartialTrieOptions, TrieOptions } from './trie.js';
+export type { PartialTrieOptions, TrieOptions, TrieOptionsRO } from './trie.js';
 export { Trie } from './trie.js';
 export { buildTrie, buildTrieFast, TrieBuilder } from './TrieBuilder.js';
 export type { FindFullResult } from './TrieNode/find.js';

@@ -1,9 +1,10 @@
 import { opAppend, opFilter, opMap, pipe } from '@cspell/cspell-pipe/sync';
 
+import { FindWordOptionsRO } from './ITrie.js';
 import type { PartialTrieInfo, TrieInfo } from './ITrieNode/TrieInfo.js';
 import { genSuggestions, suggest } from './suggest.js';
 import type { SuggestionCollector, SuggestionResult } from './suggestCollector.js';
-import type { SuggestionOptions } from './suggestions/genSuggestionsOptions.js';
+import type { SuggestionOptionsRO } from './suggestions/genSuggestionsOptions.js';
 import type { FindFullResult, FindOptions, PartialFindOptions } from './TrieNode/find.js';
 import { createFindOptions, findLegacyCompound, findWord, findWordNode, isForbiddenWord } from './TrieNode/find.js';
 import {
@@ -21,7 +22,9 @@ import { replaceAllFactory } from './utils/util.js';
 import type { CompoundWordsMethod, WalkerIterator } from './walker/index.js';
 import { walker } from './walker/index.js';
 
-export type { PartialTrieInfo as PartialTrieOptions, TrieInfo as TrieOptions } from './ITrieNode/TrieInfo.js';
+export type { PartialTrieOptions, PartialTrieOptionsRO, TrieOptions, TrieOptionsRO } from './ITrieNode/index.js';
+
+type RO<T> = Readonly<T>;
 
 const defaultLegacyMinCompoundLength = 3;
 
@@ -99,7 +102,7 @@ export class Trie {
         return !!f.found && !f.forbidden;
     }
 
-    findWord(word: string, options?: FindWordOptions): FindFullResult {
+    findWord(word: string, options?: FindWordOptionsRO): FindFullResult {
         if (options?.useLegacyWordCompounds) {
             const len =
                 options.useLegacyWordCompounds !== true
@@ -145,7 +148,7 @@ export class Trie {
      * @param numChanges - the maximum number of changes allowed to text. This is an approximate value, since some changes cost less than others.
      *                      the lower the value, the faster results are returned. Values less than 4 are best.
      */
-    suggest(text: string, options: SuggestionOptions): string[] {
+    suggest(text: string, options: SuggestionOptionsRO): string[] {
         return this.suggestWithCost(text, options).map((a) => a.word);
     }
 
@@ -153,7 +156,7 @@ export class Trie {
      * Suggest spellings for `text`.  The results are sorted by edit distance with changes near the beginning of a word having a greater impact.
      * The results include the word and adjusted edit cost.  This is useful for merging results from multiple tries.
      */
-    suggestWithCost(text: string, options: SuggestionOptions): SuggestionResult[] {
+    suggestWithCost(text: string, options: SuggestionOptionsRO): SuggestionResult[] {
         const sep = options.compoundSeparator;
         const adjWord = sep ? replaceAllFactory(sep, '') : (a: string) => a;
         const optFilter = options.filter;
@@ -214,7 +217,7 @@ export class Trie {
         return new Trie(root, undefined);
     }
 
-    private createFindOptions(options: PartialFindOptions = {}): FindOptions {
+    private createFindOptions(options: RO<PartialFindOptions> = {}): FindOptions {
         const findOptions = createFindOptions({
             ...this._findOptionsDefaults,
             ...options,
@@ -230,9 +233,4 @@ export class Trie {
         this.lastCreateFindOptionsMatchCaseMap.set(matchCase, findOptions);
         return findOptions;
     }
-}
-
-export interface FindWordOptions {
-    caseSensitive?: boolean;
-    useLegacyWordCompounds?: boolean | number;
 }

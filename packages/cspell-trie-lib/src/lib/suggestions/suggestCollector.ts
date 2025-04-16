@@ -6,7 +6,7 @@ import { startTimer } from '../utils/timer.js';
 import { clean, regexQuote, replaceAllFactory } from '../utils/util.js';
 import { WORD_SEPARATOR } from '../walker/index.js';
 import { DEFAULT_COMPOUNDED_WORD_SEPARATOR } from './constants.js';
-import type { GenSuggestionOptions, GenSuggestionOptionsStrict } from './genSuggestionsOptions.js';
+import type { GenSuggestionOptionsRO, GenSuggestionOptionsStrictRO } from './genSuggestionsOptions.js';
 import type {
     GenerateSuggestionResult,
     MaxCost,
@@ -67,14 +67,14 @@ export interface SuggestionCollector {
     readonly maxNumSuggestions: number;
     readonly includesTies: boolean;
     readonly ignoreCase: boolean;
-    readonly genSuggestionOptions: GenSuggestionOptions;
+    readonly genSuggestionOptions: GenSuggestionOptionsRO;
     /**
      * Possible value sent to the SuggestionIterator telling it to stop processing.
      */
     readonly symbolStopProcessing: symbol;
 }
 
-export interface SuggestionCollectorOptions extends Omit<GenSuggestionOptionsStrict, 'ignoreCase' | 'changeLimit'> {
+export interface SuggestionCollectorOptions extends Omit<GenSuggestionOptionsStrictRO, 'ignoreCase' | 'changeLimit'> {
     /**
      * number of best matching suggestions.
      * @default 10
@@ -118,7 +118,9 @@ export interface SuggestionCollectorOptions extends Omit<GenSuggestionOptionsStr
     weightMap?: WeightMap | undefined;
 }
 
-export const defaultSuggestionCollectorOptions: RequireOptional<SuggestionCollectorOptions> = Object.freeze({
+export type SuggestionCollectorOptionsRO = Readonly<SuggestionCollectorOptions>;
+
+export const defaultSuggestionCollectorOptions: Readonly<RequireOptional<SuggestionCollectorOptions>> = Object.freeze({
     numSuggestions: defaultMaxNumberSuggestions,
     filter: () => true,
     changeLimit: MAX_NUM_CHANGES,
@@ -130,7 +132,7 @@ export const defaultSuggestionCollectorOptions: RequireOptional<SuggestionCollec
     compoundMethod: undefined,
 });
 
-export function suggestionCollector(wordToMatch: string, options: SuggestionCollectorOptions): SuggestionCollector {
+export function suggestionCollector(wordToMatch: string, options: SuggestionCollectorOptionsRO): SuggestionCollector {
     const {
         filter = () => true,
         changeLimit = MAX_NUM_CHANGES,
@@ -157,7 +159,7 @@ export function suggestionCollector(wordToMatch: string, options: SuggestionColl
         addDefToWeightMap(weightMap, { map: useSeparator, insDel: 50 });
     }
 
-    const genSuggestionOptions: GenSuggestionOptions = clean({
+    const genSuggestionOptions: GenSuggestionOptionsRO = clean({
         changeLimit,
         ignoreCase,
         compoundMethod: options.compoundMethod,

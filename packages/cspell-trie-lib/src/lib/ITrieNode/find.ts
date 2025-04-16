@@ -41,19 +41,23 @@ export function findWordNode(root: Root, word: string, options?: PartialFindOpti
 export function findWord(root: Root, word: string, options?: PartialFindOptions): FindFullResult {
     if (root.find) {
         const found = root.find(word, options?.matchCase || false);
-        if (found) return found as FindFullResult;
+        if (found) {
+            if (options?.checkForbidden && found.forbidden === undefined) {
+                found.forbidden = isForbiddenWord(root, word, root.forbidPrefix);
+            }
+            return found as FindFullNodeResult;
+        }
         if (!root.hasCompoundWords) {
             return notFound;
         }
     }
     // return { found: false, compoundUsed: false, caseMatched: false, forbidden: false };
-    const v = _findWordNode(root, word, options);
-    return {
-        found: v.found,
-        compoundUsed: v.compoundUsed,
-        caseMatched: v.caseMatched,
-        forbidden: v.forbidden,
-    };
+    const { found, compoundUsed, caseMatched, forbidden } = _findWordNode(root, word, options);
+    const result = { found, compoundUsed, caseMatched, forbidden };
+    if (options?.checkForbidden && forbidden === undefined) {
+        result.forbidden = isForbiddenWord(root, word, root.forbidPrefix);
+    }
+    return result;
 }
 
 /**
@@ -68,18 +72,18 @@ function _findWordNode(root: Root, word: string, options: PartialFindOptions): F
     const compoundMode = knownCompoundModes.get(options?.compoundMode) || _defaultFindOptions.compoundMode;
     const compoundPrefix = compoundMode === 'compound' ? (trieInfo.compoundCharacter ?? root.compoundFix) : '';
     const ignoreCasePrefix = matchCase ? '' : (trieInfo.stripCaseAndAccentsPrefix ?? root.caseInsensitivePrefix);
+    const mustCheckForbidden = options?.checkForbidden === true;
     const checkForbidden = options?.checkForbidden ?? true;
 
     function __findCompound(): FindFullNodeResult {
         const f = findCompoundWord(root, word, compoundPrefix, ignoreCasePrefix);
-        const result: FindFullNodeResult = { ...f };
-        if (f.found !== false && f.compoundUsed) {
+        if (f.found !== false && (mustCheckForbidden || (f.compoundUsed && checkForbidden))) {
             // If case was ignored when searching for the word, then check the forbidden
             // in the ignore case forbidden list.
             const r = !f.caseMatched ? walk(root, root.caseInsensitivePrefix) : root;
-            result.forbidden = checkForbidden ? isForbiddenWord(r, word, root.forbidPrefix) : undefined;
+            f.forbidden = isForbiddenWord(r, word, root.forbidPrefix);
         }
-        return result;
+        return f;
     }
 
     function __findExact(): FindFullNodeResult {

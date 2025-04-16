@@ -36,6 +36,8 @@ export interface SuggestOptions {
     timeout?: number | undefined;
 }
 
+export type SuggestOptionsRO = Readonly<SuggestOptions>;
+
 export function createSuggestOptions(
     numSuggestions?: number,
     compoundMethod?: CompoundWordsMethod,

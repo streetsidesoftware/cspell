@@ -23,14 +23,18 @@ export interface DictionaryDefinitionBase {
      * - Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`.
      */
     name: DictionaryId;
+
     /**
      * Optional description of the contents / purpose of the dictionary.
      */
     description?: string;
+
     /** Replacement pairs. */
     repMap?: ReplaceMap;
+
     /** Use Compounds. */
     useCompounds?: boolean;
+
     /**
      * Indicate that suggestions should not come from this dictionary.
      * Words in this dictionary are considered correct, but will not be
@@ -41,6 +45,16 @@ export interface DictionaryDefinitionBase {
      * possible suggestions.
      */
     noSuggest?: boolean | undefined;
+
+    /**
+     * Some dictionaries may contain forbidden words to prevent compounding from generating
+     * words that are not valid in the language. These are often
+     * words that are used in other languages or might be generated through compounding.
+     * This setting allows flagged words to be ignored when checking the dictionary.
+     * The effect is similar to the word not being in the dictionary.
+     */
+    ignoreForbiddenWords?: boolean | undefined;
+
     /**
      * Type of file:
      * - S - single word per line,
@@ -89,21 +103,30 @@ interface DictionaryDefinitionInlineBase extends DictionaryDefinitionBase, Inlin
      * @hidden
      */
     path?: undefined;
+
     /**
      * Not used
      * @hidden
      */
     file?: undefined;
+
     /**
      * Not used
      * @hidden
      */
     type?: DictionaryDefinitionBase['type'];
+
     /**
      * Use `ignoreWords` instead.
      * @hidden
      */
     noSuggest?: DictionaryDefinitionBase['noSuggest'];
+
+    /**
+     * Not used
+     * @hidden
+     */
+    ignoreForbiddenWords?: undefined;
 }
 
 export interface DictionaryDefinitionInlineWords

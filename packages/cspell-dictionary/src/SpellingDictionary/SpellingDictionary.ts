@@ -1,7 +1,7 @@
 import type { DictionaryInformation, ReplaceMap } from '@cspell/cspell-types';
 import type { SuggestionCollector, SuggestionResult, WeightMap } from 'cspell-trie-lib';
 
-import type { SuggestOptions } from './SuggestOptions.js';
+import type { SuggestOptionsRO } from './SuggestOptions.js';
 
 export type { DictionaryDefinitionInline } from '@cspell/cspell-types';
 
@@ -18,7 +18,10 @@ export interface SearchOptions {
     ignoreCase?: boolean | undefined;
 }
 
+export type SearchOptionsRO = Readonly<SearchOptions>;
+
 export type FindOptions = SearchOptions;
+export type FindOptionsRO = Readonly<FindOptions>;
 
 export interface Suggestion {
     word: string;
@@ -39,24 +42,37 @@ export interface FindResult {
 }
 
 export type HasOptions = SearchOptions;
+export type HasOptionsRO = Readonly<HasOptions>;
 
 export type IgnoreCaseOption = boolean;
 
 export interface SpellingDictionaryOptions {
     repMap?: ReplaceMap;
+
     /**
      * The dictionary is case aware.
      */
     caseSensitive?: boolean;
+
     /**
      * This is a NO Suggest dictionary used for words to be ignored.
      */
     noSuggest?: boolean | undefined;
+
+    /**
+     * Some dictionaries may contain flagged words that are not valid in the language. These are often
+     * words that are used in other languages or might be generated through compounding.
+     * This setting allows flagged words to be ignored when checking the dictionary.
+     * The effect is similar to the word not being in the dictionary.
+     */
+    ignoreForbiddenWords?: boolean | undefined;
+
     /**
      * Extra dictionary information used in improving suggestions
      * based upon locale.
      */
     dictionaryInformation?: DictionaryInformation;
+
     /**
      * Strip Case and Accents to allow for case insensitive searches and
      * words without accents.
@@ -67,16 +83,20 @@ export interface SpellingDictionaryOptions {
      * @default true
      */
     supportNonStrictSearches?: boolean;
+
     /**
      * Turns on legacy word compounds.
      * @deprecated
      */
     useCompounds?: boolean;
+
     /**
      * Optional WeightMap used to improve suggestions.
      */
     weightMap?: WeightMap | undefined;
 }
+
+export type SpellingDictionaryOptionsRO = Readonly<SpellingDictionaryOptions>;
 
 export interface DictionaryInfo {
     /** The name of the dictionary */
@@ -90,9 +110,9 @@ export interface DictionaryInfo {
 export interface SpellingDictionary extends DictionaryInfo {
     readonly type: string;
     readonly containsNoSuggestWords: boolean;
-    has(word: string, options?: HasOptions): boolean;
+    has(word: string, options?: HasOptionsRO): boolean;
     /** A more detailed search for a word, might take longer than `has` */
-    find(word: string, options?: SearchOptions): FindResult | undefined;
+    find(word: string, options?: SearchOptionsRO): FindResult | undefined;
     /**
      * Checks if a word is forbidden.
      * @param word - word to check.
@@ -105,17 +125,17 @@ export interface SpellingDictionary extends DictionaryInfo {
      * @param word - word to check
      * @param options - options
      */
-    isNoSuggestWord(word: string, options: HasOptions): boolean;
+    isNoSuggestWord(word: string, options: HasOptionsRO): boolean;
     /**
      * Generate suggestions for a word
      * @param word - word
      * @param suggestOptions - options
      */
-    suggest(word: string, suggestOptions?: SuggestOptions): SuggestionResult[];
+    suggest(word: string, suggestOptions?: SuggestOptionsRO): SuggestionResult[];
 
     getPreferredSuggestions?: (word: string) => PreferredSuggestion[];
 
-    genSuggestions(collector: SuggestionCollector, suggestOptions: SuggestOptions): void;
+    genSuggestions(collector: SuggestionCollector, suggestOptions: SuggestOptionsRO): void;
     mapWord(word: string): string;
     /**
      * Generates all possible word combinations by applying `repMap`.
