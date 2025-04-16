@@ -11,7 +11,6 @@ describe('Validate ignoreForbiddenWords', () => {
     test('samples/ignore-forbidden-dutch-words/README.md', { timeout }, async () => {
         const configFile = await cspell.readConfigFile(new URL('cspell.config.mjs', dutchSampleUrl));
         const result = await cspell.spellCheckDocument({ uri: dutchSampleReadme.href }, {}, configFile);
-        console.error('%o', result);
         expect(result).toBeDefined();
         expect(result.issues).toHaveLength(0);
     });
