@@ -186,7 +186,7 @@ describe('Verify Case Sensitive Dictionaries', () => {
     });
 });
 
-describe.only('test ignoreForbiddenWordsOption', () => {
+describe('test ignoreForbiddenWordsOption', () => {
     const words = [
         'apple',
         'ape',
@@ -212,7 +212,7 @@ describe.only('test ignoreForbiddenWordsOption', () => {
         expect(dict.isForbidden('berry')).toBe(false);
     });
 
-    test.only('forbidden words are found', () => {
+    test('forbidden words are found', () => {
         const dict = createSpellingDictionary(words, 'words', 'test', opts({ ignoreForbiddenWords: false }));
         expect(dict.has('apple')).toBe(true);
         expect(dict.find('apple')).toEqual({ found: 'apple', forbidden: true, noSuggest: false });
