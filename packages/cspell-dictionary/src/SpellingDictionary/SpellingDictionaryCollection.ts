@@ -5,13 +5,13 @@ import { isDefined } from '../util/util.js';
 import * as Defaults from './defaults.js';
 import type {
     FindResult,
-    HasOptions,
-    SearchOptions,
+    HasOptionsRO,
+    SearchOptionsRO,
     SpellingDictionary,
-    SpellingDictionaryOptions,
+    SpellingDictionaryOptionsRO,
 } from './SpellingDictionary.js';
 import { defaultNumSuggestions, hasOptionToSearchOption, suggestionCollector } from './SpellingDictionaryMethods.js';
-import type { SuggestOptions } from './SuggestOptions.js';
+import type { SuggestOptionsRO } from './SuggestOptions.js';
 
 function identityString(w: string): string {
     return w;
@@ -24,7 +24,7 @@ export interface SpellingDictionaryCollection extends SpellingDictionary {
 }
 
 class SpellingDictionaryCollectionImpl implements SpellingDictionaryCollection {
-    readonly options: SpellingDictionaryOptions = { weightMap: undefined };
+    readonly options: SpellingDictionaryOptionsRO = { weightMap: undefined };
     readonly mapWord = identityString;
     readonly type = 'SpellingDictionaryCollection';
     readonly source: string;
@@ -42,17 +42,17 @@ class SpellingDictionaryCollectionImpl implements SpellingDictionaryCollection {
         this.containsNoSuggestWords = this.dictionaries.reduce((a, b) => a || b.containsNoSuggestWords, false);
     }
 
-    public has(word: string, hasOptions?: HasOptions): boolean {
+    public has(word: string, hasOptions?: HasOptionsRO): boolean {
         const options = hasOptionToSearchOption(hasOptions);
         return !!isWordInAnyDictionary(this.dictionaries, word, options) && !this.isForbidden(word);
     }
 
-    public find(word: string, hasOptions?: HasOptions): FindResult | undefined {
+    public find(word: string, hasOptions?: HasOptionsRO): FindResult | undefined {
         const options = hasOptionToSearchOption(hasOptions);
         return findInAnyDictionary(this.dictionaries, word, options);
     }
 
-    public isNoSuggestWord(word: string, options?: HasOptions): boolean {
+    public isNoSuggestWord(word: string, options?: HasOptionsRO): boolean {
         return this._isNoSuggestWord(word, options);
     }
 
@@ -61,11 +61,11 @@ class SpellingDictionaryCollectionImpl implements SpellingDictionaryCollection {
         return !!this._isForbiddenInDict(word, ignoreCase) && !this.isNoSuggestWord(word, { ignoreCase });
     }
 
-    public suggest(word: string, suggestOptions: SuggestOptions = {}): SuggestionResult[] {
+    public suggest(word: string, suggestOptions: SuggestOptionsRO = {}): SuggestionResult[] {
         return this._suggest(word, suggestOptions);
     }
 
-    public _suggest(word: string, suggestOptions: SuggestOptions): SuggestionResult[] {
+    public _suggest(word: string, suggestOptions: SuggestOptionsRO): SuggestionResult[] {
         const { numSuggestions = defaultNumSuggestions, numChanges, ignoreCase, includeTies, timeout } = suggestOptions;
         const prefixNoCase = CASE_INSENSITIVE_PREFIX;
         const filter = (word: string, _cost: number) => {
@@ -103,7 +103,7 @@ class SpellingDictionaryCollectionImpl implements SpellingDictionaryCollection {
         });
     }
 
-    public genSuggestions(collector: SuggestionCollector, suggestOptions: SuggestOptions): void {
+    public genSuggestions(collector: SuggestionCollector, suggestOptions: SuggestOptionsRO): void {
         const _suggestOptions = { ...suggestOptions };
         const { compoundMethod = CompoundWordsMethod.SEPARATE_WORDS } = suggestOptions;
         _suggestOptions.compoundMethod = this.options.useCompounds ? CompoundWordsMethod.JOIN_WORDS : compoundMethod;
@@ -118,7 +118,7 @@ class SpellingDictionaryCollectionImpl implements SpellingDictionaryCollection {
         return isWordForbiddenInAnyDictionary(this.dictionaries, word, ignoreCase);
     }
 
-    private _isNoSuggestWord = (word: string, options?: HasOptions) => {
+    private _isNoSuggestWord = (word: string, options?: HasOptionsRO) => {
         if (!this.containsNoSuggestWords) return false;
         return !!isNoSuggestWordInAnyDictionary(this.dictionaries, word, options || {});
     };
@@ -135,7 +135,7 @@ export function createCollection(
 function isWordInAnyDictionary(
     dicts: SpellingDictionary[],
     word: string,
-    options: SearchOptions,
+    options: SearchOptionsRO,
 ): SpellingDictionary | undefined {
     return dicts.find((dict) => dict.has(word, options));
 }
@@ -143,7 +143,7 @@ function isWordInAnyDictionary(
 function findInAnyDictionary(
     dicts: SpellingDictionary[],
     word: string,
-    options: SearchOptions,
+    options: SearchOptionsRO,
 ): FindResult | undefined {
     const found = dicts.map((dict) => dict.find(word, options)).filter(isDefined);
     if (!found.length) return undefined;
@@ -157,7 +157,7 @@ function findInAnyDictionary(
 function isNoSuggestWordInAnyDictionary(
     dicts: SpellingDictionary[],
     word: string,
-    options: HasOptions,
+    options: HasOptionsRO,
 ): SpellingDictionary | undefined {
     return dicts.find((dict) => dict.isNoSuggestWord(word, options));
 }

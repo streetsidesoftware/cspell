@@ -153,8 +153,11 @@ describe('Verify using multiple dictionaries', () => {
 
     test('checks for compound suggestions', async () => {
         // Add "wordsA" twice, once as a compound dictionary and once as a normal dictionary.
-        const trie = new SpellingDictionaryFromTrie(Trie.buildITrieFromWords(wordsA), 'wordsA', opts());
-        trie.options.useCompounds = true;
+        const trie = new SpellingDictionaryFromTrie(
+            Trie.buildITrieFromWords(wordsA),
+            'wordsA',
+            opts({ useCompounds: true }),
+        );
         const dicts = await Promise.all([
             trie,
             createSpellingDictionary(wordsB, 'wordsB', 'test', undefined),
@@ -173,8 +176,11 @@ describe('Verify using multiple dictionaries', () => {
 
     test('checks for compound NONE suggestions', async () => {
         // Add "wordsA" twice, once as a compound dictionary and once as a normal dictionary.
-        const trie = new SpellingDictionaryFromTrie(Trie.buildITrieFromWords(wordsA), 'wordsA', opts());
-        trie.options.useCompounds = true;
+        const trie = new SpellingDictionaryFromTrie(
+            Trie.buildITrieFromWords(wordsA),
+            'wordsA',
+            opts({ useCompounds: true }),
+        );
         const dicts = await Promise.all([
             trie,
             createSpellingDictionary(wordsB, 'wordsB', 'test', undefined),
@@ -196,8 +202,11 @@ describe('Verify using multiple dictionaries', () => {
 
     test('checks for compound JOIN_WORDS suggestions', async () => {
         // Add "wordsA" twice, once as a compound dictionary and once as a normal dictionary.
-        const trie = new SpellingDictionaryFromTrie(Trie.buildITrieFromWords(wordsA), 'wordsA', opts());
-        trie.options.useCompounds = true;
+        const trie = new SpellingDictionaryFromTrie(
+            Trie.buildITrieFromWords(wordsA),
+            'wordsA',
+            opts({ useCompounds: true }),
+        );
         const dicts = await Promise.all([
             trie,
             createSpellingDictionary(wordsB, 'wordsB', 'test', undefined),

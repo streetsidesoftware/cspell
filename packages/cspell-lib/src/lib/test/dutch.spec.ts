@@ -1,4 +1,5 @@
 import * as fs from 'node:fs';
+import { createRequire } from 'node:module';
 import * as path from 'node:path';
 
 import { describe, expect, test } from 'vitest';
@@ -9,6 +10,8 @@ import * as util from '../util/util.js';
 
 const sampleFilename = path.join(pathPackageSamples, 'Dutch.txt');
 const text = fs.readFileSync(sampleFilename, 'utf8').toString();
+
+const require = createRequire(import.meta.url);
 
 const dutchConfig = require.resolve('@cspell/dict-nl-nl/cspell-ext.json');
 

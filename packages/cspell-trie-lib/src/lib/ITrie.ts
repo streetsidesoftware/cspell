@@ -304,3 +304,5 @@ export interface FindWordOptions {
     useLegacyWordCompounds?: boolean | number;
     checkForbidden?: boolean;
 }
+
+export type FindWordOptionsRO = Readonly<FindWordOptions>;

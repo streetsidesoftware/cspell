@@ -252,6 +252,11 @@
           "description": "Path to the file, only for legacy dictionary definitions.",
           "markdownDescription": "Path to the file, only for legacy dictionary definitions."
         },
+        "ignoreForbiddenWords": {
+          "description": "Some dictionaries may contain forbidden words to prevent compounding from generating words that are not valid in the language. These are often words that are used in other languages or might be generated through compounding. This setting allows flagged words to be ignored when checking the dictionary. The effect is similar to the word not being in the dictionary.",
+          "markdownDescription": "Some dictionaries may contain forbidden words to prevent compounding from generating\nwords that are not valid in the language. These are often\nwords that are used in other languages or might be generated through compounding.\nThis setting allows flagged words to be ignored when checking the dictionary.\nThe effect is similar to the word not being in the dictionary.",
+          "type": "boolean"
+        },
         "name": {
           "$ref": "#/definitions/DictionaryId",
           "description": "This is the name of a dictionary.\n\nName Format:\n- Must contain at least 1 number or letter.\n- Spaces are allowed.\n- Leading and trailing space will be removed.\n- Names ARE case-sensitive.\n- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`.",
@@ -297,6 +302,11 @@
         },
         "dictionaryInformation": {
           "$ref": "#/definitions/DictionaryInformation"
+        },
+        "ignoreForbiddenWords": {
+          "description": "Some dictionaries may contain forbidden words to prevent compounding from generating words that are not valid in the language. These are often words that are used in other languages or might be generated through compounding. This setting allows flagged words to be ignored when checking the dictionary. The effect is similar to the word not being in the dictionary.",
+          "markdownDescription": "Some dictionaries may contain forbidden words to prevent compounding from generating\nwords that are not valid in the language. These are often\nwords that are used in other languages or might be generated through compounding.\nThis setting allows flagged words to be ignored when checking the dictionary.\nThe effect is similar to the word not being in the dictionary.",
+          "type": "boolean"
         },
         "name": {
           "$ref": "#/definitions/DictionaryId",
@@ -350,6 +360,11 @@
           "description": "Optional description of the contents / purpose of the dictionary.",
           "markdownDescription": "Optional description of the contents / purpose of the dictionary.",
           "type": "string"
+        },
+        "ignoreForbiddenWords": {
+          "description": "Some dictionaries may contain forbidden words to prevent compounding from generating words that are not valid in the language. These are often words that are used in other languages or might be generated through compounding. This setting allows flagged words to be ignored when checking the dictionary. The effect is similar to the word not being in the dictionary.",
+          "markdownDescription": "Some dictionaries may contain forbidden words to prevent compounding from generating\nwords that are not valid in the language. These are often\nwords that are used in other languages or might be generated through compounding.\nThis setting allows flagged words to be ignored when checking the dictionary.\nThe effect is similar to the word not being in the dictionary.",
+          "type": "boolean"
         },
         "name": {
           "$ref": "#/definitions/DictionaryId",
@@ -439,6 +454,11 @@
           "markdownDescription": "List of words to always be considered incorrect. Words found in `flagWords` override `words`.\n\nFormat of `flagWords`\n- single word entry - `word`\n- with suggestions - `word:suggestion` or `word->suggestion, suggestions`\n\nExample:\n```ts\n\"flagWords\": [\n  \"color: colour\",\n  \"incase: in case, encase\",\n  \"canot->cannot\",\n  \"cancelled->canceled\"\n]\n```",
           "type": "array"
         },
+        "ignoreForbiddenWords": {
+          "description": "Some dictionaries may contain forbidden words to prevent compounding from generating words that are not valid in the language. These are often words that are used in other languages or might be generated through compounding. This setting allows flagged words to be ignored when checking the dictionary. The effect is similar to the word not being in the dictionary.",
+          "markdownDescription": "Some dictionaries may contain forbidden words to prevent compounding from generating\nwords that are not valid in the language. These are often\nwords that are used in other languages or might be generated through compounding.\nThis setting allows flagged words to be ignored when checking the dictionary.\nThe effect is similar to the word not being in the dictionary.",
+          "type": "boolean"
+        },
         "ignoreWords": {
           "description": "List of words to be ignored. An ignored word will not show up as an error, even if it is also in the `flagWords`.",
           "items": {
@@ -511,6 +531,11 @@
           },
           "markdownDescription": "List of words to always be considered incorrect. Words found in `flagWords` override `words`.\n\nFormat of `flagWords`\n- single word entry - `word`\n- with suggestions - `word:suggestion` or `word->suggestion, suggestions`\n\nExample:\n```ts\n\"flagWords\": [\n  \"color: colour\",\n  \"incase: in case, encase\",\n  \"canot->cannot\",\n  \"cancelled->canceled\"\n]\n```",
           "type": "array"
+        },
+        "ignoreForbiddenWords": {
+          "description": "Some dictionaries may contain forbidden words to prevent compounding from generating words that are not valid in the language. These are often words that are used in other languages or might be generated through compounding. This setting allows flagged words to be ignored when checking the dictionary. The effect is similar to the word not being in the dictionary.",
+          "markdownDescription": "Some dictionaries may contain forbidden words to prevent compounding from generating\nwords that are not valid in the language. These are often\nwords that are used in other languages or might be generated through compounding.\nThis setting allows flagged words to be ignored when checking the dictionary.\nThe effect is similar to the word not being in the dictionary.",
+          "type": "boolean"
         },
         "ignoreWords": {
           "description": "List of words to be ignored. An ignored word will not show up as an error, even if it is also in the `flagWords`.",
@@ -585,6 +610,11 @@
           "markdownDescription": "List of words to always be considered incorrect. Words found in `flagWords` override `words`.\n\nFormat of `flagWords`\n- single word entry - `word`\n- with suggestions - `word:suggestion` or `word->suggestion, suggestions`\n\nExample:\n```ts\n\"flagWords\": [\n  \"color: colour\",\n  \"incase: in case, encase\",\n  \"canot->cannot\",\n  \"cancelled->canceled\"\n]\n```",
           "type": "array"
         },
+        "ignoreForbiddenWords": {
+          "description": "Some dictionaries may contain forbidden words to prevent compounding from generating words that are not valid in the language. These are often words that are used in other languages or might be generated through compounding. This setting allows flagged words to be ignored when checking the dictionary. The effect is similar to the word not being in the dictionary.",
+          "markdownDescription": "Some dictionaries may contain forbidden words to prevent compounding from generating\nwords that are not valid in the language. These are often\nwords that are used in other languages or might be generated through compounding.\nThis setting allows flagged words to be ignored when checking the dictionary.\nThe effect is similar to the word not being in the dictionary.",
+          "type": "boolean"
+        },
         "ignoreWords": {
           "description": "List of words to be ignored. An ignored word will not show up as an error, even if it is also in the `flagWords`.",
           "items": {
@@ -658,6 +688,11 @@
           "markdownDescription": "List of words to always be considered incorrect. Words found in `flagWords` override `words`.\n\nFormat of `flagWords`\n- single word entry - `word`\n- with suggestions - `word:suggestion` or `word->suggestion, suggestions`\n\nExample:\n```ts\n\"flagWords\": [\n  \"color: colour\",\n  \"incase: in case, encase\",\n  \"canot->cannot\",\n  \"cancelled->canceled\"\n]\n```",
           "type": "array"
         },
+        "ignoreForbiddenWords": {
+          "description": "Some dictionaries may contain forbidden words to prevent compounding from generating words that are not valid in the language. These are often words that are used in other languages or might be generated through compounding. This setting allows flagged words to be ignored when checking the dictionary. The effect is similar to the word not being in the dictionary.",
+          "markdownDescription": "Some dictionaries may contain forbidden words to prevent compounding from generating\nwords that are not valid in the language. These are often\nwords that are used in other languages or might be generated through compounding.\nThis setting allows flagged words to be ignored when checking the dictionary.\nThe effect is similar to the word not being in the dictionary.",
+          "type": "boolean"
+        },
         "ignoreWords": {
           "description": "List of words to be ignored. An ignored word will not show up as an error, even if it is also in the `flagWords`.",
           "items": {
@@ -722,6 +757,11 @@
           "description": "Optional description of the contents / purpose of the dictionary.",
           "markdownDescription": "Optional description of the contents / purpose of the dictionary.",
           "type": "string"
+        },
+        "ignoreForbiddenWords": {
+          "description": "Some dictionaries may contain forbidden words to prevent compounding from generating words that are not valid in the language. These are often words that are used in other languages or might be generated through compounding. This setting allows flagged words to be ignored when checking the dictionary. The effect is similar to the word not being in the dictionary.",
+          "markdownDescription": "Some dictionaries may contain forbidden words to prevent compounding from generating\nwords that are not valid in the language. These are often\nwords that are used in other languages or might be generated through compounding.\nThis setting allows flagged words to be ignored when checking the dictionary.\nThe effect is similar to the word not being in the dictionary.",
+          "type": "boolean"
         },
         "name": {
           "$ref": "#/definitions/DictionaryId",

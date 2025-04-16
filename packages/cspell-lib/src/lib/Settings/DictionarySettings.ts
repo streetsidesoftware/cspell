@@ -164,6 +164,7 @@ class _DictionaryDefinitionInternalWithSource implements DictionaryFileDefinitio
     readonly repMap?: ReplaceMap;
     readonly useCompounds?: boolean;
     readonly noSuggest?: boolean;
+    readonly ignoreForbiddenWords?: boolean;
     readonly scope?: CustomDictionaryScope | CustomDictionaryScope[];
     readonly __source: string;
     private ddi: DDI;
@@ -183,6 +184,7 @@ class _DictionaryDefinitionInternalWithSource implements DictionaryFileDefinitio
             type,
             repMap,
             noSuggest,
+            ignoreForbiddenWords,
             scope,
             useCompounds,
         } = defAll;
@@ -202,6 +204,7 @@ class _DictionaryDefinitionInternalWithSource implements DictionaryFileDefinitio
             type,
             repMap,
             noSuggest,
+            ignoreForbiddenWords,
             scope,
             useCompounds,
         };

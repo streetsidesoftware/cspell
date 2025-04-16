@@ -26,7 +26,10 @@ export interface GenSuggestionOptionsStrict {
     compoundSeparator?: string;
 }
 
+export type GenSuggestionOptionsStrictRO = Readonly<GenSuggestionOptionsStrict>;
+
 export type GenSuggestionOptions = Partial<GenSuggestionOptionsStrict>;
+export type GenSuggestionOptionsRO = Readonly<GenSuggestionOptions>;
 
 export interface SuggestionOptionsStrict extends GenSuggestionOptionsStrict {
     /**
@@ -57,15 +60,18 @@ export interface SuggestionOptionsStrict extends GenSuggestionOptionsStrict {
     weightMap?: WeightMap | undefined;
 }
 
-export type SuggestionOptions = Partial<SuggestionOptionsStrict>;
+export type SuggestionOptionsStrictRO = Readonly<SuggestionOptionsStrict>;
 
-export const defaultGenSuggestionOptions: GenSuggestionOptionsStrict = {
+export type SuggestionOptions = Partial<SuggestionOptionsStrict>;
+export type SuggestionOptionsRO = Readonly<SuggestionOptions>;
+
+export const defaultGenSuggestionOptions: GenSuggestionOptionsStrictRO = {
     compoundMethod: CompoundWordsMethod.NONE,
     ignoreCase: true,
     changeLimit: 5,
 };
 
-export const defaultSuggestionOptions: SuggestionOptionsStrict = {
+export const defaultSuggestionOptions: SuggestionOptionsStrictRO = {
     ...defaultGenSuggestionOptions,
     numSuggestions: 8,
     includeTies: true,
@@ -105,9 +111,9 @@ const keyMapOfSuggestionOptionsStrict: KeyMapOfSuggestionOptionsStrict = {
  * @param opts - partial options.
  * @returns Options - with defaults.
  */
-export function createSuggestionOptions(...opts: SuggestionOptions[]): SuggestionOptionsStrict {
+export function createSuggestionOptions(...opts: SuggestionOptionsRO[]): SuggestionOptionsStrictRO {
     const options = { ...defaultSuggestionOptions };
-    const keys = Object.keys(keyMapOfSuggestionOptionsStrict) as (keyof SuggestionOptions)[];
+    const keys = Object.keys(keyMapOfSuggestionOptionsStrict) as (keyof SuggestionOptionsRO)[];
     for (const opt of opts) {
         for (const key of keys) {
             assign(options, opt, key);

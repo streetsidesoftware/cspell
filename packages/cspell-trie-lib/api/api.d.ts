@@ -163,6 +163,10 @@ interface ITrieNodeRoot extends ITrieNode {
     readonly hasNonStrictWords: boolean;
 }
 
+type TrieOptions = TrieInfo;
+type TrieOptionsRO = Readonly<TrieOptions>;
+type PartialTrieOptions = PartialTrieInfo;
+
 declare const FLAG_WORD = 1;
 type ChildMap = Record<string, TrieNode>;
 interface TrieNode {
@@ -242,7 +246,9 @@ interface GenSuggestionOptionsStrict {
      */
     compoundSeparator?: string;
 }
+type GenSuggestionOptionsStrictRO = Readonly<GenSuggestionOptionsStrict>;
 type GenSuggestionOptions = Partial<GenSuggestionOptionsStrict>;
+type GenSuggestionOptionsRO = Readonly<GenSuggestionOptions>;
 interface SuggestionOptionsStrict extends GenSuggestionOptionsStrict {
     /**
      * Maximum number of suggestions to make.
@@ -268,6 +274,7 @@ interface SuggestionOptionsStrict extends GenSuggestionOptionsStrict {
     weightMap?: WeightMap | undefined;
 }
 type SuggestionOptions = Partial<SuggestionOptionsStrict>;
+type SuggestionOptionsRO = Readonly<SuggestionOptions>;
 
 type Cost = number;
 type MaxCost = Cost;
@@ -329,13 +336,13 @@ interface SuggestionCollector {
     readonly maxNumSuggestions: number;
     readonly includesTies: boolean;
     readonly ignoreCase: boolean;
-    readonly genSuggestionOptions: GenSuggestionOptions;
+    readonly genSuggestionOptions: GenSuggestionOptionsRO;
     /**
      * Possible value sent to the SuggestionIterator telling it to stop processing.
      */
     readonly symbolStopProcessing: symbol;
 }
-interface SuggestionCollectorOptions extends Omit<GenSuggestionOptionsStrict, 'ignoreCase' | 'changeLimit'> {
+interface SuggestionCollectorOptions extends Omit<GenSuggestionOptionsStrictRO, 'ignoreCase' | 'changeLimit'> {
     /**
      * number of best matching suggestions.
      * @default 10
@@ -372,7 +379,8 @@ interface SuggestionCollectorOptions extends Omit<GenSuggestionOptionsStrict, 'i
      */
     weightMap?: WeightMap | undefined;
 }
-declare function suggestionCollector(wordToMatch: string, options: SuggestionCollectorOptions): SuggestionCollector;
+type SuggestionCollectorOptionsRO = Readonly<SuggestionCollectorOptions>;
+declare function suggestionCollector(wordToMatch: string, options: SuggestionCollectorOptionsRO): SuggestionCollector;
 /**
  * Impersonating a Collector, allows searching for multiple variants on the same word.
  * The collection is still in the original collector.
@@ -430,7 +438,7 @@ interface ITrie {
      * @returns true if the word was found and is not forbidden.
      */
     hasWord(word: string, caseSensitive: boolean): boolean;
-    findWord(word: string, options?: FindWordOptions$1): FindFullResult$1;
+    findWord(word: string, options?: FindWordOptions): FindFullResult$1;
     /**
      * Determine if a word is in the forbidden word list.
      * @param word the word to lookup.
@@ -477,11 +485,12 @@ interface ITrie {
     readonly hasCompoundWords: boolean;
     readonly hasNonStrictWords: boolean;
 }
-interface FindWordOptions$1 {
+interface FindWordOptions {
     caseSensitive?: boolean;
     useLegacyWordCompounds?: boolean | number;
     checkForbidden?: boolean;
 }
+type FindWordOptionsRO = Readonly<FindWordOptions>;
 
 declare function buildITrieFromWords(words: Iterable<string>, info?: PartialTrieInfo): ITrie;
 
@@ -561,7 +570,7 @@ declare class Trie {
      * @returns true if the word was found and is not forbidden.
      */
     hasWord(word: string, caseSensitive: boolean): boolean;
-    findWord(word: string, options?: FindWordOptions): FindFullResult;
+    findWord(word: string, options?: FindWordOptionsRO): FindFullResult;
     /**
      * Determine if a word is in the forbidden word list.
      * @param word the word to lookup.
@@ -579,12 +588,12 @@ declare class Trie {
      * @param numChanges - the maximum number of changes allowed to text. This is an approximate value, since some changes cost less than others.
      *                      the lower the value, the faster results are returned. Values less than 4 are best.
      */
-    suggest(text: string, options: SuggestionOptions): string[];
+    suggest(text: string, options: SuggestionOptionsRO): string[];
     /**
      * Suggest spellings for `text`.  The results are sorted by edit distance with changes near the beginning of a word having a greater impact.
      * The results include the word and adjusted edit cost.  This is useful for merging results from multiple tries.
      */
-    suggestWithCost(text: string, options: SuggestionOptions): SuggestionResult[];
+    suggestWithCost(text: string, options: SuggestionOptionsRO): SuggestionResult[];
     /**
      * genSuggestions will generate suggestions and send them to `collector`. `collector` is responsible for returning the max acceptable cost.
      * Costs are measured in weighted changes. A cost of 100 is the same as 1 edit. Some edits are considered cheaper.
@@ -606,10 +615,6 @@ declare class Trie {
     private createFindOptions;
     private lastCreateFindOptionsMatchCaseMap;
     private createFindOptionsMatchCase;
-}
-interface FindWordOptions {
-    caseSensitive?: boolean;
-    useLegacyWordCompounds?: boolean | number;
 }
 
 interface ParseDictionaryOptions {
@@ -685,13 +690,13 @@ declare function parseDictionary(text: string | Iterable<string>, options?: Part
  * @param words Iterable set of words -- no processing is done on the words, they are inserted as is.
  * @param trieOptions options for the Trie
  */
-declare function buildTrie(words: Iterable<string>, trieOptions?: PartialTrieInfo): Trie;
+declare function buildTrie(words: Iterable<string>, trieOptions?: PartialTrieOptions): Trie;
 /**
  * Builds a Trie from a Iterable<string>. NO attempt a reducing the size of the Trie is done.
  * @param words Iterable set of words -- no processing is done on the words, they are inserted as is.
  * @param trieOptions options for the Trie
  */
-declare function buildTrieFast(words: Iterable<string>, trieOptions?: PartialTrieInfo): Trie;
+declare function buildTrieFast(words: Iterable<string>, trieOptions?: PartialTrieOptions): Trie;
 declare class TrieBuilder {
     private count;
     private readonly signatures;
@@ -701,11 +706,11 @@ declare class TrieBuilder {
     /** position 0 of lastPath is always the root */
     private lastPath;
     private tails;
-    trieOptions: TrieInfo;
+    trieOptions: TrieOptions;
     private numWords;
     private _debug_lastWordsInserted;
     private _debug_mode;
-    constructor(words?: Iterable<string>, trieOptions?: PartialTrieInfo);
+    constructor(words?: Iterable<string>, trieOptions?: PartialTrieOptions);
     private get _root();
     private signature;
     private _canBeCached;
@@ -805,4 +810,4 @@ declare const normalizeWordForCaseInsensitive: (text: string) => string[];
  */
 declare function expandCharacterSet(line: string, rangeChar?: string): Set<string>;
 
-export { CASE_INSENSITIVE_PREFIX, COMPOUND_FIX, type ChildMap, CompoundWordsMethod, type ExportOptions, FLAG_WORD, FORBID_PREFIX, type FindFullResult, type FindWordOptions, type HintedWalkerIterator, type Hinting, type ITrie, JOIN_SEPARATOR, type MaxCost, OPTIONAL_COMPOUND_FIX, type PartialTrieInfo as PartialTrieOptions, type SuggestionCollector, type SuggestionResult, Trie, TrieBuilder, type TrieNode, type TrieInfo as TrieOptions, type TrieRoot, WORD_SEPARATOR, type WalkerIterator$1 as WalkerIterator, type WeightMap, type YieldResult$1 as YieldResult, buildITrieFromWords, buildTrie, buildTrieFast, consolidate, countNodes, countWords, createDictionaryLineParserMapper as createDictionaryLineParser, createTrieRoot, createTrieRootFromList, createWeightedMap, decodeTrie, defaultTrieInfo, defaultTrieInfo as defaultTrieOptions, editDistance, editDistanceWeighted, expandCharacterSet, findNode, has, hintedWalker, impersonateCollector, importTrie, insert, isCircular, isDefined, isWordTerminationNode, iterateTrie, iteratorTrieWords, mapDictionaryInformationToWeightMap, mergeDefaults, mergeOptionalWithDefaults, normalizeWord, normalizeWordForCaseInsensitive, normalizeWordToLowercase, orderTrie, parseDictionary, parseDictionaryLegacy, parseDictionaryLines, serializeTrie, suggestionCollector, trieNodeToRoot, walk, walker };
+export { CASE_INSENSITIVE_PREFIX, COMPOUND_FIX, type ChildMap, CompoundWordsMethod, type ExportOptions, FLAG_WORD, FORBID_PREFIX, type FindFullResult, type FindWordOptions, type HintedWalkerIterator, type Hinting, type ITrie, JOIN_SEPARATOR, type MaxCost, OPTIONAL_COMPOUND_FIX, type PartialTrieOptions, type SuggestionCollector, type SuggestionResult, Trie, TrieBuilder, type TrieNode, type TrieOptions, type TrieOptionsRO, type TrieRoot, WORD_SEPARATOR, type WalkerIterator$1 as WalkerIterator, type WeightMap, type YieldResult$1 as YieldResult, buildITrieFromWords, buildTrie, buildTrieFast, consolidate, countNodes, countWords, createDictionaryLineParserMapper as createDictionaryLineParser, createTrieRoot, createTrieRootFromList, createWeightedMap, decodeTrie, defaultTrieInfo, defaultTrieInfo as defaultTrieOptions, editDistance, editDistanceWeighted, expandCharacterSet, findNode, has, hintedWalker, impersonateCollector, importTrie, insert, isCircular, isDefined, isWordTerminationNode, iterateTrie, iteratorTrieWords, mapDictionaryInformationToWeightMap, mergeDefaults, mergeOptionalWithDefaults, normalizeWord, normalizeWordForCaseInsensitive, normalizeWordToLowercase, orderTrie, parseDictionary, parseDictionaryLegacy, parseDictionaryLines, serializeTrie, suggestionCollector, trieNodeToRoot, walk, walker };

@@ -9,10 +9,10 @@ import { __testMethods__ } from './SpellingDictionaryMethods.js';
 // cSpell:ignore aple
 
 describe('Verify building Dictionary', () => {
-    test('build from word list', async () => {
+    test('build from word list', () => {
         const words = ['apple', 'ape', 'able', 'apple', 'banana', 'orange', 'pear', 'aim', 'approach', 'bear'];
 
-        const dict = await createSpellingDictionary(words, 'words', 'test', opts());
+        const dict = createSpellingDictionary(words, 'words', 'test', opts());
         expect(dict.name).toBe('words');
         expect(dict.has('apple')).toBe(true);
         const suggestions = dict.suggest('aple').map(({ word }) => word);
@@ -21,7 +21,7 @@ describe('Verify building Dictionary', () => {
         expect(suggestions).toEqual(expect.not.arrayContaining(['banana']));
     });
 
-    test('compounds from word list', async () => {
+    test('compounds from word list', () => {
         const words = [
             'apple',
             'apples',
@@ -36,7 +36,7 @@ describe('Verify building Dictionary', () => {
             'bear',
         ];
 
-        const dict = await createSpellingDictionary(words, 'words', 'test', opts({ useCompounds: true }));
+        const dict = createSpellingDictionary(words, 'words', 'test', opts({ useCompounds: true }));
         expect(dict.has('apple')).toBe(true);
         expect(dict.has('Apple')).toBe(true);
         expect(dict.has('APPLE')).toBe(true);
@@ -48,10 +48,10 @@ describe('Verify building Dictionary', () => {
         expect(dict.has('applebananas')).toBe(false);
     });
 
-    test('case-sensitive word list', async () => {
+    test('case-sensitive word list', () => {
         const words = ['apple', 'Seattle', 'Amsterdam', 'surf', 'words', 'English', 'McGreyer'];
 
-        const dict = await createSpellingDictionary(
+        const dict = createSpellingDictionary(
             words,
             'words',
             'test',
@@ -105,11 +105,11 @@ describe('Verify building Dictionary', () => {
         expect(suggestions).toEqual(expect.not.arrayContaining(['banana']));
     });
 
-    test('build from list containing non-strings', async () => {
+    test('build from list containing non-strings', () => {
         // eslint-disable-next-line no-sparse-arrays
         const words = ['apple', 'ape', 'able', , 'apple', 'banana', 'orange', 5, 'pear', 'aim', 'approach', 'bear'];
 
-        const dict = await createSpellingDictionary(words as string[], 'words', 'test', opts());
+        const dict = createSpellingDictionary(words as string[], 'words', 'test', opts());
         expect(dict.name).toBe('words');
         expect(dict.has('apple')).toBe(true);
         const suggestions = dict.suggest('aple').map(({ word }) => word);
@@ -183,6 +183,43 @@ describe('Verify Case Sensitive Dictionaries', () => {
         const sugs = dict.suggest(word, { ignoreCase });
         const sugWords = sugs.map((s) => s.word);
         expect(sugWords).toEqual(expected);
+    });
+});
+
+describe('test ignoreForbiddenWordsOption', () => {
+    const words = [
+        'apple',
+        'ape',
+        'able',
+        'apple',
+        'banana',
+        'orange',
+        'pear',
+        'aim',
+        'approach',
+        'bear',
+        '!apple',
+        '!berry',
+    ];
+
+    test('forbidden words are not found', () => {
+        const dict = createSpellingDictionary(words, 'words', 'test', opts({ ignoreForbiddenWords: true }));
+        expect(dict.has('apple')).toBe(false);
+        expect(dict.find('apple')).toBe(undefined);
+        expect(dict.isForbidden('apple')).toBe(false);
+        expect(dict.has('berry')).toBe(false);
+        expect(dict.find('berry')).toBe(undefined);
+        expect(dict.isForbidden('berry')).toBe(false);
+    });
+
+    test('forbidden words are found', () => {
+        const dict = createSpellingDictionary(words, 'words', 'test', opts({ ignoreForbiddenWords: false }));
+        expect(dict.has('apple')).toBe(true);
+        expect(dict.find('apple')).toEqual({ found: 'apple', forbidden: true, noSuggest: false });
+        expect(dict.isForbidden('apple')).toBe(true);
+        expect(dict.has('berry')).toBe(false);
+        expect(dict.find('berry')).toEqual({ found: 'berry', forbidden: true, noSuggest: false });
+        expect(dict.isForbidden('berry')).toBe(true);
     });
 });
 

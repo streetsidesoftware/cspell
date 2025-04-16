@@ -3,10 +3,10 @@ import type { TrieRoot } from '../TrieNode/TrieNode.js';
 import { clean } from '../utils/clean.js';
 import { CompoundWordsMethod, hintedWalker, JOIN_SEPARATOR, WORD_SEPARATOR } from '../walker/index.js';
 import { opCosts } from './constants.js';
-import type { GenSuggestionOptions, SuggestionOptions } from './genSuggestionsOptions.js';
+import type { GenSuggestionOptionsRO, SuggestionOptionsRO } from './genSuggestionsOptions.js';
 import { createSuggestionOptions } from './genSuggestionsOptions.js';
 import { visualLetterMaskMap } from './orthography.js';
-import type { SuggestionCollectorOptions } from './suggestCollector.js';
+import type { SuggestionCollectorOptionsRO } from './suggestCollector.js';
 import { suggestionCollector } from './suggestCollector.js';
 import type { MaxCost, SuggestionGenerator, SuggestionResult, SuggestionResultBase } from './SuggestionTypes.js';
 
@@ -23,10 +23,10 @@ const setOfSeparators = new Set([JOIN_SEPARATOR, WORD_SEPARATOR]);
 export function suggest(
     root: TrieRoot | TrieRoot[],
     word: string,
-    options: SuggestionOptions = {},
+    options: SuggestionOptionsRO = {},
 ): SuggestionResult[] {
     const opts = createSuggestionOptions(options);
-    const collectorOpts: SuggestionCollectorOptions = clean(opts);
+    const collectorOpts: SuggestionCollectorOptionsRO = clean(opts);
     const collector = suggestionCollector(word, collectorOpts);
     collector.collect(genSuggestions(root, word, { ...opts, ...collector.genSuggestionOptions }));
     return collector.suggestions;
@@ -35,7 +35,7 @@ export function suggest(
 export function* genSuggestions(
     root: TrieRoot | TrieRoot[],
     word: string,
-    options: GenSuggestionOptions = {},
+    options: GenSuggestionOptionsRO = {},
 ): SuggestionGenerator {
     const roots = Array.isArray(root) ? root : [root];
     for (const r of roots) {
@@ -52,7 +52,7 @@ interface Range {
 export function* genCompoundableSuggestions(
     root: TrieRoot,
     word: string,
-    options: GenSuggestionOptions = {},
+    options: GenSuggestionOptionsRO = {},
 ): SuggestionGenerator {
     const { compoundMethod = CompoundWordsMethod.NONE, changeLimit, ignoreCase } = createSuggestionOptions(options);
     type History = SuggestionResultBase;
