@@ -1,7 +1,7 @@
 import * as Path from 'node:path';
 
 import { FileUrlBuilder } from '@cspell/url';
-import mm from 'micromatch';
+import pm from 'picomatch';
 
 import {
     GlobPatterns,
@@ -237,7 +237,7 @@ function buildMatcherFn(
             const matchNeg = pattern.glob.match(/^!/);
             const glob = pattern.glob.replace(/^!/, '');
             const isNeg = (matchNeg && matchNeg[0].length & 1 && true) || false;
-            const reg = mm.makeRe(workaroundPicomatchBug(glob), makeReOptions);
+            const reg = pm.makeRe(workaroundPicomatchBug(glob), makeReOptions);
             const fn = pattern.glob.endsWith(suffixDir)
                 ? (filename: string) => {
                       // Note: this is a hack to get around the limitations of globs.
