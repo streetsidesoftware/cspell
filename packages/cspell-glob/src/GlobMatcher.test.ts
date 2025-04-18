@@ -3,9 +3,10 @@ import { fileURLToPath } from 'node:url';
 
 import { FileUrlBuilder } from '@cspell/url';
 import mm from 'micromatch';
+import pp from 'picomatch';
 import { describe, expect, test } from 'vitest';
 
-import { fileOrGlobToGlob } from './globHelper.js';
+import { fileOrGlobToGlob, workaroundPicomatchBug } from './globHelper.js';
 import type { GlobMatchOptions, MatcherMode } from './GlobMatcher.js';
 import { GlobMatcher } from './GlobMatcher.js';
 import type { GlobMatch, GlobPattern, GlobPatternNormalized, GlobPatternWithOptionalRoot, PathInterface } from './GlobMatcherTypes.js';
@@ -110,10 +111,36 @@ describe('Validate Micromatch assumptions', () => {
         ${'src/*.(test|spec).ts'}        | ${'src/test.ts'}              | ${false}
         ${filenameToGlob(__filename, 1)} | ${__filename}                 | ${true}
         ${filenameToGlob(__filename, 2)} | ${__filename}                 | ${true}
+        ${'temp'}                        | ${'src/temp'}                 | ${false}
+        ${'temp'}                        | ${'temp'}                     | ${true}
     `(`Micromatch glob: '$glob', filename: '$filename' expected: $expectedToMatch`, ({ glob, filename, expectedToMatch }) => {
         const reg = mm.makeRe(glob);
         expect(reg.test(filename)).toEqual(expectedToMatch);
         expect(mm.isMatch(filename, glob, { windows: path.sep === '\\' })).toBe(expectedToMatch);
+
+        const normalizedFilename = filename.split(path.sep).join('/');
+        const picomatch = pp(glob);
+        const pmRegexp = pp.makeRe(glob);
+        expect(pmRegexp.test(normalizedFilename)).toEqual(expectedToMatch);
+        expect(picomatch(normalizedFilename)).toEqual(expectedToMatch);
+    });
+
+    test.each`
+        glob             | filename         | expectedToMatch
+        ${'constructor'} | ${'constructor'} | ${true}
+        ${'__proto__'}   | ${'__proto__'}   | ${true}
+        ${'toString'}    | ${'toString'}    | ${true}
+    `(`Workaround bugs in Micromatch glob: '$glob', filename: '$filename' expected: $expectedToMatch`, ({ glob, filename, expectedToMatch }) => {
+        glob = workaroundPicomatchBug(glob);
+        const reg = mm.makeRe(glob);
+        expect(reg.test(filename)).toEqual(expectedToMatch);
+        expect(mm.isMatch(filename, glob, { windows: path.sep === '\\' })).toBe(expectedToMatch);
+
+        const normalizedFilename = filename.split(path.sep).join('/');
+        const picomatch = pp(glob);
+        const pmRegexp = pp.makeRe(glob);
+        expect(pmRegexp.test(normalizedFilename)).toEqual(expectedToMatch);
+        expect(picomatch(normalizedFilename)).toEqual(expectedToMatch);
     });
 });
 

@@ -644,13 +644,19 @@ importers:
       '@cspell/url':
         specifier: workspace:*
         version: link:../cspell-url
-      micromatch:
-        specifier: ^4.0.8
-        version: 4.0.8
+      picomatch:
+        specifier: ^4.0.2
+        version: 4.0.2
     devDependencies:
       '@types/micromatch':
         specifier: ^4.0.9
         version: 4.0.9
+      '@types/picomatch':
+        specifier: ^4.0.0
+        version: 4.0.0
+      micromatch:
+        specifier: ^4.0.8
+        version: 4.0.8
 
   packages/cspell-grammar:
     dependencies:
@@ -4223,6 +4229,9 @@ packages:
 
   '@types/parse-path@7.0.3':
     resolution: {integrity: sha512-LriObC2+KYZD3FzCrgWGv/qufdUy4eXrxcLgQMfYXgPbLIecKIsVBaQgUPmxSSLcjmYbDTQbMgr6qr6l/eb7Bg==}
+
+  '@types/picomatch@4.0.0':
+    resolution: {integrity: sha512-J1Bng+wlyEERWSgJQU1Pi0HObCLVcr994xT/M+1wcl/yNRTGBupsCxthgkdYG+GCOMaQH7iSVUY3LJVBBqG7MQ==}
 
   '@types/prismjs@1.26.5':
     resolution: {integrity: sha512-AUZTa7hQ2KY5L7AmtSiqxlhWxb4ina0yd8hNbl4TWuqnv/pFP0nDMb3YrfSBf4hJVGLh2YEIBfKaBW/9UEl6IQ==}
@@ -14748,6 +14757,8 @@ snapshots:
   '@types/parse-json@4.0.2': {}
 
   '@types/parse-path@7.0.3': {}
+
+  '@types/picomatch@4.0.0': {}
 
   '@types/prismjs@1.26.5': {}
 

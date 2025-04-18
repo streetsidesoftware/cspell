@@ -4,9 +4,9 @@ import { posix } from 'node:path';
 
 import type { CSpellUserSettings, Glob } from '@cspell/cspell-types';
 import type { GlobPatternWithRoot } from 'cspell-glob';
-import { fileOrGlobToGlob, GlobMatcher } from 'cspell-glob';
+import { fileOrGlobToGlob, GlobMatcher, workaroundPicomatchBug } from 'cspell-glob';
 import type { GlobOptions as TinyGlobbyOptions } from 'tinyglobby';
-import { glob } from 'tinyglobby';
+import { glob as tinyGlob } from 'tinyglobby';
 
 import { clean } from './util.js';
 
@@ -186,4 +186,12 @@ function posixPath(p: string): string {
 export async function normalizeFileOrGlobsToRoot(globs: Glob[], root: string): Promise<string[]> {
     const adjustedGlobs = await Promise.all(globs.map((g) => adjustPossibleDirectory(g, root)));
     return normalizeGlobsToRoot(adjustedGlobs, root, false);
+}
+
+function glob(patterns: string | string[], options: TinyGlobbyOptions): Promise<string[]> {
+    patterns =
+        typeof patterns === 'string'
+            ? workaroundPicomatchBug(patterns)
+            : patterns.map((g) => workaroundPicomatchBug(g));
+    return tinyGlob(patterns, options);
 }
