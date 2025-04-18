@@ -567,6 +567,14 @@ function filePathOrGlobToGlob(filePathOrGlob: string, root: URL, builder: FileUr
     return { root: builder.urlToFilePathOrHref(url), glob, isGlobalPattern };
 }
 
+export function workaroundPicomatchBug(glob: string): string {
+    const obj: Record<string, string> = {};
+    return glob
+        .split('/')
+        .map((s) => (obj[s] ? `{${s},${s}}` : s))
+        .join('/');
+}
+
 export const __testing__ = {
     rebaseGlob,
     trimGlob,

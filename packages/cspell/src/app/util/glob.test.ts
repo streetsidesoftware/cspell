@@ -289,18 +289,19 @@ describe('Validate internal functions', () => {
     );
 
     test.each`
-        glob                | globRoot          | root              | expectedGlobs                   | file                                | expectedToMatch
-        ${'*.json'}         | ${'.'}            | ${'.'}            | ${['*.json']}                   | ${'./package.json'}                 | ${true}
-        ${'*.json'}         | ${'.'}            | ${'.'}            | ${['*.json']}                   | ${'./.git/package.json'}            | ${false}
-        ${'*.json'}         | ${'./project/p1'} | ${'.'}            | ${['project/p1/*.json']}        | ${'./project/p1/package.json'}      | ${true}
-        ${'*.json'}         | ${'./project/p1'} | ${'.'}            | ${['project/p1/*.json']}        | ${'./project/p1/src/package.json'}  | ${false}
-        ${'*.json'}         | ${'.'}            | ${'./project/p2'} | ${['../../*.json']}             | ${'./package.json'}                 | ${true}
-        ${'/**/*.json'}     | ${'.'}            | ${'./project/p2'} | ${['**/*.json']}                | ${'./project/p2/package.json'}      | ${true}
-        ${'**/*.json'}      | ${'.'}            | ${'./project/p2'} | ${['**/*.json']}                | ${'./project/p2/package.json'}      | ${true}
-        ${'src/*.json'}     | ${'.'}            | ${'./project/p2'} | ${['../../src/*.json']}         | ${'./src/data.json'}                | ${true}
-        ${'**/src/*.json'}  | ${'.'}            | ${'./project/p2'} | ${['**/src/*.json']}            | ${'./project/p2/x/src/config.json'} | ${true}
-        ${'**/src/*.json'}  | ${'./project/p1'} | ${'.'}            | ${['**/src/*.json']}            | ${'./project/p1/src/config.json'}   | ${true}
-        ${'/**/src/*.json'} | ${'./project/p1'} | ${'.'}            | ${['project/p1/**/src/*.json']} | ${'./project/p1/src/config.json'}   | ${true}
+        glob                          | globRoot          | root              | expectedGlobs                   | file                                | expectedToMatch
+        ${'*.json'}                   | ${'.'}            | ${'.'}            | ${['*.json']}                   | ${'./package.json'}                 | ${true}
+        ${'*.json'}                   | ${'.'}            | ${'.'}            | ${['*.json']}                   | ${'./.git/package.json'}            | ${false}
+        ${'*.json'}                   | ${'./project/p1'} | ${'.'}            | ${['project/p1/*.json']}        | ${'./project/p1/package.json'}      | ${true}
+        ${'*.json'}                   | ${'./project/p1'} | ${'.'}            | ${['project/p1/*.json']}        | ${'./project/p1/src/package.json'}  | ${false}
+        ${'*.json'}                   | ${'.'}            | ${'./project/p2'} | ${['../../*.json']}             | ${'./package.json'}                 | ${true}
+        ${'/**/*.json'}               | ${'.'}            | ${'./project/p2'} | ${['**/*.json']}                | ${'./project/p2/package.json'}      | ${true}
+        ${'**/*.json'}                | ${'.'}            | ${'./project/p2'} | ${['**/*.json']}                | ${'./project/p2/package.json'}      | ${true}
+        ${'src/*.json'}               | ${'.'}            | ${'./project/p2'} | ${['../../src/*.json']}         | ${'./src/data.json'}                | ${true}
+        ${'**/src/*.json'}            | ${'.'}            | ${'./project/p2'} | ${['**/src/*.json']}            | ${'./project/p2/x/src/config.json'} | ${true}
+        ${'**/src/*.json'}            | ${'./project/p1'} | ${'.'}            | ${['**/src/*.json']}            | ${'./project/p1/src/config.json'}   | ${true}
+        ${'/**/src/*.json'}           | ${'./project/p1'} | ${'.'}            | ${['project/p1/**/src/*.json']} | ${'./project/p1/src/config.json'}   | ${true}
+        ${'**/constructor/**/*.json'} | ${'.'}            | ${'.'}            | ${['**/constructor/**/*.json']} | ${'./constructor/package.json'}     | ${true}
     `(
         'mapGlobToRoot include "$glob"@"$globRoot" -> "$root" = "$expectedGlobs"',
         ({ glob, globRoot, root, expectedGlobs, file, expectedToMatch }: TestMapGlobToRoot) => {
