@@ -1,7 +1,4 @@
-import type { Node } from 'estree';
-
-import type { WorkerOptions } from '../common/options.cjs';
-import type { ASTNode, NodeType } from './ASTNode.mjs';
+import type { ASTNode, NodeType } from './ASTNode.js';
 
 interface ExtendedSuggestion {
     /**
@@ -34,12 +31,3 @@ export interface SpellCheckResults {
     issues: Issue[];
     errors?: Error[];
 }
-
-export type SpellCheckFn = (
-    filename: string,
-    text: string,
-    root: Node,
-    options: WorkerOptions,
-) => Promise<SpellCheckResults>;
-
-export type SpellCheckSyncFn = (...p: Parameters<SpellCheckFn>) => Awaited<ReturnType<SpellCheckFn>>;

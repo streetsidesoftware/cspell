@@ -1,52 +1,37 @@
 // cspell:ignore TSESTree
 import assert from 'node:assert';
-import * as path from 'node:path';
 
-import { toFileDirURL, toFileURL } from '@cspell/url';
 import type { TSESTree } from '@typescript-eslint/types';
-import type { CSpellSettings, TextDocument, ValidationIssue } from 'cspell-lib';
-import {
-    createTextDocument,
-    DocumentValidator,
-    extractImportErrors,
-    getDictionary,
-    refreshDictionaryCache,
-} from 'cspell-lib';
 import type { Comment, ExportSpecifier, Identifier, ImportSpecifier, Literal, Node, TemplateElement } from 'estree';
 
 import { getDefaultLogger } from '../common/logger.cjs';
-import type { CustomWordListFile, ScopeSelectorList, WorkerOptions } from '../common/options.cjs';
-import type { ASTNode, JSXText, NodeType } from './ASTNode.mjs';
-import type { ASTPath, Key } from './ASTPath.mjs';
-import { defaultCheckedScopes } from './customScopes.mjs';
-import type { ScopeItem } from './scope.mjs';
-import { AstPathScope, AstScopeMatcher, astScopeToString, mapNodeToScope, scopeItem } from './scope.mjs';
-import type { Issue, SpellCheckResults, Suggestions } from './types.mjs';
-import { walkTree } from './walkTree.mjs';
+import type { ScopeSelectorList, WorkerOptions } from '../common/options.cjs';
+import { createSyncFn } from '../synckit/index.cjs';
+import type { ASTNode, JSXText, NodeType } from './ASTNode.js' with { 'resolution-mode': 'import' };
+import type { ASTPath, Key } from './ASTPath.js' with { 'resolution-mode': 'import' };
+import { defaultCheckedScopes } from './customScopes.cjs';
+import type { ScopeItem } from './scope.cjs';
+import { AstPathScope, AstScopeMatcher, astScopeToString, mapNodeToScope, scopeItem } from './scope.cjs';
+import type {
+    CheckTextRange,
+    SpellCheckFn,
+    SpellCheckIssue,
+} from './spellCheck.mjs' with { 'resolution-mode': 'import' };
+import type { Issue, SpellCheckResults, Suggestions } from './types.js' with { 'resolution-mode': 'import' };
+import { walkTree } from './walkTree.cjs';
 
-const defaultSettings: CSpellSettings = {
-    name: 'eslint-configuration-file',
-    patterns: [
-        // @todo: be able to use cooked / transformed strings.
-        // {
-        //     // Do not block unicode escape sequences.
-        //     name: 'js-unicode-escape',
-        //     pattern: /$^/g,
-        // },
-    ],
-};
+const spellCheck = createSyncFn<SpellCheckFn>(require.resolve('./worker.mjs'));
 
 const isDebugModeExtended = false;
 const forceLogging = false;
+const skipCheck = process.env.CSPELL_ESLINT_SKIP_CHECK || false;
 
-const knownConfigErrors = new Set<string>();
+interface ToBeChecked {
+    range: CheckTextRange;
+    node: ASTNode;
+}
 
-export async function spellCheck(
-    filename: string,
-    text: string,
-    root: Node,
-    options: WorkerOptions,
-): Promise<SpellCheckResults> {
+export function spellCheckAST(filename: string, text: string, root: Node, options: WorkerOptions): SpellCheckResults {
     const logger = getDefaultLogger();
     const debugMode = forceLogging || options.debugMode || false;
     logger.enabled = forceLogging || (options.debugMode ?? (logger.enabled || isDebugModeExtended));
@@ -58,22 +43,7 @@ export async function spellCheck(
 
     const toIgnore = new Set<string>();
     const importedIdentifiers = new Set<string>();
-    const validator = getDocValidator(filename, text, options);
-    await validator.prepare();
-
-    log('Settings: %o', validator.settings);
-
-    const errors = [...validator.errors];
-    const issues: Issue[] = [];
-
-    errors.push(...(await checkSettings()));
-
-    async function checkSettings() {
-        const finalSettings = validator.getFinalizedDocSettings();
-        const found = await reportConfigurationErrors(finalSettings, knownConfigErrors);
-        found.forEach((err) => (debugMode ? log(err) : log('Error: %s', err.message)));
-        return found;
-    }
+    const toBeChecked: ToBeChecked[] = [];
 
     function checkLiteral(path: ASTPath) {
         const node: Literal | ASTNode = path.node;
@@ -145,21 +115,13 @@ export async function spellCheck(
         checkNodeText(path, node.value);
     }
 
-    function checkNodeText(path: ASTPath, text: string) {
+    function checkNodeText(path: ASTPath, _text: string) {
         const node: ASTNode = path.node;
         if (!node.range) return;
 
         const adj = node.type === 'Literal' ? 1 : 0;
         const range = [node.range[0] + adj, node.range[1] - adj] as const;
-
-        const scope: string[] = calcScope(path);
-        const result = validator.checkText(range, text, scope);
-        result.forEach((issue) => reportIssue(issue, node));
-    }
-
-    function calcScope(_path: ASTPath): string[] {
-        // inheritance(node);
-        return [];
+        toBeChecked.push({ range, node });
     }
 
     function isImportIdentifier(node: ASTNode): boolean {
@@ -229,14 +191,12 @@ export async function spellCheck(
         return node.parent?.type === 'MemberExpression';
     }
 
-    function reportIssue(issue: ValidationIssue, node: ASTNode): void {
+    function reportIssue(issue: SpellCheckIssue): Issue {
+        const { word, start, end, severity } = issue;
+        const node = toBeChecked[issue.rangeIdx].node;
         const nodeType = node.type;
-        const word = issue.text;
-        const start = issue.offset;
-        const end = issue.offset + (issue.length || issue.text.length);
-        const suggestions = normalizeSuggestions(issue.suggestionsEx, nodeType);
-        const severity = issue.isFlagged ? 'Forbidden' : 'Unknown';
-        issues.push({ word, start, end, nodeType, node, suggestions, severity });
+        const suggestions = normalizeSuggestions(issue.suggestions, nodeType);
+        return { word, start, end, nodeType, node, suggestions, severity };
     }
 
     type NodeTypes = Node['type'] | Comment['type'] | 'JSXText';
@@ -257,7 +217,7 @@ export async function spellCheck(
     function needToCheckFields(path: ASTPath): Record<string, boolean> | undefined {
         const possibleScopes = mapScopes.get(path.node.type);
         if (!possibleScopes) {
-            _dumpNode(path);
+            if (debugMode) _dumpNode(path);
             return undefined;
         }
 
@@ -346,15 +306,27 @@ export async function spellCheck(
     }
 
     function debugNode(path: ASTPath, value: unknown) {
+        if (!debugMode) return;
         log(`${inheritanceSummary(path)}: %o`, value);
-        if (debugMode) _dumpNode(path);
+        _dumpNode(path);
     }
 
     // console.warn('root: %o', root);
 
     walkTree(root, checkNode);
 
-    return { issues, errors };
+    const result = skipCheck
+        ? { issues: [] }
+        : spellCheck(
+              filename,
+              text,
+              toBeChecked.map((t) => t.range),
+              options,
+          );
+
+    const issues = result.issues.map((issue) => reportIssue(issue));
+
+    return { issues, errors: result.errors || [] };
 }
 
 function mapNode(path: ASTPath, key: Key | undefined): ScopeItem {
@@ -390,97 +362,6 @@ function tagLiteral(node: ASTNode | TSESTree.Node): string {
     return node.type + '.' + extra;
 }
 
-interface CachedDoc {
-    filename: string;
-    doc: TextDocument;
-}
-
-const cache: { lastDoc: CachedDoc | undefined } = { lastDoc: undefined };
-
-const docValCache = new WeakMap<TextDocument, DocumentValidator>();
-
-function getDocValidator(filename: string, text: string, options: WorkerOptions): DocumentValidator {
-    const doc = getTextDocument(filename, text);
-    const settings = calcInitialSettings(options);
-    const cachedValidator = docValCache.get(doc);
-    if (cachedValidator && deepEqual(cachedValidator.settings, settings)) {
-        refreshDictionaryCache(0);
-        cachedValidator.updateDocumentText(text).catch(() => undefined);
-        return cachedValidator;
-    }
-
-    const resolveImportsRelativeTo = toFileURL(options.cspellOptionsRoot || import.meta.url, toFileDirURL(options.cwd));
-    const validator = new DocumentValidator(doc, { ...options, resolveImportsRelativeTo }, settings);
-    docValCache.set(doc, validator);
-    return validator;
-}
-
-function calcInitialSettings(options: WorkerOptions): CSpellSettings {
-    const { customWordListFile, cspell, cwd } = options;
-
-    const settings: CSpellSettings = {
-        ...defaultSettings,
-        ...cspell,
-        words: cspell?.words || [],
-        ignoreWords: cspell?.ignoreWords || [],
-        flagWords: cspell?.flagWords || [],
-    };
-
-    if (options.configFile) {
-        const optionCspellImport = options.cspell?.import;
-        const importConfig =
-            typeof optionCspellImport === 'string'
-                ? [optionCspellImport]
-                : Array.isArray(optionCspellImport)
-                  ? optionCspellImport
-                  : [];
-        importConfig.push(options.configFile);
-        settings.import = importConfig;
-    }
-
-    if (customWordListFile) {
-        const filePath = isCustomWordListFile(customWordListFile) ? customWordListFile.path : customWordListFile;
-        const { dictionaries = [], dictionaryDefinitions = [] } = settings;
-
-        dictionaries.push('eslint-plugin-custom-words');
-        dictionaryDefinitions.push({ name: 'eslint-plugin-custom-words', path: filePath });
-
-        settings.dictionaries = dictionaries;
-        settings.dictionaryDefinitions = dictionaryDefinitions;
-    }
-
-    resolveDictionaryPaths(settings.dictionaryDefinitions, cwd);
-
-    return settings;
-}
-
-const regexIsUrl = /^(https?|file|ftp):/i;
-
-/** Patches the path of dictionary definitions. */
-function resolveDictionaryPaths(defs: CSpellSettings['dictionaryDefinitions'], cwd: string) {
-    if (!defs) return;
-
-    for (const def of defs) {
-        if (!def.path) continue;
-        if (regexIsUrl.test(def.path)) continue;
-        def.path = path.resolve(cwd, def.path);
-    }
-}
-
-function getTextDocument(filename: string, content: string): TextDocument {
-    if (cache.lastDoc?.filename === filename) {
-        return cache.lastDoc.doc;
-    }
-
-    const doc = createTextDocument({ uri: filename, content });
-    cache.lastDoc = { filename, doc };
-    return doc;
-}
-
-function isCustomWordListFile(value: string | CustomWordListFile | undefined): value is CustomWordListFile {
-    return !!value && typeof value === 'object';
-}
-
 const needToAdjustSpace: Partial<Record<NodeType, true | undefined>> = {
     Identifier: true,
 };
@@ -502,46 +383,6 @@ function normalizeSuggestions(suggestions: Suggestions, nodeType: NodeType): Sug
         }
         return s;
     });
-}
-
-/**
- * Deep Equal check.
- * Note: There are faster methods, but this is called once per file, so speed is not a concern.
- */
-function deepEqual(a: unknown, b: unknown): boolean {
-    try {
-        assert.deepStrictEqual(a, b);
-        return true;
-    } catch {
-        return false;
-    }
-}
-
-async function reportConfigurationErrors(config: CSpellSettings, knownConfigErrors: Set<string>): Promise<Error[]> {
-    const errors: Error[] = [];
-
-    const importErrors = extractImportErrors(config);
-    importErrors.forEach((ref) => {
-        const key = ref.error.toString();
-        if (knownConfigErrors.has(key)) return;
-        knownConfigErrors.add(key);
-        errors.push(new Error('Configuration Error: \n  ' + ref.error.message));
-    });
-
-    const dictCollection = await getDictionary(config);
-    dictCollection.dictionaries.forEach((dict) => {
-        const dictErrors = dict.getErrors?.() || [];
-        const msg = `Dictionary Error with (${dict.name})`;
-        dictErrors.forEach((error) => {
-            const key = msg + error.toString();
-            if (knownConfigErrors.has(key)) return;
-            knownConfigErrors.add(key);
-            const errMsg = `${msg}: ${error.message}\n  Source: ${dict.source}`;
-            errors.push(new Error(errMsg));
-        });
-    });
-
-    return errors;
 }
 
 interface ScopeCheck {

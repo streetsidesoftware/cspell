@@ -1,0 +1,14 @@
+{
+    "extends": "../../tsconfig.base.json",
+    "compilerOptions": {
+        "tsBuildInfoFile": "../../dist/spellCheckAST/compile.tsbuildInfo",
+        "rootDir": ".",
+        "outDir": "../../dist/spellCheckAST"
+    },
+    "include": ["."],
+    "references": [
+        { "path": "../common/tsconfig.json" },
+        { "path": "../synckit/tsconfig.json" },
+        { "path": "../test-util/tsconfig.json" }
+    ]
+}

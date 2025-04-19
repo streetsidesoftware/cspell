@@ -786,7 +786,14 @@ declare class DocumentValidator {
      */
     get prepTime(): number;
     get validateDirectives(): boolean;
-    checkText(range: SimpleRange, _text: string, scope: string[]): ValidationIssue[];
+    /**
+     * Check a range of text for validation issues.
+     * @param range - the range of text to check.
+     * @param _text - the text to check. If not given, the text will be taken from the document.
+     * @param scope - the scope to use for validation. If not given, the default scope will be used.
+     * @returns the validation issues.
+     */
+    checkText(range: SimpleRange, _text: string | undefined, scope?: string[] | string): ValidationIssue[];
     check(parsedText: ParsedText): ValidationIssue[];
     /**
      * Check a Document for Validation Issues.

@@ -1,3 +1,5 @@
+// ts-check
+import cspellESLintPluginRecommended from '@cspell/eslint-plugin/recommended';
 import eslint from '@eslint/js';
 import nodePlugin from 'eslint-plugin-n';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
@@ -10,6 +12,8 @@ import tsEslint from 'typescript-eslint';
 // const compat = new FlatCompat({baseDirectory: __dirname, recommendedConfig: eslint.configs.recommended});
 
 // @ts-check
+
+const checkSpelling = !!process.env.CSPELL_CHECK_SPELLING;
 
 export default tsEslint.config(
     eslint.configs.recommended,
@@ -285,4 +289,5 @@ export default tsEslint.config(
             'unicorn/prefer-module': 'off',
         },
     },
+    ...(checkSpelling ? [cspellESLintPluginRecommended] : []),
 );

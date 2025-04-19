@@ -1,6 +1,6 @@
 import assert from 'node:assert';
 
-import type { ASTPath, Key } from './ASTPath.mjs';
+import type { ASTPath, Key } from './ASTPath.js' with { 'resolution-mode': 'import' };
 
 export type ScopeScore = number;
 
