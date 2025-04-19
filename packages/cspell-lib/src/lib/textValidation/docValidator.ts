@@ -247,9 +247,17 @@ export class DocumentValidator {
         return this.options.validateDirectives ?? this._preparations?.config.validateDirectives ?? false;
     }
 
-    public checkText(range: SimpleRange, _text: string, scope: string[]): ValidationIssue[] {
+    /**
+     * Check a range of text for validation issues.
+     * @param range - the range of text to check.
+     * @param _text - the text to check. If not given, the text will be taken from the document.
+     * @param scope - the scope to use for validation. If not given, the default scope will be used.
+     * @returns the validation issues.
+     */
+    public checkText(range: SimpleRange, _text: string | undefined, scope?: string[] | string): ValidationIssue[] {
         const text = this._document.text.slice(range[0], range[1]);
-        return this.check({ text, range, scope: scope.join(' ') });
+        scope = (Array.isArray(scope) ? scope.join(' ') : scope) || '';
+        return this.check({ text, range, scope });
     }
 
     public check(parsedText: ParsedText): ValidationIssue[] {

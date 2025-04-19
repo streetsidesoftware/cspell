@@ -2,17 +2,15 @@
 
 import type { ESLint, Rule } from 'eslint';
 import type { Program } from 'estree';
-import { createSyncFn } from 'synckit';
 
 import { getDefaultLogger } from '../common/logger.cjs';
 import type { Options } from '../common/options.cjs';
 import { optionsSchema as schema } from '../generated/schema.cjs';
-import type { Issue, SpellCheckFn } from '../worker/types.mjs';
+import { spellCheckAST } from '../spellCheckAST/spellCheckAST.cjs';
+import type { Issue } from '../spellCheckAST/types.js';
 import { normalizeOptions } from './defaultCheckOptions.cjs';
 
 type ESlintPlugin = ESLint.Plugin;
-
-const spellCheck = createSyncFn<SpellCheckFn>(require.resolve('../worker/worker.mjs'));
 
 interface ExtendedSuggestion {
     /**
@@ -120,7 +118,7 @@ function create(context: Rule.RuleContext): Rule.RuleListener {
         const filename = context.filename || context.getFilename();
         const sc = context.sourceCode || context.getSourceCode();
         if (!sc) return;
-        const { issues, errors } = spellCheck(filename, sc.text, sc.ast, options);
+        const { issues, errors } = spellCheckAST(filename, sc.text, sc.ast, options);
         if (errors && errors.length) {
             log(
                 'errors: %o',

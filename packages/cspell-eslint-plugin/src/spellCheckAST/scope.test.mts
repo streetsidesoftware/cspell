@@ -3,7 +3,7 @@ import 'mocha';
 import assert from 'node:assert';
 
 import { testEach } from '../test-util/testEach.mjs';
-import { AstScopeMatcher, parseScope, scopeItem } from './scope.mjs';
+import { AstScopeMatcher, parseScope, scopeItem } from './scope.cjs';
 
 describe('scope', () => {
     testEach([

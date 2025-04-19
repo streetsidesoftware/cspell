@@ -1,3 +1,5 @@
+// ts-check
+import cspellESLintPluginRecommended from '@cspell/eslint-plugin/recommended';
 import eslint from '@eslint/js';
 import nodePlugin from 'eslint-plugin-n';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
@@ -285,4 +287,5 @@ export default tsEslint.config(
             'unicorn/prefer-module': 'off',
         },
     },
+    cspellESLintPluginRecommended,
 );

@@ -1,5 +1,5 @@
-import type { ASTNode } from './ASTNode.mjs';
-import type { ASTPath, ASTPathElement, Key } from './ASTPath.mjs';
+import type { ASTNode } from './ASTNode.js' with { 'resolution-mode': 'import' };
+import type { ASTPath, ASTPathElement, Key } from './ASTPath.js' with { 'resolution-mode': 'import' };
 
 // const logger = getDefaultLogger();
 // const log = logger.log;

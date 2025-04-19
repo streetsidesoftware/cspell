@@ -1,4 +1,4 @@
-import type { ASTNode } from './ASTNode.mjs';
+import type { ASTNode } from './ASTNode.js';
 
 export type Key = string | number | symbol | null | undefined;
 
