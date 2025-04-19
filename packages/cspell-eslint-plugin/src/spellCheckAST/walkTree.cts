@@ -4,6 +4,8 @@ import type { ASTPath, ASTPathElement, Key } from './ASTPath.js' with { 'resolut
 // const logger = getDefaultLogger();
 // const log = logger.log;
 
+const debugMode = false;
+
 export function walkTree(node: ASTNode, enter: (path: ASTPath) => void) {
     const visited = new Set<object>();
 
@@ -33,7 +35,7 @@ export function walkTree(node: ASTNode, enter: (path: ASTPath) => void) {
             return false;
         }
         visited.add(node);
-        const path = adjustPath({ node, parent: parent, key, index, prev: undefined });
+        const path = adjustPath({ node, parent, key, index, prev: undefined });
         enter(path);
         return true;
     });
@@ -42,6 +44,8 @@ export function walkTree(node: ASTNode, enter: (path: ASTPath) => void) {
 type CallBack = (element: ASTPathElement) => boolean;
 
 function walk(root: ASTNode, enter: CallBack) {
+    const useFx = debugMode ? '' : 'walkNodes';
+
     function walkNodes(pfx: string, node: ASTNode, parent: ASTNode | undefined, key: Key, index: number | undefined) {
         const goIn = enter({ node, parent, key, index });
         // log('walk: %o', { pfx, type: node.type, key, index, goIn });
@@ -51,7 +55,7 @@ function walk(root: ASTNode, enter: CallBack) {
 
         for (const key of Object.keys(n)) {
             const v = n[key] as unknown;
-            const fx = pfx + `.${node.type}[${key}]`;
+            const fx = useFx || pfx + `.${node.type}[${key}]`;
             if (Array.isArray(v)) {
                 for (let i = 0; i < v.length; ++i) {
                     const vv = v[i];

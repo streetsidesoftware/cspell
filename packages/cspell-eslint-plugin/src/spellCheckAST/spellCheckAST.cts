@@ -24,6 +24,7 @@ const spellCheck = createSyncFn<SpellCheckFn>(require.resolve('./worker.mjs'));
 
 const isDebugModeExtended = false;
 const forceLogging = false;
+const skipCheck = process.env.CSPELL_ESLINT_SKIP_CHECK || false;
 
 interface ToBeChecked {
     range: CheckTextRange;
@@ -216,7 +217,7 @@ export function spellCheckAST(filename: string, text: string, root: Node, option
     function needToCheckFields(path: ASTPath): Record<string, boolean> | undefined {
         const possibleScopes = mapScopes.get(path.node.type);
         if (!possibleScopes) {
-            _dumpNode(path);
+            if (debugMode) _dumpNode(path);
             return undefined;
         }
 
@@ -305,20 +306,23 @@ export function spellCheckAST(filename: string, text: string, root: Node, option
     }
 
     function debugNode(path: ASTPath, value: unknown) {
+        if (!debugMode) return;
         log(`${inheritanceSummary(path)}: %o`, value);
-        if (debugMode) _dumpNode(path);
+        _dumpNode(path);
     }
 
     // console.warn('root: %o', root);
 
     walkTree(root, checkNode);
 
-    const result = spellCheck(
-        filename,
-        text,
-        toBeChecked.map((t) => t.range),
-        options,
-    );
+    const result = skipCheck
+        ? { issues: [] }
+        : spellCheck(
+              filename,
+              text,
+              toBeChecked.map((t) => t.range),
+              options,
+          );
 
     const issues = result.issues.map((issue) => reportIssue(issue));
 

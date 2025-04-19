@@ -13,6 +13,8 @@ import tsEslint from 'typescript-eslint';
 
 // @ts-check
 
+const checkSpelling = !!process.env.CSPELL_CHECK_SPELLING;
+
 export default tsEslint.config(
     eslint.configs.recommended,
     nodePlugin.configs['flat/recommended'],
@@ -287,5 +289,5 @@ export default tsEslint.config(
             'unicorn/prefer-module': 'off',
         },
     },
-    cspellESLintPluginRecommended,
+    ...(checkSpelling ? [cspellESLintPluginRecommended] : []),
 );
