@@ -7,7 +7,7 @@ import { getDefaultLogger } from '../common/logger.cjs';
 import type { Options } from '../common/options.cjs';
 import { optionsSchema as schema } from '../generated/schema.cjs';
 import { spellCheckAST } from '../spellCheckAST/spellCheckAST.cjs';
-import type { Issue } from '../spellCheckAST/types.js';
+import type { Issue } from '../spellCheckAST/types.js' with { 'resolution-mode': 'import' };
 import { normalizeOptions } from './defaultCheckOptions.cjs';
 
 type ESlintPlugin = ESLint.Plugin;
