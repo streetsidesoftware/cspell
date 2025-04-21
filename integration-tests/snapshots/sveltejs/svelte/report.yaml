@@ -3,9 +3,9 @@ Repository: sveltejs/svelte
 Url: https://github.com/sveltejs/svelte.git
 Args: '["**"]'
 Summary:
-  files: 7287
-  filesWithIssues: 490
-  issues: 3595
+  files: 7320
+  filesWithIssues: 493
+  issues: 3607
   errors: 0
 Errors: []
 
@@ -28,7 +28,7 @@ issues:
   - "documentation/docs/02-runes/08-$host.md:32:2        ondecrement     U       ondecrement={() => count -= 1}"
   - "documentation/docs/02-runes/08-$host.md:33:2        onincrement     U       onincrement={() => count += 1}"
   - "documentation/docs/03-template-syntax/01-basic-markup.md:9:66           capitalised     U       regular HTML element. A capitalised tag or a tag that uses"
-  - "documentation/docs/03-template-syntax/01-basic-markup.md:201:15         Arethra         U       <Main name=\"Arethra\">"
+  - "documentation/docs/03-template-syntax/01-basic-markup.md:203:15         Arethra         U       <Main name=\"Arethra\">"
   - "documentation/docs/03-template-syntax/04-key.md:10:145      reinstantiated      U       will cause them to be reinstantiated and reinitialised:"
   - "documentation/docs/03-template-syntax/04-key.md:10:164      reinitialised       U       be reinstantiated and reinitialised:"
   - "documentation/docs/03-template-syntax/06-snippet.md:15:128      duplicative     U       Instead of writing duplicative code like [this](/playground"
@@ -381,12 +381,12 @@ issues:
   - "packages/svelte/messages/compile-warnings/misc.md:7:21          recognised      U       > `%code%` is not a recognised code"
   - "packages/svelte/messages/shared-warnings/warnings.md:7:19           uncloneable     U       ## state_snapshot_uncloneable"
   - "packages/svelte/messages/shared-warnings/warnings.md:15:132         cloneable       U       Certain objects may not be cloneable, in which case the original"
-  - "packages/svelte/package.json:123:103        treeshakeability    U       node scripts/check-treeshakeability.js\","
-  - "packages/svelte/package.json:133:7          jridgewell          U       \"@jridgewell/trace-mapping\": \"^0"
-  - "packages/svelte/package.json:150:7          ampproject          U       \"@ampproject/remapping\": \"^2.3.0"
-  - "packages/svelte/package.json:156:6          axobject            U       \"axobject-query\": \"^4.1.0\","
-  - "packages/svelte/package.json:159:6          esrap               U       \"esrap\": \"^1.4.6\","
-  - "packages/svelte/package.json:163:6          zimmerframe         U       \"zimmerframe\": \"^1.1.2\""
+  - "packages/svelte/package.json:134:103        treeshakeability    U       node scripts/check-treeshakeability.js\","
+  - "packages/svelte/package.json:144:7          jridgewell          U       \"@jridgewell/trace-mapping\": \"^0"
+  - "packages/svelte/package.json:161:7          ampproject          U       \"@ampproject/remapping\": \"^2.3.0"
+  - "packages/svelte/package.json:167:6          axobject            U       \"axobject-query\": \"^4.1.0\","
+  - "packages/svelte/package.json:170:6          esrap               U       \"esrap\": \"^1.4.6\","
+  - "packages/svelte/package.json:174:6          zimmerframe         U       \"zimmerframe\": \"^1.1.2\""
   - "packages/svelte/scripts/check-treeshakeability.js:21:15         importee    U       resolveId(importee) {"
   - "packages/svelte/scripts/check-treeshakeability.js:32:3          onwarn      U       onwarn: (warning, handle)"
   - "packages/svelte/scripts/check-treeshakeability.js:42:20         errr        U       throw new Error('errr what');"
@@ -1693,6 +1693,9 @@ issues:
   - "packages/svelte/src/compiler/utils/mapped_code.js:134:6         unswitched      U       // unswitched loops are faster"
   - "packages/svelte/src/html-tree-validation.js:120:5       bgsound     U       'bgsound',"
   - "packages/svelte/src/index-client.js:21:29       noone (no one)      U       value; // let's hope noone modifies this global"
+  - "packages/svelte/src/internal/client/dev/debug.js:57:9           callsite    U       const callsite = new Error().stack"
+  - "packages/svelte/src/internal/client/dev/debug.js:67:28          cdeps       U       console.groupCollapsed('%cdeps', 'font-weight: normal"
+  - "packages/svelte/src/internal/client/dev/debug.js:96:28          cderived    U       console.groupCollapsed('%cderived', 'font-weight: normal"
   - "packages/svelte/src/internal/client/dev/inspect.js:22:43        occured (occurred)      U       known that an error occured, but we don't stop execution"
   - "packages/svelte/src/internal/client/dev/tracing.js:102:29       cran    U       console.log(`${label()} %cran outside of an effect"
   - "packages/svelte/src/internal/client/dom/blocks/await.js:123:91      treeshaken      U       let` or else it isn't treeshaken out */"
@@ -1708,7 +1711,7 @@ issues:
   - "packages/svelte/src/internal/client/reactivity/props.js:415:51      synchronisation     U       value)); // force a synchronisation immediately"
   - "packages/svelte/src/internal/client/reactivity/sources.js:207:65        overfiring      U       - this way we avoid overfiring."
   - "packages/svelte/src/internal/client/runtime.js:136:90       depedencies             U       to avoid duplicating depedencies inside a reaction *"
-  - "packages/svelte/src/internal/client/runtime.js:597:13       beacuse (because)       U       // That's beacuse that source was changed"
+  - "packages/svelte/src/internal/client/runtime.js:588:13       beacuse (because)       U       // That's beacuse that source was changed"
   - "packages/svelte/src/internal/client/timing.js:12:5          bunder      U       // bunder will eval and remove"
   - "packages/svelte/src/internal/server/index.js:25:23          FDEF        U       [\\s'\">/=\\u{FDD0}-\\u{FDEF}\\u{FFFE}\\u{FFFF}\\u{"
   - "packages/svelte/src/internal/server/index.js:25:31          FFFE        U       \\u{FDD0}-\\u{FDEF}\\u{FFFE}\\u{FFFF}\\u{1FFFE}\\u"
@@ -1727,7 +1730,7 @@ issues:
   - "packages/svelte/src/motion/tweened.js:161:31        tweens      U       wrapper for a value that tweens smoothly to its target"
   - "packages/svelte/src/reactivity/create-subscriber.js:69:13       subcribe    U       // re-subcribe unnecessarily and create"
   - "packages/svelte/src/reactivity/reactive-value.js:13:43          onsubscribe     U       ) => void) => void} onsubscribe"
-  - "packages/svelte/src/reactivity/set.js:77:39         nilly       U       create sources willy-nilly to track all possible"
+  - "packages/svelte/src/reactivity/set.js:108:39        nilly       U       create sources willy-nilly to track all possible"
   - "packages/svelte/src/reactivity/window/index.js:135:62       dppx    U       window.devicePixelRatio}dppx)`),"
   - "packages/svelte/src/store/shared/index.js:155:9         unsubscribers       U       const unsubscribers = stores_array.map("
   - "packages/svelte/src/utils.js:202:2          srcobject           U       srcobject: 'srcObject',"

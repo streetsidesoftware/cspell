@@ -5,7 +5,7 @@ Args: '["**/*.md","**/*.java"]'
 Summary:
   files: 1975
   filesWithIssues: 1954
-  issues: 11943
+  issues: 11940
   errors: 0
 Errors: []
 
@@ -398,10 +398,10 @@ issues:
   - "microservices-distributed-tracing/order-microservice/src/main/java/com/iluwatar/order/microservice/Main.java:52:45          zipkin          U       -p 9411:9411 --name zipkin openzipkin/zipkin }"
   - "microservices-distributed-tracing/order-microservice/src/main/java/com/iluwatar/order/microservice/Main.java:52:52          openzipkin      U       :9411 --name zipkin openzipkin/zipkin }"
   - "microservices-distributed-tracing/order-microservice/src/test/java/com/iluwatar/order/microservice/OrderServiceTest.java:150:21         springframework     U       org.springframework.http.HttpStatus.BAD"
-  - "microservices-idempotent-consumer/README.md:132:40      idempotentconsumer      U       [main] com.iluwatar.idempotentconsumer.App : Nb of requests"
+  - "microservices-idempotent-consumer/README.md:141:40      idempotentconsumer      U       [main] com.iluwatar.idempotentconsumer.App : Nb of requests"
   - "microservices-idempotent-consumer/src/main/java/com/iluwatar/idempotentconsumer/InvalidNextStateException.java:28:76        Statemachine    U       is attempted in the Statemachine for the"
   - "microservices-idempotent-consumer/src/main/java/com/iluwatar/idempotentconsumer/Request.java:35:71          INERROR     U       STARTED, COMPLETED, or INERROR."
-  - "microservices-idempotent-consumer/src/test/java/com/iluwatar/idempotentconsumer/RequestServiceTests.java:129:31         Inprogress      U       completeRequest_whenNotInprogress() {"
+  - "microservices-idempotent-consumer/src/test/java/com/iluwatar/idempotentconsumer/RequestServiceTests.java:128:31         Inprogress      U       completeRequest_whenNotInprogress() {"
   - "microservices-log-aggregation/README.md:43:21       Aggregration    U       ![Microservices Log Aggregration flowchart](./etc/microservice"
   - "microservices-log-aggregation/src/main/java/com/iluwatar/logaggregation/App.java:25:22          logaggregation      U       package com.iluwatar.logaggregation;"
   - "model-view-intent/README.md:47:244      MVVM        U       Model-View-ViewModel (MVVM) patterns, but with"
@@ -424,15 +424,11 @@ issues:
   - "model-view-viewmodel/src/main/java/com/iluwatar/model/view/viewmodel/BookServiceImpl.java:57:36         Trott           U       Alan Shalloway, James Trott\","
   - "model-view-viewmodel/src/main/java/com/iluwatar/model/view/viewmodel/BookServiceImpl.java:63:20         Larman          U       \"Craig Larman\","
   - "monad/README.md:143:19      Vavr    U       * Frameworks like Vavr enhance functional programmin"
-  - "money/README.md:53:23       amnt            U       public Money(double amnt, String curr) {"
-  - "money/README.md:62:65       Curriencies     U       throws CannotAddTwoCurrienciesException {"
+  - "money/README.md:55:25       amnt            U       public Money(double amnt, String curr) {"
+  - "money/README.md:64:67       Curriencies     U       throws CannotAddTwoCurrienciesException {"
   - "money/src/main/java/com/iluwatar/CannotAddTwoCurrienciesException.java:27:53        diffrent (different)    U       user tries to add two diffrent currencies. */"
   - "money/src/test/java/com/iluwater/money/MoneyTest.java:25:13         iluwater    U       package com.iluwater.money;"
-  - "monolithic-architecture/README.md:2:20          Ecommerce                       U       title: \"Monolithic Ecommerce App: A Cohesive Application"
-  - "monolithic-architecture/README.md:19:218        inseperable (inseparable)       U       processes that are all inseperable of each other."
-  - "monolithic-architecture/README.md:113:51        cruical                         U       points to the system is cruical"
-  - "monolithic-architecture/README.md:147:5         Springboot                      U       >* [Springboot](https://docs.spring"
-  - "monolithic-architecture/README.md:151:8         Databse                         U       >* [H2 Databse](https://www.h2database"
+  - "monolithic-architecture/README.md:52:14         Ecommerce       U       public class EcommerceApp implements CommandLineRunn"
   - "monolithic-architecture/src/main/java/com/iluwatar/monolithic/EcommerceApp.java:57:7        Initilizing     U       /** Initilizing controllers as services"
   - "monolithic-architecture/src/test/java/com/iluwatar/monolithic/MonolithicAppTest.java:62:24          ecommerce       U       private EcommerceApp ecommerceApp;"
   - "monostate/README.md:2:9         Monostate       U       title: \"Monostate Pattern in Java: Achieving"
@@ -488,8 +484,6 @@ issues:
   - "promise/README.md:127:125       dcrw        U       9_st37nn5hq_bfhp8hw2dcrw0000gp/T/promise_pattern"
   - "promise/README.md:143:43        Domenic     U       the point to Promises (Domenic Denicola)](https://gist"
   - "promise/README.md:143:51        Denicola    U       to Promises (Domenic Denicola)](https://gist.github"
-  - "publish-subscribe/README.md:123:115     deplay                      U       a 0.2 sec processing deplay"
-  - "publish-subscribe/README.md:210:44      everytime (every time)      U       output could change everytime you run the program"
   - "queue-based-load-leveling/src/main/java/com/iluwatar/queue/load/leveling/ServiceExecutor.java:30:11         Execuotr    U       * ServiceExecuotr class. This class will"
   - "reactor/README.md:59:24         Demultiplexer       U       **Synchronous Event Demultiplexer**: This is a system"
   - "reactor/README.md:105:32        Datagram            U       registerChannel(new NioDatagramChannel(16668, loggingHandler"
@@ -1030,12 +1024,12 @@ issues:
   - "service-locator/README.md:61:50         jndi                U       String JNDI_SERVICE_A = \"jndi/serviceA\";"
   - "service-locator/README.md:90:39         servicelocator      U       main] INFO com.iluwatar.servicelocator.InitContext -- Looking"
   - "service-locator/src/main/java/com/iluwatar/servicelocator/ServiceLocator.java:42:20         Jndi    U       * @param serviceJndiName a string"
-  - "service-stub/README.md:106:32       soso    U       text = \"This movie is soso\";"
+  - "service-stub/README.md:115:32       soso    U       text = \"This movie is soso\";"
   - "service-stub/src/main/java/com/iluwatar/servicestub/App.java:25:22          servicestub     U       package com.iluwatar.servicestub;"
   - "service-stub/src/main/java/com/iluwatar/servicestub/App.java:36:88          stopwords       U       not accounting for stopwords or"
   - "service-to-worker/README.md:95:39       servicetoworker     U       main] INFO com.iluwatar.servicetoworker.GiantView -- Giant giant"
   - "service-to-worker/src/test/java/com/iluwatar/servicetoworker/GiantViewTest.java:39:12       Dispaly     U       void testDispalyGiant() {"
-  - "session-facade/README.md:111:39         sessionfacade       U       main] INFO com.iluwatar.sessionfacade.CartService -- ID:"
+  - "session-facade/README.md:123:39         sessionfacade       U       main] INFO com.iluwatar.sessionfacade.CartService -- ID:"
   - "single-table-inheritance/README.md:194:183      ilkka       U       with PID 56372 (/Users/ilkka.seppala/git/java-design"
   - "single-table-inheritance/README.md:194:189      seppala     U       56372 (/Users/ilkka.seppala/git/java-design-patterns"
   - "single-table-inheritance/README.md:202:69       zaxxer      U       main] com.zaxxer.hikari.HikariDataSource"
