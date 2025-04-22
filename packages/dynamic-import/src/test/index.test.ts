@@ -35,7 +35,7 @@ describe('index', () => {
 
     test.each`
         moduleName             | parents        | expected
-        ${'./hello_world.mjs'} | ${undefined}   | ${oc({ message: expect.stringMatching(/^Failed to load url/) })}
+        ${'./hello_world.mjs'} | ${undefined}   | ${oc({ message: expect.stringMatching(/^Cannot find module/), code: 'ERR_MODULE_NOT_FOUND' })}
         ${'./hello_world.mjs'} | ${[__dirname]} | ${oc({ message: expect.stringMatching(/^Cannot find module/), code: 'ERR_MODULE_NOT_FOUND' })}
     `('dynamicImportFrom NOT FOUND $moduleName $parents', async ({ moduleName, parents, expected }) => {
         const pModule = dynamicImport<typeof helloWorld>(moduleName, parents);
