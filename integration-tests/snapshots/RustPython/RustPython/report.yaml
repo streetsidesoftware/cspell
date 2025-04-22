@@ -4,8 +4,8 @@ Url: https://github.com/RustPython/RustPython.git
 Args: '["**"]'
 Summary:
   files: 670
-  filesWithIssues: 107
-  issues: 776
+  filesWithIssues: 106
+  issues: 770
   errors: 0
 Errors: []
 
@@ -892,15 +892,11 @@ issues:
   - "pylib/build.rs:1:1\tNo issues found"
   - "pylib/Cargo.toml:1:1\tNo issues found"
   - "pylib/src/lib.rs:1:1\tNo issues found"
-  - "README.md:93:29         wasip               U       build --target wasm32-wasip1 --no-default-features"
   - "README.md:96:8          wasmer              U       Run by wasmer"
   - "README.md:99:1          wasmer              U       wasmer run --dir `pwd` -- target"
-  - "README.md:99:41         wasip               U       pwd` -- target/wasm32-wasip1/release/rustpython"
   - "README.md:102:8         wapm                U       Run by wapm"
   - "README.md:105:3         wapm                U       $ wapm install rustpython"
   - "README.md:106:3         wapm                U       $ wapm run rustpython"
-  - "README.md:116:39        wasip               U       release --target wasm32-wasip1 --features=\"freeze"
-  - "README.md:119:139       wasip               U       rustup target add wasm32-wasip1`."
   - "README.md:167:4         FOSDEM              U       - [FOSDEM 2019](https://www.youtube"
   - "README.md:175:4         Greptime            U       - [GreptimeDB](https://github.com"
   - "README.md:176:4         pyckitup            U       - [pyckitup](https://github.com"
@@ -919,10 +915,9 @@ issues:
   - "scripts/redox/run-redoxer.sh:12:47          redoxer     U       root/rustpython-lib redoxer build --release"
   - "scripts/redox/run-redoxer.sh:17:1           redoxer     U       redoxer exec -f \"$DIR\" -- ."
   - "scripts/redox/uncomment-cargo.sh:1:1\tNo issues found"
-  - "scripts/release-wapm.sh:6:14        WAPM        U       FEATURES_FOR_WAPM=(stdlib zlib)"
-  - "scripts/release-wapm.sh:10:39       wasip       U       release --target wasm32-wasip1 --no-default-features"
-  - "scripts/release-wapm.sh:10:95       WAPM        U       features=\"${FEATURES_FOR_WAPM[*]}\""
-  - "scripts/release-wapm.sh:12:1        wapm        U       wapm publish"
+  - "scripts/release-wapm.sh:6:14        WAPM    U       FEATURES_FOR_WAPM=(stdlib zlib)"
+  - "scripts/release-wapm.sh:10:95       WAPM    U       features=\"${FEATURES_FOR_WAPM[*]}\""
+  - "scripts/release-wapm.sh:12:1        wapm    U       wapm publish"
   - "src/interpreter.rs:1:1\tNo issues found"
   - "src/lib.rs:1:1\tNo issues found"
   - "src/main.rs:1:1\tNo issues found"
@@ -1197,7 +1192,7 @@ issues:
   - "vm/sre_engine/src/lib.rs:1:1\tNo issues found"
   - "vm/sre_engine/src/string.rs:1:1\tNo issues found"
   - "vm/sre_engine/tests/tests.rs:1:1\tNo issues found"
-  - "wapm.toml:11:25         wasip       U       source = \"target/wasm32-wasip1/release/rustpython"
+  - "wapm.toml:1:1\tNo issues found"
   - "wasm/demo/package.json:34:21        Liddle      U       \"author\": \"Ryan Liddle\","
   - "wasm/demo/snippets/asyncbrowser.py:2:8          asyncweb    U       import asyncweb"
   - "wasm/demo/snippets/asyncbrowser.py:15:5         asyncweb    U       asyncweb.run(main(delay))"

@@ -1812,48 +1812,48 @@ ext/bz2/bz2_filter.c:345:5     - Unknown word (tmpzval)    -- tmpzval = zend_has
 ext/calendar/cal_unix.c:32:17     - Unknown word (tmbuf)      -- struct tm *ta, tmbuf;
 ext/calendar/cal_unix.c:47:35     - Unknown word (tmbuf)      -- php_localtime_r(&ts, &tmbuf))) {
 ext/calendar/cal_unix.c:64:21     - Unknown word (jday)       -- zend_value_error("jday must be between 244
-ext/calendar/calendar.c:143:23    - Unknown word (abbrevmonths)           -- add_assoc_zval(ret, "abbrevmonths", &smonths);
-ext/calendar/calendar.c:145:25    - Unknown word (calname)                -- add_assoc_string(ret, "calname", calendar->name);
-ext/calendar/calendar.c:146:25    - Unknown word (calsymbol)              -- add_assoc_string(ret, "calsymbol", calendar->symbol)
-ext/calendar/calendar.c:165:27    - Unknown word (CALS)                   -- (i = 0; i < CAL_NUM_CALS; i++) {
-ext/calendar/calendar.c:172:32    - Unknown word (CALS)                   -- 0 || cal >= CAL_NUM_CALS) {
-ext/calendar/calendar.c:192:32    - Unknown word (CALS)                   -- 0 || cal >= CAL_NUM_CALS) {
-ext/calendar/calendar.c:268:8     - Unknown word (strpprintf)             -- zend_strpprintf(0, "%i/%i/%i", month
-ext/calendar/calendar.c:278:35    - Unknown word (abbrevdayname)          -- string(return_value, "abbrevdayname", DayNameShort[dow]
-ext/calendar/calendar.c:282:35    - Unknown word (abbrevdayname)          -- string(return_value, "abbrevdayname", "");
-ext/calendar/calendar.c:288:35    - Unknown word (abbrevmonth)            -- string(return_value, "abbrevmonth", (year > 0 ? JEWISH
-ext/calendar/calendar.c:291:35    - Unknown word (abbrevmonth)            -- string(return_value, "abbrevmonth", calendar->month_name
-ext/calendar/calendar.c:300:12    - Unknown word (julday)                 -- zend_long julday;
-ext/calendar/calendar.c:303:51    - Unknown word (julday)                 -- ZEND_NUM_ARGS(), "l", &julday) == FAILURE) {
-ext/calendar/calendar.c:307:17    - Unknown word (julday)                 -- SdnToGregorian(julday, &year, &month, &day
-ext/calendar/calendar.c:309:22    - Unknown word (strpprintf)             -- RETURN_NEW_STR(zend_strpprintf(0, "%i/%i/%i", month
-ext/calendar/calendar.c:329:12    - Unknown word (julday)                 -- zend_long julday;
-ext/calendar/calendar.c:332:51    - Unknown word (julday)                 -- ZEND_NUM_ARGS(), "l", &julday) == FAILURE) {
-ext/calendar/calendar.c:338:22    - Unknown word (strpprintf)             -- RETURN_NEW_STR(zend_strpprintf(0, "%i/%i/%i", month
-ext/calendar/calendar.c:363:21    - Unknown word (endofalafim)            -- char *p, old[18], *endofalafim;
-ext/calendar/calendar.c:365:6     - Unknown word (endofalafim)            -- p = endofalafim = old;
-ext/calendar/calendar.c:375:4     - Unknown word (alafim)                 -- /* alafim (thousands) case */
-ext/calendar/calendar.c:377:8     - Unknown word (alef)                   -- *p = alef_bet[n / 1000];
-ext/calendar/calendar.c:380:22    - Unknown word (ALAFIM)                 -- if (CAL_JEWISH_ADD_ALAFIM_GERESH & fl) {
-ext/calendar/calendar.c:380:29    - Unknown word (GERESH)                 -- CAL_JEWISH_ADD_ALAFIM_GERESH & fl) {
-ext/calendar/calendar.c:384:22    - Unknown word (ALAFIM)                 -- if (CAL_JEWISH_ADD_ALAFIM & fl) {
-ext/calendar/calendar.c:385:60    - Unknown word (אלפים)                  -- characters in ISO-8859-8: אלפים */
-ext/calendar/calendar.c:390:3     - Unknown word (endofalafim)            -- endofalafim = p;
-ext/calendar/calendar.c:396:8     - Unknown word (alef)                   -- *p = alef_bet[22];
-ext/calendar/calendar.c:401:4     - Unknown word (meot)                   -- /* meot (hundreds) case */
-ext/calendar/calendar.c:403:8     - Unknown word (alef)                   -- *p = alef_bet[18 + n / 100];
-ext/calendar/calendar.c:408:18    - Unknown word (zain)                   -- /* tet-vav & tet-zain case (special case for
-ext/calendar/calendar.c:410:8     - Unknown word (alef)                   -- *p = alef_bet[9];
-ext/calendar/calendar.c:415:4     - Unknown word (asarot)                 -- /* asarot (tens) case */
-ext/calendar/calendar.c:422:4     - Unknown word (yehidot)                -- /* yehidot (ones) case */
-ext/calendar/calendar.c:429:21    - Unknown word (GERESHAYIM)             -- if (CAL_JEWISH_ADD_GERESHAYIM & fl) {
-ext/calendar/calendar.c:430:15    - Unknown word (endofalafim)            -- switch (p - endofalafim) {
+ext/calendar/calendar.c:145:23    - Unknown word (abbrevmonths)           -- add_assoc_zval(ret, "abbrevmonths", &smonths);
+ext/calendar/calendar.c:147:25    - Unknown word (calname)                -- add_assoc_string(ret, "calname", calendar->name);
+ext/calendar/calendar.c:148:25    - Unknown word (calsymbol)              -- add_assoc_string(ret, "calsymbol", calendar->symbol)
+ext/calendar/calendar.c:165:41    - Unknown word (CALS)                   -- return_value, CAL_NUM_CALS);
+ext/calendar/calendar.c:168:27    - Unknown word (CALS)                   -- (i = 0; i < CAL_NUM_CALS; i++) {
+ext/calendar/calendar.c:175:32    - Unknown word (CALS)                   -- 0 || cal >= CAL_NUM_CALS) {
+ext/calendar/calendar.c:271:8     - Unknown word (strpprintf)             -- zend_strpprintf(0, "%i/%i/%i", month
+ext/calendar/calendar.c:281:35    - Unknown word (abbrevdayname)          -- string(return_value, "abbrevdayname", DayNameShort[dow]
+ext/calendar/calendar.c:285:35    - Unknown word (abbrevdayname)          -- string(return_value, "abbrevdayname", "");
+ext/calendar/calendar.c:291:35    - Unknown word (abbrevmonth)            -- string(return_value, "abbrevmonth", (year > 0 ? JEWISH
+ext/calendar/calendar.c:294:35    - Unknown word (abbrevmonth)            -- string(return_value, "abbrevmonth", calendar->month_name
+ext/calendar/calendar.c:303:12    - Unknown word (julday)                 -- zend_long julday;
+ext/calendar/calendar.c:306:51    - Unknown word (julday)                 -- ZEND_NUM_ARGS(), "l", &julday) == FAILURE) {
+ext/calendar/calendar.c:310:17    - Unknown word (julday)                 -- SdnToGregorian(julday, &year, &month, &day
+ext/calendar/calendar.c:312:22    - Unknown word (strpprintf)             -- RETURN_NEW_STR(zend_strpprintf(0, "%i/%i/%i", month
+ext/calendar/calendar.c:332:12    - Unknown word (julday)                 -- zend_long julday;
+ext/calendar/calendar.c:335:51    - Unknown word (julday)                 -- ZEND_NUM_ARGS(), "l", &julday) == FAILURE) {
+ext/calendar/calendar.c:341:22    - Unknown word (strpprintf)             -- RETURN_NEW_STR(zend_strpprintf(0, "%i/%i/%i", month
+ext/calendar/calendar.c:366:21    - Unknown word (endofalafim)            -- char *p, old[18], *endofalafim;
+ext/calendar/calendar.c:368:6     - Unknown word (endofalafim)            -- p = endofalafim = old;
+ext/calendar/calendar.c:378:4     - Unknown word (alafim)                 -- /* alafim (thousands) case */
+ext/calendar/calendar.c:380:8     - Unknown word (alef)                   -- *p = alef_bet[n / 1000];
+ext/calendar/calendar.c:383:22    - Unknown word (ALAFIM)                 -- if (CAL_JEWISH_ADD_ALAFIM_GERESH & fl) {
+ext/calendar/calendar.c:383:29    - Unknown word (GERESH)                 -- CAL_JEWISH_ADD_ALAFIM_GERESH & fl) {
+ext/calendar/calendar.c:387:22    - Unknown word (ALAFIM)                 -- if (CAL_JEWISH_ADD_ALAFIM & fl) {
+ext/calendar/calendar.c:388:60    - Unknown word (אלפים)                  -- characters in ISO-8859-8: אלפים */
+ext/calendar/calendar.c:393:3     - Unknown word (endofalafim)            -- endofalafim = p;
+ext/calendar/calendar.c:399:8     - Unknown word (alef)                   -- *p = alef_bet[22];
+ext/calendar/calendar.c:404:4     - Unknown word (meot)                   -- /* meot (hundreds) case */
+ext/calendar/calendar.c:406:8     - Unknown word (alef)                   -- *p = alef_bet[18 + n / 100];
+ext/calendar/calendar.c:411:18    - Unknown word (zain)                   -- /* tet-vav & tet-zain case (special case for
+ext/calendar/calendar.c:413:8     - Unknown word (alef)                   -- *p = alef_bet[9];
+ext/calendar/calendar.c:418:4     - Unknown word (asarot)                 -- /* asarot (tens) case */
+ext/calendar/calendar.c:425:4     - Unknown word (yehidot)                -- /* yehidot (ones) case */
+ext/calendar/calendar.c:432:21    - Unknown word (GERESHAYIM)             -- if (CAL_JEWISH_ADD_GERESHAYIM & fl) {
+ext/calendar/calendar.c:433:15    - Unknown word (endofalafim)            -- switch (p - endofalafim) {
 ext/calendar/calendar.c:43:10     - Unknown word (CALS)       -- CAL_NUM_CALS
-ext/calendar/calendar.c:465:23    - Unknown word (strpprintf)             -- RETURN_NEW_STR(zend_strpprintf(0, "%i/%i/%i", month
-ext/calendar/calendar.c:472:23    - Unknown word (strpprintf)             -- RETVAL_NEW_STR(zend_strpprintf(0, "%s %s %s", heb_number
-ext/calendar/calendar.c:531:14    - Unknown word (daynamel)               -- const char *daynamel, *daynames;
-ext/calendar/calendar.c:538:2     - Unknown word (daynamel)               -- daynamel = DayNameLong[day];
-ext/calendar/calendar.c:543:17    - Unknown word (daynamel)               -- RETURN_STRING(daynamel);
+ext/calendar/calendar.c:468:23    - Unknown word (strpprintf)             -- RETURN_NEW_STR(zend_strpprintf(0, "%i/%i/%i", month
+ext/calendar/calendar.c:475:23    - Unknown word (strpprintf)             -- RETVAL_NEW_STR(zend_strpprintf(0, "%s %s %s", heb_number
+ext/calendar/calendar.c:534:14    - Unknown word (daynamel)               -- const char *daynamel, *daynames;
+ext/calendar/calendar.c:541:2     - Unknown word (daynamel)               -- daynamel = DayNameLong[day];
+ext/calendar/calendar.c:546:17    - Unknown word (daynamel)               -- RETURN_STRING(daynamel);
 ext/calendar/calendar.c:61:62     - Unknown word (CALS)       -- conversion_table[CAL_NUM_CALS] = {
 ext/calendar/calendar.c:84:48     - Unknown word (אבגדהוזחטיכלמנסעפצקרשת) -- escape sequences of אבגדהוזחטיכלמנסעפצקרשת
 ext/calendar/calendar.c:86:19     - Unknown word (alef)                   -- static const char alef_bet[25] = "0\xE0\xE
@@ -3101,8 +3101,8 @@ ext/curl/interface.c:256:78    - Unknown word (zpostfields) -- php_curl *ch, zva
 ext/curl/interface.c:2603:4    - Unknown word (CAAZ)            -- CAAZ("certinfo", &listcode
 ext/curl/interface.c:2653:4    - Unknown word (CAASTR)          -- CAASTR("request_header", ch
 ext/curl/interface.c:300:6     - Unknown word (NTLMWB)      -- {"NTLMWB", CURL_VERSION_NTLM
-ext/curl/interface.c:3040:22   - Unknown word (OVFL)            -- if (ZEND_SIZE_T_INT_OVFL(ZSTR_LEN(str))) {
-ext/curl/interface.c:3069:22   - Unknown word (OVFL)            -- if (ZEND_SIZE_T_INT_OVFL(ZSTR_LEN(str))) {
+ext/curl/interface.c:3041:22   - Unknown word (OVFL)            -- if (ZEND_SIZE_T_INT_OVFL(ZSTR_LEN(str))) {
+ext/curl/interface.c:3070:22   - Unknown word (OVFL)            -- if (ZEND_SIZE_T_INT_OVFL(ZSTR_LEN(str))) {
 ext/curl/interface.c:314:28    - Unknown word (ALTSVC)      -- ALTSVC", CURL_VERSION_ALTSVC},
 ext/curl/interface.c:314:6     - Unknown word (ALTSVC)      -- {"ALTSVC", CURL_VERSION_ALTSVC
 ext/curl/interface.c:324:26    - Unknown word (HSTS)        -- HSTS", CURL_VERSION_HSTS},
@@ -3117,10 +3117,10 @@ ext/curl/multi.c:105:31    - Unknown word (easyh)      -- llist_add_element(&mh-
 ext/curl/multi.c:136:56    - Unknown word (easyh)      -- llist_get_first_ex(&mh->easyh, &pos); pz_ch_temp;
 ext/curl/multi.c:137:52    - Unknown word (easyh)      -- llist_get_next_ex(&mh->easyh, &pos)) {
 ext/curl/multi.c:170:31    - Unknown word (easyh)      -- llist_del_element(&mh->easyh, z_ch, (int (*)(void
-ext/curl/multi.c:301:13    - Unknown word (zmsgs)      -- zval *zmsgs_in_queue = NULL;
-ext/curl/multi.c:307:16    - Unknown word (zmsgs)      -- Z_PARAM_ZVAL(zmsgs_in_queue)
-ext/curl/multi.c:317:6     - Unknown word (zmsgs)      -- if (zmsgs_in_queue) {
-ext/curl/multi.c:318:28    - Unknown word (zmsgs)      -- TRY_ASSIGN_REF_LONG(zmsgs_in_queue, queued_msgs
+ext/curl/multi.c:302:13    - Unknown word (zmsgs)      -- zval *zmsgs_in_queue = NULL;
+ext/curl/multi.c:308:16    - Unknown word (zmsgs)      -- Z_PARAM_ZVAL(zmsgs_in_queue)
+ext/curl/multi.c:318:6     - Unknown word (zmsgs)      -- if (zmsgs_in_queue) {
+ext/curl/multi.c:319:28    - Unknown word (zmsgs)      -- TRY_ASSIGN_REF_LONG(zmsgs_in_queue, queued_msgs
 ext/curl/multi.c:75:23     - Unknown word (easyh)      -- zend_llist_init(&mh->easyh, sizeof(zval), _php
 ext/curl/share.c:13:14     - Unknown word (Pierrick)   -- | Author: Pierrick Charron <pierrick@php
 ext/curl/share.c:13:23     - Unknown word (Charron)    -- | Author: Pierrick Charron <pierrick@php.net>
@@ -19856,41 +19856,41 @@ ext/pgsql/pgsql.c:1955:15   - Unknown word (Qntuples)   -- if (row >= PQntuples(
 ext/pgsql/pgsql.c:1968:7    - Unknown word (Qgetisnull) -- if (PQgetisnull(pgsql_result, pgsql
 ext/pgsql/pgsql.c:2027:15   - Unknown word (Qntuples)   -- if (row >= PQntuples(pgsql_result)) {
 ext/pgsql/pgsql.c:2045:8    - Unknown word (Qgetisnull) -- if (PQgetisnull(pgsql_result, pgsql
-ext/pgsql/pgsql.c:2196:8    - Unknown word (Qgetisnull) -- if (PQgetisnull(pgsql_result, pg_row
-ext/pgsql/pgsql.c:2308:17   - Unknown word (Qgetisnull) -- RETVAL_LONG(PQgetisnull(pgsql_result, pgsql
-ext/pgsql/pgsql.c:2323:17   - Unknown word (fieldprtlen) -- PHP_FUNCTION(pg_fieldprtlen)
-ext/pgsql/pgsql.c:2428:8    - Unknown word (PQTRACE)     -- #ifdef PQTRACE_REGRESS_MODE
-ext/pgsql/pgsql.c:2429:23   - Unknown word (PQTRACE)     -- if (!(trace_mode & (PQTRACE_SUPPRESS_TIMESTAMPS
-ext/pgsql/pgsql.c:2429:51   - Unknown word (PQTRACE)     -- SUPPRESS_TIMESTAMPS|PQTRACE_REGRESS_MODE))) {
+ext/pgsql/pgsql.c:2197:8    - Unknown word (Qgetisnull) -- if (PQgetisnull(pgsql_result, pg_row
+ext/pgsql/pgsql.c:2309:17   - Unknown word (Qgetisnull) -- RETVAL_LONG(PQgetisnull(pgsql_result, pgsql
+ext/pgsql/pgsql.c:2324:17   - Unknown word (fieldprtlen) -- PHP_FUNCTION(pg_fieldprtlen)
+ext/pgsql/pgsql.c:2429:8    - Unknown word (PQTRACE)     -- #ifdef PQTRACE_REGRESS_MODE
+ext/pgsql/pgsql.c:2430:23   - Unknown word (PQTRACE)     -- if (!(trace_mode & (PQTRACE_SUPPRESS_TIMESTAMPS
+ext/pgsql/pgsql.c:2430:51   - Unknown word (PQTRACE)     -- SUPPRESS_TIMESTAMPS|PQTRACE_REGRESS_MODE))) {
 ext/pgsql/pgsql.c:249:17    - Unknown word (Lofp)       -- static inline pgLofp *pgsql_lob_from_obj
 ext/pgsql/pgsql.c:250:12    - Unknown word (Lofp)       -- return (pgLofp *)((char *)(obj) - XtOffsetOf
 ext/pgsql/pgsql.c:250:49    - Unknown word (Lofp)       -- obj) - XtOffsetOf(pgLofp, std));
 ext/pgsql/pgsql.c:256:4     - Unknown word (Lofp)       -- pgLofp *intern = zend_object
 ext/pgsql/pgsql.c:256:46    - Unknown word (Lofp)       -- object_alloc(sizeof(pgLofp), class_type);
-ext/pgsql/pgsql.c:2616:26   - Unknown word (lofd)        -- pgsql_mode=0, pgsql_lofd;
-ext/pgsql/pgsql.c:2618:16   - Unknown word (lofp)        -- pgLofp *pgsql_lofp;
-ext/pgsql/pgsql.c:2690:13   - Unknown word (lofd)        -- if ((pgsql_lofd = lo_open(pgsql, oid
-ext/pgsql/pgsql.c:2696:16   - Unknown word (lofd)        -- if ((pgsql_lofd = lo_open(pgsql, oid
-ext/pgsql/pgsql.c:2713:8    - Unknown word (lofp)        -- pgsql_lofp = Z_PGSQL_LOB_P(return
-ext/pgsql/pgsql.c:2714:8    - Unknown word (lofp)        -- pgsql_lofp->conn = pgsql;
-ext/pgsql/pgsql.c:2715:14   - Unknown word (lofd)        -- pgsql_lofp->lofd = pgsql_lofd;
-ext/pgsql/pgsql.c:2715:27   - Unknown word (lofd)        -- pgsql_lofp->lofd = pgsql_lofd;
+ext/pgsql/pgsql.c:2617:26   - Unknown word (lofd)        -- pgsql_mode=0, pgsql_lofd;
+ext/pgsql/pgsql.c:2619:16   - Unknown word (lofp)        -- pgLofp *pgsql_lofp;
+ext/pgsql/pgsql.c:2691:13   - Unknown word (lofd)        -- if ((pgsql_lofd = lo_open(pgsql, oid
+ext/pgsql/pgsql.c:2697:16   - Unknown word (lofd)        -- if ((pgsql_lofd = lo_open(pgsql, oid
+ext/pgsql/pgsql.c:2714:8    - Unknown word (lofp)        -- pgsql_lofp = Z_PGSQL_LOB_P(return
+ext/pgsql/pgsql.c:2715:8    - Unknown word (lofp)        -- pgsql_lofp->conn = pgsql;
+ext/pgsql/pgsql.c:2716:14   - Unknown word (lofd)        -- pgsql_lofp->lofd = pgsql_lofd;
+ext/pgsql/pgsql.c:2716:27   - Unknown word (lofd)        -- pgsql_lofp->lofd = pgsql_lofd;
 ext/pgsql/pgsql.c:271:10    - Unknown word (lofp)       -- pgLofp *lofp = pgsql_lob_from_obj
 ext/pgsql/pgsql.c:273:24    - Unknown word (lofp)       -- zend_object_std_dtor(&lofp->std);
-ext/pgsql/pgsql.c:3116:19   - Unknown word (PQERRORS)    -- if (verbosity & (PQERRORS_TERSE|PQERRORS_DEFAULT
-ext/pgsql/pgsql.c:3116:34   - Unknown word (PQERRORS)    -- verbosity & (PQERRORS_TERSE|PQERRORS_DEFAULT|PQERRORS_VERBOSE
-ext/pgsql/pgsql.c:3116:51   - Unknown word (PQERRORS)    -- TERSE|PQERRORS_DEFAULT|PQERRORS_VERBOSE|PQERRORS_SQLSTATE
-ext/pgsql/pgsql.c:3141:20   - Unknown word (PQSHOW)      -- if (visibility == PQSHOW_CONTEXT_NEVER || visibility
-ext/pgsql/pgsql.c:3141:58   - Unknown word (PQSHOW)      -- NEVER || visibility & (PQSHOW_CONTEXT_ERRORS|PQSHOW
-ext/pgsql/pgsql.c:3141:80   - Unknown word (PQSHOW)      -- PQSHOW_CONTEXT_ERRORS|PQSHOW_CONTEXT_ALWAYS)) {
-ext/pgsql/pgsql.c:3407:15   - Unknown word (zquery)      -- zend_string *zquery = zend_string_alloc
-ext/pgsql/pgsql.c:3408:18   - Unknown word (zquery)      -- memcpy(ZSTR_VAL(zquery), ZSTR_VAL(tmp), ZSTR
-ext/pgsql/pgsql.c:3409:11   - Unknown word (zquery)      -- ZSTR_LEN(zquery) = ZSTR_LEN(tmp);
-ext/pgsql/pgsql.c:3410:36   - Unknown word (zquery)      -- tmp) > 0 && ZSTR_VAL(zquery)[ZSTR_LEN(tmp) - 1]
-ext/pgsql/pgsql.c:3411:12   - Unknown word (zquery)      -- ZSTR_VAL(zquery)[ZSTR_LEN(tmp)] = '
+ext/pgsql/pgsql.c:3117:19   - Unknown word (PQERRORS)    -- if (verbosity & (PQERRORS_TERSE|PQERRORS_DEFAULT
+ext/pgsql/pgsql.c:3117:34   - Unknown word (PQERRORS)    -- verbosity & (PQERRORS_TERSE|PQERRORS_DEFAULT|PQERRORS_VERBOSE
+ext/pgsql/pgsql.c:3117:51   - Unknown word (PQERRORS)    -- TERSE|PQERRORS_DEFAULT|PQERRORS_VERBOSE|PQERRORS_SQLSTATE
+ext/pgsql/pgsql.c:3142:20   - Unknown word (PQSHOW)      -- if (visibility == PQSHOW_CONTEXT_NEVER || visibility
+ext/pgsql/pgsql.c:3142:58   - Unknown word (PQSHOW)      -- NEVER || visibility & (PQSHOW_CONTEXT_ERRORS|PQSHOW
+ext/pgsql/pgsql.c:3142:80   - Unknown word (PQSHOW)      -- PQSHOW_CONTEXT_ERRORS|PQSHOW_CONTEXT_ALWAYS)) {
+ext/pgsql/pgsql.c:3409:15   - Unknown word (zquery)      -- zend_string *zquery = zend_string_alloc
+ext/pgsql/pgsql.c:3410:18   - Unknown word (zquery)      -- memcpy(ZSTR_VAL(zquery), ZSTR_VAL(tmp), ZSTR
+ext/pgsql/pgsql.c:3411:11   - Unknown word (zquery)      -- ZSTR_LEN(zquery) = ZSTR_LEN(tmp);
+ext/pgsql/pgsql.c:3412:36   - Unknown word (zquery)      -- tmp) > 0 && ZSTR_VAL(zquery)[ZSTR_LEN(tmp) - 1]
+ext/pgsql/pgsql.c:3413:12   - Unknown word (zquery)      -- ZSTR_VAL(zquery)[ZSTR_LEN(tmp)] = '
 ext/pgsql/pgsql.c:364:35    - Unknown word (PQTRANS)    -- PQtransactionStatus(link) != PQTRANS_IDLE) {
 ext/pgsql/pgsql.c:416:8     - Unknown word (fmtenc)     -- char *fmtenc = PQescapeLiteral(conn
-ext/pgsql/pgsql.c:4173:17   - Unknown word (prevriously) -- /* {{{ Executes prevriously prepared stmtname asynchronou
+ext/pgsql/pgsql.c:4175:17   - Unknown word (prevriously) -- /* {{{ Executes prevriously prepared stmtname asynchronou
 ext/pgsql/pgsql.c:419:7     - Unknown word (fmtenc)     -- if (!fmtenc) {
 ext/pgsql/pgsql.c:423:8     - Unknown word (fmtuser)    -- char *fmtuser = PQescapeIdentifier
 ext/pgsql/pgsql.c:425:7     - Unknown word (fmtuser)    -- if (!fmtuser) {
@@ -19899,29 +19899,29 @@ ext/pgsql/pgsql.c:432:51    - Unknown word (fmtuser)    -- USER %s PASSWORD %s",
 ext/pgsql/pgsql.c:432:60    - Unknown word (fmtenc)     -- PASSWORD %s", fmtuser, fmtenc);
 ext/pgsql/pgsql.c:437:12    - Unknown word (fmtuser)    -- PQfreemem(fmtuser);
 ext/pgsql/pgsql.c:438:12    - Unknown word (fmtenc)     -- PQfreemem(fmtenc);
-ext/pgsql/pgsql.c:4582:100  - Unknown word (typtype)     -- atthasdef, a.attndims, t.typtype, "
-ext/pgsql/pgsql.c:4582:40   - Unknown word (typname)     -- attname, a.attnum, t.typname, a.attlen, a.attnotNULL
-ext/pgsql/pgsql.c:4582:88   - Unknown word (attndims)    -- attnotNULL, a.atthasdef, a.attndims, t.typtype, "
-ext/pgsql/pgsql.c:4586:32   - Unknown word (atttypid)    -- JOIN pg_type t ON (a.atttypid = t.oid) "
-ext/pgsql/pgsql.c:4592:100  - Unknown word (typtype)     -- atthasdef, a.attndims, t.typtype "
-ext/pgsql/pgsql.c:4592:40   - Unknown word (typname)     -- attname, a.attnum, t.typname, a.attlen, a.attnotnull
-ext/pgsql/pgsql.c:4592:88   - Unknown word (attndims)    -- attnotnull, a.atthasdef, a.attndims, t.typtype "
-ext/pgsql/pgsql.c:4595:32   - Unknown word (atttypid)    -- JOIN pg_type t ON (a.atttypid = t.oid) "
-ext/pgsql/pgsql.c:4607:40   - Unknown word (nspname)     -- &querystr, "' AND n.nspname = '");
-ext/pgsql/pgsql.c:4634:14   - Unknown word (typname)     -- /* pg_type.typname */
-ext/pgsql/pgsql.c:4642:19   - Unknown word (attndims)    -- /* pg_attribute.attndims */
-ext/pgsql/pgsql.c:4644:14   - Unknown word (typtype)     -- /* pg_type.typtype */
-ext/pgsql/pgsql.c:4647:15   - Unknown word (typtype)     -- /* pg_type.typtype */
-ext/pgsql/pgsql.c:4729:45   - Unknown word (bpchar)      -- literal(type_name, "bpchar") || zend_string_equals
-ext/pgsql/pgsql.c:4748:114  - Unknown word (timestamptz) -- literal(type_name, "timestamptz"))
-ext/pgsql/pgsql.c:4770:45   - Unknown word (lseg)        -- literal(type_name, "lseg"))
-ext/pgsql/pgsql.c:4771:13   - Unknown word (LSEG)        -- return PG_LSEG;
-ext/pgsql/pgsql.c:4821:15   - Unknown word (decref)      -- php_pcre_pce_decref(centry);
+ext/pgsql/pgsql.c:4584:100  - Unknown word (typtype)     -- atthasdef, a.attndims, t.typtype, "
+ext/pgsql/pgsql.c:4584:40   - Unknown word (typname)     -- attname, a.attnum, t.typname, a.attlen, a.attnotNULL
+ext/pgsql/pgsql.c:4584:88   - Unknown word (attndims)    -- attnotNULL, a.atthasdef, a.attndims, t.typtype, "
+ext/pgsql/pgsql.c:4588:32   - Unknown word (atttypid)    -- JOIN pg_type t ON (a.atttypid = t.oid) "
+ext/pgsql/pgsql.c:4594:100  - Unknown word (typtype)     -- atthasdef, a.attndims, t.typtype "
+ext/pgsql/pgsql.c:4594:40   - Unknown word (typname)     -- attname, a.attnum, t.typname, a.attlen, a.attnotnull
+ext/pgsql/pgsql.c:4594:88   - Unknown word (attndims)    -- attnotnull, a.atthasdef, a.attndims, t.typtype "
+ext/pgsql/pgsql.c:4597:32   - Unknown word (atttypid)    -- JOIN pg_type t ON (a.atttypid = t.oid) "
+ext/pgsql/pgsql.c:4609:40   - Unknown word (nspname)     -- &querystr, "' AND n.nspname = '");
+ext/pgsql/pgsql.c:4636:14   - Unknown word (typname)     -- /* pg_type.typname */
+ext/pgsql/pgsql.c:4644:19   - Unknown word (attndims)    -- /* pg_attribute.attndims */
+ext/pgsql/pgsql.c:4646:14   - Unknown word (typtype)     -- /* pg_type.typtype */
+ext/pgsql/pgsql.c:4649:15   - Unknown word (typtype)     -- /* pg_type.typtype */
+ext/pgsql/pgsql.c:4731:45   - Unknown word (bpchar)      -- literal(type_name, "bpchar") || zend_string_equals
+ext/pgsql/pgsql.c:4750:114  - Unknown word (timestamptz) -- literal(type_name, "timestamptz"))
+ext/pgsql/pgsql.c:4772:45   - Unknown word (lseg)        -- literal(type_name, "lseg"))
+ext/pgsql/pgsql.c:4773:13   - Unknown word (LSEG)        -- return PG_LSEG;
+ext/pgsql/pgsql.c:4823:15   - Unknown word (decref)      -- php_pcre_pce_decref(centry);
 ext/pgsql/pgsql.c:506:30    - Unknown word (inity)      -- REGEX("#^[+-]{0,1}(inf)(inity){0,1}$#ni");
-ext/pgsql/pgsql.c:5080:37   - Unknown word (valitions)   -- feel free to add more valitions. Invalid query fails
-ext/pgsql/pgsql.c:5090:12   - Unknown word (LSEG)        -- case PG_LSEG:
-ext/pgsql/pgsql.c:5142:22   - Unknown word (actallay)    -- /* these are the actallay a integer */
-ext/pgsql/pgsql.c:6057:9    - Unknown word (Qgetisnull)  -- if (PQgetisnull(pg_result, pg_row, i
+ext/pgsql/pgsql.c:5082:37   - Unknown word (valitions)   -- feel free to add more valitions. Invalid query fails
+ext/pgsql/pgsql.c:5092:12   - Unknown word (LSEG)        -- case PG_LSEG:
+ext/pgsql/pgsql.c:5144:22   - Unknown word (actallay)    -- /* these are the actallay a integer */
+ext/pgsql/pgsql.c:6059:9    - Unknown word (Qgetisnull)  -- if (PQgetisnull(pg_result, pg_row, i
 ext/pgsql/pgsql.c:659:8     - Unknown word (connstring) -- char *connstring;
 ext/pgsql/pgsql.c:660:9     - Unknown word (connstring) -- size_t connstring_len;
 ext/pgsql/pgsql.c:668:16    - Unknown word (connstring) -- Z_PARAM_PATH(connstring, connstring_len)
@@ -22586,13 +22586,13 @@ ext/spl/spl_observer.c:1128:14   - Unknown word (zinfo)      -- ZVAL_STR(&zinfo,
 ext/spl/spl_observer.c:1130:15   - Unknown word (zinfo)      -- ZVAL_LONG(&zinfo, info_long);
 ext/spl/spl_observer.c:1135:36   - Unknown word (zinfo)      -- identical_function(&zinfo, &element->inf)) {
 ext/spl/spl_observer.c:1142:48   - Unknown word (zinfo)      -- attach(intern, iterator, &zinfo);
-ext/sqlite3/sqlite3.c:1590:82   - Unknown word (binded)     -- If expanded is true, binded parameters and values
-ext/sqlite3/sqlite3.c:2360:37   - Unknown word (threasafe)  -- load if this wasn't a threasafe library loaded */
-ext/sqlite3/sqlite3.c:735:8     - Unknown word (zargs)      -- zval *zargs = NULL;
-ext/sqlite3/sqlite3.c:750:3     - Unknown word (zargs)      -- zargs = (zval *)safe_emalloc
-ext/sqlite3/sqlite3.c:760:14    - Unknown word (zargs)      -- ZVAL_COPY(&zargs[0], &agg_context->zval
-ext/sqlite3/sqlite3.c:761:14    - Unknown word (zargs)      -- ZVAL_LONG(&zargs[1], agg_context->row
-ext/sqlite3/sqlite3.c:768:16    - Unknown word (zargs)      -- ZVAL_LONG(&zargs[i + is_agg], sqlite
+ext/sqlite3/sqlite3.c:1591:82   - Unknown word (binded)     -- If expanded is true, binded parameters and values
+ext/sqlite3/sqlite3.c:2361:37   - Unknown word (threasafe)  -- load if this wasn't a threasafe library loaded */
+ext/sqlite3/sqlite3.c:736:8     - Unknown word (zargs)      -- zval *zargs = NULL;
+ext/sqlite3/sqlite3.c:751:3     - Unknown word (zargs)      -- zargs = (zval *)safe_emalloc
+ext/sqlite3/sqlite3.c:761:14    - Unknown word (zargs)      -- ZVAL_COPY(&zargs[0], &agg_context->zval
+ext/sqlite3/sqlite3.c:762:14    - Unknown word (zargs)      -- ZVAL_LONG(&zargs[1], agg_context->row
+ext/sqlite3/sqlite3.c:769:16    - Unknown word (zargs)      -- ZVAL_LONG(&zargs[i + is_agg], sqlite
 ext/standard/array.c:1021:8    - Unknown word (DEINDIRECT) -- ZVAL_DEINDIRECT(entry);
 ext/standard/array.c:13:15     - Unknown word (Andi)       -- | Authors: Andi Gutmans <andi@php.net
 ext/standard/array.c:162:15    - Unknown word (THREEWAY)   -- return ZEND_THREEWAY_COMPARE(d1, d2);
@@ -24212,23 +24212,23 @@ ext/sysvshm/sysvshm.stub.php:15:21     - Unknown word (Sysv)       -- function s
 ext/sysvshm/sysvshm.stub.php:17:22     - Unknown word (Sysv)       -- function shm_has_var(SysvSharedMemory $shm, int
 ext/sysvshm/sysvshm.stub.php:19:21     - Unknown word (Sysv)       -- function shm_remove(SysvSharedMemory $shm): bool
 ext/sysvshm/sysvshm.stub.php:9:13      - Unknown word (Sysv)       -- final class SysvSharedMemory
-ext/tidy/tidy.c:1015:23   - Unknown word (OVFL)       -- if (ZEND_SIZE_T_UINT_OVFL(ZSTR_LEN(input))) {
-ext/tidy/tidy.c:1082:23   - Unknown word (OVFL)       -- if (ZEND_SIZE_T_UINT_OVFL(ZSTR_LEN(contents))
+ext/tidy/tidy.c:1016:23   - Unknown word (OVFL)       -- if (ZEND_SIZE_T_UINT_OVFL(ZSTR_LEN(input))) {
+ext/tidy/tidy.c:1083:23   - Unknown word (OVFL)       -- if (ZEND_SIZE_T_UINT_OVFL(ZSTR_LEN(contents))
 ext/tidy/tidy.c:111:15    - Unknown word (ptdoc)      -- PHPTidyDoc *ptdoc;
-ext/tidy/tidy.c:1199:17   - Unknown word (optt)       -- TidyOptionType optt;
-ext/tidy/tidy.c:1211:54   - Unknown word (optt)       -- val(obj->ptdoc, opt, &optt);
-ext/tidy/tidy.c:1212:11   - Unknown word (optt)       -- switch (optt) {
-ext/tidy/tidy.c:1309:17   - Unknown word (optt)       -- TidyOptionType optt;
-ext/tidy/tidy.c:1325:50   - Unknown word (optt)       -- val(obj->ptdoc, opt, &optt);
-ext/tidy/tidy.c:1378:24   - Unknown word (OVFL)       -- if (ZEND_SIZE_T_UINT_OVFL(ZSTR_LEN(contents))
+ext/tidy/tidy.c:1200:17   - Unknown word (optt)       -- TidyOptionType optt;
+ext/tidy/tidy.c:1212:54   - Unknown word (optt)       -- val(obj->ptdoc, opt, &optt);
+ext/tidy/tidy.c:1213:11   - Unknown word (optt)       -- switch (optt) {
+ext/tidy/tidy.c:1310:17   - Unknown word (optt)       -- TidyOptionType optt;
+ext/tidy/tidy.c:1326:50   - Unknown word (optt)       -- val(obj->ptdoc, opt, &optt);
+ext/tidy/tidy.c:1379:24   - Unknown word (OVFL)       -- if (ZEND_SIZE_T_UINT_OVFL(ZSTR_LEN(contents))
 ext/tidy/tidy.c:274:59    - Unknown word (ptdoc)      -- zval *zv, PHPTidyDoc *ptdoc, TidyNode node)
 ext/tidy/tidy.c:280:10    - Unknown word (ptdoc)      -- newobj->ptdoc = ptdoc;
 ext/tidy/tidy.c:280:18    - Unknown word (ptdoc)      -- newobj->ptdoc = ptdoc;
 ext/tidy/tidy.c:319:23    - Unknown word (OVFL)       -- if (ZEND_SIZE_T_UINT_OVFL(ZSTR_LEN(data))) {
 ext/tidy/tidy.c:45:41     - Unknown word (libtidy)    -- with older versions of libtidy */
 ext/tidy/tidy.c:66:12     - Unknown word (ptdoc)      -- if (!obj->ptdoc->initialized) { \
-ext/tidy/tidy.c:891:31    - Unknown word (libtidyp)   -- print_table_row(2, "libtidyp Version", (const char
-ext/tidy/tidy.c:971:25    - Unknown word (OVFL)       -- if (ZEND_SIZE_T_UINT_OVFL(output_context->in.used
+ext/tidy/tidy.c:892:31    - Unknown word (libtidyp)   -- print_table_row(2, "libtidyp Version", (const char
+ext/tidy/tidy.c:972:25    - Unknown word (OVFL)       -- if (ZEND_SIZE_T_UINT_OVFL(output_context->in.used
 ext/tidy/tidy.stub.php:14:12     - Unknown word (NODETYPE)   -- const TIDY_NODETYPE_DOCTYPE = UNKNOWN;
 ext/tidy/tidy.stub.php:19:12     - Unknown word (NODETYPE)   -- const TIDY_NODETYPE_COMMENT = UNKNOWN;
 ext/tidy/tidy.stub.php:24:12     - Unknown word (NODETYPE)   -- const TIDY_NODETYPE_PROCINS = UNKNOWN;
@@ -24631,9 +24631,9 @@ ext/zip/zip_stream.c:331:82    - Unknown word (tmpzval)    -- password(za, Z_STR
 ext/zlib/php_zlib.h:14:24     - Unknown word (hrich)      -- | Stefan R�hrich <sr@linux.de>
 ext/zlib/php_zlib.h:64:9      - Unknown word (ZLIBG)      -- #define ZLIBG(v) ZEND_MODULE_GLOBALS
 ext/zlib/php_zlib.h:67:40     - Unknown word (gzio)       -- stream_ops php_stream_gzio_ops;
-ext/zlib/zlib.c:1094:8    - Unknown word (DEINDIRECT) -- ZVAL_DEINDIRECT(option_buffer);
-ext/zlib/zlib.c:1103:8    - Unknown word (DEINDIRECT) -- ZVAL_DEINDIRECT(option_buffer);
-ext/zlib/zlib.c:1112:8    - Unknown word (DEINDIRECT) -- ZVAL_DEINDIRECT(option_buffer);
+ext/zlib/zlib.c:1095:8    - Unknown word (DEINDIRECT) -- ZVAL_DEINDIRECT(option_buffer);
+ext/zlib/zlib.c:1104:8    - Unknown word (DEINDIRECT) -- ZVAL_DEINDIRECT(option_buffer);
+ext/zlib/zlib.c:1113:8    - Unknown word (DEINDIRECT) -- ZVAL_DEINDIRECT(option_buffer);
 ext/zlib/zlib.c:14:22     - Unknown word (Röhrich)    -- | Stefan Röhrich <sr@linux.de>
 ext/zlib/zlib.c:153:7     - Unknown word (ZLIBG)      -- if (!ZLIBG(compression_coding)
 ext/zlib/zlib.c:158:5     - Unknown word (ZLIBG)      -- ZLIBG(compression_coding)
@@ -24642,8 +24642,8 @@ ext/zlib/zlib.c:164:9     - Unknown word (ZLIBG)      -- return ZLIBG(compressio
 ext/zlib/zlib.c:175:37    - Unknown word (ZLIBG)      -- deflateInit2(&ctx->Z, ZLIBG(output_compression_level
 ext/zlib/zlib.c:260:87    - Unknown word (MSIE)       -- content breaks caching in MSIE,
 ext/zlib/zlib.c:461:30    - Unknown word (zpipe)      -- HACK: See zlib/examples/zpipe.c inf() function for
-ext/zlib/zlib.c:793:8     - Unknown word (DEINDIRECT) -- ZVAL_DEINDIRECT(option_buffer);
-ext/zlib/zlib.c:875:8     - Unknown word (DEINDIRECT) -- ZVAL_DEINDIRECT(option_buffer);
+ext/zlib/zlib.c:794:8     - Unknown word (DEINDIRECT) -- ZVAL_DEINDIRECT(option_buffer);
+ext/zlib/zlib.c:876:8     - Unknown word (DEINDIRECT) -- ZVAL_DEINDIRECT(option_buffer);
 ext/zlib/zlib.stub.php:215:5     - Unknown word (undocumentable) -- * @undocumentable gzputs is an alias of
 ext/zlib/zlib.stub.php:96:17     - Unknown word (VERNUM)     -- * @cvalue ZLIB_VERNUM
 ext/zlib/zlib.stub.php:98:12     - Unknown word (VERNUM)     -- const ZLIB_VERNUM = UNKNOWN;

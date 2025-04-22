@@ -3,9 +3,9 @@ Repository: googleapis/google-cloud-cpp
 Url: https://github.com/googleapis/google-cloud-cpp.git
 Args: '["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]'
 Summary:
-  files: 20002
-  filesWithIssues: 7504
-  issues: 43745
+  files: 20005
+  filesWithIssues: 7505
+  issues: 43747
   errors: 0
 Errors: []
 
@@ -613,6 +613,8 @@ issues:
   - "google/cloud/internal/external_account_token_source_url_test.cc:63:26       parseable       U       full error payload, parseable as an error info."
   - "google/cloud/internal/future_impl.cc:24:50          stdlibc     U       C++17. Fortunately, stdlibc++, MSVC are forgiving"
   - "google/cloud/internal/future_impl.h:182:34      Wmaybe      U       diagnostic ignored \"-Wmaybe-uninitialized\""
+  - "google/cloud/internal/http_header_test.cc:99:33         valuelongerthantruncatelength       U       HttpHeader long_value(\"key\", \"valuelongerthantruncatelength\");"
+  - "google/cloud/internal/http_header_test.cc:100:50        valuelonge                          U       DebugString(), Eq(\"key: valuelonge\"));"
   - "google/cloud/internal/oauth2_refreshing_credentials_wrapper.h:40:16         refreshable     U       * Wrapper for refreshable parts of a Credentials"
   - "google/cloud/internal/oauth2_service_account_credentials_test.cc:110:33         Cerl        U       constexpr kAuthProviderX509CerlUrl ="
   - "google/cloud/internal/oauth2_service_account_credentials_test.cc:627:5          CNHKF       U       rmYdCNHKFXam78uCt7xQLw=="
