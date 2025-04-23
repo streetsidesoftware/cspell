@@ -1,7 +1,7 @@
 import * as path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+import streamConsumers from "node:stream/consumers";
 
-import getStdin from 'get-stdin';
 import { afterEach, describe, expect, test, vi } from 'vitest';
 
 import { pathPackageRoot } from '../test/test.helper.js';
@@ -20,9 +20,7 @@ import {
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-vi.mock('get-stdin', () => ({
-    default: vi.fn(),
-}));
+vi.mock('node:stream/consumers', () => ({ text: vi.fn() }));
 
 const packageRoot = pathPackageRoot;
 const fixtures = path.join(packageRoot, 'fixtures/fileHelper');
@@ -40,8 +38,8 @@ describe('fileHelper', () => {
     test('readFileListFile', async () => {
         try {
             const files = ['a', 'b', 'c'];
-            const mockGetStdin = vi.mocked(getStdin);
-            mockGetStdin.mockImplementation((async () => files.join('\n')) as typeof getStdin);
+            const mockStreamConsumersText = vi.mocked(streamConsumers.text);
+            mockStreamConsumersText.mockImplementation((async () => files.join('\n')));
             const pResult = readFileListFile('stdin');
             const r = await pResult;
             expect(r).toEqual(files.map((f) => path.resolve(f)));

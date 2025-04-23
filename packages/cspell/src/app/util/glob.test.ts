@@ -19,14 +19,6 @@ interface MinimatchOptions {
     preserveMultipleSlashes?: boolean;
 }
 
-const getStdinResult = {
-    value: '',
-};
-
-vi.mock('get-stdin', () => {
-    return vi.fn(() => Promise.resolve(getStdinResult.value));
-});
-
 describe('Validate minimatch assumptions', () => {
     interface TestCase {
         pattern: string;
