@@ -1,5 +1,6 @@
 import { promises as fsp } from 'node:fs';
 import * as path from 'node:path';
+import streamConsumers from 'node:stream/consumers';
 import { fileURLToPath } from 'node:url';
 
 import { toFileDirURL, toFilePathOrHref, toFileURL } from '@cspell/url';
@@ -8,7 +9,6 @@ import { readFileText as cioReadFile, toURL } from 'cspell-io';
 import type { CSpellUserSettings, Document, Issue } from 'cspell-lib';
 import * as cspell from 'cspell-lib';
 import { fileToDocument, isBinaryFile as isUriBinaryFile } from 'cspell-lib';
-import getStdin from 'get-stdin';
 
 import { CSpellConfigFile } from '../options.js';
 import { asyncAwait, asyncFlatten, asyncMap, asyncPipe, mergeAsyncIterables } from './async.js';
@@ -149,7 +149,9 @@ export function readFileInfo(
     handleNotFound = false,
 ): Promise<ReadFileInfoResult> {
     filename = resolveFilename(filename);
-    const pText = filename.startsWith(STDINProtocol) ? getStdin() : cioReadFile(filename, encoding);
+    const pText = filename.startsWith(STDINProtocol)
+        ? streamConsumers.text(process.stdin)
+        : cioReadFile(filename, encoding);
     return pText.then(
         (text) => ({ text, filename }),
         (e) => {

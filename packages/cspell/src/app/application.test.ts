@@ -1,9 +1,9 @@
 import * as fs from 'node:fs/promises';
 import * as path from 'node:path';
 import { resolve as r } from 'node:path';
+import streamConsumers from 'node:stream/consumers';
 
 import type { Issue, RunResult } from '@cspell/cspell-types';
-import getStdin from 'get-stdin';
 import { afterEach, describe, expect, test, vi } from 'vitest';
 
 import * as App from './application.mjs';
@@ -23,7 +23,7 @@ const sampleOptions = { root: samplesRoot };
 const oc = <T>(obj: T) => expect.objectContaining(obj);
 const ac = <T>(a: Array<T>) => expect.arrayContaining(a);
 
-vi.mock('get-stdin', () => ({ default: vi.fn() }));
+vi.mock('node:stream/consumers', () => ({ default: { text: vi.fn() } }));
 
 const timeout = 10_000;
 
@@ -126,7 +126,7 @@ describe('Validate the Application', () => {
                 cspell:ignore badspellingintext
                 We can ignore values within the text: badspellingintext
             `;
-        vi.mocked(getStdin).mockImplementation((async () => text) as typeof getStdin);
+        vi.mocked(streamConsumers.text).mockImplementation(async () => text);
 
         const lint = App.lint(files, options, reporter);
         const result = await lint;
