@@ -1,6 +1,6 @@
 import * as path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import streamConsumers from "node:stream/consumers";
+import streamConsumers from 'node:stream/consumers';
 
 import { afterEach, describe, expect, test, vi } from 'vitest';
 
@@ -39,7 +39,7 @@ describe('fileHelper', () => {
         try {
             const files = ['a', 'b', 'c'];
             const mockStreamConsumersText = vi.mocked(streamConsumers.text);
-            mockStreamConsumersText.mockImplementation((async () => files.join('\n')));
+            mockStreamConsumersText.mockImplementation(async () => files.join('\n'));
             const pResult = readFileListFile('stdin');
             const r = await pResult;
             expect(r).toEqual(files.map((f) => path.resolve(f)));
