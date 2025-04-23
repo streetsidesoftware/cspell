@@ -5,7 +5,7 @@ import type { Glob } from 'cspell-lib';
 import type { Options as MicromatchOptions } from 'micromatch';
 import micromatch from 'micromatch';
 import { minimatch } from 'minimatch';
-import { describe, expect, test, vi } from 'vitest';
+import { describe, expect, test } from 'vitest';
 
 import { calcGlobs, normalizeGlobsToRoot } from './glob.js';
 

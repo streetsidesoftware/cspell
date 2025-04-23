@@ -1,6 +1,6 @@
 import * as path from 'node:path';
-import { fileURLToPath, pathToFileURL } from 'node:url';
 import streamConsumers from 'node:stream/consumers';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import { afterEach, describe, expect, test, vi } from 'vitest';
 
@@ -20,7 +20,7 @@ import {
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-vi.mock('node:stream/consumers', () => ({ text: vi.fn() }));
+vi.mock('node:stream/consumers', () => ({ default: { text: vi.fn() } }));
 
 const packageRoot = pathPackageRoot;
 const fixtures = path.join(packageRoot, 'fixtures/fileHelper');
