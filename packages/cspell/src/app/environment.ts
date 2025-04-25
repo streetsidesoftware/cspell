@@ -17,6 +17,14 @@ export interface CSpellEnvironmentVariables {
      */
     CSPELL_ENABLE_DICTIONARY_LOG_FIELDS?: string;
     CSPELL_GLOB_ROOT?: string;
+    /**
+     * Path to a specific CSpell config file.
+     */
+    CSPELL_CONFIG_PATH?: string;
+    /**
+     * Path to the default CSpell config file, used if no other config is found.
+     */
+    CSPELL_DEFAULT_CONFIG_PATH?: string;
 }
 
 export type EnvironmentKeys = keyof CSpellEnvironmentVariables;
@@ -30,6 +38,8 @@ export const environmentKeys: EnvironmentKeyNames = {
     CSPELL_ENABLE_DICTIONARY_LOG_FILE: 'CSPELL_ENABLE_DICTIONARY_LOG_FILE',
     CSPELL_ENABLE_DICTIONARY_LOG_FIELDS: 'CSPELL_ENABLE_DICTIONARY_LOG_FIELDS',
     CSPELL_GLOB_ROOT: 'CSPELL_GLOB_ROOT',
+    CSPELL_CONFIG_PATH: 'CSPELL_CONFIG_PATH',
+    CSPELL_DEFAULT_CONFIG_PATH: 'CSPELL_DEFAULT_CONFIG_PATH',
 };
 
 export function getEnvironmentVariables(): CSpellEnvironmentVariables {
