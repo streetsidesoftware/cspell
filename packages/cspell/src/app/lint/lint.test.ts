@@ -1,6 +1,6 @@
 import * as path from 'node:path';
 
-import { beforeEach, describe, expect, test, vi } from 'vitest';
+import { afterEach, describe, expect, test, vi } from 'vitest';
 
 import { CheckFailed } from '../app.mjs';
 import { environmentKeys } from '../environment.js';
@@ -26,7 +26,7 @@ const oc = <T>(obj: T) => expect.objectContaining(obj);
 const j = path.join;
 
 describe('Linter Validation Tests', () => {
-    beforeEach(() => {
+    afterEach(() => {
         delete process.env[environmentKeys.CSPELL_CONFIG_PATH];
         delete process.env[environmentKeys.CSPELL_DEFAULT_CONFIG_PATH];
     });
@@ -40,18 +40,17 @@ describe('Linter Validation Tests', () => {
         expect(rWithFiles.files).toBe(1);
     });
 
-test('uses CSPELL_CONFIG_PATH as fallback when config not provided', async () => {
+    test('uses CSPELL_CONFIG_PATH as fallback when config not provided', async () => {
         const options = { root: environmentSamples };
         const reporter = new InMemoryReporter();
-        const customConfig = j(samples, 'cspell.custom.json');
+        const customConfig = j(environmentSamples, 'cspell.custom.json');
 
         process.env[environmentKeys.CSPELL_CONFIG_PATH] = customConfig;
 
         const result = await runLint(new LintRequest(['**/*.txt'], options, reporter));
         expect(result.errors).toBe(0);
-        expect(result.files).toBeGreaterThan(0);
-
-        delete process.env[environmentKeys.CSPELL_CONFIG_PATH];
+        expect(result.files).toBe(1);
+        expect(result.issues).toBe(7);
     });
 
     test('falls back to CSPELL_DEFAULT_CONFIG_PATH when no config is set', async () => {
@@ -59,42 +58,36 @@ test('uses CSPELL_CONFIG_PATH as fallback when config not provided', async () =>
         const reporter = new InMemoryReporter();
         const defaultConfig = j(environmentSamples, 'cspell.default.json');
 
-        delete process.env[environmentKeys.CSPELL_CONFIG_PATH];
         process.env[environmentKeys.CSPELL_DEFAULT_CONFIG_PATH] = defaultConfig;
 
-        const result = await runLint(new LintRequest(['**/*.txt'], options, reporter));
+        const result = await runLint(new LintRequest(['**/*.tex'], options, reporter));
         expect(result.errors).toBe(0);
         expect(result.files).toBeGreaterThan(0);
-
-        delete process.env[environmentKeys.CSPELL_DEFAULT_CONFIG_PATH];
+        expect(result.issues).toBe(2);
     });
 
-    test('falls back to root config when no environment config is set', async () => {
-        const options = { root: samples };
-        const reporter = new InMemoryReporter();
+    test('throws an error when the specified config file does not exist', async () => {
+        const rootConfig = j(environmentSamples, 'nonexistent.json');
 
-        process.env[environmentKeys.CSPELL_CONFIG_PATH] = j(environmentSamples, 'nonexistent.json');
-        process.env[environmentKeys.CSPELL_DEFAULT_CONFIG_PATH] = j(environmentSamples, 'nonexistent.json');
+        process.env[environmentKeys.CSPELL_CONFIG_PATH] = rootConfig
+        process.env[environmentKeys.CSPELL_DEFAULT_CONFIG_PATH] = rootConfig
 
-        const rootConfig = j(samples, '.cspell.json');
-        const readConfigResult = await readConfig(undefined, samples);
+        const readConfigResult = await readConfig(undefined, environmentSamples);
+
         expect(readConfigResult.source).toBe(rootConfig);
 
-        const result = await runLint(new LintRequest(['**/*.txt'], options, reporter));
-        expect(result.errors).toBe(0);
-        expect(result.files).toBeGreaterThan(0);
-    });
+        const resultConfig = readConfigResult.config as any;
+        expect(resultConfig.__importRef.error).toBeTruthy();
+        expect(resultConfig.__importRef.error).toBeInstanceOf(Error);
+        expect(resultConfig.__importRef.error.message).toContain('Failed to read config file');
 
-    test('falls back to CSPELL_DEFAULT_CONFIG_PATH if CSPELL_CONFIG_PATH is not found', async () => {
         const options = { root: environmentSamples };
-        process.env[environmentKeys.CSPELL_CONFIG_PATH] = j(environmentSamples, 'nonexistent.json');
-        process.env[environmentKeys.CSPELL_DEFAULT_CONFIG_PATH] = j(environmentSamples, 'cspell.default.json');
         const reporter = new InMemoryReporter();
 
-        const runResult = await runLint(new LintRequest(['**/*.txt'], options, reporter));
-
-        expect(runResult.errors).toBe(0);
-        expect(runResult.files).toBeGreaterThan(0);
+        const result = await runLint(new LintRequest(['**/*.txt'], options, reporter));
+        expect(result.files).toBe(0);
+        expect(result.errors).toBe(1);
+        expect(result.issues).toBe(0);
     });
 
     test('handles malformed config file gracefully', async () => {

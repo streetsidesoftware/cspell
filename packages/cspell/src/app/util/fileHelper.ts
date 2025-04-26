@@ -1,4 +1,4 @@
-import { existsSync,promises as fsp } from 'node:fs';
+import { promises as fsp } from 'node:fs';
 import * as path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -10,7 +10,7 @@ import * as cspell from 'cspell-lib';
 import { fileToDocument, isBinaryFile as isUriBinaryFile } from 'cspell-lib';
 import getStdin from 'get-stdin';
 
-import { getEnvironmentVariable } from '../environment.js';
+import { environmentKeys, getEnvironmentVariable } from '../environment.js';
 import { CSpellConfigFile } from '../options.js';
 import { asyncAwait, asyncFlatten, asyncMap, asyncPipe, mergeAsyncIterables } from './async.js';
 import { FileUrlPrefix, STDIN, STDINProtocol, STDINUrlPrefix, UTF8 } from './constants.js';
@@ -37,15 +37,8 @@ export async function readConfig(
     configFile: string | CSpellConfigFile | undefined,
     root: string | undefined,
 ): Promise<ConfigInfo> {
-    const configPath = getEnvironmentVariable('CSPELL_CONFIG_PATH');
-    if (!configFile && configPath && existsSync(configPath)) {
-        configFile = configPath;
-    }
-
-    const defaultPath = getEnvironmentVariable('CSPELL_DEFAULT_CONFIG_PATH');
-    if (!configFile && defaultPath && existsSync(defaultPath)) {
-        configFile = defaultPath;
-    }
+    configFile ??= getEnvironmentVariable(environmentKeys.CSPELL_CONFIG_PATH);
+    configFile ??= getEnvironmentVariable(environmentKeys.CSPELL_DEFAULT_CONFIG_PATH);
 
     if (configFile) {
         const cfgFile = typeof configFile === 'string' ? await readConfigHandleError(configFile) : configFile;
