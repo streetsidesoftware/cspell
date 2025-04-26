@@ -31,8 +31,9 @@ import { CSpellReporterConfiguration } from '../models.js';
 import { npmPackage } from '../pkgInfo.js';
 import type { CreateCacheSettings, CSpellLintResultCache } from '../util/cache/index.js';
 import { calcCacheSettings, createCache } from '../util/cache/index.js';
+import { type ConfigInfo, readConfig } from '../util/configFileHelper.js';
 import { CheckFailed, toApplicationError, toError } from '../util/errors.js';
-import type { ConfigInfo, FileResult, ReadFileInfoResult } from '../util/fileHelper.js';
+import type { FileResult, ReadFileInfoResult } from '../util/fileHelper.js';
 import {
     fileInfoToDocument,
     filenameToUri,
@@ -40,7 +41,6 @@ import {
     isBinaryFile,
     isFile,
     isNotDir,
-    readConfig,
     readFileInfo,
     readFileListFiles,
     resolveFilename,
