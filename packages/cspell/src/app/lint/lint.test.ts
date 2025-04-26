@@ -69,8 +69,8 @@ describe('Linter Validation Tests', () => {
     test('throws an error when the specified config file does not exist', async () => {
         const rootConfig = j(environmentSamples, 'nonexistent.json');
 
-        process.env[environmentKeys.CSPELL_CONFIG_PATH] = rootConfig
-        process.env[environmentKeys.CSPELL_DEFAULT_CONFIG_PATH] = rootConfig
+        process.env[environmentKeys.CSPELL_CONFIG_PATH] = rootConfig;
+        process.env[environmentKeys.CSPELL_DEFAULT_CONFIG_PATH] = rootConfig;
 
         const readConfigResult = await readConfig(undefined, environmentSamples);
 
@@ -103,8 +103,6 @@ describe('Linter Validation Tests', () => {
         expect(resultConfig).toHaveProperty('name', 'Trailing comma');
         expect(resultConfig).toHaveProperty('__importRef');
     });
-
-
 
     const optionsRootCSpellJson = { root, config: j(root, 'cspell.json') };
 
