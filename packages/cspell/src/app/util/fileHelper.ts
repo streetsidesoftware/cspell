@@ -10,6 +10,7 @@ import type { CSpellUserSettings, Document, Issue } from 'cspell-lib';
 import * as cspell from 'cspell-lib';
 import { fileToDocument, isBinaryFile as isUriBinaryFile } from 'cspell-lib';
 
+import { environmentKeys, getEnvironmentVariable } from '../environment.js';
 import { CSpellConfigFile } from '../options.js';
 import { asyncAwait, asyncFlatten, asyncMap, asyncPipe, mergeAsyncIterables } from './async.js';
 import { FileUrlPrefix, STDIN, STDINProtocol, STDINUrlPrefix, UTF8 } from './constants.js';
@@ -36,6 +37,9 @@ export async function readConfig(
     configFile: string | CSpellConfigFile | undefined,
     root: string | undefined,
 ): Promise<ConfigInfo> {
+    configFile ??= getEnvironmentVariable(environmentKeys.CSPELL_CONFIG_PATH);
+    configFile ??= getEnvironmentVariable(environmentKeys.CSPELL_DEFAULT_CONFIG_PATH);
+
     if (configFile) {
         const cfgFile = typeof configFile === 'string' ? await readConfigHandleError(configFile) : configFile;
         const config = await cspell.resolveConfigFileImports(cfgFile);
