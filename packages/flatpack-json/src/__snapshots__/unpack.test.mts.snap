@@ -285,9 +285,14 @@ exports[`dehydrate > dehydrate [ 1n, 2n, 1n, 2n, 9007199254740991n, -90071992547
   "9007199254740992",
   [
     8,
-    13,
+    14,
   ],
-  "-9007199254740992",
+  "-",
+  [
+    2,
+    13,
+    11,
+  ],
 ]
 `;
 
@@ -578,8 +583,8 @@ exports[`dehydrate > dehydrate { fruit: [ 'apple', 'banana', 'apple', 'banana', 
   [
     0,
     7,
-    11,
-    12,
+    13,
+    14,
   ],
   [
     0,
@@ -593,7 +598,17 @@ exports[`dehydrate > dehydrate { fruit: [ 'apple', 'banana', 'apple', 'banana', 
   "apple",
   "banana",
   "pineapple",
-  "apple-banana-apple-banana-apple-pineapple",
+  "-banana-apple-banana-apple-",
+  [
+    2,
+    11,
+    10,
+  ],
+  [
+    2,
+    8,
+    12,
+  ],
   "There is a bit of fruit on the table. Some banana, apple, and pineapple.",
 ]
 `;
