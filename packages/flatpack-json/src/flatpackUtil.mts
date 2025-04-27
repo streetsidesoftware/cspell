@@ -19,11 +19,11 @@ import {
 import {
     ArrayBasedElements,
     type ArrayElement,
-    dataHeader,
     ElementType,
     Flatpacked,
     type FlattenedElement,
     ObjectWrapperElement,
+    supportedHeaders,
 } from './types.mjs';
 
 export function fromElement(elem: FlattenedElement, resolve: (index: number) => RefElements): RefElements {
@@ -125,5 +125,5 @@ export class FlatpackedWrapper {
 }
 
 export function isFlatpacked(value: unknown): value is Flatpacked {
-    return Array.isArray(value) && value[0] === dataHeader;
+    return Array.isArray(value) && typeof value[0] === 'string' && supportedHeaders.has(value[0]);
 }

@@ -4,7 +4,7 @@ import * as flatted from 'flatted';
 import { describe, expect, test } from 'vitest';
 
 import { parse, stringify } from './index.js';
-import { Unpacked } from './types.mjs';
+import { dataHeader, Unpacked } from './types.mjs';
 
 describe('Flatpack vs Flatted', async () => {
     const pkgJson = JSON.parse(await fs.readFile(new URL('../package.json', import.meta.url), 'utf8'));
@@ -41,7 +41,7 @@ describe('Flatpack vs Flatted', async () => {
     `('compare flatted to flatpack-json', ({ obj, expected }) => {
         const flattedJson = flatted.stringify(obj);
         const flatpackJsonFile = stringify(obj, false);
-        const flatpackJson = flatpackJsonFile.replace('Dehydrated JSON v1', '');
+        const flatpackJson = flatpackJsonFile.replace(dataHeader, '');
         const result = flatpackJson.length < flattedJson.length ? 'flatpack' : 'flatted';
         // console.log('%o', {
         //     expected,
