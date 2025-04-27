@@ -92,6 +92,16 @@ export class CompactStorage {
         return idx;
     }
 
+    private estimateSubStringCost(idxString: number, value: string, offset: number | undefined): number {
+        let cost = 5;
+        cost += Math.ceil(Math.log10(idxString));
+        cost += Math.ceil(Math.log10(value.length));
+        if (offset) {
+            cost += Math.ceil(Math.log10(offset)) + 1;
+        }
+        return cost;
+    }
+
     private addKnownString(idx: number, value: string) {
         if (value.length >= minSubStringLen) {
             this.knownStrings.add(value.length > 256 ? value.slice(0, 256) : value, { idx });
@@ -127,6 +137,10 @@ export class CompactStorage {
         }
 
         const { data: tData, found: subStr } = trieFound;
+        const cost = this.estimateSubStringCost(tData.idx, subStr, tData.offset);
+        if (subStr !== value && cost > subStr.length) {
+            return this.addStringPrimitive(value);
+        }
         const sIdx = this.addSubStringRef(tData.idx, subStr, tData.offset);
         if (subStr === value) return sIdx;
         const v = [sIdx, this.stringToIdx(value.slice(subStr.length))];

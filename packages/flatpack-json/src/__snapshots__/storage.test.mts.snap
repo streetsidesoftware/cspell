@@ -56,20 +56,10 @@ exports[`dehydrate > dehydrate [ /[\\p{L}\\p{M}]+/gu, /[\\p{L}\\p{M}]+/gu, /[\\p
   "gu",
   [
     6,
-    8,
+    6,
     4,
   ],
-  [
-    3,
-    3,
-    5,
-  ],
-  "u}\\p{M}]+",
-  [
-    2,
-    6,
-    7,
-  ],
+  "[\\p{Lu}\\p{M}]+",
 ]
 `;
 
@@ -618,8 +608,8 @@ exports[`dehydrate > dehydrate { fruit: [ 'apple', 'banana', 'apple', 'banana', 
   [
     0,
     7,
+    11,
     12,
-    13,
   ],
   [
     0,
@@ -633,12 +623,7 @@ exports[`dehydrate > dehydrate { fruit: [ 'apple', 'banana', 'apple', 'banana', 
   "apple",
   "banana",
   "pineapple",
-  "-banana-apple-banana-apple-pineapple",
-  [
-    2,
-    8,
-    11,
-  ],
+  "apple-banana-apple-banana-apple-pineapple",
   "There is a bit of fruit on the table. Some banana, apple, and pineapple.",
 ]
 `;
