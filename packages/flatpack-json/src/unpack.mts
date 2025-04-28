@@ -4,7 +4,6 @@ import {
     ArrayBasedElements,
     ArrayElement,
     BigIntElement,
-    dataHeader,
     DateElement,
     ElementType,
     Flatpacked,
@@ -21,13 +20,14 @@ import {
     SetElement,
     StringElement,
     SubStringElement,
+    supportedHeaders,
     Unpacked,
 } from './types.mjs';
 
 export function fromJSON(data: Flatpacked): Unpacked {
     const [header] = data;
 
-    if (header !== dataHeader) {
+    if (!supportedHeaders.has(header)) {
         throw new Error('Invalid header');
     }
 

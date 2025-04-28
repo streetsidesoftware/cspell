@@ -111,5 +111,22 @@ export interface FlatpackOptions {
      * @default true
      */
     dedupe?: boolean;
+
+    /**
+     * Try to optimize the size of the output.
+     */
+    optimize?: boolean;
 }
-export const dataHeader = 'Dehydrated JSON v1' as const;
+
+/**
+ * Legacy header for Flatpack JSON.
+ */
+export const dataHeaderV0_1 = 'Dehydrated JSON v1' as const;
+/**
+ * The current header for Flatpack JSON.
+ */
+export const dataHeader = 'Flatpack JSON v1' as const;
+/**
+ * The set of supported headers for Flatpack JSON.
+ */
+export const supportedHeaders = new Set<string>([dataHeaderV0_1, dataHeader]);

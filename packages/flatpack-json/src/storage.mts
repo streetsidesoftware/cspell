@@ -1,5 +1,6 @@
 import assert from 'node:assert';
 
+import { optimizeFlatpacked } from './optimizeFlatpacked.mjs';
 import { stringifyFlatpacked } from './stringify.mjs';
 import { Trie } from './Trie.mjs';
 import type {
@@ -35,6 +36,13 @@ const compare = collator.compare;
 const forceStringPrimitives = false;
 const minSubStringLen = 4;
 
+interface FoundSubString {
+    idx: number;
+    subStr: string;
+    offset: number | undefined;
+    cost: number;
+}
+
 export class CompactStorage {
     private data = [dataHeader] as Flatpacked;
     private dedupe = true;
@@ -54,9 +62,13 @@ export class CompactStorage {
      */
     private cachedArrays = new Map<number, { idx: number; v: ArrayElement }[]>();
     /**
-     * Cache of strings that have been deduped and stored in the data array.
+     * Cache of strings used for prefix matching.
      */
     private knownStrings = new Trie<TrieData>();
+    /**
+     * Cache of reversed strings used for suffix matching.
+     */
+    private knownStringsRev = new Trie<TrieData>();
     private cachedElements = new Map<number, CacheMap>();
 
     constructor(readonly options?: FlatpackOptions) {
@@ -92,9 +104,24 @@ export class CompactStorage {
         return idx;
     }
 
+    private estimateSubStringCost(idxString: number, value: string, offset: number | undefined): number {
+        if (this.cache.has(value)) {
+            return 0;
+        }
+        let cost = 5;
+        cost += Math.ceil(Math.log10(idxString));
+        cost += Math.ceil(Math.log10(value.length));
+        if (offset) {
+            cost += Math.ceil(Math.log10(offset)) + 1;
+        }
+        return cost;
+    }
+
     private addKnownString(idx: number, value: string) {
         if (value.length >= minSubStringLen) {
-            this.knownStrings.add(value.length > 256 ? value.slice(0, 256) : value, { idx });
+            const data = { idx, value };
+            this.knownStrings.add(value.length > 256 ? [...value].slice(0, 256) : value, data);
+            this.knownStringsRev.add(revStr(value, 256), data);
         }
     }
 
@@ -121,19 +148,70 @@ export class CompactStorage {
             return this.addStringPrimitive(value);
         }
 
-        const trieFound = this.knownStrings.find(value);
-        if (!trieFound || !trieFound.data || trieFound.found.length < minSubStringLen) {
+        const foundPrefix = this.findPrefix(value);
+        const foundSuffix = this.findSuffix(value);
+        if (!foundPrefix && !foundSuffix) {
             return this.addStringPrimitive(value);
         }
 
-        const { data: tData, found: subStr } = trieFound;
-        const sIdx = this.addSubStringRef(tData.idx, subStr, tData.offset);
-        if (subStr === value) return sIdx;
-        const v = [sIdx, this.stringToIdx(value.slice(subStr.length))];
+        if (
+            foundPrefix &&
+            (!foundSuffix ||
+                foundPrefix.subStr.length - foundPrefix.cost >= foundSuffix.subStr.length - foundSuffix.cost)
+        ) {
+            const { idx: pfIdx, subStr, offset } = foundPrefix;
+            const sIdx = this.addSubStringRef(pfIdx, subStr, offset);
+            if (subStr === value) return sIdx;
+            const v = [sIdx, this.stringToIdx(value.slice(subStr.length))];
+            const idx = this.data.push([ElementType.String, ...v]) - 1;
+            this.cache.set(value, idx);
+            this.addKnownString(idx, value);
+            return idx;
+        }
+
+        if (!foundSuffix) {
+            return this.addStringPrimitive(value);
+        }
+
+        const { idx: pfIdx, subStr, offset } = foundSuffix;
+        const sIdx = this.addSubStringRef(pfIdx, subStr, offset);
+        const v = [this.stringToIdx(value.slice(0, -subStr.length)), sIdx];
         const idx = this.data.push([ElementType.String, ...v]) - 1;
         this.cache.set(value, idx);
         this.addKnownString(idx, value);
         return idx;
+    }
+
+    private findPrefix(value: string): FoundSubString | undefined {
+        const trieFound = this.knownStrings.find(value);
+        if (!trieFound || !trieFound.data || trieFound.found.length < minSubStringLen) {
+            return undefined;
+        }
+
+        const { data: tData, found: subStr } = trieFound;
+        const cost = this.estimateSubStringCost(tData.idx, subStr, undefined);
+        if (cost > subStr.length) {
+            return undefined;
+        }
+        return { idx: tData.idx, subStr, offset: undefined, cost };
+    }
+
+    private findSuffix(value: string): FoundSubString | undefined {
+        const rev = revStr(value, 256);
+        const trieFound = this.knownStringsRev.find(rev);
+        if (!trieFound || !trieFound.data || trieFound.found.length < minSubStringLen) {
+            return undefined;
+        }
+
+        const { data: tData, found: subStrRev } = trieFound;
+        const offset = tData.value.length - subStrRev.length;
+        const cost = this.estimateSubStringCost(tData.idx, subStrRev, offset);
+        if (cost > subStrRev.length) {
+            return undefined;
+        }
+        const srcStr = tData.value;
+        const subStr = srcStr.slice(-subStrRev.length);
+        return { idx: tData.idx, subStr, offset, cost };
     }
 
     private objSetToIdx(value: Set<Serializable>): number {
@@ -410,13 +488,31 @@ export class CompactStorage {
     toJSON<V extends Serializable>(json: V): Flatpacked {
         this.softReset();
         this.valueToIdx(json);
-        return this.data;
+        return this.options?.optimize ? optimizeFlatpacked(this.data) : this.data;
+    }
+}
+
+function* revStr(str: string, limit: number): Generator<string> {
+    let i = str.length - 1;
+    let n = 0;
+    while (i >= 0 && n < limit) {
+        // eslint-disable-next-line unicorn/prefer-code-point
+        const code = str.charCodeAt(i);
+        if (code & 0xfc00) {
+            // surrogate pair
+            i -= 1;
+            yield str.slice(i, i + 2);
+        } else {
+            yield str[i];
+        }
+        i -= 1;
+        n += 1;
     }
 }
 
 interface TrieData {
     idx: number;
-    offset?: number;
+    value: string;
 }
 
 type CacheMap = Map<Index, Index | CacheMap>;
@@ -452,6 +548,7 @@ export function toJSON<V extends Serializable>(json: V, options?: FlatpackOption
     return new CompactStorage(options).toJSON(json);
 }
 
-export function stringify(data: Unpacked, pretty = true): string {
-    return pretty ? stringifyFlatpacked(toJSON(data)) : JSON.stringify(toJSON(data));
+export function stringify(data: Unpacked, pretty = true, options?: FlatpackOptions): string {
+    const json = toJSON(data, options);
+    return pretty ? stringifyFlatpacked(json) : JSON.stringify(json);
 }
