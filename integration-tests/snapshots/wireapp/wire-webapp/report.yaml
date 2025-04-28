@@ -3,9 +3,9 @@ Repository: wireapp/wire-webapp
 Url: https://github.com/wireapp/wire-webapp.git
 Args: '["src/script/**/*.{js,ts,tsx,md}"]'
 Summary:
-  files: 1664
-  filesWithIssues: 782
-  issues: 3056
+  files: 1683
+  filesWithIssues: 786
+  issues: 3060
   errors: 0
 Errors: []
 
@@ -753,8 +753,8 @@ issues:
   - "src/script/components/Conversation/Conversation.tsx:98:12       Giphy       U       const [isGiphyModalOpen, setIsGiphyModalOpen"
   - "src/script/components/Conversation/Conversation.tsx:98:33       Giphy       U       isGiphyModalOpen, setIsGiphyModalOpen] = useState"
   - "src/script/components/Conversation/Conversation.tsx:232:13      Giphy       U       const openGiphy = (text: string) =>"
-  - "src/script/components/Conversation/Conversation.tsx:593:16      giphy       U       <Giphy giphyRepository={repositories"
-  - "src/script/components/Conversation/Conversation.tsx:593:46      giphy       U       giphyRepository={repositories.giphy} inputValue={inputValue"
+  - "src/script/components/Conversation/Conversation.tsx:596:16      giphy       U       <Giphy giphyRepository={repositories"
+  - "src/script/components/Conversation/Conversation.tsx:596:46      giphy       U       giphyRepository={repositories.giphy} inputValue={inputValue"
   - "src/script/components/Conversation/ConversationCells/CellsHeader/CellsRefresh/CellsRefresh.tsx:20:51        wireapp     U       ReloadIcon} from '@wireapp/react-ui-kit';"
   - "src/script/components/Conversation/ConversationCells/CellsHeader/CellsSearch/CellsSearch.tsx:22:52          wireapp     U       SearchIcon} from '@wireapp/react-ui-kit';"
   - "src/script/components/Conversation/ConversationCells/CellsPagination/CellsPageList/CellsPageList.tsx:20:22          wireapp     U       import {Bold} from '@wireapp/react-ui-kit';"
@@ -769,10 +769,8 @@ issues:
   - "src/script/components/Conversation/ConversationCells/CellsTable/CellsImagePreviewModal/CellsImagePreviewModal.tsx:107:12        Zoomable    U       <ZoomableImage key={modalId} src"
   - "src/script/components/Conversation/ConversationCells/CellsTable/CellsTableNameColumn/CellsTableNameColumn.tsx:20:26         wireapp     U       import {PlayIcon} from '@wireapp/react-ui-kit';"
   - "src/script/components/Conversation/ConversationCells/CellsTable/CellsTableRowOptions/CellsTableRowOptions.tsx:22:26         wireapp     U       import {MoreIcon} from '@wireapp/react-ui-kit';"
-  - "src/script/components/Conversation/ConversationCells/ConversationCells.tsx:22:29        wireapp                     U       QualifiedId} from '@wireapp/api-client/lib/user"
-  - "src/script/components/Conversation/ConversationCells/ConversationCells.tsx:23:26        tsyringe                    U       import {container} from 'tsyringe';"
-  - "src/script/components/Conversation/ConversationCells/ConversationCells.tsx:37:55        Dimentions (Dimensions)     U       from './useCellsTableDimentions/useCellsTableDimentions"
-  - "src/script/components/Conversation/ConversationCells/ConversationCells.tsx:37:79        Dimentions (Dimensions)     U       sTableDimentions/useCellsTableDimentions';"
+  - "src/script/components/Conversation/ConversationCells/ConversationCells.tsx:22:29        wireapp     U       QualifiedId} from '@wireapp/api-client/lib/user"
+  - "src/script/components/Conversation/ConversationCells/ConversationCells.tsx:23:26        tsyringe    U       import {container} from 'tsyringe';"
   - "src/script/components/Conversation/ConversationCells/useGetAllCellsFiles/transformNodesToCellsFiles.ts:23:17        MILLIS      U       import {TIME_IN_MILLIS} from 'Util/TimeUtil"
   - "src/script/components/Conversation/ConversationCells/useGetAllCellsFiles/transformNodesToCellsFiles.ts:75:57        MILLIS      U       as number) * TIME_IN_MILLIS.SECOND;"
   - "src/script/components/Conversation/ConversationCells/useGetAllCellsFiles/transformNodesToCellsFiles.ts:83:68        usermeta    U       meta.Namespace === 'usermeta-owner')?.JsonValue;"
@@ -786,8 +784,8 @@ issues:
   - "src/script/components/Conversation/useFilesUploadDropzone/buildCellFileMetadata/buildCellFileMetadata.ts:45:51          Millis      U       videoMetadata.durationInMillis,"
   - "src/script/components/Conversation/useFilesUploadDropzone/buildCellFileMetadata/buildCellFileMetadata.ts:53:19          Millis      U       durationInMillis: audioMetadata.durationInMill"
   - "src/script/components/Conversation/useFilesUploadDropzone/buildCellFileMetadata/buildCellFileMetadata.ts:53:51          Millis      U       audioMetadata.durationInMillis,"
-  - "src/script/components/Conversation/useFilesUploadDropzone/useFilesUploadDropzone.ts:92:13       attatch     U       await attatchMetadataToFiles(transformedAcc"
-  - "src/script/components/Conversation/useFilesUploadDropzone/useFilesUploadDropzone.ts:160:9       attatch     U       const attatchMetadataToFiles = async"
+  - "src/script/components/Conversation/useFilesUploadDropzone/useFilesUploadDropzone.ts:95:13       attatch     U       await attatchMetadataToFiles(transformedAcc"
+  - "src/script/components/Conversation/useFilesUploadDropzone/useFilesUploadDropzone.ts:163:9       attatch     U       const attatchMetadataToFiles = async"
   - "src/script/components/Conversation/useFilesUploadState/useFilesUploadState.ts:36:15         Millis      U       durationInMillis?: number;"
   - "src/script/components/Conversation/useFilesUploadState/useFilesUploadState.ts:42:15         Millis      U       durationInMillis?: number;"
   - "src/script/components/Conversation/useFilesUploadState/useFilesUploadState.ts:66:19         Millis      U       durationInMillis?: number;"
@@ -1021,6 +1019,7 @@ issues:
   - "src/script/components/MessagesList/Message/ContentMessage/asset/MultipartAssets/common/FileFullscreenModal/FileFullscreenModal.tsx:22:27        wireapp     U       import {CloseIcon} from '@wireapp/react-ui-kit';"
   - "src/script/components/MessagesList/Message/ContentMessage/asset/MultipartAssets/common/FilePreviewPlayButton/FilePreviewPlayButton.tsx:20:26        wireapp     U       import {PlayIcon} from '@wireapp/react-ui-kit';"
   - "src/script/components/MessagesList/Message/ContentMessage/asset/MultipartAssets/common/MediaFilePreviewCard/MediaFilePreviewCard.tsx:22:37          wireapp     U       UnavailableFileIcon} from '@wireapp/react-ui-kit';"
+  - "src/script/components/MessagesList/Message/ContentMessage/asset/MultipartAssets/FileAssetCard/common/FileAssetOptions/FileAssetOptions.tsx:22:26        wireapp     U       import {MoreIcon} from '@wireapp/react-ui-kit';"
   - "src/script/components/MessagesList/Message/ContentMessage/asset/MultipartAssets/FileAssetCard/FileAssetCard.tsx:22:52       Asseet      U       /FileAssetSmall/FileAsseetSmall';"
   - "src/script/components/MessagesList/Message/ContentMessage/asset/MultipartAssets/FileAssetCard/FileAssetWithPreview/FileAssetWithPreview.tsx:22:27       wireapp     U       import {AlertIcon} from '@wireapp/react-ui-kit';"
   - "src/script/components/MessagesList/Message/ContentMessage/asset/MultipartAssets/ImageAssetCard/common/ImageFullscreenModal/ImageFullscreenModal.tsx:20:9        Zoomable    U       import {ZoomableImage} from 'Components"
@@ -1312,6 +1311,11 @@ issues:
   - "src/script/components/ParticipantItemContent/ParticipantItemContent.tsx:100:26      subline     U       className=\"subline\""
   - "src/script/components/PasswordGeneratorButton/PasswordGeneratorButton.test.tsx:41:68        charachters (characters)    U       random password with 15 charachters when clicked', () ="
   - "src/script/components/PasswordGeneratorButton/PasswordGeneratorButton.tsx:20:39         wireapp     U       ButtonVariant} from '@wireapp/react-ui-kit';"
+  - "src/script/components/PdfViewer/PdfControls/PdfControls.styles.ts:42:32         nums    U       fontVariantNumeric: 'tabular-nums',"
+  - "src/script/components/PdfViewer/PdfControls/PdfControls.tsx:27:10       wireapp     U       } from '@wireapp/react-ui-kit';"
+  - "src/script/components/PdfViewer/PdfSidebar/PdfSidebar.tsx:38:7          OVERSCAN    U       const OVERSCAN = 5;"
+  - "src/script/components/PdfViewer/PdfSidebar/PdfSidebar.tsx:46:7          overscan    U       overscan: OVERSCAN,"
+  - "src/script/components/PdfViewer/PdfSidebar/PdfSidebar.tsx:46:17         OVERSCAN    U       overscan: OVERSCAN,"
   - "src/script/components/Radio/RadioGroup.tsx:22:26        wireapp     U       import {TabIndex} from '@wireapp/react-ui-kit/lib/types"
   - "src/script/components/SelectText/SelectText.tsx:22:26       wireapp     U       import {TabIndex} from '@wireapp/react-ui-kit/lib/types"
   - "src/script/components/ServiceList/components/ServiceListItem/ServiceListItem.tsx:20:26          wireapp     U       import {TabIndex} from '@wireapp/react-ui-kit/lib/types"
@@ -1357,10 +1361,10 @@ issues:
   - "src/script/components/UserSearchableList/UserSearchableList.tsx:22:29       wireapp     U       QualifiedId} from '@wireapp/api-client/lib/user"
   - "src/script/components/UserSearchableList/UserSearchableList.tsx:23:26       tsyringe    U       import {container} from 'tsyringe';"
   - "src/script/components/ZoomableImage/index.ts:20:18          Zoomable    U       export * from './ZoomableImage';"
-  - "src/script/components/ZoomableImage/ZoomableImage.tsx:22:45         Zoomable    U       imageStyle} from './ZoomableImage.style';"
-  - "src/script/components/ZoomableImage/ZoomableImage.tsx:69:6          Zoomable    U       type ZoomableImageProps = HTMLProps"
-  - "src/script/components/ZoomableImage/ZoomableImage.tsx:71:14         Zoomable    U       export const ZoomableImage = (props: ZoomableImageP"
-  - "src/script/components/ZoomableImage/ZoomableImage.tsx:71:38         Zoomable    U       ZoomableImage = (props: ZoomableImageProps) => {"
+  - "src/script/components/ZoomableImage/ZoomableImage.tsx:24:45         Zoomable    U       imageStyle} from './ZoomableImage.style';"
+  - "src/script/components/ZoomableImage/ZoomableImage.tsx:71:6          Zoomable    U       type ZoomableImageProps = {imageCSS"
+  - "src/script/components/ZoomableImage/ZoomableImage.tsx:73:14         Zoomable    U       export const ZoomableImage = (props: ZoomableImageP"
+  - "src/script/components/ZoomableImage/ZoomableImage.tsx:73:38         Zoomable    U       ZoomableImage = (props: ZoomableImageProps) => {"
   - "src/script/Config.ts:20:25          wireapp     U       import {Runtime} from '@wireapp/commons';"
   - "src/script/Config.ts:89:31          acces       U       DataDog client api keys acces */"
   - "src/script/Config.ts:95:43          wireapp     U       packageJson.dependencies['@wireapp/avs'],"
