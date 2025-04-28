@@ -4,7 +4,6 @@ import {
     ArrayBasedElements,
     ArrayElement,
     BigIntElement,
-    dataHeader,
     DateElement,
     ElementType,
     Flatpacked,

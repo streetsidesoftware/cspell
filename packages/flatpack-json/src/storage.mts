@@ -1,5 +1,6 @@
 import assert from 'node:assert';
 
+import { optimizeFlatpacked } from './optimizeFlatpacked.mjs';
 import { stringifyFlatpacked } from './stringify.mjs';
 import { Trie } from './Trie.mjs';
 import type {
@@ -487,7 +488,7 @@ export class CompactStorage {
     toJSON<V extends Serializable>(json: V): Flatpacked {
         this.softReset();
         this.valueToIdx(json);
-        return this.data;
+        return this.options?.optimize ? optimizeFlatpacked(this.data) : this.data;
     }
 }
 
@@ -547,6 +548,7 @@ export function toJSON<V extends Serializable>(json: V, options?: FlatpackOption
     return new CompactStorage(options).toJSON(json);
 }
 
-export function stringify(data: Unpacked, pretty = true): string {
-    return pretty ? stringifyFlatpacked(toJSON(data)) : JSON.stringify(toJSON(data));
+export function stringify(data: Unpacked, pretty = true, options?: FlatpackOptions): string {
+    const json = toJSON(data, options);
+    return pretty ? stringifyFlatpacked(json) : JSON.stringify(json);
 }

@@ -111,6 +111,11 @@ export interface FlatpackOptions {
      * @default true
      */
     dedupe?: boolean;
+
+    /**
+     * Try to optimize the size of the output.
+     */
+    optimize?: boolean;
 }
 
 /**

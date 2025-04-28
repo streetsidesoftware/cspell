@@ -13,7 +13,10 @@ describe('Flatpack vs Flatted', async () => {
         await fs.readFile(new URL('../fixtures/cspell-cache-flatted.json', import.meta.url), 'utf8'),
     );
 
-    await fs.writeFile(new URL('../fixtures/cspell-cache-flatpack.json', import.meta.url), stringify(cspellCache));
+    await fs.writeFile(
+        new URL('../fixtures/cspell-cache-flatpack.json', import.meta.url),
+        stringify(cspellCache, true, { optimize: true }),
+    );
 
     const e = { two: '2' };
     const f = { ...e };
