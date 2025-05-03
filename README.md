@@ -94,8 +94,9 @@ Tidelift will coordinate the fix and disclosure.
 
 |        | version | Node    | Status                | Maintenance | End of Free Support |
 | :----- | :------ | :------ | :-------------------- | :---------- | :------------------ |
-| cspell | 8.x     | 18.x    | In Active Development | TBD         | TBD                 |
-| cspell | 7.x     | 16.x    | Maintenance           | 2023-10-01  | 2023-11-07          |
+| cspell | 9.x     | 20.x    | In Active Development | TBD         | TBD                 |
+| cspell | 8.x     | 18.x    | Maintenance           | 2025-05-01  | 2025-06-01          |
+| cspell | 7.x     | 16.x    | Paid support only[^1] | 2023-10-01  | 2023-11-07          |
 | cspell | 6.x     | 14.14.x | Paid support only[^1] | 2023-04-01  | 2023-05-01          |
 | cspell | 5.x     | 12.x    | Paid support only[^1] | -           | 2022-10-01          |
 | cspell | 4.x     | 10.x    | Paid support only[^1] | -           | 2022-05-01          |
