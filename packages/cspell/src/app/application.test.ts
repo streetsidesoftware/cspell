@@ -87,7 +87,7 @@ describe('Validate the Application', () => {
                 dictSource: expect.stringContaining('en_US.trie.gz'),
             }),
         );
-        expect(foundIn.map((d) => d.dictName)).toEqual(expect.arrayContaining(['en-gb', 'en_us', 'companies']));
+        expect(foundIn.map((d) => d.dictName)).toEqual(expect.arrayContaining(['en-gb-mit', 'en_us', 'companies']));
     });
 
     test('Tests running the trace command with missing dictionary', testOptions, async () => {

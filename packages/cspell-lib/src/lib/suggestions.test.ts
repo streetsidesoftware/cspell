@@ -20,11 +20,11 @@ describe('suggestions', () => {
         ${'apple'} | ${opt({ strict: false })}               | ${undefined}                   | ${ac([sug('apple', 0, ['en_us', 'companies']), sug('Apple', 1, ['en_us', 'companies'])])}
         ${'apple'} | ${opt({ includeDefaultConfig: false })} | ${undefined}                   | ${[]}
         ${'apple'} | ${{}}                                   | ${{}}                          | ${ac([sug('apple', 0, ['en_us']), sug('Apple', 1, ['en_us', 'companies'])])}
-        ${'apple'} | ${{}}                                   | ${{ language: 'en-gb' }}       | ${ac([sug('apple', 0, ['en-gb']), sug('Apple', 1, ['companies'])])}
-        ${'apple'} | ${{}}                                   | ${cfgFile}                     | ${ac([sug('apple', 0, ['en-gb']), sug('Apple', 1, ['companies'])])}
-        ${'apple'} | ${{ locale: 'en-gb' }}                  | ${undefined}                   | ${ac([sug('apple', 0, ['en-gb']), sug('Apple', 1, ['companies'])])}
-        ${'apple'} | ${{ dictionaries: ['en-gb'] }}          | ${undefined}                   | ${ac([sug('apple', 0, ['en-gb'])])}
-        ${'apple'} | ${undefined}                            | ${{ dictionaries: ['en-gb'] }} | ${ac([sug('apple', 0, ['en_us', 'en-gb']), sug('Apple', 1, ['en_us', 'companies'])])}
+        ${'apple'} | ${{}}                                   | ${{ language: 'en-gb' }}       | ${ac([sug('apple', 0, ['en-gb-mit']), sug('Apple', 1, ['companies', 'en-gb-mit'])])}
+        ${'apple'} | ${{}}                                   | ${cfgFile}                     | ${ac([sug('apple', 0, ['en-gb-mit']), sug('Apple', 1, ['companies', 'en-gb-mit'])])}
+        ${'apple'} | ${{ locale: 'en-gb' }}                  | ${undefined}                   | ${ac([sug('apple', 0, ['en-gb-mit']), sug('Apple', 1, ['companies', 'en-gb-mit'])])}
+        ${'apple'} | ${{ dictionaries: ['en-gb-mit'] }}      | ${undefined}                   | ${ac([sug('apple', 0, ['en-gb-mit'])])}
+        ${'apple'} | ${undefined}                            | ${{ dictionaries: ['en-gb'] }} | ${ac([sug('apple', 0, ['en_us']), sug('Apple', 1, ['en_us', 'companies'])])}
     `(
         'suggestionsForWord default settings word: "$word", opts: $options, settings: $settings',
         { timeout },
