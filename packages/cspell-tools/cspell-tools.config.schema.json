@@ -174,7 +174,21 @@
           "type": "array"
         },
         "excludeWordsFrom": {
-          "description": "Words from the sources that are found in `excludeWordsFrom` files will not be added to the dictionary.",
+          "description": "Words from the sources that are found in `excludeWordsFrom` files will NOT be added to the dictionary.",
+          "items": {
+            "$ref": "#/definitions/FilePath"
+          },
+          "type": "array"
+        },
+        "excludeWordsMatchingRegex": {
+          "description": "Words from the sources that match the regex in `excludeWordsMatchingRegex` will NOT be added to the dictionary.\n\nNote: The regex must be a valid JavaScript literal regex expression including the `/` delimiters.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "excludeWordsNotFoundIn": {
+          "description": "Words from the sources that are NOT found in `excludeWordsNotFoundIn` files will NOT be added to the dictionary.",
           "items": {
             "$ref": "#/definitions/FilePath"
           },

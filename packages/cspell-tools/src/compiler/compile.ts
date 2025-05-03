@@ -15,6 +15,7 @@ import type {
 } from '../config/index.js';
 import { isFileListSource, isFilePath, isFileSource } from '../config/index.js';
 import { checkShasumFile, updateChecksumForFiles } from '../shasum/index.js';
+import { stringToRegExp } from '../util/textRegex.js';
 import { createAllowedSplitWordsFromFiles, createWordsCollectionFromFiles } from './createWordsCollection.js';
 import { logWithTimestamp } from './logWithTimestamp.js';
 import { readTextFile } from './readers/readTextFile.js';
@@ -106,12 +107,27 @@ export async function compileTarget(
 ): Promise<string[]> {
     logWithTimestamp(`Start compile: ${target.name}`);
     const { rootDir, cwd, checksumFile, conditional } = compileOptions;
-    const { format, sources, trieBase, sort = true, generateNonStrict = false, excludeWordsFrom } = target;
+    const {
+        format,
+        sources,
+        trieBase,
+        sort = true,
+        generateNonStrict = false,
+        excludeWordsFrom = [],
+        excludeWordsNotFoundIn = [],
+        excludeWordsMatchingRegex,
+    } = target;
     const targetDirectory = path.resolve(rootDir, target.targetDirectory ?? cwd ?? process.cwd());
     const dictionaryDirectives = target.dictionaryDirectives ?? compileOptions.dictionaryDirectives;
     const removeDuplicates = target.removeDuplicates ?? false;
 
-    const excludeFilter = await createExcludeFilter(excludeWordsFrom);
+    const excludeFromFilter = await createExcludeFilter(excludeWordsFrom);
+    const includeFromFilter = await createIncludeFilter(excludeWordsNotFoundIn);
+    const excludeRegexFilter = createExcludeRegexFilter(excludeWordsMatchingRegex);
+
+    const excludeFilter = (word: string) => {
+        return excludeFromFilter(word) && includeFromFilter(word) && excludeRegexFilter(word);
+    };
 
     const generateNonStrictTrie = target.generateNonStrict ?? true;
 
@@ -135,7 +151,14 @@ export async function compileTarget(
     });
     const checksumRoot = (checksumFile && path.dirname(checksumFile)) || rootDir;
 
-    const deps = [...calculateDependencies(filename, filesToProcess, excludeWordsFrom, checksumRoot)];
+    const deps = [
+        ...calculateDependencies(
+            filename,
+            filesToProcess,
+            [...excludeWordsFrom, ...excludeWordsNotFoundIn],
+            checksumRoot,
+        ),
+    ];
 
     if (conditional && checksumFile) {
         const check = await checkShasumFile(checksumFile, deps, checksumRoot).catch(() => undefined);
@@ -327,9 +350,40 @@ function logProgress<T>(freq = 100_000): (iter: Iterable<T>) => Iterable<T> {
     return logProgress;
 }
 
+/**
+ * @param excludeWordsFrom - List of files to read words from.
+ * @returns a function that returns true if the word is not in the exclude list.
+ */
 async function createExcludeFilter(excludeWordsFrom: FilePath[] | undefined): Promise<(word: string) => boolean> {
     if (!excludeWordsFrom || !excludeWordsFrom.length) return () => true;
     const excludeWords = await createWordsCollectionFromFiles(excludeWordsFrom);
 
     return (word: string) => !excludeWords.has(word, word.toUpperCase() !== word);
+}
+
+/**
+ * @param includeWordsFrom - List of files to read words from.
+ * @returns a function that returns true if the word is in the include list.
+ */
+async function createIncludeFilter(includeWordsFrom: FilePath[] | undefined): Promise<(word: string) => boolean> {
+    if (!includeWordsFrom || !includeWordsFrom.length) return () => true;
+    const excludeWords = await createWordsCollectionFromFiles(includeWordsFrom);
+
+    return (word: string) => excludeWords.has(word, word.toUpperCase() !== word);
+}
+
+/**
+ * @param excludeWordsMatchingRegex - List of regex patterns to exclude.
+ * @returns a function that returns true if the word does not match any of the regex patterns.
+ */
+function createExcludeRegexFilter(excludeWordsMatchingRegex: string[] | undefined): (word: string) => boolean {
+    if (!excludeWordsMatchingRegex || !excludeWordsMatchingRegex.length) return () => true;
+    const regexes = excludeWordsMatchingRegex
+        .map((a) => stringToRegExp(a))
+        .filter((a, i): a is RegExp => {
+            if (a) return true;
+            console.warn('Invalid regex: "%s"', excludeWordsMatchingRegex[i]);
+            return false;
+        });
+    return (word: string) => !regexes.some((r) => r.test(word));
 }

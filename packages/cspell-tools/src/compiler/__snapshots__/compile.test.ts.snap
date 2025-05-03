@@ -296,6 +296,27 @@ San Francisco
 "
 `;
 
+exports[`compile > compile filtered 'dicts/cities.txt', excludeWordsMatchingRegex: [ '/^[lL]/' ] 1`] = `
+"
+# cspell-tools: keep-case no-split
+
+Mexico City
+New Amsterdam
+New Delhi
+New York
+Paris
+San Francisco
+"
+`;
+
+exports[`compile > compile filtered 'dicts/cities.txt', excludeWordsNotFoundIn: [ 'build-exclude/src/exclude.txt' ] 1`] = `
+"
+# cspell-tools: keep-case no-split
+
+London
+"
+`;
+
 exports[`compile > compile filtered 'dicts/colors.txt', excludeWordsFrom: [ 'build-exclude/src/exclude.txt' ] 1`] = `
 "
 # cspell-tools: keep-case no-split
@@ -309,5 +330,39 @@ pink
 red
 white
 yellow
+"
+`;
+
+exports[`compile > compile filtered 'dicts/colors.txt', excludeWordsMatchingRegex: [ '/^(?!red|green|low)/' ] 1`] = `
+"
+# cspell-tools: keep-case no-split
+
+green
+red
+"
+`;
+
+exports[`compile > compile filtered 'dicts/colors.txt', excludeWordsMatchingRegex: [ '/^[rg]/' ] 1`] = `
+"
+# cspell-tools: keep-case no-split
+
+black
+blue
+cyan
+magenta
+orange
+pink
+purple
+white
+yellow
+"
+`;
+
+exports[`compile > compile filtered 'dicts/colors.txt', excludeWordsNotFoundIn: [ 'build-exclude/src/exclude.txt' ] 1`] = `
+"
+# cspell-tools: keep-case no-split
+
+green
+purple
 "
 `;

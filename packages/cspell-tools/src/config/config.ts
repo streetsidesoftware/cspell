@@ -124,11 +124,29 @@ export interface Target extends CompileTargetOptions {
 
     /**
      * Words from the sources that are found in `excludeWordsFrom` files
-     * will not be added to the dictionary.
+     * will NOT be added to the dictionary.
      *
      * @since 8.3.2
      */
     excludeWordsFrom?: FilePath[] | undefined;
+
+    /**
+     * Words from the sources that are NOT found in `excludeWordsNotFoundIn` files
+     * will NOT be added to the dictionary.
+     *
+     * @since 8.19.4
+     */
+    excludeWordsNotFoundIn?: FilePath[] | undefined;
+
+    /**
+     * Words from the sources that match the regex in `excludeWordsMatchingRegex`
+     * will NOT be added to the dictionary.
+     *
+     * Note: The regex must be a valid JavaScript literal regex expression including the `/` delimiters.
+     *
+     * @since 8.19.4
+     */
+    excludeWordsMatchingRegex?: string[] | undefined;
 
     /**
      * Advanced: Set the trie base number. A value between 10 and 36
