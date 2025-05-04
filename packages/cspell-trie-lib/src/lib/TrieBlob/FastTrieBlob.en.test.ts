@@ -23,7 +23,7 @@ describe('Validate English FastTrieBlob', async () => {
         const words = sampleWordsLarge;
         const ft = FastTrieBlobBuilder.fromWordList(words);
         const result = [...ft.words()];
-        expect(result).toEqual(words);
+        expect(result).toEqual(words.sort());
     });
 
     test('has', () => {
