@@ -4,8 +4,8 @@ Url: https://github.com/dart-lang/sdk
 Args: '["--issues-summary-report","--locale=en,en-GB","--exclude=tools/dom/**/*.json","--exclude=pkg/*/test/**","--exclude=**/*_data.*","--exclude=runtime/vm/**","--exclude=sdk/lib/html/**","--exclude=benchmarks/**","--exclude=**/*_test.*","--exclude=*/**/*.{json,yaml,yml}","--exclude=tests/corelib/regexp/**","--exclude=**/{third_party,assets}/**","**/*.{dart,md}"]'
 Summary:
   files: 10301
-  filesWithIssues: 1992
-  issues: 9020
+  filesWithIssues: 1993
+  issues: 9022
   errors: 0
 Errors: []
 
@@ -396,6 +396,7 @@ issues:
   - "pkg/analyzer/lib/src/summary/format.dart:1468:49        ADUI    U       finish(fbBuilder), \"ADUI\");"
   - "pkg/analyzer/lib/src/summary/idl.dart:25:8          Prelinked       U       /// - \"Prelinked\" refers to information"
   - "pkg/analyzer/lib/src/summary/idl.dart:36:35         prelinked       U       expect \"linked\" and \"prelinked\" dependencies to be"
+  - "pkg/analyzer/lib/src/summary2/binary_format_doc.dart:170:19         witten      U       /// Any string is witten as [Uint30] and is an"
   - "pkg/analyzer/lib/src/test_utilities/mock_sdk.dart:534:17        uninstantiable      U       factory Null._uninstantiable() {"
   - "pkg/analyzer/lib/src/test_utilities/mock_sdk.dart:1170:32       Ement               U       EmbedElement extends HtmlEment {"
   - "pkg/analyzer/lib/src/test_utilities/resource_provider_mixin.dart:15:12          overriden (overridden)      U       /// can be overriden via [createResourceProvider"
@@ -908,7 +909,6 @@ issues:
   - "pkg/front_end/testcases/general/constants/const_collections.dart:55:27          quuz    U       Map<String, String> quuz = {...quux, \"!\": \"bye"
   - "pkg/front_end/testcases/general/constants/js_semantics/number_folds.dart:10:11          intdiv      U       const int intdivZero = 2 ~/ 0;"
   - "pkg/front_end/testcases/general/DeltaBlue.dart:2:42         Wolczko             U       John Maloney and Mario Wolczko"
-  - "pkg/front_end/testcases/general/DeltaBlue.dart:27:6         Bjorn               U       * Bjorn N. Freeman-Benson and"
   - "pkg/front_end/testcases/general/DeltaBlue.dart:444:47       resatisfy           U       algorithm attempts to resatisfy that"
   - "pkg/front_end/testcases/general/DeltaBlue.dart:491:25       resatisfaction      U       Extract a plan for resatisfaction starting from the given"
   - "pkg/front_end/testcases/general/DeltaBlue.dart:525:25       resatisfying        U       Extract a plan for resatisfying starting from the output"
@@ -1667,6 +1667,7 @@ issues:
   - "sdk/lib/_internal/vm/bin/directory_patch.dart:73:4          Corelib     U       // Corelib 'Uri.base' implementation"
   - "sdk/lib/_internal/vm/bin/file_patch.dart:174:15         Inotify     U       return _InotifyFileSystemWatcher(path"
   - "sdk/lib/_internal/vm/bin/file_patch.dart:337:42         wathed      U       Path is no longer being wathed."
+  - "sdk/lib/_internal/vm/bin/process_patch.dart:422:13      ager    U       // TODO(ager): Make the actual process"
   - "sdk/lib/_internal/vm/bin/socket_patch.dart:459:44       EINPROGRESS                 U       that corresponds to EINPROGRESS OS error."
   - "sdk/lib/_internal/vm/bin/socket_patch.dart:714:58       sucessful (successful)      U       address lookups were sucessful."
   - "sdk/lib/_internal/vm/bin/socket_patch.dart:1062:40      writability                 U       select(2) indicates writability, use getsockopt(2) to"
@@ -2112,6 +2113,7 @@ issuesSummary:
   - "text: aeiou, count: 1, files: 1,"
   - "text: AEIOU, count: 1, files: 1,"
   - "text: Afrom, count: 2, files: 1,"
+  - "text: ager, count: 2, files: 2,"
   - "text: aiki, count: 3, files: 1,"
   - "text: Ainv, count: 5, files: 1,"
   - "text: aiohttp, count: 1, files: 1,"
@@ -2221,7 +2223,6 @@ issuesSummary:
   - "text: bitvector, count: 1, files: 1,"
   - "text: bivariance, count: 1, files: 1,"
   - "text: Bivariant, count: 4, files: 1,"
-  - "text: Bjorn, count: 1, files: 1,"
   - "text: bkonyi, count: 41, files: 25,"
   - "text: blåbæ, count: 1, files: 1,"
   - "text: blåbærgrød, count: 7, files: 6,"
@@ -4084,6 +4085,7 @@ issuesSummary:
   - "text: wininit, count: 1, files: 1,"
   - "text: Wireshark, count: 5, files: 2,"
   - "text: withgoogle, count: 8, files: 6,"
+  - "text: witten, count: 1, files: 1,"
   - "text: wkday, count: 5, files: 1,"
   - "text: wkdays, count: 3, files: 1,"
   - "text: Wolczko, count: 1, files: 1,"
