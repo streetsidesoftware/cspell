@@ -18,7 +18,7 @@ describe('Verify trace', () => {
         const results = await traceWords(words, config, {});
         expect(results.map(({ dictName, found }) => ({ dictName, found }))).toEqual(
             expect.arrayContaining([
-                { dictName: 'en-gb-mit', found: true },
+                { dictName: 'en-gb', found: true },
                 { dictName: 'en_us', found: true },
                 { dictName: 'cpp', found: true },
                 { dictName: 'typescript', found: false },
@@ -35,7 +35,7 @@ describe('Verify trace', () => {
     test.each`
         word           | languageId   | locale       | ignoreCase | allowCompoundWords | dictName           | dictActive | found    | forbidden | noSuggest | foundWord
         ${'apple'}     | ${undefined} | ${undefined} | ${true}    | ${undefined}       | ${'en_us'}         | ${true}    | ${true}  | ${false}  | ${false}  | ${'apple'}
-        ${'apple'}     | ${undefined} | ${undefined} | ${true}    | ${undefined}       | ${'en-gb-mit'}     | ${false}   | ${true}  | ${false}  | ${false}  | ${'apple'}
+        ${'apple'}     | ${undefined} | ${undefined} | ${true}    | ${undefined}       | ${'en-gb'}         | ${false}   | ${true}  | ${false}  | ${false}  | ${'apple'}
         ${'Apple'}     | ${undefined} | ${undefined} | ${false}   | ${undefined}       | ${'en_us'}         | ${true}    | ${true}  | ${false}  | ${false}  | ${'Apple'}
         ${'Apple'}     | ${undefined} | ${undefined} | ${false}   | ${undefined}       | ${'companies'}     | ${true}    | ${true}  | ${false}  | ${false}  | ${'Apple'}
         ${'Apple'}     | ${undefined} | ${undefined} | ${false}   | ${undefined}       | ${'cpp'}           | ${false}   | ${true}  | ${false}  | ${false}  | ${'apple'}

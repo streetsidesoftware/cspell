@@ -42,7 +42,7 @@ describe('Validate LanguageSettings', () => {
         expect(sPhp.allowCompoundWords).toBeUndefined();
         expect(sPhp.dictionaries).not.toHaveLength(0);
         expect(sPhp.dictionaries).toEqual(
-            expect.arrayContaining(['en-gb-mit', 'php', 'html', 'npm', 'fonts', 'css', 'typescript', 'fullstack']),
+            expect.arrayContaining(['en-gb', 'php', 'html', 'npm', 'fonts', 'css', 'typescript', 'fullstack']),
         );
     });
 
