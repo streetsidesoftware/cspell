@@ -4,8 +4,8 @@ Url: https://github.com/vitest-dev/vitest
 Args: '["--issues-summary-report","--locale=en,en-GB","."]'
 Summary:
   files: 2075
-  filesWithIssues: 328
-  issues: 1371
+  filesWithIssues: 331
+  issues: 1387
   errors: 0
 Errors: []
 
@@ -61,12 +61,13 @@ issues:
   - "docs/config/index.md:2063:37        setupfiles              U       setupFiles {#sequence-setupfiles}"
   - "docs/config/index.md:2153:18        chaiconfig              U       ### chaiConfig {#chaiconfig}"
   - "docs/config/index.md:2221:40        onstacktrace            U       NonProjectOption /> {#onstacktrace}"
-  - "docs/guide/browser/assertion-api.md:17:293      retriable       U       purpose, Vitest provides retriable assertions out of the"
-  - "docs/guide/browser/assertion-api.md:809:46      Luca            U       input-example\" value=\"Luca\" />"
-  - "docs/guide/browser/assertion-api.md:818:18      ananas          U       <option value=\"ananas\">Ananas</option>"
-  - "docs/guide/browser/assertion-api.md:818:26      Ananas          U       option value=\"ananas\">Ananas</option>"
-  - "docs/guide/browser/assertion-api.md:1000:17     indeces         U       selection range indeces."
-  - "docs/guide/browser/assertion-api.md:1044:63     ected           U       )).toHaveSelection('ected')"
+  - "docs/guide/browser/assertion-api.md:17:293      retriable               U       purpose, Vitest provides retriable assertions out of the"
+  - "docs/guide/browser/assertion-api.md:318:10      Existant (Existent)     U       const nonExistantElement = getByTestId"
+  - "docs/guide/browser/assertion-api.md:809:46      Luca                    U       input-example\" value=\"Luca\" />"
+  - "docs/guide/browser/assertion-api.md:818:18      ananas                  U       <option value=\"ananas\">Ananas</option>"
+  - "docs/guide/browser/assertion-api.md:818:26      Ananas                  U       option value=\"ananas\">Ananas</option>"
+  - "docs/guide/browser/assertion-api.md:1000:17     indeces                 U       selection range indeces."
+  - "docs/guide/browser/assertion-api.md:1044:63     ected                   U       )).toHaveSelection('ected')"
   - "docs/guide/browser/config.md:183:78         provideroptions     U       deprecated</Badge> {#browser-provideroptions}"
   - "docs/guide/browser/context.md:37:3          unhover     U       unhover: (element: Element,"
   - "docs/guide/browser/index.md:32:1        bunx            U       bunx vitest init browser"
@@ -329,6 +330,7 @@ issues:
   - "README.md:120:82        Matias          U       github.com/antfu), [Matias Capeletto](https://github"
   - "README.md:120:89        Capeletto       U       com/antfu), [Matias Capeletto](https://github.com"
   - "test/browser/fixtures/browser-crash/vitest.config.ts:14:38          crashcontent    U       context.page.goto('about:crashcontent')"
+  - "test/browser/fixtures/expect-dom/toContainHTML.test.ts:101:42       existant (existent)     U       onExistantString = '<div> non-existant element </div>'"
   - "test/browser/fixtures/expect-dom/toHaveAccessibleErrorMessage.test.ts:49:10         asfdafbasdfasa      U       'asfdafbasdfasa',"
   - "test/browser/fixtures/expect-dom/toHaveAccessibleErrorMessage.test.ts:171:20        asdflkje            U       const msg = 'asdflkje2984fguyvb bnafdsasfa"
   - "test/browser/fixtures/expect-dom/toHaveAccessibleErrorMessage.test.ts:171:32        fguyvb              U       const msg = 'asdflkje2984fguyvb bnafdsasfa;lj'"
@@ -574,6 +576,8 @@ issuesSummary:
   - "text: examplejs, count: 1, files: 1,"
   - "text: excepturi, count: 2, files: 2,"
   - "text: exercitationem, count: 1, files: 1,"
+  - "text: existant, count: 2, files: 1,"
+  - "text: Existant, count: 14, files: 4,"
   - "text: expedita, count: 1, files: 1,"
   - "text: Fabrício, count: 1, files: 1,"
   - "text: facere, count: 1, files: 1,"
