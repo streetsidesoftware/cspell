@@ -20,11 +20,11 @@ describe('suggestions', () => {
         ${'apple'} | ${opt({ strict: false })}               | ${undefined}                   | ${ac([sug('apple', 0, ['en_us', 'companies']), sug('Apple', 1, ['en_us', 'companies'])])}
         ${'apple'} | ${opt({ includeDefaultConfig: false })} | ${undefined}                   | ${[]}
         ${'apple'} | ${{}}                                   | ${{}}                          | ${ac([sug('apple', 0, ['en_us']), sug('Apple', 1, ['en_us', 'companies'])])}
-        ${'apple'} | ${{}}                                   | ${{ language: 'en-gb' }}       | ${ac([sug('apple', 0, ['en-gb']), sug('Apple', 1, ['companies'])])}
-        ${'apple'} | ${{}}                                   | ${cfgFile}                     | ${ac([sug('apple', 0, ['en-gb']), sug('Apple', 1, ['companies'])])}
-        ${'apple'} | ${{ locale: 'en-gb' }}                  | ${undefined}                   | ${ac([sug('apple', 0, ['en-gb']), sug('Apple', 1, ['companies'])])}
+        ${'apple'} | ${{}}                                   | ${{ language: 'en-gb' }}       | ${ac([sug('apple', 0, ['en-gb']), sug('Apple', 1, ['companies', 'en-gb'])])}
+        ${'apple'} | ${{}}                                   | ${cfgFile}                     | ${ac([sug('apple', 0, ['en-gb']), sug('Apple', 1, ['companies', 'en-gb'])])}
+        ${'apple'} | ${{ locale: 'en-gb' }}                  | ${undefined}                   | ${ac([sug('apple', 0, ['en-gb']), sug('Apple', 1, ['companies', 'en-gb'])])}
         ${'apple'} | ${{ dictionaries: ['en-gb'] }}          | ${undefined}                   | ${ac([sug('apple', 0, ['en-gb'])])}
-        ${'apple'} | ${undefined}                            | ${{ dictionaries: ['en-gb'] }} | ${ac([sug('apple', 0, ['en_us', 'en-gb']), sug('Apple', 1, ['en_us', 'companies'])])}
+        ${'apple'} | ${undefined}                            | ${{ dictionaries: ['en-gb'] }} | ${ac([sug('apple', 0, ['en-gb', 'en_us']), sug('Apple', 1, ['en-gb', 'en_us', 'companies'])])}
     `(
         'suggestionsForWord default settings word: "$word", opts: $options, settings: $settings',
         { timeout },
@@ -61,13 +61,13 @@ describe('Suggestions English', async () => {
         const results = await suggestionsForWord('orangges', { languageId: 'typescript', locale: 'en-US' }, {});
         expect(results.suggestions).toEqual([
             sug('oranges', 100),
+            sug('Orange', 181),
             sug('ranges', 185),
             sug('orangs', 190),
             sug('orange', 200),
             sug('orangey', 200),
             sug('orangier', 200),
             sug('orangiest'),
-            sug('Orange', 201),
         ]);
     });
 
@@ -79,13 +79,13 @@ describe('Suggestions English', async () => {
         );
         expect(results.suggestions).toEqual([
             sug('oranges', 100),
+            sug('Orange', 181),
             sug('ranges', 185),
             sug('orangs', 190),
             sug('orange', 200),
             sug('orangey', 200),
             sug('orangier', 200),
             sug('orangiest'),
-            sug('Orange', 201),
         ]);
     });
 });
