@@ -61,13 +61,13 @@ describe('Suggestions English', async () => {
         const results = await suggestionsForWord('orangges', { languageId: 'typescript', locale: 'en-US' }, {});
         expect(results.suggestions).toEqual([
             sug('oranges', 100),
+            sug('Orange', 181),
             sug('ranges', 185),
             sug('orangs', 190),
             sug('orange', 200),
             sug('orangey', 200),
             sug('orangier', 200),
             sug('orangiest'),
-            sug('Orange', 201),
         ]);
     });
 
@@ -79,13 +79,13 @@ describe('Suggestions English', async () => {
         );
         expect(results.suggestions).toEqual([
             sug('oranges', 100),
+            sug('Orange', 181),
             sug('ranges', 185),
             sug('orangs', 190),
             sug('orange', 200),
             sug('orangey', 200),
             sug('orangier', 200),
             sug('orangiest'),
-            sug('Orange', 201),
         ]);
     });
 });
