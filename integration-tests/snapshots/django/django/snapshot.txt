@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["--issues-summary-report","**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2836, Issues found: 8263 in 911 files.
+ CSpell: Files checked: 2836, Issues found: 8265 in 911 files.
  exit code: 1
 django/__init__.py:12:26     - Unknown word (urlresolvers) -- Set the thread-local urlresolvers script prefix if `set
 django/apps/registry.py:134:40    - Unknown word (unconfigured) -- not ready" is due to unconfigured settings, accessing
@@ -1272,7 +1272,7 @@ django/db/backends/mysql/creation.py:42:20     - Unknown word (keepdb)     -- if
 django/db/backends/mysql/creation.py:67:14     - Unknown word (mysqldump)  -- "mysqldump",
 django/db/backends/mysql/creation.py:89:44     - Unknown word (SIGPIPE)    -- dump_proc to receive a SIGPIPE if the load process
 django/db/backends/mysql/creation.py:95:35     - Unknown word (mysqldump)  -- f"Got an error on mysqldump when cloning the test
-django/db/backends/mysql/features.py:122:46    - Unknown word (nonaggregated) -- GROUP BY cannot contain nonaggregated column when "
+django/db/backends/mysql/features.py:115:46    - Unknown word (nonaggregated) -- GROUP BY cannot contain nonaggregated column when "
 django/db/backends/mysql/introspection.py:175:37    - Unknown word (prec)       -- to_int(info.num_prec) or line[4],
 django/db/backends/mysql/introspection.py:25:37     - Unknown word (prec)       -- data_type max_len num_prec num_scale extra column
 django/db/backends/mysql/introspection.py:341:39    - Unknown word (colseq)     -- non_unique, index, colseq, column, order, type
@@ -1336,8 +1336,8 @@ django/db/backends/oracle/creation.py:29:63     - Unknown word (keepdb)     -- a
 django/db/backends/oracle/creation.py:35:56     - Unknown word (keepdb)     -- parameters, verbosity, keepdb
 django/db/backends/oracle/creation.py:78:64     - Unknown word (keepdb)     -- parameters, verbosity, keepdb
 django/db/backends/oracle/creation.py:93:75     - Unknown word (keepdb)     -- parameters, verbosity, keepdb)
-django/db/backends/oracle/features.py:125:47    - Unknown word (NCLOB)       -- t support comparing NCLOB to NUMBER.": {
-django/db/backends/oracle/features.py:127:23    - Unknown word (textlink)    -- "test_textlink_filter",
+django/db/backends/oracle/features.py:118:47    - Unknown word (NCLOB)       -- t support comparing NCLOB to NUMBER.": {
+django/db/backends/oracle/features.py:120:23    - Unknown word (textlink)    -- "test_textlink_filter",
 django/db/backends/oracle/features.py:45:15     - Unknown word (uppercasing) -- # does by uppercasing all identifiers.
 django/db/backends/oracle/functions.py:20:17     - Unknown word (NUMTODSINTERVAL) -- function = "NUMTODSINTERVAL"
 django/db/backends/oracle/introspection.py:103:31    - Unknown word (mviews)     -- FROM user_mviews
@@ -1551,13 +1551,13 @@ django/db/backends/sqlite3/creation.py:25:55     - Unknown word (keepdb)     -- 
 django/db/backends/sqlite3/creation.py:28:12     - Unknown word (keepdb)     -- if keepdb:
 django/db/backends/sqlite3/creation.py:74:49     - Unknown word (keepdb)     -- suffix, verbosity, keepdb=False):
 django/db/backends/sqlite3/creation.py:80:20     - Unknown word (keepdb)     -- if keepdb:
-django/db/backends/sqlite3/features.py:101:39    - Unknown word (liveserverthread) -- "servers.test_liveserverthread.LiveServerThreadTest
 django/db/backends/sqlite3/features.py:46:16     - Unknown word (nocase)     -- "ci": "nocase",
 django/db/backends/sqlite3/features.py:48:25     - Unknown word (nocase)     -- "non_default": "nocase",
 django/db/backends/sqlite3/features.py:49:21     - Unknown word (nocase)     -- "virtual": "nocase",
 django/db/backends/sqlite3/features.py:52:29     - Unknown word (dtdelta)    -- # The django_format_dtdelta() function doesn't properly
 django/db/backends/sqlite3/features.py:53:36     - Unknown word (timedeltas) -- DateTime fields and timedeltas.
-django/db/backends/sqlite3/features.py:78:43     - Unknown word (doesnt)     -- alter_field_default_doesnt_perform_queries",
+django/db/backends/sqlite3/features.py:71:43     - Unknown word (doesnt)     -- alter_field_default_doesnt_perform_queries",
+django/db/backends/sqlite3/features.py:94:39     - Unknown word (liveserverthread) -- "servers.test_liveserverthread.LiveServerThreadTest
 django/db/backends/sqlite3/introspection.py:37:10     - Unknown word (smallinteger) -- "smallinteger": "SmallIntegerField
 django/db/backends/sqlite3/introspection.py:94:27     - Unknown word (xinfo)        -- "PRAGMA table_xinfo(%s)" % self.connection
 django/db/backends/sqlite3/operations.py:107:28    - Unknown word (tznames)       -- *self._convert_tznames_to_sql(tzname),
@@ -1695,11 +1695,11 @@ django/db/models/options.py:1002:25   - Unknown word (klass)      -- seen |= set
 django/db/models/options.py:537:33    - Unknown word (longwinded) -- The third filter is a longwinded way of checking f.related
 django/db/models/options.py:996:13    - Unknown word (klass)      -- for klass in self.model.__mro
 django/db/models/options.py:999:36    - Unknown word (klass)      -- for name, value in klass.__dict__.items()
-django/db/models/query.py:2436:11   - Unknown word (aprefetch)  -- async def aprefetch_related_objects(model
-django/db/models/query.py:2648:35   - Unknown word (attnames)   -- init_list: the field attnames fetched from the database
-django/db/models/query.py:2649:57   - Unknown word (attnames)   -- isn't the same as all attnames of the
-django/db/models/query.py:2669:24   - Unknown word (attnames)   -- model_init_attnames = (
-django/db/models/query.py:2673:51   - Unknown word (attnames)   -- attname in model_init_attnames if attname in attname
+django/db/models/query.py:2437:11   - Unknown word (aprefetch)  -- async def aprefetch_related_objects(model
+django/db/models/query.py:2649:35   - Unknown word (attnames)   -- init_list: the field attnames fetched from the database
+django/db/models/query.py:2650:57   - Unknown word (attnames)   -- isn't the same as all attnames of the
+django/db/models/query.py:2670:24   - Unknown word (attnames)   -- model_init_attnames = (
+django/db/models/query.py:2674:51   - Unknown word (attnames)   -- attname in model_init_attnames if attname in attname
 django/db/models/query.py:549:27    - Unknown word (aprefetch)  -- await aprefetch_related_objects(
 django/db/models/query.py:557:23    - Unknown word (aprefetch)  -- await aprefetch_related_objects(
 django/db/models/query.py:767:30    - Unknown word (childmost)  -- insert into the childmost table.
@@ -3423,18 +3423,18 @@ tests/apps/tests.py:514:45    - Unknown word (nsapp)       -- join(base_location
 tests/apps/tests.py:521:49    - Unknown word (nsapp)       -- settings(INSTALLED_APPS=["nsapp"]):
 tests/apps/tests.py:522:51    - Unknown word (nsapp)       -- apps.get_app_config("nsapp")
 tests/apps/tests.py:533:30    - Unknown word (nsapp)       -- components of the "nsapp" package.
-tests/asgi/tests.py:10:49     - Unknown word (ASGI)       -- staticfiles.handlers import ASGIStaticFilesHandler
-tests/asgi/tests.py:11:18     - Unknown word (asgi)       -- from django.core.asgi import get_asgi_application
-tests/asgi/tests.py:11:34     - Unknown word (asgi)       -- core.asgi import get_asgi_application
-tests/asgi/tests.py:13:27     - Unknown word (asgi)       -- django.core.handlers.asgi import ASGIHandler,
-tests/asgi/tests.py:13:39     - Unknown word (ASGI)       -- handlers.asgi import ASGIHandler, ASGIRequest
-tests/asgi/tests.py:13:52     - Unknown word (ASGI)       -- import ASGIHandler, ASGIRequest
-tests/asgi/tests.py:176:24    - Unknown word (referer)    -- [b"referer", b"Scotland"],
-tests/asgi/tests.py:177:24    - Unknown word (referer)    -- [b"referer", b"Wales"],
-tests/asgi/tests.py:45:34     - Unknown word (asgi)       -- settings(ROOT_URLCONF="asgi.urls")
-tests/asgi/tests.py:46:7      - Unknown word (ASGI)       -- class ASGITest(SimpleTestCase)
-tests/asgi/tests.py:53:24     - Unknown word (asgi)       -- async def test_get_asgi_application(self):
-tests/asgi/tests.py:55:54     - Unknown word (ASGI)       -- returns a functioning ASGI callable.
+tests/asgi/tests.py:12:49     - Unknown word (ASGI)       -- staticfiles.handlers import ASGIStaticFilesHandler
+tests/asgi/tests.py:13:18     - Unknown word (asgi)       -- from django.core.asgi import get_asgi_application
+tests/asgi/tests.py:13:34     - Unknown word (asgi)       -- core.asgi import get_asgi_application
+tests/asgi/tests.py:15:27     - Unknown word (asgi)       -- django.core.handlers.asgi import ASGIHandler,
+tests/asgi/tests.py:15:39     - Unknown word (ASGI)       -- handlers.asgi import ASGIHandler, ASGIRequest
+tests/asgi/tests.py:15:52     - Unknown word (ASGI)       -- import ASGIHandler, ASGIRequest
+tests/asgi/tests.py:178:24    - Unknown word (referer)    -- [b"referer", b"Scotland"],
+tests/asgi/tests.py:179:24    - Unknown word (referer)    -- [b"referer", b"Wales"],
+tests/asgi/tests.py:47:34     - Unknown word (asgi)       -- settings(ROOT_URLCONF="asgi.urls")
+tests/asgi/tests.py:48:7      - Unknown word (ASGI)       -- class ASGITest(SimpleTestCase)
+tests/asgi/tests.py:55:24     - Unknown word (asgi)       -- async def test_get_asgi_application(self):
+tests/asgi/tests.py:57:54     - Unknown word (ASGI)       -- returns a functioning ASGI callable.
 tests/asgi/urls.py:23:44     - Unknown word (REFERER)    -- request.META.get("HTTP_REFERER") or "",
 tests/async/test_async_auth.py:110:19    - Unknown word (auser)         -- async def auser():
 tests/async/test_async_auth.py:126:20    - Unknown word (alogout)       -- async def test_alogout(self):
@@ -5587,28 +5587,30 @@ tests/indexes/tests.py:52:45     - Unknown word (looooooooooooooooooo) -- indexe
 tests/indexes/tests.py:54:50     - Unknown word (loooooooooooooooooo)  -- indexes_article_c1_c2_loooooooooooooooooo_255179b2ix",
 tests/inline_formsets/tests.py:91:19     - Unknown word (inlineformsets) -- Make sure inlineformsets respect commit=False
 tests/inspectdb/models.py:49:48     - Unknown word (tamaño)     -- IntegerField(db_column="tamaño")
-tests/inspectdb/tests.py:124:46    - Unknown word (jsonfieldcolumntype) -- inspectdb", "inspectdb_jsonfieldcolumntype", stdout=out)
-tests/inspectdb/tests.py:135:46    - Unknown word (dbcomment)           -- inspectdb", "inspectdb_dbcomment", stdout=out)
-tests/inspectdb/tests.py:154:46    - Unknown word (charfielddbcollation) -- inspectdb", "inspectdb_charfielddbcollation", stdout=out)
-tests/inspectdb/tests.py:173:46    - Unknown word (textfielddbcollation) -- inspectdb", "inspectdb_textfielddbcollation", stdout=out)
-tests/inspectdb/tests.py:190:46    - Unknown word (charfieldunlimited)   -- inspectdb", "inspectdb_charfieldunlimited", stdout=out)
-tests/inspectdb/tests.py:284:46    - Unknown word (foreignkeytofield)    -- inspectdb", "inspectdb_foreignkeytofield", stdout=out)
-tests/inspectdb/tests.py:286:56    - Unknown word (Peoplemoredata)       -- ForeignKey('InspectdbPeoplemoredata', "
-tests/inspectdb/tests.py:295:46    - Unknown word (digitsincolumnname)   -- inspectdb", "inspectdb_digitsincolumnname", stdout=out)
-tests/inspectdb/tests.py:346:24    - Unknown word (tamaño)               -- self.assertIn("tamaño = models.%s()" % integer
-tests/inspectdb/tests.py:372:36    - Unknown word (pascalcase)           -- expected_model_name = "pascalcase"
-tests/inspectdb/tests.py:380:46    - Unknown word (funcuniqueconstraint) -- inspectdb", "inspectdb_funcuniqueconstraint", stdout=out)
-tests/inspectdb/tests.py:382:39    - Unknown word (Funcuniqueconstraint) -- assertIn("class InspectdbFuncuniqueconstraint(models.Model):", output
-tests/inspectdb/tests.py:389:46    - Unknown word (columntypes)          -- inspectdb", "inspectdb_columntypes", stdout=out)
-tests/inspectdb/tests.py:400:46    - Unknown word (uniquetogether)       -- inspectdb", "inspectdb_uniquetogether", stdout=out)
-tests/inspectdb/tests.py:420:38    - Unknown word (Findex)               -- CREATE UNIQUE INDEX Findex ON %s "
-tests/inspectdb/tests.py:440:39    - Unknown word (Findex)               -- execute("DROP INDEX Findex")
-tests/inspectdb/tests.py:455:26    - Unknown word (myfields)             -- "text": "myfields.TextField",
-tests/inspectdb/tests.py:459:50    - Unknown word (columntypes)          -- inspectdb", "inspectdb_columntypes", stdout=out)
-tests/inspectdb/tests.py:461:41    - Unknown word (myfields)             -- assertIn("text_field = myfields.TextField()", output
-tests/inspectdb/tests.py:485:28    - Unknown word (inspectdbmessage)     -- "related_name='inspectdbmessage_author_set')",
-tests/inspectdb/tests.py:57:36     - Unknown word (Peopledata) -- assertNotIn("InspectdbPeopledata", output)
-tests/inspectdb/tests.py:65:46     - Unknown word (columntypes) -- inspectdb", "inspectdb_columntypes", stdout=out)
+tests/inspectdb/tests.py:135:46    - Unknown word (jsonfieldcolumntype) -- inspectdb", "inspectdb_jsonfieldcolumntype", stdout=out)
+tests/inspectdb/tests.py:146:46    - Unknown word (dbcomment)           -- inspectdb", "inspectdb_dbcomment", stdout=out)
+tests/inspectdb/tests.py:165:46    - Unknown word (charfielddbcollation) -- inspectdb", "inspectdb_charfielddbcollation", stdout=out)
+tests/inspectdb/tests.py:184:46    - Unknown word (textfielddbcollation) -- inspectdb", "inspectdb_textfielddbcollation", stdout=out)
+tests/inspectdb/tests.py:201:46    - Unknown word (charfieldunlimited)   -- inspectdb", "inspectdb_charfieldunlimited", stdout=out)
+tests/inspectdb/tests.py:295:46    - Unknown word (foreignkeytofield)    -- inspectdb", "inspectdb_foreignkeytofield", stdout=out)
+tests/inspectdb/tests.py:297:56    - Unknown word (Peoplemoredata)       -- ForeignKey('InspectdbPeoplemoredata', "
+tests/inspectdb/tests.py:306:46    - Unknown word (digitsincolumnname)   -- inspectdb", "inspectdb_digitsincolumnname", stdout=out)
+tests/inspectdb/tests.py:357:24    - Unknown word (tamaño)               -- self.assertIn("tamaño = models.%s()" % integer
+tests/inspectdb/tests.py:383:36    - Unknown word (pascalcase)           -- expected_model_name = "pascalcase"
+tests/inspectdb/tests.py:391:46    - Unknown word (funcuniqueconstraint) -- inspectdb", "inspectdb_funcuniqueconstraint", stdout=out)
+tests/inspectdb/tests.py:393:39    - Unknown word (Funcuniqueconstraint) -- assertIn("class InspectdbFuncuniqueconstraint(models.Model):", output
+tests/inspectdb/tests.py:400:46    - Unknown word (columntypes)          -- inspectdb", "inspectdb_columntypes", stdout=out)
+tests/inspectdb/tests.py:411:46    - Unknown word (uniquetogether)       -- inspectdb", "inspectdb_uniquetogether", stdout=out)
+tests/inspectdb/tests.py:430:34    - Unknown word (Findex)               -- CREATE UNIQUE INDEX Findex ON %s "
+tests/inspectdb/tests.py:434:53    - Unknown word (Findex)               -- execute, "DROP INDEX Findex")
+tests/inspectdb/tests.py:458:26    - Unknown word (myfields)             -- "text": "myfields.TextField",
+tests/inspectdb/tests.py:462:50    - Unknown word (columntypes)          -- inspectdb", "inspectdb_columntypes", stdout=out)
+tests/inspectdb/tests.py:464:41    - Unknown word (myfields)             -- assertIn("text_field = myfields.TextField()", output
+tests/inspectdb/tests.py:488:28    - Unknown word (inspectdbmessage)     -- "related_name='inspectdbmessage_author_set')",
+tests/inspectdb/tests.py:632:46    - Unknown word (compositeprimarykeymodel) -- inspectdb", "inspectdb_compositeprimarykeymodel", stdout=out)
+tests/inspectdb/tests.py:643:46    - Unknown word (compositeprimarykeymodel) -- inspectdb", "inspectdb_compositeprimarykeymodel", stdout=out)
+tests/inspectdb/tests.py:68:36     - Unknown word (Peopledata) -- assertNotIn("InspectdbPeopledata", output)
+tests/inspectdb/tests.py:76:46     - Unknown word (columntypes) -- inspectdb", "inspectdb_columntypes", stdout=out)
 tests/introspection/tests.py:198:49    - Unknown word (dbcommentmodel) -- name == "introspection_dbcommentmodel"
 tests/invalid_models_tests/test_models.py:1004:14   - Unknown word (multigeneration)                                                         -- def test_multigeneration_inheritance(self):
 tests/invalid_models_tests/test_models.py:1431:24   - Unknown word (overriden)                                                               -- def test_inherited_overriden_property_no_clash(self

@@ -3,7 +3,7 @@ Repository: vitest-dev/vitest
 Url: "https://github.com/vitest-dev/vitest"
 Args: ["--issues-summary-report","--locale=en,en-GB","."]
 Lines:
- CSpell: Files checked: 2075, Issues found: 1387 in 331 files.
+ CSpell: Files checked: 2080, Issues found: 1392 in 332 files.
  exit code: 1
 LICENSE:3:28      - Unknown word (Vitest)     -- Copyright (c) 2021-Present Vitest Team
 README.md:113:5     - Unknown word (patak)      -- - [@patak-dev](https://github
@@ -109,7 +109,9 @@ docs/guide/mocking.md:85:46     - Unknown word (Testman)    -- test message', fr
 docs/guide/profiling-test-performance.md:211:4     - Unknown word (Speedscope)  -- - [Speedscope](https://www.speedscope
 docs/guide/profiling-test-performance.md:86:106    - Unknown word (heapprofile) -- test-runner-profile/*.heapprofile` files generated. See
 docs/guide/profiling-test-performance.md:86:67     - Unknown word (cpuprofile) -- test-runner-profile/*.cpuprofile` and `test-runner-profile
-docs/guide/test-context.md:261:33    - Unknown word (overriden)  -- dependant` uses the new overriden value that is scoped
+docs/guide/test-context.md:286:33    - Unknown word (overriden)  -- dependant` uses the new overriden value that is scoped
+docs/guide/test-context.md:355:15    - Unknown word (Infering)   -- ::: info Type Infering
+docs/guide/test-context.md:356:34    - Unknown word (infering)   -- Vitest doesn't support infering the types when the
 docs/guide/testing-types.md:120:20    - Unknown word (answr)      -- assertType<string>(answr)
 docs/guide/testing-types.md:80:37     - Unknown word (typeargs)   -- expected" objects vs typeargs
 docs/guide/testing-types.md:94:60     - Unknown word (typearg)    -- compiler needs to infer the typearg for the `.toEqualTypeOf
@@ -161,16 +163,17 @@ packages/browser/src/node/commands/keyboard.ts:80:115    - Unknown word (Backquo
 packages/browser/src/node/plugin.ts:326:33    - Unknown word (nastry)     -- loupe bundle has a nastry require('util') call
 packages/browser/src/node/plugin.ts:535:15    - Unknown word (rolldown)   -- const rolldownPlugin = {
 packages/browser/src/node/pool.ts:10:13     - Unknown word (nodeos)     -- import * as nodeos from 'node:os'
-packages/browser/src/node/pool.ts:282:22    - Unknown word (cancells)   -- // if user cancells the test run manually
+packages/browser/src/node/pool.ts:299:22    - Unknown word (cancells)   -- // if user cancells the test run manually
 packages/browser/src/node/projectParent.ts:179:19    - Unknown word (cdps)       -- public readonly cdps: Map<string, BrowserServerCDP
-packages/browser/src/node/providers/playwright.ts:116:13    - Unknown word (Preficates) -- const idPreficates = new Map<string, (url
-packages/browser/src/node/providers/playwright.ts:175:49    - Unknown word (trasnform)  -- has http:// which vite.trasnformRequest doesn't understand
-packages/browser/src/node/providers/playwright.ts:296:20    - Unknown word (frameattached) -- page.on('frameattached', (frame) => {
-packages/browser/src/node/providers/playwright.ts:320:16    - Unknown word (requestfailed) -- page.on('requestfailed', (request) => {
-packages/browser/src/node/providers/playwright.ts:406:30    - Unknown word (styl)          -- :css|less|sass|scss|styl|stylus|pcss|postcss
-packages/browser/src/node/providers/playwright.ts:406:42    - Unknown word (pcss)          -- sass|scss|styl|stylus|pcss|postcss|sss)(?:$|\?
+packages/browser/src/node/providers/playwright.ts:126:13    - Unknown word (Preficates) -- const idPreficates = new Map<string, (url
+packages/browser/src/node/providers/playwright.ts:185:49    - Unknown word (trasnform)  -- has http:// which vite.trasnformRequest doesn't understand
+packages/browser/src/node/providers/playwright.ts:312:20    - Unknown word (frameattached) -- page.on('frameattached', (frame) => {
+packages/browser/src/node/providers/playwright.ts:341:16    - Unknown word (requestfailed) -- page.on('requestfailed', (request) => {
+packages/browser/src/node/providers/playwright.ts:449:30    - Unknown word (styl)          -- :css|less|sass|scss|styl|stylus|pcss|postcss
+packages/browser/src/node/providers/playwright.ts:449:42    - Unknown word (pcss)          -- sass|scss|styl|stylus|pcss|postcss|sss)(?:$|\?
 packages/browser/src/node/rpc.ts:11:10     - Unknown word (Automocked) -- import { AutomockedModule, AutospiedModule
 packages/browser/src/node/rpc.ts:11:28     - Unknown word (Autospied)  -- { AutomockedModule, AutospiedModule, ManualMockedModule
+packages/browser/src/node/serverOrchestrator.ts:29:13     - Unknown word (uknown)     -- // ignore uknown pages
 packages/browser/src/node/serverTester.ts:67:11     - Unknown word (indexhtml)  -- const indexhtml = await browserProject
 packages/coverage-istanbul/package.json:54:6      - Unknown word (magicast)   -- "magicast": "catalog:",
 packages/coverage-istanbul/src/provider.ts:28:3      - Unknown word (instrumenter) -- instrumenter!: Instrumenter
@@ -297,7 +300,7 @@ packages/vitest/LICENSE.md:897:4     - Unknown word (yocto)         -- ## yocto-
 packages/vitest/package.json:171:6     - Unknown word (tinyexec)   -- "tinyexec": "^0.3.2",
 packages/vitest/src/constants.ts:1:28      - Unknown word (jsdocs)     -- changed, update also jsdocs and docs
 packages/vitest/src/integrations/mock/date.ts:5:24      - Unknown word (Lauer)      -- Copyright (c) 2014 Bob Lauer
-packages/vitest/src/node/browser/sessions.ts:17:63     - Unknown word (orhcestrator) -- connection with the orhcestrator to be established
+packages/vitest/src/node/browser/sessions.ts:19:63     - Unknown word (orhcestrator) -- connection with the orhcestrator to be established
 packages/vitest/src/node/coverage.ts:677:15    - Unknown word (magicast's) -- // Reduce magicast's verbose errors to readable
 packages/vitest/src/node/git.ts:78:40     - Unknown word (cdup)       -- rev-parse', '--show-cdup']
 packages/vitest/src/node/plugins/index.ts:65:12     - Unknown word (reassignable) -- // reassignable when running in worker
@@ -334,13 +337,13 @@ test/browser/fixtures/expect-dom/toHaveClass.test.ts:27:59     - Unknown word (x
 test/browser/fixtures/expect-dom/toHaveDisplayValue.test.ts:84:12     - Unknown word (nanas)      -- /[Aa]nanas/,
 test/browser/fixtures/expect-dom/toHaveStyle.test.ts:26:16     - Unknown word (fakefake)   -- // border: fakefake doesn't exist
 test/browser/fixtures/expect-dom/toHaveTextContent.test.ts:72:63     - Unknown word (decendants) -- content spread across decendants', () => {
+test/browser/fixtures/failing/failing.snaphot.test.ts:5:28      - Unknown word (inaccesible) -- toMatchFileSnapshot('/inaccesible/path')
 test/browser/fixtures/locators/blog.test.tsx:16:50     - Unknown word (molestiae)  -- .toHaveTextContent(/molestiae ut ut quas/)
 test/browser/fixtures/locators/blog.test.tsx:16:66     - Unknown word (quas)       -- eTextContent(/molestiae ut ut quas/)
 test/browser/fixtures/locators/blog.test.tsx:17:71     - Unknown word (occaecati)  -- .toHaveTextContent(/occaecati excepturi/)
 test/browser/fixtures/locators/blog.test.tsx:17:81     - Unknown word (excepturi)  -- toHaveTextContent(/occaecati excepturi/)
 test/browser/specs/mocking.test.ts:19:47     - Unknown word (automocked) -- toReportPassedTest('automocked.test.ts', browser)
-test/browser/specs/runner.test.ts:190:50    - Unknown word (inaccesible) -- 'Access denied to "/inaccesible/path".')
-test/browser/specs/runner.test.ts:49:97     - Unknown word (mesage)     -- 'passed' && !result.mesage)
+test/browser/specs/runner.test.ts:50:97     - Unknown word (mesage)     -- 'passed' && !result.mesage)
 test/browser/specs/update-snapshot.test.ts:18:57     - Unknown word (Sheremet)   -- // TODO 2024-12-11 Sheremet V.A. test with multiple
 test/browser/src/blog-app/blog.tsx:15:100    - Unknown word (nfugiat)        -- beatae ea dolores neque\nfugiat blanditiis voluptate
 test/browser/src/blog-app/blog.tsx:15:108    - Unknown word (blanditiis)     -- dolores neque\nfugiat blanditiis voluptate porro vel
@@ -427,9 +430,9 @@ test/cli/test/stacktraces.test.ts:50:24     - Unknown word (framestack) -- // ex
 test/config/deps/test-dep-conditions/indirect.js:5:17      - Unknown word (Productioin) -- import conditionProductioin from '@vitest/test-dep
 test/config/fixtures/browser-custom-html/browser-custom.test.ts:7:7       - Unknown word (importmap)  -- test('importmap is injected', () =>
 test/config/fixtures/shuffle/basic.test.ts:15:11     - Unknown word (unshuffle)  -- describe('unshuffle', { shuffle: false
-test/config/test/browser-configs.test.ts:203:47    - Unknown word (workspaced) -- works correctly in workspaced browser mode if instances
-test/config/test/browser-configs.test.ts:234:15    - Unknown word (myproject)  -- project: 'myproject',
-test/config/test/browser-configs.test.ts:50:15     - Unknown word (chrom)      -- project: 'chrom*',
+test/config/test/browser-configs.test.ts:207:47    - Unknown word (workspaced) -- works correctly in workspaced browser mode if instances
+test/config/test/browser-configs.test.ts:238:15    - Unknown word (myproject)  -- project: 'myproject',
+test/config/test/browser-configs.test.ts:54:15     - Unknown word (chrom)      -- project: 'chrom*',
 test/config/test/console-color.test.ts:16:36     - Unknown word (mtrue)      -- stdout).toContain('\x1B[33mtrue\x1B[39m\n')
 test/core/package.json:32:6      - Unknown word (sweetalert) -- "sweetalert2": "^11.19.1",
 test/core/src/mocks/external/default-cjs.cjs:1:33      - Unknown word (pseudoesm)  -- exports = require('./cjs-pseudoesm.cjs')

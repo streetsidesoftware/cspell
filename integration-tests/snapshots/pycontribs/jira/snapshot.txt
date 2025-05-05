@@ -3,17 +3,19 @@ Repository: pycontribs/jira
 Url: "https://github.com/pycontribs/jira.git"
 Args: ["**/*.*"]
 Lines:
- CSpell: Files checked: 79, Issues found: 437 in 39 files.
+ CSpell: Files checked: 79, Issues found: 442 in 39 files.
  exit code: 1
 AUTHORS.rst:3:21      - Unknown word (Contribs)   -- Development Team (PyContribs)
 AUTHORS.rst:5:7       - Unknown word (Speakmon)   -- - Ben Speakmon <ben.speakmon@gmail
 AUTHORS.rst:6:3       - Unknown word (Sorin)      -- - Sorin Sbarnea <sorin.sbarnea
 AUTHORS.rst:6:9       - Unknown word (Sbarnea)    -- - Sorin Sbarnea <sorin.sbarnea@gmail
 MANIFEST.in:14:23     - Unknown word (pycache)    -- recursive-exclude * __pycache__
-README.rst:115:94    - Unknown word (Greenhopper) -- include: Jira Agile, Greenhopper)
-README.rst:134:3     - Unknown word (Navicat)     -- * Navicat_ for providing us free
-README.rst:89:11     - Unknown word (pyenv)      -- * Install pyenv_ to install a suitable
-README.rst:91:50     - Unknown word (addono)     -- 90:2990 --name jira addono/jira-software-standalone
+README.rst:119:11    - Unknown word (pyenv)      -- * Install pyenv_ to install a suitable
+README.rst:121:50    - Unknown word (addono)     -- 90:2990 --name jira addono/jira-software-standalone
+README.rst:145:94    - Unknown word (Greenhopper) -- include: Jira Agile, Greenhopper)
+README.rst:164:3     - Unknown word (Navicat)     -- * Navicat_ for providing us free
+README.rst:21:9      - Unknown word (PYPI)       -- WARNING PYPI RELEASE BROKEN -  TEMPORARY
+README.rst:39:29     - Unknown word (pyproject)  -- requirements.txt or pyproject.toml you can temporarily
 bindep.txt:1:10      - Unknown word (pypi)       -- # gssapi pypi wheel build needs:
 bindep.txt:1:3       - Unknown word (gssapi)     -- # gssapi pypi wheel build needs
 bindep.txt:2:1       - Unknown word (libkrb)     -- libkrb5-dev [platform:dpkg
@@ -111,23 +113,23 @@ jira/client.py:2605:14   - Unknown word (transitionid)     -- def find_transitio
 jira/client.py:3197:65   - Unknown word (requesttype)      -- servicedesk/{service_desk}/requesttype"
 jira/client.py:3254:32   - Unknown word (mypermissions)    -- return self._get_json("mypermissions", params=params)
 jira/client.py:3501:10   - Unknown word (rolesdict)        -- _rolesdict: dict[str, str] = self
-jira/client.py:4246:31   - Unknown word (viewissue)        -- User, None, "user/viewissue/search", startAt, maxResults
-jira/client.py:4765:66   - Unknown word (jspa)             -- admin/user/EditUser.jspa"
-jira/client.py:4793:52   - Unknown word (reindexing)       -- indexing. Returns True if reindexing is in progress or not
-jira/client.py:4806:61   - Unknown word (stoptheworld)     -- if background else "stoptheworld"
-jira/client.py:4846:78   - Unknown word (statuscode)       -- else it returns the statuscode of the Response or False
-jira/client.py:4850:60   - Unknown word (runbackup)        -- rest/backup/1/export/runbackup"
-jira/client.py:4876:53   - Unknown word (getprogress)      -- url + f"/rest/obm/1.0/getprogress?_={epoch_time:i}"
-jira/client.py:4907:9    - Unknown word (perc)             -- perc_search = re.search(r
-jira/client.py:4924:35   - Unknown word (webdav)           -- self.server_url + "/webdav/backupmanager/" + remote
-jira/client.py:4924:42   - Unknown word (backupmanager)    -- server_url + "/webdav/backupmanager/" + remote_file
-jira/client.py:5107:30   - Unknown word (workflowschemes)  -- url = self._get_url("workflowschemes")
-jira/client.py:5451:33   - Unknown word (Dalko)            -- Experimental support for iDalko Grid, expect API to
-jira/client.py:5453:13   - Unknown word (igrid)            -- def get_igrid(self, issueid: str,
-jira/client.py:5454:40   - Unknown word (idalko)           -- server_url + "/rest/idalko-igrid/1.0/datagrid/data
-jira/client.py:5611:9    - Unknown word (incompleted)      -- def incompletedIssuesEstimateSum(self
-jira/client.py:5614:28   - Unknown word (sprintreport)     -- f"rapid/charts/sprintreport?rapidViewId={board_id
-jira/client.py:5851:59   - Unknown word (lexo)             -- greenhopper.jira:gh-lexo-rank"
+jira/client.py:4243:31   - Unknown word (viewissue)        -- User, None, "user/viewissue/search", startAt, maxResults
+jira/client.py:4762:66   - Unknown word (jspa)             -- admin/user/EditUser.jspa"
+jira/client.py:4790:52   - Unknown word (reindexing)       -- indexing. Returns True if reindexing is in progress or not
+jira/client.py:4803:61   - Unknown word (stoptheworld)     -- if background else "stoptheworld"
+jira/client.py:4843:78   - Unknown word (statuscode)       -- else it returns the statuscode of the Response or False
+jira/client.py:4847:60   - Unknown word (runbackup)        -- rest/backup/1/export/runbackup"
+jira/client.py:4873:53   - Unknown word (getprogress)      -- url + f"/rest/obm/1.0/getprogress?_={epoch_time:i}"
+jira/client.py:4904:9    - Unknown word (perc)             -- perc_search = re.search(r
+jira/client.py:4921:35   - Unknown word (webdav)           -- self.server_url + "/webdav/backupmanager/" + remote
+jira/client.py:4921:42   - Unknown word (backupmanager)    -- server_url + "/webdav/backupmanager/" + remote_file
+jira/client.py:5104:30   - Unknown word (workflowschemes)  -- url = self._get_url("workflowschemes")
+jira/client.py:5448:33   - Unknown word (Dalko)            -- Experimental support for iDalko Grid, expect API to
+jira/client.py:5450:13   - Unknown word (igrid)            -- def get_igrid(self, issueid: str,
+jira/client.py:5451:40   - Unknown word (idalko)           -- server_url + "/rest/idalko-igrid/1.0/datagrid/data
+jira/client.py:5608:9    - Unknown word (incompleted)      -- def incompletedIssuesEstimateSum(self
+jira/client.py:5611:28   - Unknown word (sprintreport)     -- f"rapid/charts/sprintreport?rapidViewId={board_id
+jira/client.py:5848:59   - Unknown word (lexo)             -- greenhopper.jira:gh-lexo-rank"
 jira/client.py:618:28    - Unknown word (verif)      -- self._add_ssl_cert_verif_strategy_to_session
 jira/config.py:66:9      - Unknown word (findfile)   -- def findfile(path):
 jira/exceptions.py:38:33     - Unknown word (PYJIRA)     -- self.log_to_tempfile = "PYJIRA_LOG_TO_TEMPFILE" in
@@ -189,22 +191,21 @@ tests/test_shell.py:27:19     - Unknown word (βρέθηκε)    -- text="Δεν
 tests/tests.py:130:31    - Unknown word (headingcolour) -- key="jira.lf.text.headingcolour"
 tests/tests.py:41:29     - Unknown word (woopsydoodle) -- self.jira.find("woopsydoodle/{0}", "666")
 tests/tests.py:422:26    - Unknown word (kall)          -- actual_calls = [[kall[1], kall[2]] for kall
-tox.ini:112:38    - Unknown word (shutil)              -- -c 'import os.path, shutil, sys; \
-tox.ini:114:15    - Unknown word (isdir)               -- os.path.isdir(dist_dir) or sys.exit
-tox.ini:116:14    - Unknown word (rmtree)              -- shutil.rmtree(dist_dir)'
-tox.ini:131:5     - Unknown word (DYLD)                -- DYLD_FALLBACK_LIBRARY_PATH
-tox.ini:139:9     - Unknown word (nitpicky)            -- --nitpicky --fail-on-warning \
-tox.ini:141:12    - Unknown word (toxworkdir)          -- -d "{toxworkdir}/docs_doctree" \
-tox.ini:141:29    - Unknown word (doctree)             -- d "{toxworkdir}/docs_doctree" \
-tox.ini:144:15    - Unknown word (pathlib)             -- 'import pathlib; ' \
-tox.ini:146:1     - Unknown word (skipdist)            -- skipdist = False
-tox.ini:19:5      - Unknown word (devel)      -- devel: and ansible devel branch
-tox.ini:36:12     - Unknown word (REQPASS)    -- PYTEST_REQPASS
-tox.ini:38:5      - Unknown word (PYTHONBREAKPOINT) -- PYTHONBREAKPOINT
-tox.ini:39:5      - Unknown word (PYTHONIOENCODING) -- PYTHONIOENCODING
-tox.ini:40:5      - Unknown word (PYTHONPYCACHEPREFIX) -- PYTHONPYCACHEPREFIX
-tox.ini:44:5      - Unknown word (SETUPTOOLS)          -- SETUPTOOLS_SCM_DEBUG
-tox.ini:60:41     - Unknown word (pyproject)           -- PROCESS_START = {tox_root}/pyproject.toml
-tox.ini:74:29     - Unknown word (posargs)             -- coverage run -m pytest {posargs: \
-tox.ini:76:9      - Unknown word (showlocals)          -- --showlocals \
-tox.ini:77:9      - Unknown word (doctest)             -- --doctest-modules \
+tox.ini:116:38    - Unknown word (shutil)              -- -c 'import os.path, shutil, sys; \
+tox.ini:118:15    - Unknown word (isdir)               -- os.path.isdir(dist_dir) or sys.exit
+tox.ini:120:14    - Unknown word (rmtree)              -- shutil.rmtree(dist_dir)'
+tox.ini:135:5     - Unknown word (DYLD)                -- DYLD_FALLBACK_LIBRARY_PATH
+tox.ini:143:9     - Unknown word (nitpicky)            -- --nitpicky --fail-on-warning \
+tox.ini:145:12    - Unknown word (toxworkdir)          -- -d "{toxworkdir}/docs_doctree" \
+tox.ini:145:29    - Unknown word (doctree)             -- d "{toxworkdir}/docs_doctree" \
+tox.ini:148:15    - Unknown word (pathlib)             -- 'import pathlib; ' \
+tox.ini:150:1     - Unknown word (skipdist)            -- skipdist = False
+tox.ini:19:5      - Unknown word (devel)      -- devel: w/ constraints, some
+tox.ini:38:12     - Unknown word (REQPASS)    -- PYTEST_REQPASS
+tox.ini:40:5      - Unknown word (PYTHONBREAKPOINT) -- PYTHONBREAKPOINT
+tox.ini:41:5      - Unknown word (PYTHONIOENCODING) -- PYTHONIOENCODING
+tox.ini:42:5      - Unknown word (PYTHONPYCACHEPREFIX) -- PYTHONPYCACHEPREFIX
+tox.ini:46:5      - Unknown word (SETUPTOOLS)          -- SETUPTOOLS_SCM_DEBUG
+tox.ini:78:29     - Unknown word (posargs)             -- coverage run -m pytest {posargs: \
+tox.ini:80:9      - Unknown word (showlocals)          -- --showlocals \
+tox.ini:81:9      - Unknown word (doctest)             -- --doctest-modules \

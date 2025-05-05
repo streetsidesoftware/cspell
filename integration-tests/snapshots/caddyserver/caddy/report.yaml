@@ -5,7 +5,7 @@ Args: '["**/*.go"]'
 Summary:
   files: 283
   filesWithIssues: 255
-  issues: 3659
+  issues: 3655
   errors: 0
 Errors: []
 
@@ -2160,27 +2160,23 @@ issues:
   - "modules/caddyhttp/reverseproxy/httptransport.go:315:14      proxyproto      U       header := proxyproto.HeaderProxyFromAddrs"
   - "modules/caddyhttp/reverseproxy/httptransport.go:315:46      proxyv          U       HeaderProxyFromAddrs(proxyv, sourceAddr, destAddr"
   - "modules/caddyhttp/reverseproxy/httptransport.go:353:23      caddyconfig     U       h.NetworkProxyRaw = caddyconfig.JSONModuleObject(u,"
-  - "modules/caddyhttp/reverseproxy/httptransport.go:390:18      Alives          U       rt.DisableKeepAlives = !*h.KeepAlive.Enabled"
-  - "modules/caddyhttp/reverseproxy/httptransport.go:400:20      Alives          U       if !rt.DisableKeepAlives && h.ProxyProtocol"
-  - "modules/caddyhttp/reverseproxy/httptransport.go:401:37      keepalives      U       Logger().Warn(\"disabling keepalives, they are incompatible"
-  - "modules/caddyhttp/reverseproxy/httptransport.go:402:17      Alives          U       rt.DisableKeepAlives = true"
-  - "modules/caddyhttp/reverseproxy/httptransport.go:464:3       newtransport    U       newtransport := &HTTPTransport{"
-  - "modules/caddyhttp/reverseproxy/httptransport.go:481:3       newtransport    U       newtransport.Transport.TLSClientConfig"
-  - "modules/caddyhttp/reverseproxy/httptransport.go:481:71      newtransport    U       ServerName = repl.ReplaceAll(newtransport.Transport.TLSClientConfig"
-  - "modules/caddyhttp/reverseproxy/httptransport.go:482:10      newtransport    U       return newtransport"
-  - "modules/caddyhttp/reverseproxy/httptransport.go:504:39      Alives          U       dedicated DisableKeepAlives field in *http2.Transport"
-  - "modules/caddyhttp/reverseproxy/httptransport.go:506:38      Alives          U       Transport.DisableKeepAlives"
-  - "modules/caddyhttp/reverseproxy/httptransport.go:579:6       CAPEM           U       RootCAPEMFiles []string `json"
-  - "modules/caddyhttp/reverseproxy/httptransport.go:650:9       Iface           U       tlsAppIface, err := ctx.App(\"tls"
-  - "modules/caddyhttp/reverseproxy/httptransport.go:654:19      Iface           U       tlsApp := tlsAppIface.(*caddytls.TLS)"
-  - "modules/caddyhttp/reverseproxy/httptransport.go:654:27      caddytls        U       tlsApp := tlsAppIface.(*caddytls.TLS)"
-  - "modules/caddyhttp/reverseproxy/httptransport.go:660:13      caddytls        U       certs := caddytls.AllMatchingCertificates"
-  - "modules/caddyhttp/reverseproxy/httptransport.go:663:88      gosec           U       iteration variable (gosec warning)"
-  - "modules/caddyhttp/reverseproxy/httptransport.go:677:40      CAPEM           U       RootCAPool) > 0 || len(t.RootCAPEMFiles) > 0 {"
-  - "modules/caddyhttp/reverseproxy/httptransport.go:687:33      CAPEM           U       pemFile := range t.RootCAPEMFiles {"
-  - "modules/caddyhttp/reverseproxy/httptransport.go:698:41      CAPEM           U       RootCAPool) > 0 || len(t.RootCAPEMFiles) > 0 {"
-  - "modules/caddyhttp/reverseproxy/httptransport.go:705:20      caddytls        U       ca, ok := caRaw.(caddytls.CA)"
-  - "modules/caddyhttp/reverseproxy/httptransport.go:732:14      caddytls        U       curveID := caddytls.SupportedCurves[curveName"
+  - "modules/caddyhttp/reverseproxy/httptransport.go:420:18      Alives          U       rt.DisableKeepAlives = !*h.KeepAlive.Enabled"
+  - "modules/caddyhttp/reverseproxy/httptransport.go:430:20      Alives          U       if !rt.DisableKeepAlives && h.ProxyProtocol"
+  - "modules/caddyhttp/reverseproxy/httptransport.go:431:37      keepalives      U       Logger().Warn(\"disabling keepalives, they are incompatible"
+  - "modules/caddyhttp/reverseproxy/httptransport.go:432:17      Alives          U       rt.DisableKeepAlives = true"
+  - "modules/caddyhttp/reverseproxy/httptransport.go:498:39      Alives          U       dedicated DisableKeepAlives field in *http2.Transport"
+  - "modules/caddyhttp/reverseproxy/httptransport.go:500:38      Alives          U       Transport.DisableKeepAlives"
+  - "modules/caddyhttp/reverseproxy/httptransport.go:573:6       CAPEM           U       RootCAPEMFiles []string `json"
+  - "modules/caddyhttp/reverseproxy/httptransport.go:644:9       Iface           U       tlsAppIface, err := ctx.App(\"tls"
+  - "modules/caddyhttp/reverseproxy/httptransport.go:648:19      Iface           U       tlsApp := tlsAppIface.(*caddytls.TLS)"
+  - "modules/caddyhttp/reverseproxy/httptransport.go:648:27      caddytls        U       tlsApp := tlsAppIface.(*caddytls.TLS)"
+  - "modules/caddyhttp/reverseproxy/httptransport.go:654:13      caddytls        U       certs := caddytls.AllMatchingCertificates"
+  - "modules/caddyhttp/reverseproxy/httptransport.go:657:88      gosec           U       iteration variable (gosec warning)"
+  - "modules/caddyhttp/reverseproxy/httptransport.go:671:40      CAPEM           U       RootCAPool) > 0 || len(t.RootCAPEMFiles) > 0 {"
+  - "modules/caddyhttp/reverseproxy/httptransport.go:681:33      CAPEM           U       pemFile := range t.RootCAPEMFiles {"
+  - "modules/caddyhttp/reverseproxy/httptransport.go:692:41      CAPEM           U       RootCAPool) > 0 || len(t.RootCAPEMFiles) > 0 {"
+  - "modules/caddyhttp/reverseproxy/httptransport.go:699:20      caddytls        U       ca, ok := caRaw.(caddytls.CA)"
+  - "modules/caddyhttp/reverseproxy/httptransport.go:726:14      caddytls        U       curveID := caddytls.SupportedCurves[curveName"
   - "modules/caddyhttp/reverseproxy/metrics.go:13:14         caddyserver     U       \"github.com/caddyserver/caddy/v2\""
   - "modules/caddyhttp/reverseproxy/reverseproxy.go:41:14        caddyserver     U       \"github.com/caddyserver/caddy/v2\""
   - "modules/caddyhttp/reverseproxy/reverseproxy.go:42:14        caddyserver     U       \"github.com/caddyserver/caddy/v2/caddyconfig"
