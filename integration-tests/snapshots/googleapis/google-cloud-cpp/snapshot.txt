@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 20203, Issues found: 44050 in 7551 files.
+ CSpell: Files checked: 20205, Issues found: 44056 in 7553 files.
  exit code: 1
 ARCHITECTURE.md:158:48    - Unknown word (googlemock) -- implementation using `googlemock`
 ARCHITECTURE.md:29:61     - Unknown word (retryable)  -- RPCs that fail with a retryable error,
@@ -305,6 +305,7 @@ external/googleapis/protodeps/binaryauthorization.deps:8:25      - Unknown word 
 external/googleapis/protolists/aiplatform.list:27:59     - Unknown word (trainingjob) -- aiplatform/v1/schema/trainingjob/definition:automl_image
 external/googleapis/protolists/aiplatform.list:84:52     - Unknown word (genai)       -- cloud/aiplatform/v1:genai_tuning_service.proto
 external/googleapis/protolists/artifactregistry.list:15:61     - Unknown word (vpcsc)      -- artifactregistry/v1:vpcsc_config.proto
+external/googleapis/protolists/asset.list:1:64      - Unknown word (resourceowners) -- v1:asset_enrichment_resourceowners.proto
 external/googleapis/protolists/backupdr.list:3:58      - Unknown word (reportlog)  -- backupdr/logging/v1:reportlog.proto
 external/googleapis/protolists/backupdr.list:5:50      - Unknown word (backupplan) -- google/cloud/backupdr/v1:backupplan.proto
 external/googleapis/protolists/backupdr.list:6:50      - Unknown word (backupplanassociation) -- google/cloud/backupdr/v1:backupplanassociation.proto
@@ -359,7 +360,7 @@ generator/integration_tests/golden/v1/internal/request_id_connection_impl.cc:187
 generator/integration_tests/tests/golden_thing_admin_idempotency_policy_test.cc:26:11     - Unknown word (gtab)       -- namespace gtab = ::google::test::admin
 generator/integration_tests/tests/golden_thing_admin_rest_stub_test.cc:356:24    - Unknown word (expirable)  -- "title": "expirable access",
 generator/integration_tests/tests/request_id_connection_impl_test.cc:73:34     - Unknown word (UUIDV)      -- request has request_id in UUIDV4 format",
-generator/internal/auth_decorator_generator.cc:100:10    - Unknown word (Bidir)      -- HasBidirStreamingMethod()
+generator/internal/auth_decorator_generator.cc:101:10    - Unknown word (Bidir)      -- HasBidirStreamingMethod()
 generator/internal/codegen_utils_test.cc:444:4     - Unknown word (wsupercalifragilisticexpialidocious) -- // wsupercalifragilisticexpialidocious)"""},
 generator/internal/codegen_utils_test.cc:473:45    - Unknown word (uhoh)                                -- CommentBlockTestParams{"line1 uhoh", 0, "", 0, 5, R"""
 generator/internal/codegen_utils_test.cc:476:43    - Unknown word (wordthatiswaytoolong)                -- atCommentBlockTestParams{"foo wordthatiswaytoolong", 0, "", 0, 5,
@@ -386,7 +387,7 @@ generator/internal/routing.h:78:7      - Unknown word (actools)    -- * go/actoo
 generator/internal/scaffold_generator.cc:1012:8    - Unknown word (CXXLDFLAGS) -- CLIENT_CXXLDFLAGS := $$(shell pkg-config
 generator/internal/scaffold_generator_test.cc:437:38    - Unknown word (CXXLD)      -- actual, HasSubstr("\t$(CXXLD) "));
 generator/internal/scaffold_generator_test.cc:471:37    - Unknown word (Bazelrc)    -- ScaffoldGenerator, QuickstartBazelrc) {
-generator/internal/service_code_generator.h:191:46    - Unknown word (autopopulated) -- of the methods has an autopopulated `request_id`-like
+generator/internal/service_code_generator.h:195:46    - Unknown word (autopopulated) -- of the methods has an autopopulated `request_id`-like
 generator/templates/WORKSPACE.bazel:19:21     - Unknown word (Starlark)   -- # Add the necessary Starlark functions to fetch google
 google/cloud/BUILD.bazel:73:15     - Unknown word (DEFAULTLIB) -- "-DEFAULTLIB:bcrypt.lib",
 google/cloud/accessapproval/README.md:29:10     - Unknown word (cerr)       -- std::cerr << "Usage: " << argv
@@ -731,7 +732,7 @@ google/cloud/spanner/integration_tests/client_integration_test.cc:454:23    - Un
 google/cloud/spanner/integration_tests/client_integration_test.cc:454:31    - Unknown word (Yorke)      -- {1968, "Thom", "Yorke"},
 google/cloud/spanner/integration_tests/client_integration_test.cc:455:23    - Unknown word (Mariah)     -- {1969, "Mariah", "Carey"},
 google/cloud/spanner/integration_tests/client_integration_test.cc:464:14    - Unknown word (upserts)    -- // Use upserts as mutation groups are
-google/cloud/spanner/integration_tests/data_types_integration_test.cc:84:30     - Unknown word (Tmpl)       -- DataTypeIntegrationTestTmpl : public T {
+google/cloud/spanner/integration_tests/data_types_integration_test.cc:85:30     - Unknown word (Tmpl)       -- DataTypeIntegrationTestTmpl : public T {
 google/cloud/spanner/internal/connection_impl_test.cc:3605:37   - Unknown word (BADDECAF)   -- { partition_token: "BADDECAF" }
 google/cloud/spanner/internal/connection_impl_test.cc:3607:25   - Unknown word (CAFEDEAD)   -- transaction: { id: "CAFEDEAD" }
 google/cloud/spanner/internal/connection_impl_test.cc:65:34     - Unknown word (Wmissing)   -- diagnostic ignored "-Wmissing-field-initializers"
@@ -742,11 +743,9 @@ google/cloud/spanner/internal/partial_result_set_source_test.cc:527:31    - Unkn
 google/cloud/spanner/internal/partial_result_set_source_test.cc:527:43    - Unknown word (chunkthird)  -- "first_chunksecond_chunkthird_chunk",
 google/cloud/spanner/internal/session_pool.cc:369:22    - Unknown word (robining)   -- // to use by round-robining between the channels
 google/cloud/spanner/internal/session_pool_test.cc:718:35    - Unknown word (Stubless)   -- SessionPoolTest, GetStubForStublessSession) {
-google/cloud/spanner/interval.cc:346:7     - Unknown word (centurie)   -- {"centurie", [](auto n) { return
-google/cloud/spanner/interval_test.cc:343:31    - Unknown word (dayss)      -- THAT(MakeInterval("7 dayss"), StatusIs(StatusCode
-google/cloud/spanner/interval_test.cc:372:22    - Unknown word (Hyperborea) -- char const* bad = "Hyperborea/Gorinium";
-google/cloud/spanner/interval_test.cc:372:33    - Unknown word (Gorinium)   -- const* bad = "Hyperborea/Gorinium";
-google/cloud/spanner/interval_test.cc:50:18     - Unknown word (intvl)      -- Interval const intvl(0, 1, 2, hours(3));
+google/cloud/spanner/interval.cc:287:7     - Unknown word (centurie)   -- {"centurie", [](auto n) { return
+google/cloud/spanner/interval_test.cc:346:31    - Unknown word (dayss)      -- THAT(MakeInterval("7 dayss"), StatusIs(StatusCode
+google/cloud/spanner/interval_test.cc:61:18     - Unknown word (intvl)      -- Interval const intvl(0, 1, 2, hours(3));
 google/cloud/spanner/json.h:90:11     - Unknown word (reparsing)  -- * avoids reparsing. Therefore, applications
 google/cloud/spanner/keys.cc:58:46     - Unknown word (differencer) -- :MessageDifferencer differencer;
 google/cloud/spanner/mutations_test.cc:377:37    - Unknown word (ZXMA)       -- string_value: "Ynl0ZXMA" }
@@ -831,9 +830,9 @@ google/cloud/storage/examples/storage_object_file_transfer_samples.cc:148:28    
 google/cloud/storage/examples/storage_object_file_transfer_samples.cc:148:47    - Unknown word (laborum)       -- deserunt mollit anim id est laborum.
 google/cloud/storage/hashing_options_test.cc:38:19     - Unknown word (Tcrto)      -- EXPECT_EQ("nhB9nTcrtoJr2B01QqQZ1g==", actual
 google/cloud/storage/hashing_options_test.cc:54:16     - Unknown word (IEBA)       -- EXPECT_EQ("ImIEBA==", actual);
-google/cloud/storage/internal/async/connection_impl_open_test.cc:348:38    - Unknown word (Transien)   -- yncConnectionImplTest, TooManyTransienErrors) {
+google/cloud/storage/internal/async/connection_impl_open_test.cc:350:38    - Unknown word (Transien)   -- yncConnectionImplTest, TooManyTransienErrors) {
 google/cloud/storage/internal/async/connection_impl_upload_hash_test.cc:196:36    - Unknown word (wopt)       -- grpc::WriteOptions wopt) {
-google/cloud/storage/internal/async/connection_impl_upload_test.cc:462:42    - Unknown word (eksb)       -- sha256_bytes: "test-eksb"
+google/cloud/storage/internal/async/connection_impl_upload_test.cc:463:42    - Unknown word (eksb)       -- sha256_bytes: "test-eksb"
 google/cloud/storage/internal/async/insert_object.cc:50:21     - Unknown word (Subcord)    -- auto next = data_.Subcord(0, n);
 google/cloud/storage/internal/async/writer_connection_buffered.cc:404:39    - Unknown word (unsatisified) -- call that returns an unsatisified future until the buffer
 google/cloud/storage/internal/grpc/default_options.cc:99:49     - Unknown word (unviverse)  -- already a set endpoint or unviverse domain endpoint.

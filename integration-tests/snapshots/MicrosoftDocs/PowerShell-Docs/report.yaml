@@ -4,8 +4,8 @@ Url: https://github.com/MicrosoftDocs/PowerShell-Docs.git
 Args: '["--config=../../../cspell-power-shell-docs.config.yaml","**"]'
 Summary:
   files: 2706
-  filesWithIssues: 940
-  issues: 3743
+  filesWithIssues: 943
+  issues: 3746
   errors: 0
 Errors: []
 
@@ -168,7 +168,7 @@ issues:
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:74:12       teribyte    U       | `tb` | teribyte (1024<sup>4</sup>) multiplier"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:75:12       petibyte    U       | `pb` | petibyte (1024<sup>5</sup>) multiplier"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Operator_Precedence.md:89:14        coalese     U       | `??` (null-coalese operator)"
-  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Operators.md:130:28         Nosuch      U       example, `(Get-Item /Nosuch); $?` unexpectedly yields"
+  - "reference/5.1/Microsoft.PowerShell.Core/About/about_Operators.md:131:28         Nosuch      U       example, `(Get-Item /Nosuch); $?` unexpectedly yields"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Parameters.md:134:24        techdocs    U       Get-ChildItem -Path C:\\techdocs -Exclude *.ppt"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Parameters.md:135:18        techdocs    U       Get-ChildItem C:\\techdocs -Exclude *.ppt"
   - "reference/5.1/Microsoft.PowerShell.Core/About/about_Parameters.md:136:39        techdocs    U       Exclude *.ppt -Path C:\\techdocs"
@@ -1037,6 +1037,7 @@ issues:
   - "reference/7.4/Microsoft.PowerShell.Utility/Set-PSBreakpoint.md:167:5        Checklog    U       PS> Checklog"
   - "reference/7.4/Microsoft.PowerShell.Utility/Set-PSBreakpoint.md:169:40       Checklog    U       breakpoint on 'prompt:Checklog'"
   - "reference/7.4/Microsoft.PowerShell.Utility/Show-Command.md:333:6        shcm    U       - `shcm`"
+  - "reference/7.4/Microsoft.PowerShell.Utility/Test-Json.md:146:58      suppres     U       ErrorAction** parameter to suppres the error message. Without"
   - "reference/7.4/Microsoft.PowerShell.Utility/Trace-Command.md:86:57       echoargs    U       ParameterBinding { TestExe -echoargs $a 'c\" \"d' e\" \"f }"
   - "reference/7.4/Microsoft.PowerShell.Utility/Update-List.md:192:3         pslistmodifier      U       ([pslistmodifier]($changeInstructions"
   - "reference/7.4/Microsoft.PowerShell.Utility/Update-TypeData.md:558:3         Noteproperty    U       - Noteproperty"
@@ -1537,6 +1538,7 @@ issues:
   - "reference/7.5/Microsoft.PowerShell.Utility/Select-String.md:509:4       bigendianutf    U       - `bigendianutf32`: Encodes in UTF-"
   - "reference/7.5/Microsoft.PowerShell.Utility/Send-MailMessage.md:278:4        bigendianutf    U       - `bigendianutf32`: Encodes in UTF-"
   - "reference/7.5/Microsoft.PowerShell.Utility/Show-Command.md:333:6        shcm    U       - `shcm`"
+  - "reference/7.5/Microsoft.PowerShell.Utility/Test-Json.md:152:58      suppres     U       ErrorAction** parameter to suppres the error message. Without"
   - "reference/7.5/Microsoft.PowerShell.Utility/Trace-Command.md:86:57       echoargs    U       ParameterBinding { TestExe -echoargs $a 'c\" \"d' e\" \"f }"
   - "reference/7.5/Microsoft.PowerShell.Utility/Update-List.md:192:3         pslistmodifier      U       ([pslistmodifier]($changeInstructions"
   - "reference/7.5/Microsoft.PowerShell.Utility/Update-TypeData.md:558:3         Noteproperty    U       - Noteproperty"
@@ -2034,6 +2036,7 @@ issues:
   - "reference/7.6/Microsoft.PowerShell.Utility/Select-String.md:509:4       bigendianutf    U       - `bigendianutf32`: Encodes in UTF-"
   - "reference/7.6/Microsoft.PowerShell.Utility/Send-MailMessage.md:278:4        bigendianutf    U       - `bigendianutf32`: Encodes in UTF-"
   - "reference/7.6/Microsoft.PowerShell.Utility/Show-Command.md:333:6        shcm    U       - `shcm`"
+  - "reference/7.6/Microsoft.PowerShell.Utility/Test-Json.md:152:58      suppres     U       ErrorAction** parameter to suppres the error message. Without"
   - "reference/7.6/Microsoft.PowerShell.Utility/Trace-Command.md:86:57       echoargs    U       ParameterBinding { TestExe -echoargs $a 'c\" \"d' e\" \"f }"
   - "reference/7.6/Microsoft.PowerShell.Utility/Update-List.md:192:3         pslistmodifier      U       ([pslistmodifier]($changeInstructions"
   - "reference/7.6/Microsoft.PowerShell.Utility/Update-TypeData.md:558:3         Noteproperty    U       - Noteproperty"
@@ -2678,8 +2681,8 @@ issues:
   - "reference/docs-conceptual/developer/cmdlet/adding-user-messages-to-your-cmdlet.md:157:387       Progressrecord      U       Management.Automation.Progressrecord](/dotnet/api/System"
   - "reference/docs-conceptual/developer/cmdlet/advisory-development-guidelines.md:132:10        rehydratable    U       Built-in rehydratable types:"
   - "reference/docs-conceptual/developer/cmdlet/advisory-development-guidelines.md:158:62        Securestring    U       the [System.Security.Securestring](/dotnet/api/System"
-  - "reference/docs-conceptual/developer/cmdlet/approved-verbs-for-windows-powershell-commands.md:92:364         Unmark          U       Flush, Erase, Release, Unmark, Unset, Nullify"
-  - "reference/docs-conceptual/developer/cmdlet/approved-verbs-for-windows-powershell-commands.md:123:350        Unrestrict      U       | Release, Unrestrict, Unsecure"
+  - "reference/docs-conceptual/developer/cmdlet/approved-verbs-for-windows-powershell-commands.md:91:309         Unmark          U       Flush, Erase, Release, Unmark, Unset, Nullify"
+  - "reference/docs-conceptual/developer/cmdlet/approved-verbs-for-windows-powershell-commands.md:122:295        Unrestrict      U       | Release, Unrestrict, Unsecure"
   - "reference/docs-conceptual/developer/cmdlet/common-parameter-names.md:41:22          varname     U       this variable, use +_varname_ rather than clearing"
   - "reference/docs-conceptual/developer/cmdlet/common-parameter-names.md:56:43          varname     U       this variable, use +_varname_ rather than clearing"
   - "reference/docs-conceptual/developer/cmdlet/common-parameter-names.md:70:35          varname     U       this variable, use +_varname_ rather than clearing"

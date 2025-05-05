@@ -3,7 +3,7 @@ Repository: caddyserver/caddy
 Url: "https://github.com/caddyserver/caddy.git"
 Args: ["**/*.go"]
 Lines:
- CSpell: Files checked: 283, Issues found: 3659 in 255 files.
+ CSpell: Files checked: 283, Issues found: 3655 in 255 files.
  exit code: 1
 admin.go:1061:20   - Unknown word (Redir)       -- return errInternalRedir
 admin.go:1337:6    - Unknown word (loggable)    -- type loggableURLArray []*url.URL
@@ -2135,37 +2135,33 @@ modules/caddyhttp/reverseproxy/httptransport.go:315:46    - Unknown word (proxyv
 modules/caddyhttp/reverseproxy/httptransport.go:33:14     - Unknown word (pires)      -- "github.com/pires/go-proxyproto"
 modules/caddyhttp/reverseproxy/httptransport.go:33:23     - Unknown word (proxyproto) -- github.com/pires/go-proxyproto"
 modules/caddyhttp/reverseproxy/httptransport.go:353:23    - Unknown word (caddyconfig) -- h.NetworkProxyRaw = caddyconfig.JSONModuleObject(u,
-modules/caddyhttp/reverseproxy/httptransport.go:390:18    - Unknown word (Alives)      -- rt.DisableKeepAlives = !*h.KeepAlive.Enabled
 modules/caddyhttp/reverseproxy/httptransport.go:39:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
-modules/caddyhttp/reverseproxy/httptransport.go:400:20    - Unknown word (Alives)      -- if !rt.DisableKeepAlives && h.ProxyProtocol
-modules/caddyhttp/reverseproxy/httptransport.go:401:37    - Unknown word (keepalives)  -- Logger().Warn("disabling keepalives, they are incompatible
-modules/caddyhttp/reverseproxy/httptransport.go:402:17    - Unknown word (Alives)      -- rt.DisableKeepAlives = true
 modules/caddyhttp/reverseproxy/httptransport.go:40:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/caddyconfig
 modules/caddyhttp/reverseproxy/httptransport.go:40:35     - Unknown word (caddyconfig) -- caddyserver/caddy/v2/caddyconfig"
 modules/caddyhttp/reverseproxy/httptransport.go:41:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/modules/caddyhttp
 modules/caddyhttp/reverseproxy/httptransport.go:41:43     - Unknown word (caddyhttp)   -- caddyserver/caddy/v2/modules/caddyhttp"
+modules/caddyhttp/reverseproxy/httptransport.go:420:18    - Unknown word (Alives)      -- rt.DisableKeepAlives = !*h.KeepAlive.Enabled
 modules/caddyhttp/reverseproxy/httptransport.go:42:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/modules/caddytls
 modules/caddyhttp/reverseproxy/httptransport.go:42:43     - Unknown word (caddytls)    -- caddyserver/caddy/v2/modules/caddytls"
+modules/caddyhttp/reverseproxy/httptransport.go:430:20    - Unknown word (Alives)      -- if !rt.DisableKeepAlives && h.ProxyProtocol
+modules/caddyhttp/reverseproxy/httptransport.go:431:37    - Unknown word (keepalives)  -- Logger().Warn("disabling keepalives, they are incompatible
+modules/caddyhttp/reverseproxy/httptransport.go:432:17    - Unknown word (Alives)      -- rt.DisableKeepAlives = true
 modules/caddyhttp/reverseproxy/httptransport.go:43:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/modules/internal
-modules/caddyhttp/reverseproxy/httptransport.go:464:3     - Unknown word (newtransport) -- newtransport := &HTTPTransport{
-modules/caddyhttp/reverseproxy/httptransport.go:481:3     - Unknown word (newtransport) -- newtransport.Transport.TLSClientConfig
-modules/caddyhttp/reverseproxy/httptransport.go:481:71    - Unknown word (newtransport) -- ServerName = repl.ReplaceAll(newtransport.Transport.TLSClientConfig
-modules/caddyhttp/reverseproxy/httptransport.go:482:10    - Unknown word (newtransport) -- return newtransport
-modules/caddyhttp/reverseproxy/httptransport.go:504:39    - Unknown word (Alives)       -- dedicated DisableKeepAlives field in *http2.Transport
-modules/caddyhttp/reverseproxy/httptransport.go:506:38    - Unknown word (Alives)       -- Transport.DisableKeepAlives
+modules/caddyhttp/reverseproxy/httptransport.go:498:39    - Unknown word (Alives)      -- dedicated DisableKeepAlives field in *http2.Transport
+modules/caddyhttp/reverseproxy/httptransport.go:500:38    - Unknown word (Alives)      -- Transport.DisableKeepAlives
 modules/caddyhttp/reverseproxy/httptransport.go:54:53     - Unknown word (fastcgi)     -- other transports (like fastcgi) might be
-modules/caddyhttp/reverseproxy/httptransport.go:579:6     - Unknown word (CAPEM)        -- RootCAPEMFiles []string `json
+modules/caddyhttp/reverseproxy/httptransport.go:573:6     - Unknown word (CAPEM)       -- RootCAPEMFiles []string `json
 modules/caddyhttp/reverseproxy/httptransport.go:58:76     - Unknown word (hostnames)   -- address of upstream hostnames.
-modules/caddyhttp/reverseproxy/httptransport.go:650:9     - Unknown word (Iface)        -- tlsAppIface, err := ctx.App("tls
-modules/caddyhttp/reverseproxy/httptransport.go:654:19    - Unknown word (Iface)        -- tlsApp := tlsAppIface.(*caddytls.TLS)
-modules/caddyhttp/reverseproxy/httptransport.go:654:27    - Unknown word (caddytls)     -- tlsApp := tlsAppIface.(*caddytls.TLS)
-modules/caddyhttp/reverseproxy/httptransport.go:660:13    - Unknown word (caddytls)     -- certs := caddytls.AllMatchingCertificates
-modules/caddyhttp/reverseproxy/httptransport.go:663:88    - Unknown word (gosec)        -- iteration variable (gosec warning)
-modules/caddyhttp/reverseproxy/httptransport.go:677:40    - Unknown word (CAPEM)        -- RootCAPool) > 0 || len(t.RootCAPEMFiles) > 0 {
-modules/caddyhttp/reverseproxy/httptransport.go:687:33    - Unknown word (CAPEM)        -- pemFile := range t.RootCAPEMFiles {
-modules/caddyhttp/reverseproxy/httptransport.go:698:41    - Unknown word (CAPEM)        -- RootCAPool) > 0 || len(t.RootCAPEMFiles) > 0 {
-modules/caddyhttp/reverseproxy/httptransport.go:705:20    - Unknown word (caddytls)     -- ca, ok := caRaw.(caddytls.CA)
-modules/caddyhttp/reverseproxy/httptransport.go:732:14    - Unknown word (caddytls)     -- curveID := caddytls.SupportedCurves[curveName
+modules/caddyhttp/reverseproxy/httptransport.go:644:9     - Unknown word (Iface)       -- tlsAppIface, err := ctx.App("tls
+modules/caddyhttp/reverseproxy/httptransport.go:648:19    - Unknown word (Iface)       -- tlsApp := tlsAppIface.(*caddytls.TLS)
+modules/caddyhttp/reverseproxy/httptransport.go:648:27    - Unknown word (caddytls)    -- tlsApp := tlsAppIface.(*caddytls.TLS)
+modules/caddyhttp/reverseproxy/httptransport.go:654:13    - Unknown word (caddytls)    -- certs := caddytls.AllMatchingCertificates
+modules/caddyhttp/reverseproxy/httptransport.go:657:88    - Unknown word (gosec)       -- iteration variable (gosec warning)
+modules/caddyhttp/reverseproxy/httptransport.go:671:40    - Unknown word (CAPEM)       -- RootCAPool) > 0 || len(t.RootCAPEMFiles) > 0 {
+modules/caddyhttp/reverseproxy/httptransport.go:681:33    - Unknown word (CAPEM)       -- pemFile := range t.RootCAPEMFiles {
+modules/caddyhttp/reverseproxy/httptransport.go:692:41    - Unknown word (CAPEM)       -- RootCAPool) > 0 || len(t.RootCAPEMFiles) > 0 {
+modules/caddyhttp/reverseproxy/httptransport.go:699:20    - Unknown word (caddytls)    -- ca, ok := caRaw.(caddytls.CA)
+modules/caddyhttp/reverseproxy/httptransport.go:726:14    - Unknown word (caddytls)    -- curveID := caddytls.SupportedCurves[curveName
 modules/caddyhttp/reverseproxy/httptransport_test.go:15:6      - Unknown word (caddyfile)   -- d *caddyfile.Dispenser
 modules/caddyhttp/reverseproxy/httptransport_test.go:26:8      - Unknown word (caddyfile)   -- d: caddyfile.NewTestDispenser(
 modules/caddyhttp/reverseproxy/httptransport_test.go:36:8      - Unknown word (caddyfile)   -- d: caddyfile.NewTestDispenser(fmt
