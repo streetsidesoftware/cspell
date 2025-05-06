@@ -4,6 +4,7 @@ import { parse, stringify } from 'comment-json';
 import { ImplCSpellConfigFile } from '../CSpellConfigFile.js';
 import { detectIndent } from '../serializers/util.js';
 import type { TextFile } from '../TextFile.js';
+import { ParseError } from './Errors.js';
 
 export class CSpellConfigFileJson extends ImplCSpellConfigFile {
     public indent: string | number = 2;
@@ -45,14 +46,4 @@ export function parseCSpellConfigFileJson(file: TextFile): CSpellConfigFileJson 
 
 function isCSpellSettings(cfg: unknown): cfg is CSpellSettings {
     return !(!cfg || typeof cfg !== 'object' || Array.isArray(cfg));
-}
-
-class ParseError extends Error {
-    constructor(
-        readonly url: URL,
-        message?: string,
-        options?: ErrorOptions,
-    ) {
-        super(message || `Unable to parse ${url}`, options);
-    }
 }

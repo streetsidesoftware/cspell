@@ -5,6 +5,7 @@ import { describe, expect, test, vi } from 'vitest';
 import { CSpellConfigFileJson } from '../CSpellConfigFile/CSpellConfigFileJson.js';
 import { defaultNextDeserializer, defaultNextSerializer } from '../defaultNext.js';
 import { json } from '../test-helpers/util.js';
+import { unindent } from '../util/unindent.js';
 import { serializerCSpellJson } from './cspellJson.js';
 
 const oc = <T>(obj: T) => expect.objectContaining(obj);
@@ -12,14 +13,17 @@ const oc = <T>(obj: T) => expect.objectContaining(obj);
 const next = defaultNextDeserializer;
 
 describe('cspellJson', () => {
-    const sampleCSpellJson = `{
-  "version": "0.2",
-  // Add words here:
-  "words": [
-    "cache"
-  ]
-}
-`;
+    const sampleCSpellJson = unindent`\
+        {
+            "version": "0.2",
+            // Add words here:
+            "words": [
+                // before
+                "cache", // Inline comment
+                "unsubscribe" // last
+            ]
+        }
+    `;
 
     test.each`
         uri                  | content                                    | expected
@@ -60,5 +64,31 @@ describe('cspellJson', () => {
         const next = vi.fn();
         serializerCSpellJson.serialize({ url: new URL('file:///file.txt'), settings: {} }, next);
         expect(next).toHaveBeenCalledTimes(1);
+    });
+
+    test('add words', () => {
+        const next = vi.fn();
+        const file = serializerCSpellJson.deserialize(
+            { url: new URL('cspell.json', import.meta.url), content: sampleCSpellJson },
+            next,
+        );
+
+        expect(serializerCSpellJson.serialize(file, defaultNextSerializer)).toEqual(sampleCSpellJson);
+
+        file.addWords(['fig', 'cache', 'carrot', 'broccoli', 'fig']);
+        expect(serializerCSpellJson.serialize(file, defaultNextSerializer)).toEqual(unindent`\
+            {
+                "version": "0.2",
+                // Add words here:
+                "words": [
+                    "broccoli",
+                    // before
+                    "cache", // Inline comment
+                    "carrot",
+                    "fig",
+                    "unsubscribe" // last
+                ]
+            }
+        `);
     });
 });
