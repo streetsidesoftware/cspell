@@ -21,6 +21,9 @@ words:
     test.each`
         uri                 | content                    | expected
         ${'cspell.yaml'}    | ${''}                      | ${oc({ settings: {} })}
+        ${'cspell.yaml'}    | ${'# Comment\n'}           | ${oc({ settings: {} })}
+        ${'cspell.yaml'}    | ${'---\n\n'}               | ${oc({ settings: {} })}
+        ${'cspell.yaml'}    | ${'---\nname: test'}       | ${oc({ settings: { name: 'test' } })}
         ${'cspell.yaml'}    | ${'---\n{}\n'}             | ${oc({ settings: {} })}
         ${'cspell-ext.yml'} | ${'---\nversion: "0.2"\n'} | ${oc({ settings: { version: '0.2' } })}
         ${'.cspell.yml'}    | ${'\nwords: []\n'}         | ${oc({ settings: { words: [] } })}
@@ -33,8 +36,8 @@ words:
         ${''}            | ${''}         | ${'Unable to parse config file: "file:///"'}
         ${'cspell.js'}   | ${''}         | ${'Unable to parse config file: "file:///cspell.js"'}
         ${'cspell.json'} | ${''}         | ${'Unable to parse config file: "file:///cspell.json"'}
-        ${'cspell.yaml'} | ${'"version'} | ${'Missing closing'}
-        ${'cspell.yaml'} | ${'[]'}       | ${'Unable to parse file:///cspell.yaml'}
+        ${'cspell.yaml'} | ${'"version'} | ${'Invalid YAML content file:///cspell.yaml'}
+        ${'cspell.yaml'} | ${'[]'}       | ${'Invalid YAML content file:///cspell.yaml'}
     `('fail $uri', ({ uri, content, expected }) => {
         expect(() => serializerCSpellYaml.deserialize({ url: new URL(uri, 'file:///'), content }, next)).toThrow(
             expected,
@@ -42,10 +45,10 @@ words:
     });
 
     test.each`
-        uri                  | content                   | expected
-        ${'cspell.yaml'}     | ${'{\n\t"name": "name"}'} | ${toYaml({ name: 'name' }, '\t')}
-        ${'cspell.yaml?x=5'} | ${'{\n  "words":[]}'}     | ${toYaml({ words: [] }, 2)}
-        ${'cspell.yml'}      | ${sampleCSpellYaml}       | ${sampleCSpellYaml}
+        uri                  | content                           | expected
+        ${'cspell.yaml'}     | ${toYaml({ name: 'name' }, '\t')} | ${toYaml({ name: 'name' }, '\t')}
+        ${'cspell.yaml?x=5'} | ${toYaml({ words: [] }, 2)}       | ${toYaml({ words: [] }, 2)}
+        ${'cspell.yml'}      | ${sampleCSpellYaml}               | ${sampleCSpellYaml}
     `('serialize $uri', ({ uri, content, expected }) => {
         const next = vi.fn();
         const file = serializerCSpellYaml.deserialize({ url: new URL(uri, 'file:///'), content }, next);

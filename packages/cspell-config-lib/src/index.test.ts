@@ -28,7 +28,7 @@ describe('cspell-config', () => {
         ${'package/with-value/package.json'}    | ${['apple']}
         ${'package/without-value/package.json'} | ${['apple']}
         ${'cspell.jsonc'}                       | ${['apple', 'cache']}
-        ${'cspell.yaml'}                        | ${['apple', 'cache']}
+        ${'cspell.yaml'}                        | ${['apple', 'cache', 'dog', 'banana', 'elephant']}
     `('edit config', async ({ fixture, addWords }) => {
         const fixtureFile = fixtures(fixture);
         const tempFile = tempPath(fixture);

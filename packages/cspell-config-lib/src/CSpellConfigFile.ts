@@ -70,7 +70,7 @@ export abstract class ImplCSpellConfigFile extends CSpellConfigFile {
  * @param toAdd - words to add
  */
 function addUniqueWordsToListAndSort(list: string[], toAdd: string[]): void {
-    list.unshift(...toAdd);
+    list.push(...toAdd);
     list.sort();
     for (let i = 1; i < list.length; ++i) {
         if (list[i] === list[i - 1]) {
