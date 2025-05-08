@@ -4,8 +4,8 @@ Url: https://github.com/dart-lang/sdk
 Args: '["--issues-summary-report","--locale=en,en-GB","--exclude=tools/dom/**/*.json","--exclude=pkg/*/test/**","--exclude=**/*_data.*","--exclude=runtime/vm/**","--exclude=sdk/lib/html/**","--exclude=benchmarks/**","--exclude=**/*_test.*","--exclude=*/**/*.{json,yaml,yml}","--exclude=tests/corelib/regexp/**","--exclude=**/{third_party,assets}/**","**/*.{dart,md}"]'
 Summary:
   files: 10332
-  filesWithIssues: 2001
-  issues: 9027
+  filesWithIssues: 2000
+  issues: 9021
   errors: 0
 Errors: []
 
@@ -402,7 +402,7 @@ issues:
   - "pkg/analyzer/lib/src/summary/format.dart:1468:49        ADUI    U       finish(fbBuilder), \"ADUI\");"
   - "pkg/analyzer/lib/src/summary/idl.dart:25:8          Prelinked       U       /// - \"Prelinked\" refers to information"
   - "pkg/analyzer/lib/src/summary/idl.dart:36:35         prelinked       U       expect \"linked\" and \"prelinked\" dependencies to be"
-  - "pkg/analyzer/lib/src/summary2/binary_format_doc.dart:170:19         witten      U       /// Any string is witten as [Uint30] and is an"
+  - "pkg/analyzer/lib/src/summary2/binary_format_doc.dart:170:19         witten (written)    U       /// Any string is witten as [Uint30] and is an"
   - "pkg/analyzer/lib/src/test_utilities/mock_sdk.dart:534:17        uninstantiable      U       factory Null._uninstantiable() {"
   - "pkg/analyzer/lib/src/test_utilities/mock_sdk.dart:1170:32       Ement               U       EmbedElement extends HtmlEment {"
   - "pkg/analyzer/lib/src/test_utilities/resource_provider_mixin.dart:15:12          overriden (overridden)      U       /// can be overriden via [createResourceProvider"
@@ -1669,7 +1669,6 @@ issues:
   - "sdk/lib/_internal/vm/bin/directory_patch.dart:73:4          Corelib     U       // Corelib 'Uri.base' implementation"
   - "sdk/lib/_internal/vm/bin/file_patch.dart:174:15         Inotify     U       return _InotifyFileSystemWatcher(path"
   - "sdk/lib/_internal/vm/bin/file_patch.dart:337:42         wathed      U       Path is no longer being wathed."
-  - "sdk/lib/_internal/vm/bin/process_patch.dart:422:13      ager    U       // TODO(ager): Make the actual process"
   - "sdk/lib/_internal/vm/bin/socket_patch.dart:458:44       EINPROGRESS                 U       that corresponds to EINPROGRESS OS error."
   - "sdk/lib/_internal/vm/bin/socket_patch.dart:713:58       sucessful (successful)      U       address lookups were sucessful."
   - "sdk/lib/_internal/vm/bin/socket_patch.dart:1061:40      writability                 U       select(2) indicates writability, use getsockopt(2) to"
@@ -2006,7 +2005,6 @@ issues:
   - "tools/dom/src/_chrome/app_window.dart:226:69        titlebar        U       window (excluding the titlebar). If"
   - "tools/dom/src/_chrome/app_window.dart:295:11        sashab          U       // TODO(sashab, sra): Detect whether"
   - "tools/dom/src/_chrome/app_window.dart:306:7         Fullscreens     U       /// Fullscreens the window."
-  - "tools/dom/src/_chrome/app_window.dart:355:19        kalman          U       // TODO(sashab, kalman): Fix IDL parser to"
   - "tools/dom/src/_chrome/app_window.dart:365:38        stevenjb        U       implemented on Ash. TODO(stevenjb): Investigate implementing"
   - "tools/dom/src/_chrome/app_window.dart:397:30        fullscreened    U       Fired when the window is fullscreened."
   - "tools/dom/src/_chrome/app_window.dart:398:26        Fullscreened    U       class Event_app_window_onFullscreened extends Event {"
@@ -2116,7 +2114,6 @@ issuesSummary:
   - "text: aeiou, count: 1, files: 1,"
   - "text: AEIOU, count: 1, files: 1,"
   - "text: Afrom, count: 2, files: 1,"
-  - "text: ager, count: 2, files: 2,"
   - "text: aiki, count: 3, files: 1,"
   - "text: Ainv, count: 5, files: 1,"
   - "text: aiohttp, count: 1, files: 1,"
@@ -3015,7 +3012,6 @@ issuesSummary:
   - "text: jwren's, count: 1, files: 1,"
   - "text: JZHM, count: 1, files: 1,"
   - "text: kallentu, count: 36, files: 20,"
-  - "text: kalman, count: 4, files: 3,"
   - "text: Karel, count: 1, files: 1,"
   - "text: karlklose, count: 8, files: 6,"
   - "text: kase, count: 4, files: 1,"
