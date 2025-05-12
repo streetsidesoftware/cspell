@@ -3,34 +3,34 @@ Repository: caddyserver/caddy
 Url: "https://github.com/caddyserver/caddy.git"
 Args: ["**/*.go"]
 Lines:
- CSpell: Files checked: 283, Issues found: 3655 in 255 files.
+ CSpell: Files checked: 284, Issues found: 3655 in 255 files.
  exit code: 1
-admin.go:1061:20   - Unknown word (Redir)       -- return errInternalRedir
-admin.go:1337:6    - Unknown word (loggable)    -- type loggableURLArray []*url.URL
-admin.go:1339:10   - Unknown word (loggable)    -- func (ua loggableURLArray) MarshalLogArray
-admin.go:1360:21   - Unknown word (pidfile)     -- // PIDFile writes a pidfile to the file at filename
-admin.go:1368:2    - Unknown word (pidfile)     -- pidfile = filename
-admin.go:1378:31   - Unknown word (pidfile)     -- pidfile is the name of the pidfile, if any.
-admin.go:1378:4    - Unknown word (pidfile)     -- // pidfile is the name of the pidfile
-admin.go:1379:5    - Unknown word (pidfile)     -- var pidfile string
-admin.go:1381:15   - Unknown word (Redir)       -- // errInternalRedir indicates an internal
-admin.go:1386:16   - Unknown word (Redir)       -- var errInternalRedir = fmt.Errorf("internal
+admin.go:1075:20   - Unknown word (Redir)       -- return errInternalRedir
+admin.go:1351:6    - Unknown word (loggable)    -- type loggableURLArray []*url.URL
+admin.go:1353:10   - Unknown word (loggable)    -- func (ua loggableURLArray) MarshalLogArray
+admin.go:1374:21   - Unknown word (pidfile)     -- // PIDFile writes a pidfile to the file at filename
+admin.go:1382:2    - Unknown word (pidfile)     -- pidfile = filename
+admin.go:1392:31   - Unknown word (pidfile)     -- pidfile is the name of the pidfile, if any.
+admin.go:1392:4    - Unknown word (pidfile)     -- // pidfile is the name of the pidfile
+admin.go:1393:5    - Unknown word (pidfile)     -- var pidfile string
+admin.go:1395:15   - Unknown word (Redir)       -- // errInternalRedir indicates an internal
+admin.go:1400:16   - Unknown word (Redir)       -- var errInternalRedir = fmt.Errorf("internal
 admin.go:165:12    - Unknown word (certmagic)   -- issuers []certmagic.Issuer
 admin.go:329:26    - Unknown word (infosec)     -- security checks, the infosec community assures me
 admin.go:43:14     - Unknown word (caddyserver) -- "github.com/caddyserver/certmagic"
 admin.go:43:26     - Unknown word (certmagic)   -- github.com/caddyserver/certmagic"
 admin.go:44:14     - Unknown word (cespare)     -- "github.com/cespare/xxhash/v2"
 admin.go:44:22     - Unknown word (xxhash)      -- "github.com/cespare/xxhash/v2"
-admin.go:456:24    - Unknown word (loggable)    -- zap.Array("origins", loggableURLArray(handler.allowedOrigin
-admin.go:473:16    - Unknown word (caddytls)    -- // import the caddytls package -- but it works
-admin.go:487:76    - Unknown word (certmagic)   -- Identity.issuers, issVal.(certmagic.Issuer))
-admin.go:497:30    - Unknown word (certmagic)   -- cfg.Admin.Identity.certmagicConfig(logger, true)
-admin.go:500:25    - Unknown word (caddytls)    -- as explained in the caddytls package, they need access
-admin.go:503:30    - Unknown word (caddytls)    -- avoid import cycle with caddytls package, so manually
-admin.go:504:56    - Unknown word (certmagic)   -- interface{ SetConfig(cfg *certmagic.Config) }); ok {
-admin.go:572:23    - Unknown word (stdlib)      -- / convert logger to stdlib so it can be used by
-admin.go:836:23    - Unknown word (Redir)       -- if err == errInternalRedir {
-admin.go:937:38    - Unknown word (xxhash)      -- hash.Hash { return xxhash.New() }
+admin.go:463:24    - Unknown word (loggable)    -- zap.Array("origins", loggableURLArray(handler.allowedOrigin
+admin.go:480:16    - Unknown word (caddytls)    -- // import the caddytls package -- but it works
+admin.go:494:76    - Unknown word (certmagic)   -- Identity.issuers, issVal.(certmagic.Issuer))
+admin.go:504:30    - Unknown word (certmagic)   -- cfg.Admin.Identity.certmagicConfig(logger, true)
+admin.go:507:25    - Unknown word (caddytls)    -- as explained in the caddytls package, they need access
+admin.go:510:30    - Unknown word (caddytls)    -- avoid import cycle with caddytls package, so manually
+admin.go:511:56    - Unknown word (certmagic)   -- interface{ SetConfig(cfg *certmagic.Config) }); ok {
+admin.go:586:23    - Unknown word (stdlib)      -- / convert logger to stdlib so it can be used by
+admin.go:850:23    - Unknown word (Redir)       -- if err == errInternalRedir {
+admin.go:951:38    - Unknown word (xxhash)      -- hash.Hash { return xxhash.New() }
 admin_test.go:28:14     - Unknown word (caddyserver) -- "github.com/caddyserver/certmagic"
 admin_test.go:28:26     - Unknown word (certmagic)   -- github.com/caddyserver/certmagic"
 admin_test.go:41:8      - Unknown word (yourserver)  -- "yourserver": {
@@ -56,7 +56,7 @@ caddy.go:38:26     - Unknown word (certmagic)   -- github.com/caddyserver/certma
 caddy.go:42:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/internal/filesystems
 caddy.go:43:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/notify"
 caddy.go:493:5     - Unknown word (certmagic)   -- certmagic.Default.Storage = currentCtx
-caddy.go:539:3     - Unknown word (certmagic)   -- certmagic.Default.Storage = newCfg
+caddy.go:531:3     - Unknown word (certmagic)   -- certmagic.Default.Storage = newCfg
 caddy.go:749:24    - Unknown word (byeee)       -- logger.Warn("exiting; byeee!! 👋")
 caddy.go:760:14    - Unknown word (certmagic)   -- // clean up certmagic locks
 caddy.go:763:12    - Unknown word (pidfile)     -- // remove pidfile
@@ -1020,8 +1020,8 @@ listeners.go:621:29    - Unknown word (fcql)        -- return nil, fakeClosedErr
 listeners.go:645:34    - Unknown word (fdgram)      -- "fd" || network == "fdgram" {
 listeners_fuzz.go:15:12     - Unknown word (gofuzz)     -- //go:build gofuzz
 listeners_test.go:21:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/internal"
-logging.go:284:7     - Unknown word (wdest)      -- func (wdest writerDestructor) Destruct
-logging.go:285:9     - Unknown word (wdest)      -- return wdest.Close()
+logging.go:286:7     - Unknown word (wdest)      -- func (wdest writerDestructor) Destruct
+logging.go:287:9     - Unknown word (wdest)      -- return wdest.Close()
 metrics.go:48:15     - Unknown word (promhttp)    -- // Similar to promhttp.InstrumentHandlerCounter
 metrics.go:51:11     - Unknown word (promhttp)    -- // Unlike promhttp.InstrumentHandlerCounter
 metrics.go:8:14      - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/internal/metrics
@@ -2686,10 +2686,10 @@ modules/caddypki/acmeserver/acmeserver.go:41:43     - Unknown word (caddyhttp)  
 modules/caddypki/acmeserver/acmeserver.go:42:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/modules/caddypki
 modules/caddypki/acmeserver/acmeserver.go:42:43     - Unknown word (caddypki)    -- caddyserver/caddy/v2/modules/caddypki"
 modules/caddypki/acmeserver/acmeserver.go:97:31     - Unknown word (alpn)        -- 01", "dns-01", "tls-alpn-01"
-modules/caddypki/acmeserver/caddyfile.go:105:21    - Unknown word (Errf)          -- return nil, h.Errf("unrecognized 'allow
-modules/caddypki/acmeserver/caddyfile.go:126:21    - Unknown word (Errf)          -- return nil, h.Errf("unrecognized 'deny
-modules/caddypki/acmeserver/caddyfile.go:140:18    - Unknown word (Errf)          -- return nil, h.Errf("unrecognized ACME server
-modules/caddypki/acmeserver/caddyfile.go:150:28    - Unknown word (httpcaddyfile) -- return append(configVals, httpcaddyfile.ConfigValue{
+modules/caddypki/acmeserver/caddyfile.go:104:20    - Unknown word (Errf)          -- return nil, h.Errf("unrecognized 'allow
+modules/caddypki/acmeserver/caddyfile.go:123:20    - Unknown word (Errf)          -- return nil, h.Errf("unrecognized 'deny
+modules/caddypki/acmeserver/caddyfile.go:136:18    - Unknown word (Errf)          -- return nil, h.Errf("unrecognized ACME server
+modules/caddypki/acmeserver/caddyfile.go:146:28    - Unknown word (httpcaddyfile) -- return append(configVals, httpcaddyfile.ConfigValue{
 modules/caddypki/acmeserver/caddyfile.go:15:9      - Unknown word (acmeserver) -- package acmeserver
 modules/caddypki/acmeserver/caddyfile.go:18:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
 modules/caddypki/acmeserver/caddyfile.go:19:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/caddyconfig
