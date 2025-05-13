@@ -59,16 +59,17 @@ hunspell-reader words ./en_US.dic -o en_US.txt
 ### Installation
 
 ```
-install -S hunspell-reader rxjs
+npm install hunspell-reader
 ```
-
-Note: the reader uses rxjs 5.0.
 
 ### Usage
 
 Typescript / Javascript:
 
-```typescript
+<!--- @@inject: ./example-code/example.js --->
+
+```js
+// ts-check
 import { HunspellReader } from 'hunspell-reader';
 
 const baseFile = 'en_US';
@@ -76,11 +77,14 @@ const dicFile = baseFile + '.dic';
 const affFile = baseFile + '.aff';
 
 // Initialize the reader with the Hunspell files
-const reader = new HunspellReader(affFile, dicFile);
+const reader = await HunspellReader.createFromFiles(affFile, dicFile);
 
 // Get the words as an array
-const promiseArrayOfWords = reader.readWords().toArray().toPromise();
+const words = [...reader];
+console.log('%o', words);
 ```
+
+<!--- @@inject-end: ./example-code/example.js --->
 
 ## Reference
 
