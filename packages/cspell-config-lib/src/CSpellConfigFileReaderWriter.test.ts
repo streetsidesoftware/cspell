@@ -164,6 +164,18 @@ describe('CSpellConfigFileReaderWriter', () => {
 
         expect(config2.settings).toEqual(settings);
     });
+
+    test('parse', () => {
+        const url = new URL('cspell.json', import.meta.url);
+        const content = json({ name: 'name', words: ['one'] });
+        const io: IO = {
+            readFile: vi.fn(),
+            writeFile: vi.fn(),
+        };
+        const rw = new CSpellConfigFileReaderWriterImpl(io, defaultDeserializers, defaultLoaders);
+        const config = rw.parse({ url, content });
+        expect(config.settings).toEqual({ name: 'name', words: ['one'] });
+    });
 });
 
 class Cfg extends CSpellConfigFile {

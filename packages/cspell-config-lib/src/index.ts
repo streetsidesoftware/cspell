@@ -20,3 +20,4 @@ export type {
     SerializeSettingsFn,
 } from './Serializer.js';
 export type { TextFile, TextFileRef } from './TextFile.js';
+export {};

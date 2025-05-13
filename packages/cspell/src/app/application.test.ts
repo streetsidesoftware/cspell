@@ -148,13 +148,13 @@ describe('Validate createInit', () => {
     test('createInit', async () => {
         async function worked() {
             try {
-                await App.createInit();
+                await App.createInit({});
             } catch {
                 return false;
             }
             return true;
         }
-        expect(await worked()).toBe(false);
+        expect(await worked()).toBe(true);
     });
 });
 

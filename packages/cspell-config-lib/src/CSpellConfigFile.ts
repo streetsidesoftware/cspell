@@ -30,7 +30,17 @@ export interface ICSpellConfigFile {
 export abstract class CSpellConfigFile implements ICSpellConfigFile {
     constructor(readonly url: URL) {}
 
+    /**
+     * The settings from the config file.
+     * Note: this is a copy of the settings from the config file. It should be treated as immutable.
+     * For performance reasons, it might not be frozen.
+     */
     abstract readonly settings: CSpellSettings;
+
+    /**
+     * Helper function to add words to the config file.
+     * @param words - words to add to the config file.
+     */
     abstract addWords(words: string[]): this;
 
     get readonly(): boolean {
@@ -44,6 +54,20 @@ export abstract class CSpellConfigFile implements ICSpellConfigFile {
     get remote(): boolean {
         return this.url.protocol !== 'file:';
     }
+}
+
+export abstract class MutableCSpellConfigFile extends CSpellConfigFile {
+    /**
+     * Helper function to add words to the config file.
+     * @param words - words to add to the config file.
+     */
+    abstract addWords(words: string[]): this;
+
+    abstract setValue<K extends keyof CSpellSettings>(key: K | [K], value: CSpellSettings[K]): this;
+    abstract setValue<K extends keyof CSpellSettings, K1 extends keyof CSpellSettings[K]>(
+        key: [K, K1],
+        value: CSpellSettings[K][K1],
+    ): this;
 }
 
 export abstract class ImplCSpellConfigFile extends CSpellConfigFile {

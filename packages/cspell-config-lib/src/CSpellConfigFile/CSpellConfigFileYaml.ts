@@ -13,12 +13,12 @@ import {
     YAMLSeq,
 } from 'yaml';
 
-import { CSpellConfigFile } from '../CSpellConfigFile.js';
+import { MutableCSpellConfigFile } from '../CSpellConfigFile.js';
 import { detectIndentAsNum } from '../serializers/util.js';
 import type { TextFile } from '../TextFile.js';
 import { ParseError } from './Errors.js';
 
-export class CSpellConfigFileYaml extends CSpellConfigFile {
+export class CSpellConfigFileYaml extends MutableCSpellConfigFile {
     #settings: CSpellSettings;
 
     constructor(
@@ -54,6 +54,24 @@ export class CSpellConfigFileYaml extends CSpellConfigFile {
 
     serialize() {
         return stringify(this.yamlDoc, { indent: this.indent });
+    }
+
+    setValue<K extends keyof CSpellSettings>(key: K | [K], value: CSpellSettings[K]): this;
+    setValue<K extends keyof CSpellSettings, K1 extends keyof CSpellSettings[K]>(
+        key: [K, K1],
+        value: CSpellSettings[K][K1],
+    ): this;
+    setValue(key: unknown | unknown[], value: unknown): this {
+        if (Array.isArray(key)) {
+            this.yamlDoc.setIn(key, value);
+        } else {
+            this.yamlDoc.set(key, value);
+        }
+        return this;
+    }
+
+    static parse(file: TextFile): CSpellConfigFileYaml {
+        return parseCSpellConfigFileYaml(file);
     }
 }
 

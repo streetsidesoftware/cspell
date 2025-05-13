@@ -1,7 +1,7 @@
 import type { AddHelpTextContext, Command } from 'commander';
-import { Option as CommanderOption } from 'commander';
 
 import * as App from './application.mjs';
+import { collect, crOpt } from './commandHelpers.js';
 import { type LinterCliOptions, ReportChoicesAll } from './options.js';
 import { DEFAULT_CACHE_LOCATION } from './util/cache/index.js';
 import { canUseColor } from './util/canUseColor.js';
@@ -56,11 +56,6 @@ References:
     https://cspell.org
     https://github.com/streetsidesoftware/cspell
 `;
-
-function collect(value: string | string[], previous: string[] | undefined): string[] {
-    const values = Array.isArray(value) ? value : [value];
-    return previous ? [...previous, ...values] : values;
-}
 
 export function commandLint(prog: Command): Command {
     const spellCheckCommand = prog.command('lint', { isDefault: true });
@@ -257,28 +252,4 @@ function augmentCommandHelp(context: AddHelpTextContext) {
     }
     output.push(...hiddenHelp, advanced);
     return helpIssueTemplate(opts) + output.join('\n');
-}
-
-/**
- * Create Option - a helper function to create a commander option.
- * @param name - the name of the option
- * @param description - the description of the option
- * @param parseArg - optional function to parse the argument
- * @param defaultValue - optional default value
- * @returns CommanderOption
- */
-function crOpt<T>(
-    name: string,
-    description: string,
-    parseArg?: (value: string, previous: T) => T,
-    defaultValue?: T,
-): CommanderOption {
-    const option = new CommanderOption(name, description);
-    if (parseArg) {
-        option.argParser(parseArg);
-    }
-    if (defaultValue !== undefined) {
-        option.default(defaultValue);
-    }
-    return option;
 }
