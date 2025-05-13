@@ -2,7 +2,7 @@ import { describe, expect, test } from 'vitest';
 
 import { createTextFile, TextFile } from '../TextFile.js';
 import { unindent } from '../util/unindent.js';
-import { parseCSpellConfigFileYaml } from './CSpellConfigFileYaml.js';
+import { CSpellConfigFileYaml, parseCSpellConfigFileYaml } from './CSpellConfigFileYaml.js';
 
 describe('CSpellConfigFileYaml', () => {
     test('parseCSpellConfigFileYaml identity', () => {
@@ -84,7 +84,7 @@ describe('CSpellConfigFileYaml', () => {
 
             # After object
         `;
-        const cfg = parseCSpellConfigFileYaml(asTextFile(example));
+        const cfg = CSpellConfigFileYaml.parse(asTextFile(example));
         const words = ['fig', 'carrot', 'broccoli', 'fig'];
         cfg.addWords(words);
         expect(cfg.serialize()).toEqual(expected);
