@@ -6,6 +6,7 @@ import { createCSpellSettingsInternal as csi } from '../Models/CSpellSettingsInt
 import { finalizeSettings } from '../Settings/index.js';
 import type { SpellingDictionaryOptions } from '../SpellingDictionary/index.js';
 import { createCollection, createSpellingDictionary, getDictionaryInternal } from '../SpellingDictionary/index.js';
+import { createSuggestDictionary } from 'cspell-dictionary';
 import { FreqCounter } from '../util/FreqCounter.js';
 import * as Text from '../util/text.js';
 import { settingsToValidateOptions } from './settingsToValidateOptions.js';
@@ -258,6 +259,35 @@ describe('Validate textValidator functions', () => {
         const dict = getSpellingDictionaryCollectionSync({ ignoreWords });
         const result = [...validateText(text, dict, { ignoreCase: false, flagWords })];
         expect(result).toEqual(expected);
+    });
+    
+    test('tests unknown-words parameter', async () => {
+        const dictCol = await getSpellingDictionaryCollection();
+        
+        // Test default (report) mode
+        const resultDefault = [...validateText(sampleText, dictCol, sToV({}))];
+        const errorsDefault = resultDefault.map((wo) => wo.text);
+        expect(errorsDefault).toEqual(['giraffe', 'lightbrown', 'whiteberry', 'redberry']);
+        
+        // Test ignore-all mode
+        const resultIgnoreAll = [...validateText(sampleText, dictCol, sToV({ unknownWords: 'ignore-all' }))];
+        expect(resultIgnoreAll).toEqual([]);
+        
+        // Test ignore mode with a typo that has a simple fix
+        // cspell:ignore applei
+        const textWithSimpleTypo = 'The elephant ate the applei and the banana';
+        // Create a custom dictionary with a preferred suggestion for "applei"
+        const customDict = createCollection(
+            [
+                dictCol,
+                createSuggestDictionary(['applei:apple'], 'preferred-suggestions', 'test')
+            ],
+            'custom-collection'
+        );
+        const resultIgnore = [...validateText(textWithSimpleTypo, customDict, sToV({ unknownWords: 'ignore' }))];
+        // "applei" should be caught because it has a preferred suggestion ("apple")
+        const errorsIgnore = resultIgnore.map((wo) => wo.text);
+        expect(errorsIgnore).toEqual(['applei']);
     });
 });
 
