@@ -148,7 +148,7 @@ Contributions are welcome! See our [contribution notes](CONTRIBUTING.md). **Note
 [<img alt="Contributor ndelangen" src="https://avatars.githubusercontent.com/u/3070389?v=4&size=128" width=64>](https://github.com/ndelangen)
 [<img alt="Contributor nvuillam" src="https://avatars.githubusercontent.com/u/17500430?v=4&size=128" width=64>](https://github.com/nvuillam)
 [<img alt="Contributor thebolarin" src="https://avatars.githubusercontent.com/u/48915357?v=4&size=128" width=64>](https://github.com/thebolarin)
-[<img alt="Contributor 74th" src="https://avatars.githubusercontent.com/u/1060011?v=4&size=128" width=64>](https://github.com/74th)
+[<img alt="Contributor exhuma" src="https://avatars.githubusercontent.com/u/65717?v=4&size=128" width=64>](https://github.com/exhuma)
 [<img alt="Contributor ssbarnea" src="https://avatars.githubusercontent.com/u/102495?v=4&size=128" width=64>](https://github.com/ssbarnea)
 [<img alt="Contributor regseb" src="https://avatars.githubusercontent.com/u/1262990?v=4&size=128" width=64>](https://github.com/regseb)
 [<img alt="Contributor zwaldowski" src="https://avatars.githubusercontent.com/u/170812?v=4&size=128" width=64>](https://github.com/zwaldowski)
@@ -159,6 +159,7 @@ Contributions are welcome! See our [contribution notes](CONTRIBUTING.md). **Note
 [<img alt="Contributor wtgtybhertgeghgtwtg" src="https://avatars.githubusercontent.com/u/18507762?v=4&size=128" width=64>](https://github.com/wtgtybhertgeghgtwtg)
 [<img alt="Contributor wujekbogdan" src="https://avatars.githubusercontent.com/u/533954?v=4&size=128" width=64>](https://github.com/wujekbogdan)
 [<img alt="Contributor siosio34" src="https://avatars.githubusercontent.com/u/7166022?v=4&size=128" width=64>](https://github.com/siosio34)
+[<img alt="Contributor 74th" src="https://avatars.githubusercontent.com/u/1060011?v=4&size=128" width=64>](https://github.com/74th)
 [<img alt="Contributor ADTC" src="https://avatars.githubusercontent.com/u/6047296?v=4&size=128" width=64>](https://github.com/ADTC)
 [<img alt="Contributor kachkaev" src="https://avatars.githubusercontent.com/u/608862?v=4&size=128" width=64>](https://github.com/kachkaev)
 [<img alt="Contributor AlexJameson" src="https://avatars.githubusercontent.com/u/33040934?v=4&size=128" width=64>](https://github.com/AlexJameson)
@@ -174,12 +175,12 @@ Contributions are welcome! See our [contribution notes](CONTRIBUTING.md). **Note
 [<img alt="Contributor HoussemDellai" src="https://avatars.githubusercontent.com/u/6548359?v=4&size=128" width=64>](https://github.com/HoussemDellai)
 [<img alt="Contributor jmatsuzawa" src="https://avatars.githubusercontent.com/u/545426?v=4&size=128" width=64>](https://github.com/jmatsuzawa)
 [<img alt="Contributor joshje" src="https://avatars.githubusercontent.com/u/813784?v=4&size=128" width=64>](https://github.com/joshje)
+[<img alt="Contributor JounQin" src="https://avatars.githubusercontent.com/u/8336744?v=4&size=128" width=64>](https://github.com/JounQin)
 [<img alt="Contributor kamontat" src="https://avatars.githubusercontent.com/u/14089557?v=4&size=128" width=64>](https://github.com/kamontat)
 [<img alt="Contributor kenji-miyake" src="https://avatars.githubusercontent.com/u/31987104?v=4&size=128" width=64>](https://github.com/kenji-miyake)
 [<img alt="Contributor fughilli" src="https://avatars.githubusercontent.com/u/6869039?v=4&size=128" width=64>](https://github.com/fughilli)
 [<img alt="Contributor Ki-er" src="https://avatars.githubusercontent.com/u/32241933?v=4&size=128" width=64>](https://github.com/Ki-er)
 [<img alt="Contributor Maxim-Mazurok" src="https://avatars.githubusercontent.com/u/7756211?v=4&size=128" width=64>](https://github.com/Maxim-Mazurok)
-[<img alt="Contributor exhuma" src="https://avatars.githubusercontent.com/u/65717?v=4&size=128" width=64>](https://github.com/exhuma)
 
 <!--- cspell:enable --->
 
