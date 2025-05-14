@@ -6,7 +6,7 @@ import type { Comment, ExportSpecifier, Identifier, ImportSpecifier, Literal, No
 
 import { getDefaultLogger } from '../common/logger.cjs';
 import type { ScopeSelectorList, WorkerOptions } from '../common/options.cjs';
-import { createSyncFn } from '../synckit/index.cjs';
+import { createSyncFn } from 'synckit';
 import type { ASTNode, JSXText, NodeType } from './ASTNode.js' with { 'resolution-mode': 'import' };
 import type { ASTPath, Key } from './ASTPath.js' with { 'resolution-mode': 'import' };
 import { defaultCheckedScopes } from './customScopes.cjs';
