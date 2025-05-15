@@ -376,7 +376,7 @@ function _removePathsFromGlobalImports(): (typeof Link)['removePathsFromGlobalIm
 }
 
 type StdoutWrite = typeof process.stdout.write;
-type Callback = (err?: Error) => void;
+type Callback = (err?: Error | null) => void;
 
 function normalizeLogCalls(calls: string[][]): string {
     return normalizeOutput(calls.map((call) => Util.format(...call)));
