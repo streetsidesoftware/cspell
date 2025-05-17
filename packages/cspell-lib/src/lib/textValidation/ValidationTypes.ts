@@ -17,6 +17,8 @@ export interface ValidationOptions extends IncludeExcludeOptions {
     ignoreCase: boolean;
     ignoreRandomStrings?: boolean | undefined;
     minRandomLength?: number | undefined;
+    /** Controls how unknown words are handled */
+    unknownWords?: 'report' | 'ignore' | 'ignore-all';
 }
 
 export interface CheckOptions extends ValidationOptions {
