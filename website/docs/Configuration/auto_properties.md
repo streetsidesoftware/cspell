@@ -771,7 +771,7 @@ also in the `flagWords`.
 
 Allows this configuration to inherit configuration for one or more other files.
 
-See [Importing / Extending Configuration](https://cspell.org/configuration/imports/) for more details.
+See [Importing / Extending Configuration](https://cspell.org/docs/Configuration/imports/) for more details.
 
 </dd>
 
