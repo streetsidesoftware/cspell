@@ -73,7 +73,7 @@ export interface DictionaryDefinitionBase {
     type?: DictionaryFileTypes | undefined;
 
     /**
-     * Strip Case and Accents to allow for case insensitive searches and
+     * Strip case and accents to allow for case insensitive searches and
      * words without accents.
      *
      * Note: this setting only applies to word lists. It has no-impact on trie
