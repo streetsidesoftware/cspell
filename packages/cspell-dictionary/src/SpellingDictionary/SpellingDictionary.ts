@@ -82,13 +82,13 @@ export interface SpellingDictionaryOptions {
      *
      * @default true
      */
-    supportNonStrictSearches?: boolean;
+    supportNonStrictSearches?: boolean | undefined;
 
     /**
      * Turns on legacy word compounds.
      * @deprecated
      */
-    useCompounds?: boolean;
+    useCompounds?: boolean | undefined;
 
     /**
      * Optional WeightMap used to improve suggestions.

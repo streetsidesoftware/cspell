@@ -229,6 +229,9 @@
           "$ref": "#/definitions/DictionaryDefinitionInline"
         },
         {
+          "$ref": "#/definitions/DictionaryDefinitionSimple"
+        },
+        {
           "$ref": "#/definitions/DictionaryDefinitionAlternate"
         }
       ]
@@ -271,6 +274,12 @@
           "$ref": "#/definitions/ReplaceMap",
           "description": "Replacement pairs.",
           "markdownDescription": "Replacement pairs."
+        },
+        "supportNonStrictSearches": {
+          "default": true,
+          "description": "Strip Case and Accents to allow for case insensitive searches and words without accents.\n\nNote: this setting only applies to word lists. It has no-impact on trie dictionaries.",
+          "markdownDescription": "Strip Case and Accents to allow for case insensitive searches and\nwords without accents.\n\nNote: this setting only applies to word lists. It has no-impact on trie\ndictionaries.",
+          "type": "boolean"
         },
         "type": {
           "$ref": "#/definitions/DictionaryFileTypes",
@@ -327,6 +336,12 @@
           "$ref": "#/definitions/ReplaceMap",
           "description": "Replacement pairs.",
           "markdownDescription": "Replacement pairs."
+        },
+        "supportNonStrictSearches": {
+          "default": true,
+          "description": "Strip Case and Accents to allow for case insensitive searches and words without accents.\n\nNote: this setting only applies to word lists. It has no-impact on trie dictionaries.",
+          "markdownDescription": "Strip Case and Accents to allow for case insensitive searches and\nwords without accents.\n\nNote: this setting only applies to word lists. It has no-impact on trie\ndictionaries.",
+          "type": "boolean"
         },
         "type": {
           "$ref": "#/definitions/DictionaryFileTypes",
@@ -400,6 +415,12 @@
           ],
           "description": "Defines the scope for when words will be added to the dictionary.\n\nScope values: `user`, `workspace`, `folder`.",
           "markdownDescription": "Defines the scope for when words will be added to the dictionary.\n\nScope values: `user`, `workspace`, `folder`."
+        },
+        "supportNonStrictSearches": {
+          "default": true,
+          "description": "Strip Case and Accents to allow for case insensitive searches and words without accents.\n\nNote: this setting only applies to word lists. It has no-impact on trie dictionaries.",
+          "markdownDescription": "Strip Case and Accents to allow for case insensitive searches and\nwords without accents.\n\nNote: this setting only applies to word lists. It has no-impact on trie\ndictionaries.",
+          "type": "boolean"
         },
         "type": {
           "$ref": "#/definitions/DictionaryFileTypes",
@@ -490,6 +511,12 @@
           "markdownDescription": "A list of suggested replacements for words.\nSuggested words provide a way to make preferred suggestions on word replacements.\nTo hint at a preferred change, but not to require it.\n\nFormat of `suggestWords`\n- Single suggestion (possible auto fix)\n    - `word: suggestion`\n    - `word->suggestion`\n- Multiple suggestions (not auto fixable)\n   - `word: first, second, third`\n   - `word->first, second, third`",
           "type": "array"
         },
+        "supportNonStrictSearches": {
+          "default": true,
+          "description": "Strip Case and Accents to allow for case insensitive searches and words without accents.\n\nNote: this setting only applies to word lists. It has no-impact on trie dictionaries.",
+          "markdownDescription": "Strip Case and Accents to allow for case insensitive searches and\nwords without accents.\n\nNote: this setting only applies to word lists. It has no-impact on trie\ndictionaries.",
+          "type": "boolean"
+        },
         "type": {
           "$ref": "#/definitions/DictionaryFileTypes",
           "default": "S",
@@ -567,6 +594,12 @@
           },
           "markdownDescription": "A list of suggested replacements for words.\nSuggested words provide a way to make preferred suggestions on word replacements.\nTo hint at a preferred change, but not to require it.\n\nFormat of `suggestWords`\n- Single suggestion (possible auto fix)\n    - `word: suggestion`\n    - `word->suggestion`\n- Multiple suggestions (not auto fixable)\n   - `word: first, second, third`\n   - `word->first, second, third`",
           "type": "array"
+        },
+        "supportNonStrictSearches": {
+          "default": true,
+          "description": "Strip Case and Accents to allow for case insensitive searches and words without accents.\n\nNote: this setting only applies to word lists. It has no-impact on trie dictionaries.",
+          "markdownDescription": "Strip Case and Accents to allow for case insensitive searches and\nwords without accents.\n\nNote: this setting only applies to word lists. It has no-impact on trie\ndictionaries.",
+          "type": "boolean"
         },
         "type": {
           "$ref": "#/definitions/DictionaryFileTypes",
@@ -646,6 +679,12 @@
           "markdownDescription": "A list of suggested replacements for words.\nSuggested words provide a way to make preferred suggestions on word replacements.\nTo hint at a preferred change, but not to require it.\n\nFormat of `suggestWords`\n- Single suggestion (possible auto fix)\n    - `word: suggestion`\n    - `word->suggestion`\n- Multiple suggestions (not auto fixable)\n   - `word: first, second, third`\n   - `word->first, second, third`",
           "type": "array"
         },
+        "supportNonStrictSearches": {
+          "default": true,
+          "description": "Strip Case and Accents to allow for case insensitive searches and words without accents.\n\nNote: this setting only applies to word lists. It has no-impact on trie dictionaries.",
+          "markdownDescription": "Strip Case and Accents to allow for case insensitive searches and\nwords without accents.\n\nNote: this setting only applies to word lists. It has no-impact on trie\ndictionaries.",
+          "type": "boolean"
+        },
         "type": {
           "$ref": "#/definitions/DictionaryFileTypes",
           "default": "S",
@@ -724,6 +763,12 @@
           "markdownDescription": "A list of suggested replacements for words.\nSuggested words provide a way to make preferred suggestions on word replacements.\nTo hint at a preferred change, but not to require it.\n\nFormat of `suggestWords`\n- Single suggestion (possible auto fix)\n    - `word: suggestion`\n    - `word->suggestion`\n- Multiple suggestions (not auto fixable)\n   - `word: first, second, third`\n   - `word->first, second, third`",
           "type": "array"
         },
+        "supportNonStrictSearches": {
+          "default": true,
+          "description": "Strip Case and Accents to allow for case insensitive searches and words without accents.\n\nNote: this setting only applies to word lists. It has no-impact on trie dictionaries.",
+          "markdownDescription": "Strip Case and Accents to allow for case insensitive searches and\nwords without accents.\n\nNote: this setting only applies to word lists. It has no-impact on trie\ndictionaries.",
+          "type": "boolean"
+        },
         "type": {
           "$ref": "#/definitions/DictionaryFileTypes",
           "default": "S",
@@ -783,6 +828,12 @@
           "description": "Replacement pairs.",
           "markdownDescription": "Replacement pairs."
         },
+        "supportNonStrictSearches": {
+          "default": true,
+          "description": "Strip Case and Accents to allow for case insensitive searches and words without accents.\n\nNote: this setting only applies to word lists. It has no-impact on trie dictionaries.",
+          "markdownDescription": "Strip Case and Accents to allow for case insensitive searches and\nwords without accents.\n\nNote: this setting only applies to word lists. It has no-impact on trie\ndictionaries.",
+          "type": "boolean"
+        },
         "type": {
           "$ref": "#/definitions/DictionaryFileTypes",
           "default": "S",
@@ -798,6 +849,59 @@
       "required": [
         "name",
         "path"
+      ],
+      "type": "object"
+    },
+    "DictionaryDefinitionSimple": {
+      "additionalProperties": false,
+      "description": "An Empty Dictionary Definition",
+      "markdownDescription": "An Empty Dictionary Definition",
+      "properties": {
+        "description": {
+          "description": "Optional description of the contents / purpose of the dictionary.",
+          "markdownDescription": "Optional description of the contents / purpose of the dictionary.",
+          "type": "string"
+        },
+        "ignoreForbiddenWords": {
+          "description": "Some dictionaries may contain forbidden words to prevent compounding from generating words that are not valid in the language. These are often words that are used in other languages or might be generated through compounding. This setting allows flagged words to be ignored when checking the dictionary. The effect is similar to the word not being in the dictionary.",
+          "markdownDescription": "Some dictionaries may contain forbidden words to prevent compounding from generating\nwords that are not valid in the language. These are often\nwords that are used in other languages or might be generated through compounding.\nThis setting allows flagged words to be ignored when checking the dictionary.\nThe effect is similar to the word not being in the dictionary.",
+          "type": "boolean"
+        },
+        "name": {
+          "$ref": "#/definitions/DictionaryId",
+          "description": "This is the name of a dictionary.\n\nName Format:\n- Must contain at least 1 number or letter.\n- Spaces are allowed.\n- Leading and trailing space will be removed.\n- Names ARE case-sensitive.\n- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`.",
+          "markdownDescription": "This is the name of a dictionary.\n\nName Format:\n- Must contain at least 1 number or letter.\n- Spaces are allowed.\n- Leading and trailing space will be removed.\n- Names ARE case-sensitive.\n- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`."
+        },
+        "noSuggest": {
+          "description": "Indicate that suggestions should not come from this dictionary. Words in this dictionary are considered correct, but will not be used when making spell correction suggestions.\n\nNote: if a word is suggested by another dictionary, but found in this dictionary, it will be removed from the set of possible suggestions.",
+          "markdownDescription": "Indicate that suggestions should not come from this dictionary.\nWords in this dictionary are considered correct, but will not be\nused when making spell correction suggestions.\n\nNote: if a word is suggested by another dictionary, but found in\nthis dictionary, it will be removed from the set of\npossible suggestions.",
+          "type": "boolean"
+        },
+        "repMap": {
+          "$ref": "#/definitions/ReplaceMap",
+          "description": "Replacement pairs.",
+          "markdownDescription": "Replacement pairs."
+        },
+        "supportNonStrictSearches": {
+          "default": true,
+          "description": "Strip Case and Accents to allow for case insensitive searches and words without accents.\n\nNote: this setting only applies to word lists. It has no-impact on trie dictionaries.",
+          "markdownDescription": "Strip Case and Accents to allow for case insensitive searches and\nwords without accents.\n\nNote: this setting only applies to word lists. It has no-impact on trie\ndictionaries.",
+          "type": "boolean"
+        },
+        "type": {
+          "$ref": "#/definitions/DictionaryFileTypes",
+          "default": "S",
+          "description": "Type of file:\n- S - single word per line,\n- W - each line can contain one or more words separated by space,\n- C - each line is treated like code (Camel Case is allowed).\n\nDefault is S.\n\nC is the slowest to load due to the need to split each line based upon code splitting rules.\n\nNote: this settings does not apply to inline dictionaries or `.trie` files.",
+          "markdownDescription": "Type of file:\n- S - single word per line,\n- W - each line can contain one or more words separated by space,\n- C - each line is treated like code (Camel Case is allowed).\n\nDefault is S.\n\nC is the slowest to load due to the need to split each line based upon code splitting rules.\n\nNote: this settings does not apply to inline dictionaries or `.trie` files."
+        },
+        "useCompounds": {
+          "description": "Use Compounds.",
+          "markdownDescription": "Use Compounds.",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "name"
       ],
       "type": "object"
     },

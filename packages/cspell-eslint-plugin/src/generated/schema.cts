@@ -78,6 +78,12 @@ export const optionsSchema = {
           "markdownDescription": "True to enable compound word checking.",
           "type": "boolean"
         },
+        "caseSensitive": {
+          "default": false,
+          "description": "Determines if words must match case and accent rules.\n\nSee [Case Sensitivity](https://cspell.org/docs/case-sensitive/) for more details.\n\n- `false` - Case is ignored and accents can be missing on the entire word.   Incorrect accents or partially missing accents will be marked as incorrect.\n- `true` - Case and accents are enforced.",
+          "markdownDescription": "Determines if words must match case and accent rules.\n\nSee [Case Sensitivity](https://cspell.org/docs/case-sensitive/) for more details.\n\n- `false` - Case is ignored and accents can be missing on the entire word.\n  Incorrect accents or partially missing accents will be marked as incorrect.\n- `true` - Case and accents are enforced.",
+          "type": "boolean"
+        },
         "dictionaries": {
           "description": "Optional list of dictionaries to use. Each entry should match the name of the dictionary.\n\nTo remove a dictionary from the list, add `!` before the name.\n\nFor example, `!typescript` will turn off the dictionary with the name `typescript`.\n\nSee the [Dictionaries](https://cspell.org/docs/dictionaries/) and [Custom Dictionaries](https://cspell.org/docs/dictionaries-custom/) for more details.",
           "items": {
@@ -103,70 +109,94 @@ export const optionsSchema = {
         },
         "dictionaryDefinitions": {
           "items": {
-            "additionalProperties": false,
-            "properties": {
-              "description": {
-                "description": "Optional description of the contents / purpose of the dictionary.",
-                "markdownDescription": "Optional description of the contents / purpose of the dictionary.",
-                "type": "string"
-              },
-              "ignoreForbiddenWords": {
-                "description": "Some dictionaries may contain forbidden words to prevent compounding from generating words that are not valid in the language. These are often words that are used in other languages or might be generated through compounding. This setting allows flagged words to be ignored when checking the dictionary. The effect is similar to the word not being in the dictionary.",
-                "markdownDescription": "Some dictionaries may contain forbidden words to prevent compounding from generating\nwords that are not valid in the language. These are often\nwords that are used in other languages or might be generated through compounding.\nThis setting allows flagged words to be ignored when checking the dictionary.\nThe effect is similar to the word not being in the dictionary.",
-                "type": "boolean"
-              },
-              "name": {
-                "description": "This is the name of a dictionary.\n\nName Format:\n- Must contain at least 1 number or letter.\n- Spaces are allowed.\n- Leading and trailing space will be removed.\n- Names ARE case-sensitive.\n- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`.",
-                "markdownDescription": "This is the name of a dictionary.\n\nName Format:\n- Must contain at least 1 number or letter.\n- Spaces are allowed.\n- Leading and trailing space will be removed.\n- Names ARE case-sensitive.\n- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`.",
-                "pattern": "^(?=[^!*,;{}[\\]~\\n]+$)(?=(.*\\w)).+$",
-                "type": "string"
-              },
-              "noSuggest": {
-                "description": "Indicate that suggestions should not come from this dictionary. Words in this dictionary are considered correct, but will not be used when making spell correction suggestions.\n\nNote: if a word is suggested by another dictionary, but found in this dictionary, it will be removed from the set of possible suggestions.",
-                "markdownDescription": "Indicate that suggestions should not come from this dictionary.\nWords in this dictionary are considered correct, but will not be\nused when making spell correction suggestions.\n\nNote: if a word is suggested by another dictionary, but found in\nthis dictionary, it will be removed from the set of\npossible suggestions.",
-                "type": "boolean"
-              },
-              "path": {
-                "description": "Path to the file.",
-                "markdownDescription": "Path to the file.",
-                "type": "string"
-              },
-              "repMap": {
-                "description": "Replacement pairs.",
-                "items": {
-                  "items": {
+            "anyOf": [
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "description": {
+                    "description": "Optional description of the contents / purpose of the dictionary.",
+                    "markdownDescription": "Optional description of the contents / purpose of the dictionary.",
                     "type": "string"
                   },
-                  "maxItems": 2,
-                  "minItems": 2,
-                  "type": "array"
+                  "name": {
+                    "description": "This is the name of a dictionary.\n\nName Format:\n- Must contain at least 1 number or letter.\n- Spaces are allowed.\n- Leading and trailing space will be removed.\n- Names ARE case-sensitive.\n- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`.",
+                    "markdownDescription": "This is the name of a dictionary.\n\nName Format:\n- Must contain at least 1 number or letter.\n- Spaces are allowed.\n- Leading and trailing space will be removed.\n- Names ARE case-sensitive.\n- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`.",
+                    "type": "string"
+                  },
+                  "path": {
+                    "description": "Path to the file.",
+                    "markdownDescription": "Path to the file.",
+                    "type": "string"
+                  },
+                  "supportNonStrictSearches": {
+                    "description": "Strip Case and Accents to allow for case insensitive searches and words without accents.\n\nNote: this setting only applies to word lists. It has no-impact on trie dictionaries.",
+                    "markdownDescription": "Strip Case and Accents to allow for case insensitive searches and\nwords without accents.\n\nNote: this setting only applies to word lists. It has no-impact on trie\ndictionaries.",
+                    "type": "boolean"
+                  }
                 },
-                "markdownDescription": "Replacement pairs.",
-                "type": "array"
-              },
-              "type": {
-                "default": "S",
-                "description": "Type of file:\n- S - single word per line,\n- W - each line can contain one or more words separated by space,\n- C - each line is treated like code (Camel Case is allowed).\n\nDefault is S.\n\nC is the slowest to load due to the need to split each line based upon code splitting rules.\n\nNote: this settings does not apply to inline dictionaries or `.trie` files.",
-                "enum": [
-                  "S",
-                  "W",
-                  "C",
-                  "T"
+                "required": [
+                  "name",
+                  "path"
                 ],
-                "markdownDescription": "Type of file:\n- S - single word per line,\n- W - each line can contain one or more words separated by space,\n- C - each line is treated like code (Camel Case is allowed).\n\nDefault is S.\n\nC is the slowest to load due to the need to split each line based upon code splitting rules.\n\nNote: this settings does not apply to inline dictionaries or `.trie` files.",
-                "type": "string"
+                "type": "object"
               },
-              "useCompounds": {
-                "description": "Use Compounds.",
-                "markdownDescription": "Use Compounds.",
-                "type": "boolean"
+              {
+                "additionalProperties": false,
+                "properties": {
+                  "description": {
+                    "description": "Optional description of the contents / purpose of the dictionary.",
+                    "markdownDescription": "Optional description of the contents / purpose of the dictionary.",
+                    "type": "string"
+                  },
+                  "flagWords": {
+                    "description": "List of words to always be considered incorrect. Words found in `flagWords` override `words`.\n\nFormat of `flagWords`\n- single word entry - `word`\n- with suggestions - `word:suggestion` or `word->suggestion, suggestions`\n\nExample: ```ts \"flagWords\": [   \"color: colour\",   \"incase: in case, encase\",   \"canot->cannot\",   \"cancelled->canceled\" ] ```",
+                    "items": {
+                      "type": "string"
+                    },
+                    "markdownDescription": "List of words to always be considered incorrect. Words found in `flagWords` override `words`.\n\nFormat of `flagWords`\n- single word entry - `word`\n- with suggestions - `word:suggestion` or `word->suggestion, suggestions`\n\nExample:\n```ts\n\"flagWords\": [\n  \"color: colour\",\n  \"incase: in case, encase\",\n  \"canot->cannot\",\n  \"cancelled->canceled\"\n]\n```",
+                    "type": "array"
+                  },
+                  "ignoreWords": {
+                    "description": "List of words to be ignored. An ignored word will not show up as an error, even if it is also in the `flagWords`.",
+                    "items": {
+                      "type": "string"
+                    },
+                    "markdownDescription": "List of words to be ignored. An ignored word will not show up as an error, even if it is\nalso in the `flagWords`.",
+                    "type": "array"
+                  },
+                  "name": {
+                    "description": "This is the name of a dictionary.\n\nName Format:\n- Must contain at least 1 number or letter.\n- Spaces are allowed.\n- Leading and trailing space will be removed.\n- Names ARE case-sensitive.\n- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`.",
+                    "markdownDescription": "This is the name of a dictionary.\n\nName Format:\n- Must contain at least 1 number or letter.\n- Spaces are allowed.\n- Leading and trailing space will be removed.\n- Names ARE case-sensitive.\n- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`.",
+                    "type": "string"
+                  },
+                  "suggestWords": {
+                    "description": "A list of suggested replacements for words. Suggested words provide a way to make preferred suggestions on word replacements. To hint at a preferred change, but not to require it.\n\nFormat of `suggestWords`\n- Single suggestion (possible auto fix)     - `word: suggestion`     - `word->suggestion`\n- Multiple suggestions (not auto fixable)    - `word: first, second, third`    - `word->first, second, third`",
+                    "items": {
+                      "type": "string"
+                    },
+                    "markdownDescription": "A list of suggested replacements for words.\nSuggested words provide a way to make preferred suggestions on word replacements.\nTo hint at a preferred change, but not to require it.\n\nFormat of `suggestWords`\n- Single suggestion (possible auto fix)\n    - `word: suggestion`\n    - `word->suggestion`\n- Multiple suggestions (not auto fixable)\n   - `word: first, second, third`\n   - `word->first, second, third`",
+                    "type": "array"
+                  },
+                  "supportNonStrictSearches": {
+                    "description": "Strip Case and Accents to allow for case insensitive searches and words without accents.\n\nNote: this setting only applies to word lists. It has no-impact on trie dictionaries.",
+                    "markdownDescription": "Strip Case and Accents to allow for case insensitive searches and\nwords without accents.\n\nNote: this setting only applies to word lists. It has no-impact on trie\ndictionaries.",
+                    "type": "boolean"
+                  },
+                  "words": {
+                    "description": "List of words to be considered correct.",
+                    "items": {
+                      "type": "string"
+                    },
+                    "markdownDescription": "List of words to be considered correct.",
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "name"
+                ],
+                "type": "object"
               }
-            },
-            "required": [
-              "name",
-              "path"
-            ],
-            "type": "object"
+            ]
           },
           "type": "array"
         },

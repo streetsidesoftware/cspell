@@ -99,6 +99,7 @@ export type {
     DictionaryDefinitionInlineWords,
     DictionaryDefinitionLegacy,
     DictionaryDefinitionPreferred,
+    DictionaryDefinitionSimple,
     DictionaryFileTypes,
     DictionaryId,
     DictionaryNegRef,
