@@ -3,7 +3,7 @@ Repository: slint-ui/slint
 Url: "https://github.com/slint-ui/slint"
 Args: ["--config=../../../../repositories/config/slint/cspell.config.yaml","--issues-summary-report","."]
 Lines:
- CSpell: Files checked: 2150, Issues found: 4039 in 725 files.
+ CSpell: Files checked: 2150, Issues found: 4037 in 724 files.
  exit code: 1
 CMakeLists.txt:17:14     - Unknown word (TOPLEVEL)   -- set(SLINT_IS_TOPLEVEL_BUILD TRUE)
 CMakeLists.txt:27:31     - Unknown word (dylib's)    -- macOS, the slint_cpp.dylib's install_name uses @rpath
@@ -235,7 +235,6 @@ api/cpp/include/slint-stm32.h:99:13     - Unknown word (LTDC)       -- HAL_LTDC_
 api/cpp/include/slint-stm32.h:99:36     - Unknown word (hlcd)       -- LTDC_RegisterCallback(&hlcd_ltdc, HAL_LTDC_RELOAD
 api/cpp/include/slint-stm32.h:99:41     - Unknown word (ltdc)       -- RegisterCallback(&hlcd_ltdc, HAL_LTDC_RELOAD_EVENT
 api/cpp/include/slint-stm32.h:99:51     - Unknown word (LTDC)       -- isterCallback(&hlcd_ltdc, HAL_LTDC_RELOAD_EVENT_CB_ID,
-api/cpp/include/slint-testing.h:47:55     - Unknown word (convertts)  -- returns something that convertts to true, then the function
 api/cpp/include/slint.h:183:22    - Unknown word (itemvtable) -- item_layout_info(VT *itemvtable, ItemType *item_ptr
 api/cpp/include/slint.h:188:12    - Unknown word (itemvtable) -- return itemvtable->layout_info({ itemvtable
 api/cpp/include/slint.h:188:38    - Unknown word (itemvtable) -- itemvtable->layout_info({ itemvtable, item_ptr }, orientation
@@ -537,40 +536,38 @@ api/python/timer.rs:48:12     - Unknown word (pymethods)  -- #[gen_stub_pymethod
 api/python/timer.rs:49:3      - Unknown word (pymethods)  -- #[pymethods]
 api/python/timer.rs:61:73     - Unknown word (firethe)    -- when the timer should firethe first time, and subsequently
 api/python/timer.rs:87:7      - Unknown word (staticmethod) -- #[staticmethod]
-api/python/value.rs:102:34    - Unknown word (pyval)      -- .map(|(name, pyval)| {
-api/python/value.rs:104:29    - Unknown word (slintval)   -- let slintval = PyValue::extract_bound
-api/python/value.rs:104:64    - Unknown word (pyval)      -- PyValue::extract_bound(&pyval)?;
-api/python/value.rs:105:35    - Unknown word (slintval)   -- Ok((name, slintval.0))
+api/python/value.rs:110:12    - Unknown word (pyclass)    -- #[gen_stub_pyclass]
+api/python/value.rs:111:21    - Unknown word (unsendable) -- #[pyclass(subclass, unsendable)]
+api/python/value.rs:111:3     - Unknown word (pyclass)    -- #[pyclass(subclass, unsendable
+api/python/value.rs:117:12    - Unknown word (pymethods)  -- #[gen_stub_pymethods]
+api/python/value.rs:118:3     - Unknown word (pymethods)  -- #[pymethods]
 api/python/value.rs:11:12     - Unknown word (pyclass)    -- #[gen_stub_pyclass]
-api/python/value.rs:122:12    - Unknown word (pyclass)    -- #[gen_stub_pyclass]
-api/python/value.rs:123:21    - Unknown word (unsendable) -- #[pyclass(subclass, unsendable)]
-api/python/value.rs:123:3     - Unknown word (pyclass)    -- #[pyclass(subclass, unsendable
-api/python/value.rs:129:12    - Unknown word (pymethods)  -- #[gen_stub_pymethods]
-api/python/value.rs:130:3     - Unknown word (pymethods)  -- #[pymethods]
-api/python/value.rs:137:10    - Unknown word (getattr)    -- fn __getattr__(&self, key: &str)
-api/python/value.rs:147:10    - Unknown word (setattr)    -- fn __setattr__(&mut self, py: Python
-api/python/value.rs:175:12    - Unknown word (pyclass)    -- #[gen_stub_pyclass]
-api/python/value.rs:176:11    - Unknown word (unsendable) -- #[pyclass(unsendable)]
-api/python/value.rs:176:3     - Unknown word (pyclass)    -- #[pyclass(unsendable)]
-api/python/value.rs:181:12    - Unknown word (pymethods)  -- #[gen_stub_pymethods]
-api/python/value.rs:182:3     - Unknown word (pymethods)  -- #[pymethods]
-api/python/value.rs:20:13     - Unknown word (pyobject)   -- fn into_pyobject(self, py: Python<'py
-api/python/value.rs:22:34     - Unknown word (pyobject)   -- PyValueRef(&self.0).into_pyobject(py)
-api/python/value.rs:31:13     - Unknown word (pyobject)   -- fn into_pyobject(self, py: Python<'py
-api/python/value.rs:46:46     - Unknown word (structval)  -- interpreter::Value::Struct(structval) => {
-api/python/value.rs:47:34     - Unknown word (structval)  -- PyStruct { data: structval.clone() }.into_bound
-api/python/value.rs:75:27     - Unknown word (pyimg)      -- .map(|pyimg| slint_interpreter:
-api/python/value.rs:75:66     - Unknown word (pyimg)      -- interpreter::Value::Image(pyimg.image.clone()))
-api/python/value.rs:79:27     - Unknown word (pybrush)    -- .map(|pybrush| slint_interpreter:
-api/python/value.rs:79:68     - Unknown word (pybrush)    -- interpreter::Value::Brush(pybrush.brush.clone()))
-api/python/value.rs:83:27     - Unknown word (pycolor)    -- .map(|pycolor| slint_interpreter:
-api/python/value.rs:83:68     - Unknown word (pycolor)    -- interpreter::Value::Brush(pycolor.color.clone().into(
-api/python/value.rs:87:27     - Unknown word (pymodel)    -- .map(|pymodel| slint_interpreter:
-api/python/value.rs:87:68     - Unknown word (pymodel)    -- interpreter::Value::Model(pymodel.as_model()))
-api/python/value.rs:91:27     - Unknown word (rustmodel)  -- .map(|rustmodel| slint_interpreter:
-api/python/value.rs:91:70     - Unknown word (rustmodel)  -- interpreter::Value::Model(rustmodel.0.clone()))
-api/python/value.rs:94:63     - Unknown word (pystruct)   -- PyStruct>>().and_then(|pystruct| {
-api/python/value.rs:95:57     - Unknown word (pystruct)   -- interpreter::Value::Struct(pystruct.data.clone()))
+api/python/value.rs:125:10    - Unknown word (getattr)    -- fn __getattr__(&self, key: &str)
+api/python/value.rs:135:10    - Unknown word (setattr)    -- fn __setattr__(&mut self, py: Python
+api/python/value.rs:163:12    - Unknown word (pyclass)    -- #[gen_stub_pyclass]
+api/python/value.rs:164:11    - Unknown word (unsendable) -- #[pyclass(unsendable)]
+api/python/value.rs:164:3     - Unknown word (pyclass)    -- #[pyclass(unsendable)]
+api/python/value.rs:169:12    - Unknown word (pymethods)  -- #[gen_stub_pymethods]
+api/python/value.rs:170:3     - Unknown word (pymethods)  -- #[pymethods]
+api/python/value.rs:19:13     - Unknown word (pyobject)   -- fn into_pyobject(self, py: Python<'py
+api/python/value.rs:34:46     - Unknown word (structval)  -- interpreter::Value::Struct(structval) => {
+api/python/value.rs:35:34     - Unknown word (structval)  -- PyStruct { data: structval.clone() }.into_bound
+api/python/value.rs:63:27     - Unknown word (pyimg)      -- .map(|pyimg| slint_interpreter:
+api/python/value.rs:63:66     - Unknown word (pyimg)      -- interpreter::Value::Image(pyimg.image.clone()))
+api/python/value.rs:67:27     - Unknown word (pybrush)    -- .map(|pybrush| slint_interpreter:
+api/python/value.rs:67:68     - Unknown word (pybrush)    -- interpreter::Value::Brush(pybrush.brush.clone()))
+api/python/value.rs:71:27     - Unknown word (pycolor)    -- .map(|pycolor| slint_interpreter:
+api/python/value.rs:71:68     - Unknown word (pycolor)    -- interpreter::Value::Brush(pycolor.color.clone().into(
+api/python/value.rs:75:27     - Unknown word (pymodel)    -- .map(|pymodel| slint_interpreter:
+api/python/value.rs:75:68     - Unknown word (pymodel)    -- interpreter::Value::Model(pymodel.as_model()))
+api/python/value.rs:79:27     - Unknown word (rustmodel)  -- .map(|rustmodel| slint_interpreter:
+api/python/value.rs:79:70     - Unknown word (rustmodel)  -- interpreter::Value::Model(rustmodel.0.clone()))
+api/python/value.rs:82:63     - Unknown word (pystruct)   -- PyStruct>>().and_then(|pystruct| {
+api/python/value.rs:83:57     - Unknown word (pystruct)   -- interpreter::Value::Struct(pystruct.data.clone()))
+api/python/value.rs:90:34     - Unknown word (pyval)      -- .map(|(name, pyval)| {
+api/python/value.rs:92:29     - Unknown word (slintval)   -- let slintval = PyValue::extract_bound
+api/python/value.rs:92:64     - Unknown word (pyval)      -- PyValue::extract_bound(&pyval)?;
+api/python/value.rs:93:35     - Unknown word (slintval)   -- Ok((name, slintval.0))
 api/rs/macros/lib.rs:35:10     - Unknown word (rsplit)     -- .rsplit(not_is_byte_char)
 api/rs/macros/lib.rs:43:10     - Unknown word (rsplit)     -- .rsplit(not_is_byte_char)
 api/rs/slint/android.rs:60:116    - Unknown word (javac)      -- variable is optional if a `javac` is found in your `
@@ -666,8 +663,8 @@ demos/home-automation/ui/common.slint:79:26     - Unknown word (dustyshadow)    
 demos/home-automation/ui/common.slint:80:26     - Unknown word (dustyblue)        -- out property <color> dustyblue:#587AA6;
 demos/home-automation/ui/common.slint:81:26     - Unknown word (dustygold)        -- out property <color> dustygold:#dc9f2f;
 demos/home-automation/ui/common.slint:99:26     - Unknown word (fadedyellow)      -- out property <color> fadedyellow: #F2EED5;
-demos/home-automation/ui/components/alarm.slint:205:28    - Unknown word (hvac)       -- color: Palette.hvac-knob-foreground;
-demos/home-automation/ui/components/alarm.slint:68:36     - Unknown word (hvac)       -- color: Palette.hvac-knob-foreground;
+demos/home-automation/ui/components/alarm.slint:200:28    - Unknown word (hvac)       -- color: Palette.hvac-knob-foreground;
+demos/home-automation/ui/components/alarm.slint:67:36     - Unknown word (hvac)       -- color: Palette.hvac-knob-foreground;
 demos/home-automation/ui/components/hvac.slint:110:33    - Unknown word (hvac)       -- background: Palette.hvac-knob-background;
 demos/home-automation/ui/components/hvac.slint:152:28    - Unknown word (Setpoint)   -- text: "Setpoint: 19°C";
 demos/home-automation/ui/components/hvac.slint:165:71    - Unknown word (HVAC)       -- some visual pop when HVAC minimises to
@@ -2400,8 +2397,8 @@ internal/backends/qt/qt_window.rs:341:17    - Unknown word (preedit)    -- int p
 internal/backends/qt/qt_window.rs:345:25    - Unknown word (preedit)    -- preedit_cursor = QStringView
 internal/backends/qt/qt_window.rs:345:54    - Unknown word (preedit)    -- cursor = QStringView(preedit_string).left(attribute
 internal/backends/selector/api.rs:200:40    - Unknown word (linuxkms)   -- feature = "i-slint-backend-linuxkms"
-internal/backends/selector/api.rs:218:14    - Unknown word (linuxkms)   -- "linuxkms" => {
-internal/backends/selector/api.rs:220:37    - Unknown word (linuxkms)   -- return Err("The linuxkms backend does not implement
+internal/backends/selector/api.rs:226:14    - Unknown word (linuxkms)   -- "linuxkms" => {
+internal/backends/selector/api.rs:228:37    - Unknown word (linuxkms)   -- return Err("The linuxkms backend does not implement
 internal/backends/selector/build.rs:13:12     - Unknown word (qttypes)    -- // 1. `qttypes`' crate's build script
 internal/backends/selector/build.rs:14:69     - Unknown word (qttype)     -- script will check if the qttype crates found Qt and
 internal/backends/selector/lib.rs:10:36     - Unknown word (linuxkms)   -- feature = "i-slint-backend-linuxkms"
@@ -2485,10 +2482,10 @@ internal/backends/winit/wasm_input_helper.rs:243:31    - Unknown word (compositi
 internal/backends/winit/wasm_input_helper.rs:247:21    - Unknown word (preedit)           -- preedit_text: data.into(),
 internal/backends/winit/wasm_input_helper.rs:304:60    - Unknown word (Backtab)           -- => return Some(Key::Backtab.into()),
 internal/backends/winit/wasm_input_helper.rs:64:30     - Unknown word (autocapitalize) -- input.set_attribute("autocapitalize", "none").unwrap();
-internal/backends/winit/winitwindowadapter.rs:1005:46   - Unknown word (propgate)   -- don't ignore error, propgate to caller
-internal/backends/winit/winitwindowadapter.rs:1093:50   - Unknown word (propgate)   -- don't ignore error, propgate to caller
-internal/backends/winit/winitwindowadapter.rs:1341:38   - Unknown word (propgate)   -- don't ignore error, propgate to caller
-internal/backends/winit/winitwindowadapter.rs:934:38    - Unknown word (propgate)   -- don't ignore error, propgate to caller
+internal/backends/winit/winitwindowadapter.rs:1024:46   - Unknown word (propgate)   -- don't ignore error, propgate to caller
+internal/backends/winit/winitwindowadapter.rs:1112:50   - Unknown word (propgate)   -- don't ignore error, propgate to caller
+internal/backends/winit/winitwindowadapter.rs:1360:38   - Unknown word (propgate)   -- don't ignore error, propgate to caller
+internal/backends/winit/winitwindowadapter.rs:944:38    - Unknown word (propgate)   -- don't ignore error, propgate to caller
 internal/common/builtin_structs.rs:109:21    - Unknown word (preedit)    -- preedit_text: SharedString,
 internal/common/builtin_structs.rs:110:50    - Unknown word (preedit)    -- selection within the preedit_text
 internal/common/builtin_structs.rs:111:21    - Unknown word (preedit)    -- preedit_selection: Option<core
@@ -2551,7 +2548,6 @@ internal/compiler/generator/rust.rs:1102:13   - Unknown word (updt)       -- let
 internal/compiler/generator/rust.rs:1128:20   - Unknown word (updt)       -- #(#updt)*
 internal/compiler/generator/rust.rs:228:39    - Unknown word (rescope)    -- unknown_lints, if_let_rescope, tail_expr_drop_order
 internal/compiler/langtype.rs:159:42    - Unknown word (pathdata)   -- PathData => write!(f, "pathdata"),
-internal/compiler/langtype.rs:707:48    - Unknown word (accpeted)   -- element that can be accpeted as child of this element
 internal/compiler/langtype.rs:795:47    - Unknown word (rfind)      -- separator_pos) = name.rfind("::") {
 internal/compiler/langtype.rs:9:16      - Unknown word (Itertools)  -- use itertools::Itertools;
 internal/compiler/layout.rs:457:9     - Unknown word (elems)      -- pub elems: Vec<GridLayoutElement
@@ -3036,8 +3032,10 @@ internal/core/items/text.rs:505:32    - Unknown word (preedit)    -- selection w
 internal/core/items/text.rs:506:5     - Unknown word (preedit)    -- preedit_selection: Property
 internal/core/items/text.rs:695:123   - Unknown word (behaviour)  -- to implement a custom behaviour
 internal/core/items/text.rs:870:22    - Unknown word (preedit)    -- self.preedit_text.set(event.preedit
-internal/core/model.rs:1638:8    - Unknown word (modeliter)  -- fn modeliter_in_bounds() {
-internal/core/model.rs:1673:17   - Unknown word (doesnt)     -- fn vecmodel_doesnt_require_default() {
+internal/core/model.rs:1685:8    - Unknown word (modeliter)  -- fn modeliter_in_bounds() {
+internal/core/model.rs:1720:17   - Unknown word (doesnt)     -- fn vecmodel_doesnt_require_default() {
+internal/core/model.rs:185:33    - Unknown word (dowcast)    -- common reason why the dowcast fails at run-time is
+internal/core/model.rs:186:49    - Unknown word (downcasted) -- created and the model downcasted. To debug this at compile
 internal/core/model/adapters.rs:1129:36   - Unknown word (opsom)      -- SharedString::from("opsom"));
 internal/core/model/adapters.rs:124:49    - Unknown word (Mustermann) -- to_string(), last: "Mustermann".to_string() },
 internal/core/model/adapters.rs:125:51    - Unknown word (Tisch)      -- to_string(), last: "Tisch".to_string() },
@@ -3922,8 +3920,8 @@ tools/figma-inspector/tests/figma_output.json:36469:22  - Unknown word (Limon)  
 tools/figma-inspector/tests/figma_output.json:36476:22  - Unknown word (Limon)      -- "name": "Limon Green/50",
 tools/figma-inspector/tests/figma_output.json:36483:22  - Unknown word (Limon)      -- "name": "Limon Green/100",
 tools/figma-inspector/tests/figma_output.json:36490:22  - Unknown word (Limon)      -- "name": "Limon Green/200",
-tools/figma-inspector/tests/property-parsing.test.ts:47:67     - Unknown word (ojbect)     -- different to the API ojbect
-tools/figma-inspector/tests/property-parsing.test.ts:49:23     - Unknown word (soloution)  -- This isn't a great soloution, but test options are
+tools/figma-inspector/tests/property-parsing.test.ts:49:67     - Unknown word (ojbect)     -- different to the API ojbect
+tools/figma-inspector/tests/property-parsing.test.ts:51:23     - Unknown word (soloution)  -- This isn't a great soloution, but test options are
 tools/figma-inspector/vite.config.ts:5:45      - Unknown word (singlefile) -- } from "vite-plugin-singlefile";
 tools/figma_import/src/figmatypes.rs:78:103    - Unknown word (tempty)     -- that and consider it is tempty
 tools/figma_import/src/main.rs:33:5      - Unknown word (figmatypes) -- mod figmatypes;
