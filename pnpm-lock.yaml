@@ -592,6 +592,18 @@ importers:
         specifier: ^1.3.0
         version: 1.3.0
 
+  packages/cspell-eslint-plugin/fixtures/dictionaries:
+    devDependencies:
+      '@cspell/eslint-plugin':
+        specifier: workspace:*
+        version: link:../..
+      es-toolkit:
+        specifier: ^1.38.0
+        version: 1.38.0
+      eslint:
+        specifier: ^8.50.0
+        version: 8.57.0
+
   packages/cspell-eslint-plugin/fixtures/import-support:
     devDependencies:
       '@internal/fixture-test-dictionary':
@@ -5892,6 +5904,9 @@ packages:
   es-to-primitive@1.3.0:
     resolution: {integrity: sha512-w+5mJ3GuFL+NjVtJlvydShqE1eN3h3PbI7/5LAsYJP/2qtuMXjfL2LpHSRqo4b4eSF5K/DH1JXKUAHSB2UW50g==}
     engines: {node: '>= 0.4'}
+
+  es-toolkit@1.38.0:
+    resolution: {integrity: sha512-OT3AxczYYd3W50bCj4V0hKoOAfqIy9tof0leNQYekEDxVKir3RTVTJOLij7VAe6fsCNsGhC0JqIkURpMXTCSEA==}
 
   es6-error@4.1.1:
     resolution: {integrity: sha512-Um/+FxMr9CISWh0bi5Zv0iOD+4cFh5qLeks1qhAopKVAJw3drgKbKySikp7wGhDL0HPeaja0P5ULZrxLkniUVg==}
@@ -16713,6 +16728,8 @@ snapshots:
       is-callable: 1.2.7
       is-date-object: 1.1.0
       is-symbol: 1.1.1
+
+  es-toolkit@1.38.0: {}
 
   es6-error@4.1.1: {}
 

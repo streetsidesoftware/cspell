@@ -206,3 +206,19 @@ export type ScopeSelectorEntry = [ScopeSelector, boolean];
  * A list of scope selectors.
  */
 export type ScopeSelectorList = ScopeSelectorEntry[];
+
+/**
+ * Helper to define the options for the cspell-eslint-plugin.
+ * @param options - The options to define.
+ */
+export function defineCSpellPluginOptions(options: Partial<Options>): Partial<Options> {
+    return options;
+}
+
+/**
+ * Helper to define the CSpell config section of the cspell-eslint-plugin.
+ * @param cfg - The CSpell config to define.
+ */
+export function defineCSpellConfig(cfg: CSpellOptions): CSpellOptions {
+    return cfg;
+}

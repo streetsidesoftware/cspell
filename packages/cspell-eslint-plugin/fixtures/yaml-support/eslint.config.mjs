@@ -4,7 +4,7 @@ import parserYml from 'yaml-eslint-parser';
 import pluginYml from 'eslint-plugin-yml';
 
 /**
- * @type { import("eslint").Linter.FlatConfig[] }
+ * @type { import("eslint").Linter.Config[] }
  */
 const config = [
     eslint.configs.recommended,
