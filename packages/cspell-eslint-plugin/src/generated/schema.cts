@@ -129,8 +129,8 @@ export const optionsSchema = {
                     "type": "string"
                   },
                   "supportNonStrictSearches": {
-                    "description": "Strip Case and Accents to allow for case insensitive searches and words without accents.\n\nNote: this setting only applies to word lists. It has no-impact on trie dictionaries.",
-                    "markdownDescription": "Strip Case and Accents to allow for case insensitive searches and\nwords without accents.\n\nNote: this setting only applies to word lists. It has no-impact on trie\ndictionaries.",
+                    "description": "Strip case and accents to allow for case insensitive searches and words without accents.\n\nNote: this setting only applies to word lists. It has no-impact on trie dictionaries.",
+                    "markdownDescription": "Strip case and accents to allow for case insensitive searches and\nwords without accents.\n\nNote: this setting only applies to word lists. It has no-impact on trie\ndictionaries.",
                     "type": "boolean"
                   }
                 },
@@ -178,8 +178,8 @@ export const optionsSchema = {
                     "type": "array"
                   },
                   "supportNonStrictSearches": {
-                    "description": "Strip Case and Accents to allow for case insensitive searches and words without accents.\n\nNote: this setting only applies to word lists. It has no-impact on trie dictionaries.",
-                    "markdownDescription": "Strip Case and Accents to allow for case insensitive searches and\nwords without accents.\n\nNote: this setting only applies to word lists. It has no-impact on trie\ndictionaries.",
+                    "description": "Strip case and accents to allow for case insensitive searches and words without accents.\n\nNote: this setting only applies to word lists. It has no-impact on trie dictionaries.",
+                    "markdownDescription": "Strip case and accents to allow for case insensitive searches and\nwords without accents.\n\nNote: this setting only applies to word lists. It has no-impact on trie\ndictionaries.",
                     "type": "boolean"
                   },
                   "words": {
