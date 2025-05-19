@@ -4,7 +4,7 @@ import cspellRecommended from '@cspell/eslint-plugin/recommended';
 import eslintPluginJsonc from 'eslint-plugin-jsonc';
 
 /**
- * @type { import("eslint").Linter.FlatConfig[] }
+ * @type { import("eslint").Linter.Config[] }
  */
 const config = [
     eslint.configs.recommended,
