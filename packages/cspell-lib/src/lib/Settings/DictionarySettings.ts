@@ -186,6 +186,7 @@ class _DictionaryDefinitionInternalWithSource implements DictionaryFileDefinitio
             noSuggest,
             ignoreForbiddenWords,
             scope,
+            supportNonStrictSearches,
             useCompounds,
         } = defAll;
         const defaultPath = sourceURL;
@@ -205,6 +206,7 @@ class _DictionaryDefinitionInternalWithSource implements DictionaryFileDefinitio
             repMap,
             noSuggest,
             ignoreForbiddenWords,
+            supportNonStrictSearches,
             scope,
             useCompounds,
         };

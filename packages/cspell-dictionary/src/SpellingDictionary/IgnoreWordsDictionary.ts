@@ -103,6 +103,10 @@ class IgnoreWordsDictionary implements SpellingDictionary {
 
 const createCache = createAutoResolveWeakCache<readonly string[], SpellingDictionary>();
 
+export interface CreateIgnoreWordsDictionaryOptions {
+    supportNonStrictSearches?: boolean | undefined;
+}
+
 /**
  * Create a dictionary where all words are to be ignored.
  * Ignored words override forbidden words.
@@ -115,13 +119,13 @@ export function createIgnoreWordsDictionary(
     wordList: readonly string[],
     name: string,
     source: string,
+    options?: CreateIgnoreWordsDictionaryOptions,
 ): SpellingDictionary {
     return createCache.get(wordList, () => {
         const testSpecialCharacters = /[*+]/;
+        const parseOptions = { stripCaseAndAccents: options?.supportNonStrictSearches ?? true };
 
-        const words = [...parseDictionaryLines(wordList, { stripCaseAndAccents: true })].map((w) =>
-            w.normalize(NormalizeForm),
-        );
+        const words = [...parseDictionaryLines(wordList, parseOptions)].map((w) => w.normalize(NormalizeForm));
 
         const hasSpecial = words.some((word) => testSpecialCharacters.test(word));
 

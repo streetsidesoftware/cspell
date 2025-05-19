@@ -6,6 +6,7 @@ export type DictionaryDefinition =
     | DictionaryDefinitionCustom
     | DictionaryDefinitionAugmented
     | DictionaryDefinitionInline
+    | DictionaryDefinitionSimple
     | DictionaryDefinitionAlternate
     | DictionaryDefinitionLegacy;
 
@@ -70,6 +71,17 @@ export interface DictionaryDefinitionBase {
      * @default "S"
      */
     type?: DictionaryFileTypes | undefined;
+
+    /**
+     * Strip case and accents to allow for case insensitive searches and
+     * words without accents.
+     *
+     * Note: this setting only applies to word lists. It has no-impact on trie
+     * dictionaries.
+     *
+     * @default true
+     */
+    supportNonStrictSearches?: boolean | undefined;
 }
 
 export interface DictionaryDefinitionPreferred extends DictionaryDefinitionBase {
@@ -80,6 +92,46 @@ export interface DictionaryDefinitionPreferred extends DictionaryDefinitionBase 
      * Only for legacy dictionary definitions.
      * @deprecated true
      * @deprecationMessage Use {@link path} instead.
+     * @hidden
+     */
+    file?: undefined;
+}
+
+/**
+ * An Empty Dictionary Definition
+ */
+export interface DictionaryDefinitionSimple extends DictionaryDefinitionBase {
+    /**
+     * @hidden
+     */
+    repMap?: ReplaceMap;
+
+    /**
+     * @hidden
+     */
+    useCompounds?: boolean;
+
+    /**
+     * @hidden
+     */
+    noSuggest?: boolean | undefined;
+
+    /**
+     * @hidden
+     */
+    ignoreForbiddenWords?: boolean | undefined;
+
+    /**
+     * @hidden
+     */
+    type?: DictionaryFileTypes | undefined;
+
+    /**
+     * @hidden
+     */
+    path?: string | undefined;
+
+    /**
      * @hidden
      */
     file?: undefined;

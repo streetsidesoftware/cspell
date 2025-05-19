@@ -1,4 +1,9 @@
-import type { CSpellSettings, DictionaryDefinitionPreferred } from '@cspell/cspell-types';
+import type {
+    CSpellSettings,
+    DictionaryDefinitionInline,
+    DictionaryDefinitionPreferred,
+    DictionaryDefinitionSimple,
+} from '@cspell/cspell-types';
 
 export interface Options extends Check {
     /**
@@ -27,13 +32,30 @@ export interface Options extends Check {
     debugMode?: boolean;
 }
 
-type DictionaryDefinition = DictionaryDefinitionPreferred;
+interface DictOptions {
+    /**
+     * Strip case and accents to allow for case insensitive searches and
+     * words without accents.
+     *
+     * Note: this setting only applies to word lists. It has no-impact on trie
+     * dictionaries.
+     */
+    supportNonStrictSearches?: boolean | undefined;
+}
+
+type DictBase = Pick<DictionaryDefinitionSimple, 'name' | 'description'> & DictOptions;
+
+type SimpleInlineDefinition = DictBase &
+    Partial<Pick<DictionaryDefinitionInline, 'words' | 'flagWords' | 'ignoreWords' | 'suggestWords'>>;
+
+type DictionaryDefinition = (DictBase & Pick<DictionaryDefinitionPreferred, 'path'>) | SimpleInlineDefinition;
 
 export type CSpellOptions = Pick<
     CSpellSettings,
     // | 'languageSettings'
     // | 'overrides'
     | 'allowCompoundWords'
+    | 'caseSensitive'
     | 'dictionaries'
     | 'enabled'
     | 'flagWords'

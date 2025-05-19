@@ -143,6 +143,7 @@ describe('docValidator', () => {
         ${fix('sample-with-directives-errors.ts')}       | ${1}                 | ${['disable-prev', 'ignored', 'world', 'enable-line']}                                                                                                                                        | ${undefined}
         ${tFix('issues/issue-4811/#local/README.md')}    | ${undefined}         | ${[]}                                                                                                                                                                                         | ${undefined}
         ${tFix('issues/issue-4811/#local/version@2.md')} | ${undefined}         | ${['marrkdown']}                                                                                                                                                                              | ${undefined /* cspell:disable-line */}
+        ${fixDict('supportNonStrictSearches/test.txt')}  | ${undefined}         | ${['paris']}                                                                                                                                                                                  | ${undefined /* cspell:disable-line */}
     `(
         'checkDocument $filename $maxDuplicateProblems',
         async ({ filename, maxDuplicateProblems, expectedIssues, expectedRawIssues }) => {
