@@ -1,3 +1,7 @@
-# JSON Support
+# Example `supportNonStrictSearches`
 
-This directory contains sample to test JSON support.
+This contains an example on how to use:
+
+- `supportNonStrictSearches`
+- `defineCSpellConfig`
+- `defineCSpellPluginOptions`
