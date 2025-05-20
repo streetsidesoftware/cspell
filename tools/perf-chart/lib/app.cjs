@@ -25,9 +25,9 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
   mod
 ));
 
-// ../../node_modules/.pnpm/commander@13.1.0/node_modules/commander/lib/error.js
+// ../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/lib/error.js
 var require_error = __commonJS({
-  "../../node_modules/.pnpm/commander@13.1.0/node_modules/commander/lib/error.js"(exports2) {
+  "../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/lib/error.js"(exports2) {
     var CommanderError2 = class extends Error {
       /**
        * Constructs the CommanderError class
@@ -60,9 +60,9 @@ var require_error = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/commander@13.1.0/node_modules/commander/lib/argument.js
+// ../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/lib/argument.js
 var require_argument = __commonJS({
-  "../../node_modules/.pnpm/commander@13.1.0/node_modules/commander/lib/argument.js"(exports2) {
+  "../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/lib/argument.js"(exports2) {
     var { InvalidArgumentError: InvalidArgumentError2 } = require_error();
     var Argument2 = class {
       /**
@@ -187,9 +187,9 @@ var require_argument = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/commander@13.1.0/node_modules/commander/lib/help.js
+// ../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/lib/help.js
 var require_help = __commonJS({
-  "../../node_modules/.pnpm/commander@13.1.0/node_modules/commander/lib/help.js"(exports2) {
+  "../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/lib/help.js"(exports2) {
     var { humanReadableArgName } = require_argument();
     var Help2 = class {
       constructor() {
@@ -466,7 +466,11 @@ var require_help = __commonJS({
           extraInfo.push(`env: ${option.envVar}`);
         }
         if (extraInfo.length > 0) {
-          return `${option.description} (${extraInfo.join(", ")})`;
+          const extraDescription = `(${extraInfo.join(", ")})`;
+          if (option.description) {
+            return `${option.description} ${extraDescription}`;
+          }
+          return extraDescription;
         }
         return option.description;
       }
@@ -497,6 +501,41 @@ var require_help = __commonJS({
           return extraDescription;
         }
         return argument.description;
+      }
+      /**
+       * Format a list of items, given a heading and an array of formatted items.
+       *
+       * @param {string} heading
+       * @param {string[]} items
+       * @param {Help} helper
+       * @returns string[]
+       */
+      formatItemList(heading, items, helper) {
+        if (items.length === 0) return [];
+        return [helper.styleTitle(heading), ...items, ""];
+      }
+      /**
+       * Group items by their help group heading.
+       *
+       * @param {Command[] | Option[]} unsortedItems
+       * @param {Command[] | Option[]} visibleItems
+       * @param {Function} getGroup
+       * @returns {Map<string, Command[] | Option[]>}
+       */
+      groupItems(unsortedItems, visibleItems, getGroup) {
+        const result = /* @__PURE__ */ new Map();
+        unsortedItems.forEach((item) => {
+          const group = getGroup(item);
+          if (!result.has(group)) result.set(group, []);
+        });
+        visibleItems.forEach((item) => {
+          const group = getGroup(item);
+          if (!result.has(group)) {
+            result.set(group, []);
+          }
+          result.get(group).push(item);
+        });
+        return result;
       }
       /**
        * Generate the built-in help text.
@@ -531,26 +570,23 @@ var require_help = __commonJS({
             helper.styleArgumentDescription(helper.argumentDescription(argument))
           );
         });
-        if (argumentList.length > 0) {
-          output = output.concat([
-            helper.styleTitle("Arguments:"),
-            ...argumentList,
-            ""
-          ]);
-        }
-        const optionList = helper.visibleOptions(cmd).map((option) => {
-          return callFormatItem(
-            helper.styleOptionTerm(helper.optionTerm(option)),
-            helper.styleOptionDescription(helper.optionDescription(option))
-          );
+        output = output.concat(
+          this.formatItemList("Arguments:", argumentList, helper)
+        );
+        const optionGroups = this.groupItems(
+          cmd.options,
+          helper.visibleOptions(cmd),
+          (option) => option.helpGroupHeading ?? "Options:"
+        );
+        optionGroups.forEach((options, group) => {
+          const optionList = options.map((option) => {
+            return callFormatItem(
+              helper.styleOptionTerm(helper.optionTerm(option)),
+              helper.styleOptionDescription(helper.optionDescription(option))
+            );
+          });
+          output = output.concat(this.formatItemList(group, optionList, helper));
         });
-        if (optionList.length > 0) {
-          output = output.concat([
-            helper.styleTitle("Options:"),
-            ...optionList,
-            ""
-          ]);
-        }
         if (helper.showGlobalOptions) {
           const globalOptionList = helper.visibleGlobalOptions(cmd).map((option) => {
             return callFormatItem(
@@ -558,27 +594,24 @@ var require_help = __commonJS({
               helper.styleOptionDescription(helper.optionDescription(option))
             );
           });
-          if (globalOptionList.length > 0) {
-            output = output.concat([
-              helper.styleTitle("Global Options:"),
-              ...globalOptionList,
-              ""
-            ]);
-          }
-        }
-        const commandList = helper.visibleCommands(cmd).map((cmd2) => {
-          return callFormatItem(
-            helper.styleSubcommandTerm(helper.subcommandTerm(cmd2)),
-            helper.styleSubcommandDescription(helper.subcommandDescription(cmd2))
+          output = output.concat(
+            this.formatItemList("Global Options:", globalOptionList, helper)
           );
-        });
-        if (commandList.length > 0) {
-          output = output.concat([
-            helper.styleTitle("Commands:"),
-            ...commandList,
-            ""
-          ]);
         }
+        const commandGroups = this.groupItems(
+          cmd.commands,
+          helper.visibleCommands(cmd),
+          (sub2) => sub2.helpGroup() || "Commands:"
+        );
+        commandGroups.forEach((commands, group) => {
+          const commandList = commands.map((sub2) => {
+            return callFormatItem(
+              helper.styleSubcommandTerm(helper.subcommandTerm(sub2)),
+              helper.styleSubcommandDescription(helper.subcommandDescription(sub2))
+            );
+          });
+          output = output.concat(this.formatItemList(group, commandList, helper));
+        });
         return output.join("\n");
       }
       /**
@@ -756,9 +789,9 @@ ${itemIndentStr}`);
   }
 });
 
-// ../../node_modules/.pnpm/commander@13.1.0/node_modules/commander/lib/option.js
+// ../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/lib/option.js
 var require_option = __commonJS({
-  "../../node_modules/.pnpm/commander@13.1.0/node_modules/commander/lib/option.js"(exports2) {
+  "../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/lib/option.js"(exports2) {
     var { InvalidArgumentError: InvalidArgumentError2 } = require_error();
     var Option2 = class {
       /**
@@ -790,6 +823,7 @@ var require_option = __commonJS({
         this.argChoices = void 0;
         this.conflictsWith = [];
         this.implied = void 0;
+        this.helpGroupHeading = void 0;
       }
       /**
        * Set the default value, and optionally supply the description to be displayed in the help.
@@ -951,6 +985,16 @@ var require_option = __commonJS({
         return camelcase(this.name());
       }
       /**
+       * Set the help group heading.
+       *
+       * @param {string} heading
+       * @return {Option}
+       */
+      helpGroup(heading) {
+        this.helpGroupHeading = heading;
+        return this;
+      }
+      /**
        * Check if `arg` matches the short or long flag.
        *
        * @param {string} arg
@@ -1057,9 +1101,9 @@ var require_option = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/commander@13.1.0/node_modules/commander/lib/suggestSimilar.js
+// ../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/lib/suggestSimilar.js
 var require_suggestSimilar = __commonJS({
-  "../../node_modules/.pnpm/commander@13.1.0/node_modules/commander/lib/suggestSimilar.js"(exports2) {
+  "../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/lib/suggestSimilar.js"(exports2) {
     var maxDistance = 3;
     function editDistance(a, b) {
       if (Math.abs(a.length - b.length) > maxDistance)
@@ -1137,9 +1181,9 @@ var require_suggestSimilar = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/commander@13.1.0/node_modules/commander/lib/command.js
+// ../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/lib/command.js
 var require_command = __commonJS({
-  "../../node_modules/.pnpm/commander@13.1.0/node_modules/commander/lib/command.js"(exports2) {
+  "../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/lib/command.js"(exports2) {
     var EventEmitter = require("node:events").EventEmitter;
     var childProcess = require("node:child_process");
     var path = require("node:path");
@@ -1205,6 +1249,9 @@ var require_command = __commonJS({
         this._addImplicitHelpCommand = void 0;
         this._helpCommand = void 0;
         this._helpConfiguration = {};
+        this._helpGroupHeading = void 0;
+        this._defaultCommandGroup = void 0;
+        this._defaultOptionGroup = void 0;
       }
       /**
        * Copy settings that are useful to have in common across root command and subcommands.
@@ -1344,7 +1391,11 @@ var require_command = __commonJS({
        */
       configureOutput(configuration) {
         if (configuration === void 0) return this._outputConfiguration;
-        Object.assign(this._outputConfiguration, configuration);
+        this._outputConfiguration = Object.assign(
+          {},
+          this._outputConfiguration,
+          configuration
+        );
         return this;
       }
       /**
@@ -1415,16 +1466,16 @@ var require_command = __commonJS({
        *
        * @param {string} name
        * @param {string} [description]
-       * @param {(Function|*)} [fn] - custom argument processing function
+       * @param {(Function|*)} [parseArg] - custom argument processing function or default value
        * @param {*} [defaultValue]
        * @return {Command} `this` command for chaining
        */
-      argument(name, description, fn, defaultValue) {
+      argument(name, description, parseArg, defaultValue) {
         const argument = this.createArgument(name, description);
-        if (typeof fn === "function") {
-          argument.default(defaultValue).argParser(fn);
+        if (typeof parseArg === "function") {
+          argument.default(defaultValue).argParser(parseArg);
         } else {
-          argument.default(fn);
+          argument.default(parseArg);
         }
         this.addArgument(argument);
         return this;
@@ -1483,10 +1534,13 @@ var require_command = __commonJS({
       helpCommand(enableOrNameAndArgs, description) {
         if (typeof enableOrNameAndArgs === "boolean") {
           this._addImplicitHelpCommand = enableOrNameAndArgs;
+          if (enableOrNameAndArgs && this._defaultCommandGroup) {
+            this._initCommandGroup(this._getHelpCommand());
+          }
           return this;
         }
-        enableOrNameAndArgs = enableOrNameAndArgs ?? "help [command]";
-        const [, helpName, helpArgs] = enableOrNameAndArgs.match(/([^ ]+) *(.*)/);
+        const nameAndArgs = enableOrNameAndArgs ?? "help [command]";
+        const [, helpName, helpArgs] = nameAndArgs.match(/([^ ]+) *(.*)/);
         const helpDescription = description ?? "display help for command";
         const helpCommand = this.createCommand(helpName);
         helpCommand.helpOption(false);
@@ -1494,6 +1548,7 @@ var require_command = __commonJS({
         if (helpDescription) helpCommand.description(helpDescription);
         this._addImplicitHelpCommand = true;
         this._helpCommand = helpCommand;
+        if (enableOrNameAndArgs || description) this._initCommandGroup(helpCommand);
         return this;
       }
       /**
@@ -1510,6 +1565,7 @@ var require_command = __commonJS({
         }
         this._addImplicitHelpCommand = true;
         this._helpCommand = helpCommand;
+        this._initCommandGroup(helpCommand);
         return this;
       }
       /**
@@ -1658,6 +1714,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
           throw new Error(`Cannot add option '${option.flags}'${this._name && ` to command '${this._name}'`} due to conflicting flag '${matchingFlag}'
 -  already used by option '${matchingOption.flags}'`);
         }
+        this._initOptionGroup(option);
         this.options.push(option);
       }
       /**
@@ -1681,6 +1738,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
             `cannot add command '${newCmd}' as already have command '${existingCmd}'`
           );
         }
+        this._initCommandGroup(command);
         this.commands.push(command);
       }
       /**
@@ -2592,6 +2650,12 @@ Expecting one of '${allowedValues.join("', '")}'`);
         function maybeOption(arg) {
           return arg.length > 1 && arg[0] === "-";
         }
+        const negativeNumberArg = (arg) => {
+          if (!/^-\d*\.?\d+(e[+-]?\d+)?$/.test(arg)) return false;
+          return !this._getCommandAndAncestors().some(
+            (cmd) => cmd.options.map((opt) => opt.short).some((short) => /^-\d$/.test(short))
+          );
+        };
         let activeVariadicOption = null;
         while (args.length) {
           const arg = args.shift();
@@ -2600,7 +2664,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
             dest.push(...args);
             break;
           }
-          if (activeVariadicOption && !maybeOption(arg)) {
+          if (activeVariadicOption && (!maybeOption(arg) || negativeNumberArg(arg))) {
             this.emit(`option:${activeVariadicOption.name()}`, arg);
             continue;
           }
@@ -2614,7 +2678,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
                 this.emit(`option:${option.name()}`, value);
               } else if (option.optional) {
                 let value = null;
-                if (args.length > 0 && !maybeOption(args[0])) {
+                if (args.length > 0 && (!maybeOption(args[0]) || negativeNumberArg(args[0]))) {
                   value = args.shift();
                 }
                 this.emit(`option:${option.name()}`, value);
@@ -2645,7 +2709,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
               continue;
             }
           }
-          if (maybeOption(arg)) {
+          if (dest === operands && maybeOption(arg) && !(this.commands.length === 0 && negativeNumberArg(arg))) {
             dest = unknown;
           }
           if ((this._enablePositionalOptions || this._passThroughOptions) && operands.length === 0 && unknown.length === 0) {
@@ -3018,6 +3082,69 @@ Expecting one of '${allowedValues.join("', '")}'`);
         return this;
       }
       /**
+       * Set/get the help group heading for this subcommand in parent command's help.
+       *
+       * @param {string} [heading]
+       * @return {Command | string}
+       */
+      helpGroup(heading) {
+        if (heading === void 0) return this._helpGroupHeading ?? "";
+        this._helpGroupHeading = heading;
+        return this;
+      }
+      /**
+       * Set/get the default help group heading for subcommands added to this command.
+       * (This does not override a group set directly on the subcommand using .helpGroup().)
+       *
+       * @example
+       * program.commandsGroup('Development Commands:);
+       * program.command('watch')...
+       * program.command('lint')...
+       * ...
+       *
+       * @param {string} [heading]
+       * @returns {Command | string}
+       */
+      commandsGroup(heading) {
+        if (heading === void 0) return this._defaultCommandGroup ?? "";
+        this._defaultCommandGroup = heading;
+        return this;
+      }
+      /**
+       * Set/get the default help group heading for options added to this command.
+       * (This does not override a group set directly on the option using .helpGroup().)
+       *
+       * @example
+       * program
+       *   .optionsGroup('Development Options:')
+       *   .option('-d, --debug', 'output extra debugging')
+       *   .option('-p, --profile', 'output profiling information')
+       *
+       * @param {string} [heading]
+       * @returns {Command | string}
+       */
+      optionsGroup(heading) {
+        if (heading === void 0) return this._defaultOptionGroup ?? "";
+        this._defaultOptionGroup = heading;
+        return this;
+      }
+      /**
+       * @param {Option} option
+       * @private
+       */
+      _initOptionGroup(option) {
+        if (this._defaultOptionGroup && !option.helpGroupHeading)
+          option.helpGroup(this._defaultOptionGroup);
+      }
+      /**
+       * @param {Command} cmd
+       * @private
+       */
+      _initCommandGroup(cmd) {
+        if (this._defaultCommandGroup && !cmd.helpGroup())
+          cmd.helpGroup(this._defaultCommandGroup);
+      }
+      /**
        * Set the name of the command from script filename, such as process.argv[1],
        * or require.main.filename, or __filename.
        *
@@ -3151,15 +3278,20 @@ Expecting one of '${allowedValues.join("', '")}'`);
       helpOption(flags, description) {
         if (typeof flags === "boolean") {
           if (flags) {
-            this._helpOption = this._helpOption ?? void 0;
+            if (this._helpOption === null) this._helpOption = void 0;
+            if (this._defaultOptionGroup) {
+              this._initOptionGroup(this._getHelpOption());
+            }
           } else {
             this._helpOption = null;
           }
           return this;
         }
-        flags = flags ?? "-h, --help";
-        description = description ?? "display help for command";
-        this._helpOption = this.createOption(flags, description);
+        this._helpOption = this.createOption(
+          flags ?? "-h, --help",
+          description ?? "display help for command"
+        );
+        if (flags || description) this._initOptionGroup(this._helpOption);
         return this;
       }
       /**
@@ -3184,6 +3316,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
        */
       addHelpOption(option) {
         this._helpOption = option;
+        this._initOptionGroup(option);
         return this;
       }
       /**
@@ -3296,9 +3429,9 @@ Expecting one of '${allowedValues.join("', '")}'`);
   }
 });
 
-// ../../node_modules/.pnpm/commander@13.1.0/node_modules/commander/index.js
+// ../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/index.js
 var require_commander = __commonJS({
-  "../../node_modules/.pnpm/commander@13.1.0/node_modules/commander/index.js"(exports2) {
+  "../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/index.js"(exports2) {
     var { Argument: Argument2 } = require_argument();
     var { Command: Command2 } = require_command();
     var { CommanderError: CommanderError2, InvalidArgumentError: InvalidArgumentError2 } = require_error();
@@ -3318,7 +3451,7 @@ var require_commander = __commonJS({
   }
 });
 
-// ../../node_modules/.pnpm/commander@13.1.0/node_modules/commander/esm.mjs
+// ../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/esm.mjs
 var import_index = __toESM(require_commander(), 1);
 var {
   program,
