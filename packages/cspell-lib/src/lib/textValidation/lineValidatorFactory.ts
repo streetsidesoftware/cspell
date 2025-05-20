@@ -390,7 +390,7 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
                             return { ...issue, suggestionsEx: extendedSugs };
                         }
 
-                        return null;
+                        return undefined;
                     }).filter(issue => !!issue);
                     
                     return withSugs;
