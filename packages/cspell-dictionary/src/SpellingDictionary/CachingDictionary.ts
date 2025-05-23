@@ -1,6 +1,7 @@
 import type { CacheStats } from '../util/AutoCache.js';
 import { autoCache, extractStats } from '../util/AutoCache.js';
 import type { PreferredSuggestion, SearchOptions, SpellingDictionary } from './SpellingDictionary.js';
+import type { SuggestOptionsRO } from './SuggestOptions.js';
 import type { SpellingDictionaryCollection } from './SpellingDictionaryCollection.js';
 import { canonicalSearchOptions } from './SpellingDictionaryMethods.js';
 
@@ -31,6 +32,7 @@ export interface CachingDictionary {
     isForbidden(word: string): boolean;
     stats(): CallStats;
     getPreferredSuggestions(word: string): PreferredSuggestion[] | undefined;
+    suggest(word: string, suggestOptions?: SuggestOptionsRO): import('cspell-trie-lib').SuggestionResult[];
 }
 
 interface LogEntryBase extends SearchOptions {
@@ -79,6 +81,7 @@ class CachedDict implements CachingDictionary {
         (word: string) => this.dict.getPreferredSuggestions?.(word),
         DefaultAutoCacheSize,
     );
+    readonly suggest = (word: string, suggestOptions?: SuggestOptionsRO) => this.dict.suggest(word, suggestOptions);
 
     stats(): CallStats {
         return {

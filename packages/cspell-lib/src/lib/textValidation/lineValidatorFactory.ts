@@ -58,6 +58,7 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
         ignoreCase = true,
         ignoreRandomStrings = defaultCSpellSettings.ignoreRandomStrings,
         minRandomLength = defaultCSpellSettings.minRandomLength,
+        unknownWords = 'report',
     } = options;
     const hasWordOptions: SearchOptions = {
         ignoreCase,
@@ -314,6 +315,11 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
         }
 
         function _checkPossibleWords(possibleWord: TextOffsetRO): ValidationIssue[] {
+            // If unknown words should be completely ignored, return empty array
+            if (unknownWords === 'ignore-all') {
+                return [];
+            }
+
             const flagged = checkForFlaggedWord(possibleWord);
             if (flagged) return [flagged];
 
@@ -357,6 +363,39 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
                     nonMatching.map((w) => ({ ...w, line: lineSegment.line })).map(annotateIsFlagged),
                     hexSequences,
                 );
+                
+                // In ignore mode, only report words with simple fixes
+                if (unknownWords === 'ignore') {
+                    // Keep only words that have suggestions with small edit distance
+                    const withSugs = filtered.map((issue) => {
+                        const sugs = dictCol.suggest(issue.text, {
+                            numSuggestions: 1,
+                            compoundMethod: 0,
+                            includeTies: false,
+                            ignoreCase,
+                            timeout: 100,
+                            numChanges: 1, // Only consider very simple changes (1 edit distance)
+                        });
+                        
+                        // Only add words with simple fixes (1 edit distance) and at least one auto-fixable.
+                        if (sugs.length > 0 && sugs.some((sug) => sug.isPreferred)) {
+                            const extendedSugs = sugs.map(sug => {
+                                return {
+                                    word: sug.word,
+                                    ...(sug.isPreferred === true ? { isPreferred: true } : {}),
+                                    ...(typeof sug.cost === 'number' ? { cost: sug.cost } : {})
+                                };
+                            });
+
+                            return { ...issue, suggestionsEx: extendedSugs };
+                        }
+
+                        return undefined;
+                    }).filter(issue => !!issue);
+                    
+                    return withSugs;
+                }
+                
                 if (filtered.length < mismatches.length) {
                     return filtered;
                 }
