@@ -332,6 +332,7 @@ export interface UnknownWordsConfiguration {
      * - `report-flagged` - Report unknown words that are flagged.
      *
      * @default "report-all"
+     * @since 9.0.3
      */
     unknownWords?: UnknownWordsOptions | undefined;
 }

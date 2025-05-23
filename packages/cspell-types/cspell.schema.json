@@ -457,7 +457,8 @@
         }
       ],
       "description": "Inline Dictionary Definitions",
-      "markdownDescription": "Inline Dictionary Definitions"
+      "markdownDescription": "Inline Dictionary Definitions",
+      "since": "6.23.0"
     },
     "DictionaryDefinitionInlineFlagWords": {
       "additionalProperties": false,
@@ -1347,7 +1348,8 @@
           "$ref": "#/definitions/UnknownWordsOptions",
           "default": "report-all",
           "description": "Controls how unknown words are handled.\n\n- `report-all` - Report all unknown words (default behavior)\n- `report-simple` - Report unknown words that have simple spelling errors, typos, and flagged words.\n- `report-common-typos` - Report unknown words that are common typos and flagged words.\n- `report-flagged` - Report unknown words that are flagged.",
-          "markdownDescription": "Controls how unknown words are handled.\n\n- `report-all` - Report all unknown words (default behavior)\n- `report-simple` - Report unknown words that have simple spelling errors, typos, and flagged words.\n- `report-common-typos` - Report unknown words that are common typos and flagged words.\n- `report-flagged` - Report unknown words that are flagged."
+          "markdownDescription": "Controls how unknown words are handled.\n\n- `report-all` - Report all unknown words (default behavior)\n- `report-simple` - Report unknown words that have simple spelling errors, typos, and flagged words.\n- `report-common-typos` - Report unknown words that are common typos and flagged words.\n- `report-flagged` - Report unknown words that are flagged.",
+          "since": "9.0.3"
         },
         "words": {
           "description": "List of words to be considered correct.",
@@ -1440,6 +1442,7 @@
           },
           "description": "Enable / Disable checking file types (languageIds).\n\nThis setting replaces:  {@link  Settings.enabledLanguageIds }  and  {@link  Settings.enableFiletypes } .\n\nA Value of:\n- `true` - enable checking for the file type\n- `false` - disable checking for the file type\n\nA file type of `*` is a wildcard that enables all file types.\n\n**Example: enable all file types**\n\n| File Type | Enabled | Comment | | --------- | ------- | ------- | | `*`       | `true`  | Enable all file types. | | `json`    | `false` | Disable checking for json files. |",
           "markdownDescription": "Enable / Disable checking file types (languageIds).\n\nThis setting replaces:  {@link  Settings.enabledLanguageIds }  and  {@link  Settings.enableFiletypes } .\n\nA Value of:\n- `true` - enable checking for the file type\n- `false` - disable checking for the file type\n\nA file type of `*` is a wildcard that enables all file types.\n\n**Example: enable all file types**\n\n| File Type | Enabled | Comment |\n| --------- | ------- | ------- |\n| `*`       | `true`  | Enable all file types. |\n| `json`    | `false` | Disable checking for json files. |",
+          "since": "8.8.1",
           "title": "Enabled File Types to Check",
           "type": "object"
         },
@@ -1616,7 +1619,8 @@
           "$ref": "#/definitions/UnknownWordsOptions",
           "default": "report-all",
           "description": "Controls how unknown words are handled.\n\n- `report-all` - Report all unknown words (default behavior)\n- `report-simple` - Report unknown words that have simple spelling errors, typos, and flagged words.\n- `report-common-typos` - Report unknown words that are common typos and flagged words.\n- `report-flagged` - Report unknown words that are flagged.",
-          "markdownDescription": "Controls how unknown words are handled.\n\n- `report-all` - Report all unknown words (default behavior)\n- `report-simple` - Report unknown words that have simple spelling errors, typos, and flagged words.\n- `report-common-typos` - Report unknown words that are common typos and flagged words.\n- `report-flagged` - Report unknown words that are flagged."
+          "markdownDescription": "Controls how unknown words are handled.\n\n- `report-all` - Report all unknown words (default behavior)\n- `report-simple` - Report unknown words that have simple spelling errors, typos, and flagged words.\n- `report-common-typos` - Report unknown words that are common typos and flagged words.\n- `report-flagged` - Report unknown words that are flagged.",
+          "since": "9.0.3"
         },
         "usePnP": {
           "default": false,
@@ -1973,6 +1977,7 @@
       },
       "description": "Enable / Disable checking file types (languageIds).\n\nThis setting replaces:  {@link  Settings.enabledLanguageIds }  and  {@link  Settings.enableFiletypes } .\n\nA Value of:\n- `true` - enable checking for the file type\n- `false` - disable checking for the file type\n\nA file type of `*` is a wildcard that enables all file types.\n\n**Example: enable all file types**\n\n| File Type | Enabled | Comment | | --------- | ------- | ------- | | `*`       | `true`  | Enable all file types. | | `json`    | `false` | Disable checking for json files. |",
       "markdownDescription": "Enable / Disable checking file types (languageIds).\n\nThis setting replaces:  {@link  Settings.enabledLanguageIds }  and  {@link  Settings.enableFiletypes } .\n\nA Value of:\n- `true` - enable checking for the file type\n- `false` - disable checking for the file type\n\nA file type of `*` is a wildcard that enables all file types.\n\n**Example: enable all file types**\n\n| File Type | Enabled | Comment |\n| --------- | ------- | ------- |\n| `*`       | `true`  | Enable all file types. |\n| `json`    | `false` | Disable checking for json files. |",
+      "since": "8.8.1",
       "title": "Enabled File Types to Check",
       "type": "object"
     },
@@ -1995,7 +2000,8 @@
     "features": {
       "$ref": "#/definitions/Features",
       "description": "Configure CSpell features.",
-      "markdownDescription": "Configure CSpell features."
+      "markdownDescription": "Configure CSpell features.",
+      "since": "5.16.0"
     },
     "files": {
       "description": "Glob patterns of files to be checked.\n\nGlob patterns are relative to the `globRoot` of the configuration file that defines them.",
@@ -2240,7 +2246,8 @@
       "$ref": "#/definitions/UnknownWordsOptions",
       "default": "report-all",
       "description": "Controls how unknown words are handled.\n\n- `report-all` - Report all unknown words (default behavior)\n- `report-simple` - Report unknown words that have simple spelling errors, typos, and flagged words.\n- `report-common-typos` - Report unknown words that are common typos and flagged words.\n- `report-flagged` - Report unknown words that are flagged.",
-      "markdownDescription": "Controls how unknown words are handled.\n\n- `report-all` - Report all unknown words (default behavior)\n- `report-simple` - Report unknown words that have simple spelling errors, typos, and flagged words.\n- `report-common-typos` - Report unknown words that are common typos and flagged words.\n- `report-flagged` - Report unknown words that are flagged."
+      "markdownDescription": "Controls how unknown words are handled.\n\n- `report-all` - Report all unknown words (default behavior)\n- `report-simple` - Report unknown words that have simple spelling errors, typos, and flagged words.\n- `report-common-typos` - Report unknown words that are common typos and flagged words.\n- `report-flagged` - Report unknown words that are flagged.",
+      "since": "9.0.3"
     },
     "useGitignore": {
       "default": false,

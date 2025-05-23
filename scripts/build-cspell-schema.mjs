@@ -52,7 +52,7 @@ async function run() {
         tsconfig: path.join(typesDir, './tsconfig.json'),
         type: 'CSpellSettings',
         topRef: false,
-        extraTags: ['scope', 'deprecated', 'deprecationMessage'],
+        extraTags: ['scope', 'deprecated', 'deprecationMessage', 'since'],
         skipTypeCheck: true,
     };
 
