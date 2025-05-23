@@ -281,7 +281,10 @@ export interface Settings extends ReportingConfiguration, BaseSetting, PnPSettin
     loadDefaultConfiguration?: boolean;
 }
 
-export interface ReportingConfiguration extends ReporterConfigurationBase, SuggestionsConfiguration, UnknownWordsConfiguration {}
+export interface ReportingConfiguration
+    extends ReporterConfigurationBase,
+        SuggestionsConfiguration,
+        UnknownWordsConfiguration {}
 
 export interface SuggestionsConfiguration {
     /**
@@ -313,14 +316,14 @@ export interface SuggestionsConfiguration {
 export interface UnknownWordsConfiguration {
     /**
      * Controls how unknown words are handled.
-     * 
+     *
      * - `report` - Report all unknown words (default behavior)
      * - `ignore` - Ignore most unknown words, but report those with simple fixes
      * - `ignore-all` - Ignore all unknown words
-     * 
+     *
      * @default "report"
      */
-    unknownWords?: "report" | "ignore" | "ignore-all";
+    unknownWords?: 'report' | 'ignore' | 'ignore-all';
 }
 
 /**

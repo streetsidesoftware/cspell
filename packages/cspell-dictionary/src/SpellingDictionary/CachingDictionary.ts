@@ -1,9 +1,9 @@
 import type { CacheStats } from '../util/AutoCache.js';
 import { autoCache, extractStats } from '../util/AutoCache.js';
 import type { PreferredSuggestion, SearchOptions, SpellingDictionary } from './SpellingDictionary.js';
-import type { SuggestOptionsRO } from './SuggestOptions.js';
 import type { SpellingDictionaryCollection } from './SpellingDictionaryCollection.js';
 import { canonicalSearchOptions } from './SpellingDictionaryMethods.js';
+import type { SuggestOptionsRO } from './SuggestOptions.js';
 
 interface CallStats {
     name: string;
