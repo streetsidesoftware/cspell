@@ -281,7 +281,10 @@ export interface Settings extends ReportingConfiguration, BaseSetting, PnPSettin
     loadDefaultConfiguration?: boolean;
 }
 
-export interface ReportingConfiguration extends ReporterConfigurationBase, SuggestionsConfiguration, UnknownWordsConfiguration {}
+export interface ReportingConfiguration
+    extends ReporterConfigurationBase,
+        SuggestionsConfiguration,
+        UnknownWordsConfiguration {}
 
 export interface SuggestionsConfiguration {
     /**
@@ -310,17 +313,27 @@ export interface SuggestionsConfiguration {
     suggestionNumChanges?: number;
 }
 
+export type UnknownWordsOptions = 'report-all' | 'report-simple' | 'report-common-typos' | 'report-flagged';
+
+export const unknownWordsOptions = {
+    ReportAll: 'report-all',
+    ReportSimple: 'report-simple',
+    ReportCommonTypos: 'report-common-typos',
+    ReportFlagged: 'report-flagged',
+} as const;
+
 export interface UnknownWordsConfiguration {
     /**
      * Controls how unknown words are handled.
-     * 
-     * - `report` - Report all unknown words (default behavior)
-     * - `ignore` - Ignore most unknown words, but report those with simple fixes
-     * - `ignore-all` - Ignore all unknown words
-     * 
-     * @default "report"
+     *
+     * - `report-all` - Report all unknown words (default behavior)
+     * - `report-simple` - Report unknown words that have simple spelling errors, typos, and flagged words.
+     * - `report-common-typos` - Report unknown words that are common typos and flagged words.
+     * - `report-flagged` - Report unknown words that are flagged.
+     *
+     * @default "report-all"
      */
-    unknownWords?: "report" | "ignore" | "ignore-all";
+    unknownWords?: UnknownWordsOptions | undefined;
 }
 
 /**
@@ -464,7 +477,7 @@ export interface OverrideFilterFields {
     filename: Glob | Glob[];
 }
 
-export interface BaseSetting extends InlineDictionary, ExperimentalBaseSettings {
+export interface BaseSetting extends InlineDictionary, ExperimentalBaseSettings, UnknownWordsConfiguration {
     /** Optional identifier. */
     id?: string;
 

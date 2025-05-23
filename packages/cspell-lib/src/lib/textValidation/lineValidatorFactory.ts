@@ -2,7 +2,7 @@ import assert from 'node:assert';
 
 import { opConcatMap, opFilter, pipe } from '@cspell/cspell-pipe/sync';
 import type { ParsedText } from '@cspell/cspell-types';
-import { defaultCSpellSettings } from '@cspell/cspell-types';
+import { defaultCSpellSettings, unknownWordsOptions } from '@cspell/cspell-types';
 import type { CachingDictionary, SearchOptions, SpellingDictionary } from 'cspell-dictionary';
 import { createCachingDictionary } from 'cspell-dictionary';
 
@@ -58,7 +58,7 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
         ignoreCase = true,
         ignoreRandomStrings = defaultCSpellSettings.ignoreRandomStrings,
         minRandomLength = defaultCSpellSettings.minRandomLength,
-        unknownWords = 'report',
+        unknownWords = unknownWordsOptions.ReportAll,
     } = options;
     const hasWordOptions: SearchOptions = {
         ignoreCase,
@@ -114,8 +114,20 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
         return calcIgnored(getWordInfo(word));
     }
 
-    function getSuggestions(word: string) {
+    function getPreferredSuggestions(word: string) {
         return dictCol.getPreferredSuggestions(word);
+    }
+
+    function hasSimpleSuggestions(word: string): boolean {
+        const sugs = dictCol.suggest(word, {
+            numSuggestions: 1,
+            compoundMethod: 0,
+            includeTies: false,
+            ignoreCase,
+            timeout: 100,
+            numChanges: 1, // Only consider very simple changes (1 edit distance)
+        });
+        return !!sugs.length;
     }
 
     function isWordFlagged(wo: TextOffsetRO): boolean {
@@ -128,10 +140,17 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
     }
 
     function annotateIssue(issue: ValidationIssue): ValidationIssue {
-        const sugs = getSuggestions(issue.text);
-        if (sugs && sugs.length) {
-            issue.suggestionsEx = sugs;
+        const sugs = getPreferredSuggestions(issue.text);
+        if (!sugs?.length) {
+            issue.hasPreferredSuggestions = sugs !== undefined ? false : undefined;
+            if (unknownWords === unknownWordsOptions.ReportSimple) {
+                issue.hasSimpleSuggestions = hasSimpleSuggestions(issue.text);
+            }
+            return issue;
         }
+        issue.suggestionsEx = sugs;
+        issue.hasPreferredSuggestions = true;
+        issue.hasSimpleSuggestions = true;
         return issue;
     }
 
@@ -315,11 +334,6 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
         }
 
         function _checkPossibleWords(possibleWord: TextOffsetRO): ValidationIssue[] {
-            // If unknown words should be completely ignored, return empty array
-            if (unknownWords === 'ignore-all') {
-                return [];
-            }
-
             const flagged = checkForFlaggedWord(possibleWord);
             if (flagged) return [flagged];
 
@@ -336,7 +350,7 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
             }
             if (!mismatches.length) return mismatches;
             const hexSequences = !ignoreRandomStrings
-                ? []
+                ? undefined
                 : extractHexSequences(possibleWord.text, MIN_HEX_SEQUENCE_LENGTH)
                       .filter(
                           // Only consider hex sequences that are all upper case or all lower case and contain a `-` or a digit.
@@ -345,7 +359,7 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
                               /[\d-]/.test(w.text),
                       )
                       .map((w) => ((w.offset += possibleWord.offset), w));
-            if (hexSequences.length) {
+            if (hexSequences?.length) {
                 mismatches = filterExcludedTextOffsets(mismatches, hexSequences);
             }
             if (mismatches.length) {
@@ -363,39 +377,7 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
                     nonMatching.map((w) => ({ ...w, line: lineSegment.line })).map(annotateIsFlagged),
                     hexSequences,
                 );
-                
-                // In ignore mode, only report words with simple fixes
-                if (unknownWords === 'ignore') {
-                    // Keep only words that have suggestions with small edit distance
-                    const withSugs = filtered.map((issue) => {
-                        const sugs = dictCol.suggest(issue.text, {
-                            numSuggestions: 1,
-                            compoundMethod: 0,
-                            includeTies: false,
-                            ignoreCase,
-                            timeout: 100,
-                            numChanges: 1, // Only consider very simple changes (1 edit distance)
-                        });
-                        
-                        // Only add words with simple fixes (1 edit distance) and at least one auto-fixable.
-                        if (sugs.length > 0 && sugs.some((sug) => sug.isPreferred)) {
-                            const extendedSugs = sugs.map(sug => {
-                                return {
-                                    word: sug.word,
-                                    ...(sug.isPreferred === true ? { isPreferred: true } : {}),
-                                    ...(typeof sug.cost === 'number' ? { cost: sug.cost } : {})
-                                };
-                            });
 
-                            return { ...issue, suggestionsEx: extendedSugs };
-                        }
-
-                        return undefined;
-                    }).filter(issue => !!issue);
-                    
-                    return withSugs;
-                }
-                
                 if (filtered.length < mismatches.length) {
                     return filtered;
                 }
@@ -457,8 +439,8 @@ export function textValidatorFactory(dict: SpellingDictionary, options: Validati
     };
 }
 
-function filterExcludedTextOffsets(issues: ValidationIssue[], excluded: TextOffsetRO[]): ValidationIssue[] {
-    if (!excluded.length) return issues;
+function filterExcludedTextOffsets(issues: ValidationIssue[], excluded: TextOffsetRO[] | undefined): ValidationIssue[] {
+    if (!excluded?.length) return issues;
     const keep: ValidationIssue[] = [];
     let i = 0;
     let j = 0;

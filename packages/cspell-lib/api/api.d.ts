@@ -1,4 +1,4 @@
-import { Glob, AdvancedCSpellSettingsWithSourceTrace, DictionaryDefinitionPreferred, DictionaryDefinitionCustom, DictionaryDefinitionAugmented, DictionaryDefinitionInline, Parser, CSpellUserSettings, ImportFileRef, PnPSettings, CSpellSettingsWithSourceTrace, TextOffset, Issue, LocaleId, CSpellSettings, MappedText, ParsedText, TextDocumentOffset } from '@cspell/cspell-types';
+import { Glob, AdvancedCSpellSettingsWithSourceTrace, DictionaryDefinitionPreferred, DictionaryDefinitionCustom, DictionaryDefinitionAugmented, DictionaryDefinitionInline, Parser, CSpellUserSettings, ImportFileRef, PnPSettings, CSpellSettingsWithSourceTrace, TextOffset, Issue, LocaleId, CSpellSettings, MappedText, ReportingConfiguration, ParsedText, TextDocumentOffset } from '@cspell/cspell-types';
 export * from '@cspell/cspell-types';
 import * as cspell_io from 'cspell-io';
 import { VFileSystem } from 'cspell-io';
@@ -565,6 +565,19 @@ interface ValidationResult extends TextOffset, Pick<Issue, 'message' | 'issueTyp
 interface ValidationIssue extends ValidationResult {
     suggestions?: string[] | undefined;
     suggestionsEx?: ExtendedSuggestion[] | undefined;
+    /**
+     * `true` - if it has been determined if simple suggestions are available.
+     * `false` - if simple suggestions are NOT available.
+     * `undefined` - if it has not been determined.
+     */
+    hasSimpleSuggestions?: boolean | undefined;
+    /**
+     * This setting is used for common typo detection.
+     * `true` - if it has been determined if preferred suggestions are available.
+     * `false` - if preferred suggestions are NOT available.
+     * `undefined` - if it has not been determined.
+     */
+    hasPreferredSuggestions?: boolean | undefined;
 }
 
 type Href = string;
@@ -676,7 +689,7 @@ interface MatchRange {
 }
 
 type TextOffsetRO = Readonly<TextOffset>;
-interface ValidationOptions extends IncludeExcludeOptions {
+interface ValidationOptions extends IncludeExcludeOptions, ReportingConfiguration {
     maxNumberOfProblems?: number;
     maxDuplicateProblems?: number;
     minWordLength?: number;
@@ -686,8 +699,6 @@ interface ValidationOptions extends IncludeExcludeOptions {
     ignoreCase: boolean;
     ignoreRandomStrings?: boolean | undefined;
     minRandomLength?: number | undefined;
-    /** Controls how unknown words are handled */
-    unknownWords?: 'report' | 'ignore' | 'ignore-all';
 }
 interface IncludeExcludeOptions {
     ignoreRegExpList?: RegExp[];

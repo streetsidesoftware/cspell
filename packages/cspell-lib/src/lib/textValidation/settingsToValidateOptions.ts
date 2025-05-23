@@ -7,6 +7,7 @@ export function settingsToValidateOptions(settings: CSpellSettingsInternalFinali
         ignoreCase: !(settings.caseSensitive ?? false),
         ignoreRandomStrings: settings.ignoreRandomStrings,
         minRandomLength: settings.minRandomLength,
+        unknownWords: settings.unknownWords || 'report-all',
     };
     return opt;
 }

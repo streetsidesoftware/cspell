@@ -78,11 +78,14 @@ export type {
     Source,
     SuggestionsConfiguration,
     TrustLevel,
+    UnknownWordsConfiguration,
+    UnknownWordsOptions,
     Version,
     VersionLatest,
     VersionLegacy,
     WorkspaceTrustSettings,
 } from './CSpellSettingsDef.js';
+export { unknownWordsOptions } from './CSpellSettingsDef.js';
 export { defaultCSpellSettings } from './defaultConfigSettings.js';
 export { defineConfig } from './defineConfig.js';
 export type {

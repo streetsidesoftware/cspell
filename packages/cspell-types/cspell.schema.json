@@ -1343,6 +1343,12 @@
           "markdownDescription": "A list of suggested replacements for words.\nSuggested words provide a way to make preferred suggestions on word replacements.\nTo hint at a preferred change, but not to require it.\n\nFormat of `suggestWords`\n- Single suggestion (possible auto fix)\n    - `word: suggestion`\n    - `word->suggestion`\n- Multiple suggestions (not auto fixable)\n   - `word: first, second, third`\n   - `word->first, second, third`",
           "type": "array"
         },
+        "unknownWords": {
+          "$ref": "#/definitions/UnknownWordsOptions",
+          "default": "report-all",
+          "description": "Controls how unknown words are handled.\n\n- `report-all` - Report all unknown words (default behavior)\n- `report-simple` - Report unknown words that have simple spelling errors, typos, and flagged words.\n- `report-common-typos` - Report unknown words that are common typos and flagged words.\n- `report-flagged` - Report unknown words that are flagged.",
+          "markdownDescription": "Controls how unknown words are handled.\n\n- `report-all` - Report all unknown words (default behavior)\n- `report-simple` - Report unknown words that have simple spelling errors, typos, and flagged words.\n- `report-common-typos` - Report unknown words that are common typos and flagged words.\n- `report-flagged` - Report unknown words that are flagged."
+        },
         "words": {
           "description": "List of words to be considered correct.",
           "items": {
@@ -1607,15 +1613,10 @@
           "type": "number"
         },
         "unknownWords": {
-          "default": "report",
-          "description": "Controls how unknown words are handled.\n\n- `report` - Report all unknown words (default behavior)\n- `ignore` - Ignore most unknown words, but report those with simple fixes\n- `ignore-all` - Ignore all unknown words",
-          "enum": [
-            "report",
-            "ignore",
-            "ignore-all"
-          ],
-          "markdownDescription": "Controls how unknown words are handled.\n\n- `report` - Report all unknown words (default behavior)\n- `ignore` - Ignore most unknown words, but report those with simple fixes\n- `ignore-all` - Ignore all unknown words",
-          "type": "string"
+          "$ref": "#/definitions/UnknownWordsOptions",
+          "default": "report-all",
+          "description": "Controls how unknown words are handled.\n\n- `report-all` - Report all unknown words (default behavior)\n- `report-simple` - Report unknown words that have simple spelling errors, typos, and flagged words.\n- `report-common-typos` - Report unknown words that are common typos and flagged words.\n- `report-flagged` - Report unknown words that are flagged.",
+          "markdownDescription": "Controls how unknown words are handled.\n\n- `report-all` - Report all unknown words (default behavior)\n- `report-simple` - Report unknown words that have simple spelling errors, typos, and flagged words.\n- `report-common-typos` - Report unknown words that are common typos and flagged words.\n- `report-flagged` - Report unknown words that are flagged."
         },
         "usePnP": {
           "default": false,
@@ -1863,6 +1864,15 @@
         "$ref": "#/definitions/SuggestionCostMapDef"
       },
       "type": "array"
+    },
+    "UnknownWordsOptions": {
+      "enum": [
+        "report-all",
+        "report-simple",
+        "report-common-typos",
+        "report-flagged"
+      ],
+      "type": "string"
     },
     "Version": {
       "anyOf": [
@@ -2227,15 +2237,10 @@
       "type": "number"
     },
     "unknownWords": {
-      "default": "report",
-      "description": "Controls how unknown words are handled.\n\n- `report` - Report all unknown words (default behavior)\n- `ignore` - Ignore most unknown words, but report those with simple fixes\n- `ignore-all` - Ignore all unknown words",
-      "enum": [
-        "report",
-        "ignore",
-        "ignore-all"
-      ],
-      "markdownDescription": "Controls how unknown words are handled.\n\n- `report` - Report all unknown words (default behavior)\n- `ignore` - Ignore most unknown words, but report those with simple fixes\n- `ignore-all` - Ignore all unknown words",
-      "type": "string"
+      "$ref": "#/definitions/UnknownWordsOptions",
+      "default": "report-all",
+      "description": "Controls how unknown words are handled.\n\n- `report-all` - Report all unknown words (default behavior)\n- `report-simple` - Report unknown words that have simple spelling errors, typos, and flagged words.\n- `report-common-typos` - Report unknown words that are common typos and flagged words.\n- `report-flagged` - Report unknown words that are flagged.",
+      "markdownDescription": "Controls how unknown words are handled.\n\n- `report-all` - Report all unknown words (default behavior)\n- `report-simple` - Report unknown words that have simple spelling errors, typos, and flagged words.\n- `report-common-typos` - Report unknown words that are common typos and flagged words.\n- `report-flagged` - Report unknown words that are flagged."
     },
     "useGitignore": {
       "default": false,

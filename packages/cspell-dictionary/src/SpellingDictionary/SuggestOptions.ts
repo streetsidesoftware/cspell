@@ -31,7 +31,7 @@ export interface SuggestOptions {
     includeTies?: boolean | undefined;
 
     /**
-     * Maximum amount of time to allow for generating suggestions.
+     * Maximum amount of time in milliseconds to allow for generating suggestions.
      */
     timeout?: number | undefined;
 }

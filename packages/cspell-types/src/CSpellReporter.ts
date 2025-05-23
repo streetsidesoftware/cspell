@@ -149,14 +149,14 @@ export interface ReporterConfigurationBase {
      *
      * @default true
      */
-    ignoreRandomStrings?: boolean;
+    ignoreRandomStrings?: boolean | undefined;
 
     /**
      * The minimum length of a random string to be ignored.
      *
      * @default 40
      */
-    minRandomLength?: number;
+    minRandomLength?: number | undefined;
 }
 
 interface ReporterCommandLineOptions {

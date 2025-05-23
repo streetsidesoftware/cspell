@@ -1,4 +1,4 @@
-import type { MappedText, TextOffset as TextOffsetRW } from '@cspell/cspell-types';
+import type { MappedText, ReportingConfiguration, TextOffset as TextOffsetRW } from '@cspell/cspell-types';
 
 import type { ExtendedSuggestion } from '../Models/Suggestion.js';
 import type { ValidationIssue } from '../Models/ValidationIssue.js';
@@ -6,7 +6,7 @@ import type { ValidationIssue } from '../Models/ValidationIssue.js';
 export type { TextOffset as TextOffsetRW } from '@cspell/cspell-types';
 export type TextOffsetRO = Readonly<TextOffsetRW>;
 
-export interface ValidationOptions extends IncludeExcludeOptions {
+export interface ValidationOptions extends IncludeExcludeOptions, ReportingConfiguration {
     maxNumberOfProblems?: number;
     maxDuplicateProblems?: number;
     minWordLength?: number;
@@ -17,8 +17,6 @@ export interface ValidationOptions extends IncludeExcludeOptions {
     ignoreCase: boolean;
     ignoreRandomStrings?: boolean | undefined;
     minRandomLength?: number | undefined;
-    /** Controls how unknown words are handled */
-    unknownWords?: 'report' | 'ignore' | 'ignore-all';
 }
 
 export interface CheckOptions extends ValidationOptions {
