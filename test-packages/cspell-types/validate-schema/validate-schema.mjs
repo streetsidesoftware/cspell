@@ -7,7 +7,7 @@ import { findUp } from 'find-up-simple';
 const fixturesUrl = new URL('fixtures/', import.meta.url);
 const fixtures = ['cspell.test.json'];
 
-const keywords = ['allowTrailingCommas', 'deprecationMessage', 'markdownDescription', 'scope'];
+const keywords = ['allowTrailingCommas', 'deprecationMessage', 'markdownDescription', 'scope', 'since'];
 
 let errors = 0;
 
