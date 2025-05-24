@@ -26,11 +26,11 @@ import {
     getDefaultConfigLoader,
     getDictionary,
     isBinaryFile as cspellIsBinaryFile,
+    mergeSettings,
     setLogger,
     shouldCheckDocument,
     spellCheckDocument,
     Text as cspellText,
-    mergeSettings,
 } from 'cspell-lib';
 
 import { console } from '../console.js';

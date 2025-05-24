@@ -44,16 +44,16 @@ export interface Issue extends Omit<TextDocumentOffset, 'doc'> {
      * `true` - if it has been determined if simple suggestions are available.
      * `false` - if simple suggestions are NOT available.
      * `undefined` - if it has not been determined.
-     * @since 9.0.3
+     * @since 9.1.0
      */
     hasSimpleSuggestions?: boolean | undefined;
 
     /**
      * This setting is used for common typo detection.
-     * `true` - if it has been determined if preferred suggestions are available.
-     * `false` - if preferred suggestions are NOT available.
-     * `undefined` - if it has not been determined.
-     * @since 9.0.3
+     * - `true` - if it has been determined if preferred suggestions are available.
+     * - `false` - if preferred suggestions are NOT available.
+     * - `undefined` - if it has not been determined.
+     * @since 9.1.0
      */
     hasPreferredSuggestions?: boolean | undefined;
 }
@@ -143,7 +143,7 @@ export interface CSpellReporterEmitters {
 export interface CSpellReporter extends CSpellReporterEmitters {
     /**
      * Allows the reporter to specify supported features.
-     * @since 9.0.3
+     * @since 9.1.0
      */
     features?: FeaturesSupportedByReporter | undefined;
 }
@@ -219,16 +219,17 @@ export interface CSpellReporterModule {
  */
 export interface FeaturesSupportedByReporter {
     /**
-     * The reporter support the {@link ReportingConfiguration.unknownWords} option.
-     * If `true`, the reporter will be called with the unknown words and it is expected to handle them.
-     * If `false | undefined`, the unknown words will be filtered out before being passed to the reporter.
+     * The reporter supports the {@link ReportingConfiguration.unknownWords} option and understands
+     * how to filter issues based upon {@link Issue.isFlagged}, {@link Issue.hasSimpleSuggestions} and {@link Issue.hasPreferredSuggestions}.
+     * - `true` - The `reporter.issue` method will be called for all spelling issues and it is expected to handle .
+     * - `false | undefined` - the unknown words will be filtered out based upon the `unknownWords` setting before being passed to the reporter.
      */
     unknownWords?: boolean | undefined;
 
     /**
      * The reporter supports the {@link Issue.issueType} option.
-     * If `true`, the reporter will be called with all issues types.
-     * If `false | undefined`, only {@link IssueType.spelling} issues will be passed to the reporter.
+     * - `true` - the reporter will be called with all issues types.
+     * - `false | undefined` - only {@link IssueType.spelling} issues will be passed to the reporter.
      */
     issueType?: boolean | undefined;
 }
@@ -262,7 +263,7 @@ export interface UnknownWordsConfiguration {
      * - `report-flagged` - Report unknown words that are flagged.
      *
      * @default "report-all"
-     * @since 9.0.3
+     * @since 9.1.0
      */
     unknownWords?: UnknownWordsChoices | undefined;
 }
