@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { toFileDirURL, toFileURL } from '@cspell/url';
 import type { BufferEncoding } from 'cspell-io';
 import { readFileText as cioReadFile, toURL } from 'cspell-io';
-import type { Document, Issue } from 'cspell-lib';
+import type { Document } from 'cspell-lib';
 import * as cspell from 'cspell-lib';
 import { fileToDocument, isBinaryFile as isUriBinaryFile } from 'cspell-lib';
 
@@ -26,17 +26,6 @@ export interface FileInfo {
 }
 
 export type Perf = cspell.SpellCheckFilePerf;
-
-export interface FileResult {
-    fileInfo: FileInfo;
-    processed: boolean;
-    issues: Issue[];
-    errors: number;
-    configErrors: number;
-    elapsedTimeMs: number | undefined;
-    perf?: Perf | undefined;
-    cached?: boolean;
-}
 
 export function fileInfoToDocument(
     fileInfo: FileInfo,

@@ -270,14 +270,25 @@ export class DocumentValidator {
         const document = this._document;
         let line: TextDocumentLine | undefined = undefined;
         function mapToIssue(issue: MappedTextValidationResult): ValidationIssue {
-            const { range, text, isFlagged, isFound, suggestionsEx } = issue;
+            const { range, text, isFlagged, isFound, suggestionsEx, hasPreferredSuggestions, hasSimpleSuggestions } =
+                issue;
             const offset = range[0];
             const length = range[1] - range[0];
             assert(!line || line.offset <= offset);
             if (!line || line.offset + line.text.length <= offset) {
                 line = document.lineAt(offset);
             }
-            return { text, offset, line, length, isFlagged, isFound, suggestionsEx };
+            return {
+                text,
+                offset,
+                line,
+                length,
+                isFlagged,
+                isFound,
+                suggestionsEx,
+                hasPreferredSuggestions,
+                hasSimpleSuggestions,
+            };
         }
         const issues = [...pipeSync(segmenter(parsedText), opConcatMap(textValidator.validate), opMap(mapToIssue))];
 

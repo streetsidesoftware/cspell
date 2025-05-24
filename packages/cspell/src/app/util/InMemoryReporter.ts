@@ -20,37 +20,45 @@ export class InMemoryReporter implements CSpellReporter, InMemoryResult {
     issues: Issue[] = [];
     runResult: RunResult | undefined;
 
-    issue = (issue: Issue): void => {
+    issue(issue: Issue): void {
         this.issues.push(issue);
         this.issueCount += 1;
         const { uri, row, col, text } = issue;
         this.log.push(`Issue: ${uri}[${row}, ${col}]: Unknown word: ${text}`);
-    };
+    }
 
-    error = (message: string, error: Error): void => {
+    error(message: string, error: Error): void {
         this.errorCount += 1;
         this.errors.push(error);
         this.log.push(`Error: ${message} ${error.toString()}`);
-    };
+    }
 
-    info = (message: string): void => {
+    info(message: string): void {
         this.infoCount += 1;
         this.log.push(`Info: ${message}`);
-    };
+    }
 
-    debug = (message: string): void => {
+    debug(message: string): void {
         this.debugCount += 1;
         this.log.push(`Debug: ${message}`);
-    };
+    }
 
-    progress = (p: ProgressItem): void => {
+    progress(p: ProgressItem): void {
         this.progressCount += 1;
         this.log.push(`Progress: ${p.type} ${p.fileNum} ${p.fileCount} ${p.filename}`);
-    };
+    }
 
-    result = (r: RunResult): void => {
+    result(r: RunResult): void {
         this.runResult = r;
-    };
+    }
 
-    dump = (): InMemoryResult => ({ log: this.log, issues: this.issues, runResult: this.runResult });
+    dump(): InMemoryResult {
+        return { log: this.log, issues: this.issues, runResult: this.runResult };
+    }
+
+    get features() {
+        return {
+            issueType: true,
+        };
+    }
 }

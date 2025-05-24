@@ -556,7 +556,7 @@ interface ExtendedSuggestion {
     cost?: number;
 }
 
-interface ValidationResult extends TextOffset, Pick<Issue, 'message' | 'issueType'> {
+interface ValidationResult extends TextOffset, Pick<Issue, 'message' | 'issueType' | 'hasPreferredSuggestions' | 'hasSimpleSuggestions'> {
     line: TextOffset;
     isFlagged?: boolean | undefined;
     isFound?: boolean | undefined;
@@ -565,19 +565,6 @@ interface ValidationResult extends TextOffset, Pick<Issue, 'message' | 'issueTyp
 interface ValidationIssue extends ValidationResult {
     suggestions?: string[] | undefined;
     suggestionsEx?: ExtendedSuggestion[] | undefined;
-    /**
-     * `true` - if it has been determined if simple suggestions are available.
-     * `false` - if simple suggestions are NOT available.
-     * `undefined` - if it has not been determined.
-     */
-    hasSimpleSuggestions?: boolean | undefined;
-    /**
-     * This setting is used for common typo detection.
-     * `true` - if it has been determined if preferred suggestions are available.
-     * `false` - if preferred suggestions are NOT available.
-     * `undefined` - if it has not been determined.
-     */
-    hasPreferredSuggestions?: boolean | undefined;
 }
 
 type Href = string;
@@ -711,10 +698,8 @@ interface LineSegment {
     /** A segment of text from the line, the offset is relative to the beginning of the document. */
     segment: TextOffsetRO;
 }
-interface MappedTextValidationResult extends MappedText {
-    isFlagged?: boolean | undefined;
+interface MappedTextValidationResult extends MappedText, Pick<Issue, 'hasSimpleSuggestions' | 'hasPreferredSuggestions' | 'isFlagged' | 'suggestionsEx'> {
     isFound?: boolean | undefined;
-    suggestionsEx?: ExtendedSuggestion[] | undefined;
 }
 type TextValidatorFn = (text: MappedText) => Iterable<MappedTextValidationResult>;
 
@@ -913,7 +898,7 @@ declare function checkTextDocument(doc: TextDocument | Document, options: CheckT
  */
 declare function validateText(text: string, settings: CSpellUserSettings, options?: ValidateTextOptions): Promise<ValidationIssue[]>;
 
-interface SpellCheckFileOptions extends ValidateTextOptions {
+interface SpellCheckFileOptions extends ValidateTextOptions, Pick<CSpellUserSettings, 'unknownWords'> {
     /**
      * Optional path to a configuration file.
      * If given, it will be used instead of searching for a configuration file.

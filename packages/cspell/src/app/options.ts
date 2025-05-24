@@ -1,8 +1,11 @@
-import { CSpellSettings } from '@cspell/cspell-types';
+import { CSpellSettings, ReporterConfiguration } from '@cspell/cspell-types';
 
 import type { CacheOptions } from './util/cache/index.js';
 
-export interface LinterOptions extends Omit<BaseOptions, 'config'>, Omit<CacheOptions, 'version'> {
+export interface LinterOptions
+    extends Omit<BaseOptions, 'config'>,
+        Omit<CacheOptions, 'version'>,
+        ReporterConfiguration {
     /**
      * Display verbose information
      */
@@ -280,7 +283,13 @@ export interface LinterCliOptions extends LinterOptions {
      * @since 8.12.0
      */
     issueTemplate?: string;
+
+    report?: ReportChoices | undefined;
 }
+
+export type ReportChoices = 'all' | 'simple' | 'typos' | 'flagged';
+
+export const ReportChoicesAll: readonly ReportChoices[] = ['all', 'simple', 'typos', 'flagged'];
 
 export function fixLegacy<T extends LegacyFixes>(opts: T & LegacyOptions): Omit<T & LegacyOptions, 'local'> {
     const { local, ...rest } = opts;

@@ -2,7 +2,7 @@ import type { AddHelpTextContext, Command } from 'commander';
 import { Option as CommanderOption } from 'commander';
 
 import * as App from './application.mjs';
-import type { LinterCliOptions } from './options.js';
+import { type LinterCliOptions, ReportChoicesAll } from './options.js';
 import { DEFAULT_CACHE_LOCATION } from './util/cache/index.js';
 import { canUseColor } from './util/canUseColor.js';
 import { CheckFailed } from './util/errors.js';
@@ -156,6 +156,7 @@ export function commandLint(prog: Command): Command {
         .addOption(crOpt('--no-default-configuration', 'Do not load the default configuration and dictionaries.'))
         .option('--debug', 'Output information useful for debugging cspell.json files.')
         .option('--reporter <module|path>', 'Specify one or more reporters to use.', collect)
+        .addOption(crOpt('--report <level>', 'Set how unknown words are reported').choices(ReportChoicesAll))
         .addOption(
             crOpt('--skip-validation', 'Collect and process documents, but do not spell check.')
                 .implies({ cache: false })

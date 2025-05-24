@@ -7,6 +7,7 @@ export type {
     FindOptions,
     FindResult,
     HasOptions,
+    PreferredSuggestion,
     SearchOptions,
     SpellingDictionary,
     SpellingDictionaryCollection,

@@ -1,6 +1,5 @@
-import type { MappedText, ReportingConfiguration, TextOffset as TextOffsetRW } from '@cspell/cspell-types';
+import type { Issue, MappedText, ReportingConfiguration, TextOffset as TextOffsetRW } from '@cspell/cspell-types';
 
-import type { ExtendedSuggestion } from '../Models/Suggestion.js';
 import type { ValidationIssue } from '../Models/ValidationIssue.js';
 
 export type { TextOffset as TextOffsetRW } from '@cspell/cspell-types';
@@ -46,10 +45,10 @@ export interface LineSegment {
     segment: TextOffsetRO;
 }
 
-export interface MappedTextValidationResult extends MappedText {
-    isFlagged?: boolean | undefined;
+export interface MappedTextValidationResult
+    extends MappedText,
+        Pick<Issue, 'hasSimpleSuggestions' | 'hasPreferredSuggestions' | 'isFlagged' | 'suggestionsEx'> {
     isFound?: boolean | undefined;
-    suggestionsEx?: ExtendedSuggestion[] | undefined;
 }
 
 export type TextValidatorFn = (text: MappedText) => Iterable<MappedTextValidationResult>;

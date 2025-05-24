@@ -1,5 +1,5 @@
 import { opConcatMap, opMap, pipeSync } from '@cspell/cspell-pipe/sync';
-import { type CSpellUserSettings, type TextOffset, unknownWordsOptions } from '@cspell/cspell-types';
+import { type CSpellUserSettings, type TextOffset, unknownWordsChoices } from '@cspell/cspell-types';
 import { createInlineSpellingDictionary, createSuggestDictionary } from 'cspell-dictionary';
 import { describe, expect, test } from 'vitest';
 
@@ -314,7 +314,7 @@ describe('Validate textValidator functions', () => {
 
         // Test default (report) mode
         const resultDefault = [
-            ...validateText(sampleText, dictCol, sToV({ unknownWords: unknownWordsOptions.ReportSimple })),
+            ...validateText(sampleText, dictCol, sToV({ unknownWords: unknownWordsChoices.ReportSimple })),
         ];
         const errorsDefault = resultDefault.map(mapIssueForUnknownWords);
         expect(errorsDefault).toEqual([
@@ -354,7 +354,7 @@ describe('Validate textValidator functions', () => {
 
         // Test default (report) mode
         const resultDefault = [
-            ...validateText(sampleText, dictCol, sToV({ unknownWords: unknownWordsOptions.ReportCommonTypos })),
+            ...validateText(sampleText, dictCol, sToV({ unknownWords: unknownWordsChoices.ReportCommonTypos })),
         ];
         const errorsDefault = resultDefault.map(mapIssueForUnknownWords);
         expect(errorsDefault).toEqual([
@@ -399,7 +399,7 @@ describe('Validate textValidator functions', () => {
             ...validateText(
                 textWithSimpleTypo,
                 customDict,
-                sToV({ unknownWords: unknownWordsOptions.ReportCommonTypos }),
+                sToV({ unknownWords: unknownWordsChoices.ReportCommonTypos }),
             ),
         ];
         // "applei" should be caught because it has a preferred suggestion ("apple")
