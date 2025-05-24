@@ -1345,7 +1345,7 @@
           "type": "array"
         },
         "unknownWords": {
-          "$ref": "#/definitions/UnknownWordsOptions",
+          "$ref": "#/definitions/UnknownWordsChoices",
           "default": "report-all",
           "description": "Controls how unknown words are handled.\n\n- `report-all` - Report all unknown words (default behavior)\n- `report-simple` - Report unknown words that have simple spelling errors, typos, and flagged words.\n- `report-common-typos` - Report unknown words that are common typos and flagged words.\n- `report-flagged` - Report unknown words that are flagged.",
           "markdownDescription": "Controls how unknown words are handled.\n\n- `report-all` - Report all unknown words (default behavior)\n- `report-simple` - Report unknown words that have simple spelling errors, typos, and flagged words.\n- `report-common-typos` - Report unknown words that are common typos and flagged words.\n- `report-flagged` - Report unknown words that are flagged.",
@@ -1616,7 +1616,7 @@
           "type": "number"
         },
         "unknownWords": {
-          "$ref": "#/definitions/UnknownWordsOptions",
+          "$ref": "#/definitions/UnknownWordsChoices",
           "default": "report-all",
           "description": "Controls how unknown words are handled.\n\n- `report-all` - Report all unknown words (default behavior)\n- `report-simple` - Report unknown words that have simple spelling errors, typos, and flagged words.\n- `report-common-typos` - Report unknown words that are common typos and flagged words.\n- `report-flagged` - Report unknown words that are flagged.",
           "markdownDescription": "Controls how unknown words are handled.\n\n- `report-all` - Report all unknown words (default behavior)\n- `report-simple` - Report unknown words that have simple spelling errors, typos, and flagged words.\n- `report-common-typos` - Report unknown words that are common typos and flagged words.\n- `report-flagged` - Report unknown words that are flagged.",
@@ -1869,13 +1869,15 @@
       },
       "type": "array"
     },
-    "UnknownWordsOptions": {
+    "UnknownWordsChoices": {
+      "description": "Possible choices for how to handle unknown words.",
       "enum": [
         "report-all",
         "report-simple",
         "report-common-typos",
         "report-flagged"
       ],
+      "markdownDescription": "Possible choices for how to handle unknown words.",
       "type": "string"
     },
     "Version": {
@@ -2243,7 +2245,7 @@
       "type": "number"
     },
     "unknownWords": {
-      "$ref": "#/definitions/UnknownWordsOptions",
+      "$ref": "#/definitions/UnknownWordsChoices",
       "default": "report-all",
       "description": "Controls how unknown words are handled.\n\n- `report-all` - Report all unknown words (default behavior)\n- `report-simple` - Report unknown words that have simple spelling errors, typos, and flagged words.\n- `report-common-typos` - Report unknown words that are common typos and flagged words.\n- `report-flagged` - Report unknown words that are flagged.",
       "markdownDescription": "Controls how unknown words are handled.\n\n- `report-all` - Report all unknown words (default behavior)\n- `report-simple` - Report unknown words that have simple spelling errors, typos, and flagged words.\n- `report-common-typos` - Report unknown words that are common typos and flagged words.\n- `report-flagged` - Report unknown words that are flagged.",

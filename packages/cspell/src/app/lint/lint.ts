@@ -3,7 +3,15 @@ import { format } from 'node:util';
 
 import { isAsyncIterable, operators, opFilter, pipeAsync } from '@cspell/cspell-pipe';
 import { opMap, pipe } from '@cspell/cspell-pipe/sync';
-import type { CSpellSettings, Glob, Issue, RunResult, TextDocumentOffset, TextOffset } from '@cspell/cspell-types';
+import type {
+    CSpellSettings,
+    Glob,
+    Issue,
+    ReportIssueOptions,
+    RunResult,
+    TextDocumentOffset,
+    TextOffset,
+} from '@cspell/cspell-types';
 import { MessageTypes } from '@cspell/cspell-types';
 import { toFileURL } from '@cspell/url';
 import chalk from 'chalk';
@@ -22,6 +30,7 @@ import {
     shouldCheckDocument,
     spellCheckDocument,
     Text as cspellText,
+    mergeSettings,
 } from 'cspell-lib';
 
 import { console } from '../console.js';
@@ -33,7 +42,7 @@ import type { CreateCacheSettings, CSpellLintResultCache } from '../util/cache/i
 import { calcCacheSettings, createCache } from '../util/cache/index.js';
 import { type ConfigInfo, readConfig } from '../util/configFileHelper.js';
 import { CheckFailed, toApplicationError, toError } from '../util/errors.js';
-import type { FileResult, ReadFileInfoResult } from '../util/fileHelper.js';
+import type { ReadFileInfoResult } from '../util/fileHelper.js';
 import {
     fileInfoToDocument,
     filenameToUri,
@@ -53,9 +62,10 @@ import {
     normalizeFileOrGlobsToRoot,
     normalizeGlobsToRoot,
 } from '../util/glob.js';
+import type { LintFileResult } from '../util/LintFileResult.js';
 import { prefetchIterable } from '../util/prefetch.js';
 import type { FinalizedReporter } from '../util/reporters.js';
-import { loadReporters, mergeReporters } from '../util/reporters.js';
+import { extractReporterIssueOptions, loadReporters, mergeReporters } from '../util/reporters.js';
 import { getTimeMeasurer } from '../util/timer.js';
 import * as util from '../util/util.js';
 import { writeFileOrStream } from '../util/writeFile.js';
@@ -95,13 +105,14 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
     return lintResult;
 
     interface PrefetchResult {
-        fileResult?: FileResult | undefined;
+        fileResult?: LintFileResult | undefined;
         fileInfo?: ReadFileInfoResult | undefined;
         skip?: boolean | undefined;
+        reportIssueOptions?: ReportIssueOptions | undefined;
     }
 
     interface PFCached extends PrefetchResult {
-        fileResult: FileResult;
+        fileResult: LintFileResult;
         fileInfo?: undefined;
         skip?: undefined;
     }
@@ -110,12 +121,14 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         fileResult?: undefined;
         fileInfo: ReadFileInfoResult;
         skip?: undefined;
+        reportIssueOptions: ReportIssueOptions | undefined;
     }
 
     interface PFSkipped extends PrefetchResult {
         fileResult?: undefined;
         fileInfo?: undefined;
         skip: true;
+        reportIssueOptions?: undefined;
     }
 
     interface PrefetchFileResult {
@@ -125,6 +138,8 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
 
     function prefetch(filename: string, configInfo: ConfigInfo, cache: CSpellLintResultCache): PrefetchFileResult {
         if (isBinaryFile(filename, cfg.root)) return { filename, result: Promise.resolve({ skip: true }) };
+
+        const reportIssueOptions = extractReporterIssueOptions(configInfo.config);
 
         async function fetch() {
             const getElapsedTimeMs = getTimeMeasurer();
@@ -138,7 +153,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             const checkResult = await shouldCheckDocument({ uri }, {}, configInfo.config);
             if (!checkResult.shouldCheck) return { skip: true } as const;
             const fileInfo = await readFileInfo(filename, undefined, true);
-            return { fileInfo };
+            return { fileInfo, reportIssueOptions };
         }
 
         const result: Promise<PFCached | PFFile | PFSkipped> = fetch();
@@ -150,17 +165,18 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         configInfo: ConfigInfo,
         cache: CSpellLintResultCache,
         prefetch: PrefetchResult | undefined,
-    ): Promise<FileResult> {
+    ): Promise<LintFileResult> {
         if (prefetch?.fileResult) return prefetch.fileResult;
 
         const getElapsedTimeMs = getTimeMeasurer();
+        const reportIssueOptions = prefetch?.reportIssueOptions;
         const cachedResult = await cache.getCachedLintResults(filename);
         if (cachedResult) {
             reporter.debug(`Filename: ${filename}, using cache`);
-            return { ...cachedResult, elapsedTimeMs: getElapsedTimeMs() };
+            return { ...cachedResult, elapsedTimeMs: getElapsedTimeMs(), reportIssueOptions };
         }
 
-        const result: FileResult = {
+        const result: LintFileResult = {
             fileInfo: {
                 filename,
             },
@@ -169,6 +185,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             errors: 0,
             configErrors: 0,
             elapsedTimeMs: 0,
+            reportIssueOptions,
         };
 
         const fileInfo = prefetch?.fileInfo || (await readFileInfo(filename, undefined, true));
@@ -269,7 +286,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
                 filename,
             });
 
-        const emitProgressComplete = (filename: string, fileNum: number, fileCount: number, result: FileResult) =>
+        const emitProgressComplete = (filename: string, fileNum: number, fileCount: number, result: LintFileResult) =>
             reporter.progress(
                 util.clean({
                     type: 'ProgressFileComplete',
@@ -303,13 +320,14 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             }
         }
 
-        const emptyResult: FileResult = {
+        const emptyResult: LintFileResult = {
             fileInfo: { filename: '' },
             issues: [],
             processed: false,
             errors: 0,
             configErrors: 0,
             elapsedTimeMs: 1,
+            reportIssueOptions: undefined,
         };
 
         async function processPrefetchFileResult(pf: PrefetchFileResult, index: number) {
@@ -354,12 +372,12 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         }
 
         for await (const fileP of loadAndProcessFiles()) {
-            const { filename, fileNum, result } = await fileP;
+            const { filename, fileNum, result } = fileP;
             status.files += 1;
             status.cachedFiles = (status.cachedFiles || 0) + (result.cached ? 1 : 0);
             emitProgressComplete(filename, fileNum, fileCount ?? fileNum, result);
             // Show the spelling errors after emitting the progress.
-            result.issues.filter(cfg.uniqueFilter).forEach((issue) => reporter.issue(issue));
+            result.issues.filter(cfg.uniqueFilter).forEach((issue) => reporter.issue(issue, result.reportIssueOptions));
             if (result.issues.length || result.errors) {
                 status.filesWithIssues.add(filename);
                 status.issues += result.issues.length;
@@ -425,6 +443,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         if (cfg.options.defaultConfiguration !== undefined) {
             configInfo.config.loadDefaultConfiguration = cfg.options.defaultConfiguration;
         }
+        configInfo.config = mergeSettings(configInfo.config, cfg.cspellSettingsFromCliOptions);
         const reporterConfig: CSpellReporterConfiguration = util.clean({
             maxNumberOfProblems: configInfo.config.maxNumberOfProblems,
             maxDuplicateProblems: configInfo.config.maxDuplicateProblems,
