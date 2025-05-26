@@ -14,9 +14,13 @@ import { compareStats, toFileURL, urlBasename } from 'cspell-io';
 import type {
     DictionaryDefinitionInlineInternal,
     DictionaryDefinitionInternal,
+    DictionaryDefinitionSimpleInternal,
     DictionaryFileDefinitionInternal,
 } from '../../Models/CSpellSettingsInternalDef.js';
-import { isDictionaryDefinitionInlineInternal } from '../../Models/CSpellSettingsInternalDef.js';
+import {
+    isDictionaryDefinitionInlineInternal,
+    isDictionaryFileDefinitionInternal,
+} from '../../Models/CSpellSettingsInternalDef.js';
 import { AutoResolveWeakCache, AutoResolveWeakWeakCache } from '../../util/AutoResolve.js';
 import { toError } from '../../util/errors.js';
 import { SimpleCache } from '../../util/simpleCache.js';
@@ -90,14 +94,17 @@ export class DictionaryLoader {
         if (isDictionaryDefinitionInlineInternal(def)) {
             return Promise.resolve(this.loadInlineDict(def));
         }
-        const { key, entry } = this.getCacheEntry(def);
-        if (entry) {
-            return entry.pending.then(([dictionary]) => dictionary);
+        if (isDictionaryFileDefinitionInternal(def)) {
+            const { key, entry } = this.getCacheEntry(def);
+            if (entry) {
+                return entry.pending.then(([dictionary]) => dictionary);
+            }
+            const loadedEntry = this.loadEntry(def.path, def);
+            this.setCacheEntry(key, loadedEntry, def);
+            this.keepAliveCache.set(def, loadedEntry);
+            return loadedEntry.pending.then(([dictionary]) => dictionary);
         }
-        const loadedEntry = this.loadEntry(def.path, def);
-        this.setCacheEntry(key, loadedEntry, def);
-        this.keepAliveCache.set(def, loadedEntry);
-        return loadedEntry.pending.then(([dictionary]) => dictionary);
+        return Promise.resolve(this.loadSimpleDict(def));
     }
 
     /**
@@ -206,6 +213,10 @@ export class DictionaryLoader {
         return this.inlineDictionaryCache.get(def, (def) =>
             createInlineSpellingDictionary(def, def.__source || 'memory'),
         );
+    }
+
+    private loadSimpleDict(def: DictionaryDefinitionSimpleInternal): SpellingDictionary {
+        return createInlineSpellingDictionary({ name: def.name, words: [] }, def.__source || 'memory');
     }
 
     private calcKey(def: DictionaryFileDefinitionInternal) {

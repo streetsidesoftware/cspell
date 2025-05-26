@@ -6,6 +6,7 @@ import type {
     DictionaryDefinitionCustom,
     DictionaryDefinitionInline,
     DictionaryDefinitionPreferred,
+    DictionaryDefinitionSimple,
     Parser,
 } from '@cspell/cspell-types';
 import type { WeightMap } from 'cspell-trie-lib';
@@ -29,9 +30,17 @@ export interface CSpellSettingsInternalFinalized extends CSpellSettingsInternal 
 
 type DictionaryDefinitionCustomUniqueFields = Omit<DictionaryDefinitionCustom, keyof DictionaryDefinitionPreferred>;
 
-export type DictionaryDefinitionInternal = DictionaryFileDefinitionInternal | DictionaryDefinitionInlineInternal;
+export type DictionaryDefinitionInternal =
+    | DictionaryFileDefinitionInternal
+    | DictionaryDefinitionInlineInternal
+    | DictionaryDefinitionSimpleInternal;
 
 export type DictionaryDefinitionInlineInternal = DictionaryDefinitionInline & {
+    /** The path to the config file that contains this dictionary definition */
+    readonly __source?: string | undefined;
+};
+
+export type DictionaryDefinitionSimpleInternal = DictionaryDefinitionSimple & {
     /** The path to the config file that contains this dictionary definition */
     readonly __source?: string | undefined;
 };
@@ -85,4 +94,10 @@ export function isDictionaryDefinitionInlineInternal(
     if (def.path) return false;
     const defInline = def as DictionaryDefinitionInline;
     return !!(defInline.words || defInline.flagWords || defInline.ignoreWords || defInline.suggestWords);
+}
+
+export function isDictionaryFileDefinitionInternal(
+    def: DictionaryDefinitionInternal | DictionaryDefinitionInline | DictionaryDefinition,
+): def is DictionaryFileDefinitionInternal {
+    return !!(def.path || def.file);
 }

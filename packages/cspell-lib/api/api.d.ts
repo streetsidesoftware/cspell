@@ -1,4 +1,4 @@
-import { Glob, AdvancedCSpellSettingsWithSourceTrace, DictionaryDefinitionPreferred, DictionaryDefinitionCustom, DictionaryDefinitionAugmented, DictionaryDefinitionInline, Parser, CSpellUserSettings, ImportFileRef, PnPSettings, CSpellSettingsWithSourceTrace, TextOffset, Issue, LocaleId, CSpellSettings, MappedText, ReportingConfiguration, ParsedText, TextDocumentOffset } from '@cspell/cspell-types';
+import { Glob, AdvancedCSpellSettingsWithSourceTrace, DictionaryDefinitionPreferred, DictionaryDefinitionCustom, DictionaryDefinitionAugmented, DictionaryDefinitionInline, DictionaryDefinitionSimple, Parser, CSpellUserSettings, ImportFileRef, PnPSettings, CSpellSettingsWithSourceTrace, TextOffset, Issue, LocaleId, CSpellSettings, MappedText, ReportingConfiguration, ParsedText, TextDocumentOffset } from '@cspell/cspell-types';
 export * from '@cspell/cspell-types';
 import * as cspell_io from 'cspell-io';
 import { VFileSystem } from 'cspell-io';
@@ -232,8 +232,12 @@ interface CSpellSettingsInternalFinalized extends CSpellSettingsInternal {
     includeRegExpList: RegExp[];
 }
 type DictionaryDefinitionCustomUniqueFields = Omit<DictionaryDefinitionCustom, keyof DictionaryDefinitionPreferred>;
-type DictionaryDefinitionInternal = DictionaryFileDefinitionInternal | DictionaryDefinitionInlineInternal;
+type DictionaryDefinitionInternal = DictionaryFileDefinitionInternal | DictionaryDefinitionInlineInternal | DictionaryDefinitionSimpleInternal;
 type DictionaryDefinitionInlineInternal = DictionaryDefinitionInline & {
+    /** The path to the config file that contains this dictionary definition */
+    readonly __source?: string | undefined;
+};
+type DictionaryDefinitionSimpleInternal = DictionaryDefinitionSimple & {
     /** The path to the config file that contains this dictionary definition */
     readonly __source?: string | undefined;
 };
