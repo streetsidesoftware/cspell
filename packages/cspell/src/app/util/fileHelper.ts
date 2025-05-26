@@ -3,7 +3,7 @@ import * as path from 'node:path';
 import streamConsumers from 'node:stream/consumers';
 import { fileURLToPath } from 'node:url';
 
-import { toFileDirURL, toFileURL } from '@cspell/url';
+import { toFileDirURL, toFilePathOrHref, toFileURL, urlRelative } from '@cspell/url';
 import type { BufferEncoding } from 'cspell-io';
 import { readFileText as cioReadFile, toURL } from 'cspell-io';
 import type { Document } from 'cspell-lib';
@@ -199,4 +199,12 @@ export async function isDir(filename: string): Promise<boolean> {
 
 export function isNotDir(filename: string): Promise<boolean> {
     return isDir(filename).then((a) => !a);
+}
+
+export function relativeToCwd(filename: string | URL, cwd: string | URL = process.cwd()): string {
+    const urlCwd = toFileDirURL(cwd);
+    const url = toFileURL(filename, urlCwd);
+    const rel = urlRelative(urlCwd, url);
+    if (rel.startsWith('..')) return toFilePathOrHref(url);
+    return rel;
 }

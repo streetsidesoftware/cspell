@@ -52,6 +52,7 @@ import {
     isNotDir,
     readFileInfo,
     readFileListFiles,
+    relativeToCwd,
     resolveFilename,
 } from '../util/fileHelper.js';
 import type { GlobOptions } from '../util/glob.js';
@@ -354,7 +355,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             status.cachedFiles = (status.cachedFiles || 0) + (result.cached ? 1 : 0);
             const numIssues = reporter.emitProgressComplete(filename, fileNum, fileCount ?? fileNum, result);
             if (numIssues || result.errors) {
-                status.filesWithIssues.add(filename);
+                status.filesWithIssues.add(relativeToCwd(filename, cfg.root));
                 status.issues += numIssues;
                 status.errors += result.errors;
                 if (failFast) {
