@@ -102,7 +102,7 @@ export function generateReport(data: ReportData, options: GenerateReportOptions)
 }
 
 function formatIssue(file: string, issue: Issue): string {
-    const { row, col, isFlagged, text, context, suggestionsEx } = issue;
+    const { row, col, isFlagged, text, context = issue.line, suggestionsEx } = issue;
     const suggestions =
         suggestionsEx &&
         suggestionsEx
