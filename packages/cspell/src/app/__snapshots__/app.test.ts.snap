@@ -1136,6 +1136,85 @@ error"
 
 exports[`Validate cli > app 'not found error by default' Expect Error: [Function CheckFailed] 3`] = `""`;
 
+exports[`Validate cli > app 'reporter with spelling issues' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app 'reporter with spelling issues' Expect Error: [Function CheckFailed] 2`] = `
+"log	{
+log	    "issues": [
+log	        {
+log	            "text": "Onne",
+log	            "offset": 53,
+log	            "line": {
+log	                "text": "Onne, twwo, thhree./n",
+log	                "offset": 53
+log	            },
+log	            "length": 4,
+log	            "isFlagged": false,
+log	            "isFound": false,
+log	            "row": 5,
+log	            "col": 1,
+log	            "uri": ".fixtures/features/reporter/issues.md",
+log	            "context": {
+log	                "text": "Onne, twwo, thhree./n",
+log	                "offset": 53
+log	            }
+log	        },
+log	        {
+log	            "text": "twwo",
+log	            "offset": 59,
+log	            "line": {
+log	                "text": "Onne, twwo, thhree./n",
+log	                "offset": 53
+log	            },
+log	            "length": 4,
+log	            "isFlagged": false,
+log	            "isFound": false,
+log	            "row": 5,
+log	            "col": 7,
+log	            "uri": ".fixtures/features/reporter/issues.md",
+log	            "context": {
+log	                "text": "Onne, twwo, thhree./n",
+log	                "offset": 53
+log	            }
+log	        },
+log	        {
+log	            "text": "thhree",
+log	            "offset": 65,
+log	            "line": {
+log	                "text": "Onne, twwo, thhree./n",
+log	                "offset": 53
+log	            },
+log	            "length": 6,
+log	            "isFlagged": false,
+log	            "isFound": false,
+log	            "row": 5,
+log	            "col": 13,
+log	            "uri": ".fixtures/features/reporter/issues.md",
+log	            "context": {
+log	                "text": "Onne, twwo, thhree./n",
+log	                "offset": 53
+log	            }
+log	        }
+log	    ],
+log	    "info": [],
+log	    "debug": [],
+log	    "error": [],
+log	    "progress": [],
+log	    "result": {
+log	        "files": 3,
+log	        "filesWithIssues": [
+log	            "issues.md"
+log	        ],
+log	        "issues": 3,
+log	        "errors": 0,
+log	        "cachedFiles": 0
+log	    }
+log	}
+log"
+`;
+
+exports[`Validate cli > app 'reporter with spelling issues' Expect Error: [Function CheckFailed] 3`] = `""`;
+
 exports[`Validate cli > app 'reporter' Expect Error: undefined 1`] = `[]`;
 
 exports[`Validate cli > app 'reporter' Expect Error: undefined 2`] = `

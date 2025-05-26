@@ -38,8 +38,8 @@ export interface LinterOptions
     dot?: boolean;
     /**
      * Show part of a line where an issue is found.
-     * if true, it will show the default number of characters on either side.
-     * if a number, it will shat number of characters on either side.
+     * - if true, it will show the default number of characters on either side.
+     * - if a number, the number of characters to show on either side of the issue.
      */
     showContext?: boolean | number;
     /**
