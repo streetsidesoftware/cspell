@@ -46,6 +46,10 @@ function pathFix(...parts: string[]): string {
     return pathRoot('fixtures', ...parts);
 }
 
+function pathFeat(...parts: string[]): string {
+    return pathFix('features', ...parts);
+}
+
 function pTestFix(...parts: string[]): string {
     return Path.join(repoRoot, 'test-fixtures', ...parts);
 }
@@ -206,6 +210,10 @@ describe('Validate cli', () => {
         ${'issue-6373'}                                | ${['-r', pathFix('issue-6373'), '--no-progress']}                                              | ${undefined}       | ${true}  | ${false} | ${false}
         ${'issue-6353'}                                | ${['-r', pathFix('issue-6353'), '--no-progress']}                                              | ${undefined}       | ${true}  | ${false} | ${true}
         ${'verify globRoot works'}                     | ${['-r', pathFix('globRoot'), '.']}                                                            | ${undefined}       | ${true}  | ${false} | ${false}
+        ${'reporting level flagged'}                   | ${['-r', pathFeat('unknown-words'), '--report=flagged', '.']}                                  | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
+        ${'reporting level typos'}                     | ${['-r', pathFeat('unknown-words'), '--report=typos', '.']}                                    | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
+        ${'reporting level simple'}                    | ${['-r', pathFeat('unknown-words'), '--report=simple', '.']}                                   | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
+        ${'reporting level all'}                       | ${['-r', pathFeat('unknown-words'), '--report=all', '.']}                                      | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
     `('app $msg Expect Error: $errorCheck', async ({ testArgs, errorCheck, eError, eLog, eInfo }: TestCase) => {
         chalk.level = 1;
         const commander = getCommander();

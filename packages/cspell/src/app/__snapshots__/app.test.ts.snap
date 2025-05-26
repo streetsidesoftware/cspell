@@ -1158,6 +1158,196 @@ log"
 
 exports[`Validate cli > app 'reporter' Expect Error: undefined 3`] = `""`;
 
+exports[`Validate cli > app 'reporting level all' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app 'reporting level all' Expect Error: [Function CheckFailed] 2`] = `
+"error	1/6 code.ts 0.00ms X
+error
+log	code.ts:5:14 - Unknown word (spellllingmistake)
+log
+log	code.ts:9:26 - Unknown word (Orangges)
+log
+error	2/6 cspell.config.yaml 0.00ms
+error
+error	3/6 README.md 0.00ms
+error
+error	4/6 test-1.md 0.00ms X
+error
+log	test-1.md:3:3 - Forbidden word (whitelist) fix: (allowlist)
+log
+log	test-1.md:5:21 - Unknown word (germany) fix: (Germany)
+log
+log	test-1.md:5:33 - Unknown word (france)
+log
+log	test-1.md:7:1 - Unknown word (Baddspelling)
+log
+error	5/6 test-2.md 0.00ms X
+error
+log	test-2.md:6:21 - Unknown word (germany) fix: (Germany)
+log
+log	test-2.md:6:33 - Unknown word (france)
+log
+log	test-2.md:8:1 - Unknown word (Baddspelling)
+log
+error	6/6 test.md 0.00ms X
+error
+log	test.md:5:3 - Forbidden word (blacklist) fix: (denylist)
+log
+log	test.md:6:3 - Forbidden word (whitelist) fix: (allowlist)
+log
+log	test.md:7:3 - Forbidden word (rad) fix: (cool)
+log
+log	test.md:9:13 - Forbidden word (english) fix: (English)
+log
+log	test.md:9:38 - Forbidden word (Blacklisted) fix: (Denylisted)
+log
+log	test.md:11:21 - Unknown word (germany) fix: (Germany)
+log
+log	test.md:11:30 - Unknown word (richard)
+log
+log	test.md:11:39 - Unknown word (france)
+log
+log	test.md:12:16 - Unknown word (thier) fix: (their)
+log
+log	test.md:12:23 - Unknown word (theer)
+log
+log	test.md:12:30 - Unknown word (thnks)
+log
+error	CSpell: Files checked: 6, Issues found: 20 in 4 files.
+error"
+`;
+
+exports[`Validate cli > app 'reporting level all' Expect Error: [Function CheckFailed] 3`] = `""`;
+
+exports[`Validate cli > app 'reporting level flagged' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app 'reporting level flagged' Expect Error: [Function CheckFailed] 2`] = `
+"error	1/6 code.ts 0.00ms
+error
+error	2/6 cspell.config.yaml 0.00ms
+error
+error	3/6 README.md 0.00ms
+error
+error	4/6 test-1.md 0.00ms X
+error
+log	test-1.md:3:3 - Forbidden word (whitelist) fix: (allowlist)
+log
+error	5/6 test-2.md 0.00ms
+error
+error	6/6 test.md 0.00ms X
+error
+log	test.md:5:3 - Forbidden word (blacklist) fix: (denylist)
+log
+log	test.md:6:3 - Forbidden word (whitelist) fix: (allowlist)
+log
+log	test.md:7:3 - Forbidden word (rad) fix: (cool)
+log
+log	test.md:9:13 - Forbidden word (english) fix: (English)
+log
+log	test.md:9:38 - Forbidden word (Blacklisted) fix: (Denylisted)
+log
+error	CSpell: Files checked: 6, Issues found: 6 in 2 files.
+error"
+`;
+
+exports[`Validate cli > app 'reporting level flagged' Expect Error: [Function CheckFailed] 3`] = `""`;
+
+exports[`Validate cli > app 'reporting level simple' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app 'reporting level simple' Expect Error: [Function CheckFailed] 2`] = `
+"error	1/6 code.ts 0.00ms X
+error
+log	code.ts:9:26 - Unknown word (Orangges)
+log
+error	2/6 cspell.config.yaml 0.00ms
+error
+error	3/6 README.md 0.00ms
+error
+error	4/6 test-1.md 0.00ms X
+error
+log	test-1.md:3:3 - Forbidden word (whitelist) fix: (allowlist)
+log
+log	test-1.md:5:21 - Unknown word (germany) fix: (Germany)
+log
+log	test-1.md:5:33 - Unknown word (france)
+log
+error	5/6 test-2.md 0.00ms X
+error
+log	test-2.md:6:21 - Unknown word (germany) fix: (Germany)
+log
+log	test-2.md:6:33 - Unknown word (france)
+log
+error	6/6 test.md 0.00ms X
+error
+log	test.md:5:3 - Forbidden word (blacklist) fix: (denylist)
+log
+log	test.md:6:3 - Forbidden word (whitelist) fix: (allowlist)
+log
+log	test.md:7:3 - Forbidden word (rad) fix: (cool)
+log
+log	test.md:9:13 - Forbidden word (english) fix: (English)
+log
+log	test.md:9:38 - Forbidden word (Blacklisted) fix: (Denylisted)
+log
+log	test.md:11:21 - Unknown word (germany) fix: (Germany)
+log
+log	test.md:11:30 - Unknown word (richard)
+log
+log	test.md:11:39 - Unknown word (france)
+log
+log	test.md:12:16 - Unknown word (thier) fix: (their)
+log
+log	test.md:12:23 - Unknown word (theer)
+log
+log	test.md:12:30 - Unknown word (thnks)
+log
+error	CSpell: Files checked: 6, Issues found: 17 in 4 files.
+error"
+`;
+
+exports[`Validate cli > app 'reporting level simple' Expect Error: [Function CheckFailed] 3`] = `""`;
+
+exports[`Validate cli > app 'reporting level typos' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app 'reporting level typos' Expect Error: [Function CheckFailed] 2`] = `
+"error	1/6 code.ts 0.00ms
+error
+error	2/6 cspell.config.yaml 0.00ms
+error
+error	3/6 README.md 0.00ms
+error
+error	4/6 test-1.md 0.00ms X
+error
+log	test-1.md:3:3 - Forbidden word (whitelist) fix: (allowlist)
+log
+log	test-1.md:5:21 - Unknown word (germany) fix: (Germany)
+log
+error	5/6 test-2.md 0.00ms X
+error
+log	test-2.md:6:21 - Unknown word (germany) fix: (Germany)
+log
+error	6/6 test.md 0.00ms X
+error
+log	test.md:5:3 - Forbidden word (blacklist) fix: (denylist)
+log
+log	test.md:6:3 - Forbidden word (whitelist) fix: (allowlist)
+log
+log	test.md:7:3 - Forbidden word (rad) fix: (cool)
+log
+log	test.md:9:13 - Forbidden word (english) fix: (English)
+log
+log	test.md:9:38 - Forbidden word (Blacklisted) fix: (Denylisted)
+log
+log	test.md:11:21 - Unknown word (germany) fix: (Germany)
+log
+log	test.md:12:16 - Unknown word (thier) fix: (their)
+log
+error	CSpell: Files checked: 6, Issues found: 10 in 3 files.
+error"
+`;
+
+exports[`Validate cli > app 'reporting level typos' Expect Error: [Function CheckFailed] 3`] = `""`;
+
 exports[`Validate cli > app 'samples/Dutch.txt' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli > app 'samples/Dutch.txt' Expect Error: [Function CheckFailed] 2`] = `

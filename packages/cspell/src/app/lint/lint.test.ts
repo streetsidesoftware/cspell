@@ -78,7 +78,7 @@ describe('Linter Validation Tests', () => {
 
     const optionsRootCSpellJson = { root, config: j(root, 'cspell.json') };
 
-    // cspell:ignore Tufte checkedd whitelist Baddspelling
+    // cspell:ignore Tufte checkedd
     test.each`
         files               | options                                                                                                | expectedRunResult              | expectedReport
         ${[]}               | ${{ root: latexSamples }}                                                                              | ${oc({ errors: 0, files: 4 })} | ${oc({ errorCount: 0, errors: [], issues: [oc({ text: 'Tufte' })] })}
@@ -112,10 +112,25 @@ describe('Linter Validation Tests', () => {
         ${[]}               | ${{ ...optionsRootCSpellJson, files: ['../../README.md'], dot: true }}                                 | ${oc({ errors: 0, files: 1 })} | ${oc({ errorCount: 0, errors: [], issues: [] })}
         ${[]}               | ${{ ...optionsRootCSpellJson, files: ['../../resources/patreon.png' /* skip binary */], dot: true }}   | ${oc({ errors: 0, files: 0 })} | ${oc({ errorCount: 0, errors: [], issues: [] })}
         ${['**/*.md']}      | ${{ root: './fixtures/issue-6025', config: './fixtures/issue-6025/nested/cspell.config.yaml' }}        | ${oc({ errors: 0, files: 2 })} | ${oc({ errorCount: 0, errors: [], issues: [] })}
-        ${['test-1.md']}    | ${{ root: pUnknownWords, report: 'all' }}                                                              | ${oc({ errors: 0, files: 1 })} | ${oc({ errorCount: 0, errors: [], issues: [oc({ text: 'whitelist' }), oc({ text: 'germany' }), oc({ text: 'france' }), oc({ text: 'Baddspelling' })] })}
-        ${['test-1.md']}    | ${{ root: pUnknownWords, report: 'simple' }}                                                           | ${oc({ errors: 0, files: 1 })} | ${oc({ errorCount: 0, errors: [], issues: [oc({ text: 'whitelist' }), oc({ text: 'germany' }), oc({ text: 'france' })] })}
-        ${['test-1.md']}    | ${{ root: pUnknownWords, report: 'typos' }}                                                            | ${oc({ errors: 0, files: 1 })} | ${oc({ errorCount: 0, errors: [], issues: [oc({ text: 'whitelist' }), oc({ text: 'germany' })] })}
-        ${['test-1.md']}    | ${{ root: pUnknownWords, report: 'flagged' }}                                                          | ${oc({ errors: 0, files: 1 })} | ${oc({ errorCount: 0, errors: [], issues: [oc({ text: 'whitelist' })] })}
+    `('runLint $files $options', async ({ files, options, expectedRunResult, expectedReport }) => {
+        const reporter = new InMemoryReporter();
+        const runResult = await runLint(new LintRequest(files, options, reporter));
+        expect(report(reporter)).toEqual(expectedReport);
+        expect(runResult).toEqual(expectedRunResult);
+        expect(runResult).toEqual(reporter.runResult);
+    });
+
+    // cspell:ignore whitelist Baddspelling Orangges spellllingmistake
+    test.each`
+        files            | options                                       | expectedRunResult                         | expectedReport
+        ${['test-1.md']} | ${{ root: pUnknownWords, report: 'all' }}     | ${oc({ errors: 0, files: 1, issues: 4 })} | ${oc({ issues: [oc({ text: 'whitelist' }), oc({ text: 'germany' }), oc({ text: 'france' }), oc({ text: 'Baddspelling' })] })}
+        ${['test-1.md']} | ${{ root: pUnknownWords, report: 'simple' }}  | ${oc({ errors: 0, files: 1, issues: 3 })} | ${oc({ issues: [oc({ text: 'whitelist' }), oc({ text: 'germany' }), oc({ text: 'france' })] })}
+        ${['test-1.md']} | ${{ root: pUnknownWords, report: 'typos' }}   | ${oc({ errors: 0, files: 1, issues: 2 })} | ${oc({ issues: [oc({ text: 'whitelist' }), oc({ text: 'germany' })] })}
+        ${['test-1.md']} | ${{ root: pUnknownWords, report: 'flagged' }} | ${oc({ errors: 0, files: 1, issues: 1 })} | ${oc({ issues: [oc({ text: 'whitelist' })] })}
+        ${['code.ts']}   | ${{ root: pUnknownWords, report: 'typos' }}   | ${oc({ errors: 0, files: 1, issues: 0 })} | ${oc({ issues: [] })}
+        ${['code.ts']}   | ${{ root: pUnknownWords, report: 'simple' }}  | ${oc({ errors: 0, files: 1, issues: 1 })} | ${oc({ issues: [oc({ text: 'Orangges' })] })}
+        ${['code.ts']}   | ${{ root: pUnknownWords, report: 'all' }}     | ${oc({ errors: 0, files: 1, issues: 2 })} | ${oc({ issues: [oc({ text: 'spellllingmistake' }), oc({ text: 'Orangges' })] })}
+        ${['code.ts']}   | ${{ root: pUnknownWords }}                    | ${oc({ errors: 0, files: 1, issues: 1 })} | ${oc({ issues: [oc({ text: 'Orangges' })] })}
     `('runLint $files $options', async ({ files, options, expectedRunResult, expectedReport }) => {
         const reporter = new InMemoryReporter();
         const runResult = await runLint(new LintRequest(files, options, reporter));

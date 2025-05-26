@@ -65,7 +65,7 @@ import {
 import type { LintFileResult } from '../util/LintFileResult.js';
 import { prefetchIterable } from '../util/prefetch.js';
 import type { FinalizedReporter } from '../util/reporters.js';
-import { extractReporterIssueOptions, loadReporters, mergeReporters } from '../util/reporters.js';
+import { extractReporterIssueOptions, LintReporter, mergeReportIssueOptions } from '../util/reporters.js';
 import { getTimeMeasurer } from '../util/timer.js';
 import * as util from '../util/util.js';
 import { writeFileOrStream } from '../util/writeFile.js';
@@ -80,8 +80,7 @@ const debugStats = false;
 const { opFilterAsync } = operators;
 
 export async function runLint(cfg: LintRequest): Promise<RunResult> {
-    let { reporter } = cfg;
-    setLogger(getLoggerFromReporter(reporter));
+    const reporter = new LintReporter(cfg.reporter, cfg.options);
     const configErrors = new Set<string>();
 
     const timer = getTimeMeasurer();
@@ -229,7 +228,10 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         result.elapsedTimeMs = getElapsedTimeMs();
 
         const config = spellResult.settingsUsed ?? {};
-
+        result.reportIssueOptions = mergeReportIssueOptions(
+            spellResult.settingsUsed || configInfo.config,
+            reportIssueOptions,
+        );
         result.configErrors += await reportConfigurationErrors(config);
 
         const elapsed = result.elapsedTimeMs;
@@ -278,29 +280,6 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         const cache = createCache(cacheSettings);
         const failFast = cfg.options.failFast ?? configInfo.config.failFast ?? false;
 
-        const emitProgressBegin = (filename: string, fileNum: number, fileCount: number) =>
-            reporter.progress({
-                type: 'ProgressFileBegin',
-                fileNum,
-                fileCount,
-                filename,
-            });
-
-        const emitProgressComplete = (filename: string, fileNum: number, fileCount: number, result: LintFileResult) =>
-            reporter.progress(
-                util.clean({
-                    type: 'ProgressFileComplete',
-                    fileNum,
-                    fileCount,
-                    filename,
-                    elapsedTimeMs: result?.elapsedTimeMs,
-                    processed: result?.processed,
-                    numErrors: result?.issues.length || result?.errors,
-                    cached: result?.cached,
-                    perf: result?.perf,
-                }),
-            );
-
         function* prefetchFiles(files: string[]) {
             const iter = prefetchIterable(
                 pipe(
@@ -334,7 +313,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             const { filename, result: pFetchResult } = pf;
             const getElapsedTimeMs = getTimeMeasurer();
             const fetchResult = await pFetchResult;
-            emitProgressBegin(filename, index, fileCount ?? index);
+            reporter.emitProgressBegin(filename, index, fileCount ?? index);
             if (fetchResult?.skip) {
                 return {
                     filename,
@@ -375,12 +354,10 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             const { filename, fileNum, result } = fileP;
             status.files += 1;
             status.cachedFiles = (status.cachedFiles || 0) + (result.cached ? 1 : 0);
-            emitProgressComplete(filename, fileNum, fileCount ?? fileNum, result);
-            // Show the spelling errors after emitting the progress.
-            result.issues.filter(cfg.uniqueFilter).forEach((issue) => reporter.issue(issue, result.reportIssueOptions));
-            if (result.issues.length || result.errors) {
+            const numIssues = reporter.emitProgressComplete(filename, fileNum, fileCount ?? fileNum, result);
+            if (numIssues || result.errors) {
                 status.filesWithIssues.add(filename);
-                status.issues += result.issues.length;
+                status.issues += numIssues;
                 status.errors += result.errors;
                 if (failFast) {
                     return status;
@@ -453,8 +430,8 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         });
 
         const reporters = cfg.options.reporter ?? configInfo.config.reporters;
-
-        reporter = mergeReporters(...(await loadReporters(reporters, cfg.reporter, reporterConfig)));
+        reporter.config = reporterConfig;
+        await reporter.loadReportersAndFinalize(reporters);
         setLogger(getLoggerFromReporter(reporter));
 
         const globInfo = await determineGlobs(configInfo, cfg);

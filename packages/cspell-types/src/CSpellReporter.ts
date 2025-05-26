@@ -94,17 +94,49 @@ export interface ProgressBase {
 
 export interface ProgressFileBase extends ProgressBase {
     type: ProgressTypes;
+    /**
+     * The sequence number of the file being processed.
+     */
     fileNum: number;
+    /**
+     * The total number of files being processed.
+     */
     fileCount: number;
+    /**
+     * The file name or href of file being processed.
+     */
     filename: string;
 }
 
 export interface ProgressFileComplete extends ProgressFileBase {
     type: 'ProgressFileComplete';
+    /**
+     * The time it took to process the file in milliseconds.
+     * If `undefined`, then the elapsed time is not available.
+     */
     elapsedTimeMs: number | undefined;
+    /**
+     * `true` if the file was processed.
+     * `false` if the file was skipped.
+     */
     processed: boolean | undefined;
+    /**
+     * Number of errors and issues found in the file.
+     */
     numErrors: number | undefined;
+    /**
+     * `true` if the file was processed from the cache.
+     */
     cached?: boolean;
+    /**
+     * Issues found in the file.
+     * If `undefined`, then the issues are not available.
+     */
+    issues?: Iterable<Issue> | undefined;
+    /**
+     * reportIssuesOptions to be used when reporting issues.
+     */
+    reportIssueOptions?: ReportIssueOptions | undefined;
 }
 
 /**
@@ -239,7 +271,12 @@ export interface ReportingConfiguration
         SuggestionsConfiguration,
         UnknownWordsConfiguration {}
 
-export interface ReportIssueOptions extends UnknownWordsConfiguration {}
+export interface ReportIssueOptions extends UnknownWordsConfiguration {
+    /**
+     * Verify that the in-document directives are correct.
+     */
+    validateDirectives?: boolean;
+}
 
 /**
  * Possible choices for how to handle unknown words.

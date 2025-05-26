@@ -1,11 +1,6 @@
 import * as path from 'node:path';
 
-import {
-    CSpellUserSettings,
-    type Issue,
-    unknownWordsChoices,
-    type UnknownWordsConfiguration,
-} from '@cspell/cspell-types';
+import { CSpellUserSettings, unknownWordsChoices, type UnknownWordsConfiguration } from '@cspell/cspell-types';
 
 import type { CSpellConfigFile, LinterCliOptions, LinterOptions } from '../options.js';
 import type { GlobSrcInfo } from '../util/glob.js';
@@ -20,7 +15,6 @@ interface Deprecated {
 }
 
 export class LintRequest {
-    readonly uniqueFilter: (issue: Issue) => boolean;
     readonly locale: string;
 
     readonly configFile: string | CSpellConfigFile | undefined;
@@ -42,8 +36,6 @@ export class LintRequest {
         this.excludes = calcExcludeGlobInfo(this.root, options.exclude);
         this.locale = options.locale ?? options.local ?? '';
         this.enableGlobDot = options.dot;
-        // this.uniqueFilter = options.unique ? util.uniqueFilterFnGenerator((issue: Issue) => issue.text) : () => true;
-        this.uniqueFilter = () => true;
         this.showContext =
             options.showContext === true ? defaultContextRange : options.showContext ? options.showContext : 0;
         this.fileLists = (options.fileList ?? options.fileLists) || [];
