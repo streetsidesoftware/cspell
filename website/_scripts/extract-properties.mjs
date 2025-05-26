@@ -72,7 +72,7 @@ function schemaObjectEntry(schemaTypeObject, nameOfType) {
 
     const isRequired = (key) => (required.has(key) && 1) || 0;
     const entries = Object.entries(properties).sort(
-        (a, b) => isRequired(a[0]) - isRequired(b[0]) || a[0].localeCompare(b[0]),
+        (a, b) => isRequired(b[0]) - isRequired(a[0]) || a[0].localeCompare(b[0]),
     );
 
     // Object Fields as a table
@@ -143,14 +143,13 @@ function formatPropertyForOverview(key, entry, section, isRequired) {
  * @returns {string}
  */
 function formatPropertyToDisplay(key, entry, nameOfParentType, isRequired) {
-    const req = isRequired ? ' <sup>_required_</sup>' : '';
     return inject`
 
         ---
 
-        #### \`${key}\` {#${toId(nameOfParentType, key)}}${req}
+        #### \`${key}\` {#${toId(nameOfParentType, key)}}
 
-        ${formatTypeEntryBody(entry)}
+        ${formatTypeEntryBody(entry, isRequired)}
     `;
 }
 
@@ -167,16 +166,19 @@ function formatTopLevelType(key, entry) {
 
         ## ${key} {#${toId('', key)}}
 
-        ${formatTypeEntryBody(entry)}
+        ${formatTypeEntryBody(entry, undefined)}
     `;
 }
 
 /**
  *
  * @param {Definition} entry
+ * @param {boolean | undefined} isRequired
  * @returns {string}
  */
-function formatTypeEntryBody(entry) {
+function formatTypeEntryBody(entry, isRequired) {
+    const req = isRequired ? ' <sub><sup> _< required >_ </sup></sub>' : '';
+
     let dlDescription = formatEntryDescription(entry, '');
     if (dlDescription) {
         dlDescription = inject`
@@ -200,7 +202,7 @@ function formatTypeEntryBody(entry) {
     return inject`
         <dl>
         ${dlDescription}
-        <dt>Type</dt>
+        <dt>Type${req}</dt>
         <dd>
 
         ${formatEntryType(entry)}

@@ -1898,12 +1898,67 @@ This is a set of characters that can include `-` or `|`
 
 | Field                                                        | Type                            | Description                                                            |
 | ------------------------------------------------------------ | ------------------------------- | ---------------------------------------------------------------------- |
-| [penalty](#charactersetcosts-penalty)                        | `number`                        | The penalty cost to apply if the accent is used.                       |
 | [characters](#charactersetcosts-characters) <sup>_req_</sup> | [`CharacterSet`](#characterset) | This is a set of characters that can include `-` or `|`                |
 | [cost](#charactersetcosts-cost) <sup>_req_</sup>             | `number`                        | the cost to insert / delete / replace / swap the characters in a group |
+| [penalty](#charactersetcosts-penalty)                        | `number`                        | The penalty cost to apply if the accent is used.                       |
 
 
 ### CharacterSetCosts Fields
+
+
+---
+
+#### `characters` {#charactersetcosts-characters}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+This is a set of characters that can include `-` or `|`
+- `-` - indicates a range of characters: `a-c` => `abc`
+- `|` - is a group separator, indicating that the characters on either side
+   are not related.
+
+</dd>
+
+<dt>Type <sub><sup> _< required >_ </sup></sub></dt>
+<dd>
+
+[`CharacterSet`](#characterset)
+
+</dd>
+
+</dl>
+
+
+
+
+---
+
+#### `cost` {#charactersetcosts-cost}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+the cost to insert / delete / replace / swap the characters in a group
+
+</dd>
+
+<dt>Type <sub><sup> _< required >_ </sup></sub></dt>
+<dd>
+
+`number`
+
+</dd>
+
+</dl>
+
+
 
 
 ---
@@ -1932,10 +1987,24 @@ This is used to discourage
 
 
 
+## CostMapDefInsDel
+
+| Field                                               | Type     | Description                                                                                            |
+| --------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------ |
+| [insDel](#costmapdefinsdel-insdel) <sup>_req_</sup> | `number` | The cost to insert/delete one of the substrings in the map. Note: insert/delete costs are symmetrical. |
+| [map](#costmapdefinsdel-map) <sup>_req_</sup>       | `string` | The set of substrings to map, these are generally single character strings.                            |
+| [description](#costmapdefinsdel-description)        | `string` | A description to describe the purpose of the map.                                                      |
+| [penalty](#costmapdefinsdel-penalty)                | `number` | Add a penalty to the final cost.                                                                       |
+| [replace](#costmapdefinsdel-replace)                | `number` | The cost to replace of of the substrings in the map with another substring in the map.                 |
+| [swap](#costmapdefinsdel-swap)                      | `number` | The cost to swap two adjacent substrings found in the map.                                             |
+
+
+### CostMapDefInsDel Fields
+
 
 ---
 
-#### `characters` {#charactersetcosts-characters} <sup>_required_</sup>
+#### `insDel` {#costmapdefinsdel-insdel}
 
 
 <dl>
@@ -1943,40 +2012,11 @@ This is used to discourage
 <dt>Description</dt>
 <dd>
 
-This is a set of characters that can include `-` or `|`
-- `-` - indicates a range of characters: `a-c` => `abc`
-- `|` - is a group separator, indicating that the characters on either side
-   are not related.
+The cost to insert/delete one of the substrings in the map. Note: insert/delete costs are symmetrical.
 
 </dd>
 
-<dt>Type</dt>
-<dd>
-
-[`CharacterSet`](#characterset)
-
-</dd>
-
-</dl>
-
-
-
-
----
-
-#### `cost` {#charactersetcosts-cost} <sup>_required_</sup>
-
-
-<dl>
-
-<dt>Description</dt>
-<dd>
-
-the cost to insert / delete / replace / swap the characters in a group
-
-</dd>
-
-<dt>Type</dt>
+<dt>Type <sub><sup> _< required >_ </sup></sub></dt>
 <dd>
 
 `number`
@@ -1987,19 +2027,42 @@ the cost to insert / delete / replace / swap the characters in a group
 
 
 
-## CostMapDefInsDel
 
-| Field                                               | Type     | Description                                                                                            |
-| --------------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------ |
-| [description](#costmapdefinsdel-description)        | `string` | A description to describe the purpose of the map.                                                      |
-| [penalty](#costmapdefinsdel-penalty)                | `number` | Add a penalty to the final cost.                                                                       |
-| [replace](#costmapdefinsdel-replace)                | `number` | The cost to replace of of the substrings in the map with another substring in the map.                 |
-| [swap](#costmapdefinsdel-swap)                      | `number` | The cost to swap two adjacent substrings found in the map.                                             |
-| [insDel](#costmapdefinsdel-insdel) <sup>_req_</sup> | `number` | The cost to insert/delete one of the substrings in the map. Note: insert/delete costs are symmetrical. |
-| [map](#costmapdefinsdel-map) <sup>_req_</sup>       | `string` | The set of substrings to map, these are generally single character strings.                            |
+---
+
+#### `map` {#costmapdefinsdel-map}
 
 
-### CostMapDefInsDel Fields
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+The set of substrings to map, these are generally single character strings.
+
+Multiple sets can be defined by using a `|` to separate them.
+
+Example: `"eéê|aåá"` contains two different sets.
+
+To add a multi-character substring use `()`.
+
+Example: `"f(ph)(gh)"` results in the following set: `f`, `ph`, `gh`.
+
+- To match the beginning of a word, use `^`: `"(^I)""`.
+- To match the end of a word, use `$`: `"(e$)(ing$)"`.
+
+</dd>
+
+<dt>Type <sub><sup> _< required >_ </sup></sub></dt>
+<dd>
+
+`string`
+
+</dd>
+
+</dl>
+
+
 
 
 ---
@@ -2122,36 +2185,24 @@ This represents the cost to change `ei` to `ie` or the reverse.
 
 
 
+## CostMapDefReplace
 
----
-
-#### `insDel` {#costmapdefinsdel-insdel} <sup>_required_</sup>
-
-
-<dl>
-
-<dt>Description</dt>
-<dd>
-
-The cost to insert/delete one of the substrings in the map. Note: insert/delete costs are symmetrical.
-
-</dd>
-
-<dt>Type</dt>
-<dd>
-
-`number`
-
-</dd>
-
-</dl>
+| Field                                                  | Type     | Description                                                                                            |
+| ------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------ |
+| [map](#costmapdefreplace-map) <sup>_req_</sup>         | `string` | The set of substrings to map, these are generally single character strings.                            |
+| [replace](#costmapdefreplace-replace) <sup>_req_</sup> | `number` | The cost to replace of of the substrings in the map with another substring in the map.                 |
+| [description](#costmapdefreplace-description)          | `string` | A description to describe the purpose of the map.                                                      |
+| [insDel](#costmapdefreplace-insdel)                    | `number` | The cost to insert/delete one of the substrings in the map. Note: insert/delete costs are symmetrical. |
+| [penalty](#costmapdefreplace-penalty)                  | `number` | Add a penalty to the final cost.                                                                       |
+| [swap](#costmapdefreplace-swap)                        | `number` | The cost to swap two adjacent substrings found in the map.                                             |
 
 
+### CostMapDefReplace Fields
 
 
 ---
 
-#### `map` {#costmapdefinsdel-map} <sup>_required_</sup>
+#### `map` {#costmapdefreplace-map}
 
 
 <dl>
@@ -2174,7 +2225,7 @@ Example: `"f(ph)(gh)"` results in the following set: `f`, `ph`, `gh`.
 
 </dd>
 
-<dt>Type</dt>
+<dt>Type <sub><sup> _< required >_ </sup></sub></dt>
 <dd>
 
 `string`
@@ -2185,19 +2236,33 @@ Example: `"f(ph)(gh)"` results in the following set: `f`, `ph`, `gh`.
 
 
 
-## CostMapDefReplace
 
-| Field                                                  | Type     | Description                                                                                            |
-| ------------------------------------------------------ | -------- | ------------------------------------------------------------------------------------------------------ |
-| [description](#costmapdefreplace-description)          | `string` | A description to describe the purpose of the map.                                                      |
-| [insDel](#costmapdefreplace-insdel)                    | `number` | The cost to insert/delete one of the substrings in the map. Note: insert/delete costs are symmetrical. |
-| [penalty](#costmapdefreplace-penalty)                  | `number` | Add a penalty to the final cost.                                                                       |
-| [swap](#costmapdefreplace-swap)                        | `number` | The cost to swap two adjacent substrings found in the map.                                             |
-| [map](#costmapdefreplace-map) <sup>_req_</sup>         | `string` | The set of substrings to map, these are generally single character strings.                            |
-| [replace](#costmapdefreplace-replace) <sup>_req_</sup> | `number` | The cost to replace of of the substrings in the map with another substring in the map.                 |
+---
+
+#### `replace` {#costmapdefreplace-replace}
 
 
-### CostMapDefReplace Fields
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+The cost to replace of of the substrings in the map with another substring in the map.
+Example: Map['a', 'i']
+This would be the cost to substitute `a` with `i`: Like `bat` to `bit` or the reverse.
+
+</dd>
+
+<dt>Type <sub><sup> _< required >_ </sup></sub></dt>
+<dd>
+
+`number`
+
+</dd>
+
+</dl>
+
+
 
 
 ---
@@ -2318,10 +2383,24 @@ This represents the cost to change `ei` to `ie` or the reverse.
 
 
 
+## CostMapDefSwap
+
+| Field                                         | Type     | Description                                                                                            |
+| --------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------ |
+| [map](#costmapdefswap-map) <sup>_req_</sup>   | `string` | The set of substrings to map, these are generally single character strings.                            |
+| [swap](#costmapdefswap-swap) <sup>_req_</sup> | `number` | The cost to swap two adjacent substrings found in the map.                                             |
+| [description](#costmapdefswap-description)    | `string` | A description to describe the purpose of the map.                                                      |
+| [insDel](#costmapdefswap-insdel)              | `number` | The cost to insert/delete one of the substrings in the map. Note: insert/delete costs are symmetrical. |
+| [penalty](#costmapdefswap-penalty)            | `number` | Add a penalty to the final cost.                                                                       |
+| [replace](#costmapdefswap-replace)            | `number` | The cost to replace of of the substrings in the map with another substring in the map.                 |
+
+
+### CostMapDefSwap Fields
+
 
 ---
 
-#### `map` {#costmapdefreplace-map} <sup>_required_</sup>
+#### `map` {#costmapdefswap-map}
 
 
 <dl>
@@ -2344,7 +2423,7 @@ Example: `"f(ph)(gh)"` results in the following set: `f`, `ph`, `gh`.
 
 </dd>
 
-<dt>Type</dt>
+<dt>Type <sub><sup> _< required >_ </sup></sub></dt>
 <dd>
 
 `string`
@@ -2358,7 +2437,7 @@ Example: `"f(ph)(gh)"` results in the following set: `f`, `ph`, `gh`.
 
 ---
 
-#### `replace` {#costmapdefreplace-replace} <sup>_required_</sup>
+#### `swap` {#costmapdefswap-swap}
 
 
 <dl>
@@ -2366,13 +2445,13 @@ Example: `"f(ph)(gh)"` results in the following set: `f`, `ph`, `gh`.
 <dt>Description</dt>
 <dd>
 
-The cost to replace of of the substrings in the map with another substring in the map.
-Example: Map['a', 'i']
-This would be the cost to substitute `a` with `i`: Like `bat` to `bit` or the reverse.
+The cost to swap two adjacent substrings found in the map.
+Example: Map['e', 'i']
+This represents the cost to change `ei` to `ie` or the reverse.
 
 </dd>
 
-<dt>Type</dt>
+<dt>Type <sub><sup> _< required >_ </sup></sub></dt>
 <dd>
 
 `number`
@@ -2382,20 +2461,6 @@ This would be the cost to substitute `a` with `i`: Like `bat` to `bit` or the re
 </dl>
 
 
-
-## CostMapDefSwap
-
-| Field                                         | Type     | Description                                                                                            |
-| --------------------------------------------- | -------- | ------------------------------------------------------------------------------------------------------ |
-| [description](#costmapdefswap-description)    | `string` | A description to describe the purpose of the map.                                                      |
-| [insDel](#costmapdefswap-insdel)              | `number` | The cost to insert/delete one of the substrings in the map. Note: insert/delete costs are symmetrical. |
-| [penalty](#costmapdefswap-penalty)            | `number` | Add a penalty to the final cost.                                                                       |
-| [replace](#costmapdefswap-replace)            | `number` | The cost to replace of of the substrings in the map with another substring in the map.                 |
-| [map](#costmapdefswap-map) <sup>_req_</sup>   | `string` | The set of substrings to map, these are generally single character strings.                            |
-| [swap](#costmapdefswap-swap) <sup>_req_</sup> | `number` | The cost to swap two adjacent substrings found in the map.                                             |
-
-
-### CostMapDefSwap Fields
 
 
 ---
@@ -2517,71 +2582,6 @@ This would be the cost to substitute `a` with `i`: Like `bat` to `bit` or the re
 
 
 
----
-
-#### `map` {#costmapdefswap-map} <sup>_required_</sup>
-
-
-<dl>
-
-<dt>Description</dt>
-<dd>
-
-The set of substrings to map, these are generally single character strings.
-
-Multiple sets can be defined by using a `|` to separate them.
-
-Example: `"eéê|aåá"` contains two different sets.
-
-To add a multi-character substring use `()`.
-
-Example: `"f(ph)(gh)"` results in the following set: `f`, `ph`, `gh`.
-
-- To match the beginning of a word, use `^`: `"(^I)""`.
-- To match the end of a word, use `$`: `"(e$)(ing$)"`.
-
-</dd>
-
-<dt>Type</dt>
-<dd>
-
-`string`
-
-</dd>
-
-</dl>
-
-
-
-
----
-
-#### `swap` {#costmapdefswap-swap} <sup>_required_</sup>
-
-
-<dl>
-
-<dt>Description</dt>
-<dd>
-
-The cost to swap two adjacent substrings found in the map.
-Example: Map['e', 'i']
-This represents the cost to change `ei` to `ie` or the reverse.
-
-</dd>
-
-<dt>Type</dt>
-<dd>
-
-`number`
-
-</dd>
-
-</dl>
-
-
-
-
 
 ---
 
@@ -2659,6 +2659,8 @@ Specifies the scope of a dictionary.
 
 | Field                                                                               | Type                                          | Description                                                                          |
 | ----------------------------------------------------------------------------------- | --------------------------------------------- | ------------------------------------------------------------------------------------ |
+| [file](#dictionarydefinitionalternate-file) <sup>_req_</sup>                        | [`DictionaryPath`](#dictionarypath)           | Path to the file, only for legacy dictionary definitions.                            |
+| [name](#dictionarydefinitionalternate-name) <sup>_req_</sup>                        | [`DictionaryId`](#dictionaryid)               | This is the name of a dictionary.                                                    |
 | [description](#dictionarydefinitionalternate-description)                           | `string`                                      | Optional description of the contents / purpose of the dictionary.                    |
 | [ignoreForbiddenWords](#dictionarydefinitionalternate-ignoreforbiddenwords)         | `boolean`                                     | Some dictionaries may contain forbidden words to prevent compounding from generating |
 | [noSuggest](#dictionarydefinitionalternate-nosuggest)                               | `boolean`                                     | Indicate that suggestions should not come from this dictionary.                      |
@@ -2666,11 +2668,68 @@ Specifies the scope of a dictionary.
 | [supportNonStrictSearches](#dictionarydefinitionalternate-supportnonstrictsearches) | `boolean`                                     | Strip case and accents to allow for case insensitive searches and                    |
 | [type](#dictionarydefinitionalternate-type)                                         | [`DictionaryFileTypes`](#dictionaryfiletypes) | Type of file:                                                                        |
 | [useCompounds](#dictionarydefinitionalternate-usecompounds)                         | `boolean`                                     | Use Compounds.                                                                       |
-| [file](#dictionarydefinitionalternate-file) <sup>_req_</sup>                        | [`DictionaryPath`](#dictionarypath)           | Path to the file, only for legacy dictionary definitions.                            |
-| [name](#dictionarydefinitionalternate-name) <sup>_req_</sup>                        | [`DictionaryId`](#dictionaryid)               | This is the name of a dictionary.                                                    |
 
 
 ### DictionaryDefinitionAlternate Fields
+
+
+---
+
+#### `file` {#dictionarydefinitionalternate-file}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+Path to the file, only for legacy dictionary definitions.
+
+</dd>
+
+<dt>Type <sub><sup> _< required >_ </sup></sub></dt>
+<dd>
+
+[`DictionaryPath`](#dictionarypath)
+
+</dd>
+
+</dl>
+
+
+
+
+---
+
+#### `name` {#dictionarydefinitionalternate-name}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+This is the name of a dictionary.
+
+Name Format:
+- Must contain at least 1 number or letter.
+- Spaces are allowed.
+- Leading and trailing space will be removed.
+- Names ARE case-sensitive.
+- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`.
+
+</dd>
+
+<dt>Type <sub><sup> _< required >_ </sup></sub></dt>
+<dd>
+
+[`DictionaryId`](#dictionaryid)
+
+</dd>
+
+</dl>
+
+
 
 
 ---
@@ -2877,36 +2936,28 @@ Use Compounds.
 
 
 
+## DictionaryDefinitionAugmented
 
----
-
-#### `file` {#dictionarydefinitionalternate-file} <sup>_required_</sup>
-
-
-<dl>
-
-<dt>Description</dt>
-<dd>
-
-Path to the file, only for legacy dictionary definitions.
-
-</dd>
-
-<dt>Type</dt>
-<dd>
-
-[`DictionaryPath`](#dictionarypath)
-
-</dd>
-
-</dl>
+| Field                                                                               | Type                                              | Description                                                                          |
+| ----------------------------------------------------------------------------------- | ------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| [name](#dictionarydefinitionaugmented-name) <sup>_req_</sup>                        | [`DictionaryId`](#dictionaryid)                   | This is the name of a dictionary.                                                    |
+| [path](#dictionarydefinitionaugmented-path) <sup>_req_</sup>                        | [`DictionaryPath`](#dictionarypath)               | Path to the file.                                                                    |
+| [description](#dictionarydefinitionaugmented-description)                           | `string`                                          | Optional description of the contents / purpose of the dictionary.                    |
+| [dictionaryInformation](#dictionarydefinitionaugmented-dictionaryinformation)       | [`DictionaryInformation`](#dictionaryinformation) |                                                                                      |
+| [ignoreForbiddenWords](#dictionarydefinitionaugmented-ignoreforbiddenwords)         | `boolean`                                         | Some dictionaries may contain forbidden words to prevent compounding from generating |
+| [noSuggest](#dictionarydefinitionaugmented-nosuggest)                               | `boolean`                                         | Indicate that suggestions should not come from this dictionary.                      |
+| [repMap](#dictionarydefinitionaugmented-repmap)                                     | [`ReplaceMap`](#replacemap)                       | Replacement pairs.                                                                   |
+| [supportNonStrictSearches](#dictionarydefinitionaugmented-supportnonstrictsearches) | `boolean`                                         | Strip case and accents to allow for case insensitive searches and                    |
+| [type](#dictionarydefinitionaugmented-type)                                         | [`DictionaryFileTypes`](#dictionaryfiletypes)     | Type of file:                                                                        |
+| [useCompounds](#dictionarydefinitionaugmented-usecompounds)                         | `boolean`                                         | Use Compounds.                                                                       |
 
 
+### DictionaryDefinitionAugmented Fields
 
 
 ---
 
-#### `name` {#dictionarydefinitionalternate-name} <sup>_required_</sup>
+#### `name` {#dictionarydefinitionaugmented-name}
 
 
 <dl>
@@ -2925,7 +2976,7 @@ Name Format:
 
 </dd>
 
-<dt>Type</dt>
+<dt>Type <sub><sup> _< required >_ </sup></sub></dt>
 <dd>
 
 [`DictionaryId`](#dictionaryid)
@@ -2936,23 +2987,31 @@ Name Format:
 
 
 
-## DictionaryDefinitionAugmented
 
-| Field                                                                               | Type                                              | Description                                                                          |
-| ----------------------------------------------------------------------------------- | ------------------------------------------------- | ------------------------------------------------------------------------------------ |
-| [description](#dictionarydefinitionaugmented-description)                           | `string`                                          | Optional description of the contents / purpose of the dictionary.                    |
-| [dictionaryInformation](#dictionarydefinitionaugmented-dictionaryinformation)       | [`DictionaryInformation`](#dictionaryinformation) |                                                                                      |
-| [ignoreForbiddenWords](#dictionarydefinitionaugmented-ignoreforbiddenwords)         | `boolean`                                         | Some dictionaries may contain forbidden words to prevent compounding from generating |
-| [noSuggest](#dictionarydefinitionaugmented-nosuggest)                               | `boolean`                                         | Indicate that suggestions should not come from this dictionary.                      |
-| [repMap](#dictionarydefinitionaugmented-repmap)                                     | [`ReplaceMap`](#replacemap)                       | Replacement pairs.                                                                   |
-| [supportNonStrictSearches](#dictionarydefinitionaugmented-supportnonstrictsearches) | `boolean`                                         | Strip case and accents to allow for case insensitive searches and                    |
-| [type](#dictionarydefinitionaugmented-type)                                         | [`DictionaryFileTypes`](#dictionaryfiletypes)     | Type of file:                                                                        |
-| [useCompounds](#dictionarydefinitionaugmented-usecompounds)                         | `boolean`                                         | Use Compounds.                                                                       |
-| [name](#dictionarydefinitionaugmented-name) <sup>_req_</sup>                        | [`DictionaryId`](#dictionaryid)                   | This is the name of a dictionary.                                                    |
-| [path](#dictionarydefinitionaugmented-path) <sup>_req_</sup>                        | [`DictionaryPath`](#dictionarypath)               | Path to the file.                                                                    |
+---
+
+#### `path` {#dictionarydefinitionaugmented-path}
 
 
-### DictionaryDefinitionAugmented Fields
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+Path to the file.
+
+</dd>
+
+<dt>Type <sub><sup> _< required >_ </sup></sub></dt>
+<dd>
+
+[`DictionaryPath`](#dictionarypath)
+
+</dd>
+
+</dl>
+
+
 
 
 ---
@@ -3178,10 +3237,55 @@ Use Compounds.
 
 
 
+## DictionaryDefinitionCustom
+
+| Field                                                                            | Type                                                                                                                         | Description                                                                           |
+| -------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| [addWords](#dictionarydefinitioncustom-addwords) <sup>_req_</sup>                | `boolean`                                                                                                                    | When `true`, let's the spell checker know that words can be added to this dictionary. |
+| [name](#dictionarydefinitioncustom-name) <sup>_req_</sup>                        | [`DictionaryId`](#dictionaryid)                                                                                              | This is the name of a dictionary.                                                     |
+| [path](#dictionarydefinitioncustom-path) <sup>_req_</sup>                        | [`CustomDictionaryPath`](#customdictionarypath)                                                                              | Path to custom dictionary text file.                                                  |
+| [description](#dictionarydefinitioncustom-description)                           | `string`                                                                                                                     | Optional description of the contents / purpose of the dictionary.                     |
+| [ignoreForbiddenWords](#dictionarydefinitioncustom-ignoreforbiddenwords)         | `boolean`                                                                                                                    | Some dictionaries may contain forbidden words to prevent compounding from generating  |
+| [noSuggest](#dictionarydefinitioncustom-nosuggest)                               | `boolean`                                                                                                                    | Indicate that suggestions should not come from this dictionary.                       |
+| [repMap](#dictionarydefinitioncustom-repmap)                                     | [`ReplaceMap`](#replacemap)                                                                                                  | Replacement pairs.                                                                    |
+| [scope](#dictionarydefinitioncustom-scope)                                       | [`CustomDictionaryScope`](#customdictionaryscope)<br />[`CustomDictionaryScope`](#customdictionaryscope)&ZeroWidthSpace;`[]` | Defines the scope for when words will be added to the dictionary.                     |
+| [supportNonStrictSearches](#dictionarydefinitioncustom-supportnonstrictsearches) | `boolean`                                                                                                                    | Strip case and accents to allow for case insensitive searches and                     |
+| [type](#dictionarydefinitioncustom-type)                                         | [`DictionaryFileTypes`](#dictionaryfiletypes)                                                                                | Type of file:                                                                         |
+| [useCompounds](#dictionarydefinitioncustom-usecompounds)                         | `boolean`                                                                                                                    | Use Compounds.                                                                        |
+
+
+### DictionaryDefinitionCustom Fields
+
 
 ---
 
-#### `name` {#dictionarydefinitionaugmented-name} <sup>_required_</sup>
+#### `addWords` {#dictionarydefinitioncustom-addwords}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+When `true`, let's the spell checker know that words can be added to this dictionary.
+
+</dd>
+
+<dt>Type <sub><sup> _< required >_ </sup></sub></dt>
+<dd>
+
+`boolean`
+
+</dd>
+
+</dl>
+
+
+
+
+---
+
+#### `name` {#dictionarydefinitioncustom-name}
 
 
 <dl>
@@ -3200,7 +3304,7 @@ Name Format:
 
 </dd>
 
-<dt>Type</dt>
+<dt>Type <sub><sup> _< required >_ </sup></sub></dt>
 <dd>
 
 [`DictionaryId`](#dictionaryid)
@@ -3214,7 +3318,7 @@ Name Format:
 
 ---
 
-#### `path` {#dictionarydefinitionaugmented-path} <sup>_required_</sup>
+#### `path` {#dictionarydefinitioncustom-path}
 
 
 <dl>
@@ -3222,39 +3326,20 @@ Name Format:
 <dt>Description</dt>
 <dd>
 
-Path to the file.
+Path to custom dictionary text file.
 
 </dd>
 
-<dt>Type</dt>
+<dt>Type <sub><sup> _< required >_ </sup></sub></dt>
 <dd>
 
-[`DictionaryPath`](#dictionarypath)
+[`CustomDictionaryPath`](#customdictionarypath)
 
 </dd>
 
 </dl>
 
 
-
-## DictionaryDefinitionCustom
-
-| Field                                                                            | Type                                                                                                                         | Description                                                                           |
-| -------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
-| [description](#dictionarydefinitioncustom-description)                           | `string`                                                                                                                     | Optional description of the contents / purpose of the dictionary.                     |
-| [ignoreForbiddenWords](#dictionarydefinitioncustom-ignoreforbiddenwords)         | `boolean`                                                                                                                    | Some dictionaries may contain forbidden words to prevent compounding from generating  |
-| [noSuggest](#dictionarydefinitioncustom-nosuggest)                               | `boolean`                                                                                                                    | Indicate that suggestions should not come from this dictionary.                       |
-| [repMap](#dictionarydefinitioncustom-repmap)                                     | [`ReplaceMap`](#replacemap)                                                                                                  | Replacement pairs.                                                                    |
-| [scope](#dictionarydefinitioncustom-scope)                                       | [`CustomDictionaryScope`](#customdictionaryscope)<br />[`CustomDictionaryScope`](#customdictionaryscope)&ZeroWidthSpace;`[]` | Defines the scope for when words will be added to the dictionary.                     |
-| [supportNonStrictSearches](#dictionarydefinitioncustom-supportnonstrictsearches) | `boolean`                                                                                                                    | Strip case and accents to allow for case insensitive searches and                     |
-| [type](#dictionarydefinitioncustom-type)                                         | [`DictionaryFileTypes`](#dictionaryfiletypes)                                                                                | Type of file:                                                                         |
-| [useCompounds](#dictionarydefinitioncustom-usecompounds)                         | `boolean`                                                                                                                    | Use Compounds.                                                                        |
-| [addWords](#dictionarydefinitioncustom-addwords) <sup>_req_</sup>                | `boolean`                                                                                                                    | When `true`, let's the spell checker know that words can be added to this dictionary. |
-| [name](#dictionarydefinitioncustom-name) <sup>_req_</sup>                        | [`DictionaryId`](#dictionaryid)                                                                                              | This is the name of a dictionary.                                                     |
-| [path](#dictionarydefinitioncustom-path) <sup>_req_</sup>                        | [`CustomDictionaryPath`](#customdictionarypath)                                                                              | Path to custom dictionary text file.                                                  |
-
-
-### DictionaryDefinitionCustom Fields
 
 
 ---
@@ -3490,91 +3575,6 @@ Use Compounds.
 
 
 
----
-
-#### `addWords` {#dictionarydefinitioncustom-addwords} <sup>_required_</sup>
-
-
-<dl>
-
-<dt>Description</dt>
-<dd>
-
-When `true`, let's the spell checker know that words can be added to this dictionary.
-
-</dd>
-
-<dt>Type</dt>
-<dd>
-
-`boolean`
-
-</dd>
-
-</dl>
-
-
-
-
----
-
-#### `name` {#dictionarydefinitioncustom-name} <sup>_required_</sup>
-
-
-<dl>
-
-<dt>Description</dt>
-<dd>
-
-This is the name of a dictionary.
-
-Name Format:
-- Must contain at least 1 number or letter.
-- Spaces are allowed.
-- Leading and trailing space will be removed.
-- Names ARE case-sensitive.
-- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`.
-
-</dd>
-
-<dt>Type</dt>
-<dd>
-
-[`DictionaryId`](#dictionaryid)
-
-</dd>
-
-</dl>
-
-
-
-
----
-
-#### `path` {#dictionarydefinitioncustom-path} <sup>_required_</sup>
-
-
-<dl>
-
-<dt>Description</dt>
-<dd>
-
-Path to custom dictionary text file.
-
-</dd>
-
-<dt>Type</dt>
-<dd>
-
-[`CustomDictionaryPath`](#customdictionarypath)
-
-</dd>
-
-</dl>
-
-
-
-
 
 ---
 
@@ -3608,16 +3608,89 @@ Inline Dictionary Definitions
 
 | Field                                                                                     | Type                            | Description                                                                                   |
 | ----------------------------------------------------------------------------------------- | ------------------------------- | --------------------------------------------------------------------------------------------- |
+| [flagWords](#dictionarydefinitioninlineflagwords-flagwords) <sup>_req_</sup>              | `string`&ZeroWidthSpace;`[]`    | List of words to always be considered incorrect. Words found in `flagWords` override `words`. |
+| [name](#dictionarydefinitioninlineflagwords-name) <sup>_req_</sup>                        | [`DictionaryId`](#dictionaryid) | This is the name of a dictionary.                                                             |
 | [description](#dictionarydefinitioninlineflagwords-description)                           | `string`                        | Optional description of the contents / purpose of the dictionary.                             |
 | [ignoreWords](#dictionarydefinitioninlineflagwords-ignorewords)                           | `string`&ZeroWidthSpace;`[]`    | List of words to be ignored. An ignored word will not show up as an error, even if it is      |
 | [suggestWords](#dictionarydefinitioninlineflagwords-suggestwords)                         | `string`&ZeroWidthSpace;`[]`    | A list of suggested replacements for words.                                                   |
 | [supportNonStrictSearches](#dictionarydefinitioninlineflagwords-supportnonstrictsearches) | `boolean`                       | Strip case and accents to allow for case insensitive searches and                             |
 | [words](#dictionarydefinitioninlineflagwords-words)                                       | `string`&ZeroWidthSpace;`[]`    | List of words to be considered correct.                                                       |
-| [flagWords](#dictionarydefinitioninlineflagwords-flagwords) <sup>_req_</sup>              | `string`&ZeroWidthSpace;`[]`    | List of words to always be considered incorrect. Words found in `flagWords` override `words`. |
-| [name](#dictionarydefinitioninlineflagwords-name) <sup>_req_</sup>                        | [`DictionaryId`](#dictionaryid) | This is the name of a dictionary.                                                             |
 
 
 ### DictionaryDefinitionInlineFlagWords Fields
+
+
+---
+
+#### `flagWords` {#dictionarydefinitioninlineflagwords-flagwords}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+List of words to always be considered incorrect. Words found in `flagWords` override `words`.
+
+Format of `flagWords`
+- single word entry - `word`
+- with suggestions - `word:suggestion` or `word->suggestion, suggestions`
+
+Example:
+```ts
+"flagWords": [
+  "color: colour",
+  "incase: in case, encase",
+  "canot->cannot",
+  "cancelled->canceled"
+]
+```
+
+</dd>
+
+<dt>Type <sub><sup> _< required >_ </sup></sub></dt>
+<dd>
+
+`string`&ZeroWidthSpace;`[]`
+
+</dd>
+
+</dl>
+
+
+
+
+---
+
+#### `name` {#dictionarydefinitioninlineflagwords-name}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+This is the name of a dictionary.
+
+Name Format:
+- Must contain at least 1 number or letter.
+- Spaces are allowed.
+- Leading and trailing space will be removed.
+- Names ARE case-sensitive.
+- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`.
+
+</dd>
+
+<dt>Type <sub><sup> _< required >_ </sup></sub></dt>
+<dd>
+
+[`DictionaryId`](#dictionaryid)
+
+</dd>
+
+</dl>
+
+
 
 
 ---
@@ -3764,10 +3837,25 @@ List of words to be considered correct.
 
 
 
+## DictionaryDefinitionInlineIgnoreWords
+
+| Field                                                                                       | Type                            | Description                                                                                   |
+| ------------------------------------------------------------------------------------------- | ------------------------------- | --------------------------------------------------------------------------------------------- |
+| [ignoreWords](#dictionarydefinitioninlineignorewords-ignorewords) <sup>_req_</sup>          | `string`&ZeroWidthSpace;`[]`    | List of words to be ignored. An ignored word will not show up as an error, even if it is      |
+| [name](#dictionarydefinitioninlineignorewords-name) <sup>_req_</sup>                        | [`DictionaryId`](#dictionaryid) | This is the name of a dictionary.                                                             |
+| [description](#dictionarydefinitioninlineignorewords-description)                           | `string`                        | Optional description of the contents / purpose of the dictionary.                             |
+| [flagWords](#dictionarydefinitioninlineignorewords-flagwords)                               | `string`&ZeroWidthSpace;`[]`    | List of words to always be considered incorrect. Words found in `flagWords` override `words`. |
+| [suggestWords](#dictionarydefinitioninlineignorewords-suggestwords)                         | `string`&ZeroWidthSpace;`[]`    | A list of suggested replacements for words.                                                   |
+| [supportNonStrictSearches](#dictionarydefinitioninlineignorewords-supportnonstrictsearches) | `boolean`                       | Strip case and accents to allow for case insensitive searches and                             |
+| [words](#dictionarydefinitioninlineignorewords-words)                                       | `string`&ZeroWidthSpace;`[]`    | List of words to be considered correct.                                                       |
+
+
+### DictionaryDefinitionInlineIgnoreWords Fields
+
 
 ---
 
-#### `flagWords` {#dictionarydefinitioninlineflagwords-flagwords} <sup>_required_</sup>
+#### `ignoreWords` {#dictionarydefinitioninlineignorewords-ignorewords}
 
 
 <dl>
@@ -3775,25 +3863,12 @@ List of words to be considered correct.
 <dt>Description</dt>
 <dd>
 
-List of words to always be considered incorrect. Words found in `flagWords` override `words`.
-
-Format of `flagWords`
-- single word entry - `word`
-- with suggestions - `word:suggestion` or `word->suggestion, suggestions`
-
-Example:
-```ts
-"flagWords": [
-  "color: colour",
-  "incase: in case, encase",
-  "canot->cannot",
-  "cancelled->canceled"
-]
-```
+List of words to be ignored. An ignored word will not show up as an error, even if it is
+also in the `flagWords`.
 
 </dd>
 
-<dt>Type</dt>
+<dt>Type <sub><sup> _< required >_ </sup></sub></dt>
 <dd>
 
 `string`&ZeroWidthSpace;`[]`
@@ -3807,7 +3882,7 @@ Example:
 
 ---
 
-#### `name` {#dictionarydefinitioninlineflagwords-name} <sup>_required_</sup>
+#### `name` {#dictionarydefinitioninlineignorewords-name}
 
 
 <dl>
@@ -3826,7 +3901,7 @@ Name Format:
 
 </dd>
 
-<dt>Type</dt>
+<dt>Type <sub><sup> _< required >_ </sup></sub></dt>
 <dd>
 
 [`DictionaryId`](#dictionaryid)
@@ -3836,21 +3911,6 @@ Name Format:
 </dl>
 
 
-
-## DictionaryDefinitionInlineIgnoreWords
-
-| Field                                                                                       | Type                            | Description                                                                                   |
-| ------------------------------------------------------------------------------------------- | ------------------------------- | --------------------------------------------------------------------------------------------- |
-| [description](#dictionarydefinitioninlineignorewords-description)                           | `string`                        | Optional description of the contents / purpose of the dictionary.                             |
-| [flagWords](#dictionarydefinitioninlineignorewords-flagwords)                               | `string`&ZeroWidthSpace;`[]`    | List of words to always be considered incorrect. Words found in `flagWords` override `words`. |
-| [suggestWords](#dictionarydefinitioninlineignorewords-suggestwords)                         | `string`&ZeroWidthSpace;`[]`    | A list of suggested replacements for words.                                                   |
-| [supportNonStrictSearches](#dictionarydefinitioninlineignorewords-supportnonstrictsearches) | `boolean`                       | Strip case and accents to allow for case insensitive searches and                             |
-| [words](#dictionarydefinitioninlineignorewords-words)                                       | `string`&ZeroWidthSpace;`[]`    | List of words to be considered correct.                                                       |
-| [ignoreWords](#dictionarydefinitioninlineignorewords-ignorewords) <sup>_req_</sup>          | `string`&ZeroWidthSpace;`[]`    | List of words to be ignored. An ignored word will not show up as an error, even if it is      |
-| [name](#dictionarydefinitioninlineignorewords-name) <sup>_req_</sup>                        | [`DictionaryId`](#dictionaryid) | This is the name of a dictionary.                                                             |
-
-
-### DictionaryDefinitionInlineIgnoreWords Fields
 
 
 ---
@@ -4010,37 +4070,25 @@ List of words to be considered correct.
 
 
 
+## DictionaryDefinitionInlineSuggestWords
 
----
-
-#### `ignoreWords` {#dictionarydefinitioninlineignorewords-ignorewords} <sup>_required_</sup>
-
-
-<dl>
-
-<dt>Description</dt>
-<dd>
-
-List of words to be ignored. An ignored word will not show up as an error, even if it is
-also in the `flagWords`.
-
-</dd>
-
-<dt>Type</dt>
-<dd>
-
-`string`&ZeroWidthSpace;`[]`
-
-</dd>
-
-</dl>
+| Field                                                                                        | Type                            | Description                                                                                   |
+| -------------------------------------------------------------------------------------------- | ------------------------------- | --------------------------------------------------------------------------------------------- |
+| [name](#dictionarydefinitioninlinesuggestwords-name) <sup>_req_</sup>                        | [`DictionaryId`](#dictionaryid) | This is the name of a dictionary.                                                             |
+| [suggestWords](#dictionarydefinitioninlinesuggestwords-suggestwords) <sup>_req_</sup>        | `string`&ZeroWidthSpace;`[]`    | A list of suggested replacements for words.                                                   |
+| [description](#dictionarydefinitioninlinesuggestwords-description)                           | `string`                        | Optional description of the contents / purpose of the dictionary.                             |
+| [flagWords](#dictionarydefinitioninlinesuggestwords-flagwords)                               | `string`&ZeroWidthSpace;`[]`    | List of words to always be considered incorrect. Words found in `flagWords` override `words`. |
+| [ignoreWords](#dictionarydefinitioninlinesuggestwords-ignorewords)                           | `string`&ZeroWidthSpace;`[]`    | List of words to be ignored. An ignored word will not show up as an error, even if it is      |
+| [supportNonStrictSearches](#dictionarydefinitioninlinesuggestwords-supportnonstrictsearches) | `boolean`                       | Strip case and accents to allow for case insensitive searches and                             |
+| [words](#dictionarydefinitioninlinesuggestwords-words)                                       | `string`&ZeroWidthSpace;`[]`    | List of words to be considered correct.                                                       |
 
 
+### DictionaryDefinitionInlineSuggestWords Fields
 
 
 ---
 
-#### `name` {#dictionarydefinitioninlineignorewords-name} <sup>_required_</sup>
+#### `name` {#dictionarydefinitioninlinesuggestwords-name}
 
 
 <dl>
@@ -4059,7 +4107,7 @@ Name Format:
 
 </dd>
 
-<dt>Type</dt>
+<dt>Type <sub><sup> _< required >_ </sup></sub></dt>
 <dd>
 
 [`DictionaryId`](#dictionaryid)
@@ -4070,20 +4118,41 @@ Name Format:
 
 
 
-## DictionaryDefinitionInlineSuggestWords
 
-| Field                                                                                        | Type                            | Description                                                                                   |
-| -------------------------------------------------------------------------------------------- | ------------------------------- | --------------------------------------------------------------------------------------------- |
-| [description](#dictionarydefinitioninlinesuggestwords-description)                           | `string`                        | Optional description of the contents / purpose of the dictionary.                             |
-| [flagWords](#dictionarydefinitioninlinesuggestwords-flagwords)                               | `string`&ZeroWidthSpace;`[]`    | List of words to always be considered incorrect. Words found in `flagWords` override `words`. |
-| [ignoreWords](#dictionarydefinitioninlinesuggestwords-ignorewords)                           | `string`&ZeroWidthSpace;`[]`    | List of words to be ignored. An ignored word will not show up as an error, even if it is      |
-| [supportNonStrictSearches](#dictionarydefinitioninlinesuggestwords-supportnonstrictsearches) | `boolean`                       | Strip case and accents to allow for case insensitive searches and                             |
-| [words](#dictionarydefinitioninlinesuggestwords-words)                                       | `string`&ZeroWidthSpace;`[]`    | List of words to be considered correct.                                                       |
-| [name](#dictionarydefinitioninlinesuggestwords-name) <sup>_req_</sup>                        | [`DictionaryId`](#dictionaryid) | This is the name of a dictionary.                                                             |
-| [suggestWords](#dictionarydefinitioninlinesuggestwords-suggestwords) <sup>_req_</sup>        | `string`&ZeroWidthSpace;`[]`    | A list of suggested replacements for words.                                                   |
+---
+
+#### `suggestWords` {#dictionarydefinitioninlinesuggestwords-suggestwords}
 
 
-### DictionaryDefinitionInlineSuggestWords Fields
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+A list of suggested replacements for words.
+Suggested words provide a way to make preferred suggestions on word replacements.
+To hint at a preferred change, but not to require it.
+
+Format of `suggestWords`
+- Single suggestion (possible auto fix)
+    - `word: suggestion`
+    - `word->suggestion`
+- Multiple suggestions (not auto fixable)
+   - `word: first, second, third`
+   - `word->first, second, third`
+
+</dd>
+
+<dt>Type <sub><sup> _< required >_ </sup></sub></dt>
+<dd>
+
+`string`&ZeroWidthSpace;`[]`
+
+</dd>
+
+</dl>
+
+
 
 
 ---
@@ -4234,10 +4303,25 @@ List of words to be considered correct.
 
 
 
+## DictionaryDefinitionInlineWords
+
+| Field                                                                                 | Type                            | Description                                                                                   |
+| ------------------------------------------------------------------------------------- | ------------------------------- | --------------------------------------------------------------------------------------------- |
+| [name](#dictionarydefinitioninlinewords-name) <sup>_req_</sup>                        | [`DictionaryId`](#dictionaryid) | This is the name of a dictionary.                                                             |
+| [words](#dictionarydefinitioninlinewords-words) <sup>_req_</sup>                      | `string`&ZeroWidthSpace;`[]`    | List of words to be considered correct.                                                       |
+| [description](#dictionarydefinitioninlinewords-description)                           | `string`                        | Optional description of the contents / purpose of the dictionary.                             |
+| [flagWords](#dictionarydefinitioninlinewords-flagwords)                               | `string`&ZeroWidthSpace;`[]`    | List of words to always be considered incorrect. Words found in `flagWords` override `words`. |
+| [ignoreWords](#dictionarydefinitioninlinewords-ignorewords)                           | `string`&ZeroWidthSpace;`[]`    | List of words to be ignored. An ignored word will not show up as an error, even if it is      |
+| [suggestWords](#dictionarydefinitioninlinewords-suggestwords)                         | `string`&ZeroWidthSpace;`[]`    | A list of suggested replacements for words.                                                   |
+| [supportNonStrictSearches](#dictionarydefinitioninlinewords-supportnonstrictsearches) | `boolean`                       | Strip case and accents to allow for case insensitive searches and                             |
+
+
+### DictionaryDefinitionInlineWords Fields
+
 
 ---
 
-#### `name` {#dictionarydefinitioninlinesuggestwords-name} <sup>_required_</sup>
+#### `name` {#dictionarydefinitioninlinewords-name}
 
 
 <dl>
@@ -4256,7 +4340,7 @@ Name Format:
 
 </dd>
 
-<dt>Type</dt>
+<dt>Type <sub><sup> _< required >_ </sup></sub></dt>
 <dd>
 
 [`DictionaryId`](#dictionaryid)
@@ -4270,7 +4354,7 @@ Name Format:
 
 ---
 
-#### `suggestWords` {#dictionarydefinitioninlinesuggestwords-suggestwords} <sup>_required_</sup>
+#### `words` {#dictionarydefinitioninlinewords-words}
 
 
 <dl>
@@ -4278,21 +4362,11 @@ Name Format:
 <dt>Description</dt>
 <dd>
 
-A list of suggested replacements for words.
-Suggested words provide a way to make preferred suggestions on word replacements.
-To hint at a preferred change, but not to require it.
-
-Format of `suggestWords`
-- Single suggestion (possible auto fix)
-    - `word: suggestion`
-    - `word->suggestion`
-- Multiple suggestions (not auto fixable)
-   - `word: first, second, third`
-   - `word->first, second, third`
+List of words to be considered correct.
 
 </dd>
 
-<dt>Type</dt>
+<dt>Type <sub><sup> _< required >_ </sup></sub></dt>
 <dd>
 
 `string`&ZeroWidthSpace;`[]`
@@ -4302,21 +4376,6 @@ Format of `suggestWords`
 </dl>
 
 
-
-## DictionaryDefinitionInlineWords
-
-| Field                                                                                 | Type                            | Description                                                                                   |
-| ------------------------------------------------------------------------------------- | ------------------------------- | --------------------------------------------------------------------------------------------- |
-| [description](#dictionarydefinitioninlinewords-description)                           | `string`                        | Optional description of the contents / purpose of the dictionary.                             |
-| [flagWords](#dictionarydefinitioninlinewords-flagwords)                               | `string`&ZeroWidthSpace;`[]`    | List of words to always be considered incorrect. Words found in `flagWords` override `words`. |
-| [ignoreWords](#dictionarydefinitioninlinewords-ignorewords)                           | `string`&ZeroWidthSpace;`[]`    | List of words to be ignored. An ignored word will not show up as an error, even if it is      |
-| [suggestWords](#dictionarydefinitioninlinewords-suggestwords)                         | `string`&ZeroWidthSpace;`[]`    | A list of suggested replacements for words.                                                   |
-| [supportNonStrictSearches](#dictionarydefinitioninlinewords-supportnonstrictsearches) | `boolean`                       | Strip case and accents to allow for case insensitive searches and                             |
-| [name](#dictionarydefinitioninlinewords-name) <sup>_req_</sup>                        | [`DictionaryId`](#dictionaryid) | This is the name of a dictionary.                                                             |
-| [words](#dictionarydefinitioninlinewords-words) <sup>_req_</sup>                      | `string`&ZeroWidthSpace;`[]`    | List of words to be considered correct.                                                       |
-
-
-### DictionaryDefinitionInlineWords Fields
 
 
 ---
@@ -4477,10 +4536,27 @@ dictionaries.
 
 
 
+## DictionaryDefinitionPreferred
+
+| Field                                                                               | Type                                          | Description                                                                          |
+| ----------------------------------------------------------------------------------- | --------------------------------------------- | ------------------------------------------------------------------------------------ |
+| [name](#dictionarydefinitionpreferred-name) <sup>_req_</sup>                        | [`DictionaryId`](#dictionaryid)               | This is the name of a dictionary.                                                    |
+| [path](#dictionarydefinitionpreferred-path) <sup>_req_</sup>                        | [`DictionaryPath`](#dictionarypath)           | Path to the file.                                                                    |
+| [description](#dictionarydefinitionpreferred-description)                           | `string`                                      | Optional description of the contents / purpose of the dictionary.                    |
+| [ignoreForbiddenWords](#dictionarydefinitionpreferred-ignoreforbiddenwords)         | `boolean`                                     | Some dictionaries may contain forbidden words to prevent compounding from generating |
+| [noSuggest](#dictionarydefinitionpreferred-nosuggest)                               | `boolean`                                     | Indicate that suggestions should not come from this dictionary.                      |
+| [repMap](#dictionarydefinitionpreferred-repmap)                                     | [`ReplaceMap`](#replacemap)                   | Replacement pairs.                                                                   |
+| [supportNonStrictSearches](#dictionarydefinitionpreferred-supportnonstrictsearches) | `boolean`                                     | Strip case and accents to allow for case insensitive searches and                    |
+| [type](#dictionarydefinitionpreferred-type)                                         | [`DictionaryFileTypes`](#dictionaryfiletypes) | Type of file:                                                                        |
+| [useCompounds](#dictionarydefinitionpreferred-usecompounds)                         | `boolean`                                     | Use Compounds.                                                                       |
+
+
+### DictionaryDefinitionPreferred Fields
+
 
 ---
 
-#### `name` {#dictionarydefinitioninlinewords-name} <sup>_required_</sup>
+#### `name` {#dictionarydefinitionpreferred-name}
 
 
 <dl>
@@ -4499,7 +4575,7 @@ Name Format:
 
 </dd>
 
-<dt>Type</dt>
+<dt>Type <sub><sup> _< required >_ </sup></sub></dt>
 <dd>
 
 [`DictionaryId`](#dictionaryid)
@@ -4513,7 +4589,7 @@ Name Format:
 
 ---
 
-#### `words` {#dictionarydefinitioninlinewords-words} <sup>_required_</sup>
+#### `path` {#dictionarydefinitionpreferred-path}
 
 
 <dl>
@@ -4521,37 +4597,20 @@ Name Format:
 <dt>Description</dt>
 <dd>
 
-List of words to be considered correct.
+Path to the file.
 
 </dd>
 
-<dt>Type</dt>
+<dt>Type <sub><sup> _< required >_ </sup></sub></dt>
 <dd>
 
-`string`&ZeroWidthSpace;`[]`
+[`DictionaryPath`](#dictionarypath)
 
 </dd>
 
 </dl>
 
 
-
-## DictionaryDefinitionPreferred
-
-| Field                                                                               | Type                                          | Description                                                                          |
-| ----------------------------------------------------------------------------------- | --------------------------------------------- | ------------------------------------------------------------------------------------ |
-| [description](#dictionarydefinitionpreferred-description)                           | `string`                                      | Optional description of the contents / purpose of the dictionary.                    |
-| [ignoreForbiddenWords](#dictionarydefinitionpreferred-ignoreforbiddenwords)         | `boolean`                                     | Some dictionaries may contain forbidden words to prevent compounding from generating |
-| [noSuggest](#dictionarydefinitionpreferred-nosuggest)                               | `boolean`                                     | Indicate that suggestions should not come from this dictionary.                      |
-| [repMap](#dictionarydefinitionpreferred-repmap)                                     | [`ReplaceMap`](#replacemap)                   | Replacement pairs.                                                                   |
-| [supportNonStrictSearches](#dictionarydefinitionpreferred-supportnonstrictsearches) | `boolean`                                     | Strip case and accents to allow for case insensitive searches and                    |
-| [type](#dictionarydefinitionpreferred-type)                                         | [`DictionaryFileTypes`](#dictionaryfiletypes) | Type of file:                                                                        |
-| [useCompounds](#dictionarydefinitionpreferred-usecompounds)                         | `boolean`                                     | Use Compounds.                                                                       |
-| [name](#dictionarydefinitionpreferred-name) <sup>_req_</sup>                        | [`DictionaryId`](#dictionaryid)               | This is the name of a dictionary.                                                    |
-| [path](#dictionarydefinitionpreferred-path) <sup>_req_</sup>                        | [`DictionaryPath`](#dictionarypath)           | Path to the file.                                                                    |
-
-
-### DictionaryDefinitionPreferred Fields
 
 
 ---
@@ -4758,10 +4817,21 @@ Use Compounds.
 
 
 
+## DictionaryDefinitionSimple
+
+| Field                                                                            | Type                            | Description                                                       |
+| -------------------------------------------------------------------------------- | ------------------------------- | ----------------------------------------------------------------- |
+| [name](#dictionarydefinitionsimple-name) <sup>_req_</sup>                        | [`DictionaryId`](#dictionaryid) | This is the name of a dictionary.                                 |
+| [description](#dictionarydefinitionsimple-description)                           | `string`                        | Optional description of the contents / purpose of the dictionary. |
+| [supportNonStrictSearches](#dictionarydefinitionsimple-supportnonstrictsearches) | `boolean`                       | Strip case and accents to allow for case insensitive searches and |
+
+
+### DictionaryDefinitionSimple Fields
+
 
 ---
 
-#### `name` {#dictionarydefinitionpreferred-name} <sup>_required_</sup>
+#### `name` {#dictionarydefinitionsimple-name}
 
 
 <dl>
@@ -4780,7 +4850,7 @@ Name Format:
 
 </dd>
 
-<dt>Type</dt>
+<dt>Type <sub><sup> _< required >_ </sup></sub></dt>
 <dd>
 
 [`DictionaryId`](#dictionaryid)
@@ -4790,43 +4860,6 @@ Name Format:
 </dl>
 
 
-
-
----
-
-#### `path` {#dictionarydefinitionpreferred-path} <sup>_required_</sup>
-
-
-<dl>
-
-<dt>Description</dt>
-<dd>
-
-Path to the file.
-
-</dd>
-
-<dt>Type</dt>
-<dd>
-
-[`DictionaryPath`](#dictionarypath)
-
-</dd>
-
-</dl>
-
-
-
-## DictionaryDefinitionSimple
-
-| Field                                                                            | Type                            | Description                                                       |
-| -------------------------------------------------------------------------------- | ------------------------------- | ----------------------------------------------------------------- |
-| [description](#dictionarydefinitionsimple-description)                           | `string`                        | Optional description of the contents / purpose of the dictionary. |
-| [supportNonStrictSearches](#dictionarydefinitionsimple-supportnonstrictsearches) | `boolean`                       | Strip case and accents to allow for case insensitive searches and |
-| [name](#dictionarydefinitionsimple-name) <sup>_req_</sup>                        | [`DictionaryId`](#dictionaryid) | This is the name of a dictionary.                                 |
-
-
-### DictionaryDefinitionSimple Fields
 
 
 ---
@@ -4877,39 +4910,6 @@ dictionaries.
 <dd>
 
 `boolean`
-
-</dd>
-
-</dl>
-
-
-
-
----
-
-#### `name` {#dictionarydefinitionsimple-name} <sup>_required_</sup>
-
-
-<dl>
-
-<dt>Description</dt>
-<dd>
-
-This is the name of a dictionary.
-
-Name Format:
-- Must contain at least 1 number or letter.
-- Spaces are allowed.
-- Leading and trailing space will be removed.
-- Names ARE case-sensitive.
-- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`.
-
-</dd>
-
-<dt>Type</dt>
-<dd>
-
-[`DictionaryId`](#dictionaryid)
 
 </dd>
 
@@ -5644,8 +5644,8 @@ These are glob expressions.
 
 | Field                                            | Type     | Description                                         |
 | ------------------------------------------------ | -------- | --------------------------------------------------- |
-| [costs](#hunspellinformation-costs)              | `object` | The costs to apply when using the hunspell settings |
 | [aff](#hunspellinformation-aff) <sup>_req_</sup> | `string` | Selected Hunspell AFF content.                      |
+| [costs](#hunspellinformation-costs)              | `object` | The costs to apply when using the hunspell settings |
 
 
 ### HunspellInformation Fields
@@ -5653,33 +5653,7 @@ These are glob expressions.
 
 ---
 
-#### `costs` {#hunspellinformation-costs}
-
-
-<dl>
-
-<dt>Description</dt>
-<dd>
-
-The costs to apply when using the hunspell settings
-
-</dd>
-
-<dt>Type</dt>
-<dd>
-
-`object`
-
-</dd>
-
-</dl>
-
-
-
-
----
-
-#### `aff` {#hunspellinformation-aff} <sup>_required_</sup>
+#### `aff` {#hunspellinformation-aff}
 
 
 <dl>
@@ -5711,10 +5685,36 @@ MAP (IJ)(Ĳ)
 
 </dd>
 
-<dt>Type</dt>
+<dt>Type <sub><sup> _< required >_ </sup></sub></dt>
 <dd>
 
 `string`
+
+</dd>
+
+</dl>
+
+
+
+
+---
+
+#### `costs` {#hunspellinformation-costs}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+The costs to apply when using the hunspell settings
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`object`
 
 </dd>
 
@@ -5835,6 +5835,7 @@ A file type:
 
 | Field                                                           | Type                                                                      | Description                                                                                                                   |
 | --------------------------------------------------------------- | ------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
+| [languageId](#languagesetting-languageid) <sup>_req_</sup>      | [`MatchingFileType`](#matchingfiletype)                                   | The language id.  Ex: `typescript`, `html`, or `php`.  `*` -- will match all languages.                                       |
 | [allowCompoundWords](#languagesetting-allowcompoundwords)       | `boolean`                                                                 | True to enable compound word checking.                                                                                        |
 | [caseSensitive](#languagesetting-casesensitive)                 | `boolean`                                                                 | Determines if words must match case and accent rules.                                                                         |
 | [description](#languagesetting-description)                     | `string`                                                                  | Optional description of configuration.                                                                                        |
@@ -5854,10 +5855,35 @@ A file type:
 | [suggestWords](#languagesetting-suggestwords)                   | `string`&ZeroWidthSpace;`[]`                                              | A list of suggested replacements for words.                                                                                   |
 | [unknownWords](#languagesetting-unknownwords)                   | [`UnknownWordsChoices`](#unknownwordschoices)                             | Controls how unknown words are handled.                                                                                       |
 | [words](#languagesetting-words)                                 | `string`&ZeroWidthSpace;`[]`                                              | List of words to be considered correct.                                                                                       |
-| [languageId](#languagesetting-languageid) <sup>_req_</sup>      | [`MatchingFileType`](#matchingfiletype)                                   | The language id.  Ex: `typescript`, `html`, or `php`.  `*` -- will match all languages.                                       |
 
 
 ### LanguageSetting Fields
+
+
+---
+
+#### `languageId` {#languagesetting-languageid}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+The language id.  Ex: `typescript`, `html`, or `php`.  `*` -- will match all languages.
+
+</dd>
+
+<dt>Type <sub><sup> _< required >_ </sup></sub></dt>
+<dd>
+
+[`MatchingFileType`](#matchingfiletype)
+
+</dd>
+
+</dl>
+
+
 
 
 ---
@@ -6466,32 +6492,6 @@ List of words to be considered correct.
 
 
 
----
-
-#### `languageId` {#languagesetting-languageid} <sup>_required_</sup>
-
-
-<dl>
-
-<dt>Description</dt>
-<dd>
-
-The language id.  Ex: `typescript`, `html`, or `php`.  `*` -- will match all languages.
-
-</dd>
-
-<dt>Type</dt>
-<dd>
-
-[`MatchingFileType`](#matchingfiletype)
-
-</dd>
-
-</dl>
-
-
-
-
 
 ---
 
@@ -6542,6 +6542,7 @@ This is a written language locale like: `en`, `en-GB`, `fr`, `es`, `de` or `en,f
 
 | Field                                                                  | Type                                                                      | Description                                                                                                                                                          |
 | ---------------------------------------------------------------------- | ------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [filename](#overridesettings-filename) <sup>_req_</sup>                | [`Glob`](#glob)<br />[`Glob`](#glob)&ZeroWidthSpace;`[]`                  | Glob pattern or patterns to match against.                                                                                                                           |
 | [allowCompoundWords](#overridesettings-allowcompoundwords)             | `boolean`                                                                 | True to enable compound word checking.                                                                                                                               |
 | [caseSensitive](#overridesettings-casesensitive)                       | `boolean`                                                                 | Determines if words must match case and accent rules.                                                                                                                |
 | [description](#overridesettings-description)                           | `string`                                                                  | Optional description of configuration.                                                                                                                               |
@@ -6576,10 +6577,35 @@ This is a written language locale like: `en`, `en-GB`, `fr`, `es`, `de` or `en,f
 | [unknownWords](#overridesettings-unknownwords)                         | [`UnknownWordsChoices`](#unknownwordschoices)                             | Controls how unknown words are handled.                                                                                                                              |
 | [usePnP](#overridesettings-usepnp)                                     | `boolean`                                                                 | Packages managers like Yarn 2 use a `.pnp.cjs` file to assist in loading                                                                                             |
 | [words](#overridesettings-words)                                       | `string`&ZeroWidthSpace;`[]`                                              | List of words to be considered correct.                                                                                                                              |
-| [filename](#overridesettings-filename) <sup>_req_</sup>                | [`Glob`](#glob)<br />[`Glob`](#glob)&ZeroWidthSpace;`[]`                  | Glob pattern or patterns to match against.                                                                                                                           |
 
 
 ### OverrideSettings Fields
+
+
+---
+
+#### `filename` {#overridesettings-filename}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+Glob pattern or patterns to match against.
+
+</dd>
+
+<dt>Type <sub><sup> _< required >_ </sup></sub></dt>
+<dd>
+
+[`Glob`](#glob)<br />[`Glob`](#glob)&ZeroWidthSpace;`[]`
+
+</dd>
+
+</dl>
+
+
 
 
 ---
@@ -7626,32 +7652,6 @@ List of words to be considered correct.
 
 
 
----
-
-#### `filename` {#overridesettings-filename} <sup>_required_</sup>
-
-
-<dl>
-
-<dt>Description</dt>
-<dd>
-
-Glob pattern or patterns to match against.
-
-</dd>
-
-<dt>Type</dt>
-<dd>
-
-[`Glob`](#glob)<br />[`Glob`](#glob)&ZeroWidthSpace;`[]`
-
-</dd>
-
-</dl>
-
-
-
-
 
 ---
 
@@ -7685,7 +7685,7 @@ Glob pattern or patterns to match against.
 
 ---
 
-#### `id` {#patternadjustment-id} <sup>_required_</sup>
+#### `id` {#patternadjustment-id}
 
 
 <dl>
@@ -7697,7 +7697,7 @@ Id of the Adjustment, i.e. `short-compound`
 
 </dd>
 
-<dt>Type</dt>
+<dt>Type <sub><sup> _< required >_ </sup></sub></dt>
 <dd>
 
 `string`
@@ -7711,7 +7711,7 @@ Id of the Adjustment, i.e. `short-compound`
 
 ---
 
-#### `penalty` {#patternadjustment-penalty} <sup>_required_</sup>
+#### `penalty` {#patternadjustment-penalty}
 
 
 <dl>
@@ -7723,7 +7723,7 @@ The amount of penalty to apply.
 
 </dd>
 
-<dt>Type</dt>
+<dt>Type <sub><sup> _< required >_ </sup></sub></dt>
 <dd>
 
 `number`
@@ -7737,7 +7737,7 @@ The amount of penalty to apply.
 
 ---
 
-#### `regexp` {#patternadjustment-regexp} <sup>_required_</sup>
+#### `regexp` {#patternadjustment-regexp}
 
 
 <dl>
@@ -7749,7 +7749,7 @@ RegExp pattern to match
 
 </dd>
 
-<dt>Type</dt>
+<dt>Type <sub><sup> _< required >_ </sup></sub></dt>
 <dd>
 
 `string`
@@ -7838,12 +7838,65 @@ A PatternRef is a Pattern or PatternId.
 
 | Field                                                        | Type                                                                 | Description                                                                    |
 | ------------------------------------------------------------ | -------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| [description](#regexppatterndefinition-description)          | `string`                                                             | Description of the pattern.                                                    |
 | [name](#regexppatterndefinition-name) <sup>_req_</sup>       | [`PatternId`](#patternid)                                            | Pattern name, used as an identifier in ignoreRegExpList and includeRegExpList. |
 | [pattern](#regexppatterndefinition-pattern) <sup>_req_</sup> | [`Pattern`](#pattern)<br />[`Pattern`](#pattern)&ZeroWidthSpace;`[]` | RegExp pattern or array of RegExp patterns.                                    |
+| [description](#regexppatterndefinition-description)          | `string`                                                             | Description of the pattern.                                                    |
 
 
 ### RegExpPatternDefinition Fields
+
+
+---
+
+#### `name` {#regexppatterndefinition-name}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+Pattern name, used as an identifier in ignoreRegExpList and includeRegExpList.
+It is possible to redefine one of the predefined patterns to override its value.
+
+</dd>
+
+<dt>Type <sub><sup> _< required >_ </sup></sub></dt>
+<dd>
+
+[`PatternId`](#patternid)
+
+</dd>
+
+</dl>
+
+
+
+
+---
+
+#### `pattern` {#regexppatterndefinition-pattern}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+RegExp pattern or array of RegExp patterns.
+
+</dd>
+
+<dt>Type <sub><sup> _< required >_ </sup></sub></dt>
+<dd>
+
+[`Pattern`](#pattern)<br />[`Pattern`](#pattern)&ZeroWidthSpace;`[]`
+
+</dd>
+
+</dl>
+
+
 
 
 ---
@@ -7864,59 +7917,6 @@ Description of the pattern.
 <dd>
 
 `string`
-
-</dd>
-
-</dl>
-
-
-
-
----
-
-#### `name` {#regexppatterndefinition-name} <sup>_required_</sup>
-
-
-<dl>
-
-<dt>Description</dt>
-<dd>
-
-Pattern name, used as an identifier in ignoreRegExpList and includeRegExpList.
-It is possible to redefine one of the predefined patterns to override its value.
-
-</dd>
-
-<dt>Type</dt>
-<dd>
-
-[`PatternId`](#patternid)
-
-</dd>
-
-</dl>
-
-
-
-
----
-
-#### `pattern` {#regexppatterndefinition-pattern} <sup>_required_</sup>
-
-
-<dl>
-
-<dt>Description</dt>
-<dd>
-
-RegExp pattern or array of RegExp patterns.
-
-</dd>
-
-<dt>Type</dt>
-<dd>
-
-[`Pattern`](#pattern)<br />[`Pattern`](#pattern)&ZeroWidthSpace;`[]`
 
 </dd>
 
