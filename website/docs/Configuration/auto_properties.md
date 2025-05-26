@@ -3606,20 +3606,15 @@ Inline Dictionary Definitions
 
 ## DictionaryDefinitionInlineFlagWords
 
-| Field                                                                                     | Type                                          | Description                                                                                   |
-| ----------------------------------------------------------------------------------------- | --------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| [description](#dictionarydefinitioninlineflagwords-description)                           | `string`                                      | Optional description of the contents / purpose of the dictionary.                             |
-| [flagWords](#dictionarydefinitioninlineflagwords-flagwords)                               | `string`&ZeroWidthSpace;`[]`                  | List of words to always be considered incorrect. Words found in `flagWords` override `words`. |
-| [ignoreForbiddenWords](#dictionarydefinitioninlineflagwords-ignoreforbiddenwords)         | `boolean`                                     | Some dictionaries may contain forbidden words to prevent compounding from generating          |
-| [ignoreWords](#dictionarydefinitioninlineflagwords-ignorewords)                           | `string`&ZeroWidthSpace;`[]`                  | List of words to be ignored. An ignored word will not show up as an error, even if it is      |
-| [name](#dictionarydefinitioninlineflagwords-name)                                         | [`DictionaryId`](#dictionaryid)               | This is the name of a dictionary.                                                             |
-| [noSuggest](#dictionarydefinitioninlineflagwords-nosuggest)                               | `boolean`                                     | Indicate that suggestions should not come from this dictionary.                               |
-| [repMap](#dictionarydefinitioninlineflagwords-repmap)                                     | [`ReplaceMap`](#replacemap)                   | Replacement pairs.                                                                            |
-| [suggestWords](#dictionarydefinitioninlineflagwords-suggestwords)                         | `string`&ZeroWidthSpace;`[]`                  | A list of suggested replacements for words.                                                   |
-| [supportNonStrictSearches](#dictionarydefinitioninlineflagwords-supportnonstrictsearches) | `boolean`                                     | Strip case and accents to allow for case insensitive searches and                             |
-| [type](#dictionarydefinitioninlineflagwords-type)                                         | [`DictionaryFileTypes`](#dictionaryfiletypes) | Type of file:                                                                                 |
-| [useCompounds](#dictionarydefinitioninlineflagwords-usecompounds)                         | `boolean`                                     | Use Compounds.                                                                                |
-| [words](#dictionarydefinitioninlineflagwords-words)                                       | `string`&ZeroWidthSpace;`[]`                  | List of words to be considered correct.                                                       |
+| Field                                                                                     | Type                            | Description                                                                                   |
+| ----------------------------------------------------------------------------------------- | ------------------------------- | --------------------------------------------------------------------------------------------- |
+| [description](#dictionarydefinitioninlineflagwords-description)                           | `string`                        | Optional description of the contents / purpose of the dictionary.                             |
+| [flagWords](#dictionarydefinitioninlineflagwords-flagwords)                               | `string`&ZeroWidthSpace;`[]`    | List of words to always be considered incorrect. Words found in `flagWords` override `words`. |
+| [ignoreWords](#dictionarydefinitioninlineflagwords-ignorewords)                           | `string`&ZeroWidthSpace;`[]`    | List of words to be ignored. An ignored word will not show up as an error, even if it is      |
+| [name](#dictionarydefinitioninlineflagwords-name)                                         | [`DictionaryId`](#dictionaryid) | This is the name of a dictionary.                                                             |
+| [suggestWords](#dictionarydefinitioninlineflagwords-suggestwords)                         | `string`&ZeroWidthSpace;`[]`    | A list of suggested replacements for words.                                                   |
+| [supportNonStrictSearches](#dictionarydefinitioninlineflagwords-supportnonstrictsearches) | `boolean`                       | Strip case and accents to allow for case insensitive searches and                             |
+| [words](#dictionarydefinitioninlineflagwords-words)                                       | `string`&ZeroWidthSpace;`[]`    | List of words to be considered correct.                                                       |
 
 
 ### DictionaryDefinitionInlineFlagWords Fields
@@ -3693,36 +3688,6 @@ Example:
 
 ---
 
-#### `ignoreForbiddenWords` {#dictionarydefinitioninlineflagwords-ignoreforbiddenwords}
-
-
-<dl>
-
-<dt>Description</dt>
-<dd>
-
-Some dictionaries may contain forbidden words to prevent compounding from generating
-words that are not valid in the language. These are often
-words that are used in other languages or might be generated through compounding.
-This setting allows flagged words to be ignored when checking the dictionary.
-The effect is similar to the word not being in the dictionary.
-
-</dd>
-
-<dt>Type</dt>
-<dd>
-
-`boolean`
-
-</dd>
-
-</dl>
-
-
-
-
----
-
 #### `ignoreWords` {#dictionarydefinitioninlineflagwords-ignorewords}
 
 
@@ -3773,64 +3738,6 @@ Name Format:
 <dd>
 
 [`DictionaryId`](#dictionaryid)
-
-</dd>
-
-</dl>
-
-
-
-
----
-
-#### `noSuggest` {#dictionarydefinitioninlineflagwords-nosuggest}
-
-
-<dl>
-
-<dt>Description</dt>
-<dd>
-
-Indicate that suggestions should not come from this dictionary.
-Words in this dictionary are considered correct, but will not be
-used when making spell correction suggestions.
-
-Note: if a word is suggested by another dictionary, but found in
-this dictionary, it will be removed from the set of
-possible suggestions.
-
-</dd>
-
-<dt>Type</dt>
-<dd>
-
-`boolean`
-
-</dd>
-
-</dl>
-
-
-
-
----
-
-#### `repMap` {#dictionarydefinitioninlineflagwords-repmap}
-
-
-<dl>
-
-<dt>Description</dt>
-<dd>
-
-Replacement pairs.
-
-</dd>
-
-<dt>Type</dt>
-<dd>
-
-[`ReplaceMap`](#replacemap)
 
 </dd>
 
@@ -3907,67 +3814,6 @@ dictionaries.
 
 ---
 
-#### `type` {#dictionarydefinitioninlineflagwords-type}
-
-
-<dl>
-
-<dt>Description</dt>
-<dd>
-
-Type of file:
-- S - single word per line,
-- W - each line can contain one or more words separated by space,
-- C - each line is treated like code (Camel Case is allowed).
-
-Default is S.
-
-C is the slowest to load due to the need to split each line based upon code splitting rules.
-
-Note: this settings does not apply to inline dictionaries or `.trie` files.
-
-</dd>
-
-<dt>Type</dt>
-<dd>
-
-[`DictionaryFileTypes`](#dictionaryfiletypes)
-
-</dd>
-
-</dl>
-
-
-
-
----
-
-#### `useCompounds` {#dictionarydefinitioninlineflagwords-usecompounds}
-
-
-<dl>
-
-<dt>Description</dt>
-<dd>
-
-Use Compounds.
-
-</dd>
-
-<dt>Type</dt>
-<dd>
-
-`boolean`
-
-</dd>
-
-</dl>
-
-
-
-
----
-
 #### `words` {#dictionarydefinitioninlineflagwords-words}
 
 
@@ -3993,20 +3839,15 @@ List of words to be considered correct.
 
 ## DictionaryDefinitionInlineIgnoreWords
 
-| Field                                                                                       | Type                                          | Description                                                                                   |
-| ------------------------------------------------------------------------------------------- | --------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| [description](#dictionarydefinitioninlineignorewords-description)                           | `string`                                      | Optional description of the contents / purpose of the dictionary.                             |
-| [flagWords](#dictionarydefinitioninlineignorewords-flagwords)                               | `string`&ZeroWidthSpace;`[]`                  | List of words to always be considered incorrect. Words found in `flagWords` override `words`. |
-| [ignoreForbiddenWords](#dictionarydefinitioninlineignorewords-ignoreforbiddenwords)         | `boolean`                                     | Some dictionaries may contain forbidden words to prevent compounding from generating          |
-| [ignoreWords](#dictionarydefinitioninlineignorewords-ignorewords)                           | `string`&ZeroWidthSpace;`[]`                  | List of words to be ignored. An ignored word will not show up as an error, even if it is      |
-| [name](#dictionarydefinitioninlineignorewords-name)                                         | [`DictionaryId`](#dictionaryid)               | This is the name of a dictionary.                                                             |
-| [noSuggest](#dictionarydefinitioninlineignorewords-nosuggest)                               | `boolean`                                     | Indicate that suggestions should not come from this dictionary.                               |
-| [repMap](#dictionarydefinitioninlineignorewords-repmap)                                     | [`ReplaceMap`](#replacemap)                   | Replacement pairs.                                                                            |
-| [suggestWords](#dictionarydefinitioninlineignorewords-suggestwords)                         | `string`&ZeroWidthSpace;`[]`                  | A list of suggested replacements for words.                                                   |
-| [supportNonStrictSearches](#dictionarydefinitioninlineignorewords-supportnonstrictsearches) | `boolean`                                     | Strip case and accents to allow for case insensitive searches and                             |
-| [type](#dictionarydefinitioninlineignorewords-type)                                         | [`DictionaryFileTypes`](#dictionaryfiletypes) | Type of file:                                                                                 |
-| [useCompounds](#dictionarydefinitioninlineignorewords-usecompounds)                         | `boolean`                                     | Use Compounds.                                                                                |
-| [words](#dictionarydefinitioninlineignorewords-words)                                       | `string`&ZeroWidthSpace;`[]`                  | List of words to be considered correct.                                                       |
+| Field                                                                                       | Type                            | Description                                                                                   |
+| ------------------------------------------------------------------------------------------- | ------------------------------- | --------------------------------------------------------------------------------------------- |
+| [description](#dictionarydefinitioninlineignorewords-description)                           | `string`                        | Optional description of the contents / purpose of the dictionary.                             |
+| [flagWords](#dictionarydefinitioninlineignorewords-flagwords)                               | `string`&ZeroWidthSpace;`[]`    | List of words to always be considered incorrect. Words found in `flagWords` override `words`. |
+| [ignoreWords](#dictionarydefinitioninlineignorewords-ignorewords)                           | `string`&ZeroWidthSpace;`[]`    | List of words to be ignored. An ignored word will not show up as an error, even if it is      |
+| [name](#dictionarydefinitioninlineignorewords-name)                                         | [`DictionaryId`](#dictionaryid) | This is the name of a dictionary.                                                             |
+| [suggestWords](#dictionarydefinitioninlineignorewords-suggestwords)                         | `string`&ZeroWidthSpace;`[]`    | A list of suggested replacements for words.                                                   |
+| [supportNonStrictSearches](#dictionarydefinitioninlineignorewords-supportnonstrictsearches) | `boolean`                       | Strip case and accents to allow for case insensitive searches and                             |
+| [words](#dictionarydefinitioninlineignorewords-words)                                       | `string`&ZeroWidthSpace;`[]`    | List of words to be considered correct.                                                       |
 
 
 ### DictionaryDefinitionInlineIgnoreWords Fields
@@ -4080,36 +3921,6 @@ Example:
 
 ---
 
-#### `ignoreForbiddenWords` {#dictionarydefinitioninlineignorewords-ignoreforbiddenwords}
-
-
-<dl>
-
-<dt>Description</dt>
-<dd>
-
-Some dictionaries may contain forbidden words to prevent compounding from generating
-words that are not valid in the language. These are often
-words that are used in other languages or might be generated through compounding.
-This setting allows flagged words to be ignored when checking the dictionary.
-The effect is similar to the word not being in the dictionary.
-
-</dd>
-
-<dt>Type</dt>
-<dd>
-
-`boolean`
-
-</dd>
-
-</dl>
-
-
-
-
----
-
 #### `ignoreWords` {#dictionarydefinitioninlineignorewords-ignorewords}
 
 
@@ -4160,64 +3971,6 @@ Name Format:
 <dd>
 
 [`DictionaryId`](#dictionaryid)
-
-</dd>
-
-</dl>
-
-
-
-
----
-
-#### `noSuggest` {#dictionarydefinitioninlineignorewords-nosuggest}
-
-
-<dl>
-
-<dt>Description</dt>
-<dd>
-
-Indicate that suggestions should not come from this dictionary.
-Words in this dictionary are considered correct, but will not be
-used when making spell correction suggestions.
-
-Note: if a word is suggested by another dictionary, but found in
-this dictionary, it will be removed from the set of
-possible suggestions.
-
-</dd>
-
-<dt>Type</dt>
-<dd>
-
-`boolean`
-
-</dd>
-
-</dl>
-
-
-
-
----
-
-#### `repMap` {#dictionarydefinitioninlineignorewords-repmap}
-
-
-<dl>
-
-<dt>Description</dt>
-<dd>
-
-Replacement pairs.
-
-</dd>
-
-<dt>Type</dt>
-<dd>
-
-[`ReplaceMap`](#replacemap)
 
 </dd>
 
@@ -4294,67 +4047,6 @@ dictionaries.
 
 ---
 
-#### `type` {#dictionarydefinitioninlineignorewords-type}
-
-
-<dl>
-
-<dt>Description</dt>
-<dd>
-
-Type of file:
-- S - single word per line,
-- W - each line can contain one or more words separated by space,
-- C - each line is treated like code (Camel Case is allowed).
-
-Default is S.
-
-C is the slowest to load due to the need to split each line based upon code splitting rules.
-
-Note: this settings does not apply to inline dictionaries or `.trie` files.
-
-</dd>
-
-<dt>Type</dt>
-<dd>
-
-[`DictionaryFileTypes`](#dictionaryfiletypes)
-
-</dd>
-
-</dl>
-
-
-
-
----
-
-#### `useCompounds` {#dictionarydefinitioninlineignorewords-usecompounds}
-
-
-<dl>
-
-<dt>Description</dt>
-<dd>
-
-Use Compounds.
-
-</dd>
-
-<dt>Type</dt>
-<dd>
-
-`boolean`
-
-</dd>
-
-</dl>
-
-
-
-
----
-
 #### `words` {#dictionarydefinitioninlineignorewords-words}
 
 
@@ -4380,20 +4072,15 @@ List of words to be considered correct.
 
 ## DictionaryDefinitionInlineSuggestWords
 
-| Field                                                                                        | Type                                          | Description                                                                                   |
-| -------------------------------------------------------------------------------------------- | --------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| [description](#dictionarydefinitioninlinesuggestwords-description)                           | `string`                                      | Optional description of the contents / purpose of the dictionary.                             |
-| [flagWords](#dictionarydefinitioninlinesuggestwords-flagwords)                               | `string`&ZeroWidthSpace;`[]`                  | List of words to always be considered incorrect. Words found in `flagWords` override `words`. |
-| [ignoreForbiddenWords](#dictionarydefinitioninlinesuggestwords-ignoreforbiddenwords)         | `boolean`                                     | Some dictionaries may contain forbidden words to prevent compounding from generating          |
-| [ignoreWords](#dictionarydefinitioninlinesuggestwords-ignorewords)                           | `string`&ZeroWidthSpace;`[]`                  | List of words to be ignored. An ignored word will not show up as an error, even if it is      |
-| [name](#dictionarydefinitioninlinesuggestwords-name)                                         | [`DictionaryId`](#dictionaryid)               | This is the name of a dictionary.                                                             |
-| [noSuggest](#dictionarydefinitioninlinesuggestwords-nosuggest)                               | `boolean`                                     | Indicate that suggestions should not come from this dictionary.                               |
-| [repMap](#dictionarydefinitioninlinesuggestwords-repmap)                                     | [`ReplaceMap`](#replacemap)                   | Replacement pairs.                                                                            |
-| [suggestWords](#dictionarydefinitioninlinesuggestwords-suggestwords)                         | `string`&ZeroWidthSpace;`[]`                  | A list of suggested replacements for words.                                                   |
-| [supportNonStrictSearches](#dictionarydefinitioninlinesuggestwords-supportnonstrictsearches) | `boolean`                                     | Strip case and accents to allow for case insensitive searches and                             |
-| [type](#dictionarydefinitioninlinesuggestwords-type)                                         | [`DictionaryFileTypes`](#dictionaryfiletypes) | Type of file:                                                                                 |
-| [useCompounds](#dictionarydefinitioninlinesuggestwords-usecompounds)                         | `boolean`                                     | Use Compounds.                                                                                |
-| [words](#dictionarydefinitioninlinesuggestwords-words)                                       | `string`&ZeroWidthSpace;`[]`                  | List of words to be considered correct.                                                       |
+| Field                                                                                        | Type                            | Description                                                                                   |
+| -------------------------------------------------------------------------------------------- | ------------------------------- | --------------------------------------------------------------------------------------------- |
+| [description](#dictionarydefinitioninlinesuggestwords-description)                           | `string`                        | Optional description of the contents / purpose of the dictionary.                             |
+| [flagWords](#dictionarydefinitioninlinesuggestwords-flagwords)                               | `string`&ZeroWidthSpace;`[]`    | List of words to always be considered incorrect. Words found in `flagWords` override `words`. |
+| [ignoreWords](#dictionarydefinitioninlinesuggestwords-ignorewords)                           | `string`&ZeroWidthSpace;`[]`    | List of words to be ignored. An ignored word will not show up as an error, even if it is      |
+| [name](#dictionarydefinitioninlinesuggestwords-name)                                         | [`DictionaryId`](#dictionaryid) | This is the name of a dictionary.                                                             |
+| [suggestWords](#dictionarydefinitioninlinesuggestwords-suggestwords)                         | `string`&ZeroWidthSpace;`[]`    | A list of suggested replacements for words.                                                   |
+| [supportNonStrictSearches](#dictionarydefinitioninlinesuggestwords-supportnonstrictsearches) | `boolean`                       | Strip case and accents to allow for case insensitive searches and                             |
+| [words](#dictionarydefinitioninlinesuggestwords-words)                                       | `string`&ZeroWidthSpace;`[]`    | List of words to be considered correct.                                                       |
 
 
 ### DictionaryDefinitionInlineSuggestWords Fields
@@ -4467,36 +4154,6 @@ Example:
 
 ---
 
-#### `ignoreForbiddenWords` {#dictionarydefinitioninlinesuggestwords-ignoreforbiddenwords}
-
-
-<dl>
-
-<dt>Description</dt>
-<dd>
-
-Some dictionaries may contain forbidden words to prevent compounding from generating
-words that are not valid in the language. These are often
-words that are used in other languages or might be generated through compounding.
-This setting allows flagged words to be ignored when checking the dictionary.
-The effect is similar to the word not being in the dictionary.
-
-</dd>
-
-<dt>Type</dt>
-<dd>
-
-`boolean`
-
-</dd>
-
-</dl>
-
-
-
-
----
-
 #### `ignoreWords` {#dictionarydefinitioninlinesuggestwords-ignorewords}
 
 
@@ -4547,64 +4204,6 @@ Name Format:
 <dd>
 
 [`DictionaryId`](#dictionaryid)
-
-</dd>
-
-</dl>
-
-
-
-
----
-
-#### `noSuggest` {#dictionarydefinitioninlinesuggestwords-nosuggest}
-
-
-<dl>
-
-<dt>Description</dt>
-<dd>
-
-Indicate that suggestions should not come from this dictionary.
-Words in this dictionary are considered correct, but will not be
-used when making spell correction suggestions.
-
-Note: if a word is suggested by another dictionary, but found in
-this dictionary, it will be removed from the set of
-possible suggestions.
-
-</dd>
-
-<dt>Type</dt>
-<dd>
-
-`boolean`
-
-</dd>
-
-</dl>
-
-
-
-
----
-
-#### `repMap` {#dictionarydefinitioninlinesuggestwords-repmap}
-
-
-<dl>
-
-<dt>Description</dt>
-<dd>
-
-Replacement pairs.
-
-</dd>
-
-<dt>Type</dt>
-<dd>
-
-[`ReplaceMap`](#replacemap)
 
 </dd>
 
@@ -4681,67 +4280,6 @@ dictionaries.
 
 ---
 
-#### `type` {#dictionarydefinitioninlinesuggestwords-type}
-
-
-<dl>
-
-<dt>Description</dt>
-<dd>
-
-Type of file:
-- S - single word per line,
-- W - each line can contain one or more words separated by space,
-- C - each line is treated like code (Camel Case is allowed).
-
-Default is S.
-
-C is the slowest to load due to the need to split each line based upon code splitting rules.
-
-Note: this settings does not apply to inline dictionaries or `.trie` files.
-
-</dd>
-
-<dt>Type</dt>
-<dd>
-
-[`DictionaryFileTypes`](#dictionaryfiletypes)
-
-</dd>
-
-</dl>
-
-
-
-
----
-
-#### `useCompounds` {#dictionarydefinitioninlinesuggestwords-usecompounds}
-
-
-<dl>
-
-<dt>Description</dt>
-<dd>
-
-Use Compounds.
-
-</dd>
-
-<dt>Type</dt>
-<dd>
-
-`boolean`
-
-</dd>
-
-</dl>
-
-
-
-
----
-
 #### `words` {#dictionarydefinitioninlinesuggestwords-words}
 
 
@@ -4767,20 +4305,15 @@ List of words to be considered correct.
 
 ## DictionaryDefinitionInlineWords
 
-| Field                                                                                 | Type                                          | Description                                                                                   |
-| ------------------------------------------------------------------------------------- | --------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| [description](#dictionarydefinitioninlinewords-description)                           | `string`                                      | Optional description of the contents / purpose of the dictionary.                             |
-| [flagWords](#dictionarydefinitioninlinewords-flagwords)                               | `string`&ZeroWidthSpace;`[]`                  | List of words to always be considered incorrect. Words found in `flagWords` override `words`. |
-| [ignoreForbiddenWords](#dictionarydefinitioninlinewords-ignoreforbiddenwords)         | `boolean`                                     | Some dictionaries may contain forbidden words to prevent compounding from generating          |
-| [ignoreWords](#dictionarydefinitioninlinewords-ignorewords)                           | `string`&ZeroWidthSpace;`[]`                  | List of words to be ignored. An ignored word will not show up as an error, even if it is      |
-| [name](#dictionarydefinitioninlinewords-name)                                         | [`DictionaryId`](#dictionaryid)               | This is the name of a dictionary.                                                             |
-| [noSuggest](#dictionarydefinitioninlinewords-nosuggest)                               | `boolean`                                     | Indicate that suggestions should not come from this dictionary.                               |
-| [repMap](#dictionarydefinitioninlinewords-repmap)                                     | [`ReplaceMap`](#replacemap)                   | Replacement pairs.                                                                            |
-| [suggestWords](#dictionarydefinitioninlinewords-suggestwords)                         | `string`&ZeroWidthSpace;`[]`                  | A list of suggested replacements for words.                                                   |
-| [supportNonStrictSearches](#dictionarydefinitioninlinewords-supportnonstrictsearches) | `boolean`                                     | Strip case and accents to allow for case insensitive searches and                             |
-| [type](#dictionarydefinitioninlinewords-type)                                         | [`DictionaryFileTypes`](#dictionaryfiletypes) | Type of file:                                                                                 |
-| [useCompounds](#dictionarydefinitioninlinewords-usecompounds)                         | `boolean`                                     | Use Compounds.                                                                                |
-| [words](#dictionarydefinitioninlinewords-words)                                       | `string`&ZeroWidthSpace;`[]`                  | List of words to be considered correct.                                                       |
+| Field                                                                                 | Type                            | Description                                                                                   |
+| ------------------------------------------------------------------------------------- | ------------------------------- | --------------------------------------------------------------------------------------------- |
+| [description](#dictionarydefinitioninlinewords-description)                           | `string`                        | Optional description of the contents / purpose of the dictionary.                             |
+| [flagWords](#dictionarydefinitioninlinewords-flagwords)                               | `string`&ZeroWidthSpace;`[]`    | List of words to always be considered incorrect. Words found in `flagWords` override `words`. |
+| [ignoreWords](#dictionarydefinitioninlinewords-ignorewords)                           | `string`&ZeroWidthSpace;`[]`    | List of words to be ignored. An ignored word will not show up as an error, even if it is      |
+| [name](#dictionarydefinitioninlinewords-name)                                         | [`DictionaryId`](#dictionaryid) | This is the name of a dictionary.                                                             |
+| [suggestWords](#dictionarydefinitioninlinewords-suggestwords)                         | `string`&ZeroWidthSpace;`[]`    | A list of suggested replacements for words.                                                   |
+| [supportNonStrictSearches](#dictionarydefinitioninlinewords-supportnonstrictsearches) | `boolean`                       | Strip case and accents to allow for case insensitive searches and                             |
+| [words](#dictionarydefinitioninlinewords-words)                                       | `string`&ZeroWidthSpace;`[]`    | List of words to be considered correct.                                                       |
 
 
 ### DictionaryDefinitionInlineWords Fields
@@ -4854,36 +4387,6 @@ Example:
 
 ---
 
-#### `ignoreForbiddenWords` {#dictionarydefinitioninlinewords-ignoreforbiddenwords}
-
-
-<dl>
-
-<dt>Description</dt>
-<dd>
-
-Some dictionaries may contain forbidden words to prevent compounding from generating
-words that are not valid in the language. These are often
-words that are used in other languages or might be generated through compounding.
-This setting allows flagged words to be ignored when checking the dictionary.
-The effect is similar to the word not being in the dictionary.
-
-</dd>
-
-<dt>Type</dt>
-<dd>
-
-`boolean`
-
-</dd>
-
-</dl>
-
-
-
-
----
-
 #### `ignoreWords` {#dictionarydefinitioninlinewords-ignorewords}
 
 
@@ -4944,64 +4447,6 @@ Name Format:
 
 ---
 
-#### `noSuggest` {#dictionarydefinitioninlinewords-nosuggest}
-
-
-<dl>
-
-<dt>Description</dt>
-<dd>
-
-Indicate that suggestions should not come from this dictionary.
-Words in this dictionary are considered correct, but will not be
-used when making spell correction suggestions.
-
-Note: if a word is suggested by another dictionary, but found in
-this dictionary, it will be removed from the set of
-possible suggestions.
-
-</dd>
-
-<dt>Type</dt>
-<dd>
-
-`boolean`
-
-</dd>
-
-</dl>
-
-
-
-
----
-
-#### `repMap` {#dictionarydefinitioninlinewords-repmap}
-
-
-<dl>
-
-<dt>Description</dt>
-<dd>
-
-Replacement pairs.
-
-</dd>
-
-<dt>Type</dt>
-<dd>
-
-[`ReplaceMap`](#replacemap)
-
-</dd>
-
-</dl>
-
-
-
-
----
-
 #### `suggestWords` {#dictionarydefinitioninlinewords-suggestwords}
 
 
@@ -5051,67 +4496,6 @@ words without accents.
 
 Note: this setting only applies to word lists. It has no-impact on trie
 dictionaries.
-
-</dd>
-
-<dt>Type</dt>
-<dd>
-
-`boolean`
-
-</dd>
-
-</dl>
-
-
-
-
----
-
-#### `type` {#dictionarydefinitioninlinewords-type}
-
-
-<dl>
-
-<dt>Description</dt>
-<dd>
-
-Type of file:
-- S - single word per line,
-- W - each line can contain one or more words separated by space,
-- C - each line is treated like code (Camel Case is allowed).
-
-Default is S.
-
-C is the slowest to load due to the need to split each line based upon code splitting rules.
-
-Note: this settings does not apply to inline dictionaries or `.trie` files.
-
-</dd>
-
-<dt>Type</dt>
-<dd>
-
-[`DictionaryFileTypes`](#dictionaryfiletypes)
-
-</dd>
-
-</dl>
-
-
-
-
----
-
-#### `useCompounds` {#dictionarydefinitioninlinewords-usecompounds}
-
-
-<dl>
-
-<dt>Description</dt>
-<dd>
-
-Use Compounds.
 
 </dd>
 
@@ -5435,16 +4819,11 @@ Use Compounds.
 
 ## DictionaryDefinitionSimple
 
-| Field                                                                            | Type                                          | Description                                                                          |
-| -------------------------------------------------------------------------------- | --------------------------------------------- | ------------------------------------------------------------------------------------ |
-| [description](#dictionarydefinitionsimple-description)                           | `string`                                      | Optional description of the contents / purpose of the dictionary.                    |
-| [ignoreForbiddenWords](#dictionarydefinitionsimple-ignoreforbiddenwords)         | `boolean`                                     | Some dictionaries may contain forbidden words to prevent compounding from generating |
-| [name](#dictionarydefinitionsimple-name)                                         | [`DictionaryId`](#dictionaryid)               | This is the name of a dictionary.                                                    |
-| [noSuggest](#dictionarydefinitionsimple-nosuggest)                               | `boolean`                                     | Indicate that suggestions should not come from this dictionary.                      |
-| [repMap](#dictionarydefinitionsimple-repmap)                                     | [`ReplaceMap`](#replacemap)                   | Replacement pairs.                                                                   |
-| [supportNonStrictSearches](#dictionarydefinitionsimple-supportnonstrictsearches) | `boolean`                                     | Strip case and accents to allow for case insensitive searches and                    |
-| [type](#dictionarydefinitionsimple-type)                                         | [`DictionaryFileTypes`](#dictionaryfiletypes) | Type of file:                                                                        |
-| [useCompounds](#dictionarydefinitionsimple-usecompounds)                         | `boolean`                                     | Use Compounds.                                                                       |
+| Field                                                                            | Type                            | Description                                                       |
+| -------------------------------------------------------------------------------- | ------------------------------- | ----------------------------------------------------------------- |
+| [description](#dictionarydefinitionsimple-description)                           | `string`                        | Optional description of the contents / purpose of the dictionary. |
+| [name](#dictionarydefinitionsimple-name)                                         | [`DictionaryId`](#dictionaryid) | This is the name of a dictionary.                                 |
+| [supportNonStrictSearches](#dictionarydefinitionsimple-supportnonstrictsearches) | `boolean`                       | Strip case and accents to allow for case insensitive searches and |
 
 
 ### DictionaryDefinitionSimple Fields
@@ -5468,36 +4847,6 @@ Optional description of the contents / purpose of the dictionary.
 <dd>
 
 `string`
-
-</dd>
-
-</dl>
-
-
-
-
----
-
-#### `ignoreForbiddenWords` {#dictionarydefinitionsimple-ignoreforbiddenwords}
-
-
-<dl>
-
-<dt>Description</dt>
-<dd>
-
-Some dictionaries may contain forbidden words to prevent compounding from generating
-words that are not valid in the language. These are often
-words that are used in other languages or might be generated through compounding.
-This setting allows flagged words to be ignored when checking the dictionary.
-The effect is similar to the word not being in the dictionary.
-
-</dd>
-
-<dt>Type</dt>
-<dd>
-
-`boolean`
 
 </dd>
 
@@ -5541,64 +4890,6 @@ Name Format:
 
 ---
 
-#### `noSuggest` {#dictionarydefinitionsimple-nosuggest}
-
-
-<dl>
-
-<dt>Description</dt>
-<dd>
-
-Indicate that suggestions should not come from this dictionary.
-Words in this dictionary are considered correct, but will not be
-used when making spell correction suggestions.
-
-Note: if a word is suggested by another dictionary, but found in
-this dictionary, it will be removed from the set of
-possible suggestions.
-
-</dd>
-
-<dt>Type</dt>
-<dd>
-
-`boolean`
-
-</dd>
-
-</dl>
-
-
-
-
----
-
-#### `repMap` {#dictionarydefinitionsimple-repmap}
-
-
-<dl>
-
-<dt>Description</dt>
-<dd>
-
-Replacement pairs.
-
-</dd>
-
-<dt>Type</dt>
-<dd>
-
-[`ReplaceMap`](#replacemap)
-
-</dd>
-
-</dl>
-
-
-
-
----
-
 #### `supportNonStrictSearches` {#dictionarydefinitionsimple-supportnonstrictsearches}
 
 
@@ -5612,67 +4903,6 @@ words without accents.
 
 Note: this setting only applies to word lists. It has no-impact on trie
 dictionaries.
-
-</dd>
-
-<dt>Type</dt>
-<dd>
-
-`boolean`
-
-</dd>
-
-</dl>
-
-
-
-
----
-
-#### `type` {#dictionarydefinitionsimple-type}
-
-
-<dl>
-
-<dt>Description</dt>
-<dd>
-
-Type of file:
-- S - single word per line,
-- W - each line can contain one or more words separated by space,
-- C - each line is treated like code (Camel Case is allowed).
-
-Default is S.
-
-C is the slowest to load due to the need to split each line based upon code splitting rules.
-
-Note: this settings does not apply to inline dictionaries or `.trie` files.
-
-</dd>
-
-<dt>Type</dt>
-<dd>
-
-[`DictionaryFileTypes`](#dictionaryfiletypes)
-
-</dd>
-
-</dl>
-
-
-
-
----
-
-#### `useCompounds` {#dictionarydefinitionsimple-usecompounds}
-
-
-<dl>
-
-<dt>Description</dt>
-<dd>
-
-Use Compounds.
 
 </dd>
 
