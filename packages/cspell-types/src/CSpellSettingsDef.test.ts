@@ -1,12 +1,12 @@
 import { describe, expect, test } from 'vitest';
 
-import type { UnknownWordsConfiguration } from './CSpellSettingsDef.js';
-import { unknownWordsOptions } from './CSpellSettingsDef.js';
+import type { UnknownWordsConfiguration } from './CSpellReporter.js';
+import { unknownWordsChoices } from './CSpellReporter.js';
 
 describe('CSpellSettingsDef', () => {
     test('UnknownWordsConfiguration', () => {
         // This is a compile test.
-        const config: UnknownWordsConfiguration = { unknownWords: unknownWordsOptions.ReportAll };
+        const config: UnknownWordsConfiguration = { unknownWords: unknownWordsChoices.ReportAll };
         expect(config).toBeDefined();
     });
 });

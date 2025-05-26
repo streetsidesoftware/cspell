@@ -14,7 +14,7 @@ import type { Uri } from './util/IUri.js';
 import { toUri } from './util/Uri.js';
 import type { ValidateTextOptions, ValidationIssue } from './validator.js';
 
-export interface SpellCheckFileOptions extends ValidateTextOptions {
+export interface SpellCheckFileOptions extends ValidateTextOptions, Pick<CSpellUserSettings, 'unknownWords'> {
     /**
      * Optional path to a configuration file.
      * If given, it will be used instead of searching for a configuration file.

@@ -2,12 +2,13 @@ import assert from 'node:assert';
 
 import { opConcatMap, opFilter, pipe } from '@cspell/cspell-pipe/sync';
 import type { ParsedText } from '@cspell/cspell-types';
-import { defaultCSpellSettings, unknownWordsOptions } from '@cspell/cspell-types';
-import type { CachingDictionary, SearchOptions, SpellingDictionary } from 'cspell-dictionary';
+import { defaultCSpellSettings, unknownWordsChoices } from '@cspell/cspell-types';
+import type { CachingDictionary, PreferredSuggestion, SearchOptions, SpellingDictionary } from 'cspell-dictionary';
 import { createCachingDictionary } from 'cspell-dictionary';
 
 import type { ValidationIssue } from '../Models/ValidationIssue.js';
 import * as RxPat from '../Settings/RegExpPatterns.js';
+import { autoResolve } from '../util/AutoResolve.js';
 import {
     extractPossibleWordsFromTextOffset,
     extractText,
@@ -58,7 +59,7 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
         ignoreCase = true,
         ignoreRandomStrings = defaultCSpellSettings.ignoreRandomStrings,
         minRandomLength = defaultCSpellSettings.minRandomLength,
-        unknownWords = unknownWordsOptions.ReportAll,
+        unknownWords = unknownWordsChoices.ReportAll,
     } = options;
     const hasWordOptions: SearchOptions = {
         ignoreCase,
@@ -114,20 +115,24 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
         return calcIgnored(getWordInfo(word));
     }
 
+    const cacheGetPreferredSuggestions = new Map<string, PreferredSuggestion[] | undefined>();
     function getPreferredSuggestions(word: string) {
-        return dictCol.getPreferredSuggestions(word);
+        return autoResolve(cacheGetPreferredSuggestions, word, () => dictCol.getPreferredSuggestions(word));
     }
 
+    const cacheHasSimpleSuggestions = new Map<string, boolean>();
     function hasSimpleSuggestions(word: string): boolean {
-        const sugs = dictCol.suggest(word, {
-            numSuggestions: 1,
-            compoundMethod: 0,
-            includeTies: false,
-            ignoreCase,
-            timeout: 100,
-            numChanges: 1, // Only consider very simple changes (1 edit distance)
+        return autoResolve(cacheHasSimpleSuggestions, word, () => {
+            const sugs = dictCol.suggest(word, {
+                numSuggestions: 1,
+                compoundMethod: 0,
+                includeTies: false,
+                ignoreCase,
+                timeout: 100,
+                numChanges: 1.8, // Only consider very simple changes (1 edit distance plus case changes)
+            });
+            return !!sugs.length;
         });
-        return !!sugs.length;
     }
 
     function isWordFlagged(wo: TextOffsetRO): boolean {
@@ -143,7 +148,7 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
         const sugs = getPreferredSuggestions(issue.text);
         if (!sugs?.length) {
             issue.hasPreferredSuggestions = sugs !== undefined ? false : undefined;
-            if (unknownWords === unknownWordsOptions.ReportSimple) {
+            if (unknownWords === unknownWordsChoices.ReportSimple) {
                 issue.hasSimpleSuggestions = hasSimpleSuggestions(issue.text);
             }
             return issue;
@@ -425,10 +430,11 @@ export function textValidatorFactory(dict: SpellingDictionary, options: Validati
         const segment = { text, offset: 0 };
         const lineSegment: LineSegment = { line: segment, segment };
         function mapBackToOriginSimple(vr: ValidationIssue): MappedTextValidationResult {
-            const { text, offset, isFlagged, isFound, suggestionsEx } = vr;
+            const { text, offset, isFlagged, isFound, suggestionsEx, hasPreferredSuggestions, hasSimpleSuggestions } =
+                vr;
             const r = mapRangeBackToOriginalPos([offset, offset + text.length], map);
             const range = [r[0] + srcOffset, r[1] + srcOffset] as [number, number];
-            return { text, range, isFlagged, isFound, suggestionsEx };
+            return { text, range, isFlagged, isFound, suggestionsEx, hasPreferredSuggestions, hasSimpleSuggestions };
         }
         return [...lineValidatorFn(lineSegment)].map(mapBackToOriginSimple);
     }

@@ -80,6 +80,7 @@ export function getReporter(
             await mkdirp(path.dirname(outFilePath));
             return fs.writeFile(outFilePath, jsonData);
         },
+        features: undefined,
     };
 }
 

@@ -15,7 +15,7 @@ import { getReporter } from './cli-reporter.js';
 import { console } from './console.js';
 import type { TimedSuggestionsForWordResult } from './emitters/suggestionsEmitter.js';
 import { getFeatureFlags, parseFeatureFlags } from './featureFlags/index.js';
-import { LintRequest, runLint } from './lint/index.js';
+import { extractUnknownWordsConfig, LintRequest, runLint } from './lint/index.js';
 import { CSpellReporterConfiguration } from './models.js';
 import type { BaseOptions, LegacyOptions, LinterCliOptions, SuggestionOptions, TraceOptions } from './options.js';
 import { fixLegacy } from './options.js';
@@ -33,11 +33,14 @@ export type AppError = NodeJS.ErrnoException;
 
 export function lint(fileGlobs: string[], options: LinterCliOptions, reporter?: CSpellReporter): Promise<RunResult> {
     options = fixLegacy(options);
-    const reporterOptions: CSpellReporterConfiguration = { ...options, console };
+    const unknownWordsConfig = extractUnknownWordsConfig(options);
+    const useOptions = { ...options, ...unknownWordsConfig };
+
+    const reporterOptions: CSpellReporterConfiguration = { ...useOptions, console };
     const cfg = new LintRequest(
         fileGlobs,
-        options,
-        finalizeReporter(reporter) ?? getReporter({ ...options, fileGlobs }, reporterOptions),
+        useOptions,
+        finalizeReporter(reporter) ?? getReporter({ ...useOptions, fileGlobs }, reporterOptions),
     );
     return runLint(cfg);
 }
