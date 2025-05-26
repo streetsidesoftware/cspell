@@ -61,7 +61,7 @@ format: md
 | [suggestWords](#settings-suggestwords)                         | `string`&ZeroWidthSpace;`[]`                                              | A list of suggested replacements for words.                                                                                                                          |
 | [suggestionNumChanges](#settings-suggestionnumchanges)         | `number`                                                                  | The maximum number of changes allowed on a word to be considered a suggestions.                                                                                      |
 | [suggestionsTimeout](#settings-suggestionstimeout)             | `number`                                                                  | The maximum amount of time in milliseconds to generate suggestions for a word.                                                                                       |
-| [unknownWords](#settings-unknownwords)                         | [`UnknownWordsOptions`](#unknownwordsoptions)                             | Controls how unknown words are handled.                                                                                                                              |
+| [unknownWords](#settings-unknownwords)                         | [`UnknownWordsChoices`](#unknownwordschoices)                             | Controls how unknown words are handled.                                                                                                                              |
 | [useGitignore](#settings-usegitignore)                         | `boolean`                                                                 | Tells the spell checker to load `.gitignore` files and skip files that match the globs in the `.gitignore` files found.                                              |
 | [usePnP](#settings-usepnp)                                     | `boolean`                                                                 | Packages managers like Yarn 2 use a `.pnp.cjs` file to assist in loading                                                                                             |
 | [userWords](#settings-userwords)                               | `string`&ZeroWidthSpace;`[]`                                              | Words to add to global dictionary -- should only be in the user config file.                                                                                         |
@@ -1466,7 +1466,7 @@ Controls how unknown words are handled.
 <dt>Type</dt>
 <dd>
 
-[`UnknownWordsOptions`](#unknownwordsoptions)
+[`UnknownWordsChoices`](#unknownwordschoices)
 
 </dd>
 </dl>
@@ -6399,7 +6399,7 @@ A file type:
 | [noSuggestDictionaries](#languagesetting-nosuggestdictionaries) | [`DictionaryReference`](#dictionaryreference)&ZeroWidthSpace;`[]`         | Optional list of dictionaries that will not be used for suggestions.                                                          |
 | [patterns](#languagesetting-patterns)                           | [`RegExpPatternDefinition`](#regexppatterndefinition)&ZeroWidthSpace;`[]` | Defines a list of patterns that can be used with the  [ignoreRegExpList](#ignoreregexplist)  and                              |
 | [suggestWords](#languagesetting-suggestwords)                   | `string`&ZeroWidthSpace;`[]`                                              | A list of suggested replacements for words.                                                                                   |
-| [unknownWords](#languagesetting-unknownwords)                   | [`UnknownWordsOptions`](#unknownwordsoptions)                             | Controls how unknown words are handled.                                                                                       |
+| [unknownWords](#languagesetting-unknownwords)                   | [`UnknownWordsChoices`](#unknownwordschoices)                             | Controls how unknown words are handled.                                                                                       |
 | [words](#languagesetting-words)                                 | `string`&ZeroWidthSpace;`[]`                                              | List of words to be considered correct.                                                                                       |
 
 
@@ -6982,7 +6982,7 @@ Controls how unknown words are handled.
 <dt>Type</dt>
 <dd>
 
-[`UnknownWordsOptions`](#unknownwordsoptions)
+[`UnknownWordsChoices`](#unknownwordschoices)
 
 </dd>
 </dl>
@@ -7095,7 +7095,7 @@ This is a written language locale like: `en`, `en-GB`, `fr`, `es`, `de` or `en,f
 | [suggestWords](#overridesettings-suggestwords)                         | `string`&ZeroWidthSpace;`[]`                                              | A list of suggested replacements for words.                                                                                                                          |
 | [suggestionNumChanges](#overridesettings-suggestionnumchanges)         | `number`                                                                  | The maximum number of changes allowed on a word to be considered a suggestions.                                                                                      |
 | [suggestionsTimeout](#overridesettings-suggestionstimeout)             | `number`                                                                  | The maximum amount of time in milliseconds to generate suggestions for a word.                                                                                       |
-| [unknownWords](#overridesettings-unknownwords)                         | [`UnknownWordsOptions`](#unknownwordsoptions)                             | Controls how unknown words are handled.                                                                                                                              |
+| [unknownWords](#overridesettings-unknownwords)                         | [`UnknownWordsChoices`](#unknownwordschoices)                             | Controls how unknown words are handled.                                                                                                                              |
 | [usePnP](#overridesettings-usepnp)                                     | `boolean`                                                                 | Packages managers like Yarn 2 use a `.pnp.cjs` file to assist in loading                                                                                             |
 | [words](#overridesettings-words)                                       | `string`&ZeroWidthSpace;`[]`                                              | List of words to be considered correct.                                                                                                                              |
 
@@ -8070,7 +8070,7 @@ Controls how unknown words are handled.
 <dt>Type</dt>
 <dd>
 
-[`UnknownWordsOptions`](#unknownwordsoptions)
+[`UnknownWordsChoices`](#unknownwordschoices)
 
 </dd>
 </dl>
@@ -8656,10 +8656,17 @@ Note: the default edit distance is 100.
 
 ---
 
-## UnknownWordsOptions {#unknownwordsoptions}
+## UnknownWordsChoices {#unknownwordschoices}
 
 
 <dl>
+
+<dt>Description</dt>
+<dd>
+
+Possible choices for how to handle unknown words.
+
+</dd>
 
 <dt>Type</dt>
 <dd>
