@@ -1,6 +1,6 @@
 import * as path from 'node:path';
 
-import { CSpellUserSettings, unknownWordsChoices, type UnknownWordsConfiguration } from '@cspell/cspell-types';
+import { type CSpellUserSettings, unknownWordsChoices, type UnknownWordsConfiguration } from '@cspell/cspell-types';
 
 import type { CSpellConfigFile, LinterCliOptions, LinterOptions } from '../options.js';
 import type { GlobSrcInfo } from '../util/glob.js';
