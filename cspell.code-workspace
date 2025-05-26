@@ -4,7 +4,6 @@
             "name": "cspell-monorepo",
             "path": "."
         },
-        { "path": "docs" },
         { "path": "packages/dynamic-import" },
         { "path": "integration-tests" },
         { "path": "packages/cspell-bundled-dicts" },
@@ -66,7 +65,7 @@
         "cSpell.customDictionaries": {
             "workspace": true
         },
-        "cSpell.enableFiletypes": ["shellscript"],
+        "cSpell.enabledFileTypes": { "shellscript": true },
         "editor.defaultFormatter": "esbenp.prettier-vscode",
         "[javascript]": {
             "editor.defaultFormatter": "esbenp.prettier-vscode"
