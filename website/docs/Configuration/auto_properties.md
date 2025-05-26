@@ -93,6 +93,7 @@ Url to JSON Schema
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -118,6 +119,7 @@ True to enable compound word checking.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -143,6 +145,7 @@ Define cache settings.
 [`CacheSettings`](#cachesettings)
 
 </dd>
+
 </dl>
 
 
@@ -174,6 +177,7 @@ See [Case Sensitivity](https://cspell.org/docs/case-sensitive/) for more details
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -199,6 +203,7 @@ Optional description of configuration.
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -231,6 +236,7 @@ and [Custom Dictionaries](https://cspell.org/docs/dictionaries-custom/) for more
 [`DictionaryReference`](#dictionaryreference)&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -265,6 +271,7 @@ For example, you can use the following to add a custom dictionary:
 [`DictionaryDefinition`](#dictionarydefinition)&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -309,6 +316,7 @@ kotlin      // enable checking for kotlin
 [`LanguageIdSingle`](#languageidsingle)&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -336,6 +344,7 @@ By default, CSpell does not scan `hidden` files.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -361,6 +370,7 @@ Is the spell checker enabled.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -401,6 +411,10 @@ A file type of `*` is a wildcard that enables all file types.
 `object`
 
 </dd>
+
+<dt>Since</dt>
+<dd>8.8.1</dd>
+
 </dl>
 
 
@@ -426,6 +440,7 @@ Specify a list of file types to spell check. It is better to use  [Settings.enab
 [`LanguageIdSingle`](#languageidsingle)&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -451,6 +466,7 @@ Exit with non-zero code as soon as an issue/error is encountered (useful for CI 
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -476,6 +492,10 @@ Configure CSpell features.
 [`Features`](#features)
 
 </dd>
+
+<dt>Since</dt>
+<dd>5.16.0</dd>
+
 </dl>
 
 
@@ -503,6 +523,7 @@ Glob patterns are relative to the `globRoot` of the configuration file that defi
 [`Glob`](#glob)&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -542,6 +563,7 @@ Example:
 `string`&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -567,6 +589,7 @@ Tells the spell checker to stop searching for `.gitignore` files when it reaches
 [`FsPath`](#fspath)<br />[`FsPath`](#fspath)&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -603,6 +626,7 @@ Special Values:
 [`FSPathResolvable`](#fspathresolvable)
 
 </dd>
+
 </dl>
 
 
@@ -628,6 +652,7 @@ Optional identifier.
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -655,6 +680,7 @@ Glob patterns are relative to the  [globRoot](#globroot)  of the configuration f
 [`Glob`](#glob)&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -680,6 +706,7 @@ Ignore sequences of characters that look like random strings.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -729,6 +756,7 @@ While you can create your own patterns, you can also leverage several patterns t
 [`RegExpPatternList`](#regexppatternlist)
 
 </dd>
+
 </dl>
 
 
@@ -755,6 +783,7 @@ also in the `flagWords`.
 `string`&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -782,6 +811,7 @@ See [Importing / Extending Configuration](https://cspell.org/configuration/impor
 [`FsPath`](#fspath)<br />[`FsPath`](#fspath)&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -812,6 +842,7 @@ While you can create your own patterns, you can also leverage several patterns t
 [`RegExpPatternList`](#regexppatternlist)
 
 </dd>
+
 </dl>
 
 
@@ -843,6 +874,7 @@ For example:
 [`LocaleId`](#localeid)
 
 </dd>
+
 </dl>
 
 
@@ -868,6 +900,7 @@ Forces the spell checker to assume a give language id. Used mainly as an Overrid
 [`MatchingFileType`](#matchingfiletype)
 
 </dd>
+
 </dl>
 
 
@@ -895,6 +928,7 @@ See [Language Settings](https://cspell.org/configuration/language-settings/) for
 [`LanguageSetting`](#languagesetting)&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -921,6 +955,7 @@ will prevent ALL default configuration from being loaded.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -946,6 +981,7 @@ The maximum number of times the same word can be flagged as an error in a file.
 `number`
 
 </dd>
+
 </dl>
 
 
@@ -971,6 +1007,7 @@ The maximum number of problems to report in a file.
 `number`
 
 </dd>
+
 </dl>
 
 
@@ -996,6 +1033,7 @@ The minimum length of a random string to be ignored.
 `number`
 
 </dd>
+
 </dl>
 
 
@@ -1021,6 +1059,7 @@ The minimum length of a word before checking it against a dictionary.
 `number`
 
 </dd>
+
 </dl>
 
 
@@ -1046,6 +1085,7 @@ Optional name of configuration.
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -1071,6 +1111,7 @@ Prevents searching for local configuration when checking individual documents.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -1102,6 +1143,7 @@ possible suggestions.
 [`DictionaryReference`](#dictionaryreference)&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -1127,6 +1169,7 @@ Number of suggestions to make.
 `number`
 
 </dd>
+
 </dl>
 
 
@@ -1169,6 +1212,7 @@ For example:
 [`OverrideSettings`](#overridesettings)&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -1216,6 +1260,7 @@ For example:
 [`RegExpPatternDefinition`](#regexppatterndefinition)&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -1241,6 +1286,7 @@ The PnP files to search for. Note: `.mjs` files are not currently supported.
 `string`&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -1268,6 +1314,7 @@ modifying the file to add words and other configuration.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -1300,6 +1347,7 @@ Examples:
 [`ReporterSettings`](#reportersettings)&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -1325,6 +1373,7 @@ Show status.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -1350,6 +1399,7 @@ Delay in ms after a document has changed before checking it for spelling errors.
 `number`
 
 </dd>
+
 </dl>
 
 
@@ -1385,6 +1435,7 @@ Format of `suggestWords`
 `string`&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -1414,6 +1465,7 @@ Range: between 1 and 5.
 `number`
 
 </dd>
+
 </dl>
 
 
@@ -1439,6 +1491,7 @@ The maximum amount of time in milliseconds to generate suggestions for a word.
 `number`
 
 </dd>
+
 </dl>
 
 
@@ -1469,6 +1522,10 @@ Controls how unknown words are handled.
 [`UnknownWordsChoices`](#unknownwordschoices)
 
 </dd>
+
+<dt>Since</dt>
+<dd>9.1.0</dd>
+
 </dl>
 
 
@@ -1494,6 +1551,7 @@ Tells the spell checker to load `.gitignore` files and skip files that match the
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -1523,6 +1581,7 @@ of a PnP file and load it.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -1548,6 +1607,7 @@ Words to add to global dictionary -- should only be in the user config file.
 `string`&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -1573,6 +1633,7 @@ Verify that the in-document directives are correct.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -1600,6 +1661,7 @@ This controls how the settings in the configuration file behave.
 [`Version`](#version)
 
 </dd>
+
 </dl>
 
 
@@ -1625,6 +1687,7 @@ List of words to be considered correct.
 `string`&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -1644,6 +1707,7 @@ List of words to be considered correct.
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -1683,6 +1747,7 @@ Format of the cache file.
 [`CacheFormat`](#cacheformat)
 
 </dd>
+
 </dl>
 
 
@@ -1713,6 +1778,7 @@ A prefix of `${cwd}` is replaced with the current working directory.
 [`FSPathResolvable`](#fspathresolvable)
 
 </dd>
+
 </dl>
 
 
@@ -1738,6 +1804,7 @@ Strategy to use for detecting changed files, default: metadata
 [`CacheStrategy`](#cachestrategy)
 
 </dd>
+
 </dl>
 
 
@@ -1763,6 +1830,7 @@ Store the results of processed files in order to only operate on the changed one
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -1791,6 +1859,7 @@ The Strategy to use to detect if a file has changed.
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -1820,6 +1889,7 @@ This is a set of characters that can include `-` or `|`
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -1859,6 +1929,7 @@ This is a set of characters that can include `-` or `|`
 [`CharacterSet`](#characterset)
 
 </dd>
+
 </dl>
 
 
@@ -1884,6 +1955,7 @@ the cost to insert / delete / replace / swap the characters in a group
 `number`
 
 </dd>
+
 </dl>
 
 
@@ -1910,6 +1982,7 @@ This is used to discourage
 `number`
 
 </dd>
+
 </dl>
 
 
@@ -1949,6 +2022,7 @@ A description to describe the purpose of the map.
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -1974,6 +2048,7 @@ The cost to insert/delete one of the substrings in the map. Note: insert/delete 
 `number`
 
 </dd>
+
 </dl>
 
 
@@ -2010,6 +2085,7 @@ Example: `"f(ph)(gh)"` results in the following set: `f`, `ph`, `gh`.
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -2048,6 +2124,7 @@ Think of it as taking the toll way for speed but getting the bill later.
 `number`
 
 </dd>
+
 </dl>
 
 
@@ -2075,6 +2152,7 @@ This would be the cost to substitute `a` with `i`: Like `bat` to `bit` or the re
 `number`
 
 </dd>
+
 </dl>
 
 
@@ -2102,6 +2180,7 @@ This represents the cost to change `ei` to `ie` or the reverse.
 `number`
 
 </dd>
+
 </dl>
 
 
@@ -2141,6 +2220,7 @@ A description to describe the purpose of the map.
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -2166,6 +2246,7 @@ The cost to insert/delete one of the substrings in the map. Note: insert/delete 
 `number`
 
 </dd>
+
 </dl>
 
 
@@ -2202,6 +2283,7 @@ Example: `"f(ph)(gh)"` results in the following set: `f`, `ph`, `gh`.
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -2240,6 +2322,7 @@ Think of it as taking the toll way for speed but getting the bill later.
 `number`
 
 </dd>
+
 </dl>
 
 
@@ -2267,6 +2350,7 @@ This would be the cost to substitute `a` with `i`: Like `bat` to `bit` or the re
 `number`
 
 </dd>
+
 </dl>
 
 
@@ -2294,6 +2378,7 @@ This represents the cost to change `ei` to `ie` or the reverse.
 `number`
 
 </dd>
+
 </dl>
 
 
@@ -2333,6 +2418,7 @@ A description to describe the purpose of the map.
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -2358,6 +2444,7 @@ The cost to insert/delete one of the substrings in the map. Note: insert/delete 
 `number`
 
 </dd>
+
 </dl>
 
 
@@ -2394,6 +2481,7 @@ Example: `"f(ph)(gh)"` results in the following set: `f`, `ph`, `gh`.
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -2432,6 +2520,7 @@ Think of it as taking the toll way for speed but getting the bill later.
 `number`
 
 </dd>
+
 </dl>
 
 
@@ -2459,6 +2548,7 @@ This would be the cost to substitute `a` with `i`: Like `bat` to `bit` or the re
 `number`
 
 </dd>
+
 </dl>
 
 
@@ -2486,6 +2576,7 @@ This represents the cost to change `ei` to `ie` or the reverse.
 `number`
 
 </dd>
+
 </dl>
 
 
@@ -2512,6 +2603,7 @@ A File System Path to a dictionary file.
 [`FsDictionaryPath`](#fsdictionarypath)
 
 </dd>
+
 </dl>
 
 
@@ -2538,6 +2630,7 @@ Specifies the scope of a dictionary.
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -2557,6 +2650,7 @@ Specifies the scope of a dictionary.
 [`DictionaryDefinitionPreferred`](#dictionarydefinitionpreferred)<br />[`DictionaryDefinitionCustom`](#dictionarydefinitioncustom)<br />[`DictionaryDefinitionAugmented`](#dictionarydefinitionaugmented)<br />[`DictionaryDefinitionInline`](#dictionarydefinitioninline)<br />[`DictionaryDefinitionSimple`](#dictionarydefinitionsimple)<br />[`DictionaryDefinitionAlternate`](#dictionarydefinitionalternate)
 
 </dd>
+
 </dl>
 
 
@@ -2599,6 +2693,7 @@ Optional description of the contents / purpose of the dictionary.
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -2624,6 +2719,7 @@ Path to the file, only for legacy dictionary definitions.
 [`DictionaryPath`](#dictionarypath)
 
 </dd>
+
 </dl>
 
 
@@ -2653,6 +2749,7 @@ The effect is similar to the word not being in the dictionary.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -2685,6 +2782,7 @@ Name Format:
 [`DictionaryId`](#dictionaryid)
 
 </dd>
+
 </dl>
 
 
@@ -2716,6 +2814,7 @@ possible suggestions.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -2741,6 +2840,7 @@ Replacement pairs.
 [`ReplaceMap`](#replacemap)
 
 </dd>
+
 </dl>
 
 
@@ -2770,6 +2870,7 @@ dictionaries.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -2804,6 +2905,7 @@ Note: this settings does not apply to inline dictionaries or `.trie` files.
 [`DictionaryFileTypes`](#dictionaryfiletypes)
 
 </dd>
+
 </dl>
 
 
@@ -2829,6 +2931,7 @@ Use Compounds.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -2872,6 +2975,7 @@ Optional description of the contents / purpose of the dictionary.
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -2890,6 +2994,7 @@ Optional description of the contents / purpose of the dictionary.
 [`DictionaryInformation`](#dictionaryinformation)
 
 </dd>
+
 </dl>
 
 
@@ -2919,6 +3024,7 @@ The effect is similar to the word not being in the dictionary.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -2951,6 +3057,7 @@ Name Format:
 [`DictionaryId`](#dictionaryid)
 
 </dd>
+
 </dl>
 
 
@@ -2982,6 +3089,7 @@ possible suggestions.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -3007,6 +3115,7 @@ Path to the file.
 [`DictionaryPath`](#dictionarypath)
 
 </dd>
+
 </dl>
 
 
@@ -3032,6 +3141,7 @@ Replacement pairs.
 [`ReplaceMap`](#replacemap)
 
 </dd>
+
 </dl>
 
 
@@ -3061,6 +3171,7 @@ dictionaries.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -3095,6 +3206,7 @@ Note: this settings does not apply to inline dictionaries or `.trie` files.
 [`DictionaryFileTypes`](#dictionaryfiletypes)
 
 </dd>
+
 </dl>
 
 
@@ -3120,6 +3232,7 @@ Use Compounds.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -3164,6 +3277,7 @@ When `true`, let's the spell checker know that words can be added to this dictio
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -3189,6 +3303,7 @@ Optional description of the contents / purpose of the dictionary.
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -3218,6 +3333,7 @@ The effect is similar to the word not being in the dictionary.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -3250,6 +3366,7 @@ Name Format:
 [`DictionaryId`](#dictionaryid)
 
 </dd>
+
 </dl>
 
 
@@ -3281,6 +3398,7 @@ possible suggestions.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -3306,6 +3424,7 @@ Path to custom dictionary text file.
 [`CustomDictionaryPath`](#customdictionarypath)
 
 </dd>
+
 </dl>
 
 
@@ -3331,6 +3450,7 @@ Replacement pairs.
 [`ReplaceMap`](#replacemap)
 
 </dd>
+
 </dl>
 
 
@@ -3358,6 +3478,7 @@ Scope values: `user`, `workspace`, `folder`.
 [`CustomDictionaryScope`](#customdictionaryscope)<br />[`CustomDictionaryScope`](#customdictionaryscope)&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -3387,6 +3508,7 @@ dictionaries.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -3421,6 +3543,7 @@ Note: this settings does not apply to inline dictionaries or `.trie` files.
 [`DictionaryFileTypes`](#dictionaryfiletypes)
 
 </dd>
+
 </dl>
 
 
@@ -3446,6 +3569,7 @@ Use Compounds.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -3472,6 +3596,10 @@ Inline Dictionary Definitions
 [`DictionaryDefinitionInlineWords`](#dictionarydefinitioninlinewords)<br />[`DictionaryDefinitionInlineIgnoreWords`](#dictionarydefinitioninlineignorewords)<br />[`DictionaryDefinitionInlineFlagWords`](#dictionarydefinitioninlineflagwords)<br />[`DictionaryDefinitionInlineSuggestWords`](#dictionarydefinitioninlinesuggestwords)
 
 </dd>
+
+<dt>Since</dt>
+<dd>6.23.0</dd>
+
 </dl>
 
 
@@ -3517,6 +3645,7 @@ Optional description of the contents / purpose of the dictionary.
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -3556,6 +3685,7 @@ Example:
 `string`&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -3585,6 +3715,7 @@ The effect is similar to the word not being in the dictionary.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -3611,6 +3742,7 @@ also in the `flagWords`.
 `string`&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -3643,6 +3775,7 @@ Name Format:
 [`DictionaryId`](#dictionaryid)
 
 </dd>
+
 </dl>
 
 
@@ -3674,6 +3807,7 @@ possible suggestions.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -3699,6 +3833,7 @@ Replacement pairs.
 [`ReplaceMap`](#replacemap)
 
 </dd>
+
 </dl>
 
 
@@ -3734,6 +3869,7 @@ Format of `suggestWords`
 `string`&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -3763,6 +3899,7 @@ dictionaries.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -3797,6 +3934,7 @@ Note: this settings does not apply to inline dictionaries or `.trie` files.
 [`DictionaryFileTypes`](#dictionaryfiletypes)
 
 </dd>
+
 </dl>
 
 
@@ -3822,6 +3960,7 @@ Use Compounds.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -3847,6 +3986,7 @@ List of words to be considered correct.
 `string`&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -3892,6 +4032,7 @@ Optional description of the contents / purpose of the dictionary.
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -3931,6 +4072,7 @@ Example:
 `string`&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -3960,6 +4102,7 @@ The effect is similar to the word not being in the dictionary.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -3986,6 +4129,7 @@ also in the `flagWords`.
 `string`&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -4018,6 +4162,7 @@ Name Format:
 [`DictionaryId`](#dictionaryid)
 
 </dd>
+
 </dl>
 
 
@@ -4049,6 +4194,7 @@ possible suggestions.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -4074,6 +4220,7 @@ Replacement pairs.
 [`ReplaceMap`](#replacemap)
 
 </dd>
+
 </dl>
 
 
@@ -4109,6 +4256,7 @@ Format of `suggestWords`
 `string`&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -4138,6 +4286,7 @@ dictionaries.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -4172,6 +4321,7 @@ Note: this settings does not apply to inline dictionaries or `.trie` files.
 [`DictionaryFileTypes`](#dictionaryfiletypes)
 
 </dd>
+
 </dl>
 
 
@@ -4197,6 +4347,7 @@ Use Compounds.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -4222,6 +4373,7 @@ List of words to be considered correct.
 `string`&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -4267,6 +4419,7 @@ Optional description of the contents / purpose of the dictionary.
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -4306,6 +4459,7 @@ Example:
 `string`&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -4335,6 +4489,7 @@ The effect is similar to the word not being in the dictionary.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -4361,6 +4516,7 @@ also in the `flagWords`.
 `string`&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -4393,6 +4549,7 @@ Name Format:
 [`DictionaryId`](#dictionaryid)
 
 </dd>
+
 </dl>
 
 
@@ -4424,6 +4581,7 @@ possible suggestions.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -4449,6 +4607,7 @@ Replacement pairs.
 [`ReplaceMap`](#replacemap)
 
 </dd>
+
 </dl>
 
 
@@ -4484,6 +4643,7 @@ Format of `suggestWords`
 `string`&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -4513,6 +4673,7 @@ dictionaries.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -4547,6 +4708,7 @@ Note: this settings does not apply to inline dictionaries or `.trie` files.
 [`DictionaryFileTypes`](#dictionaryfiletypes)
 
 </dd>
+
 </dl>
 
 
@@ -4572,6 +4734,7 @@ Use Compounds.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -4597,6 +4760,7 @@ List of words to be considered correct.
 `string`&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -4642,6 +4806,7 @@ Optional description of the contents / purpose of the dictionary.
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -4681,6 +4846,7 @@ Example:
 `string`&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -4710,6 +4876,7 @@ The effect is similar to the word not being in the dictionary.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -4736,6 +4903,7 @@ also in the `flagWords`.
 `string`&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -4768,6 +4936,7 @@ Name Format:
 [`DictionaryId`](#dictionaryid)
 
 </dd>
+
 </dl>
 
 
@@ -4799,6 +4968,7 @@ possible suggestions.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -4824,6 +4994,7 @@ Replacement pairs.
 [`ReplaceMap`](#replacemap)
 
 </dd>
+
 </dl>
 
 
@@ -4859,6 +5030,7 @@ Format of `suggestWords`
 `string`&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -4888,6 +5060,7 @@ dictionaries.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -4922,6 +5095,7 @@ Note: this settings does not apply to inline dictionaries or `.trie` files.
 [`DictionaryFileTypes`](#dictionaryfiletypes)
 
 </dd>
+
 </dl>
 
 
@@ -4947,6 +5121,7 @@ Use Compounds.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -4972,6 +5147,7 @@ List of words to be considered correct.
 `string`&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -5014,6 +5190,7 @@ Optional description of the contents / purpose of the dictionary.
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -5043,6 +5220,7 @@ The effect is similar to the word not being in the dictionary.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -5075,6 +5253,7 @@ Name Format:
 [`DictionaryId`](#dictionaryid)
 
 </dd>
+
 </dl>
 
 
@@ -5106,6 +5285,7 @@ possible suggestions.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -5131,6 +5311,7 @@ Path to the file.
 [`DictionaryPath`](#dictionarypath)
 
 </dd>
+
 </dl>
 
 
@@ -5156,6 +5337,7 @@ Replacement pairs.
 [`ReplaceMap`](#replacemap)
 
 </dd>
+
 </dl>
 
 
@@ -5185,6 +5367,7 @@ dictionaries.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -5219,6 +5402,7 @@ Note: this settings does not apply to inline dictionaries or `.trie` files.
 [`DictionaryFileTypes`](#dictionaryfiletypes)
 
 </dd>
+
 </dl>
 
 
@@ -5244,6 +5428,7 @@ Use Compounds.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -5285,6 +5470,7 @@ Optional description of the contents / purpose of the dictionary.
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -5314,6 +5500,7 @@ The effect is similar to the word not being in the dictionary.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -5346,6 +5533,7 @@ Name Format:
 [`DictionaryId`](#dictionaryid)
 
 </dd>
+
 </dl>
 
 
@@ -5377,6 +5565,7 @@ possible suggestions.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -5402,6 +5591,7 @@ Replacement pairs.
 [`ReplaceMap`](#replacemap)
 
 </dd>
+
 </dl>
 
 
@@ -5431,6 +5621,7 @@ dictionaries.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -5465,6 +5656,7 @@ Note: this settings does not apply to inline dictionaries or `.trie` files.
 [`DictionaryFileTypes`](#dictionaryfiletypes)
 
 </dd>
+
 </dl>
 
 
@@ -5490,6 +5682,7 @@ Use Compounds.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -5509,6 +5702,7 @@ Use Compounds.
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -5542,6 +5736,7 @@ Name Format:
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -5585,6 +5780,7 @@ Default: `"\u0300-\u0341"`
 [`CharacterSet`](#characterset)<br />[`CharacterSetCosts`](#charactersetcosts)&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -5611,6 +5807,7 @@ If the word matches the pattern, then the penalty is applied.
 [`PatternAdjustment`](#patternadjustment)&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -5636,6 +5833,7 @@ The alphabet to use.
 [`CharacterSet`](#characterset)<br />[`CharacterSetCosts`](#charactersetcosts)&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -5661,6 +5859,7 @@ Define edit costs.
 [`EditCosts`](#editcosts)
 
 </dd>
+
 </dl>
 
 
@@ -5686,6 +5885,7 @@ Used by dictionary authors
 [`HunspellInformation`](#hunspellinformation)
 
 </dd>
+
 </dl>
 
 
@@ -5716,6 +5916,7 @@ Note: All matching characters are removed or none. Partial removal is not suppor
 [`CharacterSet`](#characterset)
 
 </dd>
+
 </dl>
 
 
@@ -5742,6 +5943,7 @@ Example: `nl,nl-be`
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -5768,6 +5970,7 @@ will be near the top of the suggestion list.
 [`SuggestionCostsDefs`](#suggestioncostsdefs)
 
 </dd>
+
 </dl>
 
 
@@ -5803,6 +6006,7 @@ The reference starts with 1 or more `!`.
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -5830,6 +6034,7 @@ Pattern: `^.*\.(?:txt|trie|dic)(?:\.gz)?$`
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -5857,6 +6062,7 @@ It is expected to match the name of a dictionary.
 [`DictionaryId`](#dictionaryid)
 
 </dd>
+
 </dl>
 
 
@@ -5886,6 +6092,7 @@ One of:
 [`DictionaryRef`](#dictionaryref)<br />[`DictionaryNegRef`](#dictionarynegref)
 
 </dd>
+
 </dl>
 
 
@@ -5925,6 +6132,7 @@ This should be very cheap, it helps with fixing accent issues.
 `number`
 
 </dd>
+
 </dl>
 
 
@@ -5950,6 +6158,7 @@ This is the base cost for making an edit.
 `number`
 
 </dd>
+
 </dl>
 
 
@@ -5976,6 +6185,7 @@ This should be very cheap, it helps with fixing capitalization issues.
 `number`
 
 </dd>
+
 </dl>
 
 
@@ -6002,6 +6212,7 @@ This value should be less than `100 - baseCost`.
 `number`
 
 </dd>
+
 </dl>
 
 
@@ -6027,6 +6238,7 @@ This is the cost for characters not in the alphabet.
 `number`
 
 </dd>
+
 </dl>
 
 
@@ -6057,6 +6269,7 @@ Special Properties:
 [`FsPath`](#fspath)
 
 </dd>
+
 </dl>
 
 
@@ -6076,6 +6289,7 @@ Special Properties:
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -6110,6 +6324,7 @@ Enable/disable using weighted suggestions.
 [`FeatureEnableOnly`](#featureenableonly)
 
 </dd>
+
 </dl>
 
 
@@ -6136,6 +6351,7 @@ A File System Path. Relative paths are relative to the configuration file.
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -6162,6 +6378,7 @@ A File System Path. Relative paths are relative to the configuration file.
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -6188,6 +6405,7 @@ These are glob expressions.
 [`SimpleGlob`](#simpleglob)
 
 </dd>
+
 </dl>
 
 
@@ -6243,6 +6461,7 @@ MAP (IJ)(Ĳ)
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -6268,6 +6487,7 @@ The costs to apply when using the hunspell settings
 `object`
 
 </dd>
+
 </dl>
 
 
@@ -6287,6 +6507,7 @@ The costs to apply when using the hunspell settings
 [`LanguageIdSingle`](#languageidsingle)<br />[`LanguageIdMultiple`](#languageidmultiple)<br />[`LanguageIdMultipleNeg`](#languageidmultipleneg)
 
 </dd>
+
 </dl>
 
 
@@ -6316,6 +6537,7 @@ A single string with a comma separated list of file types:
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -6345,6 +6567,7 @@ A Negative File Type used to exclude files of that type.
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -6373,6 +6596,7 @@ A file type:
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -6426,6 +6650,7 @@ True to enable compound word checking.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -6457,6 +6682,7 @@ See [Case Sensitivity](https://cspell.org/docs/case-sensitive/) for more details
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -6482,6 +6708,7 @@ Optional description of configuration.
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -6514,6 +6741,7 @@ and [Custom Dictionaries](https://cspell.org/docs/dictionaries-custom/) for more
 [`DictionaryReference`](#dictionaryreference)&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -6548,6 +6776,7 @@ For example, you can use the following to add a custom dictionary:
 [`DictionaryDefinition`](#dictionarydefinition)&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -6573,6 +6802,7 @@ Is the spell checker enabled.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -6612,6 +6842,7 @@ Example:
 `string`&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -6637,6 +6868,7 @@ Optional identifier.
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -6686,6 +6918,7 @@ While you can create your own patterns, you can also leverage several patterns t
 [`RegExpPatternList`](#regexppatternlist)
 
 </dd>
+
 </dl>
 
 
@@ -6712,6 +6945,7 @@ also in the `flagWords`.
 `string`&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -6742,6 +6976,7 @@ While you can create your own patterns, you can also leverage several patterns t
 [`RegExpPatternList`](#regexppatternlist)
 
 </dd>
+
 </dl>
 
 
@@ -6767,6 +7002,7 @@ The language id.  Ex: `typescript`, `html`, or `php`.  `*` -- will match all lan
 [`MatchingFileType`](#matchingfiletype)
 
 </dd>
+
 </dl>
 
 
@@ -6792,6 +7028,7 @@ Deprecated - The locale filter, matches against the language. This can be a comm
 [`LocaleId`](#localeid)<br />[`LocaleId`](#localeid)&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -6817,6 +7054,7 @@ The locale filter, matches against the language. This can be a comma separated l
 [`LocaleId`](#localeid)<br />[`LocaleId`](#localeid)&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -6842,6 +7080,7 @@ Optional name of configuration.
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -6873,6 +7112,7 @@ possible suggestions.
 [`DictionaryReference`](#dictionaryreference)&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -6920,6 +7160,7 @@ For example:
 [`RegExpPatternDefinition`](#regexppatterndefinition)&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -6955,6 +7196,7 @@ Format of `suggestWords`
 `string`&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -6985,6 +7227,10 @@ Controls how unknown words are handled.
 [`UnknownWordsChoices`](#unknownwordschoices)
 
 </dd>
+
+<dt>Since</dt>
+<dd>9.1.0</dd>
+
 </dl>
 
 
@@ -7010,6 +7256,7 @@ List of words to be considered correct.
 `string`&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -7036,6 +7283,7 @@ This is a written language locale like: `en`, `en-GB`, `fr`, `es`, `de` or `en,f
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -7055,6 +7303,7 @@ This is a written language locale like: `en`, `en-GB`, `fr`, `es`, `de` or `en,f
 [`LanguageId`](#languageid)<br />[`LanguageId`](#languageid)&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -7123,6 +7372,7 @@ True to enable compound word checking.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -7154,6 +7404,7 @@ See [Case Sensitivity](https://cspell.org/docs/case-sensitive/) for more details
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -7179,6 +7430,7 @@ Optional description of configuration.
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -7211,6 +7463,7 @@ and [Custom Dictionaries](https://cspell.org/docs/dictionaries-custom/) for more
 [`DictionaryReference`](#dictionaryreference)&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -7245,6 +7498,7 @@ For example, you can use the following to add a custom dictionary:
 [`DictionaryDefinition`](#dictionarydefinition)&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -7289,6 +7543,7 @@ kotlin      // enable checking for kotlin
 [`LanguageIdSingle`](#languageidsingle)&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -7314,6 +7569,7 @@ Is the spell checker enabled.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -7354,6 +7610,10 @@ A file type of `*` is a wildcard that enables all file types.
 `object`
 
 </dd>
+
+<dt>Since</dt>
+<dd>8.8.1</dd>
+
 </dl>
 
 
@@ -7379,6 +7639,7 @@ Specify a list of file types to spell check. It is better to use  [Settings.enab
 [`LanguageIdSingle`](#languageidsingle)&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -7404,6 +7665,7 @@ Glob pattern or patterns to match against.
 [`Glob`](#glob)<br />[`Glob`](#glob)&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -7443,6 +7705,7 @@ Example:
 `string`&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -7468,6 +7731,7 @@ Optional identifier.
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -7493,6 +7757,7 @@ Ignore sequences of characters that look like random strings.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -7542,6 +7807,7 @@ While you can create your own patterns, you can also leverage several patterns t
 [`RegExpPatternList`](#regexppatternlist)
 
 </dd>
+
 </dl>
 
 
@@ -7568,6 +7834,7 @@ also in the `flagWords`.
 `string`&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -7598,6 +7865,7 @@ While you can create your own patterns, you can also leverage several patterns t
 [`RegExpPatternList`](#regexppatternlist)
 
 </dd>
+
 </dl>
 
 
@@ -7623,6 +7891,7 @@ Sets the locale.
 [`LocaleId`](#localeid)
 
 </dd>
+
 </dl>
 
 
@@ -7648,6 +7917,7 @@ Sets the programming language id to match file type.
 [`MatchingFileType`](#matchingfiletype)
 
 </dd>
+
 </dl>
 
 
@@ -7675,6 +7945,7 @@ See [Language Settings](https://cspell.org/configuration/language-settings/) for
 [`LanguageSetting`](#languagesetting)&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -7701,6 +7972,7 @@ will prevent ALL default configuration from being loaded.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -7726,6 +7998,7 @@ The maximum number of times the same word can be flagged as an error in a file.
 `number`
 
 </dd>
+
 </dl>
 
 
@@ -7751,6 +8024,7 @@ The maximum number of problems to report in a file.
 `number`
 
 </dd>
+
 </dl>
 
 
@@ -7776,6 +8050,7 @@ The minimum length of a random string to be ignored.
 `number`
 
 </dd>
+
 </dl>
 
 
@@ -7801,6 +8076,7 @@ The minimum length of a word before checking it against a dictionary.
 `number`
 
 </dd>
+
 </dl>
 
 
@@ -7826,6 +8102,7 @@ Optional name of configuration.
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -7857,6 +8134,7 @@ possible suggestions.
 [`DictionaryReference`](#dictionaryreference)&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -7882,6 +8160,7 @@ Number of suggestions to make.
 `number`
 
 </dd>
+
 </dl>
 
 
@@ -7929,6 +8208,7 @@ For example:
 [`RegExpPatternDefinition`](#regexppatterndefinition)&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -7954,6 +8234,7 @@ The PnP files to search for. Note: `.mjs` files are not currently supported.
 `string`&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -7989,6 +8270,7 @@ Format of `suggestWords`
 `string`&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -8018,6 +8300,7 @@ Range: between 1 and 5.
 `number`
 
 </dd>
+
 </dl>
 
 
@@ -8043,6 +8326,7 @@ The maximum amount of time in milliseconds to generate suggestions for a word.
 `number`
 
 </dd>
+
 </dl>
 
 
@@ -8073,6 +8357,10 @@ Controls how unknown words are handled.
 [`UnknownWordsChoices`](#unknownwordschoices)
 
 </dd>
+
+<dt>Since</dt>
+<dd>9.1.0</dd>
+
 </dl>
 
 
@@ -8102,6 +8390,7 @@ of a PnP file and load it.
 `boolean`
 
 </dd>
+
 </dl>
 
 
@@ -8127,6 +8416,7 @@ List of words to be considered correct.
 `string`&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -8146,6 +8436,7 @@ List of words to be considered correct.
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -8182,6 +8473,7 @@ Id of the Adjustment, i.e. `short-compound`
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -8207,6 +8499,7 @@ The amount of penalty to apply.
 `number`
 
 </dd>
+
 </dl>
 
 
@@ -8232,6 +8525,7 @@ RegExp pattern to match
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -8258,6 +8552,7 @@ This matches the name in a pattern definition.
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -8284,6 +8579,7 @@ A PatternRef is a Pattern or PatternId.
 [`Pattern`](#pattern)<br />[`PatternId`](#patternid)<br />[`PredefinedPatterns`](#predefinedpatterns)
 
 </dd>
+
 </dl>
 
 
@@ -8303,6 +8599,7 @@ A PatternRef is a Pattern or PatternId.
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -8339,6 +8636,7 @@ Description of the pattern.
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -8365,6 +8663,7 @@ It is possible to redefine one of the predefined patterns to override its value.
 [`PatternId`](#patternid)
 
 </dd>
+
 </dl>
 
 
@@ -8390,6 +8689,7 @@ RegExp pattern or array of RegExp patterns.
 [`Pattern`](#pattern)<br />[`Pattern`](#pattern)&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -8416,6 +8716,7 @@ A list of pattern names or regular expressions.
 [`PatternRef`](#patternref)&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -8435,6 +8736,7 @@ A list of pattern names or regular expressions.
 `string`&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -8454,6 +8756,7 @@ A list of pattern names or regular expressions.
 [`ReplaceEntry`](#replaceentry)&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -8480,6 +8783,7 @@ The module or path to the the reporter to load.
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -8506,6 +8810,7 @@ Options to send to the reporter. These are defined by the reporter.
 [`Serializable`](#serializable)
 
 </dd>
+
 </dl>
 
 
@@ -8539,6 +8844,7 @@ Examples:
 [`ReporterModuleName`](#reportermodulename)<br />[`ReporterModuleName`](#reportermodulename)&ZeroWidthSpace;`[]`<br />`Unknown`&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -8558,6 +8864,7 @@ Examples:
 `number`<br />`string`<br />`boolean`<br />`null`<br />`object`
 
 </dd>
+
 </dl>
 
 
@@ -8584,6 +8891,7 @@ Simple Glob string, the root will be globRoot.
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -8629,6 +8937,7 @@ Note: the default edit distance is 100.
 [`CostMapDefReplace`](#costmapdefreplace)<br />[`CostMapDefInsDel`](#costmapdefinsdel)<br />[`CostMapDefSwap`](#costmapdefswap)
 
 </dd>
+
 </dl>
 
 
@@ -8648,6 +8957,7 @@ Note: the default edit distance is 100.
 [`SuggestionCostMapDef`](#suggestioncostmapdef)&ZeroWidthSpace;`[]`
 
 </dd>
+
 </dl>
 
 
@@ -8674,6 +8984,7 @@ Possible choices for how to handle unknown words.
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -8693,6 +9004,7 @@ Possible choices for how to handle unknown words.
 [`VersionLatest`](#versionlatest)<br />[`VersionLegacy`](#versionlegacy)
 
 </dd>
+
 </dl>
 
 
@@ -8719,6 +9031,7 @@ Configuration File Version.
 `string`
 
 </dd>
+
 </dl>
 
 
@@ -8745,5 +9058,6 @@ Legacy Configuration File Versions.
 `string`
 
 </dd>
+
 </dl>
 

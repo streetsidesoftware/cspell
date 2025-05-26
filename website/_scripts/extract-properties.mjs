@@ -122,6 +122,14 @@ function formatTypeEntryBody(entry) {
         `;
     }
 
+    let dlSince = '';
+    if (entry.since) {
+        dlSince = inject`
+            <dt>Since</dt>
+            <dd>${entry.since}</dd>
+        `;
+    }
+
     return inject`
         <dl>
         ${dlDescription}
@@ -131,6 +139,7 @@ function formatTypeEntryBody(entry) {
         ${formatEntryType(entry)}
 
         </dd>
+        ${dlSince}
         </dl>
     `;
 }
