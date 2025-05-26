@@ -1,10 +1,22 @@
 // @ts-check
+import assert from 'node:assert';
 import { promises as fs } from 'node:fs';
 import { inject, createTable, padLines } from './lib/utils.mjs';
 
 const schemaFile = new URL('../../cspell.schema.json', import.meta.url);
 const schemaFileOut = new URL('../docs/Configuration/auto_properties.md', import.meta.url);
 
+/**
+ * @import { JSONSchema7, JSONSchema7Definition, JSONSchema7Object, JSONSchema7Array, JSONSchema7Type } from 'json-schema';
+ */
+
+/**
+ * @typedef {JSONSchema7 & { markdownDescription?: string, since?: string }} Definition
+ */
+
+/**
+ * Extracts the properties from the cspell schema and writes them to a markdown file.
+ */
 async function run() {
     const schema = await loadSchema();
 
@@ -28,6 +40,12 @@ async function run() {
     await fs.writeFile(schemaFileOut, doc, 'utf8');
 }
 
+/**
+ *
+ * @param {JSONSchema7} entry
+ * @param {string} name
+ * @returns {string}
+ */
 function schemaEntry(entry, name) {
     if (entry.type === 'object') {
         return schemaObjectEntry(entry, name);
@@ -35,8 +53,15 @@ function schemaEntry(entry, name) {
     return formatTopLevelType(name, entry);
 }
 
+/**
+ *
+ * @param {JSONSchema7} schemaTypeObject
+ * @param {string} nameOfType
+ * @returns {string}
+ */
 function schemaObjectEntry(schemaTypeObject, nameOfType) {
     const properties = schemaTypeObject.properties || {};
+    const required = new Set(schemaTypeObject.required || []);
     // console.error('Object Type %s\n%o', 'Properties:', properties);
     /** @type {string[]} */
     const lines = [];
@@ -45,11 +70,22 @@ function schemaObjectEntry(schemaTypeObject, nameOfType) {
         lines.push(`## ${nameOfType}\n`);
     }
 
+    const isRequired = (key) => (required.has(key) && 1) || 0;
+    const entries = Object.entries(properties).sort(
+        (a, b) => isRequired(a[0]) - isRequired(b[0]) || a[0].localeCompare(b[0]),
+    );
+
     // Object Fields as a table
     lines.push(
         createTable(
             ['Field', 'Type', 'Description'],
-            Object.entries(properties).map(([key, entry]) => formatPropertyForOverview(key, entry, nameOfType)),
+            entries
+                .map(([key, entry]) =>
+                    entryIsJSONSchema7(entry)
+                        ? formatPropertyForOverview(key, entry, nameOfType, required.has(key))
+                        : [],
+                )
+                .filter((e) => e.length > 0),
         ),
     );
 
@@ -57,8 +93,9 @@ function schemaObjectEntry(schemaTypeObject, nameOfType) {
 
     lines.push(`\n\n### ${nameOfType} Fields`);
 
-    for (const [key, entry] of Object.entries(properties)) {
-        lines.push(formatPropertyToDisplay(key, entry, nameOfType));
+    for (const [key, entry] of entries) {
+        if (!entryIsJSONSchema7(entry)) continue;
+        lines.push(formatPropertyToDisplay(key, entry, nameOfType, required.has(key)));
     }
 
     return lines.join('\n');
@@ -68,6 +105,7 @@ function schemaObjectEntry(schemaTypeObject, nameOfType) {
  * @param {string} name - name of heading
  * @param {string} [section] - the containing entry name
  * @param {string} [text] - optional text to show in the link
+ * @returns {string}
  */
 function linkToHeader(name, section, text) {
     text = text || name;
@@ -83,21 +121,45 @@ function toId(nameOfParentType, header) {
     return (nameOfParentType ? `${nameOfParentType}-${header}` : header).toLowerCase().replaceAll(/\W/g, '-');
 }
 
-function formatPropertyForOverview(key, entry, section) {
-    return [linkToHeader(key, section), formatEntryType(entry), formatEntryDescriptionShort(entry)];
+/**
+ *
+ * @param {string} key
+ * @param {Definition} entry
+ * @param {string} section
+ * @param {boolean} isRequired
+ * @returns {[string, string, string]}
+ */
+function formatPropertyForOverview(key, entry, section, isRequired) {
+    const req = isRequired ? ' <sup>_req_</sup>' : '';
+    return [linkToHeader(key, section) + req, formatEntryType(entry), formatEntryDescriptionShort(entry)];
 }
 
-function formatPropertyToDisplay(key, entry, nameOfParentType) {
+/**
+ *
+ * @param {string} key
+ * @param {Definition} entry
+ * @param {string} nameOfParentType
+ * @param {boolean} isRequired
+ * @returns {string}
+ */
+function formatPropertyToDisplay(key, entry, nameOfParentType, isRequired) {
+    const req = isRequired ? ' <sup>_required_</sup>' : '';
     return inject`
 
         ---
 
-        #### \`${key}\` {#${toId(nameOfParentType, key)}}
+        #### \`${key}\` {#${toId(nameOfParentType, key)}}${req}
 
         ${formatTypeEntryBody(entry)}
     `;
 }
 
+/**
+ *
+ * @param {string} key
+ * @param {*} entry
+ * @returns {string}
+ */
 function formatTopLevelType(key, entry) {
     return inject`
 
@@ -109,6 +171,11 @@ function formatTopLevelType(key, entry) {
     `;
 }
 
+/**
+ *
+ * @param {Definition} entry
+ * @returns {string}
+ */
 function formatTypeEntryBody(entry) {
     let dlDescription = formatEntryDescription(entry, '');
     if (dlDescription) {
@@ -145,15 +212,33 @@ function formatTypeEntryBody(entry) {
 }
 
 /**
- * @param {object} entry
+ * @param {Definition} entry
+ * @returns {string}
  */
 function formatEntryType(entry, addFix = '`') {
+    /**
+     *
+     * @param {string | string[]} value
+     * @returns {string}
+     */
     function fix(value) {
         return addFix + value + addFix;
     }
 
-    if (entry.type === 'array' && entry.items) {
-        return formatEntryType(entry.items, '`') + '&ZeroWidthSpace;' + fix(`[]`);
+    if (entry.type === 'array' && entry.items && typeof entry.items === 'object') {
+        if (!Array.isArray(entry.items)) {
+            const item = entry.items;
+            return formatEntryType(item, '`') + '&ZeroWidthSpace;' + fix(`[]`);
+        }
+        const items = entry.items;
+        return (
+            fix('[') +
+            items
+                .filter(entryIsJSONSchema7)
+                .map((item) => formatEntryType(item, '`'))
+                .join(', ') +
+            fix(`]`)
+        );
     }
     if (entry.enum) {
         return entry.enum.map((e) => fix(JSON.stringify(e))).join(' | ');
@@ -165,22 +250,46 @@ function formatEntryType(entry, addFix = '`') {
         return formatReferenceType(entry.$ref, fix);
     }
     if (entry.anyOf) {
-        return entry.anyOf.map((entry) => formatEntryType(entry)).join('<br />');
+        return entry.anyOf
+            .filter(entryIsJSONSchema7)
+            .map((entry) => formatEntryType(entry))
+            .join('<br />');
     }
     return fix('Unknown');
 }
 
+/**
+ *
+ * @param {string} ref
+ * @param {(fix: string) => string} fnFix
+ * @returns {string}
+ */
 function formatReferenceType(ref, fnFix) {
     const refType = ref.split('/').slice(-1).join('');
     return linkToHeader(refType, '', fnFix(refType));
 }
 
+/**
+ *
+ * @param {Definition} schema
+ * @returns {string}
+ */
 function formatDefinitions(schema) {
     return Object.entries(schema.definitions || {})
-        .map(([key, entry]) => schemaEntry(entry, key))
+        .filter(propertyIsJSONSchema7)
+        .map(([key, entry]) => {
+            assert(entryIsJSONSchema7(entry), `Expected entry to be JSONSchema7: ${key}`);
+            return schemaEntry(entry, key);
+        })
         .join('\n\n');
 }
 
+/**
+ *
+ * @param {Definition} entry
+ * @param {string} padding
+ * @returns {string}
+ */
 function formatEntryDescription(entry, padding) {
     let description = entry.markdownDescription || entry.description || '';
     if (typeof description !== 'string') {
@@ -193,6 +302,11 @@ function formatEntryDescription(entry, padding) {
     return description;
 }
 
+/**
+ *
+ * @param {Definition} entry
+ * @returns {string}
+ */
 function formatEntryDescriptionShort(entry) {
     const description = entry.markdownDescription || entry.description || '';
     if (typeof description !== 'string') {
@@ -204,6 +318,10 @@ function formatEntryDescriptionShort(entry) {
     return short;
 }
 
+/**
+ *
+ * @returns {Promise<JSONSchema7>}
+ */
 async function loadSchema() {
     const schema = JSON.parse(await fs.readFile(schemaFile, 'utf8'));
 
@@ -224,6 +342,24 @@ function replaceLinks(markdown) {
         return link;
     });
     return markdown;
+}
+
+/**
+ *
+ * @param {[string, JSONSchema7Definition]} param0
+ * @returns {param0 is [string, JSONSchema7]}
+ */
+function propertyIsJSONSchema7([key, entry]) {
+    return typeof key === 'string' && entry && typeof entry === 'object' && !Array.isArray(entry);
+}
+
+/**
+ *
+ * @param {JSONSchema7Definition} entry
+ * @returns {entry is JSONSchema7}
+ */
+function entryIsJSONSchema7(entry) {
+    return entry && typeof entry === 'object';
 }
 
 run();
