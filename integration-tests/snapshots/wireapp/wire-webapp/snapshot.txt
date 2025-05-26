@@ -3,7 +3,7 @@ Repository: wireapp/wire-webapp
 Url: "https://github.com/wireapp/wire-webapp.git"
 Args: ["src/script/**/*.{js,ts,tsx,md}"]
 Lines:
- CSpell: Files checked: 1719, Issues found: 3079 in 799 files.
+ CSpell: Files checked: 1741, Issues found: 3080 in 807 files.
  exit code: 1
 src/script/Config.ts:20:25     - Unknown word (wireapp)    -- import {Runtime} from '@wireapp/commons';
 src/script/Config.ts:89:31     - Unknown word (acces)      -- DataDog client api keys acces */
@@ -244,7 +244,7 @@ src/script/auth/page/OauthPermissions.styles.ts:22:26     - Unknown word (wireap
 src/script/auth/page/Page.tsx:22:26     - Unknown word (wireapp)    -- import {TeamData} from '@wireapp/api-client/lib/team
 src/script/auth/page/Root.tsx:22:32     - Unknown word (wireapp)    -- pathWithParams} from '@wireapp/commons/lib/util/UrlUtil
 src/script/auth/page/Root.tsx:28:59     - Unknown word (wireapp)    -- StyledApp, THEME_ID} from '@wireapp/react-ui-kit';
-src/script/auth/page/SetAccountType.styles.tsx:22:23     - Unknown word (wireapp)    -- import {WIDTH} from '@wireapp/react-ui-kit';
+src/script/auth/page/SetAccountType.styles.tsx:22:33     - Unknown word (wireapp)    -- COLOR_V2, WIDTH} from '@wireapp/react-ui-kit';
 src/script/auth/page/SetAccountType.tsx:22:64     - Unknown word (wireapp)    -- eckRoundIcon, FlexBox} from '@wireapp/react-ui-kit';
 src/script/auth/page/SetEmail.tsx:26:54     - Unknown word (wireapp)    -- Form, H1, Input} from '@wireapp/react-ui-kit';
 src/script/auth/page/SetHandle.tsx:102:21    - Unknown word (Newletter)  -- const handleAcceptNewletterConsent = () => {
@@ -562,14 +562,15 @@ src/script/calling/CallingRepository.ts:22:29     - Unknown word (wireapp)    --
 src/script/calling/CallingRepository.ts:23:34     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
 src/script/calling/CallingRepository.ts:2402:44   - Unknown word (wuser)           -- updateActiveSpeakers = (wuser: number, convId: string
 src/script/calling/CallingRepository.ts:2450:48   - Unknown word (ONEONONE)        -- onversationType !== CONV_TYPE.ONEONONE) {
+src/script/calling/CallingRepository.ts:2468:48   - Unknown word (ONEONONE)        -- onversationType !== CONV_TYPE.ONEONONE) {
 src/script/calling/CallingRepository.ts:24:39     - Unknown word (wireapp)    -- WebappProperties} from '@wireapp/api-client/lib/user
-src/script/calling/CallingRepository.ts:2535:11   - Unknown word (Segmentations)   -- customSegmentations: Record<string, any
-src/script/calling/CallingRepository.ts:2543:11   - Unknown word (segmentations)   -- const segmentations = {
+src/script/calling/CallingRepository.ts:2544:11   - Unknown word (Segmentations)   -- customSegmentations: Record<string, any
 src/script/calling/CallingRepository.ts:254:17    - Unknown word (MILLIS)          -- TIME_IN_MILLIS.MINUTE * 15,
-src/script/calling/CallingRepository.ts:2551:16   - Unknown word (Segmentations)   -- ...customSegmentations,
-src/script/calling/CallingRepository.ts:2553:62   - Unknown word (segmentations)   -- ANALYTICS.EVENT, eventName, segmentations);
-src/script/calling/CallingRepository.ts:2607:70   - Unknown word (noopener)        -- target="_blank" rel="noopener noreferrer">`,
-src/script/calling/CallingRepository.ts:2607:79   - Unknown word (noreferrer)      -- blank" rel="noopener noreferrer">`,
+src/script/calling/CallingRepository.ts:2552:11   - Unknown word (segmentations)   -- const segmentations = {
+src/script/calling/CallingRepository.ts:2560:16   - Unknown word (Segmentations)   -- ...customSegmentations,
+src/script/calling/CallingRepository.ts:2562:62   - Unknown word (segmentations)   -- ANALYTICS.EVENT, eventName, segmentations);
+src/script/calling/CallingRepository.ts:2616:70   - Unknown word (noopener)        -- target="_blank" rel="noopener noreferrer">`,
+src/script/calling/CallingRepository.ts:2616:79   - Unknown word (noreferrer)      -- blank" rel="noopener noreferrer">`,
 src/script/calling/CallingRepository.ts:27:101    - Unknown word (Subconversation) -- SubconversationService/SubconversationService';
 src/script/calling/CallingRepository.ts:27:78     - Unknown word (Subconversation) -- core/lib/conversation/SubconversationService/SubconversationService
 src/script/calling/CallingRepository.ts:27:9      - Unknown word (Subconversation) -- import {SubconversationEpochInfoMember} from
@@ -704,16 +705,16 @@ src/script/components/CellsGlobalView/CellsGlobalView.tsx:24:39     - Unknown wo
 src/script/components/CellsGlobalView/CellsHeader/CellsHeader.tsx:24:47     - Unknown word (Seach)      -- './CellsSearch/CellsSeach';
 src/script/components/CellsGlobalView/CellsHeader/CellsRefresh/CellsRefresh.tsx:20:51     - Unknown word (wireapp)    -- ReloadIcon} from '@wireapp/react-ui-kit';
 src/script/components/CellsGlobalView/CellsHeader/CellsSearch/CellsSeach.tsx:22:52     - Unknown word (wireapp)    -- SearchIcon} from '@wireapp/react-ui-kit';
-src/script/components/CellsGlobalView/CellsTable/CellsTableColumns/CellsShareFileModal/CellsShareFileModal.tsx:20:38     - Unknown word (wireapp)    -- Label, Switch} from '@wireapp/react-ui-kit';
-src/script/components/CellsGlobalView/CellsTable/CellsTableColumns/CellsShareFileModal/useCellPublicLink.ts:49:71     - Unknown word (PYDIO)      -- Config.getConfig().CELLS_PYDIO_URL + link.LinkUrl,
-src/script/components/CellsGlobalView/CellsTable/CellsTableColumns/CellsShareFileModal/useCellPublicLink.ts:77:71     - Unknown word (PYDIO)      -- Config.getConfig().CELLS_PYDIO_URL + link.LinkUrl,
+src/script/components/CellsGlobalView/CellsTable/CellsTableColumns/CellsShareModal/CellsShareModal.tsx:20:38     - Unknown word (wireapp)    -- Label, Switch} from '@wireapp/react-ui-kit';
+src/script/components/CellsGlobalView/CellsTable/CellsTableColumns/CellsShareModal/useCellPublicLink.ts:49:71     - Unknown word (PYDIO)      -- Config.getConfig().CELLS_PYDIO_URL + link.LinkUrl,
+src/script/components/CellsGlobalView/CellsTable/CellsTableColumns/CellsShareModal/useCellPublicLink.ts:77:71     - Unknown word (PYDIO)      -- Config.getConfig().CELLS_PYDIO_URL + link.LinkUrl,
 src/script/components/CellsGlobalView/CellsTable/CellsTableColumns/CellsTableNameColumn/CellsTableNameColumn.tsx:20:38     - Unknown word (wireapp)    -- FolderIcon, PlayIcon} from '@wireapp/react-ui-kit';
-src/script/components/CellsGlobalView/CellsTable/CellsTableColumns/CellsTableRowOptions/CellsTableRowOptions.tsx:22:26     - Unknown word (wireapp)    -- import {MoreIcon} from '@wireapp/react-ui-kit';
+src/script/components/CellsGlobalView/CellsTable/CellsTableColumns/CellsTableRowOptions/CellsTableRowOptions.tsx:20:40     - Unknown word (wireapp)    -- ropdownMenu, MoreIcon} from '@wireapp/react-ui-kit';
 src/script/components/CellsGlobalView/common/openFolder/openFolder.ts:22:34     - Unknown word (wireapp)    -- parseQualifiedId} from '@wireapp/core/lib/util/qualifiedIdUtil
 src/script/components/CellsGlobalView/common/openFolder/openFolder.ts:37:74     - Unknown word (zinfra)     -- development' ? 'staging.zinfra.io' : domain;
-src/script/components/CellsGlobalView/transformCellsFiles/transformCellsFiles.ts:22:17     - Unknown word (MILLIS)     -- import {TIME_IN_MILLIS} from 'Util/TimeUtil
-src/script/components/CellsGlobalView/transformCellsFiles/transformCellsFiles.ts:91:57     - Unknown word (MILLIS)     -- as number) * TIME_IN_MILLIS.SECOND;
-src/script/components/CellsGlobalView/transformCellsFiles/transformCellsFiles.ts:99:68     - Unknown word (usermeta)   -- meta.Namespace === 'usermeta-owner')?.JsonValue;
+src/script/components/CellsGlobalView/transformCellsNodes/transformCellsNodes.ts:22:17     - Unknown word (MILLIS)     -- import {TIME_IN_MILLIS} from 'Util/TimeUtil
+src/script/components/CellsGlobalView/transformCellsNodes/transformCellsNodes.ts:91:57     - Unknown word (MILLIS)     -- as number) * TIME_IN_MILLIS.SECOND;
+src/script/components/CellsGlobalView/transformCellsNodes/transformCellsNodes.ts:99:68     - Unknown word (usermeta)   -- meta.Namespace === 'usermeta-owner')?.JsonValue;
 src/script/components/ConfigToolbar/ConfigToolbar.tsx:22:25     - Unknown word (keyboardjs) -- import keyboardjs from 'keyboardjs';
 src/script/components/ConfigToolbar/ConfigToolbar.tsx:22:8      - Unknown word (keyboardjs) -- import keyboardjs from 'keyboardjs';
 src/script/components/ConfigToolbar/ConfigToolbar.tsx:23:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
@@ -731,27 +732,13 @@ src/script/components/Conversation/Conversation.tsx:605:16    - Unknown word (gi
 src/script/components/Conversation/Conversation.tsx:605:46    - Unknown word (giphy)      -- giphyRepository={repositories.giphy} inputValue={inputValue
 src/script/components/Conversation/Conversation.tsx:98:12     - Unknown word (Giphy)      -- const [isGiphyModalOpen, setIsGiphyModalOpen
 src/script/components/Conversation/Conversation.tsx:98:33     - Unknown word (Giphy)      -- isGiphyModalOpen, setIsGiphyModalOpen] = useState
-src/script/components/Conversation/ConversationCells/CellsHeader/CellsBreadcrumbs/BreadcrumbItem/BreadcrumbItem.tsx:20:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
-src/script/components/Conversation/ConversationCells/CellsHeader/CellsBreadcrumbs/BreadcrumbLeaf/BreadcrumbLeaf.tsx:20:31     - Unknown word (wireapp)    -- ChevronUpIcon} from '@wireapp/react-ui-kit';
-src/script/components/Conversation/ConversationCells/CellsHeader/CellsBreadcrumbs/CellsBreadcrumbs.tsx:20:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
-src/script/components/Conversation/ConversationCells/CellsHeader/CellsBreadcrumbs/CellsBreadcrumbs.tsx:25:39     - Unknown word (Combained)  -- CombainedBreadcrumbs} from './CombainedBreadcrumbs/CombainedBreadcrum
-src/script/components/Conversation/ConversationCells/CellsHeader/CellsBreadcrumbs/CellsBreadcrumbs.tsx:25:60     - Unknown word (Combained)  -- CombainedBreadcrumbs/CombainedBreadcrumbs';
-src/script/components/Conversation/ConversationCells/CellsHeader/CellsBreadcrumbs/CellsBreadcrumbs.tsx:25:9      - Unknown word (Combained)  -- import {CombainedBreadcrumbs} from '.
-src/script/components/Conversation/ConversationCells/CellsHeader/CellsBreadcrumbs/CellsBreadcrumbs.tsx:75:8      - Unknown word (Combained)  -- <CombainedBreadcrumbs path={dotsPath
-src/script/components/Conversation/ConversationCells/CellsHeader/CellsBreadcrumbs/CombainedBreadcrumbs/CombainedBreadcrumbs.tsx:22:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
-src/script/components/Conversation/ConversationCells/CellsHeader/CellsBreadcrumbs/CombainedBreadcrumbs/CombainedBreadcrumbs.tsx:29:31     - Unknown word (Combained)  -- buttonStyles} from './CombainedBreadcrumbs.styles';
-src/script/components/Conversation/ConversationCells/CellsHeader/CellsBreadcrumbs/CombainedBreadcrumbs/CombainedBreadcrumbs.tsx:33:11     - Unknown word (Combained)  -- interface CombainedBreadcrumbsProps {
-src/script/components/Conversation/ConversationCells/CellsHeader/CellsBreadcrumbs/CombainedBreadcrumbs/CombainedBreadcrumbs.tsx:39:14     - Unknown word (Combained)  -- export const CombainedBreadcrumbs = ({path
-src/script/components/Conversation/ConversationCells/CellsHeader/CellsBreadcrumbs/CombainedBreadcrumbs/CombainedBreadcrumbs.tsx:39:78     - Unknown word (Combained)  -- versationQualifiedId, items}: CombainedBreadcrumbsProps) =>
-src/script/components/Conversation/ConversationCells/CellsHeader/CellsBreadcrumbs/CombainedBreadcrumbs/CombainedBreadcrumbs.tsx:47:39     - Unknown word (combained)  -- 'conversation-cells-combained-breadcrumbs',
-src/script/components/Conversation/ConversationCells/CellsHeader/CellsBreadcrumbs/CombainedBreadcrumbs/CombainedBreadcrumbs.tsx:65:45     - Unknown word (Combained)  -- cellsFolderBreadcrumbCombained')}
-src/script/components/Conversation/ConversationCells/CellsHeader/CellsBreadcrumbs/openBreadcrumb/openBreadcrumb.ts:22:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
 src/script/components/Conversation/ConversationCells/CellsHeader/CellsHeader.tsx:20:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
+src/script/components/Conversation/ConversationCells/CellsHeader/CellsMoreMenu/CellsMoreMenu.tsx:20:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
+src/script/components/Conversation/ConversationCells/CellsHeader/CellsMoreMenu/CellsMoreMenu.tsx:22:82     - Unknown word (wireapp)    -- MoreIcon, TrashIcon} from '@wireapp/react-ui-kit';
 src/script/components/Conversation/ConversationCells/CellsHeader/CellsNewMenu/CellsNewItemModal/CellsNewItemModal.tsx:20:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
-src/script/components/Conversation/ConversationCells/CellsHeader/CellsNewMenu/CellsNewItemModal/CellsNewItemModal.tsx:31:10     - Unknown word (wireapp)    -- } from '@wireapp/react-ui-kit';
-src/script/components/Conversation/ConversationCells/CellsHeader/CellsNewMenu/CellsNewItemModal/useCellsNewItemForm.ts:22:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
+src/script/components/Conversation/ConversationCells/CellsHeader/CellsNewMenu/CellsNewItemModal/CellsNewItemModal.tsx:22:58     - Unknown word (wireapp)    -- IconButtonVariant} from '@wireapp/react-ui-kit';
 src/script/components/Conversation/ConversationCells/CellsHeader/CellsNewMenu/CellsNewMenu.tsx:22:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
-src/script/components/Conversation/ConversationCells/CellsHeader/CellsNewMenu/CellsNewMenu.tsx:24:49     - Unknown word (wireapp)    -- ttonVariant, PlusIcon} from '@wireapp/react-ui-kit';
+src/script/components/Conversation/ConversationCells/CellsHeader/CellsNewMenu/CellsNewMenu.tsx:24:63     - Unknown word (wireapp)    -- ropdownMenu, PlusIcon} from '@wireapp/react-ui-kit';
 src/script/components/Conversation/ConversationCells/CellsHeader/CellsRefresh/CellsRefresh.tsx:20:59     - Unknown word (wireapp)    -- ReloadIcon} from '@wireapp/react-ui-kit';
 src/script/components/Conversation/ConversationCells/CellsHeader/CellsSearch/CellsSearch.tsx:22:52     - Unknown word (wireapp)    -- SearchIcon} from '@wireapp/react-ui-kit';
 src/script/components/Conversation/ConversationCells/CellsPagination/CellsPageList/CellsPageList.tsx:20:22     - Unknown word (wireapp)    -- import {Bold} from '@wireapp/react-ui-kit';
@@ -762,22 +749,36 @@ src/script/components/Conversation/ConversationCells/CellsTable/CellsImagePrevie
 src/script/components/Conversation/ConversationCells/CellsTable/CellsImagePreviewModal/CellsImagePreviewModal.tsx:25:9      - Unknown word (Zoomable)   -- import {ZoomableImage} from 'Components
 src/script/components/Conversation/ConversationCells/CellsTable/CellsImagePreviewModal/CellsImagePreviewModal.tsx:89:77     - Unknown word (fadein)     -- modal-show', {'modal-fadein': isImageVisible})}
 src/script/components/Conversation/ConversationCells/CellsTable/CellsTable.tsx:21:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
-src/script/components/Conversation/ConversationCells/CellsTable/CellsTableColumns/CellsFileShareModal/CellsFileShareModal.tsx:20:38     - Unknown word (wireapp)    -- Label, Switch} from '@wireapp/react-ui-kit';
-src/script/components/Conversation/ConversationCells/CellsTable/CellsTableColumns/CellsFileShareModal/useCellPublicLink.ts:51:71     - Unknown word (PYDIO)      -- Config.getConfig().CELLS_PYDIO_URL + link.LinkUrl,
-src/script/components/Conversation/ConversationCells/CellsTable/CellsTableColumns/CellsFileShareModal/useCellPublicLink.ts:79:71     - Unknown word (PYDIO)      -- Config.getConfig().CELLS_PYDIO_URL + link.LinkUrl,
+src/script/components/Conversation/ConversationCells/CellsTable/CellsTableColumns/CellsNodeShareModal/CellsNodeShareModal.tsx:20:38     - Unknown word (wireapp)    -- Label, Switch} from '@wireapp/react-ui-kit';
+src/script/components/Conversation/ConversationCells/CellsTable/CellsTableColumns/CellsNodeShareModal/useCellPublicLink.ts:51:71     - Unknown word (PYDIO)      -- Config.getConfig().CELLS_PYDIO_URL + link.LinkUrl,
+src/script/components/Conversation/ConversationCells/CellsTable/CellsTableColumns/CellsNodeShareModal/useCellPublicLink.ts:79:71     - Unknown word (PYDIO)      -- Config.getConfig().CELLS_PYDIO_URL + link.LinkUrl,
 src/script/components/Conversation/ConversationCells/CellsTable/CellsTableColumns/CellsTableColumns.tsx:21:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
 src/script/components/Conversation/ConversationCells/CellsTable/CellsTableColumns/CellsTableNameColumn/CellsTableNameColumn.tsx:20:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
 src/script/components/Conversation/ConversationCells/CellsTable/CellsTableColumns/CellsTableNameColumn/CellsTableNameColumn.tsx:22:38     - Unknown word (wireapp)    -- FolderIcon, PlayIcon} from '@wireapp/react-ui-kit';
+src/script/components/Conversation/ConversationCells/CellsTable/CellsTableColumns/CellsTableRowOptions/CellsMoveNodeModal/CellsFoldersListModalContent/CellsCreateNewFolderHint/CellsCreateNewFolderHint.tsx:20:49     - Unknown word (wireapp)    -- ttonVariant, PlusIcon} from '@wireapp/react-ui-kit';
+src/script/components/Conversation/ConversationCells/CellsTable/CellsTableColumns/CellsTableRowOptions/CellsMoveNodeModal/CellsFoldersListModalContent/CellsFolderList/CellsFolderList.tsx:20:28     - Unknown word (wireapp)    -- {FolderIcon} from '@wireapp/react-ui-kit';
+src/script/components/Conversation/ConversationCells/CellsTable/CellsTableColumns/CellsTableRowOptions/CellsMoveNodeModal/CellsFoldersListModalContent/CellsFoldersListModalContent.tsx:20:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
+src/script/components/Conversation/ConversationCells/CellsTable/CellsTableColumns/CellsTableRowOptions/CellsMoveNodeModal/CellsFoldersListModalContent/CellsMoveActions/CellsMoveActions.tsx:20:39     - Unknown word (wireapp)    -- ButtonVariant} from '@wireapp/react-ui-kit';
+src/script/components/Conversation/ConversationCells/CellsTable/CellsTableColumns/CellsTableRowOptions/CellsMoveNodeModal/CellsMoveNodeModal.tsx:22:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
+src/script/components/Conversation/ConversationCells/CellsTable/CellsTableColumns/CellsTableRowOptions/CellsMoveNodeModal/CellsMoveNodeModalHeader/CellsMoveNodeModalHeader.tsx:20:58     - Unknown word (wireapp)    -- IconButtonVariant} from '@wireapp/react-ui-kit';
+src/script/components/Conversation/ConversationCells/CellsTable/CellsTableColumns/CellsTableRowOptions/CellsMoveNodeModal/CellsNewFolderModalContent/CellsNewFolderModalContent.tsx:20:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
+src/script/components/Conversation/ConversationCells/CellsTable/CellsTableColumns/CellsTableRowOptions/CellsMoveNodeModal/useGetCellsFolders/useGetCellsFolders.ts:22:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
 src/script/components/Conversation/ConversationCells/CellsTable/CellsTableColumns/CellsTableRowOptions/CellsTableRowOptions.tsx:22:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
-src/script/components/Conversation/ConversationCells/CellsTable/CellsTableColumns/CellsTableRowOptions/CellsTableRowOptions.tsx:24:26     - Unknown word (wireapp)    -- import {MoreIcon} from '@wireapp/react-ui-kit';
+src/script/components/Conversation/ConversationCells/CellsTable/CellsTableColumns/CellsTableRowOptions/CellsTableRowOptions.tsx:24:40     - Unknown word (wireapp)    -- ropdownMenu, MoreIcon} from '@wireapp/react-ui-kit';
 src/script/components/Conversation/ConversationCells/ConversationCells.tsx:22:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
 src/script/components/Conversation/ConversationCells/ConversationCells.tsx:23:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
+src/script/components/Conversation/ConversationCells/common/CellsBreadcrumbs/CellsBreadcrumbs.tsx:20:29     - Unknown word (wireapp)    -- Breadcrumbs} from '@wireapp/react-ui-kit';
+src/script/components/Conversation/ConversationCells/common/CellsNewNodeForm/CellsNewNodeForm.tsx:22:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
+src/script/components/Conversation/ConversationCells/common/CellsNewNodeForm/CellsNewNodeForm.tsx:24:67     - Unknown word (wireapp)    -- Input, Label} from '@wireapp/react-ui-kit';
+src/script/components/Conversation/ConversationCells/common/CellsNewNodeForm/useCellsNewNodeForm.ts:22:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
+src/script/components/Conversation/ConversationCells/common/getBreadcrumbsFromPath/getBreadcrumbsFromPath.tsx:20:27     - Unknown word (wireapp)    -- import {TrashIcon} from '@wireapp/react-ui-kit';
 src/script/components/Conversation/ConversationCells/common/getCellsApiPath/getCellsApiPath.ts:20:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
+src/script/components/Conversation/ConversationCells/common/openBreadcrumb/openBreadcrumb.ts:22:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
 src/script/components/Conversation/ConversationCells/common/openFolder/openFolder.ts:22:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
-src/script/components/Conversation/ConversationCells/useGetAllCellsFiles/transformNodesToCellsFiles.ts:104:57    - Unknown word (MILLIS)     -- as number) * TIME_IN_MILLIS.SECOND;
-src/script/components/Conversation/ConversationCells/useGetAllCellsFiles/transformNodesToCellsFiles.ts:112:68    - Unknown word (usermeta)   -- meta.Namespace === 'usermeta-owner')?.JsonValue;
-src/script/components/Conversation/ConversationCells/useGetAllCellsFiles/transformNodesToCellsFiles.ts:23:17     - Unknown word (MILLIS)     -- import {TIME_IN_MILLIS} from 'Util/TimeUtil
-src/script/components/Conversation/ConversationCells/useGetAllCellsFiles/useGetAllCellsFiles.ts:22:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
+src/script/components/Conversation/ConversationCells/useGetAllCellsNodes/transformDataToCellsNodes.ts:107:57    - Unknown word (MILLIS)     -- as number) * TIME_IN_MILLIS.SECOND;
+src/script/components/Conversation/ConversationCells/useGetAllCellsNodes/transformDataToCellsNodes.ts:115:68    - Unknown word (usermeta)   -- meta.Namespace === 'usermeta-owner')?.JsonValue;
+src/script/components/Conversation/ConversationCells/useGetAllCellsNodes/transformDataToCellsNodes.ts:23:17     - Unknown word (MILLIS)     -- import {TIME_IN_MILLIS} from 'Util/TimeUtil
+src/script/components/Conversation/ConversationCells/useGetAllCellsNodes/useGetAllCellsNodes.ts:22:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
 src/script/components/Conversation/ConversationFileDropzone/FileDropzone/FileDropzoneOverlay/FileDropzoneOverlay.tsx:20:26     - Unknown word (wireapp)    -- import {SaveIcon} from '@wireapp/react-ui-kit';
 src/script/components/Conversation/ConversationTabs/ConversationTabs.tsx:22:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
 src/script/components/Conversation/ReadOnlyConversationMessage/ReadOnlyConversationMessage.test.tsx:105:66    - Unknown word (pakages)    -- that don't have any key pakages available", () => {
@@ -1391,7 +1392,7 @@ src/script/components/calling/GroupVideoGrid.tsx:260:76    - Unknown word (xsmal
 src/script/components/calling/GroupVideoGrid.tsx:69:27     - Unknown word (Colums)     -- interface CalculateRowsAndColumsParams {
 src/script/components/calling/GroupVideoGrid.tsx:76:88     - Unknown word (Colums)     -- isShort}: CalculateRowsAndColumsParams): number => {
 src/script/components/calling/GroupVideoGrid.tsx:92:58     - Unknown word (Colums)     -- params: CalculateRowsAndColumsParams): RowsAndColumns
-src/script/components/calling/GroupVideoGridTile.tsx:161:61    - Unknown word (UNFOCUSABLE) -- FOCUSABLE : TabIndex.UNFOCUSABLE}
+src/script/components/calling/GroupVideoGridTile.tsx:162:61    - Unknown word (UNFOCUSABLE) -- FOCUSABLE : TabIndex.UNFOCUSABLE}
 src/script/components/calling/GroupVideoGridTile.tsx:22:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
 src/script/components/calling/GroupVideoGridTile.tsx:23:26     - Unknown word (wireapp)    -- import {TabIndex} from '@wireapp/react-ui-kit/lib/types
 src/script/components/calling/GroupVideoGridTile.tsx:25:29     - Unknown word (wireapp)    -- VIDEO_STATE} from '@wireapp/avs';
