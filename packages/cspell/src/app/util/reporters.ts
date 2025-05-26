@@ -2,7 +2,6 @@ import assert from 'node:assert';
 
 import {
     type CSpellReporter,
-    type CSpellReporterEmitters,
     type CSpellReporterModule,
     type CSpellSettings,
     type FeaturesSupportedByReporter,
@@ -23,19 +22,7 @@ import { ApplicationError, toError } from './errors.js';
 import { LintFileResult } from './LintFileResult.js';
 import { clean } from './util.js';
 
-type StandardEmitters = Omit<CSpellReporterEmitters, 'result'>;
-
 export type FinalizedReporter = Required<CSpellReporter>;
-
-function extractEmitter<K extends keyof StandardEmitters>(
-    reporters: ReadonlyArray<StandardEmitters>,
-    emitterName: K,
-): FinalizedReporter[K][] {
-    // The `bind` is used in case the reporter is a class.
-    return reporters
-        .map((r) => r[emitterName]?.bind(r) as StandardEmitters[K])
-        .filter((r): r is FinalizedReporter[K] => !!r);
-}
 
 function filterFeatureIssues(
     features: FeaturesSupportedByReporter | undefined,
@@ -181,7 +168,7 @@ export function mergeReportIssueOptions(
     return options;
 }
 
-export class LintReporter implements FinalizedReporter {
+export class LintReporter {
     #reporters: FinalizedReporter[] = [];
     #config: ReporterConfiguration;
     #finalized: boolean = false;
@@ -212,26 +199,26 @@ export class LintReporter implements FinalizedReporter {
     }
 
     info(...params: Parameters<FinalizedReporter['info']>): void {
-        for (const fn of extractEmitter(this.#reporters, 'info')) {
-            fn(...params);
+        for (const reporter of this.#reporters) {
+            reporter.info(...params);
         }
     }
 
     debug(...params: Parameters<FinalizedReporter['debug']>): void {
-        for (const fn of extractEmitter(this.#reporters, 'debug')) {
-            fn(...params);
+        for (const reporter of this.#reporters) {
+            reporter.debug(...params);
         }
     }
 
     error(...params: Parameters<FinalizedReporter['error']>): void {
-        for (const fn of extractEmitter(this.#reporters, 'error')) {
-            fn(...params);
+        for (const reporter of this.#reporters) {
+            reporter.error(...params);
         }
     }
 
     progress(...params: Parameters<FinalizedReporter['progress']>): void {
-        for (const fn of extractEmitter(this.#reporters, 'progress')) {
-            fn(...params);
+        for (const reporter of this.#reporters) {
+            reporter.progress(...params);
         }
     }
 
@@ -244,10 +231,6 @@ export class LintReporter implements FinalizedReporter {
             unknownWords: true,
             issueType: true,
         };
-    }
-
-    get reporter(): FinalizedReporter {
-        return this;
     }
 
     async loadReportersAndFinalize(reporters: FileSettings['reporters']): Promise<void> {

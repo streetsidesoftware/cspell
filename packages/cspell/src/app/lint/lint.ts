@@ -669,7 +669,7 @@ function yesNo(value: boolean) {
     return value ? 'Yes' : 'No';
 }
 
-function getLoggerFromReporter(reporter: FinalizedReporter): Logger {
+function getLoggerFromReporter(reporter: Pick<FinalizedReporter, 'info' | 'error'>): Logger {
     const log: Logger['log'] = (...params) => {
         const msg = format(...params);
         reporter.info(msg, 'Info');
