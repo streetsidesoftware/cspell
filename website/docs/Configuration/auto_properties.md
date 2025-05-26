@@ -1704,7 +1704,7 @@ List of words to be considered correct.
 <dt>Type</dt>
 <dd>
 
-`string`
+`"legacy"` | `"universal"`
 
 </dd>
 
@@ -1856,7 +1856,7 @@ The Strategy to use to detect if a file has changed.
 <dt>Type</dt>
 <dd>
 
-`string`
+`"content"` | `"metadata"`
 
 </dd>
 
@@ -2627,7 +2627,7 @@ Specifies the scope of a dictionary.
 <dt>Type</dt>
 <dd>
 
-`string`
+`"user"` | `"workspace"` | `"folder"`
 
 </dd>
 
@@ -5699,7 +5699,7 @@ Use Compounds.
 <dt>Type</dt>
 <dd>
 
-`string`
+`"S"` | `"W"` | `"C"` | `"T"`
 
 </dd>
 
@@ -8596,7 +8596,7 @@ A PatternRef is a Pattern or PatternId.
 <dt>Type</dt>
 <dd>
 
-`string`
+`"Base64"` | `"Base64MultiLine"` | `"Base64SingleLine"` | `"CStyleComment"` | `"CStyleHexValue"` | `"CSSHexValue"` | `"CommitHash"` | `"CommitHashLink"` | `"Email"` | `"EscapeCharacters"` | `"HexValues"` | `"href"` | `"PhpHereDoc"` | `"PublicKey"` | `"RsaCert"` | `"SshRsa"` | `"SHA"` | `"HashStrings"` | `"SpellCheckerDisable"` | `"SpellCheckerDisableBlock"` | `"SpellCheckerDisableLine"` | `"SpellCheckerDisableNext"` | `"SpellCheckerIgnoreInDocSetting"` | `"string"` | `"UnicodeRef"` | `"Urls"` | `"UUID"` | `"Everything"`
 
 </dd>
 
@@ -8981,7 +8981,7 @@ Possible choices for how to handle unknown words.
 <dt>Type</dt>
 <dd>
 
-`string`
+`"report-all"` | `"report-simple"` | `"report-common-typos"` | `"report-flagged"`
 
 </dd>
 
