@@ -47,12 +47,12 @@ export type HasOptionsRO = Readonly<HasOptions>;
 export type IgnoreCaseOption = boolean;
 
 export interface SpellingDictionaryOptions {
-    repMap?: ReplaceMap;
+    repMap?: ReplaceMap | undefined;
 
     /**
      * The dictionary is case aware.
      */
-    caseSensitive?: boolean;
+    caseSensitive?: boolean | undefined;
 
     /**
      * This is a NO Suggest dictionary used for words to be ignored.
@@ -71,7 +71,7 @@ export interface SpellingDictionaryOptions {
      * Extra dictionary information used in improving suggestions
      * based upon locale.
      */
-    dictionaryInformation?: DictionaryInformation;
+    dictionaryInformation?: DictionaryInformation | undefined;
 
     /**
      * Strip Case and Accents to allow for case insensitive searches and

@@ -28,13 +28,13 @@ export interface DictionaryDefinitionBase {
     /**
      * Optional description of the contents / purpose of the dictionary.
      */
-    description?: string;
+    description?: string | undefined;
 
     /** Replacement pairs. */
-    repMap?: ReplaceMap;
+    repMap?: ReplaceMap | undefined;
 
     /** Use Compounds. */
-    useCompounds?: boolean;
+    useCompounds?: boolean | undefined;
 
     /**
      * Indicate that suggestions should not come from this dictionary.
@@ -102,37 +102,37 @@ export interface DictionaryDefinitionPreferred extends DictionaryDefinitionBase 
  */
 export interface DictionaryDefinitionSimple extends DictionaryDefinitionBase {
     /**
-     * @hidden
+     * @hide
      */
-    repMap?: ReplaceMap;
+    repMap?: ReplaceMap | undefined;
 
     /**
-     * @hidden
+     * @hide
      */
-    useCompounds?: boolean;
+    useCompounds?: boolean | undefined;
 
     /**
-     * @hidden
+     * @hide
      */
     noSuggest?: boolean | undefined;
 
     /**
-     * @hidden
+     * @hide
      */
     ignoreForbiddenWords?: boolean | undefined;
 
     /**
-     * @hidden
+     * @hide
      */
     type?: DictionaryFileTypes | undefined;
 
     /**
-     * @hidden
+     * @hide
      */
     path?: string | undefined;
 
     /**
-     * @hidden
+     * @hide
      */
     file?: undefined;
 }
@@ -144,42 +144,57 @@ export interface DictionaryDefinitionAugmented extends DictionaryDefinitionPrefe
     dictionaryInformation?: DictionaryInformation;
 }
 
-/**
- * Inline Dictionary Definition
- *
- * All words are defined inline.
- */
-interface DictionaryDefinitionInlineBase extends DictionaryDefinitionBase, InlineDictionary {
+interface HiddenFields {
     /**
      * Not used
-     * @hidden
+     * @hide
      */
     path?: undefined;
 
     /**
      * Not used
-     * @hidden
+     * @hide
      */
     file?: undefined;
 
     /**
      * Not used
-     * @hidden
+     * @hide
      */
-    type?: DictionaryDefinitionBase['type'];
+    type?: undefined;
 
     /**
      * Use `ignoreWords` instead.
-     * @hidden
+     * @hide
      */
-    noSuggest?: DictionaryDefinitionBase['noSuggest'];
+    noSuggest?: undefined;
 
     /**
      * Not used
-     * @hidden
+     * @hide
      */
     ignoreForbiddenWords?: undefined;
+
+    /**
+     * Not used
+     * @hide
+     */
+    useCompounds?: undefined;
+
+    /**
+     * @hide
+     */
+    repMap?: undefined;
 }
+
+/**
+ * Inline Dictionary Definition
+ *
+ * All words are defined inline.
+ */
+type DictionaryDefinitionInlineBase = Omit<DictionaryDefinitionBase, keyof HiddenFields> &
+    HiddenFields &
+    InlineDictionary;
 
 export interface DictionaryDefinitionInlineWords
     extends DictionaryDefinitionInlineBase,
@@ -221,7 +236,9 @@ export type DictionaryDefinitionInline =
  * @deprecationMessage Use {@link DictionaryDefinitionPreferred} instead.
  */
 export interface DictionaryDefinitionAlternate extends DictionaryDefinitionBase {
-    /** @hidden */
+    /**
+     * @hidden
+     */
     path?: undefined;
 
     /**
@@ -231,7 +248,9 @@ export interface DictionaryDefinitionAlternate extends DictionaryDefinitionBase 
      */
     file: DictionaryPath;
 
-    /** @hidden */
+    /**
+     * @hidden
+     */
     suggestionEditCosts?: undefined;
 }
 /**
