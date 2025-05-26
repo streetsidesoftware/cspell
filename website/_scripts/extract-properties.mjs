@@ -155,6 +155,9 @@ function formatEntryType(entry, addFix = '`') {
     if (entry.type === 'array' && entry.items) {
         return formatEntryType(entry.items, '`') + '&ZeroWidthSpace;' + fix(`[]`);
     }
+    if (entry.enum) {
+        return entry.enum.map((e) => fix(JSON.stringify(e))).join(' | ');
+    }
     if (entry.type) {
         return fix(entry.type);
     }
