@@ -55,10 +55,11 @@ function handleIssue(reporter: CSpellReporter, issue: Issue, reportOptions?: Rep
         // The reporter does not want to handle this issue.
         return;
     }
-    if (reporter.features?.unknownWords) {
-        return reporter.issue(issue, reportOptions);
+    if (!reporter.features?.contextGeneration && !issue.context) {
+        issue = { ...issue };
+        issue.context = issue.line; // Ensure context is always set if the reporter does not support context generation.
     }
-    return reporter.issue(issue);
+    return reporter.issue(issue, reportOptions);
 }
 
 /**
@@ -127,13 +128,12 @@ function reporterIsFinalized(reporter: CSpellReporter | FinalizedReporter | unde
     );
 }
 
-type ReportIssueOptionsKeyMap = {
-    [K in keyof ReportIssueOptions]: K;
-};
+type ReportIssueOptionsKeyMap = Required<{ [K in keyof ReportIssueOptions]: K }>;
 
 const reportIssueOptionsKeyMap: ReportIssueOptionsKeyMap = {
     unknownWords: 'unknownWords',
     validateDirectives: 'validateDirectives',
+    showContext: 'showContext',
 };
 
 function setValue<K extends keyof ReportIssueOptions>(
@@ -146,11 +146,12 @@ function setValue<K extends keyof ReportIssueOptions>(
     }
 }
 
-export function extractReporterIssueOptions(settings: CSpellSettings): ReportIssueOptions {
+export function extractReporterIssueOptions(settings: CSpellSettings | ReportIssueOptions): ReportIssueOptions {
+    const src: ReportIssueOptions = settings as ReportIssueOptions;
     const options: ReportIssueOptions = {} as ReportIssueOptions;
     for (const key in reportIssueOptionsKeyMap) {
-        const k = key as keyof ReportIssueOptions;
-        setValue(options, k, settings[k]);
+        const k = key as keyof ReportIssueOptionsKeyMap;
+        setValue(options, k, src[k]);
     }
     return options;
 }

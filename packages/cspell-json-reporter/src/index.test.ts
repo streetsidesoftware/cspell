@@ -110,6 +110,18 @@ async function runReporter(reporter: Required<CSpellReporter>): Promise<void> {
     });
     // cSpell:enable
 
+    // cSpell:disable
+    reporter.issue({
+        text: 'errrorrrs',
+        offset: 22,
+        line: { text: 'This text is fulll of errrorrrs.', offset: 0 },
+        row: 1,
+        col: 23,
+        uri: 'text.txt',
+        context: { text: 'fulll of errrorrrs.', offset: 13 },
+    });
+    // cSpell:enable
+
     reporter.progress({
         type: 'ProgressFileComplete',
         fileNum: 1,

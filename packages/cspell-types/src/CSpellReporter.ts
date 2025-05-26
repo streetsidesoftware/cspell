@@ -17,8 +17,10 @@ export interface Suggestion {
 }
 
 export interface Issue extends Omit<TextDocumentOffset, 'doc'> {
-    /** text surrounding the issue text */
-    context: TextOffset;
+    /**
+     * The text surrounding the issue text. It is only included if the reporter cannot generated it automatically.
+     */
+    context?: TextOffset | undefined;
     /**
      * true if the issue has been flagged as a forbidden word.
      */
@@ -264,6 +266,13 @@ export interface FeaturesSupportedByReporter {
      * - `false | undefined` - only {@link IssueType.spelling} issues will be passed to the reporter.
      */
     issueType?: boolean | undefined;
+
+    /**
+     * The reporter can generate context for issues.
+     * - `true` - the reporter will be called with issues that do NOT have a `context` property.
+     * - `false | undefined` - the reporter will be called with issues that have a `context` property.
+     */
+    contextGeneration?: boolean | undefined;
 }
 
 export interface ReportingConfiguration
@@ -275,7 +284,13 @@ export interface ReportIssueOptions extends UnknownWordsConfiguration {
     /**
      * Verify that the in-document directives are correct.
      */
-    validateDirectives?: boolean;
+    validateDirectives?: boolean | undefined;
+
+    /**
+     * Tells the spell checker to show context around the issue.
+     * It is the number of characters to show on either side of the issue.
+     */
+    showContext?: number | undefined;
 }
 
 /**

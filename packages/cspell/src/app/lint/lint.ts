@@ -10,7 +10,6 @@ import type {
     ReportIssueOptions,
     RunResult,
     TextDocumentOffset,
-    TextOffset,
 } from '@cspell/cspell-types';
 import { MessageTypes } from '@cspell/cspell-types';
 import { toFileURL } from '@cspell/url';
@@ -42,6 +41,7 @@ import type { CreateCacheSettings, CSpellLintResultCache } from '../util/cache/i
 import { calcCacheSettings, createCache } from '../util/cache/index.js';
 import { type ConfigInfo, readConfig } from '../util/configFileHelper.js';
 import { CheckFailed, toApplicationError, toError } from '../util/errors.js';
+import { extractContext } from '../util/extractContext.js';
 import type { ReadFileInfoResult } from '../util/fileHelper.js';
 import {
     fileInfoToDocument,
@@ -264,9 +264,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
     }
 
     function mapIssue({ doc: _, ...tdo }: TextDocumentOffset & ValidationIssue): Issue {
-        const context = cfg.showContext
-            ? extractContext(tdo, cfg.showContext)
-            : { text: tdo.line.text.trimEnd(), offset: tdo.line.offset };
+        const context = cfg.showContext ? extractContext(tdo, cfg.showContext) : undefined;
         return util.clean({ ...tdo, context });
     }
 
@@ -616,40 +614,6 @@ async function determineFilesToCheck(
     }
 
     return _determineFilesToCheck();
-}
-
-function extractContext(tdo: Pick<TextDocumentOffset, 'line' | 'offset' | 'text'>, contextRange: number): TextOffset {
-    const { line, offset } = tdo;
-    const textOffsetInLine = offset - line.offset;
-    let left = Math.max(textOffsetInLine - contextRange, 0);
-    let right = Math.min(line.text.length, textOffsetInLine + contextRange + tdo.text.length);
-    const lineText = line.text;
-
-    const isLetter = /^[a-z]$/i;
-    const isSpace = /^\s$/;
-
-    for (let n = contextRange / 2; n > 0 && left > 0; n--, left--) {
-        if (!isLetter.test(lineText[left - 1])) {
-            break;
-        }
-    }
-
-    for (let n = contextRange / 2; n > 0 && right < lineText.length; n--, right++) {
-        if (!isLetter.test(lineText[right])) {
-            break;
-        }
-    }
-
-    // remove leading space
-    for (; left < textOffsetInLine && isSpace.test(lineText[left]); left++) {
-        /* do nothing */
-    }
-
-    const context = {
-        text: line.text.slice(left, right).trimEnd(),
-        offset: left + line.offset,
-    };
-    return context;
 }
 
 function extractGlobSource(g: GlobPatternWithRoot | GlobPatternNormalized) {

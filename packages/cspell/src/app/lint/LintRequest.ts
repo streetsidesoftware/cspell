@@ -36,8 +36,10 @@ export class LintRequest {
         this.excludes = calcExcludeGlobInfo(this.root, options.exclude);
         this.locale = options.locale ?? options.local ?? '';
         this.enableGlobDot = options.dot;
-        this.showContext =
-            options.showContext === true ? defaultContextRange : options.showContext ? options.showContext : 0;
+        this.showContext = Math.max(
+            options.showContext === true ? defaultContextRange : options.showContext ? options.showContext : 0,
+            0,
+        );
         this.fileLists = (options.fileList ?? options.fileLists) || [];
         this.files = mergeFiles(options.file, options.files);
         this.cspellSettingsFromCliOptions = {
