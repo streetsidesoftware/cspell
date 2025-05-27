@@ -145,6 +145,8 @@ function existMap(values: string[]): Record<string, true> {
     return m;
 }
 
-export const __testing__ = {
+export const __testing__: {
+    hintedWalkerNext: typeof hintedWalkerNext;
+} = {
     hintedWalkerNext,
 };

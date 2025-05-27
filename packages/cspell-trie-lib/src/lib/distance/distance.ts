@@ -16,7 +16,7 @@ const defaultCost = 100;
  * @param editCost - the cost of each edit (defaults to 100)
  * @returns the edit distance.
  */
-export function editDistance(wordA: string, wordB: string, editCost = defaultCost): number {
+export function editDistance(wordA: string, wordB: string, editCost: number = defaultCost): number {
     return levenshteinDistance(wordA, wordB) * editCost;
 }
 
@@ -28,7 +28,12 @@ export function editDistance(wordA: string, wordB: string, editCost = defaultCos
  * @param editCost - the cost of each edit (defaults to 100)
  * @returns the edit distance
  */
-export function editDistanceWeighted(wordA: string, wordB: string, weights: WeightMap, editCost = defaultCost): number {
+export function editDistanceWeighted(
+    wordA: string,
+    wordB: string,
+    weights: WeightMap,
+    editCost: number = defaultCost,
+): number {
     return distanceAStarWeighted(wordA, wordB, weights, editCost);
 }
 

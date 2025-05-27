@@ -2,6 +2,13 @@ import type { BufferEncoding } from '../models/BufferEncoding.js';
 import type { FileReference, FileResourceRequest, UrlOrReference } from '../models/FileResource.js';
 import { toFileURL } from '../node/file/url.js';
 
+export interface CFileReferenceJson {
+    url: string;
+    encoding?: string | undefined;
+    baseFilename?: string | undefined;
+    gz?: boolean | undefined;
+}
+
 export class CFileReference implements FileReference {
     /**
      * Use to ensure the nominal type separation between CFileReference and FileReference
@@ -46,7 +53,7 @@ export class CFileReference implements FileReference {
         );
     }
 
-    public toJson() {
+    public toJson(): CFileReferenceJson {
         return {
             url: this.url.href,
             encoding: this.encoding,

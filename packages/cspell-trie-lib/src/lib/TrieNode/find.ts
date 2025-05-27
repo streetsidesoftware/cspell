@@ -392,12 +392,14 @@ export function isForbiddenWord(root: Root | TrieNode | undefined, word: string,
     return findWordExact(root?.c?.[forbiddenPrefix], word);
 }
 
-export const createFindOptions = memorizeLastCall(_createFindOptions);
+export const createFindOptions: typeof _createFindOptions = memorizeLastCall(_createFindOptions);
 
 function _createFindOptions(options: PartialFindOptions | undefined): FindOptions {
     return mergeDefaults(options, _defaultFindOptions);
 }
 
-export const __testing__ = {
+export const __testing__: {
+    findLegacyCompoundWord: typeof findLegacyCompoundWord;
+} = {
     findLegacyCompoundWord,
 };

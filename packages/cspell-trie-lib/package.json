@@ -29,7 +29,7 @@
   "scripts": {
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "build": "pnpm run build:lib && pnpm run build:api",
-    "build:lib": "tsup-node",
+    "build:lib": "tsdown",
     "build:api": "shx cp dist/index.d.ts api/api.d.ts",
     "clean-build": "pnpm run clean && pnpm run build",
     "coverage": "vitest run --coverage",
