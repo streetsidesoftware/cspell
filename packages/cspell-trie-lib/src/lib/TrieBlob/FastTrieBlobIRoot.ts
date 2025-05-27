@@ -1,5 +1,5 @@
 import type { FindResult, ITrieNode, ITrieNodeId, ITrieNodeRoot } from '../ITrieNode/ITrieNode.js';
-import { TrieInfo } from '../ITrieNode/TrieInfo.js';
+import type { TrieInfo } from '../ITrieNode/TrieInfo.js';
 import type { FastTrieBlobInternalsAndMethods } from './FastTrieBlobInternals.js';
 import { Utf8Accumulator } from './Utf8.js';
 
