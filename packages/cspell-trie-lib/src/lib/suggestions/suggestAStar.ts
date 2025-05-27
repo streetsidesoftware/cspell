@@ -37,7 +37,7 @@ interface PNode {
     /** cost trie to reduce duplicate paths */
     t: CostTrie;
     /** edit action taken */
-    a?: string;
+    a?: string | undefined;
 }
 
 // const ProgressFactor = opCosts.baseCost - 1;
@@ -371,7 +371,7 @@ function orderNodes(p: RO<PNode>): PNode[] {
     return nodes.reverse();
 }
 
-function editHistory(p: RO<PNode>) {
+function editHistory(p: RO<PNode>): Pick<PNode, 'i' | 'c' | 'a' | 's'>[] {
     const nodes = orderNodes(p);
     return nodes.map((n) => ({ i: n.i, c: n.c, a: n.a, s: n.s }));
 }
@@ -431,7 +431,11 @@ type FnStorePath = (
     ss: string,
 ) => void;
 
-export const __testing__ = {
+export const __testing__: {
+    comparePath: typeof comparePath;
+    editHistory: typeof editHistory;
+    serializeCostTrie: typeof serializeCostTrie;
+} = {
     comparePath,
     editHistory,
     serializeCostTrie,

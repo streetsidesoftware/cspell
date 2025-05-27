@@ -8,7 +8,7 @@ import { FLAG_WORD } from '../TrieNode/TrieNode.js';
 import type { TrieRefNode } from '../trieRef.js';
 
 const EOW = '*';
-export const DATA = EOW;
+export const DATA: string = EOW;
 
 function toReferences(node: TrieNode): Sequence<TrieRefNode> {
     return genSequence(convertToTrieRefNodes(node));

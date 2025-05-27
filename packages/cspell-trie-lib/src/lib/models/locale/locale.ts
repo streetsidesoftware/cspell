@@ -16,7 +16,7 @@ export class Locale {
         this._locale = normalizeLocale(locale);
     }
 
-    get locale() {
+    get locale(): string {
         return this._locale;
     }
 
@@ -24,15 +24,15 @@ export class Locale {
         return lookupLocaleInfo(this._locale);
     }
 
-    isValid() {
+    isValid(): boolean {
         return isStandardLocale(this._locale);
     }
 
-    toJSON() {
+    toJSON(): string {
         return this.locale;
     }
 
-    toString() {
+    toString(): string {
         return this.locale;
     }
 }

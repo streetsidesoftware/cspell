@@ -1,6 +1,6 @@
 import type { TrieNode } from '../lib/TrieNode/TrieNode.js';
 
-export function emitTrieWords(trie: TrieNode) {
+export function emitTrieWords(trie: TrieNode): void {
     let count = 0;
     function walk(trie: TrieNode, pfx = '') {
         if (trie.f) {

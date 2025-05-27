@@ -146,21 +146,21 @@ export class Utf8Accumulator {
         return 0xfffd;
     }
 
-    clone(into = new Utf8Accumulator()) {
+    clone(into: Utf8Accumulator = new Utf8Accumulator()): Utf8Accumulator {
         into.remaining = this.remaining;
         into.value = this.value;
         return into;
     }
 
-    static isMultiByte(v: number) {
+    static isMultiByte(v: number): boolean {
         return (v & 0x80) !== 0;
     }
 
-    static isSingleByte(v: number) {
+    static isSingleByte(v: number): boolean {
         return (v & 0x80) === 0;
     }
 
-    static create() {
+    static create(): Utf8Accumulator {
         return new this();
     }
 }

@@ -258,7 +258,7 @@ async function compressAndChainWriteRequest(
     return res.value;
 }
 
-export function registerHandlers(serviceBus: ServiceBus) {
+export function registerHandlers(serviceBus: ServiceBus): void {
     /**
      * Handlers are in order of low to high level
      * Order is VERY important.

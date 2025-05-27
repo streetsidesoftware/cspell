@@ -11,5 +11,6 @@ export {
     ServiceRequestCls,
     ServiceResponse,
 } from './request.js';
+export type { RequestFactory } from './requestFactory.js';
 export { requestFactory } from './requestFactory.js';
 export type { ServiceRequestFactory, ServiceRequestFactoryRequestType } from './ServiceRequestFactory.js';

@@ -358,7 +358,7 @@ export function isForbiddenWord(root: Root | ITrieNode | undefined, word: string
     return findWordExact(root?.get(forbiddenPrefix), word);
 }
 
-export const createFindOptions = memorizeLastCall(_createFindOptions);
+export const createFindOptions: typeof _createFindOptions = memorizeLastCall(_createFindOptions);
 
 function _createFindOptions(options: PartialFindOptions | undefined): FindOptions {
     if (!options) return _defaultFindOptions;
@@ -371,6 +371,8 @@ function _createFindOptions(options: PartialFindOptions | undefined): FindOption
     };
 }
 
-export const __testing__ = {
+export const __testing__: {
+    findLegacyCompoundWord: typeof findLegacyCompoundWord;
+} = {
     findLegacyCompoundWord,
 };

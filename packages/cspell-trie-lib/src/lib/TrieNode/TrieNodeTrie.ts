@@ -26,7 +26,7 @@ export class TrieNodeTrie implements TrieData {
 
     wordToCharacters = (word: string): string[] => [...word];
 
-    get iTrieRoot() {
+    get iTrieRoot(): ITrieNodeRoot {
         return this._iTrieRoot || (this._iTrieRoot = trieRootToITrieRoot(this.root));
     }
 
@@ -50,7 +50,7 @@ export class TrieNodeTrie implements TrieData {
         return findWordExact(this.root.c[this.root.forbiddenWordPrefix], word);
     }
 
-    get size() {
+    get size(): number {
         return (this._size ??= countNodes(this.root));
     }
 

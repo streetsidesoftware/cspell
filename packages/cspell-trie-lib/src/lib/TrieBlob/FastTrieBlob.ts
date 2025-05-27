@@ -203,7 +203,10 @@ export class FastTrieBlob implements TrieData {
         return this;
     }
 
-    toJSON() {
+    toJSON(): {
+        info: Readonly<TrieInfo>;
+        nodes: NodeToJSON[];
+    } {
         return {
             info: this.info,
             nodes: nodesToJSON(this.nodes),
@@ -211,7 +214,7 @@ export class FastTrieBlob implements TrieData {
         };
     }
 
-    static create(data: FastTrieBlobInternals) {
+    static create(data: FastTrieBlobInternals): FastTrieBlob {
         return new FastTrieBlob(data.nodes, data.charIndex, extractInfo(data), data.info);
     }
 
@@ -231,9 +234,9 @@ export class FastTrieBlob implements TrieData {
         );
     }
 
-    static NodeMaskEOW = TrieBlob.NodeMaskEOW;
-    static NodeChildRefShift = TrieBlob.NodeChildRefShift;
-    static NodeMaskChildCharIndex = TrieBlob.NodeMaskChildCharIndex;
+    static NodeMaskEOW: number = TrieBlob.NodeMaskEOW;
+    static NodeChildRefShift: number = TrieBlob.NodeChildRefShift;
+    static NodeMaskChildCharIndex: number = TrieBlob.NodeMaskChildCharIndex;
 
     static DefaultBitMaskInfo: FastTrieBlobBitMaskInfo = {
         NodeMaskEOW: FastTrieBlob.NodeMaskEOW,
@@ -276,7 +279,7 @@ export class FastTrieBlob implements TrieData {
     }
 
     /** number of nodes */
-    get size() {
+    get size(): number {
         return this.nodes.length;
     }
 
@@ -345,7 +348,18 @@ interface TrieBlobNodeInfo {
     children: { c: string; i: number; cIdx: number }[];
 }
 
-export function nodesToJSON<T extends FastTrieBlobNode | Uint32Array>(nodes: Readonly<T[]>) {
+export interface NodeChildToJson {
+    i: number; // index of the child node
+    c?: string | undefined; // character at this node, or undefined if not applicable
+    s: string; // sequence index in hex format
+}
+export interface NodeToJSON {
+    i: number; // index of the node
+    w: number; // end of word flag (1 if EOW, 0 otherwise)
+    c?: NodeChildToJson[]; // children of the node, or undefined if no children
+}
+
+export function nodesToJSON<T extends FastTrieBlobNode | Uint32Array>(nodes: Readonly<T[]>): NodeToJSON[] {
     const mapNodeToAcc = new Map<T, Utf8Accumulator>();
 
     function mapNode(node: T, i: number) {
@@ -368,7 +382,7 @@ export function nodesToJSON<T extends FastTrieBlobNode | Uint32Array>(nodes: Rea
             }
             return {
                 i: index,
-                c: codePoint && String.fromCodePoint(codePoint),
+                c: (codePoint && String.fromCodePoint(codePoint)) || undefined,
                 s: seq.toString(16).padStart(2, '0'),
             };
         }

@@ -553,6 +553,8 @@ function tapIterable<T>(iterable: Iterable<T>): Iterable<T> {
     };
 }
 
-export const __testing__ = {
+export const __testing__: {
+    buildReferenceMap: typeof buildReferenceMap;
+} = {
     buildReferenceMap,
 };

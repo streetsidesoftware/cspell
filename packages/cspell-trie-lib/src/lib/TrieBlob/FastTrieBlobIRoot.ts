@@ -1,4 +1,5 @@
 import type { FindResult, ITrieNode, ITrieNodeId, ITrieNodeRoot } from '../ITrieNode/ITrieNode.js';
+import { TrieInfo } from '../ITrieNode/TrieInfo.js';
 import type { FastTrieBlobInternalsAndMethods } from './FastTrieBlobInternals.js';
 import { Utf8Accumulator } from './Utf8.js';
 
@@ -245,7 +246,7 @@ export class FastTrieBlobIRoot extends FastTrieBlobINode implements ITrieNodeRoo
         return found ? { found: word, compoundUsed: false, caseMatched: false } : undefined;
     }
 
-    get info() {
+    get info(): Readonly<TrieInfo> {
         return this.trie.info;
     }
 

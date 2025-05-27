@@ -23,7 +23,7 @@ export async function readAndProcessDictionaryFile<T>(
     processor: (data: Buffer) => T,
     pathOrPackage: string,
     dictionaryName?: string,
-) {
+): Promise<T> {
     const pkgLocation = fileURLToPath(importResolve(pathOrPackage, import.meta.url));
     const buf = await readRawDictionaryFileFromConfig(pkgLocation, dictionaryName);
     return processor(buf);

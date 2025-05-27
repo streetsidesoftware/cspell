@@ -146,10 +146,6 @@ function existMap(values: string[]): Record<string, true> {
     return m;
 }
 
-export const __testing__ = {
-    hintedWalkerNext,
-};
-
 class ITrieNodeFiltered implements ITrieNode {
     readonly id: ITrieNodeId;
     readonly eow: boolean;
@@ -197,3 +193,9 @@ class ITrieNodeFiltered implements ITrieNode {
         return node;
     }
 }
+
+export const __testing__: {
+    hintedWalkerNext: typeof hintedWalkerNext;
+} = {
+    hintedWalkerNext,
+};
