@@ -252,7 +252,20 @@ function asArrayOf<T>(v: T | T[]): T[] {
     return Array.isArray(v) ? v : [v];
 }
 
-export const __testing__ = {
+export const __testing__: {
+    affKey: typeof affKey;
+    affKeyCaps: typeof affKeyCaps;
+    affMap: typeof affMap;
+    affMapAccents: typeof affMapAccents;
+    affMapCaps: typeof affMapCaps;
+    affNoTry: typeof affNoTry;
+    affRepConv: typeof affRepConv;
+    affTry: typeof affTry;
+    affTryAccents: typeof affTryAccents;
+    affTryFirstCharacterReplace: typeof affTryFirstCharacterReplace;
+    calcCosts: typeof calcCosts;
+    split: typeof splitMap;
+} = {
     affKey,
     affKeyCaps,
     affMap,

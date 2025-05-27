@@ -75,6 +75,8 @@ export function swapBytes(data: ArrayBufferView): ArrayBufferView {
     return swap16(buf);
 }
 
-export const __debug__ = {
+export const __debug__: {
+    swap16Poly: typeof swap16Poly;
+} = {
     swap16Poly,
 };

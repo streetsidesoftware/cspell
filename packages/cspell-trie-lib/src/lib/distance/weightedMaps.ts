@@ -307,7 +307,7 @@ function* findTrieTrieCostPrefixes(trie: TrieTrieCost, str: string, i: number): 
     }
 }
 
-export function createWeightCostCalculator(weightMap: WeightMap) {
+export function createWeightCostCalculator(weightMap: WeightMap): _WeightCostCalculator {
     return new _WeightCostCalculator(weightMap);
 }
 
@@ -427,7 +427,13 @@ function normalizeMap(map: string): string {
     return map.replaceAll(matchPossibleWordSeparators, DEFAULT_COMPOUNDED_WORD_SEPARATOR);
 }
 
-export const __testing__ = {
+export const __testing__: {
+    readonly findTrieCostPrefixes: typeof findTrieCostPrefixes;
+    readonly findTrieTrieCostPrefixes: typeof findTrieTrieCostPrefixes;
+    readonly normalizeDef: typeof normalizeDef;
+    readonly splitMap: typeof splitMap;
+    readonly splitMapSubstrings: typeof splitMapSubstrings;
+} = {
     findTrieCostPrefixes,
     findTrieTrieCostPrefixes,
     normalizeDef,

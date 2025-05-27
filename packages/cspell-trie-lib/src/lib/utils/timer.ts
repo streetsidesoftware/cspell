@@ -12,7 +12,9 @@ export function startTimer(): Timer {
     return () => performance.now() - start;
 }
 
-export function measure<R>(name: string, fn: () => R, log = console.log): R {
+type ConsoleLog = typeof console.log;
+
+export function measure<R>(name: string, fn: () => R, log: ConsoleLog = console.log): R {
     const calcElapsed = startTimer();
     const r = fn();
     const elapsed = (' '.repeat(16) + `${calcElapsed().toFixed(3)}ms.`).slice(-16);
@@ -20,7 +22,7 @@ export function measure<R>(name: string, fn: () => R, log = console.log): R {
     return r;
 }
 
-export async function measureAsync<R>(name: string, fn: () => Promise<R>, log = console.log): Promise<R> {
+export async function measureAsync<R>(name: string, fn: () => Promise<R>, log: ConsoleLog = console.log): Promise<R> {
     const calcElapsed = startTimer();
     const r = await fn();
     const elapsed = (' '.repeat(16) + `${calcElapsed().toFixed(3)}ms.`).slice(-16);

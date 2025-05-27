@@ -4,10 +4,10 @@ import { fileURLToPath } from 'node:url';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
-export const rootDir = join(__dirname, '../../');
-export const samplesDir = join(rootDir, 'Samples/');
-export const globalSamplesDir = join(rootDir, '../Samples/');
-export const globalTestFixturesDir = join(rootDir, '../../test-fixtures/');
+export const rootDir: string = join(__dirname, '../../');
+export const samplesDir: string = join(rootDir, 'Samples/');
+export const globalSamplesDir: string = join(rootDir, '../Samples/');
+export const globalTestFixturesDir: string = join(rootDir, '../../test-fixtures/');
 
 export function resolveSample(samplePath: string): string {
     return resolve(samplesDir, samplePath);

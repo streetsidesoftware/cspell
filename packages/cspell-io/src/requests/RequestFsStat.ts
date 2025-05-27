@@ -1,4 +1,4 @@
-import type { ServiceRequestFactoryRequestType } from '@cspell/cspell-service-bus';
+import type { RequestFactory, ServiceRequestFactoryRequestType } from '@cspell/cspell-service-bus';
 import { requestFactory } from '@cspell/cspell-service-bus';
 
 import type { Stats } from '../models/index.js';
@@ -7,11 +7,10 @@ const RequestTypeStat = 'fs:stat' as const;
 interface RequestStatParams {
     readonly url: URL;
 }
-export const RequestFsStat = requestFactory<typeof RequestTypeStat, RequestStatParams, Promise<Stats>>(RequestTypeStat);
-export type RequestFsStat = ServiceRequestFactoryRequestType<typeof RequestFsStat>;
+export type RequestFsStat = RequestFactory<typeof RequestTypeStat, RequestStatParams, Promise<Stats>>;
+export const RequestFsStat: RequestFsStat = requestFactory(RequestTypeStat);
 
 const RequestTypeStatSync = 'fs:statSync' as const;
-export const RequestFsStatSync = requestFactory<typeof RequestTypeStatSync, RequestStatParams, Stats>(
-    RequestTypeStatSync,
-);
-export type RequestFsStatSync = ServiceRequestFactoryRequestType<typeof RequestFsStatSync>;
+export type RequestFsStatSyncFactory = RequestFactory<typeof RequestTypeStatSync, RequestStatParams, Stats>;
+export type RequestFsStatSync = ServiceRequestFactoryRequestType<RequestFsStatSyncFactory>;
+export const RequestFsStatSync: RequestFsStatSyncFactory = requestFactory(RequestTypeStatSync);

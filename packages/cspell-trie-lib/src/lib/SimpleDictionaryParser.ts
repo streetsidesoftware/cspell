@@ -95,7 +95,12 @@ export const defaultParseDictionaryOptions: ParseDictionaryOptions = Object.free
 
 export const cSpellToolDirective = 'cspell-dictionary:';
 
-export const setOfCSpellDirectiveFlags = ['no-split', 'split', 'generate-alternatives', 'no-generate-alternatives'];
+export const setOfCSpellDirectiveFlags: string[] = [
+    'no-split',
+    'split',
+    'generate-alternatives',
+    'no-generate-alternatives',
+];
 
 /**
  * Normalizes a dictionary words based upon prefix / suffixes.
@@ -338,6 +343,8 @@ function splitLine(line: string, regExp: RegExp | string): string[] {
         .map((line) => decodeLine(line));
 }
 
-export const __testing__ = {
+export const __testing__: {
+    splitLine: typeof splitLine;
+} = {
     splitLine,
 };

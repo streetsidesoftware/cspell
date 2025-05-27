@@ -56,7 +56,7 @@ export function formatExResult(ex: ExResult | undefined): string {
     )}\n`;
 }
 
-export function formattedDistance(wordA: string, wordB: string, weightMap: WeightMap, cost?: number) {
+export function formattedDistance(wordA: string, wordB: string, weightMap: WeightMap, cost?: number): string {
     const calc = createWeightCostCalculator(weightMap);
     const distResult = distanceAStarWeightedEx(wordA, wordB, calc, cost);
     return formatExResult(distResult);

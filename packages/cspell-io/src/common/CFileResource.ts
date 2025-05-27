@@ -3,6 +3,14 @@ import type { BufferEncoding } from '../models/BufferEncoding.js';
 import type { FileReference, FileResource, TextFileResource } from '../models/FileResource.js';
 import { decode, encodeString, isGZipped } from './encode-decode.js';
 
+export interface CFileResourceJson {
+    url: string;
+    content: string;
+    encoding?: string | undefined;
+    baseFilename?: string | undefined;
+    gz: boolean;
+}
+
 export class CFileResource implements TextFileResource {
     private _text?: string;
     readonly baseFilename?: string | undefined;
@@ -41,7 +49,7 @@ export class CFileResource implements TextFileResource {
             : new Uint8Array(arrayBufferview.buffer, arrayBufferview.byteOffset, arrayBufferview.byteLength);
     }
 
-    public toJson() {
+    public toJson(): CFileResourceJson {
         return {
             url: this.url.href,
             content: this.getText(),

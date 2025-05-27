@@ -52,7 +52,7 @@ export class TrieBlob implements TrieData {
     #nodes8: Uint8Array;
     #beAdj = endianness() === 'BE' ? 3 : 0;
 
-    readonly wordToCharacters = (word: string) => [...word];
+    readonly wordToCharacters = (word: string): string[] => [...word];
     readonly hasForbiddenWords: boolean;
     readonly hasCompoundWords: boolean;
     readonly hasNonStrictWords: boolean;
@@ -274,7 +274,11 @@ export class TrieBlob implements TrieData {
         return count;
     }
 
-    toJSON() {
+    toJSON(): {
+        options: Readonly<TrieInfo>;
+        nodes: NodeElement[];
+        charIndex: CharIndex;
+    } {
         return {
             options: this.info,
             nodes: nodesToJson(this.nodes),
@@ -389,10 +393,11 @@ export class TrieBlob implements TrieData {
     //     }
     // }
 
-    static NodeMaskEOW = 0x0000_0100 & 0xffff;
-    static NodeMaskNumChildren = ((1 << NodeHeaderNumChildrenBits) - 1) & 0xffff;
-    static NodeMaskNumChildrenShift = NodeHeaderNumChildrenShift;
+    static NodeMaskEOW: number = 0x0000_0100 & 0xffff;
+    static NodeMaskNumChildren: number = ((1 << NodeHeaderNumChildrenBits) - 1) & 0xffff;
+    static NodeMaskNumChildrenShift: number = NodeHeaderNumChildrenShift;
     static NodeChildRefShift = 8;
+
     /**
      * Only 8 bits are reserved for the character index.
      * The max index is {@link TrieBlob.SpecialCharIndexMask} - 1.
@@ -400,7 +405,7 @@ export class TrieBlob implements TrieData {
      * - @see {@link TrieBlob.SpecialCharIndexMask}
      * - @see {@link TrieBlob.MaxCharIndex}
      */
-    static NodeMaskChildCharIndex = 0x0000_00ff;
+    static NodeMaskChildCharIndex: number = 0x0000_00ff;
 
     static nodesView(trie: TrieBlob): Readonly<Uint32Array> {
         return new Uint32Array(trie.nodes);
