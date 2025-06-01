@@ -1,8 +1,12 @@
+import assert from 'node:assert';
+
 import { describe, expect, test } from 'vitest';
 
 import { createTextFile, TextFile } from '../TextFile.js';
 import { unindent } from '../util/unindent.js';
 import { CSpellConfigFileYaml, parseCSpellConfigFileYaml } from './CSpellConfigFileYaml.js';
+
+const oc = <T>(obj: T) => expect.objectContaining(obj);
 
 describe('CSpellConfigFileYaml', () => {
     test('parseCSpellConfigFileYaml identity', () => {
@@ -262,16 +266,78 @@ describe('CSpellConfigFileYaml', () => {
         cfg.addWords(words);
         expect(cfg.serialize()).toEqual(expected);
     });
+
+    test('getValue', () => {
+        const config = exampleConfig();
+        expect(config.getValue('words')).toEqual(['banana', 'apple', 'cabbage', 'date', 'eggplant']);
+        expect(config.getNode('words')?.getValue?.(1)).toEqual('apple');
+        expect(config.getValue('languageSettings')).toBeUndefined();
+        expect(config.getValue('language')).toEqual('en');
+    });
+
+    test('setValue', () => {
+        const config = exampleConfig();
+        const nWords = config.getNode('words');
+        assert(nWords, 'Expected words node to exist');
+        nWords.setValue(1, 'Apple');
+        expect(config.getValue('words')).toEqual(['banana', 'Apple', 'cabbage', 'date', 'eggplant']);
+        expect(config.serialize()).toEqual(example().replace('apple', 'Apple'));
+    });
+
+    test('getNode', () => {
+        const example = unindent`\
+            # Top Comment Block
+            name: cspell.config.yaml
+            version: '0.2' # file version
+            language: en # the locale to use.
+            # Before object
+            # Comment for words
+            words:
+                # This is a comment
+                - banana # Inline 0
+                # Before 1
+                - apple # Inline 1
+                # Before 2
+                - cabbage
+                - date
+
+                # Section two
+                - eggplant # Inline "eggplant"
+
+            # After object
+        `;
+
+        const config = parseCSpellConfigFileYaml(asTextFile(example));
+        expect(config.getNode('words')).toEqual(oc({ comment: undefined, commentBefore: ' This is a comment' }));
+        expect(config.getNode('version')).toEqual(oc({ comment: ' file version', commentBefore: undefined }));
+        expect(config.getNode('language')).toEqual(oc({ comment: ' the locale to use.', commentBefore: undefined }));
+        expect(config.getNode('words')?.getNode(0)).toEqual(oc({ comment: ' Inline 0', commentBefore: undefined }));
+        expect(config.getNode('words')?.getNode(1)).toEqual(oc({ comment: ' Inline 1', commentBefore: ' Before 1' }));
+        expect(config.getNode('words')?.getNode(2)).toEqual(oc({ comment: undefined, commentBefore: ' Before 2' }));
+        expect(config.getNode('words')?.getNode(4)).toEqual(
+            oc({ comment: ' Inline "eggplant"', commentBefore: ' Section two' }),
+        );
+    });
 });
+
+function exampleConfig() {
+    return parseCSpellConfigFileYaml(asTextFile(example()));
+}
 
 function example() {
     return unindent`\
         # Top Comment Block
+        name: cspell.config.yaml
+        version: '0.2' # file version
+        language: en # the locale to use.
         # Before object
+        # Comment for words
         words:
             # This is a comment
             - banana # Inline "b"
+            # Before 1
             - apple # Inline "a"
+            # Before 2
             - cabbage
             - date
 

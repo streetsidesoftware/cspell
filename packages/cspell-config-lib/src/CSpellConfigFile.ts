@@ -1,5 +1,10 @@
 import type { CSpellSettings } from '@cspell/cspell-types';
 
+import type { ValueOf1 } from './types.js';
+import type { CfgNode } from './UpdateConfig/CfgTree.js';
+
+export type { CfgNode } from './UpdateConfig/CfgTree.js';
+
 export interface CSpellConfigFileReference {
     readonly url: URL;
 }
@@ -56,6 +61,8 @@ export abstract class CSpellConfigFile implements ICSpellConfigFile {
     }
 }
 
+type S = CSpellSettings;
+
 export abstract class MutableCSpellConfigFile extends CSpellConfigFile {
     /**
      * Helper function to add words to the config file.
@@ -63,11 +70,9 @@ export abstract class MutableCSpellConfigFile extends CSpellConfigFile {
      */
     abstract addWords(words: string[]): this;
 
-    abstract setValue<K extends keyof CSpellSettings>(key: K | [K], value: CSpellSettings[K]): this;
-    abstract setValue<K extends keyof CSpellSettings, K1 extends keyof CSpellSettings[K]>(
-        key: [K, K1],
-        value: CSpellSettings[K][K1],
-    ): this;
+    abstract setValue<K extends keyof S>(key: K, value: ValueOf1<S, K>): this;
+    abstract getValue<K extends keyof S>(key: K): ValueOf1<S, K> | undefined;
+    abstract getNode<K extends keyof S>(key: K): CfgNode<ValueOf1<S, K>> | undefined;
 }
 
 export abstract class ImplCSpellConfigFile extends CSpellConfigFile {

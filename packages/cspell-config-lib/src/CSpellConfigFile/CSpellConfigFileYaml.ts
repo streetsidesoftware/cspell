@@ -3,9 +3,11 @@ import assert from 'node:assert';
 import type { CSpellSettings } from '@cspell/cspell-types';
 import {
     type Document as YamlDocument,
+    isAlias,
     isMap,
     isScalar,
     isSeq,
+    type Node as YamlNode,
     parseDocument,
     Scalar,
     stringify,
@@ -16,7 +18,12 @@ import {
 import { MutableCSpellConfigFile } from '../CSpellConfigFile.js';
 import { detectIndentAsNum } from '../serializers/util.js';
 import type { TextFile } from '../TextFile.js';
+import type { KeyOf, ValueOf1 } from '../types.js';
+import type { CfgArrayNode, CfgObjectNode, CfgScalarNode, NodeOrValue, RCfgNode } from '../UpdateConfig/CfgTree.js';
+import { isNodeValue } from '../UpdateConfig/CfgTree.js';
 import { ParseError } from './Errors.js';
+
+type S = CSpellSettings;
 
 export class CSpellConfigFileYaml extends MutableCSpellConfigFile {
     #settings: CSpellSettings;
@@ -56,18 +63,30 @@ export class CSpellConfigFileYaml extends MutableCSpellConfigFile {
         return stringify(this.yamlDoc, { indent: this.indent });
     }
 
-    setValue<K extends keyof CSpellSettings>(key: K | [K], value: CSpellSettings[K]): this;
-    setValue<K extends keyof CSpellSettings, K1 extends keyof CSpellSettings[K]>(
-        key: [K, K1],
-        value: CSpellSettings[K][K1],
-    ): this;
-    setValue(key: unknown | unknown[], value: unknown): this {
+    setValue<K extends keyof S>(key: K, value: ValueOf1<S, K>): this {
+        const node = this.yamlDoc.createNode(value);
         if (Array.isArray(key)) {
-            this.yamlDoc.setIn(key, value);
+            this.yamlDoc.setIn(key, node);
         } else {
-            this.yamlDoc.set(key, value);
+            this.yamlDoc.set(key, node);
         }
+        this.#settings = this.yamlDoc.toJS();
         return this;
+    }
+
+    getValue<K extends keyof S>(key: K): ValueOf1<S, K> {
+        const node = this.#getNode(key);
+        return node?.toJS(this.yamlDoc);
+    }
+
+    #getNode(key: unknown | unknown[]): YamlNode | undefined {
+        return getYamlNode(this.yamlDoc, key);
+    }
+
+    getNode<K extends keyof S>(key: K): RCfgNode<ValueOf1<CSpellSettings, K>> | undefined {
+        const yNode = this.#getNode(key);
+        if (!yNode) return undefined;
+        return toConfigNode(this.yamlDoc, yNode) as RCfgNode<ValueOf1<CSpellSettings, K>>;
     }
 
     static parse(file: TextFile): CSpellConfigFileYaml {
@@ -196,4 +215,140 @@ function cloneWord(word: StringOrScalar): StringOrScalar {
         return word.clone() as Scalar<string>;
     }
     return word;
+}
+
+function getYamlNode(yamlDoc: YamlDocument | YAMLMap | YAMLSeq, key: unknown | unknown[]): YamlNode | undefined {
+    return (Array.isArray(key) ? yamlDoc.getIn(key, true) : yamlDoc.get(key, true)) as YamlNode | undefined;
+}
+
+type ArrayType<T> = T extends unknown[] ? T[number] : never;
+
+function toConfigNode<T>(doc: YamlDocument, yNode: YamlNode): RCfgNode<T> {
+    if (isYamlSeq(yNode)) {
+        return toConfigArrayNode(doc, yNode) as RCfgNode<T>;
+    }
+    if (isMap(yNode)) {
+        return toConfigObjectNode(doc, yNode) as RCfgNode<T>;
+    }
+    if (isScalar(yNode)) {
+        return toConfigScalarNode(doc, yNode) as RCfgNode<T>;
+    }
+    throw new Error(`Unsupported YAML node type: ${yamlNodeType(yNode)}`);
+}
+
+function toConfigNodeBase<T>(doc: YamlDocument, yNode: YamlNode) {
+    const node = {
+        get value() {
+            return yNode.toJS(doc) as T;
+        },
+        get comment() {
+            return yNode.comment ?? undefined;
+        },
+        set comment(comment: string | undefined) {
+            // eslint-disable-next-line unicorn/no-null
+            yNode.comment = comment ?? null;
+        },
+        get commentBefore() {
+            return yNode.commentBefore ?? undefined;
+        },
+        set commentBefore(comment: string | undefined) {
+            // eslint-disable-next-line unicorn/no-null
+            yNode.commentBefore = comment ?? null;
+        },
+    };
+    return node;
+}
+
+function toConfigArrayNode<T extends unknown[]>(
+    doc: YamlDocument,
+    yNode: YAMLSeq<ArrayType<T>>,
+): CfgArrayNode<ArrayType<T>> {
+    type TT = ArrayType<T>;
+    const cfgNode: CfgArrayNode<TT> = {
+        type: 'array',
+        ...toConfigNodeBase<ArrayType<T>[]>(doc, yNode),
+        getNode(key: number) {
+            const node = getYamlNode(yNode, key);
+            if (!node) return undefined;
+            return toConfigNode<TT>(doc, node) as RCfgNode<TT>;
+        },
+        getValue(key: number): TT | undefined {
+            const node = getYamlNode(yNode, key);
+            if (!node) return undefined;
+            return node.toJS(doc) as TT;
+        },
+        setValue(key: number, value: NodeOrValue<TT>): void {
+            if (!isNodeValue(value)) {
+                yNode.set(key, value);
+                return;
+            }
+            yNode.set(key, value.value);
+            const yNodeValue = getYamlNode(yNode, key);
+            assert(yNodeValue);
+            // eslint-disable-next-line unicorn/no-null
+            yNodeValue.comment = value.comment ?? null;
+            // eslint-disable-next-line unicorn/no-null
+            yNodeValue.commentBefore = value.commentBefore ?? null;
+        },
+        get length(): number {
+            return yNode.items.length;
+        },
+    };
+
+    return cfgNode;
+}
+
+function toConfigObjectNode<T extends object>(doc: YamlDocument, yNode: YAMLMap): CfgObjectNode<T> {
+    const cfgNode: CfgObjectNode<T> = {
+        type: 'object',
+        ...toConfigNodeBase<T>(doc, yNode),
+        getValue<K extends keyof T>(key: K): T[K] | undefined {
+            const node = getYamlNode(yNode, key);
+            if (!node) return undefined;
+            return node.toJS(doc) as T[K];
+        },
+        getNode<K extends keyof T>(key: K): RCfgNode<T[K]> | undefined {
+            const node = getYamlNode(yNode, key);
+            if (!node) return undefined;
+            return toConfigNode<T[K]>(doc, node);
+        },
+        setValue<K extends KeyOf<T>>(key: K, value: NodeOrValue<ValueOf1<T, K>>): void {
+            if (!isNodeValue(value)) {
+                yNode.set(key, value);
+                return;
+            }
+            yNode.set(key, value.value);
+            const yNodeValue = getYamlNode(yNode, key);
+            assert(yNodeValue);
+            // eslint-disable-next-line unicorn/no-null
+            yNodeValue.comment = value.comment ?? null;
+            // eslint-disable-next-line unicorn/no-null
+            yNodeValue.commentBefore = value.commentBefore ?? null;
+        },
+    };
+    return cfgNode;
+}
+
+function toConfigScalarNode<T extends string | number | boolean | null | undefined>(
+    doc: YamlDocument,
+    yNode: Scalar,
+): CfgScalarNode<T> {
+    const node = toConfigNodeBase<T>(doc, yNode);
+    const cfgNode: CfgScalarNode<T> = {
+        type: 'scalar',
+        ...node,
+    };
+    return cfgNode;
+}
+
+function isYamlSeq<T>(node: YamlNode): node is YAMLSeq<T> {
+    return isSeq(node);
+}
+
+function yamlNodeType(node: YamlNode): 'scalar' | 'seq' | 'map' | 'alias' | 'unknown' {
+    if (isScalar(node)) return 'scalar';
+    if (isSeq(node)) return 'seq';
+    if (isMap(node)) return 'map';
+    if (isAlias(node)) return 'alias';
+    return 'unknown';
 }
