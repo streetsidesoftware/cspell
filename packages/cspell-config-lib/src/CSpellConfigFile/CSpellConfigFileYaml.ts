@@ -5,9 +5,11 @@ import {
     type Document as YamlDocument,
     isAlias,
     isMap,
+    isPair,
     isScalar,
     isSeq,
     type Node as YamlNode,
+    type Pair,
     parseDocument,
     Scalar,
     stringify,
@@ -19,7 +21,15 @@ import { MutableCSpellConfigFile } from '../CSpellConfigFile.js';
 import { detectIndentAsNum } from '../serializers/util.js';
 import type { TextFile } from '../TextFile.js';
 import type { KeyOf, ValueOf1 } from '../types.js';
-import type { CfgArrayNode, CfgObjectNode, CfgScalarNode, NodeOrValue, RCfgNode } from '../UpdateConfig/CfgTree.js';
+import type {
+    CfgArrayNode,
+    CfgObjectNode,
+    CfgScalarNode,
+    NodeComments,
+    NodeOrValue,
+    NodeValue,
+    RCfgNode,
+} from '../UpdateConfig/CfgTree.js';
 import { isNodeValue } from '../UpdateConfig/CfgTree.js';
 import { ParseError } from './Errors.js';
 
@@ -63,12 +73,18 @@ export class CSpellConfigFileYaml extends MutableCSpellConfigFile {
         return stringify(this.yamlDoc, { indent: this.indent });
     }
 
-    setValue<K extends keyof S>(key: K, value: ValueOf1<S, K>): this {
-        const node = this.yamlDoc.createNode(value);
-        if (Array.isArray(key)) {
-            this.yamlDoc.setIn(key, node);
+    setValue<K extends keyof S>(key: K, value: NodeOrValue<ValueOf1<S, K>>): this {
+        if (isNodeValue(value)) {
+            let node = this.#getNode(key);
+            if (!node) {
+                node = this.yamlDoc.createNode(value.value);
+                setYamlNodeComments(node, value);
+                this.yamlDoc.set(key, node);
+            } else {
+                setYamlNodeValue(node, value);
+            }
         } else {
-            this.yamlDoc.set(key, node);
+            this.yamlDoc.set(key, value);
         }
         this.#settings = this.yamlDoc.toJS();
         return this;
@@ -87,6 +103,44 @@ export class CSpellConfigFileYaml extends MutableCSpellConfigFile {
         const yNode = this.#getNode(key);
         if (!yNode) return undefined;
         return toConfigNode(this.yamlDoc, yNode) as RCfgNode<ValueOf1<CSpellSettings, K>>;
+    }
+
+    getFieldNode<K extends keyof S>(key: K): RCfgNode<string> | undefined {
+        const contents = this.yamlDoc.contents;
+        if (!isMap(contents)) {
+            return undefined;
+        }
+
+        const pair = findPair(contents, key as string);
+        if (!pair) {
+            return undefined;
+        }
+        return toConfigNode(this.yamlDoc, pair.key) as RCfgNode<string>;
+    }
+
+    /**
+     * Removes a value from the document.
+     * @returns `true` if the item was found and removed.
+     */
+    delete(key: keyof S): boolean {
+        const removed = this.yamlDoc.delete(key);
+        if (removed) {
+            this.#settings = this.yamlDoc.toJS();
+        }
+        return removed;
+    }
+
+    get comment(): string | undefined {
+        return this.yamlDoc.comment ?? undefined;
+    }
+
+    set comment(comment: string | undefined) {
+        // eslint-disable-next-line unicorn/no-null
+        this.yamlDoc.comment = comment ?? null;
+    }
+
+    removeAllComments(): void {
+        this.yamlDoc;
     }
 
     static parse(file: TextFile): CSpellConfigFileYaml {
@@ -290,6 +344,19 @@ function toConfigArrayNode<T extends unknown[]>(
             // eslint-disable-next-line unicorn/no-null
             yNodeValue.commentBefore = value.commentBefore ?? null;
         },
+        delete(key: number): boolean {
+            return yNode.delete(key);
+        },
+        push(value: NodeOrValue<TT>): number {
+            if (!isNodeValue(value)) {
+                yNode.add(value);
+                return yNode.items.length;
+            }
+            yNode.add(value.value);
+
+            setYamlNodeComments(getYamlNode(yNode, yNode.items.length - 1), value);
+            return yNode.items.length;
+        },
         get length(): number {
             return yNode.items.length;
         },
@@ -325,6 +392,9 @@ function toConfigObjectNode<T extends object>(doc: YamlDocument, yNode: YAMLMap)
             // eslint-disable-next-line unicorn/no-null
             yNodeValue.commentBefore = value.commentBefore ?? null;
         },
+        delete<K extends KeyOf<T>>(key: K): boolean {
+            return yNode.delete(key);
+        },
     };
     return cfgNode;
 }
@@ -351,4 +421,54 @@ function yamlNodeType(node: YamlNode): 'scalar' | 'seq' | 'map' | 'alias' | 'unk
     if (isMap(node)) return 'map';
     if (isAlias(node)) return 'alias';
     return 'unknown';
+}
+
+function setYamlNodeComments(yamlNode: YamlNode | undefined, comments: NodeComments): void {
+    if (!yamlNode) return;
+    if ('comment' in comments) {
+        // eslint-disable-next-line unicorn/no-null
+        yamlNode.comment = comments.comment ?? null;
+    }
+    if ('commentBefore' in comments) {
+        // eslint-disable-next-line unicorn/no-null
+        yamlNode.commentBefore = comments.commentBefore ?? null;
+    }
+}
+
+function setYamlNodeValue<T>(yamlNode: YamlNode, nodeValue: NodeValue<T>): void {
+    setYamlNodeComments(yamlNode, nodeValue);
+    if (isScalar(yamlNode)) {
+        yamlNode.value = nodeValue.value;
+        return;
+    }
+    const value = nodeValue.value;
+    if (isSeq(yamlNode)) {
+        assert(Array.isArray(value), 'Expected value to be an array for YAMLSeq');
+        yamlNode.items = [];
+        for (let i = 0; i < value.length; ++i) {
+            yamlNode.set(i, value[i]);
+        }
+        return;
+    }
+    if (isMap(yamlNode)) {
+        assert(typeof value === 'object' && value !== null, 'Expected value to be an object for YAMLMap');
+        yamlNode.items = [];
+        for (const [key, val] of Object.entries(value)) {
+            yamlNode.set(key, val);
+        }
+        return;
+    }
+    throw new Error(`Unsupported YAML node type: ${yamlNodeType(yamlNode)}`);
+}
+
+function findPair(yNode: YamlNode, key: string): Pair<Scalar<string>, YamlNode> | undefined {
+    if (!isMap(yNode)) return undefined;
+    const items = yNode.items as Pair<YamlNode, YamlNode>[];
+    for (const item of items) {
+        if (!isPair(item)) continue;
+        if (isScalar(item.key) && item.key.value === key) {
+            return item as Pair<Scalar<string>, YamlNode>;
+        }
+    }
+    return undefined;
 }

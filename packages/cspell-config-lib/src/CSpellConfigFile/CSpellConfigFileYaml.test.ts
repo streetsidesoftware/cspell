@@ -3,6 +3,7 @@ import assert from 'node:assert';
 import { describe, expect, test } from 'vitest';
 
 import { createTextFile, TextFile } from '../TextFile.js';
+import { createNodeValue } from '../UpdateConfig/CfgTree.js';
 import { unindent } from '../util/unindent.js';
 import { CSpellConfigFileYaml, parseCSpellConfigFileYaml } from './CSpellConfigFileYaml.js';
 
@@ -317,6 +318,64 @@ describe('CSpellConfigFileYaml', () => {
         expect(config.getNode('words')?.getNode(4)).toEqual(
             oc({ comment: ' Inline "eggplant"', commentBefore: ' Section two' }),
         );
+        expect(config.getFieldNode('words')).toEqual({
+            value: 'words',
+            type: 'scalar',
+            comment: undefined,
+            commentBefore: ' Before object\n Comment for words',
+        });
+        expect(config.getFieldNode('name')).toEqual({
+            value: 'name',
+            type: 'scalar',
+            comment: undefined,
+            commentBefore: ' Top Comment Block',
+        });
+    });
+
+    test('getNode / setNode', () => {
+        const example = unindent`\
+            # Top Comment Block
+            name: cspell.config.yaml
+            version: '0.2' # file version
+            language: en # the locale to use.
+            # Before object
+            # Comment for words
+            words:
+                # This is a comment
+                - banana # Inline 0
+                # Before 1
+                - apple # Inline 1
+                # Before 2
+                - cabbage
+                - date
+
+                # Section two
+                - eggplant # Inline "eggplant"
+
+            # After object
+        `;
+
+        const config = parseCSpellConfigFileYaml(asTextFile(example));
+        const nn = createNodeValue('cspell.config.json', ' incline "name"', ' Before "name"');
+        config.setValue('name', nn);
+        config.setValue('language', 'en-US');
+        expect(config.getNode('name')).toEqual(
+            oc({ value: 'cspell.config.json', comment: ' incline "name"', commentBefore: ' Before "name"' }),
+        );
+        expect(config.getNode('language')).toEqual(
+            oc({ value: 'en-US', comment: ' the locale to use.', commentBefore: undefined }),
+        );
+        config.delete('words');
+        expect(config.serialize()).toEqual(unindent`\
+            # Top Comment Block
+            name:
+                # Before "name"
+                cspell.config.json # incline "name"
+            version: '0.2' # file version
+            language: en-US # the locale to use.
+
+            # After object
+        `);
     });
 });
 
