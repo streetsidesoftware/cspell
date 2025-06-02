@@ -3,9 +3,9 @@ Repository: sveltejs/svelte
 Url: https://github.com/sveltejs/svelte.git
 Args: '["**"]'
 Summary:
-  files: 7439
-  filesWithIssues: 500
-  issues: 3635
+  files: 7474
+  filesWithIssues: 503
+  issues: 3644
   errors: 0
 Errors: []
 
@@ -33,7 +33,7 @@ issues:
   - "documentation/docs/03-template-syntax/04-key.md:10:164      reinitialised       U       be reinstantiated and reinitialised:"
   - "documentation/docs/03-template-syntax/06-snippet.md:15:128      duplicative     U       Instead of writing duplicative code like [this](/playground"
   - "documentation/docs/03-template-syntax/08-@html.md:13:216        unsanitized     U       xss/). Never render unsanitized content."
-  - "documentation/docs/03-template-syntax/12-bind.md:7:79           lvalue      U       `expression` is an _lvalue_ (i.e. a variable or"
+  - "documentation/docs/03-template-syntax/12-bind.md:7:80           lvalue      U       expression` is an [_lvalue_](https://press.rebus"
   - "documentation/docs/03-template-syntax/12-bind.md:165:60         Guac        U       group={fillings} value=\"Guac (extra)\" /> Guac (extra"
   - "documentation/docs/03-template-syntax/13-use.md:14:11       myaction        U       function myaction(node) {"
   - "documentation/docs/03-template-syntax/13-use.md:61:7        onswiperight    U       * onswiperight: (e: CustomEvent) ="
@@ -61,8 +61,8 @@ issues:
   - "documentation/docs/07-misc/03-typescript.md:268:29      beforeinstallprompt             U       you want to use the beforeinstallprompt event"
   - "documentation/docs/07-misc/03-typescript.md:271:3       mycustomattribute               U       mycustomattribute?: any; // You can replace"
   - "documentation/docs/07-misc/03-typescript.md:291:3       veryexperimentalattribute       U       veryexperimentalattribute?: string;"
-  - "documentation/docs/07-misc/04-custom-elements.md:128:166        oneworld    U       treats `<custom-element oneworld={true}></custom-element"
-  - "documentation/docs/07-misc/04-custom-elements.md:128:237        eworld      U       stomElement.addEventListener('eworld', true)` (and not as"
+  - "documentation/docs/07-misc/04-custom-elements.md:130:166        oneworld    U       treats `<custom-element oneworld={true}></custom-element"
+  - "documentation/docs/07-misc/04-custom-elements.md:130:237        eworld      U       stomElement.addEventListener('eworld', true)` (and not as"
   - "documentation/docs/07-misc/06-v4-migration-guide.md:129:71      navigations     U       confusion around page navigations. \"local\" means that"
   - "documentation/docs/07-misc/06-v4-migration-guide.md:219:54      Dsve            U       example if you are using `MDsveX` - in which case you"
   - "documentation/docs/07-misc/06-v4-migration-guide.md:225:2       mdsvex          U       mdsvex(mdsvexConfig)---"
@@ -78,7 +78,7 @@ issues:
   - "documentation/docs/07-misc/99-faq.md:104:56         sveltesociety       U       maintained list of routers on sveltesociety.dev](https://sveltesociety"
   - "documentation/docs/07-misc/99-faq.md:108:272        Tauri               U       into a mobile app with [Tauri](https://v2.tauri.app"
   - "documentation/docs/99-legacy/10-legacy-on.md:88:73          initialised     U       dispatcher_ when they are initialised:"
-  - "package.json:34:7           svitejs     U       \"@svitejs/changesets-changelog"
+  - "package.json:31:7           svitejs     U       \"@svitejs/changesets-changelog"
   - "packages/svelte/CHANGELOG-pre-5.md:226:10       deindent            U       - chore: deindent cjs output for compiler"
   - "packages/svelte/CHANGELOG-pre-5.md:343:19       microdata           U       - Properly handle microdata attributes ([#8413]"
   - "packages/svelte/CHANGELOG-pre-5.md:372:23       replacestate        U       Add `data-sveltekit-replacestate` and `data-sveltekit"
@@ -319,7 +319,7 @@ issues:
   - "packages/svelte/elements.d.ts:1079:2        autocorrect                                     U       autocorrect?: 'on' | 'off' | ''"
   - "packages/svelte/elements.d.ts:1101:2        maxlength                                       U       maxlength?: number | undefined"
   - "packages/svelte/elements.d.ts:1117:2        defaultvalue                                    U       defaultvalue?: any;"
-  - "packages/svelte/elements.d.ts:1119:2        defaultchecked                                  U       defaultchecked?: any;"
+  - "packages/svelte/elements.d.ts:1119:2        defaultchecked                                  U       defaultchecked?: boolean | undefined"
   - "packages/svelte/elements.d.ts:1137:2        keytype                                         U       keytype?: string | undefined"
   - "packages/svelte/elements.d.ts:1138:2        keyparams                                       U       keyparams?: string | undefined"
   - "packages/svelte/elements.d.ts:1168:6        serviceworker                                   U       | 'serviceworker'"
@@ -1688,13 +1688,13 @@ issues:
   - "packages/svelte/src/compiler/phases/3-transform/client/visitors/BindDirective.js:46:11          unthunk     U       set = b.unthunk("
   - "packages/svelte/src/compiler/phases/3-transform/client/visitors/ConstTag.js:49:11       optimise    U       // TODO optimise the simple `{ x } ="
   - "packages/svelte/src/compiler/phases/3-transform/client/visitors/shared/declarations.js:31:30        unsub       U       call = b.call('$.store_unsub', call, b.literal(`"
-  - "packages/svelte/src/compiler/phases/3-transform/client/visitors/shared/element.js:47:67         readded     U       it isn't removed and readded on every update"
-  - "packages/svelte/src/compiler/phases/3-transform/client/visitors/SvelteElement.js:73:46          computeds       U       ...lets); // create computeds in the outer context"
+  - "packages/svelte/src/compiler/phases/3-transform/client/visitors/shared/element.js:49:67         readded     U       it isn't removed and readded on every update"
+  - "packages/svelte/src/compiler/phases/3-transform/client/visitors/SvelteElement.js:77:46          computeds       U       ...lets); // create computeds in the outer context"
   - "packages/svelte/src/compiler/phases/3-transform/server/visitors/VariableDeclaration.js:55:45        deconflict      U       declared separately, deconflict"
   - "packages/svelte/src/compiler/phases/3-transform/utils.js:237:76         spaceand    U       text node with a single spaceand keep whitespace"
   - "packages/svelte/src/compiler/phases/patterns.js:21:43       aeiou       U       starts_with_vowel = /^[aeiou]/;"
   - "packages/svelte/src/compiler/types/template.d.ts:26:41          mrow    U       for e.g. `<math>` or `<mrow>`"
-  - "packages/svelte/src/compiler/utils/ast.js:582:40        subexpression       U       expression.expressions.some((subexpression) => is_expression_async"
+  - "packages/svelte/src/compiler/utils/ast.js:563:40        subexpression       U       expression.expressions.some((subexpression) => is_expression_async"
   - "packages/svelte/src/compiler/utils/extract_svelte_ignore.js:16:16       eachblock       U       'invalid-rest-eachblock-binding': 'bind_invalid"
   - "packages/svelte/src/compiler/utils/mapped_code.js:134:6         unswitched      U       // unswitched loops are faster"
   - "packages/svelte/src/html-tree-validation.js:120:5       bgsound     U       'bgsound',"
@@ -1708,7 +1708,7 @@ issues:
   - "packages/svelte/src/internal/client/dom/blocks/await.js:144:68      microtick       U       since it's on the next microtick"
   - "packages/svelte/src/internal/client/dom/blocks/svelte-element.js:75:18          Noone (No one)      U       // Assumption: Noone changes the namespace"
   - "packages/svelte/src/internal/client/dom/elements/actions.js:18:8        inited      U       var inited = false;"
-  - "packages/svelte/src/internal/client/dom/elements/attributes.js:487:16       contructor      U       // Do not use contructor.name here as that's"
+  - "packages/svelte/src/internal/client/dom/elements/attributes.js:547:16       contructor      U       // Do not use contructor.name here as that's"
   - "packages/svelte/src/internal/client/dom/elements/bindings/input.js:28:14        numberlike      U       value = is_numberlike_input(input) ? to_number"
   - "packages/svelte/src/internal/client/dom/elements/bindings/this.js:41:78         nullfiy     U       context changes), then nullfiy the binding at"
   - "packages/svelte/src/internal/client/dom/elements/misc.js:54:66          possiblity (possibility)    U       get noticed of it (no possiblity of stopPropagation)"
@@ -1842,7 +1842,7 @@ issues:
   - "packages/svelte/tests/runtime-legacy/samples/attribute-null-classnames-no-style/_config.js:26:32        nulltest            U       equal(div.className, 'nulltest');"
   - "packages/svelte/tests/runtime-legacy/samples/attribute-null-classnames-no-style/_config.js:30:32        undefinedtest       U       equal(div.className, 'undefinedtest');"
   - "packages/svelte/tests/runtime-legacy/samples/await-mutate-array/Card.svelte:3:13        onfav       U       export let onfav;"
-  - "packages/svelte/tests/runtime-legacy/samples/binding-circular/_config.js:6:36           wheeee      U       value=\"[object Object]\">wheeee</option>"
+  - "packages/svelte/tests/runtime-legacy/samples/binding-circular/_config.js:6:45           wheeee      U       value=\"[object Object]\">wheeee</option>"
   - "packages/svelte/tests/runtime-legacy/samples/binding-this-multiple/main.svelte:25:3         duiv    U       <duiv>"
   - "packages/svelte/tests/runtime-legacy/samples/class-shortcut-with-transition/_config.js:14:37        yszte       U       p class=\"red svelte-1yszte8 border\" style=\"\">bar"
   - "packages/svelte/tests/runtime-legacy/samples/component-slot-fallback-2/_config.js:6:26          Blub    U       ssrHtml: '<input value=\"Blub\"> <input value=\"Blub"
@@ -1899,6 +1899,7 @@ issues:
   - "packages/svelte/tests/runtime-runes/samples/attribute-boolean-case-insensitivity/main.svelte:14:80          DISABLEPICTUREINPICTURE     U       val} PLAYSINLINE={val} DISABLEPICTUREINPICTURE={val} DISABLEREMOTEPLAYBACK"
   - "packages/svelte/tests/runtime-runes/samples/attribute-boolean-case-insensitivity/main.svelte:14:110         DISABLEREMOTEPLAYBACK       U       DISABLEPICTUREINPICTURE={val} DISABLEREMOTEPLAYBACK={val}></video>"
   - "packages/svelte/tests/runtime-runes/samples/binding-interop/Runes.svelte:26:62          coincidently    U       effect so they don't coincidently update with the others"
+  - "packages/svelte/tests/runtime-runes/samples/bindings-form-reset/main.svelte:6:18        ssrd    U       // this will be ssrd"
   - "packages/svelte/tests/runtime-runes/samples/class-directive-mutations/_config.js:19:31          cjqok       U       class=\"custom svelte-1cjqok6 foo bar\" title=\"a title"
   - "packages/svelte/tests/runtime-runes/samples/class-state-derived-private/main.svelte:11:7        embiggened      U       get embiggened1() {"
   - "packages/svelte/tests/runtime-runes/samples/class-state-raw/main.svelte:4:34        Froozen     U       someLibFunctionCreatingFroozenObject(value) {"
@@ -1919,6 +1920,8 @@ issues:
   - "packages/svelte/tests/runtime-runes/samples/dynamic-event-handler-2/_config.js:4:38         Pochi       U       Tama</button><button>Pochi</button><br><button"
   - "packages/svelte/tests/runtime-runes/samples/event-attribute-not-hoistable/main.svelte:9:7           doesnt (doesn't)    U       b = doesnt_exist();"
   - "packages/svelte/tests/runtime-runes/samples/event-attribute-not-hoistable/main.svelte:31:73         delegateable        U       when one of them is not delegateable -->"
+  - "packages/svelte/tests/runtime-runes/samples/event-media-element-cleanup/_config.js:17:35        someevent       U       dispatchEvent(new Event('someevent'));"
+  - "packages/svelte/tests/runtime-runes/samples/event-media-element-cleanup/main.svelte:8:9         onsomeevent     U       <video onsomeevent={handler}></video>"
   - "packages/svelte/tests/runtime-runes/samples/inspect-trace-nested/_config.js:7:10        normalise       U       function normalise_trace_logs(logs) {"
   - "packages/svelte/tests/runtime-runes/samples/inspect-trace-nested/_config.js:8:6         normalised      U       let normalised = [];"
   - "packages/svelte/tests/runtime-runes/samples/mount-props-updates/_config.js:25:61        proeprty    U       treated as a readonly proeprty"

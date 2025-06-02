@@ -4,8 +4,8 @@ Url: https://github.com/MicrosoftDocs/PowerShell-Docs.git
 Args: '["--config=../../../cspell-power-shell-docs.config.yaml","**"]'
 Summary:
   files: 2707
-  filesWithIssues: 943
-  issues: 3754
+  filesWithIssues: 946
+  issues: 3756
   errors: 0
 Errors: []
 
@@ -865,6 +865,7 @@ issues:
   - "reference/7.4/Microsoft.PowerShell.Core/Import-Module.md:541:2          RSDGF           U       `RSDGF03` computer."
   - "reference/7.4/Microsoft.PowerShell.Core/Import-Module.md:552:36         RSDGF           U       CimSession -ComputerName RSDGF03"
   - "reference/7.4/Microsoft.PowerShell.Core/Import-Module.md:1322:61        modulename      U       Get-Command -Module modulename` to see which members"
+  - "reference/7.4/Microsoft.PowerShell.Core/Microsoft.PowerShell.Core.md:244:43         execv       U       the cmdlet calls the `execv()` function to provide"
   - "reference/7.4/Microsoft.PowerShell.Core/New-Module.md:228:11        Manoj       U       $m.Hello(\"Manoj\")"
   - "reference/7.4/Microsoft.PowerShell.Core/New-ModuleManifest.md:224:8         JKBC    U       'JKBC'"
   - "reference/7.4/Microsoft.PowerShell.Core/New-PSSession.md:185:58         Corpnet     U       ComputerName Server1.Domain44.Corpnet.Fabrikam.com -Credential"
@@ -1377,6 +1378,7 @@ issues:
   - "reference/7.5/Microsoft.PowerShell.Core/Import-Module.md:541:2          RSDGF           U       `RSDGF03` computer."
   - "reference/7.5/Microsoft.PowerShell.Core/Import-Module.md:552:36         RSDGF           U       CimSession -ComputerName RSDGF03"
   - "reference/7.5/Microsoft.PowerShell.Core/Import-Module.md:1322:61        modulename      U       Get-Command -Module modulename` to see which members"
+  - "reference/7.5/Microsoft.PowerShell.Core/Microsoft.PowerShell.Core.md:244:43         execv       U       the cmdlet calls the `execv()` function to provide"
   - "reference/7.5/Microsoft.PowerShell.Core/New-Module.md:228:11        Manoj       U       $m.Hello(\"Manoj\")"
   - "reference/7.5/Microsoft.PowerShell.Core/New-ModuleManifest.md:232:8         JKBC    U       'JKBC'"
   - "reference/7.5/Microsoft.PowerShell.Core/New-PSSession.md:185:58         Corpnet     U       ComputerName Server1.Domain44.Corpnet.Fabrikam.com -Credential"
@@ -1876,6 +1878,7 @@ issues:
   - "reference/7.6/Microsoft.PowerShell.Core/Import-Module.md:541:2          RSDGF           U       `RSDGF03` computer."
   - "reference/7.6/Microsoft.PowerShell.Core/Import-Module.md:552:36         RSDGF           U       CimSession -ComputerName RSDGF03"
   - "reference/7.6/Microsoft.PowerShell.Core/Import-Module.md:1322:61        modulename      U       Get-Command -Module modulename` to see which members"
+  - "reference/7.6/Microsoft.PowerShell.Core/Microsoft.PowerShell.Core.md:244:43         execv       U       the cmdlet calls the `execv()` function to provide"
   - "reference/7.6/Microsoft.PowerShell.Core/New-Module.md:228:11        Manoj       U       $m.Hello(\"Manoj\")"
   - "reference/7.6/Microsoft.PowerShell.Core/New-ModuleManifest.md:224:8         JKBC    U       'JKBC'"
   - "reference/7.6/Microsoft.PowerShell.Core/New-PSSession.md:185:58         Corpnet     U       ComputerName Server1.Domain44.Corpnet.Fabrikam.com -Credential"
@@ -2667,10 +2670,10 @@ issues:
   - "reference/docs-conceptual/dev-cross-plat/performance/script-authoring-considerations.md:47:14       arraylist       U       $arraylist.Add($i) > $null"
   - "reference/docs-conceptual/dev-cross-plat/performance/script-authoring-considerations.md:53:14       arraylist       U       $arraylist.Add($i) | Out-Null"
   - "reference/docs-conceptual/dev-cross-plat/performance/script-authoring-considerations.md:69:29       Finalizers      U       [GC]::WaitForPendingFinalizers()"
-  - "reference/docs-conceptual/dev-cross-plat/performance/script-authoring-considerations.md:174:29      Finalizers      U       [GC]::WaitForPendingFinalizers()"
-  - "reference/docs-conceptual/dev-cross-plat/performance/script-authoring-considerations.md:316:29      Finalizers      U       [GC]::WaitForPendingFinalizers()"
-  - "reference/docs-conceptual/dev-cross-plat/performance/script-authoring-considerations.md:540:29      Finalizers      U       [GC]::WaitForPendingFinalizers()"
-  - "reference/docs-conceptual/dev-cross-plat/performance/script-authoring-considerations.md:834:29      Finalizers      U       [GC]::WaitForPendingFinalizers()"
+  - "reference/docs-conceptual/dev-cross-plat/performance/script-authoring-considerations.md:179:29      Finalizers      U       [GC]::WaitForPendingFinalizers()"
+  - "reference/docs-conceptual/dev-cross-plat/performance/script-authoring-considerations.md:321:29      Finalizers      U       [GC]::WaitForPendingFinalizers()"
+  - "reference/docs-conceptual/dev-cross-plat/performance/script-authoring-considerations.md:545:29      Finalizers      U       [GC]::WaitForPendingFinalizers()"
+  - "reference/docs-conceptual/dev-cross-plat/performance/script-authoring-considerations.md:839:29      Finalizers      U       [GC]::WaitForPendingFinalizers()"
   - "reference/docs-conceptual/dev-cross-plat/resolving-dependency-conflicts.md:3:12         rjmholt     U       ms.custom: rjmholt"
   - "reference/docs-conceptual/dev-cross-plat/resolving-dependency-conflicts.md:718:2        netcore     U       $netcore = \"netcoreapp3.1\""
   - "reference/docs-conceptual/dev-cross-plat/resolving-dependency-conflicts.md:750:53       netcore     U       bin/$Configuration/$netcore/publish/\" |"
@@ -3526,12 +3529,11 @@ issues:
   - "reference/docs-conceptual/security/remoting/PS-remoting-second-hop.md:240:57        alpineskihouse      U       ServerB -Server dc1.alpineskihouse.com"
   - "reference/docs-conceptual/security/remoting/PS-remoting-second-hop.md:324:48        creds               U       delegation, passing fresh creds"
   - "reference/docs-conceptual/security/remoting/SSH-Remoting-in-PowerShell.md:12:59         multiplatform       U       platforms and allows true multiplatform PowerShell remoting"
-  - "reference/docs-conceptual/security/remoting/SSH-Remoting-in-PowerShell.md:82:28         progra              U       Subsystem powershell C:/progra~1/powershell/7/pwsh"
-  - "reference/docs-conceptual/security/remoting/SSH-Remoting-in-PowerShell.md:82:60         sshs                U       powershell/7/pwsh.exe -sshs -NoLogo"
-  - "reference/docs-conceptual/security/remoting/SSH-Remoting-in-PowerShell.md:90:63         progra              U       PowerShell executable is `C:/progra~1/powershell/7/pwsh"
-  - "reference/docs-conceptual/security/remoting/SSH-Remoting-in-PowerShell.md:97:79         Progra              U       Windows is usually `Progra~1`. However,"
-  - "reference/docs-conceptual/security/remoting/SSH-Remoting-in-PowerShell.md:158:40        sshs                U       powershell /usr/bin/pwsh -sshs -NoLogo"
-  - "reference/docs-conceptual/security/remoting/SSH-Remoting-in-PowerShell.md:205:46        sshs                U       usr/local/bin/pwsh -sshs -NoLogo"
+  - "reference/docs-conceptual/security/remoting/SSH-Remoting-in-PowerShell.md:82:30         progra              U       Subsystem powershell C:/progra~1/powershell/7/pwsh"
+  - "reference/docs-conceptual/security/remoting/SSH-Remoting-in-PowerShell.md:82:62         sshs                U       powershell/7/pwsh.exe -sshs"
+  - "reference/docs-conceptual/security/remoting/SSH-Remoting-in-PowerShell.md:96:33         progra              U       Program Files` should be `progra~1`. You can use the"
+  - "reference/docs-conceptual/security/remoting/SSH-Remoting-in-PowerShell.md:172:42        sshs                U       powershell /usr/bin/pwsh -sshs -NoLogo"
+  - "reference/docs-conceptual/security/remoting/SSH-Remoting-in-PowerShell.md:215:48        sshs                U       usr/local/bin/pwsh -sshs -NoLogo"
   - "reference/docs-conceptual/security/remoting/WinRM-Security.md:52:18         Mandiant    U       Researchers from Mandiant presented a session"
   - "reference/docs-conceptual/security/remoting/WinRM-Security.md:116:8         etype       U       - The `etype` in the TGS ticket determines"
   - "reference/docs-conceptual/toc.yml:90:37         keyhandlers                 U       href: learn/shell/using-keyhandlers.md"
