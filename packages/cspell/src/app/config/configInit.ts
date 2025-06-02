@@ -83,6 +83,7 @@ export async function configInit(options: InitOptions): Promise<void> {
     const url = determineFileNameURL(options);
     const configFile = await createConfigFile(rw, url, options);
     await applyOptionsToConfigFile(configFile, options);
+    await fs.mkdir(new URL('./', configFile.url), { recursive: true });
     await rw.writeConfig(configFile);
 }
 
