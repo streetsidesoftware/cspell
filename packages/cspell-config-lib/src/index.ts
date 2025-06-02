@@ -1,6 +1,6 @@
 export { createReaderWriter } from './createReaderWriter.js';
 export type { ICSpellConfigFile } from './CSpellConfigFile.js';
-export { CSpellConfigFile, satisfiesCSpellConfigFile } from './CSpellConfigFile.js';
+export { CSpellConfigFile, MutableCSpellConfigFile, satisfiesCSpellConfigFile } from './CSpellConfigFile.js';
 export {
     CSpellConfigFileInMemory,
     CSpellConfigFileJavaScript,
@@ -20,4 +20,5 @@ export type {
     SerializeSettingsFn,
 } from './Serializer.js';
 export type { TextFile, TextFileRef } from './TextFile.js';
-export {};
+export type { CfgArrayNode, CfgNode, CfgObjectNode, CfgScalarNode } from './UpdateConfig/CfgTree.js';
+export { isCfgArrayNode, isCfgObjectNode, isCfgScalarNode } from './UpdateConfig/CfgTree.js';

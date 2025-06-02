@@ -29,7 +29,9 @@ export interface CfgNodeBase<T> {
     commentBefore?: string | undefined;
 }
 
-export interface CfgScalarNode<T extends string | number | boolean | null | undefined> extends CfgNodeBase<T> {
+type ScalarValue = string | number | boolean | null | undefined;
+
+export interface CfgScalarNode<T extends ScalarValue> extends CfgNodeBase<T> {
     readonly type: 'scalar';
     readonly value: T;
     setValue?: undefined;
@@ -43,6 +45,7 @@ export interface CfgScalarNode<T extends string | number | boolean | null | unde
 
 export interface CfgArrayNode<T> extends CfgNodeBase<{ [key: number]: T }> {
     readonly type: 'array';
+    readonly value: T[];
     getValue: (key: number) => T | undefined;
     getNode: (key: number) => RCfgNode<T> | undefined;
     setValue: (key: number, value: NodeOrValue<T>) => void;
@@ -53,7 +56,7 @@ export interface CfgArrayNode<T> extends CfgNodeBase<{ [key: number]: T }> {
     readonly length: number;
 }
 
-export interface CfgObjectNode<T extends object> {
+export interface CfgObjectNode<T extends object> extends CfgNodeBase<T> {
     readonly type: 'object';
     getValue: <K extends KeyOf<T>>(key: K) => ValueOf<T, K> | undefined;
     getNode: <K extends KeyOf<T>>(key: K) => RCfgNode<ValueOf<T, K>> | undefined;
@@ -87,4 +90,20 @@ export function createNodeValue<T>(value: T, comment?: string, commentBefore?: s
         commentBefore: commentBefore ?? undefined,
         [nodeValueSymbol]: true,
     };
+}
+
+export function isCfgArrayNode<T>(node: CfgArrayNode<T> | CfgNodeBase<unknown> | undefined): node is CfgArrayNode<T> {
+    return node?.type === 'array';
+}
+
+export function isCfgObjectNode<T extends object>(
+    node: CfgObjectNode<T> | CfgNodeBase<unknown> | undefined,
+): node is CfgObjectNode<T> {
+    return node?.type === 'object';
+}
+
+export function isCfgScalarNode<T extends ScalarValue>(
+    node: CfgNodeBase<T> | CfgNodeBase<unknown> | undefined,
+): node is CfgScalarNode<T> {
+    return (node && node.type === 'scalar' && (typeof node.value !== 'object' || node.value === null)) || false;
 }

@@ -5,4 +5,5 @@ export interface InitOptions {
     locale?: string;
     comments?: boolean;
     schema?: boolean;
+    dictionary?: string[];
 }

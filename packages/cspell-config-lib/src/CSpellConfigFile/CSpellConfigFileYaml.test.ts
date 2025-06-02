@@ -3,7 +3,7 @@ import assert from 'node:assert';
 import { describe, expect, test } from 'vitest';
 
 import { createTextFile, TextFile } from '../TextFile.js';
-import { createNodeValue } from '../UpdateConfig/CfgTree.js';
+import { createNodeValue, isCfgArrayNode, isCfgObjectNode, isCfgScalarNode } from '../UpdateConfig/CfgTree.js';
 import { unindent } from '../util/unindent.js';
 import { CSpellConfigFileYaml, parseCSpellConfigFileYaml } from './CSpellConfigFileYaml.js';
 
@@ -330,6 +330,44 @@ describe('CSpellConfigFileYaml', () => {
             comment: undefined,
             commentBefore: ' Top Comment Block',
         });
+
+        expect(isCfgArrayNode(config.getNode('words'))).toBe(true);
+        expect(isCfgArrayNode(config.getNode('language'))).toBe(false);
+    });
+
+    test('getNode', () => {
+        const example = unindent`\
+            # Top Comment Block
+            name: cspell.config.yaml
+            version: '0.2' # file version
+            language: en # the locale to use.
+            # Before object
+            # Comment for words
+            words:
+                # This is a comment
+                - banana # Inline 0
+                # Before 1
+                - apple # Inline 1
+                # Before 2
+                - cabbage
+                - date
+
+                # Section two
+                - eggplant # Inline "eggplant"
+            enabledFileTypes:
+                javaScript: true
+                python: false
+
+            # After object
+        `;
+
+        const config = parseCSpellConfigFileYaml(asTextFile(example));
+
+        expect(isCfgArrayNode(config.getNode('words'))).toBe(true);
+        expect(isCfgArrayNode(config.getNode('languageSettings', []))).toBe(true);
+        expect(isCfgArrayNode(config.getNode('language'))).toBe(false);
+        expect(isCfgObjectNode(config.getNode('enabledFileTypes'))).toBe(true);
+        expect(isCfgScalarNode(config.getNode('language'))).toBe(true);
     });
 
     test('getNode / setNode', () => {

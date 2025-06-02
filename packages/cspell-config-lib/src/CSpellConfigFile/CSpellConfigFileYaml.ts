@@ -99,9 +99,24 @@ export class CSpellConfigFileYaml extends MutableCSpellConfigFile {
         return getYamlNode(this.yamlDoc, key);
     }
 
-    getNode<K extends keyof S>(key: K): RCfgNode<ValueOf1<CSpellSettings, K>> | undefined {
-        const yNode = this.#getNode(key);
-        if (!yNode) return undefined;
+    getNode<K extends keyof S>(key: K): RCfgNode<ValueOf1<S, K>> | undefined;
+    getNode<K extends keyof S>(
+        key: K,
+        defaultValue: Exclude<ValueOf1<S, K>, undefined>,
+    ): Exclude<RCfgNode<ValueOf1<S, K>>, undefined>;
+    getNode<K extends keyof S>(key: K, defaultValue: ValueOf1<S, K> | undefined): RCfgNode<ValueOf1<S, K>> | undefined;
+    getNode<K extends keyof S>(
+        key: K,
+        defaultValue?: ValueOf1<CSpellSettings, K>,
+    ): RCfgNode<ValueOf1<CSpellSettings, K>> | undefined {
+        let yNode = this.#getNode(key);
+        if (!yNode) {
+            if (defaultValue === undefined) {
+                return undefined;
+            }
+            yNode = this.yamlDoc.createNode(defaultValue);
+            this.yamlDoc.set(key, yNode);
+        }
         return toConfigNode(this.yamlDoc, yNode) as RCfgNode<ValueOf1<CSpellSettings, K>>;
     }
 

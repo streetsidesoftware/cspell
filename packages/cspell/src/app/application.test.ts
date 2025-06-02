@@ -148,7 +148,7 @@ describe('Validate createInit', () => {
     test('createInit', async () => {
         async function worked() {
             try {
-                await App.createInit({});
+                await App.createInit({ output: 'temp', format: 'yaml', locale: 'en-GB' });
             } catch {
                 return false;
             }

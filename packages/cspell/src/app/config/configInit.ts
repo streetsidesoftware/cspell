@@ -1,11 +1,9 @@
 import fs from 'node:fs/promises';
-import { createRequire } from 'node:module';
-import { fileURLToPath } from 'node:url';
 
-import { toFileDirURL, toFileURL, urlRelative } from '@cspell/url';
+import { toFileDirURL, toFileURL } from '@cspell/url';
 import { createReaderWriter, CSpellConfigFile, CSpellConfigFileReaderWriter } from 'cspell-config-lib';
 
-import { toError } from '../util/errors.js';
+import { addDictionariesToConfigFile, addImportsToConfigFile, setConfigFieldValue } from './adjustConfig.js';
 import type { InitOptions } from './options.js';
 
 const schemaRef = 'https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json';
@@ -88,65 +86,20 @@ export async function configInit(options: InitOptions): Promise<void> {
     await rw.writeConfig(configFile);
 }
 
-async function fileExists(url: URL): Promise<boolean> {
-    try {
-        const stats = await fs.stat(url);
-        return stats.isFile();
-    } catch (e) {
-        const err = toError(e);
-        if (err.code === 'ENOENT') return false;
-        throw e;
-    }
-}
-
 async function applyOptionsToConfigFile(configFile: CSpellConfigFile, options: InitOptions): Promise<CSpellConfigFile> {
-    const settings = configFile.settings;
-
     if (options.locale) {
-        settings.language = options.locale;
+        setConfigFieldValue(configFile, 'language', options.locale);
     }
 
     if (options.import) {
-        await resolveImports(configFile, options.import);
+        await addImportsToConfigFile(configFile, options.import);
+    }
+
+    if (options.dictionary) {
+        addDictionariesToConfigFile(configFile, options.dictionary);
     }
 
     return configFile;
-}
-
-async function resolveImports(configFile: CSpellConfigFile, imports: string[]) {
-    const fromConfigDir = new URL('./', configFile.url);
-    const fromCurrentDir = toFileDirURL('./');
-    const require = createRequire(fromConfigDir);
-
-    function isPackageName(name: string): boolean {
-        try {
-            require.resolve(name, { paths: [fileURLToPath(fromConfigDir)] });
-            return true;
-        } catch {
-            return false;
-        }
-    }
-
-    const settings = configFile.settings;
-    settings.import ??= [];
-    const _imports = (settings.import = typeof settings.import === 'string' ? [settings.import] : settings.import);
-
-    for (const imp of imports) {
-        const url = new URL(imp, fromCurrentDir);
-        if (url.protocol !== 'file:') {
-            _imports.push(imp);
-            continue;
-        }
-        if (await fileExists(url)) {
-            _imports.push(urlRelative(fromConfigDir, url));
-            continue;
-        }
-        if (isPackageName(imp)) {
-            _imports.push(imp);
-            continue;
-        }
-        throw new Error(`Cannot resolve import: ${imp}`);
-    }
 }
 
 function determineFileNameURL(options: InitOptions): URL {
@@ -177,6 +130,22 @@ function determineDefaultFileName(options: InitOptions): string {
     throw new Error(`Unsupported format: ${options.format}`);
 }
 
+function getDefaultContent(options: InitOptions): string {
+    switch (options.format) {
+        case undefined:
+        case 'yaml': {
+            return defaultConfigYaml;
+        }
+        case 'json':
+        case 'jsonc': {
+            return defaultConfigJson;
+        }
+        default: {
+            throw new Error(`Unsupported format: ${options.format}`);
+        }
+    }
+}
+
 async function createConfigFile(
     rw: CSpellConfigFileReaderWriter,
     url: URL,
@@ -186,22 +155,7 @@ async function createConfigFile(
         return rw.readConfig(url);
     }
 
-    const stats = await fs.stat(url).catch(() => undefined);
-    if (stats) {
-        throw new Error(`File already exists: ${url}`);
-    }
+    const content = await fs.readFile(url, 'utf8').catch(() => getDefaultContent(options));
 
-    switch (options.format) {
-        case undefined:
-        case 'yaml': {
-            return rw.parse({ url, content: defaultConfigYaml });
-        }
-        case 'json':
-        case 'jsonc': {
-            return rw.parse({ url, content: defaultConfigJson });
-        }
-        default: {
-            throw new Error(`Unsupported format: ${options.format}`);
-        }
-    }
+    return rw.parse({ url, content });
 }

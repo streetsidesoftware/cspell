@@ -1,7 +1,7 @@
 import type { CSpellSettings } from '@cspell/cspell-types';
 
 import type { ValueOf1 } from './types.js';
-import type { CfgNode } from './UpdateConfig/CfgTree.js';
+import type { RCfgNode } from './UpdateConfig/CfgTree.js';
 
 export type { CfgNode } from './UpdateConfig/CfgTree.js';
 
@@ -72,7 +72,15 @@ export abstract class MutableCSpellConfigFile extends CSpellConfigFile {
 
     abstract setValue<K extends keyof S>(key: K, value: ValueOf1<S, K>): this;
     abstract getValue<K extends keyof S>(key: K): ValueOf1<S, K> | undefined;
-    abstract getNode<K extends keyof S>(key: K): CfgNode<ValueOf1<S, K>> | undefined;
+    abstract getNode<K extends keyof S>(key: K): RCfgNode<ValueOf1<S, K>> | undefined;
+    abstract getNode<K extends keyof S>(
+        key: K,
+        defaultValue: Exclude<ValueOf1<S, K>, undefined>,
+    ): Exclude<RCfgNode<ValueOf1<S, K>>, undefined>;
+    abstract getNode<K extends keyof S>(
+        key: K,
+        defaultValue: ValueOf1<S, K> | undefined,
+    ): RCfgNode<ValueOf1<S, K>> | undefined;
 }
 
 export abstract class ImplCSpellConfigFile extends CSpellConfigFile {
