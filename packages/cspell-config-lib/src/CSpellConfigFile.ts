@@ -61,6 +61,14 @@ export abstract class CSpellConfigFile implements ICSpellConfigFile {
      */
     abstract setSchema(schema: string): this;
 
+    /**
+     *
+     * @param key - the field to set the comment for.
+     * @param comment - the comment to set.
+     * @param inline - if true, the comment will be set as an inline comment.
+     */
+    abstract setComment(key: keyof CSpellSettings, comment: string, inline?: boolean): this;
+
     get readonly(): boolean {
         return this.settings.readonly || this.url.protocol !== 'file:';
     }
@@ -121,6 +129,12 @@ export abstract class ImplCSpellConfigFile extends CSpellConfigFile {
         const w = this.settings.words || [];
         this.settings.words = w;
         addUniqueWordsToListAndSort(w, words);
+        return this;
+    }
+
+    setComment(_key: keyof CSpellSettings, _comment: string, _inline?: boolean): this {
+        if (this.readonly) throw new Error(`Config file is readonly: ${this.url.href}`);
+        // do nothing
         return this;
     }
 }

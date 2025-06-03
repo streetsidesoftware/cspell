@@ -319,18 +319,22 @@ describe('CSpellConfigFileYaml', () => {
         expect(config.getNode('words')?.getNode(4)).toEqual(
             oc({ comment: ' Inline "eggplant"', commentBefore: ' Section two' }),
         );
-        expect(config.getFieldNode('words')).toEqual({
-            value: 'words',
-            type: 'scalar',
-            comment: undefined,
-            commentBefore: ' Before object\n Comment for words',
-        });
-        expect(config.getFieldNode('name')).toEqual({
-            value: 'name',
-            type: 'scalar',
-            comment: undefined,
-            commentBefore: ' Top Comment Block',
-        });
+        expect(config.getFieldNode('words')).toEqual(
+            oc({
+                value: 'words',
+                type: 'scalar',
+                comment: undefined,
+                commentBefore: ' Before object\n Comment for words',
+            }),
+        );
+        expect(config.getFieldNode('name')).toEqual(
+            oc({
+                value: 'name',
+                type: 'scalar',
+                comment: undefined,
+                commentBefore: ' Top Comment Block',
+            }),
+        );
 
         expect(isCfgArrayNode(config.getNode('words'))).toBe(true);
         expect(isCfgArrayNode(config.getNode('language'))).toBe(false);
@@ -417,7 +421,7 @@ describe('CSpellConfigFileYaml', () => {
         `);
     });
 
-    test('setSChema', () => {
+    test('setSchema', () => {
         const yamlContent = unindent`\
             # yaml-language-server: $schema=https://x.cpsell.org/cspell.schema.json
 
@@ -450,6 +454,49 @@ describe('CSpellConfigFileYaml', () => {
                 - date
 
                 - eggplant
+        `);
+    });
+
+    test('setComment', () => {
+        const yamlContent = unindent`\
+            # yaml-language-server: $schema=https://x.cpsell.org/cspell.schema.json
+
+            name: cspell.config.yaml
+            version: '0.2'
+            language: en
+            # Before words
+            words:
+                - banana
+                - apple
+                - cabbage
+                - date
+
+                - eggplant
+            ignorePaths: [ node_modules, dist, build ]
+        `;
+
+        const config = parseCSpellConfigFileYaml(asTextFile(yamlContent));
+        config.setComment('words', ' Before WORDS');
+        config.setComment('words', ' Inline WORDS', true);
+        config.setComment('ignorePaths', ' Inline IGNORE_PATHS', true);
+        config.setComment('ignorePaths', ' Ignore files based upon glob patterns.');
+        expect(config.serialize()).toEqual(unindent`\
+            # yaml-language-server: $schema=https://x.cpsell.org/cspell.schema.json
+
+            name: cspell.config.yaml
+            version: '0.2'
+            language: en
+            # Before WORDS
+            words: # Inline WORDS
+                - banana
+                - apple
+                - cabbage
+                - date
+
+                - eggplant
+            # Ignore files based upon glob patterns.
+            ignorePaths: # Inline IGNORE_PATHS
+                [ node_modules, dist, build ]
         `);
     });
 

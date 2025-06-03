@@ -34,6 +34,19 @@ export class CSpellConfigFileJson extends ImplCSpellConfigFile {
         return this;
     }
 
+    setComment(field: keyof CSpellSettings, comment: string, inline?: boolean): this {
+        const prefix = inline ? 'after:' : 'before:';
+        const symbolKey = Symbol.for(prefix + field);
+        const token = {
+            type: 'LineComment',
+            value: comment,
+            inline,
+        };
+        const settings: Record<symbol, unknown> = this.settings as Record<symbol, unknown>;
+        settings[symbolKey] = [token];
+        return this;
+    }
+
     public static parse(file: TextFile): CSpellConfigFileJson {
         try {
             const cspell: CSpellSettings | unknown = parse(file.content);

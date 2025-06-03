@@ -199,4 +199,12 @@ class Cfg extends CSpellConfigFile {
     addWords(_words: string[]): this {
         return this;
     }
+
+    setComment(_key: keyof CSpellSettings, _comment: string, _inline?: boolean): this {
+        if (this.readonly) {
+            throw new Error(`Config file is readonly: ${this.url.href}`);
+        }
+        // do nothing
+        return this;
+    }
 }

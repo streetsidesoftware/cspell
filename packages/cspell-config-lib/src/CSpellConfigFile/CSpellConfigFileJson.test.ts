@@ -92,6 +92,39 @@ describe('CSpellConfigFileJson', () => {
         `);
     });
 
+    test('setComment', () => {
+        const json = unindent`\
+            {
+                // This is a comment
+                "name": "example",
+                "language": "en",
+                "ignoreWords": [
+                    "foo",
+                    "bar"
+                ]
+            }
+        `;
+        const file = createTextFile(url, json);
+        const configFile = CSpellConfigFileJson.parse(file);
+
+        configFile.setComment('language', ' After "language"', true);
+        configFile.setComment('language', ' Language is important');
+
+        const serialized = configFile.serialize();
+        expect(serialized).toEqual(unindent`\
+            {
+                // This is a comment
+                "name": "example",
+                // Language is important
+                "language": "en", // After "language"
+                "ignoreWords": [
+                    "foo",
+                    "bar"
+                ]
+            }
+        `);
+    });
+
     test('should throw an error when parsing an invalid JSON file', () => {
         const json = `{
             "language": "en",
