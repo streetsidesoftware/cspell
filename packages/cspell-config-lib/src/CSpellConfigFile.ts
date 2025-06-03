@@ -48,6 +48,19 @@ export abstract class CSpellConfigFile implements ICSpellConfigFile {
      */
     abstract addWords(words: string[]): this;
 
+    /**
+     * Tell the config file to remove all comments.
+     * This is useful when the config file is being serialized and comments are not needed.
+     * @returns this - the config file.
+     */
+    abstract removeAllComments(): this;
+
+    /**
+     * Configure the jason.schema for the config file.
+     * @param schema - The schema to set for the config file.
+     */
+    abstract setSchema(schema: string): this;
+
     get readonly(): boolean {
         return this.settings.readonly || this.url.protocol !== 'file:';
     }
@@ -91,6 +104,18 @@ export abstract class ImplCSpellConfigFile extends CSpellConfigFile {
         super(url);
     }
 
+    setSchema(_schema: string): this {
+        return this;
+    }
+
+    removeAllComments(): this {
+        if (this.readonly) {
+            throw new Error(`Config file is readonly: ${this.url.href}`);
+        }
+        // do nothing
+        return this;
+    }
+
     addWords(words: string[]): this {
         if (this.readonly) throw new Error(`Config file is readonly: ${this.url.href}`);
         const w = this.settings.words || [];
@@ -129,6 +154,9 @@ export function satisfiesCSpellConfigFile(obj: unknown): obj is ICSpellConfigFil
             typeof obj.settings === 'object');
     return r;
 }
+
+export const cspellConfigFileSchema =
+    'https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json';
 
 export const __testing__ = {
     addUniqueWordsToListAndSort,

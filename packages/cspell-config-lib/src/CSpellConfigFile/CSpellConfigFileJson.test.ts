@@ -1,6 +1,8 @@
 import { describe, expect, test } from 'vitest';
 
+import { cspellConfigFileSchema } from '../CSpellConfigFile.js';
 import { createTextFile } from '../TextFile.js';
+import { unindent } from '../util/unindent.js';
 import { CSpellConfigFileJson } from './CSpellConfigFileJson.js';
 
 describe('CSpellConfigFileJson', () => {
@@ -36,6 +38,58 @@ describe('CSpellConfigFileJson', () => {
 
         const serialized = configFile.serialize();
         expect(serialized).toEqual(expect.stringContaining('// This is a comment'));
+    });
+
+    test('remove all comments', () => {
+        const json = unindent`\
+            {
+                // This is a comment
+                "language": "en", // Another comment
+                "ignoreWords": ["foo", "bar"]
+            }
+        `;
+        const file = createTextFile(url, json);
+        const configFile = CSpellConfigFileJson.parse(file);
+
+        configFile.removeAllComments();
+
+        const serialized = configFile.serialize();
+        expect(serialized).toEqual(unindent`\
+            {
+                "language": "en",
+                "ignoreWords": [
+                    "foo",
+                    "bar"
+                ]
+            }
+        `);
+    });
+
+    test('set schema', () => {
+        const json = unindent`\
+            {
+                // This is a comment
+                "language": "en", // Another comment
+                "ignoreWords": ["foo", "bar"]
+            }
+        `;
+        const file = createTextFile(url, json);
+        const configFile = CSpellConfigFileJson.parse(file);
+
+        configFile.setSchema(cspellConfigFileSchema);
+
+        const serialized = configFile.serialize();
+        expect(serialized).toEqual(unindent`\
+            {
+                // This is a comment
+                "language": "en", // Another comment
+                "ignoreWords": [
+                    "foo",
+                    "bar"
+                ],
+                "$schema": "${cspellConfigFileSchema}"
+            }
+        `);
     });
 
     test('should throw an error when parsing an invalid JSON file', () => {

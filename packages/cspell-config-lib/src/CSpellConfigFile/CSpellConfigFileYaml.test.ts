@@ -2,6 +2,7 @@ import assert from 'node:assert';
 
 import { describe, expect, test } from 'vitest';
 
+import { cspellConfigFileSchema } from '../CSpellConfigFile.js';
 import { createTextFile, TextFile } from '../TextFile.js';
 import { createNodeValue, isCfgArrayNode, isCfgObjectNode, isCfgScalarNode } from '../UpdateConfig/CfgTree.js';
 import { unindent } from '../util/unindent.js';
@@ -413,6 +414,64 @@ describe('CSpellConfigFileYaml', () => {
             language: en-US # the locale to use.
 
             # After object
+        `);
+    });
+
+    test('setSChema', () => {
+        const yamlContent = unindent`\
+            # yaml-language-server: $schema=https://x.cpsell.org/cspell.schema.json
+
+            name: cspell.config.yaml
+            version: '0.2'
+            language: en
+            # Before words
+            words:
+                - banana
+                - apple
+                - cabbage
+                - date
+
+                - eggplant
+        `;
+
+        const config = parseCSpellConfigFileYaml(asTextFile(yamlContent));
+        config.setSchema(cspellConfigFileSchema);
+        expect(config.serialize()).toEqual(unindent`\
+            # yaml-language-server: $schema=${cspellConfigFileSchema}
+
+            name: cspell.config.yaml
+            version: '0.2'
+            language: en
+            # Before words
+            words:
+                - banana
+                - apple
+                - cabbage
+                - date
+
+                - eggplant
+        `);
+    });
+
+    test('removeAllComments', () => {
+        const yamlContent = example();
+
+        const config = parseCSpellConfigFileYaml(asTextFile(yamlContent));
+        config.removeAllComments();
+        config.setSchema(cspellConfigFileSchema);
+        expect(config.serialize()).toEqual(unindent`\
+            # yaml-language-server: $schema=${cspellConfigFileSchema}
+
+            name: cspell.config.yaml
+            version: '0.2'
+            language: en
+            words:
+                - banana
+                - apple
+                - cabbage
+                - date
+
+                - eggplant
         `);
     });
 });

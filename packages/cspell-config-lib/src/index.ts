@@ -1,6 +1,11 @@
 export { createReaderWriter } from './createReaderWriter.js';
 export type { ICSpellConfigFile } from './CSpellConfigFile.js';
-export { CSpellConfigFile, MutableCSpellConfigFile, satisfiesCSpellConfigFile } from './CSpellConfigFile.js';
+export {
+    CSpellConfigFile,
+    cspellConfigFileSchema,
+    MutableCSpellConfigFile,
+    satisfiesCSpellConfigFile,
+} from './CSpellConfigFile.js';
 export {
     CSpellConfigFileInMemory,
     CSpellConfigFileJavaScript,

@@ -13,6 +13,7 @@ import {
     parseDocument,
     Scalar,
     stringify,
+    visit as yamlWalkAst,
     YAMLMap,
     YAMLSeq,
 } from 'yaml';
@@ -36,7 +37,7 @@ import { ParseError } from './Errors.js';
 type S = CSpellSettings;
 
 export class CSpellConfigFileYaml extends MutableCSpellConfigFile {
-    #settings: CSpellSettings;
+    #settings: CSpellSettings | undefined = undefined;
 
     constructor(
         readonly url: URL,
@@ -44,11 +45,12 @@ export class CSpellConfigFileYaml extends MutableCSpellConfigFile {
         readonly indent: number,
     ) {
         super(url);
-        this.#settings = yamlDoc.toJS();
+        // Set the initial settings from the YAML document.
+        this.#settings = this.yamlDoc.toJS() as CSpellSettings;
     }
 
     get settings(): CSpellSettings {
-        return this.#settings;
+        return this.#settings ?? (this.yamlDoc.toJS() as CSpellSettings);
     }
 
     addWords(wordsToAdd: string[]): this {
@@ -65,7 +67,7 @@ export class CSpellConfigFileYaml extends MutableCSpellConfigFile {
         sorted.forEach((item, index) => cfgWords.set(index, item));
         cfgWords.items.length = sorted.length;
         this.yamlDoc.set('words', cfgWords);
-        this.#settings = this.yamlDoc.toJS();
+        this.#markAsMutable();
         return this;
     }
 
@@ -86,7 +88,7 @@ export class CSpellConfigFileYaml extends MutableCSpellConfigFile {
         } else {
             this.yamlDoc.set(key, value);
         }
-        this.#settings = this.yamlDoc.toJS();
+        this.#markAsMutable();
         return this;
     }
 
@@ -117,6 +119,7 @@ export class CSpellConfigFileYaml extends MutableCSpellConfigFile {
             yNode = this.yamlDoc.createNode(defaultValue);
             this.yamlDoc.set(key, yNode);
         }
+        this.#markAsMutable();
         return toConfigNode(this.yamlDoc, yNode) as RCfgNode<ValueOf1<CSpellSettings, K>>;
     }
 
@@ -140,7 +143,7 @@ export class CSpellConfigFileYaml extends MutableCSpellConfigFile {
     delete(key: keyof S): boolean {
         const removed = this.yamlDoc.delete(key);
         if (removed) {
-            this.#settings = this.yamlDoc.toJS();
+            this.#markAsMutable();
         }
         return removed;
     }
@@ -154,8 +157,39 @@ export class CSpellConfigFileYaml extends MutableCSpellConfigFile {
         this.yamlDoc.comment = comment ?? null;
     }
 
-    removeAllComments(): void {
-        this.yamlDoc;
+    setSchema(schemaRef: string): this {
+        let commentBefore = this.yamlDoc.commentBefore || '';
+        commentBefore = commentBefore.replace(/^ yaml-language-server: \$schema=.*\n?/m, '');
+        commentBefore = ` yaml-language-server: $schema=${schemaRef}` + (commentBefore ? '\n' + commentBefore : '');
+        this.yamlDoc.commentBefore = commentBefore;
+        if (this.getNode('$schema')) {
+            this.setValue('$schema', schemaRef);
+        }
+        return this;
+    }
+
+    removeAllComments(): this {
+        const doc = this.yamlDoc;
+        // eslint-disable-next-line unicorn/no-null
+        doc.comment = null;
+        // eslint-disable-next-line unicorn/no-null
+        doc.commentBefore = null;
+        yamlWalkAst(this.yamlDoc, (_, node) => {
+            if (!(isScalar(node) || isMap(node) || isSeq(node))) return;
+            // eslint-disable-next-line unicorn/no-null
+            node.comment = null;
+            // eslint-disable-next-line unicorn/no-null
+            node.commentBefore = null;
+        });
+        return this;
+    }
+
+    /**
+     * Marks the config file as mutable. Any access to settings will the settings to be regenerated
+     * from the YAML document.
+     */
+    #markAsMutable() {
+        this.#settings = undefined;
     }
 
     static parse(file: TextFile): CSpellConfigFileYaml {

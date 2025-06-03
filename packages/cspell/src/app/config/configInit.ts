@@ -1,16 +1,20 @@
 import fs from 'node:fs/promises';
 
 import { toFileDirURL, toFileURL } from '@cspell/url';
-import { createReaderWriter, CSpellConfigFile, CSpellConfigFileReaderWriter } from 'cspell-config-lib';
+import {
+    createReaderWriter,
+    CSpellConfigFile,
+    CSpellConfigFileReaderWriter,
+    cspellConfigFileSchema,
+} from 'cspell-config-lib';
 
 import { addDictionariesToConfigFile, addImportsToConfigFile, setConfigFieldValue } from './adjustConfig.js';
 import type { InitOptions } from './options.js';
 
-const schemaRef = 'https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json';
+const schemaRef = cspellConfigFileSchema;
 
 const defaultConfigJson = `\
 {
-    "$schema": "${schemaRef}",
     "version": "0.2",
     // The name of the configuration. Use for display purposes only.
     // "name": "CSpell Configuration",
@@ -38,8 +42,6 @@ const defaultConfigJson = `\
 `;
 
 const defaultConfigYaml = `\
-# yaml-language-server: $schema=${schemaRef}
-
 version: '0.2'
 
 # The name of the configuration. Use for display purposes only.
@@ -48,32 +50,7 @@ version: '0.2'
 # The locale to use when spell checking.
 language: en
 
-# A description of the configuration.
-# description: ''
 
-# Configuration or packages to import.
-import: []
-
-# Define user dictionaries.
-dictionaryDefinitions: []
-
-# Enable the dictionaries.
-dictionaries: []
-
-# Glob patterns of files to be skipped.
-ignorePaths: []
-
-# Words to be considered correct.
-# words: []
-
-# Words to be ignored.
-ignoreWords: []
-
-# Words to be flagged as incorrect.
-flagWords: []
-
-# Set configuration based upon file globs.
-# overrides: []
 `;
 
 export async function configInit(options: InitOptions): Promise<void> {
@@ -88,6 +65,14 @@ export async function configInit(options: InitOptions): Promise<void> {
 }
 
 async function applyOptionsToConfigFile(configFile: CSpellConfigFile, options: InitOptions): Promise<CSpellConfigFile> {
+    if (options.comments === false) {
+        configFile.removeAllComments();
+    }
+
+    if (options.schema ?? true) {
+        configFile.setSchema(schemaRef);
+    }
+
     if (options.locale) {
         setConfigFieldValue(configFile, 'language', options.locale);
     }

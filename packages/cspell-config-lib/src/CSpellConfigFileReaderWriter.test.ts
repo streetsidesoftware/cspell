@@ -186,6 +186,16 @@ class Cfg extends CSpellConfigFile {
         super(url);
     }
 
+    removeAllComments(): this {
+        // No comments to remove in this mock.
+        return this;
+    }
+
+    setSchema(schema: string): this {
+        this.settings.$schema = schema;
+        return this;
+    }
+
     addWords(_words: string[]): this {
         return this;
     }
