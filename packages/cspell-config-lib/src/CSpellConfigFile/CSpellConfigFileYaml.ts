@@ -5,6 +5,7 @@ import {
     type Document as YamlDocument,
     isAlias,
     isMap,
+    isNode,
     isPair,
     isScalar,
     isSeq,
@@ -66,7 +67,7 @@ export class CSpellConfigFileYaml extends MutableCSpellConfigFile {
         const sorted = sortWords(cfgWords.items);
         sorted.forEach((item, index) => cfgWords.set(index, item));
         cfgWords.items.length = sorted.length;
-        this.yamlDoc.set('words', cfgWords);
+        this.#setValue('words', cfgWords);
         this.#markAsMutable();
         return this;
     }
@@ -81,12 +82,12 @@ export class CSpellConfigFileYaml extends MutableCSpellConfigFile {
             if (!node) {
                 node = this.yamlDoc.createNode(value.value);
                 setYamlNodeComments(node, value);
-                this.yamlDoc.set(key, node);
+                this.#setValue(key, node);
             } else {
                 setYamlNodeValue(node, value);
             }
         } else {
-            this.yamlDoc.set(key, value);
+            this.#setValue(key, value);
         }
         this.#markAsMutable();
         return this;
@@ -117,7 +118,7 @@ export class CSpellConfigFileYaml extends MutableCSpellConfigFile {
                 return undefined;
             }
             yNode = this.yamlDoc.createNode(defaultValue);
-            this.yamlDoc.set(key, yNode);
+            this.#setValue(key, yNode);
         }
         this.#markAsMutable();
         return toConfigNode(this.yamlDoc, yNode) as RCfgNode<ValueOf1<CSpellSettings, K>>;
@@ -129,7 +130,8 @@ export class CSpellConfigFileYaml extends MutableCSpellConfigFile {
             return undefined;
         }
 
-        const pair = findPair(contents, key as string);
+        const found = findPair(contents, key as string);
+        const pair = found && this.#fixPair(found);
         if (!pair) {
             return undefined;
         }
@@ -203,6 +205,26 @@ export class CSpellConfigFileYaml extends MutableCSpellConfigFile {
      */
     #markAsMutable() {
         this.#settings = undefined;
+    }
+
+    #setValue(key: string | Scalar<string>, value: unknown | YamlNode): void {
+        this.yamlDoc.set(key, value);
+        const contents = this.yamlDoc.contents;
+        assert(isMap(contents), 'Expected contents to be a YAMLMap');
+        const pair = findPair(contents, key);
+        assert(pair, `Expected pair for key: ${String(key)}`);
+        this.#fixPair(pair);
+    }
+
+    #toNode<T>(value: T | YamlNode): YamlNode<T> {
+        return (isNode(value) ? value : this.yamlDoc.createNode(value)) as YamlNode<T>;
+    }
+
+    #fixPair(pair: Pair<YamlNode | string, YamlNode>): Pair<Scalar<string>, YamlNode> | undefined {
+        assert(isPair(pair), 'Expected pair to be a Pair');
+        pair.key = this.#toNode(pair.key);
+        pair.value = this.#toNode(pair.value);
+        return pair as Pair<Scalar<string>, YamlNode>;
     }
 
     static parse(file: TextFile): CSpellConfigFileYaml {
@@ -610,11 +632,15 @@ function setYamlNodeValue<T>(yamlNode: YamlNode, nodeValue: NodeValue<T>): void 
     throw new Error(`Unsupported YAML node type: ${yamlNodeType(yamlNode)}`);
 }
 
-function findPair(yNode: YamlNode, key: string): Pair<Scalar<string>, YamlNode> | undefined {
+function findPair(yNode: YamlNode, yKey: string | Scalar<string>): Pair<Scalar<string> | string, YamlNode> | undefined {
+    const key = isScalar(yKey) ? yKey.value : yKey;
     if (!isMap(yNode)) return undefined;
-    const items = yNode.items as Pair<YamlNode, YamlNode>[];
+    const items = yNode.items as Pair<YamlNode | string, YamlNode>[];
     for (const item of items) {
         if (!isPair(item)) continue;
+        if (item.key === key) {
+            return item as Pair<string, YamlNode>;
+        }
         if (isScalar(item.key) && item.key.value === key) {
             return item as Pair<Scalar<string>, YamlNode>;
         }

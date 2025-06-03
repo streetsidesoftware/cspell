@@ -207,4 +207,12 @@ class Cfg extends CSpellConfigFile {
         // do nothing
         return this;
     }
+
+    setValue<K extends keyof CSpellSettings>(key: K, value: CSpellSettings[K]): this {
+        if (this.readonly) {
+            throw new Error(`Config file is readonly: ${this.url.href}`);
+        }
+        this.settings[key] = value;
+        return this;
+    }
 }

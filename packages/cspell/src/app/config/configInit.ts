@@ -1,5 +1,6 @@
 import fs from 'node:fs/promises';
 
+import type { CSpellSettings } from '@cspell/cspell-types';
 import { toFileDirURL, toFileURL } from '@cspell/url';
 import {
     createReaderWriter,
@@ -13,44 +14,37 @@ import type { InitOptions } from './options.js';
 
 const schemaRef = cspellConfigFileSchema;
 
+const defaultConfig: CommentConfig = {
+    $schema: { value: undefined, comment: ' The schema for the configuration file.' },
+    version: { value: '0.2', comment: ' The version of the configuration file format.' },
+    name: { value: undefined, comment: ' The name of the configuration. Use for display purposes only.' },
+    description: { value: undefined, comment: ' A description of the configuration.' },
+    language: { value: 'en', comment: ' The locale to use when spell checking.' },
+    import: { value: undefined, comment: ' Configuration or packages to import.' },
+    dictionaryDefinitions: { value: undefined, comment: ' Define user dictionaries.' },
+    dictionaries: { value: undefined, comment: ' Enable the dictionaries.' },
+    ignorePaths: { value: undefined, comment: ' Glob patterns of files to be skipped.' },
+    files: { value: undefined, comment: ' Glob patterns of files to be included.' },
+    words: { value: undefined, comment: ' Words to be considered correct.' },
+    ignoreWords: { value: undefined, comment: ' Words to be ignored.' },
+    flagWords: { value: undefined, comment: ' Words to be flagged as incorrect.' },
+    overrides: { value: undefined, comment: ' Set configuration based upon file globs.' },
+    languageSettings: { value: undefined, comment: ' Define language specific settings.' },
+    enabledFileTypes: { value: undefined, comment: ' Enable for specific file types.' },
+    caseSensitive: { value: false, comment: ' Enable case sensitive spell checking.' },
+    patterns: { value: undefined, comment: ' Regular expression patterns.' },
+    ignoreRegExpList: { value: undefined, comment: ' Regular expressions / patterns of text to be ignored.' },
+    includeRegExpList: { value: undefined, comment: ' Regular expressions / patterns of text to be included.' },
+};
+
 const defaultConfigJson = `\
 {
-    "version": "0.2",
-    // The name of the configuration. Use for display purposes only.
-    // "name": "CSpell Configuration",
-    // The locale to use when spell checking.
-    "language": "en",
-    // A description of the configuration.
-    // "description": "",
-    // Configuration or packages to import.
-    "import": [],
-    // Define user dictionaries.
-    "dictionaryDefinitions": [],
-    // Enable the dictionaries.
-    "dictionaries": [],
-    // Glob patterns of files to be skipped.
-    "ignorePaths": [],
-    // Words to be considered correct.
-    "words": [],
-    // Words to be ignored
-    "ignoreWords": [],
-    // Words to be flagged as incorrect.
-    "flagWords": [],
-    // Set configuration based upon file globs.
-    // "overrides": [],
 }
 `;
 
 const defaultConfigYaml = `\
+# The version of the configuration file format.
 version: '0.2'
-
-# The name of the configuration. Use for display purposes only.
-# "name": "CSpell Configuration"
-
-# The locale to use when spell checking.
-language: en
-
-
 `;
 
 export async function configInit(options: InitOptions): Promise<void> {
@@ -65,6 +59,10 @@ export async function configInit(options: InitOptions): Promise<void> {
 }
 
 async function applyOptionsToConfigFile(configFile: CSpellConfigFile, options: InitOptions): Promise<CSpellConfigFile> {
+    const settings: CSpellSettings = {};
+
+    const addComments = options.comments !== false;
+
     if (options.comments === false) {
         configFile.removeAllComments();
     }
@@ -74,15 +72,25 @@ async function applyOptionsToConfigFile(configFile: CSpellConfigFile, options: I
     }
 
     if (options.locale) {
-        setConfigFieldValue(configFile, 'language', options.locale);
+        settings.language = options.locale;
     }
 
+    applyValuesToConfigFile(configFile, settings, defaultConfig, addComments);
+
     if (options.import) {
-        await addImportsToConfigFile(configFile, options.import);
+        await addImportsToConfigFile(
+            configFile,
+            options.import,
+            (addComments && defaultConfig.import?.comment) || undefined,
+        );
     }
 
     if (options.dictionary) {
-        addDictionariesToConfigFile(configFile, options.dictionary);
+        addDictionariesToConfigFile(
+            configFile,
+            options.dictionary,
+            (addComments && defaultConfig.dictionaries?.comment) || undefined,
+        );
     }
 
     return configFile;
@@ -144,4 +152,36 @@ async function createConfigFile(
     const content = await fs.readFile(url, 'utf8').catch(() => getDefaultContent(options));
 
     return rw.parse({ url, content });
+}
+
+interface ConfigEntry<T, K extends keyof T> {
+    key?: K;
+    value: T[K];
+    comment?: string;
+}
+
+type CommentConfig = {
+    [K in keyof CSpellSettings]?: ConfigEntry<CSpellSettings, K>;
+};
+
+function applyValuesToConfigFile(
+    config: CSpellConfigFile,
+    settings: CSpellSettings,
+    defaultValues: CommentConfig,
+    addComments: boolean,
+): CSpellConfigFile {
+    const currentSettings = config.settings || {};
+    for (const [k, entry] of Object.entries(defaultValues)) {
+        const { value: defaultValue, comment } = entry;
+        const key = k as keyof CSpellSettings;
+        const newValue = settings[key];
+        const oldValue = currentSettings[key];
+        const value = newValue ?? oldValue ?? defaultValue;
+        if ((newValue === undefined && oldValue !== undefined) || value === undefined) {
+            continue;
+        }
+        const useComment = (addComments && oldValue === undefined && comment) || undefined;
+        setConfigFieldValue(config, key, value, useComment);
+    }
+    return config;
 }

@@ -60,7 +60,11 @@ export async function resolveImports(configFile: CSpellConfigFile, imports: stri
     return _imports;
 }
 
-function addImportsToMutableConfigFile(configFile: MutableCSpellConfigFile, resolvedImports: string[]) {
+function addImportsToMutableConfigFile(
+    configFile: MutableCSpellConfigFile,
+    resolvedImports: string[],
+    comment: string | undefined,
+) {
     let importNode = configFile.getNode('import', []);
     if (importNode.type === 'scalar') {
         configFile.setValue('import', [importNode.value]);
@@ -72,18 +76,28 @@ function addImportsToMutableConfigFile(configFile: MutableCSpellConfigFile, reso
         if (knownImports.has(imp)) continue;
         importNode.push(imp);
     }
+    if (comment) {
+        configFile.setComment('import', comment);
+    }
 }
 
-export async function addImportsToConfigFile(configFile: CSpellConfigFile, imports: string[]): Promise<void> {
+export async function addImportsToConfigFile(
+    configFile: CSpellConfigFile,
+    imports: string[],
+    comment: string | undefined,
+): Promise<void> {
     const resolvedImports = await resolveImports(configFile, imports);
     if (configFile instanceof MutableCSpellConfigFile) {
-        return addImportsToMutableConfigFile(configFile, resolvedImports);
+        return addImportsToMutableConfigFile(configFile, resolvedImports, comment);
     }
     const settings = configFile.settings;
     let importNode = settings.import;
     if (!Array.isArray(importNode)) {
         importNode = typeof importNode === 'string' ? [importNode] : [];
         settings.import = importNode;
+        if (comment) {
+            configFile.setComment('import', comment);
+        }
     }
     assert(Array.isArray(importNode));
     const knownImports = new Set(importNode);
@@ -97,17 +111,21 @@ export function setConfigFieldValue<K extends keyof CSpellSettings>(
     configFile: CSpellConfigFile,
     key: K,
     value: CSpellSettings[K],
+    comment?: string | undefined,
 ): void {
-    if (configFile instanceof MutableCSpellConfigFile) {
-        configFile.setValue(key, value);
-        return;
+    configFile.setValue(key, value);
+    if (comment !== undefined) {
+        configFile.setComment(key, comment);
     }
-    const settings = configFile.settings;
-    settings[key] = value;
 }
 
-export function addDictionariesToConfigFile(configFile: CSpellConfigFile, dictionaries: string[]): void {
+export function addDictionariesToConfigFile(
+    configFile: CSpellConfigFile,
+    dictionaries: string[],
+    comment?: string | undefined,
+): void {
     if (configFile instanceof MutableCSpellConfigFile) {
+        const found = configFile.getValue('dictionaries');
         const dicts = configFile.getNode('dictionaries', []);
         assert(isCfgArrayNode(dicts));
         const knownDicts = new Set(dicts.value);
@@ -116,6 +134,10 @@ export function addDictionariesToConfigFile(configFile: CSpellConfigFile, dictio
                 dicts.push(dict);
                 knownDicts.add(dict);
             }
+        }
+        if (!found && comment) {
+            // Set the comment on the field, not the list.
+            configFile.setComment('dictionaries', comment);
         }
         return;
     }
@@ -128,5 +150,5 @@ export function addDictionariesToConfigFile(configFile: CSpellConfigFile, dictio
             knownDicts.add(dict);
         }
     }
-    settings.dictionaries = dicts;
+    setConfigFieldValue(configFile, 'dictionaries', dicts, comment);
 }

@@ -61,6 +61,8 @@ export abstract class CSpellConfigFile implements ICSpellConfigFile {
      */
     abstract setSchema(schema: string): this;
 
+    abstract setValue<K extends keyof CSpellSettings>(key: K, value: CSpellSettings[K]): this;
+
     /**
      *
      * @param key - the field to set the comment for.
@@ -135,6 +137,12 @@ export abstract class ImplCSpellConfigFile extends CSpellConfigFile {
     setComment(_key: keyof CSpellSettings, _comment: string, _inline?: boolean): this {
         if (this.readonly) throw new Error(`Config file is readonly: ${this.url.href}`);
         // do nothing
+        return this;
+    }
+
+    setValue<K extends keyof CSpellSettings>(key: K, value: CSpellSettings[K]): this {
+        if (this.readonly) throw new Error(`Config file is readonly: ${this.url.href}`);
+        this.settings[key] = value;
         return this;
     }
 }
