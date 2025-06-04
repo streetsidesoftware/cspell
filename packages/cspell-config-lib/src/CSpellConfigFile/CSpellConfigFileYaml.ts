@@ -160,10 +160,22 @@ export class CSpellConfigFileYaml extends MutableCSpellConfigFile {
     }
 
     setSchema(schemaRef: string): this {
+        removeSchemaComment(this.yamlDoc);
         let commentBefore = this.yamlDoc.commentBefore || '';
         commentBefore = commentBefore.replace(/^ yaml-language-server: \$schema=.*\n?/m, '');
         commentBefore = ` yaml-language-server: $schema=${schemaRef}` + (commentBefore ? '\n' + commentBefore : '');
         this.yamlDoc.commentBefore = commentBefore;
+
+        // Remove any existing comment references that might be attached to the first field.
+        const contents = this.#getContentsMap();
+        const firstPair = contents.items[0];
+        if (firstPair && isPair(firstPair)) {
+            const key = firstPair.key;
+            if (isNode(key)) {
+                removeSchemaComment(key);
+            }
+        }
+
         if (this.getNode('$schema')) {
             this.setValue('$schema', schemaRef);
         }
@@ -209,8 +221,7 @@ export class CSpellConfigFileYaml extends MutableCSpellConfigFile {
 
     #setValue(key: string | Scalar<string>, value: unknown | YamlNode): void {
         this.yamlDoc.set(key, value);
-        const contents = this.yamlDoc.contents;
-        assert(isMap(contents), 'Expected contents to be a YAMLMap');
+        const contents = this.#getContentsMap();
         const pair = findPair(contents, key);
         assert(pair, `Expected pair for key: ${String(key)}`);
         this.#fixPair(pair);
@@ -220,11 +231,17 @@ export class CSpellConfigFileYaml extends MutableCSpellConfigFile {
         return (isNode(value) ? value : this.yamlDoc.createNode(value)) as YamlNode<T>;
     }
 
-    #fixPair(pair: Pair<YamlNode | string, YamlNode>): Pair<Scalar<string>, YamlNode> | undefined {
+    #fixPair(pair: Pair): Pair<Scalar<string>, YamlNode> | undefined {
         assert(isPair(pair), 'Expected pair to be a Pair');
         pair.key = this.#toNode(pair.key);
         pair.value = this.#toNode(pair.value);
         return pair as Pair<Scalar<string>, YamlNode>;
+    }
+
+    #getContentsMap(): YAMLMap {
+        const contents = this.yamlDoc.contents;
+        assert(isMap(contents), 'Expected contents to be a YAMLMap');
+        return contents as YAMLMap;
     }
 
     static parse(file: TextFile): CSpellConfigFileYaml {
@@ -646,4 +663,10 @@ function findPair(yNode: YamlNode, yKey: string | Scalar<string>): Pair<Scalar<s
         }
     }
     return undefined;
+}
+
+function removeSchemaComment(node: { commentBefore?: string | null }): void {
+    if (!node.commentBefore) return;
+    // eslint-disable-next-line unicorn/no-null
+    node.commentBefore = node.commentBefore?.replace(/^ yaml-language-server: \$schema=.*\n?/gm, '') ?? null;
 }
