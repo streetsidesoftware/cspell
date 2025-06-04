@@ -1,8 +1,6 @@
 import assert from 'node:assert';
 
-export interface Child<P extends CommentedCollectionNode> {
-    parent?: P | undefined;
-}
+const commentCollectionNode = Symbol.for('CommentedCollectionNode');
 
 export interface NodeComments {
     comment?: Comment | undefined;
@@ -10,7 +8,7 @@ export interface NodeComments {
 }
 
 export interface CommentedBaseNode extends NodeComments {
-    parent?: CommentedCollectionNode | undefined;
+    [commentCollectionNode]?: CommentedCollectionNode | undefined;
 }
 
 export interface CommentedScalar<T> extends CommentedBaseNode {
@@ -56,12 +54,12 @@ export interface CommentedCollectionNode extends CommentedBaseNode {
     readonly size: number;
 }
 
-type ChildNode<T, P extends CommentedCollectionNode> = CommentedNode<T> & Child<P>;
+type ChildNode<T> = CommentedNode<T>;
 
 export interface CommentedArrayNode<T> extends CommentedCollectionNode, Iterable<CommentedNode<T>> {
     readonly value: T[];
-    readonly items: ChildNode<T, this>[];
-    get(index: number): ChildNode<T, this> | undefined;
+    readonly items: ChildNode<T>[];
+    get(index: number): ChildNode<T> | undefined;
     set(index: number, value: T | CommentedNode<T>): void;
     add(value: T | CommentedNode<T>): void;
 }
@@ -70,8 +68,8 @@ export interface CommentedRecordNode<T>
     extends CommentedCollectionNode,
         Iterable<[keyof T, CommentedNode<T[keyof T]>]> {
     readonly value: T;
-    readonly items: [keyof T, ChildNode<T[keyof T], this>][];
-    get<K extends keyof T>(key: K): ChildNode<T[K], this> | undefined;
+    readonly items: [keyof T, ChildNode<T[keyof T]>][];
+    get<K extends keyof T>(key: K): ChildNode<T[K]> | undefined;
     set<K extends keyof T>(key: K, value: T[K] | CommentedNode<T[K]>): void;
 }
 
@@ -132,7 +130,7 @@ abstract class CollectionNode extends BaseNode implements CommentedCollectionNod
 }
 
 class ArrayNode<T> extends CollectionNode implements CommentedArrayNode<T> {
-    readonly items: ChildNode<T, this>[];
+    readonly items: ChildNode<T>[];
 
     constructor(items: CommentedNode<T>[], comments?: NodeComments) {
         super(comments);
@@ -148,11 +146,11 @@ class ArrayNode<T> extends CollectionNode implements CommentedArrayNode<T> {
     }
 
     has(n: CommentedBaseNode): boolean {
-        return this.items.includes(n as ChildNode<T, this>);
+        return this.items.includes(n as ChildNode<T>);
     }
 
     remove(n: CommentedBaseNode): boolean {
-        const index = this.items.indexOf(n as ChildNode<T, this>);
+        const index = this.items.indexOf(n as ChildNode<T>);
         if (index >= 0) {
             this.items.splice(index, 1);
             return true;
@@ -160,7 +158,7 @@ class ArrayNode<T> extends CollectionNode implements CommentedArrayNode<T> {
         return false;
     }
 
-    get(index: number): ChildNode<T, this> | undefined {
+    get(index: number): ChildNode<T> | undefined {
         return this.items[index];
     }
 
@@ -187,7 +185,7 @@ class ArrayNode<T> extends CollectionNode implements CommentedArrayNode<T> {
 }
 
 class RecordNode<T extends object> extends CollectionNode implements CommentedRecordNode<T> {
-    $map: Map<keyof T, ChildNode<T[keyof T], this>>;
+    $map: Map<keyof T, ChildNode<T[keyof T]>>;
 
     constructor(items: [keyof T, CommentedNode<T[keyof T]>][], comments?: NodeComments) {
         super(comments);
@@ -219,15 +217,15 @@ class RecordNode<T extends object> extends CollectionNode implements CommentedRe
         return false;
     }
 
-    get<K extends keyof T>(key: K): ChildNode<T[K], this> | undefined {
+    get<K extends keyof T>(key: K): ChildNode<T[K]> | undefined {
         const found = this.items.find(([k]) => k === key);
         if (!found) return undefined;
-        return found[1] as unknown as ChildNode<T[K], this>;
+        return found[1] as unknown as ChildNode<T[K]>;
     }
 
     set<K extends keyof T>(key: K, value: T[K] | CommentedNode<T[K]>): void {
         const cValue = adoptValue(value, this);
-        const cNodeValue = cValue as unknown as ChildNode<T[keyof T], this>;
+        const cNodeValue = cValue as unknown as ChildNode<T[keyof T]>;
         const found = this.items.find(([k]) => k === key);
         if (found) {
             found[1] = cNodeValue;
@@ -276,14 +274,14 @@ export function createCommentedNode<T>(value: T, comments?: NodeComments): Comme
     return _createCommentedNode(value, comments);
 }
 
-function adoptValue<T, P extends CommentedCollectionNode>(value: T | CommentedNode<T>, parent: P): ChildNode<T, P> {
+function adoptValue<T, P extends CommentedCollectionNode>(value: T | CommentedNode<T>, parent: P): ChildNode<T> {
     const node = isCommentedBaseNode(value) ? value : createCommentedNode(value);
     return adoptChildNode(node, parent);
 }
 
-function adoptChildNode<T, P extends CommentedCollectionNode>(node: CommentedNode<T>, parent: P): ChildNode<T, P> {
+function adoptChildNode<T, P extends CommentedCollectionNode>(node: CommentedNode<T>, parent: P): ChildNode<T> {
     assert(isCommentedBaseNode(node));
-    node.parent?.remove(node);
-    node.parent = parent;
-    return node as ChildNode<T, P>;
+    node[commentCollectionNode]?.remove(node);
+    node[commentCollectionNode] = parent;
+    return node;
 }

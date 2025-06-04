@@ -164,6 +164,18 @@ describe('CSpellConfigFileReaderWriter', () => {
 
         expect(config2.settings).toEqual(settings);
     });
+
+    test('parse', () => {
+        const url = new URL('cspell.json', import.meta.url);
+        const content = json({ name: 'name', words: ['one'] });
+        const io: IO = {
+            readFile: vi.fn(),
+            writeFile: vi.fn(),
+        };
+        const rw = new CSpellConfigFileReaderWriterImpl(io, defaultDeserializers, defaultLoaders);
+        const config = rw.parse({ url, content });
+        expect(config.settings).toEqual({ name: 'name', words: ['one'] });
+    });
 });
 
 class Cfg extends CSpellConfigFile {
@@ -174,7 +186,33 @@ class Cfg extends CSpellConfigFile {
         super(url);
     }
 
+    removeAllComments(): this {
+        // No comments to remove in this mock.
+        return this;
+    }
+
+    setSchema(schema: string): this {
+        this.settings.$schema = schema;
+        return this;
+    }
+
     addWords(_words: string[]): this {
+        return this;
+    }
+
+    setComment(_key: keyof CSpellSettings, _comment: string, _inline?: boolean): this {
+        if (this.readonly) {
+            throw new Error(`Config file is readonly: ${this.url.href}`);
+        }
+        // do nothing
+        return this;
+    }
+
+    setValue<K extends keyof CSpellSettings>(key: K, value: CSpellSettings[K]): this {
+        if (this.readonly) {
+            throw new Error(`Config file is readonly: ${this.url.href}`);
+        }
+        this.settings[key] = value;
         return this;
     }
 }

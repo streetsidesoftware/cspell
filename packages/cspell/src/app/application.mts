@@ -12,6 +12,7 @@ import {
 } from 'cspell-lib';
 
 import { getReporter } from './cli-reporter.js';
+import { configInit, type InitOptions } from './config/index.js';
 import { console } from './console.js';
 import type { TimedSuggestionsForWordResult } from './emitters/suggestionsEmitter.js';
 import { getFeatureFlags, parseFeatureFlags } from './featureFlags/index.js';
@@ -115,8 +116,8 @@ export async function* suggestions(
     }
 }
 
-export function createInit(): Promise<void> {
-    return Promise.reject();
+export function createInit(options: InitOptions): Promise<void> {
+    return configInit(options);
 }
 
 function registerApplicationFeatureFlags(): FeatureFlags {

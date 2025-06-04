@@ -3,6 +3,7 @@ import { Option as CommanderOption, program } from 'commander';
 import { satisfies as semverSatisfies } from 'semver';
 
 import { commandCheck } from './commandCheck.js';
+import { commandInit } from './commandInit.js';
 import { commandLink } from './commandLink.js';
 import { commandLint } from './commandLint.js';
 import { commandSuggestion } from './commandSuggestion.js';
@@ -35,23 +36,8 @@ export async function run(command?: Command, argv?: string[]): Promise<void> {
     commandTrace(prog).addOption(optionFlags);
     commandCheck(prog).addOption(optionFlags);
     commandSuggestion(prog).addOption(optionFlags);
+    commandInit(prog).addOption(optionFlags);
     commandLink(prog);
-
-    /*
-        program
-            .command('init')
-            .description('(Alpha) Initialize a cspell.json file.')
-            .option('-o, --output <cspell.json>', 'define where to write file.')
-            .option('--extends <cspell.json>', 'extend an existing cspell.json file.')
-            .action((options: InitOptions) => {
-                showHelp = false;
-                CSpellApplication.createInit(options).then(
-                    () => process.exit(0),
-                    () => process.exit(1)
-                );
-                console.log('Init');
-            });
-    */
 
     prog.exitOverride();
     await prog.parseAsync(args);
