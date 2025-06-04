@@ -48,8 +48,6 @@ version: '0.2'
 `;
 
 export async function configInit(options: InitOptions): Promise<void> {
-    console.error('Init %o', options);
-
     const rw = createReaderWriter();
     const url = determineFileNameURL(options);
     const configFile = await createConfigFile(rw, url, options);
@@ -119,6 +117,9 @@ function determineDefaultFileName(options: InitOptions): string {
         }
         case 'yaml': {
             return 'cspell.config.yaml';
+        }
+        case 'yml': {
+            return 'cspell.config.yml';
         }
     }
     throw new Error(`Unsupported format: ${options.format}`);

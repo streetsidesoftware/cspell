@@ -11,7 +11,7 @@ export function commandInit(prog: Command): Command {
         .option('-o, --output <path>', 'Define where to write file.')
         .addOption(
             crOpt('--format <format>', 'Define the format of the file.')
-                .choices(['yaml', 'json', 'jsonc'])
+                .choices(['yaml', 'yml', 'json', 'jsonc'])
                 .default('yaml'),
         )
         .option('--import <path|package>', 'Import a configuration file or dictionary package.', collect)
