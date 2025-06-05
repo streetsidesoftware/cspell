@@ -7,7 +7,8 @@ import { traceWords } from './trace.js';
 
 const timeout = 20_000;
 
-const ac = <T>(a: Array<T>) => expect.arrayContaining(a);
+const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
+const ac = (...params: Parameters<typeof expect.arrayContaining>) => expect.arrayContaining(...params);
 
 const testOptions: TestOptions = { timeout };
 
@@ -143,10 +144,6 @@ describe('Verify trace', () => {
         );
     });
 });
-
-function oc<T>(t: T): T {
-    return expect.objectContaining(t);
-}
 
 async function getSettings(...settings: CSpellSettings[]): Promise<CSpellSettings> {
     return settings.reduce((a, b) => mergeSettings(a, b), await getDefaultSettings(true));

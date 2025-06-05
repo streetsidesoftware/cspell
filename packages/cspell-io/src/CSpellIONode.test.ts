@@ -9,7 +9,7 @@ import { toFileURL } from './node/file/url.js';
 import { makePathToFile, pathToSample as ps, pathToTemp } from './test/test.helper.js';
 
 const sc = (m: string) => expect.stringContaining(m);
-const oc = <T>(obj: T) => expect.objectContaining(obj);
+const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
 
 describe('CSpellIONode', () => {
     test('constructor', () => {

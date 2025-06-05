@@ -8,7 +8,7 @@ import { CSpellConfigFileYaml } from '../CSpellConfigFile/CSpellConfigFileYaml.j
 import { defaultNextDeserializer } from '../defaultNext.js';
 import { serializerCSpellYaml } from './cspellYaml.js';
 
-const oc = <T>(obj: T) => expect.objectContaining(obj);
+const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
 const next = defaultNextDeserializer;
 
 describe('cspellYaml', () => {

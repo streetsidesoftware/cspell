@@ -5,7 +5,7 @@ import { createSpellingDictionary } from './createSpellingDictionary.js';
 import { createCollection } from './SpellingDictionaryCollection.js';
 import { createSuggestDictionary } from './SuggestDictionary.js';
 
-const oc = <T>(obj: T) => expect.objectContaining(obj);
+const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
 
 describe('CachingDictionary', () => {
     const words = ['apple', 'banana', 'orange', 'grape', 'mango', '!pear'];
