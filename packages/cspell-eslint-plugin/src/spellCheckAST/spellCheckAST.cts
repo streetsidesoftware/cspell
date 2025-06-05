@@ -3,10 +3,10 @@ import assert from 'node:assert';
 
 import type { TSESTree } from '@typescript-eslint/types';
 import type { Comment, ExportSpecifier, Identifier, ImportSpecifier, Literal, Node, TemplateElement } from 'estree';
+import { createSyncFn } from 'synckit';
 
 import { getDefaultLogger } from '../common/logger.cjs';
 import type { ScopeSelectorList, WorkerOptions } from '../common/options.cjs';
-import { createSyncFn } from '../synckit/index.cjs';
 import type { ASTNode, JSXText, NodeType } from './ASTNode.js' with { 'resolution-mode': 'import' };
 import type { ASTPath, Key } from './ASTPath.js' with { 'resolution-mode': 'import' };
 import { defaultCheckedScopes } from './customScopes.cjs';

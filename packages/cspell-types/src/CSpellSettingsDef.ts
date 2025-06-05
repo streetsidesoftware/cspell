@@ -1,4 +1,4 @@
-import type { ReporterConfigurationBase } from './CSpellReporter.js';
+import type { ReportingConfiguration, UnknownWordsConfiguration } from './CSpellReporter.js';
 import type { DictionaryDefinition, DictionaryReference } from './DictionaryDefinition.js';
 import type { Features } from './features.js';
 import type { InlineDictionary } from './InlineDictionary.js';
@@ -281,35 +281,6 @@ export interface Settings extends ReportingConfiguration, BaseSetting, PnPSettin
     loadDefaultConfiguration?: boolean;
 }
 
-export interface ReportingConfiguration extends ReporterConfigurationBase, SuggestionsConfiguration {}
-
-export interface SuggestionsConfiguration {
-    /**
-     * Number of suggestions to make.
-     *
-     * @default 10
-     */
-    numSuggestions?: number;
-
-    /**
-     * The maximum amount of time in milliseconds to generate suggestions for a word.
-     *
-     * @default 500
-     */
-    suggestionsTimeout?: number;
-
-    /**
-     * The maximum number of changes allowed on a word to be considered a suggestions.
-     *
-     * For example, appending an `s` onto `example` -> `examples` is considered 1 change.
-     *
-     * Range: between 1 and 5.
-     *
-     * @default 3
-     */
-    suggestionNumChanges?: number;
-}
-
 /**
  * Plug N Play settings to support package systems like Yarn 2.
  */
@@ -451,7 +422,7 @@ export interface OverrideFilterFields {
     filename: Glob | Glob[];
 }
 
-export interface BaseSetting extends InlineDictionary, ExperimentalBaseSettings {
+export interface BaseSetting extends InlineDictionary, ExperimentalBaseSettings, UnknownWordsConfiguration {
     /** Optional identifier. */
     id?: string;
 

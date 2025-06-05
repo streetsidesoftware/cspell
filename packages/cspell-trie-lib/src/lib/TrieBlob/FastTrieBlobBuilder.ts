@@ -6,7 +6,7 @@ import type { TrieNode, TrieRoot } from '../TrieNode/TrieNode.js';
 import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.js';
 import { assertValidUtf16Character } from '../utils/text.js';
 import { CharIndexBuilder } from './CharIndex.js';
-import { FastTrieBlob, nodesToJSON } from './FastTrieBlob.js';
+import { FastTrieBlob, nodesToJSON, NodeToJSON } from './FastTrieBlob.js';
 import type { FastTrieBlobBitMaskInfo } from './FastTrieBlobBitMaskInfo.js';
 import { FastTrieBlobInternals, sortNodes } from './FastTrieBlobInternals.js';
 import { resolveMap } from './resolveMap.js';
@@ -22,10 +22,13 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
     private _cursor: BuilderCursor | undefined;
 
     private _options: Readonly<TrieInfo>;
-    wordToCharacters = (word: string) => [...word];
+    wordToCharacters = (word: string): string[] => [...word];
     readonly bitMasksInfo: FastTrieBlobBitMaskInfo;
 
-    constructor(options?: PartialTrieInfo, bitMasksInfo = FastTrieBlobBuilder.DefaultBitMaskInfo) {
+    constructor(
+        options?: PartialTrieInfo,
+        bitMasksInfo: FastTrieBlobBitMaskInfo = FastTrieBlobBuilder.DefaultBitMaskInfo,
+    ) {
         this._options = mergeOptionalWithDefaults(options);
         this.bitMasksInfo = bitMasksInfo;
         this.nodes = [[0], Object.freeze([FastTrieBlobBuilder.NodeMaskEOW]) as number[]];
@@ -290,7 +293,10 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
         );
     }
 
-    toJSON() {
+    toJSON(): {
+        options: Readonly<TrieInfo>;
+        nodes: NodeToJSON[];
+    } {
         return {
             options: this.options,
             nodes: nodesToJSON(this.nodes.map((n) => Uint32Array.from(n))),
@@ -369,9 +375,9 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
         return tf.build();
     }
 
-    static NodeMaskEOW = TrieBlob.NodeMaskEOW;
-    static NodeChildRefShift = TrieBlob.NodeChildRefShift;
-    static NodeMaskChildCharIndex = TrieBlob.NodeMaskChildCharIndex;
+    static NodeMaskEOW: number = TrieBlob.NodeMaskEOW;
+    static NodeChildRefShift: number = TrieBlob.NodeChildRefShift;
+    static NodeMaskChildCharIndex: number = TrieBlob.NodeMaskChildCharIndex;
 
     static DefaultBitMaskInfo: FastTrieBlobBitMaskInfo = {
         NodeMaskEOW: FastTrieBlobBuilder.NodeMaskEOW,

@@ -1,7 +1,7 @@
 import { promises as fs } from 'node:fs';
 import * as path from 'node:path';
 
-import type { CSpellReporter, ReporterConfiguration } from '@cspell/cspell-types';
+import type { CSpellReporter, Issue, ReporterConfiguration } from '@cspell/cspell-types';
 import { MessageTypes } from '@cspell/cspell-types';
 
 import type { CSpellJSONReporterOutput } from './CSpellJSONReporterOutput.js';
@@ -28,6 +28,20 @@ type Data = Omit<CSpellJSONReporterOutput, 'result'>;
 
 const _console = console;
 
+function cleanIssue(issue: Issue): Issue {
+    // Remove properties that are not needed in the output.
+    const { hasPreferredSuggestions, hasSimpleSuggestions, context, ...rest } = issue;
+    const cleaned: Issue = rest;
+    if (hasPreferredSuggestions) {
+        cleaned.hasPreferredSuggestions = hasPreferredSuggestions;
+    }
+    if (hasSimpleSuggestions) {
+        cleaned.hasSimpleSuggestions = hasSimpleSuggestions;
+    }
+    cleaned.context = context || issue.line;
+    return cleaned;
+}
+
 export function getReporter(
     settings: unknown | CSpellJSONReporterSettings,
     cliOptions?: CSpellJSONReporterConfiguration,
@@ -37,7 +51,7 @@ export function getReporter(
     const console = cliOptions?.console ?? _console;
     return {
         issue: (issue) => {
-            reportData.issues.push(issue);
+            reportData.issues.push(cleanIssue(issue));
         },
         info: (message, msgType) => {
             if (msgType === MessageTypes.Debug && !useSettings.debug) {
@@ -80,6 +94,7 @@ export function getReporter(
             await mkdirp(path.dirname(outFilePath));
             return fs.writeFile(outFilePath, jsonData);
         },
+        features: undefined,
     };
 }
 

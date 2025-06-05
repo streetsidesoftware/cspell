@@ -8,7 +8,7 @@ import { json } from '../test-helpers/util.js';
 import { unindent } from '../util/unindent.js';
 import { serializerCSpellJson } from './cspellJson.js';
 
-const oc = <T>(obj: T) => expect.objectContaining(obj);
+const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
 
 const next = defaultNextDeserializer;
 

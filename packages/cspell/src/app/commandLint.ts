@@ -1,8 +1,8 @@
 import type { AddHelpTextContext, Command } from 'commander';
-import { Option as CommanderOption } from 'commander';
 
 import * as App from './application.mjs';
-import type { LinterCliOptions } from './options.js';
+import { collect, crOpt } from './commandHelpers.js';
+import { type LinterCliOptions, ReportChoicesAll } from './options.js';
 import { DEFAULT_CACHE_LOCATION } from './util/cache/index.js';
 import { canUseColor } from './util/canUseColor.js';
 import { CheckFailed } from './util/errors.js';
@@ -56,11 +56,6 @@ References:
     https://cspell.org
     https://github.com/streetsidesoftware/cspell
 `;
-
-function collect(value: string | string[], previous: string[] | undefined): string[] {
-    const values = Array.isArray(value) ? value : [value];
-    return previous ? [...previous, ...values] : values;
-}
 
 export function commandLint(prog: Command): Command {
     const spellCheckCommand = prog.command('lint', { isDefault: true });
@@ -164,6 +159,7 @@ export function commandLint(prog: Command): Command {
         .addOption(crOpt('--no-default-configuration', 'Do not load the default configuration and dictionaries.'))
         .option('--debug', 'Output information useful for debugging cspell.json files.')
         .option('--reporter <module|path>', 'Specify one or more reporters to use.', collect)
+        .addOption(crOpt('--report <level>', 'Set how unknown words are reported').choices(ReportChoicesAll))
         .addOption(
             crOpt('--skip-validation', 'Collect and process documents, but do not spell check.')
                 .implies({ cache: false })
@@ -264,28 +260,4 @@ function augmentCommandHelp(context: AddHelpTextContext) {
     }
     output.push(...hiddenHelp, advanced);
     return helpIssueTemplate(opts) + output.join('\n');
-}
-
-/**
- * Create Option - a helper function to create a commander option.
- * @param name - the name of the option
- * @param description - the description of the option
- * @param parseArg - optional function to parse the argument
- * @param defaultValue - optional default value
- * @returns CommanderOption
- */
-function crOpt<T>(
-    name: string,
-    description: string,
-    parseArg?: (value: string, previous: T) => T,
-    defaultValue?: T,
-): CommanderOption {
-    const option = new CommanderOption(name, description);
-    if (parseArg) {
-        option.argParser(parseArg);
-    }
-    if (defaultValue !== undefined) {
-        option.default(defaultValue);
-    }
-    return option;
 }

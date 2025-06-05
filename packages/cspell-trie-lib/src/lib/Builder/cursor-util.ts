@@ -1,6 +1,6 @@
 import type { BuilderCursor } from './BuilderCursor.js';
 
-export function insertWordsAtCursor(cursor: BuilderCursor, words: Iterable<string>) {
+export function insertWordsAtCursor(cursor: BuilderCursor, words: Iterable<string>): void {
     let prevWordLetters: string[] = [];
     for (const _word of words) {
         const letters = [..._word];

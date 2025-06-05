@@ -374,6 +374,7 @@ export function getReporter(options: ReporterOptions, config?: CSpellReporterCon
         debug: emitters.Debug,
         progress,
         result: !silent && summary ? resultEmitter : nullEmitter,
+        features: undefined,
     };
 }
 
@@ -381,7 +382,7 @@ function formatIssue(io: IOChalk, templateStr: string, issue: ReporterIssue, max
     function clean(t: string) {
         return t.replace(/\s+/, ' ');
     }
-    const { uri = '', filename, row, col, text, context, offset } = issue;
+    const { uri = '', filename, row, col, text, context = issue.line, offset } = issue;
     const contextLeft = clean(context.text.slice(0, offset - context.offset));
     const contextRight = clean(context.text.slice(offset + text.length - context.offset));
     const contextFull = clean(context.text);

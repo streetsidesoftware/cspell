@@ -6,8 +6,8 @@ import type { SuggestedWord, SuggestionOptions } from './suggestions.js';
 import { SuggestionError, suggestionsForWord, suggestionsForWords } from './suggestions.js';
 import { asyncIterableToArray } from './util/util.js';
 
-const oc = <T>(obj: T) => expect.objectContaining(obj);
-const ac = <T>(a: Array<T>) => expect.arrayContaining(a);
+const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
+const ac = (...params: Parameters<typeof expect.arrayContaining>) => expect.arrayContaining(...params);
 
 const timeout = 20_000;
 

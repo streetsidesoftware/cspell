@@ -28,7 +28,7 @@ import { RequestFsReadDirectory } from './requests/RequestFsReadDirectory.js';
 let defaultCSpellIONode: CSpellIO | undefined = undefined;
 
 export class CSpellIONode implements CSpellIO {
-    constructor(readonly serviceBus = new ServiceBus()) {
+    constructor(readonly serviceBus: ServiceBus = new ServiceBus()) {
         registerHandlers(serviceBus);
     }
 

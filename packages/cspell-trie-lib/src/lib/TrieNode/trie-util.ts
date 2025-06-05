@@ -47,7 +47,7 @@ export function walk(node: TrieNode): Iterable<YieldResult> {
     return walker(node);
 }
 
-export const iterateTrie = walk;
+export const iterateTrie: typeof walk = walk;
 
 /**
  * Generate a Iterator that can walk a Trie and yield the words.

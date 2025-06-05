@@ -1,4 +1,9 @@
-import type { CSpellSettings, DictionaryDefinitionPreferred } from '@cspell/cspell-types';
+import type {
+    CSpellSettings,
+    DictionaryDefinitionInline,
+    DictionaryDefinitionPreferred,
+    DictionaryDefinitionSimple,
+} from '@cspell/cspell-types';
 
 export interface Options extends Check {
     /**
@@ -27,13 +32,30 @@ export interface Options extends Check {
     debugMode?: boolean;
 }
 
-type DictionaryDefinition = DictionaryDefinitionPreferred;
+interface DictOptions {
+    /**
+     * Strip case and accents to allow for case insensitive searches and
+     * words without accents.
+     *
+     * Note: this setting only applies to word lists. It has no-impact on trie
+     * dictionaries.
+     */
+    supportNonStrictSearches?: boolean | undefined;
+}
+
+type DictBase = Pick<DictionaryDefinitionSimple, 'name' | 'description'> & DictOptions;
+
+type SimpleInlineDefinition = DictBase &
+    Partial<Pick<DictionaryDefinitionInline, 'words' | 'flagWords' | 'ignoreWords' | 'suggestWords'>>;
+
+type DictionaryDefinition = (DictBase & Pick<DictionaryDefinitionPreferred, 'path'>) | SimpleInlineDefinition;
 
 export type CSpellOptions = Pick<
     CSpellSettings,
     // | 'languageSettings'
     // | 'overrides'
     | 'allowCompoundWords'
+    | 'caseSensitive'
     | 'dictionaries'
     | 'enabled'
     | 'flagWords'
@@ -184,3 +206,19 @@ export type ScopeSelectorEntry = [ScopeSelector, boolean];
  * A list of scope selectors.
  */
 export type ScopeSelectorList = ScopeSelectorEntry[];
+
+/**
+ * Helper to define the options for the cspell-eslint-plugin.
+ * @param options - The options to define.
+ */
+export function defineCSpellPluginOptions(options: Partial<Options>): Partial<Options> {
+    return options;
+}
+
+/**
+ * Helper to define the CSpell config section of the cspell-eslint-plugin.
+ * @param cfg - The CSpell config to define.
+ */
+export function defineCSpellConfig(cfg: CSpellOptions): CSpellOptions {
+    return cfg;
+}

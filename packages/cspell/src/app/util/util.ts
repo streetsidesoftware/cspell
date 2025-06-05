@@ -22,6 +22,11 @@ export function unique<T>(src: T[]): T[] {
     return [...new Set(src)];
 }
 
+/**
+ * Removed all properties with a value of `undefined` from the object.
+ * @param src - the object to clean.
+ * @returns the same object with all properties with a value of `undefined` removed.
+ */
 export function clean<T extends object>(src: T): RemoveUndefined<T> {
     const r = src;
     type keyOfT = keyof T;

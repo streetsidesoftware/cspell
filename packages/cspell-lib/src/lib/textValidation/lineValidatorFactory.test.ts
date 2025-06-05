@@ -4,7 +4,7 @@ import { describe, expect, test } from 'vitest';
 
 import { textValidatorFactory } from './lineValidatorFactory.js';
 
-const oc = <T>(obj: T) => expect.objectContaining(obj);
+const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
 
 describe('lineValidatorFactory', () => {
     // cspell:ignore 𐀀𐃘 izfrNTmQLnfsLzi2Wb9x izfr Lnfs Drived

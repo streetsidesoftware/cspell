@@ -4,7 +4,7 @@ export class SecondChanceCache<Key, Value> {
 
     constructor(readonly maxL0Size: number) {}
 
-    public has(key: Key) {
+    public has(key: Key): boolean {
         if (this.map0.has(key)) return true;
         if (this.map1.has(key)) {
             this.set(key, this.get1(key)!);

@@ -1,8 +1,11 @@
-import { CSpellSettings } from '@cspell/cspell-types';
+import { CSpellSettings, ReporterConfiguration } from '@cspell/cspell-types';
 
 import type { CacheOptions } from './util/cache/index.js';
 
-export interface LinterOptions extends Omit<BaseOptions, 'config'>, Omit<CacheOptions, 'version'> {
+export interface LinterOptions
+    extends Omit<BaseOptions, 'config'>,
+        Omit<CacheOptions, 'version'>,
+        ReporterConfiguration {
     /**
      * Display verbose information
      */
@@ -35,8 +38,8 @@ export interface LinterOptions extends Omit<BaseOptions, 'config'>, Omit<CacheOp
     dot?: boolean;
     /**
      * Show part of a line where an issue is found.
-     * if true, it will show the default number of characters on either side.
-     * if a number, it will shat number of characters on either side.
+     * - if true, it will show the default number of characters on either side.
+     * - if a number, the number of characters to show on either side of the issue.
      */
     showContext?: boolean | number;
     /**
@@ -295,7 +298,13 @@ export interface LinterCliOptions extends LinterOptions {
     * If the flag is not passed, this will be `undefined`.
     */
     stopConfigSearchAt?: string;
+
+    report?: ReportChoices | undefined;
 }
+
+export type ReportChoices = 'all' | 'simple' | 'typos' | 'flagged';
+
+export const ReportChoicesAll: readonly ReportChoices[] = ['all', 'simple', 'typos', 'flagged'];
 
 export function fixLegacy<T extends LegacyFixes>(opts: T & LegacyOptions): Omit<T & LegacyOptions, 'local'> {
     const { local, ...rest } = opts;

@@ -14,12 +14,13 @@ export function createInlineSpellingDictionary(
     source: string,
 ): SpellingDictionary {
     return cache.get(inlineDict, () => {
-        const { words, flagWords, ignoreWords, suggestWords, name } = inlineDict;
+        const { words, flagWords, ignoreWords, suggestWords, name, supportNonStrictSearches } = inlineDict;
+        const options = { supportNonStrictSearches };
 
         const dictSources = [
             words && createSpellingDictionary(words, name + '-words', source, inlineDict),
             flagWords && createFlagWordsDictionary(flagWords, name + '-flag-words', source),
-            ignoreWords && createIgnoreWordsDictionary(ignoreWords, name + '-ignore-words', source),
+            ignoreWords && createIgnoreWordsDictionary(ignoreWords, name + '-ignore-words', source, options),
             suggestWords && createSuggestDictionary(suggestWords, name + '-suggest', source),
         ].filter(isDefined);
 

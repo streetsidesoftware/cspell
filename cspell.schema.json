@@ -229,6 +229,9 @@
           "$ref": "#/definitions/DictionaryDefinitionInline"
         },
         {
+          "$ref": "#/definitions/DictionaryDefinitionSimple"
+        },
+        {
           "$ref": "#/definitions/DictionaryDefinitionAlternate"
         }
       ]
@@ -271,6 +274,12 @@
           "$ref": "#/definitions/ReplaceMap",
           "description": "Replacement pairs.",
           "markdownDescription": "Replacement pairs."
+        },
+        "supportNonStrictSearches": {
+          "default": true,
+          "description": "Strip case and accents to allow for case insensitive searches and words without accents.\n\nNote: this setting only applies to word lists. It has no-impact on trie dictionaries.",
+          "markdownDescription": "Strip case and accents to allow for case insensitive searches and\nwords without accents.\n\nNote: this setting only applies to word lists. It has no-impact on trie\ndictionaries.",
+          "type": "boolean"
         },
         "type": {
           "$ref": "#/definitions/DictionaryFileTypes",
@@ -327,6 +336,12 @@
           "$ref": "#/definitions/ReplaceMap",
           "description": "Replacement pairs.",
           "markdownDescription": "Replacement pairs."
+        },
+        "supportNonStrictSearches": {
+          "default": true,
+          "description": "Strip case and accents to allow for case insensitive searches and words without accents.\n\nNote: this setting only applies to word lists. It has no-impact on trie dictionaries.",
+          "markdownDescription": "Strip case and accents to allow for case insensitive searches and\nwords without accents.\n\nNote: this setting only applies to word lists. It has no-impact on trie\ndictionaries.",
+          "type": "boolean"
         },
         "type": {
           "$ref": "#/definitions/DictionaryFileTypes",
@@ -401,6 +416,12 @@
           "description": "Defines the scope for when words will be added to the dictionary.\n\nScope values: `user`, `workspace`, `folder`.",
           "markdownDescription": "Defines the scope for when words will be added to the dictionary.\n\nScope values: `user`, `workspace`, `folder`."
         },
+        "supportNonStrictSearches": {
+          "default": true,
+          "description": "Strip case and accents to allow for case insensitive searches and words without accents.\n\nNote: this setting only applies to word lists. It has no-impact on trie dictionaries.",
+          "markdownDescription": "Strip case and accents to allow for case insensitive searches and\nwords without accents.\n\nNote: this setting only applies to word lists. It has no-impact on trie\ndictionaries.",
+          "type": "boolean"
+        },
         "type": {
           "$ref": "#/definitions/DictionaryFileTypes",
           "default": "S",
@@ -436,7 +457,8 @@
         }
       ],
       "description": "Inline Dictionary Definitions",
-      "markdownDescription": "Inline Dictionary Definitions"
+      "markdownDescription": "Inline Dictionary Definitions",
+      "since": "6.23.0"
     },
     "DictionaryDefinitionInlineFlagWords": {
       "additionalProperties": false,
@@ -454,11 +476,6 @@
           "markdownDescription": "List of words to always be considered incorrect. Words found in `flagWords` override `words`.\n\nFormat of `flagWords`\n- single word entry - `word`\n- with suggestions - `word:suggestion` or `word->suggestion, suggestions`\n\nExample:\n```ts\n\"flagWords\": [\n  \"color: colour\",\n  \"incase: in case, encase\",\n  \"canot->cannot\",\n  \"cancelled->canceled\"\n]\n```",
           "type": "array"
         },
-        "ignoreForbiddenWords": {
-          "description": "Some dictionaries may contain forbidden words to prevent compounding from generating words that are not valid in the language. These are often words that are used in other languages or might be generated through compounding. This setting allows flagged words to be ignored when checking the dictionary. The effect is similar to the word not being in the dictionary.",
-          "markdownDescription": "Some dictionaries may contain forbidden words to prevent compounding from generating\nwords that are not valid in the language. These are often\nwords that are used in other languages or might be generated through compounding.\nThis setting allows flagged words to be ignored when checking the dictionary.\nThe effect is similar to the word not being in the dictionary.",
-          "type": "boolean"
-        },
         "ignoreWords": {
           "description": "List of words to be ignored. An ignored word will not show up as an error, even if it is also in the `flagWords`.",
           "items": {
@@ -472,16 +489,6 @@
           "description": "This is the name of a dictionary.\n\nName Format:\n- Must contain at least 1 number or letter.\n- Spaces are allowed.\n- Leading and trailing space will be removed.\n- Names ARE case-sensitive.\n- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`.",
           "markdownDescription": "This is the name of a dictionary.\n\nName Format:\n- Must contain at least 1 number or letter.\n- Spaces are allowed.\n- Leading and trailing space will be removed.\n- Names ARE case-sensitive.\n- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`."
         },
-        "noSuggest": {
-          "description": "Indicate that suggestions should not come from this dictionary. Words in this dictionary are considered correct, but will not be used when making spell correction suggestions.\n\nNote: if a word is suggested by another dictionary, but found in this dictionary, it will be removed from the set of possible suggestions.",
-          "markdownDescription": "Indicate that suggestions should not come from this dictionary.\nWords in this dictionary are considered correct, but will not be\nused when making spell correction suggestions.\n\nNote: if a word is suggested by another dictionary, but found in\nthis dictionary, it will be removed from the set of\npossible suggestions.",
-          "type": "boolean"
-        },
-        "repMap": {
-          "$ref": "#/definitions/ReplaceMap",
-          "description": "Replacement pairs.",
-          "markdownDescription": "Replacement pairs."
-        },
         "suggestWords": {
           "description": "A list of suggested replacements for words. Suggested words provide a way to make preferred suggestions on word replacements. To hint at a preferred change, but not to require it.\n\nFormat of `suggestWords`\n- Single suggestion (possible auto fix)     - `word: suggestion`     - `word->suggestion`\n- Multiple suggestions (not auto fixable)    - `word: first, second, third`    - `word->first, second, third`",
           "items": {
@@ -490,15 +497,10 @@
           "markdownDescription": "A list of suggested replacements for words.\nSuggested words provide a way to make preferred suggestions on word replacements.\nTo hint at a preferred change, but not to require it.\n\nFormat of `suggestWords`\n- Single suggestion (possible auto fix)\n    - `word: suggestion`\n    - `word->suggestion`\n- Multiple suggestions (not auto fixable)\n   - `word: first, second, third`\n   - `word->first, second, third`",
           "type": "array"
         },
-        "type": {
-          "$ref": "#/definitions/DictionaryFileTypes",
-          "default": "S",
-          "description": "Type of file:\n- S - single word per line,\n- W - each line can contain one or more words separated by space,\n- C - each line is treated like code (Camel Case is allowed).\n\nDefault is S.\n\nC is the slowest to load due to the need to split each line based upon code splitting rules.\n\nNote: this settings does not apply to inline dictionaries or `.trie` files.",
-          "markdownDescription": "Type of file:\n- S - single word per line,\n- W - each line can contain one or more words separated by space,\n- C - each line is treated like code (Camel Case is allowed).\n\nDefault is S.\n\nC is the slowest to load due to the need to split each line based upon code splitting rules.\n\nNote: this settings does not apply to inline dictionaries or `.trie` files."
-        },
-        "useCompounds": {
-          "description": "Use Compounds.",
-          "markdownDescription": "Use Compounds.",
+        "supportNonStrictSearches": {
+          "default": true,
+          "description": "Strip case and accents to allow for case insensitive searches and words without accents.\n\nNote: this setting only applies to word lists. It has no-impact on trie dictionaries.",
+          "markdownDescription": "Strip case and accents to allow for case insensitive searches and\nwords without accents.\n\nNote: this setting only applies to word lists. It has no-impact on trie\ndictionaries.",
           "type": "boolean"
         },
         "words": {
@@ -532,11 +534,6 @@
           "markdownDescription": "List of words to always be considered incorrect. Words found in `flagWords` override `words`.\n\nFormat of `flagWords`\n- single word entry - `word`\n- with suggestions - `word:suggestion` or `word->suggestion, suggestions`\n\nExample:\n```ts\n\"flagWords\": [\n  \"color: colour\",\n  \"incase: in case, encase\",\n  \"canot->cannot\",\n  \"cancelled->canceled\"\n]\n```",
           "type": "array"
         },
-        "ignoreForbiddenWords": {
-          "description": "Some dictionaries may contain forbidden words to prevent compounding from generating words that are not valid in the language. These are often words that are used in other languages or might be generated through compounding. This setting allows flagged words to be ignored when checking the dictionary. The effect is similar to the word not being in the dictionary.",
-          "markdownDescription": "Some dictionaries may contain forbidden words to prevent compounding from generating\nwords that are not valid in the language. These are often\nwords that are used in other languages or might be generated through compounding.\nThis setting allows flagged words to be ignored when checking the dictionary.\nThe effect is similar to the word not being in the dictionary.",
-          "type": "boolean"
-        },
         "ignoreWords": {
           "description": "List of words to be ignored. An ignored word will not show up as an error, even if it is also in the `flagWords`.",
           "items": {
@@ -550,16 +547,6 @@
           "description": "This is the name of a dictionary.\n\nName Format:\n- Must contain at least 1 number or letter.\n- Spaces are allowed.\n- Leading and trailing space will be removed.\n- Names ARE case-sensitive.\n- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`.",
           "markdownDescription": "This is the name of a dictionary.\n\nName Format:\n- Must contain at least 1 number or letter.\n- Spaces are allowed.\n- Leading and trailing space will be removed.\n- Names ARE case-sensitive.\n- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`."
         },
-        "noSuggest": {
-          "description": "Indicate that suggestions should not come from this dictionary. Words in this dictionary are considered correct, but will not be used when making spell correction suggestions.\n\nNote: if a word is suggested by another dictionary, but found in this dictionary, it will be removed from the set of possible suggestions.",
-          "markdownDescription": "Indicate that suggestions should not come from this dictionary.\nWords in this dictionary are considered correct, but will not be\nused when making spell correction suggestions.\n\nNote: if a word is suggested by another dictionary, but found in\nthis dictionary, it will be removed from the set of\npossible suggestions.",
-          "type": "boolean"
-        },
-        "repMap": {
-          "$ref": "#/definitions/ReplaceMap",
-          "description": "Replacement pairs.",
-          "markdownDescription": "Replacement pairs."
-        },
         "suggestWords": {
           "description": "A list of suggested replacements for words. Suggested words provide a way to make preferred suggestions on word replacements. To hint at a preferred change, but not to require it.\n\nFormat of `suggestWords`\n- Single suggestion (possible auto fix)     - `word: suggestion`     - `word->suggestion`\n- Multiple suggestions (not auto fixable)    - `word: first, second, third`    - `word->first, second, third`",
           "items": {
@@ -568,15 +555,10 @@
           "markdownDescription": "A list of suggested replacements for words.\nSuggested words provide a way to make preferred suggestions on word replacements.\nTo hint at a preferred change, but not to require it.\n\nFormat of `suggestWords`\n- Single suggestion (possible auto fix)\n    - `word: suggestion`\n    - `word->suggestion`\n- Multiple suggestions (not auto fixable)\n   - `word: first, second, third`\n   - `word->first, second, third`",
           "type": "array"
         },
-        "type": {
-          "$ref": "#/definitions/DictionaryFileTypes",
-          "default": "S",
-          "description": "Type of file:\n- S - single word per line,\n- W - each line can contain one or more words separated by space,\n- C - each line is treated like code (Camel Case is allowed).\n\nDefault is S.\n\nC is the slowest to load due to the need to split each line based upon code splitting rules.\n\nNote: this settings does not apply to inline dictionaries or `.trie` files.",
-          "markdownDescription": "Type of file:\n- S - single word per line,\n- W - each line can contain one or more words separated by space,\n- C - each line is treated like code (Camel Case is allowed).\n\nDefault is S.\n\nC is the slowest to load due to the need to split each line based upon code splitting rules.\n\nNote: this settings does not apply to inline dictionaries or `.trie` files."
-        },
-        "useCompounds": {
-          "description": "Use Compounds.",
-          "markdownDescription": "Use Compounds.",
+        "supportNonStrictSearches": {
+          "default": true,
+          "description": "Strip case and accents to allow for case insensitive searches and words without accents.\n\nNote: this setting only applies to word lists. It has no-impact on trie dictionaries.",
+          "markdownDescription": "Strip case and accents to allow for case insensitive searches and\nwords without accents.\n\nNote: this setting only applies to word lists. It has no-impact on trie\ndictionaries.",
           "type": "boolean"
         },
         "words": {
@@ -610,11 +592,6 @@
           "markdownDescription": "List of words to always be considered incorrect. Words found in `flagWords` override `words`.\n\nFormat of `flagWords`\n- single word entry - `word`\n- with suggestions - `word:suggestion` or `word->suggestion, suggestions`\n\nExample:\n```ts\n\"flagWords\": [\n  \"color: colour\",\n  \"incase: in case, encase\",\n  \"canot->cannot\",\n  \"cancelled->canceled\"\n]\n```",
           "type": "array"
         },
-        "ignoreForbiddenWords": {
-          "description": "Some dictionaries may contain forbidden words to prevent compounding from generating words that are not valid in the language. These are often words that are used in other languages or might be generated through compounding. This setting allows flagged words to be ignored when checking the dictionary. The effect is similar to the word not being in the dictionary.",
-          "markdownDescription": "Some dictionaries may contain forbidden words to prevent compounding from generating\nwords that are not valid in the language. These are often\nwords that are used in other languages or might be generated through compounding.\nThis setting allows flagged words to be ignored when checking the dictionary.\nThe effect is similar to the word not being in the dictionary.",
-          "type": "boolean"
-        },
         "ignoreWords": {
           "description": "List of words to be ignored. An ignored word will not show up as an error, even if it is also in the `flagWords`.",
           "items": {
@@ -628,16 +605,6 @@
           "description": "This is the name of a dictionary.\n\nName Format:\n- Must contain at least 1 number or letter.\n- Spaces are allowed.\n- Leading and trailing space will be removed.\n- Names ARE case-sensitive.\n- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`.",
           "markdownDescription": "This is the name of a dictionary.\n\nName Format:\n- Must contain at least 1 number or letter.\n- Spaces are allowed.\n- Leading and trailing space will be removed.\n- Names ARE case-sensitive.\n- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`."
         },
-        "noSuggest": {
-          "description": "Indicate that suggestions should not come from this dictionary. Words in this dictionary are considered correct, but will not be used when making spell correction suggestions.\n\nNote: if a word is suggested by another dictionary, but found in this dictionary, it will be removed from the set of possible suggestions.",
-          "markdownDescription": "Indicate that suggestions should not come from this dictionary.\nWords in this dictionary are considered correct, but will not be\nused when making spell correction suggestions.\n\nNote: if a word is suggested by another dictionary, but found in\nthis dictionary, it will be removed from the set of\npossible suggestions.",
-          "type": "boolean"
-        },
-        "repMap": {
-          "$ref": "#/definitions/ReplaceMap",
-          "description": "Replacement pairs.",
-          "markdownDescription": "Replacement pairs."
-        },
         "suggestWords": {
           "description": "A list of suggested replacements for words. Suggested words provide a way to make preferred suggestions on word replacements. To hint at a preferred change, but not to require it.\n\nFormat of `suggestWords`\n- Single suggestion (possible auto fix)     - `word: suggestion`     - `word->suggestion`\n- Multiple suggestions (not auto fixable)    - `word: first, second, third`    - `word->first, second, third`",
           "items": {
@@ -646,15 +613,10 @@
           "markdownDescription": "A list of suggested replacements for words.\nSuggested words provide a way to make preferred suggestions on word replacements.\nTo hint at a preferred change, but not to require it.\n\nFormat of `suggestWords`\n- Single suggestion (possible auto fix)\n    - `word: suggestion`\n    - `word->suggestion`\n- Multiple suggestions (not auto fixable)\n   - `word: first, second, third`\n   - `word->first, second, third`",
           "type": "array"
         },
-        "type": {
-          "$ref": "#/definitions/DictionaryFileTypes",
-          "default": "S",
-          "description": "Type of file:\n- S - single word per line,\n- W - each line can contain one or more words separated by space,\n- C - each line is treated like code (Camel Case is allowed).\n\nDefault is S.\n\nC is the slowest to load due to the need to split each line based upon code splitting rules.\n\nNote: this settings does not apply to inline dictionaries or `.trie` files.",
-          "markdownDescription": "Type of file:\n- S - single word per line,\n- W - each line can contain one or more words separated by space,\n- C - each line is treated like code (Camel Case is allowed).\n\nDefault is S.\n\nC is the slowest to load due to the need to split each line based upon code splitting rules.\n\nNote: this settings does not apply to inline dictionaries or `.trie` files."
-        },
-        "useCompounds": {
-          "description": "Use Compounds.",
-          "markdownDescription": "Use Compounds.",
+        "supportNonStrictSearches": {
+          "default": true,
+          "description": "Strip case and accents to allow for case insensitive searches and words without accents.\n\nNote: this setting only applies to word lists. It has no-impact on trie dictionaries.",
+          "markdownDescription": "Strip case and accents to allow for case insensitive searches and\nwords without accents.\n\nNote: this setting only applies to word lists. It has no-impact on trie\ndictionaries.",
           "type": "boolean"
         },
         "words": {
@@ -688,11 +650,6 @@
           "markdownDescription": "List of words to always be considered incorrect. Words found in `flagWords` override `words`.\n\nFormat of `flagWords`\n- single word entry - `word`\n- with suggestions - `word:suggestion` or `word->suggestion, suggestions`\n\nExample:\n```ts\n\"flagWords\": [\n  \"color: colour\",\n  \"incase: in case, encase\",\n  \"canot->cannot\",\n  \"cancelled->canceled\"\n]\n```",
           "type": "array"
         },
-        "ignoreForbiddenWords": {
-          "description": "Some dictionaries may contain forbidden words to prevent compounding from generating words that are not valid in the language. These are often words that are used in other languages or might be generated through compounding. This setting allows flagged words to be ignored when checking the dictionary. The effect is similar to the word not being in the dictionary.",
-          "markdownDescription": "Some dictionaries may contain forbidden words to prevent compounding from generating\nwords that are not valid in the language. These are often\nwords that are used in other languages or might be generated through compounding.\nThis setting allows flagged words to be ignored when checking the dictionary.\nThe effect is similar to the word not being in the dictionary.",
-          "type": "boolean"
-        },
         "ignoreWords": {
           "description": "List of words to be ignored. An ignored word will not show up as an error, even if it is also in the `flagWords`.",
           "items": {
@@ -706,16 +663,6 @@
           "description": "This is the name of a dictionary.\n\nName Format:\n- Must contain at least 1 number or letter.\n- Spaces are allowed.\n- Leading and trailing space will be removed.\n- Names ARE case-sensitive.\n- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`.",
           "markdownDescription": "This is the name of a dictionary.\n\nName Format:\n- Must contain at least 1 number or letter.\n- Spaces are allowed.\n- Leading and trailing space will be removed.\n- Names ARE case-sensitive.\n- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`."
         },
-        "noSuggest": {
-          "description": "Indicate that suggestions should not come from this dictionary. Words in this dictionary are considered correct, but will not be used when making spell correction suggestions.\n\nNote: if a word is suggested by another dictionary, but found in this dictionary, it will be removed from the set of possible suggestions.",
-          "markdownDescription": "Indicate that suggestions should not come from this dictionary.\nWords in this dictionary are considered correct, but will not be\nused when making spell correction suggestions.\n\nNote: if a word is suggested by another dictionary, but found in\nthis dictionary, it will be removed from the set of\npossible suggestions.",
-          "type": "boolean"
-        },
-        "repMap": {
-          "$ref": "#/definitions/ReplaceMap",
-          "description": "Replacement pairs.",
-          "markdownDescription": "Replacement pairs."
-        },
         "suggestWords": {
           "description": "A list of suggested replacements for words. Suggested words provide a way to make preferred suggestions on word replacements. To hint at a preferred change, but not to require it.\n\nFormat of `suggestWords`\n- Single suggestion (possible auto fix)     - `word: suggestion`     - `word->suggestion`\n- Multiple suggestions (not auto fixable)    - `word: first, second, third`    - `word->first, second, third`",
           "items": {
@@ -724,15 +671,10 @@
           "markdownDescription": "A list of suggested replacements for words.\nSuggested words provide a way to make preferred suggestions on word replacements.\nTo hint at a preferred change, but not to require it.\n\nFormat of `suggestWords`\n- Single suggestion (possible auto fix)\n    - `word: suggestion`\n    - `word->suggestion`\n- Multiple suggestions (not auto fixable)\n   - `word: first, second, third`\n   - `word->first, second, third`",
           "type": "array"
         },
-        "type": {
-          "$ref": "#/definitions/DictionaryFileTypes",
-          "default": "S",
-          "description": "Type of file:\n- S - single word per line,\n- W - each line can contain one or more words separated by space,\n- C - each line is treated like code (Camel Case is allowed).\n\nDefault is S.\n\nC is the slowest to load due to the need to split each line based upon code splitting rules.\n\nNote: this settings does not apply to inline dictionaries or `.trie` files.",
-          "markdownDescription": "Type of file:\n- S - single word per line,\n- W - each line can contain one or more words separated by space,\n- C - each line is treated like code (Camel Case is allowed).\n\nDefault is S.\n\nC is the slowest to load due to the need to split each line based upon code splitting rules.\n\nNote: this settings does not apply to inline dictionaries or `.trie` files."
-        },
-        "useCompounds": {
-          "description": "Use Compounds.",
-          "markdownDescription": "Use Compounds.",
+        "supportNonStrictSearches": {
+          "default": true,
+          "description": "Strip case and accents to allow for case insensitive searches and words without accents.\n\nNote: this setting only applies to word lists. It has no-impact on trie dictionaries.",
+          "markdownDescription": "Strip case and accents to allow for case insensitive searches and\nwords without accents.\n\nNote: this setting only applies to word lists. It has no-impact on trie\ndictionaries.",
           "type": "boolean"
         },
         "words": {
@@ -783,6 +725,12 @@
           "description": "Replacement pairs.",
           "markdownDescription": "Replacement pairs."
         },
+        "supportNonStrictSearches": {
+          "default": true,
+          "description": "Strip case and accents to allow for case insensitive searches and words without accents.\n\nNote: this setting only applies to word lists. It has no-impact on trie dictionaries.",
+          "markdownDescription": "Strip case and accents to allow for case insensitive searches and\nwords without accents.\n\nNote: this setting only applies to word lists. It has no-impact on trie\ndictionaries.",
+          "type": "boolean"
+        },
         "type": {
           "$ref": "#/definitions/DictionaryFileTypes",
           "default": "S",
@@ -798,6 +746,33 @@
       "required": [
         "name",
         "path"
+      ],
+      "type": "object"
+    },
+    "DictionaryDefinitionSimple": {
+      "additionalProperties": false,
+      "description": "An Empty Dictionary Definition",
+      "markdownDescription": "An Empty Dictionary Definition",
+      "properties": {
+        "description": {
+          "description": "Optional description of the contents / purpose of the dictionary.",
+          "markdownDescription": "Optional description of the contents / purpose of the dictionary.",
+          "type": "string"
+        },
+        "name": {
+          "$ref": "#/definitions/DictionaryId",
+          "description": "This is the name of a dictionary.\n\nName Format:\n- Must contain at least 1 number or letter.\n- Spaces are allowed.\n- Leading and trailing space will be removed.\n- Names ARE case-sensitive.\n- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`.",
+          "markdownDescription": "This is the name of a dictionary.\n\nName Format:\n- Must contain at least 1 number or letter.\n- Spaces are allowed.\n- Leading and trailing space will be removed.\n- Names ARE case-sensitive.\n- Must not contain `*`, `!`, `;`, `,`, `{`, `}`, `[`, `]`, `~`."
+        },
+        "supportNonStrictSearches": {
+          "default": true,
+          "description": "Strip case and accents to allow for case insensitive searches and words without accents.\n\nNote: this setting only applies to word lists. It has no-impact on trie dictionaries.",
+          "markdownDescription": "Strip case and accents to allow for case insensitive searches and\nwords without accents.\n\nNote: this setting only applies to word lists. It has no-impact on trie\ndictionaries.",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "name"
       ],
       "type": "object"
     },
@@ -1239,6 +1214,13 @@
           "markdownDescription": "A list of suggested replacements for words.\nSuggested words provide a way to make preferred suggestions on word replacements.\nTo hint at a preferred change, but not to require it.\n\nFormat of `suggestWords`\n- Single suggestion (possible auto fix)\n    - `word: suggestion`\n    - `word->suggestion`\n- Multiple suggestions (not auto fixable)\n   - `word: first, second, third`\n   - `word->first, second, third`",
           "type": "array"
         },
+        "unknownWords": {
+          "$ref": "#/definitions/UnknownWordsChoices",
+          "default": "report-all",
+          "description": "Controls how unknown words are handled.\n\n- `report-all` - Report all unknown words (default behavior)\n- `report-simple` - Report unknown words that have simple spelling errors, typos, and flagged words.\n- `report-common-typos` - Report unknown words that are common typos and flagged words.\n- `report-flagged` - Report unknown words that are flagged.",
+          "markdownDescription": "Controls how unknown words are handled.\n\n- `report-all` - Report all unknown words (default behavior)\n- `report-simple` - Report unknown words that have simple spelling errors, typos, and flagged words.\n- `report-common-typos` - Report unknown words that are common typos and flagged words.\n- `report-flagged` - Report unknown words that are flagged.",
+          "since": "9.1.0"
+        },
         "words": {
           "description": "List of words to be considered correct.",
           "items": {
@@ -1330,6 +1312,7 @@
           },
           "description": "Enable / Disable checking file types (languageIds).\n\nThis setting replaces:  {@link  Settings.enabledLanguageIds }  and  {@link  Settings.enableFiletypes } .\n\nA Value of:\n- `true` - enable checking for the file type\n- `false` - disable checking for the file type\n\nA file type of `*` is a wildcard that enables all file types.\n\n**Example: enable all file types**\n\n| File Type | Enabled | Comment | | --------- | ------- | ------- | | `*`       | `true`  | Enable all file types. | | `json`    | `false` | Disable checking for json files. |",
           "markdownDescription": "Enable / Disable checking file types (languageIds).\n\nThis setting replaces:  {@link  Settings.enabledLanguageIds }  and  {@link  Settings.enableFiletypes } .\n\nA Value of:\n- `true` - enable checking for the file type\n- `false` - disable checking for the file type\n\nA file type of `*` is a wildcard that enables all file types.\n\n**Example: enable all file types**\n\n| File Type | Enabled | Comment |\n| --------- | ------- | ------- |\n| `*`       | `true`  | Enable all file types. |\n| `json`    | `false` | Disable checking for json files. |",
+          "since": "8.8.1",
           "title": "Enabled File Types to Check",
           "type": "object"
         },
@@ -1501,6 +1484,13 @@
           "description": "The maximum amount of time in milliseconds to generate suggestions for a word.",
           "markdownDescription": "The maximum amount of time in milliseconds to generate suggestions for a word.",
           "type": "number"
+        },
+        "unknownWords": {
+          "$ref": "#/definitions/UnknownWordsChoices",
+          "default": "report-all",
+          "description": "Controls how unknown words are handled.\n\n- `report-all` - Report all unknown words (default behavior)\n- `report-simple` - Report unknown words that have simple spelling errors, typos, and flagged words.\n- `report-common-typos` - Report unknown words that are common typos and flagged words.\n- `report-flagged` - Report unknown words that are flagged.",
+          "markdownDescription": "Controls how unknown words are handled.\n\n- `report-all` - Report all unknown words (default behavior)\n- `report-simple` - Report unknown words that have simple spelling errors, typos, and flagged words.\n- `report-common-typos` - Report unknown words that are common typos and flagged words.\n- `report-flagged` - Report unknown words that are flagged.",
+          "since": "9.1.0"
         },
         "usePnP": {
           "default": false,
@@ -1749,6 +1739,17 @@
       },
       "type": "array"
     },
+    "UnknownWordsChoices": {
+      "description": "Possible choices for how to handle unknown words.",
+      "enum": [
+        "report-all",
+        "report-simple",
+        "report-common-typos",
+        "report-flagged"
+      ],
+      "markdownDescription": "Possible choices for how to handle unknown words.",
+      "type": "string"
+    },
     "Version": {
       "anyOf": [
         {
@@ -1848,6 +1849,7 @@
       },
       "description": "Enable / Disable checking file types (languageIds).\n\nThis setting replaces:  {@link  Settings.enabledLanguageIds }  and  {@link  Settings.enableFiletypes } .\n\nA Value of:\n- `true` - enable checking for the file type\n- `false` - disable checking for the file type\n\nA file type of `*` is a wildcard that enables all file types.\n\n**Example: enable all file types**\n\n| File Type | Enabled | Comment | | --------- | ------- | ------- | | `*`       | `true`  | Enable all file types. | | `json`    | `false` | Disable checking for json files. |",
       "markdownDescription": "Enable / Disable checking file types (languageIds).\n\nThis setting replaces:  {@link  Settings.enabledLanguageIds }  and  {@link  Settings.enableFiletypes } .\n\nA Value of:\n- `true` - enable checking for the file type\n- `false` - disable checking for the file type\n\nA file type of `*` is a wildcard that enables all file types.\n\n**Example: enable all file types**\n\n| File Type | Enabled | Comment |\n| --------- | ------- | ------- |\n| `*`       | `true`  | Enable all file types. |\n| `json`    | `false` | Disable checking for json files. |",
+      "since": "8.8.1",
       "title": "Enabled File Types to Check",
       "type": "object"
     },
@@ -1870,7 +1872,8 @@
     "features": {
       "$ref": "#/definitions/Features",
       "description": "Configure CSpell features.",
-      "markdownDescription": "Configure CSpell features."
+      "markdownDescription": "Configure CSpell features.",
+      "since": "5.16.0"
     },
     "files": {
       "description": "Glob patterns of files to be checked.\n\nGlob patterns are relative to the `globRoot` of the configuration file that defines them.",
@@ -2110,6 +2113,13 @@
       "description": "The maximum amount of time in milliseconds to generate suggestions for a word.",
       "markdownDescription": "The maximum amount of time in milliseconds to generate suggestions for a word.",
       "type": "number"
+    },
+    "unknownWords": {
+      "$ref": "#/definitions/UnknownWordsChoices",
+      "default": "report-all",
+      "description": "Controls how unknown words are handled.\n\n- `report-all` - Report all unknown words (default behavior)\n- `report-simple` - Report unknown words that have simple spelling errors, typos, and flagged words.\n- `report-common-typos` - Report unknown words that are common typos and flagged words.\n- `report-flagged` - Report unknown words that are flagged.",
+      "markdownDescription": "Controls how unknown words are handled.\n\n- `report-all` - Report all unknown words (default behavior)\n- `report-simple` - Report unknown words that have simple spelling errors, typos, and flagged words.\n- `report-common-typos` - Report unknown words that are common typos and flagged words.\n- `report-flagged` - Report unknown words that are flagged.",
+      "since": "9.1.0"
     },
     "useGitignore": {
       "default": false,

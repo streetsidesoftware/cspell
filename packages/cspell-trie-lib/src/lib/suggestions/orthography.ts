@@ -1,13 +1,13 @@
 const intl = new Intl.Collator('en', { sensitivity: 'base' });
 
-export const compare = intl.compare;
+export const compare: Intl.Collator['compare'] = intl.compare;
 
 /**
  * This a set of letters that look like each other.
  * There can be a maximum of 30 groups.
  * It is possible for a letter to appear in more than 1 group, but not encouraged.
  */
-export const visualLetterGroups = [
+export const visualLetterGroups: string[] = [
     // cspell:disable
     forms('ǎàåÄÀAãâáǟặắấĀāăąaäæɐɑαаᾳ') + 'ᾳ',
     forms('Bbḃвъь'),

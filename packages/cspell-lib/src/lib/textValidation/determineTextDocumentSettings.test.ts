@@ -12,7 +12,7 @@ const __filename = fileURLToPath(import.meta.url);
 
 const samples = pathPackageSamples;
 const cfgPath = path.join(samples, '.cspell.json');
-const oc = <T>(obj: T) => expect.objectContaining(obj);
+const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
 
 describe('determineTextDocumentSettings', () => {
     test.each`

@@ -1,4 +1,4 @@
-export const specialCharacters = [
+export const specialCharacters: string[] = [
     'arrow <',
     'escape \\',
     '\\\\\\',
@@ -9,10 +9,10 @@ export const specialCharacters = [
     'Braces: {}[]()',
 ];
 
-export const smallSample = ['lift', 'talk', 'walk', 'turn', 'burn', 'chalk', 'churn'].flatMap(applyEndings);
+export const smallSample: string[] = ['lift', 'talk', 'walk', 'turn', 'burn', 'chalk', 'churn'].flatMap(applyEndings);
 
 // cspell:disable
-export const mixedLanguageWords = [
+export const mixedLanguageWords: string[] = [
     'Here are a few words to use as a dictionary. They just need to be split. ',
     'walk walked walking walker ',
     'talk talked talking talker ',
@@ -48,7 +48,7 @@ export const mixedLanguageWords = [
     .filter((a) => !!a);
 // cspell:enable
 
-export const sampleWords = [
+export const sampleWords: string[] = [
     'journal',
     'journalism',
     'journalist',
@@ -96,7 +96,7 @@ export const sampleWords = [
     // cspell:enable
 ];
 
-export const sampleWordsExt = [...sampleWords, ...mixedLanguageWords].filter(filterUnique());
+export const sampleWordsExt: string[] = [...sampleWords, ...mixedLanguageWords].filter(filterUnique());
 
 function applyEndings(s: string): string[] {
     const endings = ['', 'ed', 'er', 'ing', 's'];

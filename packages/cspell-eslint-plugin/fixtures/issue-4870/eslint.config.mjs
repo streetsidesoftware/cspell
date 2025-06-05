@@ -3,7 +3,7 @@ import nodePlugin from 'eslint-plugin-n';
 import cspellRecommended from '@cspell/eslint-plugin/recommended';
 
 /**
- * @type { import("eslint").Linter.FlatConfig[] }
+ * @type { import("eslint").Linter.Config[] }
  */
 const config = [
     eslint.configs.recommended,

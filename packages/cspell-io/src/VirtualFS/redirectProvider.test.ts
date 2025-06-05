@@ -14,7 +14,7 @@ import { VFSErrorUnsupportedRequest } from './WrappedProviderFs.js';
 const samplesURL = pathToSampleURL();
 
 const sc = (m: string) => expect.stringContaining(m);
-const oc = <T>(obj: T) => expect.objectContaining(obj);
+const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
 
 describe('Validate RedirectProvider', () => {
     test('createRedirectProvider', () => {

@@ -25,7 +25,7 @@ export class TrieNodeBuilder implements TrieBuilder<TrieNodeTrie> {
     root: TrieRoot = { ...defaultTrieInfo, c: Object.create(null) };
     shouldSort = false;
 
-    wordToCharacters = (word: string) => [...word];
+    wordToCharacters = (word: string): string[] => [...word];
 
     setOptions(options: Readonly<PartialTrieOptions>): Readonly<TrieOptions> {
         const opts = mergeOptionalWithDefaults(options, this.root);
@@ -145,7 +145,7 @@ export class TrieNodeBuilder implements TrieBuilder<TrieNodeTrie> {
         }
     }
 
-    sortNodes() {
+    sortNodes(): void {
         if (this.shouldSort) {
             this.sortChildren(this.root);
         }

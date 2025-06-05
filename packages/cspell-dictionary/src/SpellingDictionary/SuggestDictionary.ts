@@ -89,8 +89,9 @@ class SuggestDictionaryImpl implements SuggestDictionary {
         ignoreCaseAndAccents: IgnoreCaseOption = defaults.isForbiddenIgnoreCaseAndAccents,
     ): boolean {
         if (this.suggestions.has(word)) return true;
+        if (!ignoreCaseAndAccents) return false;
         const lcWord = word.toLowerCase();
-        return ignoreCaseAndAccents && (this.suggestions.has(lcWord) || this.suggestionsLower.has(lcWord));
+        return this.suggestions.has(lcWord) || this.suggestionsLower.has(lcWord);
     }
 
     suggest(

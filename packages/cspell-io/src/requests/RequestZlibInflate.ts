@@ -1,9 +1,11 @@
-import type { ServiceRequestFactoryRequestType } from '@cspell/cspell-service-bus';
+import type { RequestFactory, ServiceRequestFactoryRequestType } from '@cspell/cspell-service-bus';
 import { requestFactory } from '@cspell/cspell-service-bus';
 
 const RequestType = 'zlib:inflate' as const;
 interface RequestParams {
     readonly data: ArrayBufferView;
 }
-export const RequestZlibInflate = requestFactory<typeof RequestType, RequestParams, ArrayBufferView>(RequestType);
-export type RequestZlibInflate = ServiceRequestFactoryRequestType<typeof RequestZlibInflate>;
+
+export type RequestZlibInflateFactory = RequestFactory<typeof RequestType, RequestParams, ArrayBufferView>;
+export type RequestZlibInflate = ServiceRequestFactoryRequestType<RequestZlibInflateFactory>;
+export const RequestZlibInflate: RequestZlibInflateFactory = requestFactory(RequestType);

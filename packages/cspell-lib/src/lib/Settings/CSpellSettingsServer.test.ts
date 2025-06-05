@@ -27,7 +27,7 @@ import { _defaultSettings, getDefaultBundledSettingsAsync } from './DefaultSetti
 
 const samplesDir = pathPackageSamples;
 const pathSrc = path.join(pathPackageRoot, 'src');
-const oc = <T>(obj: T) => expect.objectContaining(obj);
+const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
 
 describe('Validate CSpellSettingsServer', () => {
     test('tests mergeSettings with conflicting "name"', () => {

@@ -3,14 +3,14 @@ import * as crypto from 'node:crypto';
 import * as fs from 'node:fs';
 import { dirname, isAbsolute as isAbsolutePath, relative as relativePath, resolve as resolvePath } from 'node:path';
 
-import type { FileResult } from '../../util/fileHelper.js';
 import { readFileInfo } from '../../util/fileHelper.js';
+import type { LintFileResult } from '../../util/LintFileResult.js';
 import type { CSpellLintResultCache } from './CSpellLintResultCache.js';
 import type { FileDescriptor, FileEntryCache } from './fileEntryCache.js';
 import { createFromFile, normalizePath } from './fileEntryCache.js';
 import { ShallowObjectCollection } from './ObjectCollection.js';
 
-export type CachedFileResult = Omit<FileResult, 'fileInfo' | 'elapsedTimeMs' | 'cached'>;
+export type CachedFileResult = Omit<LintFileResult, 'fileInfo' | 'elapsedTimeMs' | 'cached'>;
 
 /**
  * This is the data cached.
@@ -87,7 +87,7 @@ export class DiskCache implements CSpellLintResultCache {
         this.version = calcVersion(cspellVersion);
     }
 
-    public async getCachedLintResults(filename: string): Promise<FileResult | undefined> {
+    public async getCachedLintResults(filename: string): Promise<LintFileResult | undefined> {
         filename = normalizePath(filename);
         const fileDescriptor = this.fileEntryCache.getFileDescriptor(filename);
         const meta = fileDescriptor.meta as CSpellCacheMeta;
@@ -133,7 +133,7 @@ export class DiskCache implements CSpellLintResultCache {
     }
 
     public setCachedLintResults(
-        { fileInfo, elapsedTimeMs: _, cached: __, ...result }: FileResult,
+        { fileInfo, elapsedTimeMs: _, cached: __, ...result }: LintFileResult,
         dependsUponFiles: string[],
     ): void {
         const fileDescriptor = this.fileEntryCache.getFileDescriptor(fileInfo.filename);

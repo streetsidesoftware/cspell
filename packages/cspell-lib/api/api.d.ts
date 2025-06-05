@@ -1,4 +1,4 @@
-import { Glob, AdvancedCSpellSettingsWithSourceTrace, DictionaryDefinitionPreferred, DictionaryDefinitionCustom, DictionaryDefinitionAugmented, DictionaryDefinitionInline, Parser, CSpellUserSettings, ImportFileRef, PnPSettings, CSpellSettingsWithSourceTrace, TextOffset, Issue, LocaleId, CSpellSettings, MappedText, ParsedText, TextDocumentOffset } from '@cspell/cspell-types';
+import { Glob, AdvancedCSpellSettingsWithSourceTrace, DictionaryDefinitionPreferred, DictionaryDefinitionCustom, DictionaryDefinitionAugmented, DictionaryDefinitionInline, DictionaryDefinitionSimple, Parser, CSpellUserSettings, ImportFileRef, PnPSettings, CSpellSettingsWithSourceTrace, TextOffset, Issue, LocaleId, CSpellSettings, MappedText, ReportingConfiguration, ParsedText, TextDocumentOffset } from '@cspell/cspell-types';
 export * from '@cspell/cspell-types';
 import * as cspell_io from 'cspell-io';
 import { VFileSystem } from 'cspell-io';
@@ -232,8 +232,12 @@ interface CSpellSettingsInternalFinalized extends CSpellSettingsInternal {
     includeRegExpList: RegExp[];
 }
 type DictionaryDefinitionCustomUniqueFields = Omit<DictionaryDefinitionCustom, keyof DictionaryDefinitionPreferred>;
-type DictionaryDefinitionInternal = DictionaryFileDefinitionInternal | DictionaryDefinitionInlineInternal;
+type DictionaryDefinitionInternal = DictionaryFileDefinitionInternal | DictionaryDefinitionInlineInternal | DictionaryDefinitionSimpleInternal;
 type DictionaryDefinitionInlineInternal = DictionaryDefinitionInline & {
+    /** The path to the config file that contains this dictionary definition */
+    readonly __source?: string | undefined;
+};
+type DictionaryDefinitionSimpleInternal = DictionaryDefinitionSimple & {
     /** The path to the config file that contains this dictionary definition */
     readonly __source?: string | undefined;
 };
@@ -557,7 +561,7 @@ interface ExtendedSuggestion {
     cost?: number;
 }
 
-interface ValidationResult extends TextOffset, Pick<Issue, 'message' | 'issueType'> {
+interface ValidationResult extends TextOffset, Pick<Issue, 'message' | 'issueType' | 'hasPreferredSuggestions' | 'hasSimpleSuggestions'> {
     line: TextOffset;
     isFlagged?: boolean | undefined;
     isFound?: boolean | undefined;
@@ -677,7 +681,7 @@ interface MatchRange {
 }
 
 type TextOffsetRO = Readonly<TextOffset>;
-interface ValidationOptions extends IncludeExcludeOptions {
+interface ValidationOptions extends IncludeExcludeOptions, ReportingConfiguration {
     maxNumberOfProblems?: number;
     maxDuplicateProblems?: number;
     minWordLength?: number;
@@ -699,10 +703,8 @@ interface LineSegment {
     /** A segment of text from the line, the offset is relative to the beginning of the document. */
     segment: TextOffsetRO;
 }
-interface MappedTextValidationResult extends MappedText {
-    isFlagged?: boolean | undefined;
+interface MappedTextValidationResult extends MappedText, Pick<Issue, 'hasSimpleSuggestions' | 'hasPreferredSuggestions' | 'isFlagged' | 'suggestionsEx'> {
     isFound?: boolean | undefined;
-    suggestionsEx?: ExtendedSuggestion[] | undefined;
 }
 type TextValidatorFn = (text: MappedText) => Iterable<MappedTextValidationResult>;
 
@@ -901,7 +903,7 @@ declare function checkTextDocument(doc: TextDocument | Document, options: CheckT
  */
 declare function validateText(text: string, settings: CSpellUserSettings, options?: ValidateTextOptions): Promise<ValidationIssue[]>;
 
-interface SpellCheckFileOptions extends ValidateTextOptions {
+interface SpellCheckFileOptions extends ValidateTextOptions, Pick<CSpellUserSettings, 'unknownWords'> {
     /**
      * Optional path to a configuration file.
      * If given, it will be used instead of searching for a configuration file.

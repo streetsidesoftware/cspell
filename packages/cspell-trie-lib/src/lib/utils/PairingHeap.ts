@@ -121,7 +121,11 @@ function mergeSiblings<T>(compare: CompareFn<T>, n: PairHeapNode<T>): PairHeapNo
     return ss ? merge(compare, m, mergeSiblings(compare, ss)) : m;
 }
 
-export const heapMethods = {
+export const heapMethods: {
+    insert: typeof insert;
+    merge: typeof merge;
+    mergeSiblings: typeof mergeSiblings;
+} = {
     insert,
     merge,
     mergeSiblings,

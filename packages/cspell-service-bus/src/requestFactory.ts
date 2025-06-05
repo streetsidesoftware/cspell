@@ -4,7 +4,9 @@ import type { ServiceRequest } from './request.js';
 import { ServiceRequestCls } from './request.js';
 import type { ServiceRequestFactory } from './ServiceRequestFactory.js';
 
-export function requestFactory<T extends string, P, R>(requestType: T): ServiceRequestFactory<ServiceRequest<T, P, R>> {
+export type RequestFactory<T extends string, P, R> = ServiceRequestFactory<ServiceRequest<T, P, R>>;
+
+export function requestFactory<T extends string, P, R>(requestType: T): RequestFactory<T, P, R> {
     type Request = ServiceRequestCls<T, P, R>;
     class RequestClass extends ServiceRequestCls<T, P, R> {
         static type = requestType;

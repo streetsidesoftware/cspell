@@ -4,7 +4,7 @@
     "access": "public",
     "provenance": true
   },
-  "version": "9.0.1",
+  "version": "9.0.2",
   "description": "A library of useful I/O functions used across various cspell tools.",
   "type": "module",
   "sideEffects": false,
@@ -23,8 +23,8 @@
     "!**/*.map"
   ],
   "scripts": {
-    "build": "tsup-node",
-    "build:watch": "tsup-node --watch",
+    "build": "tsdown",
+    "build:watch": "tsdown --watch",
     "watch": "pnpm build:watch",
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "clean-build": "pnpm run clean && pnpm run build",

@@ -54,8 +54,8 @@ const testFixtures = pathRepoTestFixtures;
 
 const urlIssues = new URL('issues/', pathRepoTestFixturesURL);
 
-const oc = <T>(obj: T) => expect.objectContaining(obj);
-const sm = (m: string | RegExp) => expect.stringMatching(m);
+const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
+const sm = (s: string | RegExp) => expect.stringMatching(s);
 
 function expectError(err: string | Error) {
     const message = typeof err === 'string' ? err : err.message;

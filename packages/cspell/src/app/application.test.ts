@@ -21,8 +21,8 @@ const searchRoot = path.resolve(samplesRoot, 'config-search');
 
 const sampleOptions = { root: samplesRoot };
 
-const oc = <T>(obj: T) => expect.objectContaining(obj);
-const ac = <T>(a: Array<T>) => expect.arrayContaining(a);
+const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
+const ac = (...params: Parameters<typeof expect.arrayContaining>) => expect.arrayContaining(...params);
 
 vi.mock('node:stream/consumers', () => ({ default: { text: vi.fn() } }));
 
@@ -220,13 +220,13 @@ describe('Validate createInit', () => {
     test('createInit', async () => {
         async function worked() {
             try {
-                await App.createInit();
+                await App.createInit({ output: 'temp/', format: 'yaml', locale: 'en-GB' });
             } catch {
                 return false;
             }
             return true;
         }
-        expect(await worked()).toBe(false);
+        expect(await worked()).toBe(true);
     });
 });
 

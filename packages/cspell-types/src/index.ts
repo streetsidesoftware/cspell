@@ -1,12 +1,13 @@
-// Using old-style of `type` exports because the new style breaks some integrations.
 export type { CSpellUserSettingsFields } from './configFields.js';
 export { ConfigFields } from './configFields.js';
 export type {
     CSpellReporter,
+    CSpellReporterEmitters,
     CSpellReporterModule,
     DebugEmitter,
     ErrorEmitter,
     ErrorLike,
+    FeaturesSupportedByReporter,
     Issue,
     MessageEmitter,
     MessageType,
@@ -19,11 +20,14 @@ export type {
     ProgressItem,
     ProgressTypes,
     ReporterConfiguration,
+    ReportIssueOptions,
     ResultEmitter,
     RunResult,
     SpellingErrorEmitter,
 } from './CSpellReporter.js';
+export type { ReportingConfiguration, UnknownWordsChoices, UnknownWordsConfiguration } from './CSpellReporter.js';
 export { IssueType, MessageTypes } from './CSpellReporter.js';
+export { unknownWordsChoices } from './CSpellReporter.js';
 export type {
     AdvancedCSpellSettings,
     AdvancedCSpellSettingsWithSourceTrace,
@@ -72,11 +76,9 @@ export type {
     RegExpPatternDefinition,
     RegExpPatternList,
     ReporterSettings,
-    ReportingConfiguration,
     Settings,
     SimpleGlob,
     Source,
-    SuggestionsConfiguration,
     TrustLevel,
     Version,
     VersionLatest,
@@ -99,6 +101,7 @@ export type {
     DictionaryDefinitionInlineWords,
     DictionaryDefinitionLegacy,
     DictionaryDefinitionPreferred,
+    DictionaryDefinitionSimple,
     DictionaryFileTypes,
     DictionaryId,
     DictionaryNegRef,
@@ -112,5 +115,6 @@ export type { CharacterSet, CharacterSetCosts, DictionaryInformation, EditCosts 
 export type { Feature, Features } from './features.js';
 export type { ParsedText, Parser, ParseResult, ParserName, ParserOptions } from './Parser/index.js';
 export type { SuggestionCostMapDef, SuggestionCostsDefs } from './suggestionCostsDef.js';
+export type { SuggestionsConfiguration } from './SuggestionsConfiguration.js';
 export type { MappedText } from './TextMap.js';
 export type { TextDocumentOffset, TextOffset } from './TextOffset.js';

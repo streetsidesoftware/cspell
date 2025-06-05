@@ -7,7 +7,7 @@ import type { FileLoaderMiddleware } from './FileLoader.js';
 import type { IO } from './IO.js';
 import { getDeserializer, getLoader, getSerializer } from './middlewareHelper.js';
 import type { DeserializerNext, SerializerMiddleware } from './Serializer.js';
-import type { TextFileRef } from './TextFile.js';
+import type { TextFile, TextFileRef } from './TextFile.js';
 import { toURL } from './util/toURL.js';
 
 export interface CSpellConfigFileReaderWriter {
@@ -20,6 +20,8 @@ export interface CSpellConfigFileReaderWriter {
     setUntrustedExtensions(ext: readonly string[]): this;
     setTrustedUrls(urls: readonly (URL | string)[]): this;
     toCSpellConfigFile(configFile: ICSpellConfigFile): CSpellConfigFile;
+    parse(textFile: TextFile): CSpellConfigFile;
+    serialize(configFile: ICSpellConfigFile): string;
     /**
      * Untrusted extensions are extensions that are not trusted to be loaded from a file system.
      * Extension are case insensitive and should include the leading dot.
@@ -79,6 +81,11 @@ export class CSpellConfigFileReaderWriterImpl implements CSpellConfigFileReaderW
 
     getDeserializer(): DeserializerNext {
         return getDeserializer(this.middleware);
+    }
+
+    parse(textFile: TextFile): CSpellConfigFile {
+        const deserializer = this.getDeserializer();
+        return deserializer(textFile);
     }
 
     serialize(configFile: ICSpellConfigFile): string {

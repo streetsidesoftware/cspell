@@ -1,3 +1,4 @@
+import type { SuggestionsConfiguration } from './SuggestionsConfiguration';
 import type { TextDocumentOffset, TextOffset } from './TextOffset.js';
 
 export interface Suggestion {
@@ -16,28 +17,47 @@ export interface Suggestion {
 }
 
 export interface Issue extends Omit<TextDocumentOffset, 'doc'> {
-    /** text surrounding the issue text */
-    context: TextOffset;
+    /**
+     * The text surrounding the issue text. It is only included if the reporter cannot generated it automatically.
+     */
+    context?: TextOffset | undefined;
     /**
      * true if the issue has been flagged as a forbidden word.
      */
-    isFlagged?: boolean;
+    isFlagged?: boolean | undefined;
     /**
      * An optional array of replacement strings.
      */
-    suggestions?: string[];
+    suggestions?: string[] | undefined;
     /**
      * An optional array of suggestions.
      */
-    suggestionsEx?: Suggestion[];
+    suggestionsEx?: Suggestion[] | undefined;
     /**
      * Issues are spelling issues unless otherwise specified.
      */
-    issueType?: IssueType;
+    issueType?: IssueType | undefined;
     /**
      * Optional message to show.
      */
-    message?: string;
+    message?: string | undefined;
+
+    /**
+     * `true` - if it has been determined if simple suggestions are available.
+     * `false` - if simple suggestions are NOT available.
+     * `undefined` - if it has not been determined.
+     * @since 9.1.0
+     */
+    hasSimpleSuggestions?: boolean | undefined;
+
+    /**
+     * This setting is used for common typo detection.
+     * - `true` - if it has been determined if preferred suggestions are available.
+     * - `false` - if preferred suggestions are NOT available.
+     * - `undefined` - if it has not been determined.
+     * @since 9.1.0
+     */
+    hasPreferredSuggestions?: boolean | undefined;
 }
 
 export enum IssueType {
@@ -65,7 +85,7 @@ export type ErrorLike = Error | { message: string; name: string; toString: () =>
 
 export type ErrorEmitter = (message: string, error: ErrorLike) => void;
 
-export type SpellingErrorEmitter = (issue: Issue) => void;
+export type SpellingErrorEmitter = (issue: Issue, options?: ReportIssueOptions) => void;
 
 export type ProgressTypes = 'ProgressFileBegin' | 'ProgressFileComplete';
 export type ProgressItem = ProgressFileBegin | ProgressFileComplete;
@@ -76,17 +96,49 @@ export interface ProgressBase {
 
 export interface ProgressFileBase extends ProgressBase {
     type: ProgressTypes;
+    /**
+     * The sequence number of the file being processed.
+     */
     fileNum: number;
+    /**
+     * The total number of files being processed.
+     */
     fileCount: number;
+    /**
+     * The file name or href of file being processed.
+     */
     filename: string;
 }
 
 export interface ProgressFileComplete extends ProgressFileBase {
     type: 'ProgressFileComplete';
+    /**
+     * The time it took to process the file in milliseconds.
+     * If `undefined`, then the elapsed time is not available.
+     */
     elapsedTimeMs: number | undefined;
+    /**
+     * `true` if the file was processed.
+     * `false` if the file was skipped.
+     */
     processed: boolean | undefined;
+    /**
+     * Number of errors and issues found in the file.
+     */
     numErrors: number | undefined;
+    /**
+     * `true` if the file was processed from the cache.
+     */
     cached?: boolean;
+    /**
+     * Issues found in the file.
+     * If `undefined`, then the issues are not available.
+     */
+    issues?: Iterable<Issue> | undefined;
+    /**
+     * reportIssuesOptions to be used when reporting issues.
+     */
+    reportIssueOptions?: ReportIssueOptions | undefined;
 }
 
 /**
@@ -113,13 +165,21 @@ export interface RunResult {
 
 export type ResultEmitter = (result: RunResult) => void | Promise<void>;
 
-export interface CSpellReporter {
+export interface CSpellReporterEmitters {
     issue?: SpellingErrorEmitter;
     info?: MessageEmitter;
     debug?: DebugEmitter;
     error?: ErrorEmitter;
     progress?: ProgressEmitter;
     result?: ResultEmitter;
+}
+
+export interface CSpellReporter extends CSpellReporterEmitters {
+    /**
+     * Allows the reporter to specify supported features.
+     * @since 9.1.0
+     */
+    features?: FeaturesSupportedByReporter | undefined;
 }
 
 export interface ReporterConfigurationBase {
@@ -149,14 +209,14 @@ export interface ReporterConfigurationBase {
      *
      * @default true
      */
-    ignoreRandomStrings?: boolean;
+    ignoreRandomStrings?: boolean | undefined;
 
     /**
      * The minimum length of a random string to be ignored.
      *
      * @default 40
      */
-    minRandomLength?: number;
+    minRandomLength?: number | undefined;
 }
 
 interface ReporterCommandLineOptions {
@@ -186,4 +246,76 @@ export interface ReporterConfiguration extends ReporterCommandLineOptions, Repor
 
 export interface CSpellReporterModule {
     getReporter: (settings: unknown, config: ReporterConfiguration) => CSpellReporter;
+}
+
+/**
+ * Allows the reporter to advertise which features it supports.
+ */
+export interface FeaturesSupportedByReporter {
+    /**
+     * The reporter supports the {@link ReportingConfiguration.unknownWords} option and understands
+     * how to filter issues based upon {@link Issue.isFlagged}, {@link Issue.hasSimpleSuggestions} and {@link Issue.hasPreferredSuggestions}.
+     * - `true` - The `reporter.issue` method will be called for all spelling issues and it is expected to handle .
+     * - `false | undefined` - the unknown words will be filtered out based upon the `unknownWords` setting before being passed to the reporter.
+     */
+    unknownWords?: boolean | undefined;
+
+    /**
+     * The reporter supports the {@link Issue.issueType} option.
+     * - `true` - the reporter will be called with all issues types.
+     * - `false | undefined` - only {@link IssueType.spelling} issues will be passed to the reporter.
+     */
+    issueType?: boolean | undefined;
+
+    /**
+     * The reporter can generate context for issues.
+     * - `true` - the reporter will be called with issues that do NOT have a `context` property.
+     * - `false | undefined` - the reporter will be called with issues that have a `context` property.
+     */
+    contextGeneration?: boolean | undefined;
+}
+
+export interface ReportingConfiguration
+    extends ReporterConfigurationBase,
+        SuggestionsConfiguration,
+        UnknownWordsConfiguration {}
+
+export interface ReportIssueOptions extends UnknownWordsConfiguration {
+    /**
+     * Verify that the in-document directives are correct.
+     */
+    validateDirectives?: boolean | undefined;
+
+    /**
+     * Tells the spell checker to show context around the issue.
+     * It is the number of characters to show on either side of the issue.
+     */
+    showContext?: number | undefined;
+}
+
+/**
+ * Possible choices for how to handle unknown words.
+ */
+export type UnknownWordsChoices = 'report-all' | 'report-simple' | 'report-common-typos' | 'report-flagged';
+
+export const unknownWordsChoices = {
+    ReportAll: 'report-all',
+    ReportSimple: 'report-simple',
+    ReportCommonTypos: 'report-common-typos',
+    ReportFlagged: 'report-flagged',
+} as const satisfies Record<string, UnknownWordsChoices>;
+
+export interface UnknownWordsConfiguration {
+    /**
+     * Controls how unknown words are handled.
+     *
+     * - `report-all` - Report all unknown words (default behavior)
+     * - `report-simple` - Report unknown words that have simple spelling errors, typos, and flagged words.
+     * - `report-common-typos` - Report unknown words that are common typos and flagged words.
+     * - `report-flagged` - Report unknown words that are flagged.
+     *
+     * @default "report-all"
+     * @since 9.1.0
+     */
+    unknownWords?: UnknownWordsChoices | undefined;
 }

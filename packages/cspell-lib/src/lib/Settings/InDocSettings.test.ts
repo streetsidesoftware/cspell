@@ -8,9 +8,9 @@ import * as InDoc from './InDocSettings.js';
 
 const dictName = InDoc.__internal.staticInDocumentDictionaryName;
 
-const oc = <T>(obj: T) => expect.objectContaining(obj);
-const ac = <T>(a: Array<T>) => expect.arrayContaining(a);
-const nac = expect.not.arrayContaining;
+const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
+const ac = (...params: Parameters<typeof expect.arrayContaining>) => expect.arrayContaining(...params);
+const nac = (...params: Parameters<typeof expect.not.arrayContaining>) => expect.not.arrayContaining(...params);
 
 // cSpell:ignore faullts straange tooo
 // cSpell:ignoreRegExp \w+s{4}\w+

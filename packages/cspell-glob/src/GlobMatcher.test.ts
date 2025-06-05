@@ -34,7 +34,7 @@ const pathNames = new Map([
     [pathPosix, 'Posix'],
 ]);
 
-const oc = <T>(obj: T) => expect.objectContaining(obj);
+const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
 
 function r(...parts: string[]) {
     return path.resolve(...parts);
@@ -774,14 +774,9 @@ function isWin32(pathInstance: PathInterface): boolean {
     throw new Error('Unknown pathInstance');
 }
 
-/** alias for `expected.objectContaining` */
-function eo<T>(obj: T): T {
-    return expect.objectContaining(obj);
-}
-
 /** Helper for function for building expected GlobPatterns */
 function p(glob: string, root?: string): GlobPatternWithOptionalRoot {
-    return eo(root ? { glob, root } : { glob });
+    return oc(root ? { glob, root } : { glob });
 }
 
 function resolvePattern(p: GlobPattern, path: PathInterface): GlobPattern;

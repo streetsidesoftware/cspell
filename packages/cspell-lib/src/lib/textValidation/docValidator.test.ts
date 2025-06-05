@@ -21,9 +21,9 @@ const __filename = fileURLToPath(import.meta.url);
 const docCache = new AutoCache(_loadDoc, 100);
 const fixturesDir = pathPackageFixtures;
 
-const oc = <T>(obj: T) => expect.objectContaining(obj);
-const ac = <T>(a: Array<T>) => expect.arrayContaining(a);
-const sc = (m: string) => expect.stringContaining(m);
+const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
+const ac = (...params: Parameters<typeof expect.arrayContaining>) => expect.arrayContaining(...params);
+const sc = (s: string) => expect.stringContaining(s);
 
 const { sanitizeSuggestion } = __testing__;
 
@@ -143,6 +143,7 @@ describe('docValidator', () => {
         ${fix('sample-with-directives-errors.ts')}       | ${1}                 | ${['disable-prev', 'ignored', 'world', 'enable-line']}                                                                                                                                        | ${undefined}
         ${tFix('issues/issue-4811/#local/README.md')}    | ${undefined}         | ${[]}                                                                                                                                                                                         | ${undefined}
         ${tFix('issues/issue-4811/#local/version@2.md')} | ${undefined}         | ${['marrkdown']}                                                                                                                                                                              | ${undefined /* cspell:disable-line */}
+        ${fixDict('supportNonStrictSearches/test.txt')}  | ${undefined}         | ${['paris']}                                                                                                                                                                                  | ${undefined /* cspell:disable-line */}
     `(
         'checkDocument $filename $maxDuplicateProblems',
         async ({ filename, maxDuplicateProblems, expectedIssues, expectedRawIssues }) => {

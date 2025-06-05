@@ -99,7 +99,7 @@ function* nodeWalker(root: TrieNode): WalkerIterator {
 }
 
 const useITrie = false;
-export const walkerWords = useITrie ? _walkerWords2 : _walkerWords;
+export const walkerWords: typeof _walkerWords = useITrie ? _walkerWords2 : _walkerWords;
 
 /**
  * Walks the Trie and yields each word.

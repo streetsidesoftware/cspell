@@ -31,6 +31,38 @@ const defaultConfig = {
 };
 
 /**
+ *
+ * @param {import('json-schema').JSONSchema7['properties']} properties
+ */
+function removeHiddenProperties(properties) {
+    if (!properties) return;
+
+    for (const [key, prop] of Object.entries(properties)) {
+        if (typeof prop !== 'object' || !prop) continue;
+        if ('hide' in prop) {
+            delete properties[key];
+        }
+    }
+}
+
+function removeHiddenPropertiesFromDefinitions(definitions) {
+    if (!definitions) return;
+
+    for (const def of Object.values(definitions)) {
+        if (typeof def !== 'object' || !def) continue;
+        removeHiddenProperties(def.properties);
+    }
+}
+
+/**
+ * @param {import('json-schema').JSONSchema7} schema
+ */
+function removeHidden(schema) {
+    removeHiddenProperties(schema.properties);
+    removeHiddenPropertiesFromDefinitions(schema.definitions);
+}
+
+/**
  * Build the schema. This method replaces the old command line that was run in `packages/cspell-types`
  * ```sh
  * ts-json-schema-generator \
@@ -52,13 +84,14 @@ async function run() {
         tsconfig: path.join(typesDir, './tsconfig.json'),
         type: 'CSpellSettings',
         topRef: false,
-        extraTags: ['scope', 'deprecated', 'deprecationMessage'],
+        extraTags: ['scope', 'deprecated', 'deprecationMessage', 'since', 'hide'],
         skipTypeCheck: true,
     };
 
     const schema = createGenerator(config).createSchema(config.type);
     // @ts-expect-error allowTrailingCommas is a new feature
     schema.allowTrailingCommas = true;
+    removeHidden(schema);
     const stringify = config.sortProps ? safeStableStringify : JSON.stringify;
     const schemaString = stringify(schema, undefined, 2)?.replaceAll('\u200B', '') || '';
 

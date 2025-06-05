@@ -1,6 +1,6 @@
 import * as path from 'node:path';
 
-import type { Issue } from '@cspell/cspell-types';
+import { type CSpellUserSettings, unknownWordsChoices, type UnknownWordsConfiguration } from '@cspell/cspell-types';
 
 import type { CSpellConfigFile, LinterCliOptions, LinterOptions } from '../options.js';
 import type { GlobSrcInfo } from '../util/glob.js';
@@ -15,7 +15,6 @@ interface Deprecated {
 }
 
 export class LintRequest {
-    readonly uniqueFilter: (issue: Issue) => boolean;
     readonly locale: string;
 
     readonly configFile: string | CSpellConfigFile | undefined;
@@ -25,6 +24,7 @@ export class LintRequest {
     readonly enableGlobDot: boolean | undefined;
     readonly fileLists: string[];
     readonly files: string[] | undefined;
+    readonly cspellSettingsFromCliOptions: CSpellUserSettings;
 
     constructor(
         readonly fileGlobs: string[],
@@ -36,12 +36,15 @@ export class LintRequest {
         this.excludes = calcExcludeGlobInfo(this.root, options.exclude);
         this.locale = options.locale ?? options.local ?? '';
         this.enableGlobDot = options.dot;
-        // this.uniqueFilter = options.unique ? util.uniqueFilterFnGenerator((issue: Issue) => issue.text) : () => true;
-        this.uniqueFilter = () => true;
-        this.showContext =
-            options.showContext === true ? defaultContextRange : options.showContext ? options.showContext : 0;
+        this.showContext = Math.max(
+            options.showContext === true ? defaultContextRange : options.showContext ? options.showContext : 0,
+            0,
+        );
         this.fileLists = (options.fileList ?? options.fileLists) || [];
         this.files = mergeFiles(options.file, options.files);
+        this.cspellSettingsFromCliOptions = {
+            ...extractUnknownWordsConfig(options),
+        };
     }
 }
 
@@ -55,4 +58,30 @@ function merge<T>(a: T[] | undefined, b: T[] | undefined): T[] | undefined {
     if (!a) return b;
     if (!b) return a;
     return [...a, ...b];
+}
+
+export function extractUnknownWordsConfig(options: LinterCliOptions): UnknownWordsConfiguration {
+    const config: UnknownWordsConfiguration = {};
+    if (!options.report) return config;
+
+    switch (options.report) {
+        case 'all': {
+            config.unknownWords = unknownWordsChoices.ReportAll;
+            break;
+        }
+        case 'simple': {
+            config.unknownWords = unknownWordsChoices.ReportSimple;
+            break;
+        }
+        case 'typos': {
+            config.unknownWords = unknownWordsChoices.ReportCommonTypos;
+            break;
+        }
+        case 'flagged': {
+            config.unknownWords = unknownWordsChoices.ReportFlagged;
+            break;
+        }
+    }
+
+    return config;
 }

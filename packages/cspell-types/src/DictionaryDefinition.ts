@@ -6,6 +6,7 @@ export type DictionaryDefinition =
     | DictionaryDefinitionCustom
     | DictionaryDefinitionAugmented
     | DictionaryDefinitionInline
+    | DictionaryDefinitionSimple
     | DictionaryDefinitionAlternate
     | DictionaryDefinitionLegacy;
 
@@ -27,13 +28,13 @@ export interface DictionaryDefinitionBase {
     /**
      * Optional description of the contents / purpose of the dictionary.
      */
-    description?: string;
+    description?: string | undefined;
 
     /** Replacement pairs. */
-    repMap?: ReplaceMap;
+    repMap?: ReplaceMap | undefined;
 
     /** Use Compounds. */
-    useCompounds?: boolean;
+    useCompounds?: boolean | undefined;
 
     /**
      * Indicate that suggestions should not come from this dictionary.
@@ -70,6 +71,17 @@ export interface DictionaryDefinitionBase {
      * @default "S"
      */
     type?: DictionaryFileTypes | undefined;
+
+    /**
+     * Strip case and accents to allow for case insensitive searches and
+     * words without accents.
+     *
+     * Note: this setting only applies to word lists. It has no-impact on trie
+     * dictionaries.
+     *
+     * @default true
+     */
+    supportNonStrictSearches?: boolean | undefined;
 }
 
 export interface DictionaryDefinitionPreferred extends DictionaryDefinitionBase {
@@ -86,10 +98,93 @@ export interface DictionaryDefinitionPreferred extends DictionaryDefinitionBase 
 }
 
 /**
+ * An Empty Dictionary Definition
+ */
+export interface DictionaryDefinitionSimple extends DictionaryDefinitionBase {
+    /**
+     * @hide
+     */
+    repMap?: ReplaceMap | undefined;
+
+    /**
+     * @hide
+     */
+    useCompounds?: boolean | undefined;
+
+    /**
+     * @hide
+     */
+    noSuggest?: boolean | undefined;
+
+    /**
+     * @hide
+     */
+    ignoreForbiddenWords?: boolean | undefined;
+
+    /**
+     * @hide
+     */
+    type?: DictionaryFileTypes | undefined;
+
+    /**
+     * @hide
+     */
+    path?: string | undefined;
+
+    /**
+     * @hide
+     */
+    file?: undefined;
+}
+
+/**
  * Used to provide extra data related to the dictionary
  */
 export interface DictionaryDefinitionAugmented extends DictionaryDefinitionPreferred {
     dictionaryInformation?: DictionaryInformation;
+}
+
+interface HiddenFields {
+    /**
+     * Not used
+     * @hide
+     */
+    path?: undefined;
+
+    /**
+     * Not used
+     * @hide
+     */
+    file?: undefined;
+
+    /**
+     * Not used
+     * @hide
+     */
+    type?: undefined;
+
+    /**
+     * Use `ignoreWords` instead.
+     * @hide
+     */
+    noSuggest?: undefined;
+
+    /**
+     * Not used
+     * @hide
+     */
+    ignoreForbiddenWords?: undefined;
+
+    /**
+     * Not used
+     * @hide
+     */
+    useCompounds?: undefined;
+
+    /**
+     * @hide
+     */
+    repMap?: undefined;
 }
 
 /**
@@ -97,37 +192,9 @@ export interface DictionaryDefinitionAugmented extends DictionaryDefinitionPrefe
  *
  * All words are defined inline.
  */
-interface DictionaryDefinitionInlineBase extends DictionaryDefinitionBase, InlineDictionary {
-    /**
-     * Not used
-     * @hidden
-     */
-    path?: undefined;
-
-    /**
-     * Not used
-     * @hidden
-     */
-    file?: undefined;
-
-    /**
-     * Not used
-     * @hidden
-     */
-    type?: DictionaryDefinitionBase['type'];
-
-    /**
-     * Use `ignoreWords` instead.
-     * @hidden
-     */
-    noSuggest?: DictionaryDefinitionBase['noSuggest'];
-
-    /**
-     * Not used
-     * @hidden
-     */
-    ignoreForbiddenWords?: undefined;
-}
+type DictionaryDefinitionInlineBase = Omit<DictionaryDefinitionBase, keyof HiddenFields> &
+    HiddenFields &
+    InlineDictionary;
 
 export interface DictionaryDefinitionInlineWords
     extends DictionaryDefinitionInlineBase,
@@ -169,7 +236,9 @@ export type DictionaryDefinitionInline =
  * @deprecationMessage Use {@link DictionaryDefinitionPreferred} instead.
  */
 export interface DictionaryDefinitionAlternate extends DictionaryDefinitionBase {
-    /** @hidden */
+    /**
+     * @hidden
+     */
     path?: undefined;
 
     /**
@@ -179,7 +248,9 @@ export interface DictionaryDefinitionAlternate extends DictionaryDefinitionBase 
      */
     file: DictionaryPath;
 
-    /** @hidden */
+    /**
+     * @hidden
+     */
     suggestionEditCosts?: undefined;
 }
 /**

@@ -1,5 +1,6 @@
 import { opConcatMap, opMap, pipeSync } from '@cspell/cspell-pipe/sync';
-import type { CSpellUserSettings, TextOffset } from '@cspell/cspell-types';
+import { type CSpellUserSettings, type TextOffset, unknownWordsChoices } from '@cspell/cspell-types';
+import { createInlineSpellingDictionary, createSuggestDictionary } from 'cspell-dictionary';
 import { describe, expect, test } from 'vitest';
 
 import { createCSpellSettingsInternal as csi } from '../Models/CSpellSettingsInternalDef.js';
@@ -8,6 +9,7 @@ import type { SpellingDictionaryOptions } from '../SpellingDictionary/index.js';
 import { createCollection, createSpellingDictionary, getDictionaryInternal } from '../SpellingDictionary/index.js';
 import { FreqCounter } from '../util/FreqCounter.js';
 import * as Text from '../util/text.js';
+import { ValidationIssue } from '../validator.js';
 import { settingsToValidateOptions } from './settingsToValidateOptions.js';
 import { _testMethods, calcTextInclusionRanges, validateText } from './textValidator.js';
 import type { ValidationOptions } from './ValidationTypes.js';
@@ -259,6 +261,158 @@ describe('Validate textValidator functions', () => {
         const result = [...validateText(text, dict, { ignoreCase: false, flagWords })];
         expect(result).toEqual(expected);
     });
+
+    function mapIssueForUnknownWords(issue: Readonly<ValidationIssue>) {
+        const { text, isFlagged, hasPreferredSuggestions, hasSimpleSuggestions } = issue;
+        return { text, isFlagged, hasPreferredSuggestions, hasSimpleSuggestions };
+    }
+
+    test('tests unknown-words parameter default', async () => {
+        const dictCol = await getSpellingDictionaryCollection();
+        // cspell:ignore heer thier
+        const sampleText = `
+            There is a bit of colour and flavour heer and thier.
+        `;
+
+        // Test default (report) mode
+        const resultDefault = [...validateText(sampleText, dictCol, sToV({}))];
+        const errorsDefault = resultDefault.map(mapIssueForUnknownWords);
+        expect(errorsDefault).toEqual([
+            {
+                hasPreferredSuggestions: true,
+                hasSimpleSuggestions: true,
+                isFlagged: true,
+                text: 'colour',
+            },
+            {
+                hasPreferredSuggestions: true,
+                hasSimpleSuggestions: true,
+                isFlagged: true,
+                text: 'flavour',
+            },
+            {
+                hasPreferredSuggestions: false,
+                hasSimpleSuggestions: undefined,
+                isFlagged: false,
+                text: 'heer',
+            },
+            {
+                hasPreferredSuggestions: true,
+                hasSimpleSuggestions: true,
+                isFlagged: false,
+                text: 'thier',
+            },
+        ]);
+    });
+
+    test('tests unknown-words parameter ReportSimple', async () => {
+        const dictCol = await getSpellingDictionaryCollection();
+        // cspell:ignore heer thier
+        const sampleText = `
+            There is a bit of colour and flavour heer and thier.
+        `;
+
+        // Test default (report) mode
+        const resultDefault = [
+            ...validateText(sampleText, dictCol, sToV({ unknownWords: unknownWordsChoices.ReportSimple })),
+        ];
+        const errorsDefault = resultDefault.map(mapIssueForUnknownWords);
+        expect(errorsDefault).toEqual([
+            {
+                hasPreferredSuggestions: true,
+                hasSimpleSuggestions: true,
+                isFlagged: true,
+                text: 'colour',
+            },
+            {
+                hasPreferredSuggestions: true,
+                hasSimpleSuggestions: true,
+                isFlagged: true,
+                text: 'flavour',
+            },
+            {
+                hasPreferredSuggestions: false,
+                hasSimpleSuggestions: true,
+                isFlagged: false,
+                text: 'heer',
+            },
+            {
+                hasPreferredSuggestions: true,
+                hasSimpleSuggestions: true,
+                isFlagged: false,
+                text: 'thier',
+            },
+        ]);
+    });
+
+    test('tests unknown-words parameter ReportCommonTypos', async () => {
+        const dictCol = await getSpellingDictionaryCollection();
+        // cspell:ignore heer thier
+        const sampleText = `
+            There is a bit of colour and flavour heer and thier.
+        `;
+
+        // Test default (report) mode
+        const resultDefault = [
+            ...validateText(sampleText, dictCol, sToV({ unknownWords: unknownWordsChoices.ReportCommonTypos })),
+        ];
+        const errorsDefault = resultDefault.map(mapIssueForUnknownWords);
+        expect(errorsDefault).toEqual([
+            {
+                hasPreferredSuggestions: true,
+                hasSimpleSuggestions: true,
+                isFlagged: true,
+                text: 'colour',
+            },
+            {
+                hasPreferredSuggestions: true,
+                hasSimpleSuggestions: true,
+                isFlagged: true,
+                text: 'flavour',
+            },
+            {
+                hasPreferredSuggestions: false,
+                hasSimpleSuggestions: undefined,
+                isFlagged: false,
+                text: 'heer',
+            },
+            {
+                hasPreferredSuggestions: true,
+                hasSimpleSuggestions: true,
+                isFlagged: false,
+                text: 'thier',
+            },
+        ]);
+    });
+
+    test('tests unknown-words parameter simple typo', async () => {
+        const dictCol = await getSpellingDictionaryCollection();
+        // Test ignore mode with a typo that has a simple fix
+        // cspell:ignore applei
+        const textWithSimpleTypo = 'The elephant ate the applei and the banana';
+        // Create a custom dictionary with a preferred suggestion for "applei"
+        const customDict = createCollection(
+            [dictCol, createSuggestDictionary(['applei:apple'], 'preferred-suggestions', 'test')],
+            'custom-collection',
+        );
+        const resultIgnore = [
+            ...validateText(
+                textWithSimpleTypo,
+                customDict,
+                sToV({ unknownWords: unknownWordsChoices.ReportCommonTypos }),
+            ),
+        ];
+        // "applei" should be caught because it has a preferred suggestion ("apple")
+        const errorsIgnore = resultIgnore.map(mapIssueForUnknownWords);
+        expect(errorsIgnore).toEqual([
+            {
+                hasPreferredSuggestions: true,
+                hasSimpleSuggestions: true,
+                isFlagged: false,
+                text: 'applei',
+            },
+        ]);
+    });
 });
 
 interface WithIgnoreWords {
@@ -313,6 +467,7 @@ const words = [
     'fixes',
     'has',
     'have',
+    'here',
     'is',
     'known',
     'light',
@@ -323,6 +478,7 @@ const words = [
     'published',
     'should',
     'the',
+    'there',
     'they',
     'this',
     'to',
@@ -335,7 +491,7 @@ const words = [
     "they've",
 ];
 
-const forbiddenWords = ['!colour', '!favour'];
+const forbiddenWords = ['colour->color', 'flavour'];
 
 const specialWords = ['Range8', '4wheel', 'db2Admin', 'Amsterdam', 'Berlin', 'Paris'];
 
@@ -353,7 +509,14 @@ function getSpellingDictionaryCollectionSync(options?: WithIgnoreWords) {
         createSpellingDictionary(animals, 'animals', 'test', opts()),
         createSpellingDictionary(insects, 'insects', 'test', opts()),
         createSpellingDictionary(words, 'words', 'test', opts({ repMap: [['’', "'"]] })),
-        createSpellingDictionary(forbiddenWords, 'forbidden-words', 'test', opts()),
+        createInlineSpellingDictionary(
+            {
+                name: 'forbidden-words',
+                flagWords: forbiddenWords,
+                suggestWords: ['flavour:flavor', 'thier->their'],
+            },
+            'test',
+        ),
         createSpellingDictionary(
             options?.ignoreWords || [],
             'ignore-words',

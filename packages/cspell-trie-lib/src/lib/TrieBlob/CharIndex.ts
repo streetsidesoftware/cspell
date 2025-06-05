@@ -53,7 +53,9 @@ export class CharIndex {
         return this.charIndex.length;
     }
 
-    toJSON() {
+    toJSON(): {
+        charIndex: readonly string[];
+    } {
         return { charIndex: this.charIndex };
     }
 }

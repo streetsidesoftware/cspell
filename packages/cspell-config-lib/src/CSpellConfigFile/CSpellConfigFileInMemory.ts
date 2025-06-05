@@ -11,6 +11,11 @@ export class CSpellConfigFileInMemory extends ImplCSpellConfigFile {
         super(url, settings);
     }
 
+    setSchema(schema: string): this {
+        this.settings.$schema = schema;
+        return this;
+    }
+
     get virtual(): boolean {
         return true;
     }
