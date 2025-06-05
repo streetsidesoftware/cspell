@@ -3,7 +3,7 @@ import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 import { dispatchClearCache } from '../events/events.js';
 import { CalcLeftRightResultWeakCache } from './mergeCache.js';
 
-const oc = expect.objectContaining.bind(expect);
+const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
 
 describe('CalcLeftRightResultWeakCache', () => {
     let cache: CalcLeftRightResultWeakCache<object, object, number>;

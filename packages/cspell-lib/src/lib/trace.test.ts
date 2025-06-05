@@ -7,8 +7,8 @@ import { traceWords } from './trace.js';
 
 const timeout = 20_000;
 
-const oc = expect.objectContaining.bind(expect);
-const ac = expect.arrayContaining.bind(expect);
+const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
+const ac = (...params: Parameters<typeof expect.arrayContaining>) => expect.arrayContaining(...params);
 
 const testOptions: TestOptions = { timeout };
 

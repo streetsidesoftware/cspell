@@ -13,7 +13,7 @@ import type { VFileSystemProvider, VirtualFS, VProviderFileSystem } from './Virt
 import { VFSErrorUnsupportedRequest } from './VirtualFS/WrappedProviderFs.js';
 
 const sc = (m: string) => expect.stringContaining(m);
-const oc = <T>(obj: T) => expect.objectContaining(obj);
+const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
 
 let mockConsoleLog = vi.spyOn(console, 'log');
 

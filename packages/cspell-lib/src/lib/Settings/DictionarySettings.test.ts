@@ -16,7 +16,7 @@ import * as DictSettings from './DictionarySettings.js';
 const __filename = fileURLToPath(import.meta.url);
 
 const defaultSettings = await getDefaultBundledSettingsAsync();
-const oc = expect.objectContaining.bind(expect);
+const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
 
 describe('Validate DictionarySettings', () => {
     test('expects default to not be empty', () => {

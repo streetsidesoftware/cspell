@@ -2,7 +2,7 @@ import { describe, expect, test } from 'vitest';
 
 import { createMatchResult, createSimpleMatchResult, segmentMatch } from './matchResult.js';
 
-const oc = expect.objectContaining.bind(expect);
+const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
 
 describe('matchResult', () => {
     test.each`

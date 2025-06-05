@@ -8,7 +8,7 @@ import { createNodeValue, isCfgArrayNode, isCfgObjectNode, isCfgScalarNode } fro
 import { unindent } from '../util/unindent.js';
 import { CSpellConfigFileYaml, parseCSpellConfigFileYaml } from './CSpellConfigFileYaml.js';
 
-const oc = expect.objectContaining.bind(expect);
+const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
 
 describe('CSpellConfigFileYaml', () => {
     test('parseCSpellConfigFileYaml identity', () => {

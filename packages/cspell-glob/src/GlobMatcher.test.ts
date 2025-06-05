@@ -34,7 +34,7 @@ const pathNames = new Map([
     [pathPosix, 'Posix'],
 ]);
 
-const oc = expect.objectContaining.bind(expect);
+const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
 
 function r(...parts: string[]) {
     return path.resolve(...parts);

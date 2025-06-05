@@ -17,8 +17,8 @@ vi.mock('node:fs/promises', async (_importOriginal) => ({
     },
 }));
 
-const sc = expect.stringContaining.bind(expect);
-const oc = expect.objectContaining.bind(expect);
+const sc = (s: string) => expect.stringContaining(s);
+const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
 
 describe('GlobalConfigStore', () => {
     beforeEach(() => {

@@ -27,7 +27,7 @@ const fixtures = path.join(packageRoot, 'fixtures/fileHelper');
 const fileListFile = path.join(fixtures, 'file-list.txt');
 const fileListFile2 = path.join(fixtures, 'nested/file-list-2.txt');
 
-const oc = expect.objectContaining.bind(expect);
+const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
 const r = path.resolve;
 
 describe('fileHelper', () => {

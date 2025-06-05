@@ -21,9 +21,9 @@ const __filename = fileURLToPath(import.meta.url);
 const docCache = new AutoCache(_loadDoc, 100);
 const fixturesDir = pathPackageFixtures;
 
-const oc = expect.objectContaining.bind(expect);
-const ac = expect.arrayContaining.bind(expect);
-const sc = expect.stringContaining.bind(expect);
+const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
+const ac = (...params: Parameters<typeof expect.arrayContaining>) => expect.arrayContaining(...params);
+const sc = (s: string) => expect.stringContaining(s);
 
 const { sanitizeSuggestion } = __testing__;
 

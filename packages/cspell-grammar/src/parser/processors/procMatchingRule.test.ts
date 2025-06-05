@@ -8,7 +8,7 @@ import { ScopePool } from '../scope.js';
 import type { TokenizedText } from '../types.js';
 import { applyCaptureToBeginOrMatch } from './procMatchingRule.js';
 
-const oc = expect.objectContaining.bind(expect);
+const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
 
 const pool = new ScopePool();
 
