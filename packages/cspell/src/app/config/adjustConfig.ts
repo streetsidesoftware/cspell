@@ -10,6 +10,9 @@ import { CSpellConfigFile, isCfgArrayNode, MutableCSpellConfigFile } from 'cspel
 import { toError } from '../util/errors.js';
 
 async function fileExists(url: URL): Promise<boolean> {
+    if (url.protocol !== 'file:') {
+        return false; // Only check file URLs
+    }
     try {
         const stats = await fs.stat(url);
         return stats.isFile();
@@ -50,6 +53,12 @@ export async function resolveImports(configFile: CSpellConfigFile, imports: stri
             _imports.push(rel);
             continue;
         }
+
+        if (url.protocol !== 'file:') {
+            _imports.push(url.href);
+            continue;
+        }
+
         if (isPackageName(imp)) {
             _imports.push(imp);
             continue;

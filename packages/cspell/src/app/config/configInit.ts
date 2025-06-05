@@ -9,42 +9,20 @@ import {
     cspellConfigFileSchema,
 } from 'cspell-config-lib';
 
-import { addDictionariesToConfigFile, addImportsToConfigFile, setConfigFieldValue } from './adjustConfig.js';
+import { console } from '../console.js';
+import { addDictionariesToConfigFile, addImportsToConfigFile } from './adjustConfig.js';
+import { applyValuesToConfigFile } from './config.js';
+import { defaultConfig } from './constants.js';
 import type { InitOptions } from './options.js';
 
 const schemaRef = cspellConfigFileSchema;
-
-const defaultConfig: CommentConfig = {
-    $schema: { value: undefined, comment: ' The schema for the configuration file.' },
-    version: { value: '0.2', comment: ' The version of the configuration file format.' },
-    name: { value: undefined, comment: ' The name of the configuration. Use for display purposes only.' },
-    description: { value: undefined, comment: ' A description of the configuration.' },
-    language: { value: 'en', comment: ' The locale to use when spell checking.' },
-    import: { value: undefined, comment: ' Configuration or packages to import.' },
-    dictionaryDefinitions: { value: undefined, comment: ' Define user dictionaries.' },
-    dictionaries: { value: undefined, comment: ' Enable the dictionaries.' },
-    ignorePaths: { value: undefined, comment: ' Glob patterns of files to be skipped.' },
-    files: { value: undefined, comment: ' Glob patterns of files to be included.' },
-    words: { value: undefined, comment: ' Words to be considered correct.' },
-    ignoreWords: { value: undefined, comment: ' Words to be ignored.' },
-    flagWords: { value: undefined, comment: ' Words to be flagged as incorrect.' },
-    overrides: { value: undefined, comment: ' Set configuration based upon file globs.' },
-    languageSettings: { value: undefined, comment: ' Define language specific settings.' },
-    enabledFileTypes: { value: undefined, comment: ' Enable for specific file types.' },
-    caseSensitive: { value: false, comment: ' Enable case sensitive spell checking.' },
-    patterns: { value: undefined, comment: ' Regular expression patterns.' },
-    ignoreRegExpList: { value: undefined, comment: ' Regular expressions / patterns of text to be ignored.' },
-    includeRegExpList: { value: undefined, comment: ' Regular expressions / patterns of text to be included.' },
-};
 
 const defaultConfigJson = `\
 {
 }
 `;
 
-const defaultConfigYaml = `\
-# The version of the configuration file format.
-version: '0.2'
+const defaultConfigYaml = `
 `;
 
 export async function configInit(options: InitOptions): Promise<void> {
@@ -53,13 +31,20 @@ export async function configInit(options: InitOptions): Promise<void> {
     const configFile = await createConfigFile(rw, url, options);
     await applyOptionsToConfigFile(configFile, options);
     await fs.mkdir(new URL('./', configFile.url), { recursive: true });
-    await rw.writeConfig(configFile);
+
+    if (options.stdout) {
+        console.stdoutChannel.write(rw.serialize(configFile));
+    } else {
+        await rw.writeConfig(configFile);
+    }
 }
 
 async function applyOptionsToConfigFile(configFile: CSpellConfigFile, options: InitOptions): Promise<CSpellConfigFile> {
     const settings: CSpellSettings = {};
 
-    const addComments = options.comments !== false;
+    const addComments =
+        options.comments ||
+        (options.comments === undefined && !options.removeComments && !configFile.url.pathname.endsWith('.json'));
 
     if (options.comments === false) {
         configFile.removeAllComments();
@@ -95,6 +80,9 @@ async function applyOptionsToConfigFile(configFile: CSpellConfigFile, options: I
 }
 
 function determineFileNameURL(options: InitOptions): URL {
+    if (options.config) {
+        return toFileURL(options.config);
+    }
     const defaultFileName = determineDefaultFileName(options);
     const outputUrl = toFileURL(options.output || defaultFileName);
     const path = outputUrl.pathname;
@@ -153,36 +141,4 @@ async function createConfigFile(
     const content = await fs.readFile(url, 'utf8').catch(() => getDefaultContent(options));
 
     return rw.parse({ url, content });
-}
-
-interface ConfigEntry<T, K extends keyof T> {
-    key?: K;
-    value: T[K];
-    comment?: string;
-}
-
-type CommentConfig = {
-    [K in keyof CSpellSettings]?: ConfigEntry<CSpellSettings, K>;
-};
-
-function applyValuesToConfigFile(
-    config: CSpellConfigFile,
-    settings: CSpellSettings,
-    defaultValues: CommentConfig,
-    addComments: boolean,
-): CSpellConfigFile {
-    const currentSettings = config.settings || {};
-    for (const [k, entry] of Object.entries(defaultValues)) {
-        const { value: defaultValue, comment } = entry;
-        const key = k as keyof CSpellSettings;
-        const newValue = settings[key];
-        const oldValue = currentSettings[key];
-        const value = newValue ?? oldValue ?? defaultValue;
-        if ((newValue === undefined && oldValue !== undefined) || value === undefined) {
-            continue;
-        }
-        const useComment = (addComments && oldValue === undefined && comment) || undefined;
-        setConfigFieldValue(config, key, value, useComment);
-    }
-    return config;
 }

@@ -21,6 +21,7 @@ export interface CSpellConfigFileReaderWriter {
     setTrustedUrls(urls: readonly (URL | string)[]): this;
     toCSpellConfigFile(configFile: ICSpellConfigFile): CSpellConfigFile;
     parse(textFile: TextFile): CSpellConfigFile;
+    serialize(configFile: ICSpellConfigFile): string;
     /**
      * Untrusted extensions are extensions that are not trusted to be loaded from a file system.
      * Extension are case insensitive and should include the leading dot.
