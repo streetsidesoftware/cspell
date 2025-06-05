@@ -46,8 +46,8 @@ const rr = {
     vitest: require.resolve('vitest'),
 };
 
-const oc = <T>(obj: T) => expect.objectContaining(obj);
-const sm = (m: string | RegExp) => expect.stringMatching(m);
+const oc = expect.objectContaining.bind(expect);
+const sm = expect.stringMatching.bind(expect);
 
 // leakedHandles.set({ fullStack: true, timeout: 1000 });
 

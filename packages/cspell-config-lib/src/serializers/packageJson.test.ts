@@ -7,7 +7,7 @@ import { defaultNextDeserializer, defaultNextSerializer } from '../defaultNext.j
 import { json } from '../test-helpers/util.js';
 import { serializerPackageJson } from './packageJson.js';
 
-const oc = <T>(obj: T) => expect.objectContaining(obj);
+const oc = expect.objectContaining.bind(expect);
 const next = defaultNextDeserializer;
 
 describe('packageJson', () => {

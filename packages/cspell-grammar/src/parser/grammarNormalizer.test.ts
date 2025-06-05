@@ -7,6 +7,8 @@ import type { LineOffsetAnchored } from './types.js';
 
 const scopePool = new ScopePool();
 
+const oc = expect.objectContaining.bind(expect);
+
 describe('grammarNormalizer', () => {
     test('normalizeGrammar', () => {
         const r = normalizeGrammar(grammarTS);
@@ -31,7 +33,3 @@ describe('grammarNormalizer', () => {
         expect(m?.match).toEqual(expectedMatch);
     });
 });
-
-function oc<T>(t: Partial<T>): T {
-    return expect.objectContaining(t);
-}

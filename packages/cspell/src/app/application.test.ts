@@ -20,8 +20,8 @@ const tempRoot = r(packageRoot, 'temp');
 
 const sampleOptions = { root: samplesRoot };
 
-const oc = <T>(obj: T) => expect.objectContaining(obj);
-const ac = <T>(a: Array<T>) => expect.arrayContaining(a);
+const oc = expect.objectContaining.bind(expect);
+const ac = expect.arrayContaining.bind(expect);
 
 vi.mock('node:stream/consumers', () => ({ default: { text: vi.fn() } }));
 

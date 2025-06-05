@@ -8,6 +8,8 @@ import { ScopePool } from '../scope.js';
 import type { TokenizedText } from '../types.js';
 import { applyCaptureToBeginOrMatch } from './procMatchingRule.js';
 
+const oc = expect.objectContaining.bind(expect);
+
 const pool = new ScopePool();
 
 const grammar: GrammarDef = {
@@ -71,15 +73,11 @@ describe('procMatchingRule', () => {
 });
 
 function s(scope: string[]): TokenizedText {
-    return oc<TokenizedText>({ scope: pool.parseScope(scope) });
+    return oc({ scope: pool.parseScope(scope) });
 }
 
 function match(text: string, offset = 0, lineNumber = 42, anchor = -1) {
     const g = normalizeGrammar(grammar);
     const rule = g.begin(undefined);
     return rule.findNext({ text, offset, anchor, lineNumber });
-}
-
-function oc<T>(t: Partial<T>): T {
-    return expect.objectContaining(t);
 }

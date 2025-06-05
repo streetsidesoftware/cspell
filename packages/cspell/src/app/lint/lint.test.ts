@@ -23,7 +23,7 @@ const pUnknownWords = path.resolve(features, 'unknown-words');
 const filesToCheckWithMissing = path.resolve(root, 'fixtures/features/file-list/files-to-check-missing.txt');
 const configSamples = path.resolve(samples, 'config');
 
-const oc = <T>(obj: T) => expect.objectContaining(obj);
+const oc = expect.objectContaining.bind(expect);
 const j = path.join;
 
 describe('Linter Validation Tests', () => {

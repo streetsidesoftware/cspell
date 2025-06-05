@@ -3,7 +3,7 @@ import { describe, expect, test } from 'vitest';
 import { getReporter } from '../cli-reporter.js';
 import { LintRequest } from './LintRequest.js';
 
-const oc = <T>(obj: T) => expect.objectContaining(obj);
+const oc = expect.objectContaining.bind(expect);
 
 describe('LintRequest', () => {
     test.each`

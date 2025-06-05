@@ -2,7 +2,7 @@ import { describe, expect, test } from 'vitest';
 
 import { ApplicationError, CheckFailed, IOError, isErrorLike, toError } from './errors.js';
 
-const oc = <T>(obj: T) => expect.objectContaining(obj);
+const oc = expect.objectContaining.bind(expect);
 
 describe('errors', () => {
     test.each`

@@ -2,6 +2,8 @@ import { describe, expect, test } from 'vitest';
 
 import { createMatchResult, createSimpleMatchResult, segmentMatch } from './matchResult.js';
 
+const oc = expect.objectContaining.bind(expect);
+
 describe('matchResult', () => {
     test.each`
         input           | match     | expected
@@ -37,8 +39,4 @@ function crs(input: string, match: string, lineNumber = 0) {
     const index = input.indexOf(match);
     if (index < 0) throw new Error(`Failed to find "$match" in "$input"`);
     return createSimpleMatchResult(match, input, index, lineNumber);
-}
-
-function oc<T>(t: Partial<T>): T {
-    return expect.objectContaining(t);
 }
