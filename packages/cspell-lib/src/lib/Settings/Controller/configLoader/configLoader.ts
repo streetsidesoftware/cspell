@@ -113,11 +113,13 @@ export interface IConfigLoader {
     /**
      * This is an alias for `searchForConfigFile` and `mergeConfigFileWithImports`.
      * @param searchFrom the directory / file URL to start searching from.
+     * @param stopSearchAt the directory / file URL to stop searching at.
      * @param pnpSettings - related to Using Yarn PNP.
      * @returns the resulting settings
      */
     searchForConfig(
         searchFrom: URL | string | undefined,
+        stopSearchAt?: URL | string | undefined,
         pnpSettings?: PnPSettingsOptional,
     ): Promise<CSpellSettingsI | undefined>;
 
@@ -255,21 +257,32 @@ export class ConfigLoader implements IConfigLoader {
         });
     }
 
-    async searchForConfigFileLocation(searchFrom: URL | string | undefined): Promise<URL | undefined> {
-        const url = toFileURL(searchFrom || cwdURL(), cwdURL());
-        if (
-            typeof searchFrom === 'string' &&
-            !isUrlLike(searchFrom) &&
-            url.protocol === 'file:' && // check to see if it is a directory
-            (await isDirectory(this.fs, url))
-        ) {
-            return this.configSearch.searchForConfig(addTrailingSlash(url));
-        }
-        return this.configSearch.searchForConfig(url);
+    async searchForConfigFileLocation(
+        searchFrom: URL | string | undefined,
+        stopSearchAt?: URL | string | undefined,
+    ): Promise<URL | undefined> {
+        const normalizeDirURL = async (input?: URL | string): Promise<URL | undefined> => {
+            if (!input) return undefined;
+            const url = toFileURL(input, cwdURL());
+            if (
+                typeof input === 'string' &&
+                !isUrlLike(input) &&
+                url.protocol === 'file:' &&
+                await isDirectory(this.fs, url)
+            ) {
+                return addTrailingSlash(url);
+            }
+            return url;
+        };
+
+        const startURL = await normalizeDirURL(searchFrom || cwdURL());
+        const stopURL = await normalizeDirURL(stopSearchAt);
+
+        return this.configSearch.searchForConfig(startURL!, stopURL);
     }
 
-    async searchForConfigFile(searchFrom: URL | string | undefined): Promise<CSpellConfigFile | undefined> {
-        const location = await this.searchForConfigFileLocation(searchFrom);
+    async searchForConfigFile(searchFrom: URL | string | undefined, stopSearchAt?: URL | string | undefined): Promise<CSpellConfigFile | undefined> {
+        const location = await this.searchForConfigFileLocation(searchFrom, stopSearchAt);
         if (!location) return undefined;
         const file = await this.readConfigFile(location);
         return file instanceof Error ? undefined : file;
@@ -278,14 +291,16 @@ export class ConfigLoader implements IConfigLoader {
     /**
      *
      * @param searchFrom the directory / file URL to start searching from.
+     * @param stopSearchAt the directory / file URL to start searching from.
      * @param pnpSettings - related to Using Yarn PNP.
      * @returns the resulting settings
      */
     async searchForConfig(
         searchFrom: URL | string | undefined,
+        stopSearchAt?: URL | string | undefined,
         pnpSettings: PnPSettingsOptional = defaultPnPSettings,
     ): Promise<CSpellSettingsI | undefined> {
-        const configFile = await this.searchForConfigFile(searchFrom);
+        const configFile = await this.searchForConfigFile(searchFrom, stopSearchAt);
         if (!configFile) return undefined;
 
         return this.mergeConfigFileWithImports(configFile, pnpSettings);

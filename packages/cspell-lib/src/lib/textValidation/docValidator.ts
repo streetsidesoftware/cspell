@@ -522,7 +522,7 @@ async function searchForDocumentConfig(
 ): Promise<CSpellSettingsWithSourceTrace> {
     const url = documentUriToURL(document.uri);
     try {
-        return await searchForConfig(url, pnpSettings).then((s) => s || defaultConfig);
+        return await searchForConfig(url, undefined, pnpSettings).then((s) => s || defaultConfig);
     } catch (e) {
         if (url.protocol !== 'file:') return defaultConfig;
         throw e;

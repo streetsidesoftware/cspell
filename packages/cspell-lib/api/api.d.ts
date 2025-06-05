@@ -354,10 +354,11 @@ interface IConfigLoader {
     /**
      * This is an alias for `searchForConfigFile` and `mergeConfigFileWithImports`.
      * @param searchFrom the directory / file URL to start searching from.
+     * @param stopSearchAt the directory / file URL to stop searching at.
      * @param pnpSettings - related to Using Yarn PNP.
      * @returns the resulting settings
      */
-    searchForConfig(searchFrom: URL | string | undefined, pnpSettings?: PnPSettingsOptional): Promise<CSpellSettingsI | undefined>;
+    searchForConfig(searchFrom: URL | string | undefined, stopSearchAt?: URL | string | undefined, pnpSettings?: PnPSettingsOptional): Promise<CSpellSettingsI | undefined>;
     resolveConfigFileLocation(filenameOrURL: string | URL, relativeTo?: string | URL): Promise<URL | undefined>;
     getGlobalSettingsAsync(): Promise<CSpellSettingsI>;
     /**
@@ -408,7 +409,7 @@ declare const defaultConfigFilenames: readonly string[];
  * @param pnpSettings - related to Using Yarn PNP.
  * @returns the resulting settings
  */
-declare function searchForConfig(searchFrom: URL | string | undefined, pnpSettings?: PnPSettingsOptional): Promise<CSpellSettingsI | undefined>;
+declare function searchForConfig(searchFrom: URL | string | undefined, stopSearchAt?: URL | string | undefined, pnpSettings?: PnPSettingsOptional): Promise<CSpellSettingsI | undefined>;
 /**
  * Load a CSpell configuration files.
  * @param file - path or package reference to load.

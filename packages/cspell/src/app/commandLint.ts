@@ -70,6 +70,14 @@ export function commandLint(prog: Command): Command {
             '-c, --config <cspell.json>',
             'Configuration file to use.  By default cspell looks for cspell.json in the current directory.',
         )
+        .option(
+            '--no-config-search',
+            'Disable automatic searching for additional configuration files in parent directories. Only the specified config file (if any) will be used.'
+        )
+        .option(
+            '--stop-config-search-at <dir>',
+            'Specify a directory at which to stop searching for configuration files when walking up from the files being checked. Useful for limiting config inheritance.'
+        )
         .option('-v, --verbose', 'Display more information about the files being checked and the configuration.')
         .option(
             '--locale <locale>',
