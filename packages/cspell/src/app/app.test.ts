@@ -164,10 +164,6 @@ describe('Validate cli', () => {
         msg                                            | testArgs                                                                                  | errorCheck         | eError   | eLog     | eInfo
         ${'with errors and excludes'}                  | ${['-r', 'samples', '*', '-e', 'Dutch.txt', '-c', 'samples/.cspell.json']}                | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
         ${'no-args'}                                   | ${[]}                                                                                     | ${'outputHelp'}    | ${false} | ${false} | ${false}
-        ${'--help'}                                    | ${['--help']}                                                                             | ${'outputHelp'}    | ${false} | ${false} | ${false}
-        ${'lint --help'}                               | ${['lint', '--help']}                                                                     | ${'outputHelp'}    | ${false} | ${false} | ${false}
-        ${'lint --help --verbose'}                     | ${['lint', '--help', '--verbose']}                                                        | ${'outputHelp'}    | ${false} | ${false} | ${false}
-        ${'lint --help --issue-template'}              | ${['lint', '--help', '--issue-template']}                                                 | ${'outputHelp'}    | ${false} | ${false} | ${false}
         ${'current_file'}                              | ${[__filename]}                                                                           | ${undefined}       | ${true}  | ${false} | ${false}
         ${'current_file --show-perf-summary'}          | ${[__filename, '--show-perf-summary']}                                                    | ${undefined}       | ${true}  | ${false} | ${false}
         ${'with spelling errors Dutch.txt'}            | ${[pathSamples('Dutch.txt')]}                                                             | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
@@ -228,6 +224,31 @@ describe('Validate cli', () => {
 
         expect(captureStdout.text).toMatchSnapshot();
         expect(logger.normalizedHistory()).toMatchSnapshot();
+        expect(normalizeOutput(captureStderr.text)).toMatchSnapshot();
+    });
+
+    test.each`
+        cmdArgs
+        ${['--help']}
+        ${['lint', '--help']}
+        ${['lint', '--help', '--verbose']}
+        ${['lint', '--help', '--issue-template']}
+        ${['trace', '--help']}
+        ${['init', '--help']}
+        ${['suggest', '--help']}
+        ${['link', '--help']}
+        ${['check', '--help']}
+    `('app help $cmdArgs', async ({ cmdArgs }) => {
+        chalk.level = 1;
+        const commander = getCommander();
+        const result = app.run(commander, argv(...cmdArgs));
+        await expect(result).rejects.toThrow('outputHelp');
+
+        expect(error).not.toHaveBeenCalled();
+        expect(log).not.toHaveBeenCalled();
+        expect(info).not.toHaveBeenCalled();
+
+        expect(captureStdout.text).toMatchSnapshot();
         expect(normalizeOutput(captureStderr.text)).toMatchSnapshot();
     });
 
