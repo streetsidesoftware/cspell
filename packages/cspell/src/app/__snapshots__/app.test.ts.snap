@@ -656,13 +656,15 @@ exports[`Validate cli > app 'no-args' Expect Error: 'outputHelp' 1`] = `
   "  --no-color                   Turn off color.",
   "  --no-default-configuration   Do not load the default configuration and",
   "                               dictionaries.",
-  "  --debug                      Output information useful for debugging",
-  "                               cspell.json files.",
+  "  --dictionary <name>          Enable a dictionary by name.",
+  "  --disable-dictionary <name>  Disable a dictionary by name.",
   "  --reporter <module|path>     Specify one or more reporters to use.",
   "  --report <level>             Set how unknown words are reported (choices:",
   "                               "all", "simple", "typos", "flagged")",
   "  --issue-template [template]  Use a custom issue template. See --help",
   "                               --issue-template for details.",
+  "  --debug                      Output information useful for debugging",
+  "                               cspell.json files.",
   "  -h, --help                   display help for command",
   "",
   "More Examples:",
@@ -3509,13 +3511,15 @@ exports[`Validate cli > app help [ 'lint', '--help' ] 1`] = `
   "  --no-color                   Turn off color.",
   "  --no-default-configuration   Do not load the default configuration and",
   "                               dictionaries.",
-  "  --debug                      Output information useful for debugging",
-  "                               cspell.json files.",
+  "  --dictionary <name>          Enable a dictionary by name.",
+  "  --disable-dictionary <name>  Disable a dictionary by name.",
   "  --reporter <module|path>     Specify one or more reporters to use.",
   "  --report <level>             Set how unknown words are reported (choices:",
   "                               "all", "simple", "typos", "flagged")",
   "  --issue-template [template]  Use a custom issue template. See --help",
   "                               --issue-template for details.",
+  "  --debug                      Output information useful for debugging",
+  "                               cspell.json files.",
   "  -h, --help                   display help for command",
   "",
   "More Examples:",
@@ -3625,13 +3629,15 @@ exports[`Validate cli > app help [ 'lint', '--help', '--issue-template' ] 1`] = 
   "  --no-color                   Turn off color.",
   "  --no-default-configuration   Do not load the default configuration and",
   "                               dictionaries.",
-  "  --debug                      Output information useful for debugging",
-  "                               cspell.json files.",
+  "  --dictionary <name>          Enable a dictionary by name.",
+  "  --disable-dictionary <name>  Disable a dictionary by name.",
   "  --reporter <module|path>     Specify one or more reporters to use.",
   "  --report <level>             Set how unknown words are reported (choices:",
   "                               "all", "simple", "typos", "flagged")",
   "  --issue-template [template]  Use a custom issue template. See --help",
   "                               --issue-template for details.",
+  "  --debug                      Output information useful for debugging",
+  "                               cspell.json files.",
   "  -h, --help                   display help for command",
   "",
   "Issue Template:",
@@ -3768,13 +3774,15 @@ exports[`Validate cli > app help [ 'lint', '--help', '--verbose' ] 1`] = `
   "  --no-color                   Turn off color.",
   "  --no-default-configuration   Do not load the default configuration and",
   "                               dictionaries.",
-  "  --debug                      Output information useful for debugging",
-  "                               cspell.json files.",
+  "  --dictionary <name>          Enable a dictionary by name.",
+  "  --disable-dictionary <name>  Disable a dictionary by name.",
   "  --reporter <module|path>     Specify one or more reporters to use.",
   "  --report <level>             Set how unknown words are reported (choices:",
   "                               "all", "simple", "typos", "flagged")",
   "  --issue-template [template]  Use a custom issue template. See --help",
   "                               --issue-template for details.",
+  "  --debug                      Output information useful for debugging",
+  "                               cspell.json files.",
   "  -h, --help                   display help for command",
   "",
   "Hidden Options:",
@@ -3901,6 +3909,32 @@ exports[`Validate cli > app help [ 'trace', '--help' ] 1`] = `
 `;
 
 exports[`Validate cli > app help [ 'trace', '--help' ] 2`] = `""`;
+
+exports[`Validate cli > app lint 'lint --disable-dictionary --enable-dictionary' Expect Error: undefined 1`] = `[]`;
+
+exports[`Validate cli > app lint 'lint --disable-dictionary --enable-dictionary' Expect Error: undefined 2`] = `
+"error	1/1 README.md 0.00ms
+error
+error	CSpell: Files checked: 1, Issues found: 0 in 0 files.
+error"
+`;
+
+exports[`Validate cli > app lint 'lint --disable-dictionary --enable-dictionary' Expect Error: undefined 3`] = `""`;
+
+exports[`Validate cli > app lint 'lint --disable-dictionary' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app lint 'lint --disable-dictionary' Expect Error: [Function CheckFailed] 2`] = `
+"error	1/1 README.md 0.00ms X
+error
+log	README.md:7:3 - Unknown word (winkelcentrum)
+log
+log	README.md:8:3 - Unknown word (winkelstraat)
+log
+error	CSpell: Files checked: 1, Issues found: 2 in 1 file.
+error"
+`;
+
+exports[`Validate cli > app lint 'lint --disable-dictionary' Expect Error: [Function CheckFailed] 3`] = `""`;
 
 exports[`Validate cli > app success 'suggest' run with [ 'suggest', 'café', '--num-suggestions=1', '--no-include-ties' ] 1`] = `[]`;
 

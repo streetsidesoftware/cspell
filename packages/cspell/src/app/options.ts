@@ -89,6 +89,16 @@ export interface LinterOptions
     mustFindFiles?: boolean;
 
     /**
+     * List of dictionary names to use.
+     */
+    dictionary?: string[] | undefined;
+
+    /**
+     * List of dictionary names to disable.
+     */
+    disableDictionary?: string[] | undefined;
+
+    /**
      * Stop processing and exit if an issue or error is found.
      */
     failFast?: boolean;
