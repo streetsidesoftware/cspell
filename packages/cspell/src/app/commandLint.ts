@@ -158,7 +158,8 @@ export function commandLint(prog: Command): Command {
         .addOption(crOpt('--no-color', 'Turn off color.').default(undefined))
         .addOption(crOpt('--default-configuration', 'Load the default configuration and dictionaries.').hideHelp())
         .addOption(crOpt('--no-default-configuration', 'Do not load the default configuration and dictionaries.'))
-        .option('--debug', 'Output information useful for debugging cspell.json files.')
+        .option('--dictionary <name>', 'Enable a dictionary by name.', collect)
+        .option('--disable-dictionary <name>', 'Disable a dictionary by name.', collect)
         .option('--reporter <module|path>', 'Specify one or more reporters to use.', collect)
         .addOption(crOpt('--report <level>', 'Set how unknown words are reported').choices(ReportChoicesAll))
         .addOption(
@@ -169,9 +170,8 @@ export function commandLint(prog: Command): Command {
         .addOption(crOpt('--issues-summary-report', 'Output a summary of issues found.').hideHelp())
         .addOption(crOpt('--show-perf-summary', 'Output a performance summary report.').hideHelp())
         .option('--issue-template [template]', 'Use a custom issue template. See --help --issue-template for details.')
+        .option('--debug', 'Output information useful for debugging cspell.json files.')
         // Planned options
-        // .option('--dictionary <dictionary name>', 'Enable a dictionary by name.', collect)
-        // .option('--no-dictionary <dictionary name>', 'Disable a dictionary by name.', collect)
         // .option('--import', 'Import a configuration file.', collect)
         .usage(usage)
         .addHelpText('after', augmentCommandHelp)
