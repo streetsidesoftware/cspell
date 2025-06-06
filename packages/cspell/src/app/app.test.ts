@@ -62,6 +62,10 @@ function argRootFeat(feat: string): string {
     return '--root=' + pathFeat(feat);
 }
 
+function argCfgFeat(feat: string, ...rest: string[]) {
+    return `--config=${pathFeat(feat, ...rest)}`;
+}
+
 // [message, args, resolve, error, log, info]
 type ErrorCheck = undefined | Constructable | string | RegExp;
 
@@ -299,17 +303,19 @@ describe('Validate cli', () => {
         expect(normalizeOutput(captureStderr.text)).toMatchSnapshot();
     });
 
-    /* cspell:ignore notinanydictionaryx */
+    /* cspell:ignore notinanydictionaryx winkelstraat */
     test.each`
-        msg                                         | testArgs                                                        | errorCheck         | eError   | eLog     | eInfo
-        ${'trace hello'}                            | ${['trace', 'hello']}                                           | ${undefined}       | ${false} | ${true}  | ${false}
-        ${'trace café'}                             | ${['trace', 'café'.normalize('NFD')]}                           | ${undefined}       | ${false} | ${true}  | ${false}
-        ${'trace hello'}                            | ${['trace', '--locale=en-gb', 'hello']}                         | ${undefined}       | ${false} | ${true}  | ${false}
-        ${'trace help'}                             | ${['trace', '-h']}                                              | ${'outputHelp'}    | ${false} | ${false} | ${false}
-        ${'trace not-in-any-dictionary'}            | ${['trace', 'notinanydictionaryx']}                             | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
-        ${'trace missing dictionary'}               | ${['trace', 'hello', '-c', 'samples/cspell-missing-dict.json']} | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
-        ${'with spelling errors --debug Dutch.txt'} | ${['--relative', '--debug', pathSamples('Dutch.txt')]}          | ${app.CheckFailed} | ${true}  | ${true}  | ${true}
-        ${'trace flavour'}                          | ${['trace', 'flavour', '-c', pathSamples('.cspell.json')]}      | ${undefined}       | ${false} | ${true}  | ${false}
+        msg                                         | testArgs                                                                                    | errorCheck         | eError   | eLog     | eInfo
+        ${'trace hello'}                            | ${['trace', 'hello']}                                                                       | ${undefined}       | ${false} | ${true}  | ${false}
+        ${'trace café'}                             | ${['trace', 'café'.normalize('NFD')]}                                                       | ${undefined}       | ${false} | ${true}  | ${false}
+        ${'trace hello'}                            | ${['trace', '--locale=en-gb', 'hello']}                                                     | ${undefined}       | ${false} | ${true}  | ${false}
+        ${'trace help'}                             | ${['trace', '-h']}                                                                          | ${'outputHelp'}    | ${false} | ${false} | ${false}
+        ${'trace not-in-any-dictionary'}            | ${['trace', 'notinanydictionaryx']}                                                         | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
+        ${'trace missing dictionary'}               | ${['trace', 'hello', '-c', 'samples/cspell-missing-dict.json']}                             | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
+        ${'with spelling errors --debug Dutch.txt'} | ${['--relative', '--debug', pathSamples('Dutch.txt')]}                                      | ${app.CheckFailed} | ${true}  | ${true}  | ${true}
+        ${'trace flavour'}                          | ${['trace', 'flavour', '-c', pathSamples('.cspell.json')]}                                  | ${undefined}       | ${false} | ${true}  | ${false}
+        ${'trace dict not enabled'}                 | ${['trace', 'winkelstraat', argCfgFeat('d-trace', 'cspell.config.yaml')]}                   | ${undefined}       | ${false} | ${true}  | ${false}
+        ${'trace dict enabled'}                     | ${['trace', 'winkelstraat', argCfgFeat('d-trace', 'cspell.config.yaml'), argDict('words')]} | ${undefined}       | ${false} | ${true}  | ${false}
     `('app $msg Expect Error: $errorCheck', async ({ testArgs, errorCheck, eError, eLog, eInfo }: TestCase) => {
         chalk.level = 0;
         const commander = getCommander();
