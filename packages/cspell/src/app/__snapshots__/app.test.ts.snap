@@ -3385,6 +3385,85 @@ error"
 
 exports[`Validate cli > app 'with spelling errors Dutch.txt' Expect Error: [Function CheckFailed] 3`] = `""`;
 
+exports[`Validate cli > app dictionary [ 'dictionaries' ] 1`] = `[]`;
+
+exports[`Validate cli > app dictionary [ 'dictionaries' ] 2`] = `
+"Dictionary                 Dictionary Location
+ada                        node_modules/@cspell/dict-ada/dict/ada.txt
+al                         node_modules/@cspell/dict-al/dict/al.txt
+aws*                       node_modules/@cspell/dict-aws/dict/aws.txt
+bash                       node_modules/@cspell/dict-shell/dict/bash-words.txt
+coding-compound-terms*     node_modules/.../dict/coding-compound-terms.txt
+companies*                 node_modules/@cspell/.../dict/companies.txt
+computing-acronyms*        node_modules/@cspell/.../dict/computing-acronyms.txt
+cpp                        node_modules/@cspell/dict-cpp/dict/cpp.txt
+cpp-legacy                 node_modules/@cspell/dict-cpp/dict/cpp-legacy.txt
+cpp-refined                node_modules/@cspell/dict-cpp/dict/cpp-refined.txt
+cryptocurrencies*          node_modules/@cspell/.../dict/cryptocurrencies.txt
+cryptocurrencies-legacy    node_modules/.../dict/cryptocurrencies-legacy.txt
+csharp                     node_modules/@cspell/dict-csharp/csharp.txt.gz
+css                        node_modules/@cspell/dict-css/dict/css.txt
+dart                       node_modules/@cspell/dict-dart/dart.txt.gz
+data-science               node_modules/@cspell/.../dict/data-science.txt
+data-science-models        node_modules/@cspell/.../dict/data-science-models.txt
+data-science-tools         node_modules/@cspell/.../dict/data-science-tools.txt
+django                     node_modules/@cspell/dict-django/dict/django.txt
+docker                     node_modules/@cspell/dict-docker/docker-words.txt.gz
+dotnet                     node_modules/@cspell/dict-dotnet/dict/dotnet.txt
+elixir                     node_modules/@cspell/dict-elixir/dict/elixir.txt
+en_us                      node_modules/@cspell/dict-en_us/en_US.trie.gz
+en-common-misspellings
+en-gb                      node_modules/@cspell/dict-en-gb-mit/en_GB.trie.gz
+en-gb-common-misspellings
+en-us-common-misspellings
+filetypes*                 node_modules/@cspell/dict-filetypes/filetypes.txt.gz
+flutter                    node_modules/@cspell/dict-flutter/flutter.txt.gz
+fonts                      node_modules/@cspell/dict-fonts/dict/fonts.txt
+fsharp                     node_modules/@cspell/dict-fsharp/dict/fsharp.txt
+fullstack                  node_modules/@cspell/.../dict/fullstack.txt
+game-development           node_modules/@cspell/.../dict/game-development.txt
+gaming-terms               node_modules/@cspell/.../dict/gaming-terms.txt
+git
+golang                     node_modules/@cspell/dict-golang/dict/go.txt
+google                     node_modules/@cspell/dict-google/dict/google.txt
+haskell                    node_modules/@cspell/dict-haskell/dict/haskell.txt
+html                       node_modules/@cspell/dict-html/dict/html.txt
+html-symbol-entities       node_modules/@cspell/.../entities.txt.gz
+java                       node_modules/@cspell/dict-java/dict/java.trie
+julia                      node_modules/@cspell/dict-julia/dict/julia.txt
+k8s                        node_modules/@cspell/dict-k8s/dict/k8s.txt
+kotlin                     node_modules/@cspell/dict-kotlin/dict/kotlin.txt
+latex                      node_modules/@cspell/dict-latex/dict/latex.txt
+lorem-ipsum                node_modules/@cspell/dict-lorem-ipsum/dict/lorem.txt
+lua                        node_modules/@cspell/dict-lua/dict/lua.txt
+makefile                   node_modules/@cspell/dict-makefile/dict/makefile.txt
+monkeyc                    node_modules/.../dict-monkeyc/monkeyc_keywords.txt.gz
+networking-terms           node_modules/@cspell/.../dict/networkingTerms.txt
+node                       node_modules/@cspell/dict-node/dict/node.txt
+npm                        node_modules/@cspell/dict-npm/dict/npm.txt
+php                        node_modules/@cspell/dict-php/dict/php.txt
+powershell                 node_modules/@cspell/.../dict/powershell.txt
+public-licenses*           node_modules/@cspell/.../public-licenses.txt.gz
+python                     node_modules/@cspell/dict-python/dict/python.txt
+python-common              node_modules/@cspell/.../dict/python-common.txt
+r                          node_modules/@cspell/dict-r/r.txt.gz
+ruby                       node_modules/@cspell/dict-ruby/dict/ruby.txt
+rust                       node_modules/@cspell/dict-rust/dict/rust.txt
+scala                      node_modules/@cspell/dict-scala/dict/scala.txt
+shellscript                node_modules/@cspell/.../dict/shell-all-words.txt
+software-term-suggestions*
+software-tools*            node_modules/@cspell/.../dict/software-tools.txt
+softwareTerms*             node_modules/@cspell/.../dict/softwareTerms.txt
+sql                        node_modules/@cspell/dict-sql/sql.txt.gz
+svelte                     node_modules/@cspell/dict-svelte/dict/svelte.txt
+swift                      node_modules/@cspell/dict-swift/swift.txt.gz
+terraform                  node_modules/@cspell/.../dict/terraform.txt
+typescript                 node_modules/@cspell/.../dict/typescript.txt
+web-services*              node_modules/@cspell/.../dict/webServices.txt
+workspace*                 ../../cspell-dict.txt
+"
+`;
+
 exports[`Validate cli > app help [ '--help' ] 1`] = `
 [
   "Usage: cspell [options] [command]",
@@ -3406,6 +3485,7 @@ exports[`Validate cli > app help [ '--help' ] 1`] = `
   "  init [options]                        Initialize a CSpell configuration file.",
   "  link                                  Link dictionaries and other settings to",
   "                                        the cspell global config.",
+  "  dictionaries [options]                List dictionaries",
   "  help [command]                        display help for command",
   "",
 ]
@@ -3435,6 +3515,29 @@ exports[`Validate cli > app help [ 'check', '--help' ] 1`] = `
 `;
 
 exports[`Validate cli > app help [ 'check', '--help' ] 2`] = `""`;
+
+exports[`Validate cli > app help [ 'dictionaries', '--help' ] 1`] = `
+[
+  "Usage: cspell dictionaries [options]",
+  "",
+  "List dictionaries",
+  "",
+  "Options:",
+  "  -c, --config <cspell.json>  Configuration file to use.  By default cspell",
+  "                              looks for cspell.json in the current directory.",
+  "  --path-format <format>      Configure how to display the dictionary path.",
+  "                              (choices: "hide", "short", "long", "full",",
+  "                              default: Display most of the path.)",
+  "  --color                     Force color.",
+  "  --no-color                  Turn off color.",
+  "  --no-default-configuration  Do not load the default configuration and",
+  "                              dictionaries.",
+  "  -h, --help                  display help for command",
+  "",
+]
+`;
+
+exports[`Validate cli > app help [ 'dictionaries', '--help' ] 2`] = `""`;
 
 exports[`Validate cli > app help [ 'init', '--help' ] 1`] = `
 [
@@ -3990,224 +4093,6 @@ error"
 
 exports[`Validate cli > app lint 'lint --disable-dictionary' Expect Error: [Function CheckFailed] 3`] = `""`;
 
-exports[`Validate cli > app success 'suggest' run with [ 'suggest', 'café', '--num-suggestions=1', '--no-include-ties' ] 1`] = `[]`;
-
-exports[`Validate cli > app success 'suggest' run with [ 'suggest', 'café', '--num-suggestions=1', '--no-include-ties' ] 2`] = `
-"café:
-
- - café
-"
-`;
-
-exports[`Validate cli > app success 'trace café' run with [ 'trace', 'café' ] 1`] = `[]`;
-
-exports[`Validate cli > app success 'trace café' run with [ 'trace', 'café' ] 2`] = `
-"Word F Dictionary           Dictionary Location
-café - [flagWords]*         From Settings \`flagWords\`
-café - [ignoreWords]*       From Settings \`ignoreWords\`
-café - [suggestWords]*      From Settings \`suggestWords\`
-café - [words]*             From Settings \`words\`
-café - aws*                 node_modules/@cspell/dict-aws/dict/aws.txt
-café - coding-compound-ter* node_modules/.../dict/coding-compound-terms.txt
-café - companies*           node_modules/@cspell/.../dict/companies.txt
-café - computing-acronyms*  node_modules/@cspell/.../dict/computing-acronyms.txt
-café - cryptocurrencies*    node_modules/@cspell/.../dict/cryptocurrencies.txt
-café * en_us*               node_modules/@cspell/dict-en_us/en_US.trie.gz
-café - en-common-misspelli* node_modules/@cspell/.../dict-en.yaml
-café * en-gb                node_modules/@cspell/dict-en-gb-mit/en_GB.trie.gz
-café - filetypes*           node_modules/@cspell/dict-filetypes/filetypes.txt.gz
-café - public-licenses*     node_modules/@cspell/.../public-licenses.txt.gz
-café - software-term-sugge* node_modules/@cspell/.../cspell-corrections.yaml
-café - software-tools*      node_modules/@cspell/.../dict/software-tools.txt
-café - softwareTerms*       node_modules/@cspell/.../dict/softwareTerms.txt
-café - web-services*        node_modules/@cspell/.../dict/webServices.txt
-café - workspace*           ../../cspell-dict.txt
-"
-`;
-
-exports[`Validate cli > app success 'trace hello --all' run with [ 'trace', 'hello', '--all' ] 1`] = `[]`;
-
-exports[`Validate cli > app success 'trace hello --all' run with [ 'trace', 'hello', '--all' ] 2`] = `
-"Word  F Dictionary           Dictionary Location
-hello - [flagWords]*         From Settings \`flagWords\`
-hello - [ignoreWords]*       From Settings \`ignoreWords\`
-hello - [suggestWords]*      From Settings \`suggestWords\`
-hello - [words]*             From Settings \`words\`
-hello - ada                  node_modules/@cspell/dict-ada/dict/ada.txt
-hello - al                   node_modules/@cspell/dict-al/dict/al.txt
-hello - aws*                 node_modules/@cspell/dict-aws/dict/aws.txt
-hello - bash                 node_modules/@cspell/dict-shell/dict/bash-words.txt
-hello - coding-compound-ter* node_modules/.../dict/coding-compound-terms.txt
-hello - companies*           node_modules/@cspell/.../dict/companies.txt
-hello - computing-acronyms*  node_modules/.../dict/computing-acronyms.txt
-hello * cpp                  node_modules/@cspell/dict-cpp/dict/cpp.txt
-hello - cpp-legacy           node_modules/@cspell/dict-cpp/dict/cpp-legacy.txt
-hello - cpp-refined          node_modules/@cspell/dict-cpp/dict/cpp-refined.txt
-hello * cryptocurrencies*    node_modules/@cspell/.../dict/cryptocurrencies.txt
-hello - cryptocurrencies-le  node_modules/.../dict/cryptocurrencies-legacy.txt
-hello - csharp               node_modules/@cspell/dict-csharp/csharp.txt.gz
-hello - css                  node_modules/@cspell/dict-css/dict/css.txt
-hello - dart                 node_modules/@cspell/dict-dart/dart.txt.gz
-hello - data-science         node_modules/@cspell/.../dict/data-science.txt
-hello - data-science-models  node_modules/.../dict/data-science-models.txt
-hello - data-science-tools   node_modules/.../dict/data-science-tools.txt
-hello - django               node_modules/@cspell/dict-django/dict/django.txt
-hello - docker               node_modules/.../dict-docker/docker-words.txt.gz
-hello - dotnet               node_modules/@cspell/dict-dotnet/dict/dotnet.txt
-hello - elixir               node_modules/@cspell/dict-elixir/dict/elixir.txt
-hello * en_us*               node_modules/@cspell/dict-en_us/en_US.trie.gz
-hello - en-common-misspelli* node_modules/@cspell/.../dict-en.yaml
-hello * en-gb                node_modules/@cspell/dict-en-gb-mit/en_GB.trie.gz
-hello - en-gb-common-misspe  node_modules/@cspell/.../dict-en-gb.yaml
-hello - en-us-common-misspe  node_modules/@cspell/.../dict-en-us.yaml
-hello - filetypes*           node_modules/.../dict-filetypes/filetypes.txt.gz
-hello - flutter              node_modules/@cspell/dict-flutter/flutter.txt.gz
-hello - fonts                node_modules/@cspell/dict-fonts/dict/fonts.txt
-hello - fsharp               node_modules/@cspell/dict-fsharp/dict/fsharp.txt
-hello - fullstack            node_modules/@cspell/.../dict/fullstack.txt
-hello - game-development     node_modules/@cspell/.../dict/game-development.txt
-hello - gaming-terms         node_modules/@cspell/.../dict/gaming-terms.txt
-hello - git                  node_modules/@cspell/dict-git/cspell-ext.json
-hello * golang               node_modules/@cspell/dict-golang/dict/go.txt
-hello - google               node_modules/@cspell/dict-google/dict/google.txt
-hello - haskell              node_modules/@cspell/dict-haskell/dict/haskell.txt
-hello - html                 node_modules/@cspell/dict-html/dict/html.txt
-hello - html-symbol-entitie  node_modules/@cspell/.../entities.txt.gz
-hello - java                 node_modules/@cspell/dict-java/dict/java.trie
-hello - julia                node_modules/@cspell/dict-julia/dict/julia.txt
-hello - k8s                  node_modules/@cspell/dict-k8s/dict/k8s.txt
-hello - kotlin               node_modules/@cspell/dict-kotlin/dict/kotlin.txt
-hello - latex                node_modules/@cspell/dict-latex/dict/latex.txt
-hello - lorem-ipsum          node_modules/@cspell/.../dict/lorem.txt
-hello - lua                  node_modules/@cspell/dict-lua/dict/lua.txt
-hello - makefile             node_modules/@cspell/.../dict/makefile.txt
-hello - monkeyc              node_modules/@cspell/.../monkeyc_keywords.txt.gz
-hello - networking-terms     node_modules/@cspell/.../dict/networkingTerms.txt
-hello * node                 node_modules/@cspell/dict-node/dict/node.txt
-hello - npm                  node_modules/@cspell/dict-npm/dict/npm.txt
-hello - php                  node_modules/@cspell/dict-php/dict/php.txt
-hello - powershell           node_modules/@cspell/.../dict/powershell.txt
-hello - public-licenses*     node_modules/@cspell/.../public-licenses.txt.gz
-hello - python               node_modules/@cspell/dict-python/dict/python.txt
-hello - python-common        node_modules/@cspell/.../dict/python-common.txt
-hello - r                    node_modules/@cspell/dict-r/r.txt.gz
-hello - ruby                 node_modules/@cspell/dict-ruby/dict/ruby.txt
-hello - rust                 node_modules/@cspell/dict-rust/dict/rust.txt
-hello - scala                node_modules/@cspell/dict-scala/dict/scala.txt
-hello - shellscript          node_modules/@cspell/.../dict/shell-all-words.txt
-hello - software-term-sugge* node_modules/@cspell/.../cspell-corrections.yaml
-hello - software-tools*      node_modules/@cspell/.../dict/software-tools.txt
-hello - softwareTerms*       node_modules/@cspell/.../dict/softwareTerms.txt
-hello - sql                  node_modules/@cspell/dict-sql/sql.txt.gz
-hello - svelte               node_modules/@cspell/dict-svelte/dict/svelte.txt
-hello - swift                node_modules/@cspell/dict-swift/swift.txt.gz
-hello - terraform            node_modules/@cspell/.../dict/terraform.txt
-hello - typescript           node_modules/@cspell/.../dict/typescript.txt
-hello - web-services*        node_modules/@cspell/.../dict/webServices.txt
-hello - workspace*           ../../cspell-dict.txt
-"
-`;
-
-exports[`Validate cli > app success 'trace hello --color' run with [ 'trace', 'hello', '--color' ] 1`] = `[]`;
-
-exports[`Validate cli > app success 'trace hello --color' run with [ 'trace', 'hello', '--color' ] 2`] = `
-"[1m[4mWord[24m[22m  [1m[4mF[24m[22m [1m[4mDictionary[24m[22m           [1m[4mDictionary Location[24m[22m
-[32mhello[39m [2m-[22m [93m[flagWords]*[39m         [37mFrom Settings \`flagWords\`[39m
-[32mhello[39m [2m-[22m [93m[ignoreWords]*[39m       [37mFrom Settings \`ignoreWords\`[39m
-[32mhello[39m [2m-[22m [93m[suggestWords]*[39m      [37mFrom Settings \`suggestWords\`[39m
-[32mhello[39m [2m-[22m [93m[words]*[39m             [37mFrom Settings \`words\`[39m
-[32mhello[39m [2m-[22m [93maws*[39m                 [37mnode_modules/@cspell/dict-aws/dict/aws.txt[39m
-[32mhello[39m [2m-[22m [93mcoding-compound-ter*[39m [37mnode_modules/.../dict/coding-compound-terms.txt[39m
-[32mhello[39m [2m-[22m [93mcompanies*[39m           [37mnode_modules/@cspell/.../dict/companies.txt[39m
-[32mhello[39m [2m-[22m [93mcomputing-acronyms*[39m  [37mnode_modules/.../dict/computing-acronyms.txt[39m
-[32mhello[39m [97m*[39m [38;5;179mcpp [39m                 [37mnode_modules/@cspell/dict-cpp/dict/cpp.txt[39m
-[32mhello[39m [97m*[39m [93mcryptocurrencies*[39m    [37mnode_modules/@cspell/.../dict/cryptocurrencies.txt[39m
-[32mhello[39m [97m*[39m [93men_us*[39m               [37mnode_modules/@cspell/dict-en_us/en_US.trie.gz[39m
-[32mhello[39m [2m-[22m [93men-common-misspelli*[39m [37mnode_modules/@cspell/.../dict-en.yaml[39m
-[32mhello[39m [97m*[39m [38;5;179men-gb [39m               [37mnode_modules/@cspell/dict-en-gb-mit/en_GB.trie.gz[39m
-[32mhello[39m [2m-[22m [93mfiletypes*[39m           [37mnode_modules/.../dict-filetypes/filetypes.txt.gz[39m
-[32mhello[39m [97m*[39m [38;5;179mgolang [39m              [37mnode_modules/@cspell/dict-golang/dict/go.txt[39m
-[32mhello[39m [97m*[39m [38;5;179mnode [39m                [37mnode_modules/@cspell/dict-node/dict/node.txt[39m
-[32mhello[39m [2m-[22m [93mpublic-licenses*[39m     [37mnode_modules/@cspell/.../public-licenses.txt.gz[39m
-[32mhello[39m [2m-[22m [93msoftware-term-sugge*[39m [37mnode_modules/@cspell/.../cspell-corrections.yaml[39m
-[32mhello[39m [2m-[22m [93msoftware-tools*[39m      [37mnode_modules/@cspell/.../dict/software-tools.txt[39m
-[32mhello[39m [2m-[22m [93msoftwareTerms*[39m       [37mnode_modules/@cspell/.../dict/softwareTerms.txt[39m
-[32mhello[39m [2m-[22m [93mweb-services*[39m        [37mnode_modules/@cspell/.../dict/webServices.txt[39m
-[32mhello[39m [2m-[22m [93mworkspace*[39m           [37m../../cspell-dict.txt[39m
-"
-`;
-
-exports[`Validate cli > app success 'trace hello --no-color' run with [ 'trace', 'hello', '--no-color' ] 1`] = `[]`;
-
-exports[`Validate cli > app success 'trace hello --no-color' run with [ 'trace', 'hello', '--no-color' ] 2`] = `
-"Word  F Dictionary           Dictionary Location
-hello - [flagWords]*         From Settings \`flagWords\`
-hello - [ignoreWords]*       From Settings \`ignoreWords\`
-hello - [suggestWords]*      From Settings \`suggestWords\`
-hello - [words]*             From Settings \`words\`
-hello - aws*                 node_modules/@cspell/dict-aws/dict/aws.txt
-hello - coding-compound-ter* node_modules/.../dict/coding-compound-terms.txt
-hello - companies*           node_modules/@cspell/.../dict/companies.txt
-hello - computing-acronyms*  node_modules/.../dict/computing-acronyms.txt
-hello * cpp                  node_modules/@cspell/dict-cpp/dict/cpp.txt
-hello * cryptocurrencies*    node_modules/@cspell/.../dict/cryptocurrencies.txt
-hello * en_us*               node_modules/@cspell/dict-en_us/en_US.trie.gz
-hello - en-common-misspelli* node_modules/@cspell/.../dict-en.yaml
-hello * en-gb                node_modules/@cspell/dict-en-gb-mit/en_GB.trie.gz
-hello - filetypes*           node_modules/.../dict-filetypes/filetypes.txt.gz
-hello * golang               node_modules/@cspell/dict-golang/dict/go.txt
-hello * node                 node_modules/@cspell/dict-node/dict/node.txt
-hello - public-licenses*     node_modules/@cspell/.../public-licenses.txt.gz
-hello - software-term-sugge* node_modules/@cspell/.../cspell-corrections.yaml
-hello - software-tools*      node_modules/@cspell/.../dict/software-tools.txt
-hello - softwareTerms*       node_modules/@cspell/.../dict/softwareTerms.txt
-hello - web-services*        node_modules/@cspell/.../dict/webServices.txt
-hello - workspace*           ../../cspell-dict.txt
-"
-`;
-
-exports[`Validate cli > app success 'trace hello --only-found' run with [ 'trace', 'hello', '--only-found' ] 1`] = `[]`;
-
-exports[`Validate cli > app success 'trace hello --only-found' run with [ 'trace', 'hello', '--only-found' ] 2`] = `
-"Word  F Dictionary        Dictionary Location
-hello * cpp               node_modules/@cspell/dict-cpp/dict/cpp.txt
-hello * cryptocurrencies* node_modules/@cspell/.../dict/cryptocurrencies.txt
-hello * en_us*            node_modules/@cspell/dict-en_us/en_US.trie.gz
-hello * en-gb             node_modules/@cspell/dict-en-gb-mit/en_GB.trie.gz
-hello * golang            node_modules/@cspell/dict-golang/dict/go.txt
-hello * node              node_modules/@cspell/dict-node/dict/node.txt
-"
-`;
-
-exports[`Validate cli > app success 'trace hello' run with [ 'trace', '--locale=en-gb', 'hello' ] 1`] = `[]`;
-
-exports[`Validate cli > app success 'trace hello' run with [ 'trace', '--locale=en-gb', 'hello' ] 2`] = `
-"Word  F Dictionary           Dictionary Location
-hello - [flagWords]*         From Settings \`flagWords\`
-hello - [ignoreWords]*       From Settings \`ignoreWords\`
-hello - [suggestWords]*      From Settings \`suggestWords\`
-hello - [words]*             From Settings \`words\`
-hello - aws*                 node_modules/@cspell/dict-aws/dict/aws.txt
-hello - coding-compound-ter* node_modules/.../dict/coding-compound-terms.txt
-hello - companies*           node_modules/@cspell/.../dict/companies.txt
-hello - computing-acronyms*  node_modules/.../dict/computing-acronyms.txt
-hello * cpp                  node_modules/@cspell/dict-cpp/dict/cpp.txt
-hello * cryptocurrencies*    node_modules/@cspell/.../dict/cryptocurrencies.txt
-hello * en_us                node_modules/@cspell/dict-en_us/en_US.trie.gz
-hello * en-gb*               node_modules/@cspell/dict-en-gb-mit/en_GB.trie.gz
-hello - en-gb-common-misspe* node_modules/@cspell/.../dict-en-gb.yaml
-hello - filetypes*           node_modules/.../dict-filetypes/filetypes.txt.gz
-hello * golang               node_modules/@cspell/dict-golang/dict/go.txt
-hello * node                 node_modules/@cspell/dict-node/dict/node.txt
-hello - public-licenses*     node_modules/@cspell/.../public-licenses.txt.gz
-hello - software-term-sugge* node_modules/@cspell/.../cspell-corrections.yaml
-hello - software-tools*      node_modules/@cspell/.../dict/software-tools.txt
-hello - softwareTerms*       node_modules/@cspell/.../dict/softwareTerms.txt
-hello - web-services*        node_modules/@cspell/.../dict/webServices.txt
-hello - workspace*           ../../cspell-dict.txt
-"
-`;
-
 exports[`Validate cli > app suggest [ 'sug' ] 1`] = `
 [
   "Usage: cspell suggestions|sug [options] [words...]",
@@ -4426,5 +4311,223 @@ exports[`Validate cli > app suggest [ 'sug', 'mexico', '-d=en-us' ] 2`] = `""`;
 
 exports[`Validate cli > app suggest [ 'sug', 'mexico', '-d=en-us' ] 3`] = `
 "Unknown dictionary: "en-us"
+"
+`;
+
+exports[`Validate cli > app trace 'suggest' run with [ 'suggest', 'café', '--num-suggestions=1', '--no-include-ties' ] 1`] = `[]`;
+
+exports[`Validate cli > app trace 'suggest' run with [ 'suggest', 'café', '--num-suggestions=1', '--no-include-ties' ] 2`] = `
+"café:
+
+ - café
+"
+`;
+
+exports[`Validate cli > app trace 'trace café' run with [ 'trace', 'café' ] 1`] = `[]`;
+
+exports[`Validate cli > app trace 'trace café' run with [ 'trace', 'café' ] 2`] = `
+"Word F Dictionary           Dictionary Location
+café - [flagWords]*         From Settings \`flagWords\`
+café - [ignoreWords]*       From Settings \`ignoreWords\`
+café - [suggestWords]*      From Settings \`suggestWords\`
+café - [words]*             From Settings \`words\`
+café - aws*                 node_modules/@cspell/dict-aws/dict/aws.txt
+café - coding-compound-ter* node_modules/.../dict/coding-compound-terms.txt
+café - companies*           node_modules/@cspell/.../dict/companies.txt
+café - computing-acronyms*  node_modules/@cspell/.../dict/computing-acronyms.txt
+café - cryptocurrencies*    node_modules/@cspell/.../dict/cryptocurrencies.txt
+café * en_us*               node_modules/@cspell/dict-en_us/en_US.trie.gz
+café - en-common-misspelli* node_modules/@cspell/.../dict-en.yaml
+café * en-gb                node_modules/@cspell/dict-en-gb-mit/en_GB.trie.gz
+café - filetypes*           node_modules/@cspell/dict-filetypes/filetypes.txt.gz
+café - public-licenses*     node_modules/@cspell/.../public-licenses.txt.gz
+café - software-term-sugge* node_modules/@cspell/.../cspell-corrections.yaml
+café - software-tools*      node_modules/@cspell/.../dict/software-tools.txt
+café - softwareTerms*       node_modules/@cspell/.../dict/softwareTerms.txt
+café - web-services*        node_modules/@cspell/.../dict/webServices.txt
+café - workspace*           ../../cspell-dict.txt
+"
+`;
+
+exports[`Validate cli > app trace 'trace hello --all' run with [ 'trace', 'hello', '--all' ] 1`] = `[]`;
+
+exports[`Validate cli > app trace 'trace hello --all' run with [ 'trace', 'hello', '--all' ] 2`] = `
+"Word  F Dictionary           Dictionary Location
+hello - [flagWords]*         From Settings \`flagWords\`
+hello - [ignoreWords]*       From Settings \`ignoreWords\`
+hello - [suggestWords]*      From Settings \`suggestWords\`
+hello - [words]*             From Settings \`words\`
+hello - ada                  node_modules/@cspell/dict-ada/dict/ada.txt
+hello - al                   node_modules/@cspell/dict-al/dict/al.txt
+hello - aws*                 node_modules/@cspell/dict-aws/dict/aws.txt
+hello - bash                 node_modules/@cspell/dict-shell/dict/bash-words.txt
+hello - coding-compound-ter* node_modules/.../dict/coding-compound-terms.txt
+hello - companies*           node_modules/@cspell/.../dict/companies.txt
+hello - computing-acronyms*  node_modules/.../dict/computing-acronyms.txt
+hello * cpp                  node_modules/@cspell/dict-cpp/dict/cpp.txt
+hello - cpp-legacy           node_modules/@cspell/dict-cpp/dict/cpp-legacy.txt
+hello - cpp-refined          node_modules/@cspell/dict-cpp/dict/cpp-refined.txt
+hello * cryptocurrencies*    node_modules/@cspell/.../dict/cryptocurrencies.txt
+hello - cryptocurrencies-le  node_modules/.../dict/cryptocurrencies-legacy.txt
+hello - csharp               node_modules/@cspell/dict-csharp/csharp.txt.gz
+hello - css                  node_modules/@cspell/dict-css/dict/css.txt
+hello - dart                 node_modules/@cspell/dict-dart/dart.txt.gz
+hello - data-science         node_modules/@cspell/.../dict/data-science.txt
+hello - data-science-models  node_modules/.../dict/data-science-models.txt
+hello - data-science-tools   node_modules/.../dict/data-science-tools.txt
+hello - django               node_modules/@cspell/dict-django/dict/django.txt
+hello - docker               node_modules/.../dict-docker/docker-words.txt.gz
+hello - dotnet               node_modules/@cspell/dict-dotnet/dict/dotnet.txt
+hello - elixir               node_modules/@cspell/dict-elixir/dict/elixir.txt
+hello * en_us*               node_modules/@cspell/dict-en_us/en_US.trie.gz
+hello - en-common-misspelli* node_modules/@cspell/.../dict-en.yaml
+hello * en-gb                node_modules/@cspell/dict-en-gb-mit/en_GB.trie.gz
+hello - en-gb-common-misspe  node_modules/@cspell/.../dict-en-gb.yaml
+hello - en-us-common-misspe  node_modules/@cspell/.../dict-en-us.yaml
+hello - filetypes*           node_modules/.../dict-filetypes/filetypes.txt.gz
+hello - flutter              node_modules/@cspell/dict-flutter/flutter.txt.gz
+hello - fonts                node_modules/@cspell/dict-fonts/dict/fonts.txt
+hello - fsharp               node_modules/@cspell/dict-fsharp/dict/fsharp.txt
+hello - fullstack            node_modules/@cspell/.../dict/fullstack.txt
+hello - game-development     node_modules/@cspell/.../dict/game-development.txt
+hello - gaming-terms         node_modules/@cspell/.../dict/gaming-terms.txt
+hello - git                  node_modules/@cspell/dict-git/cspell-ext.json
+hello * golang               node_modules/@cspell/dict-golang/dict/go.txt
+hello - google               node_modules/@cspell/dict-google/dict/google.txt
+hello - haskell              node_modules/@cspell/dict-haskell/dict/haskell.txt
+hello - html                 node_modules/@cspell/dict-html/dict/html.txt
+hello - html-symbol-entitie  node_modules/@cspell/.../entities.txt.gz
+hello - java                 node_modules/@cspell/dict-java/dict/java.trie
+hello - julia                node_modules/@cspell/dict-julia/dict/julia.txt
+hello - k8s                  node_modules/@cspell/dict-k8s/dict/k8s.txt
+hello - kotlin               node_modules/@cspell/dict-kotlin/dict/kotlin.txt
+hello - latex                node_modules/@cspell/dict-latex/dict/latex.txt
+hello - lorem-ipsum          node_modules/@cspell/.../dict/lorem.txt
+hello - lua                  node_modules/@cspell/dict-lua/dict/lua.txt
+hello - makefile             node_modules/@cspell/.../dict/makefile.txt
+hello - monkeyc              node_modules/@cspell/.../monkeyc_keywords.txt.gz
+hello - networking-terms     node_modules/@cspell/.../dict/networkingTerms.txt
+hello * node                 node_modules/@cspell/dict-node/dict/node.txt
+hello - npm                  node_modules/@cspell/dict-npm/dict/npm.txt
+hello - php                  node_modules/@cspell/dict-php/dict/php.txt
+hello - powershell           node_modules/@cspell/.../dict/powershell.txt
+hello - public-licenses*     node_modules/@cspell/.../public-licenses.txt.gz
+hello - python               node_modules/@cspell/dict-python/dict/python.txt
+hello - python-common        node_modules/@cspell/.../dict/python-common.txt
+hello - r                    node_modules/@cspell/dict-r/r.txt.gz
+hello - ruby                 node_modules/@cspell/dict-ruby/dict/ruby.txt
+hello - rust                 node_modules/@cspell/dict-rust/dict/rust.txt
+hello - scala                node_modules/@cspell/dict-scala/dict/scala.txt
+hello - shellscript          node_modules/@cspell/.../dict/shell-all-words.txt
+hello - software-term-sugge* node_modules/@cspell/.../cspell-corrections.yaml
+hello - software-tools*      node_modules/@cspell/.../dict/software-tools.txt
+hello - softwareTerms*       node_modules/@cspell/.../dict/softwareTerms.txt
+hello - sql                  node_modules/@cspell/dict-sql/sql.txt.gz
+hello - svelte               node_modules/@cspell/dict-svelte/dict/svelte.txt
+hello - swift                node_modules/@cspell/dict-swift/swift.txt.gz
+hello - terraform            node_modules/@cspell/.../dict/terraform.txt
+hello - typescript           node_modules/@cspell/.../dict/typescript.txt
+hello - web-services*        node_modules/@cspell/.../dict/webServices.txt
+hello - workspace*           ../../cspell-dict.txt
+"
+`;
+
+exports[`Validate cli > app trace 'trace hello --color' run with [ 'trace', 'hello', '--color' ] 1`] = `[]`;
+
+exports[`Validate cli > app trace 'trace hello --color' run with [ 'trace', 'hello', '--color' ] 2`] = `
+"[1m[4mWord[24m[22m  [1m[4mF[24m[22m [1m[4mDictionary[24m[22m           [1m[4mDictionary Location[24m[22m
+[32mhello[39m [2m-[22m [93m[flagWords]*[39m         [37mFrom Settings \`flagWords\`[39m
+[32mhello[39m [2m-[22m [93m[ignoreWords]*[39m       [37mFrom Settings \`ignoreWords\`[39m
+[32mhello[39m [2m-[22m [93m[suggestWords]*[39m      [37mFrom Settings \`suggestWords\`[39m
+[32mhello[39m [2m-[22m [93m[words]*[39m             [37mFrom Settings \`words\`[39m
+[32mhello[39m [2m-[22m [93maws*[39m                 [37mnode_modules/@cspell/dict-aws/dict/aws.txt[39m
+[32mhello[39m [2m-[22m [93mcoding-compound-ter*[39m [37mnode_modules/.../dict/coding-compound-terms.txt[39m
+[32mhello[39m [2m-[22m [93mcompanies*[39m           [37mnode_modules/@cspell/.../dict/companies.txt[39m
+[32mhello[39m [2m-[22m [93mcomputing-acronyms*[39m  [37mnode_modules/.../dict/computing-acronyms.txt[39m
+[32mhello[39m [97m*[39m [38;5;179mcpp [39m                 [37mnode_modules/@cspell/dict-cpp/dict/cpp.txt[39m
+[32mhello[39m [97m*[39m [93mcryptocurrencies*[39m    [37mnode_modules/@cspell/.../dict/cryptocurrencies.txt[39m
+[32mhello[39m [97m*[39m [93men_us*[39m               [37mnode_modules/@cspell/dict-en_us/en_US.trie.gz[39m
+[32mhello[39m [2m-[22m [93men-common-misspelli*[39m [37mnode_modules/@cspell/.../dict-en.yaml[39m
+[32mhello[39m [97m*[39m [38;5;179men-gb [39m               [37mnode_modules/@cspell/dict-en-gb-mit/en_GB.trie.gz[39m
+[32mhello[39m [2m-[22m [93mfiletypes*[39m           [37mnode_modules/.../dict-filetypes/filetypes.txt.gz[39m
+[32mhello[39m [97m*[39m [38;5;179mgolang [39m              [37mnode_modules/@cspell/dict-golang/dict/go.txt[39m
+[32mhello[39m [97m*[39m [38;5;179mnode [39m                [37mnode_modules/@cspell/dict-node/dict/node.txt[39m
+[32mhello[39m [2m-[22m [93mpublic-licenses*[39m     [37mnode_modules/@cspell/.../public-licenses.txt.gz[39m
+[32mhello[39m [2m-[22m [93msoftware-term-sugge*[39m [37mnode_modules/@cspell/.../cspell-corrections.yaml[39m
+[32mhello[39m [2m-[22m [93msoftware-tools*[39m      [37mnode_modules/@cspell/.../dict/software-tools.txt[39m
+[32mhello[39m [2m-[22m [93msoftwareTerms*[39m       [37mnode_modules/@cspell/.../dict/softwareTerms.txt[39m
+[32mhello[39m [2m-[22m [93mweb-services*[39m        [37mnode_modules/@cspell/.../dict/webServices.txt[39m
+[32mhello[39m [2m-[22m [93mworkspace*[39m           [37m../../cspell-dict.txt[39m
+"
+`;
+
+exports[`Validate cli > app trace 'trace hello --no-color' run with [ 'trace', 'hello', '--no-color' ] 1`] = `[]`;
+
+exports[`Validate cli > app trace 'trace hello --no-color' run with [ 'trace', 'hello', '--no-color' ] 2`] = `
+"Word  F Dictionary           Dictionary Location
+hello - [flagWords]*         From Settings \`flagWords\`
+hello - [ignoreWords]*       From Settings \`ignoreWords\`
+hello - [suggestWords]*      From Settings \`suggestWords\`
+hello - [words]*             From Settings \`words\`
+hello - aws*                 node_modules/@cspell/dict-aws/dict/aws.txt
+hello - coding-compound-ter* node_modules/.../dict/coding-compound-terms.txt
+hello - companies*           node_modules/@cspell/.../dict/companies.txt
+hello - computing-acronyms*  node_modules/.../dict/computing-acronyms.txt
+hello * cpp                  node_modules/@cspell/dict-cpp/dict/cpp.txt
+hello * cryptocurrencies*    node_modules/@cspell/.../dict/cryptocurrencies.txt
+hello * en_us*               node_modules/@cspell/dict-en_us/en_US.trie.gz
+hello - en-common-misspelli* node_modules/@cspell/.../dict-en.yaml
+hello * en-gb                node_modules/@cspell/dict-en-gb-mit/en_GB.trie.gz
+hello - filetypes*           node_modules/.../dict-filetypes/filetypes.txt.gz
+hello * golang               node_modules/@cspell/dict-golang/dict/go.txt
+hello * node                 node_modules/@cspell/dict-node/dict/node.txt
+hello - public-licenses*     node_modules/@cspell/.../public-licenses.txt.gz
+hello - software-term-sugge* node_modules/@cspell/.../cspell-corrections.yaml
+hello - software-tools*      node_modules/@cspell/.../dict/software-tools.txt
+hello - softwareTerms*       node_modules/@cspell/.../dict/softwareTerms.txt
+hello - web-services*        node_modules/@cspell/.../dict/webServices.txt
+hello - workspace*           ../../cspell-dict.txt
+"
+`;
+
+exports[`Validate cli > app trace 'trace hello --only-found' run with [ 'trace', 'hello', '--only-found' ] 1`] = `[]`;
+
+exports[`Validate cli > app trace 'trace hello --only-found' run with [ 'trace', 'hello', '--only-found' ] 2`] = `
+"Word  F Dictionary        Dictionary Location
+hello * cpp               node_modules/@cspell/dict-cpp/dict/cpp.txt
+hello * cryptocurrencies* node_modules/@cspell/.../dict/cryptocurrencies.txt
+hello * en_us*            node_modules/@cspell/dict-en_us/en_US.trie.gz
+hello * en-gb             node_modules/@cspell/dict-en-gb-mit/en_GB.trie.gz
+hello * golang            node_modules/@cspell/dict-golang/dict/go.txt
+hello * node              node_modules/@cspell/dict-node/dict/node.txt
+"
+`;
+
+exports[`Validate cli > app trace 'trace hello' run with [ 'trace', '--locale=en-gb', 'hello' ] 1`] = `[]`;
+
+exports[`Validate cli > app trace 'trace hello' run with [ 'trace', '--locale=en-gb', 'hello' ] 2`] = `
+"Word  F Dictionary           Dictionary Location
+hello - [flagWords]*         From Settings \`flagWords\`
+hello - [ignoreWords]*       From Settings \`ignoreWords\`
+hello - [suggestWords]*      From Settings \`suggestWords\`
+hello - [words]*             From Settings \`words\`
+hello - aws*                 node_modules/@cspell/dict-aws/dict/aws.txt
+hello - coding-compound-ter* node_modules/.../dict/coding-compound-terms.txt
+hello - companies*           node_modules/@cspell/.../dict/companies.txt
+hello - computing-acronyms*  node_modules/.../dict/computing-acronyms.txt
+hello * cpp                  node_modules/@cspell/dict-cpp/dict/cpp.txt
+hello * cryptocurrencies*    node_modules/@cspell/.../dict/cryptocurrencies.txt
+hello * en_us                node_modules/@cspell/dict-en_us/en_US.trie.gz
+hello * en-gb*               node_modules/@cspell/dict-en-gb-mit/en_GB.trie.gz
+hello - en-gb-common-misspe* node_modules/@cspell/.../dict-en-gb.yaml
+hello - filetypes*           node_modules/.../dict-filetypes/filetypes.txt.gz
+hello * golang               node_modules/@cspell/dict-golang/dict/go.txt
+hello * node                 node_modules/@cspell/dict-node/dict/node.txt
+hello - public-licenses*     node_modules/@cspell/.../public-licenses.txt.gz
+hello - software-term-sugge* node_modules/@cspell/.../cspell-corrections.yaml
+hello - software-tools*      node_modules/@cspell/.../dict/software-tools.txt
+hello - softwareTerms*       node_modules/@cspell/.../dict/softwareTerms.txt
+hello - web-services*        node_modules/@cspell/.../dict/webServices.txt
+hello - workspace*           ../../cspell-dict.txt
 "
 `;

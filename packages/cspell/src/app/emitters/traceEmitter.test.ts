@@ -5,7 +5,7 @@ import { describe, expect, test, vi } from 'vitest';
 
 import type { TraceResult } from '../application.mjs';
 import { console } from '../console.js';
-import { __testing__, calcTraceResultsReport, emitTraceResults } from './traceEmitter.js';
+import { calcTraceResultsReport, emitTraceResults } from './traceEmitter.js';
 
 const compareStr = Intl.Collator().compare;
 
@@ -111,21 +111,6 @@ errorcode  * project-words     D:/this_is_a_very/long/path/project-words.txt
 errorcode  - softwareTerms*    D:/this_is_a_very/long/path/node_modules/@cspell/dict-software-terms/dict/softwareTerms.txt`,
             ),
         );
-    });
-});
-
-describe('trimMidPath', () => {
-    test.each`
-        path                      | width | expected
-        ${''}                     | ${20} | ${''}
-        ${'0123456789'}           | ${7}  | ${'01...89'}
-        ${'0123/56789'}           | ${7}  | ${'01...89'}
-        ${'0123/56789'}           | ${9}  | ${'.../56789'}
-        ${'0123/56789/1234/6789'} | ${20} | ${'0123/56789/1234/6789'}
-        ${'0123/89/77/1234/6789'} | ${19} | ${'0123/.../1234/6789'}
-        ${'0123/8/7/1gh1234/689'} | ${19} | ${'0123/8/7/.../689'}
-    `('trimMidPath', ({ path, width, expected }) => {
-        expect(__testing__.trimMidPath(path, width, '/')).toBe(expected);
     });
 });
 

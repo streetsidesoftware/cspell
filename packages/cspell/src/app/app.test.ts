@@ -269,6 +269,7 @@ describe('Validate cli', () => {
         ${['suggest', '--help']}
         ${['link', '--help']}
         ${['check', '--help']}
+        ${['dictionaries', '--help']}
     `('app help $cmdArgs', async ({ cmdArgs }) => {
         chalk.level = 1;
         const commander = getCommander();
@@ -340,7 +341,19 @@ describe('Validate cli', () => {
         ${'trace café'}               | ${['trace', 'café'.normalize('NFD')]}
         ${'trace hello'}              | ${['trace', '--locale=en-gb', 'hello']}
         ${'suggest'}                  | ${['suggest', 'café'.normalize('NFD'), '--num-suggestions=1', '--no-include-ties']}
-    `('app success $msg run with $testArgs', async ({ testArgs }: TestCase) => {
+    `('app trace $msg run with $testArgs', async ({ testArgs }: TestCase) => {
+        chalk.level = 0;
+        const commander = getCommander();
+        const args = argv(...testArgs);
+        await app.run(commander, args);
+        expect(captureStdout.text).toMatchSnapshot();
+        expect(normalizeLogCalls(log.mock.calls)).toMatchSnapshot();
+    });
+
+    test.each`
+        testArgs
+        ${['dictionaries']}
+    `('app dictionary $testArgs', async ({ testArgs }: TestCase) => {
         chalk.level = 0;
         const commander = getCommander();
         const args = argv(...testArgs);
