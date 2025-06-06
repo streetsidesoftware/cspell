@@ -58,6 +58,10 @@ function pIssues(...parts: string[]): string {
     return pTestFix('issues', ...parts);
 }
 
+function argRootFeat(feat: string): string {
+    return '--root=' + pathFeat(feat);
+}
+
 // [message, args, resolve, error, log, info]
 type ErrorCheck = undefined | Constructable | string | RegExp;
 
@@ -129,6 +133,9 @@ describe('Validate cli', () => {
         .mockName('removePathsFromGlobalImports');
     const captureStdout = new RecordStdStream();
     const captureStderr = new RecordStdStream('stderr');
+
+    const argDict = (dict: string) => `--dictionary=${dict}`;
+    const argDDict = (dict: string) => `--disable-dictionary=${dict}`;
 
     beforeEach(() => {
         mockCreateInterface.mockClear();
@@ -212,6 +219,26 @@ describe('Validate cli', () => {
         ${'reporting level simple'}                    | ${['-r', pathFeat('unknown-words'), '--report=simple', '.']}                              | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
         ${'reporting level all'}                       | ${['-r', pathFeat('unknown-words'), '--report=all', '.']}                                 | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
     `('app $msg Expect Error: $errorCheck', async ({ testArgs, errorCheck, eError, eLog, eInfo }: TestCase) => {
+        chalk.level = 1;
+        const commander = getCommander();
+        const args = argv(...testArgs);
+        const result = app.run(commander, args);
+        await (!errorCheck ? expect(result).resolves.toBeUndefined() : expect(result).rejects.toThrow(errorCheck));
+
+        eError ? expect(error).toHaveBeenCalled() : expect(error).not.toHaveBeenCalled();
+        eLog ? expect(log).toHaveBeenCalled() : expect(log).not.toHaveBeenCalled();
+        eInfo ? expect(info).toHaveBeenCalled() : expect(info).not.toHaveBeenCalled();
+
+        expect(captureStdout.text).toMatchSnapshot();
+        expect(logger.normalizedHistory()).toMatchSnapshot();
+        expect(normalizeOutput(captureStderr.text)).toMatchSnapshot();
+    });
+
+    test.each`
+        msg                                                | testArgs                                                                      | errorCheck         | eError  | eLog     | eInfo    | notes
+        ${'lint --disable-dictionary'}                     | ${[argRootFeat('dictionaries'), argDDict('words'), '*.md']}                   | ${app.CheckFailed} | ${true} | ${true}  | ${false} | ${'Disable dictionary words'}
+        ${'lint --disable-dictionary --enable-dictionary'} | ${[argRootFeat('dictionaries'), argDDict('words'), argDict('words'), '*.md']} | ${undefined}       | ${true} | ${false} | ${false} | ${'Disable and reenable dictionary words'}
+    `('app lint $msg Expect Error: $errorCheck', async ({ testArgs, errorCheck, eError, eLog, eInfo }: TestCase) => {
         chalk.level = 1;
         const commander = getCommander();
         const args = argv(...testArgs);
