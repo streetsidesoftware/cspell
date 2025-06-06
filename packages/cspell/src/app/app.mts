@@ -3,6 +3,7 @@ import { Option as CommanderOption, program } from 'commander';
 import { satisfies as semverSatisfies } from 'semver';
 
 import { commandCheck } from './commandCheck.js';
+import { commandDictionaries } from './commandDictionaries.js';
 import { commandInit } from './commandInit.js';
 import { commandLink } from './commandLink.js';
 import { commandLint } from './commandLint.js';
@@ -38,6 +39,7 @@ export async function run(command?: Command, argv?: string[]): Promise<void> {
     commandSuggestion(prog).addOption(optionFlags);
     commandInit(prog).addOption(optionFlags);
     commandLink(prog);
+    commandDictionaries(prog);
 
     prog.exitOverride();
     await prog.parseAsync(args);

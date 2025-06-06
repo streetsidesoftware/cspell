@@ -171,6 +171,28 @@ export interface SuggestionOptions extends BaseOptions {
     repl?: boolean;
 }
 
+export interface DictionariesOptions {
+    /**
+     * Path to configuration file.
+     */
+    config?: string;
+
+    /**
+     * Load the default configuration
+     * @default true
+     */
+    defaultConfiguration?: boolean;
+
+    /**
+     * Use color in the output.
+     * `true` to force color, `false` to turn off color.
+     * `undefined` to use color if the output is a TTY.
+     */
+    color?: boolean | undefined;
+
+    pathFormat?: 'hide' | 'short' | 'long' | 'full';
+}
+
 export interface LegacyOptions {
     local?: string;
 }
