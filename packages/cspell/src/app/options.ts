@@ -121,11 +121,34 @@ export interface LinterOptions
 }
 
 export interface TraceOptions extends BaseOptions {
+    /**
+     * Use stdin for the input.
+     */
     stdin?: boolean;
+    /**
+     * Enable the `allowCompoundWords` option.
+     */
     allowCompoundWords?: boolean;
+    /**
+     * Ignore case and accents when searching for words.
+     */
     ignoreCase?: boolean;
+    /**
+     * Show all dictionaries, not just the ones that contain the words or are enabled.
+     */
     all?: boolean;
+    /**
+     * Show only dictionaries that contain the words.
+     * If `all` is set, this option is ignored.
+     */
     onlyFound?: boolean;
+    /**
+     * Names of dictionaries to use.
+     */
+    dictionary?: string[] | undefined;
+    /**
+     * Configure how to display the dictionary path.
+     */
     dictionaryPath?: 'hide' | 'long' | 'short' | 'full';
 }
 

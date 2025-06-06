@@ -1,5 +1,5 @@
 import { opMap, opTap, pipeAsync, toAsyncIterable } from '@cspell/cspell-pipe';
-import type { CSpellReporter, RunResult } from '@cspell/cspell-types';
+import type { CSpellReporter, CSpellSettings, RunResult } from '@cspell/cspell-types';
 import type { CheckTextInfo, FeatureFlags, SuggestionsForWordResult, TraceWordResult } from 'cspell-lib';
 import {
     checkTextDocument,
@@ -52,11 +52,16 @@ export async function* trace(words: string[], options: TraceOptions): AsyncItera
     const { languageId, locale, allowCompoundWords, ignoreCase } = options;
     const configFile = await readConfig(options.config, undefined);
     const loadDefault = options.defaultConfiguration ?? configFile.config.loadDefaultConfiguration ?? true;
+    const additionalSettings: CSpellSettings = {};
+    if (options.dictionary) {
+        additionalSettings.dictionaries = options.dictionary;
+    }
 
     const config = mergeSettings(
         await getDefaultSettings(loadDefault),
         await getGlobalSettingsAsync(),
         configFile.config,
+        additionalSettings,
     );
     yield* traceWordsAsync(iWords, config, util.clean({ languageId, locale, ignoreCase, allowCompoundWords }));
 }

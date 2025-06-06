@@ -2,6 +2,7 @@ import type { Command } from 'commander';
 import { Option as CommanderOption } from 'commander';
 
 import * as App from './application.mjs';
+import { collect } from './commandHelpers.js';
 import { console } from './console.js';
 import { isDictionaryPathFormat } from './emitters/DictionaryPathFormat.js';
 import { emitTraceResults } from './emitters/traceEmitter.js';
@@ -37,6 +38,7 @@ export function commandTrace(prog: Command): Command {
         .option('--no-allow-compound-words', 'Turn off allowCompoundWords')
         .option('--ignore-case', 'Ignore case and accents when searching for words.')
         .option('--no-ignore-case', 'Do not ignore case and accents when searching for words.')
+        .option('--dictionary <name>', 'Enable a dictionary by name. Can be used multiple times.', collect)
         .addOption(
             new CommanderOption('--dictionary-path <format>', 'Configure how to display the dictionary path.')
                 .choices(['hide', 'short', 'long', 'full'])

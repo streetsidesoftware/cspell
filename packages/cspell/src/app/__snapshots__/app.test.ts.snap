@@ -1414,6 +1414,56 @@ café - workspace*           ../../cspell-dict.txt
 "
 `;
 
+exports[`Validate cli > app 'trace dict enabled' Expect Error: undefined 1`] = `[]`;
+
+exports[`Validate cli > app 'trace dict enabled' Expect Error: undefined 2`] = `
+"Word         F Dictionary           Dictionary Location
+winkelstraat - [flagWords]*         From Settings \`flagWords\`
+winkelstraat - [ignoreWords]*       From Settings \`ignoreWords\`
+winkelstraat - [suggestWords]*      From Settings \`suggestWords\`
+winkelstraat - [words]*             From Settings \`words\`
+winkelstraat - aws*                 node_modules/@cspell/dict-aws/dict/aws.txt
+winkelstraat - coding-compound-ter* node_modules/.../coding-compound-terms.txt
+winkelstraat - companies*           node_modules/@cspell/.../dict/companies.txt
+winkelstraat - computing-acronyms*  node_modules/.../dict/computing-acronyms.txt
+winkelstraat - cryptocurrencies*    node_modules/.../dict/cryptocurrencies.txt
+winkelstraat - en_us*               node_modules/.../dict-en_us/en_US.trie.gz
+winkelstraat - en-common-misspelli* node_modules/@cspell/.../dict-en.yaml
+winkelstraat - filetypes*           node_modules/@cspell/.../filetypes.txt.gz
+winkelstraat - public-licenses*     node_modules/.../public-licenses.txt.gz
+winkelstraat - software-term-sugge* node_modules/.../cspell-corrections.yaml
+winkelstraat - software-tools*      node_modules/.../dict/software-tools.txt
+winkelstraat - softwareTerms*       node_modules/.../dict/softwareTerms.txt
+winkelstraat - web-services*        node_modules/.../dict/webServices.txt
+winkelstraat * words*               fixtures/features/d-trace/cspell.config.yaml
+"
+`;
+
+exports[`Validate cli > app 'trace dict not enabled' Expect Error: undefined 1`] = `[]`;
+
+exports[`Validate cli > app 'trace dict not enabled' Expect Error: undefined 2`] = `
+"Word         F Dictionary           Dictionary Location
+winkelstraat - [flagWords]*         From Settings \`flagWords\`
+winkelstraat - [ignoreWords]*       From Settings \`ignoreWords\`
+winkelstraat - [suggestWords]*      From Settings \`suggestWords\`
+winkelstraat - [words]*             From Settings \`words\`
+winkelstraat - aws*                 node_modules/@cspell/dict-aws/dict/aws.txt
+winkelstraat - coding-compound-ter* node_modules/.../coding-compound-terms.txt
+winkelstraat - companies*           node_modules/@cspell/.../dict/companies.txt
+winkelstraat - computing-acronyms*  node_modules/.../dict/computing-acronyms.txt
+winkelstraat - cryptocurrencies*    node_modules/.../dict/cryptocurrencies.txt
+winkelstraat - en_us*               node_modules/.../dict-en_us/en_US.trie.gz
+winkelstraat - en-common-misspelli* node_modules/@cspell/.../dict-en.yaml
+winkelstraat - filetypes*           node_modules/@cspell/.../filetypes.txt.gz
+winkelstraat - public-licenses*     node_modules/.../public-licenses.txt.gz
+winkelstraat - software-term-sugge* node_modules/.../cspell-corrections.yaml
+winkelstraat - software-tools*      node_modules/.../dict/software-tools.txt
+winkelstraat - softwareTerms*       node_modules/.../dict/softwareTerms.txt
+winkelstraat - web-services*        node_modules/.../dict/webServices.txt
+winkelstraat * words                fixtures/features/d-trace/cspell.config.yaml
+"
+`;
+
 exports[`Validate cli > app 'trace flavour' Expect Error: undefined 1`] = `[]`;
 
 exports[`Validate cli > app 'trace flavour' Expect Error: undefined 2`] = `
@@ -1516,6 +1566,8 @@ exports[`Validate cli > app 'trace help' Expect Error: 'outputHelp' 1`] = `
   "  --ignore-case               Ignore case and accents when searching for words.",
   "  --no-ignore-case            Do not ignore case and accents when searching for",
   "                              words.",
+  "  --dictionary <name>         Enable a dictionary by name. Can be used multiple",
+  "                              times.",
   "  --dictionary-path <format>  Configure how to display the dictionary path.",
   "                              (choices: "hide", "short", "long", "full",",
   "                              default: Display most of the path.)",
@@ -3893,6 +3945,8 @@ exports[`Validate cli > app help [ 'trace', '--help' ] 1`] = `
   "  --ignore-case               Ignore case and accents when searching for words.",
   "  --no-ignore-case            Do not ignore case and accents when searching for",
   "                              words.",
+  "  --dictionary <name>         Enable a dictionary by name. Can be used multiple",
+  "                              times.",
   "  --dictionary-path <format>  Configure how to display the dictionary path.",
   "                              (choices: "hide", "short", "long", "full",",
   "                              default: Display most of the path.)",
