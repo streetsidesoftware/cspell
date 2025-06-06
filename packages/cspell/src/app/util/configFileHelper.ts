@@ -21,15 +21,13 @@ export interface FileConfigInfo {
 export async function readConfig(
     configFile: string | CSpellConfigFile | undefined,
     root: string | undefined,
-    configSearch: boolean = true,
     stopConfigSearchAt?: URL | string | undefined,
 ): Promise<ConfigInfo> {
     configFile ??= getEnvironmentVariable(environmentKeys.CSPELL_CONFIG_PATH);
 
     if (configFile) {
         const cfgFile = typeof configFile === 'string' ? await readConfigHandleError(configFile) : configFile;
-        const result = await configFileToConfigInfo(cfgFile);
-        return !configSearch ? { ...result, config: { ...result.config, noConfigSearch: true } }  : result;
+        return configFileToConfigInfo(cfgFile);
     }
     const config = await cspell.searchForConfig(root, stopConfigSearchAt);
 

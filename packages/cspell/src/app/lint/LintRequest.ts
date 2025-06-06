@@ -42,7 +42,9 @@ export class LintRequest {
         );
         this.fileLists = (options.fileList ?? options.fileLists) || [];
         this.files = mergeFiles(options.file, options.files);
+         const noConfigSearch = options.configSearch === false ? true : options.configSearch === true ? false : false;
         this.cspellSettingsFromCliOptions = {
+            noConfigSearch,
             ...extractUnknownWordsConfig(options),
         };
     }

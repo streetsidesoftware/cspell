@@ -65,6 +65,7 @@ export function commandLint(prog: Command): Command {
             '-c, --config <cspell.json>',
             'Configuration file to use.  By default cspell looks for cspell.json in the current directory.',
         )
+        .option('--config-search', 'Allow searching for configuration files.', undefined)
         .option(
             '--no-config-search',
             'Disable automatic searching for additional configuration files in parent directories. Only the specified config file (if any) will be used.'

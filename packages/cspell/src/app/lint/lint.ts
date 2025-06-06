@@ -415,7 +415,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             setEnvironmentVariable(ENV_CSPELL_GLOB_ROOT, cfg.root);
         }
 
-        const configInfo: ConfigInfo = await readConfig(cfg.configFile, cfg.root, cfg.options.configSearch, cfg.options.stopConfigSearchAt);
+        const configInfo: ConfigInfo = await readConfig(cfg.configFile, cfg.root, cfg.options.stopConfigSearchAt);
         if (cfg.options.defaultConfiguration !== undefined) {
             configInfo.config.loadDefaultConfiguration = cfg.options.defaultConfiguration;
         }
