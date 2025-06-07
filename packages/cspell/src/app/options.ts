@@ -104,6 +104,11 @@ export interface LinterOptions
     failFast?: boolean;
 
     /**
+     * Keep going even if an error is found.
+     */
+    continueOnError?: boolean;
+
+    /**
      * Optional list of reporters to use, overriding any specified in the
      * configuration.
      */
