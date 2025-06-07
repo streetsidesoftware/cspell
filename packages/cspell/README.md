@@ -159,6 +159,8 @@ Options:
   --no-exit-code               Do not return an exit code if issues are found.
   --quiet                      Only show spelling issues or errors.
   --fail-fast                  Exit after first file with an issue or error.
+  --continue-on-error          Continue processing files even if there is a
+                               configuration error.
   -r, --root <root folder>     Root directory, defaults to current directory.
   --no-relative                Issues are displayed with absolute path instead
                                of relative to the root.
@@ -192,8 +194,6 @@ Options:
                                "all", "simple", "typos", "flagged")
   --issue-template [template]  Use a custom issue template. See --help
                                --issue-template for details.
-  --debug                      Output information useful for debugging
-                               cspell.json files.
   -h, --help                   display help for command
 
 More Examples:
@@ -215,6 +215,9 @@ More Examples:
     cspell "/*.md" --no-must-find-files --files $FILES
         Only spell check the "/*.md" files in $FILES,
         where $FILES is a shell variable that contains the list of files.
+
+    cspell --help --verbose
+        Show all options including hidden options.
 
 References:
     https://cspell.org
