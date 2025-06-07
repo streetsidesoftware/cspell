@@ -1,4 +1,4 @@
-export function hrTimeToSeconds([seconds, nanoseconds]: number[]) {
+export function hrTimeToSeconds([seconds, nanoseconds]: number[]): number {
     return seconds + nanoseconds / 1_000_000_000;
 }
 
@@ -43,9 +43,9 @@ export function* batch<T>(i: Iterable<T>, size: number): Iterable<T[]> {
  * Generate a filter function that will remove adjacent values that compare to falsy;
  * @param compare function to evaluate if two values are considered the same.
  */
-export function filterOrderedList<T>(compare: (a: T, b: T) => boolean | number) {
+export function filterOrderedList<T>(compare: (a: T, b: T) => boolean | number): (t: T) => boolean {
     let last: T | undefined;
-    return function (t: T) {
+    return (t: T): boolean => {
         const r = last === undefined ? last !== t : !!compare(last, t);
         last = r ? t : last;
         return r;
@@ -86,7 +86,7 @@ export function groupByField<T, K extends keyof T>(i: Iterable<T>, field: K): Ma
     return r;
 }
 
-export function insertItemIntoGroupByField<T, K extends keyof T>(map: Map<T[K], T[]>, field: K, item: T) {
+export function insertItemIntoGroupByField<T, K extends keyof T>(map: Map<T[K], T[]>, field: K, item: T): void {
     const k = item[field];
     let a = map.get(k);
     if (!a) {
