@@ -22,9 +22,10 @@ const gcl = getDefaultConfigLoaderInternal;
 
 export function searchForConfig(
     searchFrom: URL | string | undefined,
+    stopSearchAt?: URL | string | undefined,
     pnpSettings: PnPSettingsOptional = defaultPnPSettings,
 ): Promise<CSpellSettingsI | undefined> {
-    return gcl().searchForConfig(searchFrom, pnpSettings);
+    return gcl().searchForConfig(searchFrom, stopSearchAt, pnpSettings);
 }
 /**
  * Load a CSpell configuration files.
