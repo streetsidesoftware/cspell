@@ -2,9 +2,11 @@ import * as iPath from 'node:path';
 
 import chalk from 'chalk';
 
-import type { ListDictionariesResult } from '../application.mjs';
 import { console } from '../console.js';
-import { TableRow, tableToLines } from '../util/table.js';
+import type { ListDictionariesResult } from '../dictionaries/index.js';
+import type { DictionariesOptions } from '../options.js';
+import { pruneTextEnd, pruneTextStart } from '../util/pad.js';
+import { TableCell, TableRow, tableToLines } from '../util/table.js';
 import type { DictionaryPathFormat } from './DictionaryPathFormat.js';
 import { formatDictionaryLocation, type PathInterface } from './helpers.js';
 
@@ -15,11 +17,10 @@ export interface EmitDictOptions {
     dictionaryPathFormat: DictionaryPathFormat;
     iPath?: PathInterface;
     color?: boolean | undefined;
+    options: DictionariesOptions;
 }
 
 const maxWidth = 120;
-
-const colWidthDictionaryName = 40;
 
 export function emitListDictionariesResults(results: ListDictionariesResult[], options: EmitDictOptions): void {
     const report = calcListDictsResultsReport(results, options);
@@ -42,14 +43,18 @@ export function calcListDictsResultsReport(
     const col = new Intl.Collator();
     results.sort((a, b) => col.compare(a.name, b.name));
 
-    const header = emitHeader(options.dictionaryPathFormat !== 'hide');
-    const rows = results.map((r) => emitDictResult(r, options));
+    const header = calcHeaders(options);
+    const rows = results.map((r) => dictTableRowToTableRow(emitDictResult(r, options)));
 
     const t = tableToLines({
         header,
         rows,
         terminalWidth: options.lineWidth || process.stdout.columns || maxWidth,
         deliminator: ' ',
+        maxColumnWidths: {
+            locales: 12,
+            fileTypes: 40,
+        },
     });
 
     return {
@@ -58,25 +63,63 @@ export function calcListDictsResultsReport(
     };
 }
 
-function emitHeader(location: boolean): string[] {
-    const headers = ['Dictionary'];
+function calcHeaders(options: EmitDictOptions): [string, string][] {
+    const showLocation = options.dictionaryPathFormat !== 'hide' && (options.options.showLocation ?? true);
+    const showLocales = options.options.showLocales ?? true;
+    const showFileTypes = options.options.showFileTypes ?? true;
 
-    location && headers.push('Dictionary Location');
+    const headers: [string, string][] = [['name', 'Dictionary']];
+
+    showLocales && headers.push(['locales', 'Locales']);
+    showFileTypes && headers.push(['fileTypes', 'File Types']);
+
+    showLocation && headers.push(['location', 'Dictionary Location']);
 
     return headers;
 }
 
-function emitDictResult(r: ListDictionariesResult, options: EmitDictOptions): TableRow {
+function emitDictResult(r: ListDictionariesResult, options: EmitDictOptions): DictTableRow {
     const a = r.enabled ? '*' : ' ';
-    const dictName = r.name.slice(0, colWidthDictionaryName - 1) + a;
     const dictColor = r.enabled ? chalk.yellowBright : chalk.rgb(200, 128, 50);
-    const n = dictColor(dictName);
+    const n = (width: number | undefined) => dictColor(pruneTextEnd(r.name, width && width - a.length) + a);
     const c = colorize(chalk.white);
-    return [
-        n,
-        (widthSrc) =>
-            c((r.path && formatDictionaryLocation(r.path, widthSrc ?? maxWidth, { iPath, ...options })) || ''),
-    ];
+
+    const locales = (width?: number) => c(pruneTextEnd(r.locales?.join(',') || '', width));
+    const fileTypes = (width?: number) => c(pruneTextEnd(r.fileTypes?.join(',') || '', width));
+
+    if (!r.path) {
+        return {
+            name: n,
+            location: c(r.inline?.join(', ') || ''),
+            locales,
+            fileTypes,
+        };
+    }
+    return {
+        name: n,
+        location: (widthSrc) =>
+            c(
+                (r.path &&
+                    pruneTextStart(
+                        formatDictionaryLocation(r.path, widthSrc ?? maxWidth, { iPath, ...options }),
+                        widthSrc ?? maxWidth,
+                    )) ||
+                    '',
+            ),
+        locales,
+        fileTypes,
+    };
+}
+
+interface DictTableRow {
+    name: TableCell;
+    location: TableCell;
+    locales: TableCell;
+    fileTypes: TableCell;
+}
+
+function dictTableRowToTableRow(row: DictTableRow): TableRow {
+    return Object.fromEntries(Object.entries(row));
 }
 
 function colorize(fn: (s: string) => string): (s: string) => string {

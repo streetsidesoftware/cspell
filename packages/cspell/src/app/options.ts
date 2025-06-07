@@ -213,6 +213,37 @@ export interface DictionariesOptions {
      */
     color?: boolean | undefined;
 
+    /**
+     * Show enabled:
+     * - `true` to show only enabled dictionaries.
+     * - `false` to show only disabled dictionaries.
+     * - `undefined` to show all dictionaries.
+     */
+    enabled?: boolean | undefined;
+
+    /**
+     * The locale to use when listing dictionaries.
+     */
+    locale?: string;
+
+    /**
+     * The file type to use when listing dictionaries.
+     */
+    fileType?: string;
+
+    /**
+     * show the language locales supported by the dictionary.
+     */
+    showLocales?: boolean;
+    /**
+     * show the file types supported by the dictionary.
+     */
+    showFileTypes?: boolean;
+    /**
+     * Dhow the location of the dictionary.
+     */
+    showLocation?: boolean;
+
     pathFormat?: 'hide' | 'short' | 'long' | 'full';
 }
 
