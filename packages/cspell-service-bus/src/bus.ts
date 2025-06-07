@@ -39,8 +39,8 @@ export class ServiceBus implements Dispatcher {
         return dispatch(request);
     }
 
-    defaultHandler<T extends ServiceRequest>(request: T) {
-        return createResponseFail(request, new ErrorUnhandledRequest(request));
+    defaultHandler<T extends ServiceRequest>(request: T): RequestResponseType<T> {
+        return createResponseFail(request, new ErrorUnhandledRequest(request)) as RequestResponseType<T>;
     }
 
     protected reduceHandlers<R extends ServiceRequest>(
@@ -48,7 +48,7 @@ export class ServiceBus implements Dispatcher {
         request: R,
         dispatcher: Dispatcher,
         defaultHandler: HandleRequest,
-    ) {
+    ): HandleRequest {
         const _handlers = handlers.map((m) => ({ ...m, fn: m.fn(dispatcher) }));
         const handler = _handlers.reduce((next, h) => {
             const fn = h.fn(next);

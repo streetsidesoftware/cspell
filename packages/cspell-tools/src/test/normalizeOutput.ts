@@ -15,7 +15,7 @@ const regexpDate = /\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(\.\d+)?Z/gi;
 
 const rxRootRepo = new RegExp(escapeRegEx(rootRepo) + '|' + escapeRegEx(normalizeDirectorySeparator(rootRepo)), 'gi');
 
-export function normalizeOutput(output: string, cwd = process.cwd()): string {
+export function normalizeOutput(output: string, cwd: string = process.cwd()): string {
     const rxCwd = new RegExp(escapeRegEx(cwd) + '|' + escapeRegEx(normalizeDirectorySeparator(cwd)), 'gi');
 
     const normalizeDirs = normalizeDirectorySeparator(

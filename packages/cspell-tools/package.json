@@ -15,8 +15,8 @@
   "scripts": {
     "build": "pnpm run build-schema && pnpm run compile",
     "build-schema": "ts-json-schema-generator --no-top-ref --path src/config/config.ts --type RunConfig --validation-keywords deprecated  -o  ./cspell-tools.config.schema.json",
-    "compile": "tsc -p .",
-    "watch": "tsc -p . -w",
+    "compile": "tsc -p tsconfig.esm.json",
+    "watch": "tsc -p tsconfig.esm.json -w",
     "clean-build": "pnpm run clean && pnpm run build",
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "coverage": "vitest run --coverage",

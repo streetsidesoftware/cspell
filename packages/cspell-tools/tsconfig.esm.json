@@ -1,8 +1,10 @@
 {
     "extends": "../../tsconfig.esm.json",
     "compilerOptions": {
+        "exactOptionalPropertyTypes": true, // make this true
+        "declaration": true,
         "isolatedDeclarations": true,
-        "rootDir": "src",
+        "types": ["node"],
         "outDir": "dist"
     },
     "include": ["src"]

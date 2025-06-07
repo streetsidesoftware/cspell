@@ -8,7 +8,7 @@ export interface SourceReaderOptions {
     /**
      * Max Hunspell recursive depth.
      */
-    maxDepth?: number;
+    maxDepth?: number | undefined;
     /**
      * split words if necessary.
      */
@@ -18,9 +18,9 @@ export interface SourceReaderOptions {
      * before processing. Applies only to text file sources.
      * @default false
      */
-    legacy?: boolean;
+    legacy?: boolean | undefined;
 
-    keepCase?: boolean;
+    keepCase?: boolean | undefined;
 
     allowedSplitWords: AllowedSplitWordsCollection;
 

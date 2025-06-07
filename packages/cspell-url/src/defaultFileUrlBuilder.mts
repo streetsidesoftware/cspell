@@ -2,7 +2,7 @@ import { FileUrlBuilder } from './FileUrlBuilder.mjs';
 
 const fileUrlBuilder = new FileUrlBuilder();
 
-export function encodePathChars(filepath: string) {
+export function encodePathChars(filepath: string): string {
     return fileUrlBuilder.encodePathChars(filepath);
 }
 

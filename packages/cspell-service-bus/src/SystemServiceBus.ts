@@ -6,6 +6,7 @@ import { ErrorDuplicateSubsystem } from './errors.js';
 import type { Handler, HandleRequest, HandleRequestFn, HandlerNext } from './handlers.js';
 import type { RequestResponseType, ServiceRequest } from './request.js';
 import { createResponse } from './request.js';
+import type { RequestFactory } from './requestFactory.js';
 import { requestFactory } from './requestFactory.js';
 import type { ServiceRequestFactory, ServiceRequestFactoryRequestType } from './ServiceRequestFactory.js';
 
@@ -82,18 +83,18 @@ export function createSystemServiceBus(): SystemServiceBus {
 }
 
 const TypeRequestRegisterHandler = 'System:RegisterHandler' as const;
-export const RequestRegisterHandlerFactory = requestFactory<
+export const RequestRegisterHandlerFactory: RequestFactory<
     typeof TypeRequestRegisterHandler,
     { readonly requestPrefix: string; readonly handler: Handler },
     SubsystemServiceBus
->(TypeRequestRegisterHandler);
+> = requestFactory(TypeRequestRegisterHandler);
 
 const TypeRequestCreateSubsystem = 'System:CreateSubsystem' as const;
-export const RequestCreateSubsystemFactory = requestFactory<
+export const RequestCreateSubsystemFactory: RequestFactory<
     typeof TypeRequestCreateSubsystem,
     { readonly name: string; readonly requestPattern: string | RegExp },
     SubsystemServiceBus
->(TypeRequestCreateSubsystem);
+> = requestFactory(TypeRequestCreateSubsystem);
 
 interface SubsystemServiceBus extends Dispatcher {
     readonly name: string;
