@@ -192,9 +192,9 @@ function createTarget(destFilename: string): (seq: Iterable<string>) => Promise<
 // }
 
 export interface TrieOptions {
-    base?: number;
-    trie3?: boolean;
-    trie4?: boolean;
+    base?: number | undefined;
+    trie3?: boolean | undefined;
+    trie4?: boolean | undefined;
 }
 
 export interface CompileTrieOptions extends CompileOptions, TrieOptions {}
@@ -229,7 +229,10 @@ function createTrieTarget(destFilename: string, options: TrieOptions): (words: I
     };
 }
 
-export const __testing__ = {
+export const __testing__: {
+    wordListHeader: string;
+    removeDuplicates: typeof removeDuplicates;
+} = {
     wordListHeader,
     removeDuplicates,
 };

@@ -67,6 +67,8 @@ export function isInstanceOfFn<T>(constructor: { new (): T }): (t: unknown) => t
     return (t): t is T => t instanceof constructor;
 }
 
-export const __testing__ = {
+export const __testing__: {
+    BaseServiceRequest: typeof BaseServiceRequest;
+} = {
     BaseServiceRequest,
 };

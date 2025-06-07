@@ -20,5 +20,3 @@ export interface DynamicDictionaryContext {
 
     readFile(url: URL): Promise<Uint8Array>;
 }
-
-export function loadDictionary() {}

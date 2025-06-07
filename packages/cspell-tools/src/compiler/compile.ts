@@ -28,12 +28,12 @@ interface CompileOptions {
     /**
      * Optional filter function to filter targets.
      */
-    filter?: (target: Target) => boolean;
+    filter?: ((target: Target) => boolean) | undefined;
 
     /**
      * The current working directory. Defaults to process.cwd()
      */
-    cwd?: string;
+    cwd?: string | undefined;
 
     /**
      * `true` - only build if files do not match checksum.

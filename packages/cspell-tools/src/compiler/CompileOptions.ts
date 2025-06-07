@@ -15,7 +15,7 @@ export interface CompileOptions {
      * @param word the word to test
      * @returns `true` to keep the word, `false` to exclude it.
      */
-    filter?: (word: string) => boolean;
+    filter?: ((word: string) => boolean) | undefined;
 
     /**
      * Injects `cspell-dictionary` directives into the dictionary header.
@@ -34,5 +34,5 @@ export interface CompileOptions {
      * Combine compound prefixes where possible.
      * @default false
      */
-    removeDuplicates?: boolean;
+    removeDuplicates?: boolean | undefined;
 }

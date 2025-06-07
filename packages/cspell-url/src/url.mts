@@ -38,7 +38,7 @@ export function urlParent(url: string | URL): URL {
  * @param url - url to extract the dirname from.
  * @returns a URL
  */
-export const urlDirname = urlParent;
+export const urlDirname: typeof urlParent = urlParent;
 
 /**
  * Remove the file portion of the URL and return the directory portion.
@@ -195,8 +195,8 @@ export function urlToUrlRelative(urlFrom: URL, urlTo: URL): string {
     return decodeURIComponent(rel.length < p1.length ? rel : p1);
 }
 
-export const regExpWindowsPath = /^[\\/]([a-zA-Z]:[\\/])/;
-export const regExpEncodedColon = /%3[aA]/g;
+export const regExpWindowsPath: RegExp = /^[\\/]([a-zA-Z]:[\\/])/;
+export const regExpEncodedColon: RegExp = /%3[aA]/g;
 
 const badUncLocalhostUrl = /^(\/+[a-zA-Z])\$/;
 

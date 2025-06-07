@@ -53,7 +53,7 @@ export interface ParseFileOptions {
      * Preserve case
      * @default true
      */
-    keepCase?: boolean;
+    keepCase?: boolean | undefined;
 
     /**
      * Tell the parser to split into words along spaces.
@@ -76,7 +76,7 @@ export interface ParseFileOptions {
      * Use legacy splitting.
      * @default false
      */
-    legacy?: boolean;
+    legacy?: boolean | undefined;
 
     allowedSplitWords: AllowedSplitWordsCollection;
 
@@ -115,7 +115,7 @@ export const defaultParseDictionaryOptions: ParseFileOptionsRequired = Object.fr
 
 export const cSpellToolDirective = 'cspell-tools:';
 
-export const setOfCSpellDirectiveFlags = ['no-split', 'split', 'keep-case', 'no-keep-case', 'legacy'];
+export const setOfCSpellDirectiveFlags: string[] = ['no-split', 'split', 'keep-case', 'no-keep-case', 'legacy'];
 
 /**
  * Normalizes a dictionary words based upon prefix / suffixes.

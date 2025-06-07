@@ -298,7 +298,12 @@ export interface ReportIssueOptions extends UnknownWordsConfiguration {
  */
 export type UnknownWordsChoices = 'report-all' | 'report-simple' | 'report-common-typos' | 'report-flagged';
 
-export const unknownWordsChoices = {
+export const unknownWordsChoices: {
+    readonly ReportAll: 'report-all';
+    readonly ReportSimple: 'report-simple';
+    readonly ReportCommonTypos: 'report-common-typos';
+    readonly ReportFlagged: 'report-flagged';
+} = {
     ReportAll: 'report-all',
     ReportSimple: 'report-simple',
     ReportCommonTypos: 'report-common-typos',

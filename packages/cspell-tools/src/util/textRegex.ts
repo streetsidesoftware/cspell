@@ -1,6 +1,6 @@
 // cspell:ignore gimuxy
 
-export const regExMatchRegExParts = /^\s*\/([\s\S]*?)\/([gimuxy]*)\s*$/;
+export const regExMatchRegExParts: RegExp = /^\s*\/([\s\S]*?)\/([gimuxy]*)\s*$/;
 
 export function stringToRegExp(pattern: string | RegExp, defaultFlags = '', forceFlags = ''): RegExp | undefined {
     if (pattern instanceof RegExp) {

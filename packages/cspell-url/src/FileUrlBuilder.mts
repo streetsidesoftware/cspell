@@ -23,13 +23,13 @@ import {
 const isWindowsPathRegEx = regExpWindowsPathDriveLetter;
 const isWindowsPathname = regExpWindowsPath;
 
-export const percentRegEx = /%/g;
-export const backslashRegEx = /\\/g;
-export const newlineRegEx = /\n/g;
-export const carriageReturnRegEx = /\r/g;
-export const tabRegEx = /\t/g;
-export const questionRegex = /\?/g;
-export const hashRegex = /#/g;
+export const percentRegEx: RegExp = /%/g;
+export const backslashRegEx: RegExp = /\\/g;
+export const newlineRegEx: RegExp = /\n/g;
+export const carriageReturnRegEx: RegExp = /\r/g;
+export const tabRegEx: RegExp = /\t/g;
+export const questionRegex: RegExp = /\?/g;
+export const hashRegex: RegExp = /#/g;
 
 export interface ParsedPath {
     /**
@@ -107,7 +107,7 @@ export class FileUrlBuilder {
      * @param filepath
      * @returns
      */
-    encodePathChars(filepath: string) {
+    encodePathChars(filepath: string): string {
         filepath = filepath.replaceAll(percentRegEx, '%25');
         // In posix, backslash is a valid character in paths:
         if (!this.windows && !isWindows && filepath.includes('\\')) {

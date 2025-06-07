@@ -2,7 +2,7 @@ export interface ReaderOptions {
     /**
      * Max Hunspell recursive depth.
      */
-    maxDepth?: number;
+    maxDepth?: number | undefined;
 }
 
 export type AnnotatedWord = string;
