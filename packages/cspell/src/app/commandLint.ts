@@ -52,6 +52,9 @@ More Examples:
         Only spell check the "/*.md" files in $FILES,
         where $FILES is a shell variable that contains the list of files.
 
+    cspell --help --verbose
+        Show all options including hidden options.
+
 References:
     https://cspell.org
     https://github.com/streetsidesoftware/cspell
@@ -108,6 +111,7 @@ export function commandLint(prog: Command): Command {
         )
         .option('--fail-fast', 'Exit after first file with an issue or error.')
         .addOption(crOpt('--no-fail-fast', 'Process all files even if there is an error.').hideHelp())
+        .option('--continue-on-error', 'Continue processing files even if there is an error.')
         .option('-r, --root <root folder>', 'Root directory, defaults to current directory.')
         .addOption(crOpt('--relative', 'Issues are displayed relative to the root.').default(true).hideHelp())
         .option('--no-relative', 'Issues are displayed with absolute path instead of relative to the root.')
@@ -161,7 +165,7 @@ export function commandLint(prog: Command): Command {
         .addOption(crOpt('--issues-summary-report', 'Output a summary of issues found.').hideHelp())
         .addOption(crOpt('--show-perf-summary', 'Output a performance summary report.').hideHelp())
         .option('--issue-template [template]', 'Use a custom issue template. See --help --issue-template for details.')
-        .option('--debug', 'Output information useful for debugging cspell.json files.')
+        .addOption(crOpt('--debug', 'Output information useful for debugging cspell.json files.').hideHelp())
         // Planned options
         // .option('--import', 'Import a configuration file.', collect)
         .usage(usage)
