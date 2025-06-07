@@ -71,7 +71,7 @@ export class CompactStorage {
     private knownStringsRev = new Trie<TrieData>();
     private cachedElements = new Map<number, CacheMap>();
 
-    constructor(readonly options?: FlatpackOptions) {
+    constructor(readonly options?: FlatpackOptions | undefined) {
         this.dedupe = options?.dedupe ?? true;
         this.sortKeys = options?.sortKeys || this.dedupe;
     }

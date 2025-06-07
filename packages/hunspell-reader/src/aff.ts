@@ -136,15 +136,15 @@ export class Aff {
         return rules?.map((r) => r.id);
     }
 
-    get iConv() {
+    get iConv(): Converter {
         return this._iConv;
     }
 
-    get oConv() {
+    get oConv(): Converter {
         return this._oConv;
     }
 
-    setTraceMode(value: boolean) {
+    setTraceMode(value: boolean): void {
         this.affData.trace = value;
     }
 }
@@ -428,7 +428,7 @@ class AffData {
         const { AF = [], SFX = [], PFX = [] } = affInfo;
         const flags: PartialRule[] = objectToKvP(affInfo as AffTransformFlags)
             .filter(isValidFlagMember)
-            .map(([key, value]) => ({ id: value, flags: toAffixFlags(affFlag[key]) }));
+            .map(([key, value]) => ({ id: value, flags: toAffixFlags(affFlag[key]) }) as PartialRule);
         const sfxRules: PartialRule[] = [...SFX].map(([, sfx]) => sfx).map((sfx) => ({ id: sfx.id, sfx }));
         const pfxRules: PartialRule[] = [...PFX].map(([, pfx]) => pfx).map((pfx) => ({ id: pfx.id, pfx }));
 
@@ -521,7 +521,7 @@ interface AffSubstitution {
     type: AffType;
     remove: string;
     attach: string;
-    attachRules?: RuleIdx[];
+    attachRules?: RuleIdx[] | undefined;
     replace: RegExp;
 }
 

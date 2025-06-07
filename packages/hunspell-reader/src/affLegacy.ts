@@ -200,16 +200,16 @@ export class Aff {
         return [...new Set(rules)];
     }
 
-    get iConv() {
+    get iConv(): Converter {
         return this._iConv;
     }
 
-    get oConv() {
+    get oConv(): Converter {
         return this._oConv;
     }
 }
 
-function signature(aff: AffWord) {
+function signature(aff: AffWord): string {
     const { word, flags } = aff;
     const sig = Object.entries(flags)
         .filter((e) => !!e[1])
@@ -238,7 +238,7 @@ export function processRules(affInfo: AffInfo): Map<string, Rule> {
     return rules;
 }
 
-export function logAffWord(affWord: AffWord, message: string) {
+export function logAffWord(affWord: AffWord, message: string): AffWord {
     /* istanbul ignore if */
     if (log) {
         const dump = util.inspect(affWord, { showHidden: false, depth: 5, colors: true });
@@ -248,14 +248,14 @@ export function logAffWord(affWord: AffWord, message: string) {
 }
 
 /* istanbul ignore next */
-export function affWordToColoredString(affWord: AffWord) {
+export function affWordToColoredString(affWord: AffWord): string {
     return util
         .inspect({ ...affWord, flags: flagsToString(affWord.flags) }, { showHidden: false, depth: 5, colors: true })
         .replaceAll(/(\s|\n|\r)+/g, ' ');
 }
 
 /* istanbul ignore next */
-export function flagsToString(flags: AffWordFlags) {
+export function flagsToString(flags: AffWordFlags): string {
     return [...Object.entries(flags)]
         .filter(([, v]) => !!v)
         .map(([k]) => flagToLongStringMap[k])
@@ -276,7 +276,7 @@ export function asAffWord(word: string, rules = '', flags: AffWordFlags = {}): A
     };
 }
 
-export function compareAff(a: AffWord, b: AffWord) {
+export function compareAff(a: AffWord, b: AffWord): 0 | 1 | -1 {
     if (a.word !== b.word) {
         return a.word < b.word ? -1 : 1;
     }
@@ -304,11 +304,13 @@ function reduceAffixRules(
  * Returns a filter function that will filter adjacent AffWords
  * It compares the word and the flags.
  */
-export function filterAff() {
+export function filterAff(): (t: AffWord) => boolean {
     return filterOrderedList<AffWord>((a, b) => a.word !== b.word || signature(a) !== signature(b));
 }
 
-export const debug = {
+export const debug: {
+    signature: typeof signature;
+} = {
     signature,
 };
 

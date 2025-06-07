@@ -96,7 +96,7 @@ export class FlatpackStore {
 
     constructor(
         value: Serializable | FlatpackedWrapper,
-        readonly options?: FlatpackOptions,
+        readonly options?: FlatpackOptions | undefined,
     ) {
         this.dedupe = options?.dedupe ?? true;
         this.sortKeys = options?.sortKeys || this.dedupe;
