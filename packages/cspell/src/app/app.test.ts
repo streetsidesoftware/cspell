@@ -353,6 +353,7 @@ describe('Validate cli', () => {
     test.each`
         testArgs
         ${['dictionaries']}
+        ${['dictionaries', '--show-file-types', '--show-locales']}
     `('app dictionary $testArgs', async ({ testArgs }: TestCase) => {
         chalk.level = 0;
         const commander = getCommander();
