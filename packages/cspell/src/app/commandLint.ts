@@ -111,7 +111,7 @@ export function commandLint(prog: Command): Command {
         )
         .option('--fail-fast', 'Exit after first file with an issue or error.')
         .addOption(crOpt('--no-fail-fast', 'Process all files even if there is an error.').hideHelp())
-        .option('--continue-on-error', 'Continue processing files even if there is an error.')
+        .option('--continue-on-error', 'Continue processing files even if there is a configuration error.')
         .option('-r, --root <root folder>', 'Root directory, defaults to current directory.')
         .addOption(crOpt('--relative', 'Issues are displayed relative to the root.').default(true).hideHelp())
         .option('--no-relative', 'Issues are displayed with absolute path instead of relative to the root.')

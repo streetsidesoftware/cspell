@@ -3,15 +3,36 @@
 exports[`Validate cli > app '--continue-on-error - import & spelling' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli > app '--continue-on-error - import & spelling' Expect Error: [Function CheckFailed] 2`] = `
-"error	1/1 file.txt 0.00ms X
+"error	Configuration Configuration Loader Error: Failed to resolve configuration file: "./missing.config.yaml" referenced from "./fixtures/import/import-errors/missing-import.yaml"
+error
+error	1/1 file.txt 0.00ms X
 error
 log	file.txt:1:21 - Unknown word (errrros)
 log
-error	CSpell: Files checked: 1, Issues found: 1 in 1 file.
+error	-------------------------------------------
+error
+error	CSpell: Files checked: 1, Issues found: 1 in 1 file with 1 error.
 error"
 `;
 
 exports[`Validate cli > app '--continue-on-error - import & spelling' Expect Error: [Function CheckFailed] 3`] = `""`;
+
+exports[`Validate cli > app '--continue-on-error - missing config' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app '--continue-on-error - missing config' Expect Error: [Function CheckFailed] 2`] = `
+"error	Configuration Error: Failed to read config file: "./fixtures/import/import-errors/missing.yaml"
+error
+error	1/1 file.txt 0.00ms X
+error
+log	file.txt:1:21 - Unknown word (errrros)
+log
+error	-------------------------------------------
+error
+error	CSpell: Files checked: 1, Issues found: 1 in 1 file with 1 error.
+error"
+`;
+
+exports[`Validate cli > app '--continue-on-error - missing config' Expect Error: [Function CheckFailed] 3`] = `""`;
 
 exports[`Validate cli > app '--continue-on-error - missing dict' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
@@ -28,16 +49,20 @@ error"
 
 exports[`Validate cli > app '--continue-on-error - missing dict' Expect Error: [Function CheckFailed] 3`] = `""`;
 
-exports[`Validate cli > app '--continue-on-error - missing import' Expect Error: undefined 1`] = `[]`;
+exports[`Validate cli > app '--continue-on-error - missing import' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
-exports[`Validate cli > app '--continue-on-error - missing import' Expect Error: undefined 2`] = `
-"error	1/1 README.md 0.00ms
+exports[`Validate cli > app '--continue-on-error - missing import' Expect Error: [Function CheckFailed] 2`] = `
+"error	Configuration Configuration Loader Error: Failed to resolve configuration file: "./missing.config.yaml" referenced from "./fixtures/import/import-errors/missing-import.yaml"
 error
-error	CSpell: Files checked: 1, Issues found: 0 in 0 files.
+error	1/1 README.md 0.00ms
+error
+error	-------------------------------------------
+error
+error	CSpell: Files checked: 1, Issues found: 0 in 0 files with 1 error.
 error"
 `;
 
-exports[`Validate cli > app '--continue-on-error - missing import' Expect Error: undefined 3`] = `""`;
+exports[`Validate cli > app '--continue-on-error - missing import' Expect Error: [Function CheckFailed] 3`] = `""`;
 
 exports[`Validate cli > app '--continue-on-error' Expect Error: undefined 1`] = `[]`;
 
@@ -680,8 +705,8 @@ exports[`Validate cli > app 'no-args' Expect Error: 'outputHelp' 1`] = `
   "  --no-exit-code               Do not return an exit code if issues are found.",
   "  --quiet                      Only show spelling issues or errors.",
   "  --fail-fast                  Exit after first file with an issue or error.",
-  "  --continue-on-error          Continue processing files even if there is an",
-  "                               error.",
+  "  --continue-on-error          Continue processing files even if there is a",
+  "                               configuration error.",
   "  -r, --root <root folder>     Root directory, defaults to current directory.",
   "  --no-relative                Issues are displayed with absolute path instead",
   "                               of relative to the root.",
@@ -3918,8 +3943,8 @@ exports[`Validate cli > app help [ 'lint', '--help' ] 1`] = `
   "  --no-exit-code               Do not return an exit code if issues are found.",
   "  --quiet                      Only show spelling issues or errors.",
   "  --fail-fast                  Exit after first file with an issue or error.",
-  "  --continue-on-error          Continue processing files even if there is an",
-  "                               error.",
+  "  --continue-on-error          Continue processing files even if there is a",
+  "                               configuration error.",
   "  -r, --root <root folder>     Root directory, defaults to current directory.",
   "  --no-relative                Issues are displayed with absolute path instead",
   "                               of relative to the root.",
@@ -4039,8 +4064,8 @@ exports[`Validate cli > app help [ 'lint', '--help', '--issue-template' ] 1`] = 
   "  --no-exit-code               Do not return an exit code if issues are found.",
   "  --quiet                      Only show spelling issues or errors.",
   "  --fail-fast                  Exit after first file with an issue or error.",
-  "  --continue-on-error          Continue processing files even if there is an",
-  "                               error.",
+  "  --continue-on-error          Continue processing files even if there is a",
+  "                               configuration error.",
   "  -r, --root <root folder>     Root directory, defaults to current directory.",
   "  --no-relative                Issues are displayed with absolute path instead",
   "                               of relative to the root.",
@@ -4187,8 +4212,8 @@ exports[`Validate cli > app help [ 'lint', '--help', '--verbose' ] 1`] = `
   "  --no-exit-code               Do not return an exit code if issues are found.",
   "  --quiet                      Only show spelling issues or errors.",
   "  --fail-fast                  Exit after first file with an issue or error.",
-  "  --continue-on-error          Continue processing files even if there is an",
-  "                               error.",
+  "  --continue-on-error          Continue processing files even if there is a",
+  "                               configuration error.",
   "  -r, --root <root folder>     Root directory, defaults to current directory.",
   "  --no-relative                Issues are displayed with absolute path instead",
   "                               of relative to the root.",
