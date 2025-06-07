@@ -14,6 +14,8 @@ export interface LoggerOptions {
     useAsync?: boolean;
 }
 
+type Log = (...p: Parameters<typeof console.log>) => void;
+
 export class Logger {
     readonly logFile: string;
     readonly cwd: string;
@@ -39,7 +41,7 @@ export class Logger {
             : fs.appendFileSync(this.logFile, message);
     }
 
-    log = this._log.bind(this);
+    log: Log = this._log.bind(this);
 }
 
 let logger: Logger | undefined;

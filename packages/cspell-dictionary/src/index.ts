@@ -33,7 +33,10 @@ export {
 /**
  * Debugging utilities.
  */
-export const _debug = {
+export const _debug: {
+    cacheDictionaryEnableLogging: typeof cacheDictionaryEnableLogging;
+    cacheDictionaryGetLog: typeof cacheDictionaryGetLog;
+} = {
     cacheDictionaryEnableLogging,
     cacheDictionaryGetLog,
 };

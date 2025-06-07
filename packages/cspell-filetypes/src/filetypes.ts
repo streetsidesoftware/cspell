@@ -6,9 +6,9 @@ type ExtensionToFileTypeIdMap = Map<string, string[]>;
 
 const binaryFormatIds = definitions.filter((d) => d.format === 'Binary').map((d) => d.id);
 
-export const binaryLanguages = new Set(['binary', 'image', 'video', 'fonts', ...binaryFormatIds]);
+export const binaryLanguages: Set<string> = new Set(['binary', 'image', 'video', 'fonts', ...binaryFormatIds]);
 
-export const generatedFiles = new Set([
+export const generatedFiles: Set<string> = new Set([
     ...binaryLanguages,
     'map',
     'lock',

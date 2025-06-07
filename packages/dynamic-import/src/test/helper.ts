@@ -14,7 +14,7 @@ async function callHello(file: string | URL, paths?: string | URL | (string | UR
     return (await dynamicImport<Hello>(file, paths)).sayHello('Bob.');
 }
 
-export function test() {
+export function test(): Promise<string[]> {
     return Promise.all([
         callHello(pathToFileURL('./fixtures/hello_world.mjs')),
         callHello(path.resolve('./fixtures/hello_world.mjs')),

@@ -174,7 +174,10 @@ export function isSpellingDictionaryCollection(dict: SpellingDictionary): dict i
     return dict instanceof SpellingDictionaryCollectionImpl;
 }
 
-export const __testing__ = {
+export const __testing__: {
+    isWordInAnyDictionary: typeof isWordInAnyDictionary;
+    isWordForbiddenInAnyDictionary: typeof isWordForbiddenInAnyDictionary;
+} = {
     isWordInAnyDictionary,
     isWordForbiddenInAnyDictionary,
 };

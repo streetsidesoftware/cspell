@@ -98,7 +98,10 @@ export function createWeightMapFromDictionaryInformation(di: DictionaryInformati
     return di ? mapDictionaryInformationToWeightMap(di) : undefined;
 }
 
-export const __testMethods__ = {
+export const __testMethods__: {
+    wordSearchForms: typeof wordSearchForms;
+    wordSearchFormsArray: typeof wordSearchFormsArray;
+} = {
     wordSearchForms,
     wordSearchFormsArray,
 };

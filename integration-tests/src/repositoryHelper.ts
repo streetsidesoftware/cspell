@@ -15,7 +15,7 @@ import type { Logger } from './types.js';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
-export const repositoryDir = Path.resolve(Path.join(__dirname, '../repositories/temp'));
+export const repositoryDir: string = Path.resolve(Path.join(__dirname, '../repositories/temp'));
 
 function mkdirp(p: string) {
     return fs.promises.mkdir(p, { recursive: true });

@@ -170,6 +170,8 @@ function tabToSpace(text: string, tabWidth = 4): string {
     return result;
 }
 
-export const __testing__ = {
+export const __testing__: {
+    padLines: typeof padLines;
+} = {
     padLines,
 };
