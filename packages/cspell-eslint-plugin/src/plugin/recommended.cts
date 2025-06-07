@@ -11,5 +11,5 @@ const config: Linter.Config = {
     },
 };
 
-export const plugins = config.plugins;
-export const rules = config.rules;
+export const plugins: Linter.Config['plugins'] = config.plugins;
+export const rules: Linter.Config['rules'] = config.rules;

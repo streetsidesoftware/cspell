@@ -4,6 +4,7 @@ import { assert } from 'node:console';
 import type {
     Dispatcher,
     Handler,
+    RequestFactory,
     ServiceBus,
     ServiceRequest,
     ServiceRequestFactoryRequestType,
@@ -34,15 +35,23 @@ function calcFib(request: FibRequest): ServiceResponse<number> {
 }
 
 const TypeRequestFib = 'Computations:calc-fib' as const;
-export const FibRequestFactory = requestFactory<typeof TypeRequestFib, { readonly fib: number }, number>(
-    TypeRequestFib,
-);
+export const FibRequestFactory: RequestFactory<
+    'Computations:calc-fib',
+    {
+        readonly fib: number;
+    },
+    number
+> = requestFactory<typeof TypeRequestFib, { readonly fib: number }, number>(TypeRequestFib);
 type FibRequestFactory = typeof FibRequestFactory;
 type FibRequest = ServiceRequestFactoryRequestType<FibRequestFactory>;
 
-export const StringLengthRequestFactory = requestFactory<'calc-string-length', { readonly str: string }, number>(
+export const StringLengthRequestFactory: RequestFactory<
     'calc-string-length',
-);
+    {
+        readonly str: string;
+    },
+    number
+> = requestFactory<'calc-string-length', { readonly str: string }, number>('calc-string-length');
 
 export class StringToUpperRequest extends ServiceRequestCls<'toUpper', { readonly str: string }, string> {
     constructor(readonly str: string) {

@@ -10,7 +10,7 @@ three
     return parseDictionary(words);
 }
 
-export function run() {
+export function run(): boolean {
     const dict = createDictionary();
     return dict.has('two');
 }

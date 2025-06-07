@@ -10,7 +10,7 @@ import type { Repository } from './configDef.js';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
-export const snapshotDir = Path.resolve(Path.join(__dirname, '..', 'snapshots'));
+export const snapshotDir: string = Path.resolve(Path.join(__dirname, '..', 'snapshots'));
 const snapshotFileName = 'snapshot.txt';
 const reportFileName = 'report.yaml';
 

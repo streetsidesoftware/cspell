@@ -7,7 +7,7 @@ export function autoResolve<K, V>(map: Map<K, V>, key: K, resolve: (k: K) => V):
 }
 
 export class AutoResolveCache<K, V> {
-    readonly map = new Map<K, V>();
+    readonly map: Map<K, V> = new Map<K, V>();
 
     get(k: K): V | undefined;
     get(k: K, resolve: (k: K) => V): V;
@@ -39,7 +39,7 @@ export function autoResolveWeak<K extends object, V>(map: WeakMap<K, V>, key: K,
 }
 
 export class AutoResolveWeakCache<K extends object, V> {
-    readonly map = new WeakMap<K, V>();
+    readonly map: WeakMap<K, V> = new WeakMap<K, V>();
 
     get(k: K): V | undefined;
     get(k: K, resolve: (k: K) => V): V;

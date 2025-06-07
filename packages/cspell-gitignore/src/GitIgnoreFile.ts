@@ -149,6 +149,8 @@ function globToString(glob: GlobPatternWithRoot, relativeToDir: string | URL): s
     return (base ? base + '/' : '') + glob.glob;
 }
 
-export const __testing__ = {
+export const __testing__: {
+    mustBeHierarchical: typeof mustBeHierarchical;
+} = {
     mustBeHierarchical,
 };

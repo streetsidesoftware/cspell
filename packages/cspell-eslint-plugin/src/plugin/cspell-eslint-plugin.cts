@@ -45,7 +45,7 @@ const ruleMeta: Rule.RuleModule['meta'] = {
     messages,
     hasSuggestions: true,
     fixable: 'code',
-    schema: [schema],
+    schema: schema,
 };
 
 let isDebugMode = false;
@@ -179,4 +179,4 @@ export const configs: ESlintPlugin['configs'] = {
     'recommended-legacy': recommended,
 };
 
-export const plugin = { rules, configs, meta } satisfies ESlintPlugin;
+export const plugin: ESlintPlugin = { rules, configs, meta } satisfies ESlintPlugin;
