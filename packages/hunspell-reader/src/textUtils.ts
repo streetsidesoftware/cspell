@@ -4,7 +4,7 @@
  * @param regexp
  * @returns
  */
-export function escapeUnicodeCode(text: string, regexp = /\p{M}/gu): string {
+export function escapeUnicodeCode(text: string, regexp: RegExp = /\p{M}/gu): string {
     return text.replace(regexp, replaceWithUnicode);
 }
 

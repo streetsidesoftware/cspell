@@ -1,0 +1,27 @@
+name: autofix.ci
+on:
+  pull_request:
+  push:
+    branches: ['main']
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  autofix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup and Build
+        uses: ./.github/actions/install-build-cache
+        with:
+          node-version: 22.x
+
+      - name: Lint
+        run: pnpm run lint
+
+      - uses: autofix-ci/action@551dded8c6cc8a1054039c8bc0b8b48c51dfc6ef

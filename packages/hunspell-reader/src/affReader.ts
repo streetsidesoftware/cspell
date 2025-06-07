@@ -394,7 +394,7 @@ function collectionToAffInfo(affFieldCollectionTable: AffFieldCollectorTable, en
 let htmlEntitiesFound = 0;
 let currentAffFilename = '';
 
-export async function parseAffFile(filename: string, encoding: string = UTF8) {
+export async function parseAffFile(filename: string, encoding: string = UTF8): Promise<AffInfo> {
     const buffer = await readFile(filename);
     currentAffFilename = filename;
     const file = decode(buffer, encoding);
@@ -470,7 +470,11 @@ export interface AffLine {
 
 type Afx = Map<string, Fx>;
 
-export const testing = {
+export const testing: {
+    parseAffixRule: typeof parseAffixRule;
+    tablePfxOrSfx: typeof tablePfxOrSfx;
+    parseLine: typeof parseLine;
+} = {
     parseAffixRule,
     tablePfxOrSfx,
     parseLine,

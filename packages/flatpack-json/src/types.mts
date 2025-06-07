@@ -97,7 +97,7 @@ export type FlattenedElement = Readonly<PrimitiveElement | ObjectBasedElements |
 type Header = string;
 export type Flatpacked = [Header, ...FlattenedElement[]];
 export type Unpacked = Readonly<Serializable>;
-export const blockSplitRegex = /^sha\d/;
+export const blockSplitRegex: RegExp = /^sha\d/;
 
 export interface FlatpackOptions {
     /**
@@ -129,4 +129,4 @@ export const dataHeader = 'Flatpack JSON v1' as const;
 /**
  * The set of supported headers for Flatpack JSON.
  */
-export const supportedHeaders = new Set<string>([dataHeaderV0_1, dataHeader]);
+export const supportedHeaders: Set<string> = new Set<string>([dataHeaderV0_1, dataHeader]);

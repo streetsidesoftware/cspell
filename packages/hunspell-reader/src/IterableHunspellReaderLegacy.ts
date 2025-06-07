@@ -31,7 +31,7 @@ export class IterableHunspellReaderLegacy implements Iterable<string> {
         this.aff = src.aff;
     }
 
-    get dic() {
+    get dic(): string[] {
         return this.src.dic;
     }
 
@@ -73,7 +73,7 @@ export class IterableHunspellReaderLegacy implements Iterable<string> {
      * Iterator for all the words in the dictionary. The words are in the order found in the .dic after the
      * transformations have been applied. Forbidden and CompoundOnly words are filtered out.
      */
-    [Symbol.iterator]() {
+    [Symbol.iterator](): Sequence<string> {
         return this.wholeWords();
     }
 
@@ -83,7 +83,7 @@ export class IterableHunspellReaderLegacy implements Iterable<string> {
      * @param tapPreApplyRules -- optional function to be called before rules are applied to a word.
      *                            It is mostly used for monitoring progress in combination with `size`.
      */
-    seqAffWords(tapPreApplyRules?: (dicEntry: string, index: number) => void, maxDepth?: number) {
+    seqAffWords(tapPreApplyRules?: (dicEntry: string, index: number) => void, maxDepth?: number): Sequence<AffWord> {
         return this.seqTransformDictionaryEntries(tapPreApplyRules, maxDepth).concatMap((a) => a);
     }
 
@@ -109,7 +109,7 @@ export class IterableHunspellReaderLegacy implements Iterable<string> {
      *
      * @internal
      */
-    seqWords() {
+    seqWords(): Sequence<string> {
         return this.seqAffWords()
             .map((w) => w.word)
             .filter(createMatchingWordsFilter());
@@ -118,7 +118,7 @@ export class IterableHunspellReaderLegacy implements Iterable<string> {
     /**
      * Returns an iterable that will only return stand alone words.
      */
-    wholeWords() {
+    wholeWords(): Sequence<string> {
         return (
             this.seqAffWords()
                 // Filter out words that are forbidden or only allowed in Compounds.
@@ -131,7 +131,7 @@ export class IterableHunspellReaderLegacy implements Iterable<string> {
     /**
      * @internal
      */
-    seqRootWords() {
+    seqRootWords(): Sequence<string> {
         return this.dicWordsSeq().map((w) => w.word);
     }
 
@@ -141,7 +141,7 @@ export class IterableHunspellReaderLegacy implements Iterable<string> {
      * @param dicFile - path to dic file.
      * @returns IterableHunspellReader
      */
-    static async createFromFiles(affFile: string, dicFile: string) {
+    static async createFromFiles(affFile: string, dicFile: string): Promise<IterableHunspellReaderLegacy> {
         const aff = await parseAffFileToAffLegacy(affFile, defaultEncoding);
         const buffer = await fs.readFile(dicFile);
         const dicFileContent = decode(buffer, aff.affInfo.SET);
@@ -154,6 +154,6 @@ export class IterableHunspellReaderLegacy implements Iterable<string> {
     }
 }
 
-export function createMatchingWordsFilter() {
+export function createMatchingWordsFilter(): (t: string) => boolean {
     return filterOrderedList<string>((a, b) => a !== b);
 }

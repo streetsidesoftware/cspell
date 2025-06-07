@@ -9,8 +9,8 @@ export interface Fx {
     combinable: boolean;
     substitutionSets: Substitutions;
     substitutionsForRegExps: SubstitutionsForRegExp[];
-    count?: string; // number of line items for this rule.
-    extra?: string[]; // extra items on the line.
+    count?: string | undefined; // number of line items for this rule.
+    extra?: string[] | undefined; // extra items on the line.
 }
 
 export type Substitutions = Map<string, SubstitutionsForRegExp>;
@@ -19,9 +19,9 @@ export interface Substitution {
     type: 'P' | 'S';
     remove: string;
     attach: string;
-    attachRules?: string;
+    attachRules?: string | undefined;
     replace: RegExp;
-    extra?: string;
+    extra?: string | undefined;
 }
 
 export interface SubstitutionsForRegExp {
@@ -41,45 +41,45 @@ export interface Conv {
 }
 
 export interface AffTransformFlags {
-    KEEPCASE?: string;
-    WARN?: string;
-    NEEDAFFIX?: string;
-    FORCEUCASE?: string;
-    FORBIDDENWORD?: string;
-    NOSUGGEST?: string;
-    COMPOUNDBEGIN?: string;
-    COMPOUNDEND?: string;
-    COMPOUNDFLAG?: string;
-    COMPOUNDFORBIDFLAG?: string;
-    COMPOUNDMIDDLE?: string;
-    COMPOUNDPERMITFLAG?: string;
-    ONLYINCOMPOUND?: string;
+    KEEPCASE?: string | undefined;
+    WARN?: string | undefined;
+    NEEDAFFIX?: string | undefined;
+    FORCEUCASE?: string | undefined;
+    FORBIDDENWORD?: string | undefined;
+    NOSUGGEST?: string | undefined;
+    COMPOUNDBEGIN?: string | undefined;
+    COMPOUNDEND?: string | undefined;
+    COMPOUNDFLAG?: string | undefined;
+    COMPOUNDFORBIDFLAG?: string | undefined;
+    COMPOUNDMIDDLE?: string | undefined;
+    COMPOUNDPERMITFLAG?: string | undefined;
+    ONLYINCOMPOUND?: string | undefined;
 }
 
 export interface AffInfo extends AffTransformFlags {
     SET: string; // Character set encoding of the .aff and .dic file
-    TRY?: string;
-    KEY?: string;
-    WORDCHARS?: string;
-    NOSPLITSUGS?: boolean;
-    MAXCPDSUGS?: number;
-    ONLYMAXDIFF?: boolean;
-    MAXDIFF?: number;
-    BREAK?: string[];
-    FLAG?: string; // 'long' | 'num'
-    MAP?: string[];
-    ICONV?: Conv[];
-    OCONV?: Conv[];
-    REP?: Rep[];
-    AF?: string[];
-    COMPOUNDMIN?: number;
-    COMPOUNDRULE?: string[];
-    CHECKCOMPOUNDCASE?: boolean;
-    CHECKCOMPOUNDDUP?: boolean;
-    CHECKCOMPOUNDREP?: boolean;
-    CHECKCOMPOUNDPATTERN?: string[][];
-    PFX?: Map<string, Fx>;
-    SFX?: Map<string, Fx>;
+    TRY?: string | undefined;
+    KEY?: string | undefined;
+    WORDCHARS?: string | undefined;
+    NOSPLITSUGS?: boolean | undefined;
+    MAXCPDSUGS?: number | undefined;
+    ONLYMAXDIFF?: boolean | undefined;
+    MAXDIFF?: number | undefined;
+    BREAK?: string[] | undefined;
+    FLAG?: string | undefined; // 'long' | 'num'
+    MAP?: string[] | undefined;
+    ICONV?: Conv[] | undefined;
+    OCONV?: Conv[] | undefined;
+    REP?: Rep[] | undefined;
+    AF?: string[] | undefined;
+    COMPOUNDMIN?: number | undefined;
+    COMPOUNDRULE?: string[] | undefined;
+    CHECKCOMPOUNDCASE?: boolean | undefined;
+    CHECKCOMPOUNDDUP?: boolean | undefined;
+    CHECKCOMPOUNDREP?: boolean | undefined;
+    CHECKCOMPOUNDPATTERN?: string[][] | undefined;
+    PFX?: Map<string, Fx> | undefined;
+    SFX?: Map<string, Fx> | undefined;
 }
 
 export type Rule = FlagRule | PfxRule | SfxRule;
