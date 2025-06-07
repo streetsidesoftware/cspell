@@ -353,6 +353,11 @@ describe('Validate cli', () => {
     test.each`
         testArgs
         ${['dictionaries']}
+        ${['dictionaries', '--show-file-types', '--show-locales']}
+        ${['dictionaries', '--enabled', '--no-show-location']}
+        ${['dictionaries', '--no-enabled', '--no-show-location']}
+        ${['dictionaries', '--enabled', '--no-show-location', '--file-type=kotlin', '--show-locales', '--show-file-types']}
+        ${['dictionaries', '--enabled', '--no-show-location', '--locale=en-gb']}
     `('app dictionary $testArgs', async ({ testArgs }: TestCase) => {
         chalk.level = 0;
         const commander = getCommander();

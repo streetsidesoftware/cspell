@@ -18,14 +18,7 @@ import type { TimedSuggestionsForWordResult } from './emitters/suggestionsEmitte
 import { getFeatureFlags, parseFeatureFlags } from './featureFlags/index.js';
 import { extractUnknownWordsConfig, LintRequest, runLint } from './lint/index.js';
 import { CSpellReporterConfiguration } from './models.js';
-import type {
-    BaseOptions,
-    DictionariesOptions,
-    LegacyOptions,
-    LinterCliOptions,
-    SuggestionOptions,
-    TraceOptions,
-} from './options.js';
+import type { BaseOptions, LegacyOptions, LinterCliOptions, SuggestionOptions, TraceOptions } from './options.js';
 import { fixLegacy } from './options.js';
 import { simpleRepl } from './repl/index.js';
 import { readConfig } from './util/configFileHelper.js';
@@ -34,6 +27,8 @@ import { finalizeReporter } from './util/reporters.js';
 import { readStdin } from './util/stdin.js';
 import { getTimeMeasurer } from './util/timer.js';
 import * as util from './util/util.js';
+
+export { listDictionaries } from './dictionaries/index.js';
 export type { TraceResult } from 'cspell-lib';
 export { IncludeExcludeFlag } from 'cspell-lib';
 
@@ -142,31 +137,4 @@ function registerApplicationFeatureFlags(): FeatureFlags {
 export function parseApplicationFeatureFlags(flags: string[] | undefined): FeatureFlags {
     const ff = registerApplicationFeatureFlags();
     return parseFeatureFlags(flags, ff);
-}
-
-export interface ListDictionariesResult {
-    name: string;
-    description?: string | undefined;
-    path?: string | undefined;
-    enabled: boolean;
-}
-
-export async function listDictionaries(options: DictionariesOptions): Promise<ListDictionariesResult[]> {
-    const configFile = await readConfig(options.config, undefined);
-    const loadDefault = options.defaultConfiguration ?? configFile.config.loadDefaultConfiguration ?? true;
-
-    const config = mergeSettings(
-        await getDefaultSettings(loadDefault),
-        await getGlobalSettingsAsync(),
-        configFile.config,
-    );
-
-    const enabledDictionaries = new Set(config.dictionaries || []);
-
-    return (config.dictionaryDefinitions || []).map((dict) => ({
-        name: dict.name,
-        description: dict.description,
-        enabled: enabledDictionaries.has(dict.name),
-        path: dict.path,
-    }));
 }

@@ -35,9 +35,9 @@ describe('traceEmitter', () => {
 Word       F Dictionary        Dictionary Location
 errorcode  ! forbid-words*     ../forbid-words.txt
 errorcode  I ignore-words*     ../../ignore-words.txt
-error+code * my-special-words* which/should/.../the/space/my-special-words.txt
+error+code * my-special-words* which/should/not/…/the/space/my-special-words.txt
 errorcode  * project-words     project-words.txt
-errorcode  - softwareTerms*    node_modules/@cspell/.../dict/softwareTerms.txt`);
+errorcode  - softwareTerms*    node_modules/@cspell/…/dict/softwareTerms.txt`);
     });
 
     test('posix format short', () => {
@@ -55,7 +55,7 @@ errorcode  - softwareTerms*    node_modules/@cspell/.../dict/softwareTerms.txt`)
         expect(lines).toEqual([
             'Word       F Dictionary        Dictionary Location',
             'errorcode  ! forbid-words*     ../forbid-words.txt',
-            'errorcode  I ignore-words*     .../ignore-words.txt',
+            'errorcode  I ignore-words*     …/ignore-words.txt',
             'error+code * my-special-words* my-special-words.txt',
             'errorcode  * project-words     project-words.txt',
             'errorcode  - softwareTerms*    [node_modules]/softwareTerms.txt',
@@ -80,9 +80,9 @@ errorcode  - softwareTerms*    node_modules/@cspell/.../dict/softwareTerms.txt`)
 Word       F Dictionary        Dictionary Location
 errorcode  ! forbid-words*     ../forbid-words.txt
 errorcode  I ignore-words*     ../../ignore-words.txt
-error+code * my-special-words* which/should/.../the/space/my-special-words.txt
+error+code * my-special-words* which/should/not/…/the/space/my-special-words.txt
 errorcode  * project-words     project-words.txt
-errorcode  - softwareTerms*    node_modules/@cspell/.../dict/softwareTerms.txt`),
+errorcode  - softwareTerms*    node_modules/@cspell/…/dict/softwareTerms.txt`),
         );
     });
 

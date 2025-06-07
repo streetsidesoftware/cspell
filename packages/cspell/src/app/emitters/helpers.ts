@@ -13,7 +13,7 @@ export function trimMidPath(s: string, w: number, sep: string): string {
 
     function join(left: number, right: number) {
         // if (left === right) return parts.join(sep);
-        return [...parts.slice(0, left), '...', ...parts.slice(right)].join(sep);
+        return [...parts.slice(0, left), '…', ...parts.slice(right)].join(sep);
     }
 
     let left = 0,
@@ -46,9 +46,9 @@ export function trimMid(s: string, w: number): string {
     if (s.length <= w) {
         return s;
     }
-    const l = Math.floor((w - 3) / 2);
-    const r = Math.ceil((w - 3) / 2);
-    return s.slice(0, l) + '...' + s.slice(-r);
+    const l = Math.floor((w - 1) / 2);
+    const r = Math.ceil((w - 1) / 2);
+    return s.slice(0, l) + '…' + s.slice(-r);
 }
 
 export function formatDictionaryLocation(
@@ -72,7 +72,7 @@ export function formatDictionaryLocation(
         const prefix = isNodeModule
             ? '[node_modules]/'
             : relPath.startsWith('..' + iPath.sep + '..')
-              ? '.../'
+              ? '…/'
               : relPath.startsWith('..' + iPath.sep)
                 ? '../'
                 : '';
