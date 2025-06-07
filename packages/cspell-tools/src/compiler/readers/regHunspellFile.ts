@@ -1,1 +1,1 @@
-export const regHunspellFile = /\.(dic|aff)$/i;
+export const regHunspellFile: RegExp = /\.(dic|aff)$/i;

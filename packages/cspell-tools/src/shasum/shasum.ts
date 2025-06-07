@@ -112,7 +112,7 @@ interface ReportResult {
 
 interface ReportOptions {
     root?: string | undefined;
-    listFile?: string[];
+    listFile?: string[] | undefined;
 }
 
 export async function reportChecksumForFiles(files: string[], options: ReportOptions): Promise<ReportResult> {

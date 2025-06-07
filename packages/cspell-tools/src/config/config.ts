@@ -1,20 +1,20 @@
-export interface RunConfig extends Partial<CompileRequest> {
+export interface RunConfig extends Partial<Omit<CompileRequest, 'targets'>> {
     /**
      * Url to JSON Schema
      * @default "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/packages/cspell-tools/cspell-tools.config.schema.json"
      */
-    $schema?: string;
+    $schema?: string | undefined;
 
     /**
      * Optional Target Dictionaries to create.
      */
-    targets?: Target[];
+    targets?: Target[] | undefined;
     /**
      * Specify the directory where all relative paths will resolved against.
      * By default, all relative paths are relative to the location of the
      * config file.
      */
-    rootDir?: string;
+    rootDir?: string | undefined;
 }
 
 export interface CompileRequest extends CompileTargetOptions, CompileSourceOptions {
@@ -22,7 +22,7 @@ export interface CompileRequest extends CompileTargetOptions, CompileSourceOptio
      * Specify the directory where all relative paths will resolved against.
      * By default, all relative paths are relative to the current directory.
      */
-    rootDir?: string;
+    rootDir?: string | undefined;
 
     /**
      * Target Dictionaries to create.
@@ -32,7 +32,7 @@ export interface CompileRequest extends CompileTargetOptions, CompileSourceOptio
     /**
      * Path to checksum file. `true` - defaults to `./checksum.txt`.
      */
-    checksumFile?: string | boolean;
+    checksumFile?: string | boolean | undefined;
 }
 
 export interface Experimental {

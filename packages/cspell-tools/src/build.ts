@@ -1,6 +1,6 @@
 import * as path from 'node:path';
 
-import { cosmiconfig } from 'cosmiconfig';
+import { cosmiconfig, Transform } from 'cosmiconfig';
 
 import { compile } from './compiler/index.js';
 import type { CompileRequest, Target } from './config/index.js';
@@ -28,7 +28,7 @@ const searchPlaces = [
     'package.json',
 ];
 
-export async function build(targets: string[] | undefined, options: BuildOptions) {
+export async function build(targets: string[] | undefined, options: BuildOptions): Promise<void> {
     const allowedTargets = new Set(targets || []);
 
     function filter(target: Target): boolean {
@@ -40,7 +40,7 @@ export async function build(targets: string[] | undefined, options: BuildOptions
     const explorer = cosmiconfig(moduleName, {
         searchPlaces,
         stopDir: searchDir,
-        transform: normalizeConfig,
+        transform: normalizeConfig as Transform,
     });
 
     const config = await (options.config ? explorer.load(options.config) : explorer.search(searchDir));

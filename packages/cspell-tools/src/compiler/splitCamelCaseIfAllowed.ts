@@ -1,8 +1,8 @@
 import { isSingleLetter, splitCamelCaseWord } from './text.js';
 import type { AllowedSplitWordsCollection } from './WordsCollection.js';
 
-export const regExpSpaceOrDash = /[- ]+/g;
-export const regExpIsNumber = /^\d+$/;
+export const regExpSpaceOrDash: RegExp = /[- ]+/g;
+export const regExpIsNumber: RegExp = /^\d+$/;
 
 export function splitCamelCaseIfAllowed(
     word: string,

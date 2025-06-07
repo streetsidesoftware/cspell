@@ -2,7 +2,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import { hasProtocol } from './url.mjs';
 
-export const isWindows = process.platform === 'win32';
+export const isWindows: boolean = process.platform === 'win32';
 
 const windowsUrlPathRegExp = /^\/[a-zA-Z]:\//;
 
@@ -49,7 +49,7 @@ function toFilePath(url: string | URL): string {
     }
 }
 
-export const regExpWindowsPathDriveLetter = /^([a-zA-Z]):[\\/]/;
+export const regExpWindowsPathDriveLetter: RegExp = /^([a-zA-Z]):[\\/]/;
 
 export function pathWindowsDriveLetterToUpper(absoluteFilePath: string): string {
     return absoluteFilePath.replace(regExpWindowsPathDriveLetter, (s) => s.toUpperCase());
