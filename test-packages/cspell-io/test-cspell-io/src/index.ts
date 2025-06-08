@@ -1,6 +1,6 @@
 import { readFileText } from 'cspell-io';
 
-export function run(file: string) {
+export function run(file: string): Promise<string> {
     return read(file);
 }
 

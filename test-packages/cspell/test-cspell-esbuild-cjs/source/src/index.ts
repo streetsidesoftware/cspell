@@ -7,7 +7,7 @@ async function checkFile(fileGlob: string) {
     return result;
 }
 
-export async function run() {
+export async function run(): Promise<void> {
     const fileGlob = process.argv[2];
     assert(fileGlob, 'File to check expected.');
 

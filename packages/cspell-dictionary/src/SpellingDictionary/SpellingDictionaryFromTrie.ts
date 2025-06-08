@@ -29,8 +29,8 @@ import type { SuggestOptions } from './SuggestOptions.js';
 
 export class SpellingDictionaryFromTrie implements SpellingDictionary {
     private _size = 0;
-    readonly knownWords = new Set<string>();
-    readonly unknownWords = new Set<string>();
+    readonly knownWords: Set<string> = new Set<string>();
+    readonly unknownWords: Set<string> = new Set<string>();
     readonly mapWord: (word: string) => string;
     readonly remapWord: (word: string) => string[];
     readonly type = 'SpellingDictionaryFromTrie';
@@ -254,4 +254,6 @@ function* outerWordForms(word: string, mapWord: (word: string) => string[]): Ite
     return;
 }
 
-export const __testing__ = { outerWordForms };
+export const __testing__: {
+    outerWordForms: typeof outerWordForms;
+} = { outerWordForms };

@@ -1,13 +1,14 @@
 {
     "$schema": "https://json.schemastore.org/tsconfig",
     "display": "CSpell Monorepo Base Config",
-    "extends": "@tsconfig/node18/tsconfig.json",
+    "extends": "@tsconfig/node20/tsconfig.json",
     "compilerOptions": {
         "alwaysStrict": true,
         "declaration": true,
         "declarationMap": true,
         "esModuleInterop": true,
         "exactOptionalPropertyTypes": true,
+        "isolatedDeclarations": true,
         "moduleResolution": "node16",
         "newLine": "LF",
         "noImplicitAny": true,
