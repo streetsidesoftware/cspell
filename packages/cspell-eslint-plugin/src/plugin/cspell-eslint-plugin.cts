@@ -45,7 +45,7 @@ const ruleMeta: Rule.RuleModule['meta'] = {
     messages,
     hasSuggestions: true,
     fixable: 'code',
-    schema: schema,
+    schema: [schema],
 };
 
 let isDebugMode = false;

@@ -67,7 +67,7 @@ async function run() {
 
 import type { Rule } from 'eslint';
 
-export const optionsSchema: Rule.RuleMetaData['schema'] = ${schemaString}
+export const optionsSchema: Rule.RuleMetaData['schema'] = ${schemaString}\
 `,
     );
 }

@@ -440,4 +440,3 @@ export const optionsSchema: Rule.RuleMetaData['schema'] = {
   ],
   "type": "object"
 }
-
