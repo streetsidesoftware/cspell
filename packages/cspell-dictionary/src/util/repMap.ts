@@ -183,7 +183,13 @@ function addToTrie(node: RepTrieNode, match: string, replaceWith: string) {
     node.rep = [...s];
 }
 
-export const __testing__ = {
+export const __testing__: {
+    charsetToRepMap: typeof charsetToRepMapRegEx;
+    createMapperRegExp: typeof createMapperRegExp;
+    createTrie: typeof createTrie;
+    calcAllEdits: typeof calcAllEdits;
+    applyEdits: typeof applyEdits;
+} = {
     charsetToRepMap: charsetToRepMapRegEx,
     createMapperRegExp,
     createTrie,

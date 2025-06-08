@@ -68,7 +68,7 @@ export function createCache01<R>(size: number): Cache01<R> {
     return new Cache01Map(size);
 }
 
-export function autoCache<R>(fn: (p: string) => R, size = CACHE_SIZE): AutoCache<R> {
+export function autoCache<R>(fn: (p: string) => R, size: number = CACHE_SIZE): AutoCache<R> {
     const cache = createCache01<R>(size);
 
     const ac: AutoCache<R> = get as AutoCache<R>;

@@ -130,7 +130,7 @@ const defaultHelper = factoryPathHelper(path);
  * @returns root directory
  * @deprecated to be removed in the next major version.
  */
-export const directoryRoot = defaultHelper.directoryRoot;
+export const directoryRoot: (directory: string) => string = defaultHelper.directoryRoot;
 
 /**
  * Checks to see if the child directory is nested under the parent directory.
@@ -139,7 +139,7 @@ export const directoryRoot = defaultHelper.directoryRoot;
  * @returns true iff child is a child of parent.
  * @deprecated to be removed in the next major version.
  */
-export const isParentOf = defaultHelper.isParentOf;
+export const isParentOf: (parent: string, child: string) => boolean = defaultHelper.isParentOf;
 
 /**
  * Check to see if a parent directory contains a child directory.
@@ -148,7 +148,7 @@ export const isParentOf = defaultHelper.isParentOf;
  * @returns true iff child is the same as the parent or nested in the parent.
  * @deprecated to be removed in the next major version.
  */
-export const contains = defaultHelper.contains;
+export const contains: (parent: string, child: string) => boolean = defaultHelper.contains;
 
 /**
  * Make a path relative to another if the other is a parent.
@@ -157,7 +157,7 @@ export const contains = defaultHelper.contains;
  * @returns the normalized relative path or undefined if rootPath is not a parent.
  * @deprecated to be removed in the next major version.
  */
-export const makeRelativeTo = defaultHelper.makeRelativeTo;
+export const makeRelativeTo: (path: string, rootPath: string) => string | undefined = defaultHelper.makeRelativeTo;
 
 /**
  * Normalize a path to have only forward slashes.
@@ -165,7 +165,7 @@ export const makeRelativeTo = defaultHelper.makeRelativeTo;
  * @returns a normalized string.
  * @deprecated to be removed in the next major version.
  */
-export const normalizePath = defaultHelper.normalizePath;
+export const normalizePath: (path: string) => string = defaultHelper.normalizePath;
 
 export const DefaultPathHelper: PathHelper = {
     directoryRoot,

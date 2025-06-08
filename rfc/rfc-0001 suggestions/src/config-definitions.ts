@@ -69,7 +69,11 @@ const exampleTerms: Terms = {
 
 /*********************/
 
-export const __testing__ = {
+export const __testing__: {
+    exampleDef: DictionaryDefinitionSuggestions;
+    exampleFlagWords: NewBaseSettings;
+    exampleTerms: Terms;
+} = {
     exampleDef,
     exampleFlagWords,
     exampleTerms,

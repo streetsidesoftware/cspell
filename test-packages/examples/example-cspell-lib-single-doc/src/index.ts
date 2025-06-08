@@ -2,7 +2,7 @@ import * as path from 'node:path';
 
 import { spellCheckDocument } from 'cspell-lib';
 
-export async function run() {
+export async function run(): Promise<void> {
     const app = path.relative(process.cwd(), process.argv[1]);
     const file = process.argv[2];
 

@@ -179,4 +179,4 @@ export const configs: ESlintPlugin['configs'] = {
     'recommended-legacy': recommended,
 };
 
-export const plugin = { rules, configs, meta } satisfies ESlintPlugin;
+export const plugin: ESlintPlugin = { rules, configs, meta } satisfies ESlintPlugin;

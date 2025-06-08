@@ -122,7 +122,7 @@ export function createCachingDictionary(
     return cached;
 }
 
-export function enableLogging(enabled = !logRequests): void {
+export function enableLogging(enabled: boolean = !logRequests): void {
     logRequests = enabled;
 }
 

@@ -6,7 +6,7 @@ import type { ASTPath, ASTPathElement, Key } from './ASTPath.js' with { 'resolut
 
 const debugMode = false;
 
-export function walkTree(node: ASTNode, enter: (path: ASTPath) => void) {
+export function walkTree(node: ASTNode, enter: (path: ASTPath) => void): void {
     const visited = new Set<object>();
 
     let pathNode: ASTPath | undefined = undefined;

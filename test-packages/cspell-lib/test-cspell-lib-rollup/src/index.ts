@@ -14,7 +14,7 @@ async function checkSpelling(phrase: string) {
     return result.issues;
 }
 
-export async function run() {
+export async function run(): Promise<void> {
     console.log(`Start: ${new Date().toISOString()}`);
     const r = await checkSpelling('These are my coztom wordz.');
     console.log(`End: ${new Date().toISOString()}`);
