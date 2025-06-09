@@ -3,9 +3,9 @@ Repository: wireapp/wire-webapp
 Url: https://github.com/wireapp/wire-webapp.git
 Args: '["src/script/**/*.{js,ts,tsx,md}"]'
 Summary:
-  files: 1741
-  filesWithIssues: 807
-  issues: 3080
+  files: 1745
+  filesWithIssues: 811
+  issues: 3086
   errors: 0
 Errors: []
 
@@ -780,6 +780,11 @@ issues:
   - "src/script/components/Conversation/ConversationCells/CellsTable/CellsTableColumns/CellsTableRowOptions/CellsMoveNodeModal/useGetCellsFolders/useGetCellsFolders.ts:22:29        wireapp     U       QualifiedId} from '@wireapp/api-client/lib/user"
   - "src/script/components/Conversation/ConversationCells/CellsTable/CellsTableColumns/CellsTableRowOptions/CellsTableRowOptions.tsx:22:29       wireapp     U       QualifiedId} from '@wireapp/api-client/lib/user"
   - "src/script/components/Conversation/ConversationCells/CellsTable/CellsTableColumns/CellsTableRowOptions/CellsTableRowOptions.tsx:24:40       wireapp     U       ropdownMenu, MoreIcon} from '@wireapp/react-ui-kit';"
+  - "src/script/components/Conversation/ConversationCells/CellsTable/CellsTableColumns/CellsTableRowOptions/CellsTagsModal/CellsTagsModal.tsx:27:10          wireapp     U       } from '@wireapp/react-ui-kit';"
+  - "src/script/components/Conversation/ConversationCells/CellsTable/CellsTableColumns/CellsTableRowOptions/CellsTagsModal/CellsTagsModal.tsx:118:19         Potral      U       menuPotralTarget={document.body"
+  - "src/script/components/Conversation/ConversationCells/CellsTable/CellsTableColumns/CellsTableRowOptions/CellsTagsModal/useTagsManagement/transformTagToSelectOption/transformTagToSelectOption.ts:20:38          wireapp     U       ComboboxSelectOption} from '@wireapp/react-ui-kit';"
+  - "src/script/components/Conversation/ConversationCells/CellsTable/CellsTableColumns/CellsTableRowOptions/CellsTagsModal/useTagsManagement/useTagsManagement.ts:22:38          wireapp     U       ComboboxSelectOption} from '@wireapp/react-ui-kit';"
+  - "src/script/components/Conversation/ConversationCells/CellsTable/CellsTableColumns/CellsTagsColumn/CellsTagsColumn.tsx:20:35         wireapp     U       BadgesWithTooltip} from '@wireapp/react-ui-kit';"
   - "src/script/components/Conversation/ConversationCells/common/CellsBreadcrumbs/CellsBreadcrumbs.tsx:20:29         wireapp     U       Breadcrumbs} from '@wireapp/react-ui-kit';"
   - "src/script/components/Conversation/ConversationCells/common/CellsNewNodeForm/CellsNewNodeForm.tsx:22:29         wireapp     U       QualifiedId} from '@wireapp/api-client/lib/user"
   - "src/script/components/Conversation/ConversationCells/common/CellsNewNodeForm/CellsNewNodeForm.tsx:24:67         wireapp     U       Input, Label} from '@wireapp/react-ui-kit';"
@@ -788,11 +793,12 @@ issues:
   - "src/script/components/Conversation/ConversationCells/common/getCellsApiPath/getCellsApiPath.ts:20:29        wireapp     U       QualifiedId} from '@wireapp/api-client/lib/user"
   - "src/script/components/Conversation/ConversationCells/common/openBreadcrumb/openBreadcrumb.ts:22:29          wireapp     U       QualifiedId} from '@wireapp/api-client/lib/user"
   - "src/script/components/Conversation/ConversationCells/common/openFolder/openFolder.ts:22:29          wireapp     U       QualifiedId} from '@wireapp/api-client/lib/user"
-  - "src/script/components/Conversation/ConversationCells/ConversationCells.tsx:22:29        wireapp     U       QualifiedId} from '@wireapp/api-client/lib/user"
-  - "src/script/components/Conversation/ConversationCells/ConversationCells.tsx:23:26        tsyringe    U       import {container} from 'tsyringe';"
+  - "src/script/components/Conversation/ConversationCells/ConversationCells.tsx:20:29        wireapp     U       QualifiedId} from '@wireapp/api-client/lib/user"
+  - "src/script/components/Conversation/ConversationCells/ConversationCells.tsx:21:26        tsyringe    U       import {container} from 'tsyringe';"
   - "src/script/components/Conversation/ConversationCells/useGetAllCellsNodes/transformDataToCellsNodes.ts:23:17         MILLIS      U       import {TIME_IN_MILLIS} from 'Util/TimeUtil"
-  - "src/script/components/Conversation/ConversationCells/useGetAllCellsNodes/transformDataToCellsNodes.ts:107:57        MILLIS      U       as number) * TIME_IN_MILLIS.SECOND;"
-  - "src/script/components/Conversation/ConversationCells/useGetAllCellsNodes/transformDataToCellsNodes.ts:115:68        usermeta    U       meta.Namespace === 'usermeta-owner')?.JsonValue;"
+  - "src/script/components/Conversation/ConversationCells/useGetAllCellsNodes/transformDataToCellsNodes.ts:109:57        MILLIS      U       as number) * TIME_IN_MILLIS.SECOND;"
+  - "src/script/components/Conversation/ConversationCells/useGetAllCellsNodes/transformDataToCellsNodes.ts:117:68        usermeta    U       meta.Namespace === 'usermeta-owner')?.JsonValue;"
+  - "src/script/components/Conversation/ConversationCells/useGetAllCellsNodes/transformDataToCellsNodes.ts:122:68        usermeta    U       meta.Namespace === 'usermeta-tags')?.JsonValue;"
   - "src/script/components/Conversation/ConversationCells/useGetAllCellsNodes/useGetAllCellsNodes.ts:22:29       wireapp     U       QualifiedId} from '@wireapp/api-client/lib/user"
   - "src/script/components/Conversation/ConversationFileDropzone/FileDropzone/FileDropzoneOverlay/FileDropzoneOverlay.tsx:20:26          wireapp     U       import {SaveIcon} from '@wireapp/react-ui-kit';"
   - "src/script/components/Conversation/ConversationTabs/ConversationTabs.tsx:22:29          wireapp     U       QualifiedId} from '@wireapp/api-client/lib/user"
