@@ -7,7 +7,7 @@ export type FindUpFileSystem = Pick<VFileSystem, 'findUp'>;
 
 export interface FindUpURLOptions {
     type?: EntryType;
-    stopAt?: URL;
+    stopAt?: URL | URL[];
     fs?: FindUpFileSystem;
 }
 

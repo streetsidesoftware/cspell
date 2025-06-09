@@ -12,20 +12,24 @@ import type { CSpellSettingsI, CSpellSettingsWST } from './types.js';
 
 export type { CSpellConfigFile, ICSpellConfigFile } from 'cspell-config-lib';
 
+export type StopSearchAt = URL | string | (URL | string)[] | undefined;
+
+
 const gcl = getDefaultConfigLoaderInternal;
 /**
  *
  * @param searchFrom the directory / file to start searching from.
- * @param pnpSettings - related to Using Yarn PNP.
+ * @param stopSearchAt the directory / file URL to stop searching from.
+ * @param pnpSettings - related to Using Yarn PNP
  * @returns the resulting settings
  */
 
 export function searchForConfig(
     searchFrom: URL | string | undefined,
-    stopSearchAt?: URL | string | undefined,
+    stopSearchAt?: StopSearchAt,
     pnpSettings: PnPSettingsOptional = defaultPnPSettings,
 ): Promise<CSpellSettingsI | undefined> {
-    return gcl().searchForConfig(searchFrom, stopSearchAt, pnpSettings);
+    return gcl().searchForConfig(searchFrom, { stopSearchAt, ...pnpSettings});
 }
 /**
  * Load a CSpell configuration files.

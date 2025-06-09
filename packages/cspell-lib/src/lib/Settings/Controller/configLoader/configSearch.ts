@@ -31,11 +31,20 @@ export class ConfigSearch {
         this.#scanner = new DirConfigScanner(searchPlaces, allowedExtensionsByProtocol, fs);
     }
 
-    async searchForConfig(searchFromURL: URL, stopSearchAtURL?: URL): Promise<URL | undefined> {
-        const dirUrl = searchFromURL.pathname.endsWith('/') ? searchFromURL : new URL('.', searchFromURL);
-        const stopDirUrl = stopSearchAtURL?.pathname.endsWith('/') ? stopSearchAtURL : stopSearchAtURL ? new URL('.', stopSearchAtURL) : undefined;
+    async searchForConfig(searchFromURL: URL, stopSearchAtURL?: URL[]): Promise<URL | undefined> {
+        const dirUrl = searchFromURL.pathname.endsWith('/')
+            ? searchFromURL
+            : new URL('./', searchFromURL);
 
-        return this.#findUp(dirUrl, stopDirUrl);
+        const stopDirUrls = stopSearchAtURL
+            ? stopSearchAtURL.map(url =>
+                url.pathname.endsWith('/')
+                    ? url
+                    : new URL('./', url)
+            )
+            : undefined;
+
+        return this.#findUp(dirUrl, stopDirUrls);
     }
 
     clearCache() {
@@ -43,7 +52,7 @@ export class ConfigSearch {
         this.#scanner.clearCache();
     }
 
-    #findUp(fromDir: URL, stopDirUrl?: URL): Promise<URL | undefined> {
+    #findUp(fromDir: URL, stopDirUrls?: URL[]): Promise<URL | undefined> {
         const searchDirCache = this.#searchCache;
         const cached = searchDirCache.get(fromDir.href);
         if (cached) {
@@ -55,7 +64,7 @@ export class ConfigSearch {
             visit(dir);
             return this.#scanner.scanDirForConfigFile(dir);
         };
-        result = findUpFromUrl(predicate, fromDir, { type: 'file', ...(stopDirUrl && { stopAt: stopDirUrl }), });
+        result = findUpFromUrl(predicate, fromDir, { type: 'file', ...(stopDirUrls && { stopAt: stopDirUrls }) });
         searchDirCache.set(fromDir.href, result);
         visited.forEach((dir) => searchDirCache.set(dir.href, result));
         return result;

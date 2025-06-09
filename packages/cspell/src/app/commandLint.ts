@@ -75,7 +75,7 @@ export function commandLint(prog: Command): Command {
         )
         .option(
             '--stop-config-search-at <dir>',
-            'Specify a directory at which to stop searching for configuration files when walking up from the files being checked. Useful for limiting config inheritance.'
+            'Specify a directory at which to stop searching for configuration files when walking up from the files being checked. Useful for limiting config inheritance.', collect
         )
         .option('-v, --verbose', 'Display more information about the files being checked and the configuration.')
         .option(

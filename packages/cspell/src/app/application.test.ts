@@ -87,7 +87,7 @@ describe('Validate the Application', () => {
 
         const options = {
             root: rootDir,
-            stopConfigSearchAt: stopSearchAt,
+            stopConfigSearchAt: [stopSearchAt],
         };
 
         const reporter = new InMemoryReporter();
@@ -102,7 +102,7 @@ describe('Validate the Application', () => {
         return;
     });
 
-     test('Stops config search at specified directory (no config found)', testOptions, async () => {
+    test('Stops config search at specified directory (no config found)', testOptions, async () => {
         const files = ['text.txt'];
 
          const rootDir = j(searchRoot, 'search-stop', 'src/');
@@ -110,7 +110,37 @@ describe('Validate the Application', () => {
 
         const options = {
             root: rootDir,
-            stopConfigSearchAt: stopSearchAt,
+            stopConfigSearchAt: [stopSearchAt],
+        };
+
+        const reporter = new InMemoryReporter();
+        const result = await App.lint(files, options, reporter);
+
+        expect(reporter.errorCount).toBe(0);
+        expect(reporter.infoCount).toBeGreaterThan(0);
+        expect(reporter.debugCount).toBe(0); 
+        expect(reporter.runResult).toEqual(result);
+        expect(result.files).toBe(1);
+        expect(result.issues).toBe(1);
+        expect(
+            reporter.log.some(line =>
+                line.includes('Config Files Found') && line.includes('None found')
+            )
+        ).toBe(true);
+        return;
+    });
+
+     test('limits config lookup using stopConfigSearchAt for each project', testOptions, async () => {
+        const files = ['word.md'];
+       const rootDir = j(searchRoot, 'repo', 'apps', 'src', '/');
+        
+       const stopApps = j(searchRoot, 'repo', 'apps');
+        const stopLibs = j(searchRoot, 'repo', 'libs');
+        const stopConfigSearchAt = [stopApps, stopLibs];
+
+        const options = {
+            root: rootDir,
+            stopConfigSearchAt,
         };
 
         const reporter = new InMemoryReporter();
@@ -127,6 +157,8 @@ describe('Validate the Application', () => {
                 line.includes('Config Files Found') && line.includes('None found')
             )
         ).toBe(true);
+
+        expect(reporter.issues[0].text).toBe('baddword');
         return;
     });
 

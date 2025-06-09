@@ -21,7 +21,7 @@ export interface FileConfigInfo {
 export async function readConfig(
     configFile: string | CSpellConfigFile | undefined,
     root: string | undefined,
-    stopConfigSearchAt?: URL | string | undefined,
+    stopConfigSearchAt?: (URL | string)[] | undefined,
 ): Promise<ConfigInfo> {
     configFile ??= getEnvironmentVariable(environmentKeys.CSPELL_CONFIG_PATH);
 

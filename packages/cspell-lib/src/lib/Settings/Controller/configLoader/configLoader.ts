@@ -41,6 +41,7 @@ import { pnpLoader } from '../pnpLoader.js';
 import { searchPlaces } from './configLocations.js';
 import { ConfigSearch } from './configSearch.js';
 import { configToRawSettings } from './configToRawSettings.js';
+import { StopSearchAt } from './defaultConfigLoader.js';
 import { defaultSettings } from './defaultSettings.js';
 import {
     normalizeCacheSettings,
@@ -83,6 +84,12 @@ interface ImportedConfigEntry {
     referencedSet: Set<string>;
 }
 
+export interface SearchForConfigFileOptions {
+    stopSearchAt?: StopSearchAt;
+}
+
+export interface SearchForConfigOptions extends SearchForConfigFileOptions, PnPSettingsOptional {}
+
 let defaultConfigLoader: ConfigLoaderInternal | undefined = undefined;
 
 interface CacheMergeConfigFileWithImports {
@@ -113,14 +120,12 @@ export interface IConfigLoader {
     /**
      * This is an alias for `searchForConfigFile` and `mergeConfigFileWithImports`.
      * @param searchFrom the directory / file URL to start searching from.
-     * @param stopSearchAt the directory / file URL to stop searching at.
-     * @param pnpSettings - related to Using Yarn PNP.
+     * @param options - Optional settings including stop location and Yarn PnP configuration.
      * @returns the resulting settings
      */
     searchForConfig(
         searchFrom: URL | string | undefined,
-        stopSearchAt?: URL | string | undefined,
-        pnpSettings?: PnPSettingsOptional,
+        options?: SearchForConfigOptions,
     ): Promise<CSpellSettingsI | undefined>;
 
     resolveConfigFileLocation(filenameOrURL: string | URL, relativeTo?: string | URL): Promise<URL | undefined>;
@@ -259,7 +264,7 @@ export class ConfigLoader implements IConfigLoader {
 
     async searchForConfigFileLocation(
         searchFrom: URL | string | undefined,
-        stopSearchAt?: URL | string | undefined,
+        stopSearchAt?: StopSearchAt,
     ): Promise<URL | undefined> {
         const normalizeDirURL = async (input?: URL | string): Promise<URL | undefined> => {
             if (!input) return undefined;
@@ -276,12 +281,21 @@ export class ConfigLoader implements IConfigLoader {
         };
 
         const startURL = await normalizeDirURL(searchFrom || cwdURL());
-        const stopURL = await normalizeDirURL(stopSearchAt);
 
-        return this.configSearch.searchForConfig(startURL!, stopURL);
+        const rawStops = stopSearchAt
+        ? Array.isArray(stopSearchAt)
+            ? stopSearchAt
+            : [stopSearchAt]
+        : [];
+
+        const stopURLs = (await Promise.all(rawStops.map(normalizeDirURL))).filter(
+            (u): u is URL => u !== undefined
+        );
+
+        return this.configSearch.searchForConfig(startURL!, stopURLs);
     }
 
-    async searchForConfigFile(searchFrom: URL | string | undefined, stopSearchAt?: URL | string | undefined): Promise<CSpellConfigFile | undefined> {
+    async searchForConfigFile(searchFrom: URL | string | undefined, stopSearchAt?: StopSearchAt): Promise<CSpellConfigFile | undefined> {
         const location = await this.searchForConfigFileLocation(searchFrom, stopSearchAt);
         if (!location) return undefined;
         const file = await this.readConfigFile(location);
@@ -289,19 +303,22 @@ export class ConfigLoader implements IConfigLoader {
     }
 
     /**
-     *
-     * @param searchFrom the directory / file URL to start searching from.
-     * @param stopSearchAt the directory / file URL to start searching from.
-     * @param pnpSettings - related to Using Yarn PNP.
+    *
+    * @param searchFrom the directory / file URL to start searching from.
+    * @param options - Optional settings including stop location and Yarn PnP configuration.
      * @returns the resulting settings
      */
     async searchForConfig(
         searchFrom: URL | string | undefined,
-        stopSearchAt?: URL | string | undefined,
-        pnpSettings: PnPSettingsOptional = defaultPnPSettings,
+        options?: SearchForConfigOptions,
     ): Promise<CSpellSettingsI | undefined> {
-        const configFile = await this.searchForConfigFile(searchFrom, stopSearchAt);
+        const configFile = await this.searchForConfigFile(searchFrom, options?.stopSearchAt);
         if (!configFile) return undefined;
+
+        const pnpSettings: PnPSettingsOptional = {
+            usePnP: options?.usePnP ?? defaultPnPSettings.usePnP,
+            pnpFiles: options?.pnpFiles ?? defaultPnPSettings.pnpFiles,
+        };
 
         return this.mergeConfigFileWithImports(configFile, pnpSettings);
     }

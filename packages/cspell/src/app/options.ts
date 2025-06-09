@@ -383,12 +383,12 @@ export interface LinterCliOptions extends LinterOptions {
     configSearch?: boolean;
 
     /**
-    * The directory path at which CSpell should stop searching for configuration files.
+    * Directory paths at which CSpell should stop searching for configuration files.
     *
-    * This is set via the `--stop-config-search-at <dir>` CLI option.
-    * If the flag is not passed, this will be `undefined`.
+    * These are set via one or more `--stop-config-search-at <dir>` CLI options.
+    * If no flags are passed, this will be `undefined`.
     */
-    stopConfigSearchAt?: string;
+    stopConfigSearchAt?: string[];
 
     report?: ReportChoices | undefined;
 }

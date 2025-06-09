@@ -17,14 +17,18 @@ export async function findUpFromUrl(
     let dir = new URL('.', from);
     const root = new URL('/', dir);
     const predicate = makePredicate(fs, name, entryType);
-    const stopAtDir = stopAt || root;
+
+    const stopAtHrefs = new Set(
+        (Array.isArray(stopAt) ? stopAt : [stopAt || root])
+            .map(p => new URL('.', p).href)
+    );
 
     let last = '';
     while (dir.href !== last) {
         const found = await predicate(dir);
         if (found !== undefined) return found;
         last = dir.href;
-        if (dir.href === root.href || dir.href === stopAtDir.href) break;
+        if (dir.href === root.href || stopAtHrefs.has(dir.href)) break;
         dir = new URL('..', dir);
     }
     return undefined;
