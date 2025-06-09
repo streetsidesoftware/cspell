@@ -23,7 +23,7 @@ const gcl = getDefaultConfigLoaderInternal;
 
 export function searchForConfig(
     searchFrom: URL | string | undefined,
-    options?: SearchForConfigOptions
+    options?: SearchForConfigOptions,
 ): Promise<CSpellSettingsI | undefined> {
     return gcl().searchForConfig(searchFrom, options);
 }
