@@ -29,7 +29,7 @@ export async function readConfig(
         const cfgFile = typeof configFile === 'string' ? await readConfigHandleError(configFile) : configFile;
         return configFileToConfigInfo(cfgFile);
     }
-    const config = await cspell.searchForConfig(root, stopConfigSearchAt);
+    const config = await cspell.searchForConfig(root, { stopSearchAt: stopConfigSearchAt });
 
     const defaultConfigFile = getEnvironmentVariable(environmentKeys.CSPELL_DEFAULT_CONFIG_PATH);
     if (!config && defaultConfigFile) {

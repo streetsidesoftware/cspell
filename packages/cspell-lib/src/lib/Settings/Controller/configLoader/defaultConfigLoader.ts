@@ -3,11 +3,10 @@ import type { CSpellConfigFile, ICSpellConfigFile } from 'cspell-config-lib';
 
 import { toError } from '../../../util/errors.js';
 import { toFileUrl } from '../../../util/url.js';
-import type { IConfigLoader } from './configLoader.js';
+import type { IConfigLoader, SearchForConfigOptions } from './configLoader.js';
 import { getDefaultConfigLoaderInternal } from './configLoader.js';
 import { configErrorToRawSettings, configToRawSettings } from './configToRawSettings.js';
 import type { PnPSettingsOptional } from './PnPSettings.js';
-import { defaultPnPSettings } from './PnPSettings.js';
 import type { CSpellSettingsI, CSpellSettingsWST } from './types.js';
 
 export type { CSpellConfigFile, ICSpellConfigFile } from 'cspell-config-lib';
@@ -18,17 +17,15 @@ const gcl = getDefaultConfigLoaderInternal;
 /**
  *
  * @param searchFrom the directory / file to start searching from.
- * @param stopSearchAt the directory / file URL to stop searching from.
- * @param pnpSettings - related to Using Yarn PNP
+ * @param options - Optional settings including stop location and Yarn PnP configuration.
  * @returns the resulting settings
  */
 
 export function searchForConfig(
     searchFrom: URL | string | undefined,
-    stopSearchAt?: StopSearchAt,
-    pnpSettings: PnPSettingsOptional = defaultPnPSettings,
+    options?: SearchForConfigOptions
 ): Promise<CSpellSettingsI | undefined> {
-    return gcl().searchForConfig(searchFrom, { stopSearchAt, ...pnpSettings });
+    return gcl().searchForConfig(searchFrom, options);
 }
 /**
  * Load a CSpell configuration files.

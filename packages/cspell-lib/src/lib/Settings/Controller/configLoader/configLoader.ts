@@ -312,12 +312,7 @@ export class ConfigLoader implements IConfigLoader {
         const configFile = await this.searchForConfigFile(searchFrom, options?.stopSearchAt);
         if (!configFile) return undefined;
 
-        const pnpSettings: PnPSettingsOptional = {
-            usePnP: options?.usePnP ?? defaultPnPSettings.usePnP,
-            pnpFiles: options?.pnpFiles ?? defaultPnPSettings.pnpFiles,
-        };
-
-        return this.mergeConfigFileWithImports(configFile, pnpSettings);
+        return this.mergeConfigFileWithImports(configFile, options);
     }
 
     public getGlobalSettings(): CSpellSettingsI {

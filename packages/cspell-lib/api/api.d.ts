@@ -347,11 +347,10 @@ type StopSearchAt = URL | string | (URL | string)[] | undefined;
 /**
  *
  * @param searchFrom the directory / file to start searching from.
- * @param stopSearchAt the directory / file URL to stop searching from.
- * @param pnpSettings - related to Using Yarn PNP
+ * @param options - Optional settings including stop location and Yarn PnP configuration.
  * @returns the resulting settings
  */
-declare function searchForConfig(searchFrom: URL | string | undefined, stopSearchAt?: StopSearchAt, pnpSettings?: PnPSettingsOptional): Promise<CSpellSettingsI | undefined>;
+declare function searchForConfig(searchFrom: URL | string | undefined, options?: SearchForConfigOptions): Promise<CSpellSettingsI | undefined>;
 /**
  * Load a CSpell configuration files.
  * @param file - path or package reference to load.
