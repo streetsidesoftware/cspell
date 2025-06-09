@@ -105,7 +105,7 @@ describe('Validate the Application', () => {
     test('Stops config search at specified directory (no config found)', testOptions, async () => {
         const files = ['text.txt'];
 
-         const rootDir = j(searchRoot, 'search-stop', 'src/');
+        const rootDir = j(searchRoot, 'search-stop', 'src/');
         const stopSearchAt = j(searchRoot, 'search-stop', 'src/');
 
         const options = {
@@ -118,23 +118,21 @@ describe('Validate the Application', () => {
 
         expect(reporter.errorCount).toBe(0);
         expect(reporter.infoCount).toBeGreaterThan(0);
-        expect(reporter.debugCount).toBe(0); 
+        expect(reporter.debugCount).toBe(0);
         expect(reporter.runResult).toEqual(result);
         expect(result.files).toBe(1);
         expect(result.issues).toBe(1);
-        expect(
-            reporter.log.some(line =>
-                line.includes('Config Files Found') && line.includes('None found')
-            )
-        ).toBe(true);
+        expect(reporter.log.some((line) => line.includes('Config Files Found') && line.includes('None found'))).toBe(
+            true,
+        );
         return;
     });
 
-     test('limits config lookup using stopConfigSearchAt for each project', testOptions, async () => {
+    test('limits config lookup using stopConfigSearchAt for each project', testOptions, async () => {
         const files = ['word.md'];
-       const rootDir = j(searchRoot, 'repo', 'apps', 'src', '/');
-        
-       const stopApps = j(searchRoot, 'repo', 'apps');
+        const rootDir = j(searchRoot, 'repo', 'apps', 'src', '/');
+
+        const stopApps = j(searchRoot, 'repo', 'apps');
         const stopLibs = j(searchRoot, 'repo', 'libs');
         const stopConfigSearchAt = [stopApps, stopLibs];
 
@@ -152,18 +150,16 @@ describe('Validate the Application', () => {
         expect(reporter.runResult).toEqual(result);
         expect(result.files).toBe(1);
         expect(result.issues).toBe(1);
-        expect(
-            reporter.log.some(line =>
-                line.includes('Config Files Found') && line.includes('None found')
-            )
-        ).toBe(true);
+        expect(reporter.log.some((line) => line.includes('Config Files Found') && line.includes('None found'))).toBe(
+            true,
+        );
 
         expect(reporter.issues[0].text).toBe('baddword');
         return;
     });
 
     test('Tests running the application with no config search', testOptions, async () => {
-        const files = ['**/*.txt']
+        const files = ['**/*.txt'];
         const config = j(searchRoot, 'cspell.temp.json');
         const searchOptions = { root: searchRoot };
         const options = { ...searchOptions, config, configSearch: false };

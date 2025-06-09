@@ -273,7 +273,7 @@ export class ConfigLoader implements IConfigLoader {
                 typeof input === 'string' &&
                 !isUrlLike(input) &&
                 url.protocol === 'file:' &&
-                await isDirectory(this.fs, url)
+                (await isDirectory(this.fs, url))
             ) {
                 return addTrailingSlash(url);
             }
@@ -282,20 +282,17 @@ export class ConfigLoader implements IConfigLoader {
 
         const startURL = await normalizeDirURL(searchFrom || cwdURL());
 
-        const rawStops = stopSearchAt
-        ? Array.isArray(stopSearchAt)
-            ? stopSearchAt
-            : [stopSearchAt]
-        : [];
+        const rawStops = stopSearchAt ? (Array.isArray(stopSearchAt) ? stopSearchAt : [stopSearchAt]) : [];
 
-        const stopURLs = (await Promise.all(rawStops.map(normalizeDirURL))).filter(
-            (u): u is URL => u !== undefined
-        );
+        const stopURLs = (await Promise.all(rawStops.map(normalizeDirURL))).filter((u): u is URL => u !== undefined);
 
         return this.configSearch.searchForConfig(startURL!, stopURLs);
     }
 
-    async searchForConfigFile(searchFrom: URL | string | undefined, stopSearchAt?: StopSearchAt): Promise<CSpellConfigFile | undefined> {
+    async searchForConfigFile(
+        searchFrom: URL | string | undefined,
+        stopSearchAt?: StopSearchAt,
+    ): Promise<CSpellConfigFile | undefined> {
         const location = await this.searchForConfigFileLocation(searchFrom, stopSearchAt);
         if (!location) return undefined;
         const file = await this.readConfigFile(location);
@@ -303,9 +300,9 @@ export class ConfigLoader implements IConfigLoader {
     }
 
     /**
-    *
-    * @param searchFrom the directory / file URL to start searching from.
-    * @param options - Optional settings including stop location and Yarn PnP configuration.
+     *
+     * @param searchFrom the directory / file URL to start searching from.
+     * @param options - Optional settings including stop location and Yarn PnP configuration.
      * @returns the resulting settings
      */
     async searchForConfig(

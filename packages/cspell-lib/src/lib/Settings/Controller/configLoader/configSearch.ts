@@ -32,16 +32,10 @@ export class ConfigSearch {
     }
 
     async searchForConfig(searchFromURL: URL, stopSearchAtURL?: URL[]): Promise<URL | undefined> {
-        const dirUrl = searchFromURL.pathname.endsWith('/')
-            ? searchFromURL
-            : new URL('./', searchFromURL);
+        const dirUrl = searchFromURL.pathname.endsWith('/') ? searchFromURL : new URL('./', searchFromURL);
 
         const stopDirUrls = stopSearchAtURL
-            ? stopSearchAtURL.map(url =>
-                url.pathname.endsWith('/')
-                    ? url
-                    : new URL('./', url)
-            )
+            ? stopSearchAtURL.map((url) => (url.pathname.endsWith('/') ? url : new URL('./', url)))
             : undefined;
 
         return this.#findUp(dirUrl, stopDirUrls);

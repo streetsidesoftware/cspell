@@ -71,11 +71,12 @@ export function commandLint(prog: Command): Command {
         .option('--config-search', 'Allow searching for configuration files.', undefined)
         .option(
             '--no-config-search',
-            'Disable automatic searching for additional configuration files in parent directories. Only the specified config file (if any) will be used.'
+            'Disable automatic searching for additional configuration files in parent directories. Only the specified config file (if any) will be used.',
         )
         .option(
             '--stop-config-search-at <dir>',
-            'Specify a directory at which to stop searching for configuration files when walking up from the files being checked. Useful for limiting config inheritance.', collect
+            'Specify a directory at which to stop searching for configuration files when walking up from the files being checked. Useful for limiting config inheritance.',
+            collect,
         )
         .option('-v, --verbose', 'Display more information about the files being checked and the configuration.')
         .option(

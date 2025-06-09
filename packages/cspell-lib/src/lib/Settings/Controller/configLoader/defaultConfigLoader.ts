@@ -14,7 +14,6 @@ export type { CSpellConfigFile, ICSpellConfigFile } from 'cspell-config-lib';
 
 export type StopSearchAt = URL | string | (URL | string)[] | undefined;
 
-
 const gcl = getDefaultConfigLoaderInternal;
 /**
  *
@@ -29,7 +28,7 @@ export function searchForConfig(
     stopSearchAt?: StopSearchAt,
     pnpSettings: PnPSettingsOptional = defaultPnPSettings,
 ): Promise<CSpellSettingsI | undefined> {
-    return gcl().searchForConfig(searchFrom, { stopSearchAt, ...pnpSettings});
+    return gcl().searchForConfig(searchFrom, { stopSearchAt, ...pnpSettings });
 }
 /**
  * Load a CSpell configuration files.

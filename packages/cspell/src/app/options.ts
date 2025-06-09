@@ -375,19 +375,19 @@ export interface LinterCliOptions extends LinterOptions {
      */
     issueTemplate?: string;
     /**
-    * Prevents searching for local configuration files
-    *
-    * When `--no-config-search` is passed on the command line, this will be `true`.
-    * If the flag is not passed, it defaults to `false`.
-    */
+     * Prevents searching for local configuration files
+     *
+     * When `--no-config-search` is passed on the command line, this will be `true`.
+     * If the flag is not passed, it defaults to `false`.
+     */
     configSearch?: boolean;
 
     /**
-    * Directory paths at which CSpell should stop searching for configuration files.
-    *
-    * These are set via one or more `--stop-config-search-at <dir>` CLI options.
-    * If no flags are passed, this will be `undefined`.
-    */
+     * Directory paths at which CSpell should stop searching for configuration files.
+     *
+     * These are set via one or more `--stop-config-search-at <dir>` CLI options.
+     * If no flags are passed, this will be `undefined`.
+     */
     stopConfigSearchAt?: string[];
 
     report?: ReportChoices | undefined;
