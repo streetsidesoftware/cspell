@@ -28,7 +28,7 @@ jobs:
       #    echo "GHE_HOST=${GITHUB_SERVER_URL##https:\/\/}" >> $GITHUB_ENV
 
       # Drafts your next Release notes as Pull Requests are merged into "master"
-      - id: release-drafter
+      - id: release-drafter-labeler
         uses: release-drafter/release-drafter@b1476f6e6eb133afa41ed8589daba6dc69b4d3f5 # v5
         # (Optional) specify config name to use, relative to .github/. Default: release-drafter.yml
         # with:
@@ -40,14 +40,7 @@ jobs:
           disable-autolabeler: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Result
-        uses: streetsidesoftware/actions/public/summary@v1
-        with:
-          text: |
-            # Release Drafter Results
-            ```
-            ${{ toJSON(steps.release-drafter.outputs) }}
-            ```
+
   update_release_draft:
     if: github.ref == 'refs/heads/main'
     permissions:
@@ -60,7 +53,8 @@ jobs:
       #    echo "GHE_HOST=${GITHUB_SERVER_URL##https:\/\/}" >> $GITHUB_ENV
 
       # Drafts your next Release notes as Pull Requests are merged into "master"
-      - uses: release-drafter/release-drafter@b1476f6e6eb133afa41ed8589daba6dc69b4d3f5 # v5
+      - id: release-drafter
+        uses: release-drafter/release-drafter@b1476f6e6eb133afa41ed8589daba6dc69b4d3f5 # v5
         # (Optional) specify config name to use, relative to .github/. Default: release-drafter.yml
         # with:
         #   config-name: my-config.yml
@@ -71,4 +65,14 @@ jobs:
           disable-autolabeler: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Result
+        uses: streetsidesoftware/actions/public/summary@v1
+        with:
+          text: |
+            # Release Drafter Results
+            ```
+            ${{ toJSON(steps.release-drafter.outputs) }}
+            ```
+
 # cspell:ignore auto* *labeler
