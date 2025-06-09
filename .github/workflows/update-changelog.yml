@@ -26,10 +26,26 @@ jobs:
           latest-version: ${{ github.event.release.tag_name }}
           release-notes: ${{ github.event.release.body }}
 
-      - name: Commit updated CHANGELOG
-        uses: stefanzweifel/git-auto-commit-action@v5
+      - name: Get Diff
+        id: diff
+        uses: streetsidesoftware/actions/public/diff@v1
         with:
-          branch: ${{ github.event.release.target_commitish }}
-          commit_message: Update CHANGELOG
-          file_pattern: CHANGELOG.md
+          path: CHANGELOG.md
+
+      - name: Summary of changes
+        uses: streetsidesoftware/actions/public/summary@v1
+        with:
+          text: |
+            # Changelog Update Summary
+            ```
+            ${{ steps.diff.outputs.diff }}
+            ```
+
+      # - name: Commit updated CHANGELOG
+      #   uses: stefanzweifel/git-auto-commit-action@v5
+      #   with:
+      #     branch: ${{ github.event.release.target_commitish }}
+      #     commit_message: Update CHANGELOG
+      #     file_pattern: CHANGELOG.md
+
 # cspell:ignore stefanzweifel commitish
