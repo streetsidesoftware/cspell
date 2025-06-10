@@ -53,7 +53,7 @@ export class LintRequest {
             { languageId: '*', locale: '*', dictionaries },
         ];
         this.cspellSettingsFromCliOptions = {
-            noConfigSearch,
+            ...(noConfigSearch !== undefined ? { noConfigSearch } : {}),
             ...extractUnknownWordsConfig(options),
             languageSettings,
         };

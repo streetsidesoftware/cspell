@@ -82,8 +82,8 @@ describe('Validate the Application', () => {
     test('Runs the application with stop config search at', testOptions, async () => {
         const files = ['index.txt'];
 
-        const rootDir = j(searchRoot, 'stop-config-search', 'main/');
-        const stopSearchAt = j(searchRoot, 'stop-config-search/');
+        const rootDir = j(searchRoot, 'stop-config-search', 'main');
+        const stopSearchAt = j(searchRoot, 'stop-config-search');
 
         const options = {
             root: rootDir,
@@ -105,8 +105,8 @@ describe('Validate the Application', () => {
     test('Stops config search at specified directory (no config found)', testOptions, async () => {
         const files = ['text.txt'];
 
-        const rootDir = j(searchRoot, 'search-stop', 'src/');
-        const stopSearchAt = j(searchRoot, 'search-stop', 'src/');
+        const rootDir = j(searchRoot, 'search-stop', 'src');
+        const stopSearchAt = j(searchRoot, 'search-stop', 'src');
 
         const options = {
             root: rootDir,
@@ -130,7 +130,7 @@ describe('Validate the Application', () => {
 
     test('limits config lookup using stopConfigSearchAt for each project', testOptions, async () => {
         const files = ['word.md'];
-        const rootDir = j(searchRoot, 'repo', 'apps', 'src', '/');
+        const rootDir = j(searchRoot, 'repo', 'apps', 'src');
 
         const stopApps = j(searchRoot, 'repo', 'apps');
         const stopLibs = j(searchRoot, 'repo', 'libs');
