@@ -4,7 +4,7 @@ export interface InlineDictionary {
      */
     words?: string[];
 
-    // cspell:ignore colour color canot
+    // cspell:ignore colour color canot incase
     /**
      * List of words to always be considered incorrect. Words found in `flagWords` override `words`.
      *

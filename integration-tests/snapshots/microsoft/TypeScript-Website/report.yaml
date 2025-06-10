@@ -4,8 +4,8 @@ Url: https://github.com/microsoft/TypeScript-Website.git
 Args: '["--config=${repoConfig}/cspell.json","**/*.*"]'
 Summary:
   files: 760
-  filesWithIssues: 163
-  issues: 703
+  filesWithIssues: 165
+  issues: 706
   errors: 0
 Errors: []
 
@@ -184,6 +184,7 @@ issues:
   - "packages/playground-worker/index.ts:232:44      rebindings      U       functions which make the rebindings easier to manage"
   - "packages/playground/src/createUI.ts:87:25       screenreader    U       // works with every screenreader and browser combination"
   - "packages/playground/src/navigation.ts:61:9          titleh      U       const titleh4 = document.createElement"
+  - "packages/playground/src/navigation.ts:211:21        incase      U       // Fallback incase there is an extra level"
   - "packages/playground/src/sidebar/fixtures/npmPlugins.ts:6:14         xavdid          U       author: \"xavdid\","
   - "packages/playground/src/sidebar/fixtures/npmPlugins.ts:13:14        anuraghazra     U       author: \"anuraghazra\","
   - "packages/playground/src/sidebar/fixtures/npmPlugins.ts:36:14        atanasster      U       author: \"atanasster\","
@@ -211,6 +212,7 @@ issues:
   - "packages/typescriptlang-org/lib/bootup/pathsOnSiteTracker.ts:17:21          bootstapping    U       // Generated during bootstapping via pathsOnSiteTracker"
   - "packages/typescriptlang-org/lib/themes/themeGen.js:22:8         Burgendy    U       lightBurgendyAAA: \"#A31515\","
   - "packages/typescriptlang-org/lib/themes/themeGen.js:23:3         burgendy    U       burgendyAAA: \"#811f3f\","
+  - "packages/typescriptlang-org/scripts/getTypeScriptNPMVersions.js:121:6       Incase      U       // Incase the MD hasn't been ported"
   - "packages/typescriptlang-org/src/components/display/GreyButton.tsx:20:21         clicky      U       const classes = [\"clicky-grey-button\"]"
   - "packages/typescriptlang-org/src/components/index/MigrationStories.tsx:95:55         Hawaiʻi     U       gave a talk at JSConf Hawaiʻi on how Airbnb adopted"
   - "packages/typescriptlang-org/src/components/index/MigrationStories.tsx:136:12        Rodoslav    U       <p>Rodoslav Kirov and Bowen Ni covered"

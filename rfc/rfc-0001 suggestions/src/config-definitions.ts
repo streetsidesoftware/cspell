@@ -56,7 +56,7 @@ type Terms = Record<string, Term>;
 // cspell:ignore abondoning abondons aborigene accesories accidant abortificant
 const exampleTerms: Terms = {
     crap: TermForbid,
-    incase: ['in case'],
+    incase: ['in case'], // cspell:disable-line
     ignoreX: TermIgnore,
     abandoning: TermWord,
     abondoning: ['abandoning'],
