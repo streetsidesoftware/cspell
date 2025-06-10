@@ -154,7 +154,7 @@ describe('Validate the Application', () => {
             true,
         );
 
-        expect(reporter.issues[0].text).toBe('baddword');
+        expect(reporter.issues[0].text).toBe('baddword'); // cspell:disable-line
         return;
     });
 
