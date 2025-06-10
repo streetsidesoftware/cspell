@@ -18,6 +18,7 @@ export async function findUpFromUrl(
     const root = new URL('/', dir);
     const predicate = makePredicate(fs, name, entryType);
 
+    // cspell:ignore hrefs
     const stopAtHrefs = new Set((Array.isArray(stopAt) ? stopAt : [stopAt || root]).map((p) => new URL('.', p).href));
 
     let last = '';
