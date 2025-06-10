@@ -137,7 +137,7 @@ Example Term definition:
 ```yaml
 terms:
   crap: false # forbid this word
-  incase:
+  incase: # cspell:disable-line
     - in case # forbid this word and suggest `in case`
   ignoreX: null # ignore this word
   abandoning: true # this word is an acceptable term
