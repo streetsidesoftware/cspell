@@ -21,6 +21,7 @@ export interface FileConfigInfo {
 export async function readConfig(
     configFile: string | CSpellConfigFile | undefined,
     root: string | undefined,
+    stopConfigSearchAt?: (URL | string)[] | undefined,
 ): Promise<ConfigInfo> {
     configFile ??= getEnvironmentVariable(environmentKeys.CSPELL_CONFIG_PATH);
 
@@ -28,7 +29,7 @@ export async function readConfig(
         const cfgFile = typeof configFile === 'string' ? await readConfigHandleError(configFile) : configFile;
         return configFileToConfigInfo(cfgFile);
     }
-    const config = await cspell.searchForConfig(root);
+    const config = await cspell.searchForConfig(root, { stopSearchAt: stopConfigSearchAt });
 
     const defaultConfigFile = getEnvironmentVariable(environmentKeys.CSPELL_DEFAULT_CONFIG_PATH);
     if (!config && defaultConfigFile) {

@@ -105,7 +105,7 @@ export type VFindEntryType = 'file' | 'directory' | '!file' | '!directory';
 
 export interface VFindUpURLOptions {
     type?: VFindEntryType;
-    stopAt?: URL;
+    stopAt?: URL | URL[];
 }
 
 export type VFindUpPredicate = (dir: URL) => URL | undefined | Promise<URL | undefined>;

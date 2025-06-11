@@ -343,8 +343,44 @@ type PnPSettingsOptional = OptionalOrUndefined<PnPSettings>;
 type CSpellSettingsWST = CSpellSettingsWithSourceTrace;
 type CSpellSettingsI = CSpellSettingsInternal;
 
+type StopSearchAt = URL | string | (URL | string)[] | undefined;
+/**
+ *
+ * @param searchFrom the directory / file to start searching from.
+ * @param options - Optional settings including stop location and Yarn PnP configuration.
+ * @returns the resulting settings
+ */
+declare function searchForConfig(searchFrom: URL | string | undefined, options?: SearchForConfigOptions): Promise<CSpellSettingsI | undefined>;
+/**
+ * Load a CSpell configuration files.
+ * @param file - path or package reference to load.
+ * @param pnpSettings - PnP settings
+ * @returns normalized CSpellSettings
+ */
+declare function loadConfig(file: string, pnpSettings?: PnPSettingsOptional): Promise<CSpellSettingsI>;
+declare function readConfigFile(filename: string | URL, relativeTo?: string | URL): Promise<CSpellConfigFile>;
+declare function resolveConfigFileImports(configFile: CSpellConfigFile | ICSpellConfigFile): Promise<CSpellSettingsI>;
+/**
+ * Might throw if the settings have not yet been loaded.
+ * @deprecated use {@link getGlobalSettingsAsync} instead.
+ */
+declare function getGlobalSettings(): CSpellSettingsI;
+/**
+ * Loads and caches the global settings.
+ * @returns - global settings
+ */
+declare function getGlobalSettingsAsync(): Promise<CSpellSettingsI>;
+declare function getCachedFileSize(): number;
+declare function getDefaultConfigLoader(): IConfigLoader;
+declare function readRawSettings(filename: string | URL, relativeTo?: string | URL): Promise<CSpellSettingsWST>;
+
 declare const sectionCSpell = "cSpell";
 declare const defaultFileName = "cspell.json";
+interface SearchForConfigFileOptions {
+    stopSearchAt?: StopSearchAt;
+}
+interface SearchForConfigOptions extends SearchForConfigFileOptions, PnPSettingsOptional {
+}
 interface IConfigLoader {
     readSettingsAsync(filename: string | URL, relativeTo?: string | URL, pnpSettings?: PnPSettingsOptional): Promise<CSpellSettingsI>;
     /**
@@ -358,10 +394,10 @@ interface IConfigLoader {
     /**
      * This is an alias for `searchForConfigFile` and `mergeConfigFileWithImports`.
      * @param searchFrom the directory / file URL to start searching from.
-     * @param pnpSettings - related to Using Yarn PNP.
+     * @param options - Optional settings including stop location and Yarn PnP configuration.
      * @returns the resulting settings
      */
-    searchForConfig(searchFrom: URL | string | undefined, pnpSettings?: PnPSettingsOptional): Promise<CSpellSettingsI | undefined>;
+    searchForConfig(searchFrom: URL | string | undefined, options?: SearchForConfigOptions): Promise<CSpellSettingsI | undefined>;
     resolveConfigFileLocation(filenameOrURL: string | URL, relativeTo?: string | URL): Promise<URL | undefined>;
     getGlobalSettingsAsync(): Promise<CSpellSettingsI>;
     /**
@@ -405,36 +441,6 @@ declare function loadPnP(pnpSettings: PnPSettingsOptional, searchFrom: URL): Pro
 declare function createConfigLoader(fs?: VFileSystem): IConfigLoader;
 
 declare const defaultConfigFilenames: readonly string[];
-
-/**
- *
- * @param searchFrom the directory / file to start searching from.
- * @param pnpSettings - related to Using Yarn PNP.
- * @returns the resulting settings
- */
-declare function searchForConfig(searchFrom: URL | string | undefined, pnpSettings?: PnPSettingsOptional): Promise<CSpellSettingsI | undefined>;
-/**
- * Load a CSpell configuration files.
- * @param file - path or package reference to load.
- * @param pnpSettings - PnP settings
- * @returns normalized CSpellSettings
- */
-declare function loadConfig(file: string, pnpSettings?: PnPSettingsOptional): Promise<CSpellSettingsI>;
-declare function readConfigFile(filename: string | URL, relativeTo?: string | URL): Promise<CSpellConfigFile>;
-declare function resolveConfigFileImports(configFile: CSpellConfigFile | ICSpellConfigFile): Promise<CSpellSettingsI>;
-/**
- * Might throw if the settings have not yet been loaded.
- * @deprecated use {@link getGlobalSettingsAsync} instead.
- */
-declare function getGlobalSettings(): CSpellSettingsI;
-/**
- * Loads and caches the global settings.
- * @returns - global settings
- */
-declare function getGlobalSettingsAsync(): Promise<CSpellSettingsI>;
-declare function getCachedFileSize(): number;
-declare function getDefaultConfigLoader(): IConfigLoader;
-declare function readRawSettings(filename: string | URL, relativeTo?: string | URL): Promise<CSpellSettingsWST>;
 
 declare function extractImportErrors(settings: CSpellSettingsWST): ImportFileRefWithError[];
 interface ImportFileRefWithError extends ImportFileRef {
