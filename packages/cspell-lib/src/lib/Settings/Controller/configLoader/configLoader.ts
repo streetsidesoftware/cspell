@@ -223,6 +223,7 @@ export class ConfigLoader implements IConfigLoader {
     protected globalSettings: CSpellSettingsI | undefined;
     protected cspellConfigFileReaderWriter: CSpellConfigFileReaderWriter;
     protected configSearch: ConfigSearch;
+    protected stopSearchAtCache: WeakMap<SearchForConfigFileOptions, URL[] | undefined> = new WeakMap();
 
     protected toDispose: { dispose: () => void }[] = [];
 
@@ -264,34 +265,15 @@ export class ConfigLoader implements IConfigLoader {
 
     async searchForConfigFileLocation(
         searchFrom: URL | string | undefined,
-        stopSearchAt?: StopSearchAt,
+        stopSearchAt?: URL[] | undefined,
     ): Promise<URL | undefined> {
-        const normalizeDirURL = async (input?: URL | string): Promise<URL | undefined> => {
-            if (!input) return undefined;
-            const url = toFileURL(input, cwdURL());
-            if (
-                typeof input === 'string' &&
-                !isUrlLike(input) &&
-                url.protocol === 'file:' &&
-                (await isDirectory(this.fs, url))
-            ) {
-                return addTrailingSlash(url);
-            }
-            return url;
-        };
-
-        const startURL = await normalizeDirURL(searchFrom || cwdURL());
-
-        const rawStops = stopSearchAt ? (Array.isArray(stopSearchAt) ? stopSearchAt : [stopSearchAt]) : [];
-
-        const stopURLs = (await Promise.all(rawStops.map(normalizeDirURL))).filter((u): u is URL => u !== undefined);
-
-        return this.configSearch.searchForConfig(startURL!, stopURLs);
+        const searchFromURL = (await this.#normalizeDirURL(searchFrom)) || cwdURL();
+        return this.configSearch.searchForConfig(searchFromURL, stopSearchAt);
     }
 
     async searchForConfigFile(
         searchFrom: URL | string | undefined,
-        stopSearchAt?: StopSearchAt,
+        stopSearchAt?: URL[],
     ): Promise<CSpellConfigFile | undefined> {
         const location = await this.searchForConfigFileLocation(searchFrom, stopSearchAt);
         if (!location) return undefined;
@@ -309,7 +291,8 @@ export class ConfigLoader implements IConfigLoader {
         searchFrom: URL | string | undefined,
         options?: SearchForConfigOptions,
     ): Promise<CSpellSettingsI | undefined> {
-        const configFile = await this.searchForConfigFile(searchFrom, options?.stopSearchAt);
+        const stopAt = await this.#extractStopSearchAtURLs(options);
+        const configFile = await this.searchForConfigFile(searchFrom, stopAt);
         if (!configFile) return undefined;
 
         return this.mergeConfigFileWithImports(configFile, options);
@@ -637,6 +620,38 @@ export class ConfigLoader implements IConfigLoader {
         this.clearCachedSettingsFiles();
         this.configSearch = new ConfigSearch(searchPlaces, isTrusted ? trustedSearch : unTrustedSearch, this.fs);
         this.cspellConfigFileReaderWriter.setUntrustedExtensions(isTrusted ? [] : defaultJsExtensions);
+    }
+
+    async #extractStopSearchAtURLs(options: SearchForConfigOptions | undefined): Promise<URL[] | undefined> {
+        if (!options?.stopSearchAt) return undefined;
+
+        if (this.stopSearchAtCache.has(options)) {
+            return this.stopSearchAtCache.get(options);
+        }
+
+        const rawStops = Array.isArray(options.stopSearchAt) ? options.stopSearchAt : [options.stopSearchAt];
+        const stopURLs = await Promise.all(rawStops.map((s) => this.#normalizeDirURL(s)));
+
+        this.stopSearchAtCache.set(options, stopURLs);
+        return stopURLs;
+    }
+
+    async #normalizeDirURL(input: URL | string): Promise<URL>;
+    async #normalizeDirURL(input: URL | string | undefined): Promise<URL | undefined>;
+    async #normalizeDirURL(input: URL | string | undefined): Promise<URL | undefined> {
+        if (!input) return undefined;
+        const url = toFileURL(input, cwdURL());
+        if (url.pathname.endsWith('/')) return url;
+        if (input instanceof URL) return new URL('.', url);
+        if (
+            typeof input === 'string' &&
+            !isUrlLike(input) &&
+            url.protocol === 'file:' &&
+            (await isDirectory(this.fs, url))
+        ) {
+            return addTrailingSlash(url);
+        }
+        return new URL('.', url);
     }
 }
 
