@@ -1,0 +1,32 @@
+name: ' 🛝 Release Drafter Labeler'
+
+on:
+  # pull_request event is required only for autolabeler
+  pull_request:
+    # Only following types are handled by the action, but one can default to all as well
+    types: [opened, reopened, synchronize]
+  # Run on demand
+
+permissions:
+  contents: read
+
+jobs:
+  update_pr_labels:
+    permissions:
+      pull-requests: write # for release-drafter/release-drafter to add label to PR
+    runs-on: ubuntu-latest
+    steps:
+      # Drafts your next Release notes as Pull Requests are merged into "master"
+      - id: release-drafter-labeler
+        uses: release-drafter/release-drafter@b1476f6e6eb133afa41ed8589daba6dc69b4d3f5 # v5
+        # (Optional) specify config name to use, relative to .github/. Default: release-drafter.yml
+        # with:
+        #   config-name: my-config.yml
+        #   disable-autolabeler: true
+        with:
+          # See [Release Drafter is *sometimes* including unmerged PRs · Issue #917 · release-drafter/release-drafter](https://github.com/release-drafter/release-drafter/issues/917)
+          disable-releaser: true
+          disable-autolabeler: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+# cspell:ignore auto* *labeler

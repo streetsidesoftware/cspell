@@ -7,13 +7,15 @@
   "bin": {
     "update-release-please": "./update-release-please.mjs",
     "build-cspell-schema": "./build-cspell-schema.mjs",
+    "gen-release": "./gen-release.mjs",
     "update-package-json": "./update-package-json.mjs",
     "remove-zero-width-space": "./remove-zero-width-space.mjs",
     "update-contributors": "./update-contributors.mjs"
   },
   "scripts": {
     "#build:ts-json-schema-generator": "pnpm esbuild ../../../code/clones/ts-json-schema-generator/dist/index.js --bundle --outfile=lib/ts-json-schema-generator.cjs --platform=node --external:typescript",
-    "test": "echo Ok"
+    "test": "echo Ok",
+    "test:gen-release": "cd .. && node ./scripts/gen-release.mjs -t v9.1.0 -n v9.1.0 -v 9.1.0 -b \"$(cat examples/release-notes.md)\" -d ./examples/CHANGELOG.md"
   },
   "keywords": [],
   "author": "",
@@ -26,8 +28,13 @@
     "json-schema": "^0.4.0"
   },
   "dependencies": {
+    "@types/mdast": "^4.0.4",
     "globby": "^14.1.0",
+    "mdast-util-to-string": "^4.0.0",
+    "remark": "^15.0.1",
+    "remark-gfm": "^4.0.1",
     "safe-stable-stringify": "^2.5.0",
-    "ts-json-schema-generator": "^2.4.0"
+    "ts-json-schema-generator": "^2.4.0",
+    "unist-util-visit": "^5.0.0"
   }
 }
