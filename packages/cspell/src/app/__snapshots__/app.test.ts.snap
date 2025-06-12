@@ -948,7 +948,7 @@ log	test.md:11:39 - Unknown word (france)
 log
 log	test.md:12:16 - Unknown word (thier) fix: (their)
 log
-log	test.md:12:23 - Unknown word (theer)
+log	test.md:12:23 - Unknown word (theer) fix: (there)
 log
 log	test.md:12:30 - Unknown word (thnks)
 log
@@ -1036,7 +1036,7 @@ log	test.md:11:39 - Unknown word (france)
 log
 log	test.md:12:16 - Unknown word (thier) fix: (their)
 log
-log	test.md:12:23 - Unknown word (theer)
+log	test.md:12:23 - Unknown word (theer) fix: (there)
 log
 log	test.md:12:30 - Unknown word (thnks)
 log
@@ -1081,7 +1081,9 @@ log	test.md:11:21 - Unknown word (germany) fix: (Germany)
 log
 log	test.md:12:16 - Unknown word (thier) fix: (their)
 log
-error	CSpell: Files checked: 6, Issues found: 10 in 3 files.
+log	test.md:12:23 - Unknown word (theer) fix: (there)
+log
+error	CSpell: Files checked: 6, Issues found: 11 in 3 files.
 error"
 `;
 
@@ -1156,7 +1158,7 @@ log	samples/Dutch.txt:9:62 - Unknown word (Voor)
 log
 log	samples/Dutch.txt:9:67 - Unknown word (meer)
 log
-log	samples/Dutch.txt:10:4 - Unknown word (informatie)
+log	samples/Dutch.txt:10:4 - Unknown word (informatie) fix: (informative)
 log
 log	samples/Dutch.txt:11:4 - Unknown word (Auteursrechten)
 log
@@ -1276,7 +1278,7 @@ log	samples/Dutch.txt:27:63 - Unknown word (welkom)
 log
 log	samples/Dutch.txt:28:4 - Unknown word (rekeningnummer)
 log
-log	samples/Dutch.txt:28:39 - Unknown word (Stichting)
+log	samples/Dutch.txt:28:39 - Unknown word (Stichting) fix: (Stitching)
 log
 log	samples/Dutch.txt:28:62 - Unknown word (giften)
 log
@@ -1286,7 +1288,7 @@ log	samples/Dutch.txt:29:4 - Unknown word (aftrekbaar)
 log
 log	samples/Dutch.txt:29:22 - Unknown word (belasting)
 log
-log	samples/Dutch.txt:29:33 - Unknown word (Stichting)
+log	samples/Dutch.txt:29:33 - Unknown word (Stichting) fix: (Stitching)
 log
 log	samples/Dutch.txt:29:55 - Unknown word (namelijk)
 log
@@ -1302,7 +1304,7 @@ log	samples/Dutch.txt:30:46 - Unknown word (Algemeen)
 log
 log	samples/Dutch.txt:30:59 - Unknown word (Beogende)
 log
-log	samples/Dutch.txt:30:68 - Unknown word (Instelling)
+log	samples/Dutch.txt:30:68 - Unknown word (Instelling) fix: (Installing)
 log
 log	samples/Dutch.txt:32:4 - Unknown word (Meedoen)
 log
@@ -1310,7 +1312,7 @@ log	samples/Dutch.txt:32:13 - Unknown word (Iedereen)
 log
 log	samples/Dutch.txt:32:25 - Unknown word (welkom)
 log
-log	samples/Dutch.txt:32:42 - Unknown word (doen)
+log	samples/Dutch.txt:32:42 - Unknown word (doen) fix: (done, don)
 log
 log	samples/Dutch.txt:32:53 - Unknown word (fouten)
 log
@@ -1344,7 +1346,7 @@ log	samples/Dutch.txt:35:27 - Unknown word (opensource)
 log
 log	samples/Dutch.txt:35:38 - Unknown word (licenties)
 log
-log	samples/Dutch.txt:35:49 - Unknown word (Indien)
+log	samples/Dutch.txt:35:49 - Unknown word (Indien) fix: (Endian)
 log
 log	samples/Dutch.txt:35:62 - Unknown word (wenst)
 log
@@ -1422,7 +1424,7 @@ log	samples/Dutch.txt:42:53 - Unknown word (leidraad)
 log
 log	samples/Dutch.txt:42:68 - Unknown word (woordenlijst)
 log
-log	samples/Dutch.txt:43:4 - Unknown word (Indien)
+log	samples/Dutch.txt:43:4 - Unknown word (Indien) fix: (Endian)
 log
 log	samples/Dutch.txt:43:17 - Unknown word (mening)
 log
@@ -1444,7 +1446,7 @@ log	samples/Dutch.txt:44:48 - Unknown word (schriftelijk)
 log
 log	samples/Dutch.txt:45:7 - Unknown word (nemen)
 log
-log	samples/Dutch.txt:46:13 - Unknown word (Stichting)
+log	samples/Dutch.txt:46:13 - Unknown word (Stichting) fix: (Stitching)
 log
 log	samples/Dutch.txt:59:56 - Unknown word (Brouwer)
 log
@@ -1460,13 +1462,13 @@ log	samples/Dutch.txt:74:49 - Unknown word (IBAN)
 log
 log	samples/Dutch.txt:74:59 - Unknown word (RABO)
 log
-log	samples/Dutch.txt:75:4 - Unknown word (Stichting)
+log	samples/Dutch.txt:75:4 - Unknown word (Stichting) fix: (Stitching)
 log
 log	samples/Dutch.txt:77:58 - Unknown word (algemeen)
 log
 log	samples/Dutch.txt:77:71 - Unknown word (beogende)
 log
-log	samples/Dutch.txt:78:4 - Unknown word (instelling)
+log	samples/Dutch.txt:78:4 - Unknown word (instelling) fix: (installing)
 log
 log	samples/Dutch.txt:78:18 - Unknown word (ANBI)
 log
@@ -1494,7 +1496,7 @@ café - en-common-misspelli* node_modules/@cspell/…/dict/dict-en.yaml
 café * en-gb                node_modules/@cspell/dict-en-gb-mit/en_GB.trie.gz
 café - filetypes*           node_modules/@cspell/dict-filetypes/filetypes.txt.gz
 café - public-licenses*     node_modules/@cspell/…/public-licenses.txt.gz
-café - software-term-sugge* node_modules/@cspell/…/cspell-corrections.yaml
+café - software-term-sugge* node_modules/@cspell/…/dict/cspell-corrections.yaml
 café - software-tools*      node_modules/@cspell/…/dict/software-tools.txt
 café - softwareTerms*       node_modules/@cspell/…/dict/softwareTerms.txt
 café - web-services*        node_modules/@cspell/…/dict/webServices.txt
@@ -1519,7 +1521,7 @@ winkelstraat - en_us*               node_modules/…/dict-en_us/en_US.trie.gz
 winkelstraat - en-common-misspelli* node_modules/@cspell/…/dict/dict-en.yaml
 winkelstraat - filetypes*           node_modules/@cspell/…/filetypes.txt.gz
 winkelstraat - public-licenses*     node_modules/…/public-licenses.txt.gz
-winkelstraat - software-term-sugge* node_modules/…/cspell-corrections.yaml
+winkelstraat - software-term-sugge* node_modules/…/dict/cspell-corrections.yaml
 winkelstraat - software-tools*      node_modules/…/dict/software-tools.txt
 winkelstraat - softwareTerms*       node_modules/…/dict/softwareTerms.txt
 winkelstraat - web-services*        node_modules/@cspell/…/dict/webServices.txt
@@ -1544,7 +1546,7 @@ winkelstraat - en_us*               node_modules/…/dict-en_us/en_US.trie.gz
 winkelstraat - en-common-misspelli* node_modules/@cspell/…/dict/dict-en.yaml
 winkelstraat - filetypes*           node_modules/@cspell/…/filetypes.txt.gz
 winkelstraat - public-licenses*     node_modules/…/public-licenses.txt.gz
-winkelstraat - software-term-sugge* node_modules/…/cspell-corrections.yaml
+winkelstraat - software-term-sugge* node_modules/…/dict/cspell-corrections.yaml
 winkelstraat - software-tools*      node_modules/…/dict/software-tools.txt
 winkelstraat - softwareTerms*       node_modules/…/dict/softwareTerms.txt
 winkelstraat - web-services*        node_modules/@cspell/…/dict/webServices.txt
@@ -1572,7 +1574,7 @@ flavour * en-gb                node_modules/@cspell/dict-en-gb-mit/en_GB.trie.gz
 flavour - filetypes*           node_modules/…/dict-filetypes/filetypes.txt.gz
 flavour ! forbidden-words*     samples/forbidden-words.txt
 flavour - public-licenses*     node_modules/@cspell/…/public-licenses.txt.gz
-flavour - software-term-sugge* node_modules/@cspell/…/cspell-corrections.yaml
+flavour - software-term-sugge* node_modules/…/dict/cspell-corrections.yaml
 flavour - software-tools*      node_modules/@cspell/…/dict/software-tools.txt
 flavour - softwareTerms*       node_modules/@cspell/…/dict/softwareTerms.txt
 flavour - web-services*        node_modules/@cspell/…/dict/webServices.txt
@@ -1600,7 +1602,7 @@ hello - filetypes*           node_modules/…/dict-filetypes/filetypes.txt.gz
 hello * golang               node_modules/@cspell/dict-golang/dict/go.txt
 hello * node                 node_modules/@cspell/dict-node/dict/node.txt
 hello - public-licenses*     node_modules/@cspell/…/public-licenses.txt.gz
-hello - software-term-sugge* node_modules/@cspell/…/cspell-corrections.yaml
+hello - software-term-sugge* node_modules/@cspell/…/dict/cspell-corrections.yaml
 hello - software-tools*      node_modules/@cspell/…/dict/software-tools.txt
 hello - softwareTerms*       node_modules/@cspell/…/dict/softwareTerms.txt
 hello - web-services*        node_modules/@cspell/…/dict/webServices.txt
@@ -1629,7 +1631,7 @@ hello - filetypes*           node_modules/…/dict-filetypes/filetypes.txt.gz
 hello * golang               node_modules/@cspell/dict-golang/dict/go.txt
 hello * node                 node_modules/@cspell/dict-node/dict/node.txt
 hello - public-licenses*     node_modules/@cspell/…/public-licenses.txt.gz
-hello - software-term-sugge* node_modules/@cspell/…/cspell-corrections.yaml
+hello - software-term-sugge* node_modules/@cspell/…/dict/cspell-corrections.yaml
 hello - software-tools*      node_modules/@cspell/…/dict/software-tools.txt
 hello - softwareTerms*       node_modules/@cspell/…/dict/softwareTerms.txt
 hello - web-services*        node_modules/@cspell/…/dict/webServices.txt
@@ -1695,7 +1697,7 @@ hello * golang               node_modules/@cspell/dict-golang/dict/go.txt
 hello - ignore words*        ../../cspell-ignore-words.txt
 hello * node                 node_modules/@cspell/dict-node/dict/node.txt
 hello - public-licenses*     node_modules/@cspell/…/public-licenses.txt.gz
-hello - software-term-sugge* node_modules/@cspell/…/cspell-corrections.yaml
+hello - software-term-sugge* node_modules/@cspell/…/dict/cspell-corrections.yaml
 hello - software-tools*      node_modules/@cspell/…/dict/software-tools.txt
 hello - softwareTerms*       node_modules/@cspell/…/dict/softwareTerms.txt
 hello - web-services*        node_modules/@cspell/…/dict/webServices.txt
@@ -1720,7 +1722,7 @@ notinanydictionaryx - en_us*               node_modules/@cspell/…/en_US.trie.g
 notinanydictionaryx - en-common-misspelli* node_modules/…/dict/dict-en.yaml
 notinanydictionaryx - filetypes*           node_modules/…/filetypes.txt.gz
 notinanydictionaryx - public-licenses*     node_modules/…/public-licenses.txt.gz
-notinanydictionaryx - software-term-sugge* …/cspell-corrections.yaml
+notinanydictionaryx - software-term-sugge* …/dict/cspell-corrections.yaml
 notinanydictionaryx - software-tools*      node_modules/…/software-tools.txt
 notinanydictionaryx - softwareTerms*       node_modules/…/dict/softwareTerms.txt
 notinanydictionaryx - web-services*        node_modules/…/dict/webServices.txt
@@ -1886,7 +1888,7 @@ log	text.txt:1:14 - Unknown word (fulll)
 log
 log	text.txt:1:23 - Unknown word (errrorrrs)
 log
-log	text.txt:3:4 - Unknown word (hass)
+log	text.txt:3:4 - Unknown word (hass) fix: (hash)
 log
 log	text.txt:3:9 - Unknown word (someissues)
 log
@@ -1984,7 +1986,7 @@ samples/Dutch.txt:9:62 - Unknown word (Voor)
 
 samples/Dutch.txt:9:67 - Unknown word (meer)
 
-samples/Dutch.txt:10:4 - Unknown word (informatie)
+samples/Dutch.txt:10:4 - Unknown word (informatie) fix: (informative)
 
 samples/Dutch.txt:11:4 - Unknown word (Auteursrechten)
 
@@ -2104,7 +2106,7 @@ samples/Dutch.txt:27:63 - Unknown word (welkom)
 
 samples/Dutch.txt:28:4 - Unknown word (rekeningnummer)
 
-samples/Dutch.txt:28:39 - Unknown word (Stichting)
+samples/Dutch.txt:28:39 - Unknown word (Stichting) fix: (Stitching)
 
 samples/Dutch.txt:28:62 - Unknown word (giften)
 
@@ -2114,7 +2116,7 @@ samples/Dutch.txt:29:4 - Unknown word (aftrekbaar)
 
 samples/Dutch.txt:29:22 - Unknown word (belasting)
 
-samples/Dutch.txt:29:33 - Unknown word (Stichting)
+samples/Dutch.txt:29:33 - Unknown word (Stichting) fix: (Stitching)
 
 samples/Dutch.txt:29:55 - Unknown word (namelijk)
 
@@ -2130,7 +2132,7 @@ samples/Dutch.txt:30:46 - Unknown word (Algemeen)
 
 samples/Dutch.txt:30:59 - Unknown word (Beogende)
 
-samples/Dutch.txt:30:68 - Unknown word (Instelling)
+samples/Dutch.txt:30:68 - Unknown word (Instelling) fix: (Installing)
 
 samples/Dutch.txt:32:4 - Unknown word (Meedoen)
 
@@ -2138,7 +2140,7 @@ samples/Dutch.txt:32:13 - Unknown word (Iedereen)
 
 samples/Dutch.txt:32:25 - Unknown word (welkom)
 
-samples/Dutch.txt:32:42 - Unknown word (doen)
+samples/Dutch.txt:32:42 - Unknown word (doen) fix: (done, don)
 
 samples/Dutch.txt:32:53 - Unknown word (fouten)
 
@@ -2172,7 +2174,7 @@ samples/Dutch.txt:35:27 - Unknown word (opensource)
 
 samples/Dutch.txt:35:38 - Unknown word (licenties)
 
-samples/Dutch.txt:35:49 - Unknown word (Indien)
+samples/Dutch.txt:35:49 - Unknown word (Indien) fix: (Endian)
 
 samples/Dutch.txt:35:62 - Unknown word (wenst)
 
@@ -2250,7 +2252,7 @@ samples/Dutch.txt:42:53 - Unknown word (leidraad)
 
 samples/Dutch.txt:42:68 - Unknown word (woordenlijst)
 
-samples/Dutch.txt:43:4 - Unknown word (Indien)
+samples/Dutch.txt:43:4 - Unknown word (Indien) fix: (Endian)
 
 samples/Dutch.txt:43:17 - Unknown word (mening)
 
@@ -2272,7 +2274,7 @@ samples/Dutch.txt:44:48 - Unknown word (schriftelijk)
 
 samples/Dutch.txt:45:7 - Unknown word (nemen)
 
-samples/Dutch.txt:46:13 - Unknown word (Stichting)
+samples/Dutch.txt:46:13 - Unknown word (Stichting) fix: (Stitching)
 
 samples/Dutch.txt:59:56 - Unknown word (Brouwer)
 
@@ -2288,13 +2290,13 @@ samples/Dutch.txt:74:49 - Unknown word (IBAN)
 
 samples/Dutch.txt:74:59 - Unknown word (RABO)
 
-samples/Dutch.txt:75:4 - Unknown word (Stichting)
+samples/Dutch.txt:75:4 - Unknown word (Stichting) fix: (Stitching)
 
 samples/Dutch.txt:77:58 - Unknown word (algemeen)
 
 samples/Dutch.txt:77:71 - Unknown word (beogende)
 
-samples/Dutch.txt:78:4 - Unknown word (instelling)
+samples/Dutch.txt:78:4 - Unknown word (instelling) fix: (installing)
 
 samples/Dutch.txt:78:18 - Unknown word (ANBI)
 "
@@ -3153,7 +3155,7 @@ log	samples/Dutch.txt:9:62 - Unknown word (Voor)
 log
 log	samples/Dutch.txt:9:67 - Unknown word (meer)
 log
-log	samples/Dutch.txt:10:4 - Unknown word (informatie)
+log	samples/Dutch.txt:10:4 - Unknown word (informatie) fix: (informative)
 log
 log	samples/Dutch.txt:11:4 - Unknown word (Auteursrechten)
 log
@@ -3273,7 +3275,7 @@ log	samples/Dutch.txt:27:63 - Unknown word (welkom)
 log
 log	samples/Dutch.txt:28:4 - Unknown word (rekeningnummer)
 log
-log	samples/Dutch.txt:28:39 - Unknown word (Stichting)
+log	samples/Dutch.txt:28:39 - Unknown word (Stichting) fix: (Stitching)
 log
 log	samples/Dutch.txt:28:62 - Unknown word (giften)
 log
@@ -3283,7 +3285,7 @@ log	samples/Dutch.txt:29:4 - Unknown word (aftrekbaar)
 log
 log	samples/Dutch.txt:29:22 - Unknown word (belasting)
 log
-log	samples/Dutch.txt:29:33 - Unknown word (Stichting)
+log	samples/Dutch.txt:29:33 - Unknown word (Stichting) fix: (Stitching)
 log
 log	samples/Dutch.txt:29:55 - Unknown word (namelijk)
 log
@@ -3299,7 +3301,7 @@ log	samples/Dutch.txt:30:46 - Unknown word (Algemeen)
 log
 log	samples/Dutch.txt:30:59 - Unknown word (Beogende)
 log
-log	samples/Dutch.txt:30:68 - Unknown word (Instelling)
+log	samples/Dutch.txt:30:68 - Unknown word (Instelling) fix: (Installing)
 log
 log	samples/Dutch.txt:32:4 - Unknown word (Meedoen)
 log
@@ -3307,7 +3309,7 @@ log	samples/Dutch.txt:32:13 - Unknown word (Iedereen)
 log
 log	samples/Dutch.txt:32:25 - Unknown word (welkom)
 log
-log	samples/Dutch.txt:32:42 - Unknown word (doen)
+log	samples/Dutch.txt:32:42 - Unknown word (doen) fix: (done, don)
 log
 log	samples/Dutch.txt:32:53 - Unknown word (fouten)
 log
@@ -3341,7 +3343,7 @@ log	samples/Dutch.txt:35:27 - Unknown word (opensource)
 log
 log	samples/Dutch.txt:35:38 - Unknown word (licenties)
 log
-log	samples/Dutch.txt:35:49 - Unknown word (Indien)
+log	samples/Dutch.txt:35:49 - Unknown word (Indien) fix: (Endian)
 log
 log	samples/Dutch.txt:35:62 - Unknown word (wenst)
 log
@@ -3419,7 +3421,7 @@ log	samples/Dutch.txt:42:53 - Unknown word (leidraad)
 log
 log	samples/Dutch.txt:42:68 - Unknown word (woordenlijst)
 log
-log	samples/Dutch.txt:43:4 - Unknown word (Indien)
+log	samples/Dutch.txt:43:4 - Unknown word (Indien) fix: (Endian)
 log
 log	samples/Dutch.txt:43:17 - Unknown word (mening)
 log
@@ -3441,7 +3443,7 @@ log	samples/Dutch.txt:44:48 - Unknown word (schriftelijk)
 log
 log	samples/Dutch.txt:45:7 - Unknown word (nemen)
 log
-log	samples/Dutch.txt:46:13 - Unknown word (Stichting)
+log	samples/Dutch.txt:46:13 - Unknown word (Stichting) fix: (Stitching)
 log
 log	samples/Dutch.txt:59:56 - Unknown word (Brouwer)
 log
@@ -3457,13 +3459,13 @@ log	samples/Dutch.txt:74:49 - Unknown word (IBAN)
 log
 log	samples/Dutch.txt:74:59 - Unknown word (RABO)
 log
-log	samples/Dutch.txt:75:4 - Unknown word (Stichting)
+log	samples/Dutch.txt:75:4 - Unknown word (Stichting) fix: (Stitching)
 log
 log	samples/Dutch.txt:77:58 - Unknown word (algemeen)
 log
 log	samples/Dutch.txt:77:71 - Unknown word (beogende)
 log
-log	samples/Dutch.txt:78:4 - Unknown word (instelling)
+log	samples/Dutch.txt:78:4 - Unknown word (instelling) fix: (installing)
 log
 log	samples/Dutch.txt:78:18 - Unknown word (ANBI)
 log
@@ -4697,7 +4699,7 @@ café - en-common-misspelli* node_modules/@cspell/…/dict/dict-en.yaml
 café * en-gb                node_modules/@cspell/dict-en-gb-mit/en_GB.trie.gz
 café - filetypes*           node_modules/@cspell/dict-filetypes/filetypes.txt.gz
 café - public-licenses*     node_modules/@cspell/…/public-licenses.txt.gz
-café - software-term-sugge* node_modules/@cspell/…/cspell-corrections.yaml
+café - software-term-sugge* node_modules/@cspell/…/dict/cspell-corrections.yaml
 café - software-tools*      node_modules/@cspell/…/dict/software-tools.txt
 café - softwareTerms*       node_modules/@cspell/…/dict/softwareTerms.txt
 café - web-services*        node_modules/@cspell/…/dict/webServices.txt
@@ -4775,7 +4777,7 @@ hello - ruby                 node_modules/@cspell/dict-ruby/dict/ruby.txt
 hello - rust                 node_modules/@cspell/dict-rust/dict/rust.txt
 hello - scala                node_modules/@cspell/dict-scala/dict/scala.txt
 hello - shellscript          node_modules/@cspell/…/dict/shell-all-words.txt
-hello - software-term-sugge* node_modules/@cspell/…/cspell-corrections.yaml
+hello - software-term-sugge* node_modules/@cspell/…/dict/cspell-corrections.yaml
 hello - software-tools*      node_modules/@cspell/…/dict/software-tools.txt
 hello - softwareTerms*       node_modules/@cspell/…/dict/softwareTerms.txt
 hello - sql                  node_modules/@cspell/dict-sql/sql.txt.gz
@@ -4809,7 +4811,7 @@ exports[`Validate cli > app trace 'trace hello --color' run with [ 'trace', 'hel
 [32m…     … [38;5;179mgolang [3…             [37mnode_modules/@cspell/dict-golang/dict/go.txt[39m
 [32m…     … [38;5;179mnode [39m                [37mnode_modules/@cspell/dict-node/dict/node.txt[39m
 [32m…     … [93mpublic-licenses…     [37mnode_modules/@cspell/…/public-licenses.txt.gz[39m
-[32m…     … [93msoftware-term-s…     [37mnode_modules/@cspell/…/cspell-corrections.yaml[39m
+[32m…     … [93msoftware-term-s…     [37mnode_modules/@cspell/…/dict/cspell-corrections.yaml[39m
 [32m…     … [93msoftware-tools*…     [37mnode_modules/@cspell/…/dict/software-tools.txt[39m
 [32m…     … [93msoftwareTerms*[…     [37mnode_modules/@cspell/…/dict/softwareTerms.txt[39m
 [32m…     … [93mweb-services*[3…       [37mnode_modules/@cspell/…/dict/webServices.txt[39m
@@ -4838,7 +4840,7 @@ hello - filetypes*           node_modules/…/dict-filetypes/filetypes.txt.gz
 hello * golang               node_modules/@cspell/dict-golang/dict/go.txt
 hello * node                 node_modules/@cspell/dict-node/dict/node.txt
 hello - public-licenses*     node_modules/@cspell/…/public-licenses.txt.gz
-hello - software-term-sugge* node_modules/@cspell/…/cspell-corrections.yaml
+hello - software-term-sugge* node_modules/@cspell/…/dict/cspell-corrections.yaml
 hello - software-tools*      node_modules/@cspell/…/dict/software-tools.txt
 hello - softwareTerms*       node_modules/@cspell/…/dict/softwareTerms.txt
 hello - web-services*        node_modules/@cspell/…/dict/webServices.txt
@@ -4880,7 +4882,7 @@ hello - filetypes*           node_modules/…/dict-filetypes/filetypes.txt.gz
 hello * golang               node_modules/@cspell/dict-golang/dict/go.txt
 hello * node                 node_modules/@cspell/dict-node/dict/node.txt
 hello - public-licenses*     node_modules/@cspell/…/public-licenses.txt.gz
-hello - software-term-sugge* node_modules/@cspell/…/cspell-corrections.yaml
+hello - software-term-sugge* node_modules/@cspell/…/dict/cspell-corrections.yaml
 hello - software-tools*      node_modules/@cspell/…/dict/software-tools.txt
 hello - softwareTerms*       node_modules/@cspell/…/dict/softwareTerms.txt
 hello - web-services*        node_modules/@cspell/…/dict/webServices.txt
