@@ -346,3 +346,5 @@ It will create a `cspell.config.yml` file.
 ---
 
 </details>
+
+<!-- cspell:ignore ktaranov lspconfig nvim webdeveric -->
