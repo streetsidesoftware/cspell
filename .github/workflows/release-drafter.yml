@@ -5,47 +5,36 @@ on:
     # branches to consider in the event; optional, defaults to all
     branches:
       - main
-  # pull_request event is required only for autolabeler
-  pull_request:
-    # Only following types are handled by the action, but one can default to all as well
-    types: [opened, reopened, synchronize]
   # Run on demand
   workflow_dispatch:
 
 permissions:
   contents: read
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # The branch to create the PR against
+  REF_BRANCH: main
+  # The branch to create the PR from
+  NEW_BRANCH: "release-draft"
+  # Node.js version to use in the workflow
+  NODE_VERSION: '22.x'
+
 jobs:
-  update_pr_labels:
-    if: github.ref != 'refs/heads/main'
-    permissions:
-      pull-requests: write # for release-drafter/release-drafter to add label to PR
-    runs-on: ubuntu-latest
-    steps:
-      # (Optional) GitHub Enterprise requires GHE_HOST variable set
-      #- name: Set GHE_HOST
-      #  run: |
-      #    echo "GHE_HOST=${GITHUB_SERVER_URL##https:\/\/}" >> $GITHUB_ENV
-
-      # Drafts your next Release notes as Pull Requests are merged into "master"
-      - id: release-drafter-labeler
-        uses: release-drafter/release-drafter@b1476f6e6eb133afa41ed8589daba6dc69b4d3f5 # v5
-        # (Optional) specify config name to use, relative to .github/. Default: release-drafter.yml
-        # with:
-        #   config-name: my-config.yml
-        #   disable-autolabeler: true
-        with:
-          # See [Release Drafter is *sometimes* including unmerged PRs · Issue #917 · release-drafter/release-drafter](https://github.com/release-drafter/release-drafter/issues/917)
-          disable-releaser: true
-          disable-autolabeler: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
   update_release_draft:
-    if: github.ref == 'refs/heads/main'
     permissions:
       contents: write # needed by release-drafter/release-drafter to write to the draft release.
     runs-on: ubuntu-latest
+    outputs:
+      "tag_name": ${{ steps.release-drafter.outputs.tag_name }}
+      "name": ${{ steps.release-drafter.outputs.name }}
+      "resolved_version": ${{ steps.release-drafter.outputs.resolved_version }}
+      "major_version": ${{ steps.release-drafter.outputs.major_version }}
+      "minor_version": ${{ steps.release-drafter.outputs.minor_version }}
+      "body": ${{ steps.release-drafter.outputs.body }}
     steps:
       # (Optional) GitHub Enterprise requires GHE_HOST variable set
       #- name: Set GHE_HOST
@@ -63,16 +52,58 @@ jobs:
           # See [Release Drafter is *sometimes* including unmerged PRs · Issue #917 · release-drafter/release-drafter](https://github.com/release-drafter/release-drafter/issues/917)
           disable-releaser: false
           disable-autolabeler: true
+          commitish: ${{ env.REF_BRANCH }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Result
+      - name: Release Drafter Result
         uses: streetsidesoftware/actions/public/summary@v1
         with:
           text: |
             # Release Drafter Results
             ```
             ${{ toJSON(steps.release-drafter.outputs) }}
-            ```
 
-# cspell:ignore auto* *labeler
+  create-pr:
+    if: "${{ !startsWith(github.workflow.event.push.message, 'chore: Prepare Release') }}"
+    runs-on: ubuntu-latest
+    needs:
+      - update_release_draft
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup
+        uses: ./.github/actions/setup
+        with:
+          node-version: ${{ env.NODE_VERSION}}
+
+      - name: Update Change Log
+        env:
+              'GITHUB_RELEASE_TAG': ${{ needs.update_release_draft.outputs.tag_name }}
+              'GITHUB_RELEASE_BODY': ${{ needs.update_release_draft.outputs.body }}
+              'GITHUB_RELEASE_NAME': ${{ needs.update_release_draft.outputs.name }}
+              'GITHUB_RELEASE_VERSION': ${{ needs.update_release_draft.outputs.resolved_version }}
+
+        run: |
+          pnpm run update-changelog
+
+      - name: PR Body
+        id: body
+        uses: streetsidesoftware/actions/public/pr-body@v1
+        with:
+          title: Release ${{ needs.update_release_draft.outputs.name }}
+
+      - name: PR
+        uses: streetsidesoftware/actions/.github/actions/pr@v1
+        with:
+          commit-message: 'chore: Prepare Release ${{ needs.update_release_draft.outputs.name }}'
+          branch: ${{ env.NEW_BRANCH }}
+          base: ${{ env.REF_BRANCH }}
+          title: 'chore: Prepare Release ${{ needs.update_release_draft.outputs.name }}'
+          body: ${{ steps.body.outputs.body }}
+          app_id: ${{ secrets.AUTOMATION_APP_ID }}
+          app_private_key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
+
+
+# cspell:ignore auto* *labeler commitish
