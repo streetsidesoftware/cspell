@@ -19,7 +19,7 @@ env:
   # The branch to create the PR against
   REF_BRANCH: main
   # The branch to create the PR from
-  NEW_BRANCH: "release-draft"
+  NEW_BRANCH: 'release-draft'
   # Node.js version to use in the workflow
   NODE_VERSION: '22.x'
 
@@ -29,12 +29,12 @@ jobs:
       contents: write # needed by release-drafter/release-drafter to write to the draft release.
     runs-on: ubuntu-latest
     outputs:
-      "tag_name": ${{ steps.release-drafter.outputs.tag_name }}
-      "name": ${{ steps.release-drafter.outputs.name }}
-      "resolved_version": ${{ steps.release-drafter.outputs.resolved_version }}
-      "major_version": ${{ steps.release-drafter.outputs.major_version }}
-      "minor_version": ${{ steps.release-drafter.outputs.minor_version }}
-      "body": ${{ steps.release-drafter.outputs.body }}
+      'tag_name': ${{ steps.release-drafter.outputs.tag_name }}
+      'name': ${{ steps.release-drafter.outputs.name }}
+      'resolved_version': ${{ steps.release-drafter.outputs.resolved_version }}
+      'major_version': ${{ steps.release-drafter.outputs.major_version }}
+      'minor_version': ${{ steps.release-drafter.outputs.minor_version }}
+      'body': ${{ steps.release-drafter.outputs.body }}
     steps:
       # (Optional) GitHub Enterprise requires GHE_HOST variable set
       #- name: Set GHE_HOST
@@ -80,10 +80,10 @@ jobs:
 
       - name: Update Change Log
         env:
-              'GITHUB_RELEASE_TAG': ${{ needs.update_release_draft.outputs.tag_name }}
-              'GITHUB_RELEASE_BODY': ${{ needs.update_release_draft.outputs.body }}
-              'GITHUB_RELEASE_NAME': ${{ needs.update_release_draft.outputs.name }}
-              'GITHUB_RELEASE_VERSION': ${{ needs.update_release_draft.outputs.resolved_version }}
+          'GITHUB_RELEASE_TAG': ${{ needs.update_release_draft.outputs.tag_name }}
+          'GITHUB_RELEASE_BODY': ${{ needs.update_release_draft.outputs.body }}
+          'GITHUB_RELEASE_NAME': ${{ needs.update_release_draft.outputs.name }}
+          'GITHUB_RELEASE_VERSION': ${{ needs.update_release_draft.outputs.resolved_version }}
 
         run: |
           pnpm run update-changelog
@@ -104,6 +104,4 @@ jobs:
           body: ${{ steps.body.outputs.body }}
           app_id: ${{ secrets.AUTOMATION_APP_ID }}
           app_private_key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
-
-
 # cspell:ignore auto* *labeler commitish
