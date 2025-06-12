@@ -62,6 +62,9 @@ jobs:
   create-pr:
     if: "${{ !startsWith(github.workflow.event.push.message, 'chore: Prepare Release') }}"
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     needs:
       - update_release_draft
     steps:
