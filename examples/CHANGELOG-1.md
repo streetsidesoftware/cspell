@@ -34,7 +34,7 @@ Options:
   -h, --help                  display help for command
 ```
 
-***
+---
 
 </details>
 
@@ -45,10 +45,10 @@ Options:
 
 Add lint options:
 
-* `--dictionary` - enable a dictionary by name
-* `--disable-dictionary` - disable a dictionary by name
+- `--dictionary` - enable a dictionary by name
+- `--disable-dictionary` - disable a dictionary by name
 
-***
+---
 
 </details>
 
@@ -77,7 +77,7 @@ Options:
   -h, --help                 display help for command
 ```
 
-***
+---
 
 </details>
 
@@ -91,10 +91,10 @@ Options:
 Option: `--report`
 Choices:
 
-* `all` - report everything (default)
-* `simple` - only report issues with simple fixes.
-* `typos` - only report issues with common typos.
-* `flagged` - only report flagged issues.
+- `all` - report everything (default)
+- `simple` - only report issues with simple fixes.
+- `typos` - only report issues with common typos.
+- `flagged` - only report flagged issues.
 
 ## Reporters - add opt-in feature flag
 
@@ -124,7 +124,7 @@ interface FeaturesSupportedByReporter {
 }
 ```
 
-***
+---
 
 </details>
 
@@ -135,7 +135,7 @@ interface FeaturesSupportedByReporter {
 
 ### fix: Fix perf issue related to searching for the config. (#7483)
 
-***
+---
 
 </details>
 
@@ -144,7 +144,7 @@ interface FeaturesSupportedByReporter {
 
 ### fix: Hide `--config-search` option (#7479)
 
-***
+---
 
 </details>
 
@@ -153,7 +153,7 @@ interface FeaturesSupportedByReporter {
 
 ### refactor: `isolatedDeclarations: true` (#7459)
 
-***
+---
 
 </details>
 
@@ -162,7 +162,7 @@ interface FeaturesSupportedByReporter {
 
 ### refactor: enable isolatedDeclarations (#7456)
 
-***
+---
 
 </details>
 
@@ -171,7 +171,7 @@ interface FeaturesSupportedByReporter {
 
 ### refactor: enable isolatedDeclarations (#7452)
 
-***
+---
 
 </details>
 
@@ -186,7 +186,7 @@ Add lint option:
   --continue-on-error          Continue processing files even if there is a configuration error.
 ```
 
-***
+---
 
 </details>
 
@@ -211,7 +211,7 @@ Add options:
                               dictionary. (default: false)
 ```
 
-***
+---
 
 </details>
 
@@ -228,7 +228,7 @@ Options:
                               times.
 ```
 
-***
+---
 
 </details>
 
@@ -272,7 +272,7 @@ Options:
   -h, --help                 display help for command
 ```
 
-***
+---
 
 </details>
 
@@ -289,7 +289,7 @@ cspell init --format=yml
 
 It will create a `cspell.config.yml` file.
 
-***
+---
 
 </details>
 
@@ -298,7 +298,7 @@ It will create a `cspell.config.yml` file.
 
 ### fix: Only generate the context if necessary (#7388)
 
-***
+---
 
 </details>
 
@@ -307,7 +307,7 @@ It will create a `cspell.config.yml` file.
 
 ### fix: Correct the schema generator (#7395)
 
-***
+---
 
 </details>
 
@@ -339,7 +339,7 @@ It will create a `cspell.config.yml` file.
  13 files changed, 95 insertions(+), 99 deletions(-)
 ```
 
-***
+---
 
 </details>
 
@@ -350,7 +350,7 @@ It will create a `cspell.config.yml` file.
 
 ### fix: Correct the schema generator (#7395)
 
-***
+---
 
 </details>
 
