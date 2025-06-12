@@ -6,7 +6,6 @@
 <summary>feat: Add command `dictionaries` (#7445)</summary>
 
 ### feat: Add command `dictionaries` (#7445)
-
 Add new `dictionaries` command to the cli
 
 ```
@@ -27,6 +26,7 @@ Options:
   -h, --help                  display help for command
 ```
 
+
 ---
 
 </details>
@@ -35,7 +35,6 @@ Options:
 <summary>feat: Add lint option `--dictionary` (#7441)</summary>
 
 ### feat: Add lint option `--dictionary` (#7441)
-
 Add lint options:
 
 - `--dictionary` - enable a dictionary by name
@@ -49,7 +48,6 @@ Add lint options:
 <summary>feat: Add init command to command-line. (#7414)</summary>
 
 ### feat: Add init command to command-line. (#7414)
-
 New command:
 
 ```
@@ -70,6 +68,7 @@ Options:
   -h, --help                 display help for command
 ```
 
+
 ---
 
 </details>
@@ -78,12 +77,10 @@ Options:
 <summary>feat: Add command line option to set reporting level (#7380)</summary>
 
 ### feat: Add command line option to set reporting level (#7380)
-
 ## Command Line Option: `--report`
 
 Option: `--report`
 Choices:
-
 - `all` - report everything (default)
 - `simple` - only report issues with simple fixes.
 - `typos` - only report issues with common typos.
@@ -100,20 +97,20 @@ Features:
  * Allows the reporter to advertise which features it supports.
  */
 interface FeaturesSupportedByReporter {
-  /**
-   * The reporter supports the {@link ReportingConfiguration.unknownWords} option and understands
-   * how to filter issues based upon {@link Issue.isFlagged}, {@link Issue.hasSimpleSuggestions} and {@link Issue.hasPreferredSuggestions}.
-   * - `true` - The `reporter.issue` method will be called for all spelling issues and it is expected to handle .
-   * - `false | undefined` - the unknown words will be filtered out based upon the `unknownWords` setting before being passed to the reporter.
-   */
-  unknownWords?: boolean | undefined;
+    /**
+     * The reporter supports the {@link ReportingConfiguration.unknownWords} option and understands
+     * how to filter issues based upon {@link Issue.isFlagged}, {@link Issue.hasSimpleSuggestions} and {@link Issue.hasPreferredSuggestions}.
+     * - `true` - The `reporter.issue` method will be called for all spelling issues and it is expected to handle .
+     * - `false | undefined` - the unknown words will be filtered out based upon the `unknownWords` setting before being passed to the reporter.
+     */
+    unknownWords?: boolean | undefined;
 
-  /**
-   * The reporter supports the {@link Issue.issueType} option.
-   * - `true` - the reporter will be called with all issues types.
-   * - `false | undefined` - only {@link IssueType.spelling} issues will be passed to the reporter.
-   */
-  issueType?: boolean | undefined;
+    /**
+     * The reporter supports the {@link Issue.issueType} option.
+     * - `true` - the reporter will be called with all issues types.
+     * - `false | undefined` - only {@link IssueType.spelling} issues will be passed to the reporter.
+     */
+    issueType?: boolean | undefined;
 }
 ```
 
@@ -121,12 +118,14 @@ interface FeaturesSupportedByReporter {
 
 </details>
 
+
 ## Fixes
 
 <details>
 <summary>fix: Fix perf issue related to searching for the config. (#7483)</summary>
 
 ### fix: Fix perf issue related to searching for the config. (#7483)
+
 
 ---
 
@@ -137,6 +136,7 @@ interface FeaturesSupportedByReporter {
 
 ### fix: Hide `--config-search` option (#7479)
 
+
 ---
 
 </details>
@@ -145,6 +145,7 @@ interface FeaturesSupportedByReporter {
 <summary>refactor: `isolatedDeclarations: true` (#7459)</summary>
 
 ### refactor: `isolatedDeclarations: true` (#7459)
+
 
 ---
 
@@ -155,6 +156,7 @@ interface FeaturesSupportedByReporter {
 
 ### refactor: enable isolatedDeclarations (#7456)
 
+
 ---
 
 </details>
@@ -164,6 +166,7 @@ interface FeaturesSupportedByReporter {
 
 ### refactor: enable isolatedDeclarations (#7452)
 
+
 ---
 
 </details>
@@ -172,12 +175,12 @@ interface FeaturesSupportedByReporter {
 <summary>fix: Add option to continue on error (#7451)</summary>
 
 ### fix: Add option to continue on error (#7451)
-
 Add lint option:
 
 ```
   --continue-on-error          Continue processing files even if there is a configuration error.
 ```
+
 
 ---
 
@@ -187,9 +190,7 @@ Add lint option:
 <summary>fix: Improve dictionaries command (#7449)</summary>
 
 ### fix: Improve dictionaries command (#7449)
-
 Add options:
-
 ```
   --enabled                   Show only enabled dictionaries.
   --no-enabled                Do not show enabled dictionaries.
@@ -229,7 +230,6 @@ Options:
 <summary>fix: Add init options (#7436)</summary>
 
 ### fix: Add init options (#7436)
-
 New options:
 
 ```
@@ -241,7 +241,6 @@ New options:
 ```
 
 Help:
-
 ```
 Usage: cspell init [options]
 
@@ -273,7 +272,6 @@ Options:
 <summary>fix: Allow init of `cspell.config.yml` files (#7432)</summary>
 
 ### fix: Allow init of `cspell.config.yml` files (#7432)
-
 Add `yml` to the init command format list.
 
 ```
@@ -281,6 +279,7 @@ cspell init --format=yml
 ```
 
 It will create a `cspell.config.yml` file.
+
 
 ---
 
@@ -291,6 +290,7 @@ It will create a `cspell.config.yml` file.
 
 ### fix: Only generate the context if necessary (#7388)
 
+
 ---
 
 </details>
@@ -300,9 +300,11 @@ It will create a `cspell.config.yml` file.
 
 ### fix: Correct the schema generator (#7395)
 
+
 ---
 
 </details>
+
 
 ## Dictionary Updates
 
@@ -310,8 +312,11 @@ It will create a `cspell.config.yml` file.
 <summary>fix: Workflow Bot -- Update Dictionaries (main) (#7474)</summary>
 
 ### fix: Workflow Bot -- Update Dictionaries (main) (#7474)
-
 # Update Dictionaries (main)
+
+
+
+
 
 ## Summary
 
@@ -336,12 +341,14 @@ It will create a `cspell.config.yml` file.
 
 </details>
 
+
 ## Documentation
 
 <details>
 <summary>fix: Correct the schema generator (#7395)</summary>
 
 ### fix: Correct the schema generator (#7395)
+
 
 ---
 

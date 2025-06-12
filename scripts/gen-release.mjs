@@ -89,7 +89,7 @@ async function getFileStats(filePath) {
  */
 async function updateVersionFile(releaseData) {
     const { tag, name, version } = releaseData;
-    await fs.writeFile('release.json', JSON.stringify({ name, version, tag }, undefined, 2));
+    await fs.writeFile('release.json', JSON.stringify({ name, version, tag }, undefined, 4) + '\n', 'utf8');
 }
 
 const usage = `\
@@ -165,6 +165,7 @@ function buildReleaseNotes(releaseData) {
 function increaseHeadingDepth(tree) {
     let detailDepth = 0;
     visit(tree, (node, _index, _parent) => {
+        // console.log('%s', `${_index}. Visiting node: ${node.type}`);
         if (node.type === 'html') {
             if (node.value.includes('<details>')) {
                 detailDepth++;
@@ -189,6 +190,30 @@ function transformerIncreaseHeadings() {
 
 /**
  *
+ * @param {string} content
+ * @param {ReleaseData} releaseData
+ * @returns {Promise<string>}
+ */
+async function processChangeLogContent(content, releaseData) {
+    const result = await remark()
+        .use(remarkGfm)
+        .use(injectReleaseData, releaseData)
+        .data('settings', {
+            bullet: '-',
+            bulletOrdered: '.',
+            emphasis: '_',
+            strong: '*',
+            incrementListMarker: false,
+        })
+        .process(content);
+
+    const resultString = String(result).replaceAll(/^[*]{3}$/gm, '---');
+
+    return resultString;
+}
+
+/**
+ *
  * @param {URL} url
  * @param {ReleaseData} releaseData
  * @returns
@@ -197,8 +222,9 @@ async function processChangeLog(url, releaseData) {
     const urlOut = releaseData.debug ? new URL('CHANGELOG-1.md', url) : url;
     const content = await fs.readFile(url, 'utf8');
 
-    const result = await remark().use(remarkGfm).use(injectReleaseData, releaseData).process(content);
-    await fs.writeFile(urlOut, String(result), 'utf8');
+    const updatedChangeLog = await processChangeLogContent(content, releaseData);
+
+    await fs.writeFile(urlOut, updatedChangeLog, 'utf8');
 }
 
 async function processRelease() {

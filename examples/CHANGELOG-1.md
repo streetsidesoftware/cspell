@@ -107,20 +107,20 @@ Features:
  * Allows the reporter to advertise which features it supports.
  */
 interface FeaturesSupportedByReporter {
-  /**
-   * The reporter supports the {@link ReportingConfiguration.unknownWords} option and understands
-   * how to filter issues based upon {@link Issue.isFlagged}, {@link Issue.hasSimpleSuggestions} and {@link Issue.hasPreferredSuggestions}.
-   * - `true` - The `reporter.issue` method will be called for all spelling issues and it is expected to handle .
-   * - `false | undefined` - the unknown words will be filtered out based upon the `unknownWords` setting before being passed to the reporter.
-   */
-  unknownWords?: boolean | undefined;
+    /**
+     * The reporter supports the {@link ReportingConfiguration.unknownWords} option and understands
+     * how to filter issues based upon {@link Issue.isFlagged}, {@link Issue.hasSimpleSuggestions} and {@link Issue.hasPreferredSuggestions}.
+     * - `true` - The `reporter.issue` method will be called for all spelling issues and it is expected to handle .
+     * - `false | undefined` - the unknown words will be filtered out based upon the `unknownWords` setting before being passed to the reporter.
+     */
+    unknownWords?: boolean | undefined;
 
-  /**
-   * The reporter supports the {@link Issue.issueType} option.
-   * - `true` - the reporter will be called with all issues types.
-   * - `false | undefined` - only {@link IssueType.spelling} issues will be passed to the reporter.
-   */
-  issueType?: boolean | undefined;
+    /**
+     * The reporter supports the {@link Issue.issueType} option.
+     * - `true` - the reporter will be called with all issues types.
+     * - `false | undefined` - only {@link IssueType.spelling} issues will be passed to the reporter.
+     */
+    issueType?: boolean | undefined;
 }
 ```
 
@@ -353,6 +353,8 @@ It will create a `cspell.config.yml` file.
 ---
 
 </details>
+
+<!-- cspell:ignore ktaranov lspconfig nvim webdeveric -->
 
 ## 9.0.2 (2025-05-20)
 
