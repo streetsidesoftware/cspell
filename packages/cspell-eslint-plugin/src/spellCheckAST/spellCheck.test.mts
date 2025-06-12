@@ -33,7 +33,7 @@ describe('Validate spellCheck', () => {
             rangeIdx: 0,
             range: [0, text.length],
             severity: 'Unknown',
-            suggestions: undefined,
+            suggestions: [{ isPreferred: true, word: 'issue' }],
         };
         assert.deepEqual(result, { issues: [issueExpected], errors: [] });
     });

@@ -4,8 +4,8 @@ Url: https://github.com/pagekit/pagekit.git
 Args: '["-e","/app/assets/codemirror","-e","/app/system/languages","**"]'
 Summary:
   files: 741
-  filesWithIssues: 201
-  issues: 592
+  filesWithIssues: 200
+  issues: 591
   errors: 0
 Errors: []
 
@@ -19,7 +19,7 @@ issues:
   - "app/console/src/Commands/BuildCommand.php:34:24         nickic              U       '^app\\/vendor\\/nickic\\/php-parser\\/(grammar"
   - "app/console/src/Commands/BuildCommand.php:35:25         phpdocumentor       U       '^app\\/vendor\\/(phpdocumentor|phpspec|phpunit|sebastian"
   - "app/console/src/Commands/BuildCommand.php:35:39         phpspec             U       vendor\\/(phpdocumentor|phpspec|phpunit|sebastian|symfony"
-  - "app/console/src/Commands/ExtensionTranslateCommand.php:106:17       translateable       U       * Extracts translateable strings from a given"
+  - "app/console/src/Commands/ExtensionTranslateCommand.php:106:17       translateable (translatable)    U       * Extracts translateable strings from a given"
   - "app/console/src/Commands/SelfupdateCommand.php:12:7         Selfupdate      U       class SelfupdateCommand extends Command"
   - "app/installer/app/lib/output.js:10:17       bgclose     U       bgclose: false,"
   - "app/installer/app/lib/version.js:4:33           Jausions        U       original by: Philippe Jausions (http://pear.php.net"
@@ -87,7 +87,7 @@ issues:
   - "app/modules/filesystem/src/Archive/Zip.php:64:34        ZIPCLOSED       U       case \\ZipArchive::ER_ZIPCLOSED:"
   - "app/modules/filesystem/src/Archive/Zip.php:66:34        TMPOPEN         U       case \\ZipArchive::ER_TMPOPEN:"
   - "app/modules/filesystem/src/Archive/Zip.php:72:34        COMPNOTSUPP     U       case \\ZipArchive::ER_COMPNOTSUPP:"
-  - "app/modules/filesystem/src/StreamWrapper.php:140:21         underlaying     U       * Retrieve the underlaying resource."
+  - "app/modules/filesystem/src/StreamWrapper.php:140:21         underlaying (underlying)    U       * Retrieve the underlaying resource."
   - "app/modules/filter/src/FilterManager.php:11:10          addrelnofollow      U       'addrelnofollow' => 'Pagekit\\Filter"
   - "app/modules/filter/src/FilterManager.php:21:10          pregreplace         U       'pregreplace' => 'Pagekit\\Filter"
   - "app/modules/filter/src/FilterManager.php:24:10          stripnewlines       U       'stripnewlines' => 'Pagekit\\Filter"
@@ -95,8 +95,8 @@ issues:
   - "app/modules/filter/src/PregReplaceFilter.php:106:45         ADSUX       U       '/(?<modifier>[imsxeADSUXJu]+)$/', $pattern,"
   - "app/modules/filter/src/Tests/AlphaTest.php:23:33        abcabc      U       \"abc123!?) abc\" => \"abcabc\""
   - "app/modules/filter/src/Tests/StringTest.php:18:14       whateverthisis      U       \"whateverthisis\" => \"whateverthisis"
-  - "app/modules/filter/src/Tests/StripNewlinesTest.php:32:84        shouldbe    U       filter\", 'These newlines shouldbe removed bythe filter"
-  - "app/modules/filter/src/Tests/StripNewlinesTest.php:32:101       bythe       U       newlines shouldbe removed bythe filter']"
+  - "app/modules/filter/src/Tests/StripNewlinesTest.php:32:84        shouldbe (should)       U       filter\", 'These newlines shouldbe removed bythe filter"
+  - "app/modules/filter/src/Tests/StripNewlinesTest.php:32:101       bythe                   U       newlines shouldbe removed bythe filter']"
   - "app/modules/kernel/src/Controller/ControllerResolver.php:94:22          repr    U       $repr = sprintf('%s::%s()"
   - "app/modules/markdown/src/Lexer/BlockLexer.php:374:36        nooooop     U       'fences' => '/nooooop/',"
   - "app/modules/markdown/src/Lexer/InlineLexer.php:15:23        inlines     U       protected static $inlines;"
@@ -115,7 +115,7 @@ issues:
   - "app/system/app/lib/trans.js:110:8       helpfull (helpful)      U       * helpfull for message availability"
   - "app/system/app/lib/trans.js:136:33      Symfony                 U       logic comes from the Symfony2 PHP Framework."
   - "app/system/app/lib/trans.js:156:63      indice                  U       number to use to find the indice of the message"
-  - "app/system/app/lib/trans.js:217:35      litteral                U       {String} number A litteral number"
+  - "app/system/app/lib/trans.js:217:35      litteral (literal)      U       {String} number A litteral number"
   - "app/system/app/lib/trans.js:452:12      Plurar                  U       * Plurar separator."
   - "app/system/assets/images/icon-large-brush.svg:5:46          linejoin        U       stroke=\"#000000\" stroke-linejoin=\"round\" stroke-miterlimit"
   - "app/system/assets/images/icon-large-brush.svg:5:70          miterlimit      U       linejoin=\"round\" stroke-miterlimit=\"10\" d=\"M4,6\"/>"
@@ -134,7 +134,7 @@ issues:
   - "app/system/modules/finder/index.php:94:59       svgz    U       jpg,mp4,ogg,pdf,png,svgz,svg,swf'"
   - "app/system/modules/finder/src/Event/FileAccessEvent.php:95:36       imsxu       U       preg_match('/^(.{3,}?)[imsxuADU]*$/', $str, $m))"
   - "app/system/modules/info/views/info.php:118:71       Unwritable      U       text-danger\" v-else>{{ 'Unwritable' | trans }}</span><"
-  - "app/system/modules/intl/src/Loader/MoFileLoader.php:159:54      endianess       U       from stream respecting endianess."
+  - "app/system/modules/intl/src/Loader/MoFileLoader.php:159:54      endianess (endianness)      U       from stream respecting endianess."
   - "app/system/modules/intl/src/Loader/PoFileLoader.php:10:43       Tolboom     U       Copyright (c) 2012, Clemens Tolboom"
   - "app/system/modules/intl/src/Loader/PoFileLoader.php:59:11       msgctxt     U       * #| msgctxt previous-context"
   - "app/system/modules/mail/index.php:16:71         spooltransport      U       transport'], $app['swift.spooltransport']);"
@@ -161,7 +161,6 @@ issues:
   - "app/system/modules/theme/less/uikit/thumbnav.less:10:7          thumbnav    U       .hook-thumbnav() {}"
   - "app/system/modules/theme/less/uikit/uikit.less:6:16         Navs    U       // Components: Navs"
   - "app/system/modules/theme/views/template.php:18:88       preventflip     U       dropdown=\"{mode:'click', preventflip: 'y'}\">"
-  - "app/system/modules/user/src/Model/User.php:226:68       vuejs       U       email validation in vuejs"
   - "app/system/modules/widget/app/views/index.js:189:9          emptyafterfilter    U       emptyafterfilter: function (widgets)"
   - "app/system/scripts.php:23:90        autoincrement       U       true, 'length' => 10, 'autoincrement' => true]);"
   - "app/system/src/Model/NodeInterface.php:71:27        hashcode    U       Find a node by its hashcode."
