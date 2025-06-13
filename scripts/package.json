@@ -15,7 +15,9 @@
   "scripts": {
     "#build:ts-json-schema-generator": "pnpm esbuild ../../../code/clones/ts-json-schema-generator/dist/index.js --bundle --outfile=lib/ts-json-schema-generator.cjs --platform=node --external:typescript",
     "test": "echo Ok",
-    "test:gen-release": "cd .. && node ./scripts/gen-release.mjs -t v9.1.0 -n v9.1.0 -v 9.1.0 -b \"$(cat examples/release-notes.md)\" -d ./examples/CHANGELOG.md"
+    "test:gen-release": "cd .. && node ./scripts/gen-release.mjs -t v9.1.0 -n v9.1.0 -v 9.1.0 -b \"$(cat examples/release-notes.md)\" -d ./examples/CHANGELOG.md",
+    "test:gen-release-2": "cd .. && node ./scripts/gen-release.mjs -t v9.0.1 -n \"v9.0.1 Test Release\" -v 9.0.1 -b \"## Updated Release with lot of fun.\" -d ./examples/CHANGELOG.md",
+    "test:gen-release-3": "pnpm test:gen-release-2 && cd .. && node ./scripts/gen-release.mjs -t v9.0.1 -n \"v9.0.1 Updated Release\" -v 9.0.1 -b \"$(cat examples/release-notes.md)\" ./examples/CHANGELOG-1.md"
   },
   "keywords": [],
   "author": "",
