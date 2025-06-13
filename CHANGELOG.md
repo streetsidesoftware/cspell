@@ -3,17 +3,193 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## 9.0.2 (2025-05-20)
+## v9.0.2 (2025-05-20)
 
-**Note:** Version bump only for package cspell-monorepo
+### Changes
 
-## 9.0.1 (2025-05-08)
+### Fixes
 
-**Note:** Version bump only for package cspell-monorepo
+<details>
+<summary>fix: Add eslint plugin helpers (#7352)</summary>
 
-## 9.0.0 (2025-05-05)
+### fix: Add eslint plugin helpers (#7352)
 
-**Note:** Version bump only for package cspell-monorepo
+Add helper methods:
+
+- `defineCSpellPluginOptions`
+- `defineCSpellConfig`
+
+Add some examples for `supportNonStrictSearches`
+
+---
+
+</details>
+
+<details>
+<summary>fix: Make it possible to define a strict dictionary. (#7351)</summary>
+
+### fix: Make it possible to define a strict dictionary. (#7351)
+
+---
+
+</details>
+
+<details>
+<summary>fix: Correct the Hunspell Reader usage. (#7325)</summary>
+
+### fix: Correct the Hunspell Reader usage. (#7325)
+
+Add an example.
+
+---
+
+</details>
+
+### Dictionary Updates
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (#7346)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) (#7346)
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ packages/cspell-bundled-dicts/package.json |  4 ++--
+ pnpm-lock.yaml                             | 24 ++++++++++++------------
+ 2 files changed, 14 insertions(+), 14 deletions(-)
+```
+
+---
+
+</details>
+
+## v9.0.1 (2025-05-08)
+
+### Changes
+
+### Fixes
+
+<details>
+<summary>fix: Add support to add words to config and keep comments. (#7295)</summary>
+
+### fix: Add support to add words to config and keep comments. (#7295)
+
+---
+
+</details>
+
+### Dictionary Updates
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (#7306)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) (#7306)
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ .../snapshots/dart-lang/sdk/report.yaml            | 10 ++-----
+ .../snapshots/dart-lang/sdk/snapshot.txt           |  4 +--
+ .../snapshots/ktaranov/sqlserver-kit/report.yaml   |  2 +-
+ .../snapshots/vitest-dev/vitest/report.yaml        |  4 +--
+ .../snapshots/vitest-dev/vitest/snapshot.txt       |  3 +-
+ packages/cspell-bundled-dicts/package.json         |  6 ++--
+ pnpm-lock.yaml                                     | 33 +++++++++++++---------
+ 7 files changed, 29 insertions(+), 33 deletions(-)
+```
+
+---
+
+</details>
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (#7302)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) (#7302)
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ .../snapshots/AdaDoom3/AdaDoom3/report.yaml        |  3 +-
+ .../snapshots/AdaDoom3/AdaDoom3/snapshot.txt       |  3 +-
+ .../MicrosoftDocs/PowerShell-Docs/report.yaml      | 12 +++---
+ .../MicrosoftDocs/PowerShell-Docs/snapshot.txt     |  4 +-
+ .../snapshots/eslint/eslint/report.yaml            |  6 +--
+ .../snapshots/eslint/eslint/snapshot.txt           |  3 +-
+ packages/cspell-bundled-dicts/package.json         |  8 ++--
+ pnpm-lock.yaml                                     | 45 ++++++++++++----------
+ 8 files changed, 40 insertions(+), 44 deletions(-)
+```
+
+---
+
+</details>
+
+## v9.0.0 (2025-05-05)
+
+### Changes
+
+### **BREAKING**
+
+<details>
+<summary>feat!: End support for Node 18 (#7275)</summary>
+
+### feat!: End support for Node 18 (#7275)
+
+---
+
+</details>
+
+### Fixes
+
+<details>
+<summary>fix: Update en-gb dictionary to en-gb-mit (#7278)</summary>
+
+### fix: Update en-gb dictionary to en-gb-mit (#7278)
+
+---
+
+</details>
+
+### Dictionary Updates
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (#7279)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) (#7279)
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ .../snapshots/dart-lang/sdk/report.yaml            |  6 +--
+ .../snapshots/dart-lang/sdk/snapshot.txt           |  3 +-
+ .../snapshots/liriliri/licia/report.yaml           |  3 +-
+ .../snapshots/liriliri/licia/snapshot.txt          |  3 +-
+ .../microsoft/TypeScript-Website/report.yaml       |  5 +-
+ .../microsoft/TypeScript-Website/snapshot.txt      |  3 +-
+ .../snapshots/neovim/nvim-lspconfig/report.yaml    |  5 +-
+ .../snapshots/neovim/nvim-lspconfig/snapshot.txt   |  3 +-
+ .../snapshots/pycontribs/jira/report.yaml          |  3 +-
+ .../snapshots/pycontribs/jira/snapshot.txt         |  3 +-
+ .../snapshots/wireapp/wire-webapp/report.yaml      |  5 +-
+ .../snapshots/wireapp/wire-webapp/snapshot.txt     |  3 +-
+ packages/cspell-bundled-dicts/package.json         | 10 ++--
+ pnpm-lock.yaml                                     | 60 +++++++++++++---------
+ 14 files changed, 57 insertions(+), 58 deletions(-)
+```
+
+---
+
+</details>
 
 ## 8.19.4 (2025-05-03)
 

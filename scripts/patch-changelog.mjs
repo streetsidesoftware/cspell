@@ -2,21 +2,19 @@
 
 // @ts-check
 
-import fs from 'node:fs/promises';
 import { pathToFileURL } from 'node:url';
 import { parseArgs } from 'node:util';
 
 import { checkWeAreInGitRepo, processChangeLog } from './lib/changelog.mjs';
+import { fetchGitHubReleaseData } from './lib/fetch-release.mjs';
 
 /**
- * @typedef {{ tag: string; body: string; name: string; version: string; debug?: boolean }} ReleaseData
+ * @typedef {{ tag: string; token: string; debug?: boolean }} GitReleaseInfo
  */
 
 const optionsToEnv = {
     tag: 'GITHUB_RELEASE_TAG',
-    body: 'GITHUB_RELEASE_BODY',
-    name: 'GITHUB_RELEASE_NAME',
-    version: 'GITHUB_RELEASE_VERSION',
+    token: 'GITHUB_TOKEN',
 };
 
 class AppError extends Error {
@@ -36,13 +34,13 @@ class AppError extends Error {
 
 /**
  *
- * @param {Partial<ReleaseData>} releaseData
- * @returns {asserts releaseData is ReleaseData}
+ * @param {Partial<GitReleaseInfo>} releaseInfo
+ * @returns {asserts releaseInfo is GitReleaseInfo}
  */
-function checkArgs(releaseData) {
+function checkArgs(releaseInfo) {
     let ok = true;
     for (const [key, envVar] of Object.entries(optionsToEnv)) {
-        if (!releaseData[key]) {
+        if (!releaseInfo[key]) {
             console.error(`Error: Option --${key} Environment variable ${envVar} is not set.`);
             ok = false;
         }
@@ -52,29 +50,20 @@ function checkArgs(releaseData) {
     }
 }
 
-/**
- * @param {ReleaseData} releaseData
- * @return {Promise<void>}
- */
-async function updateVersionFile(releaseData) {
-    const { tag, name, version } = releaseData;
-    await fs.writeFile('release.json', JSON.stringify({ name, version, tag }, undefined, 4) + '\n', 'utf8');
-}
-
 const usage = `\
 Usage: gen-release [options]
+
+Downloads the release notes and patches the CHANGELOG.md file with the release data.
+
 Options:
   -h, --help               Show this help message
   -t, --tag <tag>          Release tag (required if not set in env)
-  -b, --body <body>        Release body (required if not set in env)
-  -n, --name <name>        Release name (required if not set in env)
-  -v, --version <version>  Release version (required if not set in env)
-  -D, --date <date>        Release date (defaults to today)
+  -T, --token <token>      GitHub token (required if not set in env)
   -d, --debug              Enable debug mode
 `;
 
 async function processRelease() {
-    console.error('Generating release data...');
+    console.error('Fetching release data...');
 
     const args = parseArgs({
         args: process.argv.slice(2),
@@ -82,10 +71,7 @@ async function processRelease() {
         options: {
             help: { type: 'boolean', short: 'h' },
             tag: { type: 'string', short: 't' },
-            body: { type: 'string', short: 'b' },
-            name: { type: 'string', short: 'n' },
-            version: { type: 'string', short: 'v' },
-            date: { type: 'string', short: 'D' },
+            token: { type: 'string', short: 'T' },
             debug: { type: 'boolean', short: 'd' },
         },
     });
@@ -97,23 +83,27 @@ async function processRelease() {
 
     await checkWeAreInGitRepo();
 
-    const releaseData = {
+    const releaseInfo = {
         tag: args.values.tag ?? process.env.GITHUB_RELEASE_TAG,
-        body: args.values.body ?? process.env.GITHUB_RELEASE_BODY,
-        name: args.values.name ?? process.env.GITHUB_RELEASE_NAME,
-        version: args.values.version ?? process.env.GITHUB_RELEASE_VERSION,
-        date: args.values.date ?? new Date().toISOString().split('T')[0],
+        token: args.values.token ?? process.env.GITHUB_TOKEN,
         debug: args.values.debug ?? false,
     };
 
-    checkArgs(releaseData);
-
-    await updateVersionFile(releaseData);
+    checkArgs(releaseInfo);
 
     const files = args.positionals.length > 0 ? args.positionals : ['CHANGELOG.md'];
 
     for (const file of files) {
         const url = pathToFileURL(file);
+        const fetchReleaseData = await fetchGitHubReleaseData(releaseInfo.token, releaseInfo.tag);
+        const releaseData = {
+            tag: fetchReleaseData.tag_name,
+            body: fetchReleaseData.body,
+            name: fetchReleaseData.name,
+            version: fetchReleaseData.tag_name.match(/v?(\d+\.\d+\.\d+)/)?.[1] ?? fetchReleaseData.tag_name,
+            date: fetchReleaseData.published_at?.split('T')?.[0] || fetchReleaseData.created_at.split('T')[0],
+            debug: args.values.debug ?? false,
+        };
         await processChangeLog(url, releaseData);
     }
 }
