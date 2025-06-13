@@ -186,7 +186,7 @@ const regexReleaseNotesHeader = /^##\s+(v?\d+\.\d+\.\d+)\s+\([-\d]+\).*$/gm;
  */
 function regexForTag(tag) {
     const regexReleaseNotesHeaderTag = /^##\s+(tag)\s+\([-\d]+\).*$/gm;
-    const rTag = tag.replace('v', 'v?').replaceAll('.', '\\.');
+    const rTag = escapeRegExp(tag).replace('v', 'v?');
     const r = regexReleaseNotesHeaderTag.source.replace('tag', rTag);
     return new RegExp(r, 'gm');
 }
@@ -340,6 +340,15 @@ async function run() {
         }
         process.exitCode = 1;
     }
+}
+
+/**
+ *
+ * @param {string} s
+ * @returns {string}
+ */
+function escapeRegExp(s) {
+    return s.replaceAll(/[$()*+.?[\\\]^{|}]/g, '\\$&').replaceAll('-', '\\x2d');
 }
 
 run();
