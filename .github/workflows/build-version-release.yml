@@ -1,21 +1,8 @@
-name: ' 🚀 Publish: 1. Create Version Release'
+name: ' 🚀 Publish: 1. Create and Publish Release'
 
 on:
   workflow_dispatch:
     inputs:
-      bump:
-        description: 'Version Bump'
-        type: choice
-        options:
-          - 'patch'
-          - 'minor'
-          - 'major'
-          - 'auto'
-        default: 'auto'
-        required: true
-      prerelease:
-        type: boolean
-        description: Prerelease
       dry_run:
         description: 'Dry Run'
         type: boolean
@@ -23,15 +10,19 @@ on:
 
   workflow_call:
     secrets:
-      token:
+      PUBLISH_NPM:
         required: true
+    inputs:
+      dry_run:
+        description: 'Dry Run'
+        type: boolean
+        default: true
 
 permissions:
-  contents: read
+  contents: write
+  id-token: write
 
 env:
-  USE_NEXT: ${{ inputs.prerelease }}
-  BUMP: ${{ (inputs.bump != 'auto' && inputs.prerelease && 'pre') || '' }}${{ (inputs.bump != 'auto' && inputs.bump) || '' }}
   DRY_RUN: ${{ (inputs.dry_run && '--dry-run') || '' }}
 
 jobs:
@@ -43,55 +34,31 @@ jobs:
           INPUTS: ${{ toJSON(inputs) }}
 
         run: |
-          echo "$INPUTS"
-          echo USE_NEXT: "$USE_NEXT"
-          echo BUMP: "$BUMP"
           echo DRY_RUN: "$DRY_RUN"
-
-      - uses: tibdex/github-app-token@3beb63f4bd073e61482598c45c71c1019b59b73a # v2.1.0
-        # cspell:ignore tibdex
-        if: ${{ !env.DRY_RUN && !inputs.token }}
-        id: generate-token
-        with:
-          app_id: ${{ secrets.AUTOMATION_APP_ID }}
-          private_key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
-
-      - name: Setup Token
-        env:
-          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token || secrets.GITHUB_TOKEN }}
-        run: echo GITHUB_TOKEN=$GITHUB_TOKEN >> $GITHUB_ENV
 
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          token: ${{ env.GITHUB_TOKEN }} # needed to trigger workflows
+          fetch-depth: 0
+          ref: main
 
       - name: Setup Node and Pnpm
         uses: ./.github/actions/setup-node
         with:
-          node-version: 18
+          node-version: 20.x
 
       - name: Version
+        id: version
         run: |
-          echo VERSION=$(jq -r .version lerna.json) >> $GITHUB_ENV
-
-      - name: Mode
-        env:
-          MODE: >
-            ${{ (env.USE_NEXT == 'true' && '"--conventional-prerelease=*"')
-            || (contains(env.VERSION, 'alpha') && '"--conventional-graduate=*"')
-            || ''
-            }}
-        run: |
-          echo MODE=$MODE >> $GITHUB_ENV
+          echo version=$(jq -r .version lerna.json) >> $GITHUB_OUTPUT
 
       - name: Setup Git
         run: |
           git config user.name streetsidesoftware[bot]
           git config user.email streetsidesoftware[bot]@users.noreply.github.com
-          git remote add gh-token "https://${{ env.GITHUB_TOKEN }}@github.com/streetsidesoftware/cspell.git"
+          git remote add gh-token "https://${{ secrets.GITHUB_TOKEN }}@github.com/streetsidesoftware/cspell.git"
 
-      - name: Install
+      - name: Install and Build
         run: pnpm i
 
       # - name: Debug
@@ -99,5 +66,27 @@ jobs:
       #     pnpx envinfo --system --npmPackages '@lerna-lite/*' --binaries --browsers
 
       - name: Push Version
-        run: pnpm lerna version ${{ env.BUMP }} --conventional-commits --sync-workspace-lock --changelog-preset conventionalcommits --yes ${{ env.MODE }} ${{ env.DRY_RUN }}
+        run: pnpm lerna version ${{ steps.version.outputs.version }} --no-private  --sync-workspace-lock --no-changelog --yes ${{ env.DRY_RUN }}
+
+      - name: Convert Draft Release to Published
+        if: ${{ !inputs.dry_run }}
+        run: |
+          gh release edit v${{ steps.version.outputs.version }} --draft=false
+          echo "Release v${{ steps.version.outputs.version }} published."
+
+      - name: Version Summary
+        uses: streetsidesoftware/actions/public/summary@v1
+        with:
+          text: |
+            # Version Summary
+
+            - **Version**: `${{ steps.version.outputs.version }}`
+            - **Dry Run**: `${{ inputs.dry_run }}`
+
+  publish_version:
+    if: ${{ !inputs.dry_run }}
+    needs: release_version
+    uses: ./.github/workflows/publish.yml
+    secrets:
+      PUBLISH_NPM: ${{ secrets.PUBLISH_NPM }}
 # cspell:ignore pnpx envinfo conventionalcommits

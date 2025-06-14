@@ -102,4 +102,15 @@ jobs:
           title: 'chore: Prepare Release ${{ needs.update_release_draft.outputs.name }}'
           body: ${{ steps.body.outputs.body }}
           token: ${{ secrets.GITHUB_TOKEN }}
+
+  create-release:
+    if: "${{ !startsWith(github.workflow.event.push.message, 'chore: Prepare Release') }}"
+    permissions:
+      contents: write
+      id-token: write
+    uses: ./.github/workflows/build-version-release.yml
+    with:
+      dry_run: true
+    secrets:
+      PUBLISH_NPM: ${{ secrets.PUBLISH_NPM }}
 # cspell:ignore auto* *labeler commitish
