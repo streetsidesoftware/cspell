@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v9.1.1 (2025-06-14)
+
+### Changes
+
+### Fixes
+
+- fix: Use the native JSON parser if possible (<a href="https://github.com/streetsidesoftware/cspell/pull/7502">#7502</a>)
+
 ## v9.1.0 (2025-06-14)
 
 ### Changes
