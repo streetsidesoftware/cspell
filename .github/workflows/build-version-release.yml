@@ -50,7 +50,7 @@ jobs:
       - name: Version
         id: version
         run: |
-          echo version=$(jq -r .version lerna.json) >> $GITHUB_OUTPUT
+          echo version=$(jq -r .version .release.json) >> $GITHUB_OUTPUT
 
       - name: Setup Git
         run: |
