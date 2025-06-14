@@ -112,8 +112,20 @@ jobs:
             ${{ steps.body.outputs.body }}
           token: ${{ secrets.GITHUB_TOKEN }}
 
+  event-info:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show Event Info
+        uses: streetsidesoftware/actions/public/summary@v1
+        with:
+          text: |
+            # Event Information
+            ```
+            ${{ toJSON(github.workflow) }}
+            ```
+
   create-release:
-    if: "${{ startsWith(github.workflow.event.push.message, 'chore: Prepare Release') && contains(github.workflow.event.push.message, '(auto-deploy)') }}"
+    if: "${{ startsWith(github.workflow.event.push.title, 'chore: Prepare Release') && contains(github.workflow.event.push.message, '(auto-deploy)') }}"
     permissions:
       contents: write
       id-token: write
