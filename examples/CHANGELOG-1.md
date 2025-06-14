@@ -10,9 +10,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Features
 
 <details>
-<summary>feat: Add command `dictionaries` (#7445)</summary>
+<summary>feat: Add command `dictionaries` (<a href="https://github.com/streetsidesoftware/cspell/pull/7445">#7445</a>)</summary>
 
-### feat: Add command `dictionaries` (#7445)
+### feat: Add command `dictionaries` ([#7445](https://github.com/streetsidesoftware/cspell/pull/7445))
 
 Add new `dictionaries` command to the cli
 
@@ -39,9 +39,9 @@ Options:
 </details>
 
 <details>
-<summary>feat: Add lint option `--dictionary` (#7441)</summary>
+<summary>feat: Add lint option `--dictionary` (<a href="https://github.com/streetsidesoftware/cspell/pull/7441">#7441</a>)</summary>
 
-### feat: Add lint option `--dictionary` (#7441)
+### feat: Add lint option `--dictionary` ([#7441](https://github.com/streetsidesoftware/cspell/pull/7441))
 
 Add lint options:
 
@@ -53,9 +53,9 @@ Add lint options:
 </details>
 
 <details>
-<summary>feat: Add init command to command-line. (#7414)</summary>
+<summary>feat: Add init command to command-line. (<a href="https://github.com/streetsidesoftware/cspell/pull/7414">#7414</a>)</summary>
 
-### feat: Add init command to command-line. (#7414)
+### feat: Add init command to command-line. ([#7414](https://github.com/streetsidesoftware/cspell/pull/7414))
 
 New command:
 
@@ -82,9 +82,9 @@ Options:
 </details>
 
 <details>
-<summary>feat: Add command line option to set reporting level (#7380)</summary>
+<summary>feat: Add command line option to set reporting level (<a href="https://github.com/streetsidesoftware/cspell/pull/7380">#7380</a>)</summary>
 
-### feat: Add command line option to set reporting level (#7380)
+### feat: Add command line option to set reporting level ([#7380](https://github.com/streetsidesoftware/cspell/pull/7380))
 
 ## Command Line Option: `--report`
 
@@ -131,54 +131,54 @@ interface FeaturesSupportedByReporter {
 ### Fixes
 
 <details>
-<summary>fix: Fix perf issue related to searching for the config. (#7483)</summary>
+<summary>fix: Fix perf issue related to searching for the config. (<a href="https://github.com/streetsidesoftware/cspell/pull/7483">#7483</a>)</summary>
 
-### fix: Fix perf issue related to searching for the config. (#7483)
-
----
-
-</details>
-
-<details>
-<summary>fix: Hide `--config-search` option (#7479)</summary>
-
-### fix: Hide `--config-search` option (#7479)
+### fix: Fix perf issue related to searching for the config. ([#7483](https://github.com/streetsidesoftware/cspell/pull/7483))
 
 ---
 
 </details>
 
 <details>
-<summary>refactor: `isolatedDeclarations: true` (#7459)</summary>
+<summary>fix: Hide `--config-search` option (<a href="https://github.com/streetsidesoftware/cspell/pull/7479">#7479</a>)</summary>
 
-### refactor: `isolatedDeclarations: true` (#7459)
-
----
-
-</details>
-
-<details>
-<summary>refactor: enable isolatedDeclarations (#7456)</summary>
-
-### refactor: enable isolatedDeclarations (#7456)
+### fix: Hide `--config-search` option ([#7479](https://github.com/streetsidesoftware/cspell/pull/7479))
 
 ---
 
 </details>
 
 <details>
-<summary>refactor: enable isolatedDeclarations (#7452)</summary>
+<summary>refactor: `isolatedDeclarations: true` (<a href="https://github.com/streetsidesoftware/cspell/pull/7459">#7459</a>)</summary>
 
-### refactor: enable isolatedDeclarations (#7452)
+### refactor: `isolatedDeclarations: true` ([#7459](https://github.com/streetsidesoftware/cspell/pull/7459))
 
 ---
 
 </details>
 
 <details>
-<summary>fix: Add option to continue on error (#7451)</summary>
+<summary>refactor: enable isolatedDeclarations (<a href="https://github.com/streetsidesoftware/cspell/pull/7456">#7456</a>)</summary>
 
-### fix: Add option to continue on error (#7451)
+### refactor: enable isolatedDeclarations ([#7456](https://github.com/streetsidesoftware/cspell/pull/7456))
+
+---
+
+</details>
+
+<details>
+<summary>refactor: enable isolatedDeclarations (<a href="https://github.com/streetsidesoftware/cspell/pull/7452">#7452</a>)</summary>
+
+### refactor: enable isolatedDeclarations ([#7452](https://github.com/streetsidesoftware/cspell/pull/7452))
+
+---
+
+</details>
+
+<details>
+<summary>fix: Add option to continue on error (<a href="https://github.com/streetsidesoftware/cspell/pull/7451">#7451</a>)</summary>
+
+### fix: Add option to continue on error ([#7451](https://github.com/streetsidesoftware/cspell/pull/7451))
 
 Add lint option:
 
@@ -191,9 +191,9 @@ Add lint option:
 </details>
 
 <details>
-<summary>fix: Improve dictionaries command (#7449)</summary>
+<summary>fix: Improve dictionaries command (<a href="https://github.com/streetsidesoftware/cspell/pull/7449">#7449</a>)</summary>
 
-### fix: Improve dictionaries command (#7449)
+### fix: Improve dictionaries command ([#7449](https://github.com/streetsidesoftware/cspell/pull/7449))
 
 Add options:
 
@@ -216,9 +216,9 @@ Add options:
 </details>
 
 <details>
-<summary>fix: Add trace option `--dictionary` (#7443)</summary>
+<summary>fix: Add trace option `--dictionary` (<a href="https://github.com/streetsidesoftware/cspell/pull/7443">#7443</a>)</summary>
 
-### fix: Add trace option `--dictionary` (#7443)
+### fix: Add trace option `--dictionary` ([#7443](https://github.com/streetsidesoftware/cspell/pull/7443))
 
 ```
 Usage: cspell trace [options] [words...]
@@ -233,9 +233,9 @@ Options:
 </details>
 
 <details>
-<summary>fix: Add init options (#7436)</summary>
+<summary>fix: Add init options (<a href="https://github.com/streetsidesoftware/cspell/pull/7436">#7436</a>)</summary>
 
-### fix: Add init options (#7436)
+### fix: Add init options ([#7436](https://github.com/streetsidesoftware/cspell/pull/7436))
 
 New options:
 
@@ -277,9 +277,9 @@ Options:
 </details>
 
 <details>
-<summary>fix: Allow init of `cspell.config.yml` files (#7432)</summary>
+<summary>fix: Allow init of `cspell.config.yml` files (<a href="https://github.com/streetsidesoftware/cspell/pull/7432">#7432</a>)</summary>
 
-### fix: Allow init of `cspell.config.yml` files (#7432)
+### fix: Allow init of `cspell.config.yml` files ([#7432](https://github.com/streetsidesoftware/cspell/pull/7432))
 
 Add `yml` to the init command format list.
 
@@ -294,18 +294,18 @@ It will create a `cspell.config.yml` file.
 </details>
 
 <details>
-<summary>fix: Only generate the context if necessary (#7388)</summary>
+<summary>fix: Only generate the context if necessary (<a href="https://github.com/streetsidesoftware/cspell/pull/7388">#7388</a>)</summary>
 
-### fix: Only generate the context if necessary (#7388)
+### fix: Only generate the context if necessary ([#7388](https://github.com/streetsidesoftware/cspell/pull/7388))
 
 ---
 
 </details>
 
 <details>
-<summary>fix: Correct the schema generator (#7395)</summary>
+<summary>fix: Correct the schema generator (<a href="https://github.com/streetsidesoftware/cspell/pull/7395">#7395</a>)</summary>
 
-### fix: Correct the schema generator (#7395)
+### fix: Correct the schema generator ([#7395](https://github.com/streetsidesoftware/cspell/pull/7395))
 
 ---
 
@@ -314,9 +314,9 @@ It will create a `cspell.config.yml` file.
 ### Dictionary Updates
 
 <details>
-<summary>fix: Workflow Bot -- Update Dictionaries (main) (#7474)</summary>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/7474">#7474</a>)</summary>
 
-### fix: Workflow Bot -- Update Dictionaries (main) (#7474)
+### fix: Workflow Bot -- Update Dictionaries (main) ([#7474](https://github.com/streetsidesoftware/cspell/pull/7474))
 
 # Update Dictionaries (main)
 
@@ -346,9 +346,9 @@ It will create a `cspell.config.yml` file.
 ### Documentation
 
 <details>
-<summary>fix: Correct the schema generator (#7395)</summary>
+<summary>fix: Correct the schema generator (<a href="https://github.com/streetsidesoftware/cspell/pull/7395">#7395</a>)</summary>
 
-### fix: Correct the schema generator (#7395)
+### fix: Correct the schema generator ([#7395](https://github.com/streetsidesoftware/cspell/pull/7395))
 
 ---
 

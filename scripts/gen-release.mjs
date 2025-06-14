@@ -104,6 +104,8 @@ async function processRelease() {
         version: args.values.version ?? process.env.GITHUB_RELEASE_VERSION,
         date: args.values.date ?? new Date().toISOString().split('T')[0],
         debug: args.values.debug ?? false,
+        repoUrl: new URL('https://github.com/streetsidesoftware/cspell/'),
+        apiUrl: new URL('https://api.github.com/repos/streetsidesoftware/cspell/'),
     };
 
     checkArgs(releaseData);

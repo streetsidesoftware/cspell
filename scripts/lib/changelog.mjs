@@ -12,7 +12,16 @@ import { visit } from 'unist-util-visit';
  */
 
 /**
- * @typedef {{ tag: string; body: string; name: string; version: string; date: string; debug?: boolean }} ReleaseData
+ * @typedef {Object} ReleaseData
+ * @property {string} tag - The release tag, e.g., 'v1.2.3
+ * @property {string} body - The release notes body in Markdown format.
+ * @property {string} name - The name of the release.
+ * @property {string} version - The version of the release, e.g., '1.2.3'.
+ * @property {string} date - The release date in 'YYYY-MM-DD' format.
+ * @property {boolean} [summarize] - Whether to summarize the release notes.
+ * @property {boolean} [debug] - Whether to enable debug mode.
+ * @property {URL} repoUrl - The URL of the repository.
+ * @property {URL} apiUrl - The base URL of the REST API.
  */
 
 class AppError extends Error {
@@ -66,6 +75,7 @@ function buildReleaseNotesRoot(releaseData) {
     const name = releaseData.tag !== releaseData.name ? ` -- ${releaseData.name}` : '';
     const headingText = `${releaseData.tag} (${date})${name}`;
     increaseDepth(injectNodes);
+    fixPullRequestReferences(releaseData.repoUrl, injectNodes);
     /** @type {Heading} */
     const heading = {
         type: 'heading',
@@ -85,7 +95,7 @@ function buildReleaseNotesRoot(releaseData) {
 function buildReleaseNotes(releaseData) {
     const root = buildReleaseNotesRoot(releaseData);
     // Convert the MDAST to a string
-    const result = remark()
+    let result = remark()
         .data('settings', {
             bullet: '-',
             bulletOrdered: '.',
@@ -95,7 +105,9 @@ function buildReleaseNotes(releaseData) {
         })
         .stringify(root)
         .replaceAll(/^[*]{3}$/gm, '---');
-    return result.replace(/\n*$/, '\n\n');
+    result = fixPullRequestReferencesMarkdown(releaseData.repoUrl, result);
+    result = result.replace(/\n*$/, '\n\n');
+    return result;
 }
 
 /**
@@ -117,6 +129,66 @@ function increaseHeadingDepth(tree) {
         if (node.type !== 'heading') return;
         if (detailDepth === 0) {
             node.depth++;
+        }
+    });
+}
+
+/**
+ * @param {URL} urlRepo
+ * @param {string} prNumber
+ * @returns {string}
+ */
+function prNumberToAnchor(urlRepo, prNumber) {
+    if (!/^#\d+$/.test(prNumber)) {
+        throw new AppError(`Invalid pull request number: ${prNumber}`);
+    }
+    const url = new URL(`pull/${prNumber.slice(1)}`, urlRepo);
+    return `<a href="${url.href}">${prNumber}</a>`;
+}
+
+/**
+ * @param {URL} urlRepo
+ * @param {string} prNumber
+ * @returns {string}
+ */
+function prNumberToMarkdownLink(urlRepo, prNumber) {
+    if (!/^#\d+$/.test(prNumber)) {
+        throw new AppError(`Invalid pull request number: ${prNumber}`);
+    }
+    const url = new URL(`pull/${prNumber.slice(1)}`, urlRepo);
+    return `[${prNumber}](${url.href})`;
+}
+
+/**
+ *
+ * @param {URL} urlRepo
+ * @param {string} markdown
+ * @returns
+ */
+function fixPullRequestReferencesMarkdown(urlRepo, markdown) {
+    const value = markdown.replaceAll(
+        /\((#\d+)\)/g,
+        (match) => `(${prNumberToMarkdownLink(urlRepo, match.slice(1, -1))})`,
+    );
+    return value;
+}
+
+/**
+ *
+ * @param {URL} urlRepo
+ * @param {Root} tree
+ */
+function fixPullRequestReferences(urlRepo, tree) {
+    visit(tree, (node, _index, _parent) => {
+        // console.log('%s', `${_index}. Visiting node: ${node.type}`);
+        if (node.type === 'html') {
+            const value = node.value.replaceAll(
+                /\((#\d+)\)/g,
+                (match) => `(${prNumberToAnchor(urlRepo, match.slice(1, -1))})`,
+            );
+            // console.log('Found HTML node: %s -> %s', node.value, value);
+            node.value = value;
+            return;
         }
     });
 }

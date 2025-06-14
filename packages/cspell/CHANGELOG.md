@@ -10,9 +10,9 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 ### Fixes
 
 <details>
-<summary>fix: Add eslint plugin helpers (#7352)</summary>
+<summary>fix: Add eslint plugin helpers (<a href="https://github.com/streetsidesoftware/cspell/pull/7352">#7352</a>)</summary>
 
-### fix: Add eslint plugin helpers (#7352)
+### fix: Add eslint plugin helpers ([#7352](https://github.com/streetsidesoftware/cspell/pull/7352))
 
 Add helper methods:
 
@@ -26,18 +26,18 @@ Add some examples for `supportNonStrictSearches`
 </details>
 
 <details>
-<summary>fix: Make it possible to define a strict dictionary. (#7351)</summary>
+<summary>fix: Make it possible to define a strict dictionary. (<a href="https://github.com/streetsidesoftware/cspell/pull/7351">#7351</a>)</summary>
 
-### fix: Make it possible to define a strict dictionary. (#7351)
+### fix: Make it possible to define a strict dictionary. ([#7351](https://github.com/streetsidesoftware/cspell/pull/7351))
 
 ---
 
 </details>
 
 <details>
-<summary>fix: Correct the Hunspell Reader usage. (#7325)</summary>
+<summary>fix: Correct the Hunspell Reader usage. (<a href="https://github.com/streetsidesoftware/cspell/pull/7325">#7325</a>)</summary>
 
-### fix: Correct the Hunspell Reader usage. (#7325)
+### fix: Correct the Hunspell Reader usage. ([#7325](https://github.com/streetsidesoftware/cspell/pull/7325))
 
 Add an example.
 
@@ -48,9 +48,9 @@ Add an example.
 ### Dictionary Updates
 
 <details>
-<summary>fix: Workflow Bot -- Update Dictionaries (main) (#7346)</summary>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/7346">#7346</a>)</summary>
 
-### fix: Workflow Bot -- Update Dictionaries (main) (#7346)
+### fix: Workflow Bot -- Update Dictionaries (main) ([#7346](https://github.com/streetsidesoftware/cspell/pull/7346))
 
 # Update Dictionaries (main)
 
@@ -73,9 +73,9 @@ Add an example.
 ### Fixes
 
 <details>
-<summary>fix: Add support to add words to config and keep comments. (#7295)</summary>
+<summary>fix: Add support to add words to config and keep comments. (<a href="https://github.com/streetsidesoftware/cspell/pull/7295">#7295</a>)</summary>
 
-### fix: Add support to add words to config and keep comments. (#7295)
+### fix: Add support to add words to config and keep comments. ([#7295](https://github.com/streetsidesoftware/cspell/pull/7295))
 
 ---
 
@@ -84,9 +84,9 @@ Add an example.
 ### Dictionary Updates
 
 <details>
-<summary>fix: Workflow Bot -- Update Dictionaries (main) (#7306)</summary>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/7306">#7306</a>)</summary>
 
-### fix: Workflow Bot -- Update Dictionaries (main) (#7306)
+### fix: Workflow Bot -- Update Dictionaries (main) ([#7306](https://github.com/streetsidesoftware/cspell/pull/7306))
 
 # Update Dictionaries (main)
 
@@ -108,9 +108,9 @@ Add an example.
 </details>
 
 <details>
-<summary>fix: Workflow Bot -- Update Dictionaries (main) (#7302)</summary>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/7302">#7302</a>)</summary>
 
-### fix: Workflow Bot -- Update Dictionaries (main) (#7302)
+### fix: Workflow Bot -- Update Dictionaries (main) ([#7302](https://github.com/streetsidesoftware/cspell/pull/7302))
 
 # Update Dictionaries (main)
 
@@ -139,9 +139,9 @@ Add an example.
 ### **BREAKING**
 
 <details>
-<summary>feat!: End support for Node 18 (#7275)</summary>
+<summary>feat!: End support for Node 18 (<a href="https://github.com/streetsidesoftware/cspell/pull/7275">#7275</a>)</summary>
 
-### feat!: End support for Node 18 (#7275)
+### feat!: End support for Node 18 ([#7275](https://github.com/streetsidesoftware/cspell/pull/7275))
 
 ---
 
@@ -150,9 +150,9 @@ Add an example.
 ### Fixes
 
 <details>
-<summary>fix: Update en-gb dictionary to en-gb-mit (#7278)</summary>
+<summary>fix: Update en-gb dictionary to en-gb-mit (<a href="https://github.com/streetsidesoftware/cspell/pull/7278">#7278</a>)</summary>
 
-### fix: Update en-gb dictionary to en-gb-mit (#7278)
+### fix: Update en-gb dictionary to en-gb-mit ([#7278](https://github.com/streetsidesoftware/cspell/pull/7278))
 
 ---
 
@@ -161,9 +161,9 @@ Add an example.
 ### Dictionary Updates
 
 <details>
-<summary>fix: Workflow Bot -- Update Dictionaries (main) (#7279)</summary>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/7279">#7279</a>)</summary>
 
-### fix: Workflow Bot -- Update Dictionaries (main) (#7279)
+### fix: Workflow Bot -- Update Dictionaries (main) ([#7279](https://github.com/streetsidesoftware/cspell/pull/7279))
 
 # Update Dictionaries (main)
 
