@@ -49,7 +49,7 @@ export class CSpellConfigFileJson extends ImplCSpellConfigFile {
 
     public static parse(file: TextFile): CSpellConfigFileJson {
         try {
-            const cspell: CSpellSettings | unknown = parse(file.content);
+            const cspell: CSpellSettings | unknown = parseJson(file.content);
             if (!isCSpellSettings(cspell)) {
                 throw new ParseError(file.url);
             }
@@ -64,6 +64,14 @@ export class CSpellConfigFileJson extends ImplCSpellConfigFile {
             }
             throw new ParseError(file.url, undefined, { cause });
         }
+    }
+}
+
+function parseJson(content: string): unknown {
+    try {
+        return JSON.parse(content);
+    } catch {
+        return parse(content);
     }
 }
 
