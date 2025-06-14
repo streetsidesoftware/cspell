@@ -57,8 +57,9 @@ Downloads the release notes and patches the CHANGELOG.md file with the release d
 
 Options:
   -h, --help               Show this help message
-  -t, --tag <tag>          Release tag (required if not set in env)
+  -t, --tag <tag>          Release tag (default: latest)
   -T, --token <token>      GitHub token (required if not set in env)
+  -s, --summarize          Summarize the release notes
   -d, --debug              Enable debug mode
 `;
 
@@ -72,6 +73,7 @@ async function processRelease() {
             help: { type: 'boolean', short: 'h' },
             tag: { type: 'string', short: 't', multiple: true },
             token: { type: 'string', short: 'T' },
+            summarize: { type: 'boolean', short: 's' },
             debug: { type: 'boolean', short: 'd' },
         },
     });
@@ -89,6 +91,7 @@ async function processRelease() {
         tag: tags[0],
         token: args.values.token ?? process.env.GITHUB_TOKEN,
         debug: args.values.debug ?? false,
+        summarize: args.values.summarize ?? false,
         repoUrl: new URL('https://github.com/streetsidesoftware/cspell/'),
         apiUrl: new URL('https://api.github.com/repos/streetsidesoftware/cspell/'),
     };

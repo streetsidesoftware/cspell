@@ -3,17 +3,49 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## 9.0.2 (2025-05-20)
+## v9.0.2 (2025-05-20)
 
-**Note:** Version bump only for package @cspell/dynamic-import
+### Changes
 
-## 9.0.1 (2025-05-08)
+### Fixes
 
-**Note:** Version bump only for package @cspell/dynamic-import
+- fix: Add eslint plugin helpers (<a href="https://github.com/streetsidesoftware/cspell/pull/7352">#7352</a>)
+- fix: Make it possible to define a strict dictionary. (<a href="https://github.com/streetsidesoftware/cspell/pull/7351">#7351</a>)
 
-## 9.0.0 (2025-05-05)
+- fix: Correct the Hunspell Reader usage. (<a href="https://github.com/streetsidesoftware/cspell/pull/7325">#7325</a>)
 
-**Note:** Version bump only for package @cspell/dynamic-import
+### Dictionary Updates
+
+- fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/7346">#7346</a>)
+
+## v9.0.1 (2025-05-08)
+
+### Changes
+
+### Fixes
+
+- fix: Add support to add words to config and keep comments. (<a href="https://github.com/streetsidesoftware/cspell/pull/7295">#7295</a>)
+
+### Dictionary Updates
+
+- fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/7306">#7306</a>)
+- fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/7302">#7302</a>)
+
+## v9.0.0 (2025-05-05)
+
+### Changes
+
+### **BREAKING**
+
+- feat!: End support for Node 18 (<a href="https://github.com/streetsidesoftware/cspell/pull/7275">#7275</a>)
+
+### Fixes
+
+- fix: Update en-gb dictionary to en-gb-mit (<a href="https://github.com/streetsidesoftware/cspell/pull/7278">#7278</a>)
+
+### Dictionary Updates
+
+- fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/7279">#7279</a>)
 
 ## 8.19.4 (2025-05-03)
 
