@@ -56,7 +56,7 @@ jobs:
             ${{ toJSON(steps.release-drafter.outputs) }}
 
   create-pr:
-    if: "${{ !startsWith(github.workflow.event.push.message, 'chore: Prepare Release') }}"
+    if: "${{ !startsWith(github.event.head_commit.message, 'chore: Prepare Release') }}"
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -112,20 +112,20 @@ jobs:
             ${{ steps.body.outputs.body }}
           token: ${{ secrets.GITHUB_TOKEN }}
 
-  event-info:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Show Event Info
-        uses: streetsidesoftware/actions/public/summary@v1
-        with:
-          text: |
-            # Event Information
-            ```
-            ${{ toJSON(github.event) }}
-            ```
+  # event-info:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - name: Show Event Info
+  #       uses: streetsidesoftware/actions/public/summary@v1
+  #       with:
+  #         text: |
+  #           # Event Information
+  #           ```
+  #           ${{ toJSON(github.event) }}
+  #           ```
 
   create-release:
-    if: "${{ startsWith(github.workflow.event.push.title, 'chore: Prepare Release') && contains(github.workflow.event.push.message, '(auto-deploy)') }}"
+    if: "${{ startsWith(github.event.head_commit.message, 'chore: Prepare Release') && contains(github.event.head_commit.message, '(auto-deploy)') }}"
     permissions:
       contents: write
       id-token: write
