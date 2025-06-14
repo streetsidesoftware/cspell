@@ -121,7 +121,7 @@ jobs:
           text: |
             # Event Information
             ```
-            ${{ toJSON(github.workflow) }}
+            ${{ toJSON(github.event) }}
             ```
 
   create-release:
