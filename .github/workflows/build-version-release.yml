@@ -60,5 +60,5 @@ jobs:
       #     pnpx envinfo --system --npmPackages '@lerna-lite/*' --binaries --browsers
 
       - name: Push Version
-        run: pnpm lerna version ${{ steps.version.outputs.version }} --no-private  --sync-workspace-lock --no-change-log --yes ${{ env.DRY_RUN }}
+        run: pnpm lerna version ${{ steps.version.outputs.version }} --no-private  --sync-workspace-lock --no-changelog --yes ${{ env.DRY_RUN }}
 # cspell:ignore pnpx envinfo conventionalcommits
