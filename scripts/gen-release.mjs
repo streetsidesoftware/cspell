@@ -58,7 +58,7 @@ function checkArgs(releaseData) {
  */
 async function updateVersionFile(releaseData) {
     const { tag, name, version } = releaseData;
-    await fs.writeFile('release.json', JSON.stringify({ name, version, tag }, undefined, 4) + '\n', 'utf8');
+    await fs.writeFile('.release.json', JSON.stringify({ name, version, tag }, undefined, 4) + '\n', 'utf8');
 }
 
 const usage = `\

@@ -3,19 +3,6 @@ name: ' 🚀 Publish: 1. Create Version Release'
 on:
   workflow_dispatch:
     inputs:
-      bump:
-        description: 'Version Bump'
-        type: choice
-        options:
-          - 'patch'
-          - 'minor'
-          - 'major'
-          - 'auto'
-        default: 'auto'
-        required: true
-      prerelease:
-        type: boolean
-        description: Prerelease
       dry_run:
         description: 'Dry Run'
         type: boolean
@@ -30,8 +17,6 @@ permissions:
   contents: read
 
 env:
-  USE_NEXT: ${{ inputs.prerelease }}
-  BUMP: ${{ (inputs.bump != 'auto' && inputs.prerelease && 'pre') || '' }}${{ (inputs.bump != 'auto' && inputs.bump) || '' }}
   DRY_RUN: ${{ (inputs.dry_run && '--dry-run') || '' }}
 
 jobs:
@@ -43,53 +28,29 @@ jobs:
           INPUTS: ${{ toJSON(inputs) }}
 
         run: |
-          echo "$INPUTS"
-          echo USE_NEXT: "$USE_NEXT"
-          echo BUMP: "$BUMP"
           echo DRY_RUN: "$DRY_RUN"
-
-      - uses: tibdex/github-app-token@3beb63f4bd073e61482598c45c71c1019b59b73a # v2.1.0
-        # cspell:ignore tibdex
-        if: ${{ !env.DRY_RUN && !inputs.token }}
-        id: generate-token
-        with:
-          app_id: ${{ secrets.AUTOMATION_APP_ID }}
-          private_key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
-
-      - name: Setup Token
-        env:
-          GITHUB_TOKEN: ${{ steps.generate-token.outputs.token || secrets.GITHUB_TOKEN }}
-        run: echo GITHUB_TOKEN=$GITHUB_TOKEN >> $GITHUB_ENV
 
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          token: ${{ env.GITHUB_TOKEN }} # needed to trigger workflows
+          fetch-depth: 0
+          ref: main
 
       - name: Setup Node and Pnpm
         uses: ./.github/actions/setup-node
         with:
-          node-version: 18
+          node-version: 20.x
 
       - name: Version
+        id: version
         run: |
-          echo VERSION=$(jq -r .version lerna.json) >> $GITHUB_ENV
-
-      - name: Mode
-        env:
-          MODE: >
-            ${{ (env.USE_NEXT == 'true' && '"--conventional-prerelease=*"')
-            || (contains(env.VERSION, 'alpha') && '"--conventional-graduate=*"')
-            || ''
-            }}
-        run: |
-          echo MODE=$MODE >> $GITHUB_ENV
+          echo version=$(jq -r .version lerna.json) >> $GITHUB_OUTPUT
 
       - name: Setup Git
         run: |
           git config user.name streetsidesoftware[bot]
           git config user.email streetsidesoftware[bot]@users.noreply.github.com
-          git remote add gh-token "https://${{ env.GITHUB_TOKEN }}@github.com/streetsidesoftware/cspell.git"
+          git remote add gh-token "https://${{ secrets.GITHUB_TOKEN }}@github.com/streetsidesoftware/cspell.git"
 
       - name: Install
         run: pnpm i
@@ -99,5 +60,5 @@ jobs:
       #     pnpx envinfo --system --npmPackages '@lerna-lite/*' --binaries --browsers
 
       - name: Push Version
-        run: pnpm lerna version ${{ env.BUMP }} --conventional-commits --sync-workspace-lock --changelog-preset conventionalcommits --yes ${{ env.MODE }} ${{ env.DRY_RUN }}
+        run: echo pnpm lerna version ${{ steps.version.outputs.version }} --no-private  --sync-workspace-lock --no-change-log --yes ${{ env.DRY_RUN }}
 # cspell:ignore pnpx envinfo conventionalcommits
