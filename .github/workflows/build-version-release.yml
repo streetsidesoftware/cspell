@@ -12,6 +12,11 @@ on:
     secrets:
       PUBLISH_NPM:
         required: true
+    inputs:
+      dry_run:
+        description: 'Dry Run'
+        type: boolean
+        default: true
 
 permissions:
   contents: write
