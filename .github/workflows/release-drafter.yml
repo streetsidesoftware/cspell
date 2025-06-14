@@ -100,8 +100,6 @@ jobs:
             ## Version Information
             - **Tag**: `${{ needs.update_release_draft.outputs.tag_name }}`
             - **Version**: `${{ needs.update_release_draft.outputs.resolved_version }}`
-            - **Major Version**: `${{ needs.update_release_draft.outputs.major_version }}`
-            - **Minor Version**: `${{ needs.update_release_draft.outputs.minor_version }}`
 
       - name: Create PR
         uses: peter-evans/create-pull-request@v7
@@ -121,7 +119,7 @@ jobs:
       id-token: write
     uses: ./.github/workflows/build-version-release.yml
     with:
-      dry_run: true
+      dry_run: false
     secrets:
       PUBLISH_NPM: ${{ secrets.PUBLISH_NPM }}
 # cspell:ignore auto* *labeler commitish
