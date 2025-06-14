@@ -3,6 +3,49 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v9.1.0 (2025-06-14)
+
+### Changes
+
+### Features
+
+- feat: Add command `dictionaries` (<a href="https://github.com/streetsidesoftware/cspell/pull/7445">#7445</a>)
+- feat: Add lint option `--dictionary` (<a href="https://github.com/streetsidesoftware/cspell/pull/7441">#7441</a>)
+
+- feat: Add init command to command-line. (<a href="https://github.com/streetsidesoftware/cspell/pull/7414">#7414</a>)
+- feat: Add command line option to set reporting level (<a href="https://github.com/streetsidesoftware/cspell/pull/7380">#7380</a>)
+
+### Fixes
+
+- fix: Fix perf issue related to searching for the config. (<a href="https://github.com/streetsidesoftware/cspell/pull/7483">#7483</a>)
+- fix: Hide `--config-search` option (<a href="https://github.com/streetsidesoftware/cspell/pull/7479">#7479</a>)
+
+- refactor: `isolatedDeclarations: true` (<a href="https://github.com/streetsidesoftware/cspell/pull/7459">#7459</a>)
+- refactor: enable isolatedDeclarations (<a href="https://github.com/streetsidesoftware/cspell/pull/7456">#7456</a>)
+
+- refactor: enable isolatedDeclarations (<a href="https://github.com/streetsidesoftware/cspell/pull/7452">#7452</a>)
+- fix: Add option to continue on error (<a href="https://github.com/streetsidesoftware/cspell/pull/7451">#7451</a>)
+
+- fix: Improve dictionaries command (<a href="https://github.com/streetsidesoftware/cspell/pull/7449">#7449</a>)
+- fix: Add trace option `--dictionary` (<a href="https://github.com/streetsidesoftware/cspell/pull/7443">#7443</a>)
+
+- fix: Add init options (<a href="https://github.com/streetsidesoftware/cspell/pull/7436">#7436</a>)
+- fix: Allow init of `cspell.config.yml` files (<a href="https://github.com/streetsidesoftware/cspell/pull/7432">#7432</a>)
+
+- fix: Only generate the context if necessary (<a href="https://github.com/streetsidesoftware/cspell/pull/7388">#7388</a>)
+- fix: Correct the schema generator (<a href="https://github.com/streetsidesoftware/cspell/pull/7395">#7395</a>)
+
+### Dictionary Updates
+
+- fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/7499">#7499</a>)
+- fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/7485">#7485</a>)
+
+- fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/7474">#7474</a>)
+
+### Documentation
+
+- fix: Correct the schema generator (<a href="https://github.com/streetsidesoftware/cspell/pull/7395">#7395</a>)
+
 ## v9.0.2 (2025-05-20)
 
 ### Changes
