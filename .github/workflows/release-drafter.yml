@@ -92,19 +92,34 @@ jobs:
         uses: streetsidesoftware/actions/public/pr-body@v1
         with:
           title: Release ${{ needs.update_release_draft.outputs.name }}
+          message: |
+            ## Release Notes
+            <details>
+            <summary>Details</summary>
+
+            ${{ needs.update_release_draft.outputs.body }}
+
+            </details>
+
+            ## Version Information
+            - **Tag**: `${{ needs.update_release_draft.outputs.tag_name }}`
+            - **Version**: `${{ needs.update_release_draft.outputs.resolved_version }}`
+            - **Major Version**: `${{ needs.update_release_draft.outputs.major_version }}`
+            - **Minor Version**: `${{ needs.update_release_draft.outputs.minor_version }}`
 
       - name: Create PR
         uses: peter-evans/create-pull-request@v7
         with:
-          commit-message: 'chore: Prepare Release ${{ needs.update_release_draft.outputs.name }}'
+          commit-message: 'chore: Prepare Release ${{ needs.update_release_draft.outputs.name }} (auto-deploy)'
           branch: ${{ env.NEW_BRANCH }}
           base: ${{ env.REF_BRANCH }}
           title: 'chore: Prepare Release ${{ needs.update_release_draft.outputs.name }}'
-          body: ${{ steps.body.outputs.body }}
+          body: |
+            ${{ steps.body.outputs.body }}
           token: ${{ secrets.GITHUB_TOKEN }}
 
   create-release:
-    if: "${{ !startsWith(github.workflow.event.push.message, 'chore: Prepare Release') }}"
+    if: "${{ startsWith(github.workflow.event.push.message, 'chore: Prepare Release') && contains(github.workflow.event.push.message, '(auto-deploy)') }}"
     permissions:
       contents: write
       id-token: write
