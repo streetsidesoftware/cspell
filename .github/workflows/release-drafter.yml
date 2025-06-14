@@ -104,10 +104,10 @@ jobs:
       - name: Create PR
         uses: peter-evans/create-pull-request@v7
         with:
-          commit-message: 'chore: Prepare Release ${{ needs.update_release_draft.outputs.name }} (auto-deploy)'
+          commit-message: 'chore: Prepare Release ${{ needs.update_release_draft.outputs.name }}'
           branch: ${{ env.NEW_BRANCH }}
           base: ${{ env.REF_BRANCH }}
-          title: 'chore: Prepare Release ${{ needs.update_release_draft.outputs.name }}'
+          title: 'chore: Prepare Release ${{ needs.update_release_draft.outputs.name }} (auto-deploy)'
           body: |
             ${{ steps.body.outputs.body }}
           token: ${{ secrets.GITHUB_TOKEN }}
