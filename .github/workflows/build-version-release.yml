@@ -70,6 +70,8 @@ jobs:
 
       - name: Convert Draft Release to Published
         if: ${{ !inputs.dry_run }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh release edit v${{ steps.version.outputs.version }} --draft=false
           echo "Release v${{ steps.version.outputs.version }} published."
