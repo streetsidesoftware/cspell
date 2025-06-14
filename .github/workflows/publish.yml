@@ -31,11 +31,23 @@ jobs:
         run: |
           echo "VERSION=$(jq .version lerna.json)" >> $GITHUB_OUTPUT
 
+      - name: DIST_TAG
+        id: dist_tag
+        uses: streetsidesoftware/actions/public/output@v1
+        with:
+          value: ${{ contains(steps.version.outputs.VERSION, 'alpha') && '--dist-tag next' || '' }}
+
       # See: https://github.com/lerna/lerna/tree/main/commands/publish#bump-from-package
       - name: Publish to NPM
         env:
           NODE_AUTH_TOKEN: ${{secrets.PUBLISH_NPM}}
-          DIST_TAG: ${{ contains(steps.version.outputs.VERSION, 'alpha') && '--dist-tag next' || '' }}
           NPM_CONFIG_PROVENANCE: true
+        run: pnpm lerna publish from-package --no-push --no-private --yes ${{ steps.dist_tag.outputs.value }}
 
-        run: pnpm lerna publish from-package --no-push --no-private --yes ${{ env.DIST_TAG }}
+      - name: Summary
+        uses: streetsidesoftware/actions/public/summary@v1
+        with:
+          text: |
+            # Publish Results
+            - Version: ${{ steps.version.outputs.VERSION }}
+            - Dist Tag: `${{ steps.dist_tag.outputs.value }}`
