@@ -76,7 +76,7 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION}}
 
-      - name: Update Change Log
+      - name: Update Change Log Files
         env:
           'GITHUB_RELEASE_TAG': ${{ needs.update_release_draft.outputs.tag_name }}
           'GITHUB_RELEASE_BODY': ${{ needs.update_release_draft.outputs.body }}
@@ -84,7 +84,8 @@ jobs:
           'GITHUB_RELEASE_VERSION': ${{ needs.update_release_draft.outputs.resolved_version }}
 
         run: |
-          pnpm run update-changelog
+          node ./scripts/gen-release.mjs -s packages/*/CHANGELOG.md
+          node ./scripts/gen-release.mjs CHANGELOG.md packages/cspell/CHANGELOG.md
 
       - name: PR Body
         id: body

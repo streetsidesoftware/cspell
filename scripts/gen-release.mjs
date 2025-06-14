@@ -62,7 +62,7 @@ async function updateVersionFile(releaseData) {
 }
 
 const usage = `\
-Usage: gen-release [options]
+Usage: gen-release [options] [CHANGELOG.md]
 Options:
   -h, --help               Show this help message
   -t, --tag <tag>          Release tag (required if not set in env)
@@ -70,6 +70,7 @@ Options:
   -n, --name <name>        Release name (required if not set in env)
   -v, --version <version>  Release version (required if not set in env)
   -D, --date <date>        Release date (defaults to today)
+  -s, --summarize          Summarize the release notes
   -d, --debug              Enable debug mode
 `;
 
@@ -85,6 +86,7 @@ async function processRelease() {
             body: { type: 'string', short: 'b' },
             name: { type: 'string', short: 'n' },
             version: { type: 'string', short: 'v' },
+            summarize: { type: 'boolean', short: 's' },
             date: { type: 'string', short: 'D' },
             debug: { type: 'boolean', short: 'd' },
         },
@@ -104,6 +106,9 @@ async function processRelease() {
         version: args.values.version ?? process.env.GITHUB_RELEASE_VERSION,
         date: args.values.date ?? new Date().toISOString().split('T')[0],
         debug: args.values.debug ?? false,
+        summarize: args.values.summarize ?? false,
+        repoUrl: new URL('https://github.com/streetsidesoftware/cspell/'),
+        apiUrl: new URL('https://api.github.com/repos/streetsidesoftware/cspell/'),
     };
 
     checkArgs(releaseData);

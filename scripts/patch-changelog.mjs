@@ -51,14 +51,15 @@ function checkArgs(releaseInfo) {
 }
 
 const usage = `\
-Usage: gen-release [options]
+Usage: patch-changelog [options] [CHANGELOG.md]
 
 Downloads the release notes and patches the CHANGELOG.md file with the release data.
 
 Options:
   -h, --help               Show this help message
-  -t, --tag <tag>          Release tag (required if not set in env)
+  -t, --tag <tag>          Release tag, can be used multiple times (default: latest)
   -T, --token <token>      GitHub token (required if not set in env)
+  -s, --summarize          Summarize the release notes
   -d, --debug              Enable debug mode
 `;
 
@@ -70,8 +71,9 @@ async function processRelease() {
         allowPositionals: true,
         options: {
             help: { type: 'boolean', short: 'h' },
-            tag: { type: 'string', short: 't' },
+            tag: { type: 'string', short: 't', multiple: true },
             token: { type: 'string', short: 'T' },
+            summarize: { type: 'boolean', short: 's' },
             debug: { type: 'boolean', short: 'd' },
         },
     });
@@ -83,28 +85,37 @@ async function processRelease() {
 
     await checkWeAreInGitRepo();
 
-    const releaseInfo = {
-        tag: args.values.tag ?? process.env.GITHUB_RELEASE_TAG,
+    const tags = args.values.tag?.length ? args.values.tag : [process.env.GITHUB_RELEASE_TAG || 'latest'];
+
+    const baseReleaseInfo = {
+        tag: tags[0],
         token: args.values.token ?? process.env.GITHUB_TOKEN,
         debug: args.values.debug ?? false,
+        summarize: args.values.summarize ?? false,
+        repoUrl: new URL('https://github.com/streetsidesoftware/cspell/'),
+        apiUrl: new URL('https://api.github.com/repos/streetsidesoftware/cspell/'),
     };
 
-    checkArgs(releaseInfo);
+    checkArgs(baseReleaseInfo);
 
-    const files = args.positionals.length > 0 ? args.positionals : ['CHANGELOG.md'];
+    for (const tag of tags) {
+        const releaseInfo = { ...baseReleaseInfo, tag };
+        const files = args.positionals.length > 0 ? args.positionals : ['CHANGELOG.md'];
+        const fetchReleaseData = await fetchGitHubReleaseData(releaseInfo);
 
-    for (const file of files) {
-        const url = pathToFileURL(file);
-        const fetchReleaseData = await fetchGitHubReleaseData(releaseInfo.token, releaseInfo.tag);
-        const releaseData = {
-            tag: fetchReleaseData.tag_name,
-            body: fetchReleaseData.body,
-            name: fetchReleaseData.name,
-            version: fetchReleaseData.tag_name.match(/v?(\d+\.\d+\.\d+)/)?.[1] ?? fetchReleaseData.tag_name,
-            date: fetchReleaseData.published_at?.split('T')?.[0] || fetchReleaseData.created_at.split('T')[0],
-            debug: args.values.debug ?? false,
-        };
-        await processChangeLog(url, releaseData);
+        for (const file of files) {
+            const url = pathToFileURL(file);
+            const releaseData = {
+                ...releaseInfo,
+                tag: fetchReleaseData.tag_name,
+                body: fetchReleaseData.body,
+                name: fetchReleaseData.name,
+                version: fetchReleaseData.tag_name.match(/v?(\d+\.\d+\.\d+)/)?.[1] ?? fetchReleaseData.tag_name,
+                date: fetchReleaseData.published_at?.split('T')?.[0] || fetchReleaseData.created_at.split('T')[0],
+                debug: args.values.debug ?? false,
+            };
+            await processChangeLog(url, releaseData);
+        }
     }
 }
 

@@ -25,13 +25,26 @@
 
 /**
  *
- * @param {string} token
+ * @param {URL} apiUrl
  * @param {string} tag
+ * @returns {URL}
+ */
+function calcGetReleaseUrl(apiUrl, tag) {
+    if (tag === 'latest') {
+        return new URL('releases/latest', apiUrl);
+    }
+    return new URL(`releases/tags/${tag}`, apiUrl);
+}
+
+/**
+ * @param {{ apiUrl: URL, token: string, tag: string }} request
  * @returns {Promise<ReleaseData>}
  */
-export async function fetchGitHubReleaseData(token, tag) {
+export async function fetchGitHubReleaseData(request) {
+    const { apiUrl, token, tag } = request;
+    const url = calcGetReleaseUrl(apiUrl, tag);
     // eslint-disable-next-line n/no-unsupported-features/node-builtins
-    const response = await fetch(`https://api.github.com/repos/streetsidesoftware/cspell/releases/tags/${tag}`, {
+    const response = await fetch(url, {
         headers: {
             Accept: 'application/vnd.github+json',
             Authorization: `Bearer ${token}`,
