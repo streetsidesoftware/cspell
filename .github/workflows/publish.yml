@@ -24,14 +24,15 @@ jobs:
         uses: ./.github/actions/install-build
 
       - name: Version
+        id: version
         run: |
-          echo "VERSION=$(jq .version lerna.json)" >> $GITHUB_ENV
+          echo "VERSION=$(jq .version lerna.json)" >> $GITHUB_OUTPUT
 
       # See: https://github.com/lerna/lerna/tree/main/commands/publish#bump-from-package
       - name: Publish to NPM
         env:
           NODE_AUTH_TOKEN: ${{secrets.PUBLISH_NPM}}
-          DIST_TAG: ${{ contains(env.VERSION, 'alpha') && '--dist-tag next' || '' }}
+          DIST_TAG: ${{ contains(steps.version.outputs.VERSION, 'alpha') && '--dist-tag next' || '' }}
           NPM_CONFIG_PROVENANCE: true
 
         run: pnpm lerna publish from-package --no-push --no-private --yes ${{ env.DIST_TAG }}

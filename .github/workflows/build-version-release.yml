@@ -1,4 +1,4 @@
-name: ' 🚀 Publish: 1. Create Version Release'
+name: ' 🚀 Publish: 1. Create and Publish Release'
 
 on:
   workflow_dispatch:
@@ -10,11 +10,12 @@ on:
 
   workflow_call:
     secrets:
-      token:
+      PUBLISH_NPM:
         required: true
 
 permissions:
-  contents: read
+  contents: write
+  id-token: write
 
 env:
   DRY_RUN: ${{ (inputs.dry_run && '--dry-run') || '' }}
@@ -52,7 +53,7 @@ jobs:
           git config user.email streetsidesoftware[bot]@users.noreply.github.com
           git remote add gh-token "https://${{ secrets.GITHUB_TOKEN }}@github.com/streetsidesoftware/cspell.git"
 
-      - name: Install
+      - name: Install and Build
         run: pnpm i
 
       # - name: Debug
@@ -61,4 +62,26 @@ jobs:
 
       - name: Push Version
         run: pnpm lerna version ${{ steps.version.outputs.version }} --no-private  --sync-workspace-lock --no-changelog --yes ${{ env.DRY_RUN }}
+
+      - name: Convert Draft Release to Published
+        if: ${{ !inputs.dry_run }}
+        run: |
+          gh release edit v${{ steps.version.outputs.version }} --draft=false
+          echo "Release v${{ steps.version.outputs.version }} published."
+
+      - name: Version Summary
+        uses: streetsidesoftware/actions/public/summary@v1
+        with:
+          text: |
+            # Version Summary
+
+            - **Version**: `${{ steps.version.outputs.version }}`
+            - **Dry Run**: `${{ inputs.dry_run }}`
+
+  publish_version:
+    if: ${{ !inputs.dry_run }}
+    needs: release_version
+    uses: ./.github/workflows/publish.yml
+    secrets:
+      PUBLISH_NPM: ${{ secrets.PUBLISH_NPM }}
 # cspell:ignore pnpx envinfo conventionalcommits
