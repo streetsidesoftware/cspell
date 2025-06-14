@@ -51,13 +51,13 @@ function checkArgs(releaseInfo) {
 }
 
 const usage = `\
-Usage: gen-release [options]
+Usage: patch-changelog [options] [CHANGELOG.md]
 
 Downloads the release notes and patches the CHANGELOG.md file with the release data.
 
 Options:
   -h, --help               Show this help message
-  -t, --tag <tag>          Release tag (default: latest)
+  -t, --tag <tag>          Release tag, can be used multiple times (default: latest)
   -T, --token <token>      GitHub token (required if not set in env)
   -s, --summarize          Summarize the release notes
   -d, --debug              Enable debug mode
