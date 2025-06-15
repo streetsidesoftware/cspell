@@ -48,14 +48,14 @@ jobs:
           # List of supported node versions (latest is tested in `test-os`)
           - 20.x
           - 22.x
-          - 23.x
+          - 24.x
 
         os:
           - ubuntu-latest
 
         include:
           - os: windows-latest
-            node-version: 23.x
+            node-version: 24.x
 
     steps:
       - uses: actions/checkout@v4
