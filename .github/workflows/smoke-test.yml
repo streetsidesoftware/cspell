@@ -55,7 +55,7 @@ jobs:
         node-version:
           - 20.x
           - 22.x
-          - 23.x
+          - 24.x
 
         os:
           - ubuntu-latest
@@ -104,7 +104,7 @@ jobs:
         with:
           show-summary: true
           use-setup: true
-          node-version: 23.x
+          node-version: 24.x
 
   smoke-test-windows:
     runs-on: ${{ matrix.os }}
