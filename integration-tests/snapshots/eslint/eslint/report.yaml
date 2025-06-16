@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: https://github.com/eslint/eslint
 Args: '[".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]'
 Summary:
-  files: 2068
+  files: 2073
   filesWithIssues: 309
   issues: 1612
   errors: 0
@@ -186,7 +186,7 @@ issues:
   - "lib/cli-engine/formatters/html.js:247:66        noopener        U       target=\"_blank\" rel=\"noopener noreferrer\">${ruleId"
   - "lib/cli-engine/formatters/html.js:247:75        noreferrer      U       blank\" rel=\"noopener noreferrer\">${ruleId ? ruleId"
   - "lib/cli-engine/lint-result-cache.js:13:58       jsonify     U       stable-stringify-without-jsonify\");"
-  - "lib/cli.js:34:38        humanwhocodes       U       ModuleImporter } = require(\"@humanwhocodes/module-importer\");"
+  - "lib/cli.js:31:38        humanwhocodes       U       ModuleImporter } = require(\"@humanwhocodes/module-importer\");"
   - "lib/config/config.js:568:47         inting      U       configuration rules while inting."
   - "lib/config/flat-config-schema.js:263:36         incompat    U       messageTemplate = \"eslintrc-incompat\";"
   - "lib/eslint/eslint-helpers.js:172:33         humanfs         U       hfs } = await import(\"@humanfs/node\");"
@@ -271,7 +271,7 @@ issues:
   - "README.md:317:5         teamend             U       <!--teamend-->"
   - "README.md:320:5         sponsorsstart       U       <!--sponsorsstart-->"
   - "README.md:330:105       Qlty                U       d157d/logo.png\" alt=\"Qlty Software\" height=\"9"
-  - "README.md:332:796       Neko                U       com/u/11081491\" alt=\"Neko\" height=\"32\"></a> <a"
+  - "README.md:332:999       Neko                U       com/u/11081491\" alt=\"Neko\" height=\"32\"></a> <a"
   - "README.md:337:5         sponsorsend         U       <!--sponsorsend-->"
   - "templates/blogpost.md.ejs:18:10         linkify     U       function linkify(line) {"
   - "tests/bin/eslint.js:506:36      eslintsuppressions      U       SUPPRESSIONS_PATH = \".temp-eslintsuppressions\";"
@@ -305,19 +305,19 @@ issues:
   - "tests/lib/eslint/eslint.js:2040:22      myjs                                U       files: [\"**/*.myjs\"],"
   - "tests/lib/eslint/eslint.js:2731:9       doesnotexist                        U       \"doesnotexist/*.js\","
   - "tests/lib/eslint/eslint.js:2830:47      doesexist                           U       await eslint.lintFiles([\"doesexist/*.js\"]);"
-  - "tests/lib/eslint/eslint.js:3584:63      unignoring                          U       unignored without also unignoring all files in them\","
-  - "tests/lib/eslint/eslint.js:3598:27      jsfmt                               U       \"!tests/format/**/jsfmt.spec.js\","
-  - "tests/lib/eslint/eslint.js:7970:25      mcts                                U       \"eslint.config.mcts\": configFileContent"
-  - "tests/lib/eslint/eslint.js:11420:20     dignore                             U       cwd: `${root}-dignore`,"
-  - "tests/lib/eslint/eslint.js:13160:26     previos (previous)                  U       make sure that the previos assertion checks the"
-  - "tests/lib/eslint/eslint.js:13241:46     intenationally (internationally)    U       cacheFilePath, \"[]\"); // intenationally invalid to additionally"
-  - "tests/lib/eslint/eslint.js:13471:46     occured (occurred)                  U       the previous run that occured after the cache was"
+  - "tests/lib/eslint/eslint.js:3685:63      unignoring                          U       unignored without also unignoring all files in them\","
+  - "tests/lib/eslint/eslint.js:3699:27      jsfmt                               U       \"!tests/format/**/jsfmt.spec.js\","
+  - "tests/lib/eslint/eslint.js:8071:25      mcts                                U       \"eslint.config.mcts\": configFileContent"
+  - "tests/lib/eslint/eslint.js:11521:20     dignore                             U       cwd: `${root}-dignore`,"
+  - "tests/lib/eslint/eslint.js:13261:26     previos (previous)                  U       make sure that the previos assertion checks the"
+  - "tests/lib/eslint/eslint.js:13342:46     intenationally (internationally)    U       cacheFilePath, \"[]\"); // intenationally invalid to additionally"
+  - "tests/lib/eslint/eslint.js:13572:46     occured (occurred)                  U       the previous run that occured after the cache was"
   - "tests/lib/eslint/legacy-eslint.js:3031:15       succesfully (successfully)      U       it(\"should succesfully execute with a rule"
   - "tests/lib/linter/linter.js:3647:1       consolexlog                     U       consolexlog(\"test2\");"
   - "tests/lib/linter/linter.js:3807:75      rulename                        U       this is 2, since the rulename is very likely to be"
   - "tests/lib/linter/linter.js:5858:25      suppresed (suppressed)          U       it(\"should report one suppresed problem when noInlineConfig"
   - "tests/lib/linter/linter.js:8064:13      postprocessors                  U       describe(\"postprocessors\", () => {"
-  - "tests/lib/linter/linter.js:19773:16     intentionaly (intentionally)    U       // intentionaly mutates objects and"
+  - "tests/lib/linter/linter.js:19771:16     intentionaly (intentionally)    U       // intentionaly mutates objects and"
   - "tests/lib/linter/report-translator.js:344:13        fooo        U       text: \"fooo\\nbar\","
   - "tests/lib/linter/report-translator.js:395:15        ncdar       U       text: \"o\\ncdar\","
   - "tests/lib/linter/rules.js:29:20         michaelficarra      U       const ruleId = \"michaelficarra\";"

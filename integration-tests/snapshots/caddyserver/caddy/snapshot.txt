@@ -3,7 +3,7 @@ Repository: caddyserver/caddy
 Url: "https://github.com/caddyserver/caddy.git"
 Args: ["**/*.go"]
 Lines:
- CSpell: Files checked: 284, Issues found: 3658 in 255 files.
+ CSpell: Files checked: 285, Issues found: 3682 in 256 files.
  exit code: 1
 admin.go:1075:20   - Unknown word (Redir)       -- return errInternalRedir
 admin.go:1351:6    - Unknown word (loggable)    -- type loggableURLArray []*url.URL
@@ -844,26 +844,27 @@ cmd/commandfuncs.go:793:49    - Unknown word (caddyfile)   -- caddyconfig.GetAda
 cmd/commandfuncs.go:95:5      - Unknown word (pidfile)     -- if pidfileFlag != "" {
 cmd/commandfuncs.go:96:34     - Unknown word (pidfile)     -- append(cmd.Args, "--pidfile", pidfileFlag)
 cmd/commandfuncs.go:96:44     - Unknown word (pidfile)     -- cmd.Args, "--pidfile", pidfileFlag)
-cmd/commands.go:109:25    - Unknown word (pidfile)     -- cmd.Flags().StringP("pidfile", "", "", "Path of file
-cmd/commands.go:116:103   - Unknown word (pidfile)     -- resume] [--watch] [--pidfile <file>]",
-cmd/commands.go:132:2     - Unknown word (Caddyfile)   -- "Caddyfile" and the caddyfile config
-cmd/commands.go:132:21    - Unknown word (caddyfile)   -- "Caddyfile" and the caddyfile config adapter is plugged
-cmd/commands.go:157:25    - Unknown word (pidfile)     -- cmd.Flags().StringP("pidfile", "", "", "Path of file
-cmd/commands.go:158:25    - Unknown word (pingback)    -- cmd.Flags().StringP("pingback", "", "", "Echo confirmation
+cmd/commands.go:116:25    - Unknown word (pidfile)     -- cmd.Flags().StringP("pidfile", "", "", "Path of file
+cmd/commands.go:123:103   - Unknown word (pidfile)     -- resume] [--watch] [--pidfile <file>]",
+cmd/commands.go:139:2     - Unknown word (Caddyfile)   -- "Caddyfile" and the caddyfile config
+cmd/commands.go:139:21    - Unknown word (caddyfile)   -- "Caddyfile" and the caddyfile config adapter is plugged
 cmd/commands.go:15:9      - Unknown word (caddycmd)   -- package caddycmd
-cmd/commands.go:214:56    - Unknown word (xcaddy)      -- documentation (or by using xcaddy), more
-cmd/commands.go:27:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
-cmd/commands.go:292:41    - Unknown word (caddyfile)   -- StringP("adapter", "a", "caddyfile", "Name of config adapter
-cmd/commands.go:327:33    - Unknown word (Caddyfile)   -- storage export --config Caddyfile.old --output - |
-cmd/commands.go:328:33    - Unknown word (Caddyfile)   -- storage import --config Caddyfile.new --input -
-cmd/commands.go:34:47     - Unknown word (godoc)       -- the RegisterCommand() godoc.
-cmd/commands.go:373:21    - Unknown word (Caddyfile)   -- Short: "Formats a Caddyfile",
-cmd/commands.go:375:13    - Unknown word (Caddyfile)   -- Formats the Caddyfile by adding proper indentation
-cmd/commands.go:497:24    - Unknown word (compinit)    -- $ echo "autoload -U compinit; compinit" >> ~/.zshrc
-cmd/commands.go:497:34    - Unknown word (compinit)    -- autoload -U compinit; compinit" >> ~/.zshrc
-cmd/commands.go:70:22     - Unknown word (caddycmd)    -- // this function. A caddycmd.WrapCommandFuncForCobra
-cmd/commands.go:80:40     - Unknown word (initialised) -- returns a list of commands initialised by
-cmd/commands.go:91:80     - Unknown word (pidfile)     -- path>] [--watch] [--pidfile <file>]",
+cmd/commands.go:164:25    - Unknown word (pidfile)     -- cmd.Flags().StringP("pidfile", "", "", "Path of file
+cmd/commands.go:165:25    - Unknown word (pingback)    -- cmd.Flags().StringP("pingback", "", "", "Echo confirmation
+cmd/commands.go:221:56    - Unknown word (xcaddy)      -- documentation (or by using xcaddy), more
+cmd/commands.go:28:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
+cmd/commands.go:299:41    - Unknown word (caddyfile)   -- StringP("adapter", "a", "caddyfile", "Name of config adapter
+cmd/commands.go:334:33    - Unknown word (Caddyfile)   -- storage export --config Caddyfile.old --output - |
+cmd/commands.go:335:33    - Unknown word (Caddyfile)   -- storage import --config Caddyfile.new --input -
+cmd/commands.go:35:47     - Unknown word (godoc)       -- the RegisterCommand() godoc.
+cmd/commands.go:380:21    - Unknown word (Caddyfile)   -- Short: "Formats a Caddyfile",
+cmd/commands.go:382:13    - Unknown word (Caddyfile)   -- Formats the Caddyfile by adding proper indentation
+cmd/commands.go:505:24    - Unknown word (compinit)    -- $ echo "autoload -U compinit; compinit" >> ~/.zshrc
+cmd/commands.go:505:34    - Unknown word (compinit)    -- autoload -U compinit; compinit" >> ~/.zshrc
+cmd/commands.go:71:22     - Unknown word (caddycmd)    -- // this function. A caddycmd.WrapCommandFuncForCobra
+cmd/commands.go:81:40     - Unknown word (initialised) -- returns a list of commands initialised by
+cmd/commands.go:98:80     - Unknown word (pidfile)     -- path>] [--watch] [--pidfile <file>]",
+cmd/commands_test.go:1:9       - Unknown word (caddycmd)   -- package caddycmd
 cmd/main.go:107:8     - Unknown word (Caddyfile)    -- func isCaddyfile(configFile, adapterName
 cmd/main.go:108:21    - Unknown word (caddyfile)    -- if adapterName == "caddyfile" {
 cmd/main.go:112:54    - Unknown word (caddyfile)    -- config file starts with "caddyfile" or
@@ -2975,9 +2976,9 @@ modules/caddytls/certselection.go:56:116    - Unknown word (certmagic)   -- cert
 modules/caddytls/certselection.go:56:92     - Unknown word (certmagic)   -- ClientHelloInfo, choices []certmagic.Certificate) (certmagic
 modules/caddytls/certselection.go:57:19     - Unknown word (certmagic)   -- viable := make([]certmagic.Certificate, 0, len
 modules/caddytls/certselection.go:64:68     - Unknown word (gosec)       -- iteration variable (gosec warning)
-modules/caddytls/connpolicy.go:1009:33   - Unknown word (unmarshalable) -- PublicKeyAlgorithm is a JSON-unmarshalable wrapper type.
-modules/caddytls/connpolicy.go:1043:6    - Unknown word (destructable)  -- type destructableWriter struct{ *os.File
-modules/caddytls/connpolicy.go:1045:9    - Unknown word (destructable)  -- func (d destructableWriter) Destruct() error
+modules/caddytls/connpolicy.go:1051:33   - Unknown word (unmarshalable) -- PublicKeyAlgorithm is a JSON-unmarshalable wrapper type.
+modules/caddytls/connpolicy.go:1085:6    - Unknown word (destructable)  -- type destructableWriter struct{ *os.File
+modules/caddytls/connpolicy.go:1087:9    - Unknown word (destructable)  -- func (d destructableWriter) Destruct() error
 modules/caddytls/connpolicy.go:147:11    - Unknown word (Iface)       -- if tlsAppIface, err := ctx.AppIfConfigured
 modules/caddytls/connpolicy.go:15:9      - Unknown word (caddytls)   -- package caddytls
 modules/caddytls/connpolicy.go:213:18    - Unknown word (ALPN)        -- // Negotiation (ALPN) during the handshake
@@ -3182,21 +3183,37 @@ modules/caddytls/internalissuer.go:55:10     - Unknown word (caddypki)    -- ca 
 modules/caddytls/internalissuer.go:73:12     - Unknown word (caddypki)    -- iss.CA = caddypki.DefaultCAID
 modules/caddytls/internalissuer.go:73:28     - Unknown word (CAID)        -- CA = caddypki.DefaultCAID
 modules/caddytls/internalissuer.go:81:24     - Unknown word (caddypki)    -- pkiApp := appModule.(*caddypki.PKI)
+modules/caddytls/leaffileloader.go:107:4     - Unknown word (caddyfile)   -- _ caddyfile.Unmarshaler = (*LeafFileLoade
 modules/caddytls/leaffileloader.go:15:9      - Unknown word (caddytls)   -- package caddytls
 modules/caddytls/leaffileloader.go:23:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
-modules/caddytls/leaffileloader.go:59:3      - Unknown word (ders)        -- ders, err := convertPEMFilesToDERB
-modules/caddytls/leaffileloader.go:63:40     - Unknown word (ders)        -- 9.ParseCertificates(ders)
-modules/caddytls/leaffileloader.go:77:6      - Unknown word (ders)        -- var ders []byte
-modules/caddytls/leaffileloader.go:83:3      - Unknown word (ders)        -- ders = append(
-modules/caddytls/leaffileloader.go:84:4      - Unknown word (ders)        -- ders,
+modules/caddytls/leaffileloader.go:24:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/caddyconfig
+modules/caddytls/leaffileloader.go:24:35     - Unknown word (caddyconfig) -- caddyserver/caddy/v2/caddyconfig/caddyfile"
+modules/caddytls/leaffileloader.go:24:47     - Unknown word (caddyfile)   -- caddy/v2/caddyconfig/caddyfile"
+modules/caddytls/leaffileloader.go:56:13     - Unknown word (Caddyfile)   -- // UnmarshalCaddyfile implements caddyfile
+modules/caddytls/leaffileloader.go:56:34     - Unknown word (caddyfile)   -- UnmarshalCaddyfile implements caddyfile.Unmarshaler.
+modules/caddytls/leaffileloader.go:57:36     - Unknown word (Caddyfile)   -- LeafFileLoader) UnmarshalCaddyfile(d *caddyfile.Dispenser
+modules/caddytls/leaffileloader.go:57:49     - Unknown word (caddyfile)   -- UnmarshalCaddyfile(d *caddyfile.Dispenser) error {
+modules/caddytls/leaffileloader.go:67:3      - Unknown word (ders)        -- ders, err := convertPEMFilesToDERB
+modules/caddytls/leaffileloader.go:71:40     - Unknown word (ders)        -- 9.ParseCertificates(ders)
+modules/caddytls/leaffileloader.go:85:6      - Unknown word (ders)        -- var ders []byte
+modules/caddytls/leaffileloader.go:91:3      - Unknown word (ders)        -- ders = append(
+modules/caddytls/leaffileloader.go:92:4      - Unknown word (ders)        -- ders,
 modules/caddytls/leaffileloader_test.go:10:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
 modules/caddytls/leaffileloader_test.go:14:46     - Unknown word (caddytest)   -- Files: []string{"../../caddytest/leafcert.pem"}}
 modules/caddytls/leaffileloader_test.go:14:56     - Unknown word (leafcert)    -- string{"../../caddytest/leafcert.pem"}}
 modules/caddytls/leaffileloader_test.go:1:9       - Unknown word (caddytls)   -- package caddytls
 modules/caddytls/leaffileloader_test.go:27:42     - Unknown word (caddytest)   -- os.ReadFile("../../caddytest/leafcert.pem")
 modules/caddytls/leaffileloader_test.go:27:52     - Unknown word (leafcert)    -- ReadFile("../../caddytest/leafcert.pem")
+modules/caddytls/leaffolderloader.go:105:4     - Unknown word (caddyfile)   -- _ caddyfile.Unmarshaler = (*LeafFolderLoa
 modules/caddytls/leaffolderloader.go:15:9      - Unknown word (caddytls)   -- package caddytls
 modules/caddytls/leaffolderloader.go:24:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
+modules/caddytls/leaffolderloader.go:25:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/caddyconfig
+modules/caddytls/leaffolderloader.go:25:35     - Unknown word (caddyconfig) -- caddyserver/caddy/v2/caddyconfig/caddyfile"
+modules/caddytls/leaffolderloader.go:25:47     - Unknown word (caddyfile)   -- caddy/v2/caddyconfig/caddyfile"
+modules/caddytls/leaffolderloader.go:59:13     - Unknown word (Caddyfile)   -- // UnmarshalCaddyfile implements caddyfile
+modules/caddytls/leaffolderloader.go:59:34     - Unknown word (caddyfile)   -- UnmarshalCaddyfile implements caddyfile.Unmarshaler.
+modules/caddytls/leaffolderloader.go:60:38     - Unknown word (Caddyfile)   -- LeafFolderLoader) UnmarshalCaddyfile(d *caddyfile.Dispenser
+modules/caddytls/leaffolderloader.go:60:51     - Unknown word (caddyfile)   -- UnmarshalCaddyfile(d *caddyfile.Dispenser) error {
 modules/caddytls/leaffolderloader_test.go:10:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
 modules/caddytls/leaffolderloader_test.go:14:50     - Unknown word (caddytest)   -- Folders: []string{"../../caddytest"}}
 modules/caddytls/leaffolderloader_test.go:1:9       - Unknown word (caddytls)   -- package caddytls
@@ -3204,6 +3221,13 @@ modules/caddytls/leaffolderloader_test.go:26:42     - Unknown word (caddytest)  
 modules/caddytls/leaffolderloader_test.go:26:52     - Unknown word (leafcert)    -- ReadFile("../../caddytest/leafcert.pem")
 modules/caddytls/leafpemloader.go:15:9      - Unknown word (caddytls)   -- package caddytls
 modules/caddytls/leafpemloader.go:21:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
+modules/caddytls/leafpemloader.go:22:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/caddyconfig
+modules/caddytls/leafpemloader.go:22:35     - Unknown word (caddyconfig) -- caddyserver/caddy/v2/caddyconfig/caddyfile"
+modules/caddytls/leafpemloader.go:22:47     - Unknown word (caddyfile)   -- caddy/v2/caddyconfig/caddyfile"
+modules/caddytls/leafpemloader.go:56:13     - Unknown word (Caddyfile)   -- // UnmarshalCaddyfile implements caddyfile
+modules/caddytls/leafpemloader.go:56:34     - Unknown word (caddyfile)   -- UnmarshalCaddyfile implements caddyfile.Unmarshaler.
+modules/caddytls/leafpemloader.go:57:35     - Unknown word (Caddyfile)   -- LeafPEMLoader) UnmarshalCaddyfile(d *caddyfile.Dispenser
+modules/caddytls/leafpemloader.go:57:48     - Unknown word (caddyfile)   -- UnmarshalCaddyfile(d *caddyfile.Dispenser) error {
 modules/caddytls/leafpemloader_test.go:10:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
 modules/caddytls/leafpemloader_test.go:1:9       - Unknown word (caddytls)   -- package caddytls
 modules/caddytls/leafpemloader_test.go:43:42     - Unknown word (caddytest)   -- os.ReadFile("../../caddytest/leafcert.pem")
