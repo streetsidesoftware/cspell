@@ -33,7 +33,7 @@ build.ps1:26:16     - Unknown word (threadjob)  -- if ($null -eq $threadjob) {
 build.ps1:40:11     - Unknown word (Docset)     -- $ReferenceDocset = Join-Path $PSScriptRoot
 build.ps1:45:25     - Unknown word (Docset)     -- ChildItem $ReferenceDocset -Directory -Exclude
 build.ps1:63:37     - Unknown word (docset)     -- no yaml header in our docset will ever be that long
-cabgen-bootstrap.yml:14:24     - Unknown word (cabgen)     -- template: PowerShell/cabgen.yml@ReferenceAutomation
+cabgen-bootstrap.yml:15:24     - Unknown word (cabgen)     -- template: PowerShell/cabgen.yml@ReferenceAutomation
 ci-steps.yml:10:33     - Unknown word (ARTIFACTSTAGINGDIRECTORY) -- destPath = "${env:BUILD_ARTIFACTSTAGINGDIRECTORY}/install-powershell
 ci-steps.yml:26:124    - Unknown word (updatablehelp)            -- ArtifactStagingDirectory)\updatablehelp-$(Build.BuildId).zip
 ci-steps.yml:26:55     - Unknown word (updatablehelp)            -- Build.SourcesDirectory)\updatablehelp\*" -DestinationPath
@@ -101,10 +101,10 @@ reference/5.1/Microsoft.PowerShell.Core/About/about_Comments.md:141:28    - Unkn
 reference/5.1/Microsoft.PowerShell.Core/About/about_CommonParameters.md:48:23     - Unknown word (proga)      -- **ProgressAction** (proga)
 reference/5.1/Microsoft.PowerShell.Core/About/about_CommonParameters.md:557:10    - Unknown word (proga)      -- Aliases: proga
 reference/5.1/Microsoft.PowerShell.Core/About/about_CommonParameters.md:813:72    - Unknown word (defau)      -- Suspend [?] Help (defau
-reference/5.1/Microsoft.PowerShell.Core/About/about_Comparison_Operators.md:419:11    - Unknown word (Chell)      -- "Rhell", "Chell", "Mel", "Smell", "Shell
-reference/5.1/Microsoft.PowerShell.Core/About/about_Comparison_Operators.md:419:2     - Unknown word (Rhell)      -- "Rhell", "Chell", "Mel", "Smell
-reference/5.1/Microsoft.PowerShell.Core/About/about_Comparison_Operators.md:420:11    - Unknown word (Rhell)      -- # Output: Rhell, Chell, Shell
-reference/5.1/Microsoft.PowerShell.Core/About/about_Comparison_Operators.md:420:18    - Unknown word (Chell)      -- # Output: Rhell, Chell, Shell
+reference/5.1/Microsoft.PowerShell.Core/About/about_Comparison_Operators.md:447:11    - Unknown word (Chell)      -- 'Rhell', 'Chell', 'Mel', 'Smell', 'Shell
+reference/5.1/Microsoft.PowerShell.Core/About/about_Comparison_Operators.md:447:2     - Unknown word (Rhell)      -- 'Rhell', 'Chell', 'Mel', 'Smell
+reference/5.1/Microsoft.PowerShell.Core/About/about_Comparison_Operators.md:448:11    - Unknown word (Rhell)      -- # Output: Rhell, Chell, Shell
+reference/5.1/Microsoft.PowerShell.Core/About/about_Comparison_Operators.md:448:18    - Unknown word (Chell)      -- # Output: Rhell, Chell, Shell
 reference/5.1/Microsoft.PowerShell.Core/About/about_Comparison_Operators.md:48:15     - Unknown word (inotin)     -- - `-notin`, `-inotin`, `-cnotin` - value
 reference/5.1/Microsoft.PowerShell.Core/About/about_Comparison_Operators.md:48:26     - Unknown word (cnotin)     -- notin`, `-inotin`, `-cnotin` - value isn't in a
 reference/5.1/Microsoft.PowerShell.Core/About/about_Debuggers.md:148:2     - Unknown word (scriptname) -- $scriptname = $MyInvocation.PSCommandPath
@@ -625,10 +625,10 @@ reference/7.4/Microsoft.PowerShell.Core/About/about_Comments.md:141:28    - Unkn
 reference/7.4/Microsoft.PowerShell.Core/About/about_CommonParameters.md:48:23     - Unknown word (proga)      -- **ProgressAction** (proga)
 reference/7.4/Microsoft.PowerShell.Core/About/about_CommonParameters.md:558:10    - Unknown word (proga)      -- Aliases: proga
 reference/7.4/Microsoft.PowerShell.Core/About/about_CommonParameters.md:812:72    - Unknown word (defau)      -- Suspend [?] Help (defau
-reference/7.4/Microsoft.PowerShell.Core/About/about_Comparison_Operators.md:419:11    - Unknown word (Chell)      -- "Rhell", "Chell", "Mel", "Smell", "Shell
-reference/7.4/Microsoft.PowerShell.Core/About/about_Comparison_Operators.md:419:2     - Unknown word (Rhell)      -- "Rhell", "Chell", "Mel", "Smell
-reference/7.4/Microsoft.PowerShell.Core/About/about_Comparison_Operators.md:420:11    - Unknown word (Rhell)      -- # Output: Rhell, Chell, Shell
-reference/7.4/Microsoft.PowerShell.Core/About/about_Comparison_Operators.md:420:18    - Unknown word (Chell)      -- # Output: Rhell, Chell, Shell
+reference/7.4/Microsoft.PowerShell.Core/About/about_Comparison_Operators.md:447:11    - Unknown word (Chell)      -- 'Rhell', 'Chell', 'Mel', 'Smell', 'Shell
+reference/7.4/Microsoft.PowerShell.Core/About/about_Comparison_Operators.md:447:2     - Unknown word (Rhell)      -- 'Rhell', 'Chell', 'Mel', 'Smell
+reference/7.4/Microsoft.PowerShell.Core/About/about_Comparison_Operators.md:448:11    - Unknown word (Rhell)      -- # Output: Rhell, Chell, Shell
+reference/7.4/Microsoft.PowerShell.Core/About/about_Comparison_Operators.md:448:18    - Unknown word (Chell)      -- # Output: Rhell, Chell, Shell
 reference/7.4/Microsoft.PowerShell.Core/About/about_Comparison_Operators.md:48:15     - Unknown word (inotin)     -- - `-notin`, `-inotin`, `-cnotin` - value
 reference/7.4/Microsoft.PowerShell.Core/About/about_Comparison_Operators.md:48:26     - Unknown word (cnotin)     -- notin`, `-inotin`, `-cnotin` - value isn't in a
 reference/7.4/Microsoft.PowerShell.Core/About/about_Debuggers.md:148:2     - Unknown word (scriptname) -- $scriptname = $MyInvocation.PSCommandPath
@@ -1139,10 +1139,10 @@ reference/7.5/Microsoft.PowerShell.Core/About/about_Comments.md:141:28    - Unkn
 reference/7.5/Microsoft.PowerShell.Core/About/about_CommonParameters.md:48:23     - Unknown word (proga)      -- **ProgressAction** (proga)
 reference/7.5/Microsoft.PowerShell.Core/About/about_CommonParameters.md:558:10    - Unknown word (proga)      -- Aliases: proga
 reference/7.5/Microsoft.PowerShell.Core/About/about_CommonParameters.md:812:72    - Unknown word (defau)      -- Suspend [?] Help (defau
-reference/7.5/Microsoft.PowerShell.Core/About/about_Comparison_Operators.md:419:11    - Unknown word (Chell)      -- "Rhell", "Chell", "Mel", "Smell", "Shell
-reference/7.5/Microsoft.PowerShell.Core/About/about_Comparison_Operators.md:419:2     - Unknown word (Rhell)      -- "Rhell", "Chell", "Mel", "Smell
-reference/7.5/Microsoft.PowerShell.Core/About/about_Comparison_Operators.md:420:11    - Unknown word (Rhell)      -- # Output: Rhell, Chell, Shell
-reference/7.5/Microsoft.PowerShell.Core/About/about_Comparison_Operators.md:420:18    - Unknown word (Chell)      -- # Output: Rhell, Chell, Shell
+reference/7.5/Microsoft.PowerShell.Core/About/about_Comparison_Operators.md:447:11    - Unknown word (Chell)      -- 'Rhell', 'Chell', 'Mel', 'Smell', 'Shell
+reference/7.5/Microsoft.PowerShell.Core/About/about_Comparison_Operators.md:447:2     - Unknown word (Rhell)      -- 'Rhell', 'Chell', 'Mel', 'Smell
+reference/7.5/Microsoft.PowerShell.Core/About/about_Comparison_Operators.md:448:11    - Unknown word (Rhell)      -- # Output: Rhell, Chell, Shell
+reference/7.5/Microsoft.PowerShell.Core/About/about_Comparison_Operators.md:448:18    - Unknown word (Chell)      -- # Output: Rhell, Chell, Shell
 reference/7.5/Microsoft.PowerShell.Core/About/about_Comparison_Operators.md:48:15     - Unknown word (inotin)     -- - `-notin`, `-inotin`, `-cnotin` - value
 reference/7.5/Microsoft.PowerShell.Core/About/about_Comparison_Operators.md:48:26     - Unknown word (cnotin)     -- notin`, `-inotin`, `-cnotin` - value isn't in a
 reference/7.5/Microsoft.PowerShell.Core/About/about_Debuggers.md:148:2     - Unknown word (scriptname) -- $scriptname = $MyInvocation.PSCommandPath
@@ -1639,10 +1639,10 @@ reference/7.6/Microsoft.PowerShell.Core/About/about_Comments.md:141:28    - Unkn
 reference/7.6/Microsoft.PowerShell.Core/About/about_CommonParameters.md:48:23     - Unknown word (proga)      -- **ProgressAction** (proga)
 reference/7.6/Microsoft.PowerShell.Core/About/about_CommonParameters.md:558:10    - Unknown word (proga)      -- Aliases: proga
 reference/7.6/Microsoft.PowerShell.Core/About/about_CommonParameters.md:812:72    - Unknown word (defau)      -- Suspend [?] Help (defau
-reference/7.6/Microsoft.PowerShell.Core/About/about_Comparison_Operators.md:419:11    - Unknown word (Chell)      -- "Rhell", "Chell", "Mel", "Smell", "Shell
-reference/7.6/Microsoft.PowerShell.Core/About/about_Comparison_Operators.md:419:2     - Unknown word (Rhell)      -- "Rhell", "Chell", "Mel", "Smell
-reference/7.6/Microsoft.PowerShell.Core/About/about_Comparison_Operators.md:420:11    - Unknown word (Rhell)      -- # Output: Rhell, Chell, Shell
-reference/7.6/Microsoft.PowerShell.Core/About/about_Comparison_Operators.md:420:18    - Unknown word (Chell)      -- # Output: Rhell, Chell, Shell
+reference/7.6/Microsoft.PowerShell.Core/About/about_Comparison_Operators.md:447:11    - Unknown word (Chell)      -- 'Rhell', 'Chell', 'Mel', 'Smell', 'Shell
+reference/7.6/Microsoft.PowerShell.Core/About/about_Comparison_Operators.md:447:2     - Unknown word (Rhell)      -- 'Rhell', 'Chell', 'Mel', 'Smell
+reference/7.6/Microsoft.PowerShell.Core/About/about_Comparison_Operators.md:448:11    - Unknown word (Rhell)      -- # Output: Rhell, Chell, Shell
+reference/7.6/Microsoft.PowerShell.Core/About/about_Comparison_Operators.md:448:18    - Unknown word (Chell)      -- # Output: Rhell, Chell, Shell
 reference/7.6/Microsoft.PowerShell.Core/About/about_Comparison_Operators.md:48:15     - Unknown word (inotin)     -- - `-notin`, `-inotin`, `-cnotin` - value
 reference/7.6/Microsoft.PowerShell.Core/About/about_Comparison_Operators.md:48:26     - Unknown word (cnotin)     -- notin`, `-inotin`, `-cnotin` - value isn't in a
 reference/7.6/Microsoft.PowerShell.Core/About/about_Debuggers.md:148:2     - Unknown word (scriptname) -- $scriptname = $MyInvocation.PSCommandPath
@@ -2572,7 +2572,7 @@ reference/docs-conceptual/community/2025-updates.md:163:3     - Unknown word (Ar
 reference/docs-conceptual/community/2025-updates.md:163:7     - Unknown word (Hein)               -- | ArieHein |     15
 reference/docs-conceptual/community/2025-updates.md:164:3     - Unknown word (changeworld)        -- | changeworld |     8
 reference/docs-conceptual/community/2025-updates.md:166:3     - Unknown word (cnotin)             -- | cnotin |     1
-reference/docs-conceptual/community/2025-updates.md:24:22     - Unknown word (Resoure)    -- Updated docs for PSResoureGet 1.1.1 release - no
+reference/docs-conceptual/community/2025-updates.md:24:22     - Unknown word (Resoure)    -- Updated docs for PSResoureGet 1.1.1 release - now
 reference/docs-conceptual/community/2025-updates.md:25:62     - Unknown word (MDOP)       -- Server 20212/2012r2/MDOP (5338 articles)
 reference/docs-conceptual/community/2025-updates.md:40:3      - Unknown word (changeworld) -- | changeworld |     3      |
 reference/docs-conceptual/community/2025-updates.md:41:3      - Unknown word (cflanderscpc) -- | cflanderscpc |     1      |

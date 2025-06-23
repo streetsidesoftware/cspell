@@ -3,9 +3,9 @@ Repository: sveltejs/svelte
 Url: https://github.com/sveltejs/svelte.git
 Args: '["**"]'
 Summary:
-  files: 7500
-  filesWithIssues: 503
-  issues: 3643
+  files: 7523
+  filesWithIssues: 504
+  issues: 3645
   errors: 0
 Errors: []
 
@@ -1687,7 +1687,7 @@ issues:
   - "packages/svelte/src/compiler/phases/3-transform/client/visitors/AssignmentExpression.js:31:27       proxify     U       not, we may need to proxify the value, or warn that"
   - "packages/svelte/src/compiler/phases/3-transform/client/visitors/AssignmentExpression.js:40:7        callees     U       const callees = {"
   - "packages/svelte/src/compiler/phases/3-transform/client/visitors/BindDirective.js:46:11          unthunk     U       set = b.unthunk("
-  - "packages/svelte/src/compiler/phases/3-transform/client/visitors/ConstTag.js:49:11       optimise    U       // TODO optimise the simple `{ x } ="
+  - "packages/svelte/src/compiler/phases/3-transform/client/visitors/ConstTag.js:43:11       optimise    U       // TODO optimise the simple `{ x } ="
   - "packages/svelte/src/compiler/phases/3-transform/client/visitors/shared/declarations.js:31:30        unsub       U       call = b.call('$.store_unsub', call, b.literal(`"
   - "packages/svelte/src/compiler/phases/3-transform/client/visitors/shared/element.js:49:67         readded     U       it isn't removed and readded on every update"
   - "packages/svelte/src/compiler/phases/3-transform/client/visitors/SvelteElement.js:77:46          computeds       U       ...lets); // create computeds in the outer context"
@@ -1709,7 +1709,7 @@ issues:
   - "packages/svelte/src/internal/client/dom/blocks/await.js:146:68      microtick       U       since it's on the next microtick"
   - "packages/svelte/src/internal/client/dom/blocks/svelte-element.js:75:18          Noone (No one)      U       // Assumption: Noone changes the namespace"
   - "packages/svelte/src/internal/client/dom/elements/actions.js:18:8        inited      U       var inited = false;"
-  - "packages/svelte/src/internal/client/dom/elements/attributes.js:547:16       contructor (constructor)    U       // Do not use contructor.name here as that's"
+  - "packages/svelte/src/internal/client/dom/elements/attributes.js:553:16       contructor (constructor)    U       // Do not use contructor.name here as that's"
   - "packages/svelte/src/internal/client/dom/elements/bindings/input.js:28:14        numberlike      U       value = is_numberlike_input(input) ? to_number"
   - "packages/svelte/src/internal/client/dom/elements/bindings/this.js:41:78         nullfiy (nullify)       U       context changes), then nullfiy the binding at"
   - "packages/svelte/src/internal/client/dom/elements/misc.js:54:66          possiblity (possibility)    U       get noticed of it (no possiblity of stopPropagation)"
