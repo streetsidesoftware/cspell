@@ -126,7 +126,6 @@ Contributions are welcome! See our [contribution notes](CONTRIBUTING.md). **Note
 [<img alt="Contributor benmccann" src="https://avatars.githubusercontent.com/u/322311?v=4&size=128" width=64>](https://github.com/benmccann)
 [<img alt="Contributor fisker" src="https://avatars.githubusercontent.com/u/172584?v=4&size=128" width=64>](https://github.com/fisker)
 [<img alt="Contributor dakotaJang" src="https://avatars.githubusercontent.com/u/22528264?v=4&size=128" width=64>](https://github.com/dakotaJang)
-[<img alt="Contributor bisubus" src="https://avatars.githubusercontent.com/u/2905949?v=4&size=128" width=64>](https://github.com/bisubus)
 [<img alt="Contributor aimagic" src="https://avatars.githubusercontent.com/u/40253639?v=4&size=128" width=64>](https://github.com/aimagic)
 [<img alt="Contributor abdusabri" src="https://avatars.githubusercontent.com/u/25670682?v=4&size=128" width=64>](https://github.com/abdusabri)
 [<img alt="Contributor tlindsay42" src="https://avatars.githubusercontent.com/u/11078689?v=4&size=128" width=64>](https://github.com/tlindsay42)
