@@ -5,7 +5,7 @@ import chalk from 'chalk';
 import { console } from '../console.js';
 import type { ListDictionariesResult } from '../dictionaries/index.js';
 import type { DictionariesOptions } from '../options.js';
-import { pruneTextEnd, pruneTextStart } from '../util/pad.js';
+import { pruneAnsiTextEnd, pruneAnsiTextStart } from '../util/pad.js';
 import { TableCell, TableRow, tableToLines } from '../util/table.js';
 import type { DictionaryPathFormat } from './DictionaryPathFormat.js';
 import { formatDictionaryLocation, type PathInterface } from './helpers.js';
@@ -81,11 +81,11 @@ function calcHeaders(options: EmitDictOptions): [string, string][] {
 function emitDictResult(r: ListDictionariesResult, options: EmitDictOptions): DictTableRow {
     const a = r.enabled ? '*' : ' ';
     const dictColor = r.enabled ? chalk.yellowBright : chalk.rgb(200, 128, 50);
-    const n = (width: number | undefined) => dictColor(pruneTextEnd(r.name, width && width - a.length) + a);
+    const n = (width: number | undefined) => dictColor(pruneAnsiTextEnd(r.name, width && width - a.length) + a);
     const c = colorize(chalk.white);
 
-    const locales = (width?: number) => c(pruneTextEnd(r.locales?.join(',') || '', width));
-    const fileTypes = (width?: number) => c(pruneTextEnd(r.fileTypes?.join(',') || '', width));
+    const locales = (width?: number) => c(pruneAnsiTextEnd(r.locales?.join(',') || '', width));
+    const fileTypes = (width?: number) => c(pruneAnsiTextEnd(r.fileTypes?.join(',') || '', width));
 
     if (!r.path) {
         return {
@@ -100,7 +100,7 @@ function emitDictResult(r: ListDictionariesResult, options: EmitDictOptions): Di
         location: (widthSrc) =>
             c(
                 (r.path &&
-                    pruneTextStart(
+                    pruneAnsiTextStart(
                         formatDictionaryLocation(r.path, widthSrc ?? maxWidth, { iPath, ...options }),
                         widthSrc ?? maxWidth,
                     )) ||
