@@ -4,8 +4,8 @@ Url: https://github.com/eslint/eslint
 Args: '[".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]'
 Summary:
   files: 2073
-  filesWithIssues: 309
-  issues: 1612
+  filesWithIssues: 308
+  issues: 1610
   errors: 0
 Errors: []
 
@@ -228,8 +228,6 @@ issues:
   - "lib/rules/no-mixed-requires.js:95:57        iojs    U       per nodejs v0.12.2 and iojs v0.7.1"
   - "lib/rules/no-new-native-nonconstructor.js:33:9          Nonconstructor      U       noNewNonconstructor:"
   - "lib/rules/no-trailing-spaces.js:87:4        NONBLANK    U       NONBLANK = `${BLANK_CLASS}+$"
-  - "lib/rules/no-unused-vars.js:1155:37     dectructured                    U       unused variables in dectructured object with single property"
-  - "lib/rules/no-unused-vars.js:1155:90     decalartion (declaration)       U       property in variable decalartion and function parameter"
   - "lib/rules/no-useless-backreference.js:83:31         bref        U       \"Backreference '{{ bref }}' will be ignored"
   - "lib/rules/no-useless-backreference.js:127:20        bref's      U       // group is bref's ancestor => bref is"
   - "lib/rules/no-useless-escape.js:34:47        nrvtbfux        U       ESCAPES = union(new Set(\"\\\\nrvtbfux\"), astUtils.LINEBREAKS"
@@ -313,11 +311,9 @@ issues:
   - "tests/lib/eslint/eslint.js:13342:46     intenationally (internationally)    U       cacheFilePath, \"[]\"); // intenationally invalid to additionally"
   - "tests/lib/eslint/eslint.js:13572:46     occured (occurred)                  U       the previous run that occured after the cache was"
   - "tests/lib/eslint/legacy-eslint.js:3031:15       succesfully (successfully)      U       it(\"should succesfully execute with a rule"
-  - "tests/lib/linter/linter.js:3647:1       consolexlog                     U       consolexlog(\"test2\");"
-  - "tests/lib/linter/linter.js:3807:75      rulename                        U       this is 2, since the rulename is very likely to be"
-  - "tests/lib/linter/linter.js:5858:25      suppresed (suppressed)          U       it(\"should report one suppresed problem when noInlineConfig"
-  - "tests/lib/linter/linter.js:8064:13      postprocessors                  U       describe(\"postprocessors\", () => {"
-  - "tests/lib/linter/linter.js:19771:16     intentionaly (intentionally)    U       // intentionaly mutates objects and"
+  - "tests/lib/linter/linter.js:3647:1       consolexlog         U       consolexlog(\"test2\");"
+  - "tests/lib/linter/linter.js:3807:75      rulename            U       this is 2, since the rulename is very likely to be"
+  - "tests/lib/linter/linter.js:8064:13      postprocessors      U       describe(\"postprocessors\", () => {"
   - "tests/lib/linter/report-translator.js:344:13        fooo        U       text: \"fooo\\nbar\","
   - "tests/lib/linter/report-translator.js:395:15        ncdar       U       text: \"o\\ncdar\","
   - "tests/lib/linter/rules.js:29:20         michaelficarra      U       const ruleId = \"michaelficarra\";"
@@ -371,6 +367,7 @@ issues:
   - "tests/lib/rules/no-constructor-return.js:34:26          Oumae       U       code: \"return 'Kumiko Oumae'\","
   - "tests/lib/rules/no-dupe-else-if.js:55:55        subconditions       U       may contain redundant subconditions, but the branch can"
   - "tests/lib/rules/no-duplicate-imports.js:122:23      modns       U       code: 'import * as modns from \"lodash-es\";\\nimport"
+  - "tests/lib/rules/no-duplicate-imports.js:390:28      Modns       U       code: 'import type * as Modns from \"lodash-es\";\\nimport"
   - "tests/lib/rules/no-else-return.js:167:68        nqaz    U       bar \\nelse { baz() } \\nqaz() }\","
   - "tests/lib/rules/no-eval.js:66:22        noneval     U       code: \"globalThis.noneval('foo')\","
   - "tests/lib/rules/no-inline-comments.js:130:22        otherthing      U       ignorePattern: \"otherthing\","
@@ -642,9 +639,7 @@ issuesSummary:
   - "text: customformat, count: 1, files: 1,"
   - "text: Cypro, count: 1, files: 1,"
   - "text: dbname, count: 3, files: 1,"
-  - "text: decalartion, count: 1, files: 1,"
   - "text: decrementcurrent, count: 2, files: 1,"
-  - "text: dectructured, count: 1, files: 1,"
   - "text: Defult, count: 1, files: 1,"
   - "text: destructures, count: 1, files: 1,"
   - "text: devel, count: 4, files: 1,"
@@ -768,7 +763,6 @@ issuesSummary:
   - "text: inof, count: 3, files: 1,"
   - "text: inspectable, count: 1, files: 1,"
   - "text: intenationally, count: 6, files: 2,"
-  - "text: intentionaly, count: 1, files: 1,"
   - "text: inting, count: 1, files: 1,"
   - "text: invalidtoken, count: 2, files: 1,"
   - "text: iojs, count: 1, files: 1,"
@@ -834,6 +828,7 @@ issuesSummary:
   - "text: microtask, count: 4, files: 1,"
   - "text: MMSP, count: 1, files: 1,"
   - "text: modns, count: 3, files: 1,"
+  - "text: Modns, count: 3, files: 1,"
   - "text: morerules, count: 2, files: 1,"
   - "text: MQSP, count: 1, files: 1,"
   - "text: Mtavruli, count: 1, files: 1,"
@@ -1006,7 +1001,6 @@ issuesSummary:
   - "text: succesfully, count: 5, files: 1,"
   - "text: Suggestable, count: 4, files: 1,"
   - "text: supernew, count: 3, files: 1,"
-  - "text: suppresed, count: 2, files: 1,"
   - "text: SVGCSS, count: 1, files: 1,"
   - "text: SVGH, count: 1, files: 1,"
   - "text: SVGICC, count: 1, files: 1,"

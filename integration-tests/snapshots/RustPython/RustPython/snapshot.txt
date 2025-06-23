@@ -3,7 +3,7 @@ Repository: RustPython/RustPython
 Url: "https://github.com/RustPython/RustPython.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 674, Issues found: 766 in 103 files.
+ CSpell: Files checked: 674, Issues found: 762 in 102 files.
  exit code: 1
 Cargo.toml:107:28    - Unknown word (nsis)       -- package.metadata.packager.nsis]
 Cargo.toml:193:1     - Unknown word (rustix)     -- rustix = { version = "1.0"
@@ -204,8 +204,6 @@ extra_tests/snippets/builtin_float.py:279:6     - Unknown word (inity)      -- "
 extra_tests/snippets/builtin_float.py:280:6     - Unknown word (iinity)     -- "iinity",
 extra_tests/snippets/builtin_float.py:281:7     - Unknown word (xnan)       -- "0xnan",
 extra_tests/snippets/builtin_float.py:393:21    - Unknown word (xbep)       -- identical(fromHex("0xbep0"), 190.0)
-extra_tests/snippets/builtin_list.py:329:13    - Unknown word (refrences)  -- # make sure refrences are assigned correctly
-extra_tests/snippets/builtin_list.py:437:13    - Unknown word (refrences)  -- # make sure refrences are assigned correctly
 extra_tests/snippets/builtin_list.py:813:26    - Unknown word (daedlock)   -- Test for list entering daedlock or not (https://github
 extra_tests/snippets/builtin_pow.py:136:9     - Unknown word (fiveto)     -- fiveto = float(5**n)
 extra_tests/snippets/builtin_pow.py:137:24    - Unknown word (fiveto)     -- # For small n, fiveto will be odd.  Eventually
@@ -423,7 +421,6 @@ extra_tests/snippets/stdlib_datetime.py:900:57    - Unknown word (aord)       --
 extra_tests/snippets/stdlib_datetime.py:903:37    - Unknown word (aord)       -- equal(b.toordinal(), aord + 1)
 extra_tests/snippets/stdlib_datetime.py:904:51    - Unknown word (aord)       -- theclass.fromordinal(aord + 1))
 extra_tests/snippets/stdlib_hashlib.py:41:30     - Unknown word (fubar)      -- hashlib.new("blake2s", b"fubar")
-extra_tests/snippets/stdlib_io_bytesio.py:53:33     - Unknown word (accpets)    -- that the write method accpets bytearray
 extra_tests/snippets/stdlib_itertools.py:185:5     - Unknown word (underten)   -- def underten(x):
 extra_tests/snippets/stdlib_itertools.py:230:9     - Unknown word (underten)   -- it = tw(underten, [1, 3, 5, 20, 2, 4
 extra_tests/snippets/stdlib_itertools.py:233:10    - Unknown word (citertools) -- == b"citertools\ntakewhile\np0\n(c_
@@ -445,7 +442,6 @@ extra_tests/snippets/stdlib_itertools.py:366:148   - Unknown word (nbtp)       -
 extra_tests/snippets/stdlib_itertools.py:391:148   - Unknown word (nbtp)       -- naI8\natp4\nRp5\nI4\nbtp6\nRp7\nI1\nb."
 extra_tests/snippets/stdlib_itertools.py:442:72    - Unknown word (ACEF)       -- 0, 1, 1])) == list("ACEF")
 extra_tests/snippets/stdlib_itertools.py:447:82    - Unknown word (ACEF)       -- ", 1, 9])) == list("ACEF")
-extra_tests/snippets/stdlib_itertools.py:54:24     - Unknown word (evaluted)   -- iterables are lazily evaluted
 extra_tests/snippets/stdlib_logging.py:14:9      - Unknown word (WOOT)       -- assert "WOOT" in res
 extra_tests/snippets/stdlib_logging.py:9:16      - Unknown word (WOOT)       -- logging.error("WOOT")
 extra_tests/snippets/stdlib_math.py:11:9      - Unknown word (Conversible) -- # class Conversible():
@@ -629,8 +625,8 @@ src/settings.rs:254:74    - Unknown word (PYTHONINTMAXSTRDIGITS)   -- int_max_st
 src/settings.rs:67:49     - Unknown word (PYTHONDONTWRITEBYTECODE) -- files on import; also PYTHONDONTWRITEBYTECODE=x
 src/settings.rs:84:58     - Unknown word (PYTHONNOUSERSITE)        -- directory to sys.path; also PYTHONNOUSERSITE=x
 src/settings.rs:87:51     - Unknown word (PYTHONUNBUFFERED)        -- effect on stdin; also PYTHONUNBUFFERED=x
-stdlib/Cargo.toml:102:1     - Unknown word (rustix)     -- rustix = { workspace = true
-stdlib/Cargo.toml:82:41     - Unknown word (libbz)      -- "0.5", features = ["libbz2-rs-sys"] }
+stdlib/Cargo.toml:103:1     - Unknown word (rustix)     -- rustix = { workspace = true
+stdlib/Cargo.toml:83:41     - Unknown word (libbz)      -- "0.5", features = ["libbz2-rs-sys"] }
 stdlib/build.rs:10:27     - Unknown word (ossl)       -- (0x1_01_00_07_0, "ossl110g"),
 stdlib/build.rs:2:44      - Unknown word (osslconf)   -- rustc-check-cfg=cfg(osslconf, values("OPENSSL_NO
 stdlib/build.rs:37:39     - Unknown word (osslconf)   -- println!("cargo:rustc-cfg=osslconf=\"{conf}\"");
@@ -643,19 +639,19 @@ vm/Cargo.toml:100:1     - Unknown word (rustix)     -- rustix = { workspace = tr
 vm/src/builtins/function/jitfunc.rs:114:14    - Unknown word (Jitting)    -- "Jitting function requires return
 vm/src/builtins/function/jitfunc.rs:89:14     - Unknown word (Jitting)    -- "Jitting function requires arguments
 vm/src/builtins/memory.rs:641:18    - Unknown word (fortain)    -- // TODO: fortain order
-vm/src/builtins/str.rs:2253:21   - Unknown word (Ωppercases) -- ("Greek Ωppercases ...", "greek ωppercases
-vm/src/builtins/str.rs:2253:45   - Unknown word (ωppercases) -- Ωppercases ...", "greek ωppercases ..."),
-vm/src/builtins/str.rs:2254:21   - Unknown word (ῼitlecases) -- ("Greek ῼitlecases ...", "greek ῳitlecases
-vm/src/builtins/str.rs:2254:45   - Unknown word (ῳitlecases) -- ῼitlecases ...", "greek ῳitlecases ..."),
-vm/src/builtins/str.rs:2268:20   - Unknown word (Ωppercases) -- "Greek Ωppercases ...",
-vm/src/builtins/str.rs:2269:20   - Unknown word (ῼitlecases) -- "Greek ῼitlecases ...",
-vm/src/builtins/str.rs:577:48    - Unknown word (cmpxchg)    -- len, we don't need a cmpxchg loop, since it'll always
+vm/src/builtins/str.rs:2267:21   - Unknown word (Ωppercases) -- ("Greek Ωppercases ...", "greek ωppercases
+vm/src/builtins/str.rs:2267:45   - Unknown word (ωppercases) -- Ωppercases ...", "greek ωppercases ..."),
+vm/src/builtins/str.rs:2268:21   - Unknown word (ῼitlecases) -- ("Greek ῼitlecases ...", "greek ῳitlecases
+vm/src/builtins/str.rs:2268:45   - Unknown word (ῳitlecases) -- ῼitlecases ...", "greek ῳitlecases ..."),
+vm/src/builtins/str.rs:2282:20   - Unknown word (Ωppercases) -- "Greek Ωppercases ...",
+vm/src/builtins/str.rs:2283:20   - Unknown word (ῼitlecases) -- "Greek ῼitlecases ...",
+vm/src/builtins/str.rs:578:48    - Unknown word (cmpxchg)    -- len, we don't need a cmpxchg loop, since it'll always
 vm/src/function/argument.rs:121:13    - Unknown word (kwargc)     -- let kwargc = kwarg_names.len()
 vm/src/function/argument.rs:122:36    - Unknown word (kwargc)     -- posargc = total_argc - kwargc;
 vm/src/function/builtin.rs:69:26     - Unknown word (sizedness)  -- requirements of zero-sizedness apply, see that documentation
 vm/src/object/traverse_object.rs:47:56     - Unknown word (maintaince) -- pointer* to a struct for maintaince weak ref, so no ownership
 vm/src/object/traverse_object.rs:67:56     - Unknown word (maintaince) -- pointer* to a struct for maintaince weak ref, so no ownership
-vm/src/protocol/buffer.rs:389:22    - Unknown word (fortain)    -- // TODO: support fortain order
+vm/src/protocol/buffer.rs:384:22    - Unknown word (fortain)    -- // TODO: support fortain order
 vm/src/stdlib/builtins.rs:446:26    - Unknown word (normalish)  -- // everything is normalish, we can just rely on
 vm/src/vm/setting.rs:39:10     - Unknown word (Xfoo)       -- /// -Xfoo[=bar]
 vm/src/vm/setting.rs:42:10     - Unknown word (Wfoo)       -- /// -Wfoo

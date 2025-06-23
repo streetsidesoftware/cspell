@@ -4,8 +4,8 @@ Url: https://github.com/googleapis/google-cloud-cpp.git
 Args: '["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]'
 Summary:
   files: 20485
-  filesWithIssues: 7662
-  issues: 44683
+  filesWithIssues: 7664
+  issues: 44698
   errors: 0
 Errors: []
 
@@ -743,15 +743,16 @@ issues:
   - "google/cloud/spanner/integration_tests/client_integration_test.cc:1472:50       shoppingcarts                   U       HasSubstr(\"shoppingcarts\"))));"
   - "google/cloud/spanner/integration_tests/data_types_integration_test.cc:85:30         Tmpl    U       DataTypeIntegrationTestTmpl : public T {"
   - "google/cloud/spanner/internal/connection_impl_test.cc:65:34         Wmissing    U       diagnostic ignored \"-Wmissing-field-initializers\""
-  - "google/cloud/spanner/internal/connection_impl_test.cc:3605:37       BADDECAF    U       { partition_token: \"BADDECAF\" }"
-  - "google/cloud/spanner/internal/connection_impl_test.cc:3607:25       CAFEDEAD    U       transaction: { id: \"CAFEDEAD\" }"
+  - "google/cloud/spanner/internal/connection_impl_test.cc:3298:37       BADDECAF    U       { partition_token: \"BADDECAF\" }"
+  - "google/cloud/spanner/internal/connection_impl_test.cc:3300:25       CAFEDEAD    U       transaction: { id: \"CAFEDEAD\" }"
   - "google/cloud/spanner/internal/logging_result_set_reader.cc:34:43        unresumable     U       __func__ << \"() << (unresumable)\";"
   - "google/cloud/spanner/internal/partial_result_set_resume_test.cc:528:39      Resumability    U       set<spanner::StreamingResumabilityBufferSizeOption>(0)"
   - "google/cloud/spanner/internal/partial_result_set_source_test.cc:527:31      chunksecond     U       not_chunked\", \"first_chunksecond_chunkthird_chunk\","
   - "google/cloud/spanner/internal/partial_result_set_source_test.cc:527:43      chunkthird      U       \"first_chunksecond_chunkthird_chunk\","
   - "google/cloud/spanner/internal/partial_result_set_source.cc:213:64       resumability    U       again so as to maintain resumability."
-  - "google/cloud/spanner/internal/session_pool_test.cc:718:35       Stubless    U       SessionPoolTest, GetStubForStublessSession) {"
-  - "google/cloud/spanner/internal/session_pool.cc:369:22        robining    U       // to use by round-robining between the channels"
+  - "google/cloud/spanner/internal/session_pool_test.cc:736:35       Stubless        U       SessionPoolTest, GetStubForStublessSession) {"
+  - "google/cloud/spanner/internal/session_pool_test.cc:751:25       Multilpexed     U       TEST_F(SessionPoolTest, MultilpexedSessionReplacementSuccess"
+  - "google/cloud/spanner/internal/session_pool.cc:459:22        robining    U       // to use by round-robining between the channels"
   - "google/cloud/spanner/interval_test.cc:61:18         intvl       U       Interval const intvl(0, 1, 2, hours(3));"
   - "google/cloud/spanner/interval_test.cc:346:31        dayss       U       THAT(MakeInterval(\"7 dayss\"), StatusIs(StatusCode"
   - "google/cloud/spanner/interval.cc:287:7          centurie    U       {\"centurie\", [](auto n) { return"
