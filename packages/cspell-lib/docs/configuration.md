@@ -12,6 +12,7 @@ The spell checker will look for the following configuration files.
 - `.vscode/cSpell.json`
 - `.vscode/.cspell.json`
 - `cspell.config.js`
+- `cspell.config.mjs`
 - `cspell.config.cjs`
 - `cspell.config.json`
 - `cspell.config.yaml`
