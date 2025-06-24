@@ -3,6 +3,53 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v9.1.2 (2025-06-24)
+
+### Fixes
+
+<details>
+<summary>fix: Do not double encode stdin urls (<a href="https://github.com/streetsidesoftware/cspell/pull/7536">#7536</a>)</summary>
+
+### fix: Do not double encode stdin urls ([#7536](https://github.com/streetsidesoftware/cspell/pull/7536))
+
+fixes #7517
+
+---
+
+</details>
+
+<details>
+<summary>fix: cspell trace output (<a href="https://github.com/streetsidesoftware/cspell/pull/7528">#7528</a>)</summary>
+
+### fix: cspell trace output ([#7528](https://github.com/streetsidesoftware/cspell/pull/7528))
+
+It was incorrectly trimming ansi strings.
+
+---
+
+</details>
+
+### Dictionary Updates
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/7526">#7526</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#7526](https://github.com/streetsidesoftware/cspell/pull/7526))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ packages/cspell-bundled-dicts/package.json |  4 ++--
+ pnpm-lock.yaml                             | 24 ++++++++++++------------
+ 2 files changed, 14 insertions(+), 14 deletions(-)
+```
+
+---
+
+</details>
+
 ## v9.1.1 (2025-06-14)
 
 ### Changes
