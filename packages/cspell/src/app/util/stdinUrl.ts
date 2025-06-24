@@ -19,10 +19,11 @@ export function isStdinUrl(url: string | URL): boolean {
  */
 export function resolveStdinUrl(url: string, cwd: string): string {
     assert(url.startsWith(STDINProtocol), `Expected url to start with ${STDINProtocol}`);
-    const path = url
+    const path = decodeURIComponent(url)
         .slice(STDINProtocol.length)
         .replace(/^\/\//, '')
         .replace(/^\/([a-z]:)/i, '$1');
     const fileUrl = toFileURL(path, cwd);
+    // If the path is empty,
     return fileUrl.toString().replace(/^file:/, STDINProtocol) + (path ? '' : '/');
 }

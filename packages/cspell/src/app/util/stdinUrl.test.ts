@@ -19,13 +19,16 @@ describe('stdinUrl', () => {
     });
 
     test.each`
-        url                        | expected
-        ${'stdin://'}              | ${stdinUrl}
-        ${'stdin:package.json'}    | ${new URL('package.json', stdinUrl).href}
-        ${'stdin:./package.json'}  | ${new URL('package.json', stdinUrl).href}
-        ${'stdin:' + __filename}   | ${new URL(filenameURL.pathname, stdinUrl).href}
-        ${'stdin://' + __filename} | ${new URL(filenameURL.pathname, stdinUrl).href}
-    `('resolveStdinUrl', ({ url, expected }) => {
+        url                               | expected
+        ${'stdin://'}                     | ${stdinUrl}
+        ${'stdin:package.json'}           | ${new URL('package.json', stdinUrl).href}
+        ${'stdin:./issue 7517/README.md'} | ${new URL('issue 7517/README.md', stdinUrl).href}
+        ${'stdin:./package.json'}         | ${new URL('package.json', stdinUrl).href}
+        ${'stdin:' + __filename}          | ${new URL(filenameURL.pathname, stdinUrl).href}
+        ${'stdin://' + __filename}        | ${new URL(filenameURL.pathname, stdinUrl).href}
+    `('resolveStdinUrl $url', ({ url, expected }) => {
         expect(resolveStdinUrl(url, __dirname)).toBe(expected);
+        // check nested resolve
+        expect(resolveStdinUrl(resolveStdinUrl(url, __dirname), dirUrl.href)).toBe(expected);
     });
 });
