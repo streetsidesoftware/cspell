@@ -3,29 +3,19 @@ Repository: mdx-js/mdx
 Url: "https://github.com/mdx-js/mdx"
 Args: ["--config=../../../../config/repositories/mdx-js/mdx/cspell.json","**/*.*"]
 Lines:
- CSpell: Files checked: 141, Issues found: 629 in 72 files.
+ CSpell: Files checked: 141, Issues found: 588 in 71 files.
  exit code: 1
-docs/_asset/editor.jsx:10:22     - Unknown word (Mdast)      -- * @import {Nodes as MdastNodes, Root as MdastRoot
-docs/_asset/editor.jsx:10:42     - Unknown word (Mdast)      -- MdastNodes, Root as MdastRoot} from 'mdast'
-docs/_asset/editor.jsx:10:59     - Unknown word (mdast)      -- as MdastRoot} from 'mdast'
-docs/_asset/editor.jsx:15:12     - Unknown word (mdast)      -- * } from 'mdast-util-mdx-jsx'
 docs/_asset/editor.jsx:169:15    - Unknown word (recma)      -- const recmaPlugins = []
 docs/_asset/editor.jsx:186:23    - Unknown word (esast)      -- if (show === 'esast') recmaPlugins.push
 docs/_asset/editor.jsx:186:31    - Unknown word (recma)      -- if (show === 'esast') recmaPlugins.push([captureEsast
 docs/_asset/editor.jsx:186:57    - Unknown word (Esast)      -- recmaPlugins.push([captureEsast])
-docs/_asset/editor.jsx:188:23    - Unknown word (mdast)      -- if (show === 'mdast') remarkPlugins.push
-docs/_asset/editor.jsx:188:58    - Unknown word (Mdast)      -- remarkPlugins.push([captureMdast])
 docs/_asset/editor.jsx:194:45    - Unknown word (esast)      -- 'code' || show === 'esast' ? generateJsx : false
 docs/_asset/editor.jsx:199:11    - Unknown word (recma)      -- recmaPlugins,
 docs/_asset/editor.jsx:209:13    - Unknown word (jsxs)       -- jsxs,
 docs/_asset/editor.jsx:232:35    - Unknown word (jsxs)       -- {Fragment, jsx, jsxs}
 docs/_asset/editor.jsx:246:17    - Unknown word (jsxs)       -- jsxs
-docs/_asset/editor.jsx:252:25    - Unknown word (Mdast)      -- function captureMdast() {
-docs/_asset/editor.jsx:254:22    - Unknown word (Mdast)      -- * @param {MdastRoot} tree
 docs/_asset/editor.jsx:280:25    - Unknown word (Esast)      -- function captureEsast() {
 docs/_asset/editor.jsx:339:17    - Unknown word (jsxs)       -- jsxs
-docs/_asset/editor.jsx:369:32    - Unknown word (mdast)      -- <option value="mdast">mdast (markdown)</option
-docs/_asset/editor.jsx:369:39    - Unknown word (mdast)      -- option value="mdast">mdast (markdown)</option>
 docs/_asset/editor.jsx:371:32    - Unknown word (esast)      -- <option value="esast">esast (javascript)
 docs/_asset/editor.jsx:371:39    - Unknown word (esast)      -- option value="esast">esast (javascript)</option
 docs/_asset/editor.jsx:48:35     - Unknown word (wooorm)     -- createStarryNight} from '@wooorm/starry-night'
@@ -442,7 +432,6 @@ packages/mdx/lib/core.js:125:8     - Unknown word (recma)      -- import recmaBu
 packages/mdx/lib/core.js:128:14    - Unknown word (Recma)      -- import rehypeRecma from 'rehype-recma'
 packages/mdx/lib/core.js:222:16    - Unknown word (Recma)      -- .use(rehypeRecma, settings)
 packages/mdx/lib/core.js:26:21     - Unknown word (Recma)      -- * @property {RehypeRecmaOptions['elementAttributeNameC
-packages/mdx/lib/core.js:3:25      - Unknown word (mdast)      -- import {Root} from 'mdast'
 packages/mdx/lib/core.js:43:40     - Unknown word (jsxs)       -- jsx`, `jsxDEV`, and `jsxs`.
 packages/mdx/lib/core.js:4:30      - Unknown word (Recma)      -- import {Options as RehypeRecmaOptions} from 'rehype
 packages/mdx/lib/core.js:4:57      - Unknown word (recma)      -- ypeRecmaOptions} from 'rehype-recma'
@@ -451,8 +440,6 @@ packages/mdx/lib/evaluate.js:49:34     - Unknown word (compiletime) -- await com
 packages/mdx/lib/evaluate.js:67:10     - Unknown word (compiletime) -- const {compiletime, runtime} = resolveEvaluateOp
 packages/mdx/lib/evaluate.js:68:36     - Unknown word (compiletime) -- runSync(compileSync(file, compiletime), runtime)
 packages/mdx/lib/node-types.js:10:4      - Unknown word (mdxjs)      -- 'mdxjsEsm'
-packages/mdx/lib/node-types.js:2:32      - Unknown word (mdast)      -- node types made by `mdast-util-mdx`, which have
-packages/mdx/lib/node-types.js:3:31      - Unknown word (mdast)      -- through untouched from the mdast tree to the hast tree
 packages/mdx/lib/plugin/recma-build-jsx-transform.js:24:17     - Unknown word (recma)      -- export function recmaBuildJsxTransform(options
 packages/mdx/lib/plugin/recma-build-jsx-transform.js:44:35     - Unknown word (jsxs)       -- generated, and get `jsx`, `jsxs`, and `Fragment` from
 packages/mdx/lib/plugin/recma-build-jsx-transform.js:7:41      - Unknown word (recma)      -- for internal plugin `recma-build-jsx-transform
@@ -461,21 +448,16 @@ packages/mdx/lib/plugin/recma-document.js:180:28    - Unknown word (recma)      
 packages/mdx/lib/plugin/recma-document.js:32:29     - Unknown word (devlop)     -- ok as assert} from 'devlop'
 packages/mdx/lib/plugin/recma-document.js:51:17     - Unknown word (recma)      -- export function recmaDocument(options) {
 packages/mdx/lib/plugin/recma-jsx-rewrite.js:62:17     - Unknown word (recma)      -- export function recmaJsxRewrite(options)
-packages/mdx/lib/plugin/remark-mark-and-unravel.js:2:38      - Unknown word (mdast)      -- RootContent} from 'mdast'
 packages/mdx/lib/plugin/remark-mark-and-unravel.js:99:26     - Unknown word (mdxjs)      -- node.type === 'mdxjsEsm') &&
 packages/mdx/lib/types.d.ts:14:11     - Unknown word (Esast)      -- interface EsastCommentData extends EsastData
 packages/mdx/lib/types.d.ts:14:36     - Unknown word (Esast)      -- EsastCommentData extends EsastData {
-packages/mdx/lib/types.d.ts:28:45     - Unknown word (mdast)      -- passed through from mdast through hast to esast
 packages/mdx/lib/types.d.ts:28:67     - Unknown word (esast)      -- mdast through hast to esast.
 packages/mdx/lib/types.d.ts:32:12     - Unknown word (Esast)      -- data?: EsastData | undefined
 packages/mdx/lib/types.d.ts:37:35     - Unknown word (recma)      -- unist data added by `recma-document`.
 packages/mdx/lib/types.d.ts:41:12     - Unknown word (Esast)      -- data?: EsastCommentData | undefined
-packages/mdx/lib/types.d.ts:45:22     - Unknown word (mdast)      -- / Register data on `mdast`.
-packages/mdx/lib/types.d.ts:46:17     - Unknown word (mdast)      -- declare module 'mdast-util-mdx-jsx' {
 packages/mdx/lib/types.d.ts:4:11      - Unknown word (Esast)      -- interface EsastData extends UnistData
 packages/mdx/lib/util/create-format-aware-processors.js:12:38     - Unknown word (extnames)   -- ReadonlyArray<string>} extnames
 packages/mdx/lib/util/create-format-aware-processors.js:26:26     - Unknown word (extnames)   -- import {md, mdx} from './extnames.js'
-packages/mdx/lib/util/create-format-aware-processors.js:3:25      - Unknown word (mdast)      -- import {Root} from 'mdast'
 packages/mdx/lib/util/create-format-aware-processors.js:47:5      - Unknown word (extnames)   -- extnames:
 packages/mdx/lib/util/estree-util-declaration-to-expression.js:10:29     - Unknown word (devlop)     -- ok as assert} from 'devlop'
 packages/mdx/lib/util/estree-util-specifiers-to-declarations.js:15:29     - Unknown word (devlop)     -- ok as assert} from 'devlop'
@@ -498,12 +480,9 @@ packages/mdx/lib/util/resolve-file-and-options.js:8:21      - Unknown word (extn
 packages/mdx/readme.md:107:45    - Unknown word (jsxs)       -- Fragment, jsx as _jsx, jsxs as _jsxs} from 'react
 packages/mdx/readme.md:107:54    - Unknown word (jsxs)       -- jsx as _jsx, jsxs as _jsxs} from 'react/jsx-runtime
 packages/mdx/readme.md:1080:46   - Unknown word (unifiedjs)     -- please read through the [`unifiedjs/unified`][unified] readme
-packages/mdx/readme.md:1088:7    - Unknown word (mdast)         -- to mdast (markdown syntax tree
-packages/mdx/readme.md:1090:14   - Unknown word (mdast)         -- 3. transform mdast to hast (HTML syntax
 packages/mdx/readme.md:1092:22   - Unknown word (esast)         -- . transform hast to esast (JS syntax tree)
 packages/mdx/readme.md:1095:14   - Unknown word (esast)         -- 8. serialize esast as JavaScript
 packages/mdx/readme.md:1103:33   - Unknown word (mdxjs)         -- micromark-extension-mdxjs`][micromark-extension
-packages/mdx/readme.md:1106:25   - Unknown word (mdast)         -- extension [`syntax-tree/mdast-util-mdx`][mdast-util
 packages/mdx/readme.md:1112:58   - Unknown word (frontmatter)   -- tables and such) or frontmatter?
 packages/mdx/readme.md:1113:57   - Unknown word (frontmatter)   -- remark-gfm` or `remark-frontmatter`,
 packages/mdx/readme.md:1129:3    - Unknown word (rehypejs)      -- [`rehypejs/rehype-highlight`][rehype
@@ -511,8 +490,6 @@ packages/mdx/readme.md:1130:3    - Unknown word (rehypejs)      -- [`rehypejs/re
 packages/mdx/readme.md:1134:28   - Unknown word (esast)         -- we go to JavaScript: [esast][] (JS; an
 packages/mdx/readme.md:1145:29   - Unknown word (astring)       -- final step is done by [astring][], a
 packages/mdx/readme.md:115:11    - Unknown word (jsxs)       -- return _jsxs(_components.h1, {children
-packages/mdx/readme.md:302:29    - Unknown word (mdast)      -- node types made by `mdast-util-mdx`, which have
-packages/mdx/readme.md:303:28    - Unknown word (mdast)      -- through untouched from the mdast tree to the hast tree
 packages/mdx/readme.md:470:4     - Unknown word (jsxs)       -- `jsxs` or `jsx` would be used
 packages/mdx/readme.md:508:24    - Unknown word (QAAQ)       -- mappings: ';;aAAaA,QAAQ;YAAQ;;;;;;;;iBAE3B'
 packages/mdx/readme.md:508:29    - Unknown word (YAAQ)       -- mappings: ';;aAAaA,QAAQ;YAAQ;;;;;;;;iBAE3B',
@@ -534,27 +511,18 @@ packages/mdx/readme.md:949:60    - Unknown word (strikethrough) -- Tables, footn
 packages/mdx/readme.md:952:47    - Unknown word (Frontmatter)   -- remarkPlugins: [[remarkFrontmatter, 'toml']]}) // A plugin
 packages/mdx/readme.md:953:57    - Unknown word (Frontmatter)   -- arkPlugins: [remarkGfm, remarkFrontmatter]}) // Two plugins.
 packages/mdx/readme.md:954:81    - Unknown word (Frontmatter)   -- singleTilde: false}], remarkFrontmatter]}) // Two plugins, first
-packages/mdx/test/compile.js:121:20    - Unknown word (Mdast)      -- * @returns {MdastRoot}
 packages/mdx/test/compile.js:1411:56   - Unknown word (jsxs)       -- Fragment, jsx as _jsx, jsxs as _jsxs} from "react
 packages/mdx/test/compile.js:1411:65   - Unknown word (jsxs)       -- jsx as _jsx, jsxs as _jsxs} from "react/jsx-runtime
 packages/mdx/test/compile.js:1419:22   - Unknown word (jsxs)       -- ' return _jsxs(_Fragment, {',
 packages/mdx/test/compile.js:1420:53   - Unknown word (jsxs)       -- span", {}), "\\n", _jsxs(_components.p, {',
-packages/mdx/test/compile.js:3:21      - Unknown word (Mdast)      -- * @import {Root as MdastRoot} from 'mdast'
-packages/mdx/test/compile.js:3:38      - Unknown word (mdast)      -- as MdastRoot} from 'mdast'
-packages/mdx/test/compile.js:944:20    - Unknown word (Mdast)      -- * @param {MdastRoot} tree
 packages/mdx/test/compile.js:951:20    - Unknown word (mdxjs)      -- type: 'mdxjsEsm',
 packages/mdx/test/evaluate.js:30:42     - Unknown word (jsxs)       -- should throw on missing `jsxs`', async function (
 packages/mdx/test/evaluate.js:35:46     - Unknown word (jsxs)       -- String(error), /Expected `jsxs` given to `evaluate
 packages/mdx/test/syntax.js:14:14     - Unknown word (Katex)      -- import rehypeKatex from 'rehype-katex'
 packages/mdx/test/syntax.js:180:31    - Unknown word (setext)     -- should support headings (setext) (`=` -> `<h1>`)',
-packages/mdx/test/syntax.js:1:32      - Unknown word (mdast)      -- Register directive nodes in mdast:
 packages/mdx/test/syntax.js:263:103   - Unknown word (describedby) -- footnote-ref="true" aria-describedby="footnote-label">1<
-packages/mdx/test/syntax.js:2:23      - Unknown word (mdast)      -- / <reference types="mdast-util-directive" />
 packages/mdx/test/syntax.js:338:105   - Unknown word (describedby) -- footnote-ref="true" aria-describedby="footnote-label">1<
 packages/mdx/test/syntax.js:391:37    - Unknown word (Katex)       -- rehypePlugins: [rehypeKatex]
-packages/mdx/test/syntax.js:420:16    - Unknown word (Mdast)       -- * @param {MdastRoot} tree
-packages/mdx/test/syntax.js:5:21      - Unknown word (Mdast)      -- * @import {Root as MdastRoot} from 'mdast'
-packages/mdx/test/syntax.js:5:38      - Unknown word (mdast)      -- as MdastRoot} from 'mdast'
 packages/mdx/test/syntax.js:644:31    - Unknown word (jsxs)        -- import {jsx as _jsx, jsxs as _jsxs} from "react
 packages/mdx/test/syntax.js:644:40    - Unknown word (jsxs)        -- jsx as _jsx, jsxs as _jsxs} from "react/jsx-runtime
 packages/mdx/test/syntax.js:648:27    - Unknown word (jsxs)        -- ' children: _jsxs("tr", {',
@@ -567,25 +535,16 @@ packages/node-loader/lib/index.js:103:33    - Unknown word (extnames)   -- regex
 packages/node-loader/lib/index.js:24:53     - Unknown word (extnames)   -- mdx-js/mdx/internal-extnames-to-regex'
 packages/node-loader/lib/index.js:24:9      - Unknown word (extnames)   -- import {extnamesToRegex} from '@mdx-js
 packages/node-loader/lib/index.js:98:10     - Unknown word (extnames)   -- const {extnames, process} = createFormatAware
-packages/remark-mdx/index.js:2:23      - Unknown word (mdast)      -- / <reference types="mdast-util-mdx" />
-packages/remark-mdx/lib/index.js:12:47     - Unknown word (mdast)      -- mdxToMarkdown} from 'mdast-util-mdx'
 packages/remark-mdx/lib/index.js:13:42     - Unknown word (mdxjs)      -- micromark-extension-mdxjs'
 packages/remark-mdx/lib/index.js:13:9      - Unknown word (mdxjs)      -- import {mdxjs} from 'micromark-extension
-packages/remark-mdx/lib/index.js:2:38      - Unknown word (mdast)      -- ToMarkdownOptions} from 'mdast-util-mdx'
 packages/remark-mdx/lib/index.js:3:68      - Unknown word (mdxjs)      -- micromark-extension-mdxjs'
 packages/remark-mdx/lib/index.js:41:28     - Unknown word (mdxjs)      -- micromarkExtensions.push(mdxjs(settings))
 packages/remark-mdx/readme.md:166:55    - Unknown word (mdxjs)      -- with `passThrough: ['mdxjsEsm',
-packages/remark-mdx/readme.md:202:14    - Unknown word (mdast)      -- with `@types/mdast` by adding a reference
-packages/remark-mdx/readme.md:205:26    - Unknown word (mdast)      -- Register MDX nodes in mdast:
-packages/remark-mdx/readme.md:209:25    - Unknown word (mdast)      -- import {Root} from 'mdast'
-packages/remark-mdx/readme.md:55:3      - Unknown word (mdast)      -- [`mdast-util-mdx`][mdast-util
-packages/remark-mdx/test/index.js:2:26      - Unknown word (mdast)      -- import {Nodes} from 'mdast'
 packages/remark-mdx/test/index.js:468:15    - Unknown word (onvisit)    -- visit(tree, onvisit)
 packages/remark-mdx/test/index.js:477:10    - Unknown word (onvisit)    -- function onvisit(node) {
 packages/remark-mdx/test/index.js:479:21    - Unknown word (mdxjs)      -- (node.type === 'mdxjsEsm' ||
 packages/remark-mdx/test/index.js:498:7     - Unknown word (onvisit)    -- onvisit(child)
 packages/remark-mdx/test/index.js:501:9     - Unknown word (onvisit)    -- onvisit(child.value)
-packages/remark-mdx/test/index.js:7:12      - Unknown word (mdast)      -- * } from 'mdast-util-mdx'
 packages/rollup/lib/index.js:4:42      - Unknown word (pluginutils) -- FilterPattern} from '@rollup/pluginutils'
 packages/rollup/lib/index.js:56:37     - Unknown word (pluginutils) -- createFilter} from '@rollup/pluginutils'
 packages/rollup/lib/index.js:96:31     - Unknown word (extnames)    -- formatAwareProcessors.extnames.includes(file.extname
