@@ -3,7 +3,7 @@ Repository: sveltejs/svelte
 Url: https://github.com/sveltejs/svelte.git
 Args: '["**"]'
 Summary:
-  files: 7523
+  files: 7567
   filesWithIssues: 504
   issues: 3645
   errors: 0
@@ -1674,7 +1674,7 @@ issues:
   - "packages/svelte/src/compiler/phases/2-analyze/css/css-prune.js:289:29       unscopeable     U       a `:global(...)` or unscopeable selector, or"
   - "packages/svelte/src/compiler/phases/2-analyze/css/utils.js:28:28        deopt       U       and we don't want to deopt on `condition`"
   - "packages/svelte/src/compiler/phases/2-analyze/css/utils.js:34:29        cslx        U       will be processed by cslx, in which case falsy"
-  - "packages/svelte/src/compiler/phases/2-analyze/index.js:639:18       nonstate    U       // warn on any nonstate declarations that are"
+  - "packages/svelte/src/compiler/phases/2-analyze/index.js:662:18       nonstate    U       // warn on any nonstate declarations that are"
   - "packages/svelte/src/compiler/phases/2-analyze/visitors/Attribute.js:82:7        unhoisted       U       const unhoisted = { hoisted: false"
   - "packages/svelte/src/compiler/phases/2-analyze/visitors/RegularElement.js:38:72          qirk    U       stripped because of a qirk:"
   - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y.js:353:3         impp            U       'impp'"
@@ -1703,20 +1703,20 @@ issues:
   - "packages/svelte/src/internal/client/dev/debug.js:57:9           callsite    U       const callsite = new Error().stack"
   - "packages/svelte/src/internal/client/dev/debug.js:67:28          cdeps       U       console.groupCollapsed('%cdeps', 'font-weight: normal"
   - "packages/svelte/src/internal/client/dev/debug.js:96:28          cderived    U       console.groupCollapsed('%cderived', 'font-weight: normal"
-  - "packages/svelte/src/internal/client/dev/inspect.js:22:43        occured (occurred)      U       known that an error occured, but we don't stop execution"
+  - "packages/svelte/src/internal/client/dev/inspect.js:23:43        occured (occurred)      U       known that an error occured, but we don't stop execution"
   - "packages/svelte/src/internal/client/dev/tracing.js:93:28        cran    U       console.log(`${prefix} %cran outside of an effect"
   - "packages/svelte/src/internal/client/dom/blocks/await.js:125:91      treeshaken      U       let` or else it isn't treeshaken out */"
   - "packages/svelte/src/internal/client/dom/blocks/await.js:146:68      microtick       U       since it's on the next microtick"
   - "packages/svelte/src/internal/client/dom/blocks/svelte-element.js:75:18          Noone (No one)      U       // Assumption: Noone changes the namespace"
   - "packages/svelte/src/internal/client/dom/elements/actions.js:18:8        inited      U       var inited = false;"
-  - "packages/svelte/src/internal/client/dom/elements/attributes.js:553:16       contructor (constructor)    U       // Do not use contructor.name here as that's"
+  - "packages/svelte/src/internal/client/dom/elements/attributes.js:555:16       contructor (constructor)    U       // Do not use contructor.name here as that's"
   - "packages/svelte/src/internal/client/dom/elements/bindings/input.js:28:14        numberlike      U       value = is_numberlike_input(input) ? to_number"
   - "packages/svelte/src/internal/client/dom/elements/bindings/this.js:41:78         nullfiy (nullify)       U       context changes), then nullfiy the binding at"
   - "packages/svelte/src/internal/client/dom/elements/misc.js:54:66          possiblity (possibility)    U       get noticed of it (no possiblity of stopPropagation)"
   - "packages/svelte/src/internal/client/proxy.js:27:12          proxyable       U       // if non-proxyable, or is already a proxy"
   - "packages/svelte/src/internal/client/reactivity/effects.js:15:2          untracking      U       untracking"
   - "packages/svelte/src/internal/client/reactivity/props.js:421:51      synchronisation     U       value)); // force a synchronisation immediately"
-  - "packages/svelte/src/internal/client/reactivity/sources.js:215:65        overfiring      U       - this way we avoid overfiring."
+  - "packages/svelte/src/internal/client/reactivity/sources.js:217:65        overfiring      U       - this way we avoid overfiring."
   - "packages/svelte/src/internal/client/runtime.js:131:90       depedencies (dependencies)      U       to avoid duplicating depedencies inside a reaction *"
   - "packages/svelte/src/internal/client/timing.js:12:5          bunder      U       // bunder will eval and remove"
   - "packages/svelte/src/internal/server/index.js:25:23          FDEF        U       [\\s'\">/=\\u{FDD0}-\\u{FDEF}\\u{FFFE}\\u{FFFF}\\u{"
@@ -1830,7 +1830,7 @@ issues:
   - "packages/svelte/tests/preprocess/samples/style-attributes/expected_map.json:3:121       UAAO    U       GAAG,CAAC,CAAC,IAAI,UAAO,CAAC,CAAC,KAAK\","
   - "packages/svelte/tests/README.md:3:51        currente    U       many tests from the currente Svelte project over"
   - "packages/svelte/tests/README.md:16:151      unkeyed     U       binding-each-remount-unkeyed` for an example"
-  - "packages/svelte/tests/runtime-browser/assert.js:163:72      infered (inferred)      U       directly visible, not infered, which is why"
+  - "packages/svelte/tests/runtime-browser/assert.js:166:72      infered (inferred)      U       directly visible, not infered, which is why"
   - "packages/svelte/tests/runtime-browser/samples/component-css-custom-properties-dynamic-svg/_config.js:14:52          qzlp    U       \"10\" class=\"svelte-1qzlp1k\"></circle>"
   - "packages/svelte/tests/runtime-browser/samples/component-event-handler-contenteditable-false/_config.js:13:21        bcde        U       component.text = 'bcde';"
   - "packages/svelte/tests/runtime-browser/samples/component-event-handler-contenteditable-false/_config.js:14:34        bcdea       U       equal(div.textContent, 'bcdea');"

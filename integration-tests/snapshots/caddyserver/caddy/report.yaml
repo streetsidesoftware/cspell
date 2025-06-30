@@ -5,7 +5,7 @@ Args: '["**/*.go"]'
 Summary:
   files: 285
   filesWithIssues: 256
-  issues: 3682
+  issues: 3681
   errors: 0
 Errors: []
 
@@ -2289,7 +2289,6 @@ issues:
   - "modules/caddyhttp/reverseproxy/streaming.go:110:12      bodyclose       U       //nolint:bodyclose"
   - "modules/caddyhttp/reverseproxy/streaming.go:129:5       nolint          U       //nolint:bodyclose"
   - "modules/caddyhttp/reverseproxy/streaming.go:129:12      bodyclose       U       //nolint:bodyclose"
-  - "modules/caddyhttp/reverseproxy/streaming.go:149:22      cancelation     U       // Ensure that the cancelation of a request closes"
   - "modules/caddyhttp/reverseproxy/streaming.go:210:6       timeoutc        U       var timeoutc <-chan time.Time"
   - "modules/caddyhttp/reverseproxy/streaming.go:214:3       timeoutc        U       timeoutc = timer.C"
   - "modules/caddyhttp/reverseproxy/streaming.go:217:2       errc            U       errc := make(chan error,"

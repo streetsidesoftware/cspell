@@ -3,11 +3,11 @@ Repository: RustPython/RustPython
 Url: "https://github.com/RustPython/RustPython.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 674, Issues found: 762 in 102 files.
+ CSpell: Files checked: 681, Issues found: 728 in 89 files.
  exit code: 1
-Cargo.toml:107:28    - Unknown word (nsis)       -- package.metadata.packager.nsis]
-Cargo.toml:193:1     - Unknown word (rustix)     -- rustix = { version = "1.0"
-Cargo.toml:83:62     - Unknown word (redoxer)    -- to compile/check with redoxer
+Cargo.toml:110:28    - Unknown word (nsis)       -- package.metadata.packager.nsis]
+Cargo.toml:196:1     - Unknown word (rustix)     -- rustix = { version = "1.0"
+Cargo.toml:86:62     - Unknown word (redoxer)    -- to compile/check with redoxer
 DEVELOPMENT.md:131:26    - Unknown word (subcrates)  -- src`: using the other subcrates to bring rustpython
 LICENSE-logo:139:15    - Unknown word (sublicensable) -- non-sublicensable, non-exclusive, irrevocable
 LICENSE-logo:205:34    - Unknown word (waivable)      -- under any voluntary or waivable statutory or compulsory
@@ -57,7 +57,6 @@ common/src/lock/cell_lock.rs:180:35    - Unknown word (sharedly)   -- deadlock("
 common/src/lock/cell_lock.rs:72:23     - Unknown word (sharedly)   -- deadlock("sharedly ", "RwLock")
 compiler/codegen/src/snapshots/rustpython_compiler_core__compile__tests__nested_double_async_with.snap:29:42     - Unknown word (woohoo)     -- LoadNameAny (6, woohoo)
 compiler/codegen/src/snapshots/rustpython_compiler_core__compile__tests__nested_double_async_with.snap:3:184     - Unknown word (woohoo)     -- async with woohoo():\n
-compiler/src/lib.rs:96:27     - Unknown word (hackily)    -- TODO: do this less hackily; ruff's parser should
 deny.toml:156:45    - Unknown word (dotgraphs)  -- ghlighting used when creating dotgraphs for crates
 deny.toml:188:11    - Unknown word (reqwest)    -- #crate = "reqwest"
 deny.toml:193:7     - Unknown word (rustls)     -- # "rustls",
@@ -73,8 +72,6 @@ deny.toml:215:22    - Unknown word (gnullvm)    -- "windows_aarch64_gnullvm",
 example_projects/aheui-rust.md:1:3       - Unknown word (aheui)      -- # aheui-rust
 example_projects/aheui-rust.md:4:14      - Unknown word (frozenlib)  -- - Creating a frozenlib: https://github.com
 example_projects/barebone/Cargo.toml:2:17      - Unknown word (barebone)   -- name = "example-barebone"
-example_projects/frozen_stdlib/src/main.rs:4:16      - Unknown word (aheui)      -- /// See also: `aheui-rust.md` for freezing
-examples/parse_folder.rs:59:35     - Unknown word (Erreur)     -- Err(y) => error!("Erreur in file {:?} {:?}",
 extra_tests/custom_text_test_runner.py:7:22      - Unknown word (Abtin)      -- Copyright (c) 2015 Abtin Gramian
 extra_tests/custom_text_test_runner.py:7:28      - Unknown word (Gramian)    -- Copyright (c) 2015 Abtin Gramian
 extra_tests/jsontests.py:3:11      - Unknown word (libregrtest) -- from test.libregrtest.runtest import findtests
@@ -500,7 +497,7 @@ extra_tests/snippets/syntax_fstring.py:23:27     - Unknown word (foobarfoo)  -- 
 extra_tests/snippets/syntax_fstring.py:29:36     - Unknown word (barbarfoo)  -- f"{foo}" 'foo' == 'barbarfoo'
 extra_tests/snippets/syntax_function2.py:23:5      - Unknown word (fubar)      -- def fubar():
 extra_tests/snippets/syntax_function2.py:26:8      - Unknown word (fubar)      -- assert fubar() == (42,)
-extra_tests/snippets/syntax_function2.py:66:23     - Unknown word (abcw)       -- assert f5.__doc__ == 'abcw00t', f5.__doc__
+extra_tests/snippets/syntax_function2.py:68:23     - Unknown word (abcw)       -- assert f5.__doc__ == 'abcw00t', f5.__doc__
 extra_tests/snippets/syntax_function_args.py:76:5      - Unknown word (fubar)      -- def fubar(x, y, obj=None):
 extra_tests/snippets/syntax_function_args.py:82:1      - Unknown word (fubar)      -- fubar(obj=6, *rest)
 extra_tests/snippets/syntax_global_nonlocal.py:3:28      - Unknown word (funkyness)  -- global and nonlocal funkyness
@@ -611,51 +608,20 @@ installer-config/installer.wxs:74:108    - Unknown word (EXITDIALOGOPTIONALCHECK
 installer-config/installer.wxs:76:27     - Unknown word (WIXUI)                          -- <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR
 scripts/bench.sh:1:29      - Unknown word (fannkuch)   -- BENCH in "int" "nbody" "fannkuch" "scimark"; do
 scripts/bench.sh:1:40      - Unknown word (scimark)    -- "nbody" "fannkuch" "scimark"; do
+scripts/checklist_template.md:1:166     - Unknown word (endmacro)   -- i.pr }}{% endif %}{% endmacro %}
 scripts/install-openssl.ps1:1:12      - Unknown word (Actix)      -- # From the Actix Web windows workflow
+scripts/notes.txt:23:14     - Unknown word (pickletester) -- pickle `test/pickletester.py` supports `test_pickle
+scripts/notes.txt:24:19     - Unknown word (picklebuffer) -- pickle `test/test_picklebuffer.py`
+scripts/notes.txt:9:11      - Unknown word (pydecimal)  -- decimal `_pydecimal.py`
 scripts/redox/recipe.sh:3:1       - Unknown word (CARGOFLAGS) -- CARGOFLAGS=--no-default-features
 scripts/redox/run-redoxer.sh:12:47     - Unknown word (redoxer)    -- root/rustpython-lib redoxer build --release
 scripts/redox/run-redoxer.sh:17:1      - Unknown word (redoxer)    -- redoxer exec -f "$DIR" -- .
 scripts/release-wapm.sh:10:95     - Unknown word (WAPM)       -- features="${FEATURES_FOR_WAPM[*]}"
 scripts/release-wapm.sh:12:1      - Unknown word (wapm)       -- wapm publish
 scripts/release-wapm.sh:6:14      - Unknown word (WAPM)       -- FEATURES_FOR_WAPM=(stdlib zlib)
-src/settings.rs:241:63    - Unknown word (PYTHONNOUSERSITE)        -- user_site || env_bool("PYTHONNOUSERSITE"));
-src/settings.rs:243:71    - Unknown word (PYTHONDONTWRITEBYTECODE) -- bytecode || env_bool("PYTHONDONTWRITEBYTECODE"));
-src/settings.rs:249:33    - Unknown word (PYTHONINTMAXSTRDIGITS)   -- Some(val) = get_env("PYTHONINTMAXSTRDIGITS") {
-src/settings.rs:254:74    - Unknown word (PYTHONINTMAXSTRDIGITS)   -- int_max_str_digits: PYTHONINTMAXSTRDIGITS: invalid limit; must
-src/settings.rs:67:49     - Unknown word (PYTHONDONTWRITEBYTECODE) -- files on import; also PYTHONDONTWRITEBYTECODE=x
-src/settings.rs:84:58     - Unknown word (PYTHONNOUSERSITE)        -- directory to sys.path; also PYTHONNOUSERSITE=x
-src/settings.rs:87:51     - Unknown word (PYTHONUNBUFFERED)        -- effect on stdin; also PYTHONUNBUFFERED=x
 stdlib/Cargo.toml:103:1     - Unknown word (rustix)     -- rustix = { workspace = true
 stdlib/Cargo.toml:83:41     - Unknown word (libbz)      -- "0.5", features = ["libbz2-rs-sys"] }
-stdlib/build.rs:10:27     - Unknown word (ossl)       -- (0x1_01_00_07_0, "ossl110g"),
-stdlib/build.rs:2:44      - Unknown word (osslconf)   -- rustc-check-cfg=cfg(osslconf, values("OPENSSL_NO
-stdlib/build.rs:37:39     - Unknown word (osslconf)   -- println!("cargo:rustc-cfg=osslconf=\"{conf}\"");
-stdlib/build.rs:6:9       - Unknown word (ossl)       -- let ossl_vers = [
-stdlib/build.rs:7:27      - Unknown word (ossl)       -- (0x1_00_01_00_0, "ossl101"),
-stdlib/build.rs:8:27      - Unknown word (ossl)       -- (0x1_00_02_00_0, "ossl102"),
-stdlib/build.rs:9:27      - Unknown word (ossl)       -- (0x1_01_00_00_0, "ossl110"),
-stdlib/src/gc.rs:43:12     - Unknown word (refererts)  -- fn get_refererts(_args: FuncArgs, vm
 vm/Cargo.toml:100:1     - Unknown word (rustix)     -- rustix = { workspace = true
-vm/src/builtins/function/jitfunc.rs:114:14    - Unknown word (Jitting)    -- "Jitting function requires return
-vm/src/builtins/function/jitfunc.rs:89:14     - Unknown word (Jitting)    -- "Jitting function requires arguments
-vm/src/builtins/memory.rs:641:18    - Unknown word (fortain)    -- // TODO: fortain order
-vm/src/builtins/str.rs:2267:21   - Unknown word (Ωppercases) -- ("Greek Ωppercases ...", "greek ωppercases
-vm/src/builtins/str.rs:2267:45   - Unknown word (ωppercases) -- Ωppercases ...", "greek ωppercases ..."),
-vm/src/builtins/str.rs:2268:21   - Unknown word (ῼitlecases) -- ("Greek ῼitlecases ...", "greek ῳitlecases
-vm/src/builtins/str.rs:2268:45   - Unknown word (ῳitlecases) -- ῼitlecases ...", "greek ῳitlecases ..."),
-vm/src/builtins/str.rs:2282:20   - Unknown word (Ωppercases) -- "Greek Ωppercases ...",
-vm/src/builtins/str.rs:2283:20   - Unknown word (ῼitlecases) -- "Greek ῼitlecases ...",
-vm/src/builtins/str.rs:578:48    - Unknown word (cmpxchg)    -- len, we don't need a cmpxchg loop, since it'll always
-vm/src/function/argument.rs:121:13    - Unknown word (kwargc)     -- let kwargc = kwarg_names.len()
-vm/src/function/argument.rs:122:36    - Unknown word (kwargc)     -- posargc = total_argc - kwargc;
-vm/src/function/builtin.rs:69:26     - Unknown word (sizedness)  -- requirements of zero-sizedness apply, see that documentation
-vm/src/object/traverse_object.rs:47:56     - Unknown word (maintaince) -- pointer* to a struct for maintaince weak ref, so no ownership
-vm/src/object/traverse_object.rs:67:56     - Unknown word (maintaince) -- pointer* to a struct for maintaince weak ref, so no ownership
-vm/src/protocol/buffer.rs:384:22    - Unknown word (fortain)    -- // TODO: support fortain order
-vm/src/stdlib/builtins.rs:446:26    - Unknown word (normalish)  -- // everything is normalish, we can just rely on
-vm/src/vm/setting.rs:39:10     - Unknown word (Xfoo)       -- /// -Xfoo[=bar]
-vm/src/vm/setting.rs:42:10     - Unknown word (Wfoo)       -- /// -Wfoo
-vm/src/vm/setting.rs:75:13     - Unknown word (PYTHONUNBUFFERED) -- /// -u, PYTHONUNBUFFERED=x
 vm/sre_engine/Cargo.toml:3:13      - Unknown word (Kangzhi)    -- authors = ["Kangzhi Shi <shikangzhi@gmail
 wasm/README.md:1:16      - Unknown word (webassembly) -- # Compiling to webassembly
 wasm/demo/package.json:34:21     - Unknown word (Liddle)     -- "author": "Ryan Liddle",
