@@ -535,8 +535,8 @@ importers:
         specifier: ^8.35.0
         version: 8.35.0(eslint@9.30.0(jiti@2.4.2))(typescript@5.8.3)
       '@typescript-eslint/types':
-        specifier: ^8.35.0
-        version: 8.35.0
+        specifier: ^8.35.1
+        version: 8.35.1
       eslint:
         specifier: ^9.30.0
         version: 9.30.0(jiti@2.4.2)
@@ -4313,6 +4313,10 @@ packages:
 
   '@typescript-eslint/types@8.35.0':
     resolution: {integrity: sha512-0mYH3emanku0vHw2aRLNGqe7EXh9WHEhi7kZzscrMDf6IIRUQ5Jk4wp1QrledE/36KtdZrVfKnE32eZCf/vaVQ==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@typescript-eslint/types@8.35.1':
+    resolution: {integrity: sha512-q/O04vVnKHfrrhNAscndAn1tuQhIkwqnaW+eu5waD5IPts2eX1dgJxgqcPx5BX109/qAz7IG6VrEPTOYKCNfRQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@typescript-eslint/typescript-estree@8.35.0':
@@ -14353,7 +14357,7 @@ snapshots:
   '@typescript-eslint/project-service@8.35.0(typescript@5.8.3)':
     dependencies:
       '@typescript-eslint/tsconfig-utils': 8.35.0(typescript@5.8.3)
-      '@typescript-eslint/types': 8.35.0
+      '@typescript-eslint/types': 8.35.1
       debug: 4.4.1(supports-color@8.1.1)
       typescript: 5.8.3
     transitivePeerDependencies:
@@ -14380,6 +14384,8 @@ snapshots:
       - supports-color
 
   '@typescript-eslint/types@8.35.0': {}
+
+  '@typescript-eslint/types@8.35.1': {}
 
   '@typescript-eslint/typescript-estree@8.35.0(typescript@5.8.3)':
     dependencies:
