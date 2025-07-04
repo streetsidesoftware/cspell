@@ -17,13 +17,17 @@ By default the spell checker searches the current directory and up the hierarchy
 1. `cspell.json`
 1. `.cSpell.json`
 1. `cSpell.json`
+1. `cspell.config.mjs`
 1. `cspell.config.js`
 1. `cspell.config.cjs`
 1. `cspell.config.json`
 1. `cspell.config.yaml`
 1. `cspell.config.yml`
+1. `cspell.config.toml`
 1. `cspell.yaml`
 1. `cspell.yml`
+
+Note: `cspell` can be prefixed with `.` and or `.config/`, i.e. `.cspell.config.yaml`, `.config/cspell.config.yaml` and `.config/.cspell.config.yaml`.
 
 The first configuration file found will be loaded, the others will be ignored. To leverage multiple CSpell configuration files, the spell checker supports an `import` field. The `import` field is used to list files to be imported in order.
 
