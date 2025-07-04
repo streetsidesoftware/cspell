@@ -24,7 +24,7 @@ By default it looks for any of the following files:
 - `cspell.yml`
 - [`package.json`](#packagejson)
 
-Note: `cspell` can be prefixed with `.` and or `.config/`, i.e. `.cspell.config.yaml`, `.config/cspell.config.yaml` and `.config/.cspell.config.yaml`.
+Note: `cspell` can be prefixed with `.` and/or `.config/`, i.e. `.cspell.config.yaml`, `.config/cspell.config.yaml` and `.config/.cspell.config.yaml`.
 
 Or you can specify a path to a config file with the `--config <path>` argument on the command line.
 
