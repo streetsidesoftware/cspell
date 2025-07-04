@@ -28,8 +28,9 @@ describe('cspell-config', () => {
         ${'package/with-value/package.json'}    | ${['apple']}
         ${'package/without-value/package.json'} | ${['apple']}
         ${'cspell.jsonc'}                       | ${['apple', 'cache']}
+        ${'toml/cspell.config.toml'}            | ${['apple', 'cache']}
         ${'cspell.yaml'}                        | ${['apple', 'cache', 'dog', 'banana', 'elephant']}
-    `('edit config', async ({ fixture, addWords }) => {
+    `('edit config $fixture', async ({ fixture, addWords }) => {
         const fixtureFile = fixtures(fixture);
         const tempFile = tempPath(fixture);
         await copyFile(fixtureFile, tempFile);
