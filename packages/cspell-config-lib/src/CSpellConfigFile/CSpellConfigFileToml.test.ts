@@ -1,5 +1,5 @@
+import { parse } from 'smol-toml';
 import { describe, expect, test } from 'vitest';
-import { parse, stringify } from 'smol-toml';
 
 import { cspellConfigFileSchema } from '../CSpellConfigFile.js';
 import { createTextFile } from '../TextFile.js';

@@ -1,7 +1,7 @@
 import assert from 'node:assert';
 
-import { describe, expect, test, vi } from 'vitest';
 import { stringify as toml } from 'smol-toml';
+import { describe, expect, test, vi } from 'vitest';
 
 import { CSpellConfigFileToml } from '../CSpellConfigFile/CSpellConfigFileToml.js';
 import { defaultNextDeserializer, defaultNextSerializer } from '../defaultNext.js';

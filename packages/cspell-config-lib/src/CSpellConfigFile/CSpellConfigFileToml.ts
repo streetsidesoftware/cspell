@@ -26,7 +26,7 @@ export class CSpellConfigFileToml extends ImplCSpellConfigFile {
         return this;
     }
 
-    setComment(field: keyof CSpellSettings, comment: string, inline?: boolean): this {
+    setComment(_field: keyof CSpellSettings, _comment: string, _inline?: boolean): this {
         return this;
     }
 
