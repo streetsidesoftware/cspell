@@ -3,6 +3,116 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v9.1.3 (2025-07-05)
+
+### Fixes
+
+<details>
+<summary>fix: Add toml config reader/writer (<a href="https://github.com/streetsidesoftware/cspell/pull/7565">#7565</a>)</summary>
+
+### fix: Add toml config reader/writer ([#7565](https://github.com/streetsidesoftware/cspell/pull/7565))
+
+fixes #7563
+
+---
+
+</details>
+
+### Dictionary Updates
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/7569">#7569</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#7569](https://github.com/streetsidesoftware/cspell/pull/7569))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ packages/cspell-bundled-dicts/package.json |  2 +-
+ pnpm-lock.yaml                             | 12 ++++++------
+ 2 files changed, 7 insertions(+), 7 deletions(-)
+```
+
+---
+
+</details>
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/7564">#7564</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#7564](https://github.com/streetsidesoftware/cspell/pull/7564))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ packages/cspell-bundled-dicts/package.json |  2 +-
+ pnpm-lock.yaml                             | 12 ++++++------
+ 2 files changed, 7 insertions(+), 7 deletions(-)
+```
+
+---
+
+</details>
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/7560">#7560</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#7560](https://github.com/streetsidesoftware/cspell/pull/7560))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ .../snapshots/flutter/samples/report.yaml          |  4 +--
+ .../snapshots/flutter/samples/snapshot.txt         |  7 ++---
+ packages/cspell-bundled-dicts/package.json         |  6 ++--
+ pnpm-lock.yaml                                     | 33 +++++++++++++---------
+ 4 files changed, 26 insertions(+), 24 deletions(-)
+```
+
+---
+
+</details>
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/7549">#7549</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#7549](https://github.com/streetsidesoftware/cspell/pull/7549))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ integration-tests/snapshots/mdx-js/mdx/report.yaml | 46 ++--------------------
+ .../snapshots/mdx-js/mdx/snapshot.txt              | 43 +-------------------
+ packages/cspell-bundled-dicts/package.json         |  8 ++--
+ pnpm-lock.yaml                                     | 45 +++++++++++----------
+ 4 files changed, 33 insertions(+), 109 deletions(-)
+```
+
+---
+
+</details>
+
+### Documentation
+
+<details>
+<summary>fix: Add toml config reader/writer (<a href="https://github.com/streetsidesoftware/cspell/pull/7565">#7565</a>)</summary>
+
+### fix: Add toml config reader/writer ([#7565](https://github.com/streetsidesoftware/cspell/pull/7565))
+
+fixes #7563
+
+---
+
+</details>
+
 ## v9.1.2 (2025-06-24)
 
 ### Fixes
