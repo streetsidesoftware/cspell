@@ -3,9 +3,9 @@ Repository: RustPython/RustPython
 Url: https://github.com/RustPython/RustPython.git
 Args: '["**"]'
 Summary:
-  files: 681
-  filesWithIssues: 89
-  issues: 728
+  files: 682
+  filesWithIssues: 88
+  issues: 724
   errors: 0
 Errors: []
 
@@ -85,10 +85,7 @@ issues:
   - "common/src/lib.rs:1:1\tNo issues found"
   - "common/src/linked_list.rs:1:1\tNo issues found"
   - "common/src/lock.rs:1:1\tNo issues found"
-  - "common/src/lock/cell_lock.rs:72:23          sharedly        U       deadlock(\"sharedly \", \"RwLock\")"
-  - "common/src/lock/cell_lock.rs:131:23         upgradably      U       deadlock(\"upgradably+sharedly \", \"RwLock"
-  - "common/src/lock/cell_lock.rs:131:34         sharedly        U       deadlock(\"upgradably+sharedly \", \"RwLock\")"
-  - "common/src/lock/cell_lock.rs:180:35         sharedly        U       deadlock(\"recursively+sharedly \", \"RwLock\")"
+  - "common/src/lock/cell_lock.rs:1:1\tNo issues found"
   - "common/src/lock/immutable_mutex.rs:1:1\tNo issues found"
   - "common/src/lock/thread_mutex.rs:1:1\tNo issues found"
   - "common/src/macros.rs:1:1\tNo issues found"
@@ -1145,6 +1142,7 @@ issues:
   - "vm/src/stdlib/sysconfigdata.rs:1:1\tNo issues found"
   - "vm/src/stdlib/thread.rs:1:1\tNo issues found"
   - "vm/src/stdlib/time.rs:1:1\tNo issues found"
+  - "vm/src/stdlib/typevar.rs:1:1\tNo issues found"
   - "vm/src/stdlib/typing.rs:1:1\tNo issues found"
   - "vm/src/stdlib/warnings.rs:1:1\tNo issues found"
   - "vm/src/stdlib/weakref.rs:1:1\tNo issues found"
