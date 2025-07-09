@@ -70,6 +70,22 @@ const config: Config = {
         //         fileExtension: '.md',
         //     },
         // ],
+        [
+            '@docusaurus/plugin-client-redirects',
+            {
+                createRedirects(existingPath: string) {
+                    if (existingPath.includes('/docs/api/cspell-types/type-aliases/')) {
+                        return [
+                            existingPath.replace('/docs/api/cspell-types/type-aliases/', '/types/cspell-types/types/'),
+                        ];
+                    }
+                    if (existingPath.includes('/docs/Configuration/')) {
+                        return [existingPath.replace('/docs/Configuration/', '/configuration/')];
+                    }
+                    return undefined; // Return a falsy value: no redirect created
+                },
+            },
+        ],
     ],
 
     // Even if you don't use internationalization, you can use this field to set

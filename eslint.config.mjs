@@ -1,4 +1,4 @@
-// ts-check
+// @ts-check
 import cspellESLintPluginRecommended from '@cspell/eslint-plugin/recommended';
 import eslint from '@eslint/js';
 import nodePlugin from 'eslint-plugin-n';
@@ -10,8 +10,6 @@ import tsEslint from 'typescript-eslint';
 // import { FlatCompat } from "@eslint/eslintrc";
 // const __dirname = fileURLToPath(new URL('.', import.meta.url));
 // const compat = new FlatCompat({baseDirectory: __dirname, recommendedConfig: eslint.configs.recommended});
-
-// @ts-check
 
 const checkSpelling = !!process.env.CSPELL_CHECK_SPELLING;
 
