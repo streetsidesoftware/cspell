@@ -31,8 +31,15 @@
   "files": [
     "bin.mjs",
     "dist",
-    "!dist/tsc",
-    "!dist/esm/*.map"
+    "!**/__mocks__",
+    "!**/*.map",
+    "!**/*.perf.*",
+    "!**/*.spec.*",
+    "!**/*.test.*",
+    "!**/*.tsbuildInfo",
+    "!**/perf/**",
+    "!**/test/**",
+    "!dist/tsc"
   ],
   "scripts": {
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
