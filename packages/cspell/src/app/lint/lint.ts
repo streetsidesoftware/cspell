@@ -173,7 +173,11 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         const cachedResult = await cache.getCachedLintResults(filename);
         if (cachedResult) {
             reporter.debug(`Filename: ${filename}, using cache`);
-            return { ...cachedResult, elapsedTimeMs: getElapsedTimeMs(), reportIssueOptions };
+            return {
+                ...cachedResult,
+                elapsedTimeMs: getElapsedTimeMs(),
+                reportIssueOptions: { ...cachedResult.reportIssueOptions, ...reportIssueOptions },
+            };
         }
 
         const result: LintFileResult = {
