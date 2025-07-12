@@ -4,7 +4,7 @@ import { describe, expect, test } from 'vitest';
 import { cspellConfigFileSchema } from '../CSpellConfigFile.js';
 import { createTextFile } from '../TextFile.js';
 import { unindent } from '../util/unindent.js';
-import { CSpellConfigFileToml } from './CSpellConfigFileToml.js';
+import { CSpellConfigFileToml, parseCSpellConfigFileToml } from './CSpellConfigFileToml.js';
 
 describe('CSpellConfigFileToml', () => {
     const url = new URL('https://example.com/config.toml');
@@ -80,5 +80,18 @@ describe('CSpellConfigFileToml', () => {
         }`;
         const file = createTextFile(url, json);
         expect(() => CSpellConfigFileToml.parse(file)).toThrowError();
+    });
+
+    test('from', () => {
+        const toml = unindent`\
+            language = "en"
+            ignoreWords = ["foo", "bar"]
+        `;
+        const file = createTextFile(url, toml);
+        const cfg = parseCSpellConfigFileToml(file);
+        const cfgFrom = CSpellConfigFileToml.from(cfg.url, cfg.settings);
+        expect(cfgFrom.settings).toEqual(cfg.settings);
+        expect(cfgFrom.serialize()).toEqual(cfg.serialize());
+        expect(cfgFrom.url).toEqual(cfg.url);
     });
 });

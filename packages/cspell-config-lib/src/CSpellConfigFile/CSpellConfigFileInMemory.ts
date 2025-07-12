@@ -19,4 +19,8 @@ export class CSpellConfigFileInMemory extends ImplCSpellConfigFile {
     get virtual(): boolean {
         return true;
     }
+
+    static from(url: URL, settings: CSpellSettings, _indent?: number): CSpellConfigFileInMemory {
+        return new CSpellConfigFileInMemory(url, settings);
+    }
 }

@@ -3,7 +3,7 @@ import { describe, expect, test } from 'vitest';
 import { cspellConfigFileSchema } from '../CSpellConfigFile.js';
 import { createTextFile } from '../TextFile.js';
 import { unindent } from '../util/unindent.js';
-import { CSpellConfigFileJson } from './CSpellConfigFileJson.js';
+import { CSpellConfigFileJson, parseCSpellConfigFileJson } from './CSpellConfigFileJson.js';
 
 describe('CSpellConfigFileJson', () => {
     const url = new URL('https://example.com/config.json');
@@ -132,5 +132,18 @@ describe('CSpellConfigFileJson', () => {
         }`;
         const file = createTextFile(url, json);
         expect(() => CSpellConfigFileJson.parse(file)).toThrowError();
+    });
+
+    test('from', () => {
+        const json = `{
+            "language": "en",
+            "ignoreWords": ["foo", "bar"]
+        }`;
+        const file = createTextFile(url, json);
+        const cfg = parseCSpellConfigFileJson(file);
+        const cfgFrom = CSpellConfigFileJson.from(cfg.url, cfg.settings, cfg.indent);
+        expect(cfgFrom.settings).toEqual(cfg.settings);
+        expect(cfgFrom.serialize()).toEqual(cfg.serialize());
+        expect(cfgFrom.url).toEqual(cfg.url);
     });
 });

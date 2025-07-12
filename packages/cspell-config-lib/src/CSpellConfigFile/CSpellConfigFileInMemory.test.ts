@@ -36,4 +36,11 @@ describe('CSpellConfigFileInMemory', () => {
         const configFile = new CSpellConfigFileInMemory(url, settings);
         expect(configFile.virtual).toBe(true);
     });
+
+    test('from', () => {
+        const cfg = new CSpellConfigFileInMemory(url, settings);
+        const cfgFrom = CSpellConfigFileInMemory.from(url, settings);
+        expect(cfgFrom.settings).toEqual(cfg.settings);
+        expect(cfgFrom.url).toEqual(cfg.url);
+    });
 });

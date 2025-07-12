@@ -247,11 +247,11 @@ export class CSpellConfigFileYaml extends MutableCSpellConfigFile {
     static parse(file: TextFile): CSpellConfigFileYaml {
         return parseCSpellConfigFileYaml(file);
     }
-}
 
-export function createCSpellConfigFileYaml(url: URL, settings: CSpellSettings, indent = 2): CSpellConfigFileYaml {
-    const yamlDoc = new YamlDocument(settings);
-    return new CSpellConfigFileYaml(url, yamlDoc, indent);
+    static from(url: URL, settings: CSpellSettings, indent: number = 2): CSpellConfigFileYaml {
+        const yamlDoc = new YamlDocument(settings);
+        return new CSpellConfigFileYaml(url, yamlDoc, indent);
+    }
 }
 
 export function parseCSpellConfigFileYaml(file: TextFile): CSpellConfigFileYaml {
