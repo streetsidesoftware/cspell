@@ -158,7 +158,7 @@ export interface FileSettings extends ExtendableSettings, CommandLineSettings {
  *
  * However, specifying the glob pattern inside of a JSDoc is tricky, because the glob contains the
  * same symbol as the end-of-JSDoc symbol. To work around this, we insert a zero-width space in
- * between the "*" and the "/" symbols.
+ * between the "*" and the "/" symbols. The zero-width space is automatically removed by the schema generator.
  */
 export interface ExtendableSettings extends Settings {
     /**
