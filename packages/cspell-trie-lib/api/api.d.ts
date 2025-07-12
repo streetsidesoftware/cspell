@@ -233,8 +233,6 @@ type WalkerIterator$1 = Generator<YieldResult$1, void, FalseToNotGoDeeper | unde
 * goDeeper of true tells the walker to go deeper in the Trie if possible. Default is true.
 * This can be used to limit the walker's depth.
 */
-// next: (hinting?: Hinting) => IteratorResult<YieldResult>;
-// [Symbol.iterator]: () => HintedWalkerIterator;
 type HintedWalkerIterator = Generator<YieldResult, void, Hinting | undefined>;
 declare function hintedWalker(root: TrieRoot, ignoreCase: boolean, hint: string, compoundingMethod: CompoundWordsMethod | undefined, emitWordSeparator?: string): HintedWalkerIterator;
 /**
@@ -752,7 +750,6 @@ declare class TrieBuilder {
   trieOptions: TrieOptions;
   private numWords;
   private _debug_lastWordsInserted;
-  // private _debug_mode = true;
   private _debug_mode;
   constructor(words?: Iterable<string>, trieOptions?: PartialTrieOptions);
   private get _root();

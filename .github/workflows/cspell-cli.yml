@@ -34,4 +34,4 @@ jobs:
             cspell-cache-v2-${{ runner.os }}-
 
       - name: cspell@latest
-        run: npx cspell@latest --cache --cache-strategy=content --cache-location=.cspellcache --exclude="yarn2" --no-progress "**" --report=typos
+        run: npx cspell@latest --cache --cache-strategy=content --cache-location=.cspellcache --exclude="yarn2" --no-progress "**" --no-cache --report=typos
