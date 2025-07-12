@@ -3,6 +3,79 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v9.1.4 (2025-07-12)
+
+### Fixes
+
+<details>
+<summary>fix: Reduce CSpell package size (<a href="https://github.com/streetsidesoftware/cspell/pull/7602">#7602</a>)</summary>
+
+### fix: Reduce CSpell package size ([#7602](https://github.com/streetsidesoftware/cspell/pull/7602))
+
+---
+
+</details>
+
+<details>
+<summary>fix: Make it easier to create config files. (<a href="https://github.com/streetsidesoftware/cspell/pull/7598">#7598</a>)</summary>
+
+### fix: Make it easier to create config files. ([#7598](https://github.com/streetsidesoftware/cspell/pull/7598))
+
+---
+
+</details>
+
+<details>
+<summary>fix: store reportIssueOptions in the cache (<a href="https://github.com/streetsidesoftware/cspell/pull/7597">#7597</a>)</summary>
+
+### fix: store reportIssueOptions in the cache ([#7597](https://github.com/streetsidesoftware/cspell/pull/7597))
+
+This fixes and issue with reporting cached issues when they should have been ignored.
+
+---
+
+</details>
+
+### Dictionary Updates
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/7591">#7591</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#7591](https://github.com/streetsidesoftware/cspell/pull/7591))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ packages/cspell-bundled-dicts/package.json | 116 ++---
+ pnpm-lock.yaml                             | 706 +++++++++++++++--------------
+ 2 files changed, 432 insertions(+), 390 deletions(-)
+```
+
+---
+
+</details>
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/7574">#7574</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#7574](https://github.com/streetsidesoftware/cspell/pull/7574))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ packages/cspell-bundled-dicts/package.json |  4 ++--
+ pnpm-lock.yaml                             | 24 ++++++++++++------------
+ 2 files changed, 14 insertions(+), 14 deletions(-)
+```
+
+---
+
+</details>
+
 ## v9.1.3 (2025-07-05)
 
 ### Fixes
