@@ -65,6 +65,12 @@ export class CSpellConfigFileJson extends ImplCSpellConfigFile {
             throw new ParseError(file.url, undefined, { cause });
         }
     }
+
+    static from(url: URL, settings: CSpellSettings, indent: number | string = 2): CSpellConfigFileJson {
+        const cfg = new CSpellConfigFileJson(url, settings);
+        cfg.indent = indent;
+        return cfg;
+    }
 }
 
 function parseJson(content: string): unknown {

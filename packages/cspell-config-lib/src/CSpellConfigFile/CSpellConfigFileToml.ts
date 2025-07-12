@@ -46,6 +46,10 @@ export class CSpellConfigFileToml extends ImplCSpellConfigFile {
             throw new ParseError(file.url, undefined, { cause });
         }
     }
+
+    static from(url: URL, settings: CSpellSettings, _indent?: number): CSpellConfigFileToml {
+        return new CSpellConfigFileToml(url, settings);
+    }
 }
 
 export function parseCSpellConfigFileToml(file: TextFile): CSpellConfigFileToml {

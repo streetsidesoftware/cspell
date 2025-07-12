@@ -2,7 +2,7 @@ import assert from 'node:assert';
 
 import type { CSpellSettings } from '@cspell/cspell-types';
 import {
-    type Document as YamlDocument,
+    Document as YamlDocument,
     isAlias,
     isMap,
     isNode,
@@ -246,6 +246,11 @@ export class CSpellConfigFileYaml extends MutableCSpellConfigFile {
 
     static parse(file: TextFile): CSpellConfigFileYaml {
         return parseCSpellConfigFileYaml(file);
+    }
+
+    static from(url: URL, settings: CSpellSettings, indent: number = 2): CSpellConfigFileYaml {
+        const yamlDoc = new YamlDocument(settings);
+        return new CSpellConfigFileYaml(url, yamlDoc, indent);
     }
 }
 

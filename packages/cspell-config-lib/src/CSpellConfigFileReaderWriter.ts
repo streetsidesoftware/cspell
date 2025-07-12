@@ -96,8 +96,8 @@ export class CSpellConfigFileReaderWriterImpl implements CSpellConfigFileReaderW
     async writeConfig(configFile: ICSpellConfigFile): Promise<TextFileRef> {
         if (configFile.readonly) throw new Error(`Config file is readonly: ${configFile.url.href}`);
         const content = this.serialize(configFile);
-        await this.io.writeFile({ url: configFile.url, content });
-        return { url: configFile.url };
+        const ref = await this.io.writeFile({ url: configFile.url, content });
+        return { url: ref.url };
     }
 
     setUntrustedExtensions(ext: readonly string[]): this {

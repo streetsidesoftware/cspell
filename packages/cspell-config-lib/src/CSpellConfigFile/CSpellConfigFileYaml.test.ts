@@ -521,6 +521,20 @@ describe('CSpellConfigFileYaml', () => {
                 - eggplant
         `);
     });
+
+    test('from', () => {
+        const yamlContent = unindent`\
+            name: cspell.config.yaml
+            version: "0.2"
+        `;
+
+        const cfg = parseCSpellConfigFileYaml(asTextFile(yamlContent));
+        const cfgFrom = CSpellConfigFileYaml.from(cfg.url, { name: 'cspell.config.yaml', version: '0.2' }, cfg.indent);
+        expect(cfgFrom.settings).toEqual(cfg.settings);
+        expect(cfgFrom.serialize()).toEqual(cfg.serialize());
+        expect(cfgFrom.url).toEqual(cfg.url);
+        expect(cfgFrom.indent).toEqual(cfg.indent);
+    });
 });
 
 function exampleConfig() {
