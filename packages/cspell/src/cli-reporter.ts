@@ -516,6 +516,8 @@ export function checkTemplate(template: string): true | Error {
     }
 }
 
-export const __testing__ = {
+export const __testing__: {
+    formatIssue: typeof formatIssue;
+} = {
     formatIssue,
 };

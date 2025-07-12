@@ -9,14 +9,14 @@
   },
   "type": "module",
   "sideEffects": false,
-  "types": "dist/esm/index.d.mts",
-  "module": "dist/esm/index.mjs",
+  "types": "dist/esm/index.d.ts",
+  "module": "dist/esm/index.js",
   "exports": {
     ".": {
-      "import": "./dist/esm/index.mjs"
+      "import": "./dist/esm/index.js"
     },
     "./app": {
-      "import": "./dist/esm/app.mjs"
+      "import": "./dist/esm/app.js"
     },
     "./bin": {
       "import": "./bin.mjs"
@@ -25,24 +25,26 @@
       "import": "./bin.mjs"
     },
     "./application": {
-      "import": "./dist/esm/application.mjs"
+      "import": "./dist/esm/application.js"
     }
   },
   "files": [
     "bin.mjs",
     "dist",
-    "!**/*.tsbuildInfo",
     "!**/__mocks__",
-    "!**/test/**",
-    "!**/*.test.*",
+    "!**/*.map",
+    "!**/*.perf.*",
     "!**/*.spec.*",
-    "!**/*.map"
+    "!**/*.test.*",
+    "!**/*.tsbuildInfo",
+    "!**/perf/**",
+    "!**/test/**",
+    "!dist/tsc"
   ],
   "scripts": {
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
-    "build": "tsc -p . && pnpm run build:api",
-    "build:api": "rollup -c rollup.config.mjs",
-    "build:esm": "tsc -p .",
+    "build": "tsdown && pnpm build:tsc",
+    "build:tsc": "tsc -p .",
     "build:readme": "pnpm build:readme:help",
     "build:readme:help": "pnpm build:readme:help:lint && pnpm build:readme:help:trace && inject-markdown README.md && prettier -w README.md",
     "build:readme:help:lint": "./bin.mjs lint --help > static/help-lint.txt",

@@ -92,7 +92,10 @@ function normalizeVersion(version: string): string {
     return parts.join('.') + versionSuffix;
 }
 
-export const __testing__ = {
+export const __testing__: {
+    normalizeVersion: typeof normalizeVersion;
+    versionSuffix: string;
+} = {
     normalizeVersion,
     versionSuffix,
 };

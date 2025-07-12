@@ -53,7 +53,7 @@ const config: Config = {
             {
                 id: 'api-cspell',
                 out: './docs/api/cspell',
-                entryPoints: ['../packages/cspell/src/app/index.mts'],
+                entryPoints: ['../packages/cspell/src/index.mts'],
                 tsconfig: '../packages/cspell/tsconfig.json',
                 // outputFileStrategy: 'modules',
                 fileExtension: '.md',

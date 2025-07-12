@@ -283,6 +283,8 @@ function calcVersion(version: string): string {
     return version + META_DATA_VERSION_SUFFIX;
 }
 
-export const __testing__ = {
+export const __testing__: {
+    calcVersion: typeof calcVersion;
+} = {
     calcVersion,
 };

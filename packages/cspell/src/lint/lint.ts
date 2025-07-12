@@ -730,7 +730,7 @@ export class LinterError extends Error {
         super(message);
     }
 
-    toString() {
+    toString(): string {
         return this.message;
     }
 }

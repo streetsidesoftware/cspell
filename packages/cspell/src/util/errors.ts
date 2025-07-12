@@ -12,7 +12,7 @@ export class ApplicationError extends Error {
     constructor(
         message: string,
         readonly exitCode: number = 1,
-        readonly cause?: Error,
+        readonly cause?: Error | undefined,
     ) {
         super(message);
     }
@@ -30,7 +30,7 @@ export class IOError extends ApplicationError {
         return this.cause.code;
     }
 
-    isNotFound() {
+    isNotFound(): boolean {
         return this.cause.code === 'ENOENT';
     }
 }

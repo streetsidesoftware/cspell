@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises';
 
-export async function writeFileOrStream(filename: string, data: string) {
+export async function writeFileOrStream(filename: string, data: string): Promise<void> {
     switch (filename) {
         case 'stdout': {
             await writeStream(process.stdout, data);
@@ -17,7 +17,7 @@ export async function writeFileOrStream(filename: string, data: string) {
     return fs.writeFile(filename, data);
 }
 
-export function writeStream(stream: NodeJS.WriteStream, data: string) {
+export function writeStream(stream: NodeJS.WriteStream, data: string): Promise<void> {
     return new Promise<void>((resolve, reject) => {
         stream.write(data, (err) => {
             if (err) {
