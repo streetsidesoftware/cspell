@@ -3,7 +3,7 @@ import { format } from 'node:util';
 
 import { CommanderError, program } from 'commander';
 
-import { ApplicationError, CheckFailed, run } from './dist/esm/app.mjs';
+import { ApplicationError, CheckFailed, run } from './dist/esm/app.js';
 
 run(program, process.argv).catch((e) => {
     if (!(e instanceof CommanderError) && !(e instanceof CheckFailed)) {

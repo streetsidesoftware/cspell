@@ -12,7 +12,7 @@ import { commandTrace } from './commandTrace.js';
 import { npmPackage } from './pkgInfo.js';
 import { ApplicationError } from './util/errors.js';
 
-export { LinterCliOptions as Options } from './options.js';
+export type { LinterCliOptions as Options } from './options.js';
 export { ApplicationError, CheckFailed } from './util/errors.js';
 
 export async function run(command?: Command, argv?: string[]): Promise<void> {
