@@ -7,7 +7,10 @@ export function getFeatureFlags(): FeatureFlags {
     return getSystemFeatureFlags();
 }
 
-export function parseFeatureFlags(flags: string[] | undefined, featureFlags = getFeatureFlags()): FeatureFlags {
+export function parseFeatureFlags(
+    flags: string[] | undefined,
+    featureFlags: FeatureFlags = getFeatureFlags(),
+): FeatureFlags {
     if (!flags) return featureFlags;
 
     const flagsKvP = flags.map((f) => f.split(':', 2));

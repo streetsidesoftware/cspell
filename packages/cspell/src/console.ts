@@ -50,11 +50,11 @@ class Console implements IConsole {
 
 export const console: IConsole = new Console();
 
-export function log(...p: Parameters<typeof console.log>) {
+export function log(...p: Parameters<typeof console.log>): void {
     console.log(...p);
 }
 
-export function error(...p: Parameters<typeof console.error>) {
+export function error(...p: Parameters<typeof console.error>): void {
     console.error(...p);
 }
 

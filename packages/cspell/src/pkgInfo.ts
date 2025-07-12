@@ -6,4 +6,10 @@ export const name = 'cspell';
 export const version = '9.1.3';
 export const engines = { node: '>=20' };
 
-export const npmPackage = { name, version, engines };
+export const npmPackage: {
+    name: string;
+    version: string;
+    engines: {
+        node: string;
+    };
+} = { name, version, engines };

@@ -41,11 +41,11 @@ export class SimpleRepl implements AsyncIterable<string> {
         return [hist, line];
     }
 
-    get history() {
+    get history(): string[] {
         return this._history;
     }
 
-    [Symbol.asyncIterator]() {
+    [Symbol.asyncIterator](): AsyncIterator<string> {
         const next = (): Promise<IteratorResult<string, undefined>> => {
             if (this.beforeEach) this.beforeEach();
             // console.log('%o', this.rl);

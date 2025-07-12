@@ -40,9 +40,9 @@
   ],
   "scripts": {
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
-    "build": "tsc -p . && pnpm run build:api",
+    "build": "tsdown && pnpm build:tsc && pnpm run build:api",
     "build:api": "rollup -c rollup.config.mjs",
-    "build:esm": "tsc -p .",
+    "build:tsc": "tsc -p .",
     "build:readme": "pnpm build:readme:help",
     "build:readme:help": "pnpm build:readme:help:lint && pnpm build:readme:help:trace && inject-markdown README.md && prettier -w README.md",
     "build:readme:help:lint": "./bin.mjs lint --help > static/help-lint.txt",

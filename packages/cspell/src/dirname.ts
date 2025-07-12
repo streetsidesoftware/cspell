@@ -12,4 +12,4 @@ try {
     _dirname = __dirname;
 }
 
-export const pkgDir = _dirname;
+export const pkgDir: string = _dirname;

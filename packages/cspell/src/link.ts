@@ -3,9 +3,9 @@ import { Link } from 'cspell-lib';
 
 import type { Table } from './util/table.js';
 
-export const listGlobalImports = Link.listGlobalImports;
-export const addPathsToGlobalImports = Link.addPathsToGlobalImports;
-export const removePathsFromGlobalImports = Link.removePathsFromGlobalImports;
+export const listGlobalImports: typeof Link.listGlobalImports = Link.listGlobalImports;
+export const addPathsToGlobalImports: typeof Link.addPathsToGlobalImports = Link.addPathsToGlobalImports;
+export const removePathsFromGlobalImports: typeof Link.removePathsFromGlobalImports = Link.removePathsFromGlobalImports;
 
 export function listGlobalImportsResultToTable(results: Link.ListGlobalImportsResult[]): Table {
     const header = ['id', 'package', 'name', 'filename', 'dictionaries', 'errors'];

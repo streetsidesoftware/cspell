@@ -23,7 +23,7 @@ async function fileExists(url: URL): Promise<boolean> {
     }
 }
 
-export async function resolveImports(configFile: CSpellConfigFile, imports: string[]) {
+export async function resolveImports(configFile: CSpellConfigFile, imports: string[]): Promise<string[]> {
     const fromConfigDir = new URL('./', configFile.url);
     const fromCurrentDir = toFileDirURL('./');
     const require = createRequire(fromConfigDir);

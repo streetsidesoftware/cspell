@@ -240,7 +240,7 @@ export class LintReporter {
         this.#reporters = [...new Set(loaded)].map((reporter) => finalizeReporter(reporter));
     }
 
-    emitProgressBegin(filename: string, fileNum: number, fileCount: number) {
+    emitProgressBegin(filename: string, fileNum: number, fileCount: number): void {
         this.progress({
             type: 'ProgressFileBegin',
             fileNum,
@@ -249,7 +249,7 @@ export class LintReporter {
         });
     }
 
-    emitProgressComplete(filename: string, fileNum: number, fileCount: number, result: LintFileResult) {
+    emitProgressComplete(filename: string, fileNum: number, fileCount: number, result: LintFileResult): number {
         const filteredIssues = result.issues.filter((issue) =>
             filterFeatureIssues({}, issue, result.reportIssueOptions),
         );
