@@ -562,9 +562,11 @@ _cspell_'s behavior can be controlled through a config file. By default it looks
 - `cSpell.json`
 - `cspell.config.js`
 - `cspell.config.cjs`
+- `cspell.config.mjs`
 - `cspell.config.json`
 - `cspell.config.yaml`
 - `cspell.config.yml`
+- `cspell.config.toml`
 - `cspell.yaml`
 - `cspell.yml`
 
@@ -574,32 +576,35 @@ Or you can specify a path to a config file with the `--config <path>` argument o
 
 #### Example `cspell.json` file
 
-```javascript
+```jsonc
 // cSpell Settings
 {
-    // Version of the setting file.  Always 0.2
-    "version": "0.2",
-    // language - current active spelling language
-    "language": "en",
-    // words - list of words to be always considered correct
-    "words": [
-        "mkdirp",
-        "tsmerge",
-        "githubusercontent",
-        "streetsidesoftware",
-        "vsmarketplacebadge",
-        "visualstudio"
-    ],
-    // flagWords - list of words to be always considered incorrect
-    // This is useful for offensive words and common spelling errors.
-    // For example "hte" should be "the"
-    "flagWords": [
-        "hte"
-    ]
+  // Version of the setting file.  Always 0.2
+  "version": "0.2",
+  // language - current active spelling language
+  "language": "en",
+  // words - list of words to be always considered correct
+  "words": ["mkdirp", "tsmerge", "githubusercontent", "streetsidesoftware", "vsmarketplacebadge", "visualstudio"],
+  // flagWords - list of words to be always considered incorrect
+  // This is useful for offensive words and common spelling errors.
+  // For example "hte" should be "the"
+  "flagWords": ["hte"]
 }
 ```
 
-### cspell.json sections
+#### Example `cspell.config.mjs` file
+
+```js
+// @ts-check
+
+import { defineConfig } from 'cspell';
+
+export default defineConfig({
+  words: ['mycompany']
+});
+```
+
+### Configuration Sections
 
 - `version` - currently always 0.2 - controls how the settings in the configuration file behave.
 
@@ -656,6 +661,8 @@ Or you can specify a path to a config file with the `--config <path>` argument o
   `ignoreRegExpList` and `includeRegExpList`.
 
 - `languageSettings` - this allow for per programming language configuration settings. See [LanguageSettings](#LanguageSettings)
+
+- `overrides` - this allows for settings to be based upon the file name or path. It is useful for setting the language for localization.
 
 ## Dictionaries
 
@@ -811,4 +818,5 @@ Example:
     cspell:words Verdana
     cspell:ignore ieeees beees treeees
     cspell:ignore amet
+    cspell:ignore mycompany
 -->

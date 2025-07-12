@@ -164,11 +164,11 @@ export class DiskCache implements CSpellLintResultCache {
     }
 
     private normalizeResult(result: CachedFileResult): CachedFileResult {
-        const { issues, processed, errors, configErrors, ...rest } = result;
+        const { issues, processed, errors, configErrors, reportIssueOptions, ...rest } = result;
         if (!Object.keys(rest).length) {
             return this.ocCacheFileResult.get(result);
         }
-        return this.ocCacheFileResult.get({ issues, processed, errors, configErrors });
+        return this.ocCacheFileResult.get({ issues, processed, errors, configErrors, reportIssueOptions });
     }
 
     private calcDependencyHashes(dependsUponFiles: string[]): Dependency[] {
