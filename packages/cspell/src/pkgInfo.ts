@@ -2,8 +2,14 @@
 
 export { pkgDir } from './dirname.js';
 
-export const name = 'cspell';
-export const version = '9.1.4';
-export const engines = { node: '>=20' };
+export interface PackageJson {
+    name: string;
+    version: string;
+    engines: { node: string };
+}
 
-export const npmPackage = { name, version, engines };
+export const name: string = 'cspell';
+export const version: string = '9.1.4';
+export const engines: PackageJson['engines'] = { node: '>=20' };
+
+export const npmPackage: PackageJson = { name, version, engines };
