@@ -21,7 +21,7 @@ export class CwdUrlResolver {
         return this.#lastUrl;
     }
 
-    reset(cwd: string = process.cwd()) {
+    reset(cwd: string = process.cwd()): void {
         this.#cwd = cwd;
         this.#cwdUrl = toFileDirURL(this.#cwd);
     }

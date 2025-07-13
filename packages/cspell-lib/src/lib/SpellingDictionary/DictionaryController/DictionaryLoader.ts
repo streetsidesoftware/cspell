@@ -112,7 +112,7 @@ export class DictionaryLoader {
      * @param maxAge - Only check the dictionary if it has been at least `maxAge` ms since the last check.
      * @param now - optional timestamp representing now. (Mostly used in testing)
      */
-    public async refreshCacheEntries(maxAge = MAX_AGE, now = Date.now()): Promise<void> {
+    public async refreshCacheEntries(maxAge: number = MAX_AGE, now: number = Date.now()): Promise<void> {
         await Promise.all([...this.dictionaryCache.values()].map((entry) => this.refreshEntry(entry, maxAge, now)));
     }
 

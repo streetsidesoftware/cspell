@@ -165,7 +165,7 @@ class DefaultSettingsLoader {
     }
 }
 
-export const defaultSettingsLoader = new DefaultSettingsLoader();
+export const defaultSettingsLoader: DefaultSettingsLoader = new DefaultSettingsLoader();
 
 export function getDefaultSettings(useDefaultDictionaries = true): Promise<CSpellSettingsInternal> {
     return defaultSettingsLoader.getDefaultSettingsAsync(useDefaultDictionaries);

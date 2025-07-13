@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { pathPackageFixturesURL } from '../../test-util/test.locations.cjs';
+import { pathPackageFixturesURL } from '../../test-util/test.locations.js';
 import type { TextDocumentRef } from '../Models/TextDocument.js';
 import { searchForConfig } from '../Settings/index.js';
 import { getDictionaryInternal } from '../SpellingDictionary/index.js';

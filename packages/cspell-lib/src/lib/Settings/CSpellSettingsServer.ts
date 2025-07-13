@@ -407,6 +407,8 @@ function extractParsers(plugins: CSpellSettingsI['plugins']): Map<string, Parser
     return parserCache.get(plugins, mapPlugins);
 }
 
-export const __testing__ = {
+export const __testing__: {
+    mergeObjects: typeof mergeObjects;
+} = {
     mergeObjects,
 };

@@ -94,7 +94,10 @@ export class MinHeapQueue<T> implements IterableIterator<T> {
     }
 }
 
-export const __testing__ = {
+export const __testing__: {
+    addToHeap: typeof addToHeap;
+    takeFromHeap: typeof takeFromHeap;
+} = {
     addToHeap,
     takeFromHeap,
 };

@@ -6,7 +6,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import type { CSpellUserSettings } from '@cspell/cspell-types';
 import { describe, expect, test } from 'vitest';
 
-import { pathPackageFixtures, pathPackageRoot, pathRepoTestFixtures } from '../../test-util/test.locations.cjs';
+import { pathPackageFixtures, pathPackageRoot, pathRepoTestFixtures } from '../../test-util/test.locations.js';
 import type { TextDocument } from '../Models/TextDocument.js';
 import { createTextDocument } from '../Models/TextDocument.js';
 import type { ValidationIssue } from '../Models/ValidationIssue.js';

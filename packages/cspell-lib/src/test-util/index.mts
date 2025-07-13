@@ -9,5 +9,5 @@ export {
     pathRepoRootURL,
     pathRepoTestFixtures,
     pathRepoTestFixturesURL,
-} from './test.locations.cjs';
+} from './test.locations.js';
 export { extendExpect } from './test.matchers.mjs';

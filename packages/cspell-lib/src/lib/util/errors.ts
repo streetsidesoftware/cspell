@@ -1,6 +1,8 @@
 import { format } from 'node:util';
 
-function getTypeOf(t: unknown) {
+function getTypeOf(
+    t: unknown,
+): 'string' | 'number' | 'bigint' | 'boolean' | 'symbol' | 'undefined' | 'object' | 'function' {
     return typeof t;
 }
 type TypeOfTypes = ReturnType<typeof getTypeOf>;
@@ -97,6 +99,8 @@ async function _catchPromiseError<T>(p: Promise<T>, handler: ErrorHandler<T>): P
     }
 }
 
-export const __testing__ = {
+export const __testing__: {
+    getTypeOf: typeof getTypeOf;
+} = {
     getTypeOf,
 };

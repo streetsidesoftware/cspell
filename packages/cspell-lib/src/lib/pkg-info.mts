@@ -19,4 +19,4 @@ function calcSrcDirectory() {
     }
 }
 
-export const srcDirectory = calcSrcDirectory();
+export const srcDirectory: string = calcSrcDirectory();

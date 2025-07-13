@@ -15,7 +15,7 @@ import {
     pathRepoRootURL,
     pathRepoTestFixtures,
     pathRepoTestFixturesURL,
-} from '../../../../test-util/test.locations.cjs';
+} from '../../../../test-util/test.locations.js';
 import { logError, logWarning } from '../../../util/logger.js';
 import { cwdURL, resolveFileWithURL, toFilePathOrHref, toFileUrl } from '../../../util/url.js';
 import { currentSettingsFileVersion, defaultConfigFileModuleRef, ENV_CSPELL_GLOB_ROOT } from '../../constants.js';

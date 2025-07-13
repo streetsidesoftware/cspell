@@ -203,6 +203,8 @@ function findPackageForCSpellConfig(pathToConfig: string): NodePackage | undefin
     }
 }
 
-export const __testing__ = {
+export const __testing__: {
+    findPackageForCSpellConfig: typeof findPackageForCSpellConfig;
+} = {
     findPackageForCSpellConfig,
 };

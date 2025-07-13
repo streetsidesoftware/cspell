@@ -329,7 +329,7 @@ export function patchFilename(filename: string, templateReplacements: Record<str
 export function resolveRelativeTo(
     filename: string | URL,
     relativeTo: string | URL,
-    templateReplacements = envToTemplateVars(process.env),
+    templateReplacements: Record<string, string> = envToTemplateVars(process.env),
 ): URL {
     if (filename instanceof URL) return filename;
     filename = patchFilename(filename, templateReplacements);
@@ -359,7 +359,10 @@ function pathFromRelativeTo(relativeTo: string | URL): string {
 
 const loaderCache = new WeakMap<VFileSystem, FileResolver>();
 
-export function createFileResolver(fs: VFileSystem, templateVariables = envToTemplateVars(process.env)): FileResolver {
+export function createFileResolver(
+    fs: VFileSystem,
+    templateVariables: Record<string, string> = envToTemplateVars(process.env),
+): FileResolver {
     let loader = loaderCache.get(fs);
     if (!loader) {
         loader = new FileResolver(fs, templateVariables);

@@ -49,27 +49,27 @@ export class AutoResolveLRUCache<T, V> {
         return value.r;
     }
 
-    get size() {
+    get size(): number {
         return this.count;
     }
 
-    get hits() {
+    get hits(): number {
         return this._hits;
     }
 
-    get misses() {
+    get misses(): number {
         return this._misses;
     }
 
-    get added() {
+    get added(): number {
         return this._added;
     }
 
-    get removed() {
+    get removed(): number {
         return this._removed;
     }
 
-    clear() {
+    clear(): void {
         this._added = 0;
         this._hits = 0;
         this._misses = 0;
@@ -113,11 +113,23 @@ export class AutoResolveLRUCache<T, V> {
         }
     }
 
-    stats() {
+    stats(): {
+        size: number;
+        hits: number;
+        misses: number;
+        added: number;
+        removed: number;
+    } {
         return { size: this.count, hits: this.hits, misses: this.misses, added: this.added, removed: this.removed };
     }
 
-    toJSON() {
+    toJSON(): {
+        size: number;
+        hits: number;
+        misses: number;
+        added: number;
+        removed: number;
+    } {
         return this.stats();
     }
 

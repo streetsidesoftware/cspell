@@ -256,7 +256,10 @@ export function removeAccents(text: string): string {
     return text.normalize('NFD').replace(regExAccents, '');
 }
 
-export const __testing__ = {
+export const __testing__: {
+    regExWords: RegExp;
+    regExWordsAndDigits: RegExp;
+} = {
     regExWords,
     regExWordsAndDigits,
 };

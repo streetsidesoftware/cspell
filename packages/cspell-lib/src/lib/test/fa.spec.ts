@@ -3,7 +3,7 @@ import * as path from 'node:path';
 
 import { describe, expect, test } from 'vitest';
 
-import { pathPackageSamples } from '../../test-util/test.locations.cjs';
+import { pathPackageSamples } from '../../test-util/test.locations.js';
 import * as cspell from '../index.js';
 import * as util from '../util/util.js';
 

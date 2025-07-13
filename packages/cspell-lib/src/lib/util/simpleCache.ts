@@ -27,7 +27,7 @@ export class SimpleWeakCache<K extends object, T> {
         return undefined;
     }
 
-    set(key: K, value: T) {
+    set(key: K, value: T): void {
         this._set(key, { v: value });
     }
 
@@ -110,7 +110,7 @@ export class SimpleCache<K, T> {
         return undefined;
     }
 
-    set(key: K, value: T) {
+    set(key: K, value: T): void {
         this._set(key, { v: value });
     }
 
