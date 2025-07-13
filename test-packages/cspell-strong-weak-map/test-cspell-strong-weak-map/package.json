@@ -5,21 +5,20 @@
   "private": true,
   "bin": {
     "test-mjs": "./bin.mjs",
-    "test-rollup-cjs": "./bin.rollup.cjs",
-    "test-rollup-mjs": "./bin.rollup.mjs"
+    "test-tsdown-cjs": "./bin.tsdown.cjs",
+    "test-tsdown-mjs": "./bin.tsdown.mjs"
   },
   "type": "module",
   "module": "./dist/esm/index.mjs",
   "browser": "./dist/browser/index.mjs",
   "scripts": {
     "clean": "shx rm -rf dist .rollup.cache",
-    "build": "pnpm build:ts && pnpm build:rollup",
-    "build:rollup": "rollup -c rollup.config.mjs",
+    "build": "pnpm build:ts && tsdown",
     "build:ts": "pnpm run compile",
     "clean-build": "pnpm run clean && pnpm run build",
-    "compile": "tsc -b . -f",
+    "compile": "tsc -p .",
     "test": "pnpm test:unit && pnpm test:smoke",
-    "test:smoke": "node ./bin.mjs && node ./bin.rollup.mjs && node ./bin.rollup.cjs",
+    "test:smoke": "node ./bin.mjs && node ./bin.tsdown.mjs && node ./bin.tsdown.cjs",
     "test:unit": "vitest run"
   },
   "author": "",
