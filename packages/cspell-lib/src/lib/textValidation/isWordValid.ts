@@ -18,6 +18,8 @@ export function isWordValidWithEscapeRetry(dict: Dict, wo: TextOffsetRO, line: T
     );
 }
 
-export const __testing__ = {
+export const __testing__: {
+    hasWordCheck: typeof hasWordCheck;
+} = {
     hasWordCheck,
 };

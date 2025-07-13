@@ -3,7 +3,7 @@ import { fileURLToPath } from 'node:url';
 
 import { describe, expect, test } from 'vitest';
 
-import { pathPackageSamples } from '../../test-util/test.locations.cjs';
+import { pathPackageSamples } from '../../test-util/test.locations.js';
 import { loadTextDocument } from '../Models/TextDocument.js';
 import { loadConfig } from '../Settings/index.js';
 import { determineTextDocumentSettings } from './determineTextDocumentSettings.js';

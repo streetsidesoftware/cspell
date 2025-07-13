@@ -44,4 +44,4 @@ export class PerfMonitor {
     }
 }
 
-export const perf = new PerfMonitor();
+export const perf: PerfMonitor = new PerfMonitor();

@@ -1,1 +1,2 @@
-export { FeatureFlag, FeatureFlags, getSystemFeatureFlags, UnknownFeatureFlagError } from './FeatureFlags.js';
+export type { FeatureFlag } from './FeatureFlags.js';
+export { FeatureFlags, getSystemFeatureFlags, UnknownFeatureFlagError } from './FeatureFlags.js';

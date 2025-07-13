@@ -7,7 +7,7 @@ const maxRadio = 0.5;
  * @param s - string to check
  * @returns true if the string is considered random;
  */
-export function isRandomString(s: string, maxNoiseToLengthRatio = maxRadio): boolean {
+export function isRandomString(s: string, maxNoiseToLengthRatio: number = maxRadio): boolean {
     return scoreRandomString(s) >= maxNoiseToLengthRatio;
 }
 

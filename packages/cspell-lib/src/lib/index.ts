@@ -1,9 +1,14 @@
 export { clearCachedFiles, clearCaches } from './clearCachedFiles.js';
 export type { Document } from './Document/index.js';
 export { fileToDocument, fileToTextDocument, isBinaryFile } from './Document/index.js';
-export { ExcludeFilesGlobMap, ExclusionFunction } from './exclusionHelper.js';
+export type { ExcludeFilesGlobMap, ExclusionFunction } from './exclusionHelper.js';
 export * as ExclusionHelper from './exclusionHelper.js';
-export { FeatureFlag, FeatureFlags, getSystemFeatureFlags, UnknownFeatureFlagError } from './FeatureFlags/index.js';
+export {
+    type FeatureFlag,
+    FeatureFlags,
+    getSystemFeatureFlags,
+    UnknownFeatureFlagError,
+} from './FeatureFlags/index.js';
 export type { VFileSystemProvider, VirtualFS } from './fileSystem.js';
 export { FSCapabilityFlags, getVirtualFS } from './fileSystem.js';
 export { getLanguagesForBasename as getLanguageIdsForBaseFilename, getLanguagesForExt } from './fileTypes.js';
@@ -62,12 +67,12 @@ export {
 } from './Settings/TextDocumentSettings.js';
 export {
     determineFinalDocumentSettings,
-    DetermineFinalDocumentSettingsResult,
+    type DetermineFinalDocumentSettingsResult,
     spellCheckDocument,
     spellCheckFile,
-    SpellCheckFileOptions,
-    SpellCheckFilePerf,
-    SpellCheckFileResult,
+    type SpellCheckFileOptions,
+    type SpellCheckFilePerf,
+    type SpellCheckFileResult,
 } from './spellCheckFile.js';
 export {
     CompoundWordsMethod,
@@ -75,30 +80,30 @@ export {
     createCollection as createSpellingDictionaryCollection,
     isSpellingDictionaryLoadError,
     refreshDictionaryCache,
-    SpellingDictionary,
-    SpellingDictionaryCollection,
+    type SpellingDictionary,
+    type SpellingDictionaryCollection,
     SpellingDictionaryLoadError,
-    SuggestionCollector,
-    SuggestionResult,
-    SuggestOptions,
+    type SuggestionCollector,
+    type SuggestionResult,
+    type SuggestOptions,
 } from './SpellingDictionary/index.js';
 export type { SuggestedWord, SuggestionOptions, SuggestionsForWordResult } from './suggestions.js';
 export { SuggestionError, suggestionsForWord, suggestionsForWords } from './suggestions.js';
-export { DocumentValidator, DocumentValidatorOptions, shouldCheckDocument } from './textValidation/index.js';
+export { DocumentValidator, type DocumentValidatorOptions, shouldCheckDocument } from './textValidation/index.js';
 export type { TraceOptions, TraceResult, TraceWordResult } from './trace.js';
 export { traceWords, traceWordsAsync } from './trace.js';
-export { getLogger, Logger, setLogger } from './util/logger.js';
+export { getLogger, type Logger, setLogger } from './util/logger.js';
 export { resolveFile } from './util/resolveFile.js';
 export * as Text from './util/textApi.js';
 export {
     checkText,
     checkTextDocument,
-    CheckTextInfo,
+    type CheckTextInfo,
     IncludeExcludeFlag,
-    IncludeExcludeOptions,
-    TextInfoItem,
+    type IncludeExcludeOptions,
+    type TextInfoItem,
     validateText,
-    ValidationIssue,
+    type ValidationIssue,
 } from './validator.js';
 export * from '@cspell/cspell-types';
 export {

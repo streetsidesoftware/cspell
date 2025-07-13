@@ -4,7 +4,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import resolveFrom from 'resolve-from';
 import { describe, expect, test } from 'vitest';
 
-import { pathPackageSamplesURL, pathRepoRoot } from '../../../test-util/test.locations.cjs';
+import { pathPackageSamplesURL, pathRepoRoot } from '../../../test-util/test.locations.js';
 import { UnsupportedPnpFile } from './ImportError.js';
 import { clearPnPGlobalCache, pnpLoader } from './pnpLoader.js';
 

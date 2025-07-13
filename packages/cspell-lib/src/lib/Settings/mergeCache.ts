@@ -1,5 +1,5 @@
 import { onClearCache } from '../events/index.js';
-import { AutoResolveWeakCache } from '../util/AutoResolve.js';
+import { AutoResolveWeakCache, CacheStats } from '../util/AutoResolve.js';
 
 interface IDisposable {
     dispose(): void;
@@ -21,17 +21,17 @@ export class CalcLeftRightResultWeakCache<TL extends object, TR extends object, 
         return m.get(right, () => calc(left, right));
     }
 
-    clear() {
+    clear(): void {
         this.map.clear();
     }
 
-    dispose() {
+    dispose(): void {
         this.map.dispose();
         this._toDispose?.dispose();
         this._toDispose = undefined;
     }
 
-    stats() {
+    stats(): Readonly<CacheStats> {
         return this.map.stats();
     }
 }

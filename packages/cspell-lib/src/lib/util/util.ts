@@ -1,7 +1,7 @@
 import type { RemoveUndefined } from './types.js';
 
 // alias for uniqueFilterFnGenerator
-export const uniqueFn = uniqueFilterFnGenerator;
+export const uniqueFn: typeof uniqueFilterFnGenerator = uniqueFilterFnGenerator;
 
 export function uniqueFilterFnGenerator<T>(): (v: T) => boolean;
 export function uniqueFilterFnGenerator<T, U>(extractFn: (v: T) => U): (v: T) => boolean;

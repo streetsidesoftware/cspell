@@ -5,7 +5,7 @@ import type { CSpellConfigFile } from 'cspell-config-lib';
 import { CSpellConfigFileInMemory } from 'cspell-config-lib';
 import { describe, expect, test } from 'vitest';
 
-import { pathPackageRoot, pathPackageSamples } from '../../test-util/test.locations.cjs';
+import { pathPackageRoot, pathPackageSamples } from '../../test-util/test.locations.js';
 import { createCSpellSettingsInternal as csi } from '../Models/CSpellSettingsInternalDef.js';
 import { toURL } from '../util/url.js';
 import { calcOverrideSettings } from './calcOverrideSettings.js';

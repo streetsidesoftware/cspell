@@ -41,7 +41,7 @@ export function fromStdinFilePath(path?: string): UriInstance {
     return UriImpl.stdin(path);
 }
 
-export const file = fromFilePath;
+export const file: typeof fromFilePath = fromFilePath;
 
 export function parse(uri: string): UriInstance {
     return UriImpl.parse(uri);
@@ -105,7 +105,7 @@ class UriImpl extends URI implements UriInstance {
         return url;
     }
 
-    toJSON() {
+    toJSON(): { scheme: string; authority: string; path: string; query: string; fragment: string } {
         const { scheme, authority, path, query, fragment } = this;
         return { scheme, authority, path, query, fragment };
     }
@@ -149,7 +149,7 @@ class UriImpl extends URI implements UriInstance {
         return UriImpl.parse(url.href);
     }
 
-    static stdin(filePath = '') {
+    static stdin(filePath: string = ''): UriImpl {
         return UriImpl.from(UriImpl.file(filePath), { scheme: 'stdin' });
     }
 }
@@ -192,7 +192,10 @@ export function documentUriToURL(uri: DocumentUri): URL {
     );
 }
 
-export const __testing__ = {
+export const __testing__: {
+    UriImpl: typeof UriImpl;
+    normalizeFilePath: typeof normalizeFilePath;
+} = {
     UriImpl,
     normalizeFilePath,
 };

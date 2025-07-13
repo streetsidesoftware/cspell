@@ -1,3 +1,4 @@
+import { CacheStats } from '../util/AutoResolve.js';
 import { CalcLeftRightResultWeakCache } from './mergeCache.js';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -47,7 +48,10 @@ export function mergeList<T>(left: T[] | undefined, right: T[] | undefined): T[]
     return result;
 }
 
-export function stats() {
+export function stats(): {
+    cacheMergeListUnique: Readonly<CacheStats>;
+    cacheMergeLists: Readonly<CacheStats>;
+} {
     return {
         cacheMergeListUnique: cacheMergeListUnique.stats(),
         cacheMergeLists: cacheMergeLists.stats(),

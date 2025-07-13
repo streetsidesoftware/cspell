@@ -1,18 +1,18 @@
-import type { TextEncoding, VFileSystemProvider } from 'cspell-io';
+import type { TextEncoding, VFileSystem, VFileSystemProvider, VirtualFS } from 'cspell-io';
 import { getDefaultVirtualFs } from 'cspell-io';
 
 export type { VFileSystemProvider, VfsDirEntry, VirtualFS } from 'cspell-io';
 export { FSCapabilityFlags, VFileSystem } from 'cspell-io';
 
-export function getVirtualFS() {
+export function getVirtualFS(): VirtualFS {
     return getDefaultVirtualFs();
 }
 
-export function getFileSystem() {
+export function getFileSystem(): Required<VFileSystem> {
     return getVirtualFS().fs;
 }
 
-export function registerCSpell(fsp: VFileSystemProvider) {
+export function registerCSpell(fsp: VFileSystemProvider): void {
     const vfs = getVirtualFS();
     vfs.registerFileSystemProvider(fsp);
 }

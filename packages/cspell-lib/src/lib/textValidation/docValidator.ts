@@ -45,7 +45,7 @@ import type { SimpleRange } from './parsedText.js';
 import { createMappedTextSegmenter } from './parsedText.js';
 import { settingsToValidateOptions } from './settingsToValidateOptions.js';
 import { calcTextInclusionRanges } from './textValidator.js';
-import { traceWord } from './traceWord.js';
+import { TraceResult, traceWord } from './traceWord.js';
 import type { ValidateTextOptions } from './ValidateTextOptions.js';
 import type { MappedTextValidationResult, ValidationOptions } from './ValidationTypes.js';
 
@@ -120,7 +120,7 @@ export class DocumentValidator {
         // console.error(`DocumentValidator: ${doc.uri}`);
     }
 
-    get ready() {
+    get ready(): boolean {
         return this._ready;
     }
 
@@ -369,11 +369,11 @@ export class DocumentValidator {
         return [...validateInDocumentSettings(this.document.text, this._preparations.config)].map(toValidationIssue);
     }
 
-    get document() {
+    get document(): TextDocument {
         return this._document;
     }
 
-    public async updateDocumentText(text: string) {
+    public async updateDocumentText(text: string): Promise<void> {
         updateTextDocument(this._document, [{ text }]);
         await this._updatePrep();
     }
@@ -387,7 +387,7 @@ export class DocumentValidator {
         return this._preparations.includeRanges;
     }
 
-    public traceWord(word: string) {
+    public traceWord(word: string): TraceResult {
         assert(this._preparations, ERROR_NOT_PREPARED);
         return traceWord(word, this._preparations.dictionary, this._preparations.config);
     }
@@ -585,7 +585,9 @@ export async function shouldCheckDocument(
     return { errors, shouldCheck: await shouldCheck() };
 }
 
-export const __testing__ = {
+export const __testing__: {
+    sanitizeSuggestion: typeof sanitizeSuggestion;
+} = {
     sanitizeSuggestion,
 };
 

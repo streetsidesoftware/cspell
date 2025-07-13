@@ -119,6 +119,8 @@ export function mapLineSegmentAgainstRangesFactory(
     return mapper;
 }
 
-export const _testMethods = {
+export const _testMethods: {
+    mapWordsAgainstRanges: typeof mapLineSegmentAgainstRangesFactory;
+} = {
     mapWordsAgainstRanges: mapLineSegmentAgainstRangesFactory,
 };

@@ -193,10 +193,10 @@ const settingParsers: readonly (readonly [RegExp, ReducerFn, Directive])[] = [
     [/^LocalWords:/, (acc, m) => reduceWordList(acc, m.replaceAll(/^LocalWords:?/gi, ' '), 'words'), 'Words'],
 ] as const;
 
-export const regExSpellingGuardBlock =
+export const regExSpellingGuardBlock: RegExp =
     /(\bc?spell(?:-?checker)?::?)\s*disable(?!-line|-next)\b[\s\S]*?((?:\1\s*enable\b)|$)/gi;
-export const regExSpellingGuardNext = /\bc?spell(?:-?checker)?::?\s*disable-next\b.*\s\s?.*/gi;
-export const regExSpellingGuardLine = /^.*\bc?spell(?:-?checker)?::?\s*disable-line\b.*/gim;
+export const regExSpellingGuardNext: RegExp = /\bc?spell(?:-?checker)?::?\s*disable-next\b.*\s\s?.*/gi;
+export const regExSpellingGuardLine: RegExp = /^.*\bc?spell(?:-?checker)?::?\s*disable-line\b.*/gim;
 
 const issueMessages = {
     unknownDirective: 'Unknown CSpell directive',
@@ -413,7 +413,16 @@ export function getIgnoreRegExpFromDocument(text: string): (string | RegExp)[] {
 /**
  * These internal functions are used exposed for unit testing.
  */
-export const __internal = {
+export const __internal: {
+    collectInDocumentSettings: typeof collectInDocumentDirectives;
+    getPossibleInDocSettings: typeof getPossibleInDocSettings;
+    getWordsFromDocument: typeof getWordsFromDocument;
+    parseWords: typeof parseWords;
+    parseCompoundWords: typeof parseCompoundWords;
+    parseIgnoreRegExp: typeof parseIgnoreRegExp;
+    parseIgnoreWords: typeof parseIgnoreWords;
+    staticInDocumentDictionaryName: string;
+} = {
     collectInDocumentSettings: collectInDocumentDirectives,
     getPossibleInDocSettings,
     getWordsFromDocument,

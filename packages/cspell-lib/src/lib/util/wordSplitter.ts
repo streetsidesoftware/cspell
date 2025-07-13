@@ -460,7 +460,10 @@ function mergeSortedBreaks(...maps: SortedBreaks[]): SortedBreaks {
     return maps.flat().sort((a, b) => a.offset - b.offset);
 }
 
-export const __testing__ = {
+export const __testing__: {
+    generateWordBreaks: typeof generateWordBreaks;
+    findNextWordText: typeof findNextWordText;
+} = {
     generateWordBreaks,
     findNextWordText,
 };

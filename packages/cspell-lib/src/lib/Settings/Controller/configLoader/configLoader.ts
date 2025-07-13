@@ -2,7 +2,7 @@ import assert from 'node:assert';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import type { CSpellUserSettings, ImportFileRef, Source } from '@cspell/cspell-types';
+import type { CSpellSettings, CSpellUserSettings, ImportFileRef, Source } from '@cspell/cspell-types';
 import { CSpellConfigFile, CSpellConfigFileReaderWriter, ICSpellConfigFile, IO, TextFile } from 'cspell-config-lib';
 import { createReaderWriter } from 'cspell-config-lib';
 import { isUrlLike, toFileURL } from 'cspell-io';
@@ -13,7 +13,7 @@ import type { VFileSystem } from '../../../fileSystem.js';
 import { getVirtualFS } from '../../../fileSystem.js';
 import { createCSpellSettingsInternal as csi } from '../../../Models/CSpellSettingsInternalDef.js';
 import { srcDirectory } from '../../../pkg-info.mjs';
-import { autoResolve, AutoResolveCache, autoResolveWeak } from '../../../util/AutoResolve.js';
+import { autoResolve, AutoResolveCache, autoResolveWeak, CacheStats } from '../../../util/AutoResolve.js';
 import { logError, logWarning } from '../../../util/logger.js';
 import { FileResolver } from '../../../util/resolveFile.js';
 import { envToTemplateVars } from '../../../util/templates.js';
@@ -215,11 +215,12 @@ export class ConfigLoader implements IConfigLoader {
         this.toDispose.push(onClearCache(() => this.clearCachedSettingsFiles()));
     }
 
-    protected cachedConfig = new Map<string, ImportedConfigEntry>();
-    protected cachedConfigFiles = new Map<string, CSpellConfigFile>();
-    protected cachedPendingConfigFile = new AutoResolveCache<string, Promise<CSpellConfigFile | Error>>();
-    protected cachedMergedConfig = new WeakMap<CSpellConfigFile, CacheMergeConfigFileWithImports>();
-    protected cachedCSpellConfigFileInMemory = new WeakMap<CSpellUserSettings, Map<string, CSpellConfigFile>>();
+    protected cachedConfig: Map<string, ImportedConfigEntry> = new Map();
+    protected cachedConfigFiles: Map<string, CSpellConfigFile> = new Map();
+    protected cachedPendingConfigFile: AutoResolveCache<string, Promise<Error | CSpellConfigFile>> =
+        new AutoResolveCache();
+    protected cachedMergedConfig: WeakMap<CSpellConfigFile, CacheMergeConfigFileWithImports> = new WeakMap();
+    protected cachedCSpellConfigFileInMemory: WeakMap<CSpellSettings, Map<string, CSpellConfigFile>> = new WeakMap();
     protected globalSettings: CSpellSettingsI | undefined;
     protected cspellConfigFileReaderWriter: CSpellConfigFileReaderWriter;
     protected configSearch: ConfigSearch;
@@ -346,7 +347,7 @@ export class ConfigLoader implements IConfigLoader {
         await this.getGlobalSettingsAsync().catch((e) => logError(e));
     }
 
-    protected async resolveDefaultConfig() {
+    protected async resolveDefaultConfig(): Promise<URL> {
         const r = await this.fileResolver.resolveFile(defaultConfigFileModuleRef, srcDirectory);
         const url = toFileURL(r.filename);
         this.cspellConfigFileReaderWriter.setTrustedUrls([new URL('../..', url)]);
@@ -545,7 +546,7 @@ export class ConfigLoader implements IConfigLoader {
             ...normalizedReporters,
             ...normalizedGitignoreRoot,
             ...normalizedCacheSettings,
-        });
+        } as Partial<CSpellSettingsI>);
         if (!importedSettings.length) {
             return fileSettings;
         }
@@ -576,7 +577,7 @@ export class ConfigLoader implements IConfigLoader {
         return this.createCSpellConfigFile(cfg.url, cfg.settings);
     }
 
-    dispose() {
+    dispose(): void {
         while (this.toDispose.length) {
             try {
                 this.toDispose.pop()?.dispose();
@@ -586,7 +587,10 @@ export class ConfigLoader implements IConfigLoader {
         }
     }
 
-    getStats() {
+    getStats(): {
+        cacheMergeListUnique: Readonly<CacheStats>;
+        cacheMergeLists: Readonly<CacheStats>;
+    } {
         return { ...getMergeStats() };
     }
 
@@ -611,11 +615,11 @@ export class ConfigLoader implements IConfigLoader {
         };
     }
 
-    get isTrusted() {
+    get isTrusted(): boolean {
         return this._isTrusted;
     }
 
-    setIsTrusted(isTrusted: boolean) {
+    setIsTrusted(isTrusted: boolean): void {
         this._isTrusted = isTrusted;
         this.clearCachedSettingsFiles();
         this.configSearch = new ConfigSearch(searchPlaces, isTrusted ? trustedSearch : unTrustedSearch, this.fs);
@@ -660,7 +664,7 @@ class ConfigLoaderInternal extends ConfigLoader {
         super(vfs);
     }
 
-    get _cachedFiles() {
+    get _cachedFiles(): Map<string, ImportedConfigEntry> {
         return this.cachedConfig;
     }
 }
@@ -770,7 +774,7 @@ export class ConfigurationLoaderError extends Error {
     constructor(
         message: string,
         public readonly configurationFile?: string,
-        public readonly relativeTo?: string | URL,
+        public readonly relativeTo?: string | URL | undefined,
         cause?: unknown,
     ) {
         super(message);
@@ -811,7 +815,13 @@ function relativeToCwd(file: string | URL): string {
     return [prefix || '.', ...urlPath.slice(i)].join('/');
 }
 
-export const __testing__ = {
+export const __testing__: {
+    getDefaultConfigLoaderInternal: typeof getDefaultConfigLoaderInternal;
+    normalizeCacheSettings: typeof normalizeCacheSettings;
+    validateRawConfigVersion: typeof validateRawConfigVersion;
+    resolveGlobRoot: typeof resolveGlobRoot;
+    relativeToCwd: typeof relativeToCwd;
+} = {
     getDefaultConfigLoaderInternal,
     normalizeCacheSettings,
     validateRawConfigVersion,

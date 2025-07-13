@@ -2,7 +2,7 @@ import type { IterableLike } from './IterableLike.js';
 
 export class FreqCounter<T> {
     private _total = 0;
-    readonly _counters = new Map<T, number>();
+    readonly _counters: Map<T, number> = new Map();
 
     get total(): number {
         return this._total;

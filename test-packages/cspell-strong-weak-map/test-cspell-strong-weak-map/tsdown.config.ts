@@ -7,7 +7,7 @@ export default defineConfig([
         format: ['esm', 'cjs'],
         noExternal: ['@cspell/strong-weak-map'],
         dts: true,
-        sourcemap: true,
+        sourcemap: false,
         clean: true,
     },
 ]);

@@ -3,7 +3,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import { describe, expect, test, vi } from 'vitest';
 
-import { pathPackageRoot } from '../../../test-util/test.locations.cjs';
+import { pathPackageRoot } from '../../../test-util/test.locations.js';
 import { getFileSystem } from '../../fileSystem.js';
 import type {
     DictionaryDefinitionInlineInternal,

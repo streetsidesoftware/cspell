@@ -1,29 +1,31 @@
 // cspell:ignore ings ning gimuy anrvtbf gimuxy
 
-export const regExUpperSOrIng = /([\p{Lu}\p{M}]+(?:\\?['’])?(?:s|ing|ies|es|ings|ed|ning))(?!\p{Ll})/gu;
-export const regExSplitWords = /(\p{Ll}\p{M}?)(\p{Lu})/gu;
-export const regExSplitWords2 = /(\p{Lu}\p{M}?)((\p{Lu}\p{M}?)\p{Ll})/gu;
-export const regExpCamelCaseWordBreaksWithEnglishSuffix =
+export const regExUpperSOrIng: RegExp = /([\p{Lu}\p{M}]+(?:\\?['’])?(?:s|ing|ies|es|ings|ed|ning))(?!\p{Ll})/gu;
+export const regExSplitWords: RegExp = /(\p{Ll}\p{M}?)(\p{Lu})/gu;
+export const regExSplitWords2: RegExp = /(\p{Lu}\p{M}?)((\p{Lu}\p{M}?)\p{Ll})/gu;
+export const regExpCamelCaseWordBreaksWithEnglishSuffix: RegExp =
     /(?<=\p{Ll}\p{M}?)(?=\p{Lu})|(?<=\p{Lu}\p{M}?)(?=\p{Lu}\p{M}?\p{Ll})(?!\p{Lu}\p{M}?(?:s|ing|ies|es|ings|ed|ning)(?!\p{Ll}))/gu;
-export const regExpCamelCaseWordBreaks = /(?<=\p{Ll}\p{M}?)(?=\p{Lu})|(?<=\p{Lu}\p{M}?)(?=\p{Lu}\p{M}?\p{Ll})/gu;
-export const regExpAllPossibleWordBreaks =
+export const regExpCamelCaseWordBreaks: RegExp =
+    /(?<=\p{Ll}\p{M}?)(?=\p{Lu})|(?<=\p{Lu}\p{M}?)(?=\p{Lu}\p{M}?\p{Ll})/gu;
+export const regExpAllPossibleWordBreaks: RegExp =
     /(?<=\p{Ll}\p{M}?)(?=\p{Lu})|(?<=\p{Lu}\p{M}?)(?=\p{Lu}\p{M}?\p{Ll})|(?<=\p{Lu}\p{M}?\p{Lu}\p{M}?)(?=\p{Ll})|(?<=\p{L}\p{M}?)(?=\P{L})|(?<=\P{L})(?=\p{L})/gu;
-export const regExWords = /\p{L}\p{M}?(?:(?:\\?['’])?\p{L}\p{M}?)*/gu;
+export const regExWords: RegExp = /\p{L}\p{M}?(?:(?:\\?['’])?\p{L}\p{M}?)*/gu;
 // Words can be made of letters, numbers, period, underscore, dash, plus, and single quote
-export const regExWordsAndDigits = /[\p{L}\w'’`.+-](?:(?:\\(?=[']))?[\p{L}\p{M}\w'’`.+-])*/gu;
-export const regExIgnoreCharacters = /[\p{sc=Hiragana}\p{sc=Han}\p{sc=Katakana}\u30A0-\u30FF\p{sc=Hangul}]/gu;
-export const regExFirstUpper = /^\p{Lu}\p{M}?\p{Ll}+$/u;
-export const regExAllUpper = /^(?:\p{Lu}\p{M}?)+$/u;
-export const regExAllLower = /^(?:\p{Ll}\p{M}?)+$/u;
-export const regExPossibleWordBreaks = /[-+_’'`.\s]/g;
-export const regExMatchRegExParts = /^\s*\/([\s\S]*?)\/([gimuxy]*)\s*$/;
-export const regExAccents = /\p{M}/gu;
-export const regExEscapeCharacters = /(?<=\\)[anrvtbf]/gi;
+export const regExWordsAndDigits: RegExp = /[\p{L}\w'’`.+-](?:(?:\\(?=[']))?[\p{L}\p{M}\w'’`.+-])*/gu;
+export const regExIgnoreCharacters: RegExp = /[\p{sc=Hiragana}\p{sc=Han}\p{sc=Katakana}\u30A0-\u30FF\p{sc=Hangul}]/gu;
+export const regExFirstUpper: RegExp = /^\p{Lu}\p{M}?\p{Ll}+$/u;
+export const regExAllUpper: RegExp = /^(?:\p{Lu}\p{M}?)+$/u;
+export const regExAllLower: RegExp = /^(?:\p{Ll}\p{M}?)+$/u;
+export const regExPossibleWordBreaks: RegExp = /[-+_’'`.\s]/g;
+export const regExMatchRegExParts: RegExp = /^\s*\/([\s\S]*?)\/([gimuxy]*)\s*$/;
+export const regExAccents: RegExp = /\p{M}/gu;
+export const regExEscapeCharacters: RegExp = /(?<=\\)[anrvtbf]/gi;
 /** Matches against leading `'` or `{single letter}'` */
-export const regExDanglingQuote = /(?<=(?:^|(?!\p{M})\P{L})(?:\p{L}\p{M}?)?)[']/gu;
+export const regExDanglingQuote: RegExp = /(?<=(?:^|(?!\p{M})\P{L})(?:\p{L}\p{M}?)?)[']/gu;
 /** Match tailing endings after CAPS words */
-export const regExTrailingEndings = /(?<=(?:\p{Lu}\p{M}?){2})['’]?(?:s|d|ings?|ies|e[ds]?|ning|th|nth)(?!\p{Ll})/gu;
-export const regExNumericLiteral = /^[-+]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][-+]?\d+)?$/;
+export const regExTrailingEndings: RegExp =
+    /(?<=(?:\p{Lu}\p{M}?){2})['’]?(?:s|d|ings?|ies|e[ds]?|ning|th|nth)(?!\p{Ll})/gu;
+export const regExNumericLiteral: RegExp = /^[-+]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][-+]?\d+)?$/;
 
 export function stringToRegExp(pattern: string | RegExp, defaultFlags = 'gimu', forceFlags = 'g'): RegExp | undefined {
     if (pattern instanceof RegExp) {

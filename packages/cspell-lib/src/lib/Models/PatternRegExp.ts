@@ -3,7 +3,7 @@ export class PatternRegExp extends RegExp {
         super(pattern);
     }
 
-    toJSON() {
+    toJSON(): string {
         return this.toString();
     }
 }

@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 import type { CSpellUserSettings, GlobDef, LanguageSetting, ReporterSettings } from '@cspell/cspell-types';
 
 import { resolveFile } from '../../../util/resolveFile.js';
-import type { OptionalOrUndefined } from '../../../util/types.js';
+import type { OptionalOrUndefined, RemoveUndefined } from '../../../util/types.js';
 import { resolveFileWithURL, toFilePathOrHref } from '../../../util/url.js';
 import * as util from '../../../util/util.js';
 import { mapDictDefsToInternal } from '../../DictionarySettings.js';
@@ -15,7 +15,7 @@ interface NormalizableFields {
     import?: string | string[];
 }
 
-export function normalizeRawConfig(config: CSpellUserSettings | NormalizableFields) {
+export function normalizeRawConfig(config: CSpellUserSettings | NormalizableFields): void {
     if (typeof config.version === 'number') {
         config.version = config.version.toString();
     }
@@ -29,7 +29,10 @@ type NormalizeDictionaryDefsParams = OptionalOrUndefined<
     Pick<CSpellUserSettings, 'dictionaryDefinitions' | 'languageSettings'>
 >;
 
-export function normalizeDictionaryDefs(settings: NormalizeDictionaryDefsParams, settingsFileUrl: URL) {
+export function normalizeDictionaryDefs(
+    settings: NormalizeDictionaryDefsParams,
+    settingsFileUrl: URL,
+): RemoveUndefined<NormalizeDictionaryDefsParams> {
     const dictionaryDefinitions = mapDictDefsToInternal(settings.dictionaryDefinitions, settingsFileUrl);
     const languageSettings = settings.languageSettings?.map((langSetting) =>
         util.clean({

@@ -41,7 +41,7 @@ export class ConfigSearch {
         return this.#findUp(dirUrl, stopDirUrls);
     }
 
-    clearCache() {
+    clearCache(): void {
         this.#searchCache.clear();
         this.#scanner.clearCache();
     }
@@ -100,7 +100,7 @@ export class DirConfigScanner {
         this.#searchPlaces = this.#searchPlacesByProtocol.get('*') || searchPlaces;
     }
 
-    clearCache() {
+    clearCache(): void {
         this.#searchDirCache.clear();
     }
 

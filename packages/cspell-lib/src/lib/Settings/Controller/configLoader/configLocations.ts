@@ -51,9 +51,9 @@ const setOfLocations = new Set([
     '.config/cspell.yml',
 ]);
 
-export const searchPlaces = Object.freeze([...setOfLocations]);
+export const searchPlaces: readonly string[] = Object.freeze([...setOfLocations]);
 
-export const defaultConfigFilenames = Object.freeze([...searchPlaces]);
+export const defaultConfigFilenames: readonly string[] = Object.freeze([...searchPlaces]);
 
 function genCfgLoc(filename: string, extensions: string[]) {
     return extensions.map((ext) => filename + ext);

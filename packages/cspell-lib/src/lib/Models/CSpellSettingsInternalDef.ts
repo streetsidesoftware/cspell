@@ -14,7 +14,7 @@ import type { WeightMap } from 'cspell-trie-lib';
 import type { OptionalOrUndefined } from '../util/types.js';
 import { clean } from '../util/util.js';
 
-export const SymbolCSpellSettingsInternal = Symbol('CSpellSettingsInternal');
+export const SymbolCSpellSettingsInternal: unique symbol = Symbol('CSpellSettingsInternal');
 
 export interface CSpellSettingsInternal extends Omit<AdvancedCSpellSettingsWithSourceTrace, 'dictionaryDefinitions'> {
     [SymbolCSpellSettingsInternal]: true;

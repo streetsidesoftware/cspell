@@ -9,8 +9,8 @@ import { isDefined } from '../util/util.js';
 
 const packageName = 'cspell';
 
-export const legacyLocationDir = xdgConfig ? path.join(xdgConfig, 'configstore') : undefined;
-export const cspellGlobalLocationDir = envPaths(packageName, { suffix: '' }).config;
+export const legacyLocationDir: string | undefined = xdgConfig ? path.join(xdgConfig, 'configstore') : undefined;
+export const cspellGlobalLocationDir: string = envPaths(packageName, { suffix: '' }).config;
 
 export const defaultConfigFileName = 'cspell.json';
 
@@ -70,7 +70,7 @@ export class GlobalConfigStore {
         return this.#foundLocation;
     }
 
-    static create() {
+    static create(): GlobalConfigStore {
         return new this();
     }
 
