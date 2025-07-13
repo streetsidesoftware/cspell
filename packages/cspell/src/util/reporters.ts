@@ -40,13 +40,20 @@ function filterFeatureIssues(
         return true;
     }
     // The reporter doesn't support the `unknownWords` feature. Handle the logic here.
-    let reportIssue = issue.isFlagged;
-    reportIssue ||= !reportOptions.unknownWords || reportOptions.unknownWords === unknownWordsChoices.ReportAll;
-    reportIssue ||= reportOptions.unknownWords === unknownWordsChoices.ReportSimple && issue.hasSimpleSuggestions;
-    reportIssue ||=
-        reportOptions.unknownWords === unknownWordsChoices.ReportCommonTypos && issue.hasPreferredSuggestions;
-
-    return reportIssue || false;
+    if (
+        issue.isFlagged ||
+        !reportOptions.unknownWords ||
+        reportOptions.unknownWords === unknownWordsChoices.ReportAll
+    ) {
+        return true;
+    }
+    if (issue.hasPreferredSuggestions && reportOptions.unknownWords !== unknownWordsChoices.ReportFlagged) {
+        return true;
+    }
+    if (issue.hasSimpleSuggestions && reportOptions.unknownWords === unknownWordsChoices.ReportSimple) {
+        return true;
+    }
+    return false;
 }
 
 function handleIssue(reporter: CSpellReporter, issue: Issue, reportOptions?: ReportIssueOptions | undefined): void {
