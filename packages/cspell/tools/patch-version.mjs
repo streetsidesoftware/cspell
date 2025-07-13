@@ -1,7 +1,7 @@
 import { promises as fs } from 'node:fs';
 
 const urlPackageJson = new URL('../package.json', import.meta.url);
-const urlVersionFile = new URL('../src/app/pkgInfo.ts', import.meta.url);
+const urlVersionFile = new URL('../src/pkgInfo.ts', import.meta.url);
 
 async function readPackageJson() {
     const pkgJson = await fs.readFile(urlPackageJson, 'utf8');
