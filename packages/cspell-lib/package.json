@@ -29,7 +29,7 @@
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "clean-build": "pnpm clean && pnpm build",
     "build": "tsc -p . && pnpm run build:api",
-    "build:api": "rollup -c api/rollup.config.mjs",
+    "build:api": "tsdown",
     "watch": "tsc -p . --watch",
     "coverage": "vitest run --coverage --pool=forks",
     "test-watch": "vitest",

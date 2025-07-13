@@ -21,6 +21,6 @@ export {
     resolveSettingsImports,
     searchForConfig,
 } from './defaultConfigLoader.js';
-export { extractImportErrors, ImportFileRefWithError } from './extractImportErrors.js';
+export { extractImportErrors, type ImportFileRefWithError } from './extractImportErrors.js';
 export { readSettings } from './readSettings.js';
 export { readSettingsFiles } from './readSettingsFiles.js';
