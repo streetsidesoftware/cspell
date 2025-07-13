@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v9.1.5 (2025-07-13)
+
+### Fixes
+
+<details>
+<summary>fix: Compile before publish (<a href="https://github.com/streetsidesoftware/cspell/pull/7610">#7610</a>)</summary>
+
+### fix: Compile before publish ([#7610](https://github.com/streetsidesoftware/cspell/pull/7610))
+
+---
+
+</details>
+
 ## v9.1.4 (2025-07-13)
 
 ### Fixes
