@@ -3,9 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## v9.1.4 (2025-07-12)
+## v9.1.4 (2025-07-13)
 
 ### Fixes
+
+<details>
+<summary>fix: show simple typos reporting (<a href="https://github.com/streetsidesoftware/cspell/pull/7606">#7606</a>)</summary>
+
+### fix: show simple typos reporting ([#7606](https://github.com/streetsidesoftware/cspell/pull/7606))
+
+Fix the logic to show an issue when the reporting level is set to `simple`. The code worked because of the assumption that  `hasSimpleSuggestions` would be true if `hasPreferredSuggestions` was true.
+
+---
+
+</details>
 
 <details>
 <summary>fix: Reduce CSpell package size (<a href="https://github.com/streetsidesoftware/cspell/pull/7602">#7602</a>)</summary>
