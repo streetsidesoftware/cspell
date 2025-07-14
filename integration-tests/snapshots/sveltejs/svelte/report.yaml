@@ -3,9 +3,9 @@ Repository: sveltejs/svelte
 Url: https://github.com/sveltejs/svelte.git
 Args: '["**"]'
 Summary:
-  files: 7579
-  filesWithIssues: 503
-  issues: 3678
+  files: 7597
+  filesWithIssues: 504
+  issues: 3679
   errors: 0
 Errors: []
 
@@ -1677,10 +1677,10 @@ issues:
   - "packages/svelte/src/compiler/phases/2-analyze/index.js:687:18       nonstate    U       // warn on any nonstate declarations that are"
   - "packages/svelte/src/compiler/phases/2-analyze/visitors/Attribute.js:82:7        unhoisted       U       const unhoisted = { hoisted: false"
   - "packages/svelte/src/compiler/phases/2-analyze/visitors/RegularElement.js:38:72          qirk    U       stripped because of a qirk:"
-  - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y.js:353:3         impp            U       'impp'"
-  - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y.js:384:21        webauthn        U       if (tokens[0] === 'webauthn') {"
-  - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y.js:417:12        labelable       U       const a11y_labelable = ["
-  - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y.js:746:12        proptypes       U       // aria-proptypes"
+  - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y.js:355:3         impp            U       'impp'"
+  - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y.js:386:21        webauthn        U       if (tokens[0] === 'webauthn') {"
+  - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y.js:419:12        labelable       U       const a11y_labelable = ["
+  - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y.js:748:12        proptypes       U       // aria-proptypes"
   - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/utils.js:124:41       inbetween (between)     U       whitespace is allowed inbetween. TODO remove once legacy"
   - "packages/svelte/src/compiler/phases/3-transform/client/transform-client.js:173:3        memoizer    U       memoizer: /** @type {any} */"
   - "packages/svelte/src/compiler/phases/3-transform/client/transform-template/fix-attribute-casing.js:2:1321        onbegin     U       offset onabort onactivate onbegin onclick onend onerror"
@@ -1701,7 +1701,7 @@ issues:
   - "packages/svelte/src/compiler/utils/extract_svelte_ignore.js:16:16       eachblock       U       'invalid-rest-eachblock-binding': 'bind_invalid"
   - "packages/svelte/src/compiler/utils/mapped_code.js:134:6         unswitched      U       // unswitched loops are faster"
   - "packages/svelte/src/html-tree-validation.js:120:5       bgsound     U       'bgsound',"
-  - "packages/svelte/src/index-client.js:21:29       noone (no one)      U       value; // let's hope noone modifies this global"
+  - "packages/svelte/src/index-client.js:20:29       noone (no one)      U       value; // let's hope noone modifies this global"
   - "packages/svelte/src/internal/client/dev/debug.js:57:9           callsite    U       const callsite = new Error().stack"
   - "packages/svelte/src/internal/client/dev/debug.js:67:28          cdeps       U       console.groupCollapsed('%cdeps', 'font-weight: normal"
   - "packages/svelte/src/internal/client/dev/debug.js:96:28          cderived    U       console.groupCollapsed('%cderived', 'font-weight: normal"
@@ -1711,14 +1711,14 @@ issues:
   - "packages/svelte/src/internal/client/dom/blocks/await.js:156:68      microtick       U       since it's on the next microtick"
   - "packages/svelte/src/internal/client/dom/blocks/svelte-element.js:75:18          Noone (No one)      U       // Assumption: Noone changes the namespace"
   - "packages/svelte/src/internal/client/dom/elements/actions.js:18:8        inited      U       var inited = false;"
-  - "packages/svelte/src/internal/client/dom/elements/attributes.js:556:16       contructor (constructor)    U       // Do not use contructor.name here as that's"
+  - "packages/svelte/src/internal/client/dom/elements/attributes.js:555:16       contructor (constructor)    U       // Do not use contructor.name here as that's"
   - "packages/svelte/src/internal/client/dom/elements/bindings/input.js:28:14        numberlike      U       value = is_numberlike_input(input) ? to_number"
   - "packages/svelte/src/internal/client/dom/elements/bindings/this.js:41:78         nullfiy (nullify)       U       context changes), then nullfiy the binding at"
   - "packages/svelte/src/internal/client/dom/elements/misc.js:54:66          possiblity (possibility)    U       get noticed of it (no possiblity of stopPropagation)"
-  - "packages/svelte/src/internal/client/proxy.js:27:12          proxyable       U       // if non-proxyable, or is already a proxy"
+  - "packages/svelte/src/internal/client/proxy.js:34:12          proxyable       U       // if non-proxyable, or is already a proxy"
   - "packages/svelte/src/internal/client/reactivity/effects.js:15:2          untracking      U       untracking"
   - "packages/svelte/src/internal/client/reactivity/sources.js:217:65        overfiring      U       - this way we avoid overfiring."
-  - "packages/svelte/src/internal/client/runtime.js:132:90       depedencies (dependencies)      U       to avoid duplicating depedencies inside a reaction *"
+  - "packages/svelte/src/internal/client/runtime.js:134:90       depedencies (dependencies)      U       to avoid duplicating depedencies inside a reaction *"
   - "packages/svelte/src/internal/client/timing.js:12:5          bunder      U       // bunder will eval and remove"
   - "packages/svelte/src/internal/server/index.js:26:23          FDEF        U       [\\s'\">/=\\u{FDD0}-\\u{FDEF}\\u{FFFE}\\u{FFFF}\\u{"
   - "packages/svelte/src/internal/server/index.js:26:31          FFFE        U       \\u{FDD0}-\\u{FDEF}\\u{FFFE}\\u{FFFF}\\u{1FFFE}\\u"
@@ -1735,10 +1735,10 @@ issues:
   - "packages/svelte/src/internal/shared/clone.js:34:8           uncloned    U       let uncloned = slice.map((path)"
   - "packages/svelte/src/motion/public.d.ts:1:25         Unsubscriber    U       import { Readable, type Unsubscriber } from '../store/public"
   - "packages/svelte/src/motion/tweened.js:163:31        tweens      U       wrapper for a value that tweens smoothly to its target"
-  - "packages/svelte/src/reactivity/create-subscriber.js:75:13       subcribe (subscribe)    U       // re-subcribe unnecessarily and create"
+  - "packages/svelte/src/reactivity/create-subscriber.js:74:13       subcribe (subscribe)    U       // re-subcribe unnecessarily and create"
   - "packages/svelte/src/reactivity/media-query.js:10:86         parentehesis    U       constructor since there's no parentehesis"
   - "packages/svelte/src/reactivity/reactive-value.js:13:43          onsubscribe     U       ) => void) => void} onsubscribe"
-  - "packages/svelte/src/reactivity/set.js:114:39        nilly       U       create sources willy-nilly to track all possible"
+  - "packages/svelte/src/reactivity/set.js:127:39        nilly       U       create sources willy-nilly to track all possible"
   - "packages/svelte/src/reactivity/window/index.js:136:62       dppx    U       window.devicePixelRatio}dppx)`),"
   - "packages/svelte/src/store/shared/index.js:155:9         unsubscribers       U       const unsubscribers = stores_array.map("
   - "packages/svelte/src/utils.js:202:2          srcobject           U       srcobject: 'srcObject',"
