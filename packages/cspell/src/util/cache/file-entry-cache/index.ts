@@ -58,50 +58,8 @@ class ImplFileEntryCache implements FileEntryCache {
      * @param  buffer buffer to calculate hash on
      * @return content hash digest
      */
-    getHash(buffer: Buffer | string): string {
+    #getHash(buffer: Buffer | string): string {
         return crypto.createHash('md5').update(buffer).digest('hex');
-    }
-
-    /**
-     * Return whether or not a file has changed since last time reconcile was called.
-     * @method hasFileChanged
-     * @param  file  the filepath to check
-     * @return whether or not the file has changed
-     */
-    hasFileChanged(file: string): boolean | undefined {
-        return this.getFileDescriptor(file).changed;
-    }
-
-    /**
-     * Given an array of file paths it return and object with three arrays:
-     *  - changedFiles: Files that changed since previous run
-     *  - notChangedFiles: Files that haven't change
-     *  - notFoundFiles: Files that were not found, probably deleted
-     *
-     * @param files the files to analyze and compare to the previous seen files
-     */
-    analyzeFiles(files: string[] = []): AnalyzedFilesInfo {
-        const res: AnalyzedFilesInfo = {
-            changedFiles: [],
-            notFoundFiles: [],
-            notChangedFiles: [],
-        };
-
-        for (const entry of this.normalizeEntries(files)) {
-            if (entry.changed) {
-                res.changedFiles.push(entry.key);
-                continue;
-            }
-
-            if (entry.notFound) {
-                res.notFoundFiles.push(entry.key);
-                continue;
-            }
-
-            res.notChangedFiles.push(entry.key);
-        }
-
-        return res;
     }
 
     getFileDescriptor(file: string): FileDescriptor {
@@ -110,7 +68,7 @@ class ImplFileEntryCache implements FileEntryCache {
         try {
             fstat = fs.statSync(file);
         } catch (error) {
-            this.removeEntry(file);
+            this.#removeEntry(file);
             return { key: file, notFound: true, err: toError(error) };
         }
 
@@ -163,7 +121,7 @@ class ImplFileEntryCache implements FileEntryCache {
         }
 
         let isDifferent = true;
-        const hash = this.getHash(contentBuffer);
+        const hash = this.#getHash(contentBuffer);
 
         if (meta) {
             isDifferent = hash !== meta.hash;
@@ -183,55 +141,17 @@ class ImplFileEntryCache implements FileEntryCache {
     }
 
     /**
-     * Return the list o the files that changed compared
-     * against the ones stored in the cache
-     *
-     * @method getUpdated
-     * @param files the array of files to compare against the ones in the cache
-     */
-    getUpdatedFiles(files?: string[]): string[] {
-        files ||= [];
-
-        return this.normalizeEntries(files)
-            .filter((entry) => entry.changed)
-            .map((entry) => entry.key);
-    }
-
-    /**
-     * Return the list of files
-     * @param files
-     */
-    normalizeEntries(files?: string[]): FileDescriptor[] {
-        files ||= [];
-
-        const nEntries = files.map((file) => this.getFileDescriptor(file));
-
-        // NormalizeEntries = nEntries;
-        return nEntries;
-    }
-
-    /**
      * Remove an entry from the file-entry-cache. Useful to force the file to still be considered
      * modified the next time the process is run
-     *
-     * @param file
      */
-    removeEntry(file: string): void {
+    #removeEntry(file: string): void {
         const key = this.#getFileKey(file);
         this.#normalizedEntries.delete(key);
         this.cache.removeKey(key);
     }
 
     /**
-     * Delete the cache file from the disk
-     * @method deleteCacheFile
-     */
-    deleteCacheFile(): void {
-        this.cache.removeCacheFile();
-    }
-
-    /**
-     * Remove the cache from the file and clear the memory cache
+     * Deletes the cache file from the disk and clears the memory cache
      */
     destroy(): void {
         this.#normalizedEntries.clear();
@@ -241,8 +161,8 @@ class ImplFileEntryCache implements FileEntryCache {
     #getMetaForFileUsingCheckSum(cacheEntry: CacheEntry): Meta {
         const filePath = this.resolveKeyToFile(cacheEntry.key);
         const contentBuffer = fs.readFileSync(filePath);
-        const hash = this.getHash(contentBuffer);
-        const meta: Meta = Object.assign(cacheEntry.meta || {}, { hash });
+        const hash = this.#getHash(contentBuffer);
+        const meta: Meta = { ...cacheEntry.meta, hash };
         delete meta.size;
         delete meta.mtime;
         return meta;
@@ -251,10 +171,7 @@ class ImplFileEntryCache implements FileEntryCache {
     #getMetaForFileUsingMtimeAndSize(cacheEntry: CacheEntry): Meta {
         const filePath = this.resolveKeyToFile(cacheEntry.key);
         const stat = fs.statSync(filePath);
-        const meta = Object.assign(cacheEntry.meta || {}, {
-            size: stat.size,
-            mtime: stat.mtime.getTime(),
-        });
+        const meta = { ...cacheEntry.meta, size: stat.size, mtime: stat.mtime.getTime() };
         delete meta.hash;
         return meta;
     }
@@ -346,14 +263,14 @@ export interface FileEntryCache {
     getFileDescriptor(file: string): FileDescriptor;
 
     /**
-     * Remove the cache from the file and clear the memory cache
+     * Deletes the cache file from the disk and clears the memory cache
      */
     destroy(): void;
 
     /**
      * Sync the files and persist them to the cache
      */
-    reconcile(noPrune?: boolean): void;
+    reconcile(): void;
 }
 
 export function normalizePath(filePath: string): string {
