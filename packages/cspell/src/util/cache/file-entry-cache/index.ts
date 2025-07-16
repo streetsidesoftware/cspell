@@ -343,79 +343,7 @@ interface CacheEntry {
 export type FileDescriptor = Readonly<CacheEntry>;
 
 export interface FileEntryCache {
-    /**
-     * The flat cache storage used to persist the metadata of the `files
-     * @type {Object}
-     */
-    cache: Cache;
-
-    /**
-     * To enable relative paths as the key with current working directory
-     * @type {string}
-     */
-    currentWorkingDir: string | undefined;
-
-    /**
-     * Given a buffer, calculate md5 hash of its content.
-     * @method getHash
-     * @param  {Buffer} buffer   buffer to calculate hash on
-     * @return {String}          content hash digest
-     */
-    getHash(buffer: Buffer | string): string;
-
-    /**
-     * Return whether or not a file has changed since last time reconcile was called.
-     * @method hasFileChanged
-     * @param  {String}  file  the filepath to check
-     * @return {Boolean}       whether or not the file has changed
-     */
-    hasFileChanged(file: string): boolean | undefined;
-
-    /**
-     * Given an array of file paths it return and object with three arrays:
-     *  - changedFiles: Files that changed since previous run
-     *  - notChangedFiles: Files that haven't change
-     *  - notFoundFiles: Files that were not found, probably deleted
-     *
-     * @param  {Array} files the files to analyze and compare to the previous seen files
-     * @return {[type]}       [description]
-     */
-    analyzeFiles(files?: string[]): AnalyzedFilesInfo;
-
     getFileDescriptor(file: string): FileDescriptor;
-
-    /**
-     * Return the list o the files that changed compared
-     * against the ones stored in the cache
-     *
-     * @method getUpdated
-     * @param files {Array} the array of files to compare against the ones in the cache
-     * @returns {Array}
-     */
-    getUpdatedFiles(files?: string[]): string[];
-
-    /**
-     * Return the list of files
-     * @method normalizeEntries
-     * @param files
-     * @returns {*}
-     */
-    normalizeEntries(files?: string[]): FileDescriptor[];
-
-    /**
-     * Remove an entry from the file-entry-cache. Useful to force the file to still be considered
-     * modified the next time the process is run
-     *
-     * @method removeEntry
-     * @param entryName
-     */
-    removeEntry(entryName: string): void;
-
-    /**
-     * Delete the cache file from the disk
-     * @method deleteCacheFile
-     */
-    deleteCacheFile(): void;
 
     /**
      * Remove the cache from the file and clear the memory cache
@@ -424,7 +352,6 @@ export interface FileEntryCache {
 
     /**
      * Sync the files and persist them to the cache
-     * @method reconcile
      */
     reconcile(noPrune?: boolean): void;
 }
