@@ -24,7 +24,7 @@ export function create(
 class ImplFileEntryCache implements FileEntryCache {
     readonly cache: Cache;
     readonly useChecksum: boolean;
-    #normalizedEntries: Record<string, CacheEntry> = Object.create(null);
+    readonly #normalizedEntries: Map<string, CacheEntry> = new Map();
 
     /**
      * To enable relative paths as the key with current working directory
@@ -145,14 +145,15 @@ class ImplFileEntryCache implements FileEntryCache {
             meta,
         };
 
-        this.#normalizedEntries[key] = nEntry;
+        this.#normalizedEntries.set(key, nEntry);
 
         return nEntry;
     }
 
     #getFileDescriptorUsingChecksum(file: string): FileDescriptor {
-        let meta = this.cache.getKey(this.#getFileKey(file));
-        const cacheExists = Boolean(meta);
+        const key = this.#getFileKey(file);
+        let meta = this.cache.getKey(key);
+        const cacheExists = !!meta;
 
         let contentBuffer;
         try {
@@ -170,11 +171,13 @@ class ImplFileEntryCache implements FileEntryCache {
             meta = { hash };
         }
 
-        const nEntry = (this.#normalizedEntries[this.#getFileKey(file)] = {
-            key: this.#getFileKey(file),
+        const nEntry = {
+            key,
             changed: !cacheExists || isDifferent,
             meta,
-        });
+        };
+
+        this.#normalizedEntries.set(key, nEntry);
 
         return nEntry;
     }
@@ -211,12 +214,12 @@ class ImplFileEntryCache implements FileEntryCache {
      * Remove an entry from the file-entry-cache. Useful to force the file to still be considered
      * modified the next time the process is run
      *
-     * @method removeEntry
-     * @param entryName
+     * @param file
      */
-    removeEntry(entryName: string): void {
-        delete this.#normalizedEntries[this.#getFileKey(entryName)];
-        this.cache.removeKey(this.#getFileKey(entryName));
+    removeEntry(file: string): void {
+        const key = this.#getFileKey(file);
+        this.#normalizedEntries.delete(key);
+        this.cache.removeKey(key);
     }
 
     /**
@@ -231,16 +234,12 @@ class ImplFileEntryCache implements FileEntryCache {
      * Remove the cache from the file and clear the memory cache
      */
     destroy(): void {
-        this.#normalizedEntries = Object.create(null);
+        this.#normalizedEntries.clear();
         this.cache.destroy();
     }
 
     #getMetaForFileUsingCheckSum(cacheEntry: CacheEntry): Meta {
-        let filePath = cacheEntry.key;
-        if (this.currentWorkingDir) {
-            filePath = path.join(this.currentWorkingDir, filePath);
-        }
-
+        const filePath = this.resolveKeyToFile(cacheEntry.key);
         const contentBuffer = fs.readFileSync(filePath);
         const hash = this.getHash(contentBuffer);
         const meta: Meta = Object.assign(cacheEntry.meta || {}, { hash });
@@ -250,11 +249,7 @@ class ImplFileEntryCache implements FileEntryCache {
     }
 
     #getMetaForFileUsingMtimeAndSize(cacheEntry: CacheEntry): Meta {
-        let filePath = cacheEntry.key;
-        if (this.currentWorkingDir) {
-            filePath = path.join(this.currentWorkingDir, filePath);
-        }
-
+        const filePath = this.resolveKeyToFile(cacheEntry.key);
         const stat = fs.statSync(filePath);
         const meta = Object.assign(cacheEntry.meta || {}, {
             size: stat.size,
@@ -266,26 +261,16 @@ class ImplFileEntryCache implements FileEntryCache {
 
     /**
      * Sync the files and persist them to the cache
-     * @method reconcile
      */
     reconcile(noPrune: boolean = true): void {
         this.#removeNotFoundFiles();
 
-        const entries = this.#normalizedEntries;
-        const keys = Object.keys(entries);
-
-        if (keys.length === 0) {
-            return;
-        }
-
-        for (const entryName of keys) {
-            const cacheEntry = entries[entryName];
-
+        for (const [entryKey, cacheEntry] of this.#normalizedEntries.entries()) {
             try {
                 const meta = this.useChecksum
                     ? this.#getMetaForFileUsingCheckSum(cacheEntry)
                     : this.#getMetaForFileUsingMtimeAndSize(cacheEntry);
-                this.cache.setKey(this.#getFileKey(entryName), meta);
+                this.cache.setKey(entryKey, meta);
             } catch (error) {
                 // If the file does not exists we don't save it
                 // other errors are just thrown
@@ -298,18 +283,18 @@ class ImplFileEntryCache implements FileEntryCache {
         this.cache.save(noPrune);
     }
 
-    resolveKeyToFile(key: string): string {
+    resolveKeyToFile(entryKey: string): string {
         if (this.currentWorkingDir) {
-            return path.resolve(this.currentWorkingDir, key);
+            return path.resolve(this.currentWorkingDir, entryKey);
         }
-        return key;
+        return entryKey;
     }
 
     #getFileKey(file: string): string {
         if (this.currentWorkingDir && path.isAbsolute(file)) {
-            return path.relative(this.currentWorkingDir, file);
+            return normalizePath(path.relative(this.currentWorkingDir, file));
         }
-        return file;
+        return normalizePath(file);
     }
 }
 
