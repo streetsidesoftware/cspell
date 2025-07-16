@@ -7,7 +7,7 @@ import type { CacheSettings, CSpellSettings } from '@cspell/cspell-types';
 import { isErrorLike } from '../errors.js';
 import type { CacheOptions } from './CacheOptions.js';
 import type { CSpellLintResultCache } from './CSpellLintResultCache.js';
-import { DiskCache } from './DiskCache.js';
+import { createDiskCache } from './DiskCache.js';
 import { DummyCache } from './DummyCache.js';
 
 // cspell:word cspellcache
@@ -31,14 +31,16 @@ const versionSuffix = '';
 /**
  * Creates CSpellLintResultCache (disk cache if caching is enabled in config or dummy otherwise)
  */
-export function createCache(options: CreateCacheSettings): CSpellLintResultCache {
+export async function createCache(options: CreateCacheSettings): Promise<CSpellLintResultCache> {
     const { useCache, cacheLocation, cacheStrategy, reset } = options;
     const location = path.resolve(cacheLocation);
     const useChecksum = cacheStrategy === 'content';
     const version = normalizeVersion(options.version);
     const useUniversal = options.cacheFormat === 'universal';
-    const cache = useCache ? new DiskCache(location, useChecksum, version, useUniversal) : new DummyCache();
-    reset && cache.reset();
+    const cache = useCache ? await createDiskCache(location, useChecksum, version, useUniversal) : new DummyCache();
+    if (reset) {
+        await cache.reset();
+    }
     return cache;
 }
 

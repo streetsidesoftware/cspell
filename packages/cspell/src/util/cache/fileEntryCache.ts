@@ -1,17 +1,16 @@
-/**
- * This is a wrapper for 'file-entry-cache'
- */
-
-export type { FileDescriptor } from './file-entry-cache.mjs';
 import { mkdirSync } from 'node:fs';
 import * as path from 'node:path';
 
-import type { FileEntryCache as FecFileEntryCache } from './file-entry-cache.mjs';
-import * as fec from './file-entry-cache.mjs';
+import type { FileEntryCache } from './file-entry-cache/index.js';
+import * as fec from './file-entry-cache/index.js';
 
-export type FileEntryCache = FecFileEntryCache;
+export type { FileDescriptor, FileEntryCache } from './file-entry-cache/index.js';
 
-export function createFromFile(pathToCache: string, useCheckSum: boolean, useRelative: boolean): FileEntryCache {
+export function createFromFile(
+    pathToCache: string,
+    useCheckSum: boolean,
+    useRelative: boolean,
+): Promise<FileEntryCache> {
     const absPathToCache = path.resolve(pathToCache);
     const relDir = path.dirname(absPathToCache);
     mkdirSync(relDir, { recursive: true });

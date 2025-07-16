@@ -308,26 +308,34 @@ describe('Linter File Caching', () => {
 
     const NoCache: LinterOptions = { cache: false };
     const Config: LinterOptions = { cacheFormat: 'legacy' };
-    const WithCache: LinterOptions = { cache: true, cacheStrategy: 'content', cacheFormat: 'legacy' };
+    const WithCacheL: LinterOptions = { cache: true, cacheStrategy: 'content', cacheFormat: 'legacy' };
+    const WithCache: LinterOptions = { cache: true, cacheStrategy: 'content', cacheFormat: 'universal' };
     // const WithCacheUniversal: LinterOptions = { cache: true, cacheStrategy: 'metadata' };
-    const WithCacheReset: LinterOptions = {
+    const WithCacheResetL: LinterOptions = {
         cache: true,
         cacheStrategy: 'content',
         cacheReset: true,
         cacheFormat: 'legacy',
     };
+    const WithCacheReset: LinterOptions = {
+        ...WithCacheResetL,
+        cacheFormat: 'universal',
+    };
     const CacheMetadata: LinterOptions = { cache: true, cacheStrategy: 'metadata', cacheFormat: 'legacy' };
 
     test.each`
-        runs                                                                                                                           | root            | comment
-        ${[run([], Config, fc(0, 0)), run([], Config, fc(0, 0))]}                                                                      | ${packageRoot}  | ${'No files'}
-        ${[run(['*.md'], Config, fc(1, 0)), run(['*.md'], Config, fc(1, 1))]}                                                          | ${fr('cached')} | ${'Config based caching'}
-        ${[run(['*.md'], NoCache, fc(1, 0)), run(['*.md'], WithCache, fc(1, 0)), run(['*.md'], WithCache, fc(1, 1))]}                  | ${fr('cached')} | ${'Single .md file not cached then cached, result is not cached.'}
-        ${[run(['*.md'], WithCache, fc(1, 0)), run(['*.md'], WithCache, fc(1, 1)), run(['*.md'], WithCache, fc(1, 1))]}                | ${fr('cached')} | ${'Single .md file cached three runs'}
-        ${[run(['*.md'], WithCache, fc(1, 0)), run(['*.{md,ts}'], WithCache, fc(2, 1)), run(['*.{md,ts}'], WithCache, fc(2, 2))]}      | ${fr('cached')} | ${'cached changing glob three runs'}
-        ${[run(['*.md'], WithCache, fc(1, 0)), run(['*.{md,ts}'], WithCache, fc(2, 1)), run(['*.{md,ts}'], WithCacheReset, fc(2, 0))]} | ${fr('cached')} | ${'cached changing glob three runs'}
-        ${[run(['*.md'], WithCache, fc(1, 0)), run(['*.{md,ts}'], WithCache, fc(2, 1)), run(['*.{md,ts}'], CacheMetadata, fc(2, 0))]}  | ${fr('cached')} | ${'with cache rebuild'}
-        ${[run(['*.md'], WithCache, fc(1, 0)), run(['*.{md,ts}'], WithCacheReset, fc(2, 0)), run(['*.{md,ts}'], WithCache, fc(2, 2))]} | ${fr('cached')} | ${'cached changing glob three runs'}
+        runs                                                                                                                              | root            | comment
+        ${[run([], Config, fc(0, 0)), run([], Config, fc(0, 0))]}                                                                         | ${packageRoot}  | ${'No files'}
+        ${[run(['*.md'], Config, fc(1, 0)), run(['*.md'], Config, fc(1, 1))]}                                                             | ${fr('cached')} | ${'Config based caching'}
+        ${[run(['*.md'], NoCache, fc(1, 0)), run(['*.md'], WithCacheL, fc(1, 0)), run(['*.md'], WithCacheL, fc(1, 1))]}                   | ${fr('cached')} | ${'Single .md file not cached then cached, result is not cached.'}
+        ${[run(['*.md'], WithCacheL, fc(1, 0)), run(['*.md'], WithCacheL, fc(1, 1)), run(['*.md'], WithCacheL, fc(1, 1))]}                | ${fr('cached')} | ${'Single .md file cached three runs'}
+        ${[run(['*.md'], WithCacheL, fc(1, 0)), run(['*.{md,ts}'], WithCacheL, fc(2, 1)), run(['*.{md,ts}'], CacheMetadata, fc(2, 0))]}   | ${fr('cached')} | ${'with cache rebuild'}
+        ${[run(['*.md'], WithCacheL, fc(1, 0)), run(['*.{md,ts}'], WithCacheL, fc(2, 1)), run(['*.{md,ts}'], WithCacheL, fc(2, 2))]}      | ${fr('cached')} | ${'cached changing glob three runs L WWW'}
+        ${[run(['*.md'], WithCacheL, fc(1, 0)), run(['*.{md,ts}'], WithCacheL, fc(2, 1)), run(['*.{md,ts}'], WithCacheResetL, fc(2, 0))]} | ${fr('cached')} | ${'cached changing glob three runs L WWR'}
+        ${[run(['*.md'], WithCacheL, fc(1, 0)), run(['*.{md,ts}'], WithCacheResetL, fc(2, 0)), run(['*.{md,ts}'], WithCacheL, fc(2, 2))]} | ${fr('cached')} | ${'cached changing glob three runs L WRW'}
+        ${[run(['*.md'], WithCache, fc(1, 0)), run(['*.{md,ts}'], WithCache, fc(2, 1)), run(['*.{md,ts}'], WithCache, fc(2, 2))]}         | ${fr('cached')} | ${'cached changing glob three runs U WWW'}
+        ${[run(['*.md'], WithCache, fc(1, 0)), run(['*.{md,ts}'], WithCache, fc(2, 1)), run(['*.{md,ts}'], WithCacheReset, fc(2, 0))]}    | ${fr('cached')} | ${'cached changing glob three runs U WWR'}
+        ${[run(['*.md'], WithCache, fc(1, 0)), run(['*.{md,ts}'], WithCacheReset, fc(2, 0)), run(['*.{md,ts}'], WithCache, fc(2, 2))]}    | ${fr('cached')} | ${'cached changing glob three runs U WRW'}
     `('lint caching with $root $comment', async ({ runs, root }: TestCase) => {
         const reporter = new InMemoryReporter();
         const cacheLocation = tempLocation('.cspellcache');

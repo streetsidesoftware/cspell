@@ -1,24 +1,31 @@
 import crypto from 'node:crypto';
-import fs from 'node:fs';
+import type { Stats } from 'node:fs';
+import fs from 'node:fs/promises';
 import path from 'node:path';
 
 import type { Cache } from 'flat-cache';
 import flatCache from 'flat-cache';
 
-export function createFromFile(filePath: string, useChecksum?: boolean, currentWorkingDir?: string): FileEntryCache {
+export function createFromFile(
+    filePath: string,
+    useChecksum?: boolean,
+    currentWorkingDir?: string,
+): Promise<FileEntryCache> {
     const fname = path.basename(filePath);
     const dir = path.dirname(filePath);
     return create(fname, dir, useChecksum, currentWorkingDir);
 }
 
-export function create(
+export async function create(
     cacheId: string,
     dir: string,
     useChecksum?: boolean,
     currentWorkingDir?: string,
-): FileEntryCache {
+): Promise<FileEntryCache> {
     const cache = flatCache.load(cacheId, dir);
-    return new ImplFileEntryCache(cache, useChecksum ?? false, currentWorkingDir);
+    const fec = new ImplFileEntryCache(cache, useChecksum ?? false, currentWorkingDir);
+    await fec.removeNotFoundFiles();
+    return fec;
 }
 
 class ImplFileEntryCache implements FileEntryCache {
@@ -35,16 +42,15 @@ class ImplFileEntryCache implements FileEntryCache {
         this.cache = cache;
         this.useChecksum = useChecksum || false;
         this.currentWorkingDir = currentWorkingDir;
-        this.#removeNotFoundFiles();
     }
 
-    #removeNotFoundFiles() {
+    async removeNotFoundFiles() {
         const cachedEntries = this.cache.keys();
         // Remove not found entries
         for (const fPath of cachedEntries) {
             try {
                 const filePath = this.resolveKeyToFile(fPath);
-                fs.statSync(filePath);
+                await fs.stat(filePath);
             } catch (error) {
                 if (isNodeError(error) && error.code === 'ENOENT') {
                     this.cache.removeKey(fPath);
@@ -62,11 +68,11 @@ class ImplFileEntryCache implements FileEntryCache {
         return crypto.createHash('md5').update(buffer).digest('hex');
     }
 
-    getFileDescriptor(file: string): FileDescriptor {
-        let fstat: fs.Stats;
+    async getFileDescriptor(file: string): Promise<FileDescriptor> {
+        let fstat: Stats;
 
         try {
-            fstat = fs.statSync(file);
+            fstat = await fs.stat(file);
         } catch (error) {
             this.#removeEntry(file);
             return { key: file, notFound: true, err: toError(error) };
@@ -79,7 +85,7 @@ class ImplFileEntryCache implements FileEntryCache {
         return this.#getFileDescriptorUsingMtimeAndSize(file, fstat);
     }
 
-    #getFileDescriptorUsingMtimeAndSize(file: string, fstat: fs.Stats): FileDescriptor {
+    #getFileDescriptorUsingMtimeAndSize(file: string, fstat: Stats): FileDescriptor {
         const key = this.#getFileKey(file);
         let meta = this.cache.getKey(key);
         const cacheExists = !!meta;
@@ -108,14 +114,14 @@ class ImplFileEntryCache implements FileEntryCache {
         return nEntry;
     }
 
-    #getFileDescriptorUsingChecksum(file: string): FileDescriptor {
+    async #getFileDescriptorUsingChecksum(file: string): Promise<FileDescriptor> {
         const key = this.#getFileKey(file);
         let meta = this.cache.getKey(key);
         const cacheExists = !!meta;
 
         let contentBuffer;
         try {
-            contentBuffer = fs.readFileSync(file);
+            contentBuffer = await fs.readFile(file);
         } catch {
             contentBuffer = '';
         }
@@ -153,14 +159,15 @@ class ImplFileEntryCache implements FileEntryCache {
     /**
      * Deletes the cache file from the disk and clears the memory cache
      */
-    destroy(): void {
+    destroy(): Promise<void> {
         this.#normalizedEntries.clear();
         this.cache.destroy();
+        return Promise.resolve();
     }
 
-    #getMetaForFileUsingCheckSum(cacheEntry: CacheEntry): Meta {
+    async #getMetaForFileUsingCheckSum(cacheEntry: CacheEntry): Promise<Meta> {
         const filePath = this.resolveKeyToFile(cacheEntry.key);
-        const contentBuffer = fs.readFileSync(filePath);
+        const contentBuffer = await fs.readFile(filePath);
         const hash = this.#getHash(contentBuffer);
         const meta: Meta = { ...cacheEntry.meta, hash };
         delete meta.size;
@@ -168,9 +175,9 @@ class ImplFileEntryCache implements FileEntryCache {
         return meta;
     }
 
-    #getMetaForFileUsingMtimeAndSize(cacheEntry: CacheEntry): Meta {
+    async #getMetaForFileUsingMtimeAndSize(cacheEntry: CacheEntry): Promise<Meta> {
         const filePath = this.resolveKeyToFile(cacheEntry.key);
-        const stat = fs.statSync(filePath);
+        const stat = await fs.stat(filePath);
         const meta = { ...cacheEntry.meta, size: stat.size, mtime: stat.mtime.getTime() };
         delete meta.hash;
         return meta;
@@ -179,14 +186,14 @@ class ImplFileEntryCache implements FileEntryCache {
     /**
      * Sync the files and persist them to the cache
      */
-    reconcile(noPrune: boolean = true): void {
-        this.#removeNotFoundFiles();
+    async reconcile(noPrune: boolean = true): Promise<void> {
+        await this.removeNotFoundFiles();
 
         for (const [entryKey, cacheEntry] of this.#normalizedEntries.entries()) {
             try {
                 const meta = this.useChecksum
-                    ? this.#getMetaForFileUsingCheckSum(cacheEntry)
-                    : this.#getMetaForFileUsingMtimeAndSize(cacheEntry);
+                    ? await this.#getMetaForFileUsingCheckSum(cacheEntry)
+                    : await this.#getMetaForFileUsingMtimeAndSize(cacheEntry);
                 this.cache.setKey(entryKey, meta);
             } catch (error) {
                 // If the file does not exists we don't save it
@@ -260,17 +267,17 @@ interface CacheEntry {
 export type FileDescriptor = Readonly<CacheEntry>;
 
 export interface FileEntryCache {
-    getFileDescriptor(file: string): FileDescriptor;
+    getFileDescriptor(file: string): Promise<FileDescriptor>;
 
     /**
      * Deletes the cache file from the disk and clears the memory cache
      */
-    destroy(): void;
+    destroy(): Promise<void>;
 
     /**
      * Sync the files and persist them to the cache
      */
-    reconcile(): void;
+    reconcile(): Promise<void>;
 }
 
 export function normalizePath(filePath: string): string {

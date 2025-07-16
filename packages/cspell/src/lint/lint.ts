@@ -264,7 +264,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
 
         const dep = calcDependencies(config);
 
-        cache.setCachedLintResults(result, dep.files);
+        await cache.setCachedLintResults(result, dep.files);
         return result;
     }
 
@@ -280,7 +280,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
     ): Promise<RunResult> {
         const fileCount = Array.isArray(files) ? files.length : undefined;
         const status: RunResult = runResult();
-        const cache = createCache(cacheSettings);
+        const cache = await createCache(cacheSettings);
         const failFast = cfg.options.failFast ?? configInfo.config.failFast ?? false;
 
         function* prefetchFiles(files: string[]) {
@@ -369,7 +369,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             status.errors += result.configErrors;
         }
 
-        cache.reconcile();
+        await cache.reconcile();
         return status;
     }
 
