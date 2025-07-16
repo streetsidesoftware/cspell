@@ -19,6 +19,7 @@ export function createFromFile(pathToCache: string, useCheckSum: boolean, useRel
     const create = wrap(() => fec.createFromFile(absPathToCache, useCheckSum));
     const feCache = create();
     const cacheWrapper: FileEntryCache = {
+        currentWorkingDir: relDir,
         get cache() {
             return feCache.cache;
         },
