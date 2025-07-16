@@ -33,6 +33,7 @@ export default mergeConfig(
                     'coverage',
                     'dist/**',
                     'esm/**',
+                    'tools/**',
                     'fixtures/**',
                     'lib/**',
                     'vitest*',

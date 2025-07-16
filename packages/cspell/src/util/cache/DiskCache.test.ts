@@ -52,7 +52,7 @@ describe('DiskCache', () => {
     describe('constructor', () => {
         test('creates file-entry-cache in specified location', () => {
             expect(mockCreateFileEntryCache).toHaveBeenCalledTimes(1);
-            expect(mockCreateFileEntryCache).toHaveBeenCalledWith(path.resolve('.foobar'), false);
+            expect(mockCreateFileEntryCache).toHaveBeenCalledWith(path.resolve('.foobar'), false, undefined);
         });
     });
 
