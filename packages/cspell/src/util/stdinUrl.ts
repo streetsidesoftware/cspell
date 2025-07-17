@@ -17,7 +17,7 @@ export function isStdinUrl(url: string | URL): boolean {
  * @param cwd - file path to resolve relative paths against.
  * @returns
  */
-export function resolveStdinUrl(url: string, cwd: string): string {
+export function resolveStdinUrl(url: string, cwd: string | URL): URL {
     assert(url.startsWith(STDINProtocol), `Expected url to start with ${STDINProtocol}`);
     const path = decodeURIComponent(url)
         .slice(STDINProtocol.length)
@@ -25,5 +25,5 @@ export function resolveStdinUrl(url: string, cwd: string): string {
         .replace(/^\/([a-z]:)/i, '$1');
     const fileUrl = toFileURL(path, cwd);
     // If the path is empty,
-    return fileUrl.toString().replace(/^file:/, STDINProtocol) + (path ? '' : '/');
+    return new URL(fileUrl.toString().replace(/^file:/, STDINProtocol) + (path ? '' : '/'));
 }
