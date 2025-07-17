@@ -27,8 +27,8 @@ describe('stdinUrl', () => {
         ${'stdin:' + __filename}          | ${new URL(filenameURL.pathname, stdinUrl).href}
         ${'stdin://' + __filename}        | ${new URL(filenameURL.pathname, stdinUrl).href}
     `('resolveStdinUrl $url', ({ url, expected }) => {
-        expect(resolveStdinUrl(url, __dirname)).toBe(expected);
+        expect(resolveStdinUrl(url, __dirname).href).toBe(expected);
         // check nested resolve
-        expect(resolveStdinUrl(resolveStdinUrl(url, __dirname), dirUrl.href)).toBe(expected);
+        expect(resolveStdinUrl(resolveStdinUrl(url, __dirname).href, dirUrl.href).href).toBe(expected);
     });
 });

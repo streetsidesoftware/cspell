@@ -2,6 +2,7 @@ import * as path from 'node:path';
 import streamConsumers from 'node:stream/consumers';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
+import { toFileURL } from '@cspell/url';
 import { afterEach, describe, expect, test, vi } from 'vitest';
 
 import { pathPackageRoot } from '../test/test.helper.js';
@@ -15,6 +16,7 @@ import {
     readFileListFile,
     readFileListFiles,
     resolveFilename,
+    resolveFilenameToUrl,
 } from './fileHelper.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -117,8 +119,22 @@ describe('fileHelper', () => {
         ${'not_found'}         | ${__dirname} | ${path.join(__dirname, 'not_found')}
         ${'not_found'}         | ${undefined} | ${path.resolve('not_found')}
         ${'stdin'}             | ${undefined} | ${'stdin://'}
+        ${'file://file.txt'}   | ${undefined} | ${path.resolve('file.txt')}
         ${'stdin://source.ts'} | ${undefined} | ${pathToFileURL('source.ts').href.replace(/^file:/, 'stdin:')}
     `('resolveFilename $filename $cwd', async ({ filename, cwd, expected }) => {
         expect(resolveFilename(filename, cwd)).toBe(expected);
+    });
+
+    test.each`
+        filename               | cwd          | expected
+        ${__filename}          | ${undefined} | ${pathToFileURL(__filename)}
+        ${__dirname}           | ${undefined} | ${pathToFileURL(__dirname)}
+        ${'not_found'}         | ${__dirname} | ${toFileURL('not_found', __dirname)}
+        ${'not_found'}         | ${undefined} | ${pathToFileURL('not_found')}
+        ${'stdin'}             | ${undefined} | ${'stdin://'}
+        ${'file://file.txt'}   | ${undefined} | ${pathToFileURL('file.txt')}
+        ${'stdin://source.ts'} | ${undefined} | ${pathToFileURL('source.ts').href.replace(/^file:/, 'stdin:')}
+    `('resolveFilenameToUrl $filename $cwd', async ({ filename, cwd, expected }) => {
+        expect(resolveFilenameToUrl(filename, cwd).href).toBe(expected.toString());
     });
 });

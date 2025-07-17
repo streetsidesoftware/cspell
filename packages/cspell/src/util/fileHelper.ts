@@ -1,7 +1,6 @@
 import { promises as fsp } from 'node:fs';
 import * as path from 'node:path';
 import streamConsumers from 'node:stream/consumers';
-import { fileURLToPath } from 'node:url';
 
 import { toFileDirURL, toFilePathOrHref, toFileURL, urlRelative } from '@cspell/url';
 import type { BufferEncoding } from 'cspell-io';
@@ -11,7 +10,7 @@ import * as cspell from 'cspell-lib';
 import { fileToDocument, isBinaryFile as isUriBinaryFile } from 'cspell-lib';
 
 import { asyncAwait, asyncFlatten, asyncMap, asyncPipe, mergeAsyncIterables } from './async.js';
-import { FileUrlPrefix, STDIN, STDINProtocol, STDINUrlPrefix, UTF8 } from './constants.js';
+import { FileUrlAbsPrefix, FileUrlPrefix, STDIN, STDINProtocol, STDINUrlPrefix, UTF8 } from './constants.js';
 import { IOError, toApplicationError, toError } from './errors.js';
 import type { GlobOptions } from './glob.js';
 import { globP } from './glob.js';
@@ -74,17 +73,23 @@ export interface ReadFileInfoResult extends FileInfo {
     text: string;
 }
 
-export function resolveFilename(filename: string, cwd?: string): string {
-    cwd = cwd || process.cwd();
-    if (filename === STDIN) return STDINUrlPrefix;
+export function resolveFilenameToUrl(filename: string | URL, cwd?: string | URL): URL {
+    if (filename instanceof URL) return filename;
+    if (filename === STDIN) return new URL(STDINUrlPrefix);
+    if (filename.startsWith(FileUrlAbsPrefix)) return new URL(filename);
+    const cwdUrl = toFileDirURL(cwd || process.cwd());
     if (filename.startsWith(FileUrlPrefix)) {
-        const url = new URL(filename.slice(FileUrlPrefix.length), toFileDirURL(cwd));
-        return fileURLToPath(url);
+        // Possible relative file URL -- this is now allowed by the URL spec, users can enter it on the command line.
+        return new URL(filename.slice(FileUrlPrefix.length), cwdUrl);
     }
     if (isStdinUrl(filename)) {
-        return resolveStdinUrl(filename, cwd);
+        return resolveStdinUrl(filename, cwdUrl);
     }
-    return path.resolve(cwd, filename);
+    return toFileURL(filename, cwdUrl);
+}
+
+export function resolveFilename(filename: string, cwd?: string): string {
+    return toFilePathOrHref(resolveFilenameToUrl(filename, cwd));
 }
 
 export function readFileInfo(
