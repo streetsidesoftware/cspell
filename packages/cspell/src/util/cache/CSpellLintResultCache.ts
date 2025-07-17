@@ -8,13 +8,13 @@ export interface CSpellLintResultCache {
     /**
      * Set the cached lint results.
      */
-    setCachedLintResults(result: LintFileResult, dependsUponFiles: string[]): void;
+    setCachedLintResults(result: LintFileResult, dependsUponFiles: string[]): Promise<void>;
     /**
      * Persists the in-memory cache to disk.
      */
-    reconcile(): void;
+    reconcile(): Promise<void>;
     /**
      * Resets the cache.
      */
-    reset(): void;
+    reset(): Promise<void>;
 }

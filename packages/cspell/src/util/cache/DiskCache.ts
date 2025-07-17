@@ -68,7 +68,6 @@ interface DependencyCacheTree {
 export class DiskCache implements CSpellLintResultCache {
     public readonly cacheFileLocation: string;
     private cacheDir: string;
-    private fileEntryCache: FileEntryCache;
     private dependencyCache: Map<string, Dependency> = new Map();
     private dependencyCacheTree: DependencyCacheTree = {};
     private objectCollection = new ShallowObjectCollection<CachedData>();
@@ -80,16 +79,16 @@ export class DiskCache implements CSpellLintResultCache {
         readonly useCheckSum: boolean,
         readonly cspellVersion: string,
         readonly useUniversalCache: boolean,
+        private fileEntryCache: FileEntryCache,
     ) {
         this.cacheFileLocation = resolvePath(cacheFileLocation);
         this.cacheDir = dirname(this.cacheFileLocation);
-        this.fileEntryCache = createFromFile(this.cacheFileLocation, useCheckSum, useUniversalCache);
         this.version = calcVersion(cspellVersion);
     }
 
     public async getCachedLintResults(filename: string): Promise<LintFileResult | undefined> {
         filename = normalizePath(filename);
-        const fileDescriptor = this.fileEntryCache.getFileDescriptor(filename);
+        const fileDescriptor = await this.fileEntryCache.getFileDescriptor(filename);
         const meta = fileDescriptor.meta as CSpellCacheMeta;
         const data = meta?.data;
         const result = data?.r;
@@ -132,11 +131,11 @@ export class DiskCache implements CSpellLintResultCache {
         };
     }
 
-    public setCachedLintResults(
+    public async setCachedLintResults(
         { fileInfo, elapsedTimeMs: _, cached: __, ...result }: LintFileResult,
         dependsUponFiles: string[],
-    ): void {
-        const fileDescriptor = this.fileEntryCache.getFileDescriptor(fileInfo.filename);
+    ): Promise<void> {
+        const fileDescriptor = await this.fileEntryCache.getFileDescriptor(fileInfo.filename);
         const meta = fileDescriptor.meta as CSpellCacheMeta;
         if (fileDescriptor.notFound || !meta) {
             return;
@@ -151,12 +150,12 @@ export class DiskCache implements CSpellLintResultCache {
         meta.data = data;
     }
 
-    public reconcile(): void {
-        this.fileEntryCache.reconcile();
+    public async reconcile(): Promise<void> {
+        await this.fileEntryCache.reconcile();
     }
 
-    public reset(): void {
-        this.fileEntryCache.destroy();
+    public async reset(): Promise<void> {
+        await this.fileEntryCache.destroy();
         this.dependencyCache.clear();
         this.dependencyCacheTree = {};
         this.objectCollection = new ShallowObjectCollection<CachedData>();
@@ -242,6 +241,17 @@ export class DiskCache implements CSpellLintResultCache {
     private toRelFile(file: string): string {
         return normalizePath(this.useUniversalCache ? relativePath(this.cacheDir, file) : file);
     }
+}
+
+export async function createDiskCache(
+    cacheFileLocation: string,
+    useCheckSum: boolean,
+    cspellVersion: string,
+    useUniversalCache: boolean,
+): Promise<DiskCache> {
+    const fileEntryCache = await createFromFile(cacheFileLocation, useCheckSum, useUniversalCache);
+    const cache = new DiskCache(cacheFileLocation, useCheckSum, cspellVersion, useUniversalCache, fileEntryCache);
+    return cache;
 }
 
 function getTreeEntry(tree: DependencyCacheTree, keys: string[]): DependencyCacheTree | undefined {

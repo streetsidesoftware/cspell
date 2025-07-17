@@ -7,13 +7,13 @@ export class DummyCache implements CSpellLintResultCache {
     getCachedLintResults(): Promise<undefined> {
         return Promise.resolve(undefined);
     }
-    setCachedLintResults(): void {
-        return;
+    setCachedLintResults(): Promise<void> {
+        return Promise.resolve();
     }
-    reconcile(): void {
-        return;
+    reconcile(): Promise<void> {
+        return Promise.resolve();
     }
-    reset(): void {
-        return;
+    reset(): Promise<void> {
+        return Promise.resolve();
     }
 }

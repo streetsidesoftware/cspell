@@ -2,7 +2,7 @@ import * as path from 'node:path';
 import { resolve as r } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { beforeEach, describe, expect, test, vi } from 'vitest';
+import { describe, expect, test } from 'vitest';
 
 import type { CacheOptions } from './CacheOptions.js';
 import type { CreateCacheSettings } from './createCache.js';
@@ -10,12 +10,8 @@ import { __testing__, calcCacheSettings, createCache } from './createCache.js';
 import { DiskCache } from './DiskCache.js';
 import { DummyCache } from './DummyCache.js';
 
-vi.mock('./DiskCache');
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
-
-const mockedDiskCache = vi.mocked(DiskCache);
 
 const version = '5.20.0-alpha.192';
 
@@ -49,18 +45,13 @@ describe('Validate calcCacheSettings', () => {
 });
 
 describe('Validate createCache', () => {
-    beforeEach(() => {
-        mockedDiskCache.mockClear();
-    });
-
     test.each`
         settings     | expectedToBeCalled
         ${cco()}     | ${F}
         ${cco(true)} | ${T}
-    `('createCache $settings', ({ settings, expectedToBeCalled }) => {
-        const dc = createCache(settings);
+    `('createCache $settings', async ({ settings, expectedToBeCalled }) => {
+        const dc = await createCache(settings);
         expect(dc).toBeInstanceOf(expectedToBeCalled ? DiskCache : DummyCache);
-        expect(mockedDiskCache).toHaveBeenCalledTimes(expectedToBeCalled ? 1 : 0);
     });
 });
 

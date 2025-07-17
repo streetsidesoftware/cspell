@@ -4,22 +4,24 @@ import { afterEach, beforeEach, describe, expect, type Mock, test, vi } from 'vi
 
 import * as fileHelper from '../../util/fileHelper.js';
 import type { CachedFileResult, CSpellCacheMeta } from './DiskCache.js';
-import { __testing__, DiskCache } from './DiskCache.js';
-import { createFromFile } from './file-entry-cache.mjs';
+import { __testing__, createDiskCache, DiskCache } from './DiskCache.js';
+import { createFromFile } from './file-entry-cache/index.js';
 
 const { calcVersion } = __testing__;
 
-vi.mock('./file-entry-cache.mjs', () => ({
-    createFromFile: vi.fn().mockReturnValue({
-        getFileDescriptor: vi.fn(),
-        reconcile: vi.fn(),
-        analyzeFiles: vi.fn().mockReturnValue({
-            changedFiles: [],
-            notFoundFiles: [],
-            notChangedFiles: [],
+vi.mock('./file-entry-cache/index.js', () => ({
+    createFromFile: vi.fn().mockReturnValue(
+        Promise.resolve({
+            getFileDescriptor: vi.fn(),
+            reconcile: vi.fn(),
+            analyzeFiles: vi.fn().mockReturnValue({
+                changedFiles: [],
+                notFoundFiles: [],
+                notChangedFiles: [],
+            }),
+            destroy: vi.fn(() => Promise.resolve()),
         }),
-        destroy: vi.fn(),
-    }),
+    ),
 }));
 
 const mockCreateFileEntryCache = vi.mocked(createFromFile);
@@ -37,16 +39,25 @@ const RESULT_NO_ISSUES: CachedFileResult = {
 
 describe('DiskCache', () => {
     let diskCache: DiskCache;
-    let fileEntryCache: {
+    let _fileEntryCache: Promise<{
         getFileDescriptor: Mock;
         reconcile: Mock;
         analyzeFiles: Mock;
         destroy: Mock;
-    };
+    }>;
 
-    beforeEach(() => {
-        diskCache = new DiskCache('.foobar', false, 'version', false);
-        fileEntryCache = mockCreateFileEntryCache.mock.results[0].value;
+    function getFileEntryCache(): Promise<{
+        getFileDescriptor: Mock;
+        reconcile: Mock;
+        analyzeFiles: Mock;
+        destroy: Mock;
+    }> {
+        return _fileEntryCache;
+    }
+
+    beforeEach(async () => {
+        diskCache = await createDiskCache('.foobar', false, 'version', false);
+        _fileEntryCache = mockCreateFileEntryCache.mock.results[0].value;
     });
 
     describe('constructor', () => {
@@ -58,16 +69,19 @@ describe('DiskCache', () => {
 
     describe('getCachedLintResults', () => {
         test('returns undefined for not found files', async () => {
+            const fileEntryCache = await getFileEntryCache();
             fileEntryCache.getFileDescriptor.mockReturnValue({ notFound: true });
             expect(await diskCache.getCachedLintResults('file')).toEqual(undefined);
         });
 
         test('returns undefined for changed files', async () => {
+            const fileEntryCache = await getFileEntryCache();
             fileEntryCache.getFileDescriptor.mockReturnValue({ changed: true });
             expect(await diskCache.getCachedLintResults('file')).toEqual(undefined);
         });
 
         test('returns cached result', async () => {
+            const fileEntryCache = await getFileEntryCache();
             fileEntryCache.getFileDescriptor.mockReturnValue(entry(RESULT_NO_ISSUES));
 
             const cachedResult = await diskCache.getCachedLintResults('file');
@@ -81,6 +95,7 @@ describe('DiskCache', () => {
         });
 
         test('returns cached result for empty files', async () => {
+            const fileEntryCache = await getFileEntryCache();
             fileEntryCache.getFileDescriptor.mockReturnValue(entry(RESULT_NO_ISSUES));
 
             const cachedResult = await diskCache.getCachedLintResults('file');
@@ -95,6 +110,7 @@ describe('DiskCache', () => {
 
         test('returns cached result for files with errors', async () => {
             const result = { ...RESULT_NO_ISSUES, errors: 10 };
+            const fileEntryCache = await getFileEntryCache();
             fileEntryCache.getFileDescriptor.mockReturnValue(entry(result));
 
             const fileInfo = { filename: 'file', text: 'file content' };
@@ -111,6 +127,7 @@ describe('DiskCache', () => {
         });
 
         test('with failed dependencies', async () => {
+            const fileEntryCache = await getFileEntryCache();
             fileEntryCache.getFileDescriptor.mockReturnValue(entry(RESULT_NO_ISSUES, ['fileA', 'fileB']));
 
             fileEntryCache.analyzeFiles.mockReturnValue({
@@ -125,10 +142,11 @@ describe('DiskCache', () => {
     });
 
     describe('setCachedLintResults', () => {
-        test('skips not found files', () => {
+        test('skips not found files', async () => {
             const descriptor = { notFound: true, meta: { result: undefined } };
+            const fileEntryCache = await getFileEntryCache();
             fileEntryCache.getFileDescriptor.mockReturnValue(descriptor);
-            diskCache.setCachedLintResults(
+            await diskCache.setCachedLintResults(
                 {
                     fileInfo: { filename: 'some-file' },
                     processed: true,
@@ -143,8 +161,9 @@ describe('DiskCache', () => {
             expect(descriptor.meta.result).toBeUndefined();
         });
 
-        test('writes result and config hash to cache', () => {
+        test('writes result and config hash to cache', async () => {
             const descriptor = { meta: { data: { r: undefined } } };
+            const fileEntryCache = await getFileEntryCache();
             fileEntryCache.getFileDescriptor.mockReturnValue(descriptor);
 
             const result = {
@@ -153,7 +172,10 @@ describe('DiskCache', () => {
                 errors: 0,
                 configErrors: 0,
             };
-            diskCache.setCachedLintResults({ ...result, fileInfo: { filename: 'some-file' }, elapsedTimeMs: 100 }, []);
+            await diskCache.setCachedLintResults(
+                { ...result, fileInfo: { filename: 'some-file' }, elapsedTimeMs: 100 },
+                [],
+            );
 
             expect(fileEntryCache.getFileDescriptor).toHaveBeenCalledWith('some-file');
             expect(descriptor.meta.data.r).toEqual(result);
@@ -161,15 +183,17 @@ describe('DiskCache', () => {
     });
 
     describe('reconcile', () => {
-        test('call cache.reconcile()', () => {
+        test('call cache.reconcile()', async () => {
             diskCache.reconcile();
+            const fileEntryCache = await getFileEntryCache();
             expect(fileEntryCache.reconcile).toHaveBeenCalledTimes(1);
         });
     });
 
     describe('reset', () => {
-        test('resets', () => {
-            diskCache.reset();
+        test('resets', async () => {
+            await diskCache.reset();
+            const fileEntryCache = await getFileEntryCache();
             expect(fileEntryCache.destroy).toHaveBeenCalledTimes(1);
         });
     });
