@@ -2,16 +2,17 @@ import crypto from 'node:crypto';
 import type { Stats } from 'node:fs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 import type { FlatCache } from './flatCache.js';
 import { loadCacheFile as loadFlatCache } from './flatCache.js';
 
 export async function createFromFile(
-    filePath: string,
+    cacheFileUrl: URL,
     useChecksum?: boolean,
-    currentWorkingDir?: string,
+    currentWorkingDir?: URL,
 ): Promise<FileEntryCache> {
-    const cache = await loadFlatCache<Meta>(filePath);
+    const cache = await loadFlatCache<Meta>(cacheFileUrl);
     const fec = new ImplFileEntryCache(cache, useChecksum ?? false, currentWorkingDir);
     await fec.removeNotFoundFiles();
     return fec;
@@ -27,10 +28,10 @@ class ImplFileEntryCache implements FileEntryCache {
      */
     readonly currentWorkingDir: string | undefined;
 
-    constructor(cache: FlatCache<Meta>, useChecksum?: boolean, currentWorkingDir?: string) {
+    constructor(cache: FlatCache<Meta>, useChecksum?: boolean, currentWorkingDir?: URL) {
         this.cache = cache;
         this.useChecksum = useChecksum || false;
-        this.currentWorkingDir = currentWorkingDir;
+        this.currentWorkingDir = currentWorkingDir ? fileURLToPath(currentWorkingDir) : undefined;
     }
 
     async removeNotFoundFiles() {

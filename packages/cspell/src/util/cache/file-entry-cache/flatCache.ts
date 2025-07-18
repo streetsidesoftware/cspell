@@ -1,12 +1,11 @@
 import fs from 'node:fs/promises';
-import path from 'node:path';
 
 import { parse, stringify } from 'flatted';
 
 export class FlatCache<T> {
     #cache: Map<string, T>;
 
-    constructor(readonly cacheFilename: string) {
+    constructor(readonly cacheFilename: URL) {
         this.#cache = new Map<string, T>();
     }
 
@@ -41,7 +40,7 @@ export class FlatCache<T> {
     }
 
     async save(): Promise<void> {
-        const dir = path.dirname(this.cacheFilename);
+        const dir = new URL('.', this.cacheFilename);
         await fs.mkdir(dir, { recursive: true });
         const content = stringify(Object.fromEntries(this.#cache.entries()));
         await fs.writeFile(this.cacheFilename, content, 'utf8');
@@ -61,7 +60,12 @@ export class FlatCache<T> {
     }
 }
 
-export function loadCacheFile<T>(file: string): Promise<FlatCache<T>> {
-    const cache = new FlatCache<T>(file);
+/**
+ *
+ * @param cachefile - The location of the cache file.
+ * @returns
+ */
+export function loadCacheFile<T>(cachefile: URL): Promise<FlatCache<T>> {
+    const cache = new FlatCache<T>(cachefile);
     return cache.load();
 }

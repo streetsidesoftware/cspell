@@ -3,6 +3,7 @@ import { stat } from 'node:fs/promises';
 import path from 'node:path';
 
 import type { CacheSettings, CSpellSettings } from '@cspell/cspell-types';
+import { toFileURL } from '@cspell/url';
 
 import { isErrorLike } from '../errors.js';
 import type { CacheOptions } from './CacheOptions.js';
@@ -33,7 +34,7 @@ const versionSuffix = '';
  */
 export async function createCache(options: CreateCacheSettings): Promise<CSpellLintResultCache> {
     const { useCache, cacheLocation, cacheStrategy, reset } = options;
-    const location = path.resolve(cacheLocation);
+    const location = toFileURL(cacheLocation);
     const useChecksum = cacheStrategy === 'content';
     const version = normalizeVersion(options.version);
     const useUniversal = options.cacheFormat === 'universal';

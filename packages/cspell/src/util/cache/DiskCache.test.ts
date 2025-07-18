@@ -1,4 +1,4 @@
-import * as path from 'node:path';
+import { pathToFileURL } from 'node:url';
 
 import { afterEach, beforeEach, describe, expect, type Mock, test, vi } from 'vitest';
 
@@ -56,14 +56,14 @@ describe('DiskCache', () => {
     }
 
     beforeEach(async () => {
-        diskCache = await createDiskCache('.foobar', false, 'version', false);
+        diskCache = await createDiskCache(pathToFileURL('.foobar'), false, 'version', false);
         _fileEntryCache = mockCreateFileEntryCache.mock.results[0].value;
     });
 
     describe('constructor', () => {
         test('creates file-entry-cache in specified location', () => {
             expect(mockCreateFileEntryCache).toHaveBeenCalledTimes(1);
-            expect(mockCreateFileEntryCache).toHaveBeenCalledWith(path.resolve('.foobar'), false, undefined);
+            expect(mockCreateFileEntryCache).toHaveBeenCalledWith(pathToFileURL('.foobar'), false, undefined);
         });
     });
 
