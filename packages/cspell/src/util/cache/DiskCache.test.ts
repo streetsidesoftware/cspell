@@ -56,7 +56,7 @@ describe('DiskCache', () => {
     }
 
     beforeEach(async () => {
-        diskCache = await createDiskCache('.foobar', false, 'version', false);
+        diskCache = await createDiskCache(pathToFileURL('.foobar'), false, 'version', false);
         _fileEntryCache = mockCreateFileEntryCache.mock.results[0].value;
     });
 

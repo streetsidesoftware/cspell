@@ -1,13 +1,19 @@
 import assert from 'node:assert';
 import * as crypto from 'node:crypto';
 import * as fs from 'node:fs';
-import { dirname, isAbsolute as isAbsolutePath, relative as relativePath, resolve as resolvePath } from 'node:path';
+import {
+    isAbsolute as isAbsolutePath,
+    relative as relativePath,
+    resolve as resolvePath,
+    sep as pathSep,
+} from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 import { readFileInfo } from '../../util/fileHelper.js';
 import type { LintFileResult } from '../../util/LintFileResult.js';
 import type { CSpellLintResultCache } from './CSpellLintResultCache.js';
 import type { FileDescriptor, FileEntryCache } from './fileEntryCache.js';
-import { createFromFile, normalizePath } from './fileEntryCache.js';
+import { createFromFile } from './fileEntryCache.js';
 import { ShallowObjectCollection } from './ObjectCollection.js';
 
 export type CachedFileResult = Omit<LintFileResult, 'fileInfo' | 'elapsedTimeMs' | 'cached'>;
@@ -66,7 +72,6 @@ interface DependencyCacheTree {
  * Caches cspell results on disk
  */
 export class DiskCache implements CSpellLintResultCache {
-    public readonly cacheFileLocation: string;
     private cacheDir: string;
     private dependencyCache: Map<string, Dependency> = new Map();
     private dependencyCacheTree: DependencyCacheTree = {};
@@ -75,14 +80,13 @@ export class DiskCache implements CSpellLintResultCache {
     readonly version: string;
 
     constructor(
-        cacheFileLocation: string,
+        readonly cacheFileLocation: URL,
         readonly useCheckSum: boolean,
         readonly cspellVersion: string,
         readonly useUniversalCache: boolean,
         private fileEntryCache: FileEntryCache,
     ) {
-        this.cacheFileLocation = resolvePath(cacheFileLocation);
-        this.cacheDir = dirname(this.cacheFileLocation);
+        this.cacheDir = fileURLToPath(new URL('./', cacheFileLocation));
         this.version = calcVersion(cspellVersion);
     }
 
@@ -244,7 +248,7 @@ export class DiskCache implements CSpellLintResultCache {
 }
 
 export async function createDiskCache(
-    cacheFileLocation: string,
+    cacheFileLocation: URL,
     useCheckSum: boolean,
     cspellVersion: string,
     useUniversalCache: boolean,
@@ -291,6 +295,11 @@ function compDep(a: Dependency, b: Dependency) {
 
 function calcVersion(version: string): string {
     return version + META_DATA_VERSION_SUFFIX;
+}
+
+export function normalizePath(filePath: string): string {
+    if (pathSep === '/') return filePath;
+    return filePath.split(pathSep).join('/');
 }
 
 export const __testing__: {
