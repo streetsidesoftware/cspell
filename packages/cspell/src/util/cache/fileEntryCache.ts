@@ -1,5 +1,5 @@
-import { mkdirSync } from 'node:fs';
 import * as path from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import type { FileEntryCache } from './file-entry-cache/index.js';
 import * as fec from './file-entry-cache/index.js';
@@ -11,10 +11,12 @@ export function createFromFile(
     useCheckSum: boolean,
     useRelative: boolean,
 ): Promise<FileEntryCache> {
-    const absPathToCache = path.resolve(pathToCache);
-    const relDir = path.dirname(absPathToCache);
-    mkdirSync(relDir, { recursive: true });
-    return fec.createFromFile(absPathToCache, useCheckSum, useRelative ? relDir : undefined);
+    const cacheFileUrl = pathToFileURL(pathToCache);
+    return fec.createFromFile(
+        cacheFileUrl,
+        useCheckSum,
+        useRelative ? fileURLToPath(new URL('./', cacheFileUrl)) : undefined,
+    );
 }
 
 export function normalizePath(filePath: string): string {

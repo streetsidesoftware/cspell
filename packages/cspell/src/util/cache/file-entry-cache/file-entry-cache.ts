@@ -7,11 +7,11 @@ import type { FlatCache } from './flatCache.js';
 import { loadCacheFile as loadFlatCache } from './flatCache.js';
 
 export async function createFromFile(
-    filePath: string,
+    cacheFileUrl: URL,
     useChecksum?: boolean,
     currentWorkingDir?: string,
 ): Promise<FileEntryCache> {
-    const cache = await loadFlatCache<Meta>(filePath);
+    const cache = await loadFlatCache<Meta>(cacheFileUrl);
     const fec = new ImplFileEntryCache(cache, useChecksum ?? false, currentWorkingDir);
     await fec.removeNotFoundFiles();
     return fec;

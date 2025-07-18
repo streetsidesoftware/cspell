@@ -1,4 +1,4 @@
-import * as path from 'node:path';
+import { pathToFileURL } from 'node:url';
 
 import { afterEach, beforeEach, describe, expect, type Mock, test, vi } from 'vitest';
 
@@ -63,7 +63,7 @@ describe('DiskCache', () => {
     describe('constructor', () => {
         test('creates file-entry-cache in specified location', () => {
             expect(mockCreateFileEntryCache).toHaveBeenCalledTimes(1);
-            expect(mockCreateFileEntryCache).toHaveBeenCalledWith(path.resolve('.foobar'), false, undefined);
+            expect(mockCreateFileEntryCache).toHaveBeenCalledWith(pathToFileURL('.foobar'), false, undefined);
         });
     });
 
