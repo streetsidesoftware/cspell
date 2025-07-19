@@ -247,6 +247,9 @@ export class DiskCache implements CSpellLintResultCache {
     }
 
     private resolveFile(file: string): string {
+        if (isUrlLike(file)) {
+            return file;
+        }
         return normalizePath(resolvePath(this.cacheDir, file));
     }
 

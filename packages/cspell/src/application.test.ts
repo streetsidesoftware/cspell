@@ -353,6 +353,27 @@ describe('Linter File Caching', () => {
             expect(result, `run #${r}`).toEqual(oc(expected));
         }
     });
+
+    test.each`
+        runs                                                                                                                      | root                   | comment
+        ${[run(['*.ts'], WithCache, fc(1, 0)), run(['*.{md,ts}'], WithCache, fc(2, 1)), run(['*.{md,ts}'], WithCache, fc(2, 2))]} | ${fr('cached-remote')} | ${'cached changing glob three runs U WWW'}
+    `('lint caching remote with $root $comment', { timeout: 60_000 }, async ({ runs, root }: TestCase) => {
+        const reporter = new InMemoryReporter();
+        const cacheLocation = tempLocation('.cspellcache');
+        await fs.rm(cacheLocation, { recursive: true }).catch(() => undefined);
+
+        let r = 0;
+
+        for (const run of runs) {
+            ++r;
+            const { fileGlobs, options, expected } = run;
+            const useOptions = { ...options, cacheLocation };
+            useOptions.root = root;
+            const result = await App.lint(fileGlobs, useOptions, reporter);
+            expect(reporter.errors).toEqual([]);
+            expect(result, `run #${r}`).toEqual(oc(expected));
+        }
+    });
 });
 
 function tempLocation(...parts: string[]): string {
