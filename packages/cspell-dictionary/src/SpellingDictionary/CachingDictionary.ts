@@ -55,22 +55,21 @@ class CachedDict implements CachingDictionary {
     readonly name: string;
     readonly id = ++dictionaryCounter;
     readonly has: (word: string) => boolean;
-    #has: AutoCache<boolean>;
+    readonly #has: AutoCache<boolean>;
     constructor(
         private dict: SpellingDictionary,
         private options: SearchOptions,
     ) {
         this.name = dict.name;
-        this.#has = autoCache((word: string) => this.dict.has(word, this.options), DefaultAutoCacheSize);
-        this.has = logRequests
-            ? (word: string): boolean => {
-                  const time = performance.now() - startTime;
-                  const value = this.#has(word);
-                  log.push({ time, method: 'has', word, value });
-                  return value;
-              }
-            : this.#has;
-
+        const has = autoCache((word: string) => this.dict.has(word, this.options), DefaultAutoCacheSize);
+        const hasAndLog = (word: string): boolean => {
+            const time = performance.now() - startTime;
+            const value = has(word);
+            log.push({ time, method: 'has', word, value });
+            return value;
+        };
+        this.#has = has;
+        this.has = logRequests ? hasAndLog : has;
         // console.log(`CachedDict for ${this.name}`);
     }
 
