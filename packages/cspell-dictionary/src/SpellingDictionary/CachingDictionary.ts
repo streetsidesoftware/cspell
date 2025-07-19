@@ -1,4 +1,4 @@
-import type { CacheStats } from '../util/AutoCache.js';
+import type { AutoCache, CacheStats } from '../util/AutoCache.js';
 import { autoCache, extractStats } from '../util/AutoCache.js';
 import type { PreferredSuggestion, SearchOptions, SpellingDictionary } from './SpellingDictionary.js';
 import type { SpellingDictionaryCollection } from './SpellingDictionaryCollection.js';
@@ -54,23 +54,25 @@ export type LogEntry = LogEntryHas;
 class CachedDict implements CachingDictionary {
     readonly name: string;
     readonly id = ++dictionaryCounter;
+    readonly has: (word: string) => boolean;
+    #has: AutoCache<boolean>;
     constructor(
         private dict: SpellingDictionary,
         private options: SearchOptions,
     ) {
         this.name = dict.name;
+        this.#has = autoCache((word: string) => this.dict.has(word, this.options), DefaultAutoCacheSize);
+        this.has = logRequests
+            ? (word: string): boolean => {
+                  const time = performance.now() - startTime;
+                  const value = this.#has(word);
+                  log.push({ time, method: 'has', word, value });
+                  return value;
+              }
+            : this.#has;
+
         // console.log(`CachedDict for ${this.name}`);
     }
-
-    #has = autoCache((word: string) => this.dict.has(word, this.options), DefaultAutoCacheSize);
-    has = logRequests
-        ? (word: string): boolean => {
-              const time = performance.now() - startTime;
-              const value = this.#has(word);
-              log.push({ time, method: 'has', word, value });
-              return value;
-          }
-        : this.#has;
 
     readonly isNoSuggestWord = autoCache(
         (word: string) => this.dict.isNoSuggestWord(word, this.options),
