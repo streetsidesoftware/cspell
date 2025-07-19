@@ -14,11 +14,6 @@ vi.mock('./file-entry-cache/index.js', () => ({
         Promise.resolve({
             getFileDescriptor: vi.fn(),
             reconcile: vi.fn(),
-            analyzeFiles: vi.fn().mockReturnValue({
-                changedFiles: [],
-                notFoundFiles: [],
-                notChangedFiles: [],
-            }),
             destroy: vi.fn(() => Promise.resolve()),
         }),
     ),
@@ -37,19 +32,20 @@ const RESULT_NO_ISSUES: CachedFileResult = {
     configErrors: 0,
 };
 
+const urlCSpellReadme =
+    'https://raw.githubusercontent.com/streetsidesoftware/vscode-spell-checker/refs/heads/main/README.md';
+
 describe('DiskCache', () => {
     let diskCache: DiskCache;
     let _fileEntryCache: Promise<{
         getFileDescriptor: Mock;
         reconcile: Mock;
-        analyzeFiles: Mock;
         destroy: Mock;
     }>;
 
     function getFileEntryCache(): Promise<{
         getFileDescriptor: Mock;
         reconcile: Mock;
-        analyzeFiles: Mock;
         destroy: Mock;
     }> {
         return _fileEntryCache;
@@ -130,12 +126,6 @@ describe('DiskCache', () => {
             const fileEntryCache = await getFileEntryCache();
             fileEntryCache.getFileDescriptor.mockReturnValue(entry(RESULT_NO_ISSUES, ['fileA', 'fileB']));
 
-            fileEntryCache.analyzeFiles.mockReturnValue({
-                changedFiles: ['fileA', 'fileB'],
-                notFoundFiles: [],
-                notChangedFiles: [],
-            });
-
             expect(await diskCache.getCachedLintResults('file')).toBeUndefined();
             expect(await diskCache.getCachedLintResults('file')).toBeUndefined();
         });
@@ -180,6 +170,26 @@ describe('DiskCache', () => {
             expect(fileEntryCache.getFileDescriptor).toHaveBeenCalledWith('some-file');
             expect(descriptor.meta.data.r).toEqual(result);
         });
+
+        test('handles remote dependencies', { timeout: 60_000 }, async () => {
+            const descriptor = { meta: { data: { r: undefined } } };
+            const fileEntryCache = await getFileEntryCache();
+            fileEntryCache.getFileDescriptor.mockReturnValue(descriptor);
+
+            const result = {
+                processed: true,
+                issues: [],
+                errors: 0,
+                configErrors: 0,
+            };
+            await diskCache.setCachedLintResults(
+                { ...result, fileInfo: { filename: 'some-file' }, elapsedTimeMs: 100 },
+                [urlCSpellReadme, import.meta.url],
+            );
+
+            expect(fileEntryCache.getFileDescriptor).toHaveBeenCalledWith('some-file');
+            expect(descriptor.meta.data.r).toEqual(result);
+        });
     });
 
     describe('reconcile', () => {
@@ -200,6 +210,17 @@ describe('DiskCache', () => {
 
     afterEach(() => {
         vi.clearAllMocks();
+    });
+});
+
+describe('getDependencyForUrl', () => {
+    test('getDependencyForUrl', { timeout: 60_000 }, async () => {
+        const url = urlCSpellReadme;
+        const dep = await __testing__.getDependencyForUrl(url);
+        expect(dep).toEqual({
+            f: url,
+            h: expect.any(String),
+        });
     });
 });
 
