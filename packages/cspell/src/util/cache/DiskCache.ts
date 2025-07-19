@@ -1,6 +1,6 @@
 import assert from 'node:assert';
-import * as crypto from 'node:crypto';
-import * as fs from 'node:fs';
+import crypto from 'node:crypto';
+import fs from 'node:fs/promises';
 import {
     isAbsolute as isAbsolutePath,
     relative as relativePath,
@@ -8,6 +8,8 @@ import {
     sep as pathSep,
 } from 'node:path';
 import { fileURLToPath } from 'node:url';
+
+import { isUrlLike, toFilePathOrHref } from '@cspell/url';
 
 import { readFileInfo } from '../../util/fileHelper.js';
 import type { LintFileResult } from '../../util/LintFileResult.js';
@@ -109,7 +111,7 @@ export class DiskCache implements CSpellLintResultCache {
             !meta ||
             !result ||
             !versionMatches ||
-            !this.checkDependencies(data.d)
+            !(await this.checkDependencies(data.d))
         ) {
             return undefined;
         }
@@ -148,7 +150,7 @@ export class DiskCache implements CSpellLintResultCache {
         const data: CachedData = this.objectCollection.get({
             v: this.version,
             r: this.normalizeResult(result),
-            d: this.calcDependencyHashes(dependsUponFiles),
+            d: await this.calcDependencyHashes(dependsUponFiles),
         });
 
         meta.data = data;
@@ -174,7 +176,7 @@ export class DiskCache implements CSpellLintResultCache {
         return this.ocCacheFileResult.get({ issues, processed, errors, configErrors, reportIssueOptions });
     }
 
-    private calcDependencyHashes(dependsUponFiles: string[]): Dependency[] {
+    private async calcDependencyHashes(dependsUponFiles: string[]): Promise<Dependency[]> {
         dependsUponFiles.sort();
 
         const c = getTreeEntry(this.dependencyCacheTree, dependsUponFiles);
@@ -182,19 +184,19 @@ export class DiskCache implements CSpellLintResultCache {
             return c.d;
         }
 
-        const dependencies: Dependency[] = dependsUponFiles.map((f) => this.getDependency(f));
+        const dependencies: Dependency[] = await Promise.all(dependsUponFiles.map((f) => this.getDependency(f)));
 
         return setTreeEntry(this.dependencyCacheTree, dependencies);
     }
 
-    private checkDependency(dep: Dependency): boolean {
+    private async checkDependency(dep: Dependency): Promise<boolean> {
         const depFile = this.resolveFile(dep.f);
         const cDep = this.dependencyCache.get(depFile);
 
         if (cDep && compDep(dep, cDep)) return true;
         if (cDep) return false;
 
-        const d = this.getFileDep(depFile);
+        const d = await this.getFileDep(depFile);
         if (compDep(dep, d)) {
             this.dependencyCache.set(depFile, dep);
             return true;
@@ -203,20 +205,26 @@ export class DiskCache implements CSpellLintResultCache {
         return false;
     }
 
-    private getDependency(file: string): Dependency {
+    private async getDependency(file: string): Promise<Dependency> {
         const dep = this.dependencyCache.get(file);
         if (dep) return dep;
-        const d = this.getFileDep(file);
+        const d = await this.getFileDep(file);
         this.dependencyCache.set(file, d);
         return d;
     }
 
-    private getFileDep(file: string): Dependency {
+    private async getFileDep(file: string): Promise<Dependency> {
+        if (isUrlLike(file)) {
+            if (!file.startsWith('file://')) {
+                return getDependencyForUrl(file);
+            }
+            file = toFilePathOrHref(file);
+        }
         assert(isAbsolutePath(file), `Dependency must be absolute "${file}"`);
         const f = this.toRelFile(file);
         let h: string;
         try {
-            const buffer = fs.readFileSync(file);
+            const buffer = await fs.readFile(file);
             h = this.getHash(buffer);
         } catch {
             return { f };
@@ -224,10 +232,10 @@ export class DiskCache implements CSpellLintResultCache {
         return { f, h };
     }
 
-    private checkDependencies(dependencies: Dependency[] | undefined): boolean {
+    private async checkDependencies(dependencies: Dependency[] | undefined): Promise<boolean> {
         if (!dependencies) return false;
         for (const dep of dependencies) {
-            if (!this.checkDependency(dep)) {
+            if (!(await this.checkDependency(dep))) {
                 return false;
             }
         }
@@ -244,6 +252,24 @@ export class DiskCache implements CSpellLintResultCache {
 
     private toRelFile(file: string): string {
         return normalizePath(this.useUniversalCache ? relativePath(this.cacheDir, file) : file);
+    }
+}
+
+async function getDependencyForUrl(remoteUrl: string | URL): Promise<Dependency> {
+    const url = new URL(remoteUrl);
+
+    try {
+        // eslint-disable-next-line n/no-unsupported-features/node-builtins
+        const response = await fetch(url, { method: 'HEAD' });
+        const h =
+            response.headers.get('etag') ||
+            response.headers.get('last-modified') ||
+            response.headers.get('content-length') ||
+            '';
+        return { f: url.href, h: h ? h.trim() : '' };
+    } catch {
+        // If the fetch fails, we cannot compute a hash, so we return an empty hash.
+        return { f: url.href, h: '' };
     }
 }
 
@@ -304,6 +330,8 @@ export function normalizePath(filePath: string): string {
 
 export const __testing__: {
     calcVersion: typeof calcVersion;
+    getDependencyForUrl: typeof getDependencyForUrl;
 } = {
     calcVersion,
+    getDependencyForUrl,
 };
