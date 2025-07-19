@@ -3,6 +3,106 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v9.2.0 (2025-07-19)
+
+<details>
+<summary>refactor: Support url based cache entries (<a href="https://github.com/streetsidesoftware/cspell/pull/7639">#7639</a>)</summary>
+
+### refactor: Support url based cache entries ([#7639](https://github.com/streetsidesoftware/cspell/pull/7639))
+
+---
+
+</details>
+
+### Features
+
+<details>
+<summary>fix: Support remote dependencies in cache (<a href="https://github.com/streetsidesoftware/cspell/pull/7642">#7642</a>)</summary>
+
+### fix: Support remote dependencies in cache ([#7642](https://github.com/streetsidesoftware/cspell/pull/7642))
+
+---
+
+</details>
+
+### Fixes
+
+<details>
+<summary>fix: Remove `flat-cache` dependency (<a href="https://github.com/streetsidesoftware/cspell/pull/7636">#7636</a>)</summary>
+
+### fix: Remove `flat-cache` dependency ([#7636](https://github.com/streetsidesoftware/cspell/pull/7636))
+
+`flat-cache` v6 is not compatible with the cspell cache. Since `flat-cache` was mostly a pass through to `flatted`, it was better to just replace it.
+
+---
+
+</details>
+
+<details>
+<summary>refactor: move towards caching URLs (<a href="https://github.com/streetsidesoftware/cspell/pull/7634">#7634</a>)</summary>
+
+### refactor: move towards caching URLs ([#7634](https://github.com/streetsidesoftware/cspell/pull/7634))
+
+---
+
+</details>
+
+<details>
+<summary>fix: Support async cache (<a href="https://github.com/streetsidesoftware/cspell/pull/7631">#7631</a>)</summary>
+
+### fix: Support async cache ([#7631](https://github.com/streetsidesoftware/cspell/pull/7631))
+
+---
+
+</details>
+
+<details>
+<summary>fix: Replace file-entry-cache (<a href="https://github.com/streetsidesoftware/cspell/pull/6579">#6579</a>)</summary>
+
+### fix: Replace file-entry-cache ([#6579](https://github.com/streetsidesoftware/cspell/pull/6579))
+
+Deprecating the use of file-entry-cache.
+
+v10 of `file-entry-cache` breaks the spell checker and bloats the cache size.
+
+This PR is the first step in reducing the dependency upon file-entry-cache and its dependencies.
+
+---
+
+</details>
+
+<details>
+<summary>fix: Clean cspell-lib type exports (<a href="https://github.com/streetsidesoftware/cspell/pull/7615">#7615</a>)</summary>
+
+### fix: Clean cspell-lib type exports ([#7615](https://github.com/streetsidesoftware/cspell/pull/7615))
+
+---
+
+</details>
+
+### Dictionary Updates
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/7618">#7618</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#7618](https://github.com/streetsidesoftware/cspell/pull/7618))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ integration-tests/snapshots/vitest-dev/vitest/report.yaml  | 10 ++--------
+ integration-tests/snapshots/vitest-dev/vitest/snapshot.txt |  5 +----
+ packages/cspell-bundled-dicts/package.json                 |  2 +-
+ pnpm-lock.yaml                                             | 12 ++++++------
+ 4 files changed, 10 insertions(+), 19 deletions(-)
+```
+
+---
+
+</details>
+
 ## v9.1.5 (2025-07-13)
 
 ### Fixes
