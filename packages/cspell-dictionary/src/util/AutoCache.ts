@@ -1,6 +1,6 @@
 const CACHE_SIZE = 100;
 
-interface AutoCache<R> extends CacheStats {
+export interface AutoCache<R> extends CacheStats {
     (word: string): R;
 }
 
