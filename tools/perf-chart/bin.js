@@ -1,2 +1,2 @@
 #!/usr/bin/env node
-import './lib/app.cjs';
+import './lib/app.js';

@@ -21,7 +21,16 @@ interface CsvRecord {
 
 export async function perfReport(csvFile: string | URL): Promise<string> {
     const limit = changeDate(new Date(), -30).getTime();
-    const records = (await readCsvData(csvFile)).filter((r) => r.platform === 'linux' && r.timestamp >= limit);
+    console.error(`Generating performance report from ${csvFile} since ${new Date(limit).toISOString()}`);
+    const recordsInRange = (await readCsvData(csvFile)).filter((r) => r.platform === 'linux' && r.timestamp >= limit);
+    const runsInRange = groupCsvRecordsByRun(recordsInRange);
+    const runs = filterOutIncompleteRuns(runsInRange);
+    const records = runs.flat();
+    // console.error(`Runs in range: ${runsInRange.length}, Records: ${recordsInRange.length}`);
+    // reportOnCsvRecords(recordsInRange);
+    console.error(`Runs: ${runs.length}, Records: ${records.length}`);
+    reportOnCsvRecords(records);
+    // console.error(`Found ${records.length} records in the last 30 days. %o`, countCsvRecordsByRepo(records));
     const dailyStats = createDailyStats(records);
     const data = [...groupBy(records, 'repo')].sort((a, b) => a[0].localeCompare(b[0]));
     const markdown = inject`\
@@ -41,6 +50,138 @@ export async function perfReport(csvFile: string | URL): Promise<string> {
 
     `;
     return markdown;
+}
+
+function countCsvRecordsByRepo(records: CsvRecord[], counts: Map<string, number> = new Map()): Map<string, number> {
+    for (const r of records) {
+        const count = (counts.get(r.repo) || 0) + 1;
+        counts.set(r.repo, count);
+    }
+    return counts;
+}
+
+function filterOutIncompleteRuns(runs: CsvRecord[][]): CsvRecord[][] {
+    if (runs.length === 0) return runs;
+
+    // Determine the max size.
+    const sizes = runs.map((r) => r.length);
+    const maxSize = Math.max(...sizes);
+    if (sizes.length * maxSize === sizes.reduce((a, b) => a + b, 0)) {
+        // All runs are the same size, so we can return them as is.
+        return runs;
+    }
+
+    const maxDelta = 2;
+
+    // We are going to make a curve that will allow us to filter out runs that are too small.
+    // Keep looking while changes are made.
+    let changes = false;
+
+    do {
+        changes = false;
+        for (let i = 0; i < sizes.length; ++i) {
+            const max = Math.max(getSize(i - 1), getSize(i + 1));
+            const allowed = max - maxDelta;
+            if (sizes[i] < allowed) {
+                sizes[i] = allowed;
+                changes = true;
+            }
+        }
+        for (let i = sizes.length - 1; i >= 0; --i) {
+            const max = Math.max(getSize(i - 1), getSize(i + 1));
+            const allowed = max - maxDelta;
+            if (sizes[i] < allowed) {
+                sizes[i] = allowed;
+                changes = true;
+            }
+        }
+    } while (changes);
+
+    const result = runs.filter((r, i) => r.length >= sizes[i]);
+    return result;
+
+    // Needs to allow for adding new repos and removing old repos.
+    // This doesn't happen very often, so we can just filter out runs that are too small.
+
+    function getSize(i: number): number {
+        if (i < 0) return sizes[0];
+        if (i >= sizes.length) return sizes[sizes.length - 1];
+        return sizes[i];
+    }
+}
+
+function groupCsvRecordsByRun(records: CsvRecord[]): CsvRecord[][] {
+    // Groupd the csv records by run, that can be determined by the timestamp and
+    // the time it took to process the repo with a padding of 1 minute.
+    // If a repo record occurs more than once, only the first record is kept.
+
+    const gapPadding = 1 * 60 * 1000; // 2 minutes in milliseconds
+    const runs: CsvRecord[][] = [];
+    const seen = new Set<string>();
+    let run: CsvRecord[] = [];
+    let lastTs = 0;
+    for (const record of records) {
+        const lowerLimit = record.timestamp - record.elapsedMs - gapPadding;
+        if (lastTs < lowerLimit) {
+            seen.clear();
+            run = [];
+            runs.push(run);
+        }
+        if (!seen.has(record.repo)) {
+            run.push(record);
+            seen.add(record.repo);
+        }
+        lastTs = record.timestamp;
+    }
+    return runs;
+}
+
+function reportOnCsvRecords(records: CsvRecord[]) {
+    // Get a list of all unique repositories.
+    const repos = [...new Set(records.map((r) => r.repo))].sort();
+
+    // Groupd the csv records by run, that can be determined by the timestamp and
+    // the time it took to process the repo with a padding of 2 minutes.
+
+    const runs: CsvRecord[][] = groupCsvRecordsByRun(records);
+
+    // Process each run look for duplicates and missing repos entries.
+    runs.forEach((run, i) => {
+        const runStartTime = Math.min(...run.map((r) => r.timestamp));
+        const runEndTime = Math.max(...run.map((r) => r.timestamp));
+        const runId = (i + 1).toFixed(0).padStart(2, '0');
+        const runRepoNames = new Set(run.map((r) => r.repo));
+        const groupedByRepo: Map<string, number> = new Map(repos.map((repo) => [repo, 0]));
+        const unexpectedResults = [...countCsvRecordsByRepo(run, groupedByRepo)].filter(([_, count]) => count != 1);
+        console.error(
+            `Run ${runId} ${new Date(runStartTime).toISOString()} repos: ${pad(runRepoNames.size, 2)} ${deltaTimeMsInDHMS(runEndTime - runStartTime)} `,
+        );
+        for (const [repo, count] of unexpectedResults) {
+            console.error(`  ${repo.padEnd(20)}: ${count} records`);
+        }
+    });
+}
+
+function deltaTimeMsInDHMS(deltaMs: number): string {
+    return deltaTimeSInDHMS(deltaMs / 1000);
+}
+
+function pad(s: string | number, n: number): string {
+    const t = typeof s === 'number' ? s.toString() : s;
+    return n < 0 ? t.padEnd(-n, ' ') : t.padStart(n, ' ');
+}
+
+function deltaTimeSInDHMS(deltaSec: number): string {
+    const days = Math.floor(deltaSec / (24 * 3600));
+    const hours = Math.floor((deltaSec % (24 * 3600)) / 3600);
+    const minutes = Math.floor((deltaSec % 3600) / 60);
+    const seconds = deltaSec % 60;
+    let result = '';
+    if (days > 0) result += `${days}d `;
+    if (hours > 0) result += `${hours}h `;
+    if (minutes > 0) result += `${minutes}m `;
+    result += `${seconds.toFixed(2)}s`;
+    return result;
 }
 
 async function readCsvData(csvFile: string | URL): Promise<CsvRecord[]> {
@@ -98,7 +239,7 @@ function groupBy<T, K>(data: T[], key: keyof T | ((d: T) => K)): Map<K, T[]> {
 
 function changeDate(date: Date, deltaDays: number): Date {
     const d = new Date(date);
-    const n = d.setUTCHours(0);
+    const n = d.setUTCHours(0, 0, 0, 0);
     const dd = new Date(n + deltaDays * 24 * 60 * 60 * 1000);
     dd.setUTCHours(0, 0, 0, 0);
     return dd;
