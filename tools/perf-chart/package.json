@@ -11,27 +11,23 @@
     "node": ">=20"
   },
   "scripts": {
-    "build": "pnpm run build:tsc && pnpm run build:esbuild",
-    "build:esbuild": "esbuild --bundle --packages=bundle --platform=node --target=node18 --outfile=lib/app.cjs src/app.ts",
+    "build": "pnpm run build:tsc && tsdown",
     "build:tsc": "tsc -p .",
     "clean": "shx rm -rf dist coverage \"*.tsbuildInfo\"",
     "clean-build": "pnpm run clean && pnpm run build",
-    "test-vitest": "vitest run",
     "watch": "tsc -p . -w"
   },
   "author": "Jason Dent",
   "license": "MIT",
-  "dependencies": {
-    "commander": "^14.0.0",
-    "csv-parse": "^5.6.0",
-    "thistogram": "^1.1.1"
-  },
+  "dependencies": {},
   "keywords": [],
   "files": [
     "lib",
     "bin.js"
   ],
   "devDependencies": {
-    "esbuild": "^0.25.7"
+    "commander": "^14.0.0",
+    "csv-parse": "^5.6.0",
+    "thistogram": "^1.1.1"
   }
 }
