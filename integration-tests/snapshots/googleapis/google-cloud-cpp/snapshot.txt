@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 20560, Issues found: 45376 in 7739 files.
+ CSpell: Files checked: 20566, Issues found: 45377 in 7739 files.
  exit code: 1
 ARCHITECTURE.md:158:48    - Unknown word (googlemock) -- implementation using `googlemock`
 ARCHITECTURE.md:29:61     - Unknown word (retryable)  -- RPCs that fail with a retryable error,
@@ -476,7 +476,7 @@ google/cloud/bigquery/v2/minimal/internal/table_response_test.cc:232:25    - Unk
 google/cloud/bigquery/v2/minimal/internal/table_response_test.cc:235:24    - Unknown word (locat)            -- R"( location: "t-locat...<truncated>...")"
 google/cloud/bigquery/v2/minimal/internal/table_response_test.cc:236:33    - Unknown word (defau)            -- default_collation: "t-defau...<truncated>...")"
 google/cloud/bigquery/v2/minimal/testing/table_test_utils.cc:58:28     - Unknown word (hfields)    -- vector<std::string> hfields;
-google/cloud/bigtable/BUILD.bazel:106:22    - Unknown word (readrowsparser) -- name = "internal_readrowsparser_test",
+google/cloud/bigtable/BUILD.bazel:128:22    - Unknown word (readrowsparser) -- name = "internal_readrowsparser_test",
 google/cloud/bigtable/CMakeLists.txt:32:6      - Unknown word (testproxy)  -- "testproxy"
 google/cloud/bigtable/app_profile_config_test.cc:101:51    - Unknown word (xyzzy)      -- ofileUpdateConfig().set_etag("xyzzy").as_proto();
 google/cloud/bigtable/async_read_stream_test.cc:28:11     - Unknown word (btproto)    -- namespace btproto = ::google::bigtable
@@ -499,7 +499,7 @@ google/cloud/bigtable/instance_admin_test.cc:49:11     - Unknown word (iamproto)
 google/cloud/bigtable/internal/async_row_reader.cc:75:31     - Unknown word (cntr)       -- explicit CountFrames(int& cntr) : cntr(++cntr) {}
 google/cloud/bigtable/internal/async_row_reader_test.cc:340:37    - Unknown word (Doesnt)     -- AsyncRowReaderTest, ParserEofDoesntFailOnUnfinishedRowIfRowLimit
 google/cloud/bigtable/internal/bulk_mutator_test.cc:512:37    - Unknown word (Retryable)  -- BulkMutatorTest, ReportEitherRetryableMutationFailOrStreamFail
-google/cloud/bigtable/internal/data_connection_impl.cc:467:24    - Unknown word (satisying)  -- // sure of that, satisying the `promise<>` is deferred
+google/cloud/bigtable/internal/data_connection_impl.cc:469:24    - Unknown word (satisying)  -- // sure of that, satisying the `promise<>` is deferred
 google/cloud/bigtable/internal/legacy_async_row_reader_test.cc:144:22    - Unknown word (corresponse) -- * Future at idx i corresponse to i-th expected row
 google/cloud/bigtable/internal/legacy_async_row_reader_test.cc:552:66    - Unknown word (noooo)       -- PERMISSION_DENIED, "noooo");
 google/cloud/bigtable/internal/legacy_row_reader_test.cc:89:14     - Unknown word (preconfigured) -- // Returns a preconfigured set of parsers, so expectatio
@@ -728,24 +728,24 @@ google/cloud/spanner/benchmarks/README.md:133:29    - Unknown word (srtp)       
 google/cloud/spanner/benchmarks/README.md:52:45     - Unknown word (principa)   -- these benchmarks. The principa should have (at least
 google/cloud/spanner/benchmarks/README.md:71:49     - Unknown word (mrcb)       -- experiment=read-string | tee mrcb-read-string.csv
 google/cloud/spanner/benchmarks/README.md:97:9      - Unknown word (ggplot)     -- require(ggplot2) # may require install
-google/cloud/spanner/client_test.cc:338:68    - Unknown word (epdp)       -- tePartitionedDmlParams const& epdp) {
-google/cloud/spanner/client_test.cc:575:12    - Unknown word (STREQ)      -- EXPECT_STREQ(e, "Read() error");
+google/cloud/spanner/client_test.cc:390:68    - Unknown word (epdp)       -- tePartitionedDmlParams const& epdp) {
+google/cloud/spanner/client_test.cc:630:12    - Unknown word (STREQ)      -- EXPECT_STREQ(e, "Read() error");
 google/cloud/spanner/database_admin_client_test.cc:32:11     - Unknown word (gsad)       -- namespace gsad = ::google::spanner
 google/cloud/spanner/instance_admin_client_test.cc:29:11     - Unknown word (gsai)       -- namespace gsai = ::google::spanner
-google/cloud/spanner/integration_tests/client_integration_test.cc:1370:8    - Unknown word (reconflict) -- auto reconflict_commit = client_->Commit
-google/cloud/spanner/integration_tests/client_integration_test.cc:1471:50   - Unknown word (fkshoppingcartscustomerid) -- AllOf(HasSubstr("fkshoppingcartscustomerid"),
-google/cloud/spanner/integration_tests/client_integration_test.cc:1472:50   - Unknown word (shoppingcarts)             -- HasSubstr("shoppingcarts"))));
-google/cloud/spanner/integration_tests/client_integration_test.cc:394:23    - Unknown word (Mahalia)    -- {1911, "Mahalia", "Jackson"},
-google/cloud/spanner/integration_tests/client_integration_test.cc:424:23    - Unknown word (Aretha)     -- {1942, "Aretha", "Franklin"},
-google/cloud/spanner/integration_tests/client_integration_test.cc:442:33    - Unknown word (Vandross)   -- {1951, "Luther", "Vandross"},
-google/cloud/spanner/integration_tests/client_integration_test.cc:445:23    - Unknown word (Chaka)      -- {1953, "Chaka", "Khan"},
-google/cloud/spanner/integration_tests/client_integration_test.cc:454:23    - Unknown word (Thom)       -- {1968, "Thom", "Yorke"},
-google/cloud/spanner/integration_tests/client_integration_test.cc:454:31    - Unknown word (Yorke)      -- {1968, "Thom", "Yorke"},
-google/cloud/spanner/integration_tests/client_integration_test.cc:455:23    - Unknown word (Mariah)     -- {1969, "Mariah", "Carey"},
-google/cloud/spanner/integration_tests/client_integration_test.cc:464:14    - Unknown word (upserts)    -- // Use upserts as mutation groups are
+google/cloud/spanner/integration_tests/client_integration_test.cc:1456:8    - Unknown word (reconflict) -- auto reconflict_commit = client_->Commit
+google/cloud/spanner/integration_tests/client_integration_test.cc:1557:50   - Unknown word (fkshoppingcartscustomerid) -- AllOf(HasSubstr("fkshoppingcartscustomerid"),
+google/cloud/spanner/integration_tests/client_integration_test.cc:1558:50   - Unknown word (shoppingcarts)             -- HasSubstr("shoppingcarts"))));
+google/cloud/spanner/integration_tests/client_integration_test.cc:406:23    - Unknown word (Mahalia)    -- {1911, "Mahalia", "Jackson"},
+google/cloud/spanner/integration_tests/client_integration_test.cc:436:23    - Unknown word (Aretha)     -- {1942, "Aretha", "Franklin"},
+google/cloud/spanner/integration_tests/client_integration_test.cc:454:33    - Unknown word (Vandross)   -- {1951, "Luther", "Vandross"},
+google/cloud/spanner/integration_tests/client_integration_test.cc:457:23    - Unknown word (Chaka)      -- {1953, "Chaka", "Khan"},
+google/cloud/spanner/integration_tests/client_integration_test.cc:466:23    - Unknown word (Thom)       -- {1968, "Thom", "Yorke"},
+google/cloud/spanner/integration_tests/client_integration_test.cc:466:31    - Unknown word (Yorke)      -- {1968, "Thom", "Yorke"},
+google/cloud/spanner/integration_tests/client_integration_test.cc:467:23    - Unknown word (Mariah)     -- {1969, "Mariah", "Carey"},
+google/cloud/spanner/integration_tests/client_integration_test.cc:476:14    - Unknown word (upserts)    -- // Use upserts as mutation groups are
 google/cloud/spanner/integration_tests/data_types_integration_test.cc:85:30     - Unknown word (Tmpl)       -- DataTypeIntegrationTestTmpl : public T {
-google/cloud/spanner/internal/connection_impl_test.cc:3298:37   - Unknown word (BADDECAF)   -- { partition_token: "BADDECAF" }
-google/cloud/spanner/internal/connection_impl_test.cc:3300:25   - Unknown word (CAFEDEAD)   -- transaction: { id: "CAFEDEAD" }
+google/cloud/spanner/internal/connection_impl_test.cc:3306:37   - Unknown word (BADDECAF)   -- { partition_token: "BADDECAF" }
+google/cloud/spanner/internal/connection_impl_test.cc:3308:25   - Unknown word (CAFEDEAD)   -- transaction: { id: "CAFEDEAD" }
 google/cloud/spanner/internal/connection_impl_test.cc:65:34     - Unknown word (Wmissing)   -- diagnostic ignored "-Wmissing-field-initializers"
 google/cloud/spanner/internal/logging_result_set_reader.cc:34:43     - Unknown word (unresumable) -- __func__ << "() << (unresumable)";
 google/cloud/spanner/internal/partial_result_set_resume_test.cc:528:39    - Unknown word (Resumability) -- set<spanner::StreamingResumabilityBufferSizeOption>(0)

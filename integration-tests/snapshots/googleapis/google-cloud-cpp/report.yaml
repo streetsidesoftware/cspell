@@ -3,9 +3,9 @@ Repository: googleapis/google-cloud-cpp
 Url: https://github.com/googleapis/google-cloud-cpp.git
 Args: '["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]'
 Summary:
-  files: 20560
+  files: 20566
   filesWithIssues: 7739
-  issues: 45376
+  issues: 45377
   errors: 0
 Errors: []
 
@@ -488,7 +488,7 @@ issues:
   - "google/cloud/bigtable/bigtable_client_unit_tests.bzl:86:12          readmodifywriterow      U       \"table_readmodifywriterow_test.cc\","
   - "google/cloud/bigtable/bigtable_client_unit_tests.bzl:87:12          readrow                 U       \"table_readrow_test.cc\","
   - "google/cloud/bigtable/bigtable_client_unit_tests.bzl:88:12          readrows                U       \"table_readrows_test.cc\","
-  - "google/cloud/bigtable/BUILD.bazel:106:22        readrowsparser      U       name = \"internal_readrowsparser_test\","
+  - "google/cloud/bigtable/BUILD.bazel:128:22        readrowsparser      U       name = \"internal_readrowsparser_test\","
   - "google/cloud/bigtable/client_options_test.cc:311:28         Grpclb      U       ClientOptionsTest, SetGrpclbFallbackTimeoutMS) {"
   - "google/cloud/bigtable/client_options_test.cc:319:44         GRPCLB      U       hannelArgument(args, GRPC_ARG_GRPCLB_FALLBACK_TIMEOUT_MS"
   - "google/cloud/bigtable/CMakeLists.txt:32:6           testproxy       U       \"testproxy\""
@@ -501,7 +501,7 @@ issues:
   - "google/cloud/bigtable/internal/async_row_reader_test.cc:340:37      Doesnt (Doesn't)    U       AsyncRowReaderTest, ParserEofDoesntFailOnUnfinishedRowIfRowLimit"
   - "google/cloud/bigtable/internal/async_row_reader.cc:75:31        cntr    U       explicit CountFrames(int& cntr) : cntr(++cntr) {}"
   - "google/cloud/bigtable/internal/bulk_mutator_test.cc:512:37      Retryable       U       BulkMutatorTest, ReportEitherRetryableMutationFailOrStreamFail"
-  - "google/cloud/bigtable/internal/data_connection_impl.cc:467:24       satisying       U       // sure of that, satisying the `promise<>` is deferred"
+  - "google/cloud/bigtable/internal/data_connection_impl.cc:469:24       satisying       U       // sure of that, satisying the `promise<>` is deferred"
   - "google/cloud/bigtable/internal/legacy_async_row_reader_test.cc:144:22       corresponse     U       * Future at idx i corresponse to i-th expected row"
   - "google/cloud/bigtable/internal/legacy_async_row_reader_test.cc:552:66       noooo           U       PERMISSION_DENIED, \"noooo\");"
   - "google/cloud/bigtable/internal/legacy_row_reader_test.cc:89:14          preconfigured       U       // Returns a preconfigured set of parsers, so expectatio"
@@ -731,25 +731,25 @@ issues:
   - "google/cloud/spanner/benchmarks/README.md:103:11        rbind       U       df <- rbind(df, t);"
   - "google/cloud/spanner/benchmarks/README.md:111:1         ggsave      U       ggsave('read-data-types.png"
   - "google/cloud/spanner/benchmarks/README.md:133:29        srtp        U       experiment=read | tee srtp-read.csv"
-  - "google/cloud/spanner/client_test.cc:338:68      epdp        U       tePartitionedDmlParams const& epdp) {"
-  - "google/cloud/spanner/client_test.cc:575:12      STREQ       U       EXPECT_STREQ(e, \"Read() error\");"
+  - "google/cloud/spanner/client_test.cc:390:68      epdp        U       tePartitionedDmlParams const& epdp) {"
+  - "google/cloud/spanner/client_test.cc:630:12      STREQ       U       EXPECT_STREQ(e, \"Read() error\");"
   - "google/cloud/spanner/database_admin_client_test.cc:32:11        gsad    U       namespace gsad = ::google::spanner"
   - "google/cloud/spanner/instance_admin_client_test.cc:29:11        gsai    U       namespace gsai = ::google::spanner"
-  - "google/cloud/spanner/integration_tests/client_integration_test.cc:394:23        Mahalia                         U       {1911, \"Mahalia\", \"Jackson\"},"
-  - "google/cloud/spanner/integration_tests/client_integration_test.cc:424:23        Aretha                          U       {1942, \"Aretha\", \"Franklin\"},"
-  - "google/cloud/spanner/integration_tests/client_integration_test.cc:442:33        Vandross                        U       {1951, \"Luther\", \"Vandross\"},"
-  - "google/cloud/spanner/integration_tests/client_integration_test.cc:445:23        Chaka                           U       {1953, \"Chaka\", \"Khan\"},"
-  - "google/cloud/spanner/integration_tests/client_integration_test.cc:454:23        Thom                            U       {1968, \"Thom\", \"Yorke\"},"
-  - "google/cloud/spanner/integration_tests/client_integration_test.cc:454:31        Yorke                           U       {1968, \"Thom\", \"Yorke\"},"
-  - "google/cloud/spanner/integration_tests/client_integration_test.cc:455:23        Mariah                          U       {1969, \"Mariah\", \"Carey\"},"
-  - "google/cloud/spanner/integration_tests/client_integration_test.cc:464:14        upserts                         U       // Use upserts as mutation groups are"
-  - "google/cloud/spanner/integration_tests/client_integration_test.cc:1370:8        reconflict                      U       auto reconflict_commit = client_->Commit"
-  - "google/cloud/spanner/integration_tests/client_integration_test.cc:1471:50       fkshoppingcartscustomerid       U       AllOf(HasSubstr(\"fkshoppingcartscustomerid\"),"
-  - "google/cloud/spanner/integration_tests/client_integration_test.cc:1472:50       shoppingcarts                   U       HasSubstr(\"shoppingcarts\"))));"
+  - "google/cloud/spanner/integration_tests/client_integration_test.cc:406:23        Mahalia                         U       {1911, \"Mahalia\", \"Jackson\"},"
+  - "google/cloud/spanner/integration_tests/client_integration_test.cc:436:23        Aretha                          U       {1942, \"Aretha\", \"Franklin\"},"
+  - "google/cloud/spanner/integration_tests/client_integration_test.cc:454:33        Vandross                        U       {1951, \"Luther\", \"Vandross\"},"
+  - "google/cloud/spanner/integration_tests/client_integration_test.cc:457:23        Chaka                           U       {1953, \"Chaka\", \"Khan\"},"
+  - "google/cloud/spanner/integration_tests/client_integration_test.cc:466:23        Thom                            U       {1968, \"Thom\", \"Yorke\"},"
+  - "google/cloud/spanner/integration_tests/client_integration_test.cc:466:31        Yorke                           U       {1968, \"Thom\", \"Yorke\"},"
+  - "google/cloud/spanner/integration_tests/client_integration_test.cc:467:23        Mariah                          U       {1969, \"Mariah\", \"Carey\"},"
+  - "google/cloud/spanner/integration_tests/client_integration_test.cc:476:14        upserts                         U       // Use upserts as mutation groups are"
+  - "google/cloud/spanner/integration_tests/client_integration_test.cc:1456:8        reconflict                      U       auto reconflict_commit = client_->Commit"
+  - "google/cloud/spanner/integration_tests/client_integration_test.cc:1557:50       fkshoppingcartscustomerid       U       AllOf(HasSubstr(\"fkshoppingcartscustomerid\"),"
+  - "google/cloud/spanner/integration_tests/client_integration_test.cc:1558:50       shoppingcarts                   U       HasSubstr(\"shoppingcarts\"))));"
   - "google/cloud/spanner/integration_tests/data_types_integration_test.cc:85:30         Tmpl    U       DataTypeIntegrationTestTmpl : public T {"
   - "google/cloud/spanner/internal/connection_impl_test.cc:65:34         Wmissing    U       diagnostic ignored \"-Wmissing-field-initializers\""
-  - "google/cloud/spanner/internal/connection_impl_test.cc:3298:37       BADDECAF    U       { partition_token: \"BADDECAF\" }"
-  - "google/cloud/spanner/internal/connection_impl_test.cc:3300:25       CAFEDEAD    U       transaction: { id: \"CAFEDEAD\" }"
+  - "google/cloud/spanner/internal/connection_impl_test.cc:3306:37       BADDECAF    U       { partition_token: \"BADDECAF\" }"
+  - "google/cloud/spanner/internal/connection_impl_test.cc:3308:25       CAFEDEAD    U       transaction: { id: \"CAFEDEAD\" }"
   - "google/cloud/spanner/internal/logging_result_set_reader.cc:34:43        unresumable     U       __func__ << \"() << (unresumable)\";"
   - "google/cloud/spanner/internal/partial_result_set_resume_test.cc:528:39      Resumability    U       set<spanner::StreamingResumabilityBufferSizeOption>(0)"
   - "google/cloud/spanner/internal/partial_result_set_source_test.cc:527:31      chunksecond     U       not_chunked\", \"first_chunksecond_chunkthird_chunk\","

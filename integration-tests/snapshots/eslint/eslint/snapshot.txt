@@ -3,12 +3,12 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: [".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 2080, Issues found: 1612 in 308 files.
+ CSpell: Files checked: 2080, Issues found: 1615 in 309 files.
  exit code: 1
-Makefile.js:1018:18   - Unknown word (Multifiles) -- function downloadMultifilesTestTarget(cb) {
-Makefile.js:143:82    - Unknown word (ined)       -- followed by the string "ined".
-Makefile.js:397:9     - Unknown word (gensite)    -- target.gensite();
-Makefile.js:95:7      - Unknown word (MULTIFILES) -- PERF_MULTIFILES_TARGET_DIR = path.join
+Makefile.js:1040:18   - Unknown word (Multifiles) -- function downloadMultifilesTestTarget() {
+Makefile.js:127:82    - Unknown word (ined)       -- followed by the string "ined".
+Makefile.js:381:9     - Unknown word (gensite)    -- target.gensite();
+Makefile.js:84:7      - Unknown word (MULTIFILES) -- PERF_MULTIFILES_TARGET_DIR = path.join
 README.md:236:5     - Unknown word (teamstart)  -- <!--teamstart-->
 README.md:244:87    - Unknown word (Zakas's)    -- 5" alt="Nicholas C. Zakas's Avatar"><br />
 README.md:249:77    - Unknown word (Francesco)  -- 5" height="75" alt="Francesco Trotta's Avatar"><br
@@ -27,8 +27,8 @@ README.md:307:86    - Unknown word (Harish's)      -- 5" height="75" alt="Harish
 README.md:308:1     - Unknown word (Harish)        -- Harish
 README.md:317:5     - Unknown word (teamend)       -- <!--teamend-->
 README.md:320:5     - Unknown word (sponsorsstart) -- <!--sponsorsstart-->
-README.md:330:105   - Unknown word (Qlty)          -- d157d/logo.png" alt="Qlty Software" height="9
-README.md:337:5     - Unknown word (sponsorsend)   -- <!--sponsorsend-->
+README.md:329:105   - Unknown word (Qlty)          -- d157d/logo.png" alt="Qlty Software" height="9
+README.md:336:5     - Unknown word (sponsorsend)   -- <!--sponsorsend-->
 docs/README.md:45:51     - Unknown word (openjsf)    -- ESLint contributors, [www.openjsf.org](https://www.openjsf
 docs/package.json:31:32     - Unknown word (syntaxhighlight) -- 1ty/eleventy-plugin-syntaxhighlight": "^5.0.0",
 docs/package.json:32:11     - Unknown word (munter)          -- "@munter/tap-render": "^0.2.
@@ -131,8 +131,8 @@ docs/src/rules/no-restricted-syntax.md:71:5      - Unknown word (dont)       -- 
 docs/src/rules/no-return-await.md:12:59     - Unknown word (microtask)  -- not result in an extra microtask.
 docs/src/rules/no-script-url.md:29:41     - Unknown word (scripturl)  -- rule corresponds to `scripturl` rule of JSHint.
 docs/src/rules/no-unexpected-multiline.md:14:78     - Unknown word (Schlueter)  -- once described by Isaac Schlueter, a newline character
-docs/src/rules/no-unused-vars.md:177:67    - Unknown word (gnored)       -- varsIgnorePattern": "[iI]gnored" }` option:
-docs/src/rules/no-unused-vars.md:432:12    - Unknown word (mymethod)     -- static mymethod() {
+docs/src/rules/no-unused-vars.md:178:67    - Unknown word (gnored)       -- varsIgnorePattern": "[iI]gnored" }` option:
+docs/src/rules/no-unused-vars.md:433:12    - Unknown word (mymethod)     -- static mymethod() {
 docs/src/rules/no-unused-vars.md:58:31     - Unknown word (destructures) -- function definition destructures an array, unused entries
 docs/src/rules/no-use-before-define.md:164:3     - Unknown word (Defult)     -- Defult is `true`.
 docs/src/rules/nonblock-statement-body-position.md:2:8       - Unknown word (nonblock)   -- title: nonblock-statement-body-position
@@ -258,13 +258,13 @@ lib/rules/no-useless-escape.js:45:13     - Unknown word (CLASSSET)   -- const RE
 lib/rules/space-unary-ops.js:167:22    - Unknown word (Doesnt)     -- function verifyWordDoesntHaveSpaces(
 lib/rules/space-unary-ops.js:303:26    - Unknown word (Dont)       -- function verifyNonWordsDontHaveSpaces(node, firstToken
 lib/rules/use-isnan.js:142:13    - Unknown word (Suggestable) -- const isSuggestable =
-lib/rules/utils/ast-utils.js:425:34    - Unknown word (samely)     -- a.b` and `a?.b` are samely.
+lib/rules/utils/ast-utils.js:433:34    - Unknown word (samely)     -- a.b` and `a?.b` are samely.
 lib/services/processor-service.js:88:5      - Unknown word (Postprocesses) -- * Postprocesses the given messages synchronou
 lib/shared/serialization.js:59:42     - Unknown word (resuing)    -- paths. This allows for resuing objects in the graph
 lib/shared/text-table.js:36:8      - Unknown word (hsep)       -- const hsep = "  ";
 package.json:149:7     - Unknown word (trunkio)    -- "@trunkio/launcher": "^1.3.4"
 package.json:168:6     - Unknown word (eslump)     -- "eslump": "^3.0.0",
-package.json:185:6     - Unknown word (metascraper) -- "metascraper": "^5.25.7",
+package.json:184:6     - Unknown word (metascraper) -- "metascraper": "^5.25.7",
 package.json:63:20     - Unknown word (attw)       -- "lint:types": "attw --pack",
 templates/blogpost.md.ejs:18:10     - Unknown word (linkify)    -- function linkify(line) {
 tests/bin/eslint.js:506:36    - Unknown word (eslintsuppressions) -- SUPPRESSIONS_PATH = ".temp-eslintsuppressions";
@@ -365,6 +365,7 @@ tests/lib/rules/no-duplicate-imports.js:122:23    - Unknown word (modns)      --
 tests/lib/rules/no-duplicate-imports.js:380:28    - Unknown word (Modns)      -- code: 'import type * as Modns from "lodash-es";\nimport
 tests/lib/rules/no-else-return.js:167:68    - Unknown word (nqaz)       -- bar \nelse { baz() } \nqaz() }",
 tests/lib/rules/no-eval.js:66:22     - Unknown word (noneval)    -- code: "globalThis.noneval('foo')",
+tests/lib/rules/no-implied-eval.js:365:16    - Unknown word (wibble)     -- execScript('wibble');
 tests/lib/rules/no-inline-comments.js:130:22    - Unknown word (otherthing) -- ignorePattern: "otherthing",
 tests/lib/rules/no-invalid-regexp.js:70:29     - Unknown word (Nandinagari) -- RegExp('\\\\p{Script=Nandinagari}', 'u');",
 tests/lib/rules/no-invalid-regexp.js:74:29     - Unknown word (Cpmn)        -- RegExp('\\\\p{Script=Cpmn}', 'u')",
@@ -386,7 +387,7 @@ tests/lib/rules/no-tabs.js:23:34     - Unknown word (sdfdsf)     -- test(){\n" +
 tests/lib/rules/no-tabs.js:60:39     - Unknown word (tsdfdsf)    -- function test(){\n" + "  //\tsdfdsf \n" + "}",
 tests/lib/rules/no-undefined.js:38:4      - Unknown word (ndefined)   -- "ndefined",
 tests/lib/rules/no-unexpected-multiline.js:335:22    - Unknown word (gimuygimuygimuy) -- /bar/gimuygimuygimuy.test(baz)
-tests/lib/rules/no-unused-vars.js:1944:23   - Unknown word (fooz)       -- code: "/* global a$fooz,$foo */\na$fooz;",
+tests/lib/rules/no-unused-vars.js:1967:23   - Unknown word (fooz)       -- code: "/* global a$fooz,$foo */\na$fooz;",
 tests/lib/rules/no-use-before-define.js:2232:21   - Unknown word (Xopenport)  -- this.tscOcx.ActiveXopenport(printerName);
 tests/lib/rules/no-warning-comments.js:240:21    - Unknown word (litera)     -- code: "// regex [litera|$]",
 tests/lib/rules/no-warning-comments.js:54:26     - Unknown word (aeiou)      -- options: [{ terms: ["[aeiou]"], location: "anywhere
@@ -407,8 +408,8 @@ tests/lib/rules/semi.js:380:59    - Unknown word (mylib)      -- named2 } from '
 tests/lib/rules/sort-keys.js:509:24    - Unknown word (abce)       -- // abce
 tests/lib/rules/spaced-comment.js:150:45    - Unknown word (xmldoc)     -- comment\n//----\n/// xmldoc style comment\n//!<
 tests/lib/rules/spaced-comment.js:796:14    - Unknown word (endregionfoo) -- code: "//#endregionfoo",
-tests/lib/rules/utils/ast-utils.js:1251:8    - Unknown word (ncde)       -- "ab\ncde\n": [
-tests/lib/rules/utils/ast-utils.js:2028:10   - Unknown word (invalidtoken) -- [["123invalidtoken", "("], false],
+tests/lib/rules/utils/ast-utils.js:1315:8    - Unknown word (ncde)       -- "ab\ncde\n": [
+tests/lib/rules/utils/ast-utils.js:2092:10   - Unknown word (invalidtoken) -- [["123invalidtoken", "("], false],
 tests/lib/rules/valid-typeof.js:90:31     - Unknown word (umdefined)  -- if (typeof bar === 'umdefined') {}",
 tests/lib/shared/string-utils.js:40:6      - Unknown word (uppercases) -- it("uppercases the first letter of
 tests/lib/types/types.test.ts:905:7     - Unknown word (eslinter)   -- const eslinter = new ESLinter();
