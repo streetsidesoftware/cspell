@@ -3,7 +3,7 @@ Repository: slint-ui/slint
 Url: "https://github.com/slint-ui/slint"
 Args: ["--config=../../../../repositories/config/slint/cspell.config.yaml","--issues-summary-report","."]
 Lines:
- CSpell: Files checked: 2204, Issues found: 4168 in 745 files.
+ CSpell: Files checked: 2211, Issues found: 4281 in 753 files.
  exit code: 1
 CMakeLists.txt:17:14     - Unknown word (TOPLEVEL)   -- set(SLINT_IS_TOPLEVEL_BUILD TRUE)
 CMakeLists.txt:27:31     - Unknown word (dylib's)    -- macOS, the slint_cpp.dylib's install_name uses @rpath
@@ -65,6 +65,7 @@ api/cpp/CMakeLists.txt:180:75    - Unknown word (libslint)       -- PROPERTIES I
 api/cpp/CMakeLists.txt:180:88    - Unknown word (dylib)          -- SONAME libslint_cpp.dylib)
 api/cpp/CMakeLists.txt:188:49    - Unknown word (bigobj)         -- options(Slint INTERFACE /bigobj)
 api/cpp/CMakeLists.txt:198:5     - Unknown word (endforeach)     -- endforeach()
+api/cpp/CMakeLists.txt:205:45    - Unknown word (STREQUAL)       -- PLATFORM AND NOT IDF_TARGET STREQUAL "esp32p4")
 api/cpp/CMakeLists.txt:207:39    - Unknown word (println)        -- APPEND features "esp-println/${IDF_TARGET}")
 api/cpp/CMakeLists.txt:278:40    - Unknown word (STREQUAL)       -- AND NOT SLINT_STYLE STREQUAL "native")
 api/cpp/CMakeLists.txt:284:34    - Unknown word (buildroot)      -- environments such as buildroot set PKG_CONFIG_SYSROOT
@@ -1687,6 +1688,16 @@ examples/mcu-board-support/README.md:199:242   - Unknown word (eabihf)     -- ta
 examples/mcu-board-support/README.md:199:48    - Unknown word (THUMBV)     -- LEVEL=s CARGO_TARGET_THUMBV8M_MAIN_NONE_EABIHF_RUNNER
 examples/mcu-board-support/README.md:199:67    - Unknown word (EABIHF)     -- TARGET_THUMBV8M_MAIN_NONE_EABIHF_RUNNER="probe-rs run
 examples/mcu-board-support/README.md:209:22    - Unknown word (esplash)    -- When flashing, with `esplash`, you will be prompted
+examples/mcu-board-support/README.md:240:31    - Unknown word (AMOLED)     -- Waveshare ESP32-S3 Touch AMOLED 1.8"
+examples/mcu-board-support/README.md:240:6     - Unknown word (Waveshare)  -- #### Waveshare ESP32-S3 Touch AMOLED
+examples/mcu-board-support/README.md:242:30    - Unknown word (AMOLED)     -- Waveshare ESP32-S3 Touch AMOLED 1.8" board features
+examples/mcu-board-support/README.md:242:5     - Unknown word (Waveshare)  -- The Waveshare ESP32-S3 Touch AMOLED
+examples/mcu-board-support/README.md:243:8     - Unknown word (AMOLED)     -- - 1.8" AMOLED display with 368x44
+examples/mcu-board-support/README.md:246:36    - Unknown word (PSRAM)      -- with 16MB flash and 8MB PSRAM
+examples/mcu-board-support/README.md:251:153   - Unknown word (waveshare)  -- features=mcu-board-support/waveshare-esp32-s3-touch-amoled
+examples/mcu-board-support/README.md:251:178   - Unknown word (amoled)     -- waveshare-esp32-s3-touch-amoled-1-8 --release --config
+examples/mcu-board-support/README.md:251:235   - Unknown word (waveshare)  -- examples/mcu-board-support/waveshare_esp32_s3_touch_amoled
+examples/mcu-board-support/README.md:251:260   - Unknown word (amoled)     -- waveshare_esp32_s3_touch_amoled_1_8/cargo-config.toml
 examples/mcu-board-support/README.md:59:104    - Unknown word (thumbv)     -- pico-st7789 --target=thumbv6m-none-eabi --release
 examples/mcu-board-support/README.md:59:118    - Unknown word (eabi)       -- target=thumbv6m-none-eabi --release
 examples/mcu-board-support/README.md:68:58     - Unknown word (bootsel)    -- Raspberry Pi Pico: push the "bootsel" white button on the
@@ -1703,11 +1714,91 @@ examples/mcu-board-support/README.md:97:1      - Unknown word (udisksctl)  -- ud
 examples/mcu-board-support/README.md:99:1      - Unknown word (picotool)   -- picotool load -u -v -x -t elf
 examples/mcu-board-support/README.md:99:38     - Unknown word (thumbv)     -- -v -x -t elf target/thumbv8m.main-none-eabihf/release
 examples/mcu-board-support/README.md:99:57     - Unknown word (eabihf)     -- target/thumbv8m.main-none-eabihf/release/printerdemo
-examples/mcu-board-support/esp32_s3_box_3.rs:142:15    - Unknown word (mosi)       -- .with_mosi(peripherals.GPIO6);
-examples/mcu-board-support/esp32_s3_box_3.rs:51:23     - Unknown word (PSRAM)      -- // Initialize the PSRAM allocator.
-examples/mcu-board-support/esp32_s3_box_3.rs:52:45     - Unknown word (PSRAM)      -- allocator!(peripherals.PSRAM, esp_hal::psram);
+examples/mcu-board-support/esope_sld_c_w_s3.rs:109:33    - Unknown word (PSRAM)      -- memory status before PSRAM init
+examples/mcu-board-support/esope_sld_c_w_s3.rs:111:30    - Unknown word (PSRAM)      -- ("Heap usage before PSRAM init: {} bytes", heap
+examples/mcu-board-support/esope_sld_c_w_s3.rs:118:20    - Unknown word (psram)      -- let heap_after_psram = esp_alloc::HEAP.used
+examples/mcu-board-support/esope_sld_c_w_s3.rs:121:20    - Unknown word (psram)      -- heap_after_psram,
+examples/mcu-board-support/esope_sld_c_w_s3.rs:122:20    - Unknown word (psram)      -- heap_after_psram.saturating_sub(heap
+examples/mcu-board-support/esope_sld_c_w_s3.rs:190:59    - Unknown word (EEPROM)     -- display configuration from EEPROM
+examples/mcu-board-support/esope_sld_c_w_s3.rs:196:17    - Unknown word (eeid)       -- let mut eeid = [0u8; 0x1c];
+examples/mcu-board-support/esope_sld_c_w_s3.rs:197:17    - Unknown word (eeprom)     -- let mut eeprom = Eeprom24x::new_24x
+examples/mcu-board-support/esope_sld_c_w_s3.rs:197:26    - Unknown word (Eeprom)     -- let mut eeprom = Eeprom24x::new_24x01(RefCellDevice
+examples/mcu-board-support/esope_sld_c_w_s3.rs:198:37    - Unknown word (eeid)       -- read_data(0x00, &mut eeid).unwrap();
+examples/mcu-board-support/esope_sld_c_w_s3.rs:198:9     - Unknown word (eeprom)     -- eeprom.read_data(0x00, &mut
+examples/mcu-board-support/esope_sld_c_w_s3.rs:199:49    - Unknown word (eeid)       -- u16::from_be_bytes([eeid[8], eeid[9]]);
+examples/mcu-board-support/esope_sld_c_w_s3.rs:199:58    - Unknown word (eeid)       -- from_be_bytes([eeid[8], eeid[9]]);
+examples/mcu-board-support/esope_sld_c_w_s3.rs:200:50    - Unknown word (eeid)       -- u16::from_be_bytes([eeid[10], eeid[11]]);
+examples/mcu-board-support/esope_sld_c_w_s3.rs:201:34    - Unknown word (EEPROM)     -- ("Display size from EEPROM: {}x{}", display_width
+examples/mcu-board-support/esope_sld_c_w_s3.rs:22:17     - Unknown word (Eeprom)     -- use eeprom24x::{Eeprom24x, SlaveAddr};
+examples/mcu-board-support/esope_sld_c_w_s3.rs:248:13    - Unknown word (psram)      -- let psram_buf: &'static mut [u
+examples/mcu-board-support/esope_sld_c_w_s3.rs:251:23    - Unknown word (psram)      -- let buf_ptr = psram_buf.as_ptr() as usize
+examples/mcu-board-support/esope_sld_c_w_s3.rs:287:36    - Unknown word (EEPROM)     -- Read configuration from EEPROM
+examples/mcu-board-support/esope_sld_c_w_s3.rs:288:13    - Unknown word (pclk)       -- let pclk_hz = ((eeid[12] as u
+examples/mcu-board-support/esope_sld_c_w_s3.rs:290:13    - Unknown word (hsync)      -- let hsync_idle_low = (flags &
+examples/mcu-board-support/esope_sld_c_w_s3.rs:293:13    - Unknown word (pclk)       -- let pclk_active_neg = (flags
+examples/mcu-board-support/esope_sld_c_w_s3.rs:298:18    - Unknown word (PCLK)       -- info!(" PCLK: {} Hz", pclk_hz);
+examples/mcu-board-support/esope_sld_c_w_s3.rs:298:32    - Unknown word (pclk)       -- info!(" PCLK: {} Hz", pclk_hz);
+examples/mcu-board-support/esope_sld_c_w_s3.rs:300:18    - Unknown word (HSYNC)      -- info!(" HSYNC idle low: {}", hsync
+examples/mcu-board-support/esope_sld_c_w_s3.rs:300:39    - Unknown word (hsync)      -- HSYNC idle low: {}", hsync_idle_low);
+examples/mcu-board-support/esope_sld_c_w_s3.rs:303:18    - Unknown word (PCLK)       -- info!(" PCLK active neg: {}", pclk
+examples/mcu-board-support/esope_sld_c_w_s3.rs:303:40    - Unknown word (pclk)       -- PCLK active neg: {}", pclk_active_neg);
+examples/mcu-board-support/esope_sld_c_w_s3.rs:307:30    - Unknown word (pclk)       -- polarity: if pclk_active_neg { Polarity
+examples/mcu-board-support/esope_sld_c_w_s3.rs:320:17    - Unknown word (hsync)      -- hsync_width: 4,
+examples/mcu-board-support/esope_sld_c_w_s3.rs:322:17    - Unknown word (hsync)      -- hsync_position: 43 + 4, /
+examples/mcu-board-support/esope_sld_c_w_s3.rs:325:19    - Unknown word (hsync)      -- .with_hsync_idle_level(if hsync
+examples/mcu-board-support/esope_sld_c_w_s3.rs:359:52    - Unknown word (multicore)  -- with both timers for multicore support
+examples/mcu-board-support/esope_sld_c_w_s3.rs:364:13    - Unknown word (timg)       -- let timg0 = TimerGroup::new(peripheral
+examples/mcu-board-support/esope_sld_c_w_s3.rs:364:49    - Unknown word (TIMG)       -- TimerGroup::new(peripherals.TIMG0);
+examples/mcu-board-support/esope_sld_c_w_s3.rs:365:32    - Unknown word (timg)       -- let timer0: AnyTimer = timg0.timer0.into();
+examples/mcu-board-support/esope_sld_c_w_s3.rs:366:13    - Unknown word (timg)       -- let timg1 = TimerGroup::new(peripheral
+examples/mcu-board-support/esope_sld_c_w_s3.rs:366:49    - Unknown word (TIMG)       -- TimerGroup::new(peripherals.TIMG1);
+examples/mcu-board-support/esope_sld_c_w_s3.rs:367:32    - Unknown word (timg)       -- let timer1: AnyTimer = timg1.timer0.into();
+examples/mcu-board-support/esope_sld_c_w_s3.rs:369:58    - Unknown word (multicore)  -- with dual timers for multicore support...");
+examples/mcu-board-support/esope_sld_c_w_s3.rs:618:16    - Unknown word (xfer)       -- Ok(xfer) => {
+examples/mcu-board-support/esope_sld_c_w_s3.rs:619:50    - Unknown word (xfer)       -- new_dpi, new_dma_tx) = xfer.wait();
+examples/mcu-board-support/esope_sld_c_w_s3.rs:62:12     - Unknown word (multicore)  -- // Embassy multicore: allocate app core stack
+examples/mcu-board-support/esope_sld_c_w_s3.rs:65:8      - Unknown word (PSRAM)      -- static PSRAM_READY: Signal<CriticalSection
+examples/mcu-board-support/esope_sld_c_w_s3.rs:68:12     - Unknown word (PSRAM)      -- static mut PSRAM_BUF_PTR: *mut u8 = core
+examples/mcu-board-support/esope_sld_c_w_s3.rs:69:12     - Unknown word (PSRAM)      -- static mut PSRAM_BUF_LEN: usize = 0;
+examples/mcu-board-support/esope_sld_c_w_s3/cargo-config.toml:12:35     - Unknown word (Tlinkall)   -- -C", "link-arg=-Wl,-Tlinkall.x"]
+examples/mcu-board-support/esope_sld_c_w_s3/cargo-config.toml:8:16      - Unknown word (PSRAM)      -- ESP_HAL_CONFIG_PSRAM_MODE = "octal"
+examples/mcu-board-support/esp32_s3_box_3.rs:154:15    - Unknown word (mosi)       -- .with_mosi(peripherals.GPIO6);
+examples/mcu-board-support/esp32_s3_box_3.rs:77:23     - Unknown word (PSRAM)      -- // Initialize the PSRAM allocator.
+examples/mcu-board-support/esp32_s3_box_3.rs:78:45     - Unknown word (PSRAM)      -- allocator!(peripherals.PSRAM, esp_hal::psram);
 examples/mcu-board-support/esp32_s3_box_3/cargo-config.toml:10:35     - Unknown word (Tlinkall)   -- -C", "link-arg=-Wl,-Tlinkall.x"]
 examples/mcu-board-support/esp32_s3_box_3/cargo-config.toml:6:16      - Unknown word (PSRAM)      -- ESP_HAL_CONFIG_PSRAM_MODE = "octal"
+examples/mcu-board-support/esp32_s3_lcd_ev_board.rs:108:23    - Unknown word (PSRAM)      -- // Initialize the PSRAM allocator.
+examples/mcu-board-support/esp32_s3_lcd_ev_board.rs:109:45    - Unknown word (PSRAM)      -- allocator!(peripherals.PSRAM, esp_hal::psram);
+examples/mcu-board-support/esp32_s3_lcd_ev_board.rs:135:38    - Unknown word (PSRAM)      -- Reinitialize peripherals, PSRAM, and logger
+examples/mcu-board-support/esp32_s3_lcd_ev_board.rs:194:49    - Unknown word (reborrow)   -- Output::new(vsync_pin.reborrow(), Level::High, OutputConfig
+examples/mcu-board-support/esp32_s3_lcd_ev_board.rs:228:17    - Unknown word (hsync)      -- hsync_width: 10,
+examples/mcu-board-support/esp32_s3_lcd_ev_board.rs:230:17    - Unknown word (hsync)      -- hsync_position: 10,
+examples/mcu-board-support/esp32_s3_lcd_ev_board.rs:233:19    - Unknown word (hsync)      -- .with_hsync_idle_level(Level::High
+examples/mcu-board-support/esp32_s3_lcd_ev_board.rs:239:35    - Unknown word (reborrow)   -- with_vsync(vsync_pin.reborrow())
+examples/mcu-board-support/esp32_s3_lcd_ev_board.rs:240:19    - Unknown word (hsync)      -- .with_hsync(peripherals.GPIO46)
+examples/mcu-board-support/esp32_s3_lcd_ev_board.rs:242:19    - Unknown word (pclk)       -- .with_pclk(peripherals.GPIO9)
+examples/mcu-board-support/esp32_s3_lcd_ev_board.rs:265:23    - Unknown word (PSRAM)      -- // Allocate a PSRAM-backed DMA buffer for
+examples/mcu-board-support/esp32_s3_lcd_ev_board.rs:267:13    - Unknown word (psram)      -- let psram_buf: &'static mut [u
+examples/mcu-board-support/esp32_s3_lcd_ev_board.rs:270:40    - Unknown word (psram)      -- DmaTxBuf::new(descriptors, psram_buf).unwrap()
+examples/mcu-board-support/esp32_s3_lcd_ev_board.rs:285:16    - Unknown word (xfer)       -- Ok(xfer) => {
+examples/mcu-board-support/esp32_s3_lcd_ev_board.rs:286:41    - Unknown word (xfer)       -- (_res, dpi2, tx2) = xfer.wait();
+examples/mcu-board-support/esp32_s3_lcd_ev_board.rs:33:49     - Unknown word (regs)       -- touch coordinates from regs 0x03..0x06
+examples/mcu-board-support/esp32_s3_lcd_ev_board.rs:356:24    - Unknown word (xfer)       -- Ok(xfer) => {
+examples/mcu-board-support/esp32_s3_lcd_ev_board.rs:357:48    - Unknown word (xfer)       -- let (res, dpi2, tx2) = xfer.wait();
+examples/mcu-board-support/esp32_s3_lcd_ev_board/cargo-config.toml:10:35     - Unknown word (Tlinkall)   -- -C", "link-arg=-Wl,-Tlinkall.x"]
+examples/mcu-board-support/esp32_s3_lcd_ev_board/cargo-config.toml:6:16      - Unknown word (PSRAM)      -- ESP_HAL_CONFIG_PSRAM_MODE = "octal"
+examples/mcu-board-support/lib.rs:47:5      - Unknown word (esope)      -- mod esope_sld_c_w_s3;
+examples/mcu-board-support/lib.rs:54:30     - Unknown word (amoled)     -- waveshare_esp32_s3_touch_amoled_1_8;
+examples/mcu-board-support/lib.rs:54:5      - Unknown word (waveshare)  -- mod waveshare_esp32_s3_touch_amoled
+examples/mcu-board-support/lib.rs:67:16     - Unknown word (esope)      -- feature = "esope-sld-c-w-s3",
+examples/mcu-board-support/lib.rs:68:16     - Unknown word (waveshare)  -- feature = "waveshare-esp32-s3-touch-amoled
+examples/mcu-board-support/lib.rs:68:41     - Unknown word (amoled)     -- waveshare-esp32-s3-touch-amoled-1-8"
+examples/mcu-board-support/lib.rs:79:16     - Unknown word (esope)      -- feature = "esope-sld-c-w-s3",
+examples/mcu-board-support/lib.rs:80:16     - Unknown word (waveshare)  -- feature = "waveshare-esp32-s3-touch-amoled
+examples/mcu-board-support/lib.rs:80:41     - Unknown word (amoled)     -- waveshare-esp32-s3-touch-amoled-1-8"
+examples/mcu-board-support/lib.rs:91:20     - Unknown word (esope)      -- feature = "esope-sld-c-w-s3",
+examples/mcu-board-support/lib.rs:92:20     - Unknown word (waveshare)  -- feature = "waveshare-esp32-s3-touch-amoled
+examples/mcu-board-support/lib.rs:92:45     - Unknown word (amoled)     -- waveshare-esp32-s3-touch-amoled-1-8"
 examples/mcu-board-support/pico2_st7789.rs:136:13    - Unknown word (sclk)       -- let spi_sclk = pins.gpio10.into_function
 examples/mcu-board-support/pico2_st7789.rs:137:13    - Unknown word (mosi)       -- let spi_mosi = pins.gpio11.into_function
 examples/mcu-board-support/pico2_st7789.rs:140:44    - Unknown word (mosi)       -- :new(pac.SPI1, (spi_mosi, spi_miso, spi_sclk
@@ -2020,6 +2111,21 @@ examples/mcu-board-support/stm32u5g9j_dk2/hspi.rs:97:13     - Unknown word (iwid
 examples/mcu-board-support/stm32u5g9j_dk2/memory.x:19:10     - Unknown word (HSPI)       -- } > HSPI_ROM
 examples/mcu-board-support/stm32u5g9j_dk2/memory.x:22:25     - Unknown word (LOADADDR)   -- __si_slint_assets = LOADADDR(.slint_assets);
 examples/mcu-board-support/stm32u5g9j_dk2/memory.x:8:3       - Unknown word (HSPI)       -- HSPI_ROM : ORIGIN = 0xA0
+examples/mcu-board-support/waveshare_esp32_s3_touch_amoled_1_8.rs:107:34    - Unknown word (Waveshare)  -- C Configuration for Waveshare ESP32-S3 1.8inch AMOLED
+examples/mcu-board-support/waveshare_esp32_s3_touch_amoled_1_8.rs:107:61    - Unknown word (AMOLED)     -- Waveshare ESP32-S3 1.8inch AMOLED Touch Display
+examples/mcu-board-support/waveshare_esp32_s3_touch_amoled_1_8.rs:114:65    - Unknown word (AMOLED)     -- for the WaveShare 1.8" AMOLED display
+examples/mcu-board-support/waveshare_esp32_s3_touch_amoled_1_8.rs:117:46    - Unknown word (Waveshare)  -- display driver for the Waveshare 1.8" AMOLED display
+examples/mcu-board-support/waveshare_esp32_s3_touch_amoled_1_8.rs:117:61    - Unknown word (AMOLED)     -- for the Waveshare 1.8" AMOLED display
+examples/mcu-board-support/waveshare_esp32_s3_touch_amoled_1_8.rs:118:29    - Unknown word (Amoled)     -- let ws_driver = Ws18AmoledDriver::new(lcd_spi)
+examples/mcu-board-support/waveshare_esp32_s3_touch_amoled_1_8.rs:22:78     - Unknown word (Amoled)     -- esetDriver, Sh8601Driver, Ws18AmoledDriver,
+examples/mcu-board-support/waveshare_esp32_s3_touch_amoled_1_8.rs:65:23     - Unknown word (PSRAM)      -- // Initialize the PSRAM allocator.
+examples/mcu-board-support/waveshare_esp32_s3_touch_amoled_1_8.rs:66:45     - Unknown word (PSRAM)      -- allocator!(peripherals.PSRAM, esp_hal::psram);
+examples/mcu-board-support/waveshare_esp32_s3_touch_amoled_1_8.rs:82:38     - Unknown word (Waveshare)  -- Display configuration for Waveshare ESP32-S3-Touch-AMOLED
+examples/mcu-board-support/waveshare_esp32_s3_touch_amoled_1_8.rs:82:63     - Unknown word (AMOLED)     -- Waveshare ESP32-S3-Touch-AMOLED-1.8
+examples/mcu-board-support/waveshare_esp32_s3_touch_amoled_1_8.rs:92:34     - Unknown word (Waveshare)  -- SPI Configuration for Waveshare ESP32-S3 1.8inch AMOLED
+examples/mcu-board-support/waveshare_esp32_s3_touch_amoled_1_8.rs:92:61     - Unknown word (AMOLED)     -- Waveshare ESP32-S3 1.8inch AMOLED Touch Display
+examples/mcu-board-support/waveshare_esp32_s3_touch_amoled_1_8/cargo-config.toml:10:35     - Unknown word (Tlinkall)   -- -C", "link-arg=-Wl,-Tlinkall.x"]
+examples/mcu-board-support/waveshare_esp32_s3_touch_amoled_1_8/cargo-config.toml:6:16      - Unknown word (PSRAM)      -- ESP_HAL_CONFIG_PSRAM_MODE = "octal"
 examples/mcu-embassy/README.md:13:82     - Unknown word (colour)     -- the DK2 changes the colour of the grey circle to
 examples/mcu-embassy/README.md:24:19     - Unknown word (thumbv)     -- rustup target add thumbv8m.main-none-eabihf
 examples/mcu-embassy/README.md:24:38     - Unknown word (eabihf)     -- add thumbv8m.main-none-eabihf
@@ -2601,9 +2707,9 @@ internal/compiler/builtins.slint:167:34    - Unknown word (propgataion) -- prope
 internal/compiler/builtins.slint:168:30    - Unknown word (propgataion) -- property <duration> propgataion-delay: 100ms;
 internal/compiler/builtins.slint:332:27    - Unknown word (preedit)     -- out property <string> preedit-text;
 internal/compiler/builtins.slint:513:53    - Unknown word (constexpr)   -- ClosePolicy> close-policy; // constexpr hardcoded in typeregister
-internal/compiler/expression_tree.rs:1116:59   - Unknown word (alredy)     -- store, and stores are alredy checked
-internal/compiler/expression_tree.rs:1186:33   - Unknown word (conv)       -- "tmpobj_conv_{}",
-internal/compiler/expression_tree.rs:1386:70   - Unknown word (Constexpr)  -- PropertyVisibility::Constexpr {
+internal/compiler/expression_tree.rs:1128:59   - Unknown word (alredy)     -- store, and stores are alredy checked
+internal/compiler/expression_tree.rs:1198:33   - Unknown word (conv)       -- "tmpobj_conv_{}",
+internal/compiler/expression_tree.rs:1398:70   - Unknown word (Constexpr)  -- PropertyVisibility::Constexpr {
 internal/compiler/expression_tree.rs:54:60     - Unknown word (Contect)    -- a reference to the `ContectMenu` native item
 internal/compiler/generator/cpp.rs:1038:17   - Unknown word (charmap)    -- let charmap_var = format_smolstr
 internal/compiler/generator/cpp.rs:1038:75   - Unknown word (charmap)    -- embedded_resource_{}_charmap", resource.id);
@@ -2626,16 +2732,18 @@ internal/compiler/generator/cpp.rs:34:40     - Unknown word (constinit)  -- cons
 internal/compiler/generator/cpp.rs:3929:32   - Unknown word (textinput)  -- format!("slint_textinput_set_selection_offsets
 internal/compiler/generator/cpp.rs:3938:46   - Unknown word (fontmetrics) -- slint_cpp_text_item_fontmetrics(&{window}.handle(),
 internal/compiler/generator/cpp.rs:39:37     - Unknown word (reflexpr)   -- protected", "public", "reflexpr", "register", "reinterpret
-internal/compiler/generator/cpp.rs:4154:17   - Unknown word (strs)        -- let all_strs = ms.iter().flatten
-internal/compiler/generator/cpp.rs:4155:17   - Unknown word (strs)        -- let all_strs_len = all_strs.clone
-internal/compiler/generator/cpp.rs:4155:32   - Unknown word (strs)        -- let all_strs_len = all_strs.clone().count();
-internal/compiler/generator/cpp.rs:4159:34   - Unknown word (strs)        -- array_size: Some(all_strs_len),
-internal/compiler/generator/cpp.rs:4162:21   - Unknown word (strs)        -- all_strs.map(|s| format_smolstr
+internal/compiler/generator/cpp.rs:4014:57   - Unknown word (Retart)      -- error: invalid args to RetartTimer {arguments:?}"
+internal/compiler/generator/cpp.rs:4163:17   - Unknown word (strs)        -- let all_strs = ms.iter().flatten
+internal/compiler/generator/cpp.rs:4164:17   - Unknown word (strs)        -- let all_strs_len = all_strs.clone
+internal/compiler/generator/cpp.rs:4164:32   - Unknown word (strs)        -- let all_strs_len = all_strs.clone().count();
+internal/compiler/generator/cpp.rs:4168:34   - Unknown word (strs)        -- array_size: Some(all_strs_len),
+internal/compiler/generator/cpp.rs:4171:21   - Unknown word (strs)        -- all_strs.map(|s| format_smolstr
 internal/compiler/generator/cpp_live_reload.rs:84:20     - Unknown word (constexpr)  -- "{0}if constexpr(std::is_same_v<T, {
 internal/compiler/generator/cpp_live_reload.rs:9:16      - Unknown word (Itertools)  -- use itertools::Itertools as _;
 internal/compiler/generator/rust.rs:1114:13   - Unknown word (updt)       -- let updt = component.timers.iter
 internal/compiler/generator/rust.rs:1140:20   - Unknown word (updt)       -- #(#updt)*
 internal/compiler/generator/rust.rs:252:40    - Unknown word (rescope)    -- unknown_lints, if_let_rescope, tail_expr_drop_order
+internal/compiler/generator/rust.rs:3247:57   - Unknown word (Retart)     -- error: invalid args to RetartTimer {arguments:?}"
 internal/compiler/langtype.rs:159:42    - Unknown word (pathdata)   -- PathData => write!(f, "pathdata"),
 internal/compiler/langtype.rs:795:47    - Unknown word (rfind)      -- separator_pos) = name.rfind("::") {
 internal/compiler/langtype.rs:9:16      - Unknown word (Itertools)  -- use itertools::Itertools;
@@ -2658,10 +2766,10 @@ internal/compiler/literals.rs:126:42    - Unknown word (qsdf)       -- unescape_
 internal/compiler/literals.rs:6:16      - Unknown word (Itertools)  -- use itertools::Itertools;
 internal/compiler/llr.rs:15:9      - Unknown word (optim)      -- pub mod optim_passes {
 internal/compiler/llr/expression.rs:760:40    - Unknown word (subcomponent's) -- go from the current subcomponent's context, to the context
-internal/compiler/llr/lower_expression.rs:758:16    - Unknown word (elems)      -- layout.elems.iter().filter(|i| i
-internal/compiler/llr/lower_expression.rs:765:18    - Unknown word (elems)      -- .elems
-internal/compiler/llr/lower_expression.rs:786:29    - Unknown word (elems)      -- for item in &layout.elems {
-internal/compiler/llr/lower_expression.rs:819:14    - Unknown word (elems)      -- .elems
+internal/compiler/llr/lower_expression.rs:779:16    - Unknown word (elems)      -- layout.elems.iter().filter(|i| i
+internal/compiler/llr/lower_expression.rs:786:18    - Unknown word (elems)      -- .elems
+internal/compiler/llr/lower_expression.rs:807:29    - Unknown word (elems)      -- for item in &layout.elems {
+internal/compiler/llr/lower_expression.rs:840:14    - Unknown word (elems)      -- .elems
 internal/compiler/llr/lower_to_item_tree.rs:55:24     - Unknown word (codegen)    -- // For C++ codegen, the root component
 internal/compiler/llr/pretty_print.rs:6:16      - Unknown word (Itertools)  -- use itertools::Itertools;
 internal/compiler/lookup.rs:446:34    - Unknown word (stylemetrics) -- check_deprecated_stylemetrics(self, ctx, name),
@@ -2759,11 +2867,11 @@ internal/compiler/lookup/named_colors.rs:93:15     - Unknown word (lightslategre
 internal/compiler/lookup/named_colors.rs:94:15     - Unknown word (lightsteelblue)       -- ("lightsteelblue", parse_color_literal
 internal/compiler/lookup/named_colors.rs:95:15     - Unknown word (lightyellow)          -- ("lightyellow", parse_color_literal
 internal/compiler/lookup/named_colors.rs:97:15     - Unknown word (limegreen)            -- ("limegreen", parse_color_literal
-internal/compiler/object_tree.rs:2851:34   - Unknown word (layoutinfo) -- SmolStr::new_static("layoutinfo-v"),
-internal/compiler/object_tree.rs:2856:34   - Unknown word (layoutinfo) -- SmolStr::new_static("layoutinfo-h"),
-internal/compiler/object_tree.rs:500:5     - Unknown word (Constexpr)  -- Constexpr,
-internal/compiler/object_tree.rs:516:33    - Unknown word (Constexpr)  -- PropertyVisibility::Constexpr => f.write_str("constexpr
-internal/compiler/object_tree.rs:516:59    - Unknown word (constexpr)  -- Constexpr => f.write_str("constexpr"),
+internal/compiler/object_tree.rs:2852:34   - Unknown word (layoutinfo) -- SmolStr::new_static("layoutinfo-v"),
+internal/compiler/object_tree.rs:2857:34   - Unknown word (layoutinfo) -- SmolStr::new_static("layoutinfo-h"),
+internal/compiler/object_tree.rs:501:5     - Unknown word (Constexpr)  -- Constexpr,
+internal/compiler/object_tree.rs:517:33    - Unknown word (Constexpr)  -- PropertyVisibility::Constexpr => f.write_str("constexpr
+internal/compiler/object_tree.rs:517:59    - Unknown word (constexpr)  -- Constexpr => f.write_str("constexpr"),
 internal/compiler/parser-test-macro/lib.rs:122:36    - Unknown word (Punct)      -- let Some(TokenTree::Punct(p)) = attr.next() {
 internal/compiler/parser-test-macro/lib.rs:158:36    - Unknown word (Punct)      -- TokenTree::Punct(p) if p.as_char() =
 internal/compiler/parser-test-macro/lib.rs:161:36    - Unknown word (Punct)      -- TokenTree::Punct(p) if p.as_char() =
@@ -2814,8 +2922,8 @@ internal/compiler/passes/focus_handling.rs:115:15    - Unknown word (uncallable)
 internal/compiler/passes/focus_handling.rs:120:46    - Unknown word (unfocusable) -- Cannot forward focus to unfocusable element".into(),
 internal/compiler/passes/focus_handling.rs:40:31     - Unknown word (uncallable) -- local_forwards.remove_uncallable_forwards();
 internal/compiler/passes/focus_handling.rs:65:67     - Unknown word (uncallable) -- valid. The error remove_uncallable_forwards pass will
-internal/compiler/passes/inlining.rs:573:33    - Unknown word (elems)      -- for e in &mut l.elems {
-internal/compiler/passes/inlining.rs:578:33    - Unknown word (elems)      -- for e in &mut l.elems {
+internal/compiler/passes/inlining.rs:577:33    - Unknown word (elems)      -- for e in &mut l.elems {
+internal/compiler/passes/inlining.rs:582:33    - Unknown word (elems)      -- for e in &mut l.elems {
 internal/compiler/passes/lower_component_container.rs:10:23     - Unknown word (Emtpy)      -- ! if false: Emtpy {}
 internal/compiler/passes/lower_layout.rs:146:9     - Unknown word (elems)      -- elems: Default::default()
 internal/compiler/passes/lower_layout.rs:163:30    - Unknown word (layoutinfo) -- SmolStr::new_static("layoutinfo-h"),
@@ -2975,22 +3083,22 @@ internal/compiler/translations.rs:94:24     - Unknown word (contextid)  -- let [
 internal/compiler/translations.rs:98:13     - Unknown word (contextid)  -- let contextid = get_string(contextid
 internal/compiler/translations.rs:98:36     - Unknown word (contextid)  -- contextid = get_string(contextid).expect("contextid must
 internal/compiler/translations.rs:98:55     - Unknown word (contextid)  -- string(contextid).expect("contextid must be a string");
-internal/compiler/typeloader.rs:1491:14   - Unknown word (splitn)      -- .splitn(2, '/')
-internal/compiler/typeloader.rs:1698:13   - Unknown word (incdir)      -- let mut incdir = test_source_path.clone
-internal/compiler/typeloader.rs:1699:18   - Unknown word (incpath)     -- incdir.push("incpath");
-internal/compiler/typeloader.rs:1699:5    - Unknown word (incdir)      -- incdir.push("incpath");
+internal/compiler/typeloader.rs:1492:14   - Unknown word (splitn)      -- .splitn(2, '/')
+internal/compiler/typeloader.rs:1699:13   - Unknown word (incdir)      -- let mut incdir = test_source_path.clone
 internal/compiler/typeloader.rs:16:13     - Unknown word (fileaccess) -- use crate::{fileaccess, langtype, layout, parser
 internal/compiler/typeloader.rs:16:25     - Unknown word (langtype)   -- crate::{fileaccess, langtype, layout, parser};
-internal/compiler/typeloader.rs:1703:42   - Unknown word (incdir)      -- include_paths = vec![incdir];
-internal/compiler/typeloader.rs:1741:13   - Unknown word (incdir)      -- let mut incdir = test_source_path.clone
-internal/compiler/typeloader.rs:1742:18   - Unknown word (incpath)     -- incdir.push("incpath");
-internal/compiler/typeloader.rs:1742:5    - Unknown word (incdir)      -- incdir.push("incpath");
+internal/compiler/typeloader.rs:1700:18   - Unknown word (incpath)     -- incdir.push("incpath");
+internal/compiler/typeloader.rs:1700:5    - Unknown word (incdir)      -- incdir.push("incpath");
+internal/compiler/typeloader.rs:1704:42   - Unknown word (incdir)      -- include_paths = vec![incdir];
+internal/compiler/typeloader.rs:1742:13   - Unknown word (incdir)      -- let mut incdir = test_source_path.clone
+internal/compiler/typeloader.rs:1743:18   - Unknown word (incpath)     -- incdir.push("incpath");
+internal/compiler/typeloader.rs:1743:5    - Unknown word (incdir)      -- incdir.push("incpath");
 internal/compiler/typeloader.rs:18:16     - Unknown word (Itertools)  -- use itertools::Itertools;
-internal/compiler/typeloader.rs:1962:11   - Unknown word (libfile)     -- ("libfile.slint".into(), test
-internal/compiler/typeloader.rs:1974:31   - Unknown word (libfile)     -- LibraryType } from "@libfile.slint";
-internal/compiler/typeloader.rs:2003:11   - Unknown word (libfile)     -- ("libfile.slint".into(), test
-internal/compiler/typeloader.rs:2017:21   - Unknown word (libfile)     -- import { C } from "@libfile.slint/unknown.slint
-internal/compiler/typeloader.rs:2045:69   - Unknown word (libfile)     -- requested import \"@libfile.slint/unknown.slint
+internal/compiler/typeloader.rs:1963:11   - Unknown word (libfile)     -- ("libfile.slint".into(), test
+internal/compiler/typeloader.rs:1975:31   - Unknown word (libfile)     -- LibraryType } from "@libfile.slint";
+internal/compiler/typeloader.rs:2004:11   - Unknown word (libfile)     -- ("libfile.slint".into(), test
+internal/compiler/typeloader.rs:2018:21   - Unknown word (libfile)     -- import { C } from "@libfile.slint/unknown.slint
+internal/compiler/typeloader.rs:2046:69   - Unknown word (libfile)     -- requested import \"@libfile.slint/unknown.slint
 internal/compiler/typeloader.rs:74:22     - Unknown word (importident) -- pub fn from_node(importident: syntax_nodes::ImportIdentifi
 internal/compiler/typeloader.rs:76:42     - Unknown word (importident) -- normalize_identifier(importident.ExternalName().text
 internal/compiler/typeloader.rs:78:35     - Unknown word (importident) -- internal_name = match importident.InternalName() {
@@ -3292,9 +3400,9 @@ internal/interpreter/api.rs:1893:58   - Unknown word (yoyo)                     
 internal/interpreter/api.rs:1898:33   - Unknown word (Dont)                          -- instance.invoke_global("DontExist", "the-property
 internal/interpreter/api.rs:1906:52   - Unknown word (yoyo)                          -- "My_Super_Global", "yoyo", &[]),
 internal/interpreter/dynamic_item_tree.rs:2091:18   - Unknown word (ctypes)     -- #[allow(improper_ctypes_definitions)]
-internal/interpreter/eval.rs:1376:17   - Unknown word (textinput)  -- if let Some(textinput) = ItemRef::downcast
-internal/interpreter/eval.rs:1378:29   - Unknown word (textinput)  -- "select-all" => textinput.select_all(&window_adapter
-internal/interpreter/eval.rs:1379:34   - Unknown word (textinput)  -- clear-selection" => textinput.clear_selection(&window
+internal/interpreter/eval.rs:1391:17   - Unknown word (textinput)  -- if let Some(textinput) = ItemRef::downcast
+internal/interpreter/eval.rs:1393:29   - Unknown word (textinput)  -- "select-all" => textinput.select_all(&window_adapter
+internal/interpreter/eval.rs:1394:34   - Unknown word (textinput)  -- clear-selection" => textinput.clear_selection(&window
 internal/interpreter/eval.rs:197:68    - Unknown word (trunc)      -- => Value::Number(n.trunc()),
 internal/interpreter/eval.rs:21:21     - Unknown word (corelib)    -- use i_slint_core as corelib;
 internal/interpreter/eval.rs:399:67    - Unknown word (minmax)     -- value.clone().expect("minmax lhs expression did not
@@ -3596,6 +3704,11 @@ tests/cases/elements/timer.slint:36:12     - Unknown word (instentiate) -- // in
 tests/cases/elements/timer.slint:5:29      - Unknown word (Arunning)   -- out property <bool> tArunning: true;
 tests/cases/elements/timer.slint:92:22     - Unknown word (ellapse)     -- / despite we say to ellapse 500ms, the changed callback
 tests/cases/elements/timer.slint:94:42     - Unknown word (onced)       -- event are only called onced
+tests/cases/elements/timer_start_stop_restart.slint:318:1     - Unknown word (slintlib)   -- slintlib.private_api.mock_elapsed
+tests/cases/elements/timer_start_stop_restart.slint:319:1     - Unknown word (slintlib)   -- slintlib.private_api.mock_elapsed
+tests/cases/elements/timer_start_stop_restart.slint:321:1     - Unknown word (slintlib)   -- slintlib.private_api.mock_elapsed
+tests/cases/elements/timer_start_stop_restart.slint:325:1     - Unknown word (slintlib)   -- slintlib.private_api.mock_elapsed
+tests/cases/elements/timer_start_stop_restart.slint:326:1     - Unknown word (slintlib)   -- slintlib.private_api.mock_elapsed
 tests/cases/elements/togglebutton.slint:54:1      - Unknown word (slintlib)   -- slintlib.private_api.send_mouse
 tests/cases/elements/togglebutton.slint:58:1      - Unknown word (slintlib)   -- slintlib.private_api.send_mouse
 tests/cases/elements/toucharea.slint:116:14    - Unknown word (moveother)  -- // The final moveother is added by the grab

@@ -5,7 +5,7 @@ Args: '["**/*.go"]'
 Summary:
   files: 285
   filesWithIssues: 256
-  issues: 3685
+  issues: 3686
   errors: 0
 Errors: []
 
@@ -1572,8 +1572,9 @@ issues:
   - "modules/caddyhttp/headers/headers.go:24:43          caddyhttp       U       caddyserver/caddy/v2/modules/caddyhttp\""
   - "modules/caddyhttp/headers/headers.go:90:73          caddyhttp       U       *http.Request, next caddyhttp.Handler) error {"
   - "modules/caddyhttp/headers/headers.go:100:29         caddyhttp       U       ResponseWriterWrapper: &caddyhttp.ResponseWriterWrapper"
-  - "modules/caddyhttp/headers/headers.go:188:11         caddyhttp       U       Require *caddyhttp.ResponseMatcher `json"
-  - "modules/caddyhttp/headers/headers.go:342:3          caddyhttp       U       *caddyhttp.ResponseWriterWrapper"
+  - "modules/caddyhttp/headers/headers.go:147:57         recompiles      U       precompilation, and recompiles at runtime"
+  - "modules/caddyhttp/headers/headers.go:210:11         caddyhttp       U       Require *caddyhttp.ResponseMatcher `json"
+  - "modules/caddyhttp/headers/headers.go:377:3          caddyhttp       U       *caddyhttp.ResponseWriterWrapper"
   - "modules/caddyhttp/http2listener.go:1:9          caddyhttp       U       package caddyhttp"
   - "modules/caddyhttp/http2listener.go:6:2          weakrand        U       weakrand \"math/rand\""
   - "modules/caddyhttp/http2listener.go:18:60        stdlib          U       logic is copied from stdlib http.Server, it's an"
