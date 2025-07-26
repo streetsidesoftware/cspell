@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v9.2.1 (2025-07-26)
+
+### Dictionary Updates
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/7662">#7662</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#7662](https://github.com/streetsidesoftware/cspell/pull/7662))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ packages/cspell-bundled-dicts/package.json |  6 ++---
+ pnpm-lock.yaml                             | 36 +++++++++++++++---------------
+ 2 files changed, 21 insertions(+), 21 deletions(-)
+```
+
+---
+
+</details>
+
 ## v9.2.0 (2025-07-19)
 
 <details>
