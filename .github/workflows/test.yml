@@ -45,9 +45,7 @@ jobs:
     strategy:
       matrix:
         node-version:
-          # List of supported node versions (latest is tested in `test-os`)
-          - 20.x
-          - 22.x
+          - 20.x # Use 22.x for testing when 20.x is EOL
           - 24.x
 
         os:
@@ -109,8 +107,6 @@ jobs:
     strategy:
       matrix:
         node-version:
-          # List of supported node versions (latest is tested in `test-os`)
-          # - 20.x
           - 22.x
 
         os:
