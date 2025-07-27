@@ -376,9 +376,12 @@ describe('Linter File Caching', () => {
     });
 });
 
+let testCounter = 0;
+
 function tempLocation(...parts: string[]): string {
     const currTestName = expect.getState().currentTestName || 'test';
-    const testName = currTestName.replaceAll(/\W/g, '_');
+    const testName =
+        currTestName.replaceAll(/\W/g, '_') + performance.now().toFixed(2) + '-' + (++testCounter).toString();
     return r(tempRoot, testName, ...parts);
 }
 
