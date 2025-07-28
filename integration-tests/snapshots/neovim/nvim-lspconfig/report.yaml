@@ -5,7 +5,7 @@ Args: '["**"]'
 Summary:
   files: 750
   filesWithIssues: 629
-  issues: 5932
+  issues: 5934
   errors: 0
 Errors: []
 
@@ -590,6 +590,8 @@ issues:
   - "nvim-lspconfig-scm-1.rockspec:3:1           rockspec    U       rockspec_format = \"3.0\""
   - "plugin/lspconfig.lua:67:14          scriptnames     U       -- script in scriptnames to be executed is lspconfig"
   - "plugin/lspconfig.lua:71:26          tabnew          U       vim.cmd(string.format('tabnew %s', lsp.get_log_path"
+  - "README.md:129:95        exrc        U       detection by enabling `'exrc'` and adding an `.nvim"
+  - "README.md:132:42        getinfo     U       fn.fnamemodify(debug.getinfo(1, 'S').source:sub("
   - "scripts/docgen.lua:24:19        spairs          U       for k, v in vim.spairs(t) do"
   - "scripts/docgen.lua:47:29        indentlvl       U       function make_section(indentlvl, sep, parts)"
   - "scripts/docgen.lua:90:42        vimdoc          U       markdown \"```\" codeblock to vimdoc format."
