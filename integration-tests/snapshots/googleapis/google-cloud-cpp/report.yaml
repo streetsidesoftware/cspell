@@ -3,9 +3,9 @@ Repository: googleapis/google-cloud-cpp
 Url: https://github.com/googleapis/google-cloud-cpp.git
 Args: '["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]'
 Summary:
-  files: 20566
+  files: 20572
   filesWithIssues: 7739
-  issues: 45377
+  issues: 45379
   errors: 0
 Errors: []
 
@@ -485,10 +485,10 @@ issues:
   - "google/cloud/bigtable/benchmarks/BUILD.bazel:42:36          lpthread    U       conditions:default\": [\"-lpthread\"],"
   - "google/cloud/bigtable/benchmarks/random_mutation.cc:31:8        ABCDEFGHIJLKMNOPQRSTUVWXY       U       \"ABCDEFGHIJLKMNOPQRSTUVWXYZabcdefghijlkmnopqrstuvwxyz"
   - "google/cloud/bigtable/benchmarks/random_mutation.cc:31:33       Zabcdefghijlkmnopqrstuvwxyz     U       ABCDEFGHIJLKMNOPQRSTUVWXYZabcdefghijlkmnopqrstuvwxyz0123456789-/_\");"
-  - "google/cloud/bigtable/bigtable_client_unit_tests.bzl:86:12          readmodifywriterow      U       \"table_readmodifywriterow_test.cc\","
-  - "google/cloud/bigtable/bigtable_client_unit_tests.bzl:87:12          readrow                 U       \"table_readrow_test.cc\","
-  - "google/cloud/bigtable/bigtable_client_unit_tests.bzl:88:12          readrows                U       \"table_readrows_test.cc\","
-  - "google/cloud/bigtable/BUILD.bazel:128:22        readrowsparser      U       name = \"internal_readrowsparser_test\","
+  - "google/cloud/bigtable/bigtable_client_unit_tests.bzl:87:12          readmodifywriterow      U       \"table_readmodifywriterow_test.cc\","
+  - "google/cloud/bigtable/bigtable_client_unit_tests.bzl:88:12          readrow                 U       \"table_readrow_test.cc\","
+  - "google/cloud/bigtable/bigtable_client_unit_tests.bzl:89:12          readrows                U       \"table_readrows_test.cc\","
+  - "google/cloud/bigtable/BUILD.bazel:132:22        readrowsparser      U       name = \"internal_readrowsparser_test\","
   - "google/cloud/bigtable/client_options_test.cc:311:28         Grpclb      U       ClientOptionsTest, SetGrpclbFallbackTimeoutMS) {"
   - "google/cloud/bigtable/client_options_test.cc:319:44         GRPCLB      U       hannelArgument(args, GRPC_ARG_GRPCLB_FALLBACK_TIMEOUT_MS"
   - "google/cloud/bigtable/CMakeLists.txt:32:6           testproxy       U       \"testproxy\""
@@ -498,10 +498,10 @@ issues:
   - "google/cloud/bigtable/examples/bigtable_hello_app_profile.cc:145:40         abcdefghilklmnopqrstuvwxyz      U       generator, 8, \"abcdefghilklmnopqrstuvwxyz0123456789\");"
   - "google/cloud/bigtable/examples/howto_mock_data_api.cc:32:11         cbtm    U       namespace cbtm = ::google::cloud::bigtable"
   - "google/cloud/bigtable/instance_admin_test.cc:49:11          iamproto    U       namespace iamproto = ::google::iam::v1"
-  - "google/cloud/bigtable/internal/async_row_reader_test.cc:340:37      Doesnt (Doesn't)    U       AsyncRowReaderTest, ParserEofDoesntFailOnUnfinishedRowIfRowLimit"
-  - "google/cloud/bigtable/internal/async_row_reader.cc:75:31        cntr    U       explicit CountFrames(int& cntr) : cntr(++cntr) {}"
-  - "google/cloud/bigtable/internal/bulk_mutator_test.cc:512:37      Retryable       U       BulkMutatorTest, ReportEitherRetryableMutationFailOrStreamFail"
-  - "google/cloud/bigtable/internal/data_connection_impl.cc:469:24       satisying       U       // sure of that, satisying the `promise<>` is deferred"
+  - "google/cloud/bigtable/internal/async_row_reader_test.cc:475:37      Doesnt (Doesn't)    U       AsyncRowReaderTest, ParserEofDoesntFailOnUnfinishedRowIfRowLimit"
+  - "google/cloud/bigtable/internal/async_row_reader.cc:80:31        cntr    U       explicit CountFrames(int& cntr) : cntr(++cntr) {}"
+  - "google/cloud/bigtable/internal/bulk_mutator_test.cc:642:37      Retryable       U       BulkMutatorTest, ReportEitherRetryableMutationFailOrStreamFail"
+  - "google/cloud/bigtable/internal/data_connection_impl.cc:519:24       satisying       U       // sure of that, satisying the `promise<>` is deferred"
   - "google/cloud/bigtable/internal/legacy_async_row_reader_test.cc:144:22       corresponse     U       * Future at idx i corresponse to i-th expected row"
   - "google/cloud/bigtable/internal/legacy_async_row_reader_test.cc:552:66       noooo           U       PERMISSION_DENIED, \"noooo\");"
   - "google/cloud/bigtable/internal/legacy_row_reader_test.cc:89:14          preconfigured       U       // Returns a preconfigured set of parsers, so expectatio"

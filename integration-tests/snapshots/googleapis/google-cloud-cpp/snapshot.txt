@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 20566, Issues found: 45377 in 7739 files.
+ CSpell: Files checked: 20572, Issues found: 45379 in 7739 files.
  exit code: 1
 ARCHITECTURE.md:158:48    - Unknown word (googlemock) -- implementation using `googlemock`
 ARCHITECTURE.md:29:61     - Unknown word (retryable)  -- RPCs that fail with a retryable error,
@@ -476,7 +476,7 @@ google/cloud/bigquery/v2/minimal/internal/table_response_test.cc:232:25    - Unk
 google/cloud/bigquery/v2/minimal/internal/table_response_test.cc:235:24    - Unknown word (locat)            -- R"( location: "t-locat...<truncated>...")"
 google/cloud/bigquery/v2/minimal/internal/table_response_test.cc:236:33    - Unknown word (defau)            -- default_collation: "t-defau...<truncated>...")"
 google/cloud/bigquery/v2/minimal/testing/table_test_utils.cc:58:28     - Unknown word (hfields)    -- vector<std::string> hfields;
-google/cloud/bigtable/BUILD.bazel:128:22    - Unknown word (readrowsparser) -- name = "internal_readrowsparser_test",
+google/cloud/bigtable/BUILD.bazel:132:22    - Unknown word (readrowsparser) -- name = "internal_readrowsparser_test",
 google/cloud/bigtable/CMakeLists.txt:32:6      - Unknown word (testproxy)  -- "testproxy"
 google/cloud/bigtable/app_profile_config_test.cc:101:51    - Unknown word (xyzzy)      -- ofileUpdateConfig().set_etag("xyzzy").as_proto();
 google/cloud/bigtable/async_read_stream_test.cc:28:11     - Unknown word (btproto)    -- namespace btproto = ::google::bigtable
@@ -485,9 +485,9 @@ google/cloud/bigtable/benchmarks/BUILD.bazel:42:36     - Unknown word (lpthread)
 google/cloud/bigtable/benchmarks/bigtable_benchmark_test.cc:30:30     - Unknown word (barquaz)    -- [] = "--instance-id=barquaz";
 google/cloud/bigtable/benchmarks/random_mutation.cc:31:33     - Unknown word (Zabcdefghijlkmnopqrstuvwxyz) -- ABCDEFGHIJLKMNOPQRSTUVWXYZabcdefghijlkmnopqrstuvwxyz0123456789-/_");
 google/cloud/bigtable/benchmarks/random_mutation.cc:31:8      - Unknown word (ABCDEFGHIJLKMNOPQRSTUVWXY) -- "ABCDEFGHIJLKMNOPQRSTUVWXYZabcdefghijlkmnopqrstuvwxyz
-google/cloud/bigtable/bigtable_client_unit_tests.bzl:86:12     - Unknown word (readmodifywriterow) -- "table_readmodifywriterow_test.cc",
-google/cloud/bigtable/bigtable_client_unit_tests.bzl:87:12     - Unknown word (readrow)            -- "table_readrow_test.cc",
-google/cloud/bigtable/bigtable_client_unit_tests.bzl:88:12     - Unknown word (readrows)           -- "table_readrows_test.cc",
+google/cloud/bigtable/bigtable_client_unit_tests.bzl:87:12     - Unknown word (readmodifywriterow) -- "table_readmodifywriterow_test.cc",
+google/cloud/bigtable/bigtable_client_unit_tests.bzl:88:12     - Unknown word (readrow)            -- "table_readrow_test.cc",
+google/cloud/bigtable/bigtable_client_unit_tests.bzl:89:12     - Unknown word (readrows)           -- "table_readrows_test.cc",
 google/cloud/bigtable/client_options_test.cc:311:28    - Unknown word (Grpclb)     -- ClientOptionsTest, SetGrpclbFallbackTimeoutMS) {
 google/cloud/bigtable/client_options_test.cc:319:44    - Unknown word (GRPCLB)     -- hannelArgument(args, GRPC_ARG_GRPCLB_FALLBACK_TIMEOUT_MS
 google/cloud/bigtable/column_family.h:154:43    - Unknown word (Differencer) -- protobuf::util::MessageDifferencer::Equivalent(a.gc_rule
@@ -496,10 +496,10 @@ google/cloud/bigtable/doc/bigtable-samples-grpc-credentials.dox:57:71     - Unkn
 google/cloud/bigtable/examples/bigtable_hello_app_profile.cc:145:40    - Unknown word (abcdefghilklmnopqrstuvwxyz) -- generator, 8, "abcdefghilklmnopqrstuvwxyz0123456789");
 google/cloud/bigtable/examples/howto_mock_data_api.cc:32:11     - Unknown word (cbtm)       -- namespace cbtm = ::google::cloud::bigtable
 google/cloud/bigtable/instance_admin_test.cc:49:11     - Unknown word (iamproto)   -- namespace iamproto = ::google::iam::v1
-google/cloud/bigtable/internal/async_row_reader.cc:75:31     - Unknown word (cntr)       -- explicit CountFrames(int& cntr) : cntr(++cntr) {}
-google/cloud/bigtable/internal/async_row_reader_test.cc:340:37    - Unknown word (Doesnt)     -- AsyncRowReaderTest, ParserEofDoesntFailOnUnfinishedRowIfRowLimit
-google/cloud/bigtable/internal/bulk_mutator_test.cc:512:37    - Unknown word (Retryable)  -- BulkMutatorTest, ReportEitherRetryableMutationFailOrStreamFail
-google/cloud/bigtable/internal/data_connection_impl.cc:469:24    - Unknown word (satisying)  -- // sure of that, satisying the `promise<>` is deferred
+google/cloud/bigtable/internal/async_row_reader.cc:80:31     - Unknown word (cntr)       -- explicit CountFrames(int& cntr) : cntr(++cntr) {}
+google/cloud/bigtable/internal/async_row_reader_test.cc:475:37    - Unknown word (Doesnt)     -- AsyncRowReaderTest, ParserEofDoesntFailOnUnfinishedRowIfRowLimit
+google/cloud/bigtable/internal/bulk_mutator_test.cc:642:37    - Unknown word (Retryable)  -- BulkMutatorTest, ReportEitherRetryableMutationFailOrStreamFail
+google/cloud/bigtable/internal/data_connection_impl.cc:519:24    - Unknown word (satisying)  -- // sure of that, satisying the `promise<>` is deferred
 google/cloud/bigtable/internal/legacy_async_row_reader_test.cc:144:22    - Unknown word (corresponse) -- * Future at idx i corresponse to i-th expected row
 google/cloud/bigtable/internal/legacy_async_row_reader_test.cc:552:66    - Unknown word (noooo)       -- PERMISSION_DENIED, "noooo");
 google/cloud/bigtable/internal/legacy_row_reader_test.cc:89:14     - Unknown word (preconfigured) -- // Returns a preconfigured set of parsers, so expectatio
