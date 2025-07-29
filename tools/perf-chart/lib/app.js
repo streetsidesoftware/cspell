@@ -3072,7 +3072,7 @@ var import_commander = __toESM(require_commander(), 1);
 const { program, createCommand, createArgument, createOption, CommanderError, InvalidArgumentError, InvalidOptionArgumentError, Command, Argument, Option, Help } = import_commander.default;
 
 //#endregion
-//#region ../../node_modules/.pnpm/csv-parse@5.6.0/node_modules/csv-parse/lib/api/CsvError.js
+//#region ../../node_modules/.pnpm/csv-parse@6.1.0/node_modules/csv-parse/lib/api/CsvError.js
 var CsvError = class CsvError extends Error {
 	constructor(code, message, options, ...contexts) {
 		if (Array.isArray(message)) message = message.join(" ").trim();
@@ -3087,13 +3087,13 @@ var CsvError = class CsvError extends Error {
 };
 
 //#endregion
-//#region ../../node_modules/.pnpm/csv-parse@5.6.0/node_modules/csv-parse/lib/utils/is_object.js
+//#region ../../node_modules/.pnpm/csv-parse@6.1.0/node_modules/csv-parse/lib/utils/is_object.js
 const is_object = function(obj) {
 	return typeof obj === "object" && obj !== null && !Array.isArray(obj);
 };
 
 //#endregion
-//#region ../../node_modules/.pnpm/csv-parse@5.6.0/node_modules/csv-parse/lib/api/normalize_columns_array.js
+//#region ../../node_modules/.pnpm/csv-parse@6.1.0/node_modules/csv-parse/lib/api/normalize_columns_array.js
 const normalize_columns_array = function(columns) {
 	const normalizedColumns = [];
 	for (let i = 0, l = columns.length; i < l; i++) {
@@ -3117,7 +3117,7 @@ const normalize_columns_array = function(columns) {
 };
 
 //#endregion
-//#region ../../node_modules/.pnpm/csv-parse@5.6.0/node_modules/csv-parse/lib/utils/ResizeableBuffer.js
+//#region ../../node_modules/.pnpm/csv-parse@6.1.0/node_modules/csv-parse/lib/utils/ResizeableBuffer.js
 var ResizeableBuffer = class {
 	constructor(size = 100) {
 		this.size = size;
@@ -3173,7 +3173,7 @@ var ResizeableBuffer = class {
 var ResizeableBuffer_default = ResizeableBuffer;
 
 //#endregion
-//#region ../../node_modules/.pnpm/csv-parse@5.6.0/node_modules/csv-parse/lib/api/init_state.js
+//#region ../../node_modules/.pnpm/csv-parse@6.1.0/node_modules/csv-parse/lib/api/init_state.js
 const np = 12;
 const cr$1 = 13;
 const nl$1 = 10;
@@ -3215,7 +3215,7 @@ const init_state = function(options) {
 };
 
 //#endregion
-//#region ../../node_modules/.pnpm/csv-parse@5.6.0/node_modules/csv-parse/lib/utils/underscore.js
+//#region ../../node_modules/.pnpm/csv-parse@6.1.0/node_modules/csv-parse/lib/utils/underscore.js
 const underscore = function(str) {
 	return str.replace(/([A-Z])/g, function(_, match) {
 		return "_" + match.toLowerCase();
@@ -3223,7 +3223,7 @@ const underscore = function(str) {
 };
 
 //#endregion
-//#region ../../node_modules/.pnpm/csv-parse@5.6.0/node_modules/csv-parse/lib/api/normalize_options.js
+//#region ../../node_modules/.pnpm/csv-parse@6.1.0/node_modules/csv-parse/lib/api/normalize_options.js
 const normalize_options = function(opts) {
 	const options = {};
 	for (const opt in opts) options[underscore(opt)] = opts[opt];
@@ -3260,7 +3260,7 @@ const normalize_options = function(opts) {
 		"cast_date must be true or a function,",
 		`got ${JSON.stringify(options.cast_date)}`
 	], options);
-	options.cast_first_line_to_header = null;
+	options.cast_first_line_to_header = void 0;
 	if (options.columns === true) options.cast_first_line_to_header = void 0;
 	else if (typeof options.columns === "function") {
 		options.cast_first_line_to_header = options.columns;
@@ -3427,14 +3427,14 @@ const normalize_options = function(opts) {
 	if (options.trim === true && opts.rtrim !== false) options.rtrim = true;
 	else if (options.rtrim !== true) options.rtrim = false;
 	if (options.to === void 0 || options.to === null) options.to = -1;
-	else {
+	else if (options.to !== -1) {
 		if (typeof options.to === "string" && /\d+/.test(options.to)) options.to = parseInt(options.to);
 		if (Number.isInteger(options.to)) {
 			if (options.to <= 0) throw new Error(`Invalid Option: to must be a positive integer greater than 0, got ${JSON.stringify(opts.to)}`);
 		} else throw new Error(`Invalid Option: to must be an integer, got ${JSON.stringify(opts.to)}`);
 	}
 	if (options.to_line === void 0 || options.to_line === null) options.to_line = -1;
-	else {
+	else if (options.to_line !== -1) {
 		if (typeof options.to_line === "string" && /\d+/.test(options.to_line)) options.to_line = parseInt(options.to_line);
 		if (Number.isInteger(options.to_line)) {
 			if (options.to_line <= 0) throw new Error(`Invalid Option: to_line must be a positive integer greater than 0, got ${JSON.stringify(opts.to_line)}`);
@@ -3444,7 +3444,7 @@ const normalize_options = function(opts) {
 };
 
 //#endregion
-//#region ../../node_modules/.pnpm/csv-parse@5.6.0/node_modules/csv-parse/lib/api/index.js
+//#region ../../node_modules/.pnpm/csv-parse@6.1.0/node_modules/csv-parse/lib/api/index.js
 const isRecordEmpty = function(record) {
 	return record.every((field) => field == null || field.toString && field.toString().trim() === "");
 };
@@ -3503,10 +3503,11 @@ const transform = function(original_options = {}) {
 					const bomLength = boms[encoding$1].length;
 					this.state.bufBytesStart += bomLength;
 					buf = buf.slice(bomLength);
-					this.options = normalize_options({
+					const options$1 = normalize_options({
 						...this.original_options,
 						encoding: encoding$1
 					});
+					for (const key in options$1) this.options[key] = options$1[key];
 					({comment, escape, quote} = this.options);
 					break;
 				}
@@ -3909,7 +3910,11 @@ const transform = function(original_options = {}) {
 			const err = typeof msg === "string" ? new Error(msg) : msg;
 			if (skip_records_with_error) {
 				this.state.recordHasError = true;
-				if (this.options.on_skip !== void 0) this.options.on_skip(err, raw ? this.state.rawBuffer.toString(encoding) : void 0);
+				if (this.options.on_skip !== void 0) try {
+					this.options.on_skip(err, raw ? this.state.rawBuffer.toString(encoding) : void 0);
+				} catch (err$1) {
+					return err$1;
+				}
 				return void 0;
 			} else return err;
 		},
@@ -3942,7 +3947,7 @@ const transform = function(original_options = {}) {
 };
 
 //#endregion
-//#region ../../node_modules/.pnpm/csv-parse@5.6.0/node_modules/csv-parse/lib/sync.js
+//#region ../../node_modules/.pnpm/csv-parse@6.1.0/node_modules/csv-parse/lib/sync.js
 const parse = function(data, opts = {}) {
 	if (typeof data === "string") data = Buffer.from(data);
 	const records = opts && opts.objname ? {} : [];
@@ -3952,10 +3957,8 @@ const parse = function(data, opts = {}) {
 		else records[record[0]] = record[1];
 	};
 	const close = () => {};
-	const err1 = parser.parse(data, false, push, close);
-	if (err1 !== void 0) throw err1;
-	const err2 = parser.parse(void 0, true, push, close);
-	if (err2 !== void 0) throw err2;
+	const error = parser.parse(data, true, push, close);
+	if (error !== void 0) throw error;
 	return records;
 };
 
