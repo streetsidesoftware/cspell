@@ -22,6 +22,7 @@ export default tsEslint.config(
             '**/build/**',
             '**/node_modules/**',
             '**/.docusaurus/**',
+            '**/*.config.*',
         ],
     },
     {
