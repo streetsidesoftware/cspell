@@ -3459,7 +3459,7 @@ interface DocumentValidatorOptions extends ValidateTextOptions {
 }
 type PerfTimings = Record<string, number>;
 declare class DocumentValidator {
-  readonly settings: TextDocument;
+  readonly settings: CSpellUserSettings;
   private _document;
   private _ready;
   readonly errors: Error[];

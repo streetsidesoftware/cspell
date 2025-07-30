@@ -29,7 +29,7 @@ var __require = /* @__PURE__ */ createRequire(import.meta.url);
 
 //#endregion
 //#region ../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/lib/error.js
-var require_error = __commonJS({ "../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/lib/error.js"(exports) {
+var require_error = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/lib/error.js": ((exports) => {
 	/**
 	* CommanderError class
 	*/
@@ -65,11 +65,11 @@ var require_error = __commonJS({ "../../node_modules/.pnpm/commander@14.0.0/node
 	};
 	exports.CommanderError = CommanderError$3;
 	exports.InvalidArgumentError = InvalidArgumentError$4;
-} });
+}) });
 
 //#endregion
 //#region ../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/lib/argument.js
-var require_argument = __commonJS({ "../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/lib/argument.js"(exports) {
+var require_argument = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/lib/argument.js": ((exports) => {
 	const { InvalidArgumentError: InvalidArgumentError$3 } = require_error();
 	var Argument$3 = class {
 		/**
@@ -190,11 +190,11 @@ var require_argument = __commonJS({ "../../node_modules/.pnpm/commander@14.0.0/n
 	}
 	exports.Argument = Argument$3;
 	exports.humanReadableArgName = humanReadableArgName$2;
-} });
+}) });
 
 //#endregion
 //#region ../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/lib/help.js
-var require_help = __commonJS({ "../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/lib/help.js"(exports) {
+var require_help = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/lib/help.js": ((exports) => {
 	const { humanReadableArgName: humanReadableArgName$1 } = require_argument();
 	/**
 	* TypeScript import types for JSDoc, used by Visual Studio Code IntelliSense and `npm run typescript-checkJS`
@@ -689,11 +689,11 @@ var require_help = __commonJS({ "../../node_modules/.pnpm/commander@14.0.0/node_
 	}
 	exports.Help = Help$3;
 	exports.stripColor = stripColor$1;
-} });
+}) });
 
 //#endregion
 //#region ../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/lib/option.js
-var require_option = __commonJS({ "../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/lib/option.js"(exports) {
+var require_option = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/lib/option.js": ((exports) => {
 	const { InvalidArgumentError: InvalidArgumentError$2 } = require_error();
 	var Option$3 = class {
 		/**
@@ -992,11 +992,11 @@ var require_option = __commonJS({ "../../node_modules/.pnpm/commander@14.0.0/nod
 	}
 	exports.Option = Option$3;
 	exports.DualOptions = DualOptions$1;
-} });
+}) });
 
 //#endregion
 //#region ../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/lib/suggestSimilar.js
-var require_suggestSimilar = __commonJS({ "../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/lib/suggestSimilar.js"(exports) {
+var require_suggestSimilar = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/lib/suggestSimilar.js": ((exports) => {
 	const maxDistance = 3;
 	function editDistance(a, b) {
 		if (Math.abs(a.length - b.length) > maxDistance) return Math.max(a.length, b.length);
@@ -1049,11 +1049,11 @@ var require_suggestSimilar = __commonJS({ "../../node_modules/.pnpm/commander@14
 		return "";
 	}
 	exports.suggestSimilar = suggestSimilar$1;
-} });
+}) });
 
 //#endregion
 //#region ../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/lib/command.js
-var require_command = __commonJS({ "../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/lib/command.js"(exports) {
+var require_command = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/lib/command.js": ((exports) => {
 	const EventEmitter = __require("node:events").EventEmitter;
 	const childProcess = __require("node:child_process");
 	const path = __require("node:path");
@@ -3040,11 +3040,11 @@ Expecting one of '${allowedValues.join("', '")}'`);
 	}
 	exports.Command = Command$2;
 	exports.useColor = useColor;
-} });
+}) });
 
 //#endregion
 //#region ../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/index.js
-var require_commander = __commonJS({ "../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/index.js"(exports) {
+var require_commander = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/index.js": ((exports) => {
 	const { Argument: Argument$1 } = require_argument();
 	const { Command: Command$1 } = require_command();
 	const { CommanderError: CommanderError$1, InvalidArgumentError: InvalidArgumentError$1 } = require_error();
@@ -3064,11 +3064,11 @@ var require_commander = __commonJS({ "../../node_modules/.pnpm/commander@14.0.0/
 	exports.CommanderError = CommanderError$1;
 	exports.InvalidArgumentError = InvalidArgumentError$1;
 	exports.InvalidOptionArgumentError = InvalidArgumentError$1;
-} });
+}) });
 
 //#endregion
 //#region ../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/esm.mjs
-var import_commander = __toESM(require_commander(), 1);
+var import_commander = /* @__PURE__ */ __toESM(require_commander(), 1);
 const { program, createCommand, createArgument, createOption, CommanderError, InvalidArgumentError, InvalidOptionArgumentError, Command, Argument, Option, Help } = import_commander.default;
 
 //#endregion
