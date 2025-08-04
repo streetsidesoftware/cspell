@@ -3,12 +3,12 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: [".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 2080, Issues found: 1612 in 309 files.
+ CSpell: Files checked: 2081, Issues found: 1620 in 309 files.
  exit code: 1
-Makefile.js:1040:18   - Unknown word (Multifiles) -- function downloadMultifilesTestTarget() {
-Makefile.js:127:82    - Unknown word (ined)       -- followed by the string "ined".
-Makefile.js:381:9     - Unknown word (gensite)    -- target.gensite();
-Makefile.js:84:7      - Unknown word (MULTIFILES) -- PERF_MULTIFILES_TARGET_DIR = path.join
+Makefile.js:126:82    - Unknown word (ined)       -- followed by the string "ined".
+Makefile.js:375:9     - Unknown word (gensite)    -- target.gensite();
+Makefile.js:83:7      - Unknown word (MULTIFILES) -- PERF_MULTIFILES_TARGET_DIR = path.join
+Makefile.js:970:18    - Unknown word (Multifiles) -- function downloadMultifilesTestTarget() {
 README.md:236:5     - Unknown word (teamstart)  -- <!--teamstart-->
 README.md:244:87    - Unknown word (Zakas's)    -- 5" alt="Nicholas C. Zakas's Avatar"><br />
 README.md:249:77    - Unknown word (Francesco)  -- 5" height="75" alt="Francesco Trotta's Avatar"><br
@@ -124,7 +124,7 @@ docs/src/rules/no-new-native-nonconstructor.md:2:22      - Unknown word (noncons
 docs/src/rules/no-new-native-nonconstructor.md:64:11     - Unknown word (corge)          -- const corge = new BigInt(900719
 docs/src/rules/no-nonoctal-decimal-escape.md:2:11      - Unknown word (nonoctal)   -- title: no-nonoctal-decimal-escape
 docs/src/rules/no-param-reassign.md:164:23    - Unknown word (barrito)    -- const foo1 = function(barrito) {
-docs/src/rules/no-restricted-globals.md:28:54     - Unknown word (fdescribe)  -- ["error", "event", "fdescribe"]
+docs/src/rules/no-restricted-globals.md:30:54     - Unknown word (fdescribe)  -- ["error", "event", "fdescribe"]
 docs/src/rules/no-restricted-modules.md:66:63     - Unknown word (dgram)      -- "cluster","crypto","dgram","dns","domain","events
 docs/src/rules/no-restricted-modules.md:66:95     - Unknown word (freelist)   -- ,"domain","events","freelist","fs","http","https
 docs/src/rules/no-restricted-syntax.md:71:5      - Unknown word (dont)       -- dontMess();
@@ -148,12 +148,20 @@ docs/src/rules/object-property-newline.md:210:12    - Unknown word (yugoslavyalÄ
 docs/src/rules/object-property-newline.md:216:29    - Unknown word (complexdomain)                               -- domain.includes(":") ? "complexdomain" : "simpledomain"
 docs/src/rules/object-property-newline.md:216:47    - Unknown word (simpledomain)                                -- "complexdomain" : "simpledomain"
 docs/src/rules/object-property-newline.md:71:12     - Unknown word (bazz)       -- + bar: "bazz",
-docs/src/rules/one-var.md:421:11    - Unknown word (barfoo)     -- const barfoo = 1, bazfoo = 2;
-docs/src/rules/one-var.md:421:23    - Unknown word (bazfoo)     -- const barfoo = 1, bazfoo = 2;
-docs/src/rules/one-var.md:424:17    - Unknown word (foonorf)    -- let fooqux, foonorf;
-docs/src/rules/one-var.md:424:9     - Unknown word (fooqux)     -- let fooqux, foonorf;
-docs/src/rules/one-var.md:715:38    - Unknown word (onevar)     -- This rule maps to the `onevar` JSHint rule, but allows
-docs/src/rules/one-var.md:81:9      - Unknown word (norf)       -- let norf;
+docs/src/rules/one-var.md:439:11    - Unknown word (barfoo)     -- const barfoo = 1, bazfoo = 2;
+docs/src/rules/one-var.md:439:23    - Unknown word (bazfoo)     -- const barfoo = 1, bazfoo = 2;
+docs/src/rules/one-var.md:442:17    - Unknown word (foonorf)    -- let fooqux, foonorf;
+docs/src/rules/one-var.md:442:9     - Unknown word (fooqux)     -- let fooqux, foonorf;
+docs/src/rules/one-var.md:443:11    - Unknown word (foobarfoo)  -- using foobarfoo = 1;
+docs/src/rules/one-var.md:444:11    - Unknown word (foobazfoo)  -- using foobazfoo = 2;
+docs/src/rules/one-var.md:445:11    - Unknown word (bazbarfoo)  -- using bazbarfoo = 1, bazfoobar = 2;
+docs/src/rules/one-var.md:445:26    - Unknown word (bazfoobar)  -- using bazbarfoo = 1, bazfoobar = 2;
+docs/src/rules/one-var.md:446:17    - Unknown word (foobarbaz)  -- await using foobarbaz = 1;
+docs/src/rules/one-var.md:447:17    - Unknown word (foobazqux)  -- await using foobazqux = 2;
+docs/src/rules/one-var.md:448:17    - Unknown word (bazbarqux)  -- await using bazbarqux = 1, bazfooqux = 2;
+docs/src/rules/one-var.md:448:32    - Unknown word (bazfooqux)  -- using bazbarqux = 1, bazfooqux = 2;
+docs/src/rules/one-var.md:783:38    - Unknown word (onevar)     -- This rule maps to the `onevar` JSHint rule, but allows
+docs/src/rules/one-var.md:85:9      - Unknown word (norf)       -- let norf;
 docs/src/rules/prefer-named-capture-group.md:21:19     - Unknown word (cauli)      -- const regex = /(?:cauli|sun)flower/;
 docs/src/rules/space-unary-ops.md:9:101     - Unknown word (nonwords)   -- operators and after/before `nonwords` unary operators.
 docs/src/rules/spaced-comment.md:36:78     - Unknown word (vsdoc)      -- ocumentation read by doxygen, vsdoc, etc. which must have

@@ -3,7 +3,7 @@ Repository: gitbucket/gitbucket
 Url: "https://github.com/gitbucket/gitbucket.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 412, Issues found: 1925 in 397 files.
+ CSpell: Files checked: 413, Issues found: 1929 in 398 files.
  exit code: 1
 README.md:1:14      - Unknown word (Gitter)     -- GitBucket [![Gitter chat](https://badges
 README.md:80:88     - Unknown word (MVCC)       -- configuration, remove `;MVCC=true` from `url`.
@@ -172,7 +172,7 @@ src/main/scala/gitbucket/core/plugin/PluginRegistry.scala:92:7      - Unknown wo
 src/main/scala/gitbucket/core/service/AccountService.scala:253:35    - Unknown word (devnull)    -- mailAddress = groupName + "@devnull",
 src/main/scala/gitbucket/core/service/IssuesService.scala:680:31    - Unknown word (unassignment) -- TODO Notify plugins of unassignment as doing in registerIssueAssi
 src/main/scala/gitbucket/core/service/OpenIDConnectService.scala:217:6     - Unknown word (HMAC)       -- "HMAC" -> Family.HMAC_SHA
-src/main/scala/gitbucket/core/service/ProtectedBranchService.scala:155:15    - Unknown word (Successed)  -- unSuccessedContexts(command.getNewId
+src/main/scala/gitbucket/core/service/ProtectedBranchService.scala:186:15    - Unknown word (Successed)  -- unSuccessedContexts(command.getNewId
 src/main/scala/gitbucket/core/service/PullRequestService.scala:406:9     - Unknown word (patchs)     -- val patchs = positions.map { case
 src/main/scala/gitbucket/core/service/RepositoryCreationService.scala:118:13    - Unknown word (gitdir)     -- val gitdir = getRepositoryDir(owner
 src/main/scala/gitbucket/core/service/RepositoryCreationService.scala:305:8     - Unknown word (fccd)       -- "fccd29"
@@ -235,7 +235,7 @@ src/main/twirl/gitbucket/core/issues/list.scala.html:44:33     - Unknown word (l
 src/main/twirl/gitbucket/core/main.scala.html:31:43     - Unknown word (facebox)    -- helpers.assets("/vendors/facebox/facebox.css")" rel=
 src/main/twirl/gitbucket/core/main.scala.html:59:62     - Unknown word (adminlte)   -- vendors/AdminLTE-2.4.2/js/adminlte.min.js")" type="text
 src/main/twirl/gitbucket/core/menu.scala.html:113:54    - Unknown word (closelabel) -- assets("/vendors/facebox/closelabel.png")'
-src/main/twirl/gitbucket/core/repo/blob.scala.html:116:30    - Unknown word (linenums)      -- const pos = pre.find('ol.linenums').position();
+src/main/twirl/gitbucket/core/repo/blob.scala.html:119:30    - Unknown word (linenums)      -- const pos = pre.find('ol.linenums').position();
 src/main/twirl/gitbucket/core/repo/blob.scala.html:41:35     - Unknown word (branchcontrol) -- gitbucket.core.helper.html.branchcontrol(branch, repository,
 src/main/twirl/gitbucket/core/repo/editor.scala.html:134:48    - Unknown word (modelist)    -- assets("/vendors/ace/ext-modelist.js")" type="text/javascript
 src/main/twirl/gitbucket/core/repo/editor.scala.html:54:34     - Unknown word (dreamweaver) -- <option value="dreamweaver">Dreamweaver</option
@@ -257,15 +257,15 @@ src/main/twirl/gitbucket/core/settings/deploykey.scala.html:6:41      - Unknown 
 src/main/twirl/gitbucket/core/settings/issues.scala.html:18:41     - Unknown word (issuesfield) -- gitbucket.core.settings.html.issuesfield(customField)
 src/test/scala/gitbucket/core/GitBucketCoreModuleSpec.scala:38:32     - Unknown word (mysqld)     -- container.withCommand("mysqld --default-authentication
 src/test/scala/gitbucket/core/api/ApiIntegrationTest.scala:302:44    - Unknown word (testref)    -- createRef("refs/heads/testref", sha1)
-src/test/scala/gitbucket/core/api/ApiSpecModels.scala:101:21    - Unknown word (myboss)     -- managers = Seq("myboss")
-src/test/scala/gitbucket/core/api/ApiSpecModels.scala:33:17     - Unknown word (octocat)    -- userName = "octocat",
-src/test/scala/gitbucket/core/api/ApiSpecModels.scala:463:32    - Unknown word (Njpy)       -- id = "MDM6UmVmOTM1MDc0NjpyZWZzL3RhZ3MvMS4w",
-src/test/scala/gitbucket/core/api/ApiSpecModels.scala:768:22    - Unknown word (VBRE)       -- |"content":"UkVBRE1F",
+src/test/scala/gitbucket/core/api/ApiSpecModels.scala:102:21    - Unknown word (myboss)     -- managers = Seq("myboss")
+src/test/scala/gitbucket/core/api/ApiSpecModels.scala:34:17     - Unknown word (octocat)    -- userName = "octocat",
+src/test/scala/gitbucket/core/api/ApiSpecModels.scala:466:32    - Unknown word (Njpy)       -- id = "MDM6UmVmOTM1MDc0NjpyZWZzL3RhZ3MvMS4w",
+src/test/scala/gitbucket/core/api/ApiSpecModels.scala:781:22    - Unknown word (VBRE)       -- |"content":"UkVBRE1F",
+src/test/scala/gitbucket/core/api/JsonFormatSpec.scala:3:37      - Unknown word (jvalue)     -- s.{Formats, JValue, jvalue2extractable}
 src/test/scala/gitbucket/core/model/CommitStateSpec.scala:14:49     - Unknown word (peinding)   -- includes FAILURE must eq peinding") {
-src/test/scala/gitbucket/core/service/MergeServiceSpec.scala:27:29     - Unknown word (jvalue)     -- org.json4s.{Formats, jvalue2monadic}
 src/test/scala/gitbucket/core/service/MergeServiceSpec.scala:53:57     - Unknown word (hoge)       -- master", "test.txt", "hoge")
 src/test/scala/gitbucket/core/service/MergeServiceSpec.scala:58:13     - Unknown word (Confrict)   -- def createConfrict(git: Git): ObjectId
-src/test/scala/gitbucket/core/service/ProtectedBranchServiceSpec.scala:73:73     - Unknown word (fuga)       -- branch2", false, Seq("fuga"))
+src/test/scala/gitbucket/core/service/ProtectedBranchServiceSpec.scala:75:80     - Unknown word (fuga)       -- false, false, Seq("fuga"), false, Nil)
 src/test/scala/gitbucket/core/service/ServiceSpecBase.scala:169:49    - Unknown word (baes)       -- baseRepositoryName, baesBranch) = base.split
 src/test/scala/gitbucket/core/util/JGitUtilSpec.scala:345:53    - Unknown word (finfo)      -- git, branch, path).map(finfo => (finfo.name, finfo
 src/test/scala/gitbucket/core/util/ValidationsSpec.scala:21:40     - Unknown word (gghhii)     -- validate("color", "#gghhii", messages) == Some

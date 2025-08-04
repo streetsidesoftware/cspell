@@ -3,9 +3,9 @@ Repository: eslint/eslint
 Url: https://github.com/eslint/eslint
 Args: '[".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]'
 Summary:
-  files: 2080
+  files: 2081
   filesWithIssues: 309
-  issues: 1612
+  issues: 1620
   errors: 0
 Errors: []
 
@@ -105,7 +105,7 @@ issues:
   - "docs/src/rules/no-new-native-nonconstructor.md:64:11        corge               U       const corge = new BigInt(900719"
   - "docs/src/rules/no-nonoctal-decimal-escape.md:2:11           nonoctal    U       title: no-nonoctal-decimal-escape"
   - "docs/src/rules/no-param-reassign.md:164:23      barrito     U       const foo1 = function(barrito) {"
-  - "docs/src/rules/no-restricted-globals.md:28:54       fdescribe       U       [\"error\", \"event\", \"fdescribe\"]"
+  - "docs/src/rules/no-restricted-globals.md:30:54       fdescribe       U       [\"error\", \"event\", \"fdescribe\"]"
   - "docs/src/rules/no-restricted-modules.md:66:63       dgram       U       \"cluster\",\"crypto\",\"dgram\",\"dns\",\"domain\",\"events"
   - "docs/src/rules/no-restricted-modules.md:66:95       freelist    U       ,\"domain\",\"events\",\"freelist\",\"fs\",\"http\",\"https"
   - "docs/src/rules/no-restricted-syntax.md:71:5         dont    U       dontMess();"
@@ -129,12 +129,20 @@ issues:
   - "docs/src/rules/object-property-newline.md:210:12        yugoslavyalılaştırabildiklerimizdenmişsiniz     U       const b = \"yugoslavyalılaştırabildiklerimizdenmişsiniz\";"
   - "docs/src/rules/object-property-newline.md:216:29        complexdomain                                   U       domain.includes(\":\") ? \"complexdomain\" : \"simpledomain\""
   - "docs/src/rules/object-property-newline.md:216:47        simpledomain                                    U       \"complexdomain\" : \"simpledomain\""
-  - "docs/src/rules/one-var.md:81:9          norf        U       let norf;"
-  - "docs/src/rules/one-var.md:421:11        barfoo      U       const barfoo = 1, bazfoo = 2;"
-  - "docs/src/rules/one-var.md:421:23        bazfoo      U       const barfoo = 1, bazfoo = 2;"
-  - "docs/src/rules/one-var.md:424:9         fooqux      U       let fooqux, foonorf;"
-  - "docs/src/rules/one-var.md:424:17        foonorf     U       let fooqux, foonorf;"
-  - "docs/src/rules/one-var.md:715:38        onevar      U       This rule maps to the `onevar` JSHint rule, but allows"
+  - "docs/src/rules/one-var.md:85:9          norf            U       let norf;"
+  - "docs/src/rules/one-var.md:439:11        barfoo          U       const barfoo = 1, bazfoo = 2;"
+  - "docs/src/rules/one-var.md:439:23        bazfoo          U       const barfoo = 1, bazfoo = 2;"
+  - "docs/src/rules/one-var.md:442:9         fooqux          U       let fooqux, foonorf;"
+  - "docs/src/rules/one-var.md:442:17        foonorf         U       let fooqux, foonorf;"
+  - "docs/src/rules/one-var.md:443:11        foobarfoo       U       using foobarfoo = 1;"
+  - "docs/src/rules/one-var.md:444:11        foobazfoo       U       using foobazfoo = 2;"
+  - "docs/src/rules/one-var.md:445:11        bazbarfoo       U       using bazbarfoo = 1, bazfoobar = 2;"
+  - "docs/src/rules/one-var.md:445:26        bazfoobar       U       using bazbarfoo = 1, bazfoobar = 2;"
+  - "docs/src/rules/one-var.md:446:17        foobarbaz       U       await using foobarbaz = 1;"
+  - "docs/src/rules/one-var.md:447:17        foobazqux       U       await using foobazqux = 2;"
+  - "docs/src/rules/one-var.md:448:17        bazbarqux       U       await using bazbarqux = 1, bazfooqux = 2;"
+  - "docs/src/rules/one-var.md:448:32        bazfooqux       U       using bazbarqux = 1, bazfooqux = 2;"
+  - "docs/src/rules/one-var.md:783:38        onevar          U       This rule maps to the `onevar` JSHint rule, but allows"
   - "docs/src/rules/prefer-named-capture-group.md:21:19          cauli       U       const regex = /(?:cauli|sun)flower/;"
   - "docs/src/rules/space-unary-ops.md:9:101         nonwords    U       operators and after/before `nonwords` unary operators."
   - "docs/src/rules/spaced-comment.md:36:78          vsdoc       U       ocumentation read by doxygen, vsdoc, etc. which must have"
@@ -243,10 +251,10 @@ issues:
   - "lib/services/processor-service.js:88:5          Postprocesses       U       * Postprocesses the given messages synchronou"
   - "lib/shared/serialization.js:59:42       resuing     U       paths. This allows for resuing objects in the graph"
   - "lib/shared/text-table.js:36:8           hsep    U       const hsep = \" \";"
-  - "Makefile.js:84:7        MULTIFILES      U       PERF_MULTIFILES_TARGET_DIR = path.join"
-  - "Makefile.js:127:82      ined            U       followed by the string \"ined\"."
-  - "Makefile.js:381:9       gensite         U       target.gensite();"
-  - "Makefile.js:1040:18     Multifiles      U       function downloadMultifilesTestTarget() {"
+  - "Makefile.js:83:7        MULTIFILES      U       PERF_MULTIFILES_TARGET_DIR = path.join"
+  - "Makefile.js:126:82      ined            U       followed by the string \"ined\"."
+  - "Makefile.js:375:9       gensite         U       target.gensite();"
+  - "Makefile.js:970:18      Multifiles      U       function downloadMultifilesTestTarget() {"
   - "package.json:63:20          attw            U       \"lint:types\": \"attw --pack\","
   - "package.json:149:7          trunkio         U       \"@trunkio/launcher\": \"^1.3.4\""
   - "package.json:168:6          eslump          U       \"eslump\": \"^3.0.0\","
@@ -590,7 +598,11 @@ issuesSummary:
   - "text: barqux, count: 2, files: 2,"
   - "text: barrito, count: 2, files: 1,"
   - "text: basictkn, count: 1, files: 1,"
+  - "text: bazbarfoo, count: 1, files: 1,"
+  - "text: bazbarqux, count: 1, files: 1,"
   - "text: bazfoo, count: 1, files: 1,"
+  - "text: bazfoobar, count: 1, files: 1,"
+  - "text: bazfooqux, count: 1, files: 1,"
   - "text: bazqux, count: 2, files: 2,"
   - "text: bazz, count: 15, files: 4,"
   - "text: bcde, count: 2, files: 1,"
@@ -708,7 +720,11 @@ issuesSummary:
   - "text: foldr, count: 2, files: 1,"
   - "text: fontstack, count: 5, files: 1,"
   - "text: fooa, count: 1, files: 1,"
+  - "text: foobarbaz, count: 1, files: 1,"
+  - "text: foobarfoo, count: 1, files: 1,"
   - "text: foobaz, count: 5, files: 4,"
+  - "text: foobazfoo, count: 1, files: 1,"
+  - "text: foobazqux, count: 1, files: 1,"
   - "text: foonorf, count: 1, files: 1,"
   - "text: fooo, count: 13, files: 3,"
   - "text: foop, count: 1, files: 1,"

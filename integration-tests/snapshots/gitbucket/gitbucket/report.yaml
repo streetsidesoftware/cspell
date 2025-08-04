@@ -3,9 +3,9 @@ Repository: gitbucket/gitbucket
 Url: https://github.com/gitbucket/gitbucket.git
 Args: '["**"]'
 Summary:
-  files: 412
-  filesWithIssues: 397
-  issues: 1925
+  files: 413
+  filesWithIssues: 398
+  issues: 1929
   errors: 0
 Errors: []
 
@@ -177,7 +177,7 @@ issues:
   - "src/main/scala/gitbucket/core/service/AccountService.scala:253:35       devnull     U       mailAddress = groupName + \"@devnull\","
   - "src/main/scala/gitbucket/core/service/IssuesService.scala:680:31        unassignment    U       TODO Notify plugins of unassignment as doing in registerIssueAssi"
   - "src/main/scala/gitbucket/core/service/OpenIDConnectService.scala:217:6          HMAC    U       \"HMAC\" -> Family.HMAC_SHA"
-  - "src/main/scala/gitbucket/core/service/ProtectedBranchService.scala:155:15       Successed (Succeeded, Success, Successful)      U       unSuccessedContexts(command.getNewId"
+  - "src/main/scala/gitbucket/core/service/ProtectedBranchService.scala:186:15       Successed (Succeeded, Success, Successful)      U       unSuccessedContexts(command.getNewId"
   - "src/main/scala/gitbucket/core/service/PullRequestService.scala:406:9        patchs (patches, paths)     U       val patchs = positions.map { case"
   - "src/main/scala/gitbucket/core/service/RepositoryCreationService.scala:118:13        gitdir      U       val gitdir = getRepositoryDir(owner"
   - "src/main/scala/gitbucket/core/service/RepositoryCreationService.scala:305:8         fccd        U       \"fccd29\""
@@ -241,7 +241,7 @@ issues:
   - "src/main/twirl/gitbucket/core/main.scala.html:59:62         adminlte    U       vendors/AdminLTE-2.4.2/js/adminlte.min.js\")\" type=\"text"
   - "src/main/twirl/gitbucket/core/menu.scala.html:113:54        closelabel      U       assets(\"/vendors/facebox/closelabel.png\")'"
   - "src/main/twirl/gitbucket/core/repo/blob.scala.html:41:35        branchcontrol       U       gitbucket.core.helper.html.branchcontrol(branch, repository,"
-  - "src/main/twirl/gitbucket/core/repo/blob.scala.html:116:30       linenums            U       const pos = pre.find('ol.linenums').position();"
+  - "src/main/twirl/gitbucket/core/repo/blob.scala.html:119:30       linenums            U       const pos = pre.find('ol.linenums').position();"
   - "src/main/twirl/gitbucket/core/repo/editor.scala.html:54:34          dreamweaver     U       <option value=\"dreamweaver\">Dreamweaver</option"
   - "src/main/twirl/gitbucket/core/repo/editor.scala.html:54:47          Dreamweaver     U       value=\"dreamweaver\">Dreamweaver</option>"
   - "src/main/twirl/gitbucket/core/repo/editor.scala.html:58:34          gruvbox         U       <option value=\"gruvbox\">Gruvbox</option>"
@@ -261,16 +261,16 @@ issues:
   - "src/main/twirl/gitbucket/core/settings/deploykey.scala.html:6:41        deploykeys      U       settings.html.menu(\"deploykeys\", repository){"
   - "src/main/twirl/gitbucket/core/settings/issues.scala.html:18:41          issuesfield     U       gitbucket.core.settings.html.issuesfield(customField)"
   - "src/test/scala/gitbucket/core/api/ApiIntegrationTest.scala:302:44       testref     U       createRef(\"refs/heads/testref\", sha1)"
-  - "src/test/scala/gitbucket/core/api/ApiSpecModels.scala:33:17         octocat     U       userName = \"octocat\","
-  - "src/test/scala/gitbucket/core/api/ApiSpecModels.scala:101:21        myboss      U       managers = Seq(\"myboss\")"
-  - "src/test/scala/gitbucket/core/api/ApiSpecModels.scala:463:32        Njpy        U       id = \"MDM6UmVmOTM1MDc0NjpyZWZzL3RhZ3MvMS4w\","
-  - "src/test/scala/gitbucket/core/api/ApiSpecModels.scala:768:22        VBRE        U       |\"content\":\"UkVBRE1F\","
+  - "src/test/scala/gitbucket/core/api/ApiSpecModels.scala:34:17         octocat     U       userName = \"octocat\","
+  - "src/test/scala/gitbucket/core/api/ApiSpecModels.scala:102:21        myboss      U       managers = Seq(\"myboss\")"
+  - "src/test/scala/gitbucket/core/api/ApiSpecModels.scala:466:32        Njpy        U       id = \"MDM6UmVmOTM1MDc0NjpyZWZzL3RhZ3MvMS4w\","
+  - "src/test/scala/gitbucket/core/api/ApiSpecModels.scala:781:22        VBRE        U       |\"content\":\"UkVBRE1F\","
+  - "src/test/scala/gitbucket/core/api/JsonFormatSpec.scala:3:37         jvalue      U       s.{Formats, JValue, jvalue2extractable}"
   - "src/test/scala/gitbucket/core/GitBucketCoreModuleSpec.scala:38:32       mysqld      U       container.withCommand(\"mysqld --default-authentication"
   - "src/test/scala/gitbucket/core/model/CommitStateSpec.scala:14:49         peinding    U       includes FAILURE must eq peinding\") {"
-  - "src/test/scala/gitbucket/core/service/MergeServiceSpec.scala:27:29          jvalue      U       org.json4s.{Formats, jvalue2monadic}"
   - "src/test/scala/gitbucket/core/service/MergeServiceSpec.scala:53:57          hoge        U       master\", \"test.txt\", \"hoge\")"
   - "src/test/scala/gitbucket/core/service/MergeServiceSpec.scala:58:13          Confrict    U       def createConfrict(git: Git): ObjectId"
-  - "src/test/scala/gitbucket/core/service/ProtectedBranchServiceSpec.scala:73:73        fuga    U       branch2\", false, Seq(\"fuga\"))"
+  - "src/test/scala/gitbucket/core/service/ProtectedBranchServiceSpec.scala:75:80        fuga    U       false, false, Seq(\"fuga\"), false, Nil)"
   - "src/test/scala/gitbucket/core/service/ServiceSpecBase.scala:169:49      baes    U       baseRepositoryName, baesBranch) = base.split"
   - "src/test/scala/gitbucket/core/util/JGitUtilSpec.scala:345:53        finfo       U       git, branch, path).map(finfo => (finfo.name, finfo"
   - "src/test/scala/gitbucket/core/util/ValidationsSpec.scala:21:40          gghhii      U       validate(\"color\", \"#gghhii\", messages) == Some"
