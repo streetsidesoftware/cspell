@@ -5,7 +5,7 @@ Args: '["**/*.*"]'
 Summary:
   files: 79
   filesWithIssues: 39
-  issues: 442
+  issues: 438
   errors: 0
 Errors: []
 
@@ -161,12 +161,10 @@ issues:
   - "pyproject.toml:247:7        tomlsort            U       [tool.tomlsort]"
   - "pyproject.toml:258:4        secretstorage       U       \"secretstorage\", # linux specific dependency"
   - "pyproject.toml:259:4        jeepney             U       \"jeepney\", # linux specific dependency"
-  - "README.rst:21:9         PYPI            U       WARNING PYPI RELEASE BROKEN - TEMPORARY"
-  - "README.rst:39:29        pyproject       U       requirements.txt or pyproject.toml you can temporarily"
-  - "README.rst:119:11       pyenv           U       * Install pyenv_ to install a suitable"
-  - "README.rst:121:50       addono          U       90:2990 --name jira addono/jira-software-standalone"
-  - "README.rst:145:94       Greenhopper     U       include: Jira Agile, Greenhopper)"
-  - "README.rst:164:3        Navicat         U       * Navicat_ for providing us free"
+  - "README.rst:89:11        pyenv           U       * Install pyenv_ to install a suitable"
+  - "README.rst:91:50        addono          U       90:2990 --name jira addono/jira-software-standalone"
+  - "README.rst:115:94       Greenhopper     U       include: Jira Agile, Greenhopper)"
+  - "README.rst:134:3        Navicat         U       * Navicat_ for providing us free"
   - "tests/conftest.py:104:5         rndstr          U       def rndstr():"
   - "tests/conftest.py:108:5         rndpassword     U       def rndpassword():"
   - "tests/conftest.py:119:5         hashify         U       def hashify(some_string, max_len"
@@ -202,6 +200,7 @@ issues:
   - "tox.ini:41:5        PYTHONIOENCODING        U       PYTHONIOENCODING"
   - "tox.ini:42:5        PYTHONPYCACHEPREFIX     U       PYTHONPYCACHEPREFIX"
   - "tox.ini:46:5        SETUPTOOLS              U       SETUPTOOLS_SCM_DEBUG"
+  - "tox.ini:62:41       pyproject               U       PROCESS_START = {tox_root}/pyproject.toml"
   - "tox.ini:78:29       posargs                 U       coverage run -m pytest {posargs: \\"
   - "tox.ini:80:9        showlocals              U       --showlocals \\"
   - "tox.ini:81:9        doctest                 U       --doctest-modules \\"
