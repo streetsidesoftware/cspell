@@ -589,7 +589,7 @@ declare class Trie {
   private _findOptionsExact;
   readonly isLegacy: boolean;
   private hasForbidden;
-  constructor(root: TrieRoot, count?: number);
+  constructor(root: TrieRoot, count?: number | undefined);
   /**
   * Number of words in the Trie
   */
