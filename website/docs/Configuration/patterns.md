@@ -85,9 +85,9 @@ CSpell now supports the `x` - verbose flag.
 
 ````regexp
 /
-    ^(\s*`{3,}).*     # match the ```
-    [\s\S]*?          # the block of code
-    ^\1               # end of the block
+    ^([ \t]*`{3,}).*     # match the ```, respecting the preceding whitespace on the same line
+    ([\s\S]*?)           # the block of code
+    ^\1$                 # end of the block, including whitespace to support nested code blocks
 /gmx
 ````
 
