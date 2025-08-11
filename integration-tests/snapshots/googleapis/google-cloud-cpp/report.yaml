@@ -4,8 +4,8 @@ Url: https://github.com/googleapis/google-cloud-cpp.git
 Args: '["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]'
 Summary:
   files: 20602
-  filesWithIssues: 7740
-  issues: 45401
+  filesWithIssues: 7742
+  issues: 45407
   errors: 0
 Errors: []
 
@@ -508,6 +508,7 @@ issues:
   - "google/cloud/bigtable/internal/legacy_async_row_reader_test.cc:144:22       corresponse     U       * Future at idx i corresponse to i-th expected row"
   - "google/cloud/bigtable/internal/legacy_async_row_reader_test.cc:552:66       noooo           U       PERMISSION_DENIED, \"noooo\");"
   - "google/cloud/bigtable/internal/legacy_row_reader_test.cc:89:14          preconfigured       U       // Returns a preconfigured set of parsers, so expectatio"
+  - "google/cloud/bigtable/internal/metrics_test.cc:934:53       gfet    U       emplace(\"server-timing\", \"gfet4t7; dur=10.5\");"
   - "google/cloud/bigtable/internal/readrowsparser_acceptance_tests.inc:409:19       alue (value)        U       value: \"alue-VAL\""
   - "google/cloud/bigtable/internal/readrowsparser_acceptance_tests.inc:571:24       Multiqualifier      U       TEST_F(AcceptanceTest, MultiqualifierSplits) {"
   - "google/cloud/bigtable/internal/readrowsparser.h:15:57       READROWSPARSER      U       CLOUD_BIGTABLE_INTERNAL_READROWSPARSER_H"
@@ -752,13 +753,13 @@ issues:
   - "google/cloud/spanner/integration_tests/client_integration_test.cc:1558:50       shoppingcarts                   U       HasSubstr(\"shoppingcarts\"))));"
   - "google/cloud/spanner/integration_tests/data_types_integration_test.cc:85:30         Tmpl    U       DataTypeIntegrationTestTmpl : public T {"
   - "google/cloud/spanner/internal/connection_impl_test.cc:65:34         Wmissing    U       diagnostic ignored \"-Wmissing-field-initializers\""
-  - "google/cloud/spanner/internal/connection_impl_test.cc:3306:37       BADDECAF    U       { partition_token: \"BADDECAF\" }"
-  - "google/cloud/spanner/internal/connection_impl_test.cc:3308:25       CAFEDEAD    U       transaction: { id: \"CAFEDEAD\" }"
+  - "google/cloud/spanner/internal/connection_impl_test.cc:3713:37       BADDECAF    U       { partition_token: \"BADDECAF\" }"
+  - "google/cloud/spanner/internal/connection_impl_test.cc:3715:25       CAFEDEAD    U       transaction: { id: \"CAFEDEAD\" }"
   - "google/cloud/spanner/internal/logging_result_set_reader.cc:34:43        unresumable     U       __func__ << \"() << (unresumable)\";"
   - "google/cloud/spanner/internal/partial_result_set_resume_test.cc:528:39      Resumability    U       set<spanner::StreamingResumabilityBufferSizeOption>(0)"
   - "google/cloud/spanner/internal/partial_result_set_source_test.cc:527:31      chunksecond     U       not_chunked\", \"first_chunksecond_chunkthird_chunk\","
   - "google/cloud/spanner/internal/partial_result_set_source_test.cc:527:43      chunkthird      U       \"first_chunksecond_chunkthird_chunk\","
-  - "google/cloud/spanner/internal/partial_result_set_source.cc:213:64       resumability    U       again so as to maintain resumability."
+  - "google/cloud/spanner/internal/partial_result_set_source.cc:216:64       resumability    U       again so as to maintain resumability."
   - "google/cloud/spanner/internal/session_pool_test.cc:736:35       Stubless        U       SessionPoolTest, GetStubForStublessSession) {"
   - "google/cloud/spanner/internal/session_pool_test.cc:751:25       Multilpexed     U       TEST_F(SessionPoolTest, MultilpexedSessionReplacementSuccess"
   - "google/cloud/spanner/internal/session_pool.cc:468:22        robining    U       // to use by round-robining between the channels"
