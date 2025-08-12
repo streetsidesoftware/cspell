@@ -56,7 +56,7 @@ jobs:
             node-version: 24.x
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Install and Build
         uses: ./.github/actions/install-build
@@ -81,7 +81,7 @@ jobs:
           - ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Setup
         uses: ./.github/actions/setup
@@ -121,7 +121,7 @@ jobs:
         #     node-version: 20.x
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Install and Build
         uses: ./.github/actions/install-build
