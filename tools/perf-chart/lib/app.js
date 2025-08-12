@@ -3963,7 +3963,7 @@ const parse = function(data, opts = {}) {
 };
 
 //#endregion
-//#region ../../node_modules/.pnpm/thistogram@1.1.1/node_modules/thistogram/dist/drawingCharacters.js
+//#region ../../node_modules/.pnpm/thistogram@2.0.0/node_modules/thistogram/dist/drawingCharacters.js
 var BoxSymbol;
 (function(BoxSymbol$1) {
 	BoxSymbol$1[BoxSymbol$1["topLeft"] = 0] = "topLeft";
@@ -4007,7 +4007,7 @@ const histoCharsBottomToTop = [
 ];
 
 //#endregion
-//#region ../../node_modules/.pnpm/thistogram@1.1.1/node_modules/thistogram/dist/bars.js
+//#region ../../node_modules/.pnpm/thistogram@2.0.0/node_modules/thistogram/dist/bars.js
 /**
 * Draw a simple histogram with a single line of characters.
 * @param data - the data to draw
@@ -4069,7 +4069,7 @@ function minMaxRange(values, min, max) {
 }
 
 //#endregion
-//#region ../../node_modules/.pnpm/thistogram@1.1.1/node_modules/thistogram/dist/histogram.js
+//#region ../../node_modules/.pnpm/thistogram@2.0.0/node_modules/thistogram/dist/histogram.js
 const valueMinMaxSymbols = [
 	"●",
 	boxSymbols[BoxSymbol.leftT],
@@ -4078,7 +4078,7 @@ const valueMinMaxSymbols = [
 ];
 
 //#endregion
-//#region ../../node_modules/.pnpm/thistogram@1.1.1/node_modules/thistogram/dist/stats.js
+//#region ../../node_modules/.pnpm/thistogram@2.0.0/node_modules/thistogram/dist/stats.js
 /**
 * Calculate the standard deviation of a list of numbers
 * @param values - List of numbers
