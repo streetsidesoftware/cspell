@@ -3,6 +3,71 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v9.2.1 (2025-08-15)
+
+### Dictionary Updates
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/7728">#7728</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#7728](https://github.com/streetsidesoftware/cspell/pull/7728))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ integration-tests/snapshots/mdx-js/mdx/report.yaml |  3 +--
+ .../snapshots/mdx-js/mdx/snapshot.txt              |  3 +--
+ .../snapshots/vitest-dev/vitest/report.yaml        |  6 +-----
+ .../snapshots/vitest-dev/vitest/snapshot.txt       |  4 +---
+ packages/cspell-bundled-dicts/package.json         |  4 ++--
+ pnpm-lock.yaml                                     | 24 +++++++++++-----------
+ 6 files changed, 18 insertions(+), 26 deletions(-)
+```
+
+---
+
+</details>
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/7672">#7672</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#7672](https://github.com/streetsidesoftware/cspell/pull/7672))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ packages/cspell-bundled-dicts/package.json |  6 ++---
+ pnpm-lock.yaml                             | 36 +++++++++++++++---------------
+ 2 files changed, 21 insertions(+), 21 deletions(-)
+```
+
+---
+
+</details>
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/7662">#7662</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#7662](https://github.com/streetsidesoftware/cspell/pull/7662))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ packages/cspell-bundled-dicts/package.json |  6 ++---
+ pnpm-lock.yaml                             | 36 +++++++++++++++---------------
+ 2 files changed, 21 insertions(+), 21 deletions(-)
+```
+
+---
+
+</details>
+
 ## v9.2.0 (2025-07-19)
 
 <details>
