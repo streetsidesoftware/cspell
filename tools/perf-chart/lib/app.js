@@ -3170,7 +3170,6 @@ var ResizeableBuffer = class {
 		this.length = 0;
 	}
 };
-var ResizeableBuffer_default = ResizeableBuffer;
 
 //#endregion
 //#region ../../node_modules/.pnpm/csv-parse@6.1.0/node_modules/csv-parse/lib/api/init_state.js
@@ -3190,13 +3189,13 @@ const init_state = function(options) {
 		escaping: false,
 		escapeIsQuote: Buffer.isBuffer(options.escape) && Buffer.isBuffer(options.quote) && Buffer.compare(options.escape, options.quote) === 0,
 		expectedRecordLength: Array.isArray(options.columns) ? options.columns.length : void 0,
-		field: new ResizeableBuffer_default(20),
+		field: new ResizeableBuffer(20),
 		firstLineToHeaders: options.cast_first_line_to_header,
 		needMoreDataSize: Math.max(options.comment !== null ? options.comment.length : 0, ...options.delimiter.map((delimiter) => delimiter.length), options.quote !== null ? options.quote.length : 0),
 		previousBuf: void 0,
 		quoting: false,
 		stop: false,
-		rawBuffer: new ResizeableBuffer_default(100),
+		rawBuffer: new ResizeableBuffer(100),
 		record: [],
 		recordHasError: false,
 		record_length: 0,
