@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 20602, Issues found: 45407 in 7742 files.
+ CSpell: Files checked: 20603, Issues found: 45413 in 7742 files.
  exit code: 1
 ARCHITECTURE.md:158:48    - Unknown word (googlemock) -- implementation using `googlemock`
 ARCHITECTURE.md:29:61     - Unknown word (retryable)  -- RPCs that fail with a retryable error,
@@ -506,7 +506,7 @@ google/cloud/bigtable/internal/data_connection_impl.cc:583:24    - Unknown word 
 google/cloud/bigtable/internal/legacy_async_row_reader_test.cc:144:22    - Unknown word (corresponse) -- * Future at idx i corresponse to i-th expected row
 google/cloud/bigtable/internal/legacy_async_row_reader_test.cc:552:66    - Unknown word (noooo)       -- PERMISSION_DENIED, "noooo");
 google/cloud/bigtable/internal/legacy_row_reader_test.cc:89:14     - Unknown word (preconfigured) -- // Returns a preconfigured set of parsers, so expectatio
-google/cloud/bigtable/internal/metrics_test.cc:934:53    - Unknown word (gfet)       -- emplace("server-timing", "gfet4t7; dur=10.5");
+google/cloud/bigtable/internal/metrics_test.cc:1242:53   - Unknown word (gfet)       -- emplace("server-timing", "gfet4t7; dur=10.5");
 google/cloud/bigtable/internal/readrowsparser.h:15:57     - Unknown word (READROWSPARSER) -- CLOUD_BIGTABLE_INTERNAL_READROWSPARSER_H
 google/cloud/bigtable/internal/readrowsparser_acceptance_tests.inc:409:19    - Unknown word (alue)       -- value: "alue-VAL"
 google/cloud/bigtable/internal/readrowsparser_acceptance_tests.inc:571:24    - Unknown word (Multiqualifier) -- TEST_F(AcceptanceTest, MultiqualifierSplits) {
@@ -737,20 +737,20 @@ google/cloud/spanner/client_test.cc:390:68    - Unknown word (epdp)       -- teP
 google/cloud/spanner/client_test.cc:630:12    - Unknown word (STREQ)      -- EXPECT_STREQ(e, "Read() error");
 google/cloud/spanner/database_admin_client_test.cc:32:11     - Unknown word (gsad)       -- namespace gsad = ::google::spanner
 google/cloud/spanner/instance_admin_client_test.cc:29:11     - Unknown word (gsai)       -- namespace gsai = ::google::spanner
-google/cloud/spanner/integration_tests/client_integration_test.cc:1456:8    - Unknown word (reconflict) -- auto reconflict_commit = client_->Commit
-google/cloud/spanner/integration_tests/client_integration_test.cc:1557:50   - Unknown word (fkshoppingcartscustomerid) -- AllOf(HasSubstr("fkshoppingcartscustomerid"),
-google/cloud/spanner/integration_tests/client_integration_test.cc:1558:50   - Unknown word (shoppingcarts)             -- HasSubstr("shoppingcarts"))));
-google/cloud/spanner/integration_tests/client_integration_test.cc:406:23    - Unknown word (Mahalia)    -- {1911, "Mahalia", "Jackson"},
-google/cloud/spanner/integration_tests/client_integration_test.cc:436:23    - Unknown word (Aretha)     -- {1942, "Aretha", "Franklin"},
-google/cloud/spanner/integration_tests/client_integration_test.cc:454:33    - Unknown word (Vandross)   -- {1951, "Luther", "Vandross"},
-google/cloud/spanner/integration_tests/client_integration_test.cc:457:23    - Unknown word (Chaka)      -- {1953, "Chaka", "Khan"},
-google/cloud/spanner/integration_tests/client_integration_test.cc:466:23    - Unknown word (Thom)       -- {1968, "Thom", "Yorke"},
-google/cloud/spanner/integration_tests/client_integration_test.cc:466:31    - Unknown word (Yorke)      -- {1968, "Thom", "Yorke"},
-google/cloud/spanner/integration_tests/client_integration_test.cc:467:23    - Unknown word (Mariah)     -- {1969, "Mariah", "Carey"},
-google/cloud/spanner/integration_tests/client_integration_test.cc:476:14    - Unknown word (upserts)    -- // Use upserts as mutation groups are
+google/cloud/spanner/integration_tests/client_integration_test.cc:1463:8    - Unknown word (reconflict) -- auto reconflict_commit = client_->Commit
+google/cloud/spanner/integration_tests/client_integration_test.cc:1564:50   - Unknown word (fkshoppingcartscustomerid) -- AllOf(HasSubstr("fkshoppingcartscustomerid"),
+google/cloud/spanner/integration_tests/client_integration_test.cc:1565:50   - Unknown word (shoppingcarts)             -- HasSubstr("shoppingcarts"))));
+google/cloud/spanner/integration_tests/client_integration_test.cc:413:23    - Unknown word (Mahalia)    -- {1911, "Mahalia", "Jackson"},
+google/cloud/spanner/integration_tests/client_integration_test.cc:443:23    - Unknown word (Aretha)     -- {1942, "Aretha", "Franklin"},
+google/cloud/spanner/integration_tests/client_integration_test.cc:461:33    - Unknown word (Vandross)   -- {1951, "Luther", "Vandross"},
+google/cloud/spanner/integration_tests/client_integration_test.cc:464:23    - Unknown word (Chaka)      -- {1953, "Chaka", "Khan"},
+google/cloud/spanner/integration_tests/client_integration_test.cc:473:23    - Unknown word (Thom)       -- {1968, "Thom", "Yorke"},
+google/cloud/spanner/integration_tests/client_integration_test.cc:473:31    - Unknown word (Yorke)      -- {1968, "Thom", "Yorke"},
+google/cloud/spanner/integration_tests/client_integration_test.cc:474:23    - Unknown word (Mariah)     -- {1969, "Mariah", "Carey"},
+google/cloud/spanner/integration_tests/client_integration_test.cc:483:14    - Unknown word (upserts)    -- // Use upserts as mutation groups are
 google/cloud/spanner/integration_tests/data_types_integration_test.cc:85:30     - Unknown word (Tmpl)       -- DataTypeIntegrationTestTmpl : public T {
-google/cloud/spanner/internal/connection_impl_test.cc:3713:37   - Unknown word (BADDECAF)   -- { partition_token: "BADDECAF" }
-google/cloud/spanner/internal/connection_impl_test.cc:3715:25   - Unknown word (CAFEDEAD)   -- transaction: { id: "CAFEDEAD" }
+google/cloud/spanner/internal/connection_impl_test.cc:3708:37   - Unknown word (BADDECAF)   -- { partition_token: "BADDECAF" }
+google/cloud/spanner/internal/connection_impl_test.cc:3710:25   - Unknown word (CAFEDEAD)   -- transaction: { id: "CAFEDEAD" }
 google/cloud/spanner/internal/connection_impl_test.cc:65:34     - Unknown word (Wmissing)   -- diagnostic ignored "-Wmissing-field-initializers"
 google/cloud/spanner/internal/logging_result_set_reader.cc:34:43     - Unknown word (unresumable) -- __func__ << "() << (unresumable)";
 google/cloud/spanner/internal/partial_result_set_resume_test.cc:528:39    - Unknown word (Resumability) -- set<spanner::StreamingResumabilityBufferSizeOption>(0)
@@ -807,7 +807,7 @@ google/cloud/storage/doc/storage-main.dox:48:87     - Unknown word (Quickstarts)
 google/cloud/storage/doc/storage-mocking.dox:15:57     - Unknown word (readobject) -- samples.cc mock successful readobject
 google/cloud/storage/doc/storage-mocking.dox:29:57     - Unknown word (writeobject) -- samples.cc mock successful writeobject
 google/cloud/storage/examples/CMakeLists.txt:36:20     - Unknown word (autoclass)  -- storage_bucket_autoclass_samples.cc
-google/cloud/storage/examples/storage_async_samples.cc:178:8     - Unknown word (coro)       -- auto coro =
+google/cloud/storage/examples/storage_async_samples.cc:181:8     - Unknown word (coro)       -- auto coro =
 google/cloud/storage/examples/storage_object_file_transfer_samples.cc:143:23    - Unknown word (amet)       -- Lorem ipsum dolor sit amet, consectetur adipiscing
 google/cloud/storage/examples/storage_object_file_transfer_samples.cc:143:29    - Unknown word (consectetur) -- ipsum dolor sit amet, consectetur adipiscing elit, sed
 google/cloud/storage/examples/storage_object_file_transfer_samples.cc:143:41    - Unknown word (adipiscing)  -- sit amet, consectetur adipiscing elit, sed do eiusmod
