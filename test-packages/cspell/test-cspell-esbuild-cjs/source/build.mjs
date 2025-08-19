@@ -14,6 +14,10 @@ async function buildAll() {
         bundle: true,
         packages: 'bundle',
         platform: 'node',
+        inject: ['src/import-meta-url.cjs'],
+        define: {
+            'import.meta.url': 'import_meta_url',
+        },
         outfile: '../bin/dist/index.cjs',
     });
 }
