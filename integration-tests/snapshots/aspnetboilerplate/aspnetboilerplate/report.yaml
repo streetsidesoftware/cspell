@@ -5,7 +5,7 @@ Args: '["**/*.{md,cs,cshtml}","--exclude=wwwroot","--exclude=**/*SampleApp.Tests
 Summary:
   files: 2286
   filesWithIssues: 663
-  issues: 2366
+  issues: 2369
   errors: 0
 Errors: []
 
@@ -218,6 +218,10 @@ issues:
   - "src/Abp.NHibernate/NHibernate/EntityMappings/NhMappingExtensions.cs:8:55        standart (standard)     U       make mapping easier for standart columns."
   - "src/Abp.Quartz/Quartz/IQuartzScheduleJobManager.cs:31:13        Unschedules     U       /// Unschedules a job."
   - "src/Abp.RedisCache.ProtoBuf/Runtime/Caching/Redis/ProtoBufRedisCacheSerializer.cs:17:26         objbyte     U       /// <param name=\"objbyte\">String representation"
+  - "src/Abp.RedisCache/Runtime/Caching/Redis/RealTime/RedisOnlineClientStore.cs:35:25       SADD    U       redis.call('SADD', KEYS[1], ARGV[1])"
+  - "src/Abp.RedisCache/Runtime/Caching/Redis/RealTime/RedisOnlineClientStore.cs:36:25       HSET    U       redis.call('HSET', KEYS[2], ARGV[1],"
+  - "src/Abp.RedisCache/Runtime/Caching/Redis/RealTime/RedisOnlineClientStore.cs:147:25      HDEL    U       redis.call('HDEL', KEYS[1], ARGV[1])"
+  - "src/Abp.RedisCache/Runtime/Caching/Redis/RealTime/RedisOnlineClientStore.cs:150:29      SREM    U       redis.call('SREM', KEYS[2], ARGV[1])"
   - "src/Abp.RedisCache/Runtime/Caching/Redis/RedisDatabaseExtensions.cs:42:64       getn    U       ScriptEvaluate(\"return table.getn(redis.call('keys', ARGV"
   - "src/Abp.Web.Common/Web/Api/ProxyScripting/Generators/ProxyScriptingJsFuncHelper.cs:13:58        abcdefghijklmnopqrstuxwvyz      U       ValidJsVariableNameChars = \"abcdefghijklmnopqrstuxwvyzABCDEFGHIJKLMNOPQRSTUXWVYZ"
   - "src/Abp.Web.Common/Web/Api/ProxyScripting/Generators/ProxyScriptingJsFuncHelper.cs:13:84        ABCDEFGHIJKLMNOPQRSTUXWVYZ      U       abcdefghijklmnopqrstuxwvyzABCDEFGHIJKLMNOPQRSTUXWVYZ0123456789_\";"

@@ -4,8 +4,8 @@ Url: https://github.com/RustPython/RustPython.git
 Args: '["**"]'
 Summary:
   files: 683
-  filesWithIssues: 88
-  issues: 723
+  filesWithIssues: 89
+  issues: 724
   errors: 0
 Errors: []
 
@@ -740,9 +740,9 @@ issues:
   - "extra_tests/snippets/syntax_fstring.py:22:24        barfoo          U       assert f\"{foo}foo\" == 'barfoo'"
   - "extra_tests/snippets/syntax_fstring.py:23:27        foobarfoo       U       assert f\"foo{foo}foo\" == 'foobarfoo'"
   - "extra_tests/snippets/syntax_fstring.py:29:36        barbarfoo       U       f\"{foo}\" 'foo' == 'barbarfoo'"
-  - "extra_tests/snippets/syntax_fstring.py:144:1        tenπ            U       tenπ = 31.4"
-  - "extra_tests/snippets/syntax_fstring.py:145:21       tenπ            U       self.assertEqual(f'{tenπ=:.2f}', 'tenπ=31.40"
-  - "extra_tests/snippets/syntax_fstring.py:145:35       tenπ            U       assertEqual(f'{tenπ=:.2f}', 'tenπ=31.40')"
+  - "extra_tests/snippets/syntax_fstring.py:138:1        tenπ            U       tenπ = 31.4"
+  - "extra_tests/snippets/syntax_fstring.py:139:21       tenπ            U       self.assertEqual(f'{tenπ=:.2f}', 'tenπ=31.40"
+  - "extra_tests/snippets/syntax_fstring.py:139:35       tenπ            U       assertEqual(f'{tenπ=:.2f}', 'tenπ=31.40')"
   - "extra_tests/snippets/syntax_function_args.py:76:5           fubar       U       def fubar(x, y, obj=None):"
   - "extra_tests/snippets/syntax_function_args.py:82:1           fubar       U       fubar(obj=6, *rest)"
   - "extra_tests/snippets/syntax_function.py:1:1\tNo issues found"
@@ -757,7 +757,7 @@ issues:
   - "extra_tests/snippets/syntax_indent.py:1:1\tNo issues found"
   - "extra_tests/snippets/syntax_invalid.py:1:1\tNo issues found"
   - "extra_tests/snippets/syntax_literal.py:1:1\tNo issues found"
-  - "extra_tests/snippets/syntax_match.py:1:1\tNo issues found"
+  - "extra_tests/snippets/syntax_match.py:80:59          wheelinfo       U       fallback (reproduces wheelinfo.py issue)"
   - "extra_tests/snippets/syntax_metaclass.py:1:1\tNo issues found"
   - "extra_tests/snippets/syntax_nested_control_flow.py:1:1\tNo issues found"
   - "extra_tests/snippets/syntax_non_utf8.py:1:1\tNo issues found"

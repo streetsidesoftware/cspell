@@ -3,7 +3,7 @@ Repository: wireapp/wire-webapp
 Url: https://github.com/wireapp/wire-webapp.git
 Args: '["src/script/**/*.{js,ts,tsx,md}"]'
 Summary:
-  files: 1828
+  files: 1831
   filesWithIssues: 850
   issues: 3153
   errors: 0
@@ -267,7 +267,7 @@ issues:
   - "src/script/components/calling/CallingCell/CallingCell.tsx:24:71         wireapp     U       as CALL_STATE} from '@wireapp/avs';"
   - "src/script/components/calling/CallingCell/CallingCell.tsx:25:26         wireapp     U       import {TabIndex} from '@wireapp/react-ui-kit';"
   - "src/script/components/calling/CallingCell/CallingCell.tsx:26:30         wireapp     U       WebAppEvents} from '@wireapp/webapp-events';"
-  - "src/script/components/calling/CallingCell/CallingCell.tsx:136:48        ESTAB       U       == CALL_STATE.MEDIA_ESTAB;"
+  - "src/script/components/calling/CallingCell/CallingCell.tsx:139:48        ESTAB       U       == CALL_STATE.MEDIA_ESTAB;"
   - "src/script/components/calling/CallingCell/CallingControls/CallingControls.tsx:21:26         tsyringe    U       import {container} from 'tsyringe';"
   - "src/script/components/calling/CallingCell/CallingHeader/CallingHeader.tsx:20:57         wireapp     U       IconButtonVariant} from '@wireapp/react-ui-kit';"
   - "src/script/components/calling/CallingCell/CallIngParticipantList/CallingParticipantList.styles.ts:22:23         wireapp     U       import {media} from '@wireapp/react-ui-kit';"
@@ -466,8 +466,8 @@ issues:
   - "src/script/components/Conversation/utils/checkFileSharingPermission.ts:20:26        tsyringe    U       import {container} from 'tsyringe';"
   - "src/script/components/ConversationListCell/ConversationListCell.tsx:22:37       wireapp         U       CONVERSATION_ACCESS} from '@wireapp/api-client/lib/conversation"
   - "src/script/components/ConversationListCell/ConversationListCell.tsx:25:26       wireapp         U       import {TabIndex} from '@wireapp/react-ui-kit';"
-  - "src/script/components/ConversationListCell/ConversationListCell.tsx:169:61      UNFOCUSABLE     U       FOCUSABLE : TabIndex.UNFOCUSABLE}"
-  - "src/script/components/ConversationListCell/ConversationListCell.tsx:226:83      UNFOCUSABLE     U       FOCUSABLE : TabIndex.UNFOCUSABLE}"
+  - "src/script/components/ConversationListCell/ConversationListCell.tsx:174:61      UNFOCUSABLE     U       FOCUSABLE : TabIndex.UNFOCUSABLE}"
+  - "src/script/components/ConversationListCell/ConversationListCell.tsx:231:83      UNFOCUSABLE     U       FOCUSABLE : TabIndex.UNFOCUSABLE}"
   - "src/script/components/CopyToClipboardButton/CopyToClipboardButton.tsx:22:39         wireapp     U       ButtonVariant} from '@wireapp/react-ui-kit';"
   - "src/script/components/DraggableClickWrapper/DraggableClickWrapper.tsx:22:25         wireapp     U       import {Runtime} from '@wireapp/commons';"
   - "src/script/components/DropFileArea/DropFileArea.test.tsx:28:22          chucknorris     U       const pngFileName = 'chucknorris.png';"
@@ -1011,10 +1011,10 @@ issues:
   - "src/script/components/TitleBar/TitleBar.test.tsx:27:30          wireapp     U       WebAppEvents} from '@wireapp/webapp-events';"
   - "src/script/components/TitleBar/TitleBar.test.tsx:43:13          wireapp     U       jest.mock('@wireapp/react-ui-kit', () ="
   - "src/script/components/TitleBar/TitleBar.tsx:24:26       tsyringe    U       import {container} from 'tsyringe';"
-  - "src/script/components/TitleBar/TitleBar.tsx:26:89       wireapp     U       eMatchMedia, CallIcon} from '@wireapp/react-ui-kit';"
+  - "src/script/components/TitleBar/TitleBar.tsx:26:89       wireapp     U       useMatchMedia} from '@wireapp/react-ui-kit';"
   - "src/script/components/TitleBar/TitleBar.tsx:27:30       wireapp     U       WebAppEvents} from '@wireapp/webapp-events';"
-  - "src/script/components/TitleBar/TitleBar.tsx:44:17       MILLIS      U       import {TIME_IN_MILLIS} from 'Util/TimeUtil"
-  - "src/script/components/TitleBar/TitleBar.tsx:180:84      MILLIS      U       ?.remove(), TIME_IN_MILLIS.SECOND);"
+  - "src/script/components/TitleBar/TitleBar.tsx:45:17       MILLIS      U       import {TIME_IN_MILLIS} from 'Util/TimeUtil"
+  - "src/script/components/TitleBar/TitleBar.tsx:183:84      MILLIS      U       ?.remove(), TIME_IN_MILLIS.SECOND);"
   - "src/script/components/toggle/ReceiptModeToggle.test.tsx:21:30       wireapp     U       RECEIPT_MODE} from '@wireapp/api-client/lib/conversation"
   - "src/script/components/toggle/ReceiptModeToggle.tsx:22:30        wireapp     U       RECEIPT_MODE} from '@wireapp/api-client/lib/conversation"
   - "src/script/components/UserDevices/components/DeviceCard/DeviceCard.test.tsx:21:38       wireapp     U       ClientClassification} from '@wireapp/api-client/lib/client"
