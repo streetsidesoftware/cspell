@@ -3,6 +3,176 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v9.2.1 (2025-08-31)
+
+### Dictionary Updates
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/7795">#7795</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#7795](https://github.com/streetsidesoftware/cspell/pull/7795))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ .../snapshots/graphql/graphql-spec/report.yaml     | 108 ++++++++++-----------
+ .../snapshots/wireapp/wire-desktop/report.yaml     |   2 +-
+ packages/cspell-bundled-dicts/package.json         |   8 +-
+ packages/cspell/src/__snapshots__/app.test.ts.snap |  15 +--
+ pnpm-lock.yaml                                     |  44 +++++----
+ 5 files changed, 95 insertions(+), 82 deletions(-)
+```
+
+---
+
+</details>
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/7791">#7791</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#7791](https://github.com/streetsidesoftware/cspell/pull/7791))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ packages/cspell-bundled-dicts/package.json         |  8 ++--
+ packages/cspell/src/__snapshots__/app.test.ts.snap | 22 +++++-----
+ pnpm-lock.yaml                                     | 47 ++++++++++++----------
+ 3 files changed, 41 insertions(+), 36 deletions(-)
+```
+
+---
+
+</details>
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/7768">#7768</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#7768](https://github.com/streetsidesoftware/cspell/pull/7768))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ packages/cspell-bundled-dicts/package.json |  2 +-
+ pnpm-lock.yaml                             | 11 ++++++++---
+ 2 files changed, 9 insertions(+), 4 deletions(-)
+```
+
+---
+
+</details>
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/7764">#7764</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#7764](https://github.com/streetsidesoftware/cspell/pull/7764))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ .../snapshots/django/django/report.yaml            |  4 +-
+ .../snapshots/django/django/snapshot.txt           |  3 +-
+ .../snapshots/php/php-src/report.yaml              |  3 +-
+ .../snapshots/php/php-src/snapshot.txt             |  3 +-
+ packages/cspell-bundled-dicts/package.json         | 10 ++--
+ pnpm-lock.yaml                                     | 57 ++++++++++++----------
+ 6 files changed, 40 insertions(+), 40 deletions(-)
+```
+
+---
+
+</details>
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/7745">#7745</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#7745](https://github.com/streetsidesoftware/cspell/pull/7745))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ .../snapshots/TheAlgorithms/Python/report.yaml     |   3 +-
+ .../snapshots/TheAlgorithms/Python/snapshot.txt    |   3 +-
+ packages/cspell-bundled-dicts/package.json         |   2 +-
+ pnpm-lock.yaml                                     | 162 ++++++++++-----------
+ 4 files changed, 84 insertions(+), 86 deletions(-)
+```
+
+---
+
+</details>
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/7728">#7728</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#7728](https://github.com/streetsidesoftware/cspell/pull/7728))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ integration-tests/snapshots/mdx-js/mdx/report.yaml |  3 +--
+ .../snapshots/mdx-js/mdx/snapshot.txt              |  3 +--
+ .../snapshots/vitest-dev/vitest/report.yaml        |  6 +-----
+ .../snapshots/vitest-dev/vitest/snapshot.txt       |  4 +---
+ packages/cspell-bundled-dicts/package.json         |  4 ++--
+ pnpm-lock.yaml                                     | 24 +++++++++++-----------
+ 6 files changed, 18 insertions(+), 26 deletions(-)
+```
+
+---
+
+</details>
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/7672">#7672</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#7672](https://github.com/streetsidesoftware/cspell/pull/7672))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ packages/cspell-bundled-dicts/package.json |  6 ++---
+ pnpm-lock.yaml                             | 36 +++++++++++++++---------------
+ 2 files changed, 21 insertions(+), 21 deletions(-)
+```
+
+---
+
+</details>
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/7662">#7662</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#7662](https://github.com/streetsidesoftware/cspell/pull/7662))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ packages/cspell-bundled-dicts/package.json |  6 ++---
+ pnpm-lock.yaml                             | 36 +++++++++++++++---------------
+ 2 files changed, 21 insertions(+), 21 deletions(-)
+```
+
+---
+
+</details>
+
 ## v9.2.0 (2025-07-19)
 
 <details>
