@@ -1625,6 +1625,7 @@ hello - computing-acronyms*  node_modules/@cspell/…/dict/computing-acronyms.tx
 hello * cpp                  node_modules/@cspell/dict-cpp/dict/cpp.txt.gz
 hello * cryptocurrencies*    node_modules/@cspell/…/dict/cryptocurrencies.txt
 hello * en_us                node_modules/@cspell/dict-en_us/en_US.trie.gz
+hello - en-common-misspelli* node_modules/@cspell/…/dict/dict-en.json
 hello * en-gb*               node_modules/@cspell/dict-en-gb-mit/en_GB.trie.gz
 hello - en-gb-common-misspe* node_modules/@cspell/…/dict/dict-en-gb.json
 hello - filetypes*           node_modules/…/dict-filetypes/filetypes.txt.gz
@@ -3587,6 +3588,7 @@ coding-compound-terms*
 companies*
 computing-acronyms*
 cryptocurrencies*
+en-common-misspellings*
 en-gb*
 en-gb-common-misspellings*
 filetypes*
@@ -3602,18 +3604,18 @@ workspace*
 exports[`Validate cli > app dictionary [ 'dictionaries', '--enabled', '--no-show-location', …(3) ] 1`] = `[]`;
 
 exports[`Validate cli > app dictionary [ 'dictionaries', '--enabled', '--no-show-location', …(3) ] 2`] = `
-"Dictionary                 Locales  File Types
+"Dictionary                 Locales      File Types
 [flagWords]*
 aws*
 coding-compound-terms*
 companies*
 computing-acronyms*
 cryptocurrencies*
-en_us*                     en,en-US *
-en-common-misspellings*    en       *
+en_us*                     en,en-US     *
+en-common-misspellings*    en,en-gb,e…  *
 filetypes*
-java*                      *        java,kotlin
-kotlin*                    *        kotlin
+java*                      *            java,kotlin
+kotlin*                    *            kotlin
 public-licenses*
 software-term-suggestions*
 software-tools*
@@ -3716,7 +3718,7 @@ docker                *            dockerfile             …/docker-words.txt.g
 dotnet                *            cs,csharp,fsharp       …/dict/dotnet.txt
 elixir                *            elixir                 …/dict/elixir.txt
 en_us*                en,en-US     *                      …/en_US.trie.gz
-en-common-misspell…*  en           *                      [flagWords], [suggest…
+en-common-misspell…*  en,en-gb,e…  *                      [flagWords], [suggest…
 en-gb                 en-GB        *                      …/en_GB.trie.gz
 en-gb-common-missp…   en-gb        *                      [suggestWords]
 en-us-common-missp…   en-us        *                      [suggestWords]
@@ -4876,6 +4878,7 @@ hello - computing-acronyms*  node_modules/@cspell/…/dict/computing-acronyms.tx
 hello * cpp                  node_modules/@cspell/dict-cpp/dict/cpp.txt.gz
 hello * cryptocurrencies*    node_modules/@cspell/…/dict/cryptocurrencies.txt
 hello * en_us                node_modules/@cspell/dict-en_us/en_US.trie.gz
+hello - en-common-misspelli* node_modules/@cspell/…/dict/dict-en.json
 hello * en-gb*               node_modules/@cspell/dict-en-gb-mit/en_GB.trie.gz
 hello - en-gb-common-misspe* node_modules/@cspell/…/dict/dict-en-gb.json
 hello - filetypes*           node_modules/…/dict-filetypes/filetypes.txt.gz
