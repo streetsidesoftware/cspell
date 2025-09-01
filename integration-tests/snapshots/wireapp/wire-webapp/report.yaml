@@ -3,7 +3,7 @@ Repository: wireapp/wire-webapp
 Url: https://github.com/wireapp/wire-webapp.git
 Args: '["src/script/**/*.{js,ts,tsx,md}"]'
 Summary:
-  files: 1831
+  files: 1832
   filesWithIssues: 850
   issues: 3153
   errors: 0
@@ -870,8 +870,7 @@ issues:
   - "src/script/components/MessagesList/utils/virtualizedMessagesGroup.ts:95:73          MILLIS      U       rstMessageTimestamp / TIME_IN_MILLIS.SECOND);"
   - "src/script/components/MessagesList/VirtualizedJumpToLastMessageButton.tsx:22:41         wireapp     U       IconButton} from '@wireapp/react-ui-kit';"
   - "src/script/components/MessagesList/VirtualizedMessageListWrapper.tsx:24:26          wireapp         U       import {TabIndex} from '@wireapp/react-ui-kit';"
-  - "src/script/components/MessagesList/VirtualizedMessageListWrapper.tsx:75:26          UNFOCUSABLE     U       tabIndex={TabIndex.UNFOCUSABLE}"
-  - "src/script/components/MessagesList/VirtualizedMessagesList/VirtualizedMessagesList.tsx:122:5        overscan    U       overscan: 2,"
+  - "src/script/components/MessagesList/VirtualizedMessageListWrapper.tsx:66:26          UNFOCUSABLE     U       tabIndex={TabIndex.UNFOCUSABLE}"
   - "src/script/components/Modals/CreateConversation/ConversationType/ConfirmDiscardModal.tsx:20:54          wireapp     U       FlexBox, Text} from '@wireapp/react-ui-kit';"
   - "src/script/components/Modals/CreateConversation/ConversationType/ConversationFeature.tsx:20:28          wireapp     U       {ShieldIcon} from '@wireapp/react-ui-kit';"
   - "src/script/components/Modals/CreateConversation/ConversationType/ConversationFeature.tsx:66:24          subline     U       className=\"subline\""
@@ -901,13 +900,14 @@ issues:
   - "src/script/components/Modals/CreateConversation/CreateConversationSteps/ConversationDetails/UpgradePlanModal.tsx:20:30          wireapp     U       Button, Text} from '@wireapp/react-ui-kit';"
   - "src/script/components/Modals/CreateConversation/CreateConversationSteps/CreateConversationSteps.tsx:20:25       wireapp     U       import {FlexBox} from '@wireapp/react-ui-kit';"
   - "src/script/components/Modals/CreateConversation/CreateConversationSteps/ParticipantsSelection.tsx:22:26         tsyringe    U       import {container} from 'tsyringe';"
+  - "src/script/components/Modals/CreateConversation/CreateConversationSteps/Preference.tsx:20:26        tsyringe    U       import {container} from 'tsyringe';"
   - "src/script/components/Modals/CreateConversation/CreateConversationSubmit.tsx:20:39          wireapp     U       ButtonVariant} from '@wireapp/react-ui-kit';"
   - "src/script/components/Modals/CreateConversation/hooks/useCreateConversation.ts:22:79        wireapp     U       CONVERSATION_TYPE} from '@wireapp/api-client/lib/conversation"
   - "src/script/components/Modals/CreateConversation/hooks/useCreateConversation.ts:23:30        wireapp     U       RECEIPT_MODE} from '@wireapp/api-client/lib/conversation"
   - "src/script/components/Modals/CreateConversation/hooks/useCreateConversation.ts:24:46        wireapp     U       deratingBackendsError} from '@wireapp/core/lib/errors';"
   - "src/script/components/Modals/CreateConversation/hooks/useCreateConversation.ts:26:26        tsyringe    U       import {container} from 'tsyringe';"
   - "src/script/components/Modals/CreateConversation/hooks/useCreateConversation.ts:28:30        wireapp     U       WebAppEvents} from '@wireapp/webapp-events';"
-  - "src/script/components/Modals/CreateConversation/hooks/useCreateConversation.ts:153:17       conv        U       group_conv_type:"
+  - "src/script/components/Modals/CreateConversation/hooks/useCreateConversation.ts:155:17       conv        U       group_conv_type:"
   - "src/script/components/Modals/CreateConversation/hooks/useCreateConversationModal.ts:20:32       wireapp     U       ADD_PERMISSION} from '@wireapp/api-client/lib/conversation"
   - "src/script/components/Modals/CreateConversation/utils.ts:20:32          wireapp     U       ADD_PERMISSION} from '@wireapp/api-client/lib/conversation"
   - "src/script/components/Modals/CreateConversation/utils.ts:21:26          tsyringe    U       import {container} from 'tsyringe';"
