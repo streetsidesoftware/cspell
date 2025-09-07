@@ -1,6 +1,7 @@
 // @ts-check
 import cspellESLintPluginRecommended from '@cspell/eslint-plugin/recommended';
 import eslint from '@eslint/js';
+import { defineConfig } from 'eslint/config';
 import nodePlugin from 'eslint-plugin-n';
 import simpleImportSort from 'eslint-plugin-simple-import-sort';
 import unicorn from 'eslint-plugin-unicorn';
@@ -13,8 +14,9 @@ import tsEslint from 'typescript-eslint';
 
 const checkSpelling = !!process.env.CSPELL_CHECK_SPELLING;
 
-export default tsEslint.config(
+export default defineConfig(
     eslint.configs.recommended,
+    // @ts-expect-error incorrect types uses outdated eslint types
     nodePlugin.configs['flat/recommended'],
     ...tsEslint.configs.recommended,
     // unicorn.configs['flat/recommended'],
