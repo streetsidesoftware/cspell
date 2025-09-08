@@ -79,7 +79,11 @@ describe('Validate Dutch Suggestions', () => {
     );
 
     function sr(word: string, cost: number, compoundWord?: string): SuggestionResult {
-        return clean({ word, cost, compoundWord: compoundWord?.replace(/[|+]/g, DEFAULT_COMPOUNDED_WORD_SEPARATOR) });
+        return clean({
+            word,
+            cost,
+            compoundWord: compoundWord?.replaceAll(/[|+]/g, DEFAULT_COMPOUNDED_WORD_SEPARATOR),
+        });
     }
 
     // cspell:ignore buurt kasteloos kosten maan

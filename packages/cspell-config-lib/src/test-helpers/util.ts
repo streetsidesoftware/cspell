@@ -9,7 +9,12 @@ export function json(obj: unknown, indent: string | number = 2): string {
 
 export function tempPath(file: string): string {
     const testState = expect.getState();
-    return path.join(__dirname, '../../.temp', testState.currentTestName?.replace(/[^a-z./-]/gi, '_') || 'test', file);
+    return path.join(
+        __dirname,
+        '../../.temp',
+        testState.currentTestName?.replaceAll(/[^a-z./-]/gi, '_') || 'test',
+        file,
+    );
 }
 
 export async function createPathForFile(file: string): Promise<void> {
