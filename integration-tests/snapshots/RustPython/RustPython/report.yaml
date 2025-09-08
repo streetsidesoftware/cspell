@@ -3,9 +3,9 @@ Repository: RustPython/RustPython
 Url: https://github.com/RustPython/RustPython.git
 Args: '["**"]'
 Summary:
-  files: 684
-  filesWithIssues: 89
-  issues: 724
+  files: 687
+  filesWithIssues: 90
+  issues: 725
   errors: 0
 Errors: []
 
@@ -912,6 +912,8 @@ issues:
   - "scripts/fix_test.py:1:1\tNo issues found"
   - "scripts/generate_checklist.py:1:1\tNo issues found"
   - "scripts/install-openssl.ps1:1:12        Actix       U       # From the Actix Web windows workflow"
+  - "scripts/lib_updater.py:252:31       distrupt    U       Going in reverse to not distrupt the line offset"
+  - "scripts/libc_posix.py:1:1\tNo issues found"
   - "scripts/notes.txt:9:11          pydecimal       U       decimal `_pydecimal.py`"
   - "scripts/notes.txt:23:14         pickletester    U       pickle `test/pickletester.py` supports `test_pickle"
   - "scripts/notes.txt:24:19         picklebuffer    U       pickle `test/test_picklebuffer.py`"
@@ -981,7 +983,7 @@ issues:
   - "stdlib/src/uuid.rs:1:1\tNo issues found"
   - "stdlib/src/zlib.rs:1:1\tNo issues found"
   - "vm/build.rs:1:1\tNo issues found"
-  - "vm/Cargo.toml:95:1          rustix      U       rustix = { workspace = true"
+  - "vm/Cargo.toml:97:1          rustix      U       rustix = { workspace = true"
   - "vm/Lib/python_builtins/__reducelib.py:1:1\tNo issues found"
   - "vm/Lib/python_builtins/_py_exceptiongroup.py:1:1\tNo issues found"
   - "vm/Lib/README.md:1:1\tNo issues found"
@@ -1140,6 +1142,7 @@ issues:
   - "vm/src/stdlib/string.rs:1:1\tNo issues found"
   - "vm/src/stdlib/symtable.rs:1:1\tNo issues found"
   - "vm/src/stdlib/sys.rs:1:1\tNo issues found"
+  - "vm/src/stdlib/sysconfig.rs:1:1\tNo issues found"
   - "vm/src/stdlib/sysconfigdata.rs:1:1\tNo issues found"
   - "vm/src/stdlib/thread.rs:1:1\tNo issues found"
   - "vm/src/stdlib/time.rs:1:1\tNo issues found"

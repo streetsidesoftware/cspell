@@ -3,7 +3,7 @@ Repository: wireapp/wire-webapp
 Url: "https://github.com/wireapp/wire-webapp.git"
 Args: ["src/script/**/*.{js,ts,tsx,md}"]
 Lines:
- CSpell: Files checked: 1832, Issues found: 3153 in 850 files.
+ CSpell: Files checked: 1836, Issues found: 3157 in 851 files.
  exit code: 1
 src/script/Config.ts:20:37     - Unknown word (wireapp)    -- API_VERSION} from '@wireapp/api-client/lib/Config
 src/script/Config.ts:22:25     - Unknown word (wireapp)    -- import {Runtime} from '@wireapp/commons';
@@ -662,6 +662,7 @@ src/script/components/InputBar/useMessageHandling/useMessageReply/useMessageRepl
 src/script/components/InputBar/useMessageHandling/useMessageSend/useMessageSend.ts:24:29     - Unknown word (wireapp)    -- IAttachment} from '@wireapp/protocol-messaging'
 src/script/components/InputBar/usePing/usePing.ts:27:17     - Unknown word (MILLIS)     -- import {TIME_IN_MILLIS} from 'Util/TimeUtil
 src/script/components/InputBar/usePing/usePing.ts:44:65     - Unknown word (MILLIS)     -- sPingDisabled(false), TIME_IN_MILLIS.SECOND * 2);
+src/script/components/LoadingBar/LoadingBar.tsx:24:25     - Unknown word (wireapp)    -- import {Loading} from '@wireapp/react-ui-kit';
 src/script/components/MessagesList/JumpToLastMessageButton.tsx:24:41     - Unknown word (wireapp)    -- IconButton} from '@wireapp/react-ui-kit';
 src/script/components/MessagesList/Message/CallMessage.test.tsx:66:33     - Unknown word (incompleted) -- red hangup icon for incompleted calls', async () =>
 src/script/components/MessagesList/Message/CallTimeoutMessage.test.tsx:23:24     - Unknown word (wireapp)    -- import {REASON} from '@wireapp/avs';
@@ -1182,18 +1183,18 @@ src/script/main/app.ts:358:16    - Unknown word (Pydio)        -- : `${cellPydio
 src/script/main/app.ts:361:7     - Unknown word (pydio)        -- pydio: {
 src/script/main/app.ts:363:43    - Unknown word (PYDIO)        -- Config.getConfig().CELLS_PYDIO_SEGMENT,
 src/script/main/app.ts:364:39    - Unknown word (PYDIO)        -- Config.getConfig().CELLS_PYDIO_URL,
-src/script/main/app.ts:573:15    - Unknown word (initialise)   -- await initialiseSelfAndTeamConversations
-src/script/main/app.ts:576:46    - Unknown word (Finalisation) -- oinConversationsAfterMigrationFinalisation({
-src/script/main/app.ts:580:71    - Unknown word (Finalisation) -- injectJoinedAfterMigrationFinalisationMessage,
-src/script/main/app.ts:589:44    - Unknown word (initialising) -- logger.error(`Failed when initialising mls conversation with
-src/script/main/app.ts:613:28    - Unknown word (initialise)   -- await selfRepository.initialisePeriodicSelfSupportedProtocols
+src/script/main/app.ts:571:15    - Unknown word (initialise)   -- await initialiseSelfAndTeamConversations
+src/script/main/app.ts:574:46    - Unknown word (Finalisation) -- oinConversationsAfterMigrationFinalisation({
+src/script/main/app.ts:578:71    - Unknown word (Finalisation) -- injectJoinedAfterMigrationFinalisationMessage,
+src/script/main/app.ts:587:44    - Unknown word (initialising) -- logger.error(`Failed when initialising mls conversation with
+src/script/main/app.ts:611:28    - Unknown word (initialise)   -- await selfRepository.initialisePeriodicSelfSupportedProtocols
 src/script/main/app.ts:68:55     - Unknown word (Giphy)      -- Repositories/extension/GiphyRepository';
 src/script/main/app.ts:68:9      - Unknown word (Giphy)      -- import {GiphyRepository} from 'Repositories
 src/script/main/app.ts:69:52     - Unknown word (Giphy)      -- Repositories/extension/GiphyService';
 src/script/main/app.ts:69:9      - Unknown word (Giphy)      -- import {GiphyService} from 'Repositories
 src/script/main/app.ts:93:53     - Unknown word (MILLIS)     -- formatCoarseDuration, TIME_IN_MILLIS} from 'Util/TimeUtil
-src/script/main/app.ts:979:26    - Unknown word (softlock)     -- / ToDo: Extract the softlock logic to a separate
-src/script/main/app.ts:980:60    - Unknown word (softlock)     -- until we have a proper softlock implementation
+src/script/main/app.ts:977:26    - Unknown word (softlock)     -- / ToDo: Extract the softlock logic to a separate
+src/script/main/app.ts:978:60    - Unknown word (softlock)     -- until we have a proper softlock implementation
 src/script/main/index.tsx:24:28     - Unknown word (wireapp)    -- {ClientType} from '@wireapp/api-client/lib/client
 src/script/main/index.tsx:27:25     - Unknown word (wireapp)    -- import {Runtime} from '@wireapp/commons';
 src/script/message/MentionEntity.ts:20:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
@@ -1420,7 +1421,7 @@ src/script/page/LeftSidebar/panels/StartUI/StartUI.tsx:24:26     - Unknown word 
 src/script/page/LeftSidebar/panels/StartUI/components/TopPeople.tsx:22:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 src/script/page/LeftSidebar/panels/StartUI/components/topPeople/TopContact.tsx:22:34     - Unknown word (wireapp)    -- ConnectionStatus} from '@wireapp/api-client/lib/connection
 src/script/page/LeftSidebar/panels/StartUI/components/topPeople/TopContact.tsx:24:26     - Unknown word (wireapp)    -- import {TabIndex} from '@wireapp/react-ui-kit';
-src/script/page/MainContent/MainContent.test.tsx:37:13     - Unknown word (formkit)    -- jest.mock('@formkit/auto-animate/react'
+src/script/page/MainContent/MainContent.test.tsx:38:13     - Unknown word (formkit)    -- jest.mock('@formkit/auto-animate/react'
 src/script/page/MainContent/MainContent.tsx:24:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 src/script/page/MainContent/panels/Collection/Collection.test.tsx:21:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 src/script/page/MainContent/panels/Collection/Collection.tsx:108:39    - Unknown word (converation) -- message from a different converation, nothing to do
@@ -2000,40 +2001,40 @@ src/script/repositories/conversation/ConversationMapper.ts:33:29     - Unknown w
 src/script/repositories/conversation/ConversationMapper.ts:37:33     - Unknown word (wireapp)    -- LegalHoldStatus} from '@wireapp/protocol-messaging'
 src/script/repositories/conversation/ConversationMapper.ts:424:13    - Unknown word (conv)       -- group_conv_type,
 src/script/repositories/conversation/ConversationMapper.ts:446:13    - Unknown word (conv)       -- group_conv_type,
-src/script/repositories/conversation/ConversationRepository.test.ts:1072:9    - Unknown word (deos)       -- it('deos not mark mls 1:1 conversation
-src/script/repositories/conversation/ConversationRepository.test.ts:1300:21   - Unknown word (René)       -- group_b.name('René, Benny, Gregor, Lipis
-src/script/repositories/conversation/ConversationRepository.test.ts:1300:34   - Unknown word (Gregor)     -- b.name('René, Benny, Gregor, Lipis');
-src/script/repositories/conversation/ConversationRepository.test.ts:1300:42   - Unknown word (Lipis)      -- René, Benny, Gregor, Lipis');
-src/script/repositories/conversation/ConversationRepository.test.ts:1387:18   - Unknown word (Dexie)      -- * - With Dexie 2.x, specifying a key
-src/script/repositories/conversation/ConversationRepository.test.ts:1388:18   - Unknown word (Dexie)      -- * - With Dexie 3.x, specifying a key
-src/script/repositories/conversation/ConversationRepository.test.ts:1573:18   - Unknown word (initialise) -- it('should initialise mls 1:1 conversation
-src/script/repositories/conversation/ConversationRepository.test.ts:1731:42   - Unknown word (msdownload) -- type: 'application/x-msdownload',
+src/script/repositories/conversation/ConversationRepository.test.ts:1088:9    - Unknown word (deos)       -- it('deos not mark mls 1:1 conversation
+src/script/repositories/conversation/ConversationRepository.test.ts:1316:21   - Unknown word (René)       -- group_b.name('René, Benny, Gregor, Lipis
+src/script/repositories/conversation/ConversationRepository.test.ts:1316:34   - Unknown word (Gregor)     -- b.name('René, Benny, Gregor, Lipis');
+src/script/repositories/conversation/ConversationRepository.test.ts:1316:42   - Unknown word (Lipis)      -- René, Benny, Gregor, Lipis');
+src/script/repositories/conversation/ConversationRepository.test.ts:1403:18   - Unknown word (Dexie)      -- * - With Dexie 2.x, specifying a key
+src/script/repositories/conversation/ConversationRepository.test.ts:1404:18   - Unknown word (Dexie)      -- * - With Dexie 3.x, specifying a key
+src/script/repositories/conversation/ConversationRepository.test.ts:1589:18   - Unknown word (initialise) -- it('should initialise mls 1:1 conversation
+src/script/repositories/conversation/ConversationRepository.test.ts:1747:42   - Unknown word (msdownload) -- type: 'application/x-msdownload',
 src/script/repositories/conversation/ConversationRepository.test.ts:22:38     - Unknown word (wireapp)    -- ClientClassification} from '@wireapp/api-client/lib/client
 src/script/repositories/conversation/ConversationRepository.test.ts:23:34     - Unknown word (wireapp)    -- ConnectionStatus} from '@wireapp/api-client/lib/connection
-src/script/repositories/conversation/ConversationRepository.test.ts:2527:32   - Unknown word (zinfra)     -- domain: 'staging.zinfra.io',
-src/script/repositories/conversation/ConversationRepository.test.ts:2530:14   - Unknown word (conv)       -- 'conv1',
-src/script/repositories/conversation/ConversationRepository.test.ts:2535:32   - Unknown word (zinfra)     -- domain: 'staging.zinfra.io',
-src/script/repositories/conversation/ConversationRepository.test.ts:2538:14   - Unknown word (conv)       -- 'conv2',
-src/script/repositories/conversation/ConversationRepository.test.ts:2560:84   - Unknown word (zinfra)     -- b', domain: 'staging.zinfra.io'};
-src/script/repositories/conversation/ConversationRepository.test.ts:2566:32   - Unknown word (zinfra)     -- domain: 'staging.zinfra.io',
-src/script/repositories/conversation/ConversationRepository.test.ts:2569:14   - Unknown word (conv)       -- 'conv1',
-src/script/repositories/conversation/ConversationRepository.test.ts:2577:32   - Unknown word (zinfra)     -- domain: 'staging.zinfra.io',
-src/script/repositories/conversation/ConversationRepository.test.ts:2580:14   - Unknown word (conv)       -- 'conv2',
-src/script/repositories/conversation/ConversationRepository.test.ts:2612:10   - Unknown word (conv)       -- 'conv2',
-src/script/repositories/conversation/ConversationRepository.test.ts:2997:97   - Unknown word (atively)    -- to mls if we're not atively participating in a call
+src/script/repositories/conversation/ConversationRepository.test.ts:2543:32   - Unknown word (zinfra)     -- domain: 'staging.zinfra.io',
+src/script/repositories/conversation/ConversationRepository.test.ts:2546:14   - Unknown word (conv)       -- 'conv1',
+src/script/repositories/conversation/ConversationRepository.test.ts:2551:32   - Unknown word (zinfra)     -- domain: 'staging.zinfra.io',
+src/script/repositories/conversation/ConversationRepository.test.ts:2554:14   - Unknown word (conv)       -- 'conv2',
+src/script/repositories/conversation/ConversationRepository.test.ts:2576:84   - Unknown word (zinfra)     -- b', domain: 'staging.zinfra.io'};
+src/script/repositories/conversation/ConversationRepository.test.ts:2582:32   - Unknown word (zinfra)     -- domain: 'staging.zinfra.io',
+src/script/repositories/conversation/ConversationRepository.test.ts:2585:14   - Unknown word (conv)       -- 'conv1',
+src/script/repositories/conversation/ConversationRepository.test.ts:2593:32   - Unknown word (zinfra)     -- domain: 'staging.zinfra.io',
+src/script/repositories/conversation/ConversationRepository.test.ts:2596:14   - Unknown word (conv)       -- 'conv2',
+src/script/repositories/conversation/ConversationRepository.test.ts:2628:10   - Unknown word (conv)       -- 'conv2',
+src/script/repositories/conversation/ConversationRepository.test.ts:3013:97   - Unknown word (atively)    -- to mls if we're not atively participating in a call
 src/script/repositories/conversation/ConversationRepository.test.ts:32:10     - Unknown word (wireapp)    -- } from '@wireapp/api-client/lib/conversation
 src/script/repositories/conversation/ConversationRepository.test.ts:33:30     - Unknown word (wireapp)    -- RECEIPT_MODE} from '@wireapp/api-client/lib/conversation
 src/script/repositories/conversation/ConversationRepository.test.ts:34:38     - Unknown word (wireapp)    -- ConversationProtocol} from '@wireapp/api-client/lib/conversation
-src/script/repositories/conversation/ConversationRepository.test.ts:408:9     - Unknown word (overwites)  -- overwites: {team_id: teamId, domain
-src/script/repositories/conversation/ConversationRepository.test.ts:415:9     - Unknown word (overwites)  -- overwites: {team_id: teamId, domain
-src/script/repositories/conversation/ConversationRepository.test.ts:443:9     - Unknown word (overwites)  -- overwites: {team_id: 'teamId'
+src/script/repositories/conversation/ConversationRepository.test.ts:424:9     - Unknown word (overwites)  -- overwites: {team_id: teamId, domain
+src/script/repositories/conversation/ConversationRepository.test.ts:431:9     - Unknown word (overwites)  -- overwites: {team_id: teamId, domain
+src/script/repositories/conversation/ConversationRepository.test.ts:459:9     - Unknown word (overwites)  -- overwites: {team_id: 'teamId'
 src/script/repositories/conversation/ConversationRepository.test.ts:49:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
-src/script/repositories/conversation/ConversationRepository.test.ts:634:9     - Unknown word (overwites)  -- overwites: {group_id: 'groupId
-src/script/repositories/conversation/ConversationRepository.test.ts:672:9     - Unknown word (overwites)  -- overwites: {group_id: 'groupId
-src/script/repositories/conversation/ConversationRepository.test.ts:830:80    - Unknown word (testt)      -- dk03f38414', domain: 'testt-domain'};
-src/script/repositories/conversation/ConversationRepository.test.ts:836:59    - Unknown word (kfbe)       -- ca-a495asd47a8-ac70-9kfbe924b2d0', domain: 'testt
-src/script/repositories/conversation/ConversationRepository.test.ts:836:82    - Unknown word (testt)      -- kfbe924b2d0', domain: 'testt-domain'};
-src/script/repositories/conversation/ConversationRepository.test.ts:940:102   - Unknown word (choosen)    -- even when proteus is choosen.', async () => {
+src/script/repositories/conversation/ConversationRepository.test.ts:650:9     - Unknown word (overwites)  -- overwites: {group_id: 'groupId
+src/script/repositories/conversation/ConversationRepository.test.ts:688:9     - Unknown word (overwites)  -- overwites: {group_id: 'groupId
+src/script/repositories/conversation/ConversationRepository.test.ts:846:80    - Unknown word (testt)      -- dk03f38414', domain: 'testt-domain'};
+src/script/repositories/conversation/ConversationRepository.test.ts:852:59    - Unknown word (kfbe)       -- ca-a495asd47a8-ac70-9kfbe924b2d0', domain: 'testt
+src/script/repositories/conversation/ConversationRepository.test.ts:852:82    - Unknown word (testt)      -- kfbe924b2d0', domain: 'testt-domain'};
+src/script/repositories/conversation/ConversationRepository.test.ts:956:102   - Unknown word (choosen)    -- even when proteus is choosen.', async () => {
 src/script/repositories/conversation/ConversationRepository.ts:106:17    - Unknown word (MILLIS)     -- import {TIME_IN_MILLIS} from 'Util/TimeUtil
 src/script/repositories/conversation/ConversationRepository.ts:1183:93   - Unknown word (MANUALY)      -- LEAVE_CALL_REASON.USER_MANUALY_LEFT_CONVERSATION);
 src/script/repositories/conversation/ConversationRepository.ts:1323:19   - Unknown word (unarchived)   -- * Get the next unarchived conversation.
@@ -2066,26 +2067,26 @@ src/script/repositories/conversation/ConversationRepository.ts:2226:17   - Unkno
 src/script/repositories/conversation/ConversationRepository.ts:2241:38   - Unknown word (Converstions)   -- conversation of sortedConverstions) {
 src/script/repositories/conversation/ConversationRepository.ts:2245:40   - Unknown word (initialising)   -- logger.error(`Failed when initialising 1:1 conversation with
 src/script/repositories/conversation/ConversationRepository.ts:235:46    - Unknown word (agains)       -- client mismatch handler agains the message repository
-src/script/repositories/conversation/ConversationRepository.ts:2469:6    - Unknown word (Conversaiton)   -- }: ConversaitonWithServiceParams): Promise
-src/script/repositories/conversation/ConversationRepository.ts:2507:87   - Unknown word (Conversaiton)   -- providerId, serviceId}: ConversaitonWithServiceParams) {
-src/script/repositories/conversation/ConversationRepository.ts:2530:30   - Unknown word (Conversaiton)   -- providerId, serviceId}: ConversaitonWithServiceParams,
-src/script/repositories/conversation/ConversationRepository.ts:2613:32   - Unknown word (corecrypto)     -- MLS conversation in corecrypto and deletes the conversation
-src/script/repositories/conversation/ConversationRepository.ts:2746:117  - Unknown word (ciphersuite)    -- new fields (groupId, ciphersuite, epoch and new protocol
-src/script/repositories/conversation/ConversationRepository.ts:2794:85   - Unknown word (ciphersuite)    -- related fields (groupId, ciphersuite, epoch and new protocol
-src/script/repositories/conversation/ConversationRepository.ts:2801:65   - Unknown word (ciphersuite)    -- new fields (groupId, ciphersuite, epoch and new protocol
-src/script/repositories/conversation/ConversationRepository.ts:2961:50   - Unknown word (unarchived)     -- the conversation was unarchived
-src/script/repositories/conversation/ConversationRepository.ts:2965:64   - Unknown word (unarchived)     -- conversationEntity.id}' unarchived by trigger '${trigger
+src/script/repositories/conversation/ConversationRepository.ts:2504:6    - Unknown word (Conversaiton)   -- }: ConversaitonWithServiceParams): Promise
+src/script/repositories/conversation/ConversationRepository.ts:2542:87   - Unknown word (Conversaiton)   -- providerId, serviceId}: ConversaitonWithServiceParams) {
+src/script/repositories/conversation/ConversationRepository.ts:2565:30   - Unknown word (Conversaiton)   -- providerId, serviceId}: ConversaitonWithServiceParams,
+src/script/repositories/conversation/ConversationRepository.ts:2648:32   - Unknown word (corecrypto)     -- MLS conversation in corecrypto and deletes the conversation
+src/script/repositories/conversation/ConversationRepository.ts:2781:117  - Unknown word (ciphersuite)    -- new fields (groupId, ciphersuite, epoch and new protocol
+src/script/repositories/conversation/ConversationRepository.ts:2829:85   - Unknown word (ciphersuite)    -- related fields (groupId, ciphersuite, epoch and new protocol
+src/script/repositories/conversation/ConversationRepository.ts:2836:65   - Unknown word (ciphersuite)    -- new fields (groupId, ciphersuite, epoch and new protocol
+src/script/repositories/conversation/ConversationRepository.ts:2996:50   - Unknown word (unarchived)     -- the conversation was unarchived
 src/script/repositories/conversation/ConversationRepository.ts:29:10     - Unknown word (wireapp)    -- } from '@wireapp/api-client/lib/conversation
+src/script/repositories/conversation/ConversationRepository.ts:3000:64   - Unknown word (unarchived)     -- conversationEntity.id}' unarchived by trigger '${trigger
 src/script/repositories/conversation/ConversationRepository.ts:34:10     - Unknown word (wireapp)    -- } from '@wireapp/api-client/lib/conversation
-src/script/repositories/conversation/ConversationRepository.ts:3559:45   - Unknown word (Finalisation)   -- injectJoinedAfterMigrationFinalisationMessage = (conversation
-src/script/repositories/conversation/ConversationRepository.ts:3561:34   - Unknown word (Finalisation)   -- joinedAfterMLSMigrationFinalisationEvent = EventBuilder
-src/script/repositories/conversation/ConversationRepository.ts:3561:95   - Unknown word (Finalisation)   -- buildJoinedAfterMLSMigrationFinalisation(
-src/script/repositories/conversation/ConversationRepository.ts:3565:73   - Unknown word (Finalisation)   -- joinedAfterMLSMigrationFinalisationEvent);
-src/script/repositories/conversation/ConversationRepository.ts:3568:38   - Unknown word (Finalisation)   -- readonly injectMLSMigrationFinalisationOngoingCallMessage =
+src/script/repositories/conversation/ConversationRepository.ts:3594:45   - Unknown word (Finalisation)   -- injectJoinedAfterMigrationFinalisationMessage = (conversation
+src/script/repositories/conversation/ConversationRepository.ts:3596:34   - Unknown word (Finalisation)   -- joinedAfterMLSMigrationFinalisationEvent = EventBuilder
+src/script/repositories/conversation/ConversationRepository.ts:3596:95   - Unknown word (Finalisation)   -- buildJoinedAfterMLSMigrationFinalisation(
 src/script/repositories/conversation/ConversationRepository.ts:35:37     - Unknown word (wireapp)    -- CONVERSATION_TYPING} from '@wireapp/api-client/lib/conversation
-src/script/repositories/conversation/ConversationRepository.ts:3820:60   - Unknown word (Conv)           -- pushClients -> setClientsForConv avs api whenever
-src/script/repositories/conversation/ConversationRepository.ts:3890:14   - Unknown word (Unarchived)     -- const wasUnarchived = previouslyArchived
-src/script/repositories/conversation/ConversationRepository.ts:3891:12   - Unknown word (Unarchived)     -- if (wasUnarchived) {
+src/script/repositories/conversation/ConversationRepository.ts:3600:73   - Unknown word (Finalisation)   -- joinedAfterMLSMigrationFinalisationEvent);
+src/script/repositories/conversation/ConversationRepository.ts:3603:38   - Unknown word (Finalisation)   -- readonly injectMLSMigrationFinalisationOngoingCallMessage =
+src/script/repositories/conversation/ConversationRepository.ts:3855:60   - Unknown word (Conv)           -- pushClients -> setClientsForConv avs api whenever
+src/script/repositories/conversation/ConversationRepository.ts:3925:14   - Unknown word (Unarchived)     -- const wasUnarchived = previouslyArchived
+src/script/repositories/conversation/ConversationRepository.ts:3926:12   - Unknown word (Unarchived)     -- if (wasUnarchived) {
 src/script/repositories/conversation/ConversationRepository.ts:461:9     - Unknown word (teamid)       -- teamid: this.teamState.team
 src/script/repositories/conversation/ConversationRepository.ts:50:10     - Unknown word (wireapp)    -- } from '@wireapp/api-client/lib/event
 src/script/repositories/conversation/ConversationRepository.ts:51:35     - Unknown word (wireapp)    -- BackendErrorLabel} from '@wireapp/api-client/lib/http
@@ -2249,16 +2250,16 @@ src/script/repositories/entity/Conversation.test.ts:492:29    - Unknown word (De
 src/script/repositories/entity/Conversation.test.ts:678:39    - Unknown word (TSFI)       -- Federation @SF.Separation @TSFI.UserInterface @S0.2
 src/script/repositories/entity/Conversation.test.ts:681:60    - Unknown word (otherdomain) -- Conversation(createUuid(), 'otherdomain.test');
 src/script/repositories/entity/Conversation.test.ts:896:27    - Unknown word (wireapp)     -- /** @type {import('@wireapp/api-client/lib/connection
-src/script/repositories/entity/Conversation.ts:1066:13   - Unknown word (conv)       -- group_conv_type: this.groupConversationT
-src/script/repositories/entity/Conversation.ts:149:21    - Unknown word (Leavable)   -- public readonly isLeavable: ko.PureComputed<boolean
+src/script/repositories/entity/Conversation.ts:1080:13   - Unknown word (conv)       -- group_conv_type: this.groupConversationT
+src/script/repositories/entity/Conversation.ts:151:21    - Unknown word (Leavable)   -- public readonly isLeavable: ko.PureComputed<boolean
 src/script/repositories/entity/Conversation.ts:29:10     - Unknown word (wireapp)    -- } from '@wireapp/api-client/lib/conversation
 src/script/repositories/entity/Conversation.ts:30:30     - Unknown word (wireapp)    -- RECEIPT_MODE} from '@wireapp/api-client/lib/conversation
 src/script/repositories/entity/Conversation.ts:31:38     - Unknown word (wireapp)    -- ConversationProtocol} from '@wireapp/api-client/lib/conversation
 src/script/repositories/entity/Conversation.ts:32:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
 src/script/repositories/entity/Conversation.ts:35:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 src/script/repositories/entity/Conversation.ts:38:33     - Unknown word (wireapp)    -- LegalHoldStatus} from '@wireapp/protocol-messaging'
-src/script/repositories/entity/Conversation.ts:400:12    - Unknown word (Leavable)   -- this.isLeavable = ko.pureComputed((
-src/script/repositories/entity/Conversation.ts:728:57    - Unknown word (incomming)  -- active, push message to incomming message and update the
+src/script/repositories/entity/Conversation.ts:414:12    - Unknown word (Leavable)   -- this.isLeavable = ko.pureComputed((
+src/script/repositories/entity/Conversation.ts:742:57    - Unknown word (incomming)  -- active, push message to incomming message and update the
 src/script/repositories/entity/User/User.ts:122:16    - Unknown word (scim)       -- SCIM: 'scim',
 src/script/repositories/entity/User/User.ts:122:9     - Unknown word (SCIM)       -- SCIM: 'scim',
 src/script/repositories/entity/User/User.ts:126:38    - Unknown word (MILLIS)     -- EXPIRATION_INTERVAL: TIME_IN_MILLIS.MINUTE,
@@ -2933,15 +2934,18 @@ src/script/util/DebugUtil.ts:21:38     - Unknown word (wireapp)    -- Conversati
 src/script/util/DebugUtil.ts:22:35     - Unknown word (wireapp)    -- MemberLeaveReason} from '@wireapp/api-client/lib/conversation
 src/script/util/DebugUtil.ts:29:10     - Unknown word (wireapp)    -- } from '@wireapp/api-client/lib/event
 src/script/util/DebugUtil.ts:30:53     - Unknown word (wireapp)    -- NotificationList} from '@wireapp/api-client/lib/notification
-src/script/util/DebugUtil.ts:346:62    - Unknown word (MILLIS)     -- Date.now() + TIME_IN_MILLIS.YEAR).toISOString()
-src/script/util/DebugUtil.ts:346:7     - Unknown word (finalise)   -- finaliseRegardlessAfter: new
-src/script/util/DebugUtil.ts:35:20     - Unknown word (dexie)      -- import Dexie from 'dexie';
-src/script/util/DebugUtil.ts:35:8      - Unknown word (Dexie)      -- import Dexie from 'dexie';
-src/script/util/DebugUtil.ts:369:20    - Unknown word (programatically) -- * will allow to programatically add text in the message
-src/script/util/DebugUtil.ts:36:25     - Unknown word (keyboardjs) -- import keyboardjs from 'keyboardjs';
-src/script/util/DebugUtil.ts:36:8      - Unknown word (keyboardjs) -- import keyboardjs from 'keyboardjs';
-src/script/util/DebugUtil.ts:39:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
-src/script/util/DebugUtil.ts:66:17     - Unknown word (MILLIS)     -- import {TIME_IN_MILLIS} from './TimeUtil';
+src/script/util/DebugUtil.ts:345:62    - Unknown word (MILLIS)     -- Date.now() + TIME_IN_MILLIS.YEAR).toISOString()
+src/script/util/DebugUtil.ts:345:7     - Unknown word (finalise)   -- finaliseRegardlessAfter: new
+src/script/util/DebugUtil.ts:35:33     - Unknown word (bazinga)    -- Encoder, Decoder} from 'bazinga64';
+src/script/util/DebugUtil.ts:368:20    - Unknown word (programatically) -- * will allow to programatically add text in the message
+src/script/util/DebugUtil.ts:36:20     - Unknown word (dexie)      -- import Dexie from 'dexie';
+src/script/util/DebugUtil.ts:36:8      - Unknown word (Dexie)      -- import Dexie from 'dexie';
+src/script/util/DebugUtil.ts:37:25     - Unknown word (keyboardjs) -- import keyboardjs from 'keyboardjs';
+src/script/util/DebugUtil.ts:37:8      - Unknown word (keyboardjs) -- import keyboardjs from 'keyboardjs';
+src/script/util/DebugUtil.ts:40:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
+src/script/util/DebugUtil.ts:67:17     - Unknown word (MILLIS)     -- import {TIME_IN_MILLIS} from './TimeUtil';
+src/script/util/DebugUtil.ts:795:15    - Unknown word (metas)           -- const metas = await indexedDB.databases
+src/script/util/DebugUtil.ts:796:18    - Unknown word (metas)           -- names = (metas || []).map(m => m?.name
 src/script/util/DebugUtil.ts:90:19     - Unknown word (Dexie)      -- public readonly Dexie: typeof Dexie;
 src/script/util/DebugUtil.ts:90:33     - Unknown word (Dexie)      -- readonly Dexie: typeof Dexie;
 src/script/util/EmojiUtil.ts:20:8      - Unknown word (emojies)    -- import emojies from 'emoji-picker-react
