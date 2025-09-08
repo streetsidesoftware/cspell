@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: https://github.com/eslint/eslint
 Args: '[".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]'
 Summary:
-  files: 2090
+  files: 2093
   filesWithIssues: 311
   issues: 1648
   errors: 0
@@ -204,9 +204,9 @@ issues:
   - "lib/eslint/eslint-helpers.js:552:53         subsubdir           U       the form of \"subdir/subsubdir\"."
   - "lib/eslint/eslint-helpers.js:558:51         subd                U       pattern is passed (e.g., \"subd*\"). We want"
   - "lib/eslint/eslint-helpers.js:667:34         unconfigured        U       ignored\"|\"external\"|\"unconfigured\"} configStatus A status"
-  - "lib/eslint/eslint.js:311:14         Cloneability    U       const disableCloneabilityCheck = Symbol("
-  - "lib/eslint/eslint.js:312:20         uncloneable     U       \"Do not check for uncloneable options.\","
-  - "lib/eslint/eslint.js:548:23         UNCLONEABLE     U       error.code = \"ESLINT_UNCLONEABLE_OPTIONS\";"
+  - "lib/eslint/eslint.js:315:14         Cloneability    U       const disableCloneabilityCheck = Symbol("
+  - "lib/eslint/eslint.js:316:20         uncloneable     U       \"Do not check for uncloneable options.\","
+  - "lib/eslint/eslint.js:552:23         UNCLONEABLE     U       error.code = \"ESLINT_UNCLONEABLE_OPTIONS\";"
   - "lib/eslint/worker.js:158:94         parallelizable      U       tasks that are highly parallelizable and not repeated across"
   - "lib/languages/js/index.js:164:31        Feenstra    U       Copyright (c) 2013, Joel Feenstra"
   - "lib/languages/js/index.js:181:41        FEENSTRA    U       NO EVENT SHALL JOEL FEENSTRA BE LIABLE FOR ANY"
@@ -216,7 +216,7 @@ issues:
   - "lib/linter/esquery.js:93:30         specifity (specificity)     U       Compares this selector's specifity to another selector"
   - "lib/linter/linter.js:42:7           jslang      U       const jslang = require(\"../languages"
   - "lib/rule-tester/rule-tester.js:266:42       errorize            U       ast The root node to errorize `start`/`end` properties"
-  - "lib/rule-tester/rule-tester.js:933:21       Didnt (Didn't)      U       function assertASTDidntChange(beforeAST, afterAST"
+  - "lib/rule-tester/rule-tester.js:936:21       Didnt (Didn't)      U       function assertASTDidntChange(beforeAST, afterAST"
   - "lib/rules/dot-notation.js:163:21        quasis      U       node.property.quasis[0].value.cooked,"
   - "lib/rules/for-direction.js:83:62        nochange    U       if sub return -1, if nochange, return 0"
   - "lib/rules/func-name-matching.js:13:7        esutils     U       const esutils = require(\"esutils\""
@@ -229,7 +229,7 @@ issues:
   - "lib/rules/no-constant-binary-expression.js:55:59        nullishness     U       statically knowable constant nullishness. Meaning,"
   - "lib/rules/no-constant-binary-expression.js:64:21        Nullishness     U       function hasConstantNullishness(scope, node, nonNullish"
   - "lib/rules/no-else-return.js:396:10      consequents     U       const consequents = [];"
-  - "lib/rules/no-empty-function.js:165:16       etters      U       if (/(?:g|s)etters|methods$/iu.test(kind"
+  - "lib/rules/no-empty-function.js:167:16       etters      U       if (/(?:g|s)etters|methods$/iu.test(kind"
   - "lib/rules/no-extend-native.js:125:14        Propert (Property)      U       /^definePropert(?:y|ies)$/u,"
   - "lib/rules/no-extra-parens.js:2:27           parenthesising      U       fileoverview Disallow parenthesising higher precedence subexpressi"
   - "lib/rules/no-extra-parens.js:346:46         newed               U       constructor function is newed-up with parens"
@@ -319,13 +319,13 @@ issues:
   - "tests/lib/eslint/eslint.js:2865:47      doesexist                           U       await eslint.lintFiles([\"doesexist/*.js\"]);"
   - "tests/lib/eslint/eslint.js:3720:63      unignoring                          U       unignored without also unignoring all files in them\","
   - "tests/lib/eslint/eslint.js:3734:27      jsfmt                               U       \"!tests/format/**/jsfmt.spec.js\","
-  - "tests/lib/eslint/eslint.js:8160:25      mcts                                U       \"eslint.config.mcts\": configFileContent"
-  - "tests/lib/eslint/eslint.js:12480:20     dignore                             U       cwd: `${root}-dignore`,"
-  - "tests/lib/eslint/eslint.js:14333:26     previos (previous)                  U       make sure that the previos assertion checks the"
-  - "tests/lib/eslint/eslint.js:14415:46     intenationally (internationally)    U       cacheFilePath, \"[]\"); // intenationally invalid to additionally"
-  - "tests/lib/eslint/eslint.js:14651:46     occured (occurred)                  U       the previous run that occured after the cache was"
-  - "tests/lib/eslint/eslint.js:15798:81     unerasable                          U       of an ESM module with unerasable TypeScript syntax\","
-  - "tests/lib/eslint/eslint.js:15878:12     caclulate (calculate)               U       describe(\"caclulateWorkerCount\", () =>"
+  - "tests/lib/eslint/eslint.js:8163:25      mcts                                U       \"eslint.config.mcts\": configFileContent"
+  - "tests/lib/eslint/eslint.js:12483:20     dignore                             U       cwd: `${root}-dignore`,"
+  - "tests/lib/eslint/eslint.js:14336:26     previos (previous)                  U       make sure that the previos assertion checks the"
+  - "tests/lib/eslint/eslint.js:14418:46     intenationally (internationally)    U       cacheFilePath, \"[]\"); // intenationally invalid to additionally"
+  - "tests/lib/eslint/eslint.js:14654:46     occured (occurred)                  U       the previous run that occured after the cache was"
+  - "tests/lib/eslint/eslint.js:15801:81     unerasable                          U       of an ESM module with unerasable TypeScript syntax\","
+  - "tests/lib/eslint/eslint.js:15881:12     caclulate (calculate)               U       describe(\"caclulateWorkerCount\", () =>"
   - "tests/lib/eslint/legacy-eslint.js:3031:15       succesfully (successfully)      U       it(\"should succesfully execute with a rule"
   - "tests/lib/linter/file-report.js:682:13      fooo        U       text: \"fooo\\nbar\","
   - "tests/lib/linter/file-report.js:737:15      ncdar       U       text: \"o\\ncdar\","
