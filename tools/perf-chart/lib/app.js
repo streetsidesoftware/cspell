@@ -416,8 +416,7 @@ var require_help = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/comman
 			const extraInfo = [];
 			if (option.argChoices) extraInfo.push(`choices: ${option.argChoices.map((choice) => JSON.stringify(choice)).join(", ")}`);
 			if (option.defaultValue !== void 0) {
-				const showDefault = option.required || option.optional || option.isBoolean() && typeof option.defaultValue === "boolean";
-				if (showDefault) extraInfo.push(`default: ${option.defaultValueDescription || JSON.stringify(option.defaultValue)}`);
+				if (option.required || option.optional || option.isBoolean() && typeof option.defaultValue === "boolean") extraInfo.push(`default: ${option.defaultValueDescription || JSON.stringify(option.defaultValue)}`);
 			}
 			if (option.presetArg !== void 0 && option.optional) extraInfo.push(`preset: ${JSON.stringify(option.presetArg)}`);
 			if (option.envVar !== void 0) extraInfo.push(`env: ${option.envVar}`);
@@ -502,8 +501,7 @@ var require_help = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/comman
 				return callFormatItem(helper.styleArgumentTerm(helper.argumentTerm(argument)), helper.styleArgumentDescription(helper.argumentDescription(argument)));
 			});
 			output = output.concat(this.formatItemList("Arguments:", argumentList, helper));
-			const optionGroups = this.groupItems(cmd.options, helper.visibleOptions(cmd), (option) => option.helpGroupHeading ?? "Options:");
-			optionGroups.forEach((options, group) => {
+			this.groupItems(cmd.options, helper.visibleOptions(cmd), (option) => option.helpGroupHeading ?? "Options:").forEach((options, group) => {
 				const optionList = options.map((option) => {
 					return callFormatItem(helper.styleOptionTerm(helper.optionTerm(option)), helper.styleOptionDescription(helper.optionDescription(option)));
 				});
@@ -515,8 +513,7 @@ var require_help = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/comman
 				});
 				output = output.concat(this.formatItemList("Global Options:", globalOptionList, helper));
 			}
-			const commandGroups = this.groupItems(cmd.commands, helper.visibleCommands(cmd), (sub$1) => sub$1.helpGroup() || "Commands:");
-			commandGroups.forEach((commands, group) => {
+			this.groupItems(cmd.commands, helper.visibleCommands(cmd), (sub$1) => sub$1.helpGroup() || "Commands:").forEach((commands, group) => {
 				const commandList = commands.map((sub$1) => {
 					return callFormatItem(helper.styleSubcommandTerm(helper.subcommandTerm(sub$1)), helper.styleSubcommandDescription(helper.subcommandDescription(sub$1)));
 				});
@@ -628,14 +625,10 @@ var require_help = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/comman
 			if (!description) return itemIndentStr + term;
 			const paddedTerm = term.padEnd(termWidth + term.length - helper.displayWidth(term));
 			const spacerWidth = 2;
-			const helpWidth = this.helpWidth ?? 80;
-			const remainingWidth = helpWidth - termWidth - spacerWidth - itemIndent;
+			const remainingWidth = (this.helpWidth ?? 80) - termWidth - spacerWidth - itemIndent;
 			let formattedDescription;
 			if (remainingWidth < this.minWidthToWrap || helper.preformatted(description)) formattedDescription = description;
-			else {
-				const wrappedDescription = helper.boxWrap(description, remainingWidth);
-				formattedDescription = wrappedDescription.replace(/\n/g, "\n" + " ".repeat(termWidth + spacerWidth));
-			}
+			else formattedDescription = helper.boxWrap(description, remainingWidth).replace(/\n/g, "\n" + " ".repeat(termWidth + spacerWidth));
 			return itemIndentStr + paddedTerm + " ".repeat(spacerWidth) + formattedDescription.replace(/\n/g, `\n${itemIndentStr}`);
 		}
 		/**
@@ -684,8 +677,7 @@ var require_help = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/comman
 	* @package
 	*/
 	function stripColor$1(str) {
-		const sgrPattern = /\x1b\[\d*(;\d*)*m/g;
-		return str.replace(sgrPattern, "");
+		return str.replace(/\x1b\[\d*(;\d*)*m/g, "");
 	}
 	exports.Help = Help$3;
 	exports.stripColor = stripColor$1;
@@ -1034,8 +1026,7 @@ var require_suggestSimilar = /* @__PURE__ */ __commonJS({ "../../node_modules/.p
 			if (candidate.length <= 1) return;
 			const distance = editDistance(word, candidate);
 			const length = Math.max(word.length, candidate.length);
-			const similarity = (length - distance) / length;
-			if (similarity > minSimilarity) {
+			if ((length - distance) / length > minSimilarity) {
 				if (distance < bestDistance) {
 					bestDistance = distance;
 					similar = [candidate];
@@ -1398,8 +1389,7 @@ var require_command = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/com
 				if (enableOrNameAndArgs && this._defaultCommandGroup) this._initCommandGroup(this._getHelpCommand());
 				return this;
 			}
-			const nameAndArgs = enableOrNameAndArgs ?? "help [command]";
-			const [, helpName, helpArgs] = nameAndArgs.match(/([^ ]+) *(.*)/);
+			const [, helpName, helpArgs] = (enableOrNameAndArgs ?? "help [command]").match(/([^ ]+) *(.*)/);
 			const helpDescription = description ?? "display help for command";
 			const helpCommand = this.createCommand(helpName);
 			helpCommand.helpOption(false);
@@ -1434,8 +1424,7 @@ var require_command = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/com
 		* @package
 		*/
 		_getHelpCommand() {
-			const hasImplicitHelpCommand = this._addImplicitHelpCommand ?? (this.commands.length && !this._actionHandler && !this._findCommand("help"));
-			if (hasImplicitHelpCommand) {
+			if (this._addImplicitHelpCommand ?? (this.commands.length && !this._actionHandler && !this._findCommand("help"))) {
 				if (this._helpCommand === void 0) this.helpCommand(void 0, void 0);
 				return this._helpCommand;
 			}
@@ -1983,7 +1972,6 @@ Expecting one of '${allowedValues.join("', '")}'`);
 				if (sourceExt.includes(path.extname(baseName))) return void 0;
 				const foundExt = sourceExt.find((ext) => fs.existsSync(`${localBin}${ext}`));
 				if (foundExt) return `${localBin}${foundExt}`;
-				return void 0;
 			}
 			this._checkForMissingMandatoryOptions();
 			this._checkForConflictingOptions();
@@ -2019,20 +2007,17 @@ Expecting one of '${allowedValues.join("', '")}'`);
 				args = incrementNodeInspectorPort(process.execArgv).concat(args);
 				proc = childProcess.spawn(process.execPath, args, { stdio: "inherit" });
 			}
-			if (!proc.killed) {
-				const signals = [
-					"SIGUSR1",
-					"SIGUSR2",
-					"SIGTERM",
-					"SIGINT",
-					"SIGHUP"
-				];
-				signals.forEach((signal) => {
-					process.on(signal, () => {
-						if (proc.killed === false && proc.exitCode === null) proc.kill(signal);
-					});
+			if (!proc.killed) [
+				"SIGUSR1",
+				"SIGUSR2",
+				"SIGTERM",
+				"SIGINT",
+				"SIGHUP"
+			].forEach((signal) => {
+				process.on(signal, () => {
+					if (proc.killed === false && proc.exitCode === null) proc.kill(signal);
 				});
-			}
+			});
 			const exitCallback = this._exitCallback;
 			proc.on("close", (code) => {
 				code = code ?? 1;
@@ -2058,8 +2043,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
 			const subCommand = this._findCommand(commandName);
 			if (!subCommand) this.help({ error: true });
 			subCommand._prepareForParse();
-			let promiseChain;
-			promiseChain = this._chainOrCallSubCommandHook(promiseChain, subCommand, "preSubcommand");
+			let promiseChain = this._chainOrCallSubCommandHook(promiseChain, subCommand, "preSubcommand");
 			promiseChain = this._chainOrCall(promiseChain, () => {
 				if (subCommand._executableHandler) this._executeSubCommand(subCommand, operands.concat(unknown));
 				else return subCommand._parseCommand(operands, unknown);
@@ -2208,8 +2192,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
 			if (this._actionHandler) {
 				checkForUnknownOptions();
 				this._processArguments();
-				let promiseChain;
-				promiseChain = this._chainOrCallHooks(promiseChain, "preAction");
+				let promiseChain = this._chainOrCallHooks(promiseChain, "preAction");
 				promiseChain = this._chainOrCall(promiseChain, () => this._actionHandler(this.processedArgs));
 				if (this.parent) promiseChain = this._chainOrCall(promiseChain, () => {
 					this.parent.emit(commandEvent, operands, unknown);
@@ -2281,8 +2264,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
 				if (this.getOptionValue(optionKey) === void 0) return false;
 				return this.getOptionValueSource(optionKey) !== "default";
 			});
-			const optionsWithConflicting = definedNonDefaultOptions.filter((option) => option.conflictsWith.length > 0);
-			optionsWithConflicting.forEach((option) => {
+			definedNonDefaultOptions.filter((option) => option.conflictsWith.length > 0).forEach((option) => {
 				const conflictingAndDefined = definedNonDefaultOptions.find((defined) => option.conflictsWith.includes(defined.attributeName()));
 				if (conflictingAndDefined) this._conflictingOption(option, conflictingAndDefined);
 			});
@@ -2532,8 +2514,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
 			const getErrorMessage = (option$1) => {
 				const bestOption = findBestOptionFromValue(option$1);
 				const optionKey = bestOption.attributeName();
-				const source = this.getOptionValueSource(optionKey);
-				if (source === "env") return `environment variable '${bestOption.envVar}'`;
+				if (this.getOptionValueSource(optionKey) === "env") return `environment variable '${bestOption.envVar}'`;
 				return `option '${bestOption.flags}'`;
 			};
 			const message = `error: ${getErrorMessage(option)} cannot be used with ${getErrorMessage(conflictingOption)}`;
@@ -2571,8 +2552,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
 			if (this._allowExcessArguments) return;
 			const expected = this.registeredArguments.length;
 			const s$1 = expected === 1 ? "" : "s";
-			const forSubcommand = this.parent ? ` for '${this.name()}'` : "";
-			const message = `error: too many arguments${forSubcommand}. Expected ${expected} argument${s$1} but got ${receivedArgs.length}.`;
+			const message = `error: too many arguments${this.parent ? ` for '${this.name()}'` : ""}. Expected ${expected} argument${s$1} but got ${receivedArgs.length}.`;
 			this.error(message, { code: "commander.excessArguments" });
 		}
 		/**
@@ -2994,8 +2974,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
 		*/
 		_outputHelpIfRequested(args) {
 			const helpOption = this._getHelpOption();
-			const helpRequested = helpOption && args.find((arg) => helpOption.is(arg));
-			if (helpRequested) {
+			if (helpOption && args.find((arg) => helpOption.is(arg))) {
 				this.outputHelp();
 				this._exit(0, "commander.helpDisplayed", "(outputHelp)");
 			}
@@ -3036,7 +3015,6 @@ Expecting one of '${allowedValues.join("', '")}'`);
 	function useColor() {
 		if (process.env.NO_COLOR || process.env.FORCE_COLOR === "0" || process.env.FORCE_COLOR === "false") return false;
 		if (process.env.FORCE_COLOR || process.env.CLICOLOR_FORCE !== void 0) return true;
-		return void 0;
 	}
 	exports.Command = Command$2;
 	exports.useColor = useColor;
@@ -3527,8 +3505,7 @@ const transform = function(original_options = {}) {
 					return;
 				}
 				if (this.state.quoting === false && record_delimiter.length === 0) {
-					const record_delimiterCount = this.__autoDiscoverRecordDelimiter(buf, pos);
-					if (record_delimiterCount) record_delimiter = this.options.record_delimiter;
+					if (this.__autoDiscoverRecordDelimiter(buf, pos)) record_delimiter = this.options.record_delimiter;
 				}
 				const chr = buf[pos];
 				if (raw === true) rawBuffer.append(chr);
@@ -3592,8 +3569,7 @@ const transform = function(original_options = {}) {
 					if (this.state.quoting === false) {
 						const recordDelimiterLength = this.__isRecordDelimiter(chr, buf, pos);
 						if (recordDelimiterLength !== 0) {
-							const skipCommentLine = this.state.commenting && this.state.wasQuoting === false && this.state.record.length === 0 && this.state.field.length === 0;
-							if (skipCommentLine) this.info.comment_lines++;
+							if (this.state.commenting && this.state.wasQuoting === false && this.state.record.length === 0 && this.state.field.length === 0) this.info.comment_lines++;
 							else {
 								if (this.state.enabled === false && this.info.lines + (this.state.wasRowDelimiter === true ? 1 : 0) >= from_line) {
 									this.state.enabled = true;
@@ -3625,8 +3601,7 @@ const transform = function(original_options = {}) {
 						}
 						if (this.state.commenting) continue;
 						if (comment !== null && (comment_no_infix === false || this.state.record.length === 0 && this.state.field.length === 0)) {
-							const commentCount = this.__compareBytes(comment, buf, pos, chr);
-							if (commentCount !== 0) {
+							if (this.__compareBytes(comment, buf, pos, chr) !== 0) {
 								this.state.commenting = true;
 								continue;
 							}
@@ -3811,8 +3786,7 @@ const transform = function(original_options = {}) {
 		},
 		__cast: function(field) {
 			const { columns, relax_column_count } = this.options;
-			const isColumns = Array.isArray(columns);
-			if (isColumns === true && relax_column_count && this.options.columns.length <= this.state.record.length) return [void 0, void 0];
+			if (Array.isArray(columns) === true && relax_column_count && this.options.columns.length <= this.state.record.length) return [void 0, void 0];
 			if (this.state.castField !== null) try {
 				const info$1 = this.__infoField();
 				return [void 0, this.state.castField.call(null, field, info$1)];
@@ -3915,7 +3889,7 @@ const transform = function(original_options = {}) {
 				} catch (err$1) {
 					return err$1;
 				}
-				return void 0;
+				return;
 			} else return err;
 		},
 		__infoDataSet: function() {
@@ -4019,10 +3993,8 @@ const histoCharsBottomToTop = [
 function simpleHistogram(data, min, max, barChars = histoCharsBottomToTop) {
 	const [minVal, maxVal] = minMaxRange(data, min, max);
 	const range = maxVal - minVal || 1;
-	const lenBarChars = barChars.length;
-	const scale = lenBarChars / range;
-	const scaled = data.map((v) => Math.ceil((Math.min(v, maxVal) - minVal) * scale));
-	return scaled.map((v) => v > 0 ? barChars[v - 1] : " ").join("");
+	const scale = barChars.length / range;
+	return data.map((v) => Math.ceil((Math.min(v, maxVal) - minVal) * scale)).map((v) => v > 0 ? barChars[v - 1] : " ").join("");
 }
 const stPlotChars = {
 	left2: boxSymbols[BoxSymbol.leftT],
@@ -4064,8 +4036,7 @@ function minMaxRange(values, min, max) {
 	const minVal = min ?? Math.min(...values);
 	const maxVal = max ?? Math.max(...values);
 	const adj = (maxVal - minVal) * .05;
-	const r = [min ?? minVal - adj, max ?? maxVal + adj];
-	return r;
+	return [min ?? minVal - adj, max ?? maxVal + adj];
 }
 
 //#endregion
@@ -4238,7 +4209,7 @@ async function perfReport(csvFile) {
 	reportOnCsvRecords(records);
 	const dailyStats = createDailyStats(records);
 	const data = [...groupBy(records, "repo")].sort((a, b) => a[0].localeCompare(b[0]));
-	const markdown = inject`\
+	return inject`\
         <!---
         # This file is auto-generated. Do not edit.
         # cspell:disable
@@ -4254,7 +4225,6 @@ async function perfReport(csvFile) {
         ${createThroughputPerfTable(data)}
 
     `;
-	return markdown;
 }
 function countCsvRecordsByRepo(records, counts = /* @__PURE__ */ new Map()) {
 	for (const r of records) {
@@ -4273,24 +4243,21 @@ function filterOutIncompleteRuns(runs) {
 	do {
 		changes = false;
 		for (let i = 0; i < sizes.length; ++i) {
-			const max = Math.max(getSize(i - 1), getSize(i + 1));
-			const allowed = max - maxDelta;
+			const allowed = Math.max(getSize(i - 1), getSize(i + 1)) - maxDelta;
 			if (sizes[i] < allowed) {
 				sizes[i] = allowed;
 				changes = true;
 			}
 		}
 		for (let i = sizes.length - 1; i >= 0; --i) {
-			const max = Math.max(getSize(i - 1), getSize(i + 1));
-			const allowed = max - maxDelta;
+			const allowed = Math.max(getSize(i - 1), getSize(i + 1)) - maxDelta;
 			if (sizes[i] < allowed) {
 				sizes[i] = allowed;
 				changes = true;
 			}
 		}
 	} while (changes);
-	const result = runs.filter((r, i) => r.length >= sizes[i]);
-	return result;
+	return runs.filter((r, i) => r.length >= sizes[i]);
 	function getSize(i) {
 		if (i < 0) return sizes[0];
 		if (i >= sizes.length) return sizes[sizes.length - 1];
@@ -4320,8 +4287,7 @@ function groupCsvRecordsByRun(records) {
 }
 function reportOnCsvRecords(records) {
 	const repos = [...new Set(records.map((r) => r.repo))].sort();
-	const runs = groupCsvRecordsByRun(records);
-	runs.forEach((run, i) => {
+	groupCsvRecordsByRun(records).forEach((run, i) => {
 		const runStartTime = Math.min(...run.map((r) => r.timestamp));
 		const runEndTime = Math.max(...run.map((r) => r.timestamp));
 		const runId = (i + 1).toFixed(0).padStart(2, "0");
@@ -4353,11 +4319,10 @@ function deltaTimeSInDHMS(deltaSec) {
 }
 async function readCsvData(csvFile) {
 	const csv = await promises.readFile(csvFile, "utf8");
-	const records = parse(csv, {
+	return parse(csv, {
 		columns: true,
 		cast: true
 	});
-	return records;
 }
 const emptyStats = {
 	point: 0,
@@ -4418,8 +4383,7 @@ function groupBy(data, key) {
 	return map;
 }
 function changeDate(date, deltaDays) {
-	const d = new Date(date);
-	const n = d.setUTCHours(0, 0, 0, 0);
+	const n = new Date(date).setUTCHours(0, 0, 0, 0);
 	const dd = new Date(n + deltaDays * 24 * 60 * 60 * 1e3);
 	dd.setUTCHours(0, 0, 0, 0);
 	return dd;
@@ -4553,11 +4517,10 @@ const monthNames = [
 ];
 function createDailyPerfGraph(dailyStats) {
 	const bar = dailyStats.map((d) => d.fps.toFixed(2));
-	const fpsByRepo = groupBy(dailyStats.flatMap((d) => [...d.fpsByRepo].map(([repo, fps]) => ({
+	const lines = [...groupBy(dailyStats.flatMap((d) => [...d.fpsByRepo].map(([repo, fps]) => ({
 		repo,
 		fps
-	}))), "repo");
-	const lines = [...fpsByRepo].map(([_repo, records]) => {
+	}))), "repo")].map(([_repo, records]) => {
 		return `line [${records.map((r) => r.fps.toFixed(2)).join(", ")}]`;
 	});
 	const xAxis = dailyStats.map((d) => `${monthNames[d.date.getUTCMonth()]}-${d.date.getUTCDate()}`);
@@ -4577,8 +4540,7 @@ function createDailyPerfGraph(dailyStats) {
 function createDailyStats(data) {
 	const dailyStats = [];
 	const repoNames = [...new Set(data.map((r) => r.repo))];
-	const recordsByDay = groupBy(data, (r) => new Date(r.timestamp).setUTCHours(0, 0, 0, 0));
-	const entries = [...recordsByDay.entries()].sort((a, b) => a[0] - b[0]);
+	const entries = [...groupBy(data, (r) => new Date(r.timestamp).setUTCHours(0, 0, 0, 0)).entries()].sort((a, b) => a[0] - b[0]);
 	for (const [dayTs, records] of entries) {
 		const date = new Date(dayTs);
 		const files = records.reduce((sum, r) => sum + r.files, 0);
