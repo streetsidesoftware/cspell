@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v9.2.2 (2025-09-11)
+
+### Dictionary Updates
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/7822">#7822</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#7822](https://github.com/streetsidesoftware/cspell/pull/7822))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ .../snapshots/vitest-dev/vitest/report.yaml        |  4 +-
+ .../snapshots/vitest-dev/vitest/snapshot.txt       |  3 +-
+ packages/cspell-bundled-dicts/package.json         |  8 ++--
+ pnpm-lock.yaml                                     | 45 ++++++++++++----------
+ 4 files changed, 31 insertions(+), 29 deletions(-)
+```
+
+---
+
+</details>
+
 ## v9.2.1 (2025-08-31)
 
 ### Dictionary Updates
