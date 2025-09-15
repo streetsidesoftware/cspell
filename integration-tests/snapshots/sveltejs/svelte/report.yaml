@@ -3,9 +3,9 @@ Repository: sveltejs/svelte
 Url: https://github.com/sveltejs/svelte.git
 Args: '["**"]'
 Summary:
-  files: 7831
-  filesWithIssues: 539
-  issues: 3793
+  files: 7846
+  filesWithIssues: 543
+  issues: 3802
   errors: 0
 Errors: []
 
@@ -1673,7 +1673,7 @@ issues:
   - "packages/svelte/src/compiler/phases/2-analyze/css/css-prune.js:289:29       unscopeable     U       a `:global(...)` or unscopeable selector, or"
   - "packages/svelte/src/compiler/phases/2-analyze/css/utils.js:28:28        deopt       U       and we don't want to deopt on `condition`"
   - "packages/svelte/src/compiler/phases/2-analyze/css/utils.js:34:29        cslx        U       will be processed by cslx, in which case falsy"
-  - "packages/svelte/src/compiler/phases/2-analyze/index.js:706:18       nonstate    U       // warn on any nonstate declarations that are"
+  - "packages/svelte/src/compiler/phases/2-analyze/index.js:708:18       nonstate    U       // warn on any nonstate declarations that are"
   - "packages/svelte/src/compiler/phases/2-analyze/visitors/Attribute.js:82:7        unhoisted       U       const unhoisted = { hoisted: false"
   - "packages/svelte/src/compiler/phases/2-analyze/visitors/RegularElement.js:38:72          qirk    U       stripped because of a qirk:"
   - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y/constants.js:36:19       labelable       U       export const a11y_labelable = ["
@@ -1690,7 +1690,7 @@ issues:
   - "packages/svelte/src/compiler/phases/3-transform/client/visitors/BindDirective.js:46:11          unthunk     U       set = b.unthunk("
   - "packages/svelte/src/compiler/phases/3-transform/client/visitors/ConstTag.js:58:11       optimise    U       // TODO optimise the simple `{ x } ="
   - "packages/svelte/src/compiler/phases/3-transform/client/visitors/shared/declarations.js:31:30        unsub       U       call = b.call('$.store_unsub', call, b.literal(`"
-  - "packages/svelte/src/compiler/phases/3-transform/client/visitors/shared/element.js:43:67         readded     U       it isn't removed and readded on every update"
+  - "packages/svelte/src/compiler/phases/3-transform/client/visitors/shared/element.js:45:67         readded     U       it isn't removed and readded on every update"
   - "packages/svelte/src/compiler/phases/3-transform/server/visitors/VariableDeclaration.js:55:45        deconflict      U       declared separately, deconflict"
   - "packages/svelte/src/compiler/phases/3-transform/utils.js:237:76         spaceand    U       text node with a single spaceand keep whitespace"
   - "packages/svelte/src/compiler/phases/patterns.js:21:43       aeiou       U       starts_with_vowel = /^[aeiou]/;"
@@ -1708,7 +1708,7 @@ issues:
   - "packages/svelte/src/internal/client/dom/blocks/await.js:158:68      microtick       U       since it's on the next microtick"
   - "packages/svelte/src/internal/client/dom/blocks/svelte-element.js:75:18          Noone (No one)      U       // Assumption: Noone changes the namespace"
   - "packages/svelte/src/internal/client/dom/elements/actions.js:18:8        inited      U       var inited = false;"
-  - "packages/svelte/src/internal/client/dom/elements/attributes.js:559:16       contructor (constructor)    U       // Do not use contructor.name here as that's"
+  - "packages/svelte/src/internal/client/dom/elements/attributes.js:585:16       contructor (constructor)    U       // Do not use contructor.name here as that's"
   - "packages/svelte/src/internal/client/dom/elements/bindings/input.js:30:14        numberlike      U       value = is_numberlike_input(input) ? to_number"
   - "packages/svelte/src/internal/client/dom/elements/bindings/this.js:41:78         nullfiy (nullify)       U       context changes), then nullfiy the binding at"
   - "packages/svelte/src/internal/client/dom/elements/events.js:146:47       expando     U       GCed too early, the expando __root property"
@@ -1721,18 +1721,18 @@ issues:
   - "packages/svelte/src/internal/client/render.js:155:18        occured (occurred)      U       // If an error occured above, the operations"
   - "packages/svelte/src/internal/client/runtime.js:129:90       depedencies (dependencies)      U       to avoid duplicating depedencies inside a reaction *"
   - "packages/svelte/src/internal/client/timing.js:12:5          bunder      U       // bunder will eval and remove"
-  - "packages/svelte/src/internal/server/index.js:26:23          FDEF        U       [\\s'\">/=\\u{FDD0}-\\u{FDEF}\\u{FFFE}\\u{FFFF}\\u{"
-  - "packages/svelte/src/internal/server/index.js:26:31          FFFE        U       \\u{FDD0}-\\u{FDEF}\\u{FFFE}\\u{FFFF}\\u{1FFFE}\\u"
-  - "packages/svelte/src/internal/server/index.js:26:209         AFFFE       U       u{9FFFE}\\u{9FFFF}\\u{AFFFE}\\u{AFFFF}\\u{BFFFE}\\u"
-  - "packages/svelte/src/internal/server/index.js:26:218         AFFFF       U       u{9FFFF}\\u{AFFFE}\\u{AFFFF}\\u{BFFFE}\\u{BFFFF}\\u"
-  - "packages/svelte/src/internal/server/index.js:26:227         BFFFE       U       u{AFFFE}\\u{AFFFF}\\u{BFFFE}\\u{BFFFF}\\u{CFFFE}\\u"
-  - "packages/svelte/src/internal/server/index.js:26:236         BFFFF       U       u{AFFFF}\\u{BFFFE}\\u{BFFFF}\\u{CFFFE}\\u{CFFFF}\\u"
-  - "packages/svelte/src/internal/server/index.js:26:245         CFFFE       U       u{BFFFE}\\u{BFFFF}\\u{CFFFE}\\u{CFFFF}\\u{DFFFE}\\u"
-  - "packages/svelte/src/internal/server/index.js:26:254         CFFFF       U       u{BFFFF}\\u{CFFFE}\\u{CFFFF}\\u{DFFFE}\\u{DFFFF}\\u"
-  - "packages/svelte/src/internal/server/index.js:26:263         DFFFE       U       u{CFFFE}\\u{CFFFF}\\u{DFFFE}\\u{DFFFF}\\u{EFFFE}\\u"
-  - "packages/svelte/src/internal/server/index.js:26:272         DFFFF       U       u{CFFFF}\\u{DFFFE}\\u{DFFFF}\\u{EFFFE}\\u{EFFFF}\\u"
-  - "packages/svelte/src/internal/server/index.js:26:281         EFFFE       U       u{DFFFE}\\u{DFFFF}\\u{EFFFE}\\u{EFFFF}\\u{FFFFE}\\u"
-  - "packages/svelte/src/internal/server/index.js:26:299         FFFFE       U       u{EFFFE}\\u{EFFFF}\\u{FFFFE}\\u{FFFFF}\\u{10FFFE}"
+  - "packages/svelte/src/internal/server/index.js:27:23          FDEF        U       [\\s'\">/=\\u{FDD0}-\\u{FDEF}\\u{FFFE}\\u{FFFF}\\u{"
+  - "packages/svelte/src/internal/server/index.js:27:31          FFFE        U       \\u{FDD0}-\\u{FDEF}\\u{FFFE}\\u{FFFF}\\u{1FFFE}\\u"
+  - "packages/svelte/src/internal/server/index.js:27:209         AFFFE       U       u{9FFFE}\\u{9FFFF}\\u{AFFFE}\\u{AFFFF}\\u{BFFFE}\\u"
+  - "packages/svelte/src/internal/server/index.js:27:218         AFFFF       U       u{9FFFF}\\u{AFFFE}\\u{AFFFF}\\u{BFFFE}\\u{BFFFF}\\u"
+  - "packages/svelte/src/internal/server/index.js:27:227         BFFFE       U       u{AFFFE}\\u{AFFFF}\\u{BFFFE}\\u{BFFFF}\\u{CFFFE}\\u"
+  - "packages/svelte/src/internal/server/index.js:27:236         BFFFF       U       u{AFFFF}\\u{BFFFE}\\u{BFFFF}\\u{CFFFE}\\u{CFFFF}\\u"
+  - "packages/svelte/src/internal/server/index.js:27:245         CFFFE       U       u{BFFFE}\\u{BFFFF}\\u{CFFFE}\\u{CFFFF}\\u{DFFFE}\\u"
+  - "packages/svelte/src/internal/server/index.js:27:254         CFFFF       U       u{BFFFF}\\u{CFFFE}\\u{CFFFF}\\u{DFFFE}\\u{DFFFF}\\u"
+  - "packages/svelte/src/internal/server/index.js:27:263         DFFFE       U       u{CFFFE}\\u{CFFFF}\\u{DFFFE}\\u{DFFFF}\\u{EFFFE}\\u"
+  - "packages/svelte/src/internal/server/index.js:27:272         DFFFF       U       u{CFFFF}\\u{DFFFE}\\u{DFFFF}\\u{EFFFE}\\u{EFFFF}\\u"
+  - "packages/svelte/src/internal/server/index.js:27:281         EFFFE       U       u{DFFFE}\\u{DFFFF}\\u{EFFFE}\\u{EFFFF}\\u{FFFFE}\\u"
+  - "packages/svelte/src/internal/server/index.js:27:299         FFFFE       U       u{EFFFE}\\u{EFFFF}\\u{FFFFE}\\u{FFFFF}\\u{10FFFE}"
   - "packages/svelte/src/internal/shared/clone.js:35:8           uncloned    U       let uncloned = slice.map((path)"
   - "packages/svelte/src/motion/public.d.ts:1:25         Unsubscriber    U       import { Readable, type Unsubscriber } from '../store/public"
   - "packages/svelte/src/motion/tweened.js:163:31        tweens      U       wrapper for a value that tweens smoothly to its target"
@@ -1832,7 +1832,7 @@ issues:
   - "packages/svelte/tests/preprocess/samples/style-attributes/expected_map.json:3:121       UAAO    U       GAAG,CAAC,CAAC,IAAI,UAAO,CAAC,CAAC,KAAK\","
   - "packages/svelte/tests/README.md:3:51        currente    U       many tests from the currente Svelte project over"
   - "packages/svelte/tests/README.md:16:151      unkeyed     U       binding-each-remount-unkeyed` for an example"
-  - "packages/svelte/tests/runtime-browser/assert.js:168:72      infered (inferred)      U       directly visible, not infered, which is why"
+  - "packages/svelte/tests/runtime-browser/assert.js:169:72      infered (inferred)      U       directly visible, not infered, which is why"
   - "packages/svelte/tests/runtime-browser/samples/component-css-custom-properties-dynamic-svg/_config.js:14:52          qzlp    U       \"10\" class=\"svelte-1qzlp1k\"></circle>"
   - "packages/svelte/tests/runtime-browser/samples/component-event-handler-contenteditable-false/_config.js:13:21        bcde        U       component.text = 'bcde';"
   - "packages/svelte/tests/runtime-browser/samples/component-event-handler-contenteditable-false/_config.js:14:34        bcdea       U       equal(div.textContent, 'bcdea');"
@@ -1941,9 +1941,11 @@ issues:
   - "packages/svelte/tests/runtime-runes/samples/reactive-to-string/main.svelte:6:6          rmap    U       let rmap = new SvelteMap();"
   - "packages/svelte/tests/runtime-runes/samples/reactive-to-string/main.svelte:7:6          rset    U       let rset = new SvelteSet();"
   - "packages/svelte/tests/runtime-runes/samples/set-context-after-mount/_config.js:13:64        shouldnt (should not)       U       experimental async but really shouldnt'"
-  - "packages/svelte/tests/server-side-rendering/samples/css-injected-options-minify/_expected_head.html:1:39        gfnjhw      U       gfnjhw\">.foo.svelte-gfnjhw {color:green;}.foo.svelte"
-  - "packages/svelte/tests/server-side-rendering/samples/css-injected-options-nested/_expected_head.html:1:39        ievf    U       ievf05\">.bar.svelte-ievf05 {color:red;}</style"
+  - "packages/svelte/tests/server-side-rendering/samples/css-injected-options-minify/_expected_head.html:1:43        glmj    U       glmj\">.foo.svelte-1h3glmj {color:green;}.foo.svelte"
+  - "packages/svelte/tests/server-side-rendering/samples/css-injected-options-nested/_expected.css:2:14          nvcr    U       .foo.svelte-1nvcr6w {"
+  - "packages/svelte/tests/server-side-rendering/samples/css-injected-options/_expected_head.html:1:39           okauro      U       okauro\">.foo.svelte-okauro {color:red;}</style"
   - "packages/svelte/tests/snapshot/samples/nullish-coallescence-omittance/_expected/client/index.svelte.js:7:33         coallescence (coalescence)      U       default function Nullish_coallescence_omittance($$anchor)"
+  - "packages/svelte/tests/sourcemaps/samples/attached-sourcemap/_config.js:60:81        vsrjd       U       replace_style_2.svelte-1vsrjd4' }],"
   - "packages/svelte/tests/sourcemaps/samples/preprocessed-multiple/_config.js:10:37         bazitone    U       replace_all(src, '--bazitone', '--baz');"
   - "packages/svelte/tests/sourcemaps/samples/sourcemap-basename-without-outputname/input.svelte:1:32        outputname      U       sourcemap-basename-without-outputname</h1>"
   - "packages/svelte/tests/sourcemaps/test.ts:11:25          occurence (occurrence)      U       ** If not the first occurence, but the nth should"

@@ -3,9 +3,9 @@ Repository: googleapis/google-cloud-cpp
 Url: https://github.com/googleapis/google-cloud-cpp.git
 Args: '["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]'
 Summary:
-  files: 20726
-  filesWithIssues: 7867
-  issues: 46240
+  files: 20758
+  filesWithIssues: 7871
+  issues: 46254
   errors: 0
 Errors: []
 
@@ -360,9 +360,9 @@ issues:
   - "generator/CMakeLists.txt:189:44         HDRS                        U       cpp(PROTO_SRCS PROTO_HDRS generator_config.proto"
   - "generator/CMakeLists.txt:291:26         everytime (every time)      U       build all the tests everytime they create a new package"
   - "generator/generator_config.proto:41:35          gcpxx       U       to true generate the `gcpxxV1` alias for our inline"
-  - "generator/generator_config.textproto:1833:15        Abac            U       \"SetLegacyAbac(std::string const&,"
-  - "generator/generator_config.textproto:2640:7         Multicloud      U       # GKE Multicloud"
-  - "generator/generator_config.textproto:3890:12        Hmac            U       \"CreateHmacKey\","
+  - "generator/generator_config.textproto:1834:15        Abac            U       \"SetLegacyAbac(std::string const&,"
+  - "generator/generator_config.textproto:2641:7         Multicloud      U       # GKE Multicloud"
+  - "generator/generator_config.textproto:3898:12        Hmac            U       \"CreateHmacKey\","
   - "generator/integration_tests/backup.proto:27:40          genproto    U       \"google.golang.org/genproto/googleapis/test/admin"
   - "generator/integration_tests/golden/v1/golden_kitchen_sink_client.h:286:43       cloudresourcemanager    U       organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"
   - "generator/integration_tests/golden/v1/golden_kitchen_sink_client.h:651:62       bidir                   U       read-write RPCs (aka bidir streaming)"
@@ -381,7 +381,7 @@ issues:
   - "generator/internal/codegen_utils_test.cc:444:4          wsupercalifragilisticexpialidocious     U       // wsupercalifragilisticexpialidocious)\"\"\"},"
   - "generator/internal/codegen_utils_test.cc:473:45         uhoh                                    U       CommentBlockTestParams{\"line1 uhoh\", 0, \"\", 0, 5, R\"\"\""
   - "generator/internal/codegen_utils_test.cc:476:43         wordthatiswaytoolong                    U       atCommentBlockTestParams{\"foo wordthatiswaytoolong\", 0, \"\", 0, 5,"
-  - "generator/internal/descriptor_utils.cc:281:32       scikit      U       environment would specify the scikit-learn version as follows"
+  - "generator/internal/descriptor_utils.cc:284:32       scikit      U       environment would specify the scikit-learn version as follows"
   - "generator/internal/discovery_proto_export_file_test.cc:50:36        IWYU    U       However, it is not IWYU friendly. Including"
   - "generator/internal/discovery_to_proto_test.cc:38:18         Pointee                 U       using ::testing::Pointee;"
   - "generator/internal/discovery_to_proto_test.cc:1753:46       Circlular (Circular)    U       ourceLabelsToTypesTest, HandleCirclularDependency) {"
@@ -761,11 +761,11 @@ issues:
   - "google/cloud/spanner/internal/connection_impl_test.cc:65:34         Wmissing    U       diagnostic ignored \"-Wmissing-field-initializers\""
   - "google/cloud/spanner/internal/connection_impl_test.cc:3712:37       BADDECAF    U       { partition_token: \"BADDECAF\" }"
   - "google/cloud/spanner/internal/connection_impl_test.cc:3714:25       CAFEDEAD    U       transaction: { id: \"CAFEDEAD\" }"
-  - "google/cloud/spanner/internal/logging_result_set_reader.cc:34:43        unresumable     U       __func__ << \"() << (unresumable)\";"
-  - "google/cloud/spanner/internal/partial_result_set_resume_test.cc:528:39      Resumability    U       set<spanner::StreamingResumabilityBufferSizeOption>(0)"
-  - "google/cloud/spanner/internal/partial_result_set_source_test.cc:527:31      chunksecond     U       not_chunked\", \"first_chunksecond_chunkthird_chunk\","
-  - "google/cloud/spanner/internal/partial_result_set_source_test.cc:527:43      chunkthird      U       \"first_chunksecond_chunkthird_chunk\","
-  - "google/cloud/spanner/internal/partial_result_set_source.cc:216:64       resumability    U       again so as to maintain resumability."
+  - "google/cloud/spanner/internal/logging_result_set_reader.cc:35:43        unresumable     U       __func__ << \"() << (unresumable)\";"
+  - "google/cloud/spanner/internal/partial_result_set_resume_test.cc:532:39      Resumability    U       set<spanner::StreamingResumabilityBufferSizeOption>(0)"
+  - "google/cloud/spanner/internal/partial_result_set_source_test.cc:602:31      chunksecond     U       not_chunked\", \"first_chunksecond_chunkthird_chunk\","
+  - "google/cloud/spanner/internal/partial_result_set_source_test.cc:602:43      chunkthird      U       \"first_chunksecond_chunkthird_chunk\","
+  - "google/cloud/spanner/internal/partial_result_set_source.cc:252:64       resumability    U       again so as to maintain resumability."
   - "google/cloud/spanner/internal/session_pool_test.cc:736:35       Stubless        U       SessionPoolTest, GetStubForStublessSession) {"
   - "google/cloud/spanner/internal/session_pool_test.cc:751:25       Multilpexed     U       TEST_F(SessionPoolTest, MultilpexedSessionReplacementSuccess"
   - "google/cloud/spanner/internal/session_pool.cc:468:22        robining    U       // to use by round-robining between the channels"
