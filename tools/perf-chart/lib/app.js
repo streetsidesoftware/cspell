@@ -28,8 +28,8 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 var __require = /* @__PURE__ */ createRequire(import.meta.url);
 
 //#endregion
-//#region ../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/lib/error.js
-var require_error = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/lib/error.js": ((exports) => {
+//#region ../../node_modules/.pnpm/commander@14.0.1/node_modules/commander/lib/error.js
+var require_error = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/commander@14.0.1/node_modules/commander/lib/error.js": ((exports) => {
 	/**
 	* CommanderError class
 	*/
@@ -68,8 +68,8 @@ var require_error = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/comma
 }) });
 
 //#endregion
-//#region ../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/lib/argument.js
-var require_argument = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/lib/argument.js": ((exports) => {
+//#region ../../node_modules/.pnpm/commander@14.0.1/node_modules/commander/lib/argument.js
+var require_argument = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/commander@14.0.1/node_modules/commander/lib/argument.js": ((exports) => {
 	const { InvalidArgumentError: InvalidArgumentError$3 } = require_error();
 	var Argument$3 = class {
 		/**
@@ -101,7 +101,7 @@ var require_argument = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/co
 					this._name = name;
 					break;
 			}
-			if (this._name.length > 3 && this._name.slice(-3) === "...") {
+			if (this._name.endsWith("...")) {
 				this.variadic = true;
 				this._name = this._name.slice(0, -3);
 			}
@@ -117,9 +117,10 @@ var require_argument = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/co
 		/**
 		* @package
 		*/
-		_concatValue(value, previous) {
+		_collectValue(value, previous) {
 			if (previous === this.defaultValue || !Array.isArray(previous)) return [value];
-			return previous.concat(value);
+			previous.push(value);
+			return previous;
 		}
 		/**
 		* Set the default value, and optionally supply the description to be displayed in the help.
@@ -153,7 +154,7 @@ var require_argument = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/co
 			this.argChoices = values.slice();
 			this.parseArg = (arg, previous) => {
 				if (!this.argChoices.includes(arg)) throw new InvalidArgumentError$3(`Allowed choices are ${this.argChoices.join(", ")}.`);
-				if (this.variadic) return this._concatValue(arg, previous);
+				if (this.variadic) return this._collectValue(arg, previous);
 				return arg;
 			};
 			return this;
@@ -193,8 +194,8 @@ var require_argument = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/co
 }) });
 
 //#endregion
-//#region ../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/lib/help.js
-var require_help = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/lib/help.js": ((exports) => {
+//#region ../../node_modules/.pnpm/commander@14.0.1/node_modules/commander/lib/help.js
+var require_help = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/commander@14.0.1/node_modules/commander/lib/help.js": ((exports) => {
 	const { humanReadableArgName: humanReadableArgName$1 } = require_argument();
 	/**
 	* TypeScript import types for JSDoc, used by Visual Studio Code IntelliSense and `npm run typescript-checkJS`
@@ -684,8 +685,8 @@ var require_help = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/comman
 }) });
 
 //#endregion
-//#region ../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/lib/option.js
-var require_option = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/lib/option.js": ((exports) => {
+//#region ../../node_modules/.pnpm/commander@14.0.1/node_modules/commander/lib/option.js
+var require_option = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/commander@14.0.1/node_modules/commander/lib/option.js": ((exports) => {
 	const { InvalidArgumentError: InvalidArgumentError$2 } = require_error();
 	var Option$3 = class {
 		/**
@@ -824,9 +825,10 @@ var require_option = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/comm
 		/**
 		* @package
 		*/
-		_concatValue(value, previous) {
+		_collectValue(value, previous) {
 			if (previous === this.defaultValue || !Array.isArray(previous)) return [value];
-			return previous.concat(value);
+			previous.push(value);
+			return previous;
 		}
 		/**
 		* Only allow option value to be one of choices.
@@ -838,7 +840,7 @@ var require_option = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/comm
 			this.argChoices = values.slice();
 			this.parseArg = (arg, previous) => {
 				if (!this.argChoices.includes(arg)) throw new InvalidArgumentError$2(`Allowed choices are ${this.argChoices.join(", ")}.`);
-				if (this.variadic) return this._concatValue(arg, previous);
+				if (this.variadic) return this._collectValue(arg, previous);
 				return arg;
 			};
 			return this;
@@ -987,8 +989,8 @@ var require_option = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/comm
 }) });
 
 //#endregion
-//#region ../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/lib/suggestSimilar.js
-var require_suggestSimilar = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/lib/suggestSimilar.js": ((exports) => {
+//#region ../../node_modules/.pnpm/commander@14.0.1/node_modules/commander/lib/suggestSimilar.js
+var require_suggestSimilar = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/commander@14.0.1/node_modules/commander/lib/suggestSimilar.js": ((exports) => {
 	const maxDistance = 3;
 	function editDistance(a, b) {
 		if (Math.abs(a.length - b.length) > maxDistance) return Math.max(a.length, b.length);
@@ -1043,8 +1045,8 @@ var require_suggestSimilar = /* @__PURE__ */ __commonJS({ "../../node_modules/.p
 }) });
 
 //#endregion
-//#region ../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/lib/command.js
-var require_command = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/lib/command.js": ((exports) => {
+//#region ../../node_modules/.pnpm/commander@14.0.1/node_modules/commander/lib/command.js
+var require_command = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/commander@14.0.1/node_modules/commander/lib/command.js": ((exports) => {
 	const EventEmitter = __require("node:events").EventEmitter;
 	const childProcess = __require("node:child_process");
 	const path = __require("node:path");
@@ -1260,7 +1262,10 @@ var require_command = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/com
 		*/
 		configureOutput(configuration) {
 			if (configuration === void 0) return this._outputConfiguration;
-			this._outputConfiguration = Object.assign({}, this._outputConfiguration, configuration);
+			this._outputConfiguration = {
+				...this._outputConfiguration,
+				...configuration
+			};
 			return this;
 		}
 		/**
@@ -1365,7 +1370,7 @@ var require_command = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/com
 		*/
 		addArgument(argument) {
 			const previousArgument = this.registeredArguments.slice(-1)[0];
-			if (previousArgument && previousArgument.variadic) throw new Error(`only the last argument can be variadic '${previousArgument.name()}'`);
+			if (previousArgument?.variadic) throw new Error(`only the last argument can be variadic '${previousArgument.name()}'`);
 			if (argument.required && argument.defaultValue !== void 0 && argument.parseArg === void 0) throw new Error(`a default value for a required argument is never used: '${argument.name()}'`);
 			this.registeredArguments.push(argument);
 			return this;
@@ -1592,7 +1597,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
 				if (val == null && option.presetArg !== void 0) val = option.presetArg;
 				const oldValue = this.getOptionValue(name);
 				if (val !== null && option.parseArg) val = this._callParseArg(option, val, oldValue, invalidValueMessage);
-				else if (val !== null && option.variadic) val = option._concatValue(val, oldValue);
+				else if (val !== null && option.variadic) val = option._collectValue(val, oldValue);
 				if (val == null) if (option.negate) val = false;
 				else if (option.isBoolean() || option.optional) val = true;
 				else val = "";
@@ -2117,7 +2122,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
 		* @private
 		*/
 		_chainOrCall(promise, fn) {
-			if (promise && promise.then && typeof promise.then === "function") return promise.then(() => fn());
+			if (promise?.then && typeof promise.then === "function") return promise.then(() => fn());
 			return fn();
 		}
 		/**
@@ -2202,7 +2207,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
 				promiseChain = this._chainOrCallHooks(promiseChain, "postAction");
 				return promiseChain;
 			}
-			if (this.parent && this.parent.listenerCount(commandEvent)) {
+			if (this.parent?.listenerCount(commandEvent)) {
 				checkForUnknownOptions();
 				this._processArguments();
 				this.parent.emit(commandEvent, operands, unknown);
@@ -2296,14 +2301,13 @@ Expecting one of '${allowedValues.join("', '")}'`);
 		*     sub --unknown uuu op => [sub], [--unknown uuu op]
 		*     sub -- --unknown uuu op => [sub --unknown uuu op], []
 		*
-		* @param {string[]} argv
+		* @param {string[]} args
 		* @return {{operands: string[], unknown: string[]}}
 		*/
-		parseOptions(argv) {
+		parseOptions(args) {
 			const operands = [];
 			const unknown = [];
 			let dest = operands;
-			const args = argv.slice();
 			function maybeOption(arg) {
 				return arg.length > 1 && arg[0] === "-";
 			}
@@ -2312,11 +2316,14 @@ Expecting one of '${allowedValues.join("', '")}'`);
 				return !this._getCommandAndAncestors().some((cmd) => cmd.options.map((opt) => opt.short).some((short) => /^-\d$/.test(short)));
 			};
 			let activeVariadicOption = null;
-			while (args.length) {
-				const arg = args.shift();
+			let activeGroup = null;
+			let i = 0;
+			while (i < args.length || activeGroup) {
+				const arg = activeGroup ?? args[i++];
+				activeGroup = null;
 				if (arg === "--") {
 					if (dest === unknown) dest.push(arg);
-					dest.push(...args);
+					dest.push(...args.slice(i));
 					break;
 				}
 				if (activeVariadicOption && (!maybeOption(arg) || negativeNumberArg(arg))) {
@@ -2328,12 +2335,12 @@ Expecting one of '${allowedValues.join("', '")}'`);
 					const option = this._findOption(arg);
 					if (option) {
 						if (option.required) {
-							const value = args.shift();
+							const value = args[i++];
 							if (value === void 0) this.optionMissingArgument(option);
 							this.emit(`option:${option.name()}`, value);
 						} else if (option.optional) {
 							let value = null;
-							if (args.length > 0 && (!maybeOption(args[0]) || negativeNumberArg(args[0]))) value = args.shift();
+							if (i < args.length && (!maybeOption(args[i]) || negativeNumberArg(args[i]))) value = args[i++];
 							this.emit(`option:${option.name()}`, value);
 						} else this.emit(`option:${option.name()}`);
 						activeVariadicOption = option.variadic ? option : null;
@@ -2346,7 +2353,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
 						if (option.required || option.optional && this._combineFlagAndOptionalValue) this.emit(`option:${option.name()}`, arg.slice(2));
 						else {
 							this.emit(`option:${option.name()}`);
-							args.unshift(`-${arg.slice(2)}`);
+							activeGroup = `-${arg.slice(2)}`;
 						}
 						continue;
 					}
@@ -2363,21 +2370,18 @@ Expecting one of '${allowedValues.join("', '")}'`);
 				if ((this._enablePositionalOptions || this._passThroughOptions) && operands.length === 0 && unknown.length === 0) {
 					if (this._findCommand(arg)) {
 						operands.push(arg);
-						if (args.length > 0) unknown.push(...args);
+						unknown.push(...args.slice(i));
 						break;
 					} else if (this._getHelpCommand() && arg === this._getHelpCommand().name()) {
-						operands.push(arg);
-						if (args.length > 0) operands.push(...args);
+						operands.push(arg, ...args.slice(i));
 						break;
 					} else if (this._defaultCommandName) {
-						unknown.push(arg);
-						if (args.length > 0) unknown.push(...args);
+						unknown.push(arg, ...args.slice(i));
 						break;
 					}
 				}
 				if (this._passThroughOptions) {
-					dest.push(arg);
-					if (args.length > 0) dest.push(...args);
+					dest.push(arg, ...args.slice(i));
 					break;
 				}
 				dest.push(arg);
@@ -3023,8 +3027,8 @@ Expecting one of '${allowedValues.join("', '")}'`);
 }) });
 
 //#endregion
-//#region ../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/index.js
-var require_commander = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/index.js": ((exports) => {
+//#region ../../node_modules/.pnpm/commander@14.0.1/node_modules/commander/index.js
+var require_commander = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/commander@14.0.1/node_modules/commander/index.js": ((exports) => {
 	const { Argument: Argument$1 } = require_argument();
 	const { Command: Command$1 } = require_command();
 	const { CommanderError: CommanderError$1, InvalidArgumentError: InvalidArgumentError$1 } = require_error();
@@ -3047,7 +3051,7 @@ var require_commander = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/c
 }) });
 
 //#endregion
-//#region ../../node_modules/.pnpm/commander@14.0.0/node_modules/commander/esm.mjs
+//#region ../../node_modules/.pnpm/commander@14.0.1/node_modules/commander/esm.mjs
 var import_commander = /* @__PURE__ */ __toESM(require_commander(), 1);
 const { program, createCommand, createArgument, createOption, CommanderError, InvalidArgumentError, InvalidOptionArgumentError, Command, Argument, Option, Help } = import_commander.default;
 
