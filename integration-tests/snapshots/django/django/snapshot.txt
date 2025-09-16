@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["--issues-summary-report","**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2857, Issues found: 8492 in 920 files.
+ CSpell: Files checked: 2857, Issues found: 8491 in 919 files.
  exit code: 1
 django/__init__.py:12:26     - Unknown word (urlresolvers) -- Set the thread-local urlresolvers script prefix if `set
 django/apps/registry.py:134:40    - Unknown word (unconfigured) -- not ready" is due to unconfigured settings, accessing
@@ -1083,7 +1083,6 @@ django/core/files/move.py:55:22     - Unknown word (WRONLY)     -- os.O_WRONLY
 django/core/files/move.py:56:24     - Unknown word (CREAT)      -- | os.O_CREAT
 django/core/files/move.py:75:37     - Unknown word (CIFS)       -- Certain filesystems (e.g. CIFS) fail to copy the file
 django/core/files/move.py:91:24     - Unknown word (winerror)   -- if getattr(e, "winerror", 0) != 32:
-django/core/files/storage/base.py:40:35     - Unknown word (overriden)  -- get_available_name` is overriden and validation is lost
 django/core/files/storage/filesystem.py:107:44    - Unknown word (CREAT)      -- The combination of O_CREAT and O_EXCL makes os
 django/core/files/storage/filesystem.py:111:30    - Unknown word (WRONLY)     -- os.O_WRONLY
 django/core/files/storage/filesystem.py:112:32    - Unknown word (CREAT)      -- | os.O_CREAT
@@ -1259,8 +1258,8 @@ django/db/backends/base/creation.py:40:63     - Unknown word (keepdb)     -- Fal
 django/db/backends/base/creation.py:53:16     - Unknown word (keepdb)     -- if keepdb:
 django/db/backends/base/creation.py:64:38     - Unknown word (keepdb)     -- could skip this call if keepdb is True, but we instead
 django/db/backends/base/creation.py:65:23     - Unknown word (keepdb)     -- # give it the keepdb param. This is to handle
-django/db/backends/base/features.py:175:24    - Unknown word (clientside) -- schema_editor_uses_clientside_param_binding = False
-django/db/backends/base/features.py:83:36     - Unknown word (timedeltas) -- a true datatype for timedeltas?
+django/db/backends/base/features.py:176:24    - Unknown word (clientside) -- schema_editor_uses_clientside_param_binding = False
+django/db/backends/base/features.py:84:36     - Unknown word (timedeltas) -- a true datatype for timedeltas?
 django/db/backends/base/operations.py:292:23    - Unknown word (lastrowid)  -- return cursor.lastrowid
 django/db/backends/base/operations.py:347:17    - Unknown word (clob)       -- def process_clob(self, value):
 django/db/backends/base/operations.py:349:31    - Unknown word (CLOB)       -- Return the value of a CLOB column, for backends
@@ -1319,37 +1318,37 @@ django/db/backends/oracle/base.py:196:24    - Unknown word (LIKEC)      -- "star
 django/db/backends/oracle/base.py:197:22    - Unknown word (LIKEC)      -- "endswith": "LIKEC %s ESCAPE '\\'",
 django/db/backends/oracle/base.py:198:25    - Unknown word (LIKEC)      -- "istartswith": "LIKEC UPPER(%s) ESCAPE '\
 django/db/backends/oracle/base.py:225:6     - Unknown word (likec)      -- _likec_pattern_ops = {
-django/db/backends/oracle/base.py:336:40    - Unknown word (likec)      -- self.operators = self._likec_operators
-django/db/backends/oracle/base.py:337:42    - Unknown word (likec)      -- pattern_ops = self._likec_pattern_ops
-django/db/backends/oracle/base.py:342:25    - Unknown word (stmtcachesize) -- self.connection.stmtcachesize = 20
-django/db/backends/oracle/base.py:408:39    - Unknown word (CLOB)          -- size needs to be set as CLOB. Alternatively, if the
-django/db/backends/oracle/base.py:448:71    - Unknown word (CLOB)          -- 000 characters as a CLOB.
-django/db/backends/oracle/base.py:449:48    - Unknown word (CLOB)          -- size = Database.DB_TYPE_CLOB
-django/db/backends/oracle/base.py:493:21    - Unknown word (outputtypehandler) -- self.cursor.outputtypehandler = self._output_type
-django/db/backends/oracle/base.py:504:35    - Unknown word (prec)              -- context = decimal.Context(prec=precision)
-django/db/backends/oracle/base.py:505:45    - Unknown word (scaleb)            -- decimal.Decimal(1).scaleb(-scale)
-django/db/backends/oracle/base.py:512:38    - Unknown word (NCLOB)             -- appropriate Python type, and NCLOB with JSON as strings
-django/db/backends/oracle/base.py:520:21    - Unknown word (outconverter)      -- outconverter = FormatStylePlaceholderCurso
-django/db/backends/oracle/base.py:524:21    - Unknown word (outconverter)      -- outconverter = float
-django/db/backends/oracle/base.py:528:17    - Unknown word (outconverter)      -- outconverter = FormatStylePlaceholderCurso
-django/db/backends/oracle/base.py:535:17    - Unknown word (outconverter)      -- outconverter = FormatStylePlaceholderCurso
-django/db/backends/oracle/base.py:539:17    - Unknown word (arraysize)         -- arraysize=cursor.arraysize,
-django/db/backends/oracle/base.py:539:34    - Unknown word (arraysize)         -- arraysize=cursor.arraysize,
-django/db/backends/oracle/base.py:540:17    - Unknown word (outconverter)      -- outconverter=outconverter,
-django/db/backends/oracle/base.py:542:35    - Unknown word (NLOB)              -- oracledb 2.0.0+ returns NLOB columns with IS JSON
-django/db/backends/oracle/base.py:544:46    - Unknown word (NCLOB)             -- == Database.DB_TYPE_NCLOB:
-django/db/backends/oracle/base.py:545:48    - Unknown word (NCLOB)             -- var(Database.DB_TYPE_NCLOB, arraysize=cursor.arraysize
-django/db/backends/oracle/base.py:545:55    - Unknown word (arraysize)         -- Database.DB_TYPE_NCLOB, arraysize=cursor.arraysize)
-django/db/backends/oracle/base.py:545:72    - Unknown word (arraysize)         -- NCLOB, arraysize=cursor.arraysize)
-django/db/backends/oracle/base.py:562:22    - Unknown word (setinputsizes)     -- self.setinputsizes(**sizes)
-django/db/backends/oracle/base.py:571:22    - Unknown word (setinputsizes)     -- self.setinputsizes(*sizes)
-django/db/backends/oracle/base.py:596:15    - Unknown word (executemany)       -- # executemany() shares the formatted
-django/db/backends/oracle/base.py:629:9     - Unknown word (executemany)       -- def executemany(self, query, params
-django/db/backends/oracle/base.py:635:16    - Unknown word (firstparams)       -- query, firstparams = self._fix_for_params
-django/db/backends/oracle/base.py:638:22    - Unknown word (firstparams)       -- formatted = [firstparams] + [self._format_params
-django/db/backends/oracle/base.py:641:32    - Unknown word (executemany)       -- return self.cursor.executemany(
-django/db/backends/oracle/base.py:655:9     - Unknown word (arrayvar)          -- def arrayvar(self, *args):
-django/db/backends/oracle/base.py:656:44    - Unknown word (arrayvar)          -- VariableWrapper(self.cursor.arrayvar(*args))
+django/db/backends/oracle/base.py:337:40    - Unknown word (likec)      -- self.operators = self._likec_operators
+django/db/backends/oracle/base.py:338:42    - Unknown word (likec)      -- pattern_ops = self._likec_pattern_ops
+django/db/backends/oracle/base.py:343:25    - Unknown word (stmtcachesize) -- self.connection.stmtcachesize = 20
+django/db/backends/oracle/base.py:409:39    - Unknown word (CLOB)          -- size needs to be set as CLOB. Alternatively, if the
+django/db/backends/oracle/base.py:449:71    - Unknown word (CLOB)          -- 000 characters as a CLOB.
+django/db/backends/oracle/base.py:450:48    - Unknown word (CLOB)          -- size = Database.DB_TYPE_CLOB
+django/db/backends/oracle/base.py:494:21    - Unknown word (outputtypehandler) -- self.cursor.outputtypehandler = self._output_type
+django/db/backends/oracle/base.py:505:35    - Unknown word (prec)              -- context = decimal.Context(prec=precision)
+django/db/backends/oracle/base.py:506:45    - Unknown word (scaleb)            -- decimal.Decimal(1).scaleb(-scale)
+django/db/backends/oracle/base.py:513:38    - Unknown word (NCLOB)             -- appropriate Python type, and NCLOB with JSON as strings
+django/db/backends/oracle/base.py:521:21    - Unknown word (outconverter)      -- outconverter = FormatStylePlaceholderCurso
+django/db/backends/oracle/base.py:525:21    - Unknown word (outconverter)      -- outconverter = float
+django/db/backends/oracle/base.py:529:17    - Unknown word (outconverter)      -- outconverter = FormatStylePlaceholderCurso
+django/db/backends/oracle/base.py:536:17    - Unknown word (outconverter)      -- outconverter = FormatStylePlaceholderCurso
+django/db/backends/oracle/base.py:540:17    - Unknown word (arraysize)         -- arraysize=cursor.arraysize,
+django/db/backends/oracle/base.py:540:34    - Unknown word (arraysize)         -- arraysize=cursor.arraysize,
+django/db/backends/oracle/base.py:541:17    - Unknown word (outconverter)      -- outconverter=outconverter,
+django/db/backends/oracle/base.py:543:35    - Unknown word (NLOB)              -- oracledb 2.0.0+ returns NLOB columns with IS JSON
+django/db/backends/oracle/base.py:545:46    - Unknown word (NCLOB)             -- == Database.DB_TYPE_NCLOB:
+django/db/backends/oracle/base.py:546:48    - Unknown word (NCLOB)             -- var(Database.DB_TYPE_NCLOB, arraysize=cursor.arraysize
+django/db/backends/oracle/base.py:546:55    - Unknown word (arraysize)         -- Database.DB_TYPE_NCLOB, arraysize=cursor.arraysize)
+django/db/backends/oracle/base.py:546:72    - Unknown word (arraysize)         -- NCLOB, arraysize=cursor.arraysize)
+django/db/backends/oracle/base.py:563:22    - Unknown word (setinputsizes)     -- self.setinputsizes(**sizes)
+django/db/backends/oracle/base.py:572:22    - Unknown word (setinputsizes)     -- self.setinputsizes(*sizes)
+django/db/backends/oracle/base.py:597:15    - Unknown word (executemany)       -- # executemany() shares the formatted
+django/db/backends/oracle/base.py:630:9     - Unknown word (executemany)       -- def executemany(self, query, params
+django/db/backends/oracle/base.py:636:16    - Unknown word (firstparams)       -- query, firstparams = self._fix_for_params
+django/db/backends/oracle/base.py:639:22    - Unknown word (firstparams)       -- formatted = [firstparams] + [self._format_params
+django/db/backends/oracle/base.py:642:32    - Unknown word (executemany)       -- return self.cursor.executemany(
+django/db/backends/oracle/base.py:656:9     - Unknown word (arrayvar)          -- def arrayvar(self, *args):
+django/db/backends/oracle/base.py:657:44    - Unknown word (arrayvar)          -- VariableWrapper(self.cursor.arrayvar(*args))
 django/db/backends/oracle/base.py:80:61     - Unknown word (DJANGOTEST) -- integrity constraint (TEST_DJANGOTEST.SYS
 django/db/backends/oracle/base.py:83:53     - Unknown word (DJANGOTEST) -- unique constraint (DJANGOTEST.DEFERRABLE_
 django/db/backends/oracle/client.py:8:21      - Unknown word (rlwrap)     -- wrapper_name = "rlwrap"
@@ -1358,9 +1357,9 @@ django/db/backends/oracle/creation.py:29:63     - Unknown word (keepdb)     -- a
 django/db/backends/oracle/creation.py:35:56     - Unknown word (keepdb)     -- parameters, verbosity, keepdb
 django/db/backends/oracle/creation.py:79:64     - Unknown word (keepdb)     -- parameters, verbosity, keepdb
 django/db/backends/oracle/creation.py:94:75     - Unknown word (keepdb)     -- parameters, verbosity, keepdb)
-django/db/backends/oracle/features.py:121:47    - Unknown word (NCLOB)       -- t support comparing NCLOB to NUMBER.": {
-django/db/backends/oracle/features.py:123:23    - Unknown word (textlink)    -- "test_textlink_filter",
-django/db/backends/oracle/features.py:46:15     - Unknown word (uppercasing) -- # does by uppercasing all identifiers.
+django/db/backends/oracle/features.py:122:47    - Unknown word (NCLOB)       -- t support comparing NCLOB to NUMBER.": {
+django/db/backends/oracle/features.py:124:23    - Unknown word (textlink)    -- "test_textlink_filter",
+django/db/backends/oracle/features.py:47:15     - Unknown word (uppercasing) -- # does by uppercasing all identifiers.
 django/db/backends/oracle/functions.py:20:17     - Unknown word (NUMTODSINTERVAL) -- function = "NUMTODSINTERVAL"
 django/db/backends/oracle/introspection.py:103:31    - Unknown word (mviews)     -- FROM user_mviews
 django/db/backends/oracle/introspection.py:104:32    - Unknown word (mviews)     -- WHERE user_mviews.mview_name = user_tables
@@ -1431,9 +1430,9 @@ django/db/backends/postgresql/creation.py:42:16     - Unknown word (keepdb)     
 django/db/backends/postgresql/creation.py:46:65     - Unknown word (keepdb)     -- cursor, parameters, keepdb)
 django/db/backends/postgresql/creation.py:52:22     - Unknown word (keepdb)     -- elif not keepdb:
 django/db/backends/postgresql/creation.py:57:49     - Unknown word (keepdb)     -- suffix, verbosity, keepdb=False):
-django/db/backends/postgresql/features.py:31:24     - Unknown word (clientside) -- schema_editor_uses_clientside_param_binding = True
-django/db/backends/postgresql/features.py:46:17     - Unknown word (plpgsql)    -- $$ LANGUAGE plpgsql;"""
-django/db/backends/postgresql/features.py:54:17     - Unknown word (plpgsql)    -- $$ LANGUAGE plpgsql;"""
+django/db/backends/postgresql/features.py:32:24     - Unknown word (clientside) -- schema_editor_uses_clientside_param_binding = True
+django/db/backends/postgresql/features.py:47:17     - Unknown word (plpgsql)    -- $$ LANGUAGE plpgsql;"""
+django/db/backends/postgresql/features.py:55:17     - Unknown word (plpgsql)    -- $$ LANGUAGE plpgsql;"""
 django/db/backends/postgresql/introspection.py:100:44    - Unknown word (attcollation)   -- pg_collation co ON a.attcollation = co.oid
 django/db/backends/postgresql/introspection.py:101:33    - Unknown word (atttypid)       -- JOIN pg_type t ON a.atttypid = t.oid
 django/db/backends/postgresql/introspection.py:102:34    - Unknown word (attrelid)       -- JOIN pg_class c ON a.attrelid = c.oid
@@ -1640,7 +1639,7 @@ django/db/models/aggregates.py:298:83    - Unknown word (SAMP)       -- function
 django/db/models/aggregates.py:344:23    - Unknown word (LISTAGG)    -- function="LISTAGG",
 django/db/models/aggregates.py:395:30    - Unknown word (SAMP)       -- self.function = "VAR_SAMP" if sample else "VAR
 django/db/models/aggregates.py:399:80    - Unknown word (SAMP)       -- self.function == "VAR_SAMP"}
-django/db/models/base.py:1109:19   - Unknown word (autopopulate)  -- # autopopulate the _order field
+django/db/models/base.py:1130:19   - Unknown word (autopopulate)  -- # autopopulate the _order field
 django/db/models/base.py:116:9     - Unknown word (contributable) -- contributable_attrs = {}
 django/db/models/base.py:119:17    - Unknown word (contributable) -- contributable_attrs[obj_name] = obj
 django/db/models/base.py:185:36    - Unknown word (subclasshook)  -- # reasons as __subclasshook__ is not taken into
@@ -1717,10 +1716,10 @@ django/db/models/options.py:538:33    - Unknown word (longwinded) -- The third f
 django/db/models/options.py:998:13    - Unknown word (klass)      -- for klass in self.model.__mro
 django/db/models/query.py:101:21    - Unknown word (klass)      -- model_cls = klass_info["model"]
 django/db/models/query.py:102:25    - Unknown word (klass)      -- select_fields = klass_info["select_fields
-django/db/models/query.py:1398:68   - Unknown word (deindent)   -- the deprecation ends, deindent as:
-django/db/models/query.py:2488:11   - Unknown word (aprefetch)  -- async def aprefetch_related_objects(model
-django/db/models/query.py:2703:35   - Unknown word (attnames)   -- init_list: the field attnames fetched from the database
-django/db/models/query.py:2704:57   - Unknown word (attnames)   -- isn't the same as all attnames of the
+django/db/models/query.py:1400:68   - Unknown word (deindent)   -- the deprecation ends, deindent as:
+django/db/models/query.py:2490:11   - Unknown word (aprefetch)  -- async def aprefetch_related_objects(model
+django/db/models/query.py:2705:35   - Unknown word (attnames)   -- init_list: the field attnames fetched from the database
+django/db/models/query.py:2706:57   - Unknown word (attnames)   -- isn't the same as all attnames of the
 django/db/models/query.py:552:27    - Unknown word (aprefetch)  -- await aprefetch_related_objects(
 django/db/models/query.py:560:23    - Unknown word (aprefetch)  -- await aprefetch_related_objects(
 django/db/models/query.py:771:30    - Unknown word (childmost)  -- insert into the childmost table.
@@ -1924,23 +1923,23 @@ django/shortcuts.py:65:16     - Unknown word (klass)      -- return klass._defau
 django/shortcuts.py:66:12     - Unknown word (klass)      -- return klass
 django/shortcuts.py:69:23     - Unknown word (klass)      -- def get_object_or_404(klass, *args, **kwargs):
 django/template/__init__.py:34:19     - Unknown word (smartif)    -- - django.template.smartif
-django/template/base.py:593:25    - Unknown word (endtag)     -- def skip_past(self, endtag):
-django/template/base.py:596:74    - Unknown word (endtag)     -- and token.contents == endtag:
-django/template/base.py:598:34    - Unknown word (endtag)     -- unclosed_block_tag([endtag])
-django/template/base.py:689:19    - Unknown word (strdq)      -- (?:%(i18n_open)s%(strdq)s%(i18n_close)s|
-django/template/base.py:690:16    - Unknown word (strsq)      -- %(i18n_open)s%(strsq)s%(i18n_close)s|
-django/template/base.py:691:3     - Unknown word (strdq)      -- %(strdq)s|
-django/template/base.py:692:3     - Unknown word (strsq)      -- %(strsq)s)
-django/template/base.py:694:6     - Unknown word (strdq)      -- "strdq": r'"[^"\\]*(?:\\.[
-django/template/base.py:695:6     - Unknown word (strsq)      -- "strsq": r"'[^'\\]*(?:\\.[
-django/template/base.py:830:9     - Unknown word (alen)       -- alen = len(args)
-django/template/base.py:831:9     - Unknown word (dlen)       -- dlen = len(defaults or [
-django/template/base.py:833:20    - Unknown word (alen)       -- if plen < (alen - dlen) or plen > alen
-django/template/base.py:833:27    - Unknown word (dlen)       -- if plen < (alen - dlen) or plen > alen:
-django/template/base.py:833:43    - Unknown word (alen)       -- alen - dlen) or plen > alen:
-django/template/base.py:835:66    - Unknown word (alen)       -- d provided" % (name, alen - dlen, plen)
-django/template/base.py:835:73    - Unknown word (dlen)       -- provided" % (name, alen - dlen, plen)
-django/template/base.py:908:40    - Unknown word (bonafide)   -- we're dealing with a bonafide variable
+django/template/base.py:592:25    - Unknown word (endtag)     -- def skip_past(self, endtag):
+django/template/base.py:595:74    - Unknown word (endtag)     -- and token.contents == endtag:
+django/template/base.py:597:34    - Unknown word (endtag)     -- unclosed_block_tag([endtag])
+django/template/base.py:688:19    - Unknown word (strdq)      -- (?:%(i18n_open)s%(strdq)s%(i18n_close)s|
+django/template/base.py:689:16    - Unknown word (strsq)      -- %(i18n_open)s%(strsq)s%(i18n_close)s|
+django/template/base.py:690:3     - Unknown word (strdq)      -- %(strdq)s|
+django/template/base.py:691:3     - Unknown word (strsq)      -- %(strsq)s)
+django/template/base.py:693:6     - Unknown word (strdq)      -- "strdq": r'"[^"\\]*(?:\\.[
+django/template/base.py:694:6     - Unknown word (strsq)      -- "strsq": r"'[^'\\]*(?:\\.[
+django/template/base.py:829:9     - Unknown word (alen)       -- alen = len(args)
+django/template/base.py:830:9     - Unknown word (dlen)       -- dlen = len(defaults or [
+django/template/base.py:832:20    - Unknown word (alen)       -- if plen < (alen - dlen) or plen > alen
+django/template/base.py:832:27    - Unknown word (dlen)       -- if plen < (alen - dlen) or plen > alen:
+django/template/base.py:832:43    - Unknown word (alen)       -- alen - dlen) or plen > alen:
+django/template/base.py:834:66    - Unknown word (alen)       -- d provided" % (name, alen - dlen, plen)
+django/template/base.py:834:73    - Unknown word (dlen)       -- provided" % (name, alen - dlen, plen)
+django/template/base.py:907:40    - Unknown word (bonafide)   -- we're dealing with a bonafide variable
 django/template/defaultfilters.py:194:22    - Unknown word (scaleb)     -- exp = Decimal(1).scaleb(-abs(p))
 django/template/defaultfilters.py:196:5     - Unknown word (tupl)       -- tupl = d.as_tuple()
 django/template/defaultfilters.py:197:17    - Unknown word (tupl)       -- units = len(tupl[1])
@@ -2159,21 +2158,21 @@ django/utils/deconstruct.py:54:9      - Unknown word (klass)      -- klass.__new
 django/utils/decorators.py:57:9      - Unknown word (markcoroutinefunction) -- markcoroutinefunction(_wrapper)
 django/utils/decorators.py:5:47      - Unknown word (markcoroutinefunction) -- iscoroutinefunction, markcoroutinefunction
 django/utils/decorators.py:8:7       - Unknown word (classonlymethod)       -- class classonlymethod(classmethod):
-django/utils/deprecation.py:104:20    - Unknown word (posargs)               -- use @deprecate_posargs after @staticmethod
-django/utils/deprecation.py:106:57    - Unknown word (posargs)               -- option1 or option2 as posargs, change::
-django/utils/deprecation.py:113:20    - Unknown word (posargs)               -- @deprecate_posargs(RemovedInDjangoXXWarning
-django/utils/deprecation.py:124:53    - Unknown word (posargs)               -- using the deprecated posargs::
-django/utils/deprecation.py:177:25    - Unknown word (remappable)            -- for name in remappable_names
-django/utils/deprecation.py:180:52    - Unknown word (remappable)            -- posargs() requires all remappable_names to be "
-django/utils/deprecation.py:184:13    - Unknown word (remappable)            -- num_remappable_args = len(remappable
-django/utils/deprecation.py:184:35    - Unknown word (remappable)            -- remappable_args = len(remappable_names)
-django/utils/deprecation.py:279:46    - Unknown word (dunder)                -- to avoid swapping out dunder methods.
-django/utils/deprecation.py:280:13    - Unknown word (markcoroutinefunction) -- markcoroutinefunction(self)
-django/utils/deprecation.py:296:27    - Unknown word (acall)                 -- return self.__acall__(request)
-django/utils/deprecation.py:305:17    - Unknown word (acall)                 -- async def __acall__(self, request):
+django/utils/deprecation.py:100:15    - Unknown word (posargs)               -- def deprecate_posargs(deprecation_warning
+django/utils/deprecation.py:100:44    - Unknown word (remappable)            -- deprecation_warning, remappable_names, /):
+django/utils/deprecation.py:113:20    - Unknown word (posargs)               -- use @deprecate_posargs after @staticmethod
+django/utils/deprecation.py:115:57    - Unknown word (posargs)               -- option1 or option2 as posargs, change::
+django/utils/deprecation.py:122:20    - Unknown word (posargs)               -- @deprecate_posargs(RemovedInDjangoXXWarning
+django/utils/deprecation.py:133:53    - Unknown word (posargs)               -- using the deprecated posargs::
+django/utils/deprecation.py:186:25    - Unknown word (remappable)            -- for name in remappable_names
+django/utils/deprecation.py:189:52    - Unknown word (remappable)            -- posargs() requires all remappable_names to be "
+django/utils/deprecation.py:193:13    - Unknown word (remappable)            -- num_remappable_args = len(remappable
+django/utils/deprecation.py:193:35    - Unknown word (remappable)            -- remappable_args = len(remappable_names)
+django/utils/deprecation.py:288:46    - Unknown word (dunder)                -- to avoid swapping out dunder methods.
+django/utils/deprecation.py:289:13    - Unknown word (markcoroutinefunction) -- markcoroutinefunction(self)
+django/utils/deprecation.py:305:27    - Unknown word (acall)                 -- return self.__acall__(request)
+django/utils/deprecation.py:314:17    - Unknown word (acall)                 -- async def __acall__(self, request):
 django/utils/deprecation.py:7:47      - Unknown word (markcoroutinefunction) -- iscoroutinefunction, markcoroutinefunction, sync_to_async
-django/utils/deprecation.py:91:15     - Unknown word (posargs)               -- def deprecate_posargs(deprecation_warning
-django/utils/deprecation.py:91:44     - Unknown word (remappable)            -- deprecation_warning, remappable_names, /):
 django/utils/encoding.py:147:66    - Unknown word (multibyte)  -- bytes ≥ 128 are part of multibyte
 django/utils/encoding.py:149:2     - Unknown word (hexdig)     -- _hexdig = "0123456789ABCDEFabcdef
 django/utils/encoding.py:151:55    - Unknown word (hexdig)     -- fromhex(a + b) for a in _hexdig[8:] for b in _hexdig
@@ -3943,27 +3942,27 @@ tests/backends/tests.py:969:9     - Unknown word (SQLPK)       -- class MySQLPKZ
 tests/backends/tests.py:977:22    - Unknown word (autoval)     -- def test_zero_as_autoval(self):
 tests/basic/models.py:54:21     - Unknown word (Falsey)     -- class PrimaryKeyWithFalseyDefault(models.Model
 tests/basic/models.py:58:21     - Unknown word (Falsey)     -- class PrimaryKeyWithFalseyDbDefault(models.Model
-tests/basic/tests.py:139:18    - Unknown word (datetimefields) -- def test_for_datetimefields_saves_as_much_precision
-tests/basic/tests.py:208:32    - Unknown word (falsey)         -- test_save_primary_with_falsey_default(self):
-tests/basic/tests.py:210:27    - Unknown word (Falsey)         -- PrimaryKeyWithFalseyDefault().save()
-tests/basic/tests.py:212:32    - Unknown word (falsey)         -- test_save_primary_with_falsey_db_default(self):
-tests/basic/tests.py:214:27    - Unknown word (Falsey)         -- PrimaryKeyWithFalseyDbDefault().save()
-tests/basic/tests.py:34:19     - Unknown word (Falsey)     -- PrimaryKeyWithFalseyDbDefault,
-tests/basic/tests.py:35:19     - Unknown word (Falsey)     -- PrimaryKeyWithFalseyDefault,
-tests/basic/tests.py:375:43    - Unknown word (undashedvalue)  -- dashed-value": "1", "undashedvalue": "2"}
-tests/basic/tests.py:377:38    - Unknown word (undashedvalue)  -- assertEqual(articles[0].undashedvalue, 2)
-tests/basic/tests.py:403:14    - Unknown word (emptyqs)        -- def test_emptyqs(self):
-tests/basic/tests.py:410:14    - Unknown word (emptyqs)        -- def test_emptyqs_values(self):
-tests/basic/tests.py:418:14    - Unknown word (emptyqs)        -- def test_emptyqs_customqs(self):
-tests/basic/tests.py:418:22    - Unknown word (customqs)       -- def test_emptyqs_customqs(self):
-tests/basic/tests.py:434:14    - Unknown word (emptyqs)        -- def test_emptyqs_values_order(self):
-tests/basic/tests.py:452:14    - Unknown word (emptyqs)        -- def test_emptyqs_distinct(self):
-tests/basic/tests.py:76:14     - Unknown word (autofields) -- def test_autofields_generate_different_values
-tests/basic/tests.py:814:9     - Unknown word (asos)           -- asos = ArticleSelectOnSave
-tests/basic/tests.py:816:13    - Unknown word (asos)           -- asos.save()
-tests/basic/tests.py:818:13    - Unknown word (asos)           -- asos.save(force_update=True
-tests/basic/tests.py:824:17    - Unknown word (asos)           -- asos.save(force_update=True
-tests/basic/tests.py:850:13    - Unknown word (asos)           -- asos = ArticleSelectOnSave
+tests/basic/tests.py:141:18    - Unknown word (datetimefields) -- def test_for_datetimefields_saves_as_much_precision
+tests/basic/tests.py:210:32    - Unknown word (falsey)         -- test_save_primary_with_falsey_default(self):
+tests/basic/tests.py:212:27    - Unknown word (Falsey)         -- PrimaryKeyWithFalseyDefault().save()
+tests/basic/tests.py:214:32    - Unknown word (falsey)         -- test_save_primary_with_falsey_db_default(self):
+tests/basic/tests.py:216:27    - Unknown word (Falsey)         -- PrimaryKeyWithFalseyDbDefault().save()
+tests/basic/tests.py:36:19     - Unknown word (Falsey)     -- PrimaryKeyWithFalseyDbDefault,
+tests/basic/tests.py:377:43    - Unknown word (undashedvalue)  -- dashed-value": "1", "undashedvalue": "2"}
+tests/basic/tests.py:379:38    - Unknown word (undashedvalue)  -- assertEqual(articles[0].undashedvalue, 2)
+tests/basic/tests.py:37:19     - Unknown word (Falsey)     -- PrimaryKeyWithFalseyDefault,
+tests/basic/tests.py:405:14    - Unknown word (emptyqs)        -- def test_emptyqs(self):
+tests/basic/tests.py:412:14    - Unknown word (emptyqs)        -- def test_emptyqs_values(self):
+tests/basic/tests.py:420:14    - Unknown word (emptyqs)        -- def test_emptyqs_customqs(self):
+tests/basic/tests.py:420:22    - Unknown word (customqs)       -- def test_emptyqs_customqs(self):
+tests/basic/tests.py:436:14    - Unknown word (emptyqs)        -- def test_emptyqs_values_order(self):
+tests/basic/tests.py:454:14    - Unknown word (emptyqs)        -- def test_emptyqs_distinct(self):
+tests/basic/tests.py:78:14     - Unknown word (autofields) -- def test_autofields_generate_different_values
+tests/basic/tests.py:836:9     - Unknown word (asos)           -- asos = ArticleSelectOnSave
+tests/basic/tests.py:838:13    - Unknown word (asos)           -- asos.save()
+tests/basic/tests.py:840:13    - Unknown word (asos)           -- asos.save(force_update=True
+tests/basic/tests.py:846:17    - Unknown word (asos)           -- asos.save(force_update=True
+tests/basic/tests.py:872:13    - Unknown word (asos)           -- asos = ArticleSelectOnSave
 tests/bulk_create/tests.py:111:45    - Unknown word (Fillory)    -- ProxyMultiCountry(name="Fillory", iso_two_letter="FL
 tests/bulk_create/tests.py:117:50    - Unknown word (Fillory)    -- ProxyMultiProxyCountry(name="Fillory", iso_two_letter="FL
 tests/bulk_create/tests.py:124:36    - Unknown word (Qwghlm)     -- ProxyCountry(name="Qwghlm", iso_two_letter="QW
@@ -4379,7 +4378,7 @@ tests/deprecation/test_deprecate_posargs.py:54:20     - Unknown word (posargs)  
 tests/deprecation/test_deprecate_posargs.py:76:56     - Unknown word (remappable) -- func(b=2, a=1), and remappable_names
 tests/deprecation/test_deprecate_posargs.py:78:20     - Unknown word (posargs)    -- @deprecate_posargs(RemovedAfterNextVersionWarnin
 tests/deprecation/test_deprecate_posargs.py:7:16      - Unknown word (Posargs)    -- class DeprecatePosargsTests(SimpleTestCase
-tests/deprecation/tests.py:177:14    - Unknown word (removedafternextversionwarning) -- def test_removedafternextversionwarning_pending(self):
+tests/deprecation/tests.py:202:14    - Unknown word (removedafternextversionwarning) -- def test_removedafternextversionwarning_pending(self):
 tests/dispatch/tests.py:132:21    - Unknown word (garbaged)      -- def test_cached_garbaged_collected(self):
 tests/dispatch/tests.py:141:9     - Unknown word (wref)          -- wref = weakref.ref(sender
 tests/dispatch/tests.py:147:31    - Unknown word (wref)          -- self.assertIsNone(wref())
@@ -4401,30 +4400,30 @@ tests/expressions/models.py:107:7     - Unknown word (UUIDPK)     -- class UUIDP
 tests/expressions/models.py:113:33    - Unknown word (UUIDPK)     -- = models.ForeignKey(UUIDPK, models.CASCADE, null
 tests/expressions/test_queryset_values.py:28:44     - Unknown word (Mustermann) -- firstname="Max", lastname="Mustermann", salary=30
 tests/expressions/tests.py:115:40    - Unknown word (Mustermann) -- firstname="Max", lastname="Mustermann", salary=30
-tests/expressions/tests.py:1233:61   - Unknown word (LOUTER)      -- join_type, constants.LOUTER)
-tests/expressions/tests.py:1334:28   - Unknown word (pushdown)    -- # subquery pushdown. If the inner query
-tests/expressions/tests.py:1709:40   - Unknown word (modsalary)   -- Employee.objects.annotate(modsalary=F("salary") % 20)
-tests/expressions/tests.py:1738:60   - Unknown word (Mustermann)  -- firstname="Max", lastname="Mustermann")
-tests/expressions/tests.py:1829:14   - Unknown word (righthand)   -- def test_righthand_power(self):
-tests/expressions/tests.py:1843:13   - Unknown word (sday)        -- cls.sday = sday = datetime.date
-tests/expressions/tests.py:1843:20   - Unknown word (sday)        -- cls.sday = sday = datetime.date(201
-tests/expressions/tests.py:1864:22   - Unknown word (sday)        -- assigned=sday,
-tests/expressions/tests.py:1883:22   - Unknown word (sday)        -- assigned=sday,
-tests/expressions/tests.py:1897:22   - Unknown word (sday)        -- assigned=sday - datetime.timedelta
+tests/expressions/tests.py:1236:61   - Unknown word (LOUTER)      -- join_type, constants.LOUTER)
+tests/expressions/tests.py:1337:28   - Unknown word (pushdown)    -- # subquery pushdown. If the inner query
+tests/expressions/tests.py:1715:40   - Unknown word (modsalary)   -- Employee.objects.annotate(modsalary=F("salary") % 20)
+tests/expressions/tests.py:1744:60   - Unknown word (Mustermann)  -- firstname="Max", lastname="Mustermann")
+tests/expressions/tests.py:1835:14   - Unknown word (righthand)   -- def test_righthand_power(self):
+tests/expressions/tests.py:1849:13   - Unknown word (sday)        -- cls.sday = sday = datetime.date
+tests/expressions/tests.py:1849:20   - Unknown word (sday)        -- cls.sday = sday = datetime.date(201
+tests/expressions/tests.py:1870:22   - Unknown word (sday)        -- assigned=sday,
+tests/expressions/tests.py:1889:22   - Unknown word (sday)        -- assigned=sday,
+tests/expressions/tests.py:1903:22   - Unknown word (sday)        -- assigned=sday - datetime.timedelta
 tests/expressions/tests.py:219:34    - Unknown word (Examp)      -- F("name")[:6][:5], "Examp"), # Nested slicing
 tests/expressions/tests.py:259:31    - Unknown word (mple)       -- ("after_three", ["mple Inc.", "bar Ltd.",
-tests/expressions/tests.py:2641:46   - Unknown word (anothercol)  -- ExpressionList(F("col"), F("anothercol"))),
-tests/expressions/tests.py:2642:39   - Unknown word (anothercol)  -- ExpressionList(F(col), F(anothercol))",
+tests/expressions/tests.py:2647:46   - Unknown word (anothercol)  -- ExpressionList(F("col"), F("anothercol"))),
+tests/expressions/tests.py:2648:39   - Unknown word (anothercol)  -- ExpressionList(F(col), F(anothercol))",
 tests/expressions/tests.py:359:47    - Unknown word (Mustermann) -- "Frank Meyer", "Max Mustermann"],
 tests/expressions/tests.py:392:46    - Unknown word (Rossum)     -- Guido", lastname="van Rossum"
-tests/expressions/tests.py:427:36    - Unknown word (Funcs)      -- should be able to use Funcs when inserting new data
-tests/expressions/tests.py:525:19    - Unknown word (multijoin)  -- # Reverse multijoin F() references and the
-tests/expressions/tests.py:565:41    - Unknown word (Mustermann) -- firstname="Mary", lastname="Mustermann", salary=20
-tests/expressions/tests.py:567:9     - Unknown word (mustermanns) -- mustermanns_by_seniority = Employee
-tests/expressions/tests.py:568:23    - Unknown word (Mustermann)  -- lastname="Mustermann"
-tests/expressions/tests.py:573:34    - Unknown word (mustermanns) -- assertSequenceEqual(mustermanns_by_seniority, [self
-tests/expressions/tests.py:771:13    - Unknown word (UUIDPK)      -- u = UUIDPK.objects.create()
-tests/expressions/tests.py:773:14    - Unknown word (UUIDPK)      -- qs = UUIDPK.objects.filter(id__in
+tests/expressions/tests.py:430:36    - Unknown word (Funcs)      -- should be able to use Funcs when inserting new data
+tests/expressions/tests.py:528:19    - Unknown word (multijoin)  -- # Reverse multijoin F() references and the
+tests/expressions/tests.py:568:41    - Unknown word (Mustermann) -- firstname="Mary", lastname="Mustermann", salary=20
+tests/expressions/tests.py:570:9     - Unknown word (mustermanns) -- mustermanns_by_seniority = Employee
+tests/expressions/tests.py:571:23    - Unknown word (Mustermann)  -- lastname="Mustermann"
+tests/expressions/tests.py:576:34    - Unknown word (mustermanns) -- assertSequenceEqual(mustermanns_by_seniority, [self
+tests/expressions/tests.py:774:13    - Unknown word (UUIDPK)      -- u = UUIDPK.objects.create()
+tests/expressions/tests.py:776:14    - Unknown word (UUIDPK)      -- qs = UUIDPK.objects.filter(id__in
 tests/expressions/tests.py:83:5      - Unknown word (UUIDPK)     -- UUIDPK,
 tests/expressions_case/tests.py:162:12    - Unknown word (rels)       -- fk_rels = FKCaseTestModel.objects
 tests/expressions_case/tests.py:168:44    - Unknown word (rels)       -- When(fk_rel__in=fk_rels, then=F("fk_rel__integer
@@ -4451,7 +4450,7 @@ tests/extra_regress/tests.py:54:15     - Unknown word (Revisionable) -- qs2 = Re
 tests/extra_regress/tests.py:6:28      - Unknown word (Revisionable) -- models import Order, RevisionableModel, TestObject
 tests/field_deconstruction/tests.py:459:28    - Unknown word (barness)    -- upload_to="foo/barness", width_field="width
 tests/field_deconstruction/tests.py:467:35    - Unknown word (barness)    -- "upload_to": "foo/barness",
-tests/field_defaults/tests.py:230:37    - Unknown word (nocase)     -- Collate(Value("John"), "nocase"),
+tests/field_defaults/tests.py:234:37    - Unknown word (nocase)     -- Collate(Value("John"), "nocase"),
 tests/file_storage/test_base.py:62:52     - Unknown word (monkeypatching) -- this is achieved by monkeypatching _save).
 tests/file_storage/test_generate_filename.py:10:7      - Unknown word (AWSS)       -- class AWSS3Storage(Storage):
 tests/file_storage/test_generate_filename.py:216:24    - Unknown word (awss)       -- def test_filefield_awss3_storage(self):

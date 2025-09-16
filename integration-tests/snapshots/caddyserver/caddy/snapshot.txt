@@ -3,7 +3,7 @@ Repository: caddyserver/caddy
 Url: "https://github.com/caddyserver/caddy.git"
 Args: ["**/*.go"]
 Lines:
- CSpell: Files checked: 285, Issues found: 3695 in 256 files.
+ CSpell: Files checked: 286, Issues found: 3696 in 256 files.
  exit code: 1
 admin.go:1075:20   - Unknown word (Redir)       -- return errInternalRedir
 admin.go:1351:6    - Unknown word (loggable)    -- type loggableURLArray []*url.URL
@@ -33,18 +33,18 @@ admin.go:850:23    - Unknown word (Redir)       -- if err == errInternalRedir {
 admin.go:951:38    - Unknown word (xxhash)      -- hash.Hash { return xxhash.New() }
 admin_test.go:29:14     - Unknown word (caddyserver) -- "github.com/caddyserver/certmagic"
 admin_test.go:29:26     - Unknown word (certmagic)   -- github.com/caddyserver/certmagic"
-admin_test.go:425:10    - Unknown word (Provisionable) -- type mockProvisionableRouter struct {
+admin_test.go:423:10    - Unknown word (Provisionable) -- type mockProvisionableRouter struct {
+admin_test.go:429:14    - Unknown word (Provisionable) -- func (m *mockProvisionableRouter) Provision(Context
 admin_test.go:42:8      - Unknown word (yourserver)  -- "yourserver": {
-admin_test.go:431:14    - Unknown word (Provisionable) -- func (m *mockProvisionableRouter) Provision(Context
-admin_test.go:436:10    - Unknown word (Provisionable) -- type mockProvisionableModule struct {
-admin_test.go:437:7     - Unknown word (Provisionable) -- *mockProvisionableRouter
-admin_test.go:440:14    - Unknown word (Provisionable) -- func (m *mockProvisionableModule) CaddyModule(
-admin_test.go:491:14    - Unknown word (provisionable) -- // Create provisionable module
-admin_test.go:708:25    - Unknown word (certmagic)     -- test.cfg.storage = &certmagic.FileStorage{Path: t
-admin_test.go:712:25    - Unknown word (certmagic)     -- identityCertCache = certmagic.NewCache(certmagic.CacheOptio
-admin_test.go:712:44    - Unknown word (certmagic)     -- certmagic.NewCache(certmagic.CacheOptions{
-admin_test.go:713:29    - Unknown word (certmagic)     -- GetConfigForCert: func(certmagic.Certificate) (*certmagic
-admin_test.go:889:37    - Unknown word (doesnt)        -- RawMessage(`{"module": "doesnt_exist"}`),
+admin_test.go:434:10    - Unknown word (Provisionable) -- type mockProvisionableModule struct {
+admin_test.go:435:7     - Unknown word (Provisionable) -- *mockProvisionableRouter
+admin_test.go:438:14    - Unknown word (Provisionable) -- func (m *mockProvisionableModule) CaddyModule(
+admin_test.go:489:14    - Unknown word (provisionable) -- // Create provisionable module
+admin_test.go:706:25    - Unknown word (certmagic)     -- test.cfg.storage = &certmagic.FileStorage{Path: t
+admin_test.go:710:25    - Unknown word (certmagic)     -- identityCertCache = certmagic.NewCache(certmagic.CacheOptio
+admin_test.go:710:44    - Unknown word (certmagic)     -- certmagic.NewCache(certmagic.CacheOptions{
+admin_test.go:711:29    - Unknown word (certmagic)     -- GetConfigForCert: func(certmagic.Certificate) (*certmagic
+admin_test.go:887:37    - Unknown word (doesnt)        -- RawMessage(`{"module": "doesnt_exist"}`),
 caddy.go:1054:33   - Unknown word (devel)       -- = "" || simple == "(devel)" {
 caddy.go:1095:54   - Unknown word (caddyevents) -- current instance of the caddyevents app insteaad.
 caddy.go:1095:70   - Unknown word (insteaad)    -- the caddyevents app insteaad.
@@ -144,10 +144,10 @@ caddyconfig/caddyfile/parse.go:234:14    - Unknown word (Errf)        -- return 
 caddyconfig/caddyfile/parse.go:247:13    - Unknown word (Errf)        -- return p.Errf("Site addresses cannot
 caddyconfig/caddyfile/parse.go:264:14    - Unknown word (Errf)        -- return p.Errf("Site addresses cannot
 caddyconfig/caddyfile/parse.go:27:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
-caddyconfig/caddyfile/parse.go:725:36    - Unknown word (Curlies)     -- parser) blockTokens(retainCurlies bool) ([]Token, error
-caddyconfig/caddyfile/parse.go:726:21    - Unknown word (curlies)     -- // block must have curlies.
-caddyconfig/caddyfile/parse.go:733:11    - Unknown word (Curlies)     -- if retainCurlies {
-caddyconfig/caddyfile/parse.go:740:14    - Unknown word (Curlies)     -- if retainCurlies {
+caddyconfig/caddyfile/parse.go:720:36    - Unknown word (Curlies)     -- parser) blockTokens(retainCurlies bool) ([]Token, error
+caddyconfig/caddyfile/parse.go:721:21    - Unknown word (curlies)     -- // block must have curlies.
+caddyconfig/caddyfile/parse.go:728:11    - Unknown word (Curlies)     -- if retainCurlies {
+caddyconfig/caddyfile/parse.go:735:14    - Unknown word (Curlies)     -- if retainCurlies {
 caddyconfig/caddyfile/parse_test.go:15:9      - Unknown word (caddyfile)  -- package caddyfile
 caddyconfig/caddyfile/parse_test.go:670:13    - Unknown word (foofoobarbar) -- expect: "foofoobarbar",
 caddyconfig/caddyfile/parse_test.go:682:13    - Unknown word (foobarfoobar) -- expect: "foobarfoobar",
@@ -810,13 +810,13 @@ cmd/cobra.go:8:14      - Unknown word (caddyserver) -- "github.com/caddyserver/c
 cmd/commandfactory.go:1:9       - Unknown word (caddycmd)   -- package caddycmd
 cmd/commandfuncs.go:145:16    - Unknown word (Pingback)    -- err = handlePingbackConn(conn, expect)
 cmd/commandfuncs.go:15:9      - Unknown word (caddycmd)   -- package caddycmd
-cmd/commandfuncs.go:176:9     - Unknown word (Procs)       -- undoMaxProcs := setResourceLimits
-cmd/commandfuncs.go:177:15    - Unknown word (Procs)       -- defer undoMaxProcs()
-cmd/commandfuncs.go:185:2     - Unknown word (pingback)    -- pingbackFlag := fl.String("pingback
-cmd/commandfuncs.go:185:29    - Unknown word (pingback)    -- pingbackFlag := fl.String("pingback")
-cmd/commandfuncs.go:248:5     - Unknown word (pingback)    -- if pingbackFlag != "" {
-cmd/commandfuncs.go:279:44    - Unknown word (USERPROFILE) -- == "" && os.Getenv("USERPROFILE") == "" && !hasXDG
-cmd/commandfuncs.go:280:34    - Unknown word (USERPROFILE) -- Warn("neither HOME nor USERPROFILE environment variables
+cmd/commandfuncs.go:183:9     - Unknown word (Procs)       -- undoMaxProcs := setResourceLimits
+cmd/commandfuncs.go:184:15    - Unknown word (Procs)       -- defer undoMaxProcs()
+cmd/commandfuncs.go:192:2     - Unknown word (pingback)    -- pingbackFlag := fl.String("pingback
+cmd/commandfuncs.go:192:29    - Unknown word (pingback)    -- pingbackFlag := fl.String("pingback")
+cmd/commandfuncs.go:265:5     - Unknown word (pingback)    -- if pingbackFlag != "" {
+cmd/commandfuncs.go:296:44    - Unknown word (USERPROFILE) -- == "" && os.Getenv("USERPROFILE") == "" && !hasXDG
+cmd/commandfuncs.go:297:34    - Unknown word (USERPROFILE) -- Warn("neither HOME nor USERPROFILE environment variables
 cmd/commandfuncs.go:36:14     - Unknown word (aryann)     -- "github.com/aryann/difflib"
 cmd/commandfuncs.go:36:21     - Unknown word (difflib)    -- "github.com/aryann/difflib"
 cmd/commandfuncs.go:39:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
@@ -826,26 +826,26 @@ cmd/commandfuncs.go:41:14     - Unknown word (caddyserver) -- "github.com/caddys
 cmd/commandfuncs.go:41:35     - Unknown word (caddyconfig) -- caddyserver/caddy/v2/caddyconfig/caddyfile"
 cmd/commandfuncs.go:41:47     - Unknown word (caddyfile)   -- caddy/v2/caddyconfig/caddyfile"
 cmd/commandfuncs.go:42:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/internal"
-cmd/commandfuncs.go:456:53    - Unknown word (Caddyfile)   -- required when there is no Caddyfile in current directory
-cmd/commandfuncs.go:470:16    - Unknown word (caddyconfig) -- cfgAdapter := caddyconfig.GetAdapter(adapterFlag
+cmd/commandfuncs.go:473:53    - Unknown word (Caddyfile)   -- required when there is no Caddyfile in current directory
+cmd/commandfuncs.go:487:16    - Unknown word (caddyconfig) -- cfgAdapter := caddyconfig.GetAdapter(adapterFlag
 cmd/commandfuncs.go:48:2      - Unknown word (pidfile)     -- pidfileFlag := fl.String("pidfile
 cmd/commandfuncs.go:48:28     - Unknown word (pidfile)     -- pidfileFlag := fl.String("pidfile")
-cmd/commandfuncs.go:551:53    - Unknown word (Caddyfile)   -- required when there is no Caddyfile in current directory
-cmd/commandfuncs.go:583:17    - Unknown word (Caddyfile)   -- configFile = "Caddyfile"
-cmd/commandfuncs.go:594:20    - Unknown word (caddyfile)   -- fmt.Print(string(caddyfile.Format(input)))
-cmd/commandfuncs.go:604:12    - Unknown word (caddyfile)   -- output := caddyfile.Format(input)
-cmd/commandfuncs.go:614:11    - Unknown word (difflib)     -- diff := difflib.Diff(
-cmd/commandfuncs.go:619:9     - Unknown word (difflib)     -- case difflib.Common:
-cmd/commandfuncs.go:621:9     - Unknown word (difflib)     -- case difflib.LeftOnly:
-cmd/commandfuncs.go:623:9     - Unknown word (difflib)     -- case difflib.RightOnly:
-cmd/commandfuncs.go:631:22    - Unknown word (caddyfile)   -- if warning, diff := caddyfile.FormattingDifference
-cmd/commandfuncs.go:632:130   - Unknown word (Caddyfile)   -- overwrite' to update your Caddyfile in-place instead of
-cmd/commandfuncs.go:632:58    - Unknown word (Caddyfile)   -- fmt.Errorf(`%s:%d: Caddyfile input is not formatted
+cmd/commandfuncs.go:568:53    - Unknown word (Caddyfile)   -- required when there is no Caddyfile in current directory
+cmd/commandfuncs.go:600:17    - Unknown word (Caddyfile)   -- configFile = "Caddyfile"
+cmd/commandfuncs.go:611:20    - Unknown word (caddyfile)   -- fmt.Print(string(caddyfile.Format(input)))
+cmd/commandfuncs.go:621:12    - Unknown word (caddyfile)   -- output := caddyfile.Format(input)
+cmd/commandfuncs.go:631:11    - Unknown word (difflib)     -- diff := difflib.Diff(
+cmd/commandfuncs.go:636:9     - Unknown word (difflib)     -- case difflib.Common:
+cmd/commandfuncs.go:638:9     - Unknown word (difflib)     -- case difflib.LeftOnly:
+cmd/commandfuncs.go:640:9     - Unknown word (difflib)     -- case difflib.RightOnly:
+cmd/commandfuncs.go:648:22    - Unknown word (caddyfile)   -- if warning, diff := caddyfile.FormattingDifference
+cmd/commandfuncs.go:649:130   - Unknown word (Caddyfile)   -- overwrite' to update your Caddyfile in-place instead of
+cmd/commandfuncs.go:649:58    - Unknown word (Caddyfile)   -- fmt.Errorf(`%s:%d: Caddyfile input is not formatted
 cmd/commandfuncs.go:68:30     - Unknown word (pingback)    -- craft the command with a pingback address and with a
-cmd/commandfuncs.go:706:7     - Unknown word (srldkjfsd)   -- // "srldkjfsd"), if for some reason
+cmd/commandfuncs.go:723:7     - Unknown word (srldkjfsd)   -- // "srldkjfsd"), if for some reason
 cmd/commandfuncs.go:77:44     - Unknown word (pingback)    -- os.Args[0], "run", "--pingback", ln.Addr().String(
-cmd/commandfuncs.go:803:25    - Unknown word (caddyconfig) -- configFile == "" && caddyconfig.GetAdapter("caddyfile
-cmd/commandfuncs.go:803:49    - Unknown word (caddyfile)   -- caddyconfig.GetAdapter("caddyfile") != nil {
+cmd/commandfuncs.go:820:25    - Unknown word (caddyconfig) -- configFile == "" && caddyconfig.GetAdapter("caddyfile
+cmd/commandfuncs.go:820:49    - Unknown word (caddyfile)   -- caddyconfig.GetAdapter("caddyfile") != nil {
 cmd/commandfuncs.go:95:5      - Unknown word (pidfile)     -- if pidfileFlag != "" {
 cmd/commandfuncs.go:96:34     - Unknown word (pidfile)     -- append(cmd.Args, "--pidfile", pidfileFlag)
 cmd/commandfuncs.go:96:44     - Unknown word (pidfile)     -- cmd.Args, "--pidfile", pidfileFlag)
@@ -1028,8 +1028,9 @@ listeners.go:622:29    - Unknown word (fcql)        -- return nil, fakeClosedErr
 listeners.go:647:34    - Unknown word (fdgram)      -- "fd" || network == "fdgram" {
 listeners_fuzz.go:15:12     - Unknown word (gofuzz)     -- //go:build gofuzz
 listeners_test.go:21:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/internal"
-logging.go:286:7     - Unknown word (wdest)      -- func (wdest writerDestructor) Destruct
-logging.go:287:9     - Unknown word (wdest)      -- return wdest.Close()
+logging.go:288:7     - Unknown word (wdest)       -- func (wdest writerDestructor) Destruct
+logging.go:289:9     - Unknown word (wdest)       -- return wdest.Close()
+logging.go:32:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/internal"
 metrics.go:48:15     - Unknown word (promhttp)    -- // Similar to promhttp.InstrumentHandlerCounter
 metrics.go:51:11     - Unknown word (promhttp)    -- // Unlike promhttp.InstrumentHandlerCounter
 metrics.go:8:14      - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/internal/metrics
