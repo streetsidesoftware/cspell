@@ -673,5 +673,5 @@ function findPair(yNode: YamlNode, yKey: string | Scalar<string>): Pair<Scalar<s
 function removeSchemaComment(node: { commentBefore?: string | null }): void {
     if (!node.commentBefore) return;
     // eslint-disable-next-line unicorn/no-null
-    node.commentBefore = node.commentBefore?.replace(/^ yaml-language-server: \$schema=.*\n?/gm, '') ?? null;
+    node.commentBefore = node.commentBefore?.replaceAll(/^ yaml-language-server: \$schema=.*\n?/gm, '') ?? null;
 }
