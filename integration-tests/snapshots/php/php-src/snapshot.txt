@@ -3,7 +3,7 @@ Repository: php/php-src
 Url: "https://github.com/php/php-src.git"
 Args: ["--config=../../../../config/repositories/php/php-src/cspell.json","**/*.{md,c,h,php}"]
 Lines:
- CSpell: Files checked: 2296, Issues found: 30656 in 1592 files.
+ CSpell: Files checked: 2296, Issues found: 30654 in 1592 files.
  exit code: 1
 CODING_STANDARDS.md:101:23    - Unknown word (intvl)      -- // Could be 'date_intvl_create_from_date_str
 CODING_STANDARDS.md:110:8     - Unknown word (setclientencoding) -- pg_setclientencoding
@@ -365,7 +365,7 @@ Zend/zend_API.c:3841:31   - Unknown word (lmname)         -- zend_fetch_function
 Zend/zend_API.c:4238:15   - Unknown word (callability)    -- /* Determine callability at the first parent
 Zend/zend_API.c:686:6     - Unknown word (SSTH)       -- /* SSTH Exception: IS_LONG may
 Zend/zend_API.h:15:15     - Unknown word (Andi)       -- | Authors: Andi Gutmans <andi@php.net
-Zend/zend_API.h:2497:47   - Unknown word (refetched)  -- leak. Force it to be refetched during
+Zend/zend_API.h:2498:47   - Unknown word (refetched)  -- leak. Force it to be refetched during
 Zend/zend_API.h:971:14    - Unknown word (PSTRINGL)   -- #define ZVAL_PSTRINGL(z, s, l) do {				\
 Zend/zend_API.h:977:8     - Unknown word (PSTRINGL)   -- ZVAL_PSTRINGL(z, _s, strlen(_s));
 Zend/zend_API.h:981:8     - Unknown word (PSTRINGL)   -- ZVAL_PSTRINGL(z, "", 0);				\
@@ -440,7 +440,7 @@ Zend/zend_builtin_functions.c:1751:16   - Unknown word (sensitiveparameter) -- s
 Zend/zend_builtin_functions.c:1782:9    - Unknown word (sensitiveparameter) -- "sensitiveparameter",
 Zend/zend_builtin_functions.c:1783:16   - Unknown word (sensitiveparameter) -- sizeof("sensitiveparameter") - 1,
 Zend/zend_builtin_functions.c:1821:8    - Unknown word (sensitiveparameter) -- "sensitiveparameter",
-Zend/zend_builtin_functions.c:2065:58   - Unknown word (elsewise)           -- FCALL was just made - elsewise we're in the middle
+Zend/zend_builtin_functions.c:2064:58   - Unknown word (elsewise)           -- FCALL was just made - elsewise we're in the middle
 Zend/zend_builtin_functions.c:780:9     - Unknown word (DEINDIRECT) -- ZVAL_DEINDIRECT(prop);
 Zend/zend_builtin_functions.c:974:8     - Unknown word (klass)      -- zval *klass;
 Zend/zend_builtin_functions.c:982:16    - Unknown word (klass)      -- Z_PARAM_ZVAL(klass)
@@ -480,18 +480,18 @@ Zend/zend_closures.c:271:32    - Unknown word (zclosure)   -- closure_bind(retur
 Zend/zend_closures.c:685:17    - Unknown word (strpprintf) -- name = zend_strpprintf(0, "%s$%s",
 Zend/zend_closures.c:689:17    - Unknown word (strpprintf) -- name = zend_strpprintf(0, "%s$%s",
 Zend/zend_closures.c:693:29    - Unknown word (strpprintf) -- NEW_STR(&info, zend_strpprintf(0, "%s", i >= required
-Zend/zend_compile.c:11234:26  - Unknown word (encaps)     -- static void zend_compile_encaps_list(znode *result,
-Zend/zend_compile.c:11248:13  - Unknown word (encaps)     -- zend_ast *encaps_var = list->child[i
-Zend/zend_compile.c:11250:32  - Unknown word (ENCAPS)     -- encaps_var->attr & (ZEND_ENCAPS_VAR_DOLLAR_CURLY|ZEND
-Zend/zend_compile.c:11250:61  - Unknown word (ENCAPS)     -- VAR_DOLLAR_CURLY|ZEND_ENCAPS_VAR_DOLLAR_CURLY_VAR
-Zend/zend_compile.c:11250:7   - Unknown word (encaps)     -- if (encaps_var->attr & (ZEND_ENCAPS
-Zend/zend_compile.c:11251:107  - Unknown word (ENCAPS)     -- encaps_var->attr & ZEND_ENCAPS_VAR_DOLLAR_CURLY))
-Zend/zend_compile.c:11251:45  - Unknown word (encaps)     -- kind == ZEND_AST_VAR || encaps_var->kind == ZEND_AST
-Zend/zend_compile.c:11251:9   - Unknown word (encaps)     -- if ((encaps_var->kind == ZEND_AST
-Zend/zend_compile.c:11253:76  - Unknown word (ENCAPS)     -- encaps_var->attr & ZEND_ENCAPS_VAR_DOLLAR_CURLY_VAR
-Zend/zend_compile.c:11702:70  - Unknown word (unticked)   -- EXTENDED_STMT) && !zend_is_unticked_stmt(ast)) {
-Zend/zend_compile.c:11807:40  - Unknown word (unticked)   -- eclarables).ticks && !zend_is_unticked_stmt(ast)) {
-Zend/zend_compile.c:11930:17  - Unknown word (ENCAPS)     -- case ZEND_AST_ENCAPS_LIST:
+Zend/zend_compile.c:11240:26  - Unknown word (encaps)     -- static void zend_compile_encaps_list(znode *result,
+Zend/zend_compile.c:11254:13  - Unknown word (encaps)     -- zend_ast *encaps_var = list->child[i
+Zend/zend_compile.c:11256:32  - Unknown word (ENCAPS)     -- encaps_var->attr & (ZEND_ENCAPS_VAR_DOLLAR_CURLY|ZEND
+Zend/zend_compile.c:11256:61  - Unknown word (ENCAPS)     -- VAR_DOLLAR_CURLY|ZEND_ENCAPS_VAR_DOLLAR_CURLY_VAR
+Zend/zend_compile.c:11256:7   - Unknown word (encaps)     -- if (encaps_var->attr & (ZEND_ENCAPS
+Zend/zend_compile.c:11257:107  - Unknown word (ENCAPS)     -- encaps_var->attr & ZEND_ENCAPS_VAR_DOLLAR_CURLY))
+Zend/zend_compile.c:11257:45  - Unknown word (encaps)     -- kind == ZEND_AST_VAR || encaps_var->kind == ZEND_AST
+Zend/zend_compile.c:11257:9   - Unknown word (encaps)     -- if ((encaps_var->kind == ZEND_AST
+Zend/zend_compile.c:11259:76  - Unknown word (ENCAPS)     -- encaps_var->attr & ZEND_ENCAPS_VAR_DOLLAR_CURLY_VAR
+Zend/zend_compile.c:11708:70  - Unknown word (unticked)   -- EXTENDED_STMT) && !zend_is_unticked_stmt(ast)) {
+Zend/zend_compile.c:11813:40  - Unknown word (unticked)   -- eclarables).ticks && !zend_is_unticked_stmt(ast)) {
+Zend/zend_compile.c:11936:17  - Unknown word (ENCAPS)     -- case ZEND_AST_ENCAPS_LIST:
 Zend/zend_compile.c:15:15     - Unknown word (Andi)       -- | Authors: Andi Gutmans <andi@php.net
 Zend/zend_compile.c:178:29    - Unknown word (strpprintf) -- string *result = zend_strpprintf(0, "%c%s%s:%" PRIu3
 Zend/zend_compile.c:228:14    - Unknown word (uqname)     -- const char *uqname = ZSTR_VAL(name);
@@ -608,9 +608,9 @@ Zend/zend_execute.c:107:35    - Unknown word (Wvolatile)  -- diagnostic ignored 
 Zend/zend_execute.c:1094:42   - Unknown word (REINITABLE) -- property_val) &= ~IS_PROP_REINITABLE;
 Zend/zend_execute.c:109:35    - Unknown word (Wvolatile)  -- diagnostic warning "-Wvolatile-register-var"
 Zend/zend_execute.c:15:15     - Unknown word (Andi)       -- | Authors: Andi Gutmans <andi@php.net
-Zend/zend_execute.c:1845:25   - Unknown word (strpprintf) -- message_suffix = zend_strpprintf_unchecked(
-Zend/zend_execute.c:1928:25   - Unknown word (strpprintf) -- message_suffix = zend_strpprintf_unchecked(
-Zend/zend_execute.c:3915:5    - Unknown word (SSTH)       -- /* SSTH Exception: IS_LONG may
+Zend/zend_execute.c:1848:25   - Unknown word (strpprintf) -- message_suffix = zend_strpprintf_unchecked(
+Zend/zend_execute.c:1931:25   - Unknown word (strpprintf) -- message_suffix = zend_strpprintf_unchecked(
+Zend/zend_execute.c:3937:5    - Unknown word (SSTH)       -- /* SSTH Exception: IS_LONG may
 Zend/zend_execute.c:398:47    - Unknown word (tmpvarcv)   -- zval *_get_zval_ptr_tmpvarcv(int op_type, znode_op
 Zend/zend_execute.c:62:18     - Unknown word (IBMC)       -- # elif defined(__IBMC__) && ZEND_GCC_VERSION
 Zend/zend_execute.c:686:36    - Unknown word (fsep)       -- fname, const char **fsep, const char **fclass
@@ -695,7 +695,7 @@ Zend/zend_hash.c:194:8     - Unknown word (storeu)     -- _mm_storeu_si128((__m1
 Zend/zend_hash.c:199:18    - Unknown word (vdupq)      -- int32x4_t t = vdupq_n_s32(-1);
 Zend/zend_hash.c:2273:42   - Unknown word (ined)       -- element may point to UNDEF-ined slots */
 Zend/zend_hash.c:2303:42   - Unknown word (ined)       -- element may point to UNDEF-ined slots */
-Zend/zend_hash.c:3022:35   - Unknown word (phpt)       -- Zend/tests/bug63882_2.phpt
+Zend/zend_hash.c:3025:35   - Unknown word (phpt)       -- Zend/tests/bug63882_2.phpt
 Zend/zend_hash.c:33:12     - Unknown word (emmintrin)  -- # include <emmintrin.h>
 Zend/zend_hash.c:459:28    - Unknown word (recalc)     -- uint32_t zend_array_recalc_elements(const HashTable
 Zend/zend_hash.c:479:20    - Unknown word (recalc)     -- num = zend_array_recalc_elements(ht);
@@ -811,7 +811,7 @@ Zend/zend_opcode.c:15:15     - Unknown word (Andi)       -- | Authors: Andi Gutm
 Zend/zend_opcode.c:499:22    - Unknown word (ASTVAL)     -- ZEND_ASSERT(Z_ASTVAL(c->value)->kind == ZEND
 Zend/zend_operators.c:101:31    - Unknown word (loadu)      -- blconv_operand = _mm_loadu_si128((__m128i*)(input
 Zend/zend_operators.c:102:28    - Unknown word (cmplt)      -- i blconv_mask = _mm_cmplt_epi8(_mm_add_epi8(blconv
-Zend/zend_operators.c:1035:16   - Unknown word (strpprintf)    -- return zend_strpprintf(0, "Resource id #" ZEND
+Zend/zend_operators.c:1046:16   - Unknown word (strpprintf)    -- return zend_strpprintf(0, "Resource id #" ZEND
 Zend/zend_operators.c:109:6     - Unknown word (storeu)     -- _mm_storeu_si128((__m128i *)(dest
 Zend/zend_operators.c:115:34    - Unknown word (vdupq)      -- 6_t blconv_offset = vdupq_n_s8((signed char)(SCHAR
 Zend/zend_operators.c:116:37    - Unknown word (vdupq)      -- t blconv_threshold = vdupq_n_s8(SCHAR_MIN + (end
@@ -825,40 +825,40 @@ Zend/zend_operators.c:130:25    - Unknown word (vandq)         -- int8x16_t blco
 Zend/zend_operators.c:130:34    - Unknown word (vreinterpretq) -- blconv_add = vandq_s8(vreinterpretq_s8_u8(blconv_mask),
 Zend/zend_operators.c:131:28    - Unknown word (vaddq)         -- 6_t blconv_result = vaddq_s8(blconv_operand, blconv
 Zend/zend_operators.c:15:15     - Unknown word (Andi)       -- | Authors: Andi Gutmans <andi@php.net
-Zend/zend_operators.c:2210:14   - Unknown word (THREEWAY)      -- return ZEND_THREEWAY_COMPARE(d1, d2);
-Zend/zend_operators.c:2232:15   - Unknown word (THREEWAY)      -- return ZEND_THREEWAY_COMPARE((double) lval
-Zend/zend_operators.c:2250:15   - Unknown word (THREEWAY)      -- return ZEND_THREEWAY_COMPARE(dval, (double
-Zend/zend_operators.c:2254:15   - Unknown word (THREEWAY)      -- return ZEND_THREEWAY_COMPARE(dval, str_dval
-Zend/zend_operators.c:2276:17   - Unknown word (THREEWAY)      -- return ZEND_THREEWAY_COMPARE(Z_DVAL_P(op
-Zend/zend_operators.c:3312:41   - Unknown word (streq)         -- FASTCALL zendi_smart_streq(zend_string *s1, zend
-Zend/zend_operators.c:3754:41   - Unknown word (memnrstr)      -- ZEND_FASTCALL zend_memnrstr_ex(const char *haystack
+Zend/zend_operators.c:2218:14   - Unknown word (THREEWAY)      -- return ZEND_THREEWAY_COMPARE(d1, d2);
+Zend/zend_operators.c:2240:15   - Unknown word (THREEWAY)      -- return ZEND_THREEWAY_COMPARE((double) lval
+Zend/zend_operators.c:2258:15   - Unknown word (THREEWAY)      -- return ZEND_THREEWAY_COMPARE(dval, (double
+Zend/zend_operators.c:2262:15   - Unknown word (THREEWAY)      -- return ZEND_THREEWAY_COMPARE(dval, str_dval
+Zend/zend_operators.c:2284:17   - Unknown word (THREEWAY)      -- return ZEND_THREEWAY_COMPARE(Z_DVAL_P(op
+Zend/zend_operators.c:3320:41   - Unknown word (streq)         -- FASTCALL zendi_smart_streq(zend_string *s1, zend
+Zend/zend_operators.c:3762:41   - Unknown word (memnrstr)      -- ZEND_FASTCALL zend_memnrstr_ex(const char *haystack
 Zend/zend_operators.c:38:13     - Unknown word (INTRIN)     -- #ifdef ZEND_INTRIN_AVX2_NATIVE
 Zend/zend_operators.c:63:13     - Unknown word (INTRIN)     -- #ifdef ZEND_INTRIN_AVX2_NATIVE
 Zend/zend_operators.c:67:16     - Unknown word (blconv)     -- const __m256i blconv_offset = _mm256_set
 Zend/zend_operators.c:68:16     - Unknown word (blconv)     -- const __m256i blconv_threshold = _mm256_set
 Zend/zend_operators.c:73:16     - Unknown word (blconv)     -- const __m256i blconv_delta = _mm256_set1
-Zend/zend_operators.c:758:28    - Unknown word (strpprintf)    -- zend_string *str = zend_strpprintf(0, "Resource id #" ZEND
+Zend/zend_operators.c:761:28    - Unknown word (strpprintf)    -- zend_string *str = zend_strpprintf(0, "Resource id #" ZEND
 Zend/zend_operators.c:76:10     - Unknown word (blconv)     -- __m256i blconv_operand = _mm256_loadu
 Zend/zend_operators.c:76:34     - Unknown word (loadu)      -- blconv_operand = _mm256_loadu_si256((__m256i*)(input
 Zend/zend_operators.c:77:10     - Unknown word (blconv)     -- __m256i blconv_mask = _mm256_cmpgt
 Zend/zend_operators.c:77:31     - Unknown word (cmpgt)      -- blconv_mask = _mm256_cmpgt_epi8(blconv_threshold
 Zend/zend_operators.c:84:9      - Unknown word (storeu)     -- _mm256_storeu_si256((__m256i*)(dest
-Zend/zend_operators.h:1001:37   - Unknown word (strnieq)    -- always_inline bool zend_strnieq(const char *ptr1, const
-Zend/zend_operators.h:1013:6    - Unknown word (memnistr)   -- zend_memnistr(const char *haystack
-Zend/zend_operators.h:1046:13   - Unknown word (strnieq)    -- if (zend_strnieq(needle + 1, p + 1, needle
+Zend/zend_operators.h:1017:37   - Unknown word (strnieq)    -- always_inline bool zend_strnieq(const char *ptr1, const
+Zend/zend_operators.h:1029:6    - Unknown word (memnistr)   -- zend_memnistr(const char *haystack
+Zend/zend_operators.h:1062:13   - Unknown word (strnieq)    -- if (zend_strnieq(needle + 1, p + 1, needle
 Zend/zend_operators.h:109:41    - Unknown word (memnrstr)   -- ZEND_FASTCALL zend_memnrstr_ex(const char *haystack
 Zend/zend_operators.h:15:15     - Unknown word (Andi)       -- | Authors: Andi Gutmans <andi@php.net
-Zend/zend_operators.h:238:6     - Unknown word (memnrstr)   -- zend_memnrstr(const char *haystack
-Zend/zend_operators.h:275:15    - Unknown word (memnrstr)   -- return zend_memnrstr_ex(haystack, needle
+Zend/zend_operators.h:254:6     - Unknown word (memnrstr)   -- zend_memnrstr(const char *haystack
+Zend/zend_operators.h:291:15    - Unknown word (memnrstr)   -- return zend_memnrstr_ex(haystack, needle
 Zend/zend_operators.h:32:20     - Unknown word (ubsan)      -- * On FreeBSD with ubsan/clang we get the following
 Zend/zend_operators.h:36:6      - Unknown word (newcw)      -- * `_newcw |= (~_m << FP_MSKS_OFF
-Zend/zend_operators.h:493:41    - Unknown word (streq)      -- FASTCALL zendi_smart_streq(zend_string *s1, zend
-Zend/zend_operators.h:574:12    - Unknown word (llresult)   -- long long llresult;
-Zend/zend_operators.h:575:62    - Unknown word (llresult)   -- overflow(Z_LVAL_P(op1), 1, &llresult))) {
-Zend/zend_operators.h:579:19    - Unknown word (llresult)   -- Z_LVAL_P(op1) = llresult;
+Zend/zend_operators.h:509:41    - Unknown word (streq)      -- FASTCALL zendi_smart_streq(zend_string *s1, zend
 Zend/zend_operators.h:590:12    - Unknown word (llresult)   -- long long llresult;
-Zend/zend_operators.h:591:55    - Unknown word (llresult)   -- ongLongAdd(Z_LVAL_P(op1), 1, &llresult)))) {
-Zend/zend_operators.h:901:22    - Unknown word (streq)      -- return zendi_smart_streq(s1, s2);
+Zend/zend_operators.h:591:62    - Unknown word (llresult)   -- overflow(Z_LVAL_P(op1), 1, &llresult))) {
+Zend/zend_operators.h:595:19    - Unknown word (llresult)   -- Z_LVAL_P(op1) = llresult;
+Zend/zend_operators.h:606:12    - Unknown word (llresult)   -- long long llresult;
+Zend/zend_operators.h:607:55    - Unknown word (llresult)   -- ongLongAdd(Z_LVAL_P(op1), 1, &llresult)))) {
+Zend/zend_operators.h:917:22    - Unknown word (streq)      -- return zendi_smart_streq(s1, s2);
 Zend/zend_portability.h:15:15     - Unknown word (Andi)       -- | Authors: Andi Gutmans <andi@php.net
 Zend/zend_portability.h:174:21    - Unknown word (NEWLM)      -- # if defined(LM_ID_NEWLM)
 Zend/zend_portability.h:308:51    - Unknown word (Ofast)      -- attribute__((optimize("Ofast")))
@@ -1370,18 +1370,18 @@ Zend/zend_virtual_cwd.c:768:21    - Unknown word (PROJFS)        -- IO_REPARSE_T
 Zend/zend_virtual_cwd.h:13:15     - Unknown word (Andi)       -- | Authors: Andi Gutmans <andi@php.net
 Zend/zend_virtual_cwd.h:386:11    - Unknown word (IXROOT)     -- #ifndef S_IXROOT
 Zend/zend_virtual_cwd.h:387:11    - Unknown word (IXROOT)     -- #define S_IXROOT ( S_IXUSR | S_IXGRP
-Zend/zend_vm_def.h:10115:53  - Unknown word (uncatchable) -- comparing arrays is an uncatchable fatal error) */
+Zend/zend_vm_def.h:10125:53  - Unknown word (uncatchable) -- comparing arrays is an uncatchable fatal error) */
 Zend/zend_vm_def.h:106:53    - Unknown word (TMPVARCV)   -- HANDLER(2, ZEND_SUB, CONST|TMPVARCV, CONST|TMPVARCV)
 Zend/zend_vm_def.h:106:69    - Unknown word (TMPVARCV)   -- CONST|TMPVARCV, CONST|TMPVARCV)
 Zend/zend_vm_def.h:15:15     - Unknown word (Andi)       -- | Authors: Andi Gutmans <andi@php.net
 Zend/zend_vm_def.h:165:52    - Unknown word (TMPVARCV)   -- HANDLER(3, ZEND_MUL, CONST|TMPVARCV, CONST|TMPVARCV, SPEC
 Zend/zend_vm_def.h:47:53     - Unknown word (TMPVARCV)   -- HANDLER(1, ZEND_ADD, CONST|TMPVARCV, CONST|TMPVARCV)
 Zend/zend_vm_def.h:47:69     - Unknown word (TMPVARCV)   -- CONST|TMPVARCV, CONST|TMPVARCV)
-Zend/zend_vm_def.h:9278:13   - Unknown word (jumptable)  -- HashTable *jumptable;
-Zend/zend_vm_def.h:9290:2    - Unknown word (jumptable)  -- jumptable = Z_ARRVAL_P(GET_OP
-Zend/zend_vm_def.h:9291:33   - Unknown word (jumptable)  -- zend_hash_index_find(jumptable, Z_LVAL_P(op));
-Zend/zend_vm_def.h:9306:13   - Unknown word (jumptable)  -- HashTable *jumptable;
-Zend/zend_vm_def.h:9323:2    - Unknown word (jumptable)  -- jumptable = Z_ARRVAL_P(GET_OP
+Zend/zend_vm_def.h:9288:13   - Unknown word (jumptable)  -- HashTable *jumptable;
+Zend/zend_vm_def.h:9300:2    - Unknown word (jumptable)  -- jumptable = Z_ARRVAL_P(GET_OP
+Zend/zend_vm_def.h:9301:33   - Unknown word (jumptable)  -- zend_hash_index_find(jumptable, Z_LVAL_P(op));
+Zend/zend_vm_def.h:9316:13   - Unknown word (jumptable)  -- HashTable *jumptable;
+Zend/zend_vm_def.h:9333:2    - Unknown word (jumptable)  -- jumptable = Z_ARRVAL_P(GET_OP
 Zend/zend_vm_gen.php:1011:37   - Unknown word (NOCONSTCONST) -- opcode["hot"] === 'HOT_NOCONSTCONST_'
 Zend/zend_vm_gen.php:1012:38   - Unknown word (CONSTCONST)   -- opcode["hot"] === 'COLD_CONSTCONST_') {
 Zend/zend_vm_gen.php:1094:112  - Unknown word (CCONV)        -- OPCODE_HANDLER_FUNC_CCONV';
@@ -1427,36 +1427,36 @@ Zend/zend_vm_gen.php:1841:131  - Unknown word (tailcall)     -- they do not enfo
 Zend/zend_vm_gen.php:1841:51   - Unknown word (tailcall)     -- following helpers can not tailcall due to signature mismatch
 Zend/zend_vm_gen.php:192:20    - Unknown word (opline)     -- "ANY" => "opline->op1_type",
 Zend/zend_vm_gen.php:203:20    - Unknown word (opline)     -- "ANY" => "opline->op2_type",
-Zend/zend_vm_gen.php:2128:85   - Unknown word (MUSTTAIL)     -- ZEND_MUSTTAIL return call\n");
+Zend/zend_vm_gen.php:2132:85   - Unknown word (MUSTTAIL)     -- ZEND_MUSTTAIL return call\n");
 Zend/zend_vm_gen.php:214:33    - Unknown word (opline)     -- => "get_zval_ptr(opline->op1_type, opline->op
 Zend/zend_vm_gen.php:214:51    - Unknown word (opline)     -- ptr(opline->op1_type, opline->op1, \\1)",
 Zend/zend_vm_gen.php:215:38    - Unknown word (opline)     -- "_get_zval_ptr_tmp(opline->op1.var EXECUTE_DATA
-Zend/zend_vm_gen.php:2426:80   - Unknown word (devnull)      -- def, $lineno, $val, $devnull);
-Zend/zend_vm_gen.php:2478:16   - Unknown word (ENDNAMES)     -- $str .= <<<ENDNAMES
-Zend/zend_vm_gen.php:2488:1    - Unknown word (ENDNAMES)     -- ENDNAMES;
-Zend/zend_vm_gen.php:2492:70   - Unknown word (REGS)         -- defined(HAVE_GCC_GLOBAL_REGS))\n";
-Zend/zend_vm_gen.php:2496:37   - Unknown word (MUSTTAIL)     -- "#elif defined(HAVE_MUSTTAIL) && defined(HAVE_PRESERVE
-Zend/zend_vm_gen.php:2514:57   - Unknown word (FASTCALL)     -- HANDLER_CCONV_EX ZEND_FASTCALL\n";
-Zend/zend_vm_gen.php:2516:57   - Unknown word (FASTCALL)     -- HANDLER_CCONV ZEND_FASTCALL\n";
-Zend/zend_vm_gen.php:2517:57   - Unknown word (FASTCALL)     -- HANDLER_CCONV_EX ZEND_FASTCALL\n";
-Zend/zend_vm_gen.php:2519:61   - Unknown word (FASTCALL)     -- HANDLER_FUNC_CCONV ZEND_FASTCALL\n";
-Zend/zend_vm_gen.php:2565:24   - Unknown word (skel)         -- function gen_vm($def, $skel) {
-Zend/zend_vm_gen.php:2579:19   - Unknown word (skel)         -- $skl = @file($skel);
-Zend/zend_vm_gen.php:2581:49   - Unknown word (skel)         -- open skeleton file '$skel'\n");
-Zend/zend_vm_gen.php:2584:32   - Unknown word (skel)         -- skeleton_file = realpath($skel);
-Zend/zend_vm_gen.php:2604:39   - Unknown word (NOCONST)      -- strpos($line,"ZEND_VM_HOT_NOCONST_HANDLER(") === 0 ||
-Zend/zend_vm_gen.php:2605:39   - Unknown word (NOCONSTCONST) -- strpos($line,"ZEND_VM_HOT_NOCONSTCONST_HANDLER(") === 0 ||
-Zend/zend_vm_gen.php:2610:40   - Unknown word (CONSTCONST)   -- $line,"ZEND_VM_COLD_CONSTCONST_HANDLER(") === 0) {
-Zend/zend_vm_gen.php:2614:120  - Unknown word (CONSTCONST)   -- COLD_|COLD_CONST_|COLD_CONSTCONST_)?HANDLER\(
-Zend/zend_vm_gen.php:2614:70   - Unknown word (NOCONST)      -- HOT_OBJ_|HOT_SEND_|HOT_NOCONST_|HOT_NOCONSTCONST_|COLD
+Zend/zend_vm_gen.php:2430:80   - Unknown word (devnull)      -- def, $lineno, $val, $devnull);
+Zend/zend_vm_gen.php:2482:16   - Unknown word (ENDNAMES)     -- $str .= <<<ENDNAMES
+Zend/zend_vm_gen.php:2492:1    - Unknown word (ENDNAMES)     -- ENDNAMES;
+Zend/zend_vm_gen.php:2496:70   - Unknown word (REGS)         -- defined(HAVE_GCC_GLOBAL_REGS))\n";
+Zend/zend_vm_gen.php:2500:37   - Unknown word (MUSTTAIL)     -- "#elif defined(HAVE_MUSTTAIL) && defined(HAVE_PRESERVE
+Zend/zend_vm_gen.php:2518:57   - Unknown word (FASTCALL)     -- HANDLER_CCONV_EX ZEND_FASTCALL\n";
+Zend/zend_vm_gen.php:2520:57   - Unknown word (FASTCALL)     -- HANDLER_CCONV ZEND_FASTCALL\n";
+Zend/zend_vm_gen.php:2521:57   - Unknown word (FASTCALL)     -- HANDLER_CCONV_EX ZEND_FASTCALL\n";
+Zend/zend_vm_gen.php:2523:61   - Unknown word (FASTCALL)     -- HANDLER_FUNC_CCONV ZEND_FASTCALL\n";
+Zend/zend_vm_gen.php:2569:24   - Unknown word (skel)         -- function gen_vm($def, $skel) {
+Zend/zend_vm_gen.php:2583:19   - Unknown word (skel)         -- $skl = @file($skel);
+Zend/zend_vm_gen.php:2585:49   - Unknown word (skel)         -- open skeleton file '$skel'\n");
+Zend/zend_vm_gen.php:2588:32   - Unknown word (skel)         -- skeleton_file = realpath($skel);
+Zend/zend_vm_gen.php:2608:39   - Unknown word (NOCONST)      -- strpos($line,"ZEND_VM_HOT_NOCONST_HANDLER(") === 0 ||
+Zend/zend_vm_gen.php:2609:39   - Unknown word (NOCONSTCONST) -- strpos($line,"ZEND_VM_HOT_NOCONSTCONST_HANDLER(") === 0 ||
+Zend/zend_vm_gen.php:2614:40   - Unknown word (CONSTCONST)   -- $line,"ZEND_VM_COLD_CONSTCONST_HANDLER(") === 0) {
+Zend/zend_vm_gen.php:2618:120  - Unknown word (CONSTCONST)   -- COLD_|COLD_CONST_|COLD_CONSTCONST_)?HANDLER\(
+Zend/zend_vm_gen.php:2618:70   - Unknown word (NOCONST)      -- HOT_OBJ_|HOT_SEND_|HOT_NOCONST_|HOT_NOCONSTCONST_|COLD
 Zend/zend_vm_gen.php:265:34    - Unknown word (tmpvarcv)   -- TMPVARCV" => "_get_zval_ptr_tmpvarcv(opline->op1_type, opline
-Zend/zend_vm_gen.php:2667:46   - Unknown word (NOCONST)      -- strpos($line,"ZEND_VM_HOT_NOCONST_TYPE_SPEC_HANDLER("
+Zend/zend_vm_gen.php:2671:46   - Unknown word (NOCONST)      -- strpos($line,"ZEND_VM_HOT_NOCONST_TYPE_SPEC_HANDLER("
 Zend/zend_vm_gen.php:276:34    - Unknown word (tmpvarcv)   -- TMPVARCV" => "_get_zval_ptr_tmpvarcv(opline->op2_type, opline
-Zend/zend_vm_gen.php:2993:72   - Unknown word (JMPZ)         -- == (IS_SMART_BRANCH_JMPZ|IS_TMP_VAR)) {\n");
-Zend/zend_vm_gen.php:2995:79   - Unknown word (JMPNZ)        -- == (IS_SMART_BRANCH_JMPNZ|IS_TMP_VAR)) {\n");
-Zend/zend_vm_gen.php:3215:31   - Unknown word (noreturn)     -- out($f, "\tzend_error_noreturn(E_CORE_ERROR, \"zend
-Zend/zend_vm_gen.php:3240:25   - Unknown word (specializer)  -- "\n --without-specializer - disable
-Zend/zend_vm_gen.php:3267:40   - Unknown word (specializer)  -- argv[$i] == "--without-specializer") {
+Zend/zend_vm_gen.php:2997:72   - Unknown word (JMPZ)         -- == (IS_SMART_BRANCH_JMPZ|IS_TMP_VAR)) {\n");
+Zend/zend_vm_gen.php:2999:79   - Unknown word (JMPNZ)        -- == (IS_SMART_BRANCH_JMPNZ|IS_TMP_VAR)) {\n");
+Zend/zend_vm_gen.php:3219:31   - Unknown word (noreturn)     -- out($f, "\tzend_error_noreturn(E_CORE_ERROR, \"zend
+Zend/zend_vm_gen.php:3244:25   - Unknown word (specializer)  -- "\n --without-specializer - disable
+Zend/zend_vm_gen.php:3271:40   - Unknown word (specializer)  -- argv[$i] == "--without-specializer") {
 Zend/zend_vm_gen.php:36:15     - Unknown word (Andi)       -- | Authors: Andi Gutmans <andi@php.net
 Zend/zend_vm_gen.php:36:20     - Unknown word (Gutmans)    -- | Authors: Andi Gutmans <andi@php.net>
 Zend/zend_vm_gen.php:37:15     - Unknown word (Zeev)       -- | Zeev Suraski <zeev@php.net
@@ -3549,31 +3549,26 @@ ext/curl/interface.c:1420:32   - Unknown word (zpostfields) -- COPY(&ch->postfie
 ext/curl/interface.c:1431:22   - Unknown word (addpart)     -- part = curl_mime_addpart(mime);
 ext/curl/interface.c:1489:31   - Unknown word (zpostfields) -- COPY(&ch->postfields, zpostfields);
 ext/curl/interface.c:1491:21   - Unknown word (addpart)     -- part = curl_mime_addpart(mime);
-ext/curl/interface.c:1550:12   - Unknown word (dupch)       -- php_curl *dupch;
-ext/curl/interface.c:1565:2    - Unknown word (dupch)       -- dupch = init_curl_handle_into
-ext/curl/interface.c:1566:2    - Unknown word (dupch)       -- dupch->cp = cp;
-ext/curl/interface.c:1568:32   - Unknown word (dupch)       -- setup_easy_copy_handlers(dupch, ch);
-ext/curl/interface.c:1572:38   - Unknown word (dupch)       -- structure_from_hash(dupch, postfields) == FAILURE
-ext/curl/interface.c:1768:16   - Unknown word (HAPROXYPROTOCOL) -- case CURLOPT_HAPROXYPROTOCOL:
-ext/curl/interface.c:1778:16   - Unknown word (ALTSVC)          -- case CURLOPT_ALTSVC_CTRL:
-ext/curl/interface.c:1787:16   - Unknown word (HSTS)            -- case CURLOPT_HSTS_CTRL:
-ext/curl/interface.c:1910:14   - Unknown word (memnistr)        -- && (php_memnistr(ZSTR_VAL(str), "file
-ext/curl/interface.c:1911:14   - Unknown word (memnistr)        -- || php_memnistr(ZSTR_VAL(str), "all
-ext/curl/interface.c:1941:36   - Unknown word (implictly)       -- Authorization header would be implictly set
-ext/curl/interface.c:1942:35   - Unknown word (explictly)       -- empty string thus we explictly set the option
+ext/curl/interface.c:1754:16   - Unknown word (HAPROXYPROTOCOL) -- case CURLOPT_HAPROXYPROTOCOL:
+ext/curl/interface.c:1764:16   - Unknown word (ALTSVC)          -- case CURLOPT_ALTSVC_CTRL:
+ext/curl/interface.c:1773:16   - Unknown word (HSTS)            -- case CURLOPT_HSTS_CTRL:
+ext/curl/interface.c:1896:14   - Unknown word (memnistr)        -- && (php_memnistr(ZSTR_VAL(str), "file
+ext/curl/interface.c:1897:14   - Unknown word (memnistr)        -- || php_memnistr(ZSTR_VAL(str), "all
+ext/curl/interface.c:1927:36   - Unknown word (implictly)       -- Authorization header would be implictly set
+ext/curl/interface.c:1928:35   - Unknown word (explictly)       -- empty string thus we explictly set the option
 ext/curl/interface.c:222:78    - Unknown word (zpostfields) -- php_curl *ch, zval *zpostfields);
-ext/curl/interface.c:2293:22   - Unknown word (stblob)          -- struct curl_blob stblob;
-ext/curl/interface.c:2294:5    - Unknown word (stblob)          -- stblob.data = ZSTR_VAL(str
-ext/curl/interface.c:2295:5    - Unknown word (stblob)          -- stblob.len = ZSTR_LEN(str)
-ext/curl/interface.c:2296:5    - Unknown word (stblob)          -- stblob.flags = CURL_BLOB_COPY
-ext/curl/interface.c:2297:47   - Unknown word (stblob)          -- setopt(ch->cp, option, &stblob);
-ext/curl/interface.c:2485:5    - Unknown word (CAAZ)            -- CAAZ("content_type", &retnull
-ext/curl/interface.c:2507:4    - Unknown word (CAAD)            -- CAAD("total_time", d_code
-ext/curl/interface.c:2510:4    - Unknown word (CAAD)            -- CAAD("namelookup_time", d
-ext/curl/interface.c:2513:4    - Unknown word (CAAD)            -- CAAD("connect_time", d_code
-ext/curl/interface.c:2516:4    - Unknown word (CAAD)            -- CAAD("pretransfer_time",
-ext/curl/interface.c:2551:4    - Unknown word (CAAZ)            -- CAAZ("certinfo", &listcode
-ext/curl/interface.c:2606:4    - Unknown word (CAASTR)          -- CAASTR("request_header", ch
+ext/curl/interface.c:2279:22   - Unknown word (stblob)          -- struct curl_blob stblob;
+ext/curl/interface.c:2280:5    - Unknown word (stblob)          -- stblob.data = ZSTR_VAL(str
+ext/curl/interface.c:2281:5    - Unknown word (stblob)          -- stblob.len = ZSTR_LEN(str)
+ext/curl/interface.c:2282:5    - Unknown word (stblob)          -- stblob.flags = CURL_BLOB_COPY
+ext/curl/interface.c:2283:47   - Unknown word (stblob)          -- setopt(ch->cp, option, &stblob);
+ext/curl/interface.c:2471:5    - Unknown word (CAAZ)            -- CAAZ("content_type", &retnull
+ext/curl/interface.c:2493:4    - Unknown word (CAAD)            -- CAAD("total_time", d_code
+ext/curl/interface.c:2496:4    - Unknown word (CAAD)            -- CAAD("namelookup_time", d
+ext/curl/interface.c:2499:4    - Unknown word (CAAD)            -- CAAD("connect_time", d_code
+ext/curl/interface.c:2502:4    - Unknown word (CAAD)            -- CAAD("pretransfer_time",
+ext/curl/interface.c:2537:4    - Unknown word (CAAZ)            -- CAAZ("certinfo", &listcode
+ext/curl/interface.c:2592:4    - Unknown word (CAASTR)          -- CAASTR("request_header", ch
 ext/curl/interface.c:266:6     - Unknown word (NTLMWB)      -- {"NTLMWB", CURL_VERSION_NTLM
 ext/curl/interface.c:280:28    - Unknown word (ALTSVC)      -- ALTSVC", CURL_VERSION_ALTSVC},
 ext/curl/interface.c:280:6     - Unknown word (ALTSVC)      -- {"ALTSVC", CURL_VERSION_ALTSVC
@@ -3581,8 +3576,8 @@ ext/curl/interface.c:290:26    - Unknown word (HSTS)        -- HSTS", CURL_VERSI
 ext/curl/interface.c:290:6     - Unknown word (HSTS)        -- {"HSTS", CURL_VERSION_HSTS
 ext/curl/interface.c:293:27    - Unknown word (GSASL)       -- GSASL", CURL_VERSION_GSASL},
 ext/curl/interface.c:293:6     - Unknown word (GSASL)       -- {"GSASL", CURL_VERSION_GSASL
-ext/curl/interface.c:2999:22   - Unknown word (OVFL)            -- if (ZEND_SIZE_T_INT_OVFL(ZSTR_LEN(str))) {
-ext/curl/interface.c:3028:22   - Unknown word (OVFL)            -- if (ZEND_SIZE_T_INT_OVFL(ZSTR_LEN(str))) {
+ext/curl/interface.c:2985:22   - Unknown word (OVFL)            -- if (ZEND_SIZE_T_INT_OVFL(ZSTR_LEN(str))) {
+ext/curl/interface.c:3014:22   - Unknown word (OVFL)            -- if (ZEND_SIZE_T_INT_OVFL(ZSTR_LEN(str))) {
 ext/curl/interface.c:60:9      - Unknown word (CAAD)       -- #define CAAD(s, v) add_assoc_double
 ext/curl/interface.c:61:9      - Unknown word (CAAS)       -- #define CAAS(s, v) add_assoc_string
 ext/curl/interface.c:62:9      - Unknown word (CAASTR)     -- #define CAASTR(s, v) add_assoc_str
@@ -9133,46 +9128,46 @@ ext/json/php_json_encoder.h:13:19     - Unknown word (Zelenka)    -- | Author: J
 ext/json/php_json_parser.h:13:19     - Unknown word (Zelenka)    -- | Author: Jakub Zelenka <bukka@php.net>
 ext/json/php_json_parser.h:82:14     - Unknown word (yyparse)    -- int php_json_yyparse(php_json_parser *parser
 ext/json/php_json_scanner.h:13:19     - Unknown word (Zelenka)    -- | Author: Jakub Zelenka <bukka@php.net>
-ext/ldap/ldap.c:1073:44   - Unknown word (walletpasswd)    -- ldap->ld_sb, wallet, walletpasswd, authmode)) {
-ext/ldap/ldap.c:1091:24   - Unknown word (walletpasswd)    -- char *wallet = NULL, *walletpasswd = NULL;
-ext/ldap/ldap.c:1092:24   - Unknown word (walletpasswdlen) -- size_t walletlen = 0, walletpasswdlen = 0;
-ext/ldap/ldap.c:1092:9    - Unknown word (walletlen)       -- size_t walletlen = 0, walletpasswdlen
-ext/ldap/ldap.c:1093:23   - Unknown word (GSLC)            -- zend_long authmode = GSLC_SSL_NO_AUTH;
-ext/ldap/ldap.c:1100:30   - Unknown word (walletlen)       -- &hostlen, &wallet, &walletlen, &walletpasswd, &walletpasswd
-ext/ldap/ldap.c:1100:42   - Unknown word (walletpasswd)    -- wallet, &walletlen, &walletpasswd, &walletpasswdlen,
-ext/ldap/ldap.c:1100:57   - Unknown word (walletpasswdlen) -- walletlen, &walletpasswd, &walletpasswdlen, &authmode) != SUCCESS
-ext/ldap/ldap.c:1156:13   - Unknown word (lderrno)         -- /* {{{ _get_lderrno */
-ext/ldap/ldap.c:1157:17   - Unknown word (lderrno)         -- static int _get_lderrno(LDAP *ldap)
-ext/ldap/ldap.c:1160:6    - Unknown word (lderr)           -- int lderr;
-ext/ldap/ldap.c:1163:48   - Unknown word (lderr)           -- LDAP_OPT_ERROR_NUMBER, &lderr);
-ext/ldap/ldap.c:1164:9    - Unknown word (lderr)           -- return lderr;
-ext/ldap/ldap.c:1176:19   - Unknown word (dnlen)           -- size_t ldap_bind_dnlen, ldap_bind_pwlen;
-ext/ldap/ldap.c:1180:102  - Unknown word (dnlen)           -- bind_dn, &ldap_bind_dnlen, &ldap_bind_pw, &ldap
-ext/ldap/ldap.c:1216:19   - Unknown word (dnlen)           -- size_t ldap_bind_dnlen, ldap_bind_pwlen;
-ext/ldap/ldap.c:1219:16   - Unknown word (lserverctrls)    -- LDAPControl **lserverctrls = NULL;
-ext/ldap/ldap.c:1221:104  - Unknown word (dnlen)           -- bind_dn, &ldap_bind_dnlen, &ldap_bind_pw, &ldap
-ext/ldap/ldap.c:1229:3    - Unknown word (lserverctrls)    -- lserverctrls = php_ldap_controls
-ext/ldap/ldap.c:1230:7    - Unknown word (lserverctrls)    -- if (lserverctrls == NULL) {
-ext/ldap/ldap.c:1246:5    - Unknown word (lserverctrls)    -- lserverctrls, NULL, &msgid);
-ext/ldap/ldap.c:1268:6    - Unknown word (lserverctrls)    -- if (lserverctrls) {
-ext/ldap/ldap.c:1283:12   - Unknown word (bictx)           -- } php_ldap_bictx;
-ext/ldap/ldap.c:1286:17   - Unknown word (bictx)           -- static php_ldap_bictx *_php_sasl_setdefs(LDAP
-ext/ldap/ldap.c:1286:98   - Unknown word (authc)           -- sasl_realm, char *sasl_authc_id, char *passwd, char
-ext/ldap/ldap.c:1288:11   - Unknown word (bictx)           -- php_ldap_bictx *ctx;
-ext/ldap/ldap.c:1290:37   - Unknown word (bictx)           -- memalloc(sizeof(php_ldap_bictx));
-ext/ldap/ldap.c:1293:23   - Unknown word (authc)           -- ctx->authcid = (sasl_authc_id) ? ber_strdup(sasl
-ext/ldap/ldap.c:1293:51   - Unknown word (authc)           -- id) ? ber_strdup(sasl_authc_id) : NULL;
-ext/ldap/ldap.c:1315:41   - Unknown word (bictx)           -- sasl_freedefs(php_ldap_bictx *ctx)
-ext/ldap/ldap.c:1369:13   - Unknown word (authc)           -- char *sasl_authc_id = NULL;
-ext/ldap/ldap.c:1371:54   - Unknown word (authc)           -- mech_len, realm_len, authc_id_len, authz_id_len
+ext/ldap/ldap.c:1072:44   - Unknown word (walletpasswd)    -- ldap->ld_sb, wallet, walletpasswd, authmode)) {
+ext/ldap/ldap.c:1090:24   - Unknown word (walletpasswd)    -- char *wallet = NULL, *walletpasswd = NULL;
+ext/ldap/ldap.c:1091:24   - Unknown word (walletpasswdlen) -- size_t walletlen = 0, walletpasswdlen = 0;
+ext/ldap/ldap.c:1091:9    - Unknown word (walletlen)       -- size_t walletlen = 0, walletpasswdlen
+ext/ldap/ldap.c:1092:23   - Unknown word (GSLC)            -- zend_long authmode = GSLC_SSL_NO_AUTH;
+ext/ldap/ldap.c:1099:30   - Unknown word (walletlen)       -- &hostlen, &wallet, &walletlen, &walletpasswd, &walletpasswd
+ext/ldap/ldap.c:1099:42   - Unknown word (walletpasswd)    -- wallet, &walletlen, &walletpasswd, &walletpasswdlen,
+ext/ldap/ldap.c:1099:57   - Unknown word (walletpasswdlen) -- walletlen, &walletpasswd, &walletpasswdlen, &authmode) != SUCCESS
+ext/ldap/ldap.c:1155:13   - Unknown word (lderrno)         -- /* {{{ _get_lderrno */
+ext/ldap/ldap.c:1156:17   - Unknown word (lderrno)         -- static int _get_lderrno(LDAP *ldap)
+ext/ldap/ldap.c:1159:6    - Unknown word (lderr)           -- int lderr;
+ext/ldap/ldap.c:1162:48   - Unknown word (lderr)           -- LDAP_OPT_ERROR_NUMBER, &lderr);
+ext/ldap/ldap.c:1163:9    - Unknown word (lderr)           -- return lderr;
+ext/ldap/ldap.c:1175:19   - Unknown word (dnlen)           -- size_t ldap_bind_dnlen, ldap_bind_pwlen;
+ext/ldap/ldap.c:1179:102  - Unknown word (dnlen)           -- bind_dn, &ldap_bind_dnlen, &ldap_bind_pw, &ldap
+ext/ldap/ldap.c:1215:19   - Unknown word (dnlen)           -- size_t ldap_bind_dnlen, ldap_bind_pwlen;
+ext/ldap/ldap.c:1218:16   - Unknown word (lserverctrls)    -- LDAPControl **lserverctrls = NULL;
+ext/ldap/ldap.c:1220:104  - Unknown word (dnlen)           -- bind_dn, &ldap_bind_dnlen, &ldap_bind_pw, &ldap
+ext/ldap/ldap.c:1228:3    - Unknown word (lserverctrls)    -- lserverctrls = php_ldap_controls
+ext/ldap/ldap.c:1229:7    - Unknown word (lserverctrls)    -- if (lserverctrls == NULL) {
+ext/ldap/ldap.c:1245:5    - Unknown word (lserverctrls)    -- lserverctrls, NULL, &msgid);
+ext/ldap/ldap.c:1267:6    - Unknown word (lserverctrls)    -- if (lserverctrls) {
+ext/ldap/ldap.c:1282:12   - Unknown word (bictx)           -- } php_ldap_bictx;
+ext/ldap/ldap.c:1285:17   - Unknown word (bictx)           -- static php_ldap_bictx *_php_sasl_setdefs(LDAP
+ext/ldap/ldap.c:1285:98   - Unknown word (authc)           -- sasl_realm, char *sasl_authc_id, char *passwd, char
+ext/ldap/ldap.c:1287:11   - Unknown word (bictx)           -- php_ldap_bictx *ctx;
+ext/ldap/ldap.c:1289:37   - Unknown word (bictx)           -- memalloc(sizeof(php_ldap_bictx));
+ext/ldap/ldap.c:1292:23   - Unknown word (authc)           -- ctx->authcid = (sasl_authc_id) ? ber_strdup(sasl
+ext/ldap/ldap.c:1292:51   - Unknown word (authc)           -- id) ? ber_strdup(sasl_authc_id) : NULL;
+ext/ldap/ldap.c:1314:41   - Unknown word (bictx)           -- sasl_freedefs(php_ldap_bictx *ctx)
+ext/ldap/ldap.c:1368:13   - Unknown word (authc)           -- char *sasl_authc_id = NULL;
+ext/ldap/ldap.c:1370:54   - Unknown word (authc)           -- mech_len, realm_len, authc_id_len, authz_id_len
 ext/ldap/ldap.c:138:2     - Unknown word (LDAPG)      -- LDAPG(num_links)--;
 ext/ldap/ldap.c:17:20     - Unknown word (Taskinen)   -- | Jani Taskinen <sniper@iki.fi>
 ext/ldap/ldap.c:19:20     - Unknown word (Goldstein)  -- | Doug Goldstein <cardoe@cardoe.com>
 ext/ldap/ldap.c:20:15     - Unknown word (Côme)       -- | Côme Chilliet  <mcmic@php
 ext/ldap/ldap.c:20:20     - Unknown word (Chilliet)   -- | Côme Chilliet <mcmic@php.net>
-ext/ldap/ldap.c:2154:101  - Unknown word (lderrno)         -- ldap_err2string(_get_lderrno(ld->link)));
-ext/ldap/ldap.c:2878:19   - Unknown word (lderrno)         -- RETURN_LONG(_get_lderrno(ld->link));
-ext/ldap/ldap.c:2909:18   - Unknown word (lderrno)         -- ld_errno = _get_lderrno(ld->link);
+ext/ldap/ldap.c:2153:101  - Unknown word (lderrno)         -- ldap_err2string(_get_lderrno(ld->link)));
+ext/ldap/ldap.c:2877:19   - Unknown word (lderrno)         -- RETURN_LONG(_get_lderrno(ld->link));
+ext/ldap/ldap.c:2908:18   - Unknown word (lderrno)         -- ld_errno = _get_lderrno(ld->link);
 ext/ldap/ldap.c:293:27    - Unknown word (pperr)      -- LDAPPasswordPolicyError pperr;
 ext/ldap/ldap.c:295:70    - Unknown word (pperr)      -- ctrl, &expire, &grace, &pperr);
 ext/ldap/ldap.c:302:9     - Unknown word (pperr)      -- if ( pperr != PP_noError ) {
@@ -9185,94 +9180,94 @@ ext/ldap/ldap.c:315:65    - Unknown word (lcookie)    -- ctrl, &lestimated, &lco
 ext/ldap/ldap.c:324:35    - Unknown word (lestimated) -- long(&value, "size", lestimated);
 ext/ldap/ldap.c:325:40    - Unknown word (lcookie)    -- stringl(&value, "cookie", lcookie.bv_val, lcookie.bv_len
 ext/ldap/ldap.c:325:56    - Unknown word (lcookie)    -- cookie", lcookie.bv_val, lcookie.bv_len);
-ext/ldap/ldap.c:3360:34   - Unknown word (matcheddn)       -- *result, *errcode, *matcheddn = NULL, *errmsg = NULL
-ext/ldap/ldap.c:3364:9    - Unknown word (lreferrals)      -- char **lreferrals;
-ext/ldap/ldap.c:3365:21   - Unknown word (lerrmsg)         -- char *lmatcheddn, *lerrmsg;
-ext/ldap/ldap.c:3365:8    - Unknown word (lmatcheddn)      -- char *lmatcheddn, *lerrmsg;
-ext/ldap/ldap.c:3366:10   - Unknown word (lerrcode)        -- int rc, lerrcode;
-ext/ldap/ldap.c:3368:114  - Unknown word (matcheddn)       -- result_ce, &errcode, &matcheddn, &errmsg, &referrals
-ext/ldap/ldap.c:3378:57   - Unknown word (lerrcode)        -- ldap_result->result, &lerrcode,
-ext/ldap/ldap.c:3379:18   - Unknown word (lmatcheddn)      -- matcheddn ? &lmatcheddn : NULL,
-ext/ldap/ldap.c:3379:5    - Unknown word (matcheddn)       -- matcheddn ? &lmatcheddn : NULL
-ext/ldap/ldap.c:3380:15   - Unknown word (lerrmsg)         -- errmsg ? &lerrmsg : NULL,
-ext/ldap/ldap.c:3381:18   - Unknown word (lreferrals)      -- referrals ? &lreferrals : NULL,
-ext/ldap/ldap.c:3389:36   - Unknown word (lerrcode)        -- ASSIGN_REF_LONG(errcode, lerrcode);
-ext/ldap/ldap.c:3399:7    - Unknown word (lreferrals)      -- if (lreferrals != NULL) {
-ext/ldap/ldap.c:3400:18   - Unknown word (lreferrals)      -- char **refp = lreferrals;
-ext/ldap/ldap.c:3405:26   - Unknown word (lreferrals)      -- ldap_memvfree((void**)lreferrals);
-ext/ldap/ldap.c:3409:7    - Unknown word (lerrmsg)         -- if (lerrmsg == NULL) {
-ext/ldap/ldap.c:3412:39   - Unknown word (lerrmsg)         -- ASSIGN_REF_STRING(errmsg, lerrmsg);
-ext/ldap/ldap.c:3413:17   - Unknown word (lerrmsg)         -- ldap_memfree(lerrmsg);
-ext/ldap/ldap.c:3416:6    - Unknown word (matcheddn)       -- if (matcheddn) {
-ext/ldap/ldap.c:3417:7    - Unknown word (lmatcheddn)      -- if (lmatcheddn == NULL) {
-ext/ldap/ldap.c:3418:37   - Unknown word (matcheddn)       -- ASSIGN_REF_EMPTY_STRING(matcheddn);
-ext/ldap/ldap.c:3420:42   - Unknown word (lmatcheddn)      -- REF_STRING(matcheddn, lmatcheddn);
-ext/ldap/ldap.c:3421:17   - Unknown word (lmatcheddn)      -- ldap_memfree(lmatcheddn);
-ext/ldap/ldap.c:3430:45   - Unknown word (Pierangelo)      -- operation response parsing, Pierangelo Masarati */
-ext/ldap/ldap.c:3430:56   - Unknown word (Masarati)        -- parsing, Pierangelo Masarati */
-ext/ldap/ldap.c:3438:8    - Unknown word (lretoid)         -- char *lretoid;
-ext/ldap/ldap.c:3439:17   - Unknown word (lretdata)        -- struct berval *lretdata;
-ext/ldap/ldap.c:3453:15   - Unknown word (lretoid)         -- retoid ? &lretoid: NULL,
-ext/ldap/ldap.c:3454:16   - Unknown word (lretdata)        -- retdata ? &lretdata: NULL,
-ext/ldap/ldap.c:3462:7    - Unknown word (lretoid)         -- if (lretoid == NULL) {
-ext/ldap/ldap.c:3465:39   - Unknown word (lretoid)         -- ASSIGN_REF_STRING(retoid, lretoid);
-ext/ldap/ldap.c:3466:17   - Unknown word (lretoid)         -- ldap_memfree(lretoid);
-ext/ldap/ldap.c:3472:7    - Unknown word (lretdata)        -- if (lretdata == NULL) {
-ext/ldap/ldap.c:3475:41   - Unknown word (lretdata)        -- REF_STRINGL(retdata, lretdata->bv_val, lretdata->bv
-ext/ldap/ldap.c:3475:59   - Unknown word (lretdata)        -- retdata, lretdata->bv_val, lretdata->bv_len);
-ext/ldap/ldap.c:3620:46   - Unknown word (Opppb)           -- parameters(ZEND_NUM_ARGS(), "Opppb|h!", &link, ldap_link
-ext/ldap/ldap.c:3726:23   - Unknown word (ECNAME)          -- ifdef LDAP_OPT_X_TLS_ECNAME
-ext/ldap/ldap.c:3727:18   - Unknown word (ECNAME)          -- LDAP_OPT_X_TLS_ECNAME,
-ext/ldap/ldap.c:3923:86   - Unknown word (charslen)        -- chars, const size_t charslen, bool escape)
-ext/ldap/ldap.c:3926:13   - Unknown word (charslen)        -- while (i < charslen) {
-ext/ldap/ldap.c:3934:23   - Unknown word (ignoreslen)      -- size_t valuelen = 0, ignoreslen = 0;
-ext/ldap/ldap.c:3936:23   - Unknown word (havecharlist)   -- bool map[256] = {0}, havecharlist = 0;
-ext/ldap/ldap.c:3938:83   - Unknown word (ignoreslen)     -- valuelen, &ignores, &ignoreslen, &flags) != SUCCESS
-ext/ldap/ldap.c:3947:3    - Unknown word (havecharlist)   -- havecharlist = 1;
-ext/ldap/ldap.c:3952:3    - Unknown word (havecharlist)   -- havecharlist = 1;
-ext/ldap/ldap.c:3956:7    - Unknown word (havecharlist)   -- if (!havecharlist) {
-ext/ldap/ldap.c:3962:6    - Unknown word (ignoreslen)     -- if (ignoreslen) {
-ext/ldap/ldap.c:3963:47   - Unknown word (ignoreslen)     -- chars(map, ignores, ignoreslen, false);
-ext/ldap/ldap.c:4022:29   - Unknown word (Pierangelo)     -- Extended operations, Pierangelo Masarati */
-ext/ldap/ldap.c:4022:40   - Unknown word (Masarati)       -- operations, Pierangelo Masarati */
-ext/ldap/ldap.c:4029:16   - Unknown word (lreqdata)       -- struct berval lreqdata, *lretdata = NULL;
-ext/ldap/ldap.c:4056:3    - Unknown word (lreqdata)       -- lreqdata.bv_val = ZSTR_VAL(reqdata
-ext/ldap/ldap.c:4057:3    - Unknown word (lreqdata)       -- lreqdata.bv_len = ZSTR_LEN(reqdata
-ext/ldap/ldap.c:4059:3    - Unknown word (lreqdata)       -- lreqdata.bv_len = 0;
-ext/ldap/ldap.c:4073:4    - Unknown word (lreqdata)       -- lreqdata.bv_len > 0 ? &lreqdata
-ext/ldap/ldap.c:4153:16   - Unknown word (luser)          -- struct berval luser = { 0L, NULL };
-ext/ldap/ldap.c:4154:16   - Unknown word (loldpw)         -- struct berval loldpw = { 0L, NULL };
-ext/ldap/ldap.c:4155:16   - Unknown word (lnewpw)         -- struct berval lnewpw = { 0L, NULL };
-ext/ldap/ldap.c:4156:16   - Unknown word (lgenpasswd)     -- struct berval lgenpasswd = { 0L, NULL };
-ext/ldap/ldap.c:4157:45   - Unknown word (requestctrls)   -- lserverctrls = NULL, *requestctrls[2] = { NULL, NULL }
-ext/ldap/ldap.c:4163:108  - Unknown word (loldpw)         -- val, &luser.bv_len, &loldpw.bv_val, &loldpw.bv_len
-ext/ldap/ldap.c:4163:124  - Unknown word (loldpw)         -- len, &loldpw.bv_val, &loldpw.bv_len, &lnewpw.bv_val
-ext/ldap/ldap.c:4163:140  - Unknown word (lnewpw)         -- val, &loldpw.bv_len, &lnewpw.bv_val, &lnewpw.bv_len
-ext/ldap/ldap.c:4163:156  - Unknown word (lnewpw)         -- len, &lnewpw.bv_val, &lnewpw.bv_len, &serverctrls
-ext/ldap/ldap.c:4163:48   - Unknown word (sssz)           -- ZEND_NUM_ARGS(), "O|sssz/", &link, ldap_link
-ext/ldap/ldap.c:4163:78   - Unknown word (luser)          -- link, ldap_link_ce, &luser.bv_val, &luser.bv_len
-ext/ldap/ldap.c:4163:93   - Unknown word (luser)          -- ce, &luser.bv_val, &luser.bv_len, &loldpw.bv_val
-ext/ldap/ldap.c:4173:4    - Unknown word (requestctrls)   -- requestctrls[0] = ctrl;
-ext/ldap/ldap.c:4179:30   - Unknown word (luser)          -- ldap_passwd(ld->link, &luser,
-ext/ldap/ldap.c:4180:24   - Unknown word (loldpw)         -- loldpw.bv_len > 0 ? &loldpw : NULL,
-ext/ldap/ldap.c:4180:3    - Unknown word (loldpw)         -- loldpw.bv_len > 0 ? &loldpw
-ext/ldap/ldap.c:4181:24   - Unknown word (lnewpw)         -- lnewpw.bv_len > 0 ? &lnewpw : NULL,
-ext/ldap/ldap.c:4181:3    - Unknown word (lnewpw)         -- lnewpw.bv_len > 0 ? &lnewpw
-ext/ldap/ldap.c:4182:3    - Unknown word (requestctrls)   -- requestctrls,
-ext/ldap/ldap.c:4185:6    - Unknown word (requestctrls)   -- if (requestctrls[0] != NULL) {
-ext/ldap/ldap.c:4186:21   - Unknown word (requestctrls)   -- ldap_control_free(requestctrls[0]);
-ext/ldap/ldap.c:4203:46   - Unknown word (lgenpasswd)     -- ld->link, ldap_res, &lgenpasswd);
-ext/ldap/ldap.c:4223:7    - Unknown word (lgenpasswd)     -- if (lgenpasswd.bv_len == 0) {
-ext/ldap/ldap.c:4226:19   - Unknown word (lgenpasswd)     -- RETVAL_STRINGL(lgenpasswd.bv_val, lgenpasswd.bv
-ext/ldap/ldap.c:4226:38   - Unknown word (lgenpasswd)     -- STRINGL(lgenpasswd.bv_val, lgenpasswd.bv_len);
-ext/ldap/ldap.c:4254:17   - Unknown word (lauthzid)       -- struct berval *lauthzid;
-ext/ldap/ldap.c:4266:32   - Unknown word (lauthzid)       -- whoami_s(ld->link, &lauthzid, NULL, NULL);
-ext/ldap/ldap.c:4272:6    - Unknown word (lauthzid)       -- if (lauthzid == NULL) {
-ext/ldap/ldap.c:4275:18   - Unknown word (lauthzid)       -- RETVAL_STRINGL(lauthzid->bv_val, lauthzid->bv
-ext/ldap/ldap.c:4275:36   - Unknown word (lauthzid)       -- STRINGL(lauthzid->bv_val, lauthzid->bv_len);
-ext/ldap/ldap.c:4290:12   - Unknown word (lttl)           -- ber_int_t lttl;
-ext/ldap/ldap.c:4302:2    - Unknown word (lttl)           -- lttl = (ber_int_t) ttl;
-ext/ldap/ldap.c:4304:38   - Unknown word (lttl)           -- refresh_s(ld->link, &ldn, lttl, &newttl, NULL, NULL
+ext/ldap/ldap.c:3359:34   - Unknown word (matcheddn)       -- *result, *errcode, *matcheddn = NULL, *errmsg = NULL
+ext/ldap/ldap.c:3363:9    - Unknown word (lreferrals)      -- char **lreferrals;
+ext/ldap/ldap.c:3364:21   - Unknown word (lerrmsg)         -- char *lmatcheddn, *lerrmsg;
+ext/ldap/ldap.c:3364:8    - Unknown word (lmatcheddn)      -- char *lmatcheddn, *lerrmsg;
+ext/ldap/ldap.c:3365:10   - Unknown word (lerrcode)        -- int rc, lerrcode;
+ext/ldap/ldap.c:3367:114  - Unknown word (matcheddn)       -- result_ce, &errcode, &matcheddn, &errmsg, &referrals
+ext/ldap/ldap.c:3377:57   - Unknown word (lerrcode)        -- ldap_result->result, &lerrcode,
+ext/ldap/ldap.c:3378:18   - Unknown word (lmatcheddn)      -- matcheddn ? &lmatcheddn : NULL,
+ext/ldap/ldap.c:3378:5    - Unknown word (matcheddn)       -- matcheddn ? &lmatcheddn : NULL
+ext/ldap/ldap.c:3379:15   - Unknown word (lerrmsg)         -- errmsg ? &lerrmsg : NULL,
+ext/ldap/ldap.c:3380:18   - Unknown word (lreferrals)      -- referrals ? &lreferrals : NULL,
+ext/ldap/ldap.c:3388:36   - Unknown word (lerrcode)        -- ASSIGN_REF_LONG(errcode, lerrcode);
+ext/ldap/ldap.c:3398:7    - Unknown word (lreferrals)      -- if (lreferrals != NULL) {
+ext/ldap/ldap.c:3399:18   - Unknown word (lreferrals)      -- char **refp = lreferrals;
+ext/ldap/ldap.c:3404:26   - Unknown word (lreferrals)      -- ldap_memvfree((void**)lreferrals);
+ext/ldap/ldap.c:3408:7    - Unknown word (lerrmsg)         -- if (lerrmsg == NULL) {
+ext/ldap/ldap.c:3411:39   - Unknown word (lerrmsg)         -- ASSIGN_REF_STRING(errmsg, lerrmsg);
+ext/ldap/ldap.c:3412:17   - Unknown word (lerrmsg)         -- ldap_memfree(lerrmsg);
+ext/ldap/ldap.c:3415:6    - Unknown word (matcheddn)       -- if (matcheddn) {
+ext/ldap/ldap.c:3416:7    - Unknown word (lmatcheddn)      -- if (lmatcheddn == NULL) {
+ext/ldap/ldap.c:3417:37   - Unknown word (matcheddn)       -- ASSIGN_REF_EMPTY_STRING(matcheddn);
+ext/ldap/ldap.c:3419:42   - Unknown word (lmatcheddn)      -- REF_STRING(matcheddn, lmatcheddn);
+ext/ldap/ldap.c:3420:17   - Unknown word (lmatcheddn)      -- ldap_memfree(lmatcheddn);
+ext/ldap/ldap.c:3429:45   - Unknown word (Pierangelo)      -- operation response parsing, Pierangelo Masarati */
+ext/ldap/ldap.c:3429:56   - Unknown word (Masarati)        -- parsing, Pierangelo Masarati */
+ext/ldap/ldap.c:3437:8    - Unknown word (lretoid)         -- char *lretoid;
+ext/ldap/ldap.c:3438:17   - Unknown word (lretdata)        -- struct berval *lretdata;
+ext/ldap/ldap.c:3452:15   - Unknown word (lretoid)         -- retoid ? &lretoid: NULL,
+ext/ldap/ldap.c:3453:16   - Unknown word (lretdata)        -- retdata ? &lretdata: NULL,
+ext/ldap/ldap.c:3461:7    - Unknown word (lretoid)         -- if (lretoid == NULL) {
+ext/ldap/ldap.c:3464:39   - Unknown word (lretoid)         -- ASSIGN_REF_STRING(retoid, lretoid);
+ext/ldap/ldap.c:3465:17   - Unknown word (lretoid)         -- ldap_memfree(lretoid);
+ext/ldap/ldap.c:3471:7    - Unknown word (lretdata)        -- if (lretdata == NULL) {
+ext/ldap/ldap.c:3474:41   - Unknown word (lretdata)        -- REF_STRINGL(retdata, lretdata->bv_val, lretdata->bv
+ext/ldap/ldap.c:3474:59   - Unknown word (lretdata)        -- retdata, lretdata->bv_val, lretdata->bv_len);
+ext/ldap/ldap.c:3619:46   - Unknown word (Opppb)           -- parameters(ZEND_NUM_ARGS(), "Opppb|h!", &link, ldap_link
+ext/ldap/ldap.c:3725:23   - Unknown word (ECNAME)          -- ifdef LDAP_OPT_X_TLS_ECNAME
+ext/ldap/ldap.c:3726:18   - Unknown word (ECNAME)          -- LDAP_OPT_X_TLS_ECNAME,
+ext/ldap/ldap.c:3922:86   - Unknown word (charslen)        -- chars, const size_t charslen, bool escape)
+ext/ldap/ldap.c:3925:13   - Unknown word (charslen)        -- while (i < charslen) {
+ext/ldap/ldap.c:3933:23   - Unknown word (ignoreslen)      -- size_t valuelen = 0, ignoreslen = 0;
+ext/ldap/ldap.c:3935:23   - Unknown word (havecharlist)   -- bool map[256] = {0}, havecharlist = 0;
+ext/ldap/ldap.c:3937:83   - Unknown word (ignoreslen)     -- valuelen, &ignores, &ignoreslen, &flags) != SUCCESS
+ext/ldap/ldap.c:3946:3    - Unknown word (havecharlist)   -- havecharlist = 1;
+ext/ldap/ldap.c:3951:3    - Unknown word (havecharlist)   -- havecharlist = 1;
+ext/ldap/ldap.c:3955:7    - Unknown word (havecharlist)   -- if (!havecharlist) {
+ext/ldap/ldap.c:3961:6    - Unknown word (ignoreslen)     -- if (ignoreslen) {
+ext/ldap/ldap.c:3962:47   - Unknown word (ignoreslen)     -- chars(map, ignores, ignoreslen, false);
+ext/ldap/ldap.c:4021:29   - Unknown word (Pierangelo)     -- Extended operations, Pierangelo Masarati */
+ext/ldap/ldap.c:4021:40   - Unknown word (Masarati)       -- operations, Pierangelo Masarati */
+ext/ldap/ldap.c:4028:16   - Unknown word (lreqdata)       -- struct berval lreqdata, *lretdata = NULL;
+ext/ldap/ldap.c:4055:3    - Unknown word (lreqdata)       -- lreqdata.bv_val = ZSTR_VAL(reqdata
+ext/ldap/ldap.c:4056:3    - Unknown word (lreqdata)       -- lreqdata.bv_len = ZSTR_LEN(reqdata
+ext/ldap/ldap.c:4058:3    - Unknown word (lreqdata)       -- lreqdata.bv_len = 0;
+ext/ldap/ldap.c:4072:4    - Unknown word (lreqdata)       -- lreqdata.bv_len > 0 ? &lreqdata
+ext/ldap/ldap.c:4152:16   - Unknown word (luser)          -- struct berval luser = { 0L, NULL };
+ext/ldap/ldap.c:4153:16   - Unknown word (loldpw)         -- struct berval loldpw = { 0L, NULL };
+ext/ldap/ldap.c:4154:16   - Unknown word (lnewpw)         -- struct berval lnewpw = { 0L, NULL };
+ext/ldap/ldap.c:4155:16   - Unknown word (lgenpasswd)     -- struct berval lgenpasswd = { 0L, NULL };
+ext/ldap/ldap.c:4156:45   - Unknown word (requestctrls)   -- lserverctrls = NULL, *requestctrls[2] = { NULL, NULL }
+ext/ldap/ldap.c:4162:108  - Unknown word (loldpw)         -- val, &luser.bv_len, &loldpw.bv_val, &loldpw.bv_len
+ext/ldap/ldap.c:4162:124  - Unknown word (loldpw)         -- len, &loldpw.bv_val, &loldpw.bv_len, &lnewpw.bv_val
+ext/ldap/ldap.c:4162:140  - Unknown word (lnewpw)         -- val, &loldpw.bv_len, &lnewpw.bv_val, &lnewpw.bv_len
+ext/ldap/ldap.c:4162:156  - Unknown word (lnewpw)         -- len, &lnewpw.bv_val, &lnewpw.bv_len, &serverctrls
+ext/ldap/ldap.c:4162:48   - Unknown word (sssz)           -- ZEND_NUM_ARGS(), "O|sssz/", &link, ldap_link
+ext/ldap/ldap.c:4162:78   - Unknown word (luser)          -- link, ldap_link_ce, &luser.bv_val, &luser.bv_len
+ext/ldap/ldap.c:4162:93   - Unknown word (luser)          -- ce, &luser.bv_val, &luser.bv_len, &loldpw.bv_val
+ext/ldap/ldap.c:4172:4    - Unknown word (requestctrls)   -- requestctrls[0] = ctrl;
+ext/ldap/ldap.c:4178:30   - Unknown word (luser)          -- ldap_passwd(ld->link, &luser,
+ext/ldap/ldap.c:4179:24   - Unknown word (loldpw)         -- loldpw.bv_len > 0 ? &loldpw : NULL,
+ext/ldap/ldap.c:4179:3    - Unknown word (loldpw)         -- loldpw.bv_len > 0 ? &loldpw
+ext/ldap/ldap.c:4180:24   - Unknown word (lnewpw)         -- lnewpw.bv_len > 0 ? &lnewpw : NULL,
+ext/ldap/ldap.c:4180:3    - Unknown word (lnewpw)         -- lnewpw.bv_len > 0 ? &lnewpw
+ext/ldap/ldap.c:4181:3    - Unknown word (requestctrls)   -- requestctrls,
+ext/ldap/ldap.c:4184:6    - Unknown word (requestctrls)   -- if (requestctrls[0] != NULL) {
+ext/ldap/ldap.c:4185:21   - Unknown word (requestctrls)   -- ldap_control_free(requestctrls[0]);
+ext/ldap/ldap.c:4202:46   - Unknown word (lgenpasswd)     -- ld->link, ldap_res, &lgenpasswd);
+ext/ldap/ldap.c:4222:7    - Unknown word (lgenpasswd)     -- if (lgenpasswd.bv_len == 0) {
+ext/ldap/ldap.c:4225:19   - Unknown word (lgenpasswd)     -- RETVAL_STRINGL(lgenpasswd.bv_val, lgenpasswd.bv
+ext/ldap/ldap.c:4225:38   - Unknown word (lgenpasswd)     -- STRINGL(lgenpasswd.bv_val, lgenpasswd.bv_len);
+ext/ldap/ldap.c:4253:17   - Unknown word (lauthzid)       -- struct berval *lauthzid;
+ext/ldap/ldap.c:4265:32   - Unknown word (lauthzid)       -- whoami_s(ld->link, &lauthzid, NULL, NULL);
+ext/ldap/ldap.c:4271:6    - Unknown word (lauthzid)       -- if (lauthzid == NULL) {
+ext/ldap/ldap.c:4274:18   - Unknown word (lauthzid)       -- RETVAL_STRINGL(lauthzid->bv_val, lauthzid->bv
+ext/ldap/ldap.c:4274:36   - Unknown word (lauthzid)       -- STRINGL(lauthzid->bv_val, lauthzid->bv_len);
+ext/ldap/ldap.c:4289:12   - Unknown word (lttl)           -- ber_int_t lttl;
+ext/ldap/ldap.c:4301:2    - Unknown word (lttl)           -- lttl = (ber_int_t) ttl;
+ext/ldap/ldap.c:4303:38   - Unknown word (lttl)           -- refresh_s(ld->link, &ldn, lttl, &newttl, NULL, NULL
 ext/ldap/ldap.c:786:8     - Unknown word (ctrlarray)  -- zval* ctrlarray;
 ext/ldap/ldap.c:793:34    - Unknown word (ctrlarray)  -- FOREACH_VAL(controls, ctrlarray) {
 ext/ldap/ldap.c:794:16    - Unknown word (ctrlarray)  -- if (Z_TYPE_P(ctrlarray) != IS_ARRAY) {
@@ -9285,9 +9280,9 @@ ext/ldap/ldap.c:967:24    - Unknown word (walletpasswd) -- char *wallet = NULL, 
 ext/ldap/ldap.c:968:24    - Unknown word (walletpasswdlen) -- size_t walletlen = 0, walletpasswdlen = 0;
 ext/ldap/ldap.c:968:9     - Unknown word (walletlen)    -- size_t walletlen = 0, walletpasswdlen
 ext/ldap/ldap.c:969:23    - Unknown word (GSLC)            -- zend_long authmode = GSLC_SSL_NO_AUTH;
-ext/ldap/ldap.c:987:102   - Unknown word (walletpasswd)    -- wallet, &walletlen, &walletpasswd, &walletpasswdlen,
-ext/ldap/ldap.c:987:117   - Unknown word (walletpasswdlen) -- walletlen, &walletpasswd, &walletpasswdlen, &authmode) != SUCCESS
-ext/ldap/ldap.c:987:90    - Unknown word (walletlen)       -- hostlen, &port, &wallet, &walletlen, &walletpasswd, &walletpasswd
+ext/ldap/ldap.c:986:102   - Unknown word (walletpasswd)    -- wallet, &walletlen, &walletpasswd, &walletpasswdlen,
+ext/ldap/ldap.c:986:117   - Unknown word (walletpasswdlen) -- walletlen, &walletpasswd, &walletpasswdlen, &authmode) != SUCCESS
+ext/ldap/ldap.c:986:90    - Unknown word (walletlen)       -- hostlen, &port, &wallet, &walletlen, &walletpasswd, &walletpasswd
 ext/ldap/ldap.stub.php:168:18    - Unknown word (SASL)       -- #ifdef HAVE_LDAP_SASL
 ext/ldap/ldap.stub.php:171:27    - Unknown word (SASL)       -- @cvalue LDAP_OPT_X_SASL_MECH
 ext/ldap/ldap.stub.php:173:22    - Unknown word (SASL)       -- const LDAP_OPT_X_SASL_MECH = UNKNOWN;
@@ -9302,99 +9297,102 @@ ext/ldap/ldap.stub.php:194:32    - Unknown word (NOCANON)    -- cvalue LDAP_OPT_
 ext/ldap/ldap.stub.php:196:27    - Unknown word (NOCANON)    -- const LDAP_OPT_X_SASL_NOCANON = UNKNOWN;
 ext/ldap/ldap.stub.php:206:13    - Unknown word (ORALDAP)    -- #ifdef HAVE_ORALDAP
 ext/ldap/ldap.stub.php:209:16    - Unknown word (GSLC)       -- * @cvalue GSLC_SSL_NO_AUTH
-ext/ldap/ldap.stub.php:211:11    - Unknown word (GSLC)       -- const GSLC_SSL_NO_AUTH = UNKNOWN
-ext/ldap/ldap.stub.php:214:16    - Unknown word (GSLC)       -- * @cvalue GSLC_SSL_ONEWAY_AUTH
-ext/ldap/ldap.stub.php:216:11    - Unknown word (GSLC)       -- const GSLC_SSL_ONEWAY_AUTH = UNKNOWN
-ext/ldap/ldap.stub.php:219:16    - Unknown word (GSLC)       -- * @cvalue GSLC_SSL_TWOWAY_AUTH
-ext/ldap/ldap.stub.php:219:25    - Unknown word (TWOWAY)     -- * @cvalue GSLC_SSL_TWOWAY_AUTH
-ext/ldap/ldap.stub.php:221:20    - Unknown word (TWOWAY)     -- const GSLC_SSL_TWOWAY_AUTH = UNKNOWN;
-ext/ldap/ldap.stub.php:259:31    - Unknown word (CACERTDIR)  -- cvalue LDAP_OPT_X_TLS_CACERTDIR
-ext/ldap/ldap.stub.php:261:26    - Unknown word (CACERTDIR)  -- const LDAP_OPT_X_TLS_CACERTDIR = UNKNOWN;
-ext/ldap/ldap.stub.php:264:31    - Unknown word (CACERTFILE) -- cvalue LDAP_OPT_X_TLS_CACERTFILE
-ext/ldap/ldap.stub.php:266:26    - Unknown word (CACERTFILE) -- const LDAP_OPT_X_TLS_CACERTFILE = UNKNOWN;
-ext/ldap/ldap.stub.php:269:31    - Unknown word (CERTFILE)   -- cvalue LDAP_OPT_X_TLS_CERTFILE
-ext/ldap/ldap.stub.php:271:26    - Unknown word (CERTFILE)   -- const LDAP_OPT_X_TLS_CERTFILE = UNKNOWN;
-ext/ldap/ldap.stub.php:289:23    - Unknown word (CRLCHECK)   -- ifdef LDAP_OPT_X_TLS_CRLCHECK
-ext/ldap/ldap.stub.php:292:31    - Unknown word (CRLCHECK)   -- cvalue LDAP_OPT_X_TLS_CRLCHECK
-ext/ldap/ldap.stub.php:294:26    - Unknown word (CRLCHECK)   -- const LDAP_OPT_X_TLS_CRLCHECK = UNKNOWN;
-ext/ldap/ldap.stub.php:312:23    - Unknown word (DHFILE)     -- ifdef LDAP_OPT_X_TLS_DHFILE
-ext/ldap/ldap.stub.php:315:31    - Unknown word (DHFILE)     -- cvalue LDAP_OPT_X_TLS_DHFILE
-ext/ldap/ldap.stub.php:317:26    - Unknown word (DHFILE)     -- const LDAP_OPT_X_TLS_DHFILE = UNKNOWN;
-ext/ldap/ldap.stub.php:320:23    - Unknown word (CRLFILE)    -- ifdef LDAP_OPT_X_TLS_CRLFILE
-ext/ldap/ldap.stub.php:323:31    - Unknown word (CRLFILE)    -- cvalue LDAP_OPT_X_TLS_CRLFILE
-ext/ldap/ldap.stub.php:325:26    - Unknown word (CRLFILE)    -- const LDAP_OPT_X_TLS_CRLFILE = UNKNOWN;
-ext/ldap/ldap.stub.php:416:21    - Unknown word (EXOP)       -- * @cvalue LDAP_EXOP_START_TLS
-ext/ldap/ldap.stub.php:418:16    - Unknown word (EXOP)       -- const LDAP_EXOP_START_TLS = UNKNOWN
-ext/ldap/ldap.stub.php:421:21    - Unknown word (EXOP)       -- * @cvalue LDAP_EXOP_MODIFY_PASSWD
-ext/ldap/ldap.stub.php:423:16    - Unknown word (EXOP)       -- const LDAP_EXOP_MODIFY_PASSWD = UNKNOWN
-ext/ldap/ldap.stub.php:426:21    - Unknown word (EXOP)       -- * @cvalue LDAP_EXOP_REFRESH
-ext/ldap/ldap.stub.php:441:21    - Unknown word (MANAGEDSAIT) -- #ifdef LDAP_CONTROL_MANAGEDSAIT
-ext/ldap/ldap.stub.php:445:29    - Unknown word (MANAGEDSAIT) -- cvalue LDAP_CONTROL_MANAGEDSAIT
-ext/ldap/ldap.stub.php:447:24    - Unknown word (MANAGEDSAIT) -- const LDAP_CONTROL_MANAGEDSAIT = UNKNOWN;
-ext/ldap/ldap.stub.php:465:21    - Unknown word (VALUESRETURNFILTER) -- #ifdef LDAP_CONTROL_VALUESRETURNFILTER
-ext/ldap/ldap.stub.php:469:29    - Unknown word (VALUESRETURNFILTER) -- cvalue LDAP_CONTROL_VALUESRETURNFILTER
-ext/ldap/ldap.stub.php:471:24    - Unknown word (VALUESRETURNFILTER) -- const LDAP_CONTROL_VALUESRETURNFILTER = UNKNOWN;
-ext/ldap/ldap.stub.php:493:21    - Unknown word (SORTREQUEST)        -- #ifdef LDAP_CONTROL_SORTREQUEST
-ext/ldap/ldap.stub.php:497:29    - Unknown word (SORTREQUEST)        -- cvalue LDAP_CONTROL_SORTREQUEST
-ext/ldap/ldap.stub.php:499:24    - Unknown word (SORTREQUEST)        -- const LDAP_CONTROL_SORTREQUEST = UNKNOWN;
-ext/ldap/ldap.stub.php:503:29    - Unknown word (SORTRESPONSE)       -- cvalue LDAP_CONTROL_SORTRESPONSE
-ext/ldap/ldap.stub.php:505:24    - Unknown word (SORTRESPONSE)       -- const LDAP_CONTROL_SORTRESPONSE = UNKNOWN;
-ext/ldap/ldap.stub.php:507:21    - Unknown word (PAGEDRESULTS)       -- #ifdef LDAP_CONTROL_PAGEDRESULTS
-ext/ldap/ldap.stub.php:511:29    - Unknown word (PAGEDRESULTS)       -- cvalue LDAP_CONTROL_PAGEDRESULTS
-ext/ldap/ldap.stub.php:513:24    - Unknown word (PAGEDRESULTS)       -- const LDAP_CONTROL_PAGEDRESULTS = UNKNOWN;
-ext/ldap/ldap.stub.php:515:21    - Unknown word (AUTHZID)            -- #ifdef LDAP_CONTROL_AUTHZID_REQUEST
-ext/ldap/ldap.stub.php:519:29    - Unknown word (AUTHZID)            -- cvalue LDAP_CONTROL_AUTHZID_REQUEST
-ext/ldap/ldap.stub.php:521:24    - Unknown word (AUTHZID)            -- const LDAP_CONTROL_AUTHZID_REQUEST = UNKNOWN;
-ext/ldap/ldap.stub.php:537:8     - Unknown word (RLDAP)              -- * RLDAP Content Synchronization
-ext/ldap/ldap.stub.php:543:8     - Unknown word (RLDAP)              -- * RLDAP Content Synchronization
+ext/ldap/ldap.stub.php:212:11    - Unknown word (GSLC)       -- const GSLC_SSL_NO_AUTH = UNKNOWN
+ext/ldap/ldap.stub.php:215:16    - Unknown word (GSLC)       -- * @cvalue GSLC_SSL_ONEWAY_AUTH
+ext/ldap/ldap.stub.php:218:11    - Unknown word (GSLC)       -- const GSLC_SSL_ONEWAY_AUTH = UNKNOWN
+ext/ldap/ldap.stub.php:221:16    - Unknown word (GSLC)       -- * @cvalue GSLC_SSL_TWOWAY_AUTH
+ext/ldap/ldap.stub.php:221:25    - Unknown word (TWOWAY)     -- * @cvalue GSLC_SSL_TWOWAY_AUTH
+ext/ldap/ldap.stub.php:224:20    - Unknown word (TWOWAY)     -- const GSLC_SSL_TWOWAY_AUTH = UNKNOWN;
+ext/ldap/ldap.stub.php:262:31    - Unknown word (CACERTDIR)  -- cvalue LDAP_OPT_X_TLS_CACERTDIR
+ext/ldap/ldap.stub.php:264:26    - Unknown word (CACERTDIR)  -- const LDAP_OPT_X_TLS_CACERTDIR = UNKNOWN;
+ext/ldap/ldap.stub.php:267:31    - Unknown word (CACERTFILE) -- cvalue LDAP_OPT_X_TLS_CACERTFILE
+ext/ldap/ldap.stub.php:269:26    - Unknown word (CACERTFILE) -- const LDAP_OPT_X_TLS_CACERTFILE = UNKNOWN;
+ext/ldap/ldap.stub.php:272:31    - Unknown word (CERTFILE)   -- cvalue LDAP_OPT_X_TLS_CERTFILE
+ext/ldap/ldap.stub.php:274:26    - Unknown word (CERTFILE)   -- const LDAP_OPT_X_TLS_CERTFILE = UNKNOWN;
+ext/ldap/ldap.stub.php:292:23    - Unknown word (CRLCHECK)   -- ifdef LDAP_OPT_X_TLS_CRLCHECK
+ext/ldap/ldap.stub.php:295:31    - Unknown word (CRLCHECK)   -- cvalue LDAP_OPT_X_TLS_CRLCHECK
+ext/ldap/ldap.stub.php:297:26    - Unknown word (CRLCHECK)   -- const LDAP_OPT_X_TLS_CRLCHECK = UNKNOWN;
+ext/ldap/ldap.stub.php:315:23    - Unknown word (DHFILE)     -- ifdef LDAP_OPT_X_TLS_DHFILE
+ext/ldap/ldap.stub.php:318:31    - Unknown word (DHFILE)     -- cvalue LDAP_OPT_X_TLS_DHFILE
+ext/ldap/ldap.stub.php:320:26    - Unknown word (DHFILE)     -- const LDAP_OPT_X_TLS_DHFILE = UNKNOWN;
+ext/ldap/ldap.stub.php:323:23    - Unknown word (CRLFILE)    -- ifdef LDAP_OPT_X_TLS_CRLFILE
+ext/ldap/ldap.stub.php:326:31    - Unknown word (CRLFILE)    -- cvalue LDAP_OPT_X_TLS_CRLFILE
+ext/ldap/ldap.stub.php:328:26    - Unknown word (CRLFILE)    -- const LDAP_OPT_X_TLS_CRLFILE = UNKNOWN;
+ext/ldap/ldap.stub.php:419:21    - Unknown word (EXOP)       -- * @cvalue LDAP_EXOP_START_TLS
+ext/ldap/ldap.stub.php:421:16    - Unknown word (EXOP)       -- const LDAP_EXOP_START_TLS = UNKNOWN
+ext/ldap/ldap.stub.php:424:21    - Unknown word (EXOP)       -- * @cvalue LDAP_EXOP_MODIFY_PASSWD
+ext/ldap/ldap.stub.php:426:16    - Unknown word (EXOP)       -- const LDAP_EXOP_MODIFY_PASSWD = UNKNOWN
+ext/ldap/ldap.stub.php:429:21    - Unknown word (EXOP)       -- * @cvalue LDAP_EXOP_REFRESH
+ext/ldap/ldap.stub.php:444:21    - Unknown word (MANAGEDSAIT) -- #ifdef LDAP_CONTROL_MANAGEDSAIT
+ext/ldap/ldap.stub.php:448:29    - Unknown word (MANAGEDSAIT) -- cvalue LDAP_CONTROL_MANAGEDSAIT
+ext/ldap/ldap.stub.php:450:24    - Unknown word (MANAGEDSAIT) -- const LDAP_CONTROL_MANAGEDSAIT = UNKNOWN;
+ext/ldap/ldap.stub.php:468:21    - Unknown word (VALUESRETURNFILTER) -- #ifdef LDAP_CONTROL_VALUESRETURNFILTER
+ext/ldap/ldap.stub.php:472:29    - Unknown word (VALUESRETURNFILTER) -- cvalue LDAP_CONTROL_VALUESRETURNFILTER
+ext/ldap/ldap.stub.php:474:24    - Unknown word (VALUESRETURNFILTER) -- const LDAP_CONTROL_VALUESRETURNFILTER = UNKNOWN;
+ext/ldap/ldap.stub.php:496:21    - Unknown word (SORTREQUEST)        -- #ifdef LDAP_CONTROL_SORTREQUEST
+ext/ldap/ldap.stub.php:500:29    - Unknown word (SORTREQUEST)        -- cvalue LDAP_CONTROL_SORTREQUEST
+ext/ldap/ldap.stub.php:502:24    - Unknown word (SORTREQUEST)        -- const LDAP_CONTROL_SORTREQUEST = UNKNOWN;
+ext/ldap/ldap.stub.php:506:29    - Unknown word (SORTRESPONSE)       -- cvalue LDAP_CONTROL_SORTRESPONSE
+ext/ldap/ldap.stub.php:508:24    - Unknown word (SORTRESPONSE)       -- const LDAP_CONTROL_SORTRESPONSE = UNKNOWN;
+ext/ldap/ldap.stub.php:510:21    - Unknown word (PAGEDRESULTS)       -- #ifdef LDAP_CONTROL_PAGEDRESULTS
+ext/ldap/ldap.stub.php:514:29    - Unknown word (PAGEDRESULTS)       -- cvalue LDAP_CONTROL_PAGEDRESULTS
+ext/ldap/ldap.stub.php:516:24    - Unknown word (PAGEDRESULTS)       -- const LDAP_CONTROL_PAGEDRESULTS = UNKNOWN;
+ext/ldap/ldap.stub.php:518:21    - Unknown word (AUTHZID)            -- #ifdef LDAP_CONTROL_AUTHZID_REQUEST
+ext/ldap/ldap.stub.php:522:29    - Unknown word (AUTHZID)            -- cvalue LDAP_CONTROL_AUTHZID_REQUEST
+ext/ldap/ldap.stub.php:524:24    - Unknown word (AUTHZID)            -- const LDAP_CONTROL_AUTHZID_REQUEST = UNKNOWN;
+ext/ldap/ldap.stub.php:540:8     - Unknown word (RLDAP)              -- * RLDAP Content Synchronization
+ext/ldap/ldap.stub.php:546:8     - Unknown word (RLDAP)              -- * RLDAP Content Synchronization
 ext/ldap/ldap.stub.php:54:34     - Unknown word (MODTYPE)    -- cvalue LDAP_MODIFY_BATCH_MODTYPE
-ext/ldap/ldap.stub.php:550:21    - Unknown word (DONTUSECOPY)        -- #ifdef LDAP_CONTROL_DONTUSECOPY
-ext/ldap/ldap.stub.php:554:29    - Unknown word (DONTUSECOPY)        -- cvalue LDAP_CONTROL_DONTUSECOPY
-ext/ldap/ldap.stub.php:556:24    - Unknown word (DONTUSECOPY)        -- const LDAP_CONTROL_DONTUSECOPY = UNKNOWN;
-ext/ldap/ldap.stub.php:558:21    - Unknown word (PASSWORDPOLICYREQUEST) -- #ifdef LDAP_CONTROL_PASSWORDPOLICYREQUEST
-ext/ldap/ldap.stub.php:562:29    - Unknown word (PASSWORDPOLICYREQUEST) -- cvalue LDAP_CONTROL_PASSWORDPOLICYREQUEST
-ext/ldap/ldap.stub.php:564:24    - Unknown word (PASSWORDPOLICYREQUEST) -- const LDAP_CONTROL_PASSWORDPOLICYREQUEST = UNKNOWN;
-ext/ldap/ldap.stub.php:568:29    - Unknown word (PASSWORDPOLICYRESPONSE) -- cvalue LDAP_CONTROL_PASSWORDPOLICYRESPONSE
+ext/ldap/ldap.stub.php:553:21    - Unknown word (DONTUSECOPY)        -- #ifdef LDAP_CONTROL_DONTUSECOPY
+ext/ldap/ldap.stub.php:557:29    - Unknown word (DONTUSECOPY)        -- cvalue LDAP_CONTROL_DONTUSECOPY
+ext/ldap/ldap.stub.php:559:24    - Unknown word (DONTUSECOPY)        -- const LDAP_CONTROL_DONTUSECOPY = UNKNOWN;
+ext/ldap/ldap.stub.php:561:21    - Unknown word (PASSWORDPOLICYREQUEST) -- #ifdef LDAP_CONTROL_PASSWORDPOLICYREQUEST
+ext/ldap/ldap.stub.php:565:29    - Unknown word (PASSWORDPOLICYREQUEST) -- cvalue LDAP_CONTROL_PASSWORDPOLICYREQUEST
+ext/ldap/ldap.stub.php:567:24    - Unknown word (PASSWORDPOLICYREQUEST) -- const LDAP_CONTROL_PASSWORDPOLICYREQUEST = UNKNOWN;
 ext/ldap/ldap.stub.php:56:29     - Unknown word (MODTYPE)    -- const LDAP_MODIFY_BATCH_MODTYPE = UNKNOWN;
-ext/ldap/ldap.stub.php:570:24    - Unknown word (PASSWORDPOLICYRESPONSE) -- const LDAP_CONTROL_PASSWORDPOLICYRESPONSE = UNKNOWN;
-ext/ldap/ldap.stub.php:611:21    - Unknown word (VLVREQUEST)             -- #ifdef LDAP_CONTROL_VLVREQUEST
-ext/ldap/ldap.stub.php:615:29    - Unknown word (VLVREQUEST)             -- cvalue LDAP_CONTROL_VLVREQUEST
-ext/ldap/ldap.stub.php:617:24    - Unknown word (VLVREQUEST)             -- const LDAP_CONTROL_VLVREQUEST = UNKNOWN;
-ext/ldap/ldap.stub.php:621:29    - Unknown word (VLVRESPONSE)            -- cvalue LDAP_CONTROL_VLVRESPONSE
-ext/ldap/ldap.stub.php:623:24    - Unknown word (VLVRESPONSE)            -- const LDAP_CONTROL_VLVRESPONSE = UNKNOWN;
-ext/ldap/ldap.stub.php:626:13    - Unknown word (ORALDAP)                -- #ifdef HAVE_ORALDAP
+ext/ldap/ldap.stub.php:571:29    - Unknown word (PASSWORDPOLICYRESPONSE) -- cvalue LDAP_CONTROL_PASSWORDPOLICYRESPONSE
+ext/ldap/ldap.stub.php:573:24    - Unknown word (PASSWORDPOLICYRESPONSE) -- const LDAP_CONTROL_PASSWORDPOLICYRESPONSE = UNKNOWN;
+ext/ldap/ldap.stub.php:614:21    - Unknown word (VLVREQUEST)             -- #ifdef LDAP_CONTROL_VLVREQUEST
+ext/ldap/ldap.stub.php:618:29    - Unknown word (VLVREQUEST)             -- cvalue LDAP_CONTROL_VLVREQUEST
+ext/ldap/ldap.stub.php:620:24    - Unknown word (VLVREQUEST)             -- const LDAP_CONTROL_VLVREQUEST = UNKNOWN;
+ext/ldap/ldap.stub.php:624:29    - Unknown word (VLVRESPONSE)            -- cvalue LDAP_CONTROL_VLVRESPONSE
+ext/ldap/ldap.stub.php:626:24    - Unknown word (VLVRESPONSE)            -- const LDAP_CONTROL_VLVRESPONSE = UNKNOWN;
+ext/ldap/ldap.stub.php:629:13    - Unknown word (ORALDAP)                -- #ifdef HAVE_ORALDAP
 ext/ldap/ldap.stub.php:63:48     - Unknown word (ORALDAP)    -- 00) || defined(HAVE_ORALDAP))
-ext/ldap/ldap.stub.php:645:175   - Unknown word (authc)                  -- realm = null, ?string $authc_id = null, ?string
-ext/ldap/ldap.stub.php:649:128   - Unknown word (sizelimit)              -- attributes_only = 0, int $sizelimit = -1, int $timelimit
-ext/ldap/ldap.stub.php:649:149   - Unknown word (timelimit)              -- sizelimit = -1, int $timelimit = -1, int $deref = LDAP
-ext/ldap/ldap.stub.php:652:128   - Unknown word (sizelimit)              -- attributes_only = 0, int $sizelimit = -1, int $timelimit
-ext/ldap/ldap.stub.php:652:149   - Unknown word (timelimit)              -- sizelimit = -1, int $timelimit = -1, int $deref = LDAP
-ext/ldap/ldap.stub.php:655:130   - Unknown word (sizelimit)              -- attributes_only = 0, int $sizelimit = -1, int $timelimit
-ext/ldap/ldap.stub.php:655:151   - Unknown word (timelimit)              -- sizelimit = -1, int $timelimit = -1, int $deref = LDAP
+ext/ldap/ldap.stub.php:650:175   - Unknown word (authc)                  -- realm = null, ?string $authc_id = null, ?string
+ext/ldap/ldap.stub.php:654:128   - Unknown word (sizelimit)              -- attributes_only = 0, int $sizelimit = -1, int $timelimit
+ext/ldap/ldap.stub.php:654:149   - Unknown word (timelimit)              -- sizelimit = -1, int $timelimit = -1, int $deref = LDAP
+ext/ldap/ldap.stub.php:657:128   - Unknown word (sizelimit)              -- attributes_only = 0, int $sizelimit = -1, int $timelimit
+ext/ldap/ldap.stub.php:657:149   - Unknown word (timelimit)              -- sizelimit = -1, int $timelimit = -1, int $deref = LDAP
+ext/ldap/ldap.stub.php:660:130   - Unknown word (sizelimit)              -- attributes_only = 0, int $sizelimit = -1, int $timelimit
+ext/ldap/ldap.stub.php:660:151   - Unknown word (timelimit)              -- sizelimit = -1, int $timelimit = -1, int $deref = LDAP
 ext/ldap/ldap.stub.php:71:25     - Unknown word (SIZELIMIT)  -- * @cvalue LDAP_OPT_SIZELIMIT
-ext/ldap/ldap.stub.php:737:51    - Unknown word (ORALDAP)                -- 00) || defined(HAVE_ORALDAP)
 ext/ldap/ldap.stub.php:73:20     - Unknown word (SIZELIMIT)  -- const LDAP_OPT_SIZELIMIT = UNKNOWN;
+ext/ldap/ldap.stub.php:742:51    - Unknown word (ORALDAP)                -- 00) || defined(HAVE_ORALDAP)
 ext/ldap/ldap.stub.php:76:25     - Unknown word (TIMELIMIT)  -- * @cvalue LDAP_OPT_TIMELIMIT
-ext/ldap/ldap.stub.php:771:68    - Unknown word (SETREBINDPROC)          -- & defined(HAVE_3ARG_SETREBINDPROC))
+ext/ldap/ldap.stub.php:776:68    - Unknown word (SETREBINDPROC)          -- & defined(HAVE_3ARG_SETREBINDPROC))
 ext/ldap/ldap.stub.php:78:20     - Unknown word (TIMELIMIT)  -- const LDAP_OPT_TIMELIMIT = UNKNOWN;
-ext/ldap/ldap.stub.php:793:19    - Unknown word (exop)                   -- function ldap_exop(LDAP\Connection $ldap
-ext/ldap/ldap.stub.php:798:19    - Unknown word (exop)                   -- function ldap_exop_sync(LDAP\Connection
-ext/ldap/ldap.stub.php:805:19    - Unknown word (exop)                   -- function ldap_exop_passwd(LDAP\Connection
-ext/ldap/ldap.stub.php:810:19    - Unknown word (exop)                   -- function ldap_exop_whoami(LDAP\Connection
-ext/ldap/ldap.stub.php:814:19    - Unknown word (exop)                   -- function ldap_exop_refresh(LDAP\Connection
+ext/ldap/ldap.stub.php:798:19    - Unknown word (exop)                   -- function ldap_exop(LDAP\Connection $ldap
+ext/ldap/ldap.stub.php:803:19    - Unknown word (exop)                   -- function ldap_exop_sync(LDAP\Connection
+ext/ldap/ldap.stub.php:810:19    - Unknown word (exop)                   -- function ldap_exop_passwd(LDAP\Connection
+ext/ldap/ldap.stub.php:815:19    - Unknown word (exop)                   -- function ldap_exop_whoami(LDAP\Connection
+ext/ldap/ldap.stub.php:819:19    - Unknown word (exop)                   -- function ldap_exop_refresh(LDAP\Connection
 ext/ldap/ldap_arginfo.h:10:67     - Unknown word (GSLC)       -- auth_mode, IS_LONG, 0, "GSLC_SSL_NO_AUTH")
 ext/ldap/ldap_arginfo.h:19:67     - Unknown word (GSLC)       -- auth_mode, IS_LONG, 0, "GSLC_SSL_NO_AUTH")
 ext/ldap/ldap_arginfo.h:56:43     - Unknown word (authc)      -- WITH_DEFAULT_VALUE(0, authc_id, IS_STRING, 1, "null
-ext/ldap/ldap_arginfo.h:596:26    - Unknown word (GSLC)       -- REGISTER_LONG_CONSTANT("GSLC_SSL_NO_AUTH", GSLC_SSL
-ext/ldap/ldap_arginfo.h:596:45    - Unknown word (GSLC)       -- "GSLC_SSL_NO_AUTH", GSLC_SSL_NO_AUTH, CONST_PERSISTENT
-ext/ldap/ldap_arginfo.h:597:26    - Unknown word (GSLC)       -- REGISTER_LONG_CONSTANT("GSLC_SSL_ONEWAY_AUTH", GSLC
-ext/ldap/ldap_arginfo.h:598:35    - Unknown word (TWOWAY)     -- LONG_CONSTANT("GSLC_SSL_TWOWAY_AUTH", GSLC_SSL_TWOWAY
-ext/ldap/ldap_arginfo.h:598:58    - Unknown word (TWOWAY)     -- TWOWAY_AUTH", GSLC_SSL_TWOWAY_AUTH, CONST_PERSISTENT
-ext/ldap/ldap_arginfo.h:712:142   - Unknown word (SENSITIVEPARAMETER) -- ZSTR_KNOWN(ZEND_STR_SENSITIVEPARAMETER), 0);
-ext/ldap/ldap_arginfo.h:716:156   - Unknown word (SENSITIVEPARAMETER) -- ZSTR_KNOWN(ZEND_STR_SENSITIVEPARAMETER), 0);
-ext/ldap/ldap_arginfo.h:719:136   - Unknown word (SENSITIVEPARAMETER) -- ZSTR_KNOWN(ZEND_STR_SENSITIVEPARAMETER), 0);
-ext/ldap/ldap_arginfo.h:721:144   - Unknown word (SENSITIVEPARAMETER) -- ZSTR_KNOWN(ZEND_STR_SENSITIVEPARAMETER), 0);
-ext/ldap/ldap_arginfo.h:724:146   - Unknown word (SENSITIVEPARAMETER) -- ZSTR_KNOWN(ZEND_STR_SENSITIVEPARAMETER), 0);
+ext/ldap/ldap_arginfo.h:596:23    - Unknown word (GSLC)       -- zend_constant *const_GSLC_SSL_NO_AUTH = REGISTER
+ext/ldap/ldap_arginfo.h:596:66    - Unknown word (GSLC)       -- REGISTER_LONG_CONSTANT("GSLC_SSL_NO_AUTH", GSLC_SSL
+ext/ldap/ldap_arginfo.h:596:85    - Unknown word (GSLC)       -- "GSLC_SSL_NO_AUTH", GSLC_SSL_NO_AUTH, CONST_PERSISTENT
+ext/ldap/ldap_arginfo.h:598:102   - Unknown word (TWOWAY)     -- TWOWAY_AUTH", GSLC_SSL_TWOWAY_AUTH, CONST_PERSISTENT
+ext/ldap/ldap_arginfo.h:598:32    - Unknown word (TWOWAY)     -- constant *const_GSLC_SSL_TWOWAY_AUTH = REGISTER_LONG
+ext/ldap/ldap_arginfo.h:598:79    - Unknown word (TWOWAY)     -- LONG_CONSTANT("GSLC_SSL_TWOWAY_AUTH", GSLC_SSL_TWOWAY
+ext/ldap/ldap_arginfo.h:719:142   - Unknown word (SENSITIVEPARAMETER) -- ZSTR_KNOWN(ZEND_STR_SENSITIVEPARAMETER), 0);
+ext/ldap/ldap_arginfo.h:730:156   - Unknown word (SENSITIVEPARAMETER) -- ZSTR_KNOWN(ZEND_STR_SENSITIVEPARAMETER), 0);
+ext/ldap/ldap_arginfo.h:733:136   - Unknown word (SENSITIVEPARAMETER) -- ZSTR_KNOWN(ZEND_STR_SENSITIVEPARAMETER), 0);
+ext/ldap/ldap_arginfo.h:735:144   - Unknown word (SENSITIVEPARAMETER) -- ZSTR_KNOWN(ZEND_STR_SENSITIVEPARAMETER), 0);
+ext/ldap/ldap_arginfo.h:738:146   - Unknown word (SENSITIVEPARAMETER) -- ZSTR_KNOWN(ZEND_STR_SENSITIVEPARAMETER), 0);
+ext/ldap/ldap_arginfo.h:762:120   - Unknown word (TWOWAY)             -- attribute(const_GSLC_SSL_TWOWAY_AUTH, ZSTR_KNOWN(ZEND
+ext/ldap/ldap_arginfo.h:762:54    - Unknown word (TWOWAY)             -- Deprecated_const_GSLC_SSL_TWOWAY_AUTH_0 = zend_add_global
 ext/ldap/php_ldap.h:15:20     - Unknown word (Taskinen)   -- | Jani Taskinen <sniper@iki.fi>
 ext/ldap/php_ldap.h:50:9      - Unknown word (LDAPG)      -- #define LDAPG(v) ZEND_MODULE_GLOBALS
 ext/ldap/tests/README.md:102:1     - Unknown word (TLSCA)          -- TLSCACertificateFile /etc
@@ -17819,11 +17817,11 @@ ext/opcache/jit/zend_jit.h:176:9     - Unknown word (ZREG)       -- #define ZREG
 ext/opcache/jit/zend_jit.h:177:9     - Unknown word (ZREG)       -- #define ZREG_PHI (1<<
 ext/opcache/jit/zend_jit.h:41:73     - Unknown word (caled)      -- the most frequently caled on first request functions
 ext/opcache/jit/zend_jit.h:74:30     - Unknown word (TSSA)       -- ZEND_JIT_DEBUG_TRACE_TSSA (1<<19)
-ext/opcache/jit/zend_jit_helpers.c:2806:84   - Unknown word (REINITABLE) -- property_val) & IS_PROP_REINITABLE)) {
-ext/opcache/jit/zend_jit_helpers.c:2850:42   - Unknown word (REINITABLE) -- property_val) &= ~IS_PROP_REINITABLE;
-ext/opcache/jit/zend_jit_helpers.c:2907:35   - Unknown word (REINITABLE) -- P(zptr) &= ~IS_PROP_REINITABLE;
-ext/opcache/jit/zend_jit_helpers.c:3004:39   - Unknown word (REINITABLE) -- var_ptr) &= ~IS_PROP_REINITABLE;
-ext/opcache/jit/zend_jit_helpers.c:3010:38   - Unknown word (REINITABLE) -- var_ptr) &= ~IS_PROP_REINITABLE;
+ext/opcache/jit/zend_jit_helpers.c:2798:84   - Unknown word (REINITABLE) -- property_val) & IS_PROP_REINITABLE)) {
+ext/opcache/jit/zend_jit_helpers.c:2842:42   - Unknown word (REINITABLE) -- property_val) &= ~IS_PROP_REINITABLE;
+ext/opcache/jit/zend_jit_helpers.c:2899:35   - Unknown word (REINITABLE) -- P(zptr) &= ~IS_PROP_REINITABLE;
+ext/opcache/jit/zend_jit_helpers.c:2996:39   - Unknown word (REINITABLE) -- var_ptr) &= ~IS_PROP_REINITABLE;
+ext/opcache/jit/zend_jit_helpers.c:3002:38   - Unknown word (REINITABLE) -- var_ptr) &= ~IS_PROP_REINITABLE;
 ext/opcache/jit/zend_jit_internal.h:272:32    - Unknown word (prcessed)   -- DONE, "already prcessed") \
 ext/opcache/jit/zend_jit_internal.h:321:24    - Unknown word (JITED)      -- define ZEND_JIT_TRACE_JITED (1<<4)
 ext/opcache/jit/zend_jit_internal.h:327:23    - Unknown word (JITED)      -- define ZEND_JIT_EXIT_JITED (1<<0)
@@ -26341,11 +26339,11 @@ ext/spl/spl_heap.stub.php:7:28      - Unknown word (EXTR)       -- @cvalue SPL_P
 ext/spl/spl_heap.stub.php:8:22      - Unknown word (EXTR)       -- public const int EXTR_BOTH = UNKNOWN;
 ext/spl/spl_heap.stub.php:9:21      - Unknown word (PQUEUE)     -- /** @cvalue SPL_PQUEUE_EXTR_PRIORITY */
 ext/spl/spl_heap.stub.php:9:28      - Unknown word (EXTR)       -- @cvalue SPL_PQUEUE_EXTR_PRIORITY */
-ext/spl/spl_heap_arginfo.h:167:13    - Unknown word (EXTR)       -- zval const_EXTR_BOTH_value;
-ext/spl/spl_heap_arginfo.h:168:19    - Unknown word (EXTR)       -- ZVAL_LONG(&const_EXTR_BOTH_value, SPL_PQUEUE
-ext/spl/spl_heap_arginfo.h:168:47    - Unknown word (EXTR)       -- BOTH_value, SPL_PQUEUE_EXTR_BOTH);
-ext/spl/spl_heap_arginfo.h:169:21    - Unknown word (EXTR)       -- zend_string *const_EXTR_BOTH_name = zend_string
-ext/spl/spl_heap_arginfo.h:169:65    - Unknown word (EXTR)       -- string_init_interned("EXTR_BOTH", sizeof("EXTR
+ext/spl/spl_heap_arginfo.h:185:13    - Unknown word (EXTR)       -- zval const_EXTR_BOTH_value;
+ext/spl/spl_heap_arginfo.h:186:19    - Unknown word (EXTR)       -- ZVAL_LONG(&const_EXTR_BOTH_value, SPL_PQUEUE
+ext/spl/spl_heap_arginfo.h:186:47    - Unknown word (EXTR)       -- BOTH_value, SPL_PQUEUE_EXTR_BOTH);
+ext/spl/spl_heap_arginfo.h:187:21    - Unknown word (EXTR)       -- zend_string *const_EXTR_BOTH_name = zend_string
+ext/spl/spl_heap_arginfo.h:187:65    - Unknown word (EXTR)       -- string_init_interned("EXTR_BOTH", sizeof("EXTR
 ext/spl/spl_iterators.c:1150:22   - Unknown word (RTIT)           -- if (object->flags & RTIT_BYPASS_CURRENT) {
 ext/spl/spl_iterators.c:1200:22   - Unknown word (RTIT)           -- if (object->flags & RTIT_BYPASS_KEY) {
 ext/spl/spl_iterators.c:1250:9    - Unknown word (APPENDIT)       -- #define APPENDIT_CHECK_CTOR(intern) SPL
@@ -26609,9 +26607,9 @@ ext/standard/basic_functions.c:1815:8    - Unknown word (hicompiled) -- char *hi
 ext/standard/basic_functions.c:1833:2    - Unknown word (hicompiled) -- hicompiled_string_description
 ext/standard/basic_functions.c:1835:49   - Unknown word (hicompiled) -- syntax_highlighter_ini, hicompiled_string_description)
 ext/standard/basic_functions.c:1836:8    - Unknown word (hicompiled) -- efree(hicompiled_string_description)
-ext/standard/basic_functions.c:2197:5    - Unknown word (MSAN)       -- /* MSAN false positive, getservbyport
-ext/standard/basic_functions.c:2199:4    - Unknown word (msan)       -- __msan_unpoison_string(serv
-ext/standard/basic_functions.c:2199:9    - Unknown word (unpoison)   -- __msan_unpoison_string(serv->s_name
+ext/standard/basic_functions.c:2195:5    - Unknown word (MSAN)       -- /* MSAN false positive, getservbyport
+ext/standard/basic_functions.c:2197:4    - Unknown word (msan)       -- __msan_unpoison_string(serv
+ext/standard/basic_functions.c:2197:9    - Unknown word (unpoison)   -- __msan_unpoison_string(serv->s_name
 ext/standard/basic_functions.c:313:13    - Unknown word (INTRIN)     -- #ifdef ZEND_INTRIN_SSE4_2_FUNC_PTR
 ext/standard/basic_functions.c:314:31    - Unknown word (intrin)     -- MINIT_SUBMODULE(string_intrin)
 ext/standard/basic_functions.c:317:13    - Unknown word (INTRIN)     -- #ifdef ZEND_INTRIN_SSE4_2_PCLMUL_FUNC_PTR
@@ -27381,7 +27379,7 @@ ext/standard/http_fopen_wrapper.c:279:48    - Unknown word (tmpzval)    -- locat
 ext/standard/http_fopen_wrapper.c:328:20    - Unknown word (tmpzval)    -- if (context && (tmpzval = php_stream_context
 ext/standard/http_fopen_wrapper.c:329:27    - Unknown word (tmpzval)    -- decode = zend_is_true(tmpzval);
 ext/standard/http_fopen_wrapper.c:369:6     - Unknown word (reqok)      -- int reqok = 0;
-ext/standard/http_fopen_wrapper.c:449:28    - Unknown word (strpprintf) -- transport_string = zend_strpprintf(0, "%s://%s:%d", use
+ext/standard/http_fopen_wrapper.c:449:28    - Unknown word (strpprintf) -- transport_string = zend_strpprintf(0, "%s://%s:" ZEND_LONG
 ext/standard/http_fopen_wrapper.c:767:16    - Unknown word (stmp)       -- zend_string *stmp = php_base64_encode
 ext/standard/http_fopen_wrapper.c:770:30    - Unknown word (stmp)       -- str_append(&req_buf, stmp);
 ext/standard/http_fopen_wrapper.c:776:20    - Unknown word (stmp)       -- zend_string_free(stmp);
@@ -28117,26 +28115,26 @@ ext/uri/php_uri.c:13:15     - Unknown word (Máté)       -- | Authors: Máté K
 ext/uri/php_uri.c:13:20     - Unknown word (Kocsis)     -- | Authors: Máté Kocsis <kocsismate@php.net
 ext/uri/php_uri.c:37:23     - Unknown word (whatwg)     -- zend_class_entry *uri_whatwg_url_ce;
 ext/uri/php_uri.c:38:26     - Unknown word (whatwg)     -- object_handlers uri_whatwg_uri_object_handlers
-ext/uri/php_uri.c:42:23     - Unknown word (whatwg)     -- zend_class_entry *uri_whatwg_invalid_url_exception
-ext/uri/php_uri.c:43:23     - Unknown word (whatwg)     -- zend_class_entry *uri_whatwg_url_validation_error
+ext/uri/php_uri.c:43:23     - Unknown word (whatwg)     -- zend_class_entry *uri_whatwg_invalid_url_exception
 ext/uri/php_uri.c:44:23     - Unknown word (whatwg)     -- zend_class_entry *uri_whatwg_url_validation_error
+ext/uri/php_uri.c:45:23     - Unknown word (whatwg)     -- zend_class_entry *uri_whatwg_url_validation_error
 ext/uri/php_uri.h:13:15     - Unknown word (Máté)       -- | Authors: Máté Kocsis <kocsismate@php
 ext/uri/php_uri.h:13:20     - Unknown word (Kocsis)     -- | Authors: Máté Kocsis <kocsismate@php.net
-ext/uri/php_uri.stub.php:128:28    - Unknown word (Soldius)    -- case InvalidReverseSoldius;
-ext/uri/php_uri.stub.php:41:70     - Unknown word (userinfo)   -- SensitiveParameter] ?string $userinfo): static {}
-ext/uri/php_uri_arginfo.h:353:152   - Unknown word (SENSITIVEPARAMETER) -- ZSTR_KNOWN(ZEND_STR_SENSITIVEPARAMETER), 0);
-ext/uri/php_uri_arginfo.h:422:54    - Unknown word (Soldius)            -- entry, "InvalidReverseSoldius", NULL);
-ext/uri/php_uri_arginfo.h:474:152   - Unknown word (SENSITIVEPARAMETER) -- ZSTR_KNOWN(ZEND_STR_SENSITIVEPARAMETER), 0);
+ext/uri/php_uri.stub.php:133:28    - Unknown word (Soldius)    -- case InvalidReverseSoldius;
+ext/uri/php_uri.stub.php:46:70     - Unknown word (userinfo)   -- SensitiveParameter] ?string $userinfo): static {}
+ext/uri/php_uri_arginfo.h:363:152   - Unknown word (SENSITIVEPARAMETER) -- ZSTR_KNOWN(ZEND_STR_SENSITIVEPARAMETER), 0);
+ext/uri/php_uri_arginfo.h:432:54    - Unknown word (Soldius)            -- entry, "InvalidReverseSoldius", NULL);
+ext/uri/php_uri_arginfo.h:484:152   - Unknown word (SENSITIVEPARAMETER) -- ZSTR_KNOWN(ZEND_STR_SENSITIVEPARAMETER), 0);
 ext/uri/php_uri_common.c:13:15     - Unknown word (Máté)       -- | Authors: Máté Kocsis <kocsismate@php
 ext/uri/php_uri_common.c:13:20     - Unknown word (Kocsis)     -- | Authors: Máté Kocsis <kocsismate@php.net
 ext/uri/php_uri_common.h:13:15     - Unknown word (Máté)       -- | Authors: Máté Kocsis <kocsismate@php
 ext/uri/php_uri_common.h:13:20     - Unknown word (Kocsis)     -- | Authors: Máté Kocsis <kocsismate@php.net
-ext/uri/php_uri_common.h:165:24    - Unknown word (WHATWG)     -- define PHP_URI_PARSER_WHATWG "Uri\\WhatWg\\Url"
+ext/uri/php_uri_common.h:166:24    - Unknown word (WHATWG)     -- define PHP_URI_PARSER_WHATWG "Uri\\WhatWg\\Url"
 ext/uri/php_uri_common.h:22:30     - Unknown word (whatwg)     -- zend_class_entry *uri_whatwg_url_ce;
 ext/uri/php_uri_common.h:23:33     - Unknown word (whatwg)     -- object_handlers uri_whatwg_uri_object_handlers
-ext/uri/php_uri_common.h:27:30     - Unknown word (whatwg)     -- zend_class_entry *uri_whatwg_invalid_url_exception
-ext/uri/php_uri_common.h:28:30     - Unknown word (whatwg)     -- zend_class_entry *uri_whatwg_url_validation_error
+ext/uri/php_uri_common.h:28:30     - Unknown word (whatwg)     -- zend_class_entry *uri_whatwg_invalid_url_exception
 ext/uri/php_uri_common.h:29:30     - Unknown word (whatwg)     -- zend_class_entry *uri_whatwg_url_validation_error
+ext/uri/php_uri_common.h:30:30     - Unknown word (whatwg)     -- zend_class_entry *uri_whatwg_url_validation_error
 ext/uri/uri_parser_php_parse_url.c:13:15     - Unknown word (Máté)       -- | Authors: Máté Kocsis <kocsismate@php
 ext/uri/uri_parser_php_parse_url.c:13:20     - Unknown word (Kocsis)     -- | Authors: Máté Kocsis <kocsismate@php.net
 ext/uri/uri_parser_php_parse_url.c:14:19     - Unknown word (Düsterhus)  -- | Tim Düsterhus <timwolla@php.net>
@@ -28375,10 +28373,10 @@ ext/zend_test/object_handlers.c:72:9      - Unknown word (DONC)       -- if (IS_
 ext/zend_test/object_handlers.h:13:27     - Unknown word (Banyard)    -- Authors: George Peter Banyard <girgias@php.net>
 ext/zend_test/object_handlers.stub.php:5:5       - Unknown word (undocumentable) -- * @undocumentable
 ext/zend_test/php_test.h:58:24     - Unknown word (zendmm)     -- int observe_opline_in_zendmm;
-ext/zend_test/test.c:1028:38   - Unknown word (zendtestattribute) -- zend_attribute_validate_zendtestattribute(zend_attribute *attr
-ext/zend_test/test.c:1264:135  - Unknown word (zendmm)            -- neInZendMM, observe_opline_in_zendmm, zend_zend_test_globals
-ext/zend_test/test.c:1264:51   - Unknown word (zendmm)            -- test.observe_opline_in_zendmm", "0", PHP_INI_ALL,
-ext/zend_test/test.c:1407:45   - Unknown word (zendtestattribute) -- zend_attribute_validate_zendtestattribute;
+ext/zend_test/test.c:1082:38   - Unknown word (zendtestattribute) -- zend_attribute_validate_zendtestattribute(zend_attribute *attr
+ext/zend_test/test.c:1318:135  - Unknown word (zendmm)            -- neInZendMM, observe_opline_in_zendmm, zend_zend_test_globals
+ext/zend_test/test.c:1318:51   - Unknown word (zendmm)            -- test.observe_opline_in_zendmm", "0", PHP_INI_ALL,
+ext/zend_test/test.c:1461:45   - Unknown word (zendtestattribute) -- zend_attribute_validate_zendtestattribute;
 ext/zend_test/test.c:185:12    - Unknown word (leakbytes)  -- zend_long leakbytes = 3;
 ext/zend_test/test.c:187:52    - Unknown word (leakbytes)  -- ZEND_NUM_ARGS(), "|l", &leakbytes) == FAILURE) {
 ext/zend_test/test.c:191:10    - Unknown word (leakbytes)  -- emalloc(leakbytes);
@@ -28696,24 +28694,24 @@ main/getopt.c:39:58     - Unknown word (optchr)      -- %c\n", argv[optint][optc
 main/getopt.c:42:64     - Unknown word (optchr)      -- %c\n", argv[optint][optchr]);
 main/getopt.c:57:13     - Unknown word (optchr)      -- static int optchr = 0;
 main/http_status_codes.h:13:21     - Unknown word (Faulds)     -- | Author: Andrea Faulds <ajf@ajf.me>
-main/main.c:1069:24   - Unknown word (vstrpprintf) -- zend_string *buffer = vstrpprintf(0, format, args);
-main/main.c:1201:19   - Unknown word (strpprintf)  -- message = zend_strpprintf_unchecked(0, "%s [<a
-main/main.c:1203:19   - Unknown word (strpprintf)  -- message = zend_strpprintf_unchecked(0, "%s [%s
-main/main.c:1209:18   - Unknown word (strpprintf)  -- message = zend_strpprintf_unchecked(0, "%s: %S
+main/main.c:1071:24   - Unknown word (vstrpprintf) -- zend_string *buffer = vstrpprintf(0, format, args);
+main/main.c:1203:19   - Unknown word (strpprintf)  -- message = zend_strpprintf_unchecked(0, "%s [<a
+main/main.c:1205:19   - Unknown word (strpprintf)  -- message = zend_strpprintf_unchecked(0, "%s [%s
+main/main.c:1211:18   - Unknown word (strpprintf)  -- message = zend_strpprintf_unchecked(0, "%s: %S
 main/main.c:13:15     - Unknown word (Andi)       -- | Authors: Andi Gutmans <andi@php.net
-main/main.c:1581:18   - Unknown word (retpwptr)    -- struct passwd *retpwptr = NULL;
-main/main.c:1596:59   - Unknown word (retpwptr)    -- pw, pwbuf, pwbuflen, &retpwptr);
-main/main.c:1606:7    - Unknown word (retpwptr)    -- if (retpwptr == NULL) {
-main/main.c:1813:20   - Unknown word (tmbuf)       -- struct tm *ta, tmbuf;
-main/main.c:1815:25   - Unknown word (asctimebuf)  -- char *datetime_str, asctimebuf[52];
-main/main.c:1819:37   - Unknown word (tmbuf)       -- localtime_r(&curtime, &tmbuf);
-main/main.c:1820:38   - Unknown word (asctimebuf)  -- = php_asctime_r(ta, asctimebuf);
-main/main.c:1850:33   - Unknown word (apar)        -- sigchld_handler(int apar)
-main/main.c:2178:2    - Unknown word (WSADATA)     -- WSADATA wsaData;
-main/main.c:2268:17   - Unknown word (HIBYTE)      -- if (UNEXPECTED(HIBYTE(wsaData.wVersion) !
+main/main.c:1583:18   - Unknown word (retpwptr)    -- struct passwd *retpwptr = NULL;
+main/main.c:1598:59   - Unknown word (retpwptr)    -- pw, pwbuf, pwbuflen, &retpwptr);
+main/main.c:1608:7    - Unknown word (retpwptr)    -- if (retpwptr == NULL) {
+main/main.c:1815:20   - Unknown word (tmbuf)       -- struct tm *ta, tmbuf;
+main/main.c:1817:25   - Unknown word (asctimebuf)  -- char *datetime_str, asctimebuf[52];
+main/main.c:1821:37   - Unknown word (tmbuf)       -- localtime_r(&curtime, &tmbuf);
+main/main.c:1822:38   - Unknown word (asctimebuf)  -- = php_asctime_r(ta, asctimebuf);
+main/main.c:1852:33   - Unknown word (apar)        -- sigchld_handler(int apar)
+main/main.c:2180:2    - Unknown word (WSADATA)     -- WSADATA wsaData;
+main/main.c:2270:17   - Unknown word (HIBYTE)      -- if (UNEXPECTED(HIBYTE(wsaData.wVersion) !
 main/main.c:335:26    - Unknown word (uquantity)  -- value = zend_ini_parse_uquantity_warn(new_value, entry
 main/main.c:374:26    - Unknown word (uquantity)  -- value = zend_ini_parse_uquantity_warn(new_value, entry
-main/main.c:848:41    - Unknown word (EGPCS)      -- variables_order", "EGPCS", PHP_INI_SYSTEM|PHP
+main/main.c:850:41    - Unknown word (EGPCS)      -- variables_order", "EGPCS", PHP_INI_SYSTEM|PHP
 main/main.stub.php:101:11    - Unknown word (BINDIR)     -- const PHP_BINDIR = UNKNOWN;
 main/main.stub.php:104:16    - Unknown word (SBINDIR)    -- * @cvalue PHP_SBINDIR
 main/main.stub.php:106:11    - Unknown word (SBINDIR)    -- const PHP_SBINDIR = UNKNOWN;
@@ -29521,20 +29519,20 @@ sapi/fpm/fpm/fpm_env.c:235:57    - Unknown word (pureftpd)   -- inspired from ng
 sapi/fpm/fpm/fpm_env.c:94:8      - Unknown word (nvmatch)    -- if (nvmatch(name, environ[ct])
 sapi/fpm/fpm/fpm_log.c:210:13    - Unknown word (mili)       -- /* mili/miliseconds are supported
 sapi/fpm/fpm/fpm_log.c:211:69    - Unknown word (mili)       -- strcasecmp(format, "mili")
-sapi/fpm/fpm/fpm_main.c:1107:29   - Unknown word (RISCOSIFY)   -- riscosify_control |= __RISCOSIFY_DONT_CHECK_DIR;
-sapi/fpm/fpm/fpm_main.c:1107:6    - Unknown word (riscosify)   -- __riscosify_control |= __RISCOSIFY
-sapi/fpm/fpm/fpm_main.c:1186:17   - Unknown word (snlen)       -- size_t snlen = strlen(env_script
-sapi/fpm/fpm/fpm_main.c:1190:12   - Unknown word (snlen)       -- snlen > slen &&
-sapi/fpm/fpm/fpm_main.c:1191:68   - Unknown word (snlen)       -- script_file_info_start = snlen - slen), path_info)
-sapi/fpm/fpm/fpm_main.c:1195:12   - Unknown word (snlen)       -- snlen > decoded_path_info
-sapi/fpm/fpm/fpm_main.c:1196:68   - Unknown word (snlen)       -- script_file_info_start = snlen - decoded_path_info
-sapi/fpm/fpm/fpm_main.c:1354:44   - Unknown word (unvalidated) -- allows servers to pass on unvalidated Authorization data
+sapi/fpm/fpm/fpm_main.c:1112:29   - Unknown word (RISCOSIFY)   -- riscosify_control |= __RISCOSIFY_DONT_CHECK_DIR;
+sapi/fpm/fpm/fpm_main.c:1112:6    - Unknown word (riscosify)   -- __riscosify_control |= __RISCOSIFY
+sapi/fpm/fpm/fpm_main.c:1191:17   - Unknown word (snlen)       -- size_t snlen = strlen(env_script
+sapi/fpm/fpm/fpm_main.c:1195:12   - Unknown word (snlen)       -- snlen > slen &&
+sapi/fpm/fpm/fpm_main.c:1196:68   - Unknown word (snlen)       -- script_file_info_start = snlen - slen), path_info)
+sapi/fpm/fpm/fpm_main.c:1200:12   - Unknown word (snlen)       -- snlen > decoded_path_info
+sapi/fpm/fpm/fpm_main.c:1201:68   - Unknown word (snlen)       -- script_file_info_start = snlen - decoded_path_info
+sapi/fpm/fpm/fpm_main.c:1359:44   - Unknown word (unvalidated) -- allows servers to pass on unvalidated Authorization data
 sapi/fpm/fpm/fpm_main.c:137:12    - Unknown word (nodaemonize) -- {'F', 0, "nodaemonize"},
-sapi/fpm/fpm/fpm_main.c:1628:48   - Unknown word (deiniting)   -- without finishing or deiniting the ini builder, call
-sapi/fpm/fpm/fpm_main.c:1679:17   - Unknown word (nodaemonize) -- case 'F': /* nodaemonize */
+sapi/fpm/fpm/fpm_main.c:1634:48   - Unknown word (deiniting)   -- without finishing or deiniting the ini builder, call
+sapi/fpm/fpm/fpm_main.c:1685:17   - Unknown word (nodaemonize) -- case 'F': /* nodaemonize */
 sapi/fpm/fpm/fpm_main.c:16:19     - Unknown word (Mansell)    -- | FastCGI: Ben Mansell <php@slimyhorror.com
-sapi/fpm/fpm/fpm_main.c:1809:5    - Unknown word (onced)       -- /* onced forked tell zlog to
 sapi/fpm/fpm/fpm_main.c:180:9     - Unknown word (CGIG)        -- #define CGIG(v) ZEND_TSRMG(php_cgi
+sapi/fpm/fpm/fpm_main.c:1815:5    - Unknown word (onced)       -- /* onced forked tell zlog to
 sapi/fpm/fpm/fpm_main.c:183:9     - Unknown word (CGIG)        -- #define CGIG(v) (php_cgi_globals
 sapi/fpm/fpm/fpm_main.c:320:6     - Unknown word (CGIG)        -- if (CGIG(nph) || SG(sapi_headers
 sapi/fpm/fpm/fpm_main.c:325:7     - Unknown word (CGIG)        -- if (CGIG(rfc2616_headers) &&
@@ -29545,8 +29543,8 @@ sapi/fpm/fpm/fpm_main.c:529:45    - Unknown word (unfilterd)   -- cgi_php_load_e
 sapi/fpm/fpm/fpm_main.c:569:6     - Unknown word (CGIG)        -- if (CGIG(fix_pathinfo)) {
 sapi/fpm/fpm/fpm_main.c:71:29     - Unknown word (RISCOSIFY)  -- riscosify_control = __RISCOSIFY_STRICT_UNIX_SPECS;
 sapi/fpm/fpm/fpm_main.c:71:7      - Unknown word (riscosify)  -- int __riscosify_control = __RISCOSIFY
-sapi/fpm/fpm/fpm_main.c:855:14    - Unknown word (nodaemonize) -- " -F, --nodaemonize\n"
-sapi/fpm/fpm/fpm_main.c:858:79    - Unknown word (nodaemonize) -- output to stderr in nodaemonize even if stderr is not
+sapi/fpm/fpm/fpm_main.c:860:14    - Unknown word (nodaemonize) -- " -F, --nodaemonize\n"
+sapi/fpm/fpm/fpm_main.c:863:79    - Unknown word (nodaemonize) -- output to stderr in nodaemonize even if stderr is not
 sapi/fpm/fpm/fpm_php.h:24:4      - Unknown word (xmms)       -- "xmms.path", \
 sapi/fpm/fpm/fpm_php.h:26:4      - Unknown word (blenc)      -- "blenc.key_file", \
 sapi/fpm/fpm/fpm_php_trace.c:105:27    - Unknown word (strz)       -- if (0 > fpm_trace_get_strz(buf, sizeof(buf), function
