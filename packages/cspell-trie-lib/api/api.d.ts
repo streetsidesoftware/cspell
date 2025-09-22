@@ -68,20 +68,12 @@ declare function editDistanceWeighted(wordA: string, wordB: string, weights: Wei
 * @returns A Weighted Map to be used with distance calculations.
 */
 declare function createWeightedMap(defs: SuggestionCostMapDef[]): WeightMap;
-/**
-* Update a WeightedMap with a WeightedMapDef
-* @param weightedMap - map to update
-* @param def - the definition to use
-*/
 //#endregion
 //#region src/lib/types.d.ts
 /**
 * Make all properties in T optional and Possibly undefined
 */
 type PartialWithUndefined<T> = { [P in keyof T]?: T[P] | undefined };
-/**
-* Make all fields mandatory
-*/
 //#endregion
 //#region src/lib/ITrieNode/TrieInfo.d.ts
 interface TrieInfo {
@@ -235,20 +227,12 @@ type WalkerIterator$1 = Generator<YieldResult$1, void, FalseToNotGoDeeper | unde
 */
 type HintedWalkerIterator = Generator<YieldResult, void, Hinting | undefined>;
 declare function hintedWalker(root: TrieRoot, ignoreCase: boolean, hint: string, compoundingMethod: CompoundWordsMethod | undefined, emitWordSeparator?: string): HintedWalkerIterator;
-/**
-* Walks the Trie and yields a value at each node.
-* next(goDeeper: boolean):
-*/
-
 interface Hinting {
   goDeeper: boolean;
 }
 //#endregion
 //#region src/lib/walker/walker.d.ts
 declare function walker(root: TrieNode, compoundingMethod?: CompoundWordsMethod): WalkerIterator;
-/**
-* Walks the Trie and yields each word.
-*/
 //#endregion
 //#region src/lib/suggestions/genSuggestionsOptions.d.ts
 interface GenSuggestionOptionsStrict {
@@ -856,15 +840,6 @@ declare const normalizeWordForCaseInsensitive: (text: string) => string[];
 * @param rangeChar - the character to indicate ranges, set to empty to not have ranges.
 */
 declare function expandCharacterSet(line: string, rangeChar?: string): Set<string>;
-/**
-* Expands a range between two characters.
-* - `a <= b` -- `[a, b]`
-* - `a > b` -- `[]`
-* @param a - staring character
-* @param b - ending character
-* @returns array of unicode characters.
-*/
-
 //#endregion
 export { CASE_INSENSITIVE_PREFIX, COMPOUND_FIX, ChildMap, CompoundWordsMethod, ExportOptions, FLAG_WORD, FORBID_PREFIX, FindFullResult, FindWordOptions, HintedWalkerIterator, Hinting, ITrie, JOIN_SEPARATOR, MaxCost, OPTIONAL_COMPOUND_FIX, type PartialTrieOptions, SuggestionCollector, type SuggestionCostMapDef, SuggestionResult, Trie, TrieBuilder, TrieNode, type TrieOptions, type TrieOptionsRO, TrieRoot, WORD_SEPARATOR, WalkerIterator, WeightMap, YieldResult, buildITrieFromWords, buildTrie, buildTrieFast, consolidate, countNodes, countWords, createDictionaryLineParserMapper as createDictionaryLineParser, createTrieRoot, createTrieRootFromList, createWeightedMap, decodeTrie, defaultTrieInfo, defaultTrieInfo as defaultTrieOptions, editDistance, editDistanceWeighted, expandCharacterSet, findNode, has, hintedWalker, impersonateCollector, importTrie, insert, isCircular, isDefined, isWordTerminationNode, iterateTrie, iteratorTrieWords, mapDictionaryInformationToWeightMap, mergeDefaults, mergeOptionalWithDefaults, normalizeWord, normalizeWordForCaseInsensitive, normalizeWordToLowercase, orderTrie, parseDictionary, parseDictionaryLegacy, parseDictionaryLines, serializeTrie, suggestionCollector, trieNodeToRoot, walk, walker };
 //# sourceMappingURL=index.d.ts.map
