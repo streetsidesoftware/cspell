@@ -3,7 +3,7 @@ Repository: caddyserver/caddy
 Url: "https://github.com/caddyserver/caddy.git"
 Args: ["**/*.go"]
 Lines:
- CSpell: Files checked: 286, Issues found: 3696 in 256 files.
+ CSpell: Files checked: 286, Issues found: 3712 in 256 files.
  exit code: 1
 admin.go:1075:20   - Unknown word (Redir)       -- return errInternalRedir
 admin.go:1351:6    - Unknown word (loggable)    -- type loggableURLArray []*url.URL
@@ -812,11 +812,27 @@ cmd/commandfuncs.go:145:16    - Unknown word (Pingback)    -- err = handlePingba
 cmd/commandfuncs.go:15:9      - Unknown word (caddycmd)   -- package caddycmd
 cmd/commandfuncs.go:183:9     - Unknown word (Procs)       -- undoMaxProcs := setResourceLimits
 cmd/commandfuncs.go:184:15    - Unknown word (Procs)       -- defer undoMaxProcs()
-cmd/commandfuncs.go:192:2     - Unknown word (pingback)    -- pingbackFlag := fl.String("pingback
-cmd/commandfuncs.go:192:29    - Unknown word (pingback)    -- pingbackFlag := fl.String("pingback")
-cmd/commandfuncs.go:265:5     - Unknown word (pingback)    -- if pingbackFlag != "" {
-cmd/commandfuncs.go:296:44    - Unknown word (USERPROFILE) -- == "" && os.Getenv("USERPROFILE") == "" && !hasXDG
-cmd/commandfuncs.go:297:34    - Unknown word (USERPROFILE) -- Warn("neither HOME nor USERPROFILE environment variables
+cmd/commandfuncs.go:187:23    - Unknown word (nolint)      -- undoMaxProcs = nil //nolint:ineffassign,wastedassign
+cmd/commandfuncs.go:187:30    - Unknown word (ineffassign) -- undoMaxProcs = nil //nolint:ineffassign,wastedassign
+cmd/commandfuncs.go:187:42    - Unknown word (wastedassign) -- /nolint:ineffassign,wastedassign
+cmd/commandfuncs.go:187:9     - Unknown word (Procs)       -- undoMaxProcs = nil //nolint:ineffassign
+cmd/commandfuncs.go:195:2     - Unknown word (pingback)     -- pingbackFlag := fl.String("pingback
+cmd/commandfuncs.go:195:29    - Unknown word (pingback)     -- pingbackFlag := fl.String("pingback")
+cmd/commandfuncs.go:259:17    - Unknown word (nolint)       -- config = nil //nolint:ineffassign,wastedassign
+cmd/commandfuncs.go:259:24    - Unknown word (ineffassign)  -- config = nil //nolint:ineffassign,wastedassign
+cmd/commandfuncs.go:259:36    - Unknown word (wastedassign) -- /nolint:ineffassign,wastedassign
+cmd/commandfuncs.go:266:24    - Unknown word (nolint)       -- defaultLogger = nil //nolint:ineffassign,wastedassign
+cmd/commandfuncs.go:266:31    - Unknown word (ineffassign)  -- defaultLogger = nil //nolint:ineffassign,wastedassign
+cmd/commandfuncs.go:266:43    - Unknown word (wastedassign) -- /nolint:ineffassign,wastedassign
+cmd/commandfuncs.go:267:24    - Unknown word (nolint)       -- logBuffer = nil     //nolint:wastedassign,ineffassign
+cmd/commandfuncs.go:267:31    - Unknown word (wastedassign) -- logBuffer = nil     //nolint:wastedassign,ineffassign
+cmd/commandfuncs.go:267:44    - Unknown word (ineffassign)  -- nolint:wastedassign,ineffassign
+cmd/commandfuncs.go:272:5     - Unknown word (pingback)     -- if pingbackFlag != "" {
+cmd/commandfuncs.go:291:29    - Unknown word (nolint)       -- confirmationBytes = nil //nolint:ineffassign,wastedassign
+cmd/commandfuncs.go:291:36    - Unknown word (ineffassign)  -- firmationBytes = nil //nolint:ineffassign,wastedassign
+cmd/commandfuncs.go:291:48    - Unknown word (wastedassign) -- /nolint:ineffassign,wastedassign
+cmd/commandfuncs.go:307:44    - Unknown word (USERPROFILE)  -- == "" && os.Getenv("USERPROFILE") == "" && !hasXDG
+cmd/commandfuncs.go:308:34    - Unknown word (USERPROFILE)  -- Warn("neither HOME nor USERPROFILE environment variables
 cmd/commandfuncs.go:36:14     - Unknown word (aryann)     -- "github.com/aryann/difflib"
 cmd/commandfuncs.go:36:21     - Unknown word (difflib)    -- "github.com/aryann/difflib"
 cmd/commandfuncs.go:39:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
@@ -826,26 +842,26 @@ cmd/commandfuncs.go:41:14     - Unknown word (caddyserver) -- "github.com/caddys
 cmd/commandfuncs.go:41:35     - Unknown word (caddyconfig) -- caddyserver/caddy/v2/caddyconfig/caddyfile"
 cmd/commandfuncs.go:41:47     - Unknown word (caddyfile)   -- caddy/v2/caddyconfig/caddyfile"
 cmd/commandfuncs.go:42:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/internal"
-cmd/commandfuncs.go:473:53    - Unknown word (Caddyfile)   -- required when there is no Caddyfile in current directory
-cmd/commandfuncs.go:487:16    - Unknown word (caddyconfig) -- cfgAdapter := caddyconfig.GetAdapter(adapterFlag
+cmd/commandfuncs.go:487:53    - Unknown word (Caddyfile)    -- required when there is no Caddyfile in current directory
 cmd/commandfuncs.go:48:2      - Unknown word (pidfile)     -- pidfileFlag := fl.String("pidfile
 cmd/commandfuncs.go:48:28     - Unknown word (pidfile)     -- pidfileFlag := fl.String("pidfile")
-cmd/commandfuncs.go:568:53    - Unknown word (Caddyfile)   -- required when there is no Caddyfile in current directory
-cmd/commandfuncs.go:600:17    - Unknown word (Caddyfile)   -- configFile = "Caddyfile"
-cmd/commandfuncs.go:611:20    - Unknown word (caddyfile)   -- fmt.Print(string(caddyfile.Format(input)))
-cmd/commandfuncs.go:621:12    - Unknown word (caddyfile)   -- output := caddyfile.Format(input)
-cmd/commandfuncs.go:631:11    - Unknown word (difflib)     -- diff := difflib.Diff(
-cmd/commandfuncs.go:636:9     - Unknown word (difflib)     -- case difflib.Common:
-cmd/commandfuncs.go:638:9     - Unknown word (difflib)     -- case difflib.LeftOnly:
-cmd/commandfuncs.go:640:9     - Unknown word (difflib)     -- case difflib.RightOnly:
-cmd/commandfuncs.go:648:22    - Unknown word (caddyfile)   -- if warning, diff := caddyfile.FormattingDifference
-cmd/commandfuncs.go:649:130   - Unknown word (Caddyfile)   -- overwrite' to update your Caddyfile in-place instead of
-cmd/commandfuncs.go:649:58    - Unknown word (Caddyfile)   -- fmt.Errorf(`%s:%d: Caddyfile input is not formatted
+cmd/commandfuncs.go:501:16    - Unknown word (caddyconfig)  -- cfgAdapter := caddyconfig.GetAdapter(adapterFlag
+cmd/commandfuncs.go:582:53    - Unknown word (Caddyfile)    -- required when there is no Caddyfile in current directory
+cmd/commandfuncs.go:614:17    - Unknown word (Caddyfile)    -- configFile = "Caddyfile"
+cmd/commandfuncs.go:625:20    - Unknown word (caddyfile)    -- fmt.Print(string(caddyfile.Format(input)))
+cmd/commandfuncs.go:635:12    - Unknown word (caddyfile)    -- output := caddyfile.Format(input)
+cmd/commandfuncs.go:645:11    - Unknown word (difflib)      -- diff := difflib.Diff(
+cmd/commandfuncs.go:650:9     - Unknown word (difflib)      -- case difflib.Common:
+cmd/commandfuncs.go:652:9     - Unknown word (difflib)      -- case difflib.LeftOnly:
+cmd/commandfuncs.go:654:9     - Unknown word (difflib)      -- case difflib.RightOnly:
+cmd/commandfuncs.go:662:22    - Unknown word (caddyfile)    -- if warning, diff := caddyfile.FormattingDifference
+cmd/commandfuncs.go:663:130   - Unknown word (Caddyfile)    -- overwrite' to update your Caddyfile in-place instead of
+cmd/commandfuncs.go:663:58    - Unknown word (Caddyfile)    -- fmt.Errorf(`%s:%d: Caddyfile input is not formatted
 cmd/commandfuncs.go:68:30     - Unknown word (pingback)    -- craft the command with a pingback address and with a
-cmd/commandfuncs.go:723:7     - Unknown word (srldkjfsd)   -- // "srldkjfsd"), if for some reason
+cmd/commandfuncs.go:737:7     - Unknown word (srldkjfsd)    -- // "srldkjfsd"), if for some reason
 cmd/commandfuncs.go:77:44     - Unknown word (pingback)    -- os.Args[0], "run", "--pingback", ln.Addr().String(
-cmd/commandfuncs.go:820:25    - Unknown word (caddyconfig) -- configFile == "" && caddyconfig.GetAdapter("caddyfile
-cmd/commandfuncs.go:820:49    - Unknown word (caddyfile)   -- caddyconfig.GetAdapter("caddyfile") != nil {
+cmd/commandfuncs.go:834:25    - Unknown word (caddyconfig)  -- configFile == "" && caddyconfig.GetAdapter("caddyfile
+cmd/commandfuncs.go:834:49    - Unknown word (caddyfile)    -- caddyconfig.GetAdapter("caddyfile") != nil {
 cmd/commandfuncs.go:95:5      - Unknown word (pidfile)     -- if pidfileFlag != "" {
 cmd/commandfuncs.go:96:34     - Unknown word (pidfile)     -- append(cmd.Args, "--pidfile", pidfileFlag)
 cmd/commandfuncs.go:96:44     - Unknown word (pidfile)     -- cmd.Args, "--pidfile", pidfileFlag)
@@ -1028,8 +1044,8 @@ listeners.go:622:29    - Unknown word (fcql)        -- return nil, fakeClosedErr
 listeners.go:647:34    - Unknown word (fdgram)      -- "fd" || network == "fdgram" {
 listeners_fuzz.go:15:12     - Unknown word (gofuzz)     -- //go:build gofuzz
 listeners_test.go:21:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/internal"
-logging.go:288:7     - Unknown word (wdest)       -- func (wdest writerDestructor) Destruct
-logging.go:289:9     - Unknown word (wdest)       -- return wdest.Close()
+logging.go:295:7     - Unknown word (wdest)       -- func (wdest writerDestructor) Destruct
+logging.go:296:9     - Unknown word (wdest)       -- return wdest.Close()
 logging.go:32:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/internal"
 metrics.go:48:15     - Unknown word (promhttp)    -- // Similar to promhttp.InstrumentHandlerCounter
 metrics.go:51:11     - Unknown word (promhttp)    -- // Unlike promhttp.InstrumentHandlerCounter

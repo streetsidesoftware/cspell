@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["--issues-summary-report","**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2857, Issues found: 8491 in 919 files.
+ CSpell: Files checked: 2874, Issues found: 8529 in 925 files.
  exit code: 1
 django/__init__.py:12:26     - Unknown word (urlresolvers) -- Set the thread-local urlresolvers script prefix if `set
 django/apps/registry.py:134:40    - Unknown word (unconfigured) -- not ready" is due to unconfigured settings, accessing
@@ -215,25 +215,25 @@ django/contrib/admindocs/views.py:179:35    - Unknown word (myview)     -- # 'my
 django/contrib/admindocs/views.py:179:65    - Unknown word (myview)     -- 'mymodule.views', 'myview').
 django/contrib/admindocs/views.py:186:22    - Unknown word (klass)      -- mod, klass = get_mod_func(mod)
 django/contrib/admindocs/views.py:187:60    - Unknown word (klass)      -- import_module(mod), klass), func)
-django/contrib/auth/__init__.py:132:11    - Unknown word (aauthenticate) -- async def aauthenticate(request=None, **credentials
-django/contrib/auth/__init__.py:136:34    - Unknown word (aauthenticate) -- user = await backend.aauthenticate(request, **credentials
-django/contrib/auth/__init__.py:148:29    - Unknown word (asend)         -- await user_login_failed.asend(
-django/contrib/auth/__init__.py:200:11    - Unknown word (alogin)        -- async def alogin(request, user, backend
-django/contrib/auth/__init__.py:208:34    - Unknown word (auser)         -- Fallback to request.auser() when user is None
-django/contrib/auth/__init__.py:212:30    - Unknown word (auser)         -- user = await request.auser()
-django/contrib/auth/__init__.py:217:30    - Unknown word (ahas)          -- await request.session.ahas_key(SESSION_KEY):
-django/contrib/auth/__init__.py:228:35    - Unknown word (aflush)        -- await request.session.aflush()
-django/contrib/auth/__init__.py:230:31    - Unknown word (acycle)        -- await request.session.acycle_key()
-django/contrib/auth/__init__.py:237:26    - Unknown word (auser)         -- if hasattr(request, "auser"):
-django/contrib/auth/__init__.py:239:19    - Unknown word (auser)         -- async def auser():
-django/contrib/auth/__init__.py:242:17    - Unknown word (auser)         -- request.auser = auser
-django/contrib/auth/__init__.py:244:26    - Unknown word (asend)         -- await user_logged_in.asend(sender=user.__class
-django/contrib/auth/__init__.py:265:11    - Unknown word (alogout)       -- async def alogout(request):
-django/contrib/auth/__init__.py:274:27    - Unknown word (asend)         -- await user_logged_out.asend(sender=user.__class
-django/contrib/auth/__init__.py:275:27    - Unknown word (aflush)        -- await request.session.aflush()
-django/contrib/auth/__init__.py:378:47    - Unknown word (acycle)        -- await request.session.acycle_key()
-django/contrib/auth/__init__.py:381:47    - Unknown word (aflush)        -- await request.session.aflush()
-django/contrib/auth/__init__.py:410:27    - Unknown word (acycle)        -- await request.session.acycle_key()
+django/contrib/auth/__init__.py:130:11    - Unknown word (aauthenticate) -- async def aauthenticate(request=None, **credentials
+django/contrib/auth/__init__.py:134:34    - Unknown word (aauthenticate) -- user = await backend.aauthenticate(request, **credentials
+django/contrib/auth/__init__.py:146:29    - Unknown word (asend)         -- await user_login_failed.asend(
+django/contrib/auth/__init__.py:184:11    - Unknown word (alogin)        -- async def alogin(request, user, backend
+django/contrib/auth/__init__.py:188:30    - Unknown word (ahas)          -- await request.session.ahas_key(SESSION_KEY):
+django/contrib/auth/__init__.py:199:35    - Unknown word (aflush)        -- await request.session.aflush()
+django/contrib/auth/__init__.py:201:31    - Unknown word (acycle)        -- await request.session.acycle_key()
+django/contrib/auth/__init__.py:208:26    - Unknown word (auser)         -- if hasattr(request, "auser"):
+django/contrib/auth/__init__.py:210:19    - Unknown word (auser)         -- async def auser():
+django/contrib/auth/__init__.py:213:17    - Unknown word (auser)         -- request.auser = auser
+django/contrib/auth/__init__.py:213:25    - Unknown word (auser)         -- request.auser = auser
+django/contrib/auth/__init__.py:215:26    - Unknown word (asend)         -- await user_logged_in.asend(sender=user.__class
+django/contrib/auth/__init__.py:236:11    - Unknown word (alogout)       -- async def alogout(request):
+django/contrib/auth/__init__.py:240:30    - Unknown word (auser)         -- = getattr(request, "auser", None)
+django/contrib/auth/__init__.py:245:27    - Unknown word (asend)         -- await user_logged_out.asend(sender=user.__class
+django/contrib/auth/__init__.py:246:27    - Unknown word (aflush)        -- await request.session.aflush()
+django/contrib/auth/__init__.py:349:47    - Unknown word (acycle)        -- await request.session.acycle_key()
+django/contrib/auth/__init__.py:352:47    - Unknown word (aflush)        -- await request.session.aflush()
+django/contrib/auth/__init__.py:381:27    - Unknown word (acycle)        -- await request.session.acycle_key()
 django/contrib/auth/backends.py:14:15     - Unknown word (aauthenticate) -- async def aauthenticate(self, request, **kwargs
 django/contrib/auth/backends.py:176:15    - Unknown word (ahas)          -- async def ahas_perm(self, user_obj
 django/contrib/auth/backends.py:177:53    - Unknown word (ahas)          -- active and await super().ahas_perm(user_obj, perm
@@ -270,27 +270,24 @@ django/contrib/auth/hashers.py:602:13    - Unknown word (maxmem)     -- maxmem=s
 django/contrib/auth/hashers.py:602:25    - Unknown word (maxmem)     -- maxmem=self.maxmem,
 django/contrib/auth/hashers.py:603:13    - Unknown word (dklen)      -- dklen=64,
 django/contrib/auth/hashers.py:89:11     - Unknown word (acheck)     -- async def acheck_password(password, encoded
-django/contrib/auth/middleware.py:120:13    - Unknown word (markcoroutinefunction) -- markcoroutinefunction(self)
-django/contrib/auth/middleware.py:131:27    - Unknown word (acall)                 -- return self.__acall__(request)
-django/contrib/auth/middleware.py:174:17    - Unknown word (acall)                 -- async def __acall__(self, request):
-django/contrib/auth/middleware.py:178:32    - Unknown word (aprocess)              -- and self.__class__.aprocess_request is RemoteUserMiddlewa
-django/contrib/auth/middleware.py:178:73    - Unknown word (aprocess)              -- RemoteUserMiddleware.aprocess_request
-django/contrib/auth/middleware.py:182:55    - Unknown word (aprocess)              -- without overriding aprocess_request() is "
-django/contrib/auth/middleware.py:189:20    - Unknown word (aprocess)              -- await self.aprocess_request(request)
-django/contrib/auth/middleware.py:192:15    - Unknown word (aprocess)              -- async def aprocess_request(self, request
-django/contrib/auth/middleware.py:209:38    - Unknown word (auser)                 -- user = await request.auser()
-django/contrib/auth/middleware.py:213:30    - Unknown word (auser)                 -- user = await request.auser()
-django/contrib/auth/middleware.py:227:27    - Unknown word (aauthenticate)         -- user = await auth.aauthenticate(request, remote_user
-django/contrib/auth/middleware.py:232:24    - Unknown word (alogin)                -- await auth.alogin(request, user)
-django/contrib/auth/middleware.py:24:11     - Unknown word (auser)                 -- async def auser(request):
-django/contrib/auth/middleware.py:25:31     - Unknown word (acached)               -- not hasattr(request, "_acached_user"):
-django/contrib/auth/middleware.py:26:18     - Unknown word (acached)               -- request._acached_user = await auth.aget
-django/contrib/auth/middleware.py:274:24    - Unknown word (alogout)               -- await auth.alogout(request)
-django/contrib/auth/middleware.py:277:28    - Unknown word (alogout)               -- await auth.alogout(request)
-django/contrib/auth/middleware.py:27:21     - Unknown word (acached)               -- return request._acached_user
-django/contrib/auth/middleware.py:41:17     - Unknown word (auser)                 -- request.auser = partial(auser, request
-django/contrib/auth/middleware.py:41:33     - Unknown word (auser)                 -- request.auser = partial(auser, request)
-django/contrib/auth/middleware.py:5:47      - Unknown word (markcoroutinefunction) -- iscoroutinefunction, markcoroutinefunction, sync_to_async
+django/contrib/auth/middleware.py:119:13    - Unknown word (markcoroutinefunction) -- markcoroutinefunction(self)
+django/contrib/auth/middleware.py:130:27    - Unknown word (acall)                 -- return self.__acall__(request)
+django/contrib/auth/middleware.py:173:17    - Unknown word (acall)                 -- async def __acall__(self, request):
+django/contrib/auth/middleware.py:174:20    - Unknown word (aprocess)              -- await self.aprocess_request(request)
+django/contrib/auth/middleware.py:177:15    - Unknown word (aprocess)              -- async def aprocess_request(self, request
+django/contrib/auth/middleware.py:194:38    - Unknown word (auser)                 -- user = await request.auser()
+django/contrib/auth/middleware.py:198:30    - Unknown word (auser)                 -- user = await request.auser()
+django/contrib/auth/middleware.py:212:27    - Unknown word (aauthenticate)         -- user = await auth.aauthenticate(request, remote_user
+django/contrib/auth/middleware.py:217:24    - Unknown word (alogin)                -- await auth.alogin(request, user)
+django/contrib/auth/middleware.py:23:11     - Unknown word (auser)                 -- async def auser(request):
+django/contrib/auth/middleware.py:24:31     - Unknown word (acached)               -- not hasattr(request, "_acached_user"):
+django/contrib/auth/middleware.py:259:24    - Unknown word (alogout)               -- await auth.alogout(request)
+django/contrib/auth/middleware.py:25:18     - Unknown word (acached)               -- request._acached_user = await auth.aget
+django/contrib/auth/middleware.py:262:28    - Unknown word (alogout)               -- await auth.alogout(request)
+django/contrib/auth/middleware.py:26:21     - Unknown word (acached)               -- return request._acached_user
+django/contrib/auth/middleware.py:40:17     - Unknown word (auser)                 -- request.auser = partial(auser, request
+django/contrib/auth/middleware.py:40:33     - Unknown word (auser)                 -- request.auser = partial(auser, request)
+django/contrib/auth/middleware.py:4:47      - Unknown word (markcoroutinefunction) -- iscoroutinefunction, markcoroutinefunction
 django/contrib/auth/models.py:252:12    - Unknown word (auser)      -- async def _auser_get_permissions(user
 django/contrib/auth/models.py:276:12    - Unknown word (auser)      -- async def _auser_has_perm(user, perm
 django/contrib/auth/models.py:279:34    - Unknown word (ahas)       -- not hasattr(backend, "ahas_perm"):
@@ -956,17 +953,21 @@ django/contrib/postgres/operations.py:35:20     - Unknown word (oids)       -- g
 django/contrib/postgres/operations.py:3:16      - Unknown word (oids)       -- get_hstore_oids,
 django/contrib/postgres/operations.py:61:51     - Unknown word (extname)    -- FROM pg_extension WHERE extname = %s",
 django/contrib/postgres/operations.py:96:27     - Unknown word (pgcrypto)   -- super().__init__("pgcrypto", hints=hints)
-django/contrib/postgres/search.py:149:20    - Unknown word (setweight)  -- sql = "setweight({}, {})".format(sql
-django/contrib/postgres/search.py:193:19    - Unknown word (plainto)    -- "plain": "plainto_tsquery",
-django/contrib/postgres/search.py:193:27    - Unknown word (tsquery)    -- "plain": "plainto_tsquery",
-django/contrib/postgres/search.py:194:20    - Unknown word (phraseto)   -- "phrase": "phraseto_tsquery",
-django/contrib/postgres/search.py:194:29    - Unknown word (tsquery)    -- "phrase": "phraseto_tsquery",
-django/contrib/postgres/search.py:195:20    - Unknown word (tsquery)    -- "raw": "to_tsquery",
-django/contrib/postgres/search.py:196:36    - Unknown word (tsquery)    -- websearch": "websearch_to_tsquery",
-django/contrib/postgres/search.py:36:17     - Unknown word (tsvector)   -- return "tsvector"
-django/contrib/postgres/search.py:41:17     - Unknown word (tsquery)    -- return "tsquery"
-django/contrib/postgres/search.py:70:21     - Unknown word (regconfig)  -- return "%s::regconfig" % sql, params
-django/contrib/postgres/search.py:93:20     - Unknown word (tsvector)   -- function = "to_tsvector"
+django/contrib/postgres/search.py:107:21    - Unknown word (regconfig)  -- return "%s::regconfig" % sql, params
+django/contrib/postgres/search.py:130:20    - Unknown word (tsvector)   -- function = "to_tsvector"
+django/contrib/postgres/search.py:186:20    - Unknown word (setweight)  -- sql = "setweight({}, {})".format(sql
+django/contrib/postgres/search.py:230:19    - Unknown word (plainto)    -- "plain": "plainto_tsquery",
+django/contrib/postgres/search.py:230:27    - Unknown word (tsquery)    -- "plain": "plainto_tsquery",
+django/contrib/postgres/search.py:231:20    - Unknown word (phraseto)   -- "phrase": "phraseto_tsquery",
+django/contrib/postgres/search.py:231:29    - Unknown word (tsquery)    -- "phrase": "phraseto_tsquery",
+django/contrib/postgres/search.py:232:20    - Unknown word (tsquery)    -- "raw": "to_tsquery",
+django/contrib/postgres/search.py:233:36    - Unknown word (tsquery)    -- websearch": "websearch_to_tsquery",
+django/contrib/postgres/search.py:510:9     - Unknown word (lsql)       -- lsql, params = compiler.compile
+django/contrib/postgres/search.py:513:9     - Unknown word (rsql)       -- rsql, params = compiler.compile
+django/contrib/postgres/search.py:516:28    - Unknown word (lsql)       -- combined_sql = f"({lsql} {self.connector} {rsql
+django/contrib/postgres/search.py:516:52    - Unknown word (rsql)       -- lsql} {self.connector} {rsql})"
+django/contrib/postgres/search.py:73:17     - Unknown word (tsvector)   -- return "tsvector"
+django/contrib/postgres/search.py:78:17     - Unknown word (tsquery)    -- return "tsquery"
 django/contrib/postgres/signals.py:11:26     - Unknown word (typarray)   -- "SELECT oid, typarray FROM pg_type WHERE typname
 django/contrib/postgres/signals.py:11:54     - Unknown word (typname)    -- typarray FROM pg_type WHERE typname = %s", (type_name,)
 django/contrib/postgres/signals.py:13:9      - Unknown word (oids)       -- oids = []
@@ -1667,7 +1668,7 @@ django/db/models/fields/json.py:345:27    - Unknown word (JSONI)      -- JSONFie
 django/db/models/fields/json.py:379:36    - Unknown word (uffff)      -- "JSON_VALUE(%s, q'\uffff%s\uffff'),"
 django/db/models/fields/json.py:379:44    - Unknown word (uffff)      -- VALUE(%s, q'\uffff%s\uffff'),"
 django/db/models/fields/json.py:380:36    - Unknown word (uffff)      -- "JSON_QUERY(%s, q'\uffff%s\uffff' DISALLOW SCALARS
-django/db/models/fields/json.py:428:65    - Unknown word (MDEV)       -- and ->> operators (see MDEV-13594).
+django/db/models/fields/json.py:427:61    - Unknown word (MDEV)       -- supported on MariaDB (see MDEV-13594) and
 django/db/models/fields/related.py:1307:51   - Unknown word (klass)      -- intermediary_model(field, klass):
 django/db/models/fields/related.py:1313:33   - Unknown word (klass)      -- model = resolve_relation(klass, field.remote_field
 django/db/models/fields/related.py:1314:23   - Unknown word (klass)      -- name = "%s_%s" % (klass._meta.object_name, field
@@ -1710,16 +1711,16 @@ django/db/models/lookups.py:789:7     - Unknown word (UUIDI)      -- class UUIDI
 django/db/models/lookups.py:799:7     - Unknown word (UUIDI)      -- class UUIDIContains(UUIDTextMixin
 django/db/models/lookups.py:809:7     - Unknown word (UUIDI)      -- class UUIDIStartsWith(UUIDTextMixin
 django/db/models/lookups.py:819:7     - Unknown word (UUIDI)      -- class UUIDIEndsWith(UUIDTextMixin
-django/db/models/options.py:1001:36   - Unknown word (klass)      -- for name, value in klass.__dict__.items()
-django/db/models/options.py:1004:25   - Unknown word (klass)      -- seen |= set(klass.__dict__)
-django/db/models/options.py:538:33    - Unknown word (longwinded) -- The third filter is a longwinded way of checking f.related
-django/db/models/options.py:998:13    - Unknown word (klass)      -- for klass in self.model.__mro
+django/db/models/options.py:1005:13   - Unknown word (klass)      -- for klass in self.model.__mro
+django/db/models/options.py:1008:36   - Unknown word (klass)      -- for name, value in klass.__dict__.items()
+django/db/models/options.py:1011:25   - Unknown word (klass)      -- seen |= set(klass.__dict__)
+django/db/models/options.py:545:33    - Unknown word (longwinded) -- The third filter is a longwinded way of checking f.related
 django/db/models/query.py:101:21    - Unknown word (klass)      -- model_cls = klass_info["model"]
 django/db/models/query.py:102:25    - Unknown word (klass)      -- select_fields = klass_info["select_fields
 django/db/models/query.py:1400:68   - Unknown word (deindent)   -- the deprecation ends, deindent as:
-django/db/models/query.py:2490:11   - Unknown word (aprefetch)  -- async def aprefetch_related_objects(model
-django/db/models/query.py:2705:35   - Unknown word (attnames)   -- init_list: the field attnames fetched from the database
-django/db/models/query.py:2706:57   - Unknown word (attnames)   -- isn't the same as all attnames of the
+django/db/models/query.py:2493:11   - Unknown word (aprefetch)  -- async def aprefetch_related_objects(model
+django/db/models/query.py:2708:35   - Unknown word (attnames)   -- init_list: the field attnames fetched from the database
+django/db/models/query.py:2709:57   - Unknown word (attnames)   -- isn't the same as all attnames of the
 django/db/models/query.py:552:27    - Unknown word (aprefetch)  -- await aprefetch_related_objects(
 django/db/models/query.py:560:23    - Unknown word (aprefetch)  -- await aprefetch_related_objects(
 django/db/models/query.py:771:30    - Unknown word (childmost)  -- insert into the childmost table.
@@ -1780,40 +1781,40 @@ django/db/models/sql/datastructures.py:80:15     - Unknown word (sometable)  -- 
 django/db/models/sql/datastructures.py:80:25     - Unknown word (somecol)    -- ON sometable.somecol = othertable.othercol
 django/db/models/sql/datastructures.py:80:35     - Unknown word (othertable) -- sometable.somecol = othertable.othercol, params
 django/db/models/sql/datastructures.py:80:46     - Unknown word (othercol)   -- somecol = othertable.othercol, params
-django/db/models/sql/query.py:120:19    - Unknown word (repointing) -- # without repointing to the filtered annotation
-django/db/models/sql/query.py:1518:56   - Unknown word (multijoins) -- of reusable joins for multijoins.
-django/db/models/sql/query.py:1522:28   - Unknown word (unreffing)  -- is responsible for unreffing the joins used.
-django/db/models/sql/query.py:1629:40   - Unknown word (someval)    -- is null, then col != someval will result in SQL
-django/db/models/sql/query.py:1632:42   - Unknown word (someval)    -- col IS NULL OR col != someval)
-django/db/models/sql/query.py:1634:50   - Unknown word (someval)    -- IS NOT NULL AND col = someval).
-django/db/models/sql/query.py:1642:22   - Unknown word (someval)    -- # If someval is a nullable column
-django/db/models/sql/query.py:1642:52   - Unknown word (someval)    -- is a nullable column, someval IS NOT NULL is
-django/db/models/sql/query.py:2128:34   - Unknown word (louter)     -- trimmed_prefix, contains_louter = query.trim_start(names
-django/db/models/sql/query.py:2461:44   - Unknown word (datastructure) -- that we can use a set datastructure. We do the foo__bar
-django/db/models/sql/query.py:2651:42   - Unknown word (outerq)        -- lookup usable for doing outerq.filter(lookup=self)
-django/db/models/sql/query.py:2747:5    - Unknown word (dirn)          -- dirn = ORDER_DIR[default
-django/db/models/sql/query.py:2749:27   - Unknown word (dirn)          -- return field[1:], dirn[1]
-django/db/models/sql/query.py:2750:19   - Unknown word (dirn)          -- return field, dirn[0]
-django/db/models/sql/query.py:2813:61   - Unknown word (rels)          -- 2, if either of the rels produce NULL
-django/db/models/sql/query.py:360:53    - Unknown word (deepcopied) -- work when a Query is deepcopied."""
-django/db/models/sql/query.py:428:21    - Unknown word (klass)      -- def chain(self, klass=None):
-django/db/models/sql/query.py:431:13    - Unknown word (klass)      -- The klass argument changes the
-django/db/models/sql/query.py:434:12    - Unknown word (klass)      -- if klass and obj.__class__ !
-django/db/models/sql/query.py:434:39    - Unknown word (klass)      -- and obj.__class__ != klass:
-django/db/models/sql/query.py:435:29    - Unknown word (klass)      -- obj.__class__ = klass
-django/db/models/sql/query.py:44:51     - Unknown word (LOUTER)     -- constants import INNER, LOUTER, ORDER_DIR, SINGLE
-django/db/models/sql/query.py:554:62    - Unknown word (realiasing) -- would require complex realiasing logic.
-django/db/models/sql/query.py:575:50    - Unknown word (repointed)  -- sure the aggregates are repointed to them.
-django/db/models/sql/query.py:731:15    - Unknown word (revrel)     -- # revrel__col=1 & revrel__col
-django/db/models/sql/query.py:731:31    - Unknown word (revrel)     -- revrel__col=1 & revrel__col=2
-django/db/models/sql/query.py:936:9     - Unknown word (LOUTER)     -- LOUTER b INNER c. So, if we
-django/db/models/sql/query.py:952:20    - Unknown word (louter)     -- parent_louter = (
-django/db/models/sql/query.py:953:76    - Unknown word (LOUTER)     -- alias].join_type == LOUTER
-django/db/models/sql/query.py:955:21    - Unknown word (louter)     -- already_louter = self.alias_map[alias
-django/db/models/sql/query.py:955:65    - Unknown word (LOUTER)     -- alias].join_type == LOUTER
-django/db/models/sql/query.py:956:58    - Unknown word (louter)     -- .nullable or parent_louter) and not already_louter
-django/db/models/sql/query.py:956:82    - Unknown word (louter)     -- louter) and not already_louter:
-django/db/models/sql/query.py:969:31    - Unknown word (LOUTER)     -- Change join type from LOUTER to INNER for all joins
+django/db/models/sql/query.py:119:19    - Unknown word (repointing) -- # without repointing to the filtered annotation
+django/db/models/sql/query.py:1511:56   - Unknown word (multijoins) -- of reusable joins for multijoins.
+django/db/models/sql/query.py:1515:28   - Unknown word (unreffing)  -- is responsible for unreffing the joins used.
+django/db/models/sql/query.py:1622:40   - Unknown word (someval)    -- is null, then col != someval will result in SQL
+django/db/models/sql/query.py:1625:42   - Unknown word (someval)    -- col IS NULL OR col != someval)
+django/db/models/sql/query.py:1627:50   - Unknown word (someval)    -- IS NOT NULL AND col = someval).
+django/db/models/sql/query.py:1635:22   - Unknown word (someval)    -- # If someval is a nullable column
+django/db/models/sql/query.py:1635:52   - Unknown word (someval)    -- is a nullable column, someval IS NOT NULL is
+django/db/models/sql/query.py:2121:34   - Unknown word (louter)     -- trimmed_prefix, contains_louter = query.trim_start(names
+django/db/models/sql/query.py:2454:44   - Unknown word (datastructure) -- that we can use a set datastructure. We do the foo__bar
+django/db/models/sql/query.py:2644:42   - Unknown word (outerq)        -- lookup usable for doing outerq.filter(lookup=self)
+django/db/models/sql/query.py:2740:5    - Unknown word (dirn)          -- dirn = ORDER_DIR[default
+django/db/models/sql/query.py:2742:27   - Unknown word (dirn)          -- return field[1:], dirn[1]
+django/db/models/sql/query.py:2743:19   - Unknown word (dirn)          -- return field, dirn[0]
+django/db/models/sql/query.py:2806:61   - Unknown word (rels)          -- 2, if either of the rels produce NULL
+django/db/models/sql/query.py:359:53    - Unknown word (deepcopied) -- work when a Query is deepcopied."""
+django/db/models/sql/query.py:427:21    - Unknown word (klass)      -- def chain(self, klass=None):
+django/db/models/sql/query.py:430:13    - Unknown word (klass)      -- The klass argument changes the
+django/db/models/sql/query.py:433:12    - Unknown word (klass)      -- if klass and obj.__class__ !
+django/db/models/sql/query.py:433:39    - Unknown word (klass)      -- and obj.__class__ != klass:
+django/db/models/sql/query.py:434:29    - Unknown word (klass)      -- obj.__class__ = klass
+django/db/models/sql/query.py:43:51     - Unknown word (LOUTER)     -- constants import INNER, LOUTER, ORDER_DIR, SINGLE
+django/db/models/sql/query.py:553:62    - Unknown word (realiasing) -- would require complex realiasing logic.
+django/db/models/sql/query.py:574:50    - Unknown word (repointed)  -- sure the aggregates are repointed to them.
+django/db/models/sql/query.py:730:15    - Unknown word (revrel)     -- # revrel__col=1 & revrel__col
+django/db/models/sql/query.py:730:31    - Unknown word (revrel)     -- revrel__col=1 & revrel__col=2
+django/db/models/sql/query.py:935:9     - Unknown word (LOUTER)     -- LOUTER b INNER c. So, if we
+django/db/models/sql/query.py:951:20    - Unknown word (louter)     -- parent_louter = (
+django/db/models/sql/query.py:952:76    - Unknown word (LOUTER)     -- alias].join_type == LOUTER
+django/db/models/sql/query.py:954:21    - Unknown word (louter)     -- already_louter = self.alias_map[alias
+django/db/models/sql/query.py:954:65    - Unknown word (LOUTER)     -- alias].join_type == LOUTER
+django/db/models/sql/query.py:955:58    - Unknown word (louter)     -- .nullable or parent_louter) and not already_louter
+django/db/models/sql/query.py:955:82    - Unknown word (louter)     -- louter) and not already_louter:
+django/db/models/sql/query.py:968:31    - Unknown word (LOUTER)     -- Change join type from LOUTER to INNER for all joins
 django/db/models/sql/where.py:339:24    - Unknown word (sqls)       -- def __init__(self, sqls, params):
 django/db/models/sql/where.py:340:14    - Unknown word (sqls)       -- self.sqls = sqls
 django/db/models/sql/where.py:340:21    - Unknown word (sqls)       -- self.sqls = sqls
@@ -1922,6 +1923,11 @@ django/shortcuts.py:64:16     - Unknown word (klass)      -- if hasattr(klass, "
 django/shortcuts.py:65:16     - Unknown word (klass)      -- return klass._default_manager.all
 django/shortcuts.py:66:12     - Unknown word (klass)      -- return klass
 django/shortcuts.py:69:23     - Unknown word (klass)      -- def get_object_or_404(klass, *args, **kwargs):
+django/tasks/backends/base.py:89:15     - Unknown word (aenqueue)   -- async def aenqueue(self, task, args, kwargs
+django/tasks/base.py:118:15    - Unknown word (acall)      -- async def acall(self, *args, **kwargs
+django/tasks/base.py:232:15    - Unknown word (arefresh)   -- async def arefresh(self):
+django/tasks/base.py:86:15     - Unknown word (aenqueue)   -- async def aenqueue(self, *args, **kwargs
+django/tasks/base.py:88:41     - Unknown word (aenqueue)   -- await self.get_backend().aenqueue(self, args, kwargs)
 django/template/__init__.py:34:19     - Unknown word (smartif)    -- - django.template.smartif
 django/template/base.py:592:25    - Unknown word (endtag)     -- def skip_past(self, endtag):
 django/template/base.py:595:74    - Unknown word (endtag)     -- and token.contents == endtag:
@@ -2066,35 +2072,35 @@ django/test/html.py:25:6      - Unknown word (formnovalidate) -- "formnovalidate
 django/test/html.py:28:6      - Unknown word (itemscope)      -- "itemscope",
 django/test/html.py:35:6      - Unknown word (playsinline)    -- "playsinline",
 django/test/html.py:41:6      - Unknown word (truespeed)      -- "truespeed",
-django/test/runner.py:1014:13   - Unknown word (keepdb)     -- keepdb=self.keepdb,
+django/test/runner.py:1017:13   - Unknown word (keepdb)     -- keepdb=self.keepdb,
 django/test/runner.py:382:36    - Unknown word (unpythonic) -- implementation matches the unpythonic coding style of unittest
-django/test/runner.py:478:10    - Unknown word (subsuite)   -- def _run_subsuite(args):
-django/test/runner.py:485:19    - Unknown word (subsuite)   -- runner_class, subsuite_index, subsuite, failfast
-django/test/runner.py:485:35    - Unknown word (subsuite)   -- class, subsuite_index, subsuite, failfast, buffer =
-django/test/runner.py:487:25    - Unknown word (subsuite)   -- result = runner.run(subsuite)
-django/test/runner.py:488:12    - Unknown word (subsuite)   -- return subsuite_index, result.events
-django/test/runner.py:520:15    - Unknown word (subsuites)  -- self, subsuites, processes, failfast
-django/test/runner.py:522:14    - Unknown word (subsuites)  -- self.subsuites = subsuites
-django/test/runner.py:522:26    - Unknown word (subsuites)  -- self.subsuites = subsuites
-django/test/runner.py:541:45    - Unknown word (subsuites)  -- numeric indexes in self.subsuites instead of tests
-django/test/runner.py:552:13    - Unknown word (initargs)   -- initargs=[
-django/test/runner.py:564:51    - Unknown word (subsuites)  -- subsuite in enumerate(self.subsuites)
-django/test/runner.py:700:9     - Unknown word (keepdb)     -- keepdb=False,
-django/test/runner.py:722:14    - Unknown word (keepdb)     -- self.keepdb = keepdb
-django/test/runner.py:722:23    - Unknown word (keepdb)     -- self.keepdb = keepdb
-django/test/runner.py:774:16    - Unknown word (keepdb)     -- "--keepdb", action="store_true
+django/test/runner.py:481:10    - Unknown word (subsuite)   -- def _run_subsuite(args):
+django/test/runner.py:488:19    - Unknown word (subsuite)   -- runner_class, subsuite_index, subsuite, failfast
+django/test/runner.py:488:35    - Unknown word (subsuite)   -- class, subsuite_index, subsuite, failfast, buffer =
+django/test/runner.py:490:25    - Unknown word (subsuite)   -- result = runner.run(subsuite)
+django/test/runner.py:491:12    - Unknown word (subsuite)   -- return subsuite_index, result.events
+django/test/runner.py:523:15    - Unknown word (subsuites)  -- self, subsuites, processes, failfast
+django/test/runner.py:525:14    - Unknown word (subsuites)  -- self.subsuites = subsuites
+django/test/runner.py:525:26    - Unknown word (subsuites)  -- self.subsuites = subsuites
+django/test/runner.py:544:45    - Unknown word (subsuites)  -- numeric indexes in self.subsuites instead of tests
+django/test/runner.py:555:13    - Unknown word (initargs)   -- initargs=[
+django/test/runner.py:567:51    - Unknown word (subsuites)  -- subsuite in enumerate(self.subsuites)
+django/test/runner.py:703:9     - Unknown word (keepdb)     -- keepdb=False,
+django/test/runner.py:725:14    - Unknown word (keepdb)     -- self.keepdb = keepdb
+django/test/runner.py:725:23    - Unknown word (keepdb)     -- self.keepdb = keepdb
+django/test/runner.py:777:16    - Unknown word (keepdb)     -- "--keepdb", action="store_true
 django/test/selenium.py:84:31     - Unknown word (Prefs)      -- caps["goog:loggingPrefs"] = {"browser": "ALL
 django/test/selenium.py:93:45     - Unknown word (infobars)   -- argument("--disable-infobars")
 django/test/signals.py:243:54    - Unknown word (modwsgi)    -- auth.handlers import modwsgi
 django/test/signals.py:245:13    - Unknown word (modwsgi)    -- modwsgi.UserModel = UserModel
 django/test/signals.py:61:27     - Unknown word (tzset)      -- if hasattr(time, "tzset"):
 django/test/signals.py:66:18     - Unknown word (tzset)      -- time.tzset()
-django/test/testcases.py:310:53    - Unknown word (picklability) -- cannot be tested on picklability, since they
-django/test/testcases.py:313:13    - Unknown word (pickable)     -- pickable_state = {"_outcome"
-django/test/testcases.py:315:27    - Unknown word (pickable)     -- if key in pickable_state or not is_pickable
-django/test/testcases.py:315:52    - Unknown word (pickable)     -- pickable_state or not is_pickable(value):
-django/test/testcases.py:317:17    - Unknown word (pickable)     -- pickable_state[key] = value
-django/test/testcases.py:80:8      - Unknown word (pickable)   -- def is_pickable(obj):
+django/test/testcases.py:320:53    - Unknown word (picklability) -- cannot be tested on picklability, since they
+django/test/testcases.py:323:13    - Unknown word (pickable)     -- pickable_state = {"_outcome"
+django/test/testcases.py:325:27    - Unknown word (pickable)     -- if key in pickable_state or not is_pickable
+django/test/testcases.py:325:52    - Unknown word (pickable)     -- pickable_state or not is_pickable(value):
+django/test/testcases.py:327:17    - Unknown word (pickable)     -- pickable_state[key] = value
+django/test/testcases.py:81:8      - Unknown word (pickable)   -- def is_pickable(obj):
 django/test/utils.py:1007:22   - Unknown word (weakreferences) -- # Collecting weakreferences can take two collections
 django/test/utils.py:103:27    - Unknown word (subcontexts) -- Flattened keys of subcontexts.
 django/test/utils.py:181:5     - Unknown word (keepdb)      -- keepdb=False,
@@ -2158,21 +2164,21 @@ django/utils/deconstruct.py:54:9      - Unknown word (klass)      -- klass.__new
 django/utils/decorators.py:57:9      - Unknown word (markcoroutinefunction) -- markcoroutinefunction(_wrapper)
 django/utils/decorators.py:5:47      - Unknown word (markcoroutinefunction) -- iscoroutinefunction, markcoroutinefunction
 django/utils/decorators.py:8:7       - Unknown word (classonlymethod)       -- class classonlymethod(classmethod):
-django/utils/deprecation.py:100:15    - Unknown word (posargs)               -- def deprecate_posargs(deprecation_warning
-django/utils/deprecation.py:100:44    - Unknown word (remappable)            -- deprecation_warning, remappable_names, /):
-django/utils/deprecation.py:113:20    - Unknown word (posargs)               -- use @deprecate_posargs after @staticmethod
-django/utils/deprecation.py:115:57    - Unknown word (posargs)               -- option1 or option2 as posargs, change::
-django/utils/deprecation.py:122:20    - Unknown word (posargs)               -- @deprecate_posargs(RemovedInDjangoXXWarning
-django/utils/deprecation.py:133:53    - Unknown word (posargs)               -- using the deprecated posargs::
-django/utils/deprecation.py:186:25    - Unknown word (remappable)            -- for name in remappable_names
-django/utils/deprecation.py:189:52    - Unknown word (remappable)            -- posargs() requires all remappable_names to be "
-django/utils/deprecation.py:193:13    - Unknown word (remappable)            -- num_remappable_args = len(remappable
-django/utils/deprecation.py:193:35    - Unknown word (remappable)            -- remappable_args = len(remappable_names)
-django/utils/deprecation.py:288:46    - Unknown word (dunder)                -- to avoid swapping out dunder methods.
-django/utils/deprecation.py:289:13    - Unknown word (markcoroutinefunction) -- markcoroutinefunction(self)
-django/utils/deprecation.py:305:27    - Unknown word (acall)                 -- return self.__acall__(request)
-django/utils/deprecation.py:314:17    - Unknown word (acall)                 -- async def __acall__(self, request):
+django/utils/deprecation.py:112:20    - Unknown word (posargs)               -- use @deprecate_posargs after @staticmethod
+django/utils/deprecation.py:114:57    - Unknown word (posargs)               -- option1 or option2 as posargs, change::
+django/utils/deprecation.py:121:20    - Unknown word (posargs)               -- @deprecate_posargs(RemovedInDjangoXXWarning
+django/utils/deprecation.py:132:53    - Unknown word (posargs)               -- using the deprecated posargs::
+django/utils/deprecation.py:185:25    - Unknown word (remappable)            -- for name in remappable_names
+django/utils/deprecation.py:188:52    - Unknown word (remappable)            -- posargs() requires all remappable_names to be "
+django/utils/deprecation.py:192:13    - Unknown word (remappable)            -- num_remappable_args = len(remappable
+django/utils/deprecation.py:192:35    - Unknown word (remappable)            -- remappable_args = len(remappable_names)
+django/utils/deprecation.py:287:46    - Unknown word (dunder)                -- to avoid swapping out dunder methods.
+django/utils/deprecation.py:288:13    - Unknown word (markcoroutinefunction) -- markcoroutinefunction(self)
+django/utils/deprecation.py:304:27    - Unknown word (acall)                 -- return self.__acall__(request)
+django/utils/deprecation.py:313:17    - Unknown word (acall)                 -- async def __acall__(self, request):
 django/utils/deprecation.py:7:47      - Unknown word (markcoroutinefunction) -- iscoroutinefunction, markcoroutinefunction, sync_to_async
+django/utils/deprecation.py:99:15     - Unknown word (posargs)               -- def deprecate_posargs(deprecation_warning
+django/utils/deprecation.py:99:44     - Unknown word (remappable)            -- deprecation_warning, remappable_names, /):
 django/utils/encoding.py:147:66    - Unknown word (multibyte)  -- bytes ≥ 128 are part of multibyte
 django/utils/encoding.py:149:2     - Unknown word (hexdig)     -- _hexdig = "0123456789ABCDEFabcdef
 django/utils/encoding.py:151:55    - Unknown word (hexdig)     -- fromhex(a + b) for a in _hexdig[8:] for b in _hexdig
@@ -2219,15 +2225,17 @@ django/utils/html.py:514:22    - Unknown word (klass)      -- if "__html__" in k
 django/utils/html.py:517:29    - Unknown word (klass)      -- "__html__()." % klass.__name__
 django/utils/html.py:519:25    - Unknown word (klass)      -- if "__str__" not in klass.__dict__:
 django/utils/html.py:522:35    - Unknown word (klass)      -- define __str__()." % klass.__name__
-django/utils/http.py:109:19    - Unknown word (parsedate)  -- # email.utils.parsedate() does the job for RFC
-django/utils/http.py:158:18    - Unknown word (overconsumption) -- # To prevent overconsumption of server resources
-django/utils/http.py:40:9      - Unknown word (GENDELIMS)  -- RFC3986_GENDELIMS = ":/?#[]@"
-django/utils/http.py:41:9      - Unknown word (SUBDELIMS)  -- RFC3986_SUBDELIMS = "!$&'()*+,;="
-django/utils/http.py:45:22     - Unknown word (doseq)      -- def urlencode(query, doseq=False):
-django/utils/http.py:61:18     - Unknown word (doseq)      -- elif not doseq or isinstance(value
-django/utils/http.py:69:58     - Unknown word (doseq)      -- and iterators, when doseq=True, to
-django/utils/http.py:83:45     - Unknown word (doseq)      -- urlencode(query_params, doseq)
-django/utils/http.py:97:38     - Unknown word (usegmt)     -- formatdate(epoch_seconds, usegmt=True)
+django/utils/http.py:108:19    - Unknown word (parsedate)  -- # email.utils.parsedate() does the job for RFC
+django/utils/http.py:157:18    - Unknown word (overconsumption) -- # To prevent overconsumption of server resources
+django/utils/http.py:318:6     - Unknown word (parseparam)      -- def _parseparam(s):
+django/utils/http.py:344:14    - Unknown word (parseparam)      -- parts = _parseparam(";" + line)
+django/utils/http.py:39:9      - Unknown word (GENDELIMS)  -- RFC3986_GENDELIMS = ":/?#[]@"
+django/utils/http.py:40:9      - Unknown word (SUBDELIMS)  -- RFC3986_SUBDELIMS = "!$&'()*+,;="
+django/utils/http.py:44:22     - Unknown word (doseq)      -- def urlencode(query, doseq=False):
+django/utils/http.py:60:18     - Unknown word (doseq)      -- elif not doseq or isinstance(value
+django/utils/http.py:68:58     - Unknown word (doseq)      -- and iterators, when doseq=True, to
+django/utils/http.py:82:45     - Unknown word (doseq)      -- urlencode(query_params, doseq)
+django/utils/http.py:96:38     - Unknown word (usegmt)     -- formatdate(epoch_seconds, usegmt=True)
 django/utils/ipv6.py:29:31     - Unknown word (hextets)    -- zeroes, and make sure all hextets are lowercase.
 django/utils/log.py:105:24    - Unknown word (levelname)  -- record.levelname,
 django/utils/log.py:114:42    - Unknown word (levelname)  -- "%s: %s" % (record.levelname, record.getMessage(
@@ -2494,10 +2502,10 @@ django/views/decorators/clickjacking.py:42:6      - Unknown word (xframe)     --
 django/views/decorators/clickjacking.py:66:5      - Unknown word (xframe)     -- def xframe_options_exempt(view
 django/views/decorators/clickjacking.py:6:5       - Unknown word (xframe)     -- def xframe_options_deny(view_func
 django/views/decorators/debug.py:59:62     - Unknown word (firstlineno) -- wrapped_func.__code__.co_firstlineno
-django/views/generic/base.py:122:13    - Unknown word (markcoroutinefunction) -- markcoroutinefunction(view)
-django/views/generic/base.py:15:37     - Unknown word (classonlymethod)       -- utils.decorators import classonlymethod
-django/views/generic/base.py:3:47      - Unknown word (markcoroutinefunction) -- iscoroutinefunction, markcoroutinefunction
-django/views/generic/base.py:81:6      - Unknown word (classonlymethod)       -- @classonlymethod
+django/views/generic/base.py:123:13    - Unknown word (markcoroutinefunction) -- markcoroutinefunction(view)
+django/views/generic/base.py:16:37     - Unknown word (classonlymethod)       -- utils.decorators import classonlymethod
+django/views/generic/base.py:4:47      - Unknown word (markcoroutinefunction) -- iscoroutinefunction, markcoroutinefunction
+django/views/generic/base.py:82:6      - Unknown word (classonlymethod)       -- @classonlymethod
 django/views/i18n.py:107:54    - Unknown word (djangojs)   -- JavaScript messages go to the djangojs domain. This
 django/views/i18n.py:112:15    - Unknown word (djangojs)   -- domain = "djangojs"
 django/views/i18n.py:49:43     - Unknown word (REFERER)    -- request.META.get("HTTP_REFERER")
@@ -2766,6 +2774,7 @@ tests/admin_inlines/tests.py:232:42    - Unknown word (titlecollection)  -- admi
 tests/admin_inlines/tests.py:2427:34   - Unknown word (courseproxy)              -- admin:admin_inlines_courseproxy_add",
 tests/admin_inlines/tests.py:2428:34   - Unknown word (courseproxy)              -- admin:admin_inlines_courseproxy1_add",
 tests/admin_inlines/tests.py:2429:34   - Unknown word (courseproxy)              -- admin:admin_inlines_courseproxy2_add",
+tests/admin_inlines/tests.py:2568:65   - Unknown word (courseproxy)              -- admin:admin_inlines_courseproxy2_add")
 tests/admin_inlines/tests.py:304:65    - Unknown word (capofamiglia)     -- admin:admin_inlines_capofamiglia_add"))
 tests/admin_inlines/tests.py:319:65    - Unknown word (someparentmodel)  -- admin:admin_inlines_someparentmodel_add"))
 tests/admin_inlines/tests.py:337:42    - Unknown word (someparentmodel)  -- admin:admin_inlines_someparentmodel_change", args=(parent
@@ -3479,28 +3488,28 @@ tests/app_loading/tests.py:63:24     - Unknown word (brokenapp)  -- egg_name = "
 tests/app_loading/tests.py:65:57     - Unknown word (modelz)     -- rtRaisesMessage(ImportError, "modelz"):
 tests/apps/namespace_package_base/nsapp/apps.py:8:13      - Unknown word (nsapp)      -- name = "nsapp"
 tests/apps/query_performing_app/apps.py:61:20     - Unknown word (executemany) -- cursor.executemany(
-tests/apps/tests.py:215:72    - Unknown word (currsize)   -- settings_name.cache_info().currsize, 0)
-tests/apps/tests.py:216:55    - Unknown word (currsize)   -- models.cache_info().currsize, 0)
-tests/apps/tests.py:317:26    - Unknown word (southponies) -- "Model 'apps.southponies' was already registered
-tests/apps/tests.py:330:41    - Unknown word (southponies) -- RuntimeError, "Conflicting 'southponies' models in application
-tests/apps/tests.py:365:33    - Unknown word (lazya)       -- for model_name in ["lazya", "lazyb", "lazyb",
-tests/apps/tests.py:365:42    - Unknown word (lazyb)       -- model_name in ["lazya", "lazyb", "lazyb", "lazyc",
-tests/apps/tests.py:365:51    - Unknown word (lazyb)       -- ["lazya", "lazyb", "lazyb", "lazyc", "lazya"]
-tests/apps/tests.py:365:60    - Unknown word (lazyc)       -- "lazyb", "lazyb", "lazyc", "lazya"]
-tests/apps/tests.py:365:69    - Unknown word (lazya)       -- "lazyb", "lazyc", "lazya"]
-tests/apps/tests.py:372:73    - Unknown word (lazyb)       -- pending, {("apps", "lazyb")}
-tests/apps/tests.py:376:56    - Unknown word (lazyb)       -- test_func, ("apps", "lazyb"))
-tests/apps/tests.py:385:73    - Unknown word (lazyc)       -- pending, {("apps", "lazyc")}
-tests/apps/tests.py:424:14    - Unknown word (dunder)      -- def test_dunder_path(self):
-tests/apps/tests.py:432:17    - Unknown word (dunder)      -- def test_no_dunder_path_fallback_to_dunder
-tests/apps/tests.py:432:41    - Unknown word (dunder)      -- dunder_path_fallback_to_dunder_file(self):
-tests/apps/tests.py:438:20    - Unknown word (dunder)      -- def test_empty_dunder_path_fallback_to_dunder
-tests/apps/tests.py:438:44    - Unknown word (dunder)      -- dunder_path_fallback_to_dunder_file(self):
-tests/apps/tests.py:511:15    - Unknown word (nsapp)       -- # We need nsapp to be top-level so our
-tests/apps/tests.py:517:45    - Unknown word (nsapp)       -- join(base_location, "nsapp")
-tests/apps/tests.py:524:49    - Unknown word (nsapp)       -- settings(INSTALLED_APPS=["nsapp"]):
-tests/apps/tests.py:525:51    - Unknown word (nsapp)       -- apps.get_app_config("nsapp")
-tests/apps/tests.py:536:30    - Unknown word (nsapp)       -- components of the "nsapp" package.
+tests/apps/tests.py:216:72    - Unknown word (currsize)   -- settings_name.cache_info().currsize, 0)
+tests/apps/tests.py:217:55    - Unknown word (currsize)   -- models.cache_info().currsize, 0)
+tests/apps/tests.py:339:26    - Unknown word (southponies) -- "Model 'apps.southponies' was already registered
+tests/apps/tests.py:352:41    - Unknown word (southponies) -- RuntimeError, "Conflicting 'southponies' models in application
+tests/apps/tests.py:387:33    - Unknown word (lazya)       -- for model_name in ["lazya", "lazyb", "lazyb",
+tests/apps/tests.py:387:42    - Unknown word (lazyb)       -- model_name in ["lazya", "lazyb", "lazyb", "lazyc",
+tests/apps/tests.py:387:51    - Unknown word (lazyb)       -- ["lazya", "lazyb", "lazyb", "lazyc", "lazya"]
+tests/apps/tests.py:387:60    - Unknown word (lazyc)       -- "lazyb", "lazyb", "lazyc", "lazya"]
+tests/apps/tests.py:387:69    - Unknown word (lazya)       -- "lazyb", "lazyc", "lazya"]
+tests/apps/tests.py:394:73    - Unknown word (lazyb)       -- pending, {("apps", "lazyb")}
+tests/apps/tests.py:398:56    - Unknown word (lazyb)       -- test_func, ("apps", "lazyb"))
+tests/apps/tests.py:407:73    - Unknown word (lazyc)       -- pending, {("apps", "lazyc")}
+tests/apps/tests.py:446:14    - Unknown word (dunder)      -- def test_dunder_path(self):
+tests/apps/tests.py:454:17    - Unknown word (dunder)      -- def test_no_dunder_path_fallback_to_dunder
+tests/apps/tests.py:454:41    - Unknown word (dunder)      -- dunder_path_fallback_to_dunder_file(self):
+tests/apps/tests.py:460:20    - Unknown word (dunder)      -- def test_empty_dunder_path_fallback_to_dunder
+tests/apps/tests.py:460:44    - Unknown word (dunder)      -- dunder_path_fallback_to_dunder_file(self):
+tests/apps/tests.py:533:15    - Unknown word (nsapp)       -- # We need nsapp to be top-level so our
+tests/apps/tests.py:539:45    - Unknown word (nsapp)       -- join(base_location, "nsapp")
+tests/apps/tests.py:546:49    - Unknown word (nsapp)       -- settings(INSTALLED_APPS=["nsapp"]):
+tests/apps/tests.py:547:51    - Unknown word (nsapp)       -- apps.get_app_config("nsapp")
+tests/apps/tests.py:558:30    - Unknown word (nsapp)       -- components of the "nsapp" package.
 tests/asgi/tests.py:12:49     - Unknown word (ASGI)       -- staticfiles.handlers import ASGIStaticFilesHandler
 tests/asgi/tests.py:13:18     - Unknown word (asgi)       -- from django.core.asgi import get_asgi_application
 tests/asgi/tests.py:13:34     - Unknown word (asgi)       -- core.asgi import get_asgi_application
@@ -3514,39 +3523,37 @@ tests/asgi/tests.py:48:7      - Unknown word (ASGI)       -- class ASGITest(Simp
 tests/asgi/tests.py:55:24     - Unknown word (asgi)       -- async def test_get_asgi_application(self):
 tests/asgi/tests.py:57:54     - Unknown word (ASGI)       -- returns a functioning ASGI callable.
 tests/asgi/urls.py:23:44     - Unknown word (REFERER)    -- request.META.get("HTTP_REFERER") or "",
-tests/async/test_async_auth.py:126:20    - Unknown word (alogout)       -- async def test_alogout(self):
-tests/async/test_async_auth.py:127:65    - Unknown word (testpw)        -- testuser", password="testpw")
-tests/async/test_async_auth.py:130:15    - Unknown word (alogout)       -- await alogout(request)
-tests/async/test_async_auth.py:134:27    - Unknown word (alogout)       -- async def test_client_alogout(self):
-tests/async/test_async_auth.py:138:27    - Unknown word (alogout)       -- await self.client.alogout()
-tests/async/test_async_auth.py:160:27    - Unknown word (aforce)        -- async def test_client_aforce_login(self):
-tests/async/test_async_auth.py:161:27    - Unknown word (aforce)        -- await self.client.aforce_login(self.test_user
-tests/async/test_async_auth.py:173:27    - Unknown word (aforce)        -- async def test_client_aforce_login_backend(self)
-tests/async/test_async_auth.py:176:27    - Unknown word (aforce)        -- await self.client.aforce_login(
-tests/async/test_async_auth.py:18:46     - Unknown word (testpw)        -- test@example.com", "testpw"
-tests/async/test_async_auth.py:21:20     - Unknown word (aauthenticate) -- async def test_aauthenticate(self):
-tests/async/test_async_auth.py:22:22     - Unknown word (aauthenticate) -- user = await aauthenticate(username="testuser"
-tests/async/test_async_auth.py:22:67     - Unknown word (testpw)        -- testuser", password="testpw")
-tests/async/test_async_auth.py:27:33     - Unknown word (aauthenticate) -- self.assertIsNone(await aauthenticate(username="testuser"
-tests/async/test_async_auth.py:27:78     - Unknown word (testpw)        -- testuser", password="testpw"))
-tests/async/test_async_auth.py:29:20     - Unknown word (alogin)        -- async def test_alogin(self):
+tests/async/test_async_auth.py:106:27    - Unknown word (aforce)        -- async def test_client_aforce_login(self):
+tests/async/test_async_auth.py:107:27    - Unknown word (aforce)        -- await self.client.aforce_login(self.test_user
+tests/async/test_async_auth.py:119:27    - Unknown word (aforce)        -- async def test_client_aforce_login_backend(self)
+tests/async/test_async_auth.py:122:27    - Unknown word (aforce)        -- await self.client.aforce_login(
+tests/async/test_async_auth.py:17:46     - Unknown word (testpw)        -- test@example.com", "testpw"
+tests/async/test_async_auth.py:20:20     - Unknown word (aauthenticate) -- async def test_aauthenticate(self):
+tests/async/test_async_auth.py:21:22     - Unknown word (aauthenticate) -- user = await aauthenticate(username="testuser"
+tests/async/test_async_auth.py:21:67     - Unknown word (testpw)        -- testuser", password="testpw")
+tests/async/test_async_auth.py:26:33     - Unknown word (aauthenticate) -- self.assertIsNone(await aauthenticate(username="testuser"
+tests/async/test_async_auth.py:26:78     - Unknown word (testpw)        -- testuser", password="testpw"))
+tests/async/test_async_auth.py:28:20     - Unknown word (alogin)        -- async def test_alogin(self):
 tests/async/test_async_auth.py:2:5       - Unknown word (aauthenticate) -- aauthenticate,
-tests/async/test_async_auth.py:31:45     - Unknown word (asession)      -- = await self.client.asession()
-tests/async/test_async_auth.py:32:15     - Unknown word (alogin)        -- await alogin(request, self.test_user
-tests/async/test_async_auth.py:39:45     - Unknown word (asession)      -- = await self.client.asession()
-tests/async/test_async_auth.py:40:15     - Unknown word (alogin)        -- await alogin(request, self.test_user
+tests/async/test_async_auth.py:30:45     - Unknown word (asession)      -- = await self.client.asession()
+tests/async/test_async_auth.py:31:15     - Unknown word (alogin)        -- await alogin(request, self.test_user
+tests/async/test_async_auth.py:38:45     - Unknown word (asession)      -- = await self.client.asession()
+tests/async/test_async_auth.py:39:15     - Unknown word (alogin)        -- await alogin(request, self.test_user
 tests/async/test_async_auth.py:4:5       - Unknown word (alogin)        -- alogin,
-tests/async/test_async_auth.py:52:20     - Unknown word (alogin)        -- async def test_alogin_new_user(self):
-tests/async/test_async_auth.py:54:45     - Unknown word (asession)      -- = await self.client.asession()
-tests/async/test_async_auth.py:57:48     - Unknown word (testpw)        -- test2@example.com", "testpw2"
+tests/async/test_async_auth.py:51:20     - Unknown word (alogin)        -- async def test_alogin_new_user(self):
+tests/async/test_async_auth.py:53:45     - Unknown word (asession)      -- = await self.client.asession()
+tests/async/test_async_auth.py:56:48     - Unknown word (testpw)        -- test2@example.com", "testpw2"
 tests/async/test_async_auth.py:5:5       - Unknown word (alogout)       -- alogout,
-tests/async/test_async_auth.py:68:45     - Unknown word (asession)      -- = await self.client.asession()
-tests/async/test_async_auth.py:78:57     - Unknown word (auser)         -- object has no attribute 'auser'",
-tests/async/test_async_auth.py:82:38     - Unknown word (auser)         -- Fallback to request.auser() when user is None
-tests/async/test_async_auth.py:89:19     - Unknown word (auser)         -- async def auser():
-tests/async/test_async_auth.py:94:17     - Unknown word (auser)         -- request.auser = auser
-tests/async/test_async_auth.py:94:25     - Unknown word (auser)         -- request.auser = auser
-tests/async/test_async_auth.py:95:45     - Unknown word (asession)      -- = await self.client.asession()
+tests/async/test_async_auth.py:65:45     - Unknown word (asession)      -- = await self.client.asession()
+tests/async/test_async_auth.py:72:20     - Unknown word (alogout)       -- async def test_alogout(self):
+tests/async/test_async_auth.py:73:65     - Unknown word (testpw)        -- testuser", password="testpw")
+tests/async/test_async_auth.py:75:45     - Unknown word (asession)      -- = await self.client.asession()
+tests/async/test_async_auth.py:76:15     - Unknown word (alogout)       -- await alogout(request)
+tests/async/test_async_auth.py:80:27     - Unknown word (alogout)       -- async def test_client_alogout(self):
+tests/async/test_async_auth.py:84:27     - Unknown word (alogout)       -- await self.client.alogout()
+tests/async/test_async_auth.py:93:19     - Unknown word (auser)         -- async def auser():
+tests/async/test_async_auth.py:96:17     - Unknown word (auser)         -- request.auser = auser
+tests/async/test_async_auth.py:96:25     - Unknown word (auser)         -- request.auser = auser
 tests/async/test_async_model_methods.py:14:9      - Unknown word (refetched)  -- refetched = await SimpleModel
 tests/async/test_async_model_methods.py:15:26     - Unknown word (refetched)  -- self.assertEqual(refetched.field, 10)
 tests/async/test_async_queryset.py:257:44    - Unknown word (simplemodel)  -- id, field FROM async_simplemodel WHERE created=%s"
@@ -3683,7 +3690,8 @@ tests/auth_tests/test_hashers.py:196:45    - Unknown word (letmein)    -- assert
 tests/auth_tests/test_hashers.py:203:45    - Unknown word (letmein)    -- assertTrue(check_password("letmein", encoded, setter,
 tests/auth_tests/test_hashers.py:217:38    - Unknown word (letmein)    -- encoded = make_password("letmein", hasher="bcrypt")
 tests/auth_tests/test_hashers.py:272:31    - Unknown word (badencoded) -- passwords = ("lètmein_badencoded", "", None)
-tests/auth_tests/test_hashers.py:291:68    - Unknown word (Mamdllndh)  -- seasalt2$RGU4BAy93u+JDPtuMamdllndh+c="
+tests/auth_tests/test_hashers.py:283:31    - Unknown word (updzhx)     -- "seasalt2$xWKIh704updzhxL+vMfPbhVsHljK62FyE9
+tests/auth_tests/test_hashers.py:283:59    - Unknown word (Atco)       -- vMfPbhVsHljK62FyE988AtcoHU4=",
 tests/auth_tests/test_hashers.py:302:14    - Unknown word (bcryptsha)  -- def test_bcryptsha256_salt_check(self)
 tests/auth_tests/test_hashers.py:366:38    - Unknown word (letmein)    -- encoded = make_password("letmein")
 tests/auth_tests/test_hashers.py:52:34     - Unknown word (lètmein)    -- encoded = make_password("lètmein")
@@ -3705,16 +3713,16 @@ tests/auth_tests/test_hashers.py:93:42     - Unknown word (lètmeinz)   -- asser
 tests/auth_tests/test_management.py:1285:14   - Unknown word (usermodel)                     -- def test_usermodel_without_password(self
 tests/auth_tests/test_management.py:1298:14   - Unknown word (usermodel)                     -- def test_usermodel_without_password_interactive
 tests/auth_tests/test_management.py:154:53    - Unknown word (xfalia)     -- username = lambda: "J\xfalia"
-tests/auth_tests/test_management.py:1573:72   - Unknown word (oldmodel)                      -- auth_tests", model="oldmodel")
-tests/auth_tests/test_management.py:1577:37   - Unknown word (oldmodel)                      -- codename=f"{action}_oldmodel",
-tests/auth_tests/test_management.py:1585:63   - Unknown word (oldmodel)                      -- codename=f"{action}_oldmodel").exists()
-tests/auth_tests/test_management.py:1588:63   - Unknown word (newmodel)                      -- codename=f"{action}_newmodel").exists()
-tests/auth_tests/test_management.py:1602:63   - Unknown word (oldmodel)                      -- codename=f"{action}_oldmodel").exists()
-tests/auth_tests/test_management.py:1605:63   - Unknown word (newmodel)                      -- codename=f"{action}_newmodel").exists()
-tests/auth_tests/test_management.py:1613:72   - Unknown word (oldmodel)                      -- auth_tests", model="oldmodel")
-tests/auth_tests/test_management.py:1633:69   - Unknown word (newmodel)                      -- filter(codename="change_newmodel").exists())
-tests/auth_tests/test_management.py:1657:58   - Unknown word (newmodel)                      -- change_oldmodel", "change_newmodel"]
-tests/auth_tests/test_management.py:1664:30   - Unknown word (newmodel)                      -- codename="change_newmodel",
+tests/auth_tests/test_management.py:1574:72   - Unknown word (oldmodel)                      -- auth_tests", model="oldmodel")
+tests/auth_tests/test_management.py:1578:37   - Unknown word (oldmodel)                      -- codename=f"{action}_oldmodel",
+tests/auth_tests/test_management.py:1586:63   - Unknown word (oldmodel)                      -- codename=f"{action}_oldmodel").exists()
+tests/auth_tests/test_management.py:1589:63   - Unknown word (newmodel)                      -- codename=f"{action}_newmodel").exists()
+tests/auth_tests/test_management.py:1603:63   - Unknown word (oldmodel)                      -- codename=f"{action}_oldmodel").exists()
+tests/auth_tests/test_management.py:1606:63   - Unknown word (newmodel)                      -- codename=f"{action}_newmodel").exists()
+tests/auth_tests/test_management.py:1611:44   - Unknown word (oldmodel)                      -- auth_tests", model="oldmodel"
+tests/auth_tests/test_management.py:1626:68   - Unknown word (newmodel)                      -- filter(codename="add_newmodel").exists()
+tests/auth_tests/test_management.py:1654:69   - Unknown word (newmodel)                      -- filter(codename="change_newmodel").exists())
+tests/auth_tests/test_management.py:1678:58   - Unknown word (newmodel)                      -- change_oldmodel", "change_newmodel"]
 tests/auth_tests/test_management.py:261:46    - Unknown word (xfalia)     -- create_user(username="J\xfalia", password="qwerty"
 tests/auth_tests/test_management.py:262:52    - Unknown word (xfalia)     -- changepassword", username="J\xfalia", stdout=self.stdout
 tests/auth_tests/test_management.py:346:18    - Unknown word (Uživatel)   -- "Uživatel (leave blank to use
@@ -3767,24 +3775,20 @@ tests/auth_tests/test_models.py:80:24     - Unknown word (examplemodelb) -- mode
 tests/auth_tests/test_models.py:84:24     - Unknown word (examplemodela) -- model="examplemodela",
 tests/auth_tests/test_models.py:92:30     - Unknown word (examplemodelb) -- codename="delete_examplemodelb",
 tests/auth_tests/test_models.py:97:30     - Unknown word (examplemodelb) -- codename="delete_examplemodelb",
-tests/auth_tests/test_remote_user.py:108:34    - Unknown word (fakeuser)      -- headers = {self.header: "fakeuser"}
-tests/auth_tests/test_remote_user.py:117:54    - Unknown word (alogin)        -- django.contrib.auth.alogin() which will call
-tests/auth_tests/test_remote_user.py:250:22    - Unknown word (remoteuser)    -- # verify the remoteuser middleware will not
-tests/auth_tests/test_remote_user.py:270:22    - Unknown word (remoteuser)    -- # verify the remoteuser middleware will not
-tests/auth_tests/test_remote_user.py:273:33    - Unknown word (alogin)        -- await self.async_client.alogin(username="modeluser
-tests/auth_tests/test_remote_user.py:274:15    - Unknown word (aauthenticate) -- await aauthenticate(username="modeluser
-tests/auth_tests/test_remote_user.py:288:70    - Unknown word (newnewuser)    -- ", **{self.header: "newnewuser"})
-tests/auth_tests/test_remote_user.py:290:60    - Unknown word (newnewuser)    -- new user, username is "newnewuser"
-tests/auth_tests/test_remote_user.py:304:47    - Unknown word (newnewuser)    -- ", **{self.header: "newnewuser"}
-tests/auth_tests/test_remote_user.py:307:60    - Unknown word (newnewuser)    -- new user, username is "newnewuser"
-tests/auth_tests/test_remote_user.py:445:20    - Unknown word (AUTHUSER)      -- header = "HTTP_AUTHUSER"
-tests/auth_tests/test_remote_user.py:455:20    - Unknown word (AUTHUSER)      -- header = "HTTP_AUTHUSER"
+tests/auth_tests/test_remote_user.py:107:34    - Unknown word (fakeuser)      -- headers = {self.header: "fakeuser"}
+tests/auth_tests/test_remote_user.py:116:54    - Unknown word (alogin)        -- django.contrib.auth.alogin() which will call
+tests/auth_tests/test_remote_user.py:249:22    - Unknown word (remoteuser)    -- # verify the remoteuser middleware will not
+tests/auth_tests/test_remote_user.py:269:22    - Unknown word (remoteuser)    -- # verify the remoteuser middleware will not
+tests/auth_tests/test_remote_user.py:272:33    - Unknown word (alogin)        -- await self.async_client.alogin(username="modeluser
+tests/auth_tests/test_remote_user.py:273:15    - Unknown word (aauthenticate) -- await aauthenticate(username="modeluser
+tests/auth_tests/test_remote_user.py:287:70    - Unknown word (newnewuser)    -- ", **{self.header: "newnewuser"})
+tests/auth_tests/test_remote_user.py:289:60    - Unknown word (newnewuser)    -- new user, username is "newnewuser"
+tests/auth_tests/test_remote_user.py:303:47    - Unknown word (newnewuser)    -- ", **{self.header: "newnewuser"}
+tests/auth_tests/test_remote_user.py:306:60    - Unknown word (newnewuser)    -- new user, username is "newnewuser"
+tests/auth_tests/test_remote_user.py:444:20    - Unknown word (AUTHUSER)      -- header = "HTTP_AUTHUSER"
+tests/auth_tests/test_remote_user.py:454:20    - Unknown word (AUTHUSER)      -- header = "HTTP_AUTHUSER"
 tests/auth_tests/test_remote_user.py:4:33      - Unknown word (aauthenticate) -- contrib.auth import aauthenticate, authenticate
-tests/auth_tests/test_remote_user.py:506:15    - Unknown word (aprocess)      -- async def aprocess_request(self, request
-tests/auth_tests/test_remote_user.py:507:36    - Unknown word (aprocess)      -- NotImplementedError("aprocess_request has not been
-tests/auth_tests/test_remote_user.py:522:51    - Unknown word (aprocess)      -- without overriding aprocess_request() is "
-tests/auth_tests/test_remote_user.py:538:22    - Unknown word (aprocess)      -- error_msg = "aprocess_request has not been
-tests/auth_tests/test_remote_user.py:83:34     - Unknown word (fakeuser)      -- headers = {self.header: "fakeuser"}
+tests/auth_tests/test_remote_user.py:82:34     - Unknown word (fakeuser)      -- headers = {self.header: "fakeuser"}
 tests/auth_tests/test_templates.py:27:42     - Unknown word (jsmith)     -- objects.create_user("jsmith", "jsmith@example.com
 tests/auth_tests/test_templates.py:29:45     - Unknown word (somepath)   -- request_factory.get("/somepath/")
 tests/auth_tests/test_templates.py:57:48     - Unknown word (uidb)       -- reset_confirm", kwargs={"uidb64": "Bad", "token":
@@ -3948,21 +3952,21 @@ tests/basic/tests.py:212:27    - Unknown word (Falsey)         -- PrimaryKeyWith
 tests/basic/tests.py:214:32    - Unknown word (falsey)         -- test_save_primary_with_falsey_db_default(self):
 tests/basic/tests.py:216:27    - Unknown word (Falsey)         -- PrimaryKeyWithFalseyDbDefault().save()
 tests/basic/tests.py:36:19     - Unknown word (Falsey)     -- PrimaryKeyWithFalseyDbDefault,
-tests/basic/tests.py:377:43    - Unknown word (undashedvalue)  -- dashed-value": "1", "undashedvalue": "2"}
-tests/basic/tests.py:379:38    - Unknown word (undashedvalue)  -- assertEqual(articles[0].undashedvalue, 2)
 tests/basic/tests.py:37:19     - Unknown word (Falsey)     -- PrimaryKeyWithFalseyDefault,
-tests/basic/tests.py:405:14    - Unknown word (emptyqs)        -- def test_emptyqs(self):
-tests/basic/tests.py:412:14    - Unknown word (emptyqs)        -- def test_emptyqs_values(self):
-tests/basic/tests.py:420:14    - Unknown word (emptyqs)        -- def test_emptyqs_customqs(self):
-tests/basic/tests.py:420:22    - Unknown word (customqs)       -- def test_emptyqs_customqs(self):
-tests/basic/tests.py:436:14    - Unknown word (emptyqs)        -- def test_emptyqs_values_order(self):
-tests/basic/tests.py:454:14    - Unknown word (emptyqs)        -- def test_emptyqs_distinct(self):
+tests/basic/tests.py:385:43    - Unknown word (undashedvalue)  -- dashed-value": "1", "undashedvalue": "2"}
+tests/basic/tests.py:387:38    - Unknown word (undashedvalue)  -- assertEqual(articles[0].undashedvalue, 2)
+tests/basic/tests.py:413:14    - Unknown word (emptyqs)        -- def test_emptyqs(self):
+tests/basic/tests.py:420:14    - Unknown word (emptyqs)        -- def test_emptyqs_values(self):
+tests/basic/tests.py:428:14    - Unknown word (emptyqs)        -- def test_emptyqs_customqs(self):
+tests/basic/tests.py:428:22    - Unknown word (customqs)       -- def test_emptyqs_customqs(self):
+tests/basic/tests.py:444:14    - Unknown word (emptyqs)        -- def test_emptyqs_values_order(self):
+tests/basic/tests.py:462:14    - Unknown word (emptyqs)        -- def test_emptyqs_distinct(self):
 tests/basic/tests.py:78:14     - Unknown word (autofields) -- def test_autofields_generate_different_values
-tests/basic/tests.py:836:9     - Unknown word (asos)           -- asos = ArticleSelectOnSave
-tests/basic/tests.py:838:13    - Unknown word (asos)           -- asos.save()
-tests/basic/tests.py:840:13    - Unknown word (asos)           -- asos.save(force_update=True
-tests/basic/tests.py:846:17    - Unknown word (asos)           -- asos.save(force_update=True
-tests/basic/tests.py:872:13    - Unknown word (asos)           -- asos = ArticleSelectOnSave
+tests/basic/tests.py:844:9     - Unknown word (asos)           -- asos = ArticleSelectOnSave
+tests/basic/tests.py:846:13    - Unknown word (asos)           -- asos.save()
+tests/basic/tests.py:848:13    - Unknown word (asos)           -- asos.save(force_update=True
+tests/basic/tests.py:854:17    - Unknown word (asos)           -- asos.save(force_update=True
+tests/basic/tests.py:880:13    - Unknown word (asos)           -- asos = ArticleSelectOnSave
 tests/bulk_create/tests.py:111:45    - Unknown word (Fillory)    -- ProxyMultiCountry(name="Fillory", iso_two_letter="FL
 tests/bulk_create/tests.py:117:50    - Unknown word (Fillory)    -- ProxyMultiProxyCountry(name="Fillory", iso_two_letter="FL
 tests/bulk_create/tests.py:124:36    - Unknown word (Qwghlm)     -- ProxyCountry(name="Qwghlm", iso_two_letter="QW
@@ -4378,7 +4382,7 @@ tests/deprecation/test_deprecate_posargs.py:54:20     - Unknown word (posargs)  
 tests/deprecation/test_deprecate_posargs.py:76:56     - Unknown word (remappable) -- func(b=2, a=1), and remappable_names
 tests/deprecation/test_deprecate_posargs.py:78:20     - Unknown word (posargs)    -- @deprecate_posargs(RemovedAfterNextVersionWarnin
 tests/deprecation/test_deprecate_posargs.py:7:16      - Unknown word (Posargs)    -- class DeprecatePosargsTests(SimpleTestCase
-tests/deprecation/tests.py:202:14    - Unknown word (removedafternextversionwarning) -- def test_removedafternextversionwarning_pending(self):
+tests/deprecation/tests.py:203:14    - Unknown word (removedafternextversionwarning) -- def test_removedafternextversionwarning_pending(self):
 tests/dispatch/tests.py:132:21    - Unknown word (garbaged)      -- def test_cached_garbaged_collected(self):
 tests/dispatch/tests.py:141:9     - Unknown word (wref)          -- wref = weakref.ref(sender
 tests/dispatch/tests.py:147:31    - Unknown word (wref)          -- self.assertIsNone(wref())
@@ -4570,25 +4574,25 @@ tests/foreign_object/test_tuple_lookups.py:77:25     - Unknown word (cust)      
 tests/foreign_object/test_tuple_lookups.py:77:33     - Unknown word (cust)       -- cust_1, cust_2, cust_3, cust_4, cust_5 = (
 tests/foreign_object/test_tuple_lookups.py:77:41     - Unknown word (cust)       -- cust_2, cust_3, cust_4, cust_5 = (
 tests/foreign_object/test_tuple_lookups.py:77:9      - Unknown word (cust)       -- cust_1, cust_2, cust_3, cust
-tests/foreign_object/tests.py:250:23    - Unknown word (foreignobject) -- def test_prefetch_foreignobject_forward(self):
-tests/foreign_object/tests.py:267:23    - Unknown word (foreignobject) -- def test_prefetch_foreignobject_hidden_forward(self
-tests/foreign_object/tests.py:300:23    - Unknown word (foreignobject) -- def test_prefetch_foreignobject_null_hidden_forward
-tests/foreign_object/tests.py:301:9     - Unknown word (fiendship)     -- fiendship = Friendship.objects
-tests/foreign_object/tests.py:310:17    - Unknown word (fiendship)     -- fiendship,
-tests/foreign_object/tests.py:313:23    - Unknown word (foreignobject) -- def test_prefetch_foreignobject_reverse(self):
-tests/foreign_object/tests.py:467:43    - Unknown word (Otsikko)       -- , lang="fi", title="Otsikko", body="Diipadaapa"
-tests/foreign_object/tests.py:467:59    - Unknown word (Diipadaapa)    -- title="Otsikko", body="Diipadaapa"
-tests/foreign_object/tests.py:471:57    - Unknown word (Lalalalala)    -- title="Title", body="Lalalalala"
-tests/foreign_object/tests.py:479:44    - Unknown word (Otsikko)       -- translation__title="Otsikko"
-tests/foreign_object/tests.py:481:65    - Unknown word (Otsikko)       -- translation.title, "Otsikko")
-tests/foreign_object/tests.py:484:43    - Unknown word (Atsikko)       -- , lang="fi", title="Atsikko", body="Diipadaapa"
-tests/foreign_object/tests.py:484:59    - Unknown word (Diipadaapa)    -- title="Atsikko", body="Diipadaapa", abstract="dipad"
-tests/foreign_object/tests.py:484:82    - Unknown word (dipad)         -- Diipadaapa", abstract="dipad"
-tests/foreign_object/tests.py:489:59    - Unknown word (lalalalala)    -- title="A title", body="lalalalala", abstract="lala"
-tests/foreign_object/tests.py:529:31    - Unknown word (newsarticle)   -- "id, idea_things, newsarticle, pub_date, tag"
-tests/foreign_object/tests.py:543:31    - Unknown word (newsarticle)   -- "id, idea_things, newsarticle, pub_date, tag"
-tests/foreign_object/tests.py:738:23    - Unknown word (foreignobjectrel) -- def test_pickling_foreignobjectrel(self):
-tests/foreign_object/tests.py:753:23    - Unknown word (foreignobject)    -- def test_pickling_foreignobject(self):
+tests/foreign_object/tests.py:251:23    - Unknown word (foreignobject) -- def test_prefetch_foreignobject_forward(self):
+tests/foreign_object/tests.py:268:23    - Unknown word (foreignobject) -- def test_prefetch_foreignobject_hidden_forward(self
+tests/foreign_object/tests.py:301:23    - Unknown word (foreignobject) -- def test_prefetch_foreignobject_null_hidden_forward
+tests/foreign_object/tests.py:302:9     - Unknown word (fiendship)     -- fiendship = Friendship.objects
+tests/foreign_object/tests.py:311:17    - Unknown word (fiendship)     -- fiendship,
+tests/foreign_object/tests.py:314:23    - Unknown word (foreignobject) -- def test_prefetch_foreignobject_reverse(self):
+tests/foreign_object/tests.py:468:43    - Unknown word (Otsikko)       -- , lang="fi", title="Otsikko", body="Diipadaapa"
+tests/foreign_object/tests.py:468:59    - Unknown word (Diipadaapa)    -- title="Otsikko", body="Diipadaapa"
+tests/foreign_object/tests.py:472:57    - Unknown word (Lalalalala)    -- title="Title", body="Lalalalala"
+tests/foreign_object/tests.py:480:44    - Unknown word (Otsikko)       -- translation__title="Otsikko"
+tests/foreign_object/tests.py:482:65    - Unknown word (Otsikko)       -- translation.title, "Otsikko")
+tests/foreign_object/tests.py:485:43    - Unknown word (Atsikko)       -- , lang="fi", title="Atsikko", body="Diipadaapa"
+tests/foreign_object/tests.py:485:59    - Unknown word (Diipadaapa)    -- title="Atsikko", body="Diipadaapa", abstract="dipad"
+tests/foreign_object/tests.py:485:82    - Unknown word (dipad)         -- Diipadaapa", abstract="dipad"
+tests/foreign_object/tests.py:490:59    - Unknown word (lalalalala)    -- title="A title", body="lalalalala", abstract="lala"
+tests/foreign_object/tests.py:530:31    - Unknown word (newsarticle)   -- "id, idea_things, newsarticle, pub_date, tag"
+tests/foreign_object/tests.py:544:31    - Unknown word (newsarticle)   -- "id, idea_things, newsarticle, pub_date, tag"
+tests/foreign_object/tests.py:739:23    - Unknown word (foreignobjectrel) -- def test_pickling_foreignobjectrel(self):
+tests/foreign_object/tests.py:754:23    - Unknown word (foreignobject)    -- def test_pickling_foreignobject(self):
 tests/forms_tests/field_tests/test_base.py:23:20     - Unknown word (deepcopies) -- def test_field_deepcopies_widget_instance(self
 tests/forms_tests/field_tests/test_datefield.py:131:12    - Unknown word (Geef)       -- # 'Geef een geldige datum op
 tests/forms_tests/field_tests/test_datefield.py:131:21    - Unknown word (geldige)    -- # 'Geef een geldige datum op.' = 'Enter
@@ -4820,6 +4824,7 @@ tests/generic_relations_regress/tests.py:72:9      - Unknown word (oddrel)     -
 tests/generic_relations_regress/tests.py:73:48     - Unknown word (oddrel)     -- create(content_object=oddrel)
 tests/generic_relations_regress/tests.py:83:14     - Unknown word (textlink)   -- def test_textlink_filter(self):
 tests/generic_relations_regress/tests.py:87:41     - Unknown word (tlinks)     -- OddRelation2.objects.filter(tlinks__value="value"), [oddrel
+tests/generic_views/test_base.py:590:28    - Unknown word (querry)     -- def test_redirect_with_querry_string_in_destination
 tests/generic_views/test_dates.py:194:45    - Unknown word (sortedbynamedec) -- client.get("/dates/books/sortedbynamedec/")
 tests/generic_views/test_dates.py:255:31    - Unknown word (Testement)       -- name="The New New Testement", pages=600, pubdate
 tests/generic_views/test_dates.py:26:27     - Unknown word (Bolaño)     -- name="Roberto Bolaño", slug="roberto-bolano
@@ -5331,17 +5336,17 @@ tests/gis_tests/gis_migrations/test_operations.py:254:64    - Unknown word (rast
 tests/gis_tests/gis_migrations/test_operations.py:67:31     - Unknown word (rast)       -- test_fields += [("rast", fields.RasterField
 tests/gis_tests/gis_migrations/test_operations.py:87:25     - Unknown word (convexhull) -- "st_convexhull(%s)" % column in c[
 tests/gis_tests/inspectapp/models.py:18:5      - Unknown word (pointg)     -- pointg = models.PointField
-tests/gis_tests/inspectapp/tests.py:121:23    - Unknown word (shapefiles)   -- # Writing shapefiles via GDAL currently does
-tests/gis_tests/inspectapp/tests.py:146:15    - Unknown word (Spatia)       -- # SpatiaLite introspection is
-tests/gis_tests/inspectapp/tests.py:220:41    - Unknown word (spatialite)   -- contrib.gis.db.backends.spatialite": ("SQLite", "%(db_name
-tests/gis_tests/inspectapp/tests.py:235:14    - Unknown word (Spatia)       -- # SQLite/SpatiaLite in-memory databases
-tests/gis_tests/inspectapp/tests.py:24:49     - Unknown word (inspectapp) -- filter=lambda tn: tn == "inspectapp_allogrfields",
-tests/gis_tests/inspectapp/tests.py:24:60     - Unknown word (allogrfields) -- tn: tn == "inspectapp_allogrfields",
-tests/gis_tests/inspectapp/tests.py:40:49     - Unknown word (inspectapp)   -- filter=lambda tn: tn == "inspectapp_fields3d",
-tests/gis_tests/inspectapp/tests.py:48:22     - Unknown word (pointg)       -- "pointg = models.PointField
-tests/gis_tests/inspectapp/tests.py:51:32     - Unknown word (pointg)       -- self.assertIn("pointg = models.PointField
-tests/gis_tests/inspectapp/tests.py:56:28     - Unknown word (pointg)       -- self.assertIn("pointg = models.GeometryField
-tests/gis_tests/inspectapp/tests.py:90:62     - Unknown word (leitung)      -- DATA, "gas_lines", "gas_leitung.shp")
+tests/gis_tests/inspectapp/tests.py:122:23    - Unknown word (shapefiles)   -- # Writing shapefiles via GDAL currently does
+tests/gis_tests/inspectapp/tests.py:147:15    - Unknown word (Spatia)       -- # SpatiaLite introspection is
+tests/gis_tests/inspectapp/tests.py:221:41    - Unknown word (spatialite)   -- contrib.gis.db.backends.spatialite": ("SQLite", "%(db_name
+tests/gis_tests/inspectapp/tests.py:236:14    - Unknown word (Spatia)       -- # SQLite/SpatiaLite in-memory databases
+tests/gis_tests/inspectapp/tests.py:25:49     - Unknown word (inspectapp) -- filter=lambda tn: tn == "inspectapp_allogrfields",
+tests/gis_tests/inspectapp/tests.py:25:60     - Unknown word (allogrfields) -- tn: tn == "inspectapp_allogrfields",
+tests/gis_tests/inspectapp/tests.py:41:49     - Unknown word (inspectapp)   -- filter=lambda tn: tn == "inspectapp_fields3d",
+tests/gis_tests/inspectapp/tests.py:49:22     - Unknown word (pointg)       -- "pointg = models.PointField
+tests/gis_tests/inspectapp/tests.py:52:32     - Unknown word (pointg)       -- self.assertIn("pointg = models.PointField
+tests/gis_tests/inspectapp/tests.py:57:28     - Unknown word (pointg)       -- self.assertIn("pointg = models.GeometryField
+tests/gis_tests/inspectapp/tests.py:91:62     - Unknown word (leitung)      -- DATA, "gas_lines", "gas_leitung.shp")
 tests/gis_tests/layermap/models.py:101:1     - Unknown word (cofeat)     -- cofeat_mapping = {
 tests/gis_tests/layermap/tests.py:182:36    - Unknown word (mpolygon)    -- ValueError, ("name", "mpolygon")),
 tests/gis_tests/layermap/tests.py:198:34    - Unknown word (nombre)      -- fk_map2["state"] = {"nombre": "State"}
@@ -5802,57 +5807,57 @@ tests/logging_tests/tests.py:846:15    - Unknown word (Привет)        -- (
 tests/logging_tests/tests.py:849:28    - Unknown word (mred)          -- ("escape\x1b[31mred\x1b[0m", "escape\\x
 tests/logging_tests/tests.py:849:57    - Unknown word (mred)          -- 0m", "escape\\x1b[31mred\\x1b[0m"),
 tests/logging_tests/tests.py:879:21    - Unknown word (levelno)       -- levelno=logging.ERROR,
-tests/lookup/tests.py:1001:22   - Unknown word (foobarbaz)  -- "foobarbaz",
-tests/lookup/tests.py:1002:22   - Unknown word (foobaz)     -- "foobaz",
-tests/lookup/tests.py:1009:61   - Unknown word (foobarbaz)  -- headline__in=["foobar", "foobarbaz", "foobaz"]),
-tests/lookup/tests.py:1009:74   - Unknown word (foobaz)     -- foobar", "foobarbaz", "foobaz"]),
-tests/lookup/tests.py:1017:22   - Unknown word (barfoobaz)  -- "barfoobaz",
-tests/lookup/tests.py:1019:22   - Unknown word (bazba)      -- "bazbaRFOO",
-tests/lookup/tests.py:1019:27   - Unknown word (RFOO)       -- "bazbaRFOO",
-tests/lookup/tests.py:1020:22   - Unknown word (foobarbaz)  -- "foobarbaz",
-tests/lookup/tests.py:1021:22   - Unknown word (foobaz)     -- "foobaz",
-tests/lookup/tests.py:1030:22   - Unknown word (barfoobaz)  -- "barfoobaz",
-tests/lookup/tests.py:1031:22   - Unknown word (bazba)      -- "bazbaRFOO",
-tests/lookup/tests.py:1031:27   - Unknown word (RFOO)       -- "bazbaRFOO",
-tests/lookup/tests.py:1048:49   - Unknown word (zoocarfaz)  -- date=now, headline="zoocarfaz"),
-tests/lookup/tests.py:1050:49   - Unknown word (bazba)      -- date=now, headline="bazbaRFOO"),
-tests/lookup/tests.py:1050:54   - Unknown word (RFOO)       -- now, headline="bazbaRFOO"),
-tests/lookup/tests.py:1057:28   - Unknown word (bazba)      -- ["barfoobaz", "bazbaRFOO", "foobarbaz"],
-tests/lookup/tests.py:1057:33   - Unknown word (RFOO)       -- ["barfoobaz", "bazbaRFOO", "foobarbaz"],
-tests/lookup/tests.py:1118:48   - Unknown word (Astros)     -- create(home="Houston Astros", away="St. Louis Cardinals
-tests/lookup/tests.py:1120:48   - Unknown word (Astros)     -- create(home="Houston Astros", away="Chicago Cubs
-tests/lookup/tests.py:1121:48   - Unknown word (Astros)     -- create(home="Houston Astros", away="Milwaukee Brewers
-tests/lookup/tests.py:1122:48   - Unknown word (Astros)     -- create(home="Houston Astros", away="St. Louis Cardinals
-tests/lookup/tests.py:1124:48   - Unknown word (Astros)     -- create(home="Houston Astros", away="St. Louis Cardinals
-tests/lookup/tests.py:1128:9    - Unknown word (pudge)      -- pudge = Player.objects.create
-tests/lookup/tests.py:1129:9    - Unknown word (pudge)      -- pudge.games.set(Game.objects
-tests/lookup/tests.py:1130:15   - Unknown word (feliz)      -- pedro_feliz = Player.objects.create
-tests/lookup/tests.py:1130:57   - Unknown word (Feliz)      -- objects.create(name="Pedro Feliz")
-tests/lookup/tests.py:1131:15   - Unknown word (feliz)      -- pedro_feliz.games.set(Game.objects
-tests/lookup/tests.py:1300:61   - Unknown word (Johx)       -- John Smith", alias="Johx")
-tests/lookup/tests.py:1301:65   - Unknown word (sonx)       -- Rhonda Simpson", alias="sonx")
+tests/lookup/tests.py:1024:49   - Unknown word (foobaz)     -- date=now, headline="foobaz"),
+tests/lookup/tests.py:1026:49   - Unknown word (foobarbaz)  -- date=now, headline="foobarbaz"),
+tests/lookup/tests.py:1027:49   - Unknown word (zoocarfaz)  -- date=now, headline="zoocarfaz"),
+tests/lookup/tests.py:1028:49   - Unknown word (barfoobaz)  -- date=now, headline="barfoobaz"),
+tests/lookup/tests.py:1029:49   - Unknown word (bazba)      -- date=now, headline="bazbaRFOO"),
+tests/lookup/tests.py:1029:54   - Unknown word (RFOO)       -- now, headline="bazbaRFOO"),
+tests/lookup/tests.py:1038:22   - Unknown word (barfoobaz)  -- "barfoobaz",
+tests/lookup/tests.py:1040:22   - Unknown word (foobarbaz)  -- "foobarbaz",
+tests/lookup/tests.py:1041:22   - Unknown word (foobaz)     -- "foobaz",
+tests/lookup/tests.py:1049:22   - Unknown word (barfoobaz)  -- "barfoobaz",
+tests/lookup/tests.py:1051:22   - Unknown word (foobarbaz)  -- "foobarbaz",
+tests/lookup/tests.py:1052:22   - Unknown word (foobaz)     -- "foobaz",
+tests/lookup/tests.py:1059:61   - Unknown word (foobarbaz)  -- headline__in=["foobar", "foobarbaz", "foobaz"]),
+tests/lookup/tests.py:1059:74   - Unknown word (foobaz)     -- foobar", "foobarbaz", "foobaz"]),
+tests/lookup/tests.py:1067:22   - Unknown word (barfoobaz)  -- "barfoobaz",
+tests/lookup/tests.py:1069:22   - Unknown word (bazba)      -- "bazbaRFOO",
+tests/lookup/tests.py:1069:27   - Unknown word (RFOO)       -- "bazbaRFOO",
+tests/lookup/tests.py:1070:22   - Unknown word (foobarbaz)  -- "foobarbaz",
+tests/lookup/tests.py:1071:22   - Unknown word (foobaz)     -- "foobaz",
+tests/lookup/tests.py:1080:22   - Unknown word (barfoobaz)  -- "barfoobaz",
+tests/lookup/tests.py:1081:22   - Unknown word (bazba)      -- "bazbaRFOO",
+tests/lookup/tests.py:1081:27   - Unknown word (RFOO)       -- "bazbaRFOO",
+tests/lookup/tests.py:1098:49   - Unknown word (zoocarfaz)  -- date=now, headline="zoocarfaz"),
+tests/lookup/tests.py:1100:49   - Unknown word (bazba)      -- date=now, headline="bazbaRFOO"),
+tests/lookup/tests.py:1100:54   - Unknown word (RFOO)       -- now, headline="bazbaRFOO"),
+tests/lookup/tests.py:1107:28   - Unknown word (bazba)      -- ["barfoobaz", "bazbaRFOO", "foobarbaz"],
+tests/lookup/tests.py:1107:33   - Unknown word (RFOO)       -- ["barfoobaz", "bazbaRFOO", "foobarbaz"],
+tests/lookup/tests.py:1168:48   - Unknown word (Astros)     -- create(home="Houston Astros", away="St. Louis Cardinals
+tests/lookup/tests.py:1170:48   - Unknown word (Astros)     -- create(home="Houston Astros", away="Chicago Cubs
+tests/lookup/tests.py:1171:48   - Unknown word (Astros)     -- create(home="Houston Astros", away="Milwaukee Brewers
+tests/lookup/tests.py:1172:48   - Unknown word (Astros)     -- create(home="Houston Astros", away="St. Louis Cardinals
+tests/lookup/tests.py:1174:48   - Unknown word (Astros)     -- create(home="Houston Astros", away="St. Louis Cardinals
+tests/lookup/tests.py:1178:9    - Unknown word (pudge)      -- pudge = Player.objects.create
+tests/lookup/tests.py:1179:9    - Unknown word (pudge)      -- pudge.games.set(Game.objects
+tests/lookup/tests.py:1180:15   - Unknown word (feliz)      -- pedro_feliz = Player.objects.create
+tests/lookup/tests.py:1180:57   - Unknown word (Feliz)      -- objects.create(name="Pedro Feliz")
+tests/lookup/tests.py:1181:15   - Unknown word (feliz)      -- pedro_feliz.games.set(Game.objects
+tests/lookup/tests.py:1350:61   - Unknown word (Johx)       -- John Smith", alias="Johx")
+tests/lookup/tests.py:1351:65   - Unknown word (sonx)       -- Rhonda Simpson", alias="sonx")
 tests/lookup/tests.py:290:38    - Unknown word (constaint)  -- bulk_non_unique_meta_constaint(self):
-tests/lookup/tests.py:854:34    - Unknown word (lengtp)     -- Unsupported lookup 'lengtp' for SlugField or join
-tests/lookup/tests.py:859:46    - Unknown word (lengtp)     -- objects.filter(slug__lengtp=20)
-tests/lookup/tests.py:886:34    - Unknown word (abspl)      -- Unsupported lookup 'abspl' for ManyToOneRel or
-tests/lookup/tests.py:887:43    - Unknown word (abspk)      -- permitted, perhaps you meant abspk?"
-tests/lookup/tests.py:891:62    - Unknown word (abspk)      -- field, Abs, lookup_name="abspk"):
-tests/lookup/tests.py:892:48    - Unknown word (abspl)      -- objects.filter(article__abspl=2)
-tests/lookup/tests.py:911:49    - Unknown word (fooo)       -- date=now, headline="fooo"),
-tests/lookup/tests.py:922:69    - Unknown word (fooo)       -- ["f", "fo", "foo", "fooo"]),
-tests/lookup/tests.py:926:69    - Unknown word (fooo)       -- ["f", "fo", "foo", "fooo", "hey-Foo"]),
-tests/lookup/tests.py:931:64    - Unknown word (fooo)       -- headline__in=["fo", "foo", "fooo"]),
-tests/lookup/tests.py:935:54    - Unknown word (fooo)       -- filter(headline__regex=r"fooo?"),
-tests/lookup/tests.py:974:49    - Unknown word (foobaz)     -- date=now, headline="foobaz"),
-tests/lookup/tests.py:976:49    - Unknown word (foobarbaz)  -- date=now, headline="foobarbaz"),
-tests/lookup/tests.py:977:49    - Unknown word (zoocarfaz)  -- date=now, headline="zoocarfaz"),
-tests/lookup/tests.py:978:49    - Unknown word (barfoobaz)  -- date=now, headline="barfoobaz"),
-tests/lookup/tests.py:979:49    - Unknown word (bazba)      -- date=now, headline="bazbaRFOO"),
-tests/lookup/tests.py:979:54    - Unknown word (RFOO)       -- now, headline="bazbaRFOO"),
-tests/lookup/tests.py:988:22    - Unknown word (barfoobaz)  -- "barfoobaz",
-tests/lookup/tests.py:990:22    - Unknown word (foobarbaz)  -- "foobarbaz",
-tests/lookup/tests.py:991:22    - Unknown word (foobaz)     -- "foobaz",
-tests/lookup/tests.py:999:22    - Unknown word (barfoobaz)  -- "barfoobaz",
+tests/lookup/tests.py:904:34    - Unknown word (lengtp)     -- Unsupported lookup 'lengtp' for SlugField or join
+tests/lookup/tests.py:909:46    - Unknown word (lengtp)     -- objects.filter(slug__lengtp=20)
+tests/lookup/tests.py:936:34    - Unknown word (abspl)      -- Unsupported lookup 'abspl' for ManyToOneRel or
+tests/lookup/tests.py:937:43    - Unknown word (abspk)      -- permitted, perhaps you meant abspk?"
+tests/lookup/tests.py:941:62    - Unknown word (abspk)      -- field, Abs, lookup_name="abspk"):
+tests/lookup/tests.py:942:48    - Unknown word (abspl)      -- objects.filter(article__abspl=2)
+tests/lookup/tests.py:961:49    - Unknown word (fooo)       -- date=now, headline="fooo"),
+tests/lookup/tests.py:972:69    - Unknown word (fooo)       -- ["f", "fo", "foo", "fooo"]),
+tests/lookup/tests.py:976:69    - Unknown word (fooo)       -- ["f", "fo", "foo", "fooo", "hey-Foo"]),
+tests/lookup/tests.py:981:64    - Unknown word (fooo)       -- headline__in=["fo", "foo", "fooo"]),
+tests/lookup/tests.py:985:54    - Unknown word (fooo)       -- filter(headline__regex=r"fooo?"),
 tests/m2m_regress/tests.py:122:44    - Unknown word (doesnt)                -- invalid_data_to_m2m_doesnt_clear_existing_relations
 tests/m2m_regress/tests.py:46:58     - Unknown word (selfreferchild) -- references, related, selfreferchild, "
 tests/m2m_regress/tests.py:47:14     - Unknown word (selfreferchildsibling) -- "selfreferchildsibling"
@@ -6865,26 +6870,26 @@ tests/postgres_tests/array_default_migrations/0002_integerarraymodel_field_2.py:
 tests/postgres_tests/migrations/0001_setup_extensions.py:35:31     - Unknown word (ossp)       -- CreateExtension("uuid-ossp"),
 tests/postgres_tests/migrations/0002_create_test_models.py:455:19    - Unknown word (bigints)    -- ("bigints", BigIntegerRangeField
 tests/postgres_tests/models.py:138:5     - Unknown word (bigints)    -- bigints = BigIntegerRangeField
-tests/postgres_tests/test_aggregates.py:294:9     - Unknown word (aggr)       -- aggr1 = AggregateTestModel
-tests/postgres_tests/test_aggregates.py:295:9     - Unknown word (aggr)       -- aggr2 = AggregateTestModel
-tests/postgres_tests/test_aggregates.py:296:52    - Unknown word (aggr)       -- create(related_field=aggr1, int1=1, int2=0)
-tests/postgres_tests/test_aggregates.py:297:52    - Unknown word (aggr)       -- create(related_field=aggr1, int1=2, int2=0)
-tests/postgres_tests/test_aggregates.py:298:52    - Unknown word (aggr)       -- create(related_field=aggr2, int1=3, int2=0)
-tests/postgres_tests/test_aggregates.py:322:33    - Unknown word (stattestmodel) -- array=ArrayAgg("stattestmodel__int1", filter=Q(stattestmode
-tests/postgres_tests/test_aggregates.py:322:64    - Unknown word (stattestmodel) -- tattestmodel__int1", filter=Q(stattestmodel__int2=0))
-tests/postgres_tests/test_aggregates.py:344:33    - Unknown word (stattestmodel) -- array=ArrayAgg("stattestmodel__int1", filter=Q(stattestmode
-tests/postgres_tests/test_aggregates.py:344:64    - Unknown word (stattestmodel) -- tattestmodel__int1", filter=Q(stattestmodel__int2=0))
-tests/postgres_tests/test_aggregates.py:357:30    - Unknown word (stattestmodel) -- "stattestmodel__int1",
-tests/postgres_tests/test_aggregates.py:542:22    - Unknown word (hotelreservation) -- "hotelreservation__requirements",
-tests/postgres_tests/test_aggregates.py:543:32    - Unknown word (hotelreservation) -- order_by="-hotelreservation__start",
-tests/postgres_tests/test_aggregates.py:58:13     - Unknown word (aggs)       -- cls.aggs = AggregateTestModel
-tests/postgres_tests/test_aggregates.py:596:50    - Unknown word (aggs)             -- tTestModel(related_field=self.aggs[0], int1=0, int2=5)
-tests/postgres_tests/test_aggregates.py:597:50    - Unknown word (aggs)             -- tTestModel(related_field=self.aggs[0], int1=1, int2=4)
-tests/postgres_tests/test_aggregates.py:598:50    - Unknown word (aggs)             -- tTestModel(related_field=self.aggs[0], int1=2, int2=3)
-tests/postgres_tests/test_aggregates.py:627:23    - Unknown word (isnt)             -- def test_ordering_isnt_cleared_for_array_subquery
-tests/postgres_tests/test_aggregates.py:844:19    - Unknown word (avgx)             -- def test_regr_avgx_general(self):
-tests/postgres_tests/test_aggregates.py:848:19    - Unknown word (avgy)             -- def test_regr_avgy_general(self):
-tests/postgres_tests/test_aggregates.py:891:19    - Unknown word (avgx)             -- def test_regr_avgx_with_related_obj_and
+tests/postgres_tests/test_aggregates.py:252:9     - Unknown word (aggr)       -- aggr1 = AggregateTestModel
+tests/postgres_tests/test_aggregates.py:253:9     - Unknown word (aggr)       -- aggr2 = AggregateTestModel
+tests/postgres_tests/test_aggregates.py:254:52    - Unknown word (aggr)       -- create(related_field=aggr1, int1=1, int2=0)
+tests/postgres_tests/test_aggregates.py:255:52    - Unknown word (aggr)       -- create(related_field=aggr1, int1=2, int2=0)
+tests/postgres_tests/test_aggregates.py:256:52    - Unknown word (aggr)       -- create(related_field=aggr2, int1=3, int2=0)
+tests/postgres_tests/test_aggregates.py:280:33    - Unknown word (stattestmodel) -- array=ArrayAgg("stattestmodel__int1", filter=Q(stattestmode
+tests/postgres_tests/test_aggregates.py:280:64    - Unknown word (stattestmodel) -- tattestmodel__int1", filter=Q(stattestmodel__int2=0))
+tests/postgres_tests/test_aggregates.py:302:33    - Unknown word (stattestmodel) -- array=ArrayAgg("stattestmodel__int1", filter=Q(stattestmode
+tests/postgres_tests/test_aggregates.py:302:64    - Unknown word (stattestmodel) -- tattestmodel__int1", filter=Q(stattestmodel__int2=0))
+tests/postgres_tests/test_aggregates.py:315:30    - Unknown word (stattestmodel) -- "stattestmodel__int1",
+tests/postgres_tests/test_aggregates.py:500:22    - Unknown word (hotelreservation) -- "hotelreservation__requirements",
+tests/postgres_tests/test_aggregates.py:501:32    - Unknown word (hotelreservation) -- order_by="-hotelreservation__start",
+tests/postgres_tests/test_aggregates.py:554:50    - Unknown word (aggs)             -- tTestModel(related_field=self.aggs[0], int1=0, int2=5)
+tests/postgres_tests/test_aggregates.py:555:50    - Unknown word (aggs)             -- tTestModel(related_field=self.aggs[0], int1=1, int2=4)
+tests/postgres_tests/test_aggregates.py:556:50    - Unknown word (aggs)             -- tTestModel(related_field=self.aggs[0], int1=2, int2=3)
+tests/postgres_tests/test_aggregates.py:56:13     - Unknown word (aggs)       -- cls.aggs = AggregateTestModel
+tests/postgres_tests/test_aggregates.py:585:23    - Unknown word (isnt)             -- def test_ordering_isnt_cleared_for_array_subquery
+tests/postgres_tests/test_aggregates.py:802:19    - Unknown word (avgx)             -- def test_regr_avgx_general(self):
+tests/postgres_tests/test_aggregates.py:806:19    - Unknown word (avgy)             -- def test_regr_avgy_general(self):
+tests/postgres_tests/test_aggregates.py:849:19    - Unknown word (avgx)             -- def test_regr_avgx_with_related_obj_and
 tests/postgres_tests/test_app_installed_check.py:30:32     - Unknown word (klass)      -- make_error(self, obj, klass_name):
 tests/postgres_tests/test_app_installed_check.py:34:20     - Unknown word (klass)      -- f"use {klass_name}.",
 tests/postgres_tests/test_apps.py:17:60     - Unknown word (oids)       -- signals import get_hstore_oids
@@ -6966,25 +6971,35 @@ tests/postgres_tests/test_ranges.py:457:14    - Unknown word (biginteger) -- def
 tests/postgres_tests/test_ranges.py:556:11    - Unknown word (bigints)    -- '"bigints": null, "timestamps
 tests/postgres_tests/test_ranges.py:564:35    - Unknown word (rangesmodel) -- model": "postgres_tests.rangesmodel", "pk": null}]'
 tests/postgres_tests/test_ranges.py:598:36    - Unknown word (bigints)     -- assertIsNone(instance.bigints)
-tests/postgres_tests/test_search.py:100:35    - Unknown word (cadeau)     -- dialogue="Oh. Un beau cadeau. Oui oui.",
-tests/postgres_tests/test_search.py:154:49    - Unknown word (cadeaux)    -- vector=SearchQuery("cadeaux", config="french")
-tests/postgres_tests/test_search.py:160:21    - Unknown word (cadeaux)    -- search="cadeaux"
-tests/postgres_tests/test_search.py:212:26    - Unknown word (minstrelbravely) -- ).filter(search="minstrelbravely")
-tests/postgres_tests/test_search.py:245:33    - Unknown word (cadeau)          -- search=SearchQuery("cadeau beau un", search_type
-tests/postgres_tests/test_search.py:249:41    - Unknown word (cadeau)          -- SearchQuery("un beau cadeau", search_type="phrase
-tests/postgres_tests/test_search.py:268:19    - Unknown word (cadeaux)         -- "'cadeaux' & 'beaux'", search
-tests/postgres_tests/test_search.py:303:18    - Unknown word (cadeau)          -- "cadeau -beau", search_type
-tests/postgres_tests/test_search.py:308:38    - Unknown word (cadeau)          -- search=SearchQuery("beau cadeau", search_type="websearch
-tests/postgres_tests/test_search.py:321:38    - Unknown word (cadeaux)         -- search=SearchQuery("cadeaux", config="french"))
-tests/postgres_tests/test_search.py:327:26    - Unknown word (cadeaux)         -- ).filter(search="cadeaux")
-tests/postgres_tests/test_search.py:64:43     - Unknown word (Bedemir's)  -- Scene 5", setting="Sir Bedemir's Castle"
-tests/postgres_tests/test_search.py:66:50     - Unknown word (Bedemir)    -- objects.create(name="Bedemir")
-tests/postgres_tests/test_search.py:66:9      - Unknown word (bedemir)    -- bedemir = Character.objects
-tests/postgres_tests/test_search.py:71:13     - Unknown word (bedemir)    -- cls.bedemir0 = Line.objects.create
-tests/postgres_tests/test_search.py:73:23     - Unknown word (bedemir)    -- character=bedemir,
-tests/postgres_tests/test_search.py:77:13     - Unknown word (bedemir)    -- cls.bedemir1 = Line.objects.create
-tests/postgres_tests/test_search.py:79:23     - Unknown word (bedemir)    -- character=bedemir,
-tests/postgres_tests/test_search.py:94:79     - Unknown word (Ramper)     -- Master Ruiz' de lu la Ramper"
+tests/postgres_tests/test_search.py:103:35    - Unknown word (cadeau)     -- dialogue="Oh. Un beau cadeau. Oui oui.",
+tests/postgres_tests/test_search.py:157:49    - Unknown word (cadeaux)    -- vector=SearchQuery("cadeaux", config="french")
+tests/postgres_tests/test_search.py:163:21    - Unknown word (cadeaux)    -- search="cadeaux"
+tests/postgres_tests/test_search.py:215:26    - Unknown word (minstrelbravely) -- ).filter(search="minstrelbravely")
+tests/postgres_tests/test_search.py:248:33    - Unknown word (cadeau)          -- search=SearchQuery("cadeau beau un", search_type
+tests/postgres_tests/test_search.py:252:41    - Unknown word (cadeau)          -- SearchQuery("un beau cadeau", search_type="phrase
+tests/postgres_tests/test_search.py:271:19    - Unknown word (cadeaux)         -- "'cadeaux' & 'beaux'", search
+tests/postgres_tests/test_search.py:306:18    - Unknown word (cadeau)          -- "cadeau -beau", search_type
+tests/postgres_tests/test_search.py:311:38    - Unknown word (cadeau)          -- search=SearchQuery("beau cadeau", search_type="websearch
+tests/postgres_tests/test_search.py:324:38    - Unknown word (cadeaux)         -- search=SearchQuery("cadeaux", config="french"))
+tests/postgres_tests/test_search.py:330:26    - Unknown word (cadeaux)         -- ).filter(search="cadeaux")
+tests/postgres_tests/test_search.py:67:43     - Unknown word (Bedemir's)  -- Scene 5", setting="Sir Bedemir's Castle"
+tests/postgres_tests/test_search.py:69:50     - Unknown word (Bedemir)    -- objects.create(name="Bedemir")
+tests/postgres_tests/test_search.py:69:9      - Unknown word (bedemir)    -- bedemir = Character.objects
+tests/postgres_tests/test_search.py:74:13     - Unknown word (bedemir)    -- cls.bedemir0 = Line.objects.create
+tests/postgres_tests/test_search.py:76:23     - Unknown word (bedemir)    -- character=bedemir,
+tests/postgres_tests/test_search.py:80:13     - Unknown word (bedemir)    -- cls.bedemir1 = Line.objects.create
+tests/postgres_tests/test_search.py:82:23     - Unknown word (bedemir)    -- character=bedemir,
+tests/postgres_tests/test_search.py:874:23    - Unknown word (piqué)           -- ("L'amour piqué par une abeille", "
+tests/postgres_tests/test_search.py:874:37    - Unknown word (abeille)         -- amour piqué par une abeille", "'L amour piqué par
+tests/postgres_tests/test_search.py:874:57    - Unknown word (piqué)           -- abeille", "'L amour piqué par une abeille'"),
+tests/postgres_tests/test_search.py:874:71    - Unknown word (abeille)         -- amour piqué par une abeille'"),
+tests/postgres_tests/test_search.py:881:15    - Unknown word (ampers)          -- ("ampers&nd", "'ampers nd'")
+tests/postgres_tests/test_search.py:881:29    - Unknown word (ampers)          -- ("ampers&nd", "'ampers nd'"),
+tests/postgres_tests/test_search.py:897:45    - Unknown word (Robi)            -- SearchQuery(Lexeme("Robi", prefix=True, invert
+tests/postgres_tests/test_search.py:916:25    - Unknown word (Robi)            -- Lexeme("Robi", prefix=True) & Lexeme
+tests/postgres_tests/test_search.py:927:58    - Unknown word (afrai)           -- prefix=True) | Lexeme("afrai", prefix=True)
+tests/postgres_tests/test_search.py:972:34    - Unknown word (Drandom)         -- invalid_weights = ["E", "Drandom", "AB", "C ", 0, ""
+tests/postgres_tests/test_search.py:97:79     - Unknown word (Ramper)     -- Master Ruiz' de lu la Ramper"
 tests/postgres_tests/test_signals.py:16:26     - Unknown word (oids)       -- def assertOIDs(self, oids):
 tests/postgres_tests/test_signals.py:17:31     - Unknown word (oids)       -- self.assertIsInstance(oids, tuple)
 tests/postgres_tests/test_signals.py:18:32     - Unknown word (oids)       -- self.assertGreater(len(oids), 0)
@@ -6994,8 +7009,8 @@ tests/postgres_tests/test_trigram.py:42:20     - Unknown word (Gumby)      -- fi
 tests/postgres_tests/test_trigram.py:45:68     - Unknown word (Middlesborough) -- trigram_word_similar="Middlesborough"),
 tests/postgres_tests/test_trigram.py:55:20     - Unknown word (Gumby)          -- field="Gumby rides on the path of
 tests/postgres_tests/test_trigram.py:59:53     - Unknown word (Middlesborough) -- strict_word_similar="Middlesborough"
-tests/prefetch_related/test_prefetch_related_objects.py:156:54    - Unknown word (Wuthering)  -- , # Emily - Poems, Wuthering Heights
-tests/prefetch_related/test_prefetch_related_objects.py:17:48     - Unknown word (Wuthering)  -- objects.create(title="Wuthering Heights")
+tests/prefetch_related/test_prefetch_related_objects.py:158:54    - Unknown word (Wuthering)  -- , # Emily - Poems, Wuthering Heights
+tests/prefetch_related/test_prefetch_related_objects.py:19:48     - Unknown word (Wuthering)  -- objects.create(title="Wuthering Heights")
 tests/prefetch_related/test_uuid.py:14:68     - Unknown word (Fifi)       -- "people").get(name="Fifi")
 tests/prefetch_related/test_uuid.py:31:34     - Unknown word (Fifi)       -- objects.create(name="Fifi").fleas_hosted.add(
 tests/prefetch_related/test_uuid.py:32:34     - Unknown word (Bobo)       -- objects.create(name="Bobo").fleas_hosted.add(
@@ -7290,18 +7305,18 @@ tests/responses/test_fileresponse.py:276:36    - Unknown word (opendocument) -- 
 tests/responses/tests.py:164:19    - Unknown word (textiowrapper) -- def test_wrap_textiowrapper(self):
 tests/responses/tests.py:32:38     - Unknown word (qwer)       -- writelines(["asdf\n", "qwer\n"])
 tests/responses/tests.py:94:34     - Unknown word (J'attendrai) -- HttpResponse(status="J'attendrai")
-tests/runtests.py:323:25    - Unknown word (DJANGOS)    -- os.environ["RUNNING_DJANGOS_TEST_SUITE"] = "true
-tests/runtests.py:331:40    - Unknown word (finalizer)  -- multiprocessing.util finalizer that tries to remove
-tests/runtests.py:335:39    - Unknown word (finalizer)  -- multiprocessing.util import _finalizer_registry
-tests/runtests.py:337:6     - Unknown word (finalizer)  -- _finalizer_registry.pop((-100,
-tests/runtests.py:338:29    - Unknown word (DJANGOS)    -- os.environ["RUNNING_DJANGOS_TEST_SUITE"]
-tests/runtests.py:366:5     - Unknown word (keepdb)     -- keepdb,
-tests/runtests.py:415:16    - Unknown word (keepdb)     -- keepdb=keepdb,
-tests/runtests.py:415:9     - Unknown word (keepdb)     -- keepdb=keepdb,
-tests/runtests.py:566:12    - Unknown word (keepdb)     -- "--keepdb",
-tests/runtests.py:624:24    - Unknown word (gethostname) -- default=socket.gethostname(),
-tests/runtests.py:794:25    - Unknown word (keepdb)      -- options.keepdb,
-tests/runtests.py:79:69     - Unknown word (coveragerc) -- join(RUNTESTS_DIR, ".coveragerc")
+tests/runtests.py:319:25    - Unknown word (DJANGOS)    -- os.environ["RUNNING_DJANGOS_TEST_SUITE"] = "true
+tests/runtests.py:327:40    - Unknown word (finalizer)  -- multiprocessing.util finalizer that tries to remove
+tests/runtests.py:331:39    - Unknown word (finalizer)  -- multiprocessing.util import _finalizer_registry
+tests/runtests.py:333:6     - Unknown word (finalizer)  -- _finalizer_registry.pop((-100,
+tests/runtests.py:334:29    - Unknown word (DJANGOS)    -- os.environ["RUNNING_DJANGOS_TEST_SUITE"]
+tests/runtests.py:362:5     - Unknown word (keepdb)     -- keepdb,
+tests/runtests.py:411:16    - Unknown word (keepdb)     -- keepdb=keepdb,
+tests/runtests.py:411:9     - Unknown word (keepdb)     -- keepdb=keepdb,
+tests/runtests.py:562:12    - Unknown word (keepdb)     -- "--keepdb",
+tests/runtests.py:620:24    - Unknown word (gethostname) -- default=socket.gethostname(),
+tests/runtests.py:75:69     - Unknown word (coveragerc) -- join(RUNTESTS_DIR, ".coveragerc")
+tests/runtests.py:790:25    - Unknown word (keepdb)      -- options.keepdb,
 tests/schema/fields.py:107:17    - Unknown word (MEDIUMBLOB) -- return "MEDIUMBLOB"
 tests/schema/models.py:147:21    - Unknown word (INTEGERPK)  -- db_table = "INTEGERPK" # uppercase to ensure
 tests/schema/test_logging.py:12:51     - Unknown word (clientside) -- features.schema_editor_uses_clientside_param_binding:
@@ -7560,7 +7575,7 @@ tests/staticfiles_tests/cases.py:35:12     - Unknown word (asvar)      -- if asv
 tests/staticfiles_tests/cases.py:42:49     - Unknown word (asvar)      -- self, path, result, asvar=False, **kwargs):
 tests/staticfiles_tests/cases.py:43:55     - Unknown word (asvar)      -- template_snippet(path, asvar)
 tests/staticfiles_tests/cases.py:46:53     - Unknown word (asvar)      -- exc, path, result, asvar=False, **kwargs):
-tests/staticfiles_tests/test_finders.py:154:37    - Unknown word (currsize)   -- assertEqual(cache_info.currsize, 1)
+tests/staticfiles_tests/test_finders.py:108:37    - Unknown word (currsize)   -- assertEqual(cache_info.currsize, 1)
 tests/staticfiles_tests/test_handlers.py:15:11     - Unknown word (ASGI)       -- class TestASGIStaticFilesHandler(StaticFiles
 tests/staticfiles_tests/test_handlers.py:1:49      - Unknown word (ASGI)       -- staticfiles.handlers import ASGIStaticFilesHandler
 tests/staticfiles_tests/test_handlers.py:20:19     - Unknown word (ASGI)       -- handler = ASGIStaticFilesHandler(ASGIHandler
@@ -7588,6 +7603,28 @@ tests/syndication_tests/feeds.py:230:18    - Unknown word (scomments)  -- return
 tests/syndication_tests/feeds.py:52:18     - Unknown word (scomments)  -- return "%scomments" % item.get_absolute
 tests/syndication_tests/tests.py:715:50    - Unknown word (feedurl)    -- client.get("/syndication/feedurl/")
 tests/syndication_tests/urls.py:35:23     - Unknown word (feedurl)    -- path("syndication/feedurl/", feeds.TestFeedUrlFeed
+tests/tasks/test_dummy_backend.py:105:22    - Unknown word (arefresh)   -- await result.arefresh()
+tests/tasks/test_dummy_backend.py:170:32    - Unknown word (aenqueue)   -- def test_validate_on_aenqueue(self):
+tests/tasks/test_dummy_backend.py:186:51    - Unknown word (aenqueue)   -- with_custom_queue_name.aenqueue()
+tests/tasks/test_dummy_backend.py:199:14    - Unknown word (doesnt)     -- def test_doesnt_wait_until_transaction
+tests/tasks/test_dummy_backend.py:54:49     - Unknown word (aenqueue)   -- await cast(Task, task).aenqueue()
+tests/tasks/test_dummy_backend.py:78:45     - Unknown word (aenqueue)   -- default_task_backend.aenqueue(test_tasks.noop_task
+tests/tasks/test_dummy_backend.py:97:45     - Unknown word (aenqueue)   -- default_task_backend.aenqueue(
+tests/tasks/test_immediate_backend.py:159:45    - Unknown word (aenqueue)   -- default_task_backend.aenqueue(
+tests/tasks/test_immediate_backend.py:180:45    - Unknown word (aenqueue)   -- default_task_backend.aenqueue(
+tests/tasks/test_immediate_backend.py:188:26    - Unknown word (arefresh)   -- await result.arefresh()
+tests/tasks/test_immediate_backend.py:258:32    - Unknown word (aenqueue)   -- def test_validate_on_aenqueue(self):
+tests/tasks/test_immediate_backend.py:274:51    - Unknown word (aenqueue)   -- with_custom_queue_name.aenqueue()
+tests/tasks/test_immediate_backend.py:287:14    - Unknown word (doesnt)     -- def test_doesnt_wait_until_transaction
+tests/tasks/test_immediate_backend.py:47:37     - Unknown word (aenqueue)   -- result = await task.aenqueue()
+tests/tasks/test_tasks.py:137:45    - Unknown word (aenqueue)   -- test_tasks.noop_task.aenqueue()
+tests/tasks/test_tasks.py:145:22    - Unknown word (arefresh)   -- await result.arefresh()
+tests/tasks/test_tasks.py:198:69    - Unknown word (acall)      -- calculate_meaning_of_life.acall(), 42)
+tests/tasks/test_tasks.py:201:60    - Unknown word (acall)      -- tasks.noop_task_async.acall())
+tests/tasks/test_tasks.py:214:45    - Unknown word (aenqueue)   -- default_task_backend.aenqueue(test_tasks.noop_task
+tests/tasks/test_tasks.py:65:45     - Unknown word (aenqueue)   -- test_tasks.noop_task.aenqueue()
+tests/tasks/test_tasks.py:78:20     - Unknown word (aenqueue)   -- async def test_aenqueue_with_invalid_argument
+tests/tasks/test_tasks.py:80:40     - Unknown word (aenqueue)   -- test_tasks.noop_task.aenqueue(datetime.now())
 tests/template_backends/test_django.py:110:48    - Unknown word (reraised)   -- tag modules should be reraised with a helpful message
 tests/template_backends/test_dummy.py:107:45    - Unknown word (Jérôme)     -- template.render({"name": "Jérôme"})
 tests/template_backends/test_dummy.py:108:42    - Unknown word (Jérôme)     -- assertEqual(content, "Hello Jérôme!\n")
@@ -7998,11 +8035,11 @@ tests/test_runner/test_discover_runner.py:385:13    - Unknown word (dups)       
 tests/test_runner/test_discover_runner.py:386:34    - Unknown word (dups)       -- assertEqual(single, dups)
 tests/test_runner/test_discover_runner.py:562:53    - Unknown word (subsuites)  -- processes, len(suite.subsuites))
 tests/test_runner/test_discover_runner.py:571:53    - Unknown word (subsuites)  -- processes, len(suite.subsuites))
-tests/test_runner/test_parallel.py:219:15    - Unknown word (subsuites)  -- dummy_subsuites = []
-tests/test_runner/test_parallel.py:220:39    - Unknown word (subsuites)  -- ParallelTestSuite(dummy_subsuites, processes=2)
-tests/test_runner/test_parallel.py:239:15    - Unknown word (subsuites)  -- dummy_subsuites = []
-tests/test_runner/test_parallel.py:240:39    - Unknown word (subsuites)  -- ParallelTestSuite(dummy_subsuites, processes=2)
-tests/test_runner/test_parallel.py:255:15    - Unknown word (subsuites)  -- dummy_subsuites = []
+tests/test_runner/test_parallel.py:224:15    - Unknown word (subsuites)  -- dummy_subsuites = []
+tests/test_runner/test_parallel.py:225:39    - Unknown word (subsuites)  -- ParallelTestSuite(dummy_subsuites, processes=2)
+tests/test_runner/test_parallel.py:244:15    - Unknown word (subsuites)  -- dummy_subsuites = []
+tests/test_runner/test_parallel.py:245:39    - Unknown word (subsuites)  -- ParallelTestSuite(dummy_subsuites, processes=2)
+tests/test_runner/test_parallel.py:260:15    - Unknown word (subsuites)  -- dummy_subsuites = []
 tests/test_runner/tests.py:316:9     - Unknown word (subsuite)   -- subsuite = list(suite)[0]
 tests/test_runner/tests.py:317:23    - Unknown word (subsuite)   -- suite.addTest(subsuite)
 tests/test_runner/tests.py:583:44    - Unknown word (sdict)      -- settings("settings.py", sdict=settings)
@@ -8029,17 +8066,17 @@ tests/test_utils/test_testcase.py:164:30    - Unknown word (Käfer)      -- self
 tests/test_utils/test_testcase.py:169:37    - Unknown word (Coccinelle) -- car.name = "Volkswagen Coccinelle"
 tests/test_utils/test_testcase.py:29:29     - Unknown word (pickable)   -- self.assertEqual(is_pickable(unpicklable_obj), False
 tests/test_utils/test_testcase.py:97:13     - Unknown word (herbie)     -- cls.herbie = cls.jim_douglas.possessed
-tests/test_utils/tests.py:1000:76   - Unknown word (Žćžšđ)      -- title (with Unicode ŠĐĆŽćžšđ)</p>'
-tests/test_utils/tests.py:1004:76   - Unknown word (Žćžšđ)      -- title (with Unicode ŠĐĆŽćžšđ)</p>',
-tests/test_utils/tests.py:1198:13   - Unknown word (unvalid)    -- xml_unvalid = "<elem attr1='a attr
-tests/test_utils/tests.py:1201:40   - Unknown word (unvalid)    -- assertXMLNotEqual(xml_unvalid, xml2)
-tests/test_utils/tests.py:2025:11   - Unknown word (visualisation) -- A visualisation of the callback tree
-tests/test_utils/tests.py:2230:38   - Unknown word (defualt)       -- class__.databases = {"defualt"}
-tests/test_utils/tests.py:2232:71   - Unknown word (defualt)       -- databases refers to 'defualt' which "
-tests/test_utils/tests.py:2307:39   - Unknown word (reraised)      -- exception is setUp() is reraised after disable() is called
-tests/test_utils/tests.py:2311:44   - Unknown word (reraised)      -- NotImplementedError("reraised")
-tests/test_utils/tests.py:2316:61   - Unknown word (reraised)      -- NotImplementedError, "reraised"):
-tests/test_utils/tests.py:778:26    - Unknown word (attibutes)  -- def test_non_boolean_attibutes(self):
+tests/test_utils/tests.py:1047:76   - Unknown word (Žćžšđ)      -- title (with Unicode ŠĐĆŽćžšđ)</p>'
+tests/test_utils/tests.py:1051:76   - Unknown word (Žćžšđ)      -- title (with Unicode ŠĐĆŽćžšđ)</p>',
+tests/test_utils/tests.py:1245:13   - Unknown word (unvalid)    -- xml_unvalid = "<elem attr1='a attr
+tests/test_utils/tests.py:1248:40   - Unknown word (unvalid)    -- assertXMLNotEqual(xml_unvalid, xml2)
+tests/test_utils/tests.py:2072:11   - Unknown word (visualisation) -- A visualisation of the callback tree
+tests/test_utils/tests.py:2277:38   - Unknown word (defualt)       -- class__.databases = {"defualt"}
+tests/test_utils/tests.py:2279:71   - Unknown word (defualt)       -- databases refers to 'defualt' which "
+tests/test_utils/tests.py:2354:39   - Unknown word (reraised)      -- exception is setUp() is reraised after disable() is called
+tests/test_utils/tests.py:2358:44   - Unknown word (reraised)      -- NotImplementedError("reraised")
+tests/test_utils/tests.py:2363:61   - Unknown word (reraised)      -- NotImplementedError, "reraised"):
+tests/test_utils/tests.py:825:26    - Unknown word (attibutes)  -- def test_non_boolean_attibutes(self):
 tests/transaction_hooks/tests.py:222:28    - Unknown word (doesnt)     -- def test_error_in_hook_doesnt_prevent_clearing_hooks
 tests/transactions/tests.py:42:56     - Unknown word (Tintin)     -- objects.create(first_name="Tintin")
 tests/transactions/tests.py:60:56     - Unknown word (Tintin)     -- objects.create(first_name="Tintin")
@@ -8209,12 +8246,13 @@ tests/utils_tests/test_http.py:44:40     - Unknown word (doseq)      -- containi
 tests/utils_tests/test_http.py:45:51     - Unknown word (doseq)      -- urlencode({"a": (1, 2)}, doseq=False), "a=%281%2C+
 tests/utils_tests/test_http.py:47:34     - Unknown word (doseq)      -- custom_iterable_not_doseq(self):
 tests/utils_tests/test_http.py:490:60    - Unknown word (Afun)       -- This%20is%20%2A%2A%2Afun%2A%2A%2A",
-tests/utils_tests/test_http.py:515:46    - Unknown word (Afun)       -- This%20is%20%2A%2A%2Afun%2A%2A%2A",
-tests/utils_tests/test_http.py:568:22    - Unknown word (espécimen)  -- ((True, "espécimen"), "attachment; filename
-tests/utils_tests/test_http.py:568:74    - Unknown word (cimen)      -- filename*=utf-8''esp%C3%A9cimen"),
-tests/utils_tests/test_http.py:570:26    - Unknown word (espécimen)  -- (True, '"espécimen" filename'),
-tests/utils_tests/test_http.py:571:59    - Unknown word (cimen)      -- =utf-8''%22esp%C3%A9cimen%22%20filename",
-tests/utils_tests/test_http.py:573:72    - Unknown word (Afile)      -- filename*=utf-8''some%0Afile"),
+tests/utils_tests/test_http.py:514:46    - Unknown word (Afun)       -- This%20is%20%2A%2A%2Afun%2A%2A%2A",
+tests/utils_tests/test_http.py:515:39    - Unknown word (Afun)       -- This%20is%20%2A%2A%2Afun%2A%2A%2A",
+tests/utils_tests/test_http.py:567:22    - Unknown word (espécimen)  -- ((True, "espécimen"), "attachment; filename
+tests/utils_tests/test_http.py:567:74    - Unknown word (cimen)      -- filename*=utf-8''esp%C3%A9cimen"),
+tests/utils_tests/test_http.py:569:26    - Unknown word (espécimen)  -- (True, '"espécimen" filename'),
+tests/utils_tests/test_http.py:570:59    - Unknown word (cimen)      -- =utf-8''%22esp%C3%A9cimen%22%20filename",
+tests/utils_tests/test_http.py:572:72    - Unknown word (Afile)      -- filename*=utf-8''some%0Afile"),
 tests/utils_tests/test_lazyobject.py:499:27    - Unknown word (categoryinfo) -- lazy_category.categoryinfo
 tests/utils_tests/test_lazyobject.py:62:22     - Unknown word (falsey)     -- def test_getattr_falsey(self):
 tests/utils_tests/test_lorem_ipsum.py:109:18    - Unknown word (Exercitationem) -- "Exercitationem perferendis, exercitationem
