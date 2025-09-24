@@ -2064,6 +2064,9 @@ interface TransformedText extends PartialOrUndefined<Mapped> {
 }
 type PartialOrUndefined<T> = { [P in keyof T]?: T[P] | undefined };
 //#endregion
+declare namespace exclusionHelper_d_exports {
+  export { ExcludeFilesGlobMap, ExclusionFunction, FileExclusionFunction, extractGlobsFromExcludeFilesGlobMap, generateExclusionFunctionForFiles, generateExclusionFunctionForUri };
+}
 type ExclusionFunction = (fileUri: string) => boolean;
 type FileExclusionFunction = (file: string) => boolean;
 /** The structure of the VS Code search.exclude settings */
@@ -2495,9 +2498,6 @@ declare enum CompoundWordsMethod {
   */
   JOIN_WORDS = 2,
 }
-/**
-* Walks the Trie and yields each word.
-*/
 //#endregion
 //#region src/lib/suggestions/genSuggestionsOptions.d.ts
 interface GenSuggestionOptionsStrict {
@@ -2808,10 +2808,6 @@ declare function createSpellingDictionary(wordList: readonly string[] | Iterable
 */
 type OptionalKeys<T> = Exclude<{ [P in keyof T]: T[P] extends Exclude<T[P], undefined> ? never : P }[keyof T], undefined>;
 /**
-* Extract the fields that cannot be `undefined`
-*/
-
-/**
 * Allow undefined in optional fields
 */
 type OptionalOrUndefined<T> = { [P in keyof T]: P extends OptionalKeys<T> ? T[P] | undefined : T[P] };
@@ -3030,13 +3026,6 @@ declare function searchForConfig(searchFrom: URL | string | undefined, options?:
 * @returns normalized CSpellSettings
 */
 declare function loadConfig(file: string, pnpSettings?: PnPSettingsOptional): Promise<CSpellSettingsI>;
-/**
-* Resolve the imports in the settings file.
-* @param settings - settings to resolve imports for
-* @param filename - the filename of the settings file, use cwd if not available.
-* @returns
-*/
-
 declare function readConfigFile(filename: string | URL, relativeTo?: string | URL): Promise<CSpellConfigFile>;
 declare function resolveConfigFileImports(configFile: CSpellConfigFile | ICSpellConfigFile): Promise<CSpellSettingsI>;
 /**
@@ -3213,6 +3202,9 @@ interface ResolveSettingsResult {
   resolvedToFilename: string | undefined;
   error?: string;
   settings: CSpellSettingsWithSourceTrace;
+}
+declare namespace index_link_d_exports {
+  export { AddPathsToGlobalImportsResults, ListGlobalImportsResult, ListGlobalImportsResults, RemovePathsFromGlobalImportsResult, ResolveSettingsResult, addPathsToGlobalImports, listGlobalImports, removePathsFromGlobalImports };
 }
 //#endregion
 //#region src/lib/Settings/TextDocumentSettings.d.ts
@@ -3560,14 +3552,6 @@ declare function shouldCheckDocument(doc: TextDocumentRef, options: DocumentVali
 * @deprecated
 */
 declare function checkText(text: string, settings: CSpellUserSettings): Promise<CheckTextInfo>;
-/**
-* Annotate text with issues and include / exclude zones.
-* @param text - the text to annotate.
-* @param settings - the settings to use.
-* @returns the Check Text result
-* @deprecated
-*/
-
 interface CheckTextInfo {
   text: string;
   items: TextInfoItem[];
@@ -3695,10 +3679,6 @@ interface Logger {
   error: Console["error"];
 }
 /**
-* See `Console.error`
-*/
-
-/**
 * Set the global cspell-lib logger
 * @param logger - a logger like `console`
 * @returns the old logger.
@@ -3760,5 +3740,8 @@ declare function textOffset(text: string, offset?: number): TextOffset;
 declare function extractText(textOffset: TextOffset, startPos: number, endPos: number): string;
 declare function calculateTextDocumentOffsets<T extends TextOffset>(uri: string | Uri | URL, doc: string, wordOffsets: T[]): (TextDocumentOffset & T)[];
 declare function removeAccents(text: string): string;
+declare namespace textApi_d_exports {
+  export { calculateTextDocumentOffsets, camelToSnake, cleanText, cleanTextOffset, extractLinesOfText, extractPossibleWordsFromTextOffset, extractText, extractWordsFromCode, extractWordsFromCodeTextOffset, extractWordsFromText, extractWordsFromTextOffset, isFirstCharacterLower, isFirstCharacterUpper, isLowerCase, isUpperCase, lcFirst, match, matchCase, matchStringToTextOffset, matchToTextOffset, removeAccents, snakeToCamel, splitCamelCaseWord, splitCamelCaseWordWithOffset, stringToRegExp, textOffset, ucFirst };
+}
 //#endregion
 export { type AdvancedCSpellSettings, type AdvancedCSpellSettingsWithSourceTrace, type BaseSetting, type CSpellConfigFile, type CSpellPackageSettings, type CSpellReporter, type CSpellReporterEmitters, type CSpellReporterModule, type CSpellSettings, type CSpellSettingsWithSourceTrace, type CSpellUserSettings, type CSpellUserSettingsFields, type CSpellUserSettingsWithComments, type CacheFormat, type CacheSettings, type CacheStrategy, type CharacterSet, type CharacterSetCosts, CheckTextInfo, type CommandLineSettings, CompoundWordsMethod, ConfigFields, ConfigurationDependencies, CreateTextDocumentParams, type CustomDictionaryPath, type CustomDictionaryScope, type DebugEmitter, DetermineFinalDocumentSettingsResult, type DictionaryDefinition, type DictionaryDefinitionAlternate, type DictionaryDefinitionAugmented, type DictionaryDefinitionBase, type DictionaryDefinitionCustom, type DictionaryDefinitionInline, type DictionaryDefinitionInlineFlagWords, type DictionaryDefinitionInlineIgnoreWords, type DictionaryDefinitionInlineWords, type DictionaryDefinitionLegacy, type DictionaryDefinitionPreferred, type DictionaryDefinitionSimple, type DictionaryFileTypes, type DictionaryId, type DictionaryInformation, type DictionaryNegRef, type DictionaryPath, type DictionaryRef, type DictionaryReference, Document, DocumentValidator, DocumentValidatorOptions, ENV_CSPELL_GLOB_ROOT, type EditCosts, type ErrorEmitter, type ErrorLike, ExcludeFilesGlobMap, ExclusionFunction, exclusionHelper_d_exports as ExclusionHelper, type ExperimentalBaseSettings, type ExperimentalFileSettings, type ExtendableSettings, FSCapabilityFlags, type FSPathResolvable, type Feature, FeatureFlag, FeatureFlags, type Features, type FeaturesSupportedByReporter, type FileSettings, type FileSource, type FsPath, type Glob, type GlobDef, type ICSpellConfigFile, ImportError, type ImportFileRef, ImportFileRefWithError, type InMemorySource, IncludeExcludeFlag, IncludeExcludeOptions, type Issue, IssueType, type LanguageId, type LanguageIdMultiple, type LanguageIdMultipleNeg, type LanguageIdSingle, type LanguageSetting, type LanguageSettingFilterFields, type LanguageSettingFilterFieldsDeprecated, type LanguageSettingFilterFieldsPreferred, type LegacySettings, index_link_d_exports as Link, type LocalId, type LocaleId, Logger, type MappedText, type MatchingFileType, type MergeSource, type MessageEmitter, type MessageType, type MessageTypeLookup, MessageTypes, type OverrideFilterFields, type OverrideSettings, type ParseResult, type ParsedText, type Parser, type ParserName, type ParserOptions, type Pattern, type PatternId, type PatternRef, PerfTimer, type Plugin, type PnPSettings, type PredefinedPatterns, type ProgressBase, type ProgressEmitter, type ProgressFileBase, type ProgressFileBegin, type ProgressFileComplete, type ProgressItem, type ProgressTypes, type RegExpPatternDefinition, type RegExpPatternList, type ReplaceEntry, type ReplaceMap, type ReportIssueOptions, type ReporterConfiguration, type ReporterSettings, type ReportingConfiguration, type ResultEmitter, type RunResult, type Settings, type SimpleGlob, type Source, SpellCheckFileOptions, SpellCheckFilePerf, SpellCheckFileResult, SpellingDictionary, SpellingDictionaryCollection, SpellingDictionaryLoadError, type SpellingErrorEmitter, SuggestOptions, SuggestedWord, SuggestionCollector, type SuggestionCostMapDef, type SuggestionCostsDefs, SuggestionError, SuggestionOptions, SuggestionResult, type SuggestionsConfiguration, SuggestionsForWordResult, textApi_d_exports as Text, TextDocument, TextDocumentLine, type TextDocumentOffset, TextDocumentRef, TextInfoItem, type TextOffset, TraceOptions, TraceResult, TraceWordResult, type TrustLevel, UnknownFeatureFlagError, type UnknownWordsChoices, type UnknownWordsConfiguration, type VFileSystemProvider, ValidationIssue, type Version, type VersionLatest, type VersionLegacy, type VirtualFS, type WorkspaceTrustSettings, toArray as asyncIterableToArray, calcOverrideSettings, checkFilenameMatchesExcludeGlob as checkFilenameMatchesGlob, checkText, checkTextDocument, clearCachedFiles, clearCaches, combineTextAndLanguageSettings, combineTextAndLanguageSettings as constructSettingsForText, createConfigLoader, createPerfTimer, createSpellingDictionary, createCollection as createSpellingDictionaryCollection, createTextDocument, currentSettingsFileVersion, defaultCSpellSettings, defaultConfigFilenames, defaultFileName, defaultFileName as defaultSettingsFilename, defineConfig, determineFinalDocumentSettings, extractDependencies, extractImportErrors, fileToDocument, fileToTextDocument, finalizeSettings, getCachedFileSize, getDefaultBundledSettingsAsync, getDefaultConfigLoader, getDefaultSettings, getDictionary, getGlobalSettings, getGlobalSettingsAsync, findMatchingFileTypes as getLanguageIdsForBaseFilename, getFileTypesForExt as getLanguagesForExt, getLogger, getSources, getSystemFeatureFlags, getVirtualFS, isBinaryFile, isSpellingDictionaryLoadError, loadConfig, loadPnP, mergeInDocSettings, mergeSettings, readConfigFile, readFileText as readFile, readFileTextSync as readFileSync, readRawSettings, readSettings, readSettingsFiles, refreshDictionaryCache, resolveConfigFileImports, resolveFile, searchForConfig, sectionCSpell, setLogger, shouldCheckDocument, spellCheckDocument, spellCheckFile, suggestionsForWord, suggestionsForWords, traceWords, traceWordsAsync, unknownWordsChoices, updateTextDocument, validateText, writeToFile, writeToFileIterable, writeToFileIterable as writeToFileIterableP };
