@@ -3,18 +3,18 @@ Repository: caddyserver/caddy
 Url: "https://github.com/caddyserver/caddy.git"
 Args: ["**/*.go"]
 Lines:
- CSpell: Files checked: 286, Issues found: 3712 in 256 files.
+ CSpell: Files checked: 286, Issues found: 3714 in 256 files.
  exit code: 1
-admin.go:1075:20   - Unknown word (Redir)       -- return errInternalRedir
-admin.go:1351:6    - Unknown word (loggable)    -- type loggableURLArray []*url.URL
-admin.go:1353:10   - Unknown word (loggable)    -- func (ua loggableURLArray) MarshalLogArray
-admin.go:1374:21   - Unknown word (pidfile)     -- // PIDFile writes a pidfile to the file at filename
-admin.go:1382:2    - Unknown word (pidfile)     -- pidfile = filename
-admin.go:1392:31   - Unknown word (pidfile)     -- pidfile is the name of the pidfile, if any.
-admin.go:1392:4    - Unknown word (pidfile)     -- // pidfile is the name of the pidfile
-admin.go:1393:5    - Unknown word (pidfile)     -- var pidfile string
-admin.go:1395:15   - Unknown word (Redir)       -- // errInternalRedir indicates an internal
-admin.go:1400:16   - Unknown word (Redir)       -- var errInternalRedir = fmt.Errorf("internal
+admin.go:1082:20   - Unknown word (Redir)       -- return errInternalRedir
+admin.go:1358:6    - Unknown word (loggable)    -- type loggableURLArray []*url.URL
+admin.go:1360:10   - Unknown word (loggable)    -- func (ua loggableURLArray) MarshalLogArray
+admin.go:1381:21   - Unknown word (pidfile)     -- // PIDFile writes a pidfile to the file at filename
+admin.go:1389:2    - Unknown word (pidfile)     -- pidfile = filename
+admin.go:1399:31   - Unknown word (pidfile)     -- pidfile is the name of the pidfile, if any.
+admin.go:1399:4    - Unknown word (pidfile)     -- // pidfile is the name of the pidfile
+admin.go:1400:5    - Unknown word (pidfile)     -- var pidfile string
+admin.go:1402:15   - Unknown word (Redir)       -- // errInternalRedir indicates an internal
+admin.go:1407:16   - Unknown word (Redir)       -- var errInternalRedir = fmt.Errorf("internal
 admin.go:165:12    - Unknown word (certmagic)   -- issuers []certmagic.Issuer
 admin.go:329:26    - Unknown word (infosec)     -- security checks, the infosec community assures me
 admin.go:43:14     - Unknown word (caddyserver) -- "github.com/caddyserver/certmagic"
@@ -50,7 +50,9 @@ caddy.go:1095:54   - Unknown word (caddyevents) -- current instance of the caddy
 caddy.go:1095:70   - Unknown word (insteaad)    -- the caddyevents app insteaad.
 caddy.go:1147:41   - Unknown word (specversion) -- string `json:"specversion"`
 caddy.go:1150:41   - Unknown word (datacontenttype) -- string `json:"datacontenttype,omitempty"`
-caddy.go:1207:32   - Unknown word (caddyserver)     -- ImportPath = "github.com/caddyserver/caddy/v2"
+caddy.go:1220:101  - Unknown word (nolint)          -- in this process") //nolint:unused
+caddy.go:1256:11   - Unknown word (basenames)       -- // 4. If basenames are equal, match.
+caddy.go:1292:32   - Unknown word (caddyserver)     -- ImportPath = "github.com/caddyserver/caddy/v2"
 caddy.go:38:14     - Unknown word (caddyserver) -- "github.com/caddyserver/certmagic"
 caddy.go:38:26     - Unknown word (certmagic)   -- github.com/caddyserver/certmagic"
 caddy.go:422:5     - Unknown word (certmagic)   -- certmagic.Default.Storage = currentCtx
@@ -818,21 +820,21 @@ cmd/commandfuncs.go:187:42    - Unknown word (wastedassign) -- /nolint:ineffassi
 cmd/commandfuncs.go:187:9     - Unknown word (Procs)       -- undoMaxProcs = nil //nolint:ineffassign
 cmd/commandfuncs.go:195:2     - Unknown word (pingback)     -- pingbackFlag := fl.String("pingback
 cmd/commandfuncs.go:195:29    - Unknown word (pingback)     -- pingbackFlag := fl.String("pingback")
-cmd/commandfuncs.go:259:17    - Unknown word (nolint)       -- config = nil //nolint:ineffassign,wastedassign
-cmd/commandfuncs.go:259:24    - Unknown word (ineffassign)  -- config = nil //nolint:ineffassign,wastedassign
-cmd/commandfuncs.go:259:36    - Unknown word (wastedassign) -- /nolint:ineffassign,wastedassign
-cmd/commandfuncs.go:266:24    - Unknown word (nolint)       -- defaultLogger = nil //nolint:ineffassign,wastedassign
-cmd/commandfuncs.go:266:31    - Unknown word (ineffassign)  -- defaultLogger = nil //nolint:ineffassign,wastedassign
-cmd/commandfuncs.go:266:43    - Unknown word (wastedassign) -- /nolint:ineffassign,wastedassign
-cmd/commandfuncs.go:267:24    - Unknown word (nolint)       -- logBuffer = nil     //nolint:wastedassign,ineffassign
-cmd/commandfuncs.go:267:31    - Unknown word (wastedassign) -- logBuffer = nil     //nolint:wastedassign,ineffassign
-cmd/commandfuncs.go:267:44    - Unknown word (ineffassign)  -- nolint:wastedassign,ineffassign
-cmd/commandfuncs.go:272:5     - Unknown word (pingback)     -- if pingbackFlag != "" {
-cmd/commandfuncs.go:291:29    - Unknown word (nolint)       -- confirmationBytes = nil //nolint:ineffassign,wastedassign
-cmd/commandfuncs.go:291:36    - Unknown word (ineffassign)  -- firmationBytes = nil //nolint:ineffassign,wastedassign
-cmd/commandfuncs.go:291:48    - Unknown word (wastedassign) -- /nolint:ineffassign,wastedassign
-cmd/commandfuncs.go:307:44    - Unknown word (USERPROFILE)  -- == "" && os.Getenv("USERPROFILE") == "" && !hasXDG
-cmd/commandfuncs.go:308:34    - Unknown word (USERPROFILE)  -- Warn("neither HOME nor USERPROFILE environment variables
+cmd/commandfuncs.go:273:17    - Unknown word (nolint)       -- config = nil //nolint:ineffassign,wastedassign
+cmd/commandfuncs.go:273:24    - Unknown word (ineffassign)  -- config = nil //nolint:ineffassign,wastedassign
+cmd/commandfuncs.go:273:36    - Unknown word (wastedassign) -- /nolint:ineffassign,wastedassign
+cmd/commandfuncs.go:280:24    - Unknown word (nolint)       -- defaultLogger = nil //nolint:ineffassign,wastedassign
+cmd/commandfuncs.go:280:31    - Unknown word (ineffassign)  -- defaultLogger = nil //nolint:ineffassign,wastedassign
+cmd/commandfuncs.go:280:43    - Unknown word (wastedassign) -- /nolint:ineffassign,wastedassign
+cmd/commandfuncs.go:281:24    - Unknown word (nolint)       -- logBuffer = nil     //nolint:wastedassign,ineffassign
+cmd/commandfuncs.go:281:31    - Unknown word (wastedassign) -- logBuffer = nil     //nolint:wastedassign,ineffassign
+cmd/commandfuncs.go:281:44    - Unknown word (ineffassign)  -- nolint:wastedassign,ineffassign
+cmd/commandfuncs.go:286:5     - Unknown word (pingback)     -- if pingbackFlag != "" {
+cmd/commandfuncs.go:305:29    - Unknown word (nolint)       -- confirmationBytes = nil //nolint:ineffassign,wastedassign
+cmd/commandfuncs.go:305:36    - Unknown word (ineffassign)  -- firmationBytes = nil //nolint:ineffassign,wastedassign
+cmd/commandfuncs.go:305:48    - Unknown word (wastedassign) -- /nolint:ineffassign,wastedassign
+cmd/commandfuncs.go:321:44    - Unknown word (USERPROFILE)  -- == "" && os.Getenv("USERPROFILE") == "" && !hasXDG
+cmd/commandfuncs.go:322:34    - Unknown word (USERPROFILE)  -- Warn("neither HOME nor USERPROFILE environment variables
 cmd/commandfuncs.go:36:14     - Unknown word (aryann)     -- "github.com/aryann/difflib"
 cmd/commandfuncs.go:36:21     - Unknown word (difflib)    -- "github.com/aryann/difflib"
 cmd/commandfuncs.go:39:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
@@ -842,26 +844,26 @@ cmd/commandfuncs.go:41:14     - Unknown word (caddyserver) -- "github.com/caddys
 cmd/commandfuncs.go:41:35     - Unknown word (caddyconfig) -- caddyserver/caddy/v2/caddyconfig/caddyfile"
 cmd/commandfuncs.go:41:47     - Unknown word (caddyfile)   -- caddy/v2/caddyconfig/caddyfile"
 cmd/commandfuncs.go:42:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/internal"
-cmd/commandfuncs.go:487:53    - Unknown word (Caddyfile)    -- required when there is no Caddyfile in current directory
 cmd/commandfuncs.go:48:2      - Unknown word (pidfile)     -- pidfileFlag := fl.String("pidfile
 cmd/commandfuncs.go:48:28     - Unknown word (pidfile)     -- pidfileFlag := fl.String("pidfile")
-cmd/commandfuncs.go:501:16    - Unknown word (caddyconfig)  -- cfgAdapter := caddyconfig.GetAdapter(adapterFlag
-cmd/commandfuncs.go:582:53    - Unknown word (Caddyfile)    -- required when there is no Caddyfile in current directory
-cmd/commandfuncs.go:614:17    - Unknown word (Caddyfile)    -- configFile = "Caddyfile"
-cmd/commandfuncs.go:625:20    - Unknown word (caddyfile)    -- fmt.Print(string(caddyfile.Format(input)))
-cmd/commandfuncs.go:635:12    - Unknown word (caddyfile)    -- output := caddyfile.Format(input)
-cmd/commandfuncs.go:645:11    - Unknown word (difflib)      -- diff := difflib.Diff(
-cmd/commandfuncs.go:650:9     - Unknown word (difflib)      -- case difflib.Common:
-cmd/commandfuncs.go:652:9     - Unknown word (difflib)      -- case difflib.LeftOnly:
-cmd/commandfuncs.go:654:9     - Unknown word (difflib)      -- case difflib.RightOnly:
-cmd/commandfuncs.go:662:22    - Unknown word (caddyfile)    -- if warning, diff := caddyfile.FormattingDifference
-cmd/commandfuncs.go:663:130   - Unknown word (Caddyfile)    -- overwrite' to update your Caddyfile in-place instead of
-cmd/commandfuncs.go:663:58    - Unknown word (Caddyfile)    -- fmt.Errorf(`%s:%d: Caddyfile input is not formatted
+cmd/commandfuncs.go:505:53    - Unknown word (Caddyfile)    -- required when there is no Caddyfile in current directory
+cmd/commandfuncs.go:519:16    - Unknown word (caddyconfig)  -- cfgAdapter := caddyconfig.GetAdapter(adapterFlag
+cmd/commandfuncs.go:600:53    - Unknown word (Caddyfile)    -- required when there is no Caddyfile in current directory
+cmd/commandfuncs.go:632:17    - Unknown word (Caddyfile)    -- configFile = "Caddyfile"
+cmd/commandfuncs.go:643:20    - Unknown word (caddyfile)    -- fmt.Print(string(caddyfile.Format(input)))
+cmd/commandfuncs.go:653:12    - Unknown word (caddyfile)    -- output := caddyfile.Format(input)
+cmd/commandfuncs.go:663:11    - Unknown word (difflib)      -- diff := difflib.Diff(
+cmd/commandfuncs.go:668:9     - Unknown word (difflib)      -- case difflib.Common:
+cmd/commandfuncs.go:670:9     - Unknown word (difflib)      -- case difflib.LeftOnly:
+cmd/commandfuncs.go:672:9     - Unknown word (difflib)      -- case difflib.RightOnly:
+cmd/commandfuncs.go:680:22    - Unknown word (caddyfile)    -- if warning, diff := caddyfile.FormattingDifference
+cmd/commandfuncs.go:681:130   - Unknown word (Caddyfile)    -- overwrite' to update your Caddyfile in-place instead of
+cmd/commandfuncs.go:681:58    - Unknown word (Caddyfile)    -- fmt.Errorf(`%s:%d: Caddyfile input is not formatted
 cmd/commandfuncs.go:68:30     - Unknown word (pingback)    -- craft the command with a pingback address and with a
-cmd/commandfuncs.go:737:7     - Unknown word (srldkjfsd)    -- // "srldkjfsd"), if for some reason
+cmd/commandfuncs.go:755:7     - Unknown word (srldkjfsd)    -- // "srldkjfsd"), if for some reason
 cmd/commandfuncs.go:77:44     - Unknown word (pingback)    -- os.Args[0], "run", "--pingback", ln.Addr().String(
-cmd/commandfuncs.go:834:25    - Unknown word (caddyconfig)  -- configFile == "" && caddyconfig.GetAdapter("caddyfile
-cmd/commandfuncs.go:834:49    - Unknown word (caddyfile)    -- caddyconfig.GetAdapter("caddyfile") != nil {
+cmd/commandfuncs.go:852:25    - Unknown word (caddyconfig)  -- configFile == "" && caddyconfig.GetAdapter("caddyfile
+cmd/commandfuncs.go:852:49    - Unknown word (caddyfile)    -- caddyconfig.GetAdapter("caddyfile") != nil {
 cmd/commandfuncs.go:95:5      - Unknown word (pidfile)     -- if pidfileFlag != "" {
 cmd/commandfuncs.go:96:34     - Unknown word (pidfile)     -- append(cmd.Args, "--pidfile", pidfileFlag)
 cmd/commandfuncs.go:96:44     - Unknown word (pidfile)     -- cmd.Args, "--pidfile", pidfileFlag)
@@ -886,23 +888,23 @@ cmd/commands.go:71:22     - Unknown word (caddycmd)    -- // this function. A ca
 cmd/commands.go:81:40     - Unknown word (initialised) -- returns a list of commands initialised by
 cmd/commands.go:98:80     - Unknown word (pidfile)     -- path>] [--watch] [--pidfile <file>]",
 cmd/commands_test.go:1:9       - Unknown word (caddycmd)   -- package caddycmd
-cmd/main.go:107:8     - Unknown word (Caddyfile)    -- func isCaddyfile(configFile, adapterName
-cmd/main.go:108:21    - Unknown word (caddyfile)    -- if adapterName == "caddyfile" {
-cmd/main.go:112:54    - Unknown word (caddyfile)    -- config file starts with "caddyfile" or
-cmd/main.go:113:13    - Unknown word (caddyfile)    -- // has a ".caddyfile" extension, and no adapter
-cmd/main.go:115:5     - Unknown word (caddyfile)    -- // caddyfile adapter for convenience
-cmd/main.go:118:16    - Unknown word (Caddyfile)    -- startsOrEndsInCaddyfile := strings.HasPrefix
-cmd/main.go:118:60    - Unknown word (caddyfile)    -- HasPrefix(baseConfig, "caddyfile") || strings.HasSuffix
-cmd/main.go:127:33    - Unknown word (Caddyfile)    -- t a JSON file (e.g. Caddyfile.yaml),
-cmd/main.go:129:40    - Unknown word (Caddyfile)    -- "" && startsOrEndsInCaddyfile {
-cmd/main.go:137:31    - Unknown word (Caddyfile)    -- does not start with "Caddyfile"
-cmd/main.go:155:17    - Unknown word (caddyconfig)  -- var cfgAdapter caddyconfig.Adapter
+cmd/main.go:112:8     - Unknown word (Caddyfile)    -- func isCaddyfile(configFile, adapterName
+cmd/main.go:113:21    - Unknown word (caddyfile)    -- if adapterName == "caddyfile" {
+cmd/main.go:117:54    - Unknown word (caddyfile)    -- config file starts with "caddyfile" or
+cmd/main.go:118:13    - Unknown word (caddyfile)    -- // has a ".caddyfile" extension, and no adapter
+cmd/main.go:120:5     - Unknown word (caddyfile)    -- // caddyfile adapter for convenience
+cmd/main.go:123:16    - Unknown word (Caddyfile)    -- startsOrEndsInCaddyfile := strings.HasPrefix
+cmd/main.go:123:60    - Unknown word (caddyfile)    -- HasPrefix(baseConfig, "caddyfile") || strings.HasSuffix
+cmd/main.go:132:33    - Unknown word (Caddyfile)    -- t a JSON file (e.g. Caddyfile.yaml),
+cmd/main.go:134:40    - Unknown word (Caddyfile)    -- "" && startsOrEndsInCaddyfile {
+cmd/main.go:142:31    - Unknown word (Caddyfile)    -- does not start with "Caddyfile"
 cmd/main.go:15:9      - Unknown word (caddycmd)   -- package caddycmd
-cmd/main.go:174:16    - Unknown word (caddyconfig)  -- cfgAdapter = caddyconfig.GetAdapter("caddyfile
-cmd/main.go:199:16    - Unknown word (caddyconfig)  -- cfgAdapter = caddyconfig.GetAdapter(adapterName
-cmd/main.go:268:4     - Unknown word (nolint)       -- //nolint:staticcheck
-cmd/main.go:298:3     - Unknown word (pflag)        -- *pflag.FlagSet
-cmd/main.go:369:26    - Unknown word (certmagic)    -- caddy.DefaultStorage = &certmagic.FileStorage{Path: caddy
+cmd/main.go:160:17    - Unknown word (caddyconfig)  -- var cfgAdapter caddyconfig.Adapter
+cmd/main.go:179:16    - Unknown word (caddyconfig)  -- cfgAdapter = caddyconfig.GetAdapter("caddyfile
+cmd/main.go:204:16    - Unknown word (caddyconfig)  -- cfgAdapter = caddyconfig.GetAdapter(adapterName
+cmd/main.go:273:4     - Unknown word (nolint)       -- //nolint:staticcheck
+cmd/main.go:303:3     - Unknown word (pflag)        -- *pflag.FlagSet
+cmd/main.go:374:26    - Unknown word (certmagic)    -- caddy.DefaultStorage = &certmagic.FileStorage{Path: caddy
 cmd/main.go:37:28     - Unknown word (automemlimit) -- github.com/KimMachineGun/automemlimit/memlimit"
 cmd/main.go:37:41     - Unknown word (memlimit)     -- KimMachineGun/automemlimit/memlimit"
 cmd/main.go:38:14     - Unknown word (caddyserver)  -- "github.com/caddyserver/certmagic"
@@ -914,14 +916,14 @@ cmd/main.go:42:23     - Unknown word (zapslog)      -- go.uber.org/zap/exp/zapsl
 cmd/main.go:44:14     - Unknown word (caddyserver)  -- "github.com/caddyserver/caddy/v2"
 cmd/main.go:45:14     - Unknown word (caddyserver)  -- "github.com/caddyserver/caddy/v2/caddyconfig
 cmd/main.go:45:35     - Unknown word (caddyconfig)  -- caddyserver/caddy/v2/caddyconfig"
-cmd/main.go:470:15    - Unknown word (maxprocs)     -- undo, err := maxprocs.Set(maxprocs.Logger
-cmd/main.go:470:28    - Unknown word (maxprocs)     -- err := maxprocs.Set(maxprocs.Logger(logger.Sugar
-cmd/main.go:470:59    - Unknown word (Infof)        -- Logger(logger.Sugar().Infof))
-cmd/main.go:477:9     - Unknown word (memlimit)     -- _, _ = memlimit.SetGoMemLimitWithOpts
-cmd/main.go:478:3     - Unknown word (memlimit)     -- memlimit.WithLogger(
-cmd/main.go:479:13    - Unknown word (zapslog)      -- slog.New(zapslog.NewHandler(logger.Core
-cmd/main.go:481:3     - Unknown word (memlimit)     -- memlimit.WithProvider(
-cmd/main.go:482:4     - Unknown word (memlimit)     -- memlimit.ApplyFallback(
+cmd/main.go:475:15    - Unknown word (maxprocs)     -- undo, err := maxprocs.Set(maxprocs.Logger
+cmd/main.go:475:28    - Unknown word (maxprocs)     -- err := maxprocs.Set(maxprocs.Logger(logger.Sugar
+cmd/main.go:475:59    - Unknown word (Infof)        -- Logger(logger.Sugar().Infof))
+cmd/main.go:482:9     - Unknown word (memlimit)     -- _, _ = memlimit.SetGoMemLimitWithOpts
+cmd/main.go:483:3     - Unknown word (memlimit)     -- memlimit.WithLogger(
+cmd/main.go:484:13    - Unknown word (zapslog)      -- slog.New(zapslog.NewHandler(logger.Core
+cmd/main.go:486:3     - Unknown word (memlimit)     -- memlimit.WithProvider(
+cmd/main.go:487:4     - Unknown word (memlimit)     -- memlimit.ApplyFallback(
 cmd/main.go:56:2      - Unknown word (certmagic)    -- certmagic.UserAgent = ua
 cmd/main.go:61:2      - Unknown word (certmagic)    -- certmagic.DefaultACME.Agreed
 cmd/main.go:81:10     - Unknown word (Pingback)     -- // handlePingbackConn reads from conn
@@ -2755,23 +2757,23 @@ modules/caddypki/adminapi.go:15:9      - Unknown word (caddypki)   -- package ca
 modules/caddypki/adminapi.go:198:19    - Unknown word (CAID)        -- if id != DefaultCAID {
 modules/caddypki/adminapi.go:25:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
 modules/caddypki/ca.go:15:9      - Unknown word (caddypki)   -- package caddypki
-modules/caddypki/ca.go:193:31    - Unknown word (Smallstep)   -- NewAuthority returns a new Smallstep-powered signing authority
-modules/caddypki/ca.go:279:18    - Unknown word (certmagic)   -- rootKey, err = certmagic.PEMDecodePrivateKey
+modules/caddypki/ca.go:195:31    - Unknown word (Smallstep)   -- NewAuthority returns a new Smallstep-powered signing authority
+modules/caddypki/ca.go:281:18    - Unknown word (certmagic)   -- rootKey, err = certmagic.PEMDecodePrivateKey
 modules/caddypki/ca.go:28:14     - Unknown word (caddyserver) -- "github.com/caddyserver/certmagic"
 modules/caddypki/ca.go:28:26     - Unknown word (certmagic)   -- github.com/caddyserver/certmagic"
 modules/caddypki/ca.go:29:14     - Unknown word (smallstep)   -- "github.com/smallstep/certificates/authority
-modules/caddypki/ca.go:303:21    - Unknown word (certmagic)   -- rootKeyPEM, err := certmagic.PEMEncodePrivateKey
+modules/caddypki/ca.go:305:21    - Unknown word (certmagic)   -- rootKeyPEM, err := certmagic.PEMEncodePrivateKey
 modules/caddypki/ca.go:30:14     - Unknown word (smallstep)   -- "github.com/smallstep/certificates/db"
 modules/caddypki/ca.go:31:14     - Unknown word (smallstep)   -- "github.com/smallstep/truststore"
 modules/caddypki/ca.go:31:24     - Unknown word (truststore)  -- github.com/smallstep/truststore"
-modules/caddypki/ca.go:341:19    - Unknown word (certmagic)   -- interKey, err = certmagic.PEMDecodePrivateKey
+modules/caddypki/ca.go:343:19    - Unknown word (certmagic)   -- interKey, err = certmagic.PEMDecodePrivateKey
 modules/caddypki/ca.go:34:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
-modules/caddypki/ca.go:417:9     - Unknown word (truststore)  -- return truststore.Install(ca.root,
-modules/caddypki/ca.go:418:3     - Unknown word (truststore)  -- truststore.WithDebug(),
-modules/caddypki/ca.go:419:3     - Unknown word (truststore)  -- truststore.WithFirefox(),
-modules/caddypki/ca.go:420:3     - Unknown word (truststore)  -- truststore.WithJava(),
-modules/caddypki/ca.go:435:12    - Unknown word (CAID)        -- // DefaultCAID is the default CA ID
-modules/caddypki/ca.go:436:9     - Unknown word (CAID)        -- DefaultCAID = "local"
+modules/caddypki/ca.go:419:9     - Unknown word (truststore)  -- return truststore.Install(ca.root,
+modules/caddypki/ca.go:420:3     - Unknown word (truststore)  -- truststore.WithDebug(),
+modules/caddypki/ca.go:421:3     - Unknown word (truststore)  -- truststore.WithFirefox(),
+modules/caddypki/ca.go:422:3     - Unknown word (truststore)  -- truststore.WithJava(),
+modules/caddypki/ca.go:437:12    - Unknown word (CAID)        -- // DefaultCAID is the default CA ID
+modules/caddypki/ca.go:438:9     - Unknown word (CAID)        -- DefaultCAID = "local"
 modules/caddypki/ca.go:78:14     - Unknown word (certmagic)   -- storage certmagic.Storage
 modules/caddypki/certificates.go:15:9      - Unknown word (caddypki)   -- package caddypki
 modules/caddypki/certificates.go:22:21     - Unknown word (keyutil)    -- "go.step.sm/crypto/keyutil"
@@ -3702,13 +3704,13 @@ replacer_test.go:435:20    - Unknown word (caddytest)  -- variable: "file.caddyt
 replacer_test.go:439:20    - Unknown word (caddytest)  -- variable: "file.caddytest/integration/testdata
 replacer_test.go:469:20    - Unknown word (caddytest)  -- variable: "file.caddytest/integration/testdata
 service_windows.go:23:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/notify"
-sigtrap_posix.go:25:14     - Unknown word (caddyserver) -- "github.com/caddyserver/certmagic"
-sigtrap_posix.go:25:26     - Unknown word (certmagic)   -- github.com/caddyserver/certmagic"
-sigtrap_posix.go:32:12     - Unknown word (Moby)        -- // Docker/Moby has a similar hack:
-sigtrap_posix.go:36:3      - Unknown word (sigchan)     -- sigchan := make(chan os.Signal
-sigtrap_posix.go:37:17     - Unknown word (sigchan)     -- signal.Notify(sigchan, syscall.SIGTERM, syscall
-sigtrap_posix.go:39:20     - Unknown word (sigchan)     -- for sig := range sigchan {
-sigtrap_posix.go:43:5      - Unknown word (certmagic)   -- certmagic.CleanUpOwnLocks(context
+sigtrap_posix.go:26:14     - Unknown word (caddyserver) -- "github.com/caddyserver/certmagic"
+sigtrap_posix.go:26:26     - Unknown word (certmagic)   -- github.com/caddyserver/certmagic"
+sigtrap_posix.go:33:12     - Unknown word (Moby)        -- // Docker/Moby has a similar hack:
+sigtrap_posix.go:37:3      - Unknown word (sigchan)     -- sigchan := make(chan os.Signal
+sigtrap_posix.go:38:17     - Unknown word (sigchan)     -- signal.Notify(sigchan, syscall.SIGTERM, syscall
+sigtrap_posix.go:40:20     - Unknown word (sigchan)     -- for sig := range sigchan {
+sigtrap_posix.go:44:5      - Unknown word (certmagic)   -- certmagic.CleanUpOwnLocks(context
 storage.go:160:23    - Unknown word (certmagic)   -- var DefaultStorage = &certmagic.FileStorage{Path: AppDataDir
 storage.go:22:14     - Unknown word (caddyserver) -- "github.com/caddyserver/certmagic"
 storage.go:22:26     - Unknown word (certmagic)   -- github.com/caddyserver/certmagic"
