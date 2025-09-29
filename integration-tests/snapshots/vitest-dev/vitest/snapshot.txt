@@ -3,7 +3,7 @@ Repository: vitest-dev/vitest
 Url: "https://github.com/vitest-dev/vitest"
 Args: ["--issues-summary-report","--locale=en,en-GB","."]
 Lines:
- CSpell: Files checked: 2215, Issues found: 1414 in 368 files.
+ CSpell: Files checked: 2221, Issues found: 1416 in 370 files.
  exit code: 1
 AGENTS.md:119:5     - Unknown word (bumpp)      -- - **bumpp** - Version bumping
 AGENTS.md:120:5     - Unknown word (changelogithub) -- - **changelogithub** - Changelog generation
@@ -26,6 +26,7 @@ docs/advanced/api/vitest.md:621:107   - Unknown word (parsespecifications)    --
 docs/advanced/pool.md:76:208    - Unknown word (birpc)      -- use WebSockets with `birpc` you can write something
 docs/advanced/pool.md:79:16     - Unknown word (Birpc)      -- import { createBirpc } from 'birpc'
 docs/advanced/reporters.md:67:7      - Unknown word (twoslash)   -- ```ts twoslash
+docs/advanced/runner.md:44:40     - Unknown word (happend)    -- the retry resolution happend. Unlike `onAfterTryTask
 docs/api/assert.md:1054:75   - Unknown word (konacha)    -- } }, 'tea.green', 'konacha')
 docs/api/assert.md:1117:59   - Unknown word (Dont)       -- baz: 3 }, ['foo', 'iDontExist', 'baz'])
 docs/api/expect.md:1017:63   - Unknown word (tohavebeencalledexactlyoncewith) -- Version>3.0.0</Version> {#tohavebeencalledexactlyoncewith}
@@ -60,6 +61,7 @@ docs/config/index.md:1956:37   - Unknown word (setupfiles)           -- setupFil
 docs/config/index.md:2053:18   - Unknown word (chaiconfig)           -- ### chaiConfig {#chaiconfig}
 docs/config/index.md:2127:40   - Unknown word (onstacktrace)         -- NonProjectOption /> {#onstacktrace}
 docs/config/index.md:2156:44   - Unknown word (onunhandlederror)     -- NonProjectOption /> {#onunhandlederror}
+docs/config/index.md:2442:47   - Unknown word (attachmentsdir)       -- Version>3.2.0</Version> {#attachmentsdir}
 docs/config/index.md:253:233   - Unknown word (rebundling) -- it directly or force rebundling with `deps.optimizer
 docs/config/index.md:394:14    - Unknown word (Arrayable)  -- - **Type:** `Arrayable<BenchmarkBuiltinReporters
 docs/config/index.md:482:28    - Unknown word (unplugin)   -- are already using [`unplugin-auto-import`](https
@@ -165,17 +167,17 @@ packages/browser/src/client/public/esm-client-injector.js:49:36     - Unknown wo
 packages/browser/src/client/tester/expect/toHaveAccessibleErrorMessage.ts:19:47     - Unknown word (redent)     -- entFromUserInput, getMessage, redent } from './utils'
 packages/browser/src/client/tester/expect/utils.ts:258:44    - Unknown word (valuenow)   -- element.getAttribute('aria-valuenow'))
 packages/browser/src/client/tester/logger.ts:101:23    - Unknown word (WDIO)       -- if (args[0] === '[WDIO]') {
-packages/browser/src/client/tester/runner.ts:186:22    - Unknown word (browserv)   -- const query = `browserv=${hash}`
-packages/browser/src/client/tester/runner.ts:187:13    - Unknown word (importpath) -- const importpath = `${prefix}${filepath
+packages/browser/src/client/tester/runner.ts:267:22    - Unknown word (browserv)   -- const query = `browserv=${hash}`
+packages/browser/src/client/tester/runner.ts:268:13    - Unknown word (importpath) -- const importpath = `${prefix}${filepath
 packages/browser/src/client/tester/tester.ts:125:6     - Unknown word (webdiverio) -- // webdiverio context depends on the
 packages/browser/src/node/commands/keyboard.ts:80:115    - Unknown word (Backquote)  -- F10', 'F11', 'F12', 'Backquote', '`', '~', 'Digit1
 packages/browser/src/node/commands/screenshotMatcher/types.ts:6:13      - Unknown word (Promisable) -- export type Promisable<T> = T | Promise<T>
 packages/browser/src/node/plugin.ts:365:33    - Unknown word (nastry)     -- loupe bundle has a nastry require('util') call
 packages/browser/src/node/pool.ts:10:13     - Unknown word (nodeos)     -- import * as nodeos from 'node:os'
 packages/browser/src/node/projectParent.ts:181:19    - Unknown word (cdps)       -- public readonly cdps: Map<string, BrowserServerCDP
-packages/browser/src/node/providers/playwright.ts:171:13    - Unknown word (Preficates) -- const idPreficates = new Map<string, (url
-packages/browser/src/node/providers/playwright.ts:364:20    - Unknown word (frameattached) -- page.on('frameattached', (frame) => {
-packages/browser/src/node/providers/playwright.ts:393:16    - Unknown word (requestfailed) -- page.on('requestfailed', (request) => {
+packages/browser/src/node/providers/playwright.ts:198:13    - Unknown word (Preficates) -- const idPreficates = new Map<string, (url
+packages/browser/src/node/providers/playwright.ts:391:20    - Unknown word (frameattached) -- page.on('frameattached', (frame) => {
+packages/browser/src/node/providers/playwright.ts:420:16    - Unknown word (requestfailed) -- page.on('requestfailed', (request) => {
 packages/browser/src/node/rpc.ts:11:28     - Unknown word (Autospied)  -- { AutomockedModule, AutospiedModule, ManualMockedModule
 packages/browser/src/node/serverTester.ts:67:11     - Unknown word (indexhtml)  -- const indexhtml = await browserProject
 packages/coverage-istanbul/package.json:54:6      - Unknown word (magicast)   -- "magicast": "catalog:",
@@ -279,7 +281,7 @@ packages/vitest/src/constants.ts:1:28      - Unknown word (jsdocs)     -- change
 packages/vitest/src/integrations/mock/date.ts:5:24      - Unknown word (Lauer)      -- Copyright (c) 2014 Bob Lauer
 packages/vitest/src/node/ast-collect.ts:466:34    - Unknown word (dfsjo)      -- pattern.replace(/%[i#dfsjo%]/g, m => kReplacers
 packages/vitest/src/node/browser/sessions.ts:19:63     - Unknown word (orhcestrator) -- connection with the orhcestrator to be established
-packages/vitest/src/node/config/resolveConfig.ts:398:66    - Unknown word (overidden)  -- exclusions. These cannot be overidden by user config.
+packages/vitest/src/node/config/resolveConfig.ts:405:66    - Unknown word (overidden)  -- exclusions. These cannot be overidden by user config.
 packages/vitest/src/node/coverage.ts:764:15    - Unknown word (magicast's) -- // Reduce magicast's verbose errors to readable
 packages/vitest/src/node/git.ts:78:40     - Unknown word (cdup)       -- rev-parse', '--show-cdup']
 packages/vitest/src/node/plugins/index.ts:63:12     - Unknown word (reassignable) -- // reassignable when running in worker
@@ -412,9 +414,9 @@ test/config/deps/test-dep-conditions/indirect.js:5:17      - Unknown word (Produ
 test/config/fixtures/browser-custom-html/browser-custom.test.ts:7:7       - Unknown word (importmap)  -- test('importmap is injected', () =>
 test/config/fixtures/css/test/default-css.spec.ts:25:41     - Unknown word (cdbed)      -- module).toBe('_module_cdbed7')
 test/config/fixtures/shuffle/basic.test.ts:15:11     - Unknown word (unshuffle)  -- describe('unshuffle', { shuffle: false
-test/config/test/browser-configs.test.ts:210:47    - Unknown word (workspaced) -- works correctly in workspaced browser mode if instances
-test/config/test/browser-configs.test.ts:314:49    - Unknown word (myproject)  -- await vitest({ project: 'myproject' }, {
-test/config/test/browser-configs.test.ts:53:49     - Unknown word (chrom)      -- await vitest({ project: 'chrom*' }, {
+test/config/test/browser-configs.test.ts:212:47    - Unknown word (workspaced) -- works correctly in workspaced browser mode if instances
+test/config/test/browser-configs.test.ts:316:49    - Unknown word (myproject)  -- await vitest({ project: 'myproject' }, {
+test/config/test/browser-configs.test.ts:55:49     - Unknown word (chrom)      -- await vitest({ project: 'chrom*' }, {
 test/config/test/console-color.test.ts:16:36     - Unknown word (mtrue)      -- stdout).toContain('\x1B[33mtrue\x1B[39m\n')
 test/core/deps/dep-nested-cjs/index.d.ts:1:15      - Unknown word (Klass)      -- declare class Klass {
 test/core/src/mocks/external/default-cjs.cjs:1:33      - Unknown word (pseudoesm)  -- exports = require('./cjs-pseudoesm.cjs')

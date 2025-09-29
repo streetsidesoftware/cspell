@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: https://github.com/googleapis/google-cloud-cpp.git
 Args: '["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]'
 Summary:
-  files: 20764
+  files: 20771
   filesWithIssues: 7874
   issues: 46265
   errors: 0
@@ -493,9 +493,9 @@ issues:
   - "google/cloud/bigtable/benchmarks/random_mutation.cc:31:8        ABCDEFGHIJLKMNOPQRSTUVWXY       U       \"ABCDEFGHIJLKMNOPQRSTUVWXYZabcdefghijlkmnopqrstuvwxyz"
   - "google/cloud/bigtable/benchmarks/random_mutation.cc:31:33       Zabcdefghijlkmnopqrstuvwxyz     U       ABCDEFGHIJLKMNOPQRSTUVWXYZabcdefghijlkmnopqrstuvwxyz0123456789-/_\");"
   - "google/cloud/bigtable/benchmarks/scan_async_throughput_benchmark.cc:105:34      lprofiler       U       copt=-g --linkopt='-lprofiler' \\"
-  - "google/cloud/bigtable/bigtable_client_unit_tests.bzl:90:12          readmodifywriterow      U       \"table_readmodifywriterow_test.cc\","
-  - "google/cloud/bigtable/bigtable_client_unit_tests.bzl:91:12          readrow                 U       \"table_readrow_test.cc\","
-  - "google/cloud/bigtable/bigtable_client_unit_tests.bzl:92:12          readrows                U       \"table_readrows_test.cc\","
+  - "google/cloud/bigtable/bigtable_client_unit_tests.bzl:91:12          readmodifywriterow      U       \"table_readmodifywriterow_test.cc\","
+  - "google/cloud/bigtable/bigtable_client_unit_tests.bzl:92:12          readrow                 U       \"table_readrow_test.cc\","
+  - "google/cloud/bigtable/bigtable_client_unit_tests.bzl:93:12          readrows                U       \"table_readrows_test.cc\","
   - "google/cloud/bigtable/BUILD.bazel:132:22        readrowsparser      U       name = \"internal_readrowsparser_test\","
   - "google/cloud/bigtable/client_options_test.cc:311:28         Grpclb      U       ClientOptionsTest, SetGrpclbFallbackTimeoutMS) {"
   - "google/cloud/bigtable/client_options_test.cc:319:44         GRPCLB      U       hannelArgument(args, GRPC_ARG_GRPCLB_FALLBACK_TIMEOUT_MS"
@@ -529,8 +529,8 @@ issues:
   - "google/cloud/bigtable/tests/admin_integration_test.cc:189:12        newfam      U       \"newfam\", GC::Intersection(GC"
   - "google/cloud/bigtable/tests/mutations_integration_test.cc:120:16        decodeable (decodable)      U       // *will* be decodeable to in int64_t. I don"
   - "google/cloud/bigtable/tools/convert_acceptance_tests.py:87:13       rowkey      U       rowkey_string = base64.b64decode"
-  - "google/cloud/bigtable/value_test.cc:311:14      infval      U       auto const infval = std::numeric_limits"
-  - "google/cloud/bigtable/value_test.cc:312:14      nanval      U       auto const nanval = std::nan(\"NaN\");"
+  - "google/cloud/bigtable/value_test.cc:494:14      infval      U       auto const infval = std::numeric_limits"
+  - "google/cloud/bigtable/value_test.cc:495:14      nanval      U       auto const nanval = std::nan(\"NaN\");"
   - "google/cloud/billing/budgets/v1/internal/budget_option_defaults.cc:40:8         billingbudgets      U       \"billingbudgets.googleapis.com\");"
   - "google/cloud/billing/doc/environment-variables.dox:18:40        cloudbilling    U       (which defaults to \"cloudbilling.googleapis.com\")"
   - "google/cloud/billing/v1/cloud_billing_client.h:649:21       unbilled    U       /// expected. Any unbilled charges to date will"

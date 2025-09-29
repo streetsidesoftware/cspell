@@ -3,8 +3,8 @@ Repository: sveltejs/svelte
 Url: https://github.com/sveltejs/svelte.git
 Args: '["**"]'
 Summary:
-  files: 7920
-  filesWithIssues: 548
+  files: 7932
+  filesWithIssues: 549
   issues: 3833
   errors: 0
 Errors: []
@@ -51,7 +51,7 @@ issues:
   - "documentation/docs/03-template-syntax/14-transition.md:165:3        onintroend      U       onintroend={() => (status = 'intro"
   - "documentation/docs/03-template-syntax/14-transition.md:166:3        onoutroend      U       onoutroend={() => (status = 'outro"
   - "documentation/docs/03-template-syntax/15-in-and-out.md:5:255        outroed     U       reversing, if the block is outroed while the transition"
-  - "documentation/docs/03-template-syntax/19-await-expressions.md:121:11        octarine    U       color = 'octarine';"
+  - "documentation/docs/03-template-syntax/19-await-expressions.md:105:11        octarine    U       color = 'octarine';"
   - "documentation/docs/04-styling/03-custom-properties.md:17:28         desugars    U       above code essentially desugars to this:"
   - "documentation/docs/05-special-elements/07-svelte-options.md:13:111      mathml      U       default), \"svg\" or \"mathml\""
   - "documentation/docs/06-runtime/01-stores.md:133:42       tock                U       sound === 'tick' ? 'tock' : 'tick'));"
@@ -1691,8 +1691,8 @@ issues:
   - "packages/svelte/src/compiler/phases/3-transform/client/visitors/ConstTag.js:53:11       optimise    U       // TODO optimise the simple `{ x } ="
   - "packages/svelte/src/compiler/phases/3-transform/client/visitors/shared/declarations.js:31:30        unsub       U       call = b.call('$.store_unsub', call, b.literal(`"
   - "packages/svelte/src/compiler/phases/3-transform/client/visitors/shared/element.js:45:67         readded     U       it isn't removed and readded on every update"
-  - "packages/svelte/src/compiler/phases/3-transform/server/visitors/RegularElement.js:16:9          Optimiser       U       PromiseOptimiser"
-  - "packages/svelte/src/compiler/phases/3-transform/server/visitors/RegularElement.js:38:8          optimiser       U       const optimiser = new PromiseOptimiser"
+  - "packages/svelte/src/compiler/phases/3-transform/server/visitors/RegularElement.js:15:9          Optimiser       U       PromiseOptimiser"
+  - "packages/svelte/src/compiler/phases/3-transform/server/visitors/RegularElement.js:37:8          optimiser       U       const optimiser = new PromiseOptimiser"
   - "packages/svelte/src/compiler/phases/3-transform/server/visitors/VariableDeclaration.js:55:45        deconflict      U       declared separately, deconflict"
   - "packages/svelte/src/compiler/phases/3-transform/utils.js:237:76         spaceand    U       text node with a single spaceand keep whitespace"
   - "packages/svelte/src/compiler/phases/patterns.js:21:43       aeiou       U       starts_with_vowel = /^[aeiou]/;"
@@ -1720,7 +1720,6 @@ issues:
   - "packages/svelte/src/internal/client/reactivity/batch.js:46:14       travelling      U       * When time travelling, we re-evaluate deriveds"
   - "packages/svelte/src/internal/client/reactivity/effects.js:14:2          untracking      U       untracking"
   - "packages/svelte/src/internal/client/reactivity/sources.js:252:63        overfiring      U       - this way we avoid overfiring."
-  - "packages/svelte/src/internal/client/render.js:146:18        occured (occurred)      U       // If an error occured above, the operations"
   - "packages/svelte/src/internal/client/runtime.js:129:90       depedencies (dependencies)      U       to avoid duplicating depedencies inside a reaction *"
   - "packages/svelte/src/internal/client/timing.js:12:5          bunder      U       // bunder will eval and remove"
   - "packages/svelte/src/internal/server/index.js:25:23          FDEF        U       [\\s'\">/=\\u{FDD0}-\\u{FDEF}\\u{FFFE}\\u{FFFF}\\u{"
@@ -1736,8 +1735,8 @@ issues:
   - "packages/svelte/src/internal/server/index.js:25:281         EFFFE       U       u{DFFFE}\\u{DFFFF}\\u{EFFFE}\\u{EFFFF}\\u{FFFFE}\\u"
   - "packages/svelte/src/internal/server/index.js:25:299         FFFFE       U       u{EFFFE}\\u{EFFFF}\\u{FFFFE}\\u{FFFFF}\\u{10FFFE}"
   - "packages/svelte/src/internal/server/renderer.js:66:28       uncopied                    U       will be re-exposed, uncopied, on all children."
-  - "packages/svelte/src/internal/server/renderer.js:380:46      regsitered (registered)     U       onDestroy` callbacks regsitered during rendering. In"
-  - "packages/svelte/src/internal/server/renderer.test.ts:265:30         fastslowsync    U       body).toBe('<!--[-->fastslowsync<!--]-->');"
+  - "packages/svelte/src/internal/server/renderer.js:391:46      regsitered (registered)     U       onDestroy` callbacks regsitered during rendering. In"
+  - "packages/svelte/src/internal/server/renderer.test.ts:283:30         fastslowsync    U       body).toBe('<!--[-->fastslowsync<!--]-->');"
   - "packages/svelte/src/internal/shared/clone.js:35:8           uncloned    U       let uncloned = slice.map((path)"
   - "packages/svelte/src/motion/public.d.ts:1:25         Unsubscriber    U       import { Readable, type Unsubscriber } from '../store/public"
   - "packages/svelte/src/motion/tweened.js:163:31        tweens      U       wrapper for a value that tweens smoothly to its target"
@@ -1932,6 +1931,7 @@ issues:
   - "packages/svelte/tests/runtime-runes/samples/dynamic-event-handler-2/_config.js:4:17         Tama        U       html: '<button>Tama</button><button>Pochi"
   - "packages/svelte/tests/runtime-runes/samples/dynamic-event-handler-2/_config.js:4:38         Pochi       U       Tama</button><button>Pochi</button><br><button"
   - "packages/svelte/tests/runtime-runes/samples/effect-order-7/_config.js:8:19          AFAICT      U       // a real issue (AFAICT), we ignore it"
+  - "packages/svelte/tests/runtime-runes/samples/error-boundary-12/main.svelte:18:12         occured (occurred)      U       <p>Error occured</p>"
   - "packages/svelte/tests/runtime-runes/samples/error-boundary-18/_config.js:5:22           unskip      U       skip: true, // TODO unskip once tagged values are"
   - "packages/svelte/tests/runtime-runes/samples/event-attribute-not-hoistable/main.svelte:9:7           doesnt (doesn't)    U       b = doesnt_exist();"
   - "packages/svelte/tests/runtime-runes/samples/event-attribute-not-hoistable/main.svelte:31:73         delegateable        U       when one of them is not delegateable -->"
