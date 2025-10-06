@@ -3,9 +3,9 @@ Repository: sveltejs/svelte
 Url: https://github.com/sveltejs/svelte.git
 Args: '["**"]'
 Summary:
-  files: 7932
-  filesWithIssues: 549
-  issues: 3833
+  files: 7945
+  filesWithIssues: 551
+  issues: 3841
   errors: 0
 Errors: []
 
@@ -34,7 +34,7 @@ issues:
   - "documentation/docs/03-template-syntax/06-snippet.md:15:128      duplicative     U       Instead of writing duplicative code like [this](/playground"
   - "documentation/docs/03-template-syntax/08-@html.md:13:216        unsanitized     U       xss/). Never render unsanitized content."
   - "documentation/docs/03-template-syntax/12-bind.md:7:80           lvalue      U       expression` is an [_lvalue_](https://press.rebus"
-  - "documentation/docs/03-template-syntax/12-bind.md:165:60         Guac        U       group={fillings} value=\"Guac (extra)\" /> Guac (extra"
+  - "documentation/docs/03-template-syntax/12-bind.md:167:60         Guac        U       group={fillings} value=\"Guac (extra)\" /> Guac (extra"
   - "documentation/docs/03-template-syntax/13-use.md:14:11       myaction        U       function myaction(node) {"
   - "documentation/docs/03-template-syntax/13-use.md:61:7        onswiperight    U       * onswiperight: (e: CustomEvent) ="
   - "documentation/docs/03-template-syntax/13-use.md:62:7        onswipeleft     U       * onswipeleft: (e: CustomEvent) ="
@@ -72,10 +72,7 @@ issues:
   - "documentation/docs/07-misc/07-v5-migration-guide.md:513:25      automigrated        U       Things that are not automigrated"
   - "documentation/docs/07-misc/07-v5-migration-guide.md:796:11      footgun             U       This is a footgun. In runes mode, if you"
   - "documentation/docs/07-misc/07-v5-migration-guide.md:838:28      analyse             U       Previously, Svelte did not analyse selectors inside `:is"
-  - "documentation/docs/07-misc/99-faq.md:96:127         navaid              U       page.js). There's also [navaid](https://github.com"
-  - "documentation/docs/07-misc/99-faq.md:102:2          Routify             U       [Routify](https://routify.dev"
-  - "documentation/docs/07-misc/99-faq.md:104:56         sveltesociety       U       maintained list of routers on sveltesociety.dev](https://sveltesociety"
-  - "documentation/docs/07-misc/99-faq.md:108:272        Tauri               U       into a mobile app with [Tauri](https://v2.tauri.app"
+  - "documentation/docs/07-misc/99-faq.md:100:272        Tauri       U       into a mobile app with [Tauri](https://v2.tauri.app"
   - "documentation/docs/99-legacy/10-legacy-on.md:88:73          initialised     U       dispatcher_ when they are initialised:"
   - "package.json:31:7           svitejs     U       \"@svitejs/changesets-changelog"
   - "packages/svelte/CHANGELOG-pre-5.md:226:10       deindent            U       - chore: deindent cjs output for compiler"
@@ -1679,7 +1676,7 @@ issues:
   - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y/constants.js:36:19       labelable       U       export const a11y_labelable = ["
   - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y/constants.js:236:3       impp            U       'impp'"
   - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y/index.js:124:12      proptypes       U       // aria-proptypes"
-  - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y/index.js:722:21      webauthn        U       if (tokens[0] === 'webauthn') {"
+  - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y/index.js:725:21      webauthn        U       if (tokens[0] === 'webauthn') {"
   - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/utils.js:124:41       inbetween (between)     U       whitespace is allowed inbetween. TODO remove once legacy"
   - "packages/svelte/src/compiler/phases/3-transform/client/transform-client.js:178:3        memoizer    U       memoizer: /** @type {any} */"
   - "packages/svelte/src/compiler/phases/3-transform/client/transform-template/fix-attribute-casing.js:2:1321        onbegin     U       offset onabort onactivate onbegin onclick onend onerror"
@@ -1717,7 +1714,8 @@ issues:
   - "packages/svelte/src/internal/client/dom/elements/misc.js:54:66          possiblity (possibility)    U       get noticed of it (no possiblity of stopPropagation)"
   - "packages/svelte/src/internal/client/proxy.js:40:12          proxyable       U       // if non-proxyable, or is already a proxy"
   - "packages/svelte/src/internal/client/proxy.js:90:32          inspectable     U       /** @type {any} */ (inspectable_array(/** @type {any"
-  - "packages/svelte/src/internal/client/reactivity/batch.js:46:14       travelling      U       * When time travelling, we re-evaluate deriveds"
+  - "packages/svelte/src/internal/client/reactivity/batch.js:47:14       travelling      U       * When time travelling, we re-evaluate deriveds"
+  - "packages/svelte/src/internal/client/reactivity/deriveds.js:117:6        deferreds       U       var deferreds = new Map();"
   - "packages/svelte/src/internal/client/reactivity/effects.js:14:2          untracking      U       untracking"
   - "packages/svelte/src/internal/client/reactivity/sources.js:252:63        overfiring      U       - this way we avoid overfiring."
   - "packages/svelte/src/internal/client/runtime.js:129:90       depedencies (dependencies)      U       to avoid duplicating depedencies inside a reaction *"
@@ -1905,7 +1903,6 @@ issues:
   - "packages/svelte/tests/runtime-legacy/samples/transition-js-deferred-option-direction/_config.js:13:13       bothin      U       const div_bothin = /** @type {HTMLDivElement"
   - "packages/svelte/tests/runtime-legacy/samples/transition-js-deferred-option-direction/_config.js:16:13       bothout     U       const div_bothout = /** @type {HTMLDivElement"
   - "packages/svelte/tests/runtime-legacy/samples/transition-js-slot-5-cancelled-overflow/_config.js:6:6         spreaded (spread)       U       // + spreaded props + overflow context"
-  - "packages/svelte/tests/runtime-runes/samples/async-binding-update-while-focused-2/main.svelte:4:6            deferreds       U       let deferreds = [];"
   - "packages/svelte/tests/runtime-runes/samples/async-each/_config.js:8:11          defg    U       <button>defg</button>"
   - "packages/svelte/tests/runtime-runes/samples/async-error/_config.js:31:78        wheee       U       button>step 3</button><h1>wheee</h1>'"
   - "packages/svelte/tests/runtime-runes/samples/attribute-boolean-case-insensitivity/main.svelte:14:80          DISABLEPICTUREINPICTURE     U       val} PLAYSINLINE={val} DISABLEPICTUREINPICTURE={val} DISABLEREMOTEPLAYBACK"
