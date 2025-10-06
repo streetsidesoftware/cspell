@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: [".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 2093, Issues found: 1651 in 310 files.
+ CSpell: Files checked: 2093, Issues found: 1639 in 307 files.
  exit code: 1
 Makefile.js:126:82    - Unknown word (ined)       -- followed by the string "ined".
 Makefile.js:375:9     - Unknown word (gensite)    -- target.gensite();
@@ -231,7 +231,6 @@ lib/languages/js/index.js:181:41    - Unknown word (FEENSTRA)   -- NO EVENT SHAL
 lib/linter/code-path-analysis/code-path-state.js:1246:37   - Unknown word (circuting)  -- path due to the short-circuting, so we are just seeding
 lib/linter/code-path-analysis/code-path-state.js:1725:14   - Unknown word (Segs)       -- const prevSegsOfLeavingSegment = [headOfLeav
 lib/linter/code-path-analysis/debug-helpers.js:109:41    - Unknown word (Graphvis)   -- can be visualized with Graphvis.
-lib/linter/esquery.js:93:30     - Unknown word (specifity)  -- Compares this selector's specifity to another selector
 lib/linter/linter.js:42:7      - Unknown word (jslang)     -- const jslang = require("../languages
 lib/rule-tester/rule-tester.js:266:42    - Unknown word (errorize)   -- ast The root node to errorize `start`/`end` properties
 lib/rule-tester/rule-tester.js:936:21    - Unknown word (Didnt)      -- function assertASTDidntChange(beforeAST, afterAST
@@ -306,15 +305,10 @@ tests/lib/config/flat-config-array.js:1932:17   - Unknown word (truex)       -- 
 tests/lib/config/flat-config-array.js:222:19    - Unknown word (noniterable) -- it("should allow noniterable baseConfig objects"
 tests/lib/config/flat-config-array.js:2534:9    - Unknown word (foox)        -- foox: [1, "bar"],
 tests/lib/config/flat-config-array.js:2560:10   - Unknown word (doesnt)      -- "doesnt-exist/match": "error
-tests/lib/config/flat-config-schema.js:21:50     - Unknown word (reults)     -- expectedResult] The expected reults of merging first and
-tests/lib/config/flat-config-schema.js:47:17     - Unknown word (emtpy)      -- it("returns an emtpy object if both values
 tests/lib/eslint/eslint.js:12540:20  - Unknown word (dignore)      -- cwd: `${root}-dignore`,
 tests/lib/eslint/eslint.js:13616:11  - Unknown word (multitreading) -- // No multitreading expected because all
 tests/lib/eslint/eslint.js:13683:9   - Unknown word (Multitreading) -- // Multitreading expected because files
-tests/lib/eslint/eslint.js:14614:26  - Unknown word (previos)       -- make sure that the previos assertion checks the
-tests/lib/eslint/eslint.js:14696:46  - Unknown word (intenationally) -- cacheFilePath, "[]"); // intenationally invalid to additionally
-tests/lib/eslint/eslint.js:14932:46  - Unknown word (occured)        -- the previous run that occured after the cache was
-tests/lib/eslint/eslint.js:16079:81  - Unknown word (unerasable)     -- of an ESM module with unerasable TypeScript syntax",
+tests/lib/eslint/eslint.js:16079:81  - Unknown word (unerasable)    -- of an ESM module with unerasable TypeScript syntax",
 tests/lib/eslint/eslint.js:2086:22   - Unknown word (myjs)       -- files: ["**/*.myjs"],
 tests/lib/eslint/eslint.js:2769:9    - Unknown word (doesnotexist) -- "doesnotexist/*.js",
 tests/lib/eslint/eslint.js:2868:47   - Unknown word (doesexist)    -- await eslint.lintFiles(["doesexist/*.js"]);
@@ -322,6 +316,9 @@ tests/lib/eslint/eslint.js:3723:63   - Unknown word (unignoring)   -- unignored 
 tests/lib/eslint/eslint.js:3737:27   - Unknown word (jsfmt)        -- "!tests/format/**/jsfmt.spec.js",
 tests/lib/eslint/eslint.js:8166:25   - Unknown word (mcts)         -- "eslint.config.mcts": configFileContent
 tests/lib/eslint/legacy-eslint.js:3031:15   - Unknown word (succesfully) -- it("should succesfully execute with a rule
+tests/lib/eslint/legacy-eslint.js:3974:27   - Unknown word (previos)     -- make sure that the previos assertion checks the
+tests/lib/eslint/legacy-eslint.js:4056:47   - Unknown word (intenationally) -- cacheFilePath, "[]"); // intenationally invalid to additionally
+tests/lib/eslint/legacy-eslint.js:4293:47   - Unknown word (occured)        -- the previous run that occured after the cache was
 tests/lib/linter/file-report.js:682:13    - Unknown word (fooo)       -- text: "fooo\nbar",
 tests/lib/linter/file-report.js:737:15    - Unknown word (ncdar)      -- text: "o\ncdar",
 tests/lib/linter/linter.js:3647:1    - Unknown word (consolexlog) -- consolexlog("test2");
@@ -366,7 +363,6 @@ tests/lib/rules/indent-legacy.js:899:34    - Unknown word (xfilter)    -- functi
 tests/lib/rules/indent.js:3080:15   - Unknown word (curlies)    -- // Template curlies
 tests/lib/rules/indent.js:3741:30   - Unknown word (foop)       -- var x = function foop(bar)
 tests/lib/rules/indent.js:423:17    - Unknown word (lmnn)       -- lmnn = [{
-tests/lib/rules/init-declarations.js:426:38    - Unknown word (stirng)     -- string = function (arg1: stirng): string {
 tests/lib/rules/key-spacing.js:888:39    - Unknown word (longlonglong) -- 'bar' : 2, baz : 3, longlonglong : 4",
 tests/lib/rules/line-comment-position.js:44:14     - Unknown word (Meep)       -- code: "// Meep\nconsole.log('Meep'
 tests/lib/rules/no-cond-assign.js:263:24    - Unknown word (bkufyydt)   -- code: "(((3496.29)).bkufyydt = 2e308) ? foo : bar
@@ -394,7 +390,6 @@ tests/lib/rules/no-invalid-regexp.js:81:29     - Unknown word (Vith)        -- R
 tests/lib/rules/no-invalid-regexp.js:82:29     - Unknown word (Vithkuqi)    -- RegExp('\\\\p{Script=Vithkuqi}', 'u')",
 tests/lib/rules/no-loop-func.js:840:8     - Unknown word (Unconfigured) -- // UnconfiguredGlobalType is not defined
 tests/lib/rules/no-loop-func.js:856:52    - Unknown word (unconfig)     -- configItem: ConfiguredType, unconfigItem: UnconfiguredType
-tests/lib/rules/no-prototype-builtins.js:284:43    - Unknown word (Expresion)  -- OwnProperty is part of a ChainExpresion
 tests/lib/rules/no-prototype-builtins.js:48:28     - Unknown word (Enumerabl)  -- code: "foo?.['propertyIsEnumerabl']('bar')",
 tests/lib/rules/no-restricted-imports.js:799:27    - Unknown word (subimports) -- message: "some foo subimports are restricted",
 tests/lib/rules/no-script-url.js:25:15     - Unknown word (xjavascript) -- "var url = 'xjavascript:'",

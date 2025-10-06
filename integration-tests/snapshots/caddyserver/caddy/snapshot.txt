@@ -3,7 +3,7 @@ Repository: caddyserver/caddy
 Url: "https://github.com/caddyserver/caddy.git"
 Args: ["**/*.go"]
 Lines:
- CSpell: Files checked: 286, Issues found: 3714 in 256 files.
+ CSpell: Files checked: 286, Issues found: 3715 in 256 files.
  exit code: 1
 admin.go:1082:20   - Unknown word (Redir)       -- return errInternalRedir
 admin.go:1358:6    - Unknown word (loggable)    -- type loggableURLArray []*url.URL
@@ -572,19 +572,19 @@ caddyconfig/httpcaddyfile/tlsapp.go:481:15    - Unknown word (ACMECA)        -- 
 caddyconfig/httpcaddyfile/tlsapp.go:552:23    - Unknown word (ACMEDN)        -- globalACMEDNS, globalACMEDNSok := options["acme
 caddyconfig/httpcaddyfile/tlsapp.go:552:8     - Unknown word (ACMEDNS)       -- globalACMEDNS, globalACMEDNSok :=
 caddyconfig/httpcaddyfile/tlsapp.go:553:8     - Unknown word (ACMEEAB)       -- globalACMEEAB := options["acme_eab
-caddyconfig/httpcaddyfile/tlsapp.go:567:11    - Unknown word (ACMEDN)        -- if globalACMEDNSok {
-caddyconfig/httpcaddyfile/tlsapp.go:574:19    - Unknown word (ACMEDNS)       -- } else if globalACMEDNS != nil {
-caddyconfig/httpcaddyfile/tlsapp.go:578:54    - Unknown word (ACMEDNS)       -- JSONModuleObject(globalACMEDNS, "name", globalACMEDNS
-caddyconfig/httpcaddyfile/tlsapp.go:585:11    - Unknown word (ACMEEAB)       -- if globalACMEEAB != nil && acmeIssuer
-caddyconfig/httpcaddyfile/tlsapp.go:586:38    - Unknown word (ACMEEAB)       -- ExternalAccount = globalACMEEAB.(*acme.EAB)
-caddyconfig/httpcaddyfile/tlsapp.go:591:37    - Unknown word (ALPN)          -- configure alt HTTP and TLS-ALPN ports if the DNS challenge
-caddyconfig/httpcaddyfile/tlsapp.go:601:156   - Unknown word (TLSALPN)       -- acmeIssuer.Challenges.TLSALPN == nil || acmeIssuer
-caddyconfig/httpcaddyfile/tlsapp.go:601:196   - Unknown word (TLSALPN)       -- acmeIssuer.Challenges.TLSALPN.AlternatePort == 0)
-caddyconfig/httpcaddyfile/tlsapp.go:605:28    - Unknown word (TLSALPN)       -- acmeIssuer.Challenges.TLSALPN == nil {
-caddyconfig/httpcaddyfile/tlsapp.go:606:26    - Unknown word (TLSALPN)       -- acmeIssuer.Challenges.TLSALPN = new(caddytls.TLSALPNChallen
-caddyconfig/httpcaddyfile/tlsapp.go:606:49    - Unknown word (TLSALPN)       -- TLSALPN = new(caddytls.TLSALPNChallengeConfig)
-caddyconfig/httpcaddyfile/tlsapp.go:730:60    - Unknown word (hostnames)     -- if only one has any hostnames
-caddyconfig/httpcaddyfile/tlsapp.go:731:57    - Unknown word (hostnames)     -- the one without any hostnames,
+caddyconfig/httpcaddyfile/tlsapp.go:567:11    - Unknown word (ACMEDN)        -- if globalACMEDNSok && (acmeIssuer.Challenges
+caddyconfig/httpcaddyfile/tlsapp.go:569:32    - Unknown word (ACMEDNS)       -- globalDNS == nil && globalACMEDNS == nil {
+caddyconfig/httpcaddyfile/tlsapp.go:581:79    - Unknown word (ACMEDNS)       -- JSONModuleObject(globalACMEDNS, "name", globalACMEDNS
+caddyconfig/httpcaddyfile/tlsapp.go:584:11    - Unknown word (ACMEEAB)       -- if globalACMEEAB != nil && acmeIssuer
+caddyconfig/httpcaddyfile/tlsapp.go:585:38    - Unknown word (ACMEEAB)       -- ExternalAccount = globalACMEEAB.(*acme.EAB)
+caddyconfig/httpcaddyfile/tlsapp.go:590:37    - Unknown word (ALPN)          -- configure alt HTTP and TLS-ALPN ports if the DNS challenge
+caddyconfig/httpcaddyfile/tlsapp.go:600:156   - Unknown word (TLSALPN)       -- acmeIssuer.Challenges.TLSALPN == nil || acmeIssuer
+caddyconfig/httpcaddyfile/tlsapp.go:600:196   - Unknown word (TLSALPN)       -- acmeIssuer.Challenges.TLSALPN.AlternatePort == 0)
+caddyconfig/httpcaddyfile/tlsapp.go:604:28    - Unknown word (TLSALPN)       -- acmeIssuer.Challenges.TLSALPN == nil {
+caddyconfig/httpcaddyfile/tlsapp.go:605:26    - Unknown word (TLSALPN)       -- acmeIssuer.Challenges.TLSALPN = new(caddytls.TLSALPNChallen
+caddyconfig/httpcaddyfile/tlsapp.go:605:49    - Unknown word (TLSALPN)       -- TLSALPN = new(caddytls.TLSALPNChallengeConfig)
+caddyconfig/httpcaddyfile/tlsapp.go:729:60    - Unknown word (hostnames)     -- if only one has any hostnames
+caddyconfig/httpcaddyfile/tlsapp.go:730:57    - Unknown word (hostnames)     -- the one without any hostnames,
 caddyconfig/httpcaddyfile/tlsapp.go:90:28     - Unknown word (caddytls)      -- tlsApp.Automation = new(caddytls.AutomationConfig)
 caddyconfig/httpcaddyfile/tlsapp_test.go:1:9       - Unknown word (httpcaddyfile) -- package httpcaddyfile
 caddyconfig/httpcaddyfile/tlsapp_test.go:50:11     - Unknown word (caddytls)      -- apA := &caddytls.AutomationPolicy{SubjectsRaw
@@ -759,17 +759,18 @@ caddytest/integration/map_test.go:7:35      - Unknown word (caddytest)   -- cadd
 caddytest/integration/mockdns_test.go:10:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/caddyconfig
 caddytest/integration/mockdns_test.go:10:35     - Unknown word (caddyconfig) -- caddyserver/caddy/v2/caddyconfig/caddyfile"
 caddytest/integration/mockdns_test.go:10:47     - Unknown word (caddyfile)   -- caddy/v2/caddyconfig/caddyfile"
-caddytest/integration/mockdns_test.go:33:13     - Unknown word (Caddyfile)   -- // UnmarshalCaddyfile sets up the module from
-caddytest/integration/mockdns_test.go:33:47     - Unknown word (Caddyfile)   -- sets up the module from Caddyfile tokens.
-caddytest/integration/mockdns_test.go:34:33     - Unknown word (Caddyfile)   -- MockDNSProvider) UnmarshalCaddyfile(d *caddyfile.Dispenser
-caddytest/integration/mockdns_test.go:34:46     - Unknown word (caddyfile)   -- UnmarshalCaddyfile(d *caddyfile.Dispenser) error {
-caddytest/integration/mockdns_test.go:39:79     - Unknown word (libdns)      -- zone string, recs []libdns.Record) ([]libdns.Record
-caddytest/integration/mockdns_test.go:39:97     - Unknown word (libdns)      -- []libdns.Record) ([]libdns.Record, error) {
-caddytest/integration/mockdns_test.go:44:79     - Unknown word (libdns)      -- zone string, recs []libdns.Record) ([]libdns.Record
-caddytest/integration/mockdns_test.go:60:4      - Unknown word (caddyfile)   -- _ caddyfile.Unmarshaler = (*MockDNSProvid
-caddytest/integration/mockdns_test.go:61:4      - Unknown word (certmagic)   -- _ certmagic.DNSProvider = (*MockDNSProvid
+caddytest/integration/mockdns_test.go:35:13     - Unknown word (Caddyfile)   -- // UnmarshalCaddyfile sets up the module from
+caddytest/integration/mockdns_test.go:35:47     - Unknown word (Caddyfile)   -- sets up the module from Caddyfile tokens.
+caddytest/integration/mockdns_test.go:36:36     - Unknown word (Caddyfile)   -- MockDNSProvider) UnmarshalCaddyfile(d *caddyfile.Dispenser
+caddytest/integration/mockdns_test.go:36:49     - Unknown word (caddyfile)   -- UnmarshalCaddyfile(d *caddyfile.Dispenser) error {
+caddytest/integration/mockdns_test.go:43:12     - Unknown word (Errf)        -- return d.Errf("unexpected argument
+caddytest/integration/mockdns_test.go:49:79     - Unknown word (libdns)      -- zone string, recs []libdns.Record) ([]libdns.Record
+caddytest/integration/mockdns_test.go:49:97     - Unknown word (libdns)      -- []libdns.Record) ([]libdns.Record, error) {
+caddytest/integration/mockdns_test.go:54:79     - Unknown word (libdns)      -- zone string, recs []libdns.Record) ([]libdns.Record
 caddytest/integration/mockdns_test.go:6:14      - Unknown word (caddyserver) -- "github.com/caddyserver/certmagic"
 caddytest/integration/mockdns_test.go:6:26      - Unknown word (certmagic)   -- github.com/caddyserver/certmagic"
+caddytest/integration/mockdns_test.go:70:4      - Unknown word (caddyfile)   -- _ caddyfile.Unmarshaler = (*MockDNSProvid
+caddytest/integration/mockdns_test.go:71:4      - Unknown word (certmagic)   -- _ certmagic.DNSProvider = (*MockDNSProvid
 caddytest/integration/mockdns_test.go:7:14      - Unknown word (libdns)      -- "github.com/libdns/libdns"
 caddytest/integration/mockdns_test.go:7:21      - Unknown word (libdns)      -- "github.com/libdns/libdns"
 caddytest/integration/mockdns_test.go:9:14      - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"

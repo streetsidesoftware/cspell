@@ -3,13 +3,15 @@ Repository: wireapp/wire-desktop
 Url: https://github.com/wireapp/wire-desktop.git
 Args: '["*.md","electron/renderer/**/*.jsx","electron/src/**/*.ts","electron/html/*.html"]'
 Summary:
-  files: 43
-  filesWithIssues: 7
-  issues: 29
+  files: 46
+  filesWithIssues: 9
+  issues: 36
   errors: 0
 Errors: []
 
 issues:
+  - "electron/src/auth/ExternalBrowserAuth.ts:284:6          Unregisters         U       * Unregisters the custom protocol"
+  - "electron/src/auth/ExternalBrowserAuth.ts:292:49         unregistration      U       Invalid protocol name for unregistration');"
   - "electron/src/locale/index.ts:118:8          Čeština         U       cs: 'Čeština',"
   - "electron/src/locale/index.ts:119:8          Dansk           U       da: 'Dansk',"
   - "electron/src/locale/index.ts:120:8          Deutsch         U       de: 'Deutsch',"
@@ -29,9 +31,10 @@ issues:
   - "electron/src/locale/index.ts:136:8          Slovenščina     U       sl: 'Slovenščina',"
   - "electron/src/locale/index.ts:138:8          Türkçe          U       tr: 'Türkçe',"
   - "electron/src/locale/index.ts:139:8          Українська      U       uk: 'Українська',"
-  - "electron/src/main.ts:172:15         mdns    U       // do not use mdns for local ip obfuscation"
-  - "electron/src/main.ts:173:73         Mdns    U       WebRtcHideLocalIpsWithMdns');"
-  - "electron/src/menu/developer.ts:71:27        Availeble (Available)       U       const environments = getAvailebleEnvironments();"
+  - "electron/src/main.ts:174:15         mdns        U       // do not use mdns for local ip obfuscation"
+  - "electron/src/main.ts:175:73         Mdns        U       WebRtcHideLocalIpsWithMdns');"
+  - "electron/src/main.ts:178:19         NOSONAR     U       (async () => { // NOSONAR - TypeScript config"
+  - "electron/src/menu/developer.ts:70:27        Availeble (Available)       U       const environments = getAvailebleEnvironments();"
   - "electron/src/preload/menu/preload-context.ts:194:54         Segoe       U       BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
-  - "electron/src/preload/preload-webview.ts:278:83      Popout          U       VERSION, supportsCallingPopoutWindow: true},"
-  - "electron/src/preload/preload-webview.ts:317:8       SQSERVICES      U       // see SQSERVICES-1882 and SQSERVICES"
+  - "electron/src/preload/preload-webview.ts:492:83      Popout          U       VERSION, supportsCallingPopoutWindow: true},"
+  - "electron/src/preload/preload-webview.ts:535:8       SQSERVICES      U       // see SQSERVICES-1882 and SQSERVICES"

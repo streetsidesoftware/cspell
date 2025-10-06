@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["--issues-summary-report","**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2876, Issues found: 8540 in 925 files.
+ CSpell: Files checked: 2876, Issues found: 8541 in 925 files.
  exit code: 1
 django/__init__.py:12:26     - Unknown word (urlresolvers) -- Set the thread-local urlresolvers script prefix if `set
 django/apps/registry.py:134:40    - Unknown word (unconfigured) -- not ready" is due to unconfigured settings, accessing
@@ -1471,31 +1471,32 @@ django/db/backends/postgresql/introspection.py:205:40    - Unknown word (confrel
 django/db/backends/postgresql/introspection.py:205:69    - Unknown word (confkey)        -- confrelid AND fka.attnum = c.confkey[1]),
 django/db/backends/postgresql/introspection.py:206:20    - Unknown word (reloptions)     -- cl.reloptions
 django/db/backends/postgresql/introspection.py:208:38    - Unknown word (conrelid)       -- pg_class AS cl ON c.conrelid = cl.oid
-django/db/backends/postgresql/introspection.py:229:44    - Unknown word (arridx)         -- agg(attname ORDER BY arridx),
-django/db/backends/postgresql/introspection.py:230:17    - Unknown word (indisunique)    -- indisunique,
-django/db/backends/postgresql/introspection.py:231:17    - Unknown word (indisprimary)   -- indisprimary,
-django/db/backends/postgresql/introspection.py:232:45    - Unknown word (arridx)         -- agg(ordering ORDER BY arridx),
-django/db/backends/postgresql/introspection.py:233:17    - Unknown word (amname)         -- amname,
-django/db/backends/postgresql/introspection.py:234:17    - Unknown word (exprdef)        -- exprdef,
-django/db/backends/postgresql/introspection.py:235:20    - Unknown word (attoptions)     -- s2.attoptions
-django/db/backends/postgresql/introspection.py:238:70    - Unknown word (amname)         -- *, attr.attname, am.amname,
-django/db/backends/postgresql/introspection.py:240:34    - Unknown word (indexprs)       -- WHEN idx.indexprs IS NOT NULL THEN
-django/db/backends/postgresql/introspection.py:241:36    - Unknown word (indexdef)       -- pg_get_indexdef(idx.indexrelid)
-django/db/backends/postgresql/introspection.py:242:28    - Unknown word (exprdef)        -- END AS exprdef,
-django/db/backends/postgresql/introspection.py:243:29    - Unknown word (amname)         -- CASE am.amname
-django/db/backends/postgresql/introspection.py:249:24    - Unknown word (reloptions)     -- c2.reloptions as attoptions
-django/db/backends/postgresql/introspection.py:249:38    - Unknown word (attoptions)     -- c2.reloptions as attoptions
-django/db/backends/postgresql/introspection.py:254:34    - Unknown word (indkey)         -- unnest(i.indkey, i.indoption)
-django/db/backends/postgresql/introspection.py:254:44    - Unknown word (indoption)      -- unnest(i.indkey, i.indoption)
-django/db/backends/postgresql/introspection.py:255:34    - Unknown word (ORDINALITY)     -- WITH ORDINALITY koi(key, option, arridx
-django/db/backends/postgresql/introspection.py:255:62    - Unknown word (arridx)         -- ORDINALITY koi(key, option, arridx)
-django/db/backends/postgresql/introspection.py:257:45    - Unknown word (indrelid)       -- JOIN pg_class c ON idx.indrelid = c.oid
-django/db/backends/postgresql/introspection.py:259:42    - Unknown word (relam)          -- JOIN pg_am am ON c2.relam = am.oid
-django/db/backends/postgresql/introspection.py:264:33    - Unknown word (indisunique)    -- GROUP BY indexname, indisunique, indisprimary, amname
-django/db/backends/postgresql/introspection.py:264:46    - Unknown word (indisprimary)   -- indexname, indisunique, indisprimary, amname, exprdef, attoptions
-django/db/backends/postgresql/introspection.py:264:60    - Unknown word (amname)         -- indisunique, indisprimary, amname, exprdef, attoptions
-django/db/backends/postgresql/introspection.py:264:68    - Unknown word (exprdef)       -- indisprimary, amname, exprdef, attoptions;
-django/db/backends/postgresql/introspection.py:264:77    - Unknown word (attoptions)    -- ndisprimary, amname, exprdef, attoptions;
+django/db/backends/postgresql/introspection.py:211:23    - Unknown word (contype)        -- AND c.contype != 'n'
+django/db/backends/postgresql/introspection.py:231:44    - Unknown word (arridx)         -- agg(attname ORDER BY arridx),
+django/db/backends/postgresql/introspection.py:232:17    - Unknown word (indisunique)    -- indisunique,
+django/db/backends/postgresql/introspection.py:233:17    - Unknown word (indisprimary)   -- indisprimary,
+django/db/backends/postgresql/introspection.py:234:45    - Unknown word (arridx)         -- agg(ordering ORDER BY arridx),
+django/db/backends/postgresql/introspection.py:235:17    - Unknown word (amname)         -- amname,
+django/db/backends/postgresql/introspection.py:236:17    - Unknown word (exprdef)        -- exprdef,
+django/db/backends/postgresql/introspection.py:237:20    - Unknown word (attoptions)     -- s2.attoptions
+django/db/backends/postgresql/introspection.py:240:70    - Unknown word (amname)         -- *, attr.attname, am.amname,
+django/db/backends/postgresql/introspection.py:242:34    - Unknown word (indexprs)       -- WHEN idx.indexprs IS NOT NULL THEN
+django/db/backends/postgresql/introspection.py:243:36    - Unknown word (indexdef)       -- pg_get_indexdef(idx.indexrelid)
+django/db/backends/postgresql/introspection.py:244:28    - Unknown word (exprdef)        -- END AS exprdef,
+django/db/backends/postgresql/introspection.py:245:29    - Unknown word (amname)         -- CASE am.amname
+django/db/backends/postgresql/introspection.py:251:24    - Unknown word (reloptions)     -- c2.reloptions as attoptions
+django/db/backends/postgresql/introspection.py:251:38    - Unknown word (attoptions)     -- c2.reloptions as attoptions
+django/db/backends/postgresql/introspection.py:256:34    - Unknown word (indkey)         -- unnest(i.indkey, i.indoption)
+django/db/backends/postgresql/introspection.py:256:44    - Unknown word (indoption)      -- unnest(i.indkey, i.indoption)
+django/db/backends/postgresql/introspection.py:257:34    - Unknown word (ORDINALITY)     -- WITH ORDINALITY koi(key, option, arridx
+django/db/backends/postgresql/introspection.py:257:62    - Unknown word (arridx)         -- ORDINALITY koi(key, option, arridx)
+django/db/backends/postgresql/introspection.py:259:45    - Unknown word (indrelid)       -- JOIN pg_class c ON idx.indrelid = c.oid
+django/db/backends/postgresql/introspection.py:261:42    - Unknown word (relam)          -- JOIN pg_am am ON c2.relam = am.oid
+django/db/backends/postgresql/introspection.py:266:33    - Unknown word (indisunique)    -- GROUP BY indexname, indisunique, indisprimary, amname
+django/db/backends/postgresql/introspection.py:266:46    - Unknown word (indisprimary)   -- indexname, indisunique, indisprimary, amname, exprdef, attoptions
+django/db/backends/postgresql/introspection.py:266:60    - Unknown word (amname)        -- indisunique, indisprimary, amname, exprdef, attoptions
+django/db/backends/postgresql/introspection.py:266:68    - Unknown word (exprdef)       -- indisprimary, amname, exprdef, attoptions;
+django/db/backends/postgresql/introspection.py:266:77    - Unknown word (attoptions)    -- ndisprimary, amname, exprdef, attoptions;
 django/db/backends/postgresql/introspection.py:63:28     - Unknown word (relispartition) -- WHEN c.relispartition THEN 'p'
 django/db/backends/postgresql/introspection.py:71:23     - Unknown word (nspname)        -- AND n.nspname NOT IN ('pg_catalog
 django/db/backends/postgresql/introspection.py:93:24     - Unknown word (attnotnull)     -- NOT (a.attnotnull OR (t.typtype = 'd'
@@ -1720,9 +1721,9 @@ django/db/models/options.py:545:33    - Unknown word (longwinded) -- The third f
 django/db/models/query.py:101:21    - Unknown word (klass)      -- model_cls = klass_info["model"]
 django/db/models/query.py:102:25    - Unknown word (klass)      -- select_fields = klass_info["select_fields
 django/db/models/query.py:1452:68   - Unknown word (deindent)   -- the deprecation ends, deindent as:
-django/db/models/query.py:2545:11   - Unknown word (aprefetch)  -- async def aprefetch_related_objects(model
-django/db/models/query.py:2760:35   - Unknown word (attnames)   -- init_list: the field attnames fetched from the database
-django/db/models/query.py:2761:57   - Unknown word (attnames)   -- isn't the same as all attnames of the
+django/db/models/query.py:2557:11   - Unknown word (aprefetch)  -- async def aprefetch_related_objects(model
+django/db/models/query.py:2772:35   - Unknown word (attnames)   -- init_list: the field attnames fetched from the database
+django/db/models/query.py:2773:57   - Unknown word (attnames)   -- isn't the same as all attnames of the
 django/db/models/query.py:552:27    - Unknown word (aprefetch)  -- await aprefetch_related_objects(
 django/db/models/query.py:560:23    - Unknown word (aprefetch)  -- await aprefetch_related_objects(
 django/db/models/query.py:771:30    - Unknown word (childmost)  -- insert into the childmost table.
@@ -1784,20 +1785,20 @@ django/db/models/sql/datastructures.py:80:25     - Unknown word (somecol)    -- 
 django/db/models/sql/datastructures.py:80:35     - Unknown word (othertable) -- sometable.somecol = othertable.othercol, params
 django/db/models/sql/datastructures.py:80:46     - Unknown word (othercol)   -- somecol = othertable.othercol, params
 django/db/models/sql/query.py:119:19    - Unknown word (repointing) -- # without repointing to the filtered annotation
-django/db/models/sql/query.py:1511:56   - Unknown word (multijoins) -- of reusable joins for multijoins.
-django/db/models/sql/query.py:1515:28   - Unknown word (unreffing)  -- is responsible for unreffing the joins used.
-django/db/models/sql/query.py:1622:40   - Unknown word (someval)    -- is null, then col != someval will result in SQL
-django/db/models/sql/query.py:1625:42   - Unknown word (someval)    -- col IS NULL OR col != someval)
-django/db/models/sql/query.py:1627:50   - Unknown word (someval)    -- IS NOT NULL AND col = someval).
-django/db/models/sql/query.py:1635:22   - Unknown word (someval)    -- # If someval is a nullable column
-django/db/models/sql/query.py:1635:52   - Unknown word (someval)    -- is a nullable column, someval IS NOT NULL is
-django/db/models/sql/query.py:2121:34   - Unknown word (louter)     -- trimmed_prefix, contains_louter = query.trim_start(names
-django/db/models/sql/query.py:2454:44   - Unknown word (datastructure) -- that we can use a set datastructure. We do the foo__bar
-django/db/models/sql/query.py:2644:42   - Unknown word (outerq)        -- lookup usable for doing outerq.filter(lookup=self)
-django/db/models/sql/query.py:2740:5    - Unknown word (dirn)          -- dirn = ORDER_DIR[default
-django/db/models/sql/query.py:2742:27   - Unknown word (dirn)          -- return field[1:], dirn[1]
-django/db/models/sql/query.py:2743:19   - Unknown word (dirn)          -- return field, dirn[0]
-django/db/models/sql/query.py:2806:61   - Unknown word (rels)          -- 2, if either of the rels produce NULL
+django/db/models/sql/query.py:1512:56   - Unknown word (multijoins) -- of reusable joins for multijoins.
+django/db/models/sql/query.py:1516:28   - Unknown word (unreffing)  -- is responsible for unreffing the joins used.
+django/db/models/sql/query.py:1623:40   - Unknown word (someval)    -- is null, then col != someval will result in SQL
+django/db/models/sql/query.py:1626:42   - Unknown word (someval)    -- col IS NULL OR col != someval)
+django/db/models/sql/query.py:1628:50   - Unknown word (someval)    -- IS NOT NULL AND col = someval).
+django/db/models/sql/query.py:1636:22   - Unknown word (someval)    -- # If someval is a nullable column
+django/db/models/sql/query.py:1636:52   - Unknown word (someval)    -- is a nullable column, someval IS NOT NULL is
+django/db/models/sql/query.py:2122:34   - Unknown word (louter)     -- trimmed_prefix, contains_louter = query.trim_start(names
+django/db/models/sql/query.py:2455:44   - Unknown word (datastructure) -- that we can use a set datastructure. We do the foo__bar
+django/db/models/sql/query.py:2645:42   - Unknown word (outerq)        -- lookup usable for doing outerq.filter(lookup=self)
+django/db/models/sql/query.py:2741:5    - Unknown word (dirn)          -- dirn = ORDER_DIR[default
+django/db/models/sql/query.py:2743:27   - Unknown word (dirn)          -- return field[1:], dirn[1]
+django/db/models/sql/query.py:2744:19   - Unknown word (dirn)          -- return field, dirn[0]
+django/db/models/sql/query.py:2807:61   - Unknown word (rels)          -- 2, if either of the rels produce NULL
 django/db/models/sql/query.py:359:53    - Unknown word (deepcopied) -- work when a Query is deepcopied."""
 django/db/models/sql/query.py:427:21    - Unknown word (klass)      -- def chain(self, klass=None):
 django/db/models/sql/query.py:430:13    - Unknown word (klass)      -- The klass argument changes the
@@ -3447,10 +3448,10 @@ tests/annotations/tests.py:1061:34   - Unknown word (Kaufmann)   -- {"name": "Mo
 tests/annotations/tests.py:1155:32   - Unknown word (Bissex)     -- {"name": "Paul Bissex", "max_pages": 0},
 tests/annotations/tests.py:1156:37   - Unknown word (Chun)       -- {"name": "Wesley J. Chun", "max_pages": 0},
 tests/annotations/tests.py:1193:14   - Unknown word (alia)       -- "alia s",
-tests/annotations/tests.py:1251:53   - Unknown word (Holovaty)   -- create(name="Adrian Holovaty", age=34)
-tests/annotations/tests.py:1252:52   - Unknown word (Kaplan)     -- objects.create(name="Jacob Kaplan-Moss", age=35)
-tests/annotations/tests.py:1256:45   - Unknown word (Apress)     -- objects.create(name="Apress", num_awards=3)
-tests/annotations/tests.py:1486:25   - Unknown word (otherage)   -- ).aggregate(otherage_sum=Sum("other_age"
+tests/annotations/tests.py:1252:53   - Unknown word (Holovaty)   -- create(name="Adrian Holovaty", age=34)
+tests/annotations/tests.py:1253:52   - Unknown word (Kaplan)     -- objects.create(name="Jacob Kaplan-Moss", age=35)
+tests/annotations/tests.py:1257:45   - Unknown word (Apress)     -- objects.create(name="Apress", num_awards=3)
+tests/annotations/tests.py:1487:25   - Unknown word (otherage)   -- ).aggregate(otherage_sum=Sum("other_age"
 tests/annotations/tests.py:166:29    - Unknown word (Pappa's)    -- name="Mamma and Pappa's Books",
 tests/annotations/tests.py:392:13    - Unknown word (otherage)   -- otherage_sum=Sum("other_age"
 tests/annotations/tests.py:395:31    - Unknown word (otherage)   -- self.assertEqual(agg["otherage_sum"], other_agg["age
@@ -5812,57 +5813,57 @@ tests/logging_tests/tests.py:846:15    - Unknown word (Привет)        -- (
 tests/logging_tests/tests.py:849:28    - Unknown word (mred)          -- ("escape\x1b[31mred\x1b[0m", "escape\\x
 tests/logging_tests/tests.py:849:57    - Unknown word (mred)          -- 0m", "escape\\x1b[31mred\\x1b[0m"),
 tests/logging_tests/tests.py:879:21    - Unknown word (levelno)       -- levelno=logging.ERROR,
-tests/lookup/tests.py:1138:34   - Unknown word (lengtp)     -- Unsupported lookup 'lengtp' for SlugField or join
-tests/lookup/tests.py:1143:46   - Unknown word (lengtp)     -- objects.filter(slug__lengtp=20)
-tests/lookup/tests.py:1170:34   - Unknown word (abspl)      -- Unsupported lookup 'abspl' for ManyToOneRel or
-tests/lookup/tests.py:1171:43   - Unknown word (abspk)      -- permitted, perhaps you meant abspk?"
-tests/lookup/tests.py:1175:62   - Unknown word (abspk)      -- field, Abs, lookup_name="abspk"):
-tests/lookup/tests.py:1176:48   - Unknown word (abspl)      -- objects.filter(article__abspl=2)
-tests/lookup/tests.py:1195:49   - Unknown word (fooo)       -- date=now, headline="fooo"),
-tests/lookup/tests.py:1206:69   - Unknown word (fooo)       -- ["f", "fo", "foo", "fooo"]),
-tests/lookup/tests.py:1210:69   - Unknown word (fooo)       -- ["f", "fo", "foo", "fooo", "hey-Foo"]),
-tests/lookup/tests.py:1215:64   - Unknown word (fooo)       -- headline__in=["fo", "foo", "fooo"]),
-tests/lookup/tests.py:1219:54   - Unknown word (fooo)       -- filter(headline__regex=r"fooo?"),
-tests/lookup/tests.py:1258:49   - Unknown word (foobaz)     -- date=now, headline="foobaz"),
-tests/lookup/tests.py:1260:49   - Unknown word (foobarbaz)  -- date=now, headline="foobarbaz"),
-tests/lookup/tests.py:1261:49   - Unknown word (zoocarfaz)  -- date=now, headline="zoocarfaz"),
-tests/lookup/tests.py:1262:49   - Unknown word (barfoobaz)  -- date=now, headline="barfoobaz"),
-tests/lookup/tests.py:1263:49   - Unknown word (bazba)      -- date=now, headline="bazbaRFOO"),
-tests/lookup/tests.py:1263:54   - Unknown word (RFOO)       -- now, headline="bazbaRFOO"),
-tests/lookup/tests.py:1272:22   - Unknown word (barfoobaz)  -- "barfoobaz",
-tests/lookup/tests.py:1274:22   - Unknown word (foobarbaz)  -- "foobarbaz",
-tests/lookup/tests.py:1275:22   - Unknown word (foobaz)     -- "foobaz",
-tests/lookup/tests.py:1283:22   - Unknown word (barfoobaz)  -- "barfoobaz",
-tests/lookup/tests.py:1285:22   - Unknown word (foobarbaz)  -- "foobarbaz",
-tests/lookup/tests.py:1286:22   - Unknown word (foobaz)     -- "foobaz",
-tests/lookup/tests.py:1293:61   - Unknown word (foobarbaz)  -- headline__in=["foobar", "foobarbaz", "foobaz"]),
-tests/lookup/tests.py:1293:74   - Unknown word (foobaz)     -- foobar", "foobarbaz", "foobaz"]),
-tests/lookup/tests.py:1301:22   - Unknown word (barfoobaz)  -- "barfoobaz",
-tests/lookup/tests.py:1303:22   - Unknown word (bazba)      -- "bazbaRFOO",
-tests/lookup/tests.py:1303:27   - Unknown word (RFOO)       -- "bazbaRFOO",
-tests/lookup/tests.py:1304:22   - Unknown word (foobarbaz)  -- "foobarbaz",
-tests/lookup/tests.py:1305:22   - Unknown word (foobaz)     -- "foobaz",
-tests/lookup/tests.py:1314:22   - Unknown word (barfoobaz)  -- "barfoobaz",
-tests/lookup/tests.py:1315:22   - Unknown word (bazba)      -- "bazbaRFOO",
-tests/lookup/tests.py:1315:27   - Unknown word (RFOO)       -- "bazbaRFOO",
-tests/lookup/tests.py:1332:49   - Unknown word (zoocarfaz)  -- date=now, headline="zoocarfaz"),
-tests/lookup/tests.py:1334:49   - Unknown word (bazba)      -- date=now, headline="bazbaRFOO"),
-tests/lookup/tests.py:1334:54   - Unknown word (RFOO)       -- now, headline="bazbaRFOO"),
-tests/lookup/tests.py:1341:28   - Unknown word (bazba)      -- ["barfoobaz", "bazbaRFOO", "foobarbaz"],
-tests/lookup/tests.py:1341:33   - Unknown word (RFOO)       -- ["barfoobaz", "bazbaRFOO", "foobarbaz"],
-tests/lookup/tests.py:1402:48   - Unknown word (Astros)     -- create(home="Houston Astros", away="St. Louis Cardinals
-tests/lookup/tests.py:1404:48   - Unknown word (Astros)     -- create(home="Houston Astros", away="Chicago Cubs
-tests/lookup/tests.py:1405:48   - Unknown word (Astros)     -- create(home="Houston Astros", away="Milwaukee Brewers
-tests/lookup/tests.py:1406:48   - Unknown word (Astros)     -- create(home="Houston Astros", away="St. Louis Cardinals
-tests/lookup/tests.py:1408:48   - Unknown word (Astros)     -- create(home="Houston Astros", away="St. Louis Cardinals
-tests/lookup/tests.py:1412:9    - Unknown word (pudge)      -- pudge = Player.objects.create
-tests/lookup/tests.py:1413:9    - Unknown word (pudge)      -- pudge.games.set(Game.objects
-tests/lookup/tests.py:1414:15   - Unknown word (feliz)      -- pedro_feliz = Player.objects.create
-tests/lookup/tests.py:1414:57   - Unknown word (Feliz)      -- objects.create(name="Pedro Feliz")
-tests/lookup/tests.py:1415:15   - Unknown word (feliz)      -- pedro_feliz.games.set(Game.objects
-tests/lookup/tests.py:1584:61   - Unknown word (Johx)       -- John Smith", alias="Johx")
-tests/lookup/tests.py:1585:65   - Unknown word (sonx)       -- Rhonda Simpson", alias="sonx")
-tests/lookup/tests.py:290:38    - Unknown word (constaint)  -- bulk_non_unique_meta_constaint(self):
+tests/lookup/tests.py:1170:34   - Unknown word (lengtp)     -- Unsupported lookup 'lengtp' for SlugField or join
+tests/lookup/tests.py:1175:46   - Unknown word (lengtp)     -- objects.filter(slug__lengtp=20)
+tests/lookup/tests.py:1202:34   - Unknown word (abspl)      -- Unsupported lookup 'abspl' for ManyToOneRel or
+tests/lookup/tests.py:1203:43   - Unknown word (abspk)      -- permitted, perhaps you meant abspk?"
+tests/lookup/tests.py:1207:62   - Unknown word (abspk)      -- field, Abs, lookup_name="abspk"):
+tests/lookup/tests.py:1208:48   - Unknown word (abspl)      -- objects.filter(article__abspl=2)
+tests/lookup/tests.py:1227:49   - Unknown word (fooo)       -- date=now, headline="fooo"),
+tests/lookup/tests.py:1238:69   - Unknown word (fooo)       -- ["f", "fo", "foo", "fooo"]),
+tests/lookup/tests.py:1242:69   - Unknown word (fooo)       -- ["f", "fo", "foo", "fooo", "hey-Foo"]),
+tests/lookup/tests.py:1247:64   - Unknown word (fooo)       -- headline__in=["fo", "foo", "fooo"]),
+tests/lookup/tests.py:1251:54   - Unknown word (fooo)       -- filter(headline__regex=r"fooo?"),
+tests/lookup/tests.py:1290:49   - Unknown word (foobaz)     -- date=now, headline="foobaz"),
+tests/lookup/tests.py:1292:49   - Unknown word (foobarbaz)  -- date=now, headline="foobarbaz"),
+tests/lookup/tests.py:1293:49   - Unknown word (zoocarfaz)  -- date=now, headline="zoocarfaz"),
+tests/lookup/tests.py:1294:49   - Unknown word (barfoobaz)  -- date=now, headline="barfoobaz"),
+tests/lookup/tests.py:1295:49   - Unknown word (bazba)      -- date=now, headline="bazbaRFOO"),
+tests/lookup/tests.py:1295:54   - Unknown word (RFOO)       -- now, headline="bazbaRFOO"),
+tests/lookup/tests.py:1304:22   - Unknown word (barfoobaz)  -- "barfoobaz",
+tests/lookup/tests.py:1306:22   - Unknown word (foobarbaz)  -- "foobarbaz",
+tests/lookup/tests.py:1307:22   - Unknown word (foobaz)     -- "foobaz",
+tests/lookup/tests.py:1315:22   - Unknown word (barfoobaz)  -- "barfoobaz",
+tests/lookup/tests.py:1317:22   - Unknown word (foobarbaz)  -- "foobarbaz",
+tests/lookup/tests.py:1318:22   - Unknown word (foobaz)     -- "foobaz",
+tests/lookup/tests.py:1325:61   - Unknown word (foobarbaz)  -- headline__in=["foobar", "foobarbaz", "foobaz"]),
+tests/lookup/tests.py:1325:74   - Unknown word (foobaz)     -- foobar", "foobarbaz", "foobaz"]),
+tests/lookup/tests.py:1333:22   - Unknown word (barfoobaz)  -- "barfoobaz",
+tests/lookup/tests.py:1335:22   - Unknown word (bazba)      -- "bazbaRFOO",
+tests/lookup/tests.py:1335:27   - Unknown word (RFOO)       -- "bazbaRFOO",
+tests/lookup/tests.py:1336:22   - Unknown word (foobarbaz)  -- "foobarbaz",
+tests/lookup/tests.py:1337:22   - Unknown word (foobaz)     -- "foobaz",
+tests/lookup/tests.py:1346:22   - Unknown word (barfoobaz)  -- "barfoobaz",
+tests/lookup/tests.py:1347:22   - Unknown word (bazba)      -- "bazbaRFOO",
+tests/lookup/tests.py:1347:27   - Unknown word (RFOO)       -- "bazbaRFOO",
+tests/lookup/tests.py:1364:49   - Unknown word (zoocarfaz)  -- date=now, headline="zoocarfaz"),
+tests/lookup/tests.py:1366:49   - Unknown word (bazba)      -- date=now, headline="bazbaRFOO"),
+tests/lookup/tests.py:1366:54   - Unknown word (RFOO)       -- now, headline="bazbaRFOO"),
+tests/lookup/tests.py:1373:28   - Unknown word (bazba)      -- ["barfoobaz", "bazbaRFOO", "foobarbaz"],
+tests/lookup/tests.py:1373:33   - Unknown word (RFOO)       -- ["barfoobaz", "bazbaRFOO", "foobarbaz"],
+tests/lookup/tests.py:1434:48   - Unknown word (Astros)     -- create(home="Houston Astros", away="St. Louis Cardinals
+tests/lookup/tests.py:1436:48   - Unknown word (Astros)     -- create(home="Houston Astros", away="Chicago Cubs
+tests/lookup/tests.py:1437:48   - Unknown word (Astros)     -- create(home="Houston Astros", away="Milwaukee Brewers
+tests/lookup/tests.py:1438:48   - Unknown word (Astros)     -- create(home="Houston Astros", away="St. Louis Cardinals
+tests/lookup/tests.py:1440:48   - Unknown word (Astros)     -- create(home="Houston Astros", away="St. Louis Cardinals
+tests/lookup/tests.py:1444:9    - Unknown word (pudge)      -- pudge = Player.objects.create
+tests/lookup/tests.py:1445:9    - Unknown word (pudge)      -- pudge.games.set(Game.objects
+tests/lookup/tests.py:1446:15   - Unknown word (feliz)      -- pedro_feliz = Player.objects.create
+tests/lookup/tests.py:1446:57   - Unknown word (Feliz)      -- objects.create(name="Pedro Feliz")
+tests/lookup/tests.py:1447:15   - Unknown word (feliz)      -- pedro_feliz.games.set(Game.objects
+tests/lookup/tests.py:1616:61   - Unknown word (Johx)       -- John Smith", alias="Johx")
+tests/lookup/tests.py:1617:65   - Unknown word (sonx)       -- Rhonda Simpson", alias="sonx")
+tests/lookup/tests.py:291:38    - Unknown word (constaint)  -- bulk_non_unique_meta_constaint(self):
 tests/m2m_regress/tests.py:122:44    - Unknown word (doesnt)                -- invalid_data_to_m2m_doesnt_clear_existing_relations
 tests/m2m_regress/tests.py:46:58     - Unknown word (selfreferchild) -- references, related, selfreferchild, "
 tests/m2m_regress/tests.py:47:14     - Unknown word (selfreferchildsibling) -- "selfreferchildsibling"
@@ -6093,8 +6094,8 @@ tests/migrations/test_autodetector.py:707:10    - Unknown word (thirdapp)   -- "
 tests/migrations/test_autodetector.py:782:30    - Unknown word (Authi)      -- "verbose_name": "Authi",
 tests/migrations/test_autodetector.py:901:10    - Unknown word (thirdapp)   -- "thirdapp", "Thing", [("id", models
 tests/migrations/test_autodetector.py:917:43    - Unknown word (thirdapp)   -- models.ForeignKey("thirdapp.AuthorProxy", models
-tests/migrations/test_base.py:279:9     - Unknown word (multicol)   -- multicol_index=False,
-tests/migrations/test_base.py:325:12    - Unknown word (multicol)   -- if multicol_index:
+tests/migrations/test_base.py:280:9     - Unknown word (multicol)   -- multicol_index=False,
+tests/migrations/test_base.py:326:12    - Unknown word (multicol)   -- if multicol_index:
 tests/migrations/test_commands.py:101:47    - Unknown word (tribble)    -- ertTableNotExists("migrations_tribble")
 tests/migrations/test_commands.py:1122:25   - Unknown word (unrepresentable) -- def test_sqlmigrate_unrepresentable(self):
 tests/migrations/test_commands.py:1184:70   - Unknown word (Tribble)         -- foreign key to 'migrations.Tribble',
@@ -8158,7 +8159,7 @@ tests/user_commands/tests.py:49:63     - Unknown word (unraisablehook) -- sys, "
 tests/user_commands/tests.py:527:50    - Unknown word (doesnt)         -- executing a_42_command_that_doesnt_exist_42"
 tests/user_commands/tests.py:529:47    - Unknown word (doesnt)         -- ["a_42_command_that_doesnt_exist_42"])
 tests/user_commands/tests.py:558:77    - Unknown word (blub)           -- bar/bat", "bar", "flub/blub"]
-tests/utils_tests/test_archive.py:64:44     - Unknown word (leadpath)   -- entry.name.startswith("leadpath_")
+tests/utils_tests/test_archive.py:65:44     - Unknown word (leadpath)   -- entry.name.startswith("leadpath_")
 tests/utils_tests/test_autoreload.py:125:75    - Unknown word (zipf)       -- zipfile.ZIP_DEFLATED) as zipf:
 tests/utils_tests/test_autoreload.py:126:13    - Unknown word (zipf)       -- zipf.writestr("test_zipped
 tests/utils_tests/test_autoreload.py:218:32    - Unknown word (Werror)     -- [sys.executable, "-Werror", __file__, "runserver
