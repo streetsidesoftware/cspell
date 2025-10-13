@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 20772, Issues found: 46265 in 7874 files.
+ CSpell: Files checked: 20772, Issues found: 46268 in 7876 files.
  exit code: 1
 ARCHITECTURE.md:158:48    - Unknown word (googlemock) -- implementation using `googlemock`
 ARCHITECTURE.md:29:61     - Unknown word (retryable)  -- RPCs that fail with a retryable error,
@@ -327,7 +327,7 @@ external/googleapis/protolists/datacatalog.list:10:53     - Unknown word (policy
 external/googleapis/protolists/datacatalog.list:11:53     - Unknown word (policytagmanagerserialization) -- cloud/datacatalog/v1:policytagmanagerserialization.proto
 external/googleapis/protolists/datacatalog.list:8:57      - Unknown word (fileset)    -- cloud/datacatalog/v1:gcs_fileset_spec.proto
 external/googleapis/protolists/datamigration.list:4:50      - Unknown word (conversionworkspace) -- google/cloud/clouddms/v1:conversionworkspace_resources.proto
-external/googleapis/protolists/dataplex.list:9:50      - Unknown word (datascans)  -- google/cloud/dataplex/v1:datascans.proto
+external/googleapis/protolists/dataplex.list:10:50     - Unknown word (datascans)  -- google/cloud/dataplex/v1:datascans.proto
 external/googleapis/protolists/deploy.list:2:48      - Unknown word (automationrun) -- google/cloud/deploy/v1:automationrun_payload.proto
 external/googleapis/protolists/deploy.list:4:48      - Unknown word (customtargettype) -- google/cloud/deploy/v1:customtargettype_notification_payload
 external/googleapis/protolists/deploy.list:5:48      - Unknown word (deliverypipeline) -- google/cloud/deploy/v1:deliverypipeline_notification_payload
@@ -527,8 +527,8 @@ google/cloud/bigtable/testing/table_test_fixture.cc:37:24     - Unknown word (re
 google/cloud/bigtable/tests/admin_integration_test.cc:189:12    - Unknown word (newfam)     -- "newfam", GC::Intersection(GC
 google/cloud/bigtable/tests/mutations_integration_test.cc:120:16    - Unknown word (decodeable) -- // *will* be decodeable to in int64_t. I don
 google/cloud/bigtable/tools/convert_acceptance_tests.py:87:13     - Unknown word (rowkey)     -- rowkey_string = base64.b64decode
-google/cloud/bigtable/value_test.cc:685:14    - Unknown word (infval)     -- auto const infval = std::numeric_limits
-google/cloud/bigtable/value_test.cc:686:14    - Unknown word (nanval)     -- auto const nanval = std::nan("NaN");
+google/cloud/bigtable/value_test.cc:862:14    - Unknown word (infval)     -- auto const infval = std::numeric_limits
+google/cloud/bigtable/value_test.cc:863:14    - Unknown word (nanval)     -- auto const nanval = std::nan("NaN");
 google/cloud/billing/budgets/v1/internal/budget_option_defaults.cc:40:8      - Unknown word (billingbudgets) -- "billingbudgets.googleapis.com");
 google/cloud/billing/doc/environment-variables.dox:18:40     - Unknown word (cloudbilling) -- (which defaults to "cloudbilling.googleapis.com")
 google/cloud/billing/v1/cloud_billing_client.h:649:21    - Unknown word (unbilled)   -- /// expected. Any unbilled charges to date will
@@ -656,6 +656,7 @@ google/cloud/kms/doc/environment-variables.dox:13:21     - Unknown word (AUTOKEY
 google/cloud/kms/doc/environment-variables.dox:14:40     - Unknown word (cloudkms)   -- (which defaults to "cloudkms.googleapis.com")
 google/cloud/kms/doc/environment-variables.dox:15:16     - Unknown word (Autokey)    -- used by `MakeAutokeyAdminConnection()`.
 google/cloud/kms/doc/environment-variables.dox:26:40     - Unknown word (kmsinventory) -- (which defaults to "kmsinventory.googleapis.com")
+google/cloud/kms/v1/key_management_client.h:2027:7    - Unknown word (Decapsulates) -- /// Decapsulates data that was encapsulated
 google/cloud/kms_key_name_test.cc:47:13     - Unknown word (plojects)   -- "plojects/p1/locations/l1/keyRings
 google/cloud/licensemanager/v1/internal/license_manager_auth_decorator.h:19:39     - Unknown word (LICENSEMANAGER) -- CLOUD_CPP_GOOGLE_CLOUD_LICENSEMANAGER_V1_INTERNAL_LICENSE
 google/cloud/log.cc:58:15     - Unknown word (econv)      -- std::size_t econv = -1;
@@ -860,7 +861,7 @@ google/cloud/storage/internal/async/connection_impl_appendable_upload_test.cc:84
 google/cloud/storage/internal/async/connection_impl_open_test.cc:350:38    - Unknown word (Transien)   -- yncConnectionImplTest, TooManyTransienErrors) {
 google/cloud/storage/internal/async/connection_impl_upload_test.cc:463:42    - Unknown word (eksb)       -- sha256_bytes: "test-eksb"
 google/cloud/storage/internal/async/insert_object.cc:50:21     - Unknown word (Subcord)    -- auto next = data_.Subcord(0, n);
-google/cloud/storage/internal/async/writer_connection_buffered.cc:404:39    - Unknown word (unsatisified) -- call that returns an unsatisified future until the buffer
+google/cloud/storage/internal/async/writer_connection_buffered.cc:555:39    - Unknown word (unsatisified) -- call that returns an unsatisified future until the buffer
 google/cloud/storage/internal/grpc/default_options.cc:99:49     - Unknown word (unviverse)  -- already a set endpoint or unviverse domain endpoint.
 google/cloud/storage/internal/grpc/default_options_test.cc:112:29    - Unknown word (testbench)  -- "from-testbench-env");
 google/cloud/storage/internal/grpc/object_request_parser_test.cc:63:33     - Unknown word (Cuakt)      -- md5) : StEvo2V/qoDCuaktZSw3IQ==

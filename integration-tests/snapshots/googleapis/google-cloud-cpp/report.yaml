@@ -4,8 +4,8 @@ Url: https://github.com/googleapis/google-cloud-cpp.git
 Args: '["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]'
 Summary:
   files: 20772
-  filesWithIssues: 7874
-  issues: 46265
+  filesWithIssues: 7876
+  issues: 46268
   errors: 0
 Errors: []
 
@@ -330,7 +330,7 @@ issues:
   - "external/googleapis/protolists/datacatalog.list:10:53       policytagmanager                    U       cloud/datacatalog/v1:policytagmanager.proto"
   - "external/googleapis/protolists/datacatalog.list:11:53       policytagmanagerserialization       U       cloud/datacatalog/v1:policytagmanagerserialization.proto"
   - "external/googleapis/protolists/datamigration.list:4:50          conversionworkspace     U       google/cloud/clouddms/v1:conversionworkspace_resources.proto"
-  - "external/googleapis/protolists/dataplex.list:9:50           datascans       U       google/cloud/dataplex/v1:datascans.proto"
+  - "external/googleapis/protolists/dataplex.list:10:50          datascans       U       google/cloud/dataplex/v1:datascans.proto"
   - "external/googleapis/protolists/deploy.list:2:48         automationrun       U       google/cloud/deploy/v1:automationrun_payload.proto"
   - "external/googleapis/protolists/deploy.list:4:48         customtargettype    U       google/cloud/deploy/v1:customtargettype_notification_payload"
   - "external/googleapis/protolists/deploy.list:5:48         deliverypipeline    U       google/cloud/deploy/v1:deliverypipeline_notification_payload"
@@ -529,8 +529,8 @@ issues:
   - "google/cloud/bigtable/tests/admin_integration_test.cc:189:12        newfam      U       \"newfam\", GC::Intersection(GC"
   - "google/cloud/bigtable/tests/mutations_integration_test.cc:120:16        decodeable (decodable)      U       // *will* be decodeable to in int64_t. I don"
   - "google/cloud/bigtable/tools/convert_acceptance_tests.py:87:13       rowkey      U       rowkey_string = base64.b64decode"
-  - "google/cloud/bigtable/value_test.cc:685:14      infval      U       auto const infval = std::numeric_limits"
-  - "google/cloud/bigtable/value_test.cc:686:14      nanval      U       auto const nanval = std::nan(\"NaN\");"
+  - "google/cloud/bigtable/value_test.cc:862:14      infval      U       auto const infval = std::numeric_limits"
+  - "google/cloud/bigtable/value_test.cc:863:14      nanval      U       auto const nanval = std::nan(\"NaN\");"
   - "google/cloud/billing/budgets/v1/internal/budget_option_defaults.cc:40:8         billingbudgets      U       \"billingbudgets.googleapis.com\");"
   - "google/cloud/billing/doc/environment-variables.dox:18:40        cloudbilling    U       (which defaults to \"cloudbilling.googleapis.com\")"
   - "google/cloud/billing/v1/cloud_billing_client.h:649:21       unbilled    U       /// expected. Any unbilled charges to date will"
@@ -660,6 +660,7 @@ issues:
   - "google/cloud/kms/doc/environment-variables.dox:14:40        cloudkms        U       (which defaults to \"cloudkms.googleapis.com\")"
   - "google/cloud/kms/doc/environment-variables.dox:15:16        Autokey         U       used by `MakeAutokeyAdminConnection()`."
   - "google/cloud/kms/doc/environment-variables.dox:26:40        kmsinventory    U       (which defaults to \"kmsinventory.googleapis.com\")"
+  - "google/cloud/kms/v1/key_management_client.h:2027:7      Decapsulates    U       /// Decapsulates data that was encapsulated"
   - "google/cloud/licensemanager/v1/internal/license_manager_auth_decorator.h:19:39          LICENSEMANAGER      U       CLOUD_CPP_GOOGLE_CLOUD_LICENSEMANAGER_V1_INTERNAL_LICENSE"
   - "google/cloud/log.cc:58:15       econv       U       std::size_t econv = -1;"
   - "google/cloud/logging/v2/logging_service_v2_client.h:178:36      cloudaudit      U       organizations/123/logs/cloudaudit.googleapis.com%2Factivity"
@@ -863,7 +864,7 @@ issues:
   - "google/cloud/storage/internal/async/connection_impl_open_test.cc:350:38         Transien    U       yncConnectionImplTest, TooManyTransienErrors) {"
   - "google/cloud/storage/internal/async/connection_impl_upload_test.cc:463:42       eksb    U       sha256_bytes: \"test-eksb\""
   - "google/cloud/storage/internal/async/insert_object.cc:50:21          Subcord     U       auto next = data_.Subcord(0, n);"
-  - "google/cloud/storage/internal/async/writer_connection_buffered.cc:404:39        unsatisified    U       call that returns an unsatisified future until the buffer"
+  - "google/cloud/storage/internal/async/writer_connection_buffered.cc:555:39        unsatisified    U       call that returns an unsatisified future until the buffer"
   - "google/cloud/storage/internal/grpc/default_options_test.cc:112:29       testbench       U       \"from-testbench-env\");"
   - "google/cloud/storage/internal/grpc/default_options.cc:99:49         unviverse       U       already a set endpoint or unviverse domain endpoint."
   - "google/cloud/storage/internal/grpc/object_request_parser_test.cc:63:33          Cuakt       U       md5) : StEvo2V/qoDCuaktZSw3IQ=="
