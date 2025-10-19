@@ -10,6 +10,7 @@ concurrency:
 
 jobs:
   autofix:
+    if: contains(github.actor, 'dependabot') != true
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
