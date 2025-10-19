@@ -1604,12 +1604,10 @@ Expecting one of '${allowedValues.join("', '")}'`);
 				this.setOptionValueWithSource(name, val, valueSource);
 			};
 			this.on("option:" + oname, (val) => {
-				const invalidValueMessage = `error: option '${option.flags}' argument '${val}' is invalid.`;
-				handleOptionValue(val, invalidValueMessage, "cli");
+				handleOptionValue(val, `error: option '${option.flags}' argument '${val}' is invalid.`, "cli");
 			});
 			if (option.envVar) this.on("optionEnv:" + oname, (val) => {
-				const invalidValueMessage = `error: option '${option.flags}' value '${val}' from env '${option.envVar}' is invalid.`;
-				handleOptionValue(val, invalidValueMessage, "env");
+				handleOptionValue(val, `error: option '${option.flags}' value '${val}' from env '${option.envVar}' is invalid.`, "env");
 			});
 			return this;
 		}
@@ -1949,11 +1947,10 @@ Expecting one of '${allowedValues.join("', '")}'`);
 		*/
 		_checkForMissingExecutable(executableFile, executableDir, subcommandName) {
 			if (fs.existsSync(executableFile)) return;
-			const executableDirMessage = executableDir ? `searched for local subcommand relative to directory '${executableDir}'` : "no directory for search for local subcommand, use .executableDir() to supply a custom directory";
 			const executableMissing = `'${executableFile}' does not exist
  - if '${subcommandName}' is not meant to be an executable command, remove description parameter from '.command()' and use '.description()' instead
  - if the default executable name is not suitable, use the executableFile option to supply a custom name or path
- - ${executableDirMessage}`;
+ - ${executableDir ? `searched for local subcommand relative to directory '${executableDir}'` : "no directory for search for local subcommand, use .executableDir() to supply a custom directory"}`;
 			throw new Error(executableMissing);
 		}
 		/**
@@ -3461,9 +3458,7 @@ const transform = function(original_options = {}) {
 			if (end) return false;
 			const { encoding, escape, quote } = this.options;
 			const { quoting, needMoreDataSize, recordDelimiterMaxLength } = this.state;
-			const numOfCharLeft = bufLen - i - 1;
-			const requiredLength = Math.max(needMoreDataSize, recordDelimiterMaxLength === 0 ? Buffer.from("\r\n", encoding).length : recordDelimiterMaxLength, quoting ? (escape === null ? 0 : escape.length) + quote.length : 0, quoting ? quote.length + recordDelimiterMaxLength : 0);
-			return numOfCharLeft < requiredLength;
+			return bufLen - i - 1 < Math.max(needMoreDataSize, recordDelimiterMaxLength === 0 ? Buffer.from("\r\n", encoding).length : recordDelimiterMaxLength, quoting ? (escape === null ? 0 : escape.length) + quote.length : 0, quoting ? quote.length + recordDelimiterMaxLength : 0);
 		},
 		parse: function(nextBuf, end, push, close) {
 			const { bom, comment_no_infix, encoding, from_line, ltrim, max_record_size, raw, relax_quotes, rtrim, skip_empty_lines, to, to_line } = this.options;
@@ -4149,8 +4144,7 @@ function createMdTable(options) {
 	const hSep = [...headerSep];
 	hSep.length = header.length;
 	header.forEach((col, i) => {
-		const s$1 = hSep[i] || "---";
-		const h = calcColHeaderSep(s$1, strWidth(col));
+		const h = calcColHeaderSep(hSep[i] || "---", strWidth(col));
 		const jL = h.startsWith(":");
 		const jR = h.endsWith(":");
 		justifyCols[i] = jL ? justifyLeft : jR ? justifyRight : justifyLeft;
@@ -4207,9 +4201,7 @@ function strWidth(str) {
 async function perfReport(csvFile) {
 	const limit = changeDate(/* @__PURE__ */ new Date(), -30).getTime();
 	console.error(`Generating performance report from ${csvFile} since ${new Date(limit).toISOString()}`);
-	const recordsInRange = (await readCsvData(csvFile)).filter((r) => r.platform === "linux" && r.timestamp >= limit);
-	const runsInRange = groupCsvRecordsByRun(recordsInRange);
-	const runs = filterOutIncompleteRuns(runsInRange);
+	const runs = filterOutIncompleteRuns(groupCsvRecordsByRun((await readCsvData(csvFile)).filter((r) => r.platform === "linux" && r.timestamp >= limit)));
 	const records = runs.flat();
 	console.error(`Runs: ${runs.length}, Records: ${records.length}`);
 	reportOnCsvRecords(records);
@@ -4298,8 +4290,7 @@ function reportOnCsvRecords(records) {
 		const runEndTime = Math.max(...run.map((r) => r.timestamp));
 		const runId = (i + 1).toFixed(0).padStart(2, "0");
 		const runRepoNames = new Set(run.map((r) => r.repo));
-		const groupedByRepo = new Map(repos.map((repo) => [repo, 0]));
-		const unexpectedResults = [...countCsvRecordsByRepo(run, groupedByRepo)].filter(([_, count]) => count != 1);
+		const unexpectedResults = [...countCsvRecordsByRepo(run, new Map(repos.map((repo) => [repo, 0])))].filter(([_, count]) => count != 1);
 		console.error(`Run ${runId} ${new Date(runStartTime).toISOString()} repos: ${pad(runRepoNames.size, 2)} ${deltaTimeMsInDHMS(runEndTime - runStartTime)} `);
 		for (const [repo, count] of unexpectedResults) console.error(`  ${repo.padEnd(20)}: ${count} records`);
 	});
@@ -4324,8 +4315,7 @@ function deltaTimeSInDHMS(deltaSec) {
 	return result;
 }
 async function readCsvData(csvFile) {
-	const csv = await promises.readFile(csvFile, "utf8");
-	return parse(csv, {
+	return parse(await promises.readFile(csvFile, "utf8"), {
 		columns: true,
 		cast: true
 	});
@@ -4410,29 +4400,27 @@ function createPerfTable1(data) {
 	const sp = (v, pad$1 = 5, fixed = 1) => p(s(v, fixed), pad$1);
 	const stats = calcAllStats(data);
 	const maxRelSd = Math.max(...stats.map((s$1) => s$1.sd * s$1.sum / s$1.count));
-	const rows = data.map(([repo], i) => {
-		const { point, min, max, sum, count, sd, avg } = stats[i];
-		const relSd = sd * sum / count;
-		const sdGraph = sd ? plotPointRelativeToStandardDeviation(point, sd, avg, 21, Math.max(2.5 + Math.log(maxRelSd / relSd) / 6, Math.abs(point - avg) / sd)) : "";
-		return [
-			sub(repo),
-			s(point, 2),
-			`${sp(min)} / ${sp(avg)} / ${sp(max)}`,
-			sp(sd, 5, 2),
-			`\`${sdGraph}\``
-		];
-	});
-	const table = createMdTable({
+	return inject`
+        ## Time to Process Files
+
+        ${createMdTable({
 		header: `
         | Repository | Elapsed | Min/Avg/Max   | SD  | SD Graph  |
         | ---------- | ------: | :-----------: | --: | --------  |
         `,
-		rows
-	});
-	return inject`
-        ## Time to Process Files
-
-        ${table}
+		rows: data.map(([repo], i) => {
+			const { point, min, max, sum, count, sd, avg } = stats[i];
+			const relSd = sd * sum / count;
+			const sdGraph = sd ? plotPointRelativeToStandardDeviation(point, sd, avg, 21, Math.max(2.5 + Math.log(maxRelSd / relSd) / 6, Math.abs(point - avg) / sd)) : "";
+			return [
+				sub(repo),
+				s(point, 2),
+				`${sp(min)} / ${sp(avg)} / ${sp(max)}`,
+				sp(sd, 5, 2),
+				`\`${sdGraph}\``
+			];
+		})
+	})}
 
         Note:
         - Elapsed time is in seconds.
@@ -4441,70 +4429,66 @@ function createPerfTable1(data) {
 function createFpsPerfTable(data) {
 	const fn = (d) => 1e3 * d.files / d.elapsedMs;
 	const stats = calcAllStats(data, fn);
-	const rows = data.map(([repo, records], i) => {
-		const { point, count, trend, min, avg } = stats[i];
-		const trendGraph = simpleHistogram(trend, min * .9);
-		const relChange = (100 * (point - avg) / (avg || 1)).toFixed(2) + "%";
-		const lastRecord = records[records.length - 1];
-		const fps = fn(lastRecord);
-		const elapsed = lastRecord.elapsedMs;
-		const nFiles = lastRecord.files.toFixed(0);
-		return [
-			sub(repo),
-			nFiles,
-			s(elapsed, 2),
-			fps.toFixed(2),
-			relChange,
-			`\`${trendGraph}\``,
-			count
-		];
-	});
-	const table = createMdTable({
+	return inject`
+        ## Files per Second over Time
+
+        ${createMdTable({
 		header: `
         | Repository | Files | Sec  | Fps  | Rel   | Trend Fps | N     |
         | ---------- | ----: | ---: | ---: | ----: | --------- | ----: |
         `,
-		rows
-	});
-	return inject`
-        ## Files per Second over Time
-
-        ${table}
+		rows: data.map(([repo, records], i) => {
+			const { point, count, trend, min, avg } = stats[i];
+			const trendGraph = simpleHistogram(trend, min * .9);
+			const relChange = (100 * (point - avg) / (avg || 1)).toFixed(2) + "%";
+			const lastRecord = records[records.length - 1];
+			const fps = fn(lastRecord);
+			const elapsed = lastRecord.elapsedMs;
+			const nFiles = lastRecord.files.toFixed(0);
+			return [
+				sub(repo),
+				nFiles,
+				s(elapsed, 2),
+				fps.toFixed(2),
+				relChange,
+				`\`${trendGraph}\``,
+				count
+			];
+		})
+	})}
     `;
 }
 function createThroughputPerfTable(data) {
 	data = data.map(([repo, records]) => [repo, records.filter((r) => r.kilobytes)]);
 	const fn = (d) => 1e3 * (d.kilobytes || 0) / d.elapsedMs;
 	const stats = calcAllStats(data, fn);
-	const rows = data.map(([repo, records], i) => {
-		const { point, count, trend, min, avg } = stats[i];
-		const trendGraph = simpleHistogram(trend, min * .9);
-		const relChange = (100 * (point - avg) / (avg || 1)).toFixed(2) + "%";
-		const lastRecord = records[records.length - 1];
-		const mps = fn(lastRecord);
-		const elapsed = lastRecord.elapsedMs;
-		const nFiles = lastRecord.files.toFixed(0);
-		return [
-			sub(repo),
-			nFiles,
-			s(elapsed, 2),
-			mps.toFixed(2),
-			relChange,
-			`\`${trendGraph}\``,
-			count
-		];
-	});
-	const table = createMdTable({
+	return inject`
+        ## Data Throughput
+
+        ${createMdTable({
 		header: `
         | Repository | Files | Sec  | Kps  | Rel   | Trend Kps | N     |
         | ---------- | ----: | ---: | ---: | ----: | --------- | ----: |
         `,
-		rows
-	});
-	return inject`
-        ## Data Throughput
-
-        ${table}
+		rows: data.map(([repo, records], i) => {
+			const { point, count, trend, min, avg } = stats[i];
+			const trendGraph = simpleHistogram(trend, min * .9);
+			const relChange = (100 * (point - avg) / (avg || 1)).toFixed(2) + "%";
+			const lastRecord = records[records.length - 1];
+			const mps = fn(lastRecord);
+			const elapsed = lastRecord.elapsedMs;
+			const nFiles = lastRecord.files.toFixed(0);
+			return [
+				sub(repo),
+				nFiles,
+				s(elapsed, 2),
+				mps.toFixed(2),
+				relChange,
+				`\`${trendGraph}\``,
+				count
+			];
+		})
+	})}
     `;
 }
 const monthNames = [
@@ -4529,7 +4513,6 @@ function createDailyPerfGraph(dailyStats) {
 	}))), "repo")].map(([_repo, records]) => {
 		return `line [${records.map((r) => r.fps.toFixed(2)).join(", ")}]`;
 	});
-	const xAxis = dailyStats.map((d) => `${monthNames[d.date.getUTCMonth()]}-${d.date.getUTCDate()}`);
 	return inject`
         ## Daily Performance
 
@@ -4537,7 +4520,7 @@ function createDailyPerfGraph(dailyStats) {
         xychart-beta
             title Files Per Second by Day
             y-axis Files per Second
-            x-axis Date [${xAxis.join(", ")}]
+            x-axis Date [${dailyStats.map((d) => `${monthNames[d.date.getUTCMonth()]}-${d.date.getUTCDate()}`).join(", ")}]
             bar [${bar.join(", ")}]
             ${lines.join("\n")}
         ${"```"}
