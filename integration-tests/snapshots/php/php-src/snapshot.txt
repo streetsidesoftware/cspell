@@ -3,7 +3,7 @@ Repository: php/php-src
 Url: "https://github.com/php/php-src.git"
 Args: ["--config=../../../../config/repositories/php/php-src/cspell.json","**/*.{md,c,h,php}"]
 Lines:
- CSpell: Files checked: 2289, Issues found: 30605 in 1584 files.
+ CSpell: Files checked: 2289, Issues found: 30517 in 1584 files.
  exit code: 1
 CODING_STANDARDS.md:101:23    - Unknown word (intvl)      -- // Could be 'date_intvl_create_from_date_str
 CODING_STANDARDS.md:110:8     - Unknown word (setclientencoding) -- pg_setclientencoding
@@ -265,8 +265,6 @@ Zend/Optimizer/zend_ssa.c:242:19    - Unknown word (essa)       -- static void p
 Zend/Optimizer/zend_ssa.h:138:25    - Unknown word (sccs)       -- int sccs; /* number
 Zend/Optimizer/zend_worklist.h:15:20     - Unknown word (Wingo)      -- | Authors: Andy Wingo <wingo@igalia.com>
 Zend/README.md:130:56    - Unknown word (specializer) -- ecialization using `--without-specializer`.
-Zend/README.md:21:18     - Unknown word (valgrind)   -- USE_ZEND_ALLOC=0 valgrind --leak-check=full sapi
-Zend/README.md:27:6      - Unknown word (valgrind)   -- that valgrind can correctly track
 Zend/README.md:28:25     - Unknown word (DONT)       -- this there is the `ZEND_DONT_UNLOAD_MODULES` environment
 Zend/README.md:55:1      - Unknown word (Specializer) -- Specializer will generate code only
 Zend/README.md:80:9      - Unknown word (OPCOD)       -- INC_OPCOD()
@@ -403,7 +401,6 @@ Zend/zend_alloc.c:855:25    - Unknown word (MAYMOVE)    -- We don't use MREMAP_M
 Zend/zend_alloc.c:87:22     - Unknown word (asan)       -- include <sanitizer/asan_interface.h>
 Zend/zend_alloc.h:15:15     - Unknown word (Andi)       -- | Authors: Andi Gutmans <andi@php.net
 Zend/zend_arena.h:127:34    - Unknown word (asan)       -- intended for use with asan/valgrind. */
-Zend/zend_arena.h:127:39    - Unknown word (valgrind)   -- intended for use with asan/valgrind. */
 Zend/zend_ast.c:1486:39   - Unknown word (qstr)       -- void zend_ast_export_qstr(smart_str *str, char
 Zend/zend_ast.c:1653:39   - Unknown word (encaps)     -- void zend_ast_export_encaps_list(smart_str *str
 Zend/zend_ast.c:1664:20   - Unknown word (qstr)       -- zend_ast_export_qstr(str, quote, Z_STR_P
@@ -452,9 +449,6 @@ Zend/zend_builtin_functions.h:15:15     - Unknown word (Andi)       -- | Authors
 Zend/zend_builtin_functions.stub.php:81:5      - Unknown word (frameless)  -- * @frameless-function {"arity":
 Zend/zend_builtin_functions.stub.php:86:5      - Unknown word (frameless)  -- * @frameless-function {"arity":
 Zend/zend_builtin_functions.stub.php:87:5      - Unknown word (frameless)  -- * @frameless-function {"arity":
-Zend/zend_call_stack.c:247:13    - Unknown word (VALGRIND)   -- #ifdef HAVE_VALGRIND
-Zend/zend_call_stack.c:248:11    - Unknown word (Valgrind)   -- /* Under Valgrind, the last page is not
-Zend/zend_call_stack.c:249:17    - Unknown word (VALGRIND)   -- if (RUNNING_ON_VALGRIND) {
 Zend/zend_call_stack.c:333:9     - Unknown word (numguards)  -- size_t numguards = 0;
 Zend/zend_call_stack.c:350:15    - Unknown word (numguards)  -- len = sizeof(numguards);
 Zend/zend_call_stack.c:352:53    - Unknown word (numguards)  -- stack_guard_page", &numguards, &len, NULL, 0) !=
@@ -470,9 +464,6 @@ Zend/zend_call_stack.c:708:2     - Unknown word (prmap)      -- prmap_t *map, *o
 Zend/zend_call_stack.c:717:20    - Unknown word (PGRAB)      -- proc = Pgrab(pid, PGRAB_RDONLY, &error);
 Zend/zend_call_stack.c:717:9     - Unknown word (Pgrab)      -- proc = Pgrab(pid, PGRAB_RDONLY,
 Zend/zend_call_stack.c:738:3     - Unknown word (prmap)      -- prmap_t *tmp;
-Zend/zend_call_stack.c:76:13     - Unknown word (VALGRIND)   -- #ifdef HAVE_VALGRIND
-Zend/zend_call_stack.c:77:12     - Unknown word (valgrind)   -- # include <valgrind/valgrind.h>
-Zend/zend_call_stack.c:77:21     - Unknown word (valgrind)   -- # include <valgrind/valgrind.h>
 Zend/zend_closures.c:226:55    - Unknown word (zclosure)   -- return_value, zval *zclosure, zval *newthis, zend
 Zend/zend_closures.c:229:51    - Unknown word (zclosure)   -- zend_closure *) Z_OBJ_P(zclosure);
 Zend/zend_closures.c:260:8     - Unknown word (zclosure)   -- zval *zclosure, *newthis;
@@ -643,25 +634,15 @@ Zend/zend_fibers.c:15:21     - Unknown word (Piotrowski) -- | Authors: Aaron Pio
 Zend/zend_fibers.c:16:22     - Unknown word (Schröder)   -- | Martin Schröder <m.schroeder2007@gmail
 Zend/zend_fibers.c:251:18    - Unknown word (NOHUGEPAGE) -- #if defined(MADV_NOHUGEPAGE)
 Zend/zend_fibers.c:254:43    - Unknown word (NOHUGEPAGE) -- pointer, alloc_size, MADV_NOHUGEPAGE);
-Zend/zend_fibers.c:290:8     - Unknown word (VALGRIND)   -- #ifdef VALGRIND_STACK_REGISTER
-Zend/zend_fibers.c:292:29    - Unknown word (VALGRIND)   -- valgrind_stack_id = VALGRIND_STACK_REGISTER(base
-Zend/zend_fibers.c:292:9     - Unknown word (valgrind)   -- stack->valgrind_stack_id = VALGRIND
 Zend/zend_fibers.c:296:9     - Unknown word (asan)       -- stack->asan_pointer = stack->pointer
 Zend/zend_fibers.c:297:9     - Unknown word (asan)       -- stack->asan_size = stack->size;
-Zend/zend_fibers.c:305:8     - Unknown word (VALGRIND)   -- #ifdef VALGRIND_STACK_DEREGISTER
-Zend/zend_fibers.c:306:35    - Unknown word (valgrind)   -- STACK_DEREGISTER(stack->valgrind_stack_id);
 Zend/zend_fibers.c:315:19    - Unknown word (unpoison)   -- * so we have to unpoison it before unmapping
 Zend/zend_fibers.c:316:2     - Unknown word (ASAN)       -- ASAN_UNPOISON_MEMORY_REGION
 Zend/zend_fibers.c:316:7     - Unknown word (UNPOISON)   -- ASAN_UNPOISON_MEMORY_REGION(pointer
 Zend/zend_fibers.c:338:51    - Unknown word (chkstk)     -- probing function ___chkstk_darwin incorrectly
-Zend/zend_fibers.c:37:13     - Unknown word (VALGRIND)   -- #ifdef HAVE_VALGRIND
-Zend/zend_fibers.c:38:12     - Unknown word (valgrind)   -- # include <valgrind/valgrind.h>
-Zend/zend_fibers.c:38:21     - Unknown word (valgrind)   -- # include <valgrind/valgrind.h>
 Zend/zend_fibers.c:68:22     - Unknown word (asan)       -- include <sanitizer/asan_interface.h>
 Zend/zend_fibers.c:74:11     - Unknown word (SHSTK)      -- # define SHSTK_ENABLED (__CET__ &
 Zend/zend_fibers.c:75:39     - Unknown word (SHSTK)      -- CONTEXT_SHADOW_STACK (SHSTK_ENABLED && SHADOW_STACK
-Zend/zend_fibers.c:87:13     - Unknown word (VALGRIND)   -- #ifdef HAVE_VALGRIND
-Zend/zend_fibers.c:88:15     - Unknown word (valgrind)   -- unsigned int valgrind_stack_id;
 Zend/zend_fibers.c:92:14     - Unknown word (asan)       -- const void *asan_pointer;
 Zend/zend_fibers.c:93:9      - Unknown word (asan)       -- size_t asan_size;
 Zend/zend_fibers.h:15:21     - Unknown word (Piotrowski) -- | Authors: Aaron Piotrowski <aaron@trowski.com>
@@ -1071,12 +1052,8 @@ Zend/zend_stack.h:15:15     - Unknown word (Andi)       -- | Authors: Andi Gutma
 Zend/zend_stream.h:83:23     - Unknown word (fseeki)     -- define zend_fseek _fseeki64
 Zend/zend_stream.h:84:23     - Unknown word (ftelli)     -- define zend_ftell _ftelli64
 Zend/zend_stream.h:85:23     - Unknown word (lseeki)     -- define zend_lseek _lseeki64
-Zend/zend_string.c:22:13     - Unknown word (VALGRIND)   -- #ifdef HAVE_VALGRIND
-Zend/zend_string.c:23:12     - Unknown word (valgrind)   -- # include "valgrind/callgrind.h"
 Zend/zend_string.c:23:21     - Unknown word (callgrind)  -- # include "valgrind/callgrind.h"
 Zend/zend_string.c:27:22     - Unknown word (msan)       -- include <sanitizer/msan_interface.h>
-Zend/zend_string.c:377:32    - Unknown word (valgrind)   -- we don't build with valgrind support, include the
-Zend/zend_string.c:377:77    - Unknown word (valgrind)   -- include the symbol so that valgrind available
 Zend/zend_string.c:407:4     - Unknown word (xorl)       -- "xorl (%2), %0\n\t"
 Zend/zend_string.c:417:4     - Unknown word (xorl)       -- "xorl %0, %0\n\t"
 Zend/zend_string.c:420:4     - Unknown word (negl)       -- "negl %1\n\t"
@@ -1508,16 +1485,9 @@ Zend/zend_vm_gen.php:984:30    - Unknown word (NOCONSTCONST) -- else if ($hot ==
 Zend/zend_vm_opcodes.c:15:15     - Unknown word (Andi)       -- | Authors: Andi Gutmans <andi@php.net
 Zend/zend_vm_opcodes.h:15:15     - Unknown word (Andi)       -- | Authors: Andi Gutmans <andi@php.net
 Zend/zend_vm_opcodes.h:84:20     - Unknown word (TMPVARCV)   -- #define ZEND_VM_OP_TMPVARCV 0x00000008
-benchmark/benchmark.php:102:13    - Unknown word (Valgrind)   -- function runValgrindPhpCgiCommand(
 benchmark/benchmark.php:112:40    - Unknown word (callgrind)  -- _DIR__ . "/profiles/callgrind.out.$name";
-benchmark/benchmark.php:118:10    - Unknown word (valgrind)   -- 'valgrind',
 benchmark/benchmark.php:119:17    - Unknown word (callgrind)  -- '--tool=callgrind',
 benchmark/benchmark.php:121:12    - Unknown word (callgrind)  -- "--callgrind-out-file=$profileOut
-benchmark/benchmark.php:132:44    - Unknown word (Valgrind)   -- extractInstructionsFromValgrindOutput($process->stderr
-benchmark/benchmark.php:141:73    - Unknown word (valgrind)   -- Exception('Unexpected valgrind output');
-benchmark/benchmark.php:64:15     - Unknown word (Valgrind)   -- return runValgrindPhpCgiCommand('bench
-benchmark/benchmark.php:72:15     - Unknown word (Valgrind)   -- return runValgrindPhpCgiCommand('symfony
-benchmark/benchmark.php:95:15     - Unknown word (Valgrind)   -- return runValgrindPhpCgiCommand('wordpress
 build/gen_stub.php:1072:28   - Unknown word (NONSCALAR)  -- public const REFCOUNTS_NONSCALAR = [
 build/gen_stub.php:1118:56   - Unknown word (NONSCALAR)  -- ReturnInfo::REFCOUNTS_NONSCALAR, true)) {
 build/gen_stub.php:1316:20   - Unknown word (Undocumentable) -- public bool $isUndocumentable;
@@ -6182,11 +6152,8 @@ ext/gd/libgd/gd_avif.c:25:45     - Unknown word (quantizer)  -- to really know w
 ext/gd/libgd/gd_avif.c:336:33    - Unknown word (libavif)    -- avifDecoderSetIO(), to tell libavif how to read from our
 ext/gd/libgd/gd_avif.c:34:16     - Unknown word (SUBAMPLING) -- #define CHROMA_SUBAMPLING_HIGH_QUALITY AVIF_PIXEL
 ext/gd/libgd/gd_avif.c:363:14    - Unknown word (libavif)    -- // Check if libavif version is >= 0.9.1
-ext/gd/libgd/gd_avif.c:364:49    - Unknown word (pixi)       -- PixelInformationProperty ('pixi') to be missing in AV
 ext/gd/libgd/gd_avif.c:365:12    - Unknown word (libheif)    -- // items. libheif v1.11.0 or older does
-ext/gd/libgd/gd_avif.c:365:55    - Unknown word (pixi)       -- older does not add the 'pixi' item property to
 ext/gd/libgd/gd_avif.c:366:56    - Unknown word (libheif)    -- has been corrected in libheif v1.12.0.)
-ext/gd/libgd/gd_avif.c:369:39    - Unknown word (PIXI)       -- strictFlags &= ~AVIF_STRICT_PIXI_REQUIRED;
 ext/gd/libgd/gd_avif.c:36:9      - Unknown word (QUANTIZER)  -- #define QUANTIZER_DEFAULT 30
 ext/gd/libgd/gd_avif.c:44:49     - Unknown word (quantizer)  -- convert from AVIF's quantizer scale, which runs from
 ext/gd/libgd/gd_avif.c:472:54    - Unknown word (libavif's)  -- convert this quality to libavif's quantity param, see
@@ -16015,8 +15982,6 @@ ext/opcache/ZendAccelerator.h:217:26    - Unknown word (xlat)       -- HashTable
 ext/opcache/ZendAccelerator.h:301:9     - Unknown word (ZCSG)       -- #define ZCSG(element) (accel_shared
 ext/opcache/ZendAccelerator.h:333:26    - Unknown word (ZCSG)       -- char*)(str) >= (char*)ZCSG(interned_strings).start
 ext/opcache/ZendAccelerator.h:333:80    - Unknown word (ZCSG)       -- char*)(str) < (char*)ZCSG(interned_strings).top
-ext/opcache/jit/README.md:34:100    - Unknown word (valgrind)   -- useful to test with [valgrind](https://valgrind.org
-ext/opcache/jit/README.md:35:7      - Unknown word (valgrind)   -- Using valgrind is slower at detecting
 ext/opcache/jit/README.md:60:6      - Unknown word (dpkg)       -- sudo dpkg --add-architecture i
 ext/opcache/jit/README.md:64:22     - Unknown word (multilib)   -- gcc-multilib g++-multilib \
 ext/opcache/jit/README.md:64:9      - Unknown word (multilib)   -- gcc-multilib g++-multilib \
@@ -17176,8 +17141,6 @@ ext/opcache/jit/ir/dynasm/minilua.c:923:25    - Unknown word (Cclosure)        -
 ext/opcache/jit/ir/dynasm/minilua.c:924:5     - Unknown word (Lclosure)        -- sizeLclosure(c->l.nupvalues);
 ext/opcache/jit/ir/dynasm/minilua.c:944:9     - Unknown word (INDEXK)          -- #define INDEXK(r)((int)(r)&~(1<<(9
 ext/opcache/jit/ir/dynasm/minilua.c:945:9     - Unknown word (RKASK)           -- #define RKASK(x)((x)|(1<<(9-1)))
-ext/opcache/jit/ir/ir.c:1888:13   - Unknown word (VALGRIND)   -- #ifdef HAVE_VALGRIND
-ext/opcache/jit/ir/ir.c:1889:2    - Unknown word (VALGRIND)   -- VALGRIND_DISCARD_TRANSLATIONS
 ext/opcache/jit/ir/ir.c:2054:42   - Unknown word (RLOAD)      -- insn->op3].op == IR_RLOAD
 ext/opcache/jit/ir/ir.c:2071:29   - Unknown word (RSTORE)     -- else if (insn->op == IR_RSTORE) {
 ext/opcache/jit/ir/ir.c:2321:21   - Unknown word (insterted)  -- // TODO: VAR may be insterted after some "memory"
@@ -17192,9 +17155,6 @@ ext/opcache/jit/ir/ir.c:3153:34   - Unknown word (RSTORE)     -- control = ir_em
 ext/opcache/jit/ir/ir.c:409:24    - Unknown word (optx)       -- ctx->ir_base[IR_NULL].optx = IR_OPT(IR_C_ADDR,
 ext/opcache/jit/ir/ir.c:411:25    - Unknown word (optx)       -- ctx->ir_base[IR_FALSE].optx = IR_OPT(IR_C_BOOL,
 ext/opcache/jit/ir/ir.c:413:24    - Unknown word (optx)       -- ctx->ir_base[IR_TRUE].optx = IR_OPT(IR_C_BOOL,
-ext/opcache/jit/ir/ir.c:41:13     - Unknown word (VALGRIND)   -- #ifdef HAVE_VALGRIND
-ext/opcache/jit/ir/ir.c:42:12     - Unknown word (valgrind)   -- # include <valgrind/valgrind.h>
-ext/opcache/jit/ir/ir.c:42:21     - Unknown word (valgrind)   -- # include <valgrind/valgrind.h>
 ext/opcache/jit/ir/ir.c:489:8     - Unknown word (optx)       -- insn->optx = IR_OPT(IR_ADDR, IR
 ext/opcache/jit/ir/ir.c:497:63    - Unknown word (optx)       -- ir_val val, uint32_t optx)
 ext/opcache/jit/ir/ir.c:667:43    - Unknown word (OPTX)       -- ctx, val, IR_ADDR, IR_OPTX(IR_FUNC_ADDR, IR_ADDR
@@ -17561,7 +17521,6 @@ ext/opcache/jit/ir/ir_private.h:200:51    - Unknown word (clzll)      -- has_bui
 ext/opcache/jit/ir/ir_private.h:201:19    - Unknown word (clzll)      -- return __builtin_clzll(num);
 ext/opcache/jit/ir/ir_private.h:22:12     - Unknown word (intrin)     -- # include <intrin.h>
 ext/opcache/jit/ir/ir_private.h:315:30    - Unknown word (ntzl)       -- ir_bitset_ntz ir_ntzl
-ext/opcache/jit/ir/ir_private.h:502:37    - Unknown word (valgrind)   -- sparse part to avoid valgrind warnings */
 ext/opcache/jit/ir/ir_private.h:68:23     - Unknown word (ntzl)       -- define IR_LOG2(x) ir_ntzl(x)
 ext/opcache/jit/ir/ir_private.h:734:35    - Unknown word (capasity)   -- INLINE uint32_t ir_list_capasity(const ir_list *l)
 ext/opcache/jit/ir/ir_private.h:809:39    - Unknown word (capasity)   -- uint32_t ir_worklist_capasity(const ir_worklist *w
@@ -18971,9 +18930,6 @@ ext/pcntl/php_signal.c:56:9      - Unknown word (oact)       -- return oact.sa_h
 ext/pcre/pcre2lib/config.h:101:21    - Unknown word (VARLOOKBEHIND) -- /* The value of MAX_VARLOOKBEHIND specifies the default
 ext/pcre/pcre2lib/config.h:103:13    - Unknown word (VARLOOKBEHIND) -- #ifndef MAX_VARLOOKBEHIND
 ext/pcre/pcre2lib/config.h:104:13    - Unknown word (VARLOOKBEHIND) -- #define MAX_VARLOOKBEHIND 255
-ext/pcre/pcre2lib/config.h:22:28     - Unknown word (valgrind)   -- Define to any value for valgrind support to find invalid
-ext/pcre/pcre2lib/config.h:23:18     - Unknown word (VALGRIND)   -- #ifdef HAVE_PCRE_VALGRIND_SUPPORT
-ext/pcre/pcre2lib/config.h:24:17     - Unknown word (VALGRIND)   -- #define SUPPORT_VALGRIND 1
 ext/pcre/pcre2lib/pcre2.h:107:15    - Unknown word (ENDANCHORED) -- #define PCRE2_ENDANCHORED 0x20000000u
 ext/pcre/pcre2lib/pcre2.h:120:19    - Unknown word (BSUX)        -- #define PCRE2_ALT_BSUX 0x000000
 ext/pcre/pcre2lib/pcre2.h:134:18    - Unknown word (DOTSTAR)     -- #define PCRE2_NO_DOTSTAR_ANCHOR 0x00008000u
@@ -19221,7 +19177,6 @@ ext/pcre/pcre2lib/pcre2_compile.c:10124:10  - Unknown word (optim)             -
 ext/pcre/pcre2lib/pcre2_compile.c:10152:7   - Unknown word (patlen)            -- if (patlen == 0) pattern = (PCRE
 ext/pcre/pcre2lib/pcre2_compile.c:10188:25  - Unknown word (patlen)            -- (zero_terminated = (patlen == PCRE2_ZERO_TERMINATED
 ext/pcre/pcre2lib/pcre2_compile.c:10189:3   - Unknown word (patlen)            -- patlen = PRIV(strlen)(pattern
-ext/pcre/pcre2lib/pcre2_compile.c:10190:58  - Unknown word (Valgrind)          -- compiler; only used if Valgrind enabled */
 ext/pcre/pcre2lib/pcre2_compile.c:10204:25  - Unknown word (OPTIM)             -- optim_flags &= ~PCRE2_OPTIM_AUTO_POSSESS;
 ext/pcre/pcre2lib/pcre2_compile.c:10204:3   - Unknown word (optim)             -- optim_flags &= ~PCRE2_OPTIM
 ext/pcre/pcre2lib/pcre2_compile.c:10205:25  - Unknown word (DOTSTAR)           -- (options & PCRE2_NO_DOTSTAR_ANCHOR) != 0)
@@ -19233,9 +19188,6 @@ ext/pcre/pcre2lib/pcre2_compile.c:10235:38  - Unknown word (varlookbehind)     -
 ext/pcre/pcre2lib/pcre2_compile.c:10235:8   - Unknown word (varlookbehind)     -- cb.max_varlookbehind = ccontext->max_varlookbehind
 ext/pcre/pcre2lib/pcre2_compile.c:1024:20   - Unknown word (RNUMBER)       -- case META_COND_RNUMBER:
 ext/pcre/pcre2lib/pcre2_compile.c:1025:30   - Unknown word (Rnumber)       -- fprintf(stderr, "META (?(Rnumber) length=%d offset="
-ext/pcre/pcre2lib/pcre2_compile.c:10278:1   - Unknown word (valgrind)          -- valgrind support, make the terminator
-ext/pcre/pcre2lib/pcre2_compile.c:10282:16  - Unknown word (VALGRIND)          -- #ifdef SUPPORT_VALGRIND
-ext/pcre/pcre2lib/pcre2_compile.c:10283:22  - Unknown word (VALGRIND)          -- if (zero_terminated) VALGRIND_MAKE_MEM_NOACCESS(pattern
 ext/pcre/pcre2lib/pcre2_compile.c:10288:1   - Unknown word (skipatstart)       -- skipatstart = 0;
 ext/pcre/pcre2lib/pcre2_compile.c:10292:19  - Unknown word (skipatstart)       -- while (patlen - skipatstart >= 2 &&
 ext/pcre/pcre2lib/pcre2_compile.c:10293:14  - Unknown word (skipatstart)       -- ptr[skipatstart] == CHAR_LEFT_PARENTHESIS
@@ -19253,21 +19205,17 @@ ext/pcre/pcre2lib/pcre2_compile.c:10471:4   - Unknown word (nltype)            -
 ext/pcre/pcre2lib/pcre2_compile.c:10475:6   - Unknown word (nllen)             -- cb.nllen = 1;
 ext/pcre/pcre2lib/pcre2_compile.c:10480:6   - Unknown word (nllen)             -- cb.nllen = 1;
 ext/pcre/pcre2lib/pcre2_compile.c:10485:6   - Unknown word (nllen)             -- cb.nllen = 1;
-ext/pcre/pcre2lib/pcre2_compile.c:10496:15  - Unknown word (NLTYPE)           -- cb.nltype = NLTYPE_ANY;
+ext/pcre/pcre2lib/pcre2_compile.c:10496:15  - Unknown word (NLTYPE)            -- cb.nltype = NLTYPE_ANY;
 ext/pcre/pcre2lib/pcre2_compile.c:10496:6   - Unknown word (nltype)            -- cb.nltype = NLTYPE_ANY;
-ext/pcre/pcre2lib/pcre2_compile.c:10500:15  - Unknown word (NLTYPE)           -- cb.nltype = NLTYPE_ANYCRLF;
-ext/pcre/pcre2lib/pcre2_compile.c:10500:6   - Unknown word (nltype)           -- cb.nltype = NLTYPE_ANYCRLF;
-ext/pcre/pcre2lib/pcre2_compile.c:10678:41  - Unknown word (valgrind)         -- annoys debuggers such as valgrind. To avoid this, we explicitly
-ext/pcre/pcre2lib/pcre2_compile.c:10725:8   - Unknown word (pruneorskip)      -- cb.had_pruneorskip = FALSE;
-ext/pcre/pcre2lib/pcre2_compile.c:10748:1   - Unknown word (regexrc)          -- regexrc = compile_regex(re-
+ext/pcre/pcre2lib/pcre2_compile.c:10500:15  - Unknown word (NLTYPE)            -- cb.nltype = NLTYPE_ANYCRLF;
+ext/pcre/pcre2lib/pcre2_compile.c:10500:6   - Unknown word (nltype)            -- cb.nltype = NLTYPE_ANYCRLF;
+ext/pcre/pcre2lib/pcre2_compile.c:10725:8   - Unknown word (pruneorskip)       -- cb.had_pruneorskip = FALSE;
+ext/pcre/pcre2lib/pcre2_compile.c:10748:1   - Unknown word (regexrc)           -- regexrc = compile_regex(re-
 ext/pcre/pcre2lib/pcre2_compile.c:10751:5   - Unknown word (regexrc)          -- if (regexrc < 0) re->flags |= PCRE
-ext/pcre/pcre2lib/pcre2_compile.c:10765:23  - Unknown word (valgrind)         -- re->blocksize, and if valgrind support is configured
 ext/pcre/pcre2lib/pcre2_compile.c:10766:11  - Unknown word (unaddressable)    -- memory as unaddressable, so that any out-of
 ext/pcre/pcre2lib/pcre2_compile.c:10769:1   - Unknown word (usedlength)       -- usedlength = code - codestart;
 ext/pcre/pcre2lib/pcre2_compile.c:10770:5   - Unknown word (usedlength)       -- if (usedlength > length)
 ext/pcre/pcre2lib/pcre2_compile.c:10777:38  - Unknown word (usedlength)       -- = CU2BYTES(length - usedlength);
-ext/pcre/pcre2lib/pcre2_compile.c:10778:16  - Unknown word (VALGRIND)         -- #ifdef SUPPORT_VALGRIND
-ext/pcre/pcre2lib/pcre2_compile.c:10779:3   - Unknown word (VALGRIND)         -- VALGRIND_MAKE_MEM_NOACCESS(code
 ext/pcre/pcre2lib/pcre2_compile.c:10779:54  - Unknown word (usedlength)       -- code, CU2BYTES(length - usedlength));
 ext/pcre/pcre2lib/pcre2_compile.c:10787:9   - Unknown word (RSCAN)            -- #define RSCAN_CACHE_SIZE 8
 ext/pcre/pcre2lib/pcre2_compile.c:10792:14  - Unknown word (rgroup)           -- PCRE2_SPTR rgroup;
@@ -19288,8 +19236,6 @@ ext/pcre/pcre2lib/pcre2_compile.c:10908:39  - Unknown word (assertedcu)       --
 ext/pcre/pcre2lib/pcre2_compile.c:10908:9   - Unknown word (assertedcuflags)  -- if (assertedcuflags < REQ_NONE && assertedcu
 ext/pcre/pcre2lib/pcre2_compile.c:10909:17  - Unknown word (assertedcu)       -- firstcu = assertedcu;
 ext/pcre/pcre2lib/pcre2_compile.c:10910:22  - Unknown word (assertedcuflags)  -- firstcuflags = assertedcuflags;
-ext/pcre/pcre2lib/pcre2_compile.c:11037:58  - Unknown word (valgrind)         -- When running under valgrind, make a
-ext/pcre/pcre2lib/pcre2_compile.c:11048:16  - Unknown word (VALGRIND)         -- #ifdef SUPPORT_VALGRIND
 ext/pcre/pcre2lib/pcre2_compile.c:11097:8   - Unknown word (NLBLOCK)          -- #undef NLBLOCK /* Block containing
 ext/pcre/pcre2lib/pcre2_compile.c:119:7     - Unknown word (branchlength) -- get_branchlength(uint32_t **, int *,
 ext/pcre/pcre2lib/pcre2_compile.c:1429:14   - Unknown word (chptr)         -- is placed in chptr. A backreference to
@@ -19932,7 +19878,6 @@ ext/pcre/pcre2lib/pcre2_compile.c:9079:14   - Unknown word (PLUSI)              
 ext/pcre/pcre2lib/pcre2_compile.c:9080:14   - Unknown word (MINPLUSI)           -- case OP_MINPLUSI:
 ext/pcre/pcre2lib/pcre2_compile.c:9081:14   - Unknown word (POSPLUSI)           -- case OP_POSPLUSI:
 ext/pcre/pcre2lib/pcre2_compile.c:9085:36   - Unknown word (caselessly)         -- code unit when matching caselessly. Later scanning may
-ext/pcre/pcre2lib/pcre2_compile.c:9163:42   - Unknown word (valgrind)           -- initialized. Otherwise valgrind moans about uninitialized
 ext/pcre/pcre2lib/pcre2_compile.c:918:15    - Unknown word (LOOKAHEADNOT) -- case META_LOOKAHEADNOT: fprintf(stderr, "META
 ext/pcre/pcre2lib/pcre2_compile.c:919:53    - Unknown word (napla)        -- fprintf(stderr, "META (*napla:"); break;
 ext/pcre/pcre2lib/pcre2_compile.c:9303:3    - Unknown word (lcptr)              -- lcptr pointer to the
@@ -19940,7 +19885,7 @@ ext/pcre/pcre2lib/pcre2_compile.c:9313:8    - Unknown word (lcptr)              
 ext/pcre/pcre2lib/pcre2_compile.c:9316:19   - Unknown word (branchminlength)    -- int branchlength, branchminlength;
 ext/pcre/pcre2lib/pcre2_compile.c:9316:5    - Unknown word (branchlength)       -- int branchlength, branchminlength;
 ext/pcre/pcre2lib/pcre2_compile.c:9341:22   - Unknown word (branchlength)      -- branchlength = get_branchlength(pptrptr, &branchminlength
-ext/pcre/pcre2lib/pcre2_compile.c:9341:3    - Unknown word (branchlength)      -- branchlength = get_branchlength(pptrptr
+ext/pcre/pcre2lib/pcre2_compile.c:9341:3    - Unknown word (branchlength)       -- branchlength = get_branchlength(pptrptr
 ext/pcre/pcre2lib/pcre2_compile.c:9341:45   - Unknown word (branchminlength)   -- branchlength(pptrptr, &branchminlength, errcodeptr, lcptr,
 ext/pcre/pcre2lib/pcre2_compile.c:9341:74   - Unknown word (lcptr)             -- branchminlength, errcodeptr, lcptr,
 ext/pcre/pcre2lib/pcre2_compile.c:9343:7    - Unknown word (branchlength)      -- if (branchlength < 0) goto ISNOTFIXED
@@ -19988,9 +19933,6 @@ ext/pcre/pcre2lib/pcre2_compile_class.c:1202:60   - Unknown word (PXPUNCT)    --
 ext/pcre/pcre2lib/pcre2_compile_class.c:1459:65   - Unknown word (HASCRORLF)  -- external_flags |= PCRE2_HASCRORLF;
 ext/pcre/pcre2lib/pcre2_compile_class.c:1476:67   - Unknown word (HASCRORLF)  -- external_flags |= PCRE2_HASCRORLF;
 ext/pcre/pcre2lib/pcre2_compile_class.c:1556:46   - Unknown word (caselessness) -- because the cranges handle caselessness (only) in this
-ext/pcre/pcre2lib/pcre2_compile_class.c:1777:44   - Unknown word (VALGRIND)     -- DEBUG || defined SUPPORT_VALGRIND
-ext/pcre/pcre2lib/pcre2_compile_class.c:1783:16   - Unknown word (VALGRIND)     -- #ifdef SUPPORT_VALGRIND
-ext/pcre/pcre2lib/pcre2_compile_class.c:1784:9    - Unknown word (VALGRIND)     -- VALGRIND_MAKE_MEM_NOACCESS(data
 ext/pcre/pcre2lib/pcre2_compile_class.c:1845:53   - Unknown word (leafmost)     -- they are ordered from leafmost (at the top) to
 ext/pcre/pcre2lib/pcre2_compile_class.c:1852:15   - Unknown word (eclass)       -- fold_negation(eclass_op_info *pop_info, PCRE
 ext/pcre/pcre2lib/pcre2_compile_class.c:1902:21   - Unknown word (eclass)       -- fold_binary(int op, eclass_op_info *lhs_op_info
@@ -20746,12 +20688,10 @@ ext/pcre/pcre2lib/pcre2_internal.h:975:19    - Unknown word (RIGHTPAR)   -- #def
 ext/pcre/pcre2lib/pcre2_internal.h:976:21    - Unknown word (RIGHTPAR)   -- #define STRING_CRLF_RIGHTPAR "CRLF)
 ext/pcre/pcre2lib/pcre2_internal.h:977:20    - Unknown word (RIGHTPAR)   -- #define STRING_ANY_RIGHTPAR "ANY)
 ext/pcre/pcre2lib/pcre2_internal.h:978:24    - Unknown word (RIGHTPAR)   -- define STRING_ANYCRLF_RIGHTPAR "ANYCRLF)
-ext/pcre/pcre2lib/pcre2_internal.h:97:4      - Unknown word (Valgrind)   -- /* Valgrind (memcheck) support
 ext/pcre/pcre2lib/pcre2_internal.h:988:19    - Unknown word (DOTSTAR)    -- #define STRING_NO_DOTSTAR_ANCHOR_RIGHTPAR "NO
 ext/pcre/pcre2lib/pcre2_internal.h:988:47    - Unknown word (DOTSTAR)    -- ANCHOR_RIGHTPAR "NO_DOTSTAR_ANCHOR)"
 ext/pcre/pcre2lib/pcre2_internal.h:992:25    - Unknown word (ATSTART)    -- define STRING_NOTEMPTY_ATSTART_RIGHTPAR "NOTEMPTY
 ext/pcre/pcre2lib/pcre2_internal.h:992:53    - Unknown word (ATSTART)    -- RIGHTPAR "NOTEMPTY_ATSTART)"
-ext/pcre/pcre2lib/pcre2_internal.h:99:16     - Unknown word (VALGRIND)   -- #ifdef SUPPORT_VALGRIND
 ext/pcre/pcre2lib/pcre2_intmodedep.h:205:5     - Unknown word (CHMAX)          -- The CHMAX_255 macro does not assume
 ext/pcre/pcre2lib/pcre2_intmodedep.h:217:9     - Unknown word (CHMAX)          -- #define CHMAX_255(c) ((c) <= 255u
 ext/pcre/pcre2lib/pcre2_intmodedep.h:219:9     - Unknown word (CHMAX)          -- #define CHMAX_255(c) TRUE
@@ -21068,14 +21008,12 @@ ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:2012:21   - Unknown word (VPICKVE)    -- 
 ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:2114:11   - Unknown word (LSHR)       -- OP2(SLJIT_LSHR, TMP1, 0, TMP1, 0, TMP
 ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:2274:4    - Unknown word (VBSLL)      -- /* VBSLL.V vd, vj, ui5 */
 ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:2275:21   - Unknown word (VBSLL)      -- push_inst(compiler, VBSLL_V | VD(data2_ind) |
-ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:2356:20   - Unknown word (VALGRIND)   -- #endif /* !SUPPORT_VALGRIND */
 ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:304:11    - Unknown word (LSHR)       -- OP2(SLJIT_LSHR, TMP1, 0, TMP1, 0, TMP
 ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:328:1     - Unknown word (JUMPHERE)   -- JUMPHERE(quit);
 ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:341:3     - Unknown word (JUMPHERE)   -- JUMPHERE(partial_quit[0]);
 ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:342:3     - Unknown word (JUMPHERE)   -- JUMPHERE(partial_quit[1]);
 ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:361:3     - Unknown word (JUMPTO)     -- JUMPTO(SLJIT_JUMP, restart
 ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:363:3     - Unknown word (JUMPHERE)   -- JUMPHERE(quit);
-ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:42:23     - Unknown word (VALGRIND)   -- if !(defined SUPPORT_VALGRIND)
 ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:433:11    - Unknown word (LSHR)       -- OP2(SLJIT_LSHR, TMP1, 0, TMP1, 0, TMP
 ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:456:1     - Unknown word (JUMPHERE)   -- JUMPHERE(quit);
 ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:46:31     - Unknown word (LOONGARCH)  -- defined SLJIT_CONFIG_LOONGARCH_64 && SLJIT_CONFIG_LOONGARCH
@@ -23162,8 +23100,6 @@ ext/pcre/php_pcre.c:2331:8    - Unknown word (zcount)       -- zval *zcount = NU
 ext/pcre/php_pcre.c:2340:16   - Unknown word (zcount)       -- Z_PARAM_ZVAL(zcount)
 ext/pcre/php_pcre.c:2598:40   - Unknown word (ovector)      -- offsets = pcre2_get_ovector_pointer(match_data)
 ext/pcre/php_pcre.c:3056:26   - Unknown word (decref)       -- PHPAPI void php_pcre_pce_decref(pcre_cache_entry *pce
-ext/pcre/php_pcre.c:402:18    - Unknown word (VALGRIND)     -- #ifdef HAVE_PCRE_VALGRIND_SUPPORT
-ext/pcre/php_pcre.c:403:36    - Unknown word (Valgrind)     -- print_table_row(2, "PCRE Valgrind Support", "enabled"
 ext/pcre/php_pcre.c:584:14    - Unknown word (eoptions)     -- uint32_t eoptions = 0;
 ext/pcre/php_pcre.c:656:23    - Unknown word (backslashed)  -- but skipping the backslashed delimiters.  If the
 ext/pcre/php_pcre.c:716:14    - Unknown word (eoptions)     -- case 'r':	eoptions |= PCRE2_EXTRA_CASELESS
@@ -27411,17 +27347,13 @@ ext/standard/libavifinfo/avifinfo.c:233:35    - Unknown word (ipma)       -- is 
 ext/standard/libavifinfo/avifinfo.c:280:60    - Unknown word (pitm)       -- !memcmp(box->type, "pitm", 4) ||
 ext/standard/libavifinfo/avifinfo.c:281:27    - Unknown word (ipma)       -- !memcmp(box->type, "ipma", 4) || !memcmp(box
 ext/standard/libavifinfo/avifinfo.c:281:60    - Unknown word (ispe)       -- !memcmp(box->type, "ispe", 4) ||
-ext/standard/libavifinfo/avifinfo.c:282:27    - Unknown word (pixi)       -- !memcmp(box->type, "pixi", 4) || !memcmp(box
 ext/standard/libavifinfo/avifinfo.c:302:29    - Unknown word (pitm)       -- !memcmp(box->type, "pitm", 4)) is_parsable =
 ext/standard/libavifinfo/avifinfo.c:303:29    - Unknown word (ipma)       -- !memcmp(box->type, "ipma", 4)) is_parsable =
 ext/standard/libavifinfo/avifinfo.c:304:29    - Unknown word (ispe)       -- !memcmp(box->type, "ispe", 4)) is_parsable =
-ext/standard/libavifinfo/avifinfo.c:305:29    - Unknown word (pixi)       -- !memcmp(box->type, "pixi", 4)) is_parsable =
 ext/standard/libavifinfo/avifinfo.c:316:29    - Unknown word (ipco)       -- Parses a 'stream' of an "ipco" box into 'features
-ext/standard/libavifinfo/avifinfo.c:317:42    - Unknown word (pixi)       -- for width and height, "pixi" and "av1C" are used
 ext/standard/libavifinfo/avifinfo.c:317:5     - Unknown word (ispe)       -- // "ispe" is used for width and
 ext/standard/libavifinfo/avifinfo.c:319:36    - Unknown word (Ipco)       -- AvifInfoInternalStatus ParseIpco(AvifInfoInternalStream
 ext/standard/libavifinfo/avifinfo.c:329:28    - Unknown word (ispe)       -- (!memcmp(box.type, "ispe", 4)) {
-ext/standard/libavifinfo/avifinfo.c:347:35    - Unknown word (pixi)       -- (!memcmp(box.type, "pixi", 4)) {
 ext/standard/libavifinfo/avifinfo.c:36:9      - Unknown word (AVIFINFO)   -- #define AVIFINFO_MAX_SIZE UINT32_MAX
 ext/standard/libavifinfo/avifinfo.c:39:9      - Unknown word (AVIFINFO)   -- #define AVIFINFO_MAX_VALUE UINT8_MAX
 ext/standard/libavifinfo/avifinfo.c:408:47    - Unknown word (cicp)       -- kAlphaStr = "urn:mpeg:mpegB:cicp:systems:auxiliary:alpha
@@ -28996,7 +28928,6 @@ run-tests.php:1124:19   - Unknown word (testname)     -- echo $testname . "(1) :
 run-tests.php:1125:19   - Unknown word (logname)      -- echo $logname . "(1) :  $tested\n
 run-tests.php:1128:19   - Unknown word (testname)     -- echo $testname . ":1: $tested\n";
 run-tests.php:1129:19   - Unknown word (logname)      -- echo $logname . ":1:  $tested\n";
-run-tests.php:112:66    - Unknown word (valgrind)    -- between them 'diff' or the valgrind log
 run-tests.php:1161:6    - Unknown word (descriptorspec) -- $descriptorspec = [];
 run-tests.php:1163:10   - Unknown word (descriptorspec) -- $descriptorspec[0] = ['pipe', 'r'];
 run-tests.php:1166:10   - Unknown word (descriptorspec) -- $descriptorspec[1] = ['pipe', 'w'];
@@ -29028,7 +28959,6 @@ run-tests.php:1419:16   - Unknown word (Procs)          -- $workerProcs[$i] = $p
 run-tests.php:1425:34   - Unknown word (Procs)          -- kill_children($workerProcs);
 run-tests.php:1440:34   - Unknown word (Procs)          -- kill_children($workerProcs);
 run-tests.php:1484:76   - Unknown word (stdouts)        -- stdout in array of worker stdouts, THIS SHOULD NOT HAPPEN
-run-tests.php:157:13    - Unknown word (valgrind)     -- $valgrind, $sum_results, $shuffle
 run-tests.php:1584:65   - Unknown word (REDIR)          -- name) && $result != 'REDIR') {
 run-tests.php:1587:72   - Unknown word (XFAILED)        -- file && ($result == 'XFAILED' || $result == 'XLEAKED
 run-tests.php:1587:96   - Unknown word (XLEAKED)        -- XFAILED' || $result == 'XLEAKED' || $result == 'FAILED
@@ -29136,10 +29066,8 @@ run-tests.php:3153:45   - Unknown word (PHPTEST)       -- summary && !getenv('NO
 run-tests.php:321:10    - Unknown word (XFAILED)      -- 'XFAILED' => [],
 run-tests.php:322:10    - Unknown word (XLEAKED)      -- 'XLEAKED' => [],
 run-tests.php:3260:7    - Unknown word (Borkage)       -- class BorkageException extends Exception
-run-tests.php:335:6     - Unknown word (valgrind)     -- $valgrind = null;
 run-tests.php:360:6     - Unknown word (cfgtypes)     -- $cfgtypes = ['show', 'keep'];
 run-tests.php:361:6     - Unknown word (cfgfiles)     -- $cfgfiles = ['skip', 'php', 'clean
-run-tests.php:3622:15   - Unknown word (Valgrind)      -- class RuntestsValgrind
 run-tests.php:3622:7    - Unknown word (Runtests)      -- class RuntestsValgrind
 run-tests.php:364:15    - Unknown word (cfgtypes)     -- foreach ($cfgtypes as $type) {
 run-tests.php:3652:10   - Unknown word (vcmd)          -- $vcmd = "valgrind -q --tool
@@ -29182,12 +29110,8 @@ run-tests.php:394:23    - Unknown word (cfgtypes)     -- foreach ($cfgtypes as $
 run-tests.php:396:31    - Unknown word (cfgfiles)     -- foreach ($cfgfiles as $file) {
 run-tests.php:432:34    - Unknown word (redir)        -- $redir_tests[] = [$matches
 run-tests.php:462:31    - Unknown word (cfgfiles)     -- foreach ($cfgfiles as $file) {
-run-tests.php:467:22    - Unknown word (valgrind)     -- $valgrind = new RuntestsValgrind
 run-tests.php:467:37    - Unknown word (Runtests)     -- $valgrind = new RuntestsValgrind($environment
-run-tests.php:467:45    - Unknown word (Valgrind)     -- valgrind = new RuntestsValgrind($environment);
-run-tests.php:470:22    - Unknown word (valgrind)     -- $valgrind = new RuntestsValgrind
 run-tests.php:470:37    - Unknown word (Runtests)     -- $valgrind = new RuntestsValgrind($environment
-run-tests.php:470:45    - Unknown word (Valgrind)     -- valgrind = new RuntestsValgrind($environment, $argv
 run-tests.php:533:31    - Unknown word (cfgfiles)     -- foreach ($cfgfiles as $file) {
 run-tests.php:566:25    - Unknown word (asan)         -- case '--asan':
 run-tests.php:567:25    - Unknown word (msan)         -- case '--msan':
@@ -29213,17 +29137,14 @@ run-tests.php:667:6     - Unknown word (phpdbg)       -- $phpdbg = getenv('TEST_
 run-tests.php:667:69    - Unknown word (phpdbg)       -- : get_binary($php, 'phpdbg', 'sapi/phpdbg/phpdbg
 run-tests.php:667:84    - Unknown word (phpdbg)       -- php, 'phpdbg', 'sapi/phpdbg/phpdbg');
 run-tests.php:667:91    - Unknown word (phpdbg)       -- phpdbg', 'sapi/phpdbg/phpdbg');
-run-tests.php:66:44     - Unknown word (Valgrind)    -- for memory leaks with Valgrind (equivalent to -M memcheck
 run-tests.php:66:71     - Unknown word (memcheck)    -- Valgrind (equivalent to -M memcheck).
 run-tests.php:677:18    - Unknown word (PHPDBG)       -- putenv("TEST_PHPDBG_EXECUTABLE=$phpdbg"
 run-tests.php:677:37    - Unknown word (phpdbg)       -- TEST_PHPDBG_EXECUTABLE=$phpdbg");
 run-tests.php:678:24    - Unknown word (PHPDBG)       -- $environment['TEST_PHPDBG_EXECUTABLE'] = $phpdbg
 run-tests.php:679:18    - Unknown word (PHPDBG)       -- putenv("TEST_PHPDBG_EXECUTABLE_ESCAPED=
 run-tests.php:680:24    - Unknown word (PHPDBG)       -- $environment['TEST_PHPDBG_EXECUTABLE_ESCAPED'
-run-tests.php:68:38     - Unknown word (Valgrind)    -- Test for errors with Valgrind tool.
 run-tests.php:691:45    - Unknown word (redir)        -- merge($test_files, $redir_tests);
 run-tests.php:735:48    - Unknown word (phpt)         -- of all test files (*.phpt).
-run-tests.php:900:1     - Unknown word (VALGRIND)     -- VALGRIND : " . ($valgrind
 run-tests.php:90:20     - Unknown word (sdir)        -- --temp-source <sdir> --temp-target <tdir
 run-tests.php:90:42     - Unknown word (tdir)        -- sdir> --temp-target <tdir> [--temp-urlbase <url
 run-tests.php:90:56     - Unknown word (urlbase)     -- target <tdir> [--temp-urlbase <url>]
@@ -29266,14 +29187,11 @@ sapi/cgi/cgi_main.c:205:9     - Unknown word (CGIG)       -- #define CGIG(v) ZEN
 sapi/cgi/cgi_main.c:211:9     - Unknown word (CGIG)       -- #define CGIG(v) (php_cgi_globals
 sapi/cgi/cgi_main.c:2177:6    - Unknown word (STARTUPINFOW) -- STARTUPINFOW si;
 sapi/cgi/cgi_main.c:2187:19   - Unknown word (STARTF)       -- si.dwFlags = STARTF_USESTDHANDLES;
-sapi/cgi/cgi_main.c:2239:13   - Unknown word (VALGRIND)     -- #ifdef HAVE_VALGRIND
 sapi/cgi/cgi_main.c:2241:9    - Unknown word (CALLGRIND)    -- CALLGRIND_STOP_INSTRUMENTATION
 sapi/cgi/cgi_main.c:2243:9    - Unknown word (CALLGRIND)    -- CALLGRIND_ZERO_STATS;
-sapi/cgi/cgi_main.c:2244:14   - Unknown word (VALGRIND)     -- # ifdef HAVE_VALGRIND_CACHEGRIND_H
 sapi/cgi/cgi_main.c:2244:23   - Unknown word (CACHEGRIND)   -- ifdef HAVE_VALGRIND_CACHEGRIND_H
 sapi/cgi/cgi_main.c:2245:9    - Unknown word (CACHEGRIND)   -- CACHEGRIND_STOP_INSTRUMENTATION
 sapi/cgi/cgi_main.c:2246:47   - Unknown word (cachegrind)   -- is not supported for cachegrind. */
-sapi/cgi/cgi_main.c:2449:13   - Unknown word (VALGRIND)     -- #ifdef HAVE_VALGRIND
 sapi/cgi/cgi_main.c:2451:5    - Unknown word (CALLGRIND)    -- CALLGRIND_START_INSTRUMENTATION
 sapi/cgi/cgi_main.c:2452:23   - Unknown word (CACHEGRIND)   -- ifdef HAVE_VALGRIND_CACHEGRIND_H
 sapi/cgi/cgi_main.c:2453:5    - Unknown word (CACHEGRIND)   -- CACHEGRIND_START_INSTRUMENTATION
@@ -29296,12 +29214,8 @@ sapi/cgi/cgi_main.c:556:8     - Unknown word (valw)       -- efree(valw);
 sapi/cgi/cgi_main.c:700:6     - Unknown word (CGIG)       -- if (CGIG(fix_pathinfo)) {
 sapi/cgi/cgi_main.c:78:29     - Unknown word (RISCOSIFY)  -- riscosify_control = __RISCOSIFY_STRICT_UNIX_SPECS;
 sapi/cgi/cgi_main.c:78:7      - Unknown word (riscosify)  -- int __riscosify_control = __RISCOSIFY
-sapi/cgi/cgi_main.c:94:13     - Unknown word (VALGRIND)   -- #ifdef HAVE_VALGRIND
-sapi/cgi/cgi_main.c:95:12     - Unknown word (valgrind)   -- # include "valgrind/callgrind.h"
 sapi/cgi/cgi_main.c:95:21     - Unknown word (callgrind)  -- # include "valgrind/callgrind.h"
-sapi/cgi/cgi_main.c:96:14     - Unknown word (VALGRIND)   -- # ifdef HAVE_VALGRIND_CACHEGRIND_H
 sapi/cgi/cgi_main.c:96:23     - Unknown word (CACHEGRIND) -- ifdef HAVE_VALGRIND_CACHEGRIND_H
-sapi/cgi/cgi_main.c:97:13     - Unknown word (valgrind)   -- # include "valgrind/cachegrind.h"
 sapi/cgi/cgi_main.c:97:22     - Unknown word (cachegrind) -- include "valgrind/cachegrind.h"
 sapi/cli/generate_mime_type_map.php:25:45     - Unknown word (jshttp)     -- preference rules as jshttp/mime-types
 sapi/cli/generate_mime_type_map.php:70:14     - Unknown word (Moriyoshi)  -- | Author: Moriyoshi Koizumi <moriyoshi@php
@@ -29356,7 +29270,6 @@ sapi/cli/ps_title.c:373:20    - Unknown word (nargvstr)   -- PS_STRINGS->ps_narg
 sapi/cli/ps_title.c:404:17    - Unknown word (displen)    -- * length into *displen.
 sapi/cli/ps_title.c:407:38    - Unknown word (displen)    -- get_ps_title(size_t *displen, const char** string
 sapi/cli/ps_title.c:433:6     - Unknown word (displen)    -- *displen = ps_buffer_cur_len
-sapi/cli/ps_title.c:442:40    - Unknown word (Valgrind)   -- calling this will ensure Valgrind doesn't output 'false
 sapi/cli/ps_title.h:33:45     - Unknown word (displen)    -- get_ps_title(size_t* displen, const char** string
 sapi/embed/README.md:131:49    - Unknown word (STRL)       -- zend_string_init(ZEND_STRL("Embed SAPI error:"
 sapi/embed/README.md:132:48    - Unknown word (STRL)       -- configuration_hash, ZEND_STRL("error_prepend_string
@@ -29391,7 +29304,6 @@ sapi/fpm/fpm/events/epoll.c:106:2     - Unknown word (nepollfds)  -- nepollfds =
 sapi/fpm/fpm/events/epoll.c:118:28    - Unknown word (epoolfds)   -- ensure we have a clean epoolfds before calling epoll
 sapi/fpm/fpm/events/epoll.c:119:51    - Unknown word (nepollfds)  -- struct epoll_event) * nepollfds);
 sapi/fpm/fpm/events/epoll.c:122:38    - Unknown word (nepollfds)  -- wait(epollfd, epollfds, nepollfds, timeout);
-sapi/fpm/fpm/events/epoll.c:162:49    - Unknown word (valgrind)   -- event data to prevent valgrind reports */
 sapi/fpm/fpm/events/epoll.c:165:13    - Unknown word (EPOLLIN)    -- e.events = EPOLLIN;
 sapi/fpm/fpm/events/epoll.c:170:25    - Unknown word (EPOLLET)    -- events = e.events | EPOLLET;
 sapi/fpm/fpm/events/epoll.c:193:13    - Unknown word (EPOLLIN)    -- e.events = EPOLLIN;
