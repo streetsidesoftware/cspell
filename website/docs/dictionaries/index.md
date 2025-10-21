@@ -57,7 +57,7 @@ Use the `trace` command to see a list of dictionaries: See [Searching Dictionari
 - **useCompounds** - _Deprecated_ - allow all possible combinations of words in the dictionary.
 
 ```javascript
-// Define each dictionary.  Relative paths are relative to the config file.
+// Define each dictionary. Relative paths are relative to the config file.
 "dictionaryDefinitions": [
     { "name": "spanish", "path": "./spanish-words.txt"},
     { "name": "ruby", "path": "./ruby.txt"},
