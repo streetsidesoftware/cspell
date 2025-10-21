@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 20772, Issues found: 46268 in 7876 files.
+ CSpell: Files checked: 20788, Issues found: 46274 in 7879 files.
  exit code: 1
 ARCHITECTURE.md:158:48    - Unknown word (googlemock) -- implementation using `googlemock`
 ARCHITECTURE.md:29:61     - Unknown word (retryable)  -- RPCs that fail with a retryable error,
@@ -493,9 +493,9 @@ google/cloud/bigtable/benchmarks/bigtable_benchmark_test.cc:30:30     - Unknown 
 google/cloud/bigtable/benchmarks/random_mutation.cc:31:33     - Unknown word (Zabcdefghijlkmnopqrstuvwxyz) -- ABCDEFGHIJLKMNOPQRSTUVWXYZabcdefghijlkmnopqrstuvwxyz0123456789-/_");
 google/cloud/bigtable/benchmarks/random_mutation.cc:31:8      - Unknown word (ABCDEFGHIJLKMNOPQRSTUVWXY) -- "ABCDEFGHIJLKMNOPQRSTUVWXYZabcdefghijlkmnopqrstuvwxyz
 google/cloud/bigtable/benchmarks/scan_async_throughput_benchmark.cc:105:34    - Unknown word (lprofiler)  -- copt=-g --linkopt='-lprofiler' \
-google/cloud/bigtable/bigtable_client_unit_tests.bzl:91:12     - Unknown word (readmodifywriterow) -- "table_readmodifywriterow_test.cc",
-google/cloud/bigtable/bigtable_client_unit_tests.bzl:92:12     - Unknown word (readrow)            -- "table_readrow_test.cc",
-google/cloud/bigtable/bigtable_client_unit_tests.bzl:93:12     - Unknown word (readrows)           -- "table_readrows_test.cc",
+google/cloud/bigtable/bigtable_client_unit_tests.bzl:95:12     - Unknown word (readmodifywriterow) -- "table_readmodifywriterow_test.cc",
+google/cloud/bigtable/bigtable_client_unit_tests.bzl:96:12     - Unknown word (readrow)            -- "table_readrow_test.cc",
+google/cloud/bigtable/bigtable_client_unit_tests.bzl:97:12     - Unknown word (readrows)           -- "table_readrows_test.cc",
 google/cloud/bigtable/client_options_test.cc:311:28    - Unknown word (Grpclb)     -- ClientOptionsTest, SetGrpclbFallbackTimeoutMS) {
 google/cloud/bigtable/client_options_test.cc:319:44    - Unknown word (GRPCLB)     -- hannelArgument(args, GRPC_ARG_GRPCLB_FALLBACK_TIMEOUT_MS
 google/cloud/bigtable/column_family.h:154:43    - Unknown word (Differencer) -- protobuf::util::MessageDifferencer::Equivalent(a.gc_rule
@@ -512,6 +512,7 @@ google/cloud/bigtable/internal/legacy_async_row_reader_test.cc:144:22    - Unkno
 google/cloud/bigtable/internal/legacy_async_row_reader_test.cc:552:66    - Unknown word (noooo)       -- PERMISSION_DENIED, "noooo");
 google/cloud/bigtable/internal/legacy_row_reader_test.cc:89:14     - Unknown word (preconfigured) -- // Returns a preconfigured set of parsers, so expectatio
 google/cloud/bigtable/internal/metrics_test.cc:1242:53   - Unknown word (gfet)       -- emplace("server-timing", "gfet4t7; dur=10.5");
+google/cloud/bigtable/internal/partial_result_set_source_test.cc:162:41    - Unknown word (AAAAAW)     -- resume_token: "AAAAAWVyZXN1bWVfdG9rZW4=",
 google/cloud/bigtable/internal/readrowsparser.h:15:57     - Unknown word (READROWSPARSER) -- CLOUD_BIGTABLE_INTERNAL_READROWSPARSER_H
 google/cloud/bigtable/internal/readrowsparser_acceptance_tests.inc:409:19    - Unknown word (alue)       -- value: "alue-VAL"
 google/cloud/bigtable/internal/readrowsparser_acceptance_tests.inc:571:24    - Unknown word (Multiqualifier) -- TEST_F(AcceptanceTest, MultiqualifierSplits) {
@@ -520,9 +521,9 @@ google/cloud/bigtable/mutations.h:159:15    - Unknown word (vexpressed) -- * in 
 google/cloud/bigtable/row_range_test.cc:149:31    - Unknown word (fooa)       -- TRUE(range.Contains("fooa"));
 google/cloud/bigtable/row_range_test.cc:219:20    - Unknown word (AFFFF)      -- std::string const kAFFFF00 = std::string("a\xFF
 google/cloud/bigtable/rpc_backoff_policy.h:31:4      - Unknown word (backsoff)   -- * backsoff from failed RPC operations
+google/cloud/bigtable/sql_statement_test.cc:33:27     - Unknown word (Pointwise)  -- ::testing::UnorderedPointwise;
 google/cloud/bigtable/testing/mock_async_failing_rpc_factory.h:72:74     - Unknown word (nooo)       -- PERMISSION_DENIED, "nooo");
 google/cloud/bigtable/testing/random_names.cc:47:41     - Unknown word (abcdefghijlkmnopqrstuvwxyz) -- generator, size, "abcdefghijlkmnopqrstuvwxyz0123456789");
-google/cloud/bigtable/testing/table_integration_test.cc:47:27     - Unknown word (Pointwise)  -- ::testing::UnorderedPointwise;
 google/cloud/bigtable/testing/table_test_fixture.cc:37:24     - Unknown word (repr)       -- std::string const& repr) {
 google/cloud/bigtable/tests/admin_integration_test.cc:189:12    - Unknown word (newfam)     -- "newfam", GC::Intersection(GC
 google/cloud/bigtable/tests/mutations_integration_test.cc:120:16    - Unknown word (decodeable) -- // *will* be decodeable to in int64_t. I don
@@ -862,7 +863,7 @@ google/cloud/storage/internal/async/connection_impl_open_test.cc:350:38    - Unk
 google/cloud/storage/internal/async/connection_impl_upload_test.cc:463:42    - Unknown word (eksb)       -- sha256_bytes: "test-eksb"
 google/cloud/storage/internal/async/insert_object.cc:50:21     - Unknown word (Subcord)    -- auto next = data_.Subcord(0, n);
 google/cloud/storage/internal/async/writer_connection_buffered.cc:555:39    - Unknown word (unsatisified) -- call that returns an unsatisified future until the buffer
-google/cloud/storage/internal/grpc/default_options.cc:99:49     - Unknown word (unviverse)  -- already a set endpoint or unviverse domain endpoint.
+google/cloud/storage/internal/grpc/default_options.cc:100:49    - Unknown word (unviverse)  -- already a set endpoint or unviverse domain endpoint.
 google/cloud/storage/internal/grpc/default_options_test.cc:112:29    - Unknown word (testbench)  -- "from-testbench-env");
 google/cloud/storage/internal/grpc/object_request_parser_test.cc:63:33     - Unknown word (Cuakt)      -- md5) : StEvo2V/qoDCuaktZSw3IQ==
 google/cloud/storage/internal/grpc/stub.cc:357:10    - Unknown word (wopts)      -- auto wopts = grpc::WriteOptions
