@@ -440,7 +440,7 @@ const str = 'goedemorgen'; // <- will NOT be flagged as an error.
 
 ### Ignore
 
-_Ignore_ allows you the specify a list of words you want to ignore within the document.
+_Ignore_ allows you to specify a list of words you want to ignore within the document.
 
 ```javascript
 // cspell:ignore zaallano, wooorrdd
