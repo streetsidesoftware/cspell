@@ -192,7 +192,7 @@ class ImplFileEntryCache implements FileEntryCache {
             }
         }
 
-        this.cache.save();
+        await this.cache.save();
     }
 
     resolveKeyToFile(entryKey: string): string {
