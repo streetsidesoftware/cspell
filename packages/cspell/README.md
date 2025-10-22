@@ -648,7 +648,7 @@ export default defineConfig({
   // Including "spanish" in the list of dictionaries means both Spanish and English
   // words will be considered correct.
   "dictionaries": ["spanish", "ruby", "corp-terms", "fonts"],
-  // Define each dictionary.  Relative paths are relative to the config file.
+  // Define each dictionary. Relative paths are relative to the config file.
   "dictionaryDefinitions": [
       { "name": "spanish", "path": "./spanish-words.txt"},
       { "name": "ruby", "path": "./ruby.txt"},
@@ -716,7 +716,7 @@ The spell checker includes a set of default dictionaries.
 - **useCompounds** - allow compound words
 
 ```javascript
-// Define each dictionary.  Relative paths are relative to the config file.
+// Define each dictionary. Relative paths are relative to the config file.
 "dictionaryDefinitions": [
     { "name": "spanish", "path": "./spanish-words.txt"},
     { "name": "ruby", "path": "./ruby.txt"},
