@@ -142,7 +142,7 @@ declare function fileToDocument(file: string, text: string, languageId?: string,
 declare function fileToDocument(file: string, text?: string, languageId?: string, locale?: string): Document | DocumentWithText;
 declare function fileToTextDocument(file: string): Promise<TextDocument>;
 //#endregion
-//#region ../cspell-types/dist/index-B8R3-rR5.d.mts
+//#region ../cspell-types/dist/index-BUF_NEXq.d.mts
 //#region src/Parser/index.d.ts
 type ParserOptions = Record<string, unknown>;
 type ParserName = string;
