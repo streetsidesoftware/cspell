@@ -3,6 +3,99 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v9.2.2 (2025-10-22)
+
+### Fixes
+
+<details>
+<summary>fix: Wait for the cache to save (<a href="https://github.com/streetsidesoftware/cspell/pull/7926">#7926</a>)</summary>
+
+### fix: Wait for the cache to save ([#7926](https://github.com/streetsidesoftware/cspell/pull/7926))
+
+This fixes a flaky cache situation caused by not waiting for the cache to save before moving on.
+
+---
+
+</details>
+
+### Dictionary Updates
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/7915">#7915</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#7915](https://github.com/streetsidesoftware/cspell/pull/7915))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ .../MicrosoftDocs/PowerShell-Docs/report.yaml      |   3 +-
+ .../MicrosoftDocs/PowerShell-Docs/snapshot.txt     |   3 +-
+ .../snapshots/TheAlgorithms/Python/report.yaml     |   3 +-
+ .../snapshots/TheAlgorithms/Python/snapshot.txt    |   3 +-
+ .../snapshots/flutter/samples/report.yaml          |   4 +-
+ .../snapshots/flutter/samples/snapshot.txt         |   3 +-
+ .../snapshots/gitbucket/gitbucket/report.yaml      |   4 +-
+ .../snapshots/gitbucket/gitbucket/snapshot.txt     |   4 +-
+ .../snapshots/neovim/nvim-lspconfig/report.yaml    |   6 +-
+ .../snapshots/neovim/nvim-lspconfig/snapshot.txt   |   6 +-
+ .../snapshots/php/php-src/report.yaml              |  92 +------------------
+ .../snapshots/php/php-src/snapshot.txt             | 102 ++-------------------
+ .../snapshots/slint-ui/slint/report.yaml           |  33 ++-----
+ .../snapshots/slint-ui/slint/snapshot.txt          |  11 +--
+ .../snapshots/sveltejs/svelte/report.yaml          |   3 +-
+ .../snapshots/sveltejs/svelte/snapshot.txt         |   3 +-
+ packages/cspell-bundled-dicts/package.json         |  16 ++--
+ pnpm-lock.yaml                                     |  96 ++++++++++---------
+ 18 files changed, 96 insertions(+), 299 deletions(-)
+```
+
+---
+
+</details>
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/7835">#7835</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#7835](https://github.com/streetsidesoftware/cspell/pull/7835))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ packages/cspell-bundled-dicts/package.json |   4 +-
+ packages/cspell-lib/api/api.d.ts           |   9 --
+ pnpm-lock.yaml                             | 207 ++++++++++++++++-------------
+ 3 files changed, 118 insertions(+), 102 deletions(-)
+```
+
+---
+
+</details>
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/7822">#7822</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#7822](https://github.com/streetsidesoftware/cspell/pull/7822))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ .../snapshots/vitest-dev/vitest/report.yaml        |  4 +-
+ .../snapshots/vitest-dev/vitest/snapshot.txt       |  3 +-
+ packages/cspell-bundled-dicts/package.json         |  8 ++--
+ pnpm-lock.yaml                                     | 45 ++++++++++++----------
+ 4 files changed, 31 insertions(+), 29 deletions(-)
+```
+
+---
+
+</details>
+
 ## v9.2.1 (2025-08-31)
 
 ### Dictionary Updates
