@@ -93,7 +93,7 @@ jobs:
           echo "$PATCH_DIFF" > temp/patch.diff
 
       - name: store diff
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: diffs-update
           path: temp/*.diff
@@ -229,7 +229,7 @@ jobs:
           git diff integration-tests/config integration-tests/repositories integration-tests/snapshots  > temp/$REPO.diff
 
       - name: store diff
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: diffs-integrations-${{ steps.step-normalize-repo-name.outputs.REPO_NAME }}
           path: temp/*.diff
@@ -283,7 +283,7 @@ jobs:
           mkdir temp || echo temp already exists
           git diff packages/cspell packages/cspell-lib  > temp/update_snapshot.diff
       - name: store diff
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: diffs-update-snapshots
           path: temp/*.diff
