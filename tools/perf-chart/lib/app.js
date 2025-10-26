@@ -28,8 +28,8 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 var __require = /* @__PURE__ */ createRequire(import.meta.url);
 
 //#endregion
-//#region ../../node_modules/.pnpm/commander@14.0.1/node_modules/commander/lib/error.js
-var require_error = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/commander@14.0.1/node_modules/commander/lib/error.js": ((exports) => {
+//#region ../../node_modules/.pnpm/commander@14.0.2/node_modules/commander/lib/error.js
+var require_error = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/commander@14.0.2/node_modules/commander/lib/error.js": ((exports) => {
 	/**
 	* CommanderError class
 	*/
@@ -68,8 +68,8 @@ var require_error = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/comma
 }) });
 
 //#endregion
-//#region ../../node_modules/.pnpm/commander@14.0.1/node_modules/commander/lib/argument.js
-var require_argument = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/commander@14.0.1/node_modules/commander/lib/argument.js": ((exports) => {
+//#region ../../node_modules/.pnpm/commander@14.0.2/node_modules/commander/lib/argument.js
+var require_argument = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/commander@14.0.2/node_modules/commander/lib/argument.js": ((exports) => {
 	const { InvalidArgumentError: InvalidArgumentError$3 } = require_error();
 	var Argument$3 = class {
 		/**
@@ -194,8 +194,8 @@ var require_argument = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/co
 }) });
 
 //#endregion
-//#region ../../node_modules/.pnpm/commander@14.0.1/node_modules/commander/lib/help.js
-var require_help = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/commander@14.0.1/node_modules/commander/lib/help.js": ((exports) => {
+//#region ../../node_modules/.pnpm/commander@14.0.2/node_modules/commander/lib/help.js
+var require_help = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/commander@14.0.2/node_modules/commander/lib/help.js": ((exports) => {
 	const { humanReadableArgName: humanReadableArgName$1 } = require_argument();
 	/**
 	* TypeScript import types for JSDoc, used by Visual Studio Code IntelliSense and `npm run typescript-checkJS`
@@ -685,8 +685,8 @@ var require_help = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/comman
 }) });
 
 //#endregion
-//#region ../../node_modules/.pnpm/commander@14.0.1/node_modules/commander/lib/option.js
-var require_option = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/commander@14.0.1/node_modules/commander/lib/option.js": ((exports) => {
+//#region ../../node_modules/.pnpm/commander@14.0.2/node_modules/commander/lib/option.js
+var require_option = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/commander@14.0.2/node_modules/commander/lib/option.js": ((exports) => {
 	const { InvalidArgumentError: InvalidArgumentError$2 } = require_error();
 	var Option$3 = class {
 		/**
@@ -989,8 +989,8 @@ var require_option = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/comm
 }) });
 
 //#endregion
-//#region ../../node_modules/.pnpm/commander@14.0.1/node_modules/commander/lib/suggestSimilar.js
-var require_suggestSimilar = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/commander@14.0.1/node_modules/commander/lib/suggestSimilar.js": ((exports) => {
+//#region ../../node_modules/.pnpm/commander@14.0.2/node_modules/commander/lib/suggestSimilar.js
+var require_suggestSimilar = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/commander@14.0.2/node_modules/commander/lib/suggestSimilar.js": ((exports) => {
 	const maxDistance = 3;
 	function editDistance(a, b) {
 		if (Math.abs(a.length - b.length) > maxDistance) return Math.max(a.length, b.length);
@@ -1045,8 +1045,8 @@ var require_suggestSimilar = /* @__PURE__ */ __commonJS({ "../../node_modules/.p
 }) });
 
 //#endregion
-//#region ../../node_modules/.pnpm/commander@14.0.1/node_modules/commander/lib/command.js
-var require_command = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/commander@14.0.1/node_modules/commander/lib/command.js": ((exports) => {
+//#region ../../node_modules/.pnpm/commander@14.0.2/node_modules/commander/lib/command.js
+var require_command = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/commander@14.0.2/node_modules/commander/lib/command.js": ((exports) => {
 	const EventEmitter = __require("node:events").EventEmitter;
 	const childProcess = __require("node:child_process");
 	const path = __require("node:path");
@@ -2309,7 +2309,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
 				return arg.length > 1 && arg[0] === "-";
 			}
 			const negativeNumberArg = (arg) => {
-				if (!/^-\d*\.?\d+(e[+-]?\d+)?$/.test(arg)) return false;
+				if (!/^-(\d+|\d*\.\d+)(e[+-]?\d+)?$/.test(arg)) return false;
 				return !this._getCommandAndAncestors().some((cmd) => cmd.options.map((opt) => opt.short).some((short) => /^-\d$/.test(short)));
 			};
 			let activeVariadicOption = null;
@@ -3024,8 +3024,8 @@ Expecting one of '${allowedValues.join("', '")}'`);
 }) });
 
 //#endregion
-//#region ../../node_modules/.pnpm/commander@14.0.1/node_modules/commander/index.js
-var require_commander = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/commander@14.0.1/node_modules/commander/index.js": ((exports) => {
+//#region ../../node_modules/.pnpm/commander@14.0.2/node_modules/commander/index.js
+var require_commander = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/commander@14.0.2/node_modules/commander/index.js": ((exports) => {
 	const { Argument: Argument$1 } = require_argument();
 	const { Command: Command$1 } = require_command();
 	const { CommanderError: CommanderError$1, InvalidArgumentError: InvalidArgumentError$1 } = require_error();
@@ -3048,7 +3048,7 @@ var require_commander = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/c
 }) });
 
 //#endregion
-//#region ../../node_modules/.pnpm/commander@14.0.1/node_modules/commander/esm.mjs
+//#region ../../node_modules/.pnpm/commander@14.0.2/node_modules/commander/esm.mjs
 var import_commander = /* @__PURE__ */ __toESM(require_commander(), 1);
 const { program, createCommand, createArgument, createOption, CommanderError, InvalidArgumentError, InvalidOptionArgumentError, Command, Argument, Option, Help } = import_commander.default;
 

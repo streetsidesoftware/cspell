@@ -2968,7 +2968,7 @@ declare abstract class CSpellConfigFile implements ICSpellConfigFile {
    * @param schema - The schema to set for the config file.
    */
   abstract setSchema(schema: string): this;
-  abstract setValue<K extends keyof CSpellSettings>(key: K, value: CSpellSettings[K]): this;
+  abstract setValue<K$1 extends keyof CSpellSettings>(key: K$1, value: CSpellSettings[K$1]): this;
   /**
    *
    * @param key - the field to set the comment for.
