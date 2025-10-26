@@ -3,7 +3,7 @@ Repository: dart-lang/sdk
 Url: "https://github.com/dart-lang/sdk"
 Args: ["--issues-summary-report","--locale=en,en-GB","--exclude=tools/dom/**/*.json","--exclude=pkg/*/test/**","--exclude=**/*_data.*","--exclude=runtime/vm/**","--exclude=sdk/lib/html/**","--exclude=benchmarks/**","--exclude=**/*_test.*","--exclude=*/**/*.{json,yaml,yml}","--exclude=tests/corelib/regexp/**","--exclude=**/{third_party,assets}/**","**/*.{dart,md}"]
 Lines:
- CSpell: Files checked: 10696, Issues found: 9284 in 2041 files.
+ CSpell: Files checked: 10696, Issues found: 9148 in 2013 files.
  exit code: 1
 CONTRIBUTING.md:105:27    - Unknown word (presubmit)  -- CL. They can run the presubmit tests on your behalf
 CONTRIBUTING.md:112:52    - Unknown word (Tryjobs)    -- progress by looking at the "Tryjobs" panel in your review
@@ -790,7 +790,6 @@ pkg/dartdev/lib/src/commands/run.dart:178:40    - Unknown word (perfettofile) --
 pkg/dartdev/lib/src/install/file_system.dart:176:10    - Unknown word (ERRORLEVEL) -- EXIT /B %ERRORLEVEL%
 pkg/dartdev/lib/src/install/file_system.dart:79:22     - Unknown word (Appbundles) -- final dartInstallAppbundlesDir = _appBundles;
 pkg/dartdev/lib/src/native_assets.dart:320:33    - Unknown word (cannnot)    -- Returns `null` if package cannnot be determined.
-pkg/dartdev/lib/src/native_assets_macos.dart:10:8      - Unknown word (rpath)      -- final _rpathUri = Uri.file('@rpath
 pkg/dartdev/lib/src/native_assets_macos.dart:111:13    - Unknown word (libbuz)     -- // @rpath/libbuz.dylib
 pkg/dartdev/lib/src/native_assets_macos.dart:39:9      - Unknown word (otool)      -- final otoolResult = await Process
 pkg/dartdev/lib/src/native_assets_macos.dart:52:12     - Unknown word (Otool)      -- parseOtoolArchitectureSections
@@ -808,7 +807,6 @@ pkg/dartdev/lib/src/unified_analytics.dart:153:24    - Unknown word (BUILDBOT)  
 pkg/dartdev/lib/src/unified_analytics.dart:153:33    - Unknown word (BUILDERNAME) -- containsKey('BUILDBOT_BUILDERNAME') ||
 pkg/dartdev/lib/src/utils.dart:31:7      - Unknown word (retval)     -- int retval = 0;
 pkg/dartdev/lib/src/vm_interop_handler.dart:24:7      - Unknown word (execing)    -- /// execing it (On Linux/Mac the
-pkg/dds/dds_protocol.md:24:9      - Unknown word (Perfetto)   -- - [getPerfettoVMTimeline](#getperfettovmtime
 pkg/dds/lib/devtools_server.dart:135:29    - Unknown word (headlessly) -- 'Start devtools headlessly and write memory profiling
 pkg/dds/lib/devtools_server.dart:345:64    - Unknown word (SAMEORIGIN) -- 'x-frame-options', 'SAMEORIGIN');
 pkg/dds/lib/devtools_server.dart:369:46    - Unknown word (credentialless) -- Origin-Embedder-Policy', 'credentialless')
@@ -1111,7 +1109,6 @@ pkg/native_stack_traces/lib/src/elf.dart:531:21    - Unknown word (EXECINSTR)  -
 pkg/native_stack_traces/lib/src/elf.dart:75:65     - Unknown word (NIDENT)     -- reader.readRawBytes(_EI_NIDENT));
 pkg/native_stack_traces/lib/src/elf.dart:80:29     - Unknown word (ELFMAG)     -- bytes[_EI_MAG0] != _ELFMAG0) return null;
 pkg/native_stack_traces/lib/src/elf.dart:92:13     - Unknown word (ELFCLASS)   -- case _ELFCLASS32:
-pkg/native_stack_traces/lib/src/macho.dart:131:19    - Unknown word (RPATH)      -- static const LC_RPATH = 0x1c | LC_REQ_DYLD
 pkg/native_stack_traces/lib/src/macho.dart:482:12    - Unknown word (TVOSSIMULATOR) -- PLATFORM_TVOSSIMULATOR(0x8, 'TVOS Simulator
 pkg/native_stack_traces/lib/src/macho.dart:483:12    - Unknown word (WATCHOSSIMULATOR) -- PLATFORM_WATCHOSSIMULATOR(0x9, 'WatchOS Simulator
 pkg/native_stack_traces/lib/src/macho.dart:617:20    - Unknown word (CIGAM)            -- static const _MH_CIGAM = 0xcefaedfe;
@@ -1348,8 +1345,6 @@ pkg/vm_service/tool/common/src_gen_common.dart:53:34     - Unknown word (strs)  
 pkg/vm_service/tool/dart/generate_dart_common.dart:626:30    - Unknown word (generatable) -- String? name = field.generatableName;
 pkg/vm_service/tool/dart/src_gen_dart.dart:81:46     - Unknown word (Curlies)    -- str = '', bool ignoreCurlies = false]) =>
 pkg/vm_service_interface/lib/src/vm_service_interface.dart:731:10    - Unknown word (Perfettofile) -- /// or Perfettofile, an [RPCError] with
-pkg/vm_service_protos/README.md:11:8      - Unknown word (perfetto)   -- - [get_perfetto_vm_timeline_rpc_test
-pkg/vm_service_protos/lib/src/protos/perfetto/common/builtin_clock.pb.dart:7:54      - Unknown word (protos)     -- tools/compile_perfetto_protos.dart` from the
 pkg/vm_service_protos/lib/src/protos/perfetto/trace/clock_snapshot.pb.dart:185:65    - Unknown word (BOOTTIME)   -- the trace. Defaults to BOOTTIME, but can
 pkg/vm_service_protos/lib/src/protos/perfetto/trace/profiling/profile_common.pb.dart:268:13    - Unknown word (fopen)      -- /// E.g. "fopen"
 pkg/vm_service_protos/lib/src/protos/perfetto/trace/profiling/profile_common.pb.dart:30:28     - Unknown word (intered)    -- should be used. If the intered fields are present in
@@ -1573,13 +1568,11 @@ runtime/tools/profiling/bin/convert_allocation_profile.dart:69:62     - Unknown 
 runtime/tools/profiling/bin/convert_allocation_profile.dart:73:43     - Unknown word (uprobes)    -- kernel/tracing/events/uprobes/alloc/format
 runtime/tools/profiling/bin/set_uprobe.dart:88:7      - Unknown word (Mintel)     -- '-Mintel',
 runtime/tools/profiling/lib/src/pprof/generated/profile.pb.dart:224:42    - Unknown word (ocurrences) -- events between sampled ocurrences.
-runtime/tools/profiling/lib/src/pprof/generated/profile.pb.dart:27:24     - Unknown word (Nanos)      -- $fixnum.Int64? timeNanos,
 runtime/tools/profiling/lib/src/pprof/generated/profile.pb.dart:425:47    - Unknown word (elemntwise) -- of values that is the elemntwise sum of the
 runtime/tools/profiling/lib/src/pprof/generated/profile.pb.dart:703:27    - Unknown word (vdso)       -- abstractions like "[vdso]".
 runtime/tools/profiling/lib/src/pprof/generated/profile.pb.dart:906:17    - Unknown word (memcpy)     -- /// E.g., if memcpy() is inlined into printf
 runtime/tools/profiling/lib/src/pprof/generated/profile.pb.dart:90:58     - Unknown word (perftools)  -- perfetto.third_party.perftools.profiles'),
 runtime/tools/profiling/lib/src/pprof/generated/profile.pbjson.dart:225:6     - Unknown word (xpbm)       -- 'xpbmU=');
-runtime/tools/profiling/lib/src/pprof/generated/profile.pbjson.dart:63:17     - Unknown word (nanos)      -- {'1': 'time_nanos', '3': 9, '4': 1, '
 runtime/tools/run_clang_tidy.dart:157:6     - Unknown word (DDEBUG)       -- ['-DDEBUG'],
 runtime/tools/run_clang_tidy.dart:158:6     - Unknown word (DNDEBUG)      -- ['-DNDEBUG'],
 runtime/tools/run_clang_tidy.dart:159:18    - Unknown word (DPRODUCT)     -- ['-DNDEBUG', '-DPRODUCT'],

@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 20788, Issues found: 46274 in 7879 files.
+ CSpell: Files checked: 20788, Issues found: 45013 in 7872 files.
  exit code: 1
 ARCHITECTURE.md:158:48    - Unknown word (googlemock) -- implementation using `googlemock`
 ARCHITECTURE.md:29:61     - Unknown word (retryable)  -- RPCs that fail with a retryable error,
@@ -40,14 +40,12 @@ bazel/gapic.bzl:25:9      - Unknown word (googlapis)      -- googlapis_deps: The
 bazel/gapic.bzl:39:12     - Unknown word (filegroup)      -- native.filegroup(
 bazel/gapic.bzl:40:17     - Unknown word (srcs)           -- name = "srcs",
 bazel/gapic.bzl:45:17     - Unknown word (hdrs)           -- name = "hdrs",
-bazel/gapic.bzl:75:26     - Unknown word (googletest)     -- "@com_google_googletest//:gtest",
 bazel/googleapis.modules.patch:10:2      - Unknown word (genrule)    -- genrule(
 bazel/googleapis.modules.patch:23:21     - Unknown word (SRCS)       -- if test -z \"$(SRCS)\"; then
 bazel/library_names.bzl:16:16     - Unknown word (startswith) -- if library.startswith("compute_"):
 bazel/library_names.bzl:22:24     - Unknown word (removeprefix) -- return library.removeprefix("compute_") + "_mock
 bazel/workspace0.bzl:159:17    - Unknown word (boringssl)  -- name = "boringssl",
 bazel/workspace0.bzl:83:23     - Unknown word (skylib)     -- name = "bazel_skylib",
-bazel/workspace3.bzl:39:7      - Unknown word (Googletest) -- # Googletest dependencies
 ci/check-include-guards.gawk:26:1      - Unknown word (BEGINFILE)  -- BEGINFILE {
 ci/check-include-guards.gawk:32:16     - Unknown word (toupper)    -- guard_body=toupper(FILENAME)
 ci/check-include-guards.gawk:33:5      - Unknown word (gsub)       -- gsub("[/\\.]", "_", guard
@@ -65,8 +63,6 @@ ci/cloudbuild/notifiers/logs/README.md:42:34     - Unknown word (publiclogs) -- 
 ci/cloudbuild/notifiers/logs/README.md:55:8      - Unknown word (buildpack)  -- We use buildpack to compile the code
 ci/cloudbuild/notifiers/logs/README.md:62:44     - Unknown word (cloudevent) -- FUNCTION_SIGNATURE_TYPE=cloudevent" \
 ci/cloudbuild/notifiers/logs/function/CMakeLists.txt:26:40     - Unknown word (stdc)       -- google-cloud-cpp::storage stdc++fs)
-ci/cloudbuild/notifiers/logs/function/function.cc:198:57    - Unknown word (DISTRO)     -- substitutions"].value("_DISTRO", "");
-ci/cloudbuild/notifiers/logs/function/function.cc:66:38     - Unknown word (distro)     -- proCommand(std::string const& distro, std::string const&
 ci/cloudbuild/notifiers/logs/function/function.cc:69:21     - Unknown word (cloudbuild) -- R"""(<code>ci/cloudbuild/build.sh --docker -
 ci/cloudbuild/notifiers/logs/function/generate_svg_badge.cc:58:66     - Unknown word (Verdana)    -- family='DejaVu Sans,Verdana,Geneva,sans-serif' font
 ci/cloudbuild/notifiers/logs/function/generate_svg_badge.h:15:29     - Unknown word (CLOUDBUILD) -- GOOGLE_CLOUD_CPP_CI_CLOUDBUILD_NOTIFIERS_LOGS_FUNCTION
@@ -163,14 +159,11 @@ ci/etc/expected_install_directories:993:24    - Unknown word (parametermanager) 
 ci/etc/expected_install_directories:997:24    - Unknown word (policysimulator)         -- include/google/cloud/policysimulator
 ci/etc/expected_install_directories:9:22      - Unknown word (servicecontrol) -- /include/google/api/servicecontrol
 ci/kokoro/README.md:32:2      - Unknown word (PRESUBMIT)  -- *PRESUBMIT* thus the duplication
-ci/kokoro/windows/build-32.bat:23:6      - Unknown word (VCPKG)      -- set "VCPKG_OVERLAY_TRIPLETS=%cd
 ci/kokoro/windows/build-32.bat:29:5      - Unknown word (ERRORLEVEL) -- @if ERRORLEVEL 1 exit /b 1
 ci/verify_current_targets/CMakeLists.txt:56:47     - Unknown word (ARGN)       -- "${name}" PRIVATE ${ARGN})
 ci/verify_current_targets/CMakeLists.txt:58:1      - Unknown word (endfunction) -- endfunction ()
 ci/verify_current_targets/CMakeLists.txt:62:1      - Unknown word (endforeach)  -- endforeach ()
-ci/verify_current_targets/CMakeLists.txt:89:26     - Unknown word (protos)      -- cloud_dialogflow_v2_protos"
 ci/verify_quickstart/CMakeLists.txt:106:22    - Unknown word (STREQUAL)   -- if ("${feature}" STREQUAL "storage-grpc" OR "
-ci/verify_quickstart/CMakeLists.txt:112:10    - Unknown word (vcpkg)      -- # In vcpkg we cannot use `_` in
 ci/verify_quickstart/CMakeLists.txt:22:35     - Unknown word (DFEATURES)  -- FATAL_ERROR "Missing -DFEATURES argument, for example
 ci/verify_quickstart/CMakeLists.txt:42:16     - Unknown word (DCMAKE)     -- "-DCMAKE_PREFIX_PATH=${CMAKE
 ci/verify_quickstart/CMakeLists.txt:50:16     - Unknown word (DVCPKG)     -- "-DVCPKG_TARGET_TRIPLET=${VCPKG
@@ -203,7 +196,6 @@ doc/contributor/howto-guide-setup-development-workstation.md:157:9     - Unknown
 doc/contributor/howto-guide-setup-development-workstation.md:182:10    - Unknown word (mdformat)   -- Install `mdformat`, which we use to format
 doc/contributor/howto-guide-setup-development-workstation.md:186:27    - Unknown word (frontmatter) -- mdformat-frontmatter==0.4.1 \
 doc/contributor/howto-guide-setup-development-workstation.md:200:14    - Unknown word (setuptools)  -- pip3 install setuptools wheel
-doc/contributor/howto-guide-setup-development-workstation.md:218:34    - Unknown word (clangd)      -- from source so that clangd can find all the symbols
 doc/contributor/howto-guide-setup-development-workstation.md:236:29    - Unknown word (WERROR)      -- DGOOGLE_CLOUD_CPP_ENABLE_WERROR=ON \
 doc/contributor/howto-guide-setup-development-workstation.md:300:111   - Unknown word (ALLUSERSPROFILE) -- & SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
 doc/contributor/howto-guide-setup-development-workstation.md:306:1     - Unknown word (choco)           -- choco install -y visualstudio
@@ -225,7 +217,6 @@ doc/packaging.md:210:10    - Unknown word (DWITH)       -- -DWITH_EXAMPLES=OFF \
 doc/packaging.md:214:10    - Unknown word (DOPENTELEMETRY) -- -DOPENTELEMETRY_INSTALL=ON \
 doc/packaging.md:247:10    - Unknown word (makecache)      -- sudo dnf makecache && \
 doc/packaging.md:248:32    - Unknown word (findutils)      -- install -y cmake curl findutils gcc-c++ git make ninja
-doc/packaging.md:257:48    - Unknown word (devel)          -- protobuf-compiler protobuf-devel grpc-cpp grpc-devel
 doc/packaging.md:278:6     - Unknown word (ldconfig)       -- sudo ldconfig && cd /var/tmp && rm
 doc/packaging.md:366:23    - Unknown word (libopenssl)     -- libcurl-devel libopenssl-devel libcrc32c-devel
 doc/packaging.md:366:40    - Unknown word (libcrc)         -- devel libopenssl-devel libcrc32c-devel nlohmann_json
@@ -297,7 +288,6 @@ examples/CMakeLists.txt:33:9      - Unknown word (Findg)      -- include(FindgRP
 examples/gcs2cbt.cc:253:13    - Unknown word (cbta)       -- namespace cbta = ::google::cloud::bigtable
 external/googleapis/CMakeLists.txt:102:18    - Unknown word (latlng)         -- "google/type/latlng.proto"
 external/googleapis/CMakeLists.txt:109:18    - Unknown word (timeofday)      -- "google/type/timeofday.proto")
-external/googleapis/CMakeLists.txt:125:16    - Unknown word (Protos)         -- include(CompileProtos)
 external/googleapis/CMakeLists.txt:135:27    - Unknown word (protolist)      -- google_cloud_cpp_load_protolist(protos "${file}")
 external/googleapis/CMakeLists.txt:212:20    - Unknown word (SOVERSION)      -- SOVERSION ${PROJECT_VERSION_MAJOR
 external/googleapis/CMakeLists.txt:355:23    - Unknown word (protodeps)      -- google_cloud_cpp_load_protodeps(cloud_common_deps "protodeps
@@ -353,7 +343,6 @@ external/googleapis/protolists/shell.list:1:47      - Unknown word (cloudshell) 
 external/googleapis/protolists/tasks.list:1:47      - Unknown word (cloudtasks) -- google/cloud/tasks/v2:cloudtasks.proto
 generator/BUILD.bazel:119:39    - Unknown word (commandlineflag) -- google_absl//absl/flags:commandlineflag",
 generator/CMakeLists.txt:161:22    - Unknown word (libprotoc)  -- protobuf::libprotoc
-generator/CMakeLists.txt:187:23    - Unknown word (PROTOS)     -- PROTOS generator_config.proto
 generator/CMakeLists.txt:189:44    - Unknown word (HDRS)       -- cpp(PROTO_SRCS PROTO_HDRS generator_config.proto
 generator/CMakeLists.txt:291:26    - Unknown word (everytime)  -- build all the tests everytime they create a new package
 generator/generator_config.proto:41:35     - Unknown word (gcpxx)      -- to true generate the `gcpxxV1` alias for our inline
@@ -927,7 +916,6 @@ protos/google/cloud/compute/routers/v1/routers.proto:156:46    - Unknown word (s
 protos/google/cloud/compute/v1/internal/common_000.proto:1099:20   - Unknown word (OVERRIDEN)   -- // FIELD_VALUE_OVERRIDEN: Warning that value
 protos/google/cloud/compute/v1/internal/common_000.proto:1103:41   - Unknown word (WIEGHTED)    -- HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB: A WEIGHTED_MAGLEV
 protos/google/cloud/compute/v1/internal/common_000.proto:1302:6    - Unknown word (myorg)       -- // myorg.CustomLbPolicy). The
-protos/google/cloud/compute/v1/internal/common_000.proto:1549:35   - Unknown word (nanos)       -- outlierDetection.interval.nanos. Defaults to 1 second
 protos/google/cloud/compute/v1/internal/common_000.proto:1578:37   - Unknown word (stdev)       -- success rate: mean - (stdev * successRateStdevFactor
 protos/google/cloud/compute/v1/internal/common_000.proto:1578:56   - Unknown word (Stdev)       -- (stdev * successRateStdevFactor). This factor
 protos/google/cloud/compute/v1/internal/common_000.proto:1626:22   - Unknown word (SUBSETTING)  -- // CONSISTENT_HASH_SUBSETTING: Subsetting based on
@@ -1032,7 +1020,6 @@ protos/google/cloud/compute/v1/internal/common_076.proto:91:29     - Unknown wor
 protos/google/cloud/compute/v1/internal/common_082.proto:36:4      - Unknown word (loadbalancers) -- // loadbalancers.
 protos/google/cloud/compute/v1/internal/common_087.proto:172:6     - Unknown word (SUBINTERFACES) -- // SUBINTERFACES_ALLOWED:
 protos/google/cloud/compute/v1/internal/common_090.proto:78:75     - Unknown word (RPCLB)      -- This must be a valid gRPCLB
-protos/google/cloud/compute/v1/internal/common_090.proto:88:75     - Unknown word (Nanos)      -- seconds to 3600 seconds. Nanos
 protos/google/cloud/compute/v1/internal/common_095.proto:103:17    - Unknown word (RPKI)       -- // `INITIAL`: RPKI validation is complete
 protos/google/cloud/compute/v1/internal/common_095.proto:24:69     - Unknown word (netblock)   -- aggregated IP prefix or netblock
 protos/google/cloud/compute/v1/internal/common_095.proto:94:24     - Unknown word (prefixs)    -- public_delegated_prefixs = 9 [json_name = "publicDeleg

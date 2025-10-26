@@ -4,8 +4,8 @@ Url: https://github.com/dart-lang/sdk
 Args: '["--issues-summary-report","--locale=en,en-GB","--exclude=tools/dom/**/*.json","--exclude=pkg/*/test/**","--exclude=**/*_data.*","--exclude=runtime/vm/**","--exclude=sdk/lib/html/**","--exclude=benchmarks/**","--exclude=**/*_test.*","--exclude=*/**/*.{json,yaml,yml}","--exclude=tests/corelib/regexp/**","--exclude=**/{third_party,assets}/**","**/*.{dart,md}"]'
 Summary:
   files: 10696
-  filesWithIssues: 2041
-  issues: 9284
+  filesWithIssues: 2013
+  issues: 9148
   errors: 0
 Errors: []
 
@@ -793,7 +793,6 @@ issues:
   - "pkg/dartdev/lib/src/commands/run.dart:178:40        perfettofile    U       systrace, file, callback, perfettofile.\\n'"
   - "pkg/dartdev/lib/src/install/file_system.dart:79:22          Appbundles      U       final dartInstallAppbundlesDir = _appBundles;"
   - "pkg/dartdev/lib/src/install/file_system.dart:176:10         ERRORLEVEL      U       EXIT /B %ERRORLEVEL%"
-  - "pkg/dartdev/lib/src/native_assets_macos.dart:10:8           rpath       U       final _rpathUri = Uri.file('@rpath"
   - "pkg/dartdev/lib/src/native_assets_macos.dart:39:9           otool       U       final otoolResult = await Process"
   - "pkg/dartdev/lib/src/native_assets_macos.dart:52:12          Otool       U       parseOtoolArchitectureSections"
   - "pkg/dartdev/lib/src/native_assets_macos.dart:111:13         libbuz      U       // @rpath/libbuz.dylib"
@@ -812,7 +811,6 @@ issues:
   - "pkg/dartdev/lib/src/unified_analytics.dart:153:33       BUILDERNAME     U       containsKey('BUILDBOT_BUILDERNAME') ||"
   - "pkg/dartdev/lib/src/utils.dart:31:7         retval      U       int retval = 0;"
   - "pkg/dartdev/lib/src/vm_interop_handler.dart:24:7        execing     U       /// execing it (On Linux/Mac the"
-  - "pkg/dds/dds_protocol.md:24:9        Perfetto    U       - [getPerfettoVMTimeline](#getperfettovmtime"
   - "pkg/dds/lib/devtools_server.dart:59:40          cros (cross)        U       isChromeOS = File('/dev/.cros_milestone').existsSync"
   - "pkg/dds/lib/devtools_server.dart:135:29         headlessly          U       'Start devtools headlessly and write memory profiling"
   - "pkg/dds/lib/devtools_server.dart:345:64         SAMEORIGIN          U       'x-frame-options', 'SAMEORIGIN');"
@@ -1116,7 +1114,6 @@ issues:
   - "pkg/native_stack_traces/lib/src/elf.dart:1167:13        succesful (successful)      U       /// After succesful completion, the [endian"
   - "pkg/native_stack_traces/lib/src/elf.dart:1238:24        dynstr                      U       cacheSymbolNames('.dynstr', '.dynsym');"
   - "pkg/native_stack_traces/lib/src/macho.dart:95:26        nsyms               U       Reader reader, int nsyms, StringTable stringTable"
-  - "pkg/native_stack_traces/lib/src/macho.dart:131:19       RPATH               U       static const LC_RPATH = 0x1c | LC_REQ_DYLD"
   - "pkg/native_stack_traces/lib/src/macho.dart:482:12       TVOSSIMULATOR       U       PLATFORM_TVOSSIMULATOR(0x8, 'TVOS Simulator"
   - "pkg/native_stack_traces/lib/src/macho.dart:483:12       WATCHOSSIMULATOR    U       PLATFORM_WATCHOSSIMULATOR(0x9, 'WatchOS Simulator"
   - "pkg/native_stack_traces/lib/src/macho.dart:617:20       CIGAM               U       static const _MH_CIGAM = 0xcefaedfe;"
@@ -1289,7 +1286,6 @@ issues:
   - "pkg/testing/lib/src/expectation.dart:70:8           runtimeerror                U       \"runtimeerror\": Expectation(\"RuntimeError"
   - "pkg/testing/README.md:246:68        mysuite     U       create a file named `mysuite_test.dart` with this"
   - "pkg/vm_service_interface/lib/src/vm_service_interface.dart:731:10       Perfettofile    U       /// or Perfettofile, an [RPCError] with"
-  - "pkg/vm_service_protos/lib/src/protos/perfetto/common/builtin_clock.pb.dart:7:54         protos      U       tools/compile_perfetto_protos.dart` from the"
   - "pkg/vm_service_protos/lib/src/protos/perfetto/trace/clock_snapshot.pb.dart:185:65       BOOTTIME    U       the trace. Defaults to BOOTTIME, but can"
   - "pkg/vm_service_protos/lib/src/protos/perfetto/trace/profiling/profile_common.pb.dart:30:28          intered (interned, interred)    U       should be used. If the intered fields are present in"
   - "pkg/vm_service_protos/lib/src/protos/perfetto/trace/profiling/profile_common.pb.dart:268:13         fopen                           U       /// E.g. \"fopen\""
@@ -1300,7 +1296,6 @@ issues:
   - "pkg/vm_service_protos/lib/src/protos/perfetto/trace/track_event/track_descriptor.pb.dart:157:33         ftrace          U       other sources (e.g. ftrace) for the same process"
   - "pkg/vm_service_protos/lib/src/protos/perfetto/trace/track_event/track_event.pb.dart:99:44       Iids    U       fixnum.Int64>? categoryIids,"
   - "pkg/vm_service_protos/lib/src/protos/perfetto/trace/track_event/track_event.pbjson.dart:28:21       iids    U       {'1': 'category_iids', '3': 3, '4': 3, '"
-  - "pkg/vm_service_protos/README.md:11:8        perfetto    U       - [get_perfetto_vm_timeline_rpc_test"
   - "pkg/vm_service/example/vm_service_tester.dart:72:10         reserialize         U       // reserialize it back to the same"
   - "pkg/vm_service/example/vm_service_tester.dart:86:13         reserialized        U       final reserializedJson = (instance as dynamic"
   - "pkg/vm_service/example/vm_service_tester.dart:135:25        reserialization     U       // Disable the json reserialization checks since custom"
@@ -1574,14 +1569,12 @@ issues:
   - "runtime/tools/profiling/bin/convert_allocation_profile.dart:471:20      callchain                   U       SampleFormat.callchain |"
   - "runtime/tools/profiling/bin/convert_allocation_profile.dart:490:23      pgoffs                      U       offset: event.pgoffs,"
   - "runtime/tools/profiling/bin/set_uprobe.dart:88:7        Mintel      U       '-Mintel',"
-  - "runtime/tools/profiling/lib/src/pprof/generated/profile.pb.dart:27:24       Nanos                       U       $fixnum.Int64? timeNanos,"
   - "runtime/tools/profiling/lib/src/pprof/generated/profile.pb.dart:90:58       perftools                   U       perfetto.third_party.perftools.profiles'),"
   - "runtime/tools/profiling/lib/src/pprof/generated/profile.pb.dart:224:42      ocurrences (occurrences)    U       events between sampled ocurrences."
   - "runtime/tools/profiling/lib/src/pprof/generated/profile.pb.dart:425:47      elemntwise                  U       of values that is the elemntwise sum of the"
   - "runtime/tools/profiling/lib/src/pprof/generated/profile.pb.dart:703:27      vdso                        U       abstractions like \"[vdso]\"."
   - "runtime/tools/profiling/lib/src/pprof/generated/profile.pb.dart:906:17      memcpy                      U       /// E.g., if memcpy() is inlined into printf"
-  - "runtime/tools/profiling/lib/src/pprof/generated/profile.pbjson.dart:63:17       nanos       U       {'1': 'time_nanos', '3': 9, '4': 1, '"
-  - "runtime/tools/profiling/lib/src/pprof/generated/profile.pbjson.dart:225:6       xpbm        U       'xpbmU=');"
+  - "runtime/tools/profiling/lib/src/pprof/generated/profile.pbjson.dart:225:6       xpbm    U       'xpbmU=');"
   - "runtime/tools/profiling/README.md:1:29          profing     U       tools for low level profing of code running on the"
   - "runtime/tools/profiling/README.md:3:3           Uprobe      U       # Uprobe based profiling"
   - "runtime/tools/profiling/README.md:9:41          uprobe's    U       context based on the uprobe's description and emit"
@@ -3264,8 +3257,6 @@ issuesSummary:
   - "text: naebdyr, count: 1, files: 1,"
   - "text: ñåļîžåţîờñ, count: 1, files: 1,"
   - "text: namescope, count: 2, files: 1,"
-  - "text: nanos, count: 2, files: 1,"
-  - "text: Nanos, count: 7, files: 2,"
   - "text: Nare, count: 2, files: 2,"
   - "text: naset, count: 3, files: 1,"
   - "text: nasm, count: 1, files: 1,"
@@ -3464,8 +3455,6 @@ issuesSummary:
   - "text: pcpu, count: 2, files: 1,"
   - "text: pcre, count: 1, files: 1,"
   - "text: pecularities, count: 1, files: 1,"
-  - "text: perfetto, count: 2, files: 1,"
-  - "text: Perfetto, count: 5, files: 1,"
   - "text: perfettofile, count: 1, files: 1,"
   - "text: Perfettofile, count: 4, files: 2,"
   - "text: performantly, count: 1, files: 1,"
@@ -3531,7 +3520,6 @@ issuesSummary:
   - "text: progagation, count: 1, files: 1,"
   - "text: PROGBITS, count: 5, files: 1,"
   - "text: propogate, count: 1, files: 1,"
-  - "text: protos, count: 105, files: 38,"
   - "text: protoype, count: 1, files: 1,"
   - "text: Protype, count: 1, files: 1,"
   - "text: proxify, count: 1, files: 1,"
@@ -3652,8 +3640,6 @@ issuesSummary:
   - "text: roedmus, count: 1, files: 1,"
   - "text: routertion, count: 1, files: 1,"
   - "text: rowspan, count: 2, files: 1,"
-  - "text: rpath, count: 13, files: 3,"
-  - "text: RPATH, count: 2, files: 1,"
   - "text: rredts, count: 1, files: 1,"
   - "text: rruntime, count: 1, files: 1,"
   - "text: RTCDTMF, count: 4, files: 1,"

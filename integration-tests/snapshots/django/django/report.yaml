@@ -5,7 +5,7 @@ Args: '["--issues-summary-report","**/*.{md,py}"]'
 Summary:
   files: 2877
   filesWithIssues: 926
-  issues: 8546
+  issues: 8543
   errors: 0
 Errors: []
 
@@ -643,7 +643,6 @@ issues:
   - "django/contrib/gis/gdal/raster/band.py:108:22       smin            U       result = smin.value, smax.value, smean"
   - "django/contrib/gis/gdal/raster/band.py:108:34       smax            U       result = smin.value, smax.value, smean.value,"
   - "django/contrib/gis/gdal/raster/band.py:108:46       smean           U       smin.value, smax.value, smean.value, sstd.value"
-  - "django/contrib/gis/gdal/raster/band.py:220:50       ndarray         U       isinstance(data, numpy.ndarray)"
   - "django/contrib/gis/gdal/raster/band.py:248:30       frombuffer      U       return numpy.frombuffer("
   - "django/contrib/gis/gdal/raster/base.py:2:58         capi    U       prototypes import raster as capi"
   - "django/contrib/gis/gdal/raster/base.py:22:21        capi    U       meta_list = capi.get_ds_metadata_domain"
@@ -727,7 +726,6 @@ issues:
   - "django/contrib/gis/geos/collections.py:69:13        capi        U       capi.geom_clone(self._get"
   - "django/contrib/gis/geos/coordseq.py:9:51        capi            U       import prototypes as capi"
   - "django/contrib/gis/geos/coordseq.py:12:30       libgeos         U       django.contrib.gis.geos.libgeos import CS_PTR"
-  - "django/contrib/gis/geos/coordseq.py:51:48       ndarray         U       isinstance(value, numpy.ndarray):"
   - "django/contrib/gis/geos/coordseq.py:81:16       capi            U       return capi.cs_getx(self.ptr, index"
   - "django/contrib/gis/geos/coordseq.py:84:16       capi            U       return capi.cs_gety(self.ptr, index"
   - "django/contrib/gis/geos/coordseq.py:87:16       capi            U       return capi.cs_getz(self.ptr, index"
@@ -778,7 +776,6 @@ issues:
   - "django/contrib/gis/geos/libgeos.py:158:49       threadsafe      U       gis.geos.prototypes.threadsafe import GEOSFunc"
   - "django/contrib/gis/geos/linestring.py:1:51          capi        U       import prototypes as capi"
   - "django/contrib/gis/geos/linestring.py:10:18         capi        U       _init_func = capi.create_linestring"
-  - "django/contrib/gis/geos/linestring.py:35:42         ndarray     U       isinstance(coords, numpy.ndarray)"
   - "django/contrib/gis/geos/linestring.py:42:9          ncoords     U       ncoords = len(coords)"
   - "django/contrib/gis/geos/linestring.py:43:16         ncoords     U       if not ncoords:"
   - "django/contrib/gis/geos/linestring.py:47:12         ncoords     U       if ncoords < self._minlength:"
@@ -10179,7 +10176,6 @@ issuesSummary:
   - "text: nclob, count: 1, files: 1,"
   - "text: NCLOB, count: 14, files: 5,"
   - "text: ncoords, count: 5, files: 1,"
-  - "text: ndarray, count: 3, files: 3,"
   - "text: ndelag, count: 2, files: 1,"
   - "text: necessitatibus, count: 1, files: 1,"
   - "text: Nederlands, count: 3, files: 2,"
