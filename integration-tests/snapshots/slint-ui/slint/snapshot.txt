@@ -3,14 +3,10 @@ Repository: slint-ui/slint
 Url: "https://github.com/slint-ui/slint"
 Args: ["--config=../../../../repositories/config/slint/cspell.config.yaml","--issues-summary-report","."]
 Lines:
- CSpell: Files checked: 2539, Issues found: 4930 in 855 files.
+ CSpell: Files checked: 2539, Issues found: 4896 in 855 files.
  exit code: 1
 CMakeLists.txt:17:14     - Unknown word (TOPLEVEL)   -- set(SLINT_IS_TOPLEVEL_BUILD TRUE)
 CMakeLists.txt:27:31     - Unknown word (dylib's)    -- macOS, the slint_cpp.dylib's install_name uses @rpath
-CMakeLists.txt:27:58     - Unknown word (rpath)      -- s install_name uses @rpath. CMake doesn't set BUILD
-CMakeLists.txt:27:89     - Unknown word (RPATH)      -- CMake doesn't set BUILD_RPATH for
-CMakeLists.txt:28:77     - Unknown word (rpath)      -- here by hand in the rpath used to build binaries
-CMakeLists.txt:30:21     - Unknown word (RPATH)      -- set(CMAKE_BUILD_RPATH ${CMAKE_BINARY_DIR}
 Cross.toml:6:29      - Unknown word (gnueabihf)  -- armv7-unknown-linux-gnueabihf]
 Cross.toml:7:53      - Unknown word (gnueabihf)  -- armv7-unknown-linux-gnueabihf"
 FAQ.md:32:41     - Unknown word (toolkits)   -- experience of building UI toolkits, we have learnt that
@@ -54,13 +50,8 @@ api/cpp/CMakeLists.txt:146:19    - Unknown word (hostbuild)   -- corrosion_set_h
 api/cpp/CMakeLists.txt:156:14    - Unknown word (jemalloc)    -- # Enable jemalloc, except when cross-compiling
 api/cpp/CMakeLists.txt:157:18    - Unknown word (CROSSCOMPILING) -- if(NOT CMAKE_CROSSCOMPILING)
 api/cpp/CMakeLists.txt:158:46    - Unknown word (jemalloc)       -- slint_compiler_features "jemalloc")
-api/cpp/CMakeLists.txt:169:69    - Unknown word (rpath)          -- set install_name to rpath, so that the installed
-api/cpp/CMakeLists.txt:171:89    - Unknown word (RPATH)          -- could set CMAKE_BUILD_RPATH to
-api/cpp/CMakeLists.txt:172:75    - Unknown word (rpath)          -- would have the correct rpath set, binaries
-api/cpp/CMakeLists.txt:173:88    - Unknown word (RPATH)          -- would not and the BUILD_RPATH
 api/cpp/CMakeLists.txt:175:28    - Unknown word (TOPLEVEL)       -- (APPLE AND SLINT_IS_TOPLEVEL_BUILD AND BUILD_SHARED
 api/cpp/CMakeLists.txt:177:105   - Unknown word (dylib)          -- @rpath/libslint_cpp.dylib,-current_version,${PROJECT
-api/cpp/CMakeLists.txt:177:86    - Unknown word (rpath)          -- arg=-Wl,-install_name,@rpath/libslint_cpp.dylib,
 api/cpp/CMakeLists.txt:177:92    - Unknown word (libslint)       -- install_name,@rpath/libslint_cpp.dylib,-current_version
 api/cpp/CMakeLists.txt:179:71    - Unknown word (SONAME)         -- PROPERTIES IMPORTED_NO_SONAME 0)
 api/cpp/CMakeLists.txt:180:68    - Unknown word (SONAME)         -- PROPERTIES IMPORTED_SONAME libslint_cpp.dylib)
@@ -174,8 +165,6 @@ api/cpp/docs/mcu/esp_idf.md:117:39    - Unknown word (sdkconfig)  -- check in a 
 api/cpp/docs/mcu/esp_idf.md:131:5     - Unknown word (toctree)    -- ```{toctree}
 api/cpp/docs/mcu/esp_idf.md:26:16     - Unknown word (chipset)    -- 2. Select your chipset with `idf.py set-target
 api/cpp/docs/mcu/esp_idf.md:26:91     - Unknown word (chipset)    -- re using an `ESP32S3` chipset, run
-api/cpp/docs/mcu/esp_idf.md:61:36     - Unknown word (disp)       -- display_config_t bsp_disp_cfg = {
-api/cpp/docs/mcu/esp_idf.md:64:26     - Unknown word (disp)       -- bsp_display_new(&bsp_disp_cfg, &panel_handle,
 api/cpp/docs/mcu/generic.md:31:5      - Unknown word (DSLINT)     -- | `-DSLINT_FEATURE_FREESTANDING
 api/cpp/docs/mcu/generic.md:32:5      - Unknown word (DBUILD)     -- | `-DBUILD_SHARED_LIBS=OFF`
 api/cpp/docs/mcu/generic.md:33:5      - Unknown word (DSLINT)     -- | `-DSLINT_FEATURE_RENDERER_SOFTWARE
@@ -1015,7 +1004,6 @@ demos/usecases/esp-idf/sdkconfig.defaults:45:27     - Unknown word (NUMS)       
 demos/usecases/esp-idf/sdkconfig.defaults:47:20     - Unknown word (LVGL)       -- CONFIG_BSP_DISPLAY_LVGL_AVOID_TEAR=y
 demos/usecases/esp-idf/sdkconfig.defaults:48:20     - Unknown word (LVGL)       -- CONFIG_BSP_DISPLAY_LVGL_DIRECT_MODE=y
 demos/usecases/esp-idf/sdkconfig.defaults:57:34     - Unknown word (IRAM)       -- ATTRIBUTE_FAST_MEM_USE_IRAM=y
-demos/usecases/esp-idf/sdkconfig.defaults:58:11     - Unknown word (DISP)       -- CONFIG_LV_DISP_DEF_REFR_PERIOD=10
 demos/usecases/esp-idf/sdkconfig.defaults:58:20     - Unknown word (REFR)       -- CONFIG_LV_DISP_DEF_REFR_PERIOD=10
 demos/usecases/esp-idf/sdkconfig.defaults:65:4      - Unknown word (LVGL)       -- ## LVGL8 ##
 demos/usecases/esp-idf/sdkconfig.defaults:69:4      - Unknown word (LVGL)       -- ## LVGL9 ##
@@ -1674,13 +1662,6 @@ examples/ffmpeg/README.md:12:43     - Unknown word (libavformat) -- clang libavc
 examples/ffmpeg/README.md:12:59     - Unknown word (libavutil)   -- dev libavformat-dev libavutil-dev libavfilter-dev
 examples/ffmpeg/README.md:12:73     - Unknown word (libavfilter) -- libavformat-dev libavutil-dev libavfilter-dev libavdevice-dev
 examples/ffmpeg/README.md:12:89     - Unknown word (libavdevice) -- dev libavfilter-dev libavdevice-dev libasound2-dev pkg
-examples/ffmpeg/README.md:23:13     - Unknown word (vcpkg)       -- - install [vcpkg](https://github.com
-examples/ffmpeg/README.md:24:5      - Unknown word (vcpkg)       -- - `vcpkg install ffmpeg --triplet
-examples/ffmpeg/README.md:25:30     - Unknown word (vcpkg)       -- VCPKG_ROOT` to where `vcpkg` is installed
-examples/ffmpeg/README.md:25:8      - Unknown word (VCPKG)       -- - Set`VCPKG_ROOT` to where `vcpkg
-examples/ffmpeg/README.md:26:10     - Unknown word (VCPKG)       -- - Add `%VCPKG_ROOT%\installed\x64
-examples/ffmpeg/README.md:27:9      - Unknown word (vcpkg)       -- - Run `vcpkg install llvm[clang,target
-examples/ffmpeg/README.md:28:55     - Unknown word (VCPKG)       -- clang is installed: `%VCPKG_ROOT%\installed\x64
 examples/ffmpeg/README.md:28:9      - Unknown word (LIBCLANG)    -- - Set `LIBCLANG_PATH` to where clang
 examples/ffmpeg/README.md:9:42      - Unknown word (alsa)       -- to install ffmpeg and alsa. For example on Debian
 examples/ffmpeg/player.rs:114:13    - Unknown word (demuxer)    -- demuxer_thread: Some(demuxer
@@ -1724,9 +1705,6 @@ examples/gstreamer-player/README.md:24:7      - Unknown word (gstreamer)    -- g
 examples/gstreamer-player/README.md:25:20     - Unknown word (libav)        -- gstreamer1.0-libav libgstrtspserver-1.
 examples/gstreamer-player/README.md:25:26     - Unknown word (libgstrtspserver) -- gstreamer1.0-libav libgstrtspserver-1.0-dev libges-1.0-dev
 examples/gstreamer-player/README.md:25:51     - Unknown word (libges)           -- libgstrtspserver-1.0-dev libges-1.0-dev
-examples/gstreamer-player/README.md:31:45     - Unknown word (devel)            -- gstreamer-plugins-bad-devel gstreamer-devel gstreamer
-examples/gstreamer-player/README.md:31:61     - Unknown word (devel)            -- bad-devel gstreamer-devel gstreamer-plugins-base
-examples/gstreamer-player/README.md:31:90     - Unknown word (devel)            -- gstreamer-plugins-base-devel \
 examples/gstreamer-player/build.rs:9:14      - Unknown word (gstreamer)  -- slint_gstreamer_egl: { target_os =
 examples/gstreamer-player/main.rs:22:47     - Unknown word (playbin)    -- ElementFactory::make("playbin")
 examples/gstreamer-player/main.rs:73:22     - Unknown word (playbin)    -- // than a single playbin element, you will need
@@ -2034,8 +2012,6 @@ examples/mcu-board-support/stm32h735g.rs:236:18    - Unknown word (gpioh)      -
 examples/mcu-board-support/stm32h735g.rs:237:18    - Unknown word (gpioh)      -- let _p = gpioh.ph9.into_alternate:
 examples/mcu-board-support/stm32h735g.rs:238:18    - Unknown word (gpioh)      -- let _p = gpioh.ph10.into_alternate
 examples/mcu-board-support/stm32h735g.rs:241:18    - Unknown word (gpioa)      -- let _p = gpioa.pa8.into_alternate:
-examples/mcu-board-support/stm32h735g.rs:244:21    - Unknown word (disp)       -- let mut lcd_disp_en = gpioe.pe13.into
-examples/mcu-board-support/stm32h735g.rs:245:21    - Unknown word (disp)       -- let mut lcd_disp_ctrl = gpiod.pd10.into
 examples/mcu-board-support/stm32h735g.rs:249:16    - Unknown word (LTDC)       -- // End LTDC_MspInit
 examples/mcu-board-support/stm32h735g.rs:251:17    - Unknown word (ltdc)       -- let mut ltdc = hal::ltdc::Ltdc::new
 examples/mcu-board-support/stm32h735g.rs:251:35    - Unknown word (Ltdc)       -- mut ltdc = hal::ltdc::Ltdc::new(dp.LTDC, ccdr.peripheral
@@ -2044,8 +2020,6 @@ examples/mcu-board-support/stm32h735g.rs:253:26    - Unknown word (HSYNC)      -
 examples/mcu-board-support/stm32h735g.rs:260:9     - Unknown word (ltdc)       -- ltdc.init(embedded_display
 examples/mcu-board-support/stm32h735g.rs:267:32    - Unknown word (HSYNC)      -- h_sync: RK043FN48H_HSYNC,
 examples/mcu-board-support/stm32h735g.rs:274:25    - Unknown word (ltdc)       -- let mut layer = ltdc.split();
-examples/mcu-board-support/stm32h735g.rs:281:13    - Unknown word (disp)       -- lcd_disp_en.set_low();
-examples/mcu-board-support/stm32h735g.rs:282:13    - Unknown word (disp)       -- lcd_disp_ctrl.set_high();
 examples/mcu-board-support/stm32h735g.rs:328:81    - Unknown word (entrancy)   -- event_loop` prevents re-entrancy and thus multiple mutable
 examples/mcu-board-support/stm32h735g.rs:348:37    - Unknown word (dcache)     -- inner.scb.clean_dcache_by_slice(work_fb);
 examples/mcu-board-support/stm32h735g.rs:55:33     - Unknown word (Ltdc)       -- stm32h7xx_hal::ltdc::LtdcLayer1,
@@ -2098,7 +2072,6 @@ examples/mcu-board-support/stm32u5g9j_dk2.rs:150:9     - Unknown word (ltdc)    
 examples/mcu-board-support/stm32u5g9j_dk2.rs:157:28    - Unknown word (HSYNC)      -- h_sync: RK050HR18H_HSYNC,
 examples/mcu-board-support/stm32u5g9j_dk2.rs:165:13    - Unknown word (ltdc)       -- let mut ltdc_de = Output::new(p.PD
 examples/mcu-board-support/stm32u5g9j_dk2.rs:166:13    - Unknown word (ltdc)       -- let mut ltdc_disp_ctrl = Output:
-examples/mcu-board-support/stm32u5g9j_dk2.rs:166:18    - Unknown word (disp)       -- let mut ltdc_disp_ctrl = Output::new(p
 examples/mcu-board-support/stm32u5g9j_dk2.rs:167:13    - Unknown word (ltdc)       -- let mut ltdc_bl_ctrl = Output::new
 examples/mcu-board-support/stm32u5g9j_dk2.rs:168:13    - Unknown word (ltdc)       -- let mut ltdc = Ltdc::new_with_pins
 examples/mcu-board-support/stm32u5g9j_dk2.rs:169:11    - Unknown word (LTDC)       -- p.LTDC, // PERIPHERAL
@@ -2109,10 +2082,8 @@ examples/mcu-board-support/stm32u5g9j_dk2.rs:16:51     - Unknown word (Ltdc)    
 examples/mcu-board-support/stm32u5g9j_dk2.rs:170:20    - Unknown word (IRQS)       -- Irqs, // IRQS
 examples/mcu-board-support/stm32u5g9j_dk2.rs:170:9     - Unknown word (Irqs)       -- Irqs, // IRQS
 examples/mcu-board-support/stm32u5g9j_dk2.rs:172:20    - Unknown word (HSYNC)      -- p.PE0, // HSYNC
-examples/mcu-board-support/stm32u5g9j_dk2.rs:202:10    - Unknown word (disp)       -- ltdc_disp_ctrl.set_high();
 examples/mcu-board-support/stm32u5g9j_dk2.rs:224:77    - Unknown word (entrancy)   -- event_loop` prevents re-entrancy and thus multiple mutable
 examples/mcu-board-support/stm32u5g9j_dk2.rs:23:5      - Unknown word (hspi)       -- mod hspi;
-examples/mcu-board-support/stm32u5g9j_dk2.rs:240:37    - Unknown word (disp)       -- display_control: ltdc_disp_ctrl,
 examples/mcu-board-support/stm32u5g9j_dk2.rs:262:19    - Unknown word (Octa)       -- _flash: hspi::OctaDtrFlashMemory<'static
 examples/mcu-board-support/stm32u5g9j_dk2.rs:262:75    - Unknown word (HSPI)       -- stm32::peripherals::HSPI1>,
 examples/mcu-board-support/stm32u5g9j_dk2.rs:265:74    - Unknown word (LTDC)       -- stm32::peripherals::LTDC>,
@@ -2245,13 +2216,11 @@ examples/mcu-embassy/src/bin/ui_mcu.rs:131:28    - Unknown word (HSYNC)      -- 
 examples/mcu-embassy/src/bin/ui_mcu.rs:139:17    - Unknown word (ltdc)       -- info!("init ltdc");
 examples/mcu-embassy/src/bin/ui_mcu.rs:140:13    - Unknown word (ltdc)       -- let mut ltdc_de = Output::new(p.PD
 examples/mcu-embassy/src/bin/ui_mcu.rs:141:13    - Unknown word (ltdc)       -- let mut ltdc_disp_ctrl = Output:
-examples/mcu-embassy/src/bin/ui_mcu.rs:141:18    - Unknown word (disp)       -- let mut ltdc_disp_ctrl = Output::new(p
 examples/mcu-embassy/src/bin/ui_mcu.rs:142:13    - Unknown word (ltdc)       -- let mut ltdc_bl_ctrl = Output::new
 examples/mcu-embassy/src/bin/ui_mcu.rs:144:11    - Unknown word (LTDC)       -- p.LTDC, // PERIPHERAL
 examples/mcu-embassy/src/bin/ui_mcu.rs:145:20    - Unknown word (IRQS)       -- Irqs, // IRQS
 examples/mcu-embassy/src/bin/ui_mcu.rs:145:9     - Unknown word (Irqs)       -- Irqs, // IRQS
 examples/mcu-embassy/src/bin/ui_mcu.rs:147:20    - Unknown word (HSYNC)      -- p.PE0, // HSYNC
-examples/mcu-embassy/src/bin/ui_mcu.rs:177:10    - Unknown word (disp)       -- ltdc_disp_ctrl.set_high();
 examples/mcu-embassy/src/bin/ui_mcu.rs:24:11     - Unknown word (Exti)       -- exti::ExtiInput,
 examples/mcu-embassy/src/bin/ui_mcu.rs:251:38    - Unknown word (Exti)       -- btn_task(mut user_btn: ExtiInput<'static>) {
 examples/mcu-embassy/src/bin/ui_mcu.rs:289:42    - Unknown word (LTDC)       -- static, peripherals::LTDC>,
@@ -2278,7 +2247,6 @@ examples/mcu-embassy/src/bin/ui_simulator.rs:145:28    - Unknown word (xrel)    
 examples/mcu-embassy/src/bin/ui_simulator.rs:146:21    - Unknown word (yrel)       -- yrel: _yrel,
 examples/mcu-embassy/src/bin/ui_simulator.rs:146:28    - Unknown word (yrel)       -- yrel: _yrel,
 examples/mcu-embassy/src/bin/ui_simulator.rs:148:24    - Unknown word (mousestate) -- if mousestate.is_mouse_button_pressed
-examples/mcu-embassy/src/bin/ui_simulator.rs:49:82     - Unknown word (nanos)      -- Debug).format_timestamp_nanos().init();
 examples/mcu-embassy/src/bin/ui_simulator.rs:6:8       - Unknown word (LEFTSHIFT)  -- // The LEFTSHIFT key can be used in place
 examples/mcu-embassy/src/controller.rs:10:23     - Unknown word (defmt)      -- cfg_attr(feature = "defmt", derive(defmt::Format
 examples/mcu-embassy/src/mcu/double_buffer.rs:14:19     - Unknown word (Ltdc)       -- layer_config: LtdcLayerConfig,
@@ -2352,7 +2320,6 @@ examples/todo-mvc/ui/widgets/selection_list_view.slint:10:37     - Unknown word 
 examples/todo-mvc/ui/widgets/state_layer.slint:50:9      - Unknown word (hoverd)     -- hoverd when root.has-hover
 examples/todo/ui/todo.slint:7:19      - Unknown word (serde)      -- @rust-attr(derive(serde::Serialize, serde::Deserializ
 examples/todo/ui/todo.slint:7:37      - Unknown word (serde)      -- derive(serde::Serialize, serde::Deserialize))
-examples/uefi-demo/README.md:26:11     - Unknown word (distro)     -- varies by distro):
 examples/uefi-demo/README.md:29:56     - Unknown word (ovmf)       -- bios /usr/share/edk2-ovmf/x64/OVMF.fd -kernel
 examples/uefi-demo/README.md:29:65     - Unknown word (OVMF)       -- share/edk2-ovmf/x64/OVMF.fd -kernel target/x
 examples/uefi-demo/README.md:32:15     - Unknown word (OVMF)       -- **NOTE:** the OVMF are not support mouse
@@ -2362,7 +2329,6 @@ examples/uefi-demo/demo.slint:97:34     - Unknown word (Celestis)   -- { text: "
 examples/uefi-demo/demo.slint:97:56     - Unknown word (Chulak)     -- Celestis" }, { text: "Chulak"}, { text: "Dakara"
 examples/uefi-demo/demo.slint:98:75     - Unknown word (Tollana)    -- Langara" },  { text: "Tollana"},
 examples/uefi-demo/demo.slint:9:42      - Unknown word (Noto)       -- printerdemo/ui/fonts/NotoSans-Regular.ttf";
-examples/uefi-demo/main.rs:142:70    - Unknown word (nanos)      -- Periodic((timeout.as_nanos() / 100) as u64))
 examples/uefi-demo/main.rs:299:13    - Unknown word (mpointer)   -- let mpointer = unsafe { &mut *ptr
 examples/uefi-demo/main.rs:300:13    - Unknown word (conpointer) -- let conpointer = unsafe { &*ptr };
 examples/uefi-demo/main.rs:301:26    - Unknown word (conpointer) -- let mouse_mode = conpointer.mode();

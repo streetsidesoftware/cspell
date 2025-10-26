@@ -4,8 +4,8 @@ Url: https://github.com/googleapis/google-cloud-cpp.git
 Args: '["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]'
 Summary:
   files: 20788
-  filesWithIssues: 7879
-  issues: 46274
+  filesWithIssues: 7872
+  issues: 45013
   errors: 0
 Errors: []
 
@@ -30,14 +30,12 @@ issues:
   - "bazel/gapic.bzl:39:12       filegroup           U       native.filegroup("
   - "bazel/gapic.bzl:40:17       srcs                U       name = \"srcs\","
   - "bazel/gapic.bzl:45:17       hdrs                U       name = \"hdrs\","
-  - "bazel/gapic.bzl:75:26       googletest          U       \"@com_google_googletest//:gtest\","
   - "bazel/googleapis.modules.patch:10:2         genrule     U       genrule("
   - "bazel/googleapis.modules.patch:23:21        SRCS        U       if test -z \\\"$(SRCS)\\\"; then"
   - "bazel/library_names.bzl:16:16       startswith      U       if library.startswith(\"compute_\"):"
   - "bazel/library_names.bzl:22:24       removeprefix    U       return library.removeprefix(\"compute_\") + \"_mock"
   - "bazel/workspace0.bzl:83:23          skylib          U       name = \"bazel_skylib\","
   - "bazel/workspace0.bzl:159:17         boringssl       U       name = \"boringssl\","
-  - "bazel/workspace3.bzl:39:7           Googletest      U       # Googletest dependencies"
   - "BUILD.bazel:53:5        testonly    U       testonly = True,"
   - "BUILD.bazel:151:20      ctype       U       name = \"enable-ctype-cord-workaround\","
   - "ci/check-include-guards.gawk:26:1           BEGINFILE       U       BEGINFILE {"
@@ -47,9 +45,7 @@ issues:
   - "ci/check-include-guards.gawk:46:37          ifndef          U       lines that start with #ifndef, #define, or #endif"
   - "ci/cloudbuild/notifiers/alerts/function/function.cc:49:21       cppcodec    U       auto const data = cppcodec::base64_rfc4648::decode"
   - "ci/cloudbuild/notifiers/logs/function/CMakeLists.txt:26:40          stdc    U       google-cloud-cpp::storage stdc++fs)"
-  - "ci/cloudbuild/notifiers/logs/function/function.cc:66:38         distro          U       proCommand(std::string const& distro, std::string const&"
   - "ci/cloudbuild/notifiers/logs/function/function.cc:69:21         cloudbuild      U       R\"\"\"(<code>ci/cloudbuild/build.sh --docker -"
-  - "ci/cloudbuild/notifiers/logs/function/function.cc:198:57        DISTRO          U       substitutions\"].value(\"_DISTRO\", \"\");"
   - "ci/cloudbuild/notifiers/logs/function/generate_svg_badge.cc:58:66       Verdana     U       family='DejaVu Sans,Verdana,Geneva,sans-serif' font"
   - "ci/cloudbuild/notifiers/logs/function/generate_svg_badge.h:15:29        CLOUDBUILD      U       GOOGLE_CLOUD_CPP_CI_CLOUDBUILD_NOTIFIERS_LOGS_FUNCTION"
   - "ci/cloudbuild/notifiers/logs/README.md:42:34        publiclogs      U       cloud-cpp-community-publiclogs\""
@@ -155,17 +151,14 @@ issues:
   - "ci/etc/README.md:13:40          createinstance      U       GOOGLE_CLOUD_PROJECT}\" createinstance \\"
   - "ci/etc/README.md:22:5           createtable         U       createtable quickstart families"
   - "ci/kokoro/README.md:32:2        PRESUBMIT       U       *PRESUBMIT* thus the duplication"
-  - "ci/kokoro/windows/build-32.bat:23:6         VCPKG           U       set \"VCPKG_OVERLAY_TRIPLETS=%cd"
   - "ci/kokoro/windows/build-32.bat:29:5         ERRORLEVEL      U       @if ERRORLEVEL 1 exit /b 1"
   - "ci/verify_current_targets/CMakeLists.txt:56:47          ARGN            U       \"${name}\" PRIVATE ${ARGN})"
   - "ci/verify_current_targets/CMakeLists.txt:58:1           endfunction     U       endfunction ()"
   - "ci/verify_current_targets/CMakeLists.txt:62:1           endforeach      U       endforeach ()"
-  - "ci/verify_current_targets/CMakeLists.txt:89:26          protos          U       cloud_dialogflow_v2_protos\""
   - "ci/verify_quickstart/CMakeLists.txt:22:35       DFEATURES       U       FATAL_ERROR \"Missing -DFEATURES argument, for example"
   - "ci/verify_quickstart/CMakeLists.txt:42:16       DCMAKE          U       \"-DCMAKE_PREFIX_PATH=${CMAKE"
   - "ci/verify_quickstart/CMakeLists.txt:50:16       DVCPKG          U       \"-DVCPKG_TARGET_TRIPLET=${VCPKG"
   - "ci/verify_quickstart/CMakeLists.txt:106:22      STREQUAL        U       if (\"${feature}\" STREQUAL \"storage-grpc\" OR \""
-  - "ci/verify_quickstart/CMakeLists.txt:112:10      vcpkg           U       # In vcpkg we cannot use `_` in"
   - "cmake/templates/config.pc.in:18:1           includedir      U       includedir=@GOOGLE_CLOUD_CPP_PC"
   - "cmake/templates/config.pc.in:18:33          INCLUDEDIR      U       GOOGLE_CLOUD_CPP_PC_INCLUDEDIR@"
   - "cmake/templates/config.pc.in:26:1           Cflags          U       Cflags: -I${includedir} @GOOGLE"
@@ -207,7 +200,6 @@ issues:
   - "doc/contributor/howto-guide-setup-development-workstation.md:182:10         mdformat            U       Install `mdformat`, which we use to format"
   - "doc/contributor/howto-guide-setup-development-workstation.md:186:27         frontmatter         U       mdformat-frontmatter==0.4.1 \\"
   - "doc/contributor/howto-guide-setup-development-workstation.md:200:14         setuptools          U       pip3 install setuptools wheel"
-  - "doc/contributor/howto-guide-setup-development-workstation.md:218:34         clangd              U       from source so that clangd can find all the symbols"
   - "doc/contributor/howto-guide-setup-development-workstation.md:236:29         WERROR              U       DGOOGLE_CLOUD_CPP_ENABLE_WERROR=ON \\"
   - "doc/contributor/howto-guide-setup-development-workstation.md:300:111        ALLUSERSPROFILE     U       & SET \"PATH=%PATH%;%ALLUSERSPROFILE%\\chocolatey\\bin\""
   - "doc/contributor/howto-guide-setup-development-workstation.md:306:1          choco               U       choco install -y visualstudio"
@@ -230,7 +222,6 @@ issues:
   - "doc/packaging.md:214:10         DOPENTELEMETRY      U       -DOPENTELEMETRY_INSTALL=ON \\"
   - "doc/packaging.md:247:10         makecache           U       sudo dnf makecache && \\"
   - "doc/packaging.md:248:32         findutils           U       install -y cmake curl findutils gcc-c++ git make ninja"
-  - "doc/packaging.md:257:48         devel               U       protobuf-compiler protobuf-devel grpc-cpp grpc-devel"
   - "doc/packaging.md:278:6          ldconfig            U       sudo ldconfig && cd /var/tmp && rm"
   - "doc/packaging.md:366:23         libopenssl          U       libcurl-devel libopenssl-devel libcrc32c-devel"
   - "doc/packaging.md:366:40         libcrc              U       devel libopenssl-devel libcrc32c-devel nlohmann_json"
@@ -304,7 +295,6 @@ issues:
   - "external/googleapis/CMakeLists.txt:97:18        dayofweek           U       \"google/type/dayofweek.proto\""
   - "external/googleapis/CMakeLists.txt:102:18       latlng              U       \"google/type/latlng.proto\""
   - "external/googleapis/CMakeLists.txt:109:18       timeofday           U       \"google/type/timeofday.proto\")"
-  - "external/googleapis/CMakeLists.txt:125:16       Protos              U       include(CompileProtos)"
   - "external/googleapis/CMakeLists.txt:135:27       protolist           U       google_cloud_cpp_load_protolist(protos \"${file}\")"
   - "external/googleapis/CMakeLists.txt:212:20       SOVERSION           U       SOVERSION ${PROJECT_VERSION_MAJOR"
   - "external/googleapis/CMakeLists.txt:355:23       protodeps           U       google_cloud_cpp_load_protodeps(cloud_common_deps \"protodeps"
@@ -356,7 +346,6 @@ issues:
   - "external/googleapis/protolists/tasks.list:1:47          cloudtasks      U       google/cloud/tasks/v2:cloudtasks.proto"
   - "generator/BUILD.bazel:119:39        commandlineflag     U       google_absl//absl/flags:commandlineflag\","
   - "generator/CMakeLists.txt:161:22         libprotoc                   U       protobuf::libprotoc"
-  - "generator/CMakeLists.txt:187:23         PROTOS                      U       PROTOS generator_config.proto"
   - "generator/CMakeLists.txt:189:44         HDRS                        U       cpp(PROTO_SRCS PROTO_HDRS generator_config.proto"
   - "generator/CMakeLists.txt:291:26         everytime (every time)      U       build all the tests everytime they create a new package"
   - "generator/generator_config.proto:41:35          gcpxx       U       to true generate the `gcpxxV1` alias for our inline"
@@ -945,7 +934,6 @@ issues:
   - "protos/google/cloud/compute/v1/internal/common_000.proto:1099:20        OVERRIDEN (OVERRIDDEN)          U       // FIELD_VALUE_OVERRIDEN: Warning that value"
   - "protos/google/cloud/compute/v1/internal/common_000.proto:1103:41        WIEGHTED (WEIGHTED, WEIGHED)    U       HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB: A WEIGHTED_MAGLEV"
   - "protos/google/cloud/compute/v1/internal/common_000.proto:1302:6         myorg                           U       // myorg.CustomLbPolicy). The"
-  - "protos/google/cloud/compute/v1/internal/common_000.proto:1549:35        nanos                           U       outlierDetection.interval.nanos. Defaults to 1 second"
   - "protos/google/cloud/compute/v1/internal/common_000.proto:1578:37        stdev                           U       success rate: mean - (stdev * successRateStdevFactor"
   - "protos/google/cloud/compute/v1/internal/common_000.proto:1578:56        Stdev                           U       (stdev * successRateStdevFactor). This factor"
   - "protos/google/cloud/compute/v1/internal/common_000.proto:1626:22        SUBSETTING                      U       // CONSISTENT_HASH_SUBSETTING: Subsetting based on"
@@ -1036,7 +1024,6 @@ issues:
   - "protos/google/cloud/compute/v1/internal/common_082.proto:36:4           loadbalancers       U       // loadbalancers."
   - "protos/google/cloud/compute/v1/internal/common_087.proto:172:6          SUBINTERFACES       U       // SUBINTERFACES_ALLOWED:"
   - "protos/google/cloud/compute/v1/internal/common_090.proto:78:75          RPCLB       U       This must be a valid gRPCLB"
-  - "protos/google/cloud/compute/v1/internal/common_090.proto:88:75          Nanos       U       seconds to 3600 seconds. Nanos"
   - "protos/google/cloud/compute/v1/internal/common_095.proto:24:69          netblock    U       aggregated IP prefix or netblock"
   - "protos/google/cloud/compute/v1/internal/common_095.proto:94:24          prefixs     U       public_delegated_prefixs = 9 [json_name = \"publicDeleg"
   - "protos/google/cloud/compute/v1/internal/common_095.proto:94:65          Prefixs     U       name = \"publicDelegatedPrefixs\"];"
