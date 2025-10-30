@@ -3,7 +3,7 @@ Repository: caddyserver/caddy
 Url: "https://github.com/caddyserver/caddy.git"
 Args: ["**/*.go"]
 Lines:
- CSpell: Files checked: 288, Issues found: 3776 in 258 files.
+ CSpell: Files checked: 288, Issues found: 3774 in 258 files.
  exit code: 1
 admin.go:1082:20   - Unknown word (Redir)       -- return errInternalRedir
 admin.go:1358:6    - Unknown word (loggable)    -- type loggableURLArray []*url.URL
@@ -2204,52 +2204,51 @@ modules/caddyhttp/reverseproxy/hosts.go:24:14     - Unknown word (caddyserver) -
 modules/caddyhttp/reverseproxy/hosts.go:25:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/modules/caddyhttp
 modules/caddyhttp/reverseproxy/hosts.go:25:43     - Unknown word (caddyhttp)   -- caddyserver/caddy/v2/modules/caddyhttp"
 modules/caddyhttp/reverseproxy/hosts.go:261:18    - Unknown word (caddyhttp)   -- dialInfo, ok := caddyhttp.GetVar(ctx, dialInfoVarKey
-modules/caddyhttp/reverseproxy/httptransport.go:227:3     - Unknown word (netaddr)     -- netaddr, err := caddy.ParseNetworkAdd
-modules/caddyhttp/reverseproxy/httptransport.go:231:6     - Unknown word (netaddr)     -- if netaddr.PortRangeSize() > 1
-modules/caddyhttp/reverseproxy/httptransport.go:234:10    - Unknown word (netaddr)     -- switch netaddr.Network {
-modules/caddyhttp/reverseproxy/httptransport.go:236:47    - Unknown word (netaddr)     -- net.ResolveTCPAddr(netaddr.Network, netaddr.JoinHostPort
-modules/caddyhttp/reverseproxy/httptransport.go:236:64    - Unknown word (netaddr)     -- solveTCPAddr(netaddr.Network, netaddr.JoinHostPort(0))
+modules/caddyhttp/reverseproxy/httptransport.go:231:3     - Unknown word (netaddr)     -- netaddr, err := caddy.ParseNetworkAdd
+modules/caddyhttp/reverseproxy/httptransport.go:235:6     - Unknown word (netaddr)     -- if netaddr.PortRangeSize() > 1
+modules/caddyhttp/reverseproxy/httptransport.go:238:10    - Unknown word (netaddr)     -- switch netaddr.Network {
+modules/caddyhttp/reverseproxy/httptransport.go:240:47    - Unknown word (netaddr)     -- net.ResolveTCPAddr(netaddr.Network, netaddr.JoinHostPort
+modules/caddyhttp/reverseproxy/httptransport.go:240:64    - Unknown word (netaddr)     -- solveTCPAddr(netaddr.Network, netaddr.JoinHostPort(0))
 modules/caddyhttp/reverseproxy/httptransport.go:24:2      - Unknown word (weakrand)   -- weakrand "math/rand"
-modules/caddyhttp/reverseproxy/httptransport.go:263:14    - Unknown word (gosec)       -- //nolint:gosec
-modules/caddyhttp/reverseproxy/httptransport.go:263:7     - Unknown word (nolint)      -- //nolint:gosec
-modules/caddyhttp/reverseproxy/httptransport.go:264:33    - Unknown word (weakrand)    -- h.Resolver.netAddrs[weakrand.Intn(len(h.Resolver
-modules/caddyhttp/reverseproxy/httptransport.go:279:7     - Unknown word (caddyhttp)   -- if caddyhttp.GetVar(ctx, proxyVarKey
-modules/caddyhttp/reverseproxy/httptransport.go:294:29    - Unknown word (caddyhttp)   -- proxyProtocolInfo, ok := caddyhttp.GetVar(ctx, proxyProtocolInfo
-modules/caddyhttp/reverseproxy/httptransport.go:298:8     - Unknown word (proxyv)      -- var proxyv byte
-modules/caddyhttp/reverseproxy/httptransport.go:301:5     - Unknown word (proxyv)      -- proxyv = 1
-modules/caddyhttp/reverseproxy/httptransport.go:303:5     - Unknown word (proxyv)      -- proxyv = 2
-modules/caddyhttp/reverseproxy/httptransport.go:329:14    - Unknown word (proxyproto)  -- header := proxyproto.HeaderProxyFromAddrs
-modules/caddyhttp/reverseproxy/httptransport.go:329:46    - Unknown word (proxyv)      -- HeaderProxyFromAddrs(proxyv, sourceAddr, destAddr
+modules/caddyhttp/reverseproxy/httptransport.go:267:14    - Unknown word (gosec)       -- //nolint:gosec
+modules/caddyhttp/reverseproxy/httptransport.go:267:7     - Unknown word (nolint)      -- //nolint:gosec
+modules/caddyhttp/reverseproxy/httptransport.go:268:33    - Unknown word (weakrand)    -- h.Resolver.netAddrs[weakrand.Intn(len(h.Resolver
+modules/caddyhttp/reverseproxy/httptransport.go:283:7     - Unknown word (caddyhttp)   -- if caddyhttp.GetVar(ctx, proxyVarKey
+modules/caddyhttp/reverseproxy/httptransport.go:298:29    - Unknown word (caddyhttp)   -- proxyProtocolInfo, ok := caddyhttp.GetVar(ctx, proxyProtocolInfo
+modules/caddyhttp/reverseproxy/httptransport.go:302:8     - Unknown word (proxyv)      -- var proxyv byte
+modules/caddyhttp/reverseproxy/httptransport.go:305:5     - Unknown word (proxyv)      -- proxyv = 1
+modules/caddyhttp/reverseproxy/httptransport.go:307:5     - Unknown word (proxyv)      -- proxyv = 2
+modules/caddyhttp/reverseproxy/httptransport.go:333:14    - Unknown word (proxyproto)  -- header := proxyproto.HeaderProxyFromAddrs
+modules/caddyhttp/reverseproxy/httptransport.go:333:46    - Unknown word (proxyv)      -- HeaderProxyFromAddrs(proxyv, sourceAddr, destAddr
 modules/caddyhttp/reverseproxy/httptransport.go:34:14     - Unknown word (pires)      -- "github.com/pires/go-proxyproto"
 modules/caddyhttp/reverseproxy/httptransport.go:34:23     - Unknown word (proxyproto) -- github.com/pires/go-proxyproto"
-modules/caddyhttp/reverseproxy/httptransport.go:367:23    - Unknown word (caddyconfig) -- h.NetworkProxyRaw = caddyconfig.JSONModuleObject(u,
-modules/caddyhttp/reverseproxy/httptransport.go:387:3     - Unknown word (caddyhttp)   -- caddyhttp.SetVar(req.Context(
+modules/caddyhttp/reverseproxy/httptransport.go:371:23    - Unknown word (caddyconfig) -- h.NetworkProxyRaw = caddyconfig.JSONModuleObject(u,
+modules/caddyhttp/reverseproxy/httptransport.go:391:3     - Unknown word (caddyhttp)   -- caddyhttp.SetVar(req.Context(
 modules/caddyhttp/reverseproxy/httptransport.go:40:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
 modules/caddyhttp/reverseproxy/httptransport.go:41:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/caddyconfig
 modules/caddyhttp/reverseproxy/httptransport.go:41:35     - Unknown word (caddyconfig) -- caddyserver/caddy/v2/caddyconfig"
-modules/caddyhttp/reverseproxy/httptransport.go:425:8     - Unknown word (caddyhttp)   -- if caddyhttp.GetVar(ctx, tlsH1OnlyVarKey
-modules/caddyhttp/reverseproxy/httptransport.go:426:9     - Unknown word (stdlib)      -- // stdlib does this
+modules/caddyhttp/reverseproxy/httptransport.go:429:8     - Unknown word (caddyhttp)   -- if caddyhttp.GetVar(ctx, tlsH1OnlyVarKey
 modules/caddyhttp/reverseproxy/httptransport.go:42:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/modules/caddyhttp
 modules/caddyhttp/reverseproxy/httptransport.go:42:43     - Unknown word (caddyhttp)   -- caddyserver/caddy/v2/modules/caddyhttp"
+modules/caddyhttp/reverseproxy/httptransport.go:430:9     - Unknown word (stdlib)      -- // stdlib does this
 modules/caddyhttp/reverseproxy/httptransport.go:43:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/modules/caddytls
 modules/caddyhttp/reverseproxy/httptransport.go:43:43     - Unknown word (caddytls)    -- caddyserver/caddy/v2/modules/caddytls"
 modules/caddyhttp/reverseproxy/httptransport.go:44:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/modules/internal
-modules/caddyhttp/reverseproxy/httptransport.go:464:18    - Unknown word (Alives)      -- rt.DisableKeepAlives = !*h.KeepAlive.Enabled
-modules/caddyhttp/reverseproxy/httptransport.go:534:39    - Unknown word (Alives)      -- dedicated DisableKeepAlives field in *http2.Transport
-modules/caddyhttp/reverseproxy/httptransport.go:536:38    - Unknown word (Alives)      -- Transport.DisableKeepAlives
+modules/caddyhttp/reverseproxy/httptransport.go:468:18    - Unknown word (Alives)      -- rt.DisableKeepAlives = !*h.KeepAlive.Enabled
+modules/caddyhttp/reverseproxy/httptransport.go:503:27    - Unknown word (Alives)      -- Likewise, DisableKeepAlives from h1 is used too
 modules/caddyhttp/reverseproxy/httptransport.go:55:53     - Unknown word (fastcgi)     -- other transports (like fastcgi) might be
+modules/caddyhttp/reverseproxy/httptransport.go:589:6     - Unknown word (CAPEM)       -- RootCAPEMFiles []string `json
 modules/caddyhttp/reverseproxy/httptransport.go:59:76     - Unknown word (hostnames)   -- address of upstream hostnames.
-modules/caddyhttp/reverseproxy/httptransport.go:603:6     - Unknown word (CAPEM)       -- RootCAPEMFiles []string `json
-modules/caddyhttp/reverseproxy/httptransport.go:674:9     - Unknown word (Iface)       -- tlsAppIface, err := ctx.App("tls
-modules/caddyhttp/reverseproxy/httptransport.go:678:19    - Unknown word (Iface)       -- tlsApp := tlsAppIface.(*caddytls.TLS)
-modules/caddyhttp/reverseproxy/httptransport.go:678:27    - Unknown word (caddytls)    -- tlsApp := tlsAppIface.(*caddytls.TLS)
-modules/caddyhttp/reverseproxy/httptransport.go:684:13    - Unknown word (caddytls)    -- certs := caddytls.AllMatchingCertificates
-modules/caddyhttp/reverseproxy/httptransport.go:687:88    - Unknown word (gosec)       -- iteration variable (gosec warning)
-modules/caddyhttp/reverseproxy/httptransport.go:701:40    - Unknown word (CAPEM)       -- RootCAPool) > 0 || len(t.RootCAPEMFiles) > 0 {
-modules/caddyhttp/reverseproxy/httptransport.go:711:33    - Unknown word (CAPEM)       -- pemFile := range t.RootCAPEMFiles {
-modules/caddyhttp/reverseproxy/httptransport.go:722:41    - Unknown word (CAPEM)       -- RootCAPool) > 0 || len(t.RootCAPEMFiles) > 0 {
-modules/caddyhttp/reverseproxy/httptransport.go:729:20    - Unknown word (caddytls)    -- ca, ok := caRaw.(caddytls.CA)
-modules/caddyhttp/reverseproxy/httptransport.go:756:14    - Unknown word (caddytls)    -- curveID := caddytls.SupportedCurves[curveName
+modules/caddyhttp/reverseproxy/httptransport.go:660:9     - Unknown word (Iface)       -- tlsAppIface, err := ctx.App("tls
+modules/caddyhttp/reverseproxy/httptransport.go:664:19    - Unknown word (Iface)       -- tlsApp := tlsAppIface.(*caddytls.TLS)
+modules/caddyhttp/reverseproxy/httptransport.go:664:27    - Unknown word (caddytls)    -- tlsApp := tlsAppIface.(*caddytls.TLS)
+modules/caddyhttp/reverseproxy/httptransport.go:670:13    - Unknown word (caddytls)    -- certs := caddytls.AllMatchingCertificates
+modules/caddyhttp/reverseproxy/httptransport.go:673:88    - Unknown word (gosec)       -- iteration variable (gosec warning)
+modules/caddyhttp/reverseproxy/httptransport.go:687:40    - Unknown word (CAPEM)       -- RootCAPool) > 0 || len(t.RootCAPEMFiles) > 0 {
+modules/caddyhttp/reverseproxy/httptransport.go:697:33    - Unknown word (CAPEM)       -- pemFile := range t.RootCAPEMFiles {
+modules/caddyhttp/reverseproxy/httptransport.go:708:41    - Unknown word (CAPEM)       -- RootCAPool) > 0 || len(t.RootCAPEMFiles) > 0 {
+modules/caddyhttp/reverseproxy/httptransport.go:715:20    - Unknown word (caddytls)    -- ca, ok := caRaw.(caddytls.CA)
+modules/caddyhttp/reverseproxy/httptransport.go:742:14    - Unknown word (caddytls)    -- curveID := caddytls.SupportedCurves[curveName
 modules/caddyhttp/reverseproxy/httptransport_test.go:15:6      - Unknown word (caddyfile)   -- d *caddyfile.Dispenser
 modules/caddyhttp/reverseproxy/httptransport_test.go:26:8      - Unknown word (caddyfile)   -- d: caddyfile.NewTestDispenser(
 modules/caddyhttp/reverseproxy/httptransport_test.go:36:8      - Unknown word (caddyfile)   -- d: caddyfile.NewTestDispenser(fmt
@@ -2712,27 +2711,26 @@ modules/caddyhttp/tracing/module_test.go:52:26     - Unknown word (Caddyfile)   
 modules/caddyhttp/tracing/module_test.go:53:24     - Unknown word (Caddyfile)   -- t.Errorf("UnmarshalCaddyfile() error = %v, wantErrType
 modules/caddyhttp/tracing/module_test.go:57:24     - Unknown word (Caddyfile)   -- t.Errorf("UnmarshalCaddyfile() SpanName = %v, want
 modules/caddyhttp/tracing/module_test.go:63:27     - Unknown word (Caddyfile)   -- TestTracing_UnmarshalCaddyfile_Error(t *testing.T)
-modules/caddyhttp/tracing/tracer.go:10:43     - Unknown word (otlptrace)  -- otel/exporters/otlp/otlptrace/otlptracegrpc"
-modules/caddyhttp/tracing/tracer.go:10:53     - Unknown word (otlptracegrpc) -- exporters/otlp/otlptrace/otlptracegrpc"
-modules/caddyhttp/tracing/tracer.go:128:3     - Unknown word (semconv)       -- semconv.WebEngineName(webEngineName
-modules/caddyhttp/tracing/tracer.go:129:3     - Unknown word (semconv)       -- semconv.WebEngineVersion(webEngineVer
-modules/caddyhttp/tracing/tracer.go:14:2      - Unknown word (semconv)       -- semconv "go.opentelemetry.io
-modules/caddyhttp/tracing/tracer.go:14:36     - Unknown word (semconv)       -- opentelemetry.io/otel/semconv/v1.17.0"
-modules/caddyhttp/tracing/tracer.go:18:14     - Unknown word (caddyserver)   -- "github.com/caddyserver/caddy/v2"
-modules/caddyhttp/tracing/tracer.go:19:14     - Unknown word (caddyserver)   -- "github.com/caddyserver/caddy/v2/modules/caddyhttp
-modules/caddyhttp/tracing/tracer.go:19:43     - Unknown word (caddyhttp)     -- caddyserver/caddy/v2/modules/caddyhttp"
-modules/caddyhttp/tracing/tracer.go:30:7      - Unknown word (caddyhttp)     -- next caddyhttp.Handler
-modules/caddyhttp/tracing/tracer.go:62:24     - Unknown word (otlptracegrpc) -- traceExporter, err := otlptracegrpc.New(ctx)
-modules/caddyhttp/tracing/tracer.go:67:19     - Unknown word (autoprop)      -- ot.propagators = autoprop.NewTextMapPropagator
-modules/caddyhttp/tracing/tracer.go:74:15     - Unknown word (otelhttp)      -- ot.handler = otelhttp.NewHandler(http.HandlerFunc
-modules/caddyhttp/tracing/tracer.go:76:3      - Unknown word (otelhttp)      -- otelhttp.WithTracerProvider(tracerProv
-modules/caddyhttp/tracing/tracer.go:77:3      - Unknown word (otelhttp)      -- otelhttp.WithPropagators(ot.propagator
-modules/caddyhttp/tracing/tracer.go:78:3      - Unknown word (otelhttp)      -- otelhttp.WithSpanNameFormatter
-modules/caddyhttp/tracing/tracer.go:8:56      - Unknown word (otelhttp)   -- instrumentation/net/http/otelhttp"
-modules/caddyhttp/tracing/tracer.go:93:3      - Unknown word (caddyhttp)     -- caddyhttp.SetVar(ctx, "trace_id
-modules/caddyhttp/tracing/tracer.go:95:3      - Unknown word (caddyhttp)     -- caddyhttp.SetVar(ctx, "span_id
-modules/caddyhttp/tracing/tracer.go:97:29     - Unknown word (caddyhttp)     -- extra, ok := ctx.Value(caddyhttp.ExtraLogFieldsCtxKey
-modules/caddyhttp/tracing/tracer.go:9:43      - Unknown word (autoprop)   -- contrib/propagators/autoprop"
+modules/caddyhttp/tracing/tracer.go:10:43     - Unknown word (autoprop)   -- contrib/propagators/autoprop"
+modules/caddyhttp/tracing/tracer.go:128:3     - Unknown word (semconv)     -- semconv.WebEngineName(webEngineName
+modules/caddyhttp/tracing/tracer.go:129:3     - Unknown word (semconv)     -- semconv.WebEngineVersion(webEngineVer
+modules/caddyhttp/tracing/tracer.go:14:2      - Unknown word (semconv)    -- semconv "go.opentelemetry.io
+modules/caddyhttp/tracing/tracer.go:14:36     - Unknown word (semconv)    -- opentelemetry.io/otel/semconv/v1.17.0"
+modules/caddyhttp/tracing/tracer.go:18:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
+modules/caddyhttp/tracing/tracer.go:19:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/modules/caddyhttp
+modules/caddyhttp/tracing/tracer.go:19:43     - Unknown word (caddyhttp)   -- caddyserver/caddy/v2/modules/caddyhttp"
+modules/caddyhttp/tracing/tracer.go:30:7      - Unknown word (caddyhttp)   -- next caddyhttp.Handler
+modules/caddyhttp/tracing/tracer.go:62:24     - Unknown word (autoexport)  -- traceExporter, err := autoexport.NewSpanExporter(ctx
+modules/caddyhttp/tracing/tracer.go:67:19     - Unknown word (autoprop)    -- ot.propagators = autoprop.NewTextMapPropagator
+modules/caddyhttp/tracing/tracer.go:74:15     - Unknown word (otelhttp)    -- ot.handler = otelhttp.NewHandler(http.HandlerFunc
+modules/caddyhttp/tracing/tracer.go:76:3      - Unknown word (otelhttp)    -- otelhttp.WithTracerProvider(tracerProv
+modules/caddyhttp/tracing/tracer.go:77:3      - Unknown word (otelhttp)    -- otelhttp.WithPropagators(ot.propagator
+modules/caddyhttp/tracing/tracer.go:78:3      - Unknown word (otelhttp)    -- otelhttp.WithSpanNameFormatter
+modules/caddyhttp/tracing/tracer.go:8:41      - Unknown word (autoexport) -- io/contrib/exporters/autoexport"
+modules/caddyhttp/tracing/tracer.go:93:3      - Unknown word (caddyhttp)   -- caddyhttp.SetVar(ctx, "trace_id
+modules/caddyhttp/tracing/tracer.go:95:3      - Unknown word (caddyhttp)   -- caddyhttp.SetVar(ctx, "span_id
+modules/caddyhttp/tracing/tracer.go:97:29     - Unknown word (caddyhttp)   -- extra, ok := ctx.Value(caddyhttp.ExtraLogFieldsCtxKey
+modules/caddyhttp/tracing/tracer.go:9:56      - Unknown word (otelhttp)   -- instrumentation/net/http/otelhttp"
 modules/caddyhttp/tracing/tracer_test.go:7:14      - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
 modules/caddyhttp/vars.go:145:13    - Unknown word (Caddyfile)   -- // UnmarshalCaddyfile implements caddyfile
 modules/caddyhttp/vars.go:145:34    - Unknown word (caddyfile)   -- UnmarshalCaddyfile implements caddyfile.Unmarshaler.
