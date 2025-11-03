@@ -5,7 +5,7 @@ Args: '["**/*.go"]'
 Summary:
   files: 288
   filesWithIssues: 258
-  issues: 3774
+  issues: 3772
   errors: 0
 Errors: []
 
@@ -115,15 +115,11 @@ issues:
   - "caddyconfig/caddyfile/formatter_test.go:351:10      ACMEEMAIL       U       email {$ACMEEMAIL}"
   - "caddyconfig/caddyfile/formatter_test.go:359:10      ACMEEMAIL       U       email {$ACMEEMAIL}"
   - "caddyconfig/caddyfile/formatter_test.go:438:45      backquotes      U       Preserve braces wrapped by backquotes\","
+  - "caddyconfig/caddyfile/formatter_test.go:448:48      backticked      U       quoted backticks and backticked quotes\","
   - "caddyconfig/caddyfile/formatter.go:15:9         caddyfile       U       package caddyfile"
   - "caddyconfig/caddyfile/formatter.go:24:29        Caddyfile       U       Format formats the input Caddyfile to a standard, nice"
-  - "caddyconfig/caddyfile/formatter.go:65:9         Backquote       U       withinBackquote bool"
-  - "caddyconfig/caddyfile/formatter.go:93:10        Backquote       U       withinBackquote = !withinBackquote"
-  - "caddyconfig/caddyfile/formatter.go:93:29        Backquote       U       withinBackquote = !withinBackquote"
-  - "caddyconfig/caddyfile/formatter.go:248:13       Backquote       U       if withinBackquote {"
-  - "caddyconfig/caddyfile/formatter.go:256:13       Backquote       U       if withinBackquote {"
-  - "caddyconfig/caddyfile/formatter.go:305:9        Caddyfile       U       // the Caddyfile does not need any leading"
-  - "caddyconfig/caddyfile/formatter.go:308:8        Caddyfiles      U       // ...Caddyfiles should, however, end"
+  - "caddyconfig/caddyfile/formatter.go:322:9        Caddyfile       U       // the Caddyfile does not need any leading"
+  - "caddyconfig/caddyfile/formatter.go:325:8        Caddyfiles      U       // ...Caddyfiles should, however, end"
   - "caddyconfig/caddyfile/importargs.go:15:9        caddyfile       U       package caddyfile"
   - "caddyconfig/caddyfile/importargs.go:24:14       caddyserver     U       \"github.com/caddyserver/caddy/v2\""
   - "caddyconfig/caddyfile/importargs.go:41:22       caddyfile       U       caddy.Log().Named(\"caddyfile\").Warn("
@@ -2167,6 +2163,8 @@ issues:
   - "modules/caddyhttp/reverseproxy/fastcgi/reader.go:15:9           fastcgi     U       package fastcgi"
   - "modules/caddyhttp/reverseproxy/fastcgi/record.go:15:9           fastcgi     U       package fastcgi"
   - "modules/caddyhttp/reverseproxy/fastcgi/writer.go:15:9           fastcgi     U       package fastcgi"
+  - "modules/caddyhttp/reverseproxy/fastcgi/writer.go:115:22         nolint      U       b[0] = byte(size) //nolint:gosec // false positive"
+  - "modules/caddyhttp/reverseproxy/fastcgi/writer.go:115:29         gosec       U       byte(size) //nolint:gosec // false positive; b"
   - "modules/caddyhttp/reverseproxy/forwardauth/caddyfile.go:15:9        forwardauth         U       package forwardauth"
   - "modules/caddyhttp/reverseproxy/forwardauth/caddyfile.go:23:14       caddyserver         U       \"github.com/caddyserver/caddy/v2\""
   - "modules/caddyhttp/reverseproxy/forwardauth/caddyfile.go:24:14       caddyserver         U       \"github.com/caddyserver/caddy/v2/caddyconfig"
