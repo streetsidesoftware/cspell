@@ -3,9 +3,9 @@ Repository: RustPython/RustPython
 Url: https://github.com/RustPython/RustPython.git
 Args: '["**"]'
 Summary:
-  files: 688
-  filesWithIssues: 90
-  issues: 725
+  files: 693
+  filesWithIssues: 91
+  issues: 728
   errors: 0
 Errors: []
 
@@ -914,6 +914,9 @@ issues:
   - "scripts/install-openssl.ps1:1:12        Actix       U       # From the Actix Web windows workflow"
   - "scripts/lib_updater.py:268:31       distrupt    U       Going in reverse to not distrupt the line offset"
   - "scripts/libc_posix.py:1:1\tNo issues found"
+  - "scripts/make_ssl_data_rs.py:50:36       AKID    U       error reasons, X509_R_AKID_MISMATCH\"\"\""
+  - "scripts/make_ssl_data_rs.py:123:17      AKID    U       # [('X509_R_AKID_MISMATCH', 'X509',"
+  - "scripts/make_ssl_data_rs.py:123:42      AKID    U       MISMATCH', 'X509', 'AKID_MISMATCH', 110), .."
   - "scripts/notes.txt:9:11          pydecimal       U       decimal `_pydecimal.py`"
   - "scripts/notes.txt:23:14         pickletester    U       pickle `test/pickletester.py` supports `test_pickle"
   - "scripts/notes.txt:24:19         picklebuffer    U       pickle `test/test_picklebuffer.py`"
@@ -933,7 +936,7 @@ issues:
   - "src/shell.rs:1:1\tNo issues found"
   - "src/shell/helper.rs:1:1\tNo issues found"
   - "stdlib/build.rs:1:1\tNo issues found"
-  - "stdlib/Cargo.toml:103:1         rustix      U       rustix = { workspace = true"
+  - "stdlib/Cargo.toml:104:1         rustix      U       rustix = { workspace = true"
   - "stdlib/src/array.rs:1:1\tNo issues found"
   - "stdlib/src/binascii.rs:1:1\tNo issues found"
   - "stdlib/src/bisect.rs:1:1\tNo issues found"
@@ -975,6 +978,10 @@ issues:
   - "stdlib/src/socket.rs:1:1\tNo issues found"
   - "stdlib/src/sqlite.rs:1:1\tNo issues found"
   - "stdlib/src/ssl.rs:1:1\tNo issues found"
+  - "stdlib/src/ssl/cert.rs:1:1\tNo issues found"
+  - "stdlib/src/ssl/ssl_data_111.rs:1:1\tNo issues found"
+  - "stdlib/src/ssl/ssl_data_300.rs:1:1\tNo issues found"
+  - "stdlib/src/ssl/ssl_data_31.rs:1:1\tNo issues found"
   - "stdlib/src/statistics.rs:1:1\tNo issues found"
   - "stdlib/src/suggestions.rs:1:1\tNo issues found"
   - "stdlib/src/syslog.rs:1:1\tNo issues found"

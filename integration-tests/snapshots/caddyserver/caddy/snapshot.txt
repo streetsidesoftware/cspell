@@ -3,7 +3,7 @@ Repository: caddyserver/caddy
 Url: "https://github.com/caddyserver/caddy.git"
 Args: ["**/*.go"]
 Lines:
- CSpell: Files checked: 288, Issues found: 3774 in 258 files.
+ CSpell: Files checked: 288, Issues found: 3772 in 258 files.
  exit code: 1
 admin.go:1082:20   - Unknown word (Redir)       -- return errInternalRedir
 admin.go:1358:6    - Unknown word (loggable)    -- type loggableURLArray []*url.URL
@@ -97,14 +97,9 @@ caddyconfig/caddyfile/dispenser_test.go:15:9      - Unknown word (caddyfile)  --
 caddyconfig/caddyfile/dispenser_test.go:369:20    - Unknown word (Errf)       -- bookingError := d.Errf("unable to reserve:
 caddyconfig/caddyfile/dispenser_test.go:371:13    - Unknown word (Errf)       -- t.Errorf("Errf(): should be able to
 caddyconfig/caddyfile/formatter.go:15:9      - Unknown word (caddyfile)  -- package caddyfile
-caddyconfig/caddyfile/formatter.go:248:13    - Unknown word (Backquote)  -- if withinBackquote {
 caddyconfig/caddyfile/formatter.go:24:29     - Unknown word (Caddyfile)  -- Format formats the input Caddyfile to a standard, nice
-caddyconfig/caddyfile/formatter.go:256:13    - Unknown word (Backquote)  -- if withinBackquote {
-caddyconfig/caddyfile/formatter.go:305:9     - Unknown word (Caddyfile)  -- // the Caddyfile does not need any leading
-caddyconfig/caddyfile/formatter.go:308:8     - Unknown word (Caddyfiles) -- // ...Caddyfiles should, however, end
-caddyconfig/caddyfile/formatter.go:65:9      - Unknown word (Backquote)  -- withinBackquote bool
-caddyconfig/caddyfile/formatter.go:93:10     - Unknown word (Backquote)  -- withinBackquote = !withinBackquote
-caddyconfig/caddyfile/formatter.go:93:29     - Unknown word (Backquote)  -- withinBackquote = !withinBackquote
+caddyconfig/caddyfile/formatter.go:322:9     - Unknown word (Caddyfile)  -- // the Caddyfile does not need any leading
+caddyconfig/caddyfile/formatter.go:325:8     - Unknown word (Caddyfiles) -- // ...Caddyfiles should, however, end
 caddyconfig/caddyfile/formatter_fuzz.go:15:12     - Unknown word (gofuzz)     -- //go:build gofuzz
 caddyconfig/caddyfile/formatter_fuzz.go:17:9      - Unknown word (caddyfile)  -- package caddyfile
 caddyconfig/caddyfile/formatter_test.go:15:9      - Unknown word (caddyfile)  -- package caddyfile
@@ -119,6 +114,7 @@ caddyconfig/caddyfile/formatter_test.go:349:35    - Unknown word (caddyfile)  --
 caddyconfig/caddyfile/formatter_test.go:351:10    - Unknown word (ACMEEMAIL)  -- email {$ACMEEMAIL}
 caddyconfig/caddyfile/formatter_test.go:359:10    - Unknown word (ACMEEMAIL)  -- email {$ACMEEMAIL}
 caddyconfig/caddyfile/formatter_test.go:438:45    - Unknown word (backquotes) -- Preserve braces wrapped by backquotes",
+caddyconfig/caddyfile/formatter_test.go:448:48    - Unknown word (backticked) -- quoted backticks and backticked quotes",
 caddyconfig/caddyfile/importargs.go:15:9      - Unknown word (caddyfile)  -- package caddyfile
 caddyconfig/caddyfile/importargs.go:24:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
 caddyconfig/caddyfile/importargs.go:41:22     - Unknown word (caddyfile)   -- caddy.Log().Named("caddyfile").Warn(
@@ -2161,6 +2157,8 @@ modules/caddyhttp/reverseproxy/fastcgi/header.go:15:9      - Unknown word (fastc
 modules/caddyhttp/reverseproxy/fastcgi/pool.go:15:9      - Unknown word (fastcgi)    -- package fastcgi
 modules/caddyhttp/reverseproxy/fastcgi/reader.go:15:9      - Unknown word (fastcgi)    -- package fastcgi
 modules/caddyhttp/reverseproxy/fastcgi/record.go:15:9      - Unknown word (fastcgi)    -- package fastcgi
+modules/caddyhttp/reverseproxy/fastcgi/writer.go:115:22    - Unknown word (nolint)     -- b[0] = byte(size) //nolint:gosec // false positive
+modules/caddyhttp/reverseproxy/fastcgi/writer.go:115:29    - Unknown word (gosec)      -- byte(size) //nolint:gosec // false positive; b
 modules/caddyhttp/reverseproxy/fastcgi/writer.go:15:9      - Unknown word (fastcgi)    -- package fastcgi
 modules/caddyhttp/reverseproxy/forwardauth/caddyfile.go:106:21    - Unknown word (caddyhttp)     -- HandleResponse: []caddyhttp.ResponseHandler{},
 modules/caddyhttp/reverseproxy/forwardauth/caddyfile.go:15:9      - Unknown word (forwardauth) -- package forwardauth

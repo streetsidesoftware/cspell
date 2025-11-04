@@ -3,9 +3,9 @@ Repository: sveltejs/svelte
 Url: https://github.com/sveltejs/svelte.git
 Args: '["**"]'
 Summary:
-  files: 8016
-  filesWithIssues: 561
-  issues: 3857
+  files: 8036
+  filesWithIssues: 562
+  issues: 3872
   errors: 0
 Errors: []
 
@@ -1669,14 +1669,15 @@ issues:
   - "packages/svelte/src/compiler/phases/2-analyze/css/css-prune.js:289:29       unscopeable     U       a `:global(...)` or unscopeable selector, or"
   - "packages/svelte/src/compiler/phases/2-analyze/css/utils.js:28:28        deopt       U       and we don't want to deopt on `condition`"
   - "packages/svelte/src/compiler/phases/2-analyze/css/utils.js:34:29        cslx        U       will be processed by cslx, in which case falsy"
-  - "packages/svelte/src/compiler/phases/2-analyze/index.js:712:18       nonstate    U       // warn on any nonstate declarations that are"
+  - "packages/svelte/src/compiler/phases/2-analyze/index.js:771:14       optimise    U       // TODO optimise this better"
+  - "packages/svelte/src/compiler/phases/2-analyze/index.js:911:18       nonstate    U       // warn on any nonstate declarations that are"
   - "packages/svelte/src/compiler/phases/2-analyze/visitors/RegularElement.js:38:72          qirk    U       stripped because of a qirk:"
   - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y/constants.js:36:19       labelable       U       export const a11y_labelable = ["
   - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y/constants.js:236:3       impp            U       'impp'"
   - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y/index.js:124:12      proptypes       U       // aria-proptypes"
   - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y/index.js:725:21      webauthn        U       if (tokens[0] === 'webauthn') {"
   - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/utils.js:127:41       inbetween (between)     U       whitespace is allowed inbetween. TODO remove once legacy"
-  - "packages/svelte/src/compiler/phases/3-transform/client/transform-client.js:179:3        memoizer    U       memoizer: /** @type {any} */"
+  - "packages/svelte/src/compiler/phases/3-transform/client/transform-client.js:177:3        memoizer    U       memoizer: /** @type {any} */"
   - "packages/svelte/src/compiler/phases/3-transform/client/transform-template/fix-attribute-casing.js:2:1321        onbegin     U       offset onabort onactivate onbegin onclick onend onerror"
   - "packages/svelte/src/compiler/phases/3-transform/client/transform-template/fix-attribute-casing.js:2:1436        onrepeat    U       onmouseover onmouseup onrepeat onresize onscroll onunload"
   - "packages/svelte/src/compiler/phases/3-transform/client/types.d.ts:15:15         Memoizer    U       import type { Memoizer } from './visitors/shared"
@@ -1684,12 +1685,14 @@ issues:
   - "packages/svelte/src/compiler/phases/3-transform/client/visitors/AssignmentExpression.js:40:7        callees     U       const callees = {"
   - "packages/svelte/src/compiler/phases/3-transform/client/visitors/BindDirective.js:46:11          unthunk     U       set = b.unthunk("
   - "packages/svelte/src/compiler/phases/3-transform/client/visitors/CallExpression.js:129:79        callsite    U       from the `$inspect` callsite"
-  - "packages/svelte/src/compiler/phases/3-transform/client/visitors/ConstTag.js:53:11       optimise    U       // TODO optimise the simple `{ x } ="
   - "packages/svelte/src/compiler/phases/3-transform/client/visitors/shared/declarations.js:31:30        unsub       U       call = b.call('$.store_unsub', call, b.literal(`"
   - "packages/svelte/src/compiler/phases/3-transform/client/visitors/shared/element.js:46:67         readded     U       it isn't removed and readded on every update"
-  - "packages/svelte/src/compiler/phases/3-transform/server/visitors/RegularElement.js:15:9          Optimiser       U       PromiseOptimiser"
-  - "packages/svelte/src/compiler/phases/3-transform/server/visitors/RegularElement.js:37:8          optimiser       U       const optimiser = new PromiseOptimiser"
+  - "packages/svelte/src/compiler/phases/3-transform/client/visitors/VariableDeclaration.js:198:12       dewaterfall     U       // can dewaterfall all of them?"
+  - "packages/svelte/src/compiler/phases/3-transform/server/visitors/RegularElement.js:15:9          Optimiser       U       PromiseOptimiser,"
+  - "packages/svelte/src/compiler/phases/3-transform/server/visitors/RegularElement.js:38:8          optimiser       U       const optimiser = new PromiseOptimiser"
+  - "packages/svelte/src/compiler/phases/3-transform/server/visitors/shared/utils.js:335:18      optimising      U       * A utility for optimising promises in templates"
   - "packages/svelte/src/compiler/phases/3-transform/server/visitors/VariableDeclaration.js:55:45        deconflict      U       declared separately, deconflict"
+  - "packages/svelte/src/compiler/phases/3-transform/shared/transform-async.js:38:55         asign (assign)      U       expressions (they will asign to them; need to be"
   - "packages/svelte/src/compiler/phases/3-transform/utils.js:218:76         spaceand    U       text node with a single spaceand keep whitespace"
   - "packages/svelte/src/compiler/phases/patterns.js:21:43       aeiou       U       starts_with_vowel = /^[aeiou]/;"
   - "packages/svelte/src/compiler/types/template.d.ts:25:41          mrow    U       for e.g. `<math>` or `<mrow>`"
@@ -1706,15 +1709,15 @@ issues:
   - "packages/svelte/src/internal/client/dom/blocks/branches.js:190:10       oncommit        U       batch.oncommit(this.#commit);"
   - "packages/svelte/src/internal/client/dom/blocks/branches.js:191:10       ondiscard       U       batch.ondiscard(this.#discard);"
   - "packages/svelte/src/internal/client/dom/elements/actions.js:18:8        inited      U       var inited = false;"
-  - "packages/svelte/src/internal/client/dom/elements/attributes.js:585:16       contructor (constructor)    U       // Do not use contructor.name here as that's"
+  - "packages/svelte/src/internal/client/dom/elements/attributes.js:587:16       contructor (constructor)    U       // Do not use contructor.name here as that's"
   - "packages/svelte/src/internal/client/dom/elements/bindings/input.js:30:14        numberlike      U       value = is_numberlike_input(input) ? to_number"
   - "packages/svelte/src/internal/client/dom/elements/bindings/this.js:41:78         nullfiy (nullify)       U       context changes), then nullfiy the binding at"
   - "packages/svelte/src/internal/client/dom/elements/events.js:146:47       expando     U       GCed too early, the expando __root property"
   - "packages/svelte/src/internal/client/dom/elements/misc.js:54:66          possiblity (possibility)    U       get noticed of it (no possiblity of stopPropagation)"
   - "packages/svelte/src/internal/client/proxy.js:40:12          proxyable       U       // if non-proxyable, or is already a proxy"
   - "packages/svelte/src/internal/client/proxy.js:90:32          inspectable     U       /** @type {any} */ (inspectable_array(/** @type {any"
-  - "packages/svelte/src/internal/client/reactivity/batch.js:70:14       travelling      U       * When time travelling (i.e. working in one"
-  - "packages/svelte/src/internal/client/reactivity/batch.js:695:82      nullpointers    U       else we could run into nullpointers"
+  - "packages/svelte/src/internal/client/reactivity/batch.js:62:14       travelling      U       * When time travelling (i.e. working in one"
+  - "packages/svelte/src/internal/client/reactivity/batch.js:674:82      nullpointers    U       else we could run into nullpointers"
   - "packages/svelte/src/internal/client/reactivity/deriveds.js:118:6        deferreds       U       var deferreds = new Map();"
   - "packages/svelte/src/internal/client/reactivity/effects.js:14:2          untracking      U       untracking"
   - "packages/svelte/src/internal/client/reactivity/sources.js:253:63        overfiring      U       - this way we avoid overfiring."
@@ -1732,8 +1735,7 @@ issues:
   - "packages/svelte/src/internal/server/index.js:25:272         DFFFF       U       u{CFFFF}\\u{DFFFE}\\u{DFFFF}\\u{EFFFE}\\u{EFFFF}\\u"
   - "packages/svelte/src/internal/server/index.js:25:281         EFFFE       U       u{DFFFE}\\u{DFFFF}\\u{EFFFE}\\u{EFFFF}\\u{FFFFE}\\u"
   - "packages/svelte/src/internal/server/index.js:25:299         FFFFE       U       u{EFFFE}\\u{EFFFF}\\u{FFFFE}\\u{FFFFF}\\u{10FFFE}"
-  - "packages/svelte/src/internal/server/renderer.js:65:28       uncopied                    U       will be re-exposed, uncopied, on all children."
-  - "packages/svelte/src/internal/server/renderer.js:389:46      regsitered (registered)     U       onDestroy` callbacks regsitered during rendering. In"
+  - "packages/svelte/src/internal/server/renderer.js:65:28       uncopied    U       will be re-exposed, uncopied, on all children."
   - "packages/svelte/src/internal/server/renderer.test.ts:283:30         fastslowsync    U       body).toBe('<!--[-->fastslowsync<!--]-->');"
   - "packages/svelte/src/internal/shared/clone.js:35:8           uncloned    U       let uncloned = slice.map((path)"
   - "packages/svelte/src/motion/public.d.ts:1:25         Unsubscriber    U       import { Readable, type Unsubscriber } from '../store/public"
@@ -1802,7 +1804,7 @@ issues:
   - "packages/svelte/tests/css/samples/unused-selector-ternary/_config.js:11:36          maybeactive     U       Unused CSS selector \".maybeactive\"',"
   - "packages/svelte/tests/helpers.js:203:17         normalise       U       export function normalise_inspect_logs(logs)"
   - "packages/svelte/tests/helpers.js:205:8          normalised      U       const normalised = [];"
-  - "packages/svelte/tests/hydration/test.ts:149:22      borks       U       // Error logger borks because of circular"
+  - "packages/svelte/tests/hydration/test.ts:153:22      borks       U       // Error logger borks because of circular"
   - "packages/svelte/tests/migrate/samples/event-handlers-with-alias/output.svelte:28:9          oncustom    U       <button oncustom-event={() => 'hi'}>click"
   - "packages/svelte/tests/migrate/samples/remove-blocks-whitespace/input.svelte:17:2        dlkdj       U       dlkdj"
   - "packages/svelte/tests/migrate/samples/single-assignment-labeled/input.svelte:26:6           alot (a lot, allot)     U       let alot_times;"
@@ -1834,7 +1836,6 @@ issues:
   - "packages/svelte/tests/preprocess/samples/style-attributes/expected_map.json:3:121       UAAO    U       GAAG,CAAC,CAAC,IAAI,UAAO,CAAC,CAAC,KAAK\","
   - "packages/svelte/tests/README.md:3:51        currente    U       many tests from the currente Svelte project over"
   - "packages/svelte/tests/README.md:16:151      unkeyed     U       binding-each-remount-unkeyed` for an example"
-  - "packages/svelte/tests/runtime-browser/assert.js:169:72      infered (inferred)      U       directly visible, not infered, which is why"
   - "packages/svelte/tests/runtime-browser/samples/component-css-custom-properties-dynamic-svg/_config.js:14:52          qzlp    U       \"10\" class=\"svelte-1qzlp1k\"></circle>"
   - "packages/svelte/tests/runtime-browser/samples/component-event-handler-contenteditable-false/_config.js:13:21        bcde        U       component.text = 'bcde';"
   - "packages/svelte/tests/runtime-browser/samples/component-event-handler-contenteditable-false/_config.js:14:34        bcdea       U       equal(div.textContent, 'bcdea');"
@@ -1935,7 +1936,6 @@ issues:
   - "packages/svelte/tests/runtime-runes/samples/event-attribute-not-hoistable/main.svelte:31:73         delegateable        U       when one of them is not delegateable -->"
   - "packages/svelte/tests/runtime-runes/samples/event-media-element-cleanup/_config.js:17:35        someevent       U       dispatchEvent(new Event('someevent'));"
   - "packages/svelte/tests/runtime-runes/samples/event-media-element-cleanup/main.svelte:8:9         onsomeevent     U       <video onsomeevent={handler}></video>"
-  - "packages/svelte/tests/runtime-runes/samples/mount-props-updates/_config.js:25:61        proeprty (property)     U       treated as a readonly proeprty"
   - "packages/svelte/tests/runtime-runes/samples/multiple-head/_config.js:9:155          svelteawesome       U       description\"><meta content=\"@svelteawesome\" name=\"author\"><title"
   - "packages/svelte/tests/runtime-runes/samples/non-local-mutation-with-binding-3/_config.js:36:30          notshared       U       Mutating unbound props (`notshared`, at Counter.svelte"
   - "packages/svelte/tests/runtime-runes/samples/not-actual-runes/_config.js:7:11        Shouldnt (Should not)       U       <button>Shouldnt be reactive</button"

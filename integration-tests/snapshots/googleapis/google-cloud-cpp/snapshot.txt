@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 20799, Issues found: 45016 in 7874 files.
+ CSpell: Files checked: 20949, Issues found: 45493 in 7957 files.
  exit code: 1
 ARCHITECTURE.md:158:48    - Unknown word (googlemock) -- implementation using `googlemock`
 ARCHITECTURE.md:29:61     - Unknown word (retryable)  -- RPCs that fail with a retryable error,
@@ -386,7 +386,7 @@ generator/internal/http_annotation_parser_test.cc:244:6     - Unknown word (Pars
 generator/internal/pagination_test.cc:255:49    - Unknown word (Repated)    -- PaginationAIP4233ExactlyOneRepatedStringResponse) {
 generator/internal/printer_test.cc:36:33     - Unknown word (Inigo)      -- VarsDictionary vars{{"name", "Inigo Montoya"}};
 generator/internal/routing.h:78:7      - Unknown word (actools)    -- * go/actools-dynamic-routing-proposal
-generator/internal/scaffold_generator.cc:1050:8    - Unknown word (CXXLDFLAGS) -- CLIENT_CXXLDFLAGS := $$(shell pkg-config
+generator/internal/scaffold_generator.cc:1077:8    - Unknown word (CXXLDFLAGS) -- CLIENT_CXXLDFLAGS := $$(shell pkg-config
 generator/internal/scaffold_generator_test.cc:424:38    - Unknown word (CXXLD)      -- actual, HasSubstr("\t$(CXXLD) "));
 generator/internal/scaffold_generator_test.cc:458:37    - Unknown word (Bazelrc)    -- ScaffoldGenerator, QuickstartBazelrc) {
 generator/internal/service_code_generator.h:195:46    - Unknown word (autopopulated) -- of the methods has an autopopulated `request_id`-like
@@ -482,9 +482,9 @@ google/cloud/bigtable/benchmarks/bigtable_benchmark_test.cc:30:30     - Unknown 
 google/cloud/bigtable/benchmarks/random_mutation.cc:31:33     - Unknown word (Zabcdefghijlkmnopqrstuvwxyz) -- ABCDEFGHIJLKMNOPQRSTUVWXYZabcdefghijlkmnopqrstuvwxyz0123456789-/_");
 google/cloud/bigtable/benchmarks/random_mutation.cc:31:8      - Unknown word (ABCDEFGHIJLKMNOPQRSTUVWXY) -- "ABCDEFGHIJLKMNOPQRSTUVWXYZabcdefghijlkmnopqrstuvwxyz
 google/cloud/bigtable/benchmarks/scan_async_throughput_benchmark.cc:105:34    - Unknown word (lprofiler)  -- copt=-g --linkopt='-lprofiler' \
-google/cloud/bigtable/bigtable_client_unit_tests.bzl:97:12     - Unknown word (readmodifywriterow) -- "table_readmodifywriterow_test.cc",
-google/cloud/bigtable/bigtable_client_unit_tests.bzl:98:12     - Unknown word (readrow)            -- "table_readrow_test.cc",
-google/cloud/bigtable/bigtable_client_unit_tests.bzl:99:12     - Unknown word (readrows)           -- "table_readrows_test.cc",
+google/cloud/bigtable/bigtable_client_unit_tests.bzl:100:12    - Unknown word (readrows)           -- "table_readrows_test.cc",
+google/cloud/bigtable/bigtable_client_unit_tests.bzl:98:12     - Unknown word (readmodifywriterow) -- "table_readmodifywriterow_test.cc",
+google/cloud/bigtable/bigtable_client_unit_tests.bzl:99:12     - Unknown word (readrow)            -- "table_readrow_test.cc",
 google/cloud/bigtable/client_options_test.cc:311:28    - Unknown word (Grpclb)     -- ClientOptionsTest, SetGrpclbFallbackTimeoutMS) {
 google/cloud/bigtable/client_options_test.cc:319:44    - Unknown word (GRPCLB)     -- hannelArgument(args, GRPC_ARG_GRPCLB_FALLBACK_TIMEOUT_MS
 google/cloud/bigtable/column_family.h:154:43    - Unknown word (Differencer) -- protobuf::util::MessageDifferencer::Equivalent(a.gc_rule
@@ -496,7 +496,7 @@ google/cloud/bigtable/instance_admin_test.cc:49:11     - Unknown word (iamproto)
 google/cloud/bigtable/internal/async_row_reader.cc:80:31     - Unknown word (cntr)       -- explicit CountFrames(int& cntr) : cntr(++cntr) {}
 google/cloud/bigtable/internal/async_row_reader_test.cc:475:37    - Unknown word (Doesnt)     -- AsyncRowReaderTest, ParserEofDoesntFailOnUnfinishedRowIfRowLimit
 google/cloud/bigtable/internal/bulk_mutator_test.cc:675:37    - Unknown word (Retryable)  -- BulkMutatorTest, ReportEitherRetryableMutationFailOrStreamFail
-google/cloud/bigtable/internal/data_connection_impl.cc:577:24    - Unknown word (satisying)  -- // sure of that, satisying the `promise<>` is deferred
+google/cloud/bigtable/internal/data_connection_impl.cc:578:24    - Unknown word (satisying)  -- // sure of that, satisying the `promise<>` is deferred
 google/cloud/bigtable/internal/legacy_async_row_reader_test.cc:144:22    - Unknown word (corresponse) -- * Future at idx i corresponse to i-th expected row
 google/cloud/bigtable/internal/legacy_async_row_reader_test.cc:552:66    - Unknown word (noooo)       -- PERMISSION_DENIED, "noooo");
 google/cloud/bigtable/internal/legacy_row_reader_test.cc:89:14     - Unknown word (preconfigured) -- // Returns a preconfigured set of parsers, so expectatio
@@ -802,7 +802,7 @@ google/cloud/storage/doc/parallel-uploads-design.md:279:68    - Unknown word (in
 google/cloud/storage/doc/setup-test-resources.md:100:12    - Unknown word (keyrings)   -- gcloud kms keyrings create ${KR} --location
 google/cloud/storage/doc/setup-test-resources.md:118:37    - Unknown word (HMAC)       -- Service Account for HMAC Keys
 google/cloud/storage/doc/setup-test-resources.md:99:1      - Unknown word (KEYID)      -- KEYID=... # e.g cloud-cpp
-google/cloud/storage/doc/storage-main.dox:48:87     - Unknown word (Quickstarts) -- introduction#quickstarts 'GCS Quickstarts'
+google/cloud/storage/doc/storage-main.dox:49:87     - Unknown word (Quickstarts) -- introduction#quickstarts 'GCS Quickstarts'
 google/cloud/storage/doc/storage-mocking.dox:15:57     - Unknown word (readobject) -- samples.cc mock successful readobject
 google/cloud/storage/doc/storage-mocking.dox:29:57     - Unknown word (writeobject) -- samples.cc mock successful writeobject
 google/cloud/storage/examples/CMakeLists.txt:36:20     - Unknown word (autoclass)  -- storage_bucket_autoclass_samples.cc

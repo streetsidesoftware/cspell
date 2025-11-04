@@ -3,9 +3,9 @@ Repository: googleapis/google-cloud-cpp
 Url: https://github.com/googleapis/google-cloud-cpp.git
 Args: '["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]'
 Summary:
-  files: 20799
-  filesWithIssues: 7874
-  issues: 45016
+  files: 20949
+  filesWithIssues: 7957
+  issues: 45493
   errors: 0
 Errors: []
 
@@ -391,7 +391,7 @@ issues:
   - "generator/internal/routing.h:78:7           actools     U       * go/actools-dynamic-routing-proposal"
   - "generator/internal/scaffold_generator_test.cc:424:38        CXXLD       U       actual, HasSubstr(\"\\t$(CXXLD) \"));"
   - "generator/internal/scaffold_generator_test.cc:458:37        Bazelrc     U       ScaffoldGenerator, QuickstartBazelrc) {"
-  - "generator/internal/scaffold_generator.cc:1050:8         CXXLDFLAGS      U       CLIENT_CXXLDFLAGS := $$(shell pkg-config"
+  - "generator/internal/scaffold_generator.cc:1077:8         CXXLDFLAGS      U       CLIENT_CXXLDFLAGS := $$(shell pkg-config"
   - "generator/internal/service_code_generator.h:195:46      autopopulated       U       of the methods has an autopopulated `request_id`-like"
   - "generator/templates/WORKSPACE.bazel:19:21       Starlark    U       # Add the necessary Starlark functions to fetch google"
   - "google/cloud/accessapproval/access_approval_client.h:19:39          ACCESSAPPROVAL      U       CLOUD_CPP_GOOGLE_CLOUD_ACCESSAPPROVAL_ACCESS_APPROVAL_CLIENT"
@@ -482,9 +482,9 @@ issues:
   - "google/cloud/bigtable/benchmarks/random_mutation.cc:31:8        ABCDEFGHIJLKMNOPQRSTUVWXY       U       \"ABCDEFGHIJLKMNOPQRSTUVWXYZabcdefghijlkmnopqrstuvwxyz"
   - "google/cloud/bigtable/benchmarks/random_mutation.cc:31:33       Zabcdefghijlkmnopqrstuvwxyz     U       ABCDEFGHIJLKMNOPQRSTUVWXYZabcdefghijlkmnopqrstuvwxyz0123456789-/_\");"
   - "google/cloud/bigtable/benchmarks/scan_async_throughput_benchmark.cc:105:34      lprofiler       U       copt=-g --linkopt='-lprofiler' \\"
-  - "google/cloud/bigtable/bigtable_client_unit_tests.bzl:97:12          readmodifywriterow      U       \"table_readmodifywriterow_test.cc\","
-  - "google/cloud/bigtable/bigtable_client_unit_tests.bzl:98:12          readrow                 U       \"table_readrow_test.cc\","
-  - "google/cloud/bigtable/bigtable_client_unit_tests.bzl:99:12          readrows                U       \"table_readrows_test.cc\","
+  - "google/cloud/bigtable/bigtable_client_unit_tests.bzl:98:12          readmodifywriterow      U       \"table_readmodifywriterow_test.cc\","
+  - "google/cloud/bigtable/bigtable_client_unit_tests.bzl:99:12          readrow                 U       \"table_readrow_test.cc\","
+  - "google/cloud/bigtable/bigtable_client_unit_tests.bzl:100:12         readrows                U       \"table_readrows_test.cc\","
   - "google/cloud/bigtable/BUILD.bazel:132:22        readrowsparser      U       name = \"internal_readrowsparser_test\","
   - "google/cloud/bigtable/client_options_test.cc:311:28         Grpclb      U       ClientOptionsTest, SetGrpclbFallbackTimeoutMS) {"
   - "google/cloud/bigtable/client_options_test.cc:319:44         GRPCLB      U       hannelArgument(args, GRPC_ARG_GRPCLB_FALLBACK_TIMEOUT_MS"
@@ -498,7 +498,7 @@ issues:
   - "google/cloud/bigtable/internal/async_row_reader_test.cc:475:37      Doesnt (Doesn't)    U       AsyncRowReaderTest, ParserEofDoesntFailOnUnfinishedRowIfRowLimit"
   - "google/cloud/bigtable/internal/async_row_reader.cc:80:31        cntr    U       explicit CountFrames(int& cntr) : cntr(++cntr) {}"
   - "google/cloud/bigtable/internal/bulk_mutator_test.cc:675:37      Retryable       U       BulkMutatorTest, ReportEitherRetryableMutationFailOrStreamFail"
-  - "google/cloud/bigtable/internal/data_connection_impl.cc:577:24       satisying       U       // sure of that, satisying the `promise<>` is deferred"
+  - "google/cloud/bigtable/internal/data_connection_impl.cc:578:24       satisying       U       // sure of that, satisying the `promise<>` is deferred"
   - "google/cloud/bigtable/internal/legacy_async_row_reader_test.cc:144:22       corresponse     U       * Future at idx i corresponse to i-th expected row"
   - "google/cloud/bigtable/internal/legacy_async_row_reader_test.cc:552:66       noooo           U       PERMISSION_DENIED, \"noooo\");"
   - "google/cloud/bigtable/internal/legacy_row_reader_test.cc:89:14          preconfigured       U       // Returns a preconfigured set of parsers, so expectatio"
@@ -805,7 +805,7 @@ issues:
   - "google/cloud/storage/doc/setup-test-resources.md:99:1           KEYID       U       KEYID=... # e.g cloud-cpp"
   - "google/cloud/storage/doc/setup-test-resources.md:100:12         keyrings    U       gcloud kms keyrings create ${KR} --location"
   - "google/cloud/storage/doc/setup-test-resources.md:118:37         HMAC        U       Service Account for HMAC Keys"
-  - "google/cloud/storage/doc/storage-main.dox:48:87         Quickstarts     U       introduction#quickstarts 'GCS Quickstarts'"
+  - "google/cloud/storage/doc/storage-main.dox:49:87         Quickstarts     U       introduction#quickstarts 'GCS Quickstarts'"
   - "google/cloud/storage/doc/storage-mocking.dox:15:57          readobject      U       samples.cc mock successful readobject"
   - "google/cloud/storage/doc/storage-mocking.dox:29:57          writeobject     U       samples.cc mock successful writeobject"
   - "google/cloud/storage/examples/CMakeLists.txt:36:20          autoclass       U       storage_bucket_autoclass_samples.cc"
