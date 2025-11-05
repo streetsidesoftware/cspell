@@ -1,10 +1,13 @@
 import * as Path from 'node:path';
 
 import * as Commander from 'commander';
-import type { Constructable } from 'vitest';
 import { afterEach, describe, expect, test, vi } from 'vitest';
 
 import * as app from './app.js';
+
+interface Constructable {
+    new (...args: any[]): any;
+}
 
 const projectRoot = Path.join(__dirname, '..');
 
