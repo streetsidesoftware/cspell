@@ -1,9 +1,9 @@
-// cspell:words jitiregistered
+// cspell:words typescriptconfig
 
 const config = {
     version: '0.2',
     id: 'module/ts',
-    words: ['jitiregistered'],
+    words: ['typescriptconfig'],
     dictionaries: ['npm'],
 };
 

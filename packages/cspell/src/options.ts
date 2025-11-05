@@ -302,11 +302,6 @@ export interface BaseOptions {
      * `undefined` to use color if the output is a TTY.
      */
     color?: boolean | undefined;
-
-    /**
-     * Register a module loaders (e.g. jiti/register)
-     */
-    register?: string[];
 }
 
 export interface LinterCliOptions extends LinterOptions {

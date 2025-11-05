@@ -10,9 +10,7 @@ import { loaderJavaScript } from './loaderJavaScript.js';
 const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
 const ac = (...params: Parameters<typeof expect.arrayContaining>) => expect.arrayContaining(...params);
 
-const supportsRegister = process.version >= 'v22';
-
-const jitiRegister = supportsRegister ? await import('../test-helpers/registerJiti.js') : undefined;
+const supportsTypeScriptConfig = process.version >= 'v22';
 
 describe('loaderJavaScript', () => {
     afterEach(() => {});
@@ -51,12 +49,11 @@ describe('loaderJavaScript', () => {
         expect(result4.settings).not.toBe(result.settings);
     });
 
-    test.skipIf(!supportsRegister).each`
+    test.skipIf(!supportsTypeScriptConfig).each`
         file                      | expected
         ${'ts/cspell.config.ts'}  | ${{ settings: oc({ id: 'module/ts' }) }}
         ${'ts/cspell.config.mts'} | ${{ settings: oc({ id: 'module/mts' }) }}
     `('loaderJavaScript $file', async ({ file, expected }) => {
-        await jitiRegister;
         const url = pathToFileURL(fixtures(file));
         expected.url ??= url;
         const next = vi.fn();

@@ -379,19 +379,19 @@ describe('Validate cli', () => {
         expect(normalizeLogCalls(log.mock.calls)).toMatchSnapshot();
     });
 
-    // // cspell:ignore jitiregistered
-    // test.skipIf(process.version < 'v22.').each`
-    //     msg                           | testArgs
-    //     ${'trace registered'}        | ${'trace jitiregistered --register jiti/register --config fixtures/features/register/cspell.config.ts --only-found'}
-    // `('app trace $msg run with $testArgs', async ({ testArgs }) => {
-    //     chalk.level = 0;
-    //     testArgs = typeof testArgs === 'string' ? testArgs.split(' ') : testArgs;
-    //     const commander = getCommander();
-    //     const args = argv(...testArgs);
-    //     await app.run(commander, args);
-    //     expect(captureStdout.text).toMatchSnapshot();
-    //     expect(normalizeLogCalls(log.mock.calls)).toMatchSnapshot();
-    // });
+    // cspell:ignore typescriptconfig
+    test.skipIf(process.version < 'v22.').each`
+        msg                           | testArgs
+        ${'trace registered'}        | ${'trace typescriptconfig --config fixtures/features/ts-config/cspell.config.ts --only-found'}
+    `('app trace $msg run with $testArgs', async ({ testArgs }) => {
+        chalk.level = 0;
+        testArgs = typeof testArgs === 'string' ? testArgs.split(' ') : testArgs;
+        const commander = getCommander();
+        const args = argv(...testArgs);
+        await app.run(commander, args);
+        expect(captureStdout.text).toMatchSnapshot();
+        expect(normalizeLogCalls(log.mock.calls)).toMatchSnapshot();
+    });
 
     test.each`
         testArgs
