@@ -3,6 +3,124 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v9.3.0 (2025-11-05)
+
+### Features
+
+<details>
+<summary>feat: Support loading `.ts` and `.mts` config files. (<a href="https://github.com/streetsidesoftware/cspell/pull/7961">#7961</a>)</summary>
+
+### feat: Support loading `.ts` and `.mts` config files. ([#7961](https://github.com/streetsidesoftware/cspell/pull/7961))
+
+This PR add support to read TypeScript cspell config files.
+
+Note: TypeScript config files will fail to load when NodeJS version is less than `v22.18.0`.
+
+See: [Node.js — Running TypeScript Natively](https://nodejs.org/en/learn/typescript/run-natively)
+
+---
+
+</details>
+
+### Dictionary Updates
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/7950">#7950</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#7950](https://github.com/streetsidesoftware/cspell/pull/7950))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ .../snapshots/sveltejs/svelte/report.yaml          |  3 +-
+ .../snapshots/sveltejs/svelte/snapshot.txt         |  7 +--
+ packages/cspell-bundled-dicts/package.json         | 12 ++--
+ pnpm-lock.yaml                                     | 68 +++++++++++++---------
+ 4 files changed, 49 insertions(+), 41 deletions(-)
+```
+
+---
+
+</details>
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/7940">#7940</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#7940](https://github.com/streetsidesoftware/cspell/pull/7940))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ .../snapshots/AdaDoom3/AdaDoom3/report.yaml        |   3 +-
+ .../snapshots/AdaDoom3/AdaDoom3/snapshot.txt       |  17 ++-
+ .../Azure/azure-rest-api-specs/report.yaml         |   6 +-
+ .../Azure/azure-rest-api-specs/snapshot.txt        |  14 +--
+ .../MartinThoma/LaTeX-examples/report.yaml         |   5 +-
+ .../MartinThoma/LaTeX-examples/snapshot.txt        |   5 +-
+ .../MicrosoftDocs/PowerShell-Docs/report.yaml      |  55 +++------
+ .../MicrosoftDocs/PowerShell-Docs/snapshot.txt     |  21 +---
+ .../snapshots/TheAlgorithms/Python/report.yaml     |   9 +-
+ .../snapshots/TheAlgorithms/Python/snapshot.txt    |   7 +-
+ .../snapshots/caddyserver/caddy/report.yaml        |   4 +-
+ .../snapshots/caddyserver/caddy/snapshot.txt       |   4 +-
+ .../snapshots/dart-lang/sdk/report.yaml            |  20 +---
+ .../snapshots/dart-lang/sdk/snapshot.txt           |   9 +-
+ .../snapshots/django/django/report.yaml            |   6 +-
+ .../snapshots/django/django/snapshot.txt           |   5 +-
+ .../snapshots/eslint/eslint/report.yaml            |   4 +-
+ .../snapshots/eslint/eslint/snapshot.txt           |   3 +-
+ .../snapshots/flutter/samples/report.yaml          |  31 +----
+ .../snapshots/flutter/samples/snapshot.txt         |  29 +----
+ .../googleapis/google-cloud-cpp/report.yaml        |  17 +--
+ .../googleapis/google-cloud-cpp/snapshot.txt       |  15 +--
+ .../snapshots/ktaranov/sqlserver-kit/report.yaml   |  12 +-
+ .../snapshots/ktaranov/sqlserver-kit/snapshot.txt  |  25 ++--
+ .../snapshots/neovim/nvim-lspconfig/report.yaml    |   7 +-
+ .../snapshots/neovim/nvim-lspconfig/snapshot.txt   |   9 +-
+ .../snapshots/php/php-src/report.yaml              |  31 +----
+ .../snapshots/php/php-src/snapshot.txt             |  31 +----
+ .../snapshots/pycontribs/jira/report.yaml          |   3 +-
+ .../snapshots/pycontribs/jira/snapshot.txt         |   3 +-
+ .../snapshots/slint-ui/slint/report.yaml           |  51 +-------
+ .../snapshots/slint-ui/slint/snapshot.txt          |  36 +-----
+ .../snapshots/wireapp/wire-webapp/report.yaml      |  35 +++---
+ .../snapshots/wireapp/wire-webapp/snapshot.txt     |  19 ++-
+ packages/cspell-bundled-dicts/package.json         |  22 ++--
+ pnpm-lock.yaml                                     | 133 ++++++++++++---------
+ 36 files changed, 184 insertions(+), 522 deletions(-)
+```
+
+---
+
+</details>
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/7933">#7933</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#7933](https://github.com/streetsidesoftware/cspell/pull/7933))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ .../snapshots/ktaranov/sqlserver-kit/report.yaml   |  8 +++-
+ .../snapshots/ktaranov/sqlserver-kit/snapshot.txt  |  7 +++-
+ .../snapshots/slint-ui/slint/report.yaml           |  4 +-
+ .../snapshots/slint-ui/slint/snapshot.txt          |  3 +-
+ packages/cspell-bundled-dicts/package.json         |  8 ++--
+ pnpm-lock.yaml                                     | 45 ++++++++++++----------
+ 6 files changed, 44 insertions(+), 31 deletions(-)
+```
+
+---
+
+</details>
+
 ## v9.2.2 (2025-10-22)
 
 ### Fixes

@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v9.3.0 (2025-11-05)
+
+### Features
+
+- feat: Support loading `.ts` and `.mts` config files. (<a href="https://github.com/streetsidesoftware/cspell/pull/7961">#7961</a>)
+
+### Dictionary Updates
+
+- fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/7950">#7950</a>)
+- fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/7940">#7940</a>)
+
+- fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/7933">#7933</a>)
+
 ## v9.2.2 (2025-10-22)
 
 ### Fixes
