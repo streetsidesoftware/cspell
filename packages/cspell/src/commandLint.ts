@@ -1,4 +1,4 @@
-import type { AddHelpTextContext, Command } from 'commander';
+import { AddHelpTextContext, Command, CommandOptions } from 'commander';
 
 import * as App from './application.mjs';
 import { collect, crOpt } from './commandHelpers.js';
@@ -60,8 +60,8 @@ References:
     https://github.com/streetsidesoftware/cspell
 `;
 
-export function commandLint(prog: Command): Command {
-    const spellCheckCommand = prog.command('lint', { isDefault: true });
+export function commandLint(prog: Command, opts: CommandOptions): Command {
+    const spellCheckCommand = prog.command('lint', opts);
     spellCheckCommand
         .description('Check spelling')
         .option(
@@ -188,7 +188,6 @@ export function commandLint(prog: Command): Command {
                 options.cache = false;
             }
             options.color ??= canUseColor(options.color);
-            App.parseApplicationFeatureFlags(options.flag);
             const { mustFindFiles, fileList, files, file } = options;
             const result = await App.lint(fileGlobs, options);
             if (!fileGlobs.length && !result.files && !result.errors && !fileList && !files?.length && !file?.length) {

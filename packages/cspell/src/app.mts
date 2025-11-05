@@ -1,5 +1,5 @@
 import type { Command } from 'commander';
-import { Option as CommanderOption, program } from 'commander';
+import { program } from 'commander';
 import { satisfies as semverSatisfies } from 'semver';
 
 import { commandCheck } from './commandCheck.js';
@@ -9,6 +9,7 @@ import { commandLink } from './commandLink.js';
 import { commandLint } from './commandLint.js';
 import { commandSuggestion } from './commandSuggestion.js';
 import { commandTrace } from './commandTrace.js';
+import { addGlobalOptionsAndHooks, addGlobalOptionsToAction } from './globalOptions.js';
 import { npmPackage } from './pkgInfo.js';
 import { ApplicationError } from './util/errors.js';
 
@@ -29,17 +30,15 @@ export async function run(command?: Command, argv?: string[]): Promise<void> {
         );
     }
 
-    const optionFlags = new CommanderOption('-f,--flag <flag:value>', 'Declare an execution flag value')
-        .hideHelp()
-        .argParser((value: string, prev: undefined | string[]) => prev?.concat(value) || [value]);
-
-    commandLint(prog).addOption(optionFlags);
-    commandTrace(prog).addOption(optionFlags);
-    commandCheck(prog).addOption(optionFlags);
-    commandSuggestion(prog).addOption(optionFlags);
-    commandInit(prog).addOption(optionFlags);
+    addGlobalOptionsToAction(commandLint(prog, { isDefault: true }));
+    addGlobalOptionsToAction(commandTrace(prog));
+    addGlobalOptionsToAction(commandCheck(prog));
+    addGlobalOptionsToAction(commandSuggestion(prog));
+    addGlobalOptionsToAction(commandInit(prog));
     commandLink(prog);
-    commandDictionaries(prog);
+    addGlobalOptionsToAction(commandDictionaries(prog));
+
+    addGlobalOptionsAndHooks(prog);
 
     prog.exitOverride();
     await prog.parseAsync(args);

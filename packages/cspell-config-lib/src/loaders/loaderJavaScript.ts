@@ -14,8 +14,11 @@ async function importJavaScript(url: URL, hashSuffix: number | string): Promise<
         const _url = new URL(url.href);
         _url.hash = `${_url.hash};loaderSuffix=${hashSuffix}`;
         _log('importJavaScript: %o', { url: _url.href });
-        const result = await import(_url.href);
-        const settingsOrFunction = await (result.default ?? result);
+        let result = await import(_url.href);
+        result = result.default ?? result;
+        // It is possible to have a nested `default` when using a TypeScript loader.
+        result = result.default ?? result;
+        const settingsOrFunction = await result;
         const settings = typeof settingsOrFunction === 'function' ? await settingsOrFunction() : settingsOrFunction;
         return new CSpellConfigFileJavaScript(url, settings);
     } catch (e) {
@@ -36,7 +39,10 @@ export class LoaderJavaScript implements FileLoaderMiddleware {
         switch (ext) {
             case '.js':
             case '.cjs':
-            case '.mjs': {
+            case '.mjs':
+            case '.ts':
+            case '.cts':
+            case '.mts': {
                 return importJavaScript(url, this.hashSuffix);
             }
         }

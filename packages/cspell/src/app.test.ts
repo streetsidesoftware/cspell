@@ -214,7 +214,7 @@ describe('Validate cli', () => {
         ${'samples/Dutch.txt'}                         | ${[pathSamples('Dutch.txt')]}                                                                | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
         ${'with forbidden words'}                      | ${[pathSamples('src/sample-with-forbidden-words.md')]}                                       | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
         ${'current_file --verbose'}                    | ${['--verbose', __filename]}                                                                 | ${undefined}       | ${true}  | ${false} | ${true}
-        ${'bad config'}                                | ${['-c', __filename, __filename]}                                                            | ${app.CheckFailed} | ${true}  | ${false} | ${false}
+        ${'bad config'}                                | ${['-c', __filename + '.x', __filename]}                                                     | ${app.CheckFailed} | ${true}  | ${false} | ${false}
         ${'not found error by default'}                | ${['*.not']}                                                                                 | ${app.CheckFailed} | ${true}  | ${false} | ${false}
         ${'must find with error'}                      | ${['*.not', '--must-find-files']}                                                            | ${app.CheckFailed} | ${true}  | ${false} | ${false}
         ${'must find force no error'}                  | ${['*.not', '--no-must-find-files']}                                                         | ${undefined}       | ${true}  | ${false} | ${false}
@@ -378,6 +378,20 @@ describe('Validate cli', () => {
         expect(captureStdout.text).toMatchSnapshot();
         expect(normalizeLogCalls(log.mock.calls)).toMatchSnapshot();
     });
+
+    // // cspell:ignore jitiregistered
+    // test.skipIf(process.version < 'v22.').each`
+    //     msg                           | testArgs
+    //     ${'trace registered'}        | ${'trace jitiregistered --register jiti/register --config fixtures/features/register/cspell.config.ts --only-found'}
+    // `('app trace $msg run with $testArgs', async ({ testArgs }) => {
+    //     chalk.level = 0;
+    //     testArgs = typeof testArgs === 'string' ? testArgs.split(' ') : testArgs;
+    //     const commander = getCommander();
+    //     const args = argv(...testArgs);
+    //     await app.run(commander, args);
+    //     expect(captureStdout.text).toMatchSnapshot();
+    //     expect(normalizeLogCalls(log.mock.calls)).toMatchSnapshot();
+    // });
 
     test.each`
         testArgs

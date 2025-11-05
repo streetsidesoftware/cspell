@@ -175,7 +175,7 @@ exports[`Validate cli > app 'LICENSE' Expect Error: undefined 3`] = `""`;
 exports[`Validate cli > app 'bad config' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli > app 'bad config' Expect Error: [Function CheckFailed] 2`] = `
-"error	Configuration Error: Failed to read config file: "./src/app.test.ts"
+"error	Configuration Error: Failed to read config file: "./src/app.test.ts.x"
 error
 error	-------------------------------------------
 error
@@ -241,6 +241,7 @@ exports[`Validate cli > app 'check help' Expect Error: 'outputHelp' 1`] = `
   "  --no-exit-code              Do not return an exit code if issues are found.",
   "  --no-default-configuration  Do not load the default configuration and",
   "                              dictionaries.",
+  "  --register <loader:path>    Register a module loader (e.g. jiti/register)",
   "  -h, --help                  display help for command",
   "",
 ]
@@ -750,6 +751,7 @@ exports[`Validate cli > app 'no-args' Expect Error: 'outputHelp' 1`] = `
   "                                 "all", "simple", "typos", "flagged")",
   "  --issue-template [template]    Use a custom issue template. See --help",
   "                                 --issue-template for details.",
+  "  --register <loader:path>       Register a module loader (e.g. jiti/register)",
   "  -h, --help                     display help for command",
   "",
   "More Examples:",
@@ -1669,6 +1671,7 @@ exports[`Validate cli > app 'trace help' Expect Error: 'outputHelp' 1`] = `
   "  --no-color                  Turn off color.",
   "  --no-default-configuration  Do not load the default configuration and",
   "                              dictionaries.",
+  "  --register <loader:path>    Register a module loader (e.g. jiti/register)",
   "  -h, --help                  display help for command",
   "",
 ]
@@ -3778,6 +3781,8 @@ exports[`Validate cli > app help [ '--help' ] 1`] = `
   "",
   "Options:",
   "  -V, --version                         output the version number",
+  "  --register <loader:path>              Register a module loader (e.g.",
+  "                                        jiti/register)",
   "  -h, --help                            display help for command",
   "",
   "Commands:",
@@ -3815,6 +3820,7 @@ exports[`Validate cli > app help [ 'check', '--help' ] 1`] = `
   "  --no-exit-code              Do not return an exit code if issues are found.",
   "  --no-default-configuration  Do not load the default configuration and",
   "                              dictionaries.",
+  "  --register <loader:path>    Register a module loader (e.g. jiti/register)",
   "  -h, --help                  display help for command",
   "",
 ]
@@ -3849,6 +3855,7 @@ exports[`Validate cli > app help [ 'dictionaries', '--help' ] 1`] = `
   "  --no-color                  Turn off color.",
   "  --no-default-configuration  Do not load the default configuration and",
   "                              dictionaries.",
+  "  --register <loader:path>    Register a module loader (e.g. jiti/register)",
   "  -h, --help                  display help for command",
   "",
 ]
@@ -3877,6 +3884,7 @@ exports[`Validate cli > app help [ 'init', '--help' ] 1`] = `
   "  --no-schema                Do not add the schema reference to the config file.",
   "  --stdout                   Write the configuration to stdout instead of a",
   "                             file.",
+  "  --register <loader:path>   Register a module loader (e.g. jiti/register)",
   "  -h, --help                 display help for command",
   "",
 ]
@@ -4002,6 +4010,7 @@ exports[`Validate cli > app help [ 'lint', '--help' ] 1`] = `
   "                                 "all", "simple", "typos", "flagged")",
   "  --issue-template [template]    Use a custom issue template. See --help",
   "                                 --issue-template for details.",
+  "  --register <loader:path>       Register a module loader (e.g. jiti/register)",
   "  -h, --help                     display help for command",
   "",
   "More Examples:",
@@ -4133,6 +4142,7 @@ exports[`Validate cli > app help [ 'lint', '--help', '--issue-template' ] 1`] = 
   "                                 "all", "simple", "typos", "flagged")",
   "  --issue-template [template]    Use a custom issue template. See --help",
   "                                 --issue-template for details.",
+  "  --register <loader:path>       Register a module loader (e.g. jiti/register)",
   "  -h, --help                     display help for command",
   "",
   "Issue Template:",
@@ -4291,6 +4301,7 @@ exports[`Validate cli > app help [ 'lint', '--help', '--verbose' ] 1`] = `
   "                                 "all", "simple", "typos", "flagged")",
   "  --issue-template [template]    Use a custom issue template. See --help",
   "                                 --issue-template for details.",
+  "  --register <loader:path>       Register a module loader (e.g. jiti/register)",
   "  -h, --help                     display help for command",
   "",
   "Hidden Options:",
@@ -4384,6 +4395,8 @@ exports[`Validate cli > app help [ 'suggest', '--help' ] 1`] = `
   "                                        dictionaries specified will be used.",
   "  --no-color                            Turn off color.",
   "  --color                               Force color",
+  "  --register <loader:path>              Register a module loader (e.g.",
+  "                                        jiti/register)",
   "  -h, --help                            display help for command",
   "",
 ]
@@ -4420,6 +4433,7 @@ exports[`Validate cli > app help [ 'trace', '--help' ] 1`] = `
   "  --no-color                  Turn off color.",
   "  --no-default-configuration  Do not load the default configuration and",
   "                              dictionaries.",
+  "  --register <loader:path>    Register a module loader (e.g. jiti/register)",
   "  -h, --help                  display help for command",
   "",
 ]
@@ -4487,6 +4501,8 @@ exports[`Validate cli > app suggest [ 'sug' ] 1`] = `
   "                                        dictionaries specified will be used.",
   "  --no-color                            Turn off color.",
   "  --color                               Force color",
+  "  --register <loader:path>              Register a module loader (e.g.",
+  "                                        jiti/register)",
   "  -h, --help                            display help for command",
   "",
 ]
