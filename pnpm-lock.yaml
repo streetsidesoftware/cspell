@@ -2634,11 +2634,25 @@ packages:
     resolution: {integrity: sha512-4B4OijXeVNOPZlYA2oEwWOTkzyltLao+xbotHQeqN++Rv27Y6s818+n2Qkp8q+Fxhn0t/5lA5X1Mxktud8eayQ==}
     engines: {node: '>=14.17.0'}
 
-  '@docsearch/css@4.2.0':
-    resolution: {integrity: sha512-65KU9Fw5fGsPPPlgIghonMcndyx1bszzrDQYLfierN+Ha29yotMHzVS94bPkZS6On9LS8dE4qmW4P/fGjtCf/g==}
+  '@docsearch/core@4.3.1':
+    resolution: {integrity: sha512-ktVbkePE+2h9RwqCUMbWXOoebFyDOxHqImAqfs+lC8yOU+XwEW4jgvHGJK079deTeHtdhUNj0PXHSnhJINvHzQ==}
+    peerDependencies:
+      '@types/react': '>= 16.8.0 < 20.0.0'
+      react: '>= 16.8.0 < 20.0.0'
+      react-dom: '>= 16.8.0 < 20.0.0'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      react:
+        optional: true
+      react-dom:
+        optional: true
 
-  '@docsearch/react@4.2.0':
-    resolution: {integrity: sha512-zSN/KblmtBcerf7Z87yuKIHZQmxuXvYc6/m0+qnjyNu+Ir67AVOagTa1zBqcxkVUVkmBqUExdcyrdo9hbGbqTw==}
+  '@docsearch/css@4.3.1':
+    resolution: {integrity: sha512-Jnct7LKOi/+Oxbmq215YPYASkMdZqtyyDCkma8Cj4sCcbBuybL6fvyBaX7uJoM6kVF7aIpBA38RhHAyN5ByCHg==}
+
+  '@docsearch/react@4.3.1':
+    resolution: {integrity: sha512-vbKwgDuHi/YA0CiicXhJm4DSfOIOccl3FJlkdVmeZ5d61wNbPdAnAy71i7FF0JzO6noCQScidBBguOCaNfauEw==}
     peerDependencies:
       '@types/react': '>= 16.8.0 < 20.0.0'
       react: '>= 16.8.0 < 20.0.0'
@@ -3398,8 +3412,8 @@ packages:
     resolution: {integrity: sha512-f7zYC6kQautXHvNbLEWgD/uGu1+xCn9izgqBfgItWSx22U0ZDekxN08A1vM8cTxj/cRVe0Q94Ode+tdoYmIOOQ==}
     engines: {node: ^16.14.0 || >=18.0.0}
 
-  '@npmcli/package-json@7.0.1':
-    resolution: {integrity: sha512-956YUeI0YITbk2+KnirCkD19HLzES0habV+Els+dyZaVsaM6VGSiNwnRu6t3CZaqDLz4KXy2zx+0N/Zy6YjlAA==}
+  '@npmcli/package-json@7.0.2':
+    resolution: {integrity: sha512-0ylN3U5htO1SJTmy2YI78PZZjLkKUGg7EKgukb2CRi0kzyoDr0cfjHAzi7kozVhj2V3SxN1oyKqZ2NSo40z00g==}
     engines: {node: ^20.17.0 || >=22.9.0}
 
   '@npmcli/promise-spawn@7.0.2':
@@ -4821,8 +4835,8 @@ packages:
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
 
-  baseline-browser-mapping@2.8.23:
-    resolution: {integrity: sha512-616V5YX4bepJFzNyOfce5Fa8fDJMfoxzOIzDCZwaGL8MKVpFrXqfNUoIpRn9YMI5pXf/VKgzjB4htFMsFKKdiQ==}
+  baseline-browser-mapping@2.8.24:
+    resolution: {integrity: sha512-uUhTRDPXamakPyghwrUcjaGvvBqGrWvBHReoiULMIpOJVM9IYzQh83Xk2Onx5HlGI2o10NNCzcs9TG/S3TkwrQ==}
     hasBin: true
 
   batch@0.6.1:
@@ -9254,8 +9268,8 @@ packages:
   safer-buffer@2.1.2:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
 
-  sax@1.4.2:
-    resolution: {integrity: sha512-FySGAa0RGcFiN6zfrO9JvK1r7TB59xuzCcTHOBXBNoKgDejlOQCR2KL/FGk3/iDlsqyYg1ELZpOmlg09B01Czw==}
+  sax@1.4.3:
+    resolution: {integrity: sha512-yqYn1JhPczigF94DMS+shiDMjDowYO6y9+wB/4WgO0Y19jWYk0lQ4tuG5KI7kj4FTp1wxPj5IFfcrz/s1c3jjQ==}
 
   scheduler@0.27.0:
     resolution: {integrity: sha512-eNv+WrVbKu1f3vbYJT/xtiF5syA5HPIMtf9IgY/nKg0sWqzAUEvqY/xm7OcZc/qafLx/iO9FgOmeSAp4v5ti/Q==}
@@ -9790,8 +9804,9 @@ packages:
   tinyexec@0.3.2:
     resolution: {integrity: sha512-KQQR9yN7R5+OSwaK0XQoj22pwHoTlgYqmUscPYoknOoWCWfj/5/ABTMRi69FrKU5ffPVh5QcFikpWJI/P1ocHA==}
 
-  tinyexec@1.0.1:
-    resolution: {integrity: sha512-5uC6DDlmeqiOwCPmK9jMSdOuZTh8bU39Ys6yidB+UTt5hfZUPGAypSgFRiEp+jbi9qH40BLDvy85jIU88wKSqw==}
+  tinyexec@1.0.2:
+    resolution: {integrity: sha512-W/KYk+NFhkmsYpuHq5JykngiOCnxeVL8v8dFnqxSD8qEEdRfXk1SDM6JzNqcERbcGYj9tMrDQBYV9cjgnunFIg==}
+    engines: {node: '>=18'}
 
   tinyglobby@0.2.15:
     resolution: {integrity: sha512-j2Zq4NyQYG5XMST4cbs02Ak8iJUdxRM0XI5QyxXuZOzKOINmWurp3smXu3y5wDcJrptwpSjgXHzIQxR0omXljQ==}
@@ -12097,13 +12112,20 @@ snapshots:
 
   '@discoveryjs/json-ext@0.6.3': {}
 
-  '@docsearch/css@4.2.0': {}
+  '@docsearch/core@4.3.1(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
+    optionalDependencies:
+      '@types/react': 19.2.2
+      react: 19.2.0
+      react-dom: 19.2.0(react@19.2.0)
 
-  '@docsearch/react@4.2.0(@algolia/client-search@5.42.0)(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(search-insights@2.17.2)':
+  '@docsearch/css@4.3.1': {}
+
+  '@docsearch/react@4.3.1(@algolia/client-search@5.42.0)(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(search-insights@2.17.2)':
     dependencies:
       '@ai-sdk/react': 2.0.87(react@19.2.0)(zod@4.1.12)
       '@algolia/autocomplete-core': 1.19.2(@algolia/client-search@5.42.0)(algoliasearch@5.42.0)(search-insights@2.17.2)
-      '@docsearch/css': 4.2.0
+      '@docsearch/core': 4.3.1(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
+      '@docsearch/css': 4.3.1
       ai: 5.0.87(zod@4.1.12)
       algoliasearch: 5.42.0
       marked: 16.4.1
@@ -12777,7 +12799,7 @@ snapshots:
 
   '@docusaurus/theme-search-algolia@3.9.2(@algolia/client-search@5.42.0)(@mdx-js/react@3.1.1(@types/react@19.2.2)(react@19.2.0))(@swc/core@1.7.26)(@types/react@19.2.2)(esbuild@0.25.12)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(search-insights@2.17.2)(typescript@5.9.3)':
     dependencies:
-      '@docsearch/react': 4.2.0(@algolia/client-search@5.42.0)(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(search-insights@2.17.2)
+      '@docsearch/react': 4.3.1(@algolia/client-search@5.42.0)(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(search-insights@2.17.2)
       '@docusaurus/core': 3.9.2(@mdx-js/react@3.1.1(@types/react@19.2.2)(react@19.2.0))(@swc/core@1.7.26)(esbuild@0.25.12)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(typescript@5.9.3)
       '@docusaurus/logger': 3.9.2
       '@docusaurus/plugin-content-docs': 3.9.2(@mdx-js/react@3.1.1(@types/react@19.2.2)(react@19.2.0))(@swc/core@1.7.26)(esbuild@0.25.12)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(typescript@5.9.3)
@@ -13373,7 +13395,7 @@ snapshots:
       '@lerna-lite/npmlog': 4.9.1
       '@lerna-lite/version': 4.9.2(@lerna-lite/publish@4.9.2(@types/node@20.19.24)(conventional-commits-filter@5.0.0))(@types/node@20.19.24)(conventional-commits-filter@5.0.0)
       '@npmcli/arborist': 9.1.6
-      '@npmcli/package-json': 7.0.1
+      '@npmcli/package-json': 7.0.2
       byte-size: 9.0.1
       ci-info: 4.3.1
       columnify: 1.6.0
@@ -13530,7 +13552,7 @@ snapshots:
       '@npmcli/metavuln-calculator': 9.0.3
       '@npmcli/name-from-folder': 3.0.0
       '@npmcli/node-gyp': 4.0.0
-      '@npmcli/package-json': 7.0.1
+      '@npmcli/package-json': 7.0.2
       '@npmcli/query': 4.0.1
       '@npmcli/redact': 3.2.2
       '@npmcli/run-script': 10.0.2
@@ -13616,7 +13638,7 @@ snapshots:
   '@npmcli/map-workspaces@5.0.1':
     dependencies:
       '@npmcli/name-from-folder': 4.0.0
-      '@npmcli/package-json': 7.0.1
+      '@npmcli/package-json': 7.0.2
       glob: 11.0.3
       minimatch: 10.1.1
 
@@ -13652,13 +13674,13 @@ snapshots:
     transitivePeerDependencies:
       - bluebird
 
-  '@npmcli/package-json@7.0.1':
+  '@npmcli/package-json@7.0.2':
     dependencies:
       '@npmcli/git': 7.0.0
       glob: 11.0.3
       hosted-git-info: 9.0.2
-      json-parse-even-better-errors: 4.0.0
-      proc-log: 5.0.0
+      json-parse-even-better-errors: 5.0.0
+      proc-log: 6.0.0
       semver: 7.7.3
       validate-npm-package-license: 3.0.4
 
@@ -13683,7 +13705,7 @@ snapshots:
   '@npmcli/run-script@10.0.2':
     dependencies:
       '@npmcli/node-gyp': 5.0.0
-      '@npmcli/package-json': 7.0.1
+      '@npmcli/package-json': 7.0.2
       '@npmcli/promise-spawn': 9.0.0
       node-gyp: 11.5.0
       proc-log: 6.0.0
@@ -15079,7 +15101,7 @@ snapshots:
 
   balanced-match@1.0.2: {}
 
-  baseline-browser-mapping@2.8.23: {}
+  baseline-browser-mapping@2.8.24: {}
 
   batch@0.6.1: {}
 
@@ -15162,7 +15184,7 @@ snapshots:
 
   browserslist@4.27.0:
     dependencies:
-      baseline-browser-mapping: 2.8.23
+      baseline-browser-mapping: 2.8.24
       caniuse-lite: 1.0.30001753
       electron-to-chromium: 1.5.244
       node-releases: 2.0.27
@@ -18041,7 +18063,7 @@ snapshots:
 
   libnpmpublish@11.1.2:
     dependencies:
-      '@npmcli/package-json': 7.0.1
+      '@npmcli/package-json': 7.0.2
       ci-info: 4.3.1
       npm-package-arg: 13.0.1
       npm-registry-fetch: 19.1.0
@@ -19293,7 +19315,7 @@ snapshots:
     dependencies:
       '@npmcli/git': 7.0.0
       '@npmcli/installed-package-contents': 3.0.0
-      '@npmcli/package-json': 7.0.1
+      '@npmcli/package-json': 7.0.2
       '@npmcli/promise-spawn': 8.0.3
       '@npmcli/run-script': 10.0.2
       cacache: 20.0.1
@@ -20497,7 +20519,7 @@ snapshots:
 
   safer-buffer@2.1.2: {}
 
-  sax@1.4.2: {}
+  sax@1.4.3: {}
 
   scheduler@0.27.0: {}
 
@@ -20724,7 +20746,7 @@ snapshots:
       '@types/node': 17.0.45
       '@types/sax': 1.2.7
       arg: 5.0.2
-      sax: 1.4.2
+      sax: 1.4.3
 
   skin-tone@2.0.0:
     dependencies:
@@ -21129,7 +21151,7 @@ snapshots:
 
   tinyexec@0.3.2: {}
 
-  tinyexec@1.0.1: {}
+  tinyexec@1.0.2: {}
 
   tinyglobby@0.2.15:
     dependencies:
@@ -21239,7 +21261,7 @@ snapshots:
       rolldown: 1.0.0-beta.45
       rolldown-plugin-dts: 0.17.3(oxc-resolver@11.13.0)(rolldown@1.0.0-beta.45)(typescript@5.9.3)
       semver: 7.7.3
-      tinyexec: 1.0.1
+      tinyexec: 1.0.2
       tinyglobby: 0.2.15
       tree-kill: 1.2.2
       unconfig: 7.3.3
@@ -22176,7 +22198,7 @@ snapshots:
 
   xml-js@1.6.11:
     dependencies:
-      sax: 1.4.2
+      sax: 1.4.3
 
   xtend@4.0.2: {}
 
