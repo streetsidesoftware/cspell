@@ -6,13 +6,17 @@ import * as Util from 'node:util';
 import { toFileDirURL } from '@cspell/url';
 import chalk from 'chalk';
 import * as Commander from 'commander';
-import { afterEach, beforeEach, type Constructable, describe, expect, test, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 
 import * as app from './app.mjs';
 import { console } from './console.js';
 import * as Link from './link.js';
 import { pathPackageRoot } from './test/test.helper.js';
 import { mergeAsyncIterables } from './util/async.js';
+
+interface Constructable {
+    new (...args: any[]): any;
+}
 
 vi.mock('readline');
 

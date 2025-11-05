@@ -2,7 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 
 import ConfigStoreExport from 'configstore';
-import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
+import { afterEach, describe, expect, test, vi } from 'vitest';
 
 import { defaultConfigFileName, GlobalConfigStore, legacyLocationDir } from './cfgStore.js';
 
@@ -12,7 +12,10 @@ vi.mock('node:fs/promises', async (_importOriginal) => ({
     // default: (await _importOriginal<{ default: object }>()).default,
     default: {
         readFile: vi.fn(async (filename) => fsData.get(filename)),
-        writeFile: vi.fn(async (filename, data) => fsData.set(filename, data)),
+        writeFile: vi.fn(async (filename, data) => {
+            console.log('%o', filename);
+            fsData.set(filename, data);
+        }),
         mkdir: vi.fn(async () => undefined),
     },
 }));
@@ -21,13 +24,9 @@ const sc = (s: string) => expect.stringContaining(s);
 const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
 
 describe('GlobalConfigStore', () => {
-    beforeEach(() => {
-        vi.clearAllMocks();
-    });
-
     afterEach(() => {
         fsData.clear();
-        vi.restoreAllMocks();
+        vi.resetAllMocks();
     });
 
     test('GlobalConfigStore', () => {
