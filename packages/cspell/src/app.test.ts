@@ -214,7 +214,7 @@ describe('Validate cli', () => {
         ${'samples/Dutch.txt'}                         | ${[pathSamples('Dutch.txt')]}                                                                | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
         ${'with forbidden words'}                      | ${[pathSamples('src/sample-with-forbidden-words.md')]}                                       | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
         ${'current_file --verbose'}                    | ${['--verbose', __filename]}                                                                 | ${undefined}       | ${true}  | ${false} | ${true}
-        ${'bad config'}                                | ${['-c', __filename, __filename]}                                                            | ${app.CheckFailed} | ${true}  | ${false} | ${false}
+        ${'bad config'}                                | ${['-c', __filename + '.x', __filename]}                                                     | ${app.CheckFailed} | ${true}  | ${false} | ${false}
         ${'not found error by default'}                | ${['*.not']}                                                                                 | ${app.CheckFailed} | ${true}  | ${false} | ${false}
         ${'must find with error'}                      | ${['*.not', '--must-find-files']}                                                            | ${app.CheckFailed} | ${true}  | ${false} | ${false}
         ${'must find force no error'}                  | ${['*.not', '--no-must-find-files']}                                                         | ${undefined}       | ${true}  | ${false} | ${false}
@@ -372,6 +372,20 @@ describe('Validate cli', () => {
         ${'suggest'}                  | ${['suggest', 'café'.normalize('NFD'), '--num-suggestions=1', '--no-include-ties']}
     `('app trace $msg run with $testArgs', async ({ testArgs }: TestCase) => {
         chalk.level = 0;
+        const commander = getCommander();
+        const args = argv(...testArgs);
+        await app.run(commander, args);
+        expect(captureStdout.text).toMatchSnapshot();
+        expect(normalizeLogCalls(log.mock.calls)).toMatchSnapshot();
+    });
+
+    // cspell:ignore typescriptconfig
+    test.skipIf(process.version < 'v22.').each`
+        msg                           | testArgs
+        ${'trace registered'}        | ${'trace typescriptconfig --config fixtures/features/ts-config/cspell.config.ts --only-found'}
+    `('app trace $msg run with $testArgs', async ({ testArgs }) => {
+        chalk.level = 0;
+        testArgs = typeof testArgs === 'string' ? testArgs.split(' ') : testArgs;
         const commander = getCommander();
         const args = argv(...testArgs);
         await app.run(commander, args);

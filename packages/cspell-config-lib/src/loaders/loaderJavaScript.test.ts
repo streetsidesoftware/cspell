@@ -10,6 +10,8 @@ import { loaderJavaScript } from './loaderJavaScript.js';
 const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
 const ac = (...params: Parameters<typeof expect.arrayContaining>) => expect.arrayContaining(...params);
 
+const supportsTypeScriptConfig = process.version >= 'v22';
+
 describe('loaderJavaScript', () => {
     afterEach(() => {});
 
@@ -20,6 +22,37 @@ describe('loaderJavaScript', () => {
         ${'js/commonjs/cspell.config.js'}  | ${{ settings: oc({ id: 'commonjs/js' }) }}
         ${'js/commonjs/cspell.config.mjs'} | ${{ settings: oc({ id: 'commonjs/mjs' }) }}
         ${'js/module/cspell.custom.js'}    | ${{ settings: oc({ id: 'async-module', dictionaryDefinitions: [oc({ words: ac(['recheck', 'tested']) })] }) }}
+    `('loaderJavaScript $file', async ({ file, expected }) => {
+        const url = pathToFileURL(fixtures(file));
+        expected.url ??= url;
+        const next = vi.fn();
+
+        const result = await loaderJavaScript.load({ url, context: { deserialize, io: defaultIO } }, next);
+        expect(result).toEqual(expected);
+
+        // Try double loading.
+        const result2 = await loaderJavaScript.load({ url, context: { deserialize, io: defaultIO } }, next);
+        expect(result2.settings).toBe(result.settings);
+
+        // Ensure that we can force a load by changing search params.
+        const url3 = new URL(url.href);
+        url3.searchParams.append('q', '29');
+
+        const result3 = await loaderJavaScript.load({ url: url3, context: { deserialize, io: defaultIO } }, next);
+        expect(result3.settings).not.toBe(result.settings);
+        expect(result3.settings).toEqual(result.settings);
+
+        // Ensure that we can force a load by changing the hash.
+        const url4 = new URL(url.href);
+        url4.hash = 'hash';
+        const result4 = await loaderJavaScript.load({ url: url4, context: { deserialize, io: defaultIO } }, next);
+        expect(result4.settings).not.toBe(result.settings);
+    });
+
+    test.skipIf(!supportsTypeScriptConfig).each`
+        file                      | expected
+        ${'ts/cspell.config.ts'}  | ${{ settings: oc({ id: 'module/ts' }) }}
+        ${'ts/cspell.config.mts'} | ${{ settings: oc({ id: 'module/mts' }) }}
     `('loaderJavaScript $file', async ({ file, expected }) => {
         const url = pathToFileURL(fixtures(file));
         expected.url ??= url;

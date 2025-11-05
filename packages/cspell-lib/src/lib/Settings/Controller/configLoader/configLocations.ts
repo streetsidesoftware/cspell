@@ -1,4 +1,4 @@
-const supportedExtensions = ['.json', '.jsonc', '.yaml', '.yml', '.mjs', '.cjs', '.js', '.toml'];
+const supportedExtensions = ['.json', '.jsonc', '.yaml', '.yml', '.mjs', '.cjs', '.js', '.toml', '.mts', '.ts'];
 
 /**
  * Logic of the locations:

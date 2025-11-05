@@ -175,7 +175,7 @@ exports[`Validate cli > app 'LICENSE' Expect Error: undefined 3`] = `""`;
 exports[`Validate cli > app 'bad config' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli > app 'bad config' Expect Error: [Function CheckFailed] 2`] = `
-"error	Configuration Error: Failed to read config file: "./src/app.test.ts"
+"error	Configuration Error: Failed to read config file: "./src/app.test.ts.x"
 error
 error	-------------------------------------------
 error
@@ -4890,5 +4890,14 @@ hello - software-tools*      node_modules/@cspell/…/dict/software-tools.txt
 hello - softwareTerms*       node_modules/@cspell/…/dict/softwareTerms.txt
 hello - web-services*        node_modules/@cspell/…/dict/webServices.txt
 hello - workspace*           ../../cspell-dict.txt
+"
+`;
+
+exports[`Validate cli > app trace 'trace registered' run with 'trace typescriptconfig --config fixtures/features/ts-config/cspell.config.ts …' 1`] = `[]`;
+
+exports[`Validate cli > app trace 'trace registered' run with 'trace typescriptconfig --config fixtures/features/ts-config/cspell.config.ts …' 2`] = `
+"Word             F Dictionary Dictionary Location
+typescriptconfig * [words]*   fixtures/features/ts-config/cspell.config.ts
+typescriptconfig * cpp        node_modules/@cspell/dict-cpp/dict/cpp.txt.gz
 "
 `;
