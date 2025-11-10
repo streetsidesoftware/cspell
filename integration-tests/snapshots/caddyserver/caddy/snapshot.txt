@@ -3,7 +3,7 @@ Repository: caddyserver/caddy
 Url: "https://github.com/caddyserver/caddy.git"
 Args: ["**/*.go"]
 Lines:
- CSpell: Files checked: 288, Issues found: 3772 in 258 files.
+ CSpell: Files checked: 288, Issues found: 3774 in 258 files.
  exit code: 1
 admin.go:1082:20   - Unknown word (Redir)       -- return errInternalRedir
 admin.go:1358:6    - Unknown word (loggable)    -- type loggableURLArray []*url.URL
@@ -1026,7 +1026,8 @@ listeners.go:308:18    - Unknown word (netw)        -- func IsFdNetwork(netw str
 listeners.go:313:38    - Unknown word (FDNAMES)     -- from systemd's LISTEN_FDNAMES environment variable
 listeners.go:324:34    - Unknown word (FDNAMES)     -- = os.Getenv("LISTEN_FDNAMES")
 listeners.go:326:32    - Unknown word (FDNAMES)     -- fmt.Errorf("LISTEN_FDNAMES environment variable
-listeners.go:34:30     - Unknown word (qlog)       -- com/quic-go/quic-go/qlog"
+listeners.go:34:4      - Unknown word (qlog)       -- h3qlog "github.com/quic-go
+listeners.go:34:43     - Unknown word (qlog)       -- quic-go/quic-go/http3/qlog"
 listeners.go:364:62    - Unknown word (FDNAMES)     -- not found in LISTEN_FDNAMES", name)
 listeners.go:38:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/internal"
 listeners.go:403:38    - Unknown word (fdname)      -- named socket activation (fdname/name, fdgramname/name
@@ -1040,7 +1041,7 @@ listeners.go:528:7     - Unknown word (unwrapper)   -- if unwrapper, ok := h3ln.
 listeners.go:529:12    - Unknown word (unwrapper)   -- h3ln = unwrapper.Unwrap()
 listeners.go:537:12    - Unknown word (gosec)       -- //nolint:gosec
 listeners.go:537:5     - Unknown word (nolint)      -- //nolint:gosec
-listeners.go:550:16    - Unknown word (qlog)        -- Tracer: qlog.DefaultConnectionTracer
+listeners.go:550:18    - Unknown word (qlog)        -- Tracer: h3qlog.DefaultConnectionTracer
 listeners.go:591:5     - Unknown word (Confs)       -- tlsConfs map[*tls.Config
 listeners.go:597:2     - Unknown word (sqtc)        -- sqtc := &sharedQUICState
 listeners.go:598:6     - Unknown word (Confs)       -- tlsConfs: make(map[*tls
@@ -2490,19 +2491,20 @@ modules/caddyhttp/server.go:15:9      - Unknown word (caddyhttp)  -- package cad
 modules/caddyhttp/server.go:261:46    - Unknown word (stdlib)      -- net.Listener // stdlib http.Server will close
 modules/caddyhttp/server.go:264:16    - Unknown word (caddytls)    -- tlsApp *caddytls.TLS
 modules/caddyhttp/server.go:265:16    - Unknown word (caddyevents) -- events *caddyevents.App
-modules/caddyhttp/server.go:331:12    - Unknown word (bodyclose)   -- //nolint:bodyclose
-modules/caddyhttp/server.go:331:5     - Unknown word (nolint)      -- //nolint:bodyclose
+modules/caddyhttp/server.go:334:78    - Unknown word (nolint)      -- eFullDuplex(); err != nil { //nolint:bodyclose
+modules/caddyhttp/server.go:334:85    - Unknown word (bodyclose)   -- err != nil { //nolint:bodyclose
 modules/caddyhttp/server.go:33:14     - Unknown word (caddyserver) -- "github.com/caddyserver/certmagic"
 modules/caddyhttp/server.go:33:26     - Unknown word (certmagic)   -- github.com/caddyserver/certmagic"
-modules/caddyhttp/server.go:347:2     - Unknown word (loggable)    -- loggableReq := zap.Object("request
-modules/caddyhttp/server.go:347:39    - Unknown word (Loggable)    -- zap.Object("request", LoggableHTTPRequest{
-modules/caddyhttp/server.go:351:35    - Unknown word (loggable)    -- errorLogger.WithLazy(loggableReq)
-modules/caddyhttp/server.go:356:3     - Unknown word (wrec)        -- wrec := NewResponseRecorder
-modules/caddyhttp/server.go:357:7     - Unknown word (wrec)        -- w = wrec
-modules/caddyhttp/server.go:367:27    - Unknown word (wrec)        -- setReadSizer, ok := wrec.(interface{ setReadSize
-modules/caddyhttp/server.go:36:30     - Unknown word (qlog)        -- com/quic-go/quic-go/qlog"
-modules/caddyhttp/server.go:373:33    - Unknown word (loggable)    -- s.accessLogger.With(loggableReq)
-modules/caddyhttp/server.go:375:33    - Unknown word (wrec)        -- logRequest(accLog, r, wrec, &duration, repl, bodyReader
+modules/caddyhttp/server.go:348:2     - Unknown word (loggable)    -- loggableReq := zap.Object("request
+modules/caddyhttp/server.go:348:39    - Unknown word (Loggable)    -- zap.Object("request", LoggableHTTPRequest{
+modules/caddyhttp/server.go:352:35    - Unknown word (loggable)    -- errorLogger.WithLazy(loggableReq)
+modules/caddyhttp/server.go:357:3     - Unknown word (wrec)        -- wrec := NewResponseRecorder
+modules/caddyhttp/server.go:358:7     - Unknown word (wrec)        -- w = wrec
+modules/caddyhttp/server.go:368:27    - Unknown word (wrec)        -- setReadSizer, ok := wrec.(interface{ setReadSize
+modules/caddyhttp/server.go:36:4      - Unknown word (qlog)        -- h3qlog "github.com/quic-go
+modules/caddyhttp/server.go:36:43     - Unknown word (qlog)        -- quic-go/quic-go/http3/qlog"
+modules/caddyhttp/server.go:374:33    - Unknown word (loggable)    -- s.accessLogger.With(loggableReq)
+modules/caddyhttp/server.go:376:33    - Unknown word (wrec)        -- logRequest(accLog, r, wrec, &duration, repl, bodyReader
 modules/caddyhttp/server.go:40:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
 modules/caddyhttp/server.go:41:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/modules/caddyevents
 modules/caddyhttp/server.go:41:43     - Unknown word (caddyevents) -- caddyserver/caddy/v2/modules/caddyevents"
@@ -2510,7 +2512,7 @@ modules/caddyhttp/server.go:42:14     - Unknown word (caddyserver) -- "github.co
 modules/caddyhttp/server.go:42:43     - Unknown word (caddytls)    -- caddyserver/caddy/v2/modules/caddytls"
 modules/caddyhttp/server.go:572:57    - Unknown word (caddytls)    -- TLSConnPolicies, func(cp *caddytls.ConnectionPolicy) bool
 modules/caddyhttp/server.go:59:45     - Unknown word (slowloris)   -- zero value can mitigate slowloris attacks, but
-modules/caddyhttp/server.go:641:15    - Unknown word (qlog)        -- Tracer: qlog.DefaultConnectionTracer
+modules/caddyhttp/server.go:641:17    - Unknown word (qlog)        -- Tracer: h3qlog.DefaultConnectionTracer
 modules/caddyhttp/server.go:649:4     - Unknown word (nolint)      -- //nolint:errcheck
 modules/caddyhttp/server.go:73:15     - Unknown word (alives)      -- // when keep-alives are enabled. If zero
 modules/caddyhttp/server.go:772:6     - Unknown word (certmagic)   -- if certmagic.MatchWildcard(hostWithoutPort
