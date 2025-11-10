@@ -5,7 +5,7 @@ Args: '["**/*.go"]'
 Summary:
   files: 288
   filesWithIssues: 258
-  issues: 3772
+  issues: 3774
   errors: 0
 Errors: []
 
@@ -1044,7 +1044,8 @@ issues:
   - "listeners_test.go:897:16        fdgramname      U       input: \"fdgramname/nonexistent\","
   - "listeners_test.go:917:12        fdgram          U       input: \"fdgram/8\","
   - "listeners_test.go:919:15        fdgram          U       Network: \"fdgram\","
-  - "listeners.go:34:30          qlog            U       com/quic-go/quic-go/qlog\""
+  - "listeners.go:34:4           qlog            U       h3qlog \"github.com/quic-go"
+  - "listeners.go:34:43          qlog            U       quic-go/quic-go/http3/qlog\""
   - "listeners.go:38:14          caddyserver     U       \"github.com/caddyserver/caddy/v2/internal\""
   - "listeners.go:218:10         fdgram          U       // fd or fdgram."
   - "listeners.go:302:38         netw            U       returns true if the netw is a unix network."
@@ -1067,7 +1068,7 @@ issues:
   - "listeners.go:529:12         unwrapper       U       h3ln = unwrapper.Unwrap()"
   - "listeners.go:537:5          nolint          U       //nolint:gosec"
   - "listeners.go:537:12         gosec           U       //nolint:gosec"
-  - "listeners.go:550:16         qlog            U       Tracer: qlog.DefaultConnectionTracer"
+  - "listeners.go:550:18         qlog            U       Tracer: h3qlog.DefaultConnectionTracer"
   - "listeners.go:591:5          Confs           U       tlsConfs map[*tls.Config"
   - "listeners.go:597:2          sqtc            U       sqtc := &sharedQUICState"
   - "listeners.go:598:6          Confs           U       tlsConfs: make(map[*tls"
@@ -2501,7 +2502,8 @@ issues:
   - "modules/caddyhttp/server.go:15:9        caddyhttp       U       package caddyhttp"
   - "modules/caddyhttp/server.go:33:14       caddyserver     U       \"github.com/caddyserver/certmagic\""
   - "modules/caddyhttp/server.go:33:26       certmagic       U       github.com/caddyserver/certmagic\""
-  - "modules/caddyhttp/server.go:36:30       qlog            U       com/quic-go/quic-go/qlog\""
+  - "modules/caddyhttp/server.go:36:4        qlog            U       h3qlog \"github.com/quic-go"
+  - "modules/caddyhttp/server.go:36:43       qlog            U       quic-go/quic-go/http3/qlog\""
   - "modules/caddyhttp/server.go:40:14       caddyserver     U       \"github.com/caddyserver/caddy/v2\""
   - "modules/caddyhttp/server.go:41:14       caddyserver     U       \"github.com/caddyserver/caddy/v2/modules/caddyevents"
   - "modules/caddyhttp/server.go:41:43       caddyevents     U       caddyserver/caddy/v2/modules/caddyevents\""
@@ -2514,18 +2516,18 @@ issues:
   - "modules/caddyhttp/server.go:261:46      stdlib          U       net.Listener // stdlib http.Server will close"
   - "modules/caddyhttp/server.go:264:16      caddytls        U       tlsApp *caddytls.TLS"
   - "modules/caddyhttp/server.go:265:16      caddyevents     U       events *caddyevents.App"
-  - "modules/caddyhttp/server.go:331:5       nolint          U       //nolint:bodyclose"
-  - "modules/caddyhttp/server.go:331:12      bodyclose       U       //nolint:bodyclose"
-  - "modules/caddyhttp/server.go:347:2       loggable        U       loggableReq := zap.Object(\"request"
-  - "modules/caddyhttp/server.go:347:39      Loggable        U       zap.Object(\"request\", LoggableHTTPRequest{"
-  - "modules/caddyhttp/server.go:351:35      loggable        U       errorLogger.WithLazy(loggableReq)"
-  - "modules/caddyhttp/server.go:356:3       wrec            U       wrec := NewResponseRecorder"
-  - "modules/caddyhttp/server.go:357:7       wrec            U       w = wrec"
-  - "modules/caddyhttp/server.go:367:27      wrec            U       setReadSizer, ok := wrec.(interface{ setReadSize"
-  - "modules/caddyhttp/server.go:373:33      loggable        U       s.accessLogger.With(loggableReq)"
-  - "modules/caddyhttp/server.go:375:33      wrec            U       logRequest(accLog, r, wrec, &duration, repl, bodyReader"
+  - "modules/caddyhttp/server.go:334:78      nolint          U       eFullDuplex(); err != nil { //nolint:bodyclose"
+  - "modules/caddyhttp/server.go:334:85      bodyclose       U       err != nil { //nolint:bodyclose"
+  - "modules/caddyhttp/server.go:348:2       loggable        U       loggableReq := zap.Object(\"request"
+  - "modules/caddyhttp/server.go:348:39      Loggable        U       zap.Object(\"request\", LoggableHTTPRequest{"
+  - "modules/caddyhttp/server.go:352:35      loggable        U       errorLogger.WithLazy(loggableReq)"
+  - "modules/caddyhttp/server.go:357:3       wrec            U       wrec := NewResponseRecorder"
+  - "modules/caddyhttp/server.go:358:7       wrec            U       w = wrec"
+  - "modules/caddyhttp/server.go:368:27      wrec            U       setReadSizer, ok := wrec.(interface{ setReadSize"
+  - "modules/caddyhttp/server.go:374:33      loggable        U       s.accessLogger.With(loggableReq)"
+  - "modules/caddyhttp/server.go:376:33      wrec            U       logRequest(accLog, r, wrec, &duration, repl, bodyReader"
   - "modules/caddyhttp/server.go:572:57      caddytls        U       TLSConnPolicies, func(cp *caddytls.ConnectionPolicy) bool"
-  - "modules/caddyhttp/server.go:641:15      qlog            U       Tracer: qlog.DefaultConnectionTracer"
+  - "modules/caddyhttp/server.go:641:17      qlog            U       Tracer: h3qlog.DefaultConnectionTracer"
   - "modules/caddyhttp/server.go:649:4       nolint          U       //nolint:errcheck"
   - "modules/caddyhttp/server.go:772:6       certmagic       U       if certmagic.MatchWildcard(hostWithoutPort"
   - "modules/caddyhttp/server.go:793:39      wrec            U       Logger, r *http.Request, wrec ResponseRecorder, duration"
