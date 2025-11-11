@@ -19,6 +19,6 @@ jobs:
         uses: ./.github/actions/setup-node
 
       - run: pnpm run prepare-cspell-action
-      - uses: streetsidesoftware/cspell-action@v7
+      - uses: streetsidesoftware/cspell-action@v8
         with:
           report: typos
