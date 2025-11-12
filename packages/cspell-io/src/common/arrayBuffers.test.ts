@@ -1,12 +1,14 @@
+import { Buffer } from 'node:buffer';
+
 import { describe, expect, test } from 'vitest';
 
 import {
-    __debug__,
     arrayBufferViewToBuffer,
     asUint8Array,
     copyArrayBufferView,
     sliceView,
     swap16,
+    swap16Poly,
 } from './arrayBuffers.js';
 
 const sampleText = 'This is a bit of text to test things with.';
@@ -36,7 +38,7 @@ describe('arrayBuffers', () => {
         const src = [1, 2, 3, 4];
         const buf = Buffer.from(src);
         expect(buf).toEqual(Buffer.from(src));
-        const sBuf = __debug__.swap16Poly(buf);
+        const sBuf = swap16Poly(buf);
         expect(sBuf).toBe(buf);
         expect(buf).not.toEqual(Buffer.from(src));
         expect(buf).toEqual(Buffer.from([2, 1, 4, 3]));

@@ -1,4 +1,5 @@
 /* eslint-disable unicorn/text-encoding-identifier-case */
+import { Buffer } from 'node:buffer';
 import { gunzipSync } from 'node:zlib';
 
 import { arrayBufferViewToBuffer, asUint8Array, swap16, swapBytes } from './arrayBuffers.js';

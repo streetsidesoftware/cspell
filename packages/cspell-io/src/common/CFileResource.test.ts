@@ -1,3 +1,5 @@
+import { Buffer } from 'node:buffer';
+
 import { describe, expect, test } from 'vitest';
 
 import { CFileResource, fromFileResource } from './CFileResource.js';

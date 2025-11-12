@@ -1,3 +1,4 @@
+import { Buffer } from 'node:buffer';
 import { promises as fs } from 'node:fs';
 
 import { compress } from '../gzip/index.js';

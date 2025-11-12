@@ -1,4 +1,5 @@
 import { Operator } from "@cspell/cspell-pipe/sync";
+import { Buffer } from "node:buffer";
 import { DictionaryDefinitionAugmented, SuggestionCostMapDef } from "@cspell/cspell-types";
 
 //#region src/lib/distance/weightedMaps.d.ts

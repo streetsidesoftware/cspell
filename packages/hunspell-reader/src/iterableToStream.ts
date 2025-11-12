@@ -1,3 +1,4 @@
+import type { Buffer } from 'node:buffer';
 import * as stream from 'node:stream';
 
 // cspell:words streamable

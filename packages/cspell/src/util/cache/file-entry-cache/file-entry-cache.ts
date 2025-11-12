@@ -1,3 +1,4 @@
+import type { Buffer } from 'node:buffer';
 import crypto from 'node:crypto';
 import type { Stats } from 'node:fs';
 import fs from 'node:fs/promises';

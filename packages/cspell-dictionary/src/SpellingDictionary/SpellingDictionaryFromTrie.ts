@@ -1,3 +1,5 @@
+import type { Buffer } from 'node:buffer';
+
 import type {
     FindFullResult,
     FindWordOptions,

@@ -1,3 +1,5 @@
+import type { Buffer } from 'node:buffer';
+
 import type { TrieData } from '../TrieData.js';
 import { TrieNodeTrie } from '../TrieNode/TrieNodeTrie.js';
 import * as iv1 from './importExportV1.js';
