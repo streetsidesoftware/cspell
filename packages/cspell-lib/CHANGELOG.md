@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v9.3.1 (2025-11-12)
+
+### Fixes
+
+- fix: Support Deno (<a href="https://github.com/streetsidesoftware/cspell/pull/7966">#7966</a>)
+
 ## v9.3.0 (2025-11-05)
 
 ### Features
