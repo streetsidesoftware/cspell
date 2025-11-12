@@ -1,3 +1,5 @@
+import { Buffer } from 'node:buffer';
+
 import { suite } from 'perf-insight';
 
 import {

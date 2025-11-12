@@ -1,3 +1,5 @@
+import type { Buffer } from 'node:buffer';
+
 import { decodeTrieData } from './io/index.js';
 import { type ITrie, ITrieImpl } from './ITrie.js';
 

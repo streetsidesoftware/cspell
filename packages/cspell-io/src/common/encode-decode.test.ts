@@ -1,3 +1,5 @@
+import { Buffer } from 'node:buffer';
+
 /* eslint-disable unicorn/text-encoding-identifier-case */
 import { describe, expect, test } from 'vitest';
 

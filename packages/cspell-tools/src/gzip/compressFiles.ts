@@ -1,3 +1,4 @@
+import type { Buffer } from 'node:buffer';
 import { readFile, writeFile } from 'node:fs/promises';
 import { promisify } from 'node:util';
 import { gunzip as gunzipCB, gzip as gz, gzipSync } from 'node:zlib';

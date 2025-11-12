@@ -1,3 +1,5 @@
+import { Buffer } from 'node:buffer';
+
 import { _fetch as fetch } from './_fetch.js';
 import { FetchUrlError, toFetchUrlError } from './FetchError.js';
 

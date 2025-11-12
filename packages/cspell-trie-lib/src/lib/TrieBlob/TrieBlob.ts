@@ -1,3 +1,4 @@
+import { Buffer } from 'node:buffer';
 import { endianness } from 'node:os';
 
 import { defaultTrieInfo } from '../constants.js';
@@ -427,7 +428,7 @@ function checkSig(blob: Uint8Array): boolean {
     if (blob.length < HEADER_SIZE) {
         return false;
     }
-    const buf = Buffer.from(blob, 0, headerSig.length);
+    const buf = Buffer.from(blob as unknown as SharedArrayBuffer, 0, headerSig.length);
     if (buf.toString('utf8', 0, headerSig.length) !== headerSig) {
         return false;
     }

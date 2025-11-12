@@ -1,3 +1,5 @@
+import { Buffer } from 'node:buffer';
+
 /**
  * Treat a ArrayBufferView as a Uint8Array.
  * The Uint8Array will share the same underlying ArrayBuffer.
@@ -50,7 +52,7 @@ export function sliceView(data: ArrayBufferView, byteOffset: number, byteLength?
  * @param data - data to swap
  * @returns data
  */
-function swap16Poly(data: ArrayBufferView): ArrayBufferView {
+export function swap16Poly(data: ArrayBufferView): ArrayBufferView {
     const view = new DataView(data.buffer, data.byteOffset, data.byteLength);
     for (let i = 0; i < view.byteLength; i += 2) {
         view.setUint16(i, view.getUint16(i, false), true);
@@ -64,19 +66,10 @@ function swap16Poly(data: ArrayBufferView): ArrayBufferView {
  * @returns data
  */
 export function swap16(data: ArrayBufferView): ArrayBufferView {
-    if (typeof Buffer !== 'undefined') {
-        return arrayBufferViewToBuffer(data).swap16();
-    }
-    return swap16Poly(data);
+    return arrayBufferViewToBuffer(data).swap16();
 }
 
 export function swapBytes(data: ArrayBufferView): ArrayBufferView {
     const buf = copyArrayBufferView(data);
     return swap16(buf);
 }
-
-export const __debug__: {
-    swap16Poly: typeof swap16Poly;
-} = {
-    swap16Poly,
-};

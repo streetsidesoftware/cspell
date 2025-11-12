@@ -1,4 +1,5 @@
 /* eslint-disable unicorn/text-encoding-identifier-case */
+import { Buffer } from 'node:buffer';
 import { promises as fs } from 'node:fs';
 import * as fsPath from 'node:path';
 
