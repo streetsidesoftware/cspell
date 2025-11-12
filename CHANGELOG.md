@@ -3,6 +3,41 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v9.3.1 (2025-11-12)
+
+### Fixes
+
+<details>
+<summary>fix: Support Deno (<a href="https://github.com/streetsidesoftware/cspell/pull/7966">#7966</a>)</summary>
+
+### fix: Support Deno ([#7966](https://github.com/streetsidesoftware/cspell/pull/7966))
+
+## Deno
+
+This should enable running:
+
+```
+deno run -A cspell lint -c ./cspell.config.mts src
+```
+
+## Bun
+
+I tried bun, but it failed with:
+
+<img width="704" height="283" alt="image" src="https://github.com/user-attachments/assets/c47a5bfb-4410-4f8c-b40d-08868749e332" />
+
+## WIP
+
+Note: this is a work in progress. Deno does not support NodeJS's Buffer for decoding compressed binary data. I'll investigate a workaround.
+
+Current issue: <img width="958" height="172" alt="image" src="https://github.com/user-attachments/assets/517e5392-93c1-472b-878d-42566f7a8f38" />
+
+It also blows up with encountering `yarn` blobs, but that is to be expected.
+
+---
+
+</details>
+
 ## v9.3.0 (2025-11-05)
 
 ### Features
