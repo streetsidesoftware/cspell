@@ -42,7 +42,8 @@ jobs:
           pnpm -r up
 
       - name: Install
-        run: pnpm install
+        run: |
+          pnpm ib
 
       - name: Apply and new Lint rules
         continue-on-error: true
