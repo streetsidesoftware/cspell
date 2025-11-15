@@ -31,7 +31,7 @@ describe('CSpellConfigFileToml', () => {
         expect(configFile.settings).toEqual(settings);
 
         const serialized = configFile.serialize();
-        expect(serialized).toEqual(unindent`\
+        expect(trimEnd(serialized)).toEqual(unindent`\
             language = "en"
             ignoreWords = [ "foo", "bar" ]
         `);
@@ -48,7 +48,7 @@ describe('CSpellConfigFileToml', () => {
         configFile.setSchema(cspellConfigFileSchema);
 
         const serialized = configFile.serialize();
-        expect(serialized).toEqual(unindent`\
+        expect(trimEnd(serialized)).toEqual(unindent`\
             language = "en"
             ignoreWords = [ "foo", "bar" ]
             "$schema" = "${cspellConfigFileSchema}"
@@ -67,7 +67,7 @@ describe('CSpellConfigFileToml', () => {
         configFile.setComment('language', ' Language is important');
 
         const serialized = configFile.serialize();
-        expect(serialized).toEqual(unindent`\
+        expect(trimEnd(serialized)).toEqual(unindent`\
             language = "en"
             ignoreWords = [ "foo", "bar" ]
         `);
@@ -95,3 +95,7 @@ describe('CSpellConfigFileToml', () => {
         expect(cfgFrom.url).toEqual(cfg.url);
     });
 });
+
+function trimEnd(s: string): string {
+    return s.replace(/\n+$/, '\n');
+}

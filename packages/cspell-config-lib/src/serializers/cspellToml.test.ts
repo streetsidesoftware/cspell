@@ -64,14 +64,18 @@ describe('cspellToml', () => {
             next,
         );
 
-        expect(serializerCSpellToml.serialize(file, defaultNextSerializer).trim()).toEqual(sampleCSpellToml.trim());
+        expect(trimEnd(serializerCSpellToml.serialize(file, defaultNextSerializer))).toEqual(sampleCSpellToml);
 
         file.addWords(['fig', 'cache', 'carrot', 'broccoli', 'fig']);
-        expect(serializerCSpellToml.serialize(file, defaultNextSerializer).trim()).toEqual(
+        expect(trimEnd(serializerCSpellToml.serialize(file, defaultNextSerializer))).toEqual(
             unindent`\
             version = "0.2"
             words = [ "broccoli", "cache", "carrot", "fig", "unsubscribe" ]
-        `.trim(),
+        `,
         );
     });
 });
+
+function trimEnd(s: string): string {
+    return s.replace(/\n+$/, '\n');
+}
