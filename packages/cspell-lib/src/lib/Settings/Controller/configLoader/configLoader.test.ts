@@ -26,8 +26,10 @@ import {
     __testing__ as __configLoader_testing__,
     ConfigurationLoaderFailedToResolveError,
     createConfigLoader,
+    defaultExtensionsAll,
     loadPnP,
 } from './configLoader.js';
+import { supportedExtensions } from './configLocations.js';
 import { configToRawSettings } from './configToRawSettings.js';
 import {
     clearCachedSettingsFiles,
@@ -827,6 +829,12 @@ describe('relativeToCwd', () => {
         ${new URL('https://example.com/cspell.json')} | ${'https://example.com/cspell.json'}
     `('relativeToCwd', ({ filename, expected }) => {
         expect(relativeToCwd(filename)).toEqual(expected);
+    });
+});
+
+describe('Validate assumptions', () => {
+    test('That all config extensions can be found.', () => {
+        expect(new Set(defaultExtensionsAll)).toEqual(new Set(supportedExtensions));
     });
 });
 
