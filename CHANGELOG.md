@@ -3,6 +3,53 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v9.3.2 (2025-11-15)
+
+### Fixes
+
+<details>
+<summary>fix: Add Zig programming language dictionary (<a href="https://github.com/streetsidesoftware/cspell/pull/7998">#7998</a>)</summary>
+
+### fix: Add Zig programming language dictionary ([#7998](https://github.com/streetsidesoftware/cspell/pull/7998))
+
+---
+
+</details>
+
+<details>
+<summary>fix: Search for TypeScript config files. (<a href="https://github.com/streetsidesoftware/cspell/pull/7997">#7997</a>)</summary>
+
+### fix: Search for TypeScript config files. ([#7997](https://github.com/streetsidesoftware/cspell/pull/7997))
+
+TypeScript files were allowed, but would not be automatically found.
+
+---
+
+</details>
+
+### Dictionary Updates
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/8004">#8004</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#8004](https://github.com/streetsidesoftware/cspell/pull/8004))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ .../snapshots/ktaranov/sqlserver-kit/report.yaml   |  4 +--
+ .../snapshots/ktaranov/sqlserver-kit/snapshot.txt  |  5 ++-
+ packages/cspell-bundled-dicts/package.json         |  6 ++--
+ pnpm-lock.yaml                                     | 36 +++++++++++-----------
+ 4 files changed, 24 insertions(+), 27 deletions(-)
+```
+
+---
+
+</details>
+
 ## v9.3.1 (2025-11-12)
 
 ### Fixes
