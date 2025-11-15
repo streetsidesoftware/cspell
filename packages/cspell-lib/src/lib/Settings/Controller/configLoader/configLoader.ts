@@ -181,12 +181,13 @@ export interface IConfigLoader {
     setIsTrusted(isTrusted: boolean): void;
 }
 
-const defaultExtensions = ['.json', '.yaml', '.yml', '.jsonc'];
-const defaultJsExtensions = ['.js', '.cjs', '.mjs'];
+const defaultExtensions = ['.json', '.yaml', '.yml', '.jsonc', '.toml'];
+const defaultJsExtensions = ['.js', '.cjs', '.mjs', '.ts', '.mts'];
+export const defaultExtensionsAll: string[] = [...defaultExtensions, ...defaultJsExtensions];
 
 const trustedSearch: Map<string, readonly string[]> = new Map([
     ['*', defaultExtensions],
-    ['file:', [...defaultExtensions, ...defaultJsExtensions]],
+    ['file:', defaultExtensionsAll],
 ]);
 
 const unTrustedSearch: Map<string, readonly string[]> = new Map([['*', defaultExtensions]]);
