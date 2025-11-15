@@ -155,6 +155,7 @@ const settings = {
         '@cspell/dict-terraform/cspell-ext.json',
         '@cspell/dict-typescript/cspell-ext.json',
         '@cspell/dict-vue/cspell-ext.json',
+        '@cspell/dict-zig/cspell-ext.json',
     ],
 };
 export default settings;

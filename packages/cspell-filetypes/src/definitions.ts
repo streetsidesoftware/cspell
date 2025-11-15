@@ -367,6 +367,8 @@ export const definitions: FileTypeDefinitions = [
     { id: 'video', extensions: ['.avi', '.flv', '.mkv', '.mov', '.mp4', '.mpeg', '.mpg', '.wmv'], format: 'Binary' },
     { id: 'webm', extensions: ['.webm'], format: 'Binary', description: 'WebM is an audiovisual media file format.' },
     { id: 'wheel', extensions: ['.whl'], format: 'Binary' },
+    { id: 'zig', extensions: ['.zig'], description: 'Zig programming language' },
+    { id: 'zon', extensions: ['.zon'], description: 'Zig programming language package file' },
 ];
 
 // cspell:ignoreRegExp /id: '.*?'/g
