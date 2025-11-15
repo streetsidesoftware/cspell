@@ -41,13 +41,15 @@ describe('cspellToml', () => {
 
     test.each`
         uri                  | content              | expected
-        ${'cspell.toml'}     | ${'\nname = "name"'} | ${toml({ name: 'name' }) + '\n'}
-        ${'cspell.toml?x=5'} | ${'words = []'}      | ${toml({ words: [] }) + '\n'}
+        ${'cspell.toml'}     | ${'\nname = "name"'} | ${toml({ name: 'name' })}
+        ${'cspell.toml?x=5'} | ${'words = []'}      | ${toml({ words: [] })}
     `('serialize $uri', ({ uri, content, expected }) => {
         const next = vi.fn();
         const file = serializerCSpellToml.deserialize({ url: new URL(uri, import.meta.url), content }, next);
         assert(file instanceof CSpellConfigFileToml);
-        expect(serializerCSpellToml.serialize(file, defaultNextSerializer)).toEqual(expected);
+        const result = serializerCSpellToml.serialize(file, defaultNextSerializer);
+        expect(result.endsWith('\n')).toBe(true);
+        expect(result).toEqual(expected);
         expect(next).toHaveBeenCalledTimes(0);
     });
 
@@ -64,14 +66,14 @@ describe('cspellToml', () => {
             next,
         );
 
-        expect(serializerCSpellToml.serialize(file, defaultNextSerializer).trim()).toEqual(sampleCSpellToml.trim());
+        expect(serializerCSpellToml.serialize(file, defaultNextSerializer)).toEqual(sampleCSpellToml);
 
         file.addWords(['fig', 'cache', 'carrot', 'broccoli', 'fig']);
-        expect(serializerCSpellToml.serialize(file, defaultNextSerializer).trim()).toEqual(
+        expect(serializerCSpellToml.serialize(file, defaultNextSerializer)).toEqual(
             unindent`\
             version = "0.2"
             words = [ "broccoli", "cache", "carrot", "fig", "unsubscribe" ]
-        `.trim(),
+        `,
         );
     });
 });
