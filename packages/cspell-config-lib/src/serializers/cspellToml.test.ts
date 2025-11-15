@@ -67,9 +67,11 @@ describe('cspellToml', () => {
         expect(serializerCSpellToml.serialize(file, defaultNextSerializer).trim()).toEqual(sampleCSpellToml.trim());
 
         file.addWords(['fig', 'cache', 'carrot', 'broccoli', 'fig']);
-        expect(serializerCSpellToml.serialize(file, defaultNextSerializer).trim()).toEqual(unindent`\
+        expect(serializerCSpellToml.serialize(file, defaultNextSerializer).trim()).toEqual(
+            unindent`\
             version = "0.2"
             words = [ "broccoli", "cache", "carrot", "fig", "unsubscribe" ]
-        `.trim());
+        `.trim(),
+        );
     });
 });
