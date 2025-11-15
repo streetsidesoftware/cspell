@@ -66,10 +66,10 @@ describe('cspellToml', () => {
             next,
         );
 
-        expect((serializerCSpellToml.serialize(file, defaultNextSerializer))).toEqual(sampleCSpellToml);
+        expect(serializerCSpellToml.serialize(file, defaultNextSerializer)).toEqual(sampleCSpellToml);
 
         file.addWords(['fig', 'cache', 'carrot', 'broccoli', 'fig']);
-        expect((serializerCSpellToml.serialize(file, defaultNextSerializer))).toEqual(
+        expect(serializerCSpellToml.serialize(file, defaultNextSerializer)).toEqual(
             unindent`\
             version = "0.2"
             words = [ "broccoli", "cache", "carrot", "fig", "unsubscribe" ]
