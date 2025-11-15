@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v9.3.2 (2025-11-15)
+
+### Fixes
+
+- fix: Add Zig programming language dictionary (<a href="https://github.com/streetsidesoftware/cspell/pull/7998">#7998</a>)
+- fix: Search for TypeScript config files. (<a href="https://github.com/streetsidesoftware/cspell/pull/7997">#7997</a>)
+
+### Dictionary Updates
+
+- fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/8004">#8004</a>)
+
 ## v9.3.1 (2025-11-12)
 
 ### Fixes
