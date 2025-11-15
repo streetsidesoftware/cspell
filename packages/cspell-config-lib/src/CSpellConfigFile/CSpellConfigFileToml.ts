@@ -14,7 +14,7 @@ export class CSpellConfigFileToml extends ImplCSpellConfigFile {
     }
 
     serialize() {
-        return stringify(this.settings) + '\n';
+        return stringify(this.settings);
     }
 
     removeAllComments(): this {
