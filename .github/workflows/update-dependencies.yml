@@ -85,7 +85,7 @@ jobs:
         uses: ./.github/actions/pr
         with:
           commit-message: 'ci: Workflow Bot -- Update Yarn'
-          branch: ${{ env.NEW_BRANCH }}
+          branch: 'update-yarn-main'
           app_id: ${{ secrets.AUTOMATION_APP_ID }}
           app_private_key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
           base: ${{ env.REF_BRANCH }}
