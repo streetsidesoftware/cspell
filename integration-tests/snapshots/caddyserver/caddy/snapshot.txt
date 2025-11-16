@@ -3,7 +3,7 @@ Repository: caddyserver/caddy
 Url: "https://github.com/caddyserver/caddy.git"
 Args: ["**/*.go"]
 Lines:
- CSpell: Files checked: 288, Issues found: 3774 in 258 files.
+ CSpell: Files checked: 288, Issues found: 3778 in 258 files.
  exit code: 1
 admin.go:1082:20   - Unknown word (Redir)       -- return errInternalRedir
 admin.go:1358:6    - Unknown word (loggable)    -- type loggableURLArray []*url.URL
@@ -964,19 +964,19 @@ cmd/storagefuncs.go:27:26     - Unknown word (certmagic)   -- github.com/caddyse
 cmd/storagefuncs.go:29:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
 cmd/storagefuncs.go:82:11     - Unknown word (certmagic)   -- var stor certmagic.Storage
 cmd/x509rootsfallback.go:15:9      - Unknown word (caddycmd)   -- package caddycmd
-context.go:25:14     - Unknown word (caddyserver) -- "github.com/caddyserver/certmagic"
-context.go:25:26     - Unknown word (certmagic)   -- github.com/caddyserver/certmagic"
-context.go:29:23     - Unknown word (zapslog)     -- go.uber.org/zap/exp/zapslog"
-context.go:31:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/internal/filesystems
-context.go:543:30    - Unknown word (certmagic)     -- ctx Context) Storage() certmagic.Storage {
-context.go:595:19    - Unknown word (zapslog)       -- return slog.New(zapslog.NewHandler(l.Core()
-context.go:599:19    - Unknown word (zapslog)       -- return slog.New(zapslog.NewHandler(Log().Core
-context.go:601:18    - Unknown word (zapslog)       -- return slog.New(zapslog.NewHandler(ctx.cfg.Logging
-context.go:602:3     - Unknown word (zapslog)       -- zapslog.WithName(string(mod
-context.go:636:8     - Unknown word (caddyevents)   -- // the caddyevents package, so the core
-context.go:638:8     - Unknown word (caddyevents)   -- // the caddyevents package, which imports
-context.go:97:46     - Unknown word (filesystemmap) -- loaded, we use a default filesystemmap, which includes the
-context.go:97:80     - Unknown word (osfs)          -- which includes the osfs
+context.go:26:14     - Unknown word (caddyserver) -- "github.com/caddyserver/certmagic"
+context.go:26:26     - Unknown word (certmagic)   -- github.com/caddyserver/certmagic"
+context.go:30:23     - Unknown word (zapslog)     -- go.uber.org/zap/exp/zapslog"
+context.go:33:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/internal/filesystems
+context.go:545:30    - Unknown word (certmagic)     -- ctx Context) Storage() certmagic.Storage {
+context.go:619:13    - Unknown word (zapslog)       -- handler = zapslog.NewHandler(core)
+context.go:624:14    - Unknown word (zapslog)       -- handler = zapslog.NewHandler(core)
+context.go:628:14    - Unknown word (zapslog)       -- handler = zapslog.NewHandler(core, zapslog
+context.go:628:39    - Unknown word (zapslog)       -- zapslog.NewHandler(core, zapslog.WithName(moduleID))
+context.go:671:8     - Unknown word (caddyevents)   -- // the caddyevents package, so the core
+context.go:673:8     - Unknown word (caddyevents)   -- // the caddyevents package, which imports
+context.go:99:46     - Unknown word (filesystemmap) -- loaded, we use a default filesystemmap, which includes the
+context.go:99:80     - Unknown word (osfs)          -- which includes the osfs
 context_test.go:28:11     - Unknown word (godoc)      -- // This godoc comment will appear
 context_test.go:60:11     - Unknown word (godoc)      -- // This godoc comment will appear
 context_test.go:93:11     - Unknown word (godoc)      -- // This godoc comment will appear
@@ -1715,10 +1715,14 @@ modules/caddyhttp/ip_range.go:89:34     - Unknown word (caddyfile)   -- Unmarsha
 modules/caddyhttp/ip_range.go:90:34     - Unknown word (Caddyfile)   -- StaticIPRange) UnmarshalCaddyfile(d *caddyfile.Dispenser
 modules/caddyhttp/ip_range.go:90:47     - Unknown word (caddyfile)   -- UnmarshalCaddyfile(d *caddyfile.Dispenser) error {
 modules/caddyhttp/logging.go:15:9      - Unknown word (caddyhttp)  -- package caddyhttp
-modules/caddyhttp/logging.go:27:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
-modules/caddyhttp/logging.go:36:5      - Unknown word (hostnames)   -- // hostnames that are not in the
-modules/caddyhttp/logging.go:39:30     - Unknown word (hostnames)   -- LoggerNames maps request hostnames to one or more custom
-modules/caddyhttp/logging.go:47:18     - Unknown word (hostnames)   -- // Keys must be hostnames (without ports), and
+modules/caddyhttp/logging.go:266:7     - Unknown word (zapslog)     -- h = zapslog.NewHandler(handler.core
+modules/caddyhttp/logging.go:268:55    - Unknown word (zapslog)     -- core.With(e.fields), zapslog.WithName(handler.moduleID
+modules/caddyhttp/logging.go:268:7     - Unknown word (zapslog)     -- h = zapslog.NewHandler(handler.core
+modules/caddyhttp/logging.go:28:23     - Unknown word (zapslog)    -- go.uber.org/zap/exp/zapslog"
+modules/caddyhttp/logging.go:31:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
+modules/caddyhttp/logging.go:46:5      - Unknown word (hostnames)   -- // hostnames that are not in the
+modules/caddyhttp/logging.go:49:30     - Unknown word (hostnames)   -- LoggerNames maps request hostnames to one or more custom
+modules/caddyhttp/logging.go:57:18     - Unknown word (hostnames)   -- // Keys must be hostnames (without ports), and
 modules/caddyhttp/logging/caddyfile.go:18:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/caddyconfig
 modules/caddyhttp/logging/caddyfile.go:18:35     - Unknown word (caddyconfig) -- caddyserver/caddy/v2/caddyconfig/caddyfile"
 modules/caddyhttp/logging/caddyfile.go:18:47     - Unknown word (caddyfile)   -- caddy/v2/caddyconfig/caddyfile"
@@ -2483,8 +2487,8 @@ modules/caddyhttp/routes.go:352:7     - Unknown word (mset)        -- func (mset
 modules/caddyhttp/routes.go:353:20    - Unknown word (mset)        -- for _, m := range mset {
 modules/caddyhttp/routes.go:423:19    - Unknown word (Ifaces)      -- for _, matcherSetIfaces := range matcherSets
 modules/caddyhttp/routes.go:425:37    - Unknown word (Ifaces)      -- matcher := range matcherSetIfaces {
-modules/caddyhttp/server.go:1136:15   - Unknown word (fdgram)      -- "fdgram": "fdgram",
-modules/caddyhttp/server.go:1136:3    - Unknown word (fdgram)      -- "fdgram": "fdgram",
+modules/caddyhttp/server.go:1138:15   - Unknown word (fdgram)      -- "fdgram": "fdgram",
+modules/caddyhttp/server.go:1138:3    - Unknown word (fdgram)      -- "fdgram": "fdgram",
 modules/caddyhttp/server.go:130:21    - Unknown word (unrouted)    -- // By default, all unrouted requests receive a
 modules/caddyhttp/server.go:155:18    - Unknown word (caddytls)    -- TLSConnPolicies caddytls.ConnectionPolicies
 modules/caddyhttp/server.go:15:9      - Unknown word (caddyhttp)  -- package caddyhttp
@@ -2517,7 +2521,7 @@ modules/caddyhttp/server.go:649:4     - Unknown word (nolint)      -- //nolint:e
 modules/caddyhttp/server.go:73:15     - Unknown word (alives)      -- // when keep-alives are enabled. If zero
 modules/caddyhttp/server.go:772:6     - Unknown word (certmagic)   -- if certmagic.MatchWildcard(hostWithoutPort
 modules/caddyhttp/server.go:793:39    - Unknown word (wrec)        -- Logger, r *http.Request, wrec ResponseRecorder, duration
-modules/caddyhttp/server.go:849:32    - Unknown word (Loggable)    -- Object("resp_headers", LoggableHTTPHeader{
+modules/caddyhttp/server.go:851:32    - Unknown word (Loggable)    -- Object("resp_headers", LoggableHTTPHeader{
 modules/caddyhttp/server_test.go:110:2     - Unknown word (wrec)       -- wrec := NewResponseRecorder
 modules/caddyhttp/server_test.go:13:14     - Unknown word (stretchr)   -- "github.com/stretchr/testify/assert"
 modules/caddyhttp/server_test.go:1:9       - Unknown word (caddyhttp)  -- package caddyhttp
