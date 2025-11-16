@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: [".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 2099, Issues found: 1632 in 308 files.
+ CSpell: Files checked: 2089, Issues found: 1521 in 303 files.
  exit code: 1
 Makefile.js:126:82    - Unknown word (ined)       -- followed by the string "ined".
 Makefile.js:375:9     - Unknown word (gensite)    -- target.gensite();
@@ -74,7 +74,7 @@ docs/src/extend/code-path-analysis.md:533:2     - Unknown word (hoge)       -- h
 docs/src/extend/code-path-analysis.md:582:3     - Unknown word (fuga)       -- fuga();
 docs/src/extend/custom-formatters.md:222:61    - Unknown word (Guake)      -- www.iterm2.com/) or [Guake](http://guake-project
 docs/src/extend/custom-formatters.md:244:9     - Unknown word (eslintformatter) -- - `"eslintformatter"`
-docs/src/extend/custom-parsers.md:123:31    - Unknown word (myparser)   -- packages: ["eslint-parser-myparser"],
+docs/src/extend/custom-parsers.md:124:31    - Unknown word (myparser)   -- packages: ["eslint-parser-myparser"],
 docs/src/extend/custom-rule-tutorial.md:180:4     - Unknown word (endraw)     -- {% endraw %}
 docs/src/extend/custom-rule-tutorial.md:91:127    - Unknown word (fixability) -- documentation, and fixability. In this case, the rule
 docs/src/extend/plugin-migration-flat-config.md:242:17    - Unknown word (xdescribe)  -- xdescribe: true
@@ -82,7 +82,7 @@ docs/src/extend/selectors.md:152:405   - Unknown word (Fpath)      -- so: `[valu
 docs/src/extend/shareable-configs-deprecated.md:19:55     - Unknown word (myconfig)   -- such as `eslint-config-myconfig`.
 docs/src/integrate/nodejs-api.md:175:297   - Unknown word (cloneable)  -- other options must be [cloneable](https://developer.mozilla
 docs/src/integrate/nodejs-api.md:211:35    - Unknown word (omittable)  -- parameter `options` is omittable.
-docs/src/integrate/nodejs-api.md:611:35    - Unknown word (Fvar)       -- new SourceCode("\uFEFFvar foo = bar;", ast);
+docs/src/integrate/nodejs-api.md:609:35    - Unknown word (Fvar)       -- new SourceCode("\uFEFFvar foo = bar;", ast);
 docs/src/maintain/manage-issues.md:31:4      - Unknown word (Triaging)   -- ## Triaging Process
 docs/src/maintain/manage-releases.md:106:103   - Unknown word (eslintbot)  -- token is tied to the `eslintbot` npm account and needs
 docs/src/maintain/overview.md:32:6      - Unknown word (Stackaid)   -- - [**Stackaid.us**](https://simulation
@@ -177,14 +177,14 @@ docs/src/static/feed.njk:5:4       - Unknown word (eleventy)   -- "eleventyExclu
 docs/src/static/sitemap.njk:11:14     - Unknown word (lastmod)    -- <lastmod>{{ page.date.toISOString
 docs/src/static/sitemap.njk:12:14     - Unknown word (changefreq) -- <changefreq>{{ page.data.changeFreq
 docs/src/static/sitemap.njk:7:2       - Unknown word (urlset)     -- <urlset xmlns="http://www.sitemaps
-docs/src/use/command-line-interface.md:376:68    - Unknown word (levn)       -- configuration specified with [levn](https://github.com
-docs/src/use/command-line-interface.md:670:21    - Unknown word (customformat) -- args: ["-f", "./customformat.js", "file.js"]
+docs/src/use/command-line-interface.md:318:68    - Unknown word (levn)       -- configuration specified with [levn](https://github.com
+docs/src/use/command-line-interface.md:567:21    - Unknown word (customformat) -- args: ["-f", "./customformat.js", "file.js"]
 docs/src/use/configure/configuration-files-deprecated.md:39:25     - Unknown word (myfiletotest) -- eslint -c myconfig.json myfiletotest.js
 docs/src/use/configure/debug.md:30:44     - Unknown word (nzakas)     -- config from C:\Users\nzakas\projects\eslint\eslint
 docs/src/use/configure/ignore-deprecated.md:100:200   - Unknown word (jshintignore) -- example, you can use `.jshintignore` file because it has
 docs/src/use/configure/ignore-deprecated.md:120:11    - Unknown word (mypackage)    -- "name": "mypackage",
-docs/src/use/configure/ignore.md:64:4      - Unknown word (Unignoring) -- ## Unignoring Files and Directories
-docs/src/use/configure/ignore.md:66:165    - Unknown word (mylibrary)  -- unignores `node_modules/mylibrary`:
+docs/src/use/configure/ignore.md:93:4      - Unknown word (Unignoring) -- ## Unignoring Files and Directories
+docs/src/use/configure/ignore.md:95:165    - Unknown word (mylibrary)  -- unignores `node_modules/mylibrary`:
 docs/src/use/configure/language-options-deprecated.md:38:4      - Unknown word (prototypejs) -- - `prototypejs` - Prototype.js global
 docs/src/use/configure/language-options-deprecated.md:42:4      - Unknown word (applescript) -- - `applescript` - AppleScript global
 docs/src/use/configure/language-options-deprecated.md:43:22     - Unknown word (Nashorn)     -- `nashorn` - Java 8 Nashorn global variables.
@@ -201,9 +201,9 @@ docs/src/use/integrations.md:21:8      - Unknown word (Syntastic)  -- - [Syntast
 docs/src/use/integrations.md:23:13     - Unknown word (lspconfig)  -- - [nvim-lspconfig](https://github.com
 docs/src/use/integrations.md:23:8      - Unknown word (nvim)       -- - [nvim-lspconfig](https://github
 docs/src/use/integrations.md:25:11     - Unknown word (Flycheck)   -- - Emacs: [Flycheck](http://www.flycheck
-docs/src/use/migrate-to-10.0.0.md:104:13    - Unknown word (ruletester) -- ## <a name="ruletester-type-removed"></a> Removal
-docs/src/use/migrate-to-10.0.0.md:112:13    - Unknown word (lintmessage) -- ## <a name="lintmessage-nodetype-removed"><
-docs/src/use/migrate-to-10.0.0.md:112:25    - Unknown word (nodetype)    -- a name="lintmessage-nodetype-removed"></a> Removal
+docs/src/use/migrate-to-10.0.0.md:188:13    - Unknown word (ruletester) -- ## <a name="ruletester-type-removed"></a> Removal
+docs/src/use/migrate-to-10.0.0.md:317:13    - Unknown word (lintmessage) -- ## <a name="lintmessage-nodetype-removed"><
+docs/src/use/migrate-to-10.0.0.md:317:25    - Unknown word (nodetype)    -- a name="lintmessage-nodetype-removed"></a> Removal
 docs/src/use/migrate-to-8.0.0.md:231:20    - Unknown word (cliengine)  -- ## <a name="remove-cliengine"></a> The `CLIEngine
 docs/src/use/migrate-to-9.0.0.md:477:32    - Unknown word (getcomments) -- "removed-sourcecode-getcomments"></a> Removed `sourceCode
 docs/src/use/migrate-to-9.0.0.md:485:30    - Unknown word (currentsegments) -- name="removed-codepath-currentsegments"></a> Removed `CodePath
@@ -234,9 +234,9 @@ lib/languages/js/index.js:181:41    - Unknown word (FEENSTRA)   -- NO EVENT SHAL
 lib/linter/code-path-analysis/code-path-state.js:1246:37   - Unknown word (circuting)  -- path due to the short-circuting, so we are just seeding
 lib/linter/code-path-analysis/code-path-state.js:1725:14   - Unknown word (Segs)       -- const prevSegsOfLeavingSegment = [headOfLeav
 lib/linter/code-path-analysis/debug-helpers.js:109:41    - Unknown word (Graphvis)   -- can be visualized with Graphvis.
-lib/linter/linter.js:42:7      - Unknown word (jslang)     -- const jslang = require("../languages
-lib/rule-tester/rule-tester.js:1077:21   - Unknown word (Didnt)      -- function assertASTDidntChange(beforeAST, afterAST
+lib/rule-tester/rule-tester.js:1087:21   - Unknown word (Didnt)      -- function assertASTDidntChange(beforeAST, afterAST
 lib/rule-tester/rule-tester.js:259:42    - Unknown word (errorize)   -- ast The root node to errorize `start`/`end` properties
+lib/rule-tester/rule-tester.js:35:7      - Unknown word (jslang)     -- const jslang = require("../languages
 lib/rules/dot-notation.js:163:21    - Unknown word (quasis)     -- node.property.quasis[0].value.cooked,
 lib/rules/for-direction.js:86:62     - Unknown word (nochange)   -- if sub return -1, if nochange, return 0
 lib/rules/func-name-matching.js:13:7      - Unknown word (esutils)    -- const esutils = require("esutils"
@@ -276,9 +276,9 @@ lib/rules/use-isnan.js:142:13    - Unknown word (Suggestable) -- const isSuggest
 lib/rules/utils/ast-utils.js:433:34    - Unknown word (samely)     -- a.b` and `a?.b` are samely.
 lib/services/processor-service.js:87:5      - Unknown word (Postprocesses) -- * Postprocesses the given messages synchronou
 lib/shared/text-table.js:36:8      - Unknown word (hsep)       -- const hsep = "  ";
-package.json:150:7     - Unknown word (trunkio)    -- "@trunkio/launcher": "^1.3.4"
-package.json:169:6     - Unknown word (eslump)     -- "eslump": "^3.0.0",
-package.json:182:6     - Unknown word (metascraper) -- "metascraper": "^5.25.7",
+package.json:148:7     - Unknown word (trunkio)    -- "@trunkio/launcher": "^1.3.4"
+package.json:167:6     - Unknown word (eslump)     -- "eslump": "^3.0.0",
+package.json:180:6     - Unknown word (metascraper) -- "metascraper": "^5.25.7",
 package.json:63:20     - Unknown word (attw)       -- "lint:types": "attw --pack",
 templates/blogpost.md.ejs:18:10     - Unknown word (linkify)    -- function linkify(line) {
 tests/bin/eslint.js:507:36    - Unknown word (eslintsuppressions) -- SUPPRESSIONS_PATH = ".temp-eslintsuppressions";
@@ -292,22 +292,16 @@ tests/fixtures/config-hierarchy/file-structure.json:64:18     - Unknown word (su
 tests/fixtures/parsers/arrow-parens/identifier-type.js:323:17    - Unknown word (binop)      -- binop: null,
 tests/fixtures/parsers/typescript-parsers/declare-class.js:4:14      - Unknown word (astexplorer) -- * Parsed on astexplorer.net using @typescript
 tests/fixtures/rules/indent-legacy/indent-invalid-fixture-1.js:440:40    - Unknown word (youll)      -- terribly long description youll ' +
-tests/lib/cli-engine/cli-engine.js:2054:46   - Unknown word (fixmode)    -- fixtureDir, `${fixtureDir}/fixmode`),
-tests/lib/cli-engine/cli-engine.js:476:19    - Unknown word (layou)      -- fixTypes: ["layou"],
-tests/lib/cli-engine/cli-engine.js:5511:41   - Unknown word (sampleignorepattern) -- eslintignore` includes `sampleignorepattern`.
-tests/lib/cli-engine/cli-engine.js:6076:39   - Unknown word (somenamespace)       -- engine.getFormatter("@somenamespace/foo");
-tests/lib/cli-engine/cli-engine.js:6094:51   - Unknown word (doesntexist)         -- getFixturePath("formatters", "doesntexist.js"),
-tests/lib/cli-engine/cli-engine.js:720:26    - Unknown word (foothis)    -- output: "var bar = foothis is a syntax error."
-tests/lib/cli-engine/cli-engine.js:7776:81   - Unknown word (myconf)              -- config node_modules/myconf/.eslintrc.json',",
-tests/lib/cli-engine/cli-engine.js:8040:46   - Unknown word (extendees)           -- config file and linear extendees.", () => {
 tests/lib/cli-engine/formatters/html.js:799:42    - Unknown word (apos)       -- Unexpected &lt;&amp;&quot;&apos;&gt; foo.",
-tests/lib/cli.js:2770:38   - Unknown word (oldx)          -- = `--flag test_only_oldx --config ${configPath
-tests/lib/cli.js:483:12    - Unknown word (fakeformatter) -- `-f fakeformatter ${filePath} ${flag}
+tests/lib/cli.js:1973:37   - Unknown word (oldx)          -- = `--flag test_only_oldx --config ${configPath
+tests/lib/cli.js:311:11    - Unknown word (fakeformatter) -- `-f fakeformatter ${filePath} --no-config
 tests/lib/config/flat-config-array.js:1932:17   - Unknown word (truex)       -- foo: "truex",
 tests/lib/config/flat-config-array.js:222:19    - Unknown word (noniterable) -- it("should allow noniterable baseConfig objects"
 tests/lib/config/flat-config-array.js:2534:9    - Unknown word (foox)        -- foox: [1, "bar"],
 tests/lib/config/flat-config-array.js:2560:10   - Unknown word (doesnt)      -- "doesnt-exist/match": "error
-tests/lib/eslint/eslint.js:11469:19  - Unknown word (dignore)      -- cwd: `${root}-dignore`,
+tests/lib/eslint/eslint.js:1046:25   - Unknown word (foothis)    -- output: "var bar = foothis is a syntax error."
+tests/lib/eslint/eslint.js:11469:19  - Unknown word (dignore)       -- cwd: `${root}-dignore`,
+tests/lib/eslint/eslint.js:11731:81  - Unknown word (myconf)        -- config node_modules/myconf/eslint.config.js',"
 tests/lib/eslint/eslint.js:12496:10  - Unknown word (multitreading) -- // No multitreading expected because all
 tests/lib/eslint/eslint.js:12561:8   - Unknown word (Multitreading) -- // Multitreading expected because files
 tests/lib/eslint/eslint.js:14870:81  - Unknown word (unerasable)    -- of an ESM module with unerasable TypeScript syntax",
@@ -316,21 +310,21 @@ tests/lib/eslint/eslint.js:2505:42   - Unknown word (doesnotexist) -- lintFiles(
 tests/lib/eslint/eslint.js:2589:46   - Unknown word (doesexist)    -- await eslint.lintFiles(["doesexist/*.js"]);
 tests/lib/eslint/eslint.js:3345:62   - Unknown word (unignoring)   -- unignored without also unignoring all files in them",
 tests/lib/eslint/eslint.js:3358:26   - Unknown word (jsfmt)        -- "!tests/format/**/jsfmt.spec.js",
+tests/lib/eslint/eslint.js:4277:46   - Unknown word (fixmode)      -- fixtureDir, `${fixtureDir}/fixmode`),
 tests/lib/eslint/eslint.js:7395:23   - Unknown word (mcts)         -- "eslint.config.mcts": configFileContent
-tests/lib/eslint/legacy-eslint.js:3968:27   - Unknown word (previos)    -- make sure that the previos assertion checks the
-tests/lib/eslint/legacy-eslint.js:4050:47   - Unknown word (intenationally) -- cacheFilePath, "[]"); // intenationally invalid to additionally
+tests/lib/eslint/eslint.js:9003:19   - Unknown word (layou)        -- fixTypes: ["layou"],
+tests/lib/eslint/eslint.js:9661:51   - Unknown word (somenamespace) -- engine.loadFormatter("@somenamespace/foo");
+tests/lib/eslint/eslint.js:9683:6    - Unknown word (doesntexist)   -- "doesntexist.js",
 tests/lib/linter/file-report.js:669:13    - Unknown word (fooo)       -- text: "fooo\nbar",
 tests/lib/linter/file-report.js:722:15    - Unknown word (ncdar)      -- text: "o\ncdar",
-tests/lib/linter/linter.js:3614:1    - Unknown word (consolexlog) -- consolexlog("test2");
-tests/lib/linter/linter.js:3771:75   - Unknown word (rulename)    -- this is 2, since the rulename is very likely to be
-tests/lib/linter/linter.js:7992:13   - Unknown word (postprocessors) -- describe("postprocessors", () => {
+tests/lib/linter/linter.js:10381:13  - Unknown word (postprocessors) -- describe("postprocessors", () => {
+tests/lib/linter/linter.js:5345:1    - Unknown word (consolexlog) -- consolexlog("test2");
 tests/lib/linter/rules.js:29:20     - Unknown word (michaelficarra) -- const ruleId = "michaelficarra";
 tests/lib/linter/source-code-fixer.js:63:13     - Unknown word (removestart) -- message: "removestart",
 tests/lib/linter/source-code-fixer.js:70:13     - Unknown word (removemiddle) -- message: "removemiddle",
 tests/lib/linter/source-code-fixer.js:77:13     - Unknown word (removeend)    -- message: "removeend",
-tests/lib/options.js:377:18    - Unknown word (morerules)  -- "--rulesdir /morerules",
-tests/lib/rule-tester/rule-tester.js:3975:13   - Unknown word (outpt)      -- outpt: "var baz;",
-tests/lib/rule-tester/rule-tester.js:5158:12   - Unknown word (Subclassing) -- describe("Subclassing", () => {
+tests/lib/rule-tester/rule-tester.js:4026:13   - Unknown word (outpt)      -- outpt: "var baz;",
+tests/lib/rule-tester/rule-tester.js:5209:12   - Unknown word (Subclassing) -- describe("Subclassing", () => {
 tests/lib/rules/array-bracket-spacing.js:74:69     - Unknown word (n'quxx)     -- { 'bar': 'baz' }], \n'quxx': 1 \n}]",
 tests/lib/rules/array-element-newline.js:42:72     - Unknown word (nosomething) -- ,\nfunction bar() {\nosomething();\n}\n];",
 tests/lib/rules/arrow-body-style.js:27:32     - Unknown word (nretv)      -- = (retv, name) => {\nretv[name] = true;\nreturn
@@ -363,7 +357,7 @@ tests/lib/rules/indent-legacy.js:899:34    - Unknown word (xfilter)    -- functi
 tests/lib/rules/indent.js:3080:15   - Unknown word (curlies)    -- // Template curlies
 tests/lib/rules/indent.js:3741:30   - Unknown word (foop)       -- var x = function foop(bar)
 tests/lib/rules/indent.js:423:17    - Unknown word (lmnn)       -- lmnn = [{
-tests/lib/rules/key-spacing.js:888:39    - Unknown word (longlonglong) -- 'bar' : 2, baz : 3, longlonglong : 4",
+tests/lib/rules/key-spacing.js:887:39    - Unknown word (longlonglong) -- 'bar' : 2, baz : 3, longlonglong : 4",
 tests/lib/rules/line-comment-position.js:44:14     - Unknown word (Meep)       -- code: "// Meep\nconsole.log('Meep'
 tests/lib/rules/no-cond-assign.js:263:24    - Unknown word (bkufyydt)   -- code: "(((3496.29)).bkufyydt = 2e308) ? foo : bar
 tests/lib/rules/no-console.js:41:27     - Unknown word (myconsole)  -- var console = require('myconsole'); console.log(foo)
@@ -423,7 +417,7 @@ tests/lib/rules/utils/ast-utils.js:1315:8    - Unknown word (ncde)       -- "ab\
 tests/lib/rules/utils/ast-utils.js:2092:10   - Unknown word (invalidtoken) -- [["123invalidtoken", "("], false],
 tests/lib/rules/valid-typeof.js:98:31     - Unknown word (umdefined)  -- if (typeof bar === 'umdefined') {}",
 tests/lib/shared/string-utils.js:40:6      - Unknown word (uppercases) -- it("uppercases the first letter of
-tests/lib/types/types.test.ts:1070:7    - Unknown word (eslinter)   -- const eslinter = new ESLinter();
+tests/lib/types/types.test.ts:1053:7    - Unknown word (eslinter)   -- const eslinter = new ESLinter();
 tests/performance/jshint.js:10347:35  - Unknown word (Ashkenas)                 -- c) 2009-2013 Jeremy Ashkenas, DocumentCloud Inc.
 tests/performance/jshint.js:10491:15  - Unknown word (foldl)                    -- // or `foldl`. Delegates to **ECMAScript
 tests/performance/jshint.js:10533:67  - Unknown word (foldr)                    -- reduce, also known as `foldr`.

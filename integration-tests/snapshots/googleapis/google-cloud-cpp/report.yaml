@@ -3,9 +3,9 @@ Repository: googleapis/google-cloud-cpp
 Url: https://github.com/googleapis/google-cloud-cpp.git
 Args: '["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]'
 Summary:
-  files: 20952
+  files: 20955
   filesWithIssues: 7958
-  issues: 45740
+  issues: 45736
   errors: 0
 Errors: []
 
@@ -485,9 +485,9 @@ issues:
   - "google/cloud/bigtable/benchmarks/random_mutation.cc:31:8        ABCDEFGHIJLKMNOPQRSTUVWXY       U       \"ABCDEFGHIJLKMNOPQRSTUVWXYZabcdefghijlkmnopqrstuvwxyz"
   - "google/cloud/bigtable/benchmarks/random_mutation.cc:31:33       Zabcdefghijlkmnopqrstuvwxyz     U       ABCDEFGHIJLKMNOPQRSTUVWXYZabcdefghijlkmnopqrstuvwxyz0123456789-/_\");"
   - "google/cloud/bigtable/benchmarks/scan_async_throughput_benchmark.cc:105:34      lprofiler       U       copt=-g --linkopt='-lprofiler' \\"
-  - "google/cloud/bigtable/bigtable_client_unit_tests.bzl:99:12          readmodifywriterow      U       \"table_readmodifywriterow_test.cc\","
-  - "google/cloud/bigtable/bigtable_client_unit_tests.bzl:100:12         readrow                 U       \"table_readrow_test.cc\","
-  - "google/cloud/bigtable/bigtable_client_unit_tests.bzl:101:12         readrows                U       \"table_readrows_test.cc\","
+  - "google/cloud/bigtable/bigtable_client_unit_tests.bzl:100:12         readmodifywriterow      U       \"table_readmodifywriterow_test.cc\","
+  - "google/cloud/bigtable/bigtable_client_unit_tests.bzl:101:12         readrow                 U       \"table_readrow_test.cc\","
+  - "google/cloud/bigtable/bigtable_client_unit_tests.bzl:102:12         readrows                U       \"table_readrows_test.cc\","
   - "google/cloud/bigtable/BUILD.bazel:135:22        readrowsparser      U       name = \"internal_readrowsparser_test\","
   - "google/cloud/bigtable/client_options_test.cc:311:28         Grpclb      U       ClientOptionsTest, SetGrpclbFallbackTimeoutMS) {"
   - "google/cloud/bigtable/client_options_test.cc:319:44         GRPCLB      U       hannelArgument(args, GRPC_ARG_GRPCLB_FALLBACK_TIMEOUT_MS"
@@ -501,7 +501,7 @@ issues:
   - "google/cloud/bigtable/internal/async_row_reader_test.cc:475:37      Doesnt (Doesn't)    U       AsyncRowReaderTest, ParserEofDoesntFailOnUnfinishedRowIfRowLimit"
   - "google/cloud/bigtable/internal/async_row_reader.cc:80:31        cntr    U       explicit CountFrames(int& cntr) : cntr(++cntr) {}"
   - "google/cloud/bigtable/internal/bulk_mutator_test.cc:675:37      Retryable       U       BulkMutatorTest, ReportEitherRetryableMutationFailOrStreamFail"
-  - "google/cloud/bigtable/internal/data_connection_impl.cc:670:24       satisying       U       // sure of that, satisying the `promise<>` is deferred"
+  - "google/cloud/bigtable/internal/data_connection_impl.cc:698:24       satisying       U       // sure of that, satisying the `promise<>` is deferred"
   - "google/cloud/bigtable/internal/legacy_async_row_reader_test.cc:144:22       corresponse     U       * Future at idx i corresponse to i-th expected row"
   - "google/cloud/bigtable/internal/legacy_async_row_reader_test.cc:552:66       noooo           U       PERMISSION_DENIED, \"noooo\");"
   - "google/cloud/bigtable/internal/legacy_row_reader_test.cc:89:14          preconfigured       U       // Returns a preconfigured set of parsers, so expectatio"
@@ -1056,6 +1056,6 @@ issues:
   - "release/howto-update-conan-package.md:73:51         agan            U       io. Run the command agan if needed."
   - "release/howto-update-conan-package.md:119:30        conandata       U       google-cloud-cpp/2.x/conandata.yml"
   - "release/howto-update-conan-package.md:120:30        conanfile       U       google-cloud-cpp/2.x/conanfile.py"
-  - "release/README.md:236:29        vckpkg      U       Get to your clone of vckpkg"
-  - "release/README.md:285:110       portfile    U       ports/google-cloud-cpp/portfile.cmake"
+  - "release/README.md:238:29        vckpkg      U       Get to your clone of vckpkg"
+  - "release/README.md:287:110       portfile    U       ports/google-cloud-cpp/portfile.cmake"
   - "SECURITY.md:3:46        vulnz       U       issue, please use [g.co/vulnz](https://g.co/vulnz"
