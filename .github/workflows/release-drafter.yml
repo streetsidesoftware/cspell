@@ -111,6 +111,7 @@ jobs:
           body: |
             ${{ steps.body.outputs.body }}
           token: ${{ secrets.GITHUB_TOKEN }}
+          sign-commits: true # Sign commits made by the action
 
   # event-info:
   #   runs-on: ubuntu-latest
