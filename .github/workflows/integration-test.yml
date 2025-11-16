@@ -311,3 +311,4 @@ jobs:
           title: 'chore: ${{ steps.pr-body.outputs.title }}'
           body: ${{ steps.pr-body.outputs.body }}
           token: ${{ secrets.GITHUB_TOKEN }}
+          sign-commits: true # Sign commits made by the action

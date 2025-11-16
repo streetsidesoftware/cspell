@@ -49,11 +49,11 @@ jobs:
       REF_BRANCH: ${{ inputs.base }}
 
     steps:
-      - name: Input
-        env:
-          INPUT: ${{ toJSON(inputs) }}
-        run: |
-          echo "$INPUT"
+      # - name: Input
+      #   env:
+      #     INPUT: ${{ toJSON(inputs) }}
+      #   run: |
+      #     echo "$INPUT"
 
       - name: Checkout
         uses: actions/checkout@v5
@@ -75,43 +75,21 @@ jobs:
         run: |
           git apply --allow-empty temp/${{ inputs.patch_path }}
 
-      - name: Has changes
-        run: |
-          git --no-pager diff --compact-summary  --exit-code && echo "git_status=clean" >> $GITHUB_ENV || echo "git_status=dirty" >> $GITHUB_ENV
-          git --no-pager diff --compact-summary
-
-      - name: Gen Body
-        env:
-          BODY: ${{ inputs.body }}
-        run: |
-          echo 'git_body<<DIFF' >> $GITHUB_ENV
-          echo "$BODY" >> $GITHUB_ENV
-          git --no-pager diff --compact-summary >> $GITHUB_ENV
-          echo 'DIFF' >> $GITHUB_ENV
-
-      - name: Echo git_status
-        run: echo "${{ env.git_status }}"
-
-      - name: Body
-        run: |
-          echo "$git_body"
-
-      - uses: tibdex/github-app-token@3beb63f4bd073e61482598c45c71c1019b59b73a # v2.1.0
-        # cspell:ignore tibdex
-        if: env.git_status == 'dirty'
-        id: generate-token
+      - name: PR Body
+        id: body
+        uses: streetsidesoftware/actions/public/pr-body@v1
         with:
-          app_id: ${{ secrets.app_id }}
-          private_key: ${{ secrets.private_key }}
+          title: ${{ inputs.title }}
+          message: |
+            ${{ inputs.commit-message }}
 
       - name: Create Pull Request
-        if: env.git_status == 'dirty'
-        uses: peter-evans/create-pull-request@67ccf781d68cd99b580ae25a5c18a1cc84ffff1f # v4
+        uses: streetsidesoftware/actions/.github/actions/pr@v1
         with:
           commit-message: ${{ inputs.commit-message }}
           branch: ${{ inputs.branch }}
           base: ${{ inputs.base }}
           title: ${{ inputs.title || inputs.commit-message }}
-          token: ${{ steps.generate-token.outputs.token }}
-          body: ${{ env.git_body }}
-          delete-branch: true
+          body: ${{ steps.body.outputs.body }}
+          app_id: ${{ secrets.app_id }}
+          app_private_key: ${{ secrets.private_key }}
