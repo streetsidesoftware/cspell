@@ -469,10 +469,10 @@ flake.nix:12:31     - Unknown word (pkgs)       -- devShells = forEachSystem (pk
 flake.nix:16:16     - Unknown word (luajit)     -- pkgs.luajitPackages.vusted
 flake.nix:16:31     - Unknown word (vusted)     -- pkgs.luajitPackages.vusted
 lsp/ada_ls.lua:29:51     - Unknown word (alire)      -- Makefile', '.git', 'alire.toml', '*.gpr', '*.adc
-lsp/angularls.lua:27:27     - Unknown word (exepath)    -- local ngserver_exe = fn.exepath('ngserver')
-lsp/angularls.lua:29:11     - Unknown word (realpath)   -- local realpath = uv.fs_realpath(ngserver
-lsp/angularls.lua:36:31     - Unknown word (globpath)   -- internal_servers = fn.globpath(fn.stdpath('data'),
-lsp/angularls.lua:69:57     - Unknown word (getcwd)     -- config.root_dir) or fn.getcwd()
+lsp/angularls.lua:39:32     - Unknown word (readblob)   -- content = pcall(fn.readblob, cmd_path)
+lsp/angularls.lua:62:27     - Unknown word (exepath)    -- local ngserver_exe = fn.exepath('ngserver')
+lsp/angularls.lua:64:11     - Unknown word (realpath)   -- local realpath = uv.fs_realpath(ngserver
+lsp/angularls.lua:95:57     - Unknown word (getcwd)     -- config.root_dir) or fn.getcwd()
 lsp/apex_ls.lua:44:9      - Unknown word (Ddebug)     -- '-Ddebug.internal.errors=true
 lsp/apex_ls.lua:47:14     - Unknown word (typegeneration) -- '-Dlwc.typegeneration.disabled=true',
 lsp/apex_ls.lua:47:9      - Unknown word (Dlwc)       -- '-Dlwc.typegeneration.disabled
@@ -485,10 +485,10 @@ lsp/docker_language_server.lua:14:33     - Unknown word (ftype)      -- language
 lsp/docker_language_server.lua:16:15     - Unknown word (dockercompose) -- return 'dockercompose'
 lsp/elmls.lua:15:11     - Unknown word (ashkan)     -- -- TODO(ashkan) if we comment this
 lsp/eslint.lua:174:23    - Unknown word (fnamemodify) -- name = vim.fn.fnamemodify(root_dir, ':t'),
+lsp/eslint.lua:184:36    - Unknown word (globpath)    -- found_files = vim.fn.globpath(root_dir, file, true
 lsp/fennel_ls.lua:17:13     - Unknown word (fnlpath)    -- local fnlpath = vim.fs.joinpath(path
 lsp/gh_actions_ls.lua:26:11     - Unknown word (endswith)   -- vim.endswith(parent, '/.github/workflows
 lsp/gh_actions_ls.lua:39:17     - Unknown word (filereadable) -- if vim.fn.filereadable(file_path) == 1 then
-lsp/gitlab_duo.lua:124:23    - Unknown word (readblob)   -- local blob = vim.fn.readblob(config.token_file)
 lsp/gopls.lua:48:34     - Unknown word (GOROOT)     -- go_dir({ envvar_id = 'GOROOT', custom_subdir = '
 lsp/gopls.lua:62:34     - Unknown word (GOMODCACHE) -- go_dir({ envvar_id = 'GOMODCACHE' }, function(dir)
 lsp/graphql.lua:21:32     - Unknown word (graphqlrc)  -- util.root_pattern('.graphqlrc*', '.graphql.config
@@ -517,10 +517,10 @@ lsp/termux_language_server.lua:19:8      - Unknown word (makepkg)    -- 'makepkg
 lsp/termux_language_server.lua:25:10     - Unknown word (eclass)     -- '*.eclass',
 lsp/texlab.lua:43:14     - Unknown word (Unconfigured) -- [3] = 'Unconfigured',
 lsp/textlsp.lua:23:67     - Unknown word (enaled)     -- page. LanguageTool is enaled here
-lsp/ts_ls.lua:115:16    - Unknown word (botright)   -- vim.cmd('botright copen')
-lsp/ts_ls.lua:115:25    - Unknown word (copen)      -- vim.cmd('botright copen')
-lsp/ts_ls.lua:123:20    - Unknown word (startswith) -- return vim.startswith(action, 'source.')
-lsp/ts_ls.lua:97:14     - Unknown word (setqflist)  -- vim.fn.setqflist({}, ' ', {
+lsp/ts_ls.lua:113:16    - Unknown word (botright)   -- vim.cmd('botright copen')
+lsp/ts_ls.lua:113:25    - Unknown word (copen)      -- vim.cmd('botright copen')
+lsp/ts_ls.lua:121:20    - Unknown word (startswith) -- return vim.startswith(action, 'source.')
+lsp/ts_ls.lua:95:14     - Unknown word (setqflist)  -- vim.fn.setqflist({}, ' ', {
 lsp/ts_query_ls.lua:22:4      - Unknown word (ftplugin)   -- -- ftplugin is sourced.
 lsp/ts_query_ls.lua:41:17     - Unknown word (omnifunc)   -- vim.bo[buf].omnifunc = 'v:lua.vim.lsp.omnifunc
 lsp/yamlls.lua:77:9      - Unknown word (autocmd's)  -- --- autocmd's which check this capability
