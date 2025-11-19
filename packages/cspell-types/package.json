@@ -52,7 +52,7 @@
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "build": "pnpm build:tsc && pnpm build:tsdown && pnpm run build-schema",
     "build:tsc": "tsc -p tsconfig.json",
-    "build:tsdown": "tsdown --entry src/index.ts --entry src/Parser/index.ts --format cjs,esm  --dts --out-dir dist",
+    "build:tsdown": "tsdown",
     "build-schema": "pnpm build-cspell-schema",
     "clean-build": "pnpm run clean && pnpm run build",
     "coverage": "vitest run --coverage",

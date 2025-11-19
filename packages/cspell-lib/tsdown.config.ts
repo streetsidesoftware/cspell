@@ -7,6 +7,7 @@ export default defineConfig([
         outDir: 'api',
         format: ['esm'],
         dts: { emitDtsOnly: true, sourcemap: false, resolve: true /* dtsInput: true */ },
+        fixedExtension: false,
         sourcemap: 'hidden',
         clean: true,
     },
