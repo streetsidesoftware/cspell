@@ -857,8 +857,8 @@ importers:
         specifier: workspace:*
         version: link:../cspell-trie-lib
       glob:
-        specifier: ^10.4.5
-        version: 10.4.5
+        specifier: ^10.5.0
+        version: 10.5.0
       hunspell-reader:
         specifier: workspace:*
         version: link:../hunspell-reader
@@ -6641,8 +6641,17 @@ packages:
     resolution: {integrity: sha512-7Bv8RF0k6xjo7d4A/PxYLbUCfb6c+Vpd2/mB2yRDlew7Jb5hEXiCD9ibfO7wpk8i4sevK6DFny9h7EYbM3/sHg==}
     hasBin: true
 
+  glob@10.5.0:
+    resolution: {integrity: sha512-DfXN8DfhJ7NH3Oe7cFmu3NCu1wKbkReJ8TorzSAFbSKrlNaQSKfIzqYqVY8zlbs2NLBbWpRiU52GX2PbaBVNkg==}
+    hasBin: true
+
   glob@11.0.3:
     resolution: {integrity: sha512-2Nim7dha1KVkaiF4q6Dj+ngPPMdfvLJEOpZk/jKiUAkqKebpGAWQXAq9z1xu9HKu5lWfqw/FASuccEjyznjPaA==}
+    engines: {node: 20 || >=22}
+    hasBin: true
+
+  glob@11.1.0:
+    resolution: {integrity: sha512-vuNwKSaKiqm7g0THUBu2x7ckSs3XJLXE+2ssL7/MfTGPLLcrJQ/4Uq1CjPTtO5cCIiRxqvN6Twy1qOwhL0Xjcw==}
     engines: {node: 20 || >=22}
     hasBin: true
 
@@ -13857,7 +13866,7 @@ snapshots:
   '@npmcli/map-workspaces@3.0.6':
     dependencies:
       '@npmcli/name-from-folder': 2.0.0
-      glob: 10.4.5
+      glob: 10.5.0
       minimatch: 9.0.5
       read-package-json-fast: 3.0.2
 
@@ -13865,7 +13874,7 @@ snapshots:
     dependencies:
       '@npmcli/name-from-folder': 4.0.0
       '@npmcli/package-json': 7.0.2
-      glob: 11.0.3
+      glob: 11.1.0
       minimatch: 10.1.1
 
   '@npmcli/metavuln-calculator@9.0.3':
@@ -13891,7 +13900,7 @@ snapshots:
   '@npmcli/package-json@5.2.1':
     dependencies:
       '@npmcli/git': 5.0.8
-      glob: 10.4.5
+      glob: 10.5.0
       hosted-git-info: 7.0.2
       json-parse-even-better-errors: 3.0.2
       normalize-package-data: 6.0.2
@@ -13903,7 +13912,7 @@ snapshots:
   '@npmcli/package-json@7.0.2':
     dependencies:
       '@npmcli/git': 7.0.1
-      glob: 11.0.3
+      glob: 11.1.0
       hosted-git-info: 9.0.2
       json-parse-even-better-errors: 5.0.0
       proc-log: 6.0.0
@@ -15437,7 +15446,7 @@ snapshots:
     dependencies:
       '@npmcli/fs': 4.0.0
       fs-minipass: 3.0.3
-      glob: 11.0.3
+      glob: 11.1.0
       lru-cache: 11.2.2
       minipass: 7.1.2
       minipass-collect: 2.0.1
@@ -17332,7 +17341,25 @@ snapshots:
       package-json-from-dist: 1.0.1
       path-scurry: 1.11.1
 
+  glob@10.5.0:
+    dependencies:
+      foreground-child: 3.3.1
+      jackspeak: 3.4.3
+      minimatch: 9.0.5
+      minipass: 7.1.2
+      package-json-from-dist: 1.0.1
+      path-scurry: 1.11.1
+
   glob@11.0.3:
+    dependencies:
+      foreground-child: 3.3.1
+      jackspeak: 4.1.1
+      minimatch: 10.1.1
+      minipass: 7.1.2
+      package-json-from-dist: 1.0.1
+      path-scurry: 2.0.1
+
+  glob@11.1.0:
     dependencies:
       foreground-child: 3.3.1
       jackspeak: 4.1.1
@@ -21249,7 +21276,7 @@ snapshots:
     dependencies:
       '@jridgewell/gen-mapping': 0.3.13
       commander: 4.1.1
-      glob: 10.4.5
+      glob: 10.5.0
       lines-and-columns: 1.2.4
       mz: 2.7.0
       pirates: 4.0.7
@@ -21671,7 +21698,7 @@ snapshots:
       concat-stream: 2.0.0
       debug: 4.4.3(supports-color@8.1.1)
       extend: 3.0.2
-      glob: 10.4.5
+      glob: 10.5.0
       ignore: 6.0.2
       is-empty: 1.2.0
       is-plain-obj: 4.1.0
