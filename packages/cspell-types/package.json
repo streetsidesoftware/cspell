@@ -8,16 +8,16 @@
   "description": "Types for cspell and cspell-lib",
   "type": "commonjs",
   "sideEffects": false,
-  "main": "./dist/index.js",
+  "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
+      "require": "./dist/index.cjs"
     },
     "./Parser": {
       "import": "./dist/Parser/index.mjs",
-      "require": "./dist/Parser/index.js"
+      "require": "./dist/Parser/index.cjs"
     },
     "./cspell.schema.json": {
       "import": "./cspell.schema.json",
@@ -28,23 +28,23 @@
   "typesVersions": {
     "*": {
       "*.d.ts": [
-        "dist/*.d.ts"
+        "dist/*.d.cts"
       ],
       "*.d.mts": [
         "dist/*.d.mts"
       ],
       "index.d.ts": [
-        "dist/index.d.ts"
+        "dist/index.d.cts"
       ],
       "dist/index.d.ts": [
-        "dist/index.d.ts"
+        "dist/index.d.cts"
       ],
       "Parser": [
-        "dist/Parser/index.d.ts"
+        "dist/Parser/index.d.cts"
       ],
       "*": [
-        "dist/*.d.ts",
-        "dist/*/index.d.ts"
+        "dist/*.d.cts",
+        "dist/*/index.d.cts"
       ]
     }
   },
