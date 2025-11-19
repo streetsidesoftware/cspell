@@ -8,16 +8,16 @@
   "description": "Types for cspell and cspell-lib",
   "type": "commonjs",
   "sideEffects": false,
-  "main": "./dist/index.cjs",
+  "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "exports": {
     ".": {
       "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
+      "require": "./dist/index.js"
     },
     "./Parser": {
       "import": "./dist/Parser/index.mjs",
-      "require": "./dist/Parser/index.cjs"
+      "require": "./dist/Parser/index.js"
     },
     "./cspell.schema.json": {
       "import": "./cspell.schema.json",
@@ -28,23 +28,23 @@
   "typesVersions": {
     "*": {
       "*.d.ts": [
-        "dist/*.d.cts"
+        "dist/*.d.ts"
       ],
       "*.d.mts": [
         "dist/*.d.mts"
       ],
       "index.d.ts": [
-        "dist/index.d.cts"
+        "dist/index.d.ts"
       ],
       "dist/index.d.ts": [
-        "dist/index.d.cts"
+        "dist/index.d.ts"
       ],
       "Parser": [
-        "dist/Parser/index.d.cts"
+        "dist/Parser/index.d.ts"
       ],
       "*": [
-        "dist/*.d.cts",
-        "dist/*/index.d.cts"
+        "dist/*.d.ts",
+        "dist/*/index.d.ts"
       ]
     }
   },
@@ -52,7 +52,7 @@
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "build": "pnpm build:tsc && pnpm build:tsdown && pnpm run build-schema",
     "build:tsc": "tsc -p tsconfig.json",
-    "build:tsdown": "tsdown --entry src/index.ts --entry src/Parser/index.ts --format cjs,esm  --dts --out-dir dist",
+    "build:tsdown": "tsdown",
     "build-schema": "pnpm build-cspell-schema",
     "clean-build": "pnpm run clean && pnpm run build",
     "coverage": "vitest run --coverage",
