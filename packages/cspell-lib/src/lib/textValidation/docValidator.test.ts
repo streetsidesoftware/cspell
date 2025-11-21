@@ -277,18 +277,18 @@ describe('docValidator', () => {
 describe('shouldCheckDocument', () => {
     test.each`
         file                            | options                           | settings                                  | expected
-        ${'src/code.ts'}                | ${opts()}                         | ${s()}                                    | ${{shouldCheck: true}}
-        ${'src/code.ts'}                | ${opts({ noConfigSearch: true })} | ${s()}                                    | ${{shouldCheck: true}}
-        ${'src/code.ts'}                | ${opts()}                         | ${s({ noConfigSearch: true })}            | ${{shouldCheck: true}}
-        ${'src/code.ts'}                | ${opts()}                         | ${s({ loadDefaultConfiguration: false })} | ${{shouldCheck: true}}
-        ${'src/code.ts'}                | ${opts({ noConfigSearch: true })} | ${s({ loadDefaultConfiguration: false })} | ${{shouldCheck: true}}
-        ${'node_modules/mod/index.js'}  | ${opts()}                         | ${s()}                                    | ${{shouldCheck: false, reason: 'Excluded by ignorePaths.'}}
-        ${'node_modules/mod/index.js'}  | ${opts({ noConfigSearch: true })} | ${s()}                                    | ${{shouldCheck: true}}
-        ${'node_modules/mod/index.js'}  | ${opts()}                         | ${s({ noConfigSearch: true })}            | ${{shouldCheck: true}}
-        ${'node_modules/mod/index.js'}  | ${opts()}                         | ${s({ loadDefaultConfiguration: false })} | ${{shouldCheck: false, reason: 'Excluded by ignorePaths.'}}
-        ${'node_modules/mod/index.js'}  | ${opts({ noConfigSearch: true })} | ${s({ loadDefaultConfiguration: false })} | ${{shouldCheck: true}}
-        ${'node_modules/mod/index.jpg'} | ${opts()}                         | ${s({ loadDefaultConfiguration: false })} | ${{shouldCheck: false, reason: 'Excluded by ignorePaths.'}}
-        ${'node_modules/mod/index.jpg'} | ${opts()}                         | ${s({ loadDefaultConfiguration: true })}  | ${{shouldCheck: false, reason: 'Excluded by ignorePaths.'}}
+        ${'src/code.ts'}                | ${opts()}                         | ${s()}                                    | ${{ shouldCheck: true }}
+        ${'src/code.ts'}                | ${opts({ noConfigSearch: true })} | ${s()}                                    | ${{ shouldCheck: true }}
+        ${'src/code.ts'}                | ${opts()}                         | ${s({ noConfigSearch: true })}            | ${{ shouldCheck: true }}
+        ${'src/code.ts'}                | ${opts()}                         | ${s({ loadDefaultConfiguration: false })} | ${{ shouldCheck: true }}
+        ${'src/code.ts'}                | ${opts({ noConfigSearch: true })} | ${s({ loadDefaultConfiguration: false })} | ${{ shouldCheck: true }}
+        ${'node_modules/mod/index.js'}  | ${opts()}                         | ${s()}                                    | ${{ shouldCheck: false, reason: 'Excluded by ignorePaths.' }}
+        ${'node_modules/mod/index.js'}  | ${opts({ noConfigSearch: true })} | ${s()}                                    | ${{ shouldCheck: true }}
+        ${'node_modules/mod/index.js'}  | ${opts()}                         | ${s({ noConfigSearch: true })}            | ${{ shouldCheck: true }}
+        ${'node_modules/mod/index.js'}  | ${opts()}                         | ${s({ loadDefaultConfiguration: false })} | ${{ shouldCheck: false, reason: 'Excluded by ignorePaths.' }}
+        ${'node_modules/mod/index.js'}  | ${opts({ noConfigSearch: true })} | ${s({ loadDefaultConfiguration: false })} | ${{ shouldCheck: true }}
+        ${'node_modules/mod/index.jpg'} | ${opts()}                         | ${s({ loadDefaultConfiguration: false })} | ${{ shouldCheck: false, reason: 'Excluded by ignorePaths.' }}
+        ${'node_modules/mod/index.jpg'} | ${opts()}                         | ${s({ loadDefaultConfiguration: true })}  | ${{ shouldCheck: false, reason: 'Excluded by ignorePaths.' }}
         ${'src/code.ts'}                | ${opts({ configFile: '_nf_' })}   | ${s()}                                    | ${{ errors: [oc({ message: sc('Failed to') })], shouldCheck: true }}
     `(
         'shouldCheckDocument file: $file options: $options settings: $settings',
@@ -296,7 +296,7 @@ describe('shouldCheckDocument', () => {
             const uri = toUri(pathToFileURL(file));
             const result = await shouldCheckDocument({ uri }, options, settings);
             expect(result.settings).toBeDefined();
-            expect({ ...result, settings: undefined }).toEqual(oc({ errors:[], reason: undefined, ...expected}));
+            expect({ ...result, settings: undefined }).toEqual(oc({ errors: [], reason: undefined, ...expected }));
         },
     );
 });

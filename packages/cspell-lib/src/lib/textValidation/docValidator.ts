@@ -604,7 +604,7 @@ export async function shouldCheckDocument(
             return { errors, shouldCheck: false, settings: localConfig, reason: 'Excluded by ignorePaths.' };
         }
         const docSettings = await determineTextDocumentSettings(doc, config);
-        const shouldCheck = (docSettings.enabled ?? true);
+        const shouldCheck = docSettings.enabled ?? true;
         const reason = shouldCheck ? undefined : 'Excluded by overrides or languageSettings.';
         return { errors, shouldCheck, settings: docSettings, reason };
     }
