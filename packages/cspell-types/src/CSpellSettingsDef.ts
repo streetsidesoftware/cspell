@@ -279,6 +279,16 @@ export interface Settings extends ReportingConfiguration, BaseSetting, PnPSettin
      * @default true
      */
     loadDefaultConfiguration?: boolean;
+
+    /**
+     * The Maximum size of a file to spell check. This is used to prevent spell checking very large files.
+     *
+     * Special values:
+     * - `0` - has the effect of removing the limit.
+     *
+     * default: no limit
+     */
+    maxFileSize?: number | undefined;
 }
 
 /**

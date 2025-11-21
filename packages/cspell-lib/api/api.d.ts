@@ -427,6 +427,10 @@ interface ProgressFileComplete extends ProgressFileBase {
   */
   processed: boolean | undefined;
   /**
+  * Optional reason for skipping the file.
+  */
+  skippedReason?: string | undefined;
+  /**
   * Number of errors and issues found in the file.
   */
   numErrors: number | undefined;
@@ -1538,6 +1542,15 @@ interface Settings extends ReportingConfiguration, BaseSetting, PnPSettings, Spe
   * @default true
   */
   loadDefaultConfiguration?: boolean;
+  /**
+  * The Maximum size of a file to spell check. This is used to prevent spell checking very large files.
+  *
+  * Special values:
+  * - `0` - has the effect of removing the limit.
+  *
+  * default: no limit
+  */
+  maxFileSize?: number | undefined;
 }
 /**
 * Plug N Play settings to support package systems like Yarn 2.
@@ -3538,9 +3551,31 @@ interface Preparations {
   localConfigFilepath: string | undefined;
 }
 interface ShouldCheckDocumentResult {
+  /** possible errors found while loading configuration. */
   errors: Error[];
+  /**
+  * The calculated result:
+  * - `false` if the document should not be checked. Based upon the settings.
+  * - `true` if the document should be checked.
+  */
   shouldCheck: boolean;
+  /** final settings used to determine the result. */
+  settings: CSpellUserSettings;
+  /**
+  * The reason the document should not be checked.
+  */
+  reason?: string | undefined;
 }
+/**
+* Check if a document should be checked based upon the ignorePaths and override settings.
+*
+* This function will search and fetch settings based upon the location of the document if `noConfigSearch` is not true.
+*
+* @param doc - document to check
+* @param options - options to override some of the settings.
+* @param settings - current settings
+* @returns ShouldCheckDocumentResult
+*/
 declare function shouldCheckDocument(doc: TextDocumentRef, options: DocumentValidatorOptions, settings: CSpellUserSettings): Promise<ShouldCheckDocumentResult>;
 //#endregion
 //#region src/lib/textValidation/checkText.d.ts

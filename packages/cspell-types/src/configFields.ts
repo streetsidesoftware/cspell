@@ -35,6 +35,7 @@ export const ConfigFields: CSpellUserSettingsFields = {
     languageSettings: 'languageSettings',
     loadDefaultConfiguration: 'loadDefaultConfiguration',
     maxDuplicateProblems: 'maxDuplicateProblems',
+    maxFileSize: 'maxFileSize',
     maxNumberOfProblems: 'maxNumberOfProblems',
     minWordLength: 'minWordLength',
     minRandomLength: 'minRandomLength',

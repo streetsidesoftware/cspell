@@ -123,6 +123,14 @@ export interface LinterOptions
      * Path to configuration file.
      */
     config?: string | CSpellConfigFile;
+
+    /**
+     * Specify the maximum file size to be checked.
+     * The value can include a units suffix: `KB`, `MB`, `B`, `GB`.
+     * The numeric value can include a decimal.
+     * Example: 1.5MB
+     */
+    maxFileSize?: string | undefined;
 }
 
 export interface TraceOptions extends BaseOptions {

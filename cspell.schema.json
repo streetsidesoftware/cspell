@@ -1408,6 +1408,11 @@
           "markdownDescription": "The maximum number of times the same word can be flagged as an error in a file.",
           "type": "number"
         },
+        "maxFileSize": {
+          "description": "The Maximum size of a file to spell check. This is used to prevent spell checking very large files.\n\nSpecial values:\n- `0` - has the effect of removing the limit.\n\ndefault: no limit",
+          "markdownDescription": "The Maximum size of a file to spell check. This is used to prevent spell checking very large files.\n\nSpecial values:\n- `0` - has the effect of removing the limit.\n\ndefault: no limit",
+          "type": "number"
+        },
         "maxNumberOfProblems": {
           "default": 10000,
           "description": "The maximum number of problems to report in a file.",
@@ -1992,6 +1997,11 @@
       "default": 5,
       "description": "The maximum number of times the same word can be flagged as an error in a file.",
       "markdownDescription": "The maximum number of times the same word can be flagged as an error in a file.",
+      "type": "number"
+    },
+    "maxFileSize": {
+      "description": "The Maximum size of a file to spell check. This is used to prevent spell checking very large files.\n\nSpecial values:\n- `0` - has the effect of removing the limit.\n\ndefault: no limit",
+      "markdownDescription": "The Maximum size of a file to spell check. This is used to prevent spell checking very large files.\n\nSpecial values:\n- `0` - has the effect of removing the limit.\n\ndefault: no limit",
       "type": "number"
     },
     "maxNumberOfProblems": {
