@@ -287,6 +287,7 @@ export interface Settings extends ReportingConfiguration, BaseSetting, PnPSettin
      * - `0` - has the effect of removing the limit.
      *
      * default: no limit
+     * @since 9.4.0
      */
     maxFileSize?: number | undefined;
 }
