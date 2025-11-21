@@ -44,6 +44,7 @@ format: md
 | [languageSettings](#settings-languagesettings)                 | [`LanguageSetting`](#languagesetting)&ZeroWidthSpace;`[]`                 | Additional settings for individual languages.                                                                                                                        |
 | [loadDefaultConfiguration](#settings-loaddefaultconfiguration) | `boolean`                                                                 | By default, the bundled dictionary configurations are loaded. Explicitly setting this to `false`                                                                     |
 | [maxDuplicateProblems](#settings-maxduplicateproblems)         | `number`                                                                  | The maximum number of times the same word can be flagged as an error in a file.                                                                                      |
+| [maxFileSize](#settings-maxfilesize)                           | `number`                                                                  | The Maximum size of a file to spell check. This is used to prevent spell checking very large files.                                                                  |
 | [maxNumberOfProblems](#settings-maxnumberofproblems)           | `number`                                                                  | The maximum number of problems to report in a file.                                                                                                                  |
 | [minRandomLength](#settings-minrandomlength)                   | `number`                                                                  | The minimum length of a random string to be ignored.                                                                                                                 |
 | [minWordLength](#settings-minwordlength)                       | `number`                                                                  | The minimum length of a word before checking it against a dictionary.                                                                                                |
@@ -981,6 +982,40 @@ The maximum number of times the same word can be flagged as an error in a file.
 `number`
 
 </dd>
+
+</dl>
+
+
+
+
+---
+
+#### `maxFileSize` {#settings-maxfilesize}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+The Maximum size of a file to spell check. This is used to prevent spell checking very large files.
+
+Special values:
+- `0` - has the effect of removing the limit.
+
+default: no limit
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`number`
+
+</dd>
+
+<dt>Since</dt>
+<dd>9.4.0</dd>
 
 </dl>
 
@@ -6563,6 +6598,7 @@ This is a written language locale like: `en`, `en-GB`, `fr`, `es`, `de` or `en,f
 | [languageSettings](#overridesettings-languagesettings)                 | [`LanguageSetting`](#languagesetting)&ZeroWidthSpace;`[]`                 | Additional settings for individual languages.                                                                                                                        |
 | [loadDefaultConfiguration](#overridesettings-loaddefaultconfiguration) | `boolean`                                                                 | By default, the bundled dictionary configurations are loaded. Explicitly setting this to `false`                                                                     |
 | [maxDuplicateProblems](#overridesettings-maxduplicateproblems)         | `number`                                                                  | The maximum number of times the same word can be flagged as an error in a file.                                                                                      |
+| [maxFileSize](#overridesettings-maxfilesize)                           | `number`                                                                  | The Maximum size of a file to spell check. This is used to prevent spell checking very large files.                                                                  |
 | [maxNumberOfProblems](#overridesettings-maxnumberofproblems)           | `number`                                                                  | The maximum number of problems to report in a file.                                                                                                                  |
 | [minRandomLength](#overridesettings-minrandomlength)                   | `number`                                                                  | The minimum length of a random string to be ignored.                                                                                                                 |
 | [minWordLength](#overridesettings-minwordlength)                       | `number`                                                                  | The minimum length of a word before checking it against a dictionary.                                                                                                |
@@ -7228,6 +7264,40 @@ The maximum number of times the same word can be flagged as an error in a file.
 `number`
 
 </dd>
+
+</dl>
+
+
+
+
+---
+
+#### `maxFileSize` {#overridesettings-maxfilesize}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+The Maximum size of a file to spell check. This is used to prevent spell checking very large files.
+
+Special values:
+- `0` - has the effect of removing the limit.
+
+default: no limit
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`number`
+
+</dd>
+
+<dt>Since</dt>
+<dd>9.4.0</dd>
 
 </dl>
 
