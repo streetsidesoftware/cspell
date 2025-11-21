@@ -140,7 +140,8 @@ function reportProgressFileComplete(io: IO, p: ProgressFileComplete, cwd: URL, o
     const { idx, filename } = determineFilename(io, p, cwd);
     const { verbose, debug } = options;
     const time = reportTime(io, p.elapsedTimeMs, !!p.cached);
-    const skipped = p.processed === false ? ' skipped' : '';
+    const skippedReason = p.skippedReason ? ` (${p.skippedReason})` : '';
+    const skipped = p.processed === false ? ` skipped${skippedReason}` : '';
     const hasErrors = p.numErrors ? io.chalk.red` X` : '';
     const newLine =
         (skipped && (verbose || debug)) || hasErrors || isSlow(p.elapsedTimeMs) || io.getColorLevel() < 1 ? '\n' : '';

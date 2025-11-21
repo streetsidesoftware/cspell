@@ -270,6 +270,7 @@ export class LintReporter {
                 filename,
                 elapsedTimeMs: result.elapsedTimeMs,
                 processed: result.processed,
+                skippedReason: result.skippedReason,
                 numErrors: numIssues || result.errors,
                 cached: result.cached,
                 perf: result.perf,

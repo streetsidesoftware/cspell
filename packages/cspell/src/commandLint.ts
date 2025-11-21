@@ -7,6 +7,7 @@ import { DEFAULT_CACHE_LOCATION } from './util/cache/index.js';
 import { canUseColor } from './util/canUseColor.js';
 import { CheckFailed } from './util/errors.js';
 import { unindent } from './util/unindent.js';
+import { validateUnitSize } from './util/unitNumbers.js';
 
 // interface InitOptions extends Options {}
 
@@ -159,6 +160,7 @@ export function commandLint(prog: Command, opts: CommandOptions): Command {
         .option('--gitignore-root <path>', 'Prevent searching for .gitignore files past root.', collect)
         .option('--validate-directives', 'Validate in-document CSpell directives.')
         .addOption(crOpt('--no-validate-directives', 'Do not validate in-document CSpell directives.').hideHelp())
+        .option('--max-file-size <size>', 'Prevent checking large files. i.e 1MB, 50KB, 1GB')
         .addOption(crOpt('--color', 'Force color.').default(undefined))
         .addOption(crOpt('--no-color', 'Turn off color.').default(undefined))
         .addOption(crOpt('--default-configuration', 'Load the default configuration and dictionaries.').hideHelp())
@@ -181,30 +183,36 @@ export function commandLint(prog: Command, opts: CommandOptions): Command {
         .usage(usage)
         .addHelpText('after', augmentCommandHelp)
         .arguments('[globs...]')
-        .action(async (fileGlobs: string[], options: LinterCliOptions) => {
-            // console.error('lint: %o', { fileGlobs, options });
-            const useExitCode = options.exitCode ?? true;
-            if (options.skipValidation) {
-                options.cache = false;
-            }
-            options.color ??= canUseColor(options.color);
-            const { mustFindFiles, fileList, files, file } = options;
-            const result = await App.lint(fileGlobs, options);
-            if (!fileGlobs.length && !result.files && !result.errors && !fileList && !files?.length && !file?.length) {
-                spellCheckCommand.outputHelp();
-                throw new CheckFailed('outputHelp', 1);
-            }
-            if (result.errors || (mustFindFiles && !result.files)) {
-                throw new CheckFailed('check failed', 1);
-            }
-            if (result.issues) {
-                const exitCode = useExitCode ? 1 : 0;
-                throw new CheckFailed('check failed', exitCode);
-            }
-            return;
-        });
+        .action(action);
 
     return spellCheckCommand;
+}
+
+async function action(this: Command, fileGlobs: string[], options: LinterCliOptions) {
+    // console.error('lint: %o', { fileGlobs, options });
+    const useExitCode = options.exitCode ?? true;
+    if (options.skipValidation) {
+        options.cache = false;
+    }
+    options.color ??= canUseColor(options.color);
+    const maxFileSizeErr = validateMaxFileSize(options.maxFileSize);
+    if (maxFileSizeErr) {
+        this.error(`error: invalid option value for --max-file-size: ${maxFileSizeErr}`);
+    }
+    const { mustFindFiles, fileList, files, file } = options;
+    const result = await App.lint(fileGlobs, options);
+    if (!fileGlobs.length && !result.files && !result.errors && !fileList && !files?.length && !file?.length) {
+        this.outputHelp();
+        throw new CheckFailed('outputHelp', 1);
+    }
+    if (result.errors || (mustFindFiles && !result.files)) {
+        throw new CheckFailed('check failed', 1);
+    }
+    if (result.issues) {
+        const exitCode = useExitCode ? 1 : 0;
+        throw new CheckFailed('check failed', exitCode);
+    }
+    return;
 }
 
 function helpIssueTemplate(opts: LinterCliOptions): string {
@@ -265,4 +273,9 @@ function augmentCommandHelp(context: AddHelpTextContext) {
     }
     output.push(...hiddenHelp, advanced);
     return helpIssueTemplate(opts) + output.join('\n');
+}
+
+function validateMaxFileSize(size: string | undefined): string | undefined {
+    if (!size) return undefined;
+    return validateUnitSize(size);
 }

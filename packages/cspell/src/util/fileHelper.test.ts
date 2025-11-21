@@ -9,6 +9,7 @@ import { pathPackageRoot } from '../test/test.helper.js';
 import { asyncIterableToArray } from './async.js';
 import { IOError } from './errors.js';
 import {
+    getFileSize,
     isDir,
     isFile,
     isNotDir,
@@ -136,5 +137,29 @@ describe('fileHelper', () => {
         ${'stdin://source.ts'} | ${undefined} | ${pathToFileURL('source.ts').href.replace(/^file:/, 'stdin:')}
     `('resolveFilenameToUrl $filename $cwd', async ({ filename, cwd, expected }) => {
         expect(resolveFilenameToUrl(filename, cwd).href).toBe(expected.toString());
+    });
+
+    test.each`
+        filename        | expected
+        ${__filename}   | ${expect.any(Number)}
+        ${fileListFile} | ${expect.any(Number)}
+    `('getFileSize $filename', async ({ filename, expected }) => {
+        const size = await getFileSize(filename);
+        expect(size).toEqual(expected);
+        expect(size).toBeGreaterThan(0);
+    });
+
+    test('getFileSize returns correct size for known file', async () => {
+        const size = await getFileSize(__filename);
+        expect(size).toBeGreaterThan(0);
+        expect(typeof size).toBe('number');
+    });
+
+    test.each`
+        filename       | errorType
+        ${'not_found'} | ${Error}
+    `('getFileSize errors $filename', async ({ filename, errorType }) => {
+        filename = r(__dirname, filename);
+        await expect(getFileSize(filename)).rejects.toThrow(errorType);
     });
 });

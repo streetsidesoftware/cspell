@@ -545,10 +545,32 @@ function mapSug(sug: ExtendedSuggestion | SuggestionResult): SuggestionResult {
 }
 
 interface ShouldCheckDocumentResult {
+    /** possible errors found while loading configuration. */
     errors: Error[];
+    /**
+     * The calculated result:
+     * - `false` if the document should not be checked. Based upon the settings.
+     * - `true` if the document should be checked.
+     */
     shouldCheck: boolean;
+    /** final settings used to determine the result. */
+    settings: CSpellUserSettings;
+    /**
+     * The reason the document should not be checked.
+     */
+    reason?: string | undefined;
 }
 
+/**
+ * Check if a document should be checked based upon the ignorePaths and override settings.
+ *
+ * This function will search and fetch settings based upon the location of the document if `noConfigSearch` is not true.
+ *
+ * @param doc - document to check
+ * @param options - options to override some of the settings.
+ * @param settings - current settings
+ * @returns ShouldCheckDocumentResult
+ */
 export async function shouldCheckDocument(
     doc: TextDocumentRef,
     options: DocumentValidatorOptions,
@@ -562,7 +584,7 @@ export async function shouldCheckDocument(
         return undefined;
     }
 
-    async function shouldCheck(): Promise<boolean> {
+    async function shouldCheck(): Promise<ShouldCheckDocumentResult> {
         const useSearchForConfig =
             (!options.noConfigSearch && !settings.noConfigSearch) || options.noConfigSearch === false;
         const pLocalConfig = options.configFile
@@ -577,12 +599,17 @@ export async function shouldCheckDocument(
 
         const config = mergeSettings(settings, localConfig);
         const matcher = getGlobMatcherForExcluding(localConfig?.ignorePaths);
-        const docSettings = await determineTextDocumentSettings(doc, config);
         // eslint-disable-next-line unicorn/prefer-regexp-test
-        return !matcher.match(uriToFilePath(doc.uri)) && (docSettings.enabled ?? true);
+        if (matcher.match(uriToFilePath(doc.uri))) {
+            return { errors, shouldCheck: false, settings: localConfig, reason: 'Excluded by ignorePaths.' };
+        }
+        const docSettings = await determineTextDocumentSettings(doc, config);
+        const shouldCheck = docSettings.enabled ?? true;
+        const reason = shouldCheck ? undefined : 'Excluded by overrides or languageSettings.';
+        return { errors, shouldCheck, settings: docSettings, reason };
     }
 
-    return { errors, shouldCheck: await shouldCheck() };
+    return await shouldCheck();
 }
 
 export const __testing__: {

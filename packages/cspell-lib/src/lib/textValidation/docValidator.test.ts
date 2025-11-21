@@ -277,27 +277,26 @@ describe('docValidator', () => {
 describe('shouldCheckDocument', () => {
     test.each`
         file                            | options                           | settings                                  | expected
-        ${'src/code.ts'}                | ${opts()}                         | ${s()}                                    | ${true}
-        ${'src/code.ts'}                | ${opts({ noConfigSearch: true })} | ${s()}                                    | ${true}
-        ${'src/code.ts'}                | ${opts()}                         | ${s({ noConfigSearch: true })}            | ${true}
-        ${'src/code.ts'}                | ${opts()}                         | ${s({ loadDefaultConfiguration: false })} | ${true}
-        ${'src/code.ts'}                | ${opts({ noConfigSearch: true })} | ${s({ loadDefaultConfiguration: false })} | ${true}
-        ${'node_modules/mod/index.js'}  | ${opts()}                         | ${s()}                                    | ${false}
-        ${'node_modules/mod/index.js'}  | ${opts({ noConfigSearch: true })} | ${s()}                                    | ${true}
-        ${'node_modules/mod/index.js'}  | ${opts()}                         | ${s({ noConfigSearch: true })}            | ${true}
-        ${'node_modules/mod/index.js'}  | ${opts()}                         | ${s({ loadDefaultConfiguration: false })} | ${false}
-        ${'node_modules/mod/index.js'}  | ${opts({ noConfigSearch: true })} | ${s({ loadDefaultConfiguration: false })} | ${true}
-        ${'node_modules/mod/index.jpg'} | ${opts()}                         | ${s({ loadDefaultConfiguration: false })} | ${false}
-        ${'node_modules/mod/index.jpg'} | ${opts()}                         | ${s({ loadDefaultConfiguration: true })}  | ${false}
+        ${'src/code.ts'}                | ${opts()}                         | ${s()}                                    | ${{ shouldCheck: true }}
+        ${'src/code.ts'}                | ${opts({ noConfigSearch: true })} | ${s()}                                    | ${{ shouldCheck: true }}
+        ${'src/code.ts'}                | ${opts()}                         | ${s({ noConfigSearch: true })}            | ${{ shouldCheck: true }}
+        ${'src/code.ts'}                | ${opts()}                         | ${s({ loadDefaultConfiguration: false })} | ${{ shouldCheck: true }}
+        ${'src/code.ts'}                | ${opts({ noConfigSearch: true })} | ${s({ loadDefaultConfiguration: false })} | ${{ shouldCheck: true }}
+        ${'node_modules/mod/index.js'}  | ${opts()}                         | ${s()}                                    | ${{ shouldCheck: false, reason: 'Excluded by ignorePaths.' }}
+        ${'node_modules/mod/index.js'}  | ${opts({ noConfigSearch: true })} | ${s()}                                    | ${{ shouldCheck: true }}
+        ${'node_modules/mod/index.js'}  | ${opts()}                         | ${s({ noConfigSearch: true })}            | ${{ shouldCheck: true }}
+        ${'node_modules/mod/index.js'}  | ${opts()}                         | ${s({ loadDefaultConfiguration: false })} | ${{ shouldCheck: false, reason: 'Excluded by ignorePaths.' }}
+        ${'node_modules/mod/index.js'}  | ${opts({ noConfigSearch: true })} | ${s({ loadDefaultConfiguration: false })} | ${{ shouldCheck: true }}
+        ${'node_modules/mod/index.jpg'} | ${opts()}                         | ${s({ loadDefaultConfiguration: false })} | ${{ shouldCheck: false, reason: 'Excluded by ignorePaths.' }}
+        ${'node_modules/mod/index.jpg'} | ${opts()}                         | ${s({ loadDefaultConfiguration: true })}  | ${{ shouldCheck: false, reason: 'Excluded by ignorePaths.' }}
         ${'src/code.ts'}                | ${opts({ configFile: '_nf_' })}   | ${s()}                                    | ${{ errors: [oc({ message: sc('Failed to') })], shouldCheck: true }}
     `(
         'shouldCheckDocument file: $file options: $options settings: $settings',
         async ({ file, options, settings, expected }) => {
             const uri = toUri(pathToFileURL(file));
-            if (typeof expected === 'boolean') {
-                expected = { errors: [], shouldCheck: expected };
-            }
-            expect(await shouldCheckDocument({ uri }, options, settings)).toEqual(expected);
+            const result = await shouldCheckDocument({ uri }, options, settings);
+            expect(result.settings).toBeDefined();
+            expect({ ...result, settings: undefined }).toEqual(oc({ errors: [], reason: undefined, ...expected }));
         },
     );
 });

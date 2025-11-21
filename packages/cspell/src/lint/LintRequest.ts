@@ -6,6 +6,7 @@ import type { CSpellConfigFile, LinterCliOptions, LinterOptions } from '../optio
 import type { GlobSrcInfo } from '../util/glob.js';
 import { calcExcludeGlobInfo } from '../util/glob.js';
 import type { FinalizedReporter } from '../util/reporters.js';
+import { sizeToNumber } from '../util/unitNumbers.js';
 
 const defaultContextRange = 20;
 
@@ -25,6 +26,7 @@ export class LintRequest {
     readonly fileLists: string[];
     readonly files: string[] | undefined;
     readonly cspellSettingsFromCliOptions: CSpellUserSettings;
+    readonly maxFileSize: number | undefined;
 
     constructor(
         readonly fileGlobs: string[],
@@ -58,6 +60,8 @@ export class LintRequest {
             ...extractUnknownWordsConfig(options),
             languageSettings,
         };
+
+        this.maxFileSize = options.maxFileSize ? sizeToNumber(options.maxFileSize) : undefined;
     }
 }
 

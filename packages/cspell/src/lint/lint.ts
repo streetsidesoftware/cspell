@@ -47,6 +47,7 @@ import {
     fileInfoToDocument,
     filenameToUri,
     findFiles,
+    getFileSize,
     isBinaryFile,
     isFile,
     isNotDir,
@@ -108,12 +109,14 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         fileResult?: LintFileResult | undefined;
         fileInfo?: ReadFileInfoResult | undefined;
         skip?: boolean | undefined;
+        skipReason?: string | undefined;
         reportIssueOptions?: ReportIssueOptions | undefined;
     }
 
     interface PFCached extends PrefetchResult {
         fileResult: LintFileResult;
         fileInfo?: undefined;
+        skipReason?: undefined;
         skip?: undefined;
     }
 
@@ -121,6 +124,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         fileResult?: undefined;
         fileInfo: ReadFileInfoResult;
         skip?: undefined;
+        skipReason?: undefined;
         reportIssueOptions: ReportIssueOptions | undefined;
     }
 
@@ -128,6 +132,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         fileResult?: undefined;
         fileInfo?: undefined;
         skip: true;
+        skipReason?: string | undefined;
         reportIssueOptions?: undefined;
     }
 
@@ -137,11 +142,12 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
     }
 
     function prefetch(filename: string, configInfo: ConfigInfo, cache: CSpellLintResultCache): PrefetchFileResult {
-        if (isBinaryFile(filename, cfg.root)) return { filename, result: Promise.resolve({ skip: true }) };
-
+        if (isBinaryFile(filename, cfg.root)) {
+            return { filename, result: Promise.resolve({ skip: true, skipReason: 'Binary file.' }) };
+        }
         const reportIssueOptions = extractReporterIssueOptions(configInfo.config);
 
-        async function fetch() {
+        async function fetch(): Promise<PFCached | PFFile | PFSkipped> {
             const getElapsedTimeMs = getTimeMeasurer();
             const cachedResult = await cache.getCachedLintResults(filename);
             if (cachedResult) {
@@ -151,7 +157,18 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             }
             const uri = filenameToUri(filename, cfg.root).href;
             const checkResult = await shouldCheckDocument({ uri }, {}, configInfo.config);
-            if (!checkResult.shouldCheck) return { skip: true } as const;
+            if (!checkResult.shouldCheck)
+                return { skip: true, skipReason: checkResult.reason || 'Ignored by configuration.' } as const;
+            const maxFileSize = cfg.maxFileSize ?? checkResult.settings.maxFileSize;
+            if (maxFileSize) {
+                const size = await getFileSize(filename);
+                if (size > maxFileSize) {
+                    return {
+                        skip: true,
+                        skipReason: `File exceeded max file size of ${maxFileSize.toLocaleString()}`,
+                    } as const;
+                }
+            }
             const fileInfo = await readFileInfo(filename, undefined, true);
             return { fileInfo, reportIssueOptions };
         }
@@ -318,10 +335,16 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             const fetchResult = await pFetchResult;
             reporter.emitProgressBegin(filename, index, fileCount ?? index);
             if (fetchResult?.skip) {
+                const result: LintFileResult = {
+                    ...emptyResult,
+                    fileInfo: { filename },
+                    elapsedTimeMs: getElapsedTimeMs(),
+                    skippedReason: fetchResult.skipReason,
+                };
                 return {
                     filename,
                     fileNum: index,
-                    result: { ...emptyResult, fileInfo: { filename }, elapsedTimeMs: getElapsedTimeMs() },
+                    result,
                 };
             }
             const result = await processFile(filename, configInfo, cache, fetchResult);

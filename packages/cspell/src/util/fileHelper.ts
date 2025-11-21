@@ -4,7 +4,7 @@ import streamConsumers from 'node:stream/consumers';
 
 import { toFileDirURL, toFilePathOrHref, toFileURL, urlRelative } from '@cspell/url';
 import type { BufferEncoding } from 'cspell-io';
-import { readFileText as cioReadFile, toURL } from 'cspell-io';
+import { getStat, readFileText as cioReadFile, toURL } from 'cspell-io';
 import type { Document } from 'cspell-lib';
 import * as cspell from 'cspell-lib';
 import { fileToDocument, isBinaryFile as isUriBinaryFile } from 'cspell-lib';
@@ -112,6 +112,15 @@ export function readFileInfo(
                   : Promise.reject(new IOError(`Error reading file: "${filename}"`, error));
         },
     );
+}
+
+export async function getFileSize(filename: string): Promise<number> {
+    const s = await getStat(filename);
+    if (!(s instanceof Error)) {
+        return s.size;
+    }
+
+    throw s;
 }
 
 export function readFile(filename: string, encoding: BufferEncoding = UTF8): Promise<string> {

@@ -123,6 +123,10 @@ export interface ProgressFileComplete extends ProgressFileBase {
      */
     processed: boolean | undefined;
     /**
+     * Optional reason for skipping the file.
+     */
+    skippedReason?: string | undefined;
+    /**
      * Number of errors and issues found in the file.
      */
     numErrors: number | undefined;
