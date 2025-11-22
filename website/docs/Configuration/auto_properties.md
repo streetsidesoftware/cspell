@@ -44,7 +44,7 @@ format: md
 | [languageSettings](#settings-languagesettings)                 | [`LanguageSetting`](#languagesetting)&ZeroWidthSpace;`[]`                 | Additional settings for individual languages.                                                                                                                        |
 | [loadDefaultConfiguration](#settings-loaddefaultconfiguration) | `boolean`                                                                 | By default, the bundled dictionary configurations are loaded. Explicitly setting this to `false`                                                                     |
 | [maxDuplicateProblems](#settings-maxduplicateproblems)         | `number`                                                                  | The maximum number of times the same word can be flagged as an error in a file.                                                                                      |
-| [maxFileSize](#settings-maxfilesize)                           | `number`                                                                  | The Maximum size of a file to spell check. This is used to prevent spell checking very large files.                                                                  |
+| [maxFileSize](#settings-maxfilesize)                           | `number,string`                                                           | The Maximum size of a file to spell check. This is used to prevent spell checking very large files.                                                                  |
 | [maxNumberOfProblems](#settings-maxnumberofproblems)           | `number`                                                                  | The maximum number of problems to report in a file.                                                                                                                  |
 | [minRandomLength](#settings-minrandomlength)                   | `number`                                                                  | The minimum length of a random string to be ignored.                                                                                                                 |
 | [minWordLength](#settings-minwordlength)                       | `number`                                                                  | The minimum length of a word before checking it against a dictionary.                                                                                                |
@@ -1000,8 +1000,21 @@ The maximum number of times the same word can be flagged as an error in a file.
 
 The Maximum size of a file to spell check. This is used to prevent spell checking very large files.
 
+The value can be number or a string formatted `<number>[units]`, number with optional units.
+
+Supported units:
+
+- K, KB - value * 1024
+- M, MB - value * 2^20
+- G, GB - value * 2^30
+
 Special values:
 - `0` - has the effect of removing the limit.
+
+Examples:
+- `1000000` - 1 million bytes
+- `1000K` or `1000KB` - 1 thousand kilobytes
+- `0.5M` or `0.5MB` - 0.5 megabytes
 
 default: no limit
 
@@ -1010,7 +1023,7 @@ default: no limit
 <dt>Type</dt>
 <dd>
 
-`number`
+`number,string`
 
 </dd>
 
@@ -6598,7 +6611,7 @@ This is a written language locale like: `en`, `en-GB`, `fr`, `es`, `de` or `en,f
 | [languageSettings](#overridesettings-languagesettings)                 | [`LanguageSetting`](#languagesetting)&ZeroWidthSpace;`[]`                 | Additional settings for individual languages.                                                                                                                        |
 | [loadDefaultConfiguration](#overridesettings-loaddefaultconfiguration) | `boolean`                                                                 | By default, the bundled dictionary configurations are loaded. Explicitly setting this to `false`                                                                     |
 | [maxDuplicateProblems](#overridesettings-maxduplicateproblems)         | `number`                                                                  | The maximum number of times the same word can be flagged as an error in a file.                                                                                      |
-| [maxFileSize](#overridesettings-maxfilesize)                           | `number`                                                                  | The Maximum size of a file to spell check. This is used to prevent spell checking very large files.                                                                  |
+| [maxFileSize](#overridesettings-maxfilesize)                           | `number,string`                                                           | The Maximum size of a file to spell check. This is used to prevent spell checking very large files.                                                                  |
 | [maxNumberOfProblems](#overridesettings-maxnumberofproblems)           | `number`                                                                  | The maximum number of problems to report in a file.                                                                                                                  |
 | [minRandomLength](#overridesettings-minrandomlength)                   | `number`                                                                  | The minimum length of a random string to be ignored.                                                                                                                 |
 | [minWordLength](#overridesettings-minwordlength)                       | `number`                                                                  | The minimum length of a word before checking it against a dictionary.                                                                                                |
@@ -7282,8 +7295,21 @@ The maximum number of times the same word can be flagged as an error in a file.
 
 The Maximum size of a file to spell check. This is used to prevent spell checking very large files.
 
+The value can be number or a string formatted `<number>[units]`, number with optional units.
+
+Supported units:
+
+- K, KB - value * 1024
+- M, MB - value * 2^20
+- G, GB - value * 2^30
+
 Special values:
 - `0` - has the effect of removing the limit.
+
+Examples:
+- `1000000` - 1 million bytes
+- `1000K` or `1000KB` - 1 thousand kilobytes
+- `0.5M` or `0.5MB` - 0.5 megabytes
 
 default: no limit
 
@@ -7292,7 +7318,7 @@ default: no limit
 <dt>Type</dt>
 <dd>
 
-`number`
+`number,string`
 
 </dd>
 
