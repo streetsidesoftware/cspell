@@ -464,8 +464,10 @@ interface RunResult {
   issues: number;
   /** Number of processing errors. */
   errors: number;
-  /** Number files that used results from the cache. */
+  /** Number of files that used results from the cache. */
   cachedFiles?: number;
+  /** Number of files that were skipped (not processed). */
+  skippedFiles?: number;
 }
 type ResultEmitter = (result: RunResult) => void | Promise<void>;
 interface CSpellReporterEmitters {
@@ -1545,13 +1547,26 @@ interface Settings extends ReportingConfiguration, BaseSetting, PnPSettings, Spe
   /**
   * The Maximum size of a file to spell check. This is used to prevent spell checking very large files.
   *
+  * The value can be number or a string formatted `<number>[units]`, number with optional units.
+  *
+  * Supported units:
+  *
+  * - K, KB - value * 1024
+  * - M, MB - value * 2^20
+  * - G, GB - value * 2^30
+  *
   * Special values:
   * - `0` - has the effect of removing the limit.
+  *
+  * Examples:
+  * - `1000000` - 1 million bytes
+  * - `1000K` or `1000KB` - 1 thousand kilobytes
+  * - `0.5M` or `0.5MB` - 0.5 megabytes
   *
   * default: no limit
   * @since 9.4.0
   */
-  maxFileSize?: number | undefined;
+  maxFileSize?: number | string | undefined;
 }
 /**
 * Plug N Play settings to support package systems like Yarn 2.

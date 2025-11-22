@@ -163,8 +163,10 @@ export interface RunResult {
     issues: number;
     /** Number of processing errors. */
     errors: number;
-    /** Number files that used results from the cache. */
+    /** Number of files that used results from the cache. */
     cachedFiles?: number;
+    /** Number of files that were skipped (not processed). */
+    skippedFiles?: number;
 }
 
 export type ResultEmitter = (result: RunResult) => void | Promise<void>;
