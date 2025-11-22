@@ -287,7 +287,7 @@ export function getReporter(options: ReporterOptions, config?: CSpellReporterCon
         if (!fileGlobs.length && !result.files) {
             return;
         }
-        const { files, issues, cachedFiles, filesWithIssues, errors } = result;
+        const { files, issues, cachedFiles, filesWithIssues, errors, skippedFiles } = result;
         const numFilesWithIssues = filesWithIssues.size;
 
         if (stderr.getColorLevel() > 0) {
@@ -304,11 +304,13 @@ export function getReporter(options: ReporterOptions, config?: CSpellReporterCon
             issuesCollection.forEach((issue) => consoleError(issue));
         }
 
+        const filesChecked = files - (skippedFiles || 0);
         const cachedFilesText = cachedFiles ? ` (${cachedFiles} from cache)` : '';
+        const skippedFilesText = skippedFiles ? `, skipped: ${skippedFiles}` : '';
         const withErrorsText = errors ? ` with ${errors} error${errors === 1 ? '' : 's'}` : '';
         const numFilesWidthIssuesText = numFilesWithIssues === 1 ? '1 file' : `${numFilesWithIssues} files`;
 
-        const summaryMessage = `CSpell\u003A Files checked: ${files}${cachedFilesText}, Issues found: ${issues} in ${numFilesWidthIssuesText}${withErrorsText}.`;
+        const summaryMessage = `CSpell\u003A Files checked: ${filesChecked}${cachedFilesText}${skippedFilesText}, Issues found: ${issues} in ${numFilesWidthIssuesText}${withErrorsText}.`;
 
         consoleError(summaryMessage);
 

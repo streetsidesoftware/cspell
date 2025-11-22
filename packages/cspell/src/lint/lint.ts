@@ -40,7 +40,7 @@ import { npmPackage } from '../pkgInfo.js';
 import type { CreateCacheSettings, CSpellLintResultCache } from '../util/cache/index.js';
 import { calcCacheSettings, createCache } from '../util/cache/index.js';
 import { type ConfigInfo, readConfig } from '../util/configFileHelper.js';
-import { CheckFailed, toApplicationError, toError } from '../util/errors.js';
+import { ApplicationError, CheckFailed, toApplicationError, toError } from '../util/errors.js';
 import { extractContext } from '../util/extractContext.js';
 import type { ReadFileInfoResult } from '../util/fileHelper.js';
 import {
@@ -69,6 +69,7 @@ import { prefetchIterable } from '../util/prefetch.js';
 import type { FinalizedReporter } from '../util/reporters.js';
 import { extractReporterIssueOptions, LintReporter, mergeReportIssueOptions } from '../util/reporters.js';
 import { getTimeMeasurer } from '../util/timer.js';
+import { sizeToNumber } from '../util/unitNumbers.js';
 import * as util from '../util/util.js';
 import { writeFileOrStream } from '../util/writeFile.js';
 import type { LintRequest } from './LintRequest.js';
@@ -138,7 +139,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
 
     interface PrefetchFileResult {
         filename: string;
-        result?: Promise<PFCached | PFFile | PFSkipped>;
+        result?: Promise<PFCached | PFFile | PFSkipped | Error>;
     }
 
     function prefetch(filename: string, configInfo: ConfigInfo, cache: CSpellLintResultCache): PrefetchFileResult {
@@ -157,9 +158,10 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             }
             const uri = filenameToUri(filename, cfg.root).href;
             const checkResult = await shouldCheckDocument({ uri }, {}, configInfo.config);
-            if (!checkResult.shouldCheck)
+            if (!checkResult.shouldCheck) {
                 return { skip: true, skipReason: checkResult.reason || 'Ignored by configuration.' } as const;
-            const maxFileSize = cfg.maxFileSize ?? checkResult.settings.maxFileSize;
+            }
+            const maxFileSize = processMaxFileSize(cfg.maxFileSize ?? checkResult.settings.maxFileSize);
             if (maxFileSize) {
                 const size = await getFileSize(filename);
                 if (size > maxFileSize) {
@@ -173,7 +175,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             return { fileInfo, reportIssueOptions };
         }
 
-        const result: Promise<PFCached | PFFile | PFSkipped> = fetch();
+        const result: Promise<PFCached | PFFile | PFSkipped | Error> = fetch().catch((e) => toApplicationError(e));
         return { filename, result };
     }
 
@@ -333,6 +335,9 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             const { filename, result: pFetchResult } = pf;
             const getElapsedTimeMs = getTimeMeasurer();
             const fetchResult = await pFetchResult;
+            if (fetchResult instanceof Error) {
+                throw fetchResult;
+            }
             reporter.emitProgressBegin(filename, index, fileCount ?? index);
             if (fetchResult?.skip) {
                 const result: LintFileResult = {
@@ -362,17 +367,6 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
                     await pf.result;
                     yield processPrefetchFileResult(pf, ++i);
                 }
-                // const iter = prefetchIterable(
-                //     pipe(
-                //         prefetchFiles(files),
-                //         opMap(async (pf) => {
-                //             return processPrefetchFileResult(pf, ++i);
-                //         }),
-                //     ),
-                //     BATCH_SIZE,
-                // );
-
-                // yield* iter;
             }
         }
 
@@ -380,6 +374,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             const { filename, fileNum, result } = fileP;
             status.files += 1;
             status.cachedFiles = (status.cachedFiles || 0) + (result.cached ? 1 : 0);
+            status.skippedFiles = (status.skippedFiles || 0) + (result.processed ? 0 : 1);
             const numIssues = reporter.emitProgressComplete(filename, fileNum, fileCount ?? fileNum, result);
             if (numIssues || result.errors) {
                 status.filesWithIssues.add(relativeToCwd(filename, cfg.root));
@@ -756,4 +751,14 @@ export class LinterError extends Error {
     toString(): string {
         return this.message;
     }
+}
+
+function processMaxFileSize(value: number | string | undefined): number | undefined {
+    if (!value) return undefined;
+    if (typeof value === 'number') return value;
+    const num = sizeToNumber(value);
+    if (Number.isNaN(num)) {
+        throw new ApplicationError(`Invalid max file size: "${value}"`);
+    }
+    return num;
 }

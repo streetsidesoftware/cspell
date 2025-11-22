@@ -250,6 +250,10 @@ describe('Validate cli', () => {
         ${'reporting level typos'}                     | ${[rpFeat('unknown-words'), '--report=typos', '.']}                                          | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
         ${'reporting level simple'}                    | ${[rpFeat('unknown-words'), '--report=simple', '.']}                                         | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
         ${'reporting level all'}                       | ${[rpFeat('unknown-words'), '--report=all', '.']}                                            | ${app.CheckFailed} | ${true}  | ${true}  | ${false}
+        ${'max-file-size'}                       | ${[rpFeat('max-file-size'), '.']}                                            | ${undefined}       | ${true}  | ${false} | ${false}
+        ${'max-file-size 1mb'}                       | ${[rpFeat('max-file-size'), '--max-file-size=1mb', '.']}                                            | ${undefined}       | ${true}  | ${false} | ${false}
+        ${'max-file-size 1meg'}                       | ${[rpFeat('max-file-size'), '--max-file-size=1meg', '.']}                                            | ${Commander.CommanderError} | ${false}  | ${false}  | ${false}
+        ${'max-file-size bad'}                       | ${[rpFeat('max-file-size'), '-c', 'bad-size.cspell.config.yaml', '.']}                                            | ${app.CheckFailed} | ${true}  | ${false}  | ${false}
         ${'--continue-on-error'}                       | ${[...rcFix('import/import-errors', 'cspell.config.yaml'), '--continue-on-error', '*.md']}   | ${undefined}       | ${true}  | ${false} | ${false}
         ${'--continue-on-error - missing import'}      | ${[...rcFix('import/import-errors', 'missing-import.yaml'), '--continue-on-error', '*.md']}  | ${app.CheckFailed} | ${true}  | ${false} | ${false}
         ${'--continue-on-error - missing dict'}        | ${[...rcFix('import/import-errors', 'missing-dict.yaml'), '--continue-on-error', '*.md']}    | ${app.CheckFailed} | ${true}  | ${false} | ${false}

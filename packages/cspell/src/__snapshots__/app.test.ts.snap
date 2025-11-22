@@ -155,7 +155,7 @@ error	1/1 not-fond.md 0.00ms skipped X
 error
 error	-------------------------------------------
 error
-error	CSpell: Files checked: 1, Issues found: 0 in 1 file with 1 error.
+error	CSpell: Files checked: 0, skipped: 1, Issues found: 0 in 1 file with 1 error.
 error"
 `;
 
@@ -636,6 +636,62 @@ exports[`Validate cli > app 'link remove' 1`] = `""`;
 
 exports[`Validate cli > app 'link' 1`] = `""`;
 
+exports[`Validate cli > app 'max-file-size 1mb' Expect Error: undefined 1`] = `[]`;
+
+exports[`Validate cli > app 'max-file-size 1mb' Expect Error: undefined 2`] = `
+"error	1/4 bad-size.cspell.config.yaml 0.00ms
+error
+error	2/4 bigger-file.md 0.00ms
+error
+error	3/4 cspell.config.yaml 0.00ms
+error
+error	4/4 README.md 0.00ms
+error
+error	CSpell: Files checked: 4, Issues found: 0 in 0 files.
+error"
+`;
+
+exports[`Validate cli > app 'max-file-size 1mb' Expect Error: undefined 3`] = `""`;
+
+exports[`Validate cli > app 'max-file-size 1meg' Expect Error: [Function CommanderError] 1`] = `[]`;
+
+exports[`Validate cli > app 'max-file-size 1meg' Expect Error: [Function CommanderError] 2`] = `""`;
+
+exports[`Validate cli > app 'max-file-size 1meg' Expect Error: [Function CommanderError] 3`] = `
+"error: invalid option value for --max-file-size: Unknown units. Valid units are: B, K, KB, M, MB, G, GB.
+"
+`;
+
+exports[`Validate cli > app 'max-file-size bad' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app 'max-file-size bad' Expect Error: [Function CheckFailed] 2`] = `
+"error	Configuration Error: Failed to read config file: "./bad-size.cspell.config.yaml"
+error
+error	-------------------------------------------
+error
+error	CSpell: Files checked: 0, Issues found: 0 in 0 files with 1 error.
+error"
+`;
+
+exports[`Validate cli > app 'max-file-size bad' Expect Error: [Function CheckFailed] 3`] = `""`;
+
+exports[`Validate cli > app 'max-file-size' Expect Error: undefined 1`] = `[]`;
+
+exports[`Validate cli > app 'max-file-size' Expect Error: undefined 2`] = `
+"error	1/4 bad-size.cspell.config.yaml 0.00ms
+error
+error	2/4 bigger-file.md 0.00ms skipped (File exceeded max file size of 500)
+error
+error	3/4 cspell.config.yaml 0.00ms
+error
+error	4/4 README.md 0.00ms
+error
+error	CSpell: Files checked: 3, skipped: 1, Issues found: 0 in 0 files.
+error"
+`;
+
+exports[`Validate cli > app 'max-file-size' Expect Error: undefined 3`] = `""`;
+
 exports[`Validate cli > app 'must find force no error' Expect Error: undefined 1`] = `[]`;
 
 exports[`Validate cli > app 'must find force no error' Expect Error: undefined 2`] = `
@@ -869,7 +925,8 @@ log	            "issues.md"
 log	        ],
 log	        "issues": 3,
 log	        "errors": 0,
-log	        "cachedFiles": 0
+log	        "cachedFiles": 0,
+log	        "skippedFiles": 0
 log	    }
 log	}
 log"
@@ -891,7 +948,8 @@ log	        "files": 2,
 log	        "filesWithIssues": [],
 log	        "issues": 0,
 log	        "errors": 0,
-log	        "cachedFiles": 0
+log	        "cachedFiles": 0,
+log	        "skippedFiles": 0
 log	    }
 log	}
 log"
