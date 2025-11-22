@@ -3,6 +3,76 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v9.4.0 (2025-11-22)
+
+### Features
+
+<details>
+<summary>feat: Add option to skip large files (<a href="https://github.com/streetsidesoftware/cspell/pull/8040">#8040</a>)</summary>
+
+### feat: Add option to skip large files ([#8040](https://github.com/streetsidesoftware/cspell/pull/8040))
+
+New command line option: `--max-file-size <value>`
+The value can be `<number>[units]`, number with optional units.
+Supported units:
+
+- `K`, `KB` - value \* 1024
+- `M`, `MB` - value \* 2^20
+- `G`, `GB` - value \* 2^30
+
+There is also a new setting called `maxFileSize`. At the moment, it only takes numbers in bytes.
+
+This allows for setting a global value and overrides based upon glob settings.
+
+Note: the command line value will override any value found in the configuration files.
+
+---
+
+</details>
+
+### Fixes
+
+<details>
+<summary>fix: allow string based maxFileSize (<a href="https://github.com/streetsidesoftware/cspell/pull/8047">#8047</a>)</summary>
+
+### fix: allow string based maxFileSize ([#8047](https://github.com/streetsidesoftware/cspell/pull/8047))
+
+- Support allowing string based maxFileSize in config files.
+- Report the number of skipped files.
+
+---
+
+</details>
+
+### Dictionary Updates
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/8036">#8036</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#8036](https://github.com/streetsidesoftware/cspell/pull/8036))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ .../snapshots/TheAlgorithms/Python/report.yaml     |  7 +--
+ .../snapshots/TheAlgorithms/Python/snapshot.txt    |  5 +--
+ .../snapshots/eslint/eslint/report.yaml            |  6 +--
+ .../snapshots/eslint/eslint/snapshot.txt           |  3 +-
+ .../microsoft/TypeScript-Website/report.yaml       |  5 +--
+ .../microsoft/TypeScript-Website/snapshot.txt      |  3 +-
+ .../snapshots/slint-ui/slint/report.yaml           |  7 ++-
+ .../snapshots/slint-ui/slint/snapshot.txt          |  3 +-
+ packages/cspell-bundled-dicts/package.json         |  8 ++--
+ pnpm-lock.yaml                                     | 51 ++++++++++++----------
+ 10 files changed, 46 insertions(+), 52 deletions(-)
+```
+
+---
+
+</details>
+
 ## v9.3.2 (2025-11-15)
 
 ### Fixes
