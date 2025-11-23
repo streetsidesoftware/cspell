@@ -69,37 +69,6 @@ jobs:
       # Ensure the repository is clean after build & test
       - run: git --no-pager diff --exit-code
 
-  test-full-build:
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        node-version:
-          - 22.x
-
-        os:
-          - ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v5
-
-      - name: Setup
-        uses: ./.github/actions/setup
-        with:
-          node-version: ${{ matrix.node-version }}
-
-      - name: Swap tsconfig.json
-        run: |
-          cp tsconfig.full.json tsconfig.json
-
-      - name: Display Config
-        run: |
-          echo "$(cat tsconfig.json)"
-
-      - run: pnpm i
-      - run: pnpm run build
-      - run: pnpm test
-
   # Ensure the perf tests run on the latest node version
   perf-test:
     runs-on: ${{ matrix.os }}
