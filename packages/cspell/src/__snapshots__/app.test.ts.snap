@@ -446,9 +446,9 @@ error"
 
 exports[`Validate cli > app 'current_file --show-perf-summary' Expect Error: undefined 3`] = `""`;
 
-exports[`Validate cli > app 'current_file --verbose' Expect Error: undefined 1`] = `[]`;
+exports[`Validate cli > app 'current_file --verbose --verbose' Expect Error: undefined 1`] = `[]`;
 
-exports[`Validate cli > app 'current_file --verbose' Expect Error: undefined 2`] = `
+exports[`Validate cli > app 'current_file --verbose --verbose' Expect Error: undefined 2`] = `
 "info
 info	cspell;
 info	Date: Sat, 03 Apr 2021 11:25:33 GMT
@@ -479,11 +479,21 @@ info	    Glob: cspell.json from ./cspell.json
 info	    Glob: .vscode/** from ./cspell.json
 info	    Glob: node_modules/** from command line
 info
-info	Checking: ./src/app.test.ts, File type: auto, Language: default
 info	Checked: ./src/app.test.ts, File type: typescript, Language: en ... Issues: 0 0.00ms
 info	Config file Used: ./cspell.json
 info	Dictionaries Used: aws, companies, cryptocurrencies, filetypes, public-licenses, softwareTerms, coding-compound-terms, computing-acronyms, software-term-suggestions, software-tools, web-services, workspace, [in-document-dict], en_us, en-common-misspellings, fullstack, node, npm, svelte, typescript
 error	1/1 src/app.test.ts 0.00ms
+error
+error	CSpell: Files checked: 1, Issues found: 0 in 0 files.
+error"
+`;
+
+exports[`Validate cli > app 'current_file --verbose --verbose' Expect Error: undefined 3`] = `""`;
+
+exports[`Validate cli > app 'current_file --verbose' Expect Error: undefined 1`] = `[]`;
+
+exports[`Validate cli > app 'current_file --verbose' Expect Error: undefined 2`] = `
+"error	1/1 src/app.test.ts 0.00ms
 error
 error	CSpell: Files checked: 1, Issues found: 0 in 0 files.
 error"
@@ -546,7 +556,6 @@ info
 info	Exclusion Globs:
 info	    Glob: node_modules/** from command line
 info
-info	Checking: ./fixtures/issue-2998/fix-words.txt, File type: fix, Language: default
 info	Checked: ./fixtures/issue-2998/fix-words.txt, File type: fix, Language: en ... Issues: 0 0.00ms
 info	Config file Used: ./fixtures/issue-2998/cspell.json
 info	Dictionaries Used: aws, companies, cryptocurrencies, filetypes, public-licenses, softwareTerms, coding-compound-terms, computing-acronyms, software-term-suggestions, software-tools, web-services, en_us, en-common-misspellings, fixture
@@ -745,7 +754,8 @@ exports[`Validate cli > app 'no-args' Expect Error: 'outputHelp' 1`] = `
   "                                 the files being checked. Useful for limiting",
   "                                 config inheritance.",
   "  -v, --verbose                  Display more information about the files being",
-  "                                 checked and the configuration.",
+  "                                 checked. Add more than one -v for increased",
+  "                                 verbosity.",
   "  --locale <locale>              Set language locales. i.e. "en,fr" for English",
   "                                 and French, or "en-GB" for British English.",
   "  --language-id <file-type>      Force programming language for unknown",
@@ -4004,7 +4014,8 @@ exports[`Validate cli > app help [ 'lint', '--help' ] 1`] = `
   "                                 the files being checked. Useful for limiting",
   "                                 config inheritance.",
   "  -v, --verbose                  Display more information about the files being",
-  "                                 checked and the configuration.",
+  "                                 checked. Add more than one -v for increased",
+  "                                 verbosity.",
   "  --locale <locale>              Set language locales. i.e. "en,fr" for English",
   "                                 and French, or "en-GB" for British English.",
   "  --language-id <file-type>      Force programming language for unknown",
@@ -4137,7 +4148,8 @@ exports[`Validate cli > app help [ 'lint', '--help', '--issue-template' ] 1`] = 
   "                                 the files being checked. Useful for limiting",
   "                                 config inheritance.",
   "  -v, --verbose                  Display more information about the files being",
-  "                                 checked and the configuration.",
+  "                                 checked. Add more than one -v for increased",
+  "                                 verbosity.",
   "  --locale <locale>              Set language locales. i.e. "en,fr" for English",
   "                                 and French, or "en-GB" for British English.",
   "  --language-id <file-type>      Force programming language for unknown",
@@ -4297,7 +4309,8 @@ exports[`Validate cli > app help [ 'lint', '--help', '--verbose' ] 1`] = `
   "                                 the files being checked. Useful for limiting",
   "                                 config inheritance.",
   "  -v, --verbose                  Display more information about the files being",
-  "                                 checked and the configuration.",
+  "                                 checked. Add more than one -v for increased",
+  "                                 verbosity.",
   "  --locale <locale>              Set language locales. i.e. "en,fr" for English",
   "                                 and French, or "en-GB" for British English.",
   "  --language-id <file-type>      Force programming language for unknown",

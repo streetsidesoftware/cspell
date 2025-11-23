@@ -2,7 +2,12 @@ import { AddHelpTextContext, Command, CommandOptions } from 'commander';
 
 import * as App from './application.mjs';
 import { collect, crOpt } from './commandHelpers.js';
-import { type LinterCliOptions, ReportChoicesAll } from './options.js';
+import {
+    cvtLinterCliCommandOptionsToLinterCliOptions,
+    LinterCliCommandOptions,
+    type LinterCliOptions,
+    ReportChoicesAll,
+} from './options.js';
 import { DEFAULT_CACHE_LOCATION } from './util/cache/index.js';
 import { canUseColor } from './util/canUseColor.js';
 import { CheckFailed } from './util/errors.js';
@@ -79,7 +84,12 @@ export function commandLint(prog: Command, opts: CommandOptions): Command {
             'Specify a directory at which to stop searching for configuration files when walking up from the files being checked. Useful for limiting config inheritance.',
             collect,
         )
-        .option('-v, --verbose', 'Display more information about the files being checked and the configuration.')
+        .option(
+            '-v, --verbose',
+            'Display more information about the files being checked. Add more than one -v for increased verbosity.',
+            increaseVerbosity,
+            0,
+        )
         .option(
             '--locale <locale>',
             'Set language locales. i.e. "en,fr" for English and French, or "en-GB" for British English.',
@@ -188,7 +198,8 @@ export function commandLint(prog: Command, opts: CommandOptions): Command {
     return spellCheckCommand;
 }
 
-async function action(this: Command, fileGlobs: string[], options: LinterCliOptions) {
+async function action(this: Command, fileGlobs: string[], cliOptions: LinterCliCommandOptions) {
+    const options = cvtLinterCliCommandOptionsToLinterCliOptions(cliOptions);
     // console.error('lint: %o', { fileGlobs, options });
     const useExitCode = options.exitCode ?? true;
     if (options.skipValidation) {
@@ -278,4 +289,8 @@ function augmentCommandHelp(context: AddHelpTextContext) {
 function validateMaxFileSize(size: string | undefined): string | undefined {
     if (!size) return undefined;
     return validateUnitSize(size);
+}
+
+function increaseVerbosity(_dummyValue: unknown, previous: number): number {
+    return previous + 1;
 }
