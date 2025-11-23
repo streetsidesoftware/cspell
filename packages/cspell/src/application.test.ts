@@ -221,7 +221,14 @@ describe('Validate the Application', () => {
 
     test('running the application from stdin', testOptions, async () => {
         const files = ['stdin'];
-        const options = { ...sampleOptions, wordsOnly: true, unique: true, debug: true, verbose: true, verboseLevel: 2 };
+        const options = {
+            ...sampleOptions,
+            wordsOnly: true,
+            unique: true,
+            debug: true,
+            verbose: true,
+            verboseLevel: 2,
+        };
         const reporter = new InMemoryReporter();
 
         // cspell:ignore texxt
