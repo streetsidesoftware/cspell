@@ -218,7 +218,7 @@ describe('Validate cli', () => {
         ${'samples/Dutch.txt'}                         | ${[pathSamples('Dutch.txt')]}                                                                | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
         ${'with forbidden words'}                      | ${[pathSamples('src/sample-with-forbidden-words.md')]}                                       | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
         ${'current_file --verbose'}                    | ${['--verbose', __filename]}                                                                 | ${undefined}                | ${true}  | ${false} | ${false}
-        ${'current_file --verbose --verbose'}                    | ${['--verbose', '--verbose', __filename]}                                                                 | ${undefined}                | ${true}  | ${false} | ${true}
+        ${'current_file --verbose --verbose'}          | ${['--verbose', '--verbose', __filename]}                                                    | ${undefined}                | ${true}  | ${false} | ${true}
         ${'bad config'}                                | ${['-c', __filename + '.x', __filename]}                                                     | ${app.CheckFailed}          | ${true}  | ${false} | ${false}
         ${'not found error by default'}                | ${['*.not']}                                                                                 | ${app.CheckFailed}          | ${true}  | ${false} | ${false}
         ${'must find with error'}                      | ${['*.not', '--must-find-files']}                                                            | ${app.CheckFailed}          | ${true}  | ${false} | ${false}
@@ -229,7 +229,7 @@ describe('Validate cli', () => {
         ${'--fail-fast with option'}                   | ${['-r', failFastRoot, '--fail-fast', '*.txt']}                                              | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
         ${'--fail-fast with config'}                   | ${['-r', failFastRoot, '-c', failFastConfig, '*.txt']}                                       | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
         ${'--no-fail-fast with config'}                | ${['-r', failFastRoot, '--no-fail-fast', '-c', failFastConfig, '*.txt']}                     | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
-        ${'issue-2998 --language-id'}                  | ${[rpFix('issue-2998'), '-v', '-v', '--language-id=fix', 'fix-words.txt']}                         | ${undefined}                | ${true}  | ${false} | ${true}
+        ${'issue-2998 --language-id'}                  | ${[rpFix('issue-2998'), '-v', '-v', '--language-id=fix', 'fix-words.txt']}                   | ${undefined}                | ${true}  | ${false} | ${true}
         ${'Explicit file://'}                          | ${[rpFix('misc'), 'file://star-not.md']}                                                     | ${undefined}                | ${true}  | ${false} | ${false}
         ${'Explicit not found file://'}                | ${[rpFix('misc'), 'file://not-fond.md']}                                                     | ${app.CheckFailed}          | ${true}  | ${false} | ${false}
         ${'typos'}                                     | ${[rpFix('features/typos'), '--no-progress', '.']}                                           | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
