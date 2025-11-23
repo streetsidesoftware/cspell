@@ -19,15 +19,6 @@ export default defineConfig(
     nodePlugin.configs['flat/recommended'],
     ...tsEslint.configs.recommended,
     {
-        files: ['**/*.{ts,cts,mts,tsx,js,mjs,cjs}'],
-        languageOptions: {
-            parserOptions: {
-                project: true,
-            },
-        },
-    },
-    // unicorn.configs['flat/recommended'],
-    {
         ignores: ['**/*.json'],
         plugins: {
             unicorn,
