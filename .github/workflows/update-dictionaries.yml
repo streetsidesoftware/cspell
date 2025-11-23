@@ -305,9 +305,9 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+        uses: actions/checkout@v5 # @1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
         with:
-          persist-credentials: false
+          # persist-credentials: false
           ref: ${{ env.REF_BRANCH }}
 
       - name: Setup Node and Pnpm
@@ -354,4 +354,4 @@ jobs:
           body: ${{ steps.body.outputs.body }}
           token: ${{ steps.generate-token.outputs.token }}
           delete-branch: true
-          # sign-commits: true # Sign commits made by the action
+          sign-commits: true # Sign commits made by the action
