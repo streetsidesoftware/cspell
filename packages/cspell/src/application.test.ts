@@ -44,7 +44,7 @@ describe('Validate the Application', () => {
         const lint = App.lint(files, options, reporter);
         const result = await lint;
         expect(reporter.errorCount).toBe(0);
-        expect(reporter.infoCount).toBeGreaterThan(0);
+        expect(reporter.infoCount).toBe(0); // verbose is off, no info messages.
         expect(reporter.debugCount).toBe(0);
         expect(reporter.runResult).toEqual(result);
         expect(result.files).toBe(1);
@@ -58,7 +58,7 @@ describe('Validate the Application', () => {
         const lint = App.lint(files, options, reporter);
         const result = await lint;
         expect(reporter.errorCount).toBe(0);
-        expect(reporter.infoCount).toBeGreaterThan(0);
+        expect(reporter.infoCount).toBe(0); // verbose is off, no info messages.
         expect(reporter.debugCount).toBe(0);
         expect(reporter.runResult).toEqual(result);
         expect(result.files).toBe(1);
@@ -72,7 +72,7 @@ describe('Validate the Application', () => {
         const lint = App.lint(files, options, reporter);
         const result = await lint;
         expect(reporter.errorCount).toBe(0);
-        expect(reporter.infoCount).toBeGreaterThan(0);
+        expect(reporter.infoCount).toBe(0); // verbose is off, no info messages.
         expect(reporter.debugCount).toBe(0);
         expect(reporter.runResult).toEqual(result);
         expect(result.files).toBe(1);
@@ -94,7 +94,7 @@ describe('Validate the Application', () => {
         const result = await App.lint(files, options, reporter);
 
         expect(reporter.errorCount).toBe(0);
-        expect(reporter.infoCount).toBeGreaterThan(0);
+        expect(reporter.infoCount).toBe(0); // verbose is off, no info messages.
         expect(reporter.debugCount).toBe(0);
         expect(reporter.runResult).toEqual(result);
         expect(result.files).toBe(1);
@@ -111,6 +111,8 @@ describe('Validate the Application', () => {
         const options = {
             root: rootDir,
             stopConfigSearchAt: [stopSearchAt],
+            verbose: true,
+            verboseLevel: 2,
         };
 
         const reporter = new InMemoryReporter();
@@ -139,6 +141,8 @@ describe('Validate the Application', () => {
         const options = {
             root: rootDir,
             stopConfigSearchAt,
+            verbose: true,
+            verboseLevel: 2,
         };
 
         const reporter = new InMemoryReporter();
@@ -168,7 +172,7 @@ describe('Validate the Application', () => {
         const result = await lint;
 
         expect(reporter.errorCount).toBe(0);
-        expect(reporter.infoCount).toBeGreaterThan(0);
+        expect(reporter.infoCount).toBe(0); // verbose is off, no info messages.
         expect(reporter.debugCount).toBe(0);
         expect(reporter.runResult).toEqual(result);
         expect(result.files).toBe(3);
@@ -217,7 +221,7 @@ describe('Validate the Application', () => {
 
     test('running the application from stdin', testOptions, async () => {
         const files = ['stdin'];
-        const options = { ...sampleOptions, wordsOnly: true, unique: true, debug: true };
+        const options = { ...sampleOptions, wordsOnly: true, unique: true, debug: true, verbose: true, verboseLevel: 2 };
         const reporter = new InMemoryReporter();
 
         // cspell:ignore texxt
