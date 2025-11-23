@@ -53,8 +53,9 @@ jobs:
       patch: ${{ env.PATCH_DIFF }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v5
+        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
         with:
+          persist-credentials: false
           ref: ${{ env.REF_BRANCH }}
 
       - name: Setup Node and Pnpm
@@ -152,9 +153,10 @@ jobs:
           echo "key: ${{ needs.build.outputs.key }}"
           echo "path: ${{ needs.build.outputs.path }}"
 
-      - name: Checkout
-        uses: actions/checkout@v5
+      - name: Checkout code
+        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
         with:
+          persist-credentials: false
           ref: ${{ env.REF_BRANCH }}
 
       - name: Patch
@@ -247,9 +249,10 @@ jobs:
       PATCH: ${{ needs.check-dictionaries.outputs.patch }}
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v5
+      - name: Checkout code
+        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
         with:
+          persist-credentials: false
           ref: ${{ env.REF_BRANCH }}
 
       - name: Patch
@@ -301,9 +304,10 @@ jobs:
       REF_BRANCH: ${{ needs.calc-ref.outputs.ref }}
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v5
+      - name: Checkout code
+        uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
         with:
+          persist-credentials: false
           ref: ${{ env.REF_BRANCH }}
 
       - name: Setup Node and Pnpm
