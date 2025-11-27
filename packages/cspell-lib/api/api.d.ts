@@ -523,6 +523,10 @@ interface ReporterCommandLineOptions {
   */
   verbose?: boolean;
   /**
+  * Level of verbosity (higher number = more verbose).
+  */
+  verboseLevel?: number;
+  /**
   * Show extensive output.
   */
   debug?: boolean;

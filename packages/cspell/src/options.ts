@@ -11,6 +11,10 @@ export interface LinterOptions
      */
     verbose?: boolean;
     /**
+     * Level of verbosity (higher number = more verbose).
+     */
+    verboseLevel?: number;
+    /**
      * Show extensive output.
      */
     debug?: boolean;
@@ -401,6 +405,13 @@ export interface LinterCliOptions extends LinterOptions {
     report?: ReportChoices | undefined;
 }
 
+export interface LinterCliCommandOptions extends Omit<LinterCliOptions, 'verbose' | 'verboseLevel'> {
+    /**
+     * Display verbose information level.
+     */
+    verbose?: number;
+}
+
 export type ReportChoices = 'all' | 'simple' | 'typos' | 'flagged';
 
 export const ReportChoicesAll: readonly ReportChoices[] = ['all', 'simple', 'typos', 'flagged'];
@@ -416,4 +427,14 @@ export function fixLegacy<T extends LegacyFixes>(opts: T & LegacyOptions): Omit<
 export interface CSpellConfigFile {
     url: URL;
     settings: CSpellSettings;
+}
+
+export function cvtLinterCliCommandOptionsToLinterCliOptions(options: LinterCliCommandOptions): LinterCliOptions {
+    const { verbose: verboseLevel, ...optionsRest } = options;
+    const cliOptions: LinterCliOptions = { ...optionsRest };
+    if (verboseLevel) {
+        cliOptions.verboseLevel = verboseLevel;
+        cliOptions.verbose = true;
+    }
+    return cliOptions;
 }

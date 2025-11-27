@@ -157,7 +157,9 @@ export class DocumentValidator {
                     searchForDocumentConfig(this._document, settings, settings),
                 )
               : undefined;
-        pLocalConfig && timePromise(this.perfTiming, '_loadConfig', pLocalConfig);
+        if (pLocalConfig) {
+            timePromise(this.perfTiming, '_loadConfig', pLocalConfig);
+        }
         const localConfig = (await catchPromiseError(pLocalConfig, (e) => this.addPossibleError(e))) || {};
 
         this.addPossibleError(localConfig?.__importRef?.error);

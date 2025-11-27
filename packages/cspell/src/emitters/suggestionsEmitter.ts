@@ -2,7 +2,8 @@ import chalk from 'chalk';
 import type { SuggestedWord, SuggestionsForWordResult } from 'cspell-lib';
 
 import { console } from '../console.js';
-import { padLeft, padWidth, width } from '../util/pad.js';
+import { width } from '../util/ansi.js';
+import { padLeft, padWidth } from '../util/pad.js';
 
 export interface EmitSuggestionOptions {
     verbose?: number;

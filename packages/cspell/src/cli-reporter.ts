@@ -143,8 +143,7 @@ function reportProgressFileComplete(io: IO, p: ProgressFileComplete, cwd: URL, o
     const skippedReason = p.skippedReason ? ` (${p.skippedReason})` : '';
     const skipped = p.processed === false ? ` skipped${skippedReason}` : '';
     const hasErrors = p.numErrors ? io.chalk.red` X` : '';
-    const newLine =
-        (skipped && (verbose || debug)) || hasErrors || isSlow(p.elapsedTimeMs) || io.getColorLevel() < 1 ? '\n' : '';
+    const newLine = verbose || debug || hasErrors || isSlow(p.elapsedTimeMs) || io.getColorLevel() < 1 ? '\n' : '';
     const msg = `${idx} ${filename} ${time}${skipped}${hasErrors}${newLine || '\r'}`;
     io.write(msg);
 }
@@ -180,6 +179,7 @@ export interface ReporterOptions
         | 'silent'
         | 'summary'
         | 'verbose'
+        | 'verboseLevel'
         | 'wordsOnly'
     > {
     fileGlobs: string[];

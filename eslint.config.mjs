@@ -16,10 +16,8 @@ const checkSpelling = !!process.env.CSPELL_CHECK_SPELLING;
 
 export default defineConfig(
     eslint.configs.recommended,
-    // @ts-expect-error incorrect types uses outdated eslint types
     nodePlugin.configs['flat/recommended'],
     ...tsEslint.configs.recommended,
-    // unicorn.configs['flat/recommended'],
     {
         ignores: ['**/*.json'],
         plugins: {
