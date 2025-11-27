@@ -8,9 +8,7 @@ var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
 var __getOwnPropNames = Object.getOwnPropertyNames;
 var __getProtoOf = Object.getPrototypeOf;
 var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __commonJS = (cb, mod) => function() {
-	return mod || (0, cb[__getOwnPropNames(cb)[0]])((mod = { exports: {} }).exports, mod), mod.exports;
-};
+var __commonJSMin = (cb, mod) => () => (mod || cb((mod = { exports: {} }).exports, mod), mod.exports);
 var __copyProps = (to, from, except, desc) => {
 	if (from && typeof from === "object" || typeof from === "function") {
 		for (var keys = __getOwnPropNames(from), i = 0, n = keys.length, key; i < n; i++) {
@@ -33,7 +31,7 @@ var __require = /* @__PURE__ */ createRequire(import.meta.url);
 
 //#endregion
 //#region ../../node_modules/.pnpm/commander@14.0.2/node_modules/commander/lib/error.js
-var require_error = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/commander@14.0.2/node_modules/commander/lib/error.js": ((exports) => {
+var require_error = /* @__PURE__ */ __commonJSMin(((exports) => {
 	/**
 	* CommanderError class
 	*/
@@ -69,11 +67,11 @@ var require_error = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/comma
 	};
 	exports.CommanderError = CommanderError$3;
 	exports.InvalidArgumentError = InvalidArgumentError$4;
-}) });
+}));
 
 //#endregion
 //#region ../../node_modules/.pnpm/commander@14.0.2/node_modules/commander/lib/argument.js
-var require_argument = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/commander@14.0.2/node_modules/commander/lib/argument.js": ((exports) => {
+var require_argument = /* @__PURE__ */ __commonJSMin(((exports) => {
 	const { InvalidArgumentError: InvalidArgumentError$3 } = require_error();
 	var Argument$3 = class {
 		/**
@@ -195,11 +193,11 @@ var require_argument = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/co
 	}
 	exports.Argument = Argument$3;
 	exports.humanReadableArgName = humanReadableArgName$2;
-}) });
+}));
 
 //#endregion
 //#region ../../node_modules/.pnpm/commander@14.0.2/node_modules/commander/lib/help.js
-var require_help = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/commander@14.0.2/node_modules/commander/lib/help.js": ((exports) => {
+var require_help = /* @__PURE__ */ __commonJSMin(((exports) => {
 	const { humanReadableArgName: humanReadableArgName$1 } = require_argument();
 	/**
 	* TypeScript import types for JSDoc, used by Visual Studio Code IntelliSense and `npm run typescript-checkJS`
@@ -686,11 +684,11 @@ var require_help = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/comman
 	}
 	exports.Help = Help$3;
 	exports.stripColor = stripColor$1;
-}) });
+}));
 
 //#endregion
 //#region ../../node_modules/.pnpm/commander@14.0.2/node_modules/commander/lib/option.js
-var require_option = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/commander@14.0.2/node_modules/commander/lib/option.js": ((exports) => {
+var require_option = /* @__PURE__ */ __commonJSMin(((exports) => {
 	const { InvalidArgumentError: InvalidArgumentError$2 } = require_error();
 	var Option$3 = class {
 		/**
@@ -990,11 +988,11 @@ var require_option = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/comm
 	}
 	exports.Option = Option$3;
 	exports.DualOptions = DualOptions$1;
-}) });
+}));
 
 //#endregion
 //#region ../../node_modules/.pnpm/commander@14.0.2/node_modules/commander/lib/suggestSimilar.js
-var require_suggestSimilar = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/commander@14.0.2/node_modules/commander/lib/suggestSimilar.js": ((exports) => {
+var require_suggestSimilar = /* @__PURE__ */ __commonJSMin(((exports) => {
 	const maxDistance = 3;
 	function editDistance(a, b) {
 		if (Math.abs(a.length - b.length) > maxDistance) return Math.max(a.length, b.length);
@@ -1046,11 +1044,11 @@ var require_suggestSimilar = /* @__PURE__ */ __commonJS({ "../../node_modules/.p
 		return "";
 	}
 	exports.suggestSimilar = suggestSimilar$1;
-}) });
+}));
 
 //#endregion
 //#region ../../node_modules/.pnpm/commander@14.0.2/node_modules/commander/lib/command.js
-var require_command = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/commander@14.0.2/node_modules/commander/lib/command.js": ((exports) => {
+var require_command = /* @__PURE__ */ __commonJSMin(((exports) => {
 	const EventEmitter = __require("node:events").EventEmitter;
 	const childProcess = __require("node:child_process");
 	const path = __require("node:path");
@@ -3025,11 +3023,11 @@ Expecting one of '${allowedValues.join("', '")}'`);
 	}
 	exports.Command = Command$2;
 	exports.useColor = useColor;
-}) });
+}));
 
 //#endregion
 //#region ../../node_modules/.pnpm/commander@14.0.2/node_modules/commander/index.js
-var require_commander = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/commander@14.0.2/node_modules/commander/index.js": ((exports) => {
+var require_commander = /* @__PURE__ */ __commonJSMin(((exports) => {
 	const { Argument: Argument$1 } = require_argument();
 	const { Command: Command$1 } = require_command();
 	const { CommanderError: CommanderError$1, InvalidArgumentError: InvalidArgumentError$1 } = require_error();
@@ -3049,7 +3047,7 @@ var require_commander = /* @__PURE__ */ __commonJS({ "../../node_modules/.pnpm/c
 	exports.CommanderError = CommanderError$1;
 	exports.InvalidArgumentError = InvalidArgumentError$1;
 	exports.InvalidOptionArgumentError = InvalidArgumentError$1;
-}) });
+}));
 
 //#endregion
 //#region ../../node_modules/.pnpm/commander@14.0.2/node_modules/commander/esm.mjs
