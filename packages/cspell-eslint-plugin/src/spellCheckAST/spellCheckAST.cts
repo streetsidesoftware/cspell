@@ -12,11 +12,9 @@ import type { ASTPath, Key } from './ASTPath.js' with { 'resolution-mode': 'impo
 import { defaultCheckedScopes } from './customScopes.cjs';
 import type { ScopeItem } from './scope.cjs';
 import { AstPathScope, AstScopeMatcher, astScopeToString, mapNodeToScope, scopeItem } from './scope.cjs';
-import type {
-    CheckTextRange,
-    SpellCheckFn,
-    SpellCheckIssue,
-} from './spellCheck.mjs' with { 'resolution-mode': 'import' };
+import type { CheckTextRange, SpellCheckFn, SpellCheckIssue } from './spellCheck.mjs' with {
+    'resolution-mode': 'import',
+};
 import type { Issue, SpellCheckResults, Suggestions } from './types.js' with { 'resolution-mode': 'import' };
 import { walkTree } from './walkTree.cjs';
 

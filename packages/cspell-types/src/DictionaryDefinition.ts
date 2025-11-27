@@ -197,26 +197,22 @@ type DictionaryDefinitionInlineBase = Omit<DictionaryDefinitionBase, keyof Hidde
     InlineDictionary;
 
 export interface DictionaryDefinitionInlineWords
-    extends DictionaryDefinitionInlineBase,
-        Required<Pick<InlineDictionary, 'words'>> {
+    extends DictionaryDefinitionInlineBase, Required<Pick<InlineDictionary, 'words'>> {
     words: string[];
 }
 
 export interface DictionaryDefinitionInlineFlagWords
-    extends DictionaryDefinitionInlineBase,
-        Required<Pick<InlineDictionary, 'flagWords'>> {
+    extends DictionaryDefinitionInlineBase, Required<Pick<InlineDictionary, 'flagWords'>> {
     flagWords: string[];
 }
 
 export interface DictionaryDefinitionInlineIgnoreWords
-    extends DictionaryDefinitionInlineBase,
-        Required<Pick<InlineDictionary, 'ignoreWords'>> {
+    extends DictionaryDefinitionInlineBase, Required<Pick<InlineDictionary, 'ignoreWords'>> {
     ignoreWords: string[];
 }
 
 export interface DictionaryDefinitionInlineSuggestWords
-    extends DictionaryDefinitionInlineBase,
-        Required<Pick<InlineDictionary, 'suggestWords'>> {
+    extends DictionaryDefinitionInlineBase, Required<Pick<InlineDictionary, 'suggestWords'>> {
     suggestWords: string[];
 }
 

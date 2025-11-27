@@ -28,8 +28,7 @@ export interface CSpellSettingsWithSourceTrace extends CSpellSettings {
 }
 
 export interface AdvancedCSpellSettingsWithSourceTrace
-    extends CSpellSettingsWithSourceTrace,
-        ExperimentalFileSettings {}
+    extends CSpellSettingsWithSourceTrace, ExperimentalFileSettings {}
 
 export interface FileSettings extends ExtendableSettings, CommandLineSettings {
     /**
@@ -589,8 +588,7 @@ export interface BaseSetting extends InlineDictionary, ExperimentalBaseSettings,
 export interface LanguageSetting extends LanguageSettingFilterFields, BaseSetting {}
 
 export interface LanguageSettingFilterFields
-    extends LanguageSettingFilterFieldsPreferred,
-        LanguageSettingFilterFieldsDeprecated {}
+    extends LanguageSettingFilterFieldsPreferred, LanguageSettingFilterFieldsDeprecated {}
 
 export interface LanguageSettingFilterFieldsPreferred {
     /** The language id.  Ex: `typescript`, `html`, or `php`.  `*` -- will match all languages. */

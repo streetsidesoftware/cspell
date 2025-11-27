@@ -46,7 +46,8 @@ export type DictionaryDefinitionSimpleInternal = DictionaryDefinitionSimple & {
 };
 
 export interface DictionaryFileDefinitionInternal
-    extends Readonly<DictionaryDefinitionPreferred>,
+    extends
+        Readonly<DictionaryDefinitionPreferred>,
         Readonly<Partial<DictionaryDefinitionCustomUniqueFields>>,
         Readonly<DictionaryDefinitionAugmented> {
     /**

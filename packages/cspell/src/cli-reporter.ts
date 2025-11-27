@@ -162,26 +162,25 @@ function isSlow(elapsedTmeMs: number | undefined): number | undefined {
     return 2;
 }
 
-export interface ReporterOptions
-    extends Pick<
-        LinterCliOptions,
-        | 'color'
-        | 'debug'
-        | 'issues'
-        | 'issuesSummaryReport'
-        | 'legacy'
-        | 'progress'
-        | 'relative'
-        | 'root'
-        | 'showContext'
-        | 'showPerfSummary'
-        | 'showSuggestions'
-        | 'silent'
-        | 'summary'
-        | 'verbose'
-        | 'verboseLevel'
-        | 'wordsOnly'
-    > {
+export interface ReporterOptions extends Pick<
+    LinterCliOptions,
+    | 'color'
+    | 'debug'
+    | 'issues'
+    | 'issuesSummaryReport'
+    | 'legacy'
+    | 'progress'
+    | 'relative'
+    | 'root'
+    | 'showContext'
+    | 'showPerfSummary'
+    | 'showSuggestions'
+    | 'silent'
+    | 'summary'
+    | 'verbose'
+    | 'verboseLevel'
+    | 'wordsOnly'
+> {
     fileGlobs: string[];
 }
 
