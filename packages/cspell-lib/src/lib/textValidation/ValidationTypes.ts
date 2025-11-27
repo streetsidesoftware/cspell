@@ -46,7 +46,8 @@ export interface LineSegment {
 }
 
 export interface MappedTextValidationResult
-    extends MappedText,
+    extends
+        MappedText,
         Pick<Issue, 'hasSimpleSuggestions' | 'hasPreferredSuggestions' | 'isFlagged' | 'suggestionsEx'> {
     isFound?: boolean | undefined;
 }

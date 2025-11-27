@@ -65,8 +65,7 @@ export interface CommentedArrayNode<T> extends CommentedCollectionNode, Iterable
 }
 
 export interface CommentedRecordNode<T>
-    extends CommentedCollectionNode,
-        Iterable<[keyof T, CommentedNode<T[keyof T]>]> {
+    extends CommentedCollectionNode, Iterable<[keyof T, CommentedNode<T[keyof T]>]> {
     readonly value: T;
     readonly items: [keyof T, ChildNode<T[keyof T]>][];
     get<K extends keyof T>(key: K): ChildNode<T[K]> | undefined;

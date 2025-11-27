@@ -286,9 +286,7 @@ export interface FeaturesSupportedByReporter {
 }
 
 export interface ReportingConfiguration
-    extends ReporterConfigurationBase,
-        SuggestionsConfiguration,
-        UnknownWordsConfiguration {}
+    extends ReporterConfigurationBase, SuggestionsConfiguration, UnknownWordsConfiguration {}
 
 export interface ReportIssueOptions extends UnknownWordsConfiguration {
     /**

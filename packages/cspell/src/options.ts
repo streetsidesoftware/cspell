@@ -3,9 +3,7 @@ import { CSpellSettings, ReporterConfiguration } from '@cspell/cspell-types';
 import type { CacheOptions } from './util/cache/index.js';
 
 export interface LinterOptions
-    extends Omit<BaseOptions, 'config'>,
-        Omit<CacheOptions, 'version'>,
-        ReporterConfiguration {
+    extends Omit<BaseOptions, 'config'>, Omit<CacheOptions, 'version'>, ReporterConfiguration {
     /**
      * Display verbose information
      */
