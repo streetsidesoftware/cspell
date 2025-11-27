@@ -125,9 +125,12 @@ export type CSpellJSONReporterSettings = {
   outFile?: string;
   /**
    * Add more information about the files being checked and the configuration
-   * @default false
    */
   verbose?: boolean;
+  /**
+   * Level of verbosity (higher number = more verbose).
+   */
+  verboseLevel?: number;
   /**
    * Add information useful for debugging cspell.json files
    * @default false
