@@ -1,6 +1,7 @@
 import chalk from 'chalk';
 
-import { ansiWidth, pad, pruneTextEnd } from './pad.js';
+import { ansiWidth, pruneTextEnd } from './ansi.js';
+import { pad } from './pad.js';
 
 export type RowTextFn = (maxWidth: number | undefined) => string;
 

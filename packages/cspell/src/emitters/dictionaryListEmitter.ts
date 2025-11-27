@@ -5,7 +5,7 @@ import chalk from 'chalk';
 import { console } from '../console.js';
 import type { ListDictionariesResult } from '../dictionaries/index.js';
 import type { DictionariesOptions } from '../options.js';
-import { pruneAnsiTextEnd, pruneAnsiTextStart } from '../util/pad.js';
+import { pruneAnsiTextEnd, pruneAnsiTextStart } from '../util/ansi.js';
 import { TableCell, TableRow, tableToLines } from '../util/table.js';
 import type { DictionaryPathFormat } from './DictionaryPathFormat.js';
 import { formatDictionaryLocation, type PathInterface } from './helpers.js';

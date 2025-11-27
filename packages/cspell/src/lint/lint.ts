@@ -70,8 +70,10 @@ import { prefetchIterable } from '../util/prefetch.js';
 import type { FinalizedReporter } from '../util/reporters.js';
 import { extractReporterIssueOptions, LintReporter, mergeReportIssueOptions } from '../util/reporters.js';
 import { getTimeMeasurer } from '../util/timer.js';
+import { indent, unindent } from '../util/unindent.js';
 import { sizeToNumber } from '../util/unitNumbers.js';
 import * as util from '../util/util.js';
+import { wordWrapAnsiText } from '../util/wrap.js';
 import { writeFileOrStream } from '../util/writeFile.js';
 import type { LintRequest } from './LintRequest.js';
 
@@ -87,6 +89,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
     const reporter = new LintReporter(cfg.reporter, cfg.options);
     const configErrors = new Set<string>();
     const verboseLevel = calcVerboseLevel(cfg.options);
+    const useColor = cfg.options.color ?? true;
 
     const timer = getTimeMeasurer();
 
@@ -266,39 +269,35 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
 
     function reportCheckResult(
         result: LintFileResult,
-        doc: Document,
+        _doc: Document,
         spellResult: Partial<SpellCheckFileResult>,
         configInfo: ConfigInfo,
         config: CSpellSettingsWithSourceTrace,
     ) {
-        const filename = result.fileInfo.filename;
         const elapsed = result.elapsedTimeMs || 0;
         const dictionaries = config.dictionaries || [];
 
         if (verboseLevel > 1) {
-            reporter.info(
-                `Checked: ${filename}, File type: ${config.languageId}, Language: ${config.language} ... Issues: ${
-                    result.issues.length
-                } ${elapsed.toFixed(2)}ms`,
-                MessageTypes.Info,
-            );
-            reporter.info(
-                `Config file Used: ${spellResult.localConfigFilepath || configInfo.source}`,
-                MessageTypes.Info,
-            );
-            reporter.info(`Dictionaries Used: ${dictionaries.join(', ')}`, MessageTypes.Info);
+            const dictsUsed = [...dictionaries]
+                .sort()
+                .map((name) => chalk.green(name))
+                .join(', ');
+            const msg = unindent`
+                    File type: ${config.languageId}, Language: ${config.language}, Issues: ${
+                        result.issues.length
+                    } ${elapsed.toFixed(2)}ms
+                    Config file Used: ${relativeToCwd(spellResult.localConfigFilepath || configInfo.source, cfg.root)}
+                    Dictionaries Used:
+                      ${wordWrapAnsiText(dictsUsed, 70)}`;
+            reporter.info(indent(msg, '  '), MessageTypes.Info);
         }
 
         if (cfg.options.debug) {
-            const { id: _id, name: _name, __imports, __importRef, ...cfg } = config;
-            const debugCfg = {
-                filename,
-                languageId: doc.languageId ?? cfg.languageId ?? 'default',
-                // eslint-disable-next-line unicorn/no-null
-                config: { ...cfg, source: null },
-                source: spellResult.localConfigFilepath,
-            };
-            reporter.debug(JSON.stringify(debugCfg, undefined, 2));
+            const { enabled, language, languageId, dictionaries } = config;
+            const useConfig = { languageId, enabled, language, dictionaries };
+            const msg = unindent`\
+                Debug Config: ${formatWithOptions({ depth: 2, colors: useColor }, useConfig)}`;
+            reporter.debug(msg);
         }
     }
 
@@ -468,7 +467,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         const reporters = cfg.options.reporter ?? configInfo.config.reporters;
         reporter.config = reporterConfig;
         await reporter.loadReportersAndFinalize(reporters);
-        setLogger(getLoggerFromReporter(reporter, cfg.options.color ?? true));
+        setLogger(getLoggerFromReporter(reporter, useColor));
 
         const globInfo = await determineGlobs(configInfo, cfg);
         const { fileGlobs, excludeGlobs } = globInfo;
@@ -482,7 +481,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         checkGlobs(fileGlobs, reporter);
 
         if (verboseLevel > 1) {
-            reporter.info(`Config Files Found:\n    ${configInfo.source}\n`, MessageTypes.Info);
+            reporter.info(`Config Files Found:\n    ${relativeToCwd(configInfo.source)}\n`, MessageTypes.Info);
         }
 
         const configErrors = await countConfigErrors(configInfo);
@@ -515,17 +514,17 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         const formattedFiles = files.length > 100 ? [...files.slice(0, 100), '...'] : files;
 
         reporter.info(
-            `
-cspell;
-Date: ${new Date().toUTCString()}
-Options:
-    verbose:   ${yesNo(!!cfg.options.verbose)}
-    config:    ${cfg.configFile || 'default'}
-    exclude:   ${cliExcludes.join('\n               ')}
-    files:     ${formattedFiles}
-    wordsOnly: ${yesNo(!!cfg.options.wordsOnly)}
-    unique:    ${yesNo(!!cfg.options.unique)}
-`,
+            unindent`
+                cspell;
+                Date: ${new Date().toUTCString()}
+                Options:
+                    verbose:   ${yesNo(!!cfg.options.verbose)}
+                    config:    ${cfg.configFile || 'default'}
+                    exclude:   ${wordWrapAnsiText(cliExcludes.join(', '), 60, '  ')}
+                    files:     ${formattedFiles}
+                    wordsOnly: ${yesNo(!!cfg.options.wordsOnly)}
+                    unique:    ${yesNo(!!cfg.options.unique)}
+                `,
             MessageTypes.Info,
         );
     }
