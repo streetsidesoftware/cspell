@@ -346,6 +346,8 @@ jobs:
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@84ae59a2cdc2258d6fa0732dd66352dddae2a412 # v7.0.9
+        env:
+          ACTIONS_STEP_DEBUG: true
         with:
           commit-message: 'fix: Workflow Bot -- Update Dictionaries (${{ env.REF_BRANCH }})'
           branch: ${{ env.NEW_BRANCH }}
