@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["--issues-summary-report","**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2885, Issues found: 8588 in 927 files.
+ CSpell: Files checked: 2885, Issues found: 8570 in 924 files.
  exit code: 1
 django/__init__.py:12:26     - Unknown word (urlresolvers) -- Set the thread-local urlresolvers script prefix if `set
 django/apps/registry.py:134:40    - Unknown word (unconfigured) -- not ready" is due to unconfigured settings, accessing
@@ -1224,9 +1224,6 @@ django/core/paginator.py:454:15    - Unknown word (aend)       -- async def aend
 django/core/serializers/base.py:2:32      - Unknown word (unserializer) -- abstract serializer/unserializer base classes.
 django/core/serializers/base.py:59:9      - Unknown word (perc)         -- perc = count * 100 // self
 django/core/serializers/base.py:60:16     - Unknown word (perc)         -- done = perc * self.progress_width
-django/core/serializers/pyyaml.py:33:22     - Unknown word (representer) -- DjangoSafeDumper.add_representer(decimal.Decimal, DjangoSafeDu
-django/core/serializers/pyyaml.py:34:22     - Unknown word (representer) -- DjangoSafeDumper.add_representer(
-django/core/serializers/pyyaml.py:39:22     - Unknown word (representer) -- DjangoSafeDumper.add_representer(dict, DjangoSafeDumper
 django/core/serializers/xml_serializer.py:117:59    - Unknown word (subelements) -- keys are rolled out as subelements
 django/core/serializers/xml_serializer.py:142:63    - Unknown word (subelements) -- keys are rolled out as subelements
 django/core/serializers/xml_serializer.py:15:19     - Unknown word (xmlutils)   -- from django.utils.xmlutils import SimplerXMLGenerator
@@ -2261,8 +2258,6 @@ django/utils/http.py:96:38     - Unknown word (usegmt)     -- formatdate(epoch_s
 django/utils/inspect.py:16:37     - Unknown word (annotationlib) -- func, annotation_format=annotationlib.Format.FORWARDREF
 django/utils/inspect.py:7:12      - Unknown word (annotationlib) -- import annotationlib
 django/utils/ipv6.py:29:31     - Unknown word (hextets)    -- zeroes, and make sure all hextets are lowercase.
-django/utils/log.py:105:24    - Unknown word (levelname)  -- record.levelname,
-django/utils/log.py:114:42    - Unknown word (levelname)  -- "%s: %s" % (record.levelname, record.getMessage(
 django/utils/lorem_ipsum.py:100:6     - Unknown word (ipsa)           -- "ipsa",
 django/utils/lorem_ipsum.py:102:6     - Unknown word (reiciendis)     -- "reiciendis",
 django/utils/lorem_ipsum.py:103:6     - Unknown word (nesciunt)       -- "nesciunt",
@@ -3969,7 +3964,6 @@ tests/backends/tests.py:332:24    - Unknown word (executemany) -- cursor.execute
 tests/backends/tests.py:397:46    - Unknown word (Agnelline)   -- name="Mary", last_name="Agnelline").save()
 tests/backends/tests.py:417:53    - Unknown word (Agnelline)   -- fetchall()), [("Mary", "Agnelline"), ("Peter", "Parker
 tests/backends/tests.py:422:49    - Unknown word (françois)    -- dict["PASSWORD"] = "françois"
-tests/backends/tests.py:595:33    - Unknown word (levelno)     -- self.assertEqual(record.levelno, logging.DEBUG)
 tests/backends/tests.py:625:34    - Unknown word (MYISAM)      -- MySQL+InnoDB and MySQL+MYISAM (something we currently
 tests/backends/tests.py:969:9     - Unknown word (SQLPK)       -- class MySQLPKZeroTests(TestCase):
 tests/backends/tests.py:977:22    - Unknown word (autoval)     -- def test_zero_as_autoval(self):
@@ -4099,7 +4093,6 @@ tests/csrf_tests/tests.py:42:35     - Unknown word (bcdefghij)  -- SECRET1 = "1b
 tests/csrf_tests/tests.py:42:45     - Unknown word (bcdefghij)  -- bcdefghij2bcdefghij3bcdefghij4bcdefghij5bcdefghij
 tests/csrf_tests/tests.py:42:55     - Unknown word (bcdefghij)  -- bcdefghij3bcdefghij4bcdefghij5bcdefghij6bcdefghijABCD
 tests/csrf_tests/tests.py:42:65     - Unknown word (bcdefghij)  -- bcdefghij4bcdefghij5bcdefghij6bcdefghijABCD"
-tests/csrf_tests/tests.py:60:44     - Unknown word (levelno)    -- logger_cm, reason, levelno=logging.WARNING
 tests/csrf_tests/tests.py:627:24    - Unknown word (referer)    -- def test_https_bad_referer(self):
 tests/csrf_tests/tests.py:629:41    - Unknown word (referer)    -- HTTPS request with a bad referer is rejected
 tests/csrf_tests/tests.py:634:24    - Unknown word (REFERER)    -- req.META["HTTP_REFERER"] = "https://www.evil
@@ -4109,13 +4102,10 @@ tests/csrf_tests/tests.py:647:23    - Unknown word (referer)    -- mw._check_ref
 tests/csrf_tests/tests.py:650:23    - Unknown word (referer)    -- def test_https_no_referer(self):
 tests/csrf_tests/tests.py:659:14    - Unknown word (Referer)    -- "Referer checking failed - no
 tests/csrf_tests/tests.py:659:43    - Unknown word (Referer)    -- checking failed - no Referer.",
-tests/csrf_tests/tests.py:65:65     - Unknown word (levelno)    -- for {logger_cm=} in {levelno=} (expected 1, "
 tests/csrf_tests/tests.py:671:24    - Unknown word (REFERER)    -- req.META["HTTP_REFERER"] = "https://www.evil
 tests/csrf_tests/tests.py:675:14    - Unknown word (Referer)    -- "Referer checking failed - https
 tests/csrf_tests/tests.py:698:34    - Unknown word (Referer)    -- malformed_referer_msg = "Referer checking failed - Referer
 tests/csrf_tests/tests.py:701:24    - Unknown word (REFERER)    -- req.META["HTTP_REFERER"] = "http://http://www
-tests/csrf_tests/tests.py:70:33     - Unknown word (levelno)    -- self.assertEqual(record.levelno, levelno)
-tests/csrf_tests/tests.py:70:42     - Unknown word (levelno)    -- assertEqual(record.levelno, levelno)
 tests/csrf_tests/tests.py:711:24    - Unknown word (REFERER)    -- req.META["HTTP_REFERER"] = ""
 tests/csrf_tests/tests.py:716:24    - Unknown word (REFERER)    -- req.META["HTTP_REFERER"] = "ØBöIß"
 tests/csrf_tests/tests.py:99:31     - Unknown word (vcgiso)     -- "da4SrUiHJYoJ0HYQ0vcgisoIuFOxx4ER",
@@ -5830,21 +5820,15 @@ tests/known_related_objects/tests.py:20:50     - Unknown word (organiser)  -- to
 tests/known_related_objects/tests.py:23:50     - Unknown word (organiser)  -- tournament=cls.t2, organiser=cls.o1
 tests/known_related_objects/tests.py:4:21      - Unknown word (Organiser)  -- from .models import Organiser, Pool, PoolStyle, Tournament
 tests/known_related_objects/tests.py:65:9      - Unknown word (organiser)  -- organiser = self.o1
-tests/logging_tests/tests.py:102:9     - Unknown word (levelno)    -- levelno,
-tests/logging_tests/tests.py:110:58    - Unknown word (levelno)    -- for {logger_cm=} in {levelno=} (expected 1, got
-tests/logging_tests/tests.py:115:33    - Unknown word (levelno)    -- self.assertEqual(record.levelno, levelno)
-tests/logging_tests/tests.py:115:42    - Unknown word (levelno)    -- assertEqual(record.levelno, levelno)
 tests/logging_tests/tests.py:403:11    - Unknown word (Monkeypatches) -- # Monkeypatches
 tests/logging_tests/tests.py:413:22    - Unknown word (Monkeypatches) -- # Revert Monkeypatches
 tests/logging_tests/tests.py:459:30    - Unknown word (doesnt)        -- test_disallowed_host_doesnt_crash(self):
 tests/logging_tests/tests.py:555:44    - Unknown word (sdict)         -- settings("settings.py", sdict={"LOGGING": log_config
 tests/logging_tests/tests.py:602:40    - Unknown word (sublogger)     -- suspicious_operation_uses_sublogger(self):
 tests/logging_tests/tests.py:661:13    - Unknown word (sdict)         -- sdict={
-tests/logging_tests/tests.py:806:51    - Unknown word (levelname)     -- logging.Formatter("%(levelname)s:%(name)s:%(message
 tests/logging_tests/tests.py:846:15    - Unknown word (Привет)        -- ("Привет", "\\u041f\\u0440\\u
 tests/logging_tests/tests.py:849:28    - Unknown word (mred)          -- ("escape\x1b[31mred\x1b[0m", "escape\\x
 tests/logging_tests/tests.py:849:57    - Unknown word (mred)          -- 0m", "escape\\x1b[31mred\\x1b[0m"),
-tests/logging_tests/tests.py:879:21    - Unknown word (levelno)       -- levelno=logging.ERROR,
 tests/lookup/tests.py:1170:34   - Unknown word (lengtp)     -- Unsupported lookup 'lengtp' for SlugField or join
 tests/lookup/tests.py:1175:46   - Unknown word (lengtp)     -- objects.filter(slug__lengtp=20)
 tests/lookup/tests.py:1202:34   - Unknown word (abspl)      -- Unsupported lookup 'abspl' for ManyToOneRel or
@@ -6060,7 +6044,6 @@ tests/max_lengths/tests.py:29:23     - Unknown word (vcard)      -- "vcard": "vc
 tests/max_lengths/tests.py:34:33     - Unknown word (vcard)      -- field in ("email", "vcard", "homepage", "avatar
 tests/messages_tests/test_api.py:57:30     - Unknown word (ducktyping) -- message() should use ducktyping to allow request wrappers
 tests/messages_tests/test_cookie.py:157:55    - Unknown word (NOTRECEIVED) -- m"e', "\u2019", '123"NOTRECEIVED"']
-tests/messages_tests/tests.py:160:21    - Unknown word (levelname)  -- def test_custom_levelname(self):
 tests/middleware/extra_urls.py:6:11      - Unknown word (customurlconf) -- path("customurlconf/noslash", views.empty
 tests/middleware/extra_urls.py:7:11      - Unknown word (customurlconf) -- path("customurlconf/slash/", views.empty
 tests/middleware/extra_urls.py:8:11      - Unknown word (customurlconf) -- path("customurlconf/needsquoting#/", views
@@ -7524,7 +7507,6 @@ tests/servers/test_basehttp.py:138:17    - Unknown word (Unclosable) -- wfile = 
 tests/servers/test_basehttp.py:164:17    - Unknown word (Unclosable) -- wfile = UnclosableBytesIO()
 tests/servers/test_basehttp.py:193:17    - Unknown word (Unclosable) -- wfile = UnclosableBytesIO()
 tests/servers/test_basehttp.py:19:7      - Unknown word (Unclosable) -- class UnclosableBytesIO(BytesIO):
-tests/servers/test_basehttp.py:50:43     - Unknown word (levelname)  -- cm.records[0].levelname, wrong_level.upper(
 tests/servers/tests.py:220:49    - Unknown word (Iamastream) -- ssertEqual(response.read(), b"Iamastream")
 tests/servers/tests.py:229:49    - Unknown word (Iamastream) -- ssertEqual(response.read(), b"Iamastream")
 tests/servers/tests.py:314:66    - Unknown word (тест)       -- % urlencode({"q": "тест"})) as f:
