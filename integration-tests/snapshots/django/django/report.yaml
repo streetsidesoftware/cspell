@@ -4,8 +4,8 @@ Url: https://github.com/django/django.git
 Args: '["--issues-summary-report","**/*.{md,py}"]'
 Summary:
   files: 2885
-  filesWithIssues: 927
-  issues: 8588
+  filesWithIssues: 924
+  issues: 8570
   errors: 0
 Errors: []
 
@@ -1229,9 +1229,6 @@ issues:
   - "django/core/serializers/base.py:2:32        unserializer    U       abstract serializer/unserializer base classes."
   - "django/core/serializers/base.py:59:9        perc            U       perc = count * 100 // self"
   - "django/core/serializers/base.py:60:16       perc            U       done = perc * self.progress_width"
-  - "django/core/serializers/pyyaml.py:33:22         representer     U       DjangoSafeDumper.add_representer(decimal.Decimal, DjangoSafeDu"
-  - "django/core/serializers/pyyaml.py:34:22         representer     U       DjangoSafeDumper.add_representer("
-  - "django/core/serializers/pyyaml.py:39:22         representer     U       DjangoSafeDumper.add_representer(dict, DjangoSafeDumper"
   - "django/core/serializers/xml_serializer.py:15:19         xmlutils        U       from django.utils.xmlutils import SimplerXMLGenerator"
   - "django/core/serializers/xml_serializer.py:117:59        subelements     U       keys are rolled out as subelements"
   - "django/core/serializers/xml_serializer.py:142:63        subelements     U       keys are rolled out as subelements"
@@ -2266,8 +2263,6 @@ issues:
   - "django/utils/inspect.py:7:12        annotationlib       U       import annotationlib"
   - "django/utils/inspect.py:16:37       annotationlib       U       func, annotation_format=annotationlib.Format.FORWARDREF"
   - "django/utils/ipv6.py:29:31          hextets     U       zeroes, and make sure all hextets are lowercase."
-  - "django/utils/log.py:105:24      levelname       U       record.levelname,"
-  - "django/utils/log.py:114:42      levelname       U       \"%s: %s\" % (record.levelname, record.getMessage("
   - "django/utils/lorem_ipsum.py:8:28        amet                U       Lorem ipsum dolor sit amet, consectetur adipisicing"
   - "django/utils/lorem_ipsum.py:8:34        consectetur         U       ipsum dolor sit amet, consectetur adipisicing elit, sed"
   - "django/utils/lorem_ipsum.py:8:46        adipisicing         U       sit amet, consectetur adipisicing elit, sed do eiusmod"
@@ -3974,7 +3969,6 @@ issues:
   - "tests/backends/tests.py:397:46      Agnelline       U       name=\"Mary\", last_name=\"Agnelline\").save()"
   - "tests/backends/tests.py:417:53      Agnelline       U       fetchall()), [(\"Mary\", \"Agnelline\"), (\"Peter\", \"Parker"
   - "tests/backends/tests.py:422:49      françois        U       dict[\"PASSWORD\"] = \"françois\""
-  - "tests/backends/tests.py:595:33      levelno         U       self.assertEqual(record.levelno, logging.DEBUG)"
   - "tests/backends/tests.py:625:34      MYISAM          U       MySQL+InnoDB and MySQL+MYISAM (something we currently"
   - "tests/backends/tests.py:969:9       SQLPK           U       class MySQLPKZeroTests(TestCase):"
   - "tests/backends/tests.py:977:22      autoval         U       def test_zero_as_autoval(self):"
@@ -4103,10 +4097,6 @@ issues:
   - "tests/csrf_tests/tests.py:42:45         bcdefghij       U       bcdefghij2bcdefghij3bcdefghij4bcdefghij5bcdefghij"
   - "tests/csrf_tests/tests.py:42:55         bcdefghij       U       bcdefghij3bcdefghij4bcdefghij5bcdefghij6bcdefghijABCD"
   - "tests/csrf_tests/tests.py:42:65         bcdefghij       U       bcdefghij4bcdefghij5bcdefghij6bcdefghijABCD\""
-  - "tests/csrf_tests/tests.py:60:44         levelno         U       logger_cm, reason, levelno=logging.WARNING"
-  - "tests/csrf_tests/tests.py:65:65         levelno         U       for {logger_cm=} in {levelno=} (expected 1, \""
-  - "tests/csrf_tests/tests.py:70:33         levelno         U       self.assertEqual(record.levelno, levelno)"
-  - "tests/csrf_tests/tests.py:70:42         levelno         U       assertEqual(record.levelno, levelno)"
   - "tests/csrf_tests/tests.py:99:31         vcgiso          U       \"da4SrUiHJYoJ0HYQ0vcgisoIuFOxx4ER\","
   - "tests/csrf_tests/tests.py:627:24        referer         U       def test_https_bad_referer(self):"
   - "tests/csrf_tests/tests.py:629:41        referer         U       HTTPS request with a bad referer is rejected"
@@ -5835,21 +5825,15 @@ issues:
   - "tests/known_related_objects/tests.py:20:50          organiser       U       tournament=cls.t2, organiser=cls.o1"
   - "tests/known_related_objects/tests.py:23:50          organiser       U       tournament=cls.t2, organiser=cls.o1"
   - "tests/known_related_objects/tests.py:65:9           organiser       U       organiser = self.o1"
-  - "tests/logging_tests/tests.py:102:9          levelno             U       levelno,"
-  - "tests/logging_tests/tests.py:110:58         levelno             U       for {logger_cm=} in {levelno=} (expected 1, got"
-  - "tests/logging_tests/tests.py:115:33         levelno             U       self.assertEqual(record.levelno, levelno)"
-  - "tests/logging_tests/tests.py:115:42         levelno             U       assertEqual(record.levelno, levelno)"
   - "tests/logging_tests/tests.py:403:11         Monkeypatches       U       # Monkeypatches"
   - "tests/logging_tests/tests.py:413:22         Monkeypatches       U       # Revert Monkeypatches"
   - "tests/logging_tests/tests.py:459:30         doesnt (doesn't)    U       test_disallowed_host_doesnt_crash(self):"
   - "tests/logging_tests/tests.py:555:44         sdict               U       settings(\"settings.py\", sdict={\"LOGGING\": log_config"
   - "tests/logging_tests/tests.py:602:40         sublogger           U       suspicious_operation_uses_sublogger(self):"
   - "tests/logging_tests/tests.py:661:13         sdict               U       sdict={"
-  - "tests/logging_tests/tests.py:806:51         levelname           U       logging.Formatter(\"%(levelname)s:%(name)s:%(message"
   - "tests/logging_tests/tests.py:846:15         Привет              U       (\"Привет\", \"\\\\u041f\\\\u0440\\\\u"
   - "tests/logging_tests/tests.py:849:28         mred                U       (\"escape\\x1b[31mred\\x1b[0m\", \"escape\\\\x"
   - "tests/logging_tests/tests.py:849:57         mred                U       0m\", \"escape\\\\x1b[31mred\\\\x1b[0m\"),"
-  - "tests/logging_tests/tests.py:879:21         levelno             U       levelno=logging.ERROR,"
   - "tests/lookup/tests.py:291:38        constaint (constraint)      U       bulk_non_unique_meta_constaint(self):"
   - "tests/lookup/tests.py:1170:34       lengtp                      U       Unsupported lookup 'lengtp' for SlugField or join"
   - "tests/lookup/tests.py:1175:46       lengtp                      U       objects.filter(slug__lengtp=20)"
@@ -6065,7 +6049,6 @@ issues:
   - "tests/max_lengths/tests.py:34:33        vcard       U       field in (\"email\", \"vcard\", \"homepage\", \"avatar"
   - "tests/messages_tests/test_api.py:57:30          ducktyping      U       message() should use ducktyping to allow request wrappers"
   - "tests/messages_tests/test_cookie.py:157:55      NOTRECEIVED     U       m\"e', \"\\u2019\", '123\"NOTRECEIVED\"']"
-  - "tests/messages_tests/tests.py:160:21        levelname       U       def test_custom_levelname(self):"
   - "tests/middleware_exceptions/middleware.py:1:47          markcoroutinefunction       U       iscoroutinefunction, markcoroutinefunction"
   - "tests/middleware_exceptions/middleware.py:19:13         markcoroutinefunction       U       markcoroutinefunction(self)"
   - "tests/middleware/extra_urls.py:6:11         customurlconf       U       path(\"customurlconf/noslash\", views.empty"
@@ -7525,7 +7508,6 @@ issues:
   - "tests/serializers/tests.py:353:31       Djanaev     U       player.name = \"Soslan Djanaev\""
   - "tests/serializers/tests.py:362:9        deserial    U       deserial_objs = list(serializers"
   - "tests/servers/test_basehttp.py:19:7         Unclosable      U       class UnclosableBytesIO(BytesIO):"
-  - "tests/servers/test_basehttp.py:50:43        levelname       U       cm.records[0].levelname, wrong_level.upper("
   - "tests/servers/test_basehttp.py:105:17       Unclosable      U       wfile = UnclosableBytesIO()"
   - "tests/servers/test_basehttp.py:138:17       Unclosable      U       wfile = UnclosableBytesIO()"
   - "tests/servers/test_basehttp.py:164:17       Unclosable      U       wfile = UnclosableBytesIO()"
@@ -9961,8 +9943,6 @@ issuesSummary:
   - "text: lètmeinz, count: 5, files: 1,"
   - "text: lety, count: 1, files: 1,"
   - "text: Lëtzebuergesch, count: 1, files: 1,"
-  - "text: levelname, count: 5, files: 4,"
-  - "text: levelno, count: 10, files: 3,"
   - "text: lgdal, count: 19, files: 5,"
   - "text: lgeos, count: 9, files: 2,"
   - "text: libc, count: 3, files: 1,"
@@ -10745,7 +10725,6 @@ issuesSummary:
   - "text: repointing, count: 3, files: 2,"
   - "text: repoints, count: 2, files: 1,"
   - "text: reprehenderit, count: 3, files: 2,"
-  - "text: representer, count: 3, files: 1,"
   - "text: reproject, count: 2, files: 2,"
   - "text: Reproject, count: 2, files: 2,"
   - "text: reprojected, count: 1, files: 1,"
