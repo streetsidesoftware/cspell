@@ -33,6 +33,15 @@ Note: the command line value will override any value found in the configuration 
 ### Fixes
 
 <details>
+<summary>fix: Sign tags and commits when publishing (<a href="https://github.com/streetsidesoftware/cspell/pull/8096">#8096</a>)</summary>
+
+### fix: Sign tags and commits when publishing ([#8096](https://github.com/streetsidesoftware/cspell/pull/8096))
+
+---
+
+</details>
+
+<details>
 <summary>fix: Clean up verbose output (<a href="https://github.com/streetsidesoftware/cspell/pull/8053">#8053</a>)</summary>
 
 ### fix: Clean up verbose output ([#8053](https://github.com/streetsidesoftware/cspell/pull/8053))
