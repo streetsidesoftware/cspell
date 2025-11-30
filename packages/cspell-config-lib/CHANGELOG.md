@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v9.4.0 (2025-11-30)
+
+### Features
+
+- feat: Add option to skip large files (<a href="https://github.com/streetsidesoftware/cspell/pull/8040">#8040</a>)
+
+### Fixes
+
+- fix: Clean up verbose output (<a href="https://github.com/streetsidesoftware/cspell/pull/8053">#8053</a>)
+- fix: allow string based maxFileSize (<a href="https://github.com/streetsidesoftware/cspell/pull/8047">#8047</a>)
+
+### Dictionary Updates
+
+- fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/8091">#8091</a>)
+- fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/8080">#8080</a>)
+
+- fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/8058">#8058</a>)
+- fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/8036">#8036</a>)
+
 ## v9.3.2 (2025-11-15)
 
 ### Fixes
