@@ -3,9 +3,9 @@ Repository: googleapis/google-cloud-cpp
 Url: https://github.com/googleapis/google-cloud-cpp.git
 Args: '["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]'
 Summary:
-  files: 20955
-  filesWithIssues: 7958
-  issues: 45736
+  files: 20966
+  filesWithIssues: 7960
+  issues: 45753
   errors: 0
 Errors: []
 
@@ -485,10 +485,10 @@ issues:
   - "google/cloud/bigtable/benchmarks/random_mutation.cc:31:8        ABCDEFGHIJLKMNOPQRSTUVWXY       U       \"ABCDEFGHIJLKMNOPQRSTUVWXYZabcdefghijlkmnopqrstuvwxyz"
   - "google/cloud/bigtable/benchmarks/random_mutation.cc:31:33       Zabcdefghijlkmnopqrstuvwxyz     U       ABCDEFGHIJLKMNOPQRSTUVWXYZabcdefghijlkmnopqrstuvwxyz0123456789-/_\");"
   - "google/cloud/bigtable/benchmarks/scan_async_throughput_benchmark.cc:105:34      lprofiler       U       copt=-g --linkopt='-lprofiler' \\"
-  - "google/cloud/bigtable/bigtable_client_unit_tests.bzl:100:12         readmodifywriterow      U       \"table_readmodifywriterow_test.cc\","
-  - "google/cloud/bigtable/bigtable_client_unit_tests.bzl:101:12         readrow                 U       \"table_readrow_test.cc\","
-  - "google/cloud/bigtable/bigtable_client_unit_tests.bzl:102:12         readrows                U       \"table_readrows_test.cc\","
-  - "google/cloud/bigtable/BUILD.bazel:135:22        readrowsparser      U       name = \"internal_readrowsparser_test\","
+  - "google/cloud/bigtable/bigtable_client_unit_tests.bzl:101:12         readmodifywriterow      U       \"table_readmodifywriterow_test.cc\","
+  - "google/cloud/bigtable/bigtable_client_unit_tests.bzl:102:12         readrow                 U       \"table_readrow_test.cc\","
+  - "google/cloud/bigtable/bigtable_client_unit_tests.bzl:103:12         readrows                U       \"table_readrows_test.cc\","
+  - "google/cloud/bigtable/BUILD.bazel:137:22        readrowsparser      U       name = \"internal_readrowsparser_test\","
   - "google/cloud/bigtable/client_options_test.cc:311:28         Grpclb      U       ClientOptionsTest, SetGrpclbFallbackTimeoutMS) {"
   - "google/cloud/bigtable/client_options_test.cc:319:44         GRPCLB      U       hannelArgument(args, GRPC_ARG_GRPCLB_FALLBACK_TIMEOUT_MS"
   - "google/cloud/bigtable/CMakeLists.txt:32:6           testproxy       U       \"testproxy\""
@@ -501,13 +501,13 @@ issues:
   - "google/cloud/bigtable/internal/async_row_reader_test.cc:475:37      Doesnt (Doesn't)    U       AsyncRowReaderTest, ParserEofDoesntFailOnUnfinishedRowIfRowLimit"
   - "google/cloud/bigtable/internal/async_row_reader.cc:80:31        cntr    U       explicit CountFrames(int& cntr) : cntr(++cntr) {}"
   - "google/cloud/bigtable/internal/bulk_mutator_test.cc:675:37      Retryable       U       BulkMutatorTest, ReportEitherRetryableMutationFailOrStreamFail"
-  - "google/cloud/bigtable/internal/data_connection_impl.cc:698:24       satisying       U       // sure of that, satisying the `promise<>` is deferred"
+  - "google/cloud/bigtable/internal/data_connection_impl.cc:690:24       satisying       U       // sure of that, satisying the `promise<>` is deferred"
   - "google/cloud/bigtable/internal/legacy_async_row_reader_test.cc:144:22       corresponse     U       * Future at idx i corresponse to i-th expected row"
   - "google/cloud/bigtable/internal/legacy_async_row_reader_test.cc:552:66       noooo           U       PERMISSION_DENIED, \"noooo\");"
   - "google/cloud/bigtable/internal/legacy_row_reader_test.cc:89:14          preconfigured       U       // Returns a preconfigured set of parsers, so expectatio"
   - "google/cloud/bigtable/internal/logging_result_set_reader.cc:35:43       unresumable     U       __func__ << \"() << (unresumable)\";"
   - "google/cloud/bigtable/internal/metrics_test.cc:1242:53      gfet    U       emplace(\"server-timing\", \"gfet4t7; dur=10.5\");"
-  - "google/cloud/bigtable/internal/partial_result_set_source_test.cc:281:41         AAAAAW      U       resume_token: \"AAAAAWVyZXN1bWVfdG9rZW4=\","
+  - "google/cloud/bigtable/internal/partial_result_set_source_test.cc:283:41         AAAAAW      U       resume_token: \"AAAAAWVyZXN1bWVfdG9rZW4=\","
   - "google/cloud/bigtable/internal/readrowsparser_acceptance_tests.inc:409:19       alue (value)        U       value: \"alue-VAL\""
   - "google/cloud/bigtable/internal/readrowsparser_acceptance_tests.inc:571:24       Multiqualifier      U       TEST_F(AcceptanceTest, MultiqualifierSplits) {"
   - "google/cloud/bigtable/internal/readrowsparser.h:15:57       READROWSPARSER      U       CLOUD_BIGTABLE_INTERNAL_READROWSPARSER_H"
@@ -525,6 +525,8 @@ issues:
   - "google/cloud/bigtable/tools/convert_acceptance_tests.py:87:13       rowkey      U       rowkey_string = base64.b64decode"
   - "google/cloud/bigtable/value_test.cc:862:14      infval      U       auto const infval = std::numeric_limits"
   - "google/cloud/bigtable/value_test.cc:863:14      nanval      U       auto const nanval = std::nan(\"NaN\");"
+  - "google/cloud/bigtable/value.cc:751:13       Dedup       U       void Value::DedupProtoMap() {"
+  - "google/cloud/bigtable/value.cc:752:31       dedup       U       bigtable::v2::Value dedup_value;"
   - "google/cloud/billing/budgets/v1/internal/budget_option_defaults.cc:40:8         billingbudgets      U       \"billingbudgets.googleapis.com\");"
   - "google/cloud/billing/doc/environment-variables.dox:17:40        cloudbilling    U       (which defaults to \"cloudbilling.googleapis.com\")"
   - "google/cloud/billing/v1/cloud_billing_client.h:649:21       unbilled    U       /// expected. Any unbilled charges to date will"
@@ -880,6 +882,7 @@ issues:
   - "google/cloud/storage/tests/signed_url_conformance_test.cc:152:41        bucketboundhostname         U       cketBoundHostname(test_params.bucketboundhostname());"
   - "google/cloud/storage/tests/signed_url_conformance_test.cc:250:44        expecteddecodedpolicy       U       PostPolicyV4Escape(output.expecteddecodedpolicy());"
   - "google/cloud/storage/tests/signed_url_conformance_test.cc:336:25        nonconformant               U       std::set<std::string> nonconformant_url_tests{\"ListObjects"
+  - "google/cloud/storage/well_known_parameters.h:596:47         includs (includes)      U       listing resources only includs the latest (live) version"
   - "google/cloud/storagebatchoperations/v1/internal/storage_batch_operations_auth_decorator.h:19:39         STORAGEBATCHOPERATIONS      U       CLOUD_CPP_GOOGLE_CLOUD_STORAGEBATCHOPERATIONS_V1_INTERNAL_STORAGE"
   - "google/cloud/storageinsights/v1/internal/storage_insights_auth_decorator.h:19:39        STORAGEINSIGHTS     U       CLOUD_CPP_GOOGLE_CLOUD_STORAGEINSIGHTS_V1_INTERNAL_STORAGE"
   - "google/cloud/support/doc/environment-variables.dox:13:40        cloudsupport    U       (which defaults to \"cloudsupport.googleapis.com\")"
@@ -914,7 +917,9 @@ issues:
   - "google/cloud/webrisk/mocks/mock_web_risk_connection.h:19:39         WEBRISK     U       CLOUD_CPP_GOOGLE_CLOUD_WEBRISK_MOCKS_MOCK_WEB_RISK"
   - "google/cloud/workflows/doc/environment-variables.dox:13:40          workflowexecutions      U       (which defaults to \"workflowexecutions.googleapis.com\")"
   - "MODULE.bazel:47:106         envoyproxy      U       True, repo_name = \"com_envoyproxy_protoc_gen_validate"
-  - "protos/google/cloud/bigtable/test_proxy/test_proxy.proto:25:24          testproxypb     U       option go_package = \"./testproxypb\";"
+  - "protos/google/cloud/bigtable/test_proxy/test_proxy.proto:26:61          testproxypb     U       go/bigtable/testproxy/testproxypb;testproxypb\";"
+  - "protos/google/cloud/bigtable/test_proxy/test_proxy.proto:281:38         inthe           U       metadata for each column inthe query result."
+  - "protos/google/cloud/bigtable/test_proxy/test_proxy.proto:354:17         BTQL            U       // Executes a BTQL query with the client"
   - "protos/google/cloud/compute/accelerator_types/v1/accelerator_types.proto:15:25          microgenerator      U       Generated by the C++ microgenerator."
   - "protos/google/cloud/compute/accelerator_types/v1/accelerator_types.proto:92:6           Skylake             U       // Skylake\") ``` By default, each"
   - "protos/google/cloud/compute/accelerator_types/v1/accelerator_types.proto:94:63          Broadwell           U       cpuPlatform = \"Intel Broadwell\") AND"
