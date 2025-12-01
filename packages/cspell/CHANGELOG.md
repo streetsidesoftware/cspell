@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## v9.4.0 (2025-11-30)
+## v9.4.0 (2025-12-01)
 
 ### Features
 
@@ -31,6 +31,15 @@ Note: the command line value will override any value found in the configuration 
 </details>
 
 ### Fixes
+
+<details>
+<summary>fix: Turnoff signing for now (<a href="https://github.com/streetsidesoftware/cspell/pull/8102">#8102</a>)</summary>
+
+### fix: Turnoff signing for now ([#8102](https://github.com/streetsidesoftware/cspell/pull/8102))
+
+---
+
+</details>
 
 <details>
 <summary>fix: Sign tags and commits when publishing (<a href="https://github.com/streetsidesoftware/cspell/pull/8096">#8096</a>)</summary>

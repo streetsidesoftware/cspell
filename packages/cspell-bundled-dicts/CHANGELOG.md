@@ -3,7 +3,7 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-## v9.4.0 (2025-11-30)
+## v9.4.0 (2025-12-01)
 
 ### Features
 
@@ -11,9 +11,10 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ### Fixes
 
+- fix: Turnoff signing for now (<a href="https://github.com/streetsidesoftware/cspell/pull/8102">#8102</a>)
 - fix: Sign tags and commits when publishing (<a href="https://github.com/streetsidesoftware/cspell/pull/8096">#8096</a>)
-- fix: Clean up verbose output (<a href="https://github.com/streetsidesoftware/cspell/pull/8053">#8053</a>)
 
+- fix: Clean up verbose output (<a href="https://github.com/streetsidesoftware/cspell/pull/8053">#8053</a>)
 - fix: allow string based maxFileSize (<a href="https://github.com/streetsidesoftware/cspell/pull/8047">#8047</a>)
 
 ### Dictionary Updates
