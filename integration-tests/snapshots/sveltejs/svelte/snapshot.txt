@@ -3,7 +3,7 @@ Repository: sveltejs/svelte
 Url: "https://github.com/sveltejs/svelte.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 8068, Issues found: 3876 in 563 files.
+ CSpell: Files checked: 8211, Issues found: 3935 in 582 files.
  exit code: 1
 CONTRIBUTING.md:22:5      - Unknown word (Triaging)   -- ### Triaging issues and pull requests
 benchmarking/benchmarks/reactivity/index.js:11:2      - Unknown word (sbench)     -- sbench_create_0to1,
@@ -52,6 +52,7 @@ documentation/docs/05-special-elements/07-svelte-options.md:13:111    - Unknown 
 documentation/docs/06-runtime/01-stores.md:133:42    - Unknown word (tock)       -- sound === 'tick' ? 'tock' : 'tick'));
 documentation/docs/06-runtime/01-stores.md:307:159   - Unknown word (unsubscription) -- rather than return the unsubscription function directly. Note
 documentation/docs/06-runtime/03-lifecycle-hooks.md:101:33    - Unknown word (autoscrolls) -- implement a chat window that autoscrolls to the bottom when new
+documentation/docs/06-runtime/05-hydratable.md:20:305    - Unknown word (datafetching) -- the scenes by whatever datafetching library you use. For
 documentation/docs/07-misc/03-typescript.md:271:3     - Unknown word (globalattribute) -- globalattribute?: string;
 documentation/docs/07-misc/03-typescript.md:276:3     - Unknown word (veryexperimentalattribute) -- veryexperimentalattribute?: string;
 documentation/docs/07-misc/03-typescript.md:31:110    - Unknown word (transpiling) -- just disappear when transpiling to JavaScript, such
@@ -355,12 +356,12 @@ packages/svelte/elements.d.ts:984:22    - Unknown word (closerequest)           
 packages/svelte/elements.d.ts:99:2      - Unknown word (onpastecapture) -- onpastecapture?: ClipboardEventHandler
 packages/svelte/elements.d.ts:9:20      - Unknown word (Benoit)     -- // Benoit Benezech <https://github
 packages/svelte/elements.d.ts:9:27      - Unknown word (Benezech)   -- Benoit Benezech <https://github.com
-packages/svelte/messages/client-warnings/warnings.md:131:195   - Unknown word (refetched)  -- cause the image to be refetched (or in the case of an
-packages/svelte/messages/client-warnings/warnings.md:195:41    - Unknown word (preceeded)  -- this error is often preceeded by a `console.error
+packages/svelte/messages/client-errors/errors.md:127:161   - Unknown word (blockingly) -- running its function blockingly during hydration. This
+packages/svelte/messages/client-warnings/warnings.md:148:195   - Unknown word (refetched)  -- cause the image to be refetched (or in the case of an
 packages/svelte/messages/compile-errors/options.md:11:3      - Unknown word (Unrecognised) -- > Unrecognised compiler option %keypath
 packages/svelte/messages/compile-errors/options.md:9:12      - Unknown word (unrecognised) -- ## options_unrecognised
 packages/svelte/messages/compile-errors/template.md:190:32    - Unknown word (autoclosed) -- invalid_closing_tag_autoclosed
-packages/svelte/messages/compile-errors/template.md:404:27    - Unknown word (customelement) -- svelte_options_invalid_customelement
+packages/svelte/messages/compile-errors/template.md:412:27    - Unknown word (customelement) -- svelte_options_invalid_customelement
 packages/svelte/messages/compile-warnings/a11y.md:115:3     - Unknown word (Screenreaders) -- > Screenreaders already announce `<img
 packages/svelte/messages/compile-warnings/a11y.md:155:39    - Unknown word (idlist)        -- aria_attribute_type_idlist
 packages/svelte/messages/compile-warnings/a11y.md:167:39    - Unknown word (tokenlist)     -- aria_attribute_type_tokenlist
@@ -377,8 +378,8 @@ packages/svelte/package.json:141:103   - Unknown word (treeshakeability) -- node
 packages/svelte/package.json:144:12    - Unknown word (tsgo)             -- "check:tsgo": "tsgo --project tsconfig
 packages/svelte/package.json:152:7     - Unknown word (jridgewell)       -- "@jridgewell/trace-mapping": "^0
 packages/svelte/package.json:175:6     - Unknown word (axobject)         -- "axobject-query": "^4.1.0",
-packages/svelte/package.json:178:6     - Unknown word (esrap)            -- "esrap": "^2.1.0",
-packages/svelte/package.json:182:6     - Unknown word (zimmerframe)      -- "zimmerframe": "^1.1.2"
+packages/svelte/package.json:179:6     - Unknown word (esrap)            -- "esrap": "^2.2.0",
+packages/svelte/package.json:183:6     - Unknown word (zimmerframe)      -- "zimmerframe": "^1.1.2"
 packages/svelte/scripts/check-treeshakeability.js:21:15     - Unknown word (importee)   -- resolveId(importee) {
 packages/svelte/scripts/check-treeshakeability.js:32:3      - Unknown word (onwarn)     -- onwarn: (warning, handle)
 packages/svelte/scripts/check-treeshakeability.js:42:20     - Unknown word (errr)       -- throw new Error('errr what');
@@ -393,7 +394,7 @@ packages/svelte/src/compiler/phases/1-parse/read/options.js:136:12    - Unknown 
 packages/svelte/src/compiler/phases/1-parse/read/options.js:232:162   - Unknown word (EFFFF)      -- -\uFFFD\u{10000}-\u{EFFFF}-]';
 packages/svelte/src/compiler/phases/1-parse/read/options.js:3:20      - Unknown word (MATHML)     -- import { NAMESPACE_MATHML, NAMESPACE_SVG } from
 packages/svelte/src/compiler/phases/1-parse/read/style.js:53:42     - Unknown word (Atrule)     -- AST.CSS.Rule | AST.CSS.Atrule>} */
-packages/svelte/src/compiler/phases/1-parse/state/element.js:160:36    - Unknown word (shadowroot) -- slot' && !parent_is_shadowroot_template(parser.stack
+packages/svelte/src/compiler/phases/1-parse/state/element.js:164:40    - Unknown word (shadowroot) -- slot' && !parent_is_shadowroot_template(parser.stack
 packages/svelte/src/compiler/phases/1-parse/state/tag.js:15:14     - Unknown word (bois)       -- const pointy_bois = { '<': '>' };
 packages/svelte/src/compiler/phases/1-parse/utils/entities.js:1000:3    - Unknown word (subsub)     -- 'subsub;': 10965,
 packages/svelte/src/compiler/phases/1-parse/utils/entities.js:1001:3    - Unknown word (subsup)     -- 'subsup;': 10963,
@@ -1663,8 +1664,8 @@ packages/svelte/src/compiler/phases/2-analyze/css/css-prune.js:282:18    - Unkno
 packages/svelte/src/compiler/phases/2-analyze/css/css-prune.js:289:29    - Unknown word (unscopeable) -- a `:global(...)` or unscopeable selector, or
 packages/svelte/src/compiler/phases/2-analyze/css/utils.js:28:28     - Unknown word (deopt)      -- and we don't want to deopt on `condition`
 packages/svelte/src/compiler/phases/2-analyze/css/utils.js:34:29     - Unknown word (cslx)       -- will be processed by cslx, in which case falsy
-packages/svelte/src/compiler/phases/2-analyze/index.js:771:14    - Unknown word (optimise)   -- // TODO optimise this better
-packages/svelte/src/compiler/phases/2-analyze/index.js:911:18    - Unknown word (nonstate)   -- // warn on any nonstate declarations that are
+packages/svelte/src/compiler/phases/2-analyze/index.js:1028:14   - Unknown word (optimise)   -- // TODO optimise this better
+packages/svelte/src/compiler/phases/2-analyze/index.js:727:18    - Unknown word (nonstate)   -- // warn on any nonstate declarations that are
 packages/svelte/src/compiler/phases/2-analyze/visitors/RegularElement.js:38:72     - Unknown word (qirk)       -- stripped because of a qirk:
 packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y/constants.js:236:3     - Unknown word (impp)       -- 'impp'
 packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y/constants.js:36:19     - Unknown word (labelable)  -- export const a11y_labelable = [
@@ -1677,46 +1678,46 @@ packages/svelte/src/compiler/phases/3-transform/client/transform-template/fix-at
 packages/svelte/src/compiler/phases/3-transform/client/types.d.ts:15:15     - Unknown word (Memoizer)   -- import type { Memoizer } from './visitors/shared
 packages/svelte/src/compiler/phases/3-transform/client/visitors/AssignmentExpression.js:31:27     - Unknown word (proxify)    -- not, we may need to proxify the value, or warn that
 packages/svelte/src/compiler/phases/3-transform/client/visitors/AssignmentExpression.js:40:7      - Unknown word (callees)    -- const callees = {
-packages/svelte/src/compiler/phases/3-transform/client/visitors/BindDirective.js:46:11     - Unknown word (unthunk)    -- set = b.unthunk(
-packages/svelte/src/compiler/phases/3-transform/client/visitors/CallExpression.js:129:79    - Unknown word (callsite)   -- from the `$inspect` callsite
-packages/svelte/src/compiler/phases/3-transform/client/visitors/VariableDeclaration.js:198:12    - Unknown word (dewaterfall) -- // can dewaterfall all of them?
+packages/svelte/src/compiler/phases/3-transform/client/visitors/BindDirective.js:61:12     - Unknown word (unthunk)    -- set = b.unthunk(
+packages/svelte/src/compiler/phases/3-transform/client/visitors/CallExpression.js:130:79    - Unknown word (callsite)   -- from the `$inspect` callsite
+packages/svelte/src/compiler/phases/3-transform/client/visitors/VariableDeclaration.js:199:12    - Unknown word (dewaterfall) -- // can dewaterfall all of them?
 packages/svelte/src/compiler/phases/3-transform/client/visitors/shared/declarations.js:31:30     - Unknown word (unsub)      -- call = b.call('$.store_unsub', call, b.literal(`
 packages/svelte/src/compiler/phases/3-transform/client/visitors/shared/element.js:46:67     - Unknown word (readded)    -- it isn't removed and readded on every update
 packages/svelte/src/compiler/phases/3-transform/server/visitors/RegularElement.js:15:9      - Unknown word (Optimiser)  -- PromiseOptimiser,
 packages/svelte/src/compiler/phases/3-transform/server/visitors/RegularElement.js:38:8      - Unknown word (optimiser)  -- const optimiser = new PromiseOptimiser
 packages/svelte/src/compiler/phases/3-transform/server/visitors/VariableDeclaration.js:55:45     - Unknown word (deconflict) -- declared separately, deconflict
 packages/svelte/src/compiler/phases/3-transform/server/visitors/shared/utils.js:335:18    - Unknown word (optimising) -- * A utility for optimising promises in templates
-packages/svelte/src/compiler/phases/3-transform/shared/transform-async.js:38:55     - Unknown word (asign)      -- expressions (they will asign to them; need to be
 packages/svelte/src/compiler/phases/3-transform/utils.js:218:76    - Unknown word (spaceand)   -- text node with a single spaceand keep whitespace
 packages/svelte/src/compiler/phases/patterns.js:21:43     - Unknown word (aeiou)      -- starts_with_vowel = /^[aeiou]/;
-packages/svelte/src/compiler/types/template.d.ts:25:41     - Unknown word (mrow)       -- for e.g. `<math>` or `<mrow>`
+packages/svelte/src/compiler/types/template.d.ts:26:41     - Unknown word (mrow)       -- for e.g. `<math>` or `<mrow>`
 packages/svelte/src/compiler/utils/ast.js:563:40    - Unknown word (subexpression) -- expression.expressions.some((subexpression) => is_expression_async
 packages/svelte/src/compiler/utils/extract_svelte_ignore.js:16:16     - Unknown word (eachblock)  -- 'invalid-rest-eachblock-binding': 'bind_invalid
 packages/svelte/src/compiler/utils/mapped_code.js:134:6     - Unknown word (unswitched) -- // unswitched loops are faster
 packages/svelte/src/html-tree-validation.js:120:5     - Unknown word (bgsound)    -- 'bgsound',
 packages/svelte/src/index-client.js:20:29     - Unknown word (noone)      -- value; // let's hope noone modifies this global
-packages/svelte/src/internal/client/dev/debug.js:106:28    - Unknown word (cderived)   -- console.groupCollapsed('%cderived', 'font-weight: normal
-packages/svelte/src/internal/client/dev/debug.js:77:28     - Unknown word (cdeps)      -- console.groupCollapsed('%cdeps', 'font-weight: normal
-packages/svelte/src/internal/client/dev/tracing.js:104:28    - Unknown word (cran)       -- console.log(`${prefix} %cran outside of an effect
-packages/svelte/src/internal/client/dev/tracing.js:156:9     - Unknown word (posixified) -- const posixified = line.replaceAll('
+packages/svelte/src/internal/client/dev/debug.js:103:28    - Unknown word (cdeps)      -- console.groupCollapsed('%cdeps', 'font-weight: normal
+packages/svelte/src/internal/client/dev/debug.js:223:20    - Unknown word (creactions) -- console.group('%creactions', 'font-weight: bold
+packages/svelte/src/internal/client/dev/debug.js:436:19    - Unknown word (cbranch)    -- console.group(`%cbranch (${branch.status})$
+packages/svelte/src/internal/client/dev/debug.js:439:17    - Unknown word (ceffect)    -- console.log('%ceffect:', 'font-weight: bold
+packages/svelte/src/internal/client/dev/debug.js:460:20    - Unknown word (cchild)     -- console.group('%cchild branches', 'font-weight
+packages/svelte/src/internal/client/dev/tracing.js:105:28    - Unknown word (cran)       -- console.log(`${prefix} %cran outside of an effect
 packages/svelte/src/internal/client/dom/blocks/await.js:51:91     - Unknown word (treeshaken) -- let` or else it isn't treeshaken out */
-packages/svelte/src/internal/client/dom/blocks/branches.js:190:10    - Unknown word (oncommit)   -- batch.oncommit(this.#commit);
-packages/svelte/src/internal/client/dom/blocks/branches.js:191:10    - Unknown word (ondiscard)  -- batch.ondiscard(this.#discard);
+packages/svelte/src/internal/client/dom/blocks/branches.js:217:10    - Unknown word (oncommit)   -- batch.oncommit(this.#commit);
+packages/svelte/src/internal/client/dom/blocks/branches.js:218:10    - Unknown word (ondiscard)  -- batch.ondiscard(this.#discard);
 packages/svelte/src/internal/client/dom/elements/actions.js:18:8      - Unknown word (inited)     -- var inited = false;
 packages/svelte/src/internal/client/dom/elements/attributes.js:587:16    - Unknown word (contructor) -- // Do not use contructor.name here as that's
 packages/svelte/src/internal/client/dom/elements/bindings/input.js:30:14     - Unknown word (numberlike) -- value = is_numberlike_input(input) ? to_number
-packages/svelte/src/internal/client/dom/elements/bindings/this.js:41:78     - Unknown word (nullfiy)    -- context changes), then nullfiy the binding at
 packages/svelte/src/internal/client/dom/elements/events.js:146:47    - Unknown word (expando)    -- GCed too early, the expando __root property
-packages/svelte/src/internal/client/dom/elements/misc.js:54:66     - Unknown word (possiblity) -- get noticed of it (no possiblity of stopPropagation)
-packages/svelte/src/internal/client/proxy.js:40:12     - Unknown word (proxyable)  -- // if non-proxyable, or is already a proxy
-packages/svelte/src/internal/client/proxy.js:90:32     - Unknown word (inspectable) -- /** @type {any} */ (inspectable_array(/** @type {any
-packages/svelte/src/internal/client/reactivity/batch.js:64:14     - Unknown word (travelling) -- * When time travelling (i.e. working in one
-packages/svelte/src/internal/client/reactivity/batch.js:709:82    - Unknown word (nullpointers) -- else we could run into nullpointers
-packages/svelte/src/internal/client/reactivity/deriveds.js:115:6     - Unknown word (deferreds)  -- var deferreds = new Map();
+packages/svelte/src/internal/client/proxy.js:41:12     - Unknown word (proxyable)  -- // if non-proxyable, or is already a proxy
+packages/svelte/src/internal/client/proxy.js:91:32     - Unknown word (inspectable) -- /** @type {any} */ (inspectable_array(/** @type {any
+packages/svelte/src/internal/client/reactivity/batch.js:65:14     - Unknown word (travelling) -- * When time travelling (i.e. working in one
+packages/svelte/src/internal/client/reactivity/batch.js:732:82    - Unknown word (nullpointers) -- else we could run into nullpointers
+packages/svelte/src/internal/client/reactivity/deriveds.js:116:6     - Unknown word (deferreds)  -- var deferreds = new Map();
 packages/svelte/src/internal/client/reactivity/effects.js:14:2      - Unknown word (untracking) -- untracking
-packages/svelte/src/internal/client/reactivity/sources.js:254:63    - Unknown word (overfiring) -- - this way we avoid overfiring.
-packages/svelte/src/internal/client/runtime.js:130:90    - Unknown word (depedencies) -- to avoid duplicating depedencies inside a reaction *
+packages/svelte/src/internal/client/reactivity/sources.js:270:64    - Unknown word (overfiring) -- - this way we avoid overfiring.
+packages/svelte/src/internal/client/runtime.js:138:90    - Unknown word (depedencies) -- to avoid duplicating depedencies inside a reaction *
 packages/svelte/src/internal/client/timing.js:12:5      - Unknown word (bunder)     -- // bunder will eval and remove
+packages/svelte/src/internal/client/types.d.ts:8:8       - Unknown word (hydratables) -- /** hydratables */
 packages/svelte/src/internal/server/index.js:25:209    - Unknown word (AFFFE)      -- u{9FFFE}\u{9FFFF}\u{AFFFE}\u{AFFFF}\u{BFFFE}\u
 packages/svelte/src/internal/server/index.js:25:218    - Unknown word (AFFFF)      -- u{9FFFF}\u{AFFFE}\u{AFFFF}\u{BFFFE}\u{BFFFF}\u
 packages/svelte/src/internal/server/index.js:25:227    - Unknown word (BFFFE)      -- u{AFFFE}\u{AFFFF}\u{BFFFE}\u{BFFFF}\u{CFFFE}\u
@@ -1729,9 +1730,11 @@ packages/svelte/src/internal/server/index.js:25:272    - Unknown word (DFFFF)   
 packages/svelte/src/internal/server/index.js:25:281    - Unknown word (EFFFE)      -- u{DFFFE}\u{DFFFF}\u{EFFFE}\u{EFFFF}\u{FFFFE}\u
 packages/svelte/src/internal/server/index.js:25:299    - Unknown word (FFFFE)      -- u{EFFFE}\u{EFFFF}\u{FFFFE}\u{FFFFF}\u{10FFFE}
 packages/svelte/src/internal/server/index.js:25:31     - Unknown word (FFFE)       -- \u{FDD0}-\u{FDEF}\u{FFFE}\u{FFFF}\u{1FFFE}\u
-packages/svelte/src/internal/server/renderer.js:65:28     - Unknown word (uncopied)   -- will be re-exposed, uncopied, on all children.
+packages/svelte/src/internal/server/render-context.js:39:9      - Unknown word (webcontainer) -- if (in_webcontainer()) {
+packages/svelte/src/internal/server/renderer.js:66:28     - Unknown word (uncopied)   -- will be re-exposed, uncopied, on all children.
 packages/svelte/src/internal/server/renderer.test.ts:283:30    - Unknown word (fastslowsync) -- body).toBe('<!--[-->fastslowsync<!--]-->');
 packages/svelte/src/internal/shared/clone.js:35:8      - Unknown word (uncloned)   -- let uncloned = slice.map((path)
+packages/svelte/src/internal/shared/dev.js:47:9      - Unknown word (posixified) -- const posixified = line.replaceAll('
 packages/svelte/src/motion/public.d.ts:1:25      - Unknown word (Unsubscriber) -- import { Readable, type Unsubscriber } from '../store/public
 packages/svelte/src/motion/tweened.js:163:31    - Unknown word (tweens)     -- wrapper for a value that tweens smoothly to its target
 packages/svelte/src/reactivity/create-subscriber.js:79:13     - Unknown word (subcribe)   -- // re-subcribe unnecessarily and create
@@ -1807,14 +1810,15 @@ packages/svelte/tests/migrate/samples/single-assignment-labeled/input.svelte:26:
 packages/svelte/tests/migrate/samples/single-assignment-labeled/input.svelte:36:6      - Unknown word (evenmore)   -- let evenmore;
 packages/svelte/tests/migrate/samples/slots-with-$$props/input.svelte:3:6       - Unknown word (foos)       -- {#if foos}
 packages/svelte/tests/parser-legacy/samples/action-duplicate/output.json:17:16     - Unknown word (autofocus)  -- "name": "autofocus",
-packages/svelte/tests/parser-legacy/samples/loose-invalid-expression/output.json:157:16    - Unknown word (onclick)    -- "name": "onclick",
-packages/svelte/tests/parser-legacy/samples/loose-invalid-expression/output.json:208:16    - Unknown word (nasd)       -- "raw": "\n\nasd",
+packages/svelte/tests/parser-legacy/samples/loose-invalid-expression/output.json:217:16    - Unknown word (onclick)    -- "name": "onclick",
+packages/svelte/tests/parser-legacy/samples/loose-invalid-expression/output.json:292:16    - Unknown word (nasd)       -- "raw": "\n\nasd",
 packages/svelte/tests/parser-legacy/samples/nbsp/output.json:18:16     - Unknown word (nbsp)       -- "raw": "&nbsp;",
 packages/svelte/tests/parser-legacy/samples/textarea-end-tag/input.svelte:2:16      - Unknown word (textar)     -- <p>not actu </textar ally an element. {foo
 packages/svelte/tests/parser-legacy/samples/textarea-end-tag/input.svelte:2:9       - Unknown word (actu)       -- <p>not actu </textar ally an element
 packages/svelte/tests/parser-legacy/samples/textarea-end-tag/input.svelte:3:3       - Unknown word (textare)    -- </textare
 packages/svelte/tests/parser-legacy/samples/textarea-end-tag/input.svelte:6:5       - Unknown word (textaread)  -- > </textaread >asdf</textarea
 packages/svelte/tests/parser-legacy/samples/whitespace-leading-trailing/input.svelte:3:13      - Unknown word (chillin)    -- <p>just chillin' over here</p>
+packages/svelte/tests/parser-modern/test.ts:42:9      - Unknown word (reparsed)   -- const reparsed = JSON.parse(
 packages/svelte/tests/preprocess/samples/script-multiple/input.svelte:2:2       - Unknown word (REPLACEME)  -- REPLACEME
 packages/svelte/tests/preprocess/samples/script-multiple/input.svelte:8:2       - Unknown word (REPLACEMETOO) -- REPLACEMETOO
 packages/svelte/tests/preprocess/samples/script-multiple/output.svelte:2:2       - Unknown word (replaceme)  -- replaceme
@@ -1830,6 +1834,7 @@ packages/svelte/tests/preprocess/samples/style-attributes-modified-longer/expect
 packages/svelte/tests/preprocess/samples/style-attributes/expected_map.json:3:121     - Unknown word (UAAO)       -- GAAG,CAAC,CAAC,IAAI,UAAO,CAAC,CAAC,KAAK",
 packages/svelte/tests/preprocess/samples/style-attributes/expected_map.json:3:36      - Unknown word (IAAI)       -- AAAA,CAAC,KAAK,CAAC,IAAI,CAAC,CAAC,IAAI,CAAC
 packages/svelte/tests/preprocess/samples/style-attributes/expected_map.json:3:86      - Unknown word (GAAG)       -- CAAC,CAAC,IAAI,CAAC,GAAG,CAAC,CAAC,GAAG,CAAC
+packages/svelte/tests/print/samples/formatting/input.svelte:1:41      - Unknown word (paraglide)  -- setLocale } from '$lib/paraglide/runtime';import { m
 packages/svelte/tests/runtime-browser/samples/component-css-custom-properties-dynamic-svg/_config.js:14:52     - Unknown word (qzlp)       -- "10" class="svelte-1qzlp1k"></circle>
 packages/svelte/tests/runtime-browser/samples/component-event-handler-contenteditable-false/_config.js:13:21     - Unknown word (bcde)       -- component.text = 'bcde';
 packages/svelte/tests/runtime-browser/samples/component-event-handler-contenteditable-false/_config.js:14:34     - Unknown word (bcdea)      -- equal(div.textContent, 'bcdea');
@@ -1898,6 +1903,7 @@ packages/svelte/tests/runtime-legacy/samples/svg-multiple/_config.js:14:9      -
 packages/svelte/tests/runtime-legacy/samples/transition-js-deferred-option-direction/_config.js:13:13     - Unknown word (bothin)     -- const div_bothin = /** @type {HTMLDivElement
 packages/svelte/tests/runtime-legacy/samples/transition-js-deferred-option-direction/_config.js:16:13     - Unknown word (bothout)    -- const div_bothout = /** @type {HTMLDivElement
 packages/svelte/tests/runtime-legacy/samples/transition-js-slot-5-cancelled-overflow/_config.js:6:6       - Unknown word (spreaded)   -- // + spreaded props + overflow context
+packages/svelte/tests/runtime-runes/samples/async-action-blockers/main.svelte:3:12      - Unknown word (macrotask)  -- // Wait a macrotask to make sure the effect
 packages/svelte/tests/runtime-runes/samples/async-derived-in-multiple-effects/Component.svelte:8:31      - Unknown word (mulitple)   -- derived that depends on mulitple sources
 packages/svelte/tests/runtime-runes/samples/async-each/_config.js:8:11      - Unknown word (defg)       -- <button>defg</button>
 packages/svelte/tests/runtime-runes/samples/async-error/_config.js:31:78     - Unknown word (wheee)      -- button>step 3</button><h1>wheee</h1>'
@@ -1924,6 +1930,7 @@ packages/svelte/tests/runtime-runes/samples/destructure-async-assignments/main.s
 packages/svelte/tests/runtime-runes/samples/directives-with-member-access/main.svelte:14:31     - Unknown word (Relatedly)  -- other words a number. Relatedly, people should not do
 packages/svelte/tests/runtime-runes/samples/dynamic-event-handler-2/_config.js:4:17      - Unknown word (Tama)       -- html: '<button>Tama</button><button>Pochi
 packages/svelte/tests/runtime-runes/samples/dynamic-event-handler-2/_config.js:4:38      - Unknown word (Pochi)      -- Tama</button><button>Pochi</button><br><button
+packages/svelte/tests/runtime-runes/samples/each-updates-10/_config.js:16:8      - Unknown word (Unkeyed)    -- <h2>Unkeyed</h2>
 packages/svelte/tests/runtime-runes/samples/effect-order-7/_config.js:8:19      - Unknown word (AFAICT)     -- // a real issue (AFAICT), we ignore it
 packages/svelte/tests/runtime-runes/samples/error-boundary-12/main.svelte:18:12     - Unknown word (occured)    -- <p>Error occured</p>
 packages/svelte/tests/runtime-runes/samples/error-boundary-18/_config.js:5:22      - Unknown word (unskip)     -- skip: true, // TODO unskip once tagged values are
@@ -1931,6 +1938,8 @@ packages/svelte/tests/runtime-runes/samples/event-attribute-not-hoistable/main.s
 packages/svelte/tests/runtime-runes/samples/event-attribute-not-hoistable/main.svelte:9:7       - Unknown word (doesnt)     -- b = doesnt_exist();
 packages/svelte/tests/runtime-runes/samples/event-media-element-cleanup/_config.js:17:35     - Unknown word (someevent)  -- dispatchEvent(new Event('someevent'));
 packages/svelte/tests/runtime-runes/samples/event-media-element-cleanup/main.svelte:8:9       - Unknown word (onsomeevent) -- <video onsomeevent={handler}></video>
+packages/svelte/tests/runtime-runes/samples/hydratable-unused-keys-nesting-partial/_config.js:10:48     - Unknown word (plagueis)   -- the tragedy of darth plagueis the wise?</div><div
+packages/svelte/tests/runtime-runes/samples/hydratable-unused-keys-nesting-partial/_config.js:24:82     - Unknown word (sith)       -- wise?</div><div>no, sith daddy, please tell me
 packages/svelte/tests/runtime-runes/samples/multiple-head/_config.js:9:155     - Unknown word (svelteawesome) -- description"><meta content="@svelteawesome" name="author"><title
 packages/svelte/tests/runtime-runes/samples/non-local-mutation-with-binding-3/_config.js:36:30     - Unknown word (notshared)  -- Mutating unbound props (`notshared`, at Counter.svelte
 packages/svelte/tests/runtime-runes/samples/not-actual-runes/_config.js:7:11      - Unknown word (Shouldnt)   -- <button>Shouldnt be reactive</button

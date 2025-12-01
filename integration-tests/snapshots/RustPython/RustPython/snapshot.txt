@@ -3,16 +3,14 @@ Repository: RustPython/RustPython
 Url: "https://github.com/RustPython/RustPython.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 703, Issues found: 751 in 92 files.
+ CSpell: Files checked: 710, Issues found: 749 in 92 files.
  exit code: 1
 Cargo.toml:115:28    - Unknown word (nsis)       -- package.metadata.packager.nsis]
-Cargo.toml:201:1     - Unknown word (rustix)     -- rustix = { version = "1.0"
+Cargo.toml:200:1     - Unknown word (rustix)     -- rustix = { version = "1.0"
 Cargo.toml:91:62     - Unknown word (redoxer)    -- to compile/check with redoxer
 DEVELOPMENT.md:131:26    - Unknown word (subcrates)  -- src`: using the other subcrates to bring rustpython
 LICENSE-logo:139:15    - Unknown word (sublicensable) -- non-sublicensable, non-exclusive, irrevocable
 LICENSE-logo:205:34    - Unknown word (waivable)      -- under any voluntary or waivable statutory or compulsory
-README.md:102:8     - Unknown word (wasmer)     -- Run by wasmer
-README.md:105:1     - Unknown word (wasmer)     -- wasmer run --dir `pwd` -- target
 README.md:108:8     - Unknown word (wapm)       -- Run by wapm
 README.md:111:3     - Unknown word (wapm)       -- $ wapm install rustpython
 README.md:112:3     - Unknown word (wapm)       -- $ wapm run rustpython
@@ -87,6 +85,34 @@ crates/doc/LICENSE:5:1       - Unknown word (Mathematisch) -- Mathematisch Centr
 crates/sre_engine/Cargo.toml:3:13      - Unknown word (Kangzhi)    -- authors = ["Kangzhi Shi <shikangzhi@gmail
 crates/stdlib/Cargo.toml:109:1     - Unknown word (rustix)     -- rustix = { workspace = true
 crates/vm/Cargo.toml:94:1      - Unknown word (rustix)     -- rustix = { workspace = true
+crates/wasm/Cargo.toml:12:26     - Unknown word (rlib)       -- crate-type = ["cdylib", "rlib"]
+crates/wasm/Lib/_microdistlib.py:127:14    - Unknown word (distname)   -- rs = distname
+crates/wasm/Lib/_microdistlib.py:129:25    - Unknown word (distname)   -- rs = '%s %s' % (distname, ', '.join(['%s %s'
+crates/wasm/Lib/_microdistlib.py:130:27    - Unknown word (distname)   -- return Container(name=distname, extras=extras, constraints
+crates/wasm/Lib/_microdistlib.py:24:5      - Unknown word (distname)   -- distname = m.groups()[0]
+crates/wasm/Lib/asyncweb.py:204:18    - Unknown word (jsclosure)  -- @browser.jsclosure_once
+crates/wasm/Lib/asyncweb.py:209:47    - Unknown word (jsfloat)    -- cb.detach(), browser.jsfloat(ms))
+crates/wasm/Lib/browser.py:14:6      - Unknown word (jsstr)      -- "jsstr",
+crates/wasm/Lib/browser.py:15:6      - Unknown word (jsclosure)  -- "jsclosure",
+crates/wasm/Lib/browser.py:16:6      - Unknown word (jsclosure)  -- "jsclosure_once",
+crates/wasm/Lib/browser.py:17:6      - Unknown word (jsfloat)    -- "jsfloat",
+crates/wasm/Lib/browser.py:34:1      - Unknown word (jsstr)      -- jsstr = window.new_from_str
+crates/wasm/Lib/browser.py:35:1      - Unknown word (jsclosure)  -- jsclosure = window.new_closure
+crates/wasm/Lib/browser.py:36:1      - Unknown word (jsclosure)  -- jsclosure_once = window.new_closure
+crates/wasm/Lib/browser.py:37:2      - Unknown word (jsfloat)    -- _jsfloat = window.new_from_float
+crates/wasm/Lib/browser.py:43:5      - Unknown word (jsfloat)    -- def jsfloat(n):
+crates/wasm/Lib/browser.py:44:13     - Unknown word (jsfloat)    -- return _jsfloat(float(n))
+crates/wasm/Lib/browser.py:53:17     - Unknown word (jsstr)      -- _alert.call(jsstr(msg))
+crates/wasm/Lib/browser.py:62:26     - Unknown word (jsstr)      -- return _confirm.call(jsstr(msg)).as_bool()
+crates/wasm/Lib/browser.py:75:9      - Unknown word (jsstr)      -- jsstr(msg), jsstr(default
+crates/wasm/Lib/whlimport.py:106:13    - Unknown word (zname)        -- for zname, z in cls._packages
+crates/wasm/Lib/whlimport.py:110:50    - Unknown word (zname)        -- cls, origin=f"zip:{zname}/{fullpath}", is_package
+crates/wasm/Lib/whlimport.py:33:11     - Unknown word (asyncweb)     -- await asyncweb.wait_all(_load_package
+crates/wasm/Lib/whlimport.py:3:8       - Unknown word (asyncweb)   -- import asyncweb
+crates/wasm/Lib/whlimport.py:53:12     - Unknown word (asyncweb)     -- deps = asyncweb.spawn(asyncweb.wait
+crates/wasm/Lib/whlimport.py:53:27     - Unknown word (asyncweb)     -- deps = asyncweb.spawn(asyncweb.wait_all(_load_package
+crates/wasm/Lib/whlimport.py:64:12     - Unknown word (microdistlib) -- pkg = _microdistlib.parse_requirement(pkg
+crates/wasm/Lib/whlimport.py:9:9       - Unknown word (microdistlib) -- import _microdistlib
 deny.toml:156:45    - Unknown word (dotgraphs)  -- ghlighting used when creating dotgraphs for crates
 deny.toml:188:11    - Unknown word (reqwest)    -- #crate = "reqwest"
 deny.toml:210:21    - Unknown word (gnullvm)    -- "windows_x86_64_gnullvm",
@@ -309,7 +335,7 @@ extra_tests/snippets/stdlib_collections_deque.py:22:17     - Unknown word (klass
 extra_tests/snippets/stdlib_collections_deque.py:28:17     - Unknown word (klass)      -- d = klass(deque(s), i)
 extra_tests/snippets/stdlib_collections_deque.py:7:5       - Unknown word (klass)      -- klass = type(iter(deque()
 extra_tests/snippets/stdlib_collections_deque.py:9:9       - Unknown word (klass)      -- d = klass(deque(s))
-extra_tests/snippets/stdlib_ctypes.py:264:29    - Unknown word (RTLD)       -- mode |= _os.RTLD_MEMBER | _os.RTLD_NOW
+extra_tests/snippets/stdlib_ctypes.py:263:29    - Unknown word (RTLD)       -- mode |= _os.RTLD_MEMBER | _os.RTLD_NOW
 extra_tests/snippets/stdlib_ctypes.py:27:14     - Unknown word (PYTHONAPI)  -- FUNCFLAG_PYTHONAPI as _FUNCFLAG_PYTHONAPI
 extra_tests/snippets/stdlib_ctypes.py:27:37     - Unknown word (PYTHONAPI)  -- PYTHONAPI as _FUNCFLAG_PYTHONAPI,
 extra_tests/snippets/stdlib_datetime.py:1057:13   - Unknown word (todayagain) -- todayagain = self.theclass.fromtimestamp
@@ -657,34 +683,6 @@ wasm/demo/snippets/import_pypi.py:21:58     - Unknown word (fmter)      -- hi, m
 wasm/demo/snippets/import_pypi.py:6:8       - Unknown word (asyncweb)   -- import asyncweb
 wasm/demo/snippets/import_pypi.py:7:8       - Unknown word (whlimport)  -- import whlimport
 wasm/demo/snippets/import_pypi.py:9:1       - Unknown word (whlimport)  -- whlimport.setup()
-wasm/lib/Cargo.toml:12:26     - Unknown word (rlib)       -- crate-type = ["cdylib", "rlib"]
-wasm/lib/Lib/_microdistlib.py:127:14    - Unknown word (distname)   -- rs = distname
-wasm/lib/Lib/_microdistlib.py:129:25    - Unknown word (distname)   -- rs = '%s %s' % (distname, ', '.join(['%s %s'
-wasm/lib/Lib/_microdistlib.py:130:27    - Unknown word (distname)   -- return Container(name=distname, extras=extras, constraints
-wasm/lib/Lib/_microdistlib.py:24:5      - Unknown word (distname)   -- distname = m.groups()[0]
-wasm/lib/Lib/asyncweb.py:204:18    - Unknown word (jsclosure)  -- @browser.jsclosure_once
-wasm/lib/Lib/asyncweb.py:209:47    - Unknown word (jsfloat)    -- cb.detach(), browser.jsfloat(ms))
-wasm/lib/Lib/browser.py:14:6      - Unknown word (jsstr)      -- "jsstr",
-wasm/lib/Lib/browser.py:15:6      - Unknown word (jsclosure)  -- "jsclosure",
-wasm/lib/Lib/browser.py:16:6      - Unknown word (jsclosure)  -- "jsclosure_once",
-wasm/lib/Lib/browser.py:17:6      - Unknown word (jsfloat)    -- "jsfloat",
-wasm/lib/Lib/browser.py:34:1      - Unknown word (jsstr)      -- jsstr = window.new_from_str
-wasm/lib/Lib/browser.py:35:1      - Unknown word (jsclosure)  -- jsclosure = window.new_closure
-wasm/lib/Lib/browser.py:36:1      - Unknown word (jsclosure)  -- jsclosure_once = window.new_closure
-wasm/lib/Lib/browser.py:37:2      - Unknown word (jsfloat)    -- _jsfloat = window.new_from_float
-wasm/lib/Lib/browser.py:43:5      - Unknown word (jsfloat)    -- def jsfloat(n):
-wasm/lib/Lib/browser.py:44:13     - Unknown word (jsfloat)    -- return _jsfloat(float(n))
-wasm/lib/Lib/browser.py:53:17     - Unknown word (jsstr)      -- _alert.call(jsstr(msg))
-wasm/lib/Lib/browser.py:62:26     - Unknown word (jsstr)      -- return _confirm.call(jsstr(msg)).as_bool()
-wasm/lib/Lib/browser.py:75:9      - Unknown word (jsstr)      -- jsstr(msg), jsstr(default
-wasm/lib/Lib/whlimport.py:106:13    - Unknown word (zname)        -- for zname, z in cls._packages
-wasm/lib/Lib/whlimport.py:110:50    - Unknown word (zname)        -- cls, origin=f"zip:{zname}/{fullpath}", is_package
-wasm/lib/Lib/whlimport.py:33:11     - Unknown word (asyncweb)     -- await asyncweb.wait_all(_load_package
-wasm/lib/Lib/whlimport.py:3:8       - Unknown word (asyncweb)   -- import asyncweb
-wasm/lib/Lib/whlimport.py:53:12     - Unknown word (asyncweb)     -- deps = asyncweb.spawn(asyncweb.wait
-wasm/lib/Lib/whlimport.py:53:27     - Unknown word (asyncweb)     -- deps = asyncweb.spawn(asyncweb.wait_all(_load_package
-wasm/lib/Lib/whlimport.py:64:12     - Unknown word (microdistlib) -- pkg = _microdistlib.parse_requirement(pkg
-wasm/lib/Lib/whlimport.py:9:9       - Unknown word (microdistlib) -- import _microdistlib
 wasm/notebook/package.json:18:10     - Unknown word (lezer)      -- "lezer-loader": "^0.3.0",
 wasm/notebook/package.json:34:21     - Unknown word (Liddle)     -- "author": "Ryan Liddle",
 wasm/notebook/package.json:9:10      - Unknown word (katex)      -- "katex": "^0.12.0",
