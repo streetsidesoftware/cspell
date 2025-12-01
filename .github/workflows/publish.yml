@@ -42,7 +42,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.PUBLISH_NPM}}
           NPM_CONFIG_PROVENANCE: true
-        # Need to figure out how to sign tags and commits from workflows: --sign-git-tag --sign-git-commit
+        # TODO: support --sign-git-tag --sign-git-commit
         run: |
           pnpm lerna publish from-package --no-push --no-private --yes ${{ steps.dist_tag.outputs.value }}
 
