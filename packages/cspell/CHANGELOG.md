@@ -33,6 +33,15 @@ Note: the command line value will override any value found in the configuration 
 ### Fixes
 
 <details>
+<summary>fix: turn off gpg when publishing for now (<a href="https://github.com/streetsidesoftware/cspell/pull/8104">#8104</a>)</summary>
+
+### fix: turn off gpg when publishing for now ([#8104](https://github.com/streetsidesoftware/cspell/pull/8104))
+
+---
+
+</details>
+
+<details>
 <summary>fix: Turnoff signing for now (<a href="https://github.com/streetsidesoftware/cspell/pull/8102">#8102</a>)</summary>
 
 ### fix: Turnoff signing for now ([#8102](https://github.com/streetsidesoftware/cspell/pull/8102))
