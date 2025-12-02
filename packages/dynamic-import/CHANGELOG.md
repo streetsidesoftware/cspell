@@ -3,6 +3,8 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v9.4.1 (2025-12-02)
+
 ## v9.4.0 (2025-12-01)
 
 ### Features
