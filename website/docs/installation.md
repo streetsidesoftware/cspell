@@ -19,9 +19,11 @@ CSpell requires Node.js version `>=18.0`.
 > ```sh
 > node -v
 > ```
+>
 > Ensure that you are meeting the requirements.
 
 The below commands install CSpell.
+
 ```sh npm2yarn
 npm install -g cspell@latest
 ```
