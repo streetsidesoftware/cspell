@@ -345,7 +345,7 @@ jobs:
           private-key: ${{ secrets.AUTOMATION_PRIVATE_KEY }}
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@84ae59a2cdc2258d6fa0732dd66352dddae2a412 # v7.0.9
+        uses: peter-evans/create-pull-request@0979079bc20c05bbbb590a56c21c4e2b1d1f1bbe # v7.0.9
         env:
           ACTIONS_STEP_DEBUG: true
         with:
