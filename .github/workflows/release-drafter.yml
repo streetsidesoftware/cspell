@@ -102,7 +102,7 @@ jobs:
             - **Version**: `${{ needs.update_release_draft.outputs.resolved_version }}`
 
       - name: Create PR
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           commit-message: 'chore: Prepare Release ${{ needs.update_release_draft.outputs.name }}'
           branch: ${{ env.NEW_BRANCH }}
