@@ -22,7 +22,7 @@ runs:
       shell: bash
 
     - name: Restore CSpell cache
-      uses: actions/cache@v4.3.0
+      uses: actions/cache@v5.0.0
       if: ${{ inputs.use_cspell_cache == 'true' }}
       with:
         key: cspell-cache-${{ runner.os }}-smoke-test-${{ hashFiles('**/*.ts', '**/*.md') }}
