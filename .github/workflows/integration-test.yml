@@ -252,7 +252,7 @@ jobs:
           mkdir -p temp/perf
 
       - name: restore repos perf
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
         with:
           pattern: perf-*
           merge-multiple: true
