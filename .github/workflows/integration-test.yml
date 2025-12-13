@@ -226,7 +226,7 @@ jobs:
 
       - name: store perf run
         if: ${{ steps.step-cache-run.outputs.cache-hit != 'true' }}
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: perf-repo-${{ steps.step-normalize-repo-name.outputs.REPO_NAME }}
           path: integration-tests/perf/perf-run-*.csv
