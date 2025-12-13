@@ -4,8 +4,8 @@ Url: https://github.com/dart-lang/sdk
 Args: '["--issues-summary-report","--locale=en,en-GB","--exclude=tools/dom/**/*.json","--exclude=pkg/*/test/**","--exclude=**/*_data.*","--exclude=runtime/vm/**","--exclude=sdk/lib/html/**","--exclude=benchmarks/**","--exclude=**/*_test.*","--exclude=*/**/*.{json,yaml,yml}","--exclude=tests/corelib/regexp/**","--exclude=**/{third_party,assets}/**","**/*.{dart,md}"]'
 Summary:
   files: 10848
-  filesWithIssues: 2069
-  issues: 9375
+  filesWithIssues: 2068
+  issues: 9369
   errors: 0
 Errors: []
 
@@ -539,7 +539,6 @@ issues:
   - "pkg/compiler/lib/src/inferrer/typemasks/type_mask.dart:516:7        baseclass       U       /// baseclass was never instantiated"
   - "pkg/compiler/lib/src/inferrer/typemasks/type_mask.dart:560:19       Submask         U       return 'Submask $submask in $mask:"
   - "pkg/compiler/lib/src/inferrer/typemasks/union_type_mask.dart:312:18         nullness    U       // Likewise, nullness should be covered."
-  - "pkg/compiler/lib/src/io/position_information.dart:1078:13       prepopulate     U       /// we will prepopulate metadata about their"
   - "pkg/compiler/lib/src/io/source_map_builder.dart:335:8       opqrstuvwxyz    U       'opqrstuvwxyz0123456789+/';"
   - "pkg/compiler/lib/src/ir/protobuf_impacts.dart:47:75         initalizer (initializer)    U       create); // name metadata initalizer"
   - "pkg/compiler/lib/src/ir/scope_visitor.dart:1084:34      pessimizes      U       Lazily constructing cells pessimizes certain uses of late"
@@ -1229,7 +1228,6 @@ issues:
   - "pkg/pkg.dart:21:9           sloc    U       var sloc = _calcLines(dir) /"
   - "pkg/reload_test/lib/ddc_helpers.dart:132:56         subapps     U       not support multiple subapps, so only \""
   - "pkg/reload_test/lib/ddc_helpers.dart:416:31         subapp      U       uuid that identifies a subapp. Unused for this framework"
-  - "pkg/scrape/README.md:66:26          datapoints      U       count occurrences of datapoints you care about in the"
   - "pkg/smith/lib/configuration.dart:371:11         whesse      U       // TODO(whesse): Remove these when"
   - "pkg/smith/lib/configuration.dart:961:3          hwasan      U       hwasan._('hwasan'),"
   - "pkg/sourcemap_testing/lib/src/stepping_helper.dart:271:19       Ddebug      U       return ' (pass -Ddebug=1 to the test runner"
@@ -2518,7 +2516,6 @@ issuesSummary:
   - "text: datalist, count: 1, files: 1,"
   - "text: DATALIST, count: 1, files: 1,"
   - "text: dataoff, count: 1, files: 1,"
-  - "text: datapoints, count: 4, files: 1,"
   - "text: datasize, count: 1, files: 1,"
   - "text: datastructure, count: 1, files: 1,"
   - "text: datatypes, count: 41, files: 21,"
@@ -3554,7 +3551,6 @@ issuesSummary:
   - "text: preorder, count: 61, files: 14,"
   - "text: Preorder, count: 9, files: 3,"
   - "text: prepatching, count: 1, files: 1,"
-  - "text: prepopulate, count: 2, files: 1,"
   - "text: Prerak, count: 1, files: 1,"
   - "text: Prerequirement, count: 1, files: 1,"
   - "text: presubmit, count: 7, files: 6,"
