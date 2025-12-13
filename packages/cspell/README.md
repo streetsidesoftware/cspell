@@ -569,6 +569,9 @@ _cspell_'s behavior can be controlled through a config file. By default it looks
 - `cspell.config.js`
 - `cspell.config.cjs`
 - `cspell.config.mjs`
+- `cspell.config.ts`
+- `cspell.config.cts`
+- `cspell.config.mts`
 - `cspell.config.json`
 - `cspell.config.yaml`
 - `cspell.config.yml`

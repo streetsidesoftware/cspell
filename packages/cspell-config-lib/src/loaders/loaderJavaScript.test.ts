@@ -53,6 +53,7 @@ describe('loaderJavaScript', () => {
         file                      | expected
         ${'ts/cspell.config.ts'}  | ${{ settings: oc({ id: 'module/ts' }) }}
         ${'ts/cspell.config.mts'} | ${{ settings: oc({ id: 'module/mts' }) }}
+        ${'ts/cspell.config.cts'} | ${{ settings: oc({ id: 'module/cts' }) }}
     `('loaderJavaScript $file', async ({ file, expected }) => {
         const url = pathToFileURL(fixtures(file));
         expected.url ??= url;

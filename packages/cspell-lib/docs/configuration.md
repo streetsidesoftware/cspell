@@ -14,6 +14,9 @@ The spell checker will look for the following configuration files.
 - `cspell.config.js`
 - `cspell.config.mjs`
 - `cspell.config.cjs`
+- `cspell.config.ts`
+- `cspell.config.mts`
+- `cspell.config.cts`
 - `cspell.config.json`
 - `cspell.config.yaml`
 - `cspell.config.yml`

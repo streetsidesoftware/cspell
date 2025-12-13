@@ -20,6 +20,9 @@ By default the spell checker searches the current directory and up the hierarchy
 1. `cspell.config.mjs`
 1. `cspell.config.js`
 1. `cspell.config.cjs`
+1. `cspell.config.mts`
+1. `cspell.config.ts`
+1. `cspell.config.cts`
 1. `cspell.config.json`
 1. `cspell.config.yaml`
 1. `cspell.config.yml`
