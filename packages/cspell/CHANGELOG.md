@@ -3,6 +3,47 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v9.4.1 (2025-12-13)
+
+### Dictionary Updates
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/8149">#8149</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#8149](https://github.com/streetsidesoftware/cspell/pull/8149))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ .../snapshots/AdaDoom3/AdaDoom3/report.yaml        |   7 +-
+ .../snapshots/AdaDoom3/AdaDoom3/snapshot.txt       |   7 +-
+ .../snapshots/TheAlgorithms/Python/report.yaml     |   5 +-
+ .../snapshots/TheAlgorithms/Python/snapshot.txt    |   5 +-
+ .../snapshots/dart-lang/sdk/report.yaml            |   8 +-
+ .../snapshots/dart-lang/sdk/snapshot.txt           |   4 +-
+ .../snapshots/django/django/report.yaml            |  13 +--
+ .../snapshots/django/django/snapshot.txt           |  44 ++++----
+ .../iluwatar/java-design-patterns/report.yaml      |   3 +-
+ .../iluwatar/java-design-patterns/snapshot.txt     |   3 +-
+ .../snapshots/ktaranov/sqlserver-kit/report.yaml   |   4 +-
+ .../snapshots/ktaranov/sqlserver-kit/snapshot.txt  |   3 +-
+ .../snapshots/neovim/nvim-lspconfig/report.yaml    |   5 +-
+ .../snapshots/neovim/nvim-lspconfig/snapshot.txt   |   3 +-
+ .../snapshots/slint-ui/slint/report.yaml           |   8 +-
+ .../snapshots/slint-ui/slint/snapshot.txt          |   7 +-
+ .../snapshots/sveltejs/svelte/report.yaml          |   3 +-
+ .../snapshots/sveltejs/svelte/snapshot.txt         |   3 +-
+ packages/cspell-bundled-dicts/package.json         |  20 ++--
+ pnpm-lock.yaml                                     | 120 +++++++++++----------
+ 20 files changed, 115 insertions(+), 160 deletions(-)
+```
+
+---
+
+</details>
+
 ## v9.4.0 (2025-12-01)
 
 ### Features
