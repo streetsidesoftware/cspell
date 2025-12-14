@@ -11,6 +11,7 @@ export {
     CSpellConfigFileJavaScript,
     CSpellConfigFileJson,
     CSpellConfigFilePackageJson,
+    CSpellConfigFileWithErrors,
     CSpellConfigFileYaml,
 } from './CSpellConfigFile/index.js';
 export type { CSpellConfigFileReaderWriter } from './CSpellConfigFileReaderWriter.js';

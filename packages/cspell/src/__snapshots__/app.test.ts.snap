@@ -21,6 +21,7 @@ exports[`Validate cli > app '--continue-on-error - missing config' Expect Error:
 
 exports[`Validate cli > app '--continue-on-error - missing config' Expect Error: [Function CheckFailed] 2`] = `
 "error	Configuration Error: Failed to read config file: "./fixtures/import/import-errors/missing.yaml"
+error	  Failed to resolve configuration file: "./fixtures/import/import-errors/missing.yaml" referenced from "./"
 error
 error	1/1 file.txt 0.00ms X
 error
@@ -176,6 +177,7 @@ exports[`Validate cli > app 'bad config' Expect Error: [Function CheckFailed] 1`
 
 exports[`Validate cli > app 'bad config' Expect Error: [Function CheckFailed] 2`] = `
 "error	Configuration Error: Failed to read config file: "./src/app.test.ts.x"
+error	  Failed to resolve configuration file: "./src/app.test.ts.x" referenced from "./"
 error
 error	-------------------------------------------
 error
@@ -646,6 +648,26 @@ error"
 
 exports[`Validate cli > app 'issue-6373' Expect Error: undefined 3`] = `""`;
 
+exports[`Validate cli > app 'issue-7837' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app 'issue-7837' Expect Error: [Function CheckFailed] 2`] = `
+"error	1/3 cspell.config.yaml 0.00ms
+error
+error	Configuration Error: Failed to read config file: "./fixtures/issue-7837/nested/cspell.config.mts"
+error	  Test Config Load Failure
+error
+error	2/3 nested/cspell.config.mts 0.00ms skipped
+error
+error	3/3 nested/README.md 0.00ms skipped
+error
+error	-------------------------------------------
+error
+error	CSpell: Files checked: 1, skipped: 2, Issues found: 0 in 0 files with 1 error.
+error"
+`;
+
+exports[`Validate cli > app 'issue-7837' Expect Error: [Function CheckFailed] 3`] = `""`;
+
 exports[`Validate cli > app 'link add' 1`] = `""`;
 
 exports[`Validate cli > app 'link list' 1`] = `""`;
@@ -686,6 +708,7 @@ exports[`Validate cli > app 'max-file-size bad' Expect Error: [Function CheckFai
 
 exports[`Validate cli > app 'max-file-size bad' Expect Error: [Function CheckFailed] 2`] = `
 "error	Configuration Error: Failed to read config file: "./bad-size.cspell.config.yaml"
+error	  Failed to resolve configuration file: "bad-size.cspell.config.yaml" referenced from "./"
 error
 error	-------------------------------------------
 error
