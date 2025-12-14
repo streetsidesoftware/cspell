@@ -288,7 +288,6 @@ export class ConfigLoader implements IConfigLoader {
         if (!location) return undefined;
         const file = await this.readConfigFile(location);
         if (file instanceof Error) {
-            debugger;
             return new CSpellConfigFileWithErrors(location, configErrorToRawSettings(file, location), file);
         }
         return file;
