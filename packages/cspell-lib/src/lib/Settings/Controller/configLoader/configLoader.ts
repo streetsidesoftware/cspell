@@ -3,7 +3,14 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import type { CSpellSettings, CSpellUserSettings, ImportFileRef, Source } from '@cspell/cspell-types';
-import { CSpellConfigFile, CSpellConfigFileReaderWriter, ICSpellConfigFile, IO, TextFile } from 'cspell-config-lib';
+import {
+    CSpellConfigFile,
+    CSpellConfigFileReaderWriter,
+    CSpellConfigFileWithErrors,
+    ICSpellConfigFile,
+    IO,
+    TextFile,
+} from 'cspell-config-lib';
 import { createReaderWriter } from 'cspell-config-lib';
 import { isUrlLike, toFileURL } from 'cspell-io';
 import { URI, Utils as UriUtils } from 'vscode-uri';
@@ -33,14 +40,14 @@ import {
     defaultConfigFileModuleRef,
     ENV_CSPELL_GLOB_ROOT,
 } from '../../constants.js';
-import { getMergeStats, mergeSettings } from '../../CSpellSettingsServer.js';
+import { getMergeStats, mergeSettings, toInternalSettings } from '../../CSpellSettingsServer.js';
 import { getGlobalConfig } from '../../GlobalSettings.js';
 import { ImportError } from '../ImportError.js';
 import type { LoaderResult } from '../pnpLoader.js';
 import { pnpLoader } from '../pnpLoader.js';
 import { searchPlaces } from './configLocations.js';
 import { ConfigSearch } from './configSearch.js';
-import { configToRawSettings } from './configToRawSettings.js';
+import { configErrorToRawSettings, configToRawSettings } from './configToRawSettings.js';
 import { StopSearchAt } from './defaultConfigLoader.js';
 import { defaultSettings } from './defaultSettings.js';
 import {
@@ -276,11 +283,15 @@ export class ConfigLoader implements IConfigLoader {
     async searchForConfigFile(
         searchFrom: URL | string | undefined,
         stopSearchAt?: URL[],
-    ): Promise<CSpellConfigFile | undefined> {
+    ): Promise<CSpellConfigFile | CSpellConfigFileWithErrors | undefined> {
         const location = await this.searchForConfigFileLocation(searchFrom, stopSearchAt);
         if (!location) return undefined;
         const file = await this.readConfigFile(location);
-        return file instanceof Error ? undefined : file;
+        if (file instanceof Error) {
+            debugger;
+            return new CSpellConfigFileWithErrors(location, configErrorToRawSettings(file, location), file);
+        }
+        return file;
     }
 
     /**
@@ -296,7 +307,9 @@ export class ConfigLoader implements IConfigLoader {
         const stopAt = await this.#extractStopSearchAtURLs(options);
         const configFile = await this.searchForConfigFile(searchFrom, stopAt);
         if (!configFile) return undefined;
-
+        if (configFile instanceof CSpellConfigFileWithErrors) {
+            return toInternalSettings(configFile.settings);
+        }
         return this.mergeConfigFileWithImports(configFile, options);
     }
 

@@ -3,6 +3,9 @@ import { isError } from '../../util/errors.js';
 export class ImportError extends Error {
     readonly cause: Error | undefined;
     constructor(msg: string, cause?: Error | unknown) {
+        if (isError(cause)) {
+            msg += `\n  ${cause.message}`;
+        }
         super(msg);
         this.cause = isError(cause) ? cause : undefined;
     }

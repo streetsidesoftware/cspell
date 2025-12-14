@@ -20,6 +20,7 @@ import { documentUriToURL, updateTextDocument } from '../Models/TextDocument.js'
 import type { ValidationIssue } from '../Models/ValidationIssue.js';
 import { createPerfTimer } from '../perf/index.js';
 import {
+    extractImportErrors,
     finalizeSettings,
     loadConfig,
     mergeSettings,
@@ -158,11 +159,11 @@ export class DocumentValidator {
                 )
               : undefined;
         if (pLocalConfig) {
-            timePromise(this.perfTiming, '_loadConfig', pLocalConfig);
+            timePromise(this.perfTiming, '_loadConfig', pLocalConfig).catch(() => undefined);
         }
         const localConfig = (await catchPromiseError(pLocalConfig, (e) => this.addPossibleError(e))) || {};
 
-        this.addPossibleError(localConfig?.__importRef?.error);
+        extractImportErrors(localConfig).forEach((e) => this.addPossibleError(e));
 
         const config = mergeSettings(settings, localConfig);
         const docSettings = await timePromise(
@@ -597,7 +598,7 @@ export async function shouldCheckDocument(
 
         const localConfig = (await catchPromiseError(pLocalConfig, addPossibleError)) || {};
 
-        addPossibleError(localConfig?.__importRef?.error);
+        extractImportErrors(localConfig).forEach((e) => addPossibleError(e));
 
         const config = mergeSettings(settings, localConfig);
         const matcher = getGlobMatcherForExcluding(localConfig?.ignorePaths);
