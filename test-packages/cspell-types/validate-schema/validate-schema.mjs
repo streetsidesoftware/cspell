@@ -16,7 +16,7 @@ async function run() {
 
     assert(schemaFile, 'Schema file: `cspell.schema.json` not found.');
 
-    const ajv = new Ajv({ keywords });
+    const ajv = new Ajv({ keywords, allowUnionTypes: true, strict: true });
 
     const schema = await readJson(schemaFile);
 
