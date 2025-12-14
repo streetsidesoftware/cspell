@@ -9,11 +9,13 @@
   },
   "type": "module",
   "sideEffects": false,
-  "types": "dist/esm/index.d.ts",
+  "types": "dist/cjs/commonJsApi.d.ts",
+  "main": "dist/cjs/commonJsApi.cjs",
   "module": "dist/esm/index.js",
   "exports": {
     ".": {
-      "import": "./dist/esm/index.js"
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/commonJsApi.cjs"
     },
     "./app": {
       "import": "./dist/esm/app.js"
