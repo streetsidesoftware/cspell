@@ -9,6 +9,7 @@ export const supportedExtensions: string[] = [
     '.toml',
     '.mts',
     '.ts',
+    '.cts',
 ];
 
 /**

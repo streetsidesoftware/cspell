@@ -75,10 +75,12 @@ CSpell can use JSON, Yaml, and JavaScript files for configuration. It automatica
 - `cspell.config.cjs`
 - `.cspell.config.js`
 - `cspell.config.js`
-- `.cspell.config.ts`
-- `cspell.config.ts`
 - `.cspell.config.mts`
 - `cspell.config.mts`
+- `.cspell.config.cts`
+- `cspell.config.cts`
+- `.cspell.config.ts`
+- `cspell.config.ts`
 - `.cspell.config.toml`
 - `cspell.config.toml`
 - `.config/.cspell.json`
@@ -103,10 +105,12 @@ CSpell can use JSON, Yaml, and JavaScript files for configuration. It automatica
 - `.config/cspell.config.cjs`
 - `.config/.cspell.config.js`
 - `.config/cspell.config.js`
-- `.config/.cspell.config.ts`
-- `.config/cspell.config.ts`
 - `.config/.cspell.config.mts`
 - `.config/cspell.config.mts`
+- `.config/.cspell.config.cts`
+- `.config/cspell.config.cts`
+- `.config/.cspell.config.ts`
+- `.config/cspell.config.ts`
 - `config/.cspell.config.toml`
 - `config/cspell.config.toml`
 - `.vscode/.cspell.json`
@@ -167,6 +171,26 @@ For now choose to use either JSON or Yaml. Below are examples of each that inclu
         });
         ```
     </TabItem>
+    <TabItem value="commonjs" label="cspell.config.cjs">
+        ```javascript
+        'use strict';
+
+        const { defineConfig } = require('cspell');
+
+        module.exports = defineConfig({
+            version: '0.2',
+            dictionaryDefinitions: [
+                {
+                    name: 'project-words',
+                    path: './project-words.txt',
+                    addWords: true,
+                },
+            ],
+            dictionaries: ['project-words'],
+            ignorePaths: ['node_modules', '/project-words.txt'],
+        });
+        ```
+    </TabItem>
     <TabItem value="mts" label="cspell.config.mts">
         ```ts
         // TypeScript version of the CSpell config.
@@ -187,11 +211,11 @@ For now choose to use either JSON or Yaml. Below are examples of each that inclu
         });
         ```
     </TabItem>
-    <TabItem value="commonjs" label="cspell.config.cjs">
-        ```javascript
-        'use strict';
-
-        const { defineConfig } = require('@cspell/cspell-types');
+    <TabItem value="commonts" label="cspell.config.cts">
+        ```ts
+        // CommonJS TypeScript version of the CSpell config.
+        // Requires Node.js >= 22.18 to run natively.
+        const { defineConfig } = require('cspell');
 
         module.exports = defineConfig({
             version: '0.2',
@@ -200,7 +224,7 @@ For now choose to use either JSON or Yaml. Below are examples of each that inclu
                     name: 'project-words',
                     path: './project-words.txt',
                     addWords: true,
-                }
+                },
             ],
             dictionaries: ['project-words'],
             ignorePaths: ['node_modules', '/project-words.txt'],
@@ -306,3 +330,4 @@ cspell lint --help
 ### Options
 
 <!-- {% include  generated-docs/help-lint.md %} -->
+{/* cspell:ignore commonts */}
