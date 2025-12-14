@@ -163,7 +163,7 @@ export class DocumentValidator {
         }
         const localConfig = (await catchPromiseError(pLocalConfig, (e) => this.addPossibleError(e))) || {};
 
-        extractImportErrors(localConfig).forEach((e) => this.addPossibleError(e));
+        extractImportErrors(localConfig).forEach((e) => this.addPossibleError(e.error));
 
         const config = mergeSettings(settings, localConfig);
         const docSettings = await timePromise(
@@ -598,7 +598,7 @@ export async function shouldCheckDocument(
 
         const localConfig = (await catchPromiseError(pLocalConfig, addPossibleError)) || {};
 
-        extractImportErrors(localConfig).forEach((e) => addPossibleError(e));
+        extractImportErrors(localConfig).forEach((e) => addPossibleError(e.error));
 
         const config = mergeSettings(settings, localConfig);
         const matcher = getGlobMatcherForExcluding(localConfig?.ignorePaths);

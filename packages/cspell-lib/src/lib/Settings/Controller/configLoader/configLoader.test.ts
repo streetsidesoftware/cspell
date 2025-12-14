@@ -357,10 +357,18 @@ describe('Validate search/load config files', () => {
         };
     }
 
-    function readError(filename: string): ImportFileRefWithError {
+    function readErrorFailedToResolve(filename: string): ImportFileRefWithError {
+        return readError(filename, `Failed to resolve configuration file: "${filename}" referenced from "./"`);
+    }
+
+    function readError(filename: string, cause?: Error | string): ImportFileRefWithError {
+        let msg = `Failed to read config file: "${filename}"`;
+        if (cause) {
+            msg += `\n  ${cause.toString()}`;
+        }
         return {
             filename,
-            error: new Error(`Failed to read config file: "${filename}"`),
+            error: new Error(msg),
         };
     }
 
@@ -495,9 +503,9 @@ describe('Validate search/load config files', () => {
 
     test.each`
         file                            | expectedConfig
-        ${samplesSrc}                   | ${expectError(readError(samplesSrc).error)}
-        ${s('bug-fixes')}               | ${expectError(readError(s('bug-fixes')).error)}
-        ${s('js-config/cspell-bad.js')} | ${expectError(readError(s('js-config/cspell-bad.js')).error)}
+        ${samplesSrc}                   | ${expectError(readErrorFailedToResolve(samplesSrc).error)}
+        ${s('bug-fixes')}               | ${expectError(readErrorFailedToResolve(s('bug-fixes')).error)}
+        ${s('js-config/cspell-bad.js')} | ${expectError(readError(s('js-config/cspell-bad.js'), 'notDefined is not defined').error)}
     `('readConfigFile with error $file', async ({ file, expectedConfig }: TestLoadConfig) => {
         await expect(readConfigFile(file)).rejects.toEqual(expectedConfig);
         expect(mockedLogWarning).toHaveBeenCalledTimes(0);
@@ -506,9 +514,9 @@ describe('Validate search/load config files', () => {
 
     test.each`
         file                            | expectedConfig
-        ${samplesSrc}                   | ${readError(samplesSrc).error}
-        ${s('bug-fixes')}               | ${readError(s('bug-fixes')).error}
-        ${s('js-config/cspell-bad.js')} | ${readError(s('js-config/cspell-bad.js')).error}
+        ${samplesSrc}                   | ${readErrorFailedToResolve(samplesSrc).error}
+        ${s('bug-fixes')}               | ${readErrorFailedToResolve(s('bug-fixes')).error}
+        ${s('js-config/cspell-bad.js')} | ${readError(s('js-config/cspell-bad.js'), 'notDefined is not defined').error}
     `('ReadRawSettings with error $file', async ({ file, expectedConfig }) => {
         const result = await readRawSettings(file);
         expect(result).toEqual(oc({ __importRef: oc({ error: expectError(expectedConfig) }) }));
@@ -524,9 +532,9 @@ describe('Validate search/load config files', () => {
 
     test.each`
         file                                          | relativeTo   | expectedConfig
-        ${samplesSrc}                                 | ${undefined} | ${expectError(readError(samplesSrc).error)}
-        ${s('bug-fixes')}                             | ${undefined} | ${expectError(readError(s('bug-fixes')).error)}
-        ${s('bug-fixes/not-found/cspell.json')}       | ${undefined} | ${expectError(readError(s('bug-fixes/not-found/cspell.json')).error)}
+        ${samplesSrc}                                 | ${undefined} | ${expectError(readErrorFailedToResolve(samplesSrc).error)}
+        ${s('bug-fixes')}                             | ${undefined} | ${expectError(readErrorFailedToResolve(s('bug-fixes')).error)}
+        ${s('bug-fixes/not-found/cspell.json')}       | ${undefined} | ${expectError(readErrorFailedToResolve(s('bug-fixes/not-found/cspell.json')).error)}
         ${s('dot-config/.config/cspell.config.yaml')} | ${undefined} | ${oc(cf(s('dot-config/.config/cspell.config.yaml'), oc({ name: 'Nested in .config' })))}
         ${rp('cspell.config.json')}                   | ${undefined} | ${oc(cf(rp('cspell.config.json'), oc({ id: 'cspell-package-config' })))}
         ${s('linked/cspell.config.js')}               | ${undefined} | ${cf(s('linked/cspell.config.js'), oc({ description: 'cspell.config.js file in samples/linked' }))}
