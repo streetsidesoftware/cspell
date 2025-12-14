@@ -182,7 +182,7 @@ export interface IConfigLoader {
 }
 
 const defaultExtensions = ['.json', '.yaml', '.yml', '.jsonc', '.toml'];
-const defaultJsExtensions = ['.js', '.cjs', '.mjs', '.ts', '.mts'];
+const defaultJsExtensions = ['.js', '.cjs', '.mjs', '.ts', '.mts', '.cts'];
 export const defaultExtensionsAll: string[] = [...defaultExtensions, ...defaultJsExtensions];
 
 const trustedSearch: Map<string, readonly string[]> = new Map([
