@@ -2,7 +2,7 @@
 
 import { version } from 'node:process';
 
-if (version < 'v22') {
+if (version.startsWith('v20.')) {
     process.argv.push('--exclude=fixtures');
 }
 
