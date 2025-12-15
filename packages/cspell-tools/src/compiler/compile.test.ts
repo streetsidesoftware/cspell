@@ -7,6 +7,7 @@ import { checkShasumFile } from '../shasum/shasum.js';
 import { spyOnConsole } from '../test/console.js';
 import { createTestHelper } from '../test/TestHelper.js';
 import { compile } from './compile.js';
+import { setLogger } from './logger.js';
 import { readTextFile } from './readers/readTextFile.js';
 
 const testHelper = createTestHelper(import.meta.url);
@@ -30,6 +31,7 @@ describe('compile', () => {
 
     beforeEach(() => {
         testHelper.clearTempDir();
+        setLogger(() => undefined);
     });
 
     test.each`

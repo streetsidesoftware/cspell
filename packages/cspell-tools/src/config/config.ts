@@ -115,7 +115,6 @@ export interface Target extends CompileTargetOptions {
 
     /**
      * If `compress` is true, setting this value to true will also keep an uncompressed version of the dictionary.
-     * @default false
      */
     keepUncompressed?: boolean | undefined;
 

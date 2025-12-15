@@ -133,7 +133,8 @@ export async function compileTarget(
 
     const useTrie = format.startsWith('trie');
     const generateCompressed = target.compress ?? false;
-    const generateUncompressed = !generateCompressed || (target.keepUncompressed ?? false);
+    const generateUncompressed = target.keepUncompressed ?? false;
+
     const filename = resolveTarget(name, targetDirectory, useTrie);
 
     const filesToProcessAsync = pipeAsync(
@@ -153,7 +154,7 @@ export async function compileTarget(
 
     const deps = [
         ...calculateDependencies(
-            filename,
+            filename + (generateCompressed ? '.gz' : ''),
             filesToProcess,
             [...excludeWordsFrom, ...excludeWordsNotFoundIn],
             checksumRoot,
@@ -183,11 +184,12 @@ export async function compileTarget(
               });
         const data = iterableToString(pipe(words, normalizer, compiler));
 
-        if (generateUncompressed) {
-            await createTargetFile(dst, data, false);
-        }
-        if (generateCompressed) {
-            await createTargetFile(dst, data, true);
+        const genSet = new Set<boolean>();
+        genSet.add(generateCompressed);
+        genSet.add(!generateUncompressed);
+
+        for (const compress of genSet) {
+            await createTargetFile(dst, data, compress);
         }
     }
 

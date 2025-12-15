@@ -183,6 +183,9 @@ export async function createTargetFile(
     seq: Iterable<string> | string,
     compress?: boolean,
 ): Promise<void> {
+    const rel = path.relative(process.cwd(), destFilename);
+    const log = getLogger();
+    log(`Writing to file ${rel}${compress ? '.gz' : ''}`);
     const destDir = path.dirname(destFilename);
     await mkdirp(destDir);
     await writeTextToFile(destFilename, seq, compress);
