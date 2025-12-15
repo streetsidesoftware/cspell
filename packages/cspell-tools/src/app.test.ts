@@ -204,21 +204,25 @@ describe('Validate the application', () => {
     });
 
     test('app no args', async () => {
+        const stdout = vi.spyOn(process.stdout, 'write').mockImplementation(mockWrite);
         const commander = getCommander();
         const mock = vi.fn();
         commander.on('--help', mock);
         await expect(app.run(commander, argv())).rejects.toThrow(Commander.CommanderError);
         expect(mock.mock.calls.length).toBe(1);
         expect(consoleSpy.consoleOutput()).toMatchSnapshot();
+        expect(stdout.mock.calls.map(([data]) => data).join('')).toMatchSnapshot();
     });
 
     test('app --help', async () => {
+        const stdout = vi.spyOn(process.stdout, 'write').mockImplementation(mockWrite);
         const commander = getCommander();
         const mock = vi.fn();
         commander.on('--help', mock);
         await expect(app.run(commander, argv('--help'))).rejects.toThrow(Commander.CommanderError);
         expect(mock.mock.calls.length).toBe(1);
         expect(consoleSpy.consoleOutput()).toMatchSnapshot();
+        expect(stdout.mock.calls.map(([data]) => data).join('')).toMatchSnapshot();
     });
 
     test('app -V', async () => {
@@ -283,3 +287,17 @@ describe('Validate the application', () => {
         expect(consoleSpy.consoleOutput()).toMatchSnapshot();
     });
 });
+
+function mockWrite(buffer: Uint8Array | string, cb?: (err?: Error) => void): boolean;
+function mockWrite(str: Uint8Array | string, encoding?: BufferEncoding, cb?: (err?: Error) => void): boolean;
+function mockWrite(
+    _data: unknown,
+    encodingOrCb?: BufferEncoding | ((err?: Error) => void),
+    cb?: (err?: Error) => void,
+) {
+    if (typeof encodingOrCb === 'function') {
+        cb = encodingOrCb;
+    }
+    cb?.();
+    return true;
+}
