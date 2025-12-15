@@ -178,12 +178,14 @@ function removeDuplicateForms(forms: Iterable<string>): Map<string, string[]> {
     );
 }
 
-export function createTarget(destFilename: string): (seq: Iterable<string>) => Promise<void> {
+export function createTarget(
+    destFilename: string,
+    compress?: boolean,
+): (seq: Iterable<string> | string) => Promise<void> {
     const destDir = path.dirname(destFilename);
-    const pDir = mkdirp(destDir);
     return async (seq: Iterable<string>) => {
-        await pDir;
-        await writeTextToFile(destFilename, seq);
+        await mkdirp(destDir);
+        await writeTextToFile(destFilename, seq, compress);
     };
 }
 
