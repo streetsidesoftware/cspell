@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 20937, skipped: 29, Issues found: 45753 in 7960 files.
+ CSpell: Files checked: 20937, skipped: 29, Issues found: 45760 in 7960 files.
  exit code: 1
 ARCHITECTURE.md:158:48    - Unknown word (googlemock) -- implementation using `googlemock`
 ARCHITECTURE.md:29:61     - Unknown word (retryable)  -- RPCs that fail with a retryable error,
@@ -212,7 +212,8 @@ doc/cpp-style-guide.md:54:18     - Unknown word (blorg)      -- #include <grpcpp
 doc/cpp-style-guide.md:58:11     - Unknown word (unistd)     -- #include <unistd.h>
 doc/ctype-cord-workarounds.md:32:26     - Unknown word (CTYPE)      -- GOOGLE_CLOUD_CPP_ENABLE_CTYPE_CORD_WORKAROUND` CMake
 doc/packaging.md:1199:21   - Unknown word (epel)           -- sudo dnf install -y epel-release && \
-doc/packaging.md:1237:1    - Unknown word (Abseiil)        -- Abseiil from source. Enabling
+doc/packaging.md:1203:35   - Unknown word (binutils)       -- autoconf automake libtool binutils
+doc/packaging.md:1246:1    - Unknown word (Abseiil)        -- Abseiil from source. Enabling
 doc/packaging.md:210:10    - Unknown word (DWITH)       -- -DWITH_EXAMPLES=OFF \
 doc/packaging.md:214:10    - Unknown word (DOPENTELEMETRY) -- -DOPENTELEMETRY_INSTALL=ON \
 doc/packaging.md:247:10    - Unknown word (makecache)      -- sudo dnf makecache && \
@@ -302,7 +303,7 @@ external/googleapis/protodeps/binaryauthorization.deps:8:25      - Unknown word 
 external/googleapis/protolists/aiplatform.list:27:59     - Unknown word (trainingjob) -- aiplatform/v1/schema/trainingjob/definition:automl_image
 external/googleapis/protolists/aiplatform.list:86:52     - Unknown word (genai)       -- cloud/aiplatform/v1:genai_tuning_service.proto
 external/googleapis/protolists/alloydb.list:1:49      - Unknown word (csql)       -- google/cloud/alloydb/v1:csql_resources.proto
-external/googleapis/protolists/artifactregistry.list:15:61     - Unknown word (vpcsc)      -- artifactregistry/v1:vpcsc_config.proto
+external/googleapis/protolists/artifactregistry.list:16:61     - Unknown word (vpcsc)      -- artifactregistry/v1:vpcsc_config.proto
 external/googleapis/protolists/asset.list:1:64      - Unknown word (resourceowners) -- v1:asset_enrichment_resourceowners.proto
 external/googleapis/protolists/backupdr.list:12:50     - Unknown word (datasourcereference)   -- google/cloud/backupdr/v1:datasourcereference.proto
 external/googleapis/protolists/backupdr.list:3:58      - Unknown word (reportlog)  -- backupdr/logging/v1:reportlog.proto
@@ -784,6 +785,8 @@ google/cloud/spanner/value.h:127:9     - Unknown word (Nullness)   -- * @par Nul
 google/cloud/sql/doc/environment-variables.dox:13:40     - Unknown word (sqladmin)   -- (which defaults to "sqladmin.googleapis.com")
 google/cloud/sql/v1/internal/sql_instances_rest_connection_impl.cc:545:53    - Unknown word (Ssrs)       -- :SqlInstancesAcquireSsrsLeaseResponse>
 google/cloud/sql/v1/sql_instances_client.h:1142:71   - Unknown word (SSRS)       -- Reporting Services (SSRS).
+google/cloud/storage/README.md:26:11     - Unknown word (cstdlib)    -- #include <cstdlib>
+google/cloud/storage/README.md:46:20     - Unknown word (nullptr)    -- if (ca_bundle != nullptr) {
 google/cloud/storage/async/client_test.cc:382:24    - Unknown word (Appendable) -- TEST(AsyncClient, StartAppendableObjectUpload1) {
 google/cloud/storage/async/client_test.cc:386:7     - Unknown word (appendable) -- appendable: true
 google/cloud/storage/async/client_test.cc:657:59    - Unknown word (algorigthm) -- only-invalid-encryption-algorigthm"

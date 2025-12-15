@@ -3,7 +3,7 @@ Repository: wireapp/wire-webapp
 Url: "https://github.com/wireapp/wire-webapp.git"
 Args: ["src/script/**/*.{js,ts,tsx,md}"]
 Lines:
- CSpell: Files checked: 1789, Issues found: 3153 in 840 files.
+ CSpell: Files checked: 1806, Issues found: 3152 in 845 files.
  exit code: 1
 src/script/Config.ts:100:43    - Unknown word (wireapp)    -- packageJson.dependencies['@wireapp/avs'],
 src/script/Config.ts:102:3     - Unknown word (COUNTLY)    -- COUNTLY_SERVER_URL: 'https:
@@ -349,9 +349,9 @@ src/script/components/CellsGlobalView/common/getUserQualifiedIdFromNode/getUserQ
 src/script/components/CellsGlobalView/common/getUserQualifiedIdFromNode/getUserQualifiedIdFromNode.ts:26:41     - Unknown word (usermeta)   -- metadata.Namespace === 'usermeta-owner-uuid',
 src/script/components/CellsGlobalView/common/openConversation/openConversation.ts:20:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
 src/script/components/CellsGlobalView/common/openFolder/openFolder.ts:22:34     - Unknown word (wireapp)    -- parseQualifiedId} from '@wireapp/core/lib/util/qualifiedIdUtil
-src/script/components/CellsGlobalView/transformCellsNodes/transformCellsNodes.ts:122:57    - Unknown word (MILLIS)     -- as number) * TIME_IN_MILLIS.SECOND;
-src/script/components/CellsGlobalView/transformCellsNodes/transformCellsNodes.ts:130:68    - Unknown word (usermeta)   -- meta.Namespace === 'usermeta-owner')?.JsonValue;
-src/script/components/CellsGlobalView/transformCellsNodes/transformCellsNodes.ts:135:68    - Unknown word (usermeta)   -- meta.Namespace === 'usermeta-tags')?.JsonValue;
+src/script/components/CellsGlobalView/transformCellsNodes/transformCellsNodes.ts:117:57    - Unknown word (MILLIS)     -- as number) * TIME_IN_MILLIS.SECOND;
+src/script/components/CellsGlobalView/transformCellsNodes/transformCellsNodes.ts:125:68    - Unknown word (usermeta)   -- meta.Namespace === 'usermeta-owner')?.JsonValue;
+src/script/components/CellsGlobalView/transformCellsNodes/transformCellsNodes.ts:130:68    - Unknown word (usermeta)   -- meta.Namespace === 'usermeta-tags')?.JsonValue;
 src/script/components/CellsGlobalView/transformCellsNodes/transformCellsNodes.ts:20:34     - Unknown word (wireapp)    -- parseQualifiedId} from '@wireapp/core/lib/util/qualifiedIdUtil
 src/script/components/CellsGlobalView/transformCellsNodes/transformCellsNodes.ts:26:17     - Unknown word (MILLIS)     -- import {TIME_IN_MILLIS} from 'Util/TimeUtil
 src/script/components/CellsGlobalView/transformCellsNodes/transformCellsNodes.ts:56:65     - Unknown word (MILLIS)     -- ExpiresAt) * TIME_IN_MILLIS.SECOND)
@@ -480,7 +480,7 @@ src/script/components/FileFullscreenModal/FileEditor/FileEditor.tsx:75:35     - 
 src/script/components/FileFullscreenModal/FileEditor/FileEditor.tsx:93:29     - Unknown word (collabora)  -- src={node.EditorURLs?.collabora.Url}
 src/script/components/FileFullscreenModal/FileHeader/FileHeader.styles.ts:22:26     - Unknown word (wireapp)    -- import {COLOR_V2} from '@wireapp/react-ui-kit';
 src/script/components/FileFullscreenModal/FileHeader/FileHeader.tsx:20:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
-src/script/components/FileFullscreenModal/FileHeader/FileHeader.tsx:22:93     - Unknown word (wireapp)    -- ownloadIcon, ShowIcon} from '@wireapp/react-ui-kit';
+src/script/components/FileFullscreenModal/FileHeader/FileHeader.tsx:31:10     - Unknown word (wireapp)    -- } from '@wireapp/react-ui-kit';
 src/script/components/FileFullscreenModal/ImageFileView/ImageFileView.tsx:20:41     - Unknown word (Zoomable)   -- omableImage} from 'Components/ZoomableImage/ZoomableImage'
 src/script/components/FileFullscreenModal/ImageFileView/ImageFileView.tsx:20:55     - Unknown word (Zoomable)   -- Components/ZoomableImage/ZoomableImage';
 src/script/components/FileFullscreenModal/ImageFileView/ImageFileView.tsx:20:9      - Unknown word (Zoomable)   -- import {ZoomableImage} from 'Components
@@ -914,6 +914,12 @@ src/script/components/Modals/DetailViewModal/index.tsx:263:77    - Unknown word 
 src/script/components/Modals/DetailViewModal/index.tsx:277:14    - Unknown word (Zoomable)   -- <ZoomableImage key={currentMessageEntit
 src/script/components/Modals/DetailViewModal/index.tsx:27:41     - Unknown word (Zoomable)   -- omableImage} from 'Components/ZoomableImage';
 src/script/components/Modals/DetailViewModal/index.tsx:27:9      - Unknown word (Zoomable)   -- import {ZoomableImage} from 'Components
+src/script/components/Modals/FileHistoryModal/FileRestoreConfirmContent.tsx:20:39     - Unknown word (wireapp)    -- ButtonVariant} from '@wireapp/react-ui-kit';
+src/script/components/Modals/FileHistoryModal/FileVersionItem.tsx:20:65     - Unknown word (wireapp)    -- ReloadIcon} from '@wireapp/react-ui-kit';
+src/script/components/Modals/FileHistoryModal/hooks/useFileVersions.test.ts:30:12     - Unknown word (tsyringe)   -- jest.mock('tsyringe', () => ({
+src/script/components/Modals/FileHistoryModal/hooks/useFileVersions.ts:22:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
+src/script/components/Modals/FileHistoryModal/utils/fileVersionUtils.ts:22:83     - Unknown word (MILLIS)     -- getDayPrefix, TIME_IN_MILLIS} from 'Util/TimeUtil
+src/script/components/Modals/FileHistoryModal/utils/fileVersionUtils.ts:54:62     - Unknown word (MILLIS)     -- MTime || 0) * TIME_IN_MILLIS.SECOND;
 src/script/components/Modals/GroupCreation/GroupCreationModal.tsx:107:24    - Unknown word (temorarily) -- / Read receipts are temorarily disabled for MLS groups
 src/script/components/Modals/GroupCreation/GroupCreationModal.tsx:22:30     - Unknown word (wireapp)    -- RECEIPT_MODE} from '@wireapp/api-client/lib/conversation
 src/script/components/Modals/GroupCreation/GroupCreationModal.tsx:23:66     - Unknown word (wireapp)    -- oConversationProtocol} from '@wireapp/api-client/lib/team
@@ -927,9 +933,9 @@ src/script/components/Modals/LegalHoldModal/LegalHoldModal.test.tsx:21:34     - 
 src/script/components/Modals/LegalHoldModal/LegalHoldModal.tsx:204:25    - Unknown word (prekey)     -- response.last_prekey,
 src/script/components/Modals/LegalHoldModal/LegalHoldModal.tsx:22:39     - Unknown word (wireapp)    -- LegalHoldMemberStatus} from '@wireapp/api-client/lib/team
 src/script/components/Modals/LegalHoldModal/LegalHoldModal.tsx:22:67     - Unknown word (legalhold)  -- api-client/lib/team/legalhold/';
-src/script/components/Modals/ModalComponent/ModalComponent.tsx:108:83    - Unknown word (noninteractive) -- key-events,jsx-a11y/no-noninteractive-element-interactions
-src/script/components/Modals/ModalComponent/ModalComponent.tsx:127:30    - Unknown word (UNFOCUSABLE)    -- tabIndex={TabIndex.UNFOCUSABLE}
-src/script/components/Modals/ModalComponent/ModalComponent.tsx:24:26     - Unknown word (wireapp)    -- import {TabIndex} from '@wireapp/react-ui-kit';
+src/script/components/Modals/ModalComponent/ModalComponent.tsx:111:87    - Unknown word (noninteractive) -- key-events,jsx-a11y/no-noninteractive-element-interactions
+src/script/components/Modals/ModalComponent/ModalComponent.tsx:129:34    - Unknown word (UNFOCUSABLE)    -- tabIndex={TabIndex.UNFOCUSABLE}
+src/script/components/Modals/ModalComponent/ModalComponent.tsx:25:26     - Unknown word (wireapp)    -- import {TabIndex} from '@wireapp/react-ui-kit';
 src/script/components/Modals/PrimaryModal/CheckboxOption/CheckboxOption.tsx:22:41     - Unknown word (wireapp)    -- CheckboxLabel} from '@wireapp/react-ui-kit';
 src/script/components/Modals/PrimaryModal/GuestLinkPasswordForm/GuestLinkPasswordForm.tsx:22:32     - Unknown word (wireapp)    -- ValidationUtil} from '@wireapp/commons';
 src/script/components/Modals/PrimaryModal/GuestLinkPasswordForm/GuestLinkPasswordForm.tsx:23:43     - Unknown word (wireapp)    -- ErrorMessage} from '@wireapp/react-ui-kit';
@@ -1057,7 +1063,7 @@ src/script/components/calling/GroupVideoGrid.tsx:25:23     - Unknown word (wirea
 src/script/components/calling/GroupVideoGrid.tsx:68:27     - Unknown word (Colums)     -- interface CalculateRowsAndColumsParams {
 src/script/components/calling/GroupVideoGrid.tsx:75:88     - Unknown word (Colums)     -- isShort}: CalculateRowsAndColumsParams): number => {
 src/script/components/calling/GroupVideoGrid.tsx:91:58     - Unknown word (Colums)     -- params: CalculateRowsAndColumsParams): RowsAndColumns
-src/script/components/calling/GroupVideoGridTile.tsx:162:61    - Unknown word (UNFOCUSABLE) -- FOCUSABLE : TabIndex.UNFOCUSABLE}
+src/script/components/calling/GroupVideoGridTile.tsx:131:104   - Unknown word (UNFOCUSABLE) -- FOCUSABLE : TabIndex.UNFOCUSABLE
 src/script/components/calling/GroupVideoGridTile.tsx:22:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
 src/script/components/calling/GroupVideoGridTile.tsx:24:29     - Unknown word (wireapp)    -- VIDEO_STATE} from '@wireapp/avs';
 src/script/components/calling/GroupVideoGridTile.tsx:25:26     - Unknown word (wireapp)    -- import {TabIndex} from '@wireapp/react-ui-kit';
@@ -1338,12 +1344,12 @@ src/script/page/AppLock/AppLock.tsx:45:12     - Unknown word (applock)    -- SET
 src/script/page/AppLock/AppLock.tsx:46:19     - Unknown word (applock)    -- SETUP_CHANGE = 'applock.setup_change',
 src/script/page/AppLock/AppLock.tsx:73:38     - Unknown word (APPLOCK)    -- setState] = useState<APPLOCK_STATE>(APPLOCK_STATE
 src/script/page/AppLock/AppLock.tsx:73:53     - Unknown word (APPLOCK)    -- useState<APPLOCK_STATE>(APPLOCK_STATE.NONE);
-src/script/page/AppMain.tsx:254:11    - Unknown word (initialise)  -- await initialiseMLSMigrationFlow({
+src/script/page/AppMain.tsx:255:11    - Unknown word (initialise)  -- await initialiseMLSMigrationFlow({
 src/script/page/AppMain.tsx:25:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 src/script/page/AppMain.tsx:27:59     - Unknown word (wireapp)    -- useMatchMedia} from '@wireapp/react-ui-kit';
 src/script/page/AppMain.tsx:28:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
 src/script/page/AppMain.tsx:34:83     - Unknown word (Conversaion) -- CreateConversation/CreateConversaionModal';
-src/script/page/AppMain.tsx:65:9      - Unknown word (initialise)  -- import {initialiseMLSMigrationFlow} from
+src/script/page/AppMain.tsx:66:9      - Unknown word (initialise)  -- import {initialiseMLSMigrationFlow} from
 src/script/page/LeftSidebar/LeftSidebar.tsx:25:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
 src/script/page/LeftSidebar/LeftSidebar.tsx:30:53     - Unknown word (Temporaty)  -- Conversations} from './panels/TemporatyGuestConversations';
 src/script/page/LeftSidebar/LeftSidebar.tsx:64:23     - Unknown word (shrinked)   -- 'left-column--shrinked': listState === ListState
@@ -2155,12 +2161,12 @@ src/script/repositories/conversation/EventBuilder/EventBuilder.ts:20:35     - Un
 src/script/repositories/conversation/EventBuilder/EventBuilder.ts:230:23    - Unknown word (NOONE)        -- {reason: AVS_REASON.NOONE_JOINED | AVS_REASON
 src/script/repositories/conversation/EventBuilder/EventBuilder.ts:25:10     - Unknown word (wireapp)    -- } from '@wireapp/api-client/lib/event
 src/script/repositories/conversation/EventBuilder/EventBuilder.ts:26:34     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
-src/script/repositories/conversation/EventBuilder/EventBuilder.ts:276:28    - Unknown word (Finalisation) -- JoinedAfterMLSMigrationFinalisationEvent
-src/script/repositories/conversation/EventBuilder/EventBuilder.ts:277:17    - Unknown word (Finalisation) -- | MLSMigrationFinalisationOngoingCallEvent
+src/script/repositories/conversation/EventBuilder/EventBuilder.ts:277:28    - Unknown word (Finalisation) -- JoinedAfterMLSMigrationFinalisationEvent
+src/script/repositories/conversation/EventBuilder/EventBuilder.ts:278:17    - Unknown word (Finalisation) -- | MLSMigrationFinalisationOngoingCallEvent
 src/script/repositories/conversation/EventBuilder/EventBuilder.ts:27:33     - Unknown word (wireapp)    -- AddUsersFailure} from '@wireapp/core/lib/conversation
 src/script/repositories/conversation/EventBuilder/EventBuilder.ts:28:34     - Unknown word (wireapp)    -- MultiPartContent} from '@wireapp/core/lib/conversation
-src/script/repositories/conversation/EventBuilder/EventBuilder.ts:365:24    - Unknown word (NOONE)        -- reason: AVS_REASON.NOONE_JOINED | AVS_REASON
-src/script/repositories/conversation/EventBuilder/EventBuilder.ts:618:31    - Unknown word (Finalisation) -- buildJoinedAfterMLSMigrationFinalisation(
+src/script/repositories/conversation/EventBuilder/EventBuilder.ts:366:24    - Unknown word (NOONE)        -- reason: AVS_REASON.NOONE_JOINED | AVS_REASON
+src/script/repositories/conversation/EventBuilder/EventBuilder.ts:619:31    - Unknown word (Finalisation) -- buildJoinedAfterMLSMigrationFinalisation(
 src/script/repositories/conversation/EventMapper.test.ts:118:27    - Unknown word (ugpawm)     -- token: 'aV0TGxF3ugpawm3wAYPmew==',
 src/script/repositories/conversation/EventMapper.test.ts:118:37    - Unknown word (Pmew)       -- 'aV0TGxF3ugpawm3wAYPmew==',
 src/script/repositories/conversation/EventMapper.test.ts:20:47     - Unknown word (wireapp)    -- LinkPreview, Mention} from '@wireapp/protocol-messaging'
@@ -2331,16 +2337,9 @@ src/script/repositories/event/CallingEvent.ts:20:43     - Unknown word (wireapp)
 src/script/repositories/event/CallingEvent.ts:21:34     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
 src/script/repositories/event/CallingEvent.ts:22:33     - Unknown word (wireapp)    -- InCallEmojiType} from '@wireapp/core/lib/conversation
 src/script/repositories/event/EventProcessor.ts:20:30     - Unknown word (wireapp)    -- BackendEvent} from '@wireapp/api-client/lib/event
-src/script/repositories/event/EventRepository.test.ts:193:26    - Unknown word (conv)       -- conversation: 'conv-id',
 src/script/repositories/event/EventRepository.test.ts:20:62     - Unknown word (wireapp)    -- USER_EVENT} from '@wireapp/api-client/lib/event
-src/script/repositories/event/EventRepository.test.ts:22:33     - Unknown word (wireapp)    -- ConnectionState} from '@wireapp/core';
-src/script/repositories/event/EventRepository.test.ts:249:26    - Unknown word (conv)       -- conversation: 'conv-id',
-src/script/repositories/event/EventRepository.test.ts:273:26    - Unknown word (conv)       -- conversation: 'conv-id',
-src/script/repositories/event/EventRepository.test.ts:293:26    - Unknown word (conv)       -- conversation: 'conv-id',
-src/script/repositories/event/EventRepository.test.ts:403:26    - Unknown word (conv)       -- conversation: 'conv-id',
-src/script/repositories/event/EventRepository.ts:212:36    - Unknown word (MILLIS)     -- RETRY_DELAY_MS = TIME_IN_MILLIS.SECOND * 5;
-src/script/repositories/event/EventRepository.ts:213:49    - Unknown word (MILLIS)     -- INTERVAL_MS = TIME_IN_MILLIS.MINUTE;
-src/script/repositories/event/EventRepository.ts:214:43    - Unknown word (MILLIS)     -- TIMEOUT_MS = TIME_IN_MILLIS.SECOND * 30;
+src/script/repositories/event/EventRepository.ts:132:26    - Unknown word (Connectivitity) -- private readonly updateConnectivitityStatus = (state: ConnectionSta
+src/script/repositories/event/EventRepository.ts:212:24    - Unknown word (Connectivitity) -- this.updateConnectivitityStatus(connectionState
 src/script/repositories/event/EventRepository.ts:25:10     - Unknown word (wireapp)    -- } from '@wireapp/api-client/lib/event
 src/script/repositories/event/EventRepository.ts:26:57     - Unknown word (wireapp)    -- HandledEventPayload} from '@wireapp/core/lib/notification
 src/script/repositories/event/EventRepository.ts:29:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
@@ -2348,8 +2347,8 @@ src/script/repositories/event/EventRepository.ts:31:65     - Unknown word (wirea
 src/script/repositories/event/EventRepository.ts:32:30     - Unknown word (wireapp)    -- PromiseQueue} from '@wireapp/promise-queue';
 src/script/repositories/event/EventRepository.ts:33:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
 src/script/repositories/event/EventRepository.ts:40:17     - Unknown word (MILLIS)     -- import {TIME_IN_MILLIS} from 'Util/TimeUtil
-src/script/repositories/event/EventRepository.ts:584:17    - Unknown word (Outated)    -- 208, // Outated event decyption error
-src/script/repositories/event/EventRepository.ts:584:31    - Unknown word (decyption)  -- 8, // Outated event decyption error (see https://github
+src/script/repositories/event/EventRepository.ts:419:17    - Unknown word (Outated)        -- 208, // Outated event decyption error
+src/script/repositories/event/EventRepository.ts:419:31    - Unknown word (decyption)      -- 8, // Outated event decyption error (see https://github
 src/script/repositories/event/EventRepository.ts:70:38     - Unknown word (MILLIS)     -- EVENT_LIFETIME: TIME_IN_MILLIS.SECOND * 30,
 src/script/repositories/event/EventService.ts:20:36     - Unknown word (wireapp)    -- CONVERSATION_EVENT} from '@wireapp/api-client/lib/event
 src/script/repositories/event/EventService.ts:21:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
@@ -2763,12 +2762,12 @@ src/script/repositories/tracking/EventTrackingRepository.ts:231:37    - Unknown 
 src/script/repositories/tracking/EventTrackingRepository.ts:23:30     - Unknown word (wireapp)    -- as telemetry from '@wireapp/telemetry';
 src/script/repositories/tracking/EventTrackingRepository.ts:24:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
 src/script/repositories/tracking/EventTrackingRepository.ts:26:25     - Unknown word (Segmentations) -- import type {ContributedSegmentations, MessageRepository}
-src/script/repositories/tracking/EventTrackingRepository.ts:302:27    - Unknown word (segmentations) -- (eventName: string, segmentations?: ContributedSegmentations
-src/script/repositories/tracking/EventTrackingRepository.ts:302:54    - Unknown word (Segmentations) -- segmentations?: ContributedSegmentations) => {
-src/script/repositories/tracking/EventTrackingRepository.ts:303:52    - Unknown word (segmentations) -- ductReportingEvent(eventName, segmentations);
-src/script/repositories/tracking/EventTrackingRepository.ts:326:37    - Unknown word (Segmentations) -- getUserData(): ContributedSegmentations {
-src/script/repositories/tracking/EventTrackingRepository.ts:327:36    - Unknown word (Segmentations) -- segmentation: ContributedSegmentations = {
-src/script/repositories/tracking/EventTrackingRepository.ts:346:63    - Unknown word (Segmentations) -- eventName: string, customSegmentations?: ContributedSegmentations
+src/script/repositories/tracking/EventTrackingRepository.ts:307:27    - Unknown word (segmentations) -- (eventName: string, segmentations?: ContributedSegmentations
+src/script/repositories/tracking/EventTrackingRepository.ts:307:54    - Unknown word (Segmentations) -- segmentations?: ContributedSegmentations) => {
+src/script/repositories/tracking/EventTrackingRepository.ts:308:52    - Unknown word (segmentations) -- ductReportingEvent(eventName, segmentations);
+src/script/repositories/tracking/EventTrackingRepository.ts:331:37    - Unknown word (Segmentations) -- getUserData(): ContributedSegmentations {
+src/script/repositories/tracking/EventTrackingRepository.ts:332:36    - Unknown word (Segmentations) -- segmentation: ContributedSegmentations = {
+src/script/repositories/tracking/EventTrackingRepository.ts:351:63    - Unknown word (Segmentations) -- eventName: string, customSegmentations?: ContributedSegmentations
 src/script/repositories/tracking/EventTrackingRepository.ts:64:47     - Unknown word (COUNTLY)       -- LOCAL_STORAGE_KEY: 'COUNTLY_DEVICE_ID',
 src/script/repositories/tracking/EventTrackingRepository.ts:64:9      - Unknown word (COUNTLY)       -- COUNTLY_DEVICE_ID_LOCAL_STORAGE
 src/script/repositories/tracking/EventTrackingRepository.ts:65:47     - Unknown word (COUNTLY)       -- MIGRATE_DEVICE_ID: 'COUNTLY_FAILED_TO_MIGRATE_DEVICE
