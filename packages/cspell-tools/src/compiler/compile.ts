@@ -133,6 +133,7 @@ export async function compileTarget(
 
     const useTrie = format.startsWith('trie');
     const generateCompressed = target.compress ?? false;
+    const generateUncompressed = !generateCompressed || (target.keepUncompressed ?? false);
     const filename = resolveTarget(name, targetDirectory, useTrie);
 
     const filesToProcessAsync = pipeAsync(
@@ -182,7 +183,9 @@ export async function compileTarget(
               });
         const data = iterableToString(pipe(words, normalizer, compiler));
 
-        await createTargetFile(dst, data);
+        if (generateUncompressed) {
+            await createTargetFile(dst, data, false);
+        }
         if (generateCompressed) {
             await createTargetFile(dst, data, true);
         }
