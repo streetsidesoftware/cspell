@@ -7,12 +7,41 @@ exports[`Validate the application > app --help 1`] = `
 }
 `;
 
+exports[`Validate the application > app --help 2`] = `
+"Usage: forks [options] [command]
+
+Options:
+  -V, --version                    output the version number
+  -h, --help                       display help for command
+
+Commands:
+  compile [options] [src...]       Compile words into a cspell dictionary files.
+  compile-trie [options] [src...]  Compile words lists or Hunspell dictionary
+                                   into trie files used by cspell.
+                                   Alias of \`compile --trie\`
+  build [options] [targets...]     Build the targets defined in the run
+                                   configuration.
+  gzip <files...>                  GZip files while keeping the original.
+  shasum [options] [files...]      Calculate the checksum for files.
+  help [command]                   display help for command
+"
+`;
+
+exports[`Validate the application > app --help 3`] = `""`;
+
 exports[`Validate the application > app -V 1`] = `
 {
   "error": "",
   "log": "",
 }
 `;
+
+exports[`Validate the application > app -V 2`] = `
+"9.4.0
+"
+`;
+
+exports[`Validate the application > app -V 3`] = `""`;
 
 exports[`Validate the application > app compile compound 1`] = `
 "
@@ -187,6 +216,28 @@ exports[`Validate the application > app no args 1`] = `
   "error": "",
   "log": "",
 }
+`;
+
+exports[`Validate the application > app no args 2`] = `""`;
+
+exports[`Validate the application > app no args 3`] = `
+"Usage: forks [options] [command]
+
+Options:
+  -V, --version                    output the version number
+  -h, --help                       display help for command
+
+Commands:
+  compile [options] [src...]       Compile words into a cspell dictionary files.
+  compile-trie [options] [src...]  Compile words lists or Hunspell dictionary
+                                   into trie files used by cspell.
+                                   Alias of \`compile --trie\`
+  build [options] [targets...]     Build the targets defined in the run
+                                   configuration.
+  gzip <files...>                  GZip files while keeping the original.
+  shasum [options] [files...]      Calculate the checksum for files.
+  help [command]                   display help for command
+"
 `;
 
 exports[`Validate the application > app shasum 1`] = `

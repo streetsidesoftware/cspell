@@ -204,30 +204,39 @@ describe('Validate the application', () => {
     });
 
     test('app no args', async () => {
+        const std = mockOutput();
         const commander = getCommander();
         const mock = vi.fn();
         commander.on('--help', mock);
         await expect(app.run(commander, argv())).rejects.toThrow(Commander.CommanderError);
         expect(mock.mock.calls.length).toBe(1);
         expect(consoleSpy.consoleOutput()).toMatchSnapshot();
+        expect(std.stdout).toMatchSnapshot();
+        expect(std.stderr).toMatchSnapshot();
     });
 
     test('app --help', async () => {
+        const std = mockOutput();
         const commander = getCommander();
         const mock = vi.fn();
         commander.on('--help', mock);
         await expect(app.run(commander, argv('--help'))).rejects.toThrow(Commander.CommanderError);
         expect(mock.mock.calls.length).toBe(1);
         expect(consoleSpy.consoleOutput()).toMatchSnapshot();
+        expect(std.stdout).toMatchSnapshot();
+        expect(std.stderr).toMatchSnapshot();
     });
 
     test('app -V', async () => {
+        const std = mockOutput();
         const commander = getCommander();
         const mock = vi.fn();
         commander.on('option:version', mock);
         await expect(app.run(commander, argv('-V'))).rejects.toThrow(Commander.CommanderError);
         expect(mock.mock.calls.length).toBe(1);
         expect(consoleSpy.consoleOutput()).toMatchSnapshot();
+        expect(std.stdout).toMatchSnapshot();
+        expect(std.stderr).toMatchSnapshot();
     });
 
     test('app gzip', async () => {
@@ -283,3 +292,33 @@ describe('Validate the application', () => {
         expect(consoleSpy.consoleOutput()).toMatchSnapshot();
     });
 });
+
+function mockOutput() {
+    const stdoutMock = vi.spyOn(process.stdout, 'write').mockImplementation(mockWrite);
+    const stderrMock = vi.spyOn(process.stderr, 'write').mockImplementation(mockWrite);
+
+    return {
+        stdoutMock,
+        stderrMock,
+        get stdout() {
+            return stdoutMock.mock.calls.map(([data]) => data).join('');
+        },
+        get stderr() {
+            return stderrMock.mock.calls.map(([data]) => data).join('');
+        },
+    };
+}
+
+function mockWrite(buffer: Uint8Array | string, cb?: (err?: Error) => void): boolean;
+function mockWrite(str: Uint8Array | string, encoding?: BufferEncoding, cb?: (err?: Error) => void): boolean;
+function mockWrite(
+    _data: unknown,
+    encodingOrCb?: BufferEncoding | ((err?: Error) => void),
+    cb?: (err?: Error) => void,
+) {
+    if (typeof encodingOrCb === 'function') {
+        cb = encodingOrCb;
+    }
+    cb?.();
+    return true;
+}

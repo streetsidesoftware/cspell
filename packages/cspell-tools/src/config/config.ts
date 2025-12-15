@@ -107,11 +107,16 @@ export interface Target extends CompileTargetOptions {
     targetDirectory?: FilePath | undefined;
 
     /**
-     * Also gzip the file?
-     * Setting this value to true will create a `.gz` file next to the dictionary file.
-     * @default: false
+     * Setting this value to true will create a `.gz` dictionary file.
+     * Use `keepUncompressed` to also keep an uncompressed version.
+     * @default false
      */
     compress?: boolean | undefined;
+
+    /**
+     * If `compress` is true, setting this value to true will also keep an uncompressed version of the dictionary.
+     */
+    keepUncompressed?: boolean | undefined;
 
     /**
      * Format of the dictionary.
