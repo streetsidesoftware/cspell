@@ -26,7 +26,7 @@ export async function compileWordListToTarget(
 ): Promise<void> {
     const compiler = createWordListCompiler(options);
 
-    return createTarget(destFilename)(compiler(lines));
+    return createTargetFile(destFilename, compiler(lines));
 }
 
 export function createWordListCompiler(options: CompileOptions): WordListCompiler {
@@ -178,15 +178,14 @@ function removeDuplicateForms(forms: Iterable<string>): Map<string, string[]> {
     );
 }
 
-export function createTarget(
+export async function createTargetFile(
     destFilename: string,
+    seq: Iterable<string> | string,
     compress?: boolean,
-): (seq: Iterable<string> | string) => Promise<void> {
+): Promise<void> {
     const destDir = path.dirname(destFilename);
-    return async (seq: Iterable<string>) => {
-        await mkdirp(destDir);
-        await writeTextToFile(destFilename, seq, compress);
-    };
+    await mkdirp(destDir);
+    await writeTextToFile(destFilename, seq, compress);
 }
 
 // function sort(words: Iterable<string>): Iterable<string> {
@@ -210,9 +209,8 @@ export async function compileTrieToTarget(
 }
 
 function createTrieTarget(destFilename: string, options: TrieOptions): (words: Iterable<string>) => Promise<void> {
-    const target = createTarget(destFilename);
     return async (words: Iterable<string>) => {
-        await target(createTrieCompiler(options)(words));
+        await createTargetFile(destFilename, createTrieCompiler(options)(words));
         const log = getLogger();
         log(`Done writing to file ${path.basename(destFilename)}`);
     };

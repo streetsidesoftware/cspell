@@ -21,7 +21,7 @@ import { logWithTimestamp } from './logWithTimestamp.js';
 import { readTextFile } from './readers/readTextFile.js';
 import type { SourceReaderOptions } from './SourceReader.js';
 import { streamSourceWordsFromFile } from './streamSourceWordsFromFile.js';
-import { createTarget, createTrieCompiler, createWordListCompiler } from './wordListCompiler.js';
+import { createTargetFile, createTrieCompiler, createWordListCompiler } from './wordListCompiler.js';
 import { normalizeTargetWords } from './wordListParser.js';
 
 interface CompileOptions {
@@ -182,9 +182,9 @@ export async function compileTarget(
               });
         const data = iterableToString(pipe(words, normalizer, compiler));
 
-        await createTarget(dst, false)(data);
+        await createTargetFile(dst, data);
         if (generateCompressed) {
-            await createTarget(dst, true)(data);
+            await createTargetFile(dst, data, true);
         }
     }
 
