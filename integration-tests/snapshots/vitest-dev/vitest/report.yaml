@@ -3,9 +3,9 @@ Repository: vitest-dev/vitest
 Url: https://github.com/vitest-dev/vitest
 Args: '["--issues-summary-report","--locale=en,en-GB","."]'
 Summary:
-  files: 2403
-  filesWithIssues: 399
-  issues: 1433
+  files: 2416
+  filesWithIssues: 401
+  issues: 1438
   errors: 0
 Errors: []
 
@@ -83,8 +83,8 @@ issues:
   - "docs/config/deps.md:31:233      rebundling      U       it directly or force rebundling with `deps.optimizer"
   - "docs/config/environment.md:85:29        corresponde     U       viteEnvironment` field corresponde to the environment defined"
   - "docs/config/experimental.md:8:92        fsmodulecache           U       Version> {#experimental-fsmodulecache}"
-  - "docs/config/experimental.md:93:96       fsmodulecachepath       U       Version> {#experimental-fsmodulecachepath}"
-  - "docs/config/experimental.md:169:99      printimportbreakdown    U       Version> {#experimental-printimportbreakdown}"
+  - "docs/config/experimental.md:97:96       fsmodulecachepath       U       Version> {#experimental-fsmodulecachepath}"
+  - "docs/config/experimental.md:177:99      printimportbreakdown    U       Version> {#experimental-printimportbreakdown}"
   - "docs/config/outputfile.md:6:26          outputfile      U       outputFile <CRoot /> {#outputfile}"
   - "docs/config/pool.md:16:104      chdir               U       APIs such as `process.chdir()`. Some libraries written"
   - "docs/config/pool.md:35:22       doesnt (doesn't)    U       fs.writeFileSync('/doesnt exist')"
@@ -143,6 +143,10 @@ issues:
   - "examples/fastify/mockData.ts:7:19           Targaryen       U       name: 'Daenerys Targaryen',"
   - "examples/fastify/mockData.ts:11:10          Arya            U       name: 'Arya Stark',"
   - "examples/fastify/mockData.ts:15:10          Rhaenyra        U       name: 'Rhaenyra Targaryen',"
+  - "examples/opentelemetry/docker-compose.yaml:5:15         jaegertracing       U       image: cr.jaegertracing.io/jaegertracing/jaeger"
+  - "examples/opentelemetry/docker-compose.yaml:15:24        Zipkin              U       # - 9411:9411 # Zipkin compatibility"
+  - "examples/opentelemetry/README.md:1:10           Opentelemtry            U       # Vitest Opentelemtry Example"
+  - "examples/opentelemetry/README.md:12:40          deafult (default)       U       exports with OTLP HTTP by deafult)"
   - "LICENSE:3:46        Vitest      U       Present VoidZero Inc. and Vitest contributors"
   - "netlify.toml:2:18           vitepress       U       publish = \"docs/.vitepress/dist\""
   - "netlify.toml:11:75          keyid           U       -29T00:00:00.000Z\",\"keyid\":\"SHA256:jl3bwswu80PjjokCgh"
@@ -180,7 +184,7 @@ issues:
   - "packages/browser/src/client/tester/expect/utils.ts:275:44       valuenow    U       element.getAttribute('aria-valuenow'))"
   - "packages/browser/src/client/tester/runner.ts:284:22         browserv        U       const query = `browserv=${hash}`"
   - "packages/browser/src/client/tester/runner.ts:285:13         importpath      U       const importpath = `${prefix}${filepath"
-  - "packages/browser/src/client/tester/tester.ts:127:6          webdiverio      U       // webdiverio context depends on the"
+  - "packages/browser/src/client/tester/tester.ts:128:6          webdiverio      U       // webdiverio context depends on the"
   - "packages/browser/src/node/commands/screenshotMatcher/types.ts:12:13         Promisable      U       export type Promisable<T> = T | Promise<T>"
   - "packages/browser/src/node/plugin.ts:382:33      nastry      U       loupe bundle has a nastry require('util') call"
   - "packages/browser/src/node/projectParent.ts:178:19       cdps    U       public readonly cdps: Map<string, BrowserServerCDP"
@@ -238,7 +242,7 @@ issues:
   - "packages/utils/src/diff/getAlignedDiffs.ts:162:17       subdiff     U       const subdiff = new Diff(op, substring"
   - "packages/utils/src/diff/index.ts:285:16         Diffable    U       // if (isLineDiffable(expected, received)"
   - "packages/utils/src/display.ts:81:40         sdjifo      U       formatRegExp: RegExp = /%[sdjifoOc%]/g"
-  - "packages/utils/src/display.ts:201:13        kstr        U       const kstr"
+  - "packages/utils/src/display.ts:223:13        kstr        U       const kstr"
   - "packages/utils/src/nanoid.ts:4:6            useandom                U       = 'useandom-26T198340PX75pxJACKVERYMINDBU"
   - "packages/utils/src/nanoid.ts:4:30           JACKVERYMINDBUSHWOLF    U       useandom-26T198340PX75pxJACKVERYMINDBUSHWOLF_GQZbfghjklqvwyzrict"
   - "packages/utils/src/nanoid.ts:4:53           Zbfghjklqvwyzrict       U       pxJACKVERYMINDBUSHWOLF_GQZbfghjklqvwyzrict'"
@@ -287,9 +291,9 @@ issues:
   - "packages/vitest/src/node/browser/sessions.ts:19:63          orhcestrator    U       connection with the orhcestrator to be established"
   - "packages/vitest/src/node/cache/fsModuleCache.ts:218:21      canot (cannot)      U       // but we canot access the options because"
   - "packages/vitest/src/node/coverage.ts:757:15         magicast's      U       // Reduce magicast's verbose errors to readable"
-  - "packages/vitest/src/node/environments/fetchModule.ts:385:5          SOURCEMAPPING       U       let SOURCEMAPPING_URL = 'sourceMa'"
-  - "packages/vitest/src/node/environments/fetchModule.ts:386:23         pping               U       SOURCEMAPPING_URL += 'ppingURL'"
-  - "packages/vitest/src/node/environments/fetchModule.ts:440:32         CAAA                U       sourceMap.mappings = `AAAA,CAAA${sourceMap.mappings"
+  - "packages/vitest/src/node/environments/fetchModule.ts:394:5          SOURCEMAPPING       U       let SOURCEMAPPING_URL = 'sourceMa'"
+  - "packages/vitest/src/node/environments/fetchModule.ts:395:23         pping               U       SOURCEMAPPING_URL += 'ppingURL'"
+  - "packages/vitest/src/node/environments/fetchModule.ts:449:32         CAAA                U       sourceMap.mappings = `AAAA,CAAA${sourceMap.mappings"
   - "packages/vitest/src/node/git.ts:78:40       cdup    U       rev-parse', '--show-cdup']"
   - "packages/vitest/src/node/module-diagnostic.ts:16:18         recieves (receives)     U       // this function recieves the module diagnostic"
   - "packages/vitest/src/node/plugins/index.ts:63:12         reassignable    U       // reassignable when running in worker"
@@ -558,6 +562,7 @@ issuesSummary:
   - "text: Daenerys, count: 2, files: 2,"
   - "text: dblclick, count: 1, files: 1,"
   - "text: deadend, count: 2, files: 1,"
+  - "text: deafult, count: 1, files: 1,"
   - "text: debitis, count: 1, files: 1,"
   - "text: decendants, count: 1, files: 1,"
   - "text: definecachekeygenerator, count: 1, files: 1,"
@@ -655,6 +660,7 @@ issuesSummary:
   - "text: ivya, count: 19, files: 11,"
   - "text: Ivya, count: 7, files: 3,"
   - "text: JACKVERYMINDBUSHWOLF, count: 1, files: 1,"
+  - "text: jaegertracing, count: 2, files: 1,"
   - "text: jfif, count: 1, files: 1,"
   - "text: jridgewell, count: 22, files: 15,"
   - "text: jsdocs, count: 1, files: 1,"
@@ -731,6 +737,7 @@ issuesSummary:
   - "text: ontestcaseartifactrecord, count: 1, files: 1,"
   - "text: ontestfinished, count: 1, files: 1,"
   - "text: onwarn, count: 25, files: 9,"
+  - "text: Opentelemtry, count: 1, files: 1,"
   - "text: optio, count: 1, files: 1,"
   - "text: orhcestrator, count: 1, files: 1,"
   - "text: outputfile, count: 1, files: 1,"
@@ -934,3 +941,4 @@ issuesSummary:
   - "text: xxxdef, count: 1, files: 1,"
   - "text: Zammad, count: 3, files: 3,"
   - "text: Zbfghjklqvwyzrict, count: 1, files: 1,"
+  - "text: Zipkin, count: 1, files: 1,"
