@@ -134,6 +134,11 @@ export async function compileTarget(
     const useTrie = format.startsWith('trie');
     const generateCompressed = target.compress ?? false;
     const generateUncompressed = target.keepUncompressed ?? false;
+    const genSet = new Set<boolean>();
+    genSet.add(generateCompressed);
+    if (generateUncompressed) {
+        genSet.add(false);
+    }
 
     const filename = resolveTarget(name, targetDirectory, useTrie);
 
@@ -183,10 +188,6 @@ export async function compileTarget(
                   removeDuplicates,
               });
         const data = iterableToString(pipe(words, normalizer, compiler));
-
-        const genSet = new Set<boolean>();
-        genSet.add(generateCompressed);
-        genSet.add(!generateUncompressed);
 
         for (const compress of genSet) {
             await createTargetFile(dst, data, compress);
