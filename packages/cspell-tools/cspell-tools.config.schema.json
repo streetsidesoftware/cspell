@@ -28,17 +28,7 @@
       "additionalProperties": false,
       "properties": {
         "allowedSplitWords": {
-          "anyOf": [
-            {
-              "$ref": "#/definitions/FilePath"
-            },
-            {
-              "items": {
-                "$ref": "#/definitions/FilePath"
-              },
-              "type": "array"
-            }
-          ],
+          "$ref": "#/definitions/FilePathOrFilePathArray",
           "description": "Words in the `allowedSplitWords` are considered correct and can be used as a basis for splitting compound words.\n\nIf entries can be split so that all the words in the entry are allowed, then only the individual words are added, otherwise the entire entry is added. This is to prevent misspellings in CamelCase words from being introduced into the dictionary."
         },
         "keepRawCase": {
@@ -86,21 +76,24 @@
       "description": "Note: All relative paths are relative to the config file location.",
       "type": "string"
     },
+    "FilePathOrFilePathArray": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/FilePath"
+        },
+        {
+          "items": {
+            "$ref": "#/definitions/FilePath"
+          },
+          "type": "array"
+        }
+      ]
+    },
     "FileSource": {
       "additionalProperties": false,
       "properties": {
         "allowedSplitWords": {
-          "anyOf": [
-            {
-              "$ref": "#/definitions/FilePath"
-            },
-            {
-              "items": {
-                "$ref": "#/definitions/FilePath"
-              },
-              "type": "array"
-            }
-          ],
+          "$ref": "#/definitions/FilePathOrFilePathArray",
           "description": "Words in the `allowedSplitWords` are considered correct and can be used as a basis for splitting compound words.\n\nIf entries can be split so that all the words in the entry are allowed, then only the individual words are added, otherwise the entire entry is added. This is to prevent misspellings in CamelCase words from being introduced into the dictionary."
         },
         "filename": {
@@ -163,7 +156,7 @@
         },
         "compress": {
           "default": ": false",
-          "description": "gzip the file?",
+          "description": "Also gzip the file? Setting this value to true will create a `.gz` file next to the dictionary file.",
           "type": "boolean"
         },
         "dictionaryDirectives": {

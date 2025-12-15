@@ -5,14 +5,18 @@ import { compress } from '../gzip/index.js';
 
 const isGzFile = /\.gz$/;
 
-export async function writeTextToFile(filename: string, data: string): Promise<void> {
-    const useGz = isGzFile.test(filename);
-    const buf = Buffer.from(data, 'utf8');
+export async function writeTextToFile(
+    filename: string,
+    data: string | Iterable<string>,
+    useGzCompress?: boolean,
+): Promise<void> {
+    const dataStr = typeof data === 'string' ? data : Array.isArray(data) ? data.join('') : [...data].join('');
+    const hasGzExt = isGzFile.test(filename);
+    const useGz = useGzCompress ?? hasGzExt;
+    if (useGz && !hasGzExt) {
+        filename += '.gz';
+    }
+    const buf = Buffer.from(dataStr, 'utf8');
     const buffer = useGz ? await compress(buf) : buf;
     await fs.writeFile(filename, buffer);
-}
-
-export function writeTextLinesToFile(filename: string, lines: Iterable<string>): Promise<void> {
-    const data = Array.isArray(lines) ? lines.join('') : [...lines].join('');
-    return writeTextToFile(filename, data);
 }

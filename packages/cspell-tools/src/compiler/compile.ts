@@ -21,7 +21,7 @@ import { logWithTimestamp } from './logWithTimestamp.js';
 import { readTextFile } from './readers/readTextFile.js';
 import type { SourceReaderOptions } from './SourceReader.js';
 import { streamSourceWordsFromFile } from './streamSourceWordsFromFile.js';
-import { compileTrie, compileWordList } from './wordListCompiler.js';
+import { createTargetFile, createTrieCompiler, createWordListCompiler } from './wordListCompiler.js';
 import { normalizeTargetWords } from './wordListParser.js';
 
 interface CompileOptions {
@@ -129,12 +129,11 @@ export async function compileTarget(
         return excludeFromFilter(word) && includeFromFilter(word) && excludeRegexFilter(word);
     };
 
-    const generateNonStrictTrie = target.generateNonStrict ?? true;
-
     const name = normalizeTargetName(target.name);
 
     const useTrie = format.startsWith('trie');
-    const filename = resolveTarget(name, targetDirectory, useTrie, target.compress ?? false);
+    const generateCompressed = target.compress ?? false;
+    const filename = resolveTarget(name, targetDirectory, useTrie);
 
     const filesToProcessAsync = pipeAsync(
         readSourceList(sources, rootDir),
@@ -168,28 +167,28 @@ export async function compileTarget(
         }
     }
 
-    const action = useTrie
-        ? async (words: Iterable<string>, dst: string) => {
-              return compileTrie(pipe(words, normalizer), dst, {
+    async function action(words: Iterable<string>, dst: string): Promise<void> {
+        const compiler = useTrie
+            ? createTrieCompiler({
                   base: trieBase,
-                  sort: false,
                   trie3: format === 'trie3',
                   trie4: format === 'trie4',
-                  generateNonStrict: generateNonStrictTrie,
-                  dictionaryDirectives: undefined,
-                  //   removeDuplicates, // Add this in if we use it.
-              });
-          }
-        : async (words: Iterable<string>, dst: string) => {
-              return compileWordList(pipe(words, normalizer), dst, {
+              })
+            : createWordListCompiler({
                   sort,
                   generateNonStrict,
                   dictionaryDirectives,
                   removeDuplicates,
               });
-          };
+        const data = iterableToString(pipe(words, normalizer, compiler));
 
-    await processFiles(action, filesToProcess, filename);
+        await createTargetFile(dst, data);
+        if (generateCompressed) {
+            await createTargetFile(dst, data, true);
+        }
+    }
+
+    await processFiles({ action, filesToProcess, mergeTarget: filename });
 
     logWithTimestamp(`Done compile: ${target.name}`);
 
@@ -199,13 +198,13 @@ export async function compileTarget(
 function calculateDependencies(
     targetFile: string,
     filesToProcess: FileToProcess[],
-    excludeFiles: string[] | undefined,
+    extraDependencyFiles: string[] | undefined,
     rootDir: string,
 ): Set<string> {
     const dependencies = new Set<string>();
 
     addDependency(targetFile);
-    excludeFiles?.forEach((f) => addDependency(f));
+    extraDependencyFiles?.forEach((f) => addDependency(f));
     filesToProcess.forEach((f) => addDependency(f.src));
 
     return dependencies;
@@ -222,7 +221,13 @@ function rel(filePath: string): string {
     return path.relative(process.cwd(), filePath);
 }
 
-async function processFiles(action: ActionFn, filesToProcess: FileToProcess[], mergeTarget: string) {
+interface ProcessFilesOptions {
+    action: ActionFn;
+    filesToProcess: FileToProcess[];
+    mergeTarget: string;
+}
+
+async function processFiles({ action, filesToProcess, mergeTarget }: ProcessFilesOptions) {
     const toProcess = filesToProcess;
     const dst = mergeTarget;
 
@@ -251,8 +256,8 @@ interface FileToProcess {
 
 type ActionFn = (words: Iterable<string>, dst: string) => Promise<void>;
 
-function resolveTarget(name: string, directory: string, useTrie: boolean, useGzCompress: boolean | boolean): string {
-    const ext = ((useTrie && '.trie') || '.txt') + ((useGzCompress && '.gz') || '');
+function resolveTarget(name: string, directory: string, useTrie: boolean): string {
+    const ext = (useTrie && '.trie') || '.txt';
     const filename = name + ext;
     return path.resolve(directory, filename);
 }
@@ -386,4 +391,8 @@ function createExcludeRegexFilter(excludeWordsMatchingRegex: string[] | undefine
             return false;
         });
     return (word: string) => !regexes.some((r) => r.test(word));
+}
+
+function iterableToString(iter: Iterable<string>): string {
+    return Array.isArray(iter) ? iter.join('') : [...iter].join('');
 }

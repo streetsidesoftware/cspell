@@ -5,9 +5,10 @@ import { opAppend, opMap, pipe } from '@cspell/cspell-pipe/sync';
 import * as Trie from 'cspell-trie-lib';
 
 import type { CompileOptions } from './CompileOptions.js';
-import { writeSeqToFile } from './fileWriter.js';
+import { WordListCompiler } from './CompilerDefinitions.js';
 import { getLogger } from './logger.js';
 import { normalizeTargetWords } from './wordListParser.js';
+import { writeTextToFile } from './writeTextToFile.js';
 
 const mkdirp = async (p: string) => {
     await mkdir(p, { recursive: true });
@@ -18,19 +19,29 @@ const wordListHeader = `
 # cspell-tools: keep-case no-split`;
 const wordListHeaderLines = wordListHeader.split('\n').map((a) => a.trim());
 
-export async function compileWordList(
+export async function compileWordListToTarget(
     lines: Iterable<string>,
     destFilename: string,
     options: CompileOptions,
 ): Promise<void> {
-    const finalLines = normalize(lines, options);
+    const compiler = createWordListCompiler(options);
 
-    const directives = options.dictionaryDirectives ?? [];
-    const directivesLines = directives.map((a) => `# cspell-dictionary: ${a}`);
+    return createTargetFile(destFilename, compiler(lines));
+}
 
-    const finalSeq = pipe([...wordListHeaderLines, ...directivesLines, ''], opAppend(finalLines));
+export function createWordListCompiler(options: CompileOptions): WordListCompiler {
+    return (lines: Iterable<string>) => {
+        const finalLines = normalize(lines, options);
 
-    return createWordListTarget(destFilename)(finalSeq);
+        const directives = options.dictionaryDirectives ?? [];
+        const directivesLines = directives.map((a) => `# cspell-dictionary: ${a}`);
+
+        return pipe(
+            [...wordListHeaderLines, ...directivesLines, ''],
+            opAppend(finalLines),
+            opMap((a) => a + '\n'),
+        );
+    };
 }
 
 function normalize(lines: Iterable<string>, options: CompileOptions): Iterable<string> {
@@ -167,24 +178,14 @@ function removeDuplicateForms(forms: Iterable<string>): Map<string, string[]> {
     );
 }
 
-function createWordListTarget(destFilename: string): (seq: Iterable<string>) => Promise<void> {
-    const target = createTarget(destFilename);
-    return (seq: Iterable<string>) =>
-        target(
-            pipe(
-                seq,
-                opMap((a) => a + '\n'),
-            ),
-        );
-}
-
-function createTarget(destFilename: string): (seq: Iterable<string>) => Promise<void> {
+export async function createTargetFile(
+    destFilename: string,
+    seq: Iterable<string> | string,
+    compress?: boolean,
+): Promise<void> {
     const destDir = path.dirname(destFilename);
-    const pDir = mkdirp(destDir);
-    return async (seq: Iterable<string>) => {
-        await pDir;
-        await writeSeqToFile(seq, destFilename);
-    };
+    await mkdirp(destDir);
+    await writeTextToFile(destFilename, seq, compress);
 }
 
 // function sort(words: Iterable<string>): Iterable<string> {
@@ -199,7 +200,7 @@ export interface TrieOptions {
 
 export interface CompileTrieOptions extends CompileOptions, TrieOptions {}
 
-export async function compileTrie(
+export async function compileTrieToTarget(
     words: Iterable<string>,
     destFilename: string,
     options: CompileTrieOptions,
@@ -208,8 +209,15 @@ export async function compileTrie(
 }
 
 function createTrieTarget(destFilename: string, options: TrieOptions): (words: Iterable<string>) => Promise<void> {
-    const target = createTarget(destFilename);
     return async (words: Iterable<string>) => {
+        await createTargetFile(destFilename, createTrieCompiler(options)(words));
+        const log = getLogger();
+        log(`Done writing to file ${path.basename(destFilename)}`);
+    };
+}
+
+export function createTrieCompiler(options: TrieOptions): WordListCompiler {
+    return (words: Iterable<string>) => {
         const log = getLogger();
         log('Reading Words into Trie');
         const base = options.base ?? 32;
@@ -217,15 +225,12 @@ function createTrieTarget(destFilename: string, options: TrieOptions): (words: I
         const root = Trie.buildTrie(words).root;
         log('Reduce duplicate word endings');
         const trie = Trie.consolidate(root);
-        log(`Writing to file ${path.basename(destFilename)}`);
-        await target(
-            Trie.serializeTrie(trie, {
-                base,
-                comment: 'Built by cspell-tools.',
-                version,
-            }),
-        );
-        log(`Done writing to file ${path.basename(destFilename)}`);
+        log('Trie compilation complete');
+        return Trie.serializeTrie(trie, {
+            base,
+            comment: 'Built by cspell-tools.',
+            version,
+        });
     };
 }
 
