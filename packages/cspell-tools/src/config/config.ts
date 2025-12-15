@@ -107,7 +107,8 @@ export interface Target extends CompileTargetOptions {
     targetDirectory?: FilePath | undefined;
 
     /**
-     * gzip the file?
+     * Also gzip the file?
+     * Setting this value to true will create a `.gz` file next to the dictionary file.
      * @default: false
      */
     compress?: boolean | undefined;
@@ -165,6 +166,8 @@ export type DictionaryFormats = 'plaintext' | 'trie' | 'trie3' | 'trie4';
  */
 export type FilePath = string;
 
+export type FilePathOrFilePathArray = FilePath | FilePath[];
+
 export type DictionarySource = FilePath | FileSource | FileListSource;
 
 export interface FileSource extends CompileSourceOptions {
@@ -201,7 +204,7 @@ export interface CompileSourceOptions {
      * This is to prevent misspellings in CamelCase words from being introduced into the
      * dictionary.
      */
-    allowedSplitWords?: FilePath | FilePath[] | undefined;
+    allowedSplitWords?: FilePathOrFilePathArray | undefined;
 
     /**
      * Camel case words that have been split using the `allowedSplitWords` are added to the dictionary as compoundable words.

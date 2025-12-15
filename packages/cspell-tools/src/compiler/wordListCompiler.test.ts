@@ -18,7 +18,11 @@ import { readTextFile } from './readers/readTextFile.js';
 import type { SourceReaderOptions } from './SourceReader.js';
 import { streamSourceWordsFromFile } from './streamSourceWordsFromFile.js';
 import type { CompileTrieOptions } from './wordListCompiler.js';
-import { __testing__, compileTrie as _compileTrie, compileWordList as _compileWordList } from './wordListCompiler.js';
+import {
+    __testing__,
+    compileTrieToTarget as _compileTrie,
+    compileWordListToTarget as _compileWordList,
+} from './wordListCompiler.js';
 import { normalizeTargetWords } from './wordListParser.js';
 import { defaultAllowedSplitWords } from './WordsCollection.js';
 

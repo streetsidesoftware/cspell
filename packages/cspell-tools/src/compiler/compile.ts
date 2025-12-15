@@ -21,7 +21,7 @@ import { logWithTimestamp } from './logWithTimestamp.js';
 import { readTextFile } from './readers/readTextFile.js';
 import type { SourceReaderOptions } from './SourceReader.js';
 import { streamSourceWordsFromFile } from './streamSourceWordsFromFile.js';
-import { compileTrie, compileWordList } from './wordListCompiler.js';
+import { compileTrieToTarget, compileWordListToTarget } from './wordListCompiler.js';
 import { normalizeTargetWords } from './wordListParser.js';
 
 interface CompileOptions {
@@ -170,7 +170,7 @@ export async function compileTarget(
 
     const action = useTrie
         ? async (words: Iterable<string>, dst: string) => {
-              return compileTrie(pipe(words, normalizer), dst, {
+              return compileTrieToTarget(pipe(words, normalizer), dst, {
                   base: trieBase,
                   sort: false,
                   trie3: format === 'trie3',
@@ -181,7 +181,7 @@ export async function compileTarget(
               });
           }
         : async (words: Iterable<string>, dst: string) => {
-              return compileWordList(pipe(words, normalizer), dst, {
+              return compileWordListToTarget(pipe(words, normalizer), dst, {
                   sort,
                   generateNonStrict,
                   dictionaryDirectives,
@@ -189,7 +189,7 @@ export async function compileTarget(
               });
           };
 
-    await processFiles(action, filesToProcess, filename);
+    await processFiles({ action, filesToProcess, mergeTarget: filename });
 
     logWithTimestamp(`Done compile: ${target.name}`);
 
@@ -199,13 +199,13 @@ export async function compileTarget(
 function calculateDependencies(
     targetFile: string,
     filesToProcess: FileToProcess[],
-    excludeFiles: string[] | undefined,
+    extraDependencyFiles: string[] | undefined,
     rootDir: string,
 ): Set<string> {
     const dependencies = new Set<string>();
 
     addDependency(targetFile);
-    excludeFiles?.forEach((f) => addDependency(f));
+    extraDependencyFiles?.forEach((f) => addDependency(f));
     filesToProcess.forEach((f) => addDependency(f.src));
 
     return dependencies;
@@ -222,7 +222,13 @@ function rel(filePath: string): string {
     return path.relative(process.cwd(), filePath);
 }
 
-async function processFiles(action: ActionFn, filesToProcess: FileToProcess[], mergeTarget: string) {
+interface ProcessFilesOptions {
+    action: ActionFn;
+    filesToProcess: FileToProcess[];
+    mergeTarget: string;
+}
+
+async function processFiles({ action, filesToProcess, mergeTarget }: ProcessFilesOptions) {
     const toProcess = filesToProcess;
     const dst = mergeTarget;
 

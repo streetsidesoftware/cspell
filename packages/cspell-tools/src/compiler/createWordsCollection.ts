@@ -1,6 +1,6 @@
 import { parseDictionary } from 'cspell-trie-lib';
 
-import type { FilePath } from '../config/config.js';
+import type { FilePath, FilePathOrFilePathArray } from '../config/config.js';
 import { createReader } from './Reader.js';
 import { DictionaryReader, Reader } from './readers/ReaderOptions.js';
 import type { AllowedSplitWordsCollection, ExcludeWordsCollection, WordsCollection } from './WordsCollection.js';
@@ -21,7 +21,7 @@ class AllowedSplitWordsImpl implements AllowedSplitWordsCollection {
 }
 
 export async function createAllowedSplitWordsFromFiles(
-    files: FilePath | FilePath[] | undefined,
+    files: FilePathOrFilePathArray | undefined,
 ): Promise<AllowedSplitWordsCollection> {
     if (!files || !files.length) return defaultAllowedSplitWords;
 
@@ -66,8 +66,8 @@ function readersToCollection(readers: Reader[]): WordsCollection {
 
 const cache = new WeakMap<FilePath[], WordsCollection>();
 
-export async function createWordsCollectionFromFiles(files: FilePath | FilePath[]): Promise<WordsCollection> {
-    files = Array.isArray(files) ? files : [files];
+export async function createWordsCollectionFromFiles(files: FilePathOrFilePathArray): Promise<WordsCollection> {
+    files = toFilePathArray(files);
 
     const cached = cache.get(files);
     if (cached) return cached;
@@ -107,7 +107,7 @@ class ExcludeWordsCollectionImpl implements ExcludeWordsCollection {
 }
 
 export async function createExcludeWordsCollectionFromFiles(
-    files: FilePath | FilePath[] | undefined,
+    files: FilePathOrFilePathArray | undefined,
 ): Promise<ExcludeWordsCollection> {
     if (!files || !files.length) return defaultExcludeWordsCollection;
 
@@ -137,4 +137,8 @@ function lineReadersToCollection(readers: Reader[]): WordsCollection {
     const dict = parseDictionary(words(), { stripCaseAndAccents: false });
 
     return { size: dict.size, has: buildHasFn(dict) };
+}
+
+export function toFilePathArray(filePathOrArray: FilePathOrFilePathArray): FilePath[] {
+    return Array.isArray(filePathOrArray) ? filePathOrArray : [filePathOrArray];
 }
