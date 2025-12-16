@@ -33,6 +33,7 @@ export interface FindOptions {
     compoundFix: string;
     caseInsensitivePrefix: string;
     legacyMinCompoundLength: number;
+    compoundSeparator?: string | undefined;
 }
 
 export type PartialFindOptions = PartialWithUndefined<FindOptions> | undefined;
@@ -66,6 +67,7 @@ const _defaultFindOptions: FindOptions = {
     compoundFix: COMPOUND_FIX,
     caseInsensitivePrefix: CASE_INSENSITIVE_PREFIX,
     legacyMinCompoundLength: defaultLegacyMinCompoundLength,
+    compoundSeparator: undefined,
 };
 
 const arrayCompoundModes: CompoundModes[] = ['none', 'compound', 'legacy'];
@@ -114,7 +116,7 @@ function _findWordNode(root: Root, word: string, options: FindOptions): FindFull
     const ignoreCasePrefix = options.matchCase ? '' : (root.stripCaseAndAccentsPrefix ?? options.caseInsensitivePrefix);
 
     function __findCompound(): FindFullNodeResult {
-        const f = findCompoundWord(root, word, compoundPrefix, ignoreCasePrefix);
+        const f = findCompoundWord(root, word, compoundPrefix, ignoreCasePrefix, options.compoundSeparator || '');
         const result: FindFullNodeResult = { ...f };
         if (f.found !== false && f.compoundUsed) {
             // If case was ignored when searching for the word, then check the forbidden
@@ -156,7 +158,7 @@ export function findLegacyCompound(root: Root, word: string, options: FindOption
     if (!options.matchCase) {
         roots.push(walk(root, options.caseInsensitivePrefix));
     }
-    return findLegacyCompoundNode(roots, word, options.legacyMinCompoundLength);
+    return findLegacyCompoundNode(roots, word, options.legacyMinCompoundLength, options.compoundSeparator);
 }
 
 interface FindCompoundChain {
@@ -164,6 +166,8 @@ interface FindCompoundChain {
     cr: TrieNode | undefined;
     compoundPrefix: string;
     caseMatched: boolean;
+    /** separator Used */
+    s: string;
 }
 
 export function findCompoundNode(
@@ -171,11 +175,12 @@ export function findCompoundNode(
     word: string,
     compoundCharacter: string,
     ignoreCasePrefix: string,
+    compoundSeparator: string,
 ): FindFullNodeResult {
     // Approach - do a depth first search for the matching word.
     const stack: FindCompoundChain[] = [
         // { n: root, compoundPrefix: '', cr: undefined, caseMatched: true },
-        { n: root, compoundPrefix: ignoreCasePrefix, cr: undefined, caseMatched: true },
+        { n: root, compoundPrefix: ignoreCasePrefix, cr: undefined, caseMatched: true, s: '' },
     ];
     const compoundPrefix = compoundCharacter || ignoreCasePrefix;
     const possibleCompoundPrefix = ignoreCasePrefix && compoundCharacter ? ignoreCasePrefix + compoundCharacter : '';
@@ -195,6 +200,7 @@ export function findCompoundNode(
             compoundPrefix: prefix === compoundPrefix ? possibleCompoundPrefix : '',
             cr: r,
             caseMatched,
+            s: prefix.endsWith(compoundCharacter) ? compoundSeparator : '',
         };
     }
 
@@ -211,7 +217,7 @@ export function findCompoundNode(
         if (c && i < word.length) {
             // Go deeper.
             caseMatched = s.caseMatched;
-            stack[i] = { n: c, compoundPrefix, cr: undefined, caseMatched };
+            stack[i] = { n: c, compoundPrefix, cr: undefined, caseMatched, s: '' };
         } else if (!c || !c.f) {
             // Remember the first matching node for possible auto completion.
             node = node || c;
@@ -243,7 +249,15 @@ export function findCompoundNode(
         }
     }
 
-    const found = (i && i === word.length && word) || false;
+    function joinCompoundWord(): string {
+        return stack
+            .map((s) => s.s)
+            .map((c, i) => c + w[i])
+            .join('');
+    }
+
+    const f = (i && i === word.length && word) || false;
+    const found = f && (compoundSeparator ? joinCompoundWord() : f);
     const result: FindFullNodeResult = { found, compoundUsed, node, forbidden: undefined, caseMatched };
     return result;
 }
@@ -253,12 +267,14 @@ function findCompoundWord(
     word: string,
     compoundCharacter: string,
     ignoreCasePrefix: string,
+    compoundSeparator: string,
 ): FindFullNodeResult {
     const { found, compoundUsed, node, caseMatched } = findCompoundNode(
         root,
         word,
         compoundCharacter,
         ignoreCasePrefix,
+        compoundSeparator,
     );
     // Was it a word?
     if (!node || !node.f) {
@@ -301,6 +317,7 @@ function findLegacyCompoundNode(
     roots: (TrieNode | undefined)[],
     word: string,
     minCompoundLength: number,
+    compoundSeparator: string | undefined,
 ): FindFullNodeResult {
     const root = roots[0];
     const numRoots = roots.length;
@@ -308,6 +325,9 @@ function findLegacyCompoundNode(
     const stack: FindLegacyCompoundChain[] = [
         { n: root, usedRoots: 1, subLength: 0, isCompound: false, cr: undefined, caseMatched: true },
     ];
+
+    // eslint-disable-next-line unicorn/prefer-default-parameters
+    const sep = compoundSeparator ?? '+';
 
     const w = word;
     const wLen = w.length;
@@ -370,7 +390,7 @@ function findLegacyCompoundNode(
         for (let j = 0; j < i; ++j) {
             const { subLength } = stack[j];
             if (subLength < subLen) {
-                letters.push('+');
+                letters.push(sep);
             }
             letters.push(word[j]);
             subLen = subLength;
@@ -383,8 +403,18 @@ function findLegacyCompoundNode(
     return result;
 }
 
-function findLegacyCompoundWord(roots: (TrieNode | undefined)[], word: string, minCompoundLength: number): FindResult {
-    const { found, compoundUsed, caseMatched } = findLegacyCompoundNode(roots, word, minCompoundLength);
+function findLegacyCompoundWord(
+    roots: (TrieNode | undefined)[],
+    word: string,
+    minCompoundLength: number,
+    compoundSeparator: string | undefined,
+): FindResult {
+    const { found, compoundUsed, caseMatched } = findLegacyCompoundNode(
+        roots,
+        word,
+        minCompoundLength,
+        compoundSeparator,
+    );
     return { found, compoundUsed, caseMatched };
 }
 

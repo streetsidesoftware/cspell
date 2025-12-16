@@ -6,6 +6,7 @@ export interface FindOptions {
     compoundMode: CompoundModes;
     legacyMinCompoundLength?: number | undefined;
     checkForbidden?: boolean | undefined;
+    compoundSeparator?: string | undefined;
 }
 
 export type PartialFindOptions = PartialWithUndefined<FindOptions> | undefined;

@@ -28,7 +28,7 @@
   ],
   "scripts": {
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
-    "build": "pnpm run build:lib && pnpm run build:api",
+    "build": "pnpm run build:lib && pnpm run build:api && pnpm run check:types",
     "build:lib": "tsdown",
     "build:api": "shx cp dist/index.d.ts api/api.d.ts",
     "clean-build": "pnpm run clean && pnpm run build",
@@ -41,6 +41,7 @@
     "perf": "pnpm test:perf",
     "test": "vitest run",
     "test:update-snapshot": "vitest run -u",
+    "check:types": "tsc -p .",
     "watch": "tsc -p . -w"
   },
   "repository": {

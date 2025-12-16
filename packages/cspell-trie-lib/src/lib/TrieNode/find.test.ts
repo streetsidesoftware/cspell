@@ -7,6 +7,10 @@ import { __testing__, createFindOptions, findLegacyCompound, findWord } from './
 
 const findLegacyCompoundWord = __testing__.findLegacyCompoundWord;
 
+function oc(obj: unknown) {
+    return expect.objectContaining(obj);
+}
+
 describe('Validate findWord', () => {
     const trie = dictionary().root;
 
@@ -77,6 +81,11 @@ describe('Validate findWord', () => {
             frCompoundFound('codeErrors', { forbidden: false }),
         ],
         [
+            'codeErrors',
+            { matchCase: true, compoundMode: 'compound', compoundSeparator: '|' },
+            frCompoundFound('code|Errors', { forbidden: false }),
+        ],
+        [
             'codeCodeCodeCodeError',
             { matchCase: true, compoundMode: 'compound' },
             frCompoundFound('codeCodeCodeCodeError', { forbidden: false }),
@@ -105,50 +114,51 @@ describe('Validate Legacy Compound lookup', () => {
     // cspell:ignore walkin walkjay walkedge
     test.each`
         word             | compoundLen | expected
-        ${'talkinglift'} | ${true}     | ${true}
-        ${'joywalk'}     | ${true}     | ${true}
-        ${'jaywalk'}     | ${true}     | ${true}
+        ${'talkinglift'} | ${true}     | ${'talking+lift'}
+        ${'joywalk'}     | ${true}     | ${'joy+walk'}
+        ${'jaywalk'}     | ${true}     | ${'jay+walk'}
         ${'jwalk'}       | ${true}     | ${false}
         ${'awalk'}       | ${true}     | ${false}
-        ${'jayjay'}      | ${true}     | ${true}
+        ${'jayjay'}      | ${true}     | ${'jay+jay'}
         ${'jayjay'}      | ${4}        | ${false}
         ${'jayi'}        | ${3}        | ${false}
         ${'toto'}        | ${true}     | ${false}
-        ${'toto'}        | ${2}        | ${true}
-        ${'toto'}        | ${1}        | ${true}
-        ${'iif'}         | ${1}        | ${true}
+        ${'toto'}        | ${2}        | ${'to+to'}
+        ${'toto'}        | ${1}        | ${'to+to'}
+        ${'iif'}         | ${1}        | ${'iif'}
         ${'uplift'}      | ${true}     | ${false}
-        ${'endless'}     | ${true}     | ${true}
+        ${'endless'}     | ${true}     | ${'end+less'}
         ${'joywalk'}     | ${999}      | ${false}
-        ${'walked'}      | ${true}     | ${true}
+        ${'walked'}      | ${true}     | ${'walked'}
         ${'walkin'}      | ${true}     | ${false}
         ${'walkup'}      | ${true}     | ${false}
-        ${'walkjay'}     | ${true}     | ${true}
+        ${'walkjay'}     | ${true}     | ${'walk+jay'}
         ${'walkjay'}     | ${4}        | ${false}
-        ${'walkedge'}    | ${4}        | ${true}
+        ${'walkedge'}    | ${4}        | ${'walk+edge'}
     `('compound words no case "$word" compoundLen: $compoundLen', ({ word, compoundLen, expected }) => {
         const trie = Trie.create(sampleWords);
-        function has(word: string, compoundLen: true | number): boolean {
+        function find(word: string, compoundLen: true | number) {
             const len = compoundLen === true ? 3 : compoundLen;
-            return !!findLegacyCompoundWord([trie.root], word, len).found;
+            return findLegacyCompoundWord([trie.root], word, len, undefined).found;
         }
-        expect(has(word, compoundLen)).toBe(expected);
+        expect(find(word, compoundLen)).toBe(expected);
     });
 
     // cspell:ignore cafecode codecafe
     test.each`
-        word            | compoundLen | expected
-        ${'codecafe'}   | ${true}     | ${true}
-        ${'codeerrors'} | ${true}     | ${true}
-        ${'cafecode'}   | ${true}     | ${true}
-    `('compound words "$word" compoundLen: $compoundLen', ({ word, compoundLen, expected }) => {
+        word            | compoundLen | compoundSeparator | expected
+        ${'codecafe'}   | ${true}     | ${undefined}      | ${'code+cafe'}
+        ${'codeerrors'} | ${true}     | ${undefined}      | ${'code+errors'}
+        ${'cafecode'}   | ${true}     | ${undefined}      | ${'cafe+code'}
+        ${'cafecode'}   | ${true}     | ${'|'}            | ${'cafe|code'}
+    `('compound words "$word" compoundLen: $compoundLen', ({ word, compoundLen, compoundSeparator, expected }) => {
         const trie = dictionary();
-        function has(word: string, minLegacyCompoundLength: true | number): boolean {
+        function find(word: string, minLegacyCompoundLength: true | number) {
             const len = minLegacyCompoundLength !== true ? minLegacyCompoundLength : 3;
-            const findOptions = createFindOptions({ legacyMinCompoundLength: len });
-            return !!findLegacyCompound(trie.root, word, findOptions).found;
+            const findOptions = createFindOptions({ legacyMinCompoundLength: len, compoundSeparator });
+            return findLegacyCompound(trie.root, word, findOptions).found;
         }
-        expect(has(word, compoundLen)).toBe(expected);
+        expect(find(word, compoundLen)).toBe(expected);
     });
 });
 
@@ -291,7 +301,3 @@ const sampleWords = [
     'joyrode',
     'joystick',
 ];
-
-function oc<T>(t: Partial<T>): T {
-    return expect.objectContaining(t);
-}

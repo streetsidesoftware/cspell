@@ -453,7 +453,7 @@ interface ITrie {
   * @returns true if the word was found and is not forbidden.
   */
   hasWord(word: string, caseSensitive: boolean): boolean;
-  findWord(word: string, options?: FindWordOptions): FindFullResult$1;
+  findWord(word: string, options?: FindWordOptionsRO): FindFullResult$1;
   /**
   * Determine if a word is in the forbidden word list.
   * @param word the word to lookup.
@@ -504,6 +504,10 @@ interface FindWordOptions {
   caseSensitive?: boolean;
   useLegacyWordCompounds?: boolean | number;
   checkForbidden?: boolean;
+  /**
+  * Separate compound words with the given string.
+  */
+  compoundSeparator?: string;
 }
 type FindWordOptionsRO = Readonly<FindWordOptions>;
 //#endregion

@@ -168,6 +168,38 @@ describe('Validate Trie Class', () => {
         expect(trie.hasWord(word, caseSensitive)).toBe(found);
     });
 
+    test.each`
+        word                      | caseSensitive | found                        | forbidden    | compoundUsed | comment
+        ${'café'}                 | ${true}       | ${'café'}                    | ${undefined} | ${false}     | ${''}
+        ${'Café'}                 | ${true}       | ${false}                     | ${undefined} | ${false}     | ${''}
+        ${'café'}                 | ${false}      | ${'café'}                    | ${undefined} | ${false}     | ${''}
+        ${'Café'}                 | ${false}      | ${false}                     | ${undefined} | ${false}     | ${''}
+        ${'BeginMiddleEnd'}       | ${true}       | ${'Begin|Middle|End'}        | ${false}     | ${true}      | ${''}
+        ${'BeginMiddleMiddleEnd'} | ${true}       | ${'Begin|Middle|Middle|End'} | ${false}     | ${true}      | ${''}
+        ${'BeginEnd'}             | ${true}       | ${'Begin|End'}               | ${false}     | ${true}      | ${''}
+        ${'MiddleEnd'}            | ${true}       | ${false}                     | ${undefined} | ${false}     | ${''}
+        ${'beginend'}             | ${false}      | ${'begin|end'}               | ${false}     | ${true}      | ${'cspell:disable-line'}
+        ${'playtime'}             | ${true}       | ${'play|time'}               | ${true}      | ${true}      | ${''}
+        ${'playtime'}             | ${false}      | ${'play|time'}               | ${true}      | ${true}      | ${''}
+        ${'playmiddletime'}       | ${false}      | ${'play|middle|time'}        | ${false}     | ${true}      | ${'cspell:disable-line'}
+    `('hasWord $word $caseSensitive $found', ({ word, caseSensitive, found, forbidden, compoundUsed }) => {
+        const trie = parseDictionaryLegacy(`
+        # Sample Word List
+        Begin*
+        *End
+        +Middle+
+        café
+        play*
+        *time
+        !playtime
+        `);
+
+        const r = trie.findWord(word, { caseSensitive, compoundSeparator: '|' });
+        expect(r.found).toBe(found);
+        expect(r.forbidden).toBe(forbidden);
+        expect(r.compoundUsed).toBe(compoundUsed);
+    });
+
     // cspell:ignore begintime
     test('hasWord', () => {
         const trie = parseDictionaryLegacy(`

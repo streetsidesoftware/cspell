@@ -111,8 +111,19 @@ export class Trie {
             const findOptions = this.createFindOptions({
                 legacyMinCompoundLength: len,
                 matchCase: options.caseSensitive,
+                compoundSeparator: options.compoundSeparator,
             });
             return findLegacyCompound(this.root, word, findOptions);
+        }
+        if (options?.compoundSeparator) {
+            return findWord(
+                this.root,
+                word,
+                this.createFindOptions({
+                    matchCase: options.caseSensitive,
+                    compoundSeparator: options.compoundSeparator,
+                }),
+            );
         }
         const findOptions = this.createFindOptionsMatchCase(options?.caseSensitive);
         return findWord(this.root, word, findOptions);

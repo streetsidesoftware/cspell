@@ -119,6 +119,31 @@ describe('Verify building Dictionary', () => {
     });
 });
 
+describe('Validate finding compound words.', () => {
+    const words = [
+        '*apple*',
+        '*apples*',
+        '*ape*',
+        '*able*',
+        '*apple*',
+        '*banana*',
+        '*orange*',
+        '*pear*',
+        '*aim*',
+        '*approach*',
+        '*bear*',
+    ];
+
+    test.each`
+        word             | expected
+        ${'applebanana'} | ${'apple|banana'}
+    `('find $word in word list', ({ word, expected }) => {
+        const dict = createSpellingDictionary(words, 'words', 'test', opts({}));
+        const r = dict.find(word, { compoundSeparator: '|' });
+        expect(r?.found).toBe(expected);
+    });
+});
+
 describe('Validate wordSearchForms', () => {
     test.each`
         word                        | isCaseSensitive | ignoreCase | expected

@@ -235,7 +235,9 @@ describe('Validate the application', () => {
         await expect(app.run(commander, argv('-V'))).rejects.toThrow(Commander.CommanderError);
         expect(mock.mock.calls.length).toBe(1);
         expect(consoleSpy.consoleOutput()).toMatchSnapshot();
-        expect(std.stdout).toMatchSnapshot();
+        const versionTest = /^\d+\.\d+\.\d+.*/;
+        const version = std.stdout.trim();
+        expect(versionTest.test(version)).toBe(true);
         expect(std.stderr).toMatchSnapshot();
     });
 

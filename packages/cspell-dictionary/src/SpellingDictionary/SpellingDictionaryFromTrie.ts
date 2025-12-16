@@ -14,6 +14,7 @@ import { clean } from '../util/clean.js';
 import { createMapper, createRepMapper } from '../util/repMap.js';
 import * as Defaults from './defaults.js';
 import type {
+    FindOptionsRO,
     FindResult,
     HasOptionsRO,
     SpellingDictionary,
@@ -82,13 +83,13 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
     }
     public has(word: string, hasOptions?: HasOptionsRO): boolean {
         const { useCompounds, ignoreCase } = this.resolveOptions(hasOptions);
-        const r = this._find(word, useCompounds, ignoreCase);
+        const r = this._find(word, useCompounds, ignoreCase, undefined);
         return (r && !r.forbidden && !!r.found) || false;
     }
 
-    public find(word: string, hasOptions?: HasOptionsRO): FindResult | undefined {
+    public find(word: string, hasOptions?: FindOptionsRO): FindResult | undefined {
         const { useCompounds, ignoreCase } = this.resolveOptions(hasOptions);
-        const r = this._find(word, useCompounds, ignoreCase);
+        const r = this._find(word, useCompounds, ignoreCase, hasOptions?.compoundSeparator);
         const { forbidden = this.#isForbidden(word) } = r || {};
         if (this.#ignoreForbiddenWords && forbidden) {
             return undefined;
@@ -99,7 +100,7 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         return { found, forbidden, noSuggest };
     }
 
-    private resolveOptions(hasOptions?: HasOptionsRO): {
+    private resolveOptions(hasOptions?: FindOptionsRO): {
         useCompounds: HasOptionsRO['useCompounds'] | undefined;
         ignoreCase: boolean;
     } {
@@ -108,18 +109,23 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         return { useCompounds, ignoreCase };
     }
 
-    private _find = (word: string, useCompounds: number | boolean | undefined, ignoreCase: boolean) =>
-        this.findAnyForm(word, useCompounds, ignoreCase);
+    private _find = (
+        word: string,
+        useCompounds: number | boolean | undefined,
+        ignoreCase: boolean,
+        compoundSeparator: string | undefined,
+    ) => this.findAnyForm(word, useCompounds, ignoreCase, compoundSeparator);
 
     private findAnyForm(
         word: string,
         useCompounds: number | boolean | undefined,
         ignoreCase: boolean,
+        compoundSeparator: string | undefined,
     ): FindAnyFormResult | undefined {
         const outerForms = outerWordForms(word, this.remapWord || ((word) => [this.mapWord(word)]));
 
         for (const form of outerForms) {
-            const r = this._findAnyForm(form, useCompounds, ignoreCase);
+            const r = this._findAnyForm(form, useCompounds, ignoreCase, compoundSeparator);
             if (r) return r;
         }
         return undefined;
@@ -129,10 +135,15 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         mWord: string,
         useCompounds: number | boolean | undefined,
         ignoreCase: boolean,
+        compoundSeparator: string | undefined,
     ): FindAnyFormResult | undefined {
-        const opts: FindWordOptions = ignoreCase
+        let opts: FindWordOptions = ignoreCase
             ? this.#findWordOptionsNotCaseSensitive
             : this.#findWordOptionsCaseSensitive;
+
+        if (compoundSeparator) {
+            opts = { ...opts, compoundSeparator };
+        }
         const findResult = this.trie.findWord(mWord, opts);
         if (findResult.found !== false) {
             return findResult;
