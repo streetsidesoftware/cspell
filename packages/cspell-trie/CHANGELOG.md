@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v9.5.0 (2025-12-16)
+
+### Features
+
+- feat: Report errors with nested config files (<a href="https://github.com/streetsidesoftware/cspell/pull/8155">#8155</a>)
+- fix: Enable cts config support (<a href="https://github.com/streetsidesoftware/cspell/pull/8152">#8152</a>)
+
+### Fixes
+
+- fix: Add cspell-tools option keepUncompressed (<a href="https://github.com/streetsidesoftware/cspell/pull/8163">#8163</a>)
+- fix: Improve CSpell Tools (<a href="https://github.com/streetsidesoftware/cspell/pull/8160">#8160</a>)
+
+- fix: Make sure `cspell` exports `defineConfig ` for CommonJS (<a href="https://github.com/streetsidesoftware/cspell/pull/8156">#8156</a>)
+
+### Dictionary Updates
+
+- fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/8149">#8149</a>)
+
 ## v9.4.0 (2025-12-01)
 
 ### Features
