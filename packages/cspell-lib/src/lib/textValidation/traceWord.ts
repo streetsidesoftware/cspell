@@ -2,6 +2,7 @@ import type { CSpellSettingsWithSourceTrace } from '@cspell/cspell-types';
 
 import { getSources } from '../Settings/index.js';
 import type {
+    FindOptions,
     FindResult,
     HasOptions,
     SpellingDictionary,
@@ -52,6 +53,7 @@ export interface TraceResult extends Array<DictionaryTraceResult> {
 
 export interface TraceOptions extends Pick<CSpellSettingsWithSourceTrace, 'source' | 'allowCompoundWords'> {
     ignoreCase?: boolean;
+    compoundSeparator?: string | undefined;
 }
 
 export function traceWord(
@@ -59,9 +61,10 @@ export function traceWord(
     dictCollection: SpellingDictionaryCollection,
     config: TraceOptions,
 ): TraceResult {
-    const opts: HasOptions = {
+    const opts: FindOptions = {
         ignoreCase: config.ignoreCase ?? true,
         useCompounds: config.allowCompoundWords || false,
+        compoundSeparator: '•',
     };
 
     const splits = split({ text: word, offset: 0 }, 0, checkWord);

@@ -59,7 +59,7 @@ export interface ITrie {
      */
     hasWord(word: string, caseSensitive: boolean): boolean;
 
-    findWord(word: string, options?: FindWordOptions): FindFullResult;
+    findWord(word: string, options?: FindWordOptionsRO): FindFullResult;
 
     /**
      * Determine if a word is in the forbidden word list.
@@ -189,7 +189,7 @@ export class ITrieImpl implements ITrie {
         return !!f.found;
     }
 
-    findWord(word: string, options?: FindWordOptions): FindFullResult {
+    findWord(word: string, options?: FindWordOptionsRO): FindFullResult {
         if (options?.useLegacyWordCompounds) {
             const len =
                 options.useLegacyWordCompounds !== true
@@ -198,12 +198,14 @@ export class ITrieImpl implements ITrie {
             const findOptions = this.createFindOptions({
                 legacyMinCompoundLength: len,
                 matchCase: options.caseSensitive || false,
+                compoundSeparator: options.compoundSeparator,
             });
             return findLegacyCompound(this.root, word, findOptions);
         }
         return findWord(this.root, word, {
             matchCase: options?.caseSensitive,
             checkForbidden: options?.checkForbidden,
+            compoundSeparator: options?.compoundSeparator,
         });
     }
 
@@ -303,6 +305,10 @@ export interface FindWordOptions {
     caseSensitive?: boolean;
     useLegacyWordCompounds?: boolean | number;
     checkForbidden?: boolean;
+    /**
+     * Separate compound words with the given string.
+     */
+    compoundSeparator?: string;
 }
 
 export type FindWordOptionsRO = Readonly<FindWordOptions>;

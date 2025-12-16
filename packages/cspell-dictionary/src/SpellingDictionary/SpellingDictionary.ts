@@ -20,7 +20,13 @@ export interface SearchOptions {
 
 export type SearchOptionsRO = Readonly<SearchOptions>;
 
-export type FindOptions = SearchOptions;
+export interface FindOptions extends SearchOptions {
+    /**
+     * Separate compound words using the specified separator.
+     */
+    compoundSeparator?: string | undefined;
+}
+
 export type FindOptionsRO = Readonly<FindOptions>;
 
 export interface Suggestion {
@@ -112,7 +118,7 @@ export interface SpellingDictionary extends DictionaryInfo {
     readonly containsNoSuggestWords: boolean;
     has(word: string, options?: HasOptionsRO): boolean;
     /** A more detailed search for a word, might take longer than `has` */
-    find(word: string, options?: SearchOptionsRO): FindResult | undefined;
+    find(word: string, options?: FindOptionsRO): FindResult | undefined;
     /**
      * Checks if a word is forbidden.
      * @param word - word to check.

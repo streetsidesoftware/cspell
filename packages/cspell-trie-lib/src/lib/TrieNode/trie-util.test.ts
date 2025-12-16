@@ -13,7 +13,7 @@ import {
     validateTrie,
 } from './trie-util.js';
 
-const oc = <T>(obj: T) => expect.objectContaining(obj);
+const oc = (obj: unknown) => expect.objectContaining(obj);
 
 describe('Validate Util Functions', () => {
     test('createTriFromList', () => {

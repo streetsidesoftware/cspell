@@ -128,6 +128,26 @@ describe('Validate findWord', () => {
         });
         expect(r).toEqual(expected);
     });
+
+    test.each`
+        word                 | matchCase | expected
+        ${''}                | ${false}  | ${fr({})}
+        ${'nieuwjaarsnacht'} | ${true}   | ${fr({ caseMatched: true, compoundUsed: true, found: 'nieuwjaars.nacht', forbidden: false })}
+        ${'burgersmeester'}  | ${false}  | ${fr({ caseMatched: true, compoundUsed: true, found: 'burgers.meester', forbidden: false })}
+        ${'burgersmeester'}  | ${true}   | ${fr({ caseMatched: true, compoundUsed: true, found: 'burgers.meester', forbidden: false })}
+        ${'buurtsbewoners'}  | ${true}   | ${fr({ caseMatched: true, compoundUsed: true, found: false })}
+    `(
+        `Check misspelled words case insensitive: "$word" $matchCase compoundSeparator`,
+        async ({ word, matchCase, expected }) => {
+            const trie = await pTrie;
+            const r = findWord(trie, word, {
+                matchCase,
+                compoundMode: 'compound',
+                compoundSeparator: '.',
+            });
+            expect(r).toEqual(expected);
+        },
+    );
     // cspell:enable
 });
 

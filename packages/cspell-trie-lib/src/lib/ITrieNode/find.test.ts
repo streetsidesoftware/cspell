@@ -19,6 +19,7 @@ describe('Validate findWord', () => {
     const mCaseT = { matchCase: true };
     const mCaseF = { matchCase: false };
     const ckForbidT = { checkForbidden: true };
+    const cSep = { compoundSeparator: '|' };
 
     // cspell:ignore bluemsg
     test.each`
@@ -32,6 +33,7 @@ describe('Validate findWord', () => {
         ${'code'}      | ${{ matchCase: true, compoundMode: 'compound' }}  | ${{ found: 'code', compoundUsed: false, forbidden: undefined, caseMatched: true }}
         ${'apple'}     | ${{ ...mCaseT, ...cModeC }}                       | ${{ found: 'apple', compoundUsed: false, forbidden: undefined, caseMatched: true }}
         ${'apple'}     | ${{ ...mCaseT, ...cModeC, ...ckForbidT }}         | ${{ found: 'apple', compoundUsed: false, forbidden: true, caseMatched: true }}
+        ${'bluecode'}  | ${{ ...cModeC, ...mCaseF, ...cSep }}              | ${{ found: 'blue|code', compoundUsed: true, forbidden: true, caseMatched: false }}
     `('find exact words preserve case "$word" $opts', ({ word, opts, expected }) => {
         // Code is not allowed as a full word.
         expect(findWord(trie, word, opts)).toEqual(expected);
@@ -48,6 +50,7 @@ describe('Validate findWord', () => {
         ${'code'}      | ${{ matchCase: true, compoundMode: 'compound' }}  | ${{ found: 'code', compoundUsed: false, forbidden: undefined, caseMatched: true }}
         ${'apple'}     | ${{ ...mCaseT, ...cModeC }}                       | ${{ found: 'apple', compoundUsed: false, forbidden: undefined, caseMatched: true }}
         ${'apple'}     | ${{ ...mCaseT, ...cModeC, ...ckForbidT }}         | ${{ found: 'apple', compoundUsed: false, forbidden: true, caseMatched: true }}
+        ${'bluecode'}  | ${{ ...cModeC, ...mCaseF, ...cSep }}              | ${{ found: 'blue|code', compoundUsed: true, forbidden: true, caseMatched: false }}
     `('find exact words preserve case "$word" $opts', ({ word, opts, expected }) => {
         // Code is not allowed as a full word.
         expect(findWord(trieBlob, word, opts)).toEqual(expected);
@@ -146,34 +149,34 @@ describe('Validate Legacy Compound lookup', () => {
     // cspell:ignore walkin walkjay walkedge
     test.each`
         word             | compoundLen | expected
-        ${'talkinglift'} | ${true}     | ${true}
-        ${'joywalk'}     | ${true}     | ${true}
-        ${'jaywalk'}     | ${true}     | ${true}
+        ${'talkinglift'} | ${true}     | ${'talking+lift'}
+        ${'joywalk'}     | ${true}     | ${'joy+walk'}
+        ${'jaywalk'}     | ${true}     | ${'jay+walk'}
         ${'jwalk'}       | ${true}     | ${false}
         ${'awalk'}       | ${true}     | ${false}
-        ${'jayjay'}      | ${true}     | ${true}
+        ${'jayjay'}      | ${true}     | ${'jay+jay'}
         ${'jayjay'}      | ${4}        | ${false}
         ${'jayi'}        | ${3}        | ${false}
         ${'toto'}        | ${true}     | ${false}
-        ${'toto'}        | ${2}        | ${true}
-        ${'toto'}        | ${1}        | ${true}
-        ${'iif'}         | ${1}        | ${true}
+        ${'toto'}        | ${2}        | ${'to+to'}
+        ${'toto'}        | ${1}        | ${'to+to'}
+        ${'iif'}         | ${1}        | ${'iif'}
         ${'uplift'}      | ${true}     | ${false}
-        ${'endless'}     | ${true}     | ${true}
+        ${'endless'}     | ${true}     | ${'end+less'}
         ${'joywalk'}     | ${999}      | ${false}
-        ${'walked'}      | ${true}     | ${true}
+        ${'walked'}      | ${true}     | ${'walked'}
         ${'walkin'}      | ${true}     | ${false}
         ${'walkup'}      | ${true}     | ${false}
-        ${'walkjay'}     | ${true}     | ${true}
+        ${'walkjay'}     | ${true}     | ${'walk+jay'}
         ${'walkjay'}     | ${4}        | ${false}
-        ${'walkedge'}    | ${4}        | ${true}
+        ${'walkedge'}    | ${4}        | ${'walk+edge'}
     `('compound words no case "$word" compoundLen: $compoundLen', ({ word, compoundLen, expected }) => {
         const trie = TrieNodeTrie.createFromWords(sampleWords);
-        function has(word: string, compoundLen: true | number): boolean {
+        function find(word: string, compoundLen: true | number) {
             const len = compoundLen === true ? 3 : compoundLen;
-            return !!findLegacyCompoundWord([trie.getRoot()], word, len).found;
+            return findLegacyCompoundWord([trie.getRoot()], word, len, '+').found;
         }
-        expect(has(word, compoundLen)).toBe(expected);
+        expect(find(word, compoundLen)).toBe(expected);
     });
 
     // cspell:ignore cafecode codecafe
@@ -341,6 +344,6 @@ const sampleWords = [
     'joystick',
 ];
 
-function oc<T>(t: Partial<T>): T {
+function oc(t: unknown) {
     return expect.objectContaining(t);
 }

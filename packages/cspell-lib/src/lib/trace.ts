@@ -24,6 +24,7 @@ export interface TraceOptions {
     locale?: LocaleId;
     ignoreCase?: boolean;
     allowCompoundWords?: boolean;
+    compoundSeparator?: string | undefined;
 }
 
 export interface TraceWordResult extends Array<TraceResult> {
@@ -49,7 +50,7 @@ export async function* traceWordsAsync(
     settingsOrConfig: CSpellSettings | ICSpellConfigFile,
     options: TraceOptions | undefined,
 ): AsyncIterableIterator<TraceWordResult> {
-    const { languageId, locale: language, ignoreCase = true, allowCompoundWords } = options || {};
+    const { languageId, locale: language, ignoreCase = true, allowCompoundWords, compoundSeparator } = options || {};
 
     const settings = satisfiesCSpellConfigFile(settingsOrConfig)
         ? await resolveConfigFileImports(settingsOrConfig)
@@ -92,7 +93,7 @@ export async function* traceWordsAsync(
     const setOfActiveDicts = new Set(activeDictionaries);
 
     function processWord(word: string): TraceWordResult {
-        const results = traceWord(word, dicts, { ...config, ignoreCase });
+        const results = traceWord(word, dicts, { ...config, ignoreCase, compoundSeparator });
 
         const r = results.map((r) => ({
             ...r,
