@@ -3,6 +3,108 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v9.5.0 (2025-12-16)
+
+### Features
+
+<details>
+<summary>feat: Report errors with nested config files (<a href="https://github.com/streetsidesoftware/cspell/pull/8155">#8155</a>)</summary>
+
+### feat: Report errors with nested config files ([#8155](https://github.com/streetsidesoftware/cspell/pull/8155))
+
+fixes: #7837
+
+Errors in nested configuration files were ignored. This lead to unexpected behavior.
+
+Note: this is a fix, but since it can impact existing installs, it is marked as a feature change.
+
+---
+
+</details>
+
+<details>
+<summary>fix: Enable cts config support (<a href="https://github.com/streetsidesoftware/cspell/pull/8152">#8152</a>)</summary>
+
+### fix: Enable cts config support ([#8152](https://github.com/streetsidesoftware/cspell/pull/8152))
+
+Add support for `.cts` config files.
+
+Update docs with `ts`, `mts`, and `cts` config.
+
+---
+
+</details>
+
+### Fixes
+
+<details>
+<summary>fix: Add cspell-tools option keepUncompressed (<a href="https://github.com/streetsidesoftware/cspell/pull/8163">#8163</a>)</summary>
+
+### fix: Add cspell-tools option keepUncompressed ([#8163](https://github.com/streetsidesoftware/cspell/pull/8163))
+
+---
+
+</details>
+
+<details>
+<summary>fix: Improve CSpell Tools (<a href="https://github.com/streetsidesoftware/cspell/pull/8160">#8160</a>)</summary>
+
+### fix: Improve CSpell Tools ([#8160](https://github.com/streetsidesoftware/cspell/pull/8160))
+
+Generate both compressed and non-compressed files when `compress: true`. This allows cspell-dicts to keep track of changes and have compressed files at the same time.
+
+---
+
+</details>
+
+<details>
+<summary>fix: Make sure `cspell` exports `defineConfig ` for CommonJS (<a href="https://github.com/streetsidesoftware/cspell/pull/8156">#8156</a>)</summary>
+
+### fix: Make sure `cspell` exports `defineConfig ` for CommonJS ([#8156](https://github.com/streetsidesoftware/cspell/pull/8156))
+
+---
+
+</details>
+
+### Dictionary Updates
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/8149">#8149</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#8149](https://github.com/streetsidesoftware/cspell/pull/8149))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ .../snapshots/AdaDoom3/AdaDoom3/report.yaml        |   7 +-
+ .../snapshots/AdaDoom3/AdaDoom3/snapshot.txt       |   7 +-
+ .../snapshots/TheAlgorithms/Python/report.yaml     |   5 +-
+ .../snapshots/TheAlgorithms/Python/snapshot.txt    |   5 +-
+ .../snapshots/dart-lang/sdk/report.yaml            |   8 +-
+ .../snapshots/dart-lang/sdk/snapshot.txt           |   4 +-
+ .../snapshots/django/django/report.yaml            |  13 +--
+ .../snapshots/django/django/snapshot.txt           |  44 ++++----
+ .../iluwatar/java-design-patterns/report.yaml      |   3 +-
+ .../iluwatar/java-design-patterns/snapshot.txt     |   3 +-
+ .../snapshots/ktaranov/sqlserver-kit/report.yaml   |   4 +-
+ .../snapshots/ktaranov/sqlserver-kit/snapshot.txt  |   3 +-
+ .../snapshots/neovim/nvim-lspconfig/report.yaml    |   5 +-
+ .../snapshots/neovim/nvim-lspconfig/snapshot.txt   |   3 +-
+ .../snapshots/slint-ui/slint/report.yaml           |   8 +-
+ .../snapshots/slint-ui/slint/snapshot.txt          |   7 +-
+ .../snapshots/sveltejs/svelte/report.yaml          |   3 +-
+ .../snapshots/sveltejs/svelte/snapshot.txt         |   3 +-
+ packages/cspell-bundled-dicts/package.json         |  20 ++--
+ pnpm-lock.yaml                                     | 120 +++++++++++----------
+ 20 files changed, 115 insertions(+), 160 deletions(-)
+```
+
+---
+
+</details>
+
 ## v9.4.0 (2025-12-01)
 
 ### Features
