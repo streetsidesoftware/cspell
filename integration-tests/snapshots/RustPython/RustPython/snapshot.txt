@@ -3,14 +3,24 @@ Repository: RustPython/RustPython
 Url: "https://github.com/RustPython/RustPython.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 710, Issues found: 749 in 92 files.
+ CSpell: Files checked: 710, Issues found: 1325 in 191 files.
  exit code: 1
-Cargo.toml:115:28    - Unknown word (nsis)       -- package.metadata.packager.nsis]
-Cargo.toml:202:1     - Unknown word (rustix)     -- rustix = { version = "1.0"
-Cargo.toml:91:62     - Unknown word (redoxer)    -- to compile/check with redoxer
+Cargo.toml:115:28    - Unknown word (nsis)            -- package.metadata.packager.nsis]
+Cargo.toml:167:80    - Unknown word (oldtime)         -- features = ["clock", "oldtime", "std"] }
+Cargo.toml:183:119   - Unknown word (zerocopy)        -- "socket", "sched", "zerocopy", "dir", "hostname"
+Cargo.toml:202:1     - Unknown word (rustix)          -- rustix = { version = "1.0"
+Cargo.toml:207:1     - Unknown word (scopeguard)      -- scopeguard = "1"
+Cargo.toml:30:1      - Unknown word (winresource) -- winresource = "0.1"
+Cargo.toml:63:9      - Unknown word (microbenchmarks) -- name = "microbenchmarks"
+Cargo.toml:91:62     - Unknown word (redoxer)         -- to compile/check with redoxer
+DEVELOPMENT.md:113:5     - Unknown word (speedscope) -- The speedscope json format (default
 DEVELOPMENT.md:131:26    - Unknown word (subcrates)  -- src`: using the other subcrates to bring rustpython
-LICENSE-logo:139:15    - Unknown word (sublicensable) -- non-sublicensable, non-exclusive, irrevocable
-LICENSE-logo:205:34    - Unknown word (waivable)      -- under any voluntary or waivable statutory or compulsory
+LICENSE-logo:139:15    - Unknown word (sublicensable)   -- non-sublicensable, non-exclusive, irrevocable
+LICENSE-logo:205:34    - Unknown word (waivable)        -- under any voluntary or waivable statutory or compulsory
+LICENSE-logo:36:7      - Unknown word (creativecommons) -- wiki.creativecommons.org/Considerations_for
+LICENSE-logo:386:1     - Unknown word (creativecommons) -- creativecommons.org/policies, Creative
+LICENSE-logo:395:38    - Unknown word (creativecommons) -- may be contacted at creativecommons.org.
+LICENSE-logo:53:7      - Unknown word (creativecommons) -- wiki.creativecommons.org/Considerations_for
 README.md:108:8     - Unknown word (wapm)       -- Run by wapm
 README.md:111:3     - Unknown word (wapm)       -- $ wapm install rustpython
 README.md:112:3     - Unknown word (wapm)       -- $ wapm run rustpython
@@ -20,18 +30,25 @@ README.md:182:4     - Unknown word (pyckitup)   -- - [pyckitup](https://github.c
 README.md:250:16    - Unknown word (rspython)      -- [windelbouwman/rspython](https://github.com
 README.md:250:2     - Unknown word (windelbouwman) -- [windelbouwman/rspython](https://github
 README.md:251:2     - Unknown word (shinglyu)      -- [shinglyu/RustPython](https:/
+benches/README.md:11:21     - Unknown word (microbenchmark) -- run only the sorted microbenchmark, you can run:
+benches/README.md:34:62     - Unknown word (microbenchmarks) -- code added under the `microbenchmarks/` directory. A microbenchmark
+benches/README.md:34:93     - Unknown word (microbenchmark)  -- icrobenchmarks/` directory. A microbenchmark file has
+benches/README.md:66:1      - Unknown word (rustflags)       -- rustflags = [
 benches/benchmarks/fannkuch.py:14:5      - Unknown word (fannkuch)   -- def fannkuch(n):
+benches/benchmarks/fannkuch.py:52:15     - Unknown word (pyperf)     -- #runner = pyperf.Runner()
 benches/benchmarks/fannkuch.py:54:25     - Unknown word (fannkuch)   -- #runner.bench_func('fannkuch', fannkuch, arg)
 benches/benchmarks/fannkuch.py:54:36     - Unknown word (fannkuch)   -- bench_func('fannkuch', fannkuch, arg)
 benches/benchmarks/fannkuch.py:55:5      - Unknown word (fannkuch)   -- fannkuch(arg)
 benches/benchmarks/fannkuch.py:5:16      - Unknown word (Sokolov)    -- Contributed by Sokolov Yura, modified by Tupteq
 benches/benchmarks/fannkuch.py:5:24      - Unknown word (Yura)       -- Contributed by Sokolov Yura, modified by Tupteq
 benches/benchmarks/fannkuch.py:5:42      - Unknown word (Tupteq)     -- Sokolov Yura, modified by Tupteq.
+benches/benchmarks/fannkuch.py:8:10      - Unknown word (pyperf)     -- # import pyperf
 benches/benchmarks/nbody.py:5:15      - Unknown word (Tupteq)     -- # modified by Tupteq, Fredrik Johansson,
 benches/benchmarks/nbody.py:5:23      - Unknown word (Fredrik)    -- modified by Tupteq, Fredrik Johansson, and Daniel
 benches/benchmarks/nbody.py:5:31      - Unknown word (Johansson)  -- modified by Tupteq, Fredrik Johansson, and Daniel Nanz
 benches/benchmarks/nbody.py:5:53      - Unknown word (Nanz)       -- Johansson, and Daniel Nanz
 benches/benchmarks/pystone.py:109:23    - Unknown word (DHRYSTONE)  -- String2Loc = "DHRYSTONE PROGRAM, 2'ND STRING
+benches/benchmarks/pystone.py:128:39    - Unknown word (nulltime)   -- clock() - starttime - nulltime
 benches/benchmarks/pystone.py:128:5     - Unknown word (benchtime)  -- benchtime = clock() - starttime
 benches/benchmarks/pystone.py:129:8     - Unknown word (benchtime)  -- if benchtime == 0.0:
 benches/benchmarks/pystone.py:130:17    - Unknown word (Benchtime)  -- loopsPerBenchtime = 0.0
@@ -44,13 +61,120 @@ benches/benchmarks/pystone.py:52:40     - Unknown word (Discr)      -- self, Ptr
 benches/benchmarks/pystone.py:55:14     - Unknown word (Discr)      -- self.Discr = Discr
 benches/benchmarks/pystone.py:55:22     - Unknown word (Discr)      -- self.Discr = Discr
 benches/benchmarks/pystone.py:61:42     - Unknown word (Discr)      -- Record(self.PtrComp, self.Discr, self.EnumComp,
+benches/benchmarks/pystone.py:90:5      - Unknown word (nulltime)   -- nulltime = clock() - starttime
 benches/benchmarks/pystone.py:95:12     - Unknown word (Discr)      -- PtrGlb.Discr = Ident1
 benches/benchmarks/pystone.py:98:26     - Unknown word (DHRYSTONE)  -- PtrGlb.StringComp = "DHRYSTONE PROGRAM, SOME STRING
 benches/benchmarks/pystone.py:99:19     - Unknown word (DHRYSTONE)  -- String1Loc = "DHRYSTONE PROGRAM, 1'ST STRING
 benches/benchmarks/pystone.py:9:29      - Unknown word (Weicker)    -- Reinhold P. Weicker, CACM Vol 27, No 1
 benches/benchmarks/pystone.py:9:39      - Unknown word (CACM)       -- Reinhold P. Weicker,  CACM Vol 27, No 10, 10/8
+benches/microbenchmarks.rs:13:12     - Unknown word (microbenchmarks) -- // List of microbenchmarks to skip.
+benches/microbenchmarks.rs:172:40    - Unknown word (microbenchmarks) -- c.benchmark_group("microbenchmarks");
+benches/microbenchmarks.rs:181:46    - Unknown word (microbenchmarks) -- Path::new("./benches/microbenchmarks/");
+benches/microbenchmarks.rs:213:17    - Unknown word (MICROBENCHMARKS) -- if SKIP_MICROBENCHMARKS.contains(&benchmark
+benches/microbenchmarks.rs:21:12     - Unknown word (MICROBENCHMARKS) -- const SKIP_MICROBENCHMARKS: [&str; 8] = [
+benches/microbenchmarks.rs:58:39     - Unknown word (microbenchmark)  -- panic!("Error running microbenchmark")
+benches/microbenchmarks.rs:72:39     - Unknown word (microbenchmark)  -- panic!("Error running microbenchmark setup code")
+benches/test_benchmarks.py:19:18     - Unknown word (nbody)      -- ['benchmarks/nbody.py'],
+build.rs:4:23      - Unknown word (winresource) -- let mut res = winresource::WindowsResource::new
+crates/codegen/src/compile.rs:1167:19   - Unknown word (nameop)     -- // = compiler_nameop
+crates/codegen/src/compile.rs:1191:32   - Unknown word (typeparams) -- let (symbol_scope, _is_typeparams) = {
+crates/codegen/src/compile.rs:1193:20   - Unknown word (typeparams) -- let is_typeparams = current_table.typ
+crates/codegen/src/compile.rs:1199:52   - Unknown word (typeparams) -- symbol.is_none() && is_typeparams {
+crates/codegen/src/compile.rs:1208:42   - Unknown word (typeparams) -- map(|s| s.scope), is_typeparams)
+crates/codegen/src/compile.rs:1924:72   - Unknown word (Typeparam)  -- IntrinsicFunction2::SetTypeparamDefault
+crates/codegen/src/compile.rs:1950:72   - Unknown word (Typeparam)  -- IntrinsicFunction2::SetTypeparamDefault
+crates/codegen/src/compile.rs:1977:72   - Unknown word (Typeparam)  -- IntrinsicFunction2::SetTypeparamDefault
+crates/codegen/src/compile.rs:2320:21   - Unknown word (typeparam)  -- let mut num_typeparam_args = 0;
+crates/codegen/src/compile.rs:2325:21   - Unknown word (typeparam)  -- num_typeparam_args += 1;
+crates/codegen/src/compile.rs:2328:21   - Unknown word (typeparam)  -- num_typeparam_args += 1;
+crates/codegen/src/compile.rs:2332:20   - Unknown word (typeparam)  -- if num_typeparam_args == 2 {
+crates/codegen/src/compile.rs:2341:21   - Unknown word (typeparam)  -- num_typeparam_args as u32,
+crates/codegen/src/compile.rs:2446:49   - Unknown word (classdict)  -- for __class__ and __classdict__ in class scope
+crates/codegen/src/compile.rs:3651:29   - Unknown word (subpatterns) -- // After processing subpatterns, adjust on_top
+crates/codegen/src/compile.rs:376:13    - Unknown word (fblock)     -- fblock: Vec::with_capacity
+crates/codegen/src/compile.rs:376:40    - Unknown word (MAXBLOCKS)  -- Vec::with_capacity(MAXBLOCKS),
+crates/codegen/src/compile.rs:39:55     - Unknown word (Oparg)      -- ConstantData, ConvertValueOparg, Instruction, Invert
+crates/codegen/src/compile.rs:46:7      - Unknown word (MAXBLOCKS)  -- const MAXBLOCKS: usize = 20;
+crates/codegen/src/compile.rs:5639:61   - Unknown word (Oparg)       -- None => ConvertValueOparg::None,
+crates/codegen/src/compile.rs:5640:60   - Unknown word (Oparg)       -- :Str => ConvertValueOparg::Str,
+crates/codegen/src/compile.rs:5641:61   - Unknown word (Oparg)       -- Repr => ConvertValueOparg::Repr,
+crates/codegen/src/compile.rs:5642:62   - Unknown word (Oparg)       -- Ascii => ConvertValueOparg::Ascii,
+crates/codegen/src/compile.rs:5671:69   - Unknown word (oparg)       -- Instruction::ConvertValue { oparg: conversion })
+crates/codegen/src/compile.rs:669:33    - Unknown word (dictbytype) -- Build cellvars using dictbytype (CELL scope, sorted
+crates/codegen/src/compile.rs:689:30    - Unknown word (classdict)  -- / Handle implicit __classdict__ cell if needed
+crates/codegen/src/compile.rs:690:22    - Unknown word (classdict)  -- if ste.needs_classdict {
+crates/codegen/src/compile.rs:691:38    - Unknown word (classdict)  -- Cook up an implicit __classdict__ cell
+crates/codegen/src/compile.rs:693:37    - Unknown word (classdict)  -- cellvar_cache.insert("__classdict__".to_string());
+crates/codegen/src/compile.rs:696:33    - Unknown word (dictbytype) -- Build freevars using dictbytype (FREE scope, offset
+crates/codegen/src/compile.rs:769:13    - Unknown word (fblock)     -- fblock: Vec::with_capacity
+crates/codegen/src/compile.rs:769:40    - Unknown word (MAXBLOCKS)  -- Vec::with_capacity(MAXBLOCKS),
+crates/codegen/src/compile.rs:863:20    - Unknown word (fblock)     -- /// Push a new fblock
+crates/codegen/src/compile.rs:864:24    - Unknown word (fblock)     -- // = compiler_push_fblock
+crates/codegen/src/compile.rs:865:13    - Unknown word (fblock)     -- fn push_fblock(
+crates/codegen/src/compile.rs:872:33    - Unknown word (MAXBLOCKS)  -- code.fblock.len() >= MAXBLOCKS {
+crates/codegen/src/ir.rs:129:9     - Unknown word (fblock)     -- pub fblock: Vec<crate::compile
+crates/codegen/src/ir.rs:154:13    - Unknown word (fblock)     -- fblock: _,
+crates/codegen/src/ir.rs:219:21    - Unknown word (linetable)  -- // Generate linetable from locations
+crates/codegen/src/ir.rs:220:13    - Unknown word (linetable)  -- let linetable = generate_linetable
+crates/codegen/src/ir.rs:220:34    - Unknown word (linetable)  -- linetable = generate_linetable(&locations, first_line
+crates/codegen/src/ir.rs:241:13    - Unknown word (linetable)  -- linetable,
+crates/codegen/src/ir.rs:242:13    - Unknown word (exceptiontable) -- exceptiontable: Box::new([]), // TODO
+crates/codegen/src/ir.rs:414:35    - Unknown word (linetable)      -- CPython 3.11+ format linetable from source locations
+crates/codegen/src/ir.rs:471:34    - Unknown word (varint)         -- write_signed_varint(&mut linetable, 0);
+crates/codegen/src/ir.rs:472:27    - Unknown word (varint)         -- write_varint(&mut linetable, 0);
+crates/codegen/src/ir.rs:473:27    - Unknown word (varint)         -- write_varint(&mut linetable, (col
+crates/codegen/src/ir.rs:474:27    - Unknown word (varint)         -- write_varint(&mut linetable, (end
+crates/codegen/src/ir.rs:493:34    - Unknown word (varint)         -- write_signed_varint(&mut linetable, line
 crates/codegen/src/snapshots/rustpython_compiler_core__compile__tests__nested_double_async_with.snap:29:42     - Unknown word (woohoo)     -- LoadNameAny (6, woohoo)
 crates/codegen/src/snapshots/rustpython_compiler_core__compile__tests__nested_double_async_with.snap:3:184     - Unknown word (woohoo)     -- async with woohoo():\n
+crates/codegen/src/symboltable.rs:237:25    - Unknown word (classdict)  -- Drop __class__ and __classdict__ from free variables
+crates/codegen/src/symboltable.rs:251:19    - Unknown word (classdict)  -- // Check if __classdict__ is used as a free
+crates/codegen/src/symboltable.rs:53:54     - Unknown word (classdict)  -- needs an implicit __classdict__ cell
+crates/codegen/src/symboltable.rs:54:15     - Unknown word (classdict)  -- pub needs_classdict: bool,
+crates/codegen/src/symboltable.rs:71:19     - Unknown word (classdict)  -- needs_classdict: false,
+crates/common/src/format.rs:1366:28   - Unknown word (aftersign)  -- test_format_int_non_aftersign_zero_padding() {
+crates/compiler-core/src/bytecode.rs:1476:65   - Unknown word (ilog)           -- self.instructions.len().ilog10() as usize);
+crates/compiler-core/src/bytecode.rs:1560:13   - Unknown word (linetable)      -- linetable: self.linetable,
+crates/compiler-core/src/bytecode.rs:1560:29   - Unknown word (linetable)      -- linetable: self.linetable,
+crates/compiler-core/src/bytecode.rs:1561:13   - Unknown word (exceptiontable) -- exceptiontable: self.exceptiontable
+crates/compiler-core/src/bytecode.rs:1561:34   - Unknown word (exceptiontable) -- exceptiontable: self.exceptiontable,
+crates/compiler-core/src/bytecode.rs:1592:13   - Unknown word (linetable)      -- linetable: self.linetable.clone
+crates/compiler-core/src/bytecode.rs:1593:13   - Unknown word (exceptiontable) -- exceptiontable: self.exceptiontable
+crates/compiler-core/src/bytecode.rs:1593:34   - Unknown word (exceptiontable) -- exceptiontable: self.exceptiontable.clone(),
+crates/compiler-core/src/bytecode.rs:15:5      - Unknown word (Oparg)      -- /// Oparg values for [`Instruction
+crates/compiler-core/src/bytecode.rs:1889:28   - Unknown word (oparg)          -- ConvertValue { oparg } => write!(f, "{:pad
+crates/compiler-core/src/bytecode.rs:1889:79   - Unknown word (oparg)          -- ", "CONVERT_VALUE", oparg.get(arg)),
+crates/compiler-core/src/bytecode.rs:22:22     - Unknown word (Oparg)      -- pub enum ConvertValueOparg {
+crates/compiler-core/src/bytecode.rs:280:9     - Unknown word (linetable)  -- pub linetable: Box<[u8]>,
+crates/compiler-core/src/bytecode.rs:282:9     - Unknown word (exceptiontable) -- pub exceptiontable: Box<[u8]>,
+crates/compiler-core/src/bytecode.rs:53:35     - Unknown word (Oparg)      -- Display for ConvertValueOparg {
+crates/compiler-core/src/bytecode.rs:582:12    - Unknown word (Typeparam)      -- SetTypeparamDefault = 5,
+crates/compiler-core/src/bytecode.rs:663:50    - Unknown word (oparg)          -- string, depending on `oparg`:
+crates/compiler-core/src/bytecode.rs:673:32    - Unknown word (Oparg)          -- oparg: Arg<ConvertValueOparg>,
+crates/compiler-core/src/bytecode.rs:673:9     - Unknown word (oparg)          -- oparg: Arg<ConvertValueOparg
+crates/compiler-core/src/bytecode.rs:67:32     - Unknown word (Oparg)      -- OpArgType for ConvertValueOparg {
+crates/compiler-core/src/bytecode.rs:97:19     - Unknown word (linetable)  -- /// CPython 3.11+ linetable location info codes
+crates/compiler-core/src/marshal.rs:247:13    - Unknown word (linetable)  -- // Read linetable and exceptiontable
+crates/compiler-core/src/marshal.rs:247:27    - Unknown word (exceptiontable) -- Read linetable and exceptiontable
+crates/compiler-core/src/marshal.rs:248:9     - Unknown word (linetable)      -- let linetable_len = rdr.read_u32(
+crates/compiler-core/src/marshal.rs:249:36    - Unknown word (linetable)      -- linetable = rdr.read_slice(linetable_len)?.to_vec().into
+crates/compiler-core/src/marshal.rs:249:9     - Unknown word (linetable)      -- let linetable = rdr.read_slice(linetable
+crates/compiler-core/src/marshal.rs:251:9     - Unknown word (exceptiontable) -- let exceptiontable_len = rdr.read_u32(
+crates/compiler-core/src/marshal.rs:252:9     - Unknown word (exceptiontable) -- let exceptiontable = rdr
+crates/compiler-core/src/marshal.rs:253:21    - Unknown word (exceptiontable) -- .read_slice(exceptiontable_len)?
+crates/compiler-core/src/marshal.rs:275:9     - Unknown word (linetable)      -- linetable,
+crates/compiler-core/src/marshal.rs:276:9     - Unknown word (exceptiontable) -- exceptiontable,
+crates/derive-impl/src/pyclass.rs:309:43    - Unknown word (subclassing) -- proper memory layout for subclassing (required for #[repr
+crates/derive-impl/src/pymodule.rs:633:13    - Unknown word (pytype)     -- let pytype_ident = match args.item
+crates/derive-impl/src/pymodule.rs:640:52    - Unknown word (pytype)     -- StructSequenceMeta::from_attr(pytype_ident.clone(), structseq
+crates/derive-impl/src/pymodule.rs:652:40    - Unknown word (pytype)     -- new = quote_spanned!(pytype_ident.span() =>
+crates/derive-impl/src/pymodule.rs:653:31    - Unknown word (pytype)     -- let new_class = <#pytype_ident as ::rustpython
+crates/derive-impl/src/pymodule.rs:661:55    - Unknown word (pytype)     -- SimpleItemMeta::from_attr(pytype_ident.clone(), &attr
+crates/derive-impl/src/pystructseq.rs:424:9     - Unknown word (pytype)     -- let pytype_ident = struct_item
+crates/derive-impl/src/pystructseq.rs:425:9     - Unknown word (pytype)     -- let pytype_vis = struct_item.vis
+crates/derive-impl/src/pystructseq.rs:452:10    - Unknown word (pytype)     -- #pytype_vis struct #pytype_ident
+crates/derive-impl/src/pystructseq.rs:452:29    - Unknown word (pytype)     -- #pytype_vis struct #pytype_ident(pub ::rustpython
+crates/derive-impl/src/pystructseq.rs:455:54    - Unknown word (pytype)     -- class::PyClassDef for #pytype_ident {
 crates/doc/LICENSE:10:32     - Unknown word (CNRI)         -- Research Initiatives (CNRI, see https://www.cnri
 crates/doc/LICENSE:11:4      - Unknown word (Reston)       -- in Reston, Virginia where he released
 crates/doc/LICENSE:121:1     - Unknown word (BEOPEN)       -- BEOPEN.COM LICENSE AGREEMENT
@@ -82,9 +206,88 @@ crates/doc/LICENSE:52:20     - Unknown word (Stallman's)   -- CNRI, however, Sta
 crates/doc/LICENSE:52:47     - Unknown word (CNRI's)       -- Stallman's lawyer has told CNRI's lawyer that 1.6.1
 crates/doc/LICENSE:52:5      - Unknown word (CNRI)         -- CNRI, however, Stallman's
 crates/doc/LICENSE:5:1       - Unknown word (Mathematisch) -- Mathematisch Centrum (CWI, see https
+crates/doc/generate.py:132:38    - Unknown word (getowndoc)  -- DocEntry(parts, pydoc._getowndoc(obj))
+crates/doc/generate.py:169:46    - Unknown word (getowndoc)  -- DocEntry(new_parts, pydoc._getowndoc(attr))
+crates/doc/generate.py:208:38    - Unknown word (getowndoc)  -- DocEntry(parts, pydoc._getowndoc(typ))
+crates/jit/Cargo.toml:11:1      - Unknown word (autotests)  -- autotests = false
 crates/sre_engine/Cargo.toml:3:13      - Unknown word (Kangzhi)    -- authors = ["Kangzhi Shi <shikangzhi@gmail
 crates/stdlib/Cargo.toml:104:1     - Unknown word (rustix)     -- rustix = { workspace = true
+crates/stdlib/src/faulthandler.rs:62:24     - Unknown word (NSIGNALS)   -- const FAULTHANDLER_NSIGNALS: usize = 5;
+crates/stdlib/src/faulthandler.rs:64:24     - Unknown word (NSIGNALS)   -- const FAULTHANDLER_NSIGNALS: usize = 4;
+crates/stdlib/src/faulthandler.rs:72:67     - Unknown word (NSIGNALS)   -- FaultHandler; FAULTHANDLER_NSIGNALS] = [
+crates/stdlib/src/faulthandler.rs:81:67     - Unknown word (NSIGNALS)   -- FaultHandler; FAULTHANDLER_NSIGNALS] = [
+crates/stdlib/src/math.rs:574:18    - Unknown word (subnormals) -- // Scale subnormals to normal range first
+crates/stdlib/src/opcode.rs:117:9     - Unknown word (oparg)      -- oparg: Option<PyObjectRef
+crates/stdlib/src/opcode.rs:124:13    - Unknown word (oparg)      -- let oparg = args
+crates/stdlib/src/opcode.rs:125:14    - Unknown word (oparg)      -- .oparg
+crates/stdlib/src/opcode.rs:154:32    - Unknown word (oparg)      -- opcode.stack_effect(oparg.into(), jump))
+crates/stdlib/src/opcode.rs:226:28    - Unknown word (TYPEPARAM)  -- "INTRINSIC_SET_TYPEPARAM_DEFAULT",
+crates/stdlib/src/opcode.rs:35:68     - Unknown word (oparg)      -- error("invalid opcode or oparg"))?;
+crates/stdlib/src/ssl.rs:1343:21   - Unknown word (capath)     -- let has_capath = matches!(&args.capath
+crates/stdlib/src/ssl.rs:1343:45   - Unknown word (capath)     -- capath = matches!(&args.capath, OptionalArg::Present
+crates/stdlib/src/ssl.rs:842:39    - Unknown word (capath)     -- CA certificates from capath for lazy loading simulation
+crates/stdlib/src/ssl.rs:845:9     - Unknown word (capath)     -- capath_certs_der: PyRwLock
+crates/stdlib/src/ssl.rs:945:9     - Unknown word (capath)     -- capath: OptionalArg<Option
+crates/stdlib/src/ssl/cert.rs:648:61    - Unknown word (capath)     -- skipped (matches OpenSSL capath behavior).
+crates/stdlib/src/ssl/cert.rs:658:24    - Unknown word (capath)     -- // OpenSSL capath uses hash-based naming
+crates/stdlib/src/ssl/compat.rs:1493:71   - Unknown word (eofs)       -- behavior (suppress_ragged_eofs=True)
+crates/stdlib/src/ssl/compat.rs:1503:68   - Unknown word (eofs)       -- when suppress_ragged_eofs=False is explicitly
+crates/stdlib/src/ssl/compat.rs:1505:48   - Unknown word (eofs)       -- Implement suppress_ragged_eofs parameter if needed
+crates/vm/Cargo.toml:68:1      - Unknown word (scopeguard) -- scopeguard = { workspace = true
 crates/vm/Cargo.toml:94:1      - Unknown word (rustix)     -- rustix = { workspace = true
+crates/vm/src/builtins/asyncgenerator.rs:468:25    - Unknown word (getiter)    -- // = anextawaitable_getiter.
+crates/vm/src/builtins/code.rs:1001:22   - Unknown word (oparg)          -- fn _varname_from_oparg(&self, opcode: i32,
+crates/vm/src/builtins/code.rs:103:53    - Unknown word (varint)     -- self.reader.read_signed_varint();
+crates/vm/src/builtins/code.rs:105:34    - Unknown word (varint)     -- self.reader.read_varint();
+crates/vm/src/builtins/code.rs:106:34    - Unknown word (varint)     -- self.reader.read_varint();
+crates/vm/src/builtins/code.rs:107:34    - Unknown word (varint)     -- self.reader.read_varint();
+crates/vm/src/builtins/code.rs:110:74    - Unknown word (varint)     -- self.reader.read_signed_varint(),
+crates/vm/src/builtins/code.rs:164:8     - Unknown word (linetable)  -- co_linetable: OptionalArg<crate:
+crates/vm/src/builtins/code.rs:166:8     - Unknown word (exceptiontable) -- co_exceptiontable: OptionalArg<crate:
+crates/vm/src/builtins/code.rs:29:12     - Unknown word (linetable)  -- fn new(linetable: &'a [u8], first_line
+crates/vm/src/builtins/code.rs:35:42     - Unknown word (linetable)  -- LineTableReader::new(linetable),
+crates/vm/src/builtins/code.rs:384:5     - Unknown word (linetable)      -- linetable: PyBytesRef,
+crates/vm/src/builtins/code.rs:385:5     - Unknown word (exceptiontable) -- exceptiontable: PyBytesRef,
+crates/vm/src/builtins/code.rs:508:13    - Unknown word (exceptiontable) -- exceptiontable: args.exceptiontable
+crates/vm/src/builtins/code.rs:508:34    - Unknown word (exceptiontable) -- exceptiontable: args.exceptiontable.as_bytes().to_vec()
+crates/vm/src/builtins/code.rs:56:38     - Unknown word (linetable)  -- return false; // Invalid linetable
+crates/vm/src/builtins/code.rs:631:15    - Unknown word (exceptiontable) -- pub fn co_exceptiontable(&self, vm: &VirtualMachine
+crates/vm/src/builtins/code.rs:638:43    - Unknown word (lineiterator)   -- Implement lazy iterator (lineiterator) like CPython for better
+crates/vm/src/builtins/code.rs:77:50     - Unknown word (CODEUNIT)   -- length * 2; // sizeof(_Py_CODEUNIT) = 2
+crates/vm/src/builtins/type.rs:1296:66   - Unknown word (typeobject) -- in type_dict_set_doc (typeobject.c)
+crates/vm/src/builtins/type.rs:1667:14   - Unknown word (setdict)    -- // = subtype_setdict
+crates/vm/src/builtins/type.rs:976:86    - Unknown word (SETREF)     -- similar to CPython's Py_SETREF)
+crates/vm/src/frame.rs:1253:38   - Unknown word (defaultdict) -- // collections.defaultdict that define __missing
+crates/vm/src/frame.rs:2240:43   - Unknown word (Oparg)       -- bytecode::ConvertValueOparg,
+crates/vm/src/frame.rs:2243:35   - Unknown word (Oparg)       -- bytecode::ConvertValueOparg;
+crates/vm/src/frame.rs:2246:25   - Unknown word (Oparg)       -- ConvertValueOparg::Str => value.str(vm
+crates/vm/src/frame.rs:2247:25   - Unknown word (Oparg)       -- ConvertValueOparg::Repr => value.repr
+crates/vm/src/frame.rs:2248:25   - Unknown word (Oparg)       -- ConvertValueOparg::Ascii => vm.ctx.new
+crates/vm/src/frame.rs:2464:46   - Unknown word (Typeparam)   -- IntrinsicFunction2::SetTypeparamDefault => {
+crates/vm/src/frame.rs:2465:44   - Unknown word (typeparam)   -- stdlib::typing::set_typeparam_default(arg1, arg2,
+crates/vm/src/frame.rs:713:51    - Unknown word (oparg)      -- Instruction::ConvertValue { oparg: conversion } => {
+crates/vm/src/macros.rs:193:31    - Unknown word (metavars)   -- allow(clippy::macro_metavars_in_unsafe)]
+crates/vm/src/stdlib/ast/other.rs:17:45     - Unknown word (Oparg)      -- bytecode::ConvertValueOparg::from_op_arg)
+crates/vm/src/stdlib/ast/other.rs:19:39     - Unknown word (Oparg)      -- bytecode::ConvertValueOparg::None => Self::None
+crates/vm/src/stdlib/ast/other.rs:20:39     - Unknown word (Oparg)      -- bytecode::ConvertValueOparg::Str => Self::Str,
+crates/vm/src/stdlib/ast/other.rs:21:39     - Unknown word (Oparg)      -- bytecode::ConvertValueOparg::Repr => Self::Repr
+crates/vm/src/stdlib/ast/other.rs:22:39     - Unknown word (Oparg)      -- bytecode::ConvertValueOparg::Ascii => Self::Ascii
+crates/vm/src/stdlib/builtins.rs:968:48    - Unknown word (tmptype)    -- winner is subtype of tmptype, continue (winner is
+crates/vm/src/stdlib/builtins.rs:972:27    - Unknown word (tmptype)    -- // if tmptype is subtype of winner
+crates/vm/src/stdlib/builtins.rs:972:65    - Unknown word (tmptype)    -- subtype of winner, update (tmptype is more derived)
+crates/vm/src/stdlib/io.rs:3012:40   - Unknown word (pyio)       -- Implementation follows _pyio.py TextIOWrapper.truncate
+crates/vm/src/stdlib/sys.rs:109:33    - Unknown word (BASEPREFIX) -- option_env!("RUSTPYTHON_BASEPREFIX").unwrap_or_else(||
+crates/vm/src/stdlib/sys.rs:113:33    - Unknown word (BASEPREFIX) -- option_env!("RUSTPYTHON_BASEPREFIX").unwrap_or_else(||
+crates/vm/src/stdlib/sys.rs:117:33    - Unknown word (BASEPREFIX) -- option_env!("RUSTPYTHON_BASEPREFIX").unwrap_or_else(||
+crates/vm/src/stdlib/typevar.rs:1000:82   - Unknown word (typeparam)  -- to CPython's _Py_set_typeparam_default
+crates/vm/src/stdlib/typevar.rs:1001:45   - Unknown word (Typeparam)  -- CALL_INTRINSIC_2 SetTypeparamDefault instruction
+crates/vm/src/stdlib/typevar.rs:1002:12   - Unknown word (typeparam)  -- pub fn set_typeparam_default(
+crates/vm/src/stdlib/typing.rs:6:9       - Unknown word (typeparam)  -- set_typeparam_default,
+crates/vm/src/vm/compile.rs:29:8      - Unknown word (pymain)     -- // pymain_run_file_obj
+crates/vm/src/vm/compile.rs:31:17     - Unknown word (pymain)     -- // when pymain_run_module?
+crates/vm/src/vm/thread.rs:29:9      - Unknown word (scopeguard) -- scopeguard::defer! { vms.borrow
+crates/vm/src/vm/vm_new.rs:562:62    - Unknown word (subclassing) -- type doesn't support subclassing very well. e.g. Did
+crates/wasm/Cargo.toml:12:16     - Unknown word (cdylib)     -- crate-type = ["cdylib", "rlib"]
 crates/wasm/Cargo.toml:12:26     - Unknown word (rlib)       -- crate-type = ["cdylib", "rlib"]
 crates/wasm/Lib/_microdistlib.py:127:14    - Unknown word (distname)   -- rs = distname
 crates/wasm/Lib/_microdistlib.py:129:25    - Unknown word (distname)   -- rs = '%s %s' % (distname, ', '.join(['%s %s'
@@ -107,23 +310,49 @@ crates/wasm/Lib/browser.py:62:26     - Unknown word (jsstr)      -- return _conf
 crates/wasm/Lib/browser.py:75:9      - Unknown word (jsstr)      -- jsstr(msg), jsstr(default
 crates/wasm/Lib/whlimport.py:106:13    - Unknown word (zname)        -- for zname, z in cls._packages
 crates/wasm/Lib/whlimport.py:110:50    - Unknown word (zname)        -- cls, origin=f"zip:{zname}/{fullpath}", is_package
+crates/wasm/Lib/whlimport.py:152:6     - Unknown word (searchorder)  -- _zip_searchorder = (
+crates/wasm/Lib/whlimport.py:161:17    - Unknown word (isbytecode)   -- for suffix, isbytecode, ispackage in _zip_searchorde
+crates/wasm/Lib/whlimport.py:161:47    - Unknown word (searchorder)  -- isbytecode, ispackage in _zip_searchorder:
 crates/wasm/Lib/whlimport.py:33:11     - Unknown word (asyncweb)     -- await asyncweb.wait_all(_load_package
 crates/wasm/Lib/whlimport.py:3:8       - Unknown word (asyncweb)   -- import asyncweb
+crates/wasm/Lib/whlimport.py:45:9      - Unknown word (urlobj)       -- urlobj = urlparse(pkg)
+crates/wasm/Lib/whlimport.py:46:36     - Unknown word (urlobj)       -- posixpath.basename(urlobj.path)
 crates/wasm/Lib/whlimport.py:53:12     - Unknown word (asyncweb)     -- deps = asyncweb.spawn(asyncweb.wait
 crates/wasm/Lib/whlimport.py:53:27     - Unknown word (asyncweb)     -- deps = asyncweb.spawn(asyncweb.wait_all(_load_package
 crates/wasm/Lib/whlimport.py:64:12     - Unknown word (microdistlib) -- pkg = _microdistlib.parse_requirement(pkg
+crates/wasm/Lib/whlimport.py:76:53     - Unknown word (packagetype)  -- ver_downloads if dl["packagetype"] == "bdist_wheel")
 crates/wasm/Lib/whlimport.py:9:9       - Unknown word (microdistlib) -- import _microdistlib
 deny.toml:156:45    - Unknown word (dotgraphs)  -- ghlighting used when creating dotgraphs for crates
 deny.toml:188:11    - Unknown word (reqwest)    -- #crate = "reqwest"
 deny.toml:210:21    - Unknown word (gnullvm)    -- "windows_x86_64_gnullvm",
 deny.toml:215:22    - Unknown word (gnullvm)    -- "windows_aarch64_gnullvm",
+deny.toml:73:7      - Unknown word (RUSTSEC)    -- #"RUSTSEC-0000-0000",
+deny.toml:74:14     - Unknown word (RUSTSEC)    -- #{ id = "RUSTSEC-0000-0000", reason
 example_projects/aheui-rust.md:1:3       - Unknown word (aheui)      -- # aheui-rust
 example_projects/aheui-rust.md:4:14      - Unknown word (frozenlib)  -- - Creating a frozenlib: https://github.com
 example_projects/barebone/Cargo.toml:2:17      - Unknown word (barebone)   -- name = "example-barebone"
+example_projects/wasm32_without_js/rustpython-without-js/Cargo.toml:7:16      - Unknown word (cdylib)     -- crate-type = ["cdylib"]
+examples/atexit_example.py:5:5       - Unknown word (myexit)     -- def myexit():
+examples/atexit_example.py:9:17      - Unknown word (myexit)     -- atexit.register(myexit)
+extra_tests/custom_text_test_runner.py:115:36    - Unknown word (getargspec) -- [p for p in inspect.getargspec(func_ref).args if p
 extra_tests/custom_text_test_runner.py:7:22      - Unknown word (Abtin)      -- Copyright (c) 2015 Abtin Gramian
 extra_tests/custom_text_test_runner.py:7:28      - Unknown word (Gramian)    -- Copyright (c) 2015 Abtin Gramian
+extra_tests/jsontests.py:10:1      - Unknown word (testnames)   -- testnames.insert(0, "test_importlib
+extra_tests/jsontests.py:29:58     - Unknown word (testnames)   -- + name) for name in testnames]
+extra_tests/jsontests.py:32:1      - Unknown word (resultsfile) -- resultsfile = os.path.join(os.path
+extra_tests/jsontests.py:33:19     - Unknown word (resultsfile) -- if os.path.exists(resultsfile):
+extra_tests/jsontests.py:34:15     - Unknown word (resultsfile) -- os.remove(resultsfile)
+extra_tests/jsontests.py:36:35     - Unknown word (resultsfile) -- Runner(results_file_path=resultsfile, verbosity=2)
+extra_tests/jsontests.py:39:41     - Unknown word (resultsfile) -- results are available in", resultsfile)
 extra_tests/jsontests.py:5:11      - Unknown word (libregrtest) -- from test.libregrtest.runtest import findtests
+extra_tests/jsontests.py:5:38      - Unknown word (findtests)   -- libregrtest.runtest import findtests
+extra_tests/jsontests.py:7:1       - Unknown word (testnames)   -- testnames = findtests()
+extra_tests/jsontests.py:7:13      - Unknown word (findtests)   -- testnames = findtests()
+extra_tests/jsontests.py:9:1       - Unknown word (testnames)   -- testnames.remove("test_importlib
 extra_tests/snippets/3.1.2.18.py:3:9       - Unknown word (Jython)     -- assert "Jython" == "J" + word[1:]
+extra_tests/snippets/builtin_all.py:1:6       - Unknown word (testutils)  -- from testutils import TestFailingBool
+extra_tests/snippets/builtin_any.py:1:6       - Unknown word (testutils)  -- from testutils import TestFailingBool
+extra_tests/snippets/builtin_bool.py:1:6       - Unknown word (testutils)  -- from testutils import assert_raises
 extra_tests/snippets/builtin_bool.py:34:7      - Unknown word (Falsey)     -- class Falsey:
 extra_tests/snippets/builtin_bool.py:39:12     - Unknown word (Falsey)     -- assert not Falsey()
 extra_tests/snippets/builtin_bytearray.py:103:30    - Unknown word (efghij)     -- -6:] == bytearray(b"efghij")
@@ -169,6 +398,7 @@ extra_tests/snippets/builtin_bytearray.py:365:7     - Unknown word (juyfjyujuyj)
 extra_tests/snippets/builtin_bytearray.py:371:46    - Unknown word (cmowz)             -- example.com").strip(b"cmowz.") == bytearray(b"example
 extra_tests/snippets/builtin_bytearray.py:373:47    - Unknown word (cmowz)             -- example.com").lstrip(b"cmowz.") == bytearray(b"example
 extra_tests/snippets/builtin_bytearray.py:375:64    - Unknown word (mississ)           -- ipz") == bytearray(b"mississ")
+extra_tests/snippets/builtin_bytearray.py:4:6       - Unknown word (testutils)  -- from testutils import assert_raises
 extra_tests/snippets/builtin_bytearray.py:57:23     - Unknown word (abcdé)      -- assert len(bytearray("abcdé", "utf8")) == 6
 extra_tests/snippets/builtin_bytearray.py:704:17    - Unknown word (appen)             -- a = bytearray(b"appen")
 extra_tests/snippets/builtin_bytearray.py:723:29    - Unknown word (abcdabcdabcd)      -- a * 3 == bytearray(b"abcdabcdabcd")
@@ -188,9 +418,11 @@ extra_tests/snippets/builtin_bytearray.py:775:25    - Unknown word (dlrow)      
 extra_tests/snippets/builtin_bytearray.py:775:32    - Unknown word (olleh)             -- bytearray(b"dlrow ,olleh")
 extra_tests/snippets/builtin_bytearray.py:793:24    - Unknown word (bpython)           -- assert bytearray("rust%bpython%b", "utf-8") % (b"
 extra_tests/snippets/builtin_bytearray.py:804:18    - Unknown word (xffab)             -- a = bytearray(b"\xffab\x80\0\0\370\0\0")
+extra_tests/snippets/builtin_bytearray.py:807:112   - Unknown word (Vlatin)            -- \\u0000\\u0000\np2\nVlatin1\np3\ntp4\nRp5\ntp6
 extra_tests/snippets/builtin_bytearray.py:807:65    - Unknown word (xffab)             -- codecs\nencode\np1\n(V\xffab\x80\\u0000\\u0000\xf
 extra_tests/snippets/builtin_bytearray.py:811:87    - Unknown word (xbfab)             -- x0c\x00\x00\x00\xc3\xbfab\xc2\x80\x00\x00\xc3
 extra_tests/snippets/builtin_bytearray.py:815:93    - Unknown word (xbfab)             -- x0c\x00\x00\x00\xc3\xbfab\xc2\x80\x00\x00\xc3
+extra_tests/snippets/builtin_bytearray.py:819:18    - Unknown word (cbuiltins)         -- == b"\x80\x03cbuiltins\nbytearray\nq\x00C\t
 extra_tests/snippets/builtin_bytearray.py:819:49    - Unknown word (xffab)             -- nbytearray\nq\x00C\t\xffab\x80\x00\x00\xf8\x00
 extra_tests/snippets/builtin_bytearray.py:823:102   - Unknown word (xffab)             -- tbytearray\x94\x93\x94C\t\xffab\x80\x00\x00\xf8\x00
 extra_tests/snippets/builtin_bytearray.py:82:29     - Unknown word (abcdab)     -- a + b == bytearray(b"abcdab")
@@ -202,6 +434,7 @@ extra_tests/snippets/builtin_bytes.py:152:7     - Unknown word (koki)       -- b
 extra_tests/snippets/builtin_bytes.py:153:8     - Unknown word (koki)       -- b"|koki",
 extra_tests/snippets/builtin_bytes.py:154:8     - Unknown word (koki)       -- b"|koki|",
 extra_tests/snippets/builtin_bytes.py:177:47    - Unknown word (xkokx)      -- bytearray(b"x")) == b"xkokx"
+extra_tests/snippets/builtin_bytes.py:1:6       - Unknown word (testutils)  -- from testutils import assert_raises
 extra_tests/snippets/builtin_bytes.py:209:46    - Unknown word (kokxx)      -- bytearray(b"x")) == b"kokxx"
 extra_tests/snippets/builtin_bytes.py:23:10     - Unknown word (omkmok)     -- assert b"omkmok\Xaa" == bytes([111,
 extra_tests/snippets/builtin_bytes.py:241:46    - Unknown word (xxkok)      -- bytearray(b"x")) == b"xxkok"
@@ -238,10 +471,24 @@ extra_tests/snippets/builtin_bytes.py:40:19     - Unknown word (abcdé)      -- 
 extra_tests/snippets/builtin_bytes.py:603:19    - Unknown word (abcdabcdabcd)      -- assert a * 3 == b"abcdabcdabcd"
 extra_tests/snippets/builtin_bytes.py:604:19    - Unknown word (abcdabcdabcd)      -- assert 3 * a == b"abcdabcdabcd"
 extra_tests/snippets/builtin_bytes.py:615:15    - Unknown word (bpython)           -- assert b"rust%bpython%b" % (b" ", b"!") =
+extra_tests/snippets/builtin_bytes.py:635:18    - Unknown word (bytess)            -- return b"bytess"
+extra_tests/snippets/builtin_bytes.py:638:24    - Unknown word (bytess)            -- assert bytes(A()) == b"bytess"
 extra_tests/snippets/builtin_bytes.py:64:19     - Unknown word (abcdab)     -- assert a + b == b"abcdab"
 extra_tests/snippets/builtin_bytes.py:85:20     - Unknown word (efghij)     -- assert d[-6:] == b"efghij"
 extra_tests/snippets/builtin_bytes.py:86:22     - Unknown word (bdfh)       -- assert d[1:8:2] == b"bdfh"
 extra_tests/snippets/builtin_bytes.py:87:23     - Unknown word (igec)       -- assert d[8:1:-2] == b"igec"
+extra_tests/snippets/builtin_chr.py:1:6       - Unknown word (testutils)  -- from testutils import assert_raises
+extra_tests/snippets/builtin_complex.py:1:8       - Unknown word (testutils)  -- import testutils
+extra_tests/snippets/builtin_complex.py:2:6       - Unknown word (testutils)  -- from testutils import assert_raises
+extra_tests/snippets/builtin_dict.py:1:6       - Unknown word (testutils)  -- from testutils import assert_raises
+extra_tests/snippets/builtin_dict_union.py:13:10     - Unknown word (dunion)     -- def test_dunion_or0():
+extra_tests/snippets/builtin_dict_union.py:1:6       - Unknown word (testutils)  -- from testutils import assert_raises
+extra_tests/snippets/builtin_dict_union.py:25:10     - Unknown word (dunion)     -- def test_dunion_or1():
+extra_tests/snippets/builtin_dict_union.py:37:10     - Unknown word (dunion)     -- def test_dunion_ror0():
+extra_tests/snippets/builtin_dict_union.py:49:10     - Unknown word (dunion)     -- def test_dunion_other_types():
+extra_tests/snippets/builtin_dict_union.py:4:10      - Unknown word (dunion)     -- def test_dunion_ior0():
+extra_tests/snippets/builtin_divmod.py:1:6       - Unknown word (testutils)  -- from testutils import assert_raises
+extra_tests/snippets/builtin_exit.py:1:6       - Unknown word (testutils)  -- from testutils import assert_raises
 extra_tests/snippets/builtin_float.py:267:6     - Unknown word (infi)       -- "infi", # misspelt infinities
 extra_tests/snippets/builtin_float.py:268:7     - Unknown word (Infinit)    -- "-Infinit",
 extra_tests/snippets/builtin_float.py:278:6     - Unknown word (nfinity)    -- "nfinity",
@@ -249,20 +496,57 @@ extra_tests/snippets/builtin_float.py:279:6     - Unknown word (inity)      -- "
 extra_tests/snippets/builtin_float.py:280:6     - Unknown word (iinity)     -- "iinity",
 extra_tests/snippets/builtin_float.py:281:7     - Unknown word (xnan)       -- "0xnan",
 extra_tests/snippets/builtin_float.py:393:21    - Unknown word (xbep)       -- identical(fromHex("0xbep0"), 190.0)
+extra_tests/snippets/builtin_float.py:3:6       - Unknown word (testutils)  -- from testutils import assert_raises
+extra_tests/snippets/builtin_format.py:1:6       - Unknown word (testutils)  -- from testutils import assert_raises
+extra_tests/snippets/builtin_hash.py:1:6       - Unknown word (testutils)  -- from testutils import assert_raises
+extra_tests/snippets/builtin_hex.py:1:6       - Unknown word (testutils)  -- from testutils import assert_raises
+extra_tests/snippets/builtin_int.py:1:6       - Unknown word (testutils)  -- from testutils import assert_raises
+extra_tests/snippets/builtin_int.py:365:1     - Unknown word (subint)     -- subint = int.__new__(SubInt
+extra_tests/snippets/builtin_int.py:366:27    - Unknown word (subint)     -- assert subint.real is not subint
+extra_tests/snippets/builtin_int.py:366:8     - Unknown word (subint)     -- assert subint.real is not subint
+extra_tests/snippets/builtin_int.py:367:13    - Unknown word (subint)     -- assert type(subint.real) is int
+extra_tests/snippets/builtin_list.py:1:6       - Unknown word (testutils)  -- from testutils import assert_raises
 extra_tests/snippets/builtin_list.py:813:26    - Unknown word (daedlock)   -- Test for list entering daedlock or not (https://github
+extra_tests/snippets/builtin_mappingproxy.py:1:6       - Unknown word (testutils)  -- from testutils import assert_raises
+extra_tests/snippets/builtin_max.py:1:6       - Unknown word (testutils)  -- from testutils import assert_raises
+extra_tests/snippets/builtin_memoryview.py:3:6       - Unknown word (testutils)  -- from testutils import assert_raises
+extra_tests/snippets/builtin_min.py:1:6       - Unknown word (testutils)  -- from testutils import assert_raises
+extra_tests/snippets/builtin_object.py:7:1       - Unknown word (myobj)      -- myobj = MyObject()
+extra_tests/snippets/builtin_object.py:8:17      - Unknown word (myobj)      -- assert myobj == myobj
+extra_tests/snippets/builtin_object.py:8:8       - Unknown word (myobj)      -- assert myobj == myobj
+extra_tests/snippets/builtin_object.py:9:12      - Unknown word (myobj)      -- assert not myobj != myobj
+extra_tests/snippets/builtin_object.py:9:21      - Unknown word (myobj)      -- assert not myobj != myobj
+extra_tests/snippets/builtin_open.py:1:6       - Unknown word (testutils)  -- from testutils import assert_raises
+extra_tests/snippets/builtin_ord.py:1:6       - Unknown word (testutils)  -- from testutils import assert_raises
 extra_tests/snippets/builtin_pow.py:136:9     - Unknown word (fiveto)     -- fiveto = float(5**n)
 extra_tests/snippets/builtin_pow.py:137:24    - Unknown word (fiveto)     -- # For small n, fiveto will be odd.  Eventually
 extra_tests/snippets/builtin_pow.py:138:38    - Unknown word (thereafer)  -- mantissa bits, though, and thereafer fiveto will be even
 extra_tests/snippets/builtin_pow.py:138:48    - Unknown word (fiveto)     -- though, and thereafer fiveto will be even.
 extra_tests/snippets/builtin_pow.py:139:20    - Unknown word (fiveto)     -- expected = fiveto % 2.0 and -1.0 or 1
 extra_tests/snippets/builtin_pow.py:140:19    - Unknown word (fiveto)     -- eq(pow(a, fiveto), expected)
+extra_tests/snippets/builtin_pow.py:1:6       - Unknown word (testutils)  -- from testutils import assert_equal
+extra_tests/snippets/builtin_pow.py:29:5      - Unknown word (powtest)    -- def powtest(type):
+extra_tests/snippets/builtin_pow.py:46:13     - Unknown word (othertype)  -- for othertype in (int,):
+extra_tests/snippets/builtin_pow.py:50:27     - Unknown word (othertype)  -- jj = -othertype(j)
+extra_tests/snippets/builtin_pow.py:53:9      - Unknown word (othertype)  -- for othertype in int, float:
+extra_tests/snippets/builtin_pow.py:56:20     - Unknown word (othertype)  -- exp = -othertype(i / 10.0)
 extra_tests/snippets/builtin_pow.py:64:5      - Unknown word (asseq)      -- asseq = assert_equal
 extra_tests/snippets/builtin_pow.py:67:9      - Unknown word (asseq)      -- asseq = assert_almost_equal
 extra_tests/snippets/builtin_pow.py:79:21     - Unknown word (asseq)      -- asseq(pow(type(i), j, k),
+extra_tests/snippets/builtin_pow.py:82:10     - Unknown word (powint)     -- def test_powint():
+extra_tests/snippets/builtin_pow.py:83:5      - Unknown word (powtest)    -- powtest(int)
+extra_tests/snippets/builtin_pow.py:86:10     - Unknown word (powfloat)   -- def test_powfloat():
+extra_tests/snippets/builtin_pow.py:87:5      - Unknown word (powtest)    -- powtest(float)
+extra_tests/snippets/builtin_print.py:3:6       - Unknown word (testutils)  -- from testutils import assert_raises
 extra_tests/snippets/builtin_property.py:15:5      - Unknown word (Fubar)      -- f = Fubar()
 extra_tests/snippets/builtin_property.py:19:13     - Unknown word (Fubar)      -- assert type(Fubar.foo) is property
+extra_tests/snippets/builtin_property.py:1:6       - Unknown word (testutils)  -- from testutils import assert_raises
 extra_tests/snippets/builtin_property.py:4:7       - Unknown word (Fubar)      -- class Fubar:
+extra_tests/snippets/builtin_range.py:1:6       - Unknown word (testutils)  -- from testutils import assert_raises
+extra_tests/snippets/builtin_round.py:1:6       - Unknown word (testutils)  -- from testutils import assert_raises
+extra_tests/snippets/builtin_set.py:1:6       - Unknown word (testutils)  -- from testutils import assert_raises
 extra_tests/snippets/builtin_set.py:416:27    - Unknown word (aruguments) -- TODO: Assert that empty aruguments raises exception.
+extra_tests/snippets/builtin_slice.py:1:6       - Unknown word (testutils)  -- from testutils import assert_raises
 extra_tests/snippets/builtin_str.py:100:6     - Unknown word (koki)       -- "koki",
 extra_tests/snippets/builtin_str.py:101:6     - Unknown word (koki)       -- "koki",
 extra_tests/snippets/builtin_str.py:102:7     - Unknown word (koki)       -- "|koki",
@@ -273,6 +557,7 @@ extra_tests/snippets/builtin_str.py:186:69    - Unknown word (yetanother) -- eha
 extra_tests/snippets/builtin_str.py:192:10    - Unknown word (hoho)       -- "hoho",
 extra_tests/snippets/builtin_str.py:193:10    - Unknown word (haha)       -- "haha",
 extra_tests/snippets/builtin_str.py:195:10    - Unknown word (yetanother) -- "yetanother",
+extra_tests/snippets/builtin_str.py:1:6       - Unknown word (testutils)  -- from testutils import AssertRaises
 extra_tests/snippets/builtin_str.py:201:39    - Unknown word (dhoho)      -- x0cHallo\x1cHELLO\x1dhoho\x1ehaha\x85another\u
 extra_tests/snippets/builtin_str.py:201:47    - Unknown word (ehaha)      -- cHallo\x1cHELLO\x1dhoho\x1ehaha\x85another\u2028yetanother
 extra_tests/snippets/builtin_str.py:201:69    - Unknown word (yetanother) -- ehaha\x85another\u2028yetanother\u2029last\r\n.".splitlines
@@ -291,8 +576,10 @@ extra_tests/snippets/builtin_str.py:767:10    - Unknown word (foobarfoo)     -- 
 extra_tests/snippets/builtin_str.py:779:28    - Unknown word (fooa)          -- assert s.removesuffix("fooa") == s_ref
 extra_tests/snippets/builtin_str.py:99:10     - Unknown word (koki)       -- assert ["koki".center(i, "|") for
 extra_tests/snippets/builtin_str_encode.py:11:42     - Unknown word (estás)     -- UnicodeEncodeError, "¿como estás?".encode, "ascii")
+extra_tests/snippets/builtin_str_encode.py:1:6       - Unknown word (testutils)  -- from testutils import assert_raises
 extra_tests/snippets/builtin_str_encode.py:21:25     - Unknown word (𝕐𝕥)       -- round_trip("☢🐣 ᖇ𝓤𝕊тⓟ𝕐𝕥卄σ𝔫 ♬👣")
 extra_tests/snippets/builtin_str_encode.py:22:19     - Unknown word (ק𝔂t)       -- round_trip("💀👌 ק𝔂tℍⓞ𝓷 ３  🔥👤")
+extra_tests/snippets/builtin_str_subclass.py:1:6       - Unknown word (testutils)  -- from testutils import assert_raises
 extra_tests/snippets/builtin_str_unicode.py:26:40     - Unknown word (abcij)      -- encode("idna") == b"xn--abcij-zb5f"
 extra_tests/snippets/builtin_str_unicode.py:31:48     - Unknown word (pythn)      -- encode("idna") == b"xn--pythn-mua.org"
 extra_tests/snippets/builtin_str_unicode.py:32:49     - Unknown word (pythn)      -- encode("idna") == b"xn--pythn-mua.org."
@@ -310,22 +597,47 @@ extra_tests/snippets/builtin_str_unicode_slice.py:53:42     - Unknown word (אֱ
 extra_tests/snippets/builtin_str_unicode_slice.py:58:34     - Unknown word (אםהֱאּ)      -- hebrew_text[30:10:-3] == "אםהֱאּ "
 extra_tests/snippets/builtin_str_unicode_slice.py:60:37     - Unknown word (םיִהֹלֱא)    -- text[30:10:-1] == "א ,םיִהֹלֱא אָרָּב ,"
 extra_tests/snippets/builtin_str_unicode_slice.py:60:46     - Unknown word (אָרּ)        -- -1] == "א ,םיִהֹלֱא אָרָּב ,"
+extra_tests/snippets/builtin_tuple.py:1:6       - Unknown word (testutils)  -- from testutils import assert_raises
+extra_tests/snippets/builtin_type.py:293:9     - Unknown word (clsmethod)  -- def clsmethod(cls):
 extra_tests/snippets/builtin_type.py:297:9     - Unknown word (stmethod)   -- def stmethod():
+extra_tests/snippets/builtin_type.py:315:25    - Unknown word (clsmethod)  -- assert MyTypeWithMethod.clsmethod.__name__ == "clsmethod
+extra_tests/snippets/builtin_type.py:315:48    - Unknown word (clsmethod)  -- clsmethod.__name__ == "clsmethod"
+extra_tests/snippets/builtin_type.py:316:27    - Unknown word (clsmethod)  -- assert MyTypeWithMethod().clsmethod.__name__ == "clsmethod
+extra_tests/snippets/builtin_type.py:316:50    - Unknown word (clsmethod)  -- clsmethod.__name__ == "clsmethod"
 extra_tests/snippets/builtin_type.py:317:25    - Unknown word (stmethod)   -- assert MyTypeWithMethod.stmethod.__name__ == "stmethod
 extra_tests/snippets/builtin_type.py:317:47    - Unknown word (stmethod)   -- stmethod.__name__ == "stmethod"
 extra_tests/snippets/builtin_type.py:318:27    - Unknown word (stmethod)   -- assert MyTypeWithMethod().stmethod.__name__ == "stmethod
 extra_tests/snippets/builtin_type.py:318:49    - Unknown word (stmethod)   -- stmethod.__name__ == "stmethod"
 extra_tests/snippets/builtin_type.py:356:3     - Unknown word (Regresesion) -- # Regresesion to
+extra_tests/snippets/builtin_type.py:3:6       - Unknown word (testutils)  -- from testutils import assert_raises
+extra_tests/snippets/builtins_module.py:1:6       - Unknown word (testutils)  -- from testutils import assert_raises
+extra_tests/snippets/example_interactive.py:25:53     - Unknown word (NEWLOCALS)  -- int) # 'OPTIMIZED, NEWLOCALS, NOFREE'
+extra_tests/snippets/example_interactive.py:25:64     - Unknown word (NOFREE)     -- OPTIMIZED, NEWLOCALS, NOFREE'
 extra_tests/snippets/example_interactive.py:28:16     - Unknown word (lnotab)     -- # assert c2.co_lnotab == 0, c2.co_lnotab
 extra_tests/snippets/example_interactive.py:28:35     - Unknown word (lnotab)     -- co_lnotab == 0, c2.co_lnotab # b'\x00\x01' # Line
+extra_tests/snippets/forbidden_instantiation.py:17:6      - Unknown word (testutils)  -- from testutils import assert_raises
+extra_tests/snippets/forbidden_instantiation.py:41:1      - Unknown word (reviter)    -- reviter_types = [list, dict
+extra_tests/snippets/forbidden_instantiation.py:60:12     - Unknown word (reviter)    -- for typ in reviter_types:
+extra_tests/snippets/import.py:75:6      - Unknown word (testutils)  -- from testutils import assert_raises
 extra_tests/snippets/intro/3.1.2.5.py:1:9       - Unknown word (unununium)  -- assert "unununium" == 3 * "un" + "ium
+extra_tests/snippets/operator_arithmetic.py:1:6       - Unknown word (testutils)  -- from testutils import assert_raises
+extra_tests/snippets/operator_comparison.py:1:6       - Unknown word (testutils)  -- from testutils import assert_raises
+extra_tests/snippets/operator_div.py:1:6       - Unknown word (testutils)  -- from testutils import assert_raises
+extra_tests/snippets/operator_membership.py:1:6       - Unknown word (testutils)  -- from testutils import assert_raises
 extra_tests/snippets/protocol_index_bad.py:17:9      - Unknown word (setslice)   -- def run_setslice():
 extra_tests/snippets/protocol_index_bad.py:25:9      - Unknown word (delslice)   -- def run_delslice():
 extra_tests/snippets/protocol_index_bad.py:34:9      - Unknown word (setslice)   -- run_setslice()
 extra_tests/snippets/protocol_index_bad.py:35:9      - Unknown word (delslice)   -- run_delslice()
+extra_tests/snippets/protocol_index_bad.py:6:6       - Unknown word (testutils)  -- from testutils import assert_raises
+extra_tests/snippets/protocol_iterable.py:1:6       - Unknown word (testutils)  -- from testutils import assert_raises
+extra_tests/snippets/recursion.py:1:6       - Unknown word (testutils)  -- from testutils import assert_raises
+extra_tests/snippets/stdlib_abc.py:3:6       - Unknown word (testutils)  -- from testutils import assert_raises
+extra_tests/snippets/stdlib_abc_number.py:1:6       - Unknown word (testutils)  -- from testutils import assert_raises
 extra_tests/snippets/stdlib_array.py:125:3     - Unknown word (teset)      -- # teset array.__contains__
+extra_tests/snippets/stdlib_array.py:4:6       - Unknown word (testutils)  -- from testutils import assert_raises
 extra_tests/snippets/stdlib_binascii.py:18:3      - Unknown word (unhexlify)  -- # unhexlify tests
 extra_tests/snippets/stdlib_binascii.py:19:15     - Unknown word (unhexlify)  -- uh = binascii.unhexlify
+extra_tests/snippets/stdlib_binascii.py:3:6       - Unknown word (testutils)  -- from testutils import assert_equal
 extra_tests/snippets/stdlib_binascii.py:47:33     - Unknown word (Ghvbg)      -- equal(dec_b64(b"UnVzdFB5dGhvbg==\n"), b"RustPython
 extra_tests/snippets/stdlib_binascii.py:50:18     - Unknown word (𝕐𝕥)       -- "☢🐣 ᖇ𝓤𝕊тⓟ𝕐𝕥卄σ𝔫 ♬👣".encode(),
 extra_tests/snippets/stdlib_binascii.py:5:3       - Unknown word (hexlify)    -- # hexlify tests
@@ -334,10 +646,30 @@ extra_tests/snippets/stdlib_collections_deque.py:10:9      - Unknown word (klass
 extra_tests/snippets/stdlib_collections_deque.py:18:5      - Unknown word (klass)      -- klass = type(iter(deque()
 extra_tests/snippets/stdlib_collections_deque.py:23:17     - Unknown word (klass)      -- d = klass(deque(s), i)
 extra_tests/snippets/stdlib_collections_deque.py:29:17     - Unknown word (klass)      -- d = klass(deque(s), i)
+extra_tests/snippets/stdlib_collections_deque.py:4:6       - Unknown word (testutils)  -- from testutils import assert_raises
 extra_tests/snippets/stdlib_collections_deque.py:8:5       - Unknown word (klass)      -- klass = type(iter(deque()
+extra_tests/snippets/stdlib_csv.py:3:6       - Unknown word (testutils)  -- from testutils import assert_raises
+extra_tests/snippets/stdlib_ctypes.py:250:9     - Unknown word (winmode)    -- winmode=None,
 extra_tests/snippets/stdlib_ctypes.py:25:14     - Unknown word (PYTHONAPI)  -- FUNCFLAG_PYTHONAPI as _FUNCFLAG_PYTHONAPI
 extra_tests/snippets/stdlib_ctypes.py:25:37     - Unknown word (PYTHONAPI)  -- PYTHONAPI as _FUNCFLAG_PYTHONAPI,
 extra_tests/snippets/stdlib_ctypes.py:265:29    - Unknown word (RTLD)       -- mode |= _os.RTLD_MEMBER | _os.RTLD_NOW
+extra_tests/snippets/stdlib_ctypes.py:267:16    - Unknown word (winmode)    -- if winmode is not None:
+extra_tests/snippets/stdlib_ctypes.py:268:24    - Unknown word (winmode)    -- mode = winmode
+extra_tests/snippets/stdlib_ctypes.py:274:38    - Unknown word (getfullpathname) -- self._name = nt._getfullpathname(self._name)
+extra_tests/snippets/stdlib_ctypes.py:311:24    - Unknown word (dlltype)         -- def __init__(self, dlltype):
+extra_tests/snippets/stdlib_ctypes.py:312:15    - Unknown word (dlltype)         -- self._dlltype = dlltype
+extra_tests/snippets/stdlib_ctypes.py:312:25    - Unknown word (dlltype)         -- self._dlltype = dlltype
+extra_tests/snippets/stdlib_ctypes.py:318:25    - Unknown word (dlltype)         -- dll = self._dlltype(name)
+extra_tests/snippets/stdlib_ctypes.py:328:22    - Unknown word (dlltype)         -- return self._dlltype(name)
+extra_tests/snippets/stdlib_ctypes.py:44:9      - Unknown word (buftype)    -- buftype = c_char.__mul__(size
+extra_tests/snippets/stdlib_ctypes.py:45:11     - Unknown word (buftype)    -- # buftype = c_char * size
+extra_tests/snippets/stdlib_ctypes.py:46:15     - Unknown word (buftype)    -- buf = buftype()
+extra_tests/snippets/stdlib_ctypes.py:51:9      - Unknown word (buftype)    -- buftype = c_char.__mul__(init
+extra_tests/snippets/stdlib_ctypes.py:52:11     - Unknown word (buftype)    -- # buftype = c_char * init
+extra_tests/snippets/stdlib_ctypes.py:58:22     - Unknown word (typecode)   -- def _check_size(typ, typecode=None):
+extra_tests/snippets/stdlib_ctypes.py:63:8      - Unknown word (typecode)   -- if typecode is None:
+extra_tests/snippets/stdlib_ctypes.py:65:9      - Unknown word (typecode)   -- typecode = typ._type_
+extra_tests/snippets/stdlib_ctypes.py:66:46     - Unknown word (typecode)   -- sizeof(typ), calcsize(typecode)
 extra_tests/snippets/stdlib_datetime.py:1050:13   - Unknown word (todayagain) -- todayagain = self.theclass.fromtimestamp
 extra_tests/snippets/stdlib_datetime.py:1051:25   - Unknown word (todayagain) -- if today == todayagain:
 extra_tests/snippets/stdlib_datetime.py:1067:21   - Unknown word (todayagain) -- if today != todayagain:
@@ -346,12 +678,26 @@ extra_tests/snippets/stdlib_datetime.py:1165:20   - Unknown word (excercise)  --
 extra_tests/snippets/stdlib_datetime.py:1219:9    - Unknown word (justasbig)  -- justasbig = timedelta(0, 0, n
 extra_tests/snippets/stdlib_datetime.py:1220:27   - Unknown word (justasbig)  -- assert_equal(big, justasbig)
 extra_tests/snippets/stdlib_datetime.py:1282:23   - Unknown word (OTHERSTUFF) -- for badarg in OTHERSTUFF:
+extra_tests/snippets/stdlib_datetime.py:1372:19   - Unknown word (newval)     -- for name, newval in (("year", 2),
+extra_tests/snippets/stdlib_datetime.py:1375:13   - Unknown word (newargs)    -- newargs = args[:]
+extra_tests/snippets/stdlib_datetime.py:1376:13   - Unknown word (newargs)    -- newargs[i] = newval
+extra_tests/snippets/stdlib_datetime.py:1376:26   - Unknown word (newval)     -- newargs[i] = newval
+extra_tests/snippets/stdlib_datetime.py:1377:29   - Unknown word (newargs)    -- expected = cls(*newargs)
+extra_tests/snippets/stdlib_datetime.py:1378:41   - Unknown word (newval)     -- base.replace(**{name: newval})
 extra_tests/snippets/stdlib_datetime.py:1398:17   - Unknown word (newmeth)    -- def newmeth(self, start):
 extra_tests/snippets/stdlib_datetime.py:1410:26   - Unknown word (newmeth)    -- assert_equal(dt2.newmeth(-7), dt1.year + dt1
+extra_tests/snippets/stdlib_datetime.py:141:3     - Unknown word (unsupport)  -- # unsupport format in strptime returns
+extra_tests/snippets/stdlib_datetime.py:14:6      - Unknown word (testutils)  -- from testutils import (
 extra_tests/snippets/stdlib_datetime.py:159:14    - Unknown word (ACDT)       -- self.ACDT = timezone(timedelta
 extra_tests/snippets/stdlib_datetime.py:159:53    - Unknown word (ACDT)       -- timedelta(hours=9.5), 'ACDT')
 extra_tests/snippets/stdlib_datetime.py:164:25    - Unknown word (ACDT)       -- for tz in [self.ACDT, self.EST, timezone
 extra_tests/snippets/stdlib_datetime.py:170:25    - Unknown word (ACDT)       -- for tz in [self.ACDT, self.EST, timezone
+extra_tests/snippets/stdlib_datetime.py:173:13    - Unknown word (tzrep)      -- tzrep = repr(tz)
+extra_tests/snippets/stdlib_datetime.py:174:35    - Unknown word (tzrep)      -- assert_equal(tz, eval(tzrep))
+extra_tests/snippets/stdlib_datetime.py:1757:13   - Unknown word (newargs)    -- newargs = args[:]
+extra_tests/snippets/stdlib_datetime.py:1758:13   - Unknown word (newargs)    -- newargs[i] = args[i] + 1
+extra_tests/snippets/stdlib_datetime.py:1982:19   - Unknown word (newval)     -- for name, newval in (("year", 2),
+extra_tests/snippets/stdlib_datetime.py:1990:26   - Unknown word (newval)     -- newargs[i] = newval
 extra_tests/snippets/stdlib_datetime.py:2022:9    - Unknown word (alsobog)    -- alsobog = AlsoBogus()
 extra_tests/snippets/stdlib_datetime.py:2023:50   - Unknown word (alsobog)    -- ValueError, dt.astimezone, alsobog) # also naive
 extra_tests/snippets/stdlib_datetime.py:2037:17   - Unknown word (newmeth)    -- def newmeth(self, start):
@@ -360,6 +706,9 @@ extra_tests/snippets/stdlib_datetime.py:2125:23   - Unknown word (OTHERSTUFF) --
 extra_tests/snippets/stdlib_datetime.py:2341:17   - Unknown word (newmeth)    -- def newmeth(self, start):
 extra_tests/snippets/stdlib_datetime.py:235:35    - Unknown word (ACDT)       -- tz in [self.EST, self.ACDT, Eastern]:
 extra_tests/snippets/stdlib_datetime.py:2363:23   - Unknown word (atribute)   -- theclass as a class atribute, and theclass(1, 1,
+extra_tests/snippets/stdlib_datetime.py:236:13    - Unknown word (utctime)    -- utctime = self.DT.replace(tzinfo
+extra_tests/snippets/stdlib_datetime.py:237:32    - Unknown word (utctime)    -- local = tz.fromutc(utctime)
+extra_tests/snippets/stdlib_datetime.py:238:34    - Unknown word (utctime)    -- assert_equal(local - utctime, tz.utcoffset(local
 extra_tests/snippets/stdlib_datetime.py:2420:17   - Unknown word (aofs)       -- aofs = abs(offset)
 extra_tests/snippets/stdlib_datetime.py:2421:31   - Unknown word (aofs)       -- h, m = divmod(aofs, 60)
 extra_tests/snippets/stdlib_datetime.py:2480:55   - Unknown word (comparands) -- gets ignored if the comparands have
@@ -392,80 +741,155 @@ extra_tests/snippets/stdlib_datetime.py:2967:9    - Unknown word (nowawareplus) 
 extra_tests/snippets/stdlib_datetime.py:2968:23   - Unknown word (nowawareplus) -- self.assertIs(nowawareplus2.tzinfo, tz55)
 extra_tests/snippets/stdlib_datetime.py:2969:22   - Unknown word (nowawareplus) -- assert_equal(nowawareplus, nowawareplus2)
 extra_tests/snippets/stdlib_datetime.py:2969:36   - Unknown word (nowawareplus) -- equal(nowawareplus, nowawareplus2)
-extra_tests/snippets/stdlib_datetime.py:3029:13   - Unknown word (weirdtz)      -- for weirdtz in [FixedOffset(timedelta
-extra_tests/snippets/stdlib_datetime.py:3029:71   - Unknown word (weirdtz)      -- hours=15, minutes=58), "weirdtz", 0),
-extra_tests/snippets/stdlib_datetime.py:3030:68   - Unknown word (weirdtz)      -- hours=15, minutes=58), "weirdtz"),]:
-extra_tests/snippets/stdlib_datetime.py:3032:36   - Unknown word (weirdtz)      -- now = datetime.now(weirdtz)
-extra_tests/snippets/stdlib_datetime.py:3033:43   - Unknown word (weirdtz)      -- assertIs(now.tzinfo, weirdtz)
-extra_tests/snippets/stdlib_datetime.py:3151:15   - Unknown word (UOFS)         -- class UOFS(DST):
-extra_tests/snippets/stdlib_datetime.py:3152:32   - Unknown word (uofs)         -- def __init__(self, uofs, dofs=None):
-extra_tests/snippets/stdlib_datetime.py:3152:38   - Unknown word (dofs)         -- _init__(self, uofs, dofs=None):
-extra_tests/snippets/stdlib_datetime.py:3153:36   - Unknown word (dofs)         -- DST.__init__(self, dofs)
-extra_tests/snippets/stdlib_datetime.py:3154:22   - Unknown word (uofs)         -- self.uofs = timedelta(minutes
-extra_tests/snippets/stdlib_datetime.py:3154:47   - Unknown word (uofs)         -- = timedelta(minutes=uofs)
-extra_tests/snippets/stdlib_datetime.py:3156:29   - Unknown word (uofs)         -- return self.uofs
-extra_tests/snippets/stdlib_datetime.py:3159:53   - Unknown word (UOFS)         -- 20, 30, 40, tzinfo=UOFS(-53, dstvalue))
-extra_tests/snippets/stdlib_datetime.py:3180:15   - Unknown word (NOFS)         -- class NOFS(DST):
-extra_tests/snippets/stdlib_datetime.py:3183:49   - Unknown word (NOFS)         -- 20, 30, 40, tzinfo=NOFS())
-extra_tests/snippets/stdlib_datetime.py:3204:52   - Unknown word (UOFS)         -- 1, 0, 0, 37, tzinfo=UOFS(1439))
-extra_tests/snippets/stdlib_datetime.py:3208:64   - Unknown word (UOFS)         -- 37, 999999, tzinfo=UOFS(-1439))
-extra_tests/snippets/stdlib_datetime.py:3229:17   - Unknown word (ofsstr)       -- ofsstr = ofs is not None and
-extra_tests/snippets/stdlib_datetime.py:3230:37   - Unknown word (ofsstr)       -- tailstr = timestr + ofsstr
-extra_tests/snippets/stdlib_datetime.py:3447:31   - Unknown word (reprname)     -- init__(self, hours, reprname, stdname, dstname):
-extra_tests/snippets/stdlib_datetime.py:3449:14   - Unknown word (reprname)     -- self.reprname = reprname
-extra_tests/snippets/stdlib_datetime.py:3449:25   - Unknown word (reprname)     -- self.reprname = reprname
-extra_tests/snippets/stdlib_datetime.py:3454:21   - Unknown word (reprname)     -- return self.reprname
-extra_tests/snippets/stdlib_datetime.py:3498:5    - Unknown word (dston)        -- dston = datetime(2002, 4,
-extra_tests/snippets/stdlib_datetime.py:3504:40   - Unknown word (dston)        -- heckinside(self, dt, tz, utc, dston, dstoff):
-extra_tests/snippets/stdlib_datetime.py:3510:9    - Unknown word (asutc)        -- asutc = dt.astimezone(utc
-extra_tests/snippets/stdlib_datetime.py:3511:26   - Unknown word (asutc)        -- there_and_back = asutc.astimezone(tz)
-extra_tests/snippets/stdlib_datetime.py:3521:25   - Unknown word (dston)        -- if dt.date() == dston.date() and dt.hour
-extra_tests/snippets/stdlib_datetime.py:3543:24   - Unknown word (asutc)        -- nexthour_utc = asutc + HOUR
-extra_tests/snippets/stdlib_datetime.py:3543:9    - Unknown word (nexthour)     -- nexthour_utc = asutc + HOUR
-extra_tests/snippets/stdlib_datetime.py:3544:23   - Unknown word (nexthour)     -- nexthour_tz = nexthour_utc.astimezone(tz)
-extra_tests/snippets/stdlib_datetime.py:3544:9    - Unknown word (nexthour)     -- nexthour_tz = nexthour_utc.astimezone
-extra_tests/snippets/stdlib_datetime.py:3548:26   - Unknown word (nexthour)     -- assert_equal(nexthour_tz, dt.replace(hour
-extra_tests/snippets/stdlib_datetime.py:3549:13   - Unknown word (nexthour)     -- nexthour_utc += HOUR
-extra_tests/snippets/stdlib_datetime.py:3563:9    - Unknown word (asutc)        -- asutc = dt.astimezone(utc
-extra_tests/snippets/stdlib_datetime.py:3564:26   - Unknown word (asutc)        -- there_and_back = asutc.astimezone(tz)
-extra_tests/snippets/stdlib_datetime.py:3568:22   - Unknown word (dston)        -- dston = self.dston.replace(tzinfo=tz)
-extra_tests/snippets/stdlib_datetime.py:3568:9    - Unknown word (dston)        -- dston = self.dston.replace
-extra_tests/snippets/stdlib_datetime.py:3616:9    - Unknown word (ninewest)     -- ninewest = FixedOffset(-9*60
-extra_tests/snippets/stdlib_datetime.py:3617:44   - Unknown word (ninewest)     -- fourback.replace(tzinfo=ninewest)
-extra_tests/snippets/stdlib_datetime.py:3631:9    - Unknown word (sixutc)       -- sixutc = self.dston.replace
-extra_tests/snippets/stdlib_datetime.py:3636:15   - Unknown word (sixutc)       -- got = sixutc.astimezone(Eastern)
-extra_tests/snippets/stdlib_datetime.py:3653:17   - Unknown word (asutcbase)    -- asutcbase = asutc.replace(tzinfo
-extra_tests/snippets/stdlib_datetime.py:3654:21   - Unknown word (tzhour)       -- for tzhour in (0, 1, 1, 2):
-extra_tests/snippets/stdlib_datetime.py:3655:61   - Unknown word (tzhour)       -- dstoff.replace(hour=tzhour)
-extra_tests/snippets/stdlib_datetime.py:3658:33   - Unknown word (asutcbase)    -- asutc = asutcbase.replace(minute=minute
-extra_tests/snippets/stdlib_datetime.py:3659:25   - Unknown word (astz)         -- astz = asutc.astimezone(tz
-extra_tests/snippets/stdlib_datetime.py:3660:38   - Unknown word (astz)         -- assert_equal(astz.replace(tzinfo=None
-extra_tests/snippets/stdlib_datetime.py:3661:21   - Unknown word (asutcbase)    -- asutcbase += HOUR
-extra_tests/snippets/stdlib_datetime.py:3674:15   - Unknown word (notok)        -- class notok(ok):
-extra_tests/snippets/stdlib_datetime.py:3676:51   - Unknown word (notok)        -- ValueError, now.astimezone, notok())
-extra_tests/snippets/stdlib_datetime.py:3682:22   - Unknown word (notok)        -- class tricky_notok(ok):
-extra_tests/snippets/stdlib_datetime.py:3689:57   - Unknown word (notok)        -- dt.astimezone, tricky_notok())
-extra_tests/snippets/stdlib_datetime.py:3705:62   - Unknown word (FEDT)         -- FEastern", "FEST", "FEDT")
-extra_tests/snippets/stdlib_datetime.py:3775:3    - Unknown word (Neverthelss)  -- # Neverthelss, comparison should work
+extra_tests/snippets/stdlib_datetime.py:296:27    - Unknown word (theclass)   -- Subclasses must define 'theclass', and theclass(1, 1
+extra_tests/snippets/stdlib_datetime.py:296:42    - Unknown word (theclass)   -- define 'theclass', and theclass(1, 1, 1) must be a
+extra_tests/snippets/stdlib_datetime.py:2980:59   - Unknown word (randomtimezone) -- randrange(-1439, 1440), "randomtimezone")
+extra_tests/snippets/stdlib_datetime.py:299:5     - Unknown word (theclass)   -- for theclass in timedelta, date,
+extra_tests/snippets/stdlib_datetime.py:301:10    - Unknown word (theclass)   -- me = theclass(1, 1, 1)
+extra_tests/snippets/stdlib_datetime.py:3029:13   - Unknown word (weirdtz)        -- for weirdtz in [FixedOffset(timedelta
+extra_tests/snippets/stdlib_datetime.py:3029:71   - Unknown word (weirdtz)        -- hours=15, minutes=58), "weirdtz", 0),
+extra_tests/snippets/stdlib_datetime.py:3030:68   - Unknown word (weirdtz)        -- hours=15, minutes=58), "weirdtz"),]:
+extra_tests/snippets/stdlib_datetime.py:3032:36   - Unknown word (weirdtz)        -- now = datetime.now(weirdtz)
+extra_tests/snippets/stdlib_datetime.py:3033:43   - Unknown word (weirdtz)        -- assertIs(now.tzinfo, weirdtz)
+extra_tests/snippets/stdlib_datetime.py:3068:9    - Unknown word (utcdatetime)    -- utcdatetime = datetime.utcfromtimestamp
+extra_tests/snippets/stdlib_datetime.py:3075:20   - Unknown word (utcdatetime)    -- expected = utcdatetime + utcoffset
+extra_tests/snippets/stdlib_datetime.py:3105:32   - Unknown word (dstvalue)       -- def __init__(self, dstvalue):
+extra_tests/snippets/stdlib_datetime.py:3106:31   - Unknown word (dstvalue)       -- if isinstance(dstvalue, int):
+extra_tests/snippets/stdlib_datetime.py:3107:21   - Unknown word (dstvalue)       -- dstvalue = timedelta(minutes
+extra_tests/snippets/stdlib_datetime.py:3107:50   - Unknown word (dstvalue)       -- = timedelta(minutes=dstvalue)
+extra_tests/snippets/stdlib_datetime.py:3108:22   - Unknown word (dstvalue)       -- self.dstvalue = dstvalue
+extra_tests/snippets/stdlib_datetime.py:312:10    - Unknown word (theclass)   -- me = theclass(1, 1, 1)
+extra_tests/snippets/stdlib_datetime.py:3151:15   - Unknown word (UOFS)           -- class UOFS(DST):
+extra_tests/snippets/stdlib_datetime.py:3152:32   - Unknown word (uofs)           -- def __init__(self, uofs, dofs=None):
+extra_tests/snippets/stdlib_datetime.py:3152:38   - Unknown word (dofs)           -- _init__(self, uofs, dofs=None):
+extra_tests/snippets/stdlib_datetime.py:3153:36   - Unknown word (dofs)           -- DST.__init__(self, dofs)
+extra_tests/snippets/stdlib_datetime.py:3154:22   - Unknown word (uofs)           -- self.uofs = timedelta(minutes
+extra_tests/snippets/stdlib_datetime.py:3154:47   - Unknown word (uofs)           -- = timedelta(minutes=uofs)
+extra_tests/snippets/stdlib_datetime.py:3156:29   - Unknown word (uofs)           -- return self.uofs
+extra_tests/snippets/stdlib_datetime.py:3159:53   - Unknown word (UOFS)           -- 20, 30, 40, tzinfo=UOFS(-53, dstvalue))
+extra_tests/snippets/stdlib_datetime.py:3180:15   - Unknown word (NOFS)           -- class NOFS(DST):
+extra_tests/snippets/stdlib_datetime.py:3183:49   - Unknown word (NOFS)           -- 20, 30, 40, tzinfo=NOFS())
+extra_tests/snippets/stdlib_datetime.py:3204:52   - Unknown word (UOFS)           -- 1, 0, 0, 37, tzinfo=UOFS(1439))
+extra_tests/snippets/stdlib_datetime.py:3208:64   - Unknown word (UOFS)           -- 37, 999999, tzinfo=UOFS(-1439))
+extra_tests/snippets/stdlib_datetime.py:3228:17   - Unknown word (timestr)        -- timestr = '04:05:59' + (us and
+extra_tests/snippets/stdlib_datetime.py:3229:17   - Unknown word (ofsstr)         -- ofsstr = ofs is not None and
+extra_tests/snippets/stdlib_datetime.py:3230:17   - Unknown word (tailstr)        -- tailstr = timestr + ofsstr
+extra_tests/snippets/stdlib_datetime.py:3230:27   - Unknown word (timestr)        -- tailstr = timestr + ofsstr
+extra_tests/snippets/stdlib_datetime.py:3230:37   - Unknown word (ofsstr)         -- tailstr = timestr + ofsstr
+extra_tests/snippets/stdlib_datetime.py:3232:51   - Unknown word (tailstr)        -- iso, datestr + 'T' + tailstr)
+extra_tests/snippets/stdlib_datetime.py:3234:64   - Unknown word (tailstr)        -- k'), datestr + 'k' + tailstr)
+extra_tests/snippets/stdlib_datetime.py:3235:74   - Unknown word (tailstr)        -- datestr + '\u1234' + tailstr)
+extra_tests/snippets/stdlib_datetime.py:3236:54   - Unknown word (tailstr)        -- d), datestr + ' ' + tailstr)
+extra_tests/snippets/stdlib_datetime.py:3279:9    - Unknown word (fnone)          -- fnone = FixedOffset(None,
+extra_tests/snippets/stdlib_datetime.py:3286:50   - Unknown word (fnone)          -- ValueError, dt.astimezone, fnone)
+extra_tests/snippets/stdlib_datetime.py:3349:53   - Unknown word (utcoffsets)     -- members are distinct, utcoffsets aren't
+extra_tests/snippets/stdlib_datetime.py:3399:23   - Unknown word (datetimetz)     -- def test_subclass_datetimetz(self):
+extra_tests/snippets/stdlib_datetime.py:3438:1    - Unknown word (DSTSTART)       -- DSTSTART = datetime(1, 4, 1,
+extra_tests/snippets/stdlib_datetime.py:3443:1    - Unknown word (DSTEND)         -- DSTEND = datetime(1, 10, 2
+extra_tests/snippets/stdlib_datetime.py:3447:31   - Unknown word (reprname)       -- init__(self, hours, reprname, stdname, dstname):
+extra_tests/snippets/stdlib_datetime.py:3447:50   - Unknown word (dstname)        -- reprname, stdname, dstname):
+extra_tests/snippets/stdlib_datetime.py:3448:14   - Unknown word (stdoffset)      -- self.stdoffset = timedelta(hours=hours
+extra_tests/snippets/stdlib_datetime.py:3449:14   - Unknown word (reprname)       -- self.reprname = reprname
+extra_tests/snippets/stdlib_datetime.py:3449:25   - Unknown word (reprname)       -- self.reprname = reprname
+extra_tests/snippets/stdlib_datetime.py:3451:14   - Unknown word (dstname)        -- self.dstname = dstname
+extra_tests/snippets/stdlib_datetime.py:3451:24   - Unknown word (dstname)        -- self.dstname = dstname
+extra_tests/snippets/stdlib_datetime.py:3454:21   - Unknown word (reprname)       -- return self.reprname
+extra_tests/snippets/stdlib_datetime.py:3458:25   - Unknown word (dstname)        -- return self.dstname
+extra_tests/snippets/stdlib_datetime.py:3463:21   - Unknown word (stdoffset)      -- return self.stdoffset + self.dst(dt)
+extra_tests/snippets/stdlib_datetime.py:3473:42   - Unknown word (DSTSTART)       -- first_sunday_on_or_after(DSTSTART.replace(year=dt.year
+extra_tests/snippets/stdlib_datetime.py:3477:40   - Unknown word (DSTEND)         -- first_sunday_on_or_after(DSTEND.replace(year=dt.year
+extra_tests/snippets/stdlib_datetime.py:3498:5    - Unknown word (dston)          -- dston = datetime(2002, 4,
+extra_tests/snippets/stdlib_datetime.py:3499:5    - Unknown word (dstoff)         -- dstoff = datetime(2002, 10
+extra_tests/snippets/stdlib_datetime.py:3504:40   - Unknown word (dston)          -- heckinside(self, dt, tz, utc, dston, dstoff):
+extra_tests/snippets/stdlib_datetime.py:3504:47   - Unknown word (dstoff)         -- dt, tz, utc, dston, dstoff):
+extra_tests/snippets/stdlib_datetime.py:3504:9    - Unknown word (checkinside)    -- def checkinside(self, dt, tz, utc, dston
+extra_tests/snippets/stdlib_datetime.py:3510:9    - Unknown word (asutc)          -- asutc = dt.astimezone(utc
+extra_tests/snippets/stdlib_datetime.py:3511:26   - Unknown word (asutc)          -- there_and_back = asutc.astimezone(tz)
+extra_tests/snippets/stdlib_datetime.py:3521:25   - Unknown word (dston)          -- if dt.date() == dston.date() and dt.hour
+extra_tests/snippets/stdlib_datetime.py:3543:24   - Unknown word (asutc)          -- nexthour_utc = asutc + HOUR
+extra_tests/snippets/stdlib_datetime.py:3543:9    - Unknown word (nexthour)       -- nexthour_utc = asutc + HOUR
+extra_tests/snippets/stdlib_datetime.py:3544:23   - Unknown word (nexthour)       -- nexthour_tz = nexthour_utc.astimezone(tz)
+extra_tests/snippets/stdlib_datetime.py:3544:9    - Unknown word (nexthour)       -- nexthour_tz = nexthour_utc.astimezone
+extra_tests/snippets/stdlib_datetime.py:3545:25   - Unknown word (dstoff)         -- if dt.date() == dstoff.date() and dt.hour
+extra_tests/snippets/stdlib_datetime.py:3548:26   - Unknown word (nexthour)       -- assert_equal(nexthour_tz, dt.replace(hour
+extra_tests/snippets/stdlib_datetime.py:3549:13   - Unknown word (nexthour)       -- nexthour_utc += HOUR
+extra_tests/snippets/stdlib_datetime.py:3556:9    - Unknown word (checkoutside)   -- def checkoutside(self, dt, tz, utc):
+extra_tests/snippets/stdlib_datetime.py:3563:9    - Unknown word (asutc)          -- asutc = dt.astimezone(utc
+extra_tests/snippets/stdlib_datetime.py:3564:26   - Unknown word (asutc)          -- there_and_back = asutc.astimezone(tz)
+extra_tests/snippets/stdlib_datetime.py:3568:22   - Unknown word (dston)          -- dston = self.dston.replace(tzinfo=tz)
+extra_tests/snippets/stdlib_datetime.py:3568:9    - Unknown word (dston)          -- dston = self.dston.replace
+extra_tests/snippets/stdlib_datetime.py:3574:23   - Unknown word (dstoff)         -- dstoff = self.dstoff.replace(tzinfo=tz)
+extra_tests/snippets/stdlib_datetime.py:3574:9    - Unknown word (dstoff)         -- dstoff = self.dstoff.replace
+extra_tests/snippets/stdlib_datetime.py:3581:18   - Unknown word (checkinside)    -- self.checkinside(dston, tz, utc, dston
+extra_tests/snippets/stdlib_datetime.py:3583:22   - Unknown word (checkinside)   -- self.checkinside(during, tz, utc, dston
+extra_tests/snippets/stdlib_datetime.py:3585:18   - Unknown word (checkoutside)  -- self.checkoutside(dstoff, tz, utc)
+extra_tests/snippets/stdlib_datetime.py:3587:22   - Unknown word (checkoutside)  -- self.checkoutside(outside, tz, utc)
+extra_tests/snippets/stdlib_datetime.py:3590:46   - Unknown word (endcases)      -- name of this test, the endcases are excruciating.
+extra_tests/snippets/stdlib_datetime.py:3615:9    - Unknown word (fourback)      -- fourback = self.dston - timedelta
+extra_tests/snippets/stdlib_datetime.py:3616:9    - Unknown word (ninewest)      -- ninewest = FixedOffset(-9*60
+extra_tests/snippets/stdlib_datetime.py:3617:20   - Unknown word (fourback)      -- fourback = fourback.replace(tzinfo=ninewest
+extra_tests/snippets/stdlib_datetime.py:3617:44   - Unknown word (ninewest)      -- fourback.replace(tzinfo=ninewest)
+extra_tests/snippets/stdlib_datetime.py:3617:9    - Unknown word (fourback)      -- fourback = fourback.replace(tzinfo
+extra_tests/snippets/stdlib_datetime.py:3626:15   - Unknown word (fourback)      -- got = fourback.astimezone(Eastern)
+extra_tests/snippets/stdlib_datetime.py:3631:9    - Unknown word (sixutc)        -- sixutc = self.dston.replace
+extra_tests/snippets/stdlib_datetime.py:3636:15   - Unknown word (sixutc)        -- got = sixutc.astimezone(Eastern)
+extra_tests/snippets/stdlib_datetime.py:3653:17   - Unknown word (asutcbase)     -- asutcbase = asutc.replace(tzinfo
+extra_tests/snippets/stdlib_datetime.py:3654:21   - Unknown word (tzhour)        -- for tzhour in (0, 1, 1, 2):
+extra_tests/snippets/stdlib_datetime.py:3655:21   - Unknown word (expectedbase)  -- expectedbase = self.dstoff.replace
+extra_tests/snippets/stdlib_datetime.py:3655:61   - Unknown word (tzhour)        -- dstoff.replace(hour=tzhour)
+extra_tests/snippets/stdlib_datetime.py:3657:36   - Unknown word (expectedbase)  -- expected = expectedbase.replace(minute=minute
+extra_tests/snippets/stdlib_datetime.py:3658:33   - Unknown word (asutcbase)     -- asutc = asutcbase.replace(minute=minute
+extra_tests/snippets/stdlib_datetime.py:3659:25   - Unknown word (astz)          -- astz = asutc.astimezone(tz
+extra_tests/snippets/stdlib_datetime.py:3660:38   - Unknown word (astz)          -- assert_equal(astz.replace(tzinfo=None
+extra_tests/snippets/stdlib_datetime.py:3661:21   - Unknown word (asutcbase)     -- asutcbase += HOUR
+extra_tests/snippets/stdlib_datetime.py:3674:15   - Unknown word (notok)         -- class notok(ok):
+extra_tests/snippets/stdlib_datetime.py:3676:51   - Unknown word (notok)         -- ValueError, now.astimezone, notok())
+extra_tests/snippets/stdlib_datetime.py:3682:22   - Unknown word (notok)         -- class tricky_notok(ok):
+extra_tests/snippets/stdlib_datetime.py:3689:57   - Unknown word (notok)         -- dt.astimezone, tricky_notok())
+extra_tests/snippets/stdlib_datetime.py:3704:34   - Unknown word (stdoffset)     -- return dt + self.stdoffset
+extra_tests/snippets/stdlib_datetime.py:3705:62   - Unknown word (FEDT)          -- FEastern", "FEST", "FEDT")
+extra_tests/snippets/stdlib_datetime.py:3713:9    - Unknown word (fstart)        -- fstart = start.replace(tzinfo
+extra_tests/snippets/stdlib_datetime.py:3721:24   - Unknown word (fstart)        -- expected = fstart + FEastern.stdoffset
+extra_tests/snippets/stdlib_datetime.py:3721:42   - Unknown word (stdoffset)     -- = fstart + FEastern.stdoffset
+extra_tests/snippets/stdlib_datetime.py:3722:36   - Unknown word (fstart)        -- got = FEastern.fromutc(fstart)
+extra_tests/snippets/stdlib_datetime.py:3726:19   - Unknown word (fstart)        -- got = fstart.replace(tzinfo=utc_real
+extra_tests/snippets/stdlib_datetime.py:3730:13   - Unknown word (fstart)        -- fstart += HOUR
+extra_tests/snippets/stdlib_datetime.py:3740:42   - Unknown word (stdoffset)     -- = fstart + FEastern.stdoffset
+extra_tests/snippets/stdlib_datetime.py:3775:3    - Unknown word (Neverthelss)   -- # Neverthelss, comparison should work
 extra_tests/snippets/stdlib_datetime.py:516:13    - Unknown word (pickler)    -- for pickler, unpickler, proto in
 extra_tests/snippets/stdlib_datetime.py:516:22    - Unknown word (unpickler)  -- for pickler, unpickler, proto in pickle_choices
 extra_tests/snippets/stdlib_datetime.py:546:23    - Unknown word (OTHERSTUFF) -- for badarg in OTHERSTUFF:
+extra_tests/snippets/stdlib_datetime.py:71:38     - Unknown word (dstoffset)  -- self, offset, name, dstoffset=42):
 extra_tests/snippets/stdlib_datetime.py:733:9     - Unknown word (zerotd)     -- zerotd = timedelta(0)
 extra_tests/snippets/stdlib_datetime.py:734:54    - Unknown word (zerotd)     -- eroDivisionError, truediv, t, zerotd)
 extra_tests/snippets/stdlib_datetime.py:735:55    - Unknown word (zerotd)     -- roDivisionError, floordiv, t, zerotd)
+extra_tests/snippets/stdlib_datetime.py:74:23     - Unknown word (dstoffset)  -- if isinstance(dstoffset, int):
 extra_tests/snippets/stdlib_datetime.py:751:9     - Unknown word (zerotd)     -- zerotd = timedelta(0)
 extra_tests/snippets/stdlib_datetime.py:752:50    - Unknown word (zerotd)     -- ZeroDivisionError, mod, t, zerotd)
+extra_tests/snippets/stdlib_datetime.py:75:13     - Unknown word (dstoffset)  -- dstoffset = timedelta(minutes
+extra_tests/snippets/stdlib_datetime.py:75:43     - Unknown word (dstoffset)  -- = timedelta(minutes=dstoffset)
+extra_tests/snippets/stdlib_datetime.py:78:16     - Unknown word (dstoffset)  -- self.__dstoffset = dstoffset
 extra_tests/snippets/stdlib_datetime.py:848:13    - Unknown word (fromord)    -- fromord = self.theclass.fromordinal
 extra_tests/snippets/stdlib_datetime.py:849:29    - Unknown word (fromord)    -- assert_equal(d, fromord)
 extra_tests/snippets/stdlib_datetime.py:850:24    - Unknown word (fromord)    -- if hasattr(fromord, "hour"):
 extra_tests/snippets/stdlib_datetime.py:853:30    - Unknown word (fromord)    -- assert_equal(fromord.hour, 0)
 extra_tests/snippets/stdlib_datetime.py:854:30    - Unknown word (fromord)    -- assert_equal(fromord.minute, 0)
+extra_tests/snippets/stdlib_datetime.py:877:24    - Unknown word (maxday)     -- for month, maxday in zip(range(1, 13)
+extra_tests/snippets/stdlib_datetime.py:879:21    - Unknown word (maxday)     -- maxday += 1
+extra_tests/snippets/stdlib_datetime.py:880:37    - Unknown word (maxday)     -- for day in range(1, maxday+1):
 extra_tests/snippets/stdlib_datetime.py:889:9     - Unknown word (aord)       -- aord = a.toordinal()
 extra_tests/snippets/stdlib_datetime.py:890:27    - Unknown word (aord)       -- b = a.fromordinal(aord)
 extra_tests/snippets/stdlib_datetime.py:893:57    - Unknown word (aord)       -- lambda: a.fromordinal(aord - 1))
 extra_tests/snippets/stdlib_datetime.py:896:37    - Unknown word (aord)       -- equal(b.toordinal(), aord + 1)
 extra_tests/snippets/stdlib_datetime.py:897:51    - Unknown word (aord)       -- theclass.fromordinal(aord + 1))
+extra_tests/snippets/stdlib_dir_module.py:2:6       - Unknown word (testutils)  -- from testutils import assert_equal
+extra_tests/snippets/stdlib_functools.py:3:6       - Unknown word (testutils)  -- from testutils import assert_raises
 extra_tests/snippets/stdlib_hashlib.py:41:30     - Unknown word (fubar)      -- hashlib.new("blake2s", b"fubar")
+extra_tests/snippets/stdlib_io.py:39:5      - Unknown word (nres)       -- nres = fio.read(1)
+extra_tests/snippets/stdlib_io.py:40:16     - Unknown word (nres)       -- assert len(nres) == 1
+extra_tests/snippets/stdlib_io.py:41:5      - Unknown word (nres)       -- nres = fio.read(2)
+extra_tests/snippets/stdlib_io.py:42:16     - Unknown word (nres)       -- assert len(nres) == 2
+extra_tests/snippets/stdlib_io.py:4:6       - Unknown word (testutils)  -- from testutils import assert_raises
 extra_tests/snippets/stdlib_itertools.py:184:5     - Unknown word (underten)   -- def underten(x):
 extra_tests/snippets/stdlib_itertools.py:229:9     - Unknown word (underten)   -- it = tw(underten, [1, 3, 5, 20, 2, 4
 extra_tests/snippets/stdlib_itertools.py:232:10    - Unknown word (citertools) -- == b"citertools\ntakewhile\np0\n(c_
@@ -477,24 +901,35 @@ extra_tests/snippets/stdlib_itertools.py:240:18    - Unknown word (citertools) -
 extra_tests/snippets/stdlib_itertools.py:240:56    - Unknown word (nunderten)  -- ntakewhile\nq\x00c__main__\nunderten\nq\x01c__builtin__\niter
 extra_tests/snippets/stdlib_itertools.py:244:18    - Unknown word (citertools) -- == b"\x80\x03citertools\ntakewhile\nq\x00c_
 extra_tests/snippets/stdlib_itertools.py:244:56    - Unknown word (nunderten)  -- ntakewhile\nq\x00c__main__\nunderten\nq\x01cbuiltins\niter
+extra_tests/snippets/stdlib_itertools.py:244:72    - Unknown word (cbuiltins)  -- main__\nunderten\nq\x01cbuiltins\niter\nq\x02]q\x03(K
 extra_tests/snippets/stdlib_itertools.py:248:125   - Unknown word (underten)   -- __main__\x94\x8c\x08underten\x94\x93\x94\x8c\x08builtins
 extra_tests/snippets/stdlib_itertools.py:252:125   - Unknown word (underten)   -- __main__\x94\x8c\x08underten\x94\x93\x94\x8c\x08builtins
 extra_tests/snippets/stdlib_itertools.py:263:10    - Unknown word (citertools) -- == b"citertools\ntakewhile\np0\n(c_
 extra_tests/snippets/stdlib_itertools.py:263:148   - Unknown word (nbtp)       -- naI8\natp4\nRp5\nI4\nbtp6\nRp7\nI1\nb."
 extra_tests/snippets/stdlib_itertools.py:263:48    - Unknown word (nunderten)  -- ntakewhile\np0\n(c__main__\nunderten\np1\nc__builtin__\niter
+extra_tests/snippets/stdlib_itertools.py:275:72    - Unknown word (cbuiltins)  -- main__\nunderten\nq\x01cbuiltins\niter\nq\x02]q\x03(K
 extra_tests/snippets/stdlib_itertools.py:279:125   - Unknown word (underten)   -- __main__\x94\x8c\x08underten\x94\x93\x94\x8c\x08builtins
 extra_tests/snippets/stdlib_itertools.py:365:148   - Unknown word (nbtp)       -- naI8\natp4\nRp5\nI0\nbtp6\nRp7\nI0\nb."
+extra_tests/snippets/stdlib_itertools.py:377:72    - Unknown word (cbuiltins)  -- main__\nunderten\nq\x01cbuiltins\niter\nq\x02]q\x03(K
 extra_tests/snippets/stdlib_itertools.py:390:148   - Unknown word (nbtp)       -- naI8\natp4\nRp5\nI4\nbtp6\nRp7\nI1\nb."
+extra_tests/snippets/stdlib_itertools.py:402:72    - Unknown word (cbuiltins)  -- main__\nunderten\nq\x01cbuiltins\niter\nq\x02]q\x03(K
 extra_tests/snippets/stdlib_itertools.py:441:72    - Unknown word (ACEF)       -- 0, 1, 1])) == list("ACEF")
 extra_tests/snippets/stdlib_itertools.py:446:82    - Unknown word (ACEF)       -- ", 1, 9])) == list("ACEF")
+extra_tests/snippets/stdlib_itertools.py:4:6       - Unknown word (testutils)  -- from testutils import assert_raises
+extra_tests/snippets/stdlib_json.py:4:6       - Unknown word (testutils)  -- from testutils import assert_raises
+extra_tests/snippets/stdlib_json.py:70:33     - Unknown word (jsons)      -- reject non-str keys in jsons
 extra_tests/snippets/stdlib_logging.py:14:9      - Unknown word (WOOT)       -- assert "WOOT" in res
 extra_tests/snippets/stdlib_logging.py:9:16      - Unknown word (WOOT)       -- logging.error("WOOT")
 extra_tests/snippets/stdlib_math.py:12:9      - Unknown word (Conversible) -- # class Conversible():
 extra_tests/snippets/stdlib_math.py:17:39     - Unknown word (Conversible) -- 1.1111) == math.log(Conversible())
 extra_tests/snippets/stdlib_math.py:19:3      - Unknown word (roundings)   -- # roundings
+extra_tests/snippets/stdlib_math.py:3:6       - Unknown word (testutils)  -- from testutils import assert_raises
 extra_tests/snippets/stdlib_os.py:119:14    - Unknown word (BOYA)       -- CONTENT3 = b"BOYA"
 extra_tests/snippets/stdlib_os.py:291:48    - Unknown word (getpwall)   -- pw_uid for u in pwd.getpwall()]
+extra_tests/snippets/stdlib_os.py:387:51    - Unknown word (setresuid)  -- PermissionError, lambda: os.setresuid(42, 42, 42))
 extra_tests/snippets/stdlib_os.py:518:63    - Unknown word (VDISABLE)   -- "PC_MAX_INPUT", "PC_VDISABLE"]:
+extra_tests/snippets/stdlib_os.py:6:6       - Unknown word (testutils)  -- from testutils import assert_raises
+extra_tests/snippets/stdlib_pwd.py:9:6       - Unknown word (testutils)  -- from testutils import assert_raises
 extra_tests/snippets/stdlib_re.py:17:17     - Unknown word (abcabca)    -- s = p.sub("x", "abcabca")
 extra_tests/snippets/stdlib_re.py:19:14     - Unknown word (xcxca)      -- assert s == "xcxca"
 extra_tests/snippets/stdlib_re.py:39:35     - Unknown word (abcdddd)    -- compile("abcd*").match("abcdddd").group() == "abcdddd
@@ -521,39 +956,75 @@ extra_tests/snippets/stdlib_select.py:39:35     - Unknown word (recvr)      -- x
 extra_tests/snippets/stdlib_select.py:39:44     - Unknown word (sendr)      -- select.select([recvr], [sendr], [])
 extra_tests/snippets/stdlib_select.py:42:21     - Unknown word (rres)       -- assert recvr in rres
 extra_tests/snippets/stdlib_select.py:44:8      - Unknown word (sendr)      -- assert sendr in wres
+extra_tests/snippets/stdlib_select.py:5:6       - Unknown word (testutils)  -- from testutils import assert_raises
+extra_tests/snippets/stdlib_signal.py:5:6       - Unknown word (testutils)  -- from testutils import assert_raises
 extra_tests/snippets/stdlib_socket.py:165:13    - Unknown word (gaierror)   -- (socket.gaierror, "gaierror"),
 extra_tests/snippets/stdlib_socket.py:165:24    - Unknown word (gaierror)   -- (socket.gaierror, "gaierror"),
-extra_tests/snippets/stdlib_sqlite.py:53:22     - Unknown word (aggtxt)     -- cx.create_aggregate("aggtxt", 1, AggrText)
-extra_tests/snippets/stdlib_sqlite.py:54:21     - Unknown word (aggtxt)     -- cur.execute("select aggtxt(key) from foo")
+extra_tests/snippets/stdlib_socket.py:5:6       - Unknown word (testutils)  -- from testutils import assert_raises
+extra_tests/snippets/stdlib_sqlite.py:15:4      - Unknown word (executescript) -- cx.executescript("""
+extra_tests/snippets/stdlib_sqlite.py:33:22     - Unknown word (mysum)         -- cx.create_aggregate("mysum", 1, AggrSum)
+extra_tests/snippets/stdlib_sqlite.py:34:21     - Unknown word (mysum)         -- cur.execute("select mysum(key) from foo")
+extra_tests/snippets/stdlib_sqlite.py:53:22     - Unknown word (aggtxt)        -- cx.create_aggregate("aggtxt", 1, AggrText)
+extra_tests/snippets/stdlib_sqlite.py:54:21     - Unknown word (aggtxt)        -- cur.execute("select aggtxt(key) from foo")
+extra_tests/snippets/stdlib_sqlite.py:7:4       - Unknown word (executescript) -- cx.executescript(";")
+extra_tests/snippets/stdlib_sqlite.py:9:4       - Unknown word (executemany)   -- cx.executemany("INSERT INTO foo(key
+extra_tests/snippets/stdlib_struct.py:3:6       - Unknown word (testutils)  -- from testutils import assert_raises
 extra_tests/snippets/stdlib_subprocess.py:22:36     - Unknown word (unixy)      -- make work in a non-unixy environment (something
+extra_tests/snippets/stdlib_subprocess.py:6:6       - Unknown word (testutils)  -- from testutils import assert_raises
+extra_tests/snippets/stdlib_sys.py:5:6       - Unknown word (testutils)  -- from testutils import assert_raises
+extra_tests/snippets/stdlib_types.py:3:6       - Unknown word (testutils)  -- from testutils import assert_raises
+extra_tests/snippets/stdlib_weakref.py:3:6       - Unknown word (testutils)  -- from testutils import assert_raises
 extra_tests/snippets/stdlib_zlib.py:37:38     - Unknown word (amet)       -- Lorem ipsum dolor sit amet", "utf-8")
+extra_tests/snippets/stdlib_zlib.py:3:6       - Unknown word (testutils)  -- from testutils import assert_raises
 extra_tests/snippets/stdlib_zlib.py:40:54     - Unknown word (amet)       -- xffLorem ipsum dolor sit amet\x83\xd5\t\xc5",
 extra_tests/snippets/syntax_async.py:8:16      - Unknown word (Entrada)    -- print("Entrada")
+extra_tests/snippets/syntax_attr.py:1:6       - Unknown word (testutils)  -- from testutils import assert_raises
+extra_tests/snippets/syntax_class.py:1:6       - Unknown word (testutils)  -- from testutils import assert_raises
 extra_tests/snippets/syntax_class.py:229:20    - Unknown word (dbca)       -- assert D().f() == 'dbca', "Mro resolution using
+extra_tests/snippets/syntax_class.py:269:17    - Unknown word (mcls)       -- def __new__(mcls):
+extra_tests/snippets/syntax_class.py:270:21    - Unknown word (mcls)       -- assert type(mcls.__new__).__name__ =
+extra_tests/snippets/syntax_class.py:271:21    - Unknown word (mcls)       -- assert type(mcls.mro).__name__ == 'method
 extra_tests/snippets/syntax_class.py:42:9      - Unknown word (fubar)      -- def fubar(cls, x):
 extra_tests/snippets/syntax_class.py:48:9      - Unknown word (kungfu)     -- def kungfu(x):
 extra_tests/snippets/syntax_class.py:59:5      - Unknown word (fubar)      -- bar.fubar(2)
 extra_tests/snippets/syntax_class.py:60:5      - Unknown word (fubar)      -- Bar.fubar(2)
 extra_tests/snippets/syntax_class.py:62:5      - Unknown word (kungfu)     -- bar.kungfu(3)
 extra_tests/snippets/syntax_class.py:63:5      - Unknown word (kungfu)     -- Bar.kungfu(3)
+extra_tests/snippets/syntax_del.py:1:6       - Unknown word (testutils)  -- from testutils import assert_raises
+extra_tests/snippets/syntax_del.py:30:5      - Unknown word (mytest)     -- mytest = MyTest()
+extra_tests/snippets/syntax_del.py:31:9      - Unknown word (mytest)     -- del mytest
+extra_tests/snippets/syntax_forbidden_name.py:1:6       - Unknown word (testutils)  -- from testutils import assert_raises
 extra_tests/snippets/syntax_fstring.py:138:1     - Unknown word (tenπ)       -- tenπ = 31.4
 extra_tests/snippets/syntax_fstring.py:139:21    - Unknown word (tenπ)       -- self.assertEqual(f'{tenπ=:.2f}', 'tenπ=31.40
 extra_tests/snippets/syntax_fstring.py:139:35    - Unknown word (tenπ)       -- assertEqual(f'{tenπ=:.2f}', 'tenπ=31.40')
 extra_tests/snippets/syntax_fstring.py:16:14     - Unknown word (tersing)    -- # lets start tersing
+extra_tests/snippets/syntax_fstring.py:1:6       - Unknown word (testutils)  -- from testutils import assert_raises
 extra_tests/snippets/syntax_fstring.py:22:24     - Unknown word (barfoo)     -- assert f"{foo}foo" == 'barfoo'
 extra_tests/snippets/syntax_fstring.py:23:27     - Unknown word (foobarfoo)  -- assert f"foo{foo}foo" == 'foobarfoo'
 extra_tests/snippets/syntax_fstring.py:29:36     - Unknown word (barbarfoo)  -- f"{foo}" 'foo' == 'barbarfoo'
+extra_tests/snippets/syntax_fstring.py:91:32     - Unknown word (unicodes)   -- ascii representation of unicodes:
+extra_tests/snippets/syntax_function.py:1:6       - Unknown word (testutils)  -- from testutils import assert_raises
+extra_tests/snippets/syntax_function2.py:1:6       - Unknown word (testutils)  -- from testutils import assert_raises
 extra_tests/snippets/syntax_function2.py:23:5      - Unknown word (fubar)      -- def fubar():
 extra_tests/snippets/syntax_function2.py:26:8      - Unknown word (fubar)      -- assert fubar() == (42,)
+extra_tests/snippets/syntax_function2.py:58:5      - Unknown word (revdocstr)  -- def revdocstr(f):
+extra_tests/snippets/syntax_function2.py:64:2      - Unknown word (revdocstr)  -- @revdocstr
 extra_tests/snippets/syntax_function2.py:68:23     - Unknown word (abcw)       -- assert f5.__doc__ == 'abcw00t', f5.__doc__
+extra_tests/snippets/syntax_function_args.py:1:6       - Unknown word (testutils)  -- from testutils import assert_raises
 extra_tests/snippets/syntax_function_args.py:76:5      - Unknown word (fubar)      -- def fubar(x, y, obj=None):
 extra_tests/snippets/syntax_function_args.py:82:1      - Unknown word (fubar)      -- fubar(obj=6, *rest)
+extra_tests/snippets/syntax_generator.py:1:6       - Unknown word (testutils)  -- from testutils import assert_raises
+extra_tests/snippets/syntax_global_nonlocal.py:1:6       - Unknown word (testutils)  -- from testutils import assert_raises
 extra_tests/snippets/syntax_global_nonlocal.py:3:28      - Unknown word (funkyness)  -- global and nonlocal funkyness
+extra_tests/snippets/syntax_invalid.py:1:6       - Unknown word (testutils)  -- from testutils import assert_raises
 extra_tests/snippets/syntax_match.py:108:59    - Unknown word (wheelinfo)  -- fallback (reproduces wheelinfo.py issue)
+extra_tests/snippets/syntax_non_utf8.py:3:6       - Unknown word (testutils)  -- from testutils import assert_raises
 extra_tests/snippets/syntax_short_circuit_bool.py:14:14     - Unknown word (booled)     -- self.booled = False
 extra_tests/snippets/syntax_short_circuit_bool.py:17:25     - Unknown word (booled)     -- assert not self.booled
 extra_tests/snippets/syntax_short_circuit_bool.py:18:14     - Unknown word (booled)     -- self.booled = True
+extra_tests/snippets/syntax_slice.py:1:6       - Unknown word (testutils)  -- from testutils import assert_raises
 extra_tests/snippets/syntax_statement.py:4:15      - Unknown word (seperated)  -- # small ones, seperated by ';':
+extra_tests/snippets/syntax_try.py:1:6       - Unknown word (testutils)  -- from testutils import assert_raises
 extra_tests/snippets/syntax_try.py:35:12     - Unknown word (kablam)     -- print('kablam')
 extra_tests/snippets/syntax_try.py:49:12     - Unknown word (kablam)     -- print('kablam')
 extra_tests/snippets/syntax_try.py:62:12     - Unknown word (kablam)     -- print('kablam')
@@ -561,23 +1032,41 @@ extra_tests/snippets/syntax_try.py:73:16     - Unknown word (kablam)     -- prin
 extra_tests/snippets/syntax_try.py:82:5      - Unknown word (fubar)      -- fubar
 extra_tests/snippets/syntax_with.py:30:16     - Unknown word (Ajuus)      -- print('Ajuus')
 extra_tests/snippets/syntax_with.py:5:16      - Unknown word (Entrada)    -- print('Entrada')
+extra_tests/snippets/testutils.py:19:14     - Unknown word (failmsg)    -- self.failmsg = msg
+extra_tests/snippets/testutils.py:26:13     - Unknown word (failmsg)    -- failmsg = self.failmsg or "
+extra_tests/snippets/testutils.py:26:28     - Unknown word (failmsg)    -- failmsg = self.failmsg or "{} was not raised
+extra_tests/snippets/testutils.py:27:27     - Unknown word (failmsg)    -- assert False, failmsg
 extra_tests/snippets/testutils.py:71:28     - Unknown word (klass)      -- assert_isinstance(obj, klass):
 extra_tests/snippets/testutils.py:73:33     - Unknown word (klass)      -- lambda: isinstance(obj, klass), ["isisntance(", _typed
 extra_tests/snippets/testutils.py:73:43     - Unknown word (isisntance) -- isinstance(obj, klass), ["isisntance(", _typed(obj), ","
 extra_tests/snippets/testutils.py:73:75     - Unknown word (klass)      -- , _typed(obj), ",", klass, ")"]
 extra_tests/test_snippets.py:27:5      - Unknown word (pushd)      -- def pushd(path):
-installer-config/installer.nsi:108:37    - Unknown word (MANUPRODUCTKEY)         -- LANGDLL_REGISTRY_KEY "${MANUPRODUCTKEY}"
-installer-config/installer.nsi:114:2     - Unknown word (insertmacro)            -- !insertmacro MUI_PAGE_WELCOME
-installer-config/installer.nsi:119:4     - Unknown word (insertmacro)            -- !insertmacro MUI_PAGE_LICENSE "$
-installer-config/installer.nsi:125:4     - Unknown word (insertmacro)            -- !insertmacro MULTIUSER_PAGE_INSTALLMODE
-installer-config/installer.nsi:130:25    - Unknown word (installtion)            -- only if a previous installtion was detected
-installer-config/installer.nsi:136:32    - Unknown word (isntallation)           -- installer stores the isntallation info in registry
-installer-config/installer.nsi:141:16    - Unknown word (potentional)            -- ; This has a potentional issue that there maybe
-installer-config/installer.nsi:155:24    - Unknown word (msiexec)                -- ${StrLoc} $R0 $R1 "msiexec" ">"
-installer-config/installer.nsi:163:18    - Unknown word (SHCTX)                  -- ReadRegStr $R0 SHCTX "${UNINSTKEY}" ""
+extra_tests/test_snippets.py:58:41     - Unknown word (jobserver)  -- = "info,cargo=error,jobserver=error"
+installer-config/installer.nsi:101:8     - Unknown word (HEADERIMAGE)             -- !if "${HEADERIMAGE}" != ""
+installer-config/installer.nsi:102:15    - Unknown word (HEADERIMAGE)             -- !define MUI_HEADERIMAGE
+installer-config/installer.nsi:103:15    - Unknown word (HEADERIMAGE)             -- !define MUI_HEADERIMAGE_BITMAP "${HEADERIMAGE
+installer-config/installer.nsi:103:38    - Unknown word (HEADERIMAGE)             -- HEADERIMAGE_BITMAP "${HEADERIMAGE}"
+installer-config/installer.nsi:107:13    - Unknown word (LANGDLL)                 -- !define MUI_LANGDLL_REGISTRY_ROOT "HKCU
+installer-config/installer.nsi:108:13    - Unknown word (LANGDLL)                 -- !define MUI_LANGDLL_REGISTRY_KEY "${MANUPRODUCTKE
+installer-config/installer.nsi:108:37    - Unknown word (MANUPRODUCTKEY)          -- LANGDLL_REGISTRY_KEY "${MANUPRODUCTKEY}"
+installer-config/installer.nsi:109:13    - Unknown word (LANGDLL)                 -- !define MUI_LANGDLL_REGISTRY_VALUENAME
+installer-config/installer.nsi:113:18    - Unknown word (CUSTOMFUNCTION)          -- !define MUI_PAGE_CUSTOMFUNCTION_PRE SkipIfPassive
+installer-config/installer.nsi:114:2     - Unknown word (insertmacro)             -- !insertmacro MUI_PAGE_WELCOME
+installer-config/installer.nsi:118:20    - Unknown word (CUSTOMFUNCTION)          -- !define MUI_PAGE_CUSTOMFUNCTION_PRE SkipIfPassive
+installer-config/installer.nsi:119:4     - Unknown word (insertmacro)             -- !insertmacro MUI_PAGE_LICENSE "$
+installer-config/installer.nsi:124:20    - Unknown word (CUSTOMFUNCTION)          -- !define MUI_PAGE_CUSTOMFUNCTION_PRE SkipIfPassive
+installer-config/installer.nsi:125:4     - Unknown word (insertmacro)             -- !insertmacro MULTIUSER_PAGE_INSTALLMODE
+installer-config/installer.nsi:130:25    - Unknown word (installtion)             -- only if a previous installtion was detected
+installer-config/installer.nsi:136:32    - Unknown word (isntallation)            -- installer stores the isntallation info in registry
+installer-config/installer.nsi:141:16    - Unknown word (potentional)             -- ; This has a potentional issue that there maybe
+installer-config/installer.nsi:155:24    - Unknown word (msiexec)                 -- ${StrLoc} $R0 $R1 "msiexec" ">"
+installer-config/installer.nsi:163:18    - Unknown word (SHCTX)                   -- ReadRegStr $R0 SHCTX "${UNINSTKEY}" ""
+installer-config/installer.nsi:163:27    - Unknown word (UNINSTKEY)              -- ReadRegStr $R0 SHCTX "${UNINSTKEY}" ""
 installer-config/installer.nsi:164:18    - Unknown word (SHCTX)                  -- ReadRegStr $R1 SHCTX "${UNINSTKEY}" "UninstallStri
+installer-config/installer.nsi:164:27    - Unknown word (UNINSTKEY)              -- ReadRegStr $R1 SHCTX "${UNINSTKEY}" "UninstallString"
 installer-config/installer.nsi:167:18    - Unknown word (installar)              -- ; Compare this installar version with the existing
 installer-config/installer.nsi:174:20    - Unknown word (SHCTX)                  -- ReadRegStr $R0 SHCTX "${UNINSTKEY}" "DisplayVersio
+installer-config/installer.nsi:174:29    - Unknown word (UNINSTKEY)              -- ReadRegStr $R0 SHCTX "${UNINSTKEY}" "DisplayVersion"
 installer-config/installer.nsi:178:3     - Unknown word (nsis)                   -- nsis_tauri_utils::SemverCompare
 installer-config/installer.nsi:178:8     - Unknown word (tauri)                  -- nsis_tauri_utils::SemverCompare
 installer-config/installer.nsi:185:6     - Unknown word (insertmacro)            -- !insertmacro MUI_HEADER_TEXT "$(alreadyIns
@@ -586,52 +1075,102 @@ installer-config/installer.nsi:192:6     - Unknown word (insertmacro)           
 installer-config/installer.nsi:198:12    - Unknown word (ALLOWDOWNGRADES)        -- !if "${ALLOWDOWNGRADES}" == "true"
 installer-config/installer.nsi:203:59    - Unknown word (choow)                  -- alreadyInstalled)" "$(choowHowToInstall)"
 installer-config/installer.nsi:225:10    - Unknown word (ALLOWDOWNGRADES)        -- !if "${ALLOWDOWNGRADES}" == "false"
+installer-config/installer.nsi:23:9      - Unknown word (VERSIONWITHBUILD) -- !define VERSIONWITHBUILD "{{version_with_build
 installer-config/installer.nsi:259:20    - Unknown word (reinst)                 -- StrCmp $R1 "1" reinst_uninstall reinst_done
 installer-config/installer.nsi:259:37    - Unknown word (reinst)                 -- 1" reinst_uninstall reinst_done ; $R1 == "1", then
+installer-config/installer.nsi:25:9      - Unknown word (INSTALLMODE)      -- !define INSTALLMODE "{{install_mode}}"
 installer-config/installer.nsi:260:18    - Unknown word (reinst)                 -- StrCmp $R1 "1" reinst_done ; Same version
 installer-config/installer.nsi:262:3     - Unknown word (reinst)                 -- reinst_uninstall:
 installer-config/installer.nsi:270:21    - Unknown word (SHCTX)                  -- ReadRegStr $4 SHCTX "${MANUPRODUCTKEY}"
 installer-config/installer.nsi:270:30    - Unknown word (MANUPRODUCTKEY)         -- ReadRegStr $4 SHCTX "${MANUPRODUCTKEY}" ""
 installer-config/installer.nsi:271:22    - Unknown word (SHCTX)                  -- ReadRegStr $R1 SHCTX "${UNINSTKEY}" "UninstallStri
-installer-config/installer.nsi:27:9      - Unknown word (INSTALLERICON) -- !define INSTALLERICON "{{installer_icon}}
+installer-config/installer.nsi:27:9      - Unknown word (INSTALLERICON)    -- !define INSTALLERICON "{{installer_icon}}
 installer-config/installer.nsi:280:29    - Unknown word (INSTDIR)                -- OrIf} ${FileExists} "$INSTDIR\${MAINBINARYNAME}.exe
+installer-config/installer.nsi:280:39    - Unknown word (MAINBINARYNAME)         -- FileExists} "$INSTDIR\${MAINBINARYNAME}.exe"
+installer-config/installer.nsi:28:9      - Unknown word (SIDEBARIMAGE)     -- !define SIDEBARIMAGE "{{sidebar_image}}"
 installer-config/installer.nsi:292:14    - Unknown word (INSTDIR)                -- RMDir $INSTDIR
 installer-config/installer.nsi:294:3     - Unknown word (reinst)                 -- reinst_done:
 installer-config/installer.nsi:297:21    - Unknown word (directoy)               -- ; 5. Choose install directoy page
+installer-config/installer.nsi:298:18    - Unknown word (CUSTOMFUNCTION)         -- !define MUI_PAGE_CUSTOMFUNCTION_PRE SkipIfPassive
+installer-config/installer.nsi:29:9      - Unknown word (HEADERIMAGE)      -- !define HEADERIMAGE "{{header_image}}"
+installer-config/installer.nsi:302:18    - Unknown word (CUSTOMFUNCTION)         -- !define MUI_PAGE_CUSTOMFUNCTION_PRE SkipIfPassive
 installer-config/installer.nsi:307:23    - Unknown word (INSTFILES)              -- insertmacro MUI_PAGE_INSTFILES
+installer-config/installer.nsi:30:9      - Unknown word (MAINBINARYNAME)   -- !define MAINBINARYNAME "{{main_binary_name
+installer-config/installer.nsi:313:13    - Unknown word (FINISHPAGE)             -- !define MUI_FINISHPAGE_NOAUTOCLOSE
+installer-config/installer.nsi:313:24    - Unknown word (NOAUTOCLOSE)            -- define MUI_FINISHPAGE_NOAUTOCLOSE
+installer-config/installer.nsi:315:13    - Unknown word (FINISHPAGE)             -- !define MUI_FINISHPAGE_SHOWREADME
 installer-config/installer.nsi:315:24    - Unknown word (SHOWREADME)             -- define MUI_FINISHPAGE_SHOWREADME
+installer-config/installer.nsi:316:13    - Unknown word (FINISHPAGE)             -- !define MUI_FINISHPAGE_SHOWREADME_TEXT "$(createDesk
 installer-config/installer.nsi:316:24    - Unknown word (SHOWREADME)             -- define MUI_FINISHPAGE_SHOWREADME_TEXT "$(createDesktop
+installer-config/installer.nsi:317:13    - Unknown word (FINISHPAGE)             -- !define MUI_FINISHPAGE_SHOWREADME_FUNCTION
 installer-config/installer.nsi:317:24    - Unknown word (SHOWREADME)             -- define MUI_FINISHPAGE_SHOWREADME_FUNCTION CreateDesktopShortcu
+installer-config/installer.nsi:319:13    - Unknown word (FINISHPAGE)             -- !define MUI_FINISHPAGE_RUN "$INSTDIR\${MAINBINARYNAM
 installer-config/installer.nsi:319:30    - Unknown word (INSTDIR)                -- MUI_FINISHPAGE_RUN "$INSTDIR\${MAINBINARYNAME}.exe
+installer-config/installer.nsi:319:40    - Unknown word (MAINBINARYNAME)         -- FINISHPAGE_RUN "$INSTDIR\${MAINBINARYNAME}.exe"
+installer-config/installer.nsi:31:9      - Unknown word (MAINBINARYSRCPATH) -- !define MAINBINARYSRCPATH "{{main_binary_path
 installer-config/installer.nsi:349:25    - Unknown word (INSTFILES)              -- insertmacro MUI_UNPAGE_INSTFILES
 installer-config/installer.nsi:355:18    - Unknown word (RESERVEFILE)            -- !insertmacro MUI_RESERVEFILE_LANGDLL
+installer-config/installer.nsi:355:30    - Unknown word (LANGDLL)                -- insertmacro MUI_RESERVEFILE_LANGDLL
+installer-config/installer.nsi:36:9      - Unknown word (PLUGINSPATH)       -- !define PLUGINSPATH "{{additional_plugins
 installer-config/installer.nsi:376:2     - Unknown word (macroend)               -- !macroend
-installer-config/installer.nsi:37:9      - Unknown word (ALLOWDOWNGRADES) -- !define ALLOWDOWNGRADES "{{allow_downgrades
-installer-config/installer.nsi:390:10    - Unknown word (INSTDIR)                -- ${If} $INSTDIR == ""
-installer-config/installer.nsi:40:9      - Unknown word (MANUPRODUCTKEY)  -- !define MANUPRODUCTKEY "Software\${MANUFACTURER
-installer-config/installer.nsi:41:9      - Unknown word (UNINSTALLERSIGNCOMMAND) -- !define UNINSTALLERSIGNCOMMAND "{{uninstaller_sign
-installer-config/installer.nsi:420:10    - Unknown word (ALLOWDOWNGRADES)        -- !if "${ALLOWDOWNGRADES}" == "false"
-installer-config/installer.nsi:442:3     - Unknown word (nsis)                  -- nsis_tauri_utils::FindProcess
-installer-config/installer.nsi:442:8     - Unknown word (tauri)                 -- nsis_tauri_utils::FindProcess
-installer-config/installer.nsi:448:14    - Unknown word (tauri)                 -- nsis_tauri_utils::KillProcess
-installer-config/installer.nsi:448:9     - Unknown word (nsis)                  -- nsis_tauri_utils::KillProcess
-installer-config/installer.nsi:470:2     - Unknown word (macroend)              -- !macroend
-installer-config/installer.nsi:514:24    - Unknown word (MANUPRODUCTKEY)        -- WriteRegStr SHCTX "${MANUPRODUCTKEY}" "" $INSTDIR
-installer-config/installer.nsi:60:8      - Unknown word (UNINSTALLERSIGNCOMMAND) -- !if "${UNINSTALLERSIGNCOMMAND}" != ""
-installer-config/installer.nsi:614:10    - Unknown word (REBOOTOK)              -- RMDir /REBOOTOK "$INSTDIR\\{{this}}
-installer-config/installer.nsi:61:22     - Unknown word (UNINSTALLERSIGNCOMMAND) -- !uninstfinalize '${UNINSTALLERSIGNCOMMAND}'
-installer-config/installer.nsi:620:12    - Unknown word (SMPROGRAMS)            -- Delete "$SMPROGRAMS\$AppStartMenuFolder
-installer-config/installer.nsi:621:11    - Unknown word (SMPROGRAMS)            -- RMDir "$SMPROGRAMS\$AppStartMenuFolder
-installer-config/installer.nsi:635:26    - Unknown word (MANUPRODUCTKEY)        -- DeleteRegValue HKCU "${MANUPRODUCTKEY}" "Installer Language
-installer-config/installer.nsi:668:21    - Unknown word (SMPROGRAMS)            -- CreateDirectory "$SMPROGRAMS\$AppStartMenuFolder
-installer-config/installer.nsi:669:20    - Unknown word (SMPROGRAMS)            -- CreateShortcut "$SMPROGRAMS\$AppStartMenuFolder
-installer-config/installer.nsi:670:24    - Unknown word (SMPROGRAMS)            -- ApplicationID::Set "$SMPROGRAMS\$AppStartMenuFolder
-installer-config/installer.nsi:75:33     - Unknown word (INSTDIR)                -- MULTIUSER_INSTALLMODE_INSTDIR "${PRODUCTNAME}"
-installer-config/installer.nsi:86:21     - Unknown word (EXECUTIONLEVEL)         -- !define MULTIUSER_EXECUTIONLEVEL Highest
-installer-config/installer.nsi:91:8      - Unknown word (INSTALLERICON)          -- !if "${INSTALLERICON}" != ""
-installer-config/installer.nsi:92:23     - Unknown word (INSTALLERICON)          -- !define MUI_ICON "${INSTALLERICON}"
-installer-config/installer.nsi:97:15     - Unknown word (WELCOMEFINISHPAGE)      -- !define MUI_WELCOMEFINISHPAGE_BITMAP "${SIDEBARIMAGE
+installer-config/installer.nsi:37:9      - Unknown word (ALLOWDOWNGRADES)   -- !define ALLOWDOWNGRADES "{{allow_downgrades
+installer-config/installer.nsi:384:10    - Unknown word (DISPLAYLANGUAGESELECTOR) -- !if "${DISPLAYLANGUAGESELECTOR}" == "true"
+installer-config/installer.nsi:385:22    - Unknown word (LANGDLL)                 -- !insertmacro MUI_LANGDLL_DISPLAY
+installer-config/installer.nsi:38:9      - Unknown word (DISPLAYLANGUAGESELECTOR) -- !define DISPLAYLANGUAGESELECTOR "{{display_language
+installer-config/installer.nsi:390:10    - Unknown word (INSTDIR)                 -- ${If} $INSTDIR == ""
+installer-config/installer.nsi:39:9      - Unknown word (UNINSTKEY)               -- !define UNINSTKEY "Software\Microsoft
+installer-config/installer.nsi:40:9      - Unknown word (MANUPRODUCTKEY)          -- !define MANUPRODUCTKEY "Software\${MANUFACTURER
+installer-config/installer.nsi:41:9      - Unknown word (UNINSTALLERSIGNCOMMAND)  -- !define UNINSTALLERSIGNCOMMAND "{{uninstaller_sign
+installer-config/installer.nsi:420:10    - Unknown word (ALLOWDOWNGRADES)         -- !if "${ALLOWDOWNGRADES}" == "false"
+installer-config/installer.nsi:42:9      - Unknown word (ESTIMATEDSIZE)           -- !define ESTIMATEDSIZE "{{estimated_size}}
+installer-config/installer.nsi:442:3     - Unknown word (nsis)                    -- nsis_tauri_utils::FindProcess
+installer-config/installer.nsi:442:36    - Unknown word (MAINBINARYNAME)          -- utils::FindProcess "${MAINBINARYNAME}.exe"
+installer-config/installer.nsi:442:8     - Unknown word (tauri)                   -- nsis_tauri_utils::FindProcess
+installer-config/installer.nsi:448:14    - Unknown word (tauri)                   -- nsis_tauri_utils::KillProcess
+installer-config/installer.nsi:448:42    - Unknown word (MAINBINARYNAME)          -- utils::KillProcess "${MAINBINARYNAME}.exe"
+installer-config/installer.nsi:448:9     - Unknown word (nsis)                    -- nsis_tauri_utils::KillProcess
+installer-config/installer.nsi:470:2     - Unknown word (macroend)                -- !macroend
+installer-config/installer.nsi:478:11    - Unknown word (MAINBINARYSRCPATH)       -- File "${MAINBINARYSRCPATH}"
+installer-config/installer.nsi:48:21     - Unknown word (VERSIONWITHBUILD)        -- VIProductVersion "${VERSIONWITHBUILD}"
+installer-config/installer.nsi:505:66    - Unknown word (BUNDLEID)                -- protocol}}" "" "URL:${BUNDLEID} protocol"
+installer-config/installer.nsi:514:24    - Unknown word (MANUPRODUCTKEY)          -- WriteRegStr SHCTX "${MANUPRODUCTKEY}" "" $INSTDIR
+installer-config/installer.nsi:531:57    - Unknown word (ESTIMATEDSIZE)           -- "EstimatedSize" "${ESTIMATEDSIZE}"
+installer-config/installer.nsi:56:8      - Unknown word (PLUGINSPATH)             -- !if "${PLUGINSPATH}" != ""
+installer-config/installer.nsi:575:20    - Unknown word (UNGETLANGUAGE)           -- !insertmacro MUI_UNGETLANGUAGE
+installer-config/installer.nsi:57:22     - Unknown word (PLUGINSPATH)             -- !addplugindir "${PLUGINSPATH}"
+installer-config/installer.nsi:57:6      - Unknown word (addplugindir)            -- !addplugindir "${PLUGINSPATH}"
+installer-config/installer.nsi:60:8      - Unknown word (UNINSTALLERSIGNCOMMAND)  -- !if "${UNINSTALLERSIGNCOMMAND}" != ""
+installer-config/installer.nsi:614:10    - Unknown word (REBOOTOK)                -- RMDir /REBOOTOK "$INSTDIR\\{{this}}
+installer-config/installer.nsi:619:30    - Unknown word (GETFOLDER)               -- insertmacro MUI_STARTMENU_GETFOLDER Application $AppStartMenuFold
+installer-config/installer.nsi:61:22     - Unknown word (UNINSTALLERSIGNCOMMAND)  -- !uninstfinalize '${UNINSTALLERSIGNCOMMAND}'
+installer-config/installer.nsi:61:4      - Unknown word (uninstfinalize)          -- !uninstfinalize '${UNINSTALLERSIGNCOMMAND
+installer-config/installer.nsi:620:12    - Unknown word (SMPROGRAMS)              -- Delete "$SMPROGRAMS\$AppStartMenuFolder
+installer-config/installer.nsi:621:11    - Unknown word (SMPROGRAMS)              -- RMDir "$SMPROGRAMS\$AppStartMenuFolder
+installer-config/installer.nsi:635:26    - Unknown word (MANUPRODUCTKEY)          -- DeleteRegValue HKCU "${MANUPRODUCTKEY}" "Installer Language
+installer-config/installer.nsi:65:8      - Unknown word (INSTALLMODE)             -- !if "${INSTALLMODE}" == "perMachine"
+installer-config/installer.nsi:668:21    - Unknown word (SMPROGRAMS)              -- CreateDirectory "$SMPROGRAMS\$AppStartMenuFolder
+installer-config/installer.nsi:669:20    - Unknown word (SMPROGRAMS)              -- CreateShortcut "$SMPROGRAMS\$AppStartMenuFolder
+installer-config/installer.nsi:670:24    - Unknown word (SMPROGRAMS)              -- ApplicationID::Set "$SMPROGRAMS\$AppStartMenuFolder
+installer-config/installer.nsi:69:8      - Unknown word (INSTALLMODE)             -- !if "${INSTALLMODE}" == "currentUser"
+installer-config/installer.nsi:73:8      - Unknown word (INSTALLMODE)             -- !if "${INSTALLMODE}" == "both"
+installer-config/installer.nsi:75:21     - Unknown word (INSTALLMODE)             -- !define MULTIUSER_INSTALLMODE_INSTDIR "${PRODUCTNAME
+installer-config/installer.nsi:75:33     - Unknown word (INSTDIR)                 -- MULTIUSER_INSTALLMODE_INSTDIR "${PRODUCTNAME}"
+installer-config/installer.nsi:82:57     - Unknown word (UNINSTKEY)               -- DEFAULT_REGISTRY_KEY "${UNINSTKEY}"
+installer-config/installer.nsi:84:21     - Unknown word (INSTALLMODEPAGE)         -- !define MULTIUSER_INSTALLMODEPAGE_SHOWUSERNAME
+installer-config/installer.nsi:84:37     - Unknown word (SHOWUSERNAME)            -- MULTIUSER_INSTALLMODEPAGE_SHOWUSERNAME
+installer-config/installer.nsi:86:21     - Unknown word (EXECUTIONLEVEL)          -- !define MULTIUSER_EXECUTIONLEVEL Highest
+installer-config/installer.nsi:91:8      - Unknown word (INSTALLERICON)           -- !if "${INSTALLERICON}" != ""
+installer-config/installer.nsi:92:23     - Unknown word (INSTALLERICON)           -- !define MUI_ICON "${INSTALLERICON}"
+installer-config/installer.nsi:96:8      - Unknown word (SIDEBARIMAGE)            -- !if "${SIDEBARIMAGE}" != ""
+installer-config/installer.nsi:97:15     - Unknown word (WELCOMEFINISHPAGE)       -- !define MUI_WELCOMEFINISHPAGE_BITMAP "${SIDEBARIMAGE
+installer-config/installer.nsi:97:43     - Unknown word (SIDEBARIMAGE)            -- WELCOMEFINISHPAGE_BITMAP "${SIDEBARIMAGE}"
+installer-config/installer.wxs:112:128   - Unknown word (APPLICATIONFOLDER)              -- Type="string" Value="[APPLICATIONFOLDER]" KeyPath="yes" />
+installer-config/installer.wxs:113:23    - Unknown word (APPLICATIONFOLDER)              -- <!-- [APPLICATIONFOLDER] contains trailing backslash
+installer-config/installer.wxs:114:70    - Unknown word (APPLICATIONFOLDER)              -- Name="PATH" Value="[APPLICATIONFOLDER]bin" Permanent="no"
+installer-config/installer.wxs:118:128   - Unknown word (APPLICATIONFOLDER)              -- Type="string" Value="[APPLICATIONFOLDER]" KeyPath="yes" />
+installer-config/installer.wxs:119:67    - Unknown word (APPLICATIONFOLDER)              -- Name="PATH" Value="[APPLICATIONFOLDER]bin" Permanent="no"
 installer-config/installer.wxs:165:33    - Unknown word (msiexec)                        -- Target="[System64Folder]msiexec.exe"
+installer-config/installer.wxs:1:12      - Unknown word (BUILDARCH)  -- <?if $(sys.BUILDARCH)="x86"?>
 installer-config/installer.wxs:277:23    - Unknown word (WVRTINSTALLED)                  -- <Property Id="WVRTINSTALLED">
 installer-config/installer.wxs:278:33    - Unknown word (WVRT)                           -- <RegistrySearch Id="WVRTInstalledSystem" Root
 installer-config/installer.wxs:279:33    - Unknown word (WVRT)                           -- <RegistrySearch Id="WVRTInstalledUser" Root=
@@ -648,6 +1187,7 @@ installer-config/installer.wxs:297:40    - Unknown word (WVRTINSTALLED)         
 installer-config/installer.wxs:308:40    - Unknown word (WVRTINSTALLED)                  -- CDATA[NOT(REMOVE OR WVRTINSTALLED)]]>
 installer-config/installer.wxs:30:45     - Unknown word (amus)       -- REINSTALLMODE" Value="amus" />
 installer-config/installer.wxs:39:48     - Unknown word (UPGRADINGPRODUCTCODE) -- veShortcuts>Installed AND NOT UPGRADINGPRODUCTCODE</RemoveShortcuts>
+installer-config/installer.wxs:4:16      - Unknown word (BUILDARCH)  -- <?elseif $(sys.BUILDARCH)="x64"?>
 installer-config/installer.wxs:67:23     - Unknown word (WIXUI)                -- <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEX
 installer-config/installer.wxs:67:29     - Unknown word (EXITDIALOGOPTIONALCHECKBOXTEXT) -- <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="!(loc.LaunchApp
 installer-config/installer.wxs:68:23     - Unknown word (WIXUI)                          -- <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOX
@@ -655,16 +1195,39 @@ installer-config/installer.wxs:68:29     - Unknown word (EXITDIALOGOPTIONALCHECK
 installer-config/installer.wxs:74:102    - Unknown word (WIXUI)                          -- "LaunchApplication">WIXUI_EXITDIALOGOPTIONALCHECKBOX
 installer-config/installer.wxs:74:108    - Unknown word (EXITDIALOGOPTIONALCHECKBOX)     -- LaunchApplication">WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 and NOT Installed
 installer-config/installer.wxs:76:27     - Unknown word (WIXUI)                          -- <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR
+installer-config/installer.wxs:8:38      - Unknown word (BUILDARCH)  -- Unsupported value of sys.BUILDARCH=$(sys.BUILDARCH)?>
+installer-config/installer.wxs:8:54      - Unknown word (BUILDARCH)  -- sys.BUILDARCH=$(sys.BUILDARCH)?>
+pdc.sh:26:90     - Unknown word (Dwarnings)  -- cargo clippy --all -- -Dwarnings" "cargo test --all"
+scripts/bench.sh:1:21      - Unknown word (nbody)      -- for BENCH in "int" "nbody" "fannkuch" "scimark
 scripts/bench.sh:1:29      - Unknown word (fannkuch)   -- BENCH in "int" "nbody" "fannkuch" "scimark"; do
 scripts/bench.sh:1:40      - Unknown word (scimark)    -- "nbody" "fannkuch" "scimark"; do
+scripts/bench.sh:3:75      - Unknown word (pyperf)     -- BENCH}_cpython${CPYTHON}.pyperf"
+scripts/bench.sh:9:107     - Unknown word (pyperf)     -- rustpython_${RUSTPYTHON}.pyperf"
 scripts/checklist_template.md:1:166     - Unknown word (endmacro)   -- i.pr }}{% endif %}{% endmacro %}
+scripts/find_eq.py:67:17     - Unknown word (lineterm)   -- lineterm="",
+scripts/generate_checklist.py:142:61    - Unknown word (lineterm)   -- f1_lines, f2_lines, lineterm="")
 scripts/install-openssl.ps1:1:12      - Unknown word (Actix)      -- # From the Actix Web windows workflow
+scripts/lib_updater.py:246:33    - Unknown word (inhereted)  -- 2: Iterate and mark inhereted tests
 scripts/lib_updater.py:268:31    - Unknown word (distrupt)   -- Going in reverse to not distrupt the line offset
+scripts/make_ssl_data_rs.py:113:10    - Unknown word (errcodes)   -- args.errcodes = os.path.join(args
+scripts/make_ssl_data_rs.py:114:10    - Unknown word (errtxt)     -- args.errtxt = os.path.join(args
+scripts/make_ssl_data_rs.py:116:32    - Unknown word (errtxt)     -- os.path.isfile(args.errtxt):
+scripts/make_ssl_data_rs.py:117:35    - Unknown word (errtxt)     -- parser.error(f"File {args.errtxt} not found in srcdir
 scripts/make_ssl_data_rs.py:122:17    - Unknown word (AKID)       -- # [('X509_R_AKID_MISMATCH', 'X509',
 scripts/make_ssl_data_rs.py:122:42    - Unknown word (AKID)       -- MISMATCH', 'X509', 'AKID_MISMATCH', 110), ..
 scripts/make_ssl_data_rs.py:49:36     - Unknown word (AKID)       -- error reasons, X509_R_AKID_MISMATCH"""
+scripts/make_ssl_data_rs.py:52:36     - Unknown word (errtxt)     -- in _file_search(args.errtxt, pat):
+scripts/make_ssl_data_rs.py:53:26     - Unknown word (errname)    -- reason, libname, errname, num = match.groups
+scripts/make_ssl_data_rs.py:58:32     - Unknown word (errname)    -- yield reason, libname, errname, num
+scripts/make_ssl_data_rs.py:64:36     - Unknown word (errcodes)   -- in _file_search(args.errcodes, pat):
+scripts/make_ssl_data_rs.py:65:26     - Unknown word (errname)    -- reason, libname, errname, num = match.groups
+scripts/make_ssl_data_rs.py:67:32     - Unknown word (errname)    -- yield reason, libname, errname, num
+scripts/make_ssl_data_rs.py:95:26     - Unknown word (errname)    -- for reason, libname, errname, num in args.reasons
+scripts/notes.txt:12:6      - Unknown word (pyio)       -- io `_pyio.py`
 scripts/notes.txt:23:14     - Unknown word (pickletester) -- pickle `test/pickletester.py` supports `test_pickle
 scripts/notes.txt:24:19     - Unknown word (picklebuffer) -- pickle `test/test_picklebuffer.py`
+scripts/notes.txt:29:21     - Unknown word (sitebuiltins) -- site Don't forget `_sitebuiltins.py`
+scripts/notes.txt:8:12      - Unknown word (pydatetime) -- datetime `_pydatetime.py`
 scripts/notes.txt:9:11      - Unknown word (pydecimal)  -- decimal `_pydecimal.py`
 scripts/redox/recipe.sh:3:1       - Unknown word (CARGOFLAGS) -- CARGOFLAGS=--no-default-features
 scripts/redox/run-redoxer.sh:12:47     - Unknown word (redoxer)    -- root/rustpython-lib redoxer build --release
@@ -672,6 +1235,8 @@ scripts/redox/run-redoxer.sh:17:1      - Unknown word (redoxer)    -- redoxer ex
 scripts/release-wapm.sh:10:95     - Unknown word (WAPM)       -- features="${FEATURES_FOR_WAPM[*]}"
 scripts/release-wapm.sh:12:1      - Unknown word (wapm)       -- wapm publish
 scripts/release-wapm.sh:6:14      - Unknown word (WAPM)       -- FEATURES_FOR_WAPM=(stdlib zlib)
+src/lib.rs:165:4     - Unknown word (pymain)     -- // pymain_run_python
+src/lib.rs:229:16    - Unknown word (pymain)     -- // pymain_run_file
 wasm/README.md:1:16      - Unknown word (webassembly) -- # Compiling to webassembly
 wasm/demo/package.json:34:21     - Unknown word (Liddle)     -- "author": "Ryan Liddle",
 wasm/demo/snippets/asyncbrowser.py:16:5      - Unknown word (asyncweb)   -- asyncweb.run(main(delay))
@@ -679,13 +1244,19 @@ wasm/demo/snippets/asyncbrowser.py:1:8       - Unknown word (asyncweb)   -- impo
 wasm/demo/snippets/import_pypi.py:11:2      - Unknown word (asyncweb)   -- @asyncweb.main
 wasm/demo/snippets/import_pypi.py:13:11     - Unknown word (whlimport)  -- await whlimport.load_package("pygments
 wasm/demo/snippets/import_pypi.py:19:5      - Unknown word (fmter)      -- fmter = pygments.formatters
+wasm/demo/snippets/import_pypi.py:19:52     - Unknown word (noclasses)  -- formatters.html.HtmlFormatter(noclasses=True, style="default
 wasm/demo/snippets/import_pypi.py:20:58     - Unknown word (fmter)      -- hi, mom!')", lexer, fmter))
 wasm/demo/snippets/import_pypi.py:5:8       - Unknown word (asyncweb)   -- import asyncweb
 wasm/demo/snippets/import_pypi.py:6:8       - Unknown word (whlimport)  -- import whlimport
 wasm/demo/snippets/import_pypi.py:8:1       - Unknown word (whlimport)  -- whlimport.setup()
+wasm/demo/snippets/mandelbrot.py:43:7      - Unknown word (mandel)     -- gen = mandel()
+wasm/demo/snippets/mandelbrot.py:5:5       - Unknown word (mandel)     -- def mandel():
+wasm/notebook/README.md:99:71     - Unknown word (Etherpad)   -- Think Google Doc or Etherpad editing but for code
 wasm/notebook/package.json:18:10     - Unknown word (lezer)      -- "lezer-loader": "^0.3.0",
 wasm/notebook/package.json:34:21     - Unknown word (Liddle)     -- "author": "Ryan Liddle",
 wasm/notebook/package.json:9:10      - Unknown word (katex)      -- "katex": "^0.12.0",
+wasm/notebook/snippets/python-markdown-math.txt:50:8      - Unknown word (Bmatrix)    -- \begin{Bmatrix}
+wasm/notebook/snippets/python-markdown-math.txt:53:6      - Unknown word (Bmatrix)    -- \end{Bmatrix}
 wasm/notebook/src/index.js:142:5     - Unknown word (pyvm)       -- let pyvm = null;
 wasm/notebook/src/index.js:171:9     - Unknown word (pyvm)       -- if (pyvm) {
 wasm/notebook/src/index.js:172:9     - Unknown word (pyvm)       -- pyvm.destroy();
@@ -700,6 +1271,7 @@ wasm/notebook/src/parse.js:19:32     - Unknown word (Iomd)       -- function iom
 wasm/notebook/src/parse.js:20:11     - Unknown word (iomd)       -- const iomdLines = fullIomd.split
 wasm/notebook/src/parse.js:20:27     - Unknown word (Iomd)       -- const iomdLines = fullIomd.split('\n');
 wasm/notebook/src/parse.js:51:29     - Unknown word (iomd)       -- (const [i, line] of iomdLines.entries()) {
+wasm/notebook/src/parse.js:5:44      - Unknown word (hashcode)   -- implementation of java's hashcode method
 wasm/notebook/src/parse.js:84:15     - Unknown word (iomd)       -- pushChunk(iomdLines.length);
 wasm/notebook/src/process.js:20:21     - Unknown word (Katex)      -- // Render Math with Katex
 wasm/notebook/src/process.js:23:12     - Unknown word (katex)      -- return katex.renderToString(math
@@ -709,7 +1281,9 @@ wasm/notebook/src/process.js:7:20      - Unknown word (katex)      -- import kat
 wasm/notebook/src/process.js:7:8       - Unknown word (katex)      -- import katex from 'katex';
 wasm/notebook/src/process.js:8:20      - Unknown word (katex)      -- import 'katex/dist/katex.min.css';
 wasm/notebook/src/process.js:8:9       - Unknown word (katex)      -- import 'katex/dist/katex.min.css'
-wasm/tests/conftest.py:93:5      - Unknown word (wdriver)    -- def wdriver(request):
+wasm/tests/conftest.py:24:12     - Unknown word (sessionstart) -- def pytest_sessionstart(session):
+wasm/tests/conftest.py:35:12     - Unknown word (sessionfinish) -- def pytest_sessionfinish(session):
+wasm/tests/conftest.py:93:5      - Unknown word (wdriver)       -- def wdriver(request):
 wasm/tests/test_demo.py:19:15     - Unknown word (wdriver)    -- def test_demo(wdriver, script, output):
 wasm/tests/test_demo.py:21:21     - Unknown word (wdriver)    -- script_output = wdriver.execute_script(script
 wasm/tests/test_exec_mode.py:1:20      - Unknown word (wdriver)    -- def test_eval_mode(wdriver):
@@ -749,8 +1323,10 @@ whats_left.py:78:6      - Unknown word (xxmodule)   -- "xxmodule",
 whats_left.py:79:6      - Unknown word (xxsubtype)  -- "xxsubtype",
 whats_left.py:80:6      - Unknown word (xxlimited)  -- "xxlimited",
 whats_left.py:81:7      - Unknown word (xxtestfuzz) -- "_xxtestfuzz",
+whats_left.py:82:7      - Unknown word (testbuffer) -- "_testbuffer",
 whats_left.py:83:7      - Unknown word (testcapi)   -- "_testcapi",
 whats_left.py:84:7      - Unknown word (testimportmultiple) -- "_testimportmultiple",
 whats_left.py:85:7      - Unknown word (testinternalcapi)   -- "_testinternalcapi",
+whats_left.py:86:7      - Unknown word (testmultiphase)     -- "_testmultiphase",
 whats_left.py:87:7      - Unknown word (testlimitedcapi)    -- "_testlimitedcapi",
 whats_left.py:8:3       - Unknown word (cpymods)    -- # cpymods - a dictionary mapping

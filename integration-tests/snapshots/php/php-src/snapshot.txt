@@ -3,7 +3,7 @@ Repository: php/php-src
 Url: "https://github.com/php/php-src.git"
 Args: ["--config=../../../../config/repositories/php/php-src/cspell.json","**/*.{md,c,h,php}"]
 Lines:
- CSpell: Files checked: 2263, Issues found: 29977 in 1568 files.
+ CSpell: Files checked: 2263, Issues found: 29999 in 1568 files.
  exit code: 1
 CODING_STANDARDS.md:101:23    - Unknown word (intvl)      -- // Could be 'date_intvl_create_from_date_str
 CODING_STANDARDS.md:110:8     - Unknown word (setclientencoding) -- pg_setclientencoding
@@ -6755,6 +6755,8 @@ ext/gmp/gmp.c:109:44    - Unknown word (gmpnum)     -- zval *result, mpz_t gmpnu
 ext/gmp/gmp.c:1171:6    - Unknown word (powm)       -- mpz_powm(gmpnum_result, gmpnum
 ext/gmp/gmp.c:1214:6    - Unknown word (sqrtrem)    -- mpz_sqrtrem(gmpnum_result1, gmpnum
 ext/gmp/gmp.c:126:25    - Unknown word (GMPG)       -- destination_mpz_ptr = GMPG(zpp_arg[arg_num-1])
+ext/gmp/gmp.c:1272:9    - Unknown word (rootrem)    -- /* mpz_rootrem() is supported since
+ext/gmp/gmp.c:1274:6    - Unknown word (rootrem)    -- mpz_rootrem(gmpnum_result1, gmpnum
 ext/gmp/gmp.c:1321:18   - Unknown word (probab)     -- RETURN_LONG(mpz_probab_prime_p(gmpnum_a, (int
 ext/gmp/gmp.c:1345:6    - Unknown word (gcdext)     -- mpz_gcdext(gmpnum_g, gmpnum_s,
 ext/gmp/gmp.c:1427:19   - Unknown word (THREEWAY)   -- RETURN_LONG(ZEND_THREEWAY_COMPARE(ret, 0));
@@ -20522,8 +20524,10 @@ ext/pcre/pcre2lib/pcre2_jit_misc.c:127:26    - Unknown word (gcontext)   -- pcre
 ext/pcre/pcre2lib/pcre2_jit_misc.c:131:7     - Unknown word (gcontext)   -- (void)gcontext;
 ext/pcre/pcre2lib/pcre2_jit_misc.c:53:15     - Unknown word (rodata)     -- PRIV(jit_free_rodata)(void *current, void
 ext/pcre/pcre2lib/pcre2_jit_misc.c:93:17     - Unknown word (rodata)     -- PRIV(jit_free_rodata)(functions->read_only
+ext/pcre/pcre2lib/pcre2_jit_neon_inc.h:101:13    - Unknown word (FFCS)       -- #if defined(FFCS)
 ext/pcre/pcre2lib/pcre2_jit_neon_inc.h:103:1     - Unknown word (vect)       -- vect_t vc1 = VDUPQ(c1);
 ext/pcre/pcre2lib/pcre2_jit_neon_inc.h:103:14    - Unknown word (VDUPQ)      -- vect_t vc1 = VDUPQ(c1);
+ext/pcre/pcre2lib/pcre2_jit_neon_inc.h:105:15    - Unknown word (FFCS)       -- #elif defined(FFCS_2)
 ext/pcre/pcre2lib/pcre2_jit_neon_inc.h:107:1     - Unknown word (vect)       -- vect_t vc1 = VDUPQ(c1);
 ext/pcre/pcre2lib/pcre2_jit_neon_inc.h:107:14    - Unknown word (VDUPQ)      -- vect_t vc1 = VDUPQ(c1);
 ext/pcre/pcre2lib/pcre2_jit_neon_inc.h:109:1     - Unknown word (vect)       -- vect_t vc2 = VDUPQ(c2);
@@ -20558,6 +20562,14 @@ ext/pcre/pcre2lib/pcre2_jit_neon_inc.h:293:11    - Unknown word (VEXTQ)      -- 
 ext/pcre/pcre2lib/pcre2_jit_neon_inc.h:297:11    - Unknown word (VANDQ)      -- data2 = VANDQ(data2, char_mask);
 ext/pcre/pcre2lib/pcre2_jit_neon_inc.h:320:27    - Unknown word (ctzll)      -- str_ptr += __builtin_ctzll(qw.dw[0]) / 8;
 ext/pcre/pcre2lib/pcre2_jit_neon_inc.h:322:31    - Unknown word (ctzll)      -- ptr += 8 + __builtin_ctzll(qw.dw[1]) / 8;
+ext/pcre/pcre2lib/pcre2_jit_neon_inc.h:42:14     - Unknown word (FFCS)       -- # if defined(FFCS)
+ext/pcre/pcre2lib/pcre2_jit_neon_inc.h:44:19     - Unknown word (ffcs)       -- # define FF_FUN ffcs_utf
+ext/pcre/pcre2lib/pcre2_jit_neon_inc.h:46:19     - Unknown word (ffcs)       -- # define FF_FUN ffcs
+ext/pcre/pcre2lib/pcre2_jit_neon_inc.h:49:16     - Unknown word (FFCS)       -- # elif defined(FFCS_2)
+ext/pcre/pcre2lib/pcre2_jit_neon_inc.h:51:19     - Unknown word (ffcs)       -- # define FF_FUN ffcs_2_utf
+ext/pcre/pcre2lib/pcre2_jit_neon_inc.h:53:19     - Unknown word (ffcs)       -- # define FF_FUN ffcs_2
+ext/pcre/pcre2lib/pcre2_jit_neon_inc.h:56:16     - Unknown word (FFCS)       -- # elif defined(FFCS_MASK)
+ext/pcre/pcre2lib/pcre2_jit_neon_inc.h:58:19     - Unknown word (ffcs)       -- # define FF_FUN ffcs_mask_utf
 ext/pcre/pcre2lib/pcre2_jit_neon_inc.h:63:16     - Unknown word (FFCPS)      -- # elif defined(FFCPS_0)
 ext/pcre/pcre2lib/pcre2_jit_neon_inc.h:65:19     - Unknown word (ffcps)      -- # define FF_FUN ffcps_0_utf
 ext/pcre/pcre2lib/pcre2_jit_neon_inc.h:67:19     - Unknown word (ffcps)      -- # define FF_FUN ffcps_0
@@ -20668,6 +20680,16 @@ ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:803:10    - Unknown word (VEXTQ)      -- 
 ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:803:16    - Unknown word (vextq)      -- # define VEXTQ vextq_u32
 ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:804:10    - Unknown word (VANDQ)      -- # define VANDQ vandq_u32
 ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:804:16    - Unknown word (vandq)      -- # define VANDQ vandq_u32
+ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:811:9     - Unknown word (FFCS)       -- #define FFCS
+ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:818:8     - Unknown word (FFCS)       -- #undef FFCS
+ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:820:9     - Unknown word (FFCS)       -- #define FFCS_2
+ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:827:8     - Unknown word (FFCS)       -- #undef FFCS_2
+ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:829:9     - Unknown word (FFCS)       -- #define FFCS_MASK
+ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:863:49    - Unknown word (ffcs)       -- IMM, SLJIT_FUNC_ADDR(ffcs_utf));
+ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:866:49    - Unknown word (ffcs)       -- IMM, SLJIT_FUNC_ADDR(ffcs));
+ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:869:47    - Unknown word (ffcs)       -- IMM, SLJIT_FUNC_ADDR(ffcs));
+ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:884:51    - Unknown word (ffcs)       -- IMM, SLJIT_FUNC_ADDR(ffcs_mask_utf));
+ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:887:51    - Unknown word (ffcs)       -- IMM, SLJIT_FUNC_ADDR(ffcs_mask));
 ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:939:15    - Unknown word (vect)       -- static inline vect_t fast_forward_char
 ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:939:73    - Unknown word (vect)       -- compare_type ctype, vect_t dst, vect_t cmp1,
 ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:944:9     - Unknown word (VCEQQ)      -- dst = VCEQQ(dst, cmp1);

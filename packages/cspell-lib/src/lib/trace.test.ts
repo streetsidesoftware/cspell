@@ -34,23 +34,23 @@ describe('Verify trace', () => {
 
     // cspell:ignore *error* *code* hte colour colum
     test.each`
-        word           | languageId   | locale       | ignoreCase | allowCompoundWords | dictName           | dictActive | found    | forbidden | noSuggest | foundWord
-        ${'apple'}     | ${undefined} | ${undefined} | ${true}    | ${undefined}       | ${'en_us'}         | ${true}    | ${true}  | ${false}  | ${false}  | ${'apple'}
-        ${'apple'}     | ${undefined} | ${undefined} | ${true}    | ${undefined}       | ${'en-gb'}         | ${false}   | ${true}  | ${false}  | ${false}  | ${'apple'}
-        ${'Apple'}     | ${undefined} | ${undefined} | ${false}   | ${undefined}       | ${'en_us'}         | ${true}    | ${true}  | ${false}  | ${false}  | ${'Apple'}
-        ${'Apple'}     | ${undefined} | ${undefined} | ${false}   | ${undefined}       | ${'companies'}     | ${true}    | ${true}  | ${false}  | ${false}  | ${'Apple'}
-        ${'Apple'}     | ${undefined} | ${undefined} | ${false}   | ${undefined}       | ${'cpp'}           | ${false}   | ${true}  | ${false}  | ${false}  | ${'apple'}
-        ${'café'}      | ${undefined} | ${undefined} | ${true}    | ${undefined}       | ${'en_us'}         | ${true}    | ${true}  | ${false}  | ${false}  | ${'café'}
-        ${'errorcode'} | ${undefined} | ${undefined} | ${true}    | ${undefined}       | ${'en_us'}         | ${true}    | ${false} | ${false}  | ${false}  | ${undefined}
-        ${'errorcode'} | ${undefined} | ${undefined} | ${true}    | ${true}            | ${'en_us'}         | ${true}    | ${true}  | ${false}  | ${false}  | ${'error+code'}
-        ${'errorcode'} | ${'cpp'}     | ${undefined} | ${true}    | ${true}            | ${'cpp'}           | ${true}    | ${true}  | ${false}  | ${false}  | ${'error•code'}
-        ${'errorcode'} | ${'cpp'}     | ${undefined} | ${true}    | ${undefined}       | ${'cpp'}           | ${true}    | ${true}  | ${false}  | ${false}  | ${'error•code'}
-        ${'hte'}       | ${undefined} | ${undefined} | ${true}    | ${undefined}       | ${'en_us'}         | ${true}    | ${false} | ${false}  | ${false}  | ${undefined}
-        ${'hte'}       | ${undefined} | ${undefined} | ${true}    | ${undefined}       | ${'[flagWords]'}   | ${true}    | ${true}  | ${true}   | ${false}  | ${'hte'}
-        ${'Colour'}    | ${undefined} | ${undefined} | ${true}    | ${undefined}       | ${'[ignoreWords]'} | ${true}    | ${true}  | ${false}  | ${true}   | ${'colour'}
-        ${'colum'}     | ${undefined} | ${'en'}      | ${true}    | ${undefined}       | ${'en_us'}         | ${true}    | ${false} | ${false}  | ${false}  | ${undefined}
-        ${'Colum'}     | ${undefined} | ${'en'}      | ${true}    | ${undefined}       | ${'en_us'}         | ${true}    | ${true}  | ${false}  | ${false}  | ${'Colum'}
-        ${'Colum'}     | ${undefined} | ${'en'}      | ${false}   | ${undefined}       | ${'en_us'}         | ${true}    | ${true}  | ${false}  | ${false}  | ${'Colum'}
+        word           | languageId   | locale       | ignoreCase | allowCompoundWords | dictName                | dictActive | found    | forbidden | noSuggest | foundWord
+        ${'apple'}     | ${undefined} | ${undefined} | ${true}    | ${undefined}       | ${'en_us'}              | ${true}    | ${true}  | ${false}  | ${false}  | ${'apple'}
+        ${'apple'}     | ${undefined} | ${undefined} | ${true}    | ${undefined}       | ${'en-gb'}              | ${false}   | ${true}  | ${false}  | ${false}  | ${'apple'}
+        ${'Apple'}     | ${undefined} | ${undefined} | ${false}   | ${undefined}       | ${'en_us'}              | ${true}    | ${true}  | ${false}  | ${false}  | ${'Apple'}
+        ${'Apple'}     | ${undefined} | ${undefined} | ${false}   | ${undefined}       | ${'companies'}          | ${true}    | ${true}  | ${false}  | ${false}  | ${'Apple'}
+        ${'Apple'}     | ${undefined} | ${undefined} | ${false}   | ${undefined}       | ${'cpp'}                | ${false}   | ${true}  | ${false}  | ${false}  | ${'apple'}
+        ${'café'}      | ${undefined} | ${undefined} | ${true}    | ${undefined}       | ${'en_us'}              | ${true}    | ${true}  | ${false}  | ${false}  | ${'café'}
+        ${'errorcode'} | ${undefined} | ${undefined} | ${true}    | ${undefined}       | ${'en_us'}              | ${true}    | ${false} | ${false}  | ${false}  | ${undefined}
+        ${'errorcode'} | ${undefined} | ${undefined} | ${true}    | ${true}            | ${'en_us'}              | ${true}    | ${true}  | ${false}  | ${false}  | ${'error+code'}
+        ${'errorcode'} | ${'cpp'}     | ${undefined} | ${true}    | ${true}            | ${'cpp-compound-words'} | ${true}    | ${true}  | ${false}  | ${false}  | ${'error•code'}
+        ${'errorcode'} | ${'cpp'}     | ${undefined} | ${true}    | ${undefined}       | ${'cpp-compound-words'} | ${true}    | ${true}  | ${false}  | ${false}  | ${'error•code'}
+        ${'hte'}       | ${undefined} | ${undefined} | ${true}    | ${undefined}       | ${'en_us'}              | ${true}    | ${false} | ${false}  | ${false}  | ${undefined}
+        ${'hte'}       | ${undefined} | ${undefined} | ${true}    | ${undefined}       | ${'[flagWords]'}        | ${true}    | ${true}  | ${true}   | ${false}  | ${'hte'}
+        ${'Colour'}    | ${undefined} | ${undefined} | ${true}    | ${undefined}       | ${'[ignoreWords]'}      | ${true}    | ${true}  | ${false}  | ${true}   | ${'colour'}
+        ${'colum'}     | ${undefined} | ${'en'}      | ${true}    | ${undefined}       | ${'en_us'}              | ${true}    | ${false} | ${false}  | ${false}  | ${undefined}
+        ${'Colum'}     | ${undefined} | ${'en'}      | ${true}    | ${undefined}       | ${'en_us'}              | ${true}    | ${true}  | ${false}  | ${false}  | ${'Colum'}
+        ${'Colum'}     | ${undefined} | ${'en'}      | ${false}   | ${undefined}       | ${'en_us'}              | ${true}    | ${true}  | ${false}  | ${false}  | ${'Colum'}
     `('trace word "$word" in $dictName', testOptions, async (params) => {
         const { word, languageId, ignoreCase, locale, allowCompoundWords } = params;
         const { dictName, dictActive, found, forbidden, noSuggest, foundWord } = params;

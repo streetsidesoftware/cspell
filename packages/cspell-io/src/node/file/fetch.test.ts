@@ -47,7 +47,7 @@ describe('fetch', () => {
 
     test.each`
         url
-        ${'https://example.com/'}
+        ${'http://www.jdentonthego.com/Pictures/Nepal/NP_EBC_D02_Small_Village.jpg'}
     `(
         'fetchHead $url',
         async ({ url }) => {
