@@ -114,8 +114,8 @@ describe('traceWord CPP file', async () => {
         word              | expected
         ${'word_word'}    | ${{ ...wft('word'), dictName: 'en_us' }}
         ${'ISpellResult'} | ${{ ...wft('Result'), foundWord: 'result', dictName: 'en_us' }}
-        ${'errorcode'}    | ${{ ...wft('errorcode'), foundWord: 'error•code', dictName: 'cpp' }}
-        ${'ERRORcode'}    | ${{ ...wft('ERRORcode'), foundWord: 'error•code', dictName: 'cpp' }}
+        ${'errorcode'}    | ${{ ...wft('errorcode'), foundWord: 'error•code', dictName: 'cpp-compound-words' }}
+        ${'ERRORcode'}    | ${{ ...wft('ERRORcode'), foundWord: 'error•code', dictName: 'cpp-compound-words' }}
         ${'ERRORcode'}    | ${{ ...wft('ERROR'), foundWord: 'error', dictName: 'en_us' }}
         ${'apple-pie'}    | ${{ ...wft('pie'), dictName: 'en_us' }}
         ${"can't"}        | ${{ ...wft("can't"), dictName: 'en_us' }}
