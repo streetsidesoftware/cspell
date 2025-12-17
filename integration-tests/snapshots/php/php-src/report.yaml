@@ -5,7 +5,7 @@ Args: '["--config=${repoConfig}/cspell.json","**/*.{md,c,h,php}"]'
 Summary:
   files: 2263
   filesWithIssues: 1568
-  issues: 29977
+  issues: 29999
   errors: 0
 Errors: []
 
@@ -5370,6 +5370,8 @@ issues:
   - "ext/gmp/gmp.c:839:31        sizeinbase      U       size_in_base_2 = mpz_sizeinbase(gmpnumber, 2);"
   - "ext/gmp/gmp.c:1171:6        powm            U       mpz_powm(gmpnum_result, gmpnum"
   - "ext/gmp/gmp.c:1214:6        sqrtrem         U       mpz_sqrtrem(gmpnum_result1, gmpnum"
+  - "ext/gmp/gmp.c:1272:9        rootrem         U       /* mpz_rootrem() is supported since"
+  - "ext/gmp/gmp.c:1274:6        rootrem         U       mpz_rootrem(gmpnum_result1, gmpnum"
   - "ext/gmp/gmp.c:1321:18       probab          U       RETURN_LONG(mpz_probab_prime_p(gmpnum_a, (int"
   - "ext/gmp/gmp.c:1345:6        gcdext          U       mpz_gcdext(gmpnum_g, gmpnum_s,"
   - "ext/gmp/gmp.c:1427:19       THREEWAY        U       RETURN_LONG(ZEND_THREEWAY_COMPARE(ret, 0));"
@@ -19069,6 +19071,14 @@ issues:
   - "ext/pcre/pcre2lib/pcre2_jit_misc.c:131:7        gcontext    U       (void)gcontext;"
   - "ext/pcre/pcre2lib/pcre2_jit_neon_inc.h:9:28         Zoltan      U       This module by Zoltan Herczeg and Sebastian"
   - "ext/pcre/pcre2lib/pcre2_jit_neon_inc.h:9:35         Herczeg     U       This module by Zoltan Herczeg and Sebastian Pop"
+  - "ext/pcre/pcre2lib/pcre2_jit_neon_inc.h:42:14        FFCS        U       # if defined(FFCS)"
+  - "ext/pcre/pcre2lib/pcre2_jit_neon_inc.h:44:19        ffcs        U       # define FF_FUN ffcs_utf"
+  - "ext/pcre/pcre2lib/pcre2_jit_neon_inc.h:46:19        ffcs        U       # define FF_FUN ffcs"
+  - "ext/pcre/pcre2lib/pcre2_jit_neon_inc.h:49:16        FFCS        U       # elif defined(FFCS_2)"
+  - "ext/pcre/pcre2lib/pcre2_jit_neon_inc.h:51:19        ffcs        U       # define FF_FUN ffcs_2_utf"
+  - "ext/pcre/pcre2lib/pcre2_jit_neon_inc.h:53:19        ffcs        U       # define FF_FUN ffcs_2"
+  - "ext/pcre/pcre2lib/pcre2_jit_neon_inc.h:56:16        FFCS        U       # elif defined(FFCS_MASK)"
+  - "ext/pcre/pcre2lib/pcre2_jit_neon_inc.h:58:19        ffcs        U       # define FF_FUN ffcs_mask_utf"
   - "ext/pcre/pcre2lib/pcre2_jit_neon_inc.h:63:16        FFCPS       U       # elif defined(FFCPS_0)"
   - "ext/pcre/pcre2lib/pcre2_jit_neon_inc.h:65:19        ffcps       U       # define FF_FUN ffcps_0_utf"
   - "ext/pcre/pcre2lib/pcre2_jit_neon_inc.h:67:19        ffcps       U       # define FF_FUN ffcps_0"
@@ -19077,8 +19087,10 @@ issues:
   - "ext/pcre/pcre2lib/pcre2_jit_neon_inc.h:74:19        ffcps       U       # define FF_FUN ffcps_1"
   - "ext/pcre/pcre2lib/pcre2_jit_neon_inc.h:77:17        FFCPS       U       # elif defined (FFCPS_DEFAULT)"
   - "ext/pcre/pcre2lib/pcre2_jit_neon_inc.h:79:19        ffcps       U       # define FF_FUN ffcps_default_utf"
+  - "ext/pcre/pcre2lib/pcre2_jit_neon_inc.h:101:13       FFCS        U       #if defined(FFCS)"
   - "ext/pcre/pcre2lib/pcre2_jit_neon_inc.h:103:1        vect        U       vect_t vc1 = VDUPQ(c1);"
   - "ext/pcre/pcre2lib/pcre2_jit_neon_inc.h:103:14       VDUPQ       U       vect_t vc1 = VDUPQ(c1);"
+  - "ext/pcre/pcre2lib/pcre2_jit_neon_inc.h:105:15       FFCS        U       #elif defined(FFCS_2)"
   - "ext/pcre/pcre2lib/pcre2_jit_neon_inc.h:107:1        vect        U       vect_t vc1 = VDUPQ(c1);"
   - "ext/pcre/pcre2lib/pcre2_jit_neon_inc.h:107:14       VDUPQ       U       vect_t vc1 = VDUPQ(c1);"
   - "ext/pcre/pcre2lib/pcre2_jit_neon_inc.h:109:1        vect        U       vect_t vc2 = VDUPQ(c2);"
@@ -19159,6 +19171,16 @@ issues:
   - "ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:803:16       vextq       U       # define VEXTQ vextq_u32"
   - "ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:804:10       VANDQ       U       # define VANDQ vandq_u32"
   - "ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:804:16       vandq       U       # define VANDQ vandq_u32"
+  - "ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:811:9        FFCS        U       #define FFCS"
+  - "ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:818:8        FFCS        U       #undef FFCS"
+  - "ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:820:9        FFCS        U       #define FFCS_2"
+  - "ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:827:8        FFCS        U       #undef FFCS_2"
+  - "ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:829:9        FFCS        U       #define FFCS_MASK"
+  - "ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:863:49       ffcs        U       IMM, SLJIT_FUNC_ADDR(ffcs_utf));"
+  - "ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:866:49       ffcs        U       IMM, SLJIT_FUNC_ADDR(ffcs));"
+  - "ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:869:47       ffcs        U       IMM, SLJIT_FUNC_ADDR(ffcs));"
+  - "ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:884:51       ffcs        U       IMM, SLJIT_FUNC_ADDR(ffcs_mask_utf));"
+  - "ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:887:51       ffcs        U       IMM, SLJIT_FUNC_ADDR(ffcs_mask));"
   - "ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:939:15       vect        U       static inline vect_t fast_forward_char"
   - "ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:939:73       vect        U       compare_type ctype, vect_t dst, vect_t cmp1,"
   - "ext/pcre/pcre2lib/pcre2_jit_simd_inc.h:944:9        VCEQQ       U       dst = VCEQQ(dst, cmp1);"
