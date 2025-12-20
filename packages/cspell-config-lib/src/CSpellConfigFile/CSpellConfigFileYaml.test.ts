@@ -3,7 +3,8 @@ import assert from 'node:assert';
 import { describe, expect, test } from 'vitest';
 
 import { cspellConfigFileSchema } from '../CSpellConfigFile.js';
-import { createTextFile, TextFile } from '../TextFile.js';
+import type { TextFile } from '../TextFile.js';
+import { createTextFile } from '../TextFile.js';
 import { createNodeValue, isCfgArrayNode, isCfgObjectNode, isCfgScalarNode } from '../UpdateConfig/CfgTree.js';
 import { unindent } from '../util/unindent.js';
 import { CSpellConfigFileYaml, parseCSpellConfigFileYaml } from './CSpellConfigFileYaml.js';

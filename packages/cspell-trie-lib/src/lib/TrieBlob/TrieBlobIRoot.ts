@@ -1,6 +1,6 @@
 import type { ITrieNode, ITrieNodeId, ITrieNodeRoot } from '../ITrieNode/ITrieNode.js';
 import type { TrieCharacteristics, TrieInfo } from '../ITrieNode/TrieInfo.js';
-import { CharIndex } from './CharIndex.js';
+import type { CharIndex } from './CharIndex.js';
 import { Utf8Accumulator } from './Utf8.js';
 
 interface BitMaskInfo {

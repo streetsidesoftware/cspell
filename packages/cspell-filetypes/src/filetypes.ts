@@ -1,5 +1,5 @@
 import { definitions } from './definitions.js';
-import { FileTypeDefinition, FileTypeDefinitions, FileTypeId } from './types.js';
+import type { FileTypeDefinition, FileTypeDefinitions, FileTypeId } from './types.js';
 
 type ExtensionToFileTypeIdMapSet = Map<string, Set<string>>;
 type ExtensionToFileTypeIdMap = Map<string, string[]>;

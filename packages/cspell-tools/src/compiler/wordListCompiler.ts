@@ -5,7 +5,7 @@ import { opAppend, opMap, pipe } from '@cspell/cspell-pipe/sync';
 import * as Trie from 'cspell-trie-lib';
 
 import type { CompileOptions } from './CompileOptions.js';
-import { WordListCompiler } from './CompilerDefinitions.js';
+import type { WordListCompiler } from './CompilerDefinitions.js';
 import { getLogger } from './logger.js';
 import { normalizeTargetWords } from './wordListParser.js';
 import { writeTextToFile } from './writeTextToFile.js';

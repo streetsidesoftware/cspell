@@ -3,8 +3,8 @@ import { pathToFileURL } from 'node:url';
 import { afterEach, beforeEach, describe, expect, type Mock, test, vi } from 'vitest';
 
 import * as fileHelper from '../../util/fileHelper.js';
-import type { CachedFileResult, CSpellCacheMeta } from './DiskCache.js';
-import { __testing__, createDiskCache, DiskCache } from './DiskCache.js';
+import type { CachedFileResult, CSpellCacheMeta, DiskCache } from './DiskCache.js';
+import { __testing__, createDiskCache } from './DiskCache.js';
 import { createFromFile } from './file-entry-cache/index.js';
 
 const { calcVersion } = __testing__;

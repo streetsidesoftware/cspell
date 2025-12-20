@@ -3,9 +3,10 @@ import { promises as fs } from 'node:fs';
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 
-import { CSpellSettings } from '@cspell/cspell-types';
+import type { CSpellSettings } from '@cspell/cspell-types';
 import { toFileDirURL, urlRelative } from '@cspell/url';
-import { CSpellConfigFile, isCfgArrayNode, MutableCSpellConfigFile } from 'cspell-config-lib';
+import type { CSpellConfigFile } from 'cspell-config-lib';
+import { isCfgArrayNode, MutableCSpellConfigFile } from 'cspell-config-lib';
 
 import { toError } from '../util/errors.js';
 

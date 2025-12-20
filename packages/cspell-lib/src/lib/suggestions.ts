@@ -1,7 +1,8 @@
 import assert from 'node:assert';
 
 import type { CSpellSettings, LocaleId } from '@cspell/cspell-types';
-import { ICSpellConfigFile, satisfiesCSpellConfigFile } from 'cspell-config-lib';
+import type { ICSpellConfigFile } from 'cspell-config-lib';
+import { satisfiesCSpellConfigFile } from 'cspell-config-lib';
 
 import type { LanguageId } from './fileTypes.js';
 import {

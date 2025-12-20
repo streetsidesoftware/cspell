@@ -1,4 +1,4 @@
-import { DictionaryDefinition } from '@cspell/cspell-types';
+import type { DictionaryDefinition } from '@cspell/cspell-types';
 import { describe, expect, test } from 'vitest';
 
 import { readFastTrieBlobFromConfig, readTrieFromConfig } from '../../test/dictionaries.test.helper.js';

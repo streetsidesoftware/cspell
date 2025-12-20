@@ -224,6 +224,16 @@ export default defineConfig(
         },
     },
     {
+        files: ['**/*.mts', '**/*.ts', '**/*.tsx', '**/*.cts'],
+        rules: {
+            '@typescript-eslint/no-import-type-side-effects': 'error',
+            '@typescript-eslint/consistent-type-imports': [
+                'error',
+                { prefer: 'type-imports', fixStyle: 'separate-type-imports' },
+            ],
+        },
+    },
+    {
         files: ['**/*.cts', '**/*.cjs'],
         rules: {
             'unicorn/prefer-module': 'off',
@@ -262,6 +272,10 @@ export default defineConfig(
             'unicorn/prefer-module': 'off', // require.resolve is allowed in tests
             'unicorn/error-message': 'off',
             'unicorn/no-useless-undefined': 'off', // undefined is allowed in tests
+            '@typescript-eslint/consistent-type-imports': [
+                'error',
+                { prefer: 'type-imports', fixStyle: 'separate-type-imports', disallowTypeAnnotations: false },
+            ],
         },
     },
     {

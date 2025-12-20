@@ -19,7 +19,7 @@ import { isSpellingDictionaryLoadError } from 'cspell-lib';
 
 import type { Channel } from './console.js';
 import { console as customConsole } from './console.js';
-import { CSpellReporterConfiguration } from './models.js';
+import type { CSpellReporterConfiguration } from './models.js';
 import type { LinterCliOptions } from './options.js';
 import { ApplicationError } from './util/errors.js';
 import type { FinalizedReporter } from './util/reporters.js';

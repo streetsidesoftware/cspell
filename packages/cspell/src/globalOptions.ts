@@ -1,8 +1,9 @@
-import { Command, Option as CommanderOption } from 'commander';
+import type { Command } from 'commander';
+import { Option as CommanderOption } from 'commander';
 
 import { parseApplicationFeatureFlags } from './application.mjs';
 import { collect } from './commandHelpers.js';
-import { BaseOptions } from './options.js';
+import type { BaseOptions } from './options.js';
 
 export function addGlobalOptionsToAction(command: Command): Command {
     command = command.addOption(

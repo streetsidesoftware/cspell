@@ -2,6 +2,7 @@ import assert from 'node:assert';
 
 import { FlatpackedWrapper } from './flatpackUtil.mjs';
 import { proxyDate, proxyObject, proxySet } from './proxy.mjs';
+import type { RefElements, StringRefElements } from './RefElements.mjs';
 import {
     ArrayRefElement,
     BigIntRefElement,
@@ -12,12 +13,10 @@ import {
     ObjectWrapperRefElement,
     PrimitiveRefElement,
     PrimitiveRefElementBase,
-    RefElements,
     RegExpRefElement,
     SetRefElement,
     StringConcatRefElement,
     StringPrimitiveRefElement,
-    StringRefElements,
     SubStringRefElement,
 } from './RefElements.mjs';
 import { stringifyFlatpacked } from './stringify.mjs';

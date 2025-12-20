@@ -4,7 +4,7 @@ import type { WeightMap } from './distance/index.js';
 import { createFindOptions, findLegacyCompound, findWord, findWordNode, isForbiddenWord } from './ITrieNode/find.js';
 import type { FindOptions, PartialFindOptions } from './ITrieNode/FindOptions.js';
 import type { ITrieNode, ITrieNodeRoot } from './ITrieNode/index.js';
-import { FindFullResult } from './ITrieNode/ITrieNode.js';
+import type { FindFullResult } from './ITrieNode/ITrieNode.js';
 import { countWords, iteratorTrieWords } from './ITrieNode/trie-util.js';
 import type { PartialTrieInfo, TrieInfo } from './ITrieNode/TrieInfo.js';
 import { walker } from './ITrieNode/walker/walker.js';

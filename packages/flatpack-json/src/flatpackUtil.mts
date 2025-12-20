@@ -1,5 +1,6 @@
 import assert from 'node:assert';
 
+import type { RefElements } from './RefElements.mjs';
 import {
     ArrayRefElement,
     BigIntRefElement,
@@ -9,22 +10,14 @@ import {
     ObjectRefElement,
     ObjectWrapperRefElement,
     PrimitiveRefElement,
-    RefElements,
     RegExpRefElement,
     SetRefElement,
     StringConcatRefElement,
     StringPrimitiveRefElement,
     SubStringRefElement,
 } from './RefElements.mjs';
-import {
-    ArrayBasedElements,
-    type ArrayElement,
-    ElementType,
-    Flatpacked,
-    type FlattenedElement,
-    ObjectWrapperElement,
-    supportedHeaders,
-} from './types.mjs';
+import type { ArrayBasedElements, Flatpacked, ObjectWrapperElement } from './types.mjs';
+import { type ArrayElement, ElementType, type FlattenedElement, supportedHeaders } from './types.mjs';
 
 export function fromElement(elem: FlattenedElement, resolve: (index: number) => RefElements): RefElements {
     function handleArrayElement(element: ArrayBasedElements) {

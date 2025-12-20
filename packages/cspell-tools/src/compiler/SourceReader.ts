@@ -1,7 +1,8 @@
-import { RequireFields } from '../types.js';
+import type { RequireFields } from '../types.js';
 import { createReader } from './Reader.js';
 import type { Reader } from './readers/ReaderOptions.js';
-import { parseFileLines, ParseFileOptions } from './wordListParser.js';
+import type { ParseFileOptions } from './wordListParser.js';
+import { parseFileLines } from './wordListParser.js';
 import type { AllowedSplitWordsCollection } from './WordsCollection.js';
 
 export interface SourceReaderOptions {

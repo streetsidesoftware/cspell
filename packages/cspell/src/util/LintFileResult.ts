@@ -1,6 +1,6 @@
-import { Issue, ReportIssueOptions } from '@cspell/cspell-types';
+import type { Issue, ReportIssueOptions } from '@cspell/cspell-types';
 
-import { FileInfo, Perf } from './fileHelper.js';
+import type { FileInfo, Perf } from './fileHelper.js';
 
 export interface LintFileResult {
     fileInfo: FileInfo;

@@ -1,5 +1,6 @@
 import { onClearCache } from '../events/index.js';
-import { AutoResolveWeakCache, CacheStats } from '../util/AutoResolve.js';
+import type { CacheStats } from '../util/AutoResolve.js';
+import { AutoResolveWeakCache } from '../util/AutoResolve.js';
 
 interface IDisposable {
     dispose(): void;

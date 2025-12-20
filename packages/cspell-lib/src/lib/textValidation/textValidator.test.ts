@@ -9,7 +9,7 @@ import type { SpellingDictionaryOptions } from '../SpellingDictionary/index.js';
 import { createCollection, createSpellingDictionary, getDictionaryInternal } from '../SpellingDictionary/index.js';
 import { FreqCounter } from '../util/FreqCounter.js';
 import * as Text from '../util/text.js';
-import { ValidationIssue } from '../validator.js';
+import type { ValidationIssue } from '../validator.js';
 import { settingsToValidateOptions } from './settingsToValidateOptions.js';
 import { _testMethods, calcTextInclusionRanges, validateText } from './textValidator.js';
 import type { ValidationOptions } from './ValidationTypes.js';

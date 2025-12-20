@@ -1,4 +1,5 @@
-import { Mock, vi } from 'vitest';
+import type { Mock } from 'vitest';
+import { vi } from 'vitest';
 
 export function* generatorTestWrapper<T>(values: Iterable<T>, options?: IterableTestWrapperOptions): Iterable<T> {
     const iter = iterableTestWrapper(values, options)[Symbol.iterator]();

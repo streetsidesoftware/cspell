@@ -2,12 +2,8 @@ import fs from 'node:fs/promises';
 
 import type { CSpellSettings } from '@cspell/cspell-types';
 import { toFileDirURL, toFileURL } from '@cspell/url';
-import {
-    createReaderWriter,
-    CSpellConfigFile,
-    CSpellConfigFileReaderWriter,
-    cspellConfigFileSchema,
-} from 'cspell-config-lib';
+import type { CSpellConfigFile, CSpellConfigFileReaderWriter } from 'cspell-config-lib';
+import { createReaderWriter, cspellConfigFileSchema } from 'cspell-config-lib';
 
 import { console } from '../console.js';
 import { addDictionariesToConfigFile, addImportsToConfigFile } from './adjustConfig.js';

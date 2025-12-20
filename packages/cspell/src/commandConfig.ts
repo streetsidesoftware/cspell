@@ -1,7 +1,7 @@
 import type { Command } from 'commander';
 
 import { collect, crOpt } from './commandHelpers.js';
-import { UpdateConfigOptions } from './config/options.js';
+import type { UpdateConfigOptions } from './config/options.js';
 import { updateConfig } from './config/updateConfig.js';
 
 export function commandInit(prog: Command): Command {

@@ -1,3 +1,5 @@
+import type { SuggestionResult } from 'cspell-trie-lib';
+
 import type { AutoCache, CacheStats } from '../util/AutoCache.js';
 import { autoCache, extractStats } from '../util/AutoCache.js';
 import type { PreferredSuggestion, SearchOptions, SpellingDictionary } from './SpellingDictionary.js';
@@ -32,7 +34,7 @@ export interface CachingDictionary {
     isForbidden(word: string): boolean;
     stats(): CallStats;
     getPreferredSuggestions(word: string): PreferredSuggestion[] | undefined;
-    suggest(word: string, suggestOptions?: SuggestOptionsRO): import('cspell-trie-lib').SuggestionResult[];
+    suggest(word: string, suggestOptions?: SuggestOptionsRO): SuggestionResult[];
 }
 
 interface LogEntryBase extends SearchOptions {

@@ -1,7 +1,8 @@
 import { toFileDirURL, toFilePathOrHref, toFileURL, urlDirname } from '@cspell/url';
 import type { GlobMatchRule, GlobPatternNormalized, GlobPatternWithRoot } from 'cspell-glob';
 import { GlobMatcher } from 'cspell-glob';
-import { getDefaultVirtualFs, VFileSystem } from 'cspell-io';
+import type { VFileSystem } from 'cspell-io';
+import { getDefaultVirtualFs } from 'cspell-io';
 
 import { isDefined, isParentOf, makeRelativeTo } from './utils.js';
 

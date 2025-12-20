@@ -1,5 +1,5 @@
-import { CSpellSettings } from '@cspell/cspell-types';
-import { ICSpellConfigFile } from 'cspell-config-lib';
+import type { CSpellSettings } from '@cspell/cspell-types';
+import type { ICSpellConfigFile } from 'cspell-config-lib';
 import { describe, expect, test } from 'vitest';
 
 import type { SuggestedWord, SuggestionOptions } from './suggestions.js';

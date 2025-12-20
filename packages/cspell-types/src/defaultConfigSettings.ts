@@ -1,4 +1,4 @@
-import { CSpellSettings } from './CSpellSettingsDef';
+import type { CSpellSettings } from './CSpellSettingsDef';
 
 export const defaultCSpellSettings: {
     readonly ignoreRandomStrings: boolean;

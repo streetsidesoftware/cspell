@@ -36,7 +36,7 @@ import {
 import { console } from '../console.js';
 import { getEnvironmentVariable, setEnvironmentVariable, truthy } from '../environment.js';
 import { getFeatureFlags } from '../featureFlags/index.js';
-import { CSpellReporterConfiguration } from '../models.js';
+import type { CSpellReporterConfiguration } from '../models.js';
 import { npmPackage } from '../pkgInfo.js';
 import type { CreateCacheSettings, CSpellLintResultCache } from '../util/cache/index.js';
 import { calcCacheSettings, createCache } from '../util/cache/index.js';

@@ -19,7 +19,7 @@ import { dynamicImport } from '@cspell/dynamic-import';
 
 import { pkgDir } from '../pkgInfo.js';
 import { ApplicationError, toError } from './errors.js';
-import { LintFileResult } from './LintFileResult.js';
+import type { LintFileResult } from './LintFileResult.js';
 import { clean } from './util.js';
 
 export type FinalizedReporter = Required<CSpellReporter>;

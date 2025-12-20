@@ -1,5 +1,6 @@
 import type { CSpellSettings, DictionaryId, LocaleId } from '@cspell/cspell-types';
-import { ICSpellConfigFile, satisfiesCSpellConfigFile } from 'cspell-config-lib';
+import type { ICSpellConfigFile } from 'cspell-config-lib';
+import { satisfiesCSpellConfigFile } from 'cspell-config-lib';
 import { genSequence } from 'gensequence';
 
 import type { LanguageId } from './fileTypes.js';

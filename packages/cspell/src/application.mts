@@ -17,7 +17,7 @@ import { console } from './console.js';
 import type { TimedSuggestionsForWordResult } from './emitters/suggestionsEmitter.js';
 import { getFeatureFlags, parseFeatureFlags } from './featureFlags/index.js';
 import { extractUnknownWordsConfig, LintRequest, runLint } from './lint/index.js';
-import { CSpellReporterConfiguration } from './models.js';
+import type { CSpellReporterConfiguration } from './models.js';
 import type { BaseOptions, LegacyOptions, LinterCliOptions, SuggestionOptions, TraceOptions } from './options.js';
 import { fixLegacy } from './options.js';
 import { simpleRepl } from './repl/index.js';
