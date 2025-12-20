@@ -4,11 +4,11 @@ import { fileURLToPath } from 'node:url';
 
 import { resolve as importResolve } from 'import-meta-resolve';
 
-import { importTrieV3AsFastTrieBlob } from '../lib/io/importV3FastBlob.js';
-import type { Trie } from '../lib/trie.js';
-import type { FastTrieBlob } from '../lib/TrieBlob/FastTrieBlob.js';
-import { readRawDictionaryFileFromConfig, readTrieFile, readTrieFileFromConfig } from './reader.test.helper.js';
-import { resolveGlobalDict, resolveGlobalSample } from './samples.js';
+import { importTrieV3AsFastTrieBlob } from '../lib/io/importV3FastBlob.ts';
+import type { Trie } from '../lib/trie.ts';
+import type { FastTrieBlob } from '../lib/TrieBlob/FastTrieBlob.ts';
+import { readRawDictionaryFileFromConfig, readTrieFile, readTrieFileFromConfig } from './reader.test.helper.ts';
+import { resolveGlobalDict, resolveGlobalSample } from './samples.ts';
 
 const tries = new Map<string, Promise<Trie>>();
 

@@ -23,11 +23,11 @@
 
 import { opAppend, opConcatMap, opFilter, pipe, reduce } from '@cspell/cspell-pipe/sync';
 
-import { trieNodeToRoot } from '../TrieNode/trie-util.js';
-import type { TrieNode, TrieRoot } from '../TrieNode/TrieNode.js';
-import { FLAG_WORD } from '../TrieNode/TrieNode.js';
-import { bufferLines } from '../utils/bufferLines.js';
-import { BACK, EOL, EOR, EOW, ESCAPE, LF, REF, REF_REL } from './constants.js';
+import { trieNodeToRoot } from '../TrieNode/trie-util.ts';
+import type { TrieNode, TrieRoot } from '../TrieNode/TrieNode.ts';
+import { FLAG_WORD } from '../TrieNode/TrieNode.ts';
+import { bufferLines } from '../utils/bufferLines.ts';
+import { BACK, EOL, EOR, EOW, ESCAPE, LF, REF, REF_REL } from './constants.ts';
 
 const REF_INDEX_BEGIN = '[';
 const REF_INDEX_END = ']';

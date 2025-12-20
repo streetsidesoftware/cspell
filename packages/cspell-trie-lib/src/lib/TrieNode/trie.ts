@@ -1,6 +1,6 @@
-import type { ITrieNode, ITrieNodeId, ITrieNodeRoot } from '../ITrieNode/ITrieNode.js';
-import type { TrieInfo } from '../ITrieNode/TrieInfo.js';
-import type { TrieNode, TrieRoot } from './TrieNode.js';
+import type { ITrieNode, ITrieNodeId, ITrieNodeRoot } from '../ITrieNode/ITrieNode.ts';
+import type { TrieInfo } from '../ITrieNode/TrieInfo.ts';
+import type { TrieNode, TrieRoot } from './TrieNode.ts';
 
 export function trieRootToITrieRoot(root: TrieRoot): ITrieNodeRoot {
     return ImplITrieRoot.toITrieNode(root);
@@ -17,7 +17,9 @@ const EmptyEntries: readonly (readonly [string, ITrieNode])[] = Object.freeze([]
 class ImplITrieNode implements ITrieNode {
     readonly id: TrieNode;
     private _keys: readonly string[] | undefined;
-    protected constructor(readonly node: TrieNode) {
+    readonly node: TrieNode;
+    protected constructor(node: TrieNode) {
+        this.node = node;
         this.id = node;
     }
 
@@ -108,9 +110,11 @@ class ImplITrieRoot extends ImplITrieNode implements ITrieNodeRoot {
     readonly hasForbiddenWords: boolean;
     readonly hasCompoundWords: boolean;
     readonly hasNonStrictWords: boolean;
+    readonly root: TrieRoot;
 
-    protected constructor(readonly root: TrieRoot) {
+    protected constructor(root: TrieRoot) {
         super(root);
+        this.root = root;
         const { stripCaseAndAccentsPrefix, compoundCharacter, forbiddenWordPrefix, isCaseAware } = root;
         this.info = { stripCaseAndAccentsPrefix, compoundCharacter, forbiddenWordPrefix, isCaseAware };
         this.hasForbiddenWords = !!root.c[forbiddenWordPrefix];

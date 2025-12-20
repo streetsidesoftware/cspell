@@ -1,7 +1,7 @@
-import type { FindResult, ITrieNode, ITrieNodeId, ITrieNodeRoot } from '../ITrieNode/ITrieNode.js';
-import type { TrieInfo } from '../ITrieNode/TrieInfo.js';
-import type { FastTrieBlobInternalsAndMethods } from './FastTrieBlobInternals.js';
-import { Utf8Accumulator } from './Utf8.js';
+import type { FindResult, ITrieNode, ITrieNodeId, ITrieNodeRoot } from '../ITrieNode/ITrieNode.ts';
+import type { TrieInfo } from '../ITrieNode/TrieInfo.ts';
+import type { FastTrieBlobInternalsAndMethods } from './FastTrieBlobInternals.ts';
+import { Utf8Accumulator } from './Utf8.ts';
 
 const EmptyKeys: readonly string[] = Object.freeze([]);
 const EmptyNodes: readonly ITrieNode[] = Object.freeze([]);
@@ -22,11 +22,12 @@ class FastTrieBlobINode implements ITrieNode {
     private _entries: readonly [string, ITrieNode][] | undefined;
     private _values: readonly ITrieNode[] | undefined;
     protected charToIdx: Readonly<Record<string, NodeIndex>> | undefined;
+    readonly trie: FastTrieBlobInternalsAndMethods;
+    readonly nodeIdx: NodeIndex;
 
-    constructor(
-        readonly trie: FastTrieBlobInternalsAndMethods,
-        readonly nodeIdx: NodeIndex,
-    ) {
+    constructor(trie: FastTrieBlobInternalsAndMethods, nodeIdx: NodeIndex) {
+        this.trie = trie;
+        this.nodeIdx = nodeIdx;
         const node = trie.nodes[nodeIdx];
         this.node = node;
         this.eow = !!(node[0] & trie.NodeMaskEOW);
@@ -87,18 +88,6 @@ class FastTrieBlobINode implements ITrieNode {
             return new FastTrieBlobINode(this.trie, nodeIdx);
         }
         return this.values()[keyIdx];
-    }
-
-    getCharToIdxMap(): Record<string, number> {
-        const m = this.charToIdx;
-        if (m) return m;
-        const map: Record<string, number> = Object.create(null);
-        const keys = this.keys();
-        for (let i = 0; i < keys.length; ++i) {
-            map[keys[i]] = i;
-        }
-        this.charToIdx = map;
-        return map;
     }
 
     findExact(word: string): boolean {

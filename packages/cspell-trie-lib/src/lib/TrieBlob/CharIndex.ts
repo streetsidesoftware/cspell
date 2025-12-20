@@ -1,4 +1,4 @@
-import { encodeTextToUtf8, encodeUtf8N_BE, type Utf8BE32 } from './Utf8.js';
+import { encodeTextToUtf8, encodeUtf8N_BE, type Utf8BE32 } from './Utf8.ts';
 
 export type Utf8Seq = Readonly<number[]>;
 
@@ -20,8 +20,10 @@ export class CharIndex {
     #lastWord = '';
     #lastWordSeq: Utf8Seq = [];
     #multiByteChars: boolean;
+    readonly charIndex: readonly string[];
 
-    constructor(readonly charIndex: readonly string[]) {
+    constructor(charIndex: readonly string[]) {
+        this.charIndex = charIndex;
         this.#charToUtf8SeqMap = buildCharIndexSequenceMap(charIndex);
         this.#multiByteChars = [...this.#charToUtf8SeqMap.values()].some((c) => c.length > 1);
     }

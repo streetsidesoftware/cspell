@@ -1,5 +1,5 @@
-import type { SuggestionCostMapDef } from '../models/suggestionCostsDef.js';
-import { DEFAULT_COMPOUNDED_WORD_SEPARATOR } from '../suggestions/constants.js';
+import type { SuggestionCostMapDef } from '../models/suggestionCostsDef.ts';
+import { DEFAULT_COMPOUNDED_WORD_SEPARATOR } from '../suggestions/constants.ts';
 
 export type WeightedRepMapTrie = Record<string, WeightedRepTrieNode>;
 
@@ -312,7 +312,11 @@ export function createWeightCostCalculator(weightMap: WeightMap): _WeightCostCal
 }
 
 class _WeightCostCalculator implements WeightCostCalculator {
-    constructor(readonly weightMap: WeightMap) {}
+    readonly weightMap: WeightMap;
+
+    constructor(weightMap: WeightMap) {
+        this.weightMap = weightMap;
+    }
 
     *calcInsDelCosts(pos: CostPosition): Iterable<CostPosition> {
         const { a, ai, b, bi, c, p } = pos;

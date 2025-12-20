@@ -1,7 +1,7 @@
-import type { TrieNode, TrieRoot } from '../TrieNode/TrieNode.js';
-import { isDefined } from '../utils/isDefined.js';
-import type { YieldResult } from './walkerTypes.js';
-import { CompoundWordsMethod, JOIN_SEPARATOR, WORD_SEPARATOR } from './walkerTypes.js';
+import type { TrieNode, TrieRoot } from '../TrieNode/TrieNode.ts';
+import { isDefined } from '../utils/isDefined.ts';
+import type { YieldResult } from './walkerTypes.ts';
+import { CompoundWordsMethod, JOIN_SEPARATOR, WORD_SEPARATOR } from './walkerTypes.ts';
 
 /**
  * Ask for the next result.

@@ -1,7 +1,7 @@
-import type { ITrieNode, ITrieNodeId, ITrieNodeRoot } from '../ITrieNode/ITrieNode.js';
-import type { TrieCharacteristics, TrieInfo } from '../ITrieNode/TrieInfo.js';
-import type { CharIndex } from './CharIndex.js';
-import { Utf8Accumulator } from './Utf8.js';
+import type { ITrieNode, ITrieNodeId, ITrieNodeRoot } from '../ITrieNode/ITrieNode.ts';
+import type { TrieCharacteristics, TrieInfo } from '../ITrieNode/TrieInfo.ts';
+import type { CharIndex } from './CharIndex.ts';
+import { Utf8Accumulator } from './Utf8.ts';
 
 interface BitMaskInfo {
     readonly NodeMaskEOW: number;
@@ -36,13 +36,12 @@ export class TrieBlobInternals implements TrieMethods, BitMaskInfo {
     readonly hasForbiddenWords: boolean;
     readonly hasCompoundWords: boolean;
     readonly hasNonStrictWords: boolean;
+    readonly nodes: Uint32Array;
+    readonly charIndex: Readonly<CharIndex>;
 
-    constructor(
-        readonly nodes: Uint32Array,
-        readonly charIndex: Readonly<CharIndex>,
-        maskInfo: BitMaskInfo,
-        methods: TrieMethods,
-    ) {
+    constructor(nodes: Uint32Array, charIndex: Readonly<CharIndex>, maskInfo: BitMaskInfo, methods: TrieMethods) {
+        this.nodes = nodes;
+        this.charIndex = charIndex;
         const { NodeMaskEOW, NodeMaskChildCharIndex, NodeMaskNumChildren, NodeChildRefShift } = maskInfo;
         this.NodeMaskEOW = NodeMaskEOW;
         this.NodeMaskNumChildren = NodeMaskNumChildren;
@@ -78,11 +77,12 @@ class TrieBlobINode implements ITrieNode {
     private _entries: readonly [string, ITrieNode][] | undefined;
     private _values: readonly ITrieNode[] | undefined;
     protected charToIdx: Readonly<Record<string, number>> | undefined;
+    readonly trie: TrieBlobInternals;
+    readonly nodeIdx: NodeIndex;
 
-    constructor(
-        readonly trie: TrieBlobInternals,
-        readonly nodeIdx: NodeIndex,
-    ) {
+    constructor(trie: TrieBlobInternals, nodeIdx: NodeIndex) {
+        this.trie = trie;
+        this.nodeIdx = nodeIdx;
         const node = trie.nodes[nodeIdx];
         this.node = node;
         this.eow = !!(node & trie.NodeMaskEOW);
@@ -105,12 +105,22 @@ class TrieBlobINode implements ITrieNode {
         return this._values;
     }
 
+    valueAt(keyIdx: number): ITrieNode {
+        if (this._values) return this._values[keyIdx];
+        return this.entryAt(keyIdx)[1];
+    }
+
     entries(): readonly (readonly [string, ITrieNode])[] {
         if (this._entries) return this._entries;
         if (!this._count) return EmptyEntries;
         const entries = this.getNodesEntries();
         this._entries = entries.map(([key, value]) => [key, new TrieBlobINode(this.trie, value)]);
         return this._entries;
+    }
+
+    entryAt(keyIdx: number): readonly [string, ITrieNode] {
+        if (this._entries) return this._entries[keyIdx];
+        return this.entries()[keyIdx];
     }
 
     /** get child ITrieNode */
@@ -132,7 +142,7 @@ class TrieBlobINode implements ITrieNode {
             const nodeIdx = n >>> this.trie.NodeChildRefShift;
             return new TrieBlobINode(this.trie, nodeIdx);
         }
-        return this.values()[keyIdx];
+        return this.valueAt(keyIdx);
     }
 
     #getChildNodeIdx(char: string) {
@@ -148,18 +158,6 @@ class TrieBlobINode implements ITrieNode {
         const idx = this.#getChildNodeIdx(char);
         if (idx === undefined) return undefined;
         return new TrieBlobINode(this.trie, idx);
-    }
-
-    getCharToIdxMap(): Record<string, number> {
-        const m = this.charToIdx;
-        if (m) return m;
-        const map: Record<string, number> = Object.create(null);
-        const keys = this.keys();
-        for (let i = 0; i < keys.length; ++i) {
-            map[keys[i]] = i;
-        }
-        this.charToIdx = map;
-        return map;
     }
 
     getNode(word: string): ITrieNode | undefined {
@@ -189,7 +187,7 @@ class TrieBlobINode implements ITrieNode {
             found = Utf8Accumulator.isMultiByte(charIdx);
         }
 
-        this._chained = !!found;
+        this._chained = found;
         return this._chained;
     }
 
@@ -240,7 +238,8 @@ class TrieBlobINode implements ITrieNode {
             ++s.nodeIdx;
             const entry = nodes[nodeIdx];
             const charIdx = entry & NodeMaskChildCharIndex;
-            const acc = s.acc.clone();
+            const ss = stack[depth + 1];
+            const acc = s.acc.clone(ss?.acc);
             const codePoint = acc.decode(charIdx);
             if (codePoint !== undefined) {
                 const char = String.fromCodePoint(codePoint);
@@ -250,7 +249,7 @@ class TrieBlobINode implements ITrieNode {
             }
             const idx = entry >>> NodeChildRefShift;
             const lIdx = idx + (nodes[idx] & NodeMaskNumChildren);
-            const ss = stack[++depth];
+            depth++;
             if (ss) {
                 ss.nodeIdx = idx + 1;
                 ss.lastIdx = lIdx;
@@ -282,14 +281,11 @@ export class TrieBlobIRoot extends TrieBlobINode implements ITrieNodeRoot {
     readonly hasForbiddenWords: boolean;
     readonly hasCompoundWords: boolean;
     readonly hasNonStrictWords: boolean;
+    readonly info: Readonly<TrieInfo>;
 
-    constructor(
-        trie: TrieBlobInternals,
-        nodeIdx: number,
-        readonly info: Readonly<TrieInfo>,
-        methods: ITrieSupportMethods,
-    ) {
+    constructor(trie: TrieBlobInternals, nodeIdx: number, info: Readonly<TrieInfo>, methods: ITrieSupportMethods) {
         super(trie, nodeIdx);
+        this.info = info;
         this.find = methods.find;
         this.isForbidden = trie.isForbidden;
         this.hasForbiddenWords = trie.hasForbiddenWords;

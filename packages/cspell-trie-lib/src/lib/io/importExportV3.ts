@@ -1,9 +1,9 @@
 import { opAppend, pipe } from '@cspell/cspell-pipe/sync';
 
-import type { TrieNode, TrieRoot } from '../TrieNode/TrieNode.js';
-import { bufferLines } from '../utils/bufferLines.js';
-import { BACK, EOL, EOR, EOW, ESCAPE, LF, REF } from './constants.js';
-import { importTrieV3AsTrieRoot } from './importV3.js';
+import type { TrieNode, TrieRoot } from '../TrieNode/TrieNode.ts';
+import { bufferLines } from '../utils/bufferLines.ts';
+import { BACK, EOL, EOR, EOW, ESCAPE, LF, REF } from './constants.ts';
+import { importTrieV3AsTrieRoot } from './importV3.ts';
 
 const specialCharacters = stringToCharSet(
     [EOW, BACK, EOL, REF, EOR, ESCAPE, LF, '0123456789', '`~!@#$%^&*()_-+=[]{};:\'"<>,./?\\|'].join(''),

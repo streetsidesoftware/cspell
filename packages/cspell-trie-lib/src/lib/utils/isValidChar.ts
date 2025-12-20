@@ -1,6 +1,6 @@
 import assert from 'node:assert';
 
-import { isValidUtf16Character } from './text.js';
+import { isValidUtf16Character } from './text.ts';
 
 export function isValidChar(char: string): boolean {
     return isValidUtf16Character(char);

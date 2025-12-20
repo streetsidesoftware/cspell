@@ -1,14 +1,14 @@
-import { isWordTerminationNode } from '../TrieNode/trie-util.js';
-import type { TrieRoot } from '../TrieNode/TrieNode.js';
-import { clean } from '../utils/clean.js';
-import { CompoundWordsMethod, hintedWalker, JOIN_SEPARATOR, WORD_SEPARATOR } from '../walker/index.js';
-import { opCosts } from './constants.js';
-import type { GenSuggestionOptionsRO, SuggestionOptionsRO } from './genSuggestionsOptions.js';
-import { createSuggestionOptions } from './genSuggestionsOptions.js';
-import { visualLetterMaskMap } from './orthography.js';
-import type { SuggestionCollectorOptionsRO } from './suggestCollector.js';
-import { suggestionCollector } from './suggestCollector.js';
-import type { MaxCost, SuggestionGenerator, SuggestionResult, SuggestionResultBase } from './SuggestionTypes.js';
+import { isWordTerminationNode } from '../TrieNode/trie-util.ts';
+import type { TrieRoot } from '../TrieNode/TrieNode.ts';
+import { clean } from '../utils/clean.ts';
+import { CompoundWordsMethod, hintedWalker, JOIN_SEPARATOR, WORD_SEPARATOR } from '../walker/index.ts';
+import { opCosts } from './constants.ts';
+import type { GenSuggestionOptionsRO, SuggestionOptionsRO } from './genSuggestionsOptions.ts';
+import { createSuggestionOptions } from './genSuggestionsOptions.ts';
+import { visualLetterMaskMap } from './orthography.ts';
+import type { SuggestionCollectorOptionsRO } from './suggestCollector.ts';
+import { suggestionCollector } from './suggestCollector.ts';
+import type { MaxCost, SuggestionGenerator, SuggestionResult, SuggestionResultBase } from './SuggestionTypes.ts';
 
 const baseCost = opCosts.baseCost;
 const swapCost = opCosts.swapCost;

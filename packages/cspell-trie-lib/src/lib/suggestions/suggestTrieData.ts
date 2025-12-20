@@ -1,1 +1,1 @@
-export { getSuggestionsAStar as genSuggestions, suggestAStar as suggest } from './suggestAStar.js';
+export { getSuggestionsAStar as genSuggestions, suggestAStar as suggest } from './suggestAStar.ts';

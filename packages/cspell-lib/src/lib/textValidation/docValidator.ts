@@ -455,7 +455,7 @@ export class DocumentValidator {
             ignoreCase: !(settings.caseSensitive ?? false),
             timeout: settings.suggestionsTimeout,
             numChanges: settings.suggestionNumChanges,
-        };
+        } as const;
 
         const rawSuggestions = dict.suggest(text, sugOptions);
         return this.adjustSuggestions(text, rawSuggestions);

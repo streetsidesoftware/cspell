@@ -1,11 +1,11 @@
 import { suite } from 'perf-insight';
 
-import { buildITrieFromWords } from '../lib/index.js';
-import { createTrieBlobFromTrieRoot } from '../lib/TrieBlob/createTrieBlob.js';
-import { FastTrieBlob } from '../lib/TrieBlob/FastTrieBlob.js';
-import { FastTrieBlobBuilder } from '../lib/TrieBlob/FastTrieBlobBuilder.js';
-import { createTrieRootFromList } from '../lib/TrieNode/trie-util.js';
-import { readTrieFromConfig } from '../test/dictionaries.test.helper.js';
+import { buildITrieFromWords } from '../src/lib/index.ts';
+import { createTrieBlobFromTrieRoot } from '../src/lib/TrieBlob/createTrieBlob.ts';
+import { FastTrieBlob } from '../src/lib/TrieBlob/FastTrieBlob.ts';
+import { FastTrieBlobBuilder } from '../src/lib/TrieBlob/FastTrieBlobBuilder.ts';
+import { createTrieRootFromList } from '../src/lib/TrieNode/trie-util.ts';
+import { readTrieFromConfig } from '../src/test/dictionaries.test.helper.ts';
 
 // const measureTimeout = 100;
 

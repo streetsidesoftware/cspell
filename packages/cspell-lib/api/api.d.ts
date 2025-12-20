@@ -2517,20 +2517,21 @@ interface PenaltyAdjustment {
 * @returns the edit distance.
 */
 
-declare enum CompoundWordsMethod {
+declare const CompoundWordsMethod: {
   /**
   * Do not compound words.
   */
-  NONE = 0,
+  readonly NONE: 0;
   /**
   * Create word compounds separated by spaces.
   */
-  SEPARATE_WORDS = 1,
+  readonly SEPARATE_WORDS: 1;
   /**
   * Create word compounds without separation.
   */
-  JOIN_WORDS = 2,
-}
+  readonly JOIN_WORDS: 2;
+};
+type CompoundWordsMethod = (typeof CompoundWordsMethod)[keyof typeof CompoundWordsMethod];
 //#endregion
 //#region src/lib/suggestions/genSuggestionsOptions.d.ts
 interface GenSuggestionOptionsStrict {

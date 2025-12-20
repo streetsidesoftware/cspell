@@ -1,8 +1,8 @@
 import assert from 'node:assert';
 
-import { PairingHeap } from '../utils/PairingHeap.js';
-import type { WeightCostCalculator, WeightMap } from './weightedMaps.js';
-import { createWeightCostCalculator } from './weightedMaps.js';
+import { PairingHeap } from '../utils/PairingHeap.ts';
+import type { WeightCostCalculator, WeightMap } from './weightedMaps.ts';
+import { createWeightCostCalculator } from './weightedMaps.ts';
 
 /**
  * Calculate the edit distance between two words using an A* algorithm.
@@ -133,11 +133,13 @@ function _distanceAStarWeightedEx(wordA: string, wordB: string, map: WeightCostC
 class CandidatePool {
     readonly pool = new PairingHeap(compare);
     readonly grid: Node[] = [];
+    readonly aN: number;
+    readonly bN: number;
 
-    constructor(
-        readonly aN: number,
-        readonly bN: number,
-    ) {}
+    constructor(aN: number, bN: number) {
+        this.aN = aN;
+        this.bN = bN;
+    }
 
     next(): Node | undefined {
         let n: Node | undefined;

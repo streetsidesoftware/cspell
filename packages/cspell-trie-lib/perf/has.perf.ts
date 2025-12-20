@@ -2,8 +2,8 @@ import assert from 'node:assert';
 
 import { suite } from 'perf-insight';
 
-import { ITrieImpl } from '../lib/ITrie.js';
-import { readFastTrieBlobFromConfig, readTrieFromConfig } from '../test/dictionaries.test.helper.js';
+import { ITrieImpl } from '../src/lib/ITrie.ts';
+import { readFastTrieBlobFromConfig, readTrieFromConfig } from '../src/test/dictionaries.test.helper.ts';
 
 // const measureTimeout = 100;
 

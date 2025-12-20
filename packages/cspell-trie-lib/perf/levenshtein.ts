@@ -1,4 +1,4 @@
-import { levenshteinDistance } from '../lib/distance/levenshtein.js';
+import { levenshteinDistance } from '../src/lib/distance/levenshtein.ts';
 
 export interface NearestWords {
     word: string;
