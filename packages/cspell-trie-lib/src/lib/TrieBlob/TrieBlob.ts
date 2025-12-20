@@ -7,7 +7,8 @@ import { findNode } from '../ITrieNode/trie-util.js';
 import type { PartialTrieInfo, TrieInfo } from '../ITrieNode/TrieInfo.js';
 import type { TrieData } from '../TrieData.js';
 import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.js';
-import { CharIndex, Utf8Seq } from './CharIndex.js';
+import type { Utf8Seq } from './CharIndex.js';
+import { CharIndex } from './CharIndex.js';
 import { TrieBlobInternals, TrieBlobIRoot } from './TrieBlobIRoot.js';
 import { Utf8Accumulator } from './Utf8.js';
 

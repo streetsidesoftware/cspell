@@ -10,7 +10,8 @@ import type {
 } from '@cspell/cspell-types';
 import { IssueType } from '@cspell/cspell-types';
 import { toFilePathOrHref, toFileURL } from '@cspell/url';
-import { ICSpellConfigFile, satisfiesCSpellConfigFile } from 'cspell-config-lib';
+import type { ICSpellConfigFile } from 'cspell-config-lib';
+import { satisfiesCSpellConfigFile } from 'cspell-config-lib';
 
 import { getGlobMatcherForExcluding } from '../globs/getGlobMatcher.js';
 import type { CSpellSettingsInternal, CSpellSettingsInternalFinalized } from '../Models/CSpellSettingsInternalDef.js';
@@ -46,7 +47,8 @@ import type { SimpleRange } from './parsedText.js';
 import { createMappedTextSegmenter } from './parsedText.js';
 import { settingsToValidateOptions } from './settingsToValidateOptions.js';
 import { calcTextInclusionRanges } from './textValidator.js';
-import { TraceResult, traceWord } from './traceWord.js';
+import type { TraceResult } from './traceWord.js';
+import { traceWord } from './traceWord.js';
 import type { ValidateTextOptions } from './ValidateTextOptions.js';
 import type { MappedTextValidationResult, ValidationOptions } from './ValidationTypes.js';
 

@@ -10,16 +10,16 @@ import type {
 } from '../models/index.js';
 import { FileType } from '../models/index.js';
 import type { EventMethods, LogEvent, LogEvents } from '../models/LogEvent.js';
-import {
+import type {
     FileSystemProviderInfo,
     FSCapabilities,
-    FSCapabilityFlags,
     ReadFileOptions,
     UrlOrReference,
     VFileSystemCore,
     VfsDirEntry,
     VfsStat,
 } from '../VFileSystem.js';
+import { FSCapabilityFlags } from '../VFileSystem.js';
 import type { VFileSystemProvider, VProviderFileSystem } from '../VirtualFS.js';
 
 export function cspellIOToFsProvider(cspellIO: CSpellIO): VFileSystemProvider {

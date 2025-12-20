@@ -1,6 +1,6 @@
 import { opAppend, opFilter, opMap, pipe } from '@cspell/cspell-pipe/sync';
 
-import { FindWordOptionsRO } from './ITrie.js';
+import type { FindWordOptionsRO } from './ITrie.js';
 import type { PartialTrieInfo, TrieInfo } from './ITrieNode/TrieInfo.js';
 import { genSuggestions, suggest } from './suggest.js';
 import type { SuggestionCollector, SuggestionResult } from './suggestCollector.js';

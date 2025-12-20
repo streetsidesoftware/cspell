@@ -4,7 +4,7 @@ import { posix } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import type { CSpellSettingsWithSourceTrace, CSpellUserSettings } from '@cspell/cspell-types';
-import { ICSpellConfigFile } from 'cspell-config-lib';
+import type { ICSpellConfigFile } from 'cspell-config-lib';
 import { describe, expect, test } from 'vitest';
 
 import { pathPackageSamples, pathRepoTestFixtures } from '../test-util/index.mjs';

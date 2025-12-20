@@ -3,14 +3,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import type { CSpellSettings, CSpellUserSettings, ImportFileRef, Source } from '@cspell/cspell-types';
-import {
-    CSpellConfigFile,
-    CSpellConfigFileReaderWriter,
-    CSpellConfigFileWithErrors,
-    ICSpellConfigFile,
-    IO,
-    TextFile,
-} from 'cspell-config-lib';
+import type { CSpellConfigFileReaderWriter, ICSpellConfigFile, IO, TextFile } from 'cspell-config-lib';
+import { CSpellConfigFile, CSpellConfigFileWithErrors } from 'cspell-config-lib';
 import { createReaderWriter } from 'cspell-config-lib';
 import { isUrlLike, toFileURL } from 'cspell-io';
 import { URI, Utils as UriUtils } from 'vscode-uri';
@@ -20,7 +14,8 @@ import type { VFileSystem } from '../../../fileSystem.js';
 import { getVirtualFS } from '../../../fileSystem.js';
 import { createCSpellSettingsInternal as csi } from '../../../Models/CSpellSettingsInternalDef.js';
 import { srcDirectory } from '../../../pkg-info.mjs';
-import { autoResolve, AutoResolveCache, autoResolveWeak, CacheStats } from '../../../util/AutoResolve.js';
+import type { CacheStats } from '../../../util/AutoResolve.js';
+import { autoResolve, AutoResolveCache, autoResolveWeak } from '../../../util/AutoResolve.js';
 import { logError, logWarning } from '../../../util/logger.js';
 import { FileResolver } from '../../../util/resolveFile.js';
 import { envToTemplateVars } from '../../../util/templates.js';
@@ -48,7 +43,7 @@ import { pnpLoader } from '../pnpLoader.js';
 import { searchPlaces } from './configLocations.js';
 import { ConfigSearch } from './configSearch.js';
 import { configErrorToRawSettings, configToRawSettings } from './configToRawSettings.js';
-import { StopSearchAt } from './defaultConfigLoader.js';
+import type { StopSearchAt } from './defaultConfigLoader.js';
 import { defaultSettings } from './defaultSettings.js';
 import {
     normalizeCacheSettings,

@@ -1,11 +1,10 @@
 import assert from 'node:assert';
 
-import {
+import type {
     ArrayBasedElements,
     ArrayElement,
     BigIntElement,
     DateElement,
-    ElementType,
     Flatpacked,
     FlattenedElement,
     MapElement,
@@ -20,9 +19,9 @@ import {
     SetElement,
     StringElement,
     SubStringElement,
-    supportedHeaders,
     Unpacked,
 } from './types.mjs';
+import { ElementType, supportedHeaders } from './types.mjs';
 
 export function fromJSON(data: Flatpacked): Unpacked {
     const [header] = data;

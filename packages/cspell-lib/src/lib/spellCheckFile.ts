@@ -1,5 +1,6 @@
 import type { CSpellSettingsWithSourceTrace, CSpellUserSettings } from '@cspell/cspell-types';
-import { ICSpellConfigFile, satisfiesCSpellConfigFile } from 'cspell-config-lib';
+import type { ICSpellConfigFile } from 'cspell-config-lib';
+import { satisfiesCSpellConfigFile } from 'cspell-config-lib';
 
 import type { Document, DocumentWithText } from './Document/index.js';
 import { isBinaryDoc } from './Document/isBinaryDoc.js';

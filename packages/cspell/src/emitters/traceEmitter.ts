@@ -4,7 +4,8 @@ import chalk from 'chalk';
 
 import type { TraceResult } from '../application.mjs';
 import { console } from '../console.js';
-import { TableRow, tableToLines } from '../util/table.js';
+import type { TableRow } from '../util/table.js';
+import { tableToLines } from '../util/table.js';
 import type { DictionaryPathFormat } from './DictionaryPathFormat.js';
 import { formatDictionaryLocation, type PathInterface } from './helpers.js';
 

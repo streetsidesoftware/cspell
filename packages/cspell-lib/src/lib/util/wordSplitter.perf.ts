@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import { extname } from 'node:path/posix';
 
-import { TextOffset } from '@cspell/cspell-types';
+import type { TextOffset } from '@cspell/cspell-types';
 import { suite } from 'perf-insight';
 
 import {

@@ -3,7 +3,7 @@ import type { CSpellUserSettings } from 'cspell-lib';
 import * as cspell from 'cspell-lib';
 
 import { environmentKeys, getEnvironmentVariable } from '../environment.js';
-import { CSpellConfigFile } from '../options.js';
+import type { CSpellConfigFile } from '../options.js';
 import { filenameToUrl } from './fileHelper.js';
 
 export interface ConfigInfo {

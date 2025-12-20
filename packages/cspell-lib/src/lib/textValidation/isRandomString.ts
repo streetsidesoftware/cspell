@@ -1,4 +1,4 @@
-import { TextOffset } from '@cspell/cspell-types';
+import type { TextOffset } from '@cspell/cspell-types';
 
 const maxRadio = 0.5;
 

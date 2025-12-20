@@ -2,14 +2,10 @@ import type { ITrieNode, ITrieNodeRoot } from '../ITrieNode/ITrieNode.js';
 import { findNode } from '../ITrieNode/trie-util.js';
 import type { TrieInfo } from '../ITrieNode/TrieInfo.js';
 import type { TrieData } from '../TrieData.js';
-import { CharIndex, Utf8Seq } from './CharIndex.js';
+import type { CharIndex, Utf8Seq } from './CharIndex.js';
 import { extractInfo, type FastTrieBlobBitMaskInfo } from './FastTrieBlobBitMaskInfo.js';
-import {
-    assertSorted,
-    FastTrieBlobInternals,
-    FastTrieBlobInternalsAndMethods,
-    sortNodes,
-} from './FastTrieBlobInternals.js';
+import type { FastTrieBlobInternals } from './FastTrieBlobInternals.js';
+import { assertSorted, FastTrieBlobInternalsAndMethods, sortNodes } from './FastTrieBlobInternals.js';
 import { FastTrieBlobIRoot } from './FastTrieBlobIRoot.js';
 import { TrieBlob } from './TrieBlob.js';
 import { Utf8Accumulator } from './Utf8.js';

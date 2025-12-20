@@ -1,4 +1,4 @@
-import { KeyOf, ValueOf1 as ValueOf } from '../types.js';
+import type { KeyOf, ValueOf1 as ValueOf } from '../types.js';
 
 const nodeValueSymbol = Symbol.for('cspell.config.nodeValue');
 

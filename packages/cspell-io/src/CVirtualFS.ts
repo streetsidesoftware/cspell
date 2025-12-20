@@ -2,9 +2,10 @@ import { urlOrReferenceToUrl } from './common/index.js';
 import type { CSpellIO } from './CSpellIO.js';
 import { getDefaultCSpellIO } from './CSpellIONode.js';
 import type { Disposable } from './models/index.js';
-import { LogEvent } from './models/LogEvent.js';
-import { UrlOrReference, VFileSystem, VFileSystemCore } from './VFileSystem.js';
-import { debug, NextProvider, VFileSystemProvider, VirtualFS } from './VirtualFS.js';
+import type { LogEvent } from './models/LogEvent.js';
+import type { UrlOrReference, VFileSystem, VFileSystemCore } from './VFileSystem.js';
+import type { NextProvider, VFileSystemProvider, VirtualFS } from './VirtualFS.js';
+import { debug } from './VirtualFS.js';
 import { CVFileSystem } from './VirtualFS/CVFileSystem.js';
 import {
     chopUrl,

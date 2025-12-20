@@ -1,6 +1,7 @@
 import assert from 'node:assert';
 
-import { ArrayBasedElements, ElementType, Flatpacked, FlattenedElement, supportedHeaders } from './types.mjs';
+import type { ArrayBasedElements, Flatpacked, FlattenedElement } from './types.mjs';
+import { ElementType, supportedHeaders } from './types.mjs';
 
 export function optimizeFlatpacked(data: Flatpacked): Flatpacked {
     const [header] = data;

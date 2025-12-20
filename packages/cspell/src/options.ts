@@ -1,4 +1,4 @@
-import { CSpellSettings, ReporterConfiguration } from '@cspell/cspell-types';
+import type { CSpellSettings, ReporterConfiguration } from '@cspell/cspell-types';
 
 import type { CacheOptions } from './util/cache/index.js';
 

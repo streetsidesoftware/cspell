@@ -1,13 +1,9 @@
-import { AddHelpTextContext, Command, CommandOptions } from 'commander';
+import type { AddHelpTextContext, Command, CommandOptions } from 'commander';
 
 import * as App from './application.mjs';
 import { collect, crOpt } from './commandHelpers.js';
-import {
-    cvtLinterCliCommandOptionsToLinterCliOptions,
-    LinterCliCommandOptions,
-    type LinterCliOptions,
-    ReportChoicesAll,
-} from './options.js';
+import type { LinterCliCommandOptions } from './options.js';
+import { cvtLinterCliCommandOptionsToLinterCliOptions, type LinterCliOptions, ReportChoicesAll } from './options.js';
 import { DEFAULT_CACHE_LOCATION } from './util/cache/index.js';
 import { canUseColor } from './util/canUseColor.js';
 import { CheckFailed } from './util/errors.js';

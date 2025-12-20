@@ -3,11 +3,11 @@ import { describe, expect, test } from 'vitest';
 import { parseDictionaryLegacy } from '../SimpleDictionaryParser.js';
 import { FastTrieBlobBuilder } from '../TrieBlob/FastTrieBlobBuilder.js';
 import type { TrieData } from '../TrieData.js';
-import { TrieRoot } from '../TrieNode/TrieNode.js';
+import type { TrieRoot } from '../TrieNode/TrieNode.js';
 import { TrieNodeTrie } from '../TrieNode/TrieNodeTrie.js';
 import { __testing__, createFindOptions, findLegacyCompound, findWord } from './find.js';
 import type { PartialFindOptions } from './FindOptions.js';
-import { FindFullResult } from './ITrieNode.js';
+import type { FindFullResult } from './ITrieNode.js';
 
 const findLegacyCompoundWord = __testing__.findLegacyCompoundWord;
 

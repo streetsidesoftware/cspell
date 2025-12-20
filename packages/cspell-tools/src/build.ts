@@ -1,6 +1,7 @@
 import * as path from 'node:path';
 
-import { cosmiconfig, Transform } from 'cosmiconfig';
+import type { Transform } from 'cosmiconfig';
+import { cosmiconfig } from 'cosmiconfig';
 
 import { compile } from './compiler/index.js';
 import type { CompileRequest, Target } from './config/index.js';

@@ -1,7 +1,7 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 
-import { CSpellSettings } from '@cspell/cspell-types';
+import type { CSpellSettings } from '@cspell/cspell-types';
 import envPaths from 'env-paths';
 import { xdgConfig } from 'xdg-basedir';
 

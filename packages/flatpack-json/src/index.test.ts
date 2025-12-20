@@ -4,7 +4,8 @@ import * as flatted from 'flatted';
 import { describe, expect, test } from 'vitest';
 
 import { parse, stringify } from './index.js';
-import { dataHeader, Unpacked } from './types.mjs';
+import type { Unpacked } from './types.mjs';
+import { dataHeader } from './types.mjs';
 
 describe('Flatpack vs Flatted', async () => {
     const pkgJson = JSON.parse(await fs.readFile(new URL('../package.json', import.meta.url), 'utf8'));
