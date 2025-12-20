@@ -22,8 +22,11 @@ export type CompareFn<T> = (a: T, b: T) => number;
 export class PairingHeap<T> implements IterableIterator<T> {
     private _heap: PairHeapNode<T> | undefined;
     private _size = 0;
+    readonly compare: CompareFn<T>;
 
-    constructor(readonly compare: CompareFn<T>) {}
+    constructor(compare: CompareFn<T>) {
+        this.compare = compare;
+    }
 
     /** Add an item to the heap. */
     add(v: T): this {

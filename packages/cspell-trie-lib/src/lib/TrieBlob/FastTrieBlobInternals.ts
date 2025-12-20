@@ -1,7 +1,7 @@
-import type { PartialTrieInfo, TrieCharacteristics, TrieInfo } from '../ITrieNode/TrieInfo.js';
-import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.js';
-import type { CharIndex } from './CharIndex.js';
-import type { FastTrieBlobBitMaskInfo } from './FastTrieBlobBitMaskInfo.js';
+import type { PartialTrieInfo, TrieCharacteristics, TrieInfo } from '../ITrieNode/TrieInfo.ts';
+import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.ts';
+import type { CharIndex } from './CharIndex.ts';
+import type { FastTrieBlobBitMaskInfo } from './FastTrieBlobBitMaskInfo.ts';
 
 type Node = Uint32Array;
 type Nodes = Node[];
@@ -12,13 +12,17 @@ export class FastTrieBlobInternals implements FastTrieBlobBitMaskInfo {
     readonly NodeChildRefShift: number;
     readonly isIndexDecoderNeeded: boolean;
     readonly info: Readonly<TrieInfo>;
+    readonly nodes: Nodes;
+    readonly charIndex: CharIndex;
 
     constructor(
-        readonly nodes: Nodes,
-        readonly charIndex: CharIndex,
+        nodes: Nodes,
+        charIndex: CharIndex,
         maskInfo: FastTrieBlobBitMaskInfo,
         info: Readonly<PartialTrieInfo>,
     ) {
+        this.nodes = nodes;
+        this.charIndex = charIndex;
         const { NodeMaskEOW, NodeMaskChildCharIndex, NodeChildRefShift } = maskInfo;
         this.NodeMaskEOW = NodeMaskEOW;
         this.NodeMaskChildCharIndex = NodeMaskChildCharIndex;

@@ -1,8 +1,8 @@
-import type { ITrieNode } from '../ITrieNode/ITrieNode.js';
-import { trieNodeToITrieNode } from '../TrieNode/trie.js';
-import type { TrieNode } from '../TrieNode/TrieNode.js';
-import type { WalkerIterator } from './walkerTypes.js';
-import { CompoundWordsMethod, JOIN_SEPARATOR, WORD_SEPARATOR } from './walkerTypes.js';
+import type { ITrieNode } from '../ITrieNode/ITrieNode.ts';
+import { trieNodeToITrieNode } from '../TrieNode/trie.ts';
+import type { TrieNode } from '../TrieNode/TrieNode.ts';
+import type { WalkerIterator } from './walkerTypes.ts';
+import { CompoundWordsMethod, JOIN_SEPARATOR, WORD_SEPARATOR } from './walkerTypes.ts';
 
 /**
  * Walks the Trie and yields a value at each node.

@@ -1,7 +1,7 @@
-import { isDefined } from '../../utils/isDefined.js';
-import type { ITrieNode, ITrieNodeId, ITrieNodeRoot } from '../ITrieNode.js';
-import type { YieldResult } from './walkerTypes.js';
-import { CompoundWordsMethod, JOIN_SEPARATOR, WORD_SEPARATOR } from './walkerTypes.js';
+import { isDefined } from '../../utils/isDefined.ts';
+import type { ITrieNode, ITrieNodeId, ITrieNodeRoot } from '../ITrieNode.ts';
+import type { YieldResult } from './walkerTypes.ts';
+import { CompoundWordsMethod, JOIN_SEPARATOR, WORD_SEPARATOR } from './walkerTypes.ts';
 
 /**
  * Ask for the next result.
@@ -153,10 +153,7 @@ class ITrieNodeFiltered implements ITrieNode {
     private filtered: (readonly [string, ITrieNode])[];
     private keyMap: Map<string, ITrieNode>;
 
-    constructor(
-        private srcNode: ITrieNode,
-        predicate: (key: string, idx: number, srcNode: ITrieNode) => boolean,
-    ) {
+    constructor(srcNode: ITrieNode, predicate: (key: string, idx: number, srcNode: ITrieNode) => boolean) {
         this.id = srcNode.id;
         this.eow = srcNode.eow;
         const entries = srcNode.entries();

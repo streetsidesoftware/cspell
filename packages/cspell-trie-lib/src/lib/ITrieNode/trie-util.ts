@@ -1,6 +1,6 @@
-import type { ITrieNode, ITrieNodeId } from './ITrieNode.js';
-import { walker, walkerWords } from './walker/walker.js';
-import type { YieldResult } from './walker/walkerTypes.js';
+import type { ITrieNode, ITrieNodeId } from './ITrieNode.ts';
+import { walker, walkerWords } from './walker/walker.ts';
+import type { YieldResult } from './walker/walkerTypes.ts';
 
 export function isWordTerminationNode(node: ITrieNode): boolean {
     return node.eow;

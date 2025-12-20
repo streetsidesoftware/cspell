@@ -12,12 +12,169 @@ import {
     encodeUtf8N_BE,
     encodeUtf8N_LE,
     textToCodePoints,
-} from './Utf8.js';
+} from '../src/lib/TrieBlob/Utf8.ts';
+import { Utf8Encoder } from '../src/lib/TrieBlob/Utf8Encoder.ts';
+
+const iterations = 1000;
+const text = sampleText();
+const words = text.split(/\s+/).filter((a) => !!a);
+
+suite('Utf8 encode', async (test) => {
+    const encoder = new TextEncoder();
+    const scratchBuffer = new Uint8Array(1024);
+    const utf8Encoder = new Utf8Encoder();
+
+    test(`TextEncoder.encodeInto words (${words.length})`, () => {
+        const buffer = scratchBuffer;
+        const _words = words;
+        for (let i = iterations; i > 0; --i) {
+            for (const word of _words) {
+                encoder.encodeInto(word, buffer);
+            }
+        }
+    });
+
+    test(`encodeTextToUtf8Into Uint8Array words (${words.length})`, () => {
+        const buffer = scratchBuffer;
+        const _words = words;
+        for (let i = iterations; i > 0; --i) {
+            for (const word of _words) {
+                encodeTextToUtf8Into(word, buffer);
+            }
+        }
+    });
+
+    test(`encodeTextToUtf8Into array words (${words.length})`, () => {
+        const buffer = new Array(100);
+        const _words = words;
+        for (let i = iterations; i > 0; --i) {
+            for (const word of _words) {
+                encodeTextToUtf8Into(word, buffer);
+            }
+        }
+    });
+
+    test(`encoder.encode(word) words (${words.length})`, () => {
+        const _words = words;
+        for (let i = iterations; i > 0; --i) {
+            for (const word of _words) {
+                encoder.encode(word);
+            }
+        }
+    });
+
+    test(`encoder.encode(word) words cached (${words.length})`, () => {
+        const _words = words;
+        const map = new Map<string, Uint8Array>();
+        for (let i = iterations; i > 0; --i) {
+            for (const word of _words) {
+                const r = map.get(word);
+                if (r) {
+                    continue;
+                }
+                map.set(word, encoder.encode(word));
+            }
+        }
+    });
+
+    test(`encoder.encode(word) words cached obj (${words.length})`, () => {
+        const _words = words;
+        const map: Record<string, Uint8Array> = Object.create(null);
+        for (let i = iterations; i > 0; --i) {
+            for (const word of _words) {
+                const r = map[word];
+                if (r) {
+                    continue;
+                }
+                map[word] = encoder.encode(word);
+            }
+        }
+    });
+
+    test(`cached in obj baseline (${words.length})`, () => {
+        const _words = words;
+        const map: Record<string, unknown> = Object.create(null);
+        for (let i = iterations; i > 0; --i) {
+            for (const word of _words) {
+                const r = map[word];
+                if (r) {
+                    continue;
+                }
+                map[word] = word;
+            }
+        }
+    });
+
+    test(`encoder.encodeInto(word, buffer) words (${words.length})`, () => {
+        const buffer = scratchBuffer;
+        const _words = words;
+        for (let i = iterations; i > 0; --i) {
+            for (const word of _words) {
+                encoder.encodeInto(word, buffer);
+            }
+        }
+    });
+
+    test(`utf8Encoder(word) to array words (${words.length})`, () => {
+        const _words = words;
+        for (let i = iterations; i > 0; --i) {
+            for (const word of _words) {
+                utf8Encoder.encode(word);
+            }
+        }
+    });
+
+    test(`encoder.encode(word) to array words (${words.length})`, () => {
+        const _words = words;
+        for (let i = iterations; i > 0; --i) {
+            for (const word of _words) {
+                [...encoder.encode(word)];
+            }
+        }
+    });
+
+    test('Buffer.write(word) words ', () => {
+        const buffer = Buffer.from(scratchBuffer.buffer);
+        const _words = words;
+        for (let i = iterations; i > 0; --i) {
+            for (const word of _words) {
+                buffer.write(word, 0);
+            }
+        }
+    });
+
+    test(`encodeTextToUtf8 array words (${words.length})`, () => {
+        const _words = words;
+        for (let i = iterations; i > 0; --i) {
+            for (const word of _words) {
+                encodeTextToUtf8(word);
+            }
+        }
+    });
+
+    const charToUtf8Map = new Map<string, number[]>(
+        [...new Set([...sampleText()])].map((char) => [char, encodeTextToUtf8(char)] as const),
+    );
+
+    test(`encodeTextToUtf8 to array with lookup (${words.length})`, () => {
+        const _words = words;
+        for (let i = iterations; i > 0; --i) {
+            for (const word of _words) {
+                const a: number[] = new Array(word.length * 2);
+                let i = 0;
+                for (const c of word) {
+                    const u8 = charToUtf8Map.get(c);
+                    for (const u of u8 || []) {
+                        a[i++] = u;
+                    }
+                }
+                a.length = i;
+            }
+        }
+    });
+});
 
 suite('Utf8 encode/decode', async (test) => {
-    const iterations = 1000;
-    const text = sampleText();
-    const words = text.split(/\s+/).filter((a) => !!a);
     const wordsCP = words.map((word) => [...word].map((char) => char.codePointAt(0) || 0));
     const chars = [...text];
     const codePoints = chars.map((char) => char.codePointAt(0) || 0);
@@ -38,8 +195,9 @@ suite('Utf8 encode/decode', async (test) => {
         for (let i = iterations; i > 0; --i) {
             for (const char of chars) {
                 buffer[0] = 0;
-                encoder.encodeInto(char, buffer);
-                decoder.decode();
+                const r = encoder.encodeInto(char, buffer);
+                const b = new Uint8Array(buffer.buffer, buffer.byteOffset, r.written);
+                decoder.decode(b);
             }
         }
     });
@@ -84,11 +242,19 @@ suite('Utf8 encode/decode', async (test) => {
         }
     });
 
-    test('Buffer.write text', () => {
+    test('Buffer.write text "utf16le"', () => {
         const buffer = Buffer.from(scratchBuffer.buffer);
         // const _text = text;
         for (let i = iterations; i > 0; --i) {
             buffer.write(text, 'utf16le');
+        }
+    });
+
+    test('Buffer.write text ', () => {
+        const buffer = Buffer.from(scratchBuffer.buffer);
+        // const _text = text;
+        for (let i = iterations; i > 0; --i) {
+            buffer.write(text);
         }
     });
 
@@ -97,16 +263,6 @@ suite('Utf8 encode/decode', async (test) => {
         const points = codePoints;
         for (let i = iterations; i > 0; --i) {
             encodeCodePointsToUtf8Into(points, buffer);
-        }
-    });
-
-    test(`TextEncoder.encodeInto words (${words.length})`, () => {
-        const buffer = scratchBuffer;
-        const _words = words;
-        for (let i = iterations; i > 0; --i) {
-            for (const word of _words) {
-                encoder.encodeInto(word, buffer);
-            }
         }
     });
 
@@ -139,65 +295,6 @@ suite('Utf8 encode/decode', async (test) => {
                     [...word].map((a) => a.codePointAt(0) || 0),
                     buffer,
                 );
-            }
-        }
-    });
-
-    test(`encodeTextToUtf8Into Uint8Array words (${words.length})`, () => {
-        const buffer = scratchBuffer;
-        const _words = words;
-        for (let i = iterations; i > 0; --i) {
-            for (const word of _words) {
-                encodeTextToUtf8Into(word, buffer);
-            }
-        }
-    });
-
-    test(`encodeTextToUtf8Into array words (${words.length})`, () => {
-        const buffer = new Array(100);
-        const _words = words;
-        for (let i = iterations; i > 0; --i) {
-            for (const word of _words) {
-                encodeTextToUtf8Into(word, buffer);
-            }
-        }
-    });
-
-    test(`encoder.encode(word) to array words (${words.length})`, () => {
-        const _words = words;
-        for (let i = iterations; i > 0; --i) {
-            for (const word of _words) {
-                [...encoder.encode(word)];
-            }
-        }
-    });
-
-    test(`encodeTextToUtf8 array words (${words.length})`, () => {
-        const _words = words;
-        for (let i = iterations; i > 0; --i) {
-            for (const word of _words) {
-                encodeTextToUtf8(word);
-            }
-        }
-    });
-
-    const charToUtf8Map = new Map<string, number[]>(
-        [...new Set([...sampleText()])].map((char) => [char, encodeTextToUtf8(char)] as const),
-    );
-
-    test(`encodeTextToUtf8 to array with lookup (${words.length})`, () => {
-        const _words = words;
-        for (let i = iterations; i > 0; --i) {
-            for (const word of _words) {
-                const a: number[] = new Array(word.length * 2);
-                let i = 0;
-                for (const c of word) {
-                    const u8 = charToUtf8Map.get(c);
-                    for (const u of u8 || []) {
-                        a[i++] = u;
-                    }
-                }
-                a.length = i;
             }
         }
     });

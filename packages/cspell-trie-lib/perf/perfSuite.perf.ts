@@ -2,14 +2,14 @@ import assert from 'node:assert';
 
 import { suite } from 'perf-insight';
 
-import type { Trie } from '../lib/index.js';
-import type { FastTrieBlob } from '../lib/TrieBlob/FastTrieBlob.js';
-import { FastTrieBlobBuilder } from '../lib/TrieBlob/FastTrieBlobBuilder.js';
-import { TrieBlob } from '../lib/TrieBlob/TrieBlob.js';
-import type { TrieData } from '../lib/TrieData.js';
-import { TrieNodeTrie } from '../lib/TrieNode/TrieNodeTrie.js';
-import { walkerWordsITrie } from '../lib/walker/walker.js';
-import { readFastTrieBlobFromConfig, readTrieFromConfig } from '../test/dictionaries.test.helper.js';
+import type { Trie } from '../src/lib/index.ts';
+import type { FastTrieBlob } from '../src/lib/TrieBlob/FastTrieBlob.ts';
+import { FastTrieBlobBuilder } from '../src/lib/TrieBlob/FastTrieBlobBuilder.ts';
+import { TrieBlob } from '../src/lib/TrieBlob/TrieBlob.ts';
+import type { TrieData } from '../src/lib/TrieData.ts';
+import { TrieNodeTrie } from '../src/lib/TrieNode/TrieNodeTrie.ts';
+import { walkerWordsITrie } from '../src/lib/walker/walker.ts';
+import { readFastTrieBlobFromConfig, readTrieFromConfig } from '../src/test/dictionaries.test.helper.ts';
 
 // const weightMapEn = getEnglishWeightMap();
 

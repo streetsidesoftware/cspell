@@ -1,4 +1,4 @@
-import type { UndefinedToOptional } from '../types.js';
+import type { UndefinedToOptional } from '../types.ts';
 
 export function isDefined<T>(a: T | undefined): a is T {
     return a !== undefined;
@@ -10,7 +10,7 @@ export function isDefined<T>(a: T | undefined): a is T {
  * @returns t
  */
 export function cleanCopy<T, U = UndefinedToOptional<T>>(t: T): U {
-    const r: U = { ...(<U>(<unknown>t)) };
+    const r: U = { ...(t as unknown as U) };
     return clean(r);
 }
 
@@ -26,7 +26,7 @@ export function clean<T, U = UndefinedToOptional<T>>(t: T): U {
             delete t[prop];
         }
     }
-    return <U>(<unknown>t);
+    return t as unknown as U;
 }
 
 export function unique<T>(a: Iterable<T>): T[] {

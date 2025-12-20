@@ -259,9 +259,11 @@ export function encodeTextToUtf8Into(text: string, into: Array<number> | Uint8Ar
 }
 
 export function encodeTextToUtf8(text: string): number[] {
-    const array = new Array(text.length);
+    const array: number[] = new Array(text.length);
     const len = encodeTextToUtf8Into(text, array);
-    array.length !== len && (array.length = len);
+    if (array.length !== len) {
+        array.length = len;
+    }
     return array;
 }
 

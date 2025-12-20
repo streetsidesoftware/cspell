@@ -1,8 +1,8 @@
-import { memorizeLastCall } from '../utils/memorizeLastCall.js';
-import type { CompoundModes } from './CompoundModes.js';
-import type { FindOptions, PartialFindOptions } from './FindOptions.js';
-import type { FindFullNodeResult } from './FindTypes.js';
-import type { FindFullResult, FindResult, ITrieNode, ITrieNodeRoot } from './ITrieNode.js';
+import { memorizeLastCall } from '../utils/memorizeLastCall.ts';
+import type { CompoundModes } from './CompoundModes.ts';
+import type { FindOptions, PartialFindOptions } from './FindOptions.ts';
+import type { FindFullNodeResult } from './FindTypes.ts';
+import type { FindFullResult, FindResult, ITrieNode, ITrieNodeRoot } from './ITrieNode.ts';
 
 type Root = ITrieNodeRoot;
 

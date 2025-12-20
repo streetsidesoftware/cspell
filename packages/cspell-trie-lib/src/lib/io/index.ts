@@ -1,1 +1,1 @@
-export { decodeTrieData } from './decode.js';
+export { decodeTrieData } from './decode.ts';

@@ -1,9 +1,9 @@
-import type { BuilderCursor, TrieBuilder } from '../Builder/index.js';
-import type { TrieData } from '../TrieData.js';
-import { TrieNodeBuilder } from '../TrieNode/TrieNodeBuilder.js';
-import type { TrieNodeTrie } from '../TrieNode/TrieNodeTrie.js';
-import { getGlobalPerfTimer } from '../utils/timer.js';
-import { BACK, EOL, EOR, EOW, ESCAPE, LF, REF } from './constants.js';
+import type { BuilderCursor, TrieBuilder } from '../Builder/index.ts';
+import type { TrieData } from '../TrieData.ts';
+import { TrieNodeBuilder } from '../TrieNode/TrieNodeBuilder.ts';
+import type { TrieNodeTrie } from '../TrieNode/TrieNodeTrie.ts';
+import { getGlobalPerfTimer } from '../utils/timer.ts';
+import { BACK, EOL, EOR, EOW, ESCAPE, LF, REF } from './constants.ts';
 
 const specialCharacterMap = new Map([
     ['\n', '\\n'],

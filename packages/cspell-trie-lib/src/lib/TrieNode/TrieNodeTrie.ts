@@ -1,13 +1,13 @@
-import { consolidate } from '../consolidate.js';
-import type { ITrieNode, ITrieNodeRoot } from '../ITrieNode/ITrieNode.js';
-import { findNode } from '../ITrieNode/trie-util.js';
-import type { PartialTrieOptions, TrieOptions } from '../trie.js';
-import type { TrieData } from '../TrieData.js';
-import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.js';
-import { findWordExact } from './find.js';
-import { trieRootToITrieRoot } from './trie.js';
-import { countNodes, createTrieRootFromList, iteratorTrieWords } from './trie-util.js';
-import type { TrieRoot } from './TrieNode.js';
+import { consolidate } from '../consolidate.ts';
+import type { ITrieNode, ITrieNodeRoot } from '../ITrieNode/ITrieNode.ts';
+import { findNode } from '../ITrieNode/trie-util.ts';
+import type { PartialTrieOptions, TrieOptions } from '../trie.ts';
+import type { TrieData } from '../TrieData.ts';
+import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.ts';
+import { findWordExact } from './find.ts';
+import { trieRootToITrieRoot } from './trie.ts';
+import { countNodes, createTrieRootFromList, iteratorTrieWords } from './trie-util.ts';
+import type { TrieRoot } from './TrieNode.ts';
 
 export class TrieNodeTrie implements TrieData {
     private _iTrieRoot: ITrieNodeRoot | undefined;
@@ -16,8 +16,10 @@ export class TrieNodeTrie implements TrieData {
     readonly hasForbiddenWords: boolean;
     readonly hasCompoundWords: boolean;
     readonly hasNonStrictWords: boolean;
+    readonly root: TrieRoot;
 
-    constructor(readonly root: TrieRoot) {
+    constructor(root: TrieRoot) {
+        this.root = root;
         this.info = mergeOptionalWithDefaults(root);
         this.hasForbiddenWords = !!root.c[root.forbiddenWordPrefix];
         this.hasCompoundWords = !!root.c[root.compoundCharacter];

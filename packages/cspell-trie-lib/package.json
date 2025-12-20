@@ -34,9 +34,8 @@
     "clean-build": "pnpm run clean && pnpm run build",
     "coverage": "vitest run --coverage",
     "test:watch": "vitest",
-    "test:perf": "pnpm test:perf:js --all",
-    "test:perf:ts": "NODE_ENV=production NODE_OPTIONS=--import=@swc-node/register/esm-register insight --file \"**/*.perf.{mts,ts}\" -t 500",
-    "test:perf:js": "NODE_ENV=production insight -t 500",
+    "test:perf": "pnpm test:perf:ts --all",
+    "test:perf:ts": "insight --file \"**/*.perf.{mts,ts}\" -t 500",
     "test:perf:prof": "NODE_ENV=production node --cpu-prof  ../../node_modules/perf-insight/bin.mjs -t 1000",
     "perf": "pnpm test:perf",
     "test": "vitest run",
@@ -61,8 +60,7 @@
   "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-trie-lib#readme",
   "dependencies": {
     "@cspell/cspell-pipe": "workspace:*",
-    "@cspell/cspell-types": "workspace:*",
-    "gensequence": "^8.0.8"
+    "@cspell/cspell-types": "workspace:*"
   },
   "engines": {
     "node": ">=20"
@@ -71,6 +69,7 @@
     "@cspell/dict-en_us": "^4.4.25",
     "@cspell/dict-es-es": "^3.0.8",
     "@cspell/dict-nl-nl": "^2.4.2",
+    "gensequence": "^8.0.8",
     "import-meta-resolve": "^4.2.0"
   }
 }

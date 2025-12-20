@@ -1,7 +1,7 @@
-import type { BuilderCursor } from '../Builder/BuilderCursor.js';
-import type { FastTrieBlob } from '../TrieBlob/FastTrieBlob.js';
-import { FastTrieBlobBuilder } from '../TrieBlob/FastTrieBlobBuilder.js';
-import { importTrieV3WithBuilder } from './importV3.js';
+import type { BuilderCursor } from '../Builder/BuilderCursor.ts';
+import type { FastTrieBlob } from '../TrieBlob/FastTrieBlob.ts';
+import { FastTrieBlobBuilder } from '../TrieBlob/FastTrieBlobBuilder.ts';
+import { importTrieV3WithBuilder } from './importV3.ts';
 
 interface ReduceResults {
     cursor: BuilderCursor;

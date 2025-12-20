@@ -1,7 +1,7 @@
 import { suite } from 'perf-insight';
 
-import { encodeTextToUtf8 } from '../lib/TrieBlob/Utf8.js';
-import { readFastTrieBlobFromConfig, readTrieFromConfig } from '../test/dictionaries.test.helper.js';
+import { encodeTextToUtf8 } from '../src/lib/TrieBlob/Utf8.ts';
+import { readFastTrieBlobFromConfig, readTrieFromConfig } from '../src/test/dictionaries.test.helper.ts';
 
 // const measureTimeout = 100;
 

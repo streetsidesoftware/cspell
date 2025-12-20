@@ -1,12 +1,12 @@
-import type { ITrieNodeRoot } from '../ITrieNode/ITrieNode.js';
-import type { PartialTrieInfo } from '../ITrieNode/TrieInfo.js';
-import { isValidChar } from '../utils/isValidChar.js';
-import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.js';
-import { walker, walkerWords } from '../walker/walker.js';
-import type { YieldResult } from '../walker/walkerTypes.js';
-import { trieRootToITrieRoot } from './trie.js';
-import type { TrieNode, TrieRoot } from './TrieNode.js';
-import { FLAG_WORD } from './TrieNode.js';
+import type { ITrieNodeRoot } from '../ITrieNode/ITrieNode.ts';
+import type { PartialTrieInfo } from '../ITrieNode/TrieInfo.ts';
+import { isValidChar } from '../utils/isValidChar.ts';
+import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.ts';
+import { walker, walkerWords } from '../walker/walker.ts';
+import type { YieldResult } from '../walker/walkerTypes.ts';
+import { trieRootToITrieRoot } from './trie.ts';
+import type { TrieNode, TrieRoot } from './TrieNode.ts';
+import { FLAG_WORD } from './TrieNode.ts';
 
 export function insert(word: string, root: TrieNode = {}): TrieNode {
     // spread is necessary to handle surrogates.

@@ -191,20 +191,28 @@ interface YieldResult {
   node: TrieNode;
   depth: number;
 }
-declare enum CompoundWordsMethod {
+declare const CompoundWordsMethodEnum: {
   /**
   * Do not compound words.
   */
-  NONE = 0,
+  readonly NONE: 0;
   /**
   * Create word compounds separated by spaces.
   */
-  SEPARATE_WORDS = 1,
+  readonly SEPARATE_WORDS: 1;
   /**
   * Create word compounds without separation.
   */
-  JOIN_WORDS = 2,
+  readonly JOIN_WORDS: 2;
+};
+type CompoundWordsMethodEnum = typeof CompoundWordsMethodEnum;
+type CompoundWordsMethod = CompoundWordsMethodEnum[keyof CompoundWordsMethodEnum];
+interface CompoundWordsMethodByName extends CompoundWordsMethodEnum {
+  "0": "NONE";
+  "1": "SEPARATE_WORDS";
+  "2": "JOIN_WORDS";
 }
+declare const CompoundWordsMethod: CompoundWordsMethodByName;
 type WalkerIterator = Generator<YieldResult, void, boolean | undefined>;
 //#endregion
 //#region src/lib/ITrieNode/walker/walkerTypes.d.ts
@@ -571,14 +579,14 @@ interface FindFullResult extends FindResult {
 //#endregion
 //#region src/lib/trie.d.ts
 declare class Trie {
-  readonly root: TrieRoot;
-  private count?;
   private _options;
   private _findOptionsDefaults;
   private _findOptionsExact;
   readonly isLegacy: boolean;
   private hasForbidden;
-  constructor(root: TrieRoot, count?: number | undefined);
+  readonly root: TrieRoot;
+  private count;
+  constructor(root: TrieRoot, count?: number);
   /**
   * Number of words in the Trie
   */

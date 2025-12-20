@@ -1,12 +1,12 @@
 import { opAppend, opFilter, opMap, pipe } from '@cspell/cspell-pipe/sync';
 
-import type { FindWordOptionsRO } from './ITrie.js';
-import type { PartialTrieInfo, TrieInfo } from './ITrieNode/TrieInfo.js';
-import { genSuggestions, suggest } from './suggest.js';
-import type { SuggestionCollector, SuggestionResult } from './suggestCollector.js';
-import type { SuggestionOptionsRO } from './suggestions/genSuggestionsOptions.js';
-import type { FindFullResult, FindOptions, PartialFindOptions } from './TrieNode/find.js';
-import { createFindOptions, findLegacyCompound, findWord, findWordNode, isForbiddenWord } from './TrieNode/find.js';
+import type { FindWordOptionsRO } from './ITrie.ts';
+import type { PartialTrieInfo, TrieInfo } from './ITrieNode/TrieInfo.ts';
+import { genSuggestions, suggest } from './suggest.ts';
+import type { SuggestionCollector, SuggestionResult } from './suggestCollector.ts';
+import type { SuggestionOptionsRO } from './suggestions/genSuggestionsOptions.ts';
+import type { FindFullResult, FindOptions, PartialFindOptions } from './TrieNode/find.ts';
+import { createFindOptions, findLegacyCompound, findWord, findWordNode, isForbiddenWord } from './TrieNode/find.ts';
 import {
     countWords,
     createTrieRootFromList,
@@ -14,15 +14,15 @@ import {
     isWordTerminationNode,
     iteratorTrieWords,
     orderTrie,
-} from './TrieNode/trie-util.js';
-import type { TrieNode, TrieRoot } from './TrieNode/TrieNode.js';
-import { clean } from './utils/clean.js';
-import { mergeOptionalWithDefaults } from './utils/mergeOptionalWithDefaults.js';
-import { replaceAllFactory } from './utils/util.js';
-import type { CompoundWordsMethod, WalkerIterator } from './walker/index.js';
-import { walker } from './walker/index.js';
+} from './TrieNode/trie-util.ts';
+import type { TrieNode, TrieRoot } from './TrieNode/TrieNode.ts';
+import { clean } from './utils/clean.ts';
+import { mergeOptionalWithDefaults } from './utils/mergeOptionalWithDefaults.ts';
+import { replaceAllFactory } from './utils/util.ts';
+import type { CompoundWordsMethod, WalkerIterator } from './walker/index.ts';
+import { walker } from './walker/index.ts';
 
-export type { PartialTrieOptions, PartialTrieOptionsRO, TrieOptions, TrieOptionsRO } from './ITrieNode/index.js';
+export type { PartialTrieOptions, PartialTrieOptionsRO, TrieOptions, TrieOptionsRO } from './ITrieNode/index.ts';
 
 type RO<T> = Readonly<T>;
 
@@ -34,10 +34,12 @@ export class Trie {
     private _findOptionsExact: FindOptions;
     readonly isLegacy: boolean;
     private hasForbidden: boolean;
-    constructor(
-        readonly root: TrieRoot,
-        private count?: number,
-    ) {
+    readonly root: TrieRoot;
+    private count: number | undefined;
+
+    constructor(root: TrieRoot, count?: number) {
+        this.root = root;
+        this.count = count;
         this._options = mergeOptionalWithDefaults(root);
         this.isLegacy = this.calcIsLegacy();
         this.hasForbidden = !!root.c[root.forbiddenWordPrefix];

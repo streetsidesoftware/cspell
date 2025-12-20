@@ -1,3 +1,3 @@
-export type { BuilderCursor } from './BuilderCursor.js';
-export { insertWordsAtCursor } from './cursor-util.js';
-export type { TrieBuilder } from './TrieBuilder.js';
+export type { BuilderCursor } from './BuilderCursor.ts';
+export { insertWordsAtCursor } from './cursor-util.ts';
+export type { TrieBuilder } from './TrieBuilder.ts';

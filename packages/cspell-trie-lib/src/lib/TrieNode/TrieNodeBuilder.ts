@@ -1,11 +1,11 @@
-import { type BuilderCursor, insertWordsAtCursor, type TrieBuilder } from '../Builder/index.js';
-import { defaultTrieInfo } from '../constants.js';
-import type { PartialTrieOptions, TrieOptions } from '../trie.js';
-import { assert } from '../utils/assert.js';
-import { assertIsValidChar } from '../utils/isValidChar.js';
-import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.js';
-import type { ChildMap, TrieNode, TrieRoot } from './TrieNode.js';
-import { TrieNodeTrie } from './TrieNodeTrie.js';
+import { type BuilderCursor, insertWordsAtCursor, type TrieBuilder } from '../Builder/index.ts';
+import { defaultTrieInfo } from '../constants.ts';
+import type { PartialTrieOptions, TrieOptions } from '../trie.ts';
+import { assert } from '../utils/assert.ts';
+import { assertIsValidChar } from '../utils/isValidChar.ts';
+import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.ts';
+import type { ChildMap, TrieNode, TrieRoot } from './TrieNode.ts';
+import { TrieNodeTrie } from './TrieNodeTrie.ts';
 
 interface LockableTrieNode extends TrieNode {
     /** locked */

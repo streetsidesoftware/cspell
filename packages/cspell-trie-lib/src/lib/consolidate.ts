@@ -1,6 +1,6 @@
-import { isCircular, trieNodeToRoot } from './TrieNode/trie-util.js';
-import type { TrieNode, TrieRoot } from './TrieNode/TrieNode.js';
-import { FLAG_WORD } from './TrieNode/TrieNode.js';
+import { isCircular, trieNodeToRoot } from './TrieNode/trie-util.ts';
+import type { TrieNode, TrieRoot } from './TrieNode/TrieNode.ts';
+import { FLAG_WORD } from './TrieNode/TrieNode.ts';
 
 /**
  * Consolidate to DAWG

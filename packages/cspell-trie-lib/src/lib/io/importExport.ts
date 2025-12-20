@@ -1,8 +1,8 @@
-import type { TrieRoot } from '../TrieNode/TrieNode.js';
-import * as iv1 from './importExportV1.js';
-import * as iv2 from './importExportV2.js';
-import * as iv3 from './importExportV3.js';
-import * as iv4 from './importExportV4.js';
+import type { TrieRoot } from '../TrieNode/TrieNode.ts';
+import * as iv1 from './importExportV1.ts';
+import * as iv2 from './importExportV2.ts';
+import * as iv3 from './importExportV3.ts';
+import * as iv4 from './importExportV4.ts';
 
 export interface ExportOptions {
     base?: number;

@@ -1,6 +1,6 @@
-import { defaultTrieInfo } from '../constants.js';
-import type { PartialTrieInfo, TrieInfo } from '../ITrieNode/TrieInfo.js';
-import { mergeDefaults } from './mergeDefaults.js';
+import { defaultTrieInfo } from '../constants.ts';
+import type { PartialTrieInfo, TrieInfo } from '../ITrieNode/TrieInfo.ts';
+import { mergeDefaults } from './mergeDefaults.ts';
 
 export type ROPartialTrieOptions = Readonly<PartialTrieInfo>;
 

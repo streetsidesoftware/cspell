@@ -1,1 +1,1 @@
-export { Locale, parseLocale } from './locale.js';
+export { Locale, parseLocale } from './locale.ts';

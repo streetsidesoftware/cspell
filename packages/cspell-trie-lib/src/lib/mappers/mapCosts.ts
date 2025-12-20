@@ -1,5 +1,5 @@
-import type { EditCosts, HunspellCosts } from '../models/DictionaryInformation.js';
-import { cleanCopy } from '../utils/util.js';
+import type { EditCosts, HunspellCosts } from '../models/DictionaryInformation.ts';
+import { cleanCopy } from '../utils/util.ts';
 
 export type EditCostsRequired = Required<EditCosts>;
 export type HunspellCostsRequired = Required<HunspellCosts>;

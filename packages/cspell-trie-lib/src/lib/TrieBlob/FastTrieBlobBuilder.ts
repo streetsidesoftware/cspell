@@ -1,17 +1,17 @@
 import assert from 'node:assert';
 
-import type { BuilderCursor, TrieBuilder } from '../Builder/index.js';
-import type { PartialTrieInfo, TrieInfo } from '../ITrieNode/TrieInfo.js';
-import type { TrieNode, TrieRoot } from '../TrieNode/TrieNode.js';
-import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.js';
-import { assertValidUtf16Character } from '../utils/text.js';
-import { CharIndexBuilder } from './CharIndex.js';
-import type { NodeToJSON } from './FastTrieBlob.js';
-import { FastTrieBlob, nodesToJSON } from './FastTrieBlob.js';
-import type { FastTrieBlobBitMaskInfo } from './FastTrieBlobBitMaskInfo.js';
-import { FastTrieBlobInternals, sortNodes } from './FastTrieBlobInternals.js';
-import { resolveMap } from './resolveMap.js';
-import { TrieBlob } from './TrieBlob.js';
+import type { BuilderCursor, TrieBuilder } from '../Builder/index.ts';
+import type { PartialTrieInfo, TrieInfo } from '../ITrieNode/TrieInfo.ts';
+import type { TrieNode, TrieRoot } from '../TrieNode/TrieNode.ts';
+import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.ts';
+import { assertValidUtf16Character } from '../utils/text.ts';
+import { CharIndexBuilder } from './CharIndex.ts';
+import type { NodeToJSON } from './FastTrieBlob.ts';
+import { FastTrieBlob, nodesToJSON } from './FastTrieBlob.ts';
+import type { FastTrieBlobBitMaskInfo } from './FastTrieBlobBitMaskInfo.ts';
+import { FastTrieBlobInternals, sortNodes } from './FastTrieBlobInternals.ts';
+import { resolveMap } from './resolveMap.ts';
+import { TrieBlob } from './TrieBlob.ts';
 
 type FastTrieBlobNode = number[];
 

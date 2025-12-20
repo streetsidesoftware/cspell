@@ -1,2 +1,2 @@
-export { createWeightedMap, editDistance, editDistanceWeighted } from './distance.js';
-export type { WeightMap } from './weightedMaps.js';
+export { createWeightedMap, editDistance, editDistanceWeighted } from './distance.ts';
+export type { WeightMap } from './weightedMaps.ts';

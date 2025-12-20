@@ -1,22 +1,22 @@
 import { opAppend, opFilter, opMap, pipe } from '@cspell/cspell-pipe/sync';
 
-import type { WeightMap } from './distance/index.js';
-import { createFindOptions, findLegacyCompound, findWord, findWordNode, isForbiddenWord } from './ITrieNode/find.js';
-import type { FindOptions, PartialFindOptions } from './ITrieNode/FindOptions.js';
-import type { ITrieNode, ITrieNodeRoot } from './ITrieNode/index.js';
-import type { FindFullResult } from './ITrieNode/ITrieNode.js';
-import { countWords, iteratorTrieWords } from './ITrieNode/trie-util.js';
-import type { PartialTrieInfo, TrieInfo } from './ITrieNode/TrieInfo.js';
-import { walker } from './ITrieNode/walker/walker.js';
-import type { CompoundWordsMethod, WalkerIterator } from './ITrieNode/walker/walkerTypes.js';
-import type { SuggestionCollector, SuggestionResult } from './suggestCollector.js';
-import { createSuggestionOptions, type SuggestionOptions } from './suggestions/genSuggestionsOptions.js';
-import { genSuggestions, suggest } from './suggestions/suggestTrieData.js';
-import { FastTrieBlobBuilder } from './TrieBlob/FastTrieBlobBuilder.js';
-import type { TrieData } from './TrieData.js';
-import { clean } from './utils/clean.js';
-import { mergeOptionalWithDefaults } from './utils/mergeOptionalWithDefaults.js';
-import { replaceAllFactory } from './utils/util.js';
+import type { WeightMap } from './distance/index.ts';
+import { createFindOptions, findLegacyCompound, findWord, findWordNode, isForbiddenWord } from './ITrieNode/find.ts';
+import type { FindOptions, PartialFindOptions } from './ITrieNode/FindOptions.ts';
+import type { ITrieNode, ITrieNodeRoot } from './ITrieNode/index.ts';
+import type { FindFullResult } from './ITrieNode/ITrieNode.ts';
+import { countWords, iteratorTrieWords } from './ITrieNode/trie-util.ts';
+import type { PartialTrieInfo, TrieInfo } from './ITrieNode/TrieInfo.ts';
+import { walker } from './ITrieNode/walker/walker.ts';
+import type { CompoundWordsMethod, WalkerIterator } from './ITrieNode/walker/walkerTypes.ts';
+import type { SuggestionCollector, SuggestionResult } from './suggestCollector.ts';
+import { createSuggestionOptions, type SuggestionOptions } from './suggestions/genSuggestionsOptions.ts';
+import { genSuggestions, suggest } from './suggestions/suggestTrieData.ts';
+import { FastTrieBlobBuilder } from './TrieBlob/FastTrieBlobBuilder.ts';
+import type { TrieData } from './TrieData.ts';
+import { clean } from './utils/clean.ts';
+import { mergeOptionalWithDefaults } from './utils/mergeOptionalWithDefaults.ts';
+import { replaceAllFactory } from './utils/util.ts';
 
 const defaultLegacyMinCompoundLength = 3;
 
@@ -125,11 +125,10 @@ export class ITrieImpl implements ITrie {
     readonly hasForbiddenWords: boolean;
     readonly hasCompoundWords: boolean;
     readonly hasNonStrictWords: boolean;
+    readonly data: TrieData;
 
-    constructor(
-        readonly data: TrieData,
-        private numNodes?: number,
-    ) {
+    constructor(data: TrieData) {
+        this.data = data;
         this.root = data.getRoot();
         this._info = mergeOptionalWithDefaults(data.info);
         this.hasForbiddenWords = data.hasForbiddenWords;
@@ -293,7 +292,7 @@ export class ITrieImpl implements ITrie {
         const builder = new FastTrieBlobBuilder(info);
         builder.insert(words);
         const root = builder.build();
-        return new ITrieImpl(root, undefined);
+        return new ITrieImpl(root);
     }
 
     private createFindOptions(options: PartialFindOptions | undefined): FindOptions {

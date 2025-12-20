@@ -1,10 +1,10 @@
-import type { SuggestionCostMapDef } from '../models/suggestionCostsDef.js';
-import { distanceAStarWeighted } from './distanceAStarWeighted.js';
-import { levenshteinDistance } from './levenshtein.js';
-import type { WeightMap } from './weightedMaps.js';
-import { addDefToWeightMap, createWeightMap } from './weightedMaps.js';
+import type { SuggestionCostMapDef } from '../models/suggestionCostsDef.ts';
+import { distanceAStarWeighted } from './distanceAStarWeighted.ts';
+import { levenshteinDistance } from './levenshtein.ts';
+import type { WeightMap } from './weightedMaps.ts';
+import { addDefToWeightMap, createWeightMap } from './weightedMaps.ts';
 
-export type { SuggestionCostMapDef } from '../models/suggestionCostsDef.js';
+export type { SuggestionCostMapDef } from '../models/suggestionCostsDef.ts';
 
 const defaultCost = 100;
 

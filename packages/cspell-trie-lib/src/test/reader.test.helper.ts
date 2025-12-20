@@ -3,8 +3,8 @@ import * as fs from 'node:fs/promises';
 import * as path from 'node:path';
 import * as zlib from 'node:zlib';
 
-import { importTrie } from '../lib/io/importExport.js';
-import { Trie } from '../lib/trie.js';
+import { importTrie } from '../lib/io/importExport.ts';
+import { Trie } from '../lib/trie.ts';
 
 function isGZipped(buf: Buffer): boolean {
     return buf[0] == 0x1f && buf[1] === 0x8b;

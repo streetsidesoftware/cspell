@@ -1,14 +1,14 @@
-import type { TrieCost, WeightMap } from '../distance/weightedMaps.js';
-import type { ITrieNode, TrieOptionsRO } from '../ITrieNode/index.js';
-import { CompoundWordsMethod, JOIN_SEPARATOR, WORD_SEPARATOR } from '../ITrieNode/walker/index.js';
-import type { TrieData } from '../TrieData.js';
-import { PairingHeap } from '../utils/PairingHeap.js';
-import { opCosts } from './constants.js';
-import type { SuggestionOptionsRO } from './genSuggestionsOptions.js';
-import { createSuggestionOptions } from './genSuggestionsOptions.js';
-import { visualLetterMaskMap } from './orthography.js';
-import { suggestionCollector } from './suggestCollector.js';
-import type { SuggestionGenerator, SuggestionResult } from './SuggestionTypes.js';
+import type { TrieCost, WeightMap } from '../distance/weightedMaps.ts';
+import type { ITrieNode, TrieOptionsRO } from '../ITrieNode/index.ts';
+import { CompoundWordsMethod, JOIN_SEPARATOR, WORD_SEPARATOR } from '../ITrieNode/walker/index.ts';
+import type { TrieData } from '../TrieData.ts';
+import { PairingHeap } from '../utils/PairingHeap.ts';
+import { opCosts } from './constants.ts';
+import type { SuggestionOptionsRO } from './genSuggestionsOptions.ts';
+import { createSuggestionOptions } from './genSuggestionsOptions.ts';
+import { visualLetterMaskMap } from './orthography.ts';
+import { suggestionCollector } from './suggestCollector.ts';
+import type { SuggestionGenerator, SuggestionResult } from './SuggestionTypes.ts';
 
 type RO<T> = Readonly<T>;
 
