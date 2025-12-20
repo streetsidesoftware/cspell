@@ -1,10 +1,10 @@
-import { consolidate } from './consolidate.js';
-import type { PartialTrieOptions, TrieOptions } from './trie.js';
-import { Trie } from './trie.js';
-import { checkCircular, createTrieRootFromList, trieNodeToRoot } from './TrieNode/trie-util.js';
-import type { TrieNode, TrieRoot } from './TrieNode/TrieNode.js';
-import { mergeOptionalWithDefaults } from './utils/mergeOptionalWithDefaults.js';
-import { SecondChanceCache } from './utils/secondChanceCache.js';
+import { consolidate } from './consolidate.ts';
+import type { PartialTrieOptions, TrieOptions } from './trie.ts';
+import { Trie } from './trie.ts';
+import { checkCircular, createTrieRootFromList, trieNodeToRoot } from './TrieNode/trie-util.ts';
+import type { TrieNode, TrieRoot } from './TrieNode/TrieNode.ts';
+import { mergeOptionalWithDefaults } from './utils/mergeOptionalWithDefaults.ts';
+import { SecondChanceCache } from './utils/secondChanceCache.ts';
 
 type ChildMap = Record<string, TrieNodeEx>;
 
@@ -304,7 +304,7 @@ export class TrieBuilder {
         const f = node.f || 0;
         const c = node.c
             ? Object.fromEntries(
-                  Object.entries(node.c).map(([k, n]) => [k, { id: (<TrieNodeEx>n).id, r: this.cached.get(n) }]),
+                  Object.entries(node.c).map(([k, n]) => [k, { id: (n as TrieNodeEx).id, r: this.cached.get(n) }]),
               )
             : undefined;
         const L = Object.isFrozen(node);

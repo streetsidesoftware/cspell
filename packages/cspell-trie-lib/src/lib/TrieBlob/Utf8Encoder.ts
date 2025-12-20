@@ -1,4 +1,4 @@
-import { assert } from '../utils/assert.js';
+import { assert } from '../utils/assert.ts';
 
 interface TextEncoderEncodeIntoResult {
     read: number;

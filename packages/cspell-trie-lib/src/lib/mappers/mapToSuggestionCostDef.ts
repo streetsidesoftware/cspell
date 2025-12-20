@@ -1,11 +1,11 @@
 import { opFilter, opFlatten, opMap, opUnique, pipe } from '@cspell/cspell-pipe/sync';
 
-import type { CharacterSetCosts } from '../models/DictionaryInformation.js';
-import type { SuggestionCostMapDef } from '../models/suggestionCostsDef.js';
-import { accentForms, caseForms, expandCharacterSet, stripAccents, stripNonAccents } from '../utils/text.js';
-import { clean } from '../utils/util.js';
-import { joinLetters } from './joinLetters.js';
-import type { EditCostsRequired } from './mapCosts.js';
+import type { CharacterSetCosts } from '../models/DictionaryInformation.ts';
+import type { SuggestionCostMapDef } from '../models/suggestionCostsDef.ts';
+import { accentForms, caseForms, expandCharacterSet, stripAccents, stripNonAccents } from '../utils/text.ts';
+import { clean } from '../utils/util.ts';
+import { joinLetters } from './joinLetters.ts';
+import type { EditCostsRequired } from './mapCosts.ts';
 
 export function parseAlphabet(
     cs: CharacterSetCosts,

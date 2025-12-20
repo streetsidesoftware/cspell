@@ -1,7 +1,7 @@
 import type { Operator } from '@cspell/cspell-pipe/sync';
 import { opCombine as opPipe, opConcatMap, opFilter, opMap } from '@cspell/cspell-pipe/sync';
 
-import { buildITrieFromWords } from './buildITrie.js';
+import { buildITrieFromWords } from './buildITrie.ts';
 import {
     CASE_INSENSITIVE_PREFIX,
     COMPOUND_FIX,
@@ -9,11 +9,11 @@ import {
     IDENTITY_PREFIX,
     LINE_COMMENT,
     OPTIONAL_COMPOUND_FIX,
-} from './constants.js';
-import type { ITrie } from './ITrie.js';
-import type { Trie } from './trie.js';
-import { buildTrieFast } from './TrieBuilder.js';
-import { normalizeWord, normalizeWordForCaseInsensitive } from './utils/normalizeWord.js';
+} from './constants.ts';
+import type { ITrie } from './ITrie.ts';
+import type { Trie } from './trie.ts';
+import { buildTrieFast } from './TrieBuilder.ts';
+import { normalizeWord, normalizeWordForCaseInsensitive } from './utils/normalizeWord.ts';
 
 export interface ParseDictionaryOptions {
     compoundCharacter: string;

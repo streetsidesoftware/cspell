@@ -1,8 +1,8 @@
-import type { PartialTrieInfo } from '../ITrieNode/TrieInfo.js';
-import type { Trie } from '../trie.js';
-import type { TrieRoot } from '../TrieNode/TrieNode.js';
-import { FastTrieBlobBuilder } from './FastTrieBlobBuilder.js';
-import type { TrieBlob } from './TrieBlob.js';
+import type { PartialTrieInfo } from '../ITrieNode/TrieInfo.ts';
+import type { Trie } from '../trie.ts';
+import type { TrieRoot } from '../TrieNode/TrieNode.ts';
+import { FastTrieBlobBuilder } from './FastTrieBlobBuilder.ts';
+import type { TrieBlob } from './TrieBlob.ts';
 
 export function createTrieBlob(words: readonly string[], options?: PartialTrieInfo): TrieBlob {
     const ft = FastTrieBlobBuilder.fromWordList(words, options);

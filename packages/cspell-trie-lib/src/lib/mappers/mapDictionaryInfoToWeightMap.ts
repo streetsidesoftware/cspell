@@ -1,8 +1,8 @@
-import type { PenaltyAdjustment, WeightMap } from '../distance/weightedMaps.js';
-import { addAdjustment, createWeightMap } from '../distance/weightedMaps.js';
-import type { DictionaryInformation } from '../models/DictionaryInformation.js';
-import type { SuggestionCostMapDef } from '../models/suggestionCostsDef.js';
-import { mapDictionaryInformation, mapDictionaryInformationToAdjustment } from './mapDictionaryInfo.js';
+import type { PenaltyAdjustment, WeightMap } from '../distance/weightedMaps.ts';
+import { addAdjustment, createWeightMap } from '../distance/weightedMaps.ts';
+import type { DictionaryInformation } from '../models/DictionaryInformation.ts';
+import type { SuggestionCostMapDef } from '../models/suggestionCostsDef.ts';
+import { mapDictionaryInformation, mapDictionaryInformationToAdjustment } from './mapDictionaryInfo.ts';
 
 const defaultDefs: SuggestionCostMapDef[] = [
     {

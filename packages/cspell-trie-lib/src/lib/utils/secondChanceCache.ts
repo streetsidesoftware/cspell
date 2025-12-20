@@ -1,8 +1,11 @@
 export class SecondChanceCache<Key, Value> {
     private map0 = new Map<Key, Value>();
     private map1 = new Map<Key, Value>();
+    readonly maxL0Size: number;
 
-    constructor(readonly maxL0Size: number) {}
+    constructor(maxL0Size: number) {
+        this.maxL0Size = maxL0Size;
+    }
 
     public has(key: Key): boolean {
         if (this.map0.has(key)) return true;

@@ -1,7 +1,7 @@
 import type { Buffer } from 'node:buffer';
 
-import { decodeTrieData } from './io/index.js';
-import { type ITrie, ITrieImpl } from './ITrie.js';
+import { decodeTrieData } from './io/index.ts';
+import { type ITrie, ITrieImpl } from './ITrie.ts';
 
 export function decodeTrie(raw: string | Buffer): ITrie {
     const data = decodeTrieData(raw);
