@@ -191,7 +191,7 @@ interface YieldResult {
   node: TrieNode;
   depth: number;
 }
-declare const CompoundWordsMethod: {
+declare const CompoundWordsMethodEnum: {
   /**
   * Do not compound words.
   */
@@ -205,7 +205,14 @@ declare const CompoundWordsMethod: {
   */
   readonly JOIN_WORDS: 2;
 };
-type CompoundWordsMethod = (typeof CompoundWordsMethod)[keyof typeof CompoundWordsMethod];
+type CompoundWordsMethodEnum = typeof CompoundWordsMethodEnum;
+type CompoundWordsMethod = CompoundWordsMethodEnum[keyof CompoundWordsMethodEnum];
+interface CompoundWordsMethodByName extends CompoundWordsMethodEnum {
+  "0": "NONE";
+  "1": "SEPARATE_WORDS";
+  "2": "JOIN_WORDS";
+}
+declare const CompoundWordsMethod: CompoundWordsMethodByName;
 type WalkerIterator = Generator<YieldResult, void, boolean | undefined>;
 //#endregion
 //#region src/lib/ITrieNode/walker/walkerTypes.d.ts
