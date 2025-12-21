@@ -1,5 +1,6 @@
 import { suite } from 'perf-insight';
 
+import { CharIndex } from '../src/lib/TrieBlob/CharIndex.ts';
 import { encodeTextToUtf8 } from '../src/lib/TrieBlob/Utf8.ts';
 import { readFastTrieBlobFromConfig, readTrieFromConfig } from '../src/test/dictionaries.test.helper.ts';
 
@@ -13,27 +14,12 @@ suite('encode to sequence', async (test) => {
     const words = await getWords();
     const msgSuffix = ' - ' + words.length + ' words';
     const fastTrieBlob = await getFastTrieBlob();
-    const trieBlob = fastTrieBlob.toTrieBlob();
-    const charIndex = trieBlob.charIndex;
+    const charIndex = CharIndex.fromIterable(words);
     const encoder = new TextEncoder();
 
     test('fastTrieBlob.wordToNodeCharIndexSequence' + msgSuffix, () => {
         for (const word of words) {
             fastTrieBlob.wordToUtf8Seq(word);
-        }
-    });
-
-    test('trieBlob.wordToNodeCharIndexSequence' + msgSuffix, () => {
-        for (const word of words) {
-            trieBlob.wordToUtf8Seq(word);
-        }
-    });
-
-    test('trieBlob.wordToNodeCharIndexSequence x4' + msgSuffix, () => {
-        for (const word of words) {
-            for (let i = 0; i < 4; ++i) {
-                trieBlob.wordToUtf8Seq(word);
-            }
         }
     });
 

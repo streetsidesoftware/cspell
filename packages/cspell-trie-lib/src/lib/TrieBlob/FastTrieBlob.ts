@@ -32,7 +32,7 @@ export class FastTrieBlob implements TrieData {
 
     private constructor(nodes: FastTrieBlobNode[], bitMasksInfo: FastTrieBlobBitMaskInfo, info: Readonly<TrieInfo>) {
         this.#nodes = nodes;
-        this.#charIndex = new CharIndex([]);
+        this.#charIndex = new CharIndex();
         this.bitMasksInfo = bitMasksInfo;
         this.info = info;
         this.wordToCharacters = (word: string) => [...word];
