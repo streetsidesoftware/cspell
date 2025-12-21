@@ -3,9 +3,9 @@ import { ITrieImpl } from './ITrie.ts';
 import type { PartialTrieInfo } from './ITrieNode/TrieInfo.ts';
 import { FastTrieBlobBuilder } from './TrieBlob/FastTrieBlobBuilder.ts';
 
-export function buildITrieFromWords(words: Iterable<string>, info: PartialTrieInfo = {}): ITrie {
+export function buildITrieFromWords(words: Iterable<string>, info: PartialTrieInfo = {}, useTrieBlob = true): ITrie {
     const builder = new FastTrieBlobBuilder(info);
     builder.insert(words);
     const ft = builder.build();
-    return new ITrieImpl(ft.size > 1000 ? ft.toTrieBlob() : ft);
+    return new ITrieImpl(useTrieBlob ? ft.toTrieBlob() : ft);
 }

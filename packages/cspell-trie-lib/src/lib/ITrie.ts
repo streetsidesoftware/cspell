@@ -59,7 +59,20 @@ export interface ITrie {
      */
     find(text: string): ITrieNode | undefined;
 
+    /**
+     * A case sensitive search for the word.
+     * @param word - the word to search for.
+     * @returns true if the word is found and not forbidden.
+     */
     has(word: string): boolean;
+
+    /**
+     * The legacy case insensitive search for the word.
+     * @param word - the word to search for.
+     * @param minLegacyCompoundLength - minimum length of legacy compounds to consider.
+     * @returns true if the word is found and not forbidden.
+     * @deprecated use hasWord or findWord instead. Support for this method signature may be removed in the future.
+     */
     has(word: string, minLegacyCompoundLength: boolean | number): boolean;
 
     /**
@@ -184,15 +197,36 @@ export class ITrieImpl implements ITrie {
     /**
      * A case sensitive search for the word.
      * @param word - the word to search for.
+     * @returns true if the word is found and not forbidden.
+     */
+    has(word: string): boolean;
+
+    /**
+     * The legacy case insensitive search for the word.
+     * @param word - the word to search for.
+     * @param minLegacyCompoundLength - minimum length of legacy compounds to consider.
+     * @returns true if the word is found and not forbidden.
+     * @deprecated use hasWord or findWord instead. Support for this method signature may be removed in the future.
+     */
+    has(word: string, minLegacyCompoundLength: boolean | number): boolean;
+
+    /**
+     * A case sensitive search for the word.
+     * @param word - the word to search for.
      * @param minLegacyCompoundLength - minimum length of legacy compounds to consider.
      * @returns true if the word is found and not forbidden.
      */
     has(word: string, minLegacyCompoundLength?: boolean | number): boolean {
-        if (this.hasWord(word, true)) return true;
+        if (minLegacyCompoundLength !== undefined) return this.#hasLegacy(word, minLegacyCompoundLength);
+        return this.hasWord(word, true);
+    }
+
+    #hasLegacy(word: string, minLegacyCompoundLength: boolean | number): boolean {
+        if (this.hasWord(word, false)) return true;
         if (minLegacyCompoundLength) {
             const f = this.findWord(word, {
                 useLegacyWordCompounds: minLegacyCompoundLength,
-                caseSensitive: true,
+                caseSensitive: false,
                 checkForbidden: true,
             });
             return !!f.found && !f.forbidden;

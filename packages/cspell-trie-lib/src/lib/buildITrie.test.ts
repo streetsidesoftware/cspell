@@ -22,7 +22,8 @@ describe('buildITrie', () => {
 
         // console.log('Unique characters:', new Set(words.join('')).size);
 
-        const trie = buildITrieFromWords(words);
+        const trieBlob = buildITrieFromWords(words, undefined, true);
+        const trieFast = buildITrieFromWords(words, undefined, false);
 
         const builder = new FastTrieBlobBuilder();
         builder.insert(words);
@@ -30,15 +31,15 @@ describe('buildITrie', () => {
 
         for (const word of setOfWords) {
             expect(ft.has(word), `Expect to find "${word}" in ft trie`).toBe(true);
-            expect(trie.has(word), `Expect to find "${word}" in trie`).toBe(true);
+            expect(trieBlob.has(word), `Expect to find "${word}" in trieBlob`).toBe(true);
+            expect(trieFast.has(word), `Expect to find "${word}" in trieFast`).toBe(true);
         }
 
-        for (const word of trie.words()) {
-            expect(setOfWords.has(word), `Expect to find "${word}"`).toBe(true);
-        }
+        expect(new Set(trieFast.words())).toEqual(setOfWords);
+        expect(new Set(trieBlob.words())).toEqual(setOfWords);
 
-        expect(trie.size).toBeGreaterThan(0);
-        expect(size(trie)).toBeLessThan(trie.size);
+        expect(trieBlob.size).toBeGreaterThan(0);
+        expect(size(trieBlob)).toBeLessThan(trieBlob.size);
     });
 });
 
