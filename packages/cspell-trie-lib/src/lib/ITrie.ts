@@ -211,7 +211,7 @@ export class ITrieImpl implements ITrie {
             const findOptions = this.createFindOptions({
                 legacyMinCompoundLength: len,
                 matchCase: options.caseSensitive || false,
-                compoundSeparator: options.compoundSeparator,
+                compoundSeparator: undefined,
             });
             return findLegacyCompound(this.root, word, findOptions);
         }

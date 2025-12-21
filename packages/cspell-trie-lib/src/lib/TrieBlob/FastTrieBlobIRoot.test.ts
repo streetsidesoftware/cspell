@@ -31,8 +31,6 @@ describe('FastTrieBlob', () => {
         const iTrieRoot = FastTrieBlob.toITrieNodeRoot(ft);
         const firstLetters = new Set(words.map((w) => [...w][0]));
         const keys = new Set(iTrieRoot.keys());
-        console.log('keys.size.       :', keys.size);
-        console.log('firstLetters.size:', firstLetters.size);
         expect(keys).toEqual(firstLetters);
     });
 

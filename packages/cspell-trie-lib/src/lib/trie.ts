@@ -113,7 +113,7 @@ export class Trie {
             const findOptions = this.createFindOptions({
                 legacyMinCompoundLength: len,
                 matchCase: options.caseSensitive,
-                compoundSeparator: options.compoundSeparator,
+                compoundSeparator: undefined,
             });
             return findLegacyCompound(this.root, word, findOptions);
         }
