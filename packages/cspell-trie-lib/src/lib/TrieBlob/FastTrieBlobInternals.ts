@@ -1,6 +1,5 @@
 import type { PartialTrieInfo, TrieCharacteristics, TrieInfo } from '../ITrieNode/TrieInfo.ts';
 import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.ts';
-import type { CharIndex } from './CharIndex.ts';
 import type { FastTrieBlobBitMaskInfo } from './FastTrieBlobBitMaskInfo.ts';
 
 type Node = Uint32Array;
@@ -10,24 +9,15 @@ export class FastTrieBlobInternals implements FastTrieBlobBitMaskInfo {
     readonly NodeMaskEOW: number;
     readonly NodeMaskChildCharIndex: number;
     readonly NodeChildRefShift: number;
-    readonly isIndexDecoderNeeded: boolean;
     readonly info: Readonly<TrieInfo>;
     readonly nodes: Nodes;
-    readonly charIndex: CharIndex;
 
-    constructor(
-        nodes: Nodes,
-        charIndex: CharIndex,
-        maskInfo: FastTrieBlobBitMaskInfo,
-        info: Readonly<PartialTrieInfo>,
-    ) {
+    constructor(nodes: Nodes, maskInfo: FastTrieBlobBitMaskInfo, info: Readonly<PartialTrieInfo>) {
         this.nodes = nodes;
-        this.charIndex = charIndex;
         const { NodeMaskEOW, NodeMaskChildCharIndex, NodeChildRefShift } = maskInfo;
         this.NodeMaskEOW = NodeMaskEOW;
         this.NodeMaskChildCharIndex = NodeMaskChildCharIndex;
         this.NodeChildRefShift = NodeChildRefShift;
-        this.isIndexDecoderNeeded = charIndex.indexContainsMultiByteChars();
 
         this.info = mergeOptionalWithDefaults(info);
     }
@@ -53,12 +43,11 @@ export class FastTrieBlobInternalsAndMethods extends FastTrieBlobInternals imple
 
     constructor(
         nodes: Nodes,
-        charIndex: CharIndex,
         maskInfo: FastTrieBlobBitMaskInfo,
         info: PartialTrieInfo,
         trieMethods: Readonly<TrieMethods>,
     ) {
-        super(nodes, charIndex, maskInfo, info);
+        super(nodes, maskInfo, info);
         this.nodeFindExact = trieMethods.nodeFindExact;
         this.nodeGetChild = trieMethods.nodeGetChild;
         this.isForbidden = trieMethods.isForbidden;

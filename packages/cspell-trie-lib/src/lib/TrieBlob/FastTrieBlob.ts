@@ -220,7 +220,7 @@ export class FastTrieBlob implements TrieData {
 
     static toITrieNodeRoot(trie: FastTrieBlob): ITrieNodeRoot {
         return new FastTrieBlobIRoot(
-            new FastTrieBlobInternalsAndMethods(trie.#nodes, trie.#charIndex, trie.bitMasksInfo, trie.info, {
+            new FastTrieBlobInternalsAndMethods(trie.#nodes, trie.bitMasksInfo, trie.info, {
                 nodeFindNode: (idx: number, word: string) => trie.#lookupNode(idx, trie.wordToUtf8Seq(word)),
                 nodeFindExact: (idx: number, word: string) => trie.#has(idx, word),
                 nodeGetChild: (idx: number, letter: string) => trie.#searchNodeForChar(idx, letter),

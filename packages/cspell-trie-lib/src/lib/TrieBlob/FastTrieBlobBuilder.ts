@@ -287,7 +287,6 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
                     this.nodes.map((n) => Uint32Array.from(n)),
                     this.bitMasksInfo.NodeMaskChildCharIndex,
                 ),
-                this.charIndex.build(),
                 this.bitMasksInfo,
                 this.options,
             ),

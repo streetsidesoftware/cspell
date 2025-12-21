@@ -132,8 +132,8 @@ export class ITrieImpl implements ITrie {
     private count?: number;
     weightMap: WeightMap | undefined;
     #optionsCompound = this.createFindOptions({ compoundMode: 'compound' });
-    #findOptionsT: FindWordOptionsRO = { caseSensitive: true, checkForbidden: false };
-    #findOptionsF: FindWordOptionsRO = { caseSensitive: false, checkForbidden: false };
+    #findOptionsT: FindWordOptionsRO = { caseSensitive: true, checkForbidden: true };
+    #findOptionsF: FindWordOptionsRO = { caseSensitive: false, checkForbidden: true };
 
     readonly hasForbiddenWords: boolean;
     readonly hasCompoundWords: boolean;
@@ -198,7 +198,8 @@ export class ITrieImpl implements ITrie {
      */
     hasWord(word: string, caseSensitive: boolean): boolean {
         const options = caseSensitive ? this.#findOptionsT : this.#findOptionsF;
-        return !!this.findWord(word, options).found;
+        const r = this.findWord(word, options);
+        return !r.forbidden && !!r.found;
     }
 
     findWord(word: string, options?: FindWordOptionsRO): FindFullResult {

@@ -101,7 +101,7 @@ interface FindResult$1 {
   * - `false` - word is not in the forbidden list.
   * - `undefined` - unknown - was not checked.
   */
-  forbidden?: boolean | undefined;
+  forbidden: boolean | undefined;
 }
 interface FindFullResult$1 extends FindResult$1 {
   /**

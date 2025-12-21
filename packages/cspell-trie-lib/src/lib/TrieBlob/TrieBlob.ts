@@ -91,11 +91,17 @@ export class TrieBlob implements TrieData {
      * @param strict - if `true` the case and accents must match.
      */
     find(word: string, strict: boolean): FindResult | undefined {
-        if (!this.hasCompoundWords) {
-            const found = this.#hasWord(0, word);
-            if (found) return { found: word, compoundUsed: false, caseMatched: true };
-            if (strict || !this.#nonStrictIdx) return { found: false, compoundUsed: false, caseMatched: false };
-            return { found: this.#hasWord(this.#nonStrictIdx, word) && word, compoundUsed: false, caseMatched: false };
+        const found = this.#hasWord(0, word);
+        if (found || !this.hasCompoundWords) {
+            if (found) return { found: word, compoundUsed: false, caseMatched: true, forbidden: undefined };
+            if (strict || !this.#nonStrictIdx)
+                return { found: false, compoundUsed: false, caseMatched: false, forbidden: undefined };
+            return {
+                found: this.#hasWord(this.#nonStrictIdx, word) && word,
+                compoundUsed: false,
+                caseMatched: false,
+                forbidden: undefined,
+            };
         }
         // @todo: handle compound words.
         return undefined;
@@ -126,7 +132,7 @@ export class TrieBlob implements TrieData {
             },
         );
         return new TrieBlobIRoot(trieData, 0, this.info, {
-            find: (word, strict) => this.find(word, strict),
+            find: this.find.bind(this),
         });
     }
 

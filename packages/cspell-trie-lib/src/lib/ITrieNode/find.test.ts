@@ -14,6 +14,7 @@ const findLegacyCompoundWord = __testing__.findLegacyCompoundWord;
 describe('Validate findWord', () => {
     const trie = dictionaryTrieNodeTrie().getRoot();
     const trieBlob = dictionaryTrieBlob().getRoot();
+    const trieFast = FastTrieBlobBuilder.fromTrieRoot(dictionaryTrieRoot()).getRoot();
 
     const cModeC = { compoundMode: 'compound' };
     const mCaseT = { matchCase: true };
@@ -46,14 +47,16 @@ describe('Validate findWord', () => {
         ${'blueCode'}  | ${{ matchCase: true, compoundMode: 'compound' }}  | ${{ found: 'blueCode', compoundUsed: true, forbidden: true, caseMatched: true }}
         ${'bluecode'}  | ${{ ...mCaseF, ...cModeC }}                       | ${{ found: 'bluecode', compoundUsed: true, forbidden: true, caseMatched: false }}
         ${'bluemsg'}   | ${{ matchCase: false, compoundMode: 'compound' }} | ${{ found: 'bluemsg', compoundUsed: true, forbidden: false, caseMatched: true }}
-        ${'code'}      | ${{ matchCase: true, compoundMode: 'none' }}      | ${{ found: 'code', compoundUsed: false, forbidden: false, caseMatched: true }}
+        ${'code'}      | ${{ matchCase: true, compoundMode: 'none' }}      | ${{ found: 'code', compoundUsed: false, forbidden: undefined, caseMatched: true }}
         ${'code'}      | ${{ matchCase: true, compoundMode: 'compound' }}  | ${{ found: 'code', compoundUsed: false, forbidden: undefined, caseMatched: true }}
         ${'apple'}     | ${{ ...mCaseT, ...cModeC }}                       | ${{ found: 'apple', compoundUsed: false, forbidden: undefined, caseMatched: true }}
         ${'apple'}     | ${{ ...mCaseT, ...cModeC, ...ckForbidT }}         | ${{ found: 'apple', compoundUsed: false, forbidden: true, caseMatched: true }}
         ${'bluecode'}  | ${{ ...cModeC, ...mCaseF, ...cSep }}              | ${{ found: 'blue|code', compoundUsed: true, forbidden: true, caseMatched: false }}
+        ${'notebook'}  | ${{ ...cModeC, ...mCaseF, ...cSep }}              | ${{ found: 'note|book', compoundUsed: true, forbidden: false, caseMatched: true }}
     `('find exact words preserve case "$word" $opts', ({ word, opts, expected }) => {
         // Code is not allowed as a full word.
         expect(findWord(trieBlob, word, opts)).toEqual(expected);
+        expect(findWord(trieFast, word, opts)).toEqual(expected);
     });
 
     const ncf = { checkForbidden: false };
@@ -248,6 +251,8 @@ function dictionaryTrieRoot(): TrieRoot {
         !blueCode
         apple
         !apple
+        *note*
+        *book*
     `);
     return trie.root;
 }
