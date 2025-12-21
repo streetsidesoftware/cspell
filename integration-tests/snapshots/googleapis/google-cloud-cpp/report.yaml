@@ -4,8 +4,8 @@ Url: https://github.com/googleapis/google-cloud-cpp.git
 Args: '["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]'
 Summary:
   files: 20966
-  filesWithIssues: 7960
-  issues: 45758
+  filesWithIssues: 7953
+  issues: 45721
   errors: 0
 Errors: []
 
@@ -670,8 +670,6 @@ issues:
   - "google/cloud/networkconnectivity/v1/policy_based_routing_client.h:40:58         flexibile (flexible)    U       customers to specify flexibile routing"
   - "google/cloud/networkmanagement/mocks/mock_reachability_connection.h:19:39       NETWORKMANAGEMENT       U       CLOUD_CPP_GOOGLE_CLOUD_NETWORKMANAGEMENT_MOCKS_MOCK_REACHABILITY"
   - "google/cloud/opentelemetry/configure_basic_tracing.h:55:20          Gooogle     U       * that works with Gooogle Cloud Trace."
-  - "google/cloud/opentelemetry/internal/monitored_resource_test.cc:218:15       Faas    U       {sc::kFaasName, \"test-module\"}"
-  - "google/cloud/opentelemetry/internal/monitored_resource_test.cc:278:26       faas    U       {sc::kFaasName, \"faas-name\"},"
   - "google/cloud/opentelemetry/internal/recordable_test.cc:193:9        Truncatable             U       TEST(SetTruncatableString, LessThanLimit"
   - "google/cloud/opentelemetry/internal/recordable_test.cc:721:27       instrumentationscope    U       opentelemetry::sdk::instrumentationscope::InstrumentationScope"
   - "google/cloud/optimization/doc/environment-variables.dox:13:40       cloudoptimization       U       (which defaults to \"cloudoptimization.googleapis.com\")"
@@ -694,7 +692,6 @@ issues:
   - "google/cloud/pubsub/internal/extend_leases_with_retry.cc:62:30          modack              U       interface for making a modack rpc."
   - "google/cloud/pubsub/internal/extend_leases_with_retry.cc:120:5          enccode (encode)    U       * @enccode"
   - "google/cloud/pubsub/internal/span.h:30:29       Telemetery      U       class stores an OpenTelemetery span which can only"
-  - "google/cloud/pubsub/internal/subscriber_tracing_connection_test.cc:239:8        unsampled       U       auto unsampled_span = internal::MakeSpan"
   - "google/cloud/pubsub/internal/subscription_session_test.cc:178:37        acking      U       Increment the counter before acking, as the ack() may trigger"
   - "google/cloud/pubsub/internal/tracing_helpers.h:39:71        telemetery      U       if compiled with open telemetery"
   - "google/cloud/pubsub/samples/CMakeLists.txt:94:37        TESTDATA    U       GOOGLE_CLOUD_CPP_PUBSUB_TESTDATA=${CMAKE_CURRENT_SOURCE"
@@ -903,7 +900,6 @@ issues:
   - "google/cloud/timeseriesinsights/v1/internal/timeseries_insights_controller_auth_decorator.h:19:39       TIMESERIESINSIGHTS      U       CLOUD_CPP_GOOGLE_CLOUD_TIMESERIESINSIGHTS_V1_INTERNAL_TIMESERIES"
   - "google/cloud/tpu/v1/internal/tpu_auth_decorator.cc:104:64       Reimage     U       Operation>> TpuAuth::AsyncReimageNode("
   - "google/cloud/tpu/v1/tpu_client.h:449:7          Reimages    U       /// Reimages a node's OS."
-  - "google/cloud/trace/doc/options.dox:2:38         Stackdriver     U       cloud-trace-options Stackdriver Trace API Configuration"
   - "google/cloud/tracing_options_test.cc:65:14          unparseable     U       // Unknown/unparseable options are ignored"
   - "google/cloud/translate/v3/translation_client.h:169:24       regionalized    U       // For global (non-regionalized) requests, use `location"
   - "google/cloud/video/doc/environment-variables.dox:21:40          videostitcher       U       (which defaults to \"videostitcher.googleapis.com\")"

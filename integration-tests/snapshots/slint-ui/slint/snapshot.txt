@@ -3,7 +3,7 @@ Repository: slint-ui/slint
 Url: "https://github.com/slint-ui/slint"
 Args: ["--config=../../../../repositories/config/slint/cspell.config.yaml","--issues-summary-report","."]
 Lines:
- CSpell: Files checked: 2625, skipped: 3, Issues found: 5286 in 910 files.
+ CSpell: Files checked: 2625, skipped: 3, Issues found: 5266 in 905 files.
  exit code: 1
 CMakeLists.txt:17:14     - Unknown word (TOPLEVEL)   -- set(SLINT_IS_TOPLEVEL_BUILD TRUE)
 CMakeLists.txt:27:31     - Unknown word (dylib's)    -- macOS, the slint_cpp.dylib's install_name uses @rpath
@@ -123,7 +123,6 @@ api/cpp/README.md:82:54     - Unknown word (DCMAKE)     -- -unknown-linux-gnu -D
 api/cpp/cbindgen.rs:1013:13   - Unknown word (linuxkms)   -- backend_linuxkms
 api/cpp/cbindgen.rs:1014:13   - Unknown word (linuxkms)   -- backend_linuxkms_noseat
 api/cpp/cbindgen.rs:1014:22   - Unknown word (noseat)     -- backend_linuxkms_noseat
-api/cpp/cbindgen.rs:208:28    - Unknown word (bitflags)   -- config.macro_expansion.bitflags = true;
 api/cpp/cbindgen.rs:459:26    - Unknown word (singleshot) -- "slint_timer_singleshot",
 api/cpp/cbindgen.rs:583:29    - Unknown word (hinstance)  -- "slint_windowrc_hinstance_win32",
 api/cpp/cbindgen.rs:584:29    - Unknown word (wlsurface)  -- "slint_windowrc_wlsurface_wayland",
@@ -326,7 +325,6 @@ api/node/__test__/models.spec.mts:46:32     - Unknown word (Mustermann) -- first
 api/node/__test__/models.spec.mts:47:34     - Unknown word (Tisch)      -- first: "Roman", last: "Tisch" },
 api/node/cover.md:324:45    - Unknown word (defing)     -- be created either by defing of an object literal
 api/node/cover.md:395:1     - Unknown word (componen)   -- componen instance. Each global
-api/node/rust/interpreter/component_compiler.rs:10:16     - Unknown word (Itertools)  -- use itertools::Itertools;
 api/node/rust/interpreter/component_compiler.rs:187:45    - Unknown word (argunemt)   -- "Node.js: wrong argunemt for callback file_loader
 api/node/rust/interpreter/component_instance.rs:128:31    - Unknown word (proptype)   -- .find_map(|(name, proptype)| if name == callback
 api/node/rust/interpreter/component_instance.rs:394:24    - Unknown word (unref)      -- self.reference.unref(self.env).unwrap();
@@ -3186,7 +3184,6 @@ internal/compiler/generator/cpp.rs:4452:32   - Unknown word (strs)         -- le
 internal/compiler/generator/cpp.rs:4456:34   - Unknown word (strs)         -- array_size: Some(all_strs_len),
 internal/compiler/generator/cpp.rs:4459:21   - Unknown word (strs)         -- all_strs.map(|s| format_smolstr
 internal/compiler/generator/cpp_live_preview.rs:86:20     - Unknown word (constexpr)  -- "{0}if constexpr(std::is_same_v<T, {
-internal/compiler/generator/cpp_live_preview.rs:9:16      - Unknown word (Itertools)  -- use itertools::Itertools as _;
 internal/compiler/generator/python.rs:160:17    - Unknown word (structty)   -- fn try_from(structty: &Rc<crate::langtype
 internal/compiler/generator/python.rs:161:46    - Unknown word (structty)   -- User { name, .. } = &structty.name else {
 internal/compiler/generator/python.rs:166:21    - Unknown word (structty)   -- fields: structty
@@ -3231,7 +3228,6 @@ internal/compiler/generator/rust.rs:2318:61   - Unknown word (sourcestruct) -- S
 internal/compiler/generator/rust.rs:275:40    - Unknown word (rescope)    -- unknown_lints, if_let_rescope, tail_expr_drop_order
 internal/compiler/generator/rust.rs:462:35    - Unknown word (gloabls)    -- //(quote!(#shared_gloabls_var_name),quote!(let
 internal/compiler/langtype.rs:165:42    - Unknown word (pathdata)   -- PathData => write!(f, "pathdata"),
-internal/compiler/langtype.rs:9:16      - Unknown word (Itertools)  -- use itertools::Itertools;
 internal/compiler/layout.rs:463:9     - Unknown word (elems)      -- pub elems: Vec<GridLayoutElement
 internal/compiler/layout.rs:476:18    - Unknown word (rowcol)     -- pub fn visit_rowcol_named_references(&mut
 internal/compiler/layout.rs:477:31    - Unknown word (elems)      -- for cell in &mut self.elems {
@@ -3249,7 +3245,6 @@ internal/compiler/lib.rs:37:9      - Unknown word (pathutils)      -- pub mod pa
 internal/compiler/lib.rs:41:9      - Unknown word (typeregister)   -- pub mod typeregister;
 internal/compiler/lib.rs:6:13      - Unknown word (docsrs)     -- #![cfg_attr(docsrs, feature(doc_cfg))]
 internal/compiler/literals.rs:60:36     - Unknown word (fooo)       -- unescape_string(r#""fooo\""#), None);
-internal/compiler/literals.rs:6:16      - Unknown word (Itertools)  -- use itertools::Itertools;
 internal/compiler/literals.rs:73:42     - Unknown word (qsdf)       -- unescape_string(r#""xxx\u{qsdf}""#), None);
 internal/compiler/llr.rs:15:9      - Unknown word (optim)      -- pub mod optim_passes {
 internal/compiler/llr/expression.rs:762:40    - Unknown word (subcomponent's) -- go from the current subcomponent's context, to the context
@@ -3264,7 +3259,6 @@ internal/compiler/llr/lower_expression.rs:900:32    - Unknown word (propref)    
 internal/compiler/llr/lower_expression.rs:901:36    - Unknown word (propref)    -- let rowspan_expr = propref_or_default(&c.rowspan
 internal/compiler/llr/lower_expression.rs:902:36    - Unknown word (propref)    -- let colspan_expr = propref_or_default(&c.colspan
 internal/compiler/llr/lower_to_item_tree.rs:56:24     - Unknown word (codegen)    -- // For C++ codegen, the root component
-internal/compiler/llr/pretty_print.rs:6:16      - Unknown word (Itertools)  -- use itertools::Itertools;
 internal/compiler/object_tree.rs:3171:34   - Unknown word (layoutinfo) -- SmolStr::new_static("layoutinfo-v"),
 internal/compiler/object_tree.rs:3176:34   - Unknown word (layoutinfo) -- SmolStr::new_static("layoutinfo-h"),
 internal/compiler/object_tree.rs:342:41    - Unknown word (orignates)  -- structs, enums, that orignates from an
@@ -3547,7 +3541,6 @@ internal/compiler/typeloader.rs:17:25     - Unknown word (langtype)   -- crate::
 internal/compiler/typeloader.rs:1829:13   - Unknown word (incdir)      -- let mut incdir = test_source_path.clone
 internal/compiler/typeloader.rs:1830:18   - Unknown word (incpath)     -- incdir.push("incpath");
 internal/compiler/typeloader.rs:1830:5    - Unknown word (incdir)      -- incdir.push("incpath");
-internal/compiler/typeloader.rs:19:16     - Unknown word (Itertools)  -- use itertools::Itertools;
 internal/compiler/typeloader.rs:2050:11   - Unknown word (libfile)     -- ("libfile.slint".into(), test
 internal/compiler/typeloader.rs:2062:31   - Unknown word (libfile)     -- LibraryType } from "@libfile.slint";
 internal/compiler/typeloader.rs:2091:11   - Unknown word (libfile)     -- ("libfile.slint".into(), test
@@ -3633,7 +3626,6 @@ internal/core-macros/link-data.json:60:50     - Unknown word (focusreason)      
 internal/core-macros/link-data.json:75:48     - Unknown word (horizontalbox)    -- std-widgets/layouts/horizontalbox/"
 internal/core-macros/link-data.json:78:36     - Unknown word (horizontallayout) -- "reference/layouts/horizontallayout/"
 internal/core-macros/link-data.json:9:45      - Unknown word (builtinfunctions) -- reference/global-functions/builtinfunctions/#animation-tick---duration
-internal/core/accessibility.rs:54:1      - Unknown word (bitflags)   -- bitflags! {
 internal/core/api.rs:1036:34   - Unknown word (functors)   -- woken up, any queued up functors will be invoked.
 internal/core/api.rs:1039:42   - Unknown word (functors)   -- event loop. The provided functors will only be invoked
 internal/core/api.rs:1082:32   - Unknown word (behaviour)  -- is platform dependent behaviour.
@@ -4805,11 +4797,8 @@ tests/driver/cpp/cppdriver.rs:74:8      - Unknown word (NDEBUG)     -- #undef ND
 tests/driver/cpp/cppdriver.rs:77:11     - Unknown word (cmath)      -- #include <cmath>
 tests/driver/cpp/main.rs:5:5       - Unknown word (cppdriver)  -- mod cppdriver;
 tests/driver/driverlib/lib.rs:37:53     - Unknown word (subfolders) -- slint` files in the subfolders e.g. `tests/cases`
-tests/driver/interpreter/interpreter.rs:4:16      - Unknown word (Itertools)  -- use itertools::Itertools;
 tests/driver/interpreter/main.rs:34:23     - Unknown word (usecases)   -- test_example!(example_usecases, "demos/usecases/ui
 tests/driver/interpreter/main.rs:34:40     - Unknown word (usecases)   -- example_usecases, "demos/usecases/ui/app.slint");
-tests/driver/interpreter/main.rs:40:28     - Unknown word (sysinfo)    -- example!(example_bash_sysinfo, "examples/bash/sysinfo
-tests/driver/interpreter/main.rs:40:52     - Unknown word (sysinfo)    -- sysinfo, "examples/bash/sysinfo.slint");
 tests/driver/nodejs/nodejs.rs:58:9      - Unknown word (slintpath)  -- let slintpath = NODE_API_JS_PATH.clone
 tests/driver/nodejs/nodejs.rs:67:21     - Unknown word (slintlib)   -- let slintlib = require(String.raw
 tests/driver/nodejs/nodejs.rs:67:52     - Unknown word (slintpath)  -- require(String.raw`{slintpath}`);
@@ -4928,14 +4917,12 @@ tools/compiler/main.rs:21:16     - Unknown word (Jemalloc)   -- static GLOBAL: J
 tools/compiler/main.rs:21:27     - Unknown word (Jemalloc)   -- static GLOBAL: Jemalloc = Jemalloc;
 tools/compiler/main.rs:76:19     - Unknown word (depfile)    -- #[arg(long = "depfile", name = "dependency
 tools/compiler/main.rs:77:5      - Unknown word (depfile)    -- depfile: Option<std::path::PathBuf
-tools/compiler/main.rs:7:16      - Unknown word (Itertools)  -- use itertools::Itertools;
 tools/compiler/pyproject.toml:23:7      - Unknown word (maturin)    -- [tool.maturin]
 tools/compiler/pyproject.toml:5:14      - Unknown word (maturin)    -- requires = ["maturin>=1.9,<2.0"]
 tools/compiler/pyproject.toml:6:18      - Unknown word (maturin)    -- build-backend = "maturin"
 tools/docsnapper/headless.rs:153:58    - Unknown word (Deque)      -- std::collections::VecDeque<Event>>>,
 tools/docsnapper/headless.rs:160:16    - Unknown word (unpark)     -- self.1.unpark();
 tools/docsnapper/headless.rs:169:16    - Unknown word (unpark)     -- self.1.unpark();
-tools/docsnapper/main.rs:12:16     - Unknown word (Itertools)  -- use itertools::Itertools;
 tools/docsnapper/main.rs:324:19    - Unknown word (slintfoo)   -- r#"```slintfoo
 tools/figma-inspector/src/components/snippet/dark-theme.json:265:35    - Unknown word (noexcept)   -- "keyword.operator.noexcept"
 tools/figma-inspector/src/components/snippet/dark-theme.json:351:35    - Unknown word (alignof)    -- "keyword.operator.alignof",
@@ -5019,9 +5006,7 @@ tools/lsp/fmt/tool.rs:29:12     - Unknown word (inplace)    -- if inplace {
 tools/lsp/language/completion.rs:1050:31   - Unknown word (funi)       -- pure function funi() {}
 tools/lsp/language/completion.rs:1062:31   - Unknown word (funi)       -- pure function funi() {}
 tools/lsp/language/completion.rs:1073:47   - Unknown word (funi)       -- find(|ci| ci.label == "funi").unwrap();
-tools/lsp/language/hover.rs:12:16     - Unknown word (Itertools)  -- use itertools::Itertools as _;
 tools/lsp/language/semantic_tokens.rs:188:43    - Unknown word (rfind)      -- start = len(&text[(text.rfind('\n').unwrap() + 1)
-tools/lsp/main.rs:32:16     - Unknown word (Itertools)  -- use itertools::Itertools;
 tools/lsp/main.rs:50:24     - Unknown word (Jemalloc)   -- use tikv_jemallocator::Jemalloc;
 tools/lsp/main.rs:58:16     - Unknown word (Jemalloc)   -- static GLOBAL: Jemalloc = Jemalloc;
 tools/lsp/main.rs:58:27     - Unknown word (Jemalloc)   -- static GLOBAL: Jemalloc = Jemalloc;
@@ -5034,13 +5019,11 @@ tools/lsp/preview/properties.rs:101:4     - Unknown word (accessiblity) -- // ac
 tools/lsp/preview/properties.rs:872:34    - Unknown word (peclaration)  -- .ok_or("property peclaration has no colon")?;
 tools/lsp/preview/ui.rs:1099:8    - Unknown word (structurize) -- fn structurize(row: ModelRc<PropertyValue
 tools/lsp/preview/ui.rs:1137:21   - Unknown word (structurize) -- let structure = structurize(row)?;
-tools/lsp/preview/ui.rs:11:16     - Unknown word (Itertools)  -- use itertools::Itertools;
 tools/lsp/preview/ui.rs:1430:25   - Unknown word (Sometype)    -- type_name: "Sometype".into(),
 tools/lsp/preview/ui.rs:1453:42   - Unknown word (BBBX)        -- test_property("bbb", "BBBX"),
 tools/lsp/preview/ui.rs:1475:44   - Unknown word (BBBX)        -- value.code.as_str(), "BBBX");
 tools/lsp/preview/ui.rs:2145:26   - Unknown word (stuct)       -- fn test_table_row_to_stuct() {
 tools/lsp/preview/ui.rs:9:41      - Unknown word (langtype)   -- compiler::{expression_tree, langtype};
-tools/lsp/preview/ui/brushes.rs:10:16     - Unknown word (Itertools)  -- use itertools::Itertools as _;
 tools/lsp/preview/ui/palette.rs:13:41     - Unknown word (langtype)   -- compiler::{expression_tree, langtype, object_tree};
 tools/lsp/preview/ui/palette.rs:670:60    - Unknown word (darkred)    -- unwrap().name, "Colors.darkred");
 tools/lsp/preview/ui/palette.rs:671:60    - Unknown word (indianred)  -- unwrap().name, "Colors.indianred");
@@ -5048,7 +5031,6 @@ tools/lsp/preview/ui/palette.rs:672:60    - Unknown word (mediumvioletred) -- un
 tools/lsp/preview/ui/palette.rs:673:60    - Unknown word (orangered)       -- unwrap().name, "Colors.orangered");
 tools/lsp/preview/ui/palette.rs:674:60    - Unknown word (palevioletred)   -- unwrap().name, "Colors.palevioletred");
 tools/lsp/preview/ui/property_view.rs:11:22     - Unknown word (langtype)   -- expression_tree, langtype, literals, object_tree
-tools/lsp/preview/ui/property_view.rs:6:16      - Unknown word (Itertools)  -- use itertools::Itertools;
 tools/lsp/preview/ui/search_model.rs:130:23    - Unknown word (Héllo)      -- assert!(contains("Héllo Wold", "Hello"));
 tools/lsp/preview/ui/search_model.rs:131:40    - Unknown word (héllo)      -- contains("AbcHello Wold", "héllo"));
 tools/lsp/preview/ui/search_model.rs:132:30    - Unknown word (Xyzabc)     -- assert!(contains("AXyzXyzXyzabcA", "xyzabc"));
@@ -5091,7 +5073,6 @@ tools/tr-extractor/main.rs:170:51    - Unknown word (poedit)     -- Workaround f
 tools/tr-extractor/main.rs:177:33    - Unknown word (msgctxt)    -- if let Some(msgctxt) = msgctxt {
 tools/tr-extractor/main.rs:177:44    - Unknown word (msgctxt)    -- let Some(msgctxt) = msgctxt {
 tools/tr-extractor/main.rs:178:38    - Unknown word (msgctxt)    -- builder.with_msgctxt(msgctxt.into());
-tools/tr-extractor/main.rs:225:20    - Unknown word (Itertools)  -- use itertools::Itertools;
 tools/tr-extractor/main.rs:230:13    - Unknown word (msgctx)     -- pub msgctx: &'a str,
 tools/tr-extractor/main.rs:240:13    - Unknown word (msgctx)     -- msgctx: &'static str,
 tools/tr-extractor/main.rs:245:27    - Unknown word (msgctx)     -- Self { msgid, msgctx, plural, comments, locations
@@ -5109,7 +5090,6 @@ tools/viewer/main.rs:23:16     - Unknown word (Jemalloc)   -- static GLOBAL: Jem
 tools/viewer/main.rs:23:27     - Unknown word (Jemalloc)   -- static GLOBAL: Jemalloc = Jemalloc;
 tools/viewer/main.rs:283:10    - Unknown word (fswatch)    -- fn start_fswatch_thread(args: Cli) -
 tools/viewer/main.rs:308:28    - Unknown word (fswatcher)  -- fn reload(args: Cli, fswatcher: Arc<Mutex<notify::Recommende
-tools/viewer/main.rs:8:16      - Unknown word (Itertools)  -- use itertools::Itertools;
 ui-libraries/material/docs/MIGRATION.md:65:6      - Unknown word (twelf)      -- - `twelf_hour_model` → `twelfth
 ui-libraries/material/docs/MIGRATION.md:67:11     - Unknown word (labl)       -- - `hour_labl` → `hour_label` (typo
 ui-libraries/material/docs/README.md:48:35     - Unknown word (Lmaterial)  -- slint-docsnapper -- -Lmaterial=$PWD/src/material.slint

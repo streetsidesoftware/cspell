@@ -5,7 +5,7 @@ Args: '["--config=${repoConfig}/cspell.json","**/*.{md,c,h,php}"]'
 Summary:
   files: 2263
   filesWithIssues: 1568
-  issues: 29977
+  issues: 29971
   errors: 0
 Errors: []
 
@@ -3979,20 +3979,14 @@ issues:
   - "ext/fileinfo/libmagic/is_tar.c:57:40        Magdir          U       * found in ../magic/Magdir/archive */"
   - "ext/fileinfo/libmagic/is_tar.c:69:58        nroff           U       can confuse it with an nroff file."
   - "ext/fileinfo/libmagic/is_tar.c:85:6         tartype         U       tartype[tar - 1]) == -1)"
-  - "ext/fileinfo/libmagic/is_tar.c:101:20       gpkg            U       static const char gpkg_match[] = \"/gpkg-1\""
-  - "ext/fileinfo/libmagic/is_tar.c:101:37       gpkg            U       char gpkg_match[] = \"/gpkg-1\";"
   - "ext/fileinfo/libmagic/is_tar.c:103:31       RCAST           U       union record *header = RCAST(const union record"
   - "ext/fileinfo/libmagic/is_tar.c:104:6        RCAST           U       RCAST(const void *, buf))"
   - "ext/fileinfo/libmagic/is_tar.c:108:14       nulp            U       const char *nulp;"
   - "ext/fileinfo/libmagic/is_tar.c:113:35       GLEP            U       file looks like Gentoo GLEP 78 binary package (GPKG"
-  - "ext/fileinfo/libmagic/is_tar.c:113:59       GPKG            U       GLEP 78 binary package (GPKG),"
   - "ext/fileinfo/libmagic/is_tar.c:116:2        nulp            U       nulp = CAST(const char *"
   - "ext/fileinfo/libmagic/is_tar.c:118:6        nulp            U       if (nulp != NULL && nulp >= header"
   - "ext/fileinfo/libmagic/is_tar.c:118:22       nulp            U       if (nulp != NULL && nulp >= header->header.name"
-  - "ext/fileinfo/libmagic/is_tar.c:118:59       gpkg            U       header.name + sizeof(gpkg_match) &&"
   - "ext/fileinfo/libmagic/is_tar.c:119:13       nulp            U       memcmp(nulp - sizeof(gpkg_match"
-  - "ext/fileinfo/libmagic/is_tar.c:119:27       gpkg            U       memcmp(nulp - sizeof(gpkg_match) + 1, gpkg_match"
-  - "ext/fileinfo/libmagic/is_tar.c:119:44       gpkg            U       sizeof(gpkg_match) + 1, gpkg_match,"
   - "ext/fileinfo/libmagic/is_tar.c:139:36       GNUTMAGIC       U       header->header.magic, GNUTMAGIC,"
   - "ext/fileinfo/libmagic/magic.c:346:23        PHNUM       U       case MAGIC_PARAM_ELF_PHNUM_MAX:"
   - "ext/fileinfo/libmagic/magic.c:347:11        phnum       U       ms->elf_phnum_max = CAST(uint16_t"
