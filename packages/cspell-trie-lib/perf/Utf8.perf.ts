@@ -8,12 +8,14 @@ import {
     decodeUtf8N_LE,
     encodeCodePointsToUtf8Into,
     encodeTextToUtf8,
+    encodeTextToUtf8_32,
+    encodeTextToUtf8_32Into,
     encodeTextToUtf8Into,
     encodeUtf8N_BE,
     encodeUtf8N_LE,
     textToCodePoints,
 } from '../src/lib/TrieBlob/Utf8.ts';
-import { Utf8Encoder } from '../src/lib/TrieBlob/Utf8Encoder.ts';
+import { Utf8Encoder, Utf8Encoder2 } from '../src/lib/TrieBlob/Utf8Encoder.ts';
 
 const iterations = 1000;
 const text = sampleText();
@@ -23,6 +25,7 @@ suite('Utf8 encode', async (test) => {
     const encoder = new TextEncoder();
     const scratchBuffer = new Uint8Array(1024);
     const utf8Encoder = new Utf8Encoder();
+    const utf8Encoder2 = new Utf8Encoder2(1024);
 
     test(`TextEncoder.encodeInto words (${words.length})`, () => {
         const buffer = scratchBuffer;
@@ -120,6 +123,57 @@ suite('Utf8 encode', async (test) => {
         for (let i = iterations; i > 0; --i) {
             for (const word of _words) {
                 utf8Encoder.encode(word);
+            }
+        }
+    });
+
+    test(`utf8Encoder2(word) to array words (${words.length})`, () => {
+        const _words = words;
+        for (let i = iterations; i > 0; --i) {
+            for (const word of _words) {
+                utf8Encoder2.encode(word);
+            }
+        }
+    });
+
+    test(`toUtf8Array(word) to array words (${words.length})`, () => {
+        const _words = words;
+        for (let i = iterations; i > 0; --i) {
+            for (const word of _words) {
+                toUtf8Array(word);
+            }
+        }
+    });
+
+    test(`toCodePoints(word) to array words (${words.length})`, () => {
+        const _words = words;
+        for (let i = iterations; i > 0; --i) {
+            for (const word of _words) {
+                toCodePoints(word);
+            }
+        }
+    });
+
+    test(`encodeTextToUtf8PointsInto(word) to array words (${words.length})`, () => {
+        const _words = words;
+        const buffer: number[] = new Array(100);
+        for (let i = iterations; i > 0; --i) {
+            for (const word of _words) {
+                encodeTextToUtf8_32Into(word, buffer);
+            }
+        }
+    });
+
+    test(`encodeTextToUtf8_32(word) to array words (${words.length})`, () => {
+        const _words = words;
+        const buffer: number[] = new Array(100);
+        for (let i = iterations; i > 0; --i) {
+            for (const word of _words) {
+                const len = word.length;
+                let j = 0;
+                for (let p = { text: word, offset: 0 }; p.offset < len; ) {
+                    buffer[j++] = encodeTextToUtf8_32(p);
+                }
             }
         }
     });
@@ -360,4 +414,43 @@ function sampleText() {
     //     Sample Flags text: 🇺🇸🇨🇳🇯🇵🇰🇷🇷🇺🇮🇳🇹🇭🇻🇳
     `;
     // cspell:enable
+}
+
+const textEncoder = new TextEncoder();
+const charMap: Record<string, number> = Object.create(null);
+
+function encodeChar(char: string): number {
+    const bytes = textEncoder.encode(char);
+    let code = 0;
+    for (let i = bytes.length - 1; i >= 0; i--) {
+        code = (code << 8) | bytes[i];
+    }
+    return code;
+}
+
+function toUtf8Array(text: string): number[] {
+    const src: string[] = [...text];
+    const dst: number[] = src as unknown as number[];
+
+    for (let i = 0; i < src.length; i++) {
+        const char = src[i];
+        let code = charMap[char];
+        if (code === undefined) {
+            code = encodeChar(char);
+            charMap[char] = code;
+        }
+        dst[i] = code;
+    }
+    return dst;
+}
+
+function toCodePoints(text: string): number[] {
+    const src: string[] = [...text];
+    const dst: number[] = src as unknown as number[];
+
+    for (let i = 0; i < src.length; i++) {
+        const char = src[i];
+        dst[i] = char.codePointAt(0) || 0;
+    }
+    return dst;
 }

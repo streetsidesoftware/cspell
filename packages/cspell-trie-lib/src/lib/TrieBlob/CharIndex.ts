@@ -20,9 +20,9 @@ export class CharIndex {
     #lastWord = '';
     #lastWordSeq: Utf8Seq = [];
     #multiByteChars: boolean;
-    readonly charIndex: readonly string[];
+    readonly charIndex: Set<string>;
 
-    constructor(charIndex: readonly string[]) {
+    constructor(charIndex: Set<string> = new Set()) {
         this.charIndex = charIndex;
         this.#charToUtf8SeqMap = buildCharIndexSequenceMap(charIndex);
         this.#multiByteChars = [...this.#charToUtf8SeqMap.values()].some((c) => c.length > 1);
@@ -52,17 +52,32 @@ export class CharIndex {
     }
 
     get size(): number {
-        return this.charIndex.length;
+        return this.charIndex.size;
     }
 
     toJSON(): {
-        charIndex: readonly string[];
+        charIndex: string;
     } {
-        return { charIndex: this.charIndex };
+        return { charIndex: [...this.charIndex].join('') };
+    }
+
+    static fromJSON(json: { charIndex: string }): CharIndex {
+        const charIndex = new Set<string>(json.charIndex);
+        return new CharIndex(charIndex);
+    }
+
+    static fromIterable(charIndex: Iterable<string>): CharIndex {
+        const charSet = new Set<string>();
+        for (const s of charIndex) {
+            for (const c of s) {
+                charSet.add(c);
+            }
+        }
+        return new CharIndex(charSet);
     }
 }
 
-function buildCharIndexSequenceMap(charIndex: readonly string[]): CharIndexSeqMap {
+function buildCharIndexSequenceMap(charIndex: Iterable<string>): CharIndexSeqMap {
     const map: CharIndexSeqMap = new Map();
     for (const key of charIndex) {
         map.set(key, encodeTextToUtf8(key));
@@ -71,7 +86,7 @@ function buildCharIndexSequenceMap(charIndex: readonly string[]): CharIndexSeqMa
 }
 
 export class CharIndexBuilder {
-    private readonly charIndex: string[] = [];
+    private readonly charIndex: Set<string> = new Set();
     readonly charIndexMap: CharIndexMap = new Map();
     readonly charIndexSeqMap: CharIndexSeqMap = new Map();
 
@@ -87,7 +102,7 @@ export class CharIndexBuilder {
             return found;
         }
         const nc = c.normalize('NFC');
-        this.charIndex.push(nc);
+        this.charIndex.add(nc);
         const utf8 = encodeUtf8N_BE(nc.codePointAt(0) || 0);
         this.charIndexMap.set(c, utf8);
         this.charIndexMap.set(nc, utf8);
@@ -129,7 +144,7 @@ export class CharIndexBuilder {
     }
 
     get size(): number {
-        return this.charIndex.length;
+        return this.charIndex.size;
     }
 
     build(): CharIndex {
@@ -138,6 +153,7 @@ export class CharIndexBuilder {
 }
 
 function splitUtf8(utf8: number): number[] {
+    utf8 = utf8 < 0 ? 0x1_0000_0000 + utf8 : utf8;
     if (utf8 <= 0xff) return [utf8];
     if (utf8 <= 0xffff) return [(utf8 >> 8) & 0xff, utf8 & 0xff];
     if (utf8 <= 0xff_ffff) return [(utf8 >> 16) & 0xff, (utf8 >> 8) & 0xff, utf8 & 0xff];

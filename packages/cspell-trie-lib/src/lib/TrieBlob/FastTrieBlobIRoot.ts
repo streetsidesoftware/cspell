@@ -95,6 +95,7 @@ class FastTrieBlobINode implements ITrieNode {
     }
 
     isForbidden(word: string): boolean {
+        if (!this.trie.hasForbiddenWords) return false;
         const n = this.trie.nodeGetChild(this.id, this.trie.info.forbiddenWordPrefix);
         if (n === undefined) return false;
         return this.trie.nodeFindExact(n, word);
@@ -108,10 +109,6 @@ class FastTrieBlobINode implements ITrieNode {
 
     private containsChainedIndexes(): boolean {
         if (this._chained !== undefined) return this._chained;
-        if (!this._count || !this.trie.isIndexDecoderNeeded) {
-            this._chained = false;
-            return false;
-        }
         // scan the node to see if there are encoded entries.
         let found = false;
         const NodeMaskChildCharIndex = this.trie.NodeMaskChildCharIndex;
@@ -228,11 +225,11 @@ export class FastTrieBlobIRoot extends FastTrieBlobINode implements ITrieNodeRoo
     find(word: string, strict: boolean): FindResult | undefined {
         let found = this.findExact(word);
         if (found) {
-            return { found: word, compoundUsed: false, caseMatched: true };
+            return { found: word, compoundUsed: false, caseMatched: true, forbidden: undefined };
         }
         if (strict) return undefined;
         found = this.findCaseInsensitive(word);
-        return found ? { found: word, compoundUsed: false, caseMatched: false } : undefined;
+        return found ? { found: word, compoundUsed: false, caseMatched: false, forbidden: undefined } : undefined;
     }
 
     get info(): Readonly<TrieInfo> {

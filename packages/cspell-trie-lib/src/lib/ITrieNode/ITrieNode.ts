@@ -10,7 +10,7 @@ export interface FindResult {
      * - `false` - word is not in the forbidden list.
      * - `undefined` - unknown - was not checked.
      */
-    forbidden?: boolean | undefined;
+    forbidden: boolean | undefined;
 }
 
 export interface FindFullResult extends FindResult {

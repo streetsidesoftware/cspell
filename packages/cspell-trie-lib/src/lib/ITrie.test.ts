@@ -1,9 +1,10 @@
 import { describe, expect, test } from 'vitest';
 
 import { defaultTrieInfo } from './constants.js';
-import { ITrieImpl as ITrie } from './ITrie.js';
+import type { ITrie } from './ITrie.js';
+import { ITrieImpl as ITrieClass } from './ITrie.js';
 import type { ITrieNode } from './ITrieNode/ITrieNode.js';
-import { parseDictionaryLegacy } from './SimpleDictionaryParser.js';
+import { parseDictionary, parseDictionaryLegacy } from './SimpleDictionaryParser.js';
 import type { SuggestionOptions } from './suggestions/genSuggestionsOptions.js';
 import { suggestionCollector, type SuggestionCollectorOptions } from './suggestions/suggestCollector.js';
 import { clean } from './utils/clean.js';
@@ -14,42 +15,42 @@ describe('Validate Trie Class', () => {
     const NumSuggestions: SuggestionOptions = { numSuggestions: 10 };
     const SEPARATE_WORDS: SuggestionOptions = { compoundMethod: CompoundWordsMethod.SEPARATE_WORDS };
     test('Tests creating a Trie', () => {
-        const trie = ITrie.create(sampleWords);
-        expect(trie).toBeInstanceOf(ITrie);
+        const trie = ITrieClass.create(sampleWords);
+        expect(trie).toBeInstanceOf(ITrieClass);
     });
 
     test('Tests getting words from a Trie', () => {
-        const trie = ITrie.create([...sampleWords].sort());
+        const trie = ITrieClass.create([...sampleWords].sort());
         expect([...trie.words()]).toEqual([...sampleWords].sort());
     });
 
     test('Tests seeing if a Trie contains a word', () => {
-        const trie = ITrie.create(sampleWords);
+        const trie = ITrieClass.create(sampleWords);
         expect(trie.has('lift')).toBe(true);
         expect(trie.has('fork-lift')).toBe(false);
     });
 
     test('Tests complete', () => {
-        const trie = ITrie.create([...sampleWords].sort());
+        const trie = ITrieClass.create([...sampleWords].sort());
         expect([...trie.completeWord('lift')]).toEqual(sampleWords.filter((w) => w.startsWith('lift')).sort());
         expect([...trie.completeWord('life')]).toEqual([]);
         expect([...trie.completeWord('lifting')]).toEqual(['lifting']);
     });
 
     test('tests suggestions', () => {
-        const trie = ITrie.create(sampleWords);
+        const trie = ITrieClass.create(sampleWords);
         const suggestions = trie.suggest('wall', NumSuggestions);
         expect(suggestions).toEqual(expect.arrayContaining(['walk']));
     });
 
     test('tests suggestions 2', () => {
-        const trie = ITrie.create(sampleWords);
+        const trie = ITrieClass.create(sampleWords);
         const suggestions = trie.suggest('wall', NumSuggestions);
         expect(suggestions).toEqual(['walk', 'walks']);
     });
 
     test('tests suggestions with compounds', () => {
-        const trie = ITrie.create(sampleWords);
+        const trie = ITrieClass.create(sampleWords);
         // cspell:ignore joyostalkliftswak
         const suggestions = trie.suggest('joyostalkliftswak', { ...NumSuggestions, ...SEPARATE_WORDS, changeLimit: 6 });
         // console.warn('%o', { suggestions });
@@ -57,34 +58,34 @@ describe('Validate Trie Class', () => {
     });
 
     test('tests genSuggestions', () => {
-        const trie = ITrie.create(sampleWords);
+        const trie = ITrieClass.create(sampleWords);
         const collector = suggestionCollector('wall', opts(10));
         trie.genSuggestions(collector);
         expect(collector.suggestions.map((a) => a.word)).toEqual(expect.arrayContaining(['walk']));
     });
 
     test('Tests iterate', () => {
-        const trie = ITrie.create([...sampleWords].sort());
+        const trie = ITrieClass.create([...sampleWords].sort());
         const words = [...trie.iterate()].filter((r) => isWordTerminationNode(r.node)).map((r) => r.text);
         expect(words).toEqual([...sampleWords].sort());
     });
 
     test('where only part of the word is correct', () => {
-        const trie = ITrie.create(sampleWords);
+        const trie = ITrieClass.create(sampleWords);
         expect(trie.has('talking')).toBe(true);
         expect(trie.has('talkings')).toBe(false);
     });
 
     test('Tests Trie default options', () => {
-        const trie = ITrie.create(sampleWords);
-        expect(trie).toBeInstanceOf(ITrie);
+        const trie = ITrieClass.create(sampleWords);
+        expect(trie).toBeInstanceOf(ITrieClass);
         const options = trie.info;
         expect(options).toEqual(defaultTrieInfo);
     });
 
     test('Tests Trie options', () => {
-        const trie = ITrie.create(sampleWords, { forbiddenWordPrefix: '#' });
-        expect(trie).toBeInstanceOf(ITrie);
+        const trie = ITrieClass.create(sampleWords, { forbiddenWordPrefix: '#' });
+        expect(trie).toBeInstanceOf(ITrieClass);
         const options = trie.info;
         expect(options).not.toEqual(defaultTrieInfo);
         expect(options.forbiddenWordPrefix).toBe('#');
@@ -92,7 +93,7 @@ describe('Validate Trie Class', () => {
 
     test('compound words', () => {
         // cspell:ignore talkinglift joywalk jwalk awalk jayjay jayi
-        const trie = ITrie.create(sampleWords);
+        const trie = ITrieClass.create(sampleWords);
         expect(trie.has('talkinglift', true)).toBe(true);
         expect(trie.has('joywalk', true)).toBe(true);
         expect(trie.has('jaywalk', true)).toBe(true);
@@ -112,7 +113,7 @@ describe('Validate Trie Class', () => {
     });
 
     test('size', () => {
-        const trie = ITrie.create(sampleWords);
+        const trie = ITrieClass.create(sampleWords);
         expect(trie.numWords()).toBe(80);
         // Request again to make sure it is the same value twice since the calculation is lazy.
         expect(trie.numWords()).toBe(80);
@@ -137,6 +138,19 @@ describe('Validate Trie Class', () => {
         found: boolean;
     }
 
+    function getCompoundDictionaryITrie(): ITrie {
+        return parseDictionary(`
+        # Sample Word List
+        Begin*
+        *End
+        +Middle+
+        café
+        play*
+        *time
+        !playtime
+        `);
+    }
+
     test.each`
         word                                | caseSensitive | found    | comment
         ${'café'}                           | ${true}       | ${true}  | ${''}
@@ -154,19 +168,52 @@ describe('Validate Trie Class', () => {
         ${'playtime'}                       | ${false}      | ${false} | ${''}
         ${'playmiddletime'}                 | ${false}      | ${true}  | ${'cspell:disable-line'}
     `('hasWord $word $caseSensitive $found', ({ word, caseSensitive, found }: HasWordTestCase) => {
-        const trie = parseDictionaryLegacy(`
-        # Sample Word List
-        Begin*
-        *End
-        +Middle+
-        café
-        play*
-        *time
-        !playtime
-        `);
-
+        const trie = getCompoundDictionaryITrie();
         expect(trie.hasWord(word, caseSensitive)).toBe(found);
     });
+
+    test.each`
+        word                      | caseSensitive | found                     | forbidden    | compoundUsed | comment
+        ${'café'}                 | ${true}       | ${'café'}                 | ${undefined} | ${false}     | ${''}
+        ${'Café'}                 | ${true}       | ${false}                  | ${undefined} | ${false}     | ${''}
+        ${'café'}                 | ${false}      | ${'café'}                 | ${undefined} | ${false}     | ${''}
+        ${'Café'}                 | ${false}      | ${false}                  | ${undefined} | ${false}     | ${''}
+        ${'BeginMiddleEnd'}       | ${true}       | ${'BeginMiddleEnd'}       | ${false}     | ${true}      | ${''}
+        ${'BeginMiddleMiddleEnd'} | ${true}       | ${'BeginMiddleMiddleEnd'} | ${false}     | ${true}      | ${''}
+        ${'BeginEnd'}             | ${true}       | ${'BeginEnd'}             | ${false}     | ${true}      | ${''}
+        ${'MiddleEnd'}            | ${true}       | ${false}                  | ${undefined} | ${false}     | ${''}
+        ${'beginend'}             | ${false}      | ${'beginend'}             | ${false}     | ${true}      | ${'cspell:disable-line'}
+        ${'playtime'}             | ${true}       | ${'playtime'}             | ${true}      | ${true}      | ${''}
+        ${'playtime'}             | ${false}      | ${'playtime'}             | ${true}      | ${true}      | ${''}
+        ${'playmiddletime'}       | ${false}      | ${'playmiddletime'}       | ${false}     | ${true}      | ${'cspell:disable-line'}
+    `('findWord $word $caseSensitive $found', ({ word, caseSensitive, found, forbidden, compoundUsed }) => {
+        const trie = getCompoundDictionaryITrie();
+
+        const r = trie.findWord(word, { caseSensitive });
+        expect(r.found).toBe(found);
+        expect(r.forbidden).toBe(forbidden);
+        expect(r.compoundUsed).toBe(compoundUsed);
+    });
+
+    test.each`
+        word                      | caseSensitive | found                        | forbidden | compoundUsed | comment
+        ${'BeginMiddleEnd'}       | ${true}       | ${'Begin|Middle|End'}        | ${false}  | ${true}      | ${''}
+        ${'BeginMiddleMiddleEnd'} | ${true}       | ${'Begin|Middle|Middle|End'} | ${false}  | ${true}      | ${''}
+        ${'BeginEnd'}             | ${true}       | ${'Begin|End'}               | ${false}  | ${true}      | ${''}
+        ${'beginend'}             | ${false}      | ${'begin|end'}               | ${false}  | ${true}      | ${'cspell:disable-line'}
+        ${'playtime'}             | ${true}       | ${'play|time'}               | ${true}   | ${true}      | ${''}
+        ${'playtime'}             | ${false}      | ${'play|time'}               | ${true}   | ${true}      | ${''}
+        ${'playmiddletime'}       | ${false}      | ${'play|middle|time'}        | ${false}  | ${true}      | ${'cspell:disable-line'}
+    `(
+        'findWord $word $caseSensitive $found with compounds sep',
+        ({ word, caseSensitive, found, forbidden, compoundUsed }) => {
+            const trie = getCompoundDictionaryITrie();
+            const r = trie.findWord(word, { caseSensitive, compoundSeparator: '|' });
+            expect(r.found).toBe(found);
+            expect(r.forbidden).toBe(forbidden);
+            expect(r.compoundUsed).toBe(compoundUsed);
+        },
+    );
 
     test.each`
         word                      | caseSensitive | found                        | forbidden    | compoundUsed | comment
@@ -182,7 +229,7 @@ describe('Validate Trie Class', () => {
         ${'playtime'}             | ${true}       | ${'play|time'}               | ${true}      | ${true}      | ${''}
         ${'playtime'}             | ${false}      | ${'play|time'}               | ${true}      | ${true}      | ${''}
         ${'playmiddletime'}       | ${false}      | ${'play|middle|time'}        | ${false}     | ${true}      | ${'cspell:disable-line'}
-    `('hasWord $word $caseSensitive $found', ({ word, caseSensitive, found, forbidden, compoundUsed }) => {
+    `('legacy findWord $word $caseSensitive $found', ({ word, caseSensitive, found, forbidden, compoundUsed }) => {
         const trie = parseDictionaryLegacy(`
         # Sample Word List
         Begin*

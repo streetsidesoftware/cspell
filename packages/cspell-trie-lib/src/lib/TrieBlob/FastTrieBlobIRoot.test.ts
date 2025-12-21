@@ -29,7 +29,9 @@ describe('FastTrieBlob', () => {
         const root = createTrieRootFromList(words);
         const ft = FastTrieBlobBuilder.fromTrieRoot(root);
         const iTrieRoot = FastTrieBlob.toITrieNodeRoot(ft);
-        expect(iTrieRoot.keys()).toEqual([...new Set(words.map((w) => [...w][0]))]);
+        const firstLetters = new Set(words.map((w) => [...w][0]));
+        const keys = new Set(iTrieRoot.keys());
+        expect(keys).toEqual(firstLetters);
     });
 
     test('toITrieNodeRoot.values', () => {

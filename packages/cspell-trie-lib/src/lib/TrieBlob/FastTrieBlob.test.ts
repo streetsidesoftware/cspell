@@ -29,16 +29,16 @@ describe('FastTrieBlob', () => {
     test('expected', () => {
         const ft = FastTrieBlobBuilder.fromWordList(words);
         expect(ft.has('walk')).toBe(true);
-        expect(ft.charIndex.length).toBe(new Set(words.join('')).size + 1);
+        expect([...ft.words()]).toEqual([...words].sort());
     });
 
     test('createTriFromList', () => {
         const root = createTrieRootFromList(words);
         const ft = FastTrieBlobBuilder.fromTrieRoot(root);
-        expect(ft.charIndex.length).toBe(new Set(words.join('')).size + 1);
         expect(ft.has('walk')).toBe(true);
         expect(words.findIndex((word) => !ft.has(word))).toBe(-1);
         expect(ft.has('hello')).toBe(false);
+        expect([...ft.words()].sort()).toEqual([...words].sort());
     });
 
     test('toTrieBlob', async () => {
@@ -61,6 +61,21 @@ describe('FastTrieBlob', () => {
         for (const word of walkerWordsITrie(iTrieRoot)) {
             expect(words.includes(word), `Expect to find "${word} in words."`).toBe(true);
         }
+    });
+
+    test('test compounds and non-strict', () => {
+        const words = getWordsDictionary();
+        const ft = FastTrieBlobBuilder.fromWordList(words);
+        expect(words.findIndex((word) => !ft.has(word))).toBe(-1);
+        expect([...ft.words()].sort()).toEqual([...words].sort());
+
+        expect(ft.has('English')).toBe(true);
+        expect(ft.has('english')).toBe(false);
+        expect(ft.has('~english')).toBe(true);
+        expect(ft.hasForbiddenWords).toBe(false);
+        expect(ft.hasCompoundWords).toBe(true);
+        expect(ft.hasNonStrictWords).toBe(true);
+        expect(ft.hasCaseInsensitive('english')).toBe(true);
     });
 });
 
@@ -241,4 +256,22 @@ function getSampleWords() {
 
 function writeToJsonFile(filename: string, obj: unknown): Promise<void> {
     return fs.writeFile(filename, JSON.stringify(obj, null, 2), 'utf8');
+}
+
+function makeCompoundable(word: string): string {
+    return `+${word}+`;
+}
+
+function makeNonStrict(word: string): string {
+    return `~${word.toLowerCase()}`;
+}
+
+function getWordsDictionary(): string[] {
+    // cspell:ignore wintrap
+    const properNames = ['English', 'Atlantic', 'Pacific', 'Indian', 'Arctic', 'Southern'];
+    const fruit = ['apple', 'banana', 'grape', 'orange', 'strawberry'];
+
+    const wordLists = [properNames, properNames.map(makeNonStrict), fruit, fruit.map(makeCompoundable)];
+
+    return wordLists.flat();
 }

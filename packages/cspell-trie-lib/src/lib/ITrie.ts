@@ -15,10 +15,21 @@ import { genSuggestions, suggest } from './suggestions/suggestTrieData.ts';
 import { FastTrieBlobBuilder } from './TrieBlob/FastTrieBlobBuilder.ts';
 import type { TrieData } from './TrieData.ts';
 import { clean } from './utils/clean.ts';
+import { memorizeLastCall } from './utils/memorizeLastCall.ts';
 import { mergeOptionalWithDefaults } from './utils/mergeOptionalWithDefaults.ts';
 import { replaceAllFactory } from './utils/util.ts';
 
 const defaultLegacyMinCompoundLength = 3;
+
+const cvtFindWordOptions = memorizeLastCall(_cvtFindWordOptions);
+
+function _cvtFindWordOptions(options: FindWordOptionsRO | undefined): Readonly<FindOptions> {
+    return createFindOptions({
+        matchCase: options?.caseSensitive,
+        checkForbidden: options?.checkForbidden,
+        compoundSeparator: options?.compoundSeparator,
+    });
+}
 
 export interface ITrie {
     readonly data: TrieData;
@@ -121,6 +132,8 @@ export class ITrieImpl implements ITrie {
     private count?: number;
     weightMap: WeightMap | undefined;
     #optionsCompound = this.createFindOptions({ compoundMode: 'compound' });
+    #findOptionsT: FindWordOptionsRO = { caseSensitive: true, checkForbidden: true };
+    #findOptionsF: FindWordOptionsRO = { caseSensitive: false, checkForbidden: true };
 
     readonly hasForbiddenWords: boolean;
     readonly hasCompoundWords: boolean;
@@ -168,11 +181,21 @@ export class ITrieImpl implements ITrie {
         return findWordNode(this.data.getRoot(), text, this.#optionsCompound).node;
     }
 
+    /**
+     * A case sensitive search for the word.
+     * @param word - the word to search for.
+     * @param minLegacyCompoundLength - minimum length of legacy compounds to consider.
+     * @returns true if the word is found and not forbidden.
+     */
     has(word: string, minLegacyCompoundLength?: boolean | number): boolean {
-        if (this.hasWord(word, false)) return true;
+        if (this.hasWord(word, true)) return true;
         if (minLegacyCompoundLength) {
-            const f = this.findWord(word, { useLegacyWordCompounds: minLegacyCompoundLength });
-            return !!f.found;
+            const f = this.findWord(word, {
+                useLegacyWordCompounds: minLegacyCompoundLength,
+                caseSensitive: true,
+                checkForbidden: true,
+            });
+            return !!f.found && !f.forbidden;
         }
         return false;
     }
@@ -184,8 +207,9 @@ export class ITrieImpl implements ITrie {
      * @returns true if the word was found and is not forbidden.
      */
     hasWord(word: string, caseSensitive: boolean): boolean {
-        const f = this.findWord(word, { caseSensitive, checkForbidden: false });
-        return !!f.found;
+        const options = caseSensitive ? this.#findOptionsT : this.#findOptionsF;
+        const r = this.findWord(word, options);
+        return !r.forbidden && !!r.found;
     }
 
     findWord(word: string, options?: FindWordOptionsRO): FindFullResult {
@@ -197,15 +221,11 @@ export class ITrieImpl implements ITrie {
             const findOptions = this.createFindOptions({
                 legacyMinCompoundLength: len,
                 matchCase: options.caseSensitive || false,
-                compoundSeparator: options.compoundSeparator,
+                compoundSeparator: undefined,
             });
             return findLegacyCompound(this.root, word, findOptions);
         }
-        return findWord(this.root, word, {
-            matchCase: options?.caseSensitive,
-            checkForbidden: options?.checkForbidden,
-            compoundSeparator: options?.compoundSeparator,
-        });
+        return findWord(this.root, word, cvtFindWordOptions(options));
     }
 
     /**
@@ -295,7 +315,7 @@ export class ITrieImpl implements ITrie {
         return new ITrieImpl(root);
     }
 
-    private createFindOptions(options: PartialFindOptions | undefined): FindOptions {
+    private createFindOptions(options: Readonly<PartialFindOptions> | undefined): Readonly<FindOptions> {
         const findOptions = createFindOptions(options);
         return findOptions;
     }

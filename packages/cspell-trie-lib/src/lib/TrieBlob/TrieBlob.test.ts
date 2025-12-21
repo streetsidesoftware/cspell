@@ -59,6 +59,21 @@ describe('TrieBlob', () => {
         const tb = ft.toTrieBlob();
         expect(sampleWords.some((w) => !tb.has(w))).toBe(false);
     });
+
+    test('test compounds and non-strict', () => {
+        const words = getWordsDictionary();
+        const ft = FastTrieBlobBuilder.fromWordList(words);
+        const t = ft.toTrieBlob();
+        expect(words.findIndex((word) => !t.has(word))).toBe(-1);
+        expect([...t.words()].sort()).toEqual([...words].sort());
+
+        expect(t.has('English')).toBe(true);
+        expect(t.has('english')).toBe(false);
+        expect(t.has('~english')).toBe(true);
+        expect(t.hasForbiddenWords).toBe(false);
+        expect(t.hasCompoundWords).toBe(true);
+        expect(t.hasNonStrictWords).toBe(true);
+    });
 });
 
 describe('TrieBlob encode/decode', async () => {
@@ -73,3 +88,21 @@ describe('TrieBlob encode/decode', async () => {
         expect(words.some((w) => !r.has(w))).toBe(false);
     });
 });
+
+function makeCompoundable(word: string): string {
+    return `+${word}+`;
+}
+
+function makeNonStrict(word: string): string {
+    return `~${word.toLowerCase()}`;
+}
+
+function getWordsDictionary(): string[] {
+    // cspell:ignore wintrap
+    const properNames = ['English', 'Atlantic', 'Pacific', 'Indian', 'Arctic', 'Southern'];
+    const fruit = ['apple', 'banana', 'grape', 'orange', 'strawberry'];
+
+    const wordLists = [properNames, properNames.map(makeNonStrict), fruit, fruit.map(makeCompoundable)];
+
+    return wordLists.flat();
+}

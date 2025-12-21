@@ -39,7 +39,7 @@ export function findWordNode(root: Root, word: string, options?: PartialFindOpti
  * @param options
  */
 export function findWord(root: Root, word: string, options?: PartialFindOptions): FindFullResult {
-    if (root.find) {
+    if (root.find && !options?.compoundSeparator) {
         const found = root.find(word, options?.matchCase || false);
         if (found) {
             if (options?.checkForbidden && found.forbidden === undefined) {
@@ -379,7 +379,7 @@ function findLegacyCompoundWord(
         minCompoundLength,
         compoundSeparator,
     );
-    return { found, compoundUsed, caseMatched };
+    return { found, compoundUsed, caseMatched, forbidden: undefined };
 }
 
 export function isForbiddenWord(root: Root | ITrieNode | undefined, word: string, forbiddenPrefix: string): boolean {
@@ -390,7 +390,7 @@ export function isForbiddenWord(root: Root | ITrieNode | undefined, word: string
 
 export const createFindOptions: typeof _createFindOptions = memorizeLastCall(_createFindOptions);
 
-function _createFindOptions(options: PartialFindOptions | undefined): FindOptions {
+function _createFindOptions(options: Readonly<PartialFindOptions> | undefined): Readonly<FindOptions> {
     if (!options) return _defaultFindOptions;
     const d = _defaultFindOptions;
     return {
@@ -398,6 +398,7 @@ function _createFindOptions(options: PartialFindOptions | undefined): FindOption
         compoundMode: options.compoundMode ?? d.compoundMode,
         legacyMinCompoundLength: options.legacyMinCompoundLength ?? d.legacyMinCompoundLength,
         checkForbidden: options.checkForbidden ?? d.checkForbidden,
+        compoundSeparator: options.compoundSeparator ?? d.compoundSeparator,
     };
 }
 
