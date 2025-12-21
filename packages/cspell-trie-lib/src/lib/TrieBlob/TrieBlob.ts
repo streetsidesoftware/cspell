@@ -7,9 +7,8 @@ import { findNode } from '../ITrieNode/trie-util.ts';
 import type { PartialTrieInfo, TrieInfo } from '../ITrieNode/TrieInfo.ts';
 import type { TrieData } from '../TrieData.ts';
 import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.ts';
-import { CharIndex, type Utf8Seq } from './CharIndex.ts';
 import { TrieBlobInternals, TrieBlobIRoot } from './TrieBlobIRoot.ts';
-import { Utf8Accumulator } from './Utf8.ts';
+import { encodeTextToUtf8_32, Utf8Accumulator } from './Utf8.ts';
 
 const NodeHeaderNumChildrenBits = 8;
 const NodeHeaderNumChildrenShift = 0;
@@ -60,29 +59,19 @@ export class TrieBlob implements TrieData {
     readonly hasCompoundWords: boolean;
     readonly hasNonStrictWords: boolean;
     readonly nodes: Uint32Array;
-    readonly charIndex: CharIndex;
 
-    constructor(nodes: Uint32Array, charIndex: CharIndex, info: PartialTrieInfo) {
+    constructor(nodes: Uint32Array, info: PartialTrieInfo) {
         this.nodes = nodes;
-        this.charIndex = charIndex;
         trieBlobSort(nodes);
         this.info = mergeOptionalWithDefaults(info);
         // this.#prepLookup();
         this.#nodes8 = new Uint8Array(nodes.buffer, nodes.byteOffset + this.#beAdj);
-        this.#forbidIdx = this._lookupNode(0, this.info.forbiddenWordPrefix);
-        this.#compoundIdx = this._lookupNode(0, this.info.compoundCharacter);
-        this.#nonStrictIdx = this._lookupNode(0, this.info.stripCaseAndAccentsPrefix);
+        this.#forbidIdx = this.#findNode(0, this.info.forbiddenWordPrefix);
+        this.#compoundIdx = this.#findNode(0, this.info.compoundCharacter);
+        this.#nonStrictIdx = this.#findNode(0, this.info.stripCaseAndAccentsPrefix);
         this.hasForbiddenWords = !!this.#forbidIdx;
         this.hasCompoundWords = !!this.#compoundIdx;
         this.hasNonStrictWords = !!this.#nonStrictIdx;
-    }
-
-    public wordToUtf8Seq(word: string): Utf8Seq {
-        return this.charIndex.wordToUtf8Seq(word);
-    }
-
-    private letterToNodeCharIndexSequence(letter: string): Utf8Seq {
-        return this.charIndex.getCharUtf8Seq(letter);
     }
 
     has(word: string): boolean {
@@ -119,7 +108,6 @@ export class TrieBlob implements TrieData {
     private _getRoot(): ITrieNodeRoot {
         const trieData = new TrieBlobInternals(
             this.nodes,
-            this.charIndex,
             {
                 NodeMaskEOW: TrieBlob.NodeMaskEOW,
                 NodeMaskNumChildren: TrieBlob.NodeMaskNumChildren,
@@ -128,7 +116,7 @@ export class TrieBlob implements TrieData {
             },
             {
                 nodeFindExact: (idx, word) => this.#hasWord(idx, word),
-                nodeGetChild: (idx, letter) => this._lookupNode(idx, letter),
+                nodeGetChild: (idx, letter) => this.#findNode(idx, letter),
                 nodeFindNode: (idx, word) => this.#findNode(idx, word),
                 isForbidden: (word) => this.isForbiddenWord(word),
                 findExact: (word) => this.has(word),
@@ -157,68 +145,59 @@ export class TrieBlob implements TrieData {
         return (node & m) === m;
     }
 
-    #findNode(nodeIdx: number, word: string): number | undefined {
-        const wordIndexes = this.wordToUtf8Seq(word);
-        return this.#lookupNode(nodeIdx, wordIndexes);
-    }
-
     /**
      * Find the node index for the given Utf8 character sequence.
      * @param nodeIdx - node index to start the search
      * @param seq - the byte sequence of the character to look for
      * @returns
      */
-    #lookupNode(nodeIdx: number, seq: readonly number[] | Readonly<Uint8Array>): number | undefined {
-        const NodeMaskNumChildren = TrieBlob.NodeMaskNumChildren;
-        const NodeChildRefShift = TrieBlob.NodeChildRefShift;
-        const nodes = this.nodes;
-        const nodes8 = this.#nodes8;
-        const wordIndexes = seq;
-        const len = wordIndexes.length;
-        let node = nodes[nodeIdx];
-        for (let p = 0; p < len; ++p, node = nodes[nodeIdx]) {
-            const letterIdx = wordIndexes[p];
-            const count = node & NodeMaskNumChildren;
-            const idx4 = nodeIdx << 2;
-            if (count > 15) {
-                const pEnd = idx4 + (count << 2);
-                let i = idx4 + 4;
-                let j = pEnd;
-                while (j - i >= 4) {
-                    const m = ((i + j) >> 1) & ~3;
-                    if (nodes8[m] < letterIdx) {
-                        i = m + 4;
-                    } else {
-                        j = m;
+    #findNode(nodeIdx: number, text: string): number | undefined {
+        const p = { text, offset: 0, bytes: 0 };
+
+        for (; p.offset < p.text.length; ) {
+            const code = encodeTextToUtf8_32(p);
+
+            const NodeMaskNumChildren = TrieBlob.NodeMaskNumChildren;
+            const NodeChildRefShift = TrieBlob.NodeChildRefShift;
+            const nodes = this.nodes;
+            const nodes8 = this.#nodes8;
+            let node = nodes[nodeIdx];
+            let s = (p.bytes - 1) * 8;
+
+            for (let mask = 0xff << s; mask; mask >>>= 8, s -= 8) {
+                const charVal = (code & mask) >>> s;
+                const count = node & NodeMaskNumChildren;
+                const idx4 = nodeIdx << 2;
+                // Binary search for the character in the child nodes.
+                if (count > 15) {
+                    const pEnd = idx4 + (count << 2);
+                    let i = idx4 + 4;
+                    let j = pEnd;
+                    while (j - i >= 4) {
+                        const m = ((i + j) >> 1) & ~3;
+                        if (nodes8[m] < charVal) {
+                            i = m + 4;
+                        } else {
+                            j = m;
+                        }
+                    }
+                    if (i > pEnd || nodes8[i] !== charVal) return undefined;
+                    nodeIdx = nodes[i >> 2] >>> NodeChildRefShift;
+                    node = nodes[nodeIdx];
+                    continue;
+                }
+                let i = idx4 + count * 4;
+                for (; i > idx4; i -= 4) {
+                    if (nodes8[i] === charVal) {
+                        break;
                     }
                 }
-                if (i > pEnd || nodes8[i] !== letterIdx) return undefined;
+                if (i <= idx4) return undefined;
                 nodeIdx = nodes[i >> 2] >>> NodeChildRefShift;
-                continue;
+                node = nodes[nodeIdx];
             }
-            let i = idx4 + count * 4;
-            for (; i > idx4; i -= 4) {
-                if (nodes8[i] === letterIdx) {
-                    break;
-                }
-            }
-            if (i <= idx4) return undefined;
-            nodeIdx = nodes[i >> 2] >>> NodeChildRefShift;
         }
-
         return nodeIdx;
-    }
-
-    /**
-     * Find the node index for the given character.
-     * @param nodeIdx - node index to start the search
-     * @param char - character to look for
-     * @returns
-     */
-    private _lookupNode(nodeIdx: number, char: string): number | undefined {
-        const indexSeq = this.letterToNodeCharIndexSequence(char);
-        const currNodeIdx = this.#lookupNode(nodeIdx, indexSeq);
-        return currNodeIdx;
     }
 
     *words(): Iterable<string> {
@@ -280,18 +259,15 @@ export class TrieBlob implements TrieData {
     toJSON(): {
         options: Readonly<TrieInfo>;
         nodes: NodeElement[];
-        charIndex: CharIndex;
     } {
         return {
             options: this.info,
             nodes: nodesToJson(this.nodes),
-            charIndex: this.charIndex,
         };
     }
 
     encodeBin(): Uint8Array {
-        const charIndex = Buffer.from(this.charIndex.charIndex.join('\n'));
-        const charIndexLen = (charIndex.byteLength + 3) & ~3; // round up to the nearest 4 byte boundary.
+        const charIndexLen = (0 + 3) & ~3; // round up to the nearest 4 byte boundary.
         const nodeOffset = HEADER_SIZE + charIndexLen;
         const size = nodeOffset + this.nodes.length * 4;
         const useLittle = isLittleEndian;
@@ -304,8 +280,8 @@ export class TrieBlob implements TrieData {
         header.setUint32(HEADER.nodes, nodeOffset, useLittle);
         header.setUint32(HEADER.nodesLen, this.nodes.length, useLittle);
         header.setUint32(HEADER.charIndex, HEADER_SIZE, useLittle);
-        header.setUint32(HEADER.charIndexLen, charIndex.length, useLittle);
-        buffer.set(charIndex, HEADER_SIZE);
+        header.setUint32(HEADER.charIndexLen, 0, useLittle);
+        // buffer.set(charIndex, HEADER_SIZE);
         buffer.set(nodeData, nodeOffset);
         // console.log('encodeBin: %o', this.toJSON());
         // console.log('encodeBin: buf %o nodes %o', buffer, this.nodes);
@@ -313,7 +289,6 @@ export class TrieBlob implements TrieData {
     }
 
     static decodeBin(blob: Uint8Array): TrieBlob {
-        const decoder = new TextDecoder();
         if (!checkSig(blob)) {
             throw new ErrorDecodeTrieBlob('Invalid TrieBlob Header');
         }
@@ -324,11 +299,8 @@ export class TrieBlob implements TrieData {
         }
         const offsetNodes = header.getUint32(HEADER.nodes, useLittle);
         const lenNodes = header.getUint32(HEADER.nodesLen, useLittle);
-        const offsetCharIndex = header.getUint32(HEADER.charIndex, useLittle);
-        const lenCharIndex = header.getUint32(HEADER.charIndexLen, useLittle);
-        const charIndex = decoder.decode(blob.subarray(offsetCharIndex, offsetCharIndex + lenCharIndex)).split('\n');
         const nodes = new Uint32Array(blob.buffer, offsetNodes, lenNodes);
-        const trieBlob = new TrieBlob(nodes, new CharIndex(charIndex), defaultTrieInfo);
+        const trieBlob = new TrieBlob(nodes, defaultTrieInfo);
         // console.log('decodeBin: %o', trieBlob.toJSON());
         return trieBlob;
     }

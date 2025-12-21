@@ -1,4 +1,5 @@
 /* eslint-disable unicorn/prefer-code-point */
+
 /** A utf8 value represented as big endian 32bit number */
 export type Utf8BE32 = number;
 
@@ -36,21 +37,29 @@ export function encodeUtf8N_BE(code: CodePoint): Utf8BE32 {
 }
 
 export function decodeUtf8N_BE(utf8: Utf8BE32): CodePoint {
-    if (utf8 < 0) utf8 = 0x1_0000_0000 + utf8;
-
-    if (utf8 < 0x80) {
+    if (utf8 >= 0 && utf8 < 0x80) {
         return utf8;
     }
     if ((utf8 & 0xffff_e080) === 0xc080) {
-        return ((utf8 >> 2) & 0x7c0) | (utf8 & 0x3f);
+        return ((utf8 >>> 2) & 0x7c0) | (utf8 & 0x3f);
     }
     if ((utf8 & 0xfff0_8080) === 0xe0_8080) {
-        return ((utf8 >> 4) & 0xf000) | ((utf8 >> 2) & 0x0fc0) | (utf8 & 0x3f);
+        return ((utf8 >>> 4) & 0xf000) | ((utf8 >>> 2) & 0x0fc0) | (utf8 & 0x3f);
     }
     if (((utf8 & 0xf880_8080) ^ 0xf080_8080) === 0) {
-        return ((utf8 >> 6) & 0x1c_0000) | ((utf8 >> 4) & 0x03_f000) | ((utf8 >> 2) & 0x0fc0) | (utf8 & 0x3f);
+        return ((utf8 >>> 6) & 0x1c_0000) | ((utf8 >>> 4) & 0x03_f000) | ((utf8 >>> 2) & 0x0fc0) | (utf8 & 0x3f);
     }
     return 0xfffd;
+}
+
+export function* decodeUtf8N_BE_Stream(utf8s: Iterable<Utf8BE32>): Iterable<CodePoint> {
+    for (const utf8 of utf8s) {
+        yield decodeUtf8N_BE(utf8);
+    }
+}
+
+export function decodeUtf8N_BE_StreamToString(utf8s: Iterable<Utf8BE32>): string {
+    return String.fromCodePoint(...decodeUtf8N_BE_Stream(utf8s));
 }
 
 /**
@@ -256,6 +265,45 @@ export function encodeTextToUtf8Into(text: string, into: Array<number> | Uint8Ar
         into[i++] = u & 0xff;
     }
     return i - offset;
+}
+
+export function encodeTextToUtf8_32Into(text: string, into: Utf8BE32[]): number {
+    const len = text.length;
+    let i = 0;
+    for (let p = { text, offset: 0, bytes: 0 }; p.offset < len; ) {
+        into[i++] = encodeTextToUtf8_32(p);
+    }
+    return i;
+}
+
+export interface TextOffset {
+    text: string;
+    offset: number;
+    bytes?: number;
+}
+
+export function encodeTextToUtf8_32(offset: TextOffset): Utf8BE32 {
+    const text = offset.text;
+    let code = text.charCodeAt(offset.offset);
+    code = (code & 0xf800) === 0xd800 ? text.codePointAt(offset.offset++) || 0 : code;
+    offset.offset++;
+    if (code < 0x80) {
+        offset.bytes = 1;
+        return code;
+    }
+    if (code < 0x800) {
+        offset.bytes = 2;
+        return 0xc080 | ((code & 0x7c0) << 2) | (code & 0x3f);
+    }
+    if (code < 0x1_0000) {
+        offset.bytes = 3;
+        return 0xe0_8080 | ((code & 0xf000) << 4) | ((code & 0x0fc0) << 2) | (code & 0x3f);
+    }
+    offset.bytes = 4;
+    return (
+        0x1_0000_0000 +
+        (0xf080_8080 | (((code & 0x1c_0000) << 6) | ((code & 0x03_f000) << 4) | ((code & 0x0fc0) << 2) | (code & 0x3f)))
+    );
 }
 
 export function encodeTextToUtf8(text: string): number[] {

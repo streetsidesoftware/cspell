@@ -67,3 +67,34 @@ export class Utf8Encoder {
         return r;
     }
 }
+
+export class Utf8Encoder2 {
+    #buffer: ArrayBuffer;
+    #byteArray: Uint8Array;
+    #bufferSize: number;
+    #encoder: TextEncoder;
+
+    /**
+     * Create a Utf8Encoder
+     * @param bufferSize - size of the internal buffer
+     */
+    constructor(bufferSize: number = 1024) {
+        this.#bufferSize = bufferSize;
+        this.#buffer = new ArrayBuffer(this.#bufferSize);
+        this.#byteArray = new Uint8Array(this.#buffer);
+        this.#encoder = new TextEncoder();
+    }
+
+    /**
+     *
+     * @param text - text to encode
+     * @returns a shared Uint8Array that contains the UTF-8 encoded text. I can be reused on subsequent calls.
+     */
+    encode(text: string): Readonly<Uint8Array> {
+        if (text.length * 3 > this.#bufferSize) {
+            return this.#encoder.encode(text);
+        }
+        const r = this.#encoder.encodeInto(text, this.#byteArray);
+        return this.#byteArray.subarray(0, r.written);
+    }
+}

@@ -5,9 +5,11 @@ import { describe, expect, test } from 'vitest';
 import {
     decodeUtf8ByteStream,
     decodeUtf8N_BE,
+    decodeUtf8N_BE_StreamToString,
     decodeUtf8N_LE,
     encodeCodePointsToUtf8Into,
     encodeTextToUtf8,
+    encodeTextToUtf8_32Into,
     encodeUtf8N_BE,
     encodeUtf8N_LE,
     hex32,
@@ -89,6 +91,18 @@ describe('Utf8 lib', () => {
         ).toEqual(text);
     });
 
+    test.each`
+        text    | expected
+        ${'a'}  | ${[0x61]}
+        ${'ab'} | ${[0x61, 0x62]}
+        ${'é'}  | ${[0xc3a9]}
+        ${'🇺🇸'} | ${[0xf09f_87ba, 0xf09f_87b8]}
+    `('encodeTextToUtf8_32Into $text', ({ text, expected }) => {
+        const buffer: number[] = [];
+        encodeTextToUtf8_32Into(text, buffer);
+        expect(buffer).toEqual(expected);
+    });
+
     test('decodeUtf8N_BE invalid', () => {
         expect(decodeUtf8N_BE(0xff)).toBe(0xfffd);
     });
@@ -124,6 +138,16 @@ describe('Utf8 lib', () => {
         ${-2}          | ${'0xffff_fffe'}
     `('hex32 $value', ({ value, expected }) => {
         expect(hex32(value)).toBe(expected);
+    });
+
+    test('encodeTextToUtf8_32Into', () => {
+        const text = sampleText();
+        const buffer: number[] = [];
+
+        const len = encodeTextToUtf8_32Into(text, buffer);
+
+        expect(buffer.length).toBe(len);
+        expect(decodeUtf8N_BE_StreamToString(buffer)).toBe(text);
     });
 });
 

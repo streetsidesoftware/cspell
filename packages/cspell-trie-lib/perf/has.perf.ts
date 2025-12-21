@@ -19,6 +19,7 @@ suite('trie has', async (test) => {
     const iTrieFast = new ITrieImpl(fastTrieBlob);
     const iTrieBlob = new ITrieImpl(trieBlob);
     const setOfWords = new Set(words);
+    console.log(`Number of words: ${words.length}`);
 
     test('set has words', () => {
         trieHasWords(setOfWords, words);
@@ -54,7 +55,7 @@ function _getFastTrieBlob() {
 }
 
 function trieHasWords(trie: { has: (word: string) => boolean }, words: string[]): boolean {
-    const has = (word: string) => trie.has(word);
+    const has = trie.has.bind(trie);
     const len = words.length;
     let success = true;
     for (let i = 0; i < len; ++i) {

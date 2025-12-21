@@ -2,7 +2,8 @@ import type { ITrieNode, ITrieNodeRoot } from '../ITrieNode/ITrieNode.ts';
 import { findNode } from '../ITrieNode/trie-util.ts';
 import type { TrieInfo } from '../ITrieNode/TrieInfo.ts';
 import type { TrieData } from '../TrieData.ts';
-import type { CharIndex, Utf8Seq } from './CharIndex.ts';
+import type { Utf8Seq } from './CharIndex.ts';
+import { CharIndex } from './CharIndex.ts';
 import { extractInfo, type FastTrieBlobBitMaskInfo } from './FastTrieBlobBitMaskInfo.ts';
 import type { FastTrieBlobInternals } from './FastTrieBlobInternals.ts';
 import { assertSorted, FastTrieBlobInternalsAndMethods, sortNodes } from './FastTrieBlobInternals.ts';
@@ -29,14 +30,9 @@ export class FastTrieBlob implements TrieData {
     readonly bitMasksInfo: FastTrieBlobBitMaskInfo;
     readonly info: Readonly<TrieInfo>;
 
-    private constructor(
-        nodes: FastTrieBlobNode[],
-        _charIndex: CharIndex,
-        bitMasksInfo: FastTrieBlobBitMaskInfo,
-        info: Readonly<TrieInfo>,
-    ) {
+    private constructor(nodes: FastTrieBlobNode[], bitMasksInfo: FastTrieBlobBitMaskInfo, info: Readonly<TrieInfo>) {
         this.#nodes = nodes;
-        this.#charIndex = _charIndex;
+        this.#charIndex = new CharIndex([]);
         this.bitMasksInfo = bitMasksInfo;
         this.info = info;
         this.wordToCharacters = (word: string) => [...word];
@@ -195,7 +191,7 @@ export class FastTrieBlob implements TrieData {
             }
         }
 
-        return new TrieBlob(binNodes, this.#charIndex, this.info);
+        return new TrieBlob(binNodes, this.info);
     }
 
     isReadonly(): boolean {
@@ -219,7 +215,7 @@ export class FastTrieBlob implements TrieData {
     }
 
     static create(data: FastTrieBlobInternals): FastTrieBlob {
-        return new FastTrieBlob(data.nodes, data.charIndex, extractInfo(data), data.info);
+        return new FastTrieBlob(data.nodes, extractInfo(data), data.info);
     }
 
     static toITrieNodeRoot(trie: FastTrieBlob): ITrieNodeRoot {
@@ -334,12 +330,7 @@ export class FastTrieBlob implements TrieData {
                 node[j] = (idx << TrieBlob.NodeChildRefShift) | charIndex;
             }
         }
-        return new FastTrieBlob(
-            sortNodes(nodes, TrieBlob.NodeMaskChildCharIndex),
-            trie.charIndex,
-            bitMasksInfo,
-            trie.info,
-        );
+        return new FastTrieBlob(sortNodes(nodes, TrieBlob.NodeMaskChildCharIndex), bitMasksInfo, trie.info);
     }
 
     static isFastTrieBlob(obj: unknown): obj is FastTrieBlob {

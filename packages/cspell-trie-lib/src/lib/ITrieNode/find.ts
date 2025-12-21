@@ -390,7 +390,7 @@ export function isForbiddenWord(root: Root | ITrieNode | undefined, word: string
 
 export const createFindOptions: typeof _createFindOptions = memorizeLastCall(_createFindOptions);
 
-function _createFindOptions(options: PartialFindOptions | undefined): FindOptions {
+function _createFindOptions(options: Readonly<PartialFindOptions> | undefined): Readonly<FindOptions> {
     if (!options) return _defaultFindOptions;
     const d = _defaultFindOptions;
     return {

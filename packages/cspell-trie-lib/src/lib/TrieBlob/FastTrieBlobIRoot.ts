@@ -108,10 +108,6 @@ class FastTrieBlobINode implements ITrieNode {
 
     private containsChainedIndexes(): boolean {
         if (this._chained !== undefined) return this._chained;
-        if (!this._count || !this.trie.isIndexDecoderNeeded) {
-            this._chained = false;
-            return false;
-        }
         // scan the node to see if there are encoded entries.
         let found = false;
         const NodeMaskChildCharIndex = this.trie.NodeMaskChildCharIndex;

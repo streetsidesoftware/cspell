@@ -1,6 +1,5 @@
 import type { ITrieNode, ITrieNodeId, ITrieNodeRoot } from '../ITrieNode/ITrieNode.ts';
 import type { TrieCharacteristics, TrieInfo } from '../ITrieNode/TrieInfo.ts';
-import type { CharIndex } from './CharIndex.ts';
 import { Utf8Accumulator } from './Utf8.ts';
 
 interface BitMaskInfo {
@@ -26,7 +25,6 @@ export class TrieBlobInternals implements TrieMethods, BitMaskInfo {
     readonly NodeMaskNumChildren: number;
     readonly NodeMaskChildCharIndex: number;
     readonly NodeChildRefShift: number;
-    readonly isIndexDecoderNeeded: boolean;
     readonly nodeFindExact: (idx: number, word: string) => boolean;
     readonly isForbidden: (word: string) => boolean;
     readonly findExact: (word: string) => boolean;
@@ -37,17 +35,14 @@ export class TrieBlobInternals implements TrieMethods, BitMaskInfo {
     readonly hasCompoundWords: boolean;
     readonly hasNonStrictWords: boolean;
     readonly nodes: Uint32Array;
-    readonly charIndex: Readonly<CharIndex>;
 
-    constructor(nodes: Uint32Array, charIndex: Readonly<CharIndex>, maskInfo: BitMaskInfo, methods: TrieMethods) {
+    constructor(nodes: Uint32Array, maskInfo: BitMaskInfo, methods: TrieMethods) {
         this.nodes = nodes;
-        this.charIndex = charIndex;
         const { NodeMaskEOW, NodeMaskChildCharIndex, NodeMaskNumChildren, NodeChildRefShift } = maskInfo;
         this.NodeMaskEOW = NodeMaskEOW;
         this.NodeMaskNumChildren = NodeMaskNumChildren;
         this.NodeMaskChildCharIndex = NodeMaskChildCharIndex;
         this.NodeChildRefShift = NodeChildRefShift;
-        this.isIndexDecoderNeeded = charIndex.indexContainsMultiByteChars();
         this.nodeFindExact = methods.nodeFindExact;
         this.isForbidden = methods.isForbidden;
         this.findExact = methods.findExact;
@@ -171,10 +166,6 @@ class TrieBlobINode implements ITrieNode {
 
     private containsChainedIndexes(): boolean {
         if (this._chained !== undefined) return this._chained;
-        if (!this._count || !this.trie.isIndexDecoderNeeded) {
-            this._chained = false;
-            return false;
-        }
         // scan the node to see if there are encoded entries.
         let found = false;
         const NodeMaskChildCharIndex = this.trie.NodeMaskChildCharIndex;
