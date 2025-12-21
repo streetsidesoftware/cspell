@@ -1,7 +1,8 @@
 import { describe, expect, test } from 'vitest';
 
 import { defaultTrieInfo } from './constants.js';
-import { ITrie, ITrieImpl as ITrieClass } from './ITrie.js';
+import type { ITrie } from './ITrie.js';
+import { ITrieImpl as ITrieClass } from './ITrie.js';
 import type { ITrieNode } from './ITrieNode/ITrieNode.js';
 import { parseDictionary, parseDictionaryLegacy } from './SimpleDictionaryParser.js';
 import type { SuggestionOptions } from './suggestions/genSuggestionsOptions.js';
