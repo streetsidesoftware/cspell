@@ -452,7 +452,19 @@ interface ITrie {
   * @param text - text to find in the Trie
   */
   find(text: string): ITrieNode | undefined;
+  /**
+  * A case sensitive search for the word.
+  * @param word - the word to search for.
+  * @returns true if the word is found and not forbidden.
+  */
   has(word: string): boolean;
+  /**
+  * The legacy case insensitive search for the word.
+  * @param word - the word to search for.
+  * @param minLegacyCompoundLength - minimum length of legacy compounds to consider.
+  * @returns true if the word is found and not forbidden.
+  * @deprecated use hasWord or findWord instead. Support for this method signature may be removed in the future.
+  */
   has(word: string, minLegacyCompoundLength: boolean | number): boolean;
   /**
   * Determine if a word is in the dictionary.
@@ -520,7 +532,7 @@ interface FindWordOptions {
 type FindWordOptionsRO = Readonly<FindWordOptions>;
 //#endregion
 //#region src/lib/buildITrie.d.ts
-declare function buildITrieFromWords(words: Iterable<string>, info?: PartialTrieInfo): ITrie;
+declare function buildITrieFromWords(words: Iterable<string>, info?: PartialTrieInfo, useTrieBlob?: boolean): ITrie;
 //#endregion
 //#region src/lib/consolidate.d.ts
 /**
@@ -579,6 +591,7 @@ interface FindFullResult extends FindResult {
 //#endregion
 //#region src/lib/trie.d.ts
 declare class Trie {
+  #private;
   private _options;
   private _findOptionsDefaults;
   private _findOptionsExact;
@@ -598,7 +611,20 @@ declare class Trie {
   * @param minCompoundLength - deprecated - allows words to be glued together
   */
   find(text: string, minCompoundLength?: boolean | number): TrieNode | undefined;
-  has(word: string, minLegacyCompoundLength?: boolean | number): boolean;
+  /**
+  * A case sensitive search for the word.
+  * @param word - the word to search for.
+  * @returns true if the word is found and not forbidden.
+  */
+  has(word: string): boolean;
+  /**
+  * A case insensitive search for the word.
+  * @param word - the word to search for.
+  * @param minLegacyCompoundLength - minimum length of legacy compounds to consider.
+  * @returns true if the word is found and not forbidden.
+  * @deprecated use hasWord or findWord instead. Support for this method signature may be removed in the future.
+  */
+  has(word: string, minLegacyCompoundLength: boolean | number): boolean;
   /**
   * Determine if a word is in the dictionary.
   * @param word - the exact word to search for - must be normalized.

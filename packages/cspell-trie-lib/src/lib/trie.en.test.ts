@@ -1,15 +1,27 @@
 import { describe, expect, test } from 'vitest';
 
-import { readTrieFromConfig } from '../test/dictionaries.test.helper.js';
+import { readFastTrieBlobFromConfig, readTrieFromConfig } from '../test/dictionaries.test.helper.js';
+import { ITrieImpl } from './ITrie.ts';
+import { memorizeLastCall } from './utils/memorizeLastCall.ts';
 
-function getTrie() {
+const getTrie = memorizeLastCall(_getTrie);
+
+function _getTrie() {
     return readTrieFromConfig('@cspell/dict-en_us/cspell-ext.json');
+}
+
+const getFastTrieBlob = memorizeLastCall(_getFastTrieBlob);
+
+async function _getFastTrieBlob() {
+    const trie = await readFastTrieBlobFromConfig('@cspell/dict-en_us/cspell-ext.json');
+    return new ITrieImpl(trie);
 }
 
 const timeout = 10_000;
 
 describe('Validate English Trie', () => {
     const pTrie = getTrie();
+    const pFastTrieBlob = getFastTrieBlob();
 
     // cspell:ignore setsid macukrainian
     test.each`
@@ -26,7 +38,28 @@ describe('Validate English Trie', () => {
         'has "$word" useCompound: $useCompound',
         async ({ word, expected, useCompound }) => {
             const trie = await pTrie;
+            const fastTrieBlob = await pFastTrieBlob;
             expect(trie.has(word, useCompound)).toBe(expected);
+            expect(fastTrieBlob.has(word, useCompound)).toBe(expected);
+        },
+        timeout,
+    );
+
+    test.each`
+        word              | expected
+        ${'hello'}        | ${true}
+        ${'set'}          | ${true}
+        ${'sid'}          | ${false}
+        ${'Sid'}          | ${true}
+        ${'setsid'}       | ${false}
+        ${'macukrainian'} | ${false}
+    `(
+        'has "$word" useCompound: $useCompound',
+        async ({ word, expected }) => {
+            const trie = await pTrie;
+            const fastTrieBlob = await pFastTrieBlob;
+            expect(trie.has(word)).toBe(expected);
+            expect(fastTrieBlob.has(word)).toBe(expected);
         },
         timeout,
     );
