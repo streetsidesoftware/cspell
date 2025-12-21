@@ -5,7 +5,7 @@ Args: '["--issues-summary-report","**/*.{md,py}"]'
 Summary:
   files: 2889
   filesWithIssues: 927
-  issues: 8587
+  issues: 8585
   errors: 0
 Errors: []
 
@@ -263,8 +263,6 @@ issues:
   - "django/contrib/auth/decorators.py:44:64         auser       U       to_async(test_func)(auser)"
   - "django/contrib/auth/decorators.py:113:31        ahas        U       if await user.ahas_perms(perms):"
   - "django/contrib/auth/hashers.py:89:11        acheck      U       async def acheck_password(password, encoded"
-  - "django/contrib/auth/hashers.py:378:20       PKCS        U       recommended by PKCS #5. This is compatible"
-  - "django/contrib/auth/hashers.py:380:5        PKCS        U       PKCS5_PBKDF2_HMAC_SHA1()"
   - "django/contrib/auth/hashers.py:506:23       gensalt     U       return bcrypt.gensalt(self.rounds)"
   - "django/contrib/auth/hashers.py:515:28       hexlify     U       # Use binascii.hexlify() because a hex encoded"
   - "django/contrib/auth/hashers.py:516:33       hexlify     U       password = binascii.hexlify(self.digest(password"
@@ -10546,7 +10544,6 @@ issuesSummary:
   - "text: piqué, count: 2, files: 1,"
   - "text: Pisum, count: 1, files: 1,"
   - "text: PIXTYPE, count: 3, files: 2,"
-  - "text: PKCS, count: 2, files: 1,"
   - "text: pkey, count: 4, files: 3,"
   - "text: pkfield, count: 2, files: 1,"
   - "text: placeat, count: 1, files: 1,"

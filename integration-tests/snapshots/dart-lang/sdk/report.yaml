@@ -4,8 +4,8 @@ Url: https://github.com/dart-lang/sdk
 Args: '["--issues-summary-report","--locale=en,en-GB","--exclude=tools/dom/**/*.json","--exclude=pkg/*/test/**","--exclude=**/*_data.*","--exclude=runtime/vm/**","--exclude=sdk/lib/html/**","--exclude=benchmarks/**","--exclude=**/*_test.*","--exclude=*/**/*.{json,yaml,yml}","--exclude=tests/corelib/regexp/**","--exclude=**/{third_party,assets}/**","**/*.{dart,md}"]'
 Summary:
   files: 10892
-  filesWithIssues: 2075
-  issues: 9448
+  filesWithIssues: 2072
+  issues: 9436
   errors: 0
 Errors: []
 
@@ -167,7 +167,6 @@ issues:
   - "docs/The-Dart-specification-parser.md:16:220        parseable       U       which is consistent and parseable, and which corresponds"
   - "docs/The-Dart-specification-parser.md:49:37         buildbot        U       yet) produce failing **buildbot** runs to continue to"
   - "docs/The-Dart-specification-parser.md:62:74         antlr           U       at `/usr/share/java/antlr4-runtime.jar`, the specificat"
-  - "docs/Working-with-meta-issues.md:28:159         triager     U       to the meta-issue, a triager should both add a comment"
   - "pkg/_fe_analyzer_shared/lib/src/base/errors.dart:370:9          Werror      U       /// `-Werror` command line flag is"
   - "pkg/_fe_analyzer_shared/lib/src/exhaustiveness/dart_template_buffer.dart:35:12          paulberry       U       /// TODO(paulberry): add the necessary"
   - "pkg/_fe_analyzer_shared/lib/src/exhaustiveness/exhaustive.dart:31:10        Unreachabilities    U       /// [caseUnreachabilities]. (If `null` is passed"
@@ -343,7 +342,6 @@ issues:
   - "pkg/analysis_server/tool/lsp_spec/codegen_dart.dart:131:16      Indentable      U       var buffer = IndentableStringBuffer();"
   - "pkg/analysis_server/tool/lsp_spec/codegen_dart.dart:437:11      outdent         U       ..outdent()"
   - "pkg/analysis_server/tool/lsp_spec/meta_model.dart:296:8         uinteger    U       'uinteger': 'int',"
-  - "pkg/analysis_server/tool/lsp_spec/README.md:38:87       unregisters     U       prevents registration (or unregisters) the SDK formatter."
   - "pkg/analysis_server/tool/lsp_spec/README.md:45:65       dartdocs        U       full`): The kind of dartdocs to include in requests"
   - "pkg/analysis_server/tool/lsp_spec/README.md:125:19      supertypes      U       | typeHierarchy/supertypes | ✅ | | |"
   - "pkg/analysis_server/tool/performance/project_generator/git_worktree_project_generator.dart:12:10        Worktree    U       class GitWorktreeProjectGenerator implements"
@@ -889,7 +887,6 @@ issues:
   - "pkg/dev_compiler/lib/src/kernel/expression_compiler_worker.dart:115:28      sendport    U       consumerReceivePort.sendport` = [sendPort]"
   - "pkg/dev_compiler/lib/src/kernel/expression_compiler_worker.dart:615:13      annagrin    U       // TODO(annagrin): throw on load failures"
   - "pkg/dev_compiler/tool/hotreload/example.dart:7:6            myfunction      U       void myfunction(String m, int? y) ="
-  - "pkg/dtd_impl/dtd_protocol.md:235:1          Unregisters     U       Unregisters the calling client from"
   - "pkg/dtd_impl/lib/src/dart_tooling_daemon.dart:398:9         danchevalier    U       // TODO(danchevalier): clean up these exceptions"
   - "pkg/dtd_impl/lib/src/dtd_client.dart:412:24         servicemethod       U       // [dtd_protocol.md#servicemethod](https://github.com"
   - "pkg/dtd_impl/lib/src/service/connected_app_service.dart:39:25       priveleged (privileged)     U       This service allows priveleged clients like an IDE"
@@ -1334,7 +1331,6 @@ issues:
   - "pkg/vm_service_protos/lib/src/protos/perfetto/trace/profiling/profile_common.pbjson.dart:50:18          lkcw    U       'F0aFN0cmluZ0lkcw==');"
   - "pkg/vm_service_protos/lib/src/protos/perfetto/trace/track_event/process_descriptor.pbjson.dart:37:22        NOYW    U       'ABKAlSC3Byb2Nlc3NOYW1l');"
   - "pkg/vm_service_protos/lib/src/protos/perfetto/trace/track_event/track_descriptor.pb.dart:36:46          reemitted       U       wraps, it should be reemitted whenever incremental"
-  - "pkg/vm_service_protos/lib/src/protos/perfetto/trace/track_event/track_descriptor.pb.dart:140:32         ftrace          U       other sources (e.g. ftrace) for the same process"
   - "pkg/vm_service_protos/lib/src/protos/perfetto/trace/track_event/track_event.pb.dart:100:44      Iids    U       fixnum.Int64>? categoryIids,"
   - "pkg/vm_service_protos/lib/src/protos/perfetto/trace/track_event/track_event.pbjson.dart:29:21       iids    U       {'1': 'category_iids', '3': 3, '4': 3, '"
   - "pkg/vm_service/example/vm_service_tester.dart:72:10         reserialize         U       // reserialize it back to the same"
@@ -1614,7 +1610,6 @@ issues:
   - "runtime/tools/profiling/lib/src/pprof/generated/profile.pb.dart:90:58       perftools                   U       perfetto.third_party.perftools.profiles'),"
   - "runtime/tools/profiling/lib/src/pprof/generated/profile.pb.dart:224:42      ocurrences (occurrences)    U       events between sampled ocurrences."
   - "runtime/tools/profiling/lib/src/pprof/generated/profile.pb.dart:425:47      elemntwise                  U       of values that is the elemntwise sum of the"
-  - "runtime/tools/profiling/lib/src/pprof/generated/profile.pb.dart:703:27      vdso                        U       abstractions like \"[vdso]\"."
   - "runtime/tools/profiling/lib/src/pprof/generated/profile.pb.dart:906:17      memcpy                      U       /// E.g., if memcpy() is inlined into printf"
   - "runtime/tools/profiling/lib/src/pprof/generated/profile.pbjson.dart:225:6       xpbm    U       'xpbmU=');"
   - "runtime/tools/profiling/README.md:1:29          profing     U       tools for low level profing of code running on the"
@@ -2831,7 +2826,6 @@ issuesSummary:
   - "text: Fsearch, count: 2, files: 1,"
   - "text: fshcheglov, count: 3, files: 3,"
   - "text: fsource, count: 10, files: 2,"
-  - "text: ftrace, count: 4, files: 3,"
   - "text: ftype, count: 10, files: 2,"
   - "text: fullfilled, count: 1, files: 1,"
   - "text: FULLMUTEX, count: 1, files: 1,"
@@ -4021,7 +4015,6 @@ issuesSummary:
   - "text: Treeshaken, count: 4, files: 1,"
   - "text: treeshaker, count: 3, files: 2,"
   - "text: Treeshaker, count: 2, files: 1,"
-  - "text: triager, count: 1, files: 1,"
   - "text: tripledes, count: 1, files: 1,"
   - "text: Trunc, count: 1, files: 1,"
   - "text: trustedscripturl, count: 1, files: 1,"
@@ -4135,8 +4128,6 @@ issuesSummary:
   - "text: Unreachability, count: 14, files: 4,"
   - "text: unreachables, count: 3, files: 1,"
   - "text: unregisterations, count: 1, files: 1,"
-  - "text: unregisters, count: 2, files: 2,"
-  - "text: Unregisters, count: 4, files: 4,"
   - "text: unregistration, count: 6, files: 3,"
   - "text: Unregistration, count: 4, files: 2,"
   - "text: unregistrations, count: 2, files: 1,"
@@ -4173,7 +4164,6 @@ issuesSummary:
   - "text: varint, count: 1, files: 1,"
   - "text: varity, count: 1, files: 1,"
   - "text: varname, count: 2, files: 1,"
-  - "text: vdso, count: 1, files: 1,"
   - "text: vegorov, count: 8, files: 6,"
   - "text: verison, count: 1, files: 1,"
   - "text: virt, count: 13, files: 5,"
