@@ -181,11 +181,21 @@ export class ITrieImpl implements ITrie {
         return findWordNode(this.data.getRoot(), text, this.#optionsCompound).node;
     }
 
+    /**
+     * A case sensitive search for the word.
+     * @param word - the word to search for.
+     * @param minLegacyCompoundLength - minimum length of legacy compounds to consider.
+     * @returns true if the word is found and not forbidden.
+     */
     has(word: string, minLegacyCompoundLength?: boolean | number): boolean {
-        if (this.findWord(word, this.#findOptionsF).found) return true;
+        if (this.hasWord(word, true)) return true;
         if (minLegacyCompoundLength) {
-            const f = this.findWord(word, { useLegacyWordCompounds: minLegacyCompoundLength });
-            return !!f.found;
+            const f = this.findWord(word, {
+                useLegacyWordCompounds: minLegacyCompoundLength,
+                caseSensitive: true,
+                checkForbidden: true,
+            });
+            return !!f.found && !f.forbidden;
         }
         return false;
     }
