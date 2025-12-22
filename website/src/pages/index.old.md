@@ -1,4 +1,4 @@
----
+<!-- ---
 title: CSpell
 nav_order: 1
 mdx.format: md
@@ -119,4 +119,4 @@ Contributions are welcome! See our [contribution notes](https://github.com/stree
 
 <!---
 cspell:ignore Houssem Dellai
---->
+---> -->
