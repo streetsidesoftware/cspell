@@ -1,2 +1,2 @@
-export { TrieBlob } from './TrieBlob.js';
-export { encodeTrieDataToBTrie } from './trieDataEncoder.js';
+export { TrieBlob } from './TrieBlob.ts';
+export { encodeTrieDataToBTrie } from './trieDataEncoder.ts';

@@ -26,7 +26,7 @@ export type { MaxCost, SuggestionCollector, SuggestionResult } from './suggestCo
 export { impersonateCollector, suggestionCollector } from './suggestCollector.ts';
 export type { PartialTrieOptions, TrieOptions, TrieOptionsRO } from './trie.ts';
 export { Trie } from './trie.ts';
-export { encodeTrieDataToBTrie } from './TrieBlob/index.js';
+export { encodeTrieDataToBTrie } from './TrieBlob/index.ts';
 export { buildTrie, buildTrieFast, TrieBuilder } from './TrieBuilder.ts';
 export type { FindFullResult } from './TrieNode/find.ts';
 export {
