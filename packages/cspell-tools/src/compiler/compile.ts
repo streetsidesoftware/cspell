@@ -117,7 +117,9 @@ export async function compileTarget(
         excludeWordsNotFoundIn = [],
         excludeWordsMatchingRegex,
     } = target;
-    const targetDirectory = path.resolve(rootDir, target.targetDirectory ?? cwd ?? process.cwd());
+    let targetDirectory = target.targetDirectory ?? cwd ?? process.cwd();
+    targetDirectory = targetDirectory.replace('${cwd}', cwd ?? process.cwd());
+    targetDirectory = path.resolve(rootDir, targetDirectory);
     const dictionaryDirectives = target.dictionaryDirectives ?? compileOptions.dictionaryDirectives;
     const removeDuplicates = target.removeDuplicates ?? false;
 

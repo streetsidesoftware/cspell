@@ -6,6 +6,7 @@ import type { Command } from 'commander';
 import { CommanderError, Option } from 'commander';
 
 import type { CompileAppOptions, CompileTrieAppOptions } from './AppOptions.js';
+import { generateBTrie } from './bTrie.js';
 import { build } from './build.js';
 import { processCompileAction } from './compile.js';
 import * as compiler from './compiler/index.js';
@@ -116,6 +117,8 @@ export async function run(program: Command, argv: string[], flags?: FeatureFlags
         .action(build);
 
     program.command('gzip <files...>').description('GZip files while keeping the original.').action(handleGzip);
+
+    program.command('btrie [files...]').description('Generate BTrie files from word list files.').action(generateBTrie);
 
     program
         .command('shasum [files...]')

@@ -1,5 +1,3 @@
-import type { Buffer } from 'node:buffer';
-
 import type {
     FindFullResult,
     FindWordOptions,
@@ -230,7 +228,7 @@ type FindAnyFormResult = FindFullResult;
  * @returns SpellingDictionary
  */
 export function createSpellingDictionaryFromTrieFile(
-    data: string | Buffer,
+    data: string | Uint8Array,
     name: string,
     source: string,
     options: SpellingDictionaryOptionsRO,

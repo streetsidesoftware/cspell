@@ -36,8 +36,8 @@ describe('build action', () => {
 
     test.each`
         targets       | config                           | builds
-        ${undefined}  | ${cfgYaml('build-multi-target')} | ${['colors.txt', 'code.txt', 'cities.txt']}
-        ${['colors']} | ${cfgYaml('build-multi-target')} | ${['colors.txt', '!code.txt', '!cities.txt']}
+        ${undefined}  | ${cfgYaml('build-multi-target')} | ${['dict/colors.txt', 'dict/code.txt', 'dict/cities.txt']}
+        ${['colors']} | ${cfgYaml('build-multi-target')} | ${['dict/colors.txt', '!dict/code.txt', '!dict/cities.txt']}
     `(
         'build multi %#',
         async ({ targets, config, builds }: { targets: string[] | undefined; config: string; builds: string[] }) => {

@@ -58,14 +58,15 @@
     "url": "https://github.com/streetsidesoftware/cspell/labels/cspell-trie"
   },
   "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-trie-lib#readme",
-  "dependencies": {
-    "@cspell/cspell-pipe": "workspace:*",
-    "@cspell/cspell-types": "workspace:*"
-  },
+  "dependencies": {},
   "engines": {
     "node": ">=20"
   },
+  "peerDependencies": {
+    "@cspell/cspell-types": "workspace:*"
+  },
   "devDependencies": {
+    "@cspell/cspell-pipe": "workspace:*",
     "@cspell/dict-en_us": "^4.4.25",
     "@cspell/dict-es-es": "^3.0.8",
     "@cspell/dict-nl-nl": "^2.4.2",

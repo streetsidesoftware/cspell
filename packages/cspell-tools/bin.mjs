@@ -2,7 +2,7 @@
 
 import { CommanderError, program } from 'commander';
 
-import { run } from './dist/app.js';
+import { run } from './dist/app.mjs';
 
 run(program, process.argv).catch((e) => {
     if (!(e instanceof CommanderError)) {

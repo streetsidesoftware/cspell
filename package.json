@@ -57,6 +57,7 @@
     "test-build-docs": "cd website && pnpm run build:site",
     "test-integrations": "cd ./integration-tests && pnpm run integration-tests",
     "test-schema": "node ./test-packages/cspell-types/validate-schema/validate-schema.mjs",
+    "test:deno": "deno run -A ./bin.mjs lint rfc packages/cspell/src",
     "update-changelog": "node ./scripts/gen-release.mjs CHANGELOG.md packages/cspell/CHANGELOG.md",
     "update-packages": "pnpm run update-packages-src && pnpm run update-packages-docs && pnpm update-package-json",
     "update-packages-docs": "cd website && pnpm run update-packages",

@@ -1,46 +1,16 @@
-import { Buffer } from 'node:buffer';
-import { endianness } from 'node:os';
-
 import { defaultTrieInfo } from '../constants.ts';
 import type { FindResult, ITrieNode, ITrieNodeRoot } from '../ITrieNode/ITrieNode.ts';
 import { findNode } from '../ITrieNode/trie-util.ts';
 import type { PartialTrieInfo, TrieInfo } from '../ITrieNode/TrieInfo.ts';
 import type { TrieData } from '../TrieData.ts';
+import { endianness } from '../utils/endian.ts';
 import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.ts';
+import { decodeTrieBlobToBTrie, encodeTrieBlobToBTrie } from './TrieBlobEncoder.ts';
 import { TrieBlobInternals, TrieBlobIRoot } from './TrieBlobIRoot.ts';
 import { encodeTextToUtf8_32, Utf8Accumulator } from './Utf8.ts';
 
 const NodeHeaderNumChildrenBits = 8;
 const NodeHeaderNumChildrenShift = 0;
-
-const HEADER_SIZE_UINT32 = 8;
-const HEADER_SIZE = HEADER_SIZE_UINT32 * 4;
-
-const HEADER_OFFSET = 0;
-const HEADER_OFFSET_SIG = HEADER_OFFSET;
-const HEADER_OFFSET_ENDIAN = HEADER_OFFSET_SIG + 8;
-const HEADER_OFFSET_VERSION = HEADER_OFFSET_ENDIAN + 4;
-const HEADER_OFFSET_NODES = HEADER_OFFSET_VERSION + 4;
-const HEADER_OFFSET_NODES_LEN = HEADER_OFFSET_NODES + 4;
-const HEADER_OFFSET_CHAR_INDEX = HEADER_OFFSET_NODES_LEN + 4;
-const HEADER_OFFSET_CHAR_INDEX_LEN = HEADER_OFFSET_CHAR_INDEX + 4;
-
-const HEADER = {
-    header: HEADER_OFFSET,
-    sig: HEADER_OFFSET_SIG,
-    version: HEADER_OFFSET_VERSION,
-    endian: HEADER_OFFSET_ENDIAN,
-    nodes: HEADER_OFFSET_NODES,
-    nodesLen: HEADER_OFFSET_NODES_LEN,
-    charIndex: HEADER_OFFSET_CHAR_INDEX,
-    charIndexLen: HEADER_OFFSET_CHAR_INDEX_LEN,
-} as const;
-
-const headerSig = 'TrieBlob';
-const version = '00.01.00';
-const endianSig = 0x0403_0201;
-
-const isLittleEndian: boolean = calcIsLittleEndian();
 
 export class TrieBlob implements TrieData {
     readonly info: Readonly<TrieInfo>;
@@ -272,41 +242,17 @@ export class TrieBlob implements TrieData {
         };
     }
 
+    encodeToBTrie(): Uint8Array {
+        return this.encodeBin();
+    }
+
     encodeBin(): Uint8Array {
-        const charIndexLen = (0 + 3) & ~3; // round up to the nearest 4 byte boundary.
-        const nodeOffset = HEADER_SIZE + charIndexLen;
-        const size = nodeOffset + this.nodes.length * 4;
-        const useLittle = isLittleEndian;
-        const buffer = Buffer.alloc(size);
-        const header = new DataView(buffer.buffer);
-        const nodeData = new Uint8Array(this.nodes.buffer);
-        buffer.write(headerSig, HEADER.sig, 'utf8');
-        buffer.write(version, HEADER.version, 'utf8');
-        header.setUint32(HEADER.endian, endianSig, useLittle);
-        header.setUint32(HEADER.nodes, nodeOffset, useLittle);
-        header.setUint32(HEADER.nodesLen, this.nodes.length, useLittle);
-        header.setUint32(HEADER.charIndex, HEADER_SIZE, useLittle);
-        header.setUint32(HEADER.charIndexLen, 0, useLittle);
-        // buffer.set(charIndex, HEADER_SIZE);
-        buffer.set(nodeData, nodeOffset);
-        // console.log('encodeBin: %o', this.toJSON());
-        // console.log('encodeBin: buf %o nodes %o', buffer, this.nodes);
-        return buffer;
+        return encodeTrieBlobToBTrie({ nodes: this.nodes });
     }
 
     static decodeBin(blob: Uint8Array): TrieBlob {
-        if (!checkSig(blob)) {
-            throw new ErrorDecodeTrieBlob('Invalid TrieBlob Header');
-        }
-        const header = new DataView(blob.buffer);
-        const useLittle = isLittleEndian;
-        if (header.getUint32(HEADER.endian, useLittle) !== endianSig) {
-            throw new ErrorDecodeTrieBlob('Invalid TrieBlob Header');
-        }
-        const offsetNodes = header.getUint32(HEADER.nodes, useLittle);
-        const lenNodes = header.getUint32(HEADER.nodesLen, useLittle);
-        const nodes = new Uint32Array(blob.buffer, offsetNodes, lenNodes);
-        const trieBlob = new TrieBlob(nodes, defaultTrieInfo);
+        const info = decodeTrieBlobToBTrie(blob);
+        const trieBlob = new TrieBlob(info.nodes, defaultTrieInfo);
         // console.log('decodeBin: %o', trieBlob.toJSON());
         return trieBlob;
     }
@@ -389,29 +335,6 @@ export class TrieBlob implements TrieData {
 
     static nodesView(trie: TrieBlob): Readonly<Uint32Array> {
         return new Uint32Array(trie.nodes);
-    }
-}
-
-function calcIsLittleEndian(): boolean {
-    const buf = new Uint8Array([1, 2, 3, 4]);
-    const view = new DataView(buf.buffer);
-    return view.getUint32(0, true) === endianSig;
-}
-
-function checkSig(blob: Uint8Array): boolean {
-    if (blob.length < HEADER_SIZE) {
-        return false;
-    }
-    const buf = Buffer.from(blob as unknown as SharedArrayBuffer, 0, headerSig.length);
-    if (buf.toString('utf8', 0, headerSig.length) !== headerSig) {
-        return false;
-    }
-    return true;
-}
-
-class ErrorDecodeTrieBlob extends Error {
-    constructor(message: string) {
-        super(message);
     }
 }
 

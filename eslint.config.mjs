@@ -180,7 +180,6 @@ export default defineConfig(
             'packages/*/esm/**',
             'packages/*/fixtures/**',
             'packages/*/out/**',
-            'packages/client/server/**',
             'test-fixtures/**',
             'test-packages/cspell-eslint-plugin/**',
             'test-packages/yarn/**',
@@ -224,7 +223,7 @@ export default defineConfig(
         },
     },
     {
-        files: ['**/*.mts', '**/*.ts', '**/*.tsx', '**/*.cts'],
+        files: ['**/*.{ts,mts,cts,tsx}'],
         rules: {
             '@typescript-eslint/no-import-type-side-effects': 'error',
             '@typescript-eslint/consistent-type-imports': [

@@ -1,28 +1,42 @@
 import { pipe } from '@cspell/cspell-pipe/sync';
-import { COMPOUND_FIX, FORBID_PREFIX } from 'cspell-trie-lib';
+import type { ITrie } from 'cspell-trie-lib';
+import { COMPOUND_FIX, FORBID_PREFIX, parseDictionary } from 'cspell-trie-lib';
 import type { AffWord } from 'hunspell-reader';
 import * as HR from 'hunspell-reader';
 
-import type { AnnotatedWord, BaseReader, ReaderOptions } from './ReaderOptions.js';
+import type { AnnotatedWord, Reader, ReaderOptions } from './ReaderOptions.js';
 import { regHunspellFile } from './regHunspellFile.js';
 
 const DEDUPE_SIZE = 1000;
 
-export async function readHunspellFiles(filename: string, options: ReaderOptions): Promise<BaseReader> {
+export async function readHunspellFiles(filename: string, options: ReaderOptions): Promise<Reader> {
     const dicFile = filename.replace(regHunspellFile, '.dic');
     const affFile = filename.replace(regHunspellFile, '.aff');
 
     const reader = await HR.IterableHunspellReader.createFromFiles(affFile, dicFile);
     reader.maxDepth = options.maxDepth !== undefined ? options.maxDepth : reader.maxDepth;
 
-    const words = pipe(reader.seqAffWords(), _mapAffWords, dedupeAndSort);
+    let trie: ITrie | undefined;
+
+    function lines(): Iterable<string> {
+        return pipe(reader.seqAffWords(), _mapAffWords, dedupeAndSort);
+    }
 
     return {
+        filename,
         type: 'Hunspell',
         size: reader.dic.length,
-        lines: words,
+        get lines() {
+            return lines();
+        },
+        toTrie: () => {
+            if (trie) return trie;
+            trie = parseDictionary(lines(), { stripCaseAndAccents: false });
+            return trie;
+        },
     };
 }
+
 function* dedupeAndSort(words: Iterable<AnnotatedWord>): Iterable<AnnotatedWord> {
     const buffer = new Set<string>();
 

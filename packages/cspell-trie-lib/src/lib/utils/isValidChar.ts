@@ -1,5 +1,4 @@
-import assert from 'node:assert';
-
+import { assert } from './assert.ts';
 import { isValidUtf16Character } from './text.ts';
 
 export function isValidChar(char: string): boolean {
