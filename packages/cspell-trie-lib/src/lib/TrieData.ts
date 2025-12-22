@@ -1,5 +1,5 @@
-import type { ITrieNode, ITrieNodeRoot } from './ITrieNode/ITrieNode.js';
-import type { TrieCharacteristics, TrieInfo } from './ITrieNode/TrieInfo.js';
+import type { ITrieNode, ITrieNodeRoot } from './ITrieNode/ITrieNode.ts';
+import type { TrieCharacteristics, TrieInfo } from './ITrieNode/TrieInfo.ts';
 
 export interface TrieData extends Readonly<TrieCharacteristics> {
     readonly info: Readonly<TrieInfo>;
@@ -15,4 +15,5 @@ export interface TrieData extends Readonly<TrieCharacteristics> {
     readonly hasCompoundWords: boolean;
     readonly hasNonStrictWords: boolean;
     readonly size: number;
+    encodeToBTrie?: () => Uint8Array;
 }

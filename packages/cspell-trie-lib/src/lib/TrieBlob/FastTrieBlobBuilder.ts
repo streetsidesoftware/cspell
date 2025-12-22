@@ -1,8 +1,7 @@
-import assert from 'node:assert';
-
 import type { BuilderCursor, TrieBuilder } from '../Builder/index.ts';
 import type { PartialTrieInfo, TrieInfo } from '../ITrieNode/TrieInfo.ts';
 import type { TrieNode, TrieRoot } from '../TrieNode/TrieNode.ts';
+import { assert } from '../utils/assert.ts';
 import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.ts';
 import { assertValidUtf16Character } from '../utils/text.ts';
 import { CharIndexBuilder } from './CharIndex.ts';

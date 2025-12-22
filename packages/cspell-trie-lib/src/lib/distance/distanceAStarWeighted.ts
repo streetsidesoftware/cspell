@@ -1,5 +1,4 @@
-import assert from 'node:assert';
-
+import { assert } from '../utils/assert.ts';
 import { PairingHeap } from '../utils/PairingHeap.ts';
 import type { WeightCostCalculator, WeightMap } from './weightedMaps.ts';
 import { createWeightCostCalculator } from './weightedMaps.ts';

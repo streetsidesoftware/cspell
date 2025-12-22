@@ -203,6 +203,10 @@ export class FastTrieBlob implements TrieData {
         return this;
     }
 
+    encodeToBTrie(): Uint8Array {
+        return this.toTrieBlob().encodeToBTrie();
+    }
+
     toJSON(): {
         info: Readonly<TrieInfo>;
         nodes: NodeToJSON[];
