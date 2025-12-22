@@ -5,7 +5,7 @@ Args: '["**"]'
 Summary:
   files: 413
   filesWithIssues: 397
-  issues: 1898
+  issues: 1899
   errors: 0
 Errors: []
 
@@ -151,9 +151,10 @@ issues:
   - "src/main/scala/gitbucket/core/controller/ControllerBase.scala:158:68        mobilephone     U       smartphone\" || category == \"mobilephone\""
   - "src/main/scala/gitbucket/core/controller/ControllerBase.scala:241:51        nosniff         U       Content-Type-Options\", \"nosniff\")"
   - "src/main/scala/gitbucket/core/controller/ControllerBase.scala:315:51        Charsets        U       toString(in, StandardCharsets.UTF_8)"
-  - "src/main/scala/gitbucket/core/controller/IssuesController.scala:378:40      customfield     U       owner/:repository/issues/customfield_validation/:fieldId"
-  - "src/main/scala/gitbucket/core/controller/IssuesController.scala:407:36      batchedit       U       owner/:repository/issues/batchedit/state\")(writableUsersOnly"
-  - "src/main/scala/gitbucket/core/controller/IssuesController.scala:497:66      octicon         U       isPullRequest) \"<i class='octicon octicon-git-pull-request"
+  - "src/main/scala/gitbucket/core/controller/IndexController.scala:95:13        renderable      U       get(\"/_is_renderable\") {"
+  - "src/main/scala/gitbucket/core/controller/IssuesController.scala:383:40      customfield     U       owner/:repository/issues/customfield_validation/:fieldId"
+  - "src/main/scala/gitbucket/core/controller/IssuesController.scala:412:36      batchedit       U       owner/:repository/issues/batchedit/state\")(writableUsersOnly"
+  - "src/main/scala/gitbucket/core/controller/IssuesController.scala:502:66      octicon         U       isPullRequest) \"<i class='octicon octicon-git-pull-request"
   - "src/main/scala/gitbucket/core/controller/PullRequestsController.scala:206:41        mergeguide      U       repository/pull/:id/mergeguide\")(referrersOnly { repository"
   - "src/main/scala/gitbucket/core/controller/PullRequestsController.scala:556:46        mergecheck      U       repository/compare/*...*/mergecheck\")(readableUsersOnly"
   - "src/main/scala/gitbucket/core/controller/RepositorySettingsController.scala:179:9       protecteions    U       val protecteions = getProtectedBranchList"
@@ -169,7 +170,6 @@ issues:
   - "src/main/scala/gitbucket/core/model/AccountWebHook.scala:7:55           whct        U       WebHookContentType, String](whct => whct.code, code"
   - "src/main/scala/gitbucket/core/model/AccountWebHook.scala:14:45          CTYPE       U       WebHookContentType](\"CTYPE\")"
   - "src/main/scala/gitbucket/core/model/WebHook.scala:34:37         gollum      U       Gollum extends Event(\"gollum\")"
-  - "src/main/scala/gitbucket/core/plugin/PluginRegistry.scala:92:7          renderable      U       def renderableExtensions: Seq[String"
   - "src/main/scala/gitbucket/core/service/AccountService.scala:253:35       devnull     U       mailAddress = groupName + \"@devnull\","
   - "src/main/scala/gitbucket/core/service/IssuesService.scala:680:31        unassignment    U       TODO Notify plugins of unassignment as doing in registerIssueAssi"
   - "src/main/scala/gitbucket/core/service/OpenIDConnectService.scala:217:6          HMAC    U       \"HMAC\" -> Family.HMAC_SHA"
@@ -192,8 +192,8 @@ issues:
   - "src/main/scala/gitbucket/core/util/LDAPUtil.scala:143:32        LDAPJSSE    U       new LDAPConnection(new LDAPJSSESecureSocketFactory("
   - "src/main/scala/gitbucket/core/util/StringUtil.scala:30:62       Hmac    U       getInstance(\"PBKDF2WithHmacSHA256\")"
   - "src/main/scala/gitbucket/core/util/TextAvatarUtil.scala:16:17       Blightness      U       private val bgBlightness = 0.73f"
-  - "src/main/scala/gitbucket/core/view/helpers.scala:490:36         inlinediff      U       <table class=\\\"diff inlinediff\\\">\")"
-  - "src/main/scala/gitbucket/core/view/helpers.scala:493:41         oldline         U       <th class=\"line-num oldline ${line.`type`}\">\"\"\""
+  - "src/main/scala/gitbucket/core/view/helpers.scala:501:36         inlinediff      U       <table class=\\\"diff inlinediff\\\">\")"
+  - "src/main/scala/gitbucket/core/view/helpers.scala:504:41         oldline         U       <th class=\"line-num oldline ${line.`type`}\">\"\"\""
   - "src/main/twirl/gitbucket/core/account/creategroup.scala.html:7:38           groupform       U       gitbucket.core.account.html.groupform(None, members, false"
   - "src/main/twirl/gitbucket/core/account/edit.scala.html:55:45         uploadavatar    U       gitbucket.core.helper.html.uploadavatar(Some(account))"
   - "src/main/twirl/gitbucket/core/account/edit.scala.html:75:9          pwval           U       let pwval = $('#password').val"

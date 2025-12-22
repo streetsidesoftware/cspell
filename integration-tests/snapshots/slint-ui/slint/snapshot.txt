@@ -40,8 +40,8 @@ REUSE.toml:81:13     - Unknown word (sdkconfig)    -- "demos/**/sdkconfig**",
 about.toml:23:8      - Unknown word (noassertion) -- filter-noassertion = true
 api/cpp/CMakeLists.txt:114:140   - Unknown word (libseat)     -- fullscreen on Linux. Requires libseat. If you don't have libseat
 api/cpp/CMakeLists.txt:114:167   - Unknown word (libseat)     -- libseat. If you don't have libseat, select `backend-linuxkms
-api/cpp/CMakeLists.txt:114:192   - Unknown word (linuxkms)    -- libseat, select `backend-linuxkms-noseat` instead. (Experimenta
-api/cpp/CMakeLists.txt:114:201   - Unknown word (noseat)      -- select `backend-linuxkms-noseat` instead. (Experimental
+api/cpp/CMakeLists.txt:114:192   - Unknown word (linuxkms)    -- libseat, select `backend-linuxkms-noseat` instead." OFF
+api/cpp/CMakeLists.txt:114:201   - Unknown word (noseat)      -- select `backend-linuxkms-noseat` instead." OFF "NOT
 api/cpp/CMakeLists.txt:114:40    - Unknown word (linuxkms)    -- dependent_feature(backend-linuxkms "Enable support for
 api/cpp/CMakeLists.txt:115:40    - Unknown word (linuxkms)    -- dependent_feature(backend-linuxkms-noseat "Enable support
 api/cpp/CMakeLists.txt:115:49    - Unknown word (noseat)      -- feature(backend-linuxkms-noseat "Enable support for
@@ -155,7 +155,7 @@ api/cpp/cmake/SlintMacro.cmake:74:13     - Unknown word (endforeach) -- endforea
 api/cpp/cmake/SlintMacro.cmake:83:19     - Unknown word (depfile)    -- --depfile ${CMAKE_CURRENT_BINARY
 api/cpp/cmake/SlintMacro.cmake:95:13     - Unknown word (DEPFILE)    -- DEPFILE ${CMAKE_CURRENT_BINARY
 api/cpp/cmake/SlintMacro.cmake:9:55      - Unknown word (AFAICT)     -- does not work in 3.26 AFAICT.
-api/cpp/docs/cmake.md:161:22    - Unknown word (iconfigure) -- Then you're ready to iconfigure your CMake project you
+api/cpp/docs/cmake.md:157:22    - Unknown word (iconfigure) -- Then you're ready to iconfigure your CMake project you
 api/cpp/docs/cmake.md:40:99     - Unknown word (DCMAKE)     -- Alternatively you can pass `-DCMAKE_PREFIX_PATH=/path/to
 api/cpp/docs/cmake_reference.md:20:94     - Unknown word (mycomponentlib) -- . Any import from `@mycomponentlib/` will
 api/cpp/docs/cmake_reference.md:28:19     - Unknown word (mycomponentlib) -- LIBRARY_PATHS mycomponentlib=/path/to/customcomponents
@@ -381,12 +381,12 @@ api/python/slint/brush.rs:36:3      - Unknown word (pyclass)    -- #[pyclass]
 api/python/slint/brush.rs:73:12     - Unknown word (pymethods)  -- #[gen_stub_pymethods]
 api/python/slint/brush.rs:74:3      - Unknown word (pymethods)  -- #[pymethods]
 api/python/slint/brush.rs:9:12      - Unknown word (pyclass)    -- #[gen_stub_pyclass]
-api/python/slint/build_docs.py:10:7      - Unknown word (pdoc)       -- doc = pdoc.doc.Module(slint)
-api/python/slint/build_docs.py:18:24     - Unknown word (pdoc)       -- all_modules: dict[str, pdoc.doc.Module] = {"slint
-api/python/slint/build_docs.py:23:11     - Unknown word (pdoc)       -- out = pdoc.render.html_module(module
-api/python/slint/build_docs.py:28:9      - Unknown word (pdoc)       -- index = pdoc.render.html_index(all
-api/python/slint/build_docs.py:35:27     - Unknown word (thirdparty) -- cargo about generate thirdparty.hbs -o docs/thirdparty
-api/python/slint/build_docs.py:35:50     - Unknown word (thirdparty) -- thirdparty.hbs -o docs/thirdparty.html", shell=True
+api/python/slint/build_docs.py:11:7      - Unknown word (pdoc)       -- doc = pdoc.doc.Module(slint)
+api/python/slint/build_docs.py:13:25     - Unknown word (pdoc)       -- model_cls = typing.cast(pdoc.doc.Class, doc.get(
+api/python/slint/build_docs.py:20:24     - Unknown word (pdoc)       -- all_modules: dict[str, pdoc.doc.Module] = {"slint
+api/python/slint/build_docs.py:25:11     - Unknown word (pdoc)       -- out = pdoc.render.html_module(module
+api/python/slint/build_docs.py:37:27     - Unknown word (thirdparty) -- cargo about generate thirdparty.hbs -o docs/thirdparty
+api/python/slint/build_docs.py:37:50     - Unknown word (thirdparty) -- thirdparty.hbs -o docs/thirdparty.html", shell=True
 api/python/slint/build_docs.py:5:8       - Unknown word (pdoc)       -- import pdoc
 api/python/slint/image.rs:103:7     - Unknown word (staticmethod) -- #[staticmethod]
 api/python/slint/image.rs:10:12     - Unknown word (pyclass)    -- #[gen_stub_pyclass]
@@ -593,12 +593,12 @@ api/python/slint/tests/test_instance.py:93:5      - Unknown word (imageval)     
 api/python/slint/tests/test_instance.py:94:12     - Unknown word (imageval)      -- assert imageval.width == 320
 api/python/slint/tests/test_instance.py:95:12     - Unknown word (imageval)      -- assert imageval.height == 480
 api/python/slint/tests/test_instance.py:96:25     - Unknown word (imageval)      -- assert "cat.jpg" in imageval.path.name
-api/python/slint/tests/test_load_file.py:19:20     - Unknown word (caplog)     -- def test_load_file(caplog: pytest.LogCaptureFixture
-api/python/slint/tests/test_load_file.py:24:12     - Unknown word (caplog)     -- in caplog.text
-api/python/slint/tests/test_load_file.py:57:41     - Unknown word (excinfo)    -- raises(CompileError) as excinfo:
-api/python/slint/tests/test_load_file.py:59:37     - Unknown word (excinfo)    -- typing.cast(CompileError, excinfo.value)
-api/python/slint/tests/test_load_file.py:85:32     - Unknown word (wohoo)      -- instance.say_hello("wohoo") == "from here: wohoo
-api/python/slint/tests/test_load_file.py:85:55     - Unknown word (wohoo)      -- wohoo") == "from here: wohoo"
+api/python/slint/tests/test_load_file.py:18:20     - Unknown word (caplog)     -- def test_load_file(caplog: pytest.LogCaptureFixture
+api/python/slint/tests/test_load_file.py:23:12     - Unknown word (caplog)     -- in caplog.text
+api/python/slint/tests/test_load_file.py:56:41     - Unknown word (excinfo)    -- raises(CompileError) as excinfo:
+api/python/slint/tests/test_load_file.py:58:11     - Unknown word (excinfo)    -- err = excinfo.value
+api/python/slint/tests/test_load_file.py:84:32     - Unknown word (wohoo)      -- instance.say_hello("wohoo") == "from here: wohoo
+api/python/slint/tests/test_load_file.py:84:55     - Unknown word (wohoo)      -- wohoo") == "from here: wohoo"
 api/python/slint/tests/test_loader.py:15:5      - Unknown word (oldsyspath) -- oldsyspath = sys.path
 api/python/slint/tests/test_loader.py:22:20     - Unknown word (oldsyspath) -- sys.path = oldsyspath
 api/python/slint/tests/test_loop.py:11:10     - Unknown word (sysexit)    -- def test_sysexit_exception() -> None
@@ -1152,7 +1152,7 @@ demos/weather-demo/ui/expanded_city_weather_tile.slint:11:38     - Unknown word 
 demos/weather-demo/ui/forecast_with_graph.slint:8:74      - Unknown word (datatypes)  -- CityWeather } from "./weather_datatypes.slint";
 demos/weather-demo/ui/location_search.slint:8:41      - Unknown word (datatypes)  -- eoLocation } from "./location_datatypes.slint";
 demos/weather-demo/ui/main.slint:10:41     - Unknown word (datatypes)  -- eoLocation } from "./location_datatypes.slint";
-demos/weather-demo/ui/main.slint:170:44    - Unknown word (xmark)      -- icon-source: AppImages.xmark;
+demos/weather-demo/ui/main.slint:175:44    - Unknown word (xmark)      -- icon-source: AppImages.xmark;
 demos/weather-demo/ui/main.slint:6:50      - Unknown word (stackview)  -- StackPage } from "./controls/stackview.slint";
 demos/weather-demo/ui/main.slint:8:40      - Unknown word (datatypes)  -- CityWeather } from "./weather_datatypes.slint";
 demos/weather-demo/ui/style/styles.slint:14:44     - Unknown word (cornsilk)     -- snow-white: Colors.cornsilk;
@@ -3553,7 +3553,7 @@ internal/compiler/typeregister.rs:268:37    - Unknown word (Constexpr)  -- Prope
 internal/compiler/typeregister.rs:273:37    - Unknown word (Constexpr)  -- PropertyVisibility::Constexpr,
 internal/compiler/typeregister.rs:498:41    - Unknown word (Constexpr)  -- PropertyVisibility::Constexpr;
 internal/compiler/typeregister.rs:501:41    - Unknown word (Constexpr)  -- PropertyVisibility::Constexpr;
-internal/compiler/widgets/common/lineedit-base.slint:66:46     - Unknown word (preedit)    -- == "" && text-input.preedit-text == "") ? root.placeholde
+internal/compiler/widgets/common/lineedit-base.slint:67:46     - Unknown word (preedit)    -- == "" && text-input.preedit-text == "") ? root.placeholde
 internal/compiler/widgets/common/textedit-base.slint:132:41    - Unknown word (cpos)       -- cursor-position-changed(cpos) => {
 internal/compiler/widgets/common/textedit-base.slint:133:25    - Unknown word (cpos)       -- if (cpos.x + root.viewport-x
 internal/compiler/widgets/common/textedit-base.slint:134:94    - Unknown word (cpos)       -- width - self.width,  - cpos.x + 12px));
@@ -3914,11 +3914,11 @@ internal/renderers/femtovg/itemrenderer.rs:609:30    - Unknown word (blitting)  
 internal/renderers/femtovg/lib.rs:40:5      - Unknown word (itemrenderer) -- mod itemrenderer;
 internal/renderers/femtovg/lib.rs:430:85    - Unknown word (linuxkms)     -- accessed from the winit/linuxkms backends, but not
 internal/renderers/femtovg/opengl.rs:225:79    - Unknown word (webgl)      -- &id, context_type: "webgl2" };
-internal/renderers/femtovg/wgpu.rs:155:13    - Unknown word (swapchain)  -- let swapchain_capabilities = surface
-internal/renderers/femtovg/wgpu.rs:156:13    - Unknown word (swapchain)  -- let swapchain_format = swapchain_capabiliti
-internal/renderers/femtovg/wgpu.rs:156:32    - Unknown word (swapchain)  -- let swapchain_format = swapchain_capabilities
-internal/renderers/femtovg/wgpu.rs:161:32    - Unknown word (swapchain)  -- .unwrap_or_else(|| swapchain_capabilities.formats
-internal/renderers/femtovg/wgpu.rs:162:33    - Unknown word (swapchain)  -- surface_config.format = swapchain_format;
+internal/renderers/femtovg/wgpu.rs:150:13    - Unknown word (swapchain)  -- let swapchain_capabilities = surface
+internal/renderers/femtovg/wgpu.rs:151:13    - Unknown word (swapchain)  -- let swapchain_format = swapchain_capabiliti
+internal/renderers/femtovg/wgpu.rs:151:32    - Unknown word (swapchain)  -- let swapchain_format = swapchain_capabilities
+internal/renderers/femtovg/wgpu.rs:156:32    - Unknown word (swapchain)  -- .unwrap_or_else(|| swapchain_capabilities.formats
+internal/renderers/femtovg/wgpu.rs:157:33    - Unknown word (swapchain)  -- surface_config.format = swapchain_format;
 internal/renderers/skia/cached_image.rs:124:39    - Unknown word (Unpremul)   -- skia_safe::AlphaType::Unpremul,
 internal/renderers/skia/cached_image.rs:132:35    - Unknown word (Unpremul)   -- skia_safe::AlphaType::Unpremul,
 internal/renderers/skia/cached_image.rs:139:35    - Unknown word (Premul)     -- skia_safe::AlphaType::Premul,
@@ -4189,7 +4189,7 @@ logo/README.md:44:116    - Unknown word (whitebg)    -- the versions with ***whi
 logo/README.md:51:14     - Unknown word (CMYK)       -- * For Print: CMYK = 75,45,0,0,
 logo/README.md:52:19     - Unknown word (Pantone)    -- * For Spot Color (Pantone): PMS 2727 C.
 pnpm-workspace.yaml:19:5      - Unknown word (biomejs)    -- "@biomejs/biome": 2.3.8
-pnpm-workspace.yaml:22:4      - Unknown word (vite)       -- "vite": 7.2.6
+pnpm-workspace.yaml:22:4      - Unknown word (vite)       -- "vite": 7.3.0
 pnpm-workspace.yaml:31:4      - Unknown word (rehype)     -- "rehype-external-links": 3.
 pnpm-workspace.yaml:32:15     - Unknown word (ctrf)       -- "playwright-ctrf-json-reporter": 0.0
 pnpm-workspace.yaml:34:4      - Unknown word (vitest)     -- "vitest": 4.0.15

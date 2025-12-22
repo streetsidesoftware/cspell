@@ -3,9 +3,9 @@ Repository: eslint/eslint
 Url: https://github.com/eslint/eslint
 Args: '[".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]'
 Summary:
-  files: 2064
-  filesWithIssues: 302
-  issues: 1520
+  files: 2062
+  filesWithIssues: 301
+  issues: 1519
   errors: 0
 Errors: []
 
@@ -322,9 +322,8 @@ issues:
   - "tests/lib/eslint/eslint.js:14994:81     unerasable          U       of an ESM module with unerasable TypeScript syntax\","
   - "tests/lib/linter/file-report.js:669:13      fooo        U       text: \"fooo\\nbar\","
   - "tests/lib/linter/file-report.js:722:15      ncdar       U       text: \"o\\ncdar\","
-  - "tests/lib/linter/linter.js:5345:1       consolexlog         U       consolexlog(\"test2\");"
-  - "tests/lib/linter/linter.js:10381:13     postprocessors      U       describe(\"postprocessors\", () => {"
-  - "tests/lib/linter/rules.js:29:20         michaelficarra      U       const ruleId = \"michaelficarra\";"
+  - "tests/lib/linter/linter.js:5380:11      consolexlog         U       let b; // consolexlog(\"test2\");"
+  - "tests/lib/linter/linter.js:10459:13     postprocessors      U       describe(\"postprocessors\", () => {"
   - "tests/lib/linter/source-code-fixer.js:63:13         removestart     U       message: \"removestart\","
   - "tests/lib/linter/source-code-fixer.js:70:13         removemiddle    U       message: \"removemiddle\","
   - "tests/lib/linter/source-code-fixer.js:77:13         removeend       U       message: \"removeend\","
@@ -422,7 +421,7 @@ issues:
   - "tests/lib/rules/utils/ast-utils.js:2092:10      invalidtoken    U       [[\"123invalidtoken\", \"(\"], false],"
   - "tests/lib/rules/valid-typeof.js:98:31       umdefined       U       if (typeof bar === 'umdefined') {}\","
   - "tests/lib/shared/string-utils.js:40:6           uppercases      U       it(\"uppercases the first letter of"
-  - "tests/lib/types/types.test.ts:1038:7        eslinter    U       const eslinter = new ESLinter();"
+  - "tests/lib/types/types.test.ts:1040:7        eslinter    U       const eslinter = new ESLinter();"
   - "tests/performance/jshint.js:91:14           shtylman                    U       // TODO(shtylman)"
   - "tests/performance/jshint.js:540:8           SVGCSS                      U       SVGCSSRule: false,"
   - "tests/performance/jshint.js:594:8           SVGH                        U       SVGHKernElement: false,"
@@ -832,7 +831,6 @@ issuesSummary:
   - "text: Meep, count: 2, files: 1,"
   - "text: merror, count: 5, files: 1,"
   - "text: metascraper, count: 10, files: 2,"
-  - "text: michaelficarra, count: 1, files: 1,"
   - "text: microtask, count: 4, files: 1,"
   - "text: MMSP, count: 1, files: 1,"
   - "text: modns, count: 3, files: 1,"

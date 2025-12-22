@@ -3,7 +3,7 @@ Repository: eslint/eslint
 Url: "https://github.com/eslint/eslint"
 Args: [".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]
 Lines:
- CSpell: Files checked: 2064, Issues found: 1520 in 302 files.
+ CSpell: Files checked: 2062, Issues found: 1519 in 301 files.
  exit code: 1
 Makefile.js:126:82    - Unknown word (ined)       -- followed by the string "ined".
 Makefile.js:375:9     - Unknown word (gensite)    -- target.gensite();
@@ -317,9 +317,8 @@ tests/lib/eslint/eslint.js:9742:51   - Unknown word (somenamespace) -- engine.lo
 tests/lib/eslint/eslint.js:9764:6    - Unknown word (doesntexist)   -- "doesntexist.js",
 tests/lib/linter/file-report.js:669:13    - Unknown word (fooo)       -- text: "fooo\nbar",
 tests/lib/linter/file-report.js:722:15    - Unknown word (ncdar)      -- text: "o\ncdar",
-tests/lib/linter/linter.js:10381:13  - Unknown word (postprocessors) -- describe("postprocessors", () => {
-tests/lib/linter/linter.js:5345:1    - Unknown word (consolexlog) -- consolexlog("test2");
-tests/lib/linter/rules.js:29:20     - Unknown word (michaelficarra) -- const ruleId = "michaelficarra";
+tests/lib/linter/linter.js:10459:13  - Unknown word (postprocessors) -- describe("postprocessors", () => {
+tests/lib/linter/linter.js:5380:11   - Unknown word (consolexlog) -- let b; // consolexlog("test2");
 tests/lib/linter/source-code-fixer.js:63:13     - Unknown word (removestart) -- message: "removestart",
 tests/lib/linter/source-code-fixer.js:70:13     - Unknown word (removemiddle) -- message: "removemiddle",
 tests/lib/linter/source-code-fixer.js:77:13     - Unknown word (removeend)    -- message: "removeend",
@@ -417,7 +416,7 @@ tests/lib/rules/utils/ast-utils.js:1315:8    - Unknown word (ncde)       -- "ab\
 tests/lib/rules/utils/ast-utils.js:2092:10   - Unknown word (invalidtoken) -- [["123invalidtoken", "("], false],
 tests/lib/rules/valid-typeof.js:98:31     - Unknown word (umdefined)  -- if (typeof bar === 'umdefined') {}",
 tests/lib/shared/string-utils.js:40:6      - Unknown word (uppercases) -- it("uppercases the first letter of
-tests/lib/types/types.test.ts:1038:7    - Unknown word (eslinter)   -- const eslinter = new ESLinter();
+tests/lib/types/types.test.ts:1040:7    - Unknown word (eslinter)   -- const eslinter = new ESLinter();
 tests/performance/jshint.js:10347:35  - Unknown word (Ashkenas)                 -- c) 2009-2013 Jeremy Ashkenas, DocumentCloud Inc.
 tests/performance/jshint.js:10491:15  - Unknown word (foldl)                    -- // or `foldl`. Delegates to **ECMAScript
 tests/performance/jshint.js:10533:67  - Unknown word (foldr)                    -- reduce, also known as `foldr`.
