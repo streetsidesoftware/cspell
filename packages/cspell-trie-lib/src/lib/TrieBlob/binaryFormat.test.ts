@@ -1,4 +1,3 @@
-/* eslint-disable unicorn/prefer-code-point */
 import { describe, expect, test } from 'vitest';
 
 import { BinaryDataBuilder, BinaryDataReader, BinaryFormat, BinaryFormatBuilder } from './binaryFormat.ts';
