@@ -100,7 +100,7 @@ export class BinaryFormat {
     }
 
     toJSON(): unknown {
-        return this.elements;
+        return this.elements.map(formatElementToJSON);
     }
 
     toString(): string {
@@ -117,8 +117,8 @@ export class BinaryFormat {
 
         function addHeaderLines(): void {
             const name = 'name'.padEnd(nameWidth, ' ');
-            const offset = 'offset'.padEnd(offsetWidth, ' ');
-            const size = 'size'.padEnd(sizeWidth, ' ');
+            const offset = 'offset'.padStart(offsetWidth, ' ');
+            const size = 'size'.padStart(sizeWidth, ' ');
             const type = 'type'.padEnd(typeWidth, ' ');
             const line = `${name} ${offset} ${size} ${type} description (value)`;
             lines.push('Binary Format:');
@@ -348,4 +348,10 @@ export class BinaryDataReader {
     reverseEndian(): void {
         this.#useLE = !this.#useLE;
     }
+}
+
+function formatElementToJSON(fe: FormatElement): unknown {
+    const { value } = fe;
+    const v = value ? [...value] : undefined;
+    return { ...fe, value: v };
 }
