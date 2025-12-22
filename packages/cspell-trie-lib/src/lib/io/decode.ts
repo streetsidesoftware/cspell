@@ -1,5 +1,3 @@
-import type { Buffer } from 'node:buffer';
-
 import type { TrieData } from '../TrieData.ts';
 import { TrieNodeTrie } from '../TrieNode/TrieNodeTrie.ts';
 import * as iv1 from './importExportV1.ts';
@@ -7,9 +5,13 @@ import * as iv2 from './importExportV2.ts';
 import * as iv4 from './importExportV4.ts';
 import { importTrieV3AsFastTrieBlob } from './importV3FastBlob.ts';
 
-export function decodeTrieData(raw: string | Buffer): TrieData {
-    // Binary format detection can be added here.
-    return decodeStringFormat(typeof raw === 'string' ? raw : raw.toString('utf8'));
+export function decodeTrieData(raw: string | ArrayBufferLike | Uint8Array): TrieData {
+    if (typeof raw === 'string') {
+        return decodeStringFormat(raw);
+    }
+    const decoder = new TextDecoder();
+    const text = raw instanceof Uint8Array ? decoder.decode(raw) : decoder.decode(new Uint8Array(raw));
+    return decodeStringFormat(text);
 }
 
 function decodeStringFormat(data: string): TrieData {

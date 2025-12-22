@@ -1,4 +1,3 @@
-import { Buffer } from 'node:buffer';
 import { readFile } from 'node:fs/promises';
 
 import { describe, expect, test } from 'vitest';
@@ -20,7 +19,8 @@ describe('Import/Export', () => {
     `('tests serialize / deserialize version: $version, base: $base', async ({ version, base }) => {
         const sampleWords = (await pSampleWords).split('\n').filter((a) => !!a);
         const trie = Trie.createTrieRootFromList(sampleWords);
-        const data = Buffer.from([...serializeTrie(trie, { version, base })].join('\n'));
+        const encoder = new TextEncoder();
+        const data = encoder.encode([...serializeTrie(trie, { version, base })].join('\n'));
         const root = decodeTrieData(data);
         const words = [...root.words()];
         expect(words.sort()).toEqual([...sampleWords].sort());
