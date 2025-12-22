@@ -2,6 +2,7 @@
 import { describe, expect, test } from 'vitest';
 
 import { BinaryDataBuilder, BinaryDataReader, BinaryFormat, BinaryFormatBuilder } from './binaryFormat.ts';
+import { hexDump } from './hexDump.ts';
 
 describe('BinaryFormatBuilder', () => {
     test('should create a BinaryFormatBuilder instance', () => {
@@ -36,14 +37,20 @@ describe('BinaryFormatBuilder', () => {
 });
 
 describe('BinaryDataBuilder', () => {
+    const encoder = new TextEncoder();
+
     const builder = new BinaryFormatBuilder();
     builder
         .addString('header', 'The file header', 'Test Header')
         .addString('section1', 'First section', 'Data1')
         .addString('section2', 'Second section', 'Data2')
         .addUint32('value', 'A uint32 value', 123_456)
-        .addPtrUint32Array('arrayPtr', 'Pointer to uint32 array')
-        .addPtrUint32Array('arrayPtr2', 'Pointer to second uint32 array');
+        .addUint32ArrayPtr('arrayPtr', 'Pointer to uint32 array')
+        .addUint32ArrayPtr('arrayPtr2', 'Pointer to second uint32 array')
+        .addUint8ArrayPtr('dataPtr', 'Pointer to uint8 array')
+        .addUint8ArrayPtr('utf8Ptr', 'Pointer to uint8 array')
+        .addStringPtr('stringPtr', 'Pointer to string data')
+        .addStringPtr('unsetStringPtr', 'Pointer to string data');
     const format = builder.build();
 
     test('BinaryDataBuilder LE', () => {
@@ -53,6 +60,10 @@ describe('BinaryDataBuilder', () => {
         builder.setUint32('value', 0xdead_beef);
         builder.setPtrUint32Array('arrayPtr', new Uint32Array([1, 2, 3, 4, 5]));
         builder.setPtrUint32Array('arrayPtr2', new Uint32Array([10, 20, 30, 40, 50, 60]));
+        builder.setPtrUint8Array('dataPtr', new Uint8Array([64, 65, 66, 67, 68]));
+        builder.addDataElement(new Uint8Array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]), 8);
+        builder.setPtrString('stringPtr', 'Hello, World!');
+        builder.setPtrUint8Array('utf8Ptr', encoder.encode('UTF-8 Data'));
 
         const data = builder.build();
         expect(hexDump(data)).toMatchSnapshot();
@@ -62,6 +73,11 @@ describe('BinaryDataBuilder', () => {
         expect(reader.getString('header')).toBe('Test Header');
         expect(reader.getString('section1')).toBe('Data1');
         expect(reader.getString('section2')).toBe('Data2');
+        expect(reader.getPtrString('stringPtr')).toBe('Hello, World!');
+        expect(reader.getString('stringPtr')).toBe('Hello, World!');
+        expect(reader.getString('utf8Ptr')).toBe('UTF-8 Data');
+        expect(reader.getString('unsetStringPtr')).toBe('');
+        expect(reader.getPtrUint8Array('utf8Ptr')).toEqual(encoder.encode('UTF-8 Data'));
 
         const val = reader.getUint32('value');
         expect(val).toBe(0xdead_beef);
@@ -100,19 +116,3 @@ describe('BinaryDataBuilder', () => {
         expect(arr2).toEqual(new Uint32Array([10, 20, 30, 40, 50, 60]));
     });
 });
-
-function hexDump(buffer: Uint8Array): string {
-    function hexLine(offset: number, chunk: Uint8Array): string {
-        const hex = [...chunk].map((b) => b.toString(16).padStart(2, '0')).join(' ');
-        const ascii = [...chunk].map((b) => (b >= 32 && b <= 126 ? String.fromCharCode(b) : '.')).join('');
-        return offset.toString(16).padStart(8, '0') + '  ' + hex.padEnd(48, ' ') + '  ' + ascii;
-    }
-
-    const lines: string[] = [];
-    const chunkSize = 16;
-    for (let i = 0; i < buffer.length; i += chunkSize) {
-        const chunk = buffer.subarray(i, i + chunkSize);
-        lines.push(hexLine(i, chunk));
-    }
-    return lines.join('\n');
-}

@@ -5,6 +5,7 @@ import { validateTrie } from '../TrieNode/trie-util.js';
 import { buildTrieNodeTrieFromWords } from '../TrieNode/TrieNodeBuilder.js';
 import { createTrieBlob } from './createTrieBlob.js';
 import { FastTrieBlobBuilder } from './FastTrieBlobBuilder.js';
+import { hexDump } from './hexDump.ts';
 import { TrieBlob } from './TrieBlob.js';
 
 describe('TrieBlob', () => {
@@ -86,6 +87,15 @@ describe('TrieBlob encode/decode', async () => {
         const r = TrieBlob.decodeBin(bin);
         expect([...r.words()]).toEqual(words);
         expect(words.some((w) => !r.has(w))).toBe(false);
+    });
+
+    test('encode hexDump', () => {
+        const words = ['apple', 'banana', 'grape', 'orange', 'strawberry'];
+        const ft = FastTrieBlobBuilder.fromWordList(words);
+        const bin = ft.encodeToBTrie();
+        const r = TrieBlob.decodeBin(bin);
+        expect([...r.words()]).toEqual(words);
+        expect(hexDump(bin)).toMatchSnapshot();
     });
 });
 

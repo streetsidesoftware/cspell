@@ -3,13 +3,17 @@ import { endianness } from '../utils/endian.ts';
 
 const isLittleEndian: boolean = endianness() === 'LE';
 
+export type FormatType = 'string' | 'uint32' | 'ptrUint32Array' | 'ptrUint8Array' | 'ptrString';
+
+const knownStringTypes: Set<FormatType> = new Set(['string', 'ptrString', 'ptrUint8Array']);
+
 export interface FormatElement {
     /** name of the element */
     name: string;
     /** the description of the element */
     description: string;
     /** the type of element */
-    type: 'string' | 'uint32' | 'ptrUint32Array';
+    type: FormatType;
     /** offset in bytes */
     offset: number;
     /** size in bytes */
@@ -27,14 +31,8 @@ export class BinaryFormatBuilder {
     addUint32(name: string, description: string, value?: number): BinaryFormatBuilder {
         const offset = (this.#offset + 3) & ~3; // align to 4 bytes
         const uValue = value !== undefined ? rawNumberToUint32Array(value) : 0;
-        this.#elements.push({
-            name,
-            description,
-            type: 'uint32',
-            offset,
-            size: 4,
-            value: uValue ? new Uint8Array(uValue.buffer, uValue.byteOffset, uValue.byteLength) : undefined,
-        });
+        const bValue = uValue ? new Uint8Array(uValue.buffer, uValue.byteOffset, uValue.byteLength) : undefined;
+        this.#elements.push({ name, description, type: 'uint32', offset, size: 4, value: bValue });
         this.#offset = offset + 4;
         return this;
     }
@@ -45,16 +43,37 @@ export class BinaryFormatBuilder {
      * @param description -
      * @returns this
      */
-    addPtrUint32Array(name: string, description: string): BinaryFormatBuilder {
+    addUint32ArrayPtr(name: string, description: string): BinaryFormatBuilder {
+        return this.addPointer('ptrUint32Array', name, description);
+    }
+
+    /**
+     * A pointer to a uint8 array, it has two parts, the offset and the length.
+     * @param name - name of pointer
+     * @param description -
+     * @returns this
+     */
+    addUint8ArrayPtr(name: string, description: string): BinaryFormatBuilder {
+        return this.addPointer('ptrUint8Array', name, description);
+    }
+
+    /**
+     * A pointer to a uint8 array, it has two parts, the offset and the length.
+     * @param name - name of pointer
+     * @param description -
+     * @returns this
+     */
+    addStringPtr(name: string, description: string): BinaryFormatBuilder {
+        return this.addPointer('ptrString', name, description);
+    }
+
+    addPointer(
+        type: 'ptrUint32Array' | 'ptrUint8Array' | 'ptrString',
+        name: string,
+        description: string,
+    ): BinaryFormatBuilder {
         const offset = (this.#offset + 3) & ~3; // align to 4 bytes
-        this.#elements.push({
-            name,
-            description,
-            type: 'ptrUint32Array',
-            offset,
-            size: 8,
-            value: undefined,
-        });
+        this.#elements.push({ name, description, type, offset, size: 8, value: undefined });
         this.#offset = offset + 8;
         return this;
     }
@@ -63,14 +82,7 @@ export class BinaryFormatBuilder {
         const value = typeof length === 'string' ? this.#textEncoder.encode(length) : undefined;
         let size = value?.length || 0;
         size = typeof length === 'number' ? length : size;
-        this.#elements.push({
-            name,
-            description,
-            type: 'string',
-            offset: this.#offset,
-            size,
-            value,
-        });
+        this.#elements.push({ name, description, type: 'string', offset: this.#offset, size, value });
         this.#offset += size;
         return this;
     }
@@ -150,6 +162,8 @@ export interface DataElementWithRef extends DataElement {
     ref: FormatElement;
 }
 
+export type ByteAlignment = 1 | 2 | 4 | 8;
+
 export class BinaryDataBuilder {
     #dataElementMap: Map<string, DataElement> = new Map();
     #offset = 0;
@@ -187,7 +201,8 @@ export class BinaryDataBuilder {
         assert(formatElement, `Field Format not found: ${name}`);
         assert(formatElement.type === 'string', `Field is not a string: ${name}`);
 
-        this.#encoder.encodeInto(value, element.data);
+        const r = this.#encoder.encodeInto(value, element.data);
+        assert(r.read === value.length, `String too long for field ${name}: ${value}`);
         return this;
     }
 
@@ -205,8 +220,27 @@ export class BinaryDataBuilder {
         return this;
     }
 
-    addDataElement(data: Uint8Array): DataElement {
-        const offset = (this.#offset + 3) & ~3; // align to 4 bytes
+    /**
+     * Adjust the offset so it lands on the alignment boundary.
+     * 1 = byte align
+     * 2 = 16bit align
+     * 4 = 32bit align
+     * 8 = 64bit align
+     * @param alignment - the byte alignment
+     */
+    alignTo(alignment: ByteAlignment): void {
+        const aMask = alignment - 1;
+        this.#offset = (this.#offset + aMask) & ~aMask; // align to alignment bytes
+    }
+
+    /**
+     * Append a data element to the binary data.
+     * @param data - the data to add
+     * @returns the DataElement added
+     */
+    addDataElement(data: Uint8Array, alignment: ByteAlignment): DataElement {
+        this.alignTo(alignment);
+        const offset = this.#offset;
         const name = `data_${offset}`;
         const size = data.byteLength;
         const de: DataElement = { name, offset, size, data };
@@ -215,18 +249,62 @@ export class BinaryDataBuilder {
         return de;
     }
 
-    setPtrUint32Array(name: string, data: Uint32Array): BinaryDataBuilder {
+    /**
+     * Append the data and set the pointer to it.
+     * The Uint32Array  will be converted to the proper endianness if necessary.
+     * @param name - name of the pointer field
+     * @param data - the data to add
+     * @param alignment - the alignment for the data, default 4
+     * @returns this
+     */
+    setPtrUint32Array(name: string, data: Uint32Array, alignment: ByteAlignment = 4): BinaryDataBuilder {
+        return this.#setPtrData(name, 'ptrUint32Array', covertUint32ArrayToUint8Array(data, this.#useLE), alignment);
+    }
+
+    /**
+     * Append the data and set the pointer to it.
+     * @param name - name of the pointer field
+     * @param data - the data to add
+     * @param alignment - the alignment for the data, default 1
+     * @returns this
+     */
+    setPtrUint8Array(name: string, data: Uint8Array, alignment: ByteAlignment = 1): BinaryDataBuilder {
+        return this.#setPtrData(name, 'ptrUint8Array', data, alignment);
+    }
+
+    /**
+     * Append the string and set the pointer to it. It will be encoded as UTF-8.
+     * Note: the alignment is 1. Use alignTo() if you need a different alignment.
+     * @param name - name of the pointer field
+     * @param str - the data to add
+     * @returns this
+     */
+    setPtrString(name: string, str: string): BinaryDataBuilder {
+        return this.#setPtrData(name, 'ptrString', this.#encoder.encode(str), 1);
+    }
+
+    #setPtrData(
+        name: string,
+        fType: 'ptrUint32Array' | 'ptrUint8Array' | 'ptrString',
+        data: Uint8Array,
+        alignment: ByteAlignment,
+    ): this {
         const element = this.getDataElement(name);
         assert(element, `Field not found: ${name}`);
         const formatElement = element.ref;
         assert(formatElement, `Field Format not found: ${name}`);
-        assert(formatElement.type === 'ptrUint32Array', `Field is not a ptrUint32Array: ${name}`);
+        assert(formatElement.type === fType, `Field is not a ${fType}: ${name}`);
 
-        const de = this.addDataElement(covertUint32ArrayToUint8Array(data, this.#useLE));
-        const view = new DataView(element.data.buffer, element.data.byteOffset, element.data.byteLength);
-        view.setUint32(0, de.offset, this.#useLE);
-        view.setUint32(4, de.size, this.#useLE);
+        const de = this.addDataElement(data, alignment);
+        this.#setPtr(element, de.offset, de.size);
         return this;
+    }
+
+    #setPtr(element: DataElement, dataOffset: number, dataLength: number): void {
+        assert(element.data.byteLength >= 8, `Pointer data too small: ${element.name}`);
+        const view = new DataView(element.data.buffer, element.data.byteOffset, element.data.byteLength);
+        view.setUint32(0, dataOffset, this.#useLE);
+        view.setUint32(4, dataLength, this.#useLE);
     }
 
     get offset(): number {
@@ -297,13 +375,28 @@ export class BinaryDataReader {
         this.#useLE = endian === 'LE';
     }
 
+    /**
+     * Get a string from the data.
+     * It will decode the string as UTF-8 from the following field types: 'string', 'ptrString', 'ptrUint8Array'.
+     * @param name - name of the string field
+     * @returns string value
+     */
     getString(name: string): string {
         const element = this.getDataElement(name);
         const formatElement = element.ref;
-        assert(formatElement.type === 'string', `Field is not a string: ${name}`);
-        return this.#decoder.decode(element.data);
+        if (formatElement.type === 'string') {
+            return this.#decoder.decode(element.data);
+        }
+        assert(knownStringTypes.has(formatElement.type), `Field is not a string: ${name}`);
+        const strData = this.#getPtrData(element);
+        return this.#decoder.decode(strData);
     }
 
+    /**
+     * Get a uint32 from the data.
+     * @param name - name of the uint32 field
+     * @returns number value
+     */
     getUint32(name: string): number {
         const element = this.getDataElement(name);
         const formatElement = element.ref;
@@ -312,14 +405,17 @@ export class BinaryDataReader {
         return view.getUint32(0, this.#useLE);
     }
 
+    /**
+     * Gets Uint32Array data from a pointer field.
+     * Note: The returned Uint32Array may be a view of the underlying data.
+     * If the endianness does not match, a copy will be made.
+     * @param name - name of the field
+     * @returns Uint32Array value
+     */
     getPtrUint32Array(name: string): Uint32Array {
         const element = this.getDataElement(name);
-        const formatElement = element.ref;
-        assert(formatElement.type === 'ptrUint32Array', `Field is not a ptrUint32Array: ${name}`);
-        const view = new DataView(element.data.buffer, element.data.byteOffset, element.data.byteLength);
-        const offset = view.getUint32(0, this.#useLE);
-        const length = view.getUint32(4, this.#useLE);
-        const arrData = this.data.subarray(offset, offset + length);
+        assert(element.ref.type === 'ptrUint32Array', `Field is not a ptrUint32Array: ${name}`);
+        const arrData = this.#getPtrData(element);
         const rawData32 = new Uint32Array(arrData.buffer, arrData.byteOffset, arrData.byteLength / 4);
         if (isLittleEndian === this.#useLE) {
             return rawData32;
@@ -328,6 +424,44 @@ export class BinaryDataReader {
         return convertUint32ArrayEndiannessInPlace(data);
     }
 
+    /**
+     * Gets Uint8Array data from a pointer field.
+     * Note: The returned Uint8Array is a view of the underlying data.
+     * @param name - name of the field
+     * @returns Uint8Array value
+     */
+    getPtrUint8Array(name: string): Uint8Array {
+        const element = this.getDataElement(name);
+        assert(element.ref.type === 'ptrUint8Array', `Field is not a ptrUint8Array: ${name}`);
+        return this.#getPtrData(element);
+    }
+
+    /**
+     * Gets string data from a pointer field.
+     * @param name - name of the field
+     * @returns string value
+     */
+    getPtrString(name: string): string {
+        const element = this.getDataElement(name);
+        assert(element.ref.type === 'ptrString', `Field is not a ptrString: ${name}`);
+        const strData = this.#getPtrData(element);
+        return this.#decoder.decode(strData);
+    }
+
+    #getPtrData(element: DataElementWithRef): Uint8Array {
+        const formatElement = element.ref;
+        assert(formatElement.type.startsWith('ptr'), `Field is not a ptr: ${element.name} (${formatElement.type})`);
+        const view = new DataView(element.data.buffer, element.data.byteOffset, element.data.byteLength);
+        const offset = view.getUint32(0, this.#useLE);
+        const length = view.getUint32(4, this.#useLE);
+        return this.data.subarray(offset, offset + length);
+    }
+
+    /**
+     * Get the Element information by name
+     * @param name - name of the field
+     * @returns DataElementWithRef
+     */
     getDataElement(name: string): DataElementWithRef {
         const element = this.format.getField(name);
         assert(element, `Field not found: ${name}`);

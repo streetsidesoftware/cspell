@@ -247,12 +247,12 @@ export class TrieBlob implements TrieData {
     }
 
     encodeBin(): Uint8Array {
-        return encodeTrieBlobToBTrie({ nodes: this.nodes });
+        return encodeTrieBlobToBTrie({ nodes: this.nodes, info: this.info });
     }
 
     static decodeBin(blob: Uint8Array): TrieBlob {
         const info = decodeTrieBlobToBTrie(blob);
-        const trieBlob = new TrieBlob(info.nodes, defaultTrieInfo);
+        const trieBlob = new TrieBlob(info.nodes, info.info ?? defaultTrieInfo);
         // console.log('decodeBin: %o', trieBlob.toJSON());
         return trieBlob;
     }
