@@ -3,7 +3,7 @@ Repository: gitbucket/gitbucket
 Url: "https://github.com/gitbucket/gitbucket.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 413, Issues found: 1898 in 397 files.
+ CSpell: Files checked: 413, Issues found: 1899 in 397 files.
  exit code: 1
 README.md:83:88     - Unknown word (MVCC)       -- configuration, remove `;MVCC=true` from `url`.
 build.sbt:21:4      - Unknown word (scalafmt)   -- // scalafmtOnCompile := true
@@ -143,9 +143,10 @@ src/main/scala/gitbucket/core/controller/AccountController.scala:76:58     - Unk
 src/main/scala/gitbucket/core/controller/ControllerBase.scala:158:68    - Unknown word (mobilephone) -- smartphone" || category == "mobilephone"
 src/main/scala/gitbucket/core/controller/ControllerBase.scala:241:51    - Unknown word (nosniff)     -- Content-Type-Options", "nosniff")
 src/main/scala/gitbucket/core/controller/ControllerBase.scala:315:51    - Unknown word (Charsets)    -- toString(in, StandardCharsets.UTF_8)
-src/main/scala/gitbucket/core/controller/IssuesController.scala:378:40    - Unknown word (customfield) -- owner/:repository/issues/customfield_validation/:fieldId
-src/main/scala/gitbucket/core/controller/IssuesController.scala:407:36    - Unknown word (batchedit)   -- owner/:repository/issues/batchedit/state")(writableUsersOnly
-src/main/scala/gitbucket/core/controller/IssuesController.scala:497:66    - Unknown word (octicon)     -- isPullRequest) "<i class='octicon octicon-git-pull-request
+src/main/scala/gitbucket/core/controller/IndexController.scala:95:13     - Unknown word (renderable) -- get("/_is_renderable") {
+src/main/scala/gitbucket/core/controller/IssuesController.scala:383:40    - Unknown word (customfield) -- owner/:repository/issues/customfield_validation/:fieldId
+src/main/scala/gitbucket/core/controller/IssuesController.scala:412:36    - Unknown word (batchedit)   -- owner/:repository/issues/batchedit/state")(writableUsersOnly
+src/main/scala/gitbucket/core/controller/IssuesController.scala:502:66    - Unknown word (octicon)     -- isPullRequest) "<i class='octicon octicon-git-pull-request
 src/main/scala/gitbucket/core/controller/PullRequestsController.scala:206:41    - Unknown word (mergeguide) -- repository/pull/:id/mergeguide")(referrersOnly { repository
 src/main/scala/gitbucket/core/controller/PullRequestsController.scala:556:46    - Unknown word (mergecheck) -- repository/compare/*...*/mergecheck")(readableUsersOnly
 src/main/scala/gitbucket/core/controller/RepositorySettingsController.scala:179:9     - Unknown word (protecteions) -- val protecteions = getProtectedBranchList
@@ -164,7 +165,6 @@ src/main/scala/gitbucket/core/controller/api/ApiRepositoryContentsControllerBase
 src/main/scala/gitbucket/core/model/AccountWebHook.scala:14:45     - Unknown word (CTYPE)      -- WebHookContentType]("CTYPE")
 src/main/scala/gitbucket/core/model/AccountWebHook.scala:7:55      - Unknown word (whct)       -- WebHookContentType, String](whct => whct.code, code
 src/main/scala/gitbucket/core/model/WebHook.scala:34:37     - Unknown word (gollum)     -- Gollum extends Event("gollum")
-src/main/scala/gitbucket/core/plugin/PluginRegistry.scala:92:7      - Unknown word (renderable) -- def renderableExtensions: Seq[String
 src/main/scala/gitbucket/core/service/AccountService.scala:253:35    - Unknown word (devnull)    -- mailAddress = groupName + "@devnull",
 src/main/scala/gitbucket/core/service/IssuesService.scala:680:31    - Unknown word (unassignment) -- TODO Notify plugins of unassignment as doing in registerIssueAssi
 src/main/scala/gitbucket/core/service/OpenIDConnectService.scala:217:6     - Unknown word (HMAC)       -- "HMAC" -> Family.HMAC_SHA
@@ -187,8 +187,8 @@ src/main/scala/gitbucket/core/util/LDAPUtil.scala:135:46    - Unknown word (JSSE
 src/main/scala/gitbucket/core/util/LDAPUtil.scala:143:32    - Unknown word (LDAPJSSE)   -- new LDAPConnection(new LDAPJSSESecureSocketFactory(
 src/main/scala/gitbucket/core/util/StringUtil.scala:30:62     - Unknown word (Hmac)       -- getInstance("PBKDF2WithHmacSHA256")
 src/main/scala/gitbucket/core/util/TextAvatarUtil.scala:16:17     - Unknown word (Blightness) -- private val bgBlightness = 0.73f
-src/main/scala/gitbucket/core/view/helpers.scala:490:36    - Unknown word (inlinediff) -- <table class=\"diff inlinediff\">")
-src/main/scala/gitbucket/core/view/helpers.scala:493:41    - Unknown word (oldline)    -- <th class="line-num oldline ${line.`type`}">"""
+src/main/scala/gitbucket/core/view/helpers.scala:501:36    - Unknown word (inlinediff) -- <table class=\"diff inlinediff\">")
+src/main/scala/gitbucket/core/view/helpers.scala:504:41    - Unknown word (oldline)    -- <th class="line-num oldline ${line.`type`}">"""
 src/main/twirl/gitbucket/core/account/creategroup.scala.html:7:38      - Unknown word (groupform)  -- gitbucket.core.account.html.groupform(None, members, false
 src/main/twirl/gitbucket/core/account/edit.scala.html:55:45     - Unknown word (uploadavatar) -- gitbucket.core.helper.html.uploadavatar(Some(account))
 src/main/twirl/gitbucket/core/account/edit.scala.html:75:9      - Unknown word (pwval)        -- let pwval = $('#password').val
