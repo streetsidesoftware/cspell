@@ -9,8 +9,8 @@ import { decodeTrieBlobToBTrie, encodeTrieBlobToBTrie } from './TrieBlobEncoder.
 import { TrieBlobInternals, TrieBlobIRoot } from './TrieBlobIRoot.ts';
 import { encodeTextToUtf8_32, Utf8Accumulator } from './Utf8.ts';
 
-const NodeHeaderNumChildrenBits = 8;
-const NodeHeaderNumChildrenShift = 0;
+const NodeHeaderNumChildrenBits = 8 as const;
+const NodeHeaderNumChildrenShift = 0 as const;
 
 export class TrieBlob implements TrieData {
     readonly info: Readonly<TrieInfo>;
@@ -29,6 +29,8 @@ export class TrieBlob implements TrieData {
     readonly hasCompoundWords: boolean;
     readonly hasNonStrictWords: boolean;
     readonly nodes: Uint32Array;
+    readonly NodeMaskNumChildren: number;
+    readonly NodeChildRefShift: number;
 
     constructor(nodes: Uint32Array, info: PartialTrieInfo) {
         this.nodes = nodes;
@@ -42,6 +44,8 @@ export class TrieBlob implements TrieData {
         this.hasForbiddenWords = !!this.#forbidIdx;
         this.hasCompoundWords = !!this.#compoundIdx;
         this.hasNonStrictWords = !!this.#nonStrictIdx;
+        this.NodeMaskNumChildren = TrieBlob.NodeMaskNumChildren;
+        this.NodeChildRefShift = TrieBlob.NodeChildRefShift;
     }
 
     has(word: string): boolean {
@@ -128,21 +132,23 @@ export class TrieBlob implements TrieData {
      * @returns
      */
     #findNode(nodeIdx: number, text: string): number | undefined {
+        // Using magic numbers in #findNode improves the performance by about 10%.
         const p = { text, offset: 0, bytes: 0 };
+
+        const _nodes = this.nodes;
+        const _nodes8 = this.#nodes8;
 
         for (; p.offset < p.text.length; ) {
             const code = encodeTextToUtf8_32(p);
 
-            const NodeMaskNumChildren = TrieBlob.NodeMaskNumChildren;
-            const NodeChildRefShift = TrieBlob.NodeChildRefShift;
-            const nodes = this.nodes;
-            const nodes8 = this.#nodes8;
+            const nodes = _nodes;
+            const nodes8 = _nodes8;
             let node = nodes[nodeIdx];
             let s = (p.bytes - 1) * 8;
 
             for (let mask = 0xff << s; mask; mask >>>= 8, s -= 8) {
                 const charVal = (code & mask) >>> s;
-                const count = node & NodeMaskNumChildren;
+                const count = node & 0xff; // TrieBlob.NodeMaskNumChildren
                 const idx4 = nodeIdx << 2;
                 // Binary search for the character in the child nodes.
                 if (count > 15) {
@@ -158,7 +164,7 @@ export class TrieBlob implements TrieData {
                         }
                     }
                     if (i > pEnd || nodes8[i] !== charVal) return undefined;
-                    nodeIdx = nodes[i >> 2] >>> NodeChildRefShift;
+                    nodeIdx = nodes[i >> 2] >>> 8; // TrieBlob.NodeChildRefShift
                     node = nodes[nodeIdx];
                     continue;
                 }
@@ -169,7 +175,7 @@ export class TrieBlob implements TrieData {
                     }
                 }
                 if (i <= idx4) return undefined;
-                nodeIdx = nodes[i >> 2] >>> NodeChildRefShift;
+                nodeIdx = nodes[i >> 2] >>> 8; // TrieBlob.NodeChildRefShift
                 node = nodes[nodeIdx];
             }
         }
