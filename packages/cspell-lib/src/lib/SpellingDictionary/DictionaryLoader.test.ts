@@ -49,7 +49,7 @@ describe('Validate DictionaryLoader', () => {
     }
     // cspell:ignore aujourd’hui
     const csharpDictExt = require.resolve('@cspell/dict-csharp/cspell-ext.json');
-    const csharp = path.join(path.dirname(csharpDictExt), 'csharp.txt.gz');
+    const csharp = path.join(path.dirname(csharpDictExt), 'dict/csharp.txt.gz');
     test.each`
         testCase            | file                          | options          | word               | maxAge       | hasWord  | hasErrors
         ${'sample words'}   | ${sample('words.txt')}        | ${{}}            | ${'apple'}         | ${1}         | ${true}  | ${false}
