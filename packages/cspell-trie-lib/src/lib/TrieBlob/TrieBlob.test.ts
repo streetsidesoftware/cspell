@@ -89,6 +89,25 @@ describe('TrieBlob encode/decode', async () => {
         expect(words.some((w) => !r.has(w))).toBe(false);
     });
 
+    test('node count', () => {
+        const n = countNodesMatching(trieBlob, 1, 0xff);
+        const lengths = countNodeLengths(trieBlob);
+        const refCounts = countNodeReferences(trieBlob);
+
+        // A bit of analyze about the nodes.
+        // We want to get an idea of the distribution of node sizes and references.
+
+        // // How many nodes have only 1 child? Reducing the size of these nodes would help a lot. Approx 30%
+        // console.log(
+        //     `Total nodes: ${trieBlob.nodes.length}, Nodes with 1 child: ${n} (${((n / trieBlob.nodes.length) * 100).toFixed(2)}%)`,
+        // );
+        // console.log('Node lengths distribution: %o', lengths);
+        // console.log('Top 100 node references: %o', new Map([...refCounts.entries()].slice(0, 100)));
+        expect(n).toBeLessThan(trieBlob.nodes.length / 2);
+        expect(lengths.size).toBeGreaterThan(10);
+        expect(refCounts.size).toBeGreaterThan(100);
+    });
+
     test('encode hexDump', () => {
         const words = ['apple', 'banana', 'grape', 'orange', 'strawberry'];
         const ft = FastTrieBlobBuilder.fromWordList(words);
@@ -97,7 +116,59 @@ describe('TrieBlob encode/decode', async () => {
         expect([...r.words()]).toEqual(words);
         expect(hexDump(bin)).toMatchSnapshot();
     });
+
+    test('#findNode magic numbers', () => {
+        // Verify that the magic numbers used in #findNode are correct.
+        expect(TrieBlob.NodeMaskNumChildren, 'TrieBlob.NodeMaskNumChildren has changed, update #findNode.').toBe(0xff);
+        expect(TrieBlob.NodeChildRefShift, 'TrieBlob.NodeChildRefShift has changed, update #findNode.').toBe(8);
+    });
 });
+
+function countNodesMatching(blob: TrieBlob, pattern: number, mask: number): number {
+    let count = 0;
+    const nodes = blob.nodes;
+    for (let i = 0; i < nodes.length; i++) {
+        if ((nodes[i] & mask) === pattern) {
+            count++;
+        }
+    }
+    return count;
+}
+
+function countNodeLengths(blob: TrieBlob): Map<number, [number, number]> {
+    const lengths = new Map<number, number>();
+    const nodes = blob.nodes;
+    for (let i = 0; i < nodes.length; i++) {
+        const node = nodes[i];
+        const numChildren = node & TrieBlob.NodeMaskNumChildren;
+        i += numChildren;
+        lengths.set(numChildren, (lengths.get(numChildren) || 0) + 1);
+    }
+
+    let cnt = 0;
+    const entries = [...lengths.entries()]
+        .sort((a, b) => a[0] - b[0])
+        .map(([length, count]) => [length, [count, (cnt += count)]] as [number, [number, number]]);
+    return new Map(entries);
+}
+
+function countNodeReferences(blob: TrieBlob): Map<number, number> {
+    const refs = new Map<number, number>();
+    const nodes = blob.nodes;
+    for (let i = 0; i < nodes.length; i++) {
+        const node = nodes[i];
+        const numChildren = node & TrieBlob.NodeMaskNumChildren;
+        for (let j = 1; j <= numChildren; j++) {
+            const childRef = nodes[i + j] >>> TrieBlob.NodeChildRefShift;
+            refs.set(childRef, (refs.get(childRef) || 0) + 1);
+        }
+        i += numChildren;
+    }
+
+    const entries = [...refs.entries()].sort((a, b) => b[1] - a[1]);
+
+    return new Map(entries);
+}
 
 function makeCompoundable(word: string): string {
     return `+${word}+`;
