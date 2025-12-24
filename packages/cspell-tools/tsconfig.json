@@ -1,8 +1,9 @@
 {
     "extends": "../../tsconfig.esm.json",
     "compilerOptions": {
-        "noEmit": false,
+        "noEmit": true,
         "exactOptionalPropertyTypes": true, // make this true
+        "allowImportingTsExtensions": true,
         "declaration": true,
         "isolatedDeclarations": false,
         "types": ["node"],

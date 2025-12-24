@@ -14,6 +14,7 @@ export {
     writeToFileIterableP,
 } from './file/index.js';
 export type { BufferEncoding, TextEncoding } from './models/BufferEncoding.js';
+export type { FileReference, FileResource, TextFileResource } from './models/FileResource.js';
 export type { Stats } from './models/Stats.js';
 export { FileType as VFileType } from './models/Stats.js';
 export { encodeDataUrl, toDataUrl } from './node/dataUrl.js';

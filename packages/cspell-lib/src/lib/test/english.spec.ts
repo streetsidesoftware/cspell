@@ -4,10 +4,13 @@ import { describe, expect, test } from 'vitest';
 import * as getDictionary from '../getDictionary.js';
 import * as cspell from '../index.js';
 import { validateText } from '../validator.js';
+import { makeBTrieForDictionary } from './makeBTrieForDictionary.js';
 
 const timeout = 10_000;
 
-describe('Validate English', () => {
+describe('Validate English', async () => {
+    await makeBTrieForDictionary('@cspell/dict-en_us');
+
     test('Tests suggestions', { timeout }, async () => {
         const ext = '.txt';
         const languageIds = cspell.getLanguagesForExt(ext);

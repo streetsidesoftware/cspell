@@ -8,7 +8,7 @@ import {
     createSpellingDictionary,
     createSpellingDictionaryFromTrieFile,
 } from 'cspell-dictionary';
-import type { Stats, VFileSystem } from 'cspell-io';
+import type { Stats, TextFileResource, VFileSystem } from 'cspell-io';
 import { compareStats, toFileURL, urlBasename } from 'cspell-io';
 
 import type {
@@ -57,7 +57,8 @@ interface CacheEntry {
 }
 
 interface Reader {
-    read(filename: URL): Promise<string>;
+    read(filename: URL): Promise<Uint8Array>;
+    readText(filename: URL): Promise<string>;
     readLines(filename: URL): Promise<string[]>;
 }
 
@@ -160,7 +161,7 @@ export class DictionaryLoader {
     private loadEntry(fileOrUri: string | URL, options: LoadFileOptions, now = Date.now()): CacheEntry {
         const url = toFileURL(fileOrUri);
         options = this.normalizeOptions(url, options);
-        const pDictionary = load(this.reader, toFileURL(fileOrUri), options).catch((e) =>
+        const pDictionary = load(this.reader, url, options).catch((e) =>
             createFailedToLoadDictionary(
                 options.name,
                 fileOrUri,
@@ -168,7 +169,7 @@ export class DictionaryLoader {
                 options,
             ),
         );
-        const pStat = this.getStat(fileOrUri);
+        const pStat = this.getStat(url);
         const pending = Promise.all([pDictionary, pStat]);
         const sig = now + Math.random();
         const entry: CacheEntry = {
@@ -230,13 +231,22 @@ export class DictionaryLoader {
 }
 
 function toReader(fs: VFileSystem): Reader {
-    async function readFile(url: URL): Promise<string> {
-        return (await fs.readFile(url)).getText();
+    function readResource(url: URL): Promise<TextFileResource> {
+        return fs.readFile(url);
+    }
+
+    async function readText(url: URL): Promise<string> {
+        return (await readResource(url)).getText();
+    }
+
+    async function read(url: URL): Promise<Uint8Array<ArrayBuffer>> {
+        return (await readResource(url)).getBytes();
     }
 
     return {
-        read: readFile,
-        readLines: async (filename) => toLines(await readFile(filename)),
+        read,
+        readText,
+        readLines: async (filename) => toLines(await readText(filename)),
     };
 }
 
@@ -257,8 +267,12 @@ function determineType(uri: URL, opts: Pick<LoadOptions, 'type'>): LoaderType {
     return regTrieTest.test(uri.pathname) ? 'T' : defType;
 }
 
-function load(reader: Reader, uri: URL, options: LoadOptions): Promise<SpellingDictionary> {
+async function load(reader: Reader, uri: URL, options: LoadOptions): Promise<SpellingDictionary> {
     const type = determineType(uri, options);
+    const bTrie = await tryToLoadBTrie(reader, uri, options);
+    if (bTrie) {
+        return bTrie;
+    }
     const loader = loaders[type] || loaders.default;
     return loader(reader, uri, options);
 }
@@ -309,4 +323,41 @@ async function loadTrie(reader: Reader, filename: URL, options: LoadOptions) {
 
 function toLines(content: string): string[] {
     return content.split(/\n|\r\n|\r/);
+}
+
+let useBTrie: boolean = true;
+
+export function toggleUseBTrie(): boolean {
+    useBTrie = !useBTrie;
+    return useBTrie;
+}
+
+const regexpDictEndings = /\.(?:txt|trie)(?:\.gz)?$/i;
+
+async function loadBTrie(reader: Reader, filename: URL, options: LoadOptions): Promise<SpellingDictionary> {
+    const data = await reader.read(filename);
+    return createSpellingDictionaryFromTrieFile(data, options.name, filename.href, options);
+}
+
+async function tryToLoadBTrie(
+    reader: Reader,
+    filename: URL,
+    options: LoadOptions,
+): Promise<SpellingDictionary | undefined> {
+    if (!useBTrie) return undefined;
+    const pathname = filename.pathname;
+    if (!pathname.includes('/node_modules/')) return undefined;
+    if (!regexpDictEndings.test(pathname)) return undefined;
+    const pathnameBTrie = pathname.replace(regexpDictEndings, '.btrie');
+    const pathnameBTrieGz = pathnameBTrie + '.gz';
+    const searchPaths = [pathnameBTrieGz, pathnameBTrie];
+
+    for (const p of searchPaths) {
+        const url = new URL(filename);
+        url.pathname = p;
+        const dict = loadBTrie(reader, url, options).catch(() => undefined);
+        if (dict) return dict;
+    }
+
+    return undefined;
 }

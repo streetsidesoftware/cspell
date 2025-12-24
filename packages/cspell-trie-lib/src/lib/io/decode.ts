@@ -1,16 +1,25 @@
+import { decodeBTrie, isBTrieData } from '../TrieBlob/index.ts';
 import type { TrieData } from '../TrieData.ts';
 import { TrieNodeTrie } from '../TrieNode/TrieNodeTrie.ts';
+import { toUint8Array } from '../utils/rawData.ts';
 import * as iv1 from './importExportV1.ts';
 import * as iv2 from './importExportV2.ts';
 import * as iv4 from './importExportV4.ts';
 import { importTrieV3AsFastTrieBlob } from './importV3FastBlob.ts';
 
-export function decodeTrieData(raw: string | ArrayBufferLike | Uint8Array): TrieData {
+export function decodeTrieData(raw: string | ArrayBufferView | Uint8Array): TrieData {
     if (typeof raw === 'string') {
         return decodeStringFormat(raw);
     }
+
+    const data = toUint8Array(raw);
+
+    if (isBTrieData(data)) {
+        return decodeBTrie(data);
+    }
+
     const decoder = new TextDecoder();
-    const text = raw instanceof Uint8Array ? decoder.decode(raw) : decoder.decode(new Uint8Array(raw));
+    const text = decoder.decode(data);
     return decodeStringFormat(text);
 }
 

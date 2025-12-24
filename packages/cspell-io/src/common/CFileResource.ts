@@ -1,7 +1,7 @@
 import { assert } from '../errors/assert.js';
 import type { BufferEncoding } from '../models/BufferEncoding.js';
 import type { FileReference, FileResource, TextFileResource } from '../models/FileResource.js';
-import { decode, encodeString, isGZipped } from './encode-decode.js';
+import { decode, decompress, encodeString, isGZipped } from './encode-decode.js';
 
 export interface CFileResourceJson {
     url: string;
@@ -12,41 +12,53 @@ export interface CFileResourceJson {
 }
 
 export class CFileResource implements TextFileResource {
-    private _text?: string;
     readonly baseFilename?: string | undefined;
-    private _gz?: boolean | undefined;
+    readonly url: URL;
+    readonly content: string | Uint8Array<ArrayBuffer>;
+    readonly encoding: BufferEncoding | undefined;
+    #gz?: boolean | undefined;
+    #text?: string;
+    #data?: Uint8Array<ArrayBuffer>;
 
     constructor(
-        readonly url: URL,
-        readonly content: string | ArrayBufferView,
-        readonly encoding: BufferEncoding | undefined,
+        url: URL,
+        content: string | Uint8Array<ArrayBuffer>,
+        encoding: BufferEncoding | undefined,
         baseFilename: string | undefined,
         gz: boolean | undefined,
     ) {
+        this.url = url;
+        this.content = content;
+        this.encoding = encoding;
         this.baseFilename = baseFilename ?? ((url.protocol !== 'data:' && url.pathname.split('/').pop()) || undefined);
-        this._gz = gz;
+        this.#gz = gz;
     }
 
     get gz(): boolean {
-        if (this._gz !== undefined) return this._gz;
+        if (this.#gz !== undefined) return this.#gz;
         if (this.url.pathname.endsWith('.gz')) return true;
         if (typeof this.content === 'string') return false;
         return isGZipped(this.content);
     }
 
     getText(encoding?: BufferEncoding): string {
-        if (this._text !== undefined) return this._text;
+        if (this.#text !== undefined) return this.#text;
         const text = typeof this.content === 'string' ? this.content : decode(this.content, encoding ?? this.encoding);
-        this._text = text;
+        this.#text = text;
         return text;
     }
 
-    getBytes(): Uint8Array {
-        const arrayBufferview =
-            typeof this.content === 'string' ? encodeString(this.content, this.encoding) : this.content;
-        return arrayBufferview instanceof Uint8Array
-            ? arrayBufferview
-            : new Uint8Array(arrayBufferview.buffer, arrayBufferview.byteOffset, arrayBufferview.byteLength);
+    async getBytes(unzip?: boolean): Promise<Uint8Array<ArrayBuffer>> {
+        if (unzip !== false && this.#data !== undefined) return this.#data;
+        if (typeof this.content === 'string') {
+            this.#data = encodeString(this.content, this.encoding);
+            return this.#data;
+        }
+        if (unzip ?? isGZipped(this.content)) {
+            this.#data = await decompress(this.content, 'gzip');
+            return this.#data;
+        }
+        return this.content;
     }
 
     public toJson(): CFileResourceJson {
@@ -64,18 +76,18 @@ export class CFileResource implements TextFileResource {
     }
 
     static from(fileResource: FileResource): CFileResource;
-    static from(fileReference: FileReference, content: string | ArrayBufferView): CFileResource;
-    static from(fileReference: FileReference | URL, content: string | ArrayBufferView): CFileResource;
+    static from(fileReference: FileReference, content: string | Uint8Array<ArrayBuffer>): CFileResource;
+    static from(fileReference: FileReference | URL, content: string | Uint8Array<ArrayBuffer>): CFileResource;
     static from(
         url: URL,
-        content: string | ArrayBufferView,
+        content: string | Uint8Array<ArrayBuffer>,
         encoding?: BufferEncoding | undefined,
         baseFilename?: string | undefined,
         gz?: boolean,
     ): CFileResource;
     static from(
         urlOrFileResource: FileResource | FileReference | URL,
-        content?: string | ArrayBufferView,
+        content?: string | Uint8Array<ArrayBuffer>,
         encoding?: BufferEncoding,
         baseFilename?: string | undefined,
         gz?: boolean,

@@ -23,15 +23,15 @@
     "!**/*.map"
   ],
   "scripts": {
-    "build": "tsdown",
+    "build": "tsdown && pnpm build:tsc",
+    "build:tsc": "tsc -p .",
     "build:watch": "tsdown --watch",
     "watch": "pnpm build:watch",
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "clean-build": "pnpm run clean && pnpm run build",
     "coverage": "vitest run --coverage --pool=forks",
     "test-watch": "vitest",
-    "test:build": "tsc -p .",
-    "test": "pnpm test:build && vitest run --pool=forks"
+    "test": "vitest run --pool=forks"
   },
   "repository": {
     "type": "git",

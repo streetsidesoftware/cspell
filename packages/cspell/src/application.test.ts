@@ -188,7 +188,7 @@ describe('Validate the Application', () => {
         expect(foundIn).toContainEqual(
             expect.objectContaining({
                 dictName: 'en_us',
-                dictSource: expect.stringContaining('en_US.trie.gz'),
+                dictSource: expect.stringMatching(/en_US.(trie|btrie).gz/),
             }),
         );
         expect(foundIn.map((d) => d.dictName)).toEqual(expect.arrayContaining(['en-gb', 'en_us', 'companies']));

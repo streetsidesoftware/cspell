@@ -1,2 +1,3 @@
 export { TrieBlob } from './TrieBlob.ts';
-export { encodeTrieDataToBTrie } from './trieDataEncoder.ts';
+export { isBTrieData } from './TrieBlobEncoder.ts';
+export { decodeBTrie, encodeTrieDataToBTrie } from './trieDataEncoder.ts';

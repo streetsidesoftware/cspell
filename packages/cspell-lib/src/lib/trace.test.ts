@@ -123,7 +123,7 @@ describe('Verify trace', () => {
             expect.arrayContaining([
                 expect.objectContaining({
                     dictName: 'en_us',
-                    dictSource: expect.stringContaining('en_US.trie.gz'),
+                    dictSource: expect.stringMatching(/en_US.(trie|btrie).gz/),
                 }),
             ]),
         );
