@@ -6,14 +6,18 @@ targets:
       - ../dicts/colors.txt
     format: plaintext
     targetDirectory: '${cwd}/dict'
+
   - name: cities
     sources:
       - ../dicts/cities.txt
     format: plaintext
     targetDirectory: '${cwd}/dict'
+    bTrie: true
+
   - name: code
     sources:
       - filename: ../dicts/sampleCodeDic.txt
         keepRawCase: true
     format: plaintext
     targetDirectory: '${cwd}/dict'
+    bTrie: false

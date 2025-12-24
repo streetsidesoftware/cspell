@@ -154,6 +154,10 @@
           ],
           "description": "Words in the `allowedSplitWords` are considered correct and can be used as a basis for splitting compound words.\n\nIf entries can be split so that all the words in the entry are allowed, then only the individual words are added, otherwise the entire entry is added. This is to prevent misspellings in CamelCase words from being introduced into the dictionary."
         },
+        "bTrie": {
+          "description": "Generate a `.btrie.gz` for the target.",
+          "type": "boolean"
+        },
         "compress": {
           "default": false,
           "description": "Setting this value to true will create a `.gz` dictionary file. Use `keepUncompressed` to also keep an uncompressed version.",
