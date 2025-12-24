@@ -17,12 +17,12 @@ import { setLogger } from './logger.ts';
 import { readTextFile } from './readers/readTextFile.ts';
 import type { SourceReaderOptions } from './SourceReader.ts';
 import { streamSourceWordsFromFile } from './streamSourceWordsFromFile.ts';
-import type { CompileTrieOptions } from './wordListCompiler.ts';
 import {
     __testing__,
     compileTrieToTarget as _compileTrie,
     compileWordListToTarget as _compileWordList,
 } from './wordListCompiler.js';
+import type { CompileTrieOptions } from './wordListCompiler.ts';
 import { normalizeTargetWords } from './wordListParser.ts';
 import { defaultAllowedSplitWords } from './WordsCollection.ts';
 
