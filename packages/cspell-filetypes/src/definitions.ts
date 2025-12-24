@@ -79,7 +79,7 @@ export const definitions: FileTypeDefinitions = [
     { id: 'java', extensions: ['.jav', '.java'] },
     { id: 'javascript', extensions: ['.cjs', '.es6', '.js', '.mjs', '.pac'], filenames: ['jakefile'] },
     { id: 'javascriptreact', extensions: ['.jsx'] },
-    { id: 'jinja', extensions: ['.jinja'] },
+    { id: 'jinja', extensions: ['.j2', '.jinja', '.jinja2'] },
     {
         id: 'json',
         extensions: [
