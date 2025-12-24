@@ -9,7 +9,7 @@ import {
     reportCheckChecksumFile,
     reportChecksumForFiles,
     updateChecksumForFiles,
-} from './shasum.js';
+} from './shasum.ts';
 
 vi.mock('node:fs/promises', async () => {
     const fs: any = await vi.importActual('node:fs/promises');

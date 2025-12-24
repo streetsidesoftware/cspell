@@ -17,7 +17,7 @@ import {
     sampleWordsExt,
     smallSample,
     specialCharacters,
-} from './test/sampleData.js';
+} from './test/sampleData.ts';
 
 const sampleFile = resolveSamplePath('sampleV3.trie');
 

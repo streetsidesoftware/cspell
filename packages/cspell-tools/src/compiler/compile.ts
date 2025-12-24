@@ -13,7 +13,7 @@ import type {
     FilePath,
     FileSource,
     Target,
-} from '../config/index.js';
+} from '../config/index.ts';
 import { isFileListSource, isFilePath, isFileSource } from '../config/index.ts';
 import { checkShasumFile, updateChecksumForFiles } from '../shasum/index.ts';
 import { stringToRegExp } from '../util/textRegex.ts';

@@ -1,3 +1,3 @@
-export type { CompileRequest, CompileTargetOptions, RunConfig } from '../config/index.js';
-export { compile, compileTarget } from './compile.js';
-export { type Logger, setLogger } from './logger.js';
+export type { CompileRequest, CompileTargetOptions, RunConfig } from '../config/index.ts';
+export { compile, compileTarget } from './compile.ts';
+export { type Logger, setLogger } from './logger.ts';

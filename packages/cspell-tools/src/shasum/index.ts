@@ -1,2 +1,2 @@
-export { calcFileChecksum } from './checksum.js';
-export { checkShasumFile, updateChecksumForFiles } from './shasum.js';
+export { calcFileChecksum } from './checksum.ts';
+export { checkShasumFile, updateChecksumForFiles } from './shasum.ts';

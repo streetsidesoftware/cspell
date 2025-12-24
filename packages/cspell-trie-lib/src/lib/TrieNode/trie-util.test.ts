@@ -11,7 +11,7 @@ import {
     isCircular,
     iteratorTrieWords,
     validateTrie,
-} from './trie-util.js';
+} from './trie-util.ts';
 
 const oc = (obj: unknown) => expect.objectContaining(obj);
 

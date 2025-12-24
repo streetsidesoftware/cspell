@@ -15,7 +15,7 @@ import {
     isSuggestionResult,
     suggestionCollector,
     type SuggestionCollectorOptions,
-} from './suggestCollector.js';
+} from './suggestCollector.ts';
 import { genSuggestions, suggest } from './suggestTrieData.ts';
 
 describe('Validate Suggest', () => {
