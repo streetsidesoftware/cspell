@@ -3,7 +3,7 @@ import { gunzipSync } from 'node:zlib';
 
 import { decodeTrie, type ITrie } from 'cspell-trie-lib';
 
-import type { DictionaryReader } from './ReaderOptions.js';
+import type { DictionaryReader } from './ReaderOptions.ts';
 
 export async function trieFileReader(filename: string): Promise<DictionaryReader> {
     return TrieFileReader.create(filename);

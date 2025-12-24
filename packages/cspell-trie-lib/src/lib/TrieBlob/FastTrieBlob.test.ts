@@ -2,10 +2,10 @@ import { promises as fs } from 'node:fs';
 
 import { describe, expect, test } from 'vitest';
 
-import { createTrieRootFromList } from '../TrieNode/trie-util.js';
-import { walkerWordsITrie } from '../walker/index.js';
-import { FastTrieBlob } from './FastTrieBlob.js';
-import { FastTrieBlobBuilder } from './FastTrieBlobBuilder.js';
+import { createTrieRootFromList } from '../TrieNode/trie-util.ts';
+import { walkerWordsITrie } from '../walker/index.ts';
+import { FastTrieBlob } from './FastTrieBlob.ts';
+import { FastTrieBlobBuilder } from './FastTrieBlobBuilder.ts';
 
 const debug = false;
 

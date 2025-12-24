@@ -4,12 +4,12 @@ import * as path from 'node:path';
 import * as Commander from 'commander';
 import { afterEach, beforeAll, beforeEach, describe, expect, test, vi } from 'vitest';
 
-import * as app from './app.js';
-import { readTextFile } from './compiler/readers/readTextFile.js';
-import { getSystemFeatureFlags } from './FeatureFlags/index.js';
-import { compressFile } from './gzip/compressFiles.js';
-import { spyOnConsole } from './test/console.js';
-import { createTestHelper } from './test/TestHelper.js';
+import * as app from './app.ts';
+import { readTextFile } from './compiler/readers/readTextFile.ts';
+import { getSystemFeatureFlags } from './FeatureFlags/index.ts';
+import { compressFile } from './gzip/compressFiles.ts';
+import { spyOnConsole } from './test/console.ts';
+import { createTestHelper } from './test/TestHelper.ts';
 
 vi.mock('./gzip/compressFiles.js', async () => {
     const mod = await vi.importActual<typeof import('./gzip/compressFiles.js')>('./gzip/compressFiles.js');

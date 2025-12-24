@@ -2,18 +2,18 @@ import assert from 'node:assert';
 
 import { describe, expect, test } from 'vitest';
 
-import { readRawDictionaryFile, readTrieFromConfig } from '../../test/dictionaries.test.helper.js';
-import type { WeightMap } from '../distance/index.js';
-import { mapDictionaryInformationToWeightMap } from '../mappers/mapDictionaryInfoToWeightMap.js';
-import type { DictionaryInformation } from '../models/DictionaryInformation.js';
-import { clean } from '../utils/clean.js';
-import { startTimer } from '../utils/timer.js';
-import { CompoundWordsMethod } from '../walker/index.js';
-import type { SuggestionOptions } from './genSuggestionsOptions.js';
-import { genCompoundableSuggestions, suggest } from './suggest.js';
-import type { SuggestionCollectorOptions } from './suggestCollector.js';
-import { suggestionCollector } from './suggestCollector.js';
-import type { SuggestionResult } from './SuggestionTypes.js';
+import { readRawDictionaryFile, readTrieFromConfig } from '../../test/dictionaries.test.helper.ts';
+import type { WeightMap } from '../distance/index.ts';
+import { mapDictionaryInformationToWeightMap } from '../mappers/mapDictionaryInfoToWeightMap.ts';
+import type { DictionaryInformation } from '../models/DictionaryInformation.ts';
+import { clean } from '../utils/clean.ts';
+import { startTimer } from '../utils/timer.ts';
+import { CompoundWordsMethod } from '../walker/index.ts';
+import type { SuggestionOptions } from './genSuggestionsOptions.ts';
+import { genCompoundableSuggestions, suggest } from './suggest.ts';
+import type { SuggestionCollectorOptions } from './suggestCollector.ts';
+import { suggestionCollector } from './suggestCollector.ts';
+import type { SuggestionResult } from './SuggestionTypes.ts';
 
 function getTrie() {
     return readTrieFromConfig('@cspell/dict-en_us/cspell-ext.json');

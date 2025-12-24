@@ -2,9 +2,9 @@ import * as path from 'node:path';
 
 import { describe, expect, test } from 'vitest';
 
-import { test_dirname } from '../test/TestHelper.js';
-import { streamSourceWordsFromFile } from './streamSourceWordsFromFile.js';
-import { defaultAllowedSplitWords } from './WordsCollection.js';
+import { test_dirname } from '../test/TestHelper.ts';
+import { streamSourceWordsFromFile } from './streamSourceWordsFromFile.ts';
+import { defaultAllowedSplitWords } from './WordsCollection.ts';
 
 const _dirname = test_dirname(import.meta.url);
 

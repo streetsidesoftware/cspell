@@ -1,10 +1,10 @@
 import { describe, expect, test } from 'vitest';
 
-import { findWord } from '../ITrieNode/find.js';
-import { createTrieRootFromList } from '../TrieNode/trie-util.js';
-import { walkerWordsITrie } from '../walker/walker.js';
-import { FastTrieBlob } from './FastTrieBlob.js';
-import { FastTrieBlobBuilder } from './FastTrieBlobBuilder.js';
+import { findWord } from '../ITrieNode/find.ts';
+import { createTrieRootFromList } from '../TrieNode/trie-util.ts';
+import { walkerWordsITrie } from '../walker/walker.ts';
+import { FastTrieBlob } from './FastTrieBlob.ts';
+import { FastTrieBlobBuilder } from './FastTrieBlobBuilder.ts';
 
 describe('FastTrieBlob', () => {
     const words = ['one', 'two', 'three', 'four', 'walk', 'walking', 'walks', 'wall', 'walls', 'walled', 'café'];

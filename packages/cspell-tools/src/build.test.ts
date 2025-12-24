@@ -1,10 +1,10 @@
 import { beforeEach, describe, expect, test } from 'vitest';
 
-import { build } from './build.js';
-import { setLogger } from './compiler/index.js';
-import { readTextFile } from './compiler/readers/readTextFile.js';
-import { spyOnConsole } from './test/console.js';
-import { createTestHelper } from './test/TestHelper.js';
+import { build } from './build.ts';
+import { setLogger } from './compiler/index.ts';
+import { readTextFile } from './compiler/readers/readTextFile.ts';
+import { spyOnConsole } from './test/console.ts';
+import { createTestHelper } from './test/TestHelper.ts';
 
 const helper = createTestHelper(import.meta.url);
 

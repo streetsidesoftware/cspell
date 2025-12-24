@@ -2,10 +2,10 @@ import { promises as fs } from 'node:fs';
 
 import { describe, expect, test } from 'vitest';
 
-import { walkerWordsITrie } from '../walker/walker.js';
-import { createTrieBlob } from './createTrieBlob.js';
-import { FastTrieBlob } from './FastTrieBlob.js';
-import { FastTrieBlobBuilder } from './FastTrieBlobBuilder.js';
+import { walkerWordsITrie } from '../walker/walker.ts';
+import { createTrieBlob } from './createTrieBlob.ts';
+import { FastTrieBlob } from './FastTrieBlob.ts';
+import { FastTrieBlobBuilder } from './FastTrieBlobBuilder.ts';
 
 const sampleDirUrl = new URL('../../../Samples/', import.meta.url);
 const sampleWords: Promise<readonly string[]> = readWordsFile('emoji-sequences.txt');

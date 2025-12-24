@@ -1,2 +1,2 @@
-export { compress, compressFile, decompress, OSFlags } from './compressFiles.js';
-export { gzip } from './gzip.js';
+export { compress, compressFile, decompress, OSFlags } from './compressFiles.ts';
+export { gzip } from './gzip.ts';

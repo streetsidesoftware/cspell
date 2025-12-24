@@ -2,11 +2,11 @@ import { readFile } from 'node:fs/promises';
 
 import { describe, expect, test } from 'vitest';
 
-import { resolveSample } from '../../test/samples.js';
-import { consolidate } from '../consolidate.js';
-import * as Trie from '../index.js';
-import { iteratorTrieWords } from '../TrieNode/trie-util.js';
-import { importTrie, serializeTrie } from './importExportV1.js';
+import { resolveSample } from '../../test/samples.ts';
+import { consolidate } from '../consolidate.ts';
+import * as Trie from '../index.ts';
+import { iteratorTrieWords } from '../TrieNode/trie-util.ts';
+import { importTrie, serializeTrie } from './importExportV1.ts';
 
 describe('Import/Export', () => {
     test('tests serialize / deserialize', async () => {

@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { bufferLines } from './bufferLines.js';
+import { bufferLines } from './bufferLines.ts';
 
 describe('Validate BufferLines', () => {
     test('bufferLines', () => {

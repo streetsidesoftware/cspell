@@ -1,4 +1,4 @@
-import type { PartialWithUndefined } from '../types.js';
+import type { PartialWithUndefined } from '../types.ts';
 
 export interface TrieInfo {
     compoundCharacter: string;

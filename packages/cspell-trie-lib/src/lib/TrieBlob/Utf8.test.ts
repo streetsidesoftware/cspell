@@ -15,7 +15,7 @@ import {
     hex32,
     textToCodePoints,
     Utf8Accumulator,
-} from './Utf8.js';
+} from './Utf8.ts';
 
 describe('Utf8 lib', () => {
     const encoder = new TextEncoder();

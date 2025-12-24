@@ -2,7 +2,7 @@ import assert from 'node:assert';
 import { Buffer } from 'node:buffer';
 import { promises as fs } from 'node:fs';
 
-import { decompress } from '../../gzip/index.js';
+import { decompress } from '../../gzip/index.ts';
 
 const isGzFile = /\.gz$/;
 

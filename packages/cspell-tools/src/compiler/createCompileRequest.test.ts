@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
-import type { CompileCommonAppOptions } from '../AppOptions.js';
-import { createCompileRequest } from './createCompileRequest.js';
+import type { CompileCommonAppOptions } from '../AppOptions.ts';
+import { createCompileRequest } from './createCompileRequest.ts';
 
 describe('createCompileRequest', () => {
     test.each`

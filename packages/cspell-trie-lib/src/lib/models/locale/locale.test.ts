@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { Locale, parseLocale } from './locale.js';
+import { Locale, parseLocale } from './locale.ts';
 
 describe('locale', () => {
     const T = true;

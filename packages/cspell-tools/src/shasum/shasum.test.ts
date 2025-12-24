@@ -2,14 +2,14 @@ import { writeFile } from 'node:fs/promises';
 
 import { afterEach, describe, expect, test, vi } from 'vitest';
 
-import { resolvePathToFixture } from '../test/TestHelper.js';
+import { resolvePathToFixture } from '../test/TestHelper.ts';
 import {
     calcUpdateChecksumForFiles,
     checkShasumFile,
     reportCheckChecksumFile,
     reportChecksumForFiles,
     updateChecksumForFiles,
-} from './shasum.js';
+} from './shasum.ts';
 
 vi.mock('node:fs/promises', async () => {
     const fs: any = await vi.importActual('node:fs/promises');

@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { PairingHeap } from './PairingHeap.js';
+import { PairingHeap } from './PairingHeap.ts';
 
 describe('PairingHeap', () => {
     test('Basic add and remove', () => {

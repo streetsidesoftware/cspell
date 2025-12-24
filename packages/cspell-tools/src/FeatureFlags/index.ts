@@ -1,3 +1,3 @@
-export type { FeatureFlag } from './FeatureFlags.js';
-export { FeatureFlags, getSystemFeatureFlags, UnknownFeatureFlagError } from './FeatureFlags.js';
-export { parseFlags } from './parseFlags.js';
+export type { FeatureFlag } from './FeatureFlags.ts';
+export { FeatureFlags, getSystemFeatureFlags, UnknownFeatureFlagError } from './FeatureFlags.ts';
+export { parseFlags } from './parseFlags.ts';

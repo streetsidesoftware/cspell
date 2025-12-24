@@ -1,4 +1,4 @@
-import type { FindFullResult, ITrieNode } from './ITrieNode.js';
+import type { FindFullResult, ITrieNode } from './ITrieNode.ts';
 
 export interface FindNodeResult {
     node: ITrieNode | undefined;

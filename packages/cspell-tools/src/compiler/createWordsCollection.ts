@@ -1,10 +1,10 @@
 import { parseDictionary } from 'cspell-trie-lib';
 
-import type { FilePath, FilePathOrFilePathArray } from '../config/config.js';
-import { createReader } from './Reader.js';
-import type { DictionaryReader, Reader } from './readers/ReaderOptions.js';
-import type { AllowedSplitWordsCollection, ExcludeWordsCollection, WordsCollection } from './WordsCollection.js';
-import { defaultAllowedSplitWords, defaultExcludeWordsCollection } from './WordsCollection.js';
+import type { FilePath, FilePathOrFilePathArray } from '../config/config.ts';
+import { createReader } from './Reader.ts';
+import type { DictionaryReader, Reader } from './readers/ReaderOptions.ts';
+import type { AllowedSplitWordsCollection, ExcludeWordsCollection, WordsCollection } from './WordsCollection.ts';
+import { defaultAllowedSplitWords, defaultExcludeWordsCollection } from './WordsCollection.ts';
 
 class AllowedSplitWordsImpl implements AllowedSplitWordsCollection {
     private collection: WordsCollection;

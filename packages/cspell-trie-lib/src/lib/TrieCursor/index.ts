@@ -1,1 +1,1 @@
-export { TrieCursor } from './TrieCursor.js';
+export { TrieCursor } from './TrieCursor.ts';

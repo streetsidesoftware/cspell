@@ -1,4 +1,4 @@
-import type { TrieNode } from '../lib/TrieNode/TrieNode.js';
+import type { TrieNode } from '../lib/TrieNode/TrieNode.ts';
 
 export function emitTrieWords(trie: TrieNode): void {
     let count = 0;

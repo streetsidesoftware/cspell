@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { SecondChanceCache } from './secondChanceCache.js';
+import { SecondChanceCache } from './secondChanceCache.ts';
 
 describe('Validate SecondChanceCache', () => {
     test('SecondChanceCache', () => {

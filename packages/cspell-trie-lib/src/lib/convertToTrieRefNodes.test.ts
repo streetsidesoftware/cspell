@@ -1,10 +1,10 @@
 import { genSequence } from 'gensequence';
 import { describe, expect, test } from 'vitest';
 
-import { consolidate } from './consolidate.js';
-import { convertToTrieRefNodes } from './convertToTrieRefNodes.js';
-import { createTrieRootFromList } from './TrieNode/trie-util.js';
-import type { TrieRefNode } from './trieRef.js';
+import { consolidate } from './consolidate.ts';
+import { convertToTrieRefNodes } from './convertToTrieRefNodes.ts';
+import { createTrieRootFromList } from './TrieNode/trie-util.ts';
+import type { TrieRefNode } from './trieRef.ts';
 
 describe('Validate convertToTrieRefNodes', () => {
     test('Simple Convert', () => {

@@ -1,14 +1,14 @@
 import { describe, expect, test } from 'vitest';
 
-import { formattedDistance } from '../distance/formatResultEx.js';
-import type { WeightMap } from '../distance/index.js';
-import { createWeightedMap, editDistance } from '../distance/index.js';
-import { mapDictionaryInformationToWeightMap } from '../mappers/mapDictionaryInfoToWeightMap.js';
-import { clean } from '../utils/util.js';
-import { DEFAULT_COMPOUNDED_WORD_SEPARATOR } from './constants.js';
-import type { SuggestionCollectorOptions } from './suggestCollector.js';
-import { impersonateCollector, suggestionCollector } from './suggestCollector.js';
-import type { SuggestionGenerator, SuggestionResult } from './SuggestionTypes.js';
+import { formattedDistance } from '../distance/formatResultEx.ts';
+import type { WeightMap } from '../distance/index.ts';
+import { createWeightedMap, editDistance } from '../distance/index.ts';
+import { mapDictionaryInformationToWeightMap } from '../mappers/mapDictionaryInfoToWeightMap.ts';
+import { clean } from '../utils/util.ts';
+import { DEFAULT_COMPOUNDED_WORD_SEPARATOR } from './constants.ts';
+import type { SuggestionCollectorOptions } from './suggestCollector.ts';
+import { impersonateCollector, suggestionCollector } from './suggestCollector.ts';
+import type { SuggestionGenerator, SuggestionResult } from './SuggestionTypes.ts';
 
 const defaultOptions: SuggestionCollectorOptions = {
     numSuggestions: 10,

@@ -2,14 +2,14 @@ import { readFile } from 'node:fs/promises';
 
 import { describe, expect, test } from 'vitest';
 
-import { resolveSample as resolveSamplePath } from '../../test/samples.js';
-import { consolidate } from '../consolidate.js';
-import * as Trie from '../index.js';
-import type { ITrieNode } from '../ITrieNode/ITrieNode.js';
-import { FastTrieBlob } from '../TrieBlob/FastTrieBlob.js';
-import { trieRootToITrieRoot } from '../TrieNode/trie.js';
-import { serializeTrie } from './importExportV3.js';
-import { importTrieV3AsFastTrieBlob } from './importV3FastBlob.js';
+import { resolveSample as resolveSamplePath } from '../../test/samples.ts';
+import { consolidate } from '../consolidate.ts';
+import * as Trie from '../index.ts';
+import type { ITrieNode } from '../ITrieNode/ITrieNode.ts';
+import { FastTrieBlob } from '../TrieBlob/FastTrieBlob.ts';
+import { trieRootToITrieRoot } from '../TrieNode/trie.ts';
+import { serializeTrie } from './importExportV3.ts';
+import { importTrieV3AsFastTrieBlob } from './importV3FastBlob.ts';
 import {
     filterUnique,
     mixedLanguageWords,
@@ -17,7 +17,7 @@ import {
     sampleWordsExt,
     smallSample,
     specialCharacters,
-} from './test/sampleData.js';
+} from './test/sampleData.ts';
 
 const sampleFile = resolveSamplePath('sampleV3.trie');
 

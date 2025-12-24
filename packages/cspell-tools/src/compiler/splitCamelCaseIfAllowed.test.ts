@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
-import { createAllowedSplitWords } from './createWordsCollection.js';
-import { splitCamelCaseIfAllowed } from './splitCamelCaseIfAllowed.js';
+import { createAllowedSplitWords } from './createWordsCollection.ts';
+import { splitCamelCaseIfAllowed } from './splitCamelCaseIfAllowed.ts';
 
 describe('splitCamelCaseIfAllowed', () => {
     test.each`

@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
-import { distanceAStar } from './distanceAStar.js';
-import { levenshteinDistance } from './levenshtein.js';
+import { distanceAStar } from './distanceAStar.ts';
+import { levenshteinDistance } from './levenshtein.ts';
 
 describe('distanceAStar', () => {
     test.each`

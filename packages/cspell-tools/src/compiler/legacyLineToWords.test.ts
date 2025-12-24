@@ -3,9 +3,9 @@
 import { opFilter, pipe } from '@cspell/cspell-pipe/sync';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 
-import { createAllowedSplitWords } from './createWordsCollection.js';
-import { legacyLineToWords } from './legacyLineToWords.js';
-import { defaultAllowedSplitWords } from './WordsCollection.js';
+import { createAllowedSplitWords } from './createWordsCollection.ts';
+import { legacyLineToWords } from './legacyLineToWords.ts';
+import { defaultAllowedSplitWords } from './WordsCollection.ts';
 
 const allowed = defaultAllowedSplitWords;
 

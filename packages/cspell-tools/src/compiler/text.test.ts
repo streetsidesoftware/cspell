@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { isSingleLetter, splitCamelCaseWord, splitCamelCaseWordAutoStem } from './text.js';
+import { isSingleLetter, splitCamelCaseWord, splitCamelCaseWordAutoStem } from './text.ts';
 
 describe('split', () => {
     test.each`

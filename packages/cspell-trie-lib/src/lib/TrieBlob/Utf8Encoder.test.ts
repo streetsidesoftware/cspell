@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 
-import { Utf8Encoder } from './Utf8Encoder.js';
+import { Utf8Encoder } from './Utf8Encoder.ts';
 
 describe('Utf8Encoder', () => {
     let encoder: Utf8Encoder;

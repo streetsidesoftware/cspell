@@ -1,4 +1,4 @@
-import type { TrieInfo } from '../ITrieNode/TrieInfo.js';
+import type { TrieInfo } from '../ITrieNode/TrieInfo.ts';
 
 export const FLAG_WORD = 1;
 

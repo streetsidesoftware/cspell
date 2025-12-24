@@ -2,13 +2,13 @@ import { readFile, writeFile } from 'node:fs/promises';
 
 import { beforeAll, describe, expect, test } from 'vitest';
 
-import { resolveSample as resolveSamplePath } from '../../test/samples.js';
-import { consolidate } from '../consolidate.js';
-import * as Trie from '../index.js';
-import type { TrieNode } from '../TrieNode/TrieNode.js';
-import * as v3 from './importExportV3.js';
-import { __testing__, importTrie, serializeTrie } from './importExportV4.js';
-import { sampleWords, smallSample, specialCharacters } from './test/sampleData.js';
+import { resolveSample as resolveSamplePath } from '../../test/samples.ts';
+import { consolidate } from '../consolidate.ts';
+import * as Trie from '../index.ts';
+import type { TrieNode } from '../TrieNode/TrieNode.ts';
+import * as v3 from './importExportV3.ts';
+import { __testing__, importTrie, serializeTrie } from './importExportV4.ts';
+import { sampleWords, smallSample, specialCharacters } from './test/sampleData.ts';
 
 const sampleFile = resolveSamplePath('sampleV4.trie');
 const updateSampleFile = false;

@@ -1,9 +1,9 @@
-import type { RequireFields } from '../types.js';
-import { createReader } from './Reader.js';
-import type { Reader } from './readers/ReaderOptions.js';
-import type { ParseFileOptions } from './wordListParser.js';
-import { parseFileLines } from './wordListParser.js';
-import type { AllowedSplitWordsCollection } from './WordsCollection.js';
+import type { RequireFields } from '../types.ts';
+import { createReader } from './Reader.ts';
+import type { Reader } from './readers/ReaderOptions.ts';
+import type { ParseFileOptions } from './wordListParser.ts';
+import { parseFileLines } from './wordListParser.ts';
+import type { AllowedSplitWordsCollection } from './WordsCollection.ts';
 
 export interface SourceReaderOptions {
     /**

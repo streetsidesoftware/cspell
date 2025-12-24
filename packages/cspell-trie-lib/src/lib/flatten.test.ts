@@ -1,9 +1,9 @@
 import { genSequence } from 'gensequence';
 import { describe, expect, test } from 'vitest';
 
-import { flattenToTrieRefNodeArray, flattenToTrieRefNodeIterable } from './flatten.js';
-import { createTrieRootFromList } from './TrieNode/trie-util.js';
-import type { TrieRefNode } from './trieRef.js';
+import { flattenToTrieRefNodeArray, flattenToTrieRefNodeIterable } from './flatten.ts';
+import { createTrieRootFromList } from './TrieNode/trie-util.ts';
+import type { TrieRefNode } from './trieRef.ts';
 
 describe('Validate Flatten', () => {
     test('Simple flatten Array', () => {

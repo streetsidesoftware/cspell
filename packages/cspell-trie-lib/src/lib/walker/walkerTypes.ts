@@ -1,4 +1,4 @@
-import type { TrieNode } from '../TrieNode/TrieNode.js';
+import type { TrieNode } from '../TrieNode/TrieNode.ts';
 
 export const JOIN_SEPARATOR = '+';
 export const WORD_SEPARATOR = ' ';

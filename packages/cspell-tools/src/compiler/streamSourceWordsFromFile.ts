@@ -1,5 +1,5 @@
-import type { SourceReaderOptions } from './SourceReader.js';
-import { createSourceReader } from './SourceReader.js';
+import type { SourceReaderOptions } from './SourceReader.ts';
+import { createSourceReader } from './SourceReader.ts';
 
 export async function streamSourceWordsFromFile(
     filename: string,

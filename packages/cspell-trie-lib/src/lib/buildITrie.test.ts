@@ -2,12 +2,12 @@ import { resolve } from 'node:path';
 
 import { describe, expect, test } from 'vitest';
 
-import { readFile } from '../test/reader.test.helper.js';
-import { globalTestFixturesDir } from '../test/samples.js';
-import { buildITrieFromWords } from './buildITrie.js';
-import type { ITrie } from './ITrie.js';
-import { parseDictionaryLines } from './SimpleDictionaryParser.js';
-import { FastTrieBlobBuilder } from './TrieBlob/FastTrieBlobBuilder.js';
+import { readFile } from '../test/reader.test.helper.ts';
+import { globalTestFixturesDir } from '../test/samples.ts';
+import { buildITrieFromWords } from './buildITrie.ts';
+import type { ITrie } from './ITrie.ts';
+import { parseDictionaryLines } from './SimpleDictionaryParser.ts';
+import { FastTrieBlobBuilder } from './TrieBlob/FastTrieBlobBuilder.ts';
 
 describe('buildITrie', () => {
     test('buildITrieFromWords', () => {
