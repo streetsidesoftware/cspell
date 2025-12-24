@@ -1,4 +1,4 @@
-import type { BuilderCursor } from './BuilderCursor.js';
+import type { BuilderCursor } from './BuilderCursor.ts';
 
 export function insertWordsAtCursor(cursor: BuilderCursor, words: Iterable<string>): void {
     let prevWordLetters: string[] = [];

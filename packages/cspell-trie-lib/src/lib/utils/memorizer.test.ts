@@ -1,6 +1,6 @@
 import { describe, expect, test, vi } from 'vitest';
 
-import { memorizer } from './memorizer.js';
+import { memorizer } from './memorizer.ts';
 
 describe('memorizer', () => {
     test('memorizer', () => {

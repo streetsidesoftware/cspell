@@ -4,7 +4,7 @@ import zlib from 'node:zlib';
 
 const gzip = promisify(zlib.gzip);
 
-import { createBTrieFromFile } from './compiler/bTrie.js';
+import { createBTrieFromFile } from './compiler/bTrie.ts';
 
 interface GenerateBTrieOptions {
     compress?: boolean;

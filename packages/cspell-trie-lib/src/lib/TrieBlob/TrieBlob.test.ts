@@ -1,12 +1,12 @@
 import { describe, expect, test } from 'vitest';
 
-import { readFastTrieBlobFromConfig } from '../../test/dictionaries.test.helper.js';
-import { validateTrie } from '../TrieNode/trie-util.js';
-import { buildTrieNodeTrieFromWords } from '../TrieNode/TrieNodeBuilder.js';
-import { createTrieBlob } from './createTrieBlob.js';
-import { FastTrieBlobBuilder } from './FastTrieBlobBuilder.js';
+import { readFastTrieBlobFromConfig } from '../../test/dictionaries.test.helper.ts';
+import { validateTrie } from '../TrieNode/trie-util.ts';
+import { buildTrieNodeTrieFromWords } from '../TrieNode/TrieNodeBuilder.ts';
+import { createTrieBlob } from './createTrieBlob.ts';
+import { FastTrieBlobBuilder } from './FastTrieBlobBuilder.ts';
 import { hexDump } from './hexDump.ts';
-import { TrieBlob } from './TrieBlob.js';
+import { TrieBlob } from './TrieBlob.ts';
 
 describe('TrieBlob', () => {
     const sampleWords = [

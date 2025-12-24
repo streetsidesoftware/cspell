@@ -1,4 +1,4 @@
-import type { TrieInfo } from './TrieInfo.js';
+import type { TrieInfo } from './TrieInfo.ts';
 
 export interface FindResult {
     found: string | false;

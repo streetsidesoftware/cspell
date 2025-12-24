@@ -2,7 +2,7 @@ import { promisify } from 'node:util';
 
 import { describe, expect, test } from 'vitest';
 
-import { createPerfTimer, getGlobalPerfTimer, measure, measureAsync, startTimer } from './timer.js';
+import { createPerfTimer, getGlobalPerfTimer, measure, measureAsync, startTimer } from './timer.ts';
 
 const delay = promisify(setTimeout);
 

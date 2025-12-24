@@ -5,16 +5,16 @@ import { readFileSync } from 'node:fs';
 import type { Command } from 'commander';
 import { CommanderError, Option } from 'commander';
 
-import type { CompileAppOptions, CompileTrieAppOptions } from './AppOptions.js';
-import { generateBTrie } from './bTrie.js';
-import { build } from './build.js';
-import { processCompileAction } from './compile.js';
-import * as compiler from './compiler/index.js';
-import { logWithTimestamp } from './compiler/logWithTimestamp.js';
-import type { FeatureFlags } from './FeatureFlags/index.js';
-import { gzip, OSFlags } from './gzip/index.js';
-import { reportCheckChecksumFile, reportChecksumForFiles, updateChecksumForFiles } from './shasum/shasum.js';
-import { toError } from './util/errors.js';
+import type { CompileAppOptions, CompileTrieAppOptions } from './AppOptions.ts';
+import { generateBTrie } from './bTrie.ts';
+import { build } from './build.ts';
+import { processCompileAction } from './compile.ts';
+import * as compiler from './compiler/index.ts';
+import { logWithTimestamp } from './compiler/logWithTimestamp.ts';
+import type { FeatureFlags } from './FeatureFlags/index.ts';
+import { gzip, OSFlags } from './gzip/index.ts';
+import { reportCheckChecksumFile, reportChecksumForFiles, updateChecksumForFiles } from './shasum/shasum.ts';
+import { toError } from './util/errors.ts';
 
 const npmPackageRaw = readFileSync(new URL('../package.json', import.meta.url), 'utf8');
 const npmPackage = JSON.parse(npmPackageRaw);

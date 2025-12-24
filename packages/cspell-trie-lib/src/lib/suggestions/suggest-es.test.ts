@@ -1,13 +1,13 @@
 import type { DictionaryInformation } from '@cspell/cspell-types';
 import { describe, expect, test } from 'vitest';
 
-import { readTrieFromConfig } from '../../test/dictionaries.test.helper.js';
-import { distanceAStarWeightedEx } from '../distance/distanceAStarWeighted.js';
-import { formatExResult } from '../distance/formatResultEx.js';
-import type { WeightMap } from '../distance/index.js';
-import { createWeightCostCalculator } from '../distance/weightedMaps.js';
-import { mapDictionaryInformationToWeightMap } from '../mappers/mapDictionaryInfoToWeightMap.js';
-import { parseLinesToDictionaryLegacy } from '../SimpleDictionaryParser.js';
+import { readTrieFromConfig } from '../../test/dictionaries.test.helper.ts';
+import { distanceAStarWeightedEx } from '../distance/distanceAStarWeighted.ts';
+import { formatExResult } from '../distance/formatResultEx.ts';
+import type { WeightMap } from '../distance/index.ts';
+import { createWeightCostCalculator } from '../distance/weightedMaps.ts';
+import { mapDictionaryInformationToWeightMap } from '../mappers/mapDictionaryInfoToWeightMap.ts';
+import { parseLinesToDictionaryLegacy } from '../SimpleDictionaryParser.ts';
 
 function getTrie() {
     return readTrieFromConfig('@cspell/dict-es-es/cspell-ext.json');

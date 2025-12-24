@@ -2,7 +2,7 @@ import { writeFile } from 'node:fs/promises';
 
 import { afterEach, describe, expect, test, vi } from 'vitest';
 
-import { resolvePathToFixture } from '../test/TestHelper.js';
+import { resolvePathToFixture } from '../test/TestHelper.ts';
 import {
     calcUpdateChecksumForFiles,
     checkShasumFile,

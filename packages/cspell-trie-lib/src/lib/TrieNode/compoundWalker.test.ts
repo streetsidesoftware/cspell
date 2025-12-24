@@ -1,10 +1,10 @@
 import { describe, expect, test } from 'vitest';
 
-import { parseDictionaryLegacy } from '../SimpleDictionaryParser.js';
-import type { Trie } from '../trie.js';
-import type { WalkItem, WalkNext } from './compoundWalker.js';
-import { compoundWalker, compoundWords } from './compoundWalker.js';
-import { findWord } from './find.js';
+import { parseDictionaryLegacy } from '../SimpleDictionaryParser.ts';
+import type { Trie } from '../trie.ts';
+import type { WalkItem, WalkNext } from './compoundWalker.ts';
+import { compoundWalker, compoundWords } from './compoundWalker.ts';
+import { findWord } from './find.ts';
 
 // cspell:ignore errorerror
 

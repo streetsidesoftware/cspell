@@ -4,11 +4,11 @@ import * as path from 'node:path';
 import { genSequence } from 'gensequence';
 import { describe, expect, test } from 'vitest';
 
-import { resolveGlobalSample } from '../test/samples.js';
-import { consolidate } from './consolidate.js';
-import { buildTrie } from './TrieBuilder.js';
-import { countNodes, createTrieRoot, createTrieRootFromList, iteratorTrieWords } from './TrieNode/trie-util.js';
-import type { TrieNode } from './TrieNode/TrieNode.js';
+import { resolveGlobalSample } from '../test/samples.ts';
+import { consolidate } from './consolidate.ts';
+import { buildTrie } from './TrieBuilder.ts';
+import { countNodes, createTrieRoot, createTrieRootFromList, iteratorTrieWords } from './TrieNode/trie-util.ts';
+import type { TrieNode } from './TrieNode/TrieNode.ts';
 
 const samples = resolveGlobalSample('dicts');
 const sampleEnglish = path.join(samples, 'en_US.txt');

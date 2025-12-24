@@ -2,10 +2,10 @@ import { readFile } from 'node:fs/promises';
 
 import { describe, expect, test } from 'vitest';
 
-import { resolveSample } from '../../test/samples.js';
-import * as Trie from '../index.js';
-import { decodeTrieData } from './decode.js';
-import { serializeTrie } from './importExport.js';
+import { resolveSample } from '../../test/samples.ts';
+import * as Trie from '../index.ts';
+import { decodeTrieData } from './decode.ts';
+import { serializeTrie } from './importExport.ts';
 
 describe('Import/Export', () => {
     const pSampleWords = readFile(resolveSample('sample.txt'), 'utf8');

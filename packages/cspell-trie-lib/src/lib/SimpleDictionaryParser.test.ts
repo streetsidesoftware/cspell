@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
-import type { ParseDictionaryOptions } from './SimpleDictionaryParser.js';
-import { __testing__, parseDictionaryLegacy, parseDictionaryLines } from './SimpleDictionaryParser.js';
+import type { ParseDictionaryOptions } from './SimpleDictionaryParser.ts';
+import { __testing__, parseDictionaryLegacy, parseDictionaryLines } from './SimpleDictionaryParser.ts';
 
 const { splitLine } = __testing__;
 

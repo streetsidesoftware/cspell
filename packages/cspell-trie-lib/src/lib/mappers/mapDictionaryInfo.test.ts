@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
-import type { DictionaryInformation } from '../models/DictionaryInformation.js';
-import { mapDictionaryInformation } from './mapDictionaryInfo.js';
+import type { DictionaryInformation } from '../models/DictionaryInformation.ts';
+import { mapDictionaryInformation } from './mapDictionaryInfo.ts';
 
 describe('mapDictionaryInfo', () => {
     test.each`

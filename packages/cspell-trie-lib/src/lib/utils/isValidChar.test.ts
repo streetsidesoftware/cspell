@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { formatCharCodes, isValidChar } from './isValidChar.js';
+import { formatCharCodes, isValidChar } from './isValidChar.ts';
 
 describe('isValidChar', () => {
     test.each`

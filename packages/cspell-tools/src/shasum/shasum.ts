@@ -1,9 +1,9 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve, sep as pathSep } from 'node:path';
 
-import { toError } from '../util/errors.js';
-import { isDefined } from '../util/index.js';
-import { calcFileChecksum, checkFile } from './checksum.js';
+import { toError } from '../util/errors.ts';
+import { isDefined } from '../util/index.ts';
+import { calcFileChecksum, checkFile } from './checksum.ts';
 
 export interface CheckShasumFileResult {
     passed: boolean;

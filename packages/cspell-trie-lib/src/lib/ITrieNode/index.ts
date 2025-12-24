@@ -1,4 +1,4 @@
-import type { PartialTrieInfo, TrieInfo } from './TrieInfo.js';
+import type { PartialTrieInfo, TrieInfo } from './TrieInfo.ts';
 
 export type { ITrieNode, ITrieNodeId, ITrieNodeRoot } from './ITrieNode.js';
 export type TrieOptions = TrieInfo;

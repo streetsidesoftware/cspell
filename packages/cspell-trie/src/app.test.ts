@@ -3,7 +3,7 @@ import * as Path from 'node:path';
 import * as Commander from 'commander';
 import { afterEach, describe, expect, test, vi } from 'vitest';
 
-import * as app from './app.js';
+import * as app from './app.ts';
 
 interface Constructable {
     new (...args: any[]): any;

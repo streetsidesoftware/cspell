@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { regexQuote, replaceAll, replaceAllFactory } from './util.js';
+import { regexQuote, replaceAll, replaceAllFactory } from './util.ts';
 
 describe('util', () => {
     // cspell:ignore aabbaab

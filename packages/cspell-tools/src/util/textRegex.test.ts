@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { stringToRegExp } from './textRegex.js';
+import { stringToRegExp } from './textRegex.ts';
 
 describe('Validate textRegex', () => {
     const examplePattern = `/

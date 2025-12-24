@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
-import { buildTrie, TrieBuilder } from './TrieBuilder.js';
-import { countNodes, isCircular } from './TrieNode/trie-util.js';
+import { buildTrie, TrieBuilder } from './TrieBuilder.ts';
+import { countNodes, isCircular } from './TrieNode/trie-util.ts';
 
 describe('Validate TrieBuilder', () => {
     test('builder explicit consolidateSuffixes', () => {

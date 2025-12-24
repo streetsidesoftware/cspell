@@ -1,5 +1,5 @@
-import type { PartialWithUndefined } from '../types.js';
-import type { CompoundModes } from './CompoundModes.js';
+import type { PartialWithUndefined } from '../types.ts';
+import type { CompoundModes } from './CompoundModes.ts';
 
 export interface FindOptions {
     matchCase: boolean;

@@ -3,7 +3,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 
 import { describe, expect, test, vi } from 'vitest';
 
-import { compress, compressFile, compressSync, decompress, OSFlags } from './compressFiles.js';
+import { compress, compressFile, compressSync, decompress, OSFlags } from './compressFiles.ts';
 
 const content = `
 Have a nice day.

@@ -3,13 +3,13 @@ import { writeFile } from 'node:fs/promises';
 import { opConcatMap, pipe } from '@cspell/cspell-pipe/sync';
 import YAML from 'yaml';
 
-import type { CompileCommonAppOptions } from './AppOptions.js';
-import { compile } from './compiler/compile.js';
-import { createCompileRequest } from './compiler/createCompileRequest.js';
-import { configFileSchemaURL, type RunConfig } from './config/config.js';
-import type { FeatureFlags } from './FeatureFlags/index.js';
-import { getSystemFeatureFlags, parseFlags } from './FeatureFlags/index.js';
-import { globP } from './util/globP.js';
+import type { CompileCommonAppOptions } from './AppOptions.ts';
+import { compile } from './compiler/compile.ts';
+import { createCompileRequest } from './compiler/createCompileRequest.ts';
+import { configFileSchemaURL, type RunConfig } from './config/config.ts';
+import type { FeatureFlags } from './FeatureFlags/index.ts';
+import { getSystemFeatureFlags, parseFlags } from './FeatureFlags/index.ts';
+import { globP } from './util/globP.ts';
 
 getSystemFeatureFlags().register('compound', 'Enable compound dictionary sources.');
 

@@ -1,8 +1,8 @@
 import { describe, expect, test } from 'vitest';
 
-import type { SuggestionCostMapDef } from '../models/suggestionCostsDef.js';
-import { DEFAULT_COMPOUNDED_WORD_SEPARATOR } from '../suggestions/constants.js';
-import type { CostPosition, PenaltyAdjustment } from './weightedMaps.js';
+import type { SuggestionCostMapDef } from '../models/suggestionCostsDef.ts';
+import { DEFAULT_COMPOUNDED_WORD_SEPARATOR } from '../suggestions/constants.ts';
+import type { CostPosition, PenaltyAdjustment } from './weightedMaps.ts';
 import {
     __testing__,
     addAdjustment,

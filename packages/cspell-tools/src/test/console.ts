@@ -1,6 +1,6 @@
 import { vi } from 'vitest';
 
-import { normalizeOutput } from './normalizeOutput.js';
+import { normalizeOutput } from './normalizeOutput.ts';
 
 export function spyOnConsole(): {
     consoleOutput: () => {

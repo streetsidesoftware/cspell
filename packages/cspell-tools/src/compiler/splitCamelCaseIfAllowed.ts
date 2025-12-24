@@ -1,5 +1,5 @@
-import { isSingleLetter, splitCamelCaseWord } from './text.js';
-import type { AllowedSplitWordsCollection } from './WordsCollection.js';
+import { isSingleLetter, splitCamelCaseWord } from './text.ts';
+import type { AllowedSplitWordsCollection } from './WordsCollection.ts';
 
 export const regExpSpaceOrDash: RegExp = /[- ]+/g;
 export const regExpIsNumber: RegExp = /^\d+$/;

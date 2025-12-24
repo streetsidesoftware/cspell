@@ -1,7 +1,7 @@
 import { describe, expect, test, vi } from 'vitest';
 
-import { AutoCacheMap, AutoCacheWeakMap } from './autoCacheMap.js';
-import { isDefined } from './util.js';
+import { AutoCacheMap, AutoCacheWeakMap } from './autoCacheMap.ts';
+import { isDefined } from './util.ts';
 
 describe('autoCacheMap', () => {
     test('AutoCacheMap', () => {

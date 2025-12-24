@@ -1,22 +1,22 @@
 import type { DictionaryDefinition } from '@cspell/cspell-types';
 import { describe, expect, test } from 'vitest';
 
-import { readFastTrieBlobFromConfig, readTrieFromConfig } from '../../test/dictionaries.test.helper.js';
-import { createWeightMap } from '../distance/weightedMaps.js';
-import { ITrieImpl } from '../ITrie.js';
-import { mapDictionaryInformation } from '../mappers/mapDictionaryInfo.js';
-import { parseDictionaryLegacy } from '../SimpleDictionaryParser.js';
-import { TrieNodeTrie } from '../TrieNode/TrieNodeTrie.js';
-import { cleanCopy } from '../utils/util.js';
-import { CompoundWordsMethod } from '../walker/index.js';
-import type { GenSuggestionOptions, SuggestionOptions } from './genSuggestionsOptions.js';
+import { readFastTrieBlobFromConfig, readTrieFromConfig } from '../../test/dictionaries.test.helper.ts';
+import { createWeightMap } from '../distance/weightedMaps.ts';
+import { ITrieImpl } from '../ITrie.ts';
+import { mapDictionaryInformation } from '../mappers/mapDictionaryInfo.ts';
+import { parseDictionaryLegacy } from '../SimpleDictionaryParser.ts';
+import { TrieNodeTrie } from '../TrieNode/TrieNodeTrie.ts';
+import { cleanCopy } from '../utils/util.ts';
+import { CompoundWordsMethod } from '../walker/index.ts';
+import type { GenSuggestionOptions, SuggestionOptions } from './genSuggestionsOptions.ts';
 import {
     compSuggestionResults,
     isSuggestionResult,
     suggestionCollector,
     type SuggestionCollectorOptions,
 } from './suggestCollector.js';
-import { genSuggestions, suggest } from './suggestTrieData.js';
+import { genSuggestions, suggest } from './suggestTrieData.ts';
 
 describe('Validate Suggest', () => {
     const SEPARATE_WORDS: GenSuggestionOptions = { compoundMethod: CompoundWordsMethod.SEPARATE_WORDS };

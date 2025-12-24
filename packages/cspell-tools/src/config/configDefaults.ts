@@ -1,5 +1,5 @@
-import type { RequireFields } from '../types.js';
-import type { CompileSourceOptions } from './config.js';
+import type { RequireFields } from '../types.ts';
+import type { CompileSourceOptions } from './config.ts';
 
 export const defaultCompileSourceOptions: {
     readonly maxDepth: undefined;

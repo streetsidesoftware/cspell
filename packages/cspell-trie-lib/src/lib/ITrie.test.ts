@@ -1,15 +1,15 @@
 import { describe, expect, test } from 'vitest';
 
-import { defaultTrieInfo } from './constants.js';
-import type { ITrie } from './ITrie.js';
-import { ITrieImpl as ITrieClass } from './ITrie.js';
-import type { ITrieNode } from './ITrieNode/ITrieNode.js';
-import { parseDictionary, parseDictionaryLegacy } from './SimpleDictionaryParser.js';
-import type { SuggestionOptions } from './suggestions/genSuggestionsOptions.js';
-import { suggestionCollector, type SuggestionCollectorOptions } from './suggestions/suggestCollector.js';
-import { clean } from './utils/clean.js';
-import { normalizeWordToLowercase } from './utils/normalizeWord.js';
-import { CompoundWordsMethod } from './walker/index.js';
+import { defaultTrieInfo } from './constants.ts';
+import type { ITrie } from './ITrie.ts';
+import { ITrieImpl as ITrieClass } from './ITrie.ts';
+import type { ITrieNode } from './ITrieNode/ITrieNode.ts';
+import { parseDictionary, parseDictionaryLegacy } from './SimpleDictionaryParser.ts';
+import type { SuggestionOptions } from './suggestions/genSuggestionsOptions.ts';
+import { suggestionCollector, type SuggestionCollectorOptions } from './suggestions/suggestCollector.ts';
+import { clean } from './utils/clean.ts';
+import { normalizeWordToLowercase } from './utils/normalizeWord.ts';
+import { CompoundWordsMethod } from './walker/index.ts';
 
 describe('Validate Trie Class', () => {
     const NumSuggestions: SuggestionOptions = { numSuggestions: 10 };

@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { isError, toError } from './errors.js';
+import { isError, toError } from './errors.ts';
 
 describe('errors', () => {
     test.each`

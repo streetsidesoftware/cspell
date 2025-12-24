@@ -1,6 +1,6 @@
-import { globP } from '../util/globP.js';
-import type { OSFlags } from './compressFiles.js';
-import { compressFile } from './compressFiles.js';
+import { globP } from '../util/globP.ts';
+import type { OSFlags } from './compressFiles.ts';
+import { compressFile } from './compressFiles.ts';
 
 // cspell:ignore nodir
 

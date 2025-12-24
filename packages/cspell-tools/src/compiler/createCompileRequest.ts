@@ -1,7 +1,7 @@
 import * as path from 'node:path';
 
-import type { CompileCommonAppOptions } from '../AppOptions.js';
-import type { CompileRequest, DictionaryFormats, DictionarySource, FileSource, Target } from '../config/index.js';
+import type { CompileCommonAppOptions } from '../AppOptions.ts';
+import type { CompileRequest, DictionaryFormats, DictionarySource, FileSource, Target } from '../config/index.ts';
 
 export function createCompileRequest(sourceFiles: string[], options: CompileCommonAppOptions): CompileRequest {
     options = { ...options };

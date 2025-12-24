@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
-import type { FeatureFlag } from './FeatureFlags.js';
-import { FeatureFlags, getSystemFeatureFlags } from './FeatureFlags.js';
+import type { FeatureFlag } from './FeatureFlags.ts';
+import { FeatureFlags, getSystemFeatureFlags } from './FeatureFlags.ts';
 
 describe('FeatureFlags', () => {
     const flags: FeatureFlag[] = [

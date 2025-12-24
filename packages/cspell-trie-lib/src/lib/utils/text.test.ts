@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { assertValidUtf16Character, expandCharacterSet, expandRange, isValidUtf16Character } from './text.js';
+import { assertValidUtf16Character, expandCharacterSet, expandRange, isValidUtf16Character } from './text.ts';
 
 describe('text', () => {
     test.each`

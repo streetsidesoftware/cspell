@@ -1,11 +1,11 @@
 import { describe, expect, test } from 'vitest';
 
-import type { BuilderCursor } from '../Builder/index.js';
-import { insertWordsAtCursor } from '../Builder/index.js';
-import { consolidate } from '../consolidate.js';
-import { createTrieRoot, insert, validateTrie } from './trie-util.js';
-import type { TrieNode, TrieRoot } from './TrieNode.js';
-import { buildTrieNodeTrieFromWords, TrieNodeBuilder } from './TrieNodeBuilder.js';
+import type { BuilderCursor } from '../Builder/index.ts';
+import { insertWordsAtCursor } from '../Builder/index.ts';
+import { consolidate } from '../consolidate.ts';
+import { createTrieRoot, insert, validateTrie } from './trie-util.ts';
+import type { TrieNode, TrieRoot } from './TrieNode.ts';
+import { buildTrieNodeTrieFromWords, TrieNodeBuilder } from './TrieNodeBuilder.ts';
 
 describe('TrieNodeBuilder', () => {
     test('cursor', () => {

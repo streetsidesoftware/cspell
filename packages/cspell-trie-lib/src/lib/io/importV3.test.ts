@@ -2,15 +2,15 @@ import { readFile } from 'node:fs/promises';
 
 import { describe, expect, test } from 'vitest';
 
-import { resolveSample as resolveSamplePath } from '../../test/samples.js';
-import { consolidate } from '../consolidate.js';
-import * as Trie from '../index.js';
-import type { ITrieNode } from '../ITrieNode/ITrieNode.js';
-import { trieRootToITrieRoot } from '../TrieNode/trie.js';
-import { TrieNodeBuilder } from '../TrieNode/TrieNodeBuilder.js';
-import { serializeTrie } from './importExportV3.js';
-import { importTrieV3AsTrieRoot, importTrieV3WithBuilder } from './importV3.js';
-import { sampleWords, smallSample, specialCharacters } from './test/sampleData.js';
+import { resolveSample as resolveSamplePath } from '../../test/samples.ts';
+import { consolidate } from '../consolidate.ts';
+import * as Trie from '../index.ts';
+import type { ITrieNode } from '../ITrieNode/ITrieNode.ts';
+import { trieRootToITrieRoot } from '../TrieNode/trie.ts';
+import { TrieNodeBuilder } from '../TrieNode/TrieNodeBuilder.ts';
+import { serializeTrie } from './importExportV3.ts';
+import { importTrieV3AsTrieRoot, importTrieV3WithBuilder } from './importV3.ts';
+import { sampleWords, smallSample, specialCharacters } from './test/sampleData.ts';
 
 const sampleFile = resolveSamplePath('sampleV3.trie');
 

@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { mergeDefaults } from '../utils/mergeDefaults.js';
+import { mergeDefaults } from '../utils/mergeDefaults.ts';
 import {
     checkCircular,
     countNodes,
