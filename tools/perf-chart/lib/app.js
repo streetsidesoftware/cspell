@@ -4403,7 +4403,8 @@ function createPerfTable1(data) {
 	const stats = calcAllStats(data);
 	const maxRelSd = Math.max(...stats.map((s$1) => s$1.sd * s$1.sum / s$1.count));
 	return inject`
-        ## Time to Process Files
+        <details>
+        <summary>Time to Process Files</summary>
 
         ${createMdTable({
 		header: `
@@ -4426,13 +4427,15 @@ function createPerfTable1(data) {
 
         Note:
         - Elapsed time is in seconds.
+        </details>
     `;
 }
 function createFpsPerfTable(data) {
 	const fn = (d) => 1e3 * d.files / d.elapsedMs;
 	const stats = calcAllStats(data, fn);
 	return inject`
-        ## Files per Second over Time
+        <details>
+        <summary>Files per Second over Time</summary>
 
         ${createMdTable({
 		header: `
@@ -4458,6 +4461,7 @@ function createFpsPerfTable(data) {
 			];
 		})
 	})}
+        </details>
     `;
 }
 function createThroughputPerfTable(data) {
@@ -4465,7 +4469,8 @@ function createThroughputPerfTable(data) {
 	const fn = (d) => 1e3 * (d.kilobytes || 0) / d.elapsedMs;
 	const stats = calcAllStats(data, fn);
 	return inject`
-        ## Data Throughput
+        <details>
+        <summary>Data Throughput</summary>
 
         ${createMdTable({
 		header: `
@@ -4491,6 +4496,7 @@ function createThroughputPerfTable(data) {
 			];
 		})
 	})}
+        </details>
     `;
 }
 const monthNames = [
@@ -4516,7 +4522,8 @@ function createDailyPerfGraph(dailyStats) {
 		return `line [${records.map((r) => r.fps.toFixed(2)).join(", ")}]`;
 	});
 	return inject`
-        ## Daily Performance
+        <details>
+        <summary>Daily Performance</summary>
 
         ${"```mermaid"}
         xychart-beta
@@ -4526,6 +4533,7 @@ function createDailyPerfGraph(dailyStats) {
             bar [${bar.join(", ")}]
             ${lines.join("\n")}
         ${"```"}
+        </details>
     `;
 }
 function createDailyStats(data) {
