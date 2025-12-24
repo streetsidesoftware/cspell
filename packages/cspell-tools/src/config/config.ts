@@ -124,6 +124,11 @@ export interface Target extends CompileTargetOptions {
     format: DictionaryFormats;
 
     /**
+     * Generate a `.btrie.gz` for the target.
+     */
+    bTrie?: boolean | undefined;
+
+    /**
      * File sources used to build the dictionary.
      */
     sources: DictionarySource[];
