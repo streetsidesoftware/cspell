@@ -31,7 +31,7 @@ function addCompileOptions(compileCommand: Command): Command {
             '-o, --output <path>',
             'Specify the output directory, otherwise files are written back to the same location.',
         )
-        .option('-n, --no-compress', 'By default the files are Gzipped, this will turn off GZ compression.')
+        .option('-n, --no-compress', 'By default the files are GZipped, this will turn off GZ compression.')
         .option('-m, --max_depth <limit>', 'Maximum depth to apply suffix rules.')
         .option('-M, --merge <target>', 'Merge all files into a single target file (extensions are applied)')
         .option('--split', 'Split each line', undefined)
@@ -118,7 +118,11 @@ export async function run(program: Command, argv: string[], flags?: FeatureFlags
 
     program.command('gzip <files...>').description('GZip files while keeping the original.').action(handleGzip);
 
-    program.command('btrie [files...]').description('Generate BTrie files from word list files.').action(generateBTrie);
+    program
+        .command('btrie [files...]')
+        .description('Generate BTrie files from word list files.')
+        .option('-n, --no-compress', 'By default the files are GZipped, this will turn off GZ compression.')
+        .action(generateBTrie);
 
     program
         .command('shasum [files...]')

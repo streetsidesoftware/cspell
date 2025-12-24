@@ -1,20 +1,21 @@
+import type { TArrayBufferView } from '../types.js';
 import type { BufferEncodingExt } from './BufferEncoding.js';
 import { calcEncodingFromBom, decode, decodeUtf16BE, decodeUtf16LE, encodeString } from './encode-decode.js';
 
 export function createDecoderTransformer(
     encoding?: BufferEncodingExt,
-): (iterable: AsyncIterable<string | ArrayBufferView> | Iterable<string | ArrayBufferView>) => AsyncIterable<string> {
-    function standardDecoder(buf: ArrayBufferView): string {
+): (iterable: AsyncIterable<string | TArrayBufferView> | Iterable<string | TArrayBufferView>) => AsyncIterable<string> {
+    function standardDecoder(buf: TArrayBufferView): string {
         return decode(buf, encoding);
     }
 
-    let decoder: ((buf: ArrayBufferView) => string) | undefined = undefined;
+    let decoder: ((buf: TArrayBufferView) => string) | undefined = undefined;
 
     if (encoding && !encoding.startsWith('utf')) return decoderNonUtf;
     return decoderUtf;
 
     async function* decoderNonUtf(
-        iterable: AsyncIterable<string | ArrayBufferView> | Iterable<string | ArrayBufferView>,
+        iterable: AsyncIterable<string | TArrayBufferView> | Iterable<string | TArrayBufferView>,
     ) {
         for await (const buf of iterable) {
             yield typeof buf === 'string' ? buf : decode(buf, encoding);
@@ -22,7 +23,7 @@ export function createDecoderTransformer(
     }
 
     async function* decoderUtf(
-        iterable: AsyncIterable<string | ArrayBufferView> | Iterable<string | ArrayBufferView>,
+        iterable: AsyncIterable<string | TArrayBufferView> | Iterable<string | TArrayBufferView>,
     ): AsyncIterable<string> {
         for await (const sb of iterable) {
             if (typeof sb === 'string') {
@@ -54,23 +55,26 @@ export function createDecoderTransformer(
     }
 }
 
-export function encoderTransformer(iterable: Iterable<string>, encoding?: BufferEncodingExt): Iterable<ArrayBufferView>;
+export function encoderTransformer(
+    iterable: Iterable<string>,
+    encoding?: BufferEncodingExt,
+): Iterable<TArrayBufferView>;
 export function encoderTransformer(
     iterable: AsyncIterable<string>,
     encoding?: BufferEncodingExt,
-): AsyncIterable<ArrayBufferView>;
+): AsyncIterable<TArrayBufferView>;
 export function encoderTransformer(
     iterable: Iterable<string> | AsyncIterable<string>,
     encoding?: BufferEncodingExt,
-): Iterable<ArrayBufferView> | AsyncIterable<ArrayBufferView>;
+): Iterable<TArrayBufferView> | AsyncIterable<TArrayBufferView>;
 export function encoderTransformer(
     iterable: Iterable<string> | AsyncIterable<string>,
     encoding?: BufferEncodingExt,
-): Iterable<ArrayBufferView> | AsyncIterable<ArrayBufferView> {
+): Iterable<TArrayBufferView> | AsyncIterable<TArrayBufferView> {
     return isAsyncIterable(iterable) ? encoderAsyncIterable(iterable, encoding) : encoderIterable(iterable, encoding);
 }
 
-function* encoderIterable(iterable: Iterable<string>, encoding?: BufferEncodingExt): Iterable<ArrayBufferView> {
+function* encoderIterable(iterable: Iterable<string>, encoding?: BufferEncodingExt): Iterable<TArrayBufferView> {
     let useBom = true;
 
     for (const chunk of iterable) {
@@ -82,7 +86,7 @@ function* encoderIterable(iterable: Iterable<string>, encoding?: BufferEncodingE
 async function* encoderAsyncIterable(
     iterable: Iterable<string> | AsyncIterable<string>,
     encoding?: BufferEncodingExt,
-): AsyncIterable<ArrayBufferView> {
+): AsyncIterable<TArrayBufferView> {
     let useBom = true;
 
     for await (const chunk of iterable) {

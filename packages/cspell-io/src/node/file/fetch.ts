@@ -1,5 +1,3 @@
-import { Buffer } from 'node:buffer';
-
 import { _fetch as fetch } from './_fetch.js';
 import { FetchUrlError, toFetchUrlError } from './FetchError.js';
 
@@ -17,7 +15,7 @@ export async function fetchHead(request: string | URL): Promise<Headers> {
     }
 }
 
-export async function fetchURL(url: URL, signal?: AbortSignal): Promise<Buffer> {
+export async function fetchURL(url: URL, signal?: AbortSignal): Promise<Uint8Array<ArrayBuffer>> {
     try {
         // eslint-disable-next-line n/no-unsupported-features/node-builtins
         const request = signal ? new Request(url, { signal }) : url;
@@ -25,7 +23,7 @@ export async function fetchURL(url: URL, signal?: AbortSignal): Promise<Buffer> 
         if (!response.ok) {
             throw FetchUrlError.create(url, response.status);
         }
-        return Buffer.from(await response.arrayBuffer());
+        return await response.bytes();
     } catch (e) {
         throw toFetchUrlError(e, url);
     }

@@ -1,13 +1,12 @@
 import type { TrieInfo } from '../ITrieNode/TrieInfo.ts';
 import { assert } from '../utils/assert.ts';
+import { toUint8Array } from '../utils/rawData.ts';
 import type { BinaryFormat } from './binaryFormat.ts';
 import { BinaryDataBuilder, BinaryDataReader, BinaryFormatBuilder } from './binaryFormat.ts';
 
 const headerSig = 'TrieBlob';
 const version = '00.01.00';
 const endianSig = 0x0403_0201;
-
-const _binaryFormat = getBinaryFormat();
 
 export interface TrieBlobInfo {
     readonly nodes: Uint32Array;
@@ -64,4 +63,16 @@ export class ErrorDecodeTrieBlob extends Error {
     constructor(message: string) {
         super(message);
     }
+}
+
+export function isBTrieData(data: Uint8Array | ArrayBufferView): boolean {
+    const buf = toUint8Array(data);
+    if (buf.length < headerSig.length) return false;
+
+    for (let i = 0; i < headerSig.length; i++) {
+        if (buf[i] !== headerSig.codePointAt(i)) {
+            return false;
+        }
+    }
+    return true;
 }

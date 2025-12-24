@@ -57,7 +57,7 @@ export class CSpellIONode implements CSpellIO {
         }
         return res.value;
     }
-    writeFile(urlOrFilename: UrlOrReference, content: string | ArrayBufferView): Promise<FileReference> {
+    writeFile(urlOrFilename: UrlOrReference, content: string | Uint8Array<ArrayBuffer>): Promise<FileReference> {
         const ref = toFileReference(urlOrFilename);
         const fileResource = CFileResource.from(ref, content);
         const res = this.serviceBus.dispatch(RequestFsWriteFile.create(fileResource));
