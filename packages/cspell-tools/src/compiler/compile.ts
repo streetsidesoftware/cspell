@@ -4,6 +4,7 @@ import { pipeAsync, toArray } from '@cspell/cspell-pipe';
 import { opAwaitAsync, opMapAsync } from '@cspell/cspell-pipe/operators';
 import { opConcatMap, opMap, pipe } from '@cspell/cspell-pipe/sync';
 
+import { generateBTrie } from '../bTrie.ts';
 import type {
     CompileRequest,
     CompileSourceOptions as CompileSourceConfig,
@@ -197,6 +198,10 @@ export async function compileTarget(
     }
 
     await processFiles({ action, filesToProcess, mergeTarget: filename });
+
+    if (target.bTrie) {
+        await generateBTrie([filename], { compress: true });
+    }
 
     logWithTimestamp(`Done compile: ${target.name}`);
 

@@ -25,7 +25,7 @@ describe('fetch', () => {
         async () => {
             const url = new URL('https://example.com/');
             const response = await doFetchUrl(url);
-            expect(response).toBeInstanceOf(Buffer);
+            expect(response).toBeInstanceOf(Uint8Array);
         },
         timeout,
     );
@@ -90,7 +90,7 @@ describe('fetch', () => {
 //     return r;
 // }
 
-async function doFetchUrl(url: URL, signal?: AbortSignal): Promise<Buffer> {
+async function doFetchUrl(url: URL, signal?: AbortSignal): Promise<Uint8Array<ArrayBuffer>> {
     const mockResponse = getMockResponse(url);
     if (!mockResponse) {
         try {

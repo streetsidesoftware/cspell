@@ -549,7 +549,7 @@ declare const FORBID_PREFIX = "!";
 declare const defaultTrieInfo: TrieInfo;
 //#endregion
 //#region src/lib/decodeTrie.d.ts
-declare function decodeTrie(raw: string | ArrayBufferLike | Uint8Array): ITrie;
+declare function decodeTrie(raw: string | ArrayBufferView | Uint8Array): ITrie;
 //#endregion
 //#region src/lib/io/importExport.d.ts
 interface ExportOptions {

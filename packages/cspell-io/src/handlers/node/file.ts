@@ -28,6 +28,7 @@ import {
     RequestZlibInflate,
 } from '../../requests/index.js';
 import { RequestFsReadDirectory } from '../../requests/RequestFsReadDirectory.js';
+import type { TArrayBufferView } from '../../types.js';
 
 const isGzFileRegExp = /\.gz($|[?#])/;
 
@@ -196,7 +197,7 @@ const handleRequestFsWriteFile = RequestFsWriteFile.createRequestHandler(
     'Node: fs.writeFile',
 );
 
-async function writeFile(fileRef: FileReference, content: string | ArrayBufferView): Promise<FileReference> {
+async function writeFile(fileRef: FileReference, content: string | TArrayBufferView): Promise<FileReference> {
     const gz = isGZipped(content);
     const { url, encoding, baseFilename } = fileRef;
     const resultRef: FileReference = { url, encoding, baseFilename, gz };
@@ -250,7 +251,7 @@ const handleRequestFsWriteFileGz = RequestFsWriteFile.createRequestHandler(
 async function compressAndChainWriteRequest(
     dispatcher: Dispatcher,
     fileRef: FileReference,
-    content: string | ArrayBufferView,
+    content: string | TArrayBufferView,
 ): Promise<FileReference> {
     const buf = await pGzip(encodeContent(fileRef, content));
     const res = dispatcher.dispatch(RequestFsWriteFile.create({ ...fileRef, content: buf }));
@@ -282,7 +283,7 @@ export function registerHandlers(serviceBus: ServiceBus): void {
     handlers.forEach((handler) => serviceBus.addHandler(handler));
 }
 
-function encodeContent(ref: FileReference, content: string | ArrayBufferView): string | Buffer {
+function encodeContent(ref: FileReference, content: string | TArrayBufferView): string | Buffer {
     if (typeof content === 'string') {
         if ([undefined, 'utf8', 'utf-8'].includes(ref.encoding)) return content;
         return arrayBufferViewToBuffer(encodeString(content, ref.encoding));

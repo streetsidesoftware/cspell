@@ -4,6 +4,7 @@ import { promises as fs } from 'node:fs';
 import * as fsPath from 'node:path';
 
 import { arrayBufferViewToBuffer } from '../common/arrayBuffers.js';
+import type { TArrayBufferView } from '../types.js';
 import { toFileURL } from './file/url.js';
 
 /**
@@ -17,7 +18,7 @@ import { toFileURL } from './file/url.js';
  * @param attributes - Additional attributes
  */
 export function encodeDataUrl(
-    data: string | Buffer | ArrayBufferView,
+    data: string | TArrayBufferView | Uint8Array<ArrayBuffer>,
     mediaType: string,
     attributes?: Iterable<readonly [string, string]> | undefined,
 ): string {
@@ -28,7 +29,7 @@ export function encodeDataUrl(
 }
 
 export function toDataUrl(
-    data: string | Buffer | ArrayBufferView,
+    data: string | TArrayBufferView,
     mediaType: string,
     attributes?: Iterable<[string, string]> | undefined,
 ): URL {
@@ -54,7 +55,7 @@ function encodeString(
 }
 
 export interface DecodedDataUrl {
-    data: Buffer;
+    data: Buffer<ArrayBuffer>;
     mediaType: string;
     encoding?: string | undefined;
     attributes: Map<string, string>;

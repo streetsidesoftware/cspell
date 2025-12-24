@@ -44,7 +44,7 @@ export interface FileResource extends FileReference {
     /**
      * The contents of the file
      */
-    readonly content: string | ArrayBufferView;
+    readonly content: string | Uint8Array<ArrayBuffer>;
 }
 
 export interface TextFileResource extends FileResource {
@@ -58,8 +58,13 @@ export interface TextFileResource extends FileResource {
 
     /**
      * Get the bytes of the file.
+     * @param gunzip - gunzip the data.
+     *   - `true` to gunzip the data before returning it.
+     *   - `false` to return the data as is.
+     *   - `undefined` to gunzip the data if the file is marked as gzipped.
+     * @returns the bytes of the file.
      */
-    getBytes(): Uint8Array;
+    getBytes(gunzip?: boolean): Promise<Uint8Array<ArrayBuffer>>;
 }
 
 export type UrlOrFilename = string | URL;

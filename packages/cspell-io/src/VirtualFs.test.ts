@@ -22,7 +22,7 @@ describe('VirtualFs', () => {
 
     beforeEach(() => {
         virtualFs = createVirtualFS();
-        mockConsoleLog = vi.spyOn(console, 'log');
+        mockConsoleLog = vi.spyOn(console, 'log').mockImplementation(() => {});
     });
 
     afterEach(() => {

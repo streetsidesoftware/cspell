@@ -1,8 +1,12 @@
 import { Buffer } from 'node:buffer';
+import { promisify } from 'node:util';
+import zlib from 'node:zlib';
 
 import { describe, expect, test } from 'vitest';
 
 import { CFileResource, fromFileResource } from './CFileResource.js';
+
+const gzip = promisify(zlib.gzip);
 
 describe('CFileResource', () => {
     describe('from', () => {
@@ -85,6 +89,32 @@ describe('CFileResource', () => {
             expect(cFileResource.encoding).toEqual(encoding);
             expect(cFileResource.baseFilename).toBe('file.txt');
             expect(cFileResource.gz).toEqual(gz);
+        });
+
+        test('binary data', async () => {
+            const text = 'Hello, world!';
+            const encoder = new TextEncoder();
+            const content = encoder.encode(text);
+            const decoder = new TextDecoder();
+
+            const cFileResource = CFileResource.from(new URL('https://example.com/file.txt'), content);
+
+            const fileData = await cFileResource.getBytes();
+            expect([...fileData]).toEqual([...content]);
+            expect(decoder.decode(fileData)).toBe(text);
+        });
+
+        test('binary data compressed', async () => {
+            const text = 'Hello, world!';
+            const data = Buffer.from(text, 'utf8');
+            const content = await gzip(data);
+            const decoder = new TextDecoder();
+
+            const cFileResource = CFileResource.from(new URL('https://example.com/file.txt.gz'), content);
+
+            const fileData = await cFileResource.getBytes();
+            expect([...fileData]).toEqual([...data]);
+            expect(decoder.decode(fileData)).toBe(text);
         });
     });
 

@@ -15,7 +15,7 @@ describe('decodeTrie', () => {
     `('decode $file', async ({ file, expected }) => {
         const filePath = resolveSample(file);
         const data = await fs.readFile(filePath);
-        const trie = decodeTrie(data.buffer);
+        const trie = decodeTrie(data);
         const words = [...trie.words()];
         expect(words).toEqual(expect.arrayContaining(expected));
     });
