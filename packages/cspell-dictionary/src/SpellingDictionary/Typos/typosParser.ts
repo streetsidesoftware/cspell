@@ -113,7 +113,7 @@ export function parseTyposLine(line: TypoEntry): TypoEntry | undefined {
     if (!line) return undefined;
     if (typeof line === 'string') {
         const def = createTyposDef();
-        for (const subEntry of splitIntoLines(line)) {
+        for (const subEntry of splitIntoLines(line.replace(/:\d+:/, ':'))) {
             const [left, right] = splitEntry(subEntry);
             const typo = left.trim();
             if (!right) return typo;

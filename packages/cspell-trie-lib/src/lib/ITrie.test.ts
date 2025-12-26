@@ -188,7 +188,7 @@ describe('Validate Trie Class', () => {
         expect(trie.containsPreferredSuggestions()).toBe(false);
     });
 
-    test.only('preferred suggestions', () => {
+    test('preferred suggestions', () => {
         const trie = combineSamplesIntoDictionary(sampleSuggestions());
 
         expect(trie.containsPreferredSuggestions()).toBe(true);
