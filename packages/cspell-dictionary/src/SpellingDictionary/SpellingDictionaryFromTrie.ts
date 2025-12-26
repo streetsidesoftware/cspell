@@ -52,7 +52,7 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
     ) {
         this.mapWord = createMapper(options.repMap, options.dictionaryInformation?.ignore);
         this.remapWord = createRepMapper(options.repMap, options.dictionaryInformation?.ignore);
-        this.isDictionaryCaseSensitive = options.caseSensitive ?? trie.isCaseAware;
+        this.isDictionaryCaseSensitive = options.caseSensitive ?? true;
         this.containsNoSuggestWords = options.noSuggest || false;
         this._size = size || 0;
         this.weightMap = options.weightMap || createWeightMapFromDictionaryInformation(options.dictionaryInformation);
