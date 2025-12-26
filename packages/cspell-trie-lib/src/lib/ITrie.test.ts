@@ -138,18 +138,61 @@ describe('Validate Trie Class', () => {
         found: boolean;
     }
 
-    function getCompoundDictionaryITrie(): ITrie {
-        return parseDictionary(`
-        # Sample Word List
-        Begin*
-        *End
-        +Middle+
-        café
-        play*
-        *time
-        !playtime
-        `);
+    function sampleWordList(): string {
+        return `
+            # Sample Word List
+            Begin*
+            *End
+            +Middle+
+            café
+            play*
+            *time
+            !playtime
+        `;
     }
+
+    function sampleSuggestions(): string {
+        return `
+            # Sample Suggestions
+            favourite-> favorite # cspell:ignore favourite
+            :colour:color $ cspell:ignore colour
+            !playtime:sleep, "play time"
+        `;
+    }
+
+    function combineSamplesIntoDictionary(...samples: string[]): ITrie {
+        return parseDictionary(samples.join('\n'));
+    }
+
+    function getCompoundDictionaryITrie(...additions: string[]): ITrie {
+        return combineSamplesIntoDictionary(sampleWordList(), ...additions);
+    }
+
+    test.each`
+        prefix
+        ${''}
+        ${'+'}
+        ${'!'}
+    `('word $prefix', ({ prefix }) => {
+        const trie = getCompoundDictionaryITrie();
+        const words = [...trie.words()];
+        expect(words.length).toBe(17);
+        expect(words).toContain('Begin+');
+        expect(words).toContain('+End');
+        expect([...trie.words(prefix)]).toEqual(words.filter((w) => w.startsWith(prefix)));
+    });
+
+    test('preferred no suggestions', () => {
+        const trie = combineSamplesIntoDictionary(sampleWordList());
+
+        expect(trie.containsPreferredSuggestions()).toBe(false);
+    });
+
+    test.only('preferred suggestions', () => {
+        const trie = combineSamplesIntoDictionary(sampleSuggestions());
+
+        expect(trie.containsPreferredSuggestions()).toBe(true);
+    });
 
     test.each`
         word                                | caseSensitive | found    | comment

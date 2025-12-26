@@ -1,7 +1,11 @@
-import { defaultTrieInfo } from '../constants.ts';
 import type { FindResult, ITrieNode, ITrieNodeRoot } from '../ITrieNode/ITrieNode.ts';
 import { findNode } from '../ITrieNode/trie-util.ts';
-import type { PartialTrieInfo, TrieInfo } from '../ITrieNode/TrieInfo.ts';
+import {
+    normalizeTrieCharacteristics,
+    type PartialTrieInfo,
+    type TrieCharacteristics,
+    type TrieInfo,
+} from '../ITrieNode/TrieInfo.ts';
 import type { TrieData } from '../TrieData.ts';
 import { endianness } from '../utils/endian.ts';
 import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.ts';
@@ -31,8 +35,10 @@ export class TrieBlob implements TrieData {
     readonly nodes: Uint32Array;
     readonly NodeMaskNumChildren: number;
     readonly NodeChildRefShift: number;
+    readonly hasPreferredSuggestions: boolean;
+    readonly characteristics: TrieCharacteristics;
 
-    constructor(nodes: Uint32Array, info: PartialTrieInfo) {
+    constructor(nodes: Uint32Array, info: PartialTrieInfo, characteristics: Partial<TrieCharacteristics>) {
         this.nodes = nodes;
         trieBlobSort(nodes);
         this.info = mergeOptionalWithDefaults(info);
@@ -46,6 +52,12 @@ export class TrieBlob implements TrieData {
         this.hasNonStrictWords = !!this.#nonStrictIdx;
         this.NodeMaskNumChildren = TrieBlob.NodeMaskNumChildren;
         this.NodeChildRefShift = TrieBlob.NodeChildRefShift;
+        this.characteristics = normalizeTrieCharacteristics(characteristics, {
+            hasForbiddenWords: this.hasForbiddenWords,
+            hasCompoundWords: this.hasCompoundWords,
+            hasNonStrictWords: this.hasNonStrictWords,
+        });
+        this.hasPreferredSuggestions = this.characteristics.hasPreferredSuggestions;
     }
 
     has(word: string): boolean {
@@ -103,6 +115,7 @@ export class TrieBlob implements TrieData {
                 hasCompoundWords: this.hasCompoundWords,
                 hasForbiddenWords: this.hasForbiddenWords,
                 hasNonStrictWords: this.hasNonStrictWords,
+                hasPreferredSuggestions: false,
             },
         );
         return new TrieBlobIRoot(trieData, 0, this.info, {
@@ -182,7 +195,24 @@ export class TrieBlob implements TrieData {
         return nodeIdx;
     }
 
-    *words(): Iterable<string> {
+    /**
+     * get an iterable for all the words in the dictionary.
+     * @param prefix - optional prefix to filter the words returned. The words will be prefixed with this value.
+     */
+    *words(prefix?: string): Iterable<string> {
+        if (!prefix) {
+            yield* this.#walk(0);
+            return;
+        }
+        const nodeIdx = this.#findNode(0, prefix);
+        if (!nodeIdx) return;
+
+        for (const suffix of this.#walk(nodeIdx)) {
+            yield prefix + suffix;
+        }
+    }
+
+    *#walk(rootIdx: number): Iterable<string> {
         interface StackItem {
             nodeIdx: number;
             pos: number;
@@ -194,7 +224,7 @@ export class TrieBlob implements TrieData {
         const NodeMaskChildCharIndex = TrieBlob.NodeMaskChildCharIndex;
         const NodeChildRefShift = TrieBlob.NodeChildRefShift;
         const nodes = this.nodes;
-        const stack: StackItem[] = [{ nodeIdx: 0, pos: 0, word: '', acc: Utf8Accumulator.create() }];
+        const stack: StackItem[] = [{ nodeIdx: rootIdx, pos: 0, word: '', acc: Utf8Accumulator.create() }];
         let depth = 0;
 
         while (depth >= 0) {
@@ -253,12 +283,12 @@ export class TrieBlob implements TrieData {
     }
 
     encodeBin(): Uint8Array {
-        return encodeTrieBlobToBTrie({ nodes: this.nodes, info: undefined });
+        return encodeTrieBlobToBTrie({ nodes: this.nodes, info: this.info, characteristics: this.characteristics });
     }
 
     static decodeBin(blob: Uint8Array): TrieBlob {
         const info = decodeTrieBlobToBTrie(blob);
-        const trieBlob = new TrieBlob(info.nodes, info.info ?? defaultTrieInfo);
+        const trieBlob = new TrieBlob(info.nodes, info.info, info.characteristics);
         // console.log('decodeBin: %o', trieBlob.toJSON());
         return trieBlob;
     }

@@ -1,6 +1,6 @@
 import type { ITrieNode, ITrieNodeRoot } from '../ITrieNode/ITrieNode.ts';
 import { findNode } from '../ITrieNode/trie-util.ts';
-import type { TrieInfo } from '../ITrieNode/TrieInfo.ts';
+import { normalizeTrieCharacteristics, type TrieCharacteristics, type TrieInfo } from '../ITrieNode/TrieInfo.ts';
 import type { TrieData } from '../TrieData.ts';
 import type { Utf8Seq } from './CharIndex.ts';
 import { CharIndex } from './CharIndex.ts';
@@ -18,31 +18,40 @@ const checkSorted = false;
 export class FastTrieBlob implements TrieData {
     #readonly = false;
     #forbidIdx: number;
-    #compoundIdx: number;
     #nonStrictIdx: number;
     #iTrieRoot: ITrieNodeRoot | undefined;
     wordToCharacters: (word: string) => readonly string[];
     readonly hasForbiddenWords: boolean;
     readonly hasCompoundWords: boolean;
     readonly hasNonStrictWords: boolean;
+    readonly hasPreferredSuggestions: boolean;
     #nodes: FastTrieBlobNode[];
     #charIndex: CharIndex;
     readonly bitMasksInfo: FastTrieBlobBitMaskInfo;
     readonly info: Readonly<TrieInfo>;
 
-    private constructor(nodes: FastTrieBlobNode[], bitMasksInfo: FastTrieBlobBitMaskInfo, info: Readonly<TrieInfo>) {
+    private constructor(
+        nodes: FastTrieBlobNode[],
+        bitMasksInfo: FastTrieBlobBitMaskInfo,
+        info: Readonly<TrieInfo>,
+        characteristics: Partial<TrieCharacteristics>,
+    ) {
         this.#nodes = nodes;
         this.#charIndex = new CharIndex();
         this.bitMasksInfo = bitMasksInfo;
         this.info = info;
         this.wordToCharacters = (word: string) => [...word];
         this.#forbidIdx = this.#searchNodeForChar(0, this.info.forbiddenWordPrefix) || 0;
-        this.#compoundIdx = this.#searchNodeForChar(0, this.info.compoundCharacter) || 0;
+        // this.#compoundIdx = this.#searchNodeForChar(0, this.info.compoundCharacter) || 0;
         this.#nonStrictIdx = this.#searchNodeForChar(0, this.info.stripCaseAndAccentsPrefix) || 0;
 
-        this.hasForbiddenWords = !!this.#forbidIdx;
-        this.hasCompoundWords = !!this.#compoundIdx;
-        this.hasNonStrictWords = !!this.#nonStrictIdx;
+        const { hasCompoundWords, hasForbiddenWords, hasNonStrictWords, hasPreferredSuggestions } =
+            normalizeTrieCharacteristics(characteristics);
+
+        this.hasForbiddenWords = hasForbiddenWords;
+        this.hasCompoundWords = hasCompoundWords;
+        this.hasNonStrictWords = hasNonStrictWords;
+        this.hasPreferredSuggestions = hasPreferredSuggestions;
 
         if (checkSorted) {
             assertSorted(this.#nodes, bitMasksInfo.NodeMaskChildCharIndex);
@@ -115,7 +124,24 @@ export class FastTrieBlob implements TrieData {
         return nodeIdx;
     }
 
-    *words(): Iterable<string> {
+    /**
+     * get an iterable for all the words in the dictionary.
+     * @param prefix - optional prefix to filter the words returned. The words will be prefixed with this value.
+     */
+    *words(prefix?: string): Iterable<string> {
+        if (!prefix) {
+            yield* this.#walk(0);
+            return;
+        }
+        const nodeIdx = this.#lookupNode(0, this.wordToUtf8Seq(prefix));
+        if (!nodeIdx) return;
+
+        for (const suffix of this.#walk(nodeIdx)) {
+            yield prefix + suffix;
+        }
+    }
+
+    *#walk(rootIdx: number): Iterable<string> {
         interface StackItem {
             nodeIdx: number;
             pos: number;
@@ -127,7 +153,7 @@ export class FastTrieBlob implements TrieData {
         const NodeMaskEOW = this.bitMasksInfo.NodeMaskEOW;
         const nodes = this.#nodes;
         const accumulator = Utf8Accumulator.create();
-        const stack: StackItem[] = [{ nodeIdx: 0, pos: 0, word: '', accumulator }];
+        const stack: StackItem[] = [{ nodeIdx: rootIdx, pos: 0, word: '', accumulator }];
         let depth = 0;
 
         while (depth >= 0) {
@@ -191,7 +217,7 @@ export class FastTrieBlob implements TrieData {
             }
         }
 
-        return new TrieBlob(binNodes, this.info);
+        return new TrieBlob(binNodes, this.info, normalizeTrieCharacteristics(this));
     }
 
     isReadonly(): boolean {
@@ -219,7 +245,7 @@ export class FastTrieBlob implements TrieData {
     }
 
     static create(data: FastTrieBlobInternals): FastTrieBlob {
-        return new FastTrieBlob(data.nodes, extractInfo(data), data.info);
+        return new FastTrieBlob(data.nodes, extractInfo(data), data.info, data.characteristics);
     }
 
     static toITrieNodeRoot(trie: FastTrieBlob): ITrieNodeRoot {
@@ -233,6 +259,7 @@ export class FastTrieBlob implements TrieData {
                 hasForbiddenWords: trie.hasForbiddenWords,
                 hasCompoundWords: trie.hasCompoundWords,
                 hasNonStrictWords: trie.hasNonStrictWords,
+                hasPreferredSuggestions: trie.hasPreferredSuggestions,
             }),
             0,
         );
@@ -334,7 +361,12 @@ export class FastTrieBlob implements TrieData {
                 node[j] = (idx << TrieBlob.NodeChildRefShift) | charIndex;
             }
         }
-        return new FastTrieBlob(sortNodes(nodes, TrieBlob.NodeMaskChildCharIndex), bitMasksInfo, trie.info);
+        return new FastTrieBlob(
+            sortNodes(nodes, TrieBlob.NodeMaskChildCharIndex),
+            bitMasksInfo,
+            trie.info,
+            trie.characteristics,
+        );
     }
 
     static isFastTrieBlob(obj: unknown): obj is FastTrieBlob {

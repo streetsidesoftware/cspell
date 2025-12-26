@@ -66,6 +66,8 @@ export class TrieBuilder {
     private _debug_lastWordsInserted: string[] = [];
     // private _debug_mode = true;
     private _debug_mode = false;
+    private hasSugs = false;
+    private suggestionPrefix: string;
 
     constructor(words?: Iterable<string>, trieOptions?: PartialTrieOptions) {
         this._eow = this.createNodeFrozen(1);
@@ -74,6 +76,7 @@ export class TrieBuilder {
         this.signatures.set(this.signature(this._eow), this._eow);
         this.cached.set(this._eow, this._eow.id ?? ++this.count);
         this.trieOptions = Object.freeze(mergeOptionalWithDefaults(trieOptions));
+        this.suggestionPrefix = this.trieOptions.suggestionPrefix;
 
         if (words) {
             this.insert(words);
@@ -81,7 +84,9 @@ export class TrieBuilder {
     }
 
     private get _root(): TrieRoot {
-        return trieNodeToRoot(this.lastPath[0].n, this.trieOptions);
+        const root = trieNodeToRoot(this.lastPath[0].n, this.trieOptions);
+        root.hasPreferredSuggestions = this.hasSugs;
+        return root;
     }
 
     private signature(n: TrieNodeEx): string {
@@ -216,20 +221,8 @@ export class TrieBuilder {
         this.logDebug('insertWord', word);
         this._debug_lastWordsInserted[this.numWords & 0xf] = word;
         this.numWords++;
-        // if (!(this.numWords % 100000) /*|| this.numWords > 26123530 */) {
-        //     console.warn('check circular at: %o', this.numWords);
-        //     const check = checkCircular(this._root);
-        //     if (check.isCircular) {
-        //         const prevWord = this.lastPath.map((a) => a.s).join('|');
-        //         const prevWords = this._debug_lastWordsInserted.map(
-        //             (w, i) => this._debug_lastWordsInserted[(this.numWords + i) & 0xf],
-        //         );
-        //         const { word, pos, stack } = check.ref;
-        //         console.error('Circular before %o\ncheck: %o', this.numWords, { word, pos, prevWord, prevWords });
-        //         console.error('Stack: %o', this.debugStack(stack));
-        //         throw new Error('Circular');
-        //     }
-        // }
+
+        this.hasSugs ||= word.includes(this.suggestionPrefix);
 
         const chars = [...word];
 

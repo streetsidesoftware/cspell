@@ -227,6 +227,27 @@ describe('Validate SimpleDictionaryParser', () => {
     });
 });
 
+describe('parse suggestions', () => {
+    test.each`
+        entry         | expected
+        ${'word'}     | ${['word']}
+        ${'word:sug'} | ${['word', 'word:0:sug']}
+    `('parse suggestions', ({ entry, expected }) => {
+        const words = [...parseDictionaryLines(entry)];
+        expect(words).toEqual(expected);
+    });
+
+    test('dictionaryWithSuggestions0', () => {
+        const words = [...parseDictionaryLines(dictionaryWithSuggestions0())];
+        expect(words).toMatchSnapshot();
+    });
+
+    test('dictionaryWithSuggestions', () => {
+        const words = [...parseDictionaryLines(dictionaryWithSuggestions())];
+        expect(words).toMatchSnapshot();
+    });
+});
+
 function dictionary() {
     return `
     # This is a comment.
@@ -270,6 +291,24 @@ function dictionary3() {
 
     !codecode # Do not allow \`codecode\` or \`Codecode\` when using case insensitive matching.
         `;
+}
+
+function dictionaryWithSuggestions0() {
+    return `
+        # Dictionary with suggestions
+
+        :word:suggestion1,suggestion2
+        colour-> color # cspell:ignore colour
+        favourite-> favorite # cspell:ignore favourite
+        !forbidden:suggested1,suggested2
+        !forbiddenA:"forbidden A", "suggestion A"
+        !forbiddenB:"use B", "suggestion BB"
+        !forbiddenB:"use A"
+    `;
+}
+
+function dictionaryWithSuggestions() {
+    return dictionary() + dictionary2() + dictionary3() + dictionaryWithSuggestions0();
 }
 
 function pdOp(...opts: Partial<ParseDictionaryOptions>[]): Partial<ParseDictionaryOptions> {

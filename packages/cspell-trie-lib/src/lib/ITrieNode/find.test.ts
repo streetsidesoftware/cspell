@@ -55,6 +55,9 @@ describe('Validate findWord', () => {
         ${'notebook'}  | ${{ ...cModeC, ...mCaseF, ...cSep }}              | ${{ found: 'note|book', compoundUsed: true, forbidden: false, caseMatched: true }}
     `('find exact words preserve case "$word" $opts', ({ word, opts, expected }) => {
         // Code is not allowed as a full word.
+        expect(trieBlob.hasForbiddenWords).toBe(true);
+        expect(trieFast.hasForbiddenWords).toBe(true);
+
         expect(findWord(trieBlob, word, opts)).toEqual(expected);
         expect(findWord(trieFast, word, opts)).toEqual(expected);
     });

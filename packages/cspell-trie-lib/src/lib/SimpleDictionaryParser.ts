@@ -9,6 +9,7 @@ import {
     IDENTITY_PREFIX,
     LINE_COMMENT,
     OPTIONAL_COMPOUND_FIX,
+    SUGGESTION_PREFIX,
 } from './constants.ts';
 import type { ITrie } from './ITrie.ts';
 import type { Trie } from './trie.ts';
@@ -71,6 +72,11 @@ export interface ParseDictionaryOptions {
      * Do not normalize the compound character.
      */
     keepOptionalCompoundCharacter: boolean;
+
+    /**
+     * The character used to denote suggestion prefixes.
+     */
+    suggestionPrefix: string;
 }
 
 const RegExpSplit = /[\s,;]/g;
@@ -89,6 +95,7 @@ const _defaultOptions: ParseDictionaryOptions = {
     splitKeepBoth: false,
     splitSeparator: RegExpSplit,
     keepOptionalCompoundCharacter: false,
+    suggestionPrefix: SUGGESTION_PREFIX,
 };
 
 export const defaultParseDictionaryOptions: ParseDictionaryOptions = Object.freeze(_defaultOptions);
@@ -122,6 +129,7 @@ export function createDictionaryLineParserMapper(options?: Partial<ParseDictiona
         stripCaseAndAccentsKeepDuplicate = _defaultOptions.stripCaseAndAccentsKeepDuplicate,
         stripCaseAndAccentsOnForbidden = _defaultOptions.stripCaseAndAccentsOnForbidden,
         keepOptionalCompoundCharacter = _defaultOptions.keepOptionalCompoundCharacter,
+        suggestionPrefix = _defaultOptions.suggestionPrefix,
     } = _options;
 
     let { stripCaseAndAccents = _defaultOptions.stripCaseAndAccents, split = _defaultOptions.split } = _options;
@@ -249,6 +257,65 @@ export function createDictionaryLineParserMapper(options?: Partial<ParseDictiona
         }
     }
 
+    /**
+     * Handle suggestion lines.
+     * `:` is the default suggestions prefix.
+     *
+     * The format can be:
+     * - `:word:suggestion1` # word with a single preferred suggestion (note: it is only a suggestion.)
+     * - `:word : suggestion1` # word with a single preferred suggestion (space will be removed).
+     * - `:word:suggestion1,suggestion2` # word with multiple preferred suggestions
+     * - `:word -> suggestion1, suggestion2` # word with multiple preferred suggestions (alternate format)
+     * - `:word:suggestion1,suggestion2` # this is purely a suggestion entry.
+     * - `!word:suggestion1,suggestion2` # forbidden word with suggestions.
+     * - `word:suggestion1,suggestion2` # normal word with suggestions, the word is included in the dictionary.
+     *
+     * They are stored in the dictionary with the following format:
+     *   `<prefix><word><suggestionPrefix><index><suggestionPrefix><suggestion>`
+     *
+     *
+     * Example forbidden word with suggestions:
+     * - `!word` the word itself
+     * - `!word:0:first_suggestion` the word itself
+     * - `!word:1:second_suggestion` the word itself
+     * @param lines
+     */
+    function* handleSuggestions(lines: Iterable<string>): Iterable<string> {
+        for (const line of lines) {
+            yield* handleSuggestion(line);
+        }
+    }
+
+    const r = /^\s*(?<prefix>[!:~]*)(?<word>.*?)(->|:)(?<suggestions>.*)$/;
+
+    function* handleSuggestion(line: string): Iterable<string> {
+        const hasAltFormat = line.includes('->');
+        const hasColon = line.includes(':');
+        if (!hasColon && !hasAltFormat) {
+            yield line;
+            return;
+        }
+        const m = line.match(r);
+        if (!m || !m.groups) {
+            yield line;
+            return;
+        }
+        const prefix = m.groups['prefix'] || '';
+        const word = (m.groups['word'] || '').trim();
+        const suggestionsPart = m.groups['suggestions'] || '';
+        const suggestions = suggestionsPart
+            .split(',')
+            .map((s) => s.trim())
+            .filter((s) => !!s);
+        yield prefix + word;
+        const p = suggestionPrefix;
+        const w = prefix + word + p;
+        const pad = suggestions.length.toString().length;
+        for (let i = 0; i < suggestions.length; i++) {
+            yield w + i.toString().padStart(pad) + p + suggestions[i];
+        }
+    }
+
     const mapCompounds: Operator<string>[] = keepOptionalCompoundCharacter
         ? []
         : [opConcatMap(mapOptionalPrefix), opConcatMap(mapOptionalSuffix)];
@@ -259,6 +326,7 @@ export function createDictionaryLineParserMapper(options?: Partial<ParseDictiona
         opMap(removeComments),
         splitWords,
         opMap(trim),
+        handleSuggestions,
         opFilter(filterEmptyLines),
         ...mapCompounds,
         opConcatMap(mapNormalize),
@@ -299,11 +367,7 @@ export function parseDictionaryLegacy(text: string | string[], options?: Partial
 export function parseLinesToDictionary(lines: Iterable<string>, options?: Partial<ParseDictionaryOptions>): ITrie {
     const _options = mergeOptions(_defaultOptions, options);
     const dictLines = parseDictionaryLines(lines, _options);
-    return buildITrieFromWords([...new Set(dictLines)].sort(), {
-        compoundCharacter: _options.compoundCharacter,
-        forbiddenWordPrefix: _options.forbiddenPrefix,
-        stripCaseAndAccentsPrefix: _options.caseInsensitivePrefix,
-    });
+    return buildITrieFromWords([...new Set(dictLines)].sort(), options);
 }
 
 export function parseDictionary(text: string | Iterable<string>, options?: Partial<ParseDictionaryOptions>): ITrie {

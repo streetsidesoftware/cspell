@@ -1,4 +1,4 @@
-import type { TrieInfo } from './ITrieNode/TrieInfo.ts';
+import type { TrieCharacteristics, TrieInfo } from './ITrieNode/TrieInfo.ts';
 
 export const COMPOUND_FIX = '+';
 export const OPTIONAL_COMPOUND_FIX = '*';
@@ -12,8 +12,12 @@ export const defaultTrieInfo: TrieInfo = Object.freeze({
     compoundCharacter: COMPOUND_FIX,
     forbiddenWordPrefix: FORBID_PREFIX,
     stripCaseAndAccentsPrefix: CASE_INSENSITIVE_PREFIX,
-    isCaseAware: true,
+    suggestionPrefix: SUGGESTION_PREFIX,
+});
+
+export const defaultCharacteristics: Readonly<TrieCharacteristics> = {
     hasForbiddenWords: false,
     hasCompoundWords: false,
     hasNonStrictWords: false,
-});
+    hasPreferredSuggestions: false,
+};
