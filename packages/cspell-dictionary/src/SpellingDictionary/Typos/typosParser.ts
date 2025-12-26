@@ -113,7 +113,7 @@ export function parseTyposLine(line: TypoEntry): TypoEntry | undefined {
     if (!line) return undefined;
     if (typeof line === 'string') {
         const def = createTyposDef();
-        for (const subEntry of splitIntoLines(line.replace(/:\d+:/, ':'))) {
+        for (const subEntry of splitIntoLines(line)) {
             const [left, right] = splitEntry(subEntry);
             const typo = left.trim();
             if (!right) return typo;
@@ -130,11 +130,30 @@ export function parseTyposLine(line: TypoEntry): TypoEntry | undefined {
     return sanitizeIntoTypoDef(line);
 }
 
+/**
+ * Split text into multiple lines
+ * @param content - text content
+ * @returns
+ */
 function splitIntoLines(content: string): string[] {
     return trimAndFilter(normalize(content).split(typoEntrySeparator));
 }
 
+/**
+ * Split a typo entry into key and value
+ * Entry format:
+ * - `word:suggestion`
+ * - `word->suggestion`
+ * - `word: first, second, third suggestions`
+ * - sequencing values are ignored, e.g.: `:0:`, `:1:`, `:a:`
+ *   - `word:0:first`
+ *   - `word:1:second`
+ * @param line - the line of text
+ * @returns
+ */
 function splitEntry(line: string): readonly [string, string | undefined] {
+    // Remove any sequencing values like `:1:` or `:a:`
+    line = line.replace(/:.+:/, ':');
     return line.split(typoSuggestionsSeparator, 2) as [string, string];
 }
 
