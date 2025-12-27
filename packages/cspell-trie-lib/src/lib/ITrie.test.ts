@@ -213,6 +213,14 @@ describe('Validate Trie Class', () => {
         expect(trie.hasWord('play time', true)).toBe(false); // we didn't add 'play time' as a word, it was only a suggestion.
     });
 
+    test('preferred suggestions with prefix', () => {
+        const trie = combineSamplesIntoDictionary(sampleSuggestions());
+
+        expect(trie.hasPreferredSuggestions).toBe(true);
+        const entries = [...trie.getAllPreferredSuggestions('p')];
+        expect(entries).toEqual(['playtime:sleep', 'playtime:play time']);
+    });
+
     test.each`
         word           | expected
         ${'favourite'} | ${['favorite']}
