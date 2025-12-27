@@ -184,6 +184,7 @@ export const definitions: FileTypeDefinitions = [
         extensions: ['.cfg', '.conf', '.directory', '.editorconfig', '.gitattributes', '.gitconfig', '.gitmodules', '.npmrc', '.properties', '.repo'],
         filenames: ['.env', 'gitconfig'],
     },
+    { id: 'protobuf', extensions: ['.proto', '.txtpb', '.textproto', '.textpb', '.pbtxt'] },
     { id: 'puppet', extensions: ['.puppet'] },
     { id: 'purescript', extensions: ['.purs'] },
     { id: 'python', extensions: ['.cpy', '.gyp', '.gypi', '.ipy', '.py', '.pyi', '.pyt', '.pyw', '.rpy'], filenames: ['SConscript', 'SConstruct'] },
