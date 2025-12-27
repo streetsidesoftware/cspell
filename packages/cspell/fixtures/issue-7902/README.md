@@ -1,6 +1,6 @@
 # Using Suggestions
 
-<!-- cspell:words !blacklist:allowlist -->
+<!-- cspell:words !blacklist:allowlist !second:first -->
 
 Expect that the following words will have suggestions:
 
@@ -8,3 +8,4 @@ Expect that the following words will have suggestions:
 - favourite -> favorite
 - blacklist -> allowlist
 - cafe -> café
+- second -> first

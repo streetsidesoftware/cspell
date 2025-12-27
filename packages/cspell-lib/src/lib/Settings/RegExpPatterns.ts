@@ -14,7 +14,7 @@ export const regExSpellingGuardBlock: RegExp =
     /(\bc?spell(?:-?checker)?::?)\s*disable(?!-line|-next)\b(?!-)[\s\S]*?((?:\1\s*enable\b)|$)/gi;
 export const regExSpellingGuardNext: RegExp = /\bc?spell(?:-?checker)?::?\s*disable-next\b.*\s\s?.*/gi;
 export const regExSpellingGuardLine: RegExp = /^.*\bc?spell(?:-?checker)?::?\s*disable-line\b.*/gim;
-export const regExIgnoreSpellingDirectives: RegExp = /\bc?spell(?:-?checker)?::?\s*ignoreRegExp.*/gim;
+export const regExIgnoreSpellingDirectives: RegExp = /\bc?spell(?:-?checker)?::?\s*(ignoreRegExp|word|ignore).*/gim;
 export const regExPublicKey: RegExp = /-{5}BEGIN\s+((?:RSA\s+)?PUBLIC\s+KEY)[\w=+\-/=\\\s]+?END\s+\1-{5}/g;
 export const regExCert: RegExp =
     /-{5}BEGIN\s+(CERTIFICATE|(?:RSA\s+)?(?:PRIVATE|PUBLIC)\s+KEY)[\w=+\-/=\\\s]+?END\s+\1-{5}/g;
