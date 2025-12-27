@@ -2805,6 +2805,11 @@ interface SpellingDictionary extends DictionaryInfo {
   readonly size: number;
   readonly isDictionaryCaseSensitive: boolean;
   getErrors?(): Error[];
+  /**
+   * Get all the terms in the dictionary, they may be formatted according to the dictionary options.
+   * @returns the terms in the dictionary.
+   */
+  terms?: () => Iterable<string>;
 }
 //#endregion
 //#region ../cspell-dictionary/dist/SpellingDictionary/SpellingDictionaryCollection.d.ts
