@@ -1,12 +1,22 @@
+import { opMap, pipe } from '@cspell/cspell-pipe/sync';
+import { buildITrieFromWords, parseDictionaryLines } from 'cspell-trie-lib';
 import { describe, expect, test } from 'vitest';
 
-import { createFlagWordsDictionary } from './FlagWordsDictionary.js';
+import { createFlagWordsDictionary, FlagWordsDictionary, FlagWordsDictionaryTrie } from './FlagWordsDictionary.js';
+import { createTyposDictionary } from './TyposDictionary.js';
 
 // const oc = <T>(obj: T) => expect.objectContaining(obj);
 
 describe('ForbiddenWordsDictionary', () => {
     const dictWords = ['  english', '!English', 'grumpy', 'Avocado', 'avocadoS', '!avocado'];
     const dict = createFlagWordsDictionary(dictWords, 'flag_words', 'test');
+
+    test('flag dictionary entries', () => {
+        expect(dict.isForbidden('english')).toBe(true);
+        expect(dict.isForbidden('English')).toBe(false);
+        expect(dict.isForbidden('grumpy')).toBe(true);
+        expect(dict.has('English')).toBe(false);
+    });
 
     test.each`
         word         | expected
@@ -100,6 +110,7 @@ describe('ForbiddenWordsDictionaryTrie', () => {
         '!notfound',
     ];
     const dict = createFlagWordsDictionary(flagWords, 'flag_words', 'test');
+    const fDict = createFlagWordsDictionaryLegacy(flagWords, 'flag_words', 'test');
 
     test.each`
         word         | expected
@@ -203,4 +214,66 @@ describe('ForbiddenWordsDictionaryTrie', () => {
     `('suggest of "$word"', async ({ word, expected }) => {
         expect(dict.getPreferredSuggestions?.(word)).toEqual(expected);
     });
+
+    test('dictionary generation', () => {
+        expect([...(dict.terms?.() || [])].sort()).toEqual([...(fDict.terms?.() || [])].sort());
+    });
+
+    test('terms', () => {
+        const terms = [...(dict.terms?.() || [])];
+        expect(terms.sort()).toEqual([
+            '!+found',
+            '!+working',
+            // '!Avocado',
+            // '!Capitol',
+            // '!avocadoS',
+            // '!english',
+            // '!grumpy',
+            '!not+',
+            // 'English',
+            // 'avocado',
+            // 'notfound',
+        ]);
+    });
 });
+
+function createFlagWordsDictionaryLegacy(wordList: Iterable<string>, name: string, source: string) {
+    const testSpecialCharacters = /[~*+]/;
+
+    const { t: specialWords, f: typoWords } = bisect(
+        parseDictionaryLines(wordList, { stripCaseAndAccents: false }),
+        (line) => testSpecialCharacters.test(line),
+    );
+
+    const trieDict = specialWords.size ? buildTrieDict(specialWords, name, source) : undefined;
+    const typosDict = createTyposDictionary(typoWords, name, source);
+
+    if (!trieDict) return typosDict;
+    return new FlagWordsDictionary(name, source, typosDict, trieDict);
+}
+
+const regExpCleanIgnore = /^(!!)+/;
+
+function buildTrieDict(words: Set<string>, name: string, source: string): FlagWordsDictionaryTrie {
+    const trie = buildITrieFromWords(
+        pipe(
+            words,
+            opMap((w) => '!' + w),
+            opMap((w) => w.replace(regExpCleanIgnore, '')),
+        ),
+    );
+    return new FlagWordsDictionaryTrie(trie, name, source);
+}
+
+function bisect<T>(values: Set<T> | Iterable<T>, predicate: (v: T) => boolean): { t: Set<T>; f: Set<T> } {
+    const t = new Set<T>();
+    const f = new Set<T>();
+    for (const v of values) {
+        if (predicate(v)) {
+            t.add(v);
+        } else {
+            f.add(v);
+        }
+    }
+    return { t, f };
+}

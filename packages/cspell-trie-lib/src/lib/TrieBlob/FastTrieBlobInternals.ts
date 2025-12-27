@@ -11,8 +11,14 @@ export class FastTrieBlobInternals implements FastTrieBlobBitMaskInfo {
     readonly NodeChildRefShift: number;
     readonly info: Readonly<TrieInfo>;
     readonly nodes: Nodes;
+    readonly characteristics: Readonly<Partial<TrieCharacteristics>>;
 
-    constructor(nodes: Nodes, maskInfo: FastTrieBlobBitMaskInfo, info: Readonly<PartialTrieInfo>) {
+    constructor(
+        nodes: Nodes,
+        maskInfo: FastTrieBlobBitMaskInfo,
+        info: Readonly<PartialTrieInfo>,
+        characteristics: Readonly<Partial<TrieCharacteristics>>,
+    ) {
         this.nodes = nodes;
         const { NodeMaskEOW, NodeMaskChildCharIndex, NodeChildRefShift } = maskInfo;
         this.NodeMaskEOW = NodeMaskEOW;
@@ -20,6 +26,7 @@ export class FastTrieBlobInternals implements FastTrieBlobBitMaskInfo {
         this.NodeChildRefShift = NodeChildRefShift;
 
         this.info = mergeOptionalWithDefaults(info);
+        this.characteristics = characteristics;
     }
 }
 
@@ -47,7 +54,7 @@ export class FastTrieBlobInternalsAndMethods extends FastTrieBlobInternals imple
         info: PartialTrieInfo,
         trieMethods: Readonly<TrieMethods>,
     ) {
-        super(nodes, maskInfo, info);
+        super(nodes, maskInfo, info, trieMethods);
         this.nodeFindExact = trieMethods.nodeFindExact;
         this.nodeGetChild = trieMethods.nodeGetChild;
         this.isForbidden = trieMethods.isForbidden;
@@ -56,6 +63,10 @@ export class FastTrieBlobInternalsAndMethods extends FastTrieBlobInternals imple
         this.hasForbiddenWords = trieMethods.hasForbiddenWords;
         this.hasCompoundWords = trieMethods.hasCompoundWords;
         this.hasNonStrictWords = trieMethods.hasNonStrictWords;
+    }
+
+    get hasPreferredSuggestions(): boolean {
+        return !!this.characteristics.hasPreferredSuggestions;
     }
 }
 

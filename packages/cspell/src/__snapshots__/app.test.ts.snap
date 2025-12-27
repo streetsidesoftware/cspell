@@ -668,6 +668,31 @@ error"
 
 exports[`Validate cli > app 'issue-7837' Expect Error: [Function CheckFailed] 3`] = `""`;
 
+exports[`Validate cli > app 'issue-7902' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app 'issue-7902' Expect Error: [Function CheckFailed] 2`] = `
+"error	1/3 cspell.config.yaml 0.00ms
+error
+error	2/3 README.md 0.00ms X
+error
+log	README.md:7:3 - Forbidden word (colour) fix: (color)
+log
+log	README.md:8:3 - Forbidden word (favourite) fix: (favorite)
+log
+log	README.md:9:3 - Forbidden word (blacklist) fix: (allowlist)
+log
+log	README.md:10:3 - Forbidden word (cafe) fix: (café)
+log
+log	README.md:11:3 - Forbidden word (second) fix: (first)
+log
+error	3/3 words.txt 0.00ms
+error
+error	CSpell: Files checked: 3, Issues found: 5 in 1 file.
+error"
+`;
+
+exports[`Validate cli > app 'issue-7902' Expect Error: [Function CheckFailed] 3`] = `""`;
+
 exports[`Validate cli > app 'issue-8200' Expect Error: undefined 1`] = `[]`;
 
 exports[`Validate cli > app 'issue-8200' Expect Error: undefined 2`] = `

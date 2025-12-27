@@ -7,10 +7,27 @@ import { createSuggestDictionary } from './SuggestDictionary.js';
 
 const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
 
+// cspell:words colour
+
 describe('CachingDictionary', () => {
-    const words = ['apple', 'banana', 'orange', 'grape', 'mango', '!pear'];
+    const words = [
+        'apple',
+        'banana',
+        'orange',
+        'grape',
+        'mango',
+        '!pear:apple',
+        'color',
+        ':colour:color',
+        'red:green',
+        'red:yellow',
+    ];
     const dictWords = createSpellingDictionary(words, '[words]', 'source');
-    const sugDict = createSuggestDictionary(['red:green', 'up:down'], '[suggestions]', 'source');
+    const sugDict = createSuggestDictionary(
+        ['red:green', 'up:down', 'turn:left', 'turn:right'],
+        '[suggestions]',
+        'source',
+    );
     const dict = createCollection([dictWords, sugDict], 'collection');
 
     test('hits', () => {
@@ -61,11 +78,14 @@ describe('CachingDictionary', () => {
     });
 
     test.each`
-        word       | expected
-        ${'apple'} | ${[]}
-        ${'up'}    | ${[{ word: 'down', cost: 1, isPreferred: true }]}
-        ${'red'}   | ${[{ word: 'green', cost: 1, isPreferred: true }]}
-        ${'green'} | ${[]}
+        word        | expected
+        ${'apple'}  | ${[]}
+        ${'up'}     | ${[{ word: 'down', cost: 1, isPreferred: true }]}
+        ${'red'}    | ${[{ word: 'green', cost: 1, isPreferred: true }, { word: 'yellow', cost: 2, isPreferred: true }]}
+        ${'turn'}   | ${[{ word: 'left', cost: 1, isPreferred: true }, { word: 'right', cost: 2, isPreferred: true }]}
+        ${'colour'} | ${[{ word: 'color', cost: 1, isPreferred: true }]}
+        ${'pear'}   | ${[{ word: 'apple', cost: 1, isPreferred: true }]}
+        ${'green'}  | ${[]}
     `('getPreferredSuggestions $word', ({ word, expected }) => {
         const cd = createCachingDictionary(dict, {});
         expect(cd.getPreferredSuggestions(word)).toEqual(expected);

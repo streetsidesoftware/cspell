@@ -1,9 +1,10 @@
 import { type BuilderCursor, insertWordsAtCursor, type TrieBuilder } from '../Builder/index.ts';
-import { defaultTrieInfo } from '../constants.ts';
+import { TrieInfoBuilder } from '../ITrieNode/TrieInfo.ts';
 import type { PartialTrieOptions, TrieOptions } from '../trie.ts';
 import { assert } from '../utils/assert.ts';
 import { assertIsValidChar } from '../utils/isValidChar.ts';
 import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.ts';
+import { createTrieRoot } from './trie-util.ts';
 import type { ChildMap, TrieNode, TrieRoot } from './TrieNode.ts';
 import { TrieNodeTrie } from './TrieNodeTrie.ts';
 
@@ -21,9 +22,11 @@ interface TrieNodeBranch extends LockableTrieNode {
 const compare = new Intl.Collator().compare;
 
 export class TrieNodeBuilder implements TrieBuilder<TrieNodeTrie> {
-    private _cursor: BuilderCursor | undefined;
-    root: TrieRoot = { ...defaultTrieInfo, c: Object.create(null) };
+    #cursor: BuilderCursor | undefined;
+    root: TrieRoot = createTrieRoot();
+    #trieInfoBuilder: TrieInfoBuilder = new TrieInfoBuilder(this.root);
     shouldSort = false;
+    suggestionPrefix: string = this.root.suggestionPrefix;
 
     wordToCharacters = (word: string): string[] => [...word];
 
@@ -38,20 +41,14 @@ export class TrieNodeBuilder implements TrieBuilder<TrieNodeTrie> {
     }
 
     getCursor(): BuilderCursor {
-        this._cursor ??= this.createCursor();
-        return this._cursor;
-    }
-
-    /**
-     * In this case, it isn't necessary. The TrieNodeBuilder doesn't need to know the characters
-     * @param _characters
-     */
-    setCharacterSet(_characters: string | string[]): void {
-        this.shouldSort = true;
+        this.#cursor ??= this.createCursor();
+        return this.#cursor;
     }
 
     private createCursor(): BuilderCursor {
-        const nodes: LockableTrieNode[] = [this.root, EOW];
+        const root = this.root;
+        const sug = this.suggestionPrefix;
+        const nodes: LockableTrieNode[] = [root, EOW];
         const eow = EOW;
 
         interface StackItem {
@@ -61,15 +58,20 @@ export class TrieNodeBuilder implements TrieBuilder<TrieNodeTrie> {
             c: string;
         }
 
-        assert(Object.keys(this.root.c).length === 0, 'The Trie MUST be empty for cursors to work.');
+        assert(Object.keys(root.c).length === 0, 'The Trie MUST be empty for cursors to work.');
 
-        const stack: StackItem[] = [{ n: this.root, c: '' }];
+        const stack: StackItem[] = [{ n: root, c: '' }];
 
-        let currNode: LockableTrieNode = this.root;
+        let currNode: LockableTrieNode = root;
         let depth = 0;
 
         const insertChar = (char: string) => {
             assertIsValidChar(char);
+
+            if (!depth || char === sug) {
+                this.#trieInfoBuilder.addWord(char);
+            }
+
             // console.warn('i %o', char);
             if (currNode.k) {
                 const s = stack[depth];
@@ -154,7 +156,6 @@ export class TrieNodeBuilder implements TrieBuilder<TrieNodeTrie> {
 
 export function buildTrieNodeTrieFromWords(words: Iterable<string>): TrieNodeTrie {
     const builder = new TrieNodeBuilder();
-    builder.setCharacterSet('');
     insertWordsAtCursor(builder.getCursor(), words);
     return builder.build();
 }

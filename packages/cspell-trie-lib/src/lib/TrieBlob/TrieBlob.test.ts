@@ -75,6 +75,19 @@ describe('TrieBlob', () => {
         expect(t.hasCompoundWords).toBe(true);
         expect(t.hasNonStrictWords).toBe(true);
     });
+
+    test.each`
+        prefix
+        ${''}
+        ${'wa'}
+        ${'o'}
+    `('walk with prefix $prefix', ({ prefix }) => {
+        const words = [...new Set([...getWordsDictionary(), ...sampleWords])].sort();
+        const filtered = words.filter((w) => w.startsWith(prefix));
+        const ft = FastTrieBlobBuilder.fromWordList(words);
+        const t = ft.toTrieBlob();
+        expect([...t.words(prefix)]).toEqual(filtered);
+    });
 });
 
 describe('TrieBlob encode/decode', async () => {

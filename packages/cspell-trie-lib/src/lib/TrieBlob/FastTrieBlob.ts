@@ -20,11 +20,13 @@ export class FastTrieBlob implements TrieData {
     #forbidIdx: number;
     #compoundIdx: number;
     #nonStrictIdx: number;
+    #suggestIdx: number;
     #iTrieRoot: ITrieNodeRoot | undefined;
     wordToCharacters: (word: string) => readonly string[];
     readonly hasForbiddenWords: boolean;
     readonly hasCompoundWords: boolean;
     readonly hasNonStrictWords: boolean;
+    readonly hasPreferredSuggestions: boolean;
     #nodes: FastTrieBlobNode[];
     #charIndex: CharIndex;
     readonly bitMasksInfo: FastTrieBlobBitMaskInfo;
@@ -39,10 +41,12 @@ export class FastTrieBlob implements TrieData {
         this.#forbidIdx = this.#searchNodeForChar(0, this.info.forbiddenWordPrefix) || 0;
         this.#compoundIdx = this.#searchNodeForChar(0, this.info.compoundCharacter) || 0;
         this.#nonStrictIdx = this.#searchNodeForChar(0, this.info.stripCaseAndAccentsPrefix) || 0;
+        this.#suggestIdx = this.#searchNodeForChar(0, this.info.suggestionPrefix) || 0;
 
         this.hasForbiddenWords = !!this.#forbidIdx;
         this.hasCompoundWords = !!this.#compoundIdx;
         this.hasNonStrictWords = !!this.#nonStrictIdx;
+        this.hasPreferredSuggestions = !!this.#suggestIdx;
 
         if (checkSorted) {
             assertSorted(this.#nodes, bitMasksInfo.NodeMaskChildCharIndex);
@@ -115,7 +119,24 @@ export class FastTrieBlob implements TrieData {
         return nodeIdx;
     }
 
-    *words(): Iterable<string> {
+    /**
+     * get an iterable for all the words in the dictionary.
+     * @param prefix - optional prefix to filter the words returned. The words will be prefixed with this value.
+     */
+    *words(prefix?: string): Iterable<string> {
+        if (!prefix) {
+            yield* this.#walk(0);
+            return;
+        }
+        const nodeIdx = this.#lookupNode(0, this.wordToUtf8Seq(prefix));
+        if (!nodeIdx) return;
+
+        for (const suffix of this.#walk(nodeIdx)) {
+            yield prefix + suffix;
+        }
+    }
+
+    *#walk(rootIdx: number): Iterable<string> {
         interface StackItem {
             nodeIdx: number;
             pos: number;
@@ -127,7 +148,7 @@ export class FastTrieBlob implements TrieData {
         const NodeMaskEOW = this.bitMasksInfo.NodeMaskEOW;
         const nodes = this.#nodes;
         const accumulator = Utf8Accumulator.create();
-        const stack: StackItem[] = [{ nodeIdx: 0, pos: 0, word: '', accumulator }];
+        const stack: StackItem[] = [{ nodeIdx: rootIdx, pos: 0, word: '', accumulator }];
         let depth = 0;
 
         while (depth >= 0) {
@@ -233,6 +254,7 @@ export class FastTrieBlob implements TrieData {
                 hasForbiddenWords: trie.hasForbiddenWords,
                 hasCompoundWords: trie.hasCompoundWords,
                 hasNonStrictWords: trie.hasNonStrictWords,
+                hasPreferredSuggestions: trie.hasPreferredSuggestions,
             }),
             0,
         );

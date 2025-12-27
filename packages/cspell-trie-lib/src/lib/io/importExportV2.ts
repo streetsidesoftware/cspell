@@ -226,5 +226,6 @@ export function importTrie(linesX: Iterable<string> | IterableIterator<string>):
             { nodes: [], root: { s: '', c: Object.create(null) } },
         );
 
-    return trieNodeToRoot(n.root, { isCaseAware: false });
+    // return trieNodeToRoot(n.root, { isCaseAware: false });
+    return trieNodeToRoot(n.root, {});
 }

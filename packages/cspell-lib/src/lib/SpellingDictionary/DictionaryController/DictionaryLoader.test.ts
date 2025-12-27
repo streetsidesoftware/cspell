@@ -85,7 +85,9 @@ describe('Validate DictionaryLoader', () => {
     test.each`
         testCase            | file                          | options          | word               | maxAge       | hasWord  | hasErrors
         ${'sample words'}   | ${sample('words.txt')}        | ${{}}            | ${'apple'}         | ${1}         | ${true}  | ${false}
-        ${'sample words'}   | ${sample('words.txt')}        | ${{}}            | ${'class:name'}    | ${1}         | ${true}  | ${false}
+        ${'sample words'}   | ${sample('words.txt')}        | ${{}}            | ${'class:name'}    | ${1}         | ${false} | ${false}
+        ${'sample words'}   | ${sample('words.txt')}        | ${{}}            | ${'class'}         | ${1}         | ${true}  | ${false}
+        ${'sample words'}   | ${sample('words.txt')}        | ${{}}            | ${'name'}          | ${1}         | ${false} | ${false}
         ${'sample words'}   | ${sample('words.txt')}        | ${{}}            | ${'left-right'}    | ${1}         | ${true}  | ${false}
         ${'sample words'}   | ${sample('words.txt')}        | ${{ type: 5 }}   | ${'apple'}         | ${1}         | ${true}  | ${false}
         ${'sample words'}   | ${sample('words.txt')}        | ${{ type: 'S' }} | ${'pear'}          | ${undefined} | ${true}  | ${false}

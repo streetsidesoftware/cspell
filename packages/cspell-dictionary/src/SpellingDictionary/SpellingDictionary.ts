@@ -153,6 +153,23 @@ export interface SpellingDictionary extends DictionaryInfo {
     readonly size: number;
     readonly isDictionaryCaseSensitive: boolean;
     getErrors?(): Error[];
+
+    /**
+     * Get all the terms in the dictionary, they may be formatted according to the dictionary options.
+     * @returns the terms in the dictionary.
+     */
+    terms?: () => Iterable<string>;
+}
+
+export interface SuggestDictionary extends SpellingDictionary {
+    getPreferredSuggestions: (word: string) => PreferredSuggestion[];
+    /**
+     * Determine if the word can appear in a list of suggestions.
+     * @param word - word
+     * @param ignoreCaseAndAccents - ignore case.
+     * @returns true if a word is suggested, otherwise false.
+     */
+    isSuggestedWord(word: string, ignoreCaseAndAccents?: IgnoreCaseOption): boolean;
 }
 
 export const defaultOptions: SpellingDictionaryOptions = Object.freeze({

@@ -227,8 +227,19 @@ export class Trie {
     /**
      * Returns an iterator that can be used to get all words in the trie. For some dictionaries, this can result in millions of words.
      */
-    words(): Iterable<string> {
-        return iteratorTrieWords(this.root);
+    *words(prefix?: string): Iterable<string> {
+        if (!prefix) {
+            yield* iteratorTrieWords(this.root);
+            return;
+        }
+        const node = this.find(prefix);
+        if (!node) {
+            return;
+        }
+        if (node.f) yield prefix;
+        for (const suffix of iteratorTrieWords(node)) {
+            yield prefix + suffix;
+        }
     }
 
     /**

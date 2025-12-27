@@ -1,12 +1,12 @@
 import { consolidate } from '../consolidate.ts';
 import type { ITrieNode, ITrieNodeRoot } from '../ITrieNode/ITrieNode.ts';
-import { findNode } from '../ITrieNode/trie-util.ts';
+import { findNode, iteratorTrieWords } from '../ITrieNode/trie-util.ts';
 import type { PartialTrieOptions, TrieOptions } from '../trie.ts';
 import type { TrieData } from '../TrieData.ts';
 import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.ts';
 import { findWordExact } from './find.ts';
 import { trieRootToITrieRoot } from './trie.ts';
-import { countNodes, createTrieRootFromList, iteratorTrieWords } from './trie-util.ts';
+import { countNodes, createTrieRootFromList } from './trie-util.ts';
 import type { TrieRoot } from './TrieNode.ts';
 
 export class TrieNodeTrie implements TrieData {
@@ -16,14 +16,16 @@ export class TrieNodeTrie implements TrieData {
     readonly hasForbiddenWords: boolean;
     readonly hasCompoundWords: boolean;
     readonly hasNonStrictWords: boolean;
+    readonly hasPreferredSuggestions: boolean;
     readonly root: TrieRoot;
 
     constructor(root: TrieRoot) {
         this.root = root;
         this.info = mergeOptionalWithDefaults(root);
-        this.hasForbiddenWords = !!root.c[root.forbiddenWordPrefix];
-        this.hasCompoundWords = !!root.c[root.compoundCharacter];
-        this.hasNonStrictWords = !!root.c[root.stripCaseAndAccentsPrefix];
+        this.hasForbiddenWords = root.hasForbiddenWords; // !!root.c[root.forbiddenWordPrefix];
+        this.hasCompoundWords = root.hasCompoundWords; // !!root.c[root.compoundCharacter];
+        this.hasNonStrictWords = root.hasNonStrictWords; // !!root.c[root.stripCaseAndAccentsPrefix];
+        this.hasPreferredSuggestions = root.hasPreferredSuggestions;
     }
 
     wordToCharacters = (word: string): string[] => [...word];
@@ -40,8 +42,20 @@ export class TrieNodeTrie implements TrieData {
         return findNode(this.getRoot(), prefix);
     }
 
-    words(): Iterable<string> {
-        return iteratorTrieWords(this.root);
+    *words(prefix?: string): Iterable<string> {
+        if (!prefix) {
+            yield* iteratorTrieWords(this.getRoot());
+            return;
+        }
+
+        const node = this.getNode(prefix);
+        if (!node) {
+            return;
+        }
+        if (node.eow) yield prefix;
+        for (const suffix of iteratorTrieWords(node)) {
+            yield prefix + suffix;
+        }
     }
 
     has(word: string): boolean {

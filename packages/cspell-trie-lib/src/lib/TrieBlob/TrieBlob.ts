@@ -1,4 +1,3 @@
-import { defaultTrieInfo } from '../constants.ts';
 import type { FindResult, ITrieNode, ITrieNodeRoot } from '../ITrieNode/ITrieNode.ts';
 import { findNode } from '../ITrieNode/trie-util.ts';
 import type { PartialTrieInfo, TrieInfo } from '../ITrieNode/TrieInfo.ts';
@@ -17,6 +16,7 @@ export class TrieBlob implements TrieData {
     #forbidIdx: number | undefined;
     #compoundIdx: number | undefined;
     #nonStrictIdx: number | undefined;
+    #suggestIdx: number | undefined;
 
     #size: number | undefined;
     #iTrieRoot: ITrieNodeRoot | undefined;
@@ -31,6 +31,7 @@ export class TrieBlob implements TrieData {
     readonly nodes: Uint32Array;
     readonly NodeMaskNumChildren: number;
     readonly NodeChildRefShift: number;
+    readonly hasPreferredSuggestions: boolean;
 
     constructor(nodes: Uint32Array, info: PartialTrieInfo) {
         this.nodes = nodes;
@@ -41,11 +42,13 @@ export class TrieBlob implements TrieData {
         this.#forbidIdx = this.#findNode(0, this.info.forbiddenWordPrefix);
         this.#compoundIdx = this.#findNode(0, this.info.compoundCharacter);
         this.#nonStrictIdx = this.#findNode(0, this.info.stripCaseAndAccentsPrefix);
+        this.#suggestIdx = this.#findNode(0, this.info.suggestionPrefix);
         this.hasForbiddenWords = !!this.#forbidIdx;
         this.hasCompoundWords = !!this.#compoundIdx;
         this.hasNonStrictWords = !!this.#nonStrictIdx;
         this.NodeMaskNumChildren = TrieBlob.NodeMaskNumChildren;
         this.NodeChildRefShift = TrieBlob.NodeChildRefShift;
+        this.hasPreferredSuggestions = !!this.#suggestIdx;
     }
 
     has(word: string): boolean {
@@ -103,6 +106,7 @@ export class TrieBlob implements TrieData {
                 hasCompoundWords: this.hasCompoundWords,
                 hasForbiddenWords: this.hasForbiddenWords,
                 hasNonStrictWords: this.hasNonStrictWords,
+                hasPreferredSuggestions: false,
             },
         );
         return new TrieBlobIRoot(trieData, 0, this.info, {
@@ -182,7 +186,24 @@ export class TrieBlob implements TrieData {
         return nodeIdx;
     }
 
-    *words(): Iterable<string> {
+    /**
+     * get an iterable for all the words in the dictionary.
+     * @param prefix - optional prefix to filter the words returned. The words will be prefixed with this value.
+     */
+    *words(prefix?: string): Iterable<string> {
+        if (!prefix) {
+            yield* this.#walk(0);
+            return;
+        }
+        const nodeIdx = this.#findNode(0, prefix);
+        if (!nodeIdx) return;
+
+        for (const suffix of this.#walk(nodeIdx)) {
+            yield prefix + suffix;
+        }
+    }
+
+    *#walk(rootIdx: number): Iterable<string> {
         interface StackItem {
             nodeIdx: number;
             pos: number;
@@ -194,7 +215,7 @@ export class TrieBlob implements TrieData {
         const NodeMaskChildCharIndex = TrieBlob.NodeMaskChildCharIndex;
         const NodeChildRefShift = TrieBlob.NodeChildRefShift;
         const nodes = this.nodes;
-        const stack: StackItem[] = [{ nodeIdx: 0, pos: 0, word: '', acc: Utf8Accumulator.create() }];
+        const stack: StackItem[] = [{ nodeIdx: rootIdx, pos: 0, word: '', acc: Utf8Accumulator.create() }];
         let depth = 0;
 
         while (depth >= 0) {
@@ -253,12 +274,12 @@ export class TrieBlob implements TrieData {
     }
 
     encodeBin(): Uint8Array {
-        return encodeTrieBlobToBTrie({ nodes: this.nodes, info: undefined });
+        return encodeTrieBlobToBTrie({ nodes: this.nodes, info: this.info, characteristics: this });
     }
 
     static decodeBin(blob: Uint8Array): TrieBlob {
         const info = decodeTrieBlobToBTrie(blob);
-        const trieBlob = new TrieBlob(info.nodes, info.info ?? defaultTrieInfo);
+        const trieBlob = new TrieBlob(info.nodes, info.info);
         // console.log('decodeBin: %o', trieBlob.toJSON());
         return trieBlob;
     }

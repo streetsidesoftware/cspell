@@ -15,6 +15,7 @@ import type {
     FindOptionsRO,
     FindResult,
     HasOptionsRO,
+    PreferredSuggestion,
     SpellingDictionary,
     SpellingDictionaryOptionsRO,
 } from './SpellingDictionary.js';
@@ -52,7 +53,7 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
     ) {
         this.mapWord = createMapper(options.repMap, options.dictionaryInformation?.ignore);
         this.remapWord = createRepMapper(options.repMap, options.dictionaryInformation?.ignore);
-        this.isDictionaryCaseSensitive = options.caseSensitive ?? trie.isCaseAware;
+        this.isDictionaryCaseSensitive = options.caseSensitive ?? true;
         this.containsNoSuggestWords = options.noSuggest || false;
         this._size = size || 0;
         this.weightMap = options.weightMap || createWeightMapFromDictionaryInformation(options.dictionaryInformation);
@@ -210,6 +211,12 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         for (const w of wordSuggestForms(collector.word)) {
             this.trie.genSuggestions(impersonateCollector(collector, w), _compoundMethod);
         }
+    }
+
+    public getPreferredSuggestions(word: string): PreferredSuggestion[] {
+        if (!this.trie.hasPreferredSuggestions) return [];
+        const sugs = [...this.trie.getPreferredSuggestions(word)];
+        return sugs.map((sug, i) => ({ word: sug, cost: i + 1, isPreferred: true }));
     }
 
     public getErrors(): Error[] {

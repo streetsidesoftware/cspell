@@ -8,27 +8,15 @@ import type {
     FindResult,
     HasOptions,
     IgnoreCaseOption,
-    PreferredSuggestion,
     SearchOptions,
-    SpellingDictionary,
     SpellingDictionaryOptions,
+    SuggestDictionary,
 } from './SpellingDictionary.js';
 import type { SuggestOptions } from './SuggestOptions.js';
 import { processEntriesToTyposDef, type TypoEntry, type TyposDef } from './Typos/index.js';
 import { extractAllSuggestions } from './Typos/util.js';
 
-export interface SuggestDictionary extends SpellingDictionary {
-    getPreferredSuggestions: (word: string) => PreferredSuggestion[];
-    /**
-     * Determine if the word can appear in a list of suggestions.
-     * @param word - word
-     * @param ignoreCaseAndAccents - ignore case.
-     * @returns true if a word is suggested, otherwise false.
-     */
-    isSuggestedWord(word: string, ignoreCaseAndAccents?: IgnoreCaseOption): boolean;
-}
-
-interface PreferredSuggestionResult extends SuggestionResult {
+export interface PreferredSuggestionResult extends SuggestionResult {
     isPreferred: true;
 }
 

@@ -1,7 +1,5 @@
-import assert from 'node:assert';
-
 import type { TypoEntry, TyposDef, TyposDefValue } from './typos.js';
-import { appendToDef, createTyposDef } from './util.js';
+import { appendToDef, assert, createTyposDef } from './util.js';
 
 function assertString(v: unknown): v is string {
     assert(typeof v === 'string', 'A string was expected.');
@@ -9,9 +7,15 @@ function assertString(v: unknown): v is string {
 }
 
 const suggestionsSeparator = /[,]/;
-const typoSuggestionsSeparator = /:|->/;
+// const typoSuggestionsSeparator = /:|->/;
 const typoEntrySeparator = /[\n;]/;
 const inlineComment = /#.*/gm;
+
+const sugFormatRegex = /^\s*(?:[!~:])*(?<word>.*?)(?<separator>(->|:([0-9a-f]{1,2}:)?))(?<sugs>.*)$/;
+
+export function isSuggestion(v: string): boolean {
+    return sugFormatRegex.test(v);
+}
 
 export function createTyposDefFromEntries(entries: Iterable<TypoEntry>): TyposDef {
     const def: TyposDef = Object.create(null);
@@ -130,12 +134,36 @@ export function parseTyposLine(line: TypoEntry): TypoEntry | undefined {
     return sanitizeIntoTypoDef(line);
 }
 
+/**
+ * Split text into multiple lines
+ * @param content - text content
+ * @returns
+ */
 function splitIntoLines(content: string): string[] {
     return trimAndFilter(normalize(content).split(typoEntrySeparator));
 }
 
+/**
+ * Split a typo entry into key and value
+ * Entry format:
+ * - `word:suggestion`
+ * - `word->suggestion`
+ * - `word: first, second, third suggestions`
+ * - sequencing values are ignored, e.g.: `:0:`, `:1:`, `:a:`
+ *   - `word:0:first`
+ *   - `word:1:second`
+ * @param line - the line of text
+ * @returns
+ */
 function splitEntry(line: string): readonly [string, string | undefined] {
-    return line.split(typoSuggestionsSeparator, 2) as [string, string];
+    // Remove any sequencing values like `:1:` or `:a:`
+
+    const m = line.match(sugFormatRegex);
+    if (!m?.groups) {
+        return [line.trim(), undefined];
+    }
+
+    return [m.groups.word.trim(), m.groups.sugs.trim()];
 }
 
 export function parseTyposFile(content: string): TyposDef {

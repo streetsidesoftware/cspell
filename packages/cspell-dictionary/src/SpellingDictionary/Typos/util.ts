@@ -122,3 +122,8 @@ function isArray<T>(v: T[] | unknown): v is T[] {
 function hasSuggestions(v: TyposDefValue): v is TypoValueWithSuggestions {
     return isString(v) || isArray(v);
 }
+
+export function assert(condition: unknown, message = 'Assert Failed'): asserts condition {
+    if (condition) return;
+    throw new Error(message);
+}
