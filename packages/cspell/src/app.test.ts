@@ -247,6 +247,7 @@ describe('Validate cli', () => {
         ${'issue-6373'}                                | ${[rpFix('issue-6373'), '--no-progress']}                                                    | ${undefined}                | ${true}  | ${false} | ${false}
         ${'issue-6353'}                                | ${[rpFix('issue-6353'), '--no-progress']}                                                    | ${undefined}                | ${true}  | ${false} | ${true}
         ${'issue-7837'}                                | ${[rpFix('issue-7837'), '.']}                                                                | ${app.CheckFailed}          | ${true}  | ${false} | ${false}
+        ${'issue-8200'}                                | ${[rpFix('issue-8200'), '-vv', '.']}                                                         | ${undefined}                | ${true}  | ${false} | ${true}
         ${'verify globRoot works'}                     | ${[rpFix('globRoot'), '.']}                                                                  | ${undefined}                | ${true}  | ${false} | ${false}
         ${'reporting level flagged'}                   | ${[rpFeat('unknown-words'), '--report=flagged', '.']}                                        | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
         ${'reporting level typos'}                     | ${[rpFeat('unknown-words'), '--report=typos', '.']}                                          | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
