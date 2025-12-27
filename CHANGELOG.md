@@ -3,6 +3,216 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v9.6.0 (2025-12-27)
+
+### Features
+
+<details>
+<summary>feat: auto load btrie files if available (<a href="https://github.com/streetsidesoftware/cspell/pull/8218">#8218</a>)</summary>
+
+### feat: auto load btrie files if available ([#8218](https://github.com/streetsidesoftware/cspell/pull/8218))
+
+When loading dictionaries from `node_modules`, try to load `btrie` files before loading a `.txt` or `.trie` file.
+
+---
+
+</details>
+
+<details>
+<summary>feat: Add Support reading / writing bTrie files (<a href="https://github.com/streetsidesoftware/cspell/pull/8204">#8204</a>)</summary>
+
+### feat: Add Support reading / writing bTrie files ([#8204](https://github.com/streetsidesoftware/cspell/pull/8204))
+
+---
+
+</details>
+
+### Fixes
+
+<details>
+<summary>refactor: import using .ts when the package is bundled. (<a href="https://github.com/streetsidesoftware/cspell/pull/8224">#8224</a>)</summary>
+
+### refactor: import using .ts when the package is bundled. ([#8224](https://github.com/streetsidesoftware/cspell/pull/8224))
+
+---
+
+</details>
+
+<details>
+<summary>fix: Add cspell-tools config option to gen btrie (<a href="https://github.com/streetsidesoftware/cspell/pull/8221">#8221</a>)</summary>
+
+### fix: Add cspell-tools config option to gen btrie ([#8221](https://github.com/streetsidesoftware/cspell/pull/8221))
+
+Add an option to tell the cspell-tools compiler to build btrie files.
+
+---
+
+</details>
+
+<details>
+<summary>fix: Minor perf boost to TrieBlob.#findNode (<a href="https://github.com/streetsidesoftware/cspell/pull/8213">#8213</a>)</summary>
+
+### fix: Minor perf boost to TrieBlob.#findNode ([#8213](https://github.com/streetsidesoftware/cspell/pull/8213))
+
+---
+
+</details>
+
+<details>
+<summary>fix: deprecated legacy trie.has (<a href="https://github.com/streetsidesoftware/cspell/pull/8196">#8196</a>)</summary>
+
+### fix: deprecated legacy trie.has ([#8196](https://github.com/streetsidesoftware/cspell/pull/8196))
+
+---
+
+</details>
+
+<details>
+<summary>fix: Improve speed of dictionary lookup (<a href="https://github.com/streetsidesoftware/cspell/pull/8193">#8193</a>)</summary>
+
+### fix: Improve speed of dictionary lookup ([#8193](https://github.com/streetsidesoftware/cspell/pull/8193))
+
+---
+
+</details>
+
+<details>
+<summary>fix: Run perf tests on trie-lib (<a href="https://github.com/streetsidesoftware/cspell/pull/8188">#8188</a>)</summary>
+
+### fix: Run perf tests on trie-lib ([#8188](https://github.com/streetsidesoftware/cspell/pull/8188))
+
+---
+
+</details>
+
+<details>
+<summary>fix: Force consistent type imports (<a href="https://github.com/streetsidesoftware/cspell/pull/8187">#8187</a>)</summary>
+
+### fix: Force consistent type imports ([#8187](https://github.com/streetsidesoftware/cspell/pull/8187))
+
+---
+
+</details>
+
+<details>
+<summary>fix: Support adding separators when tracing compound words (<a href="https://github.com/streetsidesoftware/cspell/pull/8176">#8176</a>)</summary>
+
+### fix: Support adding separators when tracing compound words ([#8176](https://github.com/streetsidesoftware/cspell/pull/8176))
+
+---
+
+</details>
+
+### Dictionary Updates
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/8192">#8192</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#8192](https://github.com/streetsidesoftware/cspell/pull/8192))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ .../MicrosoftDocs/PowerShell-Docs/report.yaml      |  7 +-
+ .../MicrosoftDocs/PowerShell-Docs/snapshot.txt     |  5 +-
+ .../snapshots/RustPython/RustPython/report.yaml    |  6 +-
+ .../snapshots/RustPython/RustPython/snapshot.txt   |  3 +-
+ .../snapshots/TheAlgorithms/Python/report.yaml     |  5 +-
+ .../snapshots/TheAlgorithms/Python/snapshot.txt    |  3 +-
+ .../snapshots/alexiosc/megistos/report.yaml        |  3 +-
+ .../snapshots/alexiosc/megistos/snapshot.txt       |  3 +-
+ .../aspnetboilerplate/report.yaml                  |  8 +-
+ .../aspnetboilerplate/snapshot.txt                 | 14 ++--
+ .../snapshots/dart-lang/sdk/report.yaml            | 14 +---
+ .../snapshots/dart-lang/sdk/snapshot.txt           | 11 +--
+ .../snapshots/django/django/report.yaml            |  5 +-
+ .../snapshots/django/django/snapshot.txt           |  4 +-
+ .../snapshots/eslint/eslint/report.yaml            |  6 +-
+ .../snapshots/eslint/eslint/snapshot.txt           |  4 +-
+ .../snapshots/flutter/samples/report.yaml          | 18 +---
+ .../snapshots/flutter/samples/snapshot.txt         | 10 +--
+ .../snapshots/gitbucket/gitbucket/report.yaml      | 10 +--
+ .../snapshots/gitbucket/gitbucket/snapshot.txt     |  6 +-
+ .../googleapis/google-cloud-cpp/report.yaml        |  8 +-
+ .../googleapis/google-cloud-cpp/snapshot.txt       |  6 +-
+ .../iluwatar/java-design-patterns/report.yaml      |  8 +-
+ .../iluwatar/java-design-patterns/snapshot.txt     |  8 +-
+ .../snapshots/ktaranov/sqlserver-kit/report.yaml   | 13 +--
+ .../snapshots/ktaranov/sqlserver-kit/snapshot.txt  | 19 ++---
+ .../snapshots/pagekit/pagekit/report.yaml          |  6 +-
+ .../snapshots/pagekit/pagekit/snapshot.txt         |  4 +-
+ .../snapshots/php/php-src/report.yaml              |  8 +-
+ .../snapshots/php/php-src/snapshot.txt             |  8 +-
+ .../snapshots/slint-ui/slint/report.yaml           | 97 +++++++++-------------
+ .../snapshots/slint-ui/slint/snapshot.txt          | 22 +----
+ .../snapshots/vitest-dev/vitest/report.yaml        |  4 +-
+ .../snapshots/vitest-dev/vitest/snapshot.txt       |  3 +-
+ packages/cspell-bundled-dicts/package.json         | 12 +--
+ packages/cspell/src/__snapshots__/app.test.ts.snap | 10 ++-
+ pnpm-lock.yaml                                     | 69 ++++++++-------
+ 37 files changed, 145 insertions(+), 305 deletions(-)
+```
+
+---
+
+</details>
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/8186">#8186</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#8186](https://github.com/streetsidesoftware/cspell/pull/8186))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ .../snapshots/alexiosc/megistos/report.yaml        |  6 +-----
+ .../snapshots/alexiosc/megistos/snapshot.txt       |  6 +-----
+ .../snapshots/php/php-src/report.yaml              | 24 +---------------------
+ .../snapshots/php/php-src/snapshot.txt             | 24 +---------------------
+ packages/cspell-bundled-dicts/package.json         |  2 +-
+ pnpm-lock.yaml                                     | 10 ++++-----
+ 6 files changed, 10 insertions(+), 62 deletions(-)
+```
+
+---
+
+</details>
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/8182">#8182</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#8182](https://github.com/streetsidesoftware/cspell/pull/8182))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ .../snapshots/RustPython/RustPython/report.yaml    | 843 ++++++++++++++++-----
+ .../snapshots/RustPython/RustPython/snapshot.txt   | 774 ++++++++++++++++---
+ .../snapshots/alexiosc/megistos/report.yaml        |  16 +-
+ .../snapshots/alexiosc/megistos/snapshot.txt       |  16 +-
+ .../snapshots/django/django/report.yaml            |   6 +-
+ .../snapshots/django/django/snapshot.txt           |   3 +-
+ .../googleapis/google-cloud-cpp/report.yaml        |   3 +-
+ .../googleapis/google-cloud-cpp/snapshot.txt       |   3 +-
+ .../snapshots/neovim/nvim-lspconfig/report.yaml    |   6 +-
+ .../snapshots/neovim/nvim-lspconfig/snapshot.txt   |   6 +-
+ .../snapshots/php/php-src/report.yaml              |  24 +-
+ .../snapshots/php/php-src/snapshot.txt             |  24 +-
+ packages/cspell-bundled-dicts/package.json         |  26 +-
+ pnpm-lock.yaml                                     | 161 ++--
+ 14 files changed, 1526 insertions(+), 385 deletions(-)
+```
+
+---
+
+</details>
+
 ## v9.5.0 (2025-12-16)
 
 ### Features
