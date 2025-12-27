@@ -750,8 +750,15 @@ interface ParseDictionaryOptions {
   keepOptionalCompoundCharacter: boolean;
   /**
   * The character used to denote suggestion prefixes.
+  * An empty string or whitespace disables suggestion handling.
+  * @default ":"
   */
   suggestionPrefix: string;
+  /**
+  * Disable suggestion handling. The suggestions prefixes will be treated as normal characters.
+  * This will override the `suggestionPrefix` setting.
+  */
+  disableSuggestionHandling?: boolean;
 }
 /**
 * Normalizes a dictionary words based upon prefix / suffixes.

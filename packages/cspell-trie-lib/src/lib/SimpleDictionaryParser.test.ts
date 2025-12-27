@@ -246,6 +246,11 @@ describe('parse suggestions', () => {
         const words = [...parseDictionaryLines(dictionaryWithSuggestions())];
         expect(words).toMatchSnapshot();
     });
+
+    test('dictionaryWithSuggestions disabled', () => {
+        const words = [...parseDictionaryLines(dictionaryWithSuggestions(), { disableSuggestionHandling: true })];
+        expect(words).toMatchSnapshot();
+    });
 });
 
 function dictionary() {

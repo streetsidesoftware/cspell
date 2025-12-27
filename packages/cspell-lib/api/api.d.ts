@@ -2852,7 +2852,7 @@ interface IterableLike<T> {
  * @param options - dictionary options
  * @returns a Spelling Dictionary
  */
-declare function createSpellingDictionary(wordList: readonly string[] | IterableLike<string>, name: string, source: string, options?: SpellingDictionaryOptions | undefined): SpellingDictionary;
+declare function createSpellingDictionary(wordList: readonly string[] | IterableLike<string>, name: string, source: string, options?: SpellingDictionaryOptions | undefined, disableSuggestionsHandling?: boolean): SpellingDictionary;
 //#endregion
 //#region src/lib/util/types.d.ts
 /**

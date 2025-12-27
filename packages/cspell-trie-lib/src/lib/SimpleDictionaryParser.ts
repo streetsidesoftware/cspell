@@ -10,8 +10,11 @@ import {
     LINE_COMMENT,
     OPTIONAL_COMPOUND_FIX,
     SUGGESTION_PREFIX,
+    SUGGESTIONS_DISABLED,
 } from './constants.ts';
 import type { ITrie } from './ITrie.ts';
+import type { TrieInfo } from './ITrieNode/TrieInfo.ts';
+import { extractTrieInfo } from './ITrieNode/TrieInfo.ts';
 import type { Trie } from './trie.ts';
 import { buildTrieFast } from './TrieBuilder.ts';
 import { normalizeWord, normalizeWordForCaseInsensitive } from './utils/normalizeWord.ts';
@@ -75,8 +78,16 @@ export interface ParseDictionaryOptions {
 
     /**
      * The character used to denote suggestion prefixes.
+     * An empty string or whitespace disables suggestion handling.
+     * @default ":"
      */
     suggestionPrefix: string;
+
+    /**
+     * Disable suggestion handling. The suggestions prefixes will be treated as normal characters.
+     * This will override the `suggestionPrefix` setting.
+     */
+    disableSuggestionHandling?: boolean;
 }
 
 const RegExpSplit = /[\s,;]/g;
@@ -129,10 +140,19 @@ export function createDictionaryLineParserMapper(options?: Partial<ParseDictiona
         stripCaseAndAccentsKeepDuplicate = _defaultOptions.stripCaseAndAccentsKeepDuplicate,
         stripCaseAndAccentsOnForbidden = _defaultOptions.stripCaseAndAccentsOnForbidden,
         keepOptionalCompoundCharacter = _defaultOptions.keepOptionalCompoundCharacter,
+    } = _options;
+
+    let {
+        stripCaseAndAccents = _defaultOptions.stripCaseAndAccents,
+        split = _defaultOptions.split,
         suggestionPrefix = _defaultOptions.suggestionPrefix,
     } = _options;
 
-    let { stripCaseAndAccents = _defaultOptions.stripCaseAndAccents, split = _defaultOptions.split } = _options;
+    const disableSuggestionHandling =
+        !!_options.disableSuggestionHandling || ['', ' ', '\t', '\0'].includes(suggestionPrefix);
+    if (disableSuggestionHandling) {
+        suggestionPrefix = '\0 ';
+    }
 
     // console.log('options: %o', options);
 
@@ -281,8 +301,17 @@ export function createDictionaryLineParserMapper(options?: Partial<ParseDictiona
      * @param lines
      */
     function* handleSuggestions(lines: Iterable<string>): Iterable<string> {
+        if (disableSuggestionHandling) {
+            yield* lines;
+            return;
+        }
+
         for (const line of lines) {
-            yield* handleSuggestion(line);
+            if (split) {
+                yield line;
+            } else {
+                yield* handleSuggestion(line);
+            }
         }
     }
 
@@ -366,13 +395,9 @@ export function parseDictionaryLines(
 }
 
 export function parseLinesToDictionaryLegacy(lines: Iterable<string>, options?: Partial<ParseDictionaryOptions>): Trie {
-    const _options = mergeOptions(_defaultOptions, options);
+    const _options = mergeOptions(_defaultOptions, options, { disableSuggestionHandling: true });
     const dictLines = parseDictionaryLines(lines, _options);
-    return buildTrieFast([...new Set(dictLines)].sort(), {
-        compoundCharacter: _options.compoundCharacter,
-        forbiddenWordPrefix: _options.forbiddenPrefix,
-        stripCaseAndAccentsPrefix: _options.caseInsensitivePrefix,
-    });
+    return buildTrieFast([...new Set(dictLines)].sort(), trieInfoFromOptions(options));
 }
 
 export function parseDictionaryLegacy(text: string | string[], options?: Partial<ParseDictionaryOptions>): Trie {
@@ -382,11 +407,20 @@ export function parseDictionaryLegacy(text: string | string[], options?: Partial
 export function parseLinesToDictionary(lines: Iterable<string>, options?: Partial<ParseDictionaryOptions>): ITrie {
     const _options = mergeOptions(_defaultOptions, options);
     const dictLines = parseDictionaryLines(lines, _options);
-    return buildITrieFromWords([...new Set(dictLines)].sort(), options);
+    return buildITrieFromWords([...new Set(dictLines)].sort(), trieInfoFromOptions(options));
 }
 
 export function parseDictionary(text: string | Iterable<string>, options?: Partial<ParseDictionaryOptions>): ITrie {
     return parseLinesToDictionary(typeof text === 'string' ? text.split('\n') : text, options);
+}
+
+function trieInfoFromOptions(options: Partial<ParseDictionaryOptions> | undefined): Partial<TrieInfo> {
+    const info: Partial<TrieInfo> = extractTrieInfo(options);
+    const sugPrefix = info.suggestionPrefix ?? SUGGESTION_PREFIX;
+    if (options?.disableSuggestionHandling || sugPrefix !== SUGGESTION_PREFIX) {
+        info.suggestionPrefix = SUGGESTIONS_DISABLED;
+    }
+    return info;
 }
 
 // function escapeRegEx(s: string) {

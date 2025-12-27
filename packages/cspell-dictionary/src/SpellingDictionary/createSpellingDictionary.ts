@@ -33,8 +33,15 @@ export function createSpellingDictionary(
     name: string,
     source: string,
     options?: SpellingDictionaryOptions | undefined,
+    disableSuggestionsHandling?: boolean,
 ): SpellingDictionary {
-    const params: CreateSpellingDictionaryParams = [wordList, name, source.toString(), options];
+    const params: CreateSpellingDictionaryParams = [
+        wordList,
+        name,
+        source.toString(),
+        options,
+        disableSuggestionsHandling,
+    ];
 
     if (!Array.isArray(wordList)) {
         return _createSpellingDictionary(params);
@@ -56,9 +63,9 @@ export function createSpellingDictionary(
 }
 
 function _createSpellingDictionary(params: CreateSpellingDictionaryParams): SpellingDictionary {
-    const [wordList, name, source, options] = params;
+    const [wordList, name, source, options, disableSuggestionHandling = false] = params;
     // console.log(`createSpellingDictionary ${name} ${source}`);
-    const parseOptions = { stripCaseAndAccents: options?.supportNonStrictSearches ?? true };
+    const parseOptions = { stripCaseAndAccents: options?.supportNonStrictSearches ?? true, disableSuggestionHandling };
     const words = parseDictionaryLines(wordList, parseOptions);
     const trie = buildITrieFromWords(words);
     const opts = { ...(options || defaultOptions) };

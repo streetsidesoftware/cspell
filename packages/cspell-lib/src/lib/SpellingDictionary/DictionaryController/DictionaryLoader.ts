@@ -291,7 +291,7 @@ function _legacyWordListSync(lines: Iterable<string>, filename: URL, options: Lo
         opConcatMap((line) => line.split(/[^\w\p{L}\p{M}'’]+/gu)),
         opFilter((word) => !!word),
     );
-    return createSpellingDictionary(words, options.name, filename.toString(), options);
+    return createSpellingDictionary(words, options.name, filename.toString(), options, true);
 }
 
 async function wordsPerLineWordList(reader: Reader, filename: URL, options: LoadOptions) {
@@ -308,7 +308,7 @@ function _wordsPerLineWordList(lines: Iterable<string>, filename: string, option
         opConcatMap((line) => line.split(/\s+/gu)),
         opFilter((word) => !!word),
     );
-    return createSpellingDictionary(words, options.name, filename, options);
+    return createSpellingDictionary(words, options.name, filename, options, true);
 }
 
 async function loadSimpleWordList(reader: Reader, filename: URL, options: LoadOptions) {

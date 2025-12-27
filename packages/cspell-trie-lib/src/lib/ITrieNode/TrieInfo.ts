@@ -109,6 +109,15 @@ export function normalizeTrieInfo(info?: PartialTrieInfo, defaultInfo: TrieInfo 
     };
 }
 
+/**
+ * Extract the TrieInfo a source PartialTrieInfo
+ * @param info - The source PartialTrieInfo
+ * @returns a new object with only the defined TrieInfo properties.
+ */
+export function extractTrieInfo(info: PartialTrieInfo): Partial<TrieInfo> {
+    return partialInfoToInfo(info);
+}
+
 export function cvtTrieInfoToFlags(info: Partial<TrieInfo>): TrieInfoFlags {
     let flags = '';
     for (const k of keysTrieInfo) {
