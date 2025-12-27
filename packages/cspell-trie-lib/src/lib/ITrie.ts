@@ -318,8 +318,8 @@ export class ITrieImpl implements ITrie {
      * Checks to see if there are preferred suggestions for the given text.
      * @param text
      */
-    wordHasPreferredSuggestions(_text: string): boolean {
-        return false;
+    wordHasPreferredSuggestions(text: string): boolean {
+        return this.has(this.info.suggestionPrefix + text);
     }
 
     /**

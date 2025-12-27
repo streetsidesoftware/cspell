@@ -228,9 +228,24 @@ describe('Validate Trie Class', () => {
         ${'colour'}    | ${['color']}
         ${'playtime'}  | ${['sleep', 'play time']}
         ${'SHOUTING'}  | ${['whispering']}
-    `('preferred suggestions', ({ word, expected }) => {
+    `('preferred suggestions $word', ({ word, expected }) => {
         const trie = combineSamplesIntoDictionary(sampleSuggestions());
         expect([...trie.getPreferredSuggestions(word)]).toEqual(expected);
+    });
+
+    test.each`
+        word           | expected | comment
+        ${'favourite'} | ${true}  | ${''}
+        ${'color'}     | ${false} | ${''}
+        ${'colour'}    | ${true}  | ${''}
+        ${'Colour'}    | ${false} | ${'It only searches for exact case.'}
+        ${'colour:'}   | ${false} | ${''}
+        ${':colour'}   | ${false} | ${''}
+        ${'playtime'}  | ${true}  | ${''}
+        ${'SHOUTING'}  | ${true}  | ${''}
+    `('wordHasPreferredSuggestions $word', ({ word, expected }) => {
+        const trie = combineSamplesIntoDictionary(sampleSuggestions());
+        expect(trie.wordHasPreferredSuggestions(word)).toEqual(expected);
     });
 
     test('preferred suggestions for forbidden', () => {
