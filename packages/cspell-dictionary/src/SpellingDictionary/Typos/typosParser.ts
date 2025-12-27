@@ -153,7 +153,7 @@ function splitIntoLines(content: string): string[] {
  */
 function splitEntry(line: string): readonly [string, string | undefined] {
     // Remove any sequencing values like `:1:` or `:a:`
-    line = line.replace(/:.+:/, ':');
+    line = line.replace(/(?<!^|[!~]):.:/, ':');
     return line.split(typoSuggestionsSeparator, 2) as [string, string];
 }
 

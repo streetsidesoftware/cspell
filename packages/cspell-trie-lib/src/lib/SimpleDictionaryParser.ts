@@ -288,6 +288,22 @@ export function createDictionaryLineParserMapper(options?: Partial<ParseDictiona
 
     const r = /^\s*(?<prefix>[!:~]*)(?<word>.*?)(->|:)(?<suggestions>.*)$/;
 
+    const suggestionSequence: Map<string, number> = new Map();
+    const knownSuggestions: Set<string> = new Set();
+
+    function addSuggestion(word: string, suggestion: string): string | undefined {
+        const p = suggestionPrefix;
+        const pp = p + p;
+        const n = suggestionSequence.get(word) || 0;
+        const k = word + pp + suggestion;
+        if (knownSuggestions.has(k)) {
+            return undefined;
+        }
+        knownSuggestions.add(k);
+        suggestionSequence.set(word, n + 1);
+        return k.replace(pp, p + n.toString(16) + p);
+    }
+
     function* handleSuggestion(line: string): Iterable<string> {
         const hasAltFormat = line.includes('->');
         const hasColon = line.includes(':');
@@ -307,12 +323,11 @@ export function createDictionaryLineParserMapper(options?: Partial<ParseDictiona
             .split(',')
             .map((s) => s.trim())
             .filter((s) => !!s);
-        yield prefix + word;
-        const p = suggestionPrefix;
-        const w = prefix + word + p;
-        const pad = suggestions.length.toString().length;
+        const ww = prefix + word;
+        yield ww;
         for (let i = 0; i < suggestions.length; i++) {
-            yield w + i.toString().padStart(pad) + p + suggestions[i];
+            const sug = addSuggestion(ww, suggestions[i]);
+            if (sug) yield sug;
         }
     }
 

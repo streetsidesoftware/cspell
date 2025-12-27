@@ -112,7 +112,7 @@ export interface ITrie {
     /**
      * Checks to see if the trie contains preferred suggestions for any words.
      */
-    containsPreferredSuggestions(): boolean;
+    readonly hasPreferredSuggestions: boolean;
 
     /**
      * Suggest spellings for `text`.  The results are sorted by edit distance with changes near the beginning of a word having a greater impact.
@@ -318,7 +318,7 @@ export class ITrieImpl implements ITrie {
     /**
      * Checks to see if the trie contains preferred suggestions for any words.
      */
-    containsPreferredSuggestions(): boolean {
+    get hasPreferredSuggestions(): boolean {
         return this.data.hasPreferredSuggestions;
     }
 

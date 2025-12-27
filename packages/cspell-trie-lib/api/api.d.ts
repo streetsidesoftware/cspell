@@ -502,7 +502,7 @@ interface ITrie {
   /**
   * Checks to see if the trie contains preferred suggestions for any words.
   */
-  containsPreferredSuggestions(): boolean;
+  readonly hasPreferredSuggestions: boolean;
   /**
   * Suggest spellings for `text`.  The results are sorted by edit distance with changes near the beginning of a word having a greater impact.
   * @param text - the text to search for

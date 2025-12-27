@@ -303,7 +303,7 @@ function dictionaryWithSuggestions0() {
         !forbidden:suggested1,suggested2
         !forbiddenA:"forbidden A", "suggestion A"
         !forbiddenB:"use B", "suggestion BB"
-        !forbiddenB:"use A"
+        !forbiddenB:"use A" # this should be suggested after "suggestion BB".
     `;
 }
 

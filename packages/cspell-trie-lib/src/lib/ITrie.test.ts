@@ -185,13 +185,13 @@ describe('Validate Trie Class', () => {
     test('preferred no suggestions', () => {
         const trie = combineSamplesIntoDictionary(sampleWordList());
 
-        expect(trie.containsPreferredSuggestions()).toBe(false);
+        expect(trie.hasPreferredSuggestions).toBe(false);
     });
 
     test('preferred suggestions', () => {
         const trie = combineSamplesIntoDictionary(sampleSuggestions());
 
-        expect(trie.containsPreferredSuggestions()).toBe(true);
+        expect(trie.hasPreferredSuggestions).toBe(true);
     });
 
     test.each`
