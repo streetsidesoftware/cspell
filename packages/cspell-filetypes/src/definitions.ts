@@ -13,6 +13,7 @@ export const definitions: FileTypeDefinitions = [
     { id: 'cache_files', extensions: [], filenames: ['.DS_Store', '.cspellcache', '.eslintcache'] },
     { id: 'clojure', extensions: ['.clj', '.cljc', '.cljs', '.cljx', '.clojure', '.edn'] },
     { id: 'cmake', extensions: ['.cmake'], filenames: ['CMakeLists.txt'] },
+    { id: 'codeowners', filenames: ['codeowners'] },
     { id: 'coffeescript', extensions: ['.coffee', '.cson', '.iced'] },
     {
         id: 'cpp',
