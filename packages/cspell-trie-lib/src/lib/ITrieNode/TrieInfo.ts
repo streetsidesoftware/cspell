@@ -202,7 +202,6 @@ export class TrieInfoBuilder {
     #givenInfo: PartialTrieInfo;
     #givenCharacteristics: Partial<TrieCharacteristics>;
     #srcInfo: TrieInfo;
-    #sugChar: string;
     #knownChars: Record<string, keyof TrieInfo>;
     #foundChars: Set<string>;
 
@@ -210,7 +209,6 @@ export class TrieInfoBuilder {
         this.#givenInfo = info;
         this.#srcInfo = normalizeTrieInfo(info);
         this.#knownChars = revTrieInfo(this.#srcInfo);
-        this.#sugChar = this.#srcInfo.suggestionPrefix;
         this.#givenCharacteristics = characteristics || {};
         this.#foundChars = new Set<string>(
             mapTrieCharacteristicToInfoValues(this.#givenCharacteristics, this.#srcInfo),
@@ -221,7 +219,6 @@ export class TrieInfoBuilder {
         this.#givenInfo = info;
         this.#srcInfo = normalizeTrieInfo(info);
         this.#knownChars = revTrieInfo(this.#srcInfo);
-        this.#sugChar = this.#srcInfo.suggestionPrefix;
         this.#foundChars = new Set<string>(
             mapTrieCharacteristicToInfoValues(this.#givenCharacteristics, this.#srcInfo),
         );
@@ -234,9 +231,6 @@ export class TrieInfoBuilder {
     addWord(word: string): void {
         if (word[0] in this.#knownChars) {
             this.#foundChars.add(word[0]);
-        }
-        if (word.includes(this.#sugChar)) {
-            this.#foundChars.add(this.#sugChar);
         }
     }
 

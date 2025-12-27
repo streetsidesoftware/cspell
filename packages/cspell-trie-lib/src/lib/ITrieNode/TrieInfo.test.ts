@@ -36,7 +36,7 @@ describe('TrieInfoBuilder', () => {
         builder.addWord('hello');
         builder.addWord('!forbidden');
         builder.addWord('~caseInsensitive');
-        builder.addWord('suggestion:suggestedWord');
+        builder.addWord(':suggestion:suggestedWord');
         builder.addWord('+compound');
         const def = builder.build();
         expect(def.info).toEqual({
@@ -63,7 +63,7 @@ describe('TrieInfoBuilder', () => {
         builder.addWord('hello');
         builder.addWord('?forbidden');
         builder.addWord('_caseInsensitive');
-        builder.addWord('suggestion+suggestedWord');
+        builder.addWord('+suggestion+suggestedWord');
         builder.addWord('*compound');
         const def = builder.build();
         expect(def.info).toEqual({
@@ -83,7 +83,7 @@ describe('TrieInfoBuilder', () => {
     test('builds add words. 2', () => {
         const builder = new TrieInfoBuilder();
         builder.addWord('~caseInsensitive');
-        builder.addWord('suggestion:suggestedWord');
+        builder.addWord(':suggestion:suggestedWord');
         const def = builder.build();
         expect(def.info).toEqual({
             stripCaseAndAccentsPrefix: '~',
@@ -143,7 +143,7 @@ describe('encode / decode flags', () => {
         builder.addWord('hello');
         builder.addWord('!forbidden');
         builder.addWord('~caseInsensitive');
-        builder.addWord('suggestion:suggestedWord');
+        builder.addWord(':suggestion:suggestedWord');
         builder.addWord('+compound');
         const def = builder.build();
         expect(def.info).toEqual({
@@ -169,7 +169,7 @@ describe('encode / decode flags', () => {
     test('add words. 2', () => {
         const builder = new TrieInfoBuilder();
         builder.addWord('~caseInsensitive');
-        builder.addWord('suggestion:suggestedWord');
+        builder.addWord(':suggestion:suggestedWord');
         const def = builder.build();
         expect(def.info).toEqual({
             stripCaseAndAccentsPrefix: '~',
@@ -197,7 +197,7 @@ describe('encode / decode flags', () => {
         builder.addWord('hello');
         builder.addWord('?forbidden');
         builder.addWord('_caseInsensitive');
-        builder.addWord('suggestion+suggestedWord');
+        builder.addWord('+suggestion:suggestedWord');
         builder.addWord('*compound');
         const def = builder.build();
         // The pairs of
