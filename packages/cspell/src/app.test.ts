@@ -279,6 +279,32 @@ describe('Validate cli', () => {
     });
 
     test.each`
+        msg                           | testArgs                                                                   | errorCheck         | eError  | eLog     | eInfo
+        ${'issue-2998 --language-id'} | ${[rpFix('issue-2998'), '-v', '-v', '--language-id=fix', 'fix-words.txt']} | ${undefined}       | ${true} | ${false} | ${true}
+        ${'issue-4811 **/README.md'}  | ${['-r', pIssues('issue-4811'), '--no-progress', '**/README.md']}          | ${undefined}       | ${true} | ${false} | ${false}
+        ${'issue-4811'}               | ${['-r', pIssues('issue-4811'), '--no-progress', '.']}                     | ${app.CheckFailed} | ${true} | ${true}  | ${false}
+        ${'issue-6373 .'}             | ${[rpFix('issue-6373'), '--no-progress', '.']}                             | ${app.CheckFailed} | ${true} | ${true}  | ${false}
+        ${'issue-6373'}               | ${[rpFix('issue-6373'), '--no-progress']}                                  | ${undefined}       | ${true} | ${false} | ${false}
+        ${'issue-6353'}               | ${[rpFix('issue-6353'), '--no-progress']}                                  | ${undefined}       | ${true} | ${false} | ${true}
+        ${'issue-7837'}               | ${[rpFix('issue-7837'), '.']}                                              | ${app.CheckFailed} | ${true} | ${false} | ${false}
+        ${'issue-7902'}               | ${[rpFix('issue-7902'), '.']}                                              | ${app.CheckFailed} | ${true} | ${true}  | ${false}
+    `('app $msg Expect Error: $errorCheck', async ({ testArgs, errorCheck, eError, eLog, eInfo }: TestCase) => {
+        chalk.level = 1;
+        const commander = getCommander();
+        const args = argv(...testArgs);
+        const result = app.run(commander, args);
+        await (!errorCheck ? expect(result).resolves.toBeUndefined() : expect(result).rejects.toThrow(errorCheck));
+
+        eError ? expect(error).toHaveBeenCalled() : expect(error).not.toHaveBeenCalled();
+        eLog ? expect(log).toHaveBeenCalled() : expect(log).not.toHaveBeenCalled();
+        eInfo ? expect(info).toHaveBeenCalled() : expect(info).not.toHaveBeenCalled();
+
+        expect(captureStdout.text).toMatchSnapshot();
+        expect(logger.normalizedHistory()).toMatchSnapshot();
+        expect(normalizeOutput(captureStderr.text)).toMatchSnapshot();
+    });
+
+    test.each`
         msg                                                | testArgs                                                                 | errorCheck         | eError  | eLog     | eInfo    | notes
         ${'lint --disable-dictionary'}                     | ${[rpFeat('dictionaries'), argDDict('words'), '*.md']}                   | ${app.CheckFailed} | ${true} | ${true}  | ${false} | ${'Disable dictionary words'}
         ${'lint --disable-dictionary --enable-dictionary'} | ${[rpFeat('dictionaries'), argDDict('words'), argDict('words'), '*.md']} | ${undefined}       | ${true} | ${false} | ${false} | ${'Disable and reenable dictionary words'}
