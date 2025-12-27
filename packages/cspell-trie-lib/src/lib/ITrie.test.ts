@@ -153,10 +153,13 @@ describe('Validate Trie Class', () => {
 
     function sampleSuggestions(): string {
         return `
+            ALL-CAPS
             # Sample Suggestions
             favourite-> favorite # cspell:ignore favourite
-            :colour:color $ cspell:ignore colour
+            :colour:color # cspell:ignore colour
             !playtime:sleep, "play time"
+            !SHOUTING:whispering
+            !all-caps:ALL-CAPS
         `;
     }
 
@@ -192,6 +195,54 @@ describe('Validate Trie Class', () => {
         const trie = combineSamplesIntoDictionary(sampleSuggestions());
 
         expect(trie.hasPreferredSuggestions).toBe(true);
+        const entries = [...trie.getAllPreferredSuggestions()];
+        expect(entries).toEqual([
+            'SHOUTING:whispering',
+            'all-caps:ALL-CAPS',
+            'colour:color',
+            'favourite:favorite',
+            'playtime:sleep',
+            'playtime:play time',
+        ]);
+        expect(trie.isForbiddenWord('playtime')).toBe(true);
+        expect(trie.isForbiddenWord('colour')).toBe(false);
+        expect(trie.hasWord('favourite', true)).toBe(true);
+        expect(trie.hasWord('favorite', true)).toBe(false); // because 'favorite' is a suggestion, it wasn't added as a word.
+        expect(trie.hasWord('colour', true)).toBe(false);
+        expect(trie.hasWord('playtime', true)).toBe(false);
+        expect(trie.hasWord('play time', true)).toBe(false); // we didn't add 'play time' as a word, it was only a suggestion.
+    });
+
+    test.each`
+        word           | expected
+        ${'favourite'} | ${['favorite']}
+        ${'color'}     | ${[]}
+        ${'colour'}    | ${['color']}
+        ${'playtime'}  | ${['sleep', 'play time']}
+        ${'SHOUTING'}  | ${['whispering']}
+    `('preferred suggestions', ({ word, expected }) => {
+        const trie = combineSamplesIntoDictionary(sampleSuggestions());
+        expect([...trie.getPreferredSuggestions(word)]).toEqual(expected);
+    });
+
+    test('preferred suggestions for forbidden', () => {
+        const trie = combineSamplesIntoDictionary(sampleSuggestions());
+
+        const found = trie.findWord('shouting', { caseSensitive: false, checkForbidden: true });
+        expect(found).toEqual({
+            caseMatched: false,
+            compoundUsed: false,
+            forbidden: false,
+            found: false,
+        });
+
+        const found2 = trie.findWord('SHOUTING', { caseSensitive: false, checkForbidden: true });
+        expect(found2).toEqual({
+            caseMatched: false,
+            compoundUsed: false,
+            forbidden: true,
+            found: false,
+        });
     });
 
     test.each`

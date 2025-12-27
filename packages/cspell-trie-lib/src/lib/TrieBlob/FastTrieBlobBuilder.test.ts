@@ -25,7 +25,7 @@ describe('FastTrieBlobBuilder', () => {
     });
 
     test('insert characteristics ! :', () => {
-        const words = ['one', 'two', 'three', 'four', 'houses', 'house', 'color:special', '~caseInsensitive'];
+        const words = ['one', 'two', 'three', 'four', 'houses', 'house', ':color:special', '~caseInsensitive'];
         const builder = new FastTrieBlobBuilder();
         builder.insert(words);
         const ft = builder.build();

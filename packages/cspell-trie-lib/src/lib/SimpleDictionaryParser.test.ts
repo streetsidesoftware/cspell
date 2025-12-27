@@ -227,11 +227,43 @@ describe('Validate SimpleDictionaryParser', () => {
     });
 });
 
+describe('making a forbidden dictionary', () => {
+    const dict = `
+        apple
+        !banana
+        cherry+
+        *date*
+        colour:color
+        :flavour:favor
+    `;
+
+    test('', () => {
+        const entries = parseDictionaryLines(dict, { makeWordsForbidden: true });
+        const words = [...entries];
+        expect(words).toEqual([
+            '!apple',
+            'banana',
+            '!cherry+',
+            '!date',
+            '!date+',
+            '!+date',
+            '!+date+',
+            '!colour',
+            ':colour',
+            ':colour:0:color',
+            ':flavour',
+            ':flavour:0:favor',
+        ]);
+    });
+});
+
 describe('parse suggestions', () => {
     test.each`
-        entry         | expected
-        ${'word'}     | ${['word']}
-        ${'word:sug'} | ${['word', 'word:0:sug']}
+        entry          | expected
+        ${'word'}      | ${['word']}
+        ${'word:sug'}  | ${['word', ':word', ':word:0:sug']}
+        ${'!word:sug'} | ${['!word', ':word', ':word:0:sug']}
+        ${':word:sug'} | ${[':word', ':word:0:sug']}
     `('parse suggestions', ({ entry, expected }) => {
         const words = [...parseDictionaryLines(entry)];
         expect(words).toEqual(expected);

@@ -500,6 +500,20 @@ interface ITrie {
   */
   getPreferredSuggestions(text: string): Iterable<string>;
   /**
+  * Get a list of all preferred suggestions in the trie.
+  * They are returned in order and in the following format:
+  * ```
+  * <word1>:<suggestion1>
+  * <word1>:<suggestion2>
+  * <word2>:<suggestion1>
+  * ```
+  *
+  * If `startingWith` is provided, only words that start with the prefix are returned.
+  *
+  * @param startingWith - optional prefix to filter the words returned.
+  */
+  getAllPreferredSuggestions(startingWith?: string): Iterable<string>;
+  /**
   * Checks to see if the trie contains preferred suggestions for any words.
   */
   readonly hasPreferredSuggestions: boolean;
@@ -757,8 +771,15 @@ interface ParseDictionaryOptions {
   /**
   * Disable suggestion handling. The suggestions prefixes will be treated as normal characters.
   * This will override the `suggestionPrefix` setting.
+  * @default false
   */
-  disableSuggestionHandling?: boolean;
+  disableSuggestionHandling: boolean;
+  /**
+  * If true, all words will be made forbidden words unless they are already marked as forbidden,
+  * in that case they will be made normal words.
+  * @default false
+  */
+  makeWordsForbidden?: boolean;
 }
 /**
 * Normalizes a dictionary words based upon prefix / suffixes.
@@ -808,8 +829,6 @@ declare class TrieBuilder {
   private numWords;
   private _debug_lastWordsInserted;
   private _debug_mode;
-  private hasSugs;
-  private suggestionPrefix;
   constructor(words?: Iterable<string>, trieOptions?: PartialTrieOptions);
   private get _root();
   private signature;

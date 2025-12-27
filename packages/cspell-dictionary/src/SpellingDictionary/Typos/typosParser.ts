@@ -1,7 +1,5 @@
-import assert from 'node:assert';
-
 import type { TypoEntry, TyposDef, TyposDefValue } from './typos.js';
-import { appendToDef, createTyposDef } from './util.js';
+import { appendToDef, assert, createTyposDef } from './util.js';
 
 function assertString(v: unknown): v is string {
     assert(typeof v === 'string', 'A string was expected.');
@@ -9,9 +7,15 @@ function assertString(v: unknown): v is string {
 }
 
 const suggestionsSeparator = /[,]/;
-const typoSuggestionsSeparator = /:|->/;
+// const typoSuggestionsSeparator = /:|->/;
 const typoEntrySeparator = /[\n;]/;
 const inlineComment = /#.*/gm;
+
+const sugFormatRegex = /^\s*(?:[!~:])*(?<word>.*?)(?<separator>(->|:([0-9a-f]{1,2}:)?))(?<sugs>.*)$/;
+
+export function isSuggestion(v: string): boolean {
+    return sugFormatRegex.test(v);
+}
 
 export function createTyposDefFromEntries(entries: Iterable<TypoEntry>): TyposDef {
     const def: TyposDef = Object.create(null);
@@ -153,8 +157,13 @@ function splitIntoLines(content: string): string[] {
  */
 function splitEntry(line: string): readonly [string, string | undefined] {
     // Remove any sequencing values like `:1:` or `:a:`
-    line = line.replace(/(?<!^|[!~]):.:/, ':');
-    return line.split(typoSuggestionsSeparator, 2) as [string, string];
+
+    const m = line.match(sugFormatRegex);
+    if (!m?.groups) {
+        return [line.trim(), undefined];
+    }
+
+    return [m.groups.word.trim(), m.groups.sugs.trim()];
 }
 
 export function parseTyposFile(content: string): TyposDef {

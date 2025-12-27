@@ -1,11 +1,6 @@
 import type { FindResult, ITrieNode, ITrieNodeRoot } from '../ITrieNode/ITrieNode.ts';
 import { findNode } from '../ITrieNode/trie-util.ts';
-import {
-    normalizeTrieCharacteristics,
-    type PartialTrieInfo,
-    type TrieCharacteristics,
-    type TrieInfo,
-} from '../ITrieNode/TrieInfo.ts';
+import type { PartialTrieInfo, TrieInfo } from '../ITrieNode/TrieInfo.ts';
 import type { TrieData } from '../TrieData.ts';
 import { endianness } from '../utils/endian.ts';
 import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.ts';
@@ -21,6 +16,7 @@ export class TrieBlob implements TrieData {
     #forbidIdx: number | undefined;
     #compoundIdx: number | undefined;
     #nonStrictIdx: number | undefined;
+    #suggestIdx: number | undefined;
 
     #size: number | undefined;
     #iTrieRoot: ITrieNodeRoot | undefined;
@@ -36,9 +32,8 @@ export class TrieBlob implements TrieData {
     readonly NodeMaskNumChildren: number;
     readonly NodeChildRefShift: number;
     readonly hasPreferredSuggestions: boolean;
-    readonly characteristics: TrieCharacteristics;
 
-    constructor(nodes: Uint32Array, info: PartialTrieInfo, characteristics: Partial<TrieCharacteristics>) {
+    constructor(nodes: Uint32Array, info: PartialTrieInfo) {
         this.nodes = nodes;
         trieBlobSort(nodes);
         this.info = mergeOptionalWithDefaults(info);
@@ -47,17 +42,13 @@ export class TrieBlob implements TrieData {
         this.#forbidIdx = this.#findNode(0, this.info.forbiddenWordPrefix);
         this.#compoundIdx = this.#findNode(0, this.info.compoundCharacter);
         this.#nonStrictIdx = this.#findNode(0, this.info.stripCaseAndAccentsPrefix);
+        this.#suggestIdx = this.#findNode(0, this.info.suggestionPrefix);
         this.hasForbiddenWords = !!this.#forbidIdx;
         this.hasCompoundWords = !!this.#compoundIdx;
         this.hasNonStrictWords = !!this.#nonStrictIdx;
         this.NodeMaskNumChildren = TrieBlob.NodeMaskNumChildren;
         this.NodeChildRefShift = TrieBlob.NodeChildRefShift;
-        this.characteristics = normalizeTrieCharacteristics(characteristics, {
-            hasForbiddenWords: this.hasForbiddenWords,
-            hasCompoundWords: this.hasCompoundWords,
-            hasNonStrictWords: this.hasNonStrictWords,
-        });
-        this.hasPreferredSuggestions = this.characteristics.hasPreferredSuggestions;
+        this.hasPreferredSuggestions = !!this.#suggestIdx;
     }
 
     has(word: string): boolean {
@@ -283,12 +274,12 @@ export class TrieBlob implements TrieData {
     }
 
     encodeBin(): Uint8Array {
-        return encodeTrieBlobToBTrie({ nodes: this.nodes, info: this.info, characteristics: this.characteristics });
+        return encodeTrieBlobToBTrie({ nodes: this.nodes, info: this.info, characteristics: this });
     }
 
     static decodeBin(blob: Uint8Array): TrieBlob {
         const info = decodeTrieBlobToBTrie(blob);
-        const trieBlob = new TrieBlob(info.nodes, info.info, info.characteristics);
+        const trieBlob = new TrieBlob(info.nodes, info.info);
         // console.log('decodeBin: %o', trieBlob.toJSON());
         return trieBlob;
     }

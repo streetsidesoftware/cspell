@@ -86,13 +86,21 @@ export interface ParseDictionaryOptions {
     /**
      * Disable suggestion handling. The suggestions prefixes will be treated as normal characters.
      * This will override the `suggestionPrefix` setting.
+     * @default false
      */
-    disableSuggestionHandling?: boolean;
+    disableSuggestionHandling: boolean;
+
+    /**
+     * If true, all words will be made forbidden words unless they are already marked as forbidden,
+     * in that case they will be made normal words.
+     * @default false
+     */
+    makeWordsForbidden?: boolean;
 }
 
 const RegExpSplit = /[\s,;]/g;
 
-const _defaultOptions: ParseDictionaryOptions = {
+const _defaultOptions = {
     commentCharacter: LINE_COMMENT,
     optionalCompoundCharacter: OPTIONAL_COMPOUND_FIX,
     compoundCharacter: COMPOUND_FIX,
@@ -107,7 +115,9 @@ const _defaultOptions: ParseDictionaryOptions = {
     splitSeparator: RegExpSplit,
     keepOptionalCompoundCharacter: false,
     suggestionPrefix: SUGGESTION_PREFIX,
-};
+    disableSuggestionHandling: false,
+    makeWordsForbidden: false,
+} as const satisfies ParseDictionaryOptions;
 
 export const defaultParseDictionaryOptions: ParseDictionaryOptions = Object.freeze(_defaultOptions);
 
@@ -140,18 +150,19 @@ export function createDictionaryLineParserMapper(options?: Partial<ParseDictiona
         stripCaseAndAccentsKeepDuplicate = _defaultOptions.stripCaseAndAccentsKeepDuplicate,
         stripCaseAndAccentsOnForbidden = _defaultOptions.stripCaseAndAccentsOnForbidden,
         keepOptionalCompoundCharacter = _defaultOptions.keepOptionalCompoundCharacter,
+        makeWordsForbidden = _defaultOptions.makeWordsForbidden,
     } = _options;
 
     let {
-        stripCaseAndAccents = _defaultOptions.stripCaseAndAccents,
+        stripCaseAndAccents = !makeWordsForbidden && _defaultOptions.stripCaseAndAccents,
         split = _defaultOptions.split,
         suggestionPrefix = _defaultOptions.suggestionPrefix,
     } = _options;
 
     const disableSuggestionHandling =
-        !!_options.disableSuggestionHandling || ['', ' ', '\t', '\0'].includes(suggestionPrefix);
+        _options.disableSuggestionHandling || ['', ' ', '\t', '\0'].includes(suggestionPrefix);
     if (disableSuggestionHandling) {
-        suggestionPrefix = '\0 ';
+        suggestionPrefix = SUGGESTIONS_DISABLED;
     }
 
     // console.log('options: %o', options);
@@ -244,6 +255,23 @@ export function createDictionaryLineParserMapper(options?: Partial<ParseDictiona
         return normalizeWord(stripKeepCasePrefixAndQuotes(word));
     }
 
+    function* handleForbiddenPrefix(words: Iterable<string>): Iterable<string> {
+        if (!makeWordsForbidden) {
+            yield* words;
+            return;
+        }
+        const f = forbidden;
+        const ff = f + f;
+        const sug = suggestionPrefix;
+        for (const word of words) {
+            if (word.startsWith(sug)) {
+                yield word;
+                continue;
+            }
+            yield (f + word).replaceAll(ff, '');
+        }
+    }
+
     function* mapNormalize(word: string) {
         const nWord = _normalize(word);
         const forms = new Set<string>();
@@ -307,11 +335,7 @@ export function createDictionaryLineParserMapper(options?: Partial<ParseDictiona
         }
 
         for (const line of lines) {
-            if (split) {
-                yield line;
-            } else {
-                yield* handleSuggestion(line);
-            }
+            yield* handleSuggestion(line);
         }
     }
 
@@ -352,7 +376,10 @@ export function createDictionaryLineParserMapper(options?: Partial<ParseDictiona
             .split(',')
             .map((s) => s.trim())
             .filter((s) => !!s);
-        const ww = prefix + word;
+        if (!prefix.includes(':')) {
+            yield prefix + word;
+        }
+        const ww = ':' + word;
         yield ww;
         for (let i = 0; i < suggestions.length; i++) {
             const sug = addSuggestion(ww, suggestions[i]);
@@ -370,10 +397,11 @@ export function createDictionaryLineParserMapper(options?: Partial<ParseDictiona
         opMap(removeComments),
         splitWords,
         opMap(trim),
-        handleSuggestions,
         opFilter(filterEmptyLines),
+        handleSuggestions,
         ...mapCompounds,
         opConcatMap(mapNormalize),
+        handleForbiddenPrefix,
         opMap(removeDoublePrefix),
     );
 
@@ -407,7 +435,8 @@ export function parseDictionaryLegacy(text: string | string[], options?: Partial
 export function parseLinesToDictionary(lines: Iterable<string>, options?: Partial<ParseDictionaryOptions>): ITrie {
     const _options = mergeOptions(_defaultOptions, options);
     const dictLines = parseDictionaryLines(lines, _options);
-    return buildITrieFromWords([...new Set(dictLines)].sort(), trieInfoFromOptions(options));
+    const words = [...new Set(dictLines)].sort();
+    return buildITrieFromWords(words, trieInfoFromOptions(options));
 }
 
 export function parseDictionary(text: string | Iterable<string>, options?: Partial<ParseDictionaryOptions>): ITrie {

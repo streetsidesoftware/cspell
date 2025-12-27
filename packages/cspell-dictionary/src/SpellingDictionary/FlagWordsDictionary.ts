@@ -1,6 +1,5 @@
-import { opMap, pipe } from '@cspell/cspell-pipe/sync';
 import type { CompoundWordsMethod, ITrie, SuggestionResult } from 'cspell-trie-lib';
-import { buildITrieFromWords, parseDictionaryLines } from 'cspell-trie-lib';
+import { parseDictionary } from 'cspell-trie-lib';
 
 import { createAutoResolveWeakCache } from '../util/AutoResolve.js';
 import * as Defaults from './defaults.js';
@@ -142,44 +141,11 @@ export function createFlagWordsDictionary(
     source: string,
 ): SpellingDictionary {
     return createCache.get(wordList, () => {
-        const testSpecialCharacters = /[~*+]/;
-
-        const { t: specialWords, f: typoWords } = bisect(
-            parseDictionaryLines(wordList, { stripCaseAndAccents: false }),
-            (line) => testSpecialCharacters.test(line),
-        );
-
-        const trieDict = specialWords.size ? buildTrieDict(specialWords, name, source) : undefined;
-        const typosDict = createTyposDictionary(typoWords, name, source);
-
-        if (!trieDict) return typosDict;
-
+        const trie = parseDictionary(wordList, { stripCaseAndAccents: false, makeWordsForbidden: true });
+        const trieDict = new FlagWordsDictionaryTrie(trie, name, source);
+        if (!trie.hasPreferredSuggestions) return trieDict;
+        const typosDict = createTyposDictionary(trie.getAllPreferredSuggestions(), name, source);
+        if (!trie.hasForbiddenWords) return typosDict;
         return new FlagWordsDictionary(name, source, typosDict, trieDict);
     });
-}
-
-const regExpCleanIgnore = /^(!!)+/;
-
-function buildTrieDict(words: Set<string>, name: string, source: string): FlagWordsDictionaryTrie {
-    const trie = buildITrieFromWords(
-        pipe(
-            words,
-            opMap((w) => '!' + w),
-            opMap((w) => w.replace(regExpCleanIgnore, '')),
-        ),
-    );
-    return new FlagWordsDictionaryTrie(trie, name, source);
-}
-
-function bisect<T>(values: Set<T> | Iterable<T>, predicate: (v: T) => boolean): { t: Set<T>; f: Set<T> } {
-    const t = new Set<T>();
-    const f = new Set<T>();
-    for (const v of values) {
-        if (predicate(v)) {
-            t.add(v);
-        } else {
-            f.add(v);
-        }
-    }
-    return { t, f };
 }

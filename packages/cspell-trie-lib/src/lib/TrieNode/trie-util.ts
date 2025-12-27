@@ -62,15 +62,11 @@ export function createTrieRoot(options?: PartialTrieInfoRO): TrieRoot {
 
 export function createTrieRootFromList(words: Iterable<string>, options?: PartialTrieInfo): TrieRoot {
     const root = createTrieRoot(options);
-    const suggestionPrefix = root.suggestionPrefix;
-    let hasPreferredSuggestions = root.hasPreferredSuggestions;
     for (const word of words) {
         if (word.length) {
-            hasPreferredSuggestions ||= word.includes(suggestionPrefix);
             insert(word, root);
         }
     }
-    root.hasPreferredSuggestions = hasPreferredSuggestions;
     return root;
 }
 
@@ -225,7 +221,6 @@ class CTrieRoot implements TrieRoot {
     stripCaseAndAccentsPrefix: string;
     forbiddenWordPrefix: string;
     suggestionPrefix: string;
-    hasPreferredSuggestions: boolean;
 
     constructor(options: PartialTrieInfo) {
         const newOptions = mergeOptionalWithDefaults(options);
@@ -234,7 +229,6 @@ class CTrieRoot implements TrieRoot {
         this.stripCaseAndAccentsPrefix = newOptions.stripCaseAndAccentsPrefix;
         this.forbiddenWordPrefix = newOptions.forbiddenWordPrefix;
         this.suggestionPrefix = newOptions.suggestionPrefix;
-        this.hasPreferredSuggestions = false;
     }
 
     get hasForbiddenWords(): boolean {
@@ -247,12 +241,13 @@ class CTrieRoot implements TrieRoot {
         return !!this.c[this.stripCaseAndAccentsPrefix];
     }
 
-    static createFrom(trie: TrieNode, options: PartialTrieInfo, hasSuggestions?: boolean): CTrieRoot {
+    get hasPreferredSuggestions(): boolean {
+        return !!this.c[this.suggestionPrefix];
+    }
+
+    static createFrom(trie: TrieNode, options: PartialTrieInfo): CTrieRoot {
         const root = new CTrieRoot(options);
         root.c = trie.c || Object.create(null);
-        if (hasSuggestions !== undefined) {
-            root.hasPreferredSuggestions = hasSuggestions;
-        }
         return root;
     }
 }

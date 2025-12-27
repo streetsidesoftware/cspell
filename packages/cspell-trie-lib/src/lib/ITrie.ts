@@ -110,6 +110,21 @@ export interface ITrie {
     getPreferredSuggestions(text: string): Iterable<string>;
 
     /**
+     * Get a list of all preferred suggestions in the trie.
+     * They are returned in order and in the following format:
+     * ```
+     * <word1>:<suggestion1>
+     * <word1>:<suggestion2>
+     * <word2>:<suggestion1>
+     * ```
+     *
+     * If `startingWith` is provided, only words that start with the prefix are returned.
+     *
+     * @param startingWith - optional prefix to filter the words returned.
+     */
+    getAllPreferredSuggestions(startingWith?: string): Iterable<string>;
+
+    /**
      * Checks to see if the trie contains preferred suggestions for any words.
      */
     readonly hasPreferredSuggestions: boolean;
@@ -311,8 +326,37 @@ export class ITrieImpl implements ITrie {
      * Get preferred suggestions for the given text.
      * @param text - the exact word to search for.
      */
-    getPreferredSuggestions(_text: string): Iterable<string> {
-        return [];
+    getPreferredSuggestions(text: string): Iterable<string> {
+        const prefix = text + this.info.suggestionPrefix;
+        return pipe(
+            this.getAllPreferredSuggestions(prefix),
+            opMap((s) => s.slice(prefix.length)),
+        );
+    }
+
+    /**
+     * Get a list of all preferred suggestions in the trie.
+     * They are returned in order and in the following format:
+     * ```
+     * <word1>:<suggestion1>
+     * <word1>:<suggestion2>
+     * <word2>:<suggestion1>
+     * ```
+     *
+     * If `startingWith` is provided, only words that start with the prefix are returned.
+     *
+     * @param startingWith - optional prefix to filter the words returned.
+     */
+    getAllPreferredSuggestions(startingWith: string = ''): Iterable<string> {
+        const regexpSugIndex = /:[0-9a-f]{1,2}:/;
+
+        const sugPrefix = this.info.suggestionPrefix;
+        const suggestions = pipe(
+            this.data.words(sugPrefix + startingWith),
+            opMap((result) => result.slice(1).replace(regexpSugIndex, ':')), // Remove the suggestion prefix
+            opFilter((w) => w.includes(':')),
+        );
+        return suggestions;
     }
 
     /**
