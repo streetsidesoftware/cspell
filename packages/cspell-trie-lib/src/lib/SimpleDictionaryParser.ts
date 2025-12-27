@@ -339,7 +339,7 @@ export function createDictionaryLineParserMapper(options?: Partial<ParseDictiona
         }
     }
 
-    const r = /^\s*(?<prefix>[!:~]*)(?<word>.*?)(->|:)(?<suggestions>.*)$/;
+    const r = /^\s*(?<prefix>[!:~]*)(?<word>.*?)(?:->|:([0-9a-f]{1,2}:)?)(?<suggestions>.*)$/;
 
     const suggestionSequence: Map<string, number> = new Map();
     const knownSuggestions: Set<string> = new Set();
