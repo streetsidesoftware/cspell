@@ -18,6 +18,7 @@ const checkSorted = false;
 export class FastTrieBlob implements TrieData {
     #readonly = false;
     #forbidIdx: number;
+    #compoundIdx: number;
     #nonStrictIdx: number;
     #iTrieRoot: ITrieNodeRoot | undefined;
     wordToCharacters: (word: string) => readonly string[];
@@ -42,15 +43,14 @@ export class FastTrieBlob implements TrieData {
         this.info = info;
         this.wordToCharacters = (word: string) => [...word];
         this.#forbidIdx = this.#searchNodeForChar(0, this.info.forbiddenWordPrefix) || 0;
-        // this.#compoundIdx = this.#searchNodeForChar(0, this.info.compoundCharacter) || 0;
+        this.#compoundIdx = this.#searchNodeForChar(0, this.info.compoundCharacter) || 0;
         this.#nonStrictIdx = this.#searchNodeForChar(0, this.info.stripCaseAndAccentsPrefix) || 0;
 
-        const { hasCompoundWords, hasForbiddenWords, hasNonStrictWords, hasPreferredSuggestions } =
-            normalizeTrieCharacteristics(characteristics);
+        const { hasPreferredSuggestions } = normalizeTrieCharacteristics(characteristics);
 
-        this.hasForbiddenWords = hasForbiddenWords;
-        this.hasCompoundWords = hasCompoundWords;
-        this.hasNonStrictWords = hasNonStrictWords;
+        this.hasForbiddenWords = !!this.#forbidIdx;
+        this.hasCompoundWords = !!this.#compoundIdx;
+        this.hasNonStrictWords = !!this.#nonStrictIdx;
         this.hasPreferredSuggestions = hasPreferredSuggestions;
 
         if (checkSorted) {
