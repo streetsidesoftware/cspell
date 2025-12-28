@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
-import { readSampleFile } from '../../test/samples.js';
-import { levenshteinDistance, selectNearestWords } from './levenshtein.js';
+import { readSampleFile } from '../../test/samples.ts';
+import { levenshteinDistance, selectNearestWords } from './levenshtein.ts';
 
 const sampleWords = readSampleFile('wordsForLevenshtein.txt').then((doc) => Object.freeze(doc.split('\n')));
 const sampleWordsSorted = sampleWords.then((words) => Object.freeze([...words].sort()));

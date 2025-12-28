@@ -1,15 +1,15 @@
 import { describe, expect, test } from 'vitest';
 
-import { defaultTrieInfo } from './constants.js';
-import type { ITrie } from './ITrie.js';
-import { ITrieImpl as ITrieClass } from './ITrie.js';
-import type { ITrieNode } from './ITrieNode/ITrieNode.js';
-import { parseDictionary, parseDictionaryLegacy } from './SimpleDictionaryParser.js';
-import type { SuggestionOptions } from './suggestions/genSuggestionsOptions.js';
-import { suggestionCollector, type SuggestionCollectorOptions } from './suggestions/suggestCollector.js';
-import { clean } from './utils/clean.js';
-import { normalizeWordToLowercase } from './utils/normalizeWord.js';
-import { CompoundWordsMethod } from './walker/index.js';
+import { defaultTrieInfo } from './constants.ts';
+import type { ITrie } from './ITrie.ts';
+import { ITrieImpl as ITrieClass } from './ITrie.ts';
+import type { ITrieNode } from './ITrieNode/ITrieNode.ts';
+import { parseDictionary, parseDictionaryLegacy } from './SimpleDictionaryParser.ts';
+import type { SuggestionOptions } from './suggestions/genSuggestionsOptions.ts';
+import { suggestionCollector, type SuggestionCollectorOptions } from './suggestions/suggestCollector.ts';
+import { clean } from './utils/clean.ts';
+import { normalizeWordToLowercase } from './utils/normalizeWord.ts';
+import { CompoundWordsMethod } from './walker/index.ts';
 
 describe('Validate Trie Class', () => {
     const NumSuggestions: SuggestionOptions = { numSuggestions: 10 };
@@ -138,18 +138,135 @@ describe('Validate Trie Class', () => {
         found: boolean;
     }
 
-    function getCompoundDictionaryITrie(): ITrie {
-        return parseDictionary(`
-        # Sample Word List
-        Begin*
-        *End
-        +Middle+
-        café
-        play*
-        *time
-        !playtime
-        `);
+    function sampleWordList(): string {
+        return `
+            # Sample Word List
+            Begin*
+            *End
+            +Middle+
+            café
+            play*
+            *time
+            !playtime
+        `;
     }
+
+    function sampleSuggestions(): string {
+        return `
+            ALL-CAPS
+            # Sample Suggestions
+            favourite-> favorite # cspell:ignore favourite
+            :colour:color # cspell:ignore colour
+            !playtime:sleep, "play time"
+            !SHOUTING:whispering
+            !all-caps:ALL-CAPS
+        `;
+    }
+
+    function combineSamplesIntoDictionary(...samples: string[]): ITrie {
+        return parseDictionary(samples.join('\n'));
+    }
+
+    function getCompoundDictionaryITrie(...additions: string[]): ITrie {
+        return combineSamplesIntoDictionary(sampleWordList(), ...additions);
+    }
+
+    test.each`
+        prefix
+        ${''}
+        ${'+'}
+        ${'!'}
+    `('word $prefix', ({ prefix }) => {
+        const trie = getCompoundDictionaryITrie();
+        const words = [...trie.words()];
+        expect(words.length).toBe(17);
+        expect(words).toContain('Begin+');
+        expect(words).toContain('+End');
+        expect([...trie.words(prefix)]).toEqual(words.filter((w) => w.startsWith(prefix)));
+    });
+
+    test('preferred no suggestions', () => {
+        const trie = combineSamplesIntoDictionary(sampleWordList());
+
+        expect(trie.hasPreferredSuggestions).toBe(false);
+    });
+
+    test('preferred suggestions', () => {
+        const trie = combineSamplesIntoDictionary(sampleSuggestions());
+
+        expect(trie.hasPreferredSuggestions).toBe(true);
+        const entries = [...trie.getAllPreferredSuggestions()];
+        expect(entries).toEqual([
+            'SHOUTING:whispering',
+            'all-caps:ALL-CAPS',
+            'colour:color',
+            'favourite:favorite',
+            'playtime:sleep',
+            'playtime:play time',
+        ]);
+        expect(trie.isForbiddenWord('playtime')).toBe(true);
+        expect(trie.isForbiddenWord('colour')).toBe(false);
+        expect(trie.hasWord('favourite', true)).toBe(true);
+        expect(trie.hasWord('favorite', true)).toBe(false); // because 'favorite' is a suggestion, it wasn't added as a word.
+        expect(trie.hasWord('colour', true)).toBe(false);
+        expect(trie.hasWord('playtime', true)).toBe(false);
+        expect(trie.hasWord('play time', true)).toBe(false); // we didn't add 'play time' as a word, it was only a suggestion.
+    });
+
+    test('preferred suggestions with prefix', () => {
+        const trie = combineSamplesIntoDictionary(sampleSuggestions());
+
+        expect(trie.hasPreferredSuggestions).toBe(true);
+        const entries = [...trie.getAllPreferredSuggestions('p')];
+        expect(entries).toEqual(['playtime:sleep', 'playtime:play time']);
+    });
+
+    test.each`
+        word           | expected
+        ${'favourite'} | ${['favorite']}
+        ${'color'}     | ${[]}
+        ${'colour'}    | ${['color']}
+        ${'playtime'}  | ${['sleep', 'play time']}
+        ${'SHOUTING'}  | ${['whispering']}
+    `('preferred suggestions $word', ({ word, expected }) => {
+        const trie = combineSamplesIntoDictionary(sampleSuggestions());
+        expect([...trie.getPreferredSuggestions(word)]).toEqual(expected);
+    });
+
+    test.each`
+        word           | expected | comment
+        ${'favourite'} | ${true}  | ${''}
+        ${'color'}     | ${false} | ${''}
+        ${'colour'}    | ${true}  | ${''}
+        ${'Colour'}    | ${false} | ${'It only searches for exact case.'}
+        ${'colour:'}   | ${false} | ${''}
+        ${':colour'}   | ${false} | ${''}
+        ${'playtime'}  | ${true}  | ${''}
+        ${'SHOUTING'}  | ${true}  | ${''}
+    `('wordHasPreferredSuggestions $word', ({ word, expected }) => {
+        const trie = combineSamplesIntoDictionary(sampleSuggestions());
+        expect(trie.wordHasPreferredSuggestions(word)).toEqual(expected);
+    });
+
+    test('preferred suggestions for forbidden', () => {
+        const trie = combineSamplesIntoDictionary(sampleSuggestions());
+
+        const found = trie.findWord('shouting', { caseSensitive: false, checkForbidden: true });
+        expect(found).toEqual({
+            caseMatched: false,
+            compoundUsed: false,
+            forbidden: false,
+            found: false,
+        });
+
+        const found2 = trie.findWord('SHOUTING', { caseSensitive: false, checkForbidden: true });
+        expect(found2).toEqual({
+            caseMatched: false,
+            compoundUsed: false,
+            forbidden: true,
+            found: false,
+        });
+    });
 
     test.each`
         word                                | caseSensitive | found    | comment

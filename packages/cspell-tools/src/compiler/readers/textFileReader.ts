@@ -1,7 +1,7 @@
 import { type ITrie, parseDictionary } from 'cspell-trie-lib';
 
-import type { Reader } from './ReaderOptions.js';
-import { readTextFile } from './readTextFile.js';
+import type { Reader } from './ReaderOptions.ts';
+import { readTextFile } from './readTextFile.ts';
 
 export async function textFileReader(filename: string): Promise<Reader> {
     const content = await readTextFile(filename);

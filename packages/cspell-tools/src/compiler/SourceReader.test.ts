@@ -2,10 +2,10 @@ import * as path from 'node:path';
 
 import { describe, expect, test } from 'vitest';
 
-import { createTestHelper } from '../test/TestHelper.js';
-import type { SourceReaderOptions } from './SourceReader.js';
-import { createSourceReader } from './SourceReader.js';
-import { defaultAllowedSplitWords } from './WordsCollection.js';
+import { createTestHelper } from '../test/TestHelper.ts';
+import type { SourceReaderOptions } from './SourceReader.ts';
+import { createSourceReader } from './SourceReader.ts';
+import { defaultAllowedSplitWords } from './WordsCollection.ts';
 
 const helper = createTestHelper(import.meta.url);
 

@@ -1,5 +1,5 @@
-import type { FeatureFlags } from './FeatureFlags.js';
-import { UnknownFeatureFlagError } from './FeatureFlags.js';
+import type { FeatureFlags } from './FeatureFlags.ts';
+import { UnknownFeatureFlagError } from './FeatureFlags.ts';
 
 const splitFlag = /[:=]/;
 const leadingEql = /^=/;

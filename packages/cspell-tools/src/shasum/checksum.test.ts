@@ -2,8 +2,8 @@ import { readFile } from 'node:fs/promises';
 
 import { describe, expect, test } from 'vitest';
 
-import { resolvePathToFixture } from '../test/TestHelper.js';
-import { calcChecksum, calcFileChecksum, checkChecksum, checkFile } from './checksum.js';
+import { resolvePathToFixture } from '../test/TestHelper.ts';
+import { calcChecksum, calcFileChecksum, checkChecksum, checkFile } from './checksum.ts';
 
 describe('checksum', () => {
     test('calcChecksum', () => {

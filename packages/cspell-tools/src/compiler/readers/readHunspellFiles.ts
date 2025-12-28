@@ -4,8 +4,8 @@ import { COMPOUND_FIX, FORBID_PREFIX, parseDictionary } from 'cspell-trie-lib';
 import type { AffWord } from 'hunspell-reader';
 import * as HR from 'hunspell-reader';
 
-import type { AnnotatedWord, Reader, ReaderOptions } from './ReaderOptions.js';
-import { regHunspellFile } from './regHunspellFile.js';
+import type { AnnotatedWord, Reader, ReaderOptions } from './ReaderOptions.ts';
+import { regHunspellFile } from './regHunspellFile.ts';
 
 const DEDUPE_SIZE = 1000;
 

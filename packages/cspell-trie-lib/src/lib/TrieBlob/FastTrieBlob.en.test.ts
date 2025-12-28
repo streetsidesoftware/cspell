@@ -3,8 +3,8 @@ import { promises as fs } from 'node:fs';
 import { opSkip, opTake, pipe } from '@cspell/cspell-pipe/sync';
 import { describe, expect, test } from 'vitest';
 
-import { readTrieFromConfig } from '../../test/dictionaries.test.helper.js';
-import { FastTrieBlobBuilder } from './FastTrieBlobBuilder.js';
+import { readTrieFromConfig } from '../../test/dictionaries.test.helper.ts';
+import { FastTrieBlobBuilder } from './FastTrieBlobBuilder.ts';
 
 function getTrie() {
     return readTrieFromConfig('@cspell/dict-en_us/cspell-ext.json');

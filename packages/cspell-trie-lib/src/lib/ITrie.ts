@@ -97,6 +97,39 @@ export interface ITrie {
     completeWord(text: string): Iterable<string>;
 
     /**
+     * Checks to see if there are preferred suggestions for the given text.
+     *
+     * @param word
+     */
+    wordHasPreferredSuggestions(word: string): boolean;
+
+    /**
+     * Get preferred suggestions for the given text.
+     * @param text - the exact word to search for.
+     */
+    getPreferredSuggestions(text: string): Iterable<string>;
+
+    /**
+     * Get a list of all preferred suggestions in the trie.
+     * They are returned in order and in the following format:
+     * ```
+     * <word1>:<suggestion1>
+     * <word1>:<suggestion2>
+     * <word2>:<suggestion1>
+     * ```
+     *
+     * If `startingWith` is provided, only words that start with the prefix are returned.
+     *
+     * @param startingWith - optional prefix to filter the words returned.
+     */
+    getAllPreferredSuggestions(startingWith?: string): Iterable<string>;
+
+    /**
+     * Checks to see if the trie contains preferred suggestions for any words.
+     */
+    readonly hasPreferredSuggestions: boolean;
+
+    /**
      * Suggest spellings for `text`.  The results are sorted by edit distance with changes near the beginning of a word having a greater impact.
      * @param text - the text to search for
      * @param options - Controls the generated suggestions:
@@ -123,8 +156,9 @@ export interface ITrie {
 
     /**
      * Returns an iterator that can be used to get all words in the trie. For some dictionaries, this can result in millions of words.
+     * @param prefix - optional prefix to filter the words returned. The words will be prefixed with this value.
      */
-    words(): Iterable<string>;
+    words(prefix?: string): Iterable<string>;
 
     /**
      * Allows iteration over the entire tree.
@@ -133,10 +167,10 @@ export interface ITrie {
     iterate(): WalkerIterator;
 
     readonly weightMap: WeightMap | undefined;
-    readonly isCaseAware: boolean;
     readonly hasForbiddenWords: boolean;
     readonly hasCompoundWords: boolean;
     readonly hasNonStrictWords: boolean;
+    // readonly hasPreferredSuggestions: boolean;
 }
 
 export class ITrieImpl implements ITrie {
@@ -181,10 +215,6 @@ export class ITrieImpl implements ITrie {
 
     get info(): Readonly<TrieInfo> {
         return this._info;
-    }
-
-    get isCaseAware(): boolean {
-        return this.info.isCaseAware ?? true;
     }
 
     /**
@@ -285,6 +315,58 @@ export class ITrieImpl implements ITrie {
     }
 
     /**
+     * Checks to see if there are preferred suggestions for the given text.
+     * @param text
+     */
+    wordHasPreferredSuggestions(text: string): boolean {
+        return this.has(this.info.suggestionPrefix + text);
+    }
+
+    /**
+     * Get preferred suggestions for the given text.
+     * @param text - the exact word to search for.
+     */
+    getPreferredSuggestions(text: string): Iterable<string> {
+        const prefix = text + this.info.suggestionPrefix;
+        return pipe(
+            this.getAllPreferredSuggestions(prefix),
+            opMap((s) => s.slice(prefix.length)),
+        );
+    }
+
+    /**
+     * Get a list of all preferred suggestions in the trie.
+     * They are returned in order and in the following format:
+     * ```
+     * <word1>:<suggestion1>
+     * <word1>:<suggestion2>
+     * <word2>:<suggestion1>
+     * ```
+     *
+     * If `startingWith` is provided, only words that start with the prefix are returned.
+     *
+     * @param startingWith - optional prefix to filter the words returned.
+     */
+    getAllPreferredSuggestions(startingWith: string = ''): Iterable<string> {
+        const regexpSugIndex = /:[0-9a-f]{1,2}:/;
+
+        const sugPrefix = this.info.suggestionPrefix;
+        const suggestions = pipe(
+            this.data.words(sugPrefix + startingWith),
+            opMap((result) => result.slice(1).replace(regexpSugIndex, ':')), // Remove the suggestion prefix
+            opFilter((w) => w.includes(':')),
+        );
+        return suggestions;
+    }
+
+    /**
+     * Checks to see if the trie contains preferred suggestions for any words.
+     */
+    get hasPreferredSuggestions(): boolean {
+        return this.data.hasPreferredSuggestions;
+    }
+
+    /**
      * Suggest spellings for `text`.  The results are sorted by edit distance with changes near the beginning of a word having a greater impact.
      * @param text - the text to search for
      * @param maxNumSuggestions - the maximum number of suggestions to return.
@@ -329,9 +411,11 @@ export class ITrieImpl implements ITrie {
 
     /**
      * Returns an iterator that can be used to get all words in the trie. For some dictionaries, this can result in millions of words.
+     * Note: this will not compound words automatically.
+     * @param prefix - optional prefix to filter the words returned. The words will be prefixed with this value.
      */
-    words(): Iterable<string> {
-        return iteratorTrieWords(this.root);
+    words(prefix?: string): Iterable<string> {
+        return this.data.words(prefix);
     }
 
     /**

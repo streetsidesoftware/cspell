@@ -3,9 +3,9 @@
 import { toArray } from '@cspell/cspell-pipe/sync';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 
-import type { ParseFileOptions } from './wordListParser.js';
-import { normalizeTargetWords, parseFileLines } from './wordListParser.js';
-import { defaultAllowedSplitWords } from './WordsCollection.js';
+import type { ParseFileOptions } from './wordListParser.ts';
+import { normalizeTargetWords, parseFileLines } from './wordListParser.ts';
+import { defaultAllowedSplitWords } from './WordsCollection.ts';
 
 const alwaysAllowSplit = { size: 10, has: () => true };
 

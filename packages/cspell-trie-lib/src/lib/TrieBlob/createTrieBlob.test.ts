@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { createTrieBlob } from './createTrieBlob.js';
+import { createTrieBlob } from './createTrieBlob.ts';
 
 describe('FastTrieBlob', () => {
     const words = [

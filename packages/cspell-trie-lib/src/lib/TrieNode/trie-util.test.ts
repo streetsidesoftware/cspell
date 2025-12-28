@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { mergeDefaults } from '../utils/mergeDefaults.js';
+import { mergeDefaults } from '../utils/mergeDefaults.ts';
 import {
     checkCircular,
     countNodes,
@@ -11,7 +11,7 @@ import {
     isCircular,
     iteratorTrieWords,
     validateTrie,
-} from './trie-util.js';
+} from './trie-util.ts';
 
 const oc = (obj: unknown) => expect.objectContaining(obj);
 

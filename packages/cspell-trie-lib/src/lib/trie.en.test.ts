@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { readFastTrieBlobFromConfig, readTrieFromConfig } from '../test/dictionaries.test.helper.js';
+import { readFastTrieBlobFromConfig, readTrieFromConfig } from '../test/dictionaries.test.helper.ts';
 import { ITrieImpl } from './ITrie.ts';
 import { memorizeLastCall } from './utils/memorizeLastCall.ts';
 

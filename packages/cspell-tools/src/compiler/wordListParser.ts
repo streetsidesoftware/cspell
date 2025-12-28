@@ -2,11 +2,11 @@ import { opCombine, opCombine as opPipe, type Operator, opFilter, opMap } from '
 import { createDictionaryLineParser } from 'cspell-trie-lib';
 import { uniqueFilter } from 'hunspell-reader';
 
-import { defaultCompileSourceOptions } from '../config/configDefaults.js';
-import type { CompileOptions } from './CompileOptions.js';
-import { legacyLineToWords } from './legacyLineToWords.js';
-import { splitCamelCaseIfAllowed } from './splitCamelCaseIfAllowed.js';
-import type { AllowedSplitWordsCollection } from './WordsCollection.js';
+import { defaultCompileSourceOptions } from '../config/configDefaults.ts';
+import type { CompileOptions } from './CompileOptions.ts';
+import { legacyLineToWords } from './legacyLineToWords.ts';
+import { splitCamelCaseIfAllowed } from './splitCamelCaseIfAllowed.ts';
+import type { AllowedSplitWordsCollection } from './WordsCollection.ts';
 
 export function normalizeTargetWords(options: CompileOptions): Operator<string> {
     const lineParser = createDictionaryLineParser({

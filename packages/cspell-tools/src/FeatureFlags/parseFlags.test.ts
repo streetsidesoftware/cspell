@@ -1,9 +1,9 @@
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 
-import { spyOnConsole } from '../test/console.js';
-import type { FeatureFlag } from './FeatureFlags.js';
-import { createFeatureFlags } from './FeatureFlags.js';
-import { parseFlags } from './parseFlags.js';
+import { spyOnConsole } from '../test/console.ts';
+import type { FeatureFlag } from './FeatureFlags.ts';
+import { createFeatureFlags } from './FeatureFlags.ts';
+import { parseFlags } from './parseFlags.ts';
 
 const consoleSpy = spyOnConsole();
 

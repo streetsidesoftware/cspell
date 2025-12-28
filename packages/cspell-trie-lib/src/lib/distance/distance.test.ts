@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { createWeightedMap, editDistance, editDistanceWeighted, updatedWeightedMap } from './distance.js';
+import { createWeightedMap, editDistance, editDistanceWeighted, updatedWeightedMap } from './distance.ts';
 
 describe('distance', () => {
     test.each`

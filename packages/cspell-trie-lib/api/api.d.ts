@@ -80,14 +80,16 @@ interface TrieInfo {
   compoundCharacter: string;
   stripCaseAndAccentsPrefix: string;
   forbiddenWordPrefix: string;
-  isCaseAware: boolean;
+  suggestionPrefix: string;
 }
 interface TrieCharacteristics {
   hasForbiddenWords: boolean;
   hasCompoundWords: boolean;
   hasNonStrictWords: boolean;
+  hasPreferredSuggestions: boolean;
 }
 type PartialTrieInfo = PartialWithUndefined<TrieInfo> | undefined;
+type PartialTrieInfoRO = Readonly<PartialWithUndefined<TrieInfo>> | undefined;
 //#endregion
 //#region src/lib/ITrieNode/ITrieNode.d.ts
 interface FindResult$1 {
@@ -178,7 +180,7 @@ interface TrieNode {
   f?: number | undefined;
   c?: ChildMap | undefined;
 }
-interface TrieRoot extends TrieInfo {
+interface TrieRoot extends TrieInfo, TrieCharacteristics {
   c: ChildMap;
 }
 //#endregion
@@ -415,8 +417,11 @@ interface TrieData extends Readonly<TrieCharacteristics> {
   readonly info: Readonly<TrieInfo>;
   /** Method used to split words into individual characters. */
   wordToCharacters(word: string): readonly string[];
-  /** get an iterable for all the words in the dictionary. */
-  words(): Iterable<string>;
+  /**
+  * get an iterable for all the words in the dictionary.
+  * @param prefix - optional prefix to filter the words returned. The words will be prefixed with this value.
+  */
+  words(prefix?: string): Iterable<string>;
   getRoot(): ITrieNodeRoot;
   getNode(prefix: string): ITrieNode | undefined;
   has(word: string): boolean;
@@ -484,6 +489,35 @@ interface ITrie {
   */
   completeWord(text: string): Iterable<string>;
   /**
+  * Checks to see if there are preferred suggestions for the given text.
+  *
+  * @param word
+  */
+  wordHasPreferredSuggestions(word: string): boolean;
+  /**
+  * Get preferred suggestions for the given text.
+  * @param text - the exact word to search for.
+  */
+  getPreferredSuggestions(text: string): Iterable<string>;
+  /**
+  * Get a list of all preferred suggestions in the trie.
+  * They are returned in order and in the following format:
+  * ```
+  * <word1>:<suggestion1>
+  * <word1>:<suggestion2>
+  * <word2>:<suggestion1>
+  * ```
+  *
+  * If `startingWith` is provided, only words that start with the prefix are returned.
+  *
+  * @param startingWith - optional prefix to filter the words returned.
+  */
+  getAllPreferredSuggestions(startingWith?: string): Iterable<string>;
+  /**
+  * Checks to see if the trie contains preferred suggestions for any words.
+  */
+  readonly hasPreferredSuggestions: boolean;
+  /**
   * Suggest spellings for `text`.  The results are sorted by edit distance with changes near the beginning of a word having a greater impact.
   * @param text - the text to search for
   * @param options - Controls the generated suggestions:
@@ -507,15 +541,15 @@ interface ITrie {
   genSuggestions(collector: SuggestionCollector, compoundMethod?: CompoundWordsMethod): void;
   /**
   * Returns an iterator that can be used to get all words in the trie. For some dictionaries, this can result in millions of words.
+  * @param prefix - optional prefix to filter the words returned. The words will be prefixed with this value.
   */
-  words(): Iterable<string>;
+  words(prefix?: string): Iterable<string>;
   /**
   * Allows iteration over the entire tree.
   * On the returned Iterator, calling .next(goDeeper: boolean), allows for controlling the depth.
   */
   iterate(): WalkerIterator$1;
   readonly weightMap: WeightMap | undefined;
-  readonly isCaseAware: boolean;
   readonly hasForbiddenWords: boolean;
   readonly hasCompoundWords: boolean;
   readonly hasNonStrictWords: boolean;
@@ -665,7 +699,7 @@ declare class Trie {
   /**
   * Returns an iterator that can be used to get all words in the trie. For some dictionaries, this can result in millions of words.
   */
-  words(): Iterable<string>;
+  words(prefix?: string): Iterable<string>;
   /**
   * Allows iteration over the entire tree.
   * On the returned Iterator, calling .next(goDeeper: boolean), allows for controlling the depth.
@@ -728,6 +762,24 @@ interface ParseDictionaryOptions {
   * Do not normalize the compound character.
   */
   keepOptionalCompoundCharacter: boolean;
+  /**
+  * The character used to denote suggestion prefixes.
+  * An empty string or whitespace disables suggestion handling.
+  * @default ":"
+  */
+  suggestionPrefix: string;
+  /**
+  * Disable suggestion handling. The suggestions prefixes will be treated as normal characters.
+  * This will override the `suggestionPrefix` setting.
+  * @default false
+  */
+  disableSuggestionHandling: boolean;
+  /**
+  * If true, all words will be made forbidden words unless they are already marked as forbidden,
+  * in that case they will be made normal words.
+  * @default false
+  */
+  makeWordsForbidden?: boolean;
 }
 /**
 * Normalizes a dictionary words based upon prefix / suffixes.
@@ -820,7 +872,7 @@ declare const iterateTrie: typeof walk;
 * Generate a Iterator that can walk a Trie and yield the words.
 */
 declare function iteratorTrieWords(node: TrieNode): Iterable<string>;
-declare function createTrieRoot(options: PartialTrieInfo): TrieRoot;
+declare function createTrieRoot(options?: PartialTrieInfoRO): TrieRoot;
 declare function createTrieRootFromList(words: Iterable<string>, options?: PartialTrieInfo): TrieRoot;
 declare function has(node: TrieNode, word: string): boolean;
 declare function findNode(node: TrieNode, word: string): TrieNode | undefined;

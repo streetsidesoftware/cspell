@@ -1,13 +1,13 @@
 import { describe, expect, test } from 'vitest';
 
-import { parseDictionaryLegacy } from '../SimpleDictionaryParser.js';
-import { Trie } from '../trie.js';
-import { cleanCopy } from '../utils/util.js';
-import * as Walker from '../walker/index.js';
-import type { GenSuggestionOptions, SuggestionOptions } from './genSuggestionsOptions.js';
-import { genCompoundableSuggestions, genSuggestions, suggest } from './suggest.js';
-import type { SuggestionCollectorOptions } from './suggestCollector.js';
-import { compSuggestionResults, isSuggestionResult, suggestionCollector } from './suggestCollector.js';
+import { parseDictionaryLegacy } from '../SimpleDictionaryParser.ts';
+import { Trie } from '../trie.ts';
+import { cleanCopy } from '../utils/util.ts';
+import * as Walker from '../walker/index.ts';
+import type { GenSuggestionOptions, SuggestionOptions } from './genSuggestionsOptions.ts';
+import { genCompoundableSuggestions, genSuggestions, suggest } from './suggest.ts';
+import type { SuggestionCollectorOptions } from './suggestCollector.ts';
+import { compSuggestionResults, isSuggestionResult, suggestionCollector } from './suggestCollector.ts';
 
 describe('Validate Suggest', () => {
     const SEPARATE_WORDS: GenSuggestionOptions = { compoundMethod: Walker.CompoundWordsMethod.SEPARATE_WORDS };

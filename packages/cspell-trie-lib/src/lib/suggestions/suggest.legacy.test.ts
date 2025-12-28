@@ -1,11 +1,11 @@
 import { describe, expect, test } from 'vitest';
 
-import { Trie } from '../trie.js';
-import { isWordTerminationNode } from '../TrieNode/trie-util.js';
-import type { TrieNode } from '../TrieNode/TrieNode.js';
-import { walker } from '../walker/index.js';
-import * as Sug from './suggest.js';
-import type { SuggestionResultBase } from './SuggestionTypes.js';
+import { Trie } from '../trie.ts';
+import { isWordTerminationNode } from '../TrieNode/trie-util.ts';
+import type { TrieNode } from '../TrieNode/TrieNode.ts';
+import { walker } from '../walker/index.ts';
+import * as Sug from './suggest.ts';
+import type { SuggestionResultBase } from './SuggestionTypes.ts';
 
 describe('Validate Suggest', () => {
     const trie = Trie.create(sampleWords);

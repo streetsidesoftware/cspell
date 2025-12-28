@@ -2,9 +2,9 @@ import { readFile } from 'node:fs/promises';
 
 import { describe, expect, test } from 'vitest';
 
-import { resolveSample } from '../../test/samples.js';
-import * as Trie from '../index.js';
-import { importTrie, serializeTrie } from './importExportV2.js';
+import { resolveSample } from '../../test/samples.ts';
+import * as Trie from '../index.ts';
+import { importTrie, serializeTrie } from './importExportV2.ts';
 
 describe('Import/Export', () => {
     test('tests serialize / deserialize from trie', async () => {

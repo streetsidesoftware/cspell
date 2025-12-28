@@ -2,10 +2,11 @@ import { promises as fs } from 'node:fs';
 
 import { describe, expect, test } from 'vitest';
 
-import { createTrieRootFromList } from '../TrieNode/trie-util.js';
-import { walkerWordsITrie } from '../walker/index.js';
-import { FastTrieBlob } from './FastTrieBlob.js';
-import { FastTrieBlobBuilder } from './FastTrieBlobBuilder.js';
+import { extractTrieCharacteristics } from '../ITrieNode/TrieInfo.ts';
+import { createTrieRootFromList } from '../TrieNode/trie-util.ts';
+import { walkerWordsITrie } from '../walker/index.ts';
+import { FastTrieBlob } from './FastTrieBlob.ts';
+import { FastTrieBlobBuilder } from './FastTrieBlobBuilder.ts';
 
 const debug = false;
 
@@ -66,6 +67,7 @@ describe('FastTrieBlob', () => {
     test('test compounds and non-strict', () => {
         const words = getWordsDictionary();
         const ft = FastTrieBlobBuilder.fromWordList(words);
+
         expect(words.findIndex((word) => !ft.has(word))).toBe(-1);
         expect([...ft.words()].sort()).toEqual([...words].sort());
 
@@ -76,6 +78,29 @@ describe('FastTrieBlob', () => {
         expect(ft.hasCompoundWords).toBe(true);
         expect(ft.hasNonStrictWords).toBe(true);
         expect(ft.hasCaseInsensitive('english')).toBe(true);
+        expect(ft.info).toEqual({
+            compoundCharacter: '+',
+            stripCaseAndAccentsPrefix: '~',
+            forbiddenWordPrefix: '!',
+            suggestionPrefix: ':',
+        });
+        expect(extractTrieCharacteristics(ft)).toEqual({
+            hasCompoundWords: true,
+            hasNonStrictWords: true,
+            hasForbiddenWords: false,
+            hasPreferredSuggestions: false,
+        });
+    });
+
+    test.each`
+        prefix
+        ${''}
+        ${'c'}
+    `('words with prefix $prefix', ({ prefix }) => {
+        const words = getWordsDictionary();
+        const wordFiltered = words.filter((w) => w.startsWith(prefix)).sort();
+        const ft = FastTrieBlobBuilder.fromWordList(words);
+        expect([...ft.words(prefix)].sort()).toEqual(wordFiltered);
     });
 });
 

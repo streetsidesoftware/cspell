@@ -1,16 +1,16 @@
 import type { DictionaryDefinition } from '@cspell/cspell-types';
 import { describe, expect, test } from 'vitest';
 
-import { readFastTrieBlobFromConfig, readTrieFromConfig } from '../../test/dictionaries.test.helper.js';
-import type { WeightMap } from '../distance/index.js';
-import { mapDictionaryInformationToWeightMap } from '../mappers/mapDictionaryInfoToWeightMap.js';
-import { parseDictionaryLegacy } from '../SimpleDictionaryParser.js';
-import { TrieNodeTrie } from '../TrieNode/TrieNodeTrie.js';
-import { CompoundWordsMethod } from '../walker/index.js';
-import { collectSuggestions } from './collectSuggestions.js';
-import type { SuggestionOptions } from './genSuggestionsOptions.js';
-import * as Sug from './suggestAStar.js';
-import type { SuggestionResult } from './SuggestionTypes.js';
+import { readFastTrieBlobFromConfig, readTrieFromConfig } from '../../test/dictionaries.test.helper.ts';
+import type { WeightMap } from '../distance/index.ts';
+import { mapDictionaryInformationToWeightMap } from '../mappers/mapDictionaryInfoToWeightMap.ts';
+import { parseDictionaryLegacy } from '../SimpleDictionaryParser.ts';
+import { TrieNodeTrie } from '../TrieNode/TrieNodeTrie.ts';
+import { CompoundWordsMethod } from '../walker/index.ts';
+import { collectSuggestions } from './collectSuggestions.ts';
+import type { SuggestionOptions } from './genSuggestionsOptions.ts';
+import * as Sug from './suggestAStar.ts';
+import type { SuggestionResult } from './SuggestionTypes.ts';
 
 // const oc = <T>(obj: T) => expect.objectContaining(obj);
 // const ac = <T>(a: Array<T>) => expect.arrayContaining(a);

@@ -1,6 +1,6 @@
-import type { PartialTrieOptions, TrieOptions } from '../trie.js';
-import type { TrieData } from '../TrieData.js';
-import type { BuilderCursor } from './BuilderCursor.js';
+import type { PartialTrieOptions, TrieOptions } from '../trie.ts';
+import type { TrieData } from '../TrieData.ts';
+import type { BuilderCursor } from './BuilderCursor.ts';
 
 export interface TrieBuilder<T extends TrieData> {
     /**

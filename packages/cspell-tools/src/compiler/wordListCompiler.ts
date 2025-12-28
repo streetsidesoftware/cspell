@@ -4,11 +4,11 @@ import * as path from 'node:path';
 import { opAppend, opMap, pipe } from '@cspell/cspell-pipe/sync';
 import * as Trie from 'cspell-trie-lib';
 
-import type { CompileOptions } from './CompileOptions.js';
-import type { WordListCompiler } from './CompilerDefinitions.js';
-import { getLogger } from './logger.js';
-import { normalizeTargetWords } from './wordListParser.js';
-import { writeTextToFile } from './writeTextToFile.js';
+import type { CompileOptions } from './CompileOptions.ts';
+import type { WordListCompiler } from './CompilerDefinitions.ts';
+import { getLogger } from './logger.ts';
+import { normalizeTargetWords } from './wordListParser.ts';
+import { writeTextToFile } from './writeTextToFile.ts';
 
 const mkdirp = async (p: string) => {
     await mkdir(p, { recursive: true });

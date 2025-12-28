@@ -1,13 +1,13 @@
 import { describe, expect, test } from 'vitest';
 
-import { parseDictionaryLegacy } from '../SimpleDictionaryParser.js';
-import { FastTrieBlobBuilder } from '../TrieBlob/FastTrieBlobBuilder.js';
-import type { TrieData } from '../TrieData.js';
-import type { TrieRoot } from '../TrieNode/TrieNode.js';
-import { TrieNodeTrie } from '../TrieNode/TrieNodeTrie.js';
-import { __testing__, createFindOptions, findLegacyCompound, findWord } from './find.js';
-import type { PartialFindOptions } from './FindOptions.js';
-import type { FindFullResult } from './ITrieNode.js';
+import { parseDictionaryLegacy } from '../SimpleDictionaryParser.ts';
+import { FastTrieBlobBuilder } from '../TrieBlob/FastTrieBlobBuilder.ts';
+import type { TrieData } from '../TrieData.ts';
+import type { TrieRoot } from '../TrieNode/TrieNode.ts';
+import { TrieNodeTrie } from '../TrieNode/TrieNodeTrie.ts';
+import { __testing__, createFindOptions, findLegacyCompound, findWord } from './find.ts';
+import type { PartialFindOptions } from './FindOptions.ts';
+import type { FindFullResult } from './ITrieNode.ts';
 
 const findLegacyCompoundWord = __testing__.findLegacyCompoundWord;
 
@@ -55,6 +55,9 @@ describe('Validate findWord', () => {
         ${'notebook'}  | ${{ ...cModeC, ...mCaseF, ...cSep }}              | ${{ found: 'note|book', compoundUsed: true, forbidden: false, caseMatched: true }}
     `('find exact words preserve case "$word" $opts', ({ word, opts, expected }) => {
         // Code is not allowed as a full word.
+        expect(trieBlob.hasForbiddenWords).toBe(true);
+        expect(trieFast.hasForbiddenWords).toBe(true);
+
         expect(findWord(trieBlob, word, opts)).toEqual(expected);
         expect(findWord(trieFast, word, opts)).toEqual(expected);
     });

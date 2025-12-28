@@ -1,4 +1,4 @@
-import type { TrieInfo } from '../ITrieNode/TrieInfo.js';
+import type { TrieCharacteristics, TrieInfo } from '../ITrieNode/TrieInfo.ts';
 
 export const FLAG_WORD = 1;
 
@@ -9,6 +9,6 @@ export interface TrieNode {
     c?: ChildMap | undefined;
 }
 
-export interface TrieRoot extends TrieInfo {
+export interface TrieRoot extends TrieInfo, TrieCharacteristics {
     c: ChildMap;
 }

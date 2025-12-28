@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { commonStringPrefixLen } from './cursor-util.js';
+import { commonStringPrefixLen } from './cursor-util.ts';
 
 describe('cursor-util', () => {
     test.each`

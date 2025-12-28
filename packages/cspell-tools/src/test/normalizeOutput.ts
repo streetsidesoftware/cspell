@@ -1,7 +1,7 @@
 import * as path from 'node:path';
 
-import { escapeRegEx } from './escapeRegEx.js';
-import { test_dirname } from './TestHelper.js';
+import { escapeRegEx } from './escapeRegEx.ts';
+import { test_dirname } from './TestHelper.ts';
 
 const _dirname = test_dirname(import.meta.url);
 

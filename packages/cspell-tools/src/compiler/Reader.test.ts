@@ -2,9 +2,9 @@ import * as path from 'node:path';
 
 import { describe, expect, test } from 'vitest';
 
-import { test_dirname } from '../test/TestHelper.js';
-import { createReader } from './Reader.js';
-import type { ReaderOptions } from './readers/ReaderOptions.js';
+import { test_dirname } from '../test/TestHelper.ts';
+import { createReader } from './Reader.ts';
+import type { ReaderOptions } from './readers/ReaderOptions.ts';
 
 const _dirname = test_dirname(import.meta.url);
 

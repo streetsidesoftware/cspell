@@ -1,20 +1,55 @@
 import { describe, expect, test } from 'vitest';
 
-import type { BuilderCursor } from '../Builder/index.js';
-import { insertWordsAtCursor } from '../Builder/index.js';
-import { consolidate } from '../consolidate.js';
-import { defaultTrieInfo } from '../constants.js';
-import { createTrieRoot, insert } from '../TrieNode/trie-util.js';
-import type { TrieNode, TrieRoot } from '../TrieNode/TrieNode.js';
-import { FastTrieBlobBuilder } from './FastTrieBlobBuilder.js';
+import type { BuilderCursor } from '../Builder/index.ts';
+import { insertWordsAtCursor } from '../Builder/index.ts';
+import { consolidate } from '../consolidate.ts';
+import { defaultTrieInfo } from '../constants.ts';
+import { extractTrieCharacteristics } from '../ITrieNode/TrieInfo.ts';
+import { createTrieRoot, insert } from '../TrieNode/trie-util.ts';
+import type { TrieNode, TrieRoot } from '../TrieNode/TrieNode.ts';
+import { FastTrieBlobBuilder } from './FastTrieBlobBuilder.ts';
 
 describe('FastTrieBlobBuilder', () => {
     test('insert', () => {
-        const words = ['one', 'two', 'three', 'four', 'houses', 'house'];
+        const words = ['one', 'two', 'three', 'four', 'houses', 'house', '!forbidden'];
         const builder = new FastTrieBlobBuilder();
         builder.insert(words);
         const ft = builder.build();
         expect([...ft.words()].sort()).toEqual([...words].sort());
+        expect(extractTrieCharacteristics(ft)).toEqual({
+            hasCompoundWords: false,
+            hasForbiddenWords: true,
+            hasNonStrictWords: false,
+            hasPreferredSuggestions: false,
+        });
+    });
+
+    test('insert characteristics ! :', () => {
+        const words = ['one', 'two', 'three', 'four', 'houses', 'house', ':color:special', '~caseInsensitive'];
+        const builder = new FastTrieBlobBuilder();
+        builder.insert(words);
+        const ft = builder.build();
+        expect([...ft.words()].sort()).toEqual([...words].sort());
+        expect(extractTrieCharacteristics(ft)).toEqual({
+            hasCompoundWords: false,
+            hasForbiddenWords: false,
+            hasNonStrictWords: true,
+            hasPreferredSuggestions: true,
+        });
+    });
+
+    test('insert characteristics +', () => {
+        const words = ['one', 'two', 'three', 'four', 'houses', 'house', '+one'];
+        const builder = new FastTrieBlobBuilder();
+        builder.insert(words);
+        const ft = builder.build();
+        expect([...ft.words()].sort()).toEqual([...words].sort());
+        expect(extractTrieCharacteristics(ft)).toEqual({
+            hasCompoundWords: true,
+            hasForbiddenWords: false,
+            hasNonStrictWords: false,
+            hasPreferredSuggestions: false,
+        });
     });
 
     test('insert word list', () => {

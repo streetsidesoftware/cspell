@@ -3,9 +3,9 @@ import * as path from 'node:path';
 import type { Transform } from 'cosmiconfig';
 import { cosmiconfig } from 'cosmiconfig';
 
-import { compile } from './compiler/index.js';
-import type { CompileRequest, Target } from './config/index.js';
-import { normalizeConfig } from './config/index.js';
+import { compile } from './compiler/index.ts';
+import type { CompileRequest, Target } from './config/index.ts';
+import { normalizeConfig } from './config/index.ts';
 
 export interface BuildOptions {
     /** Optional path to config file */

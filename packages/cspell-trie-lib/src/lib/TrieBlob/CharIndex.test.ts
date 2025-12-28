@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { CharIndexBuilder } from './CharIndex.js';
+import { CharIndexBuilder } from './CharIndex.ts';
 
 describe('CharIndexBuilder', () => {
     test('build char index', () => {

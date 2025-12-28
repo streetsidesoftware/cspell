@@ -1,12 +1,12 @@
 import { describe, expect, test } from 'vitest';
 
-import { parseLinesToDictionaryLegacy } from '../../SimpleDictionaryParser.js';
-import { trieRootToITrieRoot } from '../../TrieNode/trie.js';
-import { createTrieRootFromList, orderTrie } from '../../TrieNode/trie-util.js';
-import type { HintedWalkerIterator } from './hintedWalker.js';
-import { hintedWalker } from './hintedWalker.js';
-import type { YieldResult } from './walkerTypes.js';
-import { CompoundWordsMethod } from './walkerTypes.js';
+import { parseLinesToDictionaryLegacy } from '../../SimpleDictionaryParser.ts';
+import { trieRootToITrieRoot } from '../../TrieNode/trie.ts';
+import { createTrieRootFromList, orderTrie } from '../../TrieNode/trie-util.ts';
+import type { HintedWalkerIterator } from './hintedWalker.ts';
+import { hintedWalker } from './hintedWalker.ts';
+import type { YieldResult } from './walkerTypes.ts';
+import { CompoundWordsMethod } from './walkerTypes.ts';
 
 describe('Validate Util Functions', () => {
     test('Hinted Walker', () => {

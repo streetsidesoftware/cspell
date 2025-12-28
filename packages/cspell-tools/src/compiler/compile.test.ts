@@ -2,13 +2,13 @@ import * as path from 'node:path';
 
 import { beforeAll, beforeEach, describe, expect, test } from 'vitest';
 
-import type { CompileRequest, Target } from '../config/index.js';
-import { checkShasumFile } from '../shasum/shasum.js';
-import { spyOnConsole } from '../test/console.js';
-import { createTestHelper } from '../test/TestHelper.js';
-import { compile } from './compile.js';
-import { setLogger } from './logger.js';
-import { readTextFile } from './readers/readTextFile.js';
+import type { CompileRequest, Target } from '../config/index.ts';
+import { checkShasumFile } from '../shasum/shasum.ts';
+import { spyOnConsole } from '../test/console.ts';
+import { createTestHelper } from '../test/TestHelper.ts';
+import { compile } from './compile.ts';
+import { setLogger } from './logger.ts';
+import { readTextFile } from './readers/readTextFile.ts';
 
 const testHelper = createTestHelper(import.meta.url);
 

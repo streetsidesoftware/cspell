@@ -1,6 +1,6 @@
 import { encodeTrieDataToBTrie } from 'cspell-trie-lib';
 
-import { createReader } from './Reader.js';
+import { createReader } from './Reader.ts';
 
 export async function createBTrieFromFile(file: string): Promise<Uint8Array> {
     const reader = await createReader(file, {});

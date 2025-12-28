@@ -13,6 +13,7 @@ export const definitions: FileTypeDefinitions = [
     { id: 'cache_files', extensions: [], filenames: ['.DS_Store', '.cspellcache', '.eslintcache'] },
     { id: 'clojure', extensions: ['.clj', '.cljc', '.cljs', '.cljx', '.clojure', '.edn'] },
     { id: 'cmake', extensions: ['.cmake'], filenames: ['CMakeLists.txt'] },
+    { id: 'codeowners', extensions: [], filenames: ['codeowners'] },
     { id: 'coffeescript', extensions: ['.coffee', '.cson', '.iced'] },
     {
         id: 'cpp',
@@ -79,7 +80,7 @@ export const definitions: FileTypeDefinitions = [
     { id: 'java', extensions: ['.jav', '.java'] },
     { id: 'javascript', extensions: ['.cjs', '.es6', '.js', '.mjs', '.pac'], filenames: ['jakefile'] },
     { id: 'javascriptreact', extensions: ['.jsx'] },
-    { id: 'jinja', extensions: ['.jinja'] },
+    { id: 'jinja', extensions: ['.j2', '.jinja', '.jinja2'] },
     {
         id: 'json',
         extensions: [
@@ -183,6 +184,7 @@ export const definitions: FileTypeDefinitions = [
         extensions: ['.cfg', '.conf', '.directory', '.editorconfig', '.gitattributes', '.gitconfig', '.gitmodules', '.npmrc', '.properties', '.repo'],
         filenames: ['.env', 'gitconfig'],
     },
+    { id: 'protobuf', extensions: ['.proto', '.txtpb', '.textproto', '.textpb', '.pbtxt'] },
     { id: 'puppet', extensions: ['.puppet'] },
     { id: 'purescript', extensions: ['.purs'] },
     { id: 'python', extensions: ['.cpy', '.gyp', '.gypi', '.ipy', '.py', '.pyi', '.pyt', '.pyw', '.rpy'], filenames: ['SConscript', 'SConstruct'] },

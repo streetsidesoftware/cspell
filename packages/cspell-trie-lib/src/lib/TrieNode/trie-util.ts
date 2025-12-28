@@ -1,5 +1,5 @@
 import type { ITrieNodeRoot } from '../ITrieNode/ITrieNode.ts';
-import type { PartialTrieInfo } from '../ITrieNode/TrieInfo.ts';
+import type { PartialTrieInfo, PartialTrieInfoRO } from '../ITrieNode/TrieInfo.ts';
 import { isValidChar } from '../utils/isValidChar.ts';
 import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.ts';
 import { walker, walkerWords } from '../walker/walker.ts';
@@ -56,12 +56,8 @@ export function iteratorTrieWords(node: TrieNode): Iterable<string> {
     return walkerWords(node);
 }
 
-export function createTrieRoot(options: PartialTrieInfo): TrieRoot {
-    const fullOptions = mergeOptionalWithDefaults(options);
-    return {
-        ...fullOptions,
-        c: Object.create(null),
-    };
+export function createTrieRoot(options?: PartialTrieInfoRO): TrieRoot {
+    return new CTrieRoot(options);
 }
 
 export function createTrieRootFromList(words: Iterable<string>, options?: PartialTrieInfo): TrieRoot {
@@ -216,11 +212,44 @@ export function isCircular(root: TrieNode): boolean {
 }
 
 export function trieNodeToRoot(node: TrieNode, options: PartialTrieInfo): TrieRoot {
-    const newOptions = mergeOptionalWithDefaults(options);
-    return {
-        ...newOptions,
-        c: node.c || Object.create(null),
-    };
+    return CTrieRoot.createFrom(node, options);
+}
+
+class CTrieRoot implements TrieRoot {
+    c: TrieRoot['c'];
+    compoundCharacter: string;
+    stripCaseAndAccentsPrefix: string;
+    forbiddenWordPrefix: string;
+    suggestionPrefix: string;
+
+    constructor(options: PartialTrieInfo) {
+        const newOptions = mergeOptionalWithDefaults(options);
+        this.c = Object.create(null);
+        this.compoundCharacter = newOptions.compoundCharacter;
+        this.stripCaseAndAccentsPrefix = newOptions.stripCaseAndAccentsPrefix;
+        this.forbiddenWordPrefix = newOptions.forbiddenWordPrefix;
+        this.suggestionPrefix = newOptions.suggestionPrefix;
+    }
+
+    get hasForbiddenWords(): boolean {
+        return !!this.c[this.forbiddenWordPrefix];
+    }
+    get hasCompoundWords(): boolean {
+        return !!this.c[this.compoundCharacter];
+    }
+    get hasNonStrictWords(): boolean {
+        return !!this.c[this.stripCaseAndAccentsPrefix];
+    }
+
+    get hasPreferredSuggestions(): boolean {
+        return !!this.c[this.suggestionPrefix];
+    }
+
+    static createFrom(trie: TrieNode, options: PartialTrieInfo): CTrieRoot {
+        const root = new CTrieRoot(options);
+        root.c = trie.c || Object.create(null);
+        return root;
+    }
 }
 
 export interface ValidateTrieResult {

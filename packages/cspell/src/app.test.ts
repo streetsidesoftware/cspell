@@ -229,7 +229,6 @@ describe('Validate cli', () => {
         ${'--fail-fast with option'}                   | ${['-r', failFastRoot, '--fail-fast', '*.txt']}                                              | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
         ${'--fail-fast with config'}                   | ${['-r', failFastRoot, '-c', failFastConfig, '*.txt']}                                       | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
         ${'--no-fail-fast with config'}                | ${['-r', failFastRoot, '--no-fail-fast', '-c', failFastConfig, '*.txt']}                     | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
-        ${'issue-2998 --language-id'}                  | ${[rpFix('issue-2998'), '-v', '-v', '--language-id=fix', 'fix-words.txt']}                   | ${undefined}                | ${true}  | ${false} | ${true}
         ${'Explicit file://'}                          | ${[rpFix('misc'), 'file://star-not.md']}                                                     | ${undefined}                | ${true}  | ${false} | ${false}
         ${'Explicit not found file://'}                | ${[rpFix('misc'), 'file://not-fond.md']}                                                     | ${app.CheckFailed}          | ${true}  | ${false} | ${false}
         ${'typos'}                                     | ${[rpFix('features/typos'), '--no-progress', '.']}                                           | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
@@ -241,12 +240,6 @@ describe('Validate cli', () => {
         ${'inline suggest'}                            | ${[rpFix('features/inline-suggest'), '--no-progress', '--show-suggestions', '.']}            | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
         ${'reporter'}                                  | ${[rpFeat('reporter'), '-e', 'issues.md']}                                                   | ${undefined}                | ${false} | ${true}  | ${false}
         ${'reporter with spelling issues'}             | ${[rpFeat('reporter')]}                                                                      | ${app.CheckFailed}          | ${false} | ${true}  | ${false}
-        ${'issue-4811 **/README.md'}                   | ${['-r', pIssues('issue-4811'), '--no-progress', '**/README.md']}                            | ${undefined}                | ${true}  | ${false} | ${false}
-        ${'issue-4811'}                                | ${['-r', pIssues('issue-4811'), '--no-progress', '.']}                                       | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
-        ${'issue-6373 .'}                              | ${[rpFix('issue-6373'), '--no-progress', '.']}                                               | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
-        ${'issue-6373'}                                | ${[rpFix('issue-6373'), '--no-progress']}                                                    | ${undefined}                | ${true}  | ${false} | ${false}
-        ${'issue-6353'}                                | ${[rpFix('issue-6353'), '--no-progress']}                                                    | ${undefined}                | ${true}  | ${false} | ${true}
-        ${'issue-7837'}                                | ${[rpFix('issue-7837'), '.']}                                                                | ${app.CheckFailed}          | ${true}  | ${false} | ${false}
         ${'verify globRoot works'}                     | ${[rpFix('globRoot'), '.']}                                                                  | ${undefined}                | ${true}  | ${false} | ${false}
         ${'reporting level flagged'}                   | ${[rpFeat('unknown-words'), '--report=flagged', '.']}                                        | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
         ${'reporting level typos'}                     | ${[rpFeat('unknown-words'), '--report=typos', '.']}                                          | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
@@ -261,6 +254,33 @@ describe('Validate cli', () => {
         ${'--continue-on-error - missing dict'}        | ${[...rcFix('import/import-errors', 'missing-dict.yaml'), '--continue-on-error', '*.md']}    | ${app.CheckFailed}          | ${true}  | ${false} | ${false}
         ${'--continue-on-error - import & spelling'}   | ${[...rcFix('import/import-errors', 'missing-import.yaml'), '--continue-on-error', '*.txt']} | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
         ${'--continue-on-error - missing config'}      | ${[...rcFix('import/import-errors', 'missing.yaml'), '--continue-on-error', '*.txt']}        | ${app.CheckFailed}          | ${true}  | ${true}  | ${false}
+    `('app $msg Expect Error: $errorCheck', async ({ testArgs, errorCheck, eError, eLog, eInfo }: TestCase) => {
+        chalk.level = 1;
+        const commander = getCommander();
+        const args = argv(...testArgs);
+        const result = app.run(commander, args);
+        await (!errorCheck ? expect(result).resolves.toBeUndefined() : expect(result).rejects.toThrow(errorCheck));
+
+        eError ? expect(error).toHaveBeenCalled() : expect(error).not.toHaveBeenCalled();
+        eLog ? expect(log).toHaveBeenCalled() : expect(log).not.toHaveBeenCalled();
+        eInfo ? expect(info).toHaveBeenCalled() : expect(info).not.toHaveBeenCalled();
+
+        expect(captureStdout.text).toMatchSnapshot();
+        expect(logger.normalizedHistory()).toMatchSnapshot();
+        expect(normalizeOutput(captureStderr.text)).toMatchSnapshot();
+    });
+
+    test.each`
+        msg                           | testArgs                                                                   | errorCheck         | eError  | eLog     | eInfo
+        ${'issue-2998 --language-id'} | ${[rpFix('issue-2998'), '-v', '-v', '--language-id=fix', 'fix-words.txt']} | ${undefined}       | ${true} | ${false} | ${true}
+        ${'issue-4811 **/README.md'}  | ${['-r', pIssues('issue-4811'), '--no-progress', '**/README.md']}          | ${undefined}       | ${true} | ${false} | ${false}
+        ${'issue-4811'}               | ${['-r', pIssues('issue-4811'), '--no-progress', '.']}                     | ${app.CheckFailed} | ${true} | ${true}  | ${false}
+        ${'issue-6373 .'}             | ${[rpFix('issue-6373'), '--no-progress', '.']}                             | ${app.CheckFailed} | ${true} | ${true}  | ${false}
+        ${'issue-6373'}               | ${[rpFix('issue-6373'), '--no-progress']}                                  | ${undefined}       | ${true} | ${false} | ${false}
+        ${'issue-6353'}               | ${[rpFix('issue-6353'), '--no-progress']}                                  | ${undefined}       | ${true} | ${false} | ${true}
+        ${'issue-7837'}               | ${[rpFix('issue-7837'), '.']}                                              | ${app.CheckFailed} | ${true} | ${false} | ${false}
+        ${'issue-7902'}               | ${[rpFix('issue-7902'), '.']}                                              | ${app.CheckFailed} | ${true} | ${true}  | ${false}
+        ${'issue-8200'}               | ${[rpFix('issue-8200'), '-vv', '.']}                                       | ${undefined}       | ${true} | ${false} | ${true}
     `('app $msg Expect Error: $errorCheck', async ({ testArgs, errorCheck, eError, eLog, eInfo }: TestCase) => {
         chalk.level = 1;
         const commander = getCommander();

@@ -3,12 +3,12 @@ import * as zlib from 'node:zlib';
 
 import { describe, expect, test } from 'vitest';
 
-import { resolveGlobalDict } from '../../test/samples.js';
-import { importTrie } from '../io/importExport.js';
-import { normalizeWordToLowercase } from '../utils/normalizeWord.js';
-import type { FindFullResult, PartialFindOptions } from './find.js';
-import { findWord } from './find.js';
-import type { TrieNode } from './TrieNode.js';
+import { resolveGlobalDict } from '../../test/samples.ts';
+import { importTrie } from '../io/importExport.ts';
+import { normalizeWordToLowercase } from '../utils/normalizeWord.ts';
+import type { FindFullResult, PartialFindOptions } from './find.ts';
+import { findWord } from './find.ts';
+import type { TrieNode } from './TrieNode.ts';
 
 const dutchDictionary = resolveGlobalDict('nl_nl.trie.gz');
 

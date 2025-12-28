@@ -2,8 +2,8 @@ import { promises as fs } from 'node:fs';
 
 import { describe, expect, test } from 'vitest';
 
-import { resolveSample } from '../test/samples.js';
-import { decodeTrie } from './decodeTrie.js';
+import { resolveSample } from '../test/samples.ts';
+import { decodeTrie } from './decodeTrie.ts';
 
 describe('decodeTrie', () => {
     // cspell:ignore Mormotomyi Hypsoïdes

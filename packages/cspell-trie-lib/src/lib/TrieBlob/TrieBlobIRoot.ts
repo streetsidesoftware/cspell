@@ -21,6 +21,7 @@ interface TrieMethods extends Readonly<TrieCharacteristics> {
 }
 
 export class TrieBlobInternals implements TrieMethods, BitMaskInfo {
+    #methods: TrieMethods;
     readonly NodeMaskEOW: number;
     readonly NodeMaskNumChildren: number;
     readonly NodeMaskChildCharIndex: number;
@@ -30,10 +31,6 @@ export class TrieBlobInternals implements TrieMethods, BitMaskInfo {
     readonly findExact: (word: string) => boolean;
     readonly nodeGetChild: (idx: number, letter: string) => number | undefined;
     readonly nodeFindNode: (idx: number, word: string) => number | undefined;
-
-    readonly hasForbiddenWords: boolean;
-    readonly hasCompoundWords: boolean;
-    readonly hasNonStrictWords: boolean;
     readonly nodes: Uint32Array;
 
     constructor(nodes: Uint32Array, maskInfo: BitMaskInfo, methods: TrieMethods) {
@@ -43,14 +40,25 @@ export class TrieBlobInternals implements TrieMethods, BitMaskInfo {
         this.NodeMaskNumChildren = NodeMaskNumChildren;
         this.NodeMaskChildCharIndex = NodeMaskChildCharIndex;
         this.NodeChildRefShift = NodeChildRefShift;
+        this.#methods = methods;
         this.nodeFindExact = methods.nodeFindExact;
         this.isForbidden = methods.isForbidden;
         this.findExact = methods.findExact;
         this.nodeGetChild = methods.nodeGetChild;
         this.nodeFindNode = methods.nodeFindNode;
-        this.hasForbiddenWords = methods.hasForbiddenWords;
-        this.hasCompoundWords = methods.hasCompoundWords;
-        this.hasNonStrictWords = methods.hasNonStrictWords;
+    }
+
+    get hasPreferredSuggestions(): boolean {
+        return this.#methods.hasPreferredSuggestions;
+    }
+    get hasForbiddenWords(): boolean {
+        return this.#methods.hasForbiddenWords;
+    }
+    get hasCompoundWords(): boolean {
+        return this.#methods.hasCompoundWords;
+    }
+    get hasNonStrictWords(): boolean {
+        return this.#methods.hasNonStrictWords;
     }
 }
 

@@ -1,8 +1,8 @@
-import type { DictionaryReader, Reader, ReaderOptions } from './readers/ReaderOptions.js';
-import { readHunspellFiles } from './readers/readHunspellFiles.js';
-import { regHunspellFile } from './readers/regHunspellFile.js';
-import { textFileReader } from './readers/textFileReader.js';
-import { trieFileReader } from './readers/trieFileReader.js';
+import type { DictionaryReader, Reader, ReaderOptions } from './readers/ReaderOptions.ts';
+import { readHunspellFiles } from './readers/readHunspellFiles.ts';
+import { regHunspellFile } from './readers/regHunspellFile.ts';
+import { textFileReader } from './readers/textFileReader.ts';
+import { trieFileReader } from './readers/trieFileReader.ts';
 
 interface ReaderSelector {
     test: RegExp;

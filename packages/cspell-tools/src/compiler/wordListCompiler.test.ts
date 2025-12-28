@@ -9,22 +9,22 @@ import { importTrie, isCircular, iteratorTrieWords, serializeTrie } from 'cspell
 import { uniqueFilter } from 'hunspell-reader';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 
-import { spyOnConsole } from '../test/console.js';
-import { createTestHelper } from '../test/TestHelper.js';
-import type { CompileOptions } from './CompileOptions.js';
-import { legacyLineToWords } from './legacyLineToWords.js';
-import { setLogger } from './logger.js';
-import { readTextFile } from './readers/readTextFile.js';
-import type { SourceReaderOptions } from './SourceReader.js';
-import { streamSourceWordsFromFile } from './streamSourceWordsFromFile.js';
-import type { CompileTrieOptions } from './wordListCompiler.js';
+import { spyOnConsole } from '../test/console.ts';
+import { createTestHelper } from '../test/TestHelper.ts';
+import type { CompileOptions } from './CompileOptions.ts';
+import { legacyLineToWords } from './legacyLineToWords.ts';
+import { setLogger } from './logger.ts';
+import { readTextFile } from './readers/readTextFile.ts';
+import type { SourceReaderOptions } from './SourceReader.ts';
+import { streamSourceWordsFromFile } from './streamSourceWordsFromFile.ts';
+import type { CompileTrieOptions } from './wordListCompiler.ts';
 import {
     __testing__,
     compileTrieToTarget as _compileTrie,
     compileWordListToTarget as _compileWordList,
-} from './wordListCompiler.js';
-import { normalizeTargetWords } from './wordListParser.js';
-import { defaultAllowedSplitWords } from './WordsCollection.js';
+} from './wordListCompiler.ts';
+import { normalizeTargetWords } from './wordListParser.ts';
+import { defaultAllowedSplitWords } from './WordsCollection.ts';
 
 const testHelper = createTestHelper(import.meta.url);
 

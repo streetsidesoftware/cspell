@@ -1,4 +1,4 @@
-import type { Progress, SuggestionGenerator, SuggestionResult } from './SuggestionTypes.js';
+import type { Progress, SuggestionGenerator, SuggestionResult } from './SuggestionTypes.ts';
 
 function isProgress(v: unknown | Progress): v is Progress {
     if (!v || typeof v !== 'object') return false;

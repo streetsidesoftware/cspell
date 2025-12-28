@@ -1,13 +1,13 @@
 import { describe, expect, test } from 'vitest';
 
-import { CompoundWordsMethod, defaultTrieInfo, suggestionCollector } from './index.js';
-import { parseDictionaryLegacy } from './SimpleDictionaryParser.js';
-import type { SuggestionOptions } from './suggestions/genSuggestionsOptions.js';
-import type { SuggestionCollectorOptions } from './suggestions/suggestCollector.js';
-import { Trie } from './trie.js';
-import { isWordTerminationNode, orderTrie } from './TrieNode/trie-util.js';
-import { clean } from './utils/clean.js';
-import { normalizeWordToLowercase } from './utils/normalizeWord.js';
+import { CompoundWordsMethod, defaultTrieInfo, suggestionCollector } from './index.ts';
+import { parseDictionaryLegacy } from './SimpleDictionaryParser.ts';
+import type { SuggestionOptions } from './suggestions/genSuggestionsOptions.ts';
+import type { SuggestionCollectorOptions } from './suggestions/suggestCollector.ts';
+import { Trie } from './trie.ts';
+import { isWordTerminationNode, orderTrie } from './TrieNode/trie-util.ts';
+import { clean } from './utils/clean.ts';
+import { normalizeWordToLowercase } from './utils/normalizeWord.ts';
 
 describe('Validate Trie Class', () => {
     const NumSuggestions: SuggestionOptions = { numSuggestions: 10 };
@@ -139,6 +139,18 @@ describe('Validate Trie Class', () => {
         expect(trie.find('endless', true)?.f).toBe(1);
         expect(trie.find('joywalk', false)?.f).toBeUndefined();
         expect(trie.find('walked', true)?.f).toBe(1);
+    });
+
+    test.each`
+        prefix
+        ${''}
+        ${'a'}
+        ${'wa'}
+        ${'joy'}
+    `('words with prefix: $prefix', ({ prefix }) => {
+        const trie = Trie.create(sampleWords);
+        const words = [...trie.words()];
+        expect([...trie.words(prefix)]).toEqual(words.filter((w) => w.startsWith(prefix)));
     });
 
     test('size', () => {

@@ -296,12 +296,14 @@ function createPerfTable1(data: [string, CsvRecord[]][]): string {
     });
 
     return inject`
-        ## Time to Process Files
+        <details>
+        <summary>Time to Process Files</summary>
 
         ${table}
 
         Note:
         - Elapsed time is in seconds.
+        </details>
     `;
 }
 
@@ -330,9 +332,11 @@ function createFpsPerfTable(data: [string, CsvRecord[]][]): string {
     });
 
     return inject`
-        ## Files per Second over Time
+        <details>
+        <summary>Files per Second over Time</summary>
 
         ${table}
+        </details>
     `;
 }
 
@@ -363,9 +367,11 @@ function createThroughputPerfTable(data: [string, CsvRecord[]][]): string {
     });
 
     return inject`
-        ## Data Throughput
+        <details>
+        <summary>Data Throughput</summary>
 
         ${table}
+        </details>
     `;
 }
 
@@ -395,7 +401,8 @@ function createDailyPerfGraph(dailyStats: DailyStats[]): string {
     });
     const xAxis = dailyStats.map((d) => `${monthNames[d.date.getUTCMonth()]}-${d.date.getUTCDate()}`);
     return inject`
-        ## Daily Performance
+        <details>
+        <summary>Daily Performance</summary>
 
         ${'```mermaid'}
         xychart-beta
@@ -405,6 +412,7 @@ function createDailyPerfGraph(dailyStats: DailyStats[]): string {
             bar [${bar.join(', ')}]
             ${lines.join('\n')}
         ${'```'}
+        </details>
     `;
 }
 

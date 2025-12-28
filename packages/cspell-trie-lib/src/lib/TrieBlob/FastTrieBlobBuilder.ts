@@ -1,8 +1,8 @@
 import type { BuilderCursor, TrieBuilder } from '../Builder/index.ts';
-import type { PartialTrieInfo, TrieInfo } from '../ITrieNode/TrieInfo.ts';
+import type { PartialTrieInfo, TrieCharacteristics, TrieInfo } from '../ITrieNode/TrieInfo.ts';
+import { TrieInfoBuilder } from '../ITrieNode/TrieInfo.ts';
 import type { TrieNode, TrieRoot } from '../TrieNode/TrieNode.ts';
 import { assert } from '../utils/assert.ts';
-import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.ts';
 import { assertValidUtf16Character } from '../utils/text.ts';
 import { CharIndexBuilder } from './CharIndex.ts';
 import type { NodeToJSON } from './FastTrieBlob.ts';
@@ -21,27 +21,29 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
     private IdxEOW: number;
     private _cursor: BuilderCursor | undefined;
 
-    private _options: Readonly<TrieInfo>;
     wordToCharacters = (word: string): string[] => [...word];
     readonly bitMasksInfo: FastTrieBlobBitMaskInfo;
 
+    #infoBuilder: TrieInfoBuilder;
+
     constructor(
         options?: PartialTrieInfo,
+        characteristics?: Partial<TrieCharacteristics>,
         bitMasksInfo: FastTrieBlobBitMaskInfo = FastTrieBlobBuilder.DefaultBitMaskInfo,
     ) {
-        this._options = mergeOptionalWithDefaults(options);
         this.bitMasksInfo = bitMasksInfo;
         this.nodes = [[0], Object.freeze([FastTrieBlobBuilder.NodeMaskEOW]) as number[]];
         this.IdxEOW = 1;
+        this.#infoBuilder = new TrieInfoBuilder(options, characteristics);
     }
 
     setOptions(options: PartialTrieInfo): Readonly<TrieInfo> {
-        this._options = mergeOptionalWithDefaults(this.options, options);
-        return this.options;
+        this.#infoBuilder.setInfo(options);
+        return this.#infoBuilder.getActiveInfo();
     }
 
     get options(): Readonly<TrieInfo> {
-        return this._options;
+        return this.#infoBuilder.getActiveInfo();
     }
 
     private wordToUtf8Seq(word: string): Readonly<number[]> {
@@ -201,6 +203,7 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
     private _insert(word: string): this {
         word = word.trim();
         if (!word) return this;
+        this.#infoBuilder.addWord(word);
         const NodeMaskChildCharIndex = this.bitMasksInfo.NodeMaskChildCharIndex;
         const NodeChildRefShift = this.bitMasksInfo.NodeChildRefShift;
         const NodeMaskEOW = this.bitMasksInfo.NodeMaskEOW;
@@ -279,6 +282,7 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
         this._cursor = undefined;
         this._readonly = true;
         this.freeze();
+        const info = this.#infoBuilder.build();
 
         return FastTrieBlob.create(
             new FastTrieBlobInternals(
@@ -287,7 +291,8 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
                     this.bitMasksInfo.NodeMaskChildCharIndex,
                 ),
                 this.bitMasksInfo,
-                this.options,
+                info.info,
+                info.characteristics,
             ),
         );
     }
@@ -316,7 +321,7 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
         const NodeChildRefShift = bitMasksInfo.NodeChildRefShift;
         const NodeCharIndexMask = bitMasksInfo.NodeMaskChildCharIndex;
         const NodeMaskEOW = bitMasksInfo.NodeMaskEOW;
-        const tf = new FastTrieBlobBuilder(undefined, bitMasksInfo);
+        const tf = new FastTrieBlobBuilder(undefined, root, bitMasksInfo);
         const IdxEOW = tf.IdxEOW;
 
         const known = new Map<TrieNode, number>([[root, 0]]);

@@ -13,17 +13,17 @@ import type {
     FilePath,
     FileSource,
     Target,
-} from '../config/index.js';
-import { isFileListSource, isFilePath, isFileSource } from '../config/index.js';
-import { checkShasumFile, updateChecksumForFiles } from '../shasum/index.js';
-import { stringToRegExp } from '../util/textRegex.js';
-import { createAllowedSplitWordsFromFiles, createWordsCollectionFromFiles } from './createWordsCollection.js';
-import { logWithTimestamp } from './logWithTimestamp.js';
-import { readTextFile } from './readers/readTextFile.js';
-import type { SourceReaderOptions } from './SourceReader.js';
-import { streamSourceWordsFromFile } from './streamSourceWordsFromFile.js';
-import { createTargetFile, createTrieCompiler, createWordListCompiler } from './wordListCompiler.js';
-import { normalizeTargetWords } from './wordListParser.js';
+} from '../config/index.ts';
+import { isFileListSource, isFilePath, isFileSource } from '../config/index.ts';
+import { checkShasumFile, updateChecksumForFiles } from '../shasum/index.ts';
+import { stringToRegExp } from '../util/textRegex.ts';
+import { createAllowedSplitWordsFromFiles, createWordsCollectionFromFiles } from './createWordsCollection.ts';
+import { logWithTimestamp } from './logWithTimestamp.ts';
+import { readTextFile } from './readers/readTextFile.ts';
+import type { SourceReaderOptions } from './SourceReader.ts';
+import { streamSourceWordsFromFile } from './streamSourceWordsFromFile.ts';
+import { createTargetFile, createTrieCompiler, createWordListCompiler } from './wordListCompiler.ts';
+import { normalizeTargetWords } from './wordListParser.ts';
 
 interface CompileOptions {
     /**

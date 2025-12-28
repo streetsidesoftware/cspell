@@ -1,4 +1,4 @@
-import type { PartialWithUndefined } from '../types.js';
+import type { PartialWithUndefined } from '../types.ts';
 
 /**
  * Creates a new object of type T based upon the field values from `value`.

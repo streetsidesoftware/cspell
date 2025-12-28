@@ -216,20 +216,6 @@ export class TrieBuilder {
         this.logDebug('insertWord', word);
         this._debug_lastWordsInserted[this.numWords & 0xf] = word;
         this.numWords++;
-        // if (!(this.numWords % 100000) /*|| this.numWords > 26123530 */) {
-        //     console.warn('check circular at: %o', this.numWords);
-        //     const check = checkCircular(this._root);
-        //     if (check.isCircular) {
-        //         const prevWord = this.lastPath.map((a) => a.s).join('|');
-        //         const prevWords = this._debug_lastWordsInserted.map(
-        //             (w, i) => this._debug_lastWordsInserted[(this.numWords + i) & 0xf],
-        //         );
-        //         const { word, pos, stack } = check.ref;
-        //         console.error('Circular before %o\ncheck: %o', this.numWords, { word, pos, prevWord, prevWords });
-        //         console.error('Stack: %o', this.debugStack(stack));
-        //         throw new Error('Circular');
-        //     }
-        // }
 
         const chars = [...word];
 
