@@ -3,10 +3,10 @@ import assert from 'node:assert';
 import { describe, expect, test } from 'vitest';
 
 import {
-    decodeUtf8ByteStream,
     decodeUtf8_32,
     decodeUtf8_32_StreamToString,
     decodeUtf8_32Rev,
+    decodeUtf8ByteStream,
     encodeCodePointsToUtf8Into,
     encodeTextToUtf8,
     encodeTextToUtf8_32Into,
