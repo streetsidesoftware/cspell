@@ -1,10 +1,44 @@
 /* eslint-disable unicorn/prefer-code-point */
 
-/** A utf8 value represented as big endian 32bit number */
-export type Utf8BE32 = number;
+/**
+ * A utf8 value represented as 32bit number
+ *
+ * Utf8_32 number are comparable in utf8 order.
+ *
+ *            hightest byte           lowest byte   Code Point Range
+ * - 1 byte:  00000000 00000000 00000000 0xxxxxxx - 0x0000_0000 - 0x0000_007f
+ * - 2 bytes: 00000000 00000000 110xxxxx 10xxxxxx - 0x0000_0080 - 0x0000_07ff
+ * - 3 bytes: 00000000 1110xxxx 10xxxxxx 10xxxxxx - 0x0000_0800 - 0x0000_ffff
+ * - 4 bytes: 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx - 0x0001_0000 - 0x001f_ffff
+ *
+ */
+export type Utf8_32 = number;
 
-/** A utf8 value represented as little endian 32bit number */
-export type Utf8LE32 = number;
+/**
+ * A utf8 value represented as little endian 32bit number
+ *
+ * These numbers DO NOT sort into the correct order for utf8.
+ *
+ *            hightest byte           lowest byte   Code Point Range
+ * - 1 byte:  00000000 00000000 00000000 0xxxxxxx - 0x0000_0000 - 0x0000_007f
+ * - 2 bytes: 00000000 00000000 10xxxxxx 110xxxxx - 0x0000_0080 - 0x0000_07ff
+ * - 3 bytes: 00000000 10xxxxxx 10xxxxxx 1110xxxx - 0x0000_0800 - 0x0000_ffff
+ * - 4 bytes: 10xxxxxx 10xxxxxx 10xxxxxx 11110xxx - 0x0001_0000 - 0x001f_ffff
+ *
+ * This number is useful when emitting code points to a byte stream:
+ *
+ * Example:
+ * ```ts
+ * for (const letter of text) {
+ *   const codePoint = letter.codePointAt(0) || 0;
+ *   for (let utf8_32Rev = encodeToUtf8_32Rev(codePoint); utf8_32Rev !== 0; utf8_32Rev >>>= 8) {
+ *      const byte = utf8_32Rev & 0xff;
+ *      emit(byte); // write byte to stream
+ *   }
+ * }
+ * ```
+ */
+export type Utf8_32Rev = number;
 
 export type CodePoint = number;
 
@@ -21,7 +55,7 @@ export type CodePoint = number;
  * @param code - the code point to encode
  * @returns number containing the utf8 value.
  */
-export function encodeUtf8N_BE(code: CodePoint): Utf8BE32 {
+export function encodeToUtf8_32(code: CodePoint): Utf8_32 {
     if (code < 0x80) {
         return code;
     }
@@ -36,7 +70,7 @@ export function encodeUtf8N_BE(code: CodePoint): Utf8BE32 {
     );
 }
 
-export function decodeUtf8N_BE(utf8: Utf8BE32): CodePoint {
+export function decodeUtf8_32(utf8: Utf8_32): CodePoint {
     if (utf8 >= 0 && utf8 < 0x80) {
         return utf8;
     }
@@ -52,14 +86,14 @@ export function decodeUtf8N_BE(utf8: Utf8BE32): CodePoint {
     return 0xfffd;
 }
 
-export function* decodeUtf8N_BE_Stream(utf8s: Iterable<Utf8BE32>): Iterable<CodePoint> {
+export function* decodeUtf8_32_Stream(utf8s: Iterable<Utf8_32>): Iterable<CodePoint> {
     for (const utf8 of utf8s) {
-        yield decodeUtf8N_BE(utf8);
+        yield decodeUtf8_32(utf8);
     }
 }
 
-export function decodeUtf8N_BE_StreamToString(utf8s: Iterable<Utf8BE32>): string {
-    return String.fromCodePoint(...decodeUtf8N_BE_Stream(utf8s));
+export function decodeUtf8_32_StreamToString(utf8s: Iterable<Utf8_32>): string {
+    return String.fromCodePoint(...decodeUtf8_32_Stream(utf8s));
 }
 
 /**
@@ -76,7 +110,7 @@ export function decodeUtf8N_BE_StreamToString(utf8s: Iterable<Utf8BE32>): string
  * @param code - the code point to encode
  * @returns number containing the utf8 value.
  */
-export function encodeUtf8N_LE(code: CodePoint): Utf8LE32 {
+export function encodeToUtf8_32Rev(code: CodePoint): Utf8_32Rev {
     if (code < 0x80) {
         return code;
     }
@@ -92,7 +126,7 @@ export function encodeUtf8N_LE(code: CodePoint): Utf8LE32 {
     );
 }
 
-export function decodeUtf8N_LE(utf8: Utf8LE32): CodePoint {
+export function decodeUtf8_32Rev(utf8: Utf8_32Rev): CodePoint {
     if (utf8 < 0) utf8 = 0x1_0000_0000 + utf8;
 
     if (utf8 < 0x80) {
@@ -233,41 +267,7 @@ export function encodeUtf8into(code: CodePoint, into: Array<number> | Uint8Array
     return 4;
 }
 
-export function encodeTextToUtf8Into(text: string, into: Array<number> | Uint8Array, offset = 0): number {
-    let i = offset;
-    const len = text.length;
-    for (let j = 0; j < len; j++) {
-        let code = text.charCodeAt(j);
-        code = (code & 0xf800) === 0xd800 ? text.codePointAt(j++) || 0 : code;
-        if (code < 0x80) {
-            into[i++] = code;
-            continue;
-        }
-        if (code < 0x800) {
-            const u = 0xc080 | ((code & 0x7c0) << 2) | (code & 0x3f);
-            into[i++] = u >>> 8;
-            into[i++] = u & 0xff;
-            continue;
-        }
-        if (code < 0x1_0000) {
-            const u = 0xe0_8080 | ((code & 0xf000) << 4) | ((code & 0x0fc0) << 2) | (code & 0x3f);
-            into[i++] = u >>> 16;
-            into[i++] = (u >>> 8) & 0xff;
-            into[i++] = u & 0xff;
-            continue;
-        }
-        const u =
-            0xf080_8080 |
-            (((code & 0x1c_0000) << 6) | ((code & 0x03_f000) << 4) | ((code & 0x0fc0) << 2) | (code & 0x3f));
-        into[i++] = (u >>> 24) & 0x0ff;
-        into[i++] = (u >>> 16) & 0xff;
-        into[i++] = (u >>> 8) & 0xff;
-        into[i++] = u & 0xff;
-    }
-    return i - offset;
-}
-
-export function encodeTextToUtf8_32Into(text: string, into: Utf8BE32[]): number {
+export function encodeTextToUtf8_32Into(text: string, into: Utf8_32[]): number {
     const len = text.length;
     let i = 0;
     for (let p = { text, offset: 0, bytes: 0 }; p.offset < len; ) {
@@ -279,10 +279,13 @@ export function encodeTextToUtf8_32Into(text: string, into: Utf8BE32[]): number 
 export interface TextOffset {
     text: string;
     offset: number;
+}
+
+export interface TextOffsetWithByteCount extends TextOffset {
     bytes?: number;
 }
 
-export function encodeTextToUtf8_32(offset: TextOffset): Utf8BE32 {
+export function encodeTextToUtf8_32(offset: TextOffsetWithByteCount): Utf8_32 {
     const text = offset.text;
     let code = text.charCodeAt(offset.offset);
     code = (code & 0xf800) === 0xd800 ? text.codePointAt(offset.offset++) || 0 : code;
@@ -306,13 +309,47 @@ export function encodeTextToUtf8_32(offset: TextOffset): Utf8BE32 {
     );
 }
 
-export function encodeTextToUtf8(text: string): number[] {
-    const array: number[] = new Array(text.length);
-    const len = encodeTextToUtf8Into(text, array);
-    if (array.length !== len) {
-        array.length = len;
+export function encodeTextToUtf8_32Rev(offset: TextOffset): Utf8_32Rev {
+    const text = offset.text;
+    let code = text.charCodeAt(offset.offset);
+    code = (code & 0xf800) === 0xd800 ? text.codePointAt(offset.offset++) || 0 : code;
+    offset.offset++;
+
+    if (code < 0x80) {
+        return code;
     }
-    return array;
+    if (code < 0x800) {
+        return 0x80c0 | ((code & 0x7c0) >> 6) | ((code & 0x3f) << 8);
+    }
+    if (code < 0x1_0000) {
+        return 0x80_80e0 | ((code & 0xf000) >>> 12) | ((code & 0xfc0) << 2) | ((code & 0x3f) << 16);
+    }
+    return (
+        0x8080_80f0 +
+        (((code & 0x1c_0000) >>> 18) | ((code & 0x03_f000) >>> 4) | ((code & 0xfc0) << 10) | ((code & 0x3f) << 24))
+    );
+}
+
+export function encodeTextToUtf8Into(text: string, into: Array<number> | Uint8Array, offset = 0): number {
+    const t = { text, offset: 0 };
+
+    let i = offset;
+
+    for (; t.offset < text.length; ) {
+        const code = encodeTextToUtf8_32Rev(t);
+        for (let utf8_32Rev = code; utf8_32Rev !== 0; utf8_32Rev >>>= 8) {
+            into[i++] = utf8_32Rev & 0xff;
+        }
+    }
+    return i;
+}
+
+export function encodeTextToUtf8(text: string): number[] {
+    const into: number[] = new Array(text.length);
+
+    encodeTextToUtf8Into(text, into);
+
+    return into;
 }
 
 export function textToCodePoints(text: string): CodePoint[] {

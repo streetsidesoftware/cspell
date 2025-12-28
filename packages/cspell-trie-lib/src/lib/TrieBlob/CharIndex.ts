@@ -1,8 +1,8 @@
-import { encodeTextToUtf8, encodeUtf8N_BE, type Utf8BE32 } from './Utf8.ts';
+import { encodeTextToUtf8, encodeToUtf8_32, type Utf8_32 } from './Utf8.ts';
 
 export type Utf8Seq = Readonly<number[]>;
 
-export type CharIndexMap = Map<string, Utf8BE32>;
+export type CharIndexMap = Map<string, Utf8_32>;
 
 export type RO_CharIndexMap = Readonly<CharIndexMap>;
 
@@ -103,7 +103,7 @@ export class CharIndexBuilder {
         }
         const nc = c.normalize('NFC');
         this.charIndex.add(nc);
-        const utf8 = encodeUtf8N_BE(nc.codePointAt(0) || 0);
+        const utf8 = encodeToUtf8_32(nc.codePointAt(0) || 0);
         this.charIndexMap.set(c, utf8);
         this.charIndexMap.set(nc, utf8);
         this.charIndexMap.set(c.normalize('NFD'), utf8);
