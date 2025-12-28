@@ -817,6 +817,7 @@ declare function buildTrie(words: Iterable<string>, trieOptions?: PartialTrieOpt
 */
 declare function buildTrieFast(words: Iterable<string>, trieOptions?: PartialTrieOptions): Trie;
 declare class TrieBuilder {
+  #private;
   private count;
   private readonly signatures;
   private readonly cached;
@@ -831,15 +832,6 @@ declare class TrieBuilder {
   private _debug_mode;
   constructor(words?: Iterable<string>, trieOptions?: PartialTrieOptions);
   private get _root();
-  private signature;
-  private _canBeCached;
-  private tryCacheFrozen;
-  private freeze;
-  private tryToCache;
-  private storeTransform;
-  private addChild;
-  private buildTail;
-  private _insert;
   insertWord(word: string): void;
   insert(words: Iterable<string>): void;
   /**
@@ -848,12 +840,6 @@ declare class TrieBuilder {
   reset(): void;
   build(consolidateSuffixes?: boolean): Trie;
   private debugStack;
-  private debNodeInfo;
-  private logDebug;
-  private runDebug;
-  private copyIfFrozen;
-  private createNodeFrozen;
-  private createNode;
 }
 //#endregion
 //#region src/lib/TrieNode/trie-util.d.ts
