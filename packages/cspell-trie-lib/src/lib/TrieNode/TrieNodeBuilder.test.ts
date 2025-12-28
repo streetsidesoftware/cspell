@@ -59,6 +59,17 @@ describe('TrieNodeBuilder', () => {
         expect(words.some((w) => !trie.has(w))).toBe(false);
         expect(validateTrie(trie.root).isValid).toBe(true);
     });
+
+    test.each`
+        prefix
+        ${''}
+        ${'a'}
+        ${'wa'}
+    `('word $prefix', ({ prefix }) => {
+        const words = [...new Set(sampleWords())].sort();
+        const trie = buildTrieNodeTrieFromWords(words);
+        expect([...trie.words(prefix)]).toEqual(words.filter((w) => w.startsWith(prefix)));
+    });
 });
 
 function sampleWords() {

@@ -141,6 +141,18 @@ describe('Validate Trie Class', () => {
         expect(trie.find('walked', true)?.f).toBe(1);
     });
 
+    test.each`
+        prefix
+        ${''}
+        ${'a'}
+        ${'wa'}
+        ${'joy'}
+    `('words with prefix: $prefix', ({ prefix }) => {
+        const trie = Trie.create(sampleWords);
+        const words = [...trie.words()];
+        expect([...trie.words(prefix)]).toEqual(words.filter((w) => w.startsWith(prefix)));
+    });
+
     test('size', () => {
         const trie = Trie.create(sampleWords);
         expect(trie.size()).toBe(80);

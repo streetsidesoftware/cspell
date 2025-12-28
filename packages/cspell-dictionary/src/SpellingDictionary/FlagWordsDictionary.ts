@@ -1,6 +1,5 @@
-import { opMap, pipe } from '@cspell/cspell-pipe/sync';
 import type { CompoundWordsMethod, ITrie, SuggestionResult } from 'cspell-trie-lib';
-import { buildITrieFromWords, parseDictionaryLines } from 'cspell-trie-lib';
+import { parseDictionary, parseDictionaryLines } from 'cspell-trie-lib';
 
 import { createAutoResolveWeakCache } from '../util/AutoResolve.js';
 import * as Defaults from './defaults.js';
@@ -8,6 +7,7 @@ import type {
     FindResult,
     HasOptions,
     IgnoreCaseOption,
+    PreferredSuggestion,
     SpellingDictionary,
     SpellingDictionaryOptions,
 } from './SpellingDictionary.js';
@@ -17,7 +17,7 @@ import type { SuggestOptions } from './SuggestOptions.js';
 import type { TyposDictionary } from './TyposDictionary.js';
 import { createTyposDictionary } from './TyposDictionary.js';
 
-class FlagWordsDictionaryTrie extends SpellingDictionaryFromTrie {
+export class FlagWordsDictionaryTrie extends SpellingDictionaryFromTrie {
     readonly containsNoSuggestWords = false;
     readonly options: SpellingDictionaryOptions = {};
     constructor(
@@ -60,9 +60,13 @@ class FlagWordsDictionaryTrie extends SpellingDictionaryFromTrie {
         return;
     }
     readonly isDictionaryCaseSensitive: boolean = true;
+
+    terms(): Iterable<string> {
+        return this.trie.words();
+    }
 }
 
-class FlagWordsDictionary implements SpellingDictionary {
+export class FlagWordsDictionary implements SpellingDictionary {
     readonly containsNoSuggestWords = false;
     readonly options: SpellingDictionaryOptions = {};
     readonly type = 'flag-words';
@@ -108,21 +112,31 @@ class FlagWordsDictionary implements SpellingDictionary {
     suggest(word: string, suggestOptions: SuggestOptions = {}): SuggestionResult[] {
         return this.dictTypos.suggest(word, suggestOptions);
     }
-    getPreferredSuggestions(word: string) {
+
+    getPreferredSuggestions(word: string): PreferredSuggestion[] {
         return this.dictTypos.getPreferredSuggestions(word);
     }
+
     genSuggestions(): void {
         return;
     }
     mapWord(word: string): string {
         return word;
     }
-    get size() {
+    get size(): number {
         return this.dictTypos.size + (this.dictTrie?.size || 0);
     }
     readonly isDictionaryCaseSensitive: boolean = true;
     getErrors?(): Error[] {
         return [];
+    }
+
+    *terms(): Iterable<string> {
+        if (this.dictTrie) {
+            yield* this.dictTrie.terms();
+            return;
+        }
+        return;
     }
 }
 
@@ -149,26 +163,12 @@ export function createFlagWordsDictionary(
             (line) => testSpecialCharacters.test(line),
         );
 
-        const trieDict = specialWords.size ? buildTrieDict(specialWords, name, source) : undefined;
+        const trie = parseDictionary(specialWords, { stripCaseAndAccents: false, makeWordsForbidden: true });
+        const trieDict = new FlagWordsDictionaryTrie(trie, name, source);
         const typosDict = createTyposDictionary(typoWords, name, source);
-
-        if (!trieDict) return typosDict;
-
+        if (!specialWords.size) return typosDict;
         return new FlagWordsDictionary(name, source, typosDict, trieDict);
     });
-}
-
-const regExpCleanIgnore = /^(!!)+/;
-
-function buildTrieDict(words: Set<string>, name: string, source: string): FlagWordsDictionaryTrie {
-    const trie = buildITrieFromWords(
-        pipe(
-            words,
-            opMap((w) => '!' + w),
-            opMap((w) => w.replace(regExpCleanIgnore, '')),
-        ),
-    );
-    return new FlagWordsDictionaryTrie(trie, name, source);
 }
 
 function bisect<T>(values: Set<T> | Iterable<T>, predicate: (v: T) => boolean): { t: Set<T>; f: Set<T> } {

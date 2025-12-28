@@ -2805,6 +2805,11 @@ interface SpellingDictionary extends DictionaryInfo {
   readonly size: number;
   readonly isDictionaryCaseSensitive: boolean;
   getErrors?(): Error[];
+  /**
+   * Get all the terms in the dictionary, they may be formatted according to the dictionary options.
+   * @returns the terms in the dictionary.
+   */
+  terms?: () => Iterable<string>;
 }
 //#endregion
 //#region ../cspell-dictionary/dist/SpellingDictionary/SpellingDictionaryCollection.d.ts
@@ -2852,7 +2857,7 @@ interface IterableLike<T> {
  * @param options - dictionary options
  * @returns a Spelling Dictionary
  */
-declare function createSpellingDictionary(wordList: readonly string[] | IterableLike<string>, name: string, source: string, options?: SpellingDictionaryOptions | undefined): SpellingDictionary;
+declare function createSpellingDictionary(wordList: readonly string[] | IterableLike<string>, name: string, source: string, options?: SpellingDictionaryOptions | undefined, disableSuggestionsHandling?: boolean): SpellingDictionary;
 //#endregion
 //#region src/lib/util/types.d.ts
 /**

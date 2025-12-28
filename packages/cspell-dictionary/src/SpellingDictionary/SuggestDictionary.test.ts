@@ -6,7 +6,7 @@ import { createSuggestDictionary } from './SuggestDictionary.js';
 const isPreferred = true;
 
 describe('SuggestDictionary 1', () => {
-    const dictWords = ['  english:English', 'red->green', 'blue:purple', 'yellow->white'];
+    const dictWords = ['  english:English', 'red->green', 'blue:purple', 'yellow->white', 'apple:Apple, Fruit'];
     const dict = createSuggestDictionary(dictWords, 'suggestions', 'test');
 
     test.each`
@@ -61,6 +61,7 @@ describe('SuggestDictionary 1', () => {
         ${'English'} | ${[{ word: 'English', cost: 1, isPreferred: true }]}
         ${'english'} | ${[{ word: 'English', cost: 1, isPreferred: true }]}
         ${'red'}     | ${[{ cost: 1, isPreferred: true, word: 'green' }]}
+        ${'apple'}   | ${[{ word: 'Apple', cost: 1, isPreferred: true }, { word: 'Fruit', cost: 2, isPreferred: true }]}
         ${'green'}   | ${[]}
         ${'blue'}    | ${[{ cost: 1, isPreferred: true, word: 'purple' }]}
         ${'purple'}  | ${[]}
