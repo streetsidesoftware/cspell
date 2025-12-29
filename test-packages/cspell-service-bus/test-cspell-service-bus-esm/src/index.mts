@@ -94,7 +94,7 @@ const handlerRetryAgainRequest: Handler = {
 };
 const handlerThrowErrorOnRequest: Handler = {
     fn: (_service: Dispatcher) => (next) => (request) => {
-        if (request.type == 'throw') throw 'error';
+        if (request.type === 'throw') throw 'error';
         return next(request);
     },
     name: 'handlerThrowErrorOnRequest',

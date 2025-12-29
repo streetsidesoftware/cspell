@@ -44,7 +44,7 @@ export class AstScopeMatcher {
             if (curr.type !== item.type) return 0;
             if (curr.childKey && item.childKey && curr.childKey !== item.childKey) return 0;
             if (curr.childKey && !item.childKey && matchKey) return 0;
-            if (curr.childKey && (curr.childKey == item.childKey || !matchKey)) {
+            if (curr.childKey && (curr.childKey === item.childKey || !matchKey)) {
                 score += scale;
             }
             score += scale * 2;

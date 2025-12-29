@@ -7,7 +7,7 @@ export function stringifyFlatpacked(input: Flatpacked): string {
 
     for (let i = 1; i < input.length; i++) {
         const next = JSON.stringify(input[i]);
-        result += prev == next ? ',' : ',\n';
+        result += prev === next ? ',' : ',\n';
         result += next;
         prev = next;
     }

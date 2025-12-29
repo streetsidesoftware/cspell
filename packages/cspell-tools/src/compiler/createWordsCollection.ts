@@ -40,7 +40,7 @@ function buildHasFn(dict: { hasWord: (word: string, caseSensitive: boolean) => b
         const r = dict.hasWord(word, true);
         if (r || caseSensitive) return r;
         const lc = word.toLowerCase();
-        if (lc == word) return false;
+        if (lc === word) return false;
         return dict.hasWord(lc, true);
     }
 

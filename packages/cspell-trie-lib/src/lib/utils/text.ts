@@ -127,9 +127,9 @@ export function assertValidUtf16Character(char: string): void {
         const len = char.length;
         const codes = toCharCodes(char.slice(0, 2)).map((c) => '0x' + ('0000' + c.toString(16)).slice(-4));
         let message: string;
-        if (len == 1) {
+        if (len === 1) {
             message = `Invalid utf16 character, lone surrogate: ${codes[0]}`;
-        } else if (len == 2) {
+        } else if (len === 2) {
             message = `Invalid utf16 character, not a valid surrogate pair: [${codes.join(', ')}]`;
         } else {
             message = `Invalid utf16 character, must be a single character, found: ${len}`;

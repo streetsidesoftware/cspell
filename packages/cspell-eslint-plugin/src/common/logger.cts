@@ -56,6 +56,6 @@ function prefixLines(text: string, prefix: string, startIndex = 1): string {
     return text
         .split('\n')
         .map((line, index) => (index >= startIndex ? prefix + line : line))
-        .map((line) => (line.trim() == '' ? '' : line))
+        .map((line) => (line.trim() === '' ? '' : line))
         .join('\n');
 }

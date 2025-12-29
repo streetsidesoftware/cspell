@@ -413,7 +413,7 @@ export class CompactStorage {
         const useIdx = this.dedupe ? this.stashArray(idx, element) : idx;
 
         if (useIdx !== idx) {
-            assert(this.data.length == idx + 1, `Expected ${idx + 1} but got ${this.data.length}`);
+            assert(this.data.length === idx + 1, `Expected ${idx + 1} but got ${this.data.length}`);
             this.data.length = idx;
             return useIdx;
         }

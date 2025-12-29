@@ -7,7 +7,7 @@ import { importTrie } from '../lib/io/importExport.ts';
 import { Trie } from '../lib/trie.ts';
 
 function isGZipped(buf: Buffer): boolean {
-    return buf[0] == 0x1f && buf[1] === 0x8b;
+    return buf[0] === 0x1f && buf[1] === 0x8b;
 }
 
 interface DictionaryDef {
