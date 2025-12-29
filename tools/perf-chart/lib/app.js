@@ -4292,7 +4292,7 @@ function reportOnCsvRecords(records) {
 		const runEndTime = Math.max(...run.map((r) => r.timestamp));
 		const runId = (i + 1).toFixed(0).padStart(2, "0");
 		const runRepoNames = new Set(run.map((r) => r.repo));
-		const unexpectedResults = [...countCsvRecordsByRepo(run, new Map(repos.map((repo) => [repo, 0])))].filter(([_, count]) => count != 1);
+		const unexpectedResults = [...countCsvRecordsByRepo(run, new Map(repos.map((repo) => [repo, 0])))].filter(([_, count]) => count !== 1);
 		console.error(`Run ${runId} ${new Date(runStartTime).toISOString()} repos: ${pad(runRepoNames.size, 2)} ${deltaTimeMsInDHMS(runEndTime - runStartTime)} `);
 		for (const [repo, count] of unexpectedResults) console.error(`  ${repo.padEnd(20)}: ${count} records`);
 	});
