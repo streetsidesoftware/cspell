@@ -426,7 +426,7 @@ export class BinaryDataBuilder {
      * @returns this
      */
     setPtrUint32Array(name: string, data: U32Array, alignment: ByteAlignment = 4): BinaryDataBuilder {
-        return this.#setPtrData(name, covertUint32ArrayToUint8Array(data, this.#useLE), alignment);
+        return this.#setPtrData(name, convertUint32ArrayToUint8Array(data, this.#useLE), alignment);
     }
 
     /**
@@ -438,7 +438,7 @@ export class BinaryDataBuilder {
      * @returns this
      */
     setPtrUint16Array(name: string, data: U16Array, alignment: ByteAlignment = 2): BinaryDataBuilder {
-        return this.#setPtrData(name, covertUint16ArrayToUint8Array(data, this.#useLE), alignment);
+        return this.#setPtrData(name, convertUint16ArrayToUint8Array(data, this.#useLE), alignment);
     }
 
     /**
@@ -530,7 +530,7 @@ export function convertUint16ArrayEndiannessInPlace(data: Uint16Array): Uint16Ar
     return data;
 }
 
-export function covertUint32ArrayToUint8Array(
+export function convertUint32ArrayToUint8Array(
     data: U32Array,
     useLittle: boolean,
     isLE: boolean = isLittleEndian,
@@ -545,7 +545,7 @@ export function covertUint32ArrayToUint8Array(
     return new Uint8Array(target.buffer, target.byteOffset, target.byteLength);
 }
 
-export function covertUint16ArrayToUint8Array(
+export function convertUint16ArrayToUint8Array(
     data: U16Array,
     useLittle: boolean,
     isLE: boolean = isLittleEndian,
