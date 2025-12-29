@@ -1,3 +1,5 @@
+import type { BinaryFormat } from '../binary/index.ts';
+import { BinaryDataBuilder, BinaryDataReader, BinaryFormatBuilder } from '../binary/index.ts';
 import {
     cvtTrieCharacteristicsToFlags,
     cvtTrieInfoToFlags,
@@ -6,8 +8,6 @@ import {
 } from '../ITrieNode/TrieInfo.ts';
 import { assert } from '../utils/assert.ts';
 import { toUint8Array } from '../utils/rawData.ts';
-import type { BinaryFormat } from './binaryFormat.ts';
-import { BinaryDataBuilder, BinaryDataReader, BinaryFormatBuilder } from './binaryFormat.ts';
 import type { TrieBlobInfo } from './TrieBlobInfo.ts';
 
 const headerSig = 'TrieBlob';
@@ -27,7 +27,9 @@ function getBinaryFormat(): BinaryFormat {
         .build();
 }
 
-export function encodeTrieBlobToBTrie(blob: TrieBlobInfo): Uint8Array {
+type U8Array = Uint8Array<ArrayBuffer>;
+
+export function encodeTrieBlobToBTrie(blob: TrieBlobInfo): U8Array {
     const format = getBinaryFormat();
     const builder = new BinaryDataBuilder(format);
     builder.setPtrUint32Array('nodes', blob.nodes);
@@ -37,7 +39,7 @@ export function encodeTrieBlobToBTrie(blob: TrieBlobInfo): Uint8Array {
     return data;
 }
 
-export function decodeTrieBlobToBTrie(blob: Uint8Array): TrieBlobInfo {
+export function decodeTrieBlobToBTrie(blob: U8Array): TrieBlobInfo {
     const reader = new BinaryDataReader(blob, getBinaryFormat());
 
     if (reader.getString('sig') !== headerSig) {
@@ -66,7 +68,7 @@ export class ErrorDecodeTrieBlob extends Error {
     }
 }
 
-export function isBTrieData(data: Uint8Array | ArrayBufferView): boolean {
+export function isBTrieData(data: U8Array | ArrayBufferView<ArrayBuffer>): boolean {
     const buf = toUint8Array(data);
     if (buf.length < headerSig.length) return false;
 

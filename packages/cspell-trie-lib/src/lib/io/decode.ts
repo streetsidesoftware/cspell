@@ -7,7 +7,7 @@ import * as iv2 from './importExportV2.ts';
 import * as iv4 from './importExportV4.ts';
 import { importTrieV3AsFastTrieBlob } from './importV3FastBlob.ts';
 
-export function decodeTrieData(raw: string | ArrayBufferView | Uint8Array): TrieData {
+export function decodeTrieData(raw: string | ArrayBufferView<ArrayBuffer> | Uint8Array<ArrayBuffer>): TrieData {
     if (typeof raw === 'string') {
         return decodeStringFormat(raw);
     }

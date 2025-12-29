@@ -57,7 +57,7 @@ interface CacheEntry {
 }
 
 interface Reader {
-    read(filename: URL): Promise<Uint8Array>;
+    read(filename: URL): Promise<Uint8Array<ArrayBuffer>>;
     readText(filename: URL): Promise<string>;
     readLines(filename: URL): Promise<string[]>;
 }

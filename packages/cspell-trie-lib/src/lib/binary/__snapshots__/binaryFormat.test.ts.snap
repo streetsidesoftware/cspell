@@ -25,14 +25,14 @@ exports[`BinaryDataBuilder > BinaryDataBuilder LE 1`] = `
 000000a0  61                                                   a"
 `;
 
-exports[`BinaryFormatBuilder > should have the expected format. 1`] = `"[{"name":"header","description":"The file header","type":"string","offset":0,"size":11,"value":[84,101,115,116,32,72,101,97,100,101,114]},{"name":"section1","description":"First section","type":"string","offset":11,"size":5,"value":[68,97,116,97,49]},{"name":"section2","description":"Second section","type":"string","offset":16,"size":5,"value":[68,97,116,97,50]},{"name":"value","description":"A uint32 value","type":"uint32","offset":24,"size":4,"value":[64,226,1,0]}]"`;
+exports[`BinaryFormatBuilder > should have the expected format. 1`] = `"[{"name":"header","description":"The file header","type":"value","alignment":1,"offset":0,"size":11,"value":[84,101,115,116,32,72,101,97,100,101,114],"byteSize":1},{"name":"section1","description":"First section","type":"value","alignment":1,"offset":11,"size":5,"value":[68,97,116,97,49],"byteSize":1},{"name":"section2","description":"Second section","type":"value","alignment":1,"offset":16,"size":5,"value":[68,97,116,97,50],"byteSize":1},{"name":"value","description":"A uint32 value","type":"value","alignment":4,"offset":24,"size":4,"value":[64,226,1,0],"byteSize":4}]"`;
 
 exports[`BinaryFormatBuilder > should have the expected format. 2`] = `
 "Binary Format:
-name       offset   size type   description (value)
----------------------------------------------------
-header          0     11 string The file header (84,101,115,116,32,72,101,97,100,101,114)
-section1       11      5 string First section (68,97,116,97,49)
-section2       16      5 string Second section (68,97,116,97,50)
-value          24      4 uint32 A uint32 value (64,226,1,0)"
+name       offset   size type  mask description (value)
+-------------------------------------------------------
+header          0     11 value 0001 The file header (84,101,115,116,32,72,101,97,100,101,114)
+section1       11      5 value 0001 First section (68,97,116,97,49)
+section2       16      5 value 0001 Second section (68,97,116,97,50)
+value          24      4 value 0100 A uint32 value (64,226,1,0)"
 `;

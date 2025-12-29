@@ -1,11 +1,11 @@
 import { describe, expect, test } from 'vitest';
 
 import { readFastTrieBlobFromConfig } from '../../test/dictionaries.test.helper.ts';
+import { hexDump } from '../binary/index.ts';
 import { validateTrie } from '../TrieNode/trie-util.ts';
 import { buildTrieNodeTrieFromWords } from '../TrieNode/TrieNodeBuilder.ts';
 import { createTrieBlob } from './createTrieBlob.ts';
 import { FastTrieBlobBuilder } from './FastTrieBlobBuilder.ts';
-import { hexDump } from './hexDump.ts';
 import { TrieBlob } from './TrieBlob.ts';
 
 describe('TrieBlob', () => {

@@ -235,7 +235,7 @@ type FindAnyFormResult = FindFullResult;
  * @returns SpellingDictionary
  */
 export function createSpellingDictionaryFromTrieFile(
-    data: string | Uint8Array,
+    data: string | Uint8Array<ArrayBuffer>,
     name: string,
     source: string,
     options: SpellingDictionaryOptionsRO,
