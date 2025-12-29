@@ -30,11 +30,11 @@ export interface FormatElement {
     /** the type of element */
     type: FormatType;
     /**
-     * This is a bit field indicating the size of each element in bits.
-     * - 1 = 8 bits - for bytes or utf8 strings
-     * - 2 = 16 bits
-     * - 4 = 32 bits
-     * - 8 = 64 bits
+     * This field indicates the size of each element in bytes.
+     * - 1 = 1 byte (8 bits) - for bytes or UTF-8 strings
+     * - 2 = 2 bytes (16 bits)
+     * - 4 = 4 bytes (32 bits)
+     * - 8 = 8 bytes (64 bits)
      *
      * Used for pointers to indicate the size of each element pointed to.
      */
