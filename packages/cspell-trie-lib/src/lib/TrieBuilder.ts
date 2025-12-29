@@ -280,7 +280,7 @@ export class TrieBuilder {
         return new Trie(consolidateSuffixes ? consolidate(root) : root);
     }
 
-    private debugStack(stack: TrieNodeEx[]) {
+    #debugStack(stack: TrieNodeEx[]) {
         return stack.map((n) => this.#debNodeInfo(n));
     }
 
