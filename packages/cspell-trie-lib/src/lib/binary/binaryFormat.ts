@@ -342,7 +342,7 @@ export class BinaryDataBuilder {
         assert(element, `Field not found: ${name}`);
         const formatElement = element.ref;
         assert(formatElement, `Field Format not found: ${name}`);
-        assert(formatElement.byteSize == BytesSize.string, `Field is not a string: ${name}`);
+        assert(formatElement.byteSize === BytesSize.string, `Field is not a string: ${name}`);
 
         const r = this.#encoder.encodeInto(value, element.data);
         assert(r.read === value.length, `String too long for field ${name}: ${value}`);
@@ -354,7 +354,7 @@ export class BinaryDataBuilder {
         assert(element, `Field not found: ${name}`);
         const formatElement = element.ref;
         assert(formatElement, `Field Format not found: ${name}`);
-        assert(formatElement.byteSize == BytesSize.uint32, `Field is not a uint32: ${name}`);
+        assert(formatElement.byteSize === BytesSize.uint32, `Field is not a uint32: ${name}`);
 
         const view = new DataView(element.data.buffer, element.data.byteOffset, element.data.byteLength);
         const useLittle = this.#endian === 'LE';
@@ -368,7 +368,7 @@ export class BinaryDataBuilder {
         assert(element, `Field not found: ${name}`);
         const formatElement = element.ref;
         assert(formatElement, `Field Format not found: ${name}`);
-        assert(formatElement.byteSize == BytesSize.uint16, `Field is not a uint16: ${name}`);
+        assert(formatElement.byteSize === BytesSize.uint16, `Field is not a uint16: ${name}`);
 
         const view = new DataView(element.data.buffer, element.data.byteOffset, element.data.byteLength);
         const useLittle = this.#endian === 'LE';
@@ -382,7 +382,7 @@ export class BinaryDataBuilder {
         assert(element, `Field not found: ${name}`);
         const formatElement = element.ref;
         assert(formatElement, `Field Format not found: ${name}`);
-        assert(formatElement.byteSize == BytesSize.uint8, `Field is not a uint8: ${name}`);
+        assert(formatElement.byteSize === BytesSize.uint8, `Field is not a uint8: ${name}`);
         element.data[0] = value;
 
         return this;
@@ -595,7 +595,7 @@ export class BinaryDataReader {
     getString(name: string): string {
         const element = this.getDataElement(name);
         const formatElement = element.ref;
-        assert(formatElement.byteSize == BytesSize.string, `Field is not a string: ${name}`);
+        assert(formatElement.byteSize === BytesSize.string, `Field is not a string: ${name}`);
         if (formatElement.type === 'value') {
             return this.#decoder.decode(element.data);
         }
@@ -613,7 +613,7 @@ export class BinaryDataReader {
         const element = this.getDataElement(name);
         const formatElement = element.ref;
         assert(
-            formatElement.type === 'value' && formatElement.byteSize == BytesSize.uint32,
+            formatElement.type === 'value' && formatElement.byteSize === BytesSize.uint32,
             `Field is not a uint32: ${name}`,
         );
         const view = new DataView(element.data.buffer, element.data.byteOffset, element.data.byteLength);
@@ -629,7 +629,7 @@ export class BinaryDataReader {
         const element = this.getDataElement(name);
         const formatElement = element.ref;
         assert(
-            formatElement.type === 'value' && formatElement.byteSize == BytesSize.uint16,
+            formatElement.type === 'value' && formatElement.byteSize === BytesSize.uint16,
             `Field is not a uint16: ${name}`,
         );
         const view = new DataView(element.data.buffer, element.data.byteOffset, element.data.byteLength);
@@ -645,7 +645,7 @@ export class BinaryDataReader {
         const element = this.getDataElement(name);
         const formatElement = element.ref;
         assert(
-            formatElement.type === 'value' && formatElement.byteSize == BytesSize.uint8,
+            formatElement.type === 'value' && formatElement.byteSize === BytesSize.uint8,
             `Field is not a uint8: ${name}`,
         );
         return element.data[0];
@@ -661,7 +661,7 @@ export class BinaryDataReader {
     getPtrUint32Array(name: string): U32Array {
         const element = this.getDataElement(name);
         const ref = element.ref;
-        assert(ref.type === 'ptr+size' && ref.byteSize == BytesSize.uint32, `Field is not a ptrUint32Array: ${name}`);
+        assert(ref.type === 'ptr+size' && ref.byteSize === BytesSize.uint32, `Field is not a ptrUint32Array: ${name}`);
         const arrData = this.#getPtrData(element);
         const rawData32 = new Uint32Array<ArrayBuffer>(
             arrData.buffer,
@@ -685,7 +685,7 @@ export class BinaryDataReader {
     getPtrUint16Array(name: string): U16Array {
         const element = this.getDataElement(name);
         const ref = element.ref;
-        assert(ref.type === 'ptr+size' && ref.byteSize == BytesSize.uint16, `Field is not a ptrUint16Array: ${name}`);
+        assert(ref.type === 'ptr+size' && ref.byteSize === BytesSize.uint16, `Field is not a ptrUint16Array: ${name}`);
         const arrData = this.#getPtrData(element);
         const rawData16 = new Uint16Array<ArrayBuffer>(
             arrData.buffer,
