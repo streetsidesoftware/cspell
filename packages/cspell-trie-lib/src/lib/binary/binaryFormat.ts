@@ -707,7 +707,7 @@ export class BinaryDataReader {
      */
     getPtrUint8Array(name: string): U8Array {
         const element = this.getDataElement(name);
-        assert(element.ref.type === 'ptr+size', `Field is not a ptr_and_length: ${name}`);
+        assert(element.ref.type === 'ptr+size', `Field is not a ptr+size: ${name}`);
         return this.#getPtrData(element);
     }
 
@@ -718,14 +718,14 @@ export class BinaryDataReader {
      */
     getPtrString(name: string): string {
         const element = this.getDataElement(name);
-        assert(element.ref.type === 'ptr+size', `Field is not a ptr_and_length: ${name}`);
+        assert(element.ref.type === 'ptr+size', `Field is not a ptr+size: ${name}`);
         const strData = this.#getPtrData(element);
         return this.#decoder.decode(strData);
     }
 
     #getPtrData(element: DataElementWithRef): U8Array {
         const formatElement = element.ref;
-        assert(formatElement.type === 'ptr+size', `Field is not a ptr: ${element.name} (${formatElement.type})`);
+        assert(formatElement.type === 'ptr+size', `Field is not a ptr+size: ${element.name} (${formatElement.type})`);
         const view = new DataView<ArrayBuffer>(element.data.buffer, element.data.byteOffset, element.data.byteLength);
         const offset = view.getUint32(0, this.#useLE);
         const length = view.getUint32(4, this.#useLE);
