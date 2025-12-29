@@ -88,7 +88,7 @@ export class FastTrieBlob implements TrieData {
      * @param seq - the byte sequence of the character to look for
      * @returns
      */
-    #lookupNode(nodeIdx: number, seq: readonly number[] | Readonly<Uint8Array>): number | undefined {
+    #lookupNode(nodeIdx: number, seq: readonly number[] | Readonly<Uint8Array<ArrayBuffer>>): number | undefined {
         const NodeMaskChildCharIndex = this.bitMasksInfo.NodeMaskChildCharIndex;
         const NodeChildRefShift = this.bitMasksInfo.NodeChildRefShift;
         const nodes = this.#nodes;
@@ -224,7 +224,7 @@ export class FastTrieBlob implements TrieData {
         return this;
     }
 
-    encodeToBTrie(): Uint8Array {
+    encodeToBTrie(): Uint8Array<ArrayBuffer> {
         return this.toTrieBlob().encodeToBTrie();
     }
 

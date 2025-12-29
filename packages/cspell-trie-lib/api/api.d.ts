@@ -430,7 +430,7 @@ interface TrieData extends Readonly<TrieCharacteristics> {
   readonly hasCompoundWords: boolean;
   readonly hasNonStrictWords: boolean;
   readonly size: number;
-  encodeToBTrie?: () => Uint8Array;
+  encodeToBTrie?: () => Uint8Array<ArrayBuffer>;
 }
 //#endregion
 //#region src/lib/ITrie.d.ts
@@ -583,7 +583,7 @@ declare const FORBID_PREFIX = "!";
 declare const defaultTrieInfo: TrieInfo;
 //#endregion
 //#region src/lib/decodeTrie.d.ts
-declare function decodeTrie(raw: string | ArrayBufferView | Uint8Array): ITrie;
+declare function decodeTrie(raw: string | ArrayBufferView<ArrayBuffer> | Uint8Array<ArrayBuffer>): ITrie;
 //#endregion
 //#region src/lib/io/importExport.d.ts
 interface ExportOptions {
@@ -800,7 +800,7 @@ declare function parseDictionaryLegacy(text: string | string[], options?: Partia
 declare function parseDictionary(text: string | Iterable<string>, options?: Partial<ParseDictionaryOptions>): ITrie;
 //#endregion
 //#region src/lib/TrieBlob/trieDataEncoder.d.ts
-declare function encodeTrieDataToBTrie(data: TrieData): Uint8Array;
+declare function encodeTrieDataToBTrie(data: TrieData): Uint8Array<ArrayBuffer>;
 //#endregion
 //#region src/lib/TrieBuilder.d.ts
 /**
