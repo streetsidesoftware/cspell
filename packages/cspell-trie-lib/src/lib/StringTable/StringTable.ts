@@ -20,7 +20,7 @@ type IndexArrayRO = U32Array | U16Array | Readonly<number[]>;
  * This design minimizes memory overhead by avoiding individual string objects,
  * allowing efficient storage and retrieval of a large number of strings.
  *
- * Strings are retrieved based up their index.
+ * Strings are retrieved based on their index.
  *
  * The internal index table contains the offset and length of each string in the buffer.
  *
