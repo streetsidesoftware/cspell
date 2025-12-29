@@ -140,7 +140,7 @@ export class BinaryFormatBuilder {
      * @param name - name of the pointer
      * @param description - description of the pointer
      * @param overload - optional name of element to overload
-     * @returns
+     * @returns this
      */
     addPointer(byteSize: ByteSize, name: string, description: string, overload?: string): BinaryFormatBuilder {
         const alignment: ByteAlignment = 4;
