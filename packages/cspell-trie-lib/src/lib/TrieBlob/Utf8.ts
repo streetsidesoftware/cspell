@@ -5,7 +5,7 @@
  *
  * Utf8_32 number are comparable in utf8 order.
  *
- *            hightest byte           lowest byte   Code Point Range
+ *            highest byte           lowest byte   Code Point Range
  * - 1 byte:  00000000 00000000 00000000 0xxxxxxx - 0x0000_0000 - 0x0000_007f
  * - 2 bytes: 00000000 00000000 110xxxxx 10xxxxxx - 0x0000_0080 - 0x0000_07ff
  * - 3 bytes: 00000000 1110xxxx 10xxxxxx 10xxxxxx - 0x0000_0800 - 0x0000_ffff
@@ -19,7 +19,7 @@ export type Utf8_32 = number;
  *
  * These numbers DO NOT sort into the correct order for utf8.
  *
- *            hightest byte           lowest byte   Code Point Range
+ *            highest byte           lowest byte   Code Point Range
  * - 1 byte:  00000000 00000000 00000000 0xxxxxxx - 0x0000_0000 - 0x0000_007f
  * - 2 bytes: 00000000 00000000 10xxxxxx 110xxxxx - 0x0000_0080 - 0x0000_07ff
  * - 3 bytes: 00000000 10xxxxxx 10xxxxxx 1110xxxx - 0x0000_0800 - 0x0000_ffff
