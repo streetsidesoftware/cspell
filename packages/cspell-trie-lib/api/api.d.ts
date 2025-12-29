@@ -839,7 +839,6 @@ declare class TrieBuilder {
   */
   reset(): void;
   build(consolidateSuffixes?: boolean): Trie;
-  private debugStack;
 }
 //#endregion
 //#region src/lib/TrieNode/trie-util.d.ts
