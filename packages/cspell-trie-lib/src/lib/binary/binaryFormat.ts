@@ -80,7 +80,7 @@ export class BinaryFormatBuilder {
         return this.addData(name, description, 'value', uValue);
     }
 
-    addUnit16(name: string, description: string, value?: number): BinaryFormatBuilder {
+    addUint16(name: string, description: string, value?: number): BinaryFormatBuilder {
         const uValue = value !== undefined ? rawNumberToUint16Array(value) : rawNumberToUint16Array(0);
         return this.addData(name, description, 'value', uValue);
     }
@@ -124,7 +124,7 @@ export class BinaryFormatBuilder {
     }
 
     /**
-     * A pointer to a uint8 array, it has two parts, the offset and the length.
+     * A pointer to a string of UTF-8 bytes, it has two parts, the offset and the length.
      * @param name - name of pointer
      * @param description - the description of the field
      * @param overload - optional name of element to overload
@@ -605,8 +605,8 @@ export class BinaryDataReader {
     }
 
     /**
-     * Get a uint32 from the data.
-     * @param name - name of the uint32 field
+     * Get a Uint32 from the data.
+     * @param name - name of the Uint32 field
      * @returns number value
      */
     getUint32(name: string): number {
@@ -621,8 +621,8 @@ export class BinaryDataReader {
     }
 
     /**
-     * Get a uint32 from the data.
-     * @param name - name of the uint32 field
+     * Get a Uint16 from the data.
+     * @param name - name of the Uint16 field
      * @returns number value
      */
     getUint16(name: string): number {
@@ -637,8 +637,8 @@ export class BinaryDataReader {
     }
 
     /**
-     * Get a uint32 from the data.
-     * @param name - name of the uint32 field
+     * Get a Uint8 from the data.
+     * @param name - name of the Uint8 field
      * @returns number value
      */
     getUint8(name: string): number {
