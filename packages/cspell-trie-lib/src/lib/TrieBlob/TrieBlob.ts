@@ -6,7 +6,7 @@ import { endianness } from '../utils/endian.ts';
 import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.ts';
 import { decodeTrieBlobToBTrie, encodeTrieBlobToBTrie } from './TrieBlobEncoder.ts';
 import { TrieBlobInternals, TrieBlobIRoot } from './TrieBlobIRoot.ts';
-import { encodeTextToUtf8_32, Utf8Accumulator } from './Utf8.ts';
+import { encodeTextToUtf8_32Rev, Utf8Accumulator } from './Utf8.ts';
 
 const NodeHeaderNumChildrenBits = 8 as const;
 const NodeHeaderNumChildrenShift = 0 as const;
@@ -143,15 +143,12 @@ export class TrieBlob implements TrieData {
         const _nodes8 = this.#nodes8;
 
         for (; p.offset < p.text.length; ) {
-            const code = encodeTextToUtf8_32(p);
-
             const nodes = _nodes;
             const nodes8 = _nodes8;
             let node = nodes[nodeIdx];
-            let s = (p.bytes - 1) * 8;
 
-            for (let mask = 0xff << s; mask; mask >>>= 8, s -= 8) {
-                const charVal = (code & mask) >>> s;
+            for (let code = encodeTextToUtf8_32Rev(p); code; code >>>= 8) {
+                const charVal = code & 0xff;
                 const count = node & 0xff; // TrieBlob.NodeMaskNumChildren
                 const idx4 = nodeIdx << 2;
                 // Binary search for the character in the child nodes.

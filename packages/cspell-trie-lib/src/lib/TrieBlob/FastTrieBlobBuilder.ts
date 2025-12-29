@@ -11,6 +11,7 @@ import type { FastTrieBlobBitMaskInfo } from './FastTrieBlobBitMaskInfo.ts';
 import { FastTrieBlobInternals, sortNodes } from './FastTrieBlobInternals.ts';
 import { resolveMap } from './resolveMap.ts';
 import { TrieBlob } from './TrieBlob.ts';
+import { encodeToUtf8_32Rev } from './Utf8.ts';
 
 type FastTrieBlobNode = number[];
 
@@ -106,24 +107,24 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
         let nodeIdx = 0;
         let depth = 0;
 
-        const insertChar = (char: string) => {
+        function insertChar(char: string) {
             if (!nodes[nodeIdx]) {
                 refNodes.push(nodeIdx);
             }
             // console.warn('insertChar %o', { nodeIdx, depth, char });
             const pDepth = depth;
-            const utf8Seq = this.letterToUtf8Seq(char);
-            for (let i = 0; i < utf8Seq.length; ++i) {
-                insertCharIndexes(utf8Seq[i], pDepth);
+
+            for (let encoded = encodeToUtf8_32Rev(char.codePointAt(0) || 0); encoded; encoded >>>= 8) {
+                insertCharIndexes(encoded & 0xff, pDepth);
             }
-        };
+        }
 
         /**
          * A single character can result in multiple nodes being created
          * because it takes multiple bytes to represent a character.
          * @param seq - partial character index.
          */
-        const insertCharIndexes = (seq: number, pDepth: number) => {
+        function insertCharIndexes(seq: number, pDepth: number) {
             // console.warn('i %o at %o', char, nodeIdx);
             if (nodes[nodeIdx] && Object.isFrozen(nodes[nodeIdx])) {
                 nodeIdx = nodes.push([...nodes[nodeIdx]]) - 1;
@@ -148,9 +149,9 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
                 stack[depth] = { nodeIdx, pos, pDepth };
             }
             nodeIdx = childIdx;
-        };
+        }
 
-        const markEOW = () => {
+        function markEOW() {
             // console.warn('$');
             if (nodeIdx === eow) return;
             const node = nodes[nodeIdx];
@@ -164,9 +165,9 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
                 node[0] |= NodeMaskEOW;
             }
             nodeIdx = eow;
-        };
+        }
 
-        const reference = (refId: number) => {
+        function reference(refId: number) {
             const refNodeIdx = refNodes[refId];
             assert(refNodeIdx !== undefined);
             // console.warn('r %o', { refId, nodeIdx, refNodeIdx, depth });
@@ -178,9 +179,9 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
             const pos = s.pos;
             const node = nodes[nodeIdx];
             node[pos] = (refNodeIdx << NodeChildRefShift) | (node[pos] & LetterMask);
-        };
+        }
 
-        const backStep = (num: number) => {
+        function backStep(num: number) {
             if (!num) return;
             // console.warn('<< %o', num);
             assert(num <= depth && num > 0);
@@ -188,7 +189,7 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
                 depth = stack[depth].pDepth;
             }
             nodeIdx = stack[depth + 1].nodeIdx;
-        };
+        }
 
         const c: BuilderCursor = {
             insertChar,
