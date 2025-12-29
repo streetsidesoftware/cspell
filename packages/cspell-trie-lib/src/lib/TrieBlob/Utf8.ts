@@ -341,7 +341,7 @@ export function encodeTextToUtf8Into(text: string, into: Array<number> | Uint8Ar
             into[i++] = utf8_32Rev & 0xff;
         }
     }
-    return i;
+    return i - offset;
 }
 
 export function encodeTextToUtf8(text: string): number[] {
