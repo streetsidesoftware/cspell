@@ -3,7 +3,7 @@ Repository: dart-lang/sdk
 Url: "https://github.com/dart-lang/sdk"
 Args: ["--issues-summary-report","--locale=en,en-GB","--exclude=tools/dom/**/*.json","--exclude=pkg/*/test/**","--exclude=**/*_data.*","--exclude=runtime/vm/**","--exclude=sdk/lib/html/**","--exclude=benchmarks/**","--exclude=**/*_test.*","--exclude=*/**/*.{json,yaml,yml}","--exclude=tests/corelib/regexp/**","--exclude=**/{third_party,assets}/**","**/*.{dart,md}"]
 Lines:
- CSpell: Files checked: 10901, Issues found: 9534 in 2080 files.
+ CSpell: Files checked: 10901, Issues found: 9537 in 2080 files.
  exit code: 1
 CONTRIBUTING.md:105:27    - Unknown word (presubmit)  -- CL. They can run the presubmit tests on your behalf
 CONTRIBUTING.md:112:52    - Unknown word (Tryjobs)    -- progress by looking at the "Tryjobs" panel in your review
@@ -175,9 +175,9 @@ pkg/_fe_analyzer_shared/lib/src/exhaustiveness/witness.dart:148:59    - Unknown 
 pkg/_fe_analyzer_shared/lib/src/field_promotability.dart:314:59    - Unknown word (desugared)    -- and `M2`) or a fully desugared model (in
 pkg/_fe_analyzer_shared/lib/src/field_promotability.dart:340:69    - Unknown word (Tarjan's)     -- class, which implements Tarjan's
 pkg/_fe_analyzer_shared/lib/src/field_promotability.dart:93:43     - Unknown word (unpromotable) -- fields with the same name unpromotable within the library.
-pkg/_fe_analyzer_shared/lib/src/flow_analysis/flow_analysis.dart:2649:21   - Unknown word (desugars)   -- /// If the client desugars the null-aware access
-pkg/_fe_analyzer_shared/lib/src/flow_analysis/flow_analysis.dart:3273:13   - Unknown word (reachabilities) -- // join reachabilities.
-pkg/_fe_analyzer_shared/lib/src/flow_analysis/flow_analysis.dart:4339:35   - Unknown word (Reachabilities) -- there is no checkpoint.  Reachabilities form a tree structure
+pkg/_fe_analyzer_shared/lib/src/flow_analysis/flow_analysis.dart:2668:21   - Unknown word (desugars)   -- /// If the client desugars the null-aware access
+pkg/_fe_analyzer_shared/lib/src/flow_analysis/flow_analysis.dart:3264:13   - Unknown word (reachabilities) -- // join reachabilities.
+pkg/_fe_analyzer_shared/lib/src/flow_analysis/flow_analysis.dart:4320:35   - Unknown word (Reachabilities) -- there is no checkpoint.  Reachabilities form a tree structure
 pkg/_fe_analyzer_shared/lib/src/messages/diagnostic_message.dart:30:40     - Unknown word (subclassing) -- nosticMessage._(); // Prevent subclassing.
 pkg/_fe_analyzer_shared/lib/src/parser/class_member_parser.dart:40:13     - Unknown word (askesc)     -- // TODO(askesc): We listen to errors
 pkg/_fe_analyzer_shared/lib/src/parser/forwarding_listener.dart:1889:13   - Unknown word (danrubel)   -- // TODO(danrubel): hasSetEntry parameter
@@ -410,7 +410,7 @@ pkg/analyzer/lib/src/summary/format.dart:441:49    - Unknown word (ADRU)       -
 pkg/analyzer/lib/src/summary/idl.dart:25:8      - Unknown word (Prelinked)  -- /// - "Prelinked" refers to information
 pkg/analyzer/lib/src/summary/idl.dart:36:35     - Unknown word (prelinked)  -- expect "linked" and "prelinked" dependencies to be
 pkg/analyzer/lib/src/summary2/binary_format_doc.dart:170:19    - Unknown word (witten)     -- /// Any string is witten as [Uint30] and is an
-pkg/analyzer/lib/src/summary2/bundle_writer.dart:364:15    - Unknown word (fshcheglov) -- // TODO(fshcheglov): Put these separate
+pkg/analyzer/lib/src/summary2/bundle_writer.dart:370:15    - Unknown word (fshcheglov) -- // TODO(fshcheglov): Put these separate
 pkg/analyzer/lib/src/summary2/element_builder.dart:351:11    - Unknown word (implicits)  -- var implicitsMap = libraryBuilder
 pkg/analyzer/lib/src/test_utilities/mock_sdk.dart:423:45    - Unknown word (gettesr)    -- the SDK has abstract gettesr. The real implementations
 pkg/analyzer/lib/src/test_utilities/mock_sdk.dart:642:17    - Unknown word (uninstantiable) -- factory Null._uninstantiable() => throw 0;
@@ -919,9 +919,9 @@ pkg/front_end/lib/src/linux_and_intel_specific_perf.dart:72:9      - Unknown wor
 pkg/front_end/lib/src/linux_and_intel_specific_perf.dart:82:32     - Unknown word (tcsetattr)  -- magic-trace run -trigger tcsetattr -multi-thread -snapshot
 pkg/front_end/lib/src/source/source_loader.dart:1603:25   - Unknown word (exportees)  -- Set<LibraryBuilder> exportees = new Set<LibraryBuilder
 pkg/front_end/lib/src/source/source_loader.dart:1650:25   - Unknown word (exportee)   -- for (LibraryBuilder exportee in exportees) {
-pkg/front_end/lib/src/type_inference/inference_visitor.dart:479:59    - Unknown word (subterms)   -- type context for the subterms.
-pkg/front_end/lib/src/type_inference/inference_visitor.dart:7950:15   - Unknown word (unfutured)  -- DartType? unfuturedTypeContext = typeSchemaEnviro
-pkg/front_end/lib/src/type_inference/inference_visitor_base.dart:4823:15   - Unknown word (recursor)   -- recursor,
+pkg/front_end/lib/src/type_inference/inference_visitor.dart:474:59    - Unknown word (subterms)   -- type context for the subterms.
+pkg/front_end/lib/src/type_inference/inference_visitor.dart:7945:15   - Unknown word (unfutured)  -- DartType? unfuturedTypeContext = typeSchemaEnviro
+pkg/front_end/lib/src/type_inference/inference_visitor_base.dart:4817:15   - Unknown word (recursor)   -- recursor,
 pkg/front_end/lib/src/type_inference/matching_cache.dart:1355:21   - Unknown word (closurizing) -- // To avoid closurizing initializers we always
 pkg/front_end/lib/src/util/outline_extractor.dart:237:17    - Unknown word (premark)    -- Future<void> _premarkTopLevel(
 pkg/front_end/lib/src/util/outline_extractor.dart:240:14    - Unknown word (entrypointish) -- TopLevel entrypointish,
@@ -1138,10 +1138,10 @@ pkg/native_compiler/lib/runtime/vm_offsets.g.dart:2333:3    - Unknown word (Deop
 pkg/native_compiler/lib/runtime/vm_offsets.g.dart:233:23    - Unknown word (deopt)       -- int get Thread_lazy_deopt_from_return_stub_offset
 pkg/native_compiler/lib/runtime/vm_offsets.g.dart:238:18    - Unknown word (megamorphic) -- int get Thread_megamorphic_call_checked_entry_offset
 pkg/native_compiler/lib/runtime/vm_offsets.g.dart:2460:8    - Unknown word (Safepoint)   -- EnterSafepoint,
-pkg/native_compiler/lib/runtime/vm_offsets.g.dart:2574:18   - Unknown word (Desciptor)   -- AdjustArgumentsDesciptorForImplicitClosure,
-pkg/native_compiler/lib/runtime/vm_offsets.g.dart:2595:3    - Unknown word (Libc)        -- LibcPow,
-pkg/native_compiler/lib/runtime/vm_offsets.g.dart:2597:7    - Unknown word (Fmod)        -- LibcFmod,
-pkg/native_compiler/lib/runtime/vm_offsets.g.dart:2619:7    - Unknown word (Unpoison)    -- MsanUnpoison,
+pkg/native_compiler/lib/runtime/vm_offsets.g.dart:2575:18   - Unknown word (Desciptor)   -- AdjustArgumentsDesciptorForImplicitClosure,
+pkg/native_compiler/lib/runtime/vm_offsets.g.dart:2596:3    - Unknown word (Libc)        -- LibcPow,
+pkg/native_compiler/lib/runtime/vm_offsets.g.dart:2598:7    - Unknown word (Fmod)        -- LibcFmod,
+pkg/native_compiler/lib/runtime/vm_offsets.g.dart:2620:7    - Unknown word (Unpoison)    -- MsanUnpoison,
 pkg/native_compiler/lib/runtime/vm_offsets.g.dart:331:21    - Unknown word (setjmp)      -- int get TsanUtils_setjmp_function_offset => throw
 pkg/native_compiler/lib/runtime/vm_offsets.g.dart:374:22    - Unknown word (Smiable)     -- int get MonomorphicSmiableCall_expected_cid_offset
 pkg/native_stack_traces/lib/src/convert.dart:430:11    - Unknown word (virt)       -- r'(?: virt (?<virtual>[\da-f]+
@@ -1278,9 +1278,9 @@ pkg/test_runner/lib/src/environment.dart:26:4      - Unknown word (jscl)       -
 pkg/test_runner/lib/src/feature.dart:11:5      - Unknown word (configution) -- /// configution, the test runner automaticall
 pkg/test_runner/lib/src/fuchsia.dart:42:8      - Unknown word (enviornment) -- // enviornment setup.
 pkg/test_runner/lib/src/fuchsia.dart:65:14     - Unknown word (Vmex)        -- // VmexResource not available
-pkg/test_runner/lib/src/options.dart:1018:9    - Unknown word (deflakes)      -- final deflakes = <DeflakeInfo>[
-pkg/test_runner/lib/src/options.dart:284:21    - Unknown word (coredumps)  -- ..addFlag('copy-coredumps',
-pkg/test_runner/lib/src/options.dart:460:25    - Unknown word (Unfortuantely) -- // TODO(53948): Unfortuantely currently the test matrix
+pkg/test_runner/lib/src/options.dart:1022:9    - Unknown word (deflakes)      -- final deflakes = <DeflakeInfo>[
+pkg/test_runner/lib/src/options.dart:165:25    - Unknown word (Unfortuantely) -- // TODO(53948): Unfortuantely currently the test matrix
+pkg/test_runner/lib/src/options.dart:78:11     - Unknown word (coredumps)  -- 'copy-coredumps',
 pkg/test_runner/lib/src/path.dart:192:9     - Unknown word (segs)       -- var segs = _path.split('/');
 pkg/test_runner/lib/src/path.dart:214:12    - Unknown word (Segs)       -- var newSegs = <String>[];
 pkg/test_runner/lib/src/process_queue.dart:610:9     - Unknown word (testdir)    -- var testdir = command.precompiledTestDire
@@ -1911,8 +1911,9 @@ sdk/lib/io/stdio.dart:161:42    - Unknown word (icanon)     -- systems this mode
 sdk/lib/io/stdio.dart:182:18    - Unknown word (rxvt)       -- /// `screen`, `rxvt`, or `tmux` will be
 sdk/lib/io/stdio.dart:550:9     - Unknown word (stdiofd)    -- int stdiofd = object == stdout
 sdk/lib/isolate/isolate.dart:428:7     - Unknown word (spawnee)    -- /// spawnee can communicate with
-sdk/lib/js_interop/js_interop.dart:1529:50   - Unknown word (unperformant) -- elements may be very unperformant.
-sdk/lib/js_interop/js_interop.dart:705:49    - Unknown word (protoype)   -- simple JS object (the protoype is either `null` or
+sdk/lib/js_interop/js_interop.dart:1649:50   - Unknown word (unperformant) -- elements may be very unperformant.
+sdk/lib/js_interop/js_interop.dart:633:20    - Unknown word (unscopables) -- /// See [`Symbol.unscopables`].
+sdk/lib/js_interop/js_interop.dart:825:49    - Unknown word (protoype)    -- simple JS object (the protoype is either `null` or
 sdk/lib/mirrors/mirrors.dart:257:69    - Unknown word (mylibrary)  -- myMethod() {...}:] or 'mylibrary'
 sdk/lib/svg/dart2js/svg_dart2js.dart:1647:10   - Unknown word (SVGG)       -- @Native("SVGGElement")
 sdk/lib/svg/dart2js/svg_dart2js.dart:2799:41   - Unknown word (canplay)    -- EventStreamProvider<Event>('canplay');

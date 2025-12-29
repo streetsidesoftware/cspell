@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["--issues-summary-report","**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2889, Issues found: 8594 in 928 files.
+ CSpell: Files checked: 2891, Issues found: 8600 in 928 files.
  exit code: 1
 django/__init__.py:12:26     - Unknown word (urlresolvers) -- Set the thread-local urlresolvers script prefix if `set
 django/apps/registry.py:134:40    - Unknown word (unconfigured) -- not ready" is due to unconfigured settings, accessing
@@ -312,11 +312,11 @@ django/contrib/contenttypes/admin.py:30:16     - Unknown word (gfks)       -- if
 django/contrib/contenttypes/admin.py:72:24     - Unknown word (gfks)       -- for gfk in gfks:
 django/contrib/flatpages/templatetags/flatpages.py:68:30     - Unknown word (someuser)   -- % get_flatpages for someuser as flatpages %}
 django/contrib/flatpages/templatetags/flatpages.py:71:40     - Unknown word (someuser)   -- flatpages '/about/' for someuser as about_pages %}
-django/contrib/gis/db/backends/base/features.py:103:28    - Unknown word (aggr)          -- def supports_make_line_aggr(self):
-django/contrib/gis/db/backends/base/features.py:107:24    - Unknown word (aggr)          -- def supports_union_aggr(self):
 django/contrib/gis/db/backends/base/features.py:13:9      - Unknown word (spatialrefsys) -- has_spatialrefsys_table = True
-django/contrib/gis/db/backends/base/features.py:95:26     - Unknown word (aggr)          -- def supports_collect_aggr(self):
-django/contrib/gis/db/backends/base/features.py:99:25     - Unknown word (aggr)          -- def supports_extent_aggr(self):
+django/contrib/gis/db/backends/base/features.py:83:26     - Unknown word (aggr)          -- def supports_collect_aggr(self):
+django/contrib/gis/db/backends/base/features.py:87:25     - Unknown word (aggr)          -- def supports_extent_aggr(self):
+django/contrib/gis/db/backends/base/features.py:91:28     - Unknown word (aggr)          -- def supports_make_line_aggr(self):
+django/contrib/gis/db/backends/base/features.py:95:24     - Unknown word (aggr)          -- def supports_union_aggr(self):
 django/contrib/gis/db/backends/base/models.py:36:10     - Unknown word (semimajor)  -- (semimajor axis, semiminor axis
 django/contrib/gis/db/backends/base/models.py:36:26     - Unknown word (semiminor)  -- (semimajor axis, semiminor axis, and inverse flattening
 django/contrib/gis/db/backends/base/operations.py:13:5      - Unknown word (spatialite) -- spatialite = False
@@ -1129,7 +1129,7 @@ django/core/management/__init__.py:283:58    - Unknown word (COMPREPLY)  -- is p
 django/core/management/__init__.py:284:49    - Unknown word (COMPREPLY)  -- completion suggestions. `COMPREPLY` expects a space
 django/core/management/__init__.py:393:49    - Unknown word (noreload)   -- "runserver" and "--noreload" not in self.argv:
 django/core/management/__init__.py:398:38    - Unknown word (autoreloader) -- # started by the autoreloader. Pretend it didn't happen
-django/core/management/base.py:347:25    - Unknown word (djangoprojects) -- '"/home/djangoprojects/myproject".'
+django/core/management/base.py:350:25    - Unknown word (djangoprojects) -- '"/home/djangoprojects/myproject".'
 django/core/management/color.py:59:13     - Unknown word (ANSICON)    -- or "ANSICON" in os.environ
 django/core/management/color.py:78:44     - Unknown word (termcolors) -- is empty django.utils.termcolors.DEFAULT_PALETTE is used
 django/core/management/color.py:83:22     - Unknown word (termcolors) -- color_settings = termcolors.parse_color_setting
@@ -1221,11 +1221,11 @@ django/core/serializers/base.py:2:32      - Unknown word (unserializer) -- abstr
 django/core/serializers/base.py:59:9      - Unknown word (perc)         -- perc = count * 100 // self
 django/core/serializers/base.py:60:16     - Unknown word (perc)         -- done = perc * self.progress_width
 django/core/serializers/xml_serializer.py:134:59    - Unknown word (subelements) -- keys are rolled out as subelements
-django/core/serializers/xml_serializer.py:159:67    - Unknown word (subelements) -- keys are rolled out as subelements
+django/core/serializers/xml_serializer.py:162:67    - Unknown word (subelements) -- keys are rolled out as subelements
 django/core/serializers/xml_serializer.py:16:19     - Unknown word (xmlutils)   -- from django.utils.xmlutils import SimplerXMLGenerator
-django/core/serializers/xml_serializer.py:327:46    - Unknown word (subelements) -- there are 'natural' subelements, it must be a natural
-django/core/serializers/xml_serializer.py:368:46    - Unknown word (subelements) -- there are 'natural' subelements, it must be a natural
-django/core/serializers/xml_serializer.py:432:33    - Unknown word (Heimes)      -- code based on Christian Heimes' defusedxml
+django/core/serializers/xml_serializer.py:341:46    - Unknown word (subelements) -- there are 'natural' subelements, it must be a natural
+django/core/serializers/xml_serializer.py:387:46    - Unknown word (subelements) -- there are 'natural' subelements, it must be a natural
+django/core/serializers/xml_serializer.py:456:33    - Unknown word (Heimes)      -- code based on Christian Heimes' defusedxml
 django/core/servers/basehttp.py:233:18    - Unknown word (requestline) -- self.raw_requestline = self.rfile.readline
 django/core/servers/basehttp.py:234:25    - Unknown word (requestline) -- if len(self.raw_requestline) > 65536:
 django/core/servers/basehttp.py:235:18    - Unknown word (requestline) -- self.requestline = ""
@@ -1373,15 +1373,15 @@ django/db/backends/oracle/introspection.py:81:20     - Unknown word (mview)     
 django/db/backends/oracle/introspection.py:81:52     - Unknown word (mviews)     -- 'v', NULL FROM user_mviews
 django/db/backends/oracle/operations.py:105:30    - Unknown word (IYYY)       -- extract_param = "IYYY"
 django/db/backends/oracle/operations.py:109:44    - Unknown word (loookup)    -- ValueError(f"Invalid loookup type: {lookup_type!r
-django/db/backends/oracle/operations.py:359:30    - Unknown word (currval)    -- cursor.execute('"%s".currval' % sq_name)
-django/db/backends/oracle/operations.py:384:17    - Unknown word (clob)       -- def process_clob(self, value):
-django/db/backends/oracle/operations.py:415:49    - Unknown word (rcons)      -- user_tables.table_name, rcons.constraint_name
-django/db/backends/oracle/operations.py:423:42    - Unknown word (rcons)      -- user_constraints rcons
-django/db/backends/oracle/operations.py:424:54    - Unknown word (rcons)      -- tables.table_name = rcons.table_name
-django/db/backends/oracle/operations.py:425:29    - Unknown word (rcons)      -- AND rcons.constraint_type = 'R
-django/db/backends/oracle/operations.py:428:25    - Unknown word (NOCYCLE)    -- NOCYCLE PRIOR cons.constraint
-django/db/backends/oracle/operations.py:428:62    - Unknown word (rcons)      -- cons.constraint_name = rcons.r_constraint_name
-django/db/backends/oracle/operations.py:701:18    - Unknown word (NUMTODSINTERVAL) -- "NUMTODSINTERVAL(TO_NUMBER(%s - %s),
+django/db/backends/oracle/operations.py:363:30    - Unknown word (currval)    -- cursor.execute('"%s".currval' % sq_name)
+django/db/backends/oracle/operations.py:388:17    - Unknown word (clob)       -- def process_clob(self, value):
+django/db/backends/oracle/operations.py:419:49    - Unknown word (rcons)      -- user_tables.table_name, rcons.constraint_name
+django/db/backends/oracle/operations.py:427:42    - Unknown word (rcons)      -- user_constraints rcons
+django/db/backends/oracle/operations.py:428:54    - Unknown word (rcons)      -- tables.table_name = rcons.table_name
+django/db/backends/oracle/operations.py:429:29    - Unknown word (rcons)      -- AND rcons.constraint_type = 'R
+django/db/backends/oracle/operations.py:432:25    - Unknown word (NOCYCLE)    -- NOCYCLE PRIOR cons.constraint
+django/db/backends/oracle/operations.py:432:62    - Unknown word (rcons)      -- cons.constraint_name = rcons.r_constraint_name
+django/db/backends/oracle/operations.py:705:18    - Unknown word (NUMTODSINTERVAL) -- "NUMTODSINTERVAL(TO_NUMBER(%s - %s),
 django/db/backends/oracle/schema.py:130:25    - Unknown word (CLOB)       -- if re.match("^N?CLOB", old_type):
 django/db/backends/oracle/schema.py:188:40    - Unknown word (uppercased) -- properly shortened and uppercased identifier as returned
 django/db/backends/oracle/utils.py:69:17     - Unknown word (NCLOB)      -- NCLOB = "TO_NCLOB(%s)"
@@ -1570,7 +1570,7 @@ django/db/backends/sqlite3/creation.py:74:49     - Unknown word (keepdb)     -- 
 django/db/backends/sqlite3/creation.py:80:20     - Unknown word (keepdb)     -- if keepdb:
 django/db/backends/sqlite3/features.py:103:39    - Unknown word (liveserverthread) -- "servers.test_liveserverthread.LiveServerThreadTest
 django/db/backends/sqlite3/features.py:158:9     - Unknown word (setlimit)         -- setlimit(SQLITE_LIMIT_VARIABLE
-django/db/backends/sqlite3/features.py:160:43    - Unknown word (getlimit)         -- connection.connection.getlimit(sqlite3.SQLITE_LIMIT
+django/db/backends/sqlite3/features.py:161:43    - Unknown word (getlimit)         -- connection.connection.getlimit(sqlite3.SQLITE_LIMIT
 django/db/backends/sqlite3/features.py:46:16     - Unknown word (nocase)     -- "ci": "nocase",
 django/db/backends/sqlite3/features.py:48:25     - Unknown word (nocase)     -- "non_default": "nocase",
 django/db/backends/sqlite3/features.py:49:21     - Unknown word (nocase)     -- "virtual": "nocase",
@@ -1648,10 +1648,10 @@ django/db/models/expressions.py:1802:15   - Unknown word (complexifies) -- # com
 django/db/models/expressions.py:290:47    - Unknown word (multijoins) -- of reusable joins for multijoins
 django/db/models/fetch_modes.py:53:9      - Unknown word (klass)      -- klass = instance.__class_
 django/db/models/fetch_modes.py:55:48     - Unknown word (klass)      -- ldFetchBlocked(f"Fetching of {klass}.{field_name} blocked
-django/db/models/fields/__init__.py:1827:32   - Unknown word (prec)       -- return decimal.Context(prec=self.max_digits)
-django/db/models/fields/__init__.py:2851:41   - Unknown word (autopk)     -- connection.ops.validate_autopk_value(value)
-django/db/models/fields/__init__.py:2893:11   - Unknown word (subclasscheck) -- def __subclasscheck__(self, subclass):
-django/db/models/fields/__init__.py:2894:68   - Unknown word (subclasscheck) -- subclasses) or super().__subclasscheck__(
+django/db/models/fields/__init__.py:1838:32   - Unknown word (prec)       -- return decimal.Context(prec=self.max_digits)
+django/db/models/fields/__init__.py:2862:41   - Unknown word (autopk)     -- connection.ops.validate_autopk_value(value)
+django/db/models/fields/__init__.py:2904:11   - Unknown word (subclasscheck) -- def __subclasscheck__(self, subclass):
+django/db/models/fields/__init__.py:2905:68   - Unknown word (subclasscheck) -- subclasses) or super().__subclasscheck__(
 django/db/models/fields/__init__.py:523:76    - Unknown word (EXXX)       -- details.get("id", "fields.EXXX"),
 django/db/models/fields/__init__.py:534:79    - Unknown word (WXXX)       -- details.get("id", "fields.WXXX"),
 django/db/models/fields/composite.py:28:9      - Unknown word (attnames)   -- def attnames(self):
@@ -1670,6 +1670,9 @@ django/db/models/fields/json.py:424:21    - Unknown word (JSONLHS)    -- class J
 django/db/models/fields/json.py:491:27    - Unknown word (JSONI)      -- JSONField.register_lookup(JSONIContains)
 django/db/models/fields/json.py:495:27    - Unknown word (JSONLHS)    -- KeyTransform(ProcessJSONLHSMixin, Transform):
 django/db/models/fields/json.py:545:61    - Unknown word (MDEV)       -- supported on MariaDB (see MDEV-13594) and
+django/db/models/fields/json.py:674:13    - Unknown word (keytransform) -- keytransform = KeyTransform(self
+django/db/models/fields/json.py:675:28    - Unknown word (keytransform) -- exact_lookup = keytransform.get_lookup("exact")
+django/db/models/fields/json.py:675:61    - Unknown word (keytransform) -- get_lookup("exact")(keytransform, self.rhs)
 django/db/models/fields/related.py:1397:51   - Unknown word (klass)      -- intermediary_model(field, klass):
 django/db/models/fields/related.py:1403:33   - Unknown word (klass)      -- model = resolve_relation(klass, field.remote_field
 django/db/models/fields/related.py:1404:23   - Unknown word (klass)      -- name = "%s_%s" % (klass._meta.object_name, field
@@ -3860,9 +3863,9 @@ tests/auth_tests/test_validators.py:394:14    - Unknown word (أحمد)         
 tests/auth_tests/test_validators.py:395:14    - Unknown word (trailingnewline) -- "trailingnewline\n",
 tests/auth_tests/test_views.py:116:22    - Unknown word (uidb)       -- "uidb64": "aaaaaaa",
 tests/auth_tests/test_views.py:1271:21   - Unknown word (doesnt)         -- def test_logout_doesnt_cache(self):
-tests/auth_tests/test_views.py:1739:29   - Unknown word (shouldnotchange) -- data["password"] = "shouldnotchange"
-tests/auth_tests/test_views.py:1759:43   - Unknown word (uuiduser)        -- user_admin:auth_tests_uuiduser_change", args=(u.pk
-tests/auth_tests/test_views.py:1769:64   - Unknown word (uuiduser)        -- form method="post" id="uuiduser_form">')
+tests/auth_tests/test_views.py:1738:29   - Unknown word (shouldnotchange) -- data["password"] = "shouldnotchange"
+tests/auth_tests/test_views.py:1758:43   - Unknown word (uuiduser)        -- user_admin:auth_tests_uuiduser_change", args=(u.pk
+tests/auth_tests/test_views.py:1768:64   - Unknown word (uuiduser)        -- form method="post" id="uuiduser_form">')
 tests/auth_tests/test_views.py:283:35    - Unknown word (anewpassword) -- "new_password1": "anewpassword",
 tests/auth_tests/test_views.py:284:36    - Unknown word (anewpassword) -- "new_password2": " anewpassword",
 tests/auth_tests/test_views.py:289:47    - Unknown word (anewpassword) -- not u.check_password("anewpassword"))
@@ -3950,8 +3953,8 @@ tests/backends/postgresql/test_introspection.py:24:77     - Unknown word (pers) 
 tests/backends/postgresql/test_introspection.py:28:76     - Unknown word (pers)       -- column": "id", "name": "pers_seq"}],
 tests/backends/postgresql/tests.py:475:15    - Unknown word (awef)       -- a = ["awef"]
 tests/backends/postgresql/tests.py:480:16    - Unknown word (awef)       -- a = ["ᄲawef"]
-tests/backends/sqlite/test_features.py:27:35     - Unknown word (setlimit)   -- connection.connection.setlimit(limit_name, new_limit
-tests/backends/sqlite/test_features.py:30:35     - Unknown word (setlimit)   -- connection.connection.setlimit(limit_name, current
+tests/backends/sqlite/test_features.py:28:35     - Unknown word (setlimit)   -- connection.connection.setlimit(limit_name, new_limit
+tests/backends/sqlite/test_features.py:31:35     - Unknown word (setlimit)   -- connection.connection.setlimit(limit_name, current
 tests/backends/sqlite/test_operations.py:127:35    - Unknown word (setlimit)                                                -- connection.connection.setlimit(limit_name, new_limit
 tests/backends/sqlite/test_operations.py:135:35    - Unknown word (setlimit)                                                -- connection.connection.setlimit(limit_name, current
 tests/backends/sqlite/test_operations.py:37:40     - Unknown word (verylongmodelnamezzzzzzzzzzzzzzzzzzzzzz) -- DELETE FROM "backends_verylongmodelnamezzzzzzzzzzzzzzzzzzzzzz'
@@ -4935,61 +4938,61 @@ tests/gis_tests/data/geoip2/README.md:6:24      - Unknown word (mmdb)       -- G
 tests/gis_tests/data/geoip2/README.md:7:22      - Unknown word (mmdb)       -- `GeoLite2-ASN-Test.mmdb`
 tests/gis_tests/data/geoip2/README.md:8:23      - Unknown word (mmdb)       -- `GeoLite2-City-Test.mmdb`
 tests/gis_tests/data/geoip2/README.md:9:26      - Unknown word (mmdb)       -- GeoLite2-Country-Test.mmdb`
-tests/gis_tests/distapp/tests.py:106:64    - Unknown word (spatialite)   -- oracle or connection.ops.spatialite:
-tests/gis_tests/distapp/tests.py:132:30    - Unknown word (Southside)    -- (thus, Houston and Southside place will be excluded
-tests/gis_tests/distapp/tests.py:142:40    - Unknown word (Bellaire)     -- assertEqual(cities, ["Bellaire", "Pearland", "West
-tests/gis_tests/distapp/tests.py:142:52    - Unknown word (Pearland)     -- cities, ["Bellaire", "Pearland", "West University Place
-tests/gis_tests/distapp/tests.py:166:14    - Unknown word (Batemans)     -- "Batemans Bay",
-tests/gis_tests/distapp/tests.py:168:14    - Unknown word (Hillsdale)    -- "Hillsdale",
-tests/gis_tests/distapp/tests.py:170:14    - Unknown word (Mittagong)    -- "Mittagong",
-tests/gis_tests/distapp/tests.py:171:14    - Unknown word (Shellharbour) -- "Shellharbour",
-tests/gis_tests/distapp/tests.py:173:14    - Unknown word (Thirroul)     -- "Thirroul",
-tests/gis_tests/distapp/tests.py:176:27    - Unknown word (spatialite)   -- if connection.ops.spatialite:
-tests/gis_tests/distapp/tests.py:177:15    - Unknown word (Spatia)       -- # SpatiaLite is less accurate
-tests/gis_tests/distapp/tests.py:177:67    - Unknown word (Batemans)     -- returns 102.8km for Batemans Bay.
-tests/gis_tests/distapp/tests.py:212:36    - Unknown word (Batemans)     -- assertEqual(cities, ["Batemans Bay", "Canberra", "Melbourne
-tests/gis_tests/distapp/tests.py:236:62    - Unknown word (Shellharbour) -- Adelaide", "Hobart", "Shellharbour", "Thirroul"])
-tests/gis_tests/distapp/tests.py:236:78    - Unknown word (Thirroul)     -- Hobart", "Shellharbour", "Thirroul"])
-tests/gis_tests/distapp/tests.py:249:18    - Unknown word (Bellaire)     -- "Bellaire",
-tests/gis_tests/distapp/tests.py:251:18    - Unknown word (Southside)    -- "Southside Place",
-tests/gis_tests/distapp/tests.py:261:24    - Unknown word (Pearland)     -- self.assertIn("Pearland", self.get_names(qs
-tests/gis_tests/distapp/tests.py:346:27    - Unknown word (Mittagong)    -- ["Adelaide", "Mittagong", "Shellharbour", "Thirroul
-tests/gis_tests/distapp/tests.py:346:40    - Unknown word (Shellharbour) -- Adelaide", "Mittagong", "Shellharbour", "Thirroul", "Wollongong
-tests/gis_tests/distapp/tests.py:346:56    - Unknown word (Thirroul)     -- Mittagong", "Shellharbour", "Thirroul", "Wollongong"],
-tests/gis_tests/distapp/tests.py:383:23    - Unknown word (Spatia)       -- Distance functions on SpatiaLite
-tests/gis_tests/distapp/tests.py:405:45    - Unknown word (southtexaszipcode) -- Area(poly) FROM distapp_southtexaszipcode;
-tests/gis_tests/distapp/tests.py:450:25    - Unknown word (southtexascity)    -- # FROM distapp_southtexascity;
-tests/gis_tests/distapp/tests.py:469:25    - Unknown word (southtexascityft)  -- # FROM distapp_southtexascityft;
-tests/gis_tests/distapp/tests.py:505:43    - Unknown word (Shellharbour)      -- LineString of Wollongong and Shellharbour coords).
-tests/gis_tests/distapp/tests.py:516:25    - Unknown word (australiacity)     -- # FROM distapp_australiacity ORDER BY name;
-tests/gis_tests/distapp/tests.py:536:19    - Unknown word (Spatia)            -- # SpatiaLite).
-tests/gis_tests/distapp/tests.py:537:44    - Unknown word (spatialite)        -- 3 if connection.ops.spatialite else 0
-tests/gis_tests/distapp/tests.py:550:25    - Unknown word (australiacity)     -- # FROM distapp_australiacity WHERE (NOT (id = 11
-tests/gis_tests/distapp/tests.py:555:25    - Unknown word (australiacity)     -- # FROM distapp_australiacity
-tests/gis_tests/distapp/tests.py:582:53    - Unknown word (Hillsdale)         -- straliaCity.objects.get(name="Hillsdale")
-tests/gis_tests/distapp/tests.py:582:9     - Unknown word (hillsdale)         -- hillsdale = AustraliaCity.objects
-tests/gis_tests/distapp/tests.py:584:46    - Unknown word (hillsdale)         -- traliaCity.objects.exclude(id=hillsdale.id)
-tests/gis_tests/distapp/tests.py:585:50    - Unknown word (hillsdale)         -- distance=Distance("point", hillsdale.point, spheroid=True
-tests/gis_tests/distapp/tests.py:591:53    - Unknown word (spatialite)        -- postgis or connection.ops.spatialite:
-tests/gis_tests/distapp/tests.py:595:50    - Unknown word (hillsdale)         -- traliaCity.objects.exclude(id=hillsdale.id)
-tests/gis_tests/distapp/tests.py:596:54    - Unknown word (hillsdale)         -- distance=Distance("point", hillsdale.point))
-tests/gis_tests/distapp/tests.py:679:35    - Unknown word (censuszipcode)     -- ST_Transform("distapp_censuszipcode"."poly", 32140),
-tests/gis_tests/distapp/tests.py:681:25    - Unknown word (censuszipcode)     -- # FROM "distapp_censuszipcode";
-tests/gis_tests/distapp/tests.py:711:47    - Unknown word (Pearland)          -- in=("San Antonio", "Pearland"))
-tests/gis_tests/distapp/tests.py:713:55    - Unknown word (Pearland)          -- qs, ["San Antonio", "Pearland"])
-tests/gis_tests/distapp/tests.py:759:40    - Unknown word (southtexaszipcode) -- ST_Perimeter(distapp_southtexaszipcode.poly)
-tests/gis_tests/distapp/tests.py:760:25    - Unknown word (southtexaszipcode) -- # FROM distapp_southtexaszipcode;
-tests/gis_tests/distapp/tests.py:761:9     - Unknown word (perim)             -- perim_m = [
-tests/gis_tests/distapp/tests.py:772:36    - Unknown word (perim)             -- self.assertAlmostEqual(perim_m[i], z.perimeter.m
-tests/gis_tests/distapp/tests.py:775:46    - Unknown word (perim)             -- uthTexasCity.objects.annotate(perim=Perimeter("point"))
-tests/gis_tests/distapp/tests.py:777:38    - Unknown word (perim)             -- assertEqual(0, city.perim.m)
-tests/gis_tests/distapp/tests.py:783:46    - Unknown word (perim)             -- ensusZipcode.objects.annotate(perim=Perimeter("poly"))
-tests/gis_tests/distapp/tests.py:806:9     - Unknown word (htown)             -- htown = SouthTexasCity.objects
-tests/gis_tests/distapp/tests.py:808:39    - Unknown word (htown)             -- distance=Distance("poly", htown.point), area=Area("poly
-tests/gis_tests/distapp/tests.py:80:43     - Unknown word (Southside)  -- Downtown Houston", "Southside Place"]
-tests/gis_tests/distapp/tests.py:81:23     - Unknown word (Mittagong)  -- au_cities = ["Mittagong", "Shellharbour", "Thirroul
-tests/gis_tests/distapp/tests.py:81:36     - Unknown word (Shellharbour) -- cities = ["Mittagong", "Shellharbour", "Thirroul", "Wollongong
-tests/gis_tests/distapp/tests.py:81:52     - Unknown word (Thirroul)     -- Mittagong", "Shellharbour", "Thirroul", "Wollongong"]
+tests/gis_tests/distapp/tests.py:107:64    - Unknown word (spatialite)   -- oracle or connection.ops.spatialite:
+tests/gis_tests/distapp/tests.py:133:30    - Unknown word (Southside)    -- (thus, Houston and Southside place will be excluded
+tests/gis_tests/distapp/tests.py:143:40    - Unknown word (Bellaire)     -- assertEqual(cities, ["Bellaire", "Pearland", "West
+tests/gis_tests/distapp/tests.py:143:52    - Unknown word (Pearland)     -- cities, ["Bellaire", "Pearland", "West University Place
+tests/gis_tests/distapp/tests.py:167:14    - Unknown word (Batemans)     -- "Batemans Bay",
+tests/gis_tests/distapp/tests.py:169:14    - Unknown word (Hillsdale)    -- "Hillsdale",
+tests/gis_tests/distapp/tests.py:171:14    - Unknown word (Mittagong)    -- "Mittagong",
+tests/gis_tests/distapp/tests.py:172:14    - Unknown word (Shellharbour) -- "Shellharbour",
+tests/gis_tests/distapp/tests.py:174:14    - Unknown word (Thirroul)     -- "Thirroul",
+tests/gis_tests/distapp/tests.py:177:27    - Unknown word (spatialite)   -- if connection.ops.spatialite:
+tests/gis_tests/distapp/tests.py:178:15    - Unknown word (Spatia)       -- # SpatiaLite is less accurate
+tests/gis_tests/distapp/tests.py:178:67    - Unknown word (Batemans)     -- returns 102.8km for Batemans Bay.
+tests/gis_tests/distapp/tests.py:213:36    - Unknown word (Batemans)     -- assertEqual(cities, ["Batemans Bay", "Canberra", "Melbourne
+tests/gis_tests/distapp/tests.py:237:62    - Unknown word (Shellharbour) -- Adelaide", "Hobart", "Shellharbour", "Thirroul"])
+tests/gis_tests/distapp/tests.py:237:78    - Unknown word (Thirroul)     -- Hobart", "Shellharbour", "Thirroul"])
+tests/gis_tests/distapp/tests.py:250:18    - Unknown word (Bellaire)     -- "Bellaire",
+tests/gis_tests/distapp/tests.py:252:18    - Unknown word (Southside)    -- "Southside Place",
+tests/gis_tests/distapp/tests.py:262:24    - Unknown word (Pearland)     -- self.assertIn("Pearland", self.get_names(qs
+tests/gis_tests/distapp/tests.py:349:27    - Unknown word (Mittagong)    -- ["Adelaide", "Mittagong", "Shellharbour", "Thirroul
+tests/gis_tests/distapp/tests.py:349:40    - Unknown word (Shellharbour) -- Adelaide", "Mittagong", "Shellharbour", "Thirroul", "Wollongong
+tests/gis_tests/distapp/tests.py:349:56    - Unknown word (Thirroul)     -- Mittagong", "Shellharbour", "Thirroul", "Wollongong"],
+tests/gis_tests/distapp/tests.py:386:23    - Unknown word (Spatia)       -- Distance functions on SpatiaLite
+tests/gis_tests/distapp/tests.py:408:45    - Unknown word (southtexaszipcode) -- Area(poly) FROM distapp_southtexaszipcode;
+tests/gis_tests/distapp/tests.py:453:25    - Unknown word (southtexascity)    -- # FROM distapp_southtexascity;
+tests/gis_tests/distapp/tests.py:472:25    - Unknown word (southtexascityft)  -- # FROM distapp_southtexascityft;
+tests/gis_tests/distapp/tests.py:508:43    - Unknown word (Shellharbour)      -- LineString of Wollongong and Shellharbour coords).
+tests/gis_tests/distapp/tests.py:519:25    - Unknown word (australiacity)     -- # FROM distapp_australiacity ORDER BY name;
+tests/gis_tests/distapp/tests.py:539:19    - Unknown word (Spatia)            -- # SpatiaLite).
+tests/gis_tests/distapp/tests.py:540:44    - Unknown word (spatialite)        -- 3 if connection.ops.spatialite else 0
+tests/gis_tests/distapp/tests.py:553:25    - Unknown word (australiacity)     -- # FROM distapp_australiacity WHERE (NOT (id = 11
+tests/gis_tests/distapp/tests.py:558:25    - Unknown word (australiacity)     -- # FROM distapp_australiacity
+tests/gis_tests/distapp/tests.py:585:53    - Unknown word (Hillsdale)         -- straliaCity.objects.get(name="Hillsdale")
+tests/gis_tests/distapp/tests.py:585:9     - Unknown word (hillsdale)         -- hillsdale = AustraliaCity.objects
+tests/gis_tests/distapp/tests.py:587:46    - Unknown word (hillsdale)         -- traliaCity.objects.exclude(id=hillsdale.id)
+tests/gis_tests/distapp/tests.py:588:50    - Unknown word (hillsdale)         -- distance=Distance("point", hillsdale.point, spheroid=True
+tests/gis_tests/distapp/tests.py:594:53    - Unknown word (spatialite)        -- postgis or connection.ops.spatialite:
+tests/gis_tests/distapp/tests.py:598:50    - Unknown word (hillsdale)         -- traliaCity.objects.exclude(id=hillsdale.id)
+tests/gis_tests/distapp/tests.py:599:54    - Unknown word (hillsdale)         -- distance=Distance("point", hillsdale.point))
+tests/gis_tests/distapp/tests.py:682:35    - Unknown word (censuszipcode)     -- ST_Transform("distapp_censuszipcode"."poly", 32140),
+tests/gis_tests/distapp/tests.py:684:25    - Unknown word (censuszipcode)     -- # FROM "distapp_censuszipcode";
+tests/gis_tests/distapp/tests.py:714:47    - Unknown word (Pearland)          -- in=("San Antonio", "Pearland"))
+tests/gis_tests/distapp/tests.py:716:55    - Unknown word (Pearland)          -- qs, ["San Antonio", "Pearland"])
+tests/gis_tests/distapp/tests.py:762:40    - Unknown word (southtexaszipcode) -- ST_Perimeter(distapp_southtexaszipcode.poly)
+tests/gis_tests/distapp/tests.py:763:25    - Unknown word (southtexaszipcode) -- # FROM distapp_southtexaszipcode;
+tests/gis_tests/distapp/tests.py:764:9     - Unknown word (perim)             -- perim_m = [
+tests/gis_tests/distapp/tests.py:775:36    - Unknown word (perim)             -- self.assertAlmostEqual(perim_m[i], z.perimeter.m
+tests/gis_tests/distapp/tests.py:778:46    - Unknown word (perim)             -- uthTexasCity.objects.annotate(perim=Perimeter("point"))
+tests/gis_tests/distapp/tests.py:780:38    - Unknown word (perim)             -- assertEqual(0, city.perim.m)
+tests/gis_tests/distapp/tests.py:786:46    - Unknown word (perim)             -- ensusZipcode.objects.annotate(perim=Perimeter("poly"))
+tests/gis_tests/distapp/tests.py:809:9     - Unknown word (htown)             -- htown = SouthTexasCity.objects
+tests/gis_tests/distapp/tests.py:811:39    - Unknown word (htown)             -- distance=Distance("poly", htown.point), area=Area("poly
+tests/gis_tests/distapp/tests.py:81:43     - Unknown word (Southside)  -- Downtown Houston", "Southside Place"]
+tests/gis_tests/distapp/tests.py:82:23     - Unknown word (Mittagong)  -- au_cities = ["Mittagong", "Shellharbour", "Thirroul
+tests/gis_tests/distapp/tests.py:82:36     - Unknown word (Shellharbour) -- cities = ["Mittagong", "Shellharbour", "Thirroul", "Wollongong
+tests/gis_tests/distapp/tests.py:82:52     - Unknown word (Thirroul)     -- Mittagong", "Shellharbour", "Thirroul", "Wollongong"]
 tests/gis_tests/gdal_tests/test_driver.py:23:32     - Unknown word (clucka)     -- drivers = ("Foo baz", "clucka", "ESRI Shp", "ESRI
 tests/gis_tests/gdal_tests/test_driver.py:23:59     - Unknown word (rast)       -- , "ESRI Shp", "ESRI rast")
 tests/gis_tests/gdal_tests/test_driver.py:63:49     - Unknown word (capi)       -- contrib.gis.gdal.driver.capi.get_driver_count")
@@ -5214,10 +5217,10 @@ tests/gis_tests/geoapp/test_functions.py:830:53    - Unknown word (xfac)        
 tests/gis_tests/geoapp/test_functions.py:830:59    - Unknown word (yfac)            -- Translate("mpoly", xfac, yfac)
 tests/gis_tests/geoapp/test_functions.py:836:52    - Unknown word (Spatia)          -- low precision is for SpatiaLite
 tests/gis_tests/geoapp/test_functions.py:859:26    - Unknown word (Spatia)          -- # PostGIS or SpatiaLite).
-tests/gis_tests/geoapp/test_regress.py:32:17     - Unknown word (Åland)      -- name = "Åland Islands"
-tests/gis_tests/geoapp/test_regress.py:42:43     - Unknown word (aggr)       -- essDBFeature("supports_extent_aggr")
-tests/gis_tests/geoapp/test_regress.py:54:56     - Unknown word (Spatia)     -- converted properly, even on SpatiaLite. See #16408."
-tests/gis_tests/geoapp/test_regress.py:58:21     - Unknown word (Tioga)      -- county="Tioga",
+tests/gis_tests/geoapp/test_regress.py:33:17     - Unknown word (Åland)      -- name = "Åland Islands"
+tests/gis_tests/geoapp/test_regress.py:43:43     - Unknown word (aggr)       -- essDBFeature("supports_extent_aggr")
+tests/gis_tests/geoapp/test_regress.py:55:56     - Unknown word (Spatia)     -- converted properly, even on SpatiaLite. See #16408."
+tests/gis_tests/geoapp/test_regress.py:59:21     - Unknown word (Tioga)      -- county="Tioga",
 tests/gis_tests/geoapp/test_serializers.py:84:39     - Unknown word (Tioga)      -- Mansfield", county="Tioga", point="POINT(-77.
 tests/gis_tests/geoapp/test_sitemaps.py:27:14     - Unknown word (geositemap) -- def test_geositemap_kml(self):
 tests/gis_tests/geoapp/test_sitemaps.py:70:55     - Unknown word (Placemark)  -- getElementsByTagName("Placemark")),
@@ -5230,43 +5233,44 @@ tests/gis_tests/geoapp/tests.py:259:17    - Unknown word (klass)      -- g = kla
 tests/gis_tests/geoapp/tests.py:266:64    - Unknown word (klass)      -- create(name=f"Empty {klass.__name__}", geom=g)
 tests/gis_tests/geoapp/tests.py:268:16    - Unknown word (klass)      -- if klass is LinearRing:
 tests/gis_tests/geoapp/tests.py:269:65    - Unknown word (Geomtry)    -- representable in WKB, so GEOSGeomtry.wkb
-tests/gis_tests/geoapp/tests.py:323:9     - Unknown word (ptown)      -- ptown = City.objects.get(name
-tests/gis_tests/geoapp/tests.py:324:51    - Unknown word (ptown)      -- filter(point__disjoint=ptown.point)
-tests/gis_tests/geoapp/tests.py:326:51    - Unknown word (ptown)      -- filter(poly__disjoint=ptown.point)
-tests/gis_tests/geoapp/tests.py:349:9     - Unknown word (okcity)     -- okcity = City.objects.get(name
-tests/gis_tests/geoapp/tests.py:357:22    - Unknown word (EWKBHEX)    -- ) # Query w/EWKBHEX
-tests/gis_tests/geoapp/tests.py:371:56    - Unknown word (okcity)     -- filter(mpoly__contains=okcity.point.wkt)), 0
-tests/gis_tests/geoapp/tests.py:376:59    - Unknown word (okcity)     -- filter(mpoly__bbcontains=okcity.point)
-tests/gis_tests/geoapp/tests.py:416:50    - Unknown word (lwgeom)     -- and BOX2D_right() in lwgeom_box2dfloat4.c in
-tests/gis_tests/geoapp/tests.py:416:61    - Unknown word (dfloat)     -- right() in lwgeom_box2dfloat4.c in
-tests/gis_tests/geoapp/tests.py:489:9     - Unknown word (nullqs)     -- nullqs = State.objects.filter
-tests/gis_tests/geoapp/tests.py:490:9     - Unknown word (validqs)    -- validqs = State.objects.filter
-tests/gis_tests/geoapp/tests.py:494:33    - Unknown word (nullqs)     -- self.assertEqual(1, len(nullqs))
-tests/gis_tests/geoapp/tests.py:495:41    - Unknown word (nullqs)     -- assertEqual("Puerto Rico", nullqs[0].name)
-tests/gis_tests/geoapp/tests.py:497:64    - Unknown word (nullqs)     -- objects.filter(poly=None), nullqs)
-tests/gis_tests/geoapp/tests.py:498:65    - Unknown word (validqs)    -- exclude(poly=None), validqs)
-tests/gis_tests/geoapp/tests.py:501:33    - Unknown word (validqs)    -- self.assertEqual(2, len(validqs))
-tests/gis_tests/geoapp/tests.py:502:40    - Unknown word (validqs)    -- names = [s.name for s in validqs]
+tests/gis_tests/geoapp/tests.py:324:9     - Unknown word (ptown)      -- ptown = City.objects.get(name
+tests/gis_tests/geoapp/tests.py:325:51    - Unknown word (ptown)      -- filter(point__disjoint=ptown.point)
+tests/gis_tests/geoapp/tests.py:327:51    - Unknown word (ptown)      -- filter(poly__disjoint=ptown.point)
+tests/gis_tests/geoapp/tests.py:350:9     - Unknown word (okcity)     -- okcity = City.objects.get(name
+tests/gis_tests/geoapp/tests.py:358:22    - Unknown word (EWKBHEX)    -- ) # Query w/EWKBHEX
+tests/gis_tests/geoapp/tests.py:372:56    - Unknown word (okcity)     -- filter(mpoly__contains=okcity.point.wkt)), 0
+tests/gis_tests/geoapp/tests.py:378:9     - Unknown word (okcity)     -- okcity = City.objects.get(name
+tests/gis_tests/geoapp/tests.py:379:55    - Unknown word (okcity)     -- filter(mpoly__bbcontains=okcity.point)
+tests/gis_tests/geoapp/tests.py:419:50    - Unknown word (lwgeom)     -- and BOX2D_right() in lwgeom_box2dfloat4.c in
+tests/gis_tests/geoapp/tests.py:419:61    - Unknown word (dfloat)     -- right() in lwgeom_box2dfloat4.c in
+tests/gis_tests/geoapp/tests.py:493:9     - Unknown word (nullqs)     -- nullqs = State.objects.filter
+tests/gis_tests/geoapp/tests.py:494:9     - Unknown word (validqs)    -- validqs = State.objects.filter
+tests/gis_tests/geoapp/tests.py:498:33    - Unknown word (nullqs)     -- self.assertEqual(1, len(nullqs))
+tests/gis_tests/geoapp/tests.py:499:41    - Unknown word (nullqs)     -- assertEqual("Puerto Rico", nullqs[0].name)
+tests/gis_tests/geoapp/tests.py:501:64    - Unknown word (nullqs)     -- objects.filter(poly=None), nullqs)
+tests/gis_tests/geoapp/tests.py:502:65    - Unknown word (validqs)    -- exclude(poly=None), validqs)
+tests/gis_tests/geoapp/tests.py:505:33    - Unknown word (validqs)    -- self.assertEqual(2, len(validqs))
+tests/gis_tests/geoapp/tests.py:506:40    - Unknown word (validqs)    -- names = [s.name for s in validqs]
 tests/gis_tests/geoapp/tests.py:57:9      - Unknown word (nullcity)   -- nullcity = City(name="NullCity
 tests/gis_tests/geoapp/tests.py:58:9      - Unknown word (nullcity)   -- nullcity.save()
 tests/gis_tests/geoapp/tests.py:64:17     - Unknown word (nullcity)   -- nullcity.point = bad
-tests/gis_tests/geoapp/tests.py:654:17    - Unknown word (anyinteract) -- mask = "anyinteract" if connection.ops.oracle
-tests/gis_tests/geoapp/tests.py:696:43    - Unknown word (aggr)        -- essDBFeature("supports_extent_aggr")
+tests/gis_tests/geoapp/tests.py:658:17    - Unknown word (anyinteract) -- mask = "anyinteract" if connection.ops.oracle
 tests/gis_tests/geoapp/tests.py:69:9      - Unknown word (nullcity)   -- nullcity.point = new
-tests/gis_tests/geoapp/tests.py:719:40    - Unknown word (Smalltown)   -- objects.filter(name=("Smalltown")).aggregate(Extent
-tests/gis_tests/geoapp/tests.py:724:43    - Unknown word (aggr)        -- essDBFeature("supports_extent_aggr")
-tests/gis_tests/geoapp/tests.py:737:55    - Unknown word (aggr)        -- features.supports_make_line_aggr:
+tests/gis_tests/geoapp/tests.py:702:43    - Unknown word (aggr)        -- essDBFeature("supports_extent_aggr")
+tests/gis_tests/geoapp/tests.py:725:40    - Unknown word (Smalltown)   -- objects.filter(name=("Smalltown")).aggregate(Extent
+tests/gis_tests/geoapp/tests.py:730:43    - Unknown word (aggr)        -- essDBFeature("supports_extent_aggr")
 tests/gis_tests/geoapp/tests.py:73:32     - Unknown word (nullcity)   -- self.assertEqual(4326, nullcity.point.srid)
-tests/gis_tests/geoapp/tests.py:757:42    - Unknown word (aggr)        -- lessDBFeature("supports_union_aggr")
-tests/gis_tests/geoapp/tests.py:758:14    - Unknown word (unionagg)    -- def test_unionagg(self):
-tests/gis_tests/geoapp/tests.py:779:42    - Unknown word (aggr)        -- lessDBFeature("supports_union_aggr")
-tests/gis_tests/geoapp/tests.py:780:14    - Unknown word (geoagg)      -- def test_geoagg_subquery(self):
-tests/gis_tests/geoapp/tests.py:798:14    - Unknown word (unionagg)    -- def test_unionagg_tolerance(self):
-tests/gis_tests/geoapp/tests.py:801:19    - Unknown word (Forney)      -- name="Forney",
-tests/gis_tests/geoapp/tests.py:804:54    - Unknown word (Forney)      -- than distance between Forney and Dallas, that's
-tests/gis_tests/geoapp/tests.py:806:9     - Unknown word (forney)      -- forney_houston = GEOSGeometry
-tests/gis_tests/geoapp/tests.py:811:13    - Unknown word (forney)      -- forney_houston.equals_exact
-tests/gis_tests/geoapp/tests.py:821:14    - Unknown word (unionagg)    -- def test_unionagg_tolerance_escaping(self
+tests/gis_tests/geoapp/tests.py:743:55    - Unknown word (aggr)        -- features.supports_make_line_aggr:
+tests/gis_tests/geoapp/tests.py:763:42    - Unknown word (aggr)        -- lessDBFeature("supports_union_aggr")
+tests/gis_tests/geoapp/tests.py:764:14    - Unknown word (unionagg)    -- def test_unionagg(self):
+tests/gis_tests/geoapp/tests.py:785:42    - Unknown word (aggr)        -- lessDBFeature("supports_union_aggr")
+tests/gis_tests/geoapp/tests.py:786:14    - Unknown word (geoagg)      -- def test_geoagg_subquery(self):
+tests/gis_tests/geoapp/tests.py:804:14    - Unknown word (unionagg)    -- def test_unionagg_tolerance(self):
+tests/gis_tests/geoapp/tests.py:807:19    - Unknown word (Forney)      -- name="Forney",
+tests/gis_tests/geoapp/tests.py:810:54    - Unknown word (Forney)      -- than distance between Forney and Dallas, that's
+tests/gis_tests/geoapp/tests.py:812:9     - Unknown word (forney)      -- forney_houston = GEOSGeometry
+tests/gis_tests/geoapp/tests.py:817:13    - Unknown word (forney)      -- forney_houston.equals_exact
+tests/gis_tests/geoapp/tests.py:827:14    - Unknown word (unionagg)    -- def test_unionagg_tolerance_escaping(self
 tests/gis_tests/geoapp/tests.py:98:9      - Unknown word (nullstate)  -- nullstate = State(name="NullState
 tests/gis_tests/geoapp/tests.py:99:32     - Unknown word (nullstate)  -- self.assertEqual(4326, nullstate.poly.srid) # SRID auto
 tests/gis_tests/geogapp/models.py:18:22     - Unknown word (geogapp)    -- app_label = "geogapp"
@@ -5423,30 +5427,30 @@ tests/gis_tests/rasterapp/test_rasterfield.py:400:26    - Unknown word (polygoni
 tests/gis_tests/rasterapp/test_rasterfield.py:47:40     - Unknown word (rast)          -- RasterModel.objects.create(rast=None)
 tests/gis_tests/relatedapp/models.py:38:18     - Unknown word (curveball)  -- # Throwing a curveball w/`db_column` here.
 tests/gis_tests/relatedapp/models.py:39:55     - Unknown word (mycenter)   -- srid=2276, db_column="mycenter")
-tests/gis_tests/relatedapp/tests.py:129:9     - Unknown word (pcity)      -- pcity = City.objects.get(name
-tests/gis_tests/relatedapp/tests.py:134:14    - Unknown word (pcity)      -- c1 = pcity.location.point
-tests/gis_tests/relatedapp/tests.py:138:29    - Unknown word (pcity)      -- name="P1", city=pcity, center1=c1, center
-tests/gis_tests/relatedapp/tests.py:153:29    - Unknown word (pcity)      -- name="P2", city=pcity, center1=c1, center
-tests/gis_tests/relatedapp/tests.py:190:9     - Unknown word (gvqs)       -- gvqs = Location.objects.values
-tests/gis_tests/relatedapp/tests.py:191:9     - Unknown word (gvlqs)      -- gvlqs = Location.objects.values
-tests/gis_tests/relatedapp/tests.py:195:33    - Unknown word (gvqs)       -- m, d, t in zip(gqs, gvqs, gvlqs):
-tests/gis_tests/relatedapp/tests.py:195:39    - Unknown word (gvlqs)      -- t in zip(gqs, gvqs, gvlqs):
-tests/gis_tests/relatedapp/tests.py:235:39    - Unknown word (Kecksburg)  -- City.objects.get(name="Kecksburg").location.point.buffer
-tests/gis_tests/relatedapp/tests.py:242:24    - Unknown word (Kecksburg)  -- self.assertIn("Kecksburg", names)
-tests/gis_tests/relatedapp/tests.py:258:45    - Unknown word (Paglen)     -- be one author (Trevor Paglen) returned by this query
-tests/gis_tests/relatedapp/tests.py:25:15     - Unknown word (Kecksburg)  -- ("Kecksburg", "PA", -79.460734,
-tests/gis_tests/relatedapp/tests.py:291:44    - Unknown word (aggr)       -- ssDBFeature("supports_collect_aggr")
-tests/gis_tests/relatedapp/tests.py:317:44    - Unknown word (aggr)       -- ssDBFeature("supports_collect_aggr")
-tests/gis_tests/relatedapp/tests.py:343:59    - Unknown word (Spatia)     -- .7128 -2.006)"),  # SpatiaLite collapse to POINT
-tests/gis_tests/relatedapp/tests.py:36:43     - Unknown word (aggr)       -- essDBFeature("supports_extent_aggr")
-tests/gis_tests/relatedapp/tests.py:40:9      - Unknown word (aggs)       -- aggs = City.objects.aggregate
-tests/gis_tests/relatedapp/tests.py:44:9      - Unknown word (txpa)       -- txpa_extent = (-97.51611
-tests/gis_tests/relatedapp/tests.py:51:14     - Unknown word (aggs)       -- e3 = aggs["location__point__extent
-tests/gis_tests/relatedapp/tests.py:57:43     - Unknown word (txpa)       -- [(all_extent, e1), (txpa_extent, e2), (all_extent
-tests/gis_tests/relatedapp/tests.py:61:43     - Unknown word (aggr)       -- essDBFeature("supports_extent_aggr")
-tests/gis_tests/relatedapp/tests.py:74:42     - Unknown word (aggr)       -- lessDBFeature("supports_union_aggr")
-tests/gis_tests/relatedapp/tests.py:78:9      - Unknown word (aggs)       -- aggs = City.objects.aggregate
-tests/gis_tests/relatedapp/tests.py:98:14     - Unknown word (aggs)       -- u3 = aggs["location__point__union
+tests/gis_tests/relatedapp/tests.py:131:9     - Unknown word (pcity)      -- pcity = City.objects.get(name
+tests/gis_tests/relatedapp/tests.py:136:14    - Unknown word (pcity)      -- c1 = pcity.location.point
+tests/gis_tests/relatedapp/tests.py:140:29    - Unknown word (pcity)      -- name="P1", city=pcity, center1=c1, center
+tests/gis_tests/relatedapp/tests.py:155:29    - Unknown word (pcity)      -- name="P2", city=pcity, center1=c1, center
+tests/gis_tests/relatedapp/tests.py:192:9     - Unknown word (gvqs)       -- gvqs = Location.objects.values
+tests/gis_tests/relatedapp/tests.py:193:9     - Unknown word (gvlqs)      -- gvlqs = Location.objects.values
+tests/gis_tests/relatedapp/tests.py:197:33    - Unknown word (gvqs)       -- m, d, t in zip(gqs, gvqs, gvlqs):
+tests/gis_tests/relatedapp/tests.py:197:39    - Unknown word (gvlqs)      -- t in zip(gqs, gvqs, gvlqs):
+tests/gis_tests/relatedapp/tests.py:238:39    - Unknown word (Kecksburg)  -- City.objects.get(name="Kecksburg").location.point.buffer
+tests/gis_tests/relatedapp/tests.py:245:24    - Unknown word (Kecksburg)  -- self.assertIn("Kecksburg", names)
+tests/gis_tests/relatedapp/tests.py:261:45    - Unknown word (Paglen)     -- be one author (Trevor Paglen) returned by this query
+tests/gis_tests/relatedapp/tests.py:26:15     - Unknown word (Kecksburg)  -- ("Kecksburg", "PA", -79.460734,
+tests/gis_tests/relatedapp/tests.py:294:44    - Unknown word (aggr)       -- ssDBFeature("supports_collect_aggr")
+tests/gis_tests/relatedapp/tests.py:320:44    - Unknown word (aggr)       -- ssDBFeature("supports_collect_aggr")
+tests/gis_tests/relatedapp/tests.py:346:59    - Unknown word (Spatia)     -- .7128 -2.006)"),  # SpatiaLite collapse to POINT
+tests/gis_tests/relatedapp/tests.py:37:43     - Unknown word (aggr)       -- essDBFeature("supports_extent_aggr")
+tests/gis_tests/relatedapp/tests.py:41:9      - Unknown word (aggs)       -- aggs = City.objects.aggregate
+tests/gis_tests/relatedapp/tests.py:45:9      - Unknown word (txpa)       -- txpa_extent = (-97.51611
+tests/gis_tests/relatedapp/tests.py:52:14     - Unknown word (aggs)       -- e3 = aggs["location__point__extent
+tests/gis_tests/relatedapp/tests.py:58:43     - Unknown word (txpa)       -- [(all_extent, e1), (txpa_extent, e2), (all_extent
+tests/gis_tests/relatedapp/tests.py:62:43     - Unknown word (aggr)       -- essDBFeature("supports_extent_aggr")
+tests/gis_tests/relatedapp/tests.py:75:42     - Unknown word (aggr)       -- lessDBFeature("supports_union_aggr")
+tests/gis_tests/relatedapp/tests.py:79:9      - Unknown word (aggs)       -- aggs = City.objects.aggregate
+tests/gis_tests/relatedapp/tests.py:99:14     - Unknown word (aggs)       -- u3 = aggs["location__point__union
 tests/gis_tests/test_data.py:15:5      - Unknown word (tuplize)    -- def tuplize(seq):
 tests/gis_tests/test_data.py:18:22     - Unknown word (tuplize)    -- return tuple(tuplize(i) for i in seq)
 tests/gis_tests/test_data.py:22:5      - Unknown word (strconvert) -- def strconvert(d):
@@ -6648,18 +6652,18 @@ tests/model_fields/test_datetimefield.py:34:48     - Unknown word (datetim)    -
 tests/model_fields/test_datetimefield.py:38:34     - Unknown word (datetim)    -- assertEqual(obj.dt, datetim)
 tests/model_fields/test_durationfield.py:55:70     - Unknown word (durationmodel) -- model": "model_fields.durationmodel", '
 tests/model_fields/test_integerfield.py:273:51    - Unknown word (intput)     -- raises_error_on_invalid_intput(self):
-tests/model_fields/test_jsonfield.py:1294:9    - Unknown word (jsonnull)          -- jsonnull = JSONNull()
-tests/model_fields/test_jsonfield.py:1295:30   - Unknown word (jsonnull)          -- path, args, kwargs = jsonnull.deconstruct()
-tests/model_fields/test_jsonfield.py:1352:35   - Unknown word (jsonnull)          -- case_expression_with_jsonnull_then(self):
-tests/model_fields/test_jsonfield.py:1362:29   - Unknown word (jsonnull)          -- test_case_expr_with_jsonnull_condition(self):
-tests/model_fields/test_jsonfield.py:1421:21   - Unknown word (jsonnull)          -- def test_custom_jsonnull_encoder(self):
+tests/model_fields/test_jsonfield.py:1300:9    - Unknown word (jsonnull)          -- jsonnull = JSONNull()
+tests/model_fields/test_jsonfield.py:1301:30   - Unknown word (jsonnull)          -- path, args, kwargs = jsonnull.deconstruct()
+tests/model_fields/test_jsonfield.py:1358:35   - Unknown word (jsonnull)          -- case_expression_with_jsonnull_then(self):
+tests/model_fields/test_jsonfield.py:1368:29   - Unknown word (jsonnull)          -- test_case_expr_with_jsonnull_condition(self):
+tests/model_fields/test_jsonfield.py:1427:21   - Unknown word (jsonnull)          -- def test_custom_jsonnull_encoder(self):
 tests/model_fields/test_jsonfield.py:190:60    - Unknown word (jsonmodel)  -- model": "model_fields.jsonmodel", "pk": null}]'
 tests/model_fields/test_jsonfield.py:217:42    - Unknown word (nullablejsonmodel) -- model="model_fields.nullablejsonmodel">'
-tests/model_fields/test_jsonfield.py:896:21    - Unknown word (uffff'seq)         -- "escape\uffff'seq'\uffffue\uffff'nce"
-tests/model_fields/test_jsonfield.py:896:32    - Unknown word (uffffue)           -- "escape\uffff'seq'\uffffue\uffff'nce",
-tests/model_fields/test_jsonfield.py:896:40    - Unknown word (uffff'nce)         -- escape\uffff'seq'\uffffue\uffff'nce",
-tests/model_fields/test_jsonfield.py:918:47    - Unknown word (uffff'ca)          -- a,t{{{ch}}}e?d$\"'es\uffff'ca\uffff'pe",
-tests/model_fields/test_jsonfield.py:918:56    - Unknown word (uffff'pe)          -- }e?d$\"'es\uffff'ca\uffff'pe",
+tests/model_fields/test_jsonfield.py:902:21    - Unknown word (uffff'seq)         -- "escape\uffff'seq'\uffffue\uffff'nce"
+tests/model_fields/test_jsonfield.py:902:32    - Unknown word (uffffue)           -- "escape\uffff'seq'\uffffue\uffff'nce",
+tests/model_fields/test_jsonfield.py:902:40    - Unknown word (uffff'nce)         -- escape\uffff'seq'\uffffue\uffff'nce",
+tests/model_fields/test_jsonfield.py:924:47    - Unknown word (uffff'ca)          -- a,t{{{ch}}}e?d$\"'es\uffff'ca\uffff'pe",
+tests/model_fields/test_jsonfield.py:924:56    - Unknown word (uffff'pe)          -- }e?d$\"'es\uffff'ca\uffff'pe",
 tests/model_fields/test_uuid.py:239:33    - Unknown word (uuidmodel)  -- model": "model_fields.uuidmodel", "pk": null}]'
 tests/model_fields/test_uuid.py:243:33    - Unknown word (nullableuuidmodel) -- model": "model_fields.nullableuuidmodel", "pk": null}]'
 tests/model_fields/test_uuid.py:330:34    - Unknown word (uuidchild)         -- assertIsInstance(gc.uuidchild_ptr_id, uuid.UUID)
@@ -7516,7 +7520,7 @@ tests/serializers/test_jsonl.py:109:48    - Unknown word (invalidint) -- name": 
 tests/serializers/test_jsonl.py:111:64    - Unknown word (invalidint) -- 1) field_value was 'invalidint'"
 tests/serializers/test_jsonl.py:94:22     - Unknown word (badpk)      -- '{"pk": "badpk","model": "serializers
 tests/serializers/test_jsonl.py:98:59     - Unknown word (badpk)      -- serializers.player:pk=badpk)"
-tests/serializers/test_natural.py:26:72     - Unknown word (Anghor)     -- , data="Natural Key Anghor"),
+tests/serializers/test_natural.py:28:72     - Unknown word (Anghor)     -- , data="Natural Key Anghor"),
 tests/serializers/tests.py:246:25    - Unknown word (יוניקוד)    -- unicode_name = "יוניקוד"
 tests/serializers/tests.py:339:9     - Unknown word (deserial)   -- deserial_objs = list(serializers
 tests/serializers/tests.py:340:26    - Unknown word (deserial)   -- self.assertEqual(deserial_objs[0].object.score
@@ -8199,17 +8203,19 @@ tests/user_commands/tests.py:455:38    - Unknown word (outputwrapper)  -- manage
 tests/user_commands/tests.py:45:17     - Unknown word (unraisable) -- unraisable_exceptions = []
 tests/user_commands/tests.py:47:21     - Unknown word (unraisablehook) -- def unraisablehook(unraisable):
 tests/user_commands/tests.py:47:36     - Unknown word (unraisable)     -- def unraisablehook(unraisable):
-tests/user_commands/tests.py:483:13    - Unknown word (sdict)          -- sdict={
 tests/user_commands/tests.py:48:21     - Unknown word (unraisable)     -- unraisable_exceptions.append(unraisable
 tests/user_commands/tests.py:48:50     - Unknown word (unraisable)     -- unraisable_exceptions.append(unraisable)
+tests/user_commands/tests.py:496:60    - Unknown word (mycommand)      -- argv", ["manage.py", "mycommand", "--no-color"]):
+tests/user_commands/tests.py:498:58    - Unknown word (mycommand)      -- parser("manage.py", "mycommand")
 tests/user_commands/tests.py:49:27     - Unknown word (unraisablehook) -- sys.__unraisablehook__(unraisable)
 tests/user_commands/tests.py:49:44     - Unknown word (unraisable)     -- sys.__unraisablehook__(unraisable)
-tests/user_commands/tests.py:506:13    - Unknown word (sdict)          -- sdict={
+tests/user_commands/tests.py:511:13    - Unknown word (sdict)          -- sdict={
 tests/user_commands/tests.py:51:46     - Unknown word (unraisablehook) -- mock.patch.object(sys, "unraisablehook", unraisablehook):
 tests/user_commands/tests.py:51:63     - Unknown word (unraisablehook) -- sys, "unraisablehook", unraisablehook):
-tests/user_commands/tests.py:543:50    - Unknown word (doesnt)         -- executing a_42_command_that_doesnt_exist_42"
-tests/user_commands/tests.py:545:47    - Unknown word (doesnt)         -- ["a_42_command_that_doesnt_exist_42"])
-tests/user_commands/tests.py:574:77    - Unknown word (blub)           -- bar/bat", "bar", "flub/blub"]
+tests/user_commands/tests.py:534:13    - Unknown word (sdict)          -- sdict={
+tests/user_commands/tests.py:571:50    - Unknown word (doesnt)         -- executing a_42_command_that_doesnt_exist_42"
+tests/user_commands/tests.py:573:47    - Unknown word (doesnt)         -- ["a_42_command_that_doesnt_exist_42"])
+tests/user_commands/tests.py:602:77    - Unknown word (blub)           -- bar/bat", "bar", "flub/blub"]
 tests/utils_tests/test_archive.py:65:44     - Unknown word (leadpath)   -- entry.name.startswith("leadpath_")
 tests/utils_tests/test_autoreload.py:125:75    - Unknown word (zipf)       -- zipfile.ZIP_DEFLATED) as zipf:
 tests/utils_tests/test_autoreload.py:126:13    - Unknown word (zipf)       -- zipf.writestr("test_zipped
@@ -8318,7 +8324,7 @@ tests/utils_tests/test_http.py:567:74    - Unknown word (cimen)      -- filename
 tests/utils_tests/test_http.py:569:26    - Unknown word (espécimen)  -- (True, '"espécimen" filename'),
 tests/utils_tests/test_http.py:570:59    - Unknown word (cimen)      -- =utf-8''%22esp%C3%A9cimen%22%20filename",
 tests/utils_tests/test_http.py:572:72    - Unknown word (Afile)      -- filename*=utf-8''some%0Afile"),
-tests/utils_tests/test_lazyobject.py:499:27    - Unknown word (categoryinfo) -- lazy_category.categoryinfo
+tests/utils_tests/test_lazyobject.py:515:27    - Unknown word (categoryinfo) -- lazy_category.categoryinfo
 tests/utils_tests/test_lazyobject.py:62:22     - Unknown word (falsey)     -- def test_getattr_falsey(self):
 tests/utils_tests/test_lorem_ipsum.py:109:18    - Unknown word (Exercitationem) -- "Exercitationem perferendis, exercitationem
 tests/utils_tests/test_lorem_ipsum.py:110:18    - Unknown word (Exercitationem) -- "Exercitationem perferendis, exercitationem
