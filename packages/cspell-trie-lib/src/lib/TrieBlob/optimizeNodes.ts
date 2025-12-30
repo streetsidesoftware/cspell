@@ -101,7 +101,7 @@ function findMatchingNode(node: TrieBlobNode32, candidates: TrieBlobNode32[]): T
 function compareNodes(a: TrieBlobNode32, b: TrieBlobNode32): boolean {
     if (a.length !== b.length) return false;
     let diff = 0;
-    for (let i = 0; i < a.length && diff == 0; ++i) {
+    for (let i = 0; i < a.length && diff === 0; ++i) {
         diff = a[i] - b[i];
     }
     return !diff;
