@@ -1,6 +1,7 @@
 import type { FindResult, ITrieNode, ITrieNodeRoot } from '../ITrieNode/ITrieNode.ts';
 import { findNode } from '../ITrieNode/trie-util.ts';
 import type { PartialTrieInfo, TrieInfo } from '../ITrieNode/TrieInfo.ts';
+import type { StringTable } from '../StringTable/StringTable.ts';
 import type { TrieData } from '../TrieData.ts';
 import { endianness } from '../utils/endian.ts';
 import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.ts';
@@ -28,6 +29,7 @@ export class TrieBlob implements TrieData {
     #iTrieRoot: ITrieNodeRoot | undefined;
     /** the nodes data in 8 bits */
     #nodes8: U8Array;
+    #stringTable: StringTable;
     #beAdj = endianness() === 'BE' ? 3 : 0;
 
     readonly wordToCharacters = (word: string): string[] => [...word];
@@ -39,8 +41,9 @@ export class TrieBlob implements TrieData {
     readonly NodeChildRefShift: number;
     readonly hasPreferredSuggestions: boolean;
 
-    constructor(nodes: U32Array, info: PartialTrieInfo) {
+    constructor(nodes: U32Array, stringTable: StringTable, info: PartialTrieInfo) {
         this.nodes = nodes;
+        this.#stringTable = stringTable;
         trieBlobSort(nodes);
         this.info = mergeOptionalWithDefaults(info);
         // this.#prepLookup();
@@ -122,6 +125,10 @@ export class TrieBlob implements TrieData {
 
     getNode(prefix: string): ITrieNode | undefined {
         return findNode(this.getRoot(), prefix);
+    }
+
+    get stringTable(): StringTable {
+        return this.#stringTable;
     }
 
     /**
@@ -277,12 +284,17 @@ export class TrieBlob implements TrieData {
     }
 
     encodeBin(): U8Array {
-        return encodeTrieBlobToBTrie({ nodes: this.nodes, info: this.info, characteristics: this });
+        return encodeTrieBlobToBTrie({
+            nodes: this.nodes,
+            stringTable: this.stringTable,
+            info: this.info,
+            characteristics: this,
+        });
     }
 
     static decodeBin(blob: U8Array): TrieBlob {
         const info = decodeTrieBlobToBTrie(blob);
-        const trieBlob = new TrieBlob(info.nodes, info.info);
+        const trieBlob = new TrieBlob(info.nodes, info.stringTable, info.info);
         // console.log('decodeBin: %o', trieBlob.toJSON());
         return trieBlob;
     }

@@ -57,18 +57,29 @@ export class StringTable {
         return this.#strLenBits;
     }
 
-    getStringBytes(idx: number): Uint8Array | undefined {
+    get length(): number {
+        return this.#index.length;
+    }
+
+    getStringBytes(idx: number): U8Array | undefined {
         if (idx < 0 || idx >= this.#index.length) return undefined;
-        const value = this.#index[idx];
-        const offset = value >>> this.#strLenBits;
-        const length = value & this.#strLenMask;
-        return this.#data.subarray(offset, offset + length);
+        return this.#getBytesByIndexValue(this.#index[idx]);
     }
 
     getString(idx: number): string | undefined {
         const bytes = this.getStringBytes(idx);
         if (!bytes) return undefined;
         return this.#decoder.decode(bytes);
+    }
+
+    #getBytesByIndexValue(value: number): U8Array {
+        const offset = value >>> this.#strLenBits;
+        const length = value & this.#strLenMask;
+        return this.#data.subarray(offset, offset + length);
+    }
+
+    values(): U8Array[] {
+        return [...this.#index].map((v) => this.#getBytesByIndexValue(v));
     }
 
     toString(): string {
@@ -85,7 +96,7 @@ export class StringTable {
 }
 
 export class StringTableBuilder {
-    #buffers: (number[] | Uint8Array)[] = [];
+    #data: (number[] | Uint8Array)[] = [];
     #encoder = new TextEncoder();
     #lookupTrie = new GTrie<number, number>();
     #locked = false;
@@ -97,7 +108,7 @@ export class StringTableBuilder {
         if (found !== undefined) {
             return found;
         }
-        const idx = this.#buffers.push(bytes) - 1;
+        const idx = this.#data.push(bytes) - 1;
         this.#lookupTrie.insert(bytes, idx);
         this.#maxStrLen = Math.max(this.#maxStrLen, bytes.length);
         return idx;
@@ -108,20 +119,28 @@ export class StringTableBuilder {
         return this.addStringBytes(bytes);
     }
 
+    getEntry(idx: number): number[] | Uint8Array | undefined {
+        return this.#data[idx];
+    }
+
+    get length(): number {
+        return this.#data.length;
+    }
+
     build(): StringTable {
         this.#locked = true;
 
-        if (!this.#buffers.length) {
+        if (!this.#data.length) {
             return new StringTable([], new Uint8Array(0), 8);
         }
 
         // sorted by size descending
-        const sortedBySize = this.#buffers.map((b, i) => ({ b, i })).sort((a, b) => b.b.length - a.b.length);
+        const sortedBySize = this.#data.map((b, i) => ({ b, i })).sort((a, b) => b.b.length - a.b.length);
         const byteValues: number[] = [];
 
         const strLenBits = Math.ceil(Math.log2(this.#maxStrLen + 1));
         const strLenMask = (1 << strLenBits) - 1;
-        const index: number[] = new Array(this.#buffers.length);
+        const index: number[] = new Array(this.#data.length);
 
         for (const { b, i } of sortedBySize) {
             let offset = findValues(b);
@@ -162,6 +181,17 @@ export class StringTableBuilder {
             return offset;
         }
     }
+
+    static fromStringTable(table: StringTable): StringTableBuilder {
+        const builder = new StringTableBuilder();
+        const values = table.values();
+        const len = values.length;
+        for (let i = 0; i < len; ++i) {
+            builder.addStringBytes(values[i]);
+        }
+
+        return builder;
+    }
 }
 
 function getStringTableBinaryFormat(): BinaryFormat {
@@ -176,7 +206,7 @@ function getStringTableBinaryFormat(): BinaryFormat {
         .build();
 }
 
-export function encodeStringTableToBinary(table: StringTable, endian: 'LE' | 'BE'): U8Array {
+export function encodeStringTableToBinary(table: StringTable, endian?: 'LE' | 'BE'): U8Array {
     const strLenBits = table.strLenBits;
     const offsetBits = Math.ceil(Math.log2(table.charData.length + 1));
     const minIndexBits = strLenBits + offsetBits;
@@ -198,7 +228,10 @@ export function encodeStringTableToBinary(table: StringTable, endian: 'LE' | 'BE
     return builder.build();
 }
 
-export function decodeStringTableFromBinary(data: U8Array, endian: 'LE' | 'BE'): StringTable {
+export function decodeStringTableFromBinary(data: U8Array, endian?: 'LE' | 'BE'): StringTable {
+    if (!data?.length) {
+        return new StringTable([], new Uint8Array(0), 8);
+    }
     const reader = new BinaryDataReader(data, getStringTableBinaryFormat(), endian);
     const indexBits = reader.getUint8('indexBits');
     const strLenBits = reader.getUint8('strLenBits');

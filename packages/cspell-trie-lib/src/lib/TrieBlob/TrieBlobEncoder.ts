@@ -6,6 +6,7 @@ import {
     parseTrieCharacteristics,
     parseTrieInfoFlags,
 } from '../ITrieNode/TrieInfo.ts';
+import { decodeStringTableFromBinary, encodeStringTableToBinary } from '../StringTable/StringTable.ts';
 import { assert } from '../utils/assert.ts';
 import { toUint8Array } from '../utils/rawData.ts';
 import type { TrieBlobInfo } from './TrieBlobInfo.ts';
@@ -23,6 +24,7 @@ function getBinaryFormat(): BinaryFormat {
         .addString('reserved0', 'Old Pointer to TrieInfo JSON string', 8)
         .addString('trieInfo', 'Pointer to TrieInfo JSON string', 16)
         .addString('characteristics', 'Available characteristic values', 8)
+        .addUint8ArrayPtr('stringTable', 'Pointer to String Table data')
         .addString('reserved', 'Reserved space', 64)
         .build();
 }
@@ -35,6 +37,10 @@ export function encodeTrieBlobToBTrie(blob: TrieBlobInfo): U8Array {
     builder.setPtrUint32Array('nodes', blob.nodes);
     builder.setString('trieInfo', cvtTrieInfoToFlags(blob.info));
     builder.setString('characteristics', cvtTrieCharacteristicsToFlags(blob.characteristics));
+
+    const stringTableData = encodeStringTableToBinary(blob.stringTable);
+    builder.setPtrUint8Array('stringTable', stringTableData);
+
     const data = builder.build();
     return data;
 }
@@ -59,7 +65,11 @@ export function decodeTrieBlobToBTrie(blob: U8Array): TrieBlobInfo {
     const nodes = reader.getPtrUint32Array('nodes');
     const info = parseTrieInfoFlags(reader.getString('trieInfo'));
     const characteristics = parseTrieCharacteristics(reader.getString('characteristics'));
-    return { nodes, info, characteristics };
+
+    const stringTableData = reader.getPtrUint8Array('stringTable');
+    const stringTable = decodeStringTableFromBinary(stringTableData, reader.endian);
+
+    return { nodes, stringTable, info, characteristics };
 }
 
 export class ErrorDecodeTrieBlob extends Error {

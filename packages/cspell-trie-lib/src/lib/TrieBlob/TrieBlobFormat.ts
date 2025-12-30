@@ -11,6 +11,7 @@
  * The format consists of a series of nodes.
  * Node 0 is always the root node.
  * Node 1 is always the End of Word (EOW) node.
+ * Nodes 2...N are the other nodes.
  *
  */
 
@@ -20,7 +21,8 @@
  * The header is a 32-bit unsigned integer with the following layout:
  * - Bits 0-7: Number of children (up to 255)
  * - Bit 8: End of Word (EOW) flag
- * - Bits 9-31: Reserved for future use
+ * - Bits 9-29: Prefix Index into the String Table (21 bits, up to 2,097,151)
+ * - Bits 30-31: Reserved for future use
  *
  * Each child entry is a 32-bit unsigned integer with the following layout:
  * - Bits 0-7: Character index (0-255)
@@ -32,6 +34,9 @@
 export const NodeHeaderNumChildrenBits = 8 as const;
 export const NodeHeaderNumChildrenShift = 0 as const;
 export const NodeHeaderEOWMask: number = 0x0000_0100 & 0xffff; // (& 0xffff) is to ensure it is treated like an integer.
+export const NodeHeaderPrefixMask: number = 0x3fff_fe00 & 0xffff_ffff; // (& 0xffff) is to ensure it is treated like an integer.
+export const NodeHeaderPrefixShift: number = 9 as const;
+export const NodeHeaderPrefixBits: number = 21 as const;
 export const NodeHeaderNumChildrenMask: number = (1 << NodeHeaderNumChildrenBits) - 1;
 
 // Node child entry constants

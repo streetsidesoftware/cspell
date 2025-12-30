@@ -1,4 +1,5 @@
 import type { PartialTrieInfo, TrieCharacteristics, TrieInfo } from '../ITrieNode/TrieInfo.ts';
+import type { StringTable } from '../StringTable/StringTable.ts';
 import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.ts';
 import type { TrieBlobNode32 } from './TrieBlobFormat.ts';
 
@@ -6,15 +7,18 @@ type Nodes = TrieBlobNode32[];
 
 export class FastTrieBlobInternals {
     readonly info: Readonly<TrieInfo>;
+    readonly stringTable: StringTable;
     readonly nodes: Nodes;
     readonly characteristics: Readonly<Partial<TrieCharacteristics>>;
 
     constructor(
         nodes: Nodes,
+        stringTable: StringTable,
         info: Readonly<PartialTrieInfo>,
         characteristics: Readonly<Partial<TrieCharacteristics>>,
     ) {
         this.nodes = nodes;
+        this.stringTable = stringTable;
 
         this.info = mergeOptionalWithDefaults(info);
         this.characteristics = characteristics;
@@ -39,8 +43,8 @@ export class FastTrieBlobInternalsAndMethods extends FastTrieBlobInternals imple
     readonly hasCompoundWords: boolean;
     readonly hasNonStrictWords: boolean;
 
-    constructor(nodes: Nodes, info: PartialTrieInfo, trieMethods: Readonly<TrieMethods>) {
-        super(nodes, info, trieMethods);
+    constructor(nodes: Nodes, stringTable: StringTable, info: PartialTrieInfo, trieMethods: Readonly<TrieMethods>) {
+        super(nodes, stringTable, info, trieMethods);
         this.nodeFindExact = trieMethods.nodeFindExact;
         this.nodeGetChild = trieMethods.nodeGetChild;
         this.isForbidden = trieMethods.isForbidden;

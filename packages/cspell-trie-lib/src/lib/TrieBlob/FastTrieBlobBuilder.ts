@@ -1,6 +1,7 @@
 import type { BuilderCursor, TrieBuilder } from '../Builder/index.ts';
 import type { PartialTrieInfo, TrieCharacteristics, TrieInfo } from '../ITrieNode/TrieInfo.ts';
 import { TrieInfoBuilder } from '../ITrieNode/TrieInfo.ts';
+import { StringTableBuilder } from '../StringTable/StringTable.ts';
 import type { TrieNode, TrieRoot } from '../TrieNode/TrieNode.ts';
 import { assert } from '../utils/assert.ts';
 import { assertValidUtf16Character } from '../utils/text.ts';
@@ -8,7 +9,7 @@ import { CharIndexBuilder } from './CharIndex.ts';
 import type { NodeToJSON } from './FastTrieBlob.ts';
 import { FastTrieBlob, nodesToJSON } from './FastTrieBlob.ts';
 import { FastTrieBlobInternals, sortNodes } from './FastTrieBlobInternals.ts';
-import { optimizeNodes } from './optimizeNodes.ts';
+import { calculateByteSize, optimizeNodes, optimizeNodesWithStringTable } from './optimizeNodes.ts';
 import { resolveMap } from './resolveMap.ts';
 import { TrieBlob } from './TrieBlob.ts';
 import { NodeChildIndexRefShift, NodeHeaderEOWMask, NodeMaskCharByte } from './TrieBlobFormat.ts';
@@ -337,8 +338,22 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
         );
 
         const nodes = optimize ? optimizeNodes(sortedNodes) : sortedNodes;
+        const stringTable = new StringTableBuilder().build();
 
-        return FastTrieBlob.create(new FastTrieBlobInternals(nodes, info.info, info.characteristics));
+        if (optimize) {
+            const opt = optimizeNodesWithStringTable({ nodes, stringTable: new StringTableBuilder().build() });
+
+            console.log(
+                'optimizeNodesWithStringTable reduced size from %d (%d bytes) to %d (%d bytes) with string table size %d bytes',
+                nodes.length,
+                calculateByteSize(nodes),
+                opt.nodes.length,
+                calculateByteSize(opt.nodes),
+                opt.stringTable.charData.length,
+            );
+        }
+
+        return FastTrieBlob.create(new FastTrieBlobInternals(nodes, stringTable, info.info, info.characteristics));
     }
 
     toJSON(): {

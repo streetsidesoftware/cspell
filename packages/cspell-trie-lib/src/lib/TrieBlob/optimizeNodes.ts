@@ -2,6 +2,8 @@ import { type StringTable, StringTableBuilder } from '../StringTable/StringTable
 import {
     type FastTrieBlobNodes32,
     NodeHeaderEOWMask,
+    NodeHeaderPrefixMask,
+    NodeHeaderPrefixShift,
     NodeMaskCharByte,
     type TrieBlobNode32,
 } from './TrieBlobFormat.ts';
@@ -147,13 +149,121 @@ function compactNodes(nodes: FastTrieBlobNodes32): FastTrieBlobNodes32 {
     }
 }
 
-interface PfxStackItem {
-    charCodes: number[];
-    nodeIdx: number;
-    endIdx: number;
+interface NodesAndStringTable {
+    nodes: FastTrieBlobNodes32;
+    stringTable: StringTable;
+}
+
+interface NodesAndStringTableBuilder {
+    nodes: FastTrieBlobNodes32;
+    stringTableBuilder: StringTableBuilder;
+}
+
+export function calculateByteSize(nodes: FastTrieBlobNodes32): number {
+    let count = 0;
+    for (let i = nodes.length - 1; i >= 0; --i) {
+        count += nodes[i].length;
+    }
+    return count * 4; // each entry is 4 bytes
+}
+
+function copyNodes(nodes: FastTrieBlobNodes32): FastTrieBlobNodes32 {
+    const size = calculateByteSize(nodes);
+    const dst: FastTrieBlobNodes32 = Array(nodes.length);
+    const buffer = new ArrayBuffer(size);
+
+    for (let i = 0, offset = 0; i < nodes.length; ++i) {
+        const node = nodes[i];
+        const nodeCopy = new Uint32Array(buffer, offset, node.length);
+        nodeCopy.set(node);
+        dst[i] = nodeCopy;
+        offset += nodeCopy.byteLength;
+    }
+
+    return dst;
+}
+
+function copyNodesAndStringTable(src: NodesAndStringTable): NodesAndStringTableBuilder {
+    const nodes = copyNodes(src.nodes);
+    const stringTableBuilder = StringTableBuilder.fromStringTable(src.stringTable);
+    return { nodes, stringTableBuilder };
+}
+
+export function optimizeNodesWithStringTable(src: NodesAndStringTable): NodesAndStringTable {
+    const { nodes, stringTableBuilder: builder } = copyNodesAndStringTable(src);
+
+    if (!builder.length) {
+        // Add the empty string to take up index 0.
+        builder.addString('');
+    }
+
+    walkNodes(nodes, 0, { after: processNode });
+
+    return { nodes: optimizeNodes(nodes), stringTable: builder.build() };
+
+    /**
+     * If possible, replace the current node with a prefix node.
+     * @param nodeIdx - node to process
+     */
+    function processNode(nodeIdx: number): void {
+        const node = nodes[nodeIdx];
+        if (node.length !== 2) return;
+        const header = node[0];
+        // An end of word node cannot be merged with a prefix.
+        if ((header & NodeHeaderEOWMask) !== 0) return;
+        // Already has a prefix, skip.
+        if (header & NodeHeaderPrefixMask) return;
+
+        const childEntry = node[1];
+        const charByte = childEntry & NodeMaskCharByte;
+        const childNode = nodes[childEntry >>> 8];
+
+        const childHeader = childNode[0];
+        const childPrefixIdx = (childHeader & NodeHeaderPrefixMask) >>> NodeHeaderPrefixShift;
+        const childBytes = builder.getEntry(childPrefixIdx) || [];
+        const prefixBytes = [charByte, ...childBytes];
+        const prefixIdx = builder.addStringBytes(prefixBytes);
+
+        const newNode = new Uint32Array(childNode);
+        newNode[0] = (prefixIdx << NodeHeaderPrefixShift) | (childHeader & ~NodeHeaderPrefixMask);
+        nodes[nodeIdx] = newNode;
+    }
+}
+
+interface NodeWalkOptions {
+    after?: (nodeIdx: number) => void;
+    before?: (nodeIdx: number) => void;
+}
+
+function walkNodes(nodes: FastTrieBlobNodes32, nodeIdx: number, options: NodeWalkOptions): void {
+    const after = options.after || (() => undefined);
+    const before = options.before || (() => undefined);
+
+    function walk(nodeIdx: number): void {
+        before(nodeIdx);
+
+        const node = nodes[nodeIdx];
+        const count = node.length - 1;
+
+        for (let i = 1; i <= count; ++i) {
+            const entry = node[i];
+            const childIdx = entry >> 8;
+            walk(childIdx);
+        }
+
+        after(nodeIdx);
+    }
+
+    walk(nodeIdx);
 }
 
 export function extractStringTable<T extends number[] | Uint32Array>(nodes: T[]): StringTable {
+    interface PfxStackItem {
+        charCodes: number[];
+        nodeIdx: number;
+        endIdx: number;
+    }
+
     const builder = new StringTableBuilder();
     const seen: Set<number> = new Set();
     const eowMask = NodeHeaderEOWMask;
