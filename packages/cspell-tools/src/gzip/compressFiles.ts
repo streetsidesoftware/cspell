@@ -38,7 +38,7 @@ export function compressSync(buf: string | Uint8Array | Buffer, os?: OSFlags): U
 }
 
 function fixOSSystemID(zBuf: Uint8Array, os: OSFlags = OSFlags.Unix): Uint8Array {
-    const osFlag = os == OSFlags.auto ? zBuf[OSSystemIDOffset] : os;
+    const osFlag = os === OSFlags.auto ? zBuf[OSSystemIDOffset] : os;
     zBuf[OSSystemIDOffset] = osFlag;
     return zBuf;
 }

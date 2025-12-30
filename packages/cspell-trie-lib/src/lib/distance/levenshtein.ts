@@ -38,8 +38,8 @@ export function levenshteinDistance(a: string, b: string): number {
 
         for (let i = 2, i1 = 1; i <= nA; i1 = i, ++i) {
             const ac = aa[i];
-            const c = pRow[i1] + (ac == bc ? 0 : 1);
-            const ct = ac == bp && ap == bc ? ppRow[i1 - 1] + 1 : c;
+            const c = pRow[i1] + (ac === bc ? 0 : 1);
+            const ct = ac === bp && ap === bc ? ppRow[i1 - 1] + 1 : c;
             row[i] = Math.min(
                 c, // substitute
                 ct, // transpose
@@ -142,8 +142,8 @@ export function selectNearestWords(
 
             for (let i = 2, i1 = 1; i <= nA; i1 = i, ++i) {
                 const ac = aa[i];
-                const c = pRow[i1] + (ac == bc ? 0 : 1);
-                const ct = ac == bp && ap == bc ? ppRow[i1 - 1] + 1 : c;
+                const c = pRow[i1] + (ac === bc ? 0 : 1);
+                const ct = ac === bp && ap === bc ? ppRow[i1 - 1] + 1 : c;
                 const v = Math.min(
                     c, // substitute
                     ct, // transpose

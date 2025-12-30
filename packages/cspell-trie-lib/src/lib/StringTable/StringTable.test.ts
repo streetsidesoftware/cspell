@@ -76,4 +76,21 @@ describe('StringTableBuilder', () => {
         const retrieved = indices.map((i) => decodedTable.getString(i));
         expect(retrieved).toEqual(segments);
     });
+
+    test('toJSON', () => {
+        const builder = new StringTableBuilder();
+
+        segments.forEach((s) => builder.addString(s));
+        const table = builder.build();
+        const json = table.toJSON();
+        expect(json).toMatchSnapshot();
+    });
+
+    test('toString', () => {
+        const builder = new StringTableBuilder();
+
+        segments.forEach((s) => builder.addString(s));
+        const table = builder.build();
+        expect(table.toString()).toMatchSnapshot();
+    });
 });
