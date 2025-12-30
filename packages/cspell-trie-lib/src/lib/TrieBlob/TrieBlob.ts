@@ -150,38 +150,41 @@ export class TrieBlob implements TrieData {
      */
     #findNode(nodeIdx: number, text: string): number | undefined {
         // Using magic numbers in #findNode improves the performance by about 10%.
-        const p = { text, offset: 0, bytes: 0 };
 
         const _nodes = this.nodes;
         const _nodes8 = this.#nodes8;
 
-        for (; p.offset < p.text.length; ) {
+        const p: TextOffsetCode = { text, offset: 0, code: 0 };
+        for (; p.code || p.offset < p.text.length; p.code >>>= 8) {
             const nodes = _nodes;
             const nodes8 = _nodes8;
-            let node = nodes[nodeIdx];
+            const node = nodes[nodeIdx];
+            p.code = p.code || encodeTextToUtf8_32Rev(p);
+            const prefixIdx = node >>> 9;
+            const pfx = prefixIdx ? this.#stringTable.getStringBytes(prefixIdx) : undefined;
+            if (pfx && !matchPrefix(p, pfx)) return undefined;
 
-            for (let code = encodeTextToUtf8_32Rev(p); code; code >>>= 8) {
-                const charVal = code & 0xff;
-                const count = node & 0xff; // TrieBlob.NodeMaskNumChildren
-                const idx4 = nodeIdx << 2;
-                // Binary search for the character in the child nodes.
-                if (count > 15) {
-                    const pEnd = idx4 + (count << 2);
-                    let i = idx4 + 4;
-                    let j = pEnd;
-                    while (j - i >= 4) {
-                        const m = ((i + j) >> 1) & ~3;
-                        if (nodes8[m] < charVal) {
-                            i = m + 4;
-                        } else {
-                            j = m;
-                        }
+            const code = p.code;
+
+            const charVal = code & 0xff;
+            const count = node & 0xff; // TrieBlob.NodeMaskNumChildren
+            const idx4 = nodeIdx << 2;
+            // Binary search for the character in the child nodes.
+            if (count > 15) {
+                const pEnd = idx4 + (count << 2);
+                let i = idx4 + 4;
+                let j = pEnd;
+                while (j - i >= 4) {
+                    const m = ((i + j) >> 1) & ~3;
+                    if (nodes8[m] < charVal) {
+                        i = m + 4;
+                    } else {
+                        j = m;
                     }
-                    if (i > pEnd || nodes8[i] !== charVal) return undefined;
-                    nodeIdx = nodes[i >> 2] >>> 8; // TrieBlob.NodeChildRefShift
-                    node = nodes[nodeIdx];
-                    continue;
                 }
+                if (i > pEnd || nodes8[i] !== charVal) return undefined;
+                nodeIdx = nodes[i >> 2] >>> 8; // TrieBlob.NodeChildRefShift
+            } else {
                 let i = idx4 + count * 4;
                 for (; i > idx4; i -= 4) {
                     if (nodes8[i] === charVal) {
@@ -190,7 +193,6 @@ export class TrieBlob implements TrieData {
                 }
                 if (i <= idx4) return undefined;
                 nodeIdx = nodes[i >> 2] >>> 8; // TrieBlob.NodeChildRefShift
-                node = nodes[nodeIdx];
             }
         }
         return nodeIdx;
@@ -440,4 +442,24 @@ function trieBlobSort(data: U32Array) {
         const sorted = data.slice(start, end).sort((a, b) => (a & MaskChildCharIndex) - (b & MaskChildCharIndex));
         sorted.forEach((v, i) => (data[start + i] = v));
     }
+}
+
+interface TextOffsetCode {
+    text: string;
+    offset: number;
+    code: number;
+}
+
+function matchPrefix(p: TextOffsetCode, prefix: U8Array | undefined): boolean {
+    if (!prefix?.length) return true;
+
+    const len = prefix.length;
+    for (let i = 0; i < len; ++i) {
+        const charVal = p.code & 0xff;
+        if (prefix[i] !== charVal) return false;
+        p.code >>>= 8;
+        p.code = p.code || encodeTextToUtf8_32Rev(p);
+    }
+
+    return true;
 }
