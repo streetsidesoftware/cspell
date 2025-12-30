@@ -70,6 +70,18 @@ export class StringTable {
         if (!bytes) return undefined;
         return this.#decoder.decode(bytes);
     }
+
+    toString(): string {
+        return [...this.#index].map((_, i) => this.getString(i) || '').join(', ');
+    }
+
+    toJSON(): { index: number[]; data: number[]; strLenBits: number } {
+        return {
+            index: [...this.#index],
+            data: [...this.#data],
+            strLenBits: this.#strLenBits,
+        };
+    }
 }
 
 export class StringTableBuilder {

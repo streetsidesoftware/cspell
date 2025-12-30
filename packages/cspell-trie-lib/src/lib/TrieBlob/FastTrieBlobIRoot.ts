@@ -1,6 +1,7 @@
 import type { FindResult, ITrieNode, ITrieNodeId, ITrieNodeRoot } from '../ITrieNode/ITrieNode.ts';
 import type { TrieInfo } from '../ITrieNode/TrieInfo.ts';
 import type { FastTrieBlobInternalsAndMethods } from './FastTrieBlobInternals.ts';
+import { NodeChildIndexRefShift, NodeHeaderEOWMask, NodeMaskCharByte } from './TrieBlobFormat.ts';
 import { Utf8Accumulator } from './Utf8.ts';
 
 const EmptyKeys: readonly string[] = Object.freeze([]);
@@ -30,7 +31,7 @@ class FastTrieBlobINode implements ITrieNode {
         this.nodeIdx = nodeIdx;
         const node = trie.nodes[nodeIdx];
         this.node = node;
-        this.eow = !!(node[0] & trie.NodeMaskEOW);
+        this.eow = !!(node[0] & NodeHeaderEOWMask);
         this._count = node.length - 1;
         this.id = nodeIdx;
         this.findExact = (word: string) => trie.nodeFindExact(nodeIdx, word);
@@ -84,7 +85,7 @@ class FastTrieBlobINode implements ITrieNode {
     child(keyIdx: number): ITrieNode {
         if (!this._values && !this.containsChainedIndexes()) {
             const n = this.node[keyIdx + 1];
-            const nodeIdx = n >>> this.trie.NodeChildRefShift;
+            const nodeIdx = n >>> NodeChildIndexRefShift;
             return new FastTrieBlobINode(this.trie, nodeIdx);
         }
         return this.values()[keyIdx];
@@ -111,7 +112,7 @@ class FastTrieBlobINode implements ITrieNode {
         if (this._chained !== undefined) return this._chained;
         // scan the node to see if there are encoded entries.
         let found = false;
-        const NodeMaskChildCharIndex = this.trie.NodeMaskChildCharIndex;
+        const NodeMaskChildCharIndex = NodeMaskCharByte;
         const len = this._count;
         const node = this.node;
         for (let i = 1; i <= len && !found; ++i) {
@@ -129,8 +130,8 @@ class FastTrieBlobINode implements ITrieNode {
         if (!this.containsChainedIndexes()) {
             const entries = Array<[string, NodeIndex]>(this._count);
             const nodes = this.node;
-            const NodeMaskChildCharIndex = this.trie.NodeMaskChildCharIndex;
-            const RefShift = this.trie.NodeChildRefShift;
+            const NodeMaskChildCharIndex = NodeMaskCharByte;
+            const RefShift = NodeChildIndexRefShift;
             for (let i = 0; i < this._count; ++i) {
                 const entry = nodes[i + 1];
                 const codePoint = entry & NodeMaskChildCharIndex;
@@ -153,8 +154,8 @@ class FastTrieBlobINode implements ITrieNode {
             /** the decoder */
             acc: Utf8Accumulator;
         }
-        const NodeMaskChildCharIndex = this.trie.NodeMaskChildCharIndex;
-        const NodeChildRefShift = this.trie.NodeChildRefShift;
+        const NodeMaskChildCharIndex = NodeMaskCharByte;
+        const nodeChildRefShift = NodeChildIndexRefShift;
         const nodes = this.trie.nodes;
         const acc = Utf8Accumulator.create();
         const stack: StackItem[] = [{ n: this.node, c: 1, acc }];
@@ -177,11 +178,11 @@ class FastTrieBlobINode implements ITrieNode {
             const codePoint = acc.decode(charIdx);
             if (codePoint !== undefined) {
                 const char = String.fromCodePoint(codePoint);
-                const nodeIdx = entry >>> NodeChildRefShift;
+                const nodeIdx = entry >>> nodeChildRefShift;
                 entries[eIdx++] = [char, nodeIdx];
                 continue;
             }
-            const idx = entry >>> NodeChildRefShift;
+            const idx = entry >>> nodeChildRefShift;
             const ss = stack[++depth];
             if (ss) {
                 ss.n = nodes[idx];
