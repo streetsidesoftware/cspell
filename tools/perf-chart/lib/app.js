@@ -35,7 +35,7 @@ var require_error = /* @__PURE__ */ __commonJSMin(((exports) => {
 	/**
 	* CommanderError class
 	*/
-	var CommanderError$3 = class extends Error {
+	var CommanderError = class extends Error {
 		/**
 		* Constructs the CommanderError class
 		* @param {number} exitCode suggested exit code which could be used with process.exit
@@ -54,7 +54,7 @@ var require_error = /* @__PURE__ */ __commonJSMin(((exports) => {
 	/**
 	* InvalidArgumentError class
 	*/
-	var InvalidArgumentError$4 = class extends CommanderError$3 {
+	var InvalidArgumentError = class extends CommanderError {
 		/**
 		* Constructs the InvalidArgumentError class
 		* @param {string} [message] explanation of why argument is invalid
@@ -65,15 +65,15 @@ var require_error = /* @__PURE__ */ __commonJSMin(((exports) => {
 			this.name = this.constructor.name;
 		}
 	};
-	exports.CommanderError = CommanderError$3;
-	exports.InvalidArgumentError = InvalidArgumentError$4;
+	exports.CommanderError = CommanderError;
+	exports.InvalidArgumentError = InvalidArgumentError;
 }));
 
 //#endregion
 //#region ../../node_modules/.pnpm/commander@14.0.2/node_modules/commander/lib/argument.js
 var require_argument = /* @__PURE__ */ __commonJSMin(((exports) => {
-	const { InvalidArgumentError: InvalidArgumentError$3 } = require_error();
-	var Argument$3 = class {
+	const { InvalidArgumentError } = require_error();
+	var Argument = class {
 		/**
 		* Initialize a new command argument with the given name and description.
 		* The default is that the argument is required, and you can explicitly
@@ -155,7 +155,7 @@ var require_argument = /* @__PURE__ */ __commonJSMin(((exports) => {
 		choices(values) {
 			this.argChoices = values.slice();
 			this.parseArg = (arg, previous) => {
-				if (!this.argChoices.includes(arg)) throw new InvalidArgumentError$3(`Allowed choices are ${this.argChoices.join(", ")}.`);
+				if (!this.argChoices.includes(arg)) throw new InvalidArgumentError(`Allowed choices are ${this.argChoices.join(", ")}.`);
 				if (this.variadic) return this._collectValue(arg, previous);
 				return arg;
 			};
@@ -187,18 +187,18 @@ var require_argument = /* @__PURE__ */ __commonJSMin(((exports) => {
 	* @return {string}
 	* @private
 	*/
-	function humanReadableArgName$2(arg) {
+	function humanReadableArgName(arg) {
 		const nameOutput = arg.name() + (arg.variadic === true ? "..." : "");
 		return arg.required ? "<" + nameOutput + ">" : "[" + nameOutput + "]";
 	}
-	exports.Argument = Argument$3;
-	exports.humanReadableArgName = humanReadableArgName$2;
+	exports.Argument = Argument;
+	exports.humanReadableArgName = humanReadableArgName;
 }));
 
 //#endregion
 //#region ../../node_modules/.pnpm/commander@14.0.2/node_modules/commander/lib/help.js
 var require_help = /* @__PURE__ */ __commonJSMin(((exports) => {
-	const { humanReadableArgName: humanReadableArgName$1 } = require_argument();
+	const { humanReadableArgName } = require_argument();
 	/**
 	* TypeScript import types for JSDoc, used by Visual Studio Code IntelliSense and `npm run typescript-checkJS`
 	* https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html#import-types
@@ -206,7 +206,7 @@ var require_help = /* @__PURE__ */ __commonJSMin(((exports) => {
 	* @typedef { import("./command.js").Command } Command
 	* @typedef { import("./option.js").Option } Option
 	*/
-	var Help$3 = class {
+	var Help = class {
 		constructor() {
 			this.helpWidth = void 0;
 			this.minWidthToWrap = 40;
@@ -308,7 +308,7 @@ var require_help = /* @__PURE__ */ __commonJSMin(((exports) => {
 		* @returns {string}
 		*/
 		subcommandTerm(cmd) {
-			const args = cmd.registeredArguments.map((arg) => humanReadableArgName$1(arg)).join(" ");
+			const args = cmd.registeredArguments.map((arg) => humanReadableArgName(arg)).join(" ");
 			return cmd._name + (cmd._aliases[0] ? "|" + cmd._aliases[0] : "") + (cmd.options.length ? " [options]" : "") + (args ? " " + args : "");
 		}
 		/**
@@ -531,7 +531,7 @@ var require_help = /* @__PURE__ */ __commonJSMin(((exports) => {
 		* @returns {number}
 		*/
 		displayWidth(str) {
-			return stripColor$1(str).length;
+			return stripColor(str).length;
 		}
 		/**
 		* Style the title for displaying in the help. Called with 'Usage:', 'Options:', etc.
@@ -679,18 +679,18 @@ var require_help = /* @__PURE__ */ __commonJSMin(((exports) => {
 	* @returns {string}
 	* @package
 	*/
-	function stripColor$1(str) {
+	function stripColor(str) {
 		return str.replace(/\x1b\[\d*(;\d*)*m/g, "");
 	}
-	exports.Help = Help$3;
-	exports.stripColor = stripColor$1;
+	exports.Help = Help;
+	exports.stripColor = stripColor;
 }));
 
 //#endregion
 //#region ../../node_modules/.pnpm/commander@14.0.2/node_modules/commander/lib/option.js
 var require_option = /* @__PURE__ */ __commonJSMin(((exports) => {
-	const { InvalidArgumentError: InvalidArgumentError$2 } = require_error();
-	var Option$3 = class {
+	const { InvalidArgumentError } = require_error();
+	var Option = class {
 		/**
 		* Initialize a new `Option` with the given `flags` and `description`.
 		*
@@ -841,7 +841,7 @@ var require_option = /* @__PURE__ */ __commonJSMin(((exports) => {
 		choices(values) {
 			this.argChoices = values.slice();
 			this.parseArg = (arg, previous) => {
-				if (!this.argChoices.includes(arg)) throw new InvalidArgumentError$2(`Allowed choices are ${this.argChoices.join(", ")}.`);
+				if (!this.argChoices.includes(arg)) throw new InvalidArgumentError(`Allowed choices are ${this.argChoices.join(", ")}.`);
 				if (this.variadic) return this._collectValue(arg, previous);
 				return arg;
 			};
@@ -905,7 +905,7 @@ var require_option = /* @__PURE__ */ __commonJSMin(((exports) => {
 	* use cases, but is tricky for others where we want separate behaviours despite
 	* the single shared option value.
 	*/
-	var DualOptions$1 = class {
+	var DualOptions = class {
 		/**
 		* @param {Option[]} options
 		*/
@@ -986,8 +986,8 @@ var require_option = /* @__PURE__ */ __commonJSMin(((exports) => {
 			longFlag
 		};
 	}
-	exports.Option = Option$3;
-	exports.DualOptions = DualOptions$1;
+	exports.Option = Option;
+	exports.DualOptions = DualOptions;
 }));
 
 //#endregion
@@ -1015,7 +1015,7 @@ var require_suggestSimilar = /* @__PURE__ */ __commonJSMin(((exports) => {
 	* @param {string[]} candidates
 	* @returns {string}
 	*/
-	function suggestSimilar$1(word, candidates) {
+	function suggestSimilar(word, candidates) {
 		if (!candidates || candidates.length === 0) return "";
 		candidates = Array.from(new Set(candidates));
 		const searchingOptions = word.startsWith("--");
@@ -1043,7 +1043,7 @@ var require_suggestSimilar = /* @__PURE__ */ __commonJSMin(((exports) => {
 		if (similar.length === 1) return `\n(Did you mean ${similar[0]}?)`;
 		return "";
 	}
-	exports.suggestSimilar = suggestSimilar$1;
+	exports.suggestSimilar = suggestSimilar;
 }));
 
 //#endregion
@@ -1054,12 +1054,12 @@ var require_command = /* @__PURE__ */ __commonJSMin(((exports) => {
 	const path = __require("node:path");
 	const fs = __require("node:fs");
 	const process = __require("node:process");
-	const { Argument: Argument$2, humanReadableArgName } = require_argument();
-	const { CommanderError: CommanderError$2 } = require_error();
-	const { Help: Help$2, stripColor } = require_help();
-	const { Option: Option$2, DualOptions } = require_option();
+	const { Argument, humanReadableArgName } = require_argument();
+	const { CommanderError } = require_error();
+	const { Help, stripColor } = require_help();
+	const { Option, DualOptions } = require_option();
 	const { suggestSimilar } = require_suggestSimilar();
-	var Command$2 = class Command$2 extends EventEmitter {
+	var Command = class Command extends EventEmitter {
 		/**
 		* Initialize a new `Command`.
 		*
@@ -1217,7 +1217,7 @@ var require_command = /* @__PURE__ */ __commonJSMin(((exports) => {
 		* @return {Command} new command
 		*/
 		createCommand(name) {
-			return new Command$2(name);
+			return new Command(name);
 		}
 		/**
 		* You can customise the help with a subclass of Help by overriding createHelp,
@@ -1226,7 +1226,7 @@ var require_command = /* @__PURE__ */ __commonJSMin(((exports) => {
 		* @return {Help}
 		*/
 		createHelp() {
-			return Object.assign(new Help$2(), this.configureHelp());
+			return Object.assign(new Help(), this.configureHelp());
 		}
 		/**
 		* You can customise the help by overriding Help properties using configureHelp(),
@@ -1322,7 +1322,7 @@ var require_command = /* @__PURE__ */ __commonJSMin(((exports) => {
 		* @return {Argument} new argument
 		*/
 		createArgument(name, description) {
-			return new Argument$2(name, description);
+			return new Argument(name, description);
 		}
 		/**
 		* Define argument syntax for command.
@@ -1479,7 +1479,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
 		* @private
 		*/
 		_exit(exitCode, code, message) {
-			if (this._exitCallback) this._exitCallback(new CommanderError$2(exitCode, code, message));
+			if (this._exitCallback) this._exitCallback(new CommanderError(exitCode, code, message));
 			process.exit(exitCode);
 		}
 		/**
@@ -1519,7 +1519,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
 		* @return {Option} new option
 		*/
 		createOption(flags, description) {
-			return new Option$2(flags, description);
+			return new Option(flags, description);
 		}
 		/**
 		* Wrap parseArgs to catch 'commander.invalidArgument'.
@@ -1620,7 +1620,7 @@ Expecting one of '${allowedValues.join("', '")}'`);
 		* @private
 		*/
 		_optionEx(config, flags, description, fn, defaultValue) {
-			if (typeof flags === "object" && flags instanceof Option$2) throw new Error("To add an Option object use addOption() instead of option() or requiredOption()");
+			if (typeof flags === "object" && flags instanceof Option) throw new Error("To add an Option object use addOption() instead of option() or requiredOption()");
 			const option = this.createOption(flags, description);
 			option.makeOptionMandatory(!!config.mandatory);
 			if (typeof fn === "function") option.default(defaultValue).argParser(fn);
@@ -2026,14 +2026,14 @@ Expecting one of '${allowedValues.join("', '")}'`);
 			proc.on("close", (code) => {
 				code = code ?? 1;
 				if (!exitCallback) process.exit(code);
-				else exitCallback(new CommanderError$2(code, "commander.executeSubCommandAsync", "(close)"));
+				else exitCallback(new CommanderError(code, "commander.executeSubCommandAsync", "(close)"));
 			});
 			proc.on("error", (err) => {
 				if (err.code === "ENOENT") this._checkForMissingExecutable(executableFile, executableDir, subcommand._name);
 				else if (err.code === "EACCES") throw new Error(`'${executableFile}' not executable`);
 				if (!exitCallback) process.exit(1);
 				else {
-					const wrappedError = new CommanderError$2(1, "commander.executeSubCommandAsync", "(error)");
+					const wrappedError = new CommanderError(1, "commander.executeSubCommandAsync", "(error)");
 					wrappedError.nestedError = err;
 					exitCallback(wrappedError);
 				}
@@ -3021,32 +3021,32 @@ Expecting one of '${allowedValues.join("', '")}'`);
 		if (process.env.NO_COLOR || process.env.FORCE_COLOR === "0" || process.env.FORCE_COLOR === "false") return false;
 		if (process.env.FORCE_COLOR || process.env.CLICOLOR_FORCE !== void 0) return true;
 	}
-	exports.Command = Command$2;
+	exports.Command = Command;
 	exports.useColor = useColor;
 }));
 
 //#endregion
 //#region ../../node_modules/.pnpm/commander@14.0.2/node_modules/commander/index.js
 var require_commander = /* @__PURE__ */ __commonJSMin(((exports) => {
-	const { Argument: Argument$1 } = require_argument();
-	const { Command: Command$1 } = require_command();
-	const { CommanderError: CommanderError$1, InvalidArgumentError: InvalidArgumentError$1 } = require_error();
-	const { Help: Help$1 } = require_help();
-	const { Option: Option$1 } = require_option();
-	exports.program = new Command$1();
-	exports.createCommand = (name) => new Command$1(name);
-	exports.createOption = (flags, description) => new Option$1(flags, description);
-	exports.createArgument = (name, description) => new Argument$1(name, description);
+	const { Argument } = require_argument();
+	const { Command } = require_command();
+	const { CommanderError, InvalidArgumentError } = require_error();
+	const { Help } = require_help();
+	const { Option } = require_option();
+	exports.program = new Command();
+	exports.createCommand = (name) => new Command(name);
+	exports.createOption = (flags, description) => new Option(flags, description);
+	exports.createArgument = (name, description) => new Argument(name, description);
 	/**
 	* Expose classes
 	*/
-	exports.Command = Command$1;
-	exports.Option = Option$1;
-	exports.Argument = Argument$1;
-	exports.Help = Help$1;
-	exports.CommanderError = CommanderError$1;
-	exports.InvalidArgumentError = InvalidArgumentError$1;
-	exports.InvalidOptionArgumentError = InvalidArgumentError$1;
+	exports.Command = Command;
+	exports.Option = Option;
+	exports.Argument = Argument;
+	exports.Help = Help;
+	exports.CommanderError = CommanderError;
+	exports.InvalidArgumentError = InvalidArgumentError;
+	exports.InvalidOptionArgumentError = InvalidArgumentError;
 }));
 
 //#endregion
