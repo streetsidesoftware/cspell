@@ -2,6 +2,7 @@ import { promises as fs } from 'node:fs';
 
 import { describe, expect, test } from 'vitest';
 
+import { readModuleDictionary } from '../../test/reader.test.helper.ts';
 import { extractTrieCharacteristics } from '../ITrieNode/TrieInfo.ts';
 import { createTrieRootFromList } from '../TrieNode/trie-util.ts';
 import { walkerWordsITrie } from '../walker/index.ts';
@@ -101,6 +102,42 @@ describe('FastTrieBlob', () => {
         const wordFiltered = words.filter((w) => w.startsWith(prefix)).sort();
         const ft = FastTrieBlobBuilder.fromWordList(words);
         expect([...ft.words(prefix)].sort()).toEqual(wordFiltered);
+    });
+});
+
+describe('optimization', async () => {
+    const trieEn = await readModuleDictionary('@cspell/dict-en_us');
+
+    test('English Dict', () => {
+        const trie = trieEn;
+        const ft = FastTrieBlobBuilder.fromTrieRoot(trie.root, false);
+        const ft2 = FastTrieBlobBuilder.fromTrieRoot(trie.root, true);
+        expect(ft2.size).toBeLessThanOrEqual(ft.size);
+        expect([...ft.words()]).toEqual([...ft2.words()]);
+    });
+});
+
+describe('Using String Tables', async () => {
+    const trieEn = await readModuleDictionary('@cspell/dict-en_us');
+
+    test('WIP', () => {
+        const ft = FastTrieBlobBuilder.fromWordList(getSampleWords(), undefined, false);
+        expect(ft.has('ñ')).toBe(true);
+    });
+
+    test('English Dict', () => {
+        const trie = trieEn;
+        const ft = FastTrieBlobBuilder.fromTrieRoot(trie.root, false);
+        const ft2 = FastTrieBlobBuilder.fromTrieRoot(trie.root, true);
+        console.log(`English Dict: Original Size: ${ft.size}, Optimized Size: ${ft2.size}`);
+
+        const stringTable = ft2.testExtractStringTable();
+        // console.log(`String Table Size: ${stringTable.charData.length} bytes for ${stringTable.index.length} strings.`);
+        // console.log('%s', hexDump(stringTable.charData));
+        expect(stringTable.getString(0)).toBeDefined();
+
+        expect(ft2.size).toBeLessThan(ft.size);
+        expect([...ft.words()]).toEqual([...ft2.words()]);
     });
 });
 

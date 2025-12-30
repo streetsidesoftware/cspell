@@ -5,11 +5,14 @@ import type { TrieData } from '../TrieData.ts';
 import { endianness } from '../utils/endian.ts';
 import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.ts';
 import { decodeTrieBlobToBTrie, encodeTrieBlobToBTrie } from './TrieBlobEncoder.ts';
+import {
+    NodeChildIndexRefShift,
+    NodeHeaderEOWMask,
+    NodeHeaderNumChildrenMask,
+    NodeHeaderNumChildrenShift,
+} from './TrieBlobFormat.ts';
 import { TrieBlobInternals, TrieBlobIRoot } from './TrieBlobIRoot.ts';
 import { encodeTextToUtf8_32Rev, Utf8Accumulator } from './Utf8.ts';
-
-const NodeHeaderNumChildrenBits = 8 as const;
-const NodeHeaderNumChildrenShift = 0 as const;
 
 type U8Array = Uint8Array<ArrayBuffer>;
 type U32Array = Uint32Array<ArrayBuffer>;
@@ -346,10 +349,10 @@ export class TrieBlob implements TrieData {
     //     }
     // }
 
-    static NodeMaskEOW: number = 0x0000_0100 & 0xffff;
-    static NodeMaskNumChildren: number = ((1 << NodeHeaderNumChildrenBits) - 1) & 0xffff;
+    static NodeMaskEOW: number = NodeHeaderEOWMask;
+    static NodeMaskNumChildren: number = NodeHeaderNumChildrenMask;
     static NodeMaskNumChildrenShift: number = NodeHeaderNumChildrenShift;
-    static NodeChildRefShift = 8;
+    static NodeChildRefShift: number = NodeChildIndexRefShift;
 
     /**
      * Only 8 bits are reserved for the character index.
