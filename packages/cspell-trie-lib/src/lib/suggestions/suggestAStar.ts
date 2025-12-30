@@ -183,7 +183,7 @@ export function* getSuggestionsAStar(
 
             // Double letter, delete 1
             const ns = srcLetters[i + 1];
-            if (s == ns && m) {
+            if (s === ns && m) {
                 storePath(t, m, i + 2, cost0 + DL, s, p, 'dd', s);
             }
             // Delete
@@ -327,7 +327,7 @@ function createCostTrie(): CostTrie {
 }
 
 function getCostTrie(t: RO<CostTrie>, s: string) {
-    if (s.length == 1) {
+    if (s.length === 1) {
         return (t.t[s] ??= createCostTrie());
     }
     if (!s) {

@@ -152,7 +152,7 @@ function reportOnCsvRecords(records: CsvRecord[]) {
         const runId = (i + 1).toFixed(0).padStart(2, '0');
         const runRepoNames = new Set(run.map((r) => r.repo));
         const groupedByRepo: Map<string, number> = new Map(repos.map((repo) => [repo, 0]));
-        const unexpectedResults = [...countCsvRecordsByRepo(run, groupedByRepo)].filter(([_, count]) => count != 1);
+        const unexpectedResults = [...countCsvRecordsByRepo(run, groupedByRepo)].filter(([_, count]) => count !== 1);
         console.error(
             `Run ${runId} ${new Date(runStartTime).toISOString()} repos: ${pad(runRepoNames.size, 2)} ${deltaTimeMsInDHMS(runEndTime - runStartTime)} `,
         );

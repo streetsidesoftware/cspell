@@ -535,7 +535,7 @@ function gg(...globs: string[]) {
 }
 
 function mGlob(g: KnownGlob | Partial<GlobPatternNormalized>[], ...toApply: Partial<GlobPatternNormalized>[]) {
-    const globs = typeof g == 'string' ? knownGlobs[g] : g;
+    const globs = typeof g === 'string' ? knownGlobs[g] : g;
     return globs.map((glob) => toApply.reduce((a: Partial<GlobPatternNormalized>, b) => ({ ...a, ...b }), glob));
 }
 

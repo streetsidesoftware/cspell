@@ -12,7 +12,7 @@ export function splitCamelCaseIfAllowed(
     minCompoundLength: number,
 ): string[] {
     const split = [...splitCamelCase(word)];
-    if (split.length == 1) return adjustCases(split, allowedWords, keepCase);
+    if (split.length === 1) return adjustCases(split, allowedWords, keepCase);
     const missing = split.some((w) => isUnknown(w, allowedWords));
     if (missing) return [word];
     const wordIndexes = calcWordIndex(word, split);
