@@ -129,7 +129,7 @@ describe('Using String Tables', async () => {
         const trie = trieEn;
         const ft = FastTrieBlobBuilder.fromTrieRoot(trie.root, false);
         const ft2 = FastTrieBlobBuilder.fromTrieRoot(trie.root, true);
-        console.log(`English Dict: Original Size: ${ft.size}, Optimized Size: ${ft2.size}`);
+        // console.log(`English Dict: Original Size: ${ft.size}, Optimized Size: ${ft2.size}`);
 
         expect(ft2.size).toBeLessThan(ft.size);
         expect([...ft2.words()]).toEqual([...ft.words()]);
