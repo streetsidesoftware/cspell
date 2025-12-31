@@ -137,9 +137,20 @@ export function decodeUtf8_32Rev(utf8: Utf8_32Rev): CodePoint {
 }
 
 /**
- * Accumulates utf8 bytes into code points.
- * This is similar to principles behind TextDecoderStream but it is designed to be easily
- * cloned and reset to keep the cost down.
+ * Incrementally decodes a stream of UTF‑8 bytes into Unicode code points.
+ *
+ * This class keeps a small amount of state (`remaining` and `value`) so that callers can
+ * feed it one byte at a time via {@link Utf8Accumulator.decode}, and receive a complete
+ * code point whenever enough continuation bytes have been seen. If a full code point has
+ * not yet been assembled, `decode` returns `undefined`. On invalid byte sequences, the
+ * accumulator is reset to a known-good state.
+ *
+ * The design is similar in spirit to {@link TextDecoderStream} (it copes with multi-byte
+ * sequences and boundaries that may fall between input chunks), but it is implemented as a
+ * lightweight, allocation-free helper object that can be cheaply cloned and reset. This
+ * makes it suitable for performance‑sensitive code and for environments where
+ * `TextDecoderStream` is not available or where creating full stream instances would be
+ * unnecessarily expensive.
  */
 export class Utf8Accumulator {
     remaining = 0;
