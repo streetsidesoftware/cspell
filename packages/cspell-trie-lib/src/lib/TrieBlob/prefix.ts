@@ -11,15 +11,13 @@ export interface PrefixOffset {
 }
 
 export function matchEntirePrefix(text: TextToUtf8Cursor, prefix: Uint8ArrayCursor): boolean {
-    if (prefix.done) return true;
-
-    let byte = prefix.cur();
-    let charVal = text.cur();
-
     while (!prefix.done) {
+        const byte = prefix.cur();
+        const charVal = text.cur();
+        console.log('%o', { prefix, text, byte, charVal });
         if (text.done || byte !== charVal) return false;
-        byte = prefix.next();
-        charVal = text.next();
+        prefix.next();
+        text.next();
     }
 
     return true;

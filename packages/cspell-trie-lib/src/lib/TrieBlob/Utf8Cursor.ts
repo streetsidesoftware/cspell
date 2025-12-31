@@ -13,6 +13,10 @@ export interface TextToUtf8Cursor extends TextCursor {
 
     /**
      * the next offset in the text to be converted to utf8.
+     *
+     * **Note:** It is possible for `i` to be equal to `text.length` and `done` to be `false`,
+     * This is because the character at `text.length -1` may be a multi-byte utf8 character
+     * that has not been fully processed.
      */
     i: number;
 
@@ -30,7 +34,6 @@ export interface TextToUtf8Cursor extends TextCursor {
      *
      * ```ts
      * const utf8Byte = t.code & 0xff;
-     * t.code >>>= 8;
      * ```
      */
     code: Utf8_32Rev;
@@ -42,7 +45,10 @@ export interface TextToUtf8Cursor extends TextCursor {
     next(): number | 0;
 
     /**
-     * Peek at the next byte without advancing the cursor.
+     * Get the current byte from the utf8 code.
+     * Calling `cur()` will not advance the cursor. It is necessary to call `next()`.
+     *
+     * @returns the current byte or 0 if at the end of the text.
      */
     cur(): number | 0;
 }
@@ -58,18 +64,21 @@ class Utf8CursorImpl implements TextToUtf8Cursor {
         this.i = i < 0 ? (i = text.length) : i;
         this.code = 0;
         this.done = i < 0 || i >= text.length ? true : undefined;
+        this.cur();
     }
 
     cur(): number | 0 {
+        if (this.done) return 0;
         this.code ||= encodeTextToUtf8_32Rev(this);
         return this.code & 0xff;
     }
 
     next(): number | 0 {
-        this.code ||= encodeTextToUtf8_32Rev(this);
-        const byte = this.code & 0xff;
+        if (this.done) return 0;
         this.code >>>= 8;
+        this.code ||= encodeTextToUtf8_32Rev(this);
         this.done = !this.code && this.i >= this.text.length;
+        const byte = this.code & 0xff;
         return byte;
     }
 }

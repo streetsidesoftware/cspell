@@ -22,11 +22,12 @@ export class TypedArrayCursor<T extends ArrayLike> {
 
     next(): number | undefined {
         if (this.done) return undefined;
-        let i = this.i;
-        const value = this.array[i++];
-        if (i >= this.array.length) this.done = true;
-        this.i = i;
-        return value;
+        const i = ++this.i;
+        if (i >= this.array.length) {
+            this.done = true;
+            return undefined;
+        }
+        return this.array[i];
     }
 }
 
