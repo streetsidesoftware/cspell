@@ -1,5 +1,6 @@
 import React from 'react';
-import './home.css';
+
+import './home-page-section.scss';
 
 export interface HomePageSectionProps {
   title: string;
@@ -9,8 +10,8 @@ export interface HomePageSectionProps {
 
 export function HomePageSection(props: HomePageSectionProps): React.ReactElement {
   return (
-    <section className={`home-section ${props.className || ''}`}>
-      <h2 className="home-section-title">{props.title}</h2>
+    <section className="home-section">
+      <span className="home-section-title">{props.title}</span>
       <div className="home-section-content">{props.children}</div>
     </section>
   );

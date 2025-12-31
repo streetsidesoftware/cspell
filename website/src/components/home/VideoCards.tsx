@@ -1,5 +1,6 @@
 import React from 'react';
-import './home.css';
+
+import './home.scss';
 
 export interface CSpellVideoPresentation {
   title: string;

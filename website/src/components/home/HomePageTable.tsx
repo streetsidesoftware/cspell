@@ -1,26 +1,7 @@
 import React from 'react';
-import './home.css';
+import { HomePageTableProps } from './table-data';
 
-export enum HomeTableColumnAlign {
-  Left = 'left',
-  Center = 'center',
-  Right = 'right',
-}
-
-export interface HomePageTableColumn {
-  header: string;
-  align?: HomeTableColumnAlign;
-}
-
-export interface HomePageTableRow {
-  cells: (string | React.ReactNode)[];
-}
-
-export interface HomePageTableProps {
-  headerColumns: HomePageTableColumn[];
-  rows: HomePageTableRow[];
-  className?: string;
-}
+import './home.scss';
 
 export function HomePageTable(props: HomePageTableProps): React.ReactElement {
   return (

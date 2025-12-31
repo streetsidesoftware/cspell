@@ -1,5 +1,6 @@
 import React from 'react';
-import './home.css';
+
+import './home-page-card.scss';
 
 export interface HomePageCardProps {
   key: number;
@@ -14,6 +15,7 @@ export function HomePageCard(props: HomePageCardProps): React.ReactElement {
     ? {
         maskImage: `url(${props.icon})`,
         WebkitMaskImage: `url(${props.icon})`,
+        backgroundColor: props.fill,
       }
     : {
         backgroundImage: `url(${props.icon})`,
@@ -25,13 +27,15 @@ export function HomePageCard(props: HomePageCardProps): React.ReactElement {
       }
     : {};
 
-  const cspellFillClass: string = props.fill ? 'cspell-card-icon-colored' : '';
-
   return (
     <div key={props.key} className="cspell-card">
       <div className="cspell-card-header">
         <div className="cspell-card-icon" style={cspellSvgFillStyle}>
-          <div className={`cspell-card-icon-svg ${cspellFillClass}`} style={cspellSvgStyle} aria-label={props.title} />
+          <div
+            className={`cspell-card-icon-svg ${props.fill ? 'cspell-card-icon-colored' : ''}`}
+            style={cspellSvgStyle}
+            aria-label={props.title}
+          />
         </div>
         <h2 className="cspell-card-title">{props.title}</h2>
       </div>

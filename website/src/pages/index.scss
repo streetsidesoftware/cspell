@@ -1,16 +1,16 @@
 .home-container {
     margin: 0 auto;
     max-width: 1152px;
-    padding: 0 1.5rem 4rem 1.5rem;
+    padding: 0 3rem 4rem 3rem;
 }
 
 .hero {
+    gap: 2rem;
     display: flex;
     flex-direction: row;
+    background: inherit;
     align-items: center;
-    justify-content: center;
-    gap: 2rem;
-    padding: 4rem 0 5rem;
+    padding: 4rem 0 3rem;
 }
 
 .logo-image {
@@ -20,72 +20,87 @@
     padding: 0.5rem;
     border-radius: 50%;
     object-fit: contain;
-    background: var(--ifm-background-color);
     box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.1);
 }
 
 .hero-content {
     display: flex;
     flex-direction: column;
-    text-align: left;
 }
 
-.heroTitle {
-    font-size: 3.2rem;
+.hero-title {
+    font-size: 3rem;
     font-weight: 700;
-    line-height: 1.2;
-    margin: 0 0 1rem;
-    background: linear-gradient(120deg, var(--ifm-color-primary) 0%, var(--ifm-color-primary-dark) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: var(--cspell-color-primary);
 }
 
-.heroTagline {
-    font-size: 1.5rem;
+.hero-tagline {
     font-weight: 500;
+    font-size: 2rem;
     color: var(--ifm-color-content-secondary);
-    margin: 0 0 2rem;
-    line-height: 1.6;
 }
 
-.heroButtons {
-    display: flex;
+.hero-buttons {
     gap: 1rem;
+    display: flex;
+    padding: 1.5rem 0;
     align-items: center;
+
+    button {
+        font-weight: 600;
+        align-items: center;
+        display: inline-flex;
+        border-radius: 0.5rem;
+        justify-content: center;
+        padding: 0.75rem 1.5rem;
+        transition: all 0.3s ease;
+    }
+
+    .hero-button-primary {
+        cursor: pointer;
+        color: #ffffff;
+        background: var(--cspell-color-primary-500);
+        border: 1px solid var(--cspell-color-primary-500);
+
+        &:hover {
+            background: var(--cspell-color-primary-600);
+        }
+    }
+
+    .hero-button-secondary {
+        cursor: pointer;
+        color: #ffffff;
+        background: #000000;
+        border: 1px solid #030303;
+
+        &:hover {
+            color: var(--ifm-color-emphasis-100);
+            background: var(--ifm-color-emphasis-900);
+        }
+    }
 }
 
-[data-theme='dark'] .heroButtonSecondary {
-    border-color: var(--ifm-color-emphasis-400);
-}
-
-[data-theme='dark'] .heroButtonSecondary:hover {
-    background: var(--ifm-color-emphasis-200);
-    border-color: var(--ifm-color-emphasis-500);
-}
-
-.cardsGrid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+.cards-grid {
     gap: 1.5rem;
-    margin-top: 3rem;
-    margin-bottom: 4rem;
+    display: grid;
+    padding: 3rem 0;
+    grid-template-columns: repeat(3, 1fr);
 }
 
 @media screen and (max-width: 996px) {
-    .cardsGrid {
-        grid-template-columns: repeat(2, 1fr);
+    .cards-grid {
         gap: 1.25rem;
-        margin-bottom: 3.5rem;
+        padding-bottom: 1.5rem;
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media screen and (max-width: 768px) {
     .hero {
-        flex-direction: column;
-        padding: 3rem 0 4rem;
-        text-align: center;
         gap: 1.5rem;
+        text-align: center;
+        padding: 3rem 0 4rem;
+        flex-direction: column;
     }
 
     .logo-image {
@@ -97,27 +112,27 @@
         text-align: center;
     }
 
-    .heroTitle {
+    .hero-title {
         font-size: 2.5rem;
     }
 
-    .heroTagline {
+    .hero-tagline {
         font-size: 1.25rem;
     }
 
-    .heroButtons {
-        flex-direction: column;
+    .hero-buttons {
         gap: 0.75rem;
         width: 100%;
+        flex-direction: column;
     }
 
-    .heroButtonPrimary,
-    .heroButtonSecondary {
+    .hero-button-primary,
+    .hero-button-secondary {
         width: 100%;
         max-width: 280px;
     }
 
-    .cardsGrid {
+    .cards-grid {
         gap: 1rem;
         margin-top: 2rem;
         margin-bottom: 3rem;
@@ -135,8 +150,8 @@
     }
 
     .hero {
-        padding: 2rem 0 3rem;
         gap: 1rem;
+        padding: 2rem 0 3rem;
     }
 
     .logo-image {
@@ -144,16 +159,16 @@
         height: 80px;
     }
 
-    .heroTitle {
+    .hero-title {
         font-size: 2rem;
         margin-bottom: 0.75rem;
     }
 
-    .heroTagline {
+    .hero-tagline {
         font-size: 1.125rem;
     }
 
-    .cardsGrid {
+    .cards-grid {
         gap: 0.75rem;
         margin-top: 1.5rem;
         margin-bottom: 2.5rem;

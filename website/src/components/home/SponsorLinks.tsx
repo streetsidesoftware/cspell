@@ -1,5 +1,6 @@
 import React from 'react';
-import './home.css';
+
+import './home.scss';
 
 export interface CSpellSponsorLink {
   label: string;
@@ -22,6 +23,7 @@ function getIconPath(iconName?: string): string | null {
     patreon: '/img/icons/patreon.svg',
     paypal: '/img/icons/paypal-simple.svg',
     openCollective: '/img/icons/open-collective.svg',
+    cspell: '',
   };
 
   return icons[iconName.toLowerCase()] || null;
