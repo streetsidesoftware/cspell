@@ -146,6 +146,11 @@ export function decodeUtf8_32Rev(utf8: Utf8_32Rev): CodePoint {
     return 0xfffd;
 }
 
+/**
+ * Accumulates utf8 bytes into code points.
+ * This is similar to principles behind TextDecoderStream but it is designed to be easily
+ * cloned and reset to keep the cost down.
+ */
 export class Utf8Accumulator {
     remaining = 0;
     value = 0;
@@ -181,6 +186,18 @@ export class Utf8Accumulator {
             return undefined;
         }
         return this.reset();
+    }
+
+    decodeBytesToString(bytes: ReadonlyArray<number> | Uint8Array): string {
+        let value = '';
+        const len = bytes.length;
+        for (let i = 0; i < len; ++i) {
+            const code = this.decode(bytes[i]);
+            if (code) {
+                value += String.fromCodePoint(code);
+            }
+        }
+        return value;
     }
 
     reset() {

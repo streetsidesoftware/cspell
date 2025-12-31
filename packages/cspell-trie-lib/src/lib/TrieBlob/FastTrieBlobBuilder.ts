@@ -9,7 +9,7 @@ import { CharIndexBuilder } from './CharIndex.ts';
 import type { NodeToJSON } from './FastTrieBlob.ts';
 import { FastTrieBlob, nodesToJSON } from './FastTrieBlob.ts';
 import { FastTrieBlobInternals, sortNodes } from './FastTrieBlobInternals.ts';
-import { calculateByteSize, optimizeNodes, optimizeNodesWithStringTable } from './optimizeNodes.ts';
+import { optimizeNodesWithStringTable } from './optimizeNodes.ts';
 import { resolveMap } from './resolveMap.ts';
 import { TrieBlob } from './TrieBlob.ts';
 import { NodeChildIndexRefShift, NodeHeaderEOWMask, NodeMaskCharByte } from './TrieBlobFormat.ts';
@@ -337,23 +337,17 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
             NodeMaskCharByte,
         );
 
-        const nodes = optimize ? optimizeNodes(sortedNodes) : sortedNodes;
         const stringTable = new StringTableBuilder().build();
 
-        if (optimize) {
-            const opt = optimizeNodesWithStringTable({ nodes, stringTable: new StringTableBuilder().build() });
+        // if (optimize && this.IdxEOW) {
+        //     throw new Error('Cannot optimize a trie that uses node references.');
+        // }
 
-            console.log(
-                'optimizeNodesWithStringTable reduced size from %d (%d bytes) to %d (%d bytes) with string table size %d bytes',
-                nodes.length,
-                calculateByteSize(nodes),
-                opt.nodes.length,
-                calculateByteSize(opt.nodes),
-                opt.stringTable.charData.length,
-            );
-        }
+        const r = optimize
+            ? optimizeNodesWithStringTable({ nodes: sortedNodes, stringTable })
+            : { nodes: sortedNodes, stringTable };
 
-        return FastTrieBlob.create(new FastTrieBlobInternals(nodes, stringTable, info.info, info.characteristics));
+        return FastTrieBlob.create(new FastTrieBlobInternals(r.nodes, r.stringTable, info.info, info.characteristics));
     }
 
     toJSON(): {

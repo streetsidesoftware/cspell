@@ -111,9 +111,9 @@ describe('optimization', async () => {
     test('English Dict', () => {
         const trie = trieEn;
         const ft = FastTrieBlobBuilder.fromTrieRoot(trie.root, false);
-        const ft2 = FastTrieBlobBuilder.fromTrieRoot(trie.root, true);
-        expect(ft2.size).toBeLessThanOrEqual(ft.size);
-        expect([...ft.words()]).toEqual([...ft2.words()]);
+        const tb = FastTrieBlobBuilder.fromTrieRoot(trie.root, true);
+        expect(tb.size).toBeLessThanOrEqual(ft.size);
+        expect([...tb.words()]).toEqual([...ft.words()]);
     });
 });
 
@@ -131,13 +131,8 @@ describe('Using String Tables', async () => {
         const ft2 = FastTrieBlobBuilder.fromTrieRoot(trie.root, true);
         console.log(`English Dict: Original Size: ${ft.size}, Optimized Size: ${ft2.size}`);
 
-        const stringTable = ft2.testExtractStringTable();
-        // console.log(`String Table Size: ${stringTable.charData.length} bytes for ${stringTable.index.length} strings.`);
-        // console.log('%s', hexDump(stringTable.charData));
-        expect(stringTable.getString(0)).toBeDefined();
-
         expect(ft2.size).toBeLessThan(ft.size);
-        expect([...ft.words()]).toEqual([...ft2.words()]);
+        expect([...ft2.words()]).toEqual([...ft.words()]);
     });
 });
 

@@ -5,6 +5,8 @@ import type { StringTable } from '../StringTable/StringTable.ts';
 import type { TrieData } from '../TrieData.ts';
 import { endianness } from '../utils/endian.ts';
 import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.ts';
+import type { TextOffsetCode } from './prefix.ts';
+import { matchEntirePrefix } from './prefix.ts';
 import { decodeTrieBlobToBTrie, encodeTrieBlobToBTrie } from './TrieBlobEncoder.ts';
 import {
     NodeChildIndexRefShift,
@@ -13,10 +15,8 @@ import {
     NodeHeaderNumChildrenShift,
 } from './TrieBlobFormat.ts';
 import { TrieBlobInternals, TrieBlobIRoot } from './TrieBlobIRoot.ts';
+import type { U8Array, U32Array } from './TypedArray.ts';
 import { encodeTextToUtf8_32Rev, Utf8Accumulator } from './Utf8.ts';
-
-type U8Array = Uint8Array<ArrayBuffer>;
-type U32Array = Uint32Array<ArrayBuffer>;
 
 export class TrieBlob implements TrieData {
     readonly info: Readonly<TrieInfo>;
@@ -162,7 +162,7 @@ export class TrieBlob implements TrieData {
             p.code = p.code || encodeTextToUtf8_32Rev(p);
             const prefixIdx = node >>> 9;
             const pfx = prefixIdx ? this.#stringTable.getStringBytes(prefixIdx) : undefined;
-            if (pfx && !matchPrefix(p, pfx)) return undefined;
+            if (pfx && !matchEntirePrefix(p, pfx)) return undefined;
 
             const code = p.code;
 
@@ -227,11 +227,16 @@ export class TrieBlob implements TrieData {
         const NodeMaskChildCharIndex = TrieBlob.NodeMaskChildCharIndex;
         const NodeChildRefShift = TrieBlob.NodeChildRefShift;
         const nodes = this.nodes;
+        const st = this.#stringTable;
         const stack: StackItem[] = [{ nodeIdx: rootIdx, pos: 0, word: '', acc: Utf8Accumulator.create() }];
         let depth = 0;
 
         while (depth >= 0) {
-            const { nodeIdx, pos, word, acc } = stack[depth];
+            const s = stack[depth];
+            if (!s.pos) {
+                applyPrefixString(s);
+            }
+            const { nodeIdx, pos, word, acc } = s;
             const node = nodes[nodeIdx];
             // pos is 0 when first entering a node
             if (!pos && node & NodeMaskEOW) {
@@ -254,6 +259,13 @@ export class TrieBlob implements TrieData {
                 word: word + letter,
                 acc: nAcc,
             };
+        }
+
+        function applyPrefixString(s: StackItem): void {
+            const prefixIdx = nodes[s.nodeIdx] >>> 9;
+            const pfx = prefixIdx ? st.getStringBytes(prefixIdx) : undefined;
+            if (!pfx) return;
+            s.word += s.acc.decodeBytesToString(pfx);
         }
     }
 
@@ -442,24 +454,4 @@ function trieBlobSort(data: U32Array) {
         const sorted = data.slice(start, end).sort((a, b) => (a & MaskChildCharIndex) - (b & MaskChildCharIndex));
         sorted.forEach((v, i) => (data[start + i] = v));
     }
-}
-
-interface TextOffsetCode {
-    text: string;
-    offset: number;
-    code: number;
-}
-
-function matchPrefix(p: TextOffsetCode, prefix: U8Array | undefined): boolean {
-    if (!prefix?.length) return true;
-
-    const len = prefix.length;
-    for (let i = 0; i < len; ++i) {
-        const charVal = p.code & 0xff;
-        if (prefix[i] !== charVal) return false;
-        p.code >>>= 8;
-        p.code = p.code || encodeTextToUtf8_32Rev(p);
-    }
-
-    return true;
 }
