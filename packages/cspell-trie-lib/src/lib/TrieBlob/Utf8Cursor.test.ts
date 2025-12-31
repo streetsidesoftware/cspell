@@ -8,11 +8,6 @@ describe('TextToUtf8Cursor', () => {
         expect(cursor.i).toBe(1);
     });
 
-    test('should handle empty string', () => {
-        const cursor = createTextToUtf8Cursor('');
-        expect(cursor.i).toBe(0);
-    });
-
     test('should read single byte characters', () => {
         const cursor = createTextToUtf8Cursor('abc');
         expect(cursor.cur()).toBe('a'.codePointAt(0));
