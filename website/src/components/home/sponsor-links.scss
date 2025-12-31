@@ -88,12 +88,23 @@
 
 [data-theme='dark'] {
     .cspell-sponsor-link {
-        color: var(--ifm-color-primary-lightest);
+        color: #ffffff;
         border-color: var(--ifm-color-emphasis-300);
         background: linear-gradient(135deg, var(--ifm-background-surface-color) 0%, var(--ifm-color-emphasis-100) 100%);
 
         &:hover {
+            color: #ffffff;
             border-color: var(--ifm-color-primary);
+        }
+    }
+
+    .cspell-sponsor-icon {
+        img[src='/img/icons/github.svg'] {
+            filter: brightness(0) invert(1);
+        }
+
+        img[src='/img/icons/patreon.svg'] {
+            filter: brightness(0) invert(1);
         }
     }
 }
