@@ -13,8 +13,13 @@ export interface PrefixOffset {
 export function matchEntirePrefix(text: TextToUtf8Cursor, prefix: Uint8ArrayCursor): boolean {
     if (prefix.done) return true;
 
-    for (let byte = prefix.cur(), charVal = text.cur(); !prefix.done; byte = prefix.next(), charVal = text.next()) {
-        if (byte !== charVal) return false;
+    let byte = prefix.cur();
+    let charVal = text.cur();
+
+    while (!prefix.done) {
+        if (text.done || byte !== charVal) return false;
+        byte = prefix.next();
+        charVal = text.next();
     }
 
     return true;

@@ -224,7 +224,7 @@ export function optimizeNodesWithStringTable(src: NodesAndStringTable): NodesAnd
         const prefixBytes = [charByte, ...childBytes];
         const prefixIdx = builder.addStringBytes(prefixBytes);
 
-        const newNode = new Uint32Array(childNode);
+        const newNode = Uint32Array.from(childNode);
         newNode[0] = (prefixIdx << NodeHeaderPrefixShift) | (childHeader & ~NodeHeaderPrefixMask);
         nodes[nodeIdx] = newNode;
     }
