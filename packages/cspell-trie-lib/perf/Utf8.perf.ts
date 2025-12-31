@@ -3,16 +3,16 @@ import { Buffer } from 'node:buffer';
 import { suite } from 'perf-insight';
 
 import {
+    decodeUtf8_32,
+    decodeUtf8_32Rev,
     decodeUtf8ByteStream,
-    decodeUtf8N_BE,
-    decodeUtf8N_LE,
     encodeCodePointsToUtf8Into,
     encodeTextToUtf8,
     encodeTextToUtf8_32,
     encodeTextToUtf8_32Into,
     encodeTextToUtf8Into,
-    encodeUtf8N_BE,
-    encodeUtf8N_LE,
+    encodeToUtf8_32,
+    encodeToUtf8_32Rev,
     textToCodePoints,
 } from '../src/lib/TrieBlob/Utf8.ts';
 import { Utf8Encoder, Utf8Encoder2 } from '../src/lib/TrieBlob/Utf8Encoder.ts';
@@ -270,8 +270,8 @@ suite('Utf8 encode/decode', async (test) => {
         for (let i = iterations; i > 0; --i) {
             for (const char of chars) {
                 const cp = char.codePointAt(0) || 0;
-                const u8 = encodeUtf8N_BE(cp);
-                const dcp = decodeUtf8N_BE(u8);
+                const u8 = encodeToUtf8_32(cp);
+                const dcp = decodeUtf8_32(u8);
                 String.fromCodePoint(dcp);
             }
         }
@@ -281,8 +281,8 @@ suite('Utf8 encode/decode', async (test) => {
         for (let i = iterations; i > 0; --i) {
             for (const char of chars) {
                 const cp = char.codePointAt(0) || 0;
-                const u8 = encodeUtf8N_LE(cp);
-                const dcp = decodeUtf8N_LE(u8);
+                const u8 = encodeToUtf8_32Rev(cp);
+                const dcp = decodeUtf8_32Rev(u8);
                 String.fromCodePoint(dcp);
             }
         }

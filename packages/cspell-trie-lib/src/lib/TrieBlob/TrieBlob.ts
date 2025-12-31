@@ -5,11 +5,17 @@ import type { TrieData } from '../TrieData.ts';
 import { endianness } from '../utils/endian.ts';
 import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.ts';
 import { decodeTrieBlobToBTrie, encodeTrieBlobToBTrie } from './TrieBlobEncoder.ts';
+import {
+    NodeChildIndexRefShift,
+    NodeHeaderEOWMask,
+    NodeHeaderNumChildrenMask,
+    NodeHeaderNumChildrenShift,
+} from './TrieBlobFormat.ts';
 import { TrieBlobInternals, TrieBlobIRoot } from './TrieBlobIRoot.ts';
-import { encodeTextToUtf8_32, Utf8Accumulator } from './Utf8.ts';
+import { encodeTextToUtf8_32Rev, Utf8Accumulator } from './Utf8.ts';
 
-const NodeHeaderNumChildrenBits = 8 as const;
-const NodeHeaderNumChildrenShift = 0 as const;
+type U8Array = Uint8Array<ArrayBuffer>;
+type U32Array = Uint32Array<ArrayBuffer>;
 
 export class TrieBlob implements TrieData {
     readonly info: Readonly<TrieInfo>;
@@ -21,19 +27,19 @@ export class TrieBlob implements TrieData {
     #size: number | undefined;
     #iTrieRoot: ITrieNodeRoot | undefined;
     /** the nodes data in 8 bits */
-    #nodes8: Uint8Array;
+    #nodes8: U8Array;
     #beAdj = endianness() === 'BE' ? 3 : 0;
 
     readonly wordToCharacters = (word: string): string[] => [...word];
     readonly hasForbiddenWords: boolean;
     readonly hasCompoundWords: boolean;
     readonly hasNonStrictWords: boolean;
-    readonly nodes: Uint32Array;
+    readonly nodes: U32Array;
     readonly NodeMaskNumChildren: number;
     readonly NodeChildRefShift: number;
     readonly hasPreferredSuggestions: boolean;
 
-    constructor(nodes: Uint32Array, info: PartialTrieInfo) {
+    constructor(nodes: U32Array, info: PartialTrieInfo) {
         this.nodes = nodes;
         trieBlobSort(nodes);
         this.info = mergeOptionalWithDefaults(info);
@@ -143,15 +149,12 @@ export class TrieBlob implements TrieData {
         const _nodes8 = this.#nodes8;
 
         for (; p.offset < p.text.length; ) {
-            const code = encodeTextToUtf8_32(p);
-
             const nodes = _nodes;
             const nodes8 = _nodes8;
             let node = nodes[nodeIdx];
-            let s = (p.bytes - 1) * 8;
 
-            for (let mask = 0xff << s; mask; mask >>>= 8, s -= 8) {
-                const charVal = (code & mask) >>> s;
+            for (let code = encodeTextToUtf8_32Rev(p); code; code >>>= 8) {
+                const charVal = code & 0xff;
                 const count = node & 0xff; // TrieBlob.NodeMaskNumChildren
                 const idx4 = nodeIdx << 2;
                 // Binary search for the character in the child nodes.
@@ -269,15 +272,15 @@ export class TrieBlob implements TrieData {
         };
     }
 
-    encodeToBTrie(): Uint8Array {
+    encodeToBTrie(): U8Array {
         return this.encodeBin();
     }
 
-    encodeBin(): Uint8Array {
+    encodeBin(): U8Array {
         return encodeTrieBlobToBTrie({ nodes: this.nodes, info: this.info, characteristics: this });
     }
 
-    static decodeBin(blob: Uint8Array): TrieBlob {
+    static decodeBin(blob: U8Array): TrieBlob {
         const info = decodeTrieBlobToBTrie(blob);
         const trieBlob = new TrieBlob(info.nodes, info.info);
         // console.log('decodeBin: %o', trieBlob.toJSON());
@@ -346,10 +349,10 @@ export class TrieBlob implements TrieData {
     //     }
     // }
 
-    static NodeMaskEOW: number = 0x0000_0100 & 0xffff;
-    static NodeMaskNumChildren: number = ((1 << NodeHeaderNumChildrenBits) - 1) & 0xffff;
+    static NodeMaskEOW: number = NodeHeaderEOWMask;
+    static NodeMaskNumChildren: number = NodeHeaderNumChildrenMask;
     static NodeMaskNumChildrenShift: number = NodeHeaderNumChildrenShift;
-    static NodeChildRefShift = 8;
+    static NodeChildRefShift: number = NodeChildIndexRefShift;
 
     /**
      * Only 8 bits are reserved for the character index.
@@ -360,7 +363,7 @@ export class TrieBlob implements TrieData {
      */
     static NodeMaskChildCharIndex: number = 0x0000_00ff;
 
-    static nodesView(trie: TrieBlob): Readonly<Uint32Array> {
+    static nodesView(trie: TrieBlob): Readonly<U32Array> {
         return new Uint32Array(trie.nodes);
     }
 }
@@ -372,7 +375,7 @@ interface NodeElement {
     n: number;
 }
 
-function nodesToJson(nodes: Uint32Array) {
+function nodesToJson(nodes: U32Array) {
     function nodeElement(offset: number): NodeElement {
         const node = nodes[offset];
         const numChildren = node & TrieBlob.NodeMaskNumChildren;
@@ -401,7 +404,7 @@ function nodesToJson(nodes: Uint32Array) {
  * Sorts the child nodes in the trie to ensure binary lookup works.
  * @param data
  */
-function trieBlobSort(data: Uint32Array) {
+function trieBlobSort(data: U32Array) {
     const MaskNumChildren = TrieBlob.NodeMaskNumChildren;
     const MaskChildCharIndex = TrieBlob.NodeMaskChildCharIndex;
 

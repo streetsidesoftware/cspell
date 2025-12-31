@@ -121,7 +121,7 @@ describe('Validate InDocSettings', () => {
         ${'<!--- cSpell\u003Aflag-words apple -->'}                            | ${USE_TEST}                                                            | ${oc(inDocDict({ flagWords: ['apple', '-->'] }))}
         ${'# cspell\u003Aignore auto* *labeler'}                               | ${USE_TEST}                                                            | ${oc(inDocDict({ ignoreWords: ['auto*', '*labeler'] }))}
     `('detect compound words setting: $test', ({ test, text, expected }) => {
-        expect(InDoc.getInDocumentSettings(text == USE_TEST ? test : text)).toEqual(expected);
+        expect(InDoc.getInDocumentSettings(text === USE_TEST ? test : text)).toEqual(expected);
         expect([...InDoc.validateInDocumentSettings(text, {})]).toEqual([]);
     });
 

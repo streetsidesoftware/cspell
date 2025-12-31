@@ -325,5 +325,5 @@ export function impersonateCollector(collector: SuggestionCollector, word: strin
 
 export function isSuggestionResult(s: GenerateSuggestionResult): s is SuggestionResult {
     const r = s as Partial<SuggestionResult> | undefined;
-    return !!r && typeof r === 'object' && r?.cost !== undefined && r.word != undefined;
+    return !!r && typeof r === 'object' && r?.cost !== undefined && r.word !== undefined;
 }

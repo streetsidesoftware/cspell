@@ -119,7 +119,7 @@ describe('FastTrieBlobBuilder', () => {
             cursor.backStep(chars.length);
         }
         const t = builder.build();
-        expect([...t.words()].sort()).toEqual(sortedUnique);
+        expect([...t.words()]).toEqual(sortedUnique);
     });
 
     test('insertFromOptimizedTrie small', () => {
@@ -148,6 +148,27 @@ describe('FastTrieBlobBuilder', () => {
         expect([...t.words()].sort()).toEqual(sortedUnique);
     });
 
+    test('fromTrieRoot non-optimized trie', () => {
+        const words = sampleWords();
+        const t = FastTrieBlobBuilder.fromTrieRoot(buildTrie(words, false));
+        const sortedUnique = [...new Set(words)].sort();
+        expect([...t.words()].sort()).toEqual(sortedUnique);
+    });
+
+    test('fromTrieRoot(optimize) non-optimized trie', () => {
+        const words = sampleWords();
+        const t = FastTrieBlobBuilder.fromTrieRoot(buildTrie(words, false), true);
+        const sortedUnique = [...new Set(words)].sort();
+        expect([...t.words()].sort()).toEqual(sortedUnique);
+    });
+
+    test('fromTrieRoot optimized trie', () => {
+        const words = sampleWords();
+        const t = FastTrieBlobBuilder.fromTrieRoot(buildTrie(words, true));
+        const sortedUnique = [...new Set(words)].sort();
+        expect([...t.words()].sort()).toEqual(sortedUnique);
+    });
+
     test('should be able to correctly preserve referenced nodes.', () => {
         const extraWords = 'reds greens blues yellows oranges purples'.split(' ');
         const builder = new FastTrieBlobBuilder();
@@ -162,17 +183,34 @@ describe('FastTrieBlobBuilder', () => {
     });
 });
 
+describe('optimization', () => {
+    test.each`
+        comment                            | words
+        ${'single word'}                   | ${['optimization']}
+        ${'multiple words'}                | ${['optimization', 'optimize']}
+        ${'multiple words shared endings'} | ${['optimization', 'vacation', 'sensation']}
+        ${'sampleWords()'}                 | ${sampleWords()}
+    `('optimize $comment $words', ({ words }) => {
+        const sortedUnique = [...new Set(words)].sort();
+        const ft = FastTrieBlobBuilder.fromWordList(words, undefined, true);
+        expect([...ft.words()]).toEqual(sortedUnique);
+    });
+});
+
 function sampleWords() {
     return (
-        'Here are a few words to use as a dictionary. They just need to be split. ' +
-        'walk walked walking walker ' +
-        'talk talked talking talker ' +
-        'play played playing player ' +
-        'red green blue yellow orange ' +
-        'on the first day of ' +
-        'on a dark and ' +
+        `
+        Here are a few words to use as a dictionary. They just need to be split.
+        walk walked walking walker
+        talk talked talking talker
+        play played playing player
+        red green blue yellow orange
+        on the first day of
+        on a dark and
+
         // cspell:disable
-        `"ትግርኛ",
+
+        "ትግርኛ",
          "አማርኛ",
          "ພາສາລາວ",
          "ꦧꦱꦗꦮ",
@@ -185,7 +223,11 @@ function sampleWords() {
          😢😭😤😠😡🤬🤯😳🥵🥶😶‍🌫️😱😨😰😥😓
          🤗🤔🫣🤭🫢🫡🤫🫠🤥😶🫥😐🫤😑🫨😬
          🙄😯😦😧😮😲🥱😴🤤😪😮‍💨😵😵‍💫🤐🥴🤢
-         🤮🤧😷🤒🤕🤑🤠😈 ` + // cspell:enable
+         🤮🤧😷🤒🤕🤑🤠😈
+
+         // cspell:enable
+
+         ` +
         genWords(8, 'A', 'z').join(' ') +
         genWords(8, '\u1F00', '\u1FFF').join(' ') +
         ' '
@@ -235,7 +277,7 @@ function sampleWords2() {
 }
 
 function insertFromOptimizedTrie(cursor: BuilderCursor, words: string[]) {
-    const trie = buildTrie(words);
+    const trie = buildTrie(words, true);
     const nodeToRef = new Map<TrieNode, number>();
     let count = 0;
 

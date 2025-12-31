@@ -18,5 +18,5 @@ export interface TrieData extends Readonly<TrieCharacteristics> {
     readonly hasCompoundWords: boolean;
     readonly hasNonStrictWords: boolean;
     readonly size: number;
-    encodeToBTrie?: () => Uint8Array;
+    encodeToBTrie?: () => Uint8Array<ArrayBuffer>;
 }

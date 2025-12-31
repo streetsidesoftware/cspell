@@ -220,6 +220,7 @@ export default defineConfig(
                     tryExtensions: ['.d.ts', '.d.mts', '.d.cts', '.ts', '.cts', '.mts', '.js', '.cjs', '.mjs'],
                 },
             ],
+            eqeqeq: ['error', 'always'],
         },
     },
     {

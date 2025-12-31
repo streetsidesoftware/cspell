@@ -1,17 +1,19 @@
 import type { ITrieNode, ITrieNodeRoot } from '../ITrieNode/ITrieNode.ts';
 import { findNode } from '../ITrieNode/trie-util.ts';
 import type { TrieInfo } from '../ITrieNode/TrieInfo.ts';
+import type { StringTable } from '../StringTable/StringTable.ts';
 import type { TrieData } from '../TrieData.ts';
 import type { Utf8Seq } from './CharIndex.ts';
 import { CharIndex } from './CharIndex.ts';
-import { extractInfo, type FastTrieBlobBitMaskInfo } from './FastTrieBlobBitMaskInfo.ts';
 import type { FastTrieBlobInternals } from './FastTrieBlobInternals.ts';
 import { assertSorted, FastTrieBlobInternalsAndMethods, sortNodes } from './FastTrieBlobInternals.ts';
 import { FastTrieBlobIRoot } from './FastTrieBlobIRoot.ts';
+import { extractStringTable } from './optimizeNodes.ts';
 import { TrieBlob } from './TrieBlob.ts';
+import { NodeChildIndexRefShift, NodeHeaderEOWMask, NodeMaskCharByte, type TrieBlobNode32 } from './TrieBlobFormat.ts';
 import { Utf8Accumulator } from './Utf8.ts';
 
-type FastTrieBlobNode = Uint32Array;
+type FastTrieBlobNode = TrieBlobNode32;
 
 const checkSorted = false;
 
@@ -29,13 +31,11 @@ export class FastTrieBlob implements TrieData {
     readonly hasPreferredSuggestions: boolean;
     #nodes: FastTrieBlobNode[];
     #charIndex: CharIndex;
-    readonly bitMasksInfo: FastTrieBlobBitMaskInfo;
     readonly info: Readonly<TrieInfo>;
 
-    private constructor(nodes: FastTrieBlobNode[], bitMasksInfo: FastTrieBlobBitMaskInfo, info: Readonly<TrieInfo>) {
+    private constructor(nodes: FastTrieBlobNode[], info: Readonly<TrieInfo>) {
         this.#nodes = nodes;
         this.#charIndex = new CharIndex();
-        this.bitMasksInfo = bitMasksInfo;
         this.info = info;
         this.wordToCharacters = (word: string) => [...word];
         this.#forbidIdx = this.#searchNodeForChar(0, this.info.forbiddenWordPrefix) || 0;
@@ -49,7 +49,7 @@ export class FastTrieBlob implements TrieData {
         this.hasPreferredSuggestions = !!this.#suggestIdx;
 
         if (checkSorted) {
-            assertSorted(this.#nodes, bitMasksInfo.NodeMaskChildCharIndex);
+            assertSorted(this.#nodes, NodeMaskCharByte);
         }
     }
 
@@ -79,7 +79,7 @@ export class FastTrieBlob implements TrieData {
         const found = this.#lookupNode(nodeIdx, charIndexes);
         if (found === undefined) return false;
         const node = this.#nodes[found];
-        return !!(node[0] & this.bitMasksInfo.NodeMaskEOW);
+        return !!(node[0] & NodeHeaderEOWMask);
     }
 
     /**
@@ -88,9 +88,9 @@ export class FastTrieBlob implements TrieData {
      * @param seq - the byte sequence of the character to look for
      * @returns
      */
-    #lookupNode(nodeIdx: number, seq: readonly number[] | Readonly<Uint8Array>): number | undefined {
-        const NodeMaskChildCharIndex = this.bitMasksInfo.NodeMaskChildCharIndex;
-        const NodeChildRefShift = this.bitMasksInfo.NodeChildRefShift;
+    #lookupNode(nodeIdx: number, seq: readonly number[] | Readonly<Uint8Array<ArrayBuffer>>): number | undefined {
+        const nodeMaskChildCharIndex = NodeMaskCharByte;
+        const nodeChildRefShift = NodeChildIndexRefShift;
         const nodes = this.#nodes;
         const len = seq.length;
         let node = nodes[nodeIdx];
@@ -104,15 +104,15 @@ export class FastTrieBlob implements TrieData {
             let c: number = -1;
             while (i < j) {
                 const m = (i + j) >> 1;
-                c = node[m] & NodeMaskChildCharIndex;
+                c = node[m] & nodeMaskChildCharIndex;
                 if (c < letterIdx) {
                     i = m + 1;
                 } else {
                     j = m;
                 }
             }
-            if (i >= count || (node[i] & NodeMaskChildCharIndex) !== letterIdx) return undefined;
-            nodeIdx = node[i] >>> NodeChildRefShift;
+            if (i >= count || (node[i] & nodeMaskChildCharIndex) !== letterIdx) return undefined;
+            nodeIdx = node[i] >>> nodeChildRefShift;
             if (!nodeIdx) return undefined;
         }
 
@@ -143,9 +143,9 @@ export class FastTrieBlob implements TrieData {
             word: string;
             accumulator: Utf8Accumulator;
         }
-        const NodeMaskChildCharIndex = this.bitMasksInfo.NodeMaskChildCharIndex;
-        const NodeChildRefShift = this.bitMasksInfo.NodeChildRefShift;
-        const NodeMaskEOW = this.bitMasksInfo.NodeMaskEOW;
+        const nodeMaskChildCharIndex = NodeMaskCharByte;
+        const nodeChildRefShift = NodeChildIndexRefShift;
+        const NodeMaskEOW = NodeHeaderEOWMask;
         const nodes = this.#nodes;
         const accumulator = Utf8Accumulator.create();
         const stack: StackItem[] = [{ nodeIdx: rootIdx, pos: 0, word: '', accumulator }];
@@ -164,13 +164,13 @@ export class FastTrieBlob implements TrieData {
             }
             const nextPos = ++stack[depth].pos;
             const entry = node[nextPos];
-            const charIdx = entry & NodeMaskChildCharIndex;
+            const charIdx = entry & nodeMaskChildCharIndex;
             const acc = accumulator.clone();
             const codePoint = acc.decode(charIdx);
             const letter = (codePoint && String.fromCodePoint(codePoint)) || '';
             ++depth;
             stack[depth] = {
-                nodeIdx: entry >>> NodeChildRefShift,
+                nodeIdx: entry >>> nodeChildRefShift,
                 pos: 0,
                 word: word + letter,
                 accumulator: acc,
@@ -179,8 +179,8 @@ export class FastTrieBlob implements TrieData {
     }
 
     toTrieBlob(): TrieBlob {
-        const NodeMaskChildCharIndex = this.bitMasksInfo.NodeMaskChildCharIndex;
-        const NodeChildRefShift = this.bitMasksInfo.NodeChildRefShift;
+        const nodeMaskChildCharIndex = NodeMaskCharByte;
+        const nodeChildRefShift = NodeChildIndexRefShift;
         const nodes = this.#nodes;
         function calcNodeToIndex(nodes: FastTrieBlobNode[]): number[] {
             let offset = 0;
@@ -206,8 +206,8 @@ export class FastTrieBlob implements TrieData {
             binNodes[offset++] = ((node.length - 1) << lenShift) | node[0];
             for (let j = 1; j < node.length; ++j) {
                 const v = node[j];
-                const nodeRef = v >>> NodeChildRefShift;
-                const charIndex = v & NodeMaskChildCharIndex;
+                const nodeRef = v >>> nodeChildRefShift;
+                const charIndex = v & nodeMaskChildCharIndex;
                 binNodes[offset++] = (nodeToIndex[nodeRef] << refShift) | charIndex;
             }
         }
@@ -224,7 +224,7 @@ export class FastTrieBlob implements TrieData {
         return this;
     }
 
-    encodeToBTrie(): Uint8Array {
+    encodeToBTrie(): Uint8Array<ArrayBuffer> {
         return this.toTrieBlob().encodeToBTrie();
     }
 
@@ -240,12 +240,12 @@ export class FastTrieBlob implements TrieData {
     }
 
     static create(data: FastTrieBlobInternals): FastTrieBlob {
-        return new FastTrieBlob(data.nodes, extractInfo(data), data.info);
+        return new FastTrieBlob(data.nodes, data.info);
     }
 
     static toITrieNodeRoot(trie: FastTrieBlob): ITrieNodeRoot {
         return new FastTrieBlobIRoot(
-            new FastTrieBlobInternalsAndMethods(trie.#nodes, trie.bitMasksInfo, trie.info, {
+            new FastTrieBlobInternalsAndMethods(trie.#nodes, trie.info, {
                 nodeFindNode: (idx: number, word: string) => trie.#lookupNode(idx, trie.wordToUtf8Seq(word)),
                 nodeFindExact: (idx: number, word: string) => trie.#has(idx, word),
                 nodeGetChild: (idx: number, letter: string) => trie.#searchNodeForChar(idx, letter),
@@ -263,12 +263,6 @@ export class FastTrieBlob implements TrieData {
     static NodeMaskEOW: number = TrieBlob.NodeMaskEOW;
     static NodeChildRefShift: number = TrieBlob.NodeChildRefShift;
     static NodeMaskChildCharIndex: number = TrieBlob.NodeMaskChildCharIndex;
-
-    static DefaultBitMaskInfo: FastTrieBlobBitMaskInfo = {
-        NodeMaskEOW: FastTrieBlob.NodeMaskEOW,
-        NodeMaskChildCharIndex: FastTrieBlob.NodeMaskChildCharIndex,
-        NodeChildRefShift: FastTrieBlob.NodeChildRefShift,
-    };
 
     get iTrieRoot(): ITrieNodeRoot {
         return (this.#iTrieRoot ??= FastTrieBlob.toITrieNodeRoot(this));
@@ -289,16 +283,16 @@ export class FastTrieBlob implements TrieData {
     nodeInfo(nodeIndex: number, accumulator?: Utf8Accumulator): TrieBlobNodeInfo {
         const acc = accumulator ?? Utf8Accumulator.create();
         const n = this.#nodes[nodeIndex];
-        const eow = !!(n[0] & this.bitMasksInfo.NodeMaskEOW);
+        const eow = !!(n[0] & NodeHeaderEOWMask);
         const children: TrieBlobNodeInfo['children'] = [];
         children.length = n.length - 1;
         for (let p = 1; p < n.length; ++p) {
             const v = n[p];
-            const cIdx = v & this.bitMasksInfo.NodeMaskChildCharIndex;
+            const cIdx = v & NodeMaskCharByte;
             const a = acc.clone();
             const codePoint = a.decode(cIdx);
             const c = codePoint !== undefined ? String.fromCodePoint(codePoint) : '∎';
-            const i = v >>> this.bitMasksInfo.NodeChildRefShift;
+            const i = v >>> NodeChildIndexRefShift;
             children[p] = { c, i, cIdx };
         }
         return { eow, children };
@@ -320,11 +314,6 @@ export class FastTrieBlob implements TrieData {
     }
 
     static fromTrieBlob(trie: TrieBlob): FastTrieBlob {
-        const bitMasksInfo: FastTrieBlobBitMaskInfo = {
-            NodeMaskEOW: TrieBlob.NodeMaskEOW,
-            NodeMaskChildCharIndex: TrieBlob.NodeMaskChildCharIndex,
-            NodeChildRefShift: TrieBlob.NodeChildRefShift,
-        };
         const trieNodesBin = TrieBlob.nodesView(trie);
         const nodeOffsets: number[] = [];
         for (
@@ -356,11 +345,15 @@ export class FastTrieBlob implements TrieData {
                 node[j] = (idx << TrieBlob.NodeChildRefShift) | charIndex;
             }
         }
-        return new FastTrieBlob(sortNodes(nodes, TrieBlob.NodeMaskChildCharIndex), bitMasksInfo, trie.info);
+        return new FastTrieBlob(sortNodes(nodes, TrieBlob.NodeMaskChildCharIndex), trie.info);
     }
 
     static isFastTrieBlob(obj: unknown): obj is FastTrieBlob {
         return obj instanceof FastTrieBlob;
+    }
+
+    testExtractStringTable(): StringTable {
+        return extractStringTable(this.#nodes);
     }
 }
 

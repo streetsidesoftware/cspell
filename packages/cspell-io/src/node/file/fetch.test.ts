@@ -47,7 +47,7 @@ describe('fetch', () => {
 
     test.each`
         url
-        ${'http://www.jdentonthego.com/Pictures/Nepal/NP_EBC_D02_Small_Village.jpg'}
+        ${'https://www.interglot.com/images/flagsheet44.jpg'}
     `(
         'fetchHead $url',
         async ({ url }) => {

@@ -3,7 +3,7 @@ Repository: RustPython/RustPython
 Url: "https://github.com/RustPython/RustPython.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 711, Issues found: 1390 in 194 files.
+ CSpell: Files checked: 716, Issues found: 1400 in 195 files.
  exit code: 1
 Cargo.toml:115:28    - Unknown word (nsis)            -- package.metadata.packager.nsis]
 Cargo.toml:167:80    - Unknown word (oldtime)         -- features = ["clock", "oldtime", "std"] }
@@ -81,18 +81,23 @@ crates/codegen/src/compile.rs:1192:32   - Unknown word (typeparams) -- let (symb
 crates/codegen/src/compile.rs:1194:20   - Unknown word (typeparams) -- let is_typeparams = current_table.typ
 crates/codegen/src/compile.rs:1200:52   - Unknown word (typeparams) -- symbol.is_none() && is_typeparams {
 crates/codegen/src/compile.rs:1209:42   - Unknown word (typeparams) -- map(|s| s.scope), is_typeparams)
-crates/codegen/src/compile.rs:1925:72   - Unknown word (Typeparam)  -- IntrinsicFunction2::SetTypeparamDefault
-crates/codegen/src/compile.rs:1951:72   - Unknown word (Typeparam)  -- IntrinsicFunction2::SetTypeparamDefault
-crates/codegen/src/compile.rs:1978:72   - Unknown word (Typeparam)  -- IntrinsicFunction2::SetTypeparamDefault
-crates/codegen/src/compile.rs:2321:21   - Unknown word (typeparam)  -- let mut num_typeparam_args = 0;
-crates/codegen/src/compile.rs:2326:21   - Unknown word (typeparam)  -- num_typeparam_args += 1;
-crates/codegen/src/compile.rs:2329:21   - Unknown word (typeparam)  -- num_typeparam_args += 1;
-crates/codegen/src/compile.rs:2333:20   - Unknown word (typeparam)  -- if num_typeparam_args == 2 {
-crates/codegen/src/compile.rs:2342:21   - Unknown word (typeparam)  -- num_typeparam_args as u32,
-crates/codegen/src/compile.rs:2447:49   - Unknown word (classdict)  -- for __class__ and __classdict__ in class scope
-crates/codegen/src/compile.rs:3652:29   - Unknown word (subpatterns) -- // After processing subpatterns, adjust on_top
+crates/codegen/src/compile.rs:1959:72   - Unknown word (Typeparam)  -- IntrinsicFunction2::SetTypeparamDefault
+crates/codegen/src/compile.rs:1985:72   - Unknown word (Typeparam)  -- IntrinsicFunction2::SetTypeparamDefault
+crates/codegen/src/compile.rs:2012:72   - Unknown word (Typeparam)  -- IntrinsicFunction2::SetTypeparamDefault
+crates/codegen/src/compile.rs:2617:21   - Unknown word (typeparam)  -- let mut num_typeparam_args = 0;
+crates/codegen/src/compile.rs:2622:21   - Unknown word (typeparam)  -- num_typeparam_args += 1;
+crates/codegen/src/compile.rs:2625:21   - Unknown word (typeparam)  -- num_typeparam_args += 1;
+crates/codegen/src/compile.rs:2629:20   - Unknown word (typeparam)  -- if num_typeparam_args == 2 {
+crates/codegen/src/compile.rs:2638:21   - Unknown word (typeparam)  -- num_typeparam_args as u32,
+crates/codegen/src/compile.rs:2743:49   - Unknown word (classdict)  -- for __class__ and __classdict__ in class scope
 crates/codegen/src/compile.rs:377:13    - Unknown word (fblock)     -- fblock: Vec::with_capacity
 crates/codegen/src/compile.rs:377:40    - Unknown word (MAXBLOCKS)  -- Vec::with_capacity(MAXBLOCKS),
+crates/codegen/src/compile.rs:3948:29   - Unknown word (subpatterns) -- // After processing subpatterns, adjust on_top
+crates/codegen/src/compile.rs:4345:28   - Unknown word (addcompare)  -- [CPython `compiler_addcompare`](https://github.com
+crates/codegen/src/compile.rs:4346:16   - Unknown word (addcompare)  -- fn compile_addcompare(&mut self, op: &CmpOp
+crates/codegen/src/compile.rs:4396:26   - Unknown word (addcompare)  -- self.compile_addcompare(last_op);
+crates/codegen/src/compile.rs:4411:26   - Unknown word (addcompare)  -- self.compile_addcompare(op);
+crates/codegen/src/compile.rs:4425:22   - Unknown word (addcompare)  -- self.compile_addcompare(last_op);
 crates/codegen/src/compile.rs:47:7      - Unknown word (MAXBLOCKS)  -- const MAXBLOCKS: usize = 20;
 crates/codegen/src/compile.rs:670:33    - Unknown word (dictbytype) -- Build cellvars using dictbytype (CELL scope, sorted
 crates/codegen/src/compile.rs:690:30    - Unknown word (classdict)  -- / Handle implicit __classdict__ cell if needed
@@ -127,14 +132,14 @@ crates/codegen/src/symboltable.rs:53:54     - Unknown word (classdict)  -- needs
 crates/codegen/src/symboltable.rs:54:15     - Unknown word (classdict)  -- pub needs_classdict: bool,
 crates/codegen/src/symboltable.rs:71:19     - Unknown word (classdict)  -- needs_classdict: false,
 crates/common/src/format.rs:1366:28   - Unknown word (aftersign)  -- test_format_int_non_aftersign_zero_padding() {
-crates/compiler-core/src/bytecode.rs:1476:65   - Unknown word (ilog)           -- self.instructions.len().ilog10() as usize);
-crates/compiler-core/src/bytecode.rs:1560:13   - Unknown word (linetable)      -- linetable: self.linetable,
-crates/compiler-core/src/bytecode.rs:1560:29   - Unknown word (linetable)      -- linetable: self.linetable,
-crates/compiler-core/src/bytecode.rs:1561:13   - Unknown word (exceptiontable) -- exceptiontable: self.exceptiontable
-crates/compiler-core/src/bytecode.rs:1561:34   - Unknown word (exceptiontable) -- exceptiontable: self.exceptiontable,
-crates/compiler-core/src/bytecode.rs:1592:13   - Unknown word (linetable)      -- linetable: self.linetable.clone
-crates/compiler-core/src/bytecode.rs:1593:13   - Unknown word (exceptiontable) -- exceptiontable: self.exceptiontable
-crates/compiler-core/src/bytecode.rs:1593:34   - Unknown word (exceptiontable) -- exceptiontable: self.exceptiontable.clone(),
+crates/compiler-core/src/bytecode.rs:1486:65   - Unknown word (ilog)           -- self.instructions.len().ilog10() as usize);
+crates/compiler-core/src/bytecode.rs:1570:13   - Unknown word (linetable)      -- linetable: self.linetable,
+crates/compiler-core/src/bytecode.rs:1570:29   - Unknown word (linetable)      -- linetable: self.linetable,
+crates/compiler-core/src/bytecode.rs:1571:13   - Unknown word (exceptiontable) -- exceptiontable: self.exceptiontable
+crates/compiler-core/src/bytecode.rs:1571:34   - Unknown word (exceptiontable) -- exceptiontable: self.exceptiontable,
+crates/compiler-core/src/bytecode.rs:1602:13   - Unknown word (linetable)      -- linetable: self.linetable.clone
+crates/compiler-core/src/bytecode.rs:1603:13   - Unknown word (exceptiontable) -- exceptiontable: self.exceptiontable
+crates/compiler-core/src/bytecode.rs:1603:34   - Unknown word (exceptiontable) -- exceptiontable: self.exceptiontable.clone(),
 crates/compiler-core/src/bytecode.rs:280:9     - Unknown word (linetable)  -- pub linetable: Box<[u8]>,
 crates/compiler-core/src/bytecode.rs:282:9     - Unknown word (exceptiontable) -- pub exceptiontable: Box<[u8]>,
 crates/compiler-core/src/bytecode.rs:582:12    - Unknown word (Typeparam)      -- SetTypeparamDefault = 5,
@@ -149,7 +154,7 @@ crates/compiler-core/src/marshal.rs:252:9     - Unknown word (exceptiontable) --
 crates/compiler-core/src/marshal.rs:253:21    - Unknown word (exceptiontable) -- .read_slice(exceptiontable_len)?
 crates/compiler-core/src/marshal.rs:275:9     - Unknown word (linetable)      -- linetable,
 crates/compiler-core/src/marshal.rs:276:9     - Unknown word (exceptiontable) -- exceptiontable,
-crates/derive-impl/src/pyclass.rs:309:43    - Unknown word (subclassing) -- proper memory layout for subclassing (required for #[repr
+crates/derive-impl/src/pyclass.rs:322:43    - Unknown word (subclassing) -- proper memory layout for subclassing (required for #[repr
 crates/doc/LICENSE:10:32     - Unknown word (CNRI)         -- Research Initiatives (CNRI, see https://www.cnri
 crates/doc/LICENSE:11:4      - Unknown word (Reston)       -- in Reston, Virginia where he released
 crates/doc/LICENSE:121:1     - Unknown word (BEOPEN)       -- BEOPEN.COM LICENSE AGREEMENT
@@ -193,16 +198,16 @@ crates/stdlib/src/faulthandler.rs:73:67     - Unknown word (NSIGNALS)   -- Fault
 crates/stdlib/src/faulthandler.rs:82:67     - Unknown word (NSIGNALS)   -- FaultHandler; FAULTHANDLER_NSIGNALS] = [
 crates/stdlib/src/math.rs:574:18    - Unknown word (subnormals) -- // Scale subnormals to normal range first
 crates/stdlib/src/opcode.rs:226:28    - Unknown word (TYPEPARAM)  -- "INTRINSIC_SET_TYPEPARAM_DEFAULT",
-crates/stdlib/src/ssl.rs:1227:21   - Unknown word (capath)     -- let has_capath = matches!(&args.capath
-crates/stdlib/src/ssl.rs:1227:45   - Unknown word (capath)     -- capath = matches!(&args.capath, OptionalArg::Present
+crates/stdlib/src/ssl.rs:1233:21   - Unknown word (capath)     -- let has_capath = matches!(&args.capath
+crates/stdlib/src/ssl.rs:1233:45   - Unknown word (capath)     -- capath = matches!(&args.capath, OptionalArg::Present
 crates/stdlib/src/ssl.rs:726:39    - Unknown word (capath)     -- CA certificates from capath for lazy loading simulation
 crates/stdlib/src/ssl.rs:729:9     - Unknown word (capath)     -- capath_certs_der: PyRwLock
 crates/stdlib/src/ssl.rs:829:9     - Unknown word (capath)     -- capath: OptionalArg<Option
 crates/stdlib/src/ssl/cert.rs:648:61    - Unknown word (capath)     -- skipped (matches OpenSSL capath behavior).
 crates/stdlib/src/ssl/cert.rs:658:24    - Unknown word (capath)     -- // OpenSSL capath uses hash-based naming
-crates/stdlib/src/ssl/compat.rs:1509:71   - Unknown word (eofs)       -- behavior (suppress_ragged_eofs=True)
-crates/stdlib/src/ssl/compat.rs:1519:68   - Unknown word (eofs)       -- when suppress_ragged_eofs=False is explicitly
-crates/stdlib/src/ssl/compat.rs:1521:48   - Unknown word (eofs)       -- Implement suppress_ragged_eofs parameter if needed
+crates/stdlib/src/ssl/compat.rs:1559:71   - Unknown word (eofs)       -- behavior (suppress_ragged_eofs=True)
+crates/stdlib/src/ssl/compat.rs:1569:68   - Unknown word (eofs)       -- when suppress_ragged_eofs=False is explicitly
+crates/stdlib/src/ssl/compat.rs:1571:48   - Unknown word (eofs)       -- Implement suppress_ragged_eofs parameter if needed
 crates/stdlib/src/ssl/error.rs:122:15    - Unknown word (SSLEOF)     -- PySSLEOFError::class(&vm.ctx
 crates/stdlib/src/ssl/error.rs:92:27     - Unknown word (SSLEOF)     -- pyexception(name = "SSLEOFError", base = PySSLError
 crates/stdlib/src/ssl/error.rs:95:18     - Unknown word (SSLEOF)     -- pub struct PySSLEOFError(PySSLError);
@@ -226,78 +231,80 @@ crates/vm/src/builtins/code.rs:56:38     - Unknown word (linetable)  -- return f
 crates/vm/src/builtins/code.rs:631:15    - Unknown word (exceptiontable) -- pub fn co_exceptiontable(&self, vm: &VirtualMachine
 crates/vm/src/builtins/code.rs:638:43    - Unknown word (lineiterator)   -- Implement lazy iterator (lineiterator) like CPython for better
 crates/vm/src/builtins/code.rs:77:50     - Unknown word (CODEUNIT)   -- length * 2; // sizeof(_Py_CODEUNIT) = 2
-crates/vm/src/builtins/type.rs:1312:66   - Unknown word (typeobject) -- in type_dict_set_doc (typeobject.c)
-crates/vm/src/builtins/type.rs:1696:14   - Unknown word (setdict)    -- // = subtype_setdict
-crates/vm/src/builtins/type.rs:1745:13   - Unknown word (staticbase) -- let mut staticbase = subtype.clone();
-crates/vm/src/builtins/type.rs:1746:11   - Unknown word (staticbase) -- while staticbase.slots.flags.has_feature
-crates/vm/src/builtins/type.rs:1747:29   - Unknown word (staticbase) -- if let Some(base) = staticbase.base.as_ref() {
-crates/vm/src/builtins/type.rs:1748:13   - Unknown word (staticbase) -- staticbase = base.clone();
-crates/vm/src/builtins/type.rs:1754:17   - Unknown word (staticbase's) -- // Check if staticbase's tp_new differs from
-crates/vm/src/builtins/type.rs:1756:9    - Unknown word (staticbase)   -- let staticbase_new = staticbase.slots
-crates/vm/src/builtins/type.rs:992:86    - Unknown word (SETREF)     -- similar to CPython's Py_SETREF)
-crates/vm/src/frame.rs:1263:38   - Unknown word (defaultdict) -- // collections.defaultdict that define __missing
-crates/vm/src/frame.rs:2474:46   - Unknown word (Typeparam)   -- IntrinsicFunction2::SetTypeparamDefault => {
-crates/vm/src/frame.rs:2475:44   - Unknown word (typeparam)   -- stdlib::typing::set_typeparam_default(arg1, arg2,
+crates/vm/src/builtins/type.rs:1012:86   - Unknown word (SETREF)     -- similar to CPython's Py_SETREF)
+crates/vm/src/builtins/type.rs:1450:66   - Unknown word (typeobject) -- in type_dict_set_doc (typeobject.c)
+crates/vm/src/builtins/type.rs:1850:14   - Unknown word (setdict)    -- // = subtype_setdict
+crates/vm/src/builtins/type.rs:1901:13   - Unknown word (staticbase) -- let mut staticbase = subtype.clone();
+crates/vm/src/builtins/type.rs:1902:11   - Unknown word (staticbase) -- while staticbase.slots.flags.has_feature
+crates/vm/src/builtins/type.rs:1903:29   - Unknown word (staticbase) -- if let Some(base) = staticbase.base.as_ref() {
+crates/vm/src/builtins/type.rs:1904:13   - Unknown word (staticbase) -- staticbase = base.clone();
+crates/vm/src/builtins/type.rs:1910:17   - Unknown word (staticbase's) -- // Check if staticbase's tp_new differs from
+crates/vm/src/builtins/type.rs:1912:9    - Unknown word (staticbase)   -- let staticbase_new = staticbase.slots
+crates/vm/src/builtins/type.rs:470:26    - Unknown word (copyslot)   -- def.accessor.copyslot_if_none(self, base)
+crates/vm/src/frame.rs:1268:38   - Unknown word (defaultdict) -- // collections.defaultdict that define __missing
+crates/vm/src/frame.rs:2488:46   - Unknown word (Typeparam)   -- IntrinsicFunction2::SetTypeparamDefault => {
+crates/vm/src/frame.rs:2489:44   - Unknown word (typeparam)   -- stdlib::typing::set_typeparam_default(arg1, arg2,
 crates/vm/src/getpath.rs:18:37     - Unknown word (pybuilddir) -- BUILDDIR_TXT: &str = "pybuilddir.txt";
-crates/vm/src/getpath.rs:218:18    - Unknown word (pybuilddir)  -- // Check for pybuilddir.txt (indicates build
 crates/vm/src/getpath.rs:21:15     - Unknown word (BUILDSTDLIB) -- pub const BUILDSTDLIB_LANDMARK: &str = "Lib
-crates/vm/src/getpath.rs:229:37    - Unknown word (BUILDSTDLIB) -- file(dir, &[platform::BUILDSTDLIB_LANDMARK])
-crates/vm/src/getpath.rs:269:34    - Unknown word (dynload)     -- POSIX: search for lib-dynload directory
-crates/vm/src/getpath.rs:311:42    - Unknown word (dynload)     -- stdlib first, then lib-dynload
+crates/vm/src/getpath.rs:225:18    - Unknown word (pybuilddir)  -- // Check for pybuilddir.txt (indicates build
+crates/vm/src/getpath.rs:236:37    - Unknown word (BUILDSTDLIB) -- file(dir, &[platform::BUILDSTDLIB_LANDMARK])
+crates/vm/src/getpath.rs:276:34    - Unknown word (dynload)     -- POSIX: search for lib-dynload directory
+crates/vm/src/getpath.rs:318:42    - Unknown word (dynload)     -- stdlib first, then lib-dynload
 crates/vm/src/getpath.rs:34:34     - Unknown word (dynload)     -- lib/python{}.{}/lib-dynload",
 crates/vm/src/getpath.rs:49:37     - Unknown word (pybuilddir)  -- BUILDDIR_TXT: &str = "pybuilddir.txt";
 crates/vm/src/getpath.rs:52:15     - Unknown word (BUILDSTDLIB) -- pub const BUILDSTDLIB_LANDMARK: &str = "Lib
 crates/vm/src/macros.rs:193:31    - Unknown word (metavars)   -- allow(clippy::macro_metavars_in_unsafe)]
-crates/vm/src/stdlib/builtins.rs:968:48    - Unknown word (tmptype)    -- winner is subtype of tmptype, continue (winner is
-crates/vm/src/stdlib/builtins.rs:972:27    - Unknown word (tmptype)    -- // if tmptype is subtype of winner
-crates/vm/src/stdlib/builtins.rs:972:65    - Unknown word (tmptype)    -- subtype of winner, update (tmptype is more derived)
-crates/vm/src/stdlib/ctypes/array.rs:268:16    - Unknown word (iteminfo)   -- // if (iteminfo->getfunc == _ctypes
-crates/vm/src/stdlib/ctypes/array.rs:268:26    - Unknown word (getfunc)    -- // if (iteminfo->getfunc == _ctypes_get_fielddesc
-crates/vm/src/stdlib/ctypes/array.rs:268:49    - Unknown word (fielddesc)  -- getfunc == _ctypes_get_fielddesc("c")->getfunc)
-crates/vm/src/stdlib/ctypes/array.rs:268:65    - Unknown word (getfunc)    -- get_fielddesc("c")->getfunc)
-crates/vm/src/stdlib/ctypes/array.rs:269:67    - Unknown word (getsets)    -- PyTypeObject*)self, CharArray_getsets);
-crates/vm/src/stdlib/ctypes/array.rs:270:30    - Unknown word (iteminfo)   -- / else if (iteminfo->getfunc == _ctypes
-crates/vm/src/stdlib/ctypes/array.rs:270:40    - Unknown word (getfunc)    -- else if (iteminfo->getfunc == _ctypes_get_fielddesc
-crates/vm/src/stdlib/ctypes/array.rs:270:63    - Unknown word (fielddesc)  -- getfunc == _ctypes_get_fielddesc("u")->getfunc)
-crates/vm/src/stdlib/ctypes/array.rs:270:79    - Unknown word (getfunc)    -- get_fielddesc("u")->getfunc)
-crates/vm/src/stdlib/ctypes/array.rs:271:68    - Unknown word (getsets)    -- yTypeObject*)self, WCharArray_getsets);
-crates/vm/src/stdlib/ctypes/array.rs:276:41    - Unknown word (getsets)    -- ) => add_char_array_getsets(&type_ref, vm),
-crates/vm/src/stdlib/ctypes/array.rs:897:43    - Unknown word (getfunc)    -- → bytes (item_info->getfunc == "c")
-crates/vm/src/stdlib/ctypes/array.rs:89:37     - Unknown word (getsets)    -- ) => add_char_array_getsets(&new_type_ref, vm),
-crates/vm/src/stdlib/ctypes/array.rs:90:38     - Unknown word (getsets)    -- => add_wchar_array_getsets(&new_type_ref, vm),
+crates/vm/src/stdlib/builtins.rs:988:48    - Unknown word (tmptype)    -- winner is subtype of tmptype, continue (winner is
+crates/vm/src/stdlib/builtins.rs:992:27    - Unknown word (tmptype)    -- // if tmptype is subtype of winner
+crates/vm/src/stdlib/builtins.rs:992:65    - Unknown word (tmptype)    -- subtype of winner, update (tmptype is more derived)
+crates/vm/src/stdlib/ctypes/array.rs:105:37    - Unknown word (getsets)    -- ) => add_char_array_getsets(&new_type_ref, vm),
+crates/vm/src/stdlib/ctypes/array.rs:106:38    - Unknown word (getsets)    -- => add_wchar_array_getsets(&new_type_ref, vm),
+crates/vm/src/stdlib/ctypes/array.rs:284:16    - Unknown word (iteminfo)   -- // if (iteminfo->getfunc == _ctypes
+crates/vm/src/stdlib/ctypes/array.rs:284:26    - Unknown word (getfunc)    -- // if (iteminfo->getfunc == _ctypes_get_fielddesc
+crates/vm/src/stdlib/ctypes/array.rs:284:49    - Unknown word (fielddesc)  -- getfunc == _ctypes_get_fielddesc("c")->getfunc)
+crates/vm/src/stdlib/ctypes/array.rs:284:65    - Unknown word (getfunc)    -- get_fielddesc("c")->getfunc)
+crates/vm/src/stdlib/ctypes/array.rs:285:67    - Unknown word (getsets)    -- PyTypeObject*)self, CharArray_getsets);
+crates/vm/src/stdlib/ctypes/array.rs:286:30    - Unknown word (iteminfo)   -- / else if (iteminfo->getfunc == _ctypes
+crates/vm/src/stdlib/ctypes/array.rs:286:40    - Unknown word (getfunc)    -- else if (iteminfo->getfunc == _ctypes_get_fielddesc
+crates/vm/src/stdlib/ctypes/array.rs:286:63    - Unknown word (fielddesc)  -- getfunc == _ctypes_get_fielddesc("u")->getfunc)
+crates/vm/src/stdlib/ctypes/array.rs:286:79    - Unknown word (getfunc)    -- get_fielddesc("u")->getfunc)
+crates/vm/src/stdlib/ctypes/array.rs:287:68    - Unknown word (getsets)    -- yTypeObject*)self, WCharArray_getsets);
+crates/vm/src/stdlib/ctypes/array.rs:292:41    - Unknown word (getsets)    -- ) => add_char_array_getsets(&type_ref, vm),
+crates/vm/src/stdlib/ctypes/array.rs:918:43    - Unknown word (getfunc)    -- → bytes (item_info->getfunc == "c")
+crates/vm/src/stdlib/ctypes/base.rs:1202:78   - Unknown word (IFUNC)       -- resolve to NULL (e.g., GNU IFUNC)
 crates/vm/src/stdlib/ctypes/base.rs:121:21    - Unknown word (paramfunc)   -- .field("paramfunc", &self.paramfunc)
 crates/vm/src/stdlib/ctypes/base.rs:121:39    - Unknown word (paramfunc)   -- field("paramfunc", &self.paramfunc)
-crates/vm/src/stdlib/ctypes/base.rs:1273:27   - Unknown word (fdescr)      -- pub fn new_from_field(fdescr: &PyCField, index_offset
-crates/vm/src/stdlib/ctypes/base.rs:1275:21   - Unknown word (fdescr)      -- offset: fdescr.offset + offset_delta
-crates/vm/src/stdlib/ctypes/base.rs:1276:19   - Unknown word (fdescr)      -- size: fdescr.size,
-crates/vm/src/stdlib/ctypes/base.rs:1277:20   - Unknown word (fdescr)      -- index: fdescr.index + index_offset
-crates/vm/src/stdlib/ctypes/base.rs:1278:20   - Unknown word (fdescr)      -- proto: fdescr.proto.clone(),
+crates/vm/src/stdlib/ctypes/base.rs:1285:27   - Unknown word (fdescr)      -- pub fn new_from_field(fdescr: &PyCField, index_offset
+crates/vm/src/stdlib/ctypes/base.rs:1287:21   - Unknown word (fdescr)      -- offset: fdescr.offset + offset_delta
+crates/vm/src/stdlib/ctypes/base.rs:1288:19   - Unknown word (fdescr)      -- size: fdescr.size,
+crates/vm/src/stdlib/ctypes/base.rs:1289:20   - Unknown word (fdescr)      -- index: fdescr.index + index_offset
+crates/vm/src/stdlib/ctypes/base.rs:1290:20   - Unknown word (fdescr)      -- proto: fdescr.proto.clone(),
 crates/vm/src/stdlib/ctypes/base.rs:141:13    - Unknown word (paramfunc)   -- paramfunc: ParamFunc::None,
 crates/vm/src/stdlib/ctypes/base.rs:161:13    - Unknown word (paramfunc)   -- paramfunc: ParamFunc::None,
-crates/vm/src/stdlib/ctypes/base.rs:1703:40   - Unknown word (parg)        -- from buffer: memcpy(&parg->value, self->b_ptr
 crates/vm/src/stdlib/ctypes/base.rs:170:51    - Unknown word (HASPOINTER)  -- element type's flags (for HASPOINTER inheritance)
-crates/vm/src/stdlib/ctypes/base.rs:1745:8    - Unknown word (parg)        -- // parg->value.p = *(void *
+crates/vm/src/stdlib/ctypes/base.rs:1715:40   - Unknown word (parg)        -- from buffer: memcpy(&parg->value, self->b_ptr
+crates/vm/src/stdlib/ctypes/base.rs:1757:8    - Unknown word (parg)        -- // parg->value.p = *(void *
 crates/vm/src/stdlib/ctypes/base.rs:190:20    - Unknown word (HASPOINTER)  -- // Inherit HASPOINTER flag from element type
 crates/vm/src/stdlib/ctypes/base.rs:191:16    - Unknown word (iteminfo)    -- // if (iteminfo->flags & (TYPEFLAG_ISPOINTER
 crates/vm/src/stdlib/ctypes/base.rs:191:44    - Unknown word (ISPOINTER)   -- iteminfo->flags & (TYPEFLAG_ISPOINTER | TYPEFLAG_HASPOINTER
 crates/vm/src/stdlib/ctypes/base.rs:191:65    - Unknown word (HASPOINTER)  -- ISPOINTER | TYPEFLAG_HASPOINTER))
 crates/vm/src/stdlib/ctypes/base.rs:192:43    - Unknown word (HASPOINTER)  -- stginfo->flags |= TYPEFLAG_HASPOINTER;
 crates/vm/src/stdlib/ctypes/base.rs:194:48    - Unknown word (ISPOINTER)   -- StgInfoFlags::TYPEFLAG_ISPOINTER | StgInfoFlags::TYPEFLAG
-crates/vm/src/stdlib/ctypes/base.rs:2262:9    - Unknown word (fieldlist)   -- let fieldlist: Vec<PyObjectRef> =
-crates/vm/src/stdlib/ctypes/base.rs:2270:17   - Unknown word (fieldlist)   -- for pair in fieldlist.iter() {
+crates/vm/src/stdlib/ctypes/base.rs:2284:9    - Unknown word (fieldlist)   -- let fieldlist: Vec<PyObjectRef> =
+crates/vm/src/stdlib/ctypes/base.rs:2292:17   - Unknown word (fieldlist)   -- for pair in fieldlist.iter() {
 crates/vm/src/stdlib/ctypes/base.rs:44:24     - Unknown word (ISPOINTER)  -- const TYPEFLAG_ISPOINTER = 0x100;
 crates/vm/src/stdlib/ctypes/base.rs:46:24     - Unknown word (HASPOINTER) -- const TYPEFLAG_HASPOINTER = 0x200;
 crates/vm/src/stdlib/ctypes/base.rs:48:24     - Unknown word (HASUNION)   -- const TYPEFLAG_HASUNION = 0x400;
 crates/vm/src/stdlib/ctypes/base.rs:50:24     - Unknown word (HASBITFIELD) -- const TYPEFLAG_HASBITFIELD = 0x800;
 crates/vm/src/stdlib/ctypes/base.rs:93:16     - Unknown word (paramfunc)   -- pub(super) paramfunc: ParamFunc, // how to
-crates/vm/src/stdlib/ctypes/pointer.rs:359:29    - Unknown word (iteminfo)   -- // offset = index * iteminfo->size
-crates/vm/src/stdlib/ctypes/pointer.rs:41:18     - Unknown word (paramfunc)  -- stg_info.paramfunc = super::base::ParamFunc
-crates/vm/src/stdlib/ctypes/pointer.rs:43:50     - Unknown word (ISPOINTER)  -- StgInfoFlags::TYPEFLAG_ISPOINTER;
-crates/vm/src/stdlib/ctypes/simple.rs:1248:21   - Unknown word (outparm)    -- /// Simple_from_outparm - convert output parameter
-crates/vm/src/stdlib/ctypes/simple.rs:1252:22   - Unknown word (outparam)   -- fn __ctypes_from_outparam__(zelf: PyRef<Self>
-crates/vm/src/stdlib/ctypes/simple.rs:531:18    - Unknown word (paramfunc)  -- stg_info.paramfunc = super::base::ParamFunc
-crates/vm/src/stdlib/ctypes/simple.rs:533:25    - Unknown word (ISPOINTER)  -- // Set TYPEFLAG_ISPOINTER for pointer types: z
-crates/vm/src/stdlib/ctypes/simple.rs:536:54    - Unknown word (ISPOINTER)  -- StgInfoFlags::TYPEFLAG_ISPOINTER;
+crates/vm/src/stdlib/ctypes/pointer.rs:388:29    - Unknown word (iteminfo)   -- // offset = index * iteminfo->size
+crates/vm/src/stdlib/ctypes/pointer.rs:43:18     - Unknown word (paramfunc)  -- stg_info.paramfunc = super::base::ParamFunc
+crates/vm/src/stdlib/ctypes/pointer.rs:45:50     - Unknown word (ISPOINTER)  -- StgInfoFlags::TYPEFLAG_ISPOINTER;
+crates/vm/src/stdlib/ctypes/simple.rs:1302:21   - Unknown word (outparm)    -- /// Simple_from_outparm - convert output parameter
+crates/vm/src/stdlib/ctypes/simple.rs:1306:22   - Unknown word (outparam)   -- fn __ctypes_from_outparam__(zelf: PyRef<Self>
+crates/vm/src/stdlib/ctypes/simple.rs:577:18    - Unknown word (paramfunc)  -- stg_info.paramfunc = super::base::ParamFunc
+crates/vm/src/stdlib/ctypes/simple.rs:579:25    - Unknown word (ISPOINTER)  -- // Set TYPEFLAG_ISPOINTER for pointer types: z
+crates/vm/src/stdlib/ctypes/simple.rs:582:54    - Unknown word (ISPOINTER)  -- StgInfoFlags::TYPEFLAG_ISPOINTER;
 crates/vm/src/stdlib/ctypes/structure.rs:102:61    - Unknown word (baseinfo)    -- stg_info_opt().map(|baseinfo| {
 crates/vm/src/stdlib/ctypes/structure.rs:103:40    - Unknown word (baseinfo)    -- let mut stg_info = baseinfo.clone();
 crates/vm/src/stdlib/ctypes/structure.rs:122:22    - Unknown word (paramfunc)   -- stg_info.paramfunc = super::base::ParamFunc
@@ -345,11 +352,14 @@ crates/vm/src/stdlib/ctypes/union.rs:280:54    - Unknown word (HASPOINTER)  -- S
 crates/vm/src/stdlib/ctypes/union.rs:283:54    - Unknown word (HASBITFIELD) -- StgInfoFlags::TYPEFLAG_HASBITFIELD;
 crates/vm/src/stdlib/ctypes/union.rs:285:18    - Unknown word (paramfunc)   -- stg_info.paramfunc = super::base::ParamFunc
 crates/vm/src/stdlib/ctypes/union.rs:50:47     - Unknown word (subclassing) -- classes as finalized (subclassing finalizes the parent
-crates/vm/src/stdlib/io.rs:3018:40   - Unknown word (pyio)       -- Implementation follows _pyio.py TextIOWrapper.truncate
+crates/vm/src/stdlib/io.rs:3245:40   - Unknown word (pyio)       -- Implementation follows _pyio.py TextIOWrapper.truncate
 crates/vm/src/stdlib/typevar.rs:1000:82   - Unknown word (typeparam)  -- to CPython's _Py_set_typeparam_default
 crates/vm/src/stdlib/typevar.rs:1001:45   - Unknown word (Typeparam)  -- CALL_INTRINSIC_2 SetTypeparamDefault instruction
 crates/vm/src/stdlib/typevar.rs:1002:12   - Unknown word (typeparam)  -- pub fn set_typeparam_default(
 crates/vm/src/stdlib/typing.rs:6:9       - Unknown word (typeparam)  -- set_typeparam_default,
+crates/vm/src/types/slot_defs.rs:517:12    - Unknown word (copyslot)   -- pub fn copyslot_if_none(&self, typ:
+crates/vm/src/types/slot_defs.rs:567:20    - Unknown word (SLOTDEFINED) -- // SLOTDEFINED check for multiple inheritanc
+crates/vm/src/types/slot_defs.rs:67:47     - Unknown word (typeslots)  -- s Py_* slot IDs from typeslots.h.
 crates/vm/src/vm/compile.rs:29:8      - Unknown word (pymain)     -- // pymain_run_file_obj
 crates/vm/src/vm/compile.rs:31:17     - Unknown word (pymain)     -- // when pymain_run_module?
 crates/vm/src/vm/vm_new.rs:544:62    - Unknown word (subclassing) -- type doesn't support subclassing very well. e.g. Did
@@ -665,18 +675,18 @@ extra_tests/snippets/builtin_str_unicode_slice.py:58:34     - Unknown word (אם
 extra_tests/snippets/builtin_str_unicode_slice.py:60:37     - Unknown word (םיִהֹלֱא)    -- text[30:10:-1] == "א ,םיִהֹלֱא אָרָּב ,"
 extra_tests/snippets/builtin_str_unicode_slice.py:60:46     - Unknown word (אָרּ)        -- -1] == "א ,םיִהֹלֱא אָרָּב ,"
 extra_tests/snippets/builtin_tuple.py:1:6       - Unknown word (testutils)  -- from testutils import assert_raises
-extra_tests/snippets/builtin_type.py:293:9     - Unknown word (clsmethod)  -- def clsmethod(cls):
-extra_tests/snippets/builtin_type.py:297:9     - Unknown word (stmethod)   -- def stmethod():
-extra_tests/snippets/builtin_type.py:315:25    - Unknown word (clsmethod)  -- assert MyTypeWithMethod.clsmethod.__name__ == "clsmethod
-extra_tests/snippets/builtin_type.py:315:48    - Unknown word (clsmethod)  -- clsmethod.__name__ == "clsmethod"
-extra_tests/snippets/builtin_type.py:316:27    - Unknown word (clsmethod)  -- assert MyTypeWithMethod().clsmethod.__name__ == "clsmethod
-extra_tests/snippets/builtin_type.py:316:50    - Unknown word (clsmethod)  -- clsmethod.__name__ == "clsmethod"
-extra_tests/snippets/builtin_type.py:317:25    - Unknown word (stmethod)   -- assert MyTypeWithMethod.stmethod.__name__ == "stmethod
-extra_tests/snippets/builtin_type.py:317:47    - Unknown word (stmethod)   -- stmethod.__name__ == "stmethod"
-extra_tests/snippets/builtin_type.py:318:27    - Unknown word (stmethod)   -- assert MyTypeWithMethod().stmethod.__name__ == "stmethod
-extra_tests/snippets/builtin_type.py:318:49    - Unknown word (stmethod)   -- stmethod.__name__ == "stmethod"
-extra_tests/snippets/builtin_type.py:356:3     - Unknown word (Regresesion) -- # Regresesion to
+extra_tests/snippets/builtin_type.py:352:9     - Unknown word (clsmethod)  -- def clsmethod(cls):
+extra_tests/snippets/builtin_type.py:356:9     - Unknown word (stmethod)   -- def stmethod():
+extra_tests/snippets/builtin_type.py:374:25    - Unknown word (clsmethod)  -- assert MyTypeWithMethod.clsmethod.__name__ == "clsmethod
+extra_tests/snippets/builtin_type.py:374:48    - Unknown word (clsmethod)  -- clsmethod.__name__ == "clsmethod"
+extra_tests/snippets/builtin_type.py:375:27    - Unknown word (clsmethod)  -- assert MyTypeWithMethod().clsmethod.__name__ == "clsmethod
+extra_tests/snippets/builtin_type.py:375:50    - Unknown word (clsmethod)  -- clsmethod.__name__ == "clsmethod"
+extra_tests/snippets/builtin_type.py:376:25    - Unknown word (stmethod)   -- assert MyTypeWithMethod.stmethod.__name__ == "stmethod
+extra_tests/snippets/builtin_type.py:376:47    - Unknown word (stmethod)   -- stmethod.__name__ == "stmethod"
+extra_tests/snippets/builtin_type.py:377:27    - Unknown word (stmethod)   -- assert MyTypeWithMethod().stmethod.__name__ == "stmethod
+extra_tests/snippets/builtin_type.py:377:49    - Unknown word (stmethod)   -- stmethod.__name__ == "stmethod"
 extra_tests/snippets/builtin_type.py:3:6       - Unknown word (testutils)  -- from testutils import assert_raises
+extra_tests/snippets/builtin_type.py:415:3     - Unknown word (Regresesion) -- # Regresesion to
 extra_tests/snippets/builtins_module.py:1:6       - Unknown word (testutils)  -- from testutils import assert_raises
 extra_tests/snippets/example_interactive.py:25:53     - Unknown word (NEWLOCALS)  -- int) # 'OPTIMIZED, NEWLOCALS, NOFREE'
 extra_tests/snippets/example_interactive.py:25:64     - Unknown word (NOFREE)     -- OPTIMIZED, NEWLOCALS, NOFREE'
@@ -1037,7 +1047,7 @@ extra_tests/snippets/stdlib_struct.py:3:6       - Unknown word (testutils)  -- f
 extra_tests/snippets/stdlib_subprocess.py:22:36     - Unknown word (unixy)      -- make work in a non-unixy environment (something
 extra_tests/snippets/stdlib_subprocess.py:6:6       - Unknown word (testutils)  -- from testutils import assert_raises
 extra_tests/snippets/stdlib_sys.py:5:6       - Unknown word (testutils)  -- from testutils import assert_raises
-extra_tests/snippets/stdlib_types.py:3:6       - Unknown word (testutils)  -- from testutils import assert_raises
+extra_tests/snippets/stdlib_types.py:5:6       - Unknown word (testutils)  -- from testutils import assert_raises
 extra_tests/snippets/stdlib_weakref.py:3:6       - Unknown word (testutils)  -- from testutils import assert_raises
 extra_tests/snippets/stdlib_zlib.py:37:38     - Unknown word (amet)       -- Lorem ipsum dolor sit amet", "utf-8")
 extra_tests/snippets/stdlib_zlib.py:3:6       - Unknown word (testutils)  -- from testutils import assert_raises
@@ -1301,7 +1311,7 @@ scripts/release-wapm.sh:10:95     - Unknown word (WAPM)       -- features="${FEA
 scripts/release-wapm.sh:12:1      - Unknown word (wapm)       -- wapm publish
 scripts/release-wapm.sh:6:14      - Unknown word (WAPM)       -- FEATURES_FOR_WAPM=(stdlib zlib)
 src/lib.rs:165:4     - Unknown word (pymain)     -- // pymain_run_python
-src/lib.rs:229:16    - Unknown word (pymain)     -- // pymain_run_file
+src/lib.rs:238:16    - Unknown word (pymain)     -- // pymain_run_file
 wasm/README.md:1:16      - Unknown word (webassembly) -- # Compiling to webassembly
 wasm/demo/package.json:34:21     - Unknown word (Liddle)     -- "author": "Ryan Liddle",
 wasm/demo/snippets/asyncbrowser.py:16:5      - Unknown word (asyncweb)   -- asyncweb.run(main(delay))
@@ -1363,27 +1373,27 @@ whats_left.py:321:1     - Unknown word (cpymods)            -- cpymods = {}
 whats_left.py:352:9     - Unknown word (implementeds)       -- not_implementeds = {}
 whats_left.py:360:17    - Unknown word (implementeds)       -- not_implementeds[name] = missing_methods
 whats_left.py:363:16    - Unknown word (implementeds)       -- if not_implementeds:
-whats_left.py:375:5     - Unknown word (rustpymods)         -- rustpymods = {mod: dir_of_mod_or
-whats_left.py:386:18    - Unknown word (cpymod)             -- for modname, cpymod in cpymods.items():
-whats_left.py:386:28    - Unknown word (cpymods)            -- for modname, cpymod in cpymods.items():
-whats_left.py:387:21    - Unknown word (rustpymods)         -- rustpymod = rustpymods.get(modname)
-whats_left.py:387:9     - Unknown word (rustpymod)          -- rustpymod = rustpymods.get(modname
-whats_left.py:388:12    - Unknown word (rustpymod)          -- if rustpymod is None:
-whats_left.py:390:25    - Unknown word (rustpymod)          -- elif isinstance(rustpymod, Exception):
-whats_left.py:391:51    - Unknown word (rustpymod)          -- import"][modname] = rustpymod.__class__.__name__
-whats_left.py:392:17    - Unknown word (rustpymod)          -- rustpymod
-whats_left.py:395:44    - Unknown word (cpymod)             -- mplemented_items = sorted(set(cpymod) & set(rustpymod))
-whats_left.py:396:37    - Unknown word (cpymod)             -- missing_items = set(cpymod) - set(rustpymod)
-whats_left.py:401:63    - Unknown word (cpymod)             -- rustpymod[item]["sig"], cpymod[item]["sig"])
-whats_left.py:403:46    - Unknown word (cpymod)             -- rustpymod[item]["sig"] != cpymod[item]["sig"]
-whats_left.py:421:33    - Unknown word (cpymods)            -- cpython_modules"] = cpymods
-whats_left.py:422:17    - Unknown word (implementeds)       -- result["not_implementeds"] = not_implementeds
-whats_left.py:422:38    - Unknown word (implementeds)       -- implementeds"] = not_implementeds
-whats_left.py:487:23    - Unknown word (rustpy)             -- for i, (item, rustpy_value, cpython_value
-whats_left.py:490:16    - Unknown word (rustpy)             -- if rustpy_value is None or rustpy
-whats_left.py:490:40    - Unknown word (rustpy)             -- rustpy_value is None or rustpy_value.startswith("ValueError
-whats_left.py:491:17    - Unknown word (rustpy)             -- rustpy_value = f" {rustpy_value
-whats_left.py:491:36    - Unknown word (rustpy)             -- rustpy_value = f" {rustpy_value}"
+whats_left.py:365:80    - Unknown word (implementeds)       -- methods but missing: {not_implementeds}"
+whats_left.py:377:5     - Unknown word (rustpymods)         -- rustpymods = {mod: dir_of_mod_or
+whats_left.py:388:18    - Unknown word (cpymod)             -- for modname, cpymod in cpymods.items():
+whats_left.py:388:28    - Unknown word (cpymods)            -- for modname, cpymod in cpymods.items():
+whats_left.py:389:21    - Unknown word (rustpymods)         -- rustpymod = rustpymods.get(modname)
+whats_left.py:389:9     - Unknown word (rustpymod)          -- rustpymod = rustpymods.get(modname
+whats_left.py:390:12    - Unknown word (rustpymod)          -- if rustpymod is None:
+whats_left.py:392:25    - Unknown word (rustpymod)          -- elif isinstance(rustpymod, Exception):
+whats_left.py:393:51    - Unknown word (rustpymod)          -- import"][modname] = rustpymod.__class__.__name__
+whats_left.py:394:17    - Unknown word (rustpymod)          -- rustpymod
+whats_left.py:397:44    - Unknown word (cpymod)             -- mplemented_items = sorted(set(cpymod) & set(rustpymod))
+whats_left.py:398:37    - Unknown word (cpymod)             -- missing_items = set(cpymod) - set(rustpymod)
+whats_left.py:403:63    - Unknown word (cpymod)             -- rustpymod[item]["sig"], cpymod[item]["sig"])
+whats_left.py:405:46    - Unknown word (cpymod)             -- rustpymod[item]["sig"] != cpymod[item]["sig"]
+whats_left.py:423:33    - Unknown word (cpymods)            -- cpython_modules"] = cpymods
+whats_left.py:424:17    - Unknown word (implementeds)       -- result["not_implementeds"] = not_implementeds
+whats_left.py:490:23    - Unknown word (rustpy)             -- for i, (item, rustpy_value, cpython_value
+whats_left.py:493:16    - Unknown word (rustpy)             -- if rustpy_value is None or rustpy
+whats_left.py:493:40    - Unknown word (rustpy)             -- rustpy_value is None or rustpy_value.startswith("ValueError
+whats_left.py:494:17    - Unknown word (rustpy)             -- rustpy_value = f" {rustpy_value
+whats_left.py:494:36    - Unknown word (rustpy)             -- rustpy_value = f" {rustpy_value}"
 whats_left.py:78:6      - Unknown word (xxmodule)   -- "xxmodule",
 whats_left.py:79:6      - Unknown word (xxsubtype)  -- "xxsubtype",
 whats_left.py:80:6      - Unknown word (xxlimited)  -- "xxlimited",

@@ -3,15 +3,15 @@ import assert from 'node:assert';
 import { describe, expect, test } from 'vitest';
 
 import {
+    decodeUtf8_32,
+    decodeUtf8_32_StreamToString,
+    decodeUtf8_32Rev,
     decodeUtf8ByteStream,
-    decodeUtf8N_BE,
-    decodeUtf8N_BE_StreamToString,
-    decodeUtf8N_LE,
     encodeCodePointsToUtf8Into,
     encodeTextToUtf8,
     encodeTextToUtf8_32Into,
-    encodeUtf8N_BE,
-    encodeUtf8N_LE,
+    encodeToUtf8_32,
+    encodeToUtf8_32Rev,
     hex32,
     textToCodePoints,
     Utf8Accumulator,
@@ -35,16 +35,16 @@ describe('Utf8 lib', () => {
             encoder.encodeInto(char, buf8);
             const expectedUtf8_BE = extractUtf8BE(view);
 
-            const utf8BE = encodeUtf8N_BE(codePoint);
+            const utf8BE = encodeToUtf8_32(codePoint);
 
             expect(utf8BE).toBe(expectedUtf8_BE);
-            expect(decodeUtf8N_BE(utf8BE)).toBe(codePoint);
+            expect(decodeUtf8_32(utf8BE)).toBe(codePoint);
 
             const expectedUtf8_LE = view.getUint32(0, true);
-            const utf8LE = encodeUtf8N_LE(codePoint);
+            const utf8LE = encodeToUtf8_32Rev(codePoint);
 
             expect(utf8LE).toBe(expectedUtf8_LE);
-            expect(decodeUtf8N_LE(utf8LE)).toBe(codePoint);
+            expect(decodeUtf8_32Rev(utf8LE)).toBe(codePoint);
         }
     });
 
@@ -79,14 +79,14 @@ describe('Utf8 lib', () => {
         ${'é'}  | ${[0xc3a9]}
         ${'🇺🇸'} | ${[0xf09f_87ba, 0xf09f_87b8]}
     `('encodeUtf8N_BE $text', ({ text, expected }) => {
-        const utf = textToCodePoints(text).map((cp) => encodeUtf8N_BE(cp));
+        const utf = textToCodePoints(text).map((cp) => encodeToUtf8_32(cp));
         expect(utf).toEqual(expected);
         expect(
             String.fromCodePoint(
                 ...utf
                     .map((v) => v ^ ~1) // force it to be native
                     .map((v) => v ^ ~1)
-                    .map((c) => decodeUtf8N_BE(c)),
+                    .map((c) => decodeUtf8_32(c)),
             ),
         ).toEqual(text);
     });
@@ -104,11 +104,11 @@ describe('Utf8 lib', () => {
     });
 
     test('decodeUtf8N_BE invalid', () => {
-        expect(decodeUtf8N_BE(0xff)).toBe(0xfffd);
+        expect(decodeUtf8_32(0xff)).toBe(0xfffd);
     });
 
     test('decodeUtf8N_LE invalid', () => {
-        expect(decodeUtf8N_LE(0xff)).toBe(0xfffd);
+        expect(decodeUtf8_32Rev(0xff)).toBe(0xfffd);
     });
 
     test.each`
@@ -119,14 +119,14 @@ describe('Utf8 lib', () => {
         ${'ë'}  | ${[0xabc3]}
         ${'🇺🇸'} | ${[0xba87_9ff0, 0xb887_9ff0]}
     `('encodeUtf8N_LE $text', ({ text, expected }) => {
-        const utf = textToCodePoints(text).map((cp) => encodeUtf8N_LE(cp));
+        const utf = textToCodePoints(text).map((cp) => encodeToUtf8_32Rev(cp));
         expect(utf).toEqual(expected);
         expect(
             String.fromCodePoint(
                 ...utf
                     .map((v) => v ^ ~1) // force it to be native
                     .map((v) => v ^ ~1)
-                    .map((c) => decodeUtf8N_LE(c)),
+                    .map((c) => decodeUtf8_32Rev(c)),
             ),
         ).toEqual(text);
     });
@@ -147,7 +147,7 @@ describe('Utf8 lib', () => {
         const len = encodeTextToUtf8_32Into(text, buffer);
 
         expect(buffer.length).toBe(len);
-        expect(decodeUtf8N_BE_StreamToString(buffer)).toBe(text);
+        expect(decodeUtf8_32_StreamToString(buffer)).toBe(text);
     });
 });
 

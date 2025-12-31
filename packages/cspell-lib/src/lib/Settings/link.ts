@@ -125,7 +125,7 @@ export async function removePathsFromGlobalImports(paths: string[]): Promise<Rem
     }
 
     function matchFilename(pathToRemove: string): TestResultToExclude {
-        return Path.dirname(pathToRemove) != '.'
+        return Path.dirname(pathToRemove) !== '.'
             ? ({ filename }) => compareFilenames(filename, pathToRemove)
             : () => false;
     }

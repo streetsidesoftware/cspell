@@ -114,4 +114,83 @@ describe('BinaryDataBuilder', () => {
         const arr2 = reader.getPtrUint32Array('arrayPtr2');
         expect(arr2).toEqual(new Uint32Array([10, 20, 30, 40, 50, 60]));
     });
+
+    test('setPtrUint32Array', () => {
+        const format = new BinaryFormatBuilder().addUint32ArrayPtr('arrayPtr', 'Pointer to uint32 array').build();
+        const builder = new BinaryDataBuilder(format);
+        const arr = new Uint32Array(numberRange(10, 20));
+        builder.setPtrUint32Array('arrayPtr', arr);
+        const data = builder.build();
+        const reader = new BinaryDataReader(data, format);
+        const readArr = reader.getPtrUint32Array('arrayPtr');
+        expect(readArr).toEqual(arr);
+    });
+
+    test('setPtrUint8Array', () => {
+        const format = new BinaryFormatBuilder().addUint8ArrayPtr('arrayPtr', 'Pointer to uint8 array').build();
+        const builder = new BinaryDataBuilder(format);
+        const arr = new Uint8Array(numberRange(10, 20));
+        builder.setPtrUint8Array('arrayPtr', arr);
+        const data = builder.build();
+        const reader = new BinaryDataReader(data, format);
+        const readArr = reader.getPtrUint8Array('arrayPtr');
+        expect(readArr).toEqual(arr);
+    });
+
+    test('setPtrString', () => {
+        const format = new BinaryFormatBuilder().addStringPtr('stringPtr', 'Pointer to string data').build();
+        const builder = new BinaryDataBuilder(format);
+        const str = 'The quick brown fox jumps over the lazy dog.';
+        builder.setPtrString('stringPtr', str);
+        const data = builder.build();
+        const reader = new BinaryDataReader(data, format);
+        const readStr = reader.getPtrString('stringPtr');
+        expect(readStr).toBe(str);
+    });
+
+    test('setPtrString empty', () => {
+        const format = new BinaryFormatBuilder().addStringPtr('stringPtr', 'Pointer to string data').build();
+        const builder = new BinaryDataBuilder(format);
+        const str = '';
+        builder.setPtrString('stringPtr', str);
+        const data = builder.build();
+        const reader = new BinaryDataReader(data, format);
+        const readStr = reader.getPtrString('stringPtr');
+        expect(readStr).toBe(str);
+    });
+
+    test('setPtrUint16Array', () => {
+        const format = new BinaryFormatBuilder().addUint16ArrayPtr('arrayPtr', 'Pointer to uint16 array').build();
+        const builder = new BinaryDataBuilder(format);
+        const arr = new Uint16Array(numberRange(10, 20));
+        builder.setPtrUint16Array('arrayPtr', arr);
+        const data = builder.build();
+        const reader = new BinaryDataReader(data, format);
+        const readArr = reader.getPtrUint16Array('arrayPtr');
+        expect(readArr).toEqual(arr);
+    });
 });
+
+describe('field overrides', () => {
+    test('override addUint32ArrayPtr with addUint16ArrayPtr', () => {
+        const format = new BinaryFormatBuilder()
+            .addUint32ArrayPtr('arrayPtr32', 'Pointer to uint32 array')
+            .addUint16ArrayPtr('arrayPtr16', 'Pointer to uint16 array', 'arrayPtr32')
+            .build();
+        const builder = new BinaryDataBuilder(format);
+        const arr16 = new Uint16Array(numberRange(10, 20));
+        builder.setPtrUint16Array('arrayPtr16', arr16);
+        const data = builder.build();
+        const reader = new BinaryDataReader(data, format);
+        const readArr16 = reader.getPtrUint16Array('arrayPtr16');
+        expect(readArr16).toEqual(arr16);
+    });
+});
+
+function numberRange(start: number, end: number): number[] {
+    const result: number[] = [];
+    for (let i = start; i < end; i++) {
+        result.push(i);
+    }
+    return result;
+}

@@ -68,10 +68,10 @@ export class TrieBuilder {
     private _debug_mode = false;
 
     constructor(words?: Iterable<string>, trieOptions?: PartialTrieOptions) {
-        this._eow = this.createNodeFrozen(1);
+        this._eow = this.#createNodeFrozen(1);
         this.tails.set('', this._eow);
-        this._canBeCached(this._eow); // this line is just for coverage reasons
-        this.signatures.set(this.signature(this._eow), this._eow);
+        this.#canBeCached(this._eow); // this line is just for coverage reasons
+        this.signatures.set(this.#signature(this._eow), this._eow);
         this.cached.set(this._eow, this._eow.id ?? ++this.count);
         this.trieOptions = Object.freeze(mergeOptionalWithDefaults(trieOptions));
 
@@ -84,7 +84,7 @@ export class TrieBuilder {
         return trieNodeToRoot(this.lastPath[0].n, this.trieOptions);
     }
 
-    private signature(n: TrieNodeEx): string {
+    #signature(n: TrieNodeEx): string {
         const isWord = n.f ? '*' : '';
         const entries = n.c ? Object.entries(n.c) : undefined;
         const c = entries ? entries.map(([k, n]) => [k, this.cached.get(n)]) : undefined;
@@ -93,7 +93,7 @@ export class TrieBuilder {
         return sig;
     }
 
-    private _canBeCached(n: TrieNodeEx): boolean {
+    #canBeCached(n: TrieNodeEx): boolean {
         if (!n.c) return true;
         for (const v of Object.values(n.c)) {
             if (!this.cached.has(v)) return false;
@@ -101,7 +101,7 @@ export class TrieBuilder {
         return true;
     }
 
-    private tryCacheFrozen(n: TrieNodeEx) {
+    #tryCacheFrozen(n: TrieNodeEx) {
         assertFrozen(n);
         if (this.cached.has(n)) {
             return n;
@@ -110,41 +110,41 @@ export class TrieBuilder {
         return n;
     }
 
-    private freeze(n: TrieNodeEx): TrieNodeExFrozen {
+    #freeze(n: TrieNodeEx): TrieNodeExFrozen {
         if (Object.isFrozen(n)) return n;
         // istanbul ignore else
         if (n.c) {
             const c = Object.entries(n.c)
                 .sort((a, b) => (a[0] < b[0] ? -1 : 1))
-                .map(([k, n]) => [k, this.freeze(n)] as [string, TrieNodeExFrozen]);
+                .map(([k, n]) => [k, this.#freeze(n)] as [string, TrieNodeExFrozen]);
             n.c = Object.fromEntries(c);
             Object.freeze(n.c);
         }
         return Object.freeze(n);
     }
 
-    private tryToCache(n: TrieNodeEx): TrieNodeEx {
-        if (!this._canBeCached(n)) {
+    #tryToCache(n: TrieNodeEx): TrieNodeEx {
+        if (!this.#canBeCached(n)) {
             return n;
         }
-        const sig = this.signature(n);
+        const sig = this.#signature(n);
         const ref = this.signatures.get(sig);
         if (ref !== undefined) {
-            return this.tryCacheFrozen(ref);
+            return this.#tryCacheFrozen(ref);
         }
-        this.signatures.set(sig, this.freeze(n));
+        this.signatures.set(sig, this.#freeze(n));
         return n;
     }
 
-    private storeTransform(src: TrieNodeEx, s: string, result: TrieNodeEx) {
+    #storeTransform(src: TrieNodeEx, s: string, result: TrieNodeEx) {
         if (!Object.isFrozen(result) || !Object.isFrozen(src)) return;
-        this.logDebug('storeTransform', () => ({ s, src: this.debNodeInfo(src), result: this.debNodeInfo(result) }));
+        this.#logDebug('storeTransform', () => ({ s, src: this.#debNodeInfo(src), result: this.#debNodeInfo(result) }));
         const t = this.transforms.get(src) ?? new Map<string, TrieNodeEx>();
         t.set(s, result);
         this.transforms.set(src, t);
     }
 
-    private addChild(node: TrieNodeEx, head: string, child: TrieNodeEx): TrieNodeEx {
+    #addChild(node: TrieNodeEx, head: string, child: TrieNodeEx): TrieNodeEx {
         if (node.c?.[head] !== child) {
             let c = node.c || Object.create(null);
             if (Object.isFrozen(c)) {
@@ -152,35 +152,35 @@ export class TrieBuilder {
             }
             c[head] = child;
             if (Object.isFrozen(node)) {
-                node = this.createNode(node.f, c);
+                node = this.#createNode(node.f, c);
             } else {
                 node.c = c;
             }
         }
-        return Object.isFrozen(child) ? this.tryToCache(node) : node;
+        return Object.isFrozen(child) ? this.#tryToCache(node) : node;
     }
 
-    private buildTail(s: string[]): TrieNodeEx {
+    #buildTail(s: string[]): TrieNodeEx {
         const ss = s.join('');
         const v = this.tails.get(ss);
         if (v) return v;
         const head = s[0];
         const tail = s.slice(1);
         const t = this.tails.get(tail.join(''));
-        const c = t || this.buildTail(tail);
-        const n = this.addChild(this.createNode(), head, c);
+        const c = t || this.#buildTail(tail);
+        const n = this.#addChild(this.#createNode(), head, c);
         if (!t) {
             return n;
         }
-        const cachedNode = this.tryCacheFrozen(this.freeze(n));
+        const cachedNode = this.#tryCacheFrozen(this.#freeze(n));
         this.tails.set(ss, cachedNode);
         // console.warn('tail: %s', s);
         return cachedNode;
     }
 
-    private _insert(node: TrieNodeEx, s: string[], d: number): TrieNodeEx {
-        this.logDebug('_insert', () => ({
-            n: this.debNodeInfo(node),
+    #_insert(node: TrieNodeEx, s: string[], d: number): TrieNodeEx {
+        this.#logDebug('_insert', () => ({
+            n: this.#debNodeInfo(node),
             s,
             d,
             w: this.lastPath.map((a) => a.s).join(''),
@@ -189,14 +189,14 @@ export class TrieBuilder {
         if (Object.isFrozen(node)) {
             const n = this.transforms.get(node)?.get(s.join(''));
             if (n) {
-                return this.tryCacheFrozen(n);
+                return this.#tryCacheFrozen(n);
             }
         }
         if (!s.length) {
             if (!node.c) {
                 return this._eow;
             } else {
-                node = this.copyIfFrozen(node);
+                node = this.#copyIfFrozen(node);
                 node.f = this._eow.f;
                 return node;
             }
@@ -204,16 +204,16 @@ export class TrieBuilder {
         const head = s[0];
         const tail = s.slice(1);
         const cNode = node.c?.[head];
-        const child = cNode ? this._insert(cNode, tail, d + 1) : this.buildTail(tail);
-        node = this.addChild(node, head, child);
-        this.storeTransform(orig, s.join(''), node);
+        const child = cNode ? this.#_insert(cNode, tail, d + 1) : this.#buildTail(tail);
+        node = this.#addChild(node, head, child);
+        this.#storeTransform(orig, s.join(''), node);
         this.lastPath[d] = { s: head, n: child };
         return node;
     }
 
     insertWord(word: string): void {
         // this._debug_mode ||= this.numWords >= 26123525;
-        this.logDebug('insertWord', word);
+        this.#logDebug('insertWord', word);
         this._debug_lastWordsInserted[this.numWords & 0xf] = word;
         this.numWords++;
 
@@ -234,16 +234,16 @@ export class TrieBuilder {
         d -= 1;
         const { n } = this.lastPath[d];
         const tail = chars.slice(d);
-        this.lastPath[d].n = this._insert(n, tail, d + 1);
+        this.lastPath[d].n = this.#_insert(n, tail, d + 1);
         while (d > 0) {
             const { s, n } = this.lastPath[d];
             d -= 1;
             const parent = this.lastPath[d];
             const pn = parent.n;
-            parent.n = this.addChild(pn, s, n);
+            parent.n = this.#addChild(pn, s, n);
             if (pn === parent.n) break;
             const tail = chars.slice(d);
-            this.storeTransform(pn, tail.join(''), parent.n);
+            this.#storeTransform(pn, tail.join(''), parent.n);
         }
     }
 
@@ -260,7 +260,7 @@ export class TrieBuilder {
         this.lastPath = [{ s: '', n: { id: 0, f: undefined, c: undefined } }];
         this.cached.clear();
         this.signatures.clear();
-        this.signatures.set(this.signature(this._eow), this._eow);
+        this.signatures.set(this.#signature(this._eow), this._eow);
         this.count = 0;
         this.cached.set(this._eow, this._eow.id ?? ++this.count);
     }
@@ -280,11 +280,11 @@ export class TrieBuilder {
         return new Trie(consolidateSuffixes ? consolidate(root) : root);
     }
 
-    private debugStack(stack: TrieNodeEx[]) {
-        return stack.map((n) => this.debNodeInfo(n));
-    }
+    // #debugStack(stack: TrieNodeEx[]) {
+    //     return stack.map((n) => this.#debNodeInfo(n));
+    // }
 
-    private debNodeInfo(node: TrieNodeEx) {
+    #debNodeInfo(node: TrieNodeEx) {
         const id = node.id ?? '?';
         const cid = this.cached.get(node) ?? '?';
         const f = node.f || 0;
@@ -297,30 +297,30 @@ export class TrieBuilder {
         return { id, cid, f, c, L };
     }
 
-    private logDebug(methodName: string, contentOrFunction: unknown | (() => void)) {
-        this.runDebug(() => {
+    #logDebug(methodName: string, contentOrFunction: unknown | (() => void)) {
+        this.#runDebug(() => {
             const content = typeof contentOrFunction === 'function' ? contentOrFunction() : contentOrFunction;
             console.warn('%s: %o', methodName, content);
         });
     }
 
-    private runDebug(method: () => void) {
+    #runDebug(method: () => void) {
         if (this._debug_mode) {
             method();
         }
     }
 
-    private copyIfFrozen(n: TrieNodeEx): TrieNodeEx {
+    #copyIfFrozen(n: TrieNodeEx): TrieNodeEx {
         if (!Object.isFrozen(n)) return n;
         const c = n.c ? Object.assign(Object.create(null), n.c) : undefined;
-        return this.createNode(n.f, c);
+        return this.#createNode(n.f, c);
     }
 
-    private createNodeFrozen(f?: number | undefined, c?: ChildMap | undefined): TrieNodeExFrozen {
-        return this.freeze(this.createNode(f, c));
+    #createNodeFrozen(f?: number | undefined, c?: ChildMap | undefined): TrieNodeExFrozen {
+        return this.#freeze(this.#createNode(f, c));
     }
 
-    private createNode(f?: number | undefined, c?: ChildMap | undefined): TrieNodeEx {
+    #createNode(f?: number | undefined, c?: ChildMap | undefined): TrieNodeEx {
         return { id: ++this.count, f, c };
     }
 }

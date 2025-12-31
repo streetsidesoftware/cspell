@@ -430,7 +430,7 @@ interface TrieData extends Readonly<TrieCharacteristics> {
   readonly hasCompoundWords: boolean;
   readonly hasNonStrictWords: boolean;
   readonly size: number;
-  encodeToBTrie?: () => Uint8Array;
+  encodeToBTrie?: () => Uint8Array<ArrayBuffer>;
 }
 //#endregion
 //#region src/lib/ITrie.d.ts
@@ -583,7 +583,7 @@ declare const FORBID_PREFIX = "!";
 declare const defaultTrieInfo: TrieInfo;
 //#endregion
 //#region src/lib/decodeTrie.d.ts
-declare function decodeTrie(raw: string | ArrayBufferView | Uint8Array): ITrie;
+declare function decodeTrie(raw: string | ArrayBufferView<ArrayBuffer> | Uint8Array<ArrayBuffer>): ITrie;
 //#endregion
 //#region src/lib/io/importExport.d.ts
 interface ExportOptions {
@@ -800,7 +800,7 @@ declare function parseDictionaryLegacy(text: string | string[], options?: Partia
 declare function parseDictionary(text: string | Iterable<string>, options?: Partial<ParseDictionaryOptions>): ITrie;
 //#endregion
 //#region src/lib/TrieBlob/trieDataEncoder.d.ts
-declare function encodeTrieDataToBTrie(data: TrieData): Uint8Array;
+declare function encodeTrieDataToBTrie(data: TrieData): Uint8Array<ArrayBuffer>;
 //#endregion
 //#region src/lib/TrieBuilder.d.ts
 /**
@@ -817,6 +817,7 @@ declare function buildTrie(words: Iterable<string>, trieOptions?: PartialTrieOpt
 */
 declare function buildTrieFast(words: Iterable<string>, trieOptions?: PartialTrieOptions): Trie;
 declare class TrieBuilder {
+  #private;
   private count;
   private readonly signatures;
   private readonly cached;
@@ -831,15 +832,6 @@ declare class TrieBuilder {
   private _debug_mode;
   constructor(words?: Iterable<string>, trieOptions?: PartialTrieOptions);
   private get _root();
-  private signature;
-  private _canBeCached;
-  private tryCacheFrozen;
-  private freeze;
-  private tryToCache;
-  private storeTransform;
-  private addChild;
-  private buildTail;
-  private _insert;
   insertWord(word: string): void;
   insert(words: Iterable<string>): void;
   /**
@@ -847,13 +839,6 @@ declare class TrieBuilder {
   */
   reset(): void;
   build(consolidateSuffixes?: boolean): Trie;
-  private debugStack;
-  private debNodeInfo;
-  private logDebug;
-  private runDebug;
-  private copyIfFrozen;
-  private createNodeFrozen;
-  private createNode;
 }
 //#endregion
 //#region src/lib/TrieNode/trie-util.d.ts

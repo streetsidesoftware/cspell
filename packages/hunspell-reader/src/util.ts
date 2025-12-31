@@ -62,7 +62,7 @@ export function isDefined<T>(v: T | undefined): v is T {
  * @returns the same object.
  */
 export function cleanObject<T>(obj: T): T {
-    if (typeof obj != 'object') return obj;
+    if (typeof obj !== 'object') return obj;
     const r = obj as Record<string, unknown>;
     for (const [k, v] of Object.entries(r)) {
         if (v === undefined) {
