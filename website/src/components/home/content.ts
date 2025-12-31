@@ -69,6 +69,11 @@ export const SPONSOR_LINKS: CSpellSponsorLink[] = [
         url: 'https://opencollective.com/cspell',
         icon: 'openCollective',
     },
+    {
+        label: 'CSpell',
+        url: 'https://streetsidesoftware.com/sponsor',
+        icon: 'cspell',
+    },
 ] as const;
 
 export const STATUS_BADGES: CSpellStatusBadge[] = [

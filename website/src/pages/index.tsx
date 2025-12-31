@@ -51,17 +51,6 @@ export default function Home() {
           <SponsorLinks links={SPONSOR_LINKS} />
         </HomePageSection>
         <HomePageSection title="Third-Party Video Presentations">
-          <span>
-            Some videos related to CSpell and the
-            <a
-              href="https://marketplace.visualstudio.com/items?itemName=streetsidesoftware.code-spell-checker"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Code Spell Checker
-            </a>{' '}
-            for VS Code.
-          </span>
           <VideoCards videos={VIDEO_PRESENTATIONS} />
         </HomePageSection>
 
@@ -83,11 +72,22 @@ export default function Home() {
         <HomePageSection title="Contributing">
           <p>
             Contributions are welcome! See our{' '}
-            href="https://github.com/streetsidesoftware/cspell/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener
-            noreferrer"
-            <a>contribution notes</a>. <strong>Note:</strong> To add or remove words in a dictionary, visit{' '}
-            href="https://github.com/streetsidesoftware/cspell-dicts/issues" target="_blank" rel="noopener noreferrer"
-            <a>cspell-dicts</a>.
+            <a
+              href="https://github.com/streetsidesoftware/cspell/blob/main/CONTRIBUTING.md"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              contribution notes
+            </a>
+            . <strong>Note:</strong> To add or remove words in a dictionary, visit{' '}
+            <a
+              href="https://github.com/streetsidesoftware/cspell-dicts/issues"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              cspell-dicts
+            </a>
+            .
           </p>
           <p>
             🙏{' '}
@@ -106,9 +106,13 @@ export default function Home() {
           }}
         >
           <p>
-            Brought to you by href="https://streetsidesoftware.com" title="Street Side Software" target="_blank"
-            rel="noopener noreferrer"
-            <a>
+            Brought to you by{' '}
+            <a
+              href="https://streetsidesoftware.com"
+              title="Street Side Software"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <img
                 width="16"
                 alt="Street Side Software Logo"

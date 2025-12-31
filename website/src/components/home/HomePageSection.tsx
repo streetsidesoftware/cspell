@@ -11,7 +11,11 @@ export interface HomePageSectionProps {
 export function HomePageSection(props: HomePageSectionProps): React.ReactElement {
   return (
     <section className="home-section">
-      <span className="home-section-title">{props.title}</span>
+      <div className="home-section-header">
+        <span className="home-section-title">{props.title}</span>
+        <span className="home-section-description">Some videos related to CSpell and the</span>
+      </div>
+
       <div className="home-section-content">{props.children}</div>
     </section>
   );

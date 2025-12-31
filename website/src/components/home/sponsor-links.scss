@@ -1,0 +1,140 @@
+.cspell-sponsor-section {
+    text-align: center;
+}
+
+.cspell-sponsor-intro {
+    font-size: 1rem;
+    margin: 0 0 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    color: var(--ifm-color-content-secondary);
+}
+
+.cspell-sponsor-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.cspell-sponsor-link {
+    gap: 0.5rem;
+    width: 100%;
+    display: flex;
+    font-weight: 600;
+    min-height: 120px;
+    align-items: center;
+    text-decoration: none;
+    flex-direction: column;
+    box-sizing: border-box;
+    border-radius: 0.75rem;
+    padding: 1.5rem 1.25rem;
+    justify-content: center;
+    transition: all 0.3s ease;
+    color: var(--ifm-color-content);
+    border: 0.125rem solid var(--ifm-color-emphasis-200);
+    background: linear-gradient(135deg, var(--ifm-color-emphasis-100) 0%, var(--ifm-color-emphasis-50) 100%);
+
+    &:hover {
+        text-decoration: none;
+        transform: translateY(-0.25rem);
+        border-color: var(--ifm-color-primary);
+        color: var(--ifm-color-primary-darkest);
+        box-shadow: 0 0.5rem 1rem var(--ifm-color-emphasis-300);
+    }
+}
+
+.cspell-sponsor-icon {
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    flex-shrink: 0;
+    font-size: 2rem;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 0.25rem;
+
+    img {
+        width: 2rem;
+        height: 2rem;
+        display: block;
+        object-fit: contain;
+    }
+
+    svg {
+        width: 2rem;
+        height: 2rem;
+        display: block;
+    }
+
+    /* Make the logo circular */
+    img[src='/img/logo.png'] {
+        border-radius: 50%;
+        padding: 0.125rem;
+        background: white;
+        box-shadow: 0 0 0 0.125rem var(--ifm-color-emphasis-200);
+    }
+}
+
+.cspell-sponsor-label {
+    font-size: 1rem;
+    text-align: center;
+}
+
+[data-theme='dark'] {
+    .cspell-sponsor-link {
+        color: var(--ifm-color-primary-lightest);
+        border-color: var(--ifm-color-emphasis-300);
+        background: linear-gradient(135deg, var(--ifm-background-surface-color) 0%, var(--ifm-color-emphasis-100) 100%);
+
+        &:hover {
+            border-color: var(--ifm-color-primary);
+        }
+    }
+}
+
+@media screen and (max-width: 996px) {
+    .cspell-sponsor-links {
+        gap: 1rem;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .cspell-sponsor-links {
+        gap: 0.75rem;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+
+    .cspell-sponsor-link {
+        min-height: 100px;
+        padding: 1.25rem 1rem;
+    }
+
+    .cspell-sponsor-icon {
+        font-size: 1.75rem;
+        width: 1.75rem;
+        height: 1.75rem;
+
+        img,
+        svg {
+            width: 1.75rem;
+            height: 1.75rem;
+        }
+
+        /* Make the logo circular */
+        img[src='/img/logo.png'] {
+            padding: 0.1rem;
+            box-shadow: 0 0 0 0.1rem var(--ifm-color-emphasis-200);
+        }
+    }
+
+    .cspell-sponsor-label {
+        font-size: 0.9rem;
+    }
+}

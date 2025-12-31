@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './home.scss';
+import './sponsor-links.scss';
 
 export interface CSpellSponsorLink {
   label: string;
@@ -21,17 +21,15 @@ function getIconPath(iconName?: string): string | null {
   const icons: Record<string, string> = {
     github: '/img/icons/github.svg',
     patreon: '/img/icons/patreon.svg',
-    paypal: '/img/icons/paypal-simple.svg',
-    openCollective: '/img/icons/open-collective.svg',
-    cspell: '',
+    paypal: '/img/icons/paypal.svg',
+    opencollective: '/img/icons/open-collective.svg',
+    cspell: '/img/logo.png',
   };
 
   return icons[iconName.toLowerCase()] || null;
 }
 
 export function SponsorLinks(props: SponsorLinksProps): React.ReactElement {
-  // TODO(Bence): Replace patreon link with a link to the sponsors page https://streetsidesoftware.com/sponsor/
-
   return (
     <div className={`cspell-sponsor-links ${props.className || ''}`}>
       {props.links.map((link, index) => {
