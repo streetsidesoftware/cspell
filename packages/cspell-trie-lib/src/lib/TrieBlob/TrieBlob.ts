@@ -226,6 +226,7 @@ export class TrieBlob implements TrieData {
         const NodeMaskEOW = TrieBlob.NodeMaskEOW;
         const NodeMaskChildCharIndex = TrieBlob.NodeMaskChildCharIndex;
         const NodeChildRefShift = TrieBlob.NodeChildRefShift;
+        const nodeHeaderPrefixShift = NodeHeaderPrefixShift;
         const nodes = this.nodes;
         const st = this.#stringTable;
         const stack: StackItem[] = [{ nodeIdx: rootIdx, pos: 0, word: '', acc: Utf8Accumulator.create() }];
@@ -262,7 +263,7 @@ export class TrieBlob implements TrieData {
         }
 
         function applyPrefixString(s: StackItem): void {
-            const prefixIdx = nodes[s.nodeIdx] >>> 9;
+            const prefixIdx = nodes[s.nodeIdx] >>> nodeHeaderPrefixShift;
             const pfx = prefixIdx ? st.getStringBytes(prefixIdx) : undefined;
             if (!pfx) return;
             s.word += s.acc.decodeBytesToString(pfx);
