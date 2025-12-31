@@ -23,29 +23,13 @@ describe('prefix', () => {
         ${'hello'}    | ${'help'}   | ${0}   | ${false} | ${'different ending'}
         ${'😀🎉'}     | ${'😀'}     | ${0}   | ${true}  | ${'emoji'}
         ${'😀🎉 fun'} | ${'😀🎉'}   | ${1}   | ${true}  | ${'emoji with offset 1'}
-    `('matchEntirePrefix $comment: $word, $prefix, $expected', ({ text, prefix, offset, expected }) => {
+    `('matchEntirePrefix $comment: $text, $prefix $offset, $expected', ({ text, prefix, offset, expected }) => {
         const prefixBuffer = new TextEncoder().encode(prefix);
 
         const textCursor = createTextToUtf8Cursor(text);
         const prefixCursor = createUint8ArrayCursor(prefixBuffer.subarray(offset));
 
         textCursor.cur(); // Initialize cursor position
-        for (let i = 0; i < offset; i++) {
-            textCursor.next();
-        }
-
-        expect(matchEntirePrefix(textCursor, prefixCursor)).toBe(expected);
-    });
-
-    test.only.each`
-        text          | prefix    | offset | expected | comment
-        ${'😀🎉 fun'} | ${'😀🎉'} | ${1}   | ${true}  | ${'emoji with offset 1'}
-    `('matchEntirePrefix $comment: $word, $prefix, $expected', ({ text, prefix, offset, expected }) => {
-        const prefixBuffer = new TextEncoder().encode(prefix);
-
-        const textCursor = createTextToUtf8Cursor(text);
-        const prefixCursor = createUint8ArrayCursor(prefixBuffer.subarray(offset));
-
         for (let i = 0; i < offset; i++) {
             textCursor.next();
         }

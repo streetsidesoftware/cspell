@@ -14,7 +14,6 @@ export function matchEntirePrefix(text: TextToUtf8Cursor, prefix: Uint8ArrayCurs
     while (!prefix.done) {
         const byte = prefix.cur();
         const charVal = text.cur();
-        console.log('%o', { prefix, text, byte, charVal });
         if (text.done || byte !== charVal) return false;
         prefix.next();
         text.next();
