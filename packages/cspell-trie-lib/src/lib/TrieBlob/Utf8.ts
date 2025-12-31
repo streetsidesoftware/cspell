@@ -86,16 +86,6 @@ export function decodeUtf8_32(utf8: Utf8_32): CodePoint {
     return 0xfffd;
 }
 
-export function* decodeUtf8_32_Stream(utf8s: Iterable<Utf8_32>): Iterable<CodePoint> {
-    for (const utf8 of utf8s) {
-        yield decodeUtf8_32(utf8);
-    }
-}
-
-export function decodeUtf8_32_StreamToString(utf8s: Iterable<Utf8_32>): string {
-    return String.fromCodePoint(...decodeUtf8_32_Stream(utf8s));
-}
-
 /**
  * Encode a CodePoint into a Little Endian utf8 value, up to 4 bytes.
  *
@@ -284,53 +274,16 @@ export function encodeUtf8into(code: CodePoint, into: Array<number> | Uint8Array
     return 4;
 }
 
-export function encodeTextToUtf8_32Into(text: string, into: Utf8_32[]): number {
-    const len = text.length;
-    let i = 0;
-    for (let p = { text, offset: 0, bytes: 0 }; p.offset < len; ) {
-        into[i++] = encodeTextToUtf8_32(p);
-    }
-    return i;
-}
-
-export interface TextOffset {
+export interface TextCursor {
     text: string;
-    offset: number;
+    i: number;
 }
 
-export interface TextOffsetWithByteCount extends TextOffset {
-    bytes?: number;
-}
-
-export function encodeTextToUtf8_32(offset: TextOffsetWithByteCount): Utf8_32 {
+export function encodeTextToUtf8_32Rev(offset: TextCursor): Utf8_32Rev {
     const text = offset.text;
-    let code = text.charCodeAt(offset.offset);
-    code = (code & 0xf800) === 0xd800 ? text.codePointAt(offset.offset++) || 0 : code;
-    offset.offset++;
-    if (code < 0x80) {
-        offset.bytes = 1;
-        return code;
-    }
-    if (code < 0x800) {
-        offset.bytes = 2;
-        return 0xc080 | ((code & 0x7c0) << 2) | (code & 0x3f);
-    }
-    if (code < 0x1_0000) {
-        offset.bytes = 3;
-        return 0xe0_8080 | ((code & 0xf000) << 4) | ((code & 0x0fc0) << 2) | (code & 0x3f);
-    }
-    offset.bytes = 4;
-    return (
-        0x1_0000_0000 +
-        (0xf080_8080 | (((code & 0x1c_0000) << 6) | ((code & 0x03_f000) << 4) | ((code & 0x0fc0) << 2) | (code & 0x3f)))
-    );
-}
-
-export function encodeTextToUtf8_32Rev(offset: TextOffset): Utf8_32Rev {
-    const text = offset.text;
-    let code = text.charCodeAt(offset.offset);
-    code = (code & 0xf800) === 0xd800 ? text.codePointAt(offset.offset++) || 0 : code;
-    offset.offset++;
+    let code = text.charCodeAt(offset.i) & 0xffff; // Treat NaN as 0
+    code = (code & 0xf800) === 0xd800 ? text.codePointAt(offset.i++) || 0 : code;
+    offset.i++;
 
     if (code < 0x80) {
         return code;
@@ -348,11 +301,11 @@ export function encodeTextToUtf8_32Rev(offset: TextOffset): Utf8_32Rev {
 }
 
 export function encodeTextToUtf8Into(text: string, into: Array<number> | Uint8Array, offset = 0): number {
-    const t = { text, offset: 0 };
+    const t = { text, i: 0 };
 
     let i = offset;
 
-    for (; t.offset < text.length; ) {
+    for (; t.i < text.length; ) {
         const code = encodeTextToUtf8_32Rev(t);
         for (let utf8_32Rev = code; utf8_32Rev !== 0; utf8_32Rev >>>= 8) {
             into[i++] = utf8_32Rev & 0xff;

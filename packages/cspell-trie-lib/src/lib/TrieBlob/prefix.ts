@@ -1,35 +1,6 @@
 import type { U8Array } from './TypedArray.ts';
-import type { Utf8_32Rev } from './Utf8.ts';
-import { encodeTextToUtf8_32Rev } from './Utf8.ts';
-
-/**
- * Represents the conversion state from text to utf8.
- *
- * - text - is the original text being processed.
- * - offset - is the current position in the text.
- * - code - is the current utf8 code being processed.
- */
-export interface TextOffsetCode {
-    /** the text */
-    text: string;
-    /**
-     * the next offset in the text to be converted to utf8.
-     */
-    offset: number;
-    /**
-     * the current utf8 code being processed.
-     *
-     * If 0, the code needs to be (re)loaded and the offset moved forward.
-     *
-     * Take one byte at a time from the least significant byte.
-     *
-     * ```ts
-     * const utf8Byte = t.code & 0xff;
-     * t.code >>>= 8;
-     * ```
-     */
-    code: Utf8_32Rev;
-}
+import type { Uint8ArrayCursor } from './TypedArrayCursor.ts';
+import type { TextToUtf8Cursor } from './Utf8Cursor.ts';
 
 /**
  * Represents a prefix and the current offset in that prefix.
@@ -39,41 +10,11 @@ export interface PrefixOffset {
     offset: number;
 }
 
-/**
- * Consumes the text offset code and matches it against the prefix at the current offset.
- * @param t - the text offset code
- * @param p - the prefix and offset
- * @returns true if the prefix matches the text at the current offset
- */
-export function matchPrefix(t: TextOffsetCode, p: PrefixOffset): boolean {
-    if (p.offset >= p.prefix.length) return true;
-    if (!t.code && t.offset >= t.text.length) return false;
+export function matchEntirePrefix(text: TextToUtf8Cursor, prefix: Uint8ArrayCursor): boolean {
+    if (prefix.done) return true;
 
-    const prefix = p.prefix;
-    const len = prefix.length;
-
-    t.code = t.code || encodeTextToUtf8_32Rev(t);
-    for (; p.offset < len; ++p.offset) {
-        const charVal = t.code & 0xff;
-        if (prefix[p.offset] !== charVal) {
-            return false;
-        }
-        t.code >>>= 8;
-        t.code = t.code || encodeTextToUtf8_32Rev(t);
-    }
-
-    return true;
-}
-
-export function matchEntirePrefix(p: TextOffsetCode, prefix: U8Array | undefined): boolean {
-    if (!prefix?.length) return true;
-
-    const len = prefix.length;
-    for (let i = 0; i < len; ++i) {
-        const charVal = p.code & 0xff;
-        if (prefix[i] !== charVal) return false;
-        p.code >>>= 8;
-        p.code = p.code || encodeTextToUtf8_32Rev(p);
+    for (let byte = prefix.cur(), charVal = text.cur(); !prefix.done; byte = prefix.next(), charVal = text.next()) {
+        if (byte !== charVal) return false;
     }
 
     return true;

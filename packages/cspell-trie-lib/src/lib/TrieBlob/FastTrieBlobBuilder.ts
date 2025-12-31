@@ -242,8 +242,8 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
         const wLen = word.length;
         const bytes: number[] = [];
 
-        for (const t = { text: word, offset: 0 }; t.offset < wLen; ) {
-            const isLastChar = t.offset >= wLen - 1;
+        for (const t = { text: word, i: 0 }; t.i < wLen; ) {
+            const isLastChar = t.i >= wLen - 1;
             for (let utf8Code = encodeTextToUtf8_32Rev(t); utf8Code; utf8Code >>>= 8) {
                 const seq = utf8Code & 0xff;
                 bytes.push(seq);
@@ -338,10 +338,6 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
         );
 
         const stringTable = new StringTableBuilder().build();
-
-        // if (optimize && this.IdxEOW) {
-        //     throw new Error('Cannot optimize a trie that uses node references.');
-        // }
 
         const r = optimize
             ? optimizeNodesWithStringTable({ nodes: sortedNodes, stringTable })

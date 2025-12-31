@@ -5,7 +5,6 @@ import type { StringTable } from '../StringTable/StringTable.ts';
 import type { TrieData } from '../TrieData.ts';
 import { endianness } from '../utils/endian.ts';
 import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.ts';
-import type { TextOffsetCode } from './prefix.ts';
 import { matchEntirePrefix } from './prefix.ts';
 import { decodeTrieBlobToBTrie, encodeTrieBlobToBTrie } from './TrieBlobEncoder.ts';
 import {
@@ -13,10 +12,13 @@ import {
     NodeHeaderEOWMask,
     NodeHeaderNumChildrenMask,
     NodeHeaderNumChildrenShift,
+    NodeHeaderPrefixShift,
 } from './TrieBlobFormat.ts';
 import { TrieBlobInternals, TrieBlobIRoot } from './TrieBlobIRoot.ts';
 import type { U8Array, U32Array } from './TypedArray.ts';
-import { encodeTextToUtf8_32Rev, Utf8Accumulator } from './Utf8.ts';
+import { createUint8ArrayCursor } from './TypedArrayCursor.ts';
+import { Utf8Accumulator } from './Utf8.ts';
+import { createTextToUtf8Cursor, type TextToUtf8Cursor } from './Utf8Cursor.ts';
 
 export class TrieBlob implements TrieData {
     readonly info: Readonly<TrieInfo>;
@@ -153,20 +155,18 @@ export class TrieBlob implements TrieData {
 
         const _nodes = this.nodes;
         const _nodes8 = this.#nodes8;
+        const pfxShift = NodeHeaderPrefixShift;
 
-        const p: TextOffsetCode = { text, offset: 0, code: 0 };
-        for (; p.code || p.offset < p.text.length; p.code >>>= 8) {
+        const p: TextToUtf8Cursor = createTextToUtf8Cursor(text);
+        for (; !p.done; p.next()) {
             const nodes = _nodes;
             const nodes8 = _nodes8;
             const node = nodes[nodeIdx];
-            p.code = p.code || encodeTextToUtf8_32Rev(p);
-            const prefixIdx = node >>> 9;
+            const prefixIdx = node >>> pfxShift;
             const pfx = prefixIdx ? this.#stringTable.getStringBytes(prefixIdx) : undefined;
-            if (pfx && !matchEntirePrefix(p, pfx)) return undefined;
+            if (pfx && !matchEntirePrefix(p, createUint8ArrayCursor(pfx))) return undefined;
 
-            const code = p.code;
-
-            const charVal = code & 0xff;
+            const charVal = p.cur() & 0xff;
             const count = node & 0xff; // TrieBlob.NodeMaskNumChildren
             const idx4 = nodeIdx << 2;
             // Binary search for the character in the child nodes.

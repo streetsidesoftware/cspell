@@ -13,6 +13,7 @@ import {
     NodeChildIndexRefShift,
     NodeHeaderEOWMask,
     NodeHeaderNumChildrenMask,
+    NodeHeaderPrefixShift,
     NodeMaskCharByte,
     type TrieBlobNode32,
 } from './TrieBlobFormat.ts';
@@ -153,6 +154,7 @@ export class FastTrieBlob implements TrieData {
         const nodeMaskChildCharIndex = NodeMaskCharByte;
         const nodeChildRefShift = NodeChildIndexRefShift;
         const NodeMaskEOW = NodeHeaderEOWMask;
+        const pfxShift = NodeHeaderPrefixShift;
         const nodes = this.#nodes;
         const st = this.#stringTable;
         const stack: StackItem[] = [{ nodeIdx: rootIdx, pos: 0, word: '', acc: Utf8Accumulator.create() }];
@@ -189,7 +191,7 @@ export class FastTrieBlob implements TrieData {
         }
 
         function applyPrefixString(s: StackItem): void {
-            const prefixIdx = nodes[s.nodeIdx][0] >>> 9;
+            const prefixIdx = nodes[s.nodeIdx][0] >>> pfxShift;
             const pfx = prefixIdx ? st.getStringBytes(prefixIdx) : undefined;
             if (!pfx) return;
             s.word += s.acc.decodeBytesToString(pfx);
