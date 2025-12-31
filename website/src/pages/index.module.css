@@ -1,23 +1,161 @@
-/**
- * CSS files with the .module.css suffix will be treated as CSS modules
- * and scoped locally.
- */
+.home-container {
+    margin: 0 auto;
+    max-width: 1152px;
+    padding: 0 1.5rem 4rem 1.5rem;
+}
 
-.heroBanner {
-    padding: 4rem 0;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
+.hero {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    padding: 4rem 0 5rem;
+}
+
+.logo-image {
+    width: 120px;
+    height: 120px;
+    flex-shrink: 0;
+    padding: 0.5rem;
+    border-radius: 50%;
+    object-fit: contain;
+    background: var(--ifm-background-color);
+    box-shadow: 0 0.125rem 0.5rem rgba(0, 0, 0, 0.1);
+}
+
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.heroTitle {
+    font-size: 3.2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 1rem;
+    background: linear-gradient(120deg, var(--ifm-color-primary) 0%, var(--ifm-color-primary-dark) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.heroTagline {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--ifm-color-content-secondary);
+    margin: 0 0 2rem;
+    line-height: 1.6;
+}
+
+.heroButtons {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+[data-theme='dark'] .heroButtonSecondary {
+    border-color: var(--ifm-color-emphasis-400);
+}
+
+[data-theme='dark'] .heroButtonSecondary:hover {
+    background: var(--ifm-color-emphasis-200);
+    border-color: var(--ifm-color-emphasis-500);
+}
+
+.cardsGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+    margin-bottom: 4rem;
 }
 
 @media screen and (max-width: 996px) {
-    .heroBanner {
-        padding: 2rem;
+    .cardsGrid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.25rem;
+        margin-bottom: 3.5rem;
     }
 }
 
-.buttons {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+@media screen and (max-width: 768px) {
+    .hero {
+        flex-direction: column;
+        padding: 3rem 0 4rem;
+        text-align: center;
+        gap: 1.5rem;
+    }
+
+    .logo-image {
+        width: 100px;
+        height: 100px;
+    }
+
+    .hero-content {
+        text-align: center;
+    }
+
+    .heroTitle {
+        font-size: 2.5rem;
+    }
+
+    .heroTagline {
+        font-size: 1.25rem;
+    }
+
+    .heroButtons {
+        flex-direction: column;
+        gap: 0.75rem;
+        width: 100%;
+    }
+
+    .heroButtonPrimary,
+    .heroButtonSecondary {
+        width: 100%;
+        max-width: 280px;
+    }
+
+    .cardsGrid {
+        gap: 1rem;
+        margin-top: 2rem;
+        margin-bottom: 3rem;
+        grid-template-columns: 1fr;
+    }
+
+    .home-container {
+        padding: 3rem 1rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .home-container {
+        padding: 2rem 0.75rem;
+    }
+
+    .hero {
+        padding: 2rem 0 3rem;
+        gap: 1rem;
+    }
+
+    .logo-image {
+        width: 80px;
+        height: 80px;
+    }
+
+    .heroTitle {
+        font-size: 2rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .heroTagline {
+        font-size: 1.125rem;
+    }
+
+    .cardsGrid {
+        gap: 0.75rem;
+        margin-top: 1.5rem;
+        margin-bottom: 2.5rem;
+    }
 }
