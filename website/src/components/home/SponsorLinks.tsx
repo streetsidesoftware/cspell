@@ -28,6 +28,8 @@ function getIconPath(iconName?: string): string | null {
 }
 
 export function SponsorLinks(props: SponsorLinksProps): React.ReactElement {
+  // TODO(Bence): Replace patreon link with a link to the sponsors page https://streetsidesoftware.com/sponsor/
+
   return (
     <div className={`cspell-sponsor-links ${props.className || ''}`}>
       {props.links.map((link, index) => {

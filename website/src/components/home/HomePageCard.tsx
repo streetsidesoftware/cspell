@@ -10,23 +10,28 @@ export interface HomePageCardProps {
 }
 
 export function HomePageCard(props: HomePageCardProps): React.ReactElement {
+  const cspellSvgStyle: React.CSSProperties = props.fill
+    ? {
+        maskImage: `url(${props.icon})`,
+        WebkitMaskImage: `url(${props.icon})`,
+      }
+    : {
+        backgroundImage: `url(${props.icon})`,
+      };
+
+  const cspellSvgFillStyle: React.CSSProperties = props.fill
+    ? {
+        '--icon-color': props.fill,
+      }
+    : {};
+
+  const cspellFillClass: string = props.fill ? 'cspell-card-icon-colored' : '';
+
   return (
     <div key={props.key} className="cspell-card">
       <div className="cspell-card-header">
-        <div
-          className="cspell-card-icon"
-          style={props.fill ? { '--icon-color': props.fill } as React.CSSProperties : {}}
-        >
-          <div
-            className={`cspell-card-icon-svg ${props.fill ? 'cspell-card-icon-colored' : ''}`}
-            style={props.fill ? {
-              maskImage: `url(${props.icon})`,
-              WebkitMaskImage: `url(${props.icon})`,
-            } : {
-              backgroundImage: `url(${props.icon})`,
-            }}
-            aria-label={props.title}
-          />
+        <div className="cspell-card-icon" style={cspellSvgFillStyle}>
+          <div className={`cspell-card-icon-svg ${cspellFillClass}`} style={cspellSvgStyle} aria-label={props.title} />
         </div>
         <h2 className="cspell-card-title">{props.title}</h2>
       </div>

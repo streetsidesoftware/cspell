@@ -4,12 +4,12 @@
     align-items: flex-start;
     padding: 2rem;
     background: linear-gradient(135deg, var(--ifm-color-emphasis-100) 0%, var(--ifm-color-emphasis-50) 100%);
-    border: 0.125rem solid var(--ifm-color-emphasis-200);
+    height: 100%;
+    overflow: hidden;
+    position: relative;
     border-radius: 1rem;
     transition: all 0.3s ease;
-    height: 100%;
-    position: relative;
-    overflow: hidden;
+    border: 0.125rem solid var(--ifm-color-emphasis-200);
 }
 
 .cspell-card-header {
@@ -28,9 +28,9 @@
 .cspell-card-icon-svg {
     width: 100%;
     height: 100%;
-    background-repeat: no-repeat;
-    background-position: center;
     background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .cspell-card-icon-colored {
@@ -137,8 +137,7 @@
 }
 
 [data-theme='dark'] .cspell-sponsor-link:hover {
-    color: var(--ifm-color-primary-lightest);
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.5);
+    border-color: var(--ifm-color-primary);
 }
 
 .cspell-sponsor-icon {
@@ -163,14 +162,9 @@
 }
 
 [data-theme='dark'] .cspell-sponsor-link {
-    background: linear-gradient(135deg, var(--ifm-background-surface-color) 0%, var(--ifm-color-emphasis-100) 100%);
-    border-color: var(--ifm-color-emphasis-300);
-}
-
-[data-theme='dark'] .cspell-sponsor-link:hover {
-    background: linear-gradient(135deg, var(--ifm-color-primary-darker) 0%, var(--ifm-color-primary-dark) 100%);
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.4);
     color: var(--ifm-color-primary-lightest);
+    border-color: var(--ifm-color-emphasis-300);
+    background: linear-gradient(135deg, var(--ifm-background-surface-color) 0%, var(--ifm-color-emphasis-100) 100%);
 }
 
 .home-video-cards {
