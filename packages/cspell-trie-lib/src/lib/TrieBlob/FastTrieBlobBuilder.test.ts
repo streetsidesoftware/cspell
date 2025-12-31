@@ -155,9 +155,9 @@ describe('FastTrieBlobBuilder', () => {
         expect([...t.words()].sort()).toEqual(sortedUnique);
     });
 
-    test.skip('fromTrieRoot(optimize) non-optimized trie', () => {
+    test('fromTrieRoot(optimize) non-optimized trie', () => {
         const words = sampleWords();
-        const t = FastTrieBlobBuilder.fromTrieRoot(buildTrie(words, false), true).toTrieBlob();
+        const t = FastTrieBlobBuilder.fromTrieRoot(buildTrie(words, false), true);
         const sortedUnique = [...new Set(words)].sort();
         expect([...t.words()]).toEqual(sortedUnique);
     });
@@ -183,7 +183,7 @@ describe('FastTrieBlobBuilder', () => {
     });
 });
 
-describe.skip('optimization', () => {
+describe('optimization', () => {
     test.each`
         comment                            | words
         ${'single word'}                   | ${['optimization']}

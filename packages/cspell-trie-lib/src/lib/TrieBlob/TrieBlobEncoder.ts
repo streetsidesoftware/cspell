@@ -38,8 +38,10 @@ export function encodeTrieBlobToBTrie(blob: TrieBlobInfo): U8Array {
     builder.setString('trieInfo', cvtTrieInfoToFlags(blob.info));
     builder.setString('characteristics', cvtTrieCharacteristicsToFlags(blob.characteristics));
 
-    const stringTableData = encodeStringTableToBinary(blob.stringTable);
-    builder.setPtrUint8Array('stringTable', stringTableData);
+    if (blob.stringTable.length) {
+        const stringTableData = encodeStringTableToBinary(blob.stringTable);
+        builder.setPtrUint8Array('stringTable', stringTableData);
+    }
 
     const data = builder.build();
     return data;
