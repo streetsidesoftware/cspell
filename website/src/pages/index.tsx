@@ -50,10 +50,6 @@ export default function Home() {
         <HomePageSection title="Support Future Development">
           <SponsorLinks links={SPONSOR_LINKS} />
         </HomePageSection>
-        <HomePageSection title="Third-Party Video Presentations">
-          <VideoCards videos={VIDEO_PRESENTATIONS} />
-        </HomePageSection>
-
         <HomePageSection title="Related Packages">
           <p>
             <a href="https://github.com/streetsidesoftware/cspell-cli" target="_blank" rel="noopener noreferrer">
@@ -68,7 +64,6 @@ export default function Home() {
             This will add the <code>cspell-cli</code> command, which is an alias of the <code>cspell</code> command.
           </p>
         </HomePageSection>
-
         <HomePageSection title="Contributing">
           <p>
             Contributions are welcome! See our{' '}
@@ -97,14 +92,10 @@ export default function Home() {
             🥰
           </p>
         </HomePageSection>
-        <div
-          style={{
-            textAlign: 'center',
-            marginTop: '4rem',
-            paddingTop: '2rem',
-            borderTop: '1px solid var(--ifm-color-emphasis-200)',
-          }}
-        >
+        <HomePageSection title="Third-Party Video Presentations">
+          <VideoCards videos={VIDEO_PRESENTATIONS} />
+        </HomePageSection>
+        <div className="footer-container">
           <p>
             Brought to you by{' '}
             <a
@@ -117,7 +108,7 @@ export default function Home() {
                 width="16"
                 alt="Street Side Software Logo"
                 src="https://i.imgur.com/CyduuVY.png"
-                style={{ verticalAlign: 'middle', margin: '0 0.25rem' }}
+                className="sponsor-logo-image"
               />{' '}
               Street Side Software
             </a>
