@@ -34,7 +34,7 @@
 export const NodeHeaderNumChildrenBits = 8 as const;
 export const NodeHeaderNumChildrenShift = 0 as const;
 export const NodeHeaderEOWMask: number = 0x0000_0100 & 0xffff; // (& 0xffff) is to ensure it is treated like an integer.
-export const NodeHeaderPrefixMask: number = 0x3fff_fe00 & 0xffff_ffff; // (& 0xffff) is to ensure it is treated like an integer.
+export const NodeHeaderPrefixMask: number = 0x3fff_fe00 & 0xffff_ffff; // (& 0xffff_ffff) is to ensure it is treated like an integer.
 export const NodeHeaderPrefixShift: number = 9 as const;
 export const NodeHeaderPrefixBits: number = 21 as const;
 export const NodeHeaderNumChildrenMask: number = (1 << NodeHeaderNumChildrenBits) - 1;
