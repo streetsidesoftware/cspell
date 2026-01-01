@@ -1,13 +1,10 @@
 import eslint from '@eslint/js';
 import nodePlugin from 'eslint-plugin-n';
 import tsEslint from 'typescript-eslint';
-
-// import simpleImportSort from 'eslint-plugin-simple-import-sort';
-// import unicorn from 'eslint-plugin-unicorn';
+import { defineConfig } from 'eslint/config';
 
 // @ts-check
-
-export default tsEslint.config(
+export default defineConfig(
     eslint.configs.recommended,
     nodePlugin.configs['flat/recommended'],
     ...tsEslint.configs.recommended,
@@ -33,13 +30,17 @@ export default tsEslint.config(
                 'warn',
                 {
                     allowModules: ['@docusaurus/plugin-content-docs'],
-                    // resolvePaths: ['/path/to/a/modules/directory'],
                 },
             ],
         },
     },
     {
         files: ['**/*.tsx'],
+        settings: {
+            node: {
+                tryExtensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
+            },
+        },
         rules: {
             '@typescript-eslint/no-var-requires': 'off',
             '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
@@ -53,6 +54,7 @@ export default tsEslint.config(
                         '@theme/Heading',
                         '@theme/Layout',
                     ],
+                    resolvePaths: ['./', './src'],
                 },
             ],
             'n/no-missing-require': 'warn',
@@ -60,7 +62,6 @@ export default tsEslint.config(
                 'error',
                 {
                     allowModules: ['@site/static'],
-                    // convertPath: { '@site/static/**': ['@site/static', './static'] },
                 },
             ],
         },

@@ -26,6 +26,7 @@ const config: Config = {
     onBrokenMarkdownLinks: 'warn',
 
     plugins: [
+        'docusaurus-plugin-sass',
         [
             'docusaurus-plugin-typedoc',
             {

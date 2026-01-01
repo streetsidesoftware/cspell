@@ -1,0 +1,35 @@
+.home-section {
+    display: flex;
+    flex-direction: column;
+
+    .home-section-header {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 2rem;
+    }
+
+    .home-section-title {
+        font-size: 2rem;
+        font-weight: 600;
+        padding-top: 2rem;
+    }
+
+    .home-section-content {
+        flex: 1;
+        width: 100%;
+        max-width: 1000px;
+        display: contents;
+        align-items: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .home-section {
+        padding: 1rem 0;
+
+        .home-section-title {
+            font-size: 1.75rem;
+            padding-top: 1rem;
+        }
+    }
+}
