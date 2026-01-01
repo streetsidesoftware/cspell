@@ -15,13 +15,12 @@ const getWords = memorize(async () => [...(await getTrie()).words()]);
 suite('trie create', async (test) => {
     const words = await getWords();
     const trie = createTrieRootFromList(words);
-    const fastTrie = TrieBlobBuilder.fromWordList(words);
+    const trieBlob = TrieBlobBuilder.fromWordList(words);
     console.error('Info: %o', {
         wordsSize: words.length,
-        fastTrieSize: fastTrie.size,
+        TrieBlobSize: trieBlob.size,
         fastTrieSmallSize: TrieBlobBuilder.fromWordList(words.slice(-1000)).size,
     });
-    const trieBlob = fastTrie.toTrieBlob();
 
     test('FastTrieBlobBuilder.insert.build', () => {
         const builder = new TrieBlobBuilder();
@@ -51,10 +50,6 @@ suite('trie create', async (test) => {
 
     test('TrieBlob createTrieBlobFromTrieRoot', () => {
         createTrieBlobFromTrieRoot(trie);
-    });
-
-    test('TrieBlob fastTrie.toTrieBlob', () => {
-        fastTrie.toTrieBlob();
     });
 });
 

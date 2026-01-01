@@ -7,21 +7,13 @@ import { readTrieBlobFromConfig, readTrieFromConfig } from '../src/test/dictiona
 // const measureTimeout = 100;
 
 const getTrie = memorize(_getTrie);
-const getFastTrieBlob = memorize(_getFastTrieBlob);
 const getWords = memorize(async () => [...(await getTrie()).words()]);
 
 suite('encode to sequence', async (test) => {
     const words = await getWords();
     const msgSuffix = ' - ' + words.length + ' words';
-    const fastTrieBlob = await getFastTrieBlob();
     const charIndex = CharIndex.fromIterable(words);
     const encoder = new TextEncoder();
-
-    test('fastTrieBlob.wordToNodeCharIndexSequence' + msgSuffix, () => {
-        for (const word of words) {
-            fastTrieBlob.wordToUtf8Seq(word);
-        }
-    });
 
     test('charIndex.wordToCharIndexSequence' + msgSuffix, () => {
         for (const word of words) {
