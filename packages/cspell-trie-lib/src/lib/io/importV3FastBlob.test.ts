@@ -6,10 +6,9 @@ import { resolveSample as resolveSamplePath } from '../../test/samples.ts';
 import { consolidate } from '../consolidate.ts';
 import * as Trie from '../index.ts';
 import type { ITrieNode } from '../ITrieNode/ITrieNode.ts';
-import { FastTrieBlob } from '../TrieBlob/FastTrieBlob.ts';
 import { trieRootToITrieRoot } from '../TrieNode/trie.ts';
 import { serializeTrie } from './importExportV3.ts';
-import { importTrieV3AsFastTrieBlob } from './importV3FastBlob.ts';
+import { importTrieV3AsTrieBlob } from './importV3FastBlob.ts';
 import {
     filterUnique,
     mixedLanguageWords,
@@ -26,7 +25,7 @@ describe('Import/Export', () => {
         const trie = Trie.buildTrie(smallSample).root;
         const expected = toTree(trieRootToITrieRoot(trie));
         const data = [...serializeTrie(trie, { base: 10, comment: 'Sample Words' })].join('');
-        const ft = importTrieV3AsFastTrieBlob(
+        const ft = importTrieV3AsTrieBlob(
             data
                 .replaceAll(/\[\d+\]/g, '')
                 .split('\n')
@@ -34,7 +33,7 @@ describe('Import/Export', () => {
         );
         const words = [...ft.words()];
         expect(words.sort()).toEqual([...smallSample].sort());
-        const result = toTree(FastTrieBlob.toITrieNodeRoot(ft));
+        const result = toTree(ft.getRoot());
         expect(result).toBe(expected);
     });
 
@@ -42,7 +41,7 @@ describe('Import/Export', () => {
         const sampleWords = [...specialCharacters, ...mixedLanguageWords].filter(filterUnique());
         const trie = Trie.buildTrie(sampleWords).root;
         const data = [...serializeTrie(consolidate(trie), 10)];
-        const ft = importTrieV3AsFastTrieBlob(data);
+        const ft = importTrieV3AsTrieBlob(data);
         const words = [...ft.words()];
         expect(words.sort()).toEqual([...sampleWords].sort());
     });
@@ -57,14 +56,14 @@ describe('Import/Export', () => {
                 addLineBreaksToImproveDiffs: false,
             }),
         ].join('');
-        const ft = importTrieV3AsFastTrieBlob(data.split('\n').map((a) => (a ? a + '\n' : a)));
+        const ft = importTrieV3AsTrieBlob(data.split('\n').map((a) => (a ? a + '\n' : a)));
         const words = [...ft.words()];
         expect(words.sort()).toEqual([...sampleWords].sort());
     });
 
     test('tests deserialize from file', async () => {
         const sample = await readFile(sampleFile, 'utf8');
-        const root = importTrieV3AsFastTrieBlob(sample);
+        const root = importTrieV3AsTrieBlob(sample);
         const words = [...root.words()];
         expect(words.sort()).toEqual([...sampleWords].sort());
     });
@@ -72,7 +71,7 @@ describe('Import/Export', () => {
     test('tests serialize / deserialize trie', () => {
         const trie = Trie.buildTrie(sampleWords).root;
         const data = serializeTrie(trie, 10);
-        const root = importTrieV3AsFastTrieBlob(data);
+        const root = importTrieV3AsTrieBlob(data);
         const words = [...root.words()];
         expect(words.sort()).toEqual([...sampleWords].sort());
     });
@@ -94,7 +93,7 @@ describe('Import/Export', () => {
         const trie = Trie.buildTrie(wordList);
         wordList.sort();
         const data = [...serializeTrie(trie.root, options)].join('');
-        const ft = importTrieV3AsFastTrieBlob(data);
+        const ft = importTrieV3AsTrieBlob(data);
         const wordsTrie = [...ft.words()];
         expect(wordsTrie.sort()).toEqual(wordList);
     });
@@ -111,7 +110,7 @@ describe('Import/Export', () => {
         const trie = Trie.createTrieRootFromList(sampleWords);
         const trieDawg = consolidate(trie);
         const data = [...serializeTrie(trieDawg, options)];
-        const root = importTrieV3AsFastTrieBlob(data);
+        const root = importTrieV3AsTrieBlob(data);
         const words = [...root.words()];
         expect(words.sort()).toEqual([...sampleWords].sort());
     });

@@ -1,21 +1,16 @@
-import { promises as fs } from 'node:fs';
-
 import { describe, expect, test } from 'vitest';
 
 import { readModuleDictionary } from '../../test/reader.test.helper.ts';
 import { extractTrieCharacteristics } from '../ITrieNode/TrieInfo.ts';
 import { createTrieRootFromList } from '../TrieNode/trie-util.ts';
 import { walkerWordsITrie } from '../walker/index.ts';
-import { FastTrieBlob } from './FastTrieBlob.ts';
-import { FastTrieBlobBuilder } from './FastTrieBlobBuilder.ts';
-
-const debug = false;
+import { TrieBlobBuilder } from './TrieBlobBuilder.ts';
 
 describe('FastTrieBlob', () => {
     const words = getSampleWords();
 
     test('insert', () => {
-        const ft = new FastTrieBlobBuilder();
+        const ft = new TrieBlobBuilder();
         ft.insert(words);
         ft.insert('hello');
         expect(ft.has('hello')).toBe(true);
@@ -29,33 +24,22 @@ describe('FastTrieBlob', () => {
     });
 
     test('expected', () => {
-        const ft = FastTrieBlobBuilder.fromWordList(words);
+        const ft = TrieBlobBuilder.fromWordList(words);
         expect(ft.has('walk')).toBe(true);
         expect([...ft.words()]).toEqual([...words].sort());
     });
 
     test('createTriFromList', () => {
         const root = createTrieRootFromList(words);
-        const ft = FastTrieBlobBuilder.fromTrieRoot(root);
+        const ft = TrieBlobBuilder.fromTrieRoot(root);
         expect(ft.has('walk')).toBe(true);
         expect(words.findIndex((word) => !ft.has(word))).toBe(-1);
         expect(ft.has('hello')).toBe(false);
         expect([...ft.words()].sort()).toEqual([...words].sort());
     });
 
-    test('toTrieBlob', async () => {
-        const ft = FastTrieBlobBuilder.fromWordList(words);
-        const trie = ft.toTrieBlob();
-        expect(words.findIndex((word) => !trie.has(word))).toBe(-1);
-        const revFt = FastTrieBlob.fromTrieBlob(trie);
-        debug && (await writeToJsonFile('fastTrieBlobA.json', ft));
-        debug && (await writeToJsonFile('fastTrieBlobB.json', revFt));
-        expect(revFt.toJSON()).toEqual(ft.toJSON());
-    });
-
     test('toITrieNodeRoot', async () => {
-        const ft = FastTrieBlobBuilder.fromWordList(words);
-        const trie = ft.toTrieBlob();
+        const trie = TrieBlobBuilder.fromWordList(words);
         for (const word of words) {
             expect(trie.has(word), `Expect to find "${word} in trie."`).toBe(true);
         }
@@ -67,7 +51,7 @@ describe('FastTrieBlob', () => {
 
     test('test compounds and non-strict', () => {
         const words = getWordsDictionary();
-        const ft = FastTrieBlobBuilder.fromWordList(words);
+        const ft = TrieBlobBuilder.fromWordList(words);
 
         expect(words.findIndex((word) => !ft.has(word))).toBe(-1);
         expect([...ft.words()].sort()).toEqual([...words].sort());
@@ -78,7 +62,6 @@ describe('FastTrieBlob', () => {
         expect(ft.hasForbiddenWords).toBe(false);
         expect(ft.hasCompoundWords).toBe(true);
         expect(ft.hasNonStrictWords).toBe(true);
-        expect(ft.hasCaseInsensitive('english')).toBe(true);
         expect(ft.info).toEqual({
             compoundCharacter: '+',
             stripCaseAndAccentsPrefix: '~',
@@ -100,7 +83,7 @@ describe('FastTrieBlob', () => {
     `('words with prefix $prefix', ({ prefix }) => {
         const words = getWordsDictionary();
         const wordFiltered = words.filter((w) => w.startsWith(prefix)).sort();
-        const ft = FastTrieBlobBuilder.fromWordList(words);
+        const ft = TrieBlobBuilder.fromWordList(words);
         expect([...ft.words(prefix)].sort()).toEqual(wordFiltered);
     });
 });
@@ -110,8 +93,8 @@ describe('optimization', async () => {
 
     test('English Dict', () => {
         const trie = trieEn;
-        const ft = FastTrieBlobBuilder.fromTrieRoot(trie.root, false);
-        const tb = FastTrieBlobBuilder.fromTrieRoot(trie.root, true);
+        const ft = TrieBlobBuilder.fromTrieRoot(trie.root, false);
+        const tb = TrieBlobBuilder.fromTrieRoot(trie.root, true);
         expect(tb.size).toBeLessThanOrEqual(ft.size);
         expect([...tb.words()]).toEqual([...ft.words()]);
     });
@@ -121,14 +104,14 @@ describe('Using String Tables', async () => {
     const trieEn = await readModuleDictionary('@cspell/dict-en_us');
 
     test('WIP', () => {
-        const ft = FastTrieBlobBuilder.fromWordList(getSampleWords(), undefined, false);
+        const ft = TrieBlobBuilder.fromWordList(getSampleWords(), undefined, false);
         expect(ft.has('ñ')).toBe(true);
     });
 
     test('English Dict', () => {
         const trie = trieEn;
-        const ft = FastTrieBlobBuilder.fromTrieRoot(trie.root, false);
-        const ft2 = FastTrieBlobBuilder.fromTrieRoot(trie.root, true);
+        const ft = TrieBlobBuilder.fromTrieRoot(trie.root, false);
+        const ft2 = TrieBlobBuilder.fromTrieRoot(trie.root, true);
         // console.log(`English Dict: Original Size: ${ft.size}, Optimized Size: ${ft2.size}`);
 
         expect(ft2.size).toBeLessThan(ft.size);
@@ -309,10 +292,6 @@ function getSampleWords() {
     const words = [...setOfWords].sort();
     // console.log('Unique letter count: %o', new Set([...words.join('')]).size);
     return words;
-}
-
-function writeToJsonFile(filename: string, obj: unknown): Promise<void> {
-    return fs.writeFile(filename, JSON.stringify(obj, null, 2), 'utf8');
 }
 
 function makeCompoundable(word: string): string {

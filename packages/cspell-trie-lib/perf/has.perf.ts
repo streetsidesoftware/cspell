@@ -3,20 +3,18 @@ import assert from 'node:assert';
 import { suite } from 'perf-insight';
 
 import { ITrieImpl } from '../src/lib/ITrie.ts';
-import { readFastTrieBlobFromConfig, readTrieFromConfig } from '../src/test/dictionaries.test.helper.ts';
+import { readTrieBlobFromConfig, readTrieFromConfig } from '../src/test/dictionaries.test.helper.ts';
 
 // const measureTimeout = 100;
 
 const getTrie = memorize(_getTrie);
-const getFastTrieBlob = memorize(_getFastTrieBlob);
+const getTrieBlob = memorize(_getTrieBlob);
 const getWords = memorize(async () => [...(await getTrie()).words()]);
 
 suite('trie has', async (test) => {
     const trie = await getTrie();
     const words = await getWords();
-    const fastTrieBlob = await getFastTrieBlob();
-    const trieBlob = fastTrieBlob.toTrieBlob();
-    const iTrieFast = new ITrieImpl(fastTrieBlob);
+    const trieBlob = await getTrieBlob();
     const iTrieBlob = new ITrieImpl(trieBlob);
     const setOfWords = new Set(words);
     console.log(`Number of words: ${words.length}`);
@@ -29,16 +27,8 @@ suite('trie has', async (test) => {
         trieHasWords(trie, words);
     });
 
-    test('fastTrieBlob has words', () => {
-        trieHasWords(fastTrieBlob, words);
-    });
-
     test('trieBlob has words', () => {
         trieHasWords(trieBlob, words);
-    });
-
-    test('iTrieFast has words', () => {
-        trieHasWords(iTrieFast, words);
     });
 
     test('iTrieBlob has words', () => {
@@ -50,8 +40,8 @@ function _getTrie() {
     return readTrieFromConfig('@cspell/dict-en_us/cspell-ext.json');
 }
 
-function _getFastTrieBlob() {
-    return readFastTrieBlobFromConfig('@cspell/dict-en_us/cspell-ext.json');
+function _getTrieBlob() {
+    return readTrieBlobFromConfig('@cspell/dict-en_us/cspell-ext.json');
 }
 
 function trieHasWords(trie: { has: (word: string) => boolean }, words: string[]): boolean {

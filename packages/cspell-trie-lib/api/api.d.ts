@@ -413,7 +413,10 @@ declare function suggestionCollector(wordToMatch: string, options: SuggestionCol
 declare function impersonateCollector(collector: SuggestionCollector, word: string): SuggestionCollector;
 //#endregion
 //#region src/lib/TrieData.d.ts
-interface TrieData extends Readonly<TrieCharacteristics> {
+interface TrieDataFundamentals {
+  readonly info: Readonly<TrieInfo>;
+}
+interface TrieData extends TrieDataFundamentals, Readonly<TrieCharacteristics> {
   readonly info: Readonly<TrieInfo>;
   /** Method used to split words into individual characters. */
   wordToCharacters(word: string): readonly string[];
@@ -566,7 +569,7 @@ interface FindWordOptions {
 type FindWordOptionsRO = Readonly<FindWordOptions>;
 //#endregion
 //#region src/lib/buildITrie.d.ts
-declare function buildITrieFromWords(words: Iterable<string>, info?: PartialTrieInfo, useTrieBlob?: boolean): ITrie;
+declare function buildITrieFromWords(words: Iterable<string>, info?: PartialTrieInfo): ITrie;
 //#endregion
 //#region src/lib/consolidate.d.ts
 /**

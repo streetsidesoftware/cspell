@@ -4,7 +4,7 @@ import { opSkip, opTake, pipe } from '@cspell/cspell-pipe/sync';
 import { describe, expect, test } from 'vitest';
 
 import { readTrieFromConfig } from '../../test/dictionaries.test.helper.ts';
-import { FastTrieBlobBuilder } from './FastTrieBlobBuilder.ts';
+import { TrieBlobBuilder } from './TrieBlobBuilder.ts';
 
 function getTrie() {
     return readTrieFromConfig('@cspell/dict-en_us/cspell-ext.json');
@@ -17,11 +17,11 @@ describe('Validate English FastTrieBlob', async () => {
     const pTrie = getTrie();
     const sampleTrie = await pTrie;
     const sampleWordsLarge = [...pipe(sampleTrie.words(), opSkip(1000), opTake(6000))];
-    const fastTrieBlob = FastTrieBlobBuilder.fromTrieRoot(sampleTrie.root);
+    const fastTrieBlob = TrieBlobBuilder.fromTrieRoot(sampleTrie.root);
 
     test('insert', () => {
         const words = sampleWordsLarge;
-        const ft = FastTrieBlobBuilder.fromWordList(words);
+        const ft = TrieBlobBuilder.fromWordList(words);
         const result = [...ft.words()];
         expect(result).toEqual(words.sort());
     });
@@ -35,7 +35,7 @@ describe('Validate English FastTrieBlob', async () => {
 
     test('words', async () => {
         const words = await sampleWords;
-        const ft = FastTrieBlobBuilder.fromWordList(words);
+        const ft = TrieBlobBuilder.fromWordList(words);
         const result = [...ft.words()].sort();
 
         const rSet = new Set(result);

@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { readFastTrieBlobFromConfig, readTrieFromConfig } from '../test/dictionaries.test.helper.ts';
+import { readTrieBlobFromConfig, readTrieFromConfig } from '../test/dictionaries.test.helper.ts';
 import { ITrieImpl } from './ITrie.ts';
 import { memorizeLastCall } from './utils/memorizeLastCall.ts';
 
@@ -13,7 +13,7 @@ function _getTrie() {
 const getFastTrieBlob = memorizeLastCall(_getFastTrieBlob);
 
 async function _getFastTrieBlob() {
-    const trie = await readFastTrieBlobFromConfig('@cspell/dict-en_us/cspell-ext.json');
+    const trie = await readTrieBlobFromConfig('@cspell/dict-en_us/cspell-ext.json');
     return new ITrieImpl(trie);
 }
 

@@ -1,11 +1,11 @@
 import type { ITrie } from './ITrie.ts';
 import { ITrieImpl } from './ITrie.ts';
 import type { PartialTrieInfo } from './ITrieNode/TrieInfo.ts';
-import { FastTrieBlobBuilder } from './TrieBlob/FastTrieBlobBuilder.ts';
+import { TrieBlobBuilder } from './TrieBlob/TrieBlobBuilder.ts';
 
-export function buildITrieFromWords(words: Iterable<string>, info: PartialTrieInfo = {}, useTrieBlob = true): ITrie {
-    const builder = new FastTrieBlobBuilder(info);
+export function buildITrieFromWords(words: Iterable<string>, info: PartialTrieInfo = {}): ITrie {
+    const builder = new TrieBlobBuilder(info);
     builder.insert(words);
-    const ft = builder.build();
-    return new ITrieImpl(useTrieBlob ? ft.toTrieBlob() : ft);
+    const tb = builder.build();
+    return new ITrieImpl(tb);
 }
