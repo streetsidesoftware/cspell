@@ -2,7 +2,6 @@ import { suite } from 'perf-insight';
 
 import { buildITrieFromWords } from '../src/lib/index.ts';
 import { createTrieBlobFromTrieRoot } from '../src/lib/TrieBlob/createTrieBlob.ts';
-import { FastTrieBlob } from '../src/lib/TrieBlob/FastTrieBlob.ts';
 import { TrieBlobBuilder } from '../src/lib/TrieBlob/TrieBlobBuilder.ts';
 import { createTrieRootFromList } from '../src/lib/TrieNode/trie-util.ts';
 import { readTrieFromConfig } from '../src/test/dictionaries.test.helper.ts';
@@ -38,10 +37,6 @@ suite('trie create', async (test) => {
 
     test('FastTrieBlobBuilder.fromTrieRoot', () => {
         TrieBlobBuilder.fromTrieRoot(trie);
-    });
-
-    test('FastTrieBlob.fromTrie', () => {
-        FastTrieBlob.fromTrieBlob(trieBlob);
     });
 
     test('TrieRoot createTrieRootFromList', () => {
