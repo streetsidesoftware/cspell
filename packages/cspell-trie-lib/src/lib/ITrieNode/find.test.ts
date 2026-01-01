@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
 import { parseDictionaryLegacy } from '../SimpleDictionaryParser.ts';
-import { FastTrieBlobBuilder } from '../TrieBlob/FastTrieBlobBuilder.ts';
+import { TrieBlobBuilder } from '../TrieBlob/TrieBlobBuilder.ts';
 import type { TrieData } from '../TrieData.ts';
 import type { TrieRoot } from '../TrieNode/TrieNode.ts';
 import { TrieNodeTrie } from '../TrieNode/TrieNodeTrie.ts';
@@ -14,7 +14,7 @@ const findLegacyCompoundWord = __testing__.findLegacyCompoundWord;
 describe('Validate findWord', () => {
     const trie = dictionaryTrieNodeTrie().getRoot();
     const trieBlob = dictionaryTrieBlob().getRoot();
-    const trieFast = FastTrieBlobBuilder.fromTrieRoot(dictionaryTrieRoot()).getRoot();
+    const trieFast = TrieBlobBuilder.fromTrieRoot(dictionaryTrieRoot()).getRoot();
 
     const cModeC = { compoundMode: 'compound' };
     const mCaseT = { matchCase: true };
@@ -265,8 +265,7 @@ function dictionaryTrieNodeTrie(): TrieData {
 }
 
 function dictionaryTrieBlob(): TrieData {
-    const ft = FastTrieBlobBuilder.fromTrieRoot(dictionaryTrieRoot());
-    return ft.toTrieBlob();
+    return TrieBlobBuilder.fromTrieRoot(dictionaryTrieRoot());
 }
 
 const sampleWords = [

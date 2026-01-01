@@ -4,9 +4,9 @@ import { fileURLToPath } from 'node:url';
 
 import { resolve as importResolve } from 'import-meta-resolve';
 
-import { importTrieV3AsFastTrieBlob } from '../lib/io/importV3FastBlob.ts';
+import { importTrieV3AsTrieBlob } from '../lib/io/importV3FastBlob.ts';
 import type { Trie } from '../lib/trie.ts';
-import type { FastTrieBlob } from '../lib/TrieBlob/FastTrieBlob.ts';
+import type { TrieBlob } from '../lib/TrieBlob/index.ts';
 import { readRawDictionaryFileFromConfig, readTrieFile, readTrieFileFromConfig } from './reader.test.helper.ts';
 import { resolveGlobalDict, resolveGlobalSample } from './samples.ts';
 
@@ -29,12 +29,9 @@ export async function readAndProcessDictionaryFile<T>(
     return processor(buf);
 }
 
-export async function readFastTrieBlobFromConfig(
-    pathOrPackage: string,
-    dictionaryName?: string,
-): Promise<FastTrieBlob> {
+export async function readTrieBlobFromConfig(pathOrPackage: string, dictionaryName?: string): Promise<TrieBlob> {
     return readAndProcessDictionaryFile(
-        (buf) => importTrieV3AsFastTrieBlob(buf.toString('utf8')),
+        (buf) => importTrieV3AsTrieBlob(buf.toString('utf8')),
         pathOrPackage,
         dictionaryName,
     );

@@ -3,7 +3,7 @@ import assert from 'node:assert';
 import { suite } from 'perf-insight';
 
 import { ITrieImpl } from '../src/lib/ITrie.ts';
-import { readFastTrieBlobFromConfig, readTrieFromConfig } from '../src/test/dictionaries.test.helper.ts';
+import { readTrieBlobFromConfig, readTrieFromConfig } from '../src/test/dictionaries.test.helper.ts';
 
 // const measureTimeout = 100;
 
@@ -51,7 +51,7 @@ function _getTrie() {
 }
 
 function _getFastTrieBlob() {
-    return readFastTrieBlobFromConfig('@cspell/dict-en_us/cspell-ext.json');
+    return readTrieBlobFromConfig('@cspell/dict-en_us/cspell-ext.json');
 }
 
 function trieHasWords(trie: { has: (word: string) => boolean }, words: string[]): boolean {

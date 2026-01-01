@@ -12,7 +12,7 @@ import type { CompoundWordsMethod, WalkerIterator } from './ITrieNode/walker/wal
 import type { SuggestionCollector, SuggestionResult } from './suggestCollector.ts';
 import { createSuggestionOptions, type SuggestionOptions } from './suggestions/genSuggestionsOptions.ts';
 import { genSuggestions, suggest } from './suggestions/suggestTrieData.ts';
-import { FastTrieBlobBuilder } from './TrieBlob/FastTrieBlobBuilder.ts';
+import { TrieBlobBuilder } from './TrieBlob/TrieBlobBuilder.ts';
 import type { TrieData } from './TrieData.ts';
 import { clean } from './utils/clean.ts';
 import { memorizeLastCall } from './utils/memorizeLastCall.ts';
@@ -427,7 +427,7 @@ export class ITrieImpl implements ITrie {
     }
 
     static create(words: Iterable<string> | IterableIterator<string>, info?: PartialTrieInfo): ITrie {
-        const builder = new FastTrieBlobBuilder(info);
+        const builder = new TrieBlobBuilder(info);
         builder.insert(words);
         const root = builder.build();
         return new ITrieImpl(root);

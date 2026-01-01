@@ -1,5 +1,5 @@
 import type { TrieData } from '../TrieData.ts';
-import { FastTrieBlobBuilder } from './FastTrieBlobBuilder.ts';
+import { TrieBlobBuilder } from './TrieBlobBuilder.ts';
 import { TrieBlob } from './TrieBlob.ts';
 
 export function encodeTrieDataToBTrie(data: TrieData): Uint8Array<ArrayBuffer> {
@@ -7,7 +7,7 @@ export function encodeTrieDataToBTrie(data: TrieData): Uint8Array<ArrayBuffer> {
         return data.encodeToBTrie();
     }
 
-    const trie = FastTrieBlobBuilder.fromWordList(data.words(), data.info);
+    const trie = TrieBlobBuilder.fromWordList(data.words(), data.info);
     return trie.encodeToBTrie();
 }
 

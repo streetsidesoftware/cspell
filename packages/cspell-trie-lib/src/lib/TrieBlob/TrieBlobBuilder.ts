@@ -17,7 +17,7 @@ import { encodeTextToUtf8_32Rev, encodeToUtf8_32Rev } from './Utf8.ts';
 
 type FastTrieBlobNode = number[];
 
-export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
+export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
     private charIndex = new CharIndexBuilder();
     private nodes: FastTrieBlobNode[];
     private _readonly = false;
@@ -30,7 +30,7 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
     #infoBuilder: TrieInfoBuilder;
 
     constructor(options?: PartialTrieInfo, characteristics?: Partial<TrieCharacteristics>) {
-        this.nodes = [[0], Object.freeze([FastTrieBlobBuilder.NodeMaskEOW]) as number[]];
+        this.nodes = [[0], Object.freeze([TrieBlobBuilder.NodeMaskEOW]) as number[]];
         this.IdxEOW = 1;
         this.#infoBuilder = new TrieInfoBuilder(options, characteristics);
     }
@@ -327,7 +327,7 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
         return this;
     }
 
-    build(optimize: boolean = false): FastTrieBlob {
+    build(optimize: boolean = false): TrieBlob {
         this._cursor?.dispose?.();
         this._readonly = true;
         this.freeze();
@@ -343,7 +343,10 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
             ? optimizeNodesWithStringTable({ nodes: sortedNodes, stringTable })
             : { nodes: sortedNodes, stringTable };
 
-        return FastTrieBlob.create(new FastTrieBlobInternals(r.nodes, r.stringTable, info.info, info.characteristics));
+        const ft = FastTrieBlob.create(
+            new FastTrieBlobInternals(r.nodes, r.stringTable, info.info, info.characteristics),
+        );
+        return ft.toTrieBlob();
     }
 
     toJSON(): {
@@ -364,17 +367,17 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
         words: readonly string[] | Iterable<string>,
         options?: PartialTrieInfo,
         optimize?: boolean,
-    ): FastTrieBlob {
-        const ft = new FastTrieBlobBuilder(options);
+    ): TrieBlob {
+        const ft = new TrieBlobBuilder(options);
         return ft.insert(words).build(optimize);
     }
 
-    static fromTrieRoot(root: TrieRoot, optimize?: boolean): FastTrieBlob {
+    static fromTrieRoot(root: TrieRoot, optimize?: boolean): TrieBlob {
         const NodeCharIndexMask = NodeMaskCharByte;
         const nodeChildRefShift = NodeChildIndexRefShift;
         const NodeMaskEOW = NodeHeaderEOWMask;
 
-        const tf = new FastTrieBlobBuilder(undefined, root);
+        const tf = new TrieBlobBuilder(undefined, root);
         const IdxEOW = tf.IdxEOW;
 
         const known = new Map<TrieNode, number>([[root, 0]]);

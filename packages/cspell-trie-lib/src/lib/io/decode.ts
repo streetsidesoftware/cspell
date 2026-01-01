@@ -5,7 +5,7 @@ import { toUint8Array } from '../utils/rawData.ts';
 import * as iv1 from './importExportV1.ts';
 import * as iv2 from './importExportV2.ts';
 import * as iv4 from './importExportV4.ts';
-import { importTrieV3AsFastTrieBlob } from './importV3FastBlob.ts';
+import { importTrieV3AsTrieBlob } from './importV3FastBlob.ts';
 
 export function decodeTrieData(raw: string | ArrayBufferView<ArrayBuffer> | Uint8Array<ArrayBuffer>): TrieData {
     if (typeof raw === 'string') {
@@ -33,7 +33,7 @@ const deserializers: readonly Deserializer[] = [
     (data: string[]) => new TrieNodeTrie(iv1.importTrie(data)),
     (data: string[]) => new TrieNodeTrie(iv1.importTrie(data)),
     (data: string[]) => new TrieNodeTrie(iv2.importTrie(data)),
-    (data: string[]) => importTrieV3AsFastTrieBlob(data),
+    (data: string[]) => importTrieV3AsTrieBlob(data),
     (data: string[]) => new TrieNodeTrie(iv4.importTrie(data)),
 ] as const;
 

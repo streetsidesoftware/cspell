@@ -2,7 +2,7 @@ import { suite } from 'perf-insight';
 
 import { CharIndex } from '../src/lib/TrieBlob/CharIndex.ts';
 import { encodeTextToUtf8 } from '../src/lib/TrieBlob/Utf8.ts';
-import { readFastTrieBlobFromConfig, readTrieFromConfig } from '../src/test/dictionaries.test.helper.ts';
+import { readTrieBlobFromConfig, readTrieFromConfig } from '../src/test/dictionaries.test.helper.ts';
 
 // const measureTimeout = 100;
 
@@ -116,7 +116,7 @@ function _getTrie() {
 }
 
 function _getFastTrieBlob() {
-    return readFastTrieBlobFromConfig('@cspell/dict-en_us/cspell-ext.json');
+    return readTrieBlobFromConfig('@cspell/dict-en_us/cspell-ext.json');
 }
 
 function memorize<T, P extends []>(fn: (...p: P) => T): (...p: P) => T {
