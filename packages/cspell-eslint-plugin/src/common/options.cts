@@ -38,7 +38,7 @@ export interface Options extends Check {
      * - 'typos' - Report only common typos and flagged words
      * - 'flagged' - Report only flagged words
      *
-     * @default 'all'
+     *  default is 'all' unless overridden by CSpell settings
      */
     report?: 'all' | 'simple' | 'typos' | 'flagged';
 }
@@ -75,6 +75,7 @@ export type CSpellOptions = Pick<
     | 'includeRegExpList'
     | 'import'
     | 'language'
+    | 'unknownWords'
     | 'words'
 > & {
     dictionaryDefinitions?: DictionaryDefinition[];
@@ -198,7 +199,6 @@ export const defaultOptions: Options = {
     numSuggestions: 8,
     generateSuggestions: true,
     autoFix: false,
-    report: 'all',
 };
 
 /**

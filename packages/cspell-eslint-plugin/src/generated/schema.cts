@@ -354,6 +354,18 @@ export const optionsSchema: Rule.RuleMetaData['schema'] = {
           "markdownDescription": "Current active spelling language. This specifies the language locale to use in choosing the\ngeneral dictionary.\n\nFor example:\n\n- \"en-GB\" for British English.\n- \"en,nl\" to enable both English and Dutch.",
           "type": "string"
         },
+        "unknownWords": {
+          "default": "report-all",
+          "description": "Controls how unknown words are handled.\n\n- `report-all` - Report all unknown words (default behavior)\n- `report-simple` - Report unknown words that have simple spelling errors, typos, and flagged words.\n- `report-common-typos` - Report unknown words that are common typos and flagged words.\n- `report-flagged` - Report unknown words that are flagged.",
+          "enum": [
+            "report-all",
+            "report-simple",
+            "report-common-typos",
+            "report-flagged"
+          ],
+          "markdownDescription": "Controls how unknown words are handled.\n\n- `report-all` - Report all unknown words (default behavior)\n- `report-simple` - Report unknown words that have simple spelling errors, typos, and flagged words.\n- `report-common-typos` - Report unknown words that are common typos and flagged words.\n- `report-flagged` - Report unknown words that are flagged.",
+          "type": "string"
+        },
         "words": {
           "description": "List of words to be considered correct.",
           "items": {
@@ -433,15 +445,14 @@ export const optionsSchema: Rule.RuleMetaData['schema'] = {
       "type": "number"
     },
     "report": {
-      "default": "all",
-      "description": "Reporting level for unknown words\n\n- 'all' - Report all unknown words (default)\n- 'simple' - Report unknown words with simple suggestions and flagged words\n- 'typos' - Report only common typos and flagged words\n- 'flagged' - Report only flagged words",
+      "description": "Reporting level for unknown words\n\n- 'all' - Report all unknown words (default)\n- 'simple' - Report unknown words with simple suggestions and flagged words\n- 'typos' - Report only common typos and flagged words\n- 'flagged' - Report only flagged words\n\n default is 'all' unless overridden by CSpell settings",
       "enum": [
         "all",
         "simple",
         "typos",
         "flagged"
       ],
-      "markdownDescription": "Reporting level for unknown words\n\n- 'all' - Report all unknown words (default)\n- 'simple' - Report unknown words with simple suggestions and flagged words\n- 'typos' - Report only common typos and flagged words\n- 'flagged' - Report only flagged words",
+      "markdownDescription": "Reporting level for unknown words\n\n- 'all' - Report all unknown words (default)\n- 'simple' - Report unknown words with simple suggestions and flagged words\n- 'typos' - Report only common typos and flagged words\n- 'flagged' - Report only flagged words\n\n default is 'all' unless overridden by CSpell settings",
       "type": "string"
     }
   },

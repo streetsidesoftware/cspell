@@ -3,13 +3,14 @@ import assert from 'node:assert';
 import * as path from 'node:path';
 
 import { toFileDirURL, toFileURL } from '@cspell/url';
-import type { CSpellSettings, TextDocument, ValidationIssue } from 'cspell-lib';
+import type { CSpellSettings, TextDocument, UnknownWordsChoices, ValidationIssue } from 'cspell-lib';
 import {
     createTextDocument,
     DocumentValidator,
     extractImportErrors,
     getDictionary,
     refreshDictionaryCache,
+    unknownWordsChoices,
 } from 'cspell-lib';
 
 import { getDefaultLogger } from '../common/logger.cjs';
@@ -155,21 +156,36 @@ function getDocValidator(filename: string, text: string, options: SpellCheckOpti
     return validator;
 }
 
-function mapReportToUnknownWords(report?: string): { report?: 'all' | 'simple' | 'typos' | 'flagged' } {
-    switch (report) {
-        case 'simple': {
-            return { report: 'simple' };
-        }
-        case 'typos': {
-            return { report: 'typos' };
-        }
-        case 'flagged': {
-            return { report: 'flagged' };
-        }
-        default: {
-            return { report: 'all' };
-        }
-    }
+type ReportTypes = Exclude<Options['report'], undefined>;
+
+type MapReportToUnknownWordChoices = {
+    [key in ReportTypes]: UnknownWordsChoices;
+};
+
+const mapReportToUnknownWordChoices = {
+    all: 'report-all',
+    simple: 'report-simple',
+    typos: 'report-common-typos',
+    flagged: 'report-flagged',
+} as const satisfies MapReportToUnknownWordChoices;
+
+type MapReportToUnknownWordChoicesConst = typeof mapReportToUnknownWordChoices;
+
+type MapReportToUnknownWordChoicesRev = {
+    [v in keyof MapReportToUnknownWordChoicesConst as MapReportToUnknownWordChoicesConst[v]]: v;
+};
+
+/**
+ * This function is just used
+ */
+function _mapUnknownWordToReportTypes(k: UnknownWordsChoices, map: MapReportToUnknownWordChoicesRev): ReportTypes {
+    // This will not compile if A new value was added to UnknownWordsChoices and was not added to mapReportToUnknownWordChoices
+    return map[k];
+}
+
+function mapReportToUnknownWords(report?: Options['report']): Pick<CSpellSettings, 'unknownWords'> {
+    const unknownWords = report ? mapReportToUnknownWordChoices[report] : undefined;
+    return unknownWords ? { unknownWords } : {};
 }
 
 function calcInitialSettings(options: SpellCheckOptions): CSpellSettings {
