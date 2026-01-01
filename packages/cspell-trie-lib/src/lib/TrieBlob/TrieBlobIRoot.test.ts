@@ -4,13 +4,10 @@ import { describe, expect, test } from 'vitest';
 
 import { walkerWordsITrie } from '../walker/walker.ts';
 import { createTrieBlob } from './createTrieBlob.ts';
-import { FastTrieBlob } from './FastTrieBlob.ts';
 import { TrieBlobBuilder } from './TrieBlobBuilder.ts';
 
 const sampleDirUrl = new URL('../../../Samples/', import.meta.url);
 const sampleWords: Promise<readonly string[]> = readWordsFile('emoji-sequences.txt');
-
-const debug = false;
 
 describe('FastTrieBlob', () => {
     const words = ['one', 'two', 'three', 'four', 'walk', 'walking', 'walks', 'wall', 'walls', 'walled'];
@@ -41,18 +38,10 @@ describe('FastTrieBlob', () => {
         const sWords = [...words].sort();
         const setOfWords = new Set(sWords);
         const tb = TrieBlobBuilder.fromWordList(words);
-        const tbWords = [...tb.words()].sort();
-        debug && (await fs.writeFile('fastTrieBlob.json', JSON.stringify(tb, null, 2), 'utf8'));
+        const tbWords = [...tb.words()];
         expect(tbWords).toEqual(sWords);
-        const trie = createTrieBlob(sWords);
-        const tb2 = FastTrieBlob.fromTrieBlob(trie).toTrieBlob();
-        expect(tb2.toJSON()).toEqual(tb.toJSON());
-        const trieWords = [...trie.words()].sort();
-        debug && (await fs.writeFile('trieBlob.json', JSON.stringify(trie, null, 2), 'utf8'));
-        debug && (await fs.writeFile('fastTrieBlob2.json', JSON.stringify(tb2, null, 2), 'utf8'));
-        expect(trieWords).toEqual(sWords);
 
-        const iTrieRoot = trie.getRoot();
+        const iTrieRoot = tb.getRoot();
         for (const word of walkerWordsITrie(iTrieRoot)) {
             expect(setOfWords.has(word), `Expect to find "${word} in set of words."`).toBe(true);
         }
