@@ -35,7 +35,7 @@ export const CARD_DATA: CSpellCard[] = [
     {
         title: 'Multi-Language',
         description:
-            'Built-in dictionaries for dozens of programming and human languages. Extensible with custom word lists or dictionaries.',
+            'Built-in and add-on dictionaries for dozens of programming and human languages are available. Extensible with custom word lists and dictionaries.',
         icon: '/img/icons/globe.svg',
         fill: '#3b82f6',
     },
