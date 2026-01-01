@@ -5,6 +5,7 @@ import { CARD_DATA, SPONSOR_LINKS, VIDEO_PRESENTATIONS } from '@site/src/compone
 import { HomePageSection } from '@site/src/components/home/HomePageSection';
 import { SponsorLinks } from '@site/src/components/home/SponsorLinks';
 import { VideoCards } from '@site/src/components/home/VideoCards';
+import Contributors from '@site/src/components/home/contributors.mdx';
 
 /** Home page CSS module import */
 import './index.scss';
@@ -83,6 +84,7 @@ export default function Home() {
             </em>{' '}
             🥰
           </p>
+          <Contributors />
         </HomePageSection>
         <HomePageSection
           title="Third-Party Video Presentations"
