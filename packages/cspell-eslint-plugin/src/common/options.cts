@@ -1,8 +1,8 @@
-import {
-    type CSpellSettings,
-    type DictionaryDefinitionInline,
-    type DictionaryDefinitionPreferred,
-    type DictionaryDefinitionSimple,
+import type {
+    CSpellSettings,
+    DictionaryDefinitionInline,
+    DictionaryDefinitionPreferred,
+    DictionaryDefinitionSimple,
 } from '@cspell/cspell-types';
 
 export interface Options extends Check {
