@@ -13,7 +13,7 @@ export function HomePageSection(props: HomePageSectionProps): React.ReactElement
     <section className="home-section">
       <div className="home-section-header">
         <span className="home-section-title">{props.title}</span>
-        <span className="home-section-description">Some videos related to CSpell and the</span>
+        <span className="home-section-description">{props.description}</span>
       </div>
 
       <div className="home-section-content">{props.children}</div>
