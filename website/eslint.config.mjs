@@ -1,8 +1,7 @@
 import eslint from '@eslint/js';
 import nodePlugin from 'eslint-plugin-n';
 import tsEslint from 'typescript-eslint';
-// import simpleImportSort from 'eslint-plugin-simple-import-sort';
-// import unicorn from 'eslint-plugin-unicorn';
+
 // @ts-check
 export default tsEslint.config(
     eslint.configs.recommended,
