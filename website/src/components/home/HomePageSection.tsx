@@ -4,6 +4,7 @@ import './home-page-section.scss';
 
 export interface HomePageSectionProps {
   title: string;
+  description: string;
   children?: React.ReactNode;
   className?: string;
 }
