@@ -1,0 +1,94 @@
+{
+  "name": "@cspell/oxlint-plugin",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "version": "9.5.0",
+  "description": "CSpell Oxlint plugin",
+  "keywords": [
+    "oxlint",
+    "plugin",
+    "spell",
+    "spell checker",
+    "spelling"
+  ],
+  "author": "Jason Dent <jason@streetsidesoftware.nl>, Bence Markus <markusbence@outlook.com>",
+  "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-oxlint-plugin#readme",
+  "license": "MIT",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "types": "./dist/plugin/index.d.cts",
+      "require": "./dist/plugin/index.cjs",
+      "import": "./dist/plugin/index.cjs",
+      "default": "./dist/plugin/index.cjs"
+    },
+    "./configs": {
+      "types": "./dist/plugin/configs.d.cts",
+      "require": "./dist/plugin/configs.cjs",
+      "import": "./dist/plugin/configs.cjs",
+      "default": "./dist/plugin/configs.cjs"
+    },
+    "./recommended": {
+      "types": "./dist/plugin/recommended.d.cts",
+      "require": "./dist/plugin/recommended.cjs",
+      "import": "./dist/plugin/recommended.cjs",
+      "default": "./dist/plugin/recommended.cjs"
+    }
+  },
+  "type": "module",
+  "sideEffects": false,
+  "main": "dist/plugin/index.cjs",
+  "types": "dist/plugin/index.d.cts",
+  "files": [
+    "dist",
+    "!**/__mocks__",
+    "!**/*.spec.*",
+    "!**/*.test.*",
+    "!**/test*/**",
+    "!**/*.tsbuildInfo",
+    "!**/*.map"
+  ],
+  "scripts": {
+    "bt": "pnpm build && pnpm test",
+    "build": "pnpm build:schema && pnpm build:src",
+    "build:src": "tsc -b ./tsconfig.json -f",
+    "build:schema": "pnpm build-options-schema",
+    "watch": "tsc -b ./tsconfig.json --watch -f",
+    "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
+    "clean-build": "pnpm run clean && pnpm run build",
+    "coverage": "echo coverage",
+    "test-watch": "pnpm run test -- --watch",
+    "test-yaml": "npx mocha --timeout 10000 \"dist/**/yaml.test.mjs\"",
+    "test-oxlint": "npx mocha --timeout 10000 \"dist/**/*.test.mjs\"",
+    "test-samples": "pnpm -r --filter @internal/oxlint-plugin-fixtures-simple test",
+    "test": "pnpm run test-oxlint && pnpm run test-samples"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/streetsidesoftware/cspell.git",
+    "directory": "packages/cspell-oxlint-plugin"
+  },
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/cspell"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "@internal/cspell-eslint-plugin-scripts": "workspace:*",
+    "@types/estree": "^1.0.8",
+    "@types/mocha": "^10.0.10",
+    "mocha": "^11.7.5",
+    "oxlint": "^1.36.0",
+    "ts-json-schema-generator": "^2.4.0",
+    "typescript": "~5.9.3"
+  },
+  "dependencies": {
+    "@cspell/cspell-types": "workspace:*",
+    "@cspell/url": "workspace:*",
+    "cspell-lib": "workspace:*",
+    "synckit": "^0.11.11"
+  }
+}
