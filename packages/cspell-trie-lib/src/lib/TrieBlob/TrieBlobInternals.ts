@@ -1,7 +1,13 @@
 import type { PartialTrieInfo, TrieCharacteristics, TrieInfo } from '../ITrieNode/TrieInfo.ts';
 import type { StringTable } from '../StringTable/StringTable.ts';
 import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.ts';
-import type { TrieBlobNode32 } from './TrieBlobFormat.ts';
+import { TrieBlob } from './TrieBlob.ts';
+import {
+    NodeChildIndexRefShift,
+    NodeHeaderNumChildrenMask,
+    NodeMaskCharByte,
+    type TrieBlobNode32,
+} from './TrieBlobFormat.ts';
 
 type Nodes = TrieBlobNode32[];
 
@@ -22,41 +28,6 @@ export class FastTrieBlobInternals {
 
         this.info = mergeOptionalWithDefaults(info);
         this.characteristics = characteristics;
-    }
-}
-
-interface TrieMethods extends Readonly<TrieCharacteristics> {
-    readonly nodeFindNode: (idx: number, word: string) => number | undefined;
-    readonly nodeFindExact: (idx: number, word: string) => boolean;
-    readonly nodeGetChild: (idx: number, letter: string) => number | undefined;
-    readonly isForbidden: (word: string) => boolean;
-    readonly findExact: (word: string) => boolean;
-}
-
-export class FastTrieBlobInternalsAndMethods extends FastTrieBlobInternals implements TrieMethods {
-    readonly nodeFindNode: (idx: number, word: string) => number | undefined;
-    readonly nodeFindExact: (idx: number, word: string) => boolean;
-    readonly nodeGetChild: (idx: number, letter: string) => number | undefined;
-    readonly isForbidden: (word: string) => boolean;
-    readonly findExact: (word: string) => boolean;
-    readonly hasForbiddenWords: boolean;
-    readonly hasCompoundWords: boolean;
-    readonly hasNonStrictWords: boolean;
-
-    constructor(nodes: Nodes, stringTable: StringTable, info: PartialTrieInfo, trieMethods: Readonly<TrieMethods>) {
-        super(nodes, stringTable, info, trieMethods);
-        this.nodeFindExact = trieMethods.nodeFindExact;
-        this.nodeGetChild = trieMethods.nodeGetChild;
-        this.isForbidden = trieMethods.isForbidden;
-        this.findExact = trieMethods.findExact;
-        this.nodeFindNode = trieMethods.nodeFindNode;
-        this.hasForbiddenWords = trieMethods.hasForbiddenWords;
-        this.hasCompoundWords = trieMethods.hasCompoundWords;
-        this.hasNonStrictWords = trieMethods.hasNonStrictWords;
-    }
-
-    get hasPreferredSuggestions(): boolean {
-        return !!this.characteristics.hasPreferredSuggestions;
     }
 }
 
@@ -119,4 +90,44 @@ function isSorted<T extends SortableNode>(node: T, mask: number, start: number, 
         }
     }
     return true;
+}
+
+export function toTrieBlob(ft: FastTrieBlobInternals): TrieBlob {
+    const nodeMaskChildCharIndex = NodeMaskCharByte;
+    const nodeChildRefShift = NodeChildIndexRefShift;
+    const nodes: Nodes = ft.nodes;
+
+    function calcNodeToIndex(nodes: Nodes): number[] {
+        let offset = 0;
+        const idx: number[] = Array(nodes.length + 1);
+        for (let i = 0; i < nodes.length; ++i) {
+            idx[i] = offset;
+            offset += nodes[i].length;
+        }
+        idx[nodes.length] = offset;
+        return idx;
+    }
+
+    const nodeToIndex = calcNodeToIndex(nodes);
+    const nodeElementCount = nodeToIndex[nodeToIndex.length - 1];
+    const binNodes = new Uint32Array(nodeElementCount);
+    const lenShift = TrieBlob.NodeMaskNumChildrenShift;
+    const refShift = TrieBlob.NodeChildRefShift;
+
+    const NodeHeaderMask = ~NodeHeaderNumChildrenMask;
+
+    let offset = 0;
+    for (let i = 0; i < nodes.length; ++i) {
+        const node = nodes[i];
+        // assert(offset === nodeToIndex[i]);
+        binNodes[offset++] = ((node.length - 1) << lenShift) | (node[0] & NodeHeaderMask);
+        for (let j = 1; j < node.length; ++j) {
+            const v = node[j];
+            const nodeRef = v >>> nodeChildRefShift;
+            const charIndex = v & nodeMaskChildCharIndex;
+            binNodes[offset++] = (nodeToIndex[nodeRef] << refShift) | charIndex;
+        }
+    }
+
+    return new TrieBlob(binNodes, ft.stringTable, ft.info);
 }

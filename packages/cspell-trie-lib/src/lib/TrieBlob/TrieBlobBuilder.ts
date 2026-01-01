@@ -6,13 +6,11 @@ import type { TrieNode, TrieRoot } from '../TrieNode/TrieNode.ts';
 import { assert } from '../utils/assert.ts';
 import { assertValidUtf16Character } from '../utils/text.ts';
 import { CharIndexBuilder } from './CharIndex.ts';
-import type { NodeToJSON } from './FastTrieBlob.ts';
-import { FastTrieBlob, nodesToJSON } from './FastTrieBlob.ts';
-import { FastTrieBlobInternals, sortNodes } from './FastTrieBlobInternals.ts';
 import { optimizeNodesWithStringTable } from './optimizeNodes.ts';
 import { resolveMap } from './resolveMap.ts';
 import { TrieBlob } from './TrieBlob.ts';
 import { NodeChildIndexRefShift, NodeHeaderEOWMask, NodeMaskCharByte } from './TrieBlobFormat.ts';
+import { FastTrieBlobInternals, sortNodes, toTrieBlob } from './TrieBlobInternals.ts';
 import { encodeTextToUtf8_32Rev, encodeToUtf8_32Rev } from './Utf8.ts';
 
 type FastTrieBlobNode = number[];
@@ -343,19 +341,17 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
             ? optimizeNodesWithStringTable({ nodes: sortedNodes, stringTable })
             : { nodes: sortedNodes, stringTable };
 
-        const ft = FastTrieBlob.create(
-            new FastTrieBlobInternals(r.nodes, r.stringTable, info.info, info.characteristics),
-        );
-        return ft.toTrieBlob();
+        const fti = new FastTrieBlobInternals(r.nodes, r.stringTable, info.info, info.characteristics);
+        return toTrieBlob(fti);
     }
 
     toJSON(): {
         options: Readonly<TrieInfo>;
-        nodes: NodeToJSON[];
+        nodes: FastTrieBlobNode[];
     } {
         return {
             options: this.options,
-            nodes: nodesToJSON(this.nodes.map((n) => Uint32Array.from(n))),
+            nodes: this.nodes,
         };
     }
 
