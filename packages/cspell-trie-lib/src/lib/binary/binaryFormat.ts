@@ -172,6 +172,12 @@ export class BinaryFormatBuilder {
         return this;
     }
 
+    addUint8Array(name: string, description: string, length: number | Uint8Array | number[]): BinaryFormatBuilder {
+        const value = typeof length === 'number' ? new Uint8Array(length) : new Uint8Array(length);
+        this.addData(name, description, 'value', value);
+        return this;
+    }
+
     addData(name: string, description: string, formatType: FormatType, data: DataArrayView): BinaryFormatBuilder {
         const byteSize = data.byteLength / data.length;
         assert(isByteAlignment(byteSize), `Invalid byte size: ${byteSize} for field: ${name}`);
@@ -637,6 +643,18 @@ export class BinaryDataReader {
     }
 
     /**
+     * Read a field as Uint16 starting at the given byte offset.
+     * @param name - name of field
+     * @param byteOffset - offset of in bytes from the beginning of the field
+     * @returns the value read.
+     */
+    getAsUint16(name: string, byteOffset: number = 0): number {
+        const element = this.getDataElement(name);
+        const view = new DataView(element.data.buffer, element.data.byteOffset, element.data.byteLength);
+        return view.getUint16(byteOffset, this.#useLE);
+    }
+
+    /**
      * Get a Uint8 from the data.
      * @param name - name of the Uint8 field
      * @returns number value
@@ -754,8 +772,32 @@ export class BinaryDataReader {
         this.#useLE = endian === 'LE';
     }
 
+    get endian(): 'LE' | 'BE' {
+        return this.#useLE ? 'LE' : 'BE';
+    }
+
     reverseEndian(): void {
         this.#useLE = !this.#useLE;
+    }
+
+    /**
+     * Get the raw bytes for a field.
+     * @param name - name of the field
+     * @returns the bytes or undefined
+     */
+    getUnit8Array(name: string): U8Array | undefined {
+        const element = this.getDataElement(name);
+        if (!element) return undefined;
+        return element.data;
+    }
+
+    /**
+     * Get the FormatElement for a field.
+     * @param name - name of the field
+     * @returns the element or undefined
+     */
+    getField(name: string): FormatElement | undefined {
+        return this.format.getField(name);
     }
 }
 

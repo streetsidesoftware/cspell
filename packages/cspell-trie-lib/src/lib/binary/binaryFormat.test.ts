@@ -169,6 +169,46 @@ describe('BinaryDataBuilder', () => {
         const readArr = reader.getPtrUint16Array('arrayPtr');
         expect(readArr).toEqual(arr);
     });
+
+    test('reader.getField', () => {
+        const format = new BinaryFormatBuilder()
+            .addString('header', 'The file header', 'Test Header')
+            .addUint16('value16', 'A uint16 value', 0x1234)
+            .addUint32ArrayPtr('arrayPtr', 'Pointer to uint32 array')
+            .build();
+        const builder = new BinaryDataBuilder(format);
+        const arr = new Uint32Array(numberRange(10, 20));
+        builder.setPtrUint32Array('arrayPtr', arr);
+        const data = builder.build();
+
+        const reader = new BinaryDataReader(data, format);
+
+        // make sure the field matches
+        const field = reader.getField('arrayPtr');
+        expect(field).toEqual(format.getField('arrayPtr'));
+    });
+
+    test('reader.getAsUint16', () => {
+        const format = new BinaryFormatBuilder()
+            .addString('header', 'The file header', 'Test Header')
+            .addUint16('data16', 'A 16-bit value', 0xabcd)
+            .addUint8Array('data8', 'An array of uint8', [0x12, 0x34])
+            .build();
+        const builder = new BinaryDataBuilder(format);
+        const data = builder.build();
+
+        const reader = new BinaryDataReader(data, format);
+
+        expect(reader.getUint16('data16')).toBe(0xabcd);
+
+        const expectedUint8Array = reader.endian === 'LE' ? new Uint8Array([0xcd, 0xab]) : new Uint8Array([0xab, 0xcd]);
+        const val8 = reader.getUnit8Array('data16');
+        expect(val8).toEqual(expectedUint8Array);
+
+        const expectedUint16 = reader.endian === 'LE' ? 0x3412 : 0x1234;
+        const val16 = reader.getAsUint16('data8');
+        expect(val16).toBe(expectedUint16);
+    });
 });
 
 describe('field overrides', () => {

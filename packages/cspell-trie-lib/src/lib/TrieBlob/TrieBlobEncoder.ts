@@ -39,7 +39,7 @@ export function encodeTrieBlobToBTrie(blob: TrieBlobInfo): U8Array {
     builder.setString('characteristics', cvtTrieCharacteristicsToFlags(blob.characteristics));
 
     if (blob.stringTable.length) {
-        const stringTableData = encodeStringTableToBinary(blob.stringTable);
+        const stringTableData = encodeStringTableToBinary(blob.stringTable, builder.endian);
         builder.setPtrUint8Array('stringTable', stringTableData);
     }
 

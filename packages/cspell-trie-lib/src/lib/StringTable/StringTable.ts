@@ -198,7 +198,8 @@ function getStringTableBinaryFormat(): BinaryFormat {
     return new BinaryFormatBuilder()
         .addUint8('indexBits', 'The number of bits needed for each index entry', 32)
         .addUint8('strLenBits', 'The number of bits needed to store the max length of a string in the table.', 8)
-        .addString('reserved', 'Reserved for future use', 6)
+        .addUint16('endian', 'Endianness of the data', 0x3130) // '01' little endian
+        .addString('reserved', 'Reserved for future use', 4)
         .addUint32ArrayPtr('index32', 'String index array of 32 bit entries')
         .addUint16ArrayPtr('index16', 'String index array of 16 bit entries', 'index32')
         .addUint8ArrayPtr('index', 'String index array of 8 bit entries', 'index32')
@@ -206,7 +207,13 @@ function getStringTableBinaryFormat(): BinaryFormat {
         .build();
 }
 
-export function encodeStringTableToBinary(table: StringTable, endian?: 'LE' | 'BE'): U8Array {
+/**
+ * Encodes a StringTable into binary data so that it can be stored or transmitted.
+ * @param table - the string table to encode
+ * @param endian - the resulting endianness of the data.
+ * @returns The encoded string table binary data.
+ */
+export function encodeStringTableToBinary(table: StringTable, endian: 'LE' | 'BE'): U8Array {
     const strLenBits = table.strLenBits;
     const offsetBits = Math.ceil(Math.log2(table.charData.length + 1));
     const minIndexBits = strLenBits + offsetBits;
@@ -218,6 +225,7 @@ export function encodeStringTableToBinary(table: StringTable, endian?: 'LE' | 'B
     const builder = new BinaryDataBuilder(format, endian);
     builder.setUint8('indexBits', indexBits);
     builder.setUint8('strLenBits', strLenBits);
+    builder.setUint16('endian', 0x3130); // '01' little endian
     if (indexBits === 16) {
         builder.setPtrUint16Array('index16', toU16Array(table.index));
     } else {
@@ -228,13 +236,25 @@ export function encodeStringTableToBinary(table: StringTable, endian?: 'LE' | 'B
     return builder.build();
 }
 
-export function decodeStringTableFromBinary(data: U8Array, endian?: 'LE' | 'BE'): StringTable {
+/**
+ * Decodes binary data into a StringTable.
+ * @param data - the byte data of the string table.
+ * @param endian - the endianness of the encoded data.
+ * @returns
+ */
+export function decodeStringTableFromBinary(data: U8Array, endian: 'LE' | 'BE'): StringTable {
     if (!data?.length) {
         return new StringTable([], new Uint8Array(0), 8);
     }
     const reader = new BinaryDataReader(data, getStringTableBinaryFormat(), endian);
     const indexBits = reader.getUint8('indexBits');
     const strLenBits = reader.getUint8('strLenBits');
+    const endianStored = reader.getUint16('endian');
+    const endianExpected = endian === 'LE' ? 0x3130 : 0x3031;
+    assert(
+        !endianStored || endianStored === endianExpected,
+        `Endian mismatch: expected ${endian}, found ${endianStored}`,
+    );
     const index = indexBits === 16 ? reader.getPtrUint16Array('index16') : reader.getPtrUint32Array('index32');
     const buffer = reader.getPtrUint8Array('data');
     return new StringTable(index, buffer, strLenBits);
