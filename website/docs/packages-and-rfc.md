@@ -5,6 +5,8 @@ sidebar_label: Packages and RFCs
 nav_order: 10
 ---
 
+## Packages
+
 `cspell` uses a monorepo structure to manage the different packages. You can find the list of the available packages and their respective descriptions below.
 
 - [cspell](https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell) -- cspell command-line application
