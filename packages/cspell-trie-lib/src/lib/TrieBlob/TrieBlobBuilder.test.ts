@@ -7,12 +7,12 @@ import { defaultTrieInfo } from '../constants.ts';
 import { extractTrieCharacteristics } from '../ITrieNode/TrieInfo.ts';
 import { createTrieRoot, insert } from '../TrieNode/trie-util.ts';
 import type { TrieNode, TrieRoot } from '../TrieNode/TrieNode.ts';
-import { FastTrieBlobBuilder } from './FastTrieBlobBuilder.ts';
+import { TrieBlobBuilder } from './TrieBlobBuilder.ts';
 
 describe('FastTrieBlobBuilder', () => {
     test('insert', () => {
         const words = ['one', 'two', 'three', 'four', 'houses', 'house', '!forbidden'];
-        const builder = new FastTrieBlobBuilder();
+        const builder = new TrieBlobBuilder();
         builder.insert(words);
         const ft = builder.build();
         expect([...ft.words()].sort()).toEqual([...words].sort());
@@ -26,7 +26,7 @@ describe('FastTrieBlobBuilder', () => {
 
     test('insert characteristics ! :', () => {
         const words = ['one', 'two', 'three', 'four', 'houses', 'house', ':color:special', '~caseInsensitive'];
-        const builder = new FastTrieBlobBuilder();
+        const builder = new TrieBlobBuilder();
         builder.insert(words);
         const ft = builder.build();
         expect([...ft.words()].sort()).toEqual([...words].sort());
@@ -40,7 +40,7 @@ describe('FastTrieBlobBuilder', () => {
 
     test('insert characteristics +', () => {
         const words = ['one', 'two', 'three', 'four', 'houses', 'house', '+one'];
-        const builder = new FastTrieBlobBuilder();
+        const builder = new TrieBlobBuilder();
         builder.insert(words);
         const ft = builder.build();
         expect([...ft.words()].sort()).toEqual([...words].sort());
@@ -54,7 +54,7 @@ describe('FastTrieBlobBuilder', () => {
 
     test('insert word list', () => {
         const words = [...new Set(sampleWords())].sort();
-        const builder = new FastTrieBlobBuilder();
+        const builder = new TrieBlobBuilder();
         builder.insert(words);
         expect(builder.has('😀😃😄😁😆🥹😅😂🤣🥲☺️😊😇🙂🙃😉')).toBe(true);
         const ft = builder.build();
@@ -62,7 +62,7 @@ describe('FastTrieBlobBuilder', () => {
     });
 
     test('setOptions', () => {
-        const builder = new FastTrieBlobBuilder();
+        const builder = new TrieBlobBuilder();
         expect(builder.options).toEqual(defaultTrieInfo);
         builder.setOptions({});
         expect(builder.options).toEqual(defaultTrieInfo);
@@ -71,7 +71,7 @@ describe('FastTrieBlobBuilder', () => {
     });
 
     test('cursor', () => {
-        const builder = new FastTrieBlobBuilder();
+        const builder = new TrieBlobBuilder();
         const cursor = builder.getCursor();
         [...'hello'].forEach((letter) => cursor.insertChar(letter));
         cursor.markEOW();
@@ -85,7 +85,7 @@ describe('FastTrieBlobBuilder', () => {
         ${'hello'}
         ${'😀😎'}
     `('cursor insertChar split $word', ({ word }: { word: string }) => {
-        const builder = new FastTrieBlobBuilder();
+        const builder = new TrieBlobBuilder();
         const cursor = builder.getCursor();
         const chars = [...word];
         chars.forEach((letter) => cursor.insertChar(letter));
@@ -96,7 +96,7 @@ describe('FastTrieBlobBuilder', () => {
     });
 
     test('cursor with word list', () => {
-        const builder = new FastTrieBlobBuilder();
+        const builder = new TrieBlobBuilder();
         const cursor = builder.getCursor();
         const words = sampleWords();
         // console.log('words %o', words.sort());
@@ -108,7 +108,7 @@ describe('FastTrieBlobBuilder', () => {
     });
 
     test('cursor with word list - non-optimized', () => {
-        const builder = new FastTrieBlobBuilder();
+        const builder = new TrieBlobBuilder();
         const cursor = builder.getCursor();
         const words = sampleWords();
         const sortedUnique = [...new Set(words)].sort();
@@ -126,11 +126,11 @@ describe('FastTrieBlobBuilder', () => {
         const words = sampleWords2();
         const sortedUnique = [...new Set(words)].sort();
 
-        const b = FastTrieBlobBuilder.fromWordList(words);
+        const b = TrieBlobBuilder.fromWordList(words);
         // console.warn('trie 1 %o', toJsonObj(b));
         expect([...b.words()].sort()).toEqual(sortedUnique);
 
-        const builder = new FastTrieBlobBuilder();
+        const builder = new TrieBlobBuilder();
         const cursor = builder.getCursor();
         insertFromOptimizedTrie(cursor, words);
         // console.warn('trie 2 %o', toJsonObj(builder));
@@ -139,7 +139,7 @@ describe('FastTrieBlobBuilder', () => {
     });
 
     test('insertFromOptimizedTrie', () => {
-        const builder = new FastTrieBlobBuilder();
+        const builder = new TrieBlobBuilder();
         const cursor = builder.getCursor();
         const words = sampleWords();
         const sortedUnique = [...new Set(words)].sort();
@@ -150,28 +150,28 @@ describe('FastTrieBlobBuilder', () => {
 
     test('fromTrieRoot non-optimized trie', () => {
         const words = sampleWords();
-        const t = FastTrieBlobBuilder.fromTrieRoot(buildTrie(words, false));
+        const t = TrieBlobBuilder.fromTrieRoot(buildTrie(words, false));
         const sortedUnique = [...new Set(words)].sort();
         expect([...t.words()].sort()).toEqual(sortedUnique);
     });
 
     test('fromTrieRoot(optimize) non-optimized trie', () => {
         const words = sampleWords();
-        const t = FastTrieBlobBuilder.fromTrieRoot(buildTrie(words, false), true);
+        const t = TrieBlobBuilder.fromTrieRoot(buildTrie(words, false), true);
         const sortedUnique = [...new Set(words)].sort();
         expect([...t.words()]).toEqual(sortedUnique);
     });
 
     test('fromTrieRoot optimized trie', () => {
         const words = sampleWords();
-        const t = FastTrieBlobBuilder.fromTrieRoot(buildTrie(words, true));
+        const t = TrieBlobBuilder.fromTrieRoot(buildTrie(words, true));
         const sortedUnique = [...new Set(words)].sort();
         expect([...t.words()].sort()).toEqual(sortedUnique);
     });
 
     test('should be able to correctly preserve referenced nodes.', () => {
         const extraWords = 'reds greens blues yellows oranges purples'.split(' ');
-        const builder = new FastTrieBlobBuilder();
+        const builder = new TrieBlobBuilder();
         const cursor = builder.getCursor();
         const words = sampleWords();
         const sortedUnique = [...new Set(words), ...extraWords].sort();
@@ -192,7 +192,7 @@ describe('optimization', () => {
         ${'sampleWords()'}                 | ${sampleWords()}
     `('optimize $comment $words', ({ words }) => {
         const sortedUnique = [...new Set(words)].sort();
-        const ft = FastTrieBlobBuilder.fromWordList(words, undefined, true);
+        const ft = TrieBlobBuilder.fromWordList(words, undefined, true);
         expect([...ft.words()]).toEqual(sortedUnique);
     });
 });

@@ -7,7 +7,7 @@ import { globalTestFixturesDir } from '../test/samples.ts';
 import { buildITrieFromWords } from './buildITrie.ts';
 import type { ITrie } from './ITrie.ts';
 import { parseDictionaryLines } from './SimpleDictionaryParser.ts';
-import { FastTrieBlobBuilder } from './TrieBlob/FastTrieBlobBuilder.ts';
+import { TrieBlobBuilder } from './TrieBlob/TrieBlobBuilder.ts';
 
 describe('buildITrie', () => {
     test('buildITrieFromWords', () => {
@@ -22,10 +22,10 @@ describe('buildITrie', () => {
 
         // console.log('Unique characters:', new Set(words.join('')).size);
 
-        const trieBlob = buildITrieFromWords(words, undefined, true);
-        const trieFast = buildITrieFromWords(words, undefined, false);
+        const trieBlob = buildITrieFromWords(words, undefined);
+        const trieFast = buildITrieFromWords(words, undefined);
 
-        const builder = new FastTrieBlobBuilder();
+        const builder = new TrieBlobBuilder();
         builder.insert(words);
         const ft = builder.build();
 

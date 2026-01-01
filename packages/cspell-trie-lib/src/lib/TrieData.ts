@@ -1,7 +1,11 @@
 import type { ITrieNode, ITrieNodeRoot } from './ITrieNode/ITrieNode.ts';
 import type { TrieCharacteristics, TrieInfo } from './ITrieNode/TrieInfo.ts';
 
-export interface TrieData extends Readonly<TrieCharacteristics> {
+export interface TrieDataFundamentals {
+    readonly info: Readonly<TrieInfo>;
+}
+
+export interface TrieData extends TrieDataFundamentals, Readonly<TrieCharacteristics> {
     readonly info: Readonly<TrieInfo>;
     /** Method used to split words into individual characters. */
     wordToCharacters(word: string): readonly string[];

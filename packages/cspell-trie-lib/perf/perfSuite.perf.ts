@@ -3,13 +3,12 @@ import assert from 'node:assert';
 import { suite } from 'perf-insight';
 
 import type { Trie } from '../src/lib/index.ts';
-import type { FastTrieBlob } from '../src/lib/TrieBlob/FastTrieBlob.ts';
-import { FastTrieBlobBuilder } from '../src/lib/TrieBlob/FastTrieBlobBuilder.ts';
 import { TrieBlob } from '../src/lib/TrieBlob/TrieBlob.ts';
+import { TrieBlobBuilder } from '../src/lib/TrieBlob/TrieBlobBuilder.ts';
 import type { TrieData } from '../src/lib/TrieData.ts';
 import { TrieNodeTrie } from '../src/lib/TrieNode/TrieNodeTrie.ts';
 import { walkerWordsITrie } from '../src/lib/walker/walker.ts';
-import { readFastTrieBlobFromConfig, readTrieFromConfig } from '../src/test/dictionaries.test.helper.ts';
+import { readTrieBlobFromConfig, readTrieFromConfig } from '../src/test/dictionaries.test.helper.ts';
 
 // const weightMapEn = getEnglishWeightMap();
 
@@ -29,16 +28,16 @@ class DI {
     }
 
     private _trieFast = lazy(() => {
-        return getFastTrieBlob();
+        return getTrieBlob();
     });
 
-    get trieFastNL() {
+    get trieBlobNL() {
         return this._trieFastNL();
     }
 
-    private _trieFastNL = lazy(() => getFastTrieBlobNL());
+    private _trieFastNL = lazy(() => getTrieBlobNL());
 
-    get trieFast() {
+    get trieBlob() {
         return this._trieFast();
     }
 
@@ -56,8 +55,8 @@ class DI {
 interface TestDependencies {
     trie: Trie;
     words: string[];
-    trieFast: FastTrieBlob;
-    trieFastNL: FastTrieBlob;
+    trieBlob: TrieBlob;
+    trieBlobNL: TrieBlob;
 }
 
 type DependenciesKeys = keyof TestDependencies;
@@ -67,22 +66,12 @@ const di = new DI();
 // const measureTimeout = 100;
 
 suite('blob.FastTrieBlobBuilder', async (test) => {
-    const { trie, words, trieFast } = await prepareDI(['trie', 'words', 'trieFast']);
-    const trieBlob = FastTrieBlobBuilder.fromTrieRoot(trie.root).toTrieBlob();
-    const trieBlobFromFast = trieFast.toTrieBlob();
-    assert(!words.some((w) => !trieFast.has(w)), 'Expect all words to be found in trieFast.');
-    assert(!words.some((w) => !trieBlobFromFast.has(w)), 'Expect all words to be found in trieBlobFromFast.');
+    const { trie, words, trieBlob } = await prepareDI(['trie', 'words', 'trieBlob']);
+    assert(!words.some((w) => !trieBlob.has(w)), 'Expect all words to be found in trieFast.');
     assert(!words.some((w) => !trie.has(w)), 'Expect all words to be found in trie.');
     assert(!words.some((w) => !trieBlob.has(w)), 'Expect all words to be found in trieBlob. p1');
 
-    test('FastTrieBlobBuilder.fromTrieRoot', () => FastTrieBlobBuilder.fromTrieRoot(trie.root));
-
-    test.prepare(() => FastTrieBlobBuilder.fromTrieRoot(trie.root)).test(
-        'blob.FastTrieBlobBuilder.fromTrieRoot',
-        (ft) => ft.toTrieBlob(),
-    );
-
-    test('blob.createTrieBlobFromITrieNodeRoot', () => FastTrieBlobBuilder.fromTrieRoot(trie.root).toTrieBlob());
+    test('TrieBlobBuilder.fromTrieRoot', () => TrieBlobBuilder.fromTrieRoot(trie.root));
 
     test('blob.TrieBlob.has', () => trieHasWords(trieBlob, words));
     test('blob.words', () => [...trieBlob.words()]);
@@ -118,12 +107,12 @@ function getTrie() {
     return readTrieFromConfig('@cspell/dict-en_us/cspell-ext.json');
 }
 
-function getFastTrieBlob() {
-    return readFastTrieBlobFromConfig('@cspell/dict-en_us/cspell-ext.json');
+function getTrieBlob() {
+    return readTrieBlobFromConfig('@cspell/dict-en_us/cspell-ext.json');
 }
 
-function getFastTrieBlobNL() {
-    return readFastTrieBlobFromConfig('@cspell/dict-nl-nl/cspell-ext.json');
+function getTrieBlobNL() {
+    return readTrieBlobFromConfig('@cspell/dict-nl-nl/cspell-ext.json');
 }
 
 function trieHasWords(trie: TrieData, words: string[]): boolean {

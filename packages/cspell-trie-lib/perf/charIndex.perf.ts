@@ -2,26 +2,18 @@ import { suite } from 'perf-insight';
 
 import { CharIndex } from '../src/lib/TrieBlob/CharIndex.ts';
 import { encodeTextToUtf8 } from '../src/lib/TrieBlob/Utf8.ts';
-import { readFastTrieBlobFromConfig, readTrieFromConfig } from '../src/test/dictionaries.test.helper.ts';
+import { readTrieBlobFromConfig, readTrieFromConfig } from '../src/test/dictionaries.test.helper.ts';
 
 // const measureTimeout = 100;
 
 const getTrie = memorize(_getTrie);
-const getFastTrieBlob = memorize(_getFastTrieBlob);
 const getWords = memorize(async () => [...(await getTrie()).words()]);
 
 suite('encode to sequence', async (test) => {
     const words = await getWords();
     const msgSuffix = ' - ' + words.length + ' words';
-    const fastTrieBlob = await getFastTrieBlob();
     const charIndex = CharIndex.fromIterable(words);
     const encoder = new TextEncoder();
-
-    test('fastTrieBlob.wordToNodeCharIndexSequence' + msgSuffix, () => {
-        for (const word of words) {
-            fastTrieBlob.wordToUtf8Seq(word);
-        }
-    });
 
     test('charIndex.wordToCharIndexSequence' + msgSuffix, () => {
         for (const word of words) {
@@ -116,7 +108,7 @@ function _getTrie() {
 }
 
 function _getFastTrieBlob() {
-    return readFastTrieBlobFromConfig('@cspell/dict-en_us/cspell-ext.json');
+    return readTrieBlobFromConfig('@cspell/dict-en_us/cspell-ext.json');
 }
 
 function memorize<T, P extends []>(fn: (...p: P) => T): (...p: P) => T {

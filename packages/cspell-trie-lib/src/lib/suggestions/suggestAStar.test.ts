@@ -1,7 +1,7 @@
 import type { DictionaryDefinition } from '@cspell/cspell-types';
 import { describe, expect, test } from 'vitest';
 
-import { readFastTrieBlobFromConfig, readTrieFromConfig } from '../../test/dictionaries.test.helper.ts';
+import { readTrieBlobFromConfig, readTrieFromConfig } from '../../test/dictionaries.test.helper.ts';
 import type { WeightMap } from '../distance/index.ts';
 import { mapDictionaryInformationToWeightMap } from '../mappers/mapDictionaryInfoToWeightMap.ts';
 import { parseDictionaryLegacy } from '../SimpleDictionaryParser.ts';
@@ -325,8 +325,7 @@ describe('Validate Suggest A Star with English Dict', async () => {
     const changeLimit = 3;
 
     const trie = new TrieNodeTrie((await _getTrie()).root);
-    const fastTrie = await _getFastTrieBlob();
-    const trieBlob = fastTrie.toTrieBlob();
+    const trieBlob = await _getTrieBlob();
 
     // cspell:ignore Orangges
     test('Tests suggestions for Orangges Trie', () => {
@@ -344,7 +343,7 @@ describe('Validate Suggest A Star with English Dict', async () => {
     });
 
     test('Tests suggestions for Orangges FastTrie', () => {
-        const results = Sug.suggestAStar(fastTrie, 'Orangges', {
+        const results = Sug.suggestAStar(trieBlob, 'Orangges', {
             changeLimit: changeLimit,
             weightMap: dictWeightMap(),
         });
@@ -382,8 +381,8 @@ function _getTrie() {
     return readTrieFromConfig('@cspell/dict-en_us/cspell-ext.json');
 }
 
-function _getFastTrieBlob() {
-    return readFastTrieBlobFromConfig('@cspell/dict-en_us/cspell-ext.json');
+function _getTrieBlob() {
+    return readTrieBlobFromConfig('@cspell/dict-en_us/cspell-ext.json');
 }
 
 function dictWeightMap() {
