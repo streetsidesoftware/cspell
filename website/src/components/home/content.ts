@@ -108,7 +108,7 @@ export const VIDEO_PRESENTATIONS: CSpellVideoPresentation[] = [
     {
         title: 'Spell Checking Documentation in DevOps Pipelines',
         url: 'https://www.youtube.com/watch?v=w8gGi3aeVpc',
-        description: 'Houssem Dellai',
+        description: 'Houssem Dellai', // cspell:ignore Houssem Dellai
     },
     {
         title: "Don't Worry About Spelling...VS Code Can Do It For You!!",
@@ -138,6 +138,21 @@ export const VIDEO_PRESENTATIONS: CSpellVideoPresentation[] = [
     {
         title: 'Code Spell Checker Extension for Visual Studio Code',
         url: 'https://www.youtube.com/watch?v=dUn1mrJYMrM',
-        description: 'Coding with Estefania',
+        description: 'Coding with Estefania', // cspell:ignore Estefania
+    },
+    {
+        title: 'Quick Tip: Use a Code Spell Checker',
+        url: 'https://www.youtube.com/watch?v=Trhj3d9TK5k',
+        description: 'Sean C Davis',
+    },
+    {
+        title: 'Top 22 Must-Have VSCode Extensions for Frontend Developers',
+        url: 'https://youtu.be/SxbCOcN26MI?t=591',
+        description: 'QiroLab', // cspell:ignore Qiro
+    },
+    {
+        title: 'How to Use Cspell --file-list with Node.js',
+        url: 'https://www.youtube.com/watch?v=8XVTWc9DwXM',
+        description: 'vlogize', // cspell:ignore vlogize
     },
 ] as const;

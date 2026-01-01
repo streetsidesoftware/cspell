@@ -67,7 +67,10 @@ export default function Home() {
             >
               contribution notes
             </a>
-            . <strong>Note:</strong> To add or remove words in a dictionary, visit{' '}
+            .
+          </p>
+          <p>
+            <strong>Note:</strong> To add or remove words in a dictionary, visit{' '}
             <a
               href="https://github.com/streetsidesoftware/cspell-dicts/issues"
               target="_blank"
