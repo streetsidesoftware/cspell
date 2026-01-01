@@ -4,12 +4,11 @@ import { describe, expect, test } from 'vitest';
 
 import {
     decodeUtf8_32,
-    decodeUtf8_32_StreamToString,
     decodeUtf8_32Rev,
     decodeUtf8ByteStream,
     encodeCodePointsToUtf8Into,
     encodeTextToUtf8,
-    encodeTextToUtf8_32Into,
+    encodeTextToUtf8Into,
     encodeToUtf8_32,
     encodeToUtf8_32Rev,
     hex32,
@@ -91,18 +90,6 @@ describe('Utf8 lib', () => {
         ).toEqual(text);
     });
 
-    test.each`
-        text    | expected
-        ${'a'}  | ${[0x61]}
-        ${'ab'} | ${[0x61, 0x62]}
-        ${'é'}  | ${[0xc3a9]}
-        ${'🇺🇸'} | ${[0xf09f_87ba, 0xf09f_87b8]}
-    `('encodeTextToUtf8_32Into $text', ({ text, expected }) => {
-        const buffer: number[] = [];
-        encodeTextToUtf8_32Into(text, buffer);
-        expect(buffer).toEqual(expected);
-    });
-
     test('decodeUtf8N_BE invalid', () => {
         expect(decodeUtf8_32(0xff)).toBe(0xfffd);
     });
@@ -140,14 +127,14 @@ describe('Utf8 lib', () => {
         expect(hex32(value)).toBe(expected);
     });
 
-    test('encodeTextToUtf8_32Into', () => {
+    test('encodeTextToUtf8Into', () => {
         const text = sampleText();
         const buffer: number[] = [];
 
-        const len = encodeTextToUtf8_32Into(text, buffer);
+        const len = encodeTextToUtf8Into(text, buffer);
 
         expect(buffer.length).toBe(len);
-        expect(decodeUtf8_32_StreamToString(buffer)).toBe(text);
+        expect(new TextDecoder().decode(new Uint8Array(buffer))).toBe(text);
     });
 });
 

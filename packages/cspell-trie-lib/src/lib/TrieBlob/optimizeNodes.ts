@@ -2,6 +2,8 @@ import { type StringTable, StringTableBuilder } from '../StringTable/StringTable
 import {
     type FastTrieBlobNodes32,
     NodeHeaderEOWMask,
+    NodeHeaderPrefixMask,
+    NodeHeaderPrefixShift,
     NodeMaskCharByte,
     type TrieBlobNode32,
 } from './TrieBlobFormat.ts';
@@ -147,69 +149,110 @@ function compactNodes(nodes: FastTrieBlobNodes32): FastTrieBlobNodes32 {
     }
 }
 
-interface PfxStackItem {
-    charCodes: number[];
-    nodeIdx: number;
-    endIdx: number;
+interface NodesAndStringTable {
+    nodes: FastTrieBlobNodes32;
+    stringTable: StringTable;
 }
 
-export function extractStringTable<T extends number[] | Uint32Array>(nodes: T[]): StringTable {
-    const builder = new StringTableBuilder();
-    const seen: Set<number> = new Set();
-    const eowMask = NodeHeaderEOWMask;
-    const mask = NodeMaskCharByte;
+interface NodesAndStringTableBuilder {
+    nodes: FastTrieBlobNodes32;
+    stringTableBuilder: StringTableBuilder;
+}
 
-    const pfxStack: (PfxStackItem | undefined)[] = [];
+export function calculateByteSize(nodes: FastTrieBlobNodes32): number {
+    let count = 0;
+    for (let i = nodes.length - 1; i >= 0; --i) {
+        count += nodes[i].length;
+    }
+    return count * 4; // each entry is 4 bytes
+}
 
-    function getCount(node: T): number {
-        return node.length - 1;
+function copyNodes(nodes: FastTrieBlobNodes32): FastTrieBlobNodes32 {
+    const size = calculateByteSize(nodes);
+    const dst: FastTrieBlobNodes32 = Array(nodes.length);
+    const buffer = new ArrayBuffer(size);
+
+    for (let i = 0, offset = 0; i < nodes.length; ++i) {
+        const node = nodes[i];
+        const nodeCopy = new Uint32Array(buffer, offset, node.length);
+        nodeCopy.set(node);
+        dst[i] = nodeCopy;
+        offset += nodeCopy.byteLength;
     }
 
-    function nodeIsEOW(node: T): boolean {
-        return (node[0] & eowMask) !== 0;
+    return dst;
+}
+
+function copyNodesAndStringTable(src: NodesAndStringTable): NodesAndStringTableBuilder {
+    const nodes = copyNodes(src.nodes);
+    const stringTableBuilder = StringTableBuilder.fromStringTable(src.stringTable);
+    return { nodes, stringTableBuilder };
+}
+
+export function optimizeNodesWithStringTable(src: NodesAndStringTable): NodesAndStringTable {
+    const { nodes, stringTableBuilder: builder } = copyNodesAndStringTable(src);
+
+    if (!builder.length) {
+        // Add the empty string to take up index 0.
+        builder.addString('');
     }
 
-    function processNode(nodeIdx: number, depth: number): void {
+    walkNodes(nodes, 0, { after: processNode });
+
+    return { nodes: optimizeNodes(nodes), stringTable: builder.build() };
+
+    /**
+     * If possible, replace the current node with a prefix node.
+     * @param nodeIdx - node to process
+     */
+    function processNode(nodeIdx: number): void {
         const node = nodes[nodeIdx];
-        const count = getCount(node);
-        const isEow = nodeIsEOW(node);
-        const endOfPfx = isEow || count > 1;
-        const curPfx = pfxStack[depth - 1];
-        pfxStack[depth] = undefined;
+        if (node.length !== 2) return;
+        const header = node[0];
+        // An end of word node cannot be merged with a prefix.
+        if ((header & NodeHeaderEOWMask) !== 0) return;
+        // Already has a prefix, skip.
+        if (header & NodeHeaderPrefixMask) return;
 
-        if (endOfPfx) {
-            if (curPfx) {
-                curPfx.endIdx = nodeIdx;
-                emitPrefix(curPfx);
-            }
-            return;
-        }
+        const childEntry = node[1];
+        const charByte = childEntry & NodeMaskCharByte;
+        const childNode = nodes[childEntry >>> 8];
 
-        if (count !== 1) return;
+        const childHeader = childNode[0];
+        const childPrefixIdx = (childHeader & NodeHeaderPrefixMask) >>> NodeHeaderPrefixShift;
+        const childBytes = builder.getEntry(childPrefixIdx) || [];
+        const prefixBytes = [charByte, ...childBytes];
+        const prefixIdx = builder.addStringBytes(prefixBytes);
 
-        const pfx = curPfx || { charCodes: [], nodeIdx: nodeIdx, endIdx: nodeIdx };
-        pfx.charCodes.push(node[1] & mask);
-        pfxStack[depth] = pfx;
+        const newNode = Uint32Array.from(childNode);
+        newNode[0] = (prefixIdx << NodeHeaderPrefixShift) | (childHeader & ~NodeHeaderPrefixMask);
+        nodes[nodeIdx] = newNode;
     }
+}
 
-    function emitPrefix(pfxStackItem: PfxStackItem): void {
-        if (seen.has(pfxStackItem.nodeIdx)) return;
+interface NodeWalkOptions {
+    after?: (nodeIdx: number) => void;
+    before?: (nodeIdx: number) => void;
+}
 
-        builder.addStringBytes(pfxStackItem.charCodes);
-        seen.add(pfxStackItem.nodeIdx);
-    }
+function walkNodes(nodes: FastTrieBlobNodes32, nodeIdx: number, options: NodeWalkOptions): void {
+    const after = options.after || (() => undefined);
+    const before = options.before || (() => undefined);
 
-    function walk(nodeIdx: number, depth: number): void {
-        processNode(nodeIdx, depth);
+    function walk(nodeIdx: number): void {
+        before(nodeIdx);
+
         const node = nodes[nodeIdx];
-        const count = getCount(node);
+        const count = node.length - 1;
+
         for (let i = 1; i <= count; ++i) {
-            const childIdx = node[i] >> 8;
-            walk(childIdx, depth + 1);
+            const entry = node[i];
+            const childIdx = entry >> 8;
+            walk(childIdx);
         }
+
+        after(nodeIdx);
     }
 
-    walk(0, 0);
-
-    return builder.build();
+    walk(nodeIdx);
 }

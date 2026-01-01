@@ -8,8 +8,6 @@ import {
     decodeUtf8ByteStream,
     encodeCodePointsToUtf8Into,
     encodeTextToUtf8,
-    encodeTextToUtf8_32,
-    encodeTextToUtf8_32Into,
     encodeTextToUtf8Into,
     encodeToUtf8_32,
     encodeToUtf8_32Rev,
@@ -150,30 +148,6 @@ suite('Utf8 encode', async (test) => {
         for (let i = iterations; i > 0; --i) {
             for (const word of _words) {
                 toCodePoints(word);
-            }
-        }
-    });
-
-    test(`encodeTextToUtf8PointsInto(word) to array words (${words.length})`, () => {
-        const _words = words;
-        const buffer: number[] = new Array(100);
-        for (let i = iterations; i > 0; --i) {
-            for (const word of _words) {
-                encodeTextToUtf8_32Into(word, buffer);
-            }
-        }
-    });
-
-    test(`encodeTextToUtf8_32(word) to array words (${words.length})`, () => {
-        const _words = words;
-        const buffer: number[] = new Array(100);
-        for (let i = iterations; i > 0; --i) {
-            for (const word of _words) {
-                const len = word.length;
-                let j = 0;
-                for (let p = { text: word, offset: 0 }; p.offset < len; ) {
-                    buffer[j++] = encodeTextToUtf8_32(p);
-                }
             }
         }
     });
