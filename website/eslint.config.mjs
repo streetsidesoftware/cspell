@@ -1,12 +1,9 @@
 import eslint from '@eslint/js';
 import nodePlugin from 'eslint-plugin-n';
 import tsEslint from 'typescript-eslint';
-
 // import simpleImportSort from 'eslint-plugin-simple-import-sort';
 // import unicorn from 'eslint-plugin-unicorn';
-
 // @ts-check
-
 export default tsEslint.config(
     eslint.configs.recommended,
     nodePlugin.configs['flat/recommended'],
@@ -39,6 +36,11 @@ export default tsEslint.config(
     },
     {
         files: ['**/*.tsx'],
+        settings: {
+            node: {
+                tryExtensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
+            },
+        },
         rules: {
             '@typescript-eslint/no-var-requires': 'off',
             '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
@@ -51,12 +53,8 @@ export default tsEslint.config(
                         '@docusaurus/useDocusaurusContext',
                         '@theme/Heading',
                         '@theme/Layout',
-                        '@site/src/components/home/VideoCards',
-                        '@site/src/components/home/HomePageCard',
-                        '@site/src/components/home/HomePageSection',
-                        '@site/src/components/home/SponsorLinks',
-                        '@site/src/components/home/content',
                     ],
+                    resolvePaths: ['./', './src'],
                 },
             ],
             'n/no-missing-require': 'warn',
