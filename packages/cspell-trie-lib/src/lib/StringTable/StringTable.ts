@@ -194,11 +194,21 @@ export class StringTableBuilder {
     }
 }
 
+/**
+ * The endian code used to identify endianness in the binary format.
+ * We will store the characters 'S' and 'T'.
+ * 'ST' in little endian is 0x5453
+ * 'ST' in big endian is 0x5354
+ *
+ * The value stored should match the value retrieved, otherwise the endianness is incorrect.
+ */
+const bomCode = 0x5453; // 'ST' in little endian UTF-8
+
 function getStringTableBinaryFormat(): BinaryFormat {
     return new BinaryFormatBuilder()
         .addUint8('indexBits', 'The number of bits needed for each index entry', 32)
         .addUint8('strLenBits', 'The number of bits needed to store the max length of a string in the table.', 8)
-        .addUint16('endian', 'Endianness of the data', 0x3130) // '01' little endian
+        .addUint16('bom', 'The Byte Order Mark.', bomCode)
         .addString('reserved', 'Reserved for future use', 4)
         .addUint32ArrayPtr('index32', 'String index array of 32 bit entries')
         .addUint16ArrayPtr('index16', 'String index array of 16 bit entries', 'index32')
@@ -225,7 +235,7 @@ export function encodeStringTableToBinary(table: StringTable, endian: 'LE' | 'BE
     const builder = new BinaryDataBuilder(format, endian);
     builder.setUint8('indexBits', indexBits);
     builder.setUint8('strLenBits', strLenBits);
-    builder.setUint16('endian', 0x3130); // '01' little endian
+    builder.setUint16('bom', bomCode); // store the little endian value
     if (indexBits === 16) {
         builder.setPtrUint16Array('index16', toU16Array(table.index));
     } else {
@@ -240,7 +250,7 @@ export function encodeStringTableToBinary(table: StringTable, endian: 'LE' | 'BE
  * Decodes binary data into a StringTable.
  * @param data - the byte data of the string table.
  * @param endian - the endianness of the encoded data.
- * @returns
+ * @returns The decoded StringTable.
  */
 export function decodeStringTableFromBinary(data: U8Array, endian: 'LE' | 'BE'): StringTable {
     if (!data?.length) {
@@ -249,12 +259,8 @@ export function decodeStringTableFromBinary(data: U8Array, endian: 'LE' | 'BE'):
     const reader = new BinaryDataReader(data, getStringTableBinaryFormat(), endian);
     const indexBits = reader.getUint8('indexBits');
     const strLenBits = reader.getUint8('strLenBits');
-    const endianStored = reader.getUint16('endian');
-    const endianExpected = endian === 'LE' ? 0x3130 : 0x3031;
-    assert(
-        !endianStored || endianStored === endianExpected,
-        `Endian mismatch: expected ${endian}, found ${endianStored}`,
-    );
+    const bomStored = reader.getUint16('bom');
+    assert(!bomStored || bomStored === bomCode, 'Endian mismatch');
     const index = indexBits === 16 ? reader.getPtrUint16Array('index16') : reader.getPtrUint32Array('index32');
     const buffer = reader.getPtrUint8Array('data');
     return new StringTable(index, buffer, strLenBits);

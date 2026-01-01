@@ -785,7 +785,7 @@ export class BinaryDataReader {
      * @param name - name of the field
      * @returns the bytes or undefined
      */
-    getUnit8Array(name: string): U8Array | undefined {
+    getUint8Array(name: string): U8Array | undefined {
         const element = this.getDataElement(name);
         if (!element) return undefined;
         return element.data;

@@ -202,7 +202,7 @@ describe('BinaryDataBuilder', () => {
         expect(reader.getUint16('data16')).toBe(0xabcd);
 
         const expectedUint8Array = reader.endian === 'LE' ? new Uint8Array([0xcd, 0xab]) : new Uint8Array([0xab, 0xcd]);
-        const val8 = reader.getUnit8Array('data16');
+        const val8 = reader.getUint8Array('data16');
         expect(val8).toEqual(expectedUint8Array);
 
         const expectedUint16 = reader.endian === 'LE' ? 0x3412 : 0x1234;
