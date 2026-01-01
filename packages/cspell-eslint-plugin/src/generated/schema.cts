@@ -431,6 +431,18 @@ export const optionsSchema: Rule.RuleMetaData['schema'] = {
       "description": "Number of spelling suggestions to make.",
       "markdownDescription": "Number of spelling suggestions to make.",
       "type": "number"
+    },
+    "report": {
+      "default": "all",
+      "description": "Reporting level for unknown words\n\n- 'all' - Report all unknown words (default)\n- 'simple' - Report unknown words with simple suggestions and flagged words\n- 'typos' - Report only common typos and flagged words\n- 'flagged' - Report only flagged words",
+      "enum": [
+        "all",
+        "simple",
+        "typos",
+        "flagged"
+      ],
+      "markdownDescription": "Reporting level for unknown words\n\n- 'all' - Report all unknown words (default)\n- 'simple' - Report unknown words with simple suggestions and flagged words\n- 'typos' - Report only common typos and flagged words\n- 'flagged' - Report only flagged words",
+      "type": "string"
     }
   },
   "required": [

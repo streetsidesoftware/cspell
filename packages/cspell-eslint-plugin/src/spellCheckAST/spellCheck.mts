@@ -155,6 +155,23 @@ function getDocValidator(filename: string, text: string, options: SpellCheckOpti
     return validator;
 }
 
+function mapReportToUnknownWords(report?: string): { report?: 'all' | 'simple' | 'typos' | 'flagged' } {
+    switch (report) {
+        case 'simple': {
+            return { report: 'simple' };
+        }
+        case 'typos': {
+            return { report: 'typos' };
+        }
+        case 'flagged': {
+            return { report: 'flagged' };
+        }
+        default: {
+            return { report: 'all' };
+        }
+    }
+}
+
 function calcInitialSettings(options: SpellCheckOptions): CSpellSettings {
     const { customWordListFile, cspell, cwd } = options;
 
@@ -164,6 +181,7 @@ function calcInitialSettings(options: SpellCheckOptions): CSpellSettings {
         words: cspell?.words || [],
         ignoreWords: cspell?.ignoreWords || [],
         flagWords: cspell?.flagWords || [],
+        ...mapReportToUnknownWords(options.report),
     };
 
     if (options.configFile) {

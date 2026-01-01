@@ -1,8 +1,8 @@
-import type {
-    CSpellSettings,
-    DictionaryDefinitionInline,
-    DictionaryDefinitionPreferred,
-    DictionaryDefinitionSimple,
+import {
+    type CSpellSettings,
+    type DictionaryDefinitionInline,
+    type DictionaryDefinitionPreferred,
+    type DictionaryDefinitionSimple,
 } from '@cspell/cspell-types';
 
 export interface Options extends Check {
@@ -30,6 +30,17 @@ export interface Options extends Check {
      * default false
      */
     debugMode?: boolean;
+    /**
+     * Reporting level for unknown words
+     *
+     * - 'all' - Report all unknown words (default)
+     * - 'simple' - Report unknown words with simple suggestions and flagged words
+     * - 'typos' - Report only common typos and flagged words
+     * - 'flagged' - Report only flagged words
+     *
+     * @default 'all'
+     */
+    report?: 'all' | 'simple' | 'typos' | 'flagged';
 }
 
 interface DictOptions {
@@ -187,6 +198,7 @@ export const defaultOptions: Options = {
     numSuggestions: 8,
     generateSuggestions: true,
     autoFix: false,
+    report: 'all',
 };
 
 /**

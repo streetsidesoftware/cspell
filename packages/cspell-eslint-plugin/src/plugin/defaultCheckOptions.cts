@@ -24,6 +24,7 @@ export const defaultOptions: RequiredOptions = {
     numSuggestions: 8,
     generateSuggestions: true,
     autoFix: false,
+    report: 'all',
 };
 
 export function normalizeOptions(opts: Options | undefined, cwd: string): WorkerOptions {
