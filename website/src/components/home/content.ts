@@ -55,11 +55,6 @@ export const SPONSOR_LINKS: CSpellSponsorLink[] = [
         icon: 'github',
     },
     {
-        label: 'Patreon',
-        url: 'https://patreon.com/streetsidesoftware',
-        icon: 'patreon',
-    },
-    {
         label: 'PayPal',
         url: 'https://www.paypal.com/donate/?hosted_button_id=26LNBP2Q6MKCY',
         icon: 'paypal',
