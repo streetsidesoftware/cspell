@@ -4,7 +4,7 @@ import './home-page-section.scss';
 
 export interface HomePageSectionProps {
   title: string;
-  description: string;
+  description?: string;
   children?: React.ReactNode;
   className?: string;
 }
@@ -14,7 +14,7 @@ export function HomePageSection(props: HomePageSectionProps): React.ReactElement
     <section className="home-section">
       <div className="home-section-header">
         <span className="home-section-title">{props.title}</span>
-        <span className="home-section-description">{props.description}</span>
+        {props.description && <span className="home-section-description">{props.description}</span>}
       </div>
 
       <div className="home-section-content">{props.children}</div>

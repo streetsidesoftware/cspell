@@ -108,32 +108,36 @@ export const VIDEO_PRESENTATIONS: CSpellVideoPresentation[] = [
     {
         title: 'Spell Checking Documentation in DevOps Pipelines',
         url: 'https://www.youtube.com/watch?v=w8gGi3aeVpc',
-        description: 'by Houssem Dellai',
+        description: 'Houssem Dellai',
     },
     {
         title: "Don't Worry About Spelling...VS Code Can Do It For You!!",
         url: 'https://www.youtube.com/watch?v=MfxFMFMsBP4',
-        description: 'by James Q Quick',
+        description: 'James Q. Quick',
     },
     {
         title: 'Spell Checking In VSCode - VSCode Pro Tips',
         url: 'https://www.youtube.com/watch?v=_GwpPJgH1Gw',
+        description: 'Syntax',
     },
     {
         title: 'Spell Check in VS Code with Code Spell Checker - Extension Highlight',
         url: 'https://www.youtube.com/watch?v=ZxNnOjWetH4',
+        description: 'Bald. Bearded. Builder.',
     },
     {
         title: 'Spell check your code from the command line with Cspell',
         url: 'https://www.youtube.com/watch?v=nwmJ9h_zPJc',
+        description: 'Tom on the Internet',
     },
     {
-        title: 'How to Use VS Code Spell Checker',
+        title: 'How to Use VS Code Spell Checker - Detailed walkthrough to setup and use multiple languages',
         url: 'https://www.youtube.com/watch?v=Ix5bMd0kZeY',
-        description: 'Detailed walkthrough to setup and use multiple languages',
+        description: 'Coding With Adam',
     },
     {
         title: 'Code Spell Checker Extension for Visual Studio Code',
         url: 'https://www.youtube.com/watch?v=dUn1mrJYMrM',
+        description: 'Coding with Estefania',
     },
 ] as const;

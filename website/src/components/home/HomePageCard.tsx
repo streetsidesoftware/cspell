@@ -2,44 +2,54 @@ import React from 'react';
 
 import './home-page-card.scss';
 
-export interface HomePageCardProps {
-  key: number;
+export interface HomePageCard {
   icon: string;
   title: string;
   description: string;
   fill?: string;
 }
 
-export function HomePageCard(props: HomePageCardProps): React.ReactElement {
-  const cspellSvgStyle: React.CSSProperties = props.fill
-    ? {
-        maskImage: `url(${props.icon})`,
-        WebkitMaskImage: `url(${props.icon})`,
-        backgroundColor: props.fill,
-      }
-    : {
-        backgroundImage: `url(${props.icon})`,
-      };
+export interface HomePageCardProps {
+  cards: HomePageCard[];
+  className?: string;
+}
 
-  const cspellSvgFillStyle: React.CSSProperties = props.fill
-    ? {
-        '--icon-color': props.fill,
-      }
-    : {};
+export function HomePageCards(props: HomePageCardProps): React.ReactElement {
+  const cspellSvgStyle: React.CSSProperties = (card: HomePageCard) =>
+    card.fill
+      ? {
+          maskImage: `url(${card.icon})`,
+          WebkitMaskImage: `url(${card.icon})`,
+          backgroundColor: card.fill,
+        }
+      : {
+          backgroundImage: `url(${card.icon})`,
+        };
+
+  const cspellSvgFillStyle: React.CSSProperties = (card: HomePageCard) =>
+    card.fill
+      ? {
+          '--icon-color': card.fill,
+        }
+      : {};
 
   return (
-    <div key={props.key} className="cspell-card">
-      <div className="cspell-card-header">
-        <div className="cspell-card-icon" style={cspellSvgFillStyle}>
-          <div
-            className={`cspell-card-icon-svg ${props.fill ? 'cspell-card-icon-colored' : ''}`}
-            style={cspellSvgStyle}
-            aria-label={props.title}
-          />
+    <>
+      {props.cards.map((card, index) => (
+        <div key={index} className="cspell-card">
+          <div className="cspell-card-header">
+            <div className="cspell-card-icon" style={cspellSvgFillStyle(card)}>
+              <div
+                className={`cspell-card-icon-svg ${card.fill ? 'cspell-card-icon-colored' : ''}`}
+                style={cspellSvgStyle(card)}
+                aria-label={card.title}
+              />
+            </div>
+            <h2 className="cspell-card-title">{card.title}</h2>
+          </div>
+          <p className="cspell-card-description">{card.description}</p>
         </div>
-        <h2 className="cspell-card-title">{props.title}</h2>
-      </div>
-      <p className="cspell-card-description">{props.description}</p>
-    </div>
+      ))}
+    </>
   );
 }

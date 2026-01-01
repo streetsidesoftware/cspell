@@ -1,6 +1,6 @@
 import React from 'react';
 import Layout from '@theme/Layout';
-import { HomePageCard } from '@site/src/components/home/HomePageCard';
+import { HomePageCards } from '@site/src/components/home/HomePageCard';
 import { CARD_DATA, SPONSOR_LINKS, VIDEO_PRESENTATIONS } from '@site/src/components/home/content';
 import { HomePageSection } from '@site/src/components/home/HomePageSection';
 import { SponsorLinks } from '@site/src/components/home/SponsorLinks';
@@ -37,15 +37,7 @@ export default function Home() {
           </button>
         </div>
         <div className="cards-grid">
-          {CARD_DATA.map((card, index) => (
-            <HomePageCard
-              key={index}
-              title={card.title}
-              description={card.description}
-              icon={card.icon}
-              fill={card.fill}
-            />
-          ))}
+          <HomePageCards cards={CARD_DATA} />
         </div>
         <HomePageSection title="Support Future Development">
           <SponsorLinks links={SPONSOR_LINKS} />
@@ -92,7 +84,10 @@ export default function Home() {
             🥰
           </p>
         </HomePageSection>
-        <HomePageSection title="Third-Party Video Presentations">
+        <HomePageSection
+          title="Third-Party Video Presentations"
+          description="Some videos related to CSpell from the community."
+        >
           <VideoCards videos={VIDEO_PRESENTATIONS} />
         </HomePageSection>
         <div className="footer-container">
