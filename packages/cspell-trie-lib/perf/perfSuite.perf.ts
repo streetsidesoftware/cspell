@@ -4,8 +4,8 @@ import { suite } from 'perf-insight';
 
 import type { Trie } from '../src/lib/index.ts';
 import type { FastTrieBlob } from '../src/lib/TrieBlob/FastTrieBlob.ts';
-import { TrieBlobBuilder } from '../src/lib/TrieBlob/TrieBlobBuilder.ts';
 import { TrieBlob } from '../src/lib/TrieBlob/TrieBlob.ts';
+import { TrieBlobBuilder } from '../src/lib/TrieBlob/TrieBlobBuilder.ts';
 import type { TrieData } from '../src/lib/TrieData.ts';
 import { TrieNodeTrie } from '../src/lib/TrieNode/TrieNodeTrie.ts';
 import { walkerWordsITrie } from '../src/lib/walker/walker.ts';

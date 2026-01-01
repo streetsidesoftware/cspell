@@ -1,6 +1,6 @@
 import type { TrieData } from '../TrieData.ts';
-import { TrieBlobBuilder } from './TrieBlobBuilder.ts';
 import { TrieBlob } from './TrieBlob.ts';
+import { TrieBlobBuilder } from './TrieBlobBuilder.ts';
 
 export function encodeTrieDataToBTrie(data: TrieData): Uint8Array<ArrayBuffer> {
     if (data.encodeToBTrie) {
