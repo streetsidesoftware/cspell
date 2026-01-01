@@ -130,6 +130,16 @@ describe('TrieBlob encode/decode', async () => {
         expect(hexDump(bin)).toMatchSnapshot();
     });
 
+    test('encode optimize hexDump', () => {
+        const words = ['apple', 'banana', 'grape', 'orange', 'strawberry'];
+        const ft = FastTrieBlobBuilder.fromWordList(words, undefined, true);
+        const tb = ft.toTrieBlob();
+        const bin = tb.encodeToBTrie();
+        const r = TrieBlob.decodeBin(bin);
+        expect([...r.words()]).toEqual(words);
+        expect(hexDump(bin)).toMatchSnapshot();
+    });
+
     test('#findNode magic numbers', () => {
         // Verify that the magic numbers used in #findNode are correct.
         expect(TrieBlob.NodeMaskNumChildren, 'TrieBlob.NodeMaskNumChildren has changed, update #findNode.').toBe(0xff);

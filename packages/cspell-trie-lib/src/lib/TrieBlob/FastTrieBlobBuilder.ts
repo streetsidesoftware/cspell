@@ -1,6 +1,7 @@
 import type { BuilderCursor, TrieBuilder } from '../Builder/index.ts';
 import type { PartialTrieInfo, TrieCharacteristics, TrieInfo } from '../ITrieNode/TrieInfo.ts';
 import { TrieInfoBuilder } from '../ITrieNode/TrieInfo.ts';
+import { StringTableBuilder } from '../StringTable/StringTable.ts';
 import type { TrieNode, TrieRoot } from '../TrieNode/TrieNode.ts';
 import { assert } from '../utils/assert.ts';
 import { assertValidUtf16Character } from '../utils/text.ts';
@@ -8,7 +9,7 @@ import { CharIndexBuilder } from './CharIndex.ts';
 import type { NodeToJSON } from './FastTrieBlob.ts';
 import { FastTrieBlob, nodesToJSON } from './FastTrieBlob.ts';
 import { FastTrieBlobInternals, sortNodes } from './FastTrieBlobInternals.ts';
-import { optimizeNodes } from './optimizeNodes.ts';
+import { optimizeNodesWithStringTable } from './optimizeNodes.ts';
 import { resolveMap } from './resolveMap.ts';
 import { TrieBlob } from './TrieBlob.ts';
 import { NodeChildIndexRefShift, NodeHeaderEOWMask, NodeMaskCharByte } from './TrieBlobFormat.ts';
@@ -241,8 +242,8 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
         const wLen = word.length;
         const bytes: number[] = [];
 
-        for (const t = { text: word, offset: 0 }; t.offset < wLen; ) {
-            const isLastChar = t.offset >= wLen - 1;
+        for (const t = { text: word, i: 0 }; t.i < wLen; ) {
+            const isLastChar = t.i >= wLen - 1;
             for (let utf8Code = encodeTextToUtf8_32Rev(t); utf8Code; utf8Code >>>= 8) {
                 const seq = utf8Code & 0xff;
                 bytes.push(seq);
@@ -336,9 +337,13 @@ export class FastTrieBlobBuilder implements TrieBuilder<FastTrieBlob> {
             NodeMaskCharByte,
         );
 
-        const nodes = optimize ? optimizeNodes(sortedNodes) : sortedNodes;
+        const stringTable = new StringTableBuilder().build();
 
-        return FastTrieBlob.create(new FastTrieBlobInternals(nodes, info.info, info.characteristics));
+        const r = optimize
+            ? optimizeNodesWithStringTable({ nodes: sortedNodes, stringTable })
+            : { nodes: sortedNodes, stringTable };
+
+        return FastTrieBlob.create(new FastTrieBlobInternals(r.nodes, r.stringTable, info.info, info.characteristics));
     }
 
     toJSON(): {
