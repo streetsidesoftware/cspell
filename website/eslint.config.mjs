@@ -33,7 +33,6 @@ export default tsEslint.config(
                 'warn',
                 {
                     allowModules: ['@docusaurus/plugin-content-docs'],
-                    // resolvePaths: ['/path/to/a/modules/directory'],
                 },
             ],
         },
@@ -52,6 +51,11 @@ export default tsEslint.config(
                         '@docusaurus/useDocusaurusContext',
                         '@theme/Heading',
                         '@theme/Layout',
+                        '@site/src/components/home/VideoCards',
+                        '@site/src/components/home/HomePageCard',
+                        '@site/src/components/home/HomePageSection',
+                        '@site/src/components/home/SponsorLinks',
+                        '@site/src/components/home/content',
                     ],
                 },
             ],
@@ -60,7 +64,6 @@ export default tsEslint.config(
                 'error',
                 {
                     allowModules: ['@site/static'],
-                    // convertPath: { '@site/static/**': ['@site/static', './static'] },
                 },
             ],
         },
