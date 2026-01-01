@@ -10,7 +10,6 @@ import {
     extractImportErrors,
     getDictionary,
     refreshDictionaryCache,
-    unknownWordsChoices,
 } from 'cspell-lib';
 
 import { getDefaultLogger } from '../common/logger.cjs';
