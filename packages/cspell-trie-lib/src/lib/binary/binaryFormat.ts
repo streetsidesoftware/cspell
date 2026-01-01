@@ -173,7 +173,8 @@ export class BinaryFormatBuilder {
     }
 
     addUint8Array(name: string, description: string, length: number | Uint8Array | number[]): BinaryFormatBuilder {
-        const value = typeof length === 'number' ? new Uint8Array(length) : new Uint8Array(length);
+        // `as number` is needed because the type definition for `new Uint8Array` is wrong.
+        const value = new Uint8Array(length as number);
         this.addData(name, description, 'value', value);
         return this;
     }
