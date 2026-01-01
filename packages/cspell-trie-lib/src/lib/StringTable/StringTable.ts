@@ -196,13 +196,13 @@ export class StringTableBuilder {
 
 /**
  * The endian code used to identify endianness in the binary format.
- * We will store the characters 'S' and 'T'.
- * 'ST' in little endian is 0x5453
- * 'ST' in big endian is 0x5354
+ * We use the 16-bit value 0x5453 (corresponding to the characters 'S' (0x53) and 'T' (0x54)).
+ * In little-endian representation, 0x5453 is stored as bytes 0x53 0x54 ('S', 'T').
+ * In big-endian representation, 0x5453 is stored as bytes 0x54 0x53 ('T', 'S').
  *
  * The value stored should match the value retrieved, otherwise the endianness is incorrect.
  */
-const bomCode = 0x5453; // 'ST' in little endian UTF-8
+const bomCode = 0x5453; // 16-bit BOM value used for endianness check
 
 function getStringTableBinaryFormat(): BinaryFormat {
     return new BinaryFormatBuilder()
