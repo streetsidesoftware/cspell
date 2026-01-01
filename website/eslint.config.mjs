@@ -1,9 +1,10 @@
 import eslint from '@eslint/js';
 import nodePlugin from 'eslint-plugin-n';
 import tsEslint from 'typescript-eslint';
+import { defineConfig } from 'eslint/config';
 
 // @ts-check
-export default tsEslint.config(
+export default defineConfig(
     eslint.configs.recommended,
     nodePlugin.configs['flat/recommended'],
     ...tsEslint.configs.recommended,
