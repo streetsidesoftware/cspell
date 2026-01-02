@@ -16,7 +16,7 @@ export interface VideoCardsProps {
 
 function getYouTubeThumbnail(url: string): string {
   // Extract YouTube video ID from URL
-  const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\n?#]+)/);
+  const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&\n?#]+)/); // cspell:disable-line
   const videoId = match?.[1];
 
   if (videoId) {
