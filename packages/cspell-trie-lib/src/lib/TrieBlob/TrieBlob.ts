@@ -16,6 +16,7 @@ import {
     NodeMaskCharByte,
 } from './TrieBlobFormat.ts';
 import { TrieBlobInternals, TrieBlobIRoot } from './TrieBlobIRoot.ts';
+import { TrieBlobInternalsLegacy, TrieBlobIRootLegacy } from './TrieBlobIRootLegacy.ts';
 import type { U8Array, U32Array } from './TypedArray.ts';
 import { createUint8ArrayCursor } from './TypedArrayCursor.ts';
 import { Utf8Accumulator } from './Utf8.ts';
@@ -123,6 +124,33 @@ export class TrieBlob implements TrieData {
             },
         );
         return new TrieBlobIRoot(trieData, 0, this.info, {
+            find: this.find.bind(this),
+        });
+    }
+
+    getRootLegacy(): ITrieNodeRoot {
+        const trieData = new TrieBlobInternalsLegacy(
+            this.nodes,
+            // this.#stringTable,
+            {
+                NodeMaskEOW: NodeHeaderEOWMask,
+                NodeMaskNumChildren: NodeHeaderNumChildrenMask,
+                NodeMaskChildCharIndex: NodeMaskCharByte,
+                NodeChildRefShift: NodeChildIndexRefShift,
+            },
+            {
+                nodeFindExact: (idx, word) => this.#hasWord(idx, word),
+                nodeGetChild: (idx, letter) => this.#findNode(idx, letter),
+                nodeFindNode: (idx, word) => this.#findNode(idx, word),
+                isForbidden: (word) => this.isForbiddenWord(word),
+                findExact: (word) => this.has(word),
+                hasCompoundWords: this.hasCompoundWords,
+                hasForbiddenWords: this.hasForbiddenWords,
+                hasNonStrictWords: this.hasNonStrictWords,
+                hasPreferredSuggestions: this.hasPreferredSuggestions,
+            },
+        );
+        return new TrieBlobIRootLegacy(trieData, 0, this.info, {
             find: this.find.bind(this),
         });
     }

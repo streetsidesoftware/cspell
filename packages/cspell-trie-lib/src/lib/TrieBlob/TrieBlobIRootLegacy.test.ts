@@ -14,20 +14,20 @@ describe('FastTrieBlob', () => {
 
     test('toITrieNodeRoot', () => {
         const trie = createTrieBlob(words);
-        const iTrieRoot = trie.getRoot();
+        const iTrieRoot = trie.getRootLegacy();
         const iter = walkerWordsITrie(iTrieRoot);
         expect([...iter]).toEqual(words.sort());
     });
 
     test('toITrieNodeRoot.keys', () => {
         const trie = createTrieBlob(words);
-        const iTrieRoot = trie.getRoot();
+        const iTrieRoot = trie.getRootLegacy();
         expect(iTrieRoot.keys()).toEqual([...new Set(words.map((w) => w[0]))].sort());
     });
 
     test('toITrieNodeRoot.values', () => {
         const trie = createTrieBlob(words);
-        const iTrieRoot = trie.getRoot();
+        const iTrieRoot = trie.getRootLegacy();
         const keys = [...iTrieRoot.keys()];
         const values = [...iTrieRoot.values()];
         expect(values.length).toBe(keys.length);
@@ -41,7 +41,7 @@ describe('FastTrieBlob', () => {
         const tbWords = [...tb.words()];
         expect(tbWords).toEqual(sWords);
 
-        const iTrieRoot = tb.getRoot();
+        const iTrieRoot = tb.getRootLegacy();
         for (const word of walkerWordsITrie(iTrieRoot)) {
             expect(setOfWords.has(word), `Expect to find "${word} in set of words."`).toBe(true);
         }

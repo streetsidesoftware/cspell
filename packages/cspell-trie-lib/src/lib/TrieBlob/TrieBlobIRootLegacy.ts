@@ -20,7 +20,7 @@ interface TrieMethods extends Readonly<TrieCharacteristics> {
     readonly findExact: (word: string) => boolean;
 }
 
-export class TrieBlobInternals implements TrieMethods, BitMaskInfo {
+export class TrieBlobInternalsLegacy implements TrieMethods, BitMaskInfo {
     #methods: TrieMethods;
     readonly NodeMaskEOW: number;
     readonly NodeMaskNumChildren: number;
@@ -66,7 +66,7 @@ const EmptyKeys: readonly string[] = Object.freeze([]);
 const EmptyNodes: readonly ITrieNode[] = Object.freeze([]);
 const EmptyEntries: readonly (readonly [string, ITrieNode])[] = Object.freeze([]);
 
-export interface ITrieSupportMethods extends Readonly<Pick<ITrieNodeRoot, 'find'>> {}
+export interface ITrieSupportMethodsLegacy extends Readonly<Pick<ITrieNodeRoot, 'find'>> {}
 
 class TrieBlobINode implements ITrieNode {
     readonly id: number;
@@ -80,10 +80,10 @@ class TrieBlobINode implements ITrieNode {
     private _entries: readonly [string, ITrieNode][] | undefined;
     private _values: readonly ITrieNode[] | undefined;
     protected charToIdx: Readonly<Record<string, number>> | undefined;
-    readonly trie: TrieBlobInternals;
+    readonly trie: TrieBlobInternalsLegacy;
     readonly nodeIdx: NodeIndex;
 
-    constructor(trie: TrieBlobInternals, nodeIdx: NodeIndex) {
+    constructor(trie: TrieBlobInternalsLegacy, nodeIdx: NodeIndex) {
         this.trie = trie;
         this.nodeIdx = nodeIdx;
         const node = trie.nodes[nodeIdx];
@@ -273,7 +273,7 @@ class TrieBlobINode implements ITrieNode {
     }
 }
 
-export class TrieBlobIRoot extends TrieBlobINode implements ITrieNodeRoot {
+export class TrieBlobIRootLegacy extends TrieBlobINode implements ITrieNodeRoot {
     find: ITrieNodeRoot['find'];
     isForbidden: ITrieNodeRoot['isForbidden'];
 
@@ -282,7 +282,12 @@ export class TrieBlobIRoot extends TrieBlobINode implements ITrieNodeRoot {
     readonly hasNonStrictWords: boolean;
     readonly info: Readonly<TrieInfo>;
 
-    constructor(trie: TrieBlobInternals, nodeIdx: number, info: Readonly<TrieInfo>, methods: ITrieSupportMethods) {
+    constructor(
+        trie: TrieBlobInternalsLegacy,
+        nodeIdx: number,
+        info: Readonly<TrieInfo>,
+        methods: ITrieSupportMethodsLegacy,
+    ) {
         super(trie, nodeIdx);
         this.info = info;
         this.find = methods.find;
