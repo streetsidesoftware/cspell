@@ -12,12 +12,15 @@ interface BitMaskInfo {
 type Node = number;
 type NodeIndex = number;
 
-interface TrieMethods extends Readonly<TrieCharacteristics> {
+type ITrieSupportMethods = Readonly<Required<Pick<ITrieNodeRoot, 'find'>>>;
+
+interface TrieMethods extends Readonly<TrieCharacteristics>, ITrieSupportMethods {
     readonly nodeFindNode: (idx: number, word: string) => number | undefined;
     readonly nodeFindExact: (idx: number, word: string) => boolean;
     readonly nodeGetChild: (idx: number, letter: string) => number | undefined;
     readonly isForbidden: (word: string) => boolean;
     readonly findExact: (word: string) => boolean;
+    readonly find: ITrieSupportMethods['find'];
 }
 
 export class TrieBlobInternals implements TrieMethods, BitMaskInfo {
@@ -31,6 +34,8 @@ export class TrieBlobInternals implements TrieMethods, BitMaskInfo {
     readonly findExact: (word: string) => boolean;
     readonly nodeGetChild: (idx: number, letter: string) => number | undefined;
     readonly nodeFindNode: (idx: number, word: string) => number | undefined;
+    readonly find: ITrieSupportMethods['find'];
+
     readonly nodes: Uint32Array;
 
     constructor(nodes: Uint32Array, maskInfo: BitMaskInfo, methods: TrieMethods) {
@@ -46,6 +51,7 @@ export class TrieBlobInternals implements TrieMethods, BitMaskInfo {
         this.findExact = methods.findExact;
         this.nodeGetChild = methods.nodeGetChild;
         this.nodeFindNode = methods.nodeFindNode;
+        this.find = methods.find;
     }
 
     get hasPreferredSuggestions(): boolean {
@@ -65,8 +71,6 @@ export class TrieBlobInternals implements TrieMethods, BitMaskInfo {
 const EmptyKeys: readonly string[] = Object.freeze([]);
 const EmptyNodes: readonly ITrieNode[] = Object.freeze([]);
 const EmptyEntries: readonly (readonly [string, ITrieNode])[] = Object.freeze([]);
-
-export interface ITrieSupportMethods extends Readonly<Pick<ITrieNodeRoot, 'find'>> {}
 
 class TrieBlobINode implements ITrieNode {
     readonly id: number;
@@ -282,10 +286,10 @@ export class TrieBlobIRoot extends TrieBlobINode implements ITrieNodeRoot {
     readonly hasNonStrictWords: boolean;
     readonly info: Readonly<TrieInfo>;
 
-    constructor(trie: TrieBlobInternals, nodeIdx: number, info: Readonly<TrieInfo>, methods: ITrieSupportMethods) {
+    constructor(trie: TrieBlobInternals, nodeIdx: number, info: Readonly<TrieInfo>) {
         super(trie, nodeIdx);
         this.info = info;
-        this.find = methods.find;
+        this.find = trie.find;
         this.isForbidden = trie.isForbidden;
         this.hasForbiddenWords = trie.hasForbiddenWords;
         this.hasCompoundWords = trie.hasCompoundWords;

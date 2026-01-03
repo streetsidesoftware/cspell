@@ -17,6 +17,7 @@ import {
 } from './TrieBlobFormat.ts';
 import { TrieBlobInternals, TrieBlobIRoot } from './TrieBlobIRoot.ts';
 import { TrieBlobInternalsLegacy, TrieBlobIRootLegacy } from './TrieBlobIRootLegacy.ts';
+import type { TrieBlobNodeRef } from './TrieBlobNodeRef.ts';
 import type { U8Array, U32Array } from './TypedArray.ts';
 import { createUint8ArrayCursor } from './TypedArrayCursor.ts';
 import { Utf8Accumulator } from './Utf8.ts';
@@ -117,15 +118,14 @@ export class TrieBlob implements TrieData {
                 nodeFindNode: (idx, word) => this.#findNode(idx, word),
                 isForbidden: (word) => this.isForbiddenWord(word),
                 findExact: (word) => this.has(word),
+                find: this.find.bind(this),
                 hasCompoundWords: this.hasCompoundWords,
                 hasForbiddenWords: this.hasForbiddenWords,
                 hasNonStrictWords: this.hasNonStrictWords,
                 hasPreferredSuggestions: this.hasPreferredSuggestions,
             },
         );
-        return new TrieBlobIRoot(trieData, 0, this.info, {
-            find: this.find.bind(this),
-        });
+        return new TrieBlobIRoot(trieData, 0, this.info);
     }
 
     getRootLegacy(): ITrieNodeRoot {
@@ -570,19 +570,6 @@ function trieBlobSort(data: U32Array) {
         const sorted = data.slice(start, end).sort((a, b) => (a & MaskChildCharIndex) - (b & MaskChildCharIndex));
         sorted.forEach((v, i) => (data[start + i] = v));
     }
-}
-
-/**
- * A reference to a node in the TrieBlob.
- * It includes the node index, the prefix index.
- */
-export interface TrieBlobNodeRef {
-    /** The index of the node */
-    nodeIdx: number;
-    /** The index into the prefix if it exists. */
-    pfx: number;
-    /** the prefix bytes if they exist */
-    prefix: U8Array | undefined;
 }
 
 interface RefWithBChar extends TrieBlobNodeRef {
