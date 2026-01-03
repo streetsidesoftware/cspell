@@ -153,8 +153,20 @@ export function decodeUtf8_32Rev(utf8: Utf8_32Rev): CodePoint {
  * unnecessarily expensive.
  */
 export class Utf8Accumulator {
+    /**
+     * Number of remaining continuation bytes expected for the current code point being decoded.
+     */
     remaining = 0;
+    /**
+     * Partially decoded code point value being accumulated.
+     */
     value = 0;
+
+    /**
+     * Decode a single utf8 byte
+     * @param byte
+     * @returns a CodePoint if a full code point has been decoded, undefined if more bytes are needed, or 0xfffd on error.
+     */
     decode(byte: number): CodePoint | undefined {
         let remaining = this.remaining;
         if (byte & ~0xff) return this.reset();
@@ -187,6 +199,10 @@ export class Utf8Accumulator {
             return undefined;
         }
         return this.reset();
+    }
+
+    get codePoint(): CodePoint | undefined {
+        return this.remaining ? undefined : this.value;
     }
 
     decodeBytesToString(bytes: ReadonlyArray<number> | Uint8Array): string {

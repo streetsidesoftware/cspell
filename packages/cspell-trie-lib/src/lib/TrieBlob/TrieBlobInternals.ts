@@ -5,6 +5,7 @@ import { TrieBlob } from './TrieBlob.ts';
 import {
     NodeChildIndexRefShift,
     NodeHeaderNumChildrenMask,
+    NodeHeaderNumChildrenShift,
     NodeMaskCharByte,
     type TrieBlobNode32,
 } from './TrieBlobFormat.ts';
@@ -111,8 +112,8 @@ export function toTrieBlob(ft: FastTrieBlobInternals): TrieBlob {
     const nodeToIndex = calcNodeToIndex(nodes);
     const nodeElementCount = nodeToIndex[nodeToIndex.length - 1];
     const binNodes = new Uint32Array(nodeElementCount);
-    const lenShift = TrieBlob.NodeMaskNumChildrenShift;
-    const refShift = TrieBlob.NodeChildRefShift;
+    const lenShift = NodeHeaderNumChildrenShift;
+    const refShift = NodeChildIndexRefShift;
 
     const NodeHeaderMask = ~NodeHeaderNumChildrenMask;
 

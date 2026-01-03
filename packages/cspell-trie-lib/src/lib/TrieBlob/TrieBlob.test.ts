@@ -7,6 +7,7 @@ import { buildTrieNodeTrieFromWords } from '../TrieNode/TrieNodeBuilder.ts';
 import { createTrieBlob } from './createTrieBlob.ts';
 import { TrieBlob } from './TrieBlob.ts';
 import { TrieBlobBuilder } from './TrieBlobBuilder.ts';
+import { NodeChildIndexRefShift, NodeHeaderNumChildrenMask } from './TrieBlobFormat.ts';
 
 describe('TrieBlob', () => {
     const sampleWords = [
@@ -136,8 +137,8 @@ describe('TrieBlob encode/decode', async () => {
 
     test('#findNode magic numbers', () => {
         // Verify that the magic numbers used in #findNode are correct.
-        expect(TrieBlob.NodeMaskNumChildren, 'TrieBlob.NodeMaskNumChildren has changed, update #findNode.').toBe(0xff);
-        expect(TrieBlob.NodeChildRefShift, 'TrieBlob.NodeChildRefShift has changed, update #findNode.').toBe(8);
+        expect(NodeHeaderNumChildrenMask, 'TrieBlob.NodeMaskNumChildren has changed, update #findNode.').toBe(0xff);
+        expect(NodeChildIndexRefShift, 'TrieBlob.NodeChildRefShift has changed, update #findNode.').toBe(8);
     });
 });
 
@@ -157,7 +158,7 @@ function countNodeLengths(blob: TrieBlob): Map<number, [number, number]> {
     const nodes = blob.nodes;
     for (let i = 0; i < nodes.length; i++) {
         const node = nodes[i];
-        const numChildren = node & TrieBlob.NodeMaskNumChildren;
+        const numChildren = node & NodeHeaderNumChildrenMask;
         i += numChildren;
         lengths.set(numChildren, (lengths.get(numChildren) || 0) + 1);
     }
@@ -174,9 +175,9 @@ function countNodeReferences(blob: TrieBlob): Map<number, number> {
     const nodes = blob.nodes;
     for (let i = 0; i < nodes.length; i++) {
         const node = nodes[i];
-        const numChildren = node & TrieBlob.NodeMaskNumChildren;
+        const numChildren = node & NodeHeaderNumChildrenMask;
         for (let j = 1; j <= numChildren; j++) {
-            const childRef = nodes[i + j] >>> TrieBlob.NodeChildRefShift;
+            const childRef = nodes[i + j] >>> NodeChildIndexRefShift;
             refs.set(childRef, (refs.get(childRef) || 0) + 1);
         }
         i += numChildren;

@@ -8,7 +8,7 @@ import { assertValidUtf16Character } from '../utils/text.ts';
 import { CharIndexBuilder } from './CharIndex.ts';
 import { optimizeNodesWithStringTable } from './optimizeNodes.ts';
 import { resolveMap } from './resolveMap.ts';
-import { TrieBlob } from './TrieBlob.ts';
+import type { TrieBlob } from './TrieBlob.ts';
 import { NodeChildIndexRefShift, NodeHeaderEOWMask, NodeMaskCharByte } from './TrieBlobFormat.ts';
 import { FastTrieBlobInternals, sortNodes, toTrieBlob } from './TrieBlobInternals.ts';
 import { encodeTextToUtf8_32Rev, encodeToUtf8_32Rev } from './Utf8.ts';
@@ -431,9 +431,9 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
         return tf.build(optimize);
     }
 
-    static NodeMaskEOW: number = TrieBlob.NodeMaskEOW;
-    static NodeChildRefShift: number = TrieBlob.NodeChildRefShift;
-    static NodeMaskChildCharIndex: number = TrieBlob.NodeMaskChildCharIndex;
+    static NodeMaskEOW: number = NodeHeaderEOWMask;
+    static NodeChildRefShift: number = NodeChildIndexRefShift;
+    static NodeMaskChildCharIndex: number = NodeMaskCharByte;
 }
 
 function createCharUtf8_32RevLookup(maxSize: number = 256): (char: string) => number {
