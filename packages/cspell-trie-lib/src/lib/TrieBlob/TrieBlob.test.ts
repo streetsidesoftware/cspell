@@ -61,7 +61,7 @@ describe('TrieBlob', () => {
     });
 
     test('test compounds and non-strict', () => {
-        const words = getWordsDictionary();
+        const words = getWordsForDictionary();
         const t = TrieBlobBuilder.fromWordList(words);
         expect(words.findIndex((word) => !t.has(word))).toBe(-1);
         expect([...t.words()].sort()).toEqual([...words].sort());
@@ -80,10 +80,39 @@ describe('TrieBlob', () => {
         ${'wa'}
         ${'o'}
     `('walk with prefix $prefix', ({ prefix }) => {
-        const words = [...new Set([...getWordsDictionary(), ...sampleWords])].sort();
+        const words = [...new Set([...getWordsForDictionary(), ...sampleWords])].sort();
         const filtered = words.filter((w) => w.startsWith(prefix));
         const t = TrieBlobBuilder.fromWordList(words);
         expect([...t.words(prefix)]).toEqual(filtered);
+    });
+});
+
+describe('TrieBlob ITrie support methods', () => {
+    test('getChildrenFromRef not optimized', () => {
+        const words = getWordsForDictionary();
+        const firstChars = [...new Set(words.map((w) => [...w][0]))].sort();
+        const t = TrieBlobBuilder.fromWordList(words);
+
+        const rootRef = t.rootRef();
+        const entries = t.getChildrenFromRef(rootRef);
+        const keys = entries.map(([char]) => char);
+        const children = new Map(entries);
+        expect(children.has('🍎')).toBe(true);
+        expect(keys).toEqual(firstChars);
+    });
+
+    test('getChildrenFromRef optimized', () => {
+        const words = getWordsForDictionary();
+        const firstChars = [...new Set(words.map((w) => [...w][0]))].sort();
+        const t = TrieBlobBuilder.fromWordList(words, undefined, true);
+
+        const rootRef = t.rootRef();
+
+        const entries = t.getChildrenFromRef(rootRef);
+        const keys = entries.map(([char]) => char);
+        const children = new Map(entries);
+        expect(children.has('🍎')).toBe(true);
+        expect(keys).toEqual(firstChars);
     });
 });
 
@@ -196,12 +225,14 @@ function makeNonStrict(word: string): string {
     return `~${word.toLowerCase()}`;
 }
 
-function getWordsDictionary(): string[] {
+function getWordsForDictionary(): string[] {
     // cspell:ignore wintrap
     const properNames = ['English', 'Atlantic', 'Pacific', 'Indian', 'Arctic', 'Southern'];
     const fruit = ['apple', 'banana', 'grape', 'orange', 'strawberry'];
+    const emojis = ['😀', '😎', '🍎', '🍌', '🍇', '🍊', '🍓'];
+    const flags = ['🇺🇸', '🇨🇦', '🇬🇧', '🇦🇺', '🇮🇳', '🇯🇵'];
 
-    const wordLists = [properNames, properNames.map(makeNonStrict), fruit, fruit.map(makeCompoundable)];
+    const wordLists = [properNames, properNames.map(makeNonStrict), fruit, fruit.map(makeCompoundable), emojis, flags];
 
     return wordLists.flat();
 }

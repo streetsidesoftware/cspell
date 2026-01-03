@@ -316,48 +316,20 @@ export class TrieBlob implements TrieData {
         return trieBlob;
     }
 
-    // #prepLookup() {
-    //     const NodeMaskNumChildren = TrieBlob.NodeMaskNumChildren;
-    //     const NodeMaskChildCharIndex = TrieBlob.NodeMaskChildCharIndex;
-    //     const NodeChildRefShift = TrieBlob.NodeChildRefShift;
-    //     const stack: WalkStackItem[] = [];
-    //     const iter = this.#walk(stack)[Symbol.iterator]();
-    //     const nodes = this.nodes;
-
-    //     let n: IteratorResult<number>;
-    //     let deeper = true;
-    //     while (!(n = iter.next(deeper)).done) {
-    //         const depth = n.value;
-    //         const nodeIdx = stack[depth].nodeIdx;
-    //         const node = nodes[nodeIdx];
-    //         const len = node & NodeMaskNumChildren;
-    //         deeper = len > lookupCount;
-    //         if (deeper) {
-    //             const map = new Map<number, number>();
-    //             this.#nodeIdxLookup.set(nodeIdx, map);
-    //             for (let i = len; i > 0; --i) {
-    //                 const n = nodes[i + nodeIdx];
-    //                 map.set(n & NodeMaskChildCharIndex, n >> NodeChildRefShift);
-    //             }
-    //             // const parent = depth > 0 ? stack[depth - 1].nodeIdx : -1;
-    //             // console.error('Node %d has %d children, parent %d', nodeIdx, len, parent);
-    //         }
-    //     }
-    // }
-
-    // Keeping this for a bit, until we are sure we don't need it.
-    *#sWalk(stack: LocationWithBChar[], depth: number = 0): Generator<number, undefined, undefined | boolean> {
+    *#sWalk(stack: RefWithBChar[], depth: number = 0): Generator<number, undefined, boolean> {
         const MaskNumChildren = NodeHeaderNumChildrenMask;
         const NodeRefShift = NodeChildIndexRefShift;
         const CharMask = NodeMaskCharByte;
         const PrefixMask = NodeHeaderPrefixMask;
         const PrefixShift = NodeHeaderPrefixShift;
+
         const nodes = this.nodes;
         stack[0] ||= { nodeIdx: 0, pfx: 0, pos: 0, prefix: undefined, bChar: 0 };
 
         while (depth >= 0) {
             let s = stack[depth];
             const { nodeIdx, pos, pfx, prefix } = s;
+
             // pos is 0 when first entering a node
             if (!pos) {
                 const deeper = yield depth;
@@ -366,6 +338,7 @@ export class TrieBlob implements TrieData {
                     continue;
                 }
             }
+
             // next prefix child
             if (prefix) {
                 // if there is a prefix, the pos is either 0 (start) or 1 (done).
@@ -374,7 +347,9 @@ export class TrieBlob implements TrieData {
                     continue;
                 }
 
+                s.pos = 1; // mark the prefix char as consumed.
                 ++depth;
+                // init or reuse next depth
                 stack[depth] ||= { nodeIdx: 0, pfx: 0, pos: 0, prefix: undefined, bChar: 0 };
                 s = stack[depth];
                 s.nodeIdx = nodeIdx;
@@ -384,12 +359,14 @@ export class TrieBlob implements TrieData {
                 s.bChar = prefix[pfx];
                 continue;
             }
+
             const node = nodes[nodeIdx];
             const len = node & MaskNumChildren;
             if (pos >= len) {
                 --depth;
                 continue;
             }
+
             // next child
             const nextPos = ++s.pos;
             const entry = nodes[nodeIdx + nextPos];
@@ -400,34 +377,57 @@ export class TrieBlob implements TrieData {
             s.nodeIdx = eNodeIdx;
             s.pfx = 0;
             s.pos = 0;
-            const pfxV = entry & PrefixMask;
+            const pfxV = nodes[eNodeIdx] & PrefixMask;
             s.prefix = pfxV ? this.#stringTable.getStringBytes(pfxV >>> PrefixShift) : undefined;
             s.bChar = entry & CharMask;
         }
     }
 
-    childrenFromLocation(location: TrieBlobNodeRef): [string, TrieBlobNodeRef][] {
+    getChildrenFromRef(ref: TrieBlobNodeRef): [string, TrieBlobNodeRef][] {
         const acc: Utf8Accumulator = Utf8Accumulator.create();
         const accStack: Utf8Accumulator[] = [acc];
-        const stack: LocationWithBChar[] = [{ ...location, pos: 0, bChar: 0 }];
+        const stack: RefWithBChar[] = [{ ...ref, pos: 0, bChar: 0 }];
         const results: [string, TrieBlobNodeRef][] = [];
 
         const iterable = this.#sWalk(stack);
 
         let deeper = false;
-        for (let next = iterable.next(); !next.done; next = iterable.next(deeper)) {
+        for (let next = iterable.next(true); !next.done; next = iterable.next(deeper)) {
             const depth = next.value;
-            if (!depth) {
-                deeper = true;
-                continue;
+
+            // console.log('value: %o', next);
+
+            if (depth <= 0) {
+                if (!depth) {
+                    deeper = true;
+                    continue;
+                }
+                break;
             }
+
             const s = stack[depth];
             accStack[depth] = accStack[depth - 1].clone(accStack[depth]);
             const acc = accStack[depth];
             const char = acc.decode(s.bChar);
+
+            // console.log(
+            //     '%d, %s %o %o, %o %o %s',
+            //     depth,
+            //     stack
+            //         .slice(0, depth + 1)
+            //         .map((s) => charToHex(s.bChar))
+            //         .join(' -> '),
+            //     char,
+            //     String.fromCodePoint(char || '.'.codePointAt(0) || 0),
+            //     { value: acc.value, remaining: acc.remaining },
+            //     s.pfx,
+            //     '[' + (s.prefix ? [...s.prefix].map(charToHex).join(', ') : '') + ']',
+            // );
+
             if (char) {
                 deeper = false;
-                results.push([String.fromCodePoint(char), { ...s }]);
+                results.push([String.fromCodePoint(char), { nodeIdx: s.nodeIdx, pfx: s.pfx, prefix: s.prefix }]);
+                continue;
             }
             deeper = true;
         }
@@ -451,6 +451,30 @@ export class TrieBlob implements TrieData {
         const pfxV = node & NodeHeaderPrefixMask;
         const prefix = pfxV ? this.#stringTable.getStringBytes(pfxV >>> NodeHeaderPrefixShift) : undefined;
         return { nodeIdx, pfx: 0, prefix };
+    }
+
+    rootRef(): TrieBlobNodeRef {
+        return this.toRef(0);
+    }
+
+    getNodeDebugInfo(ref: TrieBlobNodeRef): NodeDebugInfo {
+        const node = this.nodes[ref.nodeIdx];
+        const isEOW = !!(node & NodeHeaderEOWMask);
+        const count = node & NodeHeaderNumChildrenMask;
+        const children = new Map<string, string>();
+        for (let i = 1; i <= count; ++i) {
+            const entry = this.nodes[ref.nodeIdx + i];
+            const c = entry & NodeMaskCharByte;
+            const idx = entry >>> NodeChildIndexRefShift;
+            children.set(charToHex(c), numberToHex(idx) + ' ' + idx);
+        }
+        return {
+            ...ref,
+            prefix: ref.prefix ? [...ref.prefix].map(charToHex).join(', ') : '',
+            isEOW,
+            count,
+            children,
+        };
     }
 
     static copyNodes(trie: TrieBlob): Readonly<U32Array> {
@@ -533,7 +557,7 @@ export interface TrieBlobNodeRef {
     prefix: U8Array | undefined;
 }
 
-interface LocationWithBChar extends TrieBlobNodeRef {
+interface RefWithBChar extends TrieBlobNodeRef {
     /** The current child, 0 = not started */
     pos: number;
     /**
@@ -542,4 +566,20 @@ interface LocationWithBChar extends TrieBlobNodeRef {
      * 0 if not available, e.g., at the root node or
      */
     bChar: number;
+}
+
+interface NodeDebugInfo extends Omit<TrieBlobNodeRef, 'prefix'> {
+    prefix: string | undefined;
+    isEOW: boolean;
+    count: number;
+    children: Map<string, string>;
+}
+
+export function numberToHex(n: number): string {
+    const digits = n.toString(16).padStart(8, '0');
+    return '0x' + digits.slice(0, 4) + '_' + digits.slice(4);
+}
+
+function charToHex(c: number): string {
+    return c.toString(16).padStart(2, '0') + ' ' + (c >= 32 && c <= 126 ? String.fromCodePoint(c) : '.');
 }
