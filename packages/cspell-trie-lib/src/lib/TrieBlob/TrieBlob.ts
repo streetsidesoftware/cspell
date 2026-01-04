@@ -116,17 +116,17 @@ export class TrieBlob implements TrieData {
         const trieData: ITrieBlobIMethods = {
             info: this.info,
             nodes: this.nodes,
-            nodeFindExact: (ref, word) => this.#hasWord(ref, word),
-            nodeGetChild: (ref, letter) => this.#findNode(ref, letter),
-            nodeFindNode: (ref, word) => this.#findNode(ref, word),
-            isEow: (ref) => this.isRefEOW(ref),
-            getChildEntries: (ref) => this.getChildrenFromRef(ref),
-            hasChildren: (ref) => this.hasChildren(ref),
-            isForbidden: (word) => this.isForbiddenWord(word),
-            findExact: (word) => this.has(word),
+            nodeFindExact: this.#hasWord.bind(this),
+            nodeGetChild: this.#findNode.bind(this),
+            nodeFindNode: this.#findNode.bind(this),
+            isEow: this.isRefEOW.bind(this),
+            getChildEntries: this.#getChildrenFromRef.bind(this),
+            hasChildren: this.hasChildren.bind(this),
+            isForbidden: this.isForbiddenWord.bind(this),
+            findExact: this.has.bind(this),
             find: this.find.bind(this),
-            nodeToITrieNodeId: (ref) => trieBlobNodeRefToITrieNodeId(ref),
-            fromITrieNodeId: (id) => iTrieNodeIdToTrieBlobNodeRefParts(id),
+            nodeToITrieNodeId: trieBlobNodeRefToITrieNodeId,
+            fromITrieNodeId: iTrieNodeIdToTrieBlobNodeRefParts,
             hasCompoundWords: this.hasCompoundWords,
             hasForbiddenWords: this.hasForbiddenWords,
             hasNonStrictWords: this.hasNonStrictWords,
@@ -221,18 +221,18 @@ export class TrieBlob implements TrieData {
      */
     *words(prefix?: string): Iterable<string> {
         if (!prefix) {
-            yield* this.#walk(this.rootRef);
+            yield* this.#walkWords(this.rootRef);
             return;
         }
         const nodeIdx = this.#findNode(this.rootRef, prefix);
         if (!nodeIdx) return;
 
-        for (const suffix of this.#walk(nodeIdx)) {
+        for (const suffix of this.#walkWords(nodeIdx)) {
             yield prefix + suffix;
         }
     }
 
-    *#walk(rootRef: Ref): Iterable<string> {
+    *#walkWords(rootRef: Ref): Iterable<string> {
         interface StackItem {
             nodeIdx: number;
             pfx: number;
@@ -340,7 +340,13 @@ export class TrieBlob implements TrieData {
         return trieBlob;
     }
 
-    *#sWalk(stack: RefWithBChar[], depth: number = 0): Generator<number, undefined, boolean> {
+    /**
+     * Walk the trie starting at the given reference at position 0 (or depth).
+     * @param stack - the stack used while walking - updated
+     * @param depth - that starting depth in the stack
+     * @yields the depth in the stack. The stack will contain the current Reference.
+     */
+    *#walk(stack: RefWithBChar[], depth: number = 0): Generator<number, undefined, boolean> {
         const MaskNumChildren = NodeHeaderNumChildrenMask;
         const NodeRefShift = NodeChildIndexRefShift;
         const CharMask = NodeMaskCharByte;
@@ -348,6 +354,7 @@ export class TrieBlob implements TrieData {
         const PrefixShift = NodeHeaderPrefixShift;
 
         const nodes = this.nodes;
+        // Initialize the stack at depth 0.
         stack[0] ||= { nodeIdx: 0, pfx: 0, pos: 0, prefix: undefined, bChar: 0 };
 
         while (depth >= 0) {
@@ -430,7 +437,7 @@ export class TrieBlob implements TrieData {
         const stack: RefWithBChar[] = [{ ...ref, pos: 0, bChar: 0 }];
         const results: [string, RefPfx][] = [];
 
-        const iterable = this.#sWalk(stack);
+        const iterable = this.#walk(stack);
 
         let deeper = false;
         for (let next = iterable.next(true); !next.done; next = iterable.next(deeper)) {
