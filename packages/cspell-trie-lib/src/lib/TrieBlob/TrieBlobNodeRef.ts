@@ -25,7 +25,7 @@ export function trieBlobNodeRefToITrieNodeId(ref: TrieBlobNodeRef): ITrieNodeId 
 
 export function iTrieNodeIdToTrieBlobNodeRefParts(id: ITrieNodeId): TrieBlobNodeRef {
     assert(typeof id === 'bigint', 'iTrieNodeIdToTrieBlobNodeRefParts: id must be a bigint');
-    const nodeIdx = Number(id >> 32n) & 0xffff_ffff;
+    const nodeIdx = Number(id >> 32n) & 0x7fff_ffff;
     const pfx = Number(id & 0xffff_ffffn); // cspell:ignore 0xffff_ffffn
     return { nodeIdx, pfx };
 }

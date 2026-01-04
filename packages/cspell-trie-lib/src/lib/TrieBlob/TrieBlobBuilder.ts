@@ -28,7 +28,7 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
     #infoBuilder: TrieInfoBuilder;
 
     constructor(options?: PartialTrieInfo, characteristics?: Partial<TrieCharacteristics>) {
-        this.nodes = [[0], Object.freeze([TrieBlobBuilder.NodeMaskEOW]) as number[]];
+        this.nodes = [[0], Object.freeze([NodeHeaderEOWMask]) as number[]];
         this.IdxEOW = 1;
         this.#infoBuilder = new TrieInfoBuilder(options, characteristics);
     }
@@ -429,10 +429,6 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
 
         return tf.build(optimize);
     }
-
-    static NodeMaskEOW: number = NodeHeaderEOWMask;
-    static NodeChildRefShift: number = NodeChildIndexRefShift;
-    static NodeMaskChildCharIndex: number = NodeMaskCharByte;
 }
 
 function createCharUtf8_32RevLookup(maxSize: number = 256): (char: string) => number {
