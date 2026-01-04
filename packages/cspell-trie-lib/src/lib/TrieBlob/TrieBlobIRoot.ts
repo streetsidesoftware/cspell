@@ -1,74 +1,7 @@
 import type { ITrieNode, ITrieNodeId, ITrieNodeRoot } from '../ITrieNode/ITrieNode.ts';
-import type { TrieCharacteristics, TrieInfo } from '../ITrieNode/TrieInfo.ts';
+import type { TrieInfo } from '../ITrieNode/TrieInfo.ts';
+import type { ITrieBlobIMethods, Node, NodeIndex } from './TrieBlobIMethods.ts';
 import { Utf8Accumulator } from './Utf8.ts';
-
-interface BitMaskInfo {
-    readonly NodeMaskEOW: number;
-    readonly NodeMaskNumChildren: number;
-    readonly NodeMaskChildCharIndex: number;
-    readonly NodeChildRefShift: number;
-}
-
-type Node = number;
-type NodeIndex = number;
-
-type ITrieSupportMethods = Readonly<Required<Pick<ITrieNodeRoot, 'find'>>>;
-
-interface TrieMethods extends Readonly<TrieCharacteristics>, ITrieSupportMethods {
-    readonly nodeFindNode: (idx: number, word: string) => number | undefined;
-    readonly nodeFindExact: (idx: number, word: string) => boolean;
-    readonly nodeGetChild: (idx: number, letter: string) => number | undefined;
-    readonly isForbidden: (word: string) => boolean;
-    readonly findExact: (word: string) => boolean;
-    readonly find: ITrieSupportMethods['find'];
-}
-
-export class TrieBlobMethods implements TrieMethods, BitMaskInfo {
-    #methods: TrieMethods;
-    readonly NodeMaskEOW: number;
-    readonly NodeMaskNumChildren: number;
-    readonly NodeMaskChildCharIndex: number;
-    readonly NodeChildRefShift: number;
-    readonly nodeFindExact: (idx: number, word: string) => boolean;
-    readonly isForbidden: (word: string) => boolean;
-    readonly findExact: (word: string) => boolean;
-    readonly nodeGetChild: (idx: number, letter: string) => number | undefined;
-    readonly nodeFindNode: (idx: number, word: string) => number | undefined;
-    readonly find: ITrieSupportMethods['find'];
-    readonly info: Readonly<TrieInfo>;
-
-    readonly nodes: Uint32Array;
-
-    constructor(nodes: Uint32Array, maskInfo: BitMaskInfo, methods: TrieMethods, info: Readonly<TrieInfo>) {
-        this.nodes = nodes;
-        const { NodeMaskEOW, NodeMaskChildCharIndex, NodeMaskNumChildren, NodeChildRefShift } = maskInfo;
-        this.NodeMaskEOW = NodeMaskEOW;
-        this.NodeMaskNumChildren = NodeMaskNumChildren;
-        this.NodeMaskChildCharIndex = NodeMaskChildCharIndex;
-        this.NodeChildRefShift = NodeChildRefShift;
-        this.#methods = methods;
-        this.nodeFindExact = methods.nodeFindExact;
-        this.isForbidden = methods.isForbidden;
-        this.findExact = methods.findExact;
-        this.nodeGetChild = methods.nodeGetChild;
-        this.nodeFindNode = methods.nodeFindNode;
-        this.find = methods.find;
-        this.info = info;
-    }
-
-    get hasPreferredSuggestions(): boolean {
-        return this.#methods.hasPreferredSuggestions;
-    }
-    get hasForbiddenWords(): boolean {
-        return this.#methods.hasForbiddenWords;
-    }
-    get hasCompoundWords(): boolean {
-        return this.#methods.hasCompoundWords;
-    }
-    get hasNonStrictWords(): boolean {
-        return this.#methods.hasNonStrictWords;
-    }
-}
 
 const EmptyKeys: readonly string[] = Object.freeze([]);
 const EmptyNodes: readonly ITrieNode[] = Object.freeze([]);
@@ -86,10 +19,10 @@ class TrieBlobINode implements ITrieNode {
     private _entries: readonly [string, ITrieNode][] | undefined;
     private _values: readonly ITrieNode[] | undefined;
     protected charToIdx: Readonly<Record<string, number>> | undefined;
-    readonly trie: TrieBlobMethods;
+    readonly trie: ITrieBlobIMethods;
     readonly nodeIdx: NodeIndex;
 
-    constructor(trie: TrieBlobMethods, nodeIdx: NodeIndex) {
+    constructor(trie: ITrieBlobIMethods, nodeIdx: NodeIndex) {
         this.trie = trie;
         this.nodeIdx = nodeIdx;
         const node = trie.nodes[nodeIdx];
@@ -288,7 +221,7 @@ export class TrieBlobIRoot extends TrieBlobINode implements ITrieNodeRoot {
     readonly hasNonStrictWords: boolean;
     readonly info: Readonly<TrieInfo>;
 
-    constructor(trie: TrieBlobMethods, nodeIdx: number) {
+    constructor(trie: ITrieBlobIMethods, nodeIdx: number) {
         super(trie, nodeIdx);
         this.info = trie.info;
         this.find = trie.find;
