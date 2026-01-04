@@ -127,8 +127,8 @@ export const optionsSchema: Rule.RuleMetaData['schema'] = {
                     "type": "string"
                   },
                   "path": {
-                    "description": "Path to the file.",
-                    "markdownDescription": "Path to the file.",
+                    "description": "Path or url to the dictionary file.",
+                    "markdownDescription": "Path or url to the dictionary file.",
                     "type": "string"
                   },
                   "supportNonStrictSearches": {

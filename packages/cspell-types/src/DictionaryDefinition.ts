@@ -85,8 +85,18 @@ export interface DictionaryDefinitionBase {
 }
 
 export interface DictionaryDefinitionPreferred extends DictionaryDefinitionBase {
-    /** Path to the file. */
+    /**
+     * Path or url to the dictionary file.
+     */
     path: DictionaryPath;
+
+    /**
+     * An alternative path to a bTrie dictionary file.
+     * It will be used in place of `path` if the version of CSpell being used
+     * supports btrie files.
+     * @since 9.6.0
+     */
+    btrie?: DictionaryPathToBTrie | undefined;
 
     /**
      * Only for legacy dictionary definitions.
@@ -97,10 +107,29 @@ export interface DictionaryDefinitionPreferred extends DictionaryDefinitionBase 
     file?: undefined;
 }
 
+interface HiddenPaths {
+    /**
+     * @hide
+     */
+    path?: string | undefined;
+
+    /**
+     * @hide
+     */
+    btrie?: string | undefined;
+
+    /**
+     * @hide
+     */
+    file?: undefined;
+}
+
+interface DictionaryDefinitionBaseWithPathsHidden extends DictionaryDefinitionBase, HiddenPaths {}
+
 /**
  * An Empty Dictionary Definition
  */
-export interface DictionaryDefinitionSimple extends DictionaryDefinitionBase {
+export interface DictionaryDefinitionSimple extends DictionaryDefinitionBaseWithPathsHidden {
     /**
      * @hide
      */
@@ -125,16 +154,6 @@ export interface DictionaryDefinitionSimple extends DictionaryDefinitionBase {
      * @hide
      */
     type?: DictionaryFileTypes | undefined;
-
-    /**
-     * @hide
-     */
-    path?: string | undefined;
-
-    /**
-     * @hide
-     */
-    file?: undefined;
 }
 
 /**
@@ -150,6 +169,12 @@ interface HiddenFields {
      * @hide
      */
     path?: undefined;
+
+    /**
+     * Not used
+     * @hide
+     */
+    btrie?: string | undefined;
 
     /**
      * Not used
@@ -230,13 +255,9 @@ export type DictionaryDefinitionInline =
  * Only for legacy dictionary definitions.
  * @deprecated true
  * @deprecationMessage Use {@link DictionaryDefinitionPreferred} instead.
+ * This will be removed in a future release.
  */
-export interface DictionaryDefinitionAlternate extends DictionaryDefinitionBase {
-    /**
-     * @hidden
-     */
-    path?: undefined;
-
+export interface DictionaryDefinitionAlternate extends DictionaryDefinitionBase, Omit<HiddenPaths, 'file'> {
     /**
      * Path to the file, only for legacy dictionary definitions.
      * @deprecated true
@@ -251,9 +272,11 @@ export interface DictionaryDefinitionAlternate extends DictionaryDefinitionBase 
 }
 /**
  * @deprecated true
+ * @deprecationMessage Use {@link DictionaryDefinitionPreferred} instead.
+ * This will be removed in a future release.
  * @hidden
  */
-export interface DictionaryDefinitionLegacy extends DictionaryDefinitionBase {
+export interface DictionaryDefinitionLegacy extends DictionaryDefinitionBase, Omit<HiddenPaths, 'file' | 'path'> {
     /** Path to the file, if undefined the path to the extension dictionaries is assumed. */
     path?: FsDictionaryPath;
     /**
@@ -293,7 +316,9 @@ export type CustomDictionaryScope = 'user' | 'workspace' | 'folder';
  * Note: only plain text files with one word per line are supported at this moment.
  */
 export interface DictionaryDefinitionCustom extends DictionaryDefinitionPreferred {
-    /** Path to custom dictionary text file. */
+    /**
+     * A file path or url to a custom dictionary file.
+     */
     path: CustomDictionaryPath;
 
     /**
@@ -333,14 +358,21 @@ export type FsDictionaryPath = string;
 
 /**
  * A File System Path to a dictionary file.
- * Pattern: `^.*\.(?:txt|trie|dic)(?:\.gz)?$`
+ * Pattern: `^.*\.(?:txt|trie|btrie|dic)(?:\.gz)?$`
  */
 export type DictionaryPath = string;
 
 /**
  * A File System Path to a dictionary file.
+ * Pattern: `^.*\.(?:btrie)(?:\.gz)?$`
+ * @since 9.6.0
  */
-export type CustomDictionaryPath = FsDictionaryPath;
+export type DictionaryPathToBTrie = string;
+
+/**
+ * A path or url to a custom dictionary file.
+ */
+export type CustomDictionaryPath = string;
 
 /**
  * Reference to a dictionary by name.
