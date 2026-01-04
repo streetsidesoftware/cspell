@@ -18,7 +18,11 @@ import {
 import type { ITrieBlobIMethods } from './TrieBlobIMethods.ts';
 import { TrieBlobIRoot } from './TrieBlobIRoot.ts';
 import { TrieBlobInternalsLegacy, TrieBlobIRootLegacy } from './TrieBlobIRootLegacy.ts';
-import type { TrieBlobNodeRef } from './TrieBlobNodeRef.ts';
+import {
+    iTrieNodeIdToTrieBlobNodeRefParts,
+    type TrieBlobNodeRefAndPrefix,
+    trieBlobNodeRefToITrieNodeId,
+} from './TrieBlobNodeRef.ts';
 import type { U8Array, U32Array } from './TypedArray.ts';
 import { createUint8ArrayCursor } from './TypedArrayCursor.ts';
 import { Utf8Accumulator } from './Utf8.ts';
@@ -113,6 +117,8 @@ export class TrieBlob implements TrieData {
             isForbidden: (word) => this.isForbiddenWord(word),
             findExact: (word) => this.has(word),
             find: this.find.bind(this),
+            nodeToITrieNodeId: (idx) => trieBlobNodeRefToITrieNodeId({ nodeIdx: idx, pfx: 0 }),
+            fromITrieNodeId: (id) => iTrieNodeIdToTrieBlobNodeRefParts(id).nodeIdx,
             hasCompoundWords: this.hasCompoundWords,
             hasForbiddenWords: this.hasForbiddenWords,
             hasNonStrictWords: this.hasNonStrictWords,
@@ -409,11 +415,11 @@ export class TrieBlob implements TrieData {
         }
     }
 
-    getChildrenFromRef(ref: TrieBlobNodeRef): [string, TrieBlobNodeRef][] {
+    getChildrenFromRef(ref: TrieBlobNodeRefAndPrefix): [string, TrieBlobNodeRefAndPrefix][] {
         const acc: Utf8Accumulator = Utf8Accumulator.create();
         const accStack: Utf8Accumulator[] = [acc];
         const stack: RefWithBChar[] = [{ ...ref, pos: 0, bChar: 0 }];
-        const results: [string, TrieBlobNodeRef][] = [];
+        const results: [string, TrieBlobNodeRefAndPrefix][] = [];
 
         const iterable = this.#sWalk(stack);
 
@@ -466,24 +472,24 @@ export class TrieBlob implements TrieData {
      * @param location
      * @returns
      */
-    isRefEOW(location: TrieBlobNodeRef): boolean {
+    isRefEOW(location: TrieBlobNodeRefAndPrefix): boolean {
         if (location.prefix) return false;
         const node = this.nodes[location.nodeIdx];
         return !!(node & NodeHeaderEOWMask);
     }
 
-    toRef(nodeIdx: number): TrieBlobNodeRef {
+    toRef(nodeIdx: number): TrieBlobNodeRefAndPrefix {
         const node = this.nodes[nodeIdx];
         const pfxV = node & NodeHeaderPrefixMask;
         const prefix = pfxV ? this.#stringTable.getStringBytes(pfxV >>> NodeHeaderPrefixShift) : undefined;
         return { nodeIdx, pfx: 0, prefix };
     }
 
-    rootRef(): TrieBlobNodeRef {
+    rootRef(): TrieBlobNodeRefAndPrefix {
         return this.toRef(0);
     }
 
-    getNodeDebugInfo(ref: TrieBlobNodeRef): NodeDebugInfo {
+    getNodeDebugInfo(ref: TrieBlobNodeRefAndPrefix): NodeDebugInfo {
         const node = this.nodes[ref.nodeIdx];
         const isEOW = !!(node & NodeHeaderEOWMask);
         const count = node & NodeHeaderNumChildrenMask;
@@ -570,7 +576,7 @@ function trieBlobSort(data: U32Array) {
     }
 }
 
-interface RefWithBChar extends TrieBlobNodeRef {
+interface RefWithBChar extends TrieBlobNodeRefAndPrefix {
     /** The current child, 0 = not started */
     pos: number;
     /**
@@ -581,7 +587,7 @@ interface RefWithBChar extends TrieBlobNodeRef {
     bChar: number;
 }
 
-interface NodeDebugInfo extends Omit<TrieBlobNodeRef, 'prefix'> {
+interface NodeDebugInfo extends Omit<TrieBlobNodeRefAndPrefix, 'prefix'> {
     prefix: string | undefined;
     isEOW: boolean;
     count: number;

@@ -231,7 +231,7 @@ export class TrieBlobIRoot extends TrieBlobINode implements ITrieNodeRoot {
     readonly hasNonStrictWords: boolean;
     readonly info: Readonly<TrieInfo>;
 
-    constructor(trie: ITrieBlobIMethods, nodeIdx: NodeRef) {
+    constructor(trie: Readonly<ITrieBlobIMethods>, nodeIdx: NodeRef) {
         super(trie, nodeIdx);
         this.info = trie.info;
         this.find = trie.find;
@@ -240,9 +240,11 @@ export class TrieBlobIRoot extends TrieBlobINode implements ITrieNodeRoot {
         this.hasCompoundWords = trie.hasCompoundWords;
         this.hasNonStrictWords = trie.hasNonStrictWords;
     }
+
     resolveId(id: ITrieNodeId): ITrieNode {
-        return new TrieBlobINode(this.trie, id as number);
+        return new TrieBlobINode(this.trie, this.trie.fromITrieNodeId(id));
     }
+
     get forbidPrefix(): string {
         return this.info.forbiddenWordPrefix;
     }

@@ -1,4 +1,4 @@
-import type { ITrieNodeRoot } from '../ITrieNode/ITrieNode.ts';
+import type { ITrieNodeId, ITrieNodeRoot } from '../ITrieNode/ITrieNode.ts';
 import type { TrieCharacteristics, TrieInfo } from '../ITrieNode/TrieInfo.ts';
 
 interface BitMaskInfo {
@@ -10,14 +10,17 @@ interface BitMaskInfo {
 
 export type NodeRef = number;
 
-type ITrieSupportMethods = Readonly<Required<Pick<ITrieNodeRoot, 'find'>>>;
+type ITrieSupportMethods = Required<Pick<ITrieNodeRoot, 'find'>>;
+
 interface TrieMethods extends Readonly<TrieCharacteristics>, ITrieSupportMethods {
-    readonly nodeFindNode: (idx: NodeRef, word: string) => NodeRef | undefined;
-    readonly nodeFindExact: (idx: NodeRef, word: string) => boolean;
-    readonly nodeGetChild: (idx: NodeRef, letter: string) => NodeRef | undefined;
-    readonly isForbidden: (word: string) => boolean;
-    readonly findExact: (word: string) => boolean;
-    readonly find: ITrieSupportMethods['find'];
+    nodeFindNode: (idx: NodeRef, word: string) => NodeRef | undefined;
+    nodeFindExact: (idx: NodeRef, word: string) => boolean;
+    nodeGetChild: (idx: NodeRef, letter: string) => NodeRef | undefined;
+    isForbidden: (word: string) => boolean;
+    findExact: (word: string) => boolean;
+    find: ITrieSupportMethods['find'];
+    nodeToITrieNodeId: (idx: NodeRef) => ITrieNodeId;
+    fromITrieNodeId: (id: ITrieNodeId) => NodeRef;
 }
 
 export interface ITrieBlobIMethods extends TrieMethods, BitMaskInfo {
