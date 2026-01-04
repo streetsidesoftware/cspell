@@ -5,7 +5,7 @@ Args: '["**/*.go"]'
 Summary:
   files: 290
   filesWithIssues: 260
-  issues: 3833
+  issues: 3830
   errors: 0
 Errors: []
 
@@ -463,7 +463,6 @@ issues:
   - "caddyconfig/httpcaddyfile/options.go:574:7          libdns              U       case libdns.RecordGetter,"
   - "caddyconfig/httpcaddyfile/options.go:575:3          libdns              U       libdns.RecordSetter,"
   - "caddyconfig/httpcaddyfile/options.go:576:3          libdns              U       libdns.RecordAppender,"
-  - "caddyconfig/httpcaddyfile/options.go:576:16         Appender            U       libdns.RecordAppender,"
   - "caddyconfig/httpcaddyfile/options.go:577:16         Deleter             U       libdns.RecordDeleter:"
   - "caddyconfig/httpcaddyfile/options.go:614:39         ECHDNS              U       caddyconfig.JSON(caddytls.ECHDNSPublisher{"
   - "caddyconfig/httpcaddyfile/pkiapp.go:15:9        httpcaddyfile       U       package httpcaddyfile"
@@ -3479,14 +3478,12 @@ issues:
   - "modules/caddytls/tls.go:46:15       certmagic       U       certCache *certmagic.Cache"
   - "modules/caddytls/tls.go:92:24       certmagic       U       Disables checks in certmagic that the configured"
   - "modules/caddytls/tls.go:126:69      libdns          U       should be any/all of the libdns interfaces (RecordSetter"
-  - "modules/caddytls/tls.go:126:108     Appender        U       RecordSetter, RecordAppender, etc.)"
   - "modules/caddytls/tls.go:134:22      caddyevents     U       events *caddyevents.App"
   - "modules/caddytls/tls.go:155:11      Iface           U       eventsAppIface, err := ctx.App(\"events"
   - "modules/caddytls/tls.go:159:22      Iface           U       t.events = eventsAppIface.(*caddyevents.App)"
   - "modules/caddytls/tls.go:159:30      caddyevents     U       events = eventsAppIface.(*caddyevents.App)"
   - "modules/caddytls/tls.go:168:12      libdns          U       // common libdns interfaces, since it"
   - "modules/caddytls/tls.go:177:4       libdns          U       libdns.RecordAppender"
-  - "modules/caddytls/tls.go:177:17      Appender        U       libdns.RecordAppender"
   - "modules/caddytls/tls.go:178:17      Deleter         U       libdns.RecordDeleter"
   - "modules/caddytls/tls.go:189:15      certmagic       U       cacheOpts := certmagic.CacheOptions{"
   - "modules/caddytls/tls.go:190:31      certmagic       U       GetConfigForCert: func(cert certmagic.Certificate) (*certmagic"
