@@ -1,35 +1,15 @@
-import type { PartialTrieInfo, TrieCharacteristics, TrieInfo } from '../ITrieNode/TrieInfo.ts';
+import type { TrieInfo } from '../ITrieNode/TrieInfo.ts';
 import type { StringTable } from '../StringTable/StringTable.ts';
-import { mergeOptionalWithDefaults } from '../utils/mergeOptionalWithDefaults.ts';
 import { TrieBlob } from './TrieBlob.ts';
 import {
     NodeChildIndexRefShift,
     NodeHeaderNumChildrenMask,
+    NodeHeaderNumChildrenShift,
     NodeMaskCharByte,
     type TrieBlobNode32,
 } from './TrieBlobFormat.ts';
 
 type Nodes = TrieBlobNode32[];
-
-export class FastTrieBlobInternals {
-    readonly info: Readonly<TrieInfo>;
-    readonly stringTable: StringTable;
-    readonly nodes: Nodes;
-    readonly characteristics: Readonly<Partial<TrieCharacteristics>>;
-
-    constructor(
-        nodes: Nodes,
-        stringTable: StringTable,
-        info: Readonly<PartialTrieInfo>,
-        characteristics: Readonly<Partial<TrieCharacteristics>>,
-    ) {
-        this.nodes = nodes;
-        this.stringTable = stringTable;
-
-        this.info = mergeOptionalWithDefaults(info);
-        this.characteristics = characteristics;
-    }
-}
 
 interface SortableNode {
     [index: number]: number;
@@ -92,10 +72,9 @@ function isSorted<T extends SortableNode>(node: T, mask: number, start: number, 
     return true;
 }
 
-export function toTrieBlob(ft: FastTrieBlobInternals): TrieBlob {
+export function toTrieBlob(nodes: Nodes, stringTable: StringTable, info: Readonly<TrieInfo>): TrieBlob {
     const nodeMaskChildCharIndex = NodeMaskCharByte;
     const nodeChildRefShift = NodeChildIndexRefShift;
-    const nodes: Nodes = ft.nodes;
 
     function calcNodeToIndex(nodes: Nodes): number[] {
         let offset = 0;
@@ -111,8 +90,8 @@ export function toTrieBlob(ft: FastTrieBlobInternals): TrieBlob {
     const nodeToIndex = calcNodeToIndex(nodes);
     const nodeElementCount = nodeToIndex[nodeToIndex.length - 1];
     const binNodes = new Uint32Array(nodeElementCount);
-    const lenShift = TrieBlob.NodeMaskNumChildrenShift;
-    const refShift = TrieBlob.NodeChildRefShift;
+    const lenShift = NodeHeaderNumChildrenShift;
+    const refShift = NodeChildIndexRefShift;
 
     const NodeHeaderMask = ~NodeHeaderNumChildrenMask;
 
@@ -129,5 +108,5 @@ export function toTrieBlob(ft: FastTrieBlobInternals): TrieBlob {
         }
     }
 
-    return new TrieBlob(binNodes, ft.stringTable, ft.info);
+    return new TrieBlob(binNodes, stringTable, info);
 }

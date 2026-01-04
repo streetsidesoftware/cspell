@@ -325,8 +325,12 @@ function toLines(content: string): string[] {
     return content.split(/\n|\r\n|\r/);
 }
 
-let useBTrie: boolean = true;
+let useBTrie: boolean = false;
 
+/**
+ * Toggle the use of btrie files when loading dictionaries.
+ * @returns the new setting
+ */
 export function toggleUseBTrie(): boolean {
     useBTrie = !useBTrie;
     return useBTrie;

@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { assertSorted, sortNodes } from './TrieBlobInternals.ts';
+import { assertSorted, sortNodes } from './TrieBuilderUtils.ts';
 
 describe('FastTrieBlobInternals', () => {
     test('assertSorted passes for sorted nodes', () => {

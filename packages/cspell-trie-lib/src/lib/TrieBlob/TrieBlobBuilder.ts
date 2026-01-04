@@ -1,6 +1,6 @@
 import type { BuilderCursor, TrieBuilder } from '../Builder/index.ts';
 import type { PartialTrieInfo, TrieCharacteristics, TrieInfo } from '../ITrieNode/TrieInfo.ts';
-import { TrieInfoBuilder } from '../ITrieNode/TrieInfo.ts';
+import { normalizeTrieInfo, TrieInfoBuilder } from '../ITrieNode/TrieInfo.ts';
 import { StringTableBuilder } from '../StringTable/StringTable.ts';
 import type { TrieNode, TrieRoot } from '../TrieNode/TrieNode.ts';
 import { assert } from '../utils/assert.ts';
@@ -8,9 +8,9 @@ import { assertValidUtf16Character } from '../utils/text.ts';
 import { CharIndexBuilder } from './CharIndex.ts';
 import { optimizeNodesWithStringTable } from './optimizeNodes.ts';
 import { resolveMap } from './resolveMap.ts';
-import { TrieBlob } from './TrieBlob.ts';
+import type { TrieBlob } from './TrieBlob.ts';
 import { NodeChildIndexRefShift, NodeHeaderEOWMask, NodeMaskCharByte } from './TrieBlobFormat.ts';
-import { FastTrieBlobInternals, sortNodes, toTrieBlob } from './TrieBlobInternals.ts';
+import { sortNodes, toTrieBlob } from './TrieBuilderUtils.ts';
 import { encodeTextToUtf8_32Rev, encodeToUtf8_32Rev } from './Utf8.ts';
 
 type FastTrieBlobNode = number[];
@@ -28,7 +28,7 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
     #infoBuilder: TrieInfoBuilder;
 
     constructor(options?: PartialTrieInfo, characteristics?: Partial<TrieCharacteristics>) {
-        this.nodes = [[0], Object.freeze([TrieBlobBuilder.NodeMaskEOW]) as number[]];
+        this.nodes = [[0], Object.freeze([NodeHeaderEOWMask]) as number[]];
         this.IdxEOW = 1;
         this.#infoBuilder = new TrieInfoBuilder(options, characteristics);
     }
@@ -341,8 +341,7 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
             ? optimizeNodesWithStringTable({ nodes: sortedNodes, stringTable })
             : { nodes: sortedNodes, stringTable };
 
-        const fti = new FastTrieBlobInternals(r.nodes, r.stringTable, info.info, info.characteristics);
-        return toTrieBlob(fti);
+        return toTrieBlob(r.nodes, r.stringTable, normalizeTrieInfo(info.info));
     }
 
     toJSON(): {
@@ -430,10 +429,6 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
 
         return tf.build(optimize);
     }
-
-    static NodeMaskEOW: number = TrieBlob.NodeMaskEOW;
-    static NodeChildRefShift: number = TrieBlob.NodeChildRefShift;
-    static NodeMaskChildCharIndex: number = TrieBlob.NodeMaskChildCharIndex;
 }
 
 function createCharUtf8_32RevLookup(maxSize: number = 256): (char: string) => number {

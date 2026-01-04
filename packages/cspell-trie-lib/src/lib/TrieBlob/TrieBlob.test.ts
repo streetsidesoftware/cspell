@@ -7,6 +7,7 @@ import { buildTrieNodeTrieFromWords } from '../TrieNode/TrieNodeBuilder.ts';
 import { createTrieBlob } from './createTrieBlob.ts';
 import { TrieBlob } from './TrieBlob.ts';
 import { TrieBlobBuilder } from './TrieBlobBuilder.ts';
+import { NodeChildIndexRefShift, NodeHeaderNumChildrenMask } from './TrieBlobFormat.ts';
 
 describe('TrieBlob', () => {
     const sampleWords = [
@@ -60,7 +61,7 @@ describe('TrieBlob', () => {
     });
 
     test('test compounds and non-strict', () => {
-        const words = getWordsDictionary();
+        const words = getWordsForDictionary();
         const t = TrieBlobBuilder.fromWordList(words);
         expect(words.findIndex((word) => !t.has(word))).toBe(-1);
         expect([...t.words()].sort()).toEqual([...words].sort());
@@ -79,10 +80,39 @@ describe('TrieBlob', () => {
         ${'wa'}
         ${'o'}
     `('walk with prefix $prefix', ({ prefix }) => {
-        const words = [...new Set([...getWordsDictionary(), ...sampleWords])].sort();
+        const words = [...new Set([...getWordsForDictionary(), ...sampleWords])].sort();
         const filtered = words.filter((w) => w.startsWith(prefix));
         const t = TrieBlobBuilder.fromWordList(words);
         expect([...t.words(prefix)]).toEqual(filtered);
+    });
+});
+
+describe('TrieBlob ITrie support methods', () => {
+    test('getChildrenFromRef not optimized', () => {
+        const words = getWordsForDictionary();
+        const firstChars = [...new Set(words.map((w) => [...w][0]))].sort();
+        const t = TrieBlobBuilder.fromWordList(words);
+
+        const rootRef = t.rootRef;
+        const entries = t.getChildrenFromRef(rootRef);
+        const keys = entries.map(([char]) => char);
+        const children = new Map(entries);
+        expect(children.has('🍎')).toBe(true);
+        expect(keys).toEqual(firstChars);
+    });
+
+    test('getChildrenFromRef optimized', () => {
+        const words = getWordsForDictionary();
+        const firstChars = [...new Set(words.map((w) => [...w][0]))].sort();
+        const t = TrieBlobBuilder.fromWordList(words, undefined, true);
+
+        const rootRef = t.rootRef;
+
+        const entries = t.getChildrenFromRef(rootRef);
+        const keys = entries.map(([char]) => char);
+        const children = new Map(entries);
+        expect(children.has('🍎')).toBe(true);
+        expect(keys).toEqual(firstChars);
     });
 });
 
@@ -136,8 +166,8 @@ describe('TrieBlob encode/decode', async () => {
 
     test('#findNode magic numbers', () => {
         // Verify that the magic numbers used in #findNode are correct.
-        expect(TrieBlob.NodeMaskNumChildren, 'TrieBlob.NodeMaskNumChildren has changed, update #findNode.').toBe(0xff);
-        expect(TrieBlob.NodeChildRefShift, 'TrieBlob.NodeChildRefShift has changed, update #findNode.').toBe(8);
+        expect(NodeHeaderNumChildrenMask, 'TrieBlob.NodeMaskNumChildren has changed, update #findNode.').toBe(0xff);
+        expect(NodeChildIndexRefShift, 'TrieBlob.NodeChildRefShift has changed, update #findNode.').toBe(8);
     });
 });
 
@@ -157,7 +187,7 @@ function countNodeLengths(blob: TrieBlob): Map<number, [number, number]> {
     const nodes = blob.nodes;
     for (let i = 0; i < nodes.length; i++) {
         const node = nodes[i];
-        const numChildren = node & TrieBlob.NodeMaskNumChildren;
+        const numChildren = node & NodeHeaderNumChildrenMask;
         i += numChildren;
         lengths.set(numChildren, (lengths.get(numChildren) || 0) + 1);
     }
@@ -174,9 +204,9 @@ function countNodeReferences(blob: TrieBlob): Map<number, number> {
     const nodes = blob.nodes;
     for (let i = 0; i < nodes.length; i++) {
         const node = nodes[i];
-        const numChildren = node & TrieBlob.NodeMaskNumChildren;
+        const numChildren = node & NodeHeaderNumChildrenMask;
         for (let j = 1; j <= numChildren; j++) {
-            const childRef = nodes[i + j] >>> TrieBlob.NodeChildRefShift;
+            const childRef = nodes[i + j] >>> NodeChildIndexRefShift;
             refs.set(childRef, (refs.get(childRef) || 0) + 1);
         }
         i += numChildren;
@@ -195,12 +225,14 @@ function makeNonStrict(word: string): string {
     return `~${word.toLowerCase()}`;
 }
 
-function getWordsDictionary(): string[] {
+function getWordsForDictionary(): string[] {
     // cspell:ignore wintrap
     const properNames = ['English', 'Atlantic', 'Pacific', 'Indian', 'Arctic', 'Southern'];
     const fruit = ['apple', 'banana', 'grape', 'orange', 'strawberry'];
+    const emojis = ['😀', '😎', '🍎', '🍌', '🍇', '🍊', '🍓'];
+    const flags = ['🇺🇸', '🇨🇦', '🇬🇧', '🇦🇺', '🇮🇳', '🇯🇵'];
 
-    const wordLists = [properNames, properNames.map(makeNonStrict), fruit, fruit.map(makeCompoundable)];
+    const wordLists = [properNames, properNames.map(makeNonStrict), fruit, fruit.map(makeCompoundable), emojis, flags];
 
     return wordLists.flat();
 }
