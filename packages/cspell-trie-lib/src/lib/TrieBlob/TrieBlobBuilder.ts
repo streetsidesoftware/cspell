@@ -1,8 +1,8 @@
 import type { BuilderCursor, TrieBuilder } from '../Builder/index.ts';
+import type { ITrieNode, ITrieNodeRoot } from '../ITrieNode/index.ts';
 import type { PartialTrieInfo, TrieCharacteristics, TrieInfo } from '../ITrieNode/TrieInfo.ts';
 import { normalizeTrieInfo, TrieInfoBuilder } from '../ITrieNode/TrieInfo.ts';
 import { StringTableBuilder } from '../StringTable/StringTable.ts';
-import type { TrieNode, TrieRoot } from '../TrieNode/TrieNode.ts';
 import { assert } from '../utils/assert.ts';
 import { assertValidUtf16Character } from '../utils/text.ts';
 import { CharIndexBuilder } from './CharIndex.ts';
@@ -367,7 +367,7 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
         return ft.insert(words).build(optimize);
     }
 
-    static fromTrieRoot(root: TrieRoot, optimize?: boolean): TrieBlob {
+    static fromITrieRoot(root: ITrieNodeRoot, optimize?: boolean): TrieBlob {
         const NodeCharIndexMask = NodeMaskCharByte;
         const nodeChildRefShift = NodeChildIndexRefShift;
         const NodeMaskEOW = NodeHeaderEOWMask;
@@ -375,23 +375,22 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
         const tf = new TrieBlobBuilder(undefined, root);
         const IdxEOW = tf.IdxEOW;
 
-        const known = new Map<TrieNode, number>([[root, 0]]);
+        const known = new Map<ITrieNode, number>([[root, 0]]);
 
-        function resolveNode(n: TrieNode): number {
-            if (n.f && !n.c) return IdxEOW;
-            const node = [n.f ? NodeMaskEOW : 0];
+        function resolveNode(n: ITrieNode): number {
+            if (n.eow && !n.hasChildren()) return IdxEOW;
+            const node = [n.eow ? NodeMaskEOW : 0];
             return tf.nodes.push(node) - 1;
         }
 
-        function walk(n: TrieNode): number {
+        function walk(n: ITrieNode): number {
             const found = known.get(n);
             if (found) return found;
             const nodeIdx = resolveMap(known, n, resolveNode);
             const node = tf.nodes[nodeIdx];
-            if (!n.c) return nodeIdx;
-            const children = Object.entries(n.c);
-            for (let p = 0; p < children.length; ++p) {
-                const [char, childNode] = children[p];
+            if (!n.hasChildren()) return nodeIdx;
+            const children = n.entries();
+            for (const [char, childNode] of children) {
                 addCharToNode(node, char, childNode);
             }
             return nodeIdx;
@@ -405,7 +404,7 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
             return i;
         }
 
-        function addCharToNode(node: FastTrieBlobNode, char: string, n: TrieNode): void {
+        function addCharToNode(node: FastTrieBlobNode, char: string, n: ITrieNode): void {
             const indexSeq = tf.letterToUtf8Seq(char);
             assertValidUtf16Character(char);
             // console.error('addCharToNode %o', { char, indexSeq });

@@ -7,5 +7,5 @@ export async function createBTrieFromFile(file: string): Promise<Uint8Array> {
 
     const trie = reader.toTrie();
 
-    return encodeTrieDataToBTrie(trie.data);
+    return encodeTrieDataToBTrie(trie.data, true);
 }

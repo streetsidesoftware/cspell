@@ -96,6 +96,12 @@ export interface ParseDictionaryOptions {
      * @default false
      */
     makeWordsForbidden?: boolean;
+
+    /**
+     * Optimize the trie for size by merging duplicate sub-tries and using a String Table.
+     * @default false
+     */
+    optimize?: boolean;
 }
 
 const RegExpSplit = /[\s,;]/g;
@@ -436,7 +442,7 @@ export function parseLinesToDictionary(lines: Iterable<string>, options?: Partia
     const _options = mergeOptions(_defaultOptions, options);
     const dictLines = parseDictionaryLines(lines, _options);
     const words = [...new Set(dictLines)].sort();
-    return buildITrieFromWords(words, trieInfoFromOptions(options));
+    return buildITrieFromWords(words, trieInfoFromOptions(options), options?.optimize);
 }
 
 export function parseDictionary(text: string | Iterable<string>, options?: Partial<ParseDictionaryOptions>): ITrie {

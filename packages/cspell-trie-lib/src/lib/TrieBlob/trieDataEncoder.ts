@@ -2,12 +2,12 @@ import type { TrieData } from '../TrieData.ts';
 import { TrieBlob } from './TrieBlob.ts';
 import { TrieBlobBuilder } from './TrieBlobBuilder.ts';
 
-export function encodeTrieDataToBTrie(data: TrieData): Uint8Array<ArrayBuffer> {
+export function encodeTrieDataToBTrie(data: TrieData, optimize?: boolean): Uint8Array<ArrayBuffer> {
     if (data.encodeToBTrie) {
         return data.encodeToBTrie();
     }
 
-    const trie = TrieBlobBuilder.fromWordList(data.words(), data.info);
+    const trie = TrieBlobBuilder.fromITrieRoot(data.getRoot(), optimize);
     return trie.encodeToBTrie();
 }
 

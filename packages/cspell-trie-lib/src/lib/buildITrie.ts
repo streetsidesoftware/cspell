@@ -3,9 +3,9 @@ import { ITrieImpl } from './ITrie.ts';
 import type { PartialTrieInfo } from './ITrieNode/TrieInfo.ts';
 import { TrieBlobBuilder } from './TrieBlob/TrieBlobBuilder.ts';
 
-export function buildITrieFromWords(words: Iterable<string>, info: PartialTrieInfo = {}): ITrie {
+export function buildITrieFromWords(words: Iterable<string>, info: PartialTrieInfo = {}, optimize?: boolean): ITrie {
     const builder = new TrieBlobBuilder(info);
     builder.insert(words);
-    const tb = builder.build();
+    const tb = builder.build(optimize);
     return new ITrieImpl(tb);
 }

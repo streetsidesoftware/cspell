@@ -4,6 +4,7 @@ import { opSkip, opTake, pipe } from '@cspell/cspell-pipe/sync';
 import { describe, expect, test } from 'vitest';
 
 import { readTrieFromConfig } from '../../test/dictionaries.test.helper.ts';
+import { createTrieBlobFromTrie } from './createTrieBlob.ts';
 import { TrieBlobBuilder } from './TrieBlobBuilder.ts';
 
 function getTrie() {
@@ -17,7 +18,7 @@ describe('Validate English FastTrieBlob', async () => {
     const pTrie = getTrie();
     const sampleTrie = await pTrie;
     const sampleWordsLarge = [...pipe(sampleTrie.words(), opSkip(1000), opTake(6000))];
-    const fastTrieBlob = TrieBlobBuilder.fromTrieRoot(sampleTrie.root);
+    const trieBlob = createTrieBlobFromTrie(sampleTrie);
 
     test('insert', () => {
         const words = sampleWordsLarge;
@@ -29,7 +30,7 @@ describe('Validate English FastTrieBlob', async () => {
     test('has', () => {
         const words = sampleWordsLarge;
         for (const word of words) {
-            expect(fastTrieBlob.has(word)).toBe(true);
+            expect(trieBlob.has(word)).toBe(true);
         }
     });
 

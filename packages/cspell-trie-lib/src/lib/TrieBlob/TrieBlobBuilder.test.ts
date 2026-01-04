@@ -5,8 +5,10 @@ import { insertWordsAtCursor } from '../Builder/index.ts';
 import { consolidate } from '../consolidate.ts';
 import { defaultTrieInfo } from '../constants.ts';
 import { extractTrieCharacteristics } from '../ITrieNode/TrieInfo.ts';
+import { trieRootToITrieRoot } from '../TrieNode/trie.ts';
 import { createTrieRoot, insert } from '../TrieNode/trie-util.ts';
 import type { TrieNode, TrieRoot } from '../TrieNode/TrieNode.ts';
+import { createTrieBlobFromTrieRoot } from './createTrieBlob.ts';
 import { TrieBlobBuilder } from './TrieBlobBuilder.ts';
 
 describe('FastTrieBlobBuilder', () => {
@@ -150,23 +152,47 @@ describe('FastTrieBlobBuilder', () => {
 
     test('fromTrieRoot non-optimized trie', () => {
         const words = sampleWords();
-        const t = TrieBlobBuilder.fromTrieRoot(buildTrie(words, false));
+        const trie = buildTrie(words, false);
+        const iTrieRoot = trieRootToITrieRoot(trie);
+        const t = createTrieBlobFromTrieRoot(trie, false);
         const sortedUnique = [...new Set(words)].sort();
         expect([...t.words()].sort()).toEqual(sortedUnique);
+
+        const t2 = TrieBlobBuilder.fromITrieRoot(iTrieRoot, false);
+        expect([...t2.words()].sort()).toEqual(sortedUnique);
+
+        const t3 = TrieBlobBuilder.fromITrieRoot(t.getRoot(), false);
+        expect([...t3.words()].sort()).toEqual(sortedUnique);
     });
 
     test('fromTrieRoot(optimize) non-optimized trie', () => {
         const words = sampleWords();
-        const t = TrieBlobBuilder.fromTrieRoot(buildTrie(words, false), true);
+        const trie = buildTrie(words, false);
+        const iTrieRoot = trieRootToITrieRoot(trie);
+        const t = createTrieBlobFromTrieRoot(trie, true);
         const sortedUnique = [...new Set(words)].sort();
         expect([...t.words()]).toEqual(sortedUnique);
+
+        const t2 = TrieBlobBuilder.fromITrieRoot(iTrieRoot, false);
+        expect([...t2.words()].sort()).toEqual(sortedUnique);
+
+        const t3 = TrieBlobBuilder.fromITrieRoot(t.getRoot(), false);
+        expect([...t3.words()].sort()).toEqual(sortedUnique);
     });
 
     test('fromTrieRoot optimized trie', () => {
         const words = sampleWords();
-        const t = TrieBlobBuilder.fromTrieRoot(buildTrie(words, true));
+        const trie = buildTrie(words, false);
+        const iTrieRoot = trieRootToITrieRoot(trie);
+        const t = createTrieBlobFromTrieRoot(trie, true);
         const sortedUnique = [...new Set(words)].sort();
         expect([...t.words()].sort()).toEqual(sortedUnique);
+
+        const t2 = TrieBlobBuilder.fromITrieRoot(iTrieRoot, true);
+        expect([...t2.words()].sort()).toEqual(sortedUnique);
+
+        const t3 = TrieBlobBuilder.fromITrieRoot(t.getRoot(), true);
+        expect([...t3.words()].sort()).toEqual(sortedUnique);
     });
 
     test('should be able to correctly preserve referenced nodes.', () => {
