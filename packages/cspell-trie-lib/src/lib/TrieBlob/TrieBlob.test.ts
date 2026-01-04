@@ -93,7 +93,7 @@ describe('TrieBlob ITrie support methods', () => {
         const firstChars = [...new Set(words.map((w) => [...w][0]))].sort();
         const t = TrieBlobBuilder.fromWordList(words);
 
-        const rootRef = t.rootRef();
+        const rootRef = t.rootRef;
         const entries = t.getChildrenFromRef(rootRef);
         const keys = entries.map(([char]) => char);
         const children = new Map(entries);
@@ -106,7 +106,7 @@ describe('TrieBlob ITrie support methods', () => {
         const firstChars = [...new Set(words.map((w) => [...w][0]))].sort();
         const t = TrieBlobBuilder.fromWordList(words, undefined, true);
 
-        const rootRef = t.rootRef();
+        const rootRef = t.rootRef;
 
         const entries = t.getChildrenFromRef(rootRef);
         const keys = entries.map(([char]) => char);
