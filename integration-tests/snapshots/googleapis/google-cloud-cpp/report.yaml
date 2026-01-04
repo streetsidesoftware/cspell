@@ -4,13 +4,12 @@ Url: https://github.com/googleapis/google-cloud-cpp.git
 Args: '["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]'
 Summary:
   files: 21013
-  filesWithIssues: 7964
-  issues: 45747
+  filesWithIssues: 7840
+  issues: 45200
   errors: 0
 Errors: []
 
 issues:
-  - "ARCHITECTURE.md:29:61       retryable       U       RPCs that fail with a retryable error,"
   - "ARCHITECTURE.md:158:48      googlemock      U       implementation using `googlemock`"
   - "bazel/BUILD.bazel:17:37         subpackages     U       visibility = [\"//:__subpackages__\"])"
   - "bazel/bzlmod0.bzl:17:12         bzlmod      U       def gl_cpp_bzlmod0(name = None):"
@@ -166,11 +165,8 @@ issues:
   - "CMakeLists.txt:20:13        BUGREPORT       U       set(PACKAGE_BUGREPORT \"https://github.com"
   - "CMakeLists.txt:90:25        DOPENSSL        U       \" cmake -DOPENSSL_ROOT_DIR=/usr/local"
   - "CMakeLists.txt:97:25        DGOOGLE         U       \" cmake -DGOOGLE_CLOUD_CPP_ENABLE_MACOS"
-  - "CMakeLists.txt:100:6        ccache          U       # If ccache is installed use it"
-  - "CMakeLists.txt:101:32       CCACHE          U       GOOGLE_CLOUD_CPP_ENABLE_CCACHE \"Automatically use ccache"
   - "CMakeLists.txt:121:37       REFDOC          U       CLOUD_CPP_USE_LATEST_FOR_REFDOC_LINKS"
   - "CMakeLists.txt:130:31       DOCFX           U       GOOGLE_CLOUD_CPP_INTERNAL_DOCFX"
-  - "CMakeLists.txt:217:8        subproject      U       # Each subproject adds dependencies to"
   - "CMakeLists.txt:224:17       PROTOC          U       # `Protobuf_PROTOC_EXECUTABLE` is pretty"
   - "CMakeLists.txt:233:33       protoc          U       [==[Override gRPC's protoc plugin location."
   - "CMakeLists.txt:260:64       gmock           U       GTest::gtest and GTest::gmock libraries."
@@ -501,11 +497,9 @@ issues:
   - "google/cloud/bigtable/instance_admin_test.cc:49:11          iamproto    U       namespace iamproto = ::google::iam::v1"
   - "google/cloud/bigtable/internal/async_row_reader_test.cc:475:37      Doesnt (Doesn't)    U       AsyncRowReaderTest, ParserEofDoesntFailOnUnfinishedRowIfRowLimit"
   - "google/cloud/bigtable/internal/async_row_reader.cc:80:31        cntr    U       explicit CountFrames(int& cntr) : cntr(++cntr) {}"
-  - "google/cloud/bigtable/internal/bulk_mutator_test.cc:675:37      Retryable       U       BulkMutatorTest, ReportEitherRetryableMutationFailOrStreamFail"
   - "google/cloud/bigtable/internal/data_connection_impl.cc:690:24       satisying       U       // sure of that, satisying the `promise<>` is deferred"
   - "google/cloud/bigtable/internal/legacy_async_row_reader_test.cc:144:22       corresponse     U       * Future at idx i corresponse to i-th expected row"
   - "google/cloud/bigtable/internal/legacy_async_row_reader_test.cc:552:66       noooo           U       PERMISSION_DENIED, \"noooo\");"
-  - "google/cloud/bigtable/internal/legacy_row_reader_test.cc:89:14          preconfigured       U       // Returns a preconfigured set of parsers, so expectatio"
   - "google/cloud/bigtable/internal/logging_result_set_reader.cc:35:43       unresumable     U       __func__ << \"() << (unresumable)\";"
   - "google/cloud/bigtable/internal/metrics_test.cc:1242:53      gfet    U       emplace(\"server-timing\", \"gfet4t7; dur=10.5\");"
   - "google/cloud/bigtable/internal/partial_result_set_source_test.cc:283:41         AAAAAW      U       resume_token: \"AAAAAWVyZXN1bWVfdG9rZW4=\","
@@ -560,7 +554,6 @@ issues:
   - "google/cloud/compute/doc/environment-variables.dox:377:21       SUBNETWORKS     U       - `GOOGLE_CLOUD_CPP_SUBNETWORKS_ENDPOINT=...` overrides"
   - "google/cloud/compute/doc/environment-variables.dox:379:16       Subnetworks     U       used by `MakeSubnetworksConnection()`."
   - "google/cloud/compute/instance_group_managers/v1/instance_group_managers_client.h:104:34         listmanagedinstances    U       abandoning action with the listmanagedinstances method. If the group"
-  - "google/cloud/compute/security_policies/v1/internal/security_policies_rest_connection_impl.cc:545:34         Preconfigured       U       SecurityPoliciesListPreconfiguredExpressionSetsResponse"
   - "google/cloud/confidentialcomputing/v1/confidential_computing_client.h:19:39         CONFIDENTIALCOMPUTING       U       CLOUD_CPP_GOOGLE_CLOUD_CONFIDENTIALCOMPUTING_V1_CONFIDENTIAL_COMPUTING"
   - "google/cloud/configdelivery/v1/config_delivery_client.cc:712:27         Rollouts    U       ConfigDeliveryClient::ListRollouts(std::string const& parent"
   - "google/cloud/configdelivery/v1/config_delivery_client.h:19:39       CONFIGDELIVERY      U       CLOUD_CPP_GOOGLE_CLOUD_CONFIGDELIVERY_V1_CONFIG_DELIVERY_CLIENT"
@@ -632,7 +625,6 @@ issues:
   - "google/cloud/internal/curl_wrappers_test.cc:53:14       Casse       U       struct TestCasse {"
   - "google/cloud/internal/detect_gcp_test.cc:43:43          Loogle      U       testing::Values(\"Loogle\", \"Test\", \"Google K"
   - "google/cloud/internal/external_account_token_source_aws_test.cc:936:46      dgst    U       215\" | openssl dgst -sha256 -mac HMAC -macopt"
-  - "google/cloud/internal/external_account_token_source_url_test.cc:63:26       parseable       U       full error payload, parseable as an error info."
   - "google/cloud/internal/future_impl.cc:24:50          stdlibc     U       C++17. Fortunately, stdlibc++, MSVC are forgiving"
   - "google/cloud/internal/future_impl.h:182:34      Wmaybe      U       diagnostic ignored \"-Wmaybe-uninitialized\""
   - "google/cloud/internal/http_header_test.cc:99:33         valuelongerthantruncatelength       U       HttpHeader long_value(\"key\", \"valuelongerthantruncatelength\");"

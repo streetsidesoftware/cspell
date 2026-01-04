@@ -3,10 +3,9 @@ Repository: slint-ui/slint
 Url: "https://github.com/slint-ui/slint"
 Args: ["--config=../../../../repositories/config/slint/cspell.config.yaml","--issues-summary-report","."]
 Lines:
- CSpell: Files checked: 2625, skipped: 3, Issues found: 5266 in 905 files.
+ CSpell: Files checked: 2625, skipped: 3, Issues found: 5261 in 904 files.
  exit code: 1
 CMakeLists.txt:17:14     - Unknown word (TOPLEVEL)   -- set(SLINT_IS_TOPLEVEL_BUILD TRUE)
-CMakeLists.txt:27:31     - Unknown word (dylib's)    -- macOS, the slint_cpp.dylib's install_name uses @rpath
 Cross.toml:6:29      - Unknown word (gnueabihf)  -- armv7-unknown-linux-gnueabihf]
 Cross.toml:7:53      - Unknown word (gnueabihf)  -- armv7-unknown-linux-gnueabihf"
 FAQ.md:31:41     - Unknown word (toolkits)   -- experience of building UI toolkits, we have learnt that
@@ -57,12 +56,10 @@ api/cpp/CMakeLists.txt:164:14    - Unknown word (jemalloc)       -- # Enable jem
 api/cpp/CMakeLists.txt:165:18    - Unknown word (CROSSCOMPILING) -- if(NOT CMAKE_CROSSCOMPILING)
 api/cpp/CMakeLists.txt:166:46    - Unknown word (jemalloc)       -- slint_compiler_features "jemalloc")
 api/cpp/CMakeLists.txt:183:28    - Unknown word (TOPLEVEL)       -- (APPLE AND SLINT_IS_TOPLEVEL_BUILD AND BUILD_SHARED
-api/cpp/CMakeLists.txt:185:105   - Unknown word (dylib)          -- @rpath/libslint_cpp.dylib,-current_version,${PROJECT
 api/cpp/CMakeLists.txt:185:92    - Unknown word (libslint)       -- install_name,@rpath/libslint_cpp.dylib,-current_version
 api/cpp/CMakeLists.txt:187:71    - Unknown word (SONAME)         -- PROPERTIES IMPORTED_NO_SONAME 0)
 api/cpp/CMakeLists.txt:188:68    - Unknown word (SONAME)         -- PROPERTIES IMPORTED_SONAME libslint_cpp.dylib)
 api/cpp/CMakeLists.txt:188:75    - Unknown word (libslint)       -- PROPERTIES IMPORTED_SONAME libslint_cpp.dylib)
-api/cpp/CMakeLists.txt:188:88    - Unknown word (dylib)          -- SONAME libslint_cpp.dylib)
 api/cpp/CMakeLists.txt:197:40    - Unknown word (bigobj)         -- CXX_COMPILER_ID:MSVC>:/bigobj>
 api/cpp/CMakeLists.txt:198:45    - Unknown word (mbig)           -- COMPILER_ID:Clang>:-Wa,-mbig-obj>
 api/cpp/CMakeLists.txt:199:43    - Unknown word (mbig)           -- COMPILER_ID:GNU>:-Wa,-mbig-obj>
@@ -2391,7 +2388,6 @@ examples/servo/README.md:6:165     - Unknown word (rendring)   -- Linux and soft
 examples/servo/README.md:89:13     - Unknown word (platofrm)   -- ### Install platofrm-tools
 examples/servo/README.md:92:17     - Unknown word (cmdline)    -- ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager
 examples/servo/README.md:92:42     - Unknown word (sdkmanager) -- cmdline-tools/latest/bin/sdkmanager --install "platforms
-examples/servo/build.rs:46:22     - Unknown word (dylib)      -- // On MacOS, all dylib dependencies are shipped
 examples/servo/build.rs:48:40     - Unknown word (dyld)       -- locate them. See `man dyld` for more info.
 examples/servo/build.rs:54:49     - Unknown word (jemalloc)   -- this workaround since jemalloc-sys still links
 examples/servo/build.rs:55:15     - Unknown word (libgcc)     -- // to libgcc instead of libunwind
@@ -3631,7 +3627,6 @@ internal/core/api.rs:1039:42   - Unknown word (functors)   -- event loop. The pr
 internal/core/api.rs:1082:32   - Unknown word (behaviour)  -- is platform dependent behaviour.
 internal/core/api.rs:579:21    - Unknown word (unmaximize) -- /// Maximize or unmaximize the window.
 internal/core/api.rs:589:21    - Unknown word (unminimze)  -- /// Minimize or unminimze the window.
-internal/core/context.rs:60:34     - Unknown word (cloneable)  -- Make EvenLoopProxy cloneable, and maybe wrap in a
 internal/core/date_time.rs:7:14      - Unknown word (Datelike)   -- use chrono::{Datelike, NaiveDate};
 internal/core/future.rs:4:86      - Unknown word (Warker)     -- implement using RawWarker
 internal/core/gdb_pretty_printers.py:141:14    - Unknown word (subprinters)   -- self.subprinters = [SharedVectorSubPrinter

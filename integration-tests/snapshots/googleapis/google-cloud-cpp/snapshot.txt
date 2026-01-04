@@ -3,18 +3,14 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 20984, skipped: 29, Issues found: 45747 in 7964 files.
+ CSpell: Files checked: 20984, skipped: 29, Issues found: 45200 in 7840 files.
  exit code: 1
 ARCHITECTURE.md:158:48    - Unknown word (googlemock) -- implementation using `googlemock`
-ARCHITECTURE.md:29:61     - Unknown word (retryable)  -- RPCs that fail with a retryable error,
 BUILD.bazel:151:20    - Unknown word (ctype)      -- name = "enable-ctype-cord-workaround",
 BUILD.bazel:53:5      - Unknown word (testonly)   -- testonly = True,
-CMakeLists.txt:100:6     - Unknown word (ccache)     -- # If ccache is installed use it
-CMakeLists.txt:101:32    - Unknown word (CCACHE)     -- GOOGLE_CLOUD_CPP_ENABLE_CCACHE "Automatically use ccache
 CMakeLists.txt:121:37    - Unknown word (REFDOC)     -- CLOUD_CPP_USE_LATEST_FOR_REFDOC_LINKS
 CMakeLists.txt:130:31    - Unknown word (DOCFX)      -- GOOGLE_CLOUD_CPP_INTERNAL_DOCFX
 CMakeLists.txt:20:13     - Unknown word (BUGREPORT)  -- set(PACKAGE_BUGREPORT "https://github.com
-CMakeLists.txt:217:8     - Unknown word (subproject) -- # Each subproject adds dependencies to
 CMakeLists.txt:224:17    - Unknown word (PROTOC)     -- # `Protobuf_PROTOC_EXECUTABLE` is pretty
 CMakeLists.txt:233:33    - Unknown word (protoc)     -- [==[Override gRPC's protoc plugin location.
 CMakeLists.txt:260:64    - Unknown word (gmock)      -- GTest::gtest and GTest::gmock libraries.
@@ -499,11 +495,9 @@ google/cloud/bigtable/examples/howto_mock_data_api.cc:32:11     - Unknown word (
 google/cloud/bigtable/instance_admin_test.cc:49:11     - Unknown word (iamproto)   -- namespace iamproto = ::google::iam::v1
 google/cloud/bigtable/internal/async_row_reader.cc:80:31     - Unknown word (cntr)       -- explicit CountFrames(int& cntr) : cntr(++cntr) {}
 google/cloud/bigtable/internal/async_row_reader_test.cc:475:37    - Unknown word (Doesnt)     -- AsyncRowReaderTest, ParserEofDoesntFailOnUnfinishedRowIfRowLimit
-google/cloud/bigtable/internal/bulk_mutator_test.cc:675:37    - Unknown word (Retryable)  -- BulkMutatorTest, ReportEitherRetryableMutationFailOrStreamFail
 google/cloud/bigtable/internal/data_connection_impl.cc:690:24    - Unknown word (satisying)  -- // sure of that, satisying the `promise<>` is deferred
 google/cloud/bigtable/internal/legacy_async_row_reader_test.cc:144:22    - Unknown word (corresponse) -- * Future at idx i corresponse to i-th expected row
 google/cloud/bigtable/internal/legacy_async_row_reader_test.cc:552:66    - Unknown word (noooo)       -- PERMISSION_DENIED, "noooo");
-google/cloud/bigtable/internal/legacy_row_reader_test.cc:89:14     - Unknown word (preconfigured) -- // Returns a preconfigured set of parsers, so expectatio
 google/cloud/bigtable/internal/logging_result_set_reader.cc:35:43     - Unknown word (unresumable) -- __func__ << "() << (unresumable)";
 google/cloud/bigtable/internal/metrics_test.cc:1242:53   - Unknown word (gfet)       -- emplace("server-timing", "gfet4t7; dur=10.5");
 google/cloud/bigtable/internal/partial_result_set_source_test.cc:283:41    - Unknown word (AAAAAW)     -- resume_token: "AAAAAWVyZXN1bWVfdG9rZW4=",
@@ -557,7 +551,6 @@ google/cloud/compute/doc/environment-variables.dox:207:22    - Unknown word (Mir
 google/cloud/compute/doc/environment-variables.dox:377:21    - Unknown word (SUBNETWORKS) -- - `GOOGLE_CLOUD_CPP_SUBNETWORKS_ENDPOINT=...` overrides
 google/cloud/compute/doc/environment-variables.dox:379:16    - Unknown word (Subnetworks) -- used by `MakeSubnetworksConnection()`.
 google/cloud/compute/instance_group_managers/v1/instance_group_managers_client.h:104:34    - Unknown word (listmanagedinstances) -- abandoning action with the listmanagedinstances method. If the group
-google/cloud/compute/security_policies/v1/internal/security_policies_rest_connection_impl.cc:545:34    - Unknown word (Preconfigured) -- SecurityPoliciesListPreconfiguredExpressionSetsResponse
 google/cloud/confidentialcomputing/v1/confidential_computing_client.h:19:39     - Unknown word (CONFIDENTIALCOMPUTING) -- CLOUD_CPP_GOOGLE_CLOUD_CONFIDENTIALCOMPUTING_V1_CONFIDENTIAL_COMPUTING
 google/cloud/configdelivery/v1/config_delivery_client.cc:712:27    - Unknown word (Rollouts)   -- ConfigDeliveryClient::ListRollouts(std::string const& parent
 google/cloud/configdelivery/v1/config_delivery_client.h:19:39     - Unknown word (CONFIGDELIVERY) -- CLOUD_CPP_GOOGLE_CLOUD_CONFIGDELIVERY_V1_CONFIG_DELIVERY_CLIENT
@@ -629,7 +622,6 @@ google/cloud/internal/curl_rest_client_integration_test.cc:284:66    - Unknown w
 google/cloud/internal/curl_wrappers_test.cc:53:14     - Unknown word (Casse)      -- struct TestCasse {
 google/cloud/internal/detect_gcp_test.cc:43:43     - Unknown word (Loogle)     -- testing::Values("Loogle", "Test", "Google K
 google/cloud/internal/external_account_token_source_aws_test.cc:936:46    - Unknown word (dgst)       -- 215" | openssl  dgst -sha256 -mac HMAC -macopt
-google/cloud/internal/external_account_token_source_url_test.cc:63:26     - Unknown word (parseable)  -- full error payload, parseable as an error info.
 google/cloud/internal/future_impl.cc:24:50     - Unknown word (stdlibc)    -- C++17. Fortunately, stdlibc++, MSVC are forgiving
 google/cloud/internal/future_impl.h:182:34    - Unknown word (Wmaybe)     -- diagnostic ignored "-Wmaybe-uninitialized"
 google/cloud/internal/http_header_test.cc:100:50    - Unknown word (valuelonge)                    -- DebugString(), Eq("key: valuelonge"));

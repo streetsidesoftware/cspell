@@ -4,8 +4,8 @@ Url: https://github.com/slint-ui/slint
 Args: '["--config=${commonRoot}/config/slint/cspell.config.yaml","--issues-summary-report","."]'
 Summary:
   files: 2628
-  filesWithIssues: 905
-  issues: 5266
+  filesWithIssues: 904
+  issues: 5261
   errors: 0
 Errors: []
 
@@ -73,11 +73,9 @@ issues:
   - "api/cpp/CMakeLists.txt:166:46       jemalloc            U       slint_compiler_features \"jemalloc\")"
   - "api/cpp/CMakeLists.txt:183:28       TOPLEVEL            U       (APPLE AND SLINT_IS_TOPLEVEL_BUILD AND BUILD_SHARED"
   - "api/cpp/CMakeLists.txt:185:92       libslint            U       install_name,@rpath/libslint_cpp.dylib,-current_version"
-  - "api/cpp/CMakeLists.txt:185:105      dylib               U       @rpath/libslint_cpp.dylib,-current_version,${PROJECT"
   - "api/cpp/CMakeLists.txt:187:71       SONAME              U       PROPERTIES IMPORTED_NO_SONAME 0)"
   - "api/cpp/CMakeLists.txt:188:68       SONAME              U       PROPERTIES IMPORTED_SONAME libslint_cpp.dylib)"
   - "api/cpp/CMakeLists.txt:188:75       libslint            U       PROPERTIES IMPORTED_SONAME libslint_cpp.dylib)"
-  - "api/cpp/CMakeLists.txt:188:88       dylib               U       SONAME libslint_cpp.dylib)"
   - "api/cpp/CMakeLists.txt:197:40       bigobj              U       CXX_COMPILER_ID:MSVC>:/bigobj>"
   - "api/cpp/CMakeLists.txt:198:45       mbig                U       COMPILER_ID:Clang>:-Wa,-mbig-obj>"
   - "api/cpp/CMakeLists.txt:199:43       mbig                U       COMPILER_ID:GNU>:-Wa,-mbig-obj>"
@@ -777,7 +775,6 @@ issues:
   - "cmake/FindOpenGLES2.cmake:1:1\tNo issues found"
   - "cmake/FindOpenGLES3.cmake:1:1\tNo issues found"
   - "CMakeLists.txt:17:14        TOPLEVEL    U       set(SLINT_IS_TOPLEVEL_BUILD TRUE)"
-  - "CMakeLists.txt:27:31        dylib's     U       macOS, the slint_cpp.dylib's install_name uses @rpath"
   - "CMakePresets.json:1:1\tNo issues found"
   - "CONTRIBUTING.md:1:1\tNo issues found"
   - "Cross.toml:6:29         gnueabihf       U       armv7-unknown-linux-gnueabihf]"
@@ -2942,7 +2939,6 @@ issues:
   - "examples/safe-ui/src/slint-safeui-platform-interface.h:48:12        safeui      U       void slint_safeui_platform_render(const"
   - "examples/safe-ui/src/slint-safeui-platform-interface.h:64:11        safeui      U       int slint_safeui_platform_duration_since"
   - "examples/safe-ui/ui/app-window.slint:1:1\tNo issues found"
-  - "examples/servo/build.rs:46:22       dylib           U       // On MacOS, all dylib dependencies are shipped"
   - "examples/servo/build.rs:48:40       dyld            U       locate them. See `man dyld` for more info."
   - "examples/servo/build.rs:54:49       jemalloc        U       this workaround since jemalloc-sys still links"
   - "examples/servo/build.rs:55:15       libgcc          U       // to libgcc instead of libunwind"
@@ -4645,7 +4641,7 @@ issues:
   - "internal/core/api.rs:1082:32        behaviour       U       is platform dependent behaviour."
   - "internal/core/callbacks.rs:1:1\tNo issues found"
   - "internal/core/component_factory.rs:1:1\tNo issues found"
-  - "internal/core/context.rs:60:34          cloneable       U       Make EvenLoopProxy cloneable, and maybe wrap in a"
+  - "internal/core/context.rs:1:1\tNo issues found"
   - "internal/core/date_time.rs:7:14         Datelike    U       use chrono::{Datelike, NaiveDate};"
   - "internal/core/future.rs:4:86        Warker      U       implement using RawWarker"
   - "internal/core/gdb_pretty_printers.py:1:15           Klarälvdalens       U       # Copyright © Klarälvdalens Datakonsult AB, a KDAB"
@@ -7152,7 +7148,6 @@ issuesSummary:
   - "text: CLIB, count: 5, files: 1,"
   - "text: clippoard, count: 1, files: 1,"
   - "text: CLOEXEC, count: 1, files: 1,"
-  - "text: cloneable, count: 1, files: 1,"
   - "text: clou, count: 3, files: 1,"
   - "text: cmakelists, count: 1, files: 1,"
   - "text: cmath, count: 1, files: 1,"
@@ -7331,8 +7326,6 @@ issuesSummary:
   - "text: DXGI, count: 15, files: 3,"
   - "text: dyld, count: 1, files: 1,"
   - "text: DYLD, count: 2, files: 2,"
-  - "text: dylib, count: 3, files: 2,"
-  - "text: dylib's, count: 1, files: 1,"
   - "text: eabi, count: 5, files: 1,"
   - "text: EABI, count: 2, files: 1,"
   - "text: eabihf, count: 14, files: 9,"
