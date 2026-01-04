@@ -1,28 +1,38 @@
 import type { ITrieNode, ITrieNodeId, ITrieNodeRoot } from '../ITrieNode/ITrieNode.ts';
 import type { TrieInfo } from '../ITrieNode/TrieInfo.ts';
-import type { ITrieBlobIMethods, Node, NodeIndex } from './TrieBlobIMethods.ts';
+import type { ITrieBlobIMethods, NodeRef } from './TrieBlobIMethods.ts';
 import { Utf8Accumulator } from './Utf8.ts';
 
-const EmptyKeys: readonly string[] = Object.freeze([]);
-const EmptyNodes: readonly ITrieNode[] = Object.freeze([]);
-const EmptyEntries: readonly (readonly [string, ITrieNode])[] = Object.freeze([]);
+const EMPTY_KEYS: readonly string[] = Object.freeze([]);
+const EMPTY_NODES: readonly ITrieNode[] = Object.freeze([]);
+const EMPTY_ENTRIES: readonly (readonly [string, ITrieNode])[] = Object.freeze([]);
+
+/**
+ * Index to a child of the node.
+ *
+ * It can be the index into:
+ * - ITrieNode.keys()
+ * - ITrieNode.values()
+ * - ITrieNode.entries()
+ */
+type KeyIndex = number;
 
 class TrieBlobINode implements ITrieNode {
-    readonly id: number;
-    readonly node: Node;
+    readonly id: ITrieNodeId;
+    readonly node: NodeRef;
     readonly eow: boolean;
     private _keys: readonly string[] | undefined;
     private _count: number;
     private _size: number | undefined;
     private _chained: boolean | undefined;
-    private _nodesEntries: readonly [string, number][] | undefined;
+    private _nodesEntries: readonly [string, NodeRef][] | undefined;
     private _entries: readonly [string, ITrieNode][] | undefined;
     private _values: readonly ITrieNode[] | undefined;
-    protected charToIdx: Readonly<Record<string, number>> | undefined;
+    protected charToIdx: Readonly<Record<string, KeyIndex>> | undefined;
     readonly trie: ITrieBlobIMethods;
-    readonly nodeIdx: NodeIndex;
+    readonly nodeIdx: NodeRef;
 
-    constructor(trie: ITrieBlobIMethods, nodeIdx: NodeIndex) {
+    constructor(trie: ITrieBlobIMethods, nodeIdx: NodeRef) {
         this.trie = trie;
         this.nodeIdx = nodeIdx;
         const node = trie.nodes[nodeIdx];
@@ -35,13 +45,13 @@ class TrieBlobINode implements ITrieNode {
     /** get keys to children */
     keys(): readonly string[] {
         if (this._keys) return this._keys;
-        if (!this._count) return EmptyKeys;
+        if (!this._count) return EMPTY_KEYS;
         this._keys = this.getNodesEntries().map(([key]) => key);
         return this._keys;
     }
 
     values(): readonly ITrieNode[] {
-        if (!this._count) return EmptyNodes;
+        if (!this._count) return EMPTY_NODES;
         if (this._values) return this._values;
         this._values = this.entries().map(([, value]) => value);
         return this._values;
@@ -54,13 +64,13 @@ class TrieBlobINode implements ITrieNode {
 
     entries(): readonly (readonly [string, ITrieNode])[] {
         if (this._entries) return this._entries;
-        if (!this._count) return EmptyEntries;
+        if (!this._count) return EMPTY_ENTRIES;
         const entries = this.getNodesEntries();
         this._entries = entries.map(([key, value]) => [key, new TrieBlobINode(this.trie, value)]);
         return this._entries;
     }
 
-    entryAt(keyIdx: number): readonly [string, ITrieNode] {
+    entryAt(keyIdx: KeyIndex): readonly [string, ITrieNode] {
         if (this._entries) return this._entries[keyIdx];
         return this.entries()[keyIdx];
     }
@@ -78,7 +88,7 @@ class TrieBlobINode implements ITrieNode {
         return this._count > 0;
     }
 
-    child(keyIdx: number): ITrieNode {
+    child(keyIdx: KeyIndex): ITrieNode {
         if (!this._values && !this.containsChainedIndexes()) {
             const n = this.trie.nodes[this.nodeIdx + keyIdx + 1];
             const nodeIdx = n >>> this.trie.NodeChildRefShift;
@@ -129,7 +139,7 @@ class TrieBlobINode implements ITrieNode {
         return this._chained;
     }
 
-    private getNodesEntries(): readonly [string, number][] {
+    private getNodesEntries(): readonly [string, NodeRef][] {
         if (this._nodesEntries) return this._nodesEntries;
         if (!this.containsChainedIndexes()) {
             const entries = Array<[string, number]>(this._count);
@@ -150,7 +160,7 @@ class TrieBlobINode implements ITrieNode {
         return this._nodesEntries;
     }
 
-    private walkChainedIndexes(): readonly [string, number][] {
+    private walkChainedIndexes(): readonly [string, NodeRef][] {
         interface StackItem {
             nodeIdx: number;
             lastIdx: number;
@@ -221,7 +231,7 @@ export class TrieBlobIRoot extends TrieBlobINode implements ITrieNodeRoot {
     readonly hasNonStrictWords: boolean;
     readonly info: Readonly<TrieInfo>;
 
-    constructor(trie: ITrieBlobIMethods, nodeIdx: number) {
+    constructor(trie: ITrieBlobIMethods, nodeIdx: NodeRef) {
         super(trie, nodeIdx);
         this.info = trie.info;
         this.find = trie.find;
@@ -233,7 +243,6 @@ export class TrieBlobIRoot extends TrieBlobINode implements ITrieNodeRoot {
     resolveId(id: ITrieNodeId): ITrieNode {
         return new TrieBlobINode(this.trie, id as number);
     }
-
     get forbidPrefix(): string {
         return this.info.forbiddenWordPrefix;
     }
