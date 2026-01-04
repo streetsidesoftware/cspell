@@ -1,6 +1,6 @@
 import type { BuilderCursor, TrieBuilder } from '../Builder/index.ts';
 import type { PartialTrieInfo, TrieCharacteristics, TrieInfo } from '../ITrieNode/TrieInfo.ts';
-import { TrieInfoBuilder } from '../ITrieNode/TrieInfo.ts';
+import { normalizeTrieInfo, TrieInfoBuilder } from '../ITrieNode/TrieInfo.ts';
 import { StringTableBuilder } from '../StringTable/StringTable.ts';
 import type { TrieNode, TrieRoot } from '../TrieNode/TrieNode.ts';
 import { assert } from '../utils/assert.ts';
@@ -10,7 +10,7 @@ import { optimizeNodesWithStringTable } from './optimizeNodes.ts';
 import { resolveMap } from './resolveMap.ts';
 import type { TrieBlob } from './TrieBlob.ts';
 import { NodeChildIndexRefShift, NodeHeaderEOWMask, NodeMaskCharByte } from './TrieBlobFormat.ts';
-import { FastTrieBlobInternals, sortNodes, toTrieBlob } from './TrieBlobInternals.ts';
+import { sortNodes, toTrieBlob } from './TrieBuilderUtils.ts';
 import { encodeTextToUtf8_32Rev, encodeToUtf8_32Rev } from './Utf8.ts';
 
 type FastTrieBlobNode = number[];
@@ -341,8 +341,7 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
             ? optimizeNodesWithStringTable({ nodes: sortedNodes, stringTable })
             : { nodes: sortedNodes, stringTable };
 
-        const fti = new FastTrieBlobInternals(r.nodes, r.stringTable, info.info, info.characteristics);
-        return toTrieBlob(fti);
+        return toTrieBlob(r.nodes, r.stringTable, normalizeTrieInfo(info.info));
     }
 
     toJSON(): {

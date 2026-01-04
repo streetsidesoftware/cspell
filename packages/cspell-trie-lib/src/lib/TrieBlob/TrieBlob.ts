@@ -15,7 +15,7 @@ import {
     NodeHeaderPrefixShift,
     NodeMaskCharByte,
 } from './TrieBlobFormat.ts';
-import { TrieBlobInternals, TrieBlobIRoot } from './TrieBlobIRoot.ts';
+import { TrieBlobIRoot, TrieBlobMethods } from './TrieBlobIRoot.ts';
 import { TrieBlobInternalsLegacy, TrieBlobIRootLegacy } from './TrieBlobIRootLegacy.ts';
 import type { TrieBlobNodeRef } from './TrieBlobNodeRef.ts';
 import type { U8Array, U32Array } from './TypedArray.ts';
@@ -103,7 +103,7 @@ export class TrieBlob implements TrieData {
     }
 
     private _getRoot(): ITrieNodeRoot {
-        const trieData = new TrieBlobInternals(
+        const trieData = new TrieBlobMethods(
             this.nodes,
             // this.#stringTable,
             {
@@ -124,8 +124,9 @@ export class TrieBlob implements TrieData {
                 hasNonStrictWords: this.hasNonStrictWords,
                 hasPreferredSuggestions: this.hasPreferredSuggestions,
             },
+            this.info,
         );
-        return new TrieBlobIRoot(trieData, 0, this.info);
+        return new TrieBlobIRoot(trieData, 0);
     }
 
     getRootLegacy(): ITrieNodeRoot {
