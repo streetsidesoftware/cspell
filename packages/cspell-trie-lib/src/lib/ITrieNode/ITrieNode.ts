@@ -23,7 +23,15 @@ export interface FindFullResult extends FindResult {
     forbidden: boolean | undefined;
 }
 
-export type ITrieNodeId = object | number | string;
+/**
+ * ITrieNode instances are not unique. It is possible for multiple ITrieNode instances to
+ * represent the same node.
+ * `id` is used to see if two instances refer to the same node.
+ * The type is obscured because it is up the the backing structure to provide the best value.
+ * Note, only nodes from the same root are guaranteed to be unique. It is possible for two
+ * different ITrieNode instances to have the same `id` value if they come from different roots.
+ */
+export type ITrieNodeId = object | number | string | bigint;
 
 type Entry = readonly [string, ITrieNode];
 

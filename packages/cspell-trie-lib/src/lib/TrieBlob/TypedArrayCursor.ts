@@ -1,19 +1,21 @@
+import type { U8Array } from './TypedArray.ts';
+
 export interface ArrayLike {
     readonly length: number;
     readonly [n: number]: number;
 }
 
 export class TypedArrayCursor<T extends ArrayLike> {
-    readonly array: T;
+    array: T;
     i: number;
     done: undefined | boolean;
     length: number;
 
-    constructor(array: T, i: number = 0) {
+    constructor(array: T, i: number = 0, done?: boolean) {
         this.array = array;
         this.i = i;
         this.length = array.length;
-        this.done = i < 0 || i >= array.length ? true : undefined;
+        this.done = (done ?? (i >= this.length ? true : undefined)) || undefined;
     }
 
     cur(): number | undefined {
@@ -36,6 +38,8 @@ export type ArrayBufferLike = ArrayBuffer | SharedArrayBuffer;
 export type Uint8ArrayCursor<TArrayBuffer extends ArrayBufferLike = ArrayBuffer> = TypedArrayCursor<
     Uint8Array<TArrayBuffer>
 >;
+
+export type U8ArrayCursor = TypedArrayCursor<U8Array>;
 
 export function createUint8ArrayCursor<T extends Uint8Array>(array: T, i = 0): TypedArrayCursor<T> {
     return new TypedArrayCursor<T>(array, i);

@@ -33,16 +33,16 @@
 // Node header constants
 export const NodeHeaderNumChildrenBits = 8 as const;
 export const NodeHeaderNumChildrenShift = 0 as const;
-export const NodeHeaderEOWMask: number = 0x0000_0100 & 0xffff; // (& 0xffff) is to ensure it is treated like an integer.
-export const NodeHeaderPrefixMask: number = 0x3fff_fe00 & 0xffff_ffff; // (& 0xffff_ffff) is to ensure it is treated like an integer.
-export const NodeHeaderPrefixShift: number = 9 as const;
-export const NodeHeaderPrefixBits: number = 21 as const;
-export const NodeHeaderNumChildrenMask: number = (1 << NodeHeaderNumChildrenBits) - 1;
+export const NodeHeaderEOWMask = 0x0000_0100 as const;
+export const NodeHeaderPrefixMask = 0x3fff_fe00 as const;
+export const NodeHeaderPrefixShift = 9 as const;
+export const NodeHeaderPrefixBits = 21 as const;
+export const NodeHeaderNumChildrenMask = 0xff as const; // (1 << NodeHeaderNumChildrenBits) - 1
 
 // Node child entry constants
 
-export const NodeMaskCharByte: number = 0x0000_00ff & 0xffff; // (& 0xffff) is to ensure it is treated like an integer.
-export const NodeChildIndexRefShift = 8;
+export const NodeMaskCharByte = 0x0000_00ff as const;
+export const NodeChildIndexRefShift = 8 as const;
 
 /**
  * A 32-bit number
