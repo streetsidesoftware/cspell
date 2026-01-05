@@ -3,8 +3,7 @@ import type { ITrieNode, ITrieNodeId, ITrieNodeRoot } from '../ITrieNode/index.t
 import type { PartialTrieInfo, TrieCharacteristics, TrieInfo } from '../ITrieNode/TrieInfo.ts';
 import { normalizeTrieInfo, TrieInfoBuilder } from '../ITrieNode/TrieInfo.ts';
 import { StringTableBuilder } from '../StringTable/StringTable.ts';
-import { trieRootToITrieRoot } from '../TrieNode/trie.ts';
-import type { TrieRoot } from '../TrieNode/TrieNode.ts';
+import type { TrieNode, TrieRoot } from '../TrieNode/TrieNode.ts';
 import { assert } from '../utils/assert.ts';
 import { assertValidUtf16Character } from '../utils/text.ts';
 import { CharIndexBuilder } from './CharIndex.ts';
@@ -386,10 +385,92 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
         return ft.insert(words).build(optimize);
     }
 
+    /**
+     * Create a TrieBlob from a TrieRoot.
+     *
+     * This is equivalent to, but slightly faster because it avoids creating an ITrieNodes
+     * ```ts
+     * static fromTrieRoot(root: TrieRoot, optimize?: boolean): TrieBlob {
+     *   return this.fromITrieRoot(trieRootToITrieRoot(root), optimize);
+     * }
+     * ```
+     *
+     * @param root - TrieRoot
+     * @param optimize - optional; default = false, it will convert it into a DAWG and use a string table.
+     *   For small tries, it will automatically convert to a DAWG.
+     * @returns TrieBlob
+     */
     static fromTrieRoot(root: TrieRoot, optimize?: boolean): TrieBlob {
-        return this.fromITrieRoot(trieRootToITrieRoot(root), optimize);
+        const NodeCharIndexMask = NodeMaskCharByte;
+        const nodeChildRefShift = NodeChildIndexRefShift;
+        const NodeMaskEOW = NodeHeaderEOWMask;
+
+        const tf = new TrieBlobBuilder(undefined, root);
+        const IdxEOW = tf.IdxEOW;
+
+        const known = new Map<TrieNode, number>([[root, 0]]);
+
+        function resolveNode(n: TrieNode): number {
+            if (n.f && !n.c) return IdxEOW;
+            const node = [n.f ? NodeMaskEOW : 0];
+            return tf.nodes.push(node) - 1;
+        }
+
+        function walk(n: TrieNode): number {
+            const found = known.get(n);
+            if (found) return found;
+            const nodeIdx = resolveMap(known, n, resolveNode);
+            const node = tf.nodes[nodeIdx];
+            if (!n.c) return nodeIdx;
+            const children = Object.entries(n.c);
+            for (let p = 0; p < children.length; ++p) {
+                const [char, childNode] = children[p];
+                addCharToNode(node, char, childNode);
+            }
+            return nodeIdx;
+        }
+
+        function resolveChild(node: FastTrieBlobNode, charIndex: number): number {
+            let i = 1;
+            for (i = 1; i < node.length && (node[i] & NodeCharIndexMask) !== charIndex; ++i) {
+                // empty
+            }
+            return i;
+        }
+
+        function addCharToNode(node: FastTrieBlobNode, char: string, n: TrieNode): void {
+            const indexSeq = tf.letterToUtf8Seq(char);
+            assertValidUtf16Character(char);
+            // console.error('addCharToNode %o', { char, indexSeq });
+            for (const idx of indexSeq.slice(0, -1)) {
+                const pos = resolveChild(node, idx);
+                if (pos < node.length) {
+                    node = tf.nodes[node[pos] >>> nodeChildRefShift];
+                } else {
+                    const next: FastTrieBlobNode = [0];
+                    const nodeIdx = tf.nodes.push(next) - 1;
+                    node[pos] = (nodeIdx << nodeChildRefShift) | idx;
+                    node = next;
+                }
+            }
+            const letterIdx = indexSeq[indexSeq.length - 1];
+            const i = node.push(letterIdx) - 1;
+            node[i] = (walk(n) << nodeChildRefShift) | letterIdx;
+        }
+
+        walk(root);
+
+        return tf.build(optimize);
     }
 
+    /**
+     * Create a TrieBlob from a TrieRoot.
+     *
+     * @param root - root node
+     * @param optimize - optional; default = false, it will convert it into a DAWG and use a string table.
+     *   For small tries, it will automatically convert to a DAWG.
+     * @returns TrieBlob
+     */
     static fromITrieRoot(root: ITrieNodeRoot, optimize?: boolean): TrieBlob {
         const NodeCharIndexMask = NodeMaskCharByte;
         const nodeChildRefShift = NodeChildIndexRefShift;
