@@ -342,7 +342,7 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
 
         // Optimize automatically if the node count is small.
         // This will not involve a string table.
-        if (optimize || sortNodes.length < AutoOptimizeNodeCount) {
+        if (optimize ?? sortNodes.length < AutoOptimizeNodeCount) {
             sortedNodes = optimizeNodes(sortedNodes);
         }
 

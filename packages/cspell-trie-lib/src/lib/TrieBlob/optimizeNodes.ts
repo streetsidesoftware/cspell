@@ -191,6 +191,7 @@ function copyNodesAndStringTable(src: NodesAndStringTable): NodesAndStringTableB
 
 export function optimizeNodesWithStringTable(src: NodesAndStringTable): NodesAndStringTable {
     const { nodes, stringTableBuilder: builder } = copyNodesAndStringTable(src);
+    const multipleRefs = calcHasMultipleReferences(nodes);
 
     if (!builder.length) {
         // Add the empty string to take up index 0.
@@ -208,6 +209,7 @@ export function optimizeNodesWithStringTable(src: NodesAndStringTable): NodesAnd
     function processNode(nodeIdx: number): void {
         const node = nodes[nodeIdx];
         if (node.length !== 2) return;
+
         const header = node[0];
         // An end of word node cannot be merged with a prefix.
         if ((header & NodeHeaderEOWMask) !== 0) return;
@@ -216,7 +218,10 @@ export function optimizeNodesWithStringTable(src: NodesAndStringTable): NodesAnd
 
         const childEntry = node[1];
         const charByte = childEntry & NodeMaskCharByte;
-        const childNode = nodes[childEntry >>> 8];
+        const childIdx = childEntry >>> 8;
+        // We cannot merge with a child node that has multiple references.
+        if (multipleRefs.has(childIdx)) return;
+        const childNode = nodes[childIdx];
 
         const childHeader = childNode[0];
         const childPrefixIdx = (childHeader & NodeHeaderPrefixMask) >>> NodeHeaderPrefixShift;
@@ -230,9 +235,34 @@ export function optimizeNodesWithStringTable(src: NodesAndStringTable): NodesAnd
     }
 }
 
+function calcHasMultipleReferences(nodes: FastTrieBlobNodes32): Set<number> {
+    const seen = new Set<number>();
+    const multiple = new Set<number>();
+
+    walkNodes(nodes, 0, {
+        before: (nodeIdx) => {
+            if (seen.has(nodeIdx)) {
+                multiple.add(nodeIdx);
+                return true;
+            }
+            seen.add(nodeIdx);
+            return false;
+        },
+    });
+
+    return multiple;
+}
+
 interface NodeWalkOptions {
+    /**
+     * @param nodeIdx
+     */
     after?: (nodeIdx: number) => void;
-    before?: (nodeIdx: number) => void;
+    /**
+     * @param nodeIdx
+     * @returns true to stop going deeper.
+     */
+    before?: (nodeIdx: number) => boolean | undefined;
 }
 
 function walkNodes(nodes: FastTrieBlobNodes32, nodeIdx: number, options: NodeWalkOptions): void {
@@ -240,7 +270,7 @@ function walkNodes(nodes: FastTrieBlobNodes32, nodeIdx: number, options: NodeWal
     const before = options.before || (() => undefined);
 
     function walk(nodeIdx: number): void {
-        before(nodeIdx);
+        if (before(nodeIdx)) return;
 
         const node = nodes[nodeIdx];
         const count = node.length - 1;

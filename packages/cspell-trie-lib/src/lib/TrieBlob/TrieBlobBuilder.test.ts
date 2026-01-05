@@ -7,6 +7,7 @@ import { buildITrieFromWords } from '../buildITrie.ts';
 import { consolidate } from '../consolidate.ts';
 import { defaultTrieInfo } from '../constants.ts';
 import type { ITrie } from '../ITrie.ts';
+import { createITrieFromTrieData, iTrieToStructuredStringLines } from '../ITrie.ts';
 import { extractTrieCharacteristics } from '../ITrieNode/TrieInfo.ts';
 import { parseDictionaryLines } from '../SimpleDictionaryParser.ts';
 import { trieRootToITrieRoot } from '../TrieNode/trie.ts';
@@ -223,11 +224,24 @@ describe('optimization', () => {
         ${'single word'}                   | ${['optimization']}
         ${'multiple words'}                | ${['optimization', 'optimize']}
         ${'multiple words shared endings'} | ${['optimization', 'vacation', 'sensation']}
+        ${'emojis'}                        | ${['😀😃😄😁', '😆🥹😅😂', '🤣🥲☺️😊', '😇🙂🙃😉']}
         ${'sampleWords()'}                 | ${sampleWords()}
     `('optimize $comment $words', ({ words }) => {
         const sortedUnique = [...new Set(words)].sort();
-        const ft = TrieBlobBuilder.fromWordList(words, undefined, { useStringTable: true, optimize: true });
-        expect([...ft.words()]).toEqual(sortedUnique);
+        const ft0 = TrieBlobBuilder.fromWordList(words, undefined, { useStringTable: false, optimize: false });
+        expect([...ft0.words()]).toEqual(sortedUnique);
+        const ft1 = TrieBlobBuilder.fromWordList(words, undefined, { useStringTable: false, optimize: true });
+        expect([...ft1.words()]).toEqual(sortedUnique);
+        const ft2 = TrieBlobBuilder.fromWordList(words, undefined, { useStringTable: true, optimize: true });
+        expect([...ft2.words()]).toEqual(sortedUnique);
+
+        const t0 = createITrieFromTrieData(ft0);
+        const t1 = createITrieFromTrieData(ft1);
+        const t2 = createITrieFromTrieData(ft2);
+
+        expect(iTrieToStructuredStringLines(t0).join('\n')).toMatchSnapshot('No optimization');
+        expect(iTrieToStructuredStringLines(t1).join('\n')).toMatchSnapshot('With optimization');
+        expect(iTrieToStructuredStringLines(t2).join('\n')).toMatchSnapshot('With optimization and string table');
     });
 
     test(

@@ -439,6 +439,10 @@ export class ITrieImpl implements ITrie {
     }
 }
 
+export function createITrieFromTrieData(data: TrieData): ITrie {
+    return new ITrieImpl(data);
+}
+
 export interface FindWordOptions {
     caseSensitive?: boolean;
     useLegacyWordCompounds?: boolean | number;
@@ -524,11 +528,7 @@ function* _iTrieToPathAndWord(trie: ITrie, withId: boolean): Iterable<[string, s
                     .map(mapItem)
                     .join('') + '⏎';
 
-            const diffIdx = findFirstDiff(lastStep, steps);
-
-            const indent = '-'.repeat(diffIdx);
-            const remainder = steps.slice(diffIdx);
-            const path = indent + remainder;
+            const path = diffStrings(lastStep, steps, '-');
 
             yield [path, item.word];
             lastStep = steps;
@@ -545,12 +545,19 @@ function* _iTrieToPathAndWord(trie: ITrie, withId: boolean): Iterable<[string, s
     }
 }
 
-function findFirstDiff(a: string, b: string): number {
+function findFirstDiff(a: string[], b: string[]): number {
     let i = 0;
     for (; i < a.length && i < b.length; ++i) {
         if (a[i] !== b[i]) return i;
     }
     return i;
+}
+
+function diffStrings(a: string, b: string, replace: string): string {
+    const aa = [...a];
+    const bb = [...b];
+    const idx = findFirstDiff(aa, bb);
+    return replace.repeat(idx) + bb.slice(idx).join('');
 }
 
 function formatNodeId(id: ITrieNodeId): string {
