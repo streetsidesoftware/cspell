@@ -2,6 +2,7 @@ import type { Operator } from '@cspell/cspell-pipe/sync';
 import { opCombine as opPipe, opConcatMap, opFilter, opMap } from '@cspell/cspell-pipe/sync';
 
 import { buildITrieFromWords } from './buildITrie.ts';
+import type { BuildOptions } from './BuildOptions.ts';
 import {
     CASE_INSENSITIVE_PREFIX,
     COMPOUND_FIX,
@@ -19,7 +20,7 @@ import type { Trie } from './trie.ts';
 import { buildTrieFast } from './TrieBuilder.ts';
 import { normalizeWord, normalizeWordForCaseInsensitive } from './utils/normalizeWord.ts';
 
-export interface ParseDictionaryOptions {
+export interface ParseDictionaryOptions extends BuildOptions {
     compoundCharacter: string;
     optionalCompoundCharacter: string;
     forbiddenPrefix: string;
@@ -96,6 +97,18 @@ export interface ParseDictionaryOptions {
      * @default false
      */
     makeWordsForbidden?: boolean;
+
+    /**
+     * Optimize the trie for size by merging duplicate sub-tries and using a String Table.
+     * @default false
+     */
+    optimize?: boolean;
+
+    /**
+     * Use a string table to reduce memory usage.
+     * @default false
+     */
+    useStringTable?: boolean;
 }
 
 const RegExpSplit = /[\s,;]/g;
@@ -436,7 +449,8 @@ export function parseLinesToDictionary(lines: Iterable<string>, options?: Partia
     const _options = mergeOptions(_defaultOptions, options);
     const dictLines = parseDictionaryLines(lines, _options);
     const words = [...new Set(dictLines)].sort();
-    return buildITrieFromWords(words, trieInfoFromOptions(options));
+    const { optimize, useStringTable } = options || {};
+    return buildITrieFromWords(words, trieInfoFromOptions(options), { optimize, useStringTable });
 }
 
 export function parseDictionary(text: string | Iterable<string>, options?: Partial<ParseDictionaryOptions>): ITrie {

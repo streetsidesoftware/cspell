@@ -154,4 +154,8 @@ export class TrieBlobIRoot extends TrieBlobINode implements ITrieNodeRoot {
     get caseInsensitivePrefix(): string {
         return this.info.stripCaseAndAccentsPrefix;
     }
+
+    get suggestionPrefix(): string {
+        return this.info.suggestionPrefix;
+    }
 }

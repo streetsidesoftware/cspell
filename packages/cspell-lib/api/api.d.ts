@@ -2498,6 +2498,7 @@ declare function getFileTypesForExt(ext: string): FileTypeId[];
 declare function findMatchingFileTypes(filename: string): FileTypeId[];
 //#endregion
 //#region ../cspell-trie-lib/dist/index.d.ts
+//#endregion
 //#region src/lib/distance/weightedMaps.d.ts
 
 /**

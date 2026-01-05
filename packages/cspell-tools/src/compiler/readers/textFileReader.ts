@@ -15,7 +15,7 @@ export async function textFileReader(filename: string): Promise<Reader> {
         lines: words,
         toTrie: () => {
             if (trie) return trie;
-            trie = parseDictionary(words, { stripCaseAndAccents: false });
+            trie = parseDictionary(words, { stripCaseAndAccents: false, optimize: true });
             return trie;
         },
     };

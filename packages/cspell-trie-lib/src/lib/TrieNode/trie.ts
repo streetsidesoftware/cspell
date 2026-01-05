@@ -148,6 +148,10 @@ class ImplITrieRoot extends ImplITrieNode implements ITrieNodeRoot {
         return this.root.stripCaseAndAccentsPrefix;
     }
 
+    get suggestionPrefix(): string {
+        return this.root.suggestionPrefix;
+    }
+
     static toITrieNode(node: TrieRoot): ITrieNodeRoot {
         return new this(node);
     }
