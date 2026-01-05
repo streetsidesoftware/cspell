@@ -3,7 +3,7 @@ Repository: slint-ui/slint
 Url: "https://github.com/slint-ui/slint"
 Args: ["--config=../../../../repositories/config/slint/cspell.config.yaml","--issues-summary-report","."]
 Lines:
- CSpell: Files checked: 2625, skipped: 3, Issues found: 5261 in 904 files.
+ CSpell: Files checked: 2627, skipped: 3, Issues found: 5280 in 907 files.
  exit code: 1
 CMakeLists.txt:17:14     - Unknown word (TOPLEVEL)   -- set(SLINT_IS_TOPLEVEL_BUILD TRUE)
 Cross.toml:6:29      - Unknown word (gnueabihf)  -- armv7-unknown-linux-gnueabihf]
@@ -1465,7 +1465,7 @@ docs/common/src/utils/slint.tmLanguage.json:587:956   - Unknown word (mediumorch
 docs/common/src/utils/slint.tmLanguage.json:587:969   - Unknown word (mediumpurple)         -- mediumblue|mediumorchid|mediumpurple|mediumseagreen|mediumslateblu
 docs/common/src/utils/slint.tmLanguage.json:587:982   - Unknown word (mediumseagreen)       -- mediumorchid|mediumpurple|mediumseagreen|mediumslateblue|mediumspringg
 docs/common/src/utils/slint.tmLanguage.json:587:997   - Unknown word (mediumslateblue)      -- mediumpurple|mediumseagreen|mediumslateblue|mediumspringgreen|mediumturqu
-docs/development.md:185:66    - Unknown word (gitk)       -- desktop.github.com) or [gitk](https://git-scm.com
+docs/development.md:188:66    - Unknown word (gitk)       -- desktop.github.com) or [gitk](https://git-scm.com
 docs/development.md:42:36     - Unknown word (corelib)    -- small as possible. **`corelib-macros`** contains some
 docs/install_qt.md:32:57     - Unknown word (qtbase)     -- modules, you just need `qtbase` (for QtWidgets) and
 docs/install_qt.md:32:86     - Unknown word (qtsvg)      -- for QtWidgets) and `qtsvg` for the SVG plugin
@@ -1587,8 +1587,9 @@ examples/7guis/circledraw.slint:86:21     - Unknown word (lightgray)  -- backgro
 examples/7guis/crud.rs:22:49     - Unknown word (Mustermann) -- to_string(), last: "Mustermann".to_string() },
 examples/7guis/crud.rs:23:51     - Unknown word (Tisch)      -- to_string(), last: "Tisch".to_string() },
 examples/7guis/tempconv.slint:6:15      - Unknown word (Conv)       -- component TempConv inherits Window {
+examples/README.md:117:17    - Unknown word (DCMAKE)           -- cmake -GNinja -DCMAKE_PREFIX_PATH="<path to
 examples/README.md:17:245    - Unknown word (manipulationsand) -- image crate to do image manipulationsand feed the result into
-examples/README.md:85:17     - Unknown word (DCMAKE)           -- cmake -GNinja -DCMAKE_PREFIX_PATH="<path to
+examples/README.md:41:4      - Unknown word (gstreamer)        -- | [gstreamer-player](./gstreamer
 examples/bash/README.md:16:24     - Unknown word (sysinfo)    -- `sysinfo_linux.sh`/`sysinfo_macos.sh`: show how
 examples/bash/README.md:16:5      - Unknown word (sysinfo)    -- * `sysinfo_linux.sh`/`sysinfo_macos
 examples/bash/README.md:21:54     - Unknown word (Noto)       -- u1f4bb.svg` from the Noto Emoji font from
@@ -1642,6 +1643,9 @@ examples/carousel/ui/carousel.slint:81:21     - Unknown word (swipping)   -- swi
 examples/carousel/ui/theme.slint:41:41     - Unknown word (Roboto)     -- string> font-family: "Roboto";
 examples/carousel/ui/theme.slint:4:15      - Unknown word (Roboto)     -- import "fonts/Roboto-Regular.ttf";
 examples/carousel/ui/theme.slint:5:15      - Unknown word (Roboto)     -- import "fonts/Roboto-Bold.ttf";
+examples/cpp/README.md:15:4      - Unknown word (windowadapter) -- - `windowadapter_win.h` - Slint platform
+examples/cpp/README.md:16:4      - Unknown word (appview)       -- - `appview.h/cpp` - Interface between
+examples/cpp/README.md:26:138    - Unknown word (qwidget)       -- :ComponentInstance::qwidget()`.
 examples/cpp/platform_native/CMakeLists.txt:5:47      - Unknown word (appview)    -- native WIN32 main.cpp appview.cpp)
 examples/cpp/platform_native/README.md:5:4       - Unknown word (appview)    -- - appview.h is an interface that
 examples/cpp/platform_native/README.md:7:4       - Unknown word (appview)    -- - appview.cpp is the implementation
@@ -3233,7 +3237,7 @@ internal/compiler/layout.rs:507:9     - Unknown word (elems)      -- pub elems: 
 internal/compiler/layout.rs:513:31    - Unknown word (elems)      -- for cell in &mut self.elems {
 internal/compiler/lexer.rs:197:31    - Unknown word (FEFF)       -- source.starts_with("\u{FEFF}") {
 internal/compiler/lexer.rs:337:66    - Unknown word (rfind)      -- begin..(begin + m)].rfind(['\\', '\n', '/', '
-internal/compiler/lib.rs:125:27    - Unknown word (inlines)        -- / Run the pass that inlines all the elements.
+internal/compiler/lib.rs:141:27    - Unknown word (inlines)        -- / Run the pass that inlines all the elements.
 internal/compiler/lib.rs:25:9      - Unknown word (fileaccess) -- pub mod fileaccess;
 internal/compiler/lib.rs:27:9      - Unknown word (langtype)   -- pub mod langtype;
 internal/compiler/lib.rs:34:9      - Unknown word (namedreference) -- pub mod namedreference;
@@ -3340,14 +3344,19 @@ internal/compiler/passes/lower_menus.rs:389:22    - Unknown word (supportes)  --
 internal/compiler/passes/lower_menus.rs:392:26    - Unknown word (supportes)  -- None => Some(supportes_native_menu_bar),
 internal/compiler/passes/lower_menus.rs:397:33    - Unknown word (menulayout) -- format_smolstr!("{}-menulayout", window.id),
 internal/compiler/passes/remove_return.rs:518:21    - Unknown word (conv)       -- "tmpobj_ret_conv_{}",
-internal/compiler/passes/resolving.rs:1371:13   - Unknown word (unaryop)    -- fn from_unaryop_expression_node(
-internal/compiler/passes/resolving.rs:1706:17   - Unknown word (depr)       -- if let Some(depr) = result.deprecated
-internal/compiler/passes/resolving.rs:1707:64   - Unknown word (depr)       -- warning(&first_str, depr, &first);
-internal/compiler/passes/resolving.rs:1933:32   - Unknown word (descr)      -- let ty_descr = match expression.ty
-internal/compiler/passes/resolving.rs:1952:87   - Unknown word (descr)      -- }", next.text(), ty_descr),
+internal/compiler/passes/resolving.rs:1373:13   - Unknown word (unaryop)    -- fn from_unaryop_expression_node(
+internal/compiler/passes/resolving.rs:1708:17   - Unknown word (depr)       -- if let Some(depr) = result.deprecated
+internal/compiler/passes/resolving.rs:1709:64   - Unknown word (depr)       -- warning(&first_str, depr, &first);
+internal/compiler/passes/resolving.rs:1935:32   - Unknown word (descr)      -- let ty_descr = match expression.ty
+internal/compiler/passes/resolving.rs:1954:87   - Unknown word (descr)      -- }", next.text(), ty_descr),
 internal/compiler/passes/resolving/remove_noop.rs:53:48     - Unknown word (efffects)   -- because they may have side-efffects.
 internal/compiler/passes/z_order.rs:19:33     - Unknown word (zorder)     -- reorder_children_by_zorder(elem, diag);
 internal/compiler/passes/z_order.rs:24:24     - Unknown word (zorder)     -- reorder_children_by_zorder(
+internal/compiler/tests/syntax/analysis/binding_loop_image.slint:12:159    - Unknown word (layoutinfo) -- source-clip-height -> layoutinfo-v -> preferred-height
+internal/compiler/tests/syntax/analysis/binding_loop_image.slint:16:108    - Unknown word (layoutinfo) -- source-clip-height -> layoutinfo-v -> preferred-height
+internal/compiler/tests/syntax/analysis/binding_loop_image.slint:16:42     - Unknown word (layoutinfo) -- binding for the property 'layoutinfo-v' is part of a binding
+internal/compiler/tests/syntax/analysis/binding_loop_image.slint:7:129     - Unknown word (layoutinfo) -- source-clip-height -> layoutinfo-v -> preferred-height
+internal/compiler/tests/syntax/analysis/binding_loop_image.slint:7:63      - Unknown word (layoutinfo) -- binding for the property 'layoutinfo-v' is part of a binding
 internal/compiler/tests/syntax/analysis/binding_loop_layout.slint:6:186     - Unknown word (layoutinfo) -- inner.width -> inner.layoutinfo-h -> outer.layoutinfo
 internal/compiler/tests/syntax/analysis/binding_loop_layout.slint:6:208     - Unknown word (layoutinfo) -- layoutinfo-h -> outer.layoutinfo-h -> tc.layoutinfo-h
 internal/compiler/tests/syntax/analysis/binding_loop_layout.slint:6:227     - Unknown word (layoutinfo) -- outer.layoutinfo-h -> tc.layoutinfo-h)}
@@ -3613,9 +3622,10 @@ internal/core-macros/link-data.json:108:35    - Unknown word (contextmenuarea)  
 internal/core-macros/link-data.json:132:35    - Unknown word (popupwindow)      -- : "reference/window/popupwindow/"
 internal/core-macros/link-data.json:135:54    - Unknown word (progressindicator) -- widgets/basic-widgets/progressindicator/"
 internal/core-macros/link-data.json:156:54    - Unknown word (standardbutton)    -- widgets/basic-widgets/standardbutton/"
-internal/core-macros/link-data.json:174:43    - Unknown word (textinput)         -- reference/keyboard-input/textinput/"
-internal/core-macros/link-data.json:183:48    - Unknown word (verticalbox)       -- std-widgets/layouts/verticalbox/"
-internal/core-macros/link-data.json:186:36    - Unknown word (verticallayout)    -- "reference/layouts/verticallayout/"
+internal/core-macros/link-data.json:168:48    - Unknown word (stylemetrics)      -- std-widgets/globals/stylemetrics/"
+internal/core-macros/link-data.json:177:43    - Unknown word (textinput)         -- reference/keyboard-input/textinput/"
+internal/core-macros/link-data.json:186:48    - Unknown word (verticalbox)       -- std-widgets/layouts/verticalbox/"
+internal/core-macros/link-data.json:189:36    - Unknown word (verticallayout)    -- "reference/layouts/verticallayout/"
 internal/core-macros/link-data.json:42:45     - Unknown word (builtinfunctions) -- reference/global-functions/builtinfunctions/#debug"
 internal/core-macros/link-data.json:51:50     - Unknown word (eventresult)      -- global-structs-enums/#eventresult"
 internal/core-macros/link-data.json:60:50     - Unknown word (focusreason)      -- global-structs-enums/#focusreason"
@@ -3859,22 +3869,22 @@ internal/core/window.rs:415:27    - Unknown word (behaviour)  -- / Defines the c
 internal/core/window.rs:441:11    - Unknown word (datastructure) -- /// Inner datastructure for the [`crate::api
 internal/core/window/popup.rs:4:5       - Unknown word (Pupup)      -- //! Pupup window handling helpers
 internal/core/window/popup.rs:59:27     - Unknown word (unclipped)  -- test_place_popup_fixed_unclipped() {
-internal/interpreter/api.rs:1056:61   - Unknown word (compilerlib) -- exposes the `Type` from compilerlib.
-internal/interpreter/api.rs:1129:61   - Unknown word (compilerlib) -- exposes the `Type` from compilerlib.
-internal/interpreter/api.rs:1765:32   - Unknown word (underscoresanddashespreserved) -- instance.get_property("underscoresanddashespreserved"),
-internal/interpreter/api.rs:1773:32   - Unknown word (underscoresanddashespreserved) -- instance.set_property("underscoresanddashespreserved", Value::Number(99.
-internal/interpreter/api.rs:1794:31   - Unknown word (xreadonly)                     -- out property <string> xreadonly: "the value";
-internal/interpreter/api.rs:1810:29   - Unknown word (xreadonly)                     -- assert_eq!(props[1].0, "xreadonly");
-internal/interpreter/api.rs:1818:32   - Unknown word (xreadonly)                     -- instance.set_property("xreadonly", SharedString::from
-internal/interpreter/api.rs:1821:39   - Unknown word (xreadonly)                     -- instance.get_property("xreadonly"), Ok(Value::String
-internal/interpreter/api.rs:1897:39   - Unknown word (Dont)                          -- set_global_property("DontExist", "the-property
-internal/interpreter/api.rs:1902:58   - Unknown word (theproperty)                   -- "My_Super-Global", "theproperty", Value::Number(88.
-internal/interpreter/api.rs:1906:56   - Unknown word (theproperty)                   -- property("AliasedGlobal", "theproperty", Value::Number(88.
-internal/interpreter/api.rs:1914:58   - Unknown word (yoyo)                          -- "My-Super_Global", "yoyo"),
-internal/interpreter/api.rs:1929:39   - Unknown word (Dont)                          -- set_global_callback("DontExist", "the-property
-internal/interpreter/api.rs:1937:58   - Unknown word (yoyo)                          -- "My_Super_Global", "yoyo", |_| panic!()),
-internal/interpreter/api.rs:1942:33   - Unknown word (Dont)                          -- instance.invoke_global("DontExist", "the-property
-internal/interpreter/api.rs:1950:52   - Unknown word (yoyo)                          -- "My_Super_Global", "yoyo", &[]),
+internal/interpreter/api.rs:1063:61   - Unknown word (compilerlib) -- exposes the `Type` from compilerlib.
+internal/interpreter/api.rs:1136:61   - Unknown word (compilerlib) -- exposes the `Type` from compilerlib.
+internal/interpreter/api.rs:1772:32   - Unknown word (underscoresanddashespreserved) -- instance.get_property("underscoresanddashespreserved"),
+internal/interpreter/api.rs:1780:32   - Unknown word (underscoresanddashespreserved) -- instance.set_property("underscoresanddashespreserved", Value::Number(99.
+internal/interpreter/api.rs:1801:31   - Unknown word (xreadonly)                     -- out property <string> xreadonly: "the value";
+internal/interpreter/api.rs:1817:29   - Unknown word (xreadonly)                     -- assert_eq!(props[1].0, "xreadonly");
+internal/interpreter/api.rs:1825:32   - Unknown word (xreadonly)                     -- instance.set_property("xreadonly", SharedString::from
+internal/interpreter/api.rs:1828:39   - Unknown word (xreadonly)                     -- instance.get_property("xreadonly"), Ok(Value::String
+internal/interpreter/api.rs:1904:39   - Unknown word (Dont)                          -- set_global_property("DontExist", "the-property
+internal/interpreter/api.rs:1909:58   - Unknown word (theproperty)                   -- "My_Super-Global", "theproperty", Value::Number(88.
+internal/interpreter/api.rs:1913:56   - Unknown word (theproperty)                   -- property("AliasedGlobal", "theproperty", Value::Number(88.
+internal/interpreter/api.rs:1921:58   - Unknown word (yoyo)                          -- "My-Super_Global", "yoyo"),
+internal/interpreter/api.rs:1936:39   - Unknown word (Dont)                          -- set_global_callback("DontExist", "the-property
+internal/interpreter/api.rs:1944:58   - Unknown word (yoyo)                          -- "My_Super_Global", "yoyo", |_| panic!()),
+internal/interpreter/api.rs:1949:33   - Unknown word (Dont)                          -- instance.invoke_global("DontExist", "the-property
+internal/interpreter/api.rs:1957:52   - Unknown word (yoyo)                          -- "My_Super_Global", "yoyo", &[]),
 internal/interpreter/dynamic_item_tree.rs:2197:18   - Unknown word (ctypes)     -- #[allow(improper_ctypes_definitions)]
 internal/interpreter/eval.rs:1546:17   - Unknown word (textinput)  -- if let Some(textinput) = ItemRef::downcast
 internal/interpreter/eval.rs:1548:29   - Unknown word (textinput)  -- "select-all" => textinput.select_all(&window_adapter
@@ -4484,6 +4494,10 @@ tests/cases/interfaces/implements.slint:1:53      - Unknown word (KDAB)         
 tests/cases/interfaces/uses.slint:1:21      - Unknown word (Klarälvdalens) -- // Copyright © 2025 Klarälvdalens Datakonsult AB, a KDAB
 tests/cases/interfaces/uses.slint:1:35      - Unknown word (Datakonsult)   -- 2025 Klarälvdalens Datakonsult AB, a KDAB Group company
 tests/cases/interfaces/uses.slint:1:53      - Unknown word (KDAB)          -- arälvdalens Datakonsult AB, a KDAB Group company <info
+tests/cases/issues/issue_10923_popupwindow-reshow.slint:24:25     - Unknown word (lightskyblue) -- background: lightskyblue;
+tests/cases/issues/issue_10923_popupwindow-reshow.slint:63:1      - Unknown word (slintlib)     -- slintlib.private_api.send_mouse
+tests/cases/issues/issue_10923_popupwindow-reshow.slint:64:1      - Unknown word (slintlib)     -- slintlib.private_api.send_mouse
+tests/cases/issues/issue_10923_popupwindow-reshow.slint:66:1      - Unknown word (slintlib)     -- slintlib.private_api.send_mouse
 tests/cases/issues/issue_2780_listview_crash.slint:20:117    - Unknown word (aliceblue)  -- Colors.orange, Colors.aliceblue, Colors.limegreen];
 tests/cases/issues/issue_2780_listview_crash.slint:20:135    - Unknown word (limegreen)  -- Colors.aliceblue, Colors.limegreen];
 tests/cases/issues/issue_3561_return_image.slint:48:62     - Unknown word (whitebg)    -- logo/slint-logo-full-whitebg.png");
@@ -4782,14 +4796,14 @@ tests/cases/widgets/timepicker.slint:42:25     - Unknown word (timepicker) -- as
 tests/cases/widgets/timepicker.slint:57:25     - Unknown word (timepicker) -- assert_eq(instance->get_timepicker_created(), true);
 tests/cases/widgets/timepicker.slint:8:28      - Unknown word (timepicker) -- out property <bool> timepicker-created;
 tests/doctests/main.rs:4:19      - Unknown word (codepoints) -- #![allow(uncommon_codepoints)]
-tests/driver/cpp/cppdriver.rs:138:32    - Unknown word (Werror)     -- compiler_command.arg("-Werror").arg("-Wall").arg(
-tests/driver/cpp/cppdriver.rs:138:60    - Unknown word (Wextra)     -- .arg("-Wall").arg("-Wextra");
-tests/driver/cpp/cppdriver.rs:140:32    - Unknown word (lslint)     -- compiler_command.arg("-lslint_cpp");
-tests/driver/cpp/cppdriver.rs:170:26    - Unknown word (exitcode)   -- cmd.arg("--error-exitcode=1");
-tests/driver/cpp/cppdriver.rs:205:11    - Unknown word (DYLD)       -- ("DYLD_FALLBACK_LIBRARY_PATH
-tests/driver/cpp/cppdriver.rs:73:8      - Unknown word (NDEBUG)     -- #ifdef NDEBUG
-tests/driver/cpp/cppdriver.rs:74:8      - Unknown word (NDEBUG)     -- #undef NDEBUG
-tests/driver/cpp/cppdriver.rs:77:11     - Unknown word (cmath)      -- #include <cmath>
+tests/driver/cpp/cppdriver.rs:139:32    - Unknown word (Werror)     -- compiler_command.arg("-Werror").arg("-Wall").arg(
+tests/driver/cpp/cppdriver.rs:139:60    - Unknown word (Wextra)     -- .arg("-Wall").arg("-Wextra");
+tests/driver/cpp/cppdriver.rs:141:32    - Unknown word (lslint)     -- compiler_command.arg("-lslint_cpp");
+tests/driver/cpp/cppdriver.rs:171:26    - Unknown word (exitcode)   -- cmd.arg("--error-exitcode=1");
+tests/driver/cpp/cppdriver.rs:206:11    - Unknown word (DYLD)       -- ("DYLD_FALLBACK_LIBRARY_PATH
+tests/driver/cpp/cppdriver.rs:74:8      - Unknown word (NDEBUG)     -- #ifdef NDEBUG
+tests/driver/cpp/cppdriver.rs:75:8      - Unknown word (NDEBUG)     -- #undef NDEBUG
+tests/driver/cpp/cppdriver.rs:78:11     - Unknown word (cmath)      -- #include <cmath>
 tests/driver/cpp/main.rs:5:5       - Unknown word (cppdriver)  -- mod cppdriver;
 tests/driver/driverlib/lib.rs:37:53     - Unknown word (subfolders) -- slint` files in the subfolders e.g. `tests/cases`
 tests/driver/interpreter/main.rs:34:23     - Unknown word (usecases)   -- test_example!(example_usecases, "demos/usecases/ui
@@ -4905,16 +4919,22 @@ tests/screenshots/cases/text/text-input-selection.slint:28:16     - Unknown word
 tools/compiler/main.rs:11:16     - Unknown word (jemalloc)   -- feature = "jemalloc",
 tools/compiler/main.rs:14:24     - Unknown word (Jemalloc)   -- use tikv_jemallocator::Jemalloc;
 tools/compiler/main.rs:17:16     - Unknown word (jemalloc)   -- feature = "jemalloc",
-tools/compiler/main.rs:217:17    - Unknown word (depfile)    -- if let Some(depfile) = args.depfile {
-tools/compiler/main.rs:217:33    - Unknown word (depfile)    -- Some(depfile) = args.depfile {
-tools/compiler/main.rs:218:58    - Unknown word (depfile)    -- std::fs::File::create(depfile)?);
 tools/compiler/main.rs:21:16     - Unknown word (Jemalloc)   -- static GLOBAL: Jemalloc = Jemalloc;
 tools/compiler/main.rs:21:27     - Unknown word (Jemalloc)   -- static GLOBAL: Jemalloc = Jemalloc;
+tools/compiler/main.rs:221:17    - Unknown word (depfile)    -- if let Some(depfile) = args.depfile {
+tools/compiler/main.rs:221:33    - Unknown word (depfile)    -- Some(depfile) = args.depfile {
+tools/compiler/main.rs:222:58    - Unknown word (depfile)    -- std::fs::File::create(depfile)?);
 tools/compiler/main.rs:76:19     - Unknown word (depfile)    -- #[arg(long = "depfile", name = "dependency
 tools/compiler/main.rs:77:5      - Unknown word (depfile)    -- depfile: Option<std::path::PathBuf
 tools/compiler/pyproject.toml:23:7      - Unknown word (maturin)    -- [tool.maturin]
 tools/compiler/pyproject.toml:5:14      - Unknown word (maturin)    -- requires = ["maturin>=1.9,<2.0"]
 tools/compiler/pyproject.toml:6:18      - Unknown word (maturin)    -- build-backend = "maturin"
+tools/docsnapper/README.md:14:19     - Unknown word (headlessly) -- 4. Renders the UI headlessly with the Skia renderer
+tools/docsnapper/README.md:1:3       - Unknown word (Docsnapper) -- # Docsnapper
+tools/docsnapper/README.md:42:7      - Unknown word (docsnapper) -- slint-docsnapper <docs-folder> [options
+tools/docsnapper/README.md:59:7      - Unknown word (docsnapper) -- slint-docsnapper docs/astro/src/content
+tools/docsnapper/README.md:62:7      - Unknown word (docsnapper) -- slint-docsnapper docs/astro/src/content
+tools/docsnapper/README.md:68:22     - Unknown word (docsnapper) -- cargo build -p slint-docsnapper --release
 tools/docsnapper/headless.rs:153:58    - Unknown word (Deque)      -- std::collections::VecDeque<Event>>>,
 tools/docsnapper/headless.rs:160:16    - Unknown word (unpark)     -- self.1.unpark();
 tools/docsnapper/headless.rs:169:16    - Unknown word (unpark)     -- self.1.unpark();
@@ -5080,14 +5100,14 @@ tools/viewer/main.rs:131:9     - Unknown word (fswatcher)  -- let fswatcher = if
 tools/viewer/main.rs:132:41    - Unknown word (fswatcher)  -- init_compiler(&args, fswatcher);
 tools/viewer/main.rs:188:5     - Unknown word (fswatcher)  -- fswatcher: Option<Arc<Mutex<notify
 tools/viewer/main.rs:19:24     - Unknown word (Jemalloc)   -- use tikv_jemallocator::Jemalloc;
-tools/viewer/main.rs:209:28    - Unknown word (fswatcher)  -- let Some(watcher) = fswatcher {
+tools/viewer/main.rs:210:28    - Unknown word (fswatcher)  -- let Some(watcher) = fswatcher {
 tools/viewer/main.rs:23:16     - Unknown word (Jemalloc)   -- static GLOBAL: Jemalloc = Jemalloc;
 tools/viewer/main.rs:23:27     - Unknown word (Jemalloc)   -- static GLOBAL: Jemalloc = Jemalloc;
-tools/viewer/main.rs:283:10    - Unknown word (fswatch)    -- fn start_fswatch_thread(args: Cli) -
-tools/viewer/main.rs:308:28    - Unknown word (fswatcher)  -- fn reload(args: Cli, fswatcher: Arc<Mutex<notify::Recommende
+tools/viewer/main.rs:284:10    - Unknown word (fswatch)    -- fn start_fswatch_thread(args: Cli) -
+tools/viewer/main.rs:309:28    - Unknown word (fswatcher)  -- fn reload(args: Cli, fswatcher: Arc<Mutex<notify::Recommende
 ui-libraries/material/docs/MIGRATION.md:65:6      - Unknown word (twelf)      -- - `twelf_hour_model` → `twelfth
 ui-libraries/material/docs/MIGRATION.md:67:11     - Unknown word (labl)       -- - `hour_labl` → `hour_label` (typo
-ui-libraries/material/docs/README.md:48:35     - Unknown word (Lmaterial)  -- slint-docsnapper -- -Lmaterial=$PWD/src/material.slint
+ui-libraries/material/docs/README.md:47:35     - Unknown word (Lmaterial)  -- slint-docsnapper -- -Lmaterial=$PWD/ui-libraries/material
 ui-libraries/material/docs/astro.config.ts:15:33     - Unknown word (partytown)  -- partytown from "@astrojs/partytown";
 ui-libraries/material/docs/astro.config.ts:15:8      - Unknown word (partytown)  -- import partytown from "@astrojs/partytown
 ui-libraries/material/docs/astro.config.ts:175:17    - Unknown word (tabler)     -- tabler: ["*"],
@@ -5227,7 +5247,6 @@ ui-libraries/material/docs/src/utils/link-data.json:93:55     - Unknown word (li
 ui-libraries/material/docs/src/utils/link-data.json:99:35     - Unknown word (contextmenuarea)  -- : "reference/window/contextmenuarea/#menu"
 ui-libraries/material/docs/src/utils/permalinks.ts:3:22      - Unknown word (limax)      -- import slugify from "limax";
 ui-libraries/material/docs/src/utils/permalinks.ts:5:33      - Unknown word (astrowind)  -- SITE, APP_BLOG } from "astrowind:config";
-ui-libraries/material/docs/src/utils/utils.ts:243:23    - Unknown word (astrowind)  -- import { I18N } from "astrowind:config";
 ui-libraries/material/docs/vendor/integration/index.ts:15:16     - Unknown word (astrowind)  -- name: "astrowind-integration",
 ui-libraries/material/docs/vendor/integration/index.ts:27:50     - Unknown word (astrowind)  -- buildLogger = logger.fork("astrowind");
 ui-libraries/material/docs/vendor/integration/index.ts:29:42     - Unknown word (astrowind)  -- const virtualModuleId = "astrowind:config";
