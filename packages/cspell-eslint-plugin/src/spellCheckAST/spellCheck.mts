@@ -155,32 +155,18 @@ function getDocValidator(filename: string, text: string, options: SpellCheckOpti
     return validator;
 }
 
-type ReportTypes = Exclude<Options['report'], undefined>;
+export type ReportTypes = Exclude<Options['report'], undefined>;
 
 type MapReportToUnknownWordChoices = {
     [key in ReportTypes]: UnknownWordsChoices;
 };
 
-const mapReportToUnknownWordChoices = {
+export const mapReportToUnknownWordChoices: MapReportToUnknownWordChoices = {
     all: 'report-all',
     simple: 'report-simple',
     typos: 'report-common-typos',
     flagged: 'report-flagged',
-} as const satisfies MapReportToUnknownWordChoices;
-
-type MapReportToUnknownWordChoicesConst = typeof mapReportToUnknownWordChoices;
-
-type MapReportToUnknownWordChoicesRev = {
-    [v in keyof MapReportToUnknownWordChoicesConst as MapReportToUnknownWordChoicesConst[v]]: v;
-};
-
-/**
- * This function is just used
- */
-function _mapUnknownWordToReportTypes(k: UnknownWordsChoices, map: MapReportToUnknownWordChoicesRev): ReportTypes {
-    // This will not compile if A new value was added to UnknownWordsChoices and was not added to mapReportToUnknownWordChoices
-    return map[k];
-}
+} as const;
 
 function mapReportToUnknownWords(report?: Options['report']): Pick<CSpellSettings, 'unknownWords'> {
     const unknownWords = report ? mapReportToUnknownWordChoices[report] : undefined;

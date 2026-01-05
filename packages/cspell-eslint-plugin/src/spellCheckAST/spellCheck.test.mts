@@ -2,7 +2,23 @@ import 'mocha';
 
 import assert from 'node:assert';
 
-import { spellCheck, type SpellCheckOptions } from './spellCheck.mjs';
+import type { UnknownWordsChoices } from 'cspell-lib';
+
+import type { ReportTypes} from './spellCheck.mjs';
+import { type mapReportToUnknownWordChoices, spellCheck, type SpellCheckOptions } from './spellCheck.mjs';
+
+type MapReportToUnknownWordChoicesConst = typeof mapReportToUnknownWordChoices;
+
+type MapReportToUnknownWordChoicesRev = {
+    [v in keyof MapReportToUnknownWordChoicesConst as MapReportToUnknownWordChoicesConst[v]]: v;
+};
+/**
+ * This function is just used
+ */
+function _mapUnknownWordToReportTypes(k: UnknownWordsChoices, map: MapReportToUnknownWordChoicesRev): ReportTypes {
+    // This will not compile if A new value was added to UnknownWordsChoices and was not added to mapReportToUnknownWordChoices
+    return map[k];
+}
 
 const defaultOptions: SpellCheckOptions = {
     numSuggestions: 8,
