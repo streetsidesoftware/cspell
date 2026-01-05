@@ -3,6 +3,8 @@ import type { ITrieNode, ITrieNodeRoot } from '../ITrieNode/index.ts';
 import type { PartialTrieInfo, TrieCharacteristics, TrieInfo } from '../ITrieNode/TrieInfo.ts';
 import { normalizeTrieInfo, TrieInfoBuilder } from '../ITrieNode/TrieInfo.ts';
 import { StringTableBuilder } from '../StringTable/StringTable.ts';
+import { trieRootToITrieRoot } from '../TrieNode/trie.ts';
+import type { TrieRoot } from '../TrieNode/TrieNode.ts';
 import { assert } from '../utils/assert.ts';
 import { assertValidUtf16Character } from '../utils/text.ts';
 import { CharIndexBuilder } from './CharIndex.ts';
@@ -341,6 +343,14 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
             ? optimizeNodesWithStringTable({ nodes: sortedNodes, stringTable })
             : { nodes: sortedNodes, stringTable };
 
+        // console.log('TrieBlobBuilder.build: %o', {
+        //     optimize,
+        //     size: r.nodes.reduce((sum, n) => sum + n.length, 0),
+        //     numNodes: r.nodes.length,
+        //     stringTableSize: r.stringTable.length,
+        //     strLenBits: r.stringTable.strLenBits,
+        // });
+
         return toTrieBlob(r.nodes, r.stringTable, normalizeTrieInfo(info.info));
     }
 
@@ -365,6 +375,10 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
     ): TrieBlob {
         const ft = new TrieBlobBuilder(options);
         return ft.insert(words).build(optimize);
+    }
+
+    static fromTrieRoot(root: TrieRoot, optimize?: boolean): TrieBlob {
+        return this.fromITrieRoot(trieRootToITrieRoot(root), optimize);
     }
 
     static fromITrieRoot(root: ITrieNodeRoot, optimize?: boolean): TrieBlob {

@@ -154,7 +154,7 @@ describe('FastTrieBlobBuilder', () => {
         const words = sampleWords();
         const trie = buildTrie(words, false);
         const iTrieRoot = trieRootToITrieRoot(trie);
-        const t = createTrieBlobFromTrieRoot(trie, false);
+        const t = TrieBlobBuilder.fromTrieRoot(trie, false);
         const sortedUnique = [...new Set(words)].sort();
         expect([...t.words()].sort()).toEqual(sortedUnique);
 

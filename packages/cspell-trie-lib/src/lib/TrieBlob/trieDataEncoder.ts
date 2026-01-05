@@ -3,7 +3,7 @@ import { TrieBlob } from './TrieBlob.ts';
 import { TrieBlobBuilder } from './TrieBlobBuilder.ts';
 
 export function encodeTrieDataToBTrie(data: TrieData, optimize?: boolean): Uint8Array<ArrayBuffer> {
-    if (data.encodeToBTrie) {
+    if (!optimize && data.encodeToBTrie) {
         return data.encodeToBTrie();
     }
 
