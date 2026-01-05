@@ -59,6 +59,12 @@ describe('StringTableBuilder', () => {
 
         const retrieved = indices.map((i) => table.getString(i));
         expect(retrieved).toEqual(segments);
+
+        expect(table.bitInfo()).toEqual({
+            minIndexBits: 11,
+            offsetBits: 7,
+            strLenBits: 4,
+        });
     });
 
     test('encode and decode StringTable', () => {

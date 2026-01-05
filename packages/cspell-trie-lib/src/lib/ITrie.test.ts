@@ -2,7 +2,7 @@ import { describe, expect, test } from 'vitest';
 
 import { defaultTrieInfo } from './constants.ts';
 import type { ITrie } from './ITrie.ts';
-import { ITrieImpl as ITrieClass } from './ITrie.ts';
+import { ITrieImpl as ITrieClass, iTrieToStructuredStringLines } from './ITrie.ts';
 import type { ITrieNode } from './ITrieNode/ITrieNode.ts';
 import { parseDictionary, parseDictionaryLegacy } from './SimpleDictionaryParser.ts';
 import type { SuggestionOptions } from './suggestions/genSuggestionsOptions.ts';
@@ -417,6 +417,37 @@ describe('Validate Trie Class', () => {
         expect(trie.find('playtime', 99)?.f).toBeUndefined();
         expect(trie.find('play+time', true)?.f).toBe(1);
         expect(trie.find('play++time', true)?.f).toBe(1);
+    });
+
+    test('iTrieToStringLines', () => {
+        const words = `
+            # Sample Word List
+            !playtime
+            begin
+            beginning
+            end
+            ending
+            café
+            cafe
+            time
+            ride
+            hide
+            riding
+        `;
+
+        const trie = parseDictionary(words);
+        const trieForceOptimize = parseDictionary(words, { optimize: true });
+        const trieWithStringTable = parseDictionary(words, { optimize: true, useStringTable: true });
+
+        const expected = iTrieToStructuredStringLines(trie, false);
+        const expectedWithId = iTrieToStructuredStringLines(trie, true);
+
+        expect(iTrieToStructuredStringLines(trieForceOptimize, false)).toEqual(expected);
+        // small word list are auto optimized, so we expect the same result
+        expect(iTrieToStructuredStringLines(trieForceOptimize, true)).toEqual(expectedWithId);
+        expect(iTrieToStructuredStringLines(trieWithStringTable, false)).toEqual(expected);
+        // Uses a string table, so we expect a different result
+        expect(iTrieToStructuredStringLines(trieWithStringTable, true)).not.toEqual(expectedWithId);
     });
 });
 

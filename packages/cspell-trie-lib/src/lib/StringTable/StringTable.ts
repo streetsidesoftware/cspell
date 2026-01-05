@@ -82,6 +82,13 @@ export class StringTable {
         return this.#data.byteLength;
     }
 
+    bitInfo(): { strLenBits: number; offsetBits: number; minIndexBits: number } {
+        const strLenBits = this.strLenBits;
+        const offsetBits = Math.ceil(Math.log2(this.charData.length + 1));
+        const minIndexBits = strLenBits + offsetBits;
+        return { strLenBits, offsetBits, minIndexBits };
+    }
+
     values(): U8Array[] {
         return [...this.#index].map((v) => this.#getBytesByIndexValue(v));
     }

@@ -105,7 +105,7 @@ describe('TrieBlob ITrie support methods', () => {
     test('getChildrenFromRef optimized', () => {
         const words = getWordsForDictionary();
         const firstChars = [...new Set(words.map((w) => [...w][0]))].sort();
-        const t = TrieBlobBuilder.fromWordList(words, undefined, true);
+        const t = TrieBlobBuilder.fromWordList(words, undefined, { useStringTable: true, optimize: true });
 
         const rootRef = t.rootRef;
 
@@ -158,7 +158,7 @@ describe('TrieBlob encode/decode', async () => {
 
     test('encode optimize hexDump', () => {
         const words = ['apple', 'banana', 'grape', 'orange', 'strawberry'];
-        const tb = TrieBlobBuilder.fromWordList(words, undefined, true);
+        const tb = TrieBlobBuilder.fromWordList(words, undefined, { useStringTable: true, optimize: true });
         const bin = tb.encodeToBTrie();
         const r = TrieBlob.decodeBin(bin);
         expect([...r.words()]).toEqual(words);

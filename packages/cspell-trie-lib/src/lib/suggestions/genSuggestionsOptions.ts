@@ -1,4 +1,5 @@
 import type { WeightMap } from '../distance/index.ts';
+import { isDebuggerAttached } from '../utils/debugger.ts';
 import { CompoundWordsMethod } from '../walker/index.ts';
 
 export interface GenSuggestionOptionsStrict {
@@ -75,7 +76,9 @@ export const defaultSuggestionOptions: SuggestionOptionsStrictRO = {
     ...defaultGenSuggestionOptions,
     numSuggestions: 8,
     includeTies: true,
-    timeout: 5000,
+    get timeout() {
+        return isDebuggerAttached() ? 1_000_000 : 1000;
+    },
 };
 
 type KeyOfGenSuggestionOptionsStrict = keyof GenSuggestionOptionsStrict;

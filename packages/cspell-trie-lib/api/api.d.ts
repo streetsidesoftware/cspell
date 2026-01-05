@@ -1,6 +1,20 @@
 import { DictionaryDefinitionAugmented, SuggestionCostMapDef } from "@cspell/cspell-types";
 import { Operator } from "@cspell/cspell-pipe/sync";
 
+//#region src/lib/BuildOptions.d.ts
+interface BuildOptions {
+  /**
+  * Optimize the trie for size by merging duplicate sub-tries and using a String Table.
+  * @default false
+  */
+  optimize?: boolean | undefined;
+  /**
+  * Use a string table to reduce memory usage.
+  * @default false
+  */
+  useStringTable?: boolean | undefined;
+}
+//#endregion
 //#region src/lib/distance/weightedMaps.d.ts
 
 /**
@@ -578,7 +592,7 @@ interface FindWordOptions {
 type FindWordOptionsRO = Readonly<FindWordOptions>;
 //#endregion
 //#region src/lib/buildITrie.d.ts
-declare function buildITrieFromWords(words: Iterable<string>, info?: PartialTrieInfo, optimize?: boolean): ITrie;
+declare function buildITrieFromWords(words: Iterable<string>, info?: PartialTrieInfo, buildOptions?: BuildOptions): ITrie;
 //#endregion
 //#region src/lib/consolidate.d.ts
 /**
@@ -726,7 +740,7 @@ declare class Trie {
 }
 //#endregion
 //#region src/lib/SimpleDictionaryParser.d.ts
-interface ParseDictionaryOptions {
+interface ParseDictionaryOptions extends BuildOptions {
   compoundCharacter: string;
   optionalCompoundCharacter: string;
   forbiddenPrefix: string;
@@ -797,6 +811,11 @@ interface ParseDictionaryOptions {
   * @default false
   */
   optimize?: boolean;
+  /**
+  * Use a string table to reduce memory usage.
+  * @default false
+  */
+  useStringTable?: boolean;
 }
 /**
 * Normalizes a dictionary words based upon prefix / suffixes.
@@ -817,7 +836,7 @@ declare function parseDictionaryLegacy(text: string | string[], options?: Partia
 declare function parseDictionary(text: string | Iterable<string>, options?: Partial<ParseDictionaryOptions>): ITrie;
 //#endregion
 //#region src/lib/TrieBlob/trieDataEncoder.d.ts
-declare function encodeTrieDataToBTrie(data: TrieData, optimize?: boolean): Uint8Array<ArrayBuffer>;
+declare function encodeTrieDataToBTrie(data: TrieData, buildOptions?: BuildOptions): Uint8Array<ArrayBuffer>;
 //#endregion
 //#region src/lib/TrieBuilder.d.ts
 /**

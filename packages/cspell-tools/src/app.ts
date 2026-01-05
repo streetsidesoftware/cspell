@@ -123,6 +123,7 @@ export async function run(program: Command, argv: string[], flags?: FeatureFlags
         .description('Generate BTrie files from word list files.')
         .option('-n, --no-compress', 'By default the files are GZipped, this will turn off GZ compression.')
         .option('--no-optimize', 'Do not try to optimize.')
+        .option('--no-string-table', 'Do not use a string table in the BTrie.')
         .action(generateBTrie);
 
     program

@@ -1,4 +1,5 @@
 import type { BuilderCursor, TrieBuilder } from '../Builder/index.ts';
+import type { BuildOptions } from '../BuildOptions.ts';
 import type { ITrieNode, ITrieNodeId, ITrieNodeRoot } from '../ITrieNode/index.ts';
 import type { PartialTrieInfo, TrieCharacteristics, TrieInfo } from '../ITrieNode/TrieInfo.ts';
 import { normalizeTrieInfo, TrieInfoBuilder } from '../ITrieNode/TrieInfo.ts';
@@ -328,7 +329,8 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
         return this;
     }
 
-    build(optimize: boolean = false): TrieBlob {
+    build(options?: BuildOptions): TrieBlob {
+        const { optimize, useStringTable } = options || {};
         this._cursor?.dispose?.();
         this._readonly = true;
         this.freeze();
@@ -340,23 +342,25 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
 
         // Optimize automatically if the node count is small.
         // This will not involve a string table.
-        if (!optimize && sortNodes.length < AutoOptimizeNodeCount) {
+        if (optimize || sortNodes.length < AutoOptimizeNodeCount) {
             sortedNodes = optimizeNodes(sortedNodes);
         }
 
         const stringTable = new StringTableBuilder().build();
 
-        const r = optimize
+        const r = useStringTable
             ? optimizeNodesWithStringTable({ nodes: sortedNodes, stringTable })
             : { nodes: sortedNodes, stringTable };
 
         // console.log('TrieBlobBuilder.build: %o', {
         //     optimize,
+        //     useStringTable,
         //     size: r.nodes.reduce((sum, n) => sum + n.length, 0) * 4,
         //     numNodes: r.nodes.length,
-        //     stringTableLength: r.stringTable.length,
+        //     stringNumEntries: r.stringTable.length,
         //     strLenBits: r.stringTable.strLenBits,
         //     stringTableByteSize: r.stringTable.dataByteLength(),
+        //     stringTableBitInfo: r.stringTable.bitInfo(),
         // });
 
         return toTrieBlob(r.nodes, r.stringTable, normalizeTrieInfo(info.info));
@@ -379,10 +383,10 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
     static fromWordList(
         words: readonly string[] | Iterable<string>,
         options?: PartialTrieInfo,
-        optimize?: boolean,
+        buildOptions?: BuildOptions,
     ): TrieBlob {
         const ft = new TrieBlobBuilder(options);
-        return ft.insert(words).build(optimize);
+        return ft.insert(words).build(buildOptions);
     }
 
     /**
@@ -396,11 +400,10 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
      * ```
      *
      * @param root - TrieRoot
-     * @param optimize - optional; default = false, it will convert it into a DAWG and use a string table.
-     *   For small tries, it will automatically convert to a DAWG.
+     * @param buildOptions - optional build options
      * @returns TrieBlob
      */
-    static fromTrieRoot(root: TrieRoot, optimize?: boolean): TrieBlob {
+    static fromTrieRoot(root: TrieRoot, buildOptions?: BuildOptions): TrieBlob {
         const NodeCharIndexMask = NodeMaskCharByte;
         const nodeChildRefShift = NodeChildIndexRefShift;
         const NodeMaskEOW = NodeHeaderEOWMask;
@@ -460,18 +463,17 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
 
         walk(root);
 
-        return tf.build(optimize);
+        return tf.build(buildOptions);
     }
 
     /**
      * Create a TrieBlob from a TrieRoot.
      *
      * @param root - root node
-     * @param optimize - optional; default = false, it will convert it into a DAWG and use a string table.
-     *   For small tries, it will automatically convert to a DAWG.
+     * @param buildOptions - optional build options
      * @returns TrieBlob
      */
-    static fromITrieRoot(root: ITrieNodeRoot, optimize?: boolean): TrieBlob {
+    static fromITrieRoot(root: ITrieNodeRoot, buildOptions?: BuildOptions): TrieBlob {
         const NodeCharIndexMask = NodeMaskCharByte;
         const nodeChildRefShift = NodeChildIndexRefShift;
         const NodeMaskEOW = NodeHeaderEOWMask;
@@ -530,7 +532,7 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
 
         walk(root);
 
-        return tf.build(optimize);
+        return tf.build(buildOptions);
     }
 }
 

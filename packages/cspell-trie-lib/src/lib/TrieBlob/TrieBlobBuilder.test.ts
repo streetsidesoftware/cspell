@@ -1,10 +1,14 @@
 import { describe, expect, test } from 'vitest';
 
+import { registerDebugMode } from '../../test/debugger.ts';
 import type { BuilderCursor } from '../Builder/index.ts';
 import { insertWordsAtCursor } from '../Builder/index.ts';
+import { buildITrieFromWords } from '../buildITrie.ts';
 import { consolidate } from '../consolidate.ts';
 import { defaultTrieInfo } from '../constants.ts';
+import type { ITrie } from '../ITrie.ts';
 import { extractTrieCharacteristics } from '../ITrieNode/TrieInfo.ts';
+import { parseDictionaryLines } from '../SimpleDictionaryParser.ts';
 import { trieRootToITrieRoot } from '../TrieNode/trie.ts';
 import { createTrieRoot, insert } from '../TrieNode/trie-util.ts';
 import type { TrieNode, TrieRoot } from '../TrieNode/TrieNode.ts';
@@ -154,14 +158,14 @@ describe('FastTrieBlobBuilder', () => {
         const words = sampleWords();
         const trie = buildTrie(words, false);
         const iTrieRoot = trieRootToITrieRoot(trie);
-        const t = TrieBlobBuilder.fromTrieRoot(trie, false);
+        const t = TrieBlobBuilder.fromTrieRoot(trie);
         const sortedUnique = [...new Set(words)].sort();
         expect([...t.words()].sort()).toEqual(sortedUnique);
 
-        const t2 = TrieBlobBuilder.fromITrieRoot(iTrieRoot, false);
+        const t2 = TrieBlobBuilder.fromITrieRoot(iTrieRoot);
         expect([...t2.words()].sort()).toEqual(sortedUnique);
 
-        const t3 = TrieBlobBuilder.fromITrieRoot(t.getRoot(), false);
+        const t3 = TrieBlobBuilder.fromITrieRoot(t.getRoot());
         expect([...t3.words()].sort()).toEqual(sortedUnique);
     });
 
@@ -169,29 +173,29 @@ describe('FastTrieBlobBuilder', () => {
         const words = sampleWords();
         const trie = buildTrie(words, false);
         const iTrieRoot = trieRootToITrieRoot(trie);
-        const t = createTrieBlobFromTrieRoot(trie, true);
+        const t = createTrieBlobFromTrieRoot(trie, { useStringTable: true, optimize: true });
         const sortedUnique = [...new Set(words)].sort();
         expect([...t.words()]).toEqual(sortedUnique);
 
-        const t2 = TrieBlobBuilder.fromITrieRoot(iTrieRoot, false);
+        const t2 = TrieBlobBuilder.fromITrieRoot(iTrieRoot);
         expect([...t2.words()].sort()).toEqual(sortedUnique);
 
-        const t3 = TrieBlobBuilder.fromITrieRoot(t.getRoot(), false);
+        const t3 = TrieBlobBuilder.fromITrieRoot(t.getRoot());
         expect([...t3.words()].sort()).toEqual(sortedUnique);
     });
 
     test('fromTrieRoot optimized trie', () => {
         const words = sampleWords();
-        const trie = buildTrie(words, false);
+        const trie = buildTrie(words);
         const iTrieRoot = trieRootToITrieRoot(trie);
-        const t = createTrieBlobFromTrieRoot(trie, true);
+        const t = createTrieBlobFromTrieRoot(trie, { useStringTable: true, optimize: true });
         const sortedUnique = [...new Set(words)].sort();
         expect([...t.words()].sort()).toEqual(sortedUnique);
 
-        const t2 = TrieBlobBuilder.fromITrieRoot(iTrieRoot, true);
+        const t2 = TrieBlobBuilder.fromITrieRoot(iTrieRoot, { useStringTable: true, optimize: true });
         expect([...t2.words()].sort()).toEqual(sortedUnique);
 
-        const t3 = TrieBlobBuilder.fromITrieRoot(t.getRoot(), true);
+        const t3 = TrieBlobBuilder.fromITrieRoot(t.getRoot(), { useStringTable: true, optimize: true });
         expect([...t3.words()].sort()).toEqual(sortedUnique);
     });
 
@@ -210,6 +214,10 @@ describe('FastTrieBlobBuilder', () => {
 });
 
 describe('optimization', () => {
+    // Register the debug mode to make sure suggestions do not timeout during debugging.
+    const isDebugMode = registerDebugMode();
+    const timeout = isDebugMode ? 1_000_000 : undefined;
+
     test.each`
         comment                            | words
         ${'single word'}                   | ${['optimization']}
@@ -218,9 +226,65 @@ describe('optimization', () => {
         ${'sampleWords()'}                 | ${sampleWords()}
     `('optimize $comment $words', ({ words }) => {
         const sortedUnique = [...new Set(words)].sort();
-        const ft = TrieBlobBuilder.fromWordList(words, undefined, true);
+        const ft = TrieBlobBuilder.fromWordList(words, undefined, { useStringTable: true, optimize: true });
         expect([...ft.words()]).toEqual(sortedUnique);
     });
+
+    test(
+        'impact on suggest (accents)',
+        () => {
+            // setDebuggerAttached(true); // turn on debug output in suggestAStar
+
+            // cspell:ignore Geschäft Aujourd'hui
+            const words = [
+                ...parseDictionaryLines(['Geschäft'.normalize('NFD'), 'café', 'book', "Aujourd'hui"], {
+                    stripCaseAndAccents: true,
+                }),
+            ];
+            const tb = buildITrieFromWords(words);
+            expect([...tb.words()]).toEqual([
+                "Aujourd'hui",
+                'Geschäft',
+                'book',
+                'café',
+                "~aujourd'hui",
+                '~cafe',
+                '~geschaft',
+                '~geschäft',
+            ]);
+
+            // console.log('%s', iTrieToStructuredStringLines(tb).join('\n'));
+
+            expect(tb.has(words[0])).toBe(true);
+            expect(iTrieHas(tb, words[0], true)).toBe(true);
+            expect(iTrieHas(tb, words[0], false)).toBe(true);
+            expect(iTrieHas(tb, words[0].toLowerCase(), false)).toBe(true);
+            words.forEach((w) => expect(tb.hasWord(w, true)).toBe(true));
+            words.map((w) => w.toLowerCase()).forEach((w) => expect(iTrieHas(tb, w, false)).toBe(true));
+            expect(tb.hasWord(words[0].toLowerCase(), false)).toBe(true);
+            expect(tb.hasWord(words[0].toLowerCase(), true)).toBe(false);
+            // expect(d.suggest('geschaft', { ignoreCase: false }).map((r) => r)).toEqual(['Geschäft']);
+            expect(tb.suggestWithCost('geschaft', { ignoreCase: true })).toEqual([
+                {
+                    cost: 0,
+                    isPreferred: undefined,
+                    word: 'geschaft',
+                },
+                {
+                    cost: 1,
+                    isPreferred: undefined,
+                    word: 'geschäft',
+                },
+                {
+                    cost: 2,
+                    isPreferred: undefined,
+                    word: 'Geschäft',
+                },
+            ]);
+            expect(tb.suggest('geschaft', { ignoreCase: true })).toEqual(['geschaft', 'geschäft', 'Geschäft']);
+        },
+        timeout,
+    );
 });
 
 function sampleWords() {
@@ -363,3 +427,14 @@ function genWords(len: number, startLetter: string, endLetter: string): string[]
 // function toJsonObj(s: { toJSON: () => any }) {
 //     return JSON.parse(JSON.stringify(s));
 // }
+
+function iTrieHas(trie: ITrie, word: string, caseSensitive: boolean): boolean {
+    let r = trie.hasWord(word, caseSensitive);
+    r ||= trie.hasWord(word.toLowerCase(), caseSensitive);
+
+    if (!caseSensitive) {
+        r ||= trie.hasWord('~' + word, caseSensitive);
+    }
+
+    return r;
+}
