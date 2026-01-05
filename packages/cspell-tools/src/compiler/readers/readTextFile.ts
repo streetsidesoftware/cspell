@@ -5,12 +5,9 @@ import { decompress } from '../../gzip/index.ts';
 const isGzFile = /\.gz$/;
 
 export function readTextFile(filename: string): Promise<string> {
-    const content = fs
-        .readFile(filename)
-        .then(async (buffer) => (isGzFile.test(filename) ? decompress(buffer) : buffer))
-        .then((buffer) => {
-            return new TextDecoder('utf-8').decode(buffer);
-        });
+    const content = readFile(filename).then((buffer) => {
+        return new TextDecoder('utf-8').decode(buffer);
+    });
     return content;
 }
 
