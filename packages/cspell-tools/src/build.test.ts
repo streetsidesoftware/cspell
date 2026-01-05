@@ -47,7 +47,8 @@ describe('build action', () => {
             const shouldNotExist = builds.filter((a) => a.startsWith('!')).map((a) => a.slice(1));
             for (const build of shouldExist) {
                 const content = await readFile(t(build));
-                expect(hexDump(content)).toMatchSnapshot();
+                const text = isBinary(content) ? hexDump(content) : new TextDecoder('utf-8').decode(content);
+                expect(text).toMatchSnapshot();
             }
             for (const build of shouldNotExist) {
                 const found = await helper.fileExists(t(build));
@@ -71,4 +72,8 @@ function f(...parts: string[]): string {
 
 function cfgYaml(...parts: string[]): string {
     return helper.resolveFixture(...parts, 'cspell-tools.config.yaml');
+}
+
+function isBinary(data: Uint8Array): boolean {
+    return data.includes(0);
 }
