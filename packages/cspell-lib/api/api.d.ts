@@ -1022,8 +1022,17 @@ interface DictionaryDefinitionBase {
   supportNonStrictSearches?: boolean | undefined;
 }
 interface DictionaryDefinitionPreferred extends DictionaryDefinitionBase {
-  /** Path to the file. */
+  /**
+  * Path or url to the dictionary file.
+  */
   path: DictionaryPath;
+  /**
+  * An alternative path to a bTrie dictionary file.
+  * It will be used in place of `path` if the version of CSpell being used
+  * supports btrie files.
+  * @since 9.6.0
+  */
+  btrie?: DictionaryPathToBTrie | undefined;
   /**
   * Only for legacy dictionary definitions.
   * @deprecated true
@@ -1032,10 +1041,25 @@ interface DictionaryDefinitionPreferred extends DictionaryDefinitionBase {
   */
   file?: undefined;
 }
+interface HiddenPaths {
+  /**
+  * @hide
+  */
+  path?: string | undefined;
+  /**
+  * @hide
+  */
+  btrie?: string | undefined;
+  /**
+  * @hide
+  */
+  file?: undefined;
+}
+interface DictionaryDefinitionBaseWithPathsHidden extends DictionaryDefinitionBase, HiddenPaths {}
 /**
 * An Empty Dictionary Definition
 */
-interface DictionaryDefinitionSimple extends DictionaryDefinitionBase {
+interface DictionaryDefinitionSimple extends DictionaryDefinitionBaseWithPathsHidden {
   /**
   * @hide
   */
@@ -1056,14 +1080,6 @@ interface DictionaryDefinitionSimple extends DictionaryDefinitionBase {
   * @hide
   */
   type?: DictionaryFileTypes | undefined;
-  /**
-  * @hide
-  */
-  path?: string | undefined;
-  /**
-  * @hide
-  */
-  file?: undefined;
 }
 /**
 * Used to provide extra data related to the dictionary
@@ -1077,6 +1093,11 @@ interface HiddenFields {
   * @hide
   */
   path?: undefined;
+  /**
+  * Not used
+  * @hide
+  */
+  btrie?: string | undefined;
   /**
   * Not used
   * @hide
@@ -1134,12 +1155,9 @@ type DictionaryDefinitionInline = DictionaryDefinitionInlineWords | DictionaryDe
 * Only for legacy dictionary definitions.
 * @deprecated true
 * @deprecationMessage Use {@link DictionaryDefinitionPreferred} instead.
+* This will be removed in a future release.
 */
-interface DictionaryDefinitionAlternate extends DictionaryDefinitionBase {
-  /**
-  * @hidden
-  */
-  path?: undefined;
+interface DictionaryDefinitionAlternate extends DictionaryDefinitionBase, Omit<HiddenPaths, "file"> {
   /**
   * Path to the file, only for legacy dictionary definitions.
   * @deprecated true
@@ -1153,9 +1171,11 @@ interface DictionaryDefinitionAlternate extends DictionaryDefinitionBase {
 }
 /**
 * @deprecated true
+* @deprecationMessage Use {@link DictionaryDefinitionPreferred} instead.
+* This will be removed in a future release.
 * @hidden
 */
-interface DictionaryDefinitionLegacy extends DictionaryDefinitionBase {
+interface DictionaryDefinitionLegacy extends DictionaryDefinitionBase, Omit<HiddenPaths, "file" | "path"> {
   /** Path to the file, if undefined the path to the extension dictionaries is assumed. */
   path?: FsDictionaryPath;
   /**
@@ -1194,7 +1214,9 @@ type CustomDictionaryScope = "user" | "workspace" | "folder";
 * Note: only plain text files with one word per line are supported at this moment.
 */
 interface DictionaryDefinitionCustom extends DictionaryDefinitionPreferred {
-  /** Path to custom dictionary text file. */
+  /**
+  * A file path or url to a custom dictionary file.
+  */
   path: CustomDictionaryPath;
   /**
   * Defines the scope for when words will be added to the dictionary.
@@ -1228,13 +1250,19 @@ type ReplaceMap = ReplaceEntry[];
 type FsDictionaryPath = string;
 /**
 * A File System Path to a dictionary file.
-* Pattern: `^.*\.(?:txt|trie|dic)(?:\.gz)?$`
+* Pattern: `^.*\.(?:txt|trie|btrie|dic)(?:\.gz)?$`
 */
 type DictionaryPath = string;
 /**
 * A File System Path to a dictionary file.
+* Pattern: `^.*\.(?:btrie)(?:\.gz)?$`
+* @since 9.6.0
 */
-type CustomDictionaryPath = FsDictionaryPath;
+type DictionaryPathToBTrie = string;
+/**
+* A path or url to a custom dictionary file.
+*/
+type CustomDictionaryPath = string;
 /**
 * Reference to a dictionary by name.
 * One of:
@@ -2470,6 +2498,7 @@ declare function getFileTypesForExt(ext: string): FileTypeId[];
 declare function findMatchingFileTypes(filename: string): FileTypeId[];
 //#endregion
 //#region ../cspell-trie-lib/dist/index.d.ts
+//#endregion
 //#region src/lib/distance/weightedMaps.d.ts
 
 /**

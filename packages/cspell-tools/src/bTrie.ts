@@ -4,11 +4,8 @@ import zlib from 'node:zlib';
 
 const gzip = promisify(zlib.gzip);
 
+import type { GenerateBTrieOptions } from './compiler/bTrie.ts';
 import { createBTrieFromFile } from './compiler/bTrie.ts';
-
-interface GenerateBTrieOptions {
-    compress?: boolean;
-}
 
 export function generateBTrie(files: string[], options: GenerateBTrieOptions): Promise<void> {
     return generateBTrieFromFiles(files, options);
@@ -19,7 +16,7 @@ async function generateBTrieFromFiles(files: string[], options: GenerateBTrieOpt
     console.log(`Generating BTrie for ${files.length} file(s).`);
     for (const file of files) {
         console.log(`Processing file: ${file}`);
-        const btrie = await createBTrieFromFile(file);
+        const btrie = await createBTrieFromFile(file, options);
         let outFile = bTrieFileName(file);
         if (compress) {
             const gzipped = await gzip(btrie);

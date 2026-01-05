@@ -1,4 +1,6 @@
 import type { BuilderCursor, TrieBuilder } from '../Builder/index.ts';
+import type { BuildOptions } from '../BuildOptions.ts';
+import type { ITrieNode, ITrieNodeId, ITrieNodeRoot } from '../ITrieNode/index.ts';
 import type { PartialTrieInfo, TrieCharacteristics, TrieInfo } from '../ITrieNode/TrieInfo.ts';
 import { normalizeTrieInfo, TrieInfoBuilder } from '../ITrieNode/TrieInfo.ts';
 import { StringTableBuilder } from '../StringTable/StringTable.ts';
@@ -6,7 +8,7 @@ import type { TrieNode, TrieRoot } from '../TrieNode/TrieNode.ts';
 import { assert } from '../utils/assert.ts';
 import { assertValidUtf16Character } from '../utils/text.ts';
 import { CharIndexBuilder } from './CharIndex.ts';
-import { optimizeNodesWithStringTable } from './optimizeNodes.ts';
+import { optimizeNodes, optimizeNodesWithStringTable } from './optimizeNodes.ts';
 import { resolveMap } from './resolveMap.ts';
 import type { TrieBlob } from './TrieBlob.ts';
 import { NodeChildIndexRefShift, NodeHeaderEOWMask, NodeMaskCharByte } from './TrieBlobFormat.ts';
@@ -14,6 +16,8 @@ import { sortNodes, toTrieBlob } from './TrieBuilderUtils.ts';
 import { encodeTextToUtf8_32Rev, encodeToUtf8_32Rev } from './Utf8.ts';
 
 type FastTrieBlobNode = number[];
+
+const AutoOptimizeNodeCount = 1000;
 
 export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
     private charIndex = new CharIndexBuilder();
@@ -325,21 +329,39 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
         return this;
     }
 
-    build(optimize: boolean = false): TrieBlob {
+    build(buildOptions?: BuildOptions): TrieBlob {
+        const { optimize, useStringTable } = buildOptions || {};
         this._cursor?.dispose?.();
         this._readonly = true;
         this.freeze();
         const info = this.#infoBuilder.build();
-        const sortedNodes = sortNodes(
+        let sortedNodes = sortNodes(
             this.nodes.map((n) => Uint32Array.from(n)),
             NodeMaskCharByte,
         );
 
+        // Optimize automatically if the node count is small.
+        // This will not involve a string table.
+        if (optimize ?? sortNodes.length < AutoOptimizeNodeCount) {
+            sortedNodes = optimizeNodes(sortedNodes);
+        }
+
         const stringTable = new StringTableBuilder().build();
 
-        const r = optimize
+        const r = useStringTable
             ? optimizeNodesWithStringTable({ nodes: sortedNodes, stringTable })
             : { nodes: sortedNodes, stringTable };
+
+        // console.log('TrieBlobBuilder.build: %o', {
+        //     optimize,
+        //     useStringTable,
+        //     size: r.nodes.reduce((sum, n) => sum + n.length, 0) * 4,
+        //     numNodes: r.nodes.length,
+        //     stringNumEntries: r.stringTable.length,
+        //     strLenBits: r.stringTable.strLenBits,
+        //     stringTableByteSize: r.stringTable.dataByteLength(),
+        //     stringTableBitInfo: r.stringTable.bitInfo(),
+        // });
 
         return toTrieBlob(r.nodes, r.stringTable, normalizeTrieInfo(info.info));
     }
@@ -361,13 +383,27 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
     static fromWordList(
         words: readonly string[] | Iterable<string>,
         options?: PartialTrieInfo,
-        optimize?: boolean,
+        buildOptions?: BuildOptions,
     ): TrieBlob {
         const ft = new TrieBlobBuilder(options);
-        return ft.insert(words).build(optimize);
+        return ft.insert(words).build(buildOptions);
     }
 
-    static fromTrieRoot(root: TrieRoot, optimize?: boolean): TrieBlob {
+    /**
+     * Create a TrieBlob from a TrieRoot.
+     *
+     * This is equivalent to, but slightly faster because it avoids creating an ITrieNodes
+     * ```ts
+     * static fromTrieRoot(root: TrieRoot, optimize?: boolean): TrieBlob {
+     *   return this.fromITrieRoot(trieRootToITrieRoot(root), optimize);
+     * }
+     * ```
+     *
+     * @param root - TrieRoot
+     * @param buildOptions - optional build options
+     * @returns TrieBlob
+     */
+    static fromTrieRoot(root: TrieRoot, buildOptions?: BuildOptions): TrieBlob {
         const NodeCharIndexMask = NodeMaskCharByte;
         const nodeChildRefShift = NodeChildIndexRefShift;
         const NodeMaskEOW = NodeHeaderEOWMask;
@@ -427,7 +463,76 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
 
         walk(root);
 
-        return tf.build(optimize);
+        return tf.build(buildOptions);
+    }
+
+    /**
+     * Create a TrieBlob from a TrieRoot.
+     *
+     * @param root - root node
+     * @param buildOptions - optional build options
+     * @returns TrieBlob
+     */
+    static fromITrieRoot(root: ITrieNodeRoot, buildOptions?: BuildOptions): TrieBlob {
+        const NodeCharIndexMask = NodeMaskCharByte;
+        const nodeChildRefShift = NodeChildIndexRefShift;
+        const NodeMaskEOW = NodeHeaderEOWMask;
+
+        const tf = new TrieBlobBuilder(undefined, root);
+        const IdxEOW = tf.IdxEOW;
+
+        const known = new Map<ITrieNodeId, number>([[root.id, 0]]);
+
+        function resolveNode(n: ITrieNode): number {
+            if (n.eow && !n.hasChildren()) return IdxEOW;
+            const node = [n.eow ? NodeMaskEOW : 0];
+            return tf.nodes.push(node) - 1;
+        }
+
+        function walk(n: ITrieNode): number {
+            const found = known.get(n.id);
+            if (found) return found;
+            const nodeIdx = resolveMap(known, n.id, () => resolveNode(n));
+            const node = tf.nodes[nodeIdx];
+            if (!n.hasChildren()) return nodeIdx;
+            const children = n.entries();
+            for (const [char, childNode] of children) {
+                addCharToNode(node, char, childNode);
+            }
+            return nodeIdx;
+        }
+
+        function resolveChild(node: FastTrieBlobNode, charIndex: number): number {
+            let i = 1;
+            for (i = 1; i < node.length && (node[i] & NodeCharIndexMask) !== charIndex; ++i) {
+                // empty
+            }
+            return i;
+        }
+
+        function addCharToNode(node: FastTrieBlobNode, char: string, n: ITrieNode): void {
+            const indexSeq = tf.letterToUtf8Seq(char);
+            assertValidUtf16Character(char);
+            // console.error('addCharToNode %o', { char, indexSeq });
+            for (const idx of indexSeq.slice(0, -1)) {
+                const pos = resolveChild(node, idx);
+                if (pos < node.length) {
+                    node = tf.nodes[node[pos] >>> nodeChildRefShift];
+                } else {
+                    const next: FastTrieBlobNode = [0];
+                    const nodeIdx = tf.nodes.push(next) - 1;
+                    node[pos] = (nodeIdx << nodeChildRefShift) | idx;
+                    node = next;
+                }
+            }
+            const letterIdx = indexSeq[indexSeq.length - 1];
+            const i = node.push(letterIdx) - 1;
+            node[i] = (walk(n) << nodeChildRefShift) | letterIdx;
+        }
+
+        walk(root);
+
+        return tf.build(buildOptions);
     }
 }
 

@@ -1,7 +1,8 @@
 import type { TrieCost, WeightMap } from '../distance/weightedMaps.ts';
-import type { ITrieNode, TrieOptionsRO } from '../ITrieNode/index.ts';
+import type { ITrieNode, ITrieNodeId, TrieOptionsRO } from '../ITrieNode/index.ts';
 import { CompoundWordsMethod, JOIN_SEPARATOR, WORD_SEPARATOR } from '../ITrieNode/walker/index.ts';
 import type { TrieData } from '../TrieData.ts';
+import { isDebuggerAttached } from '../utils/debugger.ts';
 import { PairingHeap } from '../utils/PairingHeap.ts';
 import { opCosts } from './constants.ts';
 import type { SuggestionOptionsRO } from './genSuggestionsOptions.ts';
@@ -78,6 +79,7 @@ export function* getSuggestionsAStar(
     const compRoot = root.get(comp);
     const compRootIgnoreCase = rootIgnoreCase && rootIgnoreCase.get(comp);
     const emitted: Record<string, number> = Object.create(null);
+    const debug = isDebuggerAttached();
 
     const srcLetters = [...srcWord];
 
@@ -155,6 +157,14 @@ export function* getSuggestionsAStar(
         if (p.n.eow && p.i === len) {
             const word = pNodeToWord(p);
             const result = { word, cost: p.c };
+            if (debug) {
+                console.log('add possible suggestion: %o', {
+                    ...result,
+                    nodes: pNodeToDbgInfo(p)
+                        .map(({ id, s, c, a }) => `${a}{${s || '∅'}} $${c}-> ${id} `)
+                        .join(''),
+                });
+            }
             resultHeap.add(result);
         }
 
@@ -191,10 +201,12 @@ export function* getSuggestionsAStar(
 
             // Replace
             for (const [ss, node] of n.entries()) {
-                if (node.id === m?.id || ss in sc) continue;
+                // Don't replace with self - skip
+                if (ss === s || ss in sc) continue;
                 const g = visMap[ss] || 0;
                 // srcWord === 'WALK' && console.log(g.toString(2));
                 const c = sg & g ? costVis : cost;
+                // console.log('replace %s (%s) -> %s (%s)', formatNodeId(n.id), s, formatNodeId(node.id), ss);
                 storePath(t, node, i + 1, c, ss, p, 'r', ss);
             }
 
@@ -338,6 +350,33 @@ function getCostTrie(t: RO<CostTrie>, s: string) {
         tt = tt.t[c] ??= createCostTrie();
     }
     return tt;
+}
+
+interface DgbNodePathInfo {
+    id: ITrieNodeId;
+    s: string;
+    c: Cost;
+    // action taken
+    a: string;
+}
+
+function pNodeToDbgInfo(p: RO<PNode>): DgbNodePathInfo[] {
+    const parts: DgbNodePathInfo[] = [];
+    let n: RO<PNode> | undefined = p;
+    while (n) {
+        const id = formatNodeId(n.n.id);
+        parts.push({ id, s: n.s, c: n.c, a: n.a || '' });
+        n = n.p;
+    }
+    parts.reverse();
+    return parts;
+}
+
+function formatNodeId(id: ITrieNodeId): string {
+    const s = id.toString(16).padStart(16, '0');
+    const upper = s.slice(0, 8).replace(/^0+/, '').padStart(4, '0');
+    const lower = s.slice(8).replace(/^0+/, '');
+    return `${upper}${lower ? '.' + lower : ''}`;
 }
 
 function pNodeToWord(p: RO<PNode>): string {

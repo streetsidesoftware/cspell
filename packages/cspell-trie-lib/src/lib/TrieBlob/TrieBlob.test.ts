@@ -4,7 +4,7 @@ import { readTrieBlobFromConfig } from '../../test/dictionaries.test.helper.ts';
 import { hexDump } from '../binary/index.ts';
 import { validateTrie } from '../TrieNode/trie-util.ts';
 import { buildTrieNodeTrieFromWords } from '../TrieNode/TrieNodeBuilder.ts';
-import { createTrieBlob } from './createTrieBlob.ts';
+import { createTrieBlob, createTrieBlobFromTrieRoot } from './createTrieBlob.ts';
 import { TrieBlob } from './TrieBlob.ts';
 import { TrieBlobBuilder } from './TrieBlobBuilder.ts';
 import { NodeChildIndexRefShift, NodeHeaderNumChildrenMask } from './TrieBlobFormat.ts';
@@ -54,7 +54,8 @@ describe('TrieBlob', () => {
         expect([...trie.words()]).toEqual(sampleWords);
         expect(sampleWords.some((w) => !trie.has(w))).toBe(false);
         expect(validateTrie(trie.root).isValid).toBe(true);
-        const tb = TrieBlobBuilder.fromTrieRoot(trie.root);
+        const tb = createTrieBlobFromTrieRoot(trie.root);
+
         // console.error('%o', JSON.parse(JSON.stringify(ft)));
         expect([...tb.words()]).toEqual(sampleWords);
         expect(sampleWords.some((w) => !tb.has(w))).toBe(false);
@@ -104,7 +105,7 @@ describe('TrieBlob ITrie support methods', () => {
     test('getChildrenFromRef optimized', () => {
         const words = getWordsForDictionary();
         const firstChars = [...new Set(words.map((w) => [...w][0]))].sort();
-        const t = TrieBlobBuilder.fromWordList(words, undefined, true);
+        const t = TrieBlobBuilder.fromWordList(words, undefined, { useStringTable: true, optimize: true });
 
         const rootRef = t.rootRef;
 
@@ -157,7 +158,7 @@ describe('TrieBlob encode/decode', async () => {
 
     test('encode optimize hexDump', () => {
         const words = ['apple', 'banana', 'grape', 'orange', 'strawberry'];
-        const tb = TrieBlobBuilder.fromWordList(words, undefined, true);
+        const tb = TrieBlobBuilder.fromWordList(words, undefined, { useStringTable: true, optimize: true });
         const bin = tb.encodeToBTrie();
         const r = TrieBlob.decodeBin(bin);
         expect([...r.words()]).toEqual(words);

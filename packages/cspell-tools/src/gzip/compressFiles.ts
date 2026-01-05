@@ -43,10 +43,12 @@ function fixOSSystemID(zBuf: Uint8Array, os: OSFlags = OSFlags.Unix): Uint8Array
     return zBuf;
 }
 
-export async function decompress(buf: Uint8Array | Buffer, encoding?: undefined): Promise<Uint8Array>;
+type U8Array = Uint8Array<ArrayBuffer>;
+
+export async function decompress(buf: Uint8Array | Buffer, encoding?: undefined): Promise<U8Array>;
 export async function decompress(buf: Uint8Array | Buffer, encoding: 'utf8'): Promise<string>;
-export async function decompress(buf: Uint8Array | Buffer, encoding: 'utf8' | undefined): Promise<string | Uint8Array>;
-export async function decompress(buf: Uint8Array | Buffer, encoding?: 'utf8'): Promise<string | Uint8Array> {
+export async function decompress(buf: Uint8Array | Buffer, encoding: 'utf8' | undefined): Promise<string | U8Array>;
+export async function decompress(buf: Uint8Array | Buffer, encoding?: 'utf8'): Promise<string | U8Array> {
     const dBuf = gunzip(buf);
     if (!encoding) return dBuf;
     return (await dBuf).toString(encoding);

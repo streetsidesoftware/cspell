@@ -199,6 +199,7 @@ class _DictionaryDefinitionInternalWithSource implements DictionaryFileDefinitio
             name,
             file: undefined,
             path: resolvedPath,
+            btrie: undefined,
             addWords,
             description,
             dictionaryInformation,

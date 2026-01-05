@@ -2,9 +2,10 @@ import { beforeEach, describe, expect, test } from 'vitest';
 
 import { build } from './build.ts';
 import { setLogger } from './compiler/index.ts';
-import { readTextFile } from './compiler/readers/readTextFile.ts';
+import { readFile, readTextFile } from './compiler/readers/readTextFile.ts';
 import { spyOnConsole } from './test/console.ts';
 import { createTestHelper } from './test/TestHelper.ts';
+import { hexDump } from './util/hexDump.ts';
 
 const helper = createTestHelper(import.meta.url);
 
@@ -45,8 +46,9 @@ describe('build action', () => {
             const shouldExist = builds.filter((a) => !a.startsWith('!'));
             const shouldNotExist = builds.filter((a) => a.startsWith('!')).map((a) => a.slice(1));
             for (const build of shouldExist) {
-                const content = await readTextFile(t(build));
-                expect(content).toMatchSnapshot();
+                const content = await readFile(t(build));
+                const text = isBinary(content) ? hexDump(content) : new TextDecoder('utf-8').decode(content);
+                expect(text).toMatchSnapshot();
             }
             for (const build of shouldNotExist) {
                 const found = await helper.fileExists(t(build));
@@ -70,4 +72,8 @@ function f(...parts: string[]): string {
 
 function cfgYaml(...parts: string[]): string {
     return helper.resolveFixture(...parts, 'cspell-tools.config.yaml');
+}
+
+function isBinary(data: Uint8Array): boolean {
+    return data.includes(0);
 }

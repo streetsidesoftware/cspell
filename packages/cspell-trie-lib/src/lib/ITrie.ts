@@ -4,7 +4,7 @@ import type { WeightMap } from './distance/index.ts';
 import { createFindOptions, findLegacyCompound, findWord, findWordNode, isForbiddenWord } from './ITrieNode/find.ts';
 import type { FindOptions, PartialFindOptions } from './ITrieNode/FindOptions.ts';
 import type { ITrieNode, ITrieNodeRoot } from './ITrieNode/index.ts';
-import type { FindFullResult } from './ITrieNode/ITrieNode.ts';
+import type { FindFullResult, ITrieNodeId } from './ITrieNode/ITrieNode.ts';
 import { countWords, iteratorTrieWords } from './ITrieNode/trie-util.ts';
 import type { PartialTrieInfo, TrieInfo } from './ITrieNode/TrieInfo.ts';
 import { walker } from './ITrieNode/walker/walker.ts';
@@ -438,6 +438,11 @@ export class ITrieImpl implements ITrie {
         return findOptions;
     }
 }
+
+export function createITrieFromTrieData(data: TrieData): ITrie {
+    return new ITrieImpl(data);
+}
+
 export interface FindWordOptions {
     caseSensitive?: boolean;
     useLegacyWordCompounds?: boolean | number;
@@ -449,3 +454,115 @@ export interface FindWordOptions {
 }
 
 export type FindWordOptionsRO = Readonly<FindWordOptions>;
+
+export interface WalkITriedNodeStackItem {
+    /** current node */
+    node: ITrieNode;
+    /** current depth in the tree. */
+    depth: number;
+    /** key used to get here */
+    key: string;
+    /** the word up to this depth in the tree. */
+    word: string;
+    /** the position to process next (0 == beginning of node) */
+    pos: number;
+}
+
+/**
+ * A ITrie node walker.
+ *
+ * Use `.next(stop: boolean)` to control the depth of the walk.
+ *
+ * @param trie - the trie to walk
+ * @param stack - optional stack to use, useful for resuming a walk or the path to a specific node.
+ * @param depth - optional starting depth.
+ */
+export function* walkITrieNodes(
+    trie: ITrie,
+    stack: WalkITriedNodeStackItem[] = [],
+    depth: number = 0,
+): Generator<WalkITriedNodeStackItem, undefined, boolean | undefined> {
+    stack[0] ||= { node: trie.data.getRoot(), depth: 0, pos: 0, key: '', word: '' };
+
+    while (depth >= 0) {
+        const item = stack[depth];
+        if (!item.pos) {
+            const stop = yield item;
+            if (stop) {
+                depth--;
+                continue;
+            }
+        }
+        ++item.pos;
+        if (!item.node.hasChildren()) {
+            depth--;
+            continue;
+        }
+        const entries = [...item.node.entries()];
+        if (item.pos > entries.length) {
+            depth--;
+            continue;
+        }
+        const [key, node] = entries[item.pos - 1];
+
+        ++depth;
+        stack[depth] = { node, key, depth, pos: 0, word: item.word + key };
+    }
+}
+
+export function iTrieToStructuredStringLines(trie: ITrie, withId: boolean = true): string[] {
+    const lines = [..._iTrieToPathAndWord(trie, withId)];
+    const pathMax = lines.reduce((max, [path]) => Math.max(max, path.length), 0);
+    return lines.map(([path, word]) => `${path.padEnd(pathMax)} > ${word}`);
+}
+
+function* _iTrieToPathAndWord(trie: ITrie, withId: boolean): Iterable<[string, string]> {
+    const stack: WalkITriedNodeStackItem[] = [];
+    let lastStep = '';
+    const mapItem = withId ? mapWithId : mapWithoutId;
+    for (const item of walkITrieNodes(trie, stack)) {
+        if (item.node.eow) {
+            const steps =
+                stack
+                    .slice(1, item.depth + 1)
+                    .map(mapItem)
+                    .join('') + '⏎';
+
+            const path = diffStrings(lastStep, steps, '-');
+
+            yield [path, item.word];
+            lastStep = steps;
+        }
+    }
+
+    function mapWithId(item: WalkITriedNodeStackItem): string {
+        const id = formatNodeId(item.node.id);
+        return `${item.key || '.'},(${id})`;
+    }
+
+    function mapWithoutId(item: WalkITriedNodeStackItem): string {
+        return (item.key || '.') + ',';
+    }
+}
+
+function findFirstDiff(a: string[], b: string[]): number {
+    let i = 0;
+    for (; i < a.length && i < b.length; ++i) {
+        if (a[i] !== b[i]) return i;
+    }
+    return i;
+}
+
+function diffStrings(a: string, b: string, replace: string): string {
+    const aa = [...a];
+    const bb = [...b];
+    const idx = findFirstDiff(aa, bb);
+    return replace.repeat(idx) + bb.slice(idx).join('');
+}
+
+function formatNodeId(id: ITrieNodeId): string {
+    const s = id.toString(16).padStart(16, '0');
+    const upper = s.slice(0, 8).replace(/^0+/, '').padStart(4, '0');
+    const lower = s.slice(8).replace(/^0+/, '').padStart(1, '0');
+    return `${upper}${lower ? '.' + lower : ''}`;
+}

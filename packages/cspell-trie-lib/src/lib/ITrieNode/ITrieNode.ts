@@ -87,6 +87,7 @@ export interface ITrieNodeRoot extends ITrieNode {
     readonly forbidPrefix: string;
     readonly compoundFix: string;
     readonly caseInsensitivePrefix: string;
+    readonly suggestionPrefix: string;
 
     readonly hasForbiddenWords: boolean;
     readonly hasCompoundWords: boolean;

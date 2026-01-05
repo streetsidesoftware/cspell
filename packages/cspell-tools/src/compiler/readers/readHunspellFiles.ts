@@ -31,7 +31,7 @@ export async function readHunspellFiles(filename: string, options: ReaderOptions
         },
         toTrie: () => {
             if (trie) return trie;
-            trie = parseDictionary(lines(), { stripCaseAndAccents: false });
+            trie = parseDictionary(lines(), { stripCaseAndAccents: false, optimize: true });
             return trie;
         },
     };

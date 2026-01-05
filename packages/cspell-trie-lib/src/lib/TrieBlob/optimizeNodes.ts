@@ -8,12 +8,13 @@ import {
     type TrieBlobNode32,
 } from './TrieBlobFormat.ts';
 
+const MAX_AUTO_ADD_TO_STRING_TABLE = 4;
+
 /**
  * Convert from a Trie to a DAWG by merging identical nodes.
  * @param nodes - the nodes to optimize. This array and the contents WILL BE CHANGED and used as a scratch space.
  * @returns the optimized nodes.
  */
-
 export function optimizeNodes(nodes: FastTrieBlobNodes32): FastTrieBlobNodes32 {
     /** the has map to look up locked nodes. */
     const nodeHashMap: Map<number, TrieBlobNode32[]> = new Map();
@@ -191,6 +192,8 @@ function copyNodesAndStringTable(src: NodesAndStringTable): NodesAndStringTableB
 
 export function optimizeNodesWithStringTable(src: NodesAndStringTable): NodesAndStringTable {
     const { nodes, stringTableBuilder: builder } = copyNodesAndStringTable(src);
+    const multipleNodeRefs = calcHasMultipleReferences(nodes);
+    const multiStringRefs = new Set<number>([0]);
 
     if (!builder.length) {
         // Add the empty string to take up index 0.
@@ -208,6 +211,7 @@ export function optimizeNodesWithStringTable(src: NodesAndStringTable): NodesAnd
     function processNode(nodeIdx: number): void {
         const node = nodes[nodeIdx];
         if (node.length !== 2) return;
+
         const header = node[0];
         // An end of word node cannot be merged with a prefix.
         if ((header & NodeHeaderEOWMask) !== 0) return;
@@ -216,11 +220,18 @@ export function optimizeNodesWithStringTable(src: NodesAndStringTable): NodesAnd
 
         const childEntry = node[1];
         const charByte = childEntry & NodeMaskCharByte;
-        const childNode = nodes[childEntry >>> 8];
+        const childIdx = childEntry >>> 8;
+        // We cannot merge with a child node that has multiple references.
+        if (multipleNodeRefs.has(childIdx)) return;
+        const childNode = nodes[childIdx];
 
         const childHeader = childNode[0];
         const childPrefixIdx = (childHeader & NodeHeaderPrefixMask) >>> NodeHeaderPrefixShift;
         const childBytes = builder.getEntry(childPrefixIdx) || [];
+        if (!multiStringRefs.has(childPrefixIdx)) {
+            multiStringRefs.add(childPrefixIdx);
+            if (childBytes.length >= MAX_AUTO_ADD_TO_STRING_TABLE) return;
+        }
         const prefixBytes = [charByte, ...childBytes];
         const prefixIdx = builder.addStringBytes(prefixBytes);
 
@@ -230,9 +241,34 @@ export function optimizeNodesWithStringTable(src: NodesAndStringTable): NodesAnd
     }
 }
 
+function calcHasMultipleReferences(nodes: FastTrieBlobNodes32): Set<number> {
+    const seen = new Set<number>();
+    const multiple = new Set<number>();
+
+    walkNodes(nodes, 0, {
+        before: (nodeIdx) => {
+            if (seen.has(nodeIdx)) {
+                multiple.add(nodeIdx);
+                return true;
+            }
+            seen.add(nodeIdx);
+            return false;
+        },
+    });
+
+    return multiple;
+}
+
 interface NodeWalkOptions {
+    /**
+     * @param nodeIdx
+     */
     after?: (nodeIdx: number) => void;
-    before?: (nodeIdx: number) => void;
+    /**
+     * @param nodeIdx
+     * @returns true to stop going deeper.
+     */
+    before?: (nodeIdx: number) => boolean | undefined;
 }
 
 function walkNodes(nodes: FastTrieBlobNodes32, nodeIdx: number, options: NodeWalkOptions): void {
@@ -240,7 +276,7 @@ function walkNodes(nodes: FastTrieBlobNodes32, nodeIdx: number, options: NodeWal
     const before = options.before || (() => undefined);
 
     function walk(nodeIdx: number): void {
-        before(nodeIdx);
+        if (before(nodeIdx)) return;
 
         const node = nodes[nodeIdx];
         const count = node.length - 1;

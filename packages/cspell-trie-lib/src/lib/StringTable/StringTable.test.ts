@@ -59,6 +59,12 @@ describe('StringTableBuilder', () => {
 
         const retrieved = indices.map((i) => table.getString(i));
         expect(retrieved).toEqual(segments);
+
+        expect(table.bitInfo()).toEqual({
+            minIndexBits: 11,
+            offsetBits: 7,
+            strLenBits: 4,
+        });
     });
 
     test('encode and decode StringTable', () => {
@@ -72,6 +78,9 @@ describe('StringTableBuilder', () => {
         expect(hexDump(encoded)).toMatchSnapshot();
 
         const decodedTable = decodeStringTableFromBinary(encoded, 'LE');
+
+        expect(decodedTable.length).toBe(table.length);
+        expect(decodedTable.dataByteLength()).toBe(table.dataByteLength());
 
         const retrieved = indices.map((i) => decodedTable.getString(i));
         expect(retrieved).toEqual(segments);
