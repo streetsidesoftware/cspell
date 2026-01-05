@@ -329,8 +329,8 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
         return this;
     }
 
-    build(options?: BuildOptions): TrieBlob {
-        const { optimize, useStringTable } = options || {};
+    build(buildOptions?: BuildOptions): TrieBlob {
+        const { optimize, useStringTable } = buildOptions || {};
         this._cursor?.dispose?.();
         this._readonly = true;
         this.freeze();

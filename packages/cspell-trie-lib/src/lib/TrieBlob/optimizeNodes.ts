@@ -8,12 +8,13 @@ import {
     type TrieBlobNode32,
 } from './TrieBlobFormat.ts';
 
+const MAX_AUTO_ADD_TO_STRING_TABLE = 4;
+
 /**
  * Convert from a Trie to a DAWG by merging identical nodes.
  * @param nodes - the nodes to optimize. This array and the contents WILL BE CHANGED and used as a scratch space.
  * @returns the optimized nodes.
  */
-
 export function optimizeNodes(nodes: FastTrieBlobNodes32): FastTrieBlobNodes32 {
     /** the has map to look up locked nodes. */
     const nodeHashMap: Map<number, TrieBlobNode32[]> = new Map();
@@ -191,7 +192,8 @@ function copyNodesAndStringTable(src: NodesAndStringTable): NodesAndStringTableB
 
 export function optimizeNodesWithStringTable(src: NodesAndStringTable): NodesAndStringTable {
     const { nodes, stringTableBuilder: builder } = copyNodesAndStringTable(src);
-    const multipleRefs = calcHasMultipleReferences(nodes);
+    const multipleNodeRefs = calcHasMultipleReferences(nodes);
+    const multiStringRefs = new Set<number>([0]);
 
     if (!builder.length) {
         // Add the empty string to take up index 0.
@@ -220,12 +222,16 @@ export function optimizeNodesWithStringTable(src: NodesAndStringTable): NodesAnd
         const charByte = childEntry & NodeMaskCharByte;
         const childIdx = childEntry >>> 8;
         // We cannot merge with a child node that has multiple references.
-        if (multipleRefs.has(childIdx)) return;
+        if (multipleNodeRefs.has(childIdx)) return;
         const childNode = nodes[childIdx];
 
         const childHeader = childNode[0];
         const childPrefixIdx = (childHeader & NodeHeaderPrefixMask) >>> NodeHeaderPrefixShift;
         const childBytes = builder.getEntry(childPrefixIdx) || [];
+        if (!multiStringRefs.has(childPrefixIdx)) {
+            multiStringRefs.add(childPrefixIdx);
+            if (childBytes.length >= MAX_AUTO_ADD_TO_STRING_TABLE) return;
+        }
         const prefixBytes = [charByte, ...childBytes];
         const prefixIdx = builder.addStringBytes(prefixBytes);
 
