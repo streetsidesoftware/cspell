@@ -1,5 +1,5 @@
 import type { BuilderCursor, TrieBuilder } from '../Builder/index.ts';
-import type { ITrieNode, ITrieNodeRoot } from '../ITrieNode/index.ts';
+import type { ITrieNode, ITrieNodeId, ITrieNodeRoot } from '../ITrieNode/index.ts';
 import type { PartialTrieInfo, TrieCharacteristics, TrieInfo } from '../ITrieNode/TrieInfo.ts';
 import { normalizeTrieInfo, TrieInfoBuilder } from '../ITrieNode/TrieInfo.ts';
 import { StringTableBuilder } from '../StringTable/StringTable.ts';
@@ -8,7 +8,7 @@ import type { TrieRoot } from '../TrieNode/TrieNode.ts';
 import { assert } from '../utils/assert.ts';
 import { assertValidUtf16Character } from '../utils/text.ts';
 import { CharIndexBuilder } from './CharIndex.ts';
-import { optimizeNodesWithStringTable } from './optimizeNodes.ts';
+import { optimizeNodes, optimizeNodesWithStringTable } from './optimizeNodes.ts';
 import { resolveMap } from './resolveMap.ts';
 import type { TrieBlob } from './TrieBlob.ts';
 import { NodeChildIndexRefShift, NodeHeaderEOWMask, NodeMaskCharByte } from './TrieBlobFormat.ts';
@@ -16,6 +16,8 @@ import { sortNodes, toTrieBlob } from './TrieBuilderUtils.ts';
 import { encodeTextToUtf8_32Rev, encodeToUtf8_32Rev } from './Utf8.ts';
 
 type FastTrieBlobNode = number[];
+
+const AutoOptimizeNodeCount = 1000;
 
 export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
     private charIndex = new CharIndexBuilder();
@@ -332,10 +334,16 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
         this._readonly = true;
         this.freeze();
         const info = this.#infoBuilder.build();
-        const sortedNodes = sortNodes(
+        let sortedNodes = sortNodes(
             this.nodes.map((n) => Uint32Array.from(n)),
             NodeMaskCharByte,
         );
+
+        // Optimize automatically if the node count is small.
+        // This will not involve a string table.
+        if (!optimize && sortNodes.length < AutoOptimizeNodeCount) {
+            sortedNodes = optimizeNodes(sortedNodes);
+        }
 
         const stringTable = new StringTableBuilder().build();
 
@@ -345,10 +353,11 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
 
         // console.log('TrieBlobBuilder.build: %o', {
         //     optimize,
-        //     size: r.nodes.reduce((sum, n) => sum + n.length, 0),
+        //     size: r.nodes.reduce((sum, n) => sum + n.length, 0) * 4,
         //     numNodes: r.nodes.length,
-        //     stringTableSize: r.stringTable.length,
+        //     stringTableLength: r.stringTable.length,
         //     strLenBits: r.stringTable.strLenBits,
+        //     stringTableByteSize: r.stringTable.dataByteLength(),
         // });
 
         return toTrieBlob(r.nodes, r.stringTable, normalizeTrieInfo(info.info));
@@ -389,7 +398,7 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
         const tf = new TrieBlobBuilder(undefined, root);
         const IdxEOW = tf.IdxEOW;
 
-        const known = new Map<ITrieNode, number>([[root, 0]]);
+        const known = new Map<ITrieNodeId, number>([[root.id, 0]]);
 
         function resolveNode(n: ITrieNode): number {
             if (n.eow && !n.hasChildren()) return IdxEOW;
@@ -398,9 +407,9 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
         }
 
         function walk(n: ITrieNode): number {
-            const found = known.get(n);
+            const found = known.get(n.id);
             if (found) return found;
-            const nodeIdx = resolveMap(known, n, resolveNode);
+            const nodeIdx = resolveMap(known, n.id, () => resolveNode(n));
             const node = tf.nodes[nodeIdx];
             if (!n.hasChildren()) return nodeIdx;
             const children = n.entries();

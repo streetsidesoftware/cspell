@@ -78,6 +78,10 @@ export class StringTable {
         return this.#data.subarray(offset, offset + length);
     }
 
+    dataByteLength(): number {
+        return this.#data.byteLength;
+    }
+
     values(): U8Array[] {
         return [...this.#index].map((v) => this.#getBytesByIndexValue(v));
     }

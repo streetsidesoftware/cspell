@@ -73,6 +73,9 @@ describe('StringTableBuilder', () => {
 
         const decodedTable = decodeStringTableFromBinary(encoded, 'LE');
 
+        expect(decodedTable.length).toBe(table.length);
+        expect(decodedTable.dataByteLength()).toBe(table.dataByteLength());
+
         const retrieved = indices.map((i) => decodedTable.getString(i));
         expect(retrieved).toEqual(segments);
     });
