@@ -2641,14 +2641,14 @@ This would be the cost to substitute `a` with `i`: Like `bat` to `bit` or the re
 <dt>Description</dt>
 <dd>
 
-A File System Path to a dictionary file.
+A path or url to a custom dictionary file.
 
 </dd>
 
 <dt>Type</dt>
 <dd>
 
-[`FsDictionaryPath`](#fsdictionarypath)
+`string`
 
 </dd>
 
@@ -2989,7 +2989,8 @@ Use Compounds.
 | Field                                                                               | Type                                              | Description                                                                          |
 | ----------------------------------------------------------------------------------- | ------------------------------------------------- | ------------------------------------------------------------------------------------ |
 | [name](#dictionarydefinitionaugmented-name) <sup>_req_</sup>                        | [`DictionaryId`](#dictionaryid)                   | This is the name of a dictionary.                                                    |
-| [path](#dictionarydefinitionaugmented-path) <sup>_req_</sup>                        | [`DictionaryPath`](#dictionarypath)               | Path to the file.                                                                    |
+| [path](#dictionarydefinitionaugmented-path) <sup>_req_</sup>                        | [`DictionaryPath`](#dictionarypath)               | Path or url to the dictionary file.                                                  |
+| [btrie](#dictionarydefinitionaugmented-btrie)                                       | [`DictionaryPathToBTrie`](#dictionarypathtobtrie) | An alternative path to a bTrie dictionary file.                                      |
 | [description](#dictionarydefinitionaugmented-description)                           | `string`                                          | Optional description of the contents / purpose of the dictionary.                    |
 | [dictionaryInformation](#dictionarydefinitionaugmented-dictionaryinformation)       | [`DictionaryInformation`](#dictionaryinformation) |                                                                                      |
 | [ignoreForbiddenWords](#dictionarydefinitionaugmented-ignoreforbiddenwords)         | `boolean`                                         | Some dictionaries may contain forbidden words to prevent compounding from generating |
@@ -3046,7 +3047,7 @@ Name Format:
 <dt>Description</dt>
 <dd>
 
-Path to the file.
+Path or url to the dictionary file.
 
 </dd>
 
@@ -3056,6 +3057,37 @@ Path to the file.
 [`DictionaryPath`](#dictionarypath)
 
 </dd>
+
+</dl>
+
+
+
+
+---
+
+#### `btrie` {#dictionarydefinitionaugmented-btrie}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+An alternative path to a bTrie dictionary file.
+It will be used in place of `path` if the version of CSpell being used
+supports btrie files.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`DictionaryPathToBTrie`](#dictionarypathtobtrie)
+
+</dd>
+
+<dt>Since</dt>
+<dd>9.6.0</dd>
 
 </dl>
 
@@ -3291,7 +3323,8 @@ Use Compounds.
 | -------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
 | [addWords](#dictionarydefinitioncustom-addwords) <sup>_req_</sup>                | `boolean`                                                                                                                    | When `true`, let's the spell checker know that words can be added to this dictionary. |
 | [name](#dictionarydefinitioncustom-name) <sup>_req_</sup>                        | [`DictionaryId`](#dictionaryid)                                                                                              | This is the name of a dictionary.                                                     |
-| [path](#dictionarydefinitioncustom-path) <sup>_req_</sup>                        | [`CustomDictionaryPath`](#customdictionarypath)                                                                              | Path to custom dictionary text file.                                                  |
+| [path](#dictionarydefinitioncustom-path) <sup>_req_</sup>                        | [`CustomDictionaryPath`](#customdictionarypath)                                                                              | A file path or url to a custom dictionary file.                                       |
+| [btrie](#dictionarydefinitioncustom-btrie)                                       | [`DictionaryPathToBTrie`](#dictionarypathtobtrie)                                                                            | An alternative path to a bTrie dictionary file.                                       |
 | [description](#dictionarydefinitioncustom-description)                           | `string`                                                                                                                     | Optional description of the contents / purpose of the dictionary.                     |
 | [ignoreForbiddenWords](#dictionarydefinitioncustom-ignoreforbiddenwords)         | `boolean`                                                                                                                    | Some dictionaries may contain forbidden words to prevent compounding from generating  |
 | [noSuggest](#dictionarydefinitioncustom-nosuggest)                               | `boolean`                                                                                                                    | Indicate that suggestions should not come from this dictionary.                       |
@@ -3374,7 +3407,7 @@ Name Format:
 <dt>Description</dt>
 <dd>
 
-Path to custom dictionary text file.
+A file path or url to a custom dictionary file.
 
 </dd>
 
@@ -3384,6 +3417,37 @@ Path to custom dictionary text file.
 [`CustomDictionaryPath`](#customdictionarypath)
 
 </dd>
+
+</dl>
+
+
+
+
+---
+
+#### `btrie` {#dictionarydefinitioncustom-btrie}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+An alternative path to a bTrie dictionary file.
+It will be used in place of `path` if the version of CSpell being used
+supports btrie files.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`DictionaryPathToBTrie`](#dictionarypathtobtrie)
+
+</dd>
+
+<dt>Since</dt>
+<dd>9.6.0</dd>
 
 </dl>
 
@@ -4586,17 +4650,18 @@ dictionaries.
 
 ## DictionaryDefinitionPreferred
 
-| Field                                                                               | Type                                          | Description                                                                          |
-| ----------------------------------------------------------------------------------- | --------------------------------------------- | ------------------------------------------------------------------------------------ |
-| [name](#dictionarydefinitionpreferred-name) <sup>_req_</sup>                        | [`DictionaryId`](#dictionaryid)               | This is the name of a dictionary.                                                    |
-| [path](#dictionarydefinitionpreferred-path) <sup>_req_</sup>                        | [`DictionaryPath`](#dictionarypath)           | Path to the file.                                                                    |
-| [description](#dictionarydefinitionpreferred-description)                           | `string`                                      | Optional description of the contents / purpose of the dictionary.                    |
-| [ignoreForbiddenWords](#dictionarydefinitionpreferred-ignoreforbiddenwords)         | `boolean`                                     | Some dictionaries may contain forbidden words to prevent compounding from generating |
-| [noSuggest](#dictionarydefinitionpreferred-nosuggest)                               | `boolean`                                     | Indicate that suggestions should not come from this dictionary.                      |
-| [repMap](#dictionarydefinitionpreferred-repmap)                                     | [`ReplaceMap`](#replacemap)                   | Replacement pairs.                                                                   |
-| [supportNonStrictSearches](#dictionarydefinitionpreferred-supportnonstrictsearches) | `boolean`                                     | Strip case and accents to allow for case insensitive searches and                    |
-| [type](#dictionarydefinitionpreferred-type)                                         | [`DictionaryFileTypes`](#dictionaryfiletypes) | Type of file:                                                                        |
-| [useCompounds](#dictionarydefinitionpreferred-usecompounds)                         | `boolean`                                     | Use Compounds.                                                                       |
+| Field                                                                               | Type                                              | Description                                                                          |
+| ----------------------------------------------------------------------------------- | ------------------------------------------------- | ------------------------------------------------------------------------------------ |
+| [name](#dictionarydefinitionpreferred-name) <sup>_req_</sup>                        | [`DictionaryId`](#dictionaryid)                   | This is the name of a dictionary.                                                    |
+| [path](#dictionarydefinitionpreferred-path) <sup>_req_</sup>                        | [`DictionaryPath`](#dictionarypath)               | Path or url to the dictionary file.                                                  |
+| [btrie](#dictionarydefinitionpreferred-btrie)                                       | [`DictionaryPathToBTrie`](#dictionarypathtobtrie) | An alternative path to a bTrie dictionary file.                                      |
+| [description](#dictionarydefinitionpreferred-description)                           | `string`                                          | Optional description of the contents / purpose of the dictionary.                    |
+| [ignoreForbiddenWords](#dictionarydefinitionpreferred-ignoreforbiddenwords)         | `boolean`                                         | Some dictionaries may contain forbidden words to prevent compounding from generating |
+| [noSuggest](#dictionarydefinitionpreferred-nosuggest)                               | `boolean`                                         | Indicate that suggestions should not come from this dictionary.                      |
+| [repMap](#dictionarydefinitionpreferred-repmap)                                     | [`ReplaceMap`](#replacemap)                       | Replacement pairs.                                                                   |
+| [supportNonStrictSearches](#dictionarydefinitionpreferred-supportnonstrictsearches) | `boolean`                                         | Strip case and accents to allow for case insensitive searches and                    |
+| [type](#dictionarydefinitionpreferred-type)                                         | [`DictionaryFileTypes`](#dictionaryfiletypes)     | Type of file:                                                                        |
+| [useCompounds](#dictionarydefinitionpreferred-usecompounds)                         | `boolean`                                         | Use Compounds.                                                                       |
 
 
 ### DictionaryDefinitionPreferred Fields
@@ -4645,7 +4710,7 @@ Name Format:
 <dt>Description</dt>
 <dd>
 
-Path to the file.
+Path or url to the dictionary file.
 
 </dd>
 
@@ -4655,6 +4720,37 @@ Path to the file.
 [`DictionaryPath`](#dictionarypath)
 
 </dd>
+
+</dl>
+
+
+
+
+---
+
+#### `btrie` {#dictionarydefinitionpreferred-btrie}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+An alternative path to a bTrie dictionary file.
+It will be used in place of `path` if the version of CSpell being used
+supports btrie files.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`DictionaryPathToBTrie`](#dictionarypathtobtrie)
+
+</dd>
+
+<dt>Since</dt>
+<dd>9.6.0</dd>
 
 </dl>
 
@@ -5302,7 +5398,7 @@ The reference starts with 1 or more `!`.
 <dd>
 
 A File System Path to a dictionary file.
-Pattern: `^.*\.(?:txt|trie|dic)(?:\.gz)?$`
+Pattern: `^.*\.(?:txt|trie|btrie|dic)(?:\.gz)?$`
 
 </dd>
 
@@ -5312,6 +5408,37 @@ Pattern: `^.*\.(?:txt|trie|dic)(?:\.gz)?$`
 `string`
 
 </dd>
+
+</dl>
+
+
+
+
+
+---
+
+## DictionaryPathToBTrie {#dictionarypathtobtrie}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+A File System Path to a dictionary file.
+Pattern: `^.*\.(?:btrie)(?:\.gz)?$`
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
+
+<dt>Since</dt>
+<dd>9.6.0</dd>
 
 </dl>
 
@@ -5600,33 +5727,6 @@ Enable/disable using weighted suggestions.
 <dd>
 
 [`FeatureEnableOnly`](#featureenableonly)
-
-</dd>
-
-</dl>
-
-
-
-
-
----
-
-## FsDictionaryPath {#fsdictionarypath}
-
-
-<dl>
-
-<dt>Description</dt>
-<dd>
-
-A File System Path. Relative paths are relative to the configuration file.
-
-</dd>
-
-<dt>Type</dt>
-<dd>
-
-`string`
 
 </dd>
 
