@@ -200,9 +200,9 @@
       "type": "object"
     },
     "CustomDictionaryPath": {
-      "$ref": "#/definitions/FsDictionaryPath",
-      "description": "A File System Path to a dictionary file.",
-      "markdownDescription": "A File System Path to a dictionary file."
+      "description": "A path or url to a custom dictionary file.",
+      "markdownDescription": "A path or url to a custom dictionary file.",
+      "type": "string"
     },
     "CustomDictionaryScope": {
       "description": "Specifies the scope of a dictionary.",
@@ -239,7 +239,7 @@
     "DictionaryDefinitionAlternate": {
       "additionalProperties": false,
       "deprecated": true,
-      "deprecationMessage": "Use {@link DictionaryDefinitionPreferred } instead.",
+      "deprecationMessage": "Use {@link DictionaryDefinitionPreferred } instead.\nThis will be removed in a future release.",
       "description": "Only for legacy dictionary definitions.",
       "markdownDescription": "Only for legacy dictionary definitions.",
       "properties": {
@@ -304,6 +304,12 @@
       "description": "Used to provide extra data related to the dictionary",
       "markdownDescription": "Used to provide extra data related to the dictionary",
       "properties": {
+        "btrie": {
+          "$ref": "#/definitions/DictionaryPathToBTrie",
+          "description": "An alternative path to a bTrie dictionary file. It will be used in place of `path` if the version of CSpell being used supports btrie files.",
+          "markdownDescription": "An alternative path to a bTrie dictionary file.\nIt will be used in place of `path` if the version of CSpell being used\nsupports btrie files.",
+          "since": "9.6.0"
+        },
         "description": {
           "description": "Optional description of the contents / purpose of the dictionary.",
           "markdownDescription": "Optional description of the contents / purpose of the dictionary.",
@@ -329,8 +335,8 @@
         },
         "path": {
           "$ref": "#/definitions/DictionaryPath",
-          "description": "Path to the file.",
-          "markdownDescription": "Path to the file."
+          "description": "Path or url to the dictionary file.",
+          "markdownDescription": "Path or url to the dictionary file."
         },
         "repMap": {
           "$ref": "#/definitions/ReplaceMap",
@@ -371,6 +377,12 @@
           "markdownDescription": "When `true`, let's the spell checker know that words can be added to this dictionary.",
           "type": "boolean"
         },
+        "btrie": {
+          "$ref": "#/definitions/DictionaryPathToBTrie",
+          "description": "An alternative path to a bTrie dictionary file. It will be used in place of `path` if the version of CSpell being used supports btrie files.",
+          "markdownDescription": "An alternative path to a bTrie dictionary file.\nIt will be used in place of `path` if the version of CSpell being used\nsupports btrie files.",
+          "since": "9.6.0"
+        },
         "description": {
           "description": "Optional description of the contents / purpose of the dictionary.",
           "markdownDescription": "Optional description of the contents / purpose of the dictionary.",
@@ -393,8 +405,8 @@
         },
         "path": {
           "$ref": "#/definitions/CustomDictionaryPath",
-          "description": "Path to custom dictionary text file.",
-          "markdownDescription": "Path to custom dictionary text file."
+          "description": "A file path or url to a custom dictionary file.",
+          "markdownDescription": "A file path or url to a custom dictionary file."
         },
         "repMap": {
           "$ref": "#/definitions/ReplaceMap",
@@ -695,6 +707,12 @@
     "DictionaryDefinitionPreferred": {
       "additionalProperties": false,
       "properties": {
+        "btrie": {
+          "$ref": "#/definitions/DictionaryPathToBTrie",
+          "description": "An alternative path to a bTrie dictionary file. It will be used in place of `path` if the version of CSpell being used supports btrie files.",
+          "markdownDescription": "An alternative path to a bTrie dictionary file.\nIt will be used in place of `path` if the version of CSpell being used\nsupports btrie files.",
+          "since": "9.6.0"
+        },
         "description": {
           "description": "Optional description of the contents / purpose of the dictionary.",
           "markdownDescription": "Optional description of the contents / purpose of the dictionary.",
@@ -717,8 +735,8 @@
         },
         "path": {
           "$ref": "#/definitions/DictionaryPath",
-          "description": "Path to the file.",
-          "markdownDescription": "Path to the file."
+          "description": "Path or url to the dictionary file.",
+          "markdownDescription": "Path or url to the dictionary file."
         },
         "repMap": {
           "$ref": "#/definitions/ReplaceMap",
@@ -870,8 +888,14 @@
       "type": "string"
     },
     "DictionaryPath": {
-      "description": "A File System Path to a dictionary file. Pattern: `^.*\\.(?:txt|trie|dic)(?:\\.gz)?$`",
-      "markdownDescription": "A File System Path to a dictionary file.\nPattern: `^.*\\.(?:txt|trie|dic)(?:\\.gz)?$`",
+      "description": "A File System Path to a dictionary file. Pattern: `^.*\\.(?:txt|trie|btrie|dic)(?:\\.gz)?$`",
+      "markdownDescription": "A File System Path to a dictionary file.\nPattern: `^.*\\.(?:txt|trie|btrie|dic)(?:\\.gz)?$`",
+      "type": "string"
+    },
+    "DictionaryPathToBTrie": {
+      "description": "A File System Path to a dictionary file. Pattern: `^.*\\.(?:btrie)(?:\\.gz)?$`",
+      "markdownDescription": "A File System Path to a dictionary file.\nPattern: `^.*\\.(?:btrie)(?:\\.gz)?$`",
+      "since": "9.6.0",
       "type": "string"
     },
     "DictionaryRef": {
@@ -947,11 +971,6 @@
         }
       },
       "type": "object"
-    },
-    "FsDictionaryPath": {
-      "description": "A File System Path. Relative paths are relative to the configuration file.",
-      "markdownDescription": "A File System Path. Relative paths are relative to the configuration file.",
-      "type": "string"
     },
     "FsPath": {
       "description": "A File System Path. Relative paths are relative to the configuration file.",
