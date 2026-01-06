@@ -443,8 +443,8 @@ describe('Validate Trie Class', () => {
         const expectedWithId = iTrieToStructuredStringLines(trie, true);
 
         expect(iTrieToStructuredStringLines(trieForceOptimize, false)).toEqual(expected);
-        // small word list are auto optimized, so we expect the same result
-        expect(iTrieToStructuredStringLines(trieForceOptimize, true)).toEqual(expectedWithId);
+        // small word list are NOT auto optimized, so we expect the same result
+        expect(iTrieToStructuredStringLines(trieForceOptimize, true)).not.toEqual(expectedWithId);
         expect(iTrieToStructuredStringLines(trieWithStringTable, false)).toEqual(expected);
         // Uses a string table, so we expect a different result
         expect(iTrieToStructuredStringLines(trieWithStringTable, true)).not.toEqual(expectedWithId);
