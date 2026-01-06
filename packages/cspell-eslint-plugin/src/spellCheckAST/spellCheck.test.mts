@@ -53,6 +53,73 @@ describe('Validate spellCheck', () => {
         };
         assert.deepEqual(result, { issues: [issueExpected], errors: [] });
     });
+
+    it('checks a simple file with report type - all.', async () => {
+        // cspell:ignore isssue
+        const text = sampleTextTs() + '\n // This is an isssue.\n';
+        const ranges = [textToRange(text)];
+        const result = await spellCheck(import.meta.url, text, ranges, {
+            ...defaultOptions,
+            report: 'all',
+        });
+
+        const issueExpected = {
+            word: 'isssue',
+            start: text.indexOf('isssue'),
+            end: text.indexOf('isssue') + 'isssue'.length,
+            rangeIdx: 0,
+            range: [0, text.length],
+            severity: 'Unknown',
+            suggestions: [{ isPreferred: true, word: 'issue' }],
+        };
+        assert.deepEqual(result, { issues: [issueExpected], errors: [] });
+    });
+
+    it('checks a simple file with report type - simple.', async () => {
+        // cspell:ignore isssue xyzabc
+        // 'isssue' is a simple typo (has suggestion), 'xyzabc' is not a simple typo
+        const text = sampleTextTs() + '\n // This is an isssue and xyzabc.\n';
+        const ranges = [textToRange(text)];
+        const result = await spellCheck(import.meta.url, text, ranges, {
+            ...defaultOptions,
+            report: 'simple',
+        });
+
+        const issueExpected = {
+            word: 'isssue',
+            start: text.indexOf('isssue'),
+            end: text.indexOf('isssue') + 'isssue'.length,
+            rangeIdx: 0,
+            range: [0, text.length],
+            severity: 'Unknown',
+            suggestions: [{ isPreferred: true, word: 'issue' }],
+        };
+        // 'simple' should report simple typos like 'isssue' but not random unknown words like 'xyzabc'
+        assert.deepEqual(result, { issues: [issueExpected], errors: [] });
+    });
+
+    it('checks a simple file with report type - typos.', async () => {
+        // cspell:ignore isssue xyzabc
+        // 'isssue' has a preferred suggestion so it's considered a common typo
+        const text = sampleTextTs() + '\n // This is an isssue and xyzabc.\n';
+        const ranges = [textToRange(text)];
+        const result = await spellCheck(import.meta.url, text, ranges, {
+            ...defaultOptions,
+            report: 'typos',
+        });
+
+        const issueExpected = {
+            word: 'isssue',
+            start: text.indexOf('isssue'),
+            end: text.indexOf('isssue') + 'isssue'.length,
+            rangeIdx: 0,
+            range: [0, text.length],
+            severity: 'Unknown',
+            suggestions: [{ isPreferred: true, word: 'issue' }],
+        };
+        // 'typos' reports words with preferred suggestions (common typos) but not random unknown words
+        assert.deepEqual(result, { issues: [issueExpected], errors: [] });
+    });
 });
 
 function sampleTextTs(): string {
