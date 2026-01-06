@@ -46,7 +46,7 @@ export async function run(program: Command, argv: string[]): Promise<Command> {
             notify('Create Trie', !!outputFile);
             const pOutputStream = createWriteStream(outputFile);
             notify(`Generating...`, !!outputFile);
-            const lines = await fileToLines(filename);
+            const lines = (await readTextFile(filename)).split('\n');
             const toLower = lowerCase ? (a: string) => a.toLowerCase() : (a: string) => a;
 
             const wordsRx = lines
@@ -73,9 +73,9 @@ export async function run(program: Command, argv: string[]): Promise<Command> {
             const { output: outputFile } = options;
             notify('Reading Trie', !!outputFile);
             const pOutputStream = createWriteStream(outputFile);
-            const lines = await fileToLines(filename);
-            const root = Trie.importTrie(lines);
-            const words: Sequence<string> = genSequence(Trie.iteratorTrieWords(root));
+            const data = await readFile(filename);
+            const trie = Trie.decodeTrie(data);
+            const words: Sequence<string> = genSequence(trie.words());
             const outputStream = await pOutputStream;
             return new Promise((resolve) => {
                 stream.Readable.from(words.map((a) => a + '\n'))
@@ -87,10 +87,13 @@ export async function run(program: Command, argv: string[]): Promise<Command> {
     return program.parseAsync(argv);
 }
 
-async function fileToLines(filename: string): Promise<Sequence<string>> {
+async function readFile(filename: string): Promise<Uint8Array<ArrayBuffer>> {
     const buffer = await fsp.readFile(filename);
-    const file = (/\.gz$/.test(filename) ? zlib.gunzipSync(buffer) : buffer).toString(UTF8);
-    return genSequence(file.split(/\r?\n/));
+    return /\.gz$/.test(filename) ? zlib.gunzipSync(buffer) : buffer;
+}
+
+async function readTextFile(filename: string): Promise<string> {
+    return new TextDecoder(UTF8).decode(await readFile(filename));
 }
 
 function createWriteStream(filename?: string): Promise<NodeJS.WritableStream> {

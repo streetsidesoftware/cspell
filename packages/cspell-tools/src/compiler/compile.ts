@@ -4,7 +4,6 @@ import { pipeAsync, toArray } from '@cspell/cspell-pipe';
 import { opAwaitAsync, opMapAsync } from '@cspell/cspell-pipe/operators';
 import { opConcatMap, opMap, pipe } from '@cspell/cspell-pipe/sync';
 
-import { generateBTrie } from '../bTrie.ts';
 import type {
     CompileRequest,
     CompileSourceOptions as CompileSourceConfig,
@@ -17,6 +16,7 @@ import type {
 import { isFileListSource, isFilePath, isFileSource } from '../config/index.ts';
 import { checkShasumFile, updateChecksumForFiles } from '../shasum/index.ts';
 import { stringToRegExp } from '../util/textRegex.ts';
+import { generateBTrieFromFile } from './bTrie.ts';
 import { createAllowedSplitWordsFromFiles, createWordsCollectionFromFiles } from './createWordsCollection.ts';
 import { logWithTimestamp } from './logWithTimestamp.ts';
 import { readTextFile } from './readers/readTextFile.ts';
@@ -200,7 +200,8 @@ export async function compileTarget(
     await processFiles({ action, filesToProcess, mergeTarget: filename });
 
     if (target.bTrie) {
-        await generateBTrie([filename], { compress: true });
+        const cfg = typeof target.bTrie === 'object' ? target.bTrie : {};
+        await generateBTrieFromFile(filename, { compress: true, optimize: true, useStringTable: true, ...cfg });
     }
 
     logWithTimestamp(`Done compile: ${target.name}`);

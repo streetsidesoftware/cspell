@@ -2,6 +2,24 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "additionalProperties": false,
   "definitions": {
+    "BTrieOptions": {
+      "additionalProperties": false,
+      "properties": {
+        "compress": {
+          "description": "compress the resulting file",
+          "type": "boolean"
+        },
+        "optimize": {
+          "description": "optimize the trie into a DAWG",
+          "type": "boolean"
+        },
+        "useStringTable": {
+          "description": "use a string table to reduce size",
+          "type": "boolean"
+        }
+      },
+      "type": "object"
+    },
     "DictionaryFormats": {
       "enum": [
         "plaintext",
@@ -155,8 +173,15 @@
           "description": "Words in the `allowedSplitWords` are considered correct and can be used as a basis for splitting compound words.\n\nIf entries can be split so that all the words in the entry are allowed, then only the individual words are added, otherwise the entire entry is added. This is to prevent misspellings in CamelCase words from being introduced into the dictionary."
         },
         "bTrie": {
-          "description": "Generate a `.btrie.gz` for the target.",
-          "type": "boolean"
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "$ref": "#/definitions/BTrieOptions"
+            }
+          ],
+          "description": "Generate a `.btrie.gz` for the target."
         },
         "compress": {
           "default": false,

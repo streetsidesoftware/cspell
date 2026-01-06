@@ -126,7 +126,7 @@ export interface Target extends CompileTargetOptions {
     /**
      * Generate a `.btrie.gz` for the target.
      */
-    bTrie?: boolean | undefined;
+    bTrie?: boolean | BTrieOptions | undefined;
 
     /**
      * File sources used to build the dictionary.
@@ -230,6 +230,15 @@ export interface CompileSourceOptions {
      * @default 4
      */
     minCompoundLength?: number | undefined;
+}
+
+export interface BTrieOptions {
+    /** compress the resulting file */
+    compress?: boolean | undefined;
+    /** optimize the trie into a DAWG */
+    optimize?: boolean | undefined;
+    /** use a string table to reduce size */
+    useStringTable?: boolean | undefined;
 }
 
 export const configFileSchemaURL =

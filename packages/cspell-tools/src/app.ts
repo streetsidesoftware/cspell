@@ -12,7 +12,7 @@ import { processCompileAction } from './compile.ts';
 import * as compiler from './compiler/index.ts';
 import { logWithTimestamp } from './compiler/logWithTimestamp.ts';
 import type { FeatureFlags } from './FeatureFlags/index.ts';
-import { gzip, OSFlags } from './gzip/index.ts';
+import { gzipFiles, OSFlags } from './gzip/index.ts';
 import { reportCheckChecksumFile, reportChecksumForFiles, updateChecksumForFiles } from './shasum/shasum.ts';
 import { toError } from './util/errors.ts';
 
@@ -67,7 +67,7 @@ interface ShasumOptions {
 export async function run(program: Command, argv: string[], flags?: FeatureFlags): Promise<void> {
     async function handleGzip(files: string[]): Promise<void> {
         try {
-            await gzip(files, OSFlags.Unix);
+            await gzipFiles(files, OSFlags.Unix);
         } catch (error) {
             const err = toError(error);
             program.error(err.message);
@@ -124,6 +124,10 @@ export async function run(program: Command, argv: string[], flags?: FeatureFlags
         .option('-n, --no-compress', 'By default the files are GZipped, this will turn off GZ compression.')
         .option('--no-optimize', 'Do not try to optimize.')
         .option('--no-use-string-table', 'Do not use a string table in the BTrie.')
+        .option(
+            '-o, --output <path>',
+            'Specify the output directory, otherwise files are written back to the same location.',
+        )
         .action(generateBTrie);
 
     program

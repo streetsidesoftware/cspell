@@ -14,6 +14,7 @@ type ReaderFn = (filename: string, options: ReaderOptions) => Promise<Reader>;
 // Readers first match wins
 const readers: ReaderSelector[] = [
     { test: /\.trie\b/, method: trieFileReader },
+    { test: /\.btrie\b/, method: trieFileReader },
     { test: regHunspellFile, method: readHunspellFiles },
 ];
 
