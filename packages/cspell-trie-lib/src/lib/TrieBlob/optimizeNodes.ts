@@ -1,4 +1,5 @@
 import { type StringTable, StringTableBuilder } from '../StringTable/StringTable.ts';
+import { measurePerf } from '../utils/performance.ts';
 import {
     type FastTrieBlobNodes32,
     NodeHeaderEOWMask,
@@ -16,6 +17,7 @@ const MAX_AUTO_ADD_TO_STRING_TABLE = 4;
  * @returns the optimized nodes.
  */
 export function optimizeNodes(nodes: FastTrieBlobNodes32): FastTrieBlobNodes32 {
+    const endPerf = measurePerf('TrieBlob.optimizeNodes');
     /** the has map to look up locked nodes. */
     const nodeHashMap: Map<number, TrieBlobNode32[]> = new Map();
     const lockedNodes: WeakMap<TrieBlobNode32, number> = new WeakMap();
@@ -27,7 +29,9 @@ export function optimizeNodes(nodes: FastTrieBlobNodes32): FastTrieBlobNodes32 {
     walk(0);
 
     // return nodes;
-    return compactNodes(nodes);
+    const n = compactNodes(nodes);
+    endPerf();
+    return n;
 
     function getHashList(node: TrieBlobNode32): TrieBlobNode32[] {
         const hash = xorNode(node);
@@ -191,6 +195,8 @@ function copyNodesAndStringTable(src: NodesAndStringTable): NodesAndStringTableB
 }
 
 export function optimizeNodesWithStringTable(src: NodesAndStringTable): NodesAndStringTable {
+    const endPerf = measurePerf('TrieBlob.optimizeNodesWithStringTable');
+
     const { nodes, stringTableBuilder: builder } = copyNodesAndStringTable(src);
     const multipleNodeRefs = calcHasMultipleReferences(nodes);
     const multiStringRefs = new Set<number>([0]);
@@ -202,7 +208,9 @@ export function optimizeNodesWithStringTable(src: NodesAndStringTable): NodesAnd
 
     walkNodes(nodes, 0, { after: processNode });
 
-    return { nodes: optimizeNodes(nodes), stringTable: builder.build() };
+    const r = { nodes: optimizeNodes(nodes), stringTable: builder.build() };
+    endPerf();
+    return r;
 
     /**
      * If possible, replace the current node with a prefix node.

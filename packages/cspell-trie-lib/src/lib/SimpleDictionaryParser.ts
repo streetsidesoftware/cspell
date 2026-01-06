@@ -19,6 +19,7 @@ import { extractTrieInfo } from './ITrieNode/TrieInfo.ts';
 import type { Trie } from './trie.ts';
 import { buildTrieFast } from './TrieBuilder.ts';
 import { normalizeWord, normalizeWordForCaseInsensitive } from './utils/normalizeWord.ts';
+import { measurePerf } from './utils/performance.ts';
 
 export interface ParseDictionaryOptions extends BuildOptions {
     compoundCharacter: string;
@@ -428,11 +429,13 @@ export function createDictionaryLineParserMapper(options?: Partial<ParseDictiona
  * @param _options - defines prefixes used when parsing lines.
  * @returns words that have been normalized.
  */
-export function parseDictionaryLines(
+export function* parseDictionaryLines(
     lines: Iterable<string> | string,
     options?: Partial<ParseDictionaryOptions>,
 ): Iterable<string> {
-    return createDictionaryLineParserMapper(options)(typeof lines === 'string' ? [lines] : lines);
+    const endPerf = measurePerf('parseDictionaryLines');
+    yield* createDictionaryLineParserMapper(options)(typeof lines === 'string' ? [lines] : lines);
+    endPerf();
 }
 
 export function parseLinesToDictionaryLegacy(lines: Iterable<string>, options?: Partial<ParseDictionaryOptions>): Trie {
@@ -446,11 +449,14 @@ export function parseDictionaryLegacy(text: string | string[], options?: Partial
 }
 
 export function parseLinesToDictionary(lines: Iterable<string>, options?: Partial<ParseDictionaryOptions>): ITrie {
+    const endPerf = measurePerf('parseLinesToDictionary');
     const _options = mergeOptions(_defaultOptions, options);
     const dictLines = parseDictionaryLines(lines, _options);
     const words = [...new Set(dictLines)].sort();
     const { optimize, useStringTable } = options || {};
-    return buildITrieFromWords(words, trieInfoFromOptions(options), { optimize, useStringTable });
+    const t = buildITrieFromWords(words, trieInfoFromOptions(options), { optimize, useStringTable });
+    endPerf();
+    return t;
 }
 
 export function parseDictionary(text: string | Iterable<string>, options?: Partial<ParseDictionaryOptions>): ITrie {

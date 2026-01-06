@@ -1,5 +1,6 @@
 import type { TrieInfo } from '../ITrieNode/TrieInfo.ts';
 import type { StringTable } from '../StringTable/StringTable.ts';
+import { measurePerf } from '../utils/performance.ts';
 import { TrieBlob } from './TrieBlob.ts';
 import {
     NodeChildIndexRefShift,
@@ -26,11 +27,14 @@ interface SortableNode {
  * @returns
  */
 export function sortNodes<T extends SortableNode>(nodes: T[], mask: number): T[] {
+    const endPerf = measurePerf('TrieBlobBuilder.sortNodes');
+
     for (let i = 0; i < nodes.length; ++i) {
         const node = nodes[i];
         if (node.length <= 2 || isSorted(node, mask, 1)) continue;
         sortSubArray(node, mask, 1);
     }
+    endPerf();
     return nodes;
 }
 
@@ -73,6 +77,7 @@ function isSorted<T extends SortableNode>(node: T, mask: number, start: number, 
 }
 
 export function toTrieBlob(nodes: Nodes, stringTable: StringTable, info: Readonly<TrieInfo>): TrieBlob {
+    const endPerf = measurePerf('TrieBlob.toTrieBlob');
     const nodeMaskChildCharIndex = NodeMaskCharByte;
     const nodeChildRefShift = NodeChildIndexRefShift;
 
@@ -108,5 +113,7 @@ export function toTrieBlob(nodes: Nodes, stringTable: StringTable, info: Readonl
         }
     }
 
-    return new TrieBlob(binNodes, stringTable, info);
+    const t = new TrieBlob(binNodes, stringTable, info);
+    endPerf();
+    return t;
 }
