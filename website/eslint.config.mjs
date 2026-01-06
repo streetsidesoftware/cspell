@@ -9,6 +9,13 @@ export default defineConfig(
     nodePlugin.configs['flat/recommended'],
     ...tsEslint.configs.recommended,
     {
+        languageOptions: {
+            parserOptions: {
+                tsconfigRootDir: import.meta.dirname,
+            },
+        },
+    },
+    {
         ignores: [
             '**/[Ss]amples/**', // cspell:disable-line
             '**/[Tt]emp/**',
