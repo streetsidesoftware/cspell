@@ -19,6 +19,24 @@ export default defineConfig(
     nodePlugin.configs['flat/recommended'],
     ...tsEslint.configs.recommended,
     {
+        files: ['**/*.{cts,mts,ts}'],
+        languageOptions: {
+            parserOptions: {
+                tsconfigRootDir: import.meta.dirname,
+                // or, in CommonJS, __dirname
+            },
+        },
+    },
+    {
+        files: ['website/**/*.{cts,mts,ts}'],
+        languageOptions: {
+            parserOptions: {
+                tsconfigRootDir: new URL('website/', import.meta.dirname).href,
+                // or, in CommonJS, __dirname
+            },
+        },
+    },
+    {
         ignores: ['**/*.json'],
         plugins: {
             unicorn,

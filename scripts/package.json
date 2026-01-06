@@ -10,7 +10,7 @@
     "patch-changelog": "./patch-changelog.mjs",
     "update-package-json": "./update-package-json.mjs",
     "remove-zero-width-space": "./remove-zero-width-space.mjs",
-    "update-contributors": "./update-contributors.mjs"
+    "update-contributors": "./update-contributors.mts"
   },
   "scripts": {
     "#build:ts-json-schema-generator": "pnpm esbuild ../../../code/clones/ts-json-schema-generator/dist/index.js --bundle --outfile=lib/ts-json-schema-generator.cjs --platform=node --external:typescript",
@@ -28,6 +28,7 @@
     "node": ">=20"
   },
   "devDependencies": {
+    "@tsconfig/node24": "^24.0.3",
     "esbuild": "^0.27.2",
     "json-schema": "^0.4.0"
   },
