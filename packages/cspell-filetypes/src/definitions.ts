@@ -74,7 +74,7 @@ export const definitions: FileTypeDefinitions = [
     { id: 'haxe', extensions: ['.hx'] },
     { id: 'hlsl', extensions: ['.cginc', '.compute', '.fx', '.fxh', '.hlsl', '.hlsli', '.psh', '.vsh'] },
     { id: 'html', extensions: ['.asp', '.aspx', '.ejs', '.htm', '.html', '.jshtm', '.jsp', '.mdoc', '.rhtml', '.shtml', '.volt', '.vue', '.xht', '.xhtml'] },
-    { id: 'ignore', extensions: ['.git-blame-ignore-revs', '.gitignore', '.gitignore_global', '.npmignore'], filenames: ['.vscodeignore'] },
+    { id: 'ignore', extensions: ['.git-blame-ignore-revs', '.gitignore', '.gitignore_global', '.npmignore'], filenames: ['.*ignore'] },
     { id: 'ini', extensions: ['.conf', '.ini'] },
     { id: 'jade', extensions: ['.jade', '.pug'] },
     { id: 'java', extensions: ['.jav', '.java'] },
