@@ -37,6 +37,25 @@ export function compressSync(buf: string | Uint8Array | Buffer, os?: OSFlags): U
     return fixOSSystemID(gzipSync(buf), os);
 }
 
+/**
+ * Compresses the data if it is not already compressed.
+ * @param data
+ * @returns
+ */
+export async function compressIfNeeded(data: Uint8Array): Promise<Uint8Array> {
+    return isGZipped(data) ? data : compress(data);
+}
+
+/**
+ * Checks if the data is GZipped.
+ * @param data
+ * @returns true if the data is GZipped
+ */
+export function isGZipped(data: Uint8Array | string): boolean {
+    if (typeof data === 'string') return false;
+    return data[0] === 0x1f && data[1] === 0x8b;
+}
+
 function fixOSSystemID(zBuf: Uint8Array, os: OSFlags = OSFlags.Unix): Uint8Array {
     const osFlag = os === OSFlags.auto ? zBuf[OSSystemIDOffset] : os;
     zBuf[OSSystemIDOffset] = osFlag;

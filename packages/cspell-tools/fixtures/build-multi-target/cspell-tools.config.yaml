@@ -12,7 +12,7 @@ targets:
       - ../dicts/cities.txt
     format: plaintext
     targetDirectory: '${cwd}/dict'
-    bTrie: true
+    bTrie: { useStringTable: false }
 
   - name: code
     sources:
