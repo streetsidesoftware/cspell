@@ -6,6 +6,7 @@ import { normalizeTrieInfo, TrieInfoBuilder } from '../ITrieNode/TrieInfo.ts';
 import { StringTableBuilder } from '../StringTable/StringTable.ts';
 import type { TrieNode, TrieRoot } from '../TrieNode/TrieNode.ts';
 import { assert } from '../utils/assert.ts';
+import { measurePerf, measurePerfEnd, measurePerfStart } from '../utils/performance.ts';
 import { assertValidUtf16Character } from '../utils/text.ts';
 import { CharIndexBuilder } from './CharIndex.ts';
 import { optimizeNodes, optimizeNodesWithStringTable } from './optimizeNodes.ts';
@@ -17,7 +18,8 @@ import { encodeTextToUtf8_32Rev, encodeToUtf8_32Rev } from './Utf8.ts';
 
 type FastTrieBlobNode = number[];
 
-const AutoOptimizeNodeCount = 1000;
+// Turn off for now, it is too expensive to do automatically.
+const AUTO_OPTIMIZE_NODE_COUNT = 0;
 
 export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
     private charIndex = new CharIndexBuilder();
@@ -75,6 +77,8 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
     }
 
     private createCursor(id: number): BuilderCursor {
+        const endPerf = measurePerf('TrieBlobBuilder.cursor');
+
         const nodeChildRefShift = NodeChildIndexRefShift;
         const NodeMaskEOW = NodeHeaderEOWMask;
         const LetterMask = NodeMaskCharByte;
@@ -83,6 +87,7 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
         let disposed = false;
         const dispose = () => {
             if (disposed) return;
+            endPerf();
             disposed = true;
             if (this._cursorId === id) {
                 this._cursor = undefined;
@@ -322,27 +327,22 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
         return this;
     }
 
-    optimize(): this {
-        this.#assertNotReadonly();
-        this._cursor?.dispose?.();
-
-        return this;
-    }
-
     build(buildOptions?: BuildOptions): TrieBlob {
-        const { optimize, useStringTable } = buildOptions || {};
         this._cursor?.dispose?.();
         this._readonly = true;
         this.freeze();
+        const endPerf = measurePerf('TrieBlobBuilder.build');
+        const { optimize, useStringTable } = buildOptions || {};
+
         const info = this.#infoBuilder.build();
-        let sortedNodes = sortNodes(
-            this.nodes.map((n) => Uint32Array.from(n)),
-            NodeMaskCharByte,
-        );
+        measurePerfStart('TrieBlobBuilder.build.toUint32Array');
+        const bNodes = this.nodes.map((n) => Uint32Array.from(n));
+        measurePerfEnd('TrieBlobBuilder.build.toUint32Array');
+        let sortedNodes = sortNodes(bNodes, NodeMaskCharByte);
 
         // Optimize automatically if the node count is small.
         // This will not involve a string table.
-        if (optimize ?? sortNodes.length < AutoOptimizeNodeCount) {
+        if (optimize ?? sortNodes.length < AUTO_OPTIMIZE_NODE_COUNT) {
             sortedNodes = optimizeNodes(sortedNodes);
         }
 
@@ -363,7 +363,9 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
         //     stringTableBitInfo: r.stringTable.bitInfo(),
         // });
 
-        return toTrieBlob(r.nodes, r.stringTable, normalizeTrieInfo(info.info));
+        const data = toTrieBlob(r.nodes, r.stringTable, normalizeTrieInfo(info.info));
+        endPerf();
+        return data;
     }
 
     toJSON(): {
@@ -404,6 +406,7 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
      * @returns TrieBlob
      */
     static fromTrieRoot(root: TrieRoot, buildOptions?: BuildOptions): TrieBlob {
+        const endPerf = measurePerf('TrieBlobBuilder.fromTrieRoot');
         const NodeCharIndexMask = NodeMaskCharByte;
         const nodeChildRefShift = NodeChildIndexRefShift;
         const NodeMaskEOW = NodeHeaderEOWMask;
@@ -463,7 +466,9 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
 
         walk(root);
 
-        return tf.build(buildOptions);
+        const result = tf.build(buildOptions);
+        endPerf();
+        return result;
     }
 
     /**
@@ -474,6 +479,7 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
      * @returns TrieBlob
      */
     static fromITrieRoot(root: ITrieNodeRoot, buildOptions?: BuildOptions): TrieBlob {
+        const endPerf = measurePerf('TrieBlobBuilder.fromITrieRoot');
         const NodeCharIndexMask = NodeMaskCharByte;
         const nodeChildRefShift = NodeChildIndexRefShift;
         const NodeMaskEOW = NodeHeaderEOWMask;
@@ -532,7 +538,9 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
 
         walk(root);
 
-        return tf.build(buildOptions);
+        const result = tf.build(buildOptions);
+        endPerf();
+        return result;
     }
 }
 

@@ -4,6 +4,7 @@ import { buildITrieFromWords, parseDictionaryLines } from 'cspell-trie-lib';
 import { deepEqual } from 'fast-equals';
 
 import type { IterableLike } from '../util/IterableLike.js';
+import { measurePerf } from '../util/performance.js';
 import { AutoWeakCache, SimpleCache } from '../util/simpleCache.js';
 import type { DictionaryInfo, SpellingDictionary, SpellingDictionaryOptions } from './SpellingDictionary.js';
 import { defaultOptions } from './SpellingDictionary.js';
@@ -63,6 +64,7 @@ export function createSpellingDictionary(
 }
 
 function _createSpellingDictionary(params: CreateSpellingDictionaryParams): SpellingDictionary {
+    const endPerf = measurePerf('createSpellingDictionary');
     const [wordList, name, source, options, disableSuggestionHandling = false] = params;
     // console.log(`createSpellingDictionary ${name} ${source}`);
     const parseOptions = { stripCaseAndAccents: options?.supportNonStrictSearches ?? true, disableSuggestionHandling };
@@ -72,7 +74,9 @@ function _createSpellingDictionary(params: CreateSpellingDictionaryParams): Spel
     if (opts.weightMap === undefined && opts.dictionaryInformation) {
         opts.weightMap = createWeightMapFromDictionaryInformation(opts.dictionaryInformation);
     }
-    return new SpellingDictionaryFromTrie(trie, name, opts, source);
+    const d = new SpellingDictionaryFromTrie(trie, name, opts, source);
+    endPerf();
+    return d;
 }
 
 export interface SpellingDictionaryLoadError extends Error {

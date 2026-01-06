@@ -22,7 +22,10 @@ import { console as customConsole } from './console.js';
 import type { CSpellReporterConfiguration } from './models.js';
 import type { LinterCliOptions } from './options.js';
 import { ApplicationError } from './util/errors.js';
+import { getPerfMeasurements } from './util/perfMeasurements.js';
 import type { FinalizedReporter } from './util/reporters.js';
+import type { TableRow } from './util/table.js';
+import { tableToLines } from './util/table.js';
 import { uniqueFilterFnGenerator } from './util/util.js';
 
 const templateIssue = `{green $filename}:{yellow $row:$col} - $message ({red $text}) $quickFix`;
@@ -335,6 +338,29 @@ export function getReporter(options: ReporterOptions, config?: CSpellReporterCon
             stats.sort((a, b) => a[0].localeCompare(b[0]));
             for (const [key, value] of stats) {
                 value && consoleError(`  ${key.padEnd(padName)}: ${value.padStart(padValue)}ms`);
+            }
+            if (options.verboseLevel) {
+                const perfMeasurements = getPerfMeasurements();
+                if (perfMeasurements.length) {
+                    consoleError('Detailed Measurements:');
+                }
+                const maxDepth = Math.max(...perfMeasurements.map((m) => m.depth));
+                const depthIndicator = (d: number) => '⋅'.repeat(d) + ' '.repeat(maxDepth - d);
+                const rows: TableRow[] = perfMeasurements.map((m) => [
+                    '⋅'.repeat(m.depth) + m.name,
+                    (w) => (m.totalTimeMs.toFixed(2) + depthIndicator(m.depth)).padStart(w || 0),
+                    (w) => (m.totalTimeMs - m.nestedTimeMs).toFixed(2).padStart(w || 0),
+                    (w) => m.count.toString().padStart(w || 0),
+                    (w) => m.minTimeMs.toFixed(2).padStart(w || 0),
+                    (w) => m.maxTimeMs.toFixed(2).padStart(w || 0),
+                ]);
+                const table = tableToLines({
+                    header: ['Name', 'Total Time (ms)', 'Self Time (ms)', 'Count', 'Min Time (ms)', 'Max Time (ms)'],
+                    rows,
+                });
+                for (const line of table) {
+                    consoleError('  ' + line);
+                }
             }
         }
     };

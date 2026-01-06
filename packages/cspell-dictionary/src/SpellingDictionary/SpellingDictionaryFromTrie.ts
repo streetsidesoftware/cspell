@@ -9,6 +9,7 @@ import type {
 import { CompoundWordsMethod, decodeTrie, suggestionCollector } from 'cspell-trie-lib';
 
 import { clean } from '../util/clean.js';
+import { measurePerf } from '../util/performance.js';
 import { createMapper, createRepMapper } from '../util/repMap.js';
 import * as Defaults from './defaults.js';
 import type {
@@ -240,8 +241,11 @@ export function createSpellingDictionaryFromTrieFile(
     source: string,
     options: SpellingDictionaryOptionsRO,
 ): SpellingDictionary {
+    const endPerf = measurePerf('createSpellingDictionaryFromTrieFile');
     const trie = decodeTrie(data);
-    return new SpellingDictionaryFromTrie(trie, name, options, source);
+    const d = new SpellingDictionaryFromTrie(trie, name, options, source);
+    endPerf();
+    return d;
 }
 
 function* outerWordForms(word: string, mapWord: (word: string) => string[]): Iterable<string> {
