@@ -65,7 +65,7 @@ export async function fetchContributors(token: string): Promise<Contributor[]> {
         return response.json() as Promise<Contributor[]>;
     }
 
-    let contributors = [];
+    const contributors = [];
 
     for (let page = 1; page < 5; page++) {
         const c = (await fetchPage(page)).filter((c) => c.type === 'User');

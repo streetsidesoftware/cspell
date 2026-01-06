@@ -1,4 +1,6 @@
 // @ts-check
+/* eslint-disable n/no-unsupported-features/node-builtins */
+
 import cspellESLintPluginRecommended from '@cspell/eslint-plugin/recommended';
 import eslint from '@eslint/js';
 import { defineConfig } from 'eslint/config';
@@ -31,7 +33,7 @@ export default defineConfig(
         files: ['website/**/*.{cts,mts,ts}'],
         languageOptions: {
             parserOptions: {
-                tsconfigRootDir: new URL('website/', import.meta.dirname).href,
+                tsconfigRootDir: new URL('website/', import.meta.url).href,
                 // or, in CommonJS, __dirname
             },
         },

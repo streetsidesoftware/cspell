@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 import { execSync } from 'node:child_process';
-import { readFile, writeFile, mkdir } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 
 import type { Contributor } from './lib/fetch-contributors.mts';
 import { fetchContributors, normalizeContributorFields } from './lib/fetch-contributors.mts';
@@ -50,11 +50,11 @@ function contributorsToMd(contributors: Contributor[], currentContributorsMd: st
 
 async function writeContributorsJson(contributors: Contributor[]): Promise<void> {
     await mkdir(new URL('.', outputJsonUrl), { recursive: true });
-    await writeFile(outputJsonUrl, JSON.stringify({ contributors }, undefined, 4));
+    await writeFile(outputJsonUrl, JSON.stringify({ contributors }, undefined, 4) + '\n');
 }
 
 async function readExistingContributors(): Promise<Contributor[]> {
-    const content = await readFile(outputJsonUrl, 'utf-8').catch(() => undefined);
+    const content = await readFile(outputJsonUrl, 'utf8').catch(() => undefined);
     if (!content) return [];
     return (JSON.parse(content) || {}).contributors || [];
 }
