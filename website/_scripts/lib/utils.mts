@@ -1,11 +1,13 @@
 /**
- * @param {string} str - multi-line string to left pad
- * @param {string} [padding] - the padding to use
- * @param {string} [firstLinePadding] - optional padding of first line.
+ * Add padding to each line of a string.
+ * @param str - The multi-line string to left pad.
+ * @param padding - The padding to add to each line except for the first.
+ * @param firstLinePadding - The padding to add to the first line.
+ * @returns
  */
-export function padLines(str, padding = '', firstLinePadding = '') {
+export function padLines(str: string, padding: string = '', firstLinePadding: string = ''): string {
     let pad = firstLinePadding;
-    const lines = [];
+    const lines: string[] = [];
     for (const line of str.split('\n')) {
         lines.push(pad + line);
         pad = padding;
@@ -13,15 +15,13 @@ export function padLines(str, padding = '', firstLinePadding = '') {
 
     return lines.join('\n');
 }
+
 /**
  * Inject values into a template string.
- * @param {TemplateStringsArray} template
- * @param  {...any} values
- * @returns
  */
-export function inject(template, ...values) {
+export function inject(template: TemplateStringsArray, ...values: unknown[]): string {
     const strings = template;
-    const adjValues = [];
+    const adjValues: string[] = [];
     for (let i = 0; i < values.length; ++i) {
         const prevLines = strings[i].split('\n');
         const currLine = prevLines[prevLines.length - 1];
@@ -29,7 +29,7 @@ export function inject(template, ...values) {
         const padding = ' '.repeat(padLen);
         const value = `${values[i]}`;
         let pad = '';
-        const valueLines = [];
+        const valueLines: string[] = [];
         for (const line of value.split('\n')) {
             valueLines.push(pad + line);
             pad = padding;
@@ -39,14 +39,12 @@ export function inject(template, ...values) {
 
     return unindent(String.raw({ raw: strings }, ...adjValues));
 }
+
 /**
- *
- * @param {string[]} headers
- * @param {string[][]} rows
- * @returns
+ * Create a markdown table.
  */
-export function createTable(headers, rows) {
-    const colWidths = [];
+export function createTable(headers: string[], rows: string[][]): string {
+    const colWidths: number[] = [];
 
     for (const row of [headers, ...rows]) {
         row.forEach((col, i) => {
@@ -64,20 +62,18 @@ export function createTable(headers, rows) {
         .map((row) => `| ${row.join(' | ')} |`)
         .join('\n');
 }
+
 /**
  * Calculate the padding at the start of the string.
- * @param {string} s
- * @returns {number}
  */
-function padLength(s) {
+function padLength(s: string): number {
     return s.length - s.trimStart().length;
 }
+
 /**
  * Remove the left padding from a multi-line string.
- * @param {string} str
- * @returns {string}
  */
-function unindent(str) {
+function unindent(str: string): string {
     const lines = str.split('\n');
     let curPad = str.length;
     for (const line of lines) {

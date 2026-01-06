@@ -10,7 +10,7 @@
     "deploy": "docusaurus deploy",
     "clean": "pnpm run clear && rm -rf build",
     "clear": "docusaurus clear",
-    "gen-docs": "node _scripts/extract-properties.mjs",
+    "gen-docs": "node _scripts/extract-properties.mjs && node _scripts/update-contributors.mts",
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
