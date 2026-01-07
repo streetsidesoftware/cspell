@@ -13,14 +13,17 @@ describe('Validate table.ts', () => {
                 ['27438', 'Computer'],
                 ['273438', 'Desk'],
                 ['46438', 'Monitor'],
+                ['3', 'Mouse'],
             ],
+            columnAlignments: ['R', 'L'],
         };
         const x = tableToLines(table);
         expect(x.map(stripVTControlCharacters)).toEqual([
-            'id     | name    ',
-            '27438  | Computer',
+            '    id | name    ',
+            ' 27438 | Computer',
             '273438 | Desk    ',
-            '46438  | Monitor ',
+            ' 46438 | Monitor ',
+            '     3 | Mouse   ',
         ]);
     });
 

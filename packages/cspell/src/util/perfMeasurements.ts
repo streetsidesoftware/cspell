@@ -1,7 +1,6 @@
 import type { PerformanceMeasure } from 'node:perf_hooks';
 
 export interface PerfMeasurement {
-    key: string;
     depth: number;
     name: string;
     totalTimeMs: number;
@@ -9,16 +8,29 @@ export interface PerfMeasurement {
     count: number;
     minTimeMs: number;
     maxTimeMs: number;
+    children?: Map<string, PerfMeasurement>;
+}
+
+interface ParentPerfMeasurement {
+    depth: number;
+    totalTimeMs: number;
+    nestedTimeMs: number;
+    children?: Map<string, PerfMeasurement>;
 }
 
 export function getPerfMeasurements(): PerfMeasurement[] {
     const measurements = performance.getEntriesByType('measure') as PerformanceMeasure[];
-    const measurementMap: Map<string, PerfMeasurement> = new Map();
+    const childrenMap = new Map<string, PerfMeasurement>();
+    const root = {
+        depth: -1,
+        totalTimeMs: 0,
+        nestedTimeMs: 0,
+        children: childrenMap,
+    } as const satisfies ParentPerfMeasurement;
 
     if (!measurements.length) return [];
 
     interface StackItem {
-        k: string;
         m: PerformanceMeasure;
         p: PerfMeasurement;
     }
@@ -28,16 +40,21 @@ export function getPerfMeasurements(): PerfMeasurement[] {
     for (let i = 0; i < measurements.length; i++) {
         const m = measurements[i];
         rollUpStack(m.startTime);
-        const k = (stack[depth - 1]?.k || '') + '>' + m.name;
-        const s: StackItem = { k, m, p: addMeasurement(k, m, depth) };
-        if (depth > 0) {
-            const parent = stack[depth - 1];
-            parent.p.nestedTimeMs += m.duration;
-        }
+        // console.log(
+        //     '%s %s',
+        //     stack
+        //         .slice(0, depth)
+        //         .map((s) => s.p.name)
+        //         .join('>') + m.name,
+        //     m.duration.toFixed(2),
+        // );
+        const s: StackItem = { m, p: addToParent(depth === 0 ? root : stack[depth - 1].p, m) };
         stack[depth++] = s;
     }
 
-    return [...measurementMap.values()];
+    sortChildren(root);
+
+    return [...root.children.values()].flatMap((r) => [...flattenChildren(r)]);
 
     function contains(m: PerformanceMeasure, t: number): boolean {
         const stop = m.startTime + m.duration;
@@ -50,30 +67,49 @@ export function getPerfMeasurements(): PerfMeasurement[] {
         }
     }
 
-    function addMeasurement(k: string, m: PerformanceMeasure, depth: number): PerfMeasurement {
-        const p = getByKey(k, m.name, depth);
-        const timeMs = m.duration;
-        p.totalTimeMs += timeMs;
-        p.count += 1;
-        p.minTimeMs = Math.min(p.minTimeMs, timeMs);
-        p.maxTimeMs = Math.max(p.maxTimeMs, timeMs);
-        return p;
+    function addToParent(p: ParentPerfMeasurement, m: PerformanceMeasure): PerfMeasurement {
+        p.children ??= new Map();
+        p.nestedTimeMs += m.duration;
+        return updateChild(p.children, m, p.depth + 1);
     }
 
-    function getByKey(k: string, name: string, depth: number): PerfMeasurement {
-        const m = measurementMap.get(k);
-        if (m) return m;
-        const p: PerfMeasurement = {
-            key: k,
-            name,
+    function updateChild(
+        children: Map<string, PerfMeasurement>,
+        m: PerformanceMeasure,
+        depth: number,
+    ): PerfMeasurement {
+        const p = children.get(m.name);
+        if (p) {
+            p.totalTimeMs += m.duration;
+            p.count += 1;
+            p.minTimeMs = Math.min(p.minTimeMs, m.duration);
+            p.maxTimeMs = Math.max(p.maxTimeMs, m.duration);
+            return p;
+        }
+        const n: PerfMeasurement = {
+            name: m.name,
             depth,
-            totalTimeMs: 0,
+            totalTimeMs: m.duration,
             nestedTimeMs: 0,
-            count: 0,
-            minTimeMs: Number.MAX_SAFE_INTEGER,
-            maxTimeMs: 0,
+            count: 1,
+            minTimeMs: m.duration,
+            maxTimeMs: m.duration,
         };
-        measurementMap.set(k, p);
-        return p;
+        children.set(m.name, n);
+        return n;
+    }
+
+    function* flattenChildren(m: PerfMeasurement): Iterable<PerfMeasurement> {
+        yield m;
+        if (!m.children) return;
+        for (const child of m.children.values()) {
+            yield* flattenChildren(child);
+        }
+    }
+
+    function sortChildren(m: ParentPerfMeasurement): void {
+        if (!m.children) return;
+        m.children = new Map([...m.children.entries()].sort((a, b) => b[1].totalTimeMs - a[1].totalTimeMs));
+        m.children.forEach(sortChildren);
     }
 }

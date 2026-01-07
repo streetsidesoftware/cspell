@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json
+
+dictionaryDefinitions:
+  - name: words
+    path: ./btrie-words.btrie.gz
+  - name: words-btrie
+    path: ./words.txt
+    btrie: ./btrie-words.btrie.gz
+
+dictionaries:
+  - words
+  - words-btrie
+
+overrides:
+  - filename: test.md
+    dictionaries:
+      - '!words'
+      - 'words-btrie'
+  - filename: test2.md
+    dictionaries:
+      - 'words'
+      - '!words-btrie'
