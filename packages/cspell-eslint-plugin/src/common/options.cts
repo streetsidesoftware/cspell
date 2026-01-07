@@ -40,7 +40,7 @@ export interface Options extends Check {
      *
      *  default is 'all' unless overridden by CSpell settings
      */
-    report?: 'all' | 'simple' | 'typos' | 'flagged';
+    report?: 'all' | 'simple' | 'typos' | 'flagged' | undefined;
 }
 
 interface DictOptions {
