@@ -188,6 +188,7 @@ describe('docValidator', () => {
         filename                                               | maxDuplicateProblems | expectedIssues                    | expectedRawIssues
         ${tFix('issues/issue-5222/README.md')}                 | ${undefined}         | ${[]}                             | ${undefined}
         ${fix('sample-files-with-issues/WOX_Permissions.ps1')} | ${undefined}         | ${expectedIssues.WOX_Permissions} | ${expectedIssues.WOX_Permissions}
+        ${fixDict('btrie/README.md')}                          | ${undefined}         | ${[]}                             | ${undefined}
     `(
         'checkDocument group2 $filename $maxDuplicateProblems',
         async ({ filename, maxDuplicateProblems, expectedIssues, expectedRawIssues }) => {

@@ -101,7 +101,7 @@ export class DictionaryLoader {
             if (entry) {
                 return entry.pending.then(([dictionary]) => dictionary);
             }
-            const loadedEntry = this.loadEntry(def.path, def);
+            const loadedEntry = this.loadEntry(def.btrie || def.path, def);
             this.setCacheEntry(key, loadedEntry, def);
             this.keepAliveCache.set(def, loadedEntry);
             return loadedEntry.pending.then(([dictionary]) => dictionary);

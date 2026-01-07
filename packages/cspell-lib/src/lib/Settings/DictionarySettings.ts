@@ -54,10 +54,14 @@ function fixPath(def: DictionaryDefinitionInternal): DictionaryDefinitionInterna
         return def;
     }
     const newPath = fixDicPath(def.path, def.file);
+    const newBTriePath = def.btrie ? fixDicPath(def.btrie, def.file) : undefined;
+    // console.error('fixPath %o => %o', def.path, newPath);
+    // console.error('fixBTriePath %o => %o', def.btrie, newBTriePath);
     return {
         ...def,
         file: undefined,
         path: newPath,
+        btrie: newBTriePath,
     };
 }
 
@@ -178,6 +182,7 @@ class _DictionaryDefinitionInternalWithSource implements DictionaryFileDefinitio
         const {
             path: relPath = '',
             file = '',
+            btrie,
             addWords,
             description,
             dictionaryInformation,
@@ -194,12 +199,14 @@ class _DictionaryDefinitionInternalWithSource implements DictionaryFileDefinitio
         const name = determineName(filePath, def);
 
         const resolvedPath = toFilePathOrHref(resolveRelativeTo(filePath, defaultPath));
+        let bTriePath = btrie ? fixDicPath(btrie, file) : undefined;
+        bTriePath = bTriePath ? toFilePathOrHref(resolveRelativeTo(bTriePath, defaultPath)) : undefined;
 
         const ddi: DDI = {
             name,
             file: undefined,
             path: resolvedPath,
-            btrie: undefined,
+            btrie: bTriePath,
             addWords,
             description,
             dictionaryInformation,

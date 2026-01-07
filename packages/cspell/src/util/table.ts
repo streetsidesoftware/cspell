@@ -1,7 +1,7 @@
 import chalk from 'chalk';
 
 import { ansiWidth, pruneTextEnd } from './ansi.js';
-import { pad } from './pad.js';
+import { pad, padLeft } from './pad.js';
 
 export type RowTextFn = (maxWidth: number | undefined) => string;
 
@@ -50,12 +50,34 @@ export interface Table {
      * If provided, it will override the calculated widths.
      */
     maxColumnWidths?: MaxColumnWidths;
+
+    /**
+     * The alignment for each column.  'L' for left, 'R' for right.
+     * If not provided, defaults to left alignment.
+     */
+    columnAlignments?: ('L' | 'R' | undefined)[];
+
+    /**
+     * The title of the table.
+     */
+    title?: string;
+
+    /**
+     * Indentation to apply to each line of the table, but NOT the title.
+     */
+    indent?: number | string;
 }
 
 export function tableToLines(table: Table, deliminator?: string): string[] {
     const del = deliminator || table.deliminator || ' | ';
     const columnWidths: number[] = [];
+    const columnAlignments = table.columnAlignments || [];
     const maxColumnWidthsMap = table.maxColumnWidths || {};
+    const tableIndent = table.indent
+        ? typeof table.indent === 'number'
+            ? ' '.repeat(table.indent)
+            : table.indent
+        : '';
 
     const { header, rows } = table;
 
@@ -109,25 +131,32 @@ export function tableToLines(table: Table, deliminator?: string): string[] {
     }
 
     function justifyRow(c: string, i: number) {
-        return pad(c, columnWidths[i]);
+        return columnAlignments[i] === 'R' ? padLeft(c, columnWidths[i]) : pad(c, columnWidths[i]);
     }
 
     function toHeaderLine(header: string[]) {
-        return decorateRowWith(
-            header.map((c, i) => getText(c, columnWidths[i])),
-            justifyRow,
-            headerDecorator,
-        ).join(del);
+        return (
+            tableIndent +
+            decorateRowWith(
+                header.map((c, i) => getText(c, columnWidths[i])),
+                justifyRow,
+                headerDecorator,
+            ).join(del)
+        );
     }
 
     function toLine(row: TableRow) {
-        return decorateRowWith(
-            rowToCells(row).map((c, i) => getText(c, columnWidths[i])),
-            justifyRow,
-        ).join(del);
+        return (
+            tableIndent +
+            decorateRowWith(
+                rowToCells(row).map((c, i) => getText(c, columnWidths[i])),
+                justifyRow,
+            ).join(del)
+        );
     }
 
     function* process() {
+        if (table.title) yield table.title;
         yield toHeaderLine(simpleHeader);
         yield* rows.map(toLine);
     }
