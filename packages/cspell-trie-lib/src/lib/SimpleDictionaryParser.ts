@@ -429,13 +429,13 @@ export function createDictionaryLineParserMapper(options?: Partial<ParseDictiona
  * @param _options - defines prefixes used when parsing lines.
  * @returns words that have been normalized.
  */
-export function* parseDictionaryLines(
+export function parseDictionaryLines(
     lines: Iterable<string> | string,
     options?: Partial<ParseDictionaryOptions>,
 ): Iterable<string> {
-    const endPerf = measurePerf('parseDictionaryLines');
-    yield* createDictionaryLineParserMapper(options)(typeof lines === 'string' ? [lines] : lines);
-    endPerf();
+    // const endPerf = measurePerf('parseDictionaryLines');
+    return createDictionaryLineParserMapper(options)(typeof lines === 'string' ? [lines] : lines);
+    // endPerf();
 }
 
 export function parseLinesToDictionaryLegacy(lines: Iterable<string>, options?: Partial<ParseDictionaryOptions>): Trie {

@@ -1,4 +1,4 @@
-import type { BuilderCursor, TrieBuilder } from '../Builder/index.ts';
+import { type BuilderCursor, insertWordsAtCursor, type TrieBuilder } from '../Builder/index.ts';
 import type { BuildOptions } from '../BuildOptions.ts';
 import type { ITrieNode, ITrieNodeId, ITrieNodeRoot } from '../ITrieNode/index.ts';
 import type { PartialTrieInfo, TrieCharacteristics, TrieInfo } from '../ITrieNode/TrieInfo.ts';
@@ -62,12 +62,7 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
             return this.#insertWord(word);
         }
 
-        const words = word;
-
-        for (const w of words) {
-            this.#insertWord(w);
-        }
-        return this;
+        return this.insertWords(word);
     }
 
     getCursor(): BuilderCursor {
@@ -234,6 +229,20 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
         return c;
     }
 
+    insertWords(words: Iterable<string> | string[]): this {
+        for (const word of words) {
+            this.#insertWord(word);
+        }
+        return this;
+    }
+
+    _insertWordsCursor(words: Iterable<string> | string[]): this {
+        const cursor = this.getCursor();
+        insertWordsAtCursor(cursor, words);
+        cursor.dispose?.();
+        return this;
+    }
+
     #insertWord(word: string): this {
         word = word.trim();
         if (!word) return this;
@@ -282,12 +291,6 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
             // Make sure the EOW is set
             const node = nodes[nodeIdx];
             node[0] |= NodeMaskEOW;
-        }
-
-        {
-            const utf8Seq = this.wordToUtf8Seq(word);
-            assert(utf8Seq.length === bytes.length);
-            assert(utf8Seq.join(',') === bytes.join(','));
         }
 
         return this;

@@ -64,7 +64,8 @@ export function createSpellingDictionary(
 }
 
 function _createSpellingDictionary(params: CreateSpellingDictionaryParams): SpellingDictionary {
-    const endPerf = measurePerf('createSpellingDictionary');
+    const n = ''; // ':' + params[1]; // Add name to perf name for easier debugging.
+    const endPerf = measurePerf('createSpellingDictionary' + n);
     const [wordList, name, source, options, disableSuggestionHandling = false] = params;
     // console.log(`createSpellingDictionary ${name} ${source}`);
     const parseOptions = { stripCaseAndAccents: options?.supportNonStrictSearches ?? true, disableSuggestionHandling };

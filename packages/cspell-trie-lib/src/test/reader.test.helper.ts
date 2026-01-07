@@ -6,8 +6,10 @@ import * as zlib from 'node:zlib';
 
 import type { CSpellUserSettings } from '@cspell/cspell-types';
 
+import type { ITrie } from '../lib/index.ts';
+import { decodeTrie } from '../lib/index.ts';
 import { importTrie } from '../lib/io/importExport.ts';
-import { parseDictionaryLegacy } from '../lib/SimpleDictionaryParser.ts';
+import { parseDictionary, parseDictionaryLegacy } from '../lib/SimpleDictionaryParser.ts';
 import { Trie } from '../lib/trie.ts';
 import { memorizer } from '../lib/utils/memorizer.ts';
 
@@ -26,7 +28,8 @@ export interface Config {
 }
 
 export async function readConfig(configLocation: string): Promise<Config> {
-    const json = await readFile(configLocation, 'utf8');
+    const resolved = resolveModule(configLocation);
+    const json = await readFile(resolved, 'utf8');
     return JSON.parse(json.replaceAll(/\/\/.*/g, ''));
 }
 
@@ -48,16 +51,20 @@ export async function readTrieFileFromConfig(configLocation: string, name?: stri
     return new Trie(trieNode);
 }
 
-export async function readConfiguration(modulePath: string): Promise<CSpellUserSettings> {
-    const resolved = new URL(import.meta.resolve(modulePath));
+export function resolveModule(modulePath: string | URL): URL {
+    return new URL(typeof modulePath === 'string' ? import.meta.resolve(modulePath) : modulePath);
+}
+
+export async function readConfiguration(modulePath: string | URL): Promise<CSpellUserSettings> {
+    const resolved = resolveModule(modulePath);
     const json = await fs.readFile(resolved, 'utf8');
     return JSON.parse(json);
 }
 
 export const readModuleDictionary: typeof _readModuleDictionary = memorizer(_readModuleDictionary);
 
-async function _readModuleDictionary(modulePath: string, name?: string): Promise<Trie> {
-    const resolved = new URL(import.meta.resolve(modulePath));
+async function _readModuleDictionary(modulePath: string, name?: string): Promise<ITrie> {
+    const resolved = resolveModule(modulePath);
     const config = await readConfiguration(modulePath);
 
     const dictDefs = config.dictionaryDefinitions ?? [];
@@ -68,7 +75,7 @@ async function _readModuleDictionary(modulePath: string, name?: string): Promise
     const dictPath = new URL(def.path || '', resolved);
 
     if (dictPath.href.includes('.trie')) return readTrieFile(dictPath);
-    return readWordListAsTrie(dictPath);
+    return readWordList(dictPath);
 }
 
 // eslint-disable-next-line unicorn/text-encoding-identifier-case
@@ -80,14 +87,17 @@ type BufferEncoding = 'utf8' | 'utf-8';
  * @returns
  */
 export function readFile(filename: string | URL, encoding: BufferEncoding): Promise<string>;
-export function readFile(filename: string | URL): Promise<Buffer>;
-export function readFile(filename: string | URL, encoding: BufferEncoding | undefined): Promise<Buffer | string>;
+export function readFile(filename: string | URL): Promise<Buffer<ArrayBuffer>>;
+export function readFile(
+    filename: string | URL,
+    encoding: BufferEncoding | undefined,
+): Promise<Buffer<ArrayBuffer> | string>;
 export async function readFile(filename: string | URL, encoding?: BufferEncoding): Promise<Buffer | string> {
     const buf = await fs.readFile(filename).then((buffer) => (isGZipped(buffer) ? zlib.gunzipSync(buffer) : buffer));
     return encoding ? buf.toString(encoding) : buf;
 }
 
-export async function readTrieFile(filename: string | URL): Promise<Trie> {
+export async function readTrieFileAsTrie(filename: string | URL): Promise<Trie> {
     const trieFileContents = await readFile(filename, 'utf8');
     const trieNode = importTrie(trieFileContents);
     return new Trie(trieNode);
@@ -96,4 +106,14 @@ export async function readTrieFile(filename: string | URL): Promise<Trie> {
 export async function readWordListAsTrie(filename: string | URL): Promise<Trie> {
     const wordList = await readFile(filename, 'utf8');
     return parseDictionaryLegacy(wordList);
+}
+
+export async function readTrieFile(filename: string | URL): Promise<ITrie> {
+    const trieFileContents = await readFile(filename);
+    return decodeTrie(trieFileContents);
+}
+
+export async function readWordList(filename: string | URL): Promise<ITrie> {
+    const wordList = await readFile(filename, 'utf8');
+    return parseDictionary(wordList);
 }

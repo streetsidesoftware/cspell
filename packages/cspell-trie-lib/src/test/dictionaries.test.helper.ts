@@ -7,7 +7,7 @@ import { resolve as importResolve } from 'import-meta-resolve';
 import { importTrieV3AsTrieBlob } from '../lib/io/importV3FastBlob.ts';
 import type { Trie } from '../lib/trie.ts';
 import type { TrieBlob } from '../lib/TrieBlob/index.ts';
-import { readRawDictionaryFileFromConfig, readTrieFile, readTrieFileFromConfig } from './reader.test.helper.ts';
+import { readRawDictionaryFileFromConfig, readTrieFileAsTrie, readTrieFileFromConfig } from './reader.test.helper.ts';
 import { resolveGlobalDict, resolveGlobalSample } from './samples.ts';
 
 const tries = new Map<string, Promise<Trie>>();
@@ -41,7 +41,7 @@ const sampleTries = new Map<string, Promise<Trie>>();
 const samplesLocation = resolveGlobalSample('dicts');
 
 export function readSampleTrie(name: string): Promise<Trie> {
-    return memorize(name, sampleTries, (name) => readTrieFile(path.resolve(samplesLocation, name)));
+    return memorize(name, sampleTries, (name) => readTrieFileAsTrie(path.resolve(samplesLocation, name)));
 }
 
 function memorize<V>(key: string, map: Map<string, V>, resolve: (key: string) => V): V {

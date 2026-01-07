@@ -58,7 +58,7 @@ export function getPerfMeasurements(): PerfMeasurement[] {
 
     function contains(m: PerformanceMeasure, t: number): boolean {
         const stop = m.startTime + m.duration;
-        return m.startTime <= t && t < stop;
+        return t >= m.startTime && t < stop;
     }
 
     function rollUpStack(t: number) {
