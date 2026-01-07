@@ -558,7 +558,7 @@ function makeLogger() {
         t = t.replaceAll(/ +[\d.]+ms\b/g, ' 0.00ms');
         t = t.replaceAll(/\b[\d.]+ms\b/g, '0.00ms');
         t = t.replaceAll(/\b[\d.]+S\b/g, '0.00S');
-        t = t.replaceAll(/\b[\d]+\.\d\d\b/g, '0.00');
+        t = t.replaceAll(/\|\s+[\d]+\.\d\d\b/g, '| 0.00');
 
         const m = t.match(/.\[2K/g);
         if (m) {
