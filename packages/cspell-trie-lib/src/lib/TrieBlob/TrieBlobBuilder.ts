@@ -6,7 +6,7 @@ import { normalizeTrieInfo, TrieInfoBuilder } from '../ITrieNode/TrieInfo.ts';
 import { StringTableBuilder } from '../StringTable/StringTable.ts';
 import type { TrieNode, TrieRoot } from '../TrieNode/TrieNode.ts';
 import { assert } from '../utils/assert.ts';
-import { measurePerf, measurePerfEnd, measurePerfStart } from '../utils/performance.ts';
+import { measurePerf } from '../utils/performance.ts';
 import { assertValidUtf16Character } from '../utils/text.ts';
 import { CharIndexBuilder } from './CharIndex.ts';
 import { optimizeNodes, optimizeNodesWithStringTable } from './optimizeNodes.ts';
@@ -229,17 +229,15 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
         return c;
     }
 
+    /**
+     * Insert multiple words. Performance is (~10%) better if the words are sorted.
+     * @param words - words to insert
+     * @returns this
+     */
     insertWords(words: Iterable<string> | string[]): this {
         for (const word of words) {
             this.#insertWord(word);
         }
-        return this;
-    }
-
-    _insertWordsCursor(words: Iterable<string> | string[]): this {
-        const cursor = this.getCursor();
-        insertWordsAtCursor(cursor, words);
-        cursor.dispose?.();
         return this;
     }
 
@@ -265,6 +263,8 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
                 bytes.push(seq);
                 const node = nodes[nodeIdx];
                 const count = node.length;
+                // Searching backwards is faster as new entries are more likely to be near the end.
+                // This is especially true for sorted word lists.
                 let i = count - 1;
                 for (; i > 0; --i) {
                     if ((node[i] & NodeMaskChildCharIndex) === seq) {
@@ -330,6 +330,10 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
         return this;
     }
 
+    copyNodes(): FastTrieBlobNode[] {
+        return this.nodes.map((n) => [...n]);
+    }
+
     build(buildOptions?: BuildOptions): TrieBlob {
         this._cursor?.dispose?.();
         this._readonly = true;
@@ -338,9 +342,7 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
         const { optimize, useStringTable } = buildOptions || {};
 
         const info = this.#infoBuilder.build();
-        measurePerfStart('TrieBlobBuilder.build.toUint32Array');
-        const bNodes = this.nodes.map((n) => Uint32Array.from(n));
-        measurePerfEnd('TrieBlobBuilder.build.toUint32Array');
+        const bNodes = this.nodes;
         let sortedNodes = sortNodes(bNodes, NodeMaskCharByte);
 
         // Optimize automatically if the node count is small.
@@ -564,4 +566,13 @@ function createCharUtf8_32RevLookup(maxSize: number = 256): (char: string) => nu
         }
         return code;
     };
+}
+
+export function insertWordsIntoTrieBlobBuilderUsingCursor(
+    builder: TrieBlobBuilder,
+    words: Iterable<string> | string[],
+): void {
+    const cursor = builder.getCursor();
+    insertWordsAtCursor(cursor, words);
+    cursor.dispose?.();
 }

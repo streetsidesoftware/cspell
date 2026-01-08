@@ -14,4 +14,12 @@ suite('parse dictionary', async (test) => {
     test('parseDictionaryLines', () => {
         return [...parseDictionaryLines(contentCompanies)];
     });
+
+    test('parseDictionaryLines sorted 32', () => {
+        return [...parseDictionaryLines(contentCompanies, { sortBatchSize: 32 })];
+    });
+
+    test('parseDictionaryLines sorted 1000', () => {
+        return [...parseDictionaryLines(contentCompanies, { sortBatchSize: 1000 })];
+    });
 });

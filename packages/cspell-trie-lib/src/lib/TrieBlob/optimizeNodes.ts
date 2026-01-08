@@ -1,7 +1,6 @@
 import { type StringTable, StringTableBuilder } from '../StringTable/StringTable.ts';
 import { measurePerf } from '../utils/performance.ts';
 import {
-    type FastTrieBlobNodes32,
     NodeHeaderEOWMask,
     NodeHeaderPrefixMask,
     NodeHeaderPrefixShift,
@@ -11,16 +10,19 @@ import {
 
 const MAX_AUTO_ADD_TO_STRING_TABLE = 4;
 
+type TrieBlobNode = number[] | TrieBlobNode32;
+type TrieBlobNodes<NodeType extends TrieBlobNode = TrieBlobNode> = NodeType[];
+
 /**
  * Convert from a Trie to a DAWG by merging identical nodes.
  * @param nodes - the nodes to optimize. This array and the contents WILL BE CHANGED and used as a scratch space.
  * @returns the optimized nodes.
  */
-export function optimizeNodes(nodes: FastTrieBlobNodes32): FastTrieBlobNodes32 {
+export function optimizeNodes<NodeType extends TrieBlobNode>(nodes: TrieBlobNodes<NodeType>): TrieBlobNodes<NodeType> {
     const endPerf = measurePerf('TrieBlob.optimizeNodes');
     /** the has map to look up locked nodes. */
-    const nodeHashMap: Map<number, TrieBlobNode32[]> = new Map();
-    const lockedNodes: WeakMap<TrieBlobNode32, number> = new WeakMap();
+    const nodeHashMap: Map<number, NodeType[]> = new Map();
+    const lockedNodes: WeakMap<NodeType, number> = new WeakMap();
 
     const eowNode = nodes[1];
     getHashList(eowNode).push(eowNode);
@@ -33,7 +35,7 @@ export function optimizeNodes(nodes: FastTrieBlobNodes32): FastTrieBlobNodes32 {
     endPerf();
     return n;
 
-    function getHashList(node: TrieBlobNode32): TrieBlobNode32[] {
+    function getHashList(node: NodeType): NodeType[] {
         const hash = xorNode(node);
         let list = nodeHashMap.get(hash);
         if (list) return list;
@@ -42,18 +44,18 @@ export function optimizeNodes(nodes: FastTrieBlobNodes32): FastTrieBlobNodes32 {
         return list;
     }
 
-    function lockNode(node: TrieBlobNode32, index: number): number {
+    function lockNode(node: NodeType, index: number): number {
         lockedNodes.set(node, index);
         return index;
     }
 
-    function findMatchingLockedNode(hash: number, node: TrieBlobNode32): TrieBlobNode32 | undefined {
+    function findMatchingLockedNode(hash: number, node: NodeType): NodeType | undefined {
         const candidates = nodeHashMap.get(hash);
         if (!candidates) return undefined;
         return findMatchingNode(node, candidates);
     }
 
-    function registerNode(nodeIdx: number, node: TrieBlobNode32): number {
+    function registerNode(nodeIdx: number, node: NodeType): number {
         // Do not change the root node.
         if (!nodeIdx) return nodeIdx;
 
@@ -87,7 +89,7 @@ export function optimizeNodes(nodes: FastTrieBlobNodes32): FastTrieBlobNodes32 {
     }
 }
 
-function xorNode(a: TrieBlobNode32): number {
+function xorNode(a: TrieBlobNode): number {
     let xor = 0;
     for (let i = 0; i < a.length; ++i) {
         xor ^= a[i];
@@ -95,7 +97,7 @@ function xorNode(a: TrieBlobNode32): number {
     return xor;
 }
 
-function findMatchingNode(node: TrieBlobNode32, candidates: TrieBlobNode32[]): TrieBlobNode32 | undefined {
+function findMatchingNode<T extends TrieBlobNode>(node: T, candidates: T[]): T | undefined {
     for (let i = candidates.length - 1; i >= 0; --i) {
         const candidate = candidates[i];
         if (compareNodes(node, candidate)) {
@@ -105,7 +107,7 @@ function findMatchingNode(node: TrieBlobNode32, candidates: TrieBlobNode32[]): T
     return undefined;
 }
 
-function compareNodes(a: TrieBlobNode32, b: TrieBlobNode32): boolean {
+function compareNodes(a: TrieBlobNode, b: TrieBlobNode): boolean {
     if (a.length !== b.length) return false;
     let diff = 0;
     for (let i = 0; i < a.length && diff === 0; ++i) {
@@ -119,9 +121,9 @@ function compareNodes(a: TrieBlobNode32, b: TrieBlobNode32): boolean {
  * @param nodes - the nodes to compact they will get modified.
  * @returns the compacted nodes.
  */
-function compactNodes(nodes: FastTrieBlobNodes32): FastTrieBlobNodes32 {
+function compactNodes<T extends TrieBlobNode>(nodes: TrieBlobNodes<T>): TrieBlobNodes<T> {
     const nodeMap: Map<number, number> = new Map();
-    const compacted: FastTrieBlobNodes32 = [];
+    const compacted: TrieBlobNodes<T> = [];
 
     nodeMap.set(0, 0);
     nodeMap.set(1, 1);
@@ -155,16 +157,16 @@ function compactNodes(nodes: FastTrieBlobNodes32): FastTrieBlobNodes32 {
 }
 
 interface NodesAndStringTable {
-    nodes: FastTrieBlobNodes32;
+    nodes: TrieBlobNodes;
     stringTable: StringTable;
 }
 
 interface NodesAndStringTableBuilder {
-    nodes: FastTrieBlobNodes32;
+    nodes: TrieBlobNodes;
     stringTableBuilder: StringTableBuilder;
 }
 
-export function calculateByteSize(nodes: FastTrieBlobNodes32): number {
+export function calculateByteSize(nodes: TrieBlobNode[]): number {
     let count = 0;
     for (let i = nodes.length - 1; i >= 0; --i) {
         count += nodes[i].length;
@@ -172,9 +174,9 @@ export function calculateByteSize(nodes: FastTrieBlobNodes32): number {
     return count * 4; // each entry is 4 bytes
 }
 
-function copyNodes(nodes: FastTrieBlobNodes32): FastTrieBlobNodes32 {
+function copyNodes(nodes: TrieBlobNodes): TrieBlobNodes {
     const size = calculateByteSize(nodes);
-    const dst: FastTrieBlobNodes32 = Array(nodes.length);
+    const dst: TrieBlobNodes = Array(nodes.length);
     const buffer = new ArrayBuffer(size);
 
     for (let i = 0, offset = 0; i < nodes.length; ++i) {
@@ -249,7 +251,7 @@ export function optimizeNodesWithStringTable(src: NodesAndStringTable): NodesAnd
     }
 }
 
-function calcHasMultipleReferences(nodes: FastTrieBlobNodes32): Set<number> {
+function calcHasMultipleReferences(nodes: TrieBlobNodes): Set<number> {
     const seen = new Set<number>();
     const multiple = new Set<number>();
 
@@ -279,7 +281,7 @@ interface NodeWalkOptions {
     before?: (nodeIdx: number) => boolean | undefined;
 }
 
-function walkNodes(nodes: FastTrieBlobNodes32, nodeIdx: number, options: NodeWalkOptions): void {
+function walkNodes(nodes: TrieBlobNodes, nodeIdx: number, options: NodeWalkOptions): void {
     const after = options.after || (() => undefined);
     const before = options.before || (() => undefined);
 

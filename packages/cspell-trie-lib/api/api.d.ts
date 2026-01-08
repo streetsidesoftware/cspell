@@ -816,6 +816,12 @@ interface ParseDictionaryOptions extends BuildOptions {
   * @default false
   */
   useStringTable?: boolean;
+  /**
+  * The number of lines to batch before sorting.
+  * Set to 0 to disable sorting.
+  * @default 0
+  */
+  sortBatchSize?: number;
 }
 /**
 * Normalizes a dictionary words based upon prefix / suffixes.

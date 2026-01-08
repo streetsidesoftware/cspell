@@ -10,7 +10,9 @@ import {
     type TrieBlobNode32,
 } from './TrieBlobFormat.ts';
 
-type Nodes = TrieBlobNode32[];
+type TrieBlobNode = number[] | TrieBlobNode32;
+
+type Nodes = TrieBlobNode[];
 
 interface SortableNode {
     [index: number]: number;
@@ -41,11 +43,11 @@ export function sortNodes<T extends SortableNode>(nodes: T[], mask: number): T[]
 function sortSubArray<T extends SortableNode>(node: T, mask: number, startAt: number): void {
     const compare = (a: number, b: number) => (!a ? -1 : !b ? 1 : (a & mask) - (b & mask));
     if (node.subarray === undefined) {
-        const subArray = node.slice(startAt);
-        subArray.sort(compare);
-        for (let i = 0; i < subArray.length; ++i) {
-            node[i + startAt] = subArray[i];
-        }
+        // It is an array
+        const header = node[0]; // store the header
+        node[0] = Number.MIN_SAFE_INTEGER; // temporarily remove the header
+        node.sort(compare);
+        node[0] = header;
         return;
     }
     const sortSubArray = node.subarray(startAt);
