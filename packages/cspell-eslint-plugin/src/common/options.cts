@@ -81,7 +81,8 @@ export type CSpellOptions = Pick<
     dictionaryDefinitions?: DictionaryDefinition[];
 };
 
-export type RequiredOptions = Required<Pick<Options, Exclude<keyof Options, 'debugMode'>>> & Pick<Options, 'debugMode'>;
+export type RequiredOptions = Required<Pick<Options, Exclude<keyof Options, 'debugMode' | 'report'>>> &
+    Pick<Options, 'debugMode'>;
 
 export interface Check {
     /**

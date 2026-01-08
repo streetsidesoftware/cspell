@@ -20,11 +20,10 @@ export const defaultCheckOptions: Required<Check> = {
 };
 
 export const defaultOptions: RequiredOptions = {
-    ...defaultCheckOptions,
     numSuggestions: 8,
     generateSuggestions: true,
     autoFix: false,
-    report: undefined,
+    ...defaultCheckOptions,
 };
 
 export function normalizeOptions(opts: Options | undefined, cwd: string): WorkerOptions {
