@@ -1,6 +1,6 @@
 import { program } from 'commander';
 
-import { perfReportMd } from './perfChart.js';
+import { perfReportMd } from './perfChart.ts';
 
 program
     .argument('<file>', 'path to perf data file')
