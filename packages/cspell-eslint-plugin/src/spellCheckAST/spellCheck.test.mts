@@ -124,8 +124,6 @@ describe('Validate spellCheck', () => {
     });
 
     it('checks a simple file with report type - flagged.', async () => {
-        // cspell:ignore isssue xyzabc
-        // 'isssue' has a preferred suggestion so it's considered a common typo
         const text = sampleTextTs() + '\n // This is an isssue and testFlaggedWord.\n';
         const ranges = [textToRange(text)];
         const result = await spellCheck(import.meta.url, text, ranges, {
