@@ -7,40 +7,35 @@
     https://api.github.com/repos/OWNER/REPO/releases/tags/TAG
 */
 
-/**
- * @typedef {Object} ReleaseData
- * @property {number} id
- * @property {string} node_id
- * @property {string} tag_name
- * @property {string} target_commitish
- * @property {string} name
- * @property {string} body
- * @property {boolean} draft
- * @property {boolean} prerelease
- * @property {string} created_at
- * @property {string} published_at
- */
+export interface ReleaseData {
+    id: number;
+    node_id: string;
+    tag_name: string;
+    target_commitish: string;
+    name: string;
+    body: string;
+    draft: boolean;
+    prerelease: boolean;
+    created_at: string;
+    published_at: string;
+}
+
+export interface Request {
+    apiUrl: URL;
+    token: string;
+    tag: string;
+}
 
 // cspell:ignore commitish
 
-/**
- *
- * @param {URL} apiUrl
- * @param {string} tag
- * @returns {URL}
- */
-function calcGetReleaseUrl(apiUrl, tag) {
+function calcGetReleaseUrl(apiUrl: URL, tag: string): URL {
     if (tag === 'latest') {
         return new URL('releases/latest', apiUrl);
     }
     return new URL(`releases/tags/${tag}`, apiUrl);
 }
 
-/**
- * @param {{ apiUrl: URL, token: string, tag: string }} request
- * @returns {Promise<ReleaseData>}
- */
-export async function fetchGitHubReleaseData(request) {
+export async function fetchGitHubReleaseData(request: Request): Promise<ReleaseData> {
     const { apiUrl, token, tag } = request;
     const url = calcGetReleaseUrl(apiUrl, tag);
     // eslint-disable-next-line n/no-unsupported-features/node-builtins
@@ -56,5 +51,5 @@ export async function fetchGitHubReleaseData(request) {
         throw new Error(`Response status: ${response.status} ${response.statusText}`);
     }
 
-    return response.json();
+    return response.json() as Promise<ReleaseData>;
 }

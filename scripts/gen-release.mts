@@ -1,31 +1,29 @@
 #!/usr/bin/env node
 
-// @ts-check
-
 import fs from 'node:fs/promises';
 import { pathToFileURL } from 'node:url';
 import { parseArgs } from 'node:util';
 
-import { checkWeAreInGitRepo, processChangeLog } from './lib/changelog.mjs';
+import { checkWeAreInGitRepo, processChangeLog } from './lib/changelog.mts';
 
-/**
- * @typedef {{ tag: string; body: string; name: string; version: string; debug?: boolean }} ReleaseData
- */
+interface ReleaseData {
+    tag: string;
+    body: string;
+    name: string;
+    version: string;
+    debug?: boolean;
+}
 
 const optionsToEnv = {
     tag: 'GITHUB_RELEASE_TAG',
     body: 'GITHUB_RELEASE_BODY',
     name: 'GITHUB_RELEASE_NAME',
     version: 'GITHUB_RELEASE_VERSION',
-};
+} as const satisfies ReleaseData;
 
 class AppError extends Error {
-    /**
-     *
-     * @param {string} message
-     * @param {string | undefined} [code]
-     */
-    constructor(message, code) {
+    code?: string;
+    constructor(message: string, code?: string) {
         super(message);
         this.name = 'AppError';
         this.code = code;
@@ -34,14 +32,9 @@ class AppError extends Error {
 
 // cspell:ignore mdast
 
-/**
- *
- * @param {Partial<ReleaseData>} releaseData
- * @returns {asserts releaseData is ReleaseData}
- */
-function checkArgs(releaseData) {
+function checkArgs(releaseData: Partial<ReleaseData>): asserts releaseData is ReleaseData {
     let ok = true;
-    for (const [key, envVar] of Object.entries(optionsToEnv)) {
+    for (const [key, envVar] of Object.entries(optionsToEnv) as [keyof ReleaseData, string][]) {
         if (!releaseData[key]) {
             console.error(`Error: Option --${key} Environment variable ${envVar} is not set.`);
             ok = false;
@@ -52,11 +45,7 @@ function checkArgs(releaseData) {
     }
 }
 
-/**
- * @param {ReleaseData} releaseData
- * @return {Promise<void>}
- */
-async function updateVersionFile(releaseData) {
+async function updateVersionFile(releaseData: ReleaseData): Promise<void> {
     const { tag, name, version } = releaseData;
     await fs.writeFile('.release.json', JSON.stringify({ name, version, tag }, undefined, 4) + '\n', 'utf8');
 }

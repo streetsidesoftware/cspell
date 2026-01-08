@@ -17,7 +17,7 @@ env:
   # The branch to create the PR from
   NEW_BRANCH: 'release-draft'
   # Node.js version to use in the workflow
-  NODE_VERSION: '22.x'
+  NODE_VERSION: 'lts/*'
 
 jobs:
   update_release_draft:
@@ -56,7 +56,8 @@ jobs:
             ${{ toJSON(steps.release-drafter.outputs) }}
 
   create-pr:
-    if: "${{ !startsWith(github.event.head_commit.message, 'chore: Prepare Release') }}"
+    if: >-
+      ${{ !startsWith(github.event.head_commit.message, 'chore: Prepare Release') }}
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -80,8 +81,8 @@ jobs:
           'GITHUB_RELEASE_VERSION': ${{ needs.update_release_draft.outputs.resolved_version }}
 
         run: |
-          node ./scripts/gen-release.mjs -s packages/*/CHANGELOG.md
-          node ./scripts/gen-release.mjs CHANGELOG.md packages/cspell/CHANGELOG.md
+          node ./scripts/gen-release.mts -s packages/*/CHANGELOG.md
+          node ./scripts/gen-release.mts CHANGELOG.md packages/cspell/CHANGELOG.md
 
       - name: PR Body
         id: body
@@ -126,7 +127,8 @@ jobs:
   #           ```
 
   create-release:
-    if: "${{ startsWith(github.event.head_commit.message, 'chore: Prepare Release') && contains(github.event.head_commit.message, '(auto-deploy)') }}"
+    if: >-
+      ${{ startsWith(github.event.head_commit.message, 'chore: Prepare Release') && contains(github.event.head_commit.message, '(auto-deploy)') }}
     permissions:
       contents: write
       id-token: write

@@ -5,25 +5,24 @@
 import { pathToFileURL } from 'node:url';
 import { parseArgs } from 'node:util';
 
-import { checkWeAreInGitRepo, processChangeLog } from './lib/changelog.mjs';
-import { fetchGitHubReleaseData } from './lib/fetch-release.mjs';
+import { checkWeAreInGitRepo, processChangeLog } from './lib/changelog.mts';
+import { fetchGitHubReleaseData } from './lib/fetch-release.mts';
 
-/**
- * @typedef {{ tag: string; token: string; debug?: boolean }} GitReleaseInfo
- */
+interface GitReleaseInfo {
+    tag: string;
+    token: string;
+    debug?: boolean;
+}
 
 const optionsToEnv = {
     tag: 'GITHUB_RELEASE_TAG',
     token: 'GITHUB_TOKEN',
-};
+} as const satisfies GitReleaseInfo;
 
 class AppError extends Error {
-    /**
-     *
-     * @param {string} message
-     * @param {string | undefined} [code]
-     */
-    constructor(message, code) {
+    code?: string;
+
+    constructor(message: string, code?: string) {
         super(message);
         this.name = 'AppError';
         this.code = code;
@@ -32,14 +31,9 @@ class AppError extends Error {
 
 // cspell:ignore mdast
 
-/**
- *
- * @param {Partial<GitReleaseInfo>} releaseInfo
- * @returns {asserts releaseInfo is GitReleaseInfo}
- */
-function checkArgs(releaseInfo) {
+function checkArgs(releaseInfo: Partial<GitReleaseInfo>): asserts releaseInfo is GitReleaseInfo {
     let ok = true;
-    for (const [key, envVar] of Object.entries(optionsToEnv)) {
+    for (const [key, envVar] of Object.entries(optionsToEnv) as [keyof GitReleaseInfo, string][]) {
         if (!releaseInfo[key]) {
             console.error(`Error: Option --${key} Environment variable ${envVar} is not set.`);
             ok = false;
