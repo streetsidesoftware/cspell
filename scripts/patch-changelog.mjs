@@ -6,7 +6,7 @@ import { pathToFileURL } from 'node:url';
 import { parseArgs } from 'node:util';
 
 import { checkWeAreInGitRepo, processChangeLog } from './lib/changelog.mts';
-import { fetchGitHubReleaseData } from './lib/fetch-release.mjs';
+import { fetchGitHubReleaseData } from './lib/fetch-release.mts';
 
 /**
  * @typedef {{ tag: string; token: string; debug?: boolean }} GitReleaseInfo

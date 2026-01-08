@@ -6,7 +6,7 @@
   "type": "module",
   "bin": {
     "build-cspell-schema": "./build-cspell-schema.mjs",
-    "gen-release": "./gen-release.mjs",
+    "gen-release": "./gen-release.mts",
     "patch-changelog": "./patch-changelog.mjs",
     "update-package-json": "./update-package-json.mjs",
     "remove-zero-width-space": "./remove-zero-width-space.mjs",
@@ -15,10 +15,10 @@
   "scripts": {
     "#build:ts-json-schema-generator": "pnpm esbuild ../../../code/clones/ts-json-schema-generator/dist/index.js --bundle --outfile=lib/ts-json-schema-generator.cjs --platform=node --external:typescript",
     "test": "echo Ok",
-    "test:gen-release": "cd .. && node ./scripts/gen-release.mjs -t v9.1.0 -n v9.1.0 -v 9.1.0 -b \"$(cat examples/release-notes.md)\" -D 2025-06-12 -d ./examples/CHANGELOG.md",
-    "test:gen-release-s": "cd .. && node ./scripts/gen-release.mjs -t v9.1.0 -n v9.1.0 -v 9.1.0 -b \"$(cat examples/release-notes.md)\" -D 2025-06-12 -d -s ./examples/CHANGELOG.md",
-    "test:gen-release-2": "cd .. && node ./scripts/gen-release.mjs -t v9.0.1 -n \"v9.0.1 Test Release\" -v 9.0.1 -b \"## Updated Release with lot of fun.\" -d ./examples/CHANGELOG.md",
-    "test:gen-release-3": "pnpm test:gen-release-2 && cd .. && node ./scripts/gen-release.mjs -t v9.0.1 -n \"v9.0.1 Updated Release\" -v 9.0.1 -b \"$(cat examples/release-notes.md)\" ./examples/CHANGELOG-1.md",
+    "test:gen-release": "cd .. && node ./scripts/gen-release.mts -t v9.1.0 -n v9.1.0 -v 9.1.0 -b \"$(cat examples/release-notes.md)\" -D 2025-06-12 -d ./examples/CHANGELOG.md",
+    "test:gen-release-s": "cd .. && node ./scripts/gen-release.mts -t v9.1.0 -n v9.1.0 -v 9.1.0 -b \"$(cat examples/release-notes.md)\" -D 2025-06-12 -d -s ./examples/CHANGELOG.md",
+    "test:gen-release-2": "cd .. && node ./scripts/gen-release.mts -t v9.0.1 -n \"v9.0.1 Test Release\" -v 9.0.1 -b \"## Updated Release with lot of fun.\" -d ./examples/CHANGELOG.md",
+    "test:gen-release-3": "pnpm test:gen-release-2 && cd .. && node ./scripts/gen-release.mts -t v9.0.1 -n \"v9.0.1 Updated Release\" -v 9.0.1 -b \"$(cat examples/release-notes.md)\" ./examples/CHANGELOG-1.md",
     "test:patch-changelog": "cd .. && node ./scripts/patch-changelog.mjs -t v9.0.1 --token $(gh auth token)  ./examples/CHANGELOG.md"
   },
   "keywords": [],
