@@ -110,6 +110,7 @@ export function buildReleaseNotes(releaseData: ReleaseData): string {
     const root = buildReleaseNotesRoot(releaseData);
     // Convert the MDAST to a string
     let result = remark()
+        .use(remarkGfm)
         .data('settings', {
             bullet: '-',
             bulletOrdered: '.',
