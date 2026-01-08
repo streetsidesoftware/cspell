@@ -31,8 +31,20 @@ const emptyStats: CalcStatsPoint = {
     p10: 0,
 };
 
-export function getEmptyStats(): CalcStats {
-    return { ...emptyStats };
+export function getEmptyStats(point: number = 0): CalcStatsPoint {
+    return {
+        ...emptyStats,
+        point,
+        avg: point,
+        min: point,
+        max: point,
+        sum: point,
+        count: 1,
+        sd: 0,
+        trend: [0],
+        p90: point,
+        p10: point,
+    };
 }
 
 /**
@@ -46,20 +58,8 @@ function calcStatsPoint(data: CsvRecord[], fn: (d: CsvRecord) => number = (d) =>
     const trend = values.slice(-20);
     const point = values.pop();
     values.sort((a, b) => a - b);
-    if (point === undefined) return emptyStats;
-    if (values.length === 0)
-        return {
-            point,
-            avg: point,
-            min: point,
-            max: point,
-            sum: point,
-            count: 1,
-            sd: 0,
-            trend,
-            p90: point,
-            p10: point,
-        };
+    if (point === undefined) return getEmptyStats();
+    if (values.length === 0) return getEmptyStats(point);
     const sum = values.reduce((a, b) => a + b, 0);
     const avg = sum / (values.length || 1);
     const min = Math.min(...values);
@@ -82,7 +82,7 @@ export function calcStats(data: CsvRecord[], fn: (d: CsvRecord) => number): Calc
     const values = data.map((d) => fn(d)).map((v) => v || 1);
     const trend = values.slice(-20);
     values.sort((a, b) => a - b);
-    if (values.length === 0) return { ...emptyStats, trend };
+    if (values.length === 0) return getEmptyStats();
     const sum = values.reduce((a, b) => a + b, 0);
     const avg = sum / (values.length || 1);
     const min = Math.min(...values);
