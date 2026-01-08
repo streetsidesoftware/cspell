@@ -247,6 +247,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
 
+      - name: Setup Env
+        uses: ./.github/actions/setup
+        with:
+          node-version: ${{ needs.prepare.outputs.node_version }}
+
+      - name: Setup
+        run: pnpm i
+
       - name: Create the temp directory
         run: |
           mkdir -p temp/perf
