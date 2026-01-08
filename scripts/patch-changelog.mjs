@@ -5,7 +5,7 @@
 import { pathToFileURL } from 'node:url';
 import { parseArgs } from 'node:util';
 
-import { checkWeAreInGitRepo, processChangeLog } from './lib/changelog.mjs';
+import { checkWeAreInGitRepo, processChangeLog } from './lib/changelog.mts';
 import { fetchGitHubReleaseData } from './lib/fetch-release.mjs';
 
 /**

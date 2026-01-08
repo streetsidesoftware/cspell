@@ -1,36 +1,36 @@
-// @ts-check
-
+import type { Stats } from 'node:fs';
 import fs from 'node:fs/promises';
 
+import type { Heading, Root } from 'mdast';
 import { remark } from 'remark';
 import remarkGfm from 'remark-gfm';
 import { visit } from 'unist-util-visit';
 
-/**
- * @import { Node, Root, Heading, Text } from 'mdast';
- * @import { Stats } from 'node:fs';
- */
-
-/**
- * @typedef {Object} ReleaseData
- * @property {string} tag - The release tag, e.g., 'v1.2.3
- * @property {string} body - The release notes body in Markdown format.
- * @property {string} name - The name of the release.
- * @property {string} version - The version of the release, e.g., '1.2.3'.
- * @property {string} date - The release date in 'YYYY-MM-DD' format.
- * @property {boolean} [summarize] - Whether to summarize the release notes.
- * @property {boolean} [debug] - Whether to enable debug mode.
- * @property {URL} repoUrl - The URL of the repository.
- * @property {URL} apiUrl - The base URL of the REST API.
- */
+export interface ReleaseData {
+    /** The release tag, e.g., 'v1.2.3' */
+    tag: string;
+    /** The release notes body in Markdown format. */
+    body: string;
+    /** The name of the release. */
+    name: string;
+    /** The version of the release, e.g., '1.2.3'. */
+    version: string;
+    /** The release date in 'YYYY-MM-DD' format. */
+    date: string;
+    /** Whether to summarize the release notes. */
+    summarize?: boolean;
+    /** Whether to enable debug mode. */
+    debug?: boolean;
+    /** The URL of the repository. */
+    repoUrl: URL;
+    /** The base URL of the REST API. */
+    apiUrl: URL;
+}
 
 class AppError extends Error {
-    /**
-     *
-     * @param {string} message
-     * @param {string | undefined} [code]
-     */
-    constructor(message, code) {
+    code: string | undefined;
+
+    constructor(message: string, code?: string) {
         super(message);
         this.name = 'AppError';
         this.code = code;
@@ -42,19 +42,14 @@ class AppError extends Error {
 /**
  * Checks if the current working directory is the root of a git repository.
  */
-export async function checkWeAreInGitRepo() {
+export async function checkWeAreInGitRepo(): Promise<void> {
     const stats = await getFileStats('.git');
     if (!stats?.isDirectory()) {
         throw new AppError('Error: This script must be run at the git repository root.');
     }
 }
 
-/**
- *
- * @param {string | URL} filePath
- * @returns {Promise<Stats | undefined>}
- */
-export async function getFileStats(filePath) {
+export async function getFileStats(filePath: string | URL): Promise<Stats | undefined> {
     try {
         const stats = await fs.stat(filePath);
         return stats;
@@ -63,12 +58,7 @@ export async function getFileStats(filePath) {
     }
 }
 
-/**
- *
- * @param {ReleaseData} releaseData
- * @returns {Root}
- */
-function buildReleaseNotesRoot(releaseData) {
+function buildReleaseNotesRoot(releaseData: ReleaseData): Root {
     const injectNodes = remark().use(remarkGfm).parse(releaseData.body.replaceAll('\r\n', '\n'));
     const increaseDepth = transformerIncreaseHeadings();
     const date = releaseData.date;
@@ -76,8 +66,7 @@ function buildReleaseNotesRoot(releaseData) {
     const headingText = `${releaseData.tag} (${date})${name}`;
     increaseDepth(injectNodes);
     fixPullRequestReferences(releaseData.repoUrl, injectNodes);
-    /** @type {Heading} */
-    const heading = {
+    const heading: Heading = {
         type: 'heading',
         depth: 2,
         children: [{ type: 'text', value: headingText }],
@@ -87,12 +76,7 @@ function buildReleaseNotesRoot(releaseData) {
     return injectNodes;
 }
 
-/**
- *
- * @param {string} markdown
- * @return {string}
- */
-function extractSummaryText(markdown) {
+function extractSummaryText(markdown: string): string {
     let startIndex = markdown.indexOf('<summary>');
     if (startIndex === -1) return '';
     startIndex += '<summary>'.length;
@@ -103,10 +87,8 @@ function extractSummaryText(markdown) {
 
 /**
  * Summarize the release notes by replacing the <details> tags with the summary text.
- * @param {string} markdown
- * @return {string}
  */
-function summarizeReleaseNotes(markdown) {
+function summarizeReleaseNotes(markdown: string): string {
     let index = 0;
     let lastIndex = 0;
     let summary = '';
@@ -124,12 +106,7 @@ function summarizeReleaseNotes(markdown) {
     return markdown;
 }
 
-/**
- *
- * @param {ReleaseData} releaseData
- * @returns {string}
- */
-export function buildReleaseNotes(releaseData) {
+export function buildReleaseNotes(releaseData: ReleaseData): string {
     const root = buildReleaseNotesRoot(releaseData);
     // Convert the MDAST to a string
     let result = remark()
@@ -151,11 +128,7 @@ export function buildReleaseNotes(releaseData) {
     return result;
 }
 
-/**
- *
- * @param {Root} tree
- */
-function increaseHeadingDepth(tree) {
+function increaseHeadingDepth(tree: Root): void {
     let detailDepth = 0;
     visit(tree, (node, _index, _parent) => {
         // console.log('%s', `${_index}. Visiting node: ${node.type}`);
@@ -174,12 +147,7 @@ function increaseHeadingDepth(tree) {
     });
 }
 
-/**
- * @param {URL} urlRepo
- * @param {string} prNumber
- * @returns {string}
- */
-function prNumberToAnchor(urlRepo, prNumber) {
+function prNumberToAnchor(urlRepo: URL, prNumber: string): string {
     if (!/^#\d+$/.test(prNumber)) {
         throw new AppError(`Invalid pull request number: ${prNumber}`);
     }
@@ -187,12 +155,7 @@ function prNumberToAnchor(urlRepo, prNumber) {
     return `<a href="${url.href}">${prNumber}</a>`;
 }
 
-/**
- * @param {URL} urlRepo
- * @param {string} prNumber
- * @returns {string}
- */
-function prNumberToMarkdownLink(urlRepo, prNumber) {
+function prNumberToMarkdownLink(urlRepo: URL, prNumber: string): string {
     if (!/^#\d+$/.test(prNumber)) {
         throw new AppError(`Invalid pull request number: ${prNumber}`);
     }
@@ -200,13 +163,7 @@ function prNumberToMarkdownLink(urlRepo, prNumber) {
     return `[${prNumber}](${url.href})`;
 }
 
-/**
- *
- * @param {URL} urlRepo
- * @param {string} markdown
- * @returns
- */
-function fixPullRequestReferencesMarkdown(urlRepo, markdown) {
+function fixPullRequestReferencesMarkdown(urlRepo: URL, markdown: string): string {
     const value = markdown.replaceAll(
         /\((#\d+)\)/g,
         (match) => `(${prNumberToMarkdownLink(urlRepo, match.slice(1, -1))})`,
@@ -214,12 +171,7 @@ function fixPullRequestReferencesMarkdown(urlRepo, markdown) {
     return value;
 }
 
-/**
- *
- * @param {URL} urlRepo
- * @param {Root} tree
- */
-function fixPullRequestReferences(urlRepo, tree) {
+function fixPullRequestReferences(urlRepo: URL, tree: Root): void {
     visit(tree, (node, _index, _parent) => {
         // console.log('%s', `${_index}. Visiting node: ${node.type}`);
         if (node.type === 'html') {
@@ -235,33 +187,24 @@ function fixPullRequestReferences(urlRepo, tree) {
 }
 
 function transformerIncreaseHeadings() {
-    /**
-     * @param {Root} tree
-     */
     return increaseHeadingDepth;
 }
 
 const regexReleaseNotesHeader = /^##\s+(v?\d+\.\d+\.\d+)\s+\([-\d]+\).*$/gm;
 
-/**
- *
- * @param {string} tag
- * @returns {RegExp}
- */
-function regexForTag(tag) {
+function regexForTag(tag: string): RegExp {
     const regexReleaseNotesHeaderTag = /^##\s+(tag)\s+\([-\d]+\).*$/gm;
     const rTag = escapeRegExp(tag).replace('v', 'v?');
     const r = regexReleaseNotesHeaderTag.source.replace('tag', rTag);
     return new RegExp(r, 'gm');
 }
 
-/**
- *
- * @param {string} content
- * @param {string} tag
- * @returns {{ tag: string, index: number } | undefined}
- */
-function findReleaseNotesHeaderByTag(content, tag) {
+interface ReleaseNotesHeader {
+    tag: string;
+    index: number;
+}
+
+function findReleaseNotesHeaderByTag(content: string, tag: string): ReleaseNotesHeader | undefined {
     const regex = regexForTag(tag);
     const match = regex.exec(content);
     if (!match) return undefined;
@@ -269,13 +212,7 @@ function findReleaseNotesHeaderByTag(content, tag) {
     return { tag, index };
 }
 
-/**
- *
- * @param {string} content
- * @param {number} [fromOffset]
- * @returns {{ tag: string, index: number } | undefined}
- */
-function findReleaseNotesHeader(content, fromOffset = 0) {
+function findReleaseNotesHeader(content: string, fromOffset: number = 0): ReleaseNotesHeader | undefined {
     const regex = new RegExp(regexReleaseNotesHeader);
     regex.lastIndex = fromOffset;
     const match = regex.exec(content);
@@ -292,13 +229,12 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 `;
 
-/**
- *
- * @param {string} content
- * @param {ReleaseData} releaseData
- * @return {{ content: string, index: number }}
- */
-function determineContentInjectionPoint(content, releaseData) {
+interface ContentInjectionPoint {
+    content: string;
+    index: number;
+}
+
+function determineContentInjectionPoint(content: string, releaseData: ReleaseData): ContentInjectionPoint {
     const findTagHeader = findReleaseNotesHeaderByTag(content, releaseData.tag);
     if (findTagHeader) {
         const index = findTagHeader.index;
@@ -312,13 +248,7 @@ function determineContentInjectionPoint(content, releaseData) {
     return { content, index: foundHeader?.index || 0 };
 }
 
-/**
- *
- * @param {string} content
- * @param {ReleaseData} releaseData
- * @returns {string}
- */
-export function processChangeLogContent(content, releaseData) {
+export function processChangeLogContent(content: string, releaseData: ReleaseData): string {
     let notes = buildReleaseNotes(releaseData);
 
     // Find the first top-level heading (depth 2)
@@ -335,13 +265,7 @@ export function processChangeLogContent(content, releaseData) {
     return newContent.slice(0, index) + notes + newContent.slice(index);
 }
 
-/**
- *
- * @param {URL} url
- * @param {ReleaseData} releaseData
- * @returns
- */
-export async function processChangeLog(url, releaseData) {
+export async function processChangeLog(url: URL, releaseData: ReleaseData): Promise<void> {
     const urlOut = releaseData.debug ? new URL('CHANGELOG-1.md', url) : url;
     const content = await fs.readFile(url, 'utf8');
 
@@ -350,11 +274,6 @@ export async function processChangeLog(url, releaseData) {
     await fs.writeFile(urlOut, updatedChangeLog, 'utf8');
 }
 
-/**
- *
- * @param {string} s
- * @returns {string}
- */
-export function escapeRegExp(s) {
+export function escapeRegExp(s: string): string {
     return s.replaceAll(/[$()*+.?[\\\]^{|}]/g, '\\$&').replaceAll('-', '\\x2d');
 }
