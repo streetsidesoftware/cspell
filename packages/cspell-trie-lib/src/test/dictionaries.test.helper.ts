@@ -2,19 +2,22 @@ import { promises as fs } from 'node:fs';
 import * as path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { resolve as importResolve } from 'import-meta-resolve';
-
 import { importTrieV3AsTrieBlob } from '../lib/io/importV3FastBlob.ts';
 import type { Trie } from '../lib/trie.ts';
 import type { TrieBlob } from '../lib/TrieBlob/index.ts';
-import { readRawDictionaryFileFromConfig, readTrieFileAsTrie, readTrieFileFromConfig } from './reader.test.helper.ts';
+import {
+    readRawDictionaryFileFromConfig,
+    readTrieFileAsTrie,
+    readTrieFileFromConfig,
+    resolveModule,
+} from './reader.test.helper.ts';
 import { resolveGlobalDict, resolveGlobalSample } from './samples.ts';
 
 const tries = new Map<string, Promise<Trie>>();
 
 export function readTrieFromConfig(name: string): Promise<Trie> {
     return memorize(name, tries, (name) => {
-        const pkgLocation = fileURLToPath(importResolve(name, import.meta.url));
+        const pkgLocation = fileURLToPath(resolveModule(name));
         return readTrieFileFromConfig(pkgLocation);
     });
 }
@@ -24,7 +27,7 @@ export async function readAndProcessDictionaryFile<T>(
     pathOrPackage: string,
     dictionaryName?: string,
 ): Promise<T> {
-    const pkgLocation = fileURLToPath(importResolve(pathOrPackage, import.meta.url));
+    const pkgLocation = fileURLToPath(resolveModule(pathOrPackage));
     const buf = await readRawDictionaryFileFromConfig(pkgLocation, dictionaryName);
     return processor(buf);
 }

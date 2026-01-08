@@ -2,6 +2,7 @@
 import type { Buffer } from 'node:buffer';
 import * as fs from 'node:fs/promises';
 import * as path from 'node:path';
+import { pathToFileURL } from 'node:url';
 import * as zlib from 'node:zlib';
 
 import type { CSpellUserSettings } from '@cspell/cspell-types';
@@ -52,7 +53,13 @@ export async function readTrieFileFromConfig(configLocation: string, name?: stri
 }
 
 export function resolveModule(modulePath: string | URL): URL {
-    return new URL(typeof modulePath === 'string' ? import.meta.resolve(modulePath) : modulePath);
+    if (modulePath instanceof URL) {
+        return modulePath;
+    }
+    if (modulePath.startsWith('file://')) {
+        return new URL(modulePath);
+    }
+    return path.isAbsolute(modulePath) ? pathToFileURL(modulePath) : new URL(import.meta.resolve(modulePath));
 }
 
 export async function readConfiguration(modulePath: string | URL): Promise<CSpellUserSettings> {
