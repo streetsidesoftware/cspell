@@ -1,9 +1,11 @@
 {
     "extends": "../../tsconfig.base.json",
     "compilerOptions": {
+        "noEmit": true,
         "module": "NodeNext",
         "moduleResolution": "NodeNext",
         "skipLibCheck": true,
+        "allowImportingTsExtensions": true,
         "types": ["node"],
         "outDir": "dist"
     },

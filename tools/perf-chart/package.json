@@ -4,25 +4,23 @@
   "version": "8.3.2",
   "description": "Generate performance charts from cspell performance data.",
   "bin": {
-    "cspell-integration-tests": "bin.js"
+    "cspell-integration-tests": "bin.ts"
   },
   "type": "module",
   "engines": {
     "node": ">=20"
   },
   "scripts": {
-    "build": "pnpm run build:tsc && tsdown",
+    "build": "pnpm run build:tsc",
     "build:tsc": "tsc -p .",
-    "clean": "shx rm -rf dist coverage \"*.tsbuildInfo\"",
-    "clean-build": "pnpm run clean && pnpm run build",
     "watch": "tsc -p . -w"
   },
   "author": "Jason Dent",
   "license": "MIT",
   "keywords": [],
   "files": [
-    "lib",
-    "bin.js"
+    "src",
+    "bin.ts"
   ],
   "devDependencies": {
     "commander": "^14.0.2",
