@@ -6,23 +6,39 @@ import { parse as parseCsv } from 'csv-parse/sync';
 import type { CsvRecord, CsvRecordsRO } from './CsvRecord.ts';
 import type { Options } from './options.ts';
 import { perfReportMd } from './perfChartMD.ts';
+import { plotPng } from './plotPng.ts';
+import { plotSvg } from './plotSvg.ts';
 
 export async function perfReport(csvFile: string | URL, options: Options): Promise<void> {
     const days = options.days || 30;
-    const limit = changeDate(new Date(), -days).getTime();
-    console.error(`Generating performance report from ${csvFile} since ${new Date(limit).toISOString()}`);
-    const recordsInRange = (await readCsvData(csvFile)).filter((r) => r.platform === 'linux' && r.timestamp >= limit);
-    const runsInRange = groupCsvRecordsByRun(recordsInRange);
-    const runs = filterOutIncompleteRuns(runsInRange);
-    const records = runs.flat();
+    const limitDate = changeDate(new Date(), -days);
+    console.error(`Generating performance report from ${csvFile} since ${limitDate.toISOString()}`);
+    const rawRecords = await readCsvData(csvFile);
+    const records = limitDataToDaysAgo(rawRecords, days);
     // console.error(`Runs in range: ${runsInRange.length}, Records: ${recordsInRange.length}`);
-    // reportOnCsvRecords(recordsInRange);
-    console.error(`Runs: ${runs.length}, Records: ${records.length}`);
-    reportOnCsvRecords(records);
+    // _reportOnCsvRecords(recordsInRange);
+    // _reportOnCsvRecords(records);
     // console.error(`Found ${records.length} records in the last 30 days. %o`, countCsvRecordsByRepo(records));
 
     const markdown = perfReportMd(records, options);
     await outputReport(markdown, options);
+
+    const recordsGraph = limitDataToDaysAgo(rawRecords, days * 3);
+
+    await generateSvg(recordsGraph, options);
+
+    await generatePng(recordsGraph, options);
+}
+
+function limitDataToDaysAgo(data: CsvRecordsRO, days: number): CsvRecord[] {
+    const limitDate = changeDate(new Date(), -days);
+    const limitTs = limitDate.getTime();
+    const recordsInRange = data.filter((r) => r.platform === 'linux' && r.timestamp >= limitTs);
+    const runsInRange = groupCsvRecordsByRun(recordsInRange);
+    const runs = filterOutIncompleteRuns(runsInRange);
+    const records = runs.flat();
+    // console.error(`Runs: ${runs.length}, Records: ${records.length}`);
+    return records;
 }
 
 async function outputReport(markdown: string, options: Options): Promise<void> {
@@ -31,8 +47,26 @@ async function outputReport(markdown: string, options: Options): Promise<void> {
         return;
     }
 
-    await fs.mkdir(Path.dirname(options.output), { recursive: true });
-    await fs.writeFile(options.output, markdown, 'utf8');
+    await outputFile(options.output, markdown + '\n');
+}
+
+async function generateSvg(records: CsvRecord[], options: Options): Promise<void> {
+    if (!options.svg) return;
+
+    const svg = plotSvg(records, options);
+    await outputFile(options.svg, svg);
+}
+
+async function generatePng(records: CsvRecord[], options: Options): Promise<void> {
+    if (!options.png) return;
+
+    const buffer = await plotPng(records, options);
+    await outputFile(options.png, buffer);
+}
+
+async function outputFile(filePath: string, content: string | Buffer): Promise<void> {
+    await fs.mkdir(Path.dirname(filePath), { recursive: true });
+    await fs.writeFile(filePath, content);
 }
 
 function countCsvRecordsByRepo(records: CsvRecord[], counts: Map<string, number> = new Map()): Map<string, number> {
@@ -94,7 +128,7 @@ function filterOutIncompleteRuns(runs: CsvRecord[][]): CsvRecord[][] {
 }
 
 function groupCsvRecordsByRun(records: CsvRecordsRO): CsvRecord[][] {
-    // Groupd the csv records by run, that can be determined by the timestamp and
+    // Group the csv records by run, that can be determined by the timestamp and
     // the time it took to process the repo with a padding of 1 minute.
     // If a repo record occurs more than once, only the first record is kept.
 
@@ -119,11 +153,11 @@ function groupCsvRecordsByRun(records: CsvRecordsRO): CsvRecord[][] {
     return runs;
 }
 
-function reportOnCsvRecords(records: CsvRecordsRO): void {
+function _reportOnCsvRecords(records: CsvRecordsRO): void {
     // Get a list of all unique repositories.
     const repos = [...new Set(records.map((r) => r.repo))].sort();
 
-    // Groupd the csv records by run, that can be determined by the timestamp and
+    // Group the csv records by run, that can be determined by the timestamp and
     // the time it took to process the repo with a padding of 2 minutes.
 
     const runs: CsvRecord[][] = groupCsvRecordsByRun(records);

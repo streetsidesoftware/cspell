@@ -7,6 +7,8 @@ export interface DailyStats {
     files: number;
     elapsedSeconds: number;
     fps: number;
+    kps: number;
+    kpsStats: CalcStats;
     fpsByRepo: Map<string, CalcStats>;
 }
 
@@ -24,6 +26,8 @@ export function createDailyStats(data: CsvRecordsRO): DailyStats[] {
         const files = sumRecords(records, (r) => r.files);
         const elapsedSeconds = sumRecords(records, (r) => r.elapsedMs) / 1000;
         const fps = files / elapsedSeconds; // calcStats(records, (r) => (1000 * r.files) / r.elapsedMs);
+        const kps = sumRecords(records, (r) => r.kilobytes || 0) / elapsedSeconds;
+        const kpsStats = calcStats(records, (r) => r.kilobytes || 0);
 
         const fpsByRepo = new Map(
             [...groupBy(records, 'repo')].map(
@@ -34,7 +38,7 @@ export function createDailyStats(data: CsvRecordsRO): DailyStats[] {
             fpsByRepo.set(repo, fpsByRepo.get(repo) || getEmptyStats());
         });
 
-        dailyStats.push({ date, files, elapsedSeconds, fps, fpsByRepo });
+        dailyStats.push({ date, files, elapsedSeconds, fps, fpsByRepo, kps, kpsStats });
     }
     return dailyStats;
 }

@@ -7,7 +7,8 @@ program
     .description('Generate a min/max chart of the perf data')
     .option('-o, --output <path>', 'Path to the output the Markdown file.')
     .option('-g, --svg <path>', 'Path to SVG file to generate.')
-    .option('-u, --site-url <url>', 'The url to prefix svg path when adding it to the')
+    .option('-p, --png <path>', 'Path to PNG file to generate.')
+    .option('-u, --site-url <url>', 'The url to prefix svg/png path when adding it to the markdown.')
     .option(
         '-d, --days <number>',
         'The number of days in the past to plot.',
