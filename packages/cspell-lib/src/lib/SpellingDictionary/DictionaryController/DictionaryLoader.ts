@@ -21,6 +21,7 @@ import {
     isDictionaryDefinitionInlineInternal,
     isDictionaryFileDefinitionInternal,
 } from '../../Models/CSpellSettingsInternalDef.js';
+import { measurePerfFn } from '../../perf/index.js';
 import { AutoResolveWeakCache, AutoResolveWeakWeakCache } from '../../util/AutoResolve.js';
 import { toError } from '../../util/errors.js';
 import { SimpleCache } from '../../util/simpleCache.js';
@@ -100,7 +101,7 @@ export class DictionaryLoader {
             if (entry) {
                 return entry.pending.then(([dictionary]) => dictionary);
             }
-            const loadedEntry = this.loadEntry(def.path, def);
+            const loadedEntry = this.loadEntry(def.btrie || def.path, def);
             this.setCacheEntry(key, loadedEntry, def);
             this.keepAliveCache.set(def, loadedEntry);
             return loadedEntry.pending.then(([dictionary]) => dictionary);
@@ -263,23 +264,19 @@ function determineType(uri: URL, opts: Pick<LoadOptions, 'type'>): LoaderType {
     const t: DictionaryFileTypes = (opts.type && opts.type in loaders && opts.type) || 'S';
     const defLoaderType: LoaderType = t;
     const defType = uri.pathname.endsWith('.trie.gz') ? 'T' : defLoaderType;
-    const regTrieTest = /\.trie\b/i;
+    const regTrieTest = /\.b?trie\b/i;
     return regTrieTest.test(uri.pathname) ? 'T' : defType;
 }
 
 async function load(reader: Reader, uri: URL, options: LoadOptions): Promise<SpellingDictionary> {
     const type = determineType(uri, options);
-    const bTrie = await tryToLoadBTrie(reader, uri, options);
-    if (bTrie) {
-        return bTrie;
-    }
     const loader = loaders[type] || loaders.default;
     return loader(reader, uri, options);
 }
 
 async function legacyWordList(reader: Reader, filename: URL, options: LoadOptions) {
     const lines = await reader.readLines(filename);
-    return _legacyWordListSync(lines, filename, options);
+    return measurePerfFn('legacyWords', () => _legacyWordListSync(lines, filename, options));
 }
 
 function _legacyWordListSync(lines: Iterable<string>, filename: URL, options: LoadOptions) {
@@ -296,7 +293,7 @@ function _legacyWordListSync(lines: Iterable<string>, filename: URL, options: Lo
 
 async function wordsPerLineWordList(reader: Reader, filename: URL, options: LoadOptions) {
     const lines = await reader.readLines(filename);
-    return _wordsPerLineWordList(lines, filename.toString(), options);
+    return measurePerfFn('wordsPerLineWordList', () => _wordsPerLineWordList(lines, filename.toString(), options));
 }
 
 function _wordsPerLineWordList(lines: Iterable<string>, filename: string, options: LoadOptions) {
@@ -313,55 +310,18 @@ function _wordsPerLineWordList(lines: Iterable<string>, filename: string, option
 
 async function loadSimpleWordList(reader: Reader, filename: URL, options: LoadOptions) {
     const lines = await reader.readLines(filename);
-    return createSpellingDictionary(lines, options.name, filename.href, options);
+    return measurePerfFn('loadSimpleWordList', () =>
+        createSpellingDictionary(lines, options.name, filename.href, options),
+    );
 }
 
 async function loadTrie(reader: Reader, filename: URL, options: LoadOptions) {
     const content = await reader.read(filename);
-    return createSpellingDictionaryFromTrieFile(content, options.name, filename.href, options);
+    return measurePerfFn('loadTrie', () =>
+        createSpellingDictionaryFromTrieFile(content, options.name, filename.href, options),
+    );
 }
 
 function toLines(content: string): string[] {
     return content.split(/\n|\r\n|\r/);
-}
-
-let useBTrie: boolean = false;
-
-/**
- * Toggle the use of btrie files when loading dictionaries.
- * @returns the new setting
- */
-export function toggleUseBTrie(): boolean {
-    useBTrie = !useBTrie;
-    return useBTrie;
-}
-
-const regexpDictEndings = /\.(?:txt|trie)(?:\.gz)?$/i;
-
-async function loadBTrie(reader: Reader, filename: URL, options: LoadOptions): Promise<SpellingDictionary> {
-    const data = await reader.read(filename);
-    return createSpellingDictionaryFromTrieFile(data, options.name, filename.href, options);
-}
-
-async function tryToLoadBTrie(
-    reader: Reader,
-    filename: URL,
-    options: LoadOptions,
-): Promise<SpellingDictionary | undefined> {
-    if (!useBTrie) return undefined;
-    const pathname = filename.pathname;
-    if (!pathname.includes('/node_modules/')) return undefined;
-    if (!regexpDictEndings.test(pathname)) return undefined;
-    const pathnameBTrie = pathname.replace(regexpDictEndings, '.btrie');
-    const pathnameBTrieGz = pathnameBTrie + '.gz';
-    const searchPaths = [pathnameBTrieGz, pathnameBTrie];
-
-    for (const p of searchPaths) {
-        const url = new URL(filename);
-        url.pathname = p;
-        const dict = loadBTrie(reader, url, options).catch(() => undefined);
-        if (dict) return dict;
-    }
-
-    return undefined;
 }

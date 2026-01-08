@@ -2,6 +2,7 @@ import type { BinaryFormat } from '../binary/index.ts';
 import { BinaryDataBuilder, BinaryDataReader, BinaryFormatBuilder } from '../binary/index.ts';
 import { GTrie } from '../GTrie/index.ts';
 import { assert } from '../utils/assert.ts';
+import { measurePerf } from '../utils/performance.ts';
 
 type U32Array = Uint32Array<ArrayBuffer>;
 type U16Array = Uint16Array<ArrayBuffer>;
@@ -139,6 +140,13 @@ export class StringTableBuilder {
     }
 
     build(): StringTable {
+        const endPerf = measurePerf('StringTableBuilder.build');
+        const table = this.#build();
+        endPerf();
+        return table;
+    }
+
+    #build(): StringTable {
         this.#locked = true;
 
         if (!this.#data.length) {

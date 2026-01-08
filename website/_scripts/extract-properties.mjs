@@ -1,7 +1,7 @@
 // @ts-check
 import assert from 'node:assert';
 import { promises as fs } from 'node:fs';
-import { inject, createTable, padLines } from './lib/utils.mjs';
+import { inject, createTable, padLines } from './lib/utils.mts';
 
 const schemaFile = new URL('../../cspell.schema.json', import.meta.url);
 const schemaFileOut = new URL('../docs/Configuration/auto_properties.md', import.meta.url);

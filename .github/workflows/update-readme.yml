@@ -22,6 +22,8 @@ jobs:
 
       - name: Setup and Build
         uses: ./.github/actions/install-build
+        with:
+          node-version: '24.x'
 
       - name: Update Contributors
         run: |

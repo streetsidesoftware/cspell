@@ -22,7 +22,11 @@ import { console as customConsole } from './console.js';
 import type { CSpellReporterConfiguration } from './models.js';
 import type { LinterCliOptions } from './options.js';
 import { ApplicationError } from './util/errors.js';
+import type { PerfMeasurement } from './util/perfMeasurements.js';
+import { getPerfMeasurements } from './util/perfMeasurements.js';
 import type { FinalizedReporter } from './util/reporters.js';
+import type { Table, TableRow } from './util/table.js';
+import { tableToLines } from './util/table.js';
 import { uniqueFilterFnGenerator } from './util/util.js';
 
 const templateIssue = `{green $filename}:{yellow $row:$col} - $message ({red $text}) $quickFix`;
@@ -288,6 +292,7 @@ export function getReporter(options: ReporterOptions, config?: CSpellReporterCon
         }
         const { files, issues, cachedFiles, filesWithIssues, errors, skippedFiles } = result;
         const numFilesWithIssues = filesWithIssues.size;
+        const chalk = stderr.chalk;
 
         if (stderr.getColorLevel() > 0) {
             stderr.write('\r');
@@ -326,18 +331,78 @@ export function getReporter(options: ReporterOptions, config?: CSpellReporterCon
             consoleError(`  Files Skipped  : ${perfStats.filesSkipped.toString().padStart(6)}`);
             consoleError(`  Files Cached   : ${perfStats.filesCached.toString().padStart(6)}`);
             consoleError(`  Processing Time: ${perfStats.elapsedTimeMs.toFixed(2).padStart(9)}ms`);
-            consoleError('Stats:');
-            const stats = Object.entries(perfStats.perf)
-                .filter((p): p is [string, number] => !!p[1])
-                .map(([key, value]) => [key, value.toFixed(2)] as const);
-            const padName = Math.max(...stats.map((s) => s[0].length));
-            const padValue = Math.max(...stats.map((s) => s[1].length));
-            stats.sort((a, b) => a[0].localeCompare(b[0]));
-            for (const [key, value] of stats) {
-                value && consoleError(`  ${key.padEnd(padName)}: ${value.padStart(padValue)}ms`);
+
+            const tableStats: Table = {
+                title: chalk.bold('Perf Stats:'),
+                header: ['Name', 'Time (ms)'],
+                columnAlignments: ['L', 'R'],
+                indent: 2,
+                rows: Object.entries(perfStats.perf)
+                    .filter((p): p is [string, number] => !!p[1])
+                    .map(([key, value]) => [key, value.toFixed(2)] as const),
+            };
+
+            consoleError('');
+            for (const line of tableToLines(tableStats)) {
+                consoleError(line);
+            }
+
+            if (options.verboseLevel) {
+                verbosePerfReport();
             }
         }
     };
+
+    function verbosePerfReport() {
+        const perfMeasurements = getPerfMeasurements();
+        if (!perfMeasurements.length) return;
+
+        const notable = extractNotableBySelfTimeInGroup(perfMeasurements);
+
+        const chalk = stderr.chalk;
+        const maxDepth = Math.max(...perfMeasurements.map((m) => m.depth));
+        const depthIndicator = (d: number) => '⋅'.repeat(d) + ' '.repeat(maxDepth - d);
+        const rows: TableRow[] = perfMeasurements.map((m) => {
+            const cbd = (text: string) => colorByDepth(chalk, m.depth, text);
+            const cNotable = (text: string) => (notable.has(m) ? chalk.yellow(text) : text);
+            return [
+                chalk.dim('⋅'.repeat(m.depth)) + colorByDepthGrayscale(stderr.chalk, m.depth, m.name),
+                cbd(m.totalTimeMs.toFixed(2) + chalk.dim(depthIndicator(m.depth))),
+                cbd(cNotable((m.totalTimeMs - m.nestedTimeMs).toFixed(2))),
+                cbd(m.count.toString()),
+                cbd(m.minTimeMs.toFixed(2)),
+                cbd(m.maxTimeMs.toFixed(2)),
+                cbd((m.totalTimeMs / m.count).toFixed(2)),
+            ];
+        });
+        const table = tableToLines({
+            title: chalk.bold('Detailed Measurements:'),
+            header: ['Name', 'Total Time (ms)', 'Self (ms)', 'Count', 'Min (ms)', 'Max (ms)', 'Avg (ms)'],
+            rows,
+            columnAlignments: ['L', 'R', 'R', 'R', 'R', 'R', 'R'],
+            indent: 2,
+        });
+
+        consoleError('\n-------------------------------------------\n');
+        for (const line of table) {
+            consoleError(line);
+        }
+    }
+
+    function colorByDepth(chalk: ChalkInstance, depth: number, text: string): string {
+        const colors = [chalk.green, chalk.cyan, chalk.blue, chalk.magenta, chalk.red];
+        const color = colors[depth % colors.length];
+        if (depth / colors.length >= 1) {
+            return chalk.dim(color(text));
+        }
+        return color(text);
+    }
+
+    function colorByDepthGrayscale(chalk: ChalkInstance, depth: number, text: string): string {
+        const grayLevel = Math.max(32, 255 - depth * 20);
+        const color = chalk.rgb(grayLevel, grayLevel, grayLevel);
+        return color(text);
+    }
 
     function collectPerfStats(p: ProgressFileCompleteWithPerf) {
         if (p.cached) {
@@ -378,6 +443,32 @@ export function getReporter(options: ReporterOptions, config?: CSpellReporterCon
         result: !silent && summary ? resultEmitter : nullEmitter,
         features: undefined,
     };
+}
+
+function extractNotableBySelfTimeInGroup(measurements: PerfMeasurement[]): Set<PerfMeasurement> {
+    const notable = new Set<PerfMeasurement>();
+
+    if (!measurements.length) return notable;
+
+    let highest: PerfMeasurement | undefined;
+    let highestSelfTime = 0;
+    for (const m of measurements) {
+        if (m.depth === 0 || !highest) {
+            if (highest) notable.add(highest);
+            highest = m;
+            highestSelfTime = m.totalTimeMs - m.nestedTimeMs;
+            continue;
+        }
+        const selfTime = m.totalTimeMs - m.nestedTimeMs;
+        if (selfTime > highestSelfTime) {
+            highest = m;
+            highestSelfTime = selfTime;
+        }
+    }
+
+    if (highest) notable.add(highest);
+
+    return notable;
 }
 
 function formatIssue(io: IOChalk, templateStr: string, issue: ReporterIssue, maxIssueTextWidth: number): string {

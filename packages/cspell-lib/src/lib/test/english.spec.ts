@@ -21,14 +21,15 @@ describe('Validate English', async () => {
         const finalSettings = cspell.finalizeSettings(fileSettings);
         const dict = await getDictionary.getDictionary(finalSettings);
 
-        const startTime = process.hrtime();
+        const startTime = performance.now();
         // cspell:ignore installsallnecessary
         const results = dict.suggest(
             'installsallnecessary',
             createSuggestOptions(5, cspell.CompoundWordsMethod.SEPARATE_WORDS, 3),
         );
-        const elapsed = elapsedTimeMsFrom(startTime);
-        console.log(`Elapsed time ${elapsed.toFixed(2)}ms`);
+        const elapsed = performance.now() - startTime;
+        // console.log(`Elapsed time ${elapsed.toFixed(2)}ms`);
+        expect(elapsed).toBeLessThan(10_000);
         const sugs = results.map((a) => a.word);
         expect(sugs).toEqual(expect.arrayContaining(['installs all necessary']));
     });
@@ -101,11 +102,3 @@ describe('Validate English', async () => {
         expect(r.map((a) => a.text)).toEqual(['setsid', 'setsid']);
     });
 });
-
-function elapsedTimeMsFrom(relativeTo: [number, number]): number {
-    return hrTimeToMs(process.hrtime(relativeTo));
-}
-
-function hrTimeToMs(hrTime: [number, number]): number {
-    return hrTime[0] * 1.0e3 + hrTime[1] * 1.0e-6;
-}

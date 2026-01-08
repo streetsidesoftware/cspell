@@ -3,7 +3,7 @@ import { promises as fs } from 'node:fs';
 import { parse as parseCsv } from 'csv-parse/sync';
 import { calcStandardDeviation, plotPointRelativeToStandardDeviation, simpleHistogram } from 'thistogram';
 
-import { createMdTable, inject } from './text.js';
+import { createMdTable, inject } from './text.ts';
 
 interface CsvRecord {
     timestamp: number;
@@ -19,7 +19,7 @@ interface CsvRecord {
     kilobytes: number | undefined | null;
 }
 
-export async function perfReport(csvFile: string | URL): Promise<string> {
+export async function perfReportMd(csvFile: string | URL): Promise<string> {
     const limit = changeDate(new Date(), -30).getTime();
     console.error(`Generating performance report from ${csvFile} since ${new Date(limit).toISOString()}`);
     const recordsInRange = (await readCsvData(csvFile)).filter((r) => r.platform === 'linux' && r.timestamp >= limit);

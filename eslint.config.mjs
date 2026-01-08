@@ -1,4 +1,6 @@
 // @ts-check
+/* eslint-disable n/no-unsupported-features/node-builtins */
+
 import cspellESLintPluginRecommended from '@cspell/eslint-plugin/recommended';
 import eslint from '@eslint/js';
 import { defineConfig } from 'eslint/config';
@@ -18,6 +20,13 @@ export default defineConfig(
     eslint.configs.recommended,
     nodePlugin.configs['flat/recommended'],
     ...tsEslint.configs.recommended,
+    {
+        languageOptions: {
+            parserOptions: {
+                tsconfigRootDir: import.meta.dirname,
+            },
+        },
+    },
     {
         ignores: ['**/*.json'],
         plugins: {

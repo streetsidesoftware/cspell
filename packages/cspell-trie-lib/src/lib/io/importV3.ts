@@ -2,7 +2,7 @@ import type { BuilderCursor, TrieBuilder } from '../Builder/index.ts';
 import type { TrieData } from '../TrieData.ts';
 import { TrieNodeBuilder } from '../TrieNode/TrieNodeBuilder.ts';
 import type { TrieNodeTrie } from '../TrieNode/TrieNodeTrie.ts';
-import { getGlobalPerfTimer } from '../utils/timer.ts';
+import { measurePerf } from '../utils/performance.ts';
 import { BACK, EOL, EOR, EOW, ESCAPE, LF, REF } from './constants.ts';
 
 const specialCharacterMap = new Map([
@@ -30,8 +30,7 @@ export function importTrieV3WithBuilder<T extends TrieData>(
     builder: TrieBuilder<T>,
     srcLines: string[] | Iterable<string> | string,
 ): T {
-    const timer = getGlobalPerfTimer();
-    const timerStart = timer.start('importTrieV3');
+    const timerStart = measurePerf('importTrieV3');
     const dataLines: string[] =
         typeof srcLines === 'string' ? srcLines.split('\n') : Array.isArray(srcLines) ? srcLines : [...srcLines];
 
@@ -87,7 +86,7 @@ export function importTrieV3WithBuilder<T extends TrieData>(
 
     const parser = parseStream(radix);
 
-    const timerParse = timer.start('importTrieV3.parse');
+    const timerParse = measurePerf('importTrieV3.parse');
 
     for (let i = startOfData + 1; i < dataLines.length; ++i) {
         const line = dataLines[i];

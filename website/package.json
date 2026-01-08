@@ -10,7 +10,7 @@
     "deploy": "docusaurus deploy",
     "clean": "pnpm run clear && rm -rf build",
     "clear": "docusaurus clear",
-    "gen-docs": "node _scripts/extract-properties.mjs",
+    "gen-docs": "node _scripts/extract-properties.mjs && node _scripts/update-contributors.mts",
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
@@ -29,7 +29,7 @@
     "prism-react-renderer": "^2.4.1",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
-    "sass": "^1.97.1"
+    "sass": "^1.97.2"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "^3.9.2",

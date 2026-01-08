@@ -41,7 +41,7 @@ concurrency:
 
 env:
   RUNS_ON: ubuntu-latest
-  NODE_VERSION: '22.x'
+  NODE_VERSION: 'lts/*'
 
 jobs:
   pre-build:
@@ -161,7 +161,7 @@ jobs:
               'packages/*/tsconfig.json',
               'packages/*/*.ts',
               'packages/*/*.mts',
-              'tools/perf-chart/lib/app.cjs',
+              'tools/perf-chart/**',
               '*-lock.yaml'
             ) }}
 
@@ -247,6 +247,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
 
+      - name: Setup Env
+        uses: ./.github/actions/setup
+        with:
+          node-version: ${{ needs.prepare.outputs.node_version }}
+
+      - name: Setup
+        run: pnpm i
+
       - name: Create the temp directory
         run: |
           mkdir -p temp/perf
@@ -265,13 +273,13 @@ jobs:
         run: |
           touch temp/perf/perf-run-empty.csv
           cat temp/perf/perf-run-*.csv | sort >> integration-tests/perf/perf.csv
-          ./tools/perf-chart/bin.js ./integration-tests/perf/perf.csv > perf-report.md
+          ./tools/perf-chart/bin.ts ./integration-tests/perf/perf.csv > perf-report.md
 
       - name: Gen Report
         id: report
         run: |
           echo 'report<<@@REPORT@@' >> $GITHUB_OUTPUT
-          ./tools/perf-chart/bin.js ./integration-tests/perf/perf.csv >> $GITHUB_OUTPUT
+          ./tools/perf-chart/bin.ts ./integration-tests/perf/perf.csv >> $GITHUB_OUTPUT
           echo '@@REPORT@@' >> $GITHUB_OUTPUT
 
       - name: PR Body

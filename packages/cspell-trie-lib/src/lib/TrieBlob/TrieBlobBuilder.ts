@@ -1,4 +1,4 @@
-import type { BuilderCursor, TrieBuilder } from '../Builder/index.ts';
+import { type BuilderCursor, insertWordsAtCursor, type TrieBuilder } from '../Builder/index.ts';
 import type { BuildOptions } from '../BuildOptions.ts';
 import type { ITrieNode, ITrieNodeId, ITrieNodeRoot } from '../ITrieNode/index.ts';
 import type { PartialTrieInfo, TrieCharacteristics, TrieInfo } from '../ITrieNode/TrieInfo.ts';
@@ -6,6 +6,7 @@ import { normalizeTrieInfo, TrieInfoBuilder } from '../ITrieNode/TrieInfo.ts';
 import { StringTableBuilder } from '../StringTable/StringTable.ts';
 import type { TrieNode, TrieRoot } from '../TrieNode/TrieNode.ts';
 import { assert } from '../utils/assert.ts';
+import { measurePerf } from '../utils/performance.ts';
 import { assertValidUtf16Character } from '../utils/text.ts';
 import { CharIndexBuilder } from './CharIndex.ts';
 import { optimizeNodes, optimizeNodesWithStringTable } from './optimizeNodes.ts';
@@ -17,7 +18,8 @@ import { encodeTextToUtf8_32Rev, encodeToUtf8_32Rev } from './Utf8.ts';
 
 type FastTrieBlobNode = number[];
 
-const AutoOptimizeNodeCount = 1000;
+// Turn off for now, it is too expensive to do automatically.
+const AUTO_OPTIMIZE_NODE_COUNT = 0;
 
 export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
     private charIndex = new CharIndexBuilder();
@@ -60,12 +62,7 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
             return this.#insertWord(word);
         }
 
-        const words = word;
-
-        for (const w of words) {
-            this.#insertWord(w);
-        }
-        return this;
+        return this.insertWords(word);
     }
 
     getCursor(): BuilderCursor {
@@ -75,6 +72,8 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
     }
 
     private createCursor(id: number): BuilderCursor {
+        const endPerf = measurePerf('TrieBlobBuilder.cursor');
+
         const nodeChildRefShift = NodeChildIndexRefShift;
         const NodeMaskEOW = NodeHeaderEOWMask;
         const LetterMask = NodeMaskCharByte;
@@ -83,6 +82,7 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
         let disposed = false;
         const dispose = () => {
             if (disposed) return;
+            endPerf();
             disposed = true;
             if (this._cursorId === id) {
                 this._cursor = undefined;
@@ -229,6 +229,18 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
         return c;
     }
 
+    /**
+     * Insert multiple words. Performance is (~10%) better if the words are sorted.
+     * @param words - words to insert
+     * @returns this
+     */
+    insertWords(words: Iterable<string> | string[]): this {
+        for (const word of words) {
+            this.#insertWord(word);
+        }
+        return this;
+    }
+
     #insertWord(word: string): this {
         word = word.trim();
         if (!word) return this;
@@ -251,6 +263,8 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
                 bytes.push(seq);
                 const node = nodes[nodeIdx];
                 const count = node.length;
+                // Searching backwards is faster as new entries are more likely to be near the end.
+                // This is especially true for sorted word lists.
                 let i = count - 1;
                 for (; i > 0; --i) {
                     if ((node[i] & NodeMaskChildCharIndex) === seq) {
@@ -277,12 +291,6 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
             // Make sure the EOW is set
             const node = nodes[nodeIdx];
             node[0] |= NodeMaskEOW;
-        }
-
-        {
-            const utf8Seq = this.wordToUtf8Seq(word);
-            assert(utf8Seq.length === bytes.length);
-            assert(utf8Seq.join(',') === bytes.join(','));
         }
 
         return this;
@@ -322,27 +330,24 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
         return this;
     }
 
-    optimize(): this {
-        this.#assertNotReadonly();
-        this._cursor?.dispose?.();
-
-        return this;
+    copyNodes(): FastTrieBlobNode[] {
+        return this.nodes.map((n) => [...n]);
     }
 
     build(buildOptions?: BuildOptions): TrieBlob {
-        const { optimize, useStringTable } = buildOptions || {};
         this._cursor?.dispose?.();
         this._readonly = true;
         this.freeze();
+        const endPerf = measurePerf('TrieBlobBuilder.build');
+        const { optimize, useStringTable } = buildOptions || {};
+
         const info = this.#infoBuilder.build();
-        let sortedNodes = sortNodes(
-            this.nodes.map((n) => Uint32Array.from(n)),
-            NodeMaskCharByte,
-        );
+        const bNodes = this.nodes;
+        let sortedNodes = sortNodes(bNodes, NodeMaskCharByte);
 
         // Optimize automatically if the node count is small.
         // This will not involve a string table.
-        if (optimize ?? sortNodes.length < AutoOptimizeNodeCount) {
+        if (optimize ?? sortNodes.length < AUTO_OPTIMIZE_NODE_COUNT) {
             sortedNodes = optimizeNodes(sortedNodes);
         }
 
@@ -363,7 +368,9 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
         //     stringTableBitInfo: r.stringTable.bitInfo(),
         // });
 
-        return toTrieBlob(r.nodes, r.stringTable, normalizeTrieInfo(info.info));
+        const data = toTrieBlob(r.nodes, r.stringTable, normalizeTrieInfo(info.info));
+        endPerf();
+        return data;
     }
 
     toJSON(): {
@@ -404,6 +411,7 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
      * @returns TrieBlob
      */
     static fromTrieRoot(root: TrieRoot, buildOptions?: BuildOptions): TrieBlob {
+        const endPerf = measurePerf('TrieBlobBuilder.fromTrieRoot');
         const NodeCharIndexMask = NodeMaskCharByte;
         const nodeChildRefShift = NodeChildIndexRefShift;
         const NodeMaskEOW = NodeHeaderEOWMask;
@@ -463,7 +471,9 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
 
         walk(root);
 
-        return tf.build(buildOptions);
+        const result = tf.build(buildOptions);
+        endPerf();
+        return result;
     }
 
     /**
@@ -474,6 +484,7 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
      * @returns TrieBlob
      */
     static fromITrieRoot(root: ITrieNodeRoot, buildOptions?: BuildOptions): TrieBlob {
+        const endPerf = measurePerf('TrieBlobBuilder.fromITrieRoot');
         const NodeCharIndexMask = NodeMaskCharByte;
         const nodeChildRefShift = NodeChildIndexRefShift;
         const NodeMaskEOW = NodeHeaderEOWMask;
@@ -532,7 +543,9 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
 
         walk(root);
 
-        return tf.build(buildOptions);
+        const result = tf.build(buildOptions);
+        endPerf();
+        return result;
     }
 }
 
@@ -553,4 +566,13 @@ function createCharUtf8_32RevLookup(maxSize: number = 256): (char: string) => nu
         }
         return code;
     };
+}
+
+export function insertWordsIntoTrieBlobBuilderUsingCursor(
+    builder: TrieBlobBuilder,
+    words: Iterable<string> | string[],
+): void {
+    const cursor = builder.getCursor();
+    insertWordsAtCursor(cursor, words);
+    cursor.dispose?.();
 }
