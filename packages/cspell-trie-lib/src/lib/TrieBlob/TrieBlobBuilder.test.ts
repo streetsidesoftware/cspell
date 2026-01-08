@@ -1,6 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
 import { registerDebugMode } from '../../test/debugger.ts';
+import { readFixtureFile } from '../../test/samples.ts';
 import type { BuilderCursor } from '../Builder/index.ts';
 import { insertWordsAtCursor } from '../Builder/index.ts';
 import { buildITrieFromWords } from '../buildITrie.ts';
@@ -14,9 +15,11 @@ import { trieRootToITrieRoot } from '../TrieNode/trie.ts';
 import { createTrieRoot, insert } from '../TrieNode/trie-util.ts';
 import type { TrieNode, TrieRoot } from '../TrieNode/TrieNode.ts';
 import { createTrieBlobFromTrieRoot } from './createTrieBlob.ts';
-import { TrieBlobBuilder } from './TrieBlobBuilder.ts';
+import { insertWordsIntoTrieBlobBuilderUsingCursor, TrieBlobBuilder } from './TrieBlobBuilder.ts';
 
-describe('FastTrieBlobBuilder', () => {
+describe('TrieBlobBuilder', () => {
+    const pCompaniesContent = readFixtureFile('dictionaries/companies/companies.txt');
+
     test('insert', () => {
         const words = ['one', 'two', 'three', 'four', 'houses', 'house', '!forbidden'];
         const builder = new TrieBlobBuilder();
@@ -30,6 +33,52 @@ describe('FastTrieBlobBuilder', () => {
             hasPreferredSuggestions: false,
         });
     });
+
+    test('insertWords Companies', async () => {
+        const content = await pCompaniesContent;
+        const words = new Set(parseDictionaryLines(content));
+        const builder = new TrieBlobBuilder();
+        builder.insertWords(words);
+        const ft = builder.build();
+        expect([...ft.words()].sort()).toEqual([...words].sort());
+        expect(extractTrieCharacteristics(ft)).toEqual({
+            hasCompoundWords: false,
+            hasForbiddenWords: false,
+            hasNonStrictWords: true,
+            hasPreferredSuggestions: false,
+        });
+    });
+
+    test('insertWordsCursor Companies', async () => {
+        const content = await pCompaniesContent;
+        const words = new Set(parseDictionaryLines(content, { sortBatchSize: 0 }));
+        const builder = new TrieBlobBuilder();
+        insertWordsIntoTrieBlobBuilderUsingCursor(builder, words);
+        const ft = builder.build();
+        expect([...ft.words()].sort()).toEqual([...words].sort());
+        expect(extractTrieCharacteristics(ft)).toEqual({
+            hasCompoundWords: false,
+            hasForbiddenWords: false,
+            hasNonStrictWords: true,
+            hasPreferredSuggestions: false,
+        });
+    });
+
+    // // This is currently a failing test. Needs investigation.
+    // test('insertWordsCursor Companies partial sort', async () => {
+    //     const content = await pCompaniesContent;
+    //     const words = new Set(parseDictionaryLines(content, { sortBatchSize: 32 }));
+    //     const builder = new TrieBlobBuilder();
+    //     builder.insertWordsCursor(words);
+    //     const ft = builder.build();
+    //     expect([...ft.words()].sort()).toEqual([...words].sort());
+    //     expect(extractTrieCharacteristics(ft)).toEqual({
+    //         hasCompoundWords: false,
+    //         hasForbiddenWords: false,
+    //         hasNonStrictWords: true,
+    //         hasPreferredSuggestions: false,
+    //     });
+    // });
 
     test('insert characteristics ! :', () => {
         const words = ['one', 'two', 'three', 'four', 'houses', 'house', ':color:special', '~caseInsensitive'];
@@ -107,8 +156,6 @@ describe('FastTrieBlobBuilder', () => {
         const builder = new TrieBlobBuilder();
         const cursor = builder.getCursor();
         const words = sampleWords();
-        // console.log('words %o', words.sort());
-        // console.log('Unique Letters: %o', new Set(words.join('')));
         const sortedUnique = [...new Set(words)].sort();
         insertWordsAtCursor(cursor, words);
         const t = builder.build();

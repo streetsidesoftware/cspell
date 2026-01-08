@@ -21,6 +21,8 @@ import { buildTrieFast } from './TrieBuilder.ts';
 import { normalizeWord, normalizeWordForCaseInsensitive } from './utils/normalizeWord.ts';
 import { measurePerf } from './utils/performance.ts';
 
+const BATCH_SIZE = 0;
+
 export interface ParseDictionaryOptions extends BuildOptions {
     compoundCharacter: string;
     optionalCompoundCharacter: string;
@@ -110,6 +112,13 @@ export interface ParseDictionaryOptions extends BuildOptions {
      * @default false
      */
     useStringTable?: boolean;
+
+    /**
+     * The number of lines to batch before sorting.
+     * Set to 0 to disable sorting.
+     * @default 0
+     */
+    sortBatchSize?: number;
 }
 
 const RegExpSplit = /[\s,;]/g;
@@ -405,6 +414,12 @@ export function createDictionaryLineParserMapper(options?: Partial<ParseDictiona
         ? []
         : [opConcatMap(mapOptionalPrefix), opConcatMap(mapOptionalSuffix)];
 
+    const optionalOperators: Operator<string>[] = [];
+
+    if (options?.sortBatchSize) {
+        optionalOperators.push(createBatchAndSortLines(options.sortBatchSize));
+    }
+
     const processLines = opPipe(
         opFilter(isString),
         splitLines,
@@ -417,6 +432,7 @@ export function createDictionaryLineParserMapper(options?: Partial<ParseDictiona
         opConcatMap(mapNormalize),
         handleForbiddenPrefix,
         opMap(removeDoublePrefix),
+        ...optionalOperators,
     );
 
     return processLines;
@@ -503,6 +519,32 @@ function splitLine(line: string, regExp: RegExp | string): string[] {
     return encodeLine(line)
         .split(regExp)
         .map((line) => decodeLine(line));
+}
+
+function createBatchAndSortLines(batchSize: number = BATCH_SIZE): Operator<string> {
+    if (batchSize <= 1) {
+        return (s) => s;
+    }
+
+    function* batchAndSortLines(lines: Iterable<string>): Iterable<string> {
+        const maxSize = batchSize;
+        const batch: string[] = Array(maxSize);
+
+        let i = 0;
+        for (const line of lines) {
+            batch[i++] = line;
+            if (i >= maxSize) {
+                batch.sort();
+                yield* batch;
+                i = 0;
+            }
+        }
+        batch.length = i;
+        batch.sort();
+        yield* batch;
+    }
+
+    return batchAndSortLines;
 }
 
 export const __testing__: {
