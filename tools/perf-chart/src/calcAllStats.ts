@@ -101,6 +101,28 @@ export function sumRecords(data: CsvRecord[], fn: (d: CsvRecord) => number): num
     return data.reduce((sum, d) => sum + fn(d), 0);
 }
 
+export interface SumMinMaxMidAvg {
+    sum: number;
+    min: number;
+    max: number;
+    mid: number;
+    avg: number;
+    cnt: number;
+}
+
+export function calcSumMinMaxMidAvg(data: CsvRecord[], fn: (d: CsvRecord) => number): SumMinMaxMidAvg {
+    const values = data.map((d) => fn(d)).sort((a, b) => a - b);
+    const sum = values.reduce((a, b) => a + b, 0);
+    const min = Math.min(...values);
+    const max = Math.max(...values);
+    const p = values.length / 2;
+    const p0 = Math.floor(p);
+    const p1 = Math.ceil(p);
+    const mid = (values[p0] + values[p1]) / 2 || 0;
+    const avg = sum / (values.length || 1);
+    return { sum, min, max, mid, avg, cnt: values.length };
+}
+
 function calcP(values: number[], p: number): number {
     const sorted = [...values].sort((a, b) => a - b);
     const n = sorted.length * p;

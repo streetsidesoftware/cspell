@@ -10,6 +10,7 @@ export interface CsvRecord {
     usageUser: number;
     usageSystem: number;
     kilobytes: number | undefined | null;
+    runId?: number | undefined;
 }
 
 export type CsvRecordRO = Readonly<CsvRecord>;

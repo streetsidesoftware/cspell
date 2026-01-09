@@ -273,7 +273,7 @@ jobs:
         run: |
           touch temp/perf/perf-run-empty.csv
           cat temp/perf/perf-run-*.csv | sort >> integration-tests/perf/perf.csv
-          ./tools/perf-chart/bin.ts ./integration-tests/perf/perf.csv > perf-report.md
+          ./tools/perf-chart/bin.ts ./integration-tests/perf/perf.csv -o perf-report.md --daily-csv ./static/daily-stats.csv
 
       - name: Gen Report
         id: report
