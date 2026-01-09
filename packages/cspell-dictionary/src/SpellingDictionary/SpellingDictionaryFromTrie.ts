@@ -10,12 +10,15 @@ import { CompoundWordsMethod, decodeTrie, suggestionCollector } from 'cspell-tri
 
 import { clean } from '../util/clean.js';
 import { measurePerf } from '../util/performance.js';
+import type { RepMapper } from '../util/repMap.js';
 import { createMapper, createRepMapper } from '../util/repMap.js';
 import * as Defaults from './defaults.js';
 import type {
     FindOptionsRO,
     FindResult,
     HasOptionsRO,
+    MapWordMultipleFn,
+    MapWordSingleFn,
     PreferredSuggestion,
     SpellingDictionary,
     SpellingDictionaryOptionsRO,
@@ -34,8 +37,9 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
     private _size = 0;
     readonly knownWords: Set<string> = new Set<string>();
     readonly unknownWords: Set<string> = new Set<string>();
-    readonly mapWord: (word: string) => string;
-    readonly remapWord: (word: string) => string[];
+    readonly mapWord: MapWordSingleFn | undefined;
+    readonly remapWord: MapWordMultipleFn | undefined;
+    readonly repMapper: RepMapper | undefined;
     readonly type = 'SpellingDictionaryFromTrie';
     readonly isDictionaryCaseSensitive: boolean;
     readonly containsNoSuggestWords: boolean;
@@ -52,8 +56,12 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         readonly source = 'from trie',
         size?: number,
     ) {
-        this.mapWord = createMapper(options.repMap, options.dictionaryInformation?.ignore);
-        this.remapWord = createRepMapper(options.repMap, options.dictionaryInformation?.ignore);
+        const mapWord = createMapper(options.repMap, options.dictionaryInformation?.ignore);
+        const repMapper = createRepMapper(options.repMap, options.dictionaryInformation?.ignore);
+        this.mapWord = mapWord?.fn;
+        this.remapWord = repMapper?.fn;
+        this.repMapper = repMapper;
+
         this.isDictionaryCaseSensitive = options.caseSensitive ?? true;
         this.containsNoSuggestWords = options.noSuggest || false;
         this._size = size || 0;
@@ -122,7 +130,7 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         ignoreCase: boolean,
         compoundSeparator: string | undefined,
     ): FindAnyFormResult | undefined {
-        const outerForms = outerWordForms(word, this.remapWord || ((word) => [this.mapWord(word)]));
+        const outerForms = outerWordForms(word, this.repMapper);
 
         for (const form of outerForms) {
             const r = this._findAnyForm(form, useCompounds, ignoreCase, compoundSeparator);
@@ -248,23 +256,47 @@ export function createSpellingDictionaryFromTrieFile(
     return d;
 }
 
-function* outerWordForms(word: string, mapWord: (word: string) => string[]): Iterable<string> {
+// eslint-disable-next-line no-control-regex
+const isAsciiRange = /^[\u0000-\u007F]*$/;
+
+function* outerWordForms(word: string, repMapper: RepMapper | undefined): Iterable<string> {
     // Only generate the needed forms.
     const sent = new Set<string>();
     let w = word;
     const ww = w;
     yield w;
-    sent.add(w);
-    w = word.normalize('NFC');
-    if (w !== ww) {
-        yield w;
+
+    // this function is called for every word lookup, so needs to be efficient.
+    // Check to see if it is a pure ascii word.
+    if (!isAsciiRange.test(w)) {
         sent.add(w);
+        w = word.normalize('NFC');
+        if (w !== ww) {
+            yield w;
+            sent.add(w);
+        }
+        w = word.normalize('NFD');
+        if (w !== ww && !sent.has(w)) {
+            yield w;
+            sent.add(w);
+        }
     }
-    w = word.normalize('NFD');
-    if (w !== ww && !sent.has(w)) {
-        yield w;
-        sent.add(w);
+
+    if (!repMapper) return;
+    if (repMapper.test && !repMapper.test.test(ww)) return;
+    const mapWord = repMapper.fn;
+
+    // nothing was added to the set, just do the map.
+    if (!sent.size) {
+        for (const m of mapWord(w)) {
+            if (m !== ww && !sent.has(m)) {
+                yield m;
+                sent.add(m);
+            }
+        }
+        return;
     }
+
     for (const f of sent) {
         for (const m of mapWord(f)) {
             if (m !== ww && !sent.has(m)) {

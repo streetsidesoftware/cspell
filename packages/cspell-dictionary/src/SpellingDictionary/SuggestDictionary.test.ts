@@ -153,6 +153,6 @@ describe('SuggestDictionary 2', () => {
         word        | expected
         ${'purple'} | ${'purple'}
     `('mapWord "$word"', async ({ word, expected }) => {
-        expect(dict.mapWord(word)).toEqual(expected);
+        expect(dict.mapWord?.(word)).toEqual(expected);
     });
 });

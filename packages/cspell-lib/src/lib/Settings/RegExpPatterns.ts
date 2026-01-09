@@ -43,6 +43,8 @@ export const regExBase64SingleLineLegacy: RegExp =
 export const regExBase64MultiLine: RegExp =
     /(?<![A-Za-z0-9/+])["']?(?:[A-Za-z0-9/+]{40,})["']?(?:\s^\s*["']?[A-Za-z0-9/+]{40,}["']?)+(?:\s^\s*["']?[A-Za-z0-9/+]+={0,3}["']?)?(?![A-Za-z0-9/+=])/gm;
 
+// /(?<![A-Za-z0-9/+])["']?\b(?:[A-Za-z0-9/+]{40,})\b["']?(?:\s^\s*["']?\b[A-Za-z0-9/+]{40,}\b["']?)+(?:\s^\s*["']?[A-Za-z0-9/+]+={0,3}["']?)?\b(?![A-Za-z0-9/+=])/gm
+
 // cspell:ignore aeiou
 // The following is an attempt at detecting random strings.
 // export const regExRandomString =

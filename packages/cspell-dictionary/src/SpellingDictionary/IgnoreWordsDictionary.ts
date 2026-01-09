@@ -22,6 +22,7 @@ class IgnoreWordsDictionary implements SpellingDictionary {
     readonly containsNoSuggestWords = true;
     readonly options: SpellingDictionaryOptions = {};
     readonly type = 'ignore';
+    readonly mapWord = undefined;
     constructor(
         readonly name: string,
         readonly source: string,
@@ -88,9 +89,6 @@ class IgnoreWordsDictionary implements SpellingDictionary {
     }
     genSuggestions(): void {
         return;
-    }
-    mapWord(word: string): string {
-        return word;
     }
     get size() {
         return this.dict.size;

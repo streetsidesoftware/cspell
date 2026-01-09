@@ -128,7 +128,7 @@ describe('Verify using multiple dictionaries', () => {
         const dicts = [createSpellingDictionary(wordsA, 'wordsA', 'test', opts())];
 
         const dictCollection = createCollection(dicts, 'test');
-        expect(dictCollection.mapWord('Hello')).toBe('Hello');
+        expect(dictCollection.mapWord?.('Hello')).toBe('Hello');
     });
 
     test('checks for suggestions', async () => {

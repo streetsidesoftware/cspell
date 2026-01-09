@@ -25,6 +25,7 @@ class SuggestDictionaryImpl implements SuggestDictionary {
     readonly options: SpellingDictionaryOptions = {};
     readonly type = 'suggest';
     readonly size: number;
+    readonly mapWord = undefined;
     /**
      * Note: ignoreWordsLower is only suggestions with the case and accents removed.
      * The logic is that if someone explicity ignored an upper case version, it does not
@@ -120,9 +121,6 @@ class SuggestDictionaryImpl implements SuggestDictionary {
         sugs.forEach((result) => collector.add(result));
     }
 
-    mapWord(word: string): string {
-        return word;
-    }
     readonly isDictionaryCaseSensitive: boolean = true;
     getErrors?(): Error[] {
         return [];

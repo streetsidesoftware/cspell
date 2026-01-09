@@ -7,13 +7,15 @@ const { createMapperRegExp, charsetToRepMap, createTrie, calcAllEdits, applyEdit
 describe('ReMap Tests', () => {
     test('empty replace map', () => {
         const mapper = createMapper([]);
-        expect(mapper('hello')).toBe('hello');
+        expect(mapper).toBe(undefined);
     });
 
     test('punctuation replacement', () => {
         const mapper = createMapper([['`', "'"]]);
-        expect(mapper('hello')).toBe('hello');
-        expect(mapper('don`t')).toBe("don't");
+        expect(mapper?.fn('hello')).toBe('hello');
+        expect(mapper?.test?.test('hello')).toBe(false);
+        expect(mapper?.fn('don`t')).toBe("don't");
+        expect(mapper?.test?.test('don`t')).toBe(true);
     });
 
     test('multiple replacements', () => {
@@ -21,8 +23,8 @@ describe('ReMap Tests', () => {
             ['a', 'A'],
             ['b', 'B'],
         ]);
-        expect(mapper('apple')).toBe('Apple');
-        expect(mapper('banana')).toBe('BAnAnA');
+        expect(mapper?.fn('apple')).toBe('Apple');
+        expect(mapper?.fn('banana')).toBe('BAnAnA');
     });
 
     test('empty replacements', () => {
@@ -31,8 +33,8 @@ describe('ReMap Tests', () => {
             ['b', 'B'],
             ['', ''],
         ]);
-        expect(mapper('apple')).toBe('Apple');
-        expect(mapper('banana')).toBe('BAnAnA');
+        expect(mapper?.fn('apple')).toBe('Apple');
+        expect(mapper?.fn('banana')).toBe('BAnAnA');
     });
 
     test('regex replacements', () => {
@@ -40,7 +42,7 @@ describe('ReMap Tests', () => {
             ['!|@|#|\\$', '_'],
             ['a', 'A'],
         ]);
-        expect(mapper('$apple!!')).toBe('_Apple__');
+        expect(mapper?.fn('$apple!!')).toBe('_Apple__');
     });
 
     test('repeated replacements', () => {
@@ -48,7 +50,7 @@ describe('ReMap Tests', () => {
             ['a', 'A'],
             ['a', 'X'],
         ]);
-        expect(mapper('apples')).toBe('Apples');
+        expect(mapper?.fn('apples')).toBe('Apples');
     });
 
     test('nested regex replacements', () => {
@@ -57,7 +59,7 @@ describe('ReMap Tests', () => {
             ['((\\$))', '#'],
             ['a', 'A'],
         ]);
-        expect(mapper('$apple!!')).toBe('#Apple__');
+        expect(mapper?.fn('$apple!!')).toBe('#Apple__');
     });
 
     test('bad regex replacements', () => {
@@ -65,7 +67,7 @@ describe('ReMap Tests', () => {
             ['(', '_'],
             ['a', 'A'],
         ]);
-        expect(mapper('(apple)')).toBe('_Apple)');
+        expect(mapper?.fn('(apple)')).toBe('_Apple)');
     });
 
     test('empty regex replacements', () => {
@@ -73,20 +75,20 @@ describe('ReMap Tests', () => {
             ['', '_'],
             ['a', 'A'],
         ]);
-        expect(mapper('(apple)')).toBe('(Apple)');
+        expect(mapper?.fn('(apple)')).toBe('(Apple)');
     });
 
     // cspell:ignore strasse straße
 
     test.each`
         map                             | word         | expected
-        ${[]}                           | ${'word'}    | ${'word'}
+        ${[]}                           | ${'word'}    | ${undefined}
         ${[['ae', 'ä'], ['ss', 'ß']]}   | ${'strasse'} | ${'straße'}
         ${[['ae', 'ä'], ['s{2}', 'ß']]} | ${'strasse'} | ${'straße'}
         ${[['ae', 'ä'], ['ss', 'ß']]}   | ${'STRASSE'} | ${'STRASSE'}
     `('map with word $map / $word', ({ map, word, expected }) => {
         const mapper = createMapper(map);
-        expect(mapper(word)).toBe(expected);
+        expect(mapper?.fn(word)).toBe(expected);
     });
 
     test.each`

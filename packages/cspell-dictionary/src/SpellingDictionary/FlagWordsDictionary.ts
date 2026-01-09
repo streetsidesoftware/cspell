@@ -70,6 +70,8 @@ export class FlagWordsDictionary implements SpellingDictionary {
     readonly containsNoSuggestWords = false;
     readonly options: SpellingDictionaryOptions = {};
     readonly type = 'flag-words';
+    readonly mapWord = undefined;
+
     constructor(
         readonly name: string,
         readonly source: string,
@@ -120,9 +122,7 @@ export class FlagWordsDictionary implements SpellingDictionary {
     genSuggestions(): void {
         return;
     }
-    mapWord(word: string): string {
-        return word;
-    }
+
     get size(): number {
         return this.dictTypos.size + (this.dictTrie?.size || 0);
     }
