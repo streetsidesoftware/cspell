@@ -3,7 +3,7 @@ Repository: slint-ui/slint
 Url: "https://github.com/slint-ui/slint"
 Args: ["--config=../../../../repositories/config/slint/cspell.config.yaml","--issues-summary-report","."]
 Lines:
- CSpell: Files checked: 2627, skipped: 3, Issues found: 5280 in 907 files.
+ CSpell: Files checked: 2627, skipped: 3, Issues found: 5260 in 904 files.
  exit code: 1
 CMakeLists.txt:17:14     - Unknown word (TOPLEVEL)   -- set(SLINT_IS_TOPLEVEL_BUILD TRUE)
 Cross.toml:6:29      - Unknown word (gnueabihf)  -- armv7-unknown-linux-gnueabihf]
@@ -259,10 +259,6 @@ api/cpp/include/slint_window.h:715:21    - Unknown word (HINSTANCE)  -- /// Retu
 api/cpp/include/slint_window.h:724:21    - Unknown word (HINSTANCE)  -- /// Returns the HINSTANCE for this window.
 api/cpp/include/slint_window.h:728:21    - Unknown word (hinstance)  -- HINSTANCE win32_hinstance() const
 api/cpp/include/slint_window.h:731:50    - Unknown word (hinstance)  -- private::slint_windowrc_hinstance_win32(&inner.handle
-api/cpp/platform.rs:127:7     - Unknown word (Repr)       -- /// a Repr(C) variant of slint
-api/cpp/platform.rs:128:29    - Unknown word (Repr)       -- struct LayoutConstraintsReprC {
-api/cpp/platform.rs:139:23    - Unknown word (Repr)       -- -> LayoutConstraintsReprC {
-api/cpp/platform.rs:141:22    - Unknown word (Repr)       -- LayoutConstraintsReprC {
 api/cpp/platform.rs:198:22    - Unknown word (ctypes)     -- #[allow(improper_ctypes_definitions)]
 api/cpp/platform.rs:200:22    - Unknown word (ctypes)     -- #[allow(improper_ctypes_definitions)]
 api/cpp/platform.rs:290:18    - Unknown word (ctypes)     -- #[allow(improper_ctypes_definitions)]
@@ -2504,7 +2500,6 @@ examples/uefi-demo/main.rs:299:13    - Unknown word (mpointer)   -- let mpointer
 examples/uefi-demo/main.rs:300:13    - Unknown word (conpointer) -- let conpointer = unsafe { &*ptr };
 examples/uefi-demo/main.rs:301:26    - Unknown word (conpointer) -- let mouse_mode = conpointer.mode();
 examples/uefi-demo/main.rs:316:17    - Unknown word (mpointer)   -- mpointer.read_state().expect
-examples/uefi-demo/main.rs:360:47    - Unknown word (repr)       -- SlintBltPixel is a repr(transparent) BltPixel
 examples/uefi-demo/main.rs:368:78    - Unknown word (blit)       -- buffer formats. The blit buffer is easier to
 examples/uefi-demo/main.rs:44:35     - Unknown word (cntvct)     -- arch::asm!("mrs {}, cntvct_el0", out(reg) ticks
 examples/uefi-demo/main.rs:61:35     - Unknown word (cntfrq)     -- arch::asm!("mrs {}, cntfrq_el0", out(reg) freq
@@ -2521,14 +2516,6 @@ examples/wgpu_texture/lib.rs:57:13     - Unknown word (multisample) -- multisamp
 examples/wgpu_texture/lib.rs:57:32     - Unknown word (Multisample) -- multisample: wgpu::MultisampleState::default(),
 examples/wgpu_texture/lib.rs:58:13     - Unknown word (multiview)   -- multiview: None,
 examples/wgpu_texture/lib.rs:80:47     - Unknown word (Unorm)       -- TextureFormat::Rgba8UnormSrgb,
-helper_crates/const-field-offset/macro/macro.rs:139:17    - Unknown word (repr)       -- let mut has_repr_c = false;
-helper_crates/const-field-offset/macro/macro.rs:145:22    - Unknown word (repr)       -- if i == "repr" {
-helper_crates/const-field-offset/macro/macro.rs:148:36    - Unknown word (repr)       -- Ok("C") => has_repr_c = true,
-helper_crates/const-field-offset/macro/macro.rs:173:13    - Unknown word (repr)       -- if !has_repr_c {
-helper_crates/const-field-offset/macro/macro.rs:175:81    - Unknown word (repr)       -- for structures using repr(C)"}},
-helper_crates/const-field-offset/macro/macro.rs:355:11    - Unknown word (REPR)       -- const _NO_REPR_C: u32 = 0;
-helper_crates/const-field-offset/macro/macro.rs:369:8     - Unknown word (REPR)       -- const _REPR_PACKED: u32 = 0;
-helper_crates/const-field-offset/src/lib.rs:41:38     - Unknown word (repr)       -- Structures were change to repr(c) and to inherit FieldOffset
 helper_crates/vtable/src/compile_fail_tests.rs:104:13    - Unknown word (vref)       -- new_vref!(let q : VRef<MyVTable
 helper_crates/vtable/src/compile_fail_tests.rs:120:13    - Unknown word (vref)       -- new_vref!(let q : VRef<MyVTable
 helper_crates/vtable/src/compile_fail_tests.rs:136:13    - Unknown word (vref)       -- new_vref!(let mut q : VRefMut
@@ -2540,7 +2527,6 @@ helper_crates/vtable/src/lib.rs:404:18    - Unknown word (vref)       -- new_vre
 helper_crates/vtable/src/lib.rs:404:5     - Unknown word (vref)       -- new_vref!(let my_vref : VRef
 helper_crates/vtable/src/lib.rs:407:22    - Unknown word (vref)       -- new_vref!(let mut my_vref_m : VRefMut<MyVTable
 helper_crates/vtable/src/lib.rs:407:5     - Unknown word (vref)       -- new_vref!(let mut my_vref_m
-helper_crates/vtable/src/lib.rs:84:16     - Unknown word (repr)       -- /// and a `repr(C)` with `(vtable, ptr
 helper_crates/vtable/tests/test_vrc.rs:281:9     - Unknown word (vweak)      -- let vweak1 = VRc::downgrade(&vrc
 helper_crates/vtable/tests/test_vrc.rs:284:9     - Unknown word (vweak)      -- let vweak2 = VRc::downgrade(&vrc
 helper_crates/vtable/tests/test_vrc.rs:286:23    - Unknown word (vweak)      -- let vweak1clone = vweak1.clone();
@@ -3712,7 +3698,6 @@ internal/core/graphics/wgpu_27.rs:56:30     - Unknown word (waitable)   -- let d
 internal/core/graphics/wgpu_27.rs:57:47     - Unknown word (Waitable)   -- :Dx12UseFrameLatencyWaitableObject::from_env().unwrap
 internal/core/graphics/wgpu_27.rs:66:33     - Unknown word (waitable)   -- latency_waitable_object: dx12_latency
 internal/core/graphics/wgpu_27.rs:66:63     - Unknown word (waitable)   -- object: dx12_latency_waitable_object,
-internal/core/input.rs:182:57    - Unknown word (repr)       -- Duration because it is not repr(c))
 internal/core/input.rs:239:5     - Unknown word (altgr)      -- altgr: bool,
 internal/core/input.rs:255:42    - Unknown word (altgr)      -- codes::AltGr => self.altgr = pressed,
 internal/core/input.rs:274:21    - Unknown word (altgr)      -- if self.altgr {
@@ -3732,9 +3717,6 @@ internal/core/items/flickable.rs:260:13    - Unknown word (tmin)       -- tmin
 internal/core/items/input_items.rs:676:32    - Unknown word (swipegesturehandler) -- extern "C" fn slint_swipegesturehandler_cancel(
 internal/core/items/text.rs:1114:22   - Unknown word (preedit)    -- self.preedit_text.set(event.preedit
 internal/core/items/text.rs:12:82     - Unknown word (Strin)      -- EventButton, RenderingResult, StringArg,
-internal/core/items/text.rs:2005:17   - Unknown word (repr)       -- let mut repr = TextInputVisualRepresentati
-internal/core/items/text.rs:2015:9    - Unknown word (repr)       -- repr.apply_password_character
-internal/core/items/text.rs:2016:9    - Unknown word (repr)       -- repr
 internal/core/items/text.rs:2257:32   - Unknown word (textinput)  -- extern "C" fn slint_textinput_set_selection_offsets
 internal/core/items/text.rs:2274:32   - Unknown word (textinput)  -- extern "C" fn slint_textinput_select_all(
 internal/core/items/text.rs:2289:32   - Unknown word (textinput)  -- extern "C" fn slint_textinput_clear_selection(
@@ -3744,7 +3726,6 @@ internal/core/items/text.rs:2347:24   - Unknown word (fontmetrics) -- pub fn sli
 internal/core/items/text.rs:2365:46   - Unknown word (fontmetrics) -- slint_cpp_text_item_fontmetrics(
 internal/core/items/text.rs:2374:25   - Unknown word (fontmetrics) -- slint_text_item_fontmetrics(window_adapter, self
 internal/core/items/text.rs:240:32    - Unknown word (Strin)      -- link_clicked: Callback<StringArg>,
-internal/core/items/text.rs:669:53    - Unknown word (repr)       -- ops::Range<i32>>` but `repr(C)`
 internal/core/items/text.rs:671:36    - Unknown word (preedit)    -- the selection within a preedit
 internal/core/items/text.rs:741:9     - Unknown word (preedit)    -- pub preedit_text: Property<SharedString
 internal/core/items/text.rs:742:32    - Unknown word (preedit)    -- selection within the preedit (cursor and anchor)
@@ -3785,7 +3766,6 @@ internal/core/properties/change_tracker.rs:75:28     - Unknown word (ttime)     
 internal/core/properties/properties_animations.rs:526:42    - Unknown word (fractual)   -- test_delayed_animation_fractual_iteration_triggered
 internal/core/properties/properties_animations.rs:568:13    - Unknown word (fractual)   -- // (fractual) end of animation
 internal/core/sharedvector.rs:679:31    - Unknown word (sharedvector) -- serialize_deserialize_sharedvector() {
-internal/core/slice.rs:11:50     - Unknown word (repr)       -- same as `&'a [T]`  but `repr(C)`
 internal/core/string.rs:690:31    - Unknown word (sharedstring) -- serialize_deserialize_sharedstring() {
 internal/core/styled_text.rs:81:42     - Unknown word (seperated)  -- has been parsed and seperated into paragraphs
 internal/core/textlayout.rs:41:5      - Unknown word (glyphclusters) -- mod glyphclusters;
