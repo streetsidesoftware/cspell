@@ -9,6 +9,7 @@ program
     .option('-g, --svg <path>', 'Path to SVG file to generate.')
     .option('-p, --png <path>', 'Path to PNG file to generate.')
     .option('-u, --site-url <url>', 'The url to prefix svg/png path when adding it to the markdown.')
+    .option('--daily-csv <path>', 'Path out output the daily csv')
     .option(
         '-d, --days <number>',
         'The number of days in the past to plot.',
