@@ -179,6 +179,8 @@ function _reportOnCsvRecords(records: CsvRecordsRO): void {
     });
 }
 
+// cspell:ignore DHMS
+
 function deltaTimeMsInDHMS(deltaMs: number): string {
     return deltaTimeSInDHMS(deltaMs / 1000);
 }
