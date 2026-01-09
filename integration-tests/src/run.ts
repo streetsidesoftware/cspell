@@ -2,7 +2,7 @@ import os from 'node:os';
 import path from 'node:path';
 
 import type { Command } from 'commander';
-import { createCommand, InvalidArgumentError } from 'commander';
+import { createCommand, InvalidArgumentError, Option } from 'commander';
 
 import { check } from './check.js';
 import type { ListRepositoryOptions } from './repositoryHelper.js';
@@ -10,9 +10,9 @@ import { addRepository, listRepositories } from './repositoryHelper.js';
 
 const defaultParallel = Math.max(os.cpus().length / 2, 1);
 
-function processParallelArg(value: string): number {
-    const v = Number.parseInt(value, 10);
-    return v < 1 ? defaultParallel : v;
+function processParallelArg(value: number | string): number {
+    value = typeof value === 'string' ? Number.parseInt(value, 10) : value;
+    return value < 1 ? defaultParallel : value;
 }
 
 function validateParallelArg(value: string) {
@@ -21,7 +21,30 @@ function validateParallelArg(value: string) {
     if (Number.isNaN(parsedValue) || parsedValue < 1) {
         throw new InvalidArgumentError('Must be a number >= 1');
     }
-    return value;
+    return parsedValue;
+}
+
+export interface CliOptions {
+    /** Only update the snapshot */
+    updateSnapshots?: boolean;
+    /** Update Repositories to the latest SHA */
+    updateRepositories?: boolean;
+    /** GitHub Personal Access Token */
+    githubToken?: string | undefined;
+    /** Exclusion patterns */
+    exclude?: string[];
+    /** Stop on first error */
+    fail?: boolean;
+    /** Max number of parallel processes */
+    parallelLimit?: number;
+    /** Turn on NodeJS --cpu-prof */
+    cpuProf?: boolean;
+    /** Check the results. */
+    checkResults?: boolean;
+    /** Show progress */
+    progress?: boolean;
+    /** Verbose output */
+    verbose?: boolean;
 }
 
 function run(program: Command) {
@@ -32,43 +55,43 @@ function run(program: Command) {
         .option('-u, --update-snapshots', 'Update Snapshots', false)
         .option('-f, --fail', 'Fail on first error.', false)
         .option('-x, --exclude <exclusions...>', 'Exclusions patterns.')
+        .option('--no-check-results', 'Do not check the result against snapshot.')
+        .addOption(
+            new Option('--progress', 'Show progress during checking.').default(false).implies({ checkResults: false }),
+        )
+        .addOption(new Option('--verbose', 'Verbose output.').default(false).implies({ checkResults: false }))
         .option(
             '-t, --githubToken <token>',
             'GitHub Personal Access Token. Can also be set via the environment variable GITHUB_TOKEN. Example: -t $(gh auth token)',
         )
-        .option(
-            '-p, --parallelLimit <number>',
-            'Max number of parallel checks.',
-            validateParallelArg,
-            `${defaultParallel}`,
-        )
+        .option('-p, --parallelLimit <number>', 'Max number of parallel checks.', validateParallelArg, defaultParallel)
         .option('--cpu-prof', 'Enable NodeJS CPU Profiling')
         .description('Run the integration tests, checking the spelling results against the various repositories')
-        .action(
-            (
-                patterns: string[],
-                options: {
-                    updateRepositories?: boolean;
-                    updateSnapshots?: boolean;
-                    fail?: boolean;
-                    exclude?: string[];
-                    parallelLimit: string;
-                    githubToken?: string | undefined;
-                    cpuProf?: boolean;
-                },
-            ) => {
-                const {
-                    updateRepositories: update = false,
-                    fail = false,
-                    exclude = [],
-                    updateSnapshots = false,
-                    cpuProf = false,
-                } = options;
-                const parallelLimit = processParallelArg(options.parallelLimit);
-                registerToken(options.githubToken);
-                return check(patterns || [], { update, updateSnapshots, fail, exclude, parallelLimit, cpuProf });
-            },
-        );
+        .action((patterns: string[], options: CliOptions) => {
+            const {
+                updateRepositories: update = false,
+                fail = false,
+                exclude = [],
+                updateSnapshots = false,
+                cpuProf = false,
+                verbose = false,
+                progress = false,
+                checkResults = true,
+            } = options;
+            const parallelLimit = processParallelArg(options.parallelLimit || 0);
+            registerToken(options.githubToken);
+            return check(patterns || [], {
+                update,
+                updateSnapshots,
+                fail,
+                exclude,
+                parallelLimit,
+                cpuProf,
+                verbose,
+                progress,
+                checkResults,
+            });
+        });
 
     interface ListOptions extends Omit<ListRepositoryOptions, 'exclude' | 'patterns'> {
         exclude?: string[];

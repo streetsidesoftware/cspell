@@ -2,9 +2,9 @@ import Shell from 'shelljs';
 
 export interface ExecOptions {
     /** log output to console */
-    echo?: boolean;
+    echo?: boolean | undefined;
     /** exit if error code non zero */
-    bail?: boolean;
+    bail?: boolean | undefined;
     /** Optional environment variables. */
     env?: Record<string, string> | undefined;
 }
