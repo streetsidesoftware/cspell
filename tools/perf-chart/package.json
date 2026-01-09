@@ -13,6 +13,7 @@
   "scripts": {
     "build": "pnpm run build:tsc",
     "build:tsc": "tsc -p .",
+    "test-run": "./bin.ts  ../../integration-tests/perf/perf.csv -o ../../perf-report.md --png ../../perf-report.png",
     "watch": "tsc -p . -w"
   },
   "author": "Jason Dent",
@@ -23,8 +24,17 @@
     "bin.ts"
   ],
   "devDependencies": {
+    "@types/d3": "^7.4.3",
+    "@types/jsdom": "^27.0.0",
     "commander": "^14.0.2",
     "csv-parse": "^6.1.0",
     "thistogram": "^2.0.0"
+  },
+  "dependencies": {
+    "@observablehq/plot": "^0.6.17",
+    "chart.js": "^4.5.1",
+    "d3": "^7.9.0",
+    "jsdom": "^27.4.0",
+    "skia-canvas": "^3.0.8"
   }
 }
