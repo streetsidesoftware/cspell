@@ -59,12 +59,19 @@ interface CheckContext {
     logger: Logger;
     rep: Repository;
     cpuProf: boolean;
+    checkResults: boolean;
+    progress: boolean;
+    verbose: boolean;
+    update: boolean;
 }
 
 interface CheckAndUpdateOptions {
     update: boolean;
     updateSnapshots: boolean;
     cpuProf: boolean;
+    checkResults: boolean;
+    progress: boolean;
+    verbose: boolean;
 }
 
 async function execCheckAndUpdate(rep: Repository, options: CheckAndUpdateOptions): Promise<CheckResult> {
@@ -105,18 +112,34 @@ async function execCheckAndUpdate(rep: Repository, options: CheckAndUpdateOption
         logger,
         rep,
         cpuProf: options.cpuProf,
+        checkResults: options.checkResults,
+        progress: options.progress,
+        verbose: options.verbose,
+        update: options.update || options.updateSnapshots,
     };
 
-    return execCheck(context, options.update || options.updateSnapshots);
+    return execCheck(context);
 }
 
-async function execCheck(context: CheckContext, update: boolean): Promise<CheckResult> {
+async function execCheck(context: CheckContext): Promise<CheckResult> {
+    const update = context.update && !context.progress && !context.verbose;
+    const checkResultsAgainstSnapshot = (context.checkResults && !context.progress && !context.verbose) || update;
+    const echo = !!(context.verbose || context.progress);
     const { rep, logger, color } = context;
     const name = rep.path;
     const path = Path.join(repositoryDir, rep.path);
     const nodeArgs = context.cpuProf ? ['--cpu-prof', '--cpu-prof-dir="../../../.."'] : [];
     const uniqueArgs = rep.uniqueOnly !== false ? ['--unique'] : [];
-    const cmdArgs = rep.listAllFiles ? cspellArgsListAllFiles : cspellArgs;
+    let cmdArgs = rep.listAllFiles ? cspellArgsListAllFiles : cspellArgs;
+    if (context.verbose) {
+        cmdArgs += ' --verbose';
+    }
+    if (context.progress) {
+        cmdArgs = cmdArgs.replace('--no-progress', '');
+        cmdArgs = cmdArgs.replace('--show-context', '');
+        cmdArgs = cmdArgs + ' --no-issues';
+        cmdArgs = cmdArgs + ' --color';
+    }
     const cmdToExec = resolveArgs(rep.path, [genLaunchCSpellCommand(nodeArgs), cmdArgs, ...uniqueArgs]).join(' ');
     const { log } = logger;
     const env = getEnvVariables();
@@ -127,6 +150,7 @@ async function execCheck(context: CheckContext, update: boolean): Promise<CheckR
     log(color`*  Checking: `);
     log(color`*    '${name}'`);
     log(color`**********************************************\n`);
+    log('%o', { progress: context.progress, verbose: context.verbose, update, checkResultsAgainstSnapshot });
     log(time());
     const originalReport = await readReportSnapshot(rep);
     if (!(await checkoutRepositoryAsync(logger, rep.url, rep.path, rep.commit, rep.branch))) {
@@ -139,26 +163,30 @@ async function execCheck(context: CheckContext, update: boolean): Promise<CheckR
         return { success: false, rep, elapsedTime: 0 };
     }
     log(time());
-    const cspellResult = await execCommand({ logger, path, command: cmdToExec, args: rep.args, env });
+    const cspellResult = await execCommand({ logger, path, command: cmdToExec, args: rep.args, env, echo });
     log(resultReport(cspellResult));
     log(time());
     log(color`\n************ Checking Results ************`);
 
-    if (update) {
-        log(color`************ Update Snapshot *************`);
-    }
-    const r = await checkResult(rep, cspellResult, originalReport, update);
-    log(time());
-    if (r.diff) {
-        log(r.diff);
-        log('');
-    }
-    if (!update) {
-        // Restore the original report.
-        await writeReportSnapshot(rep, originalReport);
+    let success = true;
+    if (checkResultsAgainstSnapshot) {
+        if (update) {
+            log(color`************ Update Snapshot *************`);
+        }
+        const r = await checkResult(rep, cspellResult, originalReport, update);
+        success = r.match;
+        log(time());
+        if (r.diff) {
+            log(r.diff);
+            log('');
+        }
+        if (!update) {
+            // Restore the original report.
+            await writeReportSnapshot(rep, originalReport);
+        }
     }
     log(color`\n************ Done: ${name} ************\n`);
-    return { success: r.match, rep, elapsedTime: cspellResult.elapsedTime };
+    return { success, rep, elapsedTime: cspellResult.elapsedTime };
 }
 
 function time() {
@@ -171,15 +199,16 @@ interface ExecCommandOptions {
     command: string;
     args: string[];
     env?: Record<string, string> | undefined;
+    echo?: boolean;
 }
 
-async function execCommand({ logger, path, command, args, env }: ExecCommandOptions): Promise<Result> {
+async function execCommand({ logger, path, command, args, env, echo }: ExecCommandOptions): Promise<Result> {
     const start = Date.now();
     const argv = args.map((a) => JSON.stringify(a)).join(' ');
     const fullCommand = command + ' ' + argv;
     Shell.pushd('-q', path);
     logger.log(`Execute: '${fullCommand}'`);
-    const pResult = execAsync(fullCommand, { env });
+    const pResult = execAsync(fullCommand, { env, echo });
     Shell.popd('-q', '+0');
     const result = await pResult;
     const { stdout, stderr, code } = result;
@@ -275,6 +304,12 @@ export interface CheckOptions {
     parallelLimit: number;
     /** Turn on NodeJS --cpu-prof */
     cpuProf: boolean;
+    /** Check the results. */
+    checkResults: boolean;
+    /** Show progress */
+    progress: boolean;
+    /** Verbose output */
+    verbose: boolean;
 }
 
 type PendingState = 'pending' | 'rejected' | 'resolved';
@@ -360,7 +395,15 @@ Stop on fail:   ${tf(fail)}
 
     const buffered = asyncBuffer(
         matching,
-        async (rep) => execCheckAndUpdate(rep, { update, updateSnapshots, cpuProf: options.cpuProf }),
+        async (rep) =>
+            execCheckAndUpdate(rep, {
+                update,
+                updateSnapshots,
+                cpuProf: options.cpuProf,
+                checkResults: options.checkResults ?? true,
+                progress: !!options.progress,
+                verbose: !!options.verbose,
+            }),
         parallelLimit,
     );
 
