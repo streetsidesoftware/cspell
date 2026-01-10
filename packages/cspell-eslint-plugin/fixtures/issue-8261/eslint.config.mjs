@@ -22,7 +22,7 @@ const config = [
                 {
                     debugMode: false,
                     autoFix: true,
-                    report: 'typos',
+                    report: 'simple',
                 },
             ],
         },

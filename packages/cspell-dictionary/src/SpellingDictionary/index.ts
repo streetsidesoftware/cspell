@@ -15,6 +15,7 @@ export type {
     SearchOptions,
     SpellingDictionary,
     SpellingDictionaryOptions,
+    Suggestion,
 } from './SpellingDictionary.js';
 export { createCollection, SpellingDictionaryCollection } from './SpellingDictionaryCollection.js';
 export { createSpellingDictionaryFromTrieFile } from './SpellingDictionaryFromTrie.js';

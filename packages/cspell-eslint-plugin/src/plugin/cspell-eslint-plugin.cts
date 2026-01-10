@@ -28,8 +28,11 @@ interface ExtendedSuggestion {
 }
 
 const messages = {
-    wordUnknown: 'Unknown word: "{{word}}"',
     wordForbidden: 'Forbidden word: "{{word}}"',
+    wordForbiddenWithSuggestions: 'Forbidden word: "{{word}}" ({{suggestions}})',
+    wordMisspelled: 'Misspelled word: "{{word}}" ({{suggestions}})',
+    wordUnknown: 'Unknown word: "{{word}}"',
+    wordUnknownWithSuggestions: 'Unknown word: "{{word}}" ({{suggestions}})',
     suggestWord: '{{word}}{{preferred}}',
 } as const;
 
@@ -65,10 +68,24 @@ function create(context: Rule.RuleContext): Rule.RuleListener {
     logContext(log, context);
 
     function reportIssue(issue: Issue) {
-        const messageId: MessageIds = issue.severity === 'Forbidden' ? 'wordForbidden' : 'wordUnknown';
+        const allowNonPreferred = options.report === 'simple' && issue.hasSimpleSuggestions;
+        const sugs = issue.suggestions
+            ?.filter((sug) => sug.isPreferred || allowNonPreferred)
+            .map((sug) => sug.wordAdjustedToMatchCase || sug.word);
+        let messageId: MessageIds = 'wordUnknown';
+        messageId = issue.hasSimpleSuggestions && sugs?.length ? 'wordUnknownWithSuggestions' : messageId;
+        messageId = issue.severity === 'Misspelled' ? 'wordMisspelled' : messageId;
+        messageId =
+            issue.severity === 'Forbidden'
+                ? issue.hasPreferredFixes
+                    ? 'wordForbiddenWithSuggestions'
+                    : 'wordForbidden'
+                : messageId;
+        const corrections = sugs?.join(', ') || 'no suggestions';
         const { word, start, end } = issue;
         const data = {
             word,
+            suggestions: corrections,
         };
         const code = contextSourceCode(context);
         const startPos = code.getLocFromIndex(start);

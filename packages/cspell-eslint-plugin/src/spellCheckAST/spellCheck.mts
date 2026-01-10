@@ -42,9 +42,13 @@ export interface SpellCheckIssue {
     /** the word that was flagged */
     word: string;
     /** the severity of the issue. */
-    severity: 'Forbidden' | 'Unknown' | 'Hint';
+    severity: 'Forbidden' | 'Misspelled' | 'Unknown' | 'Hint';
     /** suggestions to be presented. */
     suggestions: Suggestions;
+    /** Indicates that there preferred suggestions. */
+    hasPreferredFixes: boolean;
+    /** Indicates that there are simple suggestions available. */
+    hasSimpleSuggestions: boolean;
     /** The range of text in which this issue occurred. */
     range: CheckTextRange;
     /** The index of the range in which this issues occurred. */
@@ -89,6 +93,7 @@ export async function spellCheck(
     const debugMode = forceLogging || options.debugMode || false;
     logger.enabled = forceLogging || (options.debugMode ?? (logger.enabled || isDebugModeExtended));
     const log = logger.log;
+    const filterIssues = generateReportingPredicate(options.report);
 
     log('options: %o', options);
 
@@ -105,7 +110,8 @@ export async function spellCheck(
         .map((range, idx) => {
             const issues = validator
                 .checkText(range, undefined, undefined)
-                .map((issue) => normalizeIssue(issue, range, idx));
+                .map((issue) => normalizeIssue(issue, range, idx))
+                .filter(filterIssues);
             return issues.length ? issues : undefined;
         })
         .filter((issues) => !!issues)
@@ -121,13 +127,33 @@ export async function spellCheck(
     }
 
     function normalizeIssue(issue: ValidationIssue, range: CheckTextRange, rangeIdx: number): SpellCheckIssue {
-        const word = issue.text;
-        const start = issue.offset;
+        const { text: word, offset: start, suggestionsEx: suggestions } = issue;
         const end = issue.offset + (issue.length || issue.text.length);
-        const suggestions = issue.suggestionsEx;
-        const severity = issue.isFlagged ? 'Forbidden' : 'Unknown';
-        return { word, start, end, suggestions, severity, range, rangeIdx };
+        let severity: SpellCheckIssue['severity'] = 'Unknown';
+        severity = issue.hasPreferredSuggestions ? 'Misspelled' : severity;
+        severity = issue.isFlagged ? 'Forbidden' : severity;
+        const hasPreferredFixes = issue.hasPreferredSuggestions || false;
+        const hasSimpleSuggestions = issue.hasSimpleSuggestions || false;
+        return { word, start, end, suggestions, severity, range, rangeIdx, hasPreferredFixes, hasSimpleSuggestions };
     }
+}
+
+function generateReportingPredicate(report: Options['report']): (issue: SpellCheckIssue) => boolean {
+    switch (report) {
+        case 'simple': {
+            return (issue: SpellCheckIssue) =>
+                issue.severity in { Forbidden: true, Misspelled: true } ||
+                (issue.severity === 'Unknown' && issue.hasSimpleSuggestions);
+        }
+        case 'flagged': {
+            return (issue: SpellCheckIssue) => issue.severity === 'Forbidden';
+        }
+        case 'typos': {
+            return (issue: SpellCheckIssue) => issue.severity in { Forbidden: true, Misspelled: true };
+        }
+    }
+    // report === 'all' or undefined
+    return () => true;
 }
 
 interface CachedDoc {
@@ -150,7 +176,14 @@ function getDocValidator(filename: string, text: string, options: SpellCheckOpti
     }
 
     const resolveImportsRelativeTo = toFileURL(options.cspellOptionsRoot || import.meta.url, toFileDirURL(options.cwd));
-    const validator = new DocumentValidator(doc, { ...options, resolveImportsRelativeTo }, settings);
+    const report = options.report || 'all';
+    const generateSuggestions =
+        report in { simple: true, typos: true, flagged: true } ? false : options.generateSuggestions;
+    const validator = new DocumentValidator(
+        doc,
+        { ...options, resolveImportsRelativeTo, generateSuggestions },
+        settings,
+    );
     docValCache.set(doc, validator);
     return validator;
 }

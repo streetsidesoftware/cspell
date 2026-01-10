@@ -190,11 +190,25 @@ export function spellCheckAST(filename: string, text: string, root: Node, option
     }
 
     function reportIssue(issue: SpellCheckIssue): Issue {
-        const { word, start, end, severity } = issue;
+        const { word, start, end, severity, hasPreferredFixes, hasSimpleSuggestions } = issue;
         const node = toBeChecked[issue.rangeIdx].node;
         const nodeType = node.type;
         const suggestions = normalizeSuggestions(issue.suggestions, nodeType);
-        return { word, start, end, nodeType, node, suggestions, severity };
+        const preferredFixes = suggestions
+            ?.filter((sug) => sug.isPreferred)
+            .map((sug) => sug.wordAdjustedToMatchCase || sug.word);
+        return {
+            word,
+            start,
+            end,
+            nodeType,
+            node,
+            suggestions,
+            hasPreferredFixes,
+            hasSimpleSuggestions,
+            preferredFixes,
+            severity,
+        };
     }
 
     type NodeTypes = Node['type'] | Comment['type'] | 'JSXText';

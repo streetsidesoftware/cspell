@@ -11,3 +11,5 @@ The suggested fix for suggestedmagicword should be suggested_magicword.
 This document contans other issues. And some issusesesse that do not have suggestions.
 
 `);
+
+// refain still has some simple fixes.

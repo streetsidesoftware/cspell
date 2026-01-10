@@ -75,14 +75,14 @@ export type CSpellOptions = Pick<
     | 'includeRegExpList'
     | 'import'
     | 'language'
-    | 'unknownWords'
     | 'words'
 > & {
     dictionaryDefinitions?: DictionaryDefinition[];
 };
 
 export type RequiredOptions = Required<Pick<Options, Exclude<keyof Options, 'debugMode' | 'report'>>> &
-    Pick<Options, 'debugMode'>;
+    Pick<Options, 'debugMode'> &
+    Pick<Options, 'report'>;
 
 export interface Check {
     /**

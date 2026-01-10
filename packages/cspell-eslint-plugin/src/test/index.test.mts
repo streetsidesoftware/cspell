@@ -1,3 +1,4 @@
+import assert from 'node:assert';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -12,6 +13,7 @@ import Rule from '../plugin/index.cjs';
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 const root = path.resolve(__dirname, '../..');
 const fixturesDir = path.join(root, 'fixtures');
+const setOfKnownTestCases = new Set<string>();
 
 const parsers: Record<string, Linter.Parser | undefined> = {
     // Note: it is possible for @typescript-eslint/parser to break the path
@@ -60,32 +62,35 @@ const KnownErrors: TestCaseError[] = [
 
 ruleTester.run('cspell', Rule.rules.spellchecker, {
     valid: [
-        readSample('sample.js'),
-        readSample('sample.ts'),
-        readSample('sampleESM.mjs'),
-        readFix('simple/sample.ts'),
-        readFix('simple/sampleESM.mjs'),
-        readFix('with-errors/strings.ts', { checkStrings: false, checkStringTemplates: false }),
-        readFix('with-errors/imports.ts'),
-        readFix('with-errors/sampleESM.mjs', {
+        readSample('sample.js', 'sample.js'),
+        readSample('sample.ts', 'sample.ts'),
+        readSample('sampleESM.mjs', 'sampleESM.mjs'),
+        readFix('simple/sample.ts', 'simple/sample.ts'),
+        readFix('simple/sampleESM.mjs', 'simple/sampleESM.mjs'),
+        readFix('with-errors/strings.ts checkString: false, checkStringTemplates: false', 'with-errors/strings.ts', {
+            checkStrings: false,
+            checkStringTemplates: false,
+        }),
+        readFix('with-errors/imports.ts', 'with-errors/imports.ts'),
+        readFix('with-errors/sampleESM.mjs words', 'with-errors/sampleESM.mjs', {
             cspell: {
                 words: ['Guuide', 'Gallaxy', 'BADD', 'functionn', 'coool'],
                 ignoreWords: [],
                 flagWords: [],
             },
         }),
-        readFix('with-errors/sampleESM.mjs', {
+        readFix('with-errors/sampleESM.mjs ignoreWords', 'with-errors/sampleESM.mjs', {
             cspell: {
                 ignoreWords: ['Guuide', 'Gallaxy', 'BADD', 'functionn', 'coool'],
             },
         }),
-        readFix('with-errors/auto-fix.ts', {
+        readFix('with-errors/auto-fix.ts customWordListFile', 'with-errors/auto-fix.ts', {
             ignoreImports: false,
             customWordListFile: resolveFix('with-errors/creepyData.dict.txt'),
             // Load a configuration to ignore the forbidden words.
             configFile: resolveFix('cspell.test.config.yaml'),
         }),
-        readFix('issue-4870/sample.js', {
+        readFix('issue-4870/sample.js', 'issue-4870/sample.js', {
             cspell: {
                 dictionaries: ['business-terms'],
                 dictionaryDefinitions: [
@@ -96,21 +101,10 @@ ruleTester.run('cspell', Rule.rules.spellchecker, {
                 ],
             },
         }),
-        readFix('issue-8261/sample.js', {
-            cspell: {
-                dictionaries: ['business-terms'],
-                dictionaryDefinitions: [
-                    {
-                        name: 'business-terms',
-                        path: fixtureRelativeToCwd('issue-8261/dictionaries/business-terminology.txt'),
-                    },
-                ],
-            },
-        }),
     ],
     invalid: [
         // cspell:ignore Guuide Gallaxy BADD functionn coool
-        readInvalid('with-errors/sampleESM.mjs', [
+        readInvalid('with-errors/sampleESM.mjs', 'with-errors/sampleESM.mjs', [
             'Unknown word: "Guuide"',
             'Unknown word: "Gallaxy"',
             'Unknown word: "BADD"',
@@ -119,6 +113,7 @@ ruleTester.run('cspell', Rule.rules.spellchecker, {
             'Unknown word: "coool"',
         ]),
         readInvalid(
+            'with-errors/sampleESM.mjs ignoreRegExpList',
             'with-errors/sampleESM.mjs',
             [
                 'Unknown word: "Gallaxy"',
@@ -130,40 +125,53 @@ ruleTester.run('cspell', Rule.rules.spellchecker, {
             { cspell: { ignoreRegExpList: ['/\\bGuuide\\b/g'] } },
         ),
         readInvalid(
+            'with-errors/sampleESM.mjs checkIdentifiers: false',
             'with-errors/sampleESM.mjs',
             ['Unknown word: "Guuide"', 'Unknown word: "Gallaxy"', 'Unknown word: "functionn"', 'Unknown word: "coool"'],
             { checkIdentifiers: false },
         ),
         readInvalid(
+            'with-errors/sampleESM.mjs checkComments: false',
             'with-errors/sampleESM.mjs',
             ['Unknown word: "Guuide"', 'Unknown word: "Gallaxy"', 'Unknown word: "BADD"', 'Unknown word: "coool"'],
             { checkComments: false },
         ),
         // cspell:ignore Montj Todayy Yaar Aprill Februarry gooo weeek
-        readInvalid('with-errors/sampleTemplateString.mjs', [
+        readInvalid('with-errors/sampleTemplateString.mjs', 'with-errors/sampleTemplateString.mjs', [
             'Unknown word: "Todayy"',
             'Unknown word: "Montj"',
             'Unknown word: "Yaar"',
             'Unknown word: "Februarry"',
             'Unknown word: "Aprill"',
             'Unknown word: "gooo"',
-            'Unknown word: "weeek"',
+            ce('Misspelled word: "weeek" (week)', 8),
         ]),
         // cspell:ignore naaame doen't isssues playy
-        readInvalid('with-errors/strings.ts', [
+        readInvalid('with-errors/strings.ts', 'with-errors/strings.ts', [
             'Unknown word: "naaame"',
             'Unknown word: "doen\'t"',
-            'Unknown word: "isssues"',
+            ce('Misspelled word: "isssues" (issues)', 8),
             'Unknown word: "playy"',
         ]),
-        readInvalid('with-errors/strings.ts', ['Unknown word: "isssues"', 'Unknown word: "playy"'], {
-            checkStrings: false,
-        }),
-        readInvalid('with-errors/strings.ts', ['Unknown word: "naaame"', 'Unknown word: "doen\'t"'], {
-            checkStringTemplates: false,
-        }),
+        readInvalid(
+            'with-errors/strings.ts checkStrings: false',
+            'with-errors/strings.ts',
+            [ce('Misspelled word: "isssues" (issues)', 8), 'Unknown word: "playy"'],
+            {
+                checkStrings: false,
+            },
+        ),
+        readInvalid(
+            'with-errors/strings.ts checkStringTemplates: false',
+            'with-errors/strings.ts',
+            ['Unknown word: "naaame"', 'Unknown word: "doen\'t"'],
+            {
+                checkStringTemplates: false,
+            },
+        ),
         // cspell:ignore muawhahaha grrrrr uuuug
         readInvalid(
+            'with-errors/imports.ts',
             'with-errors/imports.ts',
             [
                 'Unknown word: "muawhahaha"',
@@ -175,14 +183,21 @@ ruleTester.run('cspell', Rule.rules.spellchecker, {
             { ignoreImports: false },
         ),
         readInvalid(
+            'with-errors/imports.ts ignoreImportProperties: false',
             'with-errors/imports.ts',
             ['Unknown word: "grrrrr"', 'Unknown word: "muawhahaha"', 'Unknown word: "uuuug"'],
             { ignoreImportProperties: false },
         ),
         // cspell:ignore uuug grrr
-        readInvalid('with-errors/importAlias.ts', ['Unknown word: "uuug"']),
-        readInvalid('with-errors/importAlias.ts', ['Unknown word: "uuug"'], { ignoreImportProperties: false }),
+        readInvalid('with-errors/importAlias.ts', 'with-errors/importAlias.ts', ['Unknown word: "uuug"']),
         readInvalid(
+            'with-errors/importAlias.ts ignoreImportProperties: false',
+            'with-errors/importAlias.ts',
+            ['Unknown word: "uuug"'],
+            { ignoreImportProperties: false },
+        ),
+        readInvalid(
+            'with-errors/importAlias.ts ignoreImports false',
             'with-errors/importAlias.ts',
             [
                 'Unknown word: "uuug"',
@@ -196,28 +211,89 @@ ruleTester.run('cspell', Rule.rules.spellchecker, {
         ),
         // cspell:ignore GRRRRRR UUUUUG
         readInvalid(
+            'with-errors/creepyData.ts custom word list',
             'with-errors/creepyData.ts',
             ['Unknown word: "uuug"', 'Unknown word: "grrr"', 'Unknown word: "GRRRRRR"', 'Unknown word: "UUUUUG"'],
             { ignoreImports: false, customWordListFile: resolveFix('with-errors/creepyData.dict.txt') },
         ),
         readInvalid(
+            'Auto fix forbidden words',
             'with-errors/auto-fix.ts',
             [
-                'Forbidden word: "bluelist"',
-                'Forbidden word: "café"',
-                'Forbidden word: "Bluelist"',
-                'Forbidden word: "bluelist"',
-                'Forbidden word: "bluelist"',
-                'Forbidden word: "bluelist"',
+                ce('Forbidden word: "bluelist" (greenList)', 8),
+                ce('Forbidden word: "café" (cafe)', 8),
+                ce('Forbidden word: "Bluelist" (GreenList)', 8),
+                ce('Forbidden word: "bluelist" (greenList)', 8),
+                ce('Forbidden word: "bluelist" (greenList)', 8),
+                ce('Forbidden word: "bluelist" (greenList)', 8),
             ],
             { ignoreImports: false, customWordListFile: resolveFix('with-errors/creepyData.dict.txt') },
         ),
-        // cspell:ignore bestbusiness friendz
-        readInvalid('issue-4870/sample.js', ['Unknown word: "bestbusiness"', 'Unknown word: "friendz"'], {}),
-        readInvalid('issue-4870/sample.js', ['Unknown word: "friendz"'], {
+        // cspell:ignore bestbusiness friendz flaggedmagicword suggestedmagicword contans issusesesse magicword renaim
+        readInvalid(
+            'issue-4870',
+            'issue-4870/sample.js',
+            ['Unknown word: "bestbusiness"', 'Unknown word: "friendz"'],
+            {},
+        ),
+        readInvalid('issue-4870 allowCompoundWords', 'issue-4870/sample.js', ['Unknown word: "friendz"'], {
             cspell: { allowCompoundWords: true },
         }),
         readInvalid(
+            'Report all issues',
+            'issue-8261/sample.js',
+            [
+                ce('Forbidden word: "flaggedmagicword" (flagged_magicword)', 1),
+                ce('Forbidden word: "flaggedmagicword" (flagged_magicword)', 1),
+                ce('Misspelled word: "suggestedmagicword" (suggested_magicword)', 1),
+                ce('Misspelled word: "contans" (contains)', 8),
+                ce('Unknown word: "issusesesse"', 1),
+                ce('Unknown word: "refain"', 8), // cspell:ignore refain
+            ],
+            {
+                report: 'all',
+            },
+        ),
+        readInvalid(
+            'Report forbidden only',
+            'issue-8261/sample.js',
+            [
+                ce('Forbidden word: "flaggedmagicword" (flagged_magicword)', 1),
+                ce('Forbidden word: "flaggedmagicword" (flagged_magicword)', 1),
+            ],
+            {
+                report: 'flagged',
+            },
+        ),
+        readInvalid(
+            'Report typos only',
+            'issue-8261/sample.js',
+            [
+                ce('Forbidden word: "flaggedmagicword" (flagged_magicword)', 1),
+                ce('Forbidden word: "flaggedmagicword" (flagged_magicword)', 1),
+                ce('Misspelled word: "suggestedmagicword" (suggested_magicword)', 1),
+                ce('Misspelled word: "contans" (contains)', 1),
+            ],
+            {
+                report: 'typos',
+            },
+        ),
+        readInvalid(
+            'Report simple only',
+            'issue-8261/sample.js',
+            [
+                ce('Forbidden word: "flaggedmagicword" (flagged_magicword)', 1),
+                ce('Forbidden word: "flaggedmagicword" (flagged_magicword)', 1),
+                ce('Misspelled word: "suggestedmagicword" (suggested_magicword)', 1),
+                ce('Misspelled word: "contans" (contains)', 1),
+                ce('Unknown word: "refain" (regain, remain, retain, refrain)', 4), // cspell:ignore refain
+            ],
+            {
+                report: 'simple',
+            },
+        ),
+        readInvalid(
+            'simple/sample.ts',
             'simple/sample.ts',
             ['Unknown word: "configg"', 'Unknown word: "configg"', 'Unknown word: "cityssm"'],
             { ignoreImports: false },
@@ -231,7 +307,7 @@ function resolveFix(filename: string): string {
 
 type ValidTestCaseEsLint9 = ValidTestCase;
 
-function readFix(filename: string, options?: Options): ValidTestCase {
+function readFix(name: string, filename: string, options?: Options): ValidTestCase {
     const __filename = resolveFix(filename);
     const code = fs.readFileSync(__filename, 'utf8');
 
@@ -241,6 +317,9 @@ function readFix(filename: string, options?: Options): ValidTestCase {
     };
     if (options) {
         sample.options = [options];
+    }
+    if (name) {
+        sample.name = name;
     }
 
     const parser = parsers[path.extname(__filename)];
@@ -252,8 +331,8 @@ function readFix(filename: string, options?: Options): ValidTestCase {
     return sample;
 }
 
-function readSample(sampleFile: string, options?: Options) {
-    return readFix(path.join('samples', sampleFile), options);
+function readSample(name: string, sampleFile: string, options?: Options) {
+    return readFix(name, path.join('samples', sampleFile), options);
 }
 
 interface TestCaseError {
@@ -270,8 +349,10 @@ interface TestCaseError {
 
 type InvalidTestCaseError = RuleTester.TestCaseError | TestCaseError | string;
 
-function readInvalid(filename: string, errors: (TestCaseError | string)[], options?: Options) {
-    const sample = readFix(filename, options);
+function readInvalid(name: string, filename: string, errors: (TestCaseError | string)[], options?: Options) {
+    assert(!setOfKnownTestCases.has(name), `Duplicate test case name: ${name}`);
+    setOfKnownTestCases.add(name);
+    const sample = readFix(name, filename, options);
     return {
         ...sample,
         errors: errors.map((err) => csError(err)),
