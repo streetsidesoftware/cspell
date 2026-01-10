@@ -13,10 +13,6 @@ import type {
 import { defaultNumSuggestions, hasOptionToSearchOption, suggestionCollector } from './SpellingDictionaryMethods.js';
 import type { SuggestOptionsRO } from './SuggestOptions.js';
 
-function identityString(w: string): string {
-    return w;
-}
-
 export interface SpellingDictionaryCollection extends SpellingDictionary {
     readonly type: 'SpellingDictionaryCollection';
     readonly dictionaries: SpellingDictionary[];
@@ -25,7 +21,7 @@ export interface SpellingDictionaryCollection extends SpellingDictionary {
 
 class SpellingDictionaryCollectionImpl implements SpellingDictionaryCollection {
     readonly options: SpellingDictionaryOptionsRO = { weightMap: undefined };
-    readonly mapWord = identityString;
+    readonly mapWord = undefined;
     readonly type = 'SpellingDictionaryCollection';
     readonly source: string;
     readonly isDictionaryCaseSensitive: boolean;

@@ -43,6 +43,7 @@ class TyposDictionaryImpl implements TyposDictionary {
     readonly options: SpellingDictionaryOptions = {};
     readonly type = 'typos';
     readonly size: number;
+    readonly mapWord = undefined;
     private ignoreWords: Set<string>;
     /**
      * Note: ignoreWordsLower is only suggestions with the case and accents removed.
@@ -173,9 +174,6 @@ class TyposDictionaryImpl implements TyposDictionary {
         return this._suggest(word) || this._suggest(word.toLowerCase()) || [];
     }
 
-    mapWord(word: string): string {
-        return word;
-    }
     readonly isDictionaryCaseSensitive: boolean = true;
     getErrors?(): Error[] {
         return [];

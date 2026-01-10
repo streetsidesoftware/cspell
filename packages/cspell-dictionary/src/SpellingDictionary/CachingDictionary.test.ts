@@ -1,6 +1,11 @@
 import { describe, expect, test } from 'vitest';
 
-import { createCachingDictionary } from './CachingDictionary.js';
+import {
+    createCachingDictionary,
+    dictionaryCacheClearLog,
+    dictionaryCacheEnableLogging,
+    dictionaryCacheGetLog,
+} from './CachingDictionary.js';
 import { createSpellingDictionary } from './createSpellingDictionary.js';
 import { createCollection } from './SpellingDictionaryCollection.js';
 import { createSuggestDictionary } from './SuggestDictionary.js';
@@ -89,5 +94,25 @@ describe('CachingDictionary', () => {
     `('getPreferredSuggestions $word', ({ word, expected }) => {
         const cd = createCachingDictionary(dict, {});
         expect(cd.getPreferredSuggestions(word)).toEqual(expected);
+    });
+
+    test('test logging', () => {
+        const word = 'apple';
+        expect(dictionaryCacheEnableLogging(true)).toBe(true);
+        dictionaryCacheClearLog();
+        const cd = createCachingDictionary(dict, {});
+
+        expect(cd.has(word)).toBe(true);
+        expect(dictionaryCacheGetLog()).toEqual([oc({ method: 'has', word, miss: true })]);
+
+        expect(cd.has(word)).toBe(true);
+        expect(dictionaryCacheGetLog()).toEqual([
+            oc({ method: 'has', word, miss: true }),
+            oc({ method: 'has', word, miss: false }),
+        ]);
+
+        dictionaryCacheEnableLogging(false);
+        dictionaryCacheClearLog();
+        expect(dictionaryCacheGetLog()).toHaveLength(0);
     });
 });

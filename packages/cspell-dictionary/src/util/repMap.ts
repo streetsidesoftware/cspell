@@ -4,10 +4,14 @@ import { expandCharacterSet } from 'cspell-trie-lib';
 import { escapeRegEx } from './regexHelper.js';
 import { isDefined } from './util.js';
 
-export type ReplaceMapper = (src: string) => string;
+export interface ReplaceMapper {
+    test?: RegExp;
+    fn: (src: string) => string;
+}
 
-export function createMapper(repMap: ReplaceMap | undefined, ignoreCharset?: string): ReplaceMapper {
-    if (!repMap && !ignoreCharset) return (a) => a;
+export function createMapper(repMap: ReplaceMap | undefined, ignoreCharset?: string): ReplaceMapper | undefined {
+    if (!repMap && !ignoreCharset) return undefined;
+
     repMap = repMap || [];
     const charsetMap = charsetToRepMapRegEx(ignoreCharset);
     if (charsetMap) {
@@ -16,7 +20,7 @@ export function createMapper(repMap: ReplaceMap | undefined, ignoreCharset?: str
 
     const filteredMap = repMap.filter(([match, _]) => !!match);
     if (!filteredMap.length) {
-        return (a) => a;
+        return undefined;
     }
 
     const regEx = createMapperRegExp(repMap);
@@ -27,8 +31,13 @@ export function createMapper(repMap: ReplaceMap | undefined, ignoreCharset?: str
         return 0 <= index && index < values.length ? values[index] : m;
     }
 
-    return function (s: string) {
+    function fn(s: string) {
         return s.replace(regEx, resolve);
+    }
+
+    return {
+        test: regexpRemoveFlags(regEx, 'gm'),
+        fn,
     };
 }
 
@@ -94,15 +103,31 @@ interface Edit {
     r: string;
 }
 
-export function createRepMapper(repMap: ReplaceMap | undefined, ignoreCharset?: string): (word: string) => string[] {
-    if (!repMap && !ignoreCharset) return (word) => [word];
+export interface RepMapper {
+    test: RegExp;
+    fn: (word: string) => string[];
+}
+
+export function createRepMapper(repMap: ReplaceMap | undefined, ignoreCharset?: string): RepMapper | undefined {
+    if (!repMap?.length && !ignoreCharset) return undefined;
+
+    let tRepMap = repMap || [];
+    const charsetMap = charsetToRepMapRegEx(ignoreCharset);
+    if (charsetMap) {
+        tRepMap = [...tRepMap, ...charsetMap];
+    }
+
+    const regEx = createMapperRegExp(tRepMap);
 
     const trie = createTrie(repMap, ignoreCharset);
 
     // const root = createTrie(repMap, ignoreCharset);
-    return (word) => {
-        const edits = calcAllEdits(trie, word);
-        return applyEdits(word, edits);
+    return {
+        test: regexpRemoveFlags(regEx, 'gm'),
+        fn: (word) => {
+            const edits = calcAllEdits(trie, word);
+            return applyEdits(word, edits);
+        },
     };
 }
 
@@ -181,6 +206,12 @@ function addToTrie(node: RepTrieNode, match: string, replaceWith: string) {
     const s = new Set(node.rep || []);
     s.add(replaceWith);
     node.rep = [...s];
+}
+
+function regexpRemoveFlags(re: RegExp, flagsToRemove: string): RegExp {
+    const toRemove = new Set(flagsToRemove);
+    const flags = [...re.flags].filter((f) => !toRemove.has(f)).join('');
+    return new RegExp(re.source, flags);
 }
 
 export const __testing__: {

@@ -110,7 +110,7 @@ export function createFailedToLoadDictionary(
         isNoSuggestWord: () => false,
         isForbidden: () => false,
         suggest: () => [],
-        mapWord: (a) => a,
+        mapWord: undefined,
         genSuggestions: () => {
             return;
         },

@@ -19,7 +19,7 @@ import type { ExtendedSuggestion } from '../Models/Suggestion.js';
 import type { TextDocument, TextDocumentLine, TextDocumentRef } from '../Models/TextDocument.js';
 import { documentUriToURL, updateTextDocument } from '../Models/TextDocument.js';
 import type { ValidationIssue } from '../Models/ValidationIssue.js';
-import { createPerfTimer } from '../perf/index.js';
+import { createPerfTimer, measurePerf } from '../perf/index.js';
 import {
     extractImportErrors,
     finalizeSettings,
@@ -175,6 +175,8 @@ export class DocumentValidator {
         );
         const dict = await timePromise(this.perfTiming, '_getDictionaryInternal', getDictionaryInternal(docSettings));
 
+        const stopMeasure = measurePerf('DocumentValidator._prepareAsync');
+
         const recGlobMatcherTime = recordPerfTime(this.perfTiming, '_GlobMatcher');
         const matcher = getGlobMatcherForExcluding(localConfig?.ignorePaths);
         const uri = this._document.uri;
@@ -213,6 +215,7 @@ export class DocumentValidator {
         this._ready = true;
         this._preparationTime = timer.elapsed;
         this.perfTiming.prepTime = this._preparationTime;
+        stopMeasure();
     }
 
     private async _updatePrep() {
@@ -221,6 +224,7 @@ export class DocumentValidator {
         const prep = this._preparations;
         const docSettings = await determineTextDocumentSettings(this._document, prep.config);
         const dict = await getDictionaryInternal(docSettings);
+        const stopMeasure = measurePerf('DocumentValidator._updatePrep');
         const shouldCheck = docSettings.enabled ?? true;
         const finalSettings = finalizeSettings(docSettings);
         const validateOptions = settingsToValidateOptions(finalSettings);
@@ -239,6 +243,7 @@ export class DocumentValidator {
             textValidator,
         };
         this._preparationTime = timer.elapsed;
+        stopMeasure();
     }
 
     /**
@@ -416,6 +421,8 @@ export class DocumentValidator {
         let numProblems = 0;
         const mapOfProblems = new Map<string, number>();
 
+        const stopMeasure = measurePerf('DocumentValidator._checkParsedText');
+
         for (const pText of parsedTexts) {
             for (const issue of this.check(pText)) {
                 const { text } = issue;
@@ -426,6 +433,8 @@ export class DocumentValidator {
                 if (++numProblems >= maxNumberOfProblems) return;
             }
         }
+
+        stopMeasure();
     }
 
     private addPossibleError(error: Error | undefined | unknown): undefined {

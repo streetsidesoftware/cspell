@@ -43,6 +43,7 @@
     "pub": "pnpm run pre-pub && lerna publish --conventional-commits --changelog-preset conventionalcommits  --sync-workspace-lock",
     "pub-grad": "pnpm run pre-pub && lerna publish --conventional-commits --conventional-graduate --changelog-preset conventionalcommits  --sync-workspace-lock",
     "pub-next": "pnpm run pre-pub && lerna publish --conventional-commits --conventional-prerelease --changelog-preset conventionalcommits   --sync-workspace-lock --dist-tag next",
+    "perf-test": "node --cpu-prof ./bin.mjs . --no-cache -e \"**/yarn/**\" ",
     "test-watch": "pnpm -r run --parallel test-watch",
     "test": "pnpm test:prep && pnpm -r --stream --workspace-concurrency=2 run test && pnpm run test-schema",
     "test:perf": "pnpm -r --stream --workspace-concurrency=2 run test:perf",
