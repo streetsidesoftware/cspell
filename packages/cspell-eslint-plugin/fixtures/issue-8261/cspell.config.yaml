@@ -1,7 +1,12 @@
-# dictionaries:
-#   - business-terminology
-# dictionaryDefinitions:
-#   - name: business-terminology
-#     path: ./dictionaries/business-terminology.txt
-flaggedWords:
-  - flaggedmagicword
+dictionaries:
+  - business-terminology
+  - suggestions
+dictionaryDefinitions:
+  - name: business-terminology
+    path: ./dictionaries/business-terminology.txt
+  - name: suggestions
+    suggestWords:
+      - suggestedmagicword:suggested_magicword # cspell:disable-line
+    flagWords:
+      - flaggedmagicword:flagged_magicword # cspell:disable-line
+unknownWords: report-common-typos
