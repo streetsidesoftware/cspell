@@ -14,9 +14,8 @@ export interface Options extends Check {
 
     /**
      * Generate suggestions
-     * @default true
      */
-    generateSuggestions: boolean;
+    generateSuggestions?: boolean;
 
     /**
      * Automatically fix common mistakes.
@@ -196,7 +195,7 @@ export interface CustomWordListFile {
 
 export type WorkerOptions = RequiredOptions & { cwd: string };
 
-export const defaultOptions: Options = {
+export const defaultOptions: Options & Required<Pick<Options, 'generateSuggestions' | 'numSuggestions' | 'autoFix'>> = {
     numSuggestions: 8,
     generateSuggestions: true,
     autoFix: false,

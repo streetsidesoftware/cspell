@@ -409,7 +409,6 @@ export const optionsSchema: Rule.RuleMetaData['schema'] = {
       "type": "boolean"
     },
     "generateSuggestions": {
-      "default": true,
       "description": "Generate suggestions",
       "markdownDescription": "Generate suggestions",
       "type": "boolean"
@@ -446,7 +445,6 @@ export const optionsSchema: Rule.RuleMetaData['schema'] = {
   },
   "required": [
     "numSuggestions",
-    "generateSuggestions",
     "autoFix"
   ],
   "type": "object"

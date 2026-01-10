@@ -14,6 +14,7 @@ import {
 
 import { getDefaultLogger } from '../common/logger.cjs';
 import type { CustomWordListFile, Options } from '../common/options.cjs';
+import { defaultOptions } from '../common/options.cjs';
 
 export type SpellCheckOptions = Options & { cwd: string };
 
@@ -65,6 +66,9 @@ export type CheckTextRange = readonly [number, number];
 export type SpellCheckFn = typeof spellCheck;
 
 export type SpellCheckSyncFn = (...p: Parameters<SpellCheckFn>) => Awaited<ReturnType<SpellCheckFn>>;
+
+const ALLOWED_ISSUES_FOR_FLAGGED = new Set<SpellCheckIssue['severity']>(['Forbidden']);
+const ALLOWED_ISSUES_FOR_TYPOS = new Set<SpellCheckIssue['severity']>([...ALLOWED_ISSUES_FOR_FLAGGED, 'Misspelled']);
 
 const defaultSettings: CSpellSettings = {
     name: 'eslint-configuration-file',
@@ -142,14 +146,14 @@ function generateReportingPredicate(report: Options['report']): (issue: SpellChe
     switch (report) {
         case 'simple': {
             return (issue: SpellCheckIssue) =>
-                issue.severity in { Forbidden: true, Misspelled: true } ||
+                ALLOWED_ISSUES_FOR_TYPOS.has(issue.severity) ||
                 (issue.severity === 'Unknown' && issue.hasSimpleSuggestions);
         }
         case 'flagged': {
-            return (issue: SpellCheckIssue) => issue.severity === 'Forbidden';
+            return (issue: SpellCheckIssue) => ALLOWED_ISSUES_FOR_FLAGGED.has(issue.severity);
         }
         case 'typos': {
-            return (issue: SpellCheckIssue) => issue.severity in { Forbidden: true, Misspelled: true };
+            return (issue: SpellCheckIssue) => ALLOWED_ISSUES_FOR_TYPOS.has(issue.severity);
         }
     }
     // report === 'all' or undefined
@@ -178,7 +182,9 @@ function getDocValidator(filename: string, text: string, options: SpellCheckOpti
     const resolveImportsRelativeTo = toFileURL(options.cspellOptionsRoot || import.meta.url, toFileDirURL(options.cwd));
     const report = options.report || 'all';
     const generateSuggestions =
-        report in { simple: true, typos: true, flagged: true } ? false : options.generateSuggestions;
+        report && report !== 'all'
+            ? (options.generateSuggestions ?? false)
+            : (options.generateSuggestions ?? defaultOptions.generateSuggestions);
     const validator = new DocumentValidator(
         doc,
         { ...options, resolveImportsRelativeTo, generateSuggestions },
