@@ -12,7 +12,6 @@ import type {
 } from 'cspell-dictionary';
 import { createCachingDictionary } from 'cspell-dictionary';
 
-import type { ExtendedSuggestion } from '../Models/Suggestion.js';
 import type { ValidationIssue } from '../Models/ValidationIssue.js';
 import * as RxPat from '../Settings/RegExpPatterns.js';
 import { autoResolve } from '../util/AutoResolve.js';
@@ -165,10 +164,7 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
                 const sug = getSimpleSuggestions(issue.text);
                 issue.hasSimpleSuggestions = !!sug.length;
                 if (sug.length) {
-                    issue.suggestionsEx = sug.map((s) => {
-                        s.isPreferred = !!s.isPreferred;
-                        return s as ExtendedSuggestion;
-                    });
+                    issue.suggestionsEx = sug.map((s) => ({ ...s, isPreferred: !!s.isPreferred }));
                 }
             }
             return issue;
