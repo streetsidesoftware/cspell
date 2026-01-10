@@ -106,7 +106,7 @@ interface Edit {
 }
 
 export interface RepMapper {
-    test?: RegExp;
+    test: RegExp;
     fn: (word: string) => string[];
 }
 

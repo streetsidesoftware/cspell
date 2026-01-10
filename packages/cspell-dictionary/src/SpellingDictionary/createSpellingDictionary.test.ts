@@ -21,7 +21,7 @@ describe('Validate createSpellingDictionary', () => {
 
         expect(d.getErrors?.()).toEqual([error]);
         expect(d.suggest('error')).toEqual([]);
-        expect(d.mapWord?.('café')).toBe('café');
+        expect(d.mapWord?.('café')).toBe(undefined);
         expect(d.has('fun')).toBe(false);
         expect(d.find('hello')).toBeUndefined();
         expect(d.isNoSuggestWord('hello', {})).toBe(false);

@@ -283,12 +283,12 @@ function* outerWordForms(word: string, repMapper: RepMapper | undefined): Iterab
     }
 
     if (!repMapper) return;
-    if (repMapper.test && !repMapper.test.test(ww)) return;
     const mapWord = repMapper.fn;
 
     // nothing was added to the set, just do the map.
     if (!sent.size) {
-        for (const m of mapWord(w)) {
+        if (!repMapper.test.test(ww)) return;
+        for (const m of mapWord(ww)) {
             if (m !== ww && !sent.has(m)) {
                 yield m;
                 sent.add(m);

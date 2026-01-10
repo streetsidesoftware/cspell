@@ -8,7 +8,6 @@ import type {
     FindResult,
     HasOptions,
     IgnoreCaseOption,
-    MapWordSingleFn,
     PreferredSuggestion,
     SearchOptions,
     SpellingDictionary,

@@ -151,8 +151,9 @@ describe('SuggestDictionary 2', () => {
 
     test.each`
         word        | expected
-        ${'purple'} | ${'purple'}
+        ${'purple'} | ${undefined}
     `('mapWord "$word"', async ({ word, expected }) => {
+        expect(dict.mapWord).toBe(undefined);
         expect(dict.mapWord?.(word)).toEqual(expected);
     });
 });
