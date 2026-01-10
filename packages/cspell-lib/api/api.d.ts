@@ -2796,6 +2796,8 @@ interface DictionaryInfo {
   /** Options */
   readonly options: SpellingDictionaryOptions;
 }
+type MapWordSingleFn = (word: string) => string;
+type MapWordMultipleFn = (word: string) => string[];
 interface SpellingDictionary extends DictionaryInfo {
   readonly type: string;
   readonly containsNoSuggestWords: boolean;
@@ -2823,14 +2825,14 @@ interface SpellingDictionary extends DictionaryInfo {
   suggest(word: string, suggestOptions?: SuggestOptionsRO): SuggestionResult[];
   getPreferredSuggestions?: (word: string) => PreferredSuggestion[];
   genSuggestions(collector: SuggestionCollector, suggestOptions: SuggestOptionsRO): void;
-  mapWord(word: string): string;
+  mapWord?: MapWordSingleFn | undefined;
   /**
    * Generates all possible word combinations by applying `repMap`.
    * This acts a bit like brace expansions in globs.
    * @param word - the word to map
    * @returns array of adjusted words.
    */
-  remapWord?: (word: string) => string[];
+  remapWord?: MapWordMultipleFn | undefined;
   readonly size: number;
   readonly isDictionaryCaseSensitive: boolean;
   getErrors?(): Error[];
