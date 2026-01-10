@@ -30,6 +30,17 @@ export interface Options extends Check {
      * default false
      */
     debugMode?: boolean;
+    /**
+     * Reporting level for unknown words
+     *
+     * - 'all' - Report all unknown words (default)
+     * - 'simple' - Report unknown words with simple suggestions and flagged words
+     * - 'typos' - Report only common typos and flagged words
+     * - 'flagged' - Report only flagged words
+     *
+     *  default is 'all' unless overridden by CSpell settings
+     */
+    report?: 'all' | 'simple' | 'typos' | 'flagged' | undefined;
 }
 
 interface DictOptions {
@@ -64,12 +75,14 @@ export type CSpellOptions = Pick<
     | 'includeRegExpList'
     | 'import'
     | 'language'
+    | 'unknownWords'
     | 'words'
 > & {
     dictionaryDefinitions?: DictionaryDefinition[];
 };
 
-export type RequiredOptions = Required<Pick<Options, Exclude<keyof Options, 'debugMode'>>> & Pick<Options, 'debugMode'>;
+export type RequiredOptions = Required<Pick<Options, Exclude<keyof Options, 'debugMode' | 'report'>>> &
+    Pick<Options, 'debugMode'>;
 
 export interface Check {
     /**

@@ -3,7 +3,7 @@ import assert from 'node:assert';
 import * as path from 'node:path';
 
 import { toFileDirURL, toFileURL } from '@cspell/url';
-import type { CSpellSettings, TextDocument, ValidationIssue } from 'cspell-lib';
+import type { CSpellSettings, TextDocument, UnknownWordsChoices, ValidationIssue } from 'cspell-lib';
 import {
     createTextDocument,
     DocumentValidator,
@@ -155,6 +155,24 @@ function getDocValidator(filename: string, text: string, options: SpellCheckOpti
     return validator;
 }
 
+export type ReportTypes = Exclude<Options['report'], undefined>;
+
+type MapReportToUnknownWordChoices = {
+    [key in ReportTypes]: UnknownWordsChoices;
+};
+
+export const mapReportToUnknownWordChoices: MapReportToUnknownWordChoices = {
+    all: 'report-all',
+    simple: 'report-simple',
+    typos: 'report-common-typos',
+    flagged: 'report-flagged',
+} as const;
+
+function mapReportToUnknownWords(report?: Options['report']): Pick<CSpellSettings, 'unknownWords'> {
+    const unknownWords = report ? mapReportToUnknownWordChoices[report] : undefined;
+    return unknownWords ? { unknownWords } : {};
+}
+
 function calcInitialSettings(options: SpellCheckOptions): CSpellSettings {
     const { customWordListFile, cspell, cwd } = options;
 
@@ -164,6 +182,7 @@ function calcInitialSettings(options: SpellCheckOptions): CSpellSettings {
         words: cspell?.words || [],
         ignoreWords: cspell?.ignoreWords || [],
         flagWords: cspell?.flagWords || [],
+        ...mapReportToUnknownWords(options.report),
     };
 
     if (options.configFile) {

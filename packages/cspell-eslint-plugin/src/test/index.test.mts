@@ -96,6 +96,17 @@ ruleTester.run('cspell', Rule.rules.spellchecker, {
                 ],
             },
         }),
+        readFix('issue-8261/sample.js', {
+            cspell: {
+                dictionaries: ['business-terms'],
+                dictionaryDefinitions: [
+                    {
+                        name: 'business-terms',
+                        path: fixtureRelativeToCwd('issue-8261/dictionaries/business-terminology.txt'),
+                    },
+                ],
+            },
+        }),
     ],
     invalid: [
         // cspell:ignore Guuide Gallaxy BADD functionn coool
