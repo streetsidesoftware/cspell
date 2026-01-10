@@ -47,6 +47,7 @@ interface LogEntryBase extends SearchOptions {
 interface LogEntryHas extends LogEntryBase {
     method: 'has';
     value: boolean;
+    miss: boolean;
 }
 
 const startTime = performance.now();
@@ -66,8 +67,12 @@ class CachedDict implements CachingDictionary {
         const has = autoCache((word: string) => this.dict.has(word, this.options), DefaultAutoCacheSize);
         const hasAndLog = (word: string): boolean => {
             const time = performance.now() - startTime;
+            const misses = has.misses;
             const value = has(word);
-            log.push({ time, method: 'has', word, value });
+            if (logRequests) {
+                const miss = has.misses > misses;
+                log.push({ time, method: 'has', word, value, miss });
+            }
             return value;
         };
         this.#has = has;
@@ -125,10 +130,33 @@ export function createCachingDictionary(
     return cached;
 }
 
-export function enableLogging(enabled: boolean = !logRequests): void {
+/**
+ * Enable or disable logging of dictionary requests. Every call to `has` will be logged.
+ *
+ * This should be set prior to creating any caching dictionaries to ensure all requests are logged.
+ *
+ * @param enabled - optional - if undefined, it will toggle the setting.
+ * @returns the current state of logging.
+ */
+export function dictionaryCacheEnableLogging(enabled: boolean = !logRequests): boolean {
+    if (enabled && !logRequests) {
+        knownDicts.clear();
+    }
     logRequests = enabled;
+    return logRequests;
 }
 
-export function getLog(): LogEntryBase[] {
+/**
+ * Get the log of dictionary requests.
+ * @returns the log
+ */
+export function dictionaryCacheGetLog(): readonly Readonly<LogEntryBase>[] {
     return log;
+}
+
+/**
+ * Clear the log of dictionary requests.
+ */
+export function dictionaryCacheClearLog(): void {
+    log.length = 0;
 }

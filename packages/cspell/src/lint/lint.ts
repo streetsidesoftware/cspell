@@ -15,7 +15,7 @@ import type {
 import { MessageTypes } from '@cspell/cspell-types';
 import { toFileURL } from '@cspell/url';
 import chalk from 'chalk';
-import { _debug as cspellDictionaryDebug } from 'cspell-dictionary';
+import { dictionaryCacheEnableLogging, dictionaryCacheGetLog } from 'cspell-dictionary';
 import { findRepoRoot, GitIgnore } from 'cspell-gitignore';
 import { GlobMatcher, type GlobMatchOptions, type GlobPatternNormalized, type GlobPatternWithRoot } from 'cspell-glob';
 import type { Document, Logger, SpellCheckFileResult, ValidationIssue } from 'cspell-lib';
@@ -95,7 +95,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
 
     const logDictRequests = truthy(getEnvironmentVariable('CSPELL_ENABLE_DICTIONARY_LOGGING'));
     if (logDictRequests) {
-        cspellDictionaryDebug.cacheDictionaryEnableLogging(true);
+        dictionaryCacheEnableLogging(true);
     }
 
     const lintResult = await run();
@@ -752,8 +752,7 @@ async function writeDictionaryLog() {
     const fieldsCsv = getEnvironmentVariable('CSPELL_ENABLE_DICTIONARY_LOG_FIELDS') || 'time, word, value';
     const fields = fieldsCsv.split(',').map((f) => f.trim());
     const header = fields.join(', ') + '\n';
-    const lines = cspellDictionaryDebug
-        .cacheDictionaryGetLog()
+    const lines = dictionaryCacheGetLog()
         .filter((d) => d.method === 'has')
         .map((d) => fields.map((f) => (f in d ? `${d[f as keyof typeof d]}` : '')).join(', '));
     const data = header + lines.join('\n') + '\n';

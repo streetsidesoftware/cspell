@@ -1,3 +1,8 @@
+export {
+    dictionaryCacheClearLog,
+    dictionaryCacheEnableLogging,
+    dictionaryCacheGetLog,
+} from './SpellingDictionary/CachingDictionary.js';
 export type {
     CachingDictionary,
     FindOptions,
