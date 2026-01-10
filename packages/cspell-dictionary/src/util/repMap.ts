@@ -12,8 +12,6 @@ export interface ReplaceMapper {
 export function createMapper(repMap: ReplaceMap | undefined, ignoreCharset?: string): ReplaceMapper | undefined {
     if (!repMap && !ignoreCharset) return undefined;
 
-    console.warn('%o', { repMap, ignoreCharset });
-
     repMap = repMap || [];
     const charsetMap = charsetToRepMapRegEx(ignoreCharset);
     if (charsetMap) {

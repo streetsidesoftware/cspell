@@ -124,11 +124,17 @@ describe('Verify using multiple dictionaries', () => {
         expect(dictCollection.has(word)).toEqual(expected);
     });
 
-    test('checks mapWord is identity', async () => {
-        const dicts = [createSpellingDictionary(wordsA, 'wordsA', 'test', opts())];
+    test('checks mapWord is undefined', async () => {
+        const dictA = createSpellingDictionary(wordsA, 'wordsA', 'test', opts({ repMap: [['`', "'"]] }));
+        const dicts = [dictA];
 
         const dictCollection = createCollection(dicts, 'test');
-        expect(dictCollection.mapWord?.('Hello')).toBe('Hello');
+        // Collections do not support mapWord
+        expect(dictCollection.mapWord?.('Hello')).toBe(undefined);
+        expect(dictCollection.mapWord?.('don`t')).toBe(undefined);
+        // Individual dictionaries can inside of a collection can.
+        expect(dictA.mapWord?.('Hello')).toBe('Hello');
+        expect(dictA.mapWord?.('don`t')).toBe("don't");
     });
 
     test('checks for suggestions', async () => {
