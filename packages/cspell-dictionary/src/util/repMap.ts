@@ -36,7 +36,7 @@ export function createMapper(repMap: ReplaceMap | undefined, ignoreCharset?: str
     }
 
     return {
-        test: regEx,
+        test: regexpRemoveFlags(regEx, 'gm'),
         fn,
     };
 }
@@ -123,7 +123,7 @@ export function createRepMapper(repMap: ReplaceMap | undefined, ignoreCharset?: 
 
     // const root = createTrie(repMap, ignoreCharset);
     return {
-        test: regEx,
+        test: regexpRemoveFlags(regEx, 'gm'),
         fn: (word) => {
             const edits = calcAllEdits(trie, word);
             return applyEdits(word, edits);
@@ -206,6 +206,12 @@ function addToTrie(node: RepTrieNode, match: string, replaceWith: string) {
     const s = new Set(node.rep || []);
     s.add(replaceWith);
     node.rep = [...s];
+}
+
+function regexpRemoveFlags(re: RegExp, flagsToRemove: string): RegExp {
+    const toRemove = new Set(flagsToRemove);
+    const flags = [...re.flags].filter((f) => !toRemove.has(f)).join('');
+    return new RegExp(re.source, flags);
 }
 
 export const __testing__: {

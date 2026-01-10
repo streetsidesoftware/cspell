@@ -1,7 +1,3 @@
-import {
-    enableLogging as cacheDictionaryEnableLogging,
-    getLog as cacheDictionaryGetLog,
-} from './SpellingDictionary/CachingDictionary.js';
 export type {
     CachingDictionary,
     FindOptions,
@@ -29,14 +25,3 @@ export {
     createSuggestDictionary,
     createSuggestOptions,
 } from './SpellingDictionary/index.js';
-
-/**
- * Debugging utilities.
- */
-export const _debug: {
-    cacheDictionaryEnableLogging: typeof cacheDictionaryEnableLogging;
-    cacheDictionaryGetLog: typeof cacheDictionaryGetLog;
-} = {
-    cacheDictionaryEnableLogging,
-    cacheDictionaryGetLog,
-};
