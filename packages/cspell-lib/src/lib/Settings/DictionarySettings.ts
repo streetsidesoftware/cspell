@@ -55,8 +55,6 @@ function fixPath(def: DictionaryDefinitionInternal): DictionaryDefinitionInterna
     }
     const newPath = fixDicPath(def.path, def.file);
     const newBTriePath = def.btrie ? fixDicPath(def.btrie, def.file) : undefined;
-    // console.error('fixPath %o => %o', def.path, newPath);
-    // console.error('fixBTriePath %o => %o', def.btrie, newBTriePath);
     return {
         ...def,
         file: undefined,
