@@ -47,8 +47,6 @@ async function readTrieDictionaryFromModules(modulePath: string, name: string): 
     const dictInfo = await readDictionaryDefinitions(modulePath);
     const def = dictInfo.dictionaryDefinitions.get(name);
 
-    // console.log('Dictionary Definitions: %o', dictInfo.dictionaryDefinitions);
-
     assert(def, 'Dictionary de-de not found');
     assert(isDict(def), 'Dictionary de-de has no path');
 

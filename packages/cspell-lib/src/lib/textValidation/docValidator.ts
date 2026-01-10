@@ -265,12 +265,9 @@ export class DocumentValidator {
      * @returns the validation issues.
      */
     public checkText(range: SimpleRange, _text: string | undefined, scope?: string[] | string): ValidationIssue[] {
-        // const stopMeasurement = measurePerf('DocumentValidator.checkText');
         const text = this._document.text.slice(range[0], range[1]);
         scope = (Array.isArray(scope) ? scope.join(' ') : scope) || '';
-        const r = this.check({ text, range, scope });
-        // stopMeasurement();
-        return r;
+        return this.check({ text, range, scope });
     }
 
     public check(parsedText: ParsedText): ValidationIssue[] {

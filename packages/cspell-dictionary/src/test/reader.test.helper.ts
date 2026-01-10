@@ -1,4 +1,5 @@
 /* eslint-disable n/no-unsupported-features/node-builtins */
+import assert from 'node:assert';
 import type { Buffer } from 'node:buffer';
 import * as fs from 'node:fs/promises';
 import * as path from 'node:path';
@@ -31,9 +32,7 @@ export async function readRawDictionaryFileFromConfig(configLocation: string, na
     const config = await readConfig(configLocation);
     const dictDefs = config.dictionaryDefinitions ?? [];
     const def = name ? dictDefs.find((def) => def.name === name) : dictDefs[0];
-    if (!def) {
-        throw new Error(`Dictionary: "${name || 0}" as ${configLocation} not found.`);
-    }
+    assert(def, `Dictionary: "${name || 0}" at ${configLocation} not found.`);
     const dictPath = path.join(def.path || '', def.file || '');
     const pathToDict = path.join(path.dirname(configLocation), dictPath);
     return readFile(pathToDict);
@@ -73,16 +72,27 @@ export async function readDictionaryDefinitions(modulePath: string): Promise<Rea
 type BufferEncoding = 'utf8' | 'utf-8';
 
 /**
+ * @param filename - the file path or URL to read.
+ * @returns the file contents decompressed if necessary.
+ */
+export function readFile(filename: string | URL): Promise<Buffer<ArrayBuffer>>;
+
+/**
  * Read and possibly decompress a file.
- * @param filename
- * @returns
+ * @param filename - the file path or URL to read.
+ * @param encoding - the encoding of the file.
+ * @returns the file contents decompressed if necessary as a string.
  */
 export function readFile(filename: string | URL, encoding: BufferEncoding): Promise<string>;
-export function readFile(filename: string | URL): Promise<Buffer<ArrayBuffer>>;
-export function readFile(
-    filename: string | URL,
-    encoding: BufferEncoding | undefined,
-): Promise<Buffer<ArrayBuffer> | string>;
+
+/**
+ * Read and possibly decompress a file.
+ * @param filename - the file path or URL to read.
+ * @param encoding - the encoding of the file.
+ * @returns the file contents decompressed if necessary as a string if the encoding was specified.
+ */
+export function readFile(filename: string | URL, encoding?: BufferEncoding): Promise<Buffer<ArrayBuffer> | string>;
+
 export async function readFile(filename: string | URL, encoding?: BufferEncoding): Promise<Buffer | string> {
     const buf = await fs.readFile(filename).then((buffer) => (isGZipped(buffer) ? zlib.gunzipSync(buffer) : buffer));
     return encoding ? buf.toString(encoding) : buf;
