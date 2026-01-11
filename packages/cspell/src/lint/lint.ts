@@ -3,34 +3,21 @@ import { formatWithOptions } from 'node:util';
 
 import { isAsyncIterable, operators, opFilter, pipeAsync } from '@cspell/cspell-pipe';
 import { opMap, pipe } from '@cspell/cspell-pipe/sync';
-import type {
-    CSpellSettings,
-    CSpellSettingsWithSourceTrace,
-    Glob,
-    Issue,
-    ReportIssueOptions,
-    RunResult,
-    TextDocumentOffset,
-} from '@cspell/cspell-types';
+import type { Glob, RunResult } from '@cspell/cspell-types';
 import { MessageTypes } from '@cspell/cspell-types';
 import { toFileURL } from '@cspell/url';
 import chalk from 'chalk';
 import { dictionaryCacheEnableLogging, dictionaryCacheGetLog } from 'cspell-dictionary';
 import { findRepoRoot, GitIgnore } from 'cspell-gitignore';
 import { GlobMatcher, type GlobMatchOptions, type GlobPatternNormalized, type GlobPatternWithRoot } from 'cspell-glob';
-import type { Document, Logger, SpellCheckFileResult, ValidationIssue } from 'cspell-lib';
+import type { Logger } from 'cspell-lib';
 import {
     ENV_CSPELL_GLOB_ROOT,
-    extractDependencies,
-    extractImportErrors,
     getDefaultConfigLoader,
-    getDictionary,
     isBinaryFile as cspellIsBinaryFile,
     mergeSettings,
     setLogger,
     shouldCheckDocument,
-    spellCheckDocument,
-    Text as cspellText,
 } from 'cspell-lib';
 
 import { console } from '../console.js';
@@ -41,11 +28,8 @@ import { npmPackage } from '../pkgInfo.js';
 import type { CreateCacheSettings, CSpellLintResultCache } from '../util/cache/index.js';
 import { calcCacheSettings, createCache } from '../util/cache/index.js';
 import { type ConfigInfo, readConfig } from '../util/configFileHelper.js';
-import { ApplicationError, CheckFailed, toApplicationError, toError } from '../util/errors.js';
-import { extractContext } from '../util/extractContext.js';
-import type { ReadFileInfoResult } from '../util/fileHelper.js';
+import { ApplicationError, CheckFailed, toApplicationError } from '../util/errors.js';
 import {
-    fileInfoToDocument,
     filenameToUri,
     findFiles,
     getFileSize,
@@ -68,14 +52,16 @@ import {
 import type { LintFileResult } from '../util/LintFileResult.js';
 import { prefetchIterable } from '../util/prefetch.js';
 import type { FinalizedReporter } from '../util/reporters.js';
-import { extractReporterIssueOptions, LintReporter, mergeReportIssueOptions } from '../util/reporters.js';
+import { extractReporterIssueOptions, LintReporter } from '../util/reporters.js';
 import { getTimeMeasurer } from '../util/timer.js';
-import { indent, unindent } from '../util/unindent.js';
+import { unindent } from '../util/unindent.js';
 import { sizeToNumber } from '../util/unitNumbers.js';
 import * as util from '../util/util.js';
 import { wordWrapAnsiText } from '../util/wrap.js';
 import { writeFileOrStream } from '../util/writeFile.js';
 import type { LintRequest } from './LintRequest.js';
+import { countConfigErrors, processFile, type ProcessFileOptions } from './processFile.js';
+import type { PFCached, PFFile, PFSkipped, PrefetchFileResult } from './types.js';
 
 const version = npmPackage.version;
 
@@ -110,42 +96,6 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         console.log(`Elapsed Time: ${elapsed.toFixed(2)}ms`);
     }
     return lintResult;
-
-    interface PrefetchResult {
-        fileResult?: LintFileResult | undefined;
-        fileInfo?: ReadFileInfoResult | undefined;
-        skip?: boolean | undefined;
-        skipReason?: string | undefined;
-        reportIssueOptions?: ReportIssueOptions | undefined;
-    }
-
-    interface PFCached extends PrefetchResult {
-        fileResult: LintFileResult;
-        fileInfo?: undefined;
-        skipReason?: undefined;
-        skip?: undefined;
-    }
-
-    interface PFFile extends PrefetchResult {
-        fileResult?: undefined;
-        fileInfo: ReadFileInfoResult;
-        skip?: undefined;
-        skipReason?: undefined;
-        reportIssueOptions: ReportIssueOptions | undefined;
-    }
-
-    interface PFSkipped extends PrefetchResult {
-        fileResult?: undefined;
-        fileInfo?: undefined;
-        skip: true;
-        skipReason?: string | undefined;
-        reportIssueOptions?: undefined;
-    }
-
-    interface PrefetchFileResult {
-        filename: string;
-        result?: Promise<PFCached | PFFile | PFSkipped | Error>;
-    }
 
     function prefetch(filename: string, configInfo: ConfigInfo, cache: CSpellLintResultCache): PrefetchFileResult {
         if (isBinaryFile(filename, cfg.root)) {
@@ -182,128 +132,6 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
 
         const result: Promise<PFCached | PFFile | PFSkipped | Error> = fetch().catch((e) => toApplicationError(e));
         return { filename, result };
-    }
-
-    async function processFile(
-        filename: string,
-        configInfo: ConfigInfo,
-        cache: CSpellLintResultCache,
-        prefetch: PrefetchResult | undefined,
-    ): Promise<LintFileResult> {
-        if (prefetch?.fileResult) return prefetch.fileResult;
-
-        const getElapsedTimeMs = getTimeMeasurer();
-        const reportIssueOptions = prefetch?.reportIssueOptions;
-        const cachedResult = await cache.getCachedLintResults(filename);
-        if (cachedResult) {
-            reporter.debug(`Filename: ${filename}, using cache`);
-            return {
-                ...cachedResult,
-                elapsedTimeMs: getElapsedTimeMs(),
-                reportIssueOptions: { ...cachedResult.reportIssueOptions, ...reportIssueOptions },
-            };
-        }
-
-        const result: LintFileResult = {
-            fileInfo: {
-                filename,
-            },
-            issues: [],
-            processed: false,
-            errors: 0,
-            configErrors: 0,
-            elapsedTimeMs: 0,
-            reportIssueOptions,
-        };
-
-        const fileInfo = prefetch?.fileInfo || (await readFileInfo(filename, undefined, true));
-        if (fileInfo.errorCode) {
-            if (fileInfo.errorCode !== 'EISDIR' && cfg.options.mustFindFiles) {
-                const err = new LinterError(`File not found: "${filename}"`);
-                reporter.error('Linter:', err);
-                result.errors += 1;
-            }
-            return result;
-        }
-
-        const doc = fileInfoToDocument(fileInfo, cfg.options.languageId, cfg.locale);
-        const { text } = fileInfo;
-        result.fileInfo = fileInfo;
-
-        let spellResult: Partial<SpellCheckFileResult> = {};
-        try {
-            const { showSuggestions: generateSuggestions, validateDirectives, skipValidation } = cfg.options;
-            const numSuggestions = configInfo.config.numSuggestions ?? 5;
-            const validateOptions = util.clean({
-                generateSuggestions,
-                numSuggestions,
-                validateDirectives,
-                skipValidation,
-            });
-            const r = await spellCheckDocument(doc, validateOptions, configInfo.config);
-            // console.warn('filename: %o %o', path.relative(process.cwd(), filename), r.perf);
-            spellResult = r;
-            result.processed = r.checked;
-            result.perf = r.perf ? { ...r.perf } : undefined;
-            result.issues = cspellText.calculateTextDocumentOffsets(doc.uri, text, r.issues).map(mapIssue);
-        } catch (e) {
-            reporter.error(`Failed to process "${filename}"`, toError(e));
-            result.errors += 1;
-        }
-        result.elapsedTimeMs = getElapsedTimeMs();
-
-        const config = spellResult.settingsUsed ?? {};
-        result.reportIssueOptions = mergeReportIssueOptions(
-            spellResult.settingsUsed || configInfo.config,
-            reportIssueOptions,
-        );
-        result.configErrors += await reportConfigurationErrors(config);
-
-        reportCheckResult(result, doc, spellResult, configInfo, config);
-
-        const dep = calcDependencies(config);
-
-        await cache.setCachedLintResults(result, dep.files);
-        return result;
-    }
-
-    function reportCheckResult(
-        result: LintFileResult,
-        _doc: Document,
-        spellResult: Partial<SpellCheckFileResult>,
-        configInfo: ConfigInfo,
-        config: CSpellSettingsWithSourceTrace,
-    ) {
-        const elapsed = result.elapsedTimeMs || 0;
-        const dictionaries = config.dictionaries || [];
-
-        if (verboseLevel > 1) {
-            const dictsUsed = [...dictionaries]
-                .sort()
-                .map((name) => chalk.green(name))
-                .join(', ');
-            const msg = unindent`
-                    File type: ${config.languageId}, Language: ${config.language}, Issues: ${
-                        result.issues.length
-                    } ${elapsed.toFixed(2)}ms
-                    Config file Used: ${relativeToCwd(spellResult.localConfigFilepath || configInfo.source, cfg.root)}
-                    Dictionaries Used:
-                      ${wordWrapAnsiText(dictsUsed, 70)}`;
-            reporter.info(indent(msg, '  '), MessageTypes.Info);
-        }
-
-        if (cfg.options.debug) {
-            const { enabled, language, languageId, dictionaries } = config;
-            const useConfig = { languageId, enabled, language, dictionaries };
-            const msg = unindent`\
-                Debug Config: ${formatWithOptions({ depth: 2, colors: useColor }, useConfig)}`;
-            reporter.debug(msg);
-        }
-    }
-
-    function mapIssue({ doc: _, ...tdo }: TextDocumentOffset & ValidationIssue): Issue {
-        const context = cfg.showContext ? extractContext(tdo, cfg.showContext) : undefined;
-        return util.clean({ ...tdo, context });
     }
 
     async function processFiles(
@@ -366,7 +194,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
                     result,
                 };
             }
-            const result = await processFile(filename, configInfo, cache, fetchResult);
+            const result = await processFile(filename, cache, fetchResult, getProcessFileOptions(configInfo));
             return { filename, fileNum: index, result };
         }
 
@@ -405,53 +233,15 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         return status;
     }
 
-    interface ConfigDependencies {
-        files: string[];
-    }
-
-    function calcDependencies(config: CSpellSettings): ConfigDependencies {
-        const { configFiles, dictionaryFiles } = extractDependencies(config);
-
-        return { files: [...configFiles, ...dictionaryFiles] };
-    }
-
-    async function reportConfigurationErrors(config: CSpellSettings): Promise<number> {
-        const errors = extractImportErrors(config);
-        let count = 0;
-        errors.forEach((ref) => {
-            const key = ref.error.toString();
-            if (configErrors.has(key)) return;
-            configErrors.add(key);
-            count += 1;
-            reporter.error('Configuration', ref.error);
-        });
-
-        const dictCollection = await getDictionary(config);
-        dictCollection.dictionaries.forEach((dict) => {
-            const dictErrors = dict.getErrors?.() || [];
-            const msg = `Dictionary Error with (${dict.name})`;
-            dictErrors.forEach((error) => {
-                const key = msg + error.toString();
-                if (configErrors.has(key)) return;
-                configErrors.add(key);
-                count += 1;
-                reporter.error(msg, error);
-            });
-        });
-
-        return count;
-    }
-
-    function countConfigErrors(configInfo: ConfigInfo): Promise<number> {
-        return reportConfigurationErrors(configInfo.config);
-    }
-
     async function run(): Promise<RunResult> {
         if (cfg.options.root) {
             setEnvironmentVariable(ENV_CSPELL_GLOB_ROOT, cfg.root);
         }
 
         const configInfo: ConfigInfo = await readConfig(cfg.configFile, cfg.root, cfg.options.stopConfigSearchAt);
+
+        const processFileOptions = getProcessFileOptions(configInfo);
+
         if (cfg.options.defaultConfiguration !== undefined) {
             configInfo.config.loadDefaultConfiguration = cfg.options.defaultConfiguration;
         }
@@ -484,7 +274,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             reporter.info(`Config Files Found:\n    ${relativeToCwd(configInfo.source)}\n`, MessageTypes.Info);
         }
 
-        const configErrors = await countConfigErrors(configInfo);
+        const configErrors = await countConfigErrors(configInfo, processFileOptions);
         if (configErrors && cfg.options.exitCode !== false && !cfg.options.continueOnError) {
             return runResult({ errors: configErrors });
         }
@@ -527,6 +317,19 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
                 `,
             MessageTypes.Info,
         );
+    }
+
+    function getProcessFileOptions(configInfo: ConfigInfo): ProcessFileOptions {
+        const processFileOptionsGeneral: ProcessFileOptions = {
+            reporter,
+            chalk,
+            configInfo,
+            cfg,
+            verboseLevel,
+            useColor,
+            configErrors,
+        };
+        return processFileOptionsGeneral;
     }
 }
 
@@ -763,16 +566,6 @@ async function writeDictionaryLog() {
 
 function globPattern(g: Glob) {
     return typeof g === 'string' ? g : g.glob;
-}
-
-export class LinterError extends Error {
-    constructor(message: string) {
-        super(message);
-    }
-
-    toString(): string {
-        return this.message;
-    }
 }
 
 function calcVerboseLevel(options: LintRequest['options']): number {
