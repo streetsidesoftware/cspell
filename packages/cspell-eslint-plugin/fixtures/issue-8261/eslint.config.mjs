@@ -22,15 +22,7 @@ const config = [
                 {
                     debugMode: false,
                     autoFix: true,
-                    cspell: {
-                        dictionaries: ['business-terminology'],
-                        dictionaryDefinitions: [
-                            {
-                                name: 'business-terminology',
-                                path: './dictionaries/business-terminology.txt',
-                            },
-                        ],
-                    },
+                    report: 'simple',
                 },
             ],
         },

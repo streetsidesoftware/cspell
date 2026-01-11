@@ -48,8 +48,10 @@ describe('Validate spellCheck', () => {
             end: text.indexOf('isssue') + 'isssue'.length,
             rangeIdx: 0,
             range: [0, text.length],
-            severity: 'Unknown',
+            severity: 'Misspelled',
             suggestions: [{ isPreferred: true, word: 'issue' }],
+            hasPreferredFixes: true,
+            hasSimpleSuggestions: true,
         };
 
         assert.deepEqual(result, { issues: [issueExpected], errors: [] });
@@ -70,8 +72,10 @@ describe('Validate spellCheck', () => {
             end: text.indexOf('isssue') + 'isssue'.length,
             rangeIdx: 0,
             range: [0, text.length],
-            severity: 'Unknown',
+            severity: 'Misspelled',
             suggestions: [{ isPreferred: true, word: 'issue' }],
+            hasPreferredFixes: true,
+            hasSimpleSuggestions: true,
         };
 
         assert.deepEqual(result, { issues: [issueExpected], errors: [] });
@@ -93,8 +97,10 @@ describe('Validate spellCheck', () => {
             end: text.indexOf('isssue') + 'isssue'.length,
             rangeIdx: 0,
             range: [0, text.length],
-            severity: 'Unknown',
+            severity: 'Misspelled',
             suggestions: [{ isPreferred: true, word: 'issue' }],
+            hasPreferredFixes: true,
+            hasSimpleSuggestions: true,
         };
 
         assert.deepEqual(result, { issues: [issueExpected], errors: [] });
@@ -116,8 +122,10 @@ describe('Validate spellCheck', () => {
             end: text.indexOf('isssue') + 'isssue'.length,
             rangeIdx: 0,
             range: [0, text.length],
-            severity: 'Unknown',
+            severity: 'Misspelled',
             suggestions: [{ isPreferred: true, word: 'issue' }],
+            hasPreferredFixes: true,
+            hasSimpleSuggestions: true,
         };
 
         assert.deepEqual(result, { issues: [issueExpected], errors: [] });
@@ -137,8 +145,10 @@ describe('Validate spellCheck', () => {
             end: text.indexOf('isssue') + 'isssue'.length,
             rangeIdx: 0,
             range: [0, text.length],
-            severity: 'Unknown',
+            severity: 'Misspelled',
             suggestions: [{ isPreferred: true, word: 'issue' }],
+            hasPreferredFixes: true,
+            hasSimpleSuggestions: true,
         };
 
         assert.deepEqual(result, { issues: [issueExpected], errors: [] });

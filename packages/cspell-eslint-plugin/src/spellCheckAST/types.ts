@@ -21,8 +21,13 @@ export interface Issue {
     start: number;
     end: number;
     word: string;
-    severity: 'Forbidden' | 'Unknown' | 'Hint';
+    severity: 'Forbidden' | 'Misspelled' | 'Unknown' | 'Hint';
+    /** Possible suggestions. */
     suggestions: Suggestions;
+    /** Indicates that there preferred suggestions. */
+    hasPreferredFixes: boolean;
+    hasSimpleSuggestions: boolean;
+    preferredFixes: string[] | undefined;
     nodeType: NodeType;
     node: ASTNode | undefined;
 }

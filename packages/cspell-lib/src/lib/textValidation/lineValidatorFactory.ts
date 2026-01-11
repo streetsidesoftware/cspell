@@ -3,7 +3,13 @@ import assert from 'node:assert';
 import { opConcatMap, opFilter, pipe } from '@cspell/cspell-pipe/sync';
 import type { ParsedText } from '@cspell/cspell-types';
 import { defaultCSpellSettings, unknownWordsChoices } from '@cspell/cspell-types';
-import type { CachingDictionary, PreferredSuggestion, SearchOptions, SpellingDictionary } from 'cspell-dictionary';
+import type {
+    CachingDictionary,
+    PreferredSuggestion,
+    SearchOptions,
+    SpellingDictionary,
+    Suggestion,
+} from 'cspell-dictionary';
 import { createCachingDictionary } from 'cspell-dictionary';
 
 import type { ValidationIssue } from '../Models/ValidationIssue.js';
@@ -60,6 +66,7 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
         ignoreRandomStrings = defaultCSpellSettings.ignoreRandomStrings,
         minRandomLength = defaultCSpellSettings.minRandomLength,
         unknownWords = unknownWordsChoices.ReportAll,
+        numSuggestions,
     } = options;
     const hasWordOptions: SearchOptions = {
         ignoreCase,
@@ -120,18 +127,23 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
         return autoResolve(cacheGetPreferredSuggestions, word, () => dictCol.getPreferredSuggestions(word));
     }
 
-    const cacheHasSimpleSuggestions = new Map<string, boolean>();
-    function hasSimpleSuggestions(word: string): boolean {
+    const cacheHasSimpleSuggestions = new Map<string, Suggestion[]>();
+    function getSimpleSuggestions(word: string): Suggestion[] {
+        const numSug = numSuggestions ?? 5;
         return autoResolve(cacheHasSimpleSuggestions, word, () => {
             const sugs = dictCol.suggest(word, {
                 numSuggestions: 1,
                 compoundMethod: 0,
-                includeTies: false,
+                includeTies: true, // We want the top suggestions even if there are ties
                 ignoreCase,
                 timeout: 100,
                 numChanges: 1.8, // Only consider very simple changes (1 edit distance plus case changes)
             });
-            return !!sugs.length;
+
+            if (sugs.length > numSug) {
+                sugs.length = numSug;
+            }
+            return sugs;
         });
     }
 
@@ -145,11 +157,15 @@ export function lineValidatorFactory(sDict: SpellingDictionary, options: Validat
     }
 
     function annotateIssue(issue: ValidationIssue): ValidationIssue {
-        const sugs = getPreferredSuggestions(issue.text);
+        const sugs: PreferredSuggestion[] | undefined = getPreferredSuggestions(issue.text);
         if (!sugs?.length) {
             issue.hasPreferredSuggestions = sugs !== undefined ? false : undefined;
             if (unknownWords === unknownWordsChoices.ReportSimple) {
-                issue.hasSimpleSuggestions = hasSimpleSuggestions(issue.text);
+                const sug = getSimpleSuggestions(issue.text);
+                issue.hasSimpleSuggestions = !!sug.length;
+                if (sug.length) {
+                    issue.suggestionsEx = sug.map((s) => ({ ...s, isPreferred: !!s.isPreferred }));
+                }
             }
             return issue;
         }

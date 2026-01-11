@@ -46,7 +46,10 @@ ruleTester.run('cspell', Rule.rules.spellchecker, {
     ],
     invalid: [
         // cspell:ignore commment Schooll
-        readInvalid('json-support/sample.jsonc', [ce('Unknown word: "commment"', 8), ce('Unknown word: "Schooll"', 8)]),
+        readInvalid('json-support/sample.jsonc', [
+            ce('Misspelled word: "commment" (comment)', 8),
+            ce('Unknown word: "Schooll"', 8),
+        ]),
     ],
 });
 

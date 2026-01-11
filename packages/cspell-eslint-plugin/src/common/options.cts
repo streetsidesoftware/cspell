@@ -14,9 +14,8 @@ export interface Options extends Check {
 
     /**
      * Generate suggestions
-     * @default true
      */
-    generateSuggestions: boolean;
+    generateSuggestions?: boolean;
 
     /**
      * Automatically fix common mistakes.
@@ -75,14 +74,13 @@ export type CSpellOptions = Pick<
     | 'includeRegExpList'
     | 'import'
     | 'language'
-    | 'unknownWords'
     | 'words'
 > & {
     dictionaryDefinitions?: DictionaryDefinition[];
 };
 
-export type RequiredOptions = Required<Pick<Options, Exclude<keyof Options, 'debugMode' | 'report'>>> &
-    Pick<Options, 'debugMode'>;
+export type RequiredOptions = Options &
+    Required<Pick<Options, Exclude<keyof Options, 'debugMode' | 'report' | 'generateSuggestions'>>>;
 
 export interface Check {
     /**
@@ -196,7 +194,7 @@ export interface CustomWordListFile {
 
 export type WorkerOptions = RequiredOptions & { cwd: string };
 
-export const defaultOptions: Options = {
+export const defaultOptions: Options & Required<Pick<Options, 'generateSuggestions' | 'numSuggestions' | 'autoFix'>> = {
     numSuggestions: 8,
     generateSuggestions: true,
     autoFix: false,

@@ -13,6 +13,7 @@ export type {
     SpellingDictionary,
     SpellingDictionaryCollection,
     SpellingDictionaryOptions,
+    Suggestion,
     SuggestionCollector,
     SuggestionResult,
     SuggestOptions,
