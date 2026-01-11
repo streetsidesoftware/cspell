@@ -22,7 +22,6 @@ export const defaultCheckOptions: Required<Check> = {
 export const defaultOptions: RequiredOptions = {
     ...defaultCheckOptions,
     numSuggestions: 8,
-    generateSuggestions: true,
     autoFix: false,
 };
 

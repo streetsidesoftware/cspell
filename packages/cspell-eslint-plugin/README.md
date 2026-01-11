@@ -96,7 +96,7 @@ interface Options {
    * Generate suggestions
    * @default true
    */
-  generateSuggestions: boolean;
+  generateSuggestions?: boolean;
   /**
    * Ignore import, require names, and export from names
    * @default true
