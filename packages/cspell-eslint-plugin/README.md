@@ -98,6 +98,15 @@ interface Options {
    */
   generateSuggestions?: boolean;
   /**
+   * Control the reporting level for unknown words.
+   * - `'all'` — report all unknown words.
+   * - `'simple'` — report unknown words except for more complex or compound cases.
+   * - `'typos'` — focus on words that are likely simple typographical errors.
+   * - `'flagged'` — only report words that match flagged terms.
+   * @default 'all'
+   */
+  report?: 'all' | 'simple' | 'typos' | 'flagged';
+  /**
    * Ignore import, require names, and export from names
    * @default true
    */
