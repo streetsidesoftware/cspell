@@ -4,8 +4,8 @@ Url: https://github.com/eslint/eslint
 Args: '[".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]'
 Summary:
   files: 2062
-  filesWithIssues: 301
-  issues: 1517
+  filesWithIssues: 302
+  issues: 1519
   errors: 0
 Errors: []
 
@@ -77,6 +77,7 @@ issues:
   - "docs/src/rules/key-spacing.md:191:5         bcde    U       bcde: 42,"
   - "docs/src/rules/key-spacing.md:213:5         ijkl    U       ijkl: 'Non-consecutive lines"
   - "docs/src/rules/max-lines-per-function.md:31:45          dbname      U       return m(\"tr\", {key: db.dbname}, ["
+  - "docs/src/rules/no-await-in-loop.md:166:45       desireable (desirable)      U       some concurrency may be desireable to reduce I/O bottlenecks"
   - "docs/src/rules/no-dupe-keys.md:56:5         quxx    U       quxx: \"qux\""
   - "docs/src/rules/no-empty-character-class.md:40:13        abcefg      U       regex.test(\"abcefg\"); // false, the nested"
   - "docs/src/rules/no-eq-null.md:67:41          eqnull      U       rule corresponds to `eqnull` rule of JSHint."
@@ -209,9 +210,9 @@ issues:
   - "lib/linter/code-path-analysis/code-path-state.js:1246:37        circuting       U       path due to the short-circuting, so we are just seeding"
   - "lib/linter/code-path-analysis/code-path-state.js:1725:14        Segs            U       const prevSegsOfLeavingSegment = [headOfLeav"
   - "lib/linter/code-path-analysis/debug-helpers.js:109:41       Graphvis    U       can be visualized with Graphvis."
-  - "lib/rule-tester/rule-tester.js:35:7         jslang              U       const jslang = require(\"../languages"
-  - "lib/rule-tester/rule-tester.js:259:42       errorize            U       ast The root node to errorize `start`/`end` properties"
-  - "lib/rule-tester/rule-tester.js:1177:21      Didnt (Didn't)      U       function assertASTDidntChange(beforeAST, afterAST"
+  - "lib/rule-tester/rule-tester.js:36:7         jslang              U       const jslang = require(\"../languages"
+  - "lib/rule-tester/rule-tester.js:260:42       errorize            U       ast The root node to errorize `start`/`end` properties"
+  - "lib/rule-tester/rule-tester.js:1349:21      Didnt (Didn't)      U       function assertASTDidntChange(beforeAST, afterAST"
   - "lib/rules/dot-notation.js:163:21        quasis      U       node.property.quasis[0].value.cooked,"
   - "lib/rules/for-direction.js:86:62        nochange    U       if sub return -1, if nochange, return 0"
   - "lib/rules/func-name-matching.js:13:7        esutils     U       const esutils = require(\"esutils\""
@@ -328,6 +329,7 @@ issues:
   - "tests/lib/linter/source-code-fixer.js:77:13         removeend       U       message: \"removeend\","
   - "tests/lib/rule-tester/rule-tester.js:4096:13        outpt           U       outpt: \"var baz;\","
   - "tests/lib/rule-tester/rule-tester.js:5279:12        Subclassing     U       describe(\"Subclassing\", () => {"
+  - "tests/lib/rule-tester/rule-tester.js:6731:90        annomyous       U       everything after the first annomyous method to avoid issues"
   - "tests/lib/rules/array-bracket-spacing.js:74:69          n'quxx      U       { 'bar': 'baz' }], \\n'quxx': 1 \\n}]\","
   - "tests/lib/rules/array-element-newline.js:42:72          nosomething     U       ,\\nfunction bar() {\\nosomething();\\n}\\n];\","
   - "tests/lib/rules/arrow-body-style.js:27:32       nretv       U       = (retv, name) => {\\nretv[name] = true;\\nreturn"
@@ -563,6 +565,7 @@ issuesSummary:
   - "text: Amaresh, count: 2, files: 1,"
   - "text: amet, count: 4, files: 1,"
   - "text: anchorjs, count: 1, files: 1,"
+  - "text: annomyous, count: 1, files: 1,"
   - "text: anonname, count: 5, files: 1,"
   - "text: antidisestablishmentarianistically, count: 1, files: 1,"
   - "text: apos, count: 1, files: 1,"
@@ -645,6 +648,7 @@ issuesSummary:
   - "text: Cypro, count: 1, files: 1,"
   - "text: dbname, count: 3, files: 1,"
   - "text: decrementcurrent, count: 2, files: 1,"
+  - "text: desireable, count: 1, files: 1,"
   - "text: destructures, count: 1, files: 1,"
   - "text: Dfnp, count: 1, files: 1,"
   - "text: dgimsuvy, count: 1, files: 1,"

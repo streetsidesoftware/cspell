@@ -3,7 +3,7 @@ Repository: MicrosoftDocs/PowerShell-Docs
 Url: "https://github.com/MicrosoftDocs/PowerShell-Docs.git"
 Args: ["--config=../../../cspell-power-shell-docs.config.yaml","**"]
 Lines:
- CSpell: Files checked: 2639, Issues found: 3777 in 915 files.
+ CSpell: Files checked: 2645, Issues found: 3823 in 918 files.
  exit code: 1
 CODE_OF_CONDUCT.md:38:38     - Unknown word (opensource) -- reach out at [aka.ms/opensource/moderation-support]
 LICENSE.md:122:56    - Unknown word (sublicensable)   -- worldwide, royalty-free, non-sublicensable,
@@ -92,6 +92,10 @@ reference/5.1/Microsoft.PowerShell.Core/About/about_Arrays.md:1004:43   - Unknow
 reference/5.1/Microsoft.PowerShell.Core/About/about_Arrays.md:1006:62   - Unknown word (nosuchkey)  -- int]]::new().Item('nosuchkey' ...
 reference/5.1/Microsoft.PowerShell.Core/About/about_Calculated_Properties.md:254:21    - Unknown word (Metacontent) -- '' {'Metacontent'}
 reference/5.1/Microsoft.PowerShell.Core/About/about_Calculated_Properties.md:342:21    - Unknown word (Metacontent) -- '' {'Metacontent'}
+reference/5.1/Microsoft.PowerShell.Core/About/about_Case-Sensitivity.md:193:7     - Unknown word (Baar)       -- # Baar
+reference/5.1/Microsoft.PowerShell.Core/About/about_Case-Sensitivity.md:201:7     - Unknown word (csplit)     -- - `-csplit` is case-sensitive,
+reference/5.1/Microsoft.PowerShell.Core/About/about_Case-Sensitivity.md:204:12    - Unknown word (csplit)     -- 'Bar' -csplit 'A', 0
+reference/5.1/Microsoft.PowerShell.Core/About/about_Case-Sensitivity.md:207:12    - Unknown word (csplit)     -- 'Bar' -csplit 'A', 0, 'IgnoreCase
 reference/5.1/Microsoft.PowerShell.Core/About/about_Character_Encoding.md:161:4     - Unknown word (bigendianutf) -- - `bigendianutf32`: Encodes in UTF-
 reference/5.1/Microsoft.PowerShell.Core/About/about_Classes.md:166:35    - Unknown word (Unwin)      -- = 'George Allen & Unwin'
 reference/5.1/Microsoft.PowerShell.Core/About/about_Classes.md:177:32    - Unknown word (nwhich)     -- Time to read $Book,`nwhich was published $Age years
@@ -166,7 +170,6 @@ reference/5.1/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:74:12   
 reference/5.1/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:75:12     - Unknown word (gigibyte)   -- | `gb`   | gigibyte (1024<sup>3</sup>) multiplier
 reference/5.1/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:76:12     - Unknown word (teribyte)   -- | `tb`   | teribyte (1024<sup>4</sup>) multiplier
 reference/5.1/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:77:12     - Unknown word (petibyte)   -- | `pb`   | petibyte (1024<sup>5</sup>) multiplier
-reference/5.1/Microsoft.PowerShell.Core/About/about_Operator_Precedence.md:89:14     - Unknown word (coalese)    -- | `??` (null-coalese operator)
 reference/5.1/Microsoft.PowerShell.Core/About/about_Operators.md:131:28    - Unknown word (Nosuch)     -- example, `(Get-Item /Nosuch); $?` unexpectedly yields
 reference/5.1/Microsoft.PowerShell.Core/About/about_PSItem.md:110:60    - Unknown word (uppercases) -- the **ForEach** method uppercases the
 reference/5.1/Microsoft.PowerShell.Core/About/about_Parameters.md:134:24    - Unknown word (techdocs)   -- Get-ChildItem -Path C:\techdocs -Exclude *.ppt
@@ -385,9 +388,9 @@ reference/5.1/Microsoft.PowerShell.Diagnostics/Get-Counter.md:424:2     - Unknow
 reference/5.1/Microsoft.PowerShell.Diagnostics/Get-Counter.md:425:2     - Unknown word (Procs)      -- $Procs.CounterSamples | Sort
 reference/5.1/Microsoft.PowerShell.Diagnostics/Get-Counter.md:443:76    - Unknown word (Procs)      -- result is stored in the `$Procs` variable. The
 reference/5.1/Microsoft.PowerShell.Diagnostics/Get-Counter.md:444:3     - Unknown word (Procs)      -- `$Procs` variable with the
-reference/5.1/Microsoft.PowerShell.Diagnostics/Get-WinEvent.md:559:21    - Unknown word (timediff)   -- TimeCreated[timediff(@SystemTime) &amp;lt
-reference/5.1/Microsoft.PowerShell.Diagnostics/Get-WinEvent.md:566:44    - Unknown word (timediff)   -- Level=3 and TimeCreated[timediff(@SystemTime) &amp;lt
-reference/5.1/Microsoft.PowerShell.Diagnostics/Get-WinEvent.md:597:3     - Unknown word (Logname)    -- Logname='Application'
+reference/5.1/Microsoft.PowerShell.Diagnostics/Get-WinEvent.md:559:21    - Unknown word (timediff)   -- TimeCreated[timediff(@SystemTime) <= 864
+reference/5.1/Microsoft.PowerShell.Diagnostics/Get-WinEvent.md:566:44    - Unknown word (timediff)   -- Level=3 and TimeCreated[timediff(@SystemTime) <= 864
+reference/5.1/Microsoft.PowerShell.Diagnostics/Get-WinEvent.md:599:3     - Unknown word (Logname)    -- Logname='Application'
 reference/5.1/Microsoft.PowerShell.Diagnostics/Import-Counter.md:109:60    - Unknown word (Ctrs)           -- rocessorData.blg -Counter $intCtrs
 reference/5.1/Microsoft.PowerShell.Diagnostics/Import-Counter.md:121:6     - Unknown word (Ctrs)           -- `$intCtrs` variable. It uses the
 reference/5.1/Microsoft.PowerShell.Diagnostics/Import-Counter.md:124:68    - Unknown word (Ctrs)           -- counter paths in the `$intCtrs` variable.
@@ -655,6 +658,10 @@ reference/7.4/Microsoft.PowerShell.Core/About/about_Built-in_Functions.md:93:41 
 reference/7.4/Microsoft.PowerShell.Core/About/about_Calculated_Properties.md:255:21    - Unknown word (Metacontent) -- '' {'Metacontent'}
 reference/7.4/Microsoft.PowerShell.Core/About/about_Calculated_Properties.md:343:21    - Unknown word (Metacontent) -- '' {'Metacontent'}
 reference/7.4/Microsoft.PowerShell.Core/About/about_Calling_Generic_Methods.md:69:9      - Unknown word (Linq)       -- `System.Linq.Enumerable` class to
+reference/7.4/Microsoft.PowerShell.Core/About/about_Case-Sensitivity.md:193:7     - Unknown word (Baar)       -- # Baar
+reference/7.4/Microsoft.PowerShell.Core/About/about_Case-Sensitivity.md:201:7     - Unknown word (csplit)     -- - `-csplit` is case-sensitive,
+reference/7.4/Microsoft.PowerShell.Core/About/about_Case-Sensitivity.md:204:12    - Unknown word (csplit)     -- 'Bar' -csplit 'A', 0
+reference/7.4/Microsoft.PowerShell.Core/About/about_Case-Sensitivity.md:207:12    - Unknown word (csplit)     -- 'Bar' -csplit 'A', 0, 'IgnoreCase
 reference/7.4/Microsoft.PowerShell.Core/About/about_Character_Encoding.md:163:4     - Unknown word (bigendianutf) -- - `bigendianutf32`: Encodes in UTF-
 reference/7.4/Microsoft.PowerShell.Core/About/about_Classes.md:166:35    - Unknown word (Unwin)      -- = 'George Allen & Unwin'
 reference/7.4/Microsoft.PowerShell.Core/About/about_Classes.md:177:32    - Unknown word (nwhich)     -- Time to read $Book,`nwhich was published $Age years
@@ -750,7 +757,6 @@ reference/7.4/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:82:12   
 reference/7.4/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:83:12     - Unknown word (gigibyte)   -- | `gb`   | gigibyte (1024<sup>3</sup>) multiplier
 reference/7.4/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:84:12     - Unknown word (teribyte)   -- | `tb`   | teribyte (1024<sup>4</sup>) multiplier
 reference/7.4/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:85:12     - Unknown word (petibyte)   -- | `pb`   | petibyte (1024<sup>5</sup>) multiplier
-reference/7.4/Microsoft.PowerShell.Core/About/about_Operator_Precedence.md:89:14     - Unknown word (coalese)    -- | `??` (null-coalese operator)
 reference/7.4/Microsoft.PowerShell.Core/About/about_Operators.md:318:46    - Unknown word (subshell)   -- it asynchronously in subshell as a job.
 reference/7.4/Microsoft.PowerShell.Core/About/about_PSItem.md:111:60    - Unknown word (uppercases) -- the **ForEach** method uppercases the
 reference/7.4/Microsoft.PowerShell.Core/About/about_Parameters.md:134:24    - Unknown word (techdocs)   -- Get-ChildItem -Path C:\techdocs -Exclude *.ppt
@@ -879,6 +885,16 @@ reference/7.4/Microsoft.PowerShell.Core/About/about_Types.ps1xml.md:464:42    - 
 reference/7.4/Microsoft.PowerShell.Core/About/about_Types.ps1xml.md:480:55    - Unknown word (Dmtf)       -- nagementDateTimeConverter]::ToDmtfDateTime($args[0])
 reference/7.4/Microsoft.PowerShell.Core/About/about_Variable_Provider.md:230:27    - Unknown word (serv)       -- command deletes the `serv` variable from the current
 reference/7.4/Microsoft.PowerShell.Core/About/about_Variable_Provider.md:234:32    - Unknown word (serv)       -- Variable -Path Variable:serv
+reference/7.4/Microsoft.PowerShell.Core/About/about_WQL.md:210:14    - Unknown word (wmisearcher) -- ## Using the wmisearcher type accelerator
+reference/7.4/Microsoft.PowerShell.Core/About/about_WQL.md:212:7     - Unknown word (wmisearcher) -- The `[wmisearcher]` type accelerator creates
+reference/7.4/Microsoft.PowerShell.Core/About/about_WQL.md:217:9     - Unknown word (wmisearcher) -- Using `[wmisearcher]`, you gain easy access
+reference/7.4/Microsoft.PowerShell.Core/About/about_WQL.md:221:14    - Unknown word (wmisearcher) -- To use the `[wmisearcher]` type accelerator:
+reference/7.4/Microsoft.PowerShell.Core/About/about_WQL.md:442:43    - Unknown word (Hotepad)     -- return any process from `Hotepad.exe` through `Notepad
+reference/7.4/Microsoft.PowerShell.Core/About/about_WQL.md:446:61    - Unknown word (otepad)      -- WHERE Name LIKE '[H-N]otepad.exe'"
+reference/7.4/Microsoft.PowerShell.Core/About/about_WQL.md:481:58    - Unknown word (ASWPRCUN)    -- Process WHERE name LIKE '[^ASWPRCUN]%'"
+reference/7.4/Microsoft.PowerShell.Core/About/about_WQL.md:508:67    - Unknown word (czlc)        -- `calc.exe` through `czlc.exe`, or
+reference/7.4/Microsoft.PowerShell.Core/About/about_WQL.md:616:7     - Unknown word (Intall)      -- the **IntallDate** property. The
+reference/7.4/Microsoft.PowerShell.Core/About/about_WQL.md:91:13     - Unknown word (wmisearcher) -- - Use the `[wmisearcher]` type accelerator.
 reference/7.4/Microsoft.PowerShell.Core/About/about_Wildcards.md:22:48     - Unknown word (Techdocs)   -- the files in the `C:\Techdocs` directory with a
 reference/7.4/Microsoft.PowerShell.Core/About/about_Wildcards.md:26:18     - Unknown word (Techdocs)   -- Get-ChildItem C:\Techdocs\*.ppt
 reference/7.4/Microsoft.PowerShell.Core/About/about_Wildcards.md:61:18     - Unknown word (Techdocs)   -- Get-ChildItem C:\Techdocs\[a-l]*.txt
@@ -955,9 +971,9 @@ reference/7.4/Microsoft.PowerShell.Diagnostics/Get-Counter.md:430:2     - Unknow
 reference/7.4/Microsoft.PowerShell.Diagnostics/Get-Counter.md:431:2     - Unknown word (Procs)      -- $Procs.CounterSamples | Sort
 reference/7.4/Microsoft.PowerShell.Diagnostics/Get-Counter.md:449:76    - Unknown word (Procs)      -- result is stored in the `$Procs` variable. The
 reference/7.4/Microsoft.PowerShell.Diagnostics/Get-Counter.md:450:3     - Unknown word (Procs)      -- `$Procs` variable with the
-reference/7.4/Microsoft.PowerShell.Diagnostics/Get-WinEvent.md:561:21    - Unknown word (timediff)   -- TimeCreated[timediff(@SystemTime) &amp;lt
-reference/7.4/Microsoft.PowerShell.Diagnostics/Get-WinEvent.md:568:44    - Unknown word (timediff)   -- Level=3 and TimeCreated[timediff(@SystemTime) &amp;lt
-reference/7.4/Microsoft.PowerShell.Diagnostics/Get-WinEvent.md:599:3     - Unknown word (Logname)    -- Logname='Application'
+reference/7.4/Microsoft.PowerShell.Diagnostics/Get-WinEvent.md:561:21    - Unknown word (timediff)   -- TimeCreated[timediff(@SystemTime) <= 864
+reference/7.4/Microsoft.PowerShell.Diagnostics/Get-WinEvent.md:568:44    - Unknown word (timediff)   -- Level=3 and TimeCreated[timediff(@SystemTime) <= 864
+reference/7.4/Microsoft.PowerShell.Diagnostics/Get-WinEvent.md:601:3     - Unknown word (Logname)    -- Logname='Application'
 reference/7.4/Microsoft.PowerShell.Diagnostics/New-WinEvent.md:92:16     - Unknown word (Elasped)    -- to the **PolicyElaspedTimeInSeconds** field
 reference/7.4/Microsoft.PowerShell.Management/Add-Content.md:228:4     - Unknown word (bigendianutf) -- - `bigendianutf32`: Encodes in UTF-
 reference/7.4/Microsoft.PowerShell.Management/Clear-RecycleBin.md:31:17     - Unknown word (readded)    -- This cmdlet was readded in PowerShell 7.
@@ -1193,6 +1209,10 @@ reference/7.5/Microsoft.PowerShell.Core/About/about_Built-in_Functions.md:93:41 
 reference/7.5/Microsoft.PowerShell.Core/About/about_Calculated_Properties.md:255:21    - Unknown word (Metacontent) -- '' {'Metacontent'}
 reference/7.5/Microsoft.PowerShell.Core/About/about_Calculated_Properties.md:343:21    - Unknown word (Metacontent) -- '' {'Metacontent'}
 reference/7.5/Microsoft.PowerShell.Core/About/about_Calling_Generic_Methods.md:69:9      - Unknown word (Linq)       -- `System.Linq.Enumerable` class to
+reference/7.5/Microsoft.PowerShell.Core/About/about_Case-Sensitivity.md:193:7     - Unknown word (Baar)       -- # Baar
+reference/7.5/Microsoft.PowerShell.Core/About/about_Case-Sensitivity.md:201:7     - Unknown word (csplit)     -- - `-csplit` is case-sensitive,
+reference/7.5/Microsoft.PowerShell.Core/About/about_Case-Sensitivity.md:204:12    - Unknown word (csplit)     -- 'Bar' -csplit 'A', 0
+reference/7.5/Microsoft.PowerShell.Core/About/about_Case-Sensitivity.md:207:12    - Unknown word (csplit)     -- 'Bar' -csplit 'A', 0, 'IgnoreCase
 reference/7.5/Microsoft.PowerShell.Core/About/about_Character_Encoding.md:163:4     - Unknown word (bigendianutf) -- - `bigendianutf32`: Encodes in UTF-
 reference/7.5/Microsoft.PowerShell.Core/About/about_Classes.md:166:35    - Unknown word (Unwin)      -- = 'George Allen & Unwin'
 reference/7.5/Microsoft.PowerShell.Core/About/about_Classes.md:177:32    - Unknown word (nwhich)     -- Time to read $Book,`nwhich was published $Age years
@@ -1288,7 +1308,6 @@ reference/7.5/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:82:12   
 reference/7.5/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:83:12     - Unknown word (gigibyte)   -- | `gb`   | gigibyte (1024<sup>3</sup>) multiplier
 reference/7.5/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:84:12     - Unknown word (teribyte)   -- | `tb`   | teribyte (1024<sup>4</sup>) multiplier
 reference/7.5/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:85:12     - Unknown word (petibyte)   -- | `pb`   | petibyte (1024<sup>5</sup>) multiplier
-reference/7.5/Microsoft.PowerShell.Core/About/about_Operator_Precedence.md:89:14     - Unknown word (coalese)    -- | `??` (null-coalese operator)
 reference/7.5/Microsoft.PowerShell.Core/About/about_Operators.md:318:46    - Unknown word (subshell)   -- it asynchronously in subshell as a job.
 reference/7.5/Microsoft.PowerShell.Core/About/about_PSItem.md:111:60    - Unknown word (uppercases) -- the **ForEach** method uppercases the
 reference/7.5/Microsoft.PowerShell.Core/About/about_Parameters.md:134:24    - Unknown word (techdocs)   -- Get-ChildItem -Path C:\techdocs -Exclude *.ppt
@@ -1416,6 +1435,16 @@ reference/7.5/Microsoft.PowerShell.Core/About/about_Types.ps1xml.md:464:42    - 
 reference/7.5/Microsoft.PowerShell.Core/About/about_Types.ps1xml.md:480:55    - Unknown word (Dmtf)       -- nagementDateTimeConverter]::ToDmtfDateTime($args[0])
 reference/7.5/Microsoft.PowerShell.Core/About/about_Variable_Provider.md:230:27    - Unknown word (serv)       -- command deletes the `serv` variable from the current
 reference/7.5/Microsoft.PowerShell.Core/About/about_Variable_Provider.md:234:32    - Unknown word (serv)       -- Variable -Path Variable:serv
+reference/7.5/Microsoft.PowerShell.Core/About/about_WQL.md:210:14    - Unknown word (wmisearcher) -- ## Using the wmisearcher type accelerator
+reference/7.5/Microsoft.PowerShell.Core/About/about_WQL.md:212:7     - Unknown word (wmisearcher) -- The `[wmisearcher]` type accelerator creates
+reference/7.5/Microsoft.PowerShell.Core/About/about_WQL.md:217:9     - Unknown word (wmisearcher) -- Using `[wmisearcher]`, you gain easy access
+reference/7.5/Microsoft.PowerShell.Core/About/about_WQL.md:221:14    - Unknown word (wmisearcher) -- To use the `[wmisearcher]` type accelerator:
+reference/7.5/Microsoft.PowerShell.Core/About/about_WQL.md:442:43    - Unknown word (Hotepad)     -- return any process from `Hotepad.exe` through `Notepad
+reference/7.5/Microsoft.PowerShell.Core/About/about_WQL.md:446:61    - Unknown word (otepad)      -- WHERE Name LIKE '[H-N]otepad.exe'"
+reference/7.5/Microsoft.PowerShell.Core/About/about_WQL.md:481:58    - Unknown word (ASWPRCUN)    -- Process WHERE name LIKE '[^ASWPRCUN]%'"
+reference/7.5/Microsoft.PowerShell.Core/About/about_WQL.md:508:67    - Unknown word (czlc)        -- `calc.exe` through `czlc.exe`, or
+reference/7.5/Microsoft.PowerShell.Core/About/about_WQL.md:616:7     - Unknown word (Intall)      -- the **IntallDate** property. The
+reference/7.5/Microsoft.PowerShell.Core/About/about_WQL.md:91:13     - Unknown word (wmisearcher) -- - Use the `[wmisearcher]` type accelerator.
 reference/7.5/Microsoft.PowerShell.Core/About/about_Wildcards.md:22:48     - Unknown word (Techdocs)   -- the files in the `C:\Techdocs` directory with a
 reference/7.5/Microsoft.PowerShell.Core/About/about_Wildcards.md:26:18     - Unknown word (Techdocs)   -- Get-ChildItem C:\Techdocs\*.ppt
 reference/7.5/Microsoft.PowerShell.Core/About/about_Wildcards.md:61:18     - Unknown word (Techdocs)   -- Get-ChildItem C:\Techdocs\[a-l]*.txt
@@ -1489,8 +1518,9 @@ reference/7.5/Microsoft.PowerShell.Diagnostics/Get-Counter.md:433:2     - Unknow
 reference/7.5/Microsoft.PowerShell.Diagnostics/Get-Counter.md:434:2     - Unknown word (Procs)      -- $Procs.CounterSamples | Sort
 reference/7.5/Microsoft.PowerShell.Diagnostics/Get-Counter.md:452:76    - Unknown word (Procs)      -- result is stored in the `$Procs` variable. The
 reference/7.5/Microsoft.PowerShell.Diagnostics/Get-Counter.md:453:3     - Unknown word (Procs)      -- `$Procs` variable with the
-reference/7.5/Microsoft.PowerShell.Diagnostics/Get-WinEvent.md:564:21    - Unknown word (timediff)   -- TimeCreated[timediff(@SystemTime) &amp;lt
-reference/7.5/Microsoft.PowerShell.Diagnostics/Get-WinEvent.md:571:44    - Unknown word (timediff)   -- Level=3 and TimeCreated[timediff(@SystemTime) &amp;lt
+reference/7.5/Microsoft.PowerShell.Diagnostics/Get-WinEvent.md:561:21    - Unknown word (timediff)   -- TimeCreated[timediff(@SystemTime) <= 864
+reference/7.5/Microsoft.PowerShell.Diagnostics/Get-WinEvent.md:568:44    - Unknown word (timediff)   -- Level=3 and TimeCreated[timediff(@SystemTime) <= 864
+reference/7.5/Microsoft.PowerShell.Diagnostics/Get-WinEvent.md:601:3     - Unknown word (Logname)    -- Logname='Application'
 reference/7.5/Microsoft.PowerShell.Diagnostics/New-WinEvent.md:92:16     - Unknown word (Elasped)    -- to the **PolicyElaspedTimeInSeconds** field
 reference/7.5/Microsoft.PowerShell.Management/Add-Content.md:227:4     - Unknown word (bigendianutf) -- - `bigendianutf32`: Encodes in UTF-
 reference/7.5/Microsoft.PowerShell.Management/Clear-RecycleBin.md:31:17     - Unknown word (readded)    -- This cmdlet was readded in PowerShell 7.
@@ -1717,6 +1747,10 @@ reference/7.6/Microsoft.PowerShell.Core/About/about_Built-in_Functions.md:93:41 
 reference/7.6/Microsoft.PowerShell.Core/About/about_Calculated_Properties.md:255:21    - Unknown word (Metacontent) -- '' {'Metacontent'}
 reference/7.6/Microsoft.PowerShell.Core/About/about_Calculated_Properties.md:343:21    - Unknown word (Metacontent) -- '' {'Metacontent'}
 reference/7.6/Microsoft.PowerShell.Core/About/about_Calling_Generic_Methods.md:69:9      - Unknown word (Linq)       -- `System.Linq.Enumerable` class to
+reference/7.6/Microsoft.PowerShell.Core/About/about_Case-Sensitivity.md:193:7     - Unknown word (Baar)       -- # Baar
+reference/7.6/Microsoft.PowerShell.Core/About/about_Case-Sensitivity.md:201:7     - Unknown word (csplit)     -- - `-csplit` is case-sensitive,
+reference/7.6/Microsoft.PowerShell.Core/About/about_Case-Sensitivity.md:204:12    - Unknown word (csplit)     -- 'Bar' -csplit 'A', 0
+reference/7.6/Microsoft.PowerShell.Core/About/about_Case-Sensitivity.md:207:12    - Unknown word (csplit)     -- 'Bar' -csplit 'A', 0, 'IgnoreCase
 reference/7.6/Microsoft.PowerShell.Core/About/about_Character_Encoding.md:163:4     - Unknown word (bigendianutf) -- - `bigendianutf32`: Encodes in UTF-
 reference/7.6/Microsoft.PowerShell.Core/About/about_Classes.md:166:35    - Unknown word (Unwin)      -- = 'George Allen & Unwin'
 reference/7.6/Microsoft.PowerShell.Core/About/about_Classes.md:177:32    - Unknown word (nwhich)     -- Time to read $Book,`nwhich was published $Age years
@@ -1817,7 +1851,6 @@ reference/7.6/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:82:12   
 reference/7.6/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:83:12     - Unknown word (gigibyte)   -- | `gb`   | gigibyte (1024<sup>3</sup>) multiplier
 reference/7.6/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:84:12     - Unknown word (teribyte)   -- | `tb`   | teribyte (1024<sup>4</sup>) multiplier
 reference/7.6/Microsoft.PowerShell.Core/About/about_Numeric_Literals.md:85:12     - Unknown word (petibyte)   -- | `pb`   | petibyte (1024<sup>5</sup>) multiplier
-reference/7.6/Microsoft.PowerShell.Core/About/about_Operator_Precedence.md:89:14     - Unknown word (coalese)    -- | `??` (null-coalese operator)
 reference/7.6/Microsoft.PowerShell.Core/About/about_Operators.md:318:46    - Unknown word (subshell)   -- it asynchronously in subshell as a job.
 reference/7.6/Microsoft.PowerShell.Core/About/about_PSItem.md:111:60    - Unknown word (uppercases) -- the **ForEach** method uppercases the
 reference/7.6/Microsoft.PowerShell.Core/About/about_Parameters.md:134:24    - Unknown word (techdocs)   -- Get-ChildItem -Path C:\techdocs -Exclude *.ppt
@@ -1945,6 +1978,16 @@ reference/7.6/Microsoft.PowerShell.Core/About/about_Types.ps1xml.md:464:42    - 
 reference/7.6/Microsoft.PowerShell.Core/About/about_Types.ps1xml.md:480:55    - Unknown word (Dmtf)       -- nagementDateTimeConverter]::ToDmtfDateTime($args[0])
 reference/7.6/Microsoft.PowerShell.Core/About/about_Variable_Provider.md:230:27    - Unknown word (serv)       -- command deletes the `serv` variable from the current
 reference/7.6/Microsoft.PowerShell.Core/About/about_Variable_Provider.md:234:32    - Unknown word (serv)       -- Variable -Path Variable:serv
+reference/7.6/Microsoft.PowerShell.Core/About/about_WQL.md:210:14    - Unknown word (wmisearcher) -- ## Using the wmisearcher type accelerator
+reference/7.6/Microsoft.PowerShell.Core/About/about_WQL.md:212:7     - Unknown word (wmisearcher) -- The `[wmisearcher]` type accelerator creates
+reference/7.6/Microsoft.PowerShell.Core/About/about_WQL.md:217:9     - Unknown word (wmisearcher) -- Using `[wmisearcher]`, you gain easy access
+reference/7.6/Microsoft.PowerShell.Core/About/about_WQL.md:221:14    - Unknown word (wmisearcher) -- To use the `[wmisearcher]` type accelerator:
+reference/7.6/Microsoft.PowerShell.Core/About/about_WQL.md:442:43    - Unknown word (Hotepad)     -- return any process from `Hotepad.exe` through `Notepad
+reference/7.6/Microsoft.PowerShell.Core/About/about_WQL.md:446:61    - Unknown word (otepad)      -- WHERE Name LIKE '[H-N]otepad.exe'"
+reference/7.6/Microsoft.PowerShell.Core/About/about_WQL.md:481:58    - Unknown word (ASWPRCUN)    -- Process WHERE name LIKE '[^ASWPRCUN]%'"
+reference/7.6/Microsoft.PowerShell.Core/About/about_WQL.md:508:67    - Unknown word (czlc)        -- `calc.exe` through `czlc.exe`, or
+reference/7.6/Microsoft.PowerShell.Core/About/about_WQL.md:616:7     - Unknown word (Intall)      -- the **IntallDate** property. The
+reference/7.6/Microsoft.PowerShell.Core/About/about_WQL.md:91:13     - Unknown word (wmisearcher) -- - Use the `[wmisearcher]` type accelerator.
 reference/7.6/Microsoft.PowerShell.Core/About/about_Wildcards.md:22:48     - Unknown word (Techdocs)   -- the files in the `C:\Techdocs` directory with a
 reference/7.6/Microsoft.PowerShell.Core/About/about_Wildcards.md:26:18     - Unknown word (Techdocs)   -- Get-ChildItem C:\Techdocs\*.ppt
 reference/7.6/Microsoft.PowerShell.Core/About/about_Wildcards.md:61:18     - Unknown word (Techdocs)   -- Get-ChildItem C:\Techdocs\[a-l]*.txt
@@ -2017,8 +2060,9 @@ reference/7.6/Microsoft.PowerShell.Diagnostics/Get-Counter.md:430:2     - Unknow
 reference/7.6/Microsoft.PowerShell.Diagnostics/Get-Counter.md:431:2     - Unknown word (Procs)      -- $Procs.CounterSamples | Sort
 reference/7.6/Microsoft.PowerShell.Diagnostics/Get-Counter.md:449:76    - Unknown word (Procs)      -- result is stored in the `$Procs` variable. The
 reference/7.6/Microsoft.PowerShell.Diagnostics/Get-Counter.md:450:3     - Unknown word (Procs)      -- `$Procs` variable with the
-reference/7.6/Microsoft.PowerShell.Diagnostics/Get-WinEvent.md:561:21    - Unknown word (timediff)   -- TimeCreated[timediff(@SystemTime) &amp;lt
-reference/7.6/Microsoft.PowerShell.Diagnostics/Get-WinEvent.md:568:44    - Unknown word (timediff)   -- Level=3 and TimeCreated[timediff(@SystemTime) &amp;lt
+reference/7.6/Microsoft.PowerShell.Diagnostics/Get-WinEvent.md:561:21    - Unknown word (timediff)   -- TimeCreated[timediff(@SystemTime) <= 864
+reference/7.6/Microsoft.PowerShell.Diagnostics/Get-WinEvent.md:568:44    - Unknown word (timediff)   -- Level=3 and TimeCreated[timediff(@SystemTime) <= 864
+reference/7.6/Microsoft.PowerShell.Diagnostics/Get-WinEvent.md:601:3     - Unknown word (Logname)    -- Logname='Application'
 reference/7.6/Microsoft.PowerShell.Diagnostics/New-WinEvent.md:92:16     - Unknown word (Elasped)    -- to the **PolicyElaspedTimeInSeconds** field
 reference/7.6/Microsoft.PowerShell.Management/Add-Content.md:228:4     - Unknown word (bigendianutf) -- - `bigendianutf32`: Encodes in UTF-
 reference/7.6/Microsoft.PowerShell.Management/Clear-RecycleBin.md:31:17     - Unknown word (readded)    -- This cmdlet was readded in PowerShell 7.
@@ -2668,58 +2712,60 @@ reference/docs-conceptual/community/2024-updates.md:80:3      - Unknown word (al
 reference/docs-conceptual/community/2024-updates.md:81:3      - Unknown word (igoragoli)          -- | igoragoli |     1      |
 reference/docs-conceptual/community/2024-updates.md:82:3      - Unknown word (jmillerca)          -- | jmillerca |     1      |
 reference/docs-conceptual/community/2024-updates.md:84:3      - Unknown word (uiolee)             -- | uiolee |     1      |
-reference/docs-conceptual/community/2025-updates.md:103:3     - Unknown word (skycommand) -- | skycommand |     2      |
-reference/docs-conceptual/community/2025-updates.md:104:3     - Unknown word (lukebarone) -- | lukebarone |     1      |
-reference/docs-conceptual/community/2025-updates.md:105:10    - Unknown word (Gururaj)    -- | PraveenGururaj |     1      |
-reference/docs-conceptual/community/2025-updates.md:105:3     - Unknown word (Praveen)    -- | PraveenGururaj |     1
-reference/docs-conceptual/community/2025-updates.md:107:3     - Unknown word (Gijsreyn)   -- | Gijsreyn |     1
-reference/docs-conceptual/community/2025-updates.md:131:3     - Unknown word (changeworld) -- | changeworld |     2      |
-reference/docs-conceptual/community/2025-updates.md:132:11    - Unknown word (Mwendia)     -- | Dickson-Mwendia |     1      |
-reference/docs-conceptual/community/2025-updates.md:133:3     - Unknown word (chwarr)      -- | chwarr |     1
-reference/docs-conceptual/community/2025-updates.md:161:3     - Unknown word (changeworld) -- | changeworld |     3      |
-reference/docs-conceptual/community/2025-updates.md:162:3     - Unknown word (sethvs)      -- | sethvs |     2      |
-reference/docs-conceptual/community/2025-updates.md:163:3     - Unknown word (yashanshh)   -- | yashanshh |     2      |
-reference/docs-conceptual/community/2025-updates.md:164:3     - Unknown word (Gijsreyn)    -- | Gijsreyn |     1      |
-reference/docs-conceptual/community/2025-updates.md:165:3     - Unknown word (TNGBBK)      -- | TNGBBK |            |
-reference/docs-conceptual/community/2025-updates.md:184:3     - Unknown word (skycommand)  -- | skycommand |     2      |
-reference/docs-conceptual/community/2025-updates.md:186:3     - Unknown word (Orangu)      -- | OranguTech |     1      |
-reference/docs-conceptual/community/2025-updates.md:187:3     - Unknown word (changeworld) -- | changeworld |     1      |
-reference/docs-conceptual/community/2025-updates.md:188:9     - Unknown word (Nieto)       -- | ThomasNieto |     1      |
-reference/docs-conceptual/community/2025-updates.md:189:6     - Unknown word (Erde)        -- | SamErde |     1      |
-reference/docs-conceptual/community/2025-updates.md:199:22    - Unknown word (Resoure)     -- Updated docs for PSResoureGet 1.1.1 release - now
-reference/docs-conceptual/community/2025-updates.md:200:62    - Unknown word (MDOP)        -- Server 20212/2012r2/MDOP (5338 articles)
-reference/docs-conceptual/community/2025-updates.md:215:3     - Unknown word (changeworld) -- | changeworld |     3      |
-reference/docs-conceptual/community/2025-updates.md:216:3     - Unknown word (cflanderscpc) -- | cflanderscpc |     1      |
-reference/docs-conceptual/community/2025-updates.md:218:3     - Unknown word (dodexahedron) -- | dodexahedron |     1      |
-reference/docs-conceptual/community/2025-updates.md:219:8     - Unknown word (Mussabekov)   -- | MaratMussabekov |     1      |
-reference/docs-conceptual/community/2025-updates.md:220:3     - Unknown word (geeksbsmrt)   -- | geeksbsmrt |     1      |
-reference/docs-conceptual/community/2025-updates.md:222:3     - Unknown word (ajansveld)    -- | ajansveld |     1
-reference/docs-conceptual/community/2025-updates.md:223:3     - Unknown word (robinmalik)   -- | robinmalik |     1      |
-reference/docs-conceptual/community/2025-updates.md:224:3     - Unknown word (andreshungbz) -- | andreshungbz |     1      |
-reference/docs-conceptual/community/2025-updates.md:225:3     - Unknown word (mklement)     -- | mklement0 |
-reference/docs-conceptual/community/2025-updates.md:248:3     - Unknown word (surfingoldelephant) -- | surfingoldelephant |     3      |
-reference/docs-conceptual/community/2025-updates.md:250:3     - Unknown word (changeworld)        -- | changeworld |     1
-reference/docs-conceptual/community/2025-updates.md:259:38    - Unknown word (surfingoldelephant) -- quality improvements from surfingoldelephant
-reference/docs-conceptual/community/2025-updates.md:275:3     - Unknown word (surfingoldelephant) -- | surfingoldelephant |     38     |
-reference/docs-conceptual/community/2025-updates.md:276:3     - Unknown word (Allyyyyy)           -- | Allyyyyy |     1
-reference/docs-conceptual/community/2025-updates.md:277:3     - Unknown word (jborean)            -- | jborean93 |     1
-reference/docs-conceptual/community/2025-updates.md:286:5     - Unknown word (surfingoldelephant) -- - surfingoldelephant - 13 PRs on 497 files
-reference/docs-conceptual/community/2025-updates.md:287:5     - Unknown word (Arie)               -- - ArieHein - 10 PRs on 140
-reference/docs-conceptual/community/2025-updates.md:287:9     - Unknown word (Hein)               -- - ArieHein - 10 PRs on 140 files
-reference/docs-conceptual/community/2025-updates.md:302:3     - Unknown word (surfingoldelephant) -- | surfingoldelephant |     13     |
-reference/docs-conceptual/community/2025-updates.md:303:3     - Unknown word (Arie)               -- | ArieHein |
-reference/docs-conceptual/community/2025-updates.md:303:7     - Unknown word (Hein)               -- | ArieHein |     10
-reference/docs-conceptual/community/2025-updates.md:305:3     - Unknown word (deadlydog)          -- | deadlydog |     2
-reference/docs-conceptual/community/2025-updates.md:306:3     - Unknown word (piedquance)         -- | piedquance |
-reference/docs-conceptual/community/2025-updates.md:322:22    - Unknown word (Arie)               -- Special thanks to @ArieHein for his contributions
-reference/docs-conceptual/community/2025-updates.md:322:26    - Unknown word (Hein)               -- Special thanks to @ArieHein for his contributions
-reference/docs-conceptual/community/2025-updates.md:338:3     - Unknown word (Arie)               -- | ArieHein |
-reference/docs-conceptual/community/2025-updates.md:338:7     - Unknown word (Hein)               -- | ArieHein |     15
-reference/docs-conceptual/community/2025-updates.md:341:3     - Unknown word (cnotin)             -- | cnotin |     1
-reference/docs-conceptual/community/2025-updates.md:47:3      - Unknown word (alirobe)    -- | alirobe |     1      |
-reference/docs-conceptual/community/2025-updates.md:48:3      - Unknown word (sleggy)     -- | sleggy |     1      |
-reference/docs-conceptual/community/2025-updates.md:77:8      - Unknown word (Falck)      -- | OscarFalck17 |     1      |
-reference/docs-conceptual/community/2025-updates.md:78:9      - Unknown word (Mosquera)   -- | StuartMosquera |     1      |
+reference/docs-conceptual/community/2025-updates.md:110:8     - Unknown word (Falck)              -- | OscarFalck17 |     1      |
+reference/docs-conceptual/community/2025-updates.md:111:9     - Unknown word (Mosquera)           -- | StuartMosquera |     1      |
+reference/docs-conceptual/community/2025-updates.md:136:3     - Unknown word (skycommand)         -- | skycommand |     2      |
+reference/docs-conceptual/community/2025-updates.md:137:3     - Unknown word (lukebarone)         -- | lukebarone |     1      |
+reference/docs-conceptual/community/2025-updates.md:138:10    - Unknown word (Gururaj)            -- | PraveenGururaj |     1      |
+reference/docs-conceptual/community/2025-updates.md:138:3     - Unknown word (Praveen)            -- | PraveenGururaj |     1
+reference/docs-conceptual/community/2025-updates.md:140:3     - Unknown word (Gijsreyn)           -- | Gijsreyn |     1
+reference/docs-conceptual/community/2025-updates.md:164:3     - Unknown word (changeworld)        -- | changeworld |     2      |
+reference/docs-conceptual/community/2025-updates.md:165:11    - Unknown word (Mwendia)            -- | Dickson-Mwendia |     1      |
+reference/docs-conceptual/community/2025-updates.md:166:3     - Unknown word (chwarr)             -- | chwarr |     1
+reference/docs-conceptual/community/2025-updates.md:194:3     - Unknown word (changeworld)        -- | changeworld |     3      |
+reference/docs-conceptual/community/2025-updates.md:195:3     - Unknown word (sethvs)             -- | sethvs |     2      |
+reference/docs-conceptual/community/2025-updates.md:196:3     - Unknown word (yashanshh)          -- | yashanshh |     2      |
+reference/docs-conceptual/community/2025-updates.md:197:3     - Unknown word (Gijsreyn)           -- | Gijsreyn |     1      |
+reference/docs-conceptual/community/2025-updates.md:198:3     - Unknown word (TNGBBK)             -- | TNGBBK |            |
+reference/docs-conceptual/community/2025-updates.md:217:3     - Unknown word (skycommand)         -- | skycommand |     2      |
+reference/docs-conceptual/community/2025-updates.md:219:3     - Unknown word (Orangu)             -- | OranguTech |     1      |
+reference/docs-conceptual/community/2025-updates.md:220:3     - Unknown word (changeworld)        -- | changeworld |     1      |
+reference/docs-conceptual/community/2025-updates.md:221:9     - Unknown word (Nieto)              -- | ThomasNieto |     1      |
+reference/docs-conceptual/community/2025-updates.md:222:6     - Unknown word (Erde)               -- | SamErde |     1      |
+reference/docs-conceptual/community/2025-updates.md:232:22    - Unknown word (Resoure)            -- Updated docs for PSResoureGet 1.1.1 release - now
+reference/docs-conceptual/community/2025-updates.md:233:62    - Unknown word (MDOP)               -- Server 20212/2012r2/MDOP (5338 articles)
+reference/docs-conceptual/community/2025-updates.md:248:3     - Unknown word (changeworld)        -- | changeworld |     3      |
+reference/docs-conceptual/community/2025-updates.md:249:3     - Unknown word (cflanderscpc)       -- | cflanderscpc |     1      |
+reference/docs-conceptual/community/2025-updates.md:251:3     - Unknown word (dodexahedron)       -- | dodexahedron |     1      |
+reference/docs-conceptual/community/2025-updates.md:252:8     - Unknown word (Mussabekov)         -- | MaratMussabekov |     1      |
+reference/docs-conceptual/community/2025-updates.md:253:3     - Unknown word (geeksbsmrt)         -- | geeksbsmrt |     1      |
+reference/docs-conceptual/community/2025-updates.md:255:3     - Unknown word (ajansveld)          -- | ajansveld |     1
+reference/docs-conceptual/community/2025-updates.md:256:3     - Unknown word (robinmalik)         -- | robinmalik |     1      |
+reference/docs-conceptual/community/2025-updates.md:257:3     - Unknown word (andreshungbz)       -- | andreshungbz |     1      |
+reference/docs-conceptual/community/2025-updates.md:258:3     - Unknown word (mklement)           -- | mklement0 |
+reference/docs-conceptual/community/2025-updates.md:281:3     - Unknown word (surfingoldelephant) -- | surfingoldelephant |     3      |
+reference/docs-conceptual/community/2025-updates.md:283:3     - Unknown word (changeworld)        -- | changeworld |     1
+reference/docs-conceptual/community/2025-updates.md:292:38    - Unknown word (surfingoldelephant) -- quality improvements from surfingoldelephant
+reference/docs-conceptual/community/2025-updates.md:308:3     - Unknown word (surfingoldelephant) -- | surfingoldelephant |     38     |
+reference/docs-conceptual/community/2025-updates.md:309:3     - Unknown word (Allyyyyy)           -- | Allyyyyy |     1
+reference/docs-conceptual/community/2025-updates.md:310:3     - Unknown word (jborean)            -- | jborean93 |     1
+reference/docs-conceptual/community/2025-updates.md:319:5     - Unknown word (surfingoldelephant) -- - surfingoldelephant - 13 PRs on 497 files
+reference/docs-conceptual/community/2025-updates.md:320:5     - Unknown word (Arie)               -- - ArieHein - 10 PRs on 140
+reference/docs-conceptual/community/2025-updates.md:320:9     - Unknown word (Hein)               -- - ArieHein - 10 PRs on 140 files
+reference/docs-conceptual/community/2025-updates.md:336:3     - Unknown word (Arie)               -- | ArieHein |
+reference/docs-conceptual/community/2025-updates.md:336:7     - Unknown word (Hein)               -- | ArieHein |     10
+reference/docs-conceptual/community/2025-updates.md:338:3     - Unknown word (deadlydog)          -- | deadlydog |     2
+reference/docs-conceptual/community/2025-updates.md:339:3     - Unknown word (piedquance)         -- | piedquance |
+reference/docs-conceptual/community/2025-updates.md:355:22    - Unknown word (Arie)               -- Special thanks to @ArieHein for his contributions
+reference/docs-conceptual/community/2025-updates.md:355:26    - Unknown word (Hein)               -- Special thanks to @ArieHein for his contributions
+reference/docs-conceptual/community/2025-updates.md:371:3     - Unknown word (Arie)               -- | ArieHein |
+reference/docs-conceptual/community/2025-updates.md:371:7     - Unknown word (Hein)               -- | ArieHein |     15
+reference/docs-conceptual/community/2025-updates.md:374:3     - Unknown word (cnotin)             -- | cnotin |     1
+reference/docs-conceptual/community/2025-updates.md:46:3      - Unknown word (surfingoldelephant) -- | surfingoldelephant |     3      |
+reference/docs-conceptual/community/2025-updates.md:47:3      - Unknown word (kborowinski)        -- | kborowinski |     1
+reference/docs-conceptual/community/2025-updates.md:48:3      - Unknown word (aberus)             -- | aberus |     1
+reference/docs-conceptual/community/2025-updates.md:80:3      - Unknown word (alirobe)            -- | alirobe |     1      |
+reference/docs-conceptual/community/2025-updates.md:81:3      - Unknown word (sleggy)             -- | sleggy |     1      |
 reference/docs-conceptual/community/community-update.yml:52:21     - Unknown word (Helmick's)  -- - text: Jason Helmick's - The Show
 reference/docs-conceptual/community/contributing/general-markdown.md:255:41    - Unknown word (friendlyname) -- use Markdown syntax `[friendlyname](url-or-path)`.
 reference/docs-conceptual/community/contributing/general-markdown.md:267:56    - Unknown word (DMTF)         -- this parameter, the DMTF standard resource URI
@@ -2765,18 +2811,18 @@ reference/docs-conceptual/community/hall-of-fame.md:40:3      - Unknown word (pu
 reference/docs-conceptual/community/hall-of-fame.md:41:3      - Unknown word (bergmeister)        -- | bergmeister |      |
 reference/docs-conceptual/community/hall-of-fame.md:52:3      - Unknown word (mklement)           -- | mklement0 |      |
 reference/docs-conceptual/community/hall-of-fame.md:53:3      - Unknown word (ehmiiz)             -- | ehmiiz |
-reference/docs-conceptual/community/hall-of-fame.md:54:4      - Unknown word (Sazonov)            -- | iSazonov |      |
+reference/docs-conceptual/community/hall-of-fame.md:55:4      - Unknown word (Sazonov)            -- | iSazonov |      |
 reference/docs-conceptual/community/hall-of-fame.md:56:3      - Unknown word (jszabo)             -- | jszabo98 |
-reference/docs-conceptual/community/hall-of-fame.md:57:3      - Unknown word (juvtib)             -- | juvtib |
-reference/docs-conceptual/community/hall-of-fame.md:58:3      - Unknown word (surfingoldelephant) -- | surfingoldelephant |      |      |
+reference/docs-conceptual/community/hall-of-fame.md:57:3      - Unknown word (surfingoldelephant) -- | surfingoldelephant |      |      |
+reference/docs-conceptual/community/hall-of-fame.md:58:3      - Unknown word (juvtib)             -- | juvtib |
 reference/docs-conceptual/community/hall-of-fame.md:59:3      - Unknown word (peetrike)           -- | peetrike |      |
 reference/docs-conceptual/community/hall-of-fame.md:60:3      - Unknown word (doctordns)          -- | doctordns |      |
 reference/docs-conceptual/community/hall-of-fame.md:61:3      - Unknown word (kilasuit)           -- | kilasuit |      |
 reference/docs-conceptual/community/hall-of-fame.md:63:3      - Unknown word (vexx)               -- | vexx32 |
 reference/docs-conceptual/community/hall-of-fame.md:65:3      - Unknown word (alexandair)         -- | alexandair |      |
-reference/docs-conceptual/community/hall-of-fame.md:66:3      - Unknown word (clamb)              -- | clamb123 |
-reference/docs-conceptual/community/hall-of-fame.md:67:3      - Unknown word (tabad)              -- | tabad |
-reference/docs-conceptual/community/hall-of-fame.md:68:3      - Unknown word (rkeithhill)         -- | rkeithhill |      |
+reference/docs-conceptual/community/hall-of-fame.md:66:3      - Unknown word (rkeithhill)         -- | rkeithhill |      |
+reference/docs-conceptual/community/hall-of-fame.md:67:3      - Unknown word (clamb)              -- | clamb123 |
+reference/docs-conceptual/community/hall-of-fame.md:68:3      - Unknown word (tabad)              -- | tabad |
 reference/docs-conceptual/community/hall-of-fame.md:69:3      - Unknown word (trollyanov)         -- | trollyanov |      |
 reference/docs-conceptual/community/hall-of-fame.md:70:3      - Unknown word (jsilverm)           -- | jsilverm |      |
 reference/docs-conceptual/community/hall-of-fame.md:71:8      - Unknown word (Toso)               -- | CarloToso |      |

@@ -1630,7 +1630,7 @@ modules/caddyhttp/headers/headers.go:210:11    - Unknown word (caddyhttp)   -- R
 modules/caddyhttp/headers/headers.go:23:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
 modules/caddyhttp/headers/headers.go:24:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/modules/caddyhttp
 modules/caddyhttp/headers/headers.go:24:43     - Unknown word (caddyhttp)   -- caddyserver/caddy/v2/modules/caddyhttp"
-modules/caddyhttp/headers/headers.go:377:3     - Unknown word (caddyhttp)   -- *caddyhttp.ResponseWriterWrapper
+modules/caddyhttp/headers/headers.go:380:3     - Unknown word (caddyhttp)   -- *caddyhttp.ResponseWriterWrapper
 modules/caddyhttp/headers/headers.go:90:73     - Unknown word (caddyhttp)   -- *http.Request, next caddyhttp.Handler) error {
 modules/caddyhttp/headers/headers_test.go:129:16    - Unknown word (caddyhttp)   -- Require: &caddyhttp.ResponseMatcher{
 modules/caddyhttp/headers/headers_test.go:149:16    - Unknown word (caddyhttp)   -- Require: &caddyhttp.ResponseMatcher{
@@ -2369,33 +2369,33 @@ modules/caddyhttp/reverseproxy/streaming.go:129:12    - Unknown word (bodyclose)
 modules/caddyhttp/reverseproxy/streaming.go:129:5     - Unknown word (nolint)      -- //nolint:bodyclose
 modules/caddyhttp/reverseproxy/streaming.go:210:6     - Unknown word (timeoutc)    -- var timeoutc <-chan time.Time
 modules/caddyhttp/reverseproxy/streaming.go:214:3     - Unknown word (timeoutc)    -- timeoutc = timer.C
-modules/caddyhttp/reverseproxy/streaming.go:217:2     - Unknown word (errc)        -- errc := make(chan error,
-modules/caddyhttp/reverseproxy/streaming.go:219:23    - Unknown word (errc)        -- go spc.copyToBackend(errc)
-modules/caddyhttp/reverseproxy/streaming.go:220:25    - Unknown word (errc)        -- spc.copyFromBackend(errc)
-modules/caddyhttp/reverseproxy/streaming.go:222:16    - Unknown word (errc)        -- case err := <-errc:
-modules/caddyhttp/reverseproxy/streaming.go:226:17    - Unknown word (timeoutc)    -- case time := <-timeoutc:
+modules/caddyhttp/reverseproxy/streaming.go:217:70    - Unknown word (errc)        -- error will be read from errc
+modules/caddyhttp/reverseproxy/streaming.go:220:2     - Unknown word (errc)        -- errc := make(chan error,
+modules/caddyhttp/reverseproxy/streaming.go:222:23    - Unknown word (errc)        -- go spc.copyToBackend(errc)
+modules/caddyhttp/reverseproxy/streaming.go:223:25    - Unknown word (errc)        -- spc.copyFromBackend(errc)
+modules/caddyhttp/reverseproxy/streaming.go:225:16    - Unknown word (errc)        -- case err := <-errc:
+modules/caddyhttp/reverseproxy/streaming.go:229:17    - Unknown word (timeoutc)    -- case time := <-timeoutc:
 modules/caddyhttp/reverseproxy/streaming.go:27:2      - Unknown word (weakrand)   -- weakrand "math/rand"
-modules/caddyhttp/reverseproxy/streaming.go:287:13    - Unknown word (bodyclose)   -- //nolint:bodyclose
-modules/caddyhttp/reverseproxy/streaming.go:287:6     - Unknown word (nolint)      -- //nolint:bodyclose
-modules/caddyhttp/reverseproxy/streaming.go:324:7     - Unknown word (rerr)        -- nr, rerr := src.Read(buf)
-modules/caddyhttp/reverseproxy/streaming.go:327:22    - Unknown word (rerr)        -- c.Write(zap.Error(rerr))
-modules/caddyhttp/reverseproxy/streaming.go:329:21    - Unknown word (rerr)        -- if rerr != nil && rerr != io.EOF && rerr !
-modules/caddyhttp/reverseproxy/streaming.go:329:39    - Unknown word (rerr)        -- & rerr != io.EOF && rerr != context.Canceled
-modules/caddyhttp/reverseproxy/streaming.go:329:6     - Unknown word (rerr)        -- if rerr != nil && rerr != io
-modules/caddyhttp/reverseproxy/streaming.go:331:7     - Unknown word (fastcgi)     -- // fastcgi PoC earlier; but it
-modules/caddyhttp/reverseproxy/streaming.go:343:8     - Unknown word (werr)        -- nw, werr := dst.Write(buf[:nr
-modules/caddyhttp/reverseproxy/streaming.go:351:16    - Unknown word (werr)        -- zap.Error(werr),
-modules/caddyhttp/reverseproxy/streaming.go:354:7     - Unknown word (werr)        -- if werr != nil {
-modules/caddyhttp/reverseproxy/streaming.go:355:47    - Unknown word (werr)        -- Errorf("writing: %w", werr)
+modules/caddyhttp/reverseproxy/streaming.go:290:13    - Unknown word (bodyclose)   -- //nolint:bodyclose
+modules/caddyhttp/reverseproxy/streaming.go:290:6     - Unknown word (nolint)      -- //nolint:bodyclose
+modules/caddyhttp/reverseproxy/streaming.go:327:7     - Unknown word (rerr)        -- nr, rerr := src.Read(buf)
+modules/caddyhttp/reverseproxy/streaming.go:330:22    - Unknown word (rerr)        -- c.Write(zap.Error(rerr))
+modules/caddyhttp/reverseproxy/streaming.go:332:21    - Unknown word (rerr)        -- if rerr != nil && rerr != io.EOF && rerr !
+modules/caddyhttp/reverseproxy/streaming.go:332:39    - Unknown word (rerr)        -- & rerr != io.EOF && rerr != context.Canceled
+modules/caddyhttp/reverseproxy/streaming.go:332:6     - Unknown word (rerr)        -- if rerr != nil && rerr != io
+modules/caddyhttp/reverseproxy/streaming.go:334:7     - Unknown word (fastcgi)     -- // fastcgi PoC earlier; but it
+modules/caddyhttp/reverseproxy/streaming.go:346:8     - Unknown word (werr)        -- nw, werr := dst.Write(buf[:nr
+modules/caddyhttp/reverseproxy/streaming.go:354:16    - Unknown word (werr)        -- zap.Error(werr),
+modules/caddyhttp/reverseproxy/streaming.go:357:7     - Unknown word (werr)        -- if werr != nil {
+modules/caddyhttp/reverseproxy/streaming.go:358:47    - Unknown word (werr)        -- Errorf("writing: %w", werr)
 modules/caddyhttp/reverseproxy/streaming.go:38:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2/modules/caddyhttp
 modules/caddyhttp/reverseproxy/streaming.go:38:43     - Unknown word (caddyhttp)   -- caddyserver/caddy/v2/modules/caddyhttp"
-modules/caddyhttp/reverseproxy/streaming.go:451:37    - Unknown word (pascaldekloe) -- connection. Thanks to @pascaldekloe who provided inspiration
-modules/caddyhttp/reverseproxy/streaming.go:453:15    - Unknown word (pascaldekloe) -- // github.com/pascaldekloe/websocket. Further work
+modules/caddyhttp/reverseproxy/streaming.go:454:37    - Unknown word (pascaldekloe) -- connection. Thanks to @pascaldekloe who provided inspiration
+modules/caddyhttp/reverseproxy/streaming.go:456:15    - Unknown word (pascaldekloe) -- // github.com/pascaldekloe/websocket. Further work
 modules/caddyhttp/reverseproxy/streaming.go:52:11     - Unknown word (bodyclose)   -- //nolint:bodyclose
 modules/caddyhttp/reverseproxy/streaming.go:52:4      - Unknown word (nolint)      -- //nolint:bodyclose
-modules/caddyhttp/reverseproxy/streaming.go:551:7     - Unknown word (weakrand)     -- n := weakrand.Uint32()
-modules/caddyhttp/reverseproxy/streaming.go:589:5     - Unknown word (nolint)       -- //nolint:errcheck
-modules/caddyhttp/reverseproxy/streaming.go:638:47    - Unknown word (errc)         -- otocolCopier) copyFromBackend(errc chan<- error) {
+modules/caddyhttp/reverseproxy/streaming.go:554:7     - Unknown word (weakrand)     -- n := weakrand.Uint32()
+modules/caddyhttp/reverseproxy/streaming.go:592:5     - Unknown word (nolint)       -- //nolint:errcheck
 modules/caddyhttp/reverseproxy/streaming.go:99:17     - Unknown word (caddyhttp)   -- if body, ok := caddyhttp.GetVar(req.Context(
 modules/caddyhttp/reverseproxy/streaming_test.go:9:14      - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
 modules/caddyhttp/reverseproxy/upstreams.go:104:14    - Unknown word (gosec)       -- //nolint:gosec

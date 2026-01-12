@@ -3,9 +3,9 @@ Repository: sveltejs/svelte
 Url: https://github.com/sveltejs/svelte.git
 Args: '["**"]'
 Summary:
-  files: 8245
+  files: 8260
   filesWithIssues: 583
-  issues: 3937
+  issues: 3939
   errors: 0
 Errors: []
 
@@ -1666,8 +1666,8 @@ issues:
   - "packages/svelte/src/compiler/phases/2-analyze/css/css-prune.js:289:29       unscopeable     U       a `:global(...)` or unscopeable selector, or"
   - "packages/svelte/src/compiler/phases/2-analyze/css/utils.js:28:28        deopt       U       and we don't want to deopt on `condition`"
   - "packages/svelte/src/compiler/phases/2-analyze/css/utils.js:34:29        cslx        U       will be processed by cslx, in which case falsy"
-  - "packages/svelte/src/compiler/phases/2-analyze/index.js:727:18       nonstate    U       // warn on any nonstate declarations that are"
-  - "packages/svelte/src/compiler/phases/2-analyze/index.js:1028:14      optimise    U       // TODO optimise this better"
+  - "packages/svelte/src/compiler/phases/2-analyze/index.js:728:18       nonstate    U       // warn on any nonstate declarations that are"
+  - "packages/svelte/src/compiler/phases/2-analyze/index.js:1029:14      optimise    U       // TODO optimise this better"
   - "packages/svelte/src/compiler/phases/2-analyze/visitors/RegularElement.js:38:72          qirk    U       stripped because of a qirk:"
   - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y/constants.js:36:19       labelable       U       export const a11y_labelable = ["
   - "packages/svelte/src/compiler/phases/2-analyze/visitors/shared/a11y/constants.js:236:3       impp            U       'impp'"
@@ -1713,12 +1713,12 @@ issues:
   - "packages/svelte/src/internal/client/dom/elements/events.js:146:47       expando     U       GCed too early, the expando __root property"
   - "packages/svelte/src/internal/client/proxy.js:41:12          proxyable       U       // if non-proxyable, or is already a proxy"
   - "packages/svelte/src/internal/client/proxy.js:91:32          inspectable     U       /** @type {any} */ (inspectable_array(/** @type {any"
-  - "packages/svelte/src/internal/client/reactivity/batch.js:64:14       travelling      U       * When time travelling (i.e. working in one"
-  - "packages/svelte/src/internal/client/reactivity/batch.js:727:82      nullpointers    U       else we could run into nullpointers"
-  - "packages/svelte/src/internal/client/reactivity/deriveds.js:116:6        deferreds       U       var deferreds = new Map();"
-  - "packages/svelte/src/internal/client/reactivity/effects.js:14:2          untracking      U       untracking"
-  - "packages/svelte/src/internal/client/reactivity/sources.js:270:64        overfiring      U       - this way we avoid overfiring."
-  - "packages/svelte/src/internal/client/runtime.js:138:90       depedencies (dependencies)      U       to avoid duplicating depedencies inside a reaction *"
+  - "packages/svelte/src/internal/client/reactivity/batch.js:58:14       travelling      U       * When time travelling (i.e. working in one"
+  - "packages/svelte/src/internal/client/reactivity/batch.js:689:82      nullpointers    U       else we could run into nullpointers"
+  - "packages/svelte/src/internal/client/reactivity/deriveds.js:117:6        deferreds       U       var deferreds = new Map();"
+  - "packages/svelte/src/internal/client/reactivity/effects.js:13:2          untracking      U       untracking"
+  - "packages/svelte/src/internal/client/reactivity/sources.js:272:64        overfiring      U       - this way we avoid overfiring."
+  - "packages/svelte/src/internal/client/runtime.js:137:90       depedencies (dependencies)      U       to avoid duplicating depedencies inside a reaction *"
   - "packages/svelte/src/internal/client/timing.js:12:5          bunder      U       // bunder will eval and remove"
   - "packages/svelte/src/internal/client/types.d.ts:8:8          hydratables     U       /** hydratables */"
   - "packages/svelte/src/internal/server/index.js:25:23          FDEF        U       [\\s'\">/=\\u{FDD0}-\\u{FDEF}\\u{FFFE}\\u{FFFF}\\u{"
@@ -1803,7 +1803,7 @@ issues:
   - "packages/svelte/tests/css/samples/unused-selector-ternary/_config.js:11:36          maybeactive     U       Unused CSS selector \".maybeactive\"',"
   - "packages/svelte/tests/helpers.js:203:17         normalise       U       export function normalise_inspect_logs(logs)"
   - "packages/svelte/tests/helpers.js:205:8          normalised      U       const normalised = [];"
-  - "packages/svelte/tests/hydration/test.ts:153:22      borks       U       // Error logger borks because of circular"
+  - "packages/svelte/tests/hydration/test.ts:146:22      borks       U       // Error logger borks because of circular"
   - "packages/svelte/tests/manual/each-stress-test/main.svelte:23:5          adbc        U       \"adbc\","
   - "packages/svelte/tests/manual/each-stress-test/main.svelte:24:5          adebc       U       \"adebc\""
   - "packages/svelte/tests/manual/each-stress-test/main.svelte:180:17        squircle    U       corner-shape: squircle;"

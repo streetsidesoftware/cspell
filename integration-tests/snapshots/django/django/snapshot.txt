@@ -3,7 +3,7 @@ Repository: django/django
 Url: "https://github.com/django/django.git"
 Args: ["--issues-summary-report","**/*.{md,py}"]
 Lines:
- CSpell: Files checked: 2891, Issues found: 8599 in 928 files.
+ CSpell: Files checked: 2888, Issues found: 8589 in 928 files.
  exit code: 1
 django/__init__.py:12:26     - Unknown word (urlresolvers) -- Set the thread-local urlresolvers script prefix if `set
 django/apps/registry.py:134:40    - Unknown word (unconfigured) -- not ready" is due to unconfigured settings, accessing
@@ -926,7 +926,7 @@ django/contrib/messages/storage/cookie.py:87:39     - Unknown word (messagesnotf
 django/contrib/postgres/aggregates/statistics.py:36:32     - Unknown word (SAMP)       -- self.function = "COVAR_SAMP" if sample else "COVAR
 django/contrib/postgres/aggregates/statistics.py:41:22     - Unknown word (AVGX)       -- function = "REGR_AVGX"
 django/contrib/postgres/aggregates/statistics.py:45:22     - Unknown word (AVGY)       -- function = "REGR_AVGY"
-django/contrib/postgres/constraints.py:39:63     - Unknown word (spgist)     -- lower() not in {"gist", "spgist"}:
+django/contrib/postgres/constraints.py:40:71     - Unknown word (spgist)     -- in {"gist", "hash", "spgist"}:
 django/contrib/postgres/fields/hstore.py:105:17    - Unknown word (akeys)      -- function = "akeys"
 django/contrib/postgres/fields/hstore.py:112:17    - Unknown word (avals)      -- function = "avals"
 django/contrib/postgres/fields/ranges.py:192:17    - Unknown word (numrange)   -- return "numrange"
@@ -1749,15 +1749,15 @@ django/db/models/sql/compiler.py:1528:25   - Unknown word (convs)      -- for j,
 django/db/models/sql/compiler.py:1529:42   - Unknown word (convs)      -- converters[i + j] = (convs, col)
 django/db/models/sql/compiler.py:1546:23   - Unknown word (convs)      -- for pos, (convs, expression) in converters
 django/db/models/sql/compiler.py:1548:34   - Unknown word (convs)      -- for converter in convs:
-django/db/models/sql/compiler.py:1786:24   - Unknown word (sqls)       -- # tuple like ([sqls], [[params]s]) for each
-django/db/models/sql/compiler.py:2014:9    - Unknown word (innerq)     -- innerq = self.query.clone(
-django/db/models/sql/compiler.py:2015:9    - Unknown word (innerq)     -- innerq.__class__ = Query
-django/db/models/sql/compiler.py:2016:9    - Unknown word (innerq)     -- innerq.clear_select_clause
-django/db/models/sql/compiler.py:2018:9    - Unknown word (innerq)     -- innerq.select = [pk.get_col
-django/db/models/sql/compiler.py:2019:9    - Unknown word (outerq)     -- outerq = Query(self.query.model
-django/db/models/sql/compiler.py:2023:27   - Unknown word (innerq)     -- sql, params = innerq.get_compiler(connection
-django/db/models/sql/compiler.py:2025:9    - Unknown word (outerq)     -- outerq.add_filter("pk__in"
-django/db/models/sql/compiler.py:2026:29   - Unknown word (outerq)     -- return self._as_sql(outerq)
+django/db/models/sql/compiler.py:1789:24   - Unknown word (sqls)       -- # tuple like ([sqls], [[params]s]) for each
+django/db/models/sql/compiler.py:2021:9    - Unknown word (innerq)     -- innerq = self.query.clone(
+django/db/models/sql/compiler.py:2022:9    - Unknown word (innerq)     -- innerq.__class__ = Query
+django/db/models/sql/compiler.py:2023:9    - Unknown word (innerq)     -- innerq.clear_select_clause
+django/db/models/sql/compiler.py:2025:9    - Unknown word (innerq)     -- innerq.select = [pk.get_col
+django/db/models/sql/compiler.py:2026:9    - Unknown word (outerq)     -- outerq = Query(self.query.model
+django/db/models/sql/compiler.py:2030:27   - Unknown word (innerq)     -- sql, params = innerq.get_compiler(connection
+django/db/models/sql/compiler.py:2032:9    - Unknown word (outerq)     -- outerq.add_filter("pk__in"
+django/db/models/sql/compiler.py:2033:29   - Unknown word (outerq)     -- return self._as_sql(outerq)
 django/db/models/sql/compiler.py:232:37    - Unknown word (klass)      -- select_from_parent(cls, klass_info):
 django/db/models/sql/compiler.py:233:19    - Unknown word (klass)      -- for ki in klass_info["related_klass
 django/db/models/sql/compiler.py:468:23    - Unknown word (combinated) -- # combinated queries might define
@@ -1942,10 +1942,10 @@ django/shortcuts.py:66:16     - Unknown word (klass)      -- return klass._defau
 django/shortcuts.py:67:12     - Unknown word (klass)      -- return klass
 django/shortcuts.py:70:23     - Unknown word (klass)      -- def get_object_or_404(klass, *args, **kwargs):
 django/tasks/backends/base.py:89:15     - Unknown word (aenqueue)   -- async def aenqueue(self, task, args, kwargs
-django/tasks/base.py:118:15    - Unknown word (acall)      -- async def acall(self, *args, **kwargs
-django/tasks/base.py:232:15    - Unknown word (arefresh)   -- async def arefresh(self):
-django/tasks/base.py:86:15     - Unknown word (aenqueue)   -- async def aenqueue(self, *args, **kwargs
-django/tasks/base.py:88:41     - Unknown word (aenqueue)   -- await self.get_backend().aenqueue(self, args, kwargs)
+django/tasks/base.py:119:15    - Unknown word (acall)      -- async def acall(self, *args, **kwargs
+django/tasks/base.py:233:15    - Unknown word (arefresh)   -- async def arefresh(self):
+django/tasks/base.py:87:15     - Unknown word (aenqueue)   -- async def aenqueue(self, *args, **kwargs
+django/tasks/base.py:89:41     - Unknown word (aenqueue)   -- await self.get_backend().aenqueue(self, args, kwargs)
 django/template/__init__.py:34:19     - Unknown word (smartif)    -- - django.template.smartif
 django/template/base.py:593:25    - Unknown word (endtag)     -- def skip_past(self, endtag):
 django/template/base.py:596:74    - Unknown word (endtag)     -- and token.contents == endtag:
@@ -3746,32 +3746,22 @@ tests/auth_tests/test_hashers.py:698:14    - Unknown word (CAUX)       -- "CAUXR
 tests/auth_tests/test_hashers.py:70:29     - Unknown word (acheck)     -- self.assertIs(await acheck_password("", blank_encoded
 tests/auth_tests/test_hashers.py:85:34     - Unknown word (lètmein)    -- encoded = make_password("lètmein", "seasalt", "pbkdf
 tests/auth_tests/test_hashers.py:93:42     - Unknown word (lètmeinz)   -- assertFalse(check_password("lètmeinz", encoded))
-tests/auth_tests/test_management.py:1285:14   - Unknown word (usermodel)                     -- def test_usermodel_without_password(self
-tests/auth_tests/test_management.py:1298:14   - Unknown word (usermodel)                     -- def test_usermodel_without_password_interactive
-tests/auth_tests/test_management.py:154:53    - Unknown word (xfalia)     -- username = lambda: "J\xfalia"
-tests/auth_tests/test_management.py:1574:72   - Unknown word (oldmodel)                      -- auth_tests", model="oldmodel")
-tests/auth_tests/test_management.py:1578:37   - Unknown word (oldmodel)                      -- codename=f"{action}_oldmodel",
-tests/auth_tests/test_management.py:1586:63   - Unknown word (oldmodel)                      -- codename=f"{action}_oldmodel").exists()
-tests/auth_tests/test_management.py:1589:63   - Unknown word (newmodel)                      -- codename=f"{action}_newmodel").exists()
-tests/auth_tests/test_management.py:1603:63   - Unknown word (oldmodel)                      -- codename=f"{action}_oldmodel").exists()
-tests/auth_tests/test_management.py:1606:63   - Unknown word (newmodel)                      -- codename=f"{action}_newmodel").exists()
-tests/auth_tests/test_management.py:1611:44   - Unknown word (oldmodel)                      -- auth_tests", model="oldmodel"
-tests/auth_tests/test_management.py:1626:68   - Unknown word (newmodel)                      -- filter(codename="add_newmodel").exists()
-tests/auth_tests/test_management.py:1654:69   - Unknown word (newmodel)                      -- filter(codename="change_newmodel").exists())
-tests/auth_tests/test_management.py:1678:58   - Unknown word (newmodel)                      -- change_oldmodel", "change_newmodel"]
-tests/auth_tests/test_management.py:261:46    - Unknown word (xfalia)     -- create_user(username="J\xfalia", password="qwerty"
-tests/auth_tests/test_management.py:262:52    - Unknown word (xfalia)     -- changepassword", username="J\xfalia", stdout=self.stdout
-tests/auth_tests/test_management.py:346:18    - Unknown word (Uživatel)   -- "Uživatel (leave blank to use
-tests/auth_tests/test_management.py:354:52    - Unknown word (eivatel)    -- verbose_name = _("u\u017eivatel")
-tests/auth_tests/test_management.py:528:44    - Unknown word (mygroup)    -- objects.create(name="mygroup")
-tests/auth_tests/test_management.py:558:44    - Unknown word (mygroup)    -- objects.create(name="mygroup")
-tests/auth_tests/test_management.py:588:44    - Unknown word (mygroup)    -- objects.create(name="mygroup")
-tests/auth_tests/test_management.py:830:21    - Unknown word (supremelycomplex) -- username = "supremelycomplex"
-tests/auth_tests/test_management.py:834:14    - Unknown word (superduperunguessablepassword) -- "superduperunguessablepassword",
-tests/auth_tests/test_management.py:835:14    - Unknown word (superduperunguessablepassword) -- "superduperunguessablepassword",
-tests/auth_tests/test_management.py:882:14    - Unknown word (superduperunguessablepassword) -- "superduperunguessablepassword",
-tests/auth_tests/test_management.py:883:14    - Unknown word (superduperunguessablepassword) -- "superduperunguessablepassword",
-tests/auth_tests/test_management.py:932:14    - Unknown word (superduperunguessablepassword) -- "superduperunguessablepassword",
+tests/auth_tests/test_management.py:1279:14   - Unknown word (usermodel)                     -- def test_usermodel_without_password(self
+tests/auth_tests/test_management.py:1292:14   - Unknown word (usermodel)                     -- def test_usermodel_without_password_interactive
+tests/auth_tests/test_management.py:148:53    - Unknown word (xfalia)     -- username = lambda: "J\xfalia"
+tests/auth_tests/test_management.py:255:46    - Unknown word (xfalia)     -- create_user(username="J\xfalia", password="qwerty"
+tests/auth_tests/test_management.py:256:52    - Unknown word (xfalia)     -- changepassword", username="J\xfalia", stdout=self.stdout
+tests/auth_tests/test_management.py:340:18    - Unknown word (Uživatel)   -- "Uživatel (leave blank to use
+tests/auth_tests/test_management.py:348:52    - Unknown word (eivatel)    -- verbose_name = _("u\u017eivatel")
+tests/auth_tests/test_management.py:522:44    - Unknown word (mygroup)    -- objects.create(name="mygroup")
+tests/auth_tests/test_management.py:552:44    - Unknown word (mygroup)    -- objects.create(name="mygroup")
+tests/auth_tests/test_management.py:582:44    - Unknown word (mygroup)    -- objects.create(name="mygroup")
+tests/auth_tests/test_management.py:824:21    - Unknown word (supremelycomplex) -- username = "supremelycomplex"
+tests/auth_tests/test_management.py:828:14    - Unknown word (superduperunguessablepassword) -- "superduperunguessablepassword",
+tests/auth_tests/test_management.py:829:14    - Unknown word (superduperunguessablepassword) -- "superduperunguessablepassword",
+tests/auth_tests/test_management.py:876:14    - Unknown word (superduperunguessablepassword) -- "superduperunguessablepassword",
+tests/auth_tests/test_management.py:877:14    - Unknown word (superduperunguessablepassword) -- "superduperunguessablepassword",
+tests/auth_tests/test_management.py:926:14    - Unknown word (superduperunguessablepassword) -- "superduperunguessablepassword",
 tests/auth_tests/test_middleware.py:2:54      - Unknown word (alogin)     -- REDIRECT_FIELD_NAME, alogin, alogout
 tests/auth_tests/test_middleware.py:2:62      - Unknown word (alogout)    -- FIELD_NAME, alogin, alogout
 tests/auth_tests/test_middleware.py:30:33     - Unknown word (doesnt)     -- test_no_password_change_doesnt_invalidate_session(self
@@ -6966,20 +6956,20 @@ tests/postgres_tests/test_array.py:333:19    - Unknown word (mogrify)    -- # ps
 tests/postgres_tests/test_array.py:640:13    - Unknown word (subarray)   -- subarray=F("field")[:1]
 tests/postgres_tests/test_array.py:641:32    - Unknown word (subarray)   -- filter(field__len=F("subarray__len"))
 tests/postgres_tests/test_array.py:980:38    - Unknown word (integerarraydefaultmodel) -- name = "postgres_tests_integerarraydefaultmodel"
-tests/postgres_tests/test_constraints.py:1045:29   - Unknown word (spgist)     -- test_range_adjacent_spgist_include(self):
-tests/postgres_tests/test_constraints.py:1046:42   - Unknown word (spgist)     -- name = "ints_adjacent_spgist_include"
-tests/postgres_tests/test_constraints.py:1053:25   - Unknown word (spgist)     -- index_type="spgist",
-tests/postgres_tests/test_constraints.py:1081:29   - Unknown word (spgist)     -- test_range_adjacent_spgist_include_condition(self
-tests/postgres_tests/test_constraints.py:1082:42   - Unknown word (spgist)     -- name = "ints_adjacent_spgist_include_condition"
-tests/postgres_tests/test_constraints.py:216:48    - Unknown word (Bedemir's)  -- setting__contains="Sir Bedemir's Castle"),
-tests/postgres_tests/test_constraints.py:263:65    - Unknown word (Bedemir's)  -- ScEnE 10", setting="Sir Bedemir's Castle")
-tests/postgres_tests/test_constraints.py:264:60    - Unknown word (Bedemir's)  -- Scene 5", setting="Sir Bedemir's Castle")
-tests/postgres_tests/test_constraints.py:269:61    - Unknown word (Bedemir's)  -- ScEnE 10", setting="Sir Bedemir's Castle")
-tests/postgres_tests/test_constraints.py:48:46     - Unknown word (indclass)   -- i on oc.oid = ANY(i.indclass)
-tests/postgres_tests/test_constraints.py:610:25    - Unknown word (SPGIST)     -- index_type="SPGIST",
-tests/postgres_tests/test_constraints.py:625:32    - Unknown word (SPGIST)     -- "index_type": "SPGIST",
-tests/postgres_tests/test_constraints.py:814:25    - Unknown word (TSTZRANGE)  -- function = "TSTZRANGE"
-tests/postgres_tests/test_constraints.py:94:31     - Unknown word (daterange)  -- test_check_constraint_daterange_contains(self):
+tests/postgres_tests/test_constraints.py:100:31    - Unknown word (daterange)  -- test_check_constraint_daterange_contains(self):
+tests/postgres_tests/test_constraints.py:1091:29   - Unknown word (spgist)     -- test_range_adjacent_spgist_include(self):
+tests/postgres_tests/test_constraints.py:1092:42   - Unknown word (spgist)     -- name = "ints_adjacent_spgist_include"
+tests/postgres_tests/test_constraints.py:1099:25   - Unknown word (spgist)     -- index_type="spgist",
+tests/postgres_tests/test_constraints.py:1127:29   - Unknown word (spgist)     -- test_range_adjacent_spgist_include_condition(self
+tests/postgres_tests/test_constraints.py:1128:42   - Unknown word (spgist)     -- name = "ints_adjacent_spgist_include_condition"
+tests/postgres_tests/test_constraints.py:222:48    - Unknown word (Bedemir's)  -- setting__contains="Sir Bedemir's Castle"),
+tests/postgres_tests/test_constraints.py:269:65    - Unknown word (Bedemir's)  -- ScEnE 10", setting="Sir Bedemir's Castle")
+tests/postgres_tests/test_constraints.py:270:60    - Unknown word (Bedemir's)  -- Scene 5", setting="Sir Bedemir's Castle")
+tests/postgres_tests/test_constraints.py:275:61    - Unknown word (Bedemir's)  -- ScEnE 10", setting="Sir Bedemir's Castle")
+tests/postgres_tests/test_constraints.py:54:46     - Unknown word (indclass)   -- i on oc.oid = ANY(i.indclass)
+tests/postgres_tests/test_constraints.py:656:25    - Unknown word (SPGIST)     -- index_type="SPGIST",
+tests/postgres_tests/test_constraints.py:671:32    - Unknown word (SPGIST)     -- "index_type": "SPGIST",
+tests/postgres_tests/test_constraints.py:860:25    - Unknown word (TSTZRANGE)  -- function = "TSTZRANGE"
 tests/postgres_tests/test_hstore.py:303:22    - Unknown word (Трурль)     -- {"все": "Трурль и Клапауций"},
 tests/postgres_tests/test_hstore.py:303:31    - Unknown word (Клапауций)  -- {"все": "Трурль и Клапауций"},
 tests/postgres_tests/test_hstore.py:304:16    - Unknown word (Трурль)     -- [{"Трурль": "Клапауций"}, {"Клапауций
