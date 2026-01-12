@@ -3,6 +3,77 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v9.6.0 (2026-01-12)
+
+### Features
+
+- feat: ESLint-plugin -- Distinguish between Forbidden, Misspelled, and Unknown words. (<a href="https://github.com/streetsidesoftware/cspell/pull/8337">#8337</a>)
+- feat: ESLint-plugin -- Add `report` option to be able to control the reporting level (matching the CLI): "all", "simple", "typos", "flagged". (<a href="https://github.com/streetsidesoftware/cspell/pull/8273">#8273</a>)
+
+- feat: support storing suggestions in trie (<a href="https://github.com/streetsidesoftware/cspell/pull/8228">#8228</a>)
+- feat: Add Support reading / writing bTrie files (<a href="https://github.com/streetsidesoftware/cspell/pull/8204">#8204</a>)
+
+### Fixes
+
+- refactor: extract processFile from lint.ts (<a href="https://github.com/streetsidesoftware/cspell/pull/8344">#8344</a>)
+- fix: Improve word lookup performance when not found (<a href="https://github.com/streetsidesoftware/cspell/pull/8330">#8330</a>)
+
+- fix: Improve loading time of dictionaries (<a href="https://github.com/streetsidesoftware/cspell/pull/8318">#8318</a>)
+- fix: Reduce loading time of dictionaries. (<a href="https://github.com/streetsidesoftware/cspell/pull/8316">#8316</a>)
+
+- fix: Support loading btrie dictionaries in cspell-lib (<a href="https://github.com/streetsidesoftware/cspell/pull/8311">#8311</a>)
+- fix: Improve loading performance a bit. (<a href="https://github.com/streetsidesoftware/cspell/pull/8309">#8309</a>)
+
+- fix: Prepare tools to generate btrie files. (<a href="https://github.com/streetsidesoftware/cspell/pull/8298">#8298</a>)
+- fix: Optimize btrie files when building (<a href="https://github.com/streetsidesoftware/cspell/pull/8285">#8285</a>)
+
+- fix: Add `btrie` path to dictionary definition (<a href="https://github.com/streetsidesoftware/cspell/pull/8284">#8284</a>)
+- fix: Work towards support prefixes when walking ITrie (<a href="https://github.com/streetsidesoftware/cspell/pull/8276">#8276</a>)
+
+- fix: Fix CStyleHexValue to handle BigInt values. (<a href="https://github.com/streetsidesoftware/cspell/pull/8282">#8282</a>)
+- refactor: Remove FastTrieBlob (<a href="https://github.com/streetsidesoftware/cspell/pull/8267">#8267</a>)
+
+- fix: Make endian required when encoding a StringTable (<a href="https://github.com/streetsidesoftware/cspell/pull/8265">#8265</a>)
+- refactor: Removed FastTrieBlob part 1 (<a href="https://github.com/streetsidesoftware/cspell/pull/8266">#8266</a>)
+
+- fix: Support string prefixes when walking nodes (<a href="https://github.com/streetsidesoftware/cspell/pull/8259">#8259</a>)
+- refactor: Document TrieBlob format (<a href="https://github.com/streetsidesoftware/cspell/pull/8256">#8256</a>)
+
+- fix: adjust error message (<a href="https://github.com/streetsidesoftware/cspell/pull/8249">#8249</a>)
+- fix: Add StringTable and refactor BinaryFormat (<a href="https://github.com/streetsidesoftware/cspell/pull/8243">#8243</a>)
+
+- refactor: Rename private methods in TrieBuilder (<a href="https://github.com/streetsidesoftware/cspell/pull/8240">#8240</a>)
+- refactor: A bit of refactoring of utf8 naming (<a href="https://github.com/streetsidesoftware/cspell/pull/8239">#8239</a>)
+
+- refactor: Add GTrie class for later (<a href="https://github.com/streetsidesoftware/cspell/pull/8238">#8238</a>)
+- refactor: import using .ts when the package is bundled. (<a href="https://github.com/streetsidesoftware/cspell/pull/8224">#8224</a>)
+
+- fix: Add cspell-tools config option to gen btrie (<a href="https://github.com/streetsidesoftware/cspell/pull/8221">#8221</a>)
+- feat: auto load btrie files if available (<a href="https://github.com/streetsidesoftware/cspell/pull/8218">#8218</a>)
+
+- fix: Minor perf boost to TrieBlob.#findNode (<a href="https://github.com/streetsidesoftware/cspell/pull/8213">#8213</a>)
+- fix: deprecated legacy trie.has (<a href="https://github.com/streetsidesoftware/cspell/pull/8196">#8196</a>)
+
+- fix: Improve speed of dictionary lookup (<a href="https://github.com/streetsidesoftware/cspell/pull/8193">#8193</a>)
+- fix: Run perf tests on trie-lib (<a href="https://github.com/streetsidesoftware/cspell/pull/8188">#8188</a>)
+
+- fix: Force consistent type imports (<a href="https://github.com/streetsidesoftware/cspell/pull/8187">#8187</a>)
+- fix: Support adding separators when tracing compound words (<a href="https://github.com/streetsidesoftware/cspell/pull/8176">#8176</a>)
+
+### Dictionary Updates
+
+- fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/8326">#8326</a>)
+- fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/8277">#8277</a>)
+
+- fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/8192">#8192</a>)
+- fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/8186">#8186</a>)
+
+- fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/8182">#8182</a>)
+
+### Documentation
+
+- refactor: landing page update (<a href="https://github.com/streetsidesoftware/cspell/pull/8211">#8211</a>)
+
 ## v9.5.0 (2025-12-16)
 
 ### Features

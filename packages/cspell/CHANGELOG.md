@@ -3,6 +3,679 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v9.6.0 (2026-01-12)
+
+### Features
+
+<details>
+<summary>feat: ESLint-plugin -- Distinguish between Forbidden, Misspelled, and Unknown words. (<a href="https://github.com/streetsidesoftware/cspell/pull/8337">#8337</a>)</summary>
+
+### feat: ESLint-plugin -- Distinguish between Forbidden, Misspelled, and Unknown words. ([#8337](https://github.com/streetsidesoftware/cspell/pull/8337))
+
+## Pull request overview
+
+This PR updates the eslint-plugin to report different types of spelling issues with improved categorization and messaging. The changes include upgrading ESLint from v8 to v9, introducing new issue severity levels (Forbidden, Misspelled, Unknown, Hint), and adding a `report` option to control the level of reporting.
+
+**Changes:**
+
+- Upgraded ESLint dependency from v8.57.1 to v9.39.2 across all fixtures and packages
+- Introduced new severity level "Misspelled" to distinguish typos with suggestions from truly unknown words
+- Added `report` option ('all', 'simple', 'typos', 'flagged') to control which types of issues are reported
+- Enhanced error messages to include suggestions directly in the message text
+
+---
+
+</details>
+
+<details>
+<summary>feat: ESLint-plugin -- Add `report` option to be able to control the reporting level (matching the CLI): "all", "simple", "typos", "flagged". (<a href="https://github.com/streetsidesoftware/cspell/pull/8273">#8273</a>)</summary>
+
+### feat: ESLint-plugin -- Add `report` option to be able to control the reporting level (matching the CLI): "all", "simple", "typos", "flagged". ([#8273](https://github.com/streetsidesoftware/cspell/pull/8273))
+
+## Pull request overview
+
+This PR adds support for unknown word reporting options to the cspell ESLint plugin, allowing users to control which types of spelling issues are reported (all unknown words, simple typos, common typos, or only flagged words).
+
+**Changes:**
+
+- Added a new `report` option to the ESLint plugin configuration with values: 'all', 'simple', 'typos', and 'flagged'
+- Implemented mapping from the `report` option to CSpell's `unknownWords` setting
+- Added unit tests for the new report filtering functionality
+
+This `PR` contains the changes required to resolve `cspell ESLint plugin: support typos-only reporting (CLI --report typos / unknownWords report-common-typos) #8261`
+
+---
+
+</details>
+
+<details>
+<summary>feat: support storing suggestions in trie (<a href="https://github.com/streetsidesoftware/cspell/pull/8228">#8228</a>)</summary>
+
+### feat: support storing suggestions in trie ([#8228](https://github.com/streetsidesoftware/cspell/pull/8228))
+
+## Pull request overview
+
+This PR adds support for storing word suggestions directly in trie data structures, enabling dictionaries to provide preferred spelling suggestions for words. The implementation introduces a new `suggestionPrefix` field (default `:`) to `TrieInfo` and a `hasPreferredSuggestions` characteristic flag.
+
+**Key Changes:**
+
+- Adds suggestion storage capability to trie structures with a new `suggestionPrefix` field
+- Removes the `isCaseAware` field from `TrieInfo` (minor breaking change since it was no longer used)
+- Implements suggestion parsing logic in dictionary parsers to handle formats like `word:suggestion` and `word->suggestion`
+
+### Details
+
+Add support to have suggestion in normal word lists:
+
+Note: `:` or `->` separators can be used in the word list.
+
+Examples:
+
+```
+colour:color # colour is allowed, but color is preferred.
+:colour:color # this is just a suggestion to use `color` instead of `colour`.
+:colour->color # same as `:colour:color`
+!colour:color # `colour` will be flagged and `color` will be suggested as the fix.
+```
+
+You can add more than one suggestion, but auto-fix won't be possible since
+the spell checker cannot determine which one you want.
+
+```
+!incase:encase, in case # two suggestions
+```
+
+---
+
+</details>
+
+<details>
+<summary>feat: Add Support reading / writing bTrie files (<a href="https://github.com/streetsidesoftware/cspell/pull/8204">#8204</a>)</summary>
+
+### feat: Add Support reading / writing bTrie files ([#8204](https://github.com/streetsidesoftware/cspell/pull/8204))
+
+## Pull request overview
+
+This pull request adds support for reading and writing binary Trie (bTrie) files, which is a more efficient binary format for storing trie data structures. The changes make the cspell-trie-lib package more platform-neutral by replacing Node.js-specific APIs (like `Buffer` and `os.endianness()`) with Web standard APIs (`Uint8Array`, `TextEncoder`/`TextDecoder`, and a custom endianness detection function).
+
+**Changes:**
+
+- Implemented a new binary format specification system with encoder/decoder classes
+- Added bTrie file format support with proper endianness handling
+- Made cspell-trie-lib platform-neutral by removing Node.js dependencies from production code
+- Added new CLI command `btrie` to cspell-tools for generating bTrie files
+- Enhanced readers in cspell-tools to handle multiple file formats including bTrie
+
+---
+
+</details>
+
+### Fixes
+
+<details>
+<summary>refactor: extract processFile from lint.ts (<a href="https://github.com/streetsidesoftware/cspell/pull/8344">#8344</a>)</summary>
+
+### refactor: extract processFile from lint.ts ([#8344](https://github.com/streetsidesoftware/cspell/pull/8344))
+
+---
+
+</details>
+
+<details>
+<summary>fix: Improve word lookup performance when not found (<a href="https://github.com/streetsidesoftware/cspell/pull/8330">#8330</a>)</summary>
+
+### fix: Improve word lookup performance when not found ([#8330](https://github.com/streetsidesoftware/cspell/pull/8330))
+
+## Pull request overview
+
+This PR improves word lookup performance when words are not found by optimizing how the spell checker generates different word forms for dictionary lookups. The key optimization is to avoid expensive Unicode normalization and replacement mapping operations when they're not needed.
+
+**Changes:**
+
+- Converted `mapWord` from required to optional on SpellingDictionary interface, using `undefined` for dictionaries that don't need word mapping
+- Added early-exit optimization for ASCII words to skip Unicode normalization
+- Added test-before-apply optimization for replacement mappers to avoid expensive operations when the word won't match
+- Enhanced dictionary logging to track cache misses and improved the public API for logging functions
+- Added comprehensive tests including integration test with real German dictionary
+
+When a word is not found, the spell checker tries many different forms to find the word. This can be expensive if a lot of words are not found.
+
+---
+
+</details>
+
+<details>
+<summary>fix: Improve loading time of dictionaries (<a href="https://github.com/streetsidesoftware/cspell/pull/8318">#8318</a>)</summary>
+
+### fix: Improve loading time of dictionaries ([#8318](https://github.com/streetsidesoftware/cspell/pull/8318))
+
+## Pull request overview
+
+This pull request aims to improve the loading time of dictionaries by optimizing the internal data structures and sorting algorithms used in the trie builder. The changes focus on:
+
+- Removing unused timer utility functions and tests
+- Simplifying performance measurement infrastructure
+- Optimizing node sorting by avoiding unnecessary Uint32Array conversions
+- Adding an optional batch sorting feature for dictionary parsing
+- Generalizing types to work with both regular arrays and Uint32Arrays
+
+---
+
+</details>
+
+<details>
+<summary>fix: Reduce loading time of dictionaries. (<a href="https://github.com/streetsidesoftware/cspell/pull/8316">#8316</a>)</summary>
+
+### fix: Reduce loading time of dictionaries. ([#8316](https://github.com/streetsidesoftware/cspell/pull/8316))
+
+---
+
+</details>
+
+<details>
+<summary>fix: Support loading btrie dictionaries in cspell-lib (<a href="https://github.com/streetsidesoftware/cspell/pull/8311">#8311</a>)</summary>
+
+### fix: Support loading btrie dictionaries in cspell-lib ([#8311](https://github.com/streetsidesoftware/cspell/pull/8311))
+
+## Pull request overview
+
+This PR adds support for loading btrie (binary trie) dictionaries in cspell-lib, enabling more efficient dictionary storage and loading. The changes also include enhancements to the table utility for better formatting and a refactoring of performance measurement tracking to use a hierarchical structure.
+
+- Added btrie path resolution and loading support in DictionarySettings and DictionaryLoader
+- Enhanced the table utility with column alignment, indentation, and title support
+- Refactored performance measurements to use a hierarchical tree structure instead of flat key-based tracking
+- Improved performance reporting with color coding and additional metrics
+
+---
+
+</details>
+
+<details>
+<summary>fix: Improve loading performance a bit. (<a href="https://github.com/streetsidesoftware/cspell/pull/8309">#8309</a>)</summary>
+
+### fix: Improve loading performance a bit. ([#8309](https://github.com/streetsidesoftware/cspell/pull/8309))
+
+---
+
+</details>
+
+<details>
+<summary>fix: Prepare tools to generate btrie files. (<a href="https://github.com/streetsidesoftware/cspell/pull/8298">#8298</a>)</summary>
+
+### fix: Prepare tools to generate btrie files. ([#8298](https://github.com/streetsidesoftware/cspell/pull/8298))
+
+---
+
+</details>
+
+<details>
+<summary>fix: Optimize btrie files when building (<a href="https://github.com/streetsidesoftware/cspell/pull/8285">#8285</a>)</summary>
+
+### fix: Optimize btrie files when building ([#8285](https://github.com/streetsidesoftware/cspell/pull/8285))
+
+Have CSpell Tools optimize the Trie while building. We are trying to reduce the size of the file.
+
+---
+
+</details>
+
+<details>
+<summary>fix: Add `btrie` path to dictionary definition (<a href="https://github.com/streetsidesoftware/cspell/pull/8284">#8284</a>)</summary>
+
+### fix: Add `btrie` path to dictionary definition ([#8284](https://github.com/streetsidesoftware/cspell/pull/8284))
+
+Make it possible for a dictionary to specify a btrie path in addition to the normal `path`.
+
+---
+
+</details>
+
+<details>
+<summary>fix: Work towards support prefixes when walking ITrie (<a href="https://github.com/streetsidesoftware/cspell/pull/8276">#8276</a>)</summary>
+
+### fix: Work towards support prefixes when walking ITrie ([#8276](https://github.com/streetsidesoftware/cspell/pull/8276))
+
+---
+
+</details>
+
+<details>
+<summary>fix: Fix CStyleHexValue to handle BigInt values. (<a href="https://github.com/streetsidesoftware/cspell/pull/8282">#8282</a>)</summary>
+
+### fix: Fix CStyleHexValue to handle BigInt values. ([#8282](https://github.com/streetsidesoftware/cspell/pull/8282))
+
+Example: `0xffff_ffff_ffffn`
+
+---
+
+</details>
+
+<details>
+<summary>refactor: Remove FastTrieBlob (<a href="https://github.com/streetsidesoftware/cspell/pull/8267">#8267</a>)</summary>
+
+### refactor: Remove FastTrieBlob ([#8267](https://github.com/streetsidesoftware/cspell/pull/8267))
+
+---
+
+</details>
+
+<details>
+<summary>fix: Make endian required when encoding a StringTable (<a href="https://github.com/streetsidesoftware/cspell/pull/8265">#8265</a>)</summary>
+
+### fix: Make endian required when encoding a StringTable ([#8265](https://github.com/streetsidesoftware/cspell/pull/8265))
+
+---
+
+</details>
+
+<details>
+<summary>refactor: Removed FastTrieBlob part 1 (<a href="https://github.com/streetsidesoftware/cspell/pull/8266">#8266</a>)</summary>
+
+### refactor: Removed FastTrieBlob part 1 ([#8266](https://github.com/streetsidesoftware/cspell/pull/8266))
+
+FastTrieBlob served it purpose. It is now time for it to be retired since it is too difficult to maintain in parallel with TrieBlob.
+
+---
+
+</details>
+
+<details>
+<summary>fix: Support string prefixes when walking nodes (<a href="https://github.com/streetsidesoftware/cspell/pull/8259">#8259</a>)</summary>
+
+### fix: Support string prefixes when walking nodes ([#8259](https://github.com/streetsidesoftware/cspell/pull/8259))
+
+---
+
+</details>
+
+<details>
+<summary>refactor: Document TrieBlob format (<a href="https://github.com/streetsidesoftware/cspell/pull/8256">#8256</a>)</summary>
+
+### refactor: Document TrieBlob format ([#8256](https://github.com/streetsidesoftware/cspell/pull/8256))
+
+- Document TrieBlob format
+- Add TribBlob node optimizer to make DAWGs
+- Test out StringTables
+- Remove some dead code
+
+---
+
+</details>
+
+<details>
+<summary>fix: adjust error message (<a href="https://github.com/streetsidesoftware/cspell/pull/8249">#8249</a>)</summary>
+
+### fix: adjust error message ([#8249](https://github.com/streetsidesoftware/cspell/pull/8249))
+
+---
+
+</details>
+
+<details>
+<summary>fix: Add StringTable and refactor BinaryFormat (<a href="https://github.com/streetsidesoftware/cspell/pull/8243">#8243</a>)</summary>
+
+### fix: Add StringTable and refactor BinaryFormat ([#8243](https://github.com/streetsidesoftware/cspell/pull/8243))
+
+---
+
+</details>
+
+<details>
+<summary>refactor: Rename private methods in TrieBuilder (<a href="https://github.com/streetsidesoftware/cspell/pull/8240">#8240</a>)</summary>
+
+### refactor: Rename private methods in TrieBuilder ([#8240](https://github.com/streetsidesoftware/cspell/pull/8240))
+
+---
+
+</details>
+
+<details>
+<summary>refactor: A bit of refactoring of utf8 naming (<a href="https://github.com/streetsidesoftware/cspell/pull/8239">#8239</a>)</summary>
+
+### refactor: A bit of refactoring of utf8 naming ([#8239](https://github.com/streetsidesoftware/cspell/pull/8239))
+
+---
+
+</details>
+
+<details>
+<summary>refactor: Add GTrie class for later (<a href="https://github.com/streetsidesoftware/cspell/pull/8238">#8238</a>)</summary>
+
+### refactor: Add GTrie class for later ([#8238](https://github.com/streetsidesoftware/cspell/pull/8238))
+
+---
+
+</details>
+
+<details>
+<summary>refactor: import using .ts when the package is bundled. (<a href="https://github.com/streetsidesoftware/cspell/pull/8224">#8224</a>)</summary>
+
+### refactor: import using .ts when the package is bundled. ([#8224](https://github.com/streetsidesoftware/cspell/pull/8224))
+
+---
+
+</details>
+
+<details>
+<summary>fix: Add cspell-tools config option to gen btrie (<a href="https://github.com/streetsidesoftware/cspell/pull/8221">#8221</a>)</summary>
+
+### fix: Add cspell-tools config option to gen btrie ([#8221](https://github.com/streetsidesoftware/cspell/pull/8221))
+
+Add an option to tell the cspell-tools compiler to build btrie files.
+
+---
+
+</details>
+
+<details>
+<summary>feat: auto load btrie files if available (<a href="https://github.com/streetsidesoftware/cspell/pull/8218">#8218</a>)</summary>
+
+### feat: auto load btrie files if available ([#8218](https://github.com/streetsidesoftware/cspell/pull/8218))
+
+> \[!NOTE]
+> The automatic searching / loading of bTries has been removed. The intent is to have the btrie in the `path` or as a separate setting `btrie` instead of automatically searching.\
+> Loading of bTries is still supported.
+
+## Pull request overview
+
+This pull request adds automatic loading of btrie (binary trie) files as a performance optimization when loading dictionaries from node\_modules. The feature checks for .btrie or .btrie.gz files before falling back to .txt or .trie files, potentially improving dictionary loading performance with the more efficient binary format.
+
+**Changes:**
+
+- Added auto-detection and loading of btrie files for dictionaries in node\_modules
+- Updated type signatures from ArrayBufferLike to ArrayBufferView throughout cspell-io and cspell-trie-lib
+- Added support for async decompression via DecompressionStream API
+- Exported cspell-tools functions for programmatic btrie generation with compression options
+
+When loading dictionaries from `node_modules`, try to load `btrie` files before loading a `.txt` or `.trie` file.
+
+---
+
+</details>
+
+<details>
+<summary>fix: Minor perf boost to TrieBlob.#findNode (<a href="https://github.com/streetsidesoftware/cspell/pull/8213">#8213</a>)</summary>
+
+### fix: Minor perf boost to TrieBlob.#findNode ([#8213](https://github.com/streetsidesoftware/cspell/pull/8213))
+
+---
+
+</details>
+
+<details>
+<summary>fix: deprecated legacy trie.has (<a href="https://github.com/streetsidesoftware/cspell/pull/8196">#8196</a>)</summary>
+
+### fix: deprecated legacy trie.has ([#8196](https://github.com/streetsidesoftware/cspell/pull/8196))
+
+---
+
+</details>
+
+<details>
+<summary>fix: Improve speed of dictionary lookup (<a href="https://github.com/streetsidesoftware/cspell/pull/8193">#8193</a>)</summary>
+
+### fix: Improve speed of dictionary lookup ([#8193](https://github.com/streetsidesoftware/cspell/pull/8193))
+
+---
+
+</details>
+
+<details>
+<summary>fix: Run perf tests on trie-lib (<a href="https://github.com/streetsidesoftware/cspell/pull/8188">#8188</a>)</summary>
+
+### fix: Run perf tests on trie-lib ([#8188](https://github.com/streetsidesoftware/cspell/pull/8188))
+
+---
+
+</details>
+
+<details>
+<summary>fix: Force consistent type imports (<a href="https://github.com/streetsidesoftware/cspell/pull/8187">#8187</a>)</summary>
+
+### fix: Force consistent type imports ([#8187](https://github.com/streetsidesoftware/cspell/pull/8187))
+
+---
+
+</details>
+
+<details>
+<summary>fix: Support adding separators when tracing compound words (<a href="https://github.com/streetsidesoftware/cspell/pull/8176">#8176</a>)</summary>
+
+### fix: Support adding separators when tracing compound words ([#8176](https://github.com/streetsidesoftware/cspell/pull/8176))
+
+## Pull request overview
+
+This pull request adds support for compound word separation when tracing words in cspell. When a compound word is found, it can now be displayed with a custom separator (e.g., "type•script•config" instead of "typescriptconfig").
+
+**Changes:**
+
+- Added `compoundSeparator` option to trace and find APIs across multiple layers
+- Updated compound word finding logic to return words with separators inserted between compound parts
+- Added comprehensive test coverage for the new functionality
+- Minor code quality improvements (type parameter cleanup, version test improvement, build configuration)
+
+---
+
+</details>
+
+### Dictionary Updates
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/8326">#8326</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#8326](https://github.com/streetsidesoftware/cspell/pull/8326))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ .../snapshots/slint-ui/slint/report.yaml           | 30 ++++---------------
+ .../snapshots/slint-ui/slint/snapshot.txt          | 22 +-------------
+ packages/cspell-bundled-dicts/package.json         |  6 ++--
+ pnpm-lock.yaml                                     | 35 ++++++++++++----------
+ 4 files changed, 29 insertions(+), 64 deletions(-)
+```
+
+---
+
+</details>
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/8277">#8277</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#8277](https://github.com/streetsidesoftware/cspell/pull/8277))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ .../Azure/azure-rest-api-specs/report.yaml         |   6 +-
+ .../Azure/azure-rest-api-specs/snapshot.txt        |   6 +-
+ .../MartinThoma/LaTeX-examples/report.yaml         |   3 +-
+ .../MartinThoma/LaTeX-examples/snapshot.txt        |   3 +-
+ .../MicrosoftDocs/PowerShell-Docs/report.yaml      |   6 +-
+ .../MicrosoftDocs/PowerShell-Docs/snapshot.txt     |   4 +-
+ .../snapshots/TheAlgorithms/Python/report.yaml     |   4 +-
+ .../snapshots/TheAlgorithms/Python/snapshot.txt    |   4 +-
+ .../snapshots/alexiosc/megistos/report.yaml        |   3 +-
+ .../snapshots/alexiosc/megistos/snapshot.txt       |   3 +-
+ .../aspnetboilerplate/report.yaml                  |   4 +-
+ .../aspnetboilerplate/snapshot.txt                 |   4 +-
+ .../snapshots/caddyserver/caddy/report.yaml        |   5 +-
+ .../snapshots/caddyserver/caddy/snapshot.txt       |   5 +-
+ .../snapshots/dart-lang/sdk/report.yaml            |  32 +----
+ .../snapshots/dart-lang/sdk/snapshot.txt           |  12 +-
+ .../snapshots/django/django/report.yaml            |   6 +-
+ .../snapshots/django/django/snapshot.txt           |   3 +-
+ .../snapshots/eslint/eslint/report.yaml            |   4 +-
+ .../snapshots/eslint/eslint/snapshot.txt           |   3 +-
+ .../snapshots/flutter/samples/report.yaml          |   4 +-
+ .../snapshots/flutter/samples/snapshot.txt         |   3 +-
+ .../snapshots/gitbucket/gitbucket/report.yaml      |   3 +-
+ .../snapshots/gitbucket/gitbucket/snapshot.txt     |  57 ++++-----
+ .../googleapis/google-cloud-cpp/report.yaml        |  12 +-
+ .../googleapis/google-cloud-cpp/snapshot.txt       |  10 +-
+ .../iluwatar/java-design-patterns/report.yaml      |   9 +-
+ .../iluwatar/java-design-patterns/snapshot.txt     |   7 +-
+ .../snapshots/ktaranov/sqlserver-kit/report.yaml   |   6 +-
+ .../snapshots/ktaranov/sqlserver-kit/snapshot.txt  |   4 +-
+ .../snapshots/neovim/nvim-lspconfig/report.yaml    |   5 +-
+ .../snapshots/neovim/nvim-lspconfig/snapshot.txt   |   3 +-
+ .../snapshots/php/php-src/report.yaml              |   4 +-
+ .../snapshots/php/php-src/snapshot.txt             |   4 +-
+ .../snapshots/pycontribs/jira/report.yaml          |   3 +-
+ .../snapshots/pycontribs/jira/snapshot.txt         |   3 +-
+ .../snapshots/slint-ui/slint/report.yaml           |  13 +-
+ .../snapshots/slint-ui/slint/snapshot.txt          |   7 +-
+ .../snapshots/sveltejs/svelte/report.yaml          |   5 +-
+ .../snapshots/sveltejs/svelte/snapshot.txt         |   5 +-
+ .../typescript-cheatsheets/react/report.yaml       |   4 +-
+ .../typescript-cheatsheets/react/snapshot.txt      |   4 +-
+ .../snapshots/vitest-dev/vitest/report.yaml        |   4 +-
+ .../snapshots/vitest-dev/vitest/snapshot.txt       |   3 +-
+ packages/cspell-bundled-dicts/package.json         |  24 ++--
+ packages/cspell/src/__snapshots__/app.test.ts.snap |  32 +++--
+ pnpm-lock.yaml                                     | 142 +++++++++++----------
+ 47 files changed, 190 insertions(+), 310 deletions(-)
+```
+
+---
+
+</details>
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/8192">#8192</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#8192](https://github.com/streetsidesoftware/cspell/pull/8192))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ .../MicrosoftDocs/PowerShell-Docs/report.yaml      |  7 +-
+ .../MicrosoftDocs/PowerShell-Docs/snapshot.txt     |  5 +-
+ .../snapshots/RustPython/RustPython/report.yaml    |  6 +-
+ .../snapshots/RustPython/RustPython/snapshot.txt   |  3 +-
+ .../snapshots/TheAlgorithms/Python/report.yaml     |  5 +-
+ .../snapshots/TheAlgorithms/Python/snapshot.txt    |  3 +-
+ .../snapshots/alexiosc/megistos/report.yaml        |  3 +-
+ .../snapshots/alexiosc/megistos/snapshot.txt       |  3 +-
+ .../aspnetboilerplate/report.yaml                  |  8 +-
+ .../aspnetboilerplate/snapshot.txt                 | 14 ++--
+ .../snapshots/dart-lang/sdk/report.yaml            | 14 +---
+ .../snapshots/dart-lang/sdk/snapshot.txt           | 11 +--
+ .../snapshots/django/django/report.yaml            |  5 +-
+ .../snapshots/django/django/snapshot.txt           |  4 +-
+ .../snapshots/eslint/eslint/report.yaml            |  6 +-
+ .../snapshots/eslint/eslint/snapshot.txt           |  4 +-
+ .../snapshots/flutter/samples/report.yaml          | 18 +---
+ .../snapshots/flutter/samples/snapshot.txt         | 10 +--
+ .../snapshots/gitbucket/gitbucket/report.yaml      | 10 +--
+ .../snapshots/gitbucket/gitbucket/snapshot.txt     |  6 +-
+ .../googleapis/google-cloud-cpp/report.yaml        |  8 +-
+ .../googleapis/google-cloud-cpp/snapshot.txt       |  6 +-
+ .../iluwatar/java-design-patterns/report.yaml      |  8 +-
+ .../iluwatar/java-design-patterns/snapshot.txt     |  8 +-
+ .../snapshots/ktaranov/sqlserver-kit/report.yaml   | 13 +--
+ .../snapshots/ktaranov/sqlserver-kit/snapshot.txt  | 19 ++---
+ .../snapshots/pagekit/pagekit/report.yaml          |  6 +-
+ .../snapshots/pagekit/pagekit/snapshot.txt         |  4 +-
+ .../snapshots/php/php-src/report.yaml              |  8 +-
+ .../snapshots/php/php-src/snapshot.txt             |  8 +-
+ .../snapshots/slint-ui/slint/report.yaml           | 97 +++++++++-------------
+ .../snapshots/slint-ui/slint/snapshot.txt          | 22 +----
+ .../snapshots/vitest-dev/vitest/report.yaml        |  4 +-
+ .../snapshots/vitest-dev/vitest/snapshot.txt       |  3 +-
+ packages/cspell-bundled-dicts/package.json         | 12 +--
+ packages/cspell/src/__snapshots__/app.test.ts.snap | 10 ++-
+ pnpm-lock.yaml                                     | 69 ++++++++-------
+ 37 files changed, 145 insertions(+), 305 deletions(-)
+```
+
+---
+
+</details>
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/8186">#8186</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#8186](https://github.com/streetsidesoftware/cspell/pull/8186))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ .../snapshots/alexiosc/megistos/report.yaml        |  6 +-----
+ .../snapshots/alexiosc/megistos/snapshot.txt       |  6 +-----
+ .../snapshots/php/php-src/report.yaml              | 24 +---------------------
+ .../snapshots/php/php-src/snapshot.txt             | 24 +---------------------
+ packages/cspell-bundled-dicts/package.json         |  2 +-
+ pnpm-lock.yaml                                     | 10 ++++-----
+ 6 files changed, 10 insertions(+), 62 deletions(-)
+```
+
+---
+
+</details>
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/8182">#8182</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#8182](https://github.com/streetsidesoftware/cspell/pull/8182))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ .../snapshots/RustPython/RustPython/report.yaml    | 843 ++++++++++++++++-----
+ .../snapshots/RustPython/RustPython/snapshot.txt   | 774 ++++++++++++++++---
+ .../snapshots/alexiosc/megistos/report.yaml        |  16 +-
+ .../snapshots/alexiosc/megistos/snapshot.txt       |  16 +-
+ .../snapshots/django/django/report.yaml            |   6 +-
+ .../snapshots/django/django/snapshot.txt           |   3 +-
+ .../googleapis/google-cloud-cpp/report.yaml        |   3 +-
+ .../googleapis/google-cloud-cpp/snapshot.txt       |   3 +-
+ .../snapshots/neovim/nvim-lspconfig/report.yaml    |   6 +-
+ .../snapshots/neovim/nvim-lspconfig/snapshot.txt   |   6 +-
+ .../snapshots/php/php-src/report.yaml              |  24 +-
+ .../snapshots/php/php-src/snapshot.txt             |  24 +-
+ packages/cspell-bundled-dicts/package.json         |  26 +-
+ pnpm-lock.yaml                                     | 161 ++--
+ 14 files changed, 1526 insertions(+), 385 deletions(-)
+```
+
+---
+
+</details>
+
+### Documentation
+
+<details>
+<summary>refactor: landing page update (<a href="https://github.com/streetsidesoftware/cspell/pull/8211">#8211</a>)</summary>
+
+### refactor: landing page update ([#8211](https://github.com/streetsidesoftware/cspell/pull/8211))
+
+## Description
+
+This PR introduces a new landing page for the `cspell` package, leveraging the ability to write custom `React` components in Docosaurus. The PR introduces new colour variants and a few new `md` pages for sections that were removed from the previous home page structure.
+
+### Video
+
+<https://github.com/user-attachments/assets/0773b4b5-2e4a-418e-aa6c-5a6e4209798c>
+
+<https://github.com/user-attachments/assets/7e846066-fdac-44ae-b731-c206eadd822e>
+
+Thank you!
+
+---
+
+</details>
+
 ## v9.5.0 (2025-12-16)
 
 ### Features
