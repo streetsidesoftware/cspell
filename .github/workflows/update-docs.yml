@@ -33,7 +33,8 @@ jobs:
 
       - name: Build Docs
         run: |
-          pnpm ib
+          pnpm i
+          pnpm build:prod
           pnpm run build-cspell-types-docs
 
       - name: PR
