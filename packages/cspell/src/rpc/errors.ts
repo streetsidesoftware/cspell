@@ -24,7 +24,7 @@ export class UnknownMethodRPCRequestError extends RPCRequestError {
 
     constructor(method: string, message?: string) {
         super(message || `Unknown method: ${method}`);
-        this.name = 'AbortRequestError';
+        this.name = 'UnknownMethodRPCRequestError';
         this.method = method;
     }
 }
