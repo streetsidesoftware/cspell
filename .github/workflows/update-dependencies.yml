@@ -43,7 +43,8 @@ jobs:
 
       - name: Install
         run: |
-          pnpm ib
+          pnpm i
+          pnpm build
 
       - name: Apply and new Lint rules
         continue-on-error: true

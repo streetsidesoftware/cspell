@@ -101,7 +101,7 @@ runs:
 
     - name: Build
       if: ${{ steps.step-cache-build.outputs.cache-hit != 'true' }}
-      run: pnpm run build
+      run: pnpm run build:prod
       shell: bash
 
     - name: Summary
