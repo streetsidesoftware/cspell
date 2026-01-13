@@ -85,7 +85,7 @@ export interface RPCClientRequest<Method extends string, TResult extends Promise
     readonly response: TResult;
     readonly isResolved: boolean;
     readonly isCanceled: boolean;
-    //** calling abort will cancel the request if it has not already been resolved. */
+    /** calling abort will cancel the request if it has not already been resolved. */
     abort: AbortController['abort'];
 }
 
