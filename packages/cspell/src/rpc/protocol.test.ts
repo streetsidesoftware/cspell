@@ -3,7 +3,7 @@ import { describe, expect, test } from 'vitest';
 import type { RPCProtocol, RPCProtocolMethods } from './protocol.js';
 import { protocolDefinition, protocolMethods } from './protocol.js';
 
-describe('Models', () => {
+describe('Protocol types', () => {
     test('Protocol types', () => {
         interface RPC {
             sum(a: number, b: number): number;
