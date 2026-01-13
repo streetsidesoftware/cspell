@@ -1,4 +1,4 @@
-import { AbortRequestError, CanceledRequestError } from './errors.js';
+import { AbortRPCRequestError, CanceledRPCRequestError } from './errors.js';
 import type { MessagePortLike } from './messagePort.js';
 import type { RequestID, RPCClientRequest } from './models.js';
 import {
@@ -28,14 +28,14 @@ export interface RPCClientOptions {
 export class RPCClient<
     T,
     P extends RPCProtocol<T> = RPCProtocol<T>,
-    Methods extends RPCProtocolMethodNames<P> = RPCProtocolMethodNames<P>,
+    MethodNames extends RPCProtocolMethodNames<P> = RPCProtocolMethodNames<P>,
 > {
     #port: MessagePortLike;
     #count: number = 0;
     #options: RPCClientOptions;
 
-    #pendingRequests = new Map<RequestID, PendingRequest<Methods>>();
-    #pendingRequestsByPromise = new WeakMap<Promise<unknown>, PendingRequest<Methods>>();
+    #pendingRequests = new Map<RequestID, PendingRequest<MethodNames>>();
+    #pendingRequestsByPromise = new WeakMap<Promise<unknown>, PendingRequest<MethodNames>>();
 
     #onMessage: (msg: unknown) => void;
 
@@ -53,7 +53,7 @@ export class RPCClient<
         port.start();
     }
 
-    request<M extends Methods>(
+    request<M extends MethodNames>(
         method: M,
         params: Parameters<P[M]>,
         options: { signal?: AbortSignal } = {},
@@ -102,8 +102,8 @@ export class RPCClient<
             if (isResolved || isCanceled) return;
             isCanceled = true;
             cancelRequest();
-            reason = typeof reason === 'string' ? new AbortRequestError(reason) : reason;
-            reason ??= new AbortRequestError(`Request ${id} aborted`);
+            reason = typeof reason === 'string' ? new AbortRPCRequestError(reason) : reason;
+            reason ??= new AbortRPCRequestError(`Request ${id} aborted`);
             resolver.reject(reason);
         }
     }
@@ -115,12 +115,16 @@ export class RPCClient<
      * @param options - Call options including abort signal.
      * @returns A Promise with the method result.
      */
-    call<M extends Methods>(method: M, params: Parameters<P[M]>, options?: { signal?: AbortSignal }): ReturnType<P[M]> {
+    call<M extends MethodNames>(
+        method: M,
+        params: Parameters<P[M]>,
+        options?: { signal?: AbortSignal },
+    ): ReturnType<P[M]> {
         const req = this.request(method, params, options);
         return req.response;
     }
 
-    getApi<M extends Methods>(methods: M[]): Pick<P, M> {
+    getApi<M extends MethodNames>(methods: M[]): Pick<P, M> {
         const apiEntries: [M, P[M]][] = methods.map(
             (method) => [method, ((...params: Parameters<P[M]>) => this.call(method, params)) as P[M]] as const,
         );
@@ -182,7 +186,7 @@ export class RPCClient<
         const pendingRequest = this.#pendingRequests.get(id);
         if (!pendingRequest) return false;
         this.#sendCancelRequest(id);
-        pendingRequest.clientRequest.abort(new CanceledRequestError(`Request ${id} canceled`));
+        pendingRequest.clientRequest.abort(new CanceledRPCRequestError(`Request ${id} canceled`));
         return true;
     }
 

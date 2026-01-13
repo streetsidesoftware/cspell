@@ -1,26 +1,24 @@
-import assert from 'node:assert';
 import { randomUUID } from 'node:crypto';
 import { MessageChannel } from 'node:worker_threads';
 
 import { describe, expect, test, vi } from 'vitest';
 
+import { assert } from './assert.js';
 import { RPCClient } from './client.js';
-import { AbortRequestError } from './errors.js';
+import { AbortRPCRequestError } from './errors.js';
 import type { MessagePortLike } from './messagePort.js';
 import { createRPCError, createRPCResponse, isRPCBaseMessage, isRPCCancel, isRPCRequest } from './modelsHelpers.js';
 
 describe('RPC Client', () => {
     test('new RPCClient', () => {
         const port = createPort();
-        const spyOnAddListener = vi.spyOn(port, 'addListener');
-        const spyOnStart = vi.spyOn(port, 'start');
-        const spyOnClose = vi.spyOn(port, 'close');
+        spyOnPort(port);
         const client = new RPCClient<any>(port);
         expect(client).toBeDefined();
-        expect(spyOnAddListener).toHaveBeenCalledWith('message', expect.any(Function));
-        expect(spyOnStart).toHaveBeenCalled();
+        expect(port.addListener).toHaveBeenCalledWith('message', expect.any(Function));
+        expect(port.start).toHaveBeenCalled();
         client[Symbol.dispose]();
-        expect(spyOnClose).toHaveBeenCalled();
+        expect(port.close).toHaveBeenCalled();
     });
 
     test('sending and receiving a response', async () => {
@@ -138,7 +136,7 @@ describe('RPC Client', () => {
 
         const request = client.request('sum', [2, 3]);
         const p = expect(request.response).rejects.toThrowError(
-            new AbortRequestError('Client is aborting the request'),
+            new AbortRPCRequestError('Client is aborting the request'),
         );
         request.abort('Client is aborting the request');
         await p;
@@ -209,4 +207,11 @@ function createPort(attach?: (port: MessagePortLike) => void): MessagePortLike {
 
 function respondWithDelay<T>(port: MessagePortLike, value: T, delayMs: number = 0): void {
     setTimeout(() => port.postMessage(value), delayMs);
+}
+
+function spyOnPort(port: MessagePortLike) {
+    const spyOnAddListener = vi.spyOn(port, 'addListener');
+    const spyOnStart = vi.spyOn(port, 'start');
+    const spyOnClose = vi.spyOn(port, 'close');
+    return { spyOnAddListener, spyOnStart, spyOnClose };
 }
