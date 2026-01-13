@@ -78,7 +78,7 @@ describe('RPC Server', () => {
         clientPort.postMessage(createRPCRequest(randomUUID(), 'length unknown', []));
         expect((await msgs.next()).value.error).toBeDefined();
 
-        wait(10);
+        await wait(10);
 
         server[Symbol.dispose]();
 
