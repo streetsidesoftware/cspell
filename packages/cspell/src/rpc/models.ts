@@ -17,7 +17,7 @@ export interface RPCBaseMessage {
     /**
      * The type of message being sent.
      */
-    type: 'request' | 'response' | 'error' | 'cancel' | 'stop' | 'ok';
+    type: 'request' | 'response' | 'error' | 'cancel' | 'ok';
 }
 
 /**
@@ -52,14 +52,6 @@ export interface RPCRequestMessage<TParams = unknown> extends RPCBaseMessage {
  */
 export interface RPCCancelRequestMessage extends RPCBaseMessage {
     type: 'cancel';
-}
-
-/**
- * A message to stop the server.
- */
-export interface RPCStopRequestMessage extends Omit<RPCBaseMessage, 'id'> {
-    id?: RequestID;
-    type: 'stop';
 }
 
 /**

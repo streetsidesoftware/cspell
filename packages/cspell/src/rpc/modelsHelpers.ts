@@ -9,7 +9,6 @@ import type {
     RPCOkResponseMessage,
     RPCRequestMessage,
     RPCResponseMessage,
-    RPCStopRequestMessage,
 } from './models.js';
 
 type RPCRequestTypeNames = {
@@ -21,7 +20,6 @@ const RequestTypeNames: RPCRequestTypeNames = {
     response: 'response',
     error: 'error',
     cancel: 'cancel',
-    stop: 'stop',
     ok: 'ok',
 };
 
@@ -57,12 +55,6 @@ export function isRPCResponse<TResult>(response: RPCBaseMessage): response is RP
 
 export function isRPCRequest<P>(message: RPCBaseMessage): message is RPCRequestMessage<P> {
     return message.type === 'request' && (message as RPCRequestMessage<P>).method !== undefined;
-}
-
-export function isRPCStopRequest(message: unknown): message is RPCStopRequestMessage {
-    if (!message || typeof message !== 'object') return false;
-    const m = message as RPCBaseMessage;
-    return m.type === 'stop';
 }
 
 /**

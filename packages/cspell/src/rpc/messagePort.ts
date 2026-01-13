@@ -27,11 +27,11 @@ export interface MessagePortLike {
     /**
      * Closes the port and stops it from receiving messages.
      */
-    close(): void;
+    close?: () => void;
 
     /**
      * Start receiving messages on the port.
      * Note: Some MessagePort implementations may start automatically.
      */
-    start(): void;
+    start?: () => void;
 }

@@ -78,12 +78,11 @@ describe('RPC Server', () => {
         clientPort.postMessage(createRPCRequest(randomUUID(), 'length unknown', []));
         expect((await msgs.next()).value.error).toBeDefined();
 
+        wait(10);
+
         server[Symbol.dispose]();
 
-        // We stopped the server, but that doesn't mean the other port is closed.
-        wait(10);
         expect(msgs.isClosed).toBe(false);
-
         msgs[Symbol.dispose]();
 
         expect(msgs.isStopped).toBe(true);

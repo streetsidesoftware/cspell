@@ -50,7 +50,7 @@ export class RPCClient<
         this.#onMessage = (msg: unknown) => this.#processMessageFromServer(msg);
 
         port.addListener('message', this.#onMessage);
-        port.start();
+        port.start?.();
     }
 
     request<M extends MethodNames>(
@@ -207,7 +207,7 @@ export class RPCClient<
         this.#port.removeListener('message', this.#onMessage);
 
         if (this.#options.closePortOnDispose ?? true) {
-            this.#port.close();
+            this.#port.close?.();
         }
     }
 }

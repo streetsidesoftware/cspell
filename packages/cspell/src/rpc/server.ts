@@ -58,7 +58,7 @@ export class RPCServer<
         this.#onClose = () => this.#cancelAllRequests(new Error('RPC Server port closed'));
         port.removeListener('close', this.#onClose);
         port.addListener('message', this.#onMessage);
-        port.start();
+        port.start?.();
     }
 
     #sendResponse(response: RPCBaseMessage): void {
@@ -150,7 +150,7 @@ export class RPCServer<
         this.#port.removeListener('close', this.#onClose);
 
         if (this.#options.closePortOnDispose ?? true) {
-            this.#port.close();
+            this.#port.close?.();
         }
     }
 }
