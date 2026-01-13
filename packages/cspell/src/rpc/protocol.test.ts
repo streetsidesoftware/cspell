@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
-import type { Protocol, ProtocolMethods } from './models.js';
-import { protocolDefinition, protocolMethods } from './models.js';
+import type { RPCProtocol, RPCProtocolMethods } from './protocol.js';
+import { protocolDefinition, protocolMethods } from './protocol.js';
 
 describe('Models', () => {
     test('Protocol types', () => {
@@ -11,8 +11,8 @@ describe('Models', () => {
             count: number;
         }
 
-        type RPCProtocol = Protocol<RPC>;
-        type RPCProtocolMethods = ProtocolMethods<RPC>;
+        type RPCApiProtocol = RPCProtocol<RPC>;
+        type RPCApiProtocolMethods = RPCProtocolMethods<RPC>;
 
         const methodsSync = {
             sum: (a: number, b: number): number => {
@@ -35,16 +35,16 @@ describe('Models', () => {
             },
         };
 
-        const pAsync: RPCProtocol = protocolDefinition(methodsAsync);
-        const pSync: RPCProtocolMethods = protocolMethods(methodsSync);
+        const pAsync: RPCApiProtocol = protocolDefinition(methodsAsync);
+        const pSync: RPCApiProtocolMethods = protocolMethods(methodsSync);
 
         expect(pAsync).toBeDefined();
         expect(pSync).toBeDefined();
         expect(pAsync).toBe(methodsAsync);
         expect(pSync).toBe(methodsSync);
 
-        type ProtocolMethodsSync = ProtocolMethods<typeof methodsSync>;
-        type ProtocolSync = Protocol<typeof methodsSync>;
+        type ProtocolMethodsSync = RPCProtocolMethods<typeof methodsSync>;
+        type ProtocolSync = RPCProtocol<typeof methodsSync>;
 
         const protocolMethodsSync: ProtocolMethodsSync = protocolMethods(methodsSync);
         const protocolAsync: ProtocolSync = protocolDefinition({
@@ -54,6 +54,5 @@ describe('Models', () => {
 
         expect(protocolMethodsSync).toBeDefined();
         expect(protocolAsync).toBeDefined();
-        // expect(protocolAsync[0]) // Property '0' does not exist on type 'Protocol<...>'
     });
 });

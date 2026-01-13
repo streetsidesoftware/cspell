@@ -1,31 +1,26 @@
 import assert from 'node:assert';
 import { randomUUID } from 'node:crypto';
+import { MessageChannel } from 'node:worker_threads';
 
 import { describe, expect, test, vi } from 'vitest';
 
 import { RPCClient } from './client.js';
 import { AbortRequestError } from './errors.js';
-import {
-    createRPCError,
-    createRPCResponse,
-    isRPCBaseMessage,
-    isRPCCancel,
-    isRPCRequest,
-    type MessagePortLike,
-} from './models.js';
+import type { MessagePortLike } from './messagePort.js';
+import { createRPCError, createRPCResponse, isRPCBaseMessage, isRPCCancel, isRPCRequest } from './modelsHelpers.js';
 
 describe('RPC Client', () => {
     test('new RPCClient', () => {
-        const mockPort = createMockPort();
-        const client = new RPCClient<any>(mockPort);
+        const port = createPort();
+        const spyOnAddListener = vi.spyOn(port, 'addListener');
+        const spyOnStart = vi.spyOn(port, 'start');
+        const spyOnClose = vi.spyOn(port, 'close');
+        const client = new RPCClient<any>(port);
         expect(client).toBeDefined();
-        expect(mockPort.onmessage).toBeDefined();
-
-        expect(mockPort[Symbol.dispose]).toBeDefined();
-        expect(mockPort[Symbol.dispose]).toBeInstanceOf(Function);
-        expect(mockPort[Symbol.dispose]).toHaveBeenCalledTimes(0);
+        expect(spyOnAddListener).toHaveBeenCalledWith('message', expect.any(Function));
+        expect(spyOnStart).toHaveBeenCalled();
         client[Symbol.dispose]();
-        expect(mockPort[Symbol.dispose]).toHaveBeenCalledTimes(1);
+        expect(spyOnClose).toHaveBeenCalled();
     });
 
     test('sending and receiving a response', async () => {
@@ -36,12 +31,11 @@ describe('RPC Client', () => {
 
         type ServerApi = typeof serverApi;
 
-        const mockPort = createMockPort(vi.fn(handleMessage));
+        const mockPort = createPort(attachHandler);
 
         const client = new RPCClient<ServerApi>(mockPort);
 
         expect(client).toBeDefined();
-        assert(mockPort.onmessage);
 
         const result = await client.call('sum', [2, 3]);
         expect(result).toBe(5);
@@ -59,18 +53,23 @@ describe('RPC Client', () => {
             return key in serverApi;
         }
 
-        function handleMessage(msg: unknown) {
-            expect(msg).toBeDefined();
-            expect(isRPCBaseMessage(msg)).toBe(true);
-            assert(isRPCBaseMessage(msg));
-            expect(isRPCRequest(msg)).toBe(true);
-            assert(isRPCRequest(msg));
-            const method = msg.method;
-            if (isKeyOfServerApi(method)) {
-                assert(isRPCRequest<[number, number]>(msg));
-                const result = serverApi[method](...msg.params);
-                const response = createRPCResponse(msg.id, result);
-                respondWithDelay(mockPort, response, 1);
+        function attachHandler(port: MessagePortLike) {
+            port.addListener('message', handleMessage);
+            return;
+
+            function handleMessage(msg: unknown) {
+                expect(msg).toBeDefined();
+                expect(isRPCBaseMessage(msg)).toBe(true);
+                assert(isRPCBaseMessage(msg));
+                expect(isRPCRequest(msg)).toBe(true);
+                assert(isRPCRequest(msg));
+                const method = msg.method;
+                if (isKeyOfServerApi(method)) {
+                    assert(isRPCRequest<[number, number]>(msg));
+                    const result = serverApi[method](...msg.params);
+                    const response = createRPCResponse(msg.id, result);
+                    respondWithDelay(port, response, 1);
+                }
             }
         }
     });
@@ -83,11 +82,10 @@ describe('RPC Client', () => {
 
         type ServerApi = typeof serverApi & { div: (a: number, b: number) => number };
 
-        const mockPort = createMockPort(vi.fn(handleMessage));
+        const mockPort = createPort(attachHandler);
 
         const client = new RPCClient<ServerApi>(mockPort, { randomUUID });
         expect(client).toBeDefined();
-        assert(mockPort.onmessage);
 
         const error = new Error('Method not found');
 
@@ -99,22 +97,27 @@ describe('RPC Client', () => {
             return key in serverApi;
         }
 
-        function handleMessage(msg: unknown) {
-            expect(msg).toBeDefined();
-            expect(isRPCBaseMessage(msg)).toBe(true);
-            assert(isRPCBaseMessage(msg));
-            expect(isRPCRequest(msg)).toBe(true);
-            assert(isRPCRequest(msg));
-            const method = msg.method;
-            if (isKeyOfServerApi(method) && method !== 'div') {
-                assert(isRPCRequest<[number, number]>(msg));
-                const result = serverApi[method](...msg.params);
-                const response = createRPCResponse(msg.id, result);
-                respondWithDelay(mockPort, response, 1);
-                return;
-            }
+        function attachHandler(port: MessagePortLike) {
+            port.addListener('message', handleMessage);
+            return;
 
-            respondWithDelay(mockPort, createRPCError(msg.id, error), 1);
+            function handleMessage(msg: unknown) {
+                expect(msg).toBeDefined();
+                expect(isRPCBaseMessage(msg)).toBe(true);
+                assert(isRPCBaseMessage(msg));
+                expect(isRPCRequest(msg)).toBe(true);
+                assert(isRPCRequest(msg));
+                const method = msg.method;
+                if (isKeyOfServerApi(method) && method !== 'div') {
+                    assert(isRPCRequest<[number, number]>(msg));
+                    const result = serverApi[method](...msg.params);
+                    const response = createRPCResponse(msg.id, result);
+                    respondWithDelay(port, response, 1);
+                    return;
+                }
+
+                respondWithDelay(port, createRPCError(msg.id, error), 1);
+            }
         }
     });
 
@@ -124,12 +127,12 @@ describe('RPC Client', () => {
             mul: (a: number, b: number) => number;
         }
 
-        const mockPort = createMockPort(vi.fn(handleMessage));
+        const port = createPort(attachHandler);
+        const spyOnPostMessage = vi.spyOn(port, 'postMessage');
 
-        const client = new RPCClient<ServerApi>(mockPort, { randomUUID });
+        const client = new RPCClient<ServerApi>(port, { randomUUID });
 
         expect(client).toBeDefined();
-        assert(mockPort.onmessage);
 
         const error = new Error('Error canceled by client');
 
@@ -140,15 +143,19 @@ describe('RPC Client', () => {
         request.abort('Client is aborting the request');
         await p;
 
-        expect(mockPort.postMessage).toHaveBeenCalledWith(expect.objectContaining({ type: 'cancel' }));
+        expect(spyOnPostMessage).toHaveBeenCalledWith(expect.objectContaining({ type: 'cancel' }));
 
-        function handleMessage(msg: unknown) {
-            expect(msg).toBeDefined();
-            expect(isRPCBaseMessage(msg)).toBe(true);
-            assert(isRPCBaseMessage(msg));
+        function attachHandler(mockPort: MessagePortLike) {
+            mockPort.addListener('message', handleMessage);
+            return;
+            function handleMessage(msg: unknown) {
+                expect(msg).toBeDefined();
+                expect(isRPCBaseMessage(msg)).toBe(true);
+                assert(isRPCBaseMessage(msg));
 
-            if (isRPCCancel(msg)) {
-                respondWithDelay(mockPort, createRPCError(msg.id, error), 1);
+                if (isRPCCancel(msg)) {
+                    respondWithDelay(mockPort, createRPCError(msg.id, error), 1);
+                }
             }
         }
     });
@@ -159,12 +166,11 @@ describe('RPC Client', () => {
             mul: (a: number, b: number) => number;
         }
 
-        const mockPort = createMockPort(vi.fn(handleMessage));
+        const mockPort = createPort(attachHandler);
 
         const client = new RPCClient<ServerApi>(mockPort, { randomUUID });
 
         expect(client).toBeDefined();
-        assert(mockPort.onmessage);
 
         const error = new Error('Error canceled by client');
         const errorAbort = new Error('Error aborted by client');
@@ -176,27 +182,31 @@ describe('RPC Client', () => {
 
         await p;
 
-        function handleMessage(msg: unknown) {
-            expect(msg).toBeDefined();
-            expect(isRPCBaseMessage(msg)).toBe(true);
-            assert(isRPCBaseMessage(msg));
+        function attachHandler(port: MessagePortLike) {
+            port.addListener('message', handleMessage);
+            return;
 
-            if (isRPCCancel(msg)) {
-                respondWithDelay(mockPort, createRPCError(msg.id, error), 1);
+            function handleMessage(msg: unknown) {
+                expect(msg).toBeDefined();
+                expect(isRPCBaseMessage(msg)).toBe(true);
+                assert(isRPCBaseMessage(msg));
+
+                if (isRPCCancel(msg)) {
+                    respondWithDelay(port, createRPCError(msg.id, error), 1);
+                }
             }
         }
     });
 });
 
-function createMockPort(postMessageImpl = vi.fn()): MessagePortLike {
-    return {
-        onmessage: undefined,
-        onmessageerror: undefined,
-        postMessage: postMessageImpl,
-        [Symbol.dispose]: vi.fn(),
-    };
+function createPort(attach?: (port: MessagePortLike) => void): MessagePortLike {
+    const { port1, port2 } = new MessageChannel();
+
+    attach?.(port2);
+
+    return port1;
 }
 
 function respondWithDelay<T>(port: MessagePortLike, value: T, delayMs: number = 0): void {
-    setTimeout(() => port.onmessage?.(value), delayMs);
+    setTimeout(() => port.postMessage(value), delayMs);
 }

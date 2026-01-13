@@ -1,10 +1,16 @@
 import { AbortRequestError, CanceledRequestError } from './errors.js';
-import type { MessagePortLike, Protocol, RequestID, RPCClientRequest } from './models.js';
-import { createRPCCancelRequest, createRPCRequest, isRPCBaseMessage, isRPCError, isRPCResponse } from './models.js';
+import type { MessagePortLike } from './messagePort.js';
+import type { RequestID, RPCClientRequest } from './models.js';
+import {
+    createRPCCancelRequest,
+    createRPCRequest,
+    isRPCBaseMessage,
+    isRPCError,
+    isRPCResponse,
+} from './modelsHelpers.js';
+import type { RPCProtocol, RPCProtocolMethodNames } from './protocol.js';
 import { Resolver } from './Resolver.js';
-import type { ANY, StringKeyOf } from './types.js';
-
-type ProtocolMethodNames<P> = StringKeyOf<Protocol<P>>;
+import type { ANY } from './types.js';
 
 interface PendingRequest<TMethod extends string> {
     clientRequest: RPCClientRequest<TMethod, Promise<undefined>>;
@@ -13,12 +19,16 @@ interface PendingRequest<TMethod extends string> {
 
 export interface RPCClientOptions {
     randomUUID?: () => string;
+    closePortOnDispose?: boolean;
 }
 
+/**
+ * The RPC Client.
+ */
 export class RPCClient<
     T,
-    P extends Protocol<T> = Protocol<T>,
-    Methods extends ProtocolMethodNames<P> = ProtocolMethodNames<P>,
+    P extends RPCProtocol<T> = RPCProtocol<T>,
+    Methods extends RPCProtocolMethodNames<P> = RPCProtocolMethodNames<P>,
 > {
     #port: MessagePortLike;
     #count: number = 0;
@@ -27,7 +37,7 @@ export class RPCClient<
     #pendingRequests = new Map<RequestID, PendingRequest<Methods>>();
     #pendingRequestsByPromise = new WeakMap<Promise<unknown>, PendingRequest<Methods>>();
 
-    #onmessage: ((msg: unknown) => void) | undefined;
+    #onMessage: (msg: unknown) => void;
 
     /**
      * Create an RPC Client.
@@ -37,10 +47,10 @@ export class RPCClient<
         this.#port = port;
         this.#options = options;
 
-        // eslint-disable-next-line unicorn/prefer-add-event-listener
-        this.#onmessage = (msg: unknown) => this.#processMessageFromServer(msg);
-        // eslint-disable-next-line unicorn/prefer-add-event-listener
-        port.onmessage = this.#onmessage;
+        this.#onMessage = (msg: unknown) => this.#processMessageFromServer(msg);
+
+        port.addListener('message', this.#onMessage);
+        port.start();
     }
 
     request<M extends Methods>(
@@ -189,8 +199,11 @@ export class RPCClient<
 
     [Symbol.dispose](): void {
         this.cancelAllRequests(new Error('RPC Client disposed'));
-        // eslint-disable-next-line unicorn/prefer-add-event-listener
-        this.#port.onmessage = undefined;
-        this.#port[Symbol.dispose]?.();
+
+        this.#port.removeListener('message', this.#onMessage);
+
+        if (this.#options.closePortOnDispose ?? true) {
+            this.#port.close();
+        }
     }
 }
