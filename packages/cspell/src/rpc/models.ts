@@ -3,10 +3,13 @@
  */
 export type RequestID = number | string;
 
+export type ResponseCode = 0 | 200 | 400 | 500 | 503;
+
 /**
  * A base RPC Message.
  */
 export interface RPCBaseMessage {
+    sig: 'RPC0';
     /**
      * A Unique identifier for the request/response.
      */
@@ -14,7 +17,25 @@ export interface RPCBaseMessage {
     /**
      * The type of message being sent.
      */
-    type: 'request' | 'response' | 'error' | 'cancel' | 'stop';
+    type: 'request' | 'response' | 'error' | 'cancel' | 'stop' | 'ok';
+}
+
+/**
+ * A message to check if the server is running.
+ */
+export interface RPCOkRequestMessage extends RPCBaseMessage {
+    type: 'ok';
+}
+
+export interface RPCResponseBase extends RPCBaseMessage {
+    code: ResponseCode;
+}
+
+/**
+ * A message to check if the server is running.
+ */
+export interface RPCOkResponseMessage extends RPCResponseBase {
+    type: 'ok';
 }
 
 /**
@@ -41,23 +62,29 @@ export interface RPCStopRequestMessage extends Omit<RPCBaseMessage, 'id'> {
     type: 'stop';
 }
 
-export interface RPCResponseMessage<TResult = unknown> extends RPCBaseMessage {
+/**
+ * The response message for a request from the server.
+ */
+export interface RPCResponseMessage<TResult = unknown> extends RPCResponseBase {
     type: 'response';
     result: TResult;
 }
 
+/**
+ * The error information for a failed request.
+ */
 export interface RequestError {
     message: string;
-    data?: unknown;
     cause?: unknown;
 }
 
 export type RPCError = RequestError | Error;
 
-export interface RPCErrorMessage extends RPCBaseMessage {
+export interface RPCErrorMessage extends RPCResponseBase {
     id: RequestID;
     type: 'error';
     error: RPCError;
+    data?: unknown;
 }
 
 export interface RPCClientRequest<Method extends string, TResult extends Promise<unknown>> {

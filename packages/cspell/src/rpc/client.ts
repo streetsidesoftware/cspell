@@ -5,7 +5,7 @@ import {
     createRPCCancelRequest,
     createRPCRequest,
     isRPCBaseMessage,
-    isRPCError,
+    isRPCErrorResponse,
     isRPCResponse,
 } from './modelsHelpers.js';
 import type { RPCProtocol, RPCProtocolMethodNames } from './protocol.js';
@@ -168,7 +168,7 @@ export class RPCClient<
         const pendingRequest = this.#pendingRequests.get(msg.id);
         if (!pendingRequest) return;
 
-        if (isRPCError(msg)) {
+        if (isRPCErrorResponse(msg)) {
             this.#pendingRequests.delete(id);
             this.#pendingRequestsByPromise.delete(pendingRequest.clientRequest.response);
             pendingRequest.resolver.reject(msg.error);

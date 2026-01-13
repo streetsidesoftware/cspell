@@ -28,3 +28,13 @@ export class UnknownMethodRPCRequestError extends RPCRequestError {
         this.method = method;
     }
 }
+
+export class MalformedRPCRequestError extends RPCRequestError {
+    request?: unknown;
+
+    constructor(message: string, request?: unknown) {
+        super(message);
+        this.name = 'MalformedRPCRequestError';
+        this.request = request;
+    }
+}

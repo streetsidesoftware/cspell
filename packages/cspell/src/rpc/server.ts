@@ -1,12 +1,25 @@
 import { assert } from './assert.js';
-import { UnknownMethodRPCRequestError } from './errors.js';
+import { MalformedRPCRequestError, UnknownMethodRPCRequestError } from './errors.js';
 import type { MessagePortLike } from './messagePort.js';
 import type { RPCBaseMessage, RPCRequestMessage } from './models.js';
-import { createRPCError, createRPCResponse, isRPCBaseMessage, isRPCCancel, isRPCRequest } from './modelsHelpers.js';
+import {
+    createRPCError,
+    createRPCOkResponse,
+    createRPCResponse,
+    isRPCBaseMessage,
+    isRPCCancelRequest,
+    isRPCOkRequest,
+    isRPCRequest,
+} from './modelsHelpers.js';
 import type { RPCProtocol, RPCProtocolMethodNames } from './protocol.js';
 
 export interface RPCServerOptions {
     closePortOnDispose?: boolean;
+    /**
+     * If true, the server will respond with an error message for unknown or malformed requests.
+     * @default false
+     */
+    returnMalformedRPCRequestError?: boolean;
 }
 
 interface PendingRequest {
@@ -34,7 +47,11 @@ export class RPCServer<
         this.#options = options;
         this.#methods = methods as unknown as P;
 
-        this.#allowedMethods = new Set(Object.keys(this.#methods) as MethodsNames[]);
+        this.#allowedMethods = new Set(
+            Object.keys(this.#methods).filter(
+                (k) => typeof this.#methods[k as MethodsNames] === 'function',
+            ) as MethodsNames[],
+        );
 
         this.#pendingRequests = new Map();
         this.#onMessage = (msg: unknown) => this.#handleMessage(msg);
@@ -51,16 +68,27 @@ export class RPCServer<
 
     #handleMessage(msg: unknown): void {
         if (!isRPCBaseMessage(msg)) {
+            if (this.#options.returnMalformedRPCRequestError) {
+                this.#sendResponse(createRPCError(0, new MalformedRPCRequestError('Malformed RPC request', msg)));
+            }
             // Not a valid RPC message; ignore.
             return;
         }
-        if (isRPCCancel(msg)) {
+        if (isRPCCancelRequest(msg)) {
             // For now just remove it from pending requests.
             this.#pendingRequests.delete(msg.id);
             // later, implement aborting the request if possible.
             return;
         }
+        if (isRPCOkRequest(msg)) {
+            this.#sendResponse(createRPCOkResponse(msg.id));
+            return;
+        }
+
         if (!isRPCRequest(msg)) {
+            if (this.#options.returnMalformedRPCRequestError) {
+                this.#sendResponse(createRPCError(msg.id, new MalformedRPCRequestError('Malformed RPC request', msg)));
+            }
             // Not a request; ignore.
             return;
         }

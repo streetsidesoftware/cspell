@@ -7,7 +7,13 @@ import { assert } from './assert.js';
 import { RPCClient } from './client.js';
 import { AbortRPCRequestError } from './errors.js';
 import type { MessagePortLike } from './messagePort.js';
-import { createRPCError, createRPCResponse, isRPCBaseMessage, isRPCCancel, isRPCRequest } from './modelsHelpers.js';
+import {
+    createRPCError,
+    createRPCResponse,
+    isRPCBaseMessage,
+    isRPCCancelRequest,
+    isRPCRequest,
+} from './modelsHelpers.js';
 
 describe('RPC Client', () => {
     test('new RPCClient', () => {
@@ -151,7 +157,7 @@ describe('RPC Client', () => {
                 expect(isRPCBaseMessage(msg)).toBe(true);
                 assert(isRPCBaseMessage(msg));
 
-                if (isRPCCancel(msg)) {
+                if (isRPCCancelRequest(msg)) {
                     respondWithDelay(mockPort, createRPCError(msg.id, error), 1);
                 }
             }
@@ -189,7 +195,7 @@ describe('RPC Client', () => {
                 expect(isRPCBaseMessage(msg)).toBe(true);
                 assert(isRPCBaseMessage(msg));
 
-                if (isRPCCancel(msg)) {
+                if (isRPCCancelRequest(msg)) {
                     respondWithDelay(port, createRPCError(msg.id, error), 1);
                 }
             }
