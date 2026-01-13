@@ -56,7 +56,7 @@ export class RPCServer<
         this.#pendingRequests = new Map();
         this.#onMessage = (msg: unknown) => this.#handleMessage(msg);
         this.#onClose = () => this.#cancelAllRequests(new Error('RPC Server port closed'));
-        port.removeListener('close', this.#onClose);
+        port.addListener('close', this.#onClose);
         port.addListener('message', this.#onMessage);
         port.start?.();
     }
