@@ -1,0 +1,27 @@
+---
+title: 'Available Languages'
+categories: docs
+# parent: Docs
+sidebar_position: 5
+sidebar_label: Available Languages
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import { programmingLangDefinitions } from "@cspell/filetypes";
+
+# Available Languages & Triggers
+
+This page lists all supported programming languages and file types with their corresponding file extensions that triggers
+the given language check in CSpell.
+
+## Programming Languages
+
+{programmingLangDefinitions.map((lang) => (
+  <div key={lang.id} style={{ marginBottom: '2rem' }}>
+    <h3>{lang.id}</h3>
+    {lang.description && <p>{lang.description}</p>}
+    <h4>File Extensions:</h4>
+    <pre><code>{[...lang.extensions, ...(lang.filenames || [])].join(', ') || 'No specific extensions'}</code></pre>
+  </div>
+))}
