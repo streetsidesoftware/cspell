@@ -31,6 +31,7 @@ import {
 } from '../Settings/index.js';
 import type { DirectiveIssue } from '../Settings/InDocSettings.js';
 import { validateInDocumentSettings } from '../Settings/InDocSettings.js';
+import { cloneSettingsForExport } from '../Settings/sanitizeSettings.js';
 import type { SpellingDictionaryCollection, SuggestionResult } from '../SpellingDictionary/index.js';
 import { getDictionaryInternal } from '../SpellingDictionary/index.js';
 import type { WordSuggestion } from '../suggestions.js';
@@ -90,6 +91,7 @@ export class DocumentValidator {
     readonly options: DocumentValidatorOptions;
     readonly perfTiming: PerfTimings = {};
     public skipValidation: boolean;
+    #sharableSettings: CSpellSettingsWithSourceTrace = {};
 
     static async create(
         doc: TextDocument,
@@ -215,6 +217,9 @@ export class DocumentValidator {
         this._ready = true;
         this._preparationTime = timer.elapsed;
         this.perfTiming.prepTime = this._preparationTime;
+
+        this.#sharableSettings = cloneSettingsForExport(finalSettings);
+
         stopMeasure();
     }
 
@@ -506,6 +511,10 @@ export class DocumentValidator {
     public shouldCheckDocument(): boolean {
         assert(this._preparations, ERROR_NOT_PREPARED);
         return this._preparations.shouldCheck;
+    }
+
+    getSettingsUsed(): CSpellSettingsWithSourceTrace {
+        return this.#sharableSettings;
     }
 
     /**

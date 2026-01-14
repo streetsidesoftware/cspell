@@ -162,14 +162,14 @@ async function spellCheckFullDocument(
     const prep = docValidator._getPreparations();
 
     if (docValidator.errors.length) {
+        const settingsUsed =
+            docValidator.getSettingsUsed() ||
+            (satisfiesCSpellConfigFile(settingsOrConfigFile) ? settingsOrConfigFile.settings : settingsOrConfigFile);
+
         return {
             document,
             options,
-            settingsUsed:
-                prep?.localConfig ||
-                (satisfiesCSpellConfigFile(settingsOrConfigFile)
-                    ? settingsOrConfigFile.settings
-                    : settingsOrConfigFile),
+            settingsUsed,
             localConfigFilepath: prep?.localConfigFilepath,
             issues: [],
             checked: false,
@@ -187,7 +187,7 @@ async function spellCheckFullDocument(
     const result: SpellCheckFileResult = {
         document,
         options,
-        settingsUsed: docValidator.getFinalizedDocSettings(),
+        settingsUsed: docValidator.getSettingsUsed(),
         localConfigFilepath: prep?.localConfigFilepath,
         issues,
         checked: docValidator.shouldCheckDocument(),
