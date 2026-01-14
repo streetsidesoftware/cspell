@@ -1,27 +1,36 @@
 ---
-title: 'Available Languages'
+title: 'Programming language dictionaries'
 categories: docs
 # parent: Docs
 sidebar_position: 5
-sidebar_label: Available Languages
+sidebar_label: Programming language dictionaries
 ---
-
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import { programmingLangDefinitions } from "@cspell/filetypes";
 
-# Available Languages & Triggers
+# Programming language dictionaries
 
-This page lists all supported programming languages and file types with their corresponding file extensions that triggers
-the given language check in CSpell.
+This page lists all supported programming languages and file types with their corresponding file extensions
+that triggers a language check in CSpell.
 
 ## Programming Languages
 
 {programmingLangDefinitions.map((lang) => (
   <div key={lang.id} style={{ marginBottom: '2rem' }}>
-    <h3>{lang.id}</h3>
+    <h2>{lang.id}</h2>
     {lang.description && <p>{lang.description}</p>}
-    <h4>File Extensions:</h4>
-    <pre><code>{[...lang.extensions, ...(lang.filenames || [])].join(', ') || 'No specific extensions'}</code></pre>
+    {(lang.filenames || []).length > 0 && (
+      <>
+        <h6>Filenames:</h6>
+        <pre><code>{(lang.filenames || []).join('\n') || 'No filename specified'}</code></pre>
+      </>
+    )}
+    {(lang.extensions || []).length > 0 && (
+        <>
+            <h6>File Extensions:</h6>
+            <pre><code>{(lang.extensions || []).join('\n') || 'No file extension specified'}</code></pre>
+        </>
+    )}
   </div>
 ))}
