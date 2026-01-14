@@ -10,20 +10,12 @@ import type {
 } from '@cspell/cspell-types';
 
 import type { CSpellSettingsInternal, CSpellSettingsInternalFinalized } from '../Models/CSpellSettingsInternalDef.js';
-import type { Handlers } from './clone.js';
-import { cloneInto } from './clone.js';
+import type { Handlers } from '../util/clone.js';
+import { cloneInto, copy0, copy1, skip } from '../util/clone.js';
 
 type CloneableSettings = CSpellSettingsWithSourceTrace | CSpellSettingsInternal | CSpellSettingsInternalFinalized;
 
 type SettingsKeys = keyof CSpellSettingsWithSourceTrace;
-
-type OnlySettingsThatExtend<T> = {
-    [key in SettingsKeys]: CSpellSettingsWithSourceTrace[key] extends T ? CSpellSettingsWithSourceTrace[key] : never;
-};
-
-type OnlyRecords = OnlySettingsThatExtend<object>;
-
-type OnlyRecordsKeys = keyof OnlyRecords;
 
 type CSpellSettingsHandlers = Handlers<CSpellSettingsWithSourceTrace>;
 
@@ -36,7 +28,7 @@ export function cloneSettingsForExport(settings: Readonly<CloneableSettings>): C
     const result: CSpellSettingsWithSourceTrace = {};
     const handlers = getHandlers();
     cloneInto(settings, result, handlers);
-    return settings;
+    return result;
 }
 
 const handlers: CSpellSettingsHandlers = {
@@ -48,58 +40,58 @@ const handlers: CSpellSettingsHandlers = {
     id: skip,
     version: skip,
 
-    allowCompoundWords: copySetting,
+    allowCompoundWords: copy1,
     cache: skip,
-    caseSensitive: copySetting,
+    caseSensitive: copy1,
     description: skip,
-    dictionaries: copySetting,
+    dictionaries: copy1,
     dictionaryDefinitions: copyDictionaryDefinitions,
-    enabled: copySetting,
-    enabledLanguageIds: copySetting,
-    enableFiletypes: copySetting,
-    enabledFileTypes: copyRecord,
-    enableGlobDot: copySetting,
-    failFast: copySetting,
+    enabled: copy1,
+    enabledLanguageIds: copy1,
+    enableFiletypes: copy1,
+    enabledFileTypes: copy1,
+    enableGlobDot: copy1,
+    failFast: copy1,
     features: skip,
     files: copyGlobsSettingsFields,
-    flagWords: copySetting,
-    gitignoreRoot: copySetting,
-    globRoot: copySetting,
+    flagWords: copy1,
+    gitignoreRoot: copy1,
+    globRoot: copy1,
     ignorePaths: copyGlobsSettingsFields,
-    ignoreRegExpList: copySetting,
-    ignoreWords: copySetting,
-    ignoreRandomStrings: copySetting,
+    ignoreRegExpList: copy1,
+    ignoreWords: copy1,
+    ignoreRandomStrings: copy1,
     import: skip,
-    includeRegExpList: copySetting,
-    language: copySetting,
-    languageId: copySetting,
+    includeRegExpList: copy1,
+    language: copy1,
+    languageId: copy1,
     languageSettings: copyLanguageSettings,
-    loadDefaultConfiguration: copySetting,
-    maxDuplicateProblems: copySetting,
-    maxFileSize: copySetting,
-    maxNumberOfProblems: copySetting,
-    minWordLength: copySetting,
-    minRandomLength: copySetting,
+    loadDefaultConfiguration: copy1,
+    maxDuplicateProblems: copy1,
+    maxFileSize: copy1,
+    maxNumberOfProblems: copy1,
+    minWordLength: copy1,
+    minRandomLength: copy1,
     name: skip,
-    noConfigSearch: copySetting,
-    noSuggestDictionaries: copySetting,
-    numSuggestions: copySetting,
+    noConfigSearch: copy1,
+    noSuggestDictionaries: copy1,
+    numSuggestions: copy1,
     overrides: copyOverrides,
     patterns: copyPatternsField,
     pnpFiles: skip,
     readonly: skip,
     reporters: skip,
-    showStatus: copySetting,
-    spellCheckDelayMs: copySetting,
-    suggestionNumChanges: copySetting,
-    suggestionsTimeout: copySetting,
-    suggestWords: copySetting,
-    unknownWords: copySetting,
-    useGitignore: copySetting,
+    showStatus: copy1,
+    spellCheckDelayMs: copy1,
+    suggestionNumChanges: copy1,
+    suggestionsTimeout: copy1,
+    suggestWords: copy1,
+    unknownWords: copy1,
+    useGitignore: copy1,
     usePnP: skip,
-    userWords: copySetting,
-    validateDirectives: copySetting,
-    words: copySetting,
+    userWords: copy1,
+    validateDirectives: copy1,
+    words: copy1,
 
     // Experimental
     parser: skip,
@@ -107,57 +99,6 @@ const handlers: CSpellSettingsHandlers = {
 
 function getHandlers(): CSpellSettingsHandlers {
     return handlers;
-}
-
-function copySetting<T, K extends keyof T>(src: Readonly<T>, dst: T, key: K): void {
-    if (src[key] === undefined) return;
-    const value: T[K] | undefined = src[key];
-    if (value === undefined) return;
-
-    if (Array.isArray(value)) {
-        dst[key] = [...value] as T[K];
-        return;
-    }
-
-    if (value instanceof Set) {
-        dst[key] = new Set(value) as T[K];
-        return;
-    }
-
-    if (value instanceof Map) {
-        dst[key] = new Set(value) as T[K];
-        return;
-    }
-
-    if (value instanceof RegExp) {
-        dst[key] = value;
-        return;
-    }
-
-    if (typeof value === 'object') {
-        dst[key] = { ...value } as T[K];
-    }
-
-    dst[key] = value;
-}
-
-function copyRecord<K extends OnlyRecordsKeys>(
-    src: Readonly<CloneableSettings>,
-    dst: CSpellSettingsWithSourceTrace,
-    key: K,
-): void {
-    const value = src[key];
-    if (value && typeof value === 'object') {
-        dst[key] = { ...value };
-    }
-}
-
-function skip(
-    _src: Readonly<CloneableSettings>,
-    _dst: CSpellSettingsWithSourceTrace,
-    _key: keyof CSpellSettingsWithSourceTrace,
-): void {
-    // do nothing
 }
 
 function copyImportRefField(
@@ -182,7 +123,7 @@ function copyImportsField(
 
 function copyImportFileRef(src: ImportFileRef): ImportFileRef {
     const ref: ImportFileRef = { filename: src.filename };
-    cpy(src, ref, 'error');
+    copy0(src, ref, 'error');
     return ref;
 }
 
@@ -282,23 +223,23 @@ const LanguageSettingsHandlers: Handlers<LanguageSetting> = {
     id: cpy,
     locale: cpy,
     local: cpy,
-    allowCompoundWords: copySetting,
-    caseSensitive: copySetting,
+    allowCompoundWords: copy1,
+    caseSensitive: copy1,
     description: skip,
-    dictionaries: copySetting,
+    dictionaries: copy1,
     dictionaryDefinitions: copyDictionaryDefinitions,
-    enabled: copySetting,
-    flagWords: copySetting,
-    ignoreRegExpList: copySetting,
-    ignoreWords: copySetting,
-    includeRegExpList: copySetting,
-    languageId: copySetting,
+    enabled: copy1,
+    flagWords: copy1,
+    ignoreRegExpList: copy1,
+    ignoreWords: copy1,
+    includeRegExpList: copy1,
+    languageId: copy1,
     name: skip,
-    noSuggestDictionaries: copySetting,
+    noSuggestDictionaries: copy1,
     patterns: copyPatternsField,
-    suggestWords: copySetting,
-    unknownWords: copySetting,
-    words: copySetting,
+    suggestWords: copy1,
+    unknownWords: copy1,
+    words: copy1,
 
     // Experimental
     parser: skip,
@@ -310,7 +251,7 @@ function copyLanguageSetting(src: Readonly<LanguageSetting>, dst: LanguageSettin
 
 const RegExpPatternDefinitionHandlers: Handlers<RegExpPatternDefinition> = {
     name: cpy,
-    pattern: copySetting,
+    pattern: copy1,
     description: cpy,
 };
 
@@ -332,42 +273,42 @@ function copyRegExpPatternDefinition(src: Readonly<RegExpPatternDefinition>, dst
 }
 
 const OverridesHandlers: Handlers<OverrideSettings> = {
-    id: copySetting,
-    allowCompoundWords: copySetting,
-    caseSensitive: copySetting,
-    description: copySetting,
-    dictionaries: copySetting,
+    id: copy1,
+    allowCompoundWords: copy1,
+    caseSensitive: copy1,
+    description: copy1,
+    dictionaries: copy1,
     dictionaryDefinitions: copyDictionaryDefinitions,
-    enabled: copySetting,
-    enabledFileTypes: copyRecord,
-    enabledLanguageIds: copySetting,
-    enableFiletypes: copySetting,
+    enabled: copy1,
+    enabledFileTypes: copy1,
+    enabledLanguageIds: copy1,
+    enableFiletypes: copy1,
     filename: copyGlobsOverrideFields,
-    flagWords: copySetting,
-    ignoreRandomStrings: copySetting,
-    ignoreRegExpList: copySetting,
-    ignoreWords: copySetting,
-    includeRegExpList: copySetting,
-    language: copySetting,
-    languageId: copySetting,
+    flagWords: copy1,
+    ignoreRandomStrings: copy1,
+    ignoreRegExpList: copy1,
+    ignoreWords: copy1,
+    includeRegExpList: copy1,
+    language: copy1,
+    languageId: copy1,
     languageSettings: copyLanguageSettings,
-    loadDefaultConfiguration: copySetting,
-    maxDuplicateProblems: copySetting,
-    maxFileSize: copySetting,
-    maxNumberOfProblems: copySetting,
-    minRandomLength: copySetting,
-    minWordLength: copySetting,
+    loadDefaultConfiguration: copy1,
+    maxDuplicateProblems: copy1,
+    maxFileSize: copy1,
+    maxNumberOfProblems: copy1,
+    minRandomLength: copy1,
+    minWordLength: copy1,
     name: skip,
-    noSuggestDictionaries: copySetting,
-    numSuggestions: copySetting,
+    noSuggestDictionaries: copy1,
+    numSuggestions: copy1,
     patterns: copyPatternsField,
     pnpFiles: skip,
-    suggestionNumChanges: copySetting,
-    suggestionsTimeout: copySetting,
-    suggestWords: copySetting,
-    unknownWords: copySetting,
+    suggestionNumChanges: copy1,
+    suggestionsTimeout: copy1,
+    suggestWords: copy1,
+    unknownWords: copy1,
     usePnP: skip,
-    words: copySetting,
+    words: copy1,
 
     parser: skip,
 };

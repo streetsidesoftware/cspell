@@ -37,9 +37,11 @@ import { getDictionaryInternal } from '../SpellingDictionary/index.js';
 import type { WordSuggestion } from '../suggestions.js';
 import { calcSuggestionAdjustedToToMatchCase } from '../suggestions.js';
 import { catchPromiseError, toError } from '../util/errors.js';
+import { memorizeLastCall } from '../util/memorizeLastCall.js';
 import { AutoCache } from '../util/simpleCache.js';
 import type { MatchRange } from '../util/TextRange.js';
 import { uriToFilePath } from '../util/Uri.js';
+import { cleanValidationIssue } from './cleanValidationIssue.js';
 import { defaultMaxDuplicateProblems, defaultMaxNumberOfProblems } from './defaultConstants.js';
 import { determineTextDocumentSettings } from './determineTextDocumentSettings.js';
 import type { TextValidator } from './lineValidatorFactory.js';
@@ -91,7 +93,6 @@ export class DocumentValidator {
     readonly options: DocumentValidatorOptions;
     readonly perfTiming: PerfTimings = {};
     public skipValidation: boolean;
-    #sharableSettings: CSpellSettingsWithSourceTrace = {};
 
     static async create(
         doc: TextDocument,
@@ -217,8 +218,6 @@ export class DocumentValidator {
         this._ready = true;
         this._preparationTime = timer.elapsed;
         this.perfTiming.prepTime = this._preparationTime;
-
-        this.#sharableSettings = cloneSettingsForExport(finalSettings);
 
         stopMeasure();
     }
@@ -355,7 +354,9 @@ export class DocumentValidator {
                 forceCheck || this.shouldCheckDocument() ? [...this._checkParsedText(this._parse())] : [];
             const directiveIssues = this.checkDocumentDirectives();
             // console.log('Stats: %o', this._preparations.textValidator.lineValidator.dict.stats());
-            const allIssues = [...spellingIssues, ...directiveIssues].sort((a, b) => a.offset - b.offset);
+            const allIssues = [...spellingIssues, ...directiveIssues]
+                .map(cleanValidationIssue)
+                .sort((a, b) => a.offset - b.offset);
             return allIssues;
         } finally {
             timerDone();
@@ -514,7 +515,7 @@ export class DocumentValidator {
     }
 
     getSettingsUsed(): CSpellSettingsWithSourceTrace {
-        return this.#sharableSettings;
+        return sanitizeSettingsForExport(this._preparations?.finalSettings);
     }
 
     /**
@@ -523,6 +524,14 @@ export class DocumentValidator {
     public _getPreparations(): Preparations | undefined {
         return this._preparations;
     }
+}
+
+const _cloneSettingsForExport = memorizeLastCall(cloneSettingsForExport);
+
+function sanitizeSettingsForExport(
+    settings: CSpellSettingsInternalFinalized | undefined,
+): CSpellSettingsWithSourceTrace {
+    return settings ? _cloneSettingsForExport(settings) : {};
 }
 
 function sanitizeSuggestion(sug: WordSuggestion): ExtendedSuggestion {
