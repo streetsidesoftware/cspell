@@ -1,24 +1,71 @@
-import { Worker } from 'node:worker_threads';
+import { Buffer } from 'node:buffer';
+import { MessageChannel, Worker } from 'node:worker_threads';
 
-import { RPCClient } from '../rpc/index.js';
-import type { CSpellWorkerAPI } from './api.js';
+import { type CSpellRPCApi, CSpellRPCClient } from 'cspell-lib';
+
+export type { CSpellRPCApi as CSpellWorkerAPI } from 'cspell-lib';
+
+const workerCode = /* JavaScript */ `
+import { parentPort } from 'node:worker_threads';
+
+import { createCSpellRPCServer } from 'cspell-lib';
+
+if (parentPort) {
+    createCSpellRPCServer(parentPort);
+}
+`;
 
 export class CSpellWorker {
-    #client: RPCClient<CSpellWorkerAPI>;
+    #client: CSpellRPCClient;
     #worker: Worker;
     #messageChannel: MessageChannel;
+    #isTerminated: boolean = false;
 
     constructor() {
-        const urlSelf = new URL(import.meta.url);
-        const extension = urlSelf.pathname.endsWith('.ts') ? '.ts' : '.js';
-        const workerFile = './cspellWorkerThread' + extension;
-        const urlWorker = new URL(import.meta.resolve(workerFile));
+        this.#isTerminated = false;
+        const base64 = Buffer.from(workerCode).toString('base64');
         this.#messageChannel = new MessageChannel();
-        this.#worker = new Worker(urlWorker, {});
-        this.#client = new RPCClient<CSpellWorkerAPI>(worker);
+        const { port1, port2 } = this.#messageChannel;
+
+        const worker = new Worker(`data:text/javascript;base64,${base64}`, {
+            workerData: { port: port1 },
+            transferList: [port1],
+        });
+        this.#worker = worker;
+        this.#client = new CSpellRPCClient(port2);
+
+        this.#worker.once('exit', () => this.terminate());
     }
 
-    get api(): CSpellWorkerAPI {
-        return this.#client.getApi(['spellCheckDocument']);
+    get api(): CSpellRPCApi {
+        return this.#client.getApi();
+    }
+
+    terminate(): Promise<void> {
+        return this.#terminate();
+    }
+
+    /**
+     * This not NOT async on purpose to ensure that #isTerminated is set immediately.
+     * @returns Promise<void> that resolves when the worker has exited.
+     */
+    #terminate(): Promise<void> {
+        try {
+            if (this.#isTerminated) return Promise.resolve();
+            this.#isTerminated = true;
+            this.#client[Symbol.dispose]();
+            this.#messageChannel.port2.close();
+            return this.#worker
+                .terminate()
+                .then(() => {})
+                .catch(() => {});
+        } catch {
+            // Ignore errors on terminate
+            return Promise.resolve();
+        }
+    }
+
+    [Symbol.asyncDispose](): Promise<void> {
+        return this.terminate();
     }
 }

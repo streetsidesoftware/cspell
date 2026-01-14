@@ -16,131 +16,123 @@ declare function clearCachedFiles(): Promise<void>;
 */
 declare function clearCaches(): void;
 //#endregion
-//#region src/lib/util/IUri.d.ts
-interface Uri {
-  readonly scheme: string;
-  readonly path: string;
-  readonly authority?: string;
-  readonly fragment?: string;
-  readonly query?: string;
-}
-type DocumentUri = Uri | URL | string;
-//#endregion
-//#region src/lib/Document/Document.d.ts
-interface Document {
-  uri: UriString;
-  text?: string;
-  languageId?: string;
-  locale?: string;
-}
-type UriString = string;
-interface DocumentWithText extends Document {
-  text: string;
-}
-//#endregion
-//#region src/lib/Document/isBinaryDoc.d.ts
-declare function isBinaryFile(filename: Uri | URL | string, languageId?: string | string[], text?: string): boolean;
-//#endregion
-//#region src/lib/Models/TextDocument.d.ts
-interface Position {
+//#region src/rpc/messagePort.d.ts
+interface MessagePortLike {
   /**
-  * The line number (zero-based).
+  * Sends a message to the port.
+  * @param message - anything supported by postMessage
   */
-  line: number;
+  postMessage(message: unknown): void;
   /**
-  * The zero based offset from the beginning of the line.
-  * Note: surrogate pairs are counted as two characters.
+  * Sets a function to handle the 'close' event.
   */
-  character: number;
+  addListener(event: "close", listener: (ev: Event) => void): this;
+  /**
+  * Sets a function to handle messages received on the port.
+  * Set to undefined to remove the handler.
+  */
+  addListener(event: "message", listener: (value: unknown) => void): this;
+  /**
+  * Sets a function to handle message errors received on the port.
+  * Set to undefined to remove the handler.
+  */
+  addListener(event: "messageerror", listener: (error: Error) => void): this;
+  removeListener(event: "close", listener: (ev: Event) => void, options?: EventListenerOptions): this;
+  removeListener(event: "message", listener: (value: unknown) => void, options?: EventListenerOptions): this;
+  removeListener(event: "messageerror", listener: (error: Error) => void, options?: EventListenerOptions): this;
+  /**
+  * Closes the port and stops it from receiving messages.
+  */
+  close?: () => void;
+  /**
+  * Start receiving messages on the port.
+  * Note: Some MessagePort implementations may start automatically.
+  */
+  start?: () => void;
+}
+//#endregion
+//#region src/rpc/models.d.ts
+/**
+* A Unique identifier for the request/response.
+*/
+type RequestID = number | string;
+interface RPCClientRequest<Method extends string, TResult extends Promise<unknown>> {
+  readonly id: RequestID;
+  readonly method: Method;
+  readonly response: TResult;
+  readonly isResolved: boolean;
+  readonly isCanceled: boolean;
+  /** calling abort will cancel the request if it has not already been resolved. */
+  abort: AbortController["abort"];
+}
+//#endregion
+//#region src/rpc/types.d.ts
+type ANY = any;
+type OnlyFunctionsOrNever<T> = T extends ((...args: ANY[]) => ANY) ? T : never;
+type ToReturnPromise<T extends (...args: ANY) => ANY> = T extends ((...args: infer A) => infer R) ? R extends Promise<ANY> ? (...args: A) => R : (...args: A) => Promise<R> : ANY;
+type StringKeyOf<T> = Exclude<Extract<keyof T, string>, number | symbol>;
+//#endregion
+//#region src/rpc/protocol.d.ts
+type RPCProtocol<T> = { [K in StringKeyOf<T> as T[K] extends OnlyFunctionsOrNever<T[K]> ? K : never]: ToReturnPromise<OnlyFunctionsOrNever<T[K]>> };
+type RPCProtocolMethodNames<P$1> = StringKeyOf<RPCProtocol<P$1>>;
+//#endregion
+//#region src/rpc/client.d.ts
+interface RPCClientOptions {
+  randomUUID?: () => string;
+  closePortOnDispose?: boolean;
 }
 /**
-* Range offset tuple.
+* The RPC Client.
 */
-type SimpleRange$1 = [start: number, end: number];
-interface TextDocumentLine {
-  readonly text: string;
-  readonly offset: number;
-  readonly position: Position;
+declare class RPCClient<T, P$1 extends RPCProtocol<T> = RPCProtocol<T>, MethodNames extends RPCProtocolMethodNames<P$1> = RPCProtocolMethodNames<P$1>> {
+  #private;
+  /**
+  * Create an RPC Client.
+  * @param port - The port used to send and receive RPC messages.
+  */
+  constructor(port: MessagePortLike, options?: RPCClientOptions);
+  request<M extends MethodNames>(method: M, params: Parameters<P$1[M]>, options?: {
+    signal?: AbortSignal;
+  }): RPCClientRequest<M, ReturnType<P$1[M]>>;
+  /**
+  * Call a method on the RPC server.
+  * @param method - The method name.
+  * @param params - The method parameters.
+  * @param options - Call options including abort signal.
+  * @returns A Promise with the method result.
+  */
+  call<M extends MethodNames>(method: M, params: Parameters<P$1[M]>, options?: {
+    signal?: AbortSignal;
+  }): ReturnType<P$1[M]>;
+  getApi<M extends MethodNames>(methods: M[]): Pick<P$1, M>;
+  /**
+  * Abort a pending request by its promise.
+  *
+  * Note: the request promise will be rejected with an AbortRequestError.
+  * @param promise - The promise returned by the request.
+  * @param reason - The reason for aborting the request.
+  * @returns True if the request was found and aborted, false otherwise.
+  */
+  abortPromise(promise: Promise<unknown>, reason: unknown): boolean;
+  cancelRequest(id: RequestID): boolean;
+  cancelAllRequests(reason: unknown): void;
+  [Symbol.dispose](): void;
 }
-interface TextDocumentRef {
-  /**
-  * The associated URI for this document. Most documents have the __file__-scheme, indicating that they
-  * represent files on disk. However, some documents may have other schemes indicating that they are not
-  * available on disk.
-  */
-  readonly uri: DocumentUri;
-  /**
-  * The identifier of the language associated with this document.
-  */
-  readonly languageId?: string | string[] | undefined;
-  /**
-  * the raw Document Text
-  */
-  readonly text?: string | undefined;
-  /**
-  * The natural language locale.
-  */
-  readonly locale?: string | undefined;
-}
-/**
-* A simple text document. Not to be implemented. The document keeps the content
-* as string.
-*/
-interface TextDocument {
-  /**
-  * The associated URI for this document. Most documents have the __file__-scheme, indicating that they
-  * represent files on disk. However, some documents may have other schemes indicating that they are not
-  * available on disk.
-  */
-  readonly uri: DocumentUri;
-  /**
-  * The identifier of the language associated with this document.
-  */
-  readonly languageId: string | string[];
-  /**
-  * The version number of this document (it will increase after each
-  * change, including undo/redo).
-  */
-  readonly version: number;
-  /**
-  * the raw Document Text
-  */
-  readonly text: string;
-  /**
-  * The natural language locale.
-  */
-  readonly locale?: string | undefined;
-  positionAt(offset: number): Position;
-  offsetAt(position: Position): number;
-  lineAt(offset: number): TextDocumentLine;
-  getLine(lineNum: number): TextDocumentLine;
-  getLines(): Iterable<TextDocumentLine>;
-}
-interface CreateTextDocumentParams {
-  uri: DocumentUri | string;
-  content: string;
-  languageId?: string | string[] | undefined;
-  locale?: string | undefined;
-  version?: number | undefined;
-}
-interface TextDocumentContentChangeEvent {
-  range?: SimpleRange$1;
-  text: string;
-}
-declare function createTextDocument({
-  uri,
-  content,
-  languageId,
-  locale,
-  version
-}: CreateTextDocumentParams): TextDocument;
-declare function updateTextDocument(doc: TextDocument, edits: TextDocumentContentChangeEvent[], version?: number): TextDocument;
 //#endregion
-//#region src/lib/Document/resolveDocument.d.ts
-declare function fileToDocument(file: string): Document;
-declare function fileToDocument(file: string, text: string, languageId?: string, locale?: string): DocumentWithText;
-declare function fileToDocument(file: string, text?: string, languageId?: string, locale?: string): Document | DocumentWithText;
-declare function fileToTextDocument(file: string): Promise<TextDocument>;
+//#region src/rpc/server.d.ts
+interface RPCServerOptions {
+  closePortOnDispose?: boolean;
+  /**
+  * If true, the server will respond with an error message for unknown or malformed requests.
+  * @default false
+  */
+  returnMalformedRPCRequestError?: boolean;
+}
+declare class RPCServer<TApi, P$1 extends RPCProtocol<TApi> = RPCProtocol<TApi>, MethodsNames extends RPCProtocolMethodNames<P$1> = RPCProtocolMethodNames<P$1>> {
+  #private;
+  constructor(port: MessagePortLike, methods: TApi, options?: RPCServerOptions);
+  [Symbol.dispose](): void;
+}
 //#endregion
 //#region ../cspell-types/dist/Parser/index.d.mts
 //#region src/Parser/index.d.ts
@@ -2125,60 +2117,664 @@ interface TransformedText extends PartialOrUndefined<Mapped> {
 }
 type PartialOrUndefined<T> = { [P in keyof T]?: T[P] | undefined };
 //#endregion
-declare namespace exclusionHelper_d_exports {
-  export { ExcludeFilesGlobMap, ExclusionFunction, FileExclusionFunction, extractGlobsFromExcludeFilesGlobMap, generateExclusionFunctionForFiles, generateExclusionFunctionForUri };
-}
-type ExclusionFunction = (fileUri: string) => boolean;
-type FileExclusionFunction = (file: string) => boolean;
-/** The structure of the VS Code search.exclude settings */
-interface ExcludeFilesGlobMap {
-  [glob: string]: boolean;
-}
-declare function extractGlobsFromExcludeFilesGlobMap(globMap: ExcludeFilesGlobMap): string[];
-/**
-* @todo Support multi root globs.
-* @param globs - glob patterns
-* @param root - root directory
-* @param allowedSchemes - allowed schemas
-*/
-declare function generateExclusionFunctionForUri(globs: Glob[], root: string, allowedSchemes?: Set<string>): ExclusionFunction;
-/**
-* @todo Support multi root globs.
-* @param globs - glob patterns
-* @param root - root directory
-* @param allowedSchemes - allowed schemas
-*/
-declare function generateExclusionFunctionForFiles(globs: Glob[], root: string): FileExclusionFunction;
 //#endregion
-//#region src/lib/FeatureFlags/FeatureFlags.d.ts
-interface FeatureFlag {
-  name: string;
-  description: string;
+//#region ../cspell-config-lib/dist/CSpellConfigFile.d.ts
+interface ICSpellConfigFile {
+  /**
+   * The url of the config file, used to resolve imports.
+   */
+  readonly url: URL;
+  /**
+   * The settings from the config file.
+   */
+  readonly settings: CSpellSettings;
+  /**
+   * Indicate that the config file is readonly.
+   */
+  readonly?: boolean;
+  /**
+   * Indicate that the config file is virtual and not associated with a file on disk.
+   */
+  virtual?: boolean;
+  /**
+   * Indicate that the config file is remote and not associated with a file on disk.
+   */
+  remote?: boolean;
 }
-type FlagTypes = string | boolean;
+declare abstract class CSpellConfigFile implements ICSpellConfigFile {
+  readonly url: URL;
+  constructor(url: URL);
+  /**
+   * The settings from the config file.
+   * Note: this is a copy of the settings from the config file. It should be treated as immutable.
+   * For performance reasons, it might not be frozen.
+   */
+  abstract readonly settings: CSpellSettings;
+  /**
+   * Helper function to add words to the config file.
+   * @param words - words to add to the config file.
+   */
+  abstract addWords(words: string[]): this;
+  /**
+   * Tell the config file to remove all comments.
+   * This is useful when the config file is being serialized and comments are not needed.
+   * @returns this - the config file.
+   */
+  abstract removeAllComments(): this;
+  /**
+   * Configure the jason.schema for the config file.
+   * @param schema - The schema to set for the config file.
+   */
+  abstract setSchema(schema: string): this;
+  abstract setValue<K$1 extends keyof CSpellSettings>(key: K$1, value: CSpellSettings[K$1]): this;
+  /**
+   *
+   * @param key - the field to set the comment for.
+   * @param comment - the comment to set.
+   * @param inline - if true, the comment will be set as an inline comment.
+   */
+  abstract setComment(key: keyof CSpellSettings, comment: string, inline?: boolean): this;
+  get readonly(): boolean;
+  get virtual(): boolean;
+  get remote(): boolean;
+}
+//#endregion
+//#region src/lib/util/IUri.d.ts
+interface Uri {
+  readonly scheme: string;
+  readonly path: string;
+  readonly authority?: string;
+  readonly fragment?: string;
+  readonly query?: string;
+}
+type DocumentUri = Uri | URL | string;
+//#endregion
+//#region src/lib/Document/Document.d.ts
+interface Document {
+  uri: UriString;
+  text?: string;
+  languageId?: string;
+  locale?: string;
+}
+type UriString = string;
+interface DocumentWithText extends Document {
+  text: string;
+}
+//#endregion
+//#region src/lib/Document/isBinaryDoc.d.ts
+declare function isBinaryFile(filename: Uri | URL | string, languageId?: string | string[], text?: string): boolean;
+//#endregion
+//#region src/lib/Models/TextDocument.d.ts
+interface Position {
+  /**
+  * The line number (zero-based).
+  */
+  line: number;
+  /**
+  * The zero based offset from the beginning of the line.
+  * Note: surrogate pairs are counted as two characters.
+  */
+  character: number;
+}
 /**
-* Feature Flags are used to turn on/off features.
-* These are primarily used before a feature has been fully released.
+* Range offset tuple.
 */
-declare class FeatureFlags {
-  private flags;
-  private flagValues;
-  constructor(flags?: FeatureFlag[]);
-  register(flag: FeatureFlag): this;
-  register(name: string, description: string): this;
-  getFlag(flag: string): FlagTypes | undefined;
-  getFlagBool(flag: string): boolean | undefined;
-  setFlag(flag: string, value?: FlagTypes): this;
-  getFlagInfo(flag: string): FeatureFlag | undefined;
-  getFlags(): FeatureFlag[];
-  getFlagValues(): Map<string, FlagTypes>;
-  reset(): this;
+type SimpleRange$1 = [start: number, end: number];
+interface TextDocumentLine {
+  readonly text: string;
+  readonly offset: number;
+  readonly position: Position;
 }
-declare class UnknownFeatureFlagError extends Error {
-  readonly flag: string;
-  constructor(flag: string);
+interface TextDocumentRef {
+  /**
+  * The associated URI for this document. Most documents have the __file__-scheme, indicating that they
+  * represent files on disk. However, some documents may have other schemes indicating that they are not
+  * available on disk.
+  */
+  readonly uri: DocumentUri;
+  /**
+  * The identifier of the language associated with this document.
+  */
+  readonly languageId?: string | string[] | undefined;
+  /**
+  * the raw Document Text
+  */
+  readonly text?: string | undefined;
+  /**
+  * The natural language locale.
+  */
+  readonly locale?: string | undefined;
 }
-declare function getSystemFeatureFlags(): FeatureFlags;
+/**
+* A simple text document. Not to be implemented. The document keeps the content
+* as string.
+*/
+interface TextDocument {
+  /**
+  * The associated URI for this document. Most documents have the __file__-scheme, indicating that they
+  * represent files on disk. However, some documents may have other schemes indicating that they are not
+  * available on disk.
+  */
+  readonly uri: DocumentUri;
+  /**
+  * The identifier of the language associated with this document.
+  */
+  readonly languageId: string | string[];
+  /**
+  * The version number of this document (it will increase after each
+  * change, including undo/redo).
+  */
+  readonly version: number;
+  /**
+  * the raw Document Text
+  */
+  readonly text: string;
+  /**
+  * The natural language locale.
+  */
+  readonly locale?: string | undefined;
+  positionAt(offset: number): Position;
+  offsetAt(position: Position): number;
+  lineAt(offset: number): TextDocumentLine;
+  getLine(lineNum: number): TextDocumentLine;
+  getLines(): Iterable<TextDocumentLine>;
+}
+interface CreateTextDocumentParams {
+  uri: DocumentUri | string;
+  content: string;
+  languageId?: string | string[] | undefined;
+  locale?: string | undefined;
+  version?: number | undefined;
+}
+interface TextDocumentContentChangeEvent {
+  range?: SimpleRange$1;
+  text: string;
+}
+declare function createTextDocument({
+  uri,
+  content,
+  languageId,
+  locale,
+  version
+}: CreateTextDocumentParams): TextDocument;
+declare function updateTextDocument(doc: TextDocument, edits: TextDocumentContentChangeEvent[], version?: number): TextDocument;
+//#endregion
+//#region src/lib/Document/resolveDocument.d.ts
+declare function fileToDocument(file: string): Document;
+declare function fileToDocument(file: string, text: string, languageId?: string, locale?: string): DocumentWithText;
+declare function fileToDocument(file: string, text?: string, languageId?: string, locale?: string): Document | DocumentWithText;
+declare function fileToTextDocument(file: string): Promise<TextDocument>;
+//#endregion
+//#region src/lib/Models/Suggestion.d.ts
+interface ExtendedSuggestion {
+  /**
+  * The suggestion.
+  */
+  word: string;
+  /**
+  * The word is preferred above others, except other "preferred" words.
+  */
+  isPreferred?: boolean;
+  /**
+  * The suggested word adjusted to match the original case.
+  */
+  wordAdjustedToMatchCase?: string;
+  /**
+  * The cost of using this word.
+  * The lower the cost, the better the suggestion.
+  */
+  cost?: number;
+}
+//#endregion
+//#region src/lib/Models/ValidationResult.d.ts
+interface ValidationResult extends TextOffset, Pick<Issue, "message" | "issueType" | "hasPreferredSuggestions" | "hasSimpleSuggestions"> {
+  line: TextOffset;
+  isFlagged?: boolean | undefined;
+  isFound?: boolean | undefined;
+}
+//#endregion
+//#region src/lib/Models/ValidationIssue.d.ts
+interface ValidationIssue extends ValidationResult {
+  suggestions?: string[] | undefined;
+  suggestionsEx?: ExtendedSuggestion[] | undefined;
+}
+//#endregion
+//#region ../cspell-trie-lib/dist/index.d.ts
+//#endregion
+//#region src/lib/distance/weightedMaps.d.ts
+
+/**
+* Costs are minimized while penalties are maximized.
+*/
+interface Cost$1 {
+  /**
+  * The cost of an operation
+  * `c'' = min(c, c')`
+  */
+  c?: number | undefined;
+  /**
+  * The penalties applied
+  * `p'' = max(p, p')`
+  */
+  p?: number | undefined;
+}
+interface TrieCost extends Cost$1 {
+  /** nested trie nodes */
+  n?: Record<string, TrieCost>;
+}
+interface TrieTrieCost {
+  /** nested trie nodes */
+  n?: Record<string, TrieTrieCost>;
+  /** root of cost trie */
+  t?: Record<string, TrieCost>;
+}
+interface WeightMap {
+  readonly insDel: TrieCost;
+  readonly replace: TrieTrieCost;
+  readonly swap: TrieTrieCost;
+  readonly adjustments: Map<string, PenaltyAdjustment>;
+}
+interface PenaltyAdjustment {
+  /** Penalty Identifier */
+  id: string;
+  /** RegExp Pattern to match */
+  regexp: RegExp;
+  /** Penalty to apply */
+  penalty: number;
+}
+//#endregion
+//#region src/lib/distance/distance.d.ts
+/**
+* Calculate the edit distance between any two words.
+* Use the Damerau–Levenshtein distance algorithm.
+* @param wordA
+* @param wordB
+* @param editCost - the cost of each edit (defaults to 100)
+* @returns the edit distance.
+*/
+
+declare const CompoundWordsMethodEnum: {
+  /**
+  * Do not compound words.
+  */
+  readonly NONE: 0;
+  /**
+  * Create word compounds separated by spaces.
+  */
+  readonly SEPARATE_WORDS: 1;
+  /**
+  * Create word compounds without separation.
+  */
+  readonly JOIN_WORDS: 2;
+};
+type CompoundWordsMethodEnum = typeof CompoundWordsMethodEnum;
+type CompoundWordsMethod = CompoundWordsMethodEnum[keyof CompoundWordsMethodEnum];
+interface CompoundWordsMethodByName extends CompoundWordsMethodEnum {
+  "0": "NONE";
+  "1": "SEPARATE_WORDS";
+  "2": "JOIN_WORDS";
+}
+declare const CompoundWordsMethod: CompoundWordsMethodByName;
+//#endregion
+//#region src/lib/suggestions/genSuggestionsOptions.d.ts
+interface GenSuggestionOptionsStrict {
+  /**
+  * Controls forcing compound words.
+  * @default CompoundWordsMethod.NONE
+  */
+  compoundMethod?: CompoundWordsMethod;
+  /**
+  * ignore case when searching.
+  */
+  ignoreCase: boolean;
+  /**
+  * Maximum number of "edits" allowed.
+  * 3 is a good number. Above 5 can be very slow.
+  */
+  changeLimit: number;
+  /**
+  * Inserts a compound character between compounded word segments.
+  * @default ""
+  */
+  compoundSeparator?: string;
+}
+type GenSuggestionOptions = Partial<GenSuggestionOptionsStrict>;
+type GenSuggestionOptionsRO = Readonly<GenSuggestionOptions>;
+//#endregion
+//#region src/lib/suggestions/SuggestionTypes.d.ts
+type Cost = number;
+type MaxCost = Cost;
+interface SuggestionResultBase {
+  /** The suggested word */
+  word: string;
+  /** The edit cost 100 = 1 edit */
+  cost: Cost;
+  /**
+  * This suggestion is the preferred suggestion.
+  * Setting this to `true` implies that an auto fix is possible.
+  */
+  isPreferred?: boolean | undefined;
+}
+interface SuggestionResult extends SuggestionResultBase {
+  /** The suggested word with compound marks, generally a `•` */
+  compoundWord?: string | undefined;
+}
+interface Progress {
+  type: "progress";
+  /** Number of Completed Tasks so far */
+  completed: number;
+  /**
+  * Number of tasks remaining, this number is allowed to increase over time since
+  * completed tasks can generate new tasks.
+  */
+  remaining: number;
+}
+type GenerateNextParam = MaxCost | symbol | undefined;
+type GenerateSuggestionResult = SuggestionResultBase | Progress | undefined;
+/**
+* Ask for the next result.
+* maxCost - sets the max cost for following suggestions
+* This is used to limit which suggestions are emitted.
+* If the `iterator.next()` returns `undefined`, it is to request a value for maxCost.
+*
+* The SuggestionIterator is generally the
+*/
+type SuggestionGenerator = Generator<GenerateSuggestionResult, void, GenerateNextParam>;
+//#endregion
+//#region src/lib/suggestions/suggestCollector.d.ts
+type FilterWordFn = (word: string, cost: number) => boolean;
+interface SuggestionCollector {
+  /**
+  * Collection suggestions from a SuggestionIterator
+  * @param src - the SuggestionIterator used to generate suggestions.
+  * @param timeout - the amount of time in milliseconds to allow for suggestions.
+  * before sending `symbolStopProcessing`
+  * Iterator implementation:
+  * @example
+  * r = yield(suggestion);
+  * if (r === collector.symbolStopProcessing) // ...stop generating suggestions.
+  */
+  collect: (src: SuggestionGenerator, timeout?: number, filter?: FilterWordFn) => void;
+  add: (suggestion: SuggestionResultBase) => SuggestionCollector;
+  readonly suggestions: SuggestionResult[];
+  readonly changeLimit: number;
+  readonly maxCost: number;
+  readonly word: string;
+  readonly maxNumSuggestions: number;
+  readonly includesTies: boolean;
+  readonly ignoreCase: boolean;
+  readonly genSuggestionOptions: GenSuggestionOptionsRO;
+  /**
+  * Possible value sent to the SuggestionIterator telling it to stop processing.
+  */
+  readonly symbolStopProcessing: symbol;
+}
+//#endregion
+//#region src/lib/util/types.d.ts
+/**
+* The keys of an object where the values cannot be undefined.
+*/
+type OptionalKeys<T> = Exclude<{ [P in keyof T]: T[P] extends Exclude<T[P], undefined> ? never : P }[keyof T], undefined>;
+/**
+* Allow undefined in optional fields
+*/
+type OptionalOrUndefined<T> = { [P in keyof T]: P extends OptionalKeys<T> ? T[P] | undefined : T[P] };
+//#endregion
+//#region src/lib/Models/CSpellSettingsInternalDef.d.ts
+declare const SymbolCSpellSettingsInternal: unique symbol;
+interface CSpellSettingsInternal extends Omit<AdvancedCSpellSettingsWithSourceTrace, "dictionaryDefinitions"> {
+  [SymbolCSpellSettingsInternal]: true;
+  dictionaryDefinitions?: DictionaryDefinitionInternal[];
+}
+interface CSpellSettingsInternalFinalized extends CSpellSettingsInternal {
+  parserFn: Parser | undefined;
+  finalized: true;
+  ignoreRegExpList: RegExp[];
+  includeRegExpList: RegExp[];
+}
+type DictionaryDefinitionCustomUniqueFields = Omit<DictionaryDefinitionCustom, keyof DictionaryDefinitionPreferred>;
+type DictionaryDefinitionInternal = DictionaryFileDefinitionInternal | DictionaryDefinitionInlineInternal | DictionaryDefinitionSimpleInternal;
+type DictionaryDefinitionInlineInternal = DictionaryDefinitionInline & {
+  /** The path to the config file that contains this dictionary definition */
+  readonly __source?: string | undefined;
+};
+type DictionaryDefinitionSimpleInternal = DictionaryDefinitionSimple & {
+  /** The path to the config file that contains this dictionary definition */
+  readonly __source?: string | undefined;
+};
+interface DictionaryFileDefinitionInternal extends Readonly<DictionaryDefinitionPreferred>, Readonly<Partial<DictionaryDefinitionCustomUniqueFields>>, Readonly<DictionaryDefinitionAugmented> {
+  /**
+  * Optional weight map used to improve suggestions.
+  */
+  readonly weightMap?: WeightMap | undefined;
+  /** The path to the config file that contains this dictionary definition */
+  readonly __source?: string | undefined;
+}
+//#endregion
+//#region ../cspell-dictionary/dist/util/AutoCache.d.ts
+interface CacheStats {
+  hits: number;
+  misses: number;
+  swaps: number;
+}
+//#endregion
+//#region ../cspell-dictionary/dist/SpellingDictionary/SuggestOptions.d.ts
+interface SuggestOptions {
+  /**
+   * Compounding Mode.
+   * `NONE` is the best option.
+   */
+  compoundMethod?: CompoundWordsMethod | undefined;
+  /**
+   * The limit on the number of suggestions to generate. If `allowTies` is true, it is possible
+   * for more suggestions to be generated.
+   */
+  numSuggestions?: number | undefined;
+  /**
+   * Max number of changes / edits to the word to get to a suggestion matching suggestion.
+   */
+  numChanges?: number | undefined;
+  /**
+   * Allow for case-ingestive checking.
+   */
+  ignoreCase?: boolean | undefined;
+  /**
+   * If multiple suggestions have the same edit / change "cost", then included them even if
+   * it causes more than `numSuggestions` to be returned.
+   * @default false
+   */
+  includeTies?: boolean | undefined;
+  /**
+   * Maximum amount of time in milliseconds to allow for generating suggestions.
+   */
+  timeout?: number | undefined;
+}
+type SuggestOptionsRO = Readonly<SuggestOptions>;
+//#endregion
+//#region ../cspell-dictionary/dist/SpellingDictionary/SpellingDictionary.d.ts
+interface SearchOptions {
+  /**
+   * Legacy compounds have been deprecated.
+   *
+   * @deprecated
+   */
+  useCompounds?: boolean | number | undefined;
+  /**
+   * Ignore Case and Accents
+   */
+  ignoreCase?: boolean | undefined;
+}
+interface FindOptions extends SearchOptions {
+  /**
+   * Separate compound words using the specified separator.
+   */
+  compoundSeparator?: string | undefined;
+}
+type FindOptionsRO = Readonly<FindOptions>;
+interface Suggestion {
+  word: string;
+  isPreferred?: boolean | undefined;
+}
+interface PreferredSuggestion extends Suggestion {
+  isPreferred: true;
+}
+interface FindResult {
+  /** the text found, otherwise `false` */
+  found: string | false;
+  /** `true` if it is considered a forbidden word. */
+  forbidden: boolean;
+  /** `true` if it is a no-suggest word. */
+  noSuggest: boolean;
+}
+type HasOptions = SearchOptions;
+type HasOptionsRO = Readonly<HasOptions>;
+type IgnoreCaseOption = boolean;
+interface SpellingDictionaryOptions {
+  repMap?: ReplaceMap | undefined;
+  /**
+   * The dictionary is case aware.
+   */
+  caseSensitive?: boolean | undefined;
+  /**
+   * This is a NO Suggest dictionary used for words to be ignored.
+   */
+  noSuggest?: boolean | undefined;
+  /**
+   * Some dictionaries may contain flagged words that are not valid in the language. These are often
+   * words that are used in other languages or might be generated through compounding.
+   * This setting allows flagged words to be ignored when checking the dictionary.
+   * The effect is similar to the word not being in the dictionary.
+   */
+  ignoreForbiddenWords?: boolean | undefined;
+  /**
+   * Extra dictionary information used in improving suggestions
+   * based upon locale.
+   */
+  dictionaryInformation?: DictionaryInformation | undefined;
+  /**
+   * Strip Case and Accents to allow for case insensitive searches and
+   * words without accents.
+   *
+   * Note: this setting only applies to word lists. It has no-impact on trie
+   * dictionaries.
+   *
+   * @default true
+   */
+  supportNonStrictSearches?: boolean | undefined;
+  /**
+   * Turns on legacy word compounds.
+   * @deprecated
+   */
+  useCompounds?: boolean | undefined;
+  /**
+   * Optional WeightMap used to improve suggestions.
+   */
+  weightMap?: WeightMap | undefined;
+}
+interface DictionaryInfo {
+  /** The name of the dictionary */
+  readonly name: string;
+  /** The source, filename or URI */
+  readonly source: string;
+  /** Options */
+  readonly options: SpellingDictionaryOptions;
+}
+type MapWordSingleFn = (word: string) => string;
+type MapWordMultipleFn = (word: string) => string[];
+interface SpellingDictionary extends DictionaryInfo {
+  readonly type: string;
+  readonly containsNoSuggestWords: boolean;
+  has(word: string, options?: HasOptionsRO): boolean;
+  /** A more detailed search for a word, might take longer than `has` */
+  find(word: string, options?: FindOptionsRO): FindResult | undefined;
+  /**
+   * Checks if a word is forbidden.
+   * @param word - word to check.
+   */
+  isForbidden(word: string, ignoreCaseAndAccents?: IgnoreCaseOption): boolean;
+  /**
+   * No Suggest words are considered correct but will not be listed when
+   * suggestions are generated.
+   * No Suggest words and "Ignored" words are equivalent. Ignored / no suggest words override forbidden words.
+   * @param word - word to check
+   * @param options - options
+   */
+  isNoSuggestWord(word: string, options: HasOptionsRO): boolean;
+  /**
+   * Generate suggestions for a word
+   * @param word - word
+   * @param suggestOptions - options
+   */
+  suggest(word: string, suggestOptions?: SuggestOptionsRO): SuggestionResult[];
+  getPreferredSuggestions?: (word: string) => PreferredSuggestion[];
+  genSuggestions(collector: SuggestionCollector, suggestOptions: SuggestOptionsRO): void;
+  mapWord?: MapWordSingleFn | undefined;
+  /**
+   * Generates all possible word combinations by applying `repMap`.
+   * This acts a bit like brace expansions in globs.
+   * @param word - the word to map
+   * @returns array of adjusted words.
+   */
+  remapWord?: MapWordMultipleFn | undefined;
+  readonly size: number;
+  readonly isDictionaryCaseSensitive: boolean;
+  getErrors?(): Error[];
+  /**
+   * Get all the terms in the dictionary, they may be formatted according to the dictionary options.
+   * @returns the terms in the dictionary.
+   */
+  terms?: () => Iterable<string>;
+}
+//#endregion
+//#region ../cspell-dictionary/dist/SpellingDictionary/SpellingDictionaryCollection.d.ts
+interface SpellingDictionaryCollection extends SpellingDictionary {
+  readonly type: 'SpellingDictionaryCollection';
+  readonly dictionaries: SpellingDictionary[];
+  getErrors(): Error[];
+}
+declare function createCollection(dictionaries: SpellingDictionary[], name: string, source?: string): SpellingDictionaryCollection;
+//#endregion
+//#region ../cspell-dictionary/dist/SpellingDictionary/CachingDictionary.d.ts
+interface CallStats {
+  name: string;
+  id: number;
+  has: CacheStats;
+  isNoSuggestWord: CacheStats;
+  isForbidden: CacheStats;
+  getPreferredSuggestions: CacheStats;
+}
+/**
+ * Caching Dictionary remembers method calls to increase performance.
+ */
+interface CachingDictionary {
+  name: string;
+  id: number;
+  has(word: string): boolean;
+  isNoSuggestWord(word: string): boolean;
+  isForbidden(word: string): boolean;
+  stats(): CallStats;
+  getPreferredSuggestions(word: string): PreferredSuggestion[] | undefined;
+  suggest(word: string, suggestOptions?: SuggestOptionsRO): SuggestionResult[];
+}
+//#endregion
+//#region ../cspell-dictionary/dist/util/IterableLike.d.ts
+interface IterableLike<T> {
+  [Symbol.iterator]: () => Iterator<T> | IterableIterator<T>;
+}
+//#endregion
+//#region ../cspell-dictionary/dist/SpellingDictionary/createSpellingDictionary.d.ts
+/**
+ * Create a SpellingDictionary
+ * @param wordList - list of words
+ * @param name - name of dictionary
+ * @param source - filename or uri
+ * @param options - dictionary options
+ * @returns a Spelling Dictionary
+ */
+declare function createSpellingDictionary(wordList: readonly string[] | IterableLike<string>, name: string, source: string, options?: SpellingDictionaryOptions | undefined, disableSuggestionsHandling?: boolean): SpellingDictionary;
+//#endregion
+//#region src/lib/SpellingDictionary/Dictionaries.d.ts
+declare function refreshDictionaryCache(maxAge?: number): Promise<void>;
 //#endregion
 //#region ../cspell-io/dist/index.d.ts
 //#region src/async/asyncIterable.d.ts
@@ -2480,6 +3076,19 @@ declare function readFileTextSync(filename: string | URL, encoding?: BufferEncod
 //#region src/lib/fileSystem.d.ts
 declare function getVirtualFS(): VirtualFS;
 //#endregion
+//#region src/lib/SpellingDictionary/DictionaryController/DictionaryLoader.d.ts
+type LoadOptions = DictionaryDefinitionInternal;
+//#endregion
+//#region src/lib/SpellingDictionary/SpellingDictionaryError.d.ts
+declare class SpellingDictionaryLoadError extends Error {
+  readonly uri: string;
+  readonly options: LoadOptions;
+  readonly cause: Error;
+  readonly name: string;
+  constructor(uri: string, options: LoadOptions, cause: Error, message: string);
+}
+declare function isSpellingDictionaryLoadError(e: Error): e is SpellingDictionaryLoadError;
+//#endregion
 //#region ../cspell-filetypes/dist/types.d.ts
 type FileTypeId = string;
 //#endregion
@@ -2497,455 +3106,508 @@ declare function getFileTypesForExt(ext: string): FileTypeId[];
  */
 declare function findMatchingFileTypes(filename: string): FileTypeId[];
 //#endregion
-//#region ../cspell-trie-lib/dist/index.d.ts
-//#endregion
-//#region src/lib/distance/weightedMaps.d.ts
-
-/**
-* Costs are minimized while penalties are maximized.
-*/
-interface Cost$1 {
+//#region src/lib/suggestions.d.ts
+interface WordSuggestion extends SuggestionResult {
   /**
-  * The cost of an operation
-  * `c'' = min(c, c')`
+  * The suggested word adjusted to match the original case.
   */
-  c?: number | undefined;
-  /**
-  * The penalties applied
-  * `p'' = max(p, p')`
-  */
-  p?: number | undefined;
+  wordAdjustedToMatchCase?: string;
 }
-interface TrieCost extends Cost$1 {
-  /** nested trie nodes */
-  n?: Record<string, TrieCost>;
+interface SuggestedWordBase extends WordSuggestion {
+  /**
+  * dictionary names
+  */
+  dictionaries: string[];
 }
-interface TrieTrieCost {
-  /** nested trie nodes */
-  n?: Record<string, TrieTrieCost>;
-  /** root of cost trie */
-  t?: Record<string, TrieCost>;
+interface SuggestedWord extends SuggestedWordBase {
+  noSuggest: boolean;
+  forbidden: boolean;
 }
-interface WeightMap {
-  readonly insDel: TrieCost;
-  readonly replace: TrieTrieCost;
-  readonly swap: TrieTrieCost;
-  readonly adjustments: Map<string, PenaltyAdjustment>;
-}
-interface PenaltyAdjustment {
-  /** Penalty Identifier */
-  id: string;
-  /** RegExp Pattern to match */
-  regexp: RegExp;
-  /** Penalty to apply */
-  penalty: number;
-}
-//#endregion
-//#region src/lib/distance/distance.d.ts
-/**
-* Calculate the edit distance between any two words.
-* Use the Damerau–Levenshtein distance algorithm.
-* @param wordA
-* @param wordB
-* @param editCost - the cost of each edit (defaults to 100)
-* @returns the edit distance.
-*/
-
-declare const CompoundWordsMethodEnum: {
-  /**
-  * Do not compound words.
-  */
-  readonly NONE: 0;
-  /**
-  * Create word compounds separated by spaces.
-  */
-  readonly SEPARATE_WORDS: 1;
-  /**
-  * Create word compounds without separation.
-  */
-  readonly JOIN_WORDS: 2;
-};
-type CompoundWordsMethodEnum = typeof CompoundWordsMethodEnum;
-type CompoundWordsMethod = CompoundWordsMethodEnum[keyof CompoundWordsMethodEnum];
-interface CompoundWordsMethodByName extends CompoundWordsMethodEnum {
-  "0": "NONE";
-  "1": "SEPARATE_WORDS";
-  "2": "JOIN_WORDS";
-}
-declare const CompoundWordsMethod: CompoundWordsMethodByName;
-//#endregion
-//#region src/lib/suggestions/genSuggestionsOptions.d.ts
-interface GenSuggestionOptionsStrict {
-  /**
-  * Controls forcing compound words.
-  * @default CompoundWordsMethod.NONE
-  */
-  compoundMethod?: CompoundWordsMethod;
-  /**
-  * ignore case when searching.
-  */
-  ignoreCase: boolean;
-  /**
-  * Maximum number of "edits" allowed.
-  * 3 is a good number. Above 5 can be very slow.
-  */
-  changeLimit: number;
-  /**
-  * Inserts a compound character between compounded word segments.
-  * @default ""
-  */
-  compoundSeparator?: string;
-}
-type GenSuggestionOptions = Partial<GenSuggestionOptionsStrict>;
-type GenSuggestionOptionsRO = Readonly<GenSuggestionOptions>;
-//#endregion
-//#region src/lib/suggestions/SuggestionTypes.d.ts
-type Cost = number;
-type MaxCost = Cost;
-interface SuggestionResultBase {
-  /** The suggested word */
+interface SuggestionsForWordResult {
   word: string;
-  /** The edit cost 100 = 1 edit */
-  cost: Cost;
+  suggestions: SuggestedWord[];
+}
+type FromSuggestOptions = Pick<SuggestOptions, "numChanges" | "numSuggestions" | "includeTies">;
+interface SuggestionOptions extends FromSuggestOptions {
   /**
-  * This suggestion is the preferred suggestion.
-  * Setting this to `true` implies that an auto fix is possible.
+  * languageId to use when determining file type.
   */
-  isPreferred?: boolean | undefined;
-}
-interface SuggestionResult extends SuggestionResultBase {
-  /** The suggested word with compound marks, generally a `•` */
-  compoundWord?: string | undefined;
-}
-interface Progress {
-  type: "progress";
-  /** Number of Completed Tasks so far */
-  completed: number;
+  languageId?: FileTypeId | FileTypeId[];
   /**
-  * Number of tasks remaining, this number is allowed to increase over time since
-  * completed tasks can generate new tasks.
+  * Locale to use.
   */
-  remaining: number;
-}
-type GenerateNextParam = MaxCost | symbol | undefined;
-type GenerateSuggestionResult = SuggestionResultBase | Progress | undefined;
-/**
-* Ask for the next result.
-* maxCost - sets the max cost for following suggestions
-* This is used to limit which suggestions are emitted.
-* If the `iterator.next()` returns `undefined`, it is to request a value for maxCost.
-*
-* The SuggestionIterator is generally the
-*/
-type SuggestionGenerator = Generator<GenerateSuggestionResult, void, GenerateNextParam>;
-//#endregion
-//#region src/lib/suggestions/suggestCollector.d.ts
-type FilterWordFn = (word: string, cost: number) => boolean;
-interface SuggestionCollector {
+  locale?: LocaleId;
   /**
-  * Collection suggestions from a SuggestionIterator
-  * @param src - the SuggestionIterator used to generate suggestions.
-  * @param timeout - the amount of time in milliseconds to allow for suggestions.
-  * before sending `symbolStopProcessing`
-  * Iterator implementation:
-  * @example
-  * r = yield(suggestion);
-  * if (r === collector.symbolStopProcessing) // ...stop generating suggestions.
+  * Strict case and accent checking
+  * @default true
   */
-  collect: (src: SuggestionGenerator, timeout?: number, filter?: FilterWordFn) => void;
-  add: (suggestion: SuggestionResultBase) => SuggestionCollector;
-  readonly suggestions: SuggestionResult[];
-  readonly changeLimit: number;
-  readonly maxCost: number;
-  readonly word: string;
-  readonly maxNumSuggestions: number;
-  readonly includesTies: boolean;
-  readonly ignoreCase: boolean;
-  readonly genSuggestionOptions: GenSuggestionOptionsRO;
+  strict?: boolean;
   /**
-  * Possible value sent to the SuggestionIterator telling it to stop processing.
+  * List of dictionaries to use. If specified, only that list of dictionaries will be used.
   */
-  readonly symbolStopProcessing: symbol;
-}
-//#endregion
-//#region ../cspell-dictionary/dist/util/AutoCache.d.ts
-interface CacheStats {
-  hits: number;
-  misses: number;
-  swaps: number;
-}
-//#endregion
-//#region ../cspell-dictionary/dist/SpellingDictionary/SuggestOptions.d.ts
-interface SuggestOptions {
+  dictionaries?: string[];
   /**
-   * Compounding Mode.
-   * `NONE` is the best option.
-   */
-  compoundMethod?: CompoundWordsMethod | undefined;
-  /**
-   * The limit on the number of suggestions to generate. If `allowTies` is true, it is possible
-   * for more suggestions to be generated.
-   */
+  * The number of suggestions to make.
+  * @default 8
+  */
   numSuggestions?: number | undefined;
   /**
-   * Max number of changes / edits to the word to get to a suggestion matching suggestion.
-   */
+  * Max number of changes / edits to the word to get to a suggestion matching suggestion.
+  * @default 4
+  */
   numChanges?: number | undefined;
   /**
-   * Allow for case-ingestive checking.
-   */
-  ignoreCase?: boolean | undefined;
-  /**
-   * If multiple suggestions have the same edit / change "cost", then included them even if
-   * it causes more than `numSuggestions` to be returned.
-   * @default false
-   */
+  * If multiple suggestions have the same edit / change "cost", then included them even if
+  * it causes more than `numSuggestions` to be returned.
+  * @default true
+  */
   includeTies?: boolean | undefined;
   /**
-   * Maximum amount of time in milliseconds to allow for generating suggestions.
-   */
-  timeout?: number | undefined;
-}
-type SuggestOptionsRO = Readonly<SuggestOptions>;
-//#endregion
-//#region ../cspell-dictionary/dist/SpellingDictionary/SpellingDictionary.d.ts
-interface SearchOptions {
-  /**
-   * Legacy compounds have been deprecated.
-   *
-   * @deprecated
-   */
-  useCompounds?: boolean | number | undefined;
-  /**
-   * Ignore Case and Accents
-   */
-  ignoreCase?: boolean | undefined;
-}
-interface FindOptions extends SearchOptions {
-  /**
-   * Separate compound words using the specified separator.
-   */
-  compoundSeparator?: string | undefined;
-}
-type FindOptionsRO = Readonly<FindOptions>;
-interface Suggestion {
-  word: string;
-  isPreferred?: boolean | undefined;
-}
-interface PreferredSuggestion extends Suggestion {
-  isPreferred: true;
-}
-interface FindResult {
-  /** the text found, otherwise `false` */
-  found: string | false;
-  /** `true` if it is considered a forbidden word. */
-  forbidden: boolean;
-  /** `true` if it is a no-suggest word. */
-  noSuggest: boolean;
-}
-type HasOptions = SearchOptions;
-type HasOptionsRO = Readonly<HasOptions>;
-type IgnoreCaseOption = boolean;
-interface SpellingDictionaryOptions {
-  repMap?: ReplaceMap | undefined;
-  /**
-   * The dictionary is case aware.
-   */
-  caseSensitive?: boolean | undefined;
-  /**
-   * This is a NO Suggest dictionary used for words to be ignored.
-   */
-  noSuggest?: boolean | undefined;
-  /**
-   * Some dictionaries may contain flagged words that are not valid in the language. These are often
-   * words that are used in other languages or might be generated through compounding.
-   * This setting allows flagged words to be ignored when checking the dictionary.
-   * The effect is similar to the word not being in the dictionary.
-   */
-  ignoreForbiddenWords?: boolean | undefined;
-  /**
-   * Extra dictionary information used in improving suggestions
-   * based upon locale.
-   */
-  dictionaryInformation?: DictionaryInformation | undefined;
-  /**
-   * Strip Case and Accents to allow for case insensitive searches and
-   * words without accents.
-   *
-   * Note: this setting only applies to word lists. It has no-impact on trie
-   * dictionaries.
-   *
-   * @default true
-   */
-  supportNonStrictSearches?: boolean | undefined;
-  /**
-   * Turns on legacy word compounds.
-   * @deprecated
-   */
-  useCompounds?: boolean | undefined;
-  /**
-   * Optional WeightMap used to improve suggestions.
-   */
-  weightMap?: WeightMap | undefined;
-}
-interface DictionaryInfo {
-  /** The name of the dictionary */
-  readonly name: string;
-  /** The source, filename or URI */
-  readonly source: string;
-  /** Options */
-  readonly options: SpellingDictionaryOptions;
-}
-type MapWordSingleFn = (word: string) => string;
-type MapWordMultipleFn = (word: string) => string[];
-interface SpellingDictionary extends DictionaryInfo {
-  readonly type: string;
-  readonly containsNoSuggestWords: boolean;
-  has(word: string, options?: HasOptionsRO): boolean;
-  /** A more detailed search for a word, might take longer than `has` */
-  find(word: string, options?: FindOptionsRO): FindResult | undefined;
-  /**
-   * Checks if a word is forbidden.
-   * @param word - word to check.
-   */
-  isForbidden(word: string, ignoreCaseAndAccents?: IgnoreCaseOption): boolean;
-  /**
-   * No Suggest words are considered correct but will not be listed when
-   * suggestions are generated.
-   * No Suggest words and "Ignored" words are equivalent. Ignored / no suggest words override forbidden words.
-   * @param word - word to check
-   * @param options - options
-   */
-  isNoSuggestWord(word: string, options: HasOptionsRO): boolean;
-  /**
-   * Generate suggestions for a word
-   * @param word - word
-   * @param suggestOptions - options
-   */
-  suggest(word: string, suggestOptions?: SuggestOptionsRO): SuggestionResult[];
-  getPreferredSuggestions?: (word: string) => PreferredSuggestion[];
-  genSuggestions(collector: SuggestionCollector, suggestOptions: SuggestOptionsRO): void;
-  mapWord?: MapWordSingleFn | undefined;
-  /**
-   * Generates all possible word combinations by applying `repMap`.
-   * This acts a bit like brace expansions in globs.
-   * @param word - the word to map
-   * @returns array of adjusted words.
-   */
-  remapWord?: MapWordMultipleFn | undefined;
-  readonly size: number;
-  readonly isDictionaryCaseSensitive: boolean;
-  getErrors?(): Error[];
-  /**
-   * Get all the terms in the dictionary, they may be formatted according to the dictionary options.
-   * @returns the terms in the dictionary.
-   */
-  terms?: () => Iterable<string>;
-}
-//#endregion
-//#region ../cspell-dictionary/dist/SpellingDictionary/SpellingDictionaryCollection.d.ts
-interface SpellingDictionaryCollection extends SpellingDictionary {
-  readonly type: 'SpellingDictionaryCollection';
-  readonly dictionaries: SpellingDictionary[];
-  getErrors(): Error[];
-}
-declare function createCollection(dictionaries: SpellingDictionary[], name: string, source?: string): SpellingDictionaryCollection;
-//#endregion
-//#region ../cspell-dictionary/dist/SpellingDictionary/CachingDictionary.d.ts
-interface CallStats {
-  name: string;
-  id: number;
-  has: CacheStats;
-  isNoSuggestWord: CacheStats;
-  isForbidden: CacheStats;
-  getPreferredSuggestions: CacheStats;
-}
-/**
- * Caching Dictionary remembers method calls to increase performance.
- */
-interface CachingDictionary {
-  name: string;
-  id: number;
-  has(word: string): boolean;
-  isNoSuggestWord(word: string): boolean;
-  isForbidden(word: string): boolean;
-  stats(): CallStats;
-  getPreferredSuggestions(word: string): PreferredSuggestion[] | undefined;
-  suggest(word: string, suggestOptions?: SuggestOptionsRO): SuggestionResult[];
-}
-//#endregion
-//#region ../cspell-dictionary/dist/util/IterableLike.d.ts
-interface IterableLike<T> {
-  [Symbol.iterator]: () => Iterator<T> | IterableIterator<T>;
-}
-//#endregion
-//#region ../cspell-dictionary/dist/SpellingDictionary/createSpellingDictionary.d.ts
-/**
- * Create a SpellingDictionary
- * @param wordList - list of words
- * @param name - name of dictionary
- * @param source - filename or uri
- * @param options - dictionary options
- * @returns a Spelling Dictionary
- */
-declare function createSpellingDictionary(wordList: readonly string[] | IterableLike<string>, name: string, source: string, options?: SpellingDictionaryOptions | undefined, disableSuggestionsHandling?: boolean): SpellingDictionary;
-//#endregion
-//#region src/lib/util/types.d.ts
-/**
-* The keys of an object where the values cannot be undefined.
-*/
-type OptionalKeys<T> = Exclude<{ [P in keyof T]: T[P] extends Exclude<T[P], undefined> ? never : P }[keyof T], undefined>;
-/**
-* Allow undefined in optional fields
-*/
-type OptionalOrUndefined<T> = { [P in keyof T]: P extends OptionalKeys<T> ? T[P] | undefined : T[P] };
-//#endregion
-//#region src/lib/Models/CSpellSettingsInternalDef.d.ts
-declare const SymbolCSpellSettingsInternal: unique symbol;
-interface CSpellSettingsInternal extends Omit<AdvancedCSpellSettingsWithSourceTrace, "dictionaryDefinitions"> {
-  [SymbolCSpellSettingsInternal]: true;
-  dictionaryDefinitions?: DictionaryDefinitionInternal[];
-}
-interface CSpellSettingsInternalFinalized extends CSpellSettingsInternal {
-  parserFn: Parser | undefined;
-  finalized: true;
-  ignoreRegExpList: RegExp[];
-  includeRegExpList: RegExp[];
-}
-type DictionaryDefinitionCustomUniqueFields = Omit<DictionaryDefinitionCustom, keyof DictionaryDefinitionPreferred>;
-type DictionaryDefinitionInternal = DictionaryFileDefinitionInternal | DictionaryDefinitionInlineInternal | DictionaryDefinitionSimpleInternal;
-type DictionaryDefinitionInlineInternal = DictionaryDefinitionInline & {
-  /** The path to the config file that contains this dictionary definition */
-  readonly __source?: string | undefined;
-};
-type DictionaryDefinitionSimpleInternal = DictionaryDefinitionSimple & {
-  /** The path to the config file that contains this dictionary definition */
-  readonly __source?: string | undefined;
-};
-interface DictionaryFileDefinitionInternal extends Readonly<DictionaryDefinitionPreferred>, Readonly<Partial<DictionaryDefinitionCustomUniqueFields>>, Readonly<DictionaryDefinitionAugmented> {
-  /**
-  * Optional weight map used to improve suggestions.
+  * By default we want to use the default configuration, but there are cases
+  * where someone might not want that.
+  * @default true
   */
-  readonly weightMap?: WeightMap | undefined;
-  /** The path to the config file that contains this dictionary definition */
-  readonly __source?: string | undefined;
+  includeDefaultConfig?: boolean;
+}
+declare function suggestionsForWords(words: Iterable<string> | AsyncIterable<string>, options?: SuggestionOptions, settings?: CSpellSettings): AsyncIterable<SuggestionsForWordResult>;
+declare function suggestionsForWord(word: string, options?: SuggestionOptions, settings?: CSpellSettings | ICSpellConfigFile): Promise<SuggestionsForWordResult>;
+declare class SuggestionError extends Error {
+  readonly code: string;
+  constructor(message: string, code: string);
 }
 //#endregion
-//#region src/lib/SpellingDictionary/Dictionaries.d.ts
-declare function refreshDictionaryCache(maxAge?: number): Promise<void>;
-//#endregion
-//#region src/lib/SpellingDictionary/DictionaryController/DictionaryLoader.d.ts
-type LoadOptions = DictionaryDefinitionInternal;
-//#endregion
-//#region src/lib/SpellingDictionary/SpellingDictionaryError.d.ts
-declare class SpellingDictionaryLoadError extends Error {
-  readonly uri: string;
-  readonly options: LoadOptions;
-  readonly cause: Error;
-  readonly name: string;
-  constructor(uri: string, options: LoadOptions, cause: Error, message: string);
+//#region src/lib/util/TextRange.d.ts
+/**
+* A range of text in a document.
+* The range is inclusive of the startPos and exclusive of the endPos.
+*/
+interface MatchRange {
+  startPos: number;
+  endPos: number;
 }
-declare function isSpellingDictionaryLoadError(e: Error): e is SpellingDictionaryLoadError;
+//#endregion
+//#region src/lib/textValidation/ValidationTypes.d.ts
+type TextOffsetRO = Readonly<TextOffset>;
+interface ValidationOptions extends IncludeExcludeOptions, ReportingConfiguration {
+  maxNumberOfProblems?: number;
+  maxDuplicateProblems?: number;
+  minWordLength?: number;
+  flagWords?: string[];
+  allowCompoundWords?: boolean;
+  /** ignore case when checking words against dictionary or ignore words list */
+  ignoreCase: boolean;
+  ignoreRandomStrings?: boolean | undefined;
+  minRandomLength?: number | undefined;
+}
+interface IncludeExcludeOptions {
+  ignoreRegExpList?: RegExp[];
+  includeRegExpList?: RegExp[];
+}
+type LineValidatorFn = (line: LineSegment) => Iterable<ValidationIssue>;
+interface LineSegment {
+  /** A line from the document, the offset is relative to the beginning of the document. */
+  line: TextOffsetRO;
+  /** A segment of text from the line, the offset is relative to the beginning of the document. */
+  segment: TextOffsetRO;
+}
+interface MappedTextValidationResult extends MappedText, Pick<Issue, "hasSimpleSuggestions" | "hasPreferredSuggestions" | "isFlagged" | "suggestionsEx"> {
+  isFound?: boolean | undefined;
+}
+type TextValidatorFn = (text: MappedText) => Iterable<MappedTextValidationResult>;
+//#endregion
+//#region src/lib/textValidation/lineValidatorFactory.d.ts
+interface LineValidator {
+  fn: LineValidatorFn;
+  dict: CachingDictionary;
+}
+interface TextValidator {
+  validate: TextValidatorFn;
+  lineValidator: LineValidator;
+}
+//#endregion
+//#region src/lib/textValidation/parsedText.d.ts
+type Offset = number;
+type SimpleRange = readonly [Offset, Offset];
+//#endregion
+//#region src/lib/textValidation/traceWord.d.ts
+type Href = string;
+interface DictionaryTraceResult {
+  /** The word being traced. */
+  word: string;
+  found: boolean;
+  /** The word found. */
+  foundWord: string | undefined;
+  /** Indicates that the word is flagged. */
+  forbidden: boolean;
+  /** The would should not show up in suggestions, but is considered correct. */
+  noSuggest: boolean;
+  /** The name of the dictionary. */
+  dictName: string;
+  /** The path/href to dictionary file. */
+  dictSource: string;
+  /** Suggested changes to the word. */
+  preferredSuggestions?: string[] | undefined;
+  /** href to the config file referencing the dictionary. */
+  configSource: Href | undefined;
+  /** Errors */
+  errors?: Error[] | undefined;
+}
+interface WordSplits {
+  word: string;
+  found: boolean;
+}
+interface TraceResult$1 extends Array<DictionaryTraceResult> {
+  splits?: readonly WordSplits[];
+}
+//#endregion
+//#region src/lib/textValidation/ValidateTextOptions.d.ts
+interface ValidateTextOptions {
+  /**
+  * Generate suggestions where there are spelling issues.
+  */
+  generateSuggestions?: boolean;
+  /**
+  * The number of suggestions to generate. The higher the number the longer it takes.
+  */
+  numSuggestions?: number;
+  /**
+  * Verify that the in-document directives are correct.
+  */
+  validateDirectives?: boolean;
+  /**
+  * Skips spell checking the document. Useful for testing and dry runs.
+  * It will read the configuration and parse the document.
+  */
+  skipValidation?: boolean;
+}
+//#endregion
+//#region src/lib/textValidation/docValidator.d.ts
+interface DocumentValidatorOptions extends ValidateTextOptions {
+  /**
+  * Optional path to a configuration file.
+  * If given, it will be used instead of searching for a configuration file.
+  */
+  configFile?: string;
+  /**
+  * Prevents searching for local configuration files
+  * By default the spell checker looks for configuration files
+  * starting at the location of given filename.
+  * If `configFile` is defined it will still be loaded instead of searching.
+  * `false` will override the value in `settings.noConfigSearch`.
+  * @defaultValue undefined
+  */
+  noConfigSearch?: boolean;
+  /**
+  * If `settings: CSpellUserSettings` contains imports, they will be resolved using this path.
+  * If not set, the current working directory will be used.
+  */
+  resolveImportsRelativeTo?: string | URL;
+}
+type PerfTimings = Record<string, number>;
+declare class DocumentValidator {
+  #private;
+  readonly settings: CSpellUserSettings;
+  private _document;
+  private _ready;
+  readonly errors: Error[];
+  private _prepared;
+  private _preparations;
+  private _preparationTime;
+  private _suggestions;
+  readonly options: DocumentValidatorOptions;
+  readonly perfTiming: PerfTimings;
+  skipValidation: boolean;
+  static create(doc: TextDocument, options: DocumentValidatorOptions, settingsOrConfigFile: CSpellUserSettings | ICSpellConfigFile): Promise<DocumentValidator>;
+  /**
+  * @param doc - Document to validate
+  * @param config - configuration to use (not finalized).
+  */
+  constructor(doc: TextDocument, options: DocumentValidatorOptions, settings: CSpellUserSettings);
+  get ready(): boolean;
+  prepare(): Promise<void>;
+  private _prepareAsync;
+  private _updatePrep;
+  /**
+  * The amount of time in ms to prepare for validation.
+  */
+  get prepTime(): number;
+  get validateDirectives(): boolean;
+  /**
+  * Check a range of text for validation issues.
+  * @param range - the range of text to check.
+  * @param _text - the text to check. If not given, the text will be taken from the document.
+  * @param scope - the scope to use for validation. If not given, the default scope will be used.
+  * @returns the validation issues.
+  */
+  checkText(range: SimpleRange, _text: string | undefined, scope?: string[] | string): ValidationIssue[];
+  check(parsedText: ParsedText): ValidationIssue[];
+  /**
+  * Check a Document for Validation Issues.
+  * @param forceCheck - force a check even if the document would normally be excluded.
+  * @returns the validation issues.
+  */
+  checkDocumentAsync(forceCheck?: boolean): Promise<ValidationIssue[]>;
+  /**
+  * Check a Document for Validation Issues.
+  *
+  * Note: The validator must be prepared before calling this method.
+  * @param forceCheck - force a check even if the document would normally be excluded.
+  * @returns the validation issues.
+  */
+  checkDocument(forceCheck?: boolean): ValidationIssue[];
+  checkDocumentDirectives(forceCheck?: boolean): ValidationIssue[];
+  get document(): TextDocument;
+  updateDocumentText(text: string): Promise<void>;
+  /**
+  * Get the calculated ranges of text that should be included in the spell checking.
+  * @returns MatchRanges of text to include.
+  */
+  getCheckedTextRanges(): MatchRange[];
+  traceWord(word: string): TraceResult$1;
+  private defaultParser;
+  private _checkParsedText;
+  private addPossibleError;
+  private _parse;
+  private getSuggestions;
+  private genSuggestions;
+  private adjustSuggestions;
+  getFinalizedDocSettings(): CSpellSettingsInternal;
+  /**
+  * Returns true if the final result of the configuration calculation results
+  * in the document being enabled. Note: in some cases, checking the document
+  * might still make sense, for example, the `@cspell/eslint-plugin` relies on
+  * `eslint` configuration to make that determination.
+  * @returns true if the document settings have resolved to be `enabled`
+  */
+  shouldCheckDocument(): boolean;
+  getSettingsUsed(): CSpellSettingsWithSourceTrace;
+  /**
+  * Internal `cspell-lib` use.
+  */
+  _getPreparations(): Preparations | undefined;
+}
+interface Preparations {
+  /** loaded config */
+  config: CSpellSettingsInternal;
+  dictionary: SpellingDictionaryCollection;
+  /** configuration after applying in-doc settings */
+  docSettings: CSpellSettingsInternal;
+  finalSettings: CSpellSettingsInternalFinalized;
+  includeRanges: MatchRange[];
+  textValidator: TextValidator;
+  segmenter: (texts: MappedText) => Iterable<MappedText>;
+  shouldCheck: boolean;
+  validateOptions: ValidationOptions;
+  localConfig: CSpellUserSettings | undefined;
+  localConfigFilepath: string | undefined;
+}
+interface ShouldCheckDocumentResult {
+  /** possible errors found while loading configuration. */
+  errors: Error[];
+  /**
+  * The calculated result:
+  * - `false` if the document should not be checked. Based upon the settings.
+  * - `true` if the document should be checked.
+  */
+  shouldCheck: boolean;
+  /** final settings used to determine the result. */
+  settings: CSpellUserSettings;
+  /**
+  * The reason the document should not be checked.
+  */
+  reason?: string | undefined;
+}
+/**
+* Check if a document should be checked based upon the ignorePaths and override settings.
+*
+* This function will search and fetch settings based upon the location of the document if `noConfigSearch` is not true.
+*
+* @param doc - document to check
+* @param options - options to override some of the settings.
+* @param settings - current settings
+* @returns ShouldCheckDocumentResult
+*/
+declare function shouldCheckDocument(doc: TextDocumentRef, options: DocumentValidatorOptions, settings: CSpellUserSettings): Promise<ShouldCheckDocumentResult>;
+//#endregion
+//#region src/lib/textValidation/checkText.d.ts
+/**
+* Annotate text with issues and include / exclude zones.
+* @param text - the text to annotate.
+* @param settings - the settings to use.
+* @returns the Check Text result
+* @deprecated
+*/
+declare function checkText(text: string, settings: CSpellUserSettings): Promise<CheckTextInfo>;
+interface CheckTextInfo {
+  text: string;
+  items: TextInfoItem[];
+}
+interface TextInfoItem {
+  text: string;
+  startPos: number;
+  endPos: number;
+  flagIE: IncludeExcludeFlag;
+  isError?: boolean;
+}
+declare enum IncludeExcludeFlag {
+  INCLUDE = "I",
+  EXCLUDE = "E",
+}
+interface CheckTextOptions extends DocumentValidatorOptions {}
+/**
+* Calculate document issues and include / exclude zones.
+* @param doc - document to check
+* @param options - check options
+* @param settings - optional settings
+* @returns
+*/
+declare function checkTextDocument(doc: TextDocument | Document, options: CheckTextOptions, settings?: CSpellUserSettings): Promise<CheckTextInfo>;
+//#endregion
+//#region src/lib/textValidation/validator.d.ts
+/**
+* @deprecated
+* @deprecationMessage Use spellCheckDocument
+*/
+declare function validateText(text: string, settings: CSpellUserSettings, options?: ValidateTextOptions): Promise<ValidationIssue[]>;
+//#endregion
+//#region src/lib/spellCheckFile.d.ts
+interface SpellCheckFileOptions extends ValidateTextOptions, Pick<CSpellUserSettings, "unknownWords"> {
+  /**
+  * Optional path to a configuration file.
+  * If given, it will be used instead of searching for a configuration file.
+  */
+  configFile?: string;
+  /**
+  * File encoding
+  * @defaultValue 'utf-8'
+  */
+  encoding?: BufferEncoding;
+  /**
+  * Prevents searching for local configuration files
+  * By default the spell checker looks for configuration files
+  * starting at the location of given filename.
+  * If `configFile` is defined it will still be loaded instead of searching.
+  * `false` will override the value in `settings.noConfigSearch`.
+  * @defaultValue undefined
+  */
+  noConfigSearch?: boolean;
+}
+interface SpellCheckFilePerf extends Record<string, number | undefined> {
+  loadTimeMs?: number;
+  prepareTimeMs?: number;
+  checkTimeMs?: number;
+  totalTimeMs?: number;
+}
+interface SpellCheckFileResult {
+  document: Document | DocumentWithText;
+  settingsUsed: CSpellSettingsWithSourceTrace;
+  localConfigFilepath: string | undefined;
+  options: SpellCheckFileOptions;
+  issues: ValidationIssue[];
+  checked: boolean;
+  errors: Error[] | undefined;
+  perf?: SpellCheckFilePerf;
+}
+/**
+* Spell Check a file
+* @param file - absolute path to file to read and check.
+* @param options - options to control checking
+* @param settings - default settings to use.
+*/
+declare function spellCheckFile(file: string | Uri | URL, options: SpellCheckFileOptions, settingsOrConfigFile: CSpellUserSettings | ICSpellConfigFile): Promise<SpellCheckFileResult>;
+/**
+* Spell Check a Document.
+* @param document - document to be checked. If `document.text` is `undefined` the file will be loaded
+* @param options - options to control checking
+* @param settings - default settings to use.
+*/
+declare function spellCheckDocument(document: Document | DocumentWithText, options: SpellCheckFileOptions, settingsOrConfigFile: CSpellUserSettings | ICSpellConfigFile): Promise<SpellCheckFileResult>;
+interface DetermineFinalDocumentSettingsResult {
+  document: DocumentWithText;
+  settings: CSpellSettingsWithSourceTrace;
+}
+/**
+* Combines all relevant setting values into a final configuration to be used for spell checking.
+* It applies any overrides and appropriate language settings by taking into account the document type (languageId)
+* the locale (natural language) and any in document settings.
+*
+* Note: this method will not search for configuration files. Configuration files should already be merged into `settings`.
+* It is NOT necessary to include the cspell defaultSettings or globalSettings. They will be applied within this function.
+* @param document - The document to be spell checked. Note: if the URI doesn't have a path, overrides cannot be applied.
+*   `locale` - if defined will be used unless it is overridden by an in-document setting.
+*   `languageId` - if defined will be used to select appropriate file type dictionaries.
+* @param settings - The near final settings. Should already be the combination of all configuration files.
+*/
+declare function determineFinalDocumentSettings(document: DocumentWithText, settings: CSpellUserSettings): Promise<DetermineFinalDocumentSettingsResult>;
+//#endregion
+//#region src/lib/cspellRPC.d.ts
+interface CSpellRPCApi {
+  spellCheckDocument: typeof spellCheckDocument;
+}
+type CSpellRPCServerOptions = RPCServerOptions;
+declare class CSpellRPCServer extends RPCServer<CSpellRPCApi> {
+  constructor(port: MessagePortLike, options?: CSpellRPCServerOptions);
+}
+declare function createCSpellRPCServer(port: MessagePortLike, options?: CSpellRPCServerOptions): CSpellRPCServer;
+type CSpellRPCClientOptions = RPCClientOptions;
+declare class CSpellRPCClient extends RPCClient<CSpellRPCApi> {
+  constructor(port: MessagePortLike, options?: CSpellRPCClientOptions);
+  getApi(): RPCProtocol<CSpellRPCApi>;
+}
+declare namespace exclusionHelper_d_exports {
+  export { ExcludeFilesGlobMap, ExclusionFunction, FileExclusionFunction, extractGlobsFromExcludeFilesGlobMap, generateExclusionFunctionForFiles, generateExclusionFunctionForUri };
+}
+type ExclusionFunction = (fileUri: string) => boolean;
+type FileExclusionFunction = (file: string) => boolean;
+/** The structure of the VS Code search.exclude settings */
+interface ExcludeFilesGlobMap {
+  [glob: string]: boolean;
+}
+declare function extractGlobsFromExcludeFilesGlobMap(globMap: ExcludeFilesGlobMap): string[];
+/**
+* @todo Support multi root globs.
+* @param globs - glob patterns
+* @param root - root directory
+* @param allowedSchemes - allowed schemas
+*/
+declare function generateExclusionFunctionForUri(globs: Glob[], root: string, allowedSchemes?: Set<string>): ExclusionFunction;
+/**
+* @todo Support multi root globs.
+* @param globs - glob patterns
+* @param root - root directory
+* @param allowedSchemes - allowed schemas
+*/
+declare function generateExclusionFunctionForFiles(globs: Glob[], root: string): FileExclusionFunction;
+//#endregion
+//#region src/lib/FeatureFlags/FeatureFlags.d.ts
+interface FeatureFlag {
+  name: string;
+  description: string;
+}
+type FlagTypes = string | boolean;
+/**
+* Feature Flags are used to turn on/off features.
+* These are primarily used before a feature has been fully released.
+*/
+declare class FeatureFlags {
+  private flags;
+  private flagValues;
+  constructor(flags?: FeatureFlag[]);
+  register(flag: FeatureFlag): this;
+  register(name: string, description: string): this;
+  getFlag(flag: string): FlagTypes | undefined;
+  getFlagBool(flag: string): boolean | undefined;
+  setFlag(flag: string, value?: FlagTypes): this;
+  getFlagInfo(flag: string): FeatureFlag | undefined;
+  getFlags(): FeatureFlag[];
+  getFlagValues(): Map<string, FlagTypes>;
+  reset(): this;
+}
+declare class UnknownFeatureFlagError extends Error {
+  readonly flag: string;
+  constructor(flag: string);
+}
+declare function getSystemFeatureFlags(): FeatureFlags;
 //#endregion
 //#region src/lib/getDictionary.d.ts
 /**
@@ -3007,67 +3669,6 @@ declare function checkFilenameMatchesExcludeGlob(filename: string, globs: Glob |
 declare const configSettingsFileVersion0_2 = "0.2";
 declare const currentSettingsFileVersion: typeof configSettingsFileVersion0_2;
 declare const ENV_CSPELL_GLOB_ROOT = "CSPELL_GLOB_ROOT";
-//#endregion
-//#region ../cspell-config-lib/dist/CSpellConfigFile.d.ts
-interface ICSpellConfigFile {
-  /**
-   * The url of the config file, used to resolve imports.
-   */
-  readonly url: URL;
-  /**
-   * The settings from the config file.
-   */
-  readonly settings: CSpellSettings;
-  /**
-   * Indicate that the config file is readonly.
-   */
-  readonly?: boolean;
-  /**
-   * Indicate that the config file is virtual and not associated with a file on disk.
-   */
-  virtual?: boolean;
-  /**
-   * Indicate that the config file is remote and not associated with a file on disk.
-   */
-  remote?: boolean;
-}
-declare abstract class CSpellConfigFile implements ICSpellConfigFile {
-  readonly url: URL;
-  constructor(url: URL);
-  /**
-   * The settings from the config file.
-   * Note: this is a copy of the settings from the config file. It should be treated as immutable.
-   * For performance reasons, it might not be frozen.
-   */
-  abstract readonly settings: CSpellSettings;
-  /**
-   * Helper function to add words to the config file.
-   * @param words - words to add to the config file.
-   */
-  abstract addWords(words: string[]): this;
-  /**
-   * Tell the config file to remove all comments.
-   * This is useful when the config file is being serialized and comments are not needed.
-   * @returns this - the config file.
-   */
-  abstract removeAllComments(): this;
-  /**
-   * Configure the jason.schema for the config file.
-   * @param schema - The schema to set for the config file.
-   */
-  abstract setSchema(schema: string): this;
-  abstract setValue<K$1 extends keyof CSpellSettings>(key: K$1, value: CSpellSettings[K$1]): this;
-  /**
-   *
-   * @param key - the field to set the comment for.
-   * @param comment - the comment to set.
-   * @param inline - if true, the comment will be set as an inline comment.
-   */
-  abstract setComment(key: keyof CSpellSettings, comment: string, inline?: boolean): this;
-  get readonly(): boolean;
-  get virtual(): boolean;
-  get remote(): boolean;
-}
 //#endregion
 //#region src/lib/util/resolveFile.d.ts
 interface ResolveFileResult {
@@ -3298,472 +3899,6 @@ declare namespace index_link_d_exports {
 //#region src/lib/Settings/TextDocumentSettings.d.ts
 declare function combineTextAndLanguageSettings(settings: CSpellUserSettings, text: string | undefined, languageId: string | string[]): CSpellSettingsInternal;
 //#endregion
-//#region src/lib/Models/Suggestion.d.ts
-interface ExtendedSuggestion {
-  /**
-  * The suggestion.
-  */
-  word: string;
-  /**
-  * The word is preferred above others, except other "preferred" words.
-  */
-  isPreferred?: boolean;
-  /**
-  * The suggested word adjusted to match the original case.
-  */
-  wordAdjustedToMatchCase?: string;
-  /**
-  * The cost of using this word.
-  * The lower the cost, the better the suggestion.
-  */
-  cost?: number;
-}
-//#endregion
-//#region src/lib/Models/ValidationResult.d.ts
-interface ValidationResult extends TextOffset, Pick<Issue, "message" | "issueType" | "hasPreferredSuggestions" | "hasSimpleSuggestions"> {
-  line: TextOffset;
-  isFlagged?: boolean | undefined;
-  isFound?: boolean | undefined;
-}
-//#endregion
-//#region src/lib/Models/ValidationIssue.d.ts
-interface ValidationIssue extends ValidationResult {
-  suggestions?: string[] | undefined;
-  suggestionsEx?: ExtendedSuggestion[] | undefined;
-}
-//#endregion
-//#region src/lib/suggestions.d.ts
-interface WordSuggestion extends SuggestionResult {
-  /**
-  * The suggested word adjusted to match the original case.
-  */
-  wordAdjustedToMatchCase?: string;
-}
-interface SuggestedWordBase extends WordSuggestion {
-  /**
-  * dictionary names
-  */
-  dictionaries: string[];
-}
-interface SuggestedWord extends SuggestedWordBase {
-  noSuggest: boolean;
-  forbidden: boolean;
-}
-interface SuggestionsForWordResult {
-  word: string;
-  suggestions: SuggestedWord[];
-}
-type FromSuggestOptions = Pick<SuggestOptions, "numChanges" | "numSuggestions" | "includeTies">;
-interface SuggestionOptions extends FromSuggestOptions {
-  /**
-  * languageId to use when determining file type.
-  */
-  languageId?: FileTypeId | FileTypeId[];
-  /**
-  * Locale to use.
-  */
-  locale?: LocaleId;
-  /**
-  * Strict case and accent checking
-  * @default true
-  */
-  strict?: boolean;
-  /**
-  * List of dictionaries to use. If specified, only that list of dictionaries will be used.
-  */
-  dictionaries?: string[];
-  /**
-  * The number of suggestions to make.
-  * @default 8
-  */
-  numSuggestions?: number | undefined;
-  /**
-  * Max number of changes / edits to the word to get to a suggestion matching suggestion.
-  * @default 4
-  */
-  numChanges?: number | undefined;
-  /**
-  * If multiple suggestions have the same edit / change "cost", then included them even if
-  * it causes more than `numSuggestions` to be returned.
-  * @default true
-  */
-  includeTies?: boolean | undefined;
-  /**
-  * By default we want to use the default configuration, but there are cases
-  * where someone might not want that.
-  * @default true
-  */
-  includeDefaultConfig?: boolean;
-}
-declare function suggestionsForWords(words: Iterable<string> | AsyncIterable<string>, options?: SuggestionOptions, settings?: CSpellSettings): AsyncIterable<SuggestionsForWordResult>;
-declare function suggestionsForWord(word: string, options?: SuggestionOptions, settings?: CSpellSettings | ICSpellConfigFile): Promise<SuggestionsForWordResult>;
-declare class SuggestionError extends Error {
-  readonly code: string;
-  constructor(message: string, code: string);
-}
-//#endregion
-//#region src/lib/util/TextRange.d.ts
-/**
-* A range of text in a document.
-* The range is inclusive of the startPos and exclusive of the endPos.
-*/
-interface MatchRange {
-  startPos: number;
-  endPos: number;
-}
-//#endregion
-//#region src/lib/textValidation/ValidationTypes.d.ts
-type TextOffsetRO = Readonly<TextOffset>;
-interface ValidationOptions extends IncludeExcludeOptions, ReportingConfiguration {
-  maxNumberOfProblems?: number;
-  maxDuplicateProblems?: number;
-  minWordLength?: number;
-  flagWords?: string[];
-  allowCompoundWords?: boolean;
-  /** ignore case when checking words against dictionary or ignore words list */
-  ignoreCase: boolean;
-  ignoreRandomStrings?: boolean | undefined;
-  minRandomLength?: number | undefined;
-}
-interface IncludeExcludeOptions {
-  ignoreRegExpList?: RegExp[];
-  includeRegExpList?: RegExp[];
-}
-type LineValidatorFn = (line: LineSegment) => Iterable<ValidationIssue>;
-interface LineSegment {
-  /** A line from the document, the offset is relative to the beginning of the document. */
-  line: TextOffsetRO;
-  /** A segment of text from the line, the offset is relative to the beginning of the document. */
-  segment: TextOffsetRO;
-}
-interface MappedTextValidationResult extends MappedText, Pick<Issue, "hasSimpleSuggestions" | "hasPreferredSuggestions" | "isFlagged" | "suggestionsEx"> {
-  isFound?: boolean | undefined;
-}
-type TextValidatorFn = (text: MappedText) => Iterable<MappedTextValidationResult>;
-//#endregion
-//#region src/lib/textValidation/lineValidatorFactory.d.ts
-interface LineValidator {
-  fn: LineValidatorFn;
-  dict: CachingDictionary;
-}
-interface TextValidator {
-  validate: TextValidatorFn;
-  lineValidator: LineValidator;
-}
-//#endregion
-//#region src/lib/textValidation/parsedText.d.ts
-type Offset = number;
-type SimpleRange = readonly [Offset, Offset];
-//#endregion
-//#region src/lib/textValidation/traceWord.d.ts
-type Href = string;
-interface DictionaryTraceResult {
-  /** The word being traced. */
-  word: string;
-  found: boolean;
-  /** The word found. */
-  foundWord: string | undefined;
-  /** Indicates that the word is flagged. */
-  forbidden: boolean;
-  /** The would should not show up in suggestions, but is considered correct. */
-  noSuggest: boolean;
-  /** The name of the dictionary. */
-  dictName: string;
-  /** The path/href to dictionary file. */
-  dictSource: string;
-  /** Suggested changes to the word. */
-  preferredSuggestions?: string[] | undefined;
-  /** href to the config file referencing the dictionary. */
-  configSource: Href | undefined;
-  /** Errors */
-  errors?: Error[] | undefined;
-}
-interface WordSplits {
-  word: string;
-  found: boolean;
-}
-interface TraceResult$1 extends Array<DictionaryTraceResult> {
-  splits?: readonly WordSplits[];
-}
-//#endregion
-//#region src/lib/textValidation/ValidateTextOptions.d.ts
-interface ValidateTextOptions {
-  /**
-  * Generate suggestions where there are spelling issues.
-  */
-  generateSuggestions?: boolean;
-  /**
-  * The number of suggestions to generate. The higher the number the longer it takes.
-  */
-  numSuggestions?: number;
-  /**
-  * Verify that the in-document directives are correct.
-  */
-  validateDirectives?: boolean;
-  /**
-  * Skips spell checking the document. Useful for testing and dry runs.
-  * It will read the configuration and parse the document.
-  */
-  skipValidation?: boolean;
-}
-//#endregion
-//#region src/lib/textValidation/docValidator.d.ts
-interface DocumentValidatorOptions extends ValidateTextOptions {
-  /**
-  * Optional path to a configuration file.
-  * If given, it will be used instead of searching for a configuration file.
-  */
-  configFile?: string;
-  /**
-  * Prevents searching for local configuration files
-  * By default the spell checker looks for configuration files
-  * starting at the location of given filename.
-  * If `configFile` is defined it will still be loaded instead of searching.
-  * `false` will override the value in `settings.noConfigSearch`.
-  * @defaultValue undefined
-  */
-  noConfigSearch?: boolean;
-  /**
-  * If `settings: CSpellUserSettings` contains imports, they will be resolved using this path.
-  * If not set, the current working directory will be used.
-  */
-  resolveImportsRelativeTo?: string | URL;
-}
-type PerfTimings = Record<string, number>;
-declare class DocumentValidator {
-  readonly settings: CSpellUserSettings;
-  private _document;
-  private _ready;
-  readonly errors: Error[];
-  private _prepared;
-  private _preparations;
-  private _preparationTime;
-  private _suggestions;
-  readonly options: DocumentValidatorOptions;
-  readonly perfTiming: PerfTimings;
-  skipValidation: boolean;
-  static create(doc: TextDocument, options: DocumentValidatorOptions, settingsOrConfigFile: CSpellUserSettings | ICSpellConfigFile): Promise<DocumentValidator>;
-  /**
-  * @param doc - Document to validate
-  * @param config - configuration to use (not finalized).
-  */
-  constructor(doc: TextDocument, options: DocumentValidatorOptions, settings: CSpellUserSettings);
-  get ready(): boolean;
-  prepare(): Promise<void>;
-  private _prepareAsync;
-  private _updatePrep;
-  /**
-  * The amount of time in ms to prepare for validation.
-  */
-  get prepTime(): number;
-  get validateDirectives(): boolean;
-  /**
-  * Check a range of text for validation issues.
-  * @param range - the range of text to check.
-  * @param _text - the text to check. If not given, the text will be taken from the document.
-  * @param scope - the scope to use for validation. If not given, the default scope will be used.
-  * @returns the validation issues.
-  */
-  checkText(range: SimpleRange, _text: string | undefined, scope?: string[] | string): ValidationIssue[];
-  check(parsedText: ParsedText): ValidationIssue[];
-  /**
-  * Check a Document for Validation Issues.
-  * @param forceCheck - force a check even if the document would normally be excluded.
-  * @returns the validation issues.
-  */
-  checkDocumentAsync(forceCheck?: boolean): Promise<ValidationIssue[]>;
-  /**
-  * Check a Document for Validation Issues.
-  *
-  * Note: The validator must be prepared before calling this method.
-  * @param forceCheck - force a check even if the document would normally be excluded.
-  * @returns the validation issues.
-  */
-  checkDocument(forceCheck?: boolean): ValidationIssue[];
-  checkDocumentDirectives(forceCheck?: boolean): ValidationIssue[];
-  get document(): TextDocument;
-  updateDocumentText(text: string): Promise<void>;
-  /**
-  * Get the calculated ranges of text that should be included in the spell checking.
-  * @returns MatchRanges of text to include.
-  */
-  getCheckedTextRanges(): MatchRange[];
-  traceWord(word: string): TraceResult$1;
-  private defaultParser;
-  private _checkParsedText;
-  private addPossibleError;
-  private _parse;
-  private getSuggestions;
-  private genSuggestions;
-  private adjustSuggestions;
-  getFinalizedDocSettings(): CSpellSettingsInternal;
-  /**
-  * Returns true if the final result of the configuration calculation results
-  * in the document being enabled. Note: in some cases, checking the document
-  * might still make sense, for example, the `@cspell/eslint-plugin` relies on
-  * `eslint` configuration to make that determination.
-  * @returns true if the document settings have resolved to be `enabled`
-  */
-  shouldCheckDocument(): boolean;
-  /**
-  * Internal `cspell-lib` use.
-  */
-  _getPreparations(): Preparations | undefined;
-}
-interface Preparations {
-  /** loaded config */
-  config: CSpellSettingsInternal;
-  dictionary: SpellingDictionaryCollection;
-  /** configuration after applying in-doc settings */
-  docSettings: CSpellSettingsInternal;
-  finalSettings: CSpellSettingsInternalFinalized;
-  includeRanges: MatchRange[];
-  textValidator: TextValidator;
-  segmenter: (texts: MappedText) => Iterable<MappedText>;
-  shouldCheck: boolean;
-  validateOptions: ValidationOptions;
-  localConfig: CSpellUserSettings | undefined;
-  localConfigFilepath: string | undefined;
-}
-interface ShouldCheckDocumentResult {
-  /** possible errors found while loading configuration. */
-  errors: Error[];
-  /**
-  * The calculated result:
-  * - `false` if the document should not be checked. Based upon the settings.
-  * - `true` if the document should be checked.
-  */
-  shouldCheck: boolean;
-  /** final settings used to determine the result. */
-  settings: CSpellUserSettings;
-  /**
-  * The reason the document should not be checked.
-  */
-  reason?: string | undefined;
-}
-/**
-* Check if a document should be checked based upon the ignorePaths and override settings.
-*
-* This function will search and fetch settings based upon the location of the document if `noConfigSearch` is not true.
-*
-* @param doc - document to check
-* @param options - options to override some of the settings.
-* @param settings - current settings
-* @returns ShouldCheckDocumentResult
-*/
-declare function shouldCheckDocument(doc: TextDocumentRef, options: DocumentValidatorOptions, settings: CSpellUserSettings): Promise<ShouldCheckDocumentResult>;
-//#endregion
-//#region src/lib/textValidation/checkText.d.ts
-/**
-* Annotate text with issues and include / exclude zones.
-* @param text - the text to annotate.
-* @param settings - the settings to use.
-* @returns the Check Text result
-* @deprecated
-*/
-declare function checkText(text: string, settings: CSpellUserSettings): Promise<CheckTextInfo>;
-interface CheckTextInfo {
-  text: string;
-  items: TextInfoItem[];
-}
-interface TextInfoItem {
-  text: string;
-  startPos: number;
-  endPos: number;
-  flagIE: IncludeExcludeFlag;
-  isError?: boolean;
-}
-declare enum IncludeExcludeFlag {
-  INCLUDE = "I",
-  EXCLUDE = "E",
-}
-interface CheckTextOptions extends DocumentValidatorOptions {}
-/**
-* Calculate document issues and include / exclude zones.
-* @param doc - document to check
-* @param options - check options
-* @param settings - optional settings
-* @returns
-*/
-declare function checkTextDocument(doc: TextDocument | Document, options: CheckTextOptions, settings?: CSpellUserSettings): Promise<CheckTextInfo>;
-//#endregion
-//#region src/lib/textValidation/validator.d.ts
-/**
-* @deprecated
-* @deprecationMessage Use spellCheckDocument
-*/
-declare function validateText(text: string, settings: CSpellUserSettings, options?: ValidateTextOptions): Promise<ValidationIssue[]>;
-//#endregion
-//#region src/lib/spellCheckFile.d.ts
-interface SpellCheckFileOptions extends ValidateTextOptions, Pick<CSpellUserSettings, "unknownWords"> {
-  /**
-  * Optional path to a configuration file.
-  * If given, it will be used instead of searching for a configuration file.
-  */
-  configFile?: string;
-  /**
-  * File encoding
-  * @defaultValue 'utf-8'
-  */
-  encoding?: BufferEncoding;
-  /**
-  * Prevents searching for local configuration files
-  * By default the spell checker looks for configuration files
-  * starting at the location of given filename.
-  * If `configFile` is defined it will still be loaded instead of searching.
-  * `false` will override the value in `settings.noConfigSearch`.
-  * @defaultValue undefined
-  */
-  noConfigSearch?: boolean;
-}
-interface SpellCheckFilePerf extends Record<string, number | undefined> {
-  loadTimeMs?: number;
-  prepareTimeMs?: number;
-  checkTimeMs?: number;
-  totalTimeMs?: number;
-}
-interface SpellCheckFileResult {
-  document: Document | DocumentWithText;
-  settingsUsed: CSpellSettingsWithSourceTrace;
-  localConfigFilepath: string | undefined;
-  options: SpellCheckFileOptions;
-  issues: ValidationIssue[];
-  checked: boolean;
-  errors: Error[] | undefined;
-  perf?: SpellCheckFilePerf;
-}
-/**
-* Spell Check a file
-* @param file - absolute path to file to read and check.
-* @param options - options to control checking
-* @param settings - default settings to use.
-*/
-declare function spellCheckFile(file: string | Uri | URL, options: SpellCheckFileOptions, settingsOrConfigFile: CSpellUserSettings | ICSpellConfigFile): Promise<SpellCheckFileResult>;
-/**
-* Spell Check a Document.
-* @param document - document to be checked. If `document.text` is `undefined` the file will be loaded
-* @param options - options to control checking
-* @param settings - default settings to use.
-*/
-declare function spellCheckDocument(document: Document | DocumentWithText, options: SpellCheckFileOptions, settingsOrConfigFile: CSpellUserSettings | ICSpellConfigFile): Promise<SpellCheckFileResult>;
-interface DetermineFinalDocumentSettingsResult {
-  document: DocumentWithText;
-  settings: CSpellSettingsWithSourceTrace;
-}
-/**
-* Combines all relevant setting values into a final configuration to be used for spell checking.
-* It applies any overrides and appropriate language settings by taking into account the document type (languageId)
-* the locale (natural language) and any in document settings.
-*
-* Note: this method will not search for configuration files. Configuration files should already be merged into `settings`.
-* It is NOT necessary to include the cspell defaultSettings or globalSettings. They will be applied within this function.
-* @param document - The document to be spell checked. Note: if the URI doesn't have a path, overrides cannot be applied.
-*   `locale` - if defined will be used unless it is overridden by an in-document setting.
-*   `languageId` - if defined will be used to select appropriate file type dictionaries.
-* @param settings - The near final settings. Should already be the combination of all configuration files.
-*/
-declare function determineFinalDocumentSettings(document: DocumentWithText, settings: CSpellUserSettings): Promise<DetermineFinalDocumentSettingsResult>;
-//#endregion
 //#region src/lib/trace.d.ts
 interface TraceResult extends DictionaryTraceResult {
   /** True if the dictionary is currently active. */
@@ -3855,4 +3990,4 @@ declare namespace textApi_d_exports {
   export { calculateTextDocumentOffsets, camelToSnake, cleanText, cleanTextOffset, extractLinesOfText, extractPossibleWordsFromTextOffset, extractText, extractWordsFromCode, extractWordsFromCodeTextOffset, extractWordsFromText, extractWordsFromTextOffset, isFirstCharacterLower, isFirstCharacterUpper, isLowerCase, isUpperCase, lcFirst, match, matchCase, matchStringToTextOffset, matchToTextOffset, removeAccents, snakeToCamel, splitCamelCaseWord, splitCamelCaseWordWithOffset, stringToRegExp, textOffset, ucFirst };
 }
 //#endregion
-export { type AdvancedCSpellSettings, type AdvancedCSpellSettingsWithSourceTrace, type BaseSetting, type CSpellConfigFile, type CSpellPackageSettings, type CSpellReporter, type CSpellReporterEmitters, type CSpellReporterModule, type CSpellSettings, type CSpellSettingsWithSourceTrace, type CSpellUserSettings, type CSpellUserSettingsFields, type CSpellUserSettingsWithComments, type CacheFormat, type CacheSettings, type CacheStrategy, type CharacterSet, type CharacterSetCosts, CheckTextInfo, type CommandLineSettings, CompoundWordsMethod, ConfigFields, ConfigurationDependencies, CreateTextDocumentParams, type CustomDictionaryPath, type CustomDictionaryScope, type DebugEmitter, DetermineFinalDocumentSettingsResult, type DictionaryDefinition, type DictionaryDefinitionAlternate, type DictionaryDefinitionAugmented, type DictionaryDefinitionBase, type DictionaryDefinitionCustom, type DictionaryDefinitionInline, type DictionaryDefinitionInlineFlagWords, type DictionaryDefinitionInlineIgnoreWords, type DictionaryDefinitionInlineWords, type DictionaryDefinitionLegacy, type DictionaryDefinitionPreferred, type DictionaryDefinitionSimple, type DictionaryFileTypes, type DictionaryId, type DictionaryInformation, type DictionaryNegRef, type DictionaryPath, type DictionaryRef, type DictionaryReference, Document, DocumentValidator, DocumentValidatorOptions, ENV_CSPELL_GLOB_ROOT, type EditCosts, type ErrorEmitter, type ErrorLike, ExcludeFilesGlobMap, ExclusionFunction, exclusionHelper_d_exports as ExclusionHelper, type ExperimentalBaseSettings, type ExperimentalFileSettings, type ExtendableSettings, FSCapabilityFlags, type FSPathResolvable, type Feature, FeatureFlag, FeatureFlags, type Features, type FeaturesSupportedByReporter, type FileSettings, type FileSource, type FsPath, type Glob, type GlobDef, type ICSpellConfigFile, ImportError, type ImportFileRef, ImportFileRefWithError, type InMemorySource, IncludeExcludeFlag, IncludeExcludeOptions, type Issue, IssueType, type LanguageId, type LanguageIdMultiple, type LanguageIdMultipleNeg, type LanguageIdSingle, type LanguageSetting, type LanguageSettingFilterFields, type LanguageSettingFilterFieldsDeprecated, type LanguageSettingFilterFieldsPreferred, type LegacySettings, index_link_d_exports as Link, type LocalId, type LocaleId, Logger, type MappedText, type MatchingFileType, type MergeSource, type MessageEmitter, type MessageType, type MessageTypeLookup, MessageTypes, type OverrideFilterFields, type OverrideSettings, type ParseResult, type ParsedText, type Parser, type ParserName, type ParserOptions, type Pattern, type PatternId, type PatternRef, PerfTimer, type Plugin, type PnPSettings, type PredefinedPatterns, type ProgressBase, type ProgressEmitter, type ProgressFileBase, type ProgressFileBegin, type ProgressFileComplete, type ProgressItem, type ProgressTypes, type RegExpPatternDefinition, type RegExpPatternList, type ReplaceEntry, type ReplaceMap, type ReportIssueOptions, type ReporterConfiguration, type ReporterSettings, type ReportingConfiguration, type ResultEmitter, type RunResult, type Settings, type SimpleGlob, type Source, SpellCheckFileOptions, SpellCheckFilePerf, SpellCheckFileResult, SpellingDictionary, SpellingDictionaryCollection, SpellingDictionaryLoadError, type SpellingErrorEmitter, SuggestOptions, SuggestedWord, SuggestionCollector, type SuggestionCostMapDef, type SuggestionCostsDefs, SuggestionError, SuggestionOptions, SuggestionResult, type SuggestionsConfiguration, SuggestionsForWordResult, textApi_d_exports as Text, TextDocument, TextDocumentLine, type TextDocumentOffset, TextDocumentRef, TextInfoItem, type TextOffset, TraceOptions, TraceResult, TraceWordResult, type TrustLevel, UnknownFeatureFlagError, type UnknownWordsChoices, type UnknownWordsConfiguration, type VFileSystemProvider, ValidationIssue, type Version, type VersionLatest, type VersionLegacy, type VirtualFS, type WorkspaceTrustSettings, toArray as asyncIterableToArray, calcOverrideSettings, checkFilenameMatchesExcludeGlob as checkFilenameMatchesGlob, checkText, checkTextDocument, clearCachedFiles, clearCaches, combineTextAndLanguageSettings, combineTextAndLanguageSettings as constructSettingsForText, createConfigLoader, createPerfTimer, createSpellingDictionary, createCollection as createSpellingDictionaryCollection, createTextDocument, currentSettingsFileVersion, defaultCSpellSettings, defaultConfigFilenames, defaultFileName, defaultFileName as defaultSettingsFilename, defineConfig, determineFinalDocumentSettings, extractDependencies, extractImportErrors, fileToDocument, fileToTextDocument, finalizeSettings, getCachedFileSize, getDefaultBundledSettingsAsync, getDefaultConfigLoader, getDefaultSettings, getDictionary, getGlobalSettings, getGlobalSettingsAsync, findMatchingFileTypes as getLanguageIdsForBaseFilename, getFileTypesForExt as getLanguagesForExt, getLogger, getSources, getSystemFeatureFlags, getVirtualFS, isBinaryFile, isSpellingDictionaryLoadError, loadConfig, loadPnP, mergeInDocSettings, mergeSettings, readConfigFile, readFileText as readFile, readFileTextSync as readFileSync, readRawSettings, readSettings, readSettingsFiles, refreshDictionaryCache, resolveConfigFileImports, resolveFile, searchForConfig, sectionCSpell, setLogger, shouldCheckDocument, spellCheckDocument, spellCheckFile, suggestionsForWord, suggestionsForWords, traceWords, traceWordsAsync, unknownWordsChoices, updateTextDocument, validateText, writeToFile, writeToFileIterable, writeToFileIterable as writeToFileIterableP };
+export { type AdvancedCSpellSettings, type AdvancedCSpellSettingsWithSourceTrace, type BaseSetting, type CSpellConfigFile, type CSpellPackageSettings, CSpellRPCApi, CSpellRPCClient, CSpellRPCServer, CSpellRPCServerOptions, type CSpellReporter, type CSpellReporterEmitters, type CSpellReporterModule, type CSpellSettings, type CSpellSettingsWithSourceTrace, type CSpellUserSettings, type CSpellUserSettingsFields, type CSpellUserSettingsWithComments, type CacheFormat, type CacheSettings, type CacheStrategy, type CharacterSet, type CharacterSetCosts, CheckTextInfo, type CommandLineSettings, CompoundWordsMethod, ConfigFields, ConfigurationDependencies, CreateTextDocumentParams, type CustomDictionaryPath, type CustomDictionaryScope, type DebugEmitter, DetermineFinalDocumentSettingsResult, type DictionaryDefinition, type DictionaryDefinitionAlternate, type DictionaryDefinitionAugmented, type DictionaryDefinitionBase, type DictionaryDefinitionCustom, type DictionaryDefinitionInline, type DictionaryDefinitionInlineFlagWords, type DictionaryDefinitionInlineIgnoreWords, type DictionaryDefinitionInlineWords, type DictionaryDefinitionLegacy, type DictionaryDefinitionPreferred, type DictionaryDefinitionSimple, type DictionaryFileTypes, type DictionaryId, type DictionaryInformation, type DictionaryNegRef, type DictionaryPath, type DictionaryRef, type DictionaryReference, Document, DocumentValidator, DocumentValidatorOptions, ENV_CSPELL_GLOB_ROOT, type EditCosts, type ErrorEmitter, type ErrorLike, ExcludeFilesGlobMap, ExclusionFunction, exclusionHelper_d_exports as ExclusionHelper, type ExperimentalBaseSettings, type ExperimentalFileSettings, type ExtendableSettings, FSCapabilityFlags, type FSPathResolvable, type Feature, FeatureFlag, FeatureFlags, type Features, type FeaturesSupportedByReporter, type FileSettings, type FileSource, type FsPath, type Glob, type GlobDef, type ICSpellConfigFile, ImportError, type ImportFileRef, ImportFileRefWithError, type InMemorySource, IncludeExcludeFlag, IncludeExcludeOptions, type Issue, IssueType, type LanguageId, type LanguageIdMultiple, type LanguageIdMultipleNeg, type LanguageIdSingle, type LanguageSetting, type LanguageSettingFilterFields, type LanguageSettingFilterFieldsDeprecated, type LanguageSettingFilterFieldsPreferred, type LegacySettings, index_link_d_exports as Link, type LocalId, type LocaleId, Logger, type MappedText, type MatchingFileType, type MergeSource, type MessageEmitter, type MessageType, type MessageTypeLookup, MessageTypes, type OverrideFilterFields, type OverrideSettings, type ParseResult, type ParsedText, type Parser, type ParserName, type ParserOptions, type Pattern, type PatternId, type PatternRef, PerfTimer, type Plugin, type PnPSettings, type PredefinedPatterns, type ProgressBase, type ProgressEmitter, type ProgressFileBase, type ProgressFileBegin, type ProgressFileComplete, type ProgressItem, type ProgressTypes, type RegExpPatternDefinition, type RegExpPatternList, type ReplaceEntry, type ReplaceMap, type ReportIssueOptions, type ReporterConfiguration, type ReporterSettings, type ReportingConfiguration, type ResultEmitter, type RunResult, type Settings, type SimpleGlob, type Source, SpellCheckFileOptions, SpellCheckFilePerf, SpellCheckFileResult, SpellingDictionary, SpellingDictionaryCollection, SpellingDictionaryLoadError, type SpellingErrorEmitter, SuggestOptions, SuggestedWord, SuggestionCollector, type SuggestionCostMapDef, type SuggestionCostsDefs, SuggestionError, SuggestionOptions, SuggestionResult, type SuggestionsConfiguration, SuggestionsForWordResult, textApi_d_exports as Text, TextDocument, TextDocumentLine, type TextDocumentOffset, TextDocumentRef, TextInfoItem, type TextOffset, TraceOptions, TraceResult, TraceWordResult, type TrustLevel, UnknownFeatureFlagError, type UnknownWordsChoices, type UnknownWordsConfiguration, type VFileSystemProvider, ValidationIssue, type Version, type VersionLatest, type VersionLegacy, type VirtualFS, type WorkspaceTrustSettings, toArray as asyncIterableToArray, calcOverrideSettings, checkFilenameMatchesExcludeGlob as checkFilenameMatchesGlob, checkText, checkTextDocument, clearCachedFiles, clearCaches, combineTextAndLanguageSettings, combineTextAndLanguageSettings as constructSettingsForText, createCSpellRPCServer, createConfigLoader, createPerfTimer, createSpellingDictionary, createCollection as createSpellingDictionaryCollection, createTextDocument, currentSettingsFileVersion, defaultCSpellSettings, defaultConfigFilenames, defaultFileName, defaultFileName as defaultSettingsFilename, defineConfig, determineFinalDocumentSettings, extractDependencies, extractImportErrors, fileToDocument, fileToTextDocument, finalizeSettings, getCachedFileSize, getDefaultBundledSettingsAsync, getDefaultConfigLoader, getDefaultSettings, getDictionary, getGlobalSettings, getGlobalSettingsAsync, findMatchingFileTypes as getLanguageIdsForBaseFilename, getFileTypesForExt as getLanguagesForExt, getLogger, getSources, getSystemFeatureFlags, getVirtualFS, isBinaryFile, isSpellingDictionaryLoadError, loadConfig, loadPnP, mergeInDocSettings, mergeSettings, readConfigFile, readFileText as readFile, readFileTextSync as readFileSync, readRawSettings, readSettings, readSettingsFiles, refreshDictionaryCache, resolveConfigFileImports, resolveFile, searchForConfig, sectionCSpell, setLogger, shouldCheckDocument, spellCheckDocument, spellCheckFile, suggestionsForWord, suggestionsForWords, traceWords, traceWordsAsync, unknownWordsChoices, updateTextDocument, validateText, writeToFile, writeToFileIterable, writeToFileIterable as writeToFileIterableP };
