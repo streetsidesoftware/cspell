@@ -1,4 +1,6 @@
 export { clearCachedFiles, clearCaches } from './clearCachedFiles.js';
+export type { CSpellRPCApi } from './cspellRPC.js';
+export { createCSpellRPCServer, CSpellRPCClient, CSpellRPCServer, CSpellRPCServerOptions } from './cspellRPC.js';
 export type { Document } from './Document/index.js';
 export { fileToDocument, fileToTextDocument, isBinaryFile } from './Document/index.js';
 export type { ExcludeFilesGlobMap, ExclusionFunction } from './exclusionHelper.js';

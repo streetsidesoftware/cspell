@@ -1,6 +1,6 @@
-import { defineConfig } from 'tsdown';
+import { defineConfig, type UserConfig } from 'tsdown';
 
-export default defineConfig([
+const config: UserConfig[] = defineConfig([
     {
         // The API
         entry: ['src/api.ts'],
@@ -12,3 +12,5 @@ export default defineConfig([
         clean: true,
     },
 ]);
+
+export default config;
