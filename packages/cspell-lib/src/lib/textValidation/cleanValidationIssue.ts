@@ -9,16 +9,16 @@ export function cleanValidationIssue(issue: ValidationIssue): ValidationIssue {
 }
 
 const ValidationIssueHandlers: Handlers<ValidationIssue> = {
-    line: copy1,
+    text: copy0,
+    offset: copy0,
     message: copy0,
+    line: copy1,
+    length: copy0,
     issueType: copy0,
     hasPreferredSuggestions: copy0,
     hasSimpleSuggestions: copy0,
-    suggestions: copy1,
-    suggestionsEx: copy1,
-    offset: copy0,
-    length: copy0,
     isFlagged: copy0,
     isFound: copy0,
-    text: copy0,
+    suggestions: copy1,
+    suggestionsEx: copy1,
 };
