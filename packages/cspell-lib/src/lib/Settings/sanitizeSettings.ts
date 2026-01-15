@@ -263,8 +263,9 @@ function copyPatternsField(
     const patterns = src[key];
     if (!patterns) return;
     dst[key] = patterns.map((p) => {
-        copyRegExpPatternDefinition(p, { pattern: p.pattern, name: p.name });
-        return p;
+        const dst = { pattern: p.pattern, name: p.name };
+        copyRegExpPatternDefinition(p, dst);
+        return dst;
     });
 }
 
@@ -320,8 +321,9 @@ function copyOverrides(
 ): void {
     const overrides = src[key];
     if (!overrides) return;
-    dst[key] = overrides.map((o) => {
-        cloneInto(o, { filename: o.filename }, OverridesHandlers);
-        return o;
+    dst[key] = overrides.map((src) => {
+        const dst = {} as OverrideSettings;
+        cloneInto(src, dst, OverridesHandlers);
+        return dst;
     });
 }
