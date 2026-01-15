@@ -36,7 +36,7 @@ export function startSimpleRCPWorker(): SimpleWorkerInstance {
     const messageChannel = new MessageChannel();
     const { port1, port2 } = messageChannel;
 
-    const worker = new Worker(new URL('worker.js', import.meta.url), {
+    const worker = new Worker(new URL('simpleWorker.js', import.meta.url), {
         workerData: { port: port1 },
         transferList: [port1],
         stderr: true,

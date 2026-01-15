@@ -2,7 +2,7 @@ import { defineConfig, type UserConfig } from 'tsdown';
 
 const baseConfig: UserConfig = {
     entry: ['src/index.ts', 'src/simpleWorker.ts', 'src/worker.ts'],
-    noExternal: ['cspell-lib/rpc'],
+    // noExternal: ['cspell-lib/rpc'],
     outDir: 'dist',
     format: ['esm'],
     target: 'Node20',
