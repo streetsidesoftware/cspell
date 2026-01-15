@@ -4,6 +4,7 @@ import { MessageChannel } from 'node:worker_threads';
 import { describe, expect, test, vi } from 'vitest';
 
 import { RPCClient } from './client.js';
+import { AbortRPCRequestError, CanceledRPCRequestError } from './errors.js';
 import type { MessagePortLike } from './messagePort.js';
 import { RPCServer } from './server.js';
 
@@ -26,15 +27,24 @@ describe('Validate Client / Server communications', () => {
     });
 
     test('Simple API sleep', async () => {
-        const { client, server, api } = createClientServerPair(getTestApi());
+        const { client } = createClientServerPair(getTestApi());
+        const clientApi = client.getApi(['sleep']);
+        await expect(clientApi.sleep(10)).resolves.toBe(undefined);
+        await expect(client.call('sleep', [10_000], { timeoutMs: 10 })).rejects.toThrow(AbortRPCRequestError);
 
-        expect(client).toBeDefined();
-        expect(server).toBeDefined();
-        expect(api).toBeDefined();
+        const longSleep = clientApi.sleep(10_000);
+        await expect(client.cancelPromise(longSleep)).resolves.toBe(true);
+        await expect(longSleep).rejects.toThrow(CanceledRPCRequestError);
+    });
 
+    test('Shutdown server with pending requests', async () => {
+        const { client, server } = createClientServerPair(getTestApi());
         const clientApi = client.getApi(['sleep']);
 
-        await expect(clientApi.sleep(10)).resolves.toBe(undefined);
+        const longSleep = clientApi.sleep(10_000);
+        await expect(clientApi.sleep(1)).resolves.toBe(undefined);
+        server[Symbol.dispose]();
+        await expect(longSleep).rejects.toThrow(new Error('RPC Server is shutting down'));
     });
 });
 
@@ -53,7 +63,7 @@ function getTestApi(): TestApi {
         sub: (a: number, b: number): number => a - b,
         mul: (a: number, b: number): number => a * b,
         div: (a: number, b: number): number => a / b,
-        sleep: (ms: number): Promise<void> => new Promise((resolve) => setTimeout(resolve, ms)),
+        sleep: wait,
         error: (message: string): void => {
             throw new Error(message);
         },
@@ -82,4 +92,8 @@ function spyOnPort(port: MessagePortLike) {
     const spyOnStart = vi.spyOn(port, 'start');
     const spyOnClose = vi.spyOn(port, 'close');
     return { spyOnAddListener, spyOnStart, spyOnClose };
+}
+
+function wait(ms: number): Promise<void> {
+    return new Promise((resolve) => setTimeout(resolve, ms));
 }

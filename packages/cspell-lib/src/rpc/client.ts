@@ -182,8 +182,9 @@ export class RPCClient<
             if (isResolved || isCanceled) return;
             isCanceled = true;
             cancelRequest();
+            reason = reason instanceof Event ? undefined : reason;
+            reason ??= `Request ${id} aborted`;
             reason = typeof reason === 'string' ? new AbortRPCRequestError(reason) : reason;
-            reason ??= new AbortRPCRequestError(`Request ${id} aborted`);
             cleanup();
             resolver.reject(reason);
         }
@@ -214,11 +215,7 @@ export class RPCClient<
      * @param options - Call options including abort signal.
      * @returns A Promise with the method result.
      */
-    call<M extends MethodNames>(
-        method: M,
-        params: Parameters<P[M]>,
-        options?: { signal?: AbortSignal },
-    ): ReturnType<P[M]> {
+    call<M extends MethodNames>(method: M, params: Parameters<P[M]>, options?: RequestOptions): ReturnType<P[M]> {
         const req = this.request(method, params, options);
         return req.response;
     }
@@ -293,6 +290,12 @@ export class RPCClient<
         if (!pendingRequest) return false;
         await pendingRequest.cancel();
         return true;
+    }
+
+    async cancelPromise(promise: Promise<unknown>): Promise<boolean> {
+        const pendingRequestId = this.#pendingRequestsByPromise.get(promise);
+        if (!pendingRequestId) return false;
+        return this.cancelRequest(pendingRequestId);
     }
 
     [Symbol.dispose](): void {
