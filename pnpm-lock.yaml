@@ -230,6 +230,9 @@ importers:
       '@cspell/cspell-types':
         specifier: workspace:*
         version: link:../cspell-types
+      '@cspell/cspell-worker':
+        specifier: workspace:*
+        version: link:../cspell-worker
       '@cspell/dynamic-import':
         specifier: workspace:*
         version: link:../dynamic-import
@@ -943,6 +946,12 @@ importers:
   packages/cspell-types: {}
 
   packages/cspell-url: {}
+
+  packages/cspell-worker:
+    dependencies:
+      cspell-lib:
+        specifier: workspace:*
+        version: link:../cspell-lib
 
   packages/dynamic-import:
     dependencies:

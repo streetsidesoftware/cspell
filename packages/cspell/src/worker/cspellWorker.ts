@@ -1,47 +1,48 @@
-import { Buffer } from 'node:buffer';
-import { MessageChannel, Worker } from 'node:worker_threads';
+import type { Worker } from 'node:worker_threads';
 
-import { type CSpellRPCApi, CSpellRPCClient } from 'cspell-lib';
+import { startCSpellWorker } from '@cspell/cspell-worker';
+import type { CSpellRPCApi, CSpellRPCClient } from 'cspell-lib';
 
 export type { CSpellRPCApi as CSpellWorkerAPI } from 'cspell-lib';
-
-const cspellLibUrl = import.meta.resolve('cspell-lib');
-
-const workerCode = /* JavaScript */ `
-    import { parentPort } from 'node:worker_threads';
-
-    if (parentPort) {
-        console.log('CSpell Worker starting...');
-        const { createCSpellRPCServer } = await import('${cspellLibUrl}');
-        createCSpellRPCServer(parentPort);
-        console.log('CSpell Worker started.');
-    }
-`;
 
 export class CSpellWorker {
     #client: CSpellRPCClient;
     #worker: Worker;
-    #messageChannel: MessageChannel;
     #isTerminated: boolean = false;
+    #online: Promise<void>;
 
     constructor() {
         this.#isTerminated = false;
-        const base64 = Buffer.from(workerCode).toString('base64');
-        this.#messageChannel = new MessageChannel();
-        const { port1, port2 } = this.#messageChannel;
+        const { client, worker } = startCSpellWorker();
 
-        const worker = new Worker(new URL(`data:text/javascript;base64,${base64}`), {
-            workerData: { port: port1 },
-            transferList: [port1],
+        worker.on('error', (err) => {
+            console.error('CSpell Worker error: %o', err);
         });
+        worker.ref();
         this.#worker = worker;
-        this.#client = new CSpellRPCClient(port2);
+        this.#client = client;
 
-        this.#worker.once('exit', () => this.#handleOnExit());
+        this.#online = new Promise((resolve) => {
+            console.log('Waiting for CSpell Worker to come online...');
+            this.#worker.once('online', (event: unknown) => {
+                console.log('CSpell Worker is online. %o', event);
+                resolve();
+            });
+        });
+
+        this.#worker.once('exit', this.#handleOnExit);
     }
 
     get api(): CSpellRPCApi {
         return this.#client.getApi();
+    }
+
+    get online(): Promise<void> {
+        return this.#online;
+    }
+
+    getClient(): CSpellRPCClient {
+        return this.#client;
     }
 
     terminate(): Promise<void> {
@@ -60,9 +61,9 @@ export class CSpellWorker {
     #terminate(): Promise<void> {
         try {
             if (this.#isTerminated) return Promise.resolve();
+            this.#worker.unref();
             this.#isTerminated = true;
             this.#client[Symbol.dispose]();
-            this.#messageChannel.port2.close();
             return this.#worker
                 .terminate()
                 .then(() => {})

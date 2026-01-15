@@ -1,0 +1,3 @@
+# `@cspell/cspell-worker`
+
+Usage:
