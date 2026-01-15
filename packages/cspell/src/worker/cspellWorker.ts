@@ -54,7 +54,7 @@ export class CSpellWorker {
     };
 
     /**
-     * This not NOT async on purpose to ensure that #isTerminated is set immediately.
+     * This not async on purpose to ensure that #isTerminated is set immediately.
      * @returns Promise<void> that resolves when the worker has exited.
      */
     #terminate(): Promise<void> {
