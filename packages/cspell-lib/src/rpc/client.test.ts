@@ -71,7 +71,7 @@ describe('RPC Client', () => {
                 if (isKeyOfServerApi(method)) {
                     assert(isRPCRequest<[number, number]>(msg));
                     const result = serverApi[method](...msg.params);
-                    const response = createRPCResponse(msg.id, result);
+                    const response = createRPCResponse(msg.id, result, 200);
                     respondWithDelay(port, response, 1);
                 }
             }
@@ -115,12 +115,12 @@ describe('RPC Client', () => {
                 if (isKeyOfServerApi(method) && method !== 'div') {
                     assert(isRPCRequest<[number, number]>(msg));
                     const result = serverApi[method](...msg.params);
-                    const response = createRPCResponse(msg.id, result);
+                    const response = createRPCResponse(msg.id, result, 200);
                     respondWithDelay(port, response, 1);
                     return;
                 }
 
-                respondWithDelay(port, createRPCError(msg.id, error), 1);
+                respondWithDelay(port, createRPCError(msg.id, error, 400), 1);
             }
         }
     });
@@ -158,7 +158,7 @@ describe('RPC Client', () => {
                 assert(isRPCBaseMessage(msg));
 
                 if (isRPCCancelRequest(msg)) {
-                    respondWithDelay(mockPort, createRPCError(msg.id, error), 1);
+                    respondWithDelay(mockPort, createRPCError(msg.id, error, 400), 1);
                 }
             }
         }
@@ -196,7 +196,7 @@ describe('RPC Client', () => {
                 assert(isRPCBaseMessage(msg));
 
                 if (isRPCCancelRequest(msg)) {
-                    respondWithDelay(port, createRPCError(msg.id, error), 1);
+                    respondWithDelay(port, createRPCError(msg.id, error, 400), 1);
                 }
             }
         }

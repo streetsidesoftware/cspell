@@ -56,14 +56,52 @@ interface MessagePortLike {
 * A Unique identifier for the request/response.
 */
 type RequestID = number | string;
-interface RPCClientRequest<Method extends string, TResult extends Promise<unknown>> {
+type ResponseCode = 0 | 200 | 400 | 408 | 500 | 503;
+/**
+* A base RPC Message.
+*/
+interface RPCMessage {
+  sig: "RPC0";
+  /**
+  * A Unique identifier for the request/response.
+  */
+  id: RequestID;
+  /**
+  * The type of message being sent.
+  */
+  type: "request" | "response" | "cancel" | "canceled" | "ok";
+}
+interface RCPBaseRequest extends RPCMessage {
+  /**
+  * The type of message being sent.
+  */
+  type: "request" | "cancel" | "ok";
+}
+interface RPCResponse extends RPCMessage {
+  /**
+  * The type of message being sent.
+  */
+  type: "response" | "canceled" | "ok";
+  code: ResponseCode;
+  error?: RPCError | undefined;
+}
+/**
+* The error information for a failed request.
+*/
+interface RequestError {
+  message: string;
+  cause?: unknown;
+}
+type RPCError = RequestError | Error;
+interface RPCPendingClientRequest<Method extends string, TResult extends Promise<unknown>> {
   readonly id: RequestID;
-  readonly method: Method;
   readonly response: TResult;
   readonly isResolved: boolean;
   readonly isCanceled: boolean;
   /** calling abort will cancel the request if it has not already been resolved. */
   abort: AbortController["abort"];
+  cancel: () => Promise<boolean>;
+  readonly method: Method;
 }
 //#endregion
 //#region src/rpc/types.d.ts
@@ -77,9 +115,45 @@ type RPCProtocol<T> = { [K in StringKeyOf<T> as T[K] extends OnlyFunctionsOrNeve
 type RPCProtocolMethodNames<P$1> = StringKeyOf<RPCProtocol<P$1>>;
 //#endregion
 //#region src/rpc/client.d.ts
+interface PendingRequest {
+  readonly id: RequestID;
+  readonly request: RCPBaseRequest;
+  readonly response: Promise<RPCResponse>;
+  readonly isResolved: boolean;
+  readonly isCanceled: boolean;
+  /** calling abort will cancel the request if it has not already been resolved. */
+  abort: AbortController["abort"];
+  handleResponse: (res: RPCResponse) => void;
+  /**
+  * Cancels the request by telling the server to cancel the request and waiting on the response.
+  */
+  cancel: () => Promise<boolean>;
+}
 interface RPCClientOptions {
+  /**
+  * A function to generate random UUIDs.
+  * @default undefined
+  */
   randomUUID?: () => string;
+  /**
+  * If true, the client will close the port when disposed.
+  * @default true
+  */
   closePortOnDispose?: boolean;
+  /**
+  * Set the default timeout in milliseconds for requests.
+  */
+  timeoutMs?: number;
+}
+interface RequestOptions {
+  /**
+  * An AbortSignal to abort the request.
+  */
+  signal?: AbortSignal;
+  /**
+  * Timeout in milliseconds to wait before aborting the request.
+  */
+  timeoutMs?: number;
 }
 /**
 * The RPC Client.
@@ -91,9 +165,8 @@ declare class RPCClient<T, P$1 extends RPCProtocol<T> = RPCProtocol<T>, MethodNa
   * @param port - The port used to send and receive RPC messages.
   */
   constructor(port: MessagePortLike, options?: RPCClientOptions);
-  request<M extends MethodNames>(method: M, params: Parameters<P$1[M]>, options?: {
-    signal?: AbortSignal;
-  }): RPCClientRequest<M, ReturnType<P$1[M]>>;
+  request<M extends MethodNames>(method: M, params: Parameters<P$1[M]>, options?: RequestOptions): RPCPendingClientRequest<M, ReturnType<P$1[M]>>;
+  isOK(options?: RequestOptions): Promise<boolean>;
   /**
   * Call a method on the RPC server.
   * @param method - The method name.
@@ -101,10 +174,10 @@ declare class RPCClient<T, P$1 extends RPCProtocol<T> = RPCProtocol<T>, MethodNa
   * @param options - Call options including abort signal.
   * @returns A Promise with the method result.
   */
-  call<M extends MethodNames>(method: M, params: Parameters<P$1[M]>, options?: {
-    signal?: AbortSignal;
-  }): ReturnType<P$1[M]>;
+  call<M extends MethodNames>(method: M, params: Parameters<P$1[M]>, options?: RequestOptions): ReturnType<P$1[M]>;
   getApi<M extends MethodNames>(methods: M[]): Pick<P$1, M>;
+  getPendingRequestById(id: RequestID): PendingRequest | undefined;
+  getPendingRequestByPromise(promise: Promise<unknown>): PendingRequest | undefined;
   /**
   * Abort a pending request by its promise.
   *
@@ -114,8 +187,23 @@ declare class RPCClient<T, P$1 extends RPCProtocol<T> = RPCProtocol<T>, MethodNa
   * @returns True if the request was found and aborted, false otherwise.
   */
   abortPromise(promise: Promise<unknown>, reason: unknown): boolean;
-  cancelRequest(id: RequestID): boolean;
-  cancelAllRequests(reason: unknown): void;
+  /**
+  * Abort a pending request by its RequestId.
+  *
+  * Note: the request promise will be rejected with an AbortRequestError.
+  * @param requestId - The RequestID of the request to abort.
+  * @param reason - The reason for aborting the request.
+  * @returns True if the request was found and aborted, false otherwise.
+  */
+  abortRequest(requestId: RequestID, reason?: unknown): boolean;
+  abortAllRequests(reason?: unknown): void;
+  cancelRequest(id: RequestID): Promise<boolean>;
+  cancelPromise(promise: Promise<unknown>): Promise<boolean>;
+  /**
+  * Set the default timeout for requests. Requests can override this value.
+  * @param timeoutMs - the timeout in milliseconds
+  */
+  setTimeout(timeoutMs: number | undefined): void;
   [Symbol.dispose](): void;
 }
 //#endregion

@@ -1,5 +1,4 @@
 export class RPCRequestError extends Error {
-    data: unknown;
     constructor(message: string) {
         super(message);
         this.name = 'RPCRequestError';
@@ -9,7 +8,14 @@ export class RPCRequestError extends Error {
 export class AbortRPCRequestError extends RPCRequestError {
     constructor(message: string) {
         super(message);
-        this.name = 'AbortRequestError';
+        this.name = 'AbortRPCRequestError';
+    }
+}
+
+export class TimeoutRPCRequestError extends RPCRequestError {
+    constructor(message: string) {
+        super(message);
+        this.name = 'TimeoutRPCRequestError';
     }
 }
 

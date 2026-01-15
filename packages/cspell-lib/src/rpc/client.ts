@@ -1,4 +1,4 @@
-import { AbortRPCRequestError, CanceledRPCRequestError } from './errors.js';
+import { AbortRPCRequestError, CanceledRPCRequestError, TimeoutRPCRequestError } from './errors.js';
 import type { MessagePortLike } from './messagePort.js';
 import type { RCPBaseRequest, RequestID, RPCPendingClientRequest, RPCResponse } from './models.js';
 import {
@@ -25,12 +25,24 @@ interface PendingRequest {
     /**
      * Cancels the request by telling the server to cancel the request and waiting on the response.
      */
-    cancel: () => Promise<void>;
+    cancel: () => Promise<boolean>;
 }
 
 export interface RPCClientOptions {
+    /**
+     * A function to generate random UUIDs.
+     * @default undefined
+     */
     randomUUID?: () => string;
+    /**
+     * If true, the client will close the port when disposed.
+     * @default true
+     */
     closePortOnDispose?: boolean;
+    /**
+     * Set the default timeout in milliseconds for requests.
+     */
+    timeoutMs?: number;
 }
 
 export interface RequestOptions {
@@ -63,6 +75,8 @@ export class RPCClient<
     #pendingRequests = new Map<RequestID, PendingRequest>();
     #pendingRequestsByPromise = new WeakMap<Promise<unknown>, RequestID>();
 
+    #defaultTimeoutMs: number | undefined;
+
     #onMessage: (msg: unknown) => void;
 
     /**
@@ -72,6 +86,7 @@ export class RPCClient<
     constructor(port: MessagePortLike, options: RPCClientOptions = {}) {
         this.#port = port;
         this.#options = options;
+        this.#defaultTimeoutMs = options.timeoutMs;
 
         this.#onMessage = (msg: unknown) => this.#processMessageFromServer(msg);
 
@@ -82,7 +97,7 @@ export class RPCClient<
     request<M extends MethodNames>(
         method: M,
         params: Parameters<P[M]>,
-        options: RequestOptions = {},
+        options?: RequestOptions,
     ): RPCPendingClientRequest<M, ReturnType<P[M]>> {
         // Register the request.
 
@@ -130,24 +145,28 @@ export class RPCClient<
         // Register the request.
 
         const id = request.id;
+        const requestType = request.type;
         let isResolved: boolean = false;
         let isCanceled: boolean = false;
 
-        const timeoutSignal = options.timeoutMs ? AbortSignal.timeout(options.timeoutMs) : undefined;
+        const timeoutMs = options.timeoutMs ?? this.#defaultTimeoutMs;
+
+        const timeoutSignal = timeoutMs ? AbortSignal.timeout(timeoutMs) : undefined;
 
         const resolver = new Resolver<RPCResponse>();
 
         options.signal?.addEventListener('abort', abort);
-        timeoutSignal?.addEventListener('abort', abort);
+        timeoutSignal?.addEventListener('abort', timeoutHandler);
 
         const response = resolver.promise;
 
         const cancelRequest = () => this.#port.postMessage(createRPCCancelRequest(id));
 
-        const cancel = async (): Promise<void> => {
-            if (isResolved || isCanceled) return;
+        const cancel = async (): Promise<boolean> => {
+            if (isResolved || isCanceled) return isCanceled;
             cancelRequest();
             await response.catch(() => {});
+            return isCanceled;
         };
 
         const pendingRequest: PendingRequest = {
@@ -170,13 +189,17 @@ export class RPCClient<
 
         const cleanup = () => {
             options.signal?.removeEventListener('abort', abort);
-            timeoutSignal?.addEventListener('abort', abort);
+            timeoutSignal?.removeEventListener('abort', timeoutHandler);
             this.#cleanupPendingRequest(pendingRequest);
         };
 
         this.#port.postMessage(request);
 
         return pendingRequest;
+
+        function timeoutHandler(): void {
+            abort(new TimeoutRPCRequestError(`Request ${requestType} ${id} timed out after ${timeoutMs} ms`));
+        }
 
         function abort(reason?: unknown): void {
             if (isResolved || isCanceled) return;
@@ -203,9 +226,13 @@ export class RPCClient<
     }
 
     async isOK(options: RequestOptions = DefaultOkOptions): Promise<boolean> {
-        const req = this.#sendRequest(createRPCOkRequest(this.#calcId('isOK')), options);
-        const res = await req.response;
-        return isBaseResponse(res) && res.type === 'ok' && res.code === 200;
+        try {
+            const req = this.#sendRequest(createRPCOkRequest(this.#calcId('isOK')), options);
+            const res = await req.response;
+            return isBaseResponse(res) && res.type === 'ok' && res.code === 200;
+        } catch {
+            return false;
+        }
     }
 
     /**
@@ -225,6 +252,16 @@ export class RPCClient<
             (method) => [method, ((...params: Parameters<P[M]>) => this.call(method, params)) as P[M]] as const,
         );
         return Object.fromEntries(apiEntries) as Pick<P, M>;
+    }
+
+    getPendingRequestById(id: RequestID): PendingRequest | undefined {
+        return this.#pendingRequests.get(id);
+    }
+
+    getPendingRequestByPromise(promise: Promise<unknown>): PendingRequest | undefined {
+        const requestId = this.#pendingRequestsByPromise.get(promise);
+        if (!requestId) return undefined;
+        return this.getPendingRequestById(requestId);
     }
 
     #calcId(method: string): RequestID {
@@ -255,9 +292,9 @@ export class RPCClient<
      * @returns True if the request was found and aborted, false otherwise.
      */
     abortPromise(promise: Promise<unknown>, reason: unknown): boolean {
-        const pendingRequestId = this.#pendingRequestsByPromise.get(promise);
-        if (!pendingRequestId) return false;
-        return this.abortRequest(pendingRequestId, reason);
+        const pendingRequest = this.getPendingRequestByPromise(promise);
+        if (!pendingRequest) return false;
+        return this.abortRequest(pendingRequest.id, reason);
     }
 
     /**
@@ -268,14 +305,14 @@ export class RPCClient<
      * @param reason - The reason for aborting the request.
      * @returns True if the request was found and aborted, false otherwise.
      */
-    abortRequest(requestId: RequestID, reason: unknown): boolean {
-        const pendingRequest = this.#pendingRequests.get(requestId);
+    abortRequest(requestId: RequestID, reason?: unknown): boolean {
+        const pendingRequest = this.getPendingRequestById(requestId);
         if (!pendingRequest) return false;
         pendingRequest.abort(reason);
         return true;
     }
 
-    abortAllRequests(reason: unknown): void {
+    abortAllRequests(reason?: unknown): void {
         for (const pendingRequest of this.#pendingRequests.values()) {
             try {
                 pendingRequest.abort(reason);
@@ -286,16 +323,23 @@ export class RPCClient<
     }
 
     async cancelRequest(id: RequestID): Promise<boolean> {
-        const pendingRequest = this.#pendingRequests.get(id);
+        const pendingRequest = this.getPendingRequestById(id);
         if (!pendingRequest) return false;
-        await pendingRequest.cancel();
-        return true;
+        return await pendingRequest.cancel();
     }
 
     async cancelPromise(promise: Promise<unknown>): Promise<boolean> {
-        const pendingRequestId = this.#pendingRequestsByPromise.get(promise);
-        if (!pendingRequestId) return false;
-        return this.cancelRequest(pendingRequestId);
+        const request = this.getPendingRequestByPromise(promise);
+        if (!request) return false;
+        return this.cancelRequest(request.id);
+    }
+
+    /**
+     * Set the default timeout for requests. Requests can override this value.
+     * @param timeoutMs - the timeout in milliseconds
+     */
+    setTimeout(timeoutMs: number | undefined): void {
+        this.#defaultTimeoutMs = timeoutMs;
     }
 
     [Symbol.dispose](): void {

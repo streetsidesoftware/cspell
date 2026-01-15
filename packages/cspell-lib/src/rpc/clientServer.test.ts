@@ -4,7 +4,7 @@ import { MessageChannel } from 'node:worker_threads';
 import { describe, expect, test, vi } from 'vitest';
 
 import { RPCClient } from './client.js';
-import { AbortRPCRequestError, CanceledRPCRequestError } from './errors.js';
+import { CanceledRPCRequestError, TimeoutRPCRequestError } from './errors.js';
 import type { MessagePortLike } from './messagePort.js';
 import { RPCServer } from './server.js';
 
@@ -30,11 +30,29 @@ describe('Validate Client / Server communications', () => {
         const { client } = createClientServerPair(getTestApi());
         const clientApi = client.getApi(['sleep']);
         await expect(clientApi.sleep(10)).resolves.toBe(undefined);
-        await expect(client.call('sleep', [10_000], { timeoutMs: 10 })).rejects.toThrow(AbortRPCRequestError);
+        await expect(client.call('sleep', [10_000], { timeoutMs: 10 })).rejects.toThrow(TimeoutRPCRequestError);
 
         const longSleep = clientApi.sleep(10_000);
+
+        const request = client.getPendingRequestByPromise(longSleep);
+        expect(request).toBeDefined();
+        expect(request?.isCanceled).toBe(false);
+
         await expect(client.cancelPromise(longSleep)).resolves.toBe(true);
+
+        expect(request?.isCanceled).toBe(true);
+
+        // Make sure the request is removed after cancellation
+        expect(client.getPendingRequestByPromise(longSleep)).toBeUndefined();
+
         await expect(longSleep).rejects.toThrow(CanceledRPCRequestError);
+    });
+
+    test('Using a default client timeout', async () => {
+        const { client } = createClientServerPair(getTestApi());
+        const clientApi = client.getApi(['sleep']);
+        client.setTimeout(10);
+        await expect(clientApi.sleep(10_000)).rejects.toThrow(TimeoutRPCRequestError);
     });
 
     test('Shutdown server with pending requests', async () => {
@@ -45,6 +63,67 @@ describe('Validate Client / Server communications', () => {
         await expect(clientApi.sleep(1)).resolves.toBe(undefined);
         server[Symbol.dispose]();
         await expect(longSleep).rejects.toThrow(new Error('RPC Server is shutting down'));
+    });
+
+    test('Stop client with pending requests', async () => {
+        const { client } = createClientServerPair(getTestApi());
+        const clientApi = client.getApi(['sleep']);
+
+        const longSleep = clientApi.sleep(10_000);
+        await expect(clientApi.sleep(1)).resolves.toBe(undefined);
+        client[Symbol.dispose]();
+        await expect(longSleep).rejects.toThrow(new Error('RPC Client disposed'));
+    });
+
+    test('Requests after Server Shutdown', async () => {
+        const { client, server } = createClientServerPair(getTestApi());
+        const clientApi = client.getApi(['sleep']);
+        await expect(clientApi.sleep(1)).resolves.toBe(undefined);
+        server[Symbol.dispose]();
+
+        await expect(client.isOK()).resolves.toBe(false);
+    });
+
+    test('the request resolved', async () => {
+        const { client } = createClientServerPair(getTestApi());
+
+        const request = client.request('add', [1, 2], { timeoutMs: 100 });
+
+        expect(request.isResolved).toBe(false);
+        expect(request.isCanceled).toBe(false);
+
+        await expect(request.response).resolves.toBe(3);
+
+        expect(request.isResolved).toBe(true);
+        expect(request.isCanceled).toBe(false);
+
+        await expect(request.cancel()).resolves.toBe(false);
+
+        // Make sure we cannot cancel a resolved request
+        expect(request.isResolved).toBe(true);
+        expect(request.isCanceled).toBe(false);
+
+        // try to cancel by promise
+        await expect(client.cancelPromise(request.response)).resolves.toBe(false);
+
+        await expect(client.cancelRequest(request.id)).resolves.toBe(false);
+
+        // try to cancel a random promise
+        await expect(client.cancelPromise(Promise.resolve(42))).resolves.toBe(false);
+    });
+
+    test('the request canceled', async () => {
+        const { client } = createClientServerPair(getTestApi());
+
+        const request = client.request('sleep', [10_000], { timeoutMs: 10 });
+
+        expect(request.isResolved).toBe(false);
+        expect(request.isCanceled).toBe(false);
+
+        await expect(request.response).rejects.toThrow(TimeoutRPCRequestError);
+
+        expect(request.isResolved).toBe(false);
+        expect(request.isCanceled).toBe(true);
     });
 });
 
@@ -70,11 +149,15 @@ function getTestApi(): TestApi {
     };
 }
 
-function createClientServerPair<TApi>(api: TApi): {
+interface ClientServerPair<TApi> {
     client: RPCClient<TApi>;
     server: RPCServer<TApi>;
     api: TApi;
-} {
+    portClient: MessagePortLike;
+    portServer: MessagePortLike;
+}
+
+function createClientServerPair<TApi>(api: TApi): ClientServerPair<TApi> {
     const channel = new MessageChannel();
     const portClient = channel.port1;
     const portServer = channel.port2;
@@ -84,7 +167,7 @@ function createClientServerPair<TApi>(api: TApi): {
     const server = new RPCServer<TApi>(portServer, api);
     const client = new RPCClient<TApi>(portClient, { randomUUID });
 
-    return { client, server, api };
+    return { client, server, api, portClient, portServer };
 }
 
 function spyOnPort(port: MessagePortLike) {
