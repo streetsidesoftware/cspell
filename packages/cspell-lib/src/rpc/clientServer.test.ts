@@ -3,8 +3,9 @@ import { MessageChannel } from 'node:worker_threads';
 
 import { describe, expect, test, vi } from 'vitest';
 
+import { assert } from './assert.js';
 import { RPCClient } from './client.js';
-import { CanceledRPCRequestError, TimeoutRPCRequestError } from './errors.js';
+import { AbortRPCRequestError, CanceledRPCRequestError, TimeoutRPCRequestError } from './errors.js';
 import type { MessagePortLike } from './messagePort.js';
 import { RPCServer } from './server.js';
 
@@ -73,6 +74,42 @@ describe('Validate Client / Server communications', () => {
         await expect(clientApi.sleep(1)).resolves.toBe(undefined);
         client[Symbol.dispose]();
         await expect(longSleep).rejects.toThrow(new Error('RPC Client disposed'));
+    });
+
+    test('Send malformed messages to the client', async () => {
+        const { client, portClient } = createClientServerPair(getTestApi());
+        const clientApi = client.getApi(['sleep', 'add']);
+
+        const longSleep = clientApi.sleep(10_000);
+        await expect(clientApi.sleep(1)).resolves.toBe(undefined);
+
+        portClient.postMessage('Hello World');
+        portClient.postMessage({ sig: 'RPC0', id: 1, type: 'response' }); // Missing code and result
+        portClient.postMessage({ sig: 'RPC0', id: 2, type: 'response', code: 200 }); // Missing result
+
+        const request = client.getPendingRequestByPromise(longSleep);
+        assert(request);
+
+        expect(request.isResolved).toBe(false);
+        expect(request.isCanceled).toBe(false);
+
+        portClient.postMessage({ sig: 'RPC0', id: request.id, type: 'response' });
+
+        expect(request.isResolved).toBe(false);
+        expect(request.isCanceled).toBe(false);
+
+        await expect(clientApi.add(1, 2)).resolves.toBe(3);
+
+        request.abort('Test abort after malformed messages');
+        request.abort('Double abort.');
+
+        expect(request.isResolved).toBe(false);
+        expect(request.isCanceled).toBe(true);
+
+        client.abortPromise(longSleep, 'Abort again.');
+
+        client[Symbol.dispose]();
+        await expect(longSleep).rejects.toThrow(new AbortRPCRequestError('Test abort after malformed messages'));
     });
 
     test('Requests after Server Shutdown', async () => {
