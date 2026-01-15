@@ -1,60 +1,86 @@
 import type {
+    RCPBaseRequest,
     RequestID,
     ResponseCode,
-    RPCBaseMessage,
+    RPCCanceledResponseMessage,
     RPCCancelRequestMessage,
     RPCError,
-    RPCErrorMessage,
+    RPCErrorResponseMessage,
+    RPCMessage,
     RPCOkRequestMessage,
     RPCOkResponseMessage,
     RPCRequestMessage,
+    RPCResponse,
     RPCResponseMessage,
 } from './models.js';
 
 type RPCRequestTypeNames = {
-    [K in RPCBaseMessage['type']]: K;
+    [K in RCPBaseRequest['type']]: K;
 };
 
 const RequestTypeNames: RPCRequestTypeNames = {
     request: 'request',
-    response: 'response',
-    error: 'error',
     cancel: 'cancel',
     ok: 'ok',
+} as const;
+
+type RPCResponseTypeNames = {
+    [K in RPCResponse['type']]: K;
 };
 
-const knownRPCMessageTypes = new Set(Object.keys(RequestTypeNames));
+const ResponseTypeNames: RPCResponseTypeNames = {
+    response: 'response',
+    canceled: 'canceled',
+    ok: 'ok',
+} as const;
 
-export function isRPCBaseMessage(message: unknown): message is RPCBaseMessage {
+const knownRPCMessageTypes = new Set([...Object.keys(RequestTypeNames), ...Object.keys(ResponseTypeNames)]);
+const sig = 'RPC0' as const;
+
+export function isRPCBaseMessage(message: unknown): message is RPCMessage {
     if (!message || typeof message !== 'object') return false;
-    const m = message as RPCBaseMessage;
+    const m = message as RPCMessage;
+    return m.sig === sig && (typeof m.id === 'string' || typeof m.id === 'number') && knownRPCMessageTypes.has(m.type);
+}
+
+export function isBaseRequest(message: RPCMessage): message is RCPBaseRequest {
+    return message.type in RequestTypeNames;
+}
+
+export function isBaseResponse(message: unknown): message is RPCResponse {
+    return isRPCBaseMessage(message) && message.type in ResponseTypeNames;
+}
+
+export function isRPCErrorResponse(response: unknown): response is RPCErrorResponseMessage {
     return (
-        m.sig === 'RPC0' && (typeof m.id === 'string' || typeof m.id === 'number') && knownRPCMessageTypes.has(m.type)
+        isBaseResponse(response) &&
+        response.type === ResponseTypeNames.response &&
+        (response as RPCErrorResponseMessage).error !== undefined
     );
 }
 
-export function isRPCErrorResponse(response: RPCBaseMessage): response is RPCErrorMessage {
-    return response.type === 'error' && (response as RPCErrorMessage).error !== undefined;
+export function isRPCCancelRequest(request: RPCMessage): request is RPCCancelRequestMessage {
+    return request.type === RequestTypeNames.cancel;
 }
 
-export function isRPCCancelRequest(request: RPCBaseMessage): request is RPCCancelRequestMessage {
-    return request.type === 'cancel';
+export function isRPCCanceledResponse(response: RPCResponse): response is RPCCanceledResponseMessage {
+    return response.type === ResponseTypeNames.canceled;
 }
 
-export function isRPCOkRequest(request: RPCBaseMessage): request is RPCOkRequestMessage {
-    return request.type === 'ok';
+export function isRPCOkRequest(request: RPCMessage): request is RPCOkRequestMessage {
+    return request.type === RequestTypeNames.ok;
 }
 
-export function isRPCOkResponse(response: RPCBaseMessage): response is RPCOkResponseMessage {
-    return response.type === 'ok' && typeof (response as RPCOkResponseMessage).code === 'number';
+export function isRPCOkResponse(response: RPCMessage): response is RPCOkResponseMessage {
+    return response.type === ResponseTypeNames.ok && typeof (response as RPCOkResponseMessage).code === 'number';
 }
 
-export function isRPCResponse<TResult>(response: RPCBaseMessage): response is RPCResponseMessage<TResult> {
-    return response.type === 'response' && (response as RPCResponseMessage<TResult>).result !== undefined;
+export function isRPCResponse<TResult>(response: RPCMessage): response is RPCResponseMessage<TResult> {
+    return response.type === ResponseTypeNames.response && 'result' in response;
 }
 
-export function isRPCRequest<P>(message: RPCBaseMessage): message is RPCRequestMessage<P> {
-    return message.type === 'request' && (message as RPCRequestMessage<P>).method !== undefined;
+export function isRPCRequest<P>(message: RPCMessage): message is RPCRequestMessage<P> {
+    return message.type === RequestTypeNames.request && (message as RPCRequestMessage<P>).method !== undefined;
 }
 
 /**
@@ -65,7 +91,7 @@ export function isRPCRequest<P>(message: RPCBaseMessage): message is RPCRequestM
  * @returns A RPC Request Message.
  */
 export function createRPCRequest<P>(id: RequestID, method: string, params: P): RPCRequestMessage<P> {
-    return { sig: 'RPC0', id, type: 'request', method, params };
+    return { sig, id, type: RequestTypeNames.request, method, params };
 }
 
 /**
@@ -74,7 +100,20 @@ export function createRPCRequest<P>(id: RequestID, method: string, params: P): R
  * @returns A cancel request message.
  */
 export function createRPCCancelRequest(id: RequestID): RPCCancelRequestMessage {
-    return { sig: 'RPC0', id, type: 'cancel' };
+    return { sig, id, type: RequestTypeNames.cancel };
+}
+
+/**
+ * Creates a cancel request message.
+ * @param id - The request ID to be canceled.
+ * @param code - The response code
+ *   - 200 (ok) - if canceled successfully upon request.
+ *   - 408 (timeout) - if the cancellation was initiated by the server.
+ *   - 503 (unavailable) - if the server is shutting down.
+ * @returns A cancel request message.
+ */
+export function createRPCCanceledResponse(id: RequestID, code: ResponseCode): RPCCanceledResponseMessage {
+    return { sig, id, type: ResponseTypeNames.canceled, code };
 }
 
 /**
@@ -86,9 +125,9 @@ export function createRPCCancelRequest(id: RequestID): RPCCancelRequestMessage {
 export function createRPCResponse<TResult>(
     id: RequestID,
     result: TResult,
-    code: ResponseCode = 200,
+    code: ResponseCode,
 ): RPCResponseMessage<TResult> {
-    return { sig: 'RPC0', id, type: 'response', code, result };
+    return { sig, id, type: ResponseTypeNames.response, code, result };
 }
 
 /**
@@ -97,23 +136,15 @@ export function createRPCResponse<TResult>(
  * @param error - The error information.
  * @returns A RPC Error Message.
  */
-export function createRPCError(
-    id: RequestID,
-    error: RPCError,
-    data?: unknown,
-    code: ResponseCode = 400,
-): RPCErrorMessage {
-    const msg: RPCErrorMessage = { sig: 'RPC0', id, type: 'error', code, error };
-    if (data !== undefined) {
-        msg.data = data;
-    }
+export function createRPCError(id: RequestID, error: RPCError, code: ResponseCode): RPCErrorResponseMessage {
+    const msg: RPCErrorResponseMessage = { sig, id, type: ResponseTypeNames.response, code, error };
     return msg;
 }
 
 export function createRPCOkRequest(id: RequestID): RPCOkRequestMessage {
-    return { sig: 'RPC0', id, type: 'ok' };
+    return { sig, id, type: RequestTypeNames.ok };
 }
 
-export function createRPCOkResponse(id: RequestID, code: ResponseCode = 200): RPCOkResponseMessage {
-    return { sig: 'RPC0', id, type: 'ok', code };
+export function createRPCOkResponse(id: RequestID, code: ResponseCode): RPCOkResponseMessage {
+    return { sig, id, type: ResponseTypeNames.ok, code };
 }

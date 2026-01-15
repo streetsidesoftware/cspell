@@ -5,12 +5,6 @@ export class RPCRequestError extends Error {
         this.name = 'RPCRequestError';
     }
 }
-export class CanceledRPCRequestError extends RPCRequestError {
-    constructor(message: string) {
-        super(message);
-        this.name = 'CanceledRequestError';
-    }
-}
 
 export class AbortRPCRequestError extends RPCRequestError {
     constructor(message: string) {
@@ -36,5 +30,12 @@ export class MalformedRPCRequestError extends RPCRequestError {
         super(message);
         this.name = 'MalformedRPCRequestError';
         this.request = request;
+    }
+}
+
+export class CanceledRPCRequestError extends RPCRequestError {
+    constructor(message?: string) {
+        super(message ?? 'The RPC request was canceled');
+        this.name = 'CanceledRPCRequestError';
     }
 }

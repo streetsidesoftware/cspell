@@ -5,14 +5,17 @@ import { type CSpellRPCApi, CSpellRPCClient } from 'cspell-lib';
 
 export type { CSpellRPCApi as CSpellWorkerAPI } from 'cspell-lib';
 
+const cspellLibUrl = import.meta.resolve('cspell-lib');
+
 const workerCode = /* JavaScript */ `
-import { parentPort } from 'node:worker_threads';
+    import { parentPort } from 'node:worker_threads';
 
-import { createCSpellRPCServer } from 'cspell-lib';
-
-if (parentPort) {
-    createCSpellRPCServer(parentPort);
-}
+    if (parentPort) {
+        console.log('CSpell Worker starting...');
+        const { createCSpellRPCServer } = await import('${cspellLibUrl}');
+        createCSpellRPCServer(parentPort);
+        console.log('CSpell Worker started.');
+    }
 `;
 
 export class CSpellWorker {
@@ -34,7 +37,7 @@ export class CSpellWorker {
         this.#worker = worker;
         this.#client = new CSpellRPCClient(port2);
 
-        this.#worker.once('exit', () => this.terminate());
+        this.#worker.once('exit', () => this.#handleOnExit());
     }
 
     get api(): CSpellRPCApi {
@@ -44,6 +47,11 @@ export class CSpellWorker {
     terminate(): Promise<void> {
         return this.#terminate();
     }
+
+    #handleOnExit = () => {
+        console.log('CSpell Worker exited.');
+        this.#terminate();
+    };
 
     /**
      * This not NOT async on purpose to ensure that #isTerminated is set immediately.

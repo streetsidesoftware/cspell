@@ -7,6 +7,7 @@ describe('Validate CSpellWorker', () => {
         const worker = new CSpellWorker();
 
         expect(worker).toBeDefined();
+        worker[Symbol.asyncDispose]();
     });
 
     test('spell checking a document.', async () => {
@@ -22,5 +23,7 @@ describe('Validate CSpellWorker', () => {
         // const result = await api.spellCheckDocument(doc, {}, {});
         // expect(result).toBeDefined();
         // expect(result).toEqual({});
+
+        worker[Symbol.asyncDispose]();
     });
 });
