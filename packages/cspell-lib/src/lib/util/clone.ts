@@ -73,7 +73,7 @@ export function copy1<T, K extends keyof T>(src: Readonly<T>, dst: T, key: K): v
     }
 
     if (value instanceof Map) {
-        dst[key] = new Set(value) as T[K];
+        dst[key] = new Map(value) as T[K];
         return;
     }
 
