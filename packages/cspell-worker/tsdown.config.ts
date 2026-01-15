@@ -1,7 +1,8 @@
 import { defineConfig, type UserConfig } from 'tsdown';
 
 const baseConfig: UserConfig = {
-    entry: ['src/index.ts'],
+    entry: ['src/index.ts', 'src/simpleWorker.ts', 'src/worker.ts'],
+    noExternal: ['cspell-lib/rpc'],
     outDir: 'dist',
     format: ['esm'],
     target: 'Node20',
@@ -12,9 +13,6 @@ const baseConfig: UserConfig = {
     platform: 'node',
 };
 
-const config: UserConfig[] = defineConfig([
-    baseConfig,
-    { ...baseConfig, entry: ['src/worker.ts'], noExternal: ['cspell-lib/rpc'] },
-]);
+const config: UserConfig[] = defineConfig([baseConfig]);
 
 export default config;

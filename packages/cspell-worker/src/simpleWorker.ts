@@ -1,10 +1,10 @@
 import type { MessagePort } from 'node:worker_threads';
 import { parentPort, workerData } from 'node:worker_threads';
 
-import { createCSpellRPCServer } from 'cspell-lib/cspell-rpc';
+import { startSimpleServer } from './simpleServer.js';
 
 const port: MessagePort = workerData?.port || parentPort;
 
 if (port) {
-    createCSpellRPCServer(port);
+    startSimpleServer(port);
 }
