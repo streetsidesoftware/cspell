@@ -27,7 +27,7 @@ export class CSpellWorker {
         this.#messageChannel = new MessageChannel();
         const { port1, port2 } = this.#messageChannel;
 
-        const worker = new Worker(`data:text/javascript;base64,${base64}`, {
+        const worker = new Worker(new URL(`data:text/javascript;base64,${base64}`), {
             workerData: { port: port1 },
             transferList: [port1],
         });
