@@ -3305,7 +3305,6 @@ interface DocumentValidatorOptions extends ValidateTextOptions {
 }
 type PerfTimings = Record<string, number>;
 declare class DocumentValidator {
-  #private;
   readonly settings: CSpellUserSettings;
   private _document;
   private _ready;
@@ -3380,7 +3379,6 @@ declare class DocumentValidator {
   * @returns true if the document settings have resolved to be `enabled`
   */
   shouldCheckDocument(): boolean;
-  getSettingsUsed(): CSpellSettingsWithSourceTrace;
   /**
   * Internal `cspell-lib` use.
   */
@@ -3522,6 +3520,13 @@ declare function spellCheckFile(file: string | Uri | URL, options: SpellCheckFil
 * @param settings - default settings to use.
 */
 declare function spellCheckDocument(document: Document | DocumentWithText, options: SpellCheckFileOptions, settingsOrConfigFile: CSpellUserSettings | ICSpellConfigFile): Promise<SpellCheckFileResult>;
+/**
+* Spell Check a Document.
+* @param document - document to be checked. If `document.text` is `undefined` the file will be loaded
+* @param options - options to control checking
+* @param settings - default settings to use.
+*/
+declare function spellCheckDocumentRPC(document: Document | DocumentWithText, options: SpellCheckFileOptions, settingsOrConfigFile: CSpellUserSettings | ICSpellConfigFile): Promise<SpellCheckFileResult>;
 interface DetermineFinalDocumentSettingsResult {
   document: DocumentWithText;
   settings: CSpellSettingsWithSourceTrace;
@@ -3542,7 +3547,7 @@ declare function determineFinalDocumentSettings(document: DocumentWithText, sett
 //#endregion
 //#region src/lib/cspellRPC.d.ts
 interface CSpellRPCApi {
-  spellCheckDocument: typeof spellCheckDocument;
+  spellCheckDocument: typeof spellCheckDocumentRPC;
 }
 type CSpellRPCServerOptions = RPCServerOptions;
 declare class CSpellRPCServer extends RPCServer<CSpellRPCApi> {

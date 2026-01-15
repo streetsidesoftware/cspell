@@ -31,13 +31,11 @@ import {
 } from '../Settings/index.js';
 import type { DirectiveIssue } from '../Settings/InDocSettings.js';
 import { validateInDocumentSettings } from '../Settings/InDocSettings.js';
-import { cloneSettingsForExport } from '../Settings/sanitizeSettings.js';
 import type { SpellingDictionaryCollection, SuggestionResult } from '../SpellingDictionary/index.js';
 import { getDictionaryInternal } from '../SpellingDictionary/index.js';
 import type { WordSuggestion } from '../suggestions.js';
 import { calcSuggestionAdjustedToToMatchCase } from '../suggestions.js';
 import { catchPromiseError, toError } from '../util/errors.js';
-import { memorizeLastCall } from '../util/memorizeLastCall.js';
 import { AutoCache } from '../util/simpleCache.js';
 import type { MatchRange } from '../util/TextRange.js';
 import { uriToFilePath } from '../util/Uri.js';
@@ -514,24 +512,12 @@ export class DocumentValidator {
         return this._preparations.shouldCheck;
     }
 
-    getSettingsUsed(): CSpellSettingsWithSourceTrace {
-        return sanitizeSettingsForExport(this._preparations?.finalSettings);
-    }
-
     /**
      * Internal `cspell-lib` use.
      */
     public _getPreparations(): Preparations | undefined {
         return this._preparations;
     }
-}
-
-const _cloneSettingsForExport = memorizeLastCall(cloneSettingsForExport);
-
-function sanitizeSettingsForExport(
-    settings: CSpellSettingsInternalFinalized | undefined,
-): CSpellSettingsWithSourceTrace {
-    return settings ? _cloneSettingsForExport(settings) : {};
 }
 
 function sanitizeSuggestion(sug: WordSuggestion): ExtendedSuggestion {

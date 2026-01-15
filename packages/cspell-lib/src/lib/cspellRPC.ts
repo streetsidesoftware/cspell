@@ -2,16 +2,16 @@ import { randomUUID } from 'node:crypto';
 
 import type { RPCClientOptions, RPCProtocol, RPCServerOptions } from '../rpc/index.js';
 import { type MessagePortLike, RPCClient, RPCServer } from '../rpc/index.js';
-import { spellCheckDocument } from './spellCheckFile.js';
+import { spellCheckDocumentRPC } from './spellCheckFile.js';
 
 export type { MessagePortLike } from '../rpc/index.js';
 
 export interface CSpellRPCApi {
-    spellCheckDocument: typeof spellCheckDocument;
+    spellCheckDocument: typeof spellCheckDocumentRPC;
 }
 
 const cspellRPCApi: CSpellRPCApi = {
-    spellCheckDocument,
+    spellCheckDocument: spellCheckDocumentRPC,
 };
 
 export type CSpellRPCServerOptions = RPCServerOptions;
