@@ -1,7 +1,7 @@
 import { suite } from 'perf-insight';
 
-import { GlobMatcher } from '../GlobMatcher.js';
-import { loadFileList, loadPatterns } from './loadFileList.js';
+import { GlobMatcher } from '../GlobMatcher.ts';
+import { loadFileList, loadPatterns } from './loadFileList.ts';
 
 suite('cspell-glob GlobMatcher match', async (test) => {
     const fileList = await loadFileList();

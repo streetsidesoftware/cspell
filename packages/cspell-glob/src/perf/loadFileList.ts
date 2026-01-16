@@ -1,8 +1,8 @@
 import { promises as fs } from 'node:fs';
 import Path from 'node:path';
 
-import type { GlobMatchOptions } from '../GlobMatcher.js';
-import type { GlobPatternWithOptionalRoot } from '../GlobMatcherTypes.js';
+import type { GlobMatchOptions } from '../GlobMatcher.ts';
+import type { GlobPatternWithOptionalRoot } from '../GlobMatcherTypes.ts';
 
 const fixturesDataUrl = new URL('../../../../test-fixtures/perf/cspell-glob/data/', import.meta.url);
 
