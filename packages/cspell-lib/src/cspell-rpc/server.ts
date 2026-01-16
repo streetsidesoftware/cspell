@@ -22,7 +22,7 @@ let pSpellCheckFileJs: Promise<{ spellCheckDocumentRPC: typeof spellCheckDocumen
 /**
  * Get the CSpell RPC API.
  *
- * NOTE: This function lazy loads the implementation to avoid loading unnecessary during initialization of workers.
+ * NOTE: This function lazy loads the implementation to avoid loading unnecessary code during initialization of workers.
  *
  * @returns the api implementation.
  */
