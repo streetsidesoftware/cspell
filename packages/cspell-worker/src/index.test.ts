@@ -29,7 +29,7 @@ describe('Index', () => {
 
         const api = client.getApi();
 
-        expect(client.isOK()).resolves.toBe(true);
+        await expect(client.isOK()).resolves.toBe(true);
         const doc = { uri: import.meta.url };
         const result = await api.spellCheckDocument(doc, {}, {});
         expect(result).toBeDefined();
