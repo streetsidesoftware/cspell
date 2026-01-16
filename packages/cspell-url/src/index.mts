@@ -1,8 +1,8 @@
-export { isDataURL, urlBasename } from './dataUrl.mjs';
-export { encodePathChars, normalizeFilePathForUrl, toFileDirURL, toFileURL } from './defaultFileUrlBuilder.mjs';
-export { isFileURL, toFilePathOrHref } from './fileUrl.mjs';
-export type { BuilderOptions, PathInterface } from './FileUrlBuilder.mjs';
-export { FileUrlBuilder } from './FileUrlBuilder.mjs';
+export { isDataURL, urlBasename } from './dataUrl.mts';
+export { encodePathChars, normalizeFilePathForUrl, toFileDirURL, toFileURL } from './defaultFileUrlBuilder.mts';
+export { isFileURL, toFilePathOrHref } from './fileUrl.mts';
+export type { BuilderOptions, PathInterface } from './FileUrlBuilder.mts';
+export { FileUrlBuilder } from './FileUrlBuilder.mts';
 export {
     addTrailingSlash,
     basenameOfUrlPathname,
@@ -16,4 +16,4 @@ export {
     urlDirname,
     urlParent,
     urlRelative,
-} from './url.mjs';
+} from './url.mts';

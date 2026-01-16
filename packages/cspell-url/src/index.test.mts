@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import * as urlIndex from './index.mjs';
+import * as urlIndex from './index.mts';
 
 describe('index', () => {
     test('exports', () => {

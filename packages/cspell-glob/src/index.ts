@@ -1,11 +1,12 @@
+export type { NormalizeOptions } from './globHelper.ts';
 export {
     fileOrGlobToGlob,
     isGlobPatternNormalized,
     isGlobPatternWithOptionalRoot,
     isGlobPatternWithRoot,
     normalizeGlobPatterns,
-    NormalizeOptions,
     workaroundPicomatchBug,
-} from './globHelper.js';
-export { GlobMatcher, GlobMatchOptions } from './GlobMatcher.js';
-export * from './GlobMatcherTypes.js';
+} from './globHelper.ts';
+export type { GlobMatchOptions } from './GlobMatcher.ts';
+export { GlobMatcher } from './GlobMatcher.ts';
+export * from './GlobMatcherTypes.ts';

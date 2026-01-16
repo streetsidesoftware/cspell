@@ -6,10 +6,10 @@ import mm from 'micromatch';
 import pp from 'picomatch';
 import { describe, expect, test } from 'vitest';
 
-import { fileOrGlobToGlob, workaroundPicomatchBug } from './globHelper.js';
-import type { GlobMatchOptions, MatcherMode } from './GlobMatcher.js';
-import { GlobMatcher } from './GlobMatcher.js';
-import type { GlobMatch, GlobPattern, GlobPatternNormalized, GlobPatternWithOptionalRoot, PathInterface } from './GlobMatcherTypes.js';
+import { fileOrGlobToGlob, workaroundPicomatchBug } from './globHelper.ts';
+import type { GlobMatchOptions, MatcherMode } from './GlobMatcher.ts';
+import { GlobMatcher } from './GlobMatcher.ts';
+import type { GlobMatch, GlobPattern, GlobPatternNormalized, GlobPatternWithOptionalRoot, PathInterface } from './GlobMatcherTypes.ts';
 
 const defaultCwdWin32 = 'C:\\user\\home\\project\\testing';
 const defaultCwdPosix = '/user/home/project/testing';

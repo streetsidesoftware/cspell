@@ -9,7 +9,7 @@ import type {
     GlobPatternWithOptionalRoot,
     GlobPatternWithRoot,
     PathInterface,
-} from './GlobMatcherTypes.js';
+} from './GlobMatcherTypes.ts';
 
 const { posix } = Path;
 // const relRegExp = /^\..?[\\/]/;
