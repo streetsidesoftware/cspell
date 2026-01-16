@@ -5,8 +5,8 @@ import { pathToFileURL } from 'node:url';
 
 import { suite } from 'perf-insight';
 
-import { FileUrlBuilder } from '../index.mjs';
-import { urlToUrlRelative } from '../url.mjs';
+import { FileUrlBuilder } from '../index.mts';
+import { urlToUrlRelative } from '../url.mts';
 
 const fixturesDataUrl = new URL('../../../../test-fixtures/perf/cspell-glob/data/', import.meta.url);
 

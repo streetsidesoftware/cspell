@@ -1,4 +1,4 @@
-import { FileUrlBuilder } from './FileUrlBuilder.mjs';
+import { FileUrlBuilder } from './FileUrlBuilder.mts';
 
 const fileUrlBuilder = new FileUrlBuilder();
 

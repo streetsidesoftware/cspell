@@ -38,7 +38,7 @@
     "test": "vitest run --pool=forks",
     "test:update-snapshot": "vitest run -u",
     "test:perf": "NODE_ENV=production insight --file \"**/*.perf.{mjs,js}\"",
-    "test:perf:ts": "NODE_ENV=production insight --file \"**/*.perf.{mts,ts}\" --register ts-node/esm",
+    "test:perf:ts": "NODE_ENV=production insight --file \"**/*.perf.{mts,ts}\" ",
     "test:perf:prof": "NODE_ENV=production node --cpu-prof ../../node_modules/perf-insight/bin.mjs --file \"dist/**/*.perf.{mjs,js}\" -t 1000"
   },
   "repository": {

@@ -3,11 +3,11 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import { describe, expect, test } from 'vitest';
 
-import { urlBasename } from './dataUrl.mjs';
-import { normalizeFilePathForUrl, toFileDirURL, toFileURL } from './defaultFileUrlBuilder.mjs';
-import { isWindows, isWindowsFileUrl, pathWindowsDriveLetterToUpper, toFilePathOrHref } from './fileUrl.mjs';
-import { FileUrlBuilder } from './FileUrlBuilder.mjs';
-import { isUrlLike, normalizeWindowsUrl, toURL, urlParent } from './url.mjs';
+import { urlBasename } from './dataUrl.mts';
+import { normalizeFilePathForUrl, toFileDirURL, toFileURL } from './defaultFileUrlBuilder.mts';
+import { isWindows, isWindowsFileUrl, pathWindowsDriveLetterToUpper, toFilePathOrHref } from './fileUrl.mts';
+import { FileUrlBuilder } from './FileUrlBuilder.mts';
+import { isUrlLike, normalizeWindowsUrl, toURL, urlParent } from './url.mts';
 
 const root = Path.join(__dirname, '../..');
 // const oc = <T>(obj: T) => expect.objectContaining(obj);
