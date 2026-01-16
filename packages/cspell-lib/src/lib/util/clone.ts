@@ -84,6 +84,7 @@ export function copy1<T, K extends keyof T>(src: Readonly<T>, dst: T, key: K): v
 
     if (typeof value === 'object') {
         dst[key] = { ...value } as T[K];
+        return;
     }
 
     dst[key] = value;
