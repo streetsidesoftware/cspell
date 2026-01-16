@@ -132,10 +132,10 @@ export async function spellCheckDocument(
     }
 }
 
-const _cloneSettingsForExport = memorizeLastCall(cloneSettingsForExport);
+const memoizedCloneSettingsForExport = memorizeLastCall(cloneSettingsForExport);
 
 function sanitizeSettingsForExport(settings: CSpellSettingsWithSourceTrace | undefined): CSpellSettingsWithSourceTrace {
-    return settings ? _cloneSettingsForExport(settings) : {};
+    return settings ? memoizedCloneSettingsForExport(settings) : {};
 }
 
 /**
