@@ -2,8 +2,9 @@ import { MessageChannel } from 'node:worker_threads';
 
 import { describe, expect, test, vi } from 'vitest';
 
-import type { MessagePortLike } from './cspellRPC.js';
-import { CSpellRPCClient, CSpellRPCServer } from './cspellRPC.js';
+import type { MessagePortLike } from './index.js';
+import { CSpellRPCClient } from './index.js';
+import { CSpellRPCServer } from './index.js';
 
 const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
 

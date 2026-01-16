@@ -1,14 +1,9 @@
-import { randomUUID } from 'node:crypto';
-
-import type { MessagePortLike, RPCClientOptions, RPCProtocol, RPCServerOptions } from '../rpc/index.js';
-import { RPCClient, RPCServer } from '../rpc/index.js';
+import type { MessagePortLike, RPCServerOptions } from '../rpc/index.js';
+import { RPCServer } from '../rpc/index.js';
+import type { CSpellRPCApi } from './api.js';
 import type { spellCheckDocumentRPC } from './spellCheckFile.js';
 
 export type { MessagePortLike } from '../rpc/index.js';
-
-export interface CSpellRPCApi {
-    spellCheckDocument: typeof spellCheckDocumentRPC;
-}
 
 export type CSpellRPCServerOptions = RPCServerOptions;
 
@@ -20,22 +15,6 @@ export class CSpellRPCServer extends RPCServer<CSpellRPCApi> {
 
 export function createCSpellRPCServer(port: MessagePortLike, options?: CSpellRPCServerOptions): CSpellRPCServer {
     return new CSpellRPCServer(port, options);
-}
-
-export type CSpellRPCClientOptions = RPCClientOptions;
-
-export class CSpellRPCClient extends RPCClient<CSpellRPCApi> {
-    constructor(port: MessagePortLike, options?: CSpellRPCClientOptions) {
-        super(port, { randomUUID, ...options });
-    }
-
-    getApi(): RPCProtocol<CSpellRPCApi> {
-        return super.getApi(Object.keys(getCSpellRPCApi()) as Array<keyof CSpellRPCApi>);
-    }
-}
-
-export function createCSpellRPCClient(port: MessagePortLike, options?: CSpellRPCClientOptions): CSpellRPCClient {
-    return new CSpellRPCClient(port, options);
 }
 
 let pSpellCheckFileJs: Promise<{ spellCheckDocumentRPC: typeof spellCheckDocumentRPC }> | undefined = undefined;
