@@ -1,19 +1,30 @@
 import type { MessagePort } from 'node:worker_threads';
 import { parentPort, workerData } from 'node:worker_threads';
 
-const port: MessagePort = workerData?.port || parentPort;
+import { createCSpellRPCServer } from 'cspell-lib/cspell-rpc/server';
 
-if (parentPort && parentPort !== port) {
+if (parentPort) {
+    const serverPort: MessagePort = workerData?.port || parentPort;
+    const workerPort: MessagePort = parentPort;
+
+    workerPort.postMessage('status:starting');
+
     // Attach a simple echo server to the parent port to keep the worker alive.
-    parentPort.on('message', (message: unknown) => {
-        parentPort?.postMessage(message);
+    workerPort.on('message', (message: unknown) => {
+        if (typeof message !== 'string') return;
+        if (message === 'status:ok') {
+            workerPort.postMessage(message);
+        }
+        if (message.startsWith('echo:')) {
+            workerPort.postMessage(message);
+        }
     });
-}
 
-if (port) {
-    // Delay the import to avoid the worker exiting before the server is started because there are no listeners.
-    setTimeout(async () => {
-        const { createCSpellRPCServer } = await import('cspell-lib/cspell-rpc/server');
-        createCSpellRPCServer(port);
-    }, 1);
+    if (serverPort) {
+        workerPort.postMessage('status:server:starting');
+        createCSpellRPCServer(serverPort);
+        workerPort.postMessage('status:server:ready');
+    }
+
+    workerPort.postMessage('status:ready');
 }

@@ -1,4 +1,3 @@
 //
 
-export type { CSpellWorkerAPI } from './cspellWorker.js';
-export { CSpellWorker } from './cspellWorker.js';
+export { startCSpellWorker } from './cspellWorker.js';
