@@ -23,7 +23,7 @@ describe('Index', () => {
         worker.terminate();
     });
 
-    test('Create Simple Server', async () => {
+    test('Create CSpell Server', async () => {
         const { worker, client } = startCSpellWorker();
         await workerOnline(worker);
 
