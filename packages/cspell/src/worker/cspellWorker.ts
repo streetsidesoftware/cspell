@@ -1,9 +1,9 @@
 import type { Worker } from 'node:worker_threads';
 
 import { startCSpellWorker } from '@cspell/cspell-worker';
-import type { CSpellRPCApi, CSpellRPCClient } from 'cspell-lib';
+import type { CSpellRPCApi, CSpellRPCClient } from 'cspell-lib/cspell-rpc';
 
-export type { CSpellRPCApi as CSpellWorkerAPI } from 'cspell-lib';
+export type { CSpellRPCApi as CSpellWorkerAPI } from 'cspell-lib/cspell-rpc';
 
 export class CSpellWorker {
     #client: CSpellRPCClient;
