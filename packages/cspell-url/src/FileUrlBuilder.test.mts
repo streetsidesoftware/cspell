@@ -3,9 +3,9 @@ import url, { fileURLToPath, pathToFileURL } from 'node:url';
 
 import { describe, expect, test } from 'vitest';
 
-import { pathWindowsDriveLetterToUpper } from './fileUrl.mjs';
-import type { ParsedPath } from './FileUrlBuilder.mjs';
-import { FileUrlBuilder } from './FileUrlBuilder.mjs';
+import { pathWindowsDriveLetterToUpper } from './fileUrl.mts';
+import type { ParsedPath } from './FileUrlBuilder.mts';
+import { FileUrlBuilder } from './FileUrlBuilder.mts';
 
 describe('FileUrlBuilder', () => {
     test('FileUrlBuilder', () => {

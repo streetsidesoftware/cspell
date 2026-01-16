@@ -10,7 +10,7 @@ import {
     pathWindowsDriveLetterToUpper,
     regExpWindowsPathDriveLetter,
     toFilePathOrHref,
-} from './fileUrl.mjs';
+} from './fileUrl.mts';
 import {
     addTrailingSlash,
     isUrlLike,
@@ -18,7 +18,7 @@ import {
     regExpWindowsPath,
     urlParent,
     urlToUrlRelative,
-} from './url.mjs';
+} from './url.mts';
 
 const isWindowsPathRegEx = regExpWindowsPathDriveLetter;
 const isWindowsPathname = regExpWindowsPath;

@@ -1,6 +1,6 @@
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
-import { hasProtocol } from './url.mjs';
+import { hasProtocol } from './url.mts';
 
 export const isWindows: boolean = process.platform === 'win32';
 

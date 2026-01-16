@@ -11,7 +11,7 @@ import {
     urlParent,
     urlRelative,
     urlRemoveFilename,
-} from './url.mjs';
+} from './url.mts';
 
 describe('url', () => {
     test.each`

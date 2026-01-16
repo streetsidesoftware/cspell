@@ -5,21 +5,21 @@ import { FileUrlBuilder, isUrlLike } from '@cspell/url';
 import mm from 'micromatch';
 import { describe, expect, test } from 'vitest';
 
-import type { NormalizeOptions } from './globHelper.js';
+import type { NormalizeOptions } from './globHelper.ts';
 import {
     __testing__,
     fileOrGlobToGlob,
     normalizeGlobPattern,
     normalizeGlobPatterns,
     normalizeGlobToRoot,
-} from './globHelper.js';
+} from './globHelper.ts';
 import type {
     GlobPattern,
     GlobPatternNormalized,
     GlobPatternWithOptionalRoot,
     GlobPatternWithRoot,
     PathInterface,
-} from './GlobMatcherTypes.js';
+} from './GlobMatcherTypes.ts';
 
 const { rebaseGlob, trimGlob, isGlobalGlob } = __testing__;
 

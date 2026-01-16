@@ -1,4 +1,4 @@
-import { basenameOfUrlPathname, hasProtocol, toURL } from './url.mjs';
+import { basenameOfUrlPathname, hasProtocol, toURL } from './url.mts';
 
 const regMatchFilename = /filename=([^;,]*)/;
 /**

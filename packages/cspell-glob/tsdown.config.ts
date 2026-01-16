@@ -2,7 +2,7 @@ import type { UserConfig } from 'tsdown';
 import { defineConfig } from 'tsdown';
 
 const config: UserConfig = defineConfig({
-    entry: ['src/index.mts'],
+    entry: ['src/index.ts'],
     outDir: 'dist',
     format: ['esm'],
     fixedExtension: false,

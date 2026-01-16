@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import * as index from './index.js';
+import * as index from './index.ts';
 
 describe('Validate index loads', () => {
     test('the modules is ok', () => {
