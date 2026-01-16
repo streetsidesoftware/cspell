@@ -32,7 +32,7 @@ export interface SimpleWorkerInstance {
     client: SimpleRPCClient;
 }
 
-export function startSimpleRCPWorker(): SimpleWorkerInstance {
+export function startSimpleRPCWorker(): SimpleWorkerInstance {
     const messageChannel = new MessageChannel();
     const { port1, port2 } = messageChannel;
 

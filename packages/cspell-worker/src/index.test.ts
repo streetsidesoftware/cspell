@@ -2,13 +2,13 @@ import type { Worker } from 'node:worker_threads';
 
 import { describe, expect, test } from 'vitest';
 
-import { startCSpellWorker, startSimpleRCPWorker } from '../dist/index.js';
+import { startCSpellWorker, startSimpleRPCWorker } from '../dist/index.js';
 
 const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
 
 describe('Index', () => {
     test('Create Simple Server', async () => {
-        const { worker, client } = startSimpleRCPWorker();
+        const { worker, client } = startSimpleRPCWorker();
         await workerOnline(worker);
 
         const api = client.api;
