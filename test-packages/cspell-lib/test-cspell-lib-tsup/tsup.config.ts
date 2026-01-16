@@ -1,9 +1,11 @@
 import { defineConfig } from 'tsup';
 
-export default defineConfig({
+const config: ReturnType<typeof defineConfig> = defineConfig({
     entry: ['src/index.ts'],
     outDir: 'dist',
-    format: ['cjs', 'esm'],
+    format: ['esm'],
     sourcemap: true,
     clean: true,
 });
+
+export default config;

@@ -1,7 +1,7 @@
 import { MessageChannel, Worker } from 'node:worker_threads';
 
-import type { CSpellRPCClient } from 'cspell-lib';
-import { createCSpellRPCClient } from 'cspell-lib';
+import type { CSpellRPCClient } from 'cspell-lib/cspell-rpc';
+import { createCSpellRPCClient } from 'cspell-lib/cspell-rpc';
 
 import type { SimpleRPCClient } from './simpleServer.js';
 import { startSimpleRPCClient } from './simpleServer.js';
