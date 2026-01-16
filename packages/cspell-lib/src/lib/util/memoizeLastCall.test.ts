@@ -1,15 +1,15 @@
 import { describe, expect, test, vi } from 'vitest';
 
-import { memorizeLastCall } from './memorizeLastCall.js';
+import { memoizeLastCall } from './memoizeLastCall.js';
 
-describe('memorizeLastCall', () => {
-    test('memorizeLastCall simple', () => {
+describe('memoizeLastCall', () => {
+    test('memoizeLastCall simple', () => {
         function calc(v: number): number {
             return v * 2;
         }
 
         const fn = vi.fn(calc);
-        const m = memorizeLastCall(fn);
+        const m = memoizeLastCall(fn);
 
         const calls = [1, 1, 2, 1, 3, 3, 3, 3, 2, 1];
         calls.forEach((call) => m(call));
@@ -17,13 +17,13 @@ describe('memorizeLastCall', () => {
         expect(fn.mock.calls).toEqual([[1], [2], [1], [3], [2], [1]]);
     });
 
-    test('memorizeLastCall two params', () => {
+    test('memoizeLastCall two params', () => {
         function calc(letter: string, repeat: number): string {
             return letter.repeat(repeat);
         }
 
         const fn = vi.fn(calc);
-        const m = memorizeLastCall(fn);
+        const m = memoizeLastCall(fn);
 
         m('h', 1);
         m('h', 1);

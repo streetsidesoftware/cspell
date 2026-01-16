@@ -70,7 +70,7 @@ describe('RPC Server', () => {
 
         clientPort.postMessage(createRPCOkRequest(randomUUID()));
         const okResponse = await msgs.next();
-        expect(okResponse.value).toEqual(createRPCOkResponse(okResponse.value.id));
+        expect(okResponse.value).toEqual(createRPCOkResponse(okResponse.value.id, 200));
         expect(isRPCOkResponse(okResponse.value)).toBe(true);
         expect(okResponse.value.code).toBe(200);
 

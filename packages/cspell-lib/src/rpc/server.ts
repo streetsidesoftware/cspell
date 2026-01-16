@@ -1,8 +1,9 @@
 import { assert } from './assert.js';
 import { MalformedRPCRequestError, UnknownMethodRPCRequestError } from './errors.js';
 import type { MessagePortLike } from './messagePort.js';
-import type { RPCBaseMessage, RPCRequestMessage } from './models.js';
+import type { RequestID, ResponseCode, RPCMessage, RPCRequestMessage } from './models.js';
 import {
+    createRPCCanceledResponse,
     createRPCError,
     createRPCOkResponse,
     createRPCResponse,
@@ -12,6 +13,14 @@ import {
     isRPCRequest,
 } from './modelsHelpers.js';
 import type { RPCProtocol, RPCProtocolMethodNames } from './protocol.js';
+
+const RESPONSE_CODES = {
+    OK: 200 as const,
+    BadRequest: 400 as const,
+    RequestTimeout: 408 as const,
+    InternalServerError: 500 as const,
+    ServiceUnavailable: 503 as const,
+} as const;
 
 export interface RPCServerOptions {
     closePortOnDispose?: boolean;
@@ -61,38 +70,44 @@ export class RPCServer<
         port.start?.();
     }
 
-    #sendResponse(response: RPCBaseMessage): void {
+    #sendResponse(response: RPCMessage): void {
         if (this.#isClosed) return;
         this.#port.postMessage(response);
     }
 
     #handleMessage(msg: unknown): void {
-        if (!isRPCBaseMessage(msg)) {
-            if (this.#options.returnMalformedRPCRequestError) {
-                this.#sendResponse(createRPCError(0, new MalformedRPCRequestError('Malformed RPC request', msg)));
+        let id: RequestID = 0;
+        try {
+            if (!isRPCBaseMessage(msg)) {
+                if (this.#options.returnMalformedRPCRequestError) {
+                    throw new MalformedRPCRequestError('Malformed RPC request', msg);
+                }
+                // Not a valid RPC message; ignore.
+                return;
             }
-            // Not a valid RPC message; ignore.
-            return;
-        }
-        if (isRPCCancelRequest(msg)) {
-            // For now just remove it from pending requests.
-            this.#pendingRequests.delete(msg.id);
-            // later, implement aborting the request if possible.
-            return;
-        }
-        if (isRPCOkRequest(msg)) {
-            this.#sendResponse(createRPCOkResponse(msg.id));
-            return;
-        }
-
-        if (!isRPCRequest(msg)) {
-            if (this.#options.returnMalformedRPCRequestError) {
-                this.#sendResponse(createRPCError(msg.id, new MalformedRPCRequestError('Malformed RPC request', msg)));
+            id = msg.id;
+            if (isRPCCancelRequest(msg)) {
+                // For now just remove it from pending requests.
+                // later, implement aborting the request if possible.
+                this.#pendingRequests.delete(msg.id);
+                this.#sendCancelResponse(msg.id, RESPONSE_CODES.OK);
+                return;
             }
-            // Not a request; ignore.
-            return;
+            if (isRPCOkRequest(msg)) {
+                this.#sendResponse(createRPCOkResponse(msg.id, RESPONSE_CODES.OK));
+                return;
+            }
+            if (!isRPCRequest(msg)) {
+                if (this.#options.returnMalformedRPCRequestError) {
+                    throw new MalformedRPCRequestError('Malformed RPC request', msg);
+                }
+                // Not a request; ignore.
+                return;
+            }
+            this.#handleRequest(msg);
+        } catch (err) {
+            this.#sendErrorResponse(id, err);
         }
-        this.#handleRequest(msg);
     }
 
     #isMethod(method: string): method is MethodsNames {
@@ -113,23 +128,29 @@ export class RPCServer<
             const result = await this.#methods[method](...params);
 
             if (this.#pendingRequests.has(msg.id)) {
-                const response = createRPCResponse(msg.id, result);
+                const response = createRPCResponse(msg.id, result, RESPONSE_CODES.OK);
                 this.#sendResponse(response);
             }
         };
 
         this.#pendingRequests.set(msg.id, {
             requestMessage: msg,
-            promise: handleAsync().catch((err) => this.#sendErrorResponse(msg.id, err)),
+            promise: handleAsync().catch((err) =>
+                this.#sendErrorResponse(msg.id, err, RESPONSE_CODES.InternalServerError),
+            ),
         });
 
         return;
     }
 
-    #sendErrorResponse(id: RPCBaseMessage['id'], error: unknown): void {
+    #sendCancelResponse(id: RequestID, code: ResponseCode = RESPONSE_CODES.ServiceUnavailable): void {
+        this.#sendResponse(createRPCCanceledResponse(id, code));
+    }
+
+    #sendErrorResponse(id: RequestID, error: unknown, code: ResponseCode = RESPONSE_CODES.BadRequest): void {
         try {
             const err = error instanceof Error ? error : new Error(String(error));
-            this.#sendResponse(createRPCError(id, err));
+            this.#sendResponse(createRPCError(id, err, code));
         } catch {
             // Nothing to do if the port is closed.
         }

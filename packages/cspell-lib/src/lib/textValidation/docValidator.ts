@@ -39,6 +39,7 @@ import { catchPromiseError, toError } from '../util/errors.js';
 import { AutoCache } from '../util/simpleCache.js';
 import type { MatchRange } from '../util/TextRange.js';
 import { uriToFilePath } from '../util/Uri.js';
+import { cleanValidationIssue } from './cleanValidationIssue.js';
 import { defaultMaxDuplicateProblems, defaultMaxNumberOfProblems } from './defaultConstants.js';
 import { determineTextDocumentSettings } from './determineTextDocumentSettings.js';
 import type { TextValidator } from './lineValidatorFactory.js';
@@ -215,6 +216,7 @@ export class DocumentValidator {
         this._ready = true;
         this._preparationTime = timer.elapsed;
         this.perfTiming.prepTime = this._preparationTime;
+
         stopMeasure();
     }
 
@@ -350,7 +352,9 @@ export class DocumentValidator {
                 forceCheck || this.shouldCheckDocument() ? [...this._checkParsedText(this._parse())] : [];
             const directiveIssues = this.checkDocumentDirectives();
             // console.log('Stats: %o', this._preparations.textValidator.lineValidator.dict.stats());
-            const allIssues = [...spellingIssues, ...directiveIssues].sort((a, b) => a.offset - b.offset);
+            const allIssues = [...spellingIssues, ...directiveIssues]
+                .map(cleanValidationIssue)
+                .sort((a, b) => a.offset - b.offset);
             return allIssues;
         } finally {
             timerDone();

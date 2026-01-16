@@ -1,14 +1,14 @@
 import { describe, expect, test, vi } from 'vitest';
 
-import { memorizerWeak } from './memorizerWeak.js';
+import { memoizeWeak } from './memoizeWeak.js';
 
-describe('memorizer Weak', () => {
-    test('memorizer', () => {
+describe('memoize Weak', () => {
+    test('memoize', () => {
         const transform = (...args: (readonly [string])[]) => args.reduce((sum, s) => (sum += s.length), 0);
 
         const fn = vi.fn(transform);
 
-        const m = memorizerWeak(fn);
+        const m = memoizeWeak(fn);
 
         const a = ['a'] as const;
         const b = ['b'] as const;
@@ -33,7 +33,7 @@ describe('memorizer Weak', () => {
 
         const fn = vi.fn(transform);
 
-        const m = memorizerWeak(fn);
+        const m = memoizeWeak(fn);
 
         const a23 = { a: 'a', ai: 23 };
         const bBbi = { b: 'b', bi: undefined };
