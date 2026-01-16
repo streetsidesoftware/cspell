@@ -10,6 +10,7 @@ describe('Validate CSpellWorker', () => {
 
         expect(worker).toBeDefined();
         await worker.online;
+        await expect(worker.ok(1000)).resolves.toBe(true);
     });
 
     test('spell checking a document.', async () => {
@@ -24,6 +25,7 @@ describe('Validate CSpellWorker', () => {
         const client = worker.getClient();
 
         await worker.online;
+        await expect(worker.ok(1000)).resolves.toBe(true);
 
         await expect(client.isOK()).resolves.toBe(true);
 

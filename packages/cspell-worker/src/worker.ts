@@ -15,5 +15,5 @@ if (port) {
     setTimeout(async () => {
         const { createCSpellRPCServer } = await import('cspell-lib/cspell-rpc/server');
         createCSpellRPCServer(port);
-    }, 0);
+    }, 1);
 }
