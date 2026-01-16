@@ -84,7 +84,7 @@ jobs:
 
       - name: Cache Build
         id: step-cache-build
-        uses: actions/cache@v5.0.1
+        uses: actions/cache@v5.0.2
         with:
           key: ${{ needs.build.outputs.key }}
           path: ${{ needs.build.outputs.path }}
