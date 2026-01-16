@@ -11,6 +11,7 @@ export interface SimpleServerAPI {
     div(a: number, b: number): number;
     sleep(ms: number): Promise<void>;
     error(message: string): void;
+    echo(message: string): string;
 }
 
 const api: SimpleServerAPI = {
@@ -22,6 +23,7 @@ const api: SimpleServerAPI = {
     error: (message: string): void => {
         throw new Error(message);
     },
+    echo: (message: string): string => message,
 } as const;
 
 export function startSimpleServer(port: MessagePort): void {

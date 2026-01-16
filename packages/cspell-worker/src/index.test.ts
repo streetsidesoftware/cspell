@@ -1,5 +1,3 @@
-import type { Worker } from 'node:worker_threads';
-
 import { describe, expect, test } from 'vitest';
 
 import { startCSpellWorker, startSimpleRPCWorker } from '../dist/index.js';
@@ -8,8 +6,10 @@ const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.obj
 
 describe('Index', () => {
     test('Create Simple Server', async () => {
-        const { worker, client } = startSimpleRPCWorker();
-        await workerOnline(worker);
+        const { worker, client, ok, online } = startSimpleRPCWorker();
+        await online;
+
+        await expect(ok(1000)).resolves.toBe(true);
 
         const api = client.api;
         await expect(api.add(2, 3)).resolves.toBe(5);
@@ -24,9 +24,10 @@ describe('Index', () => {
     });
 
     test('Create CSpell Server', async () => {
-        const { worker, client } = startCSpellWorker();
-        await workerOnline(worker);
+        const { worker, client, ok, online } = startCSpellWorker();
+        await online;
 
+        await expect(ok(1000)).resolves.toBe(true);
         await expect(client.isOK()).resolves.toBe(true);
 
         client[Symbol.dispose]();
@@ -34,8 +35,10 @@ describe('Index', () => {
     });
 
     test('Spell check a document.', async () => {
-        const { worker, client } = startCSpellWorker();
-        await workerOnline(worker);
+        const { worker, client, ok, online } = startCSpellWorker();
+        await online;
+
+        await expect(ok(1000)).resolves.toBe(true);
 
         await expect(client.isOK()).resolves.toBe(true);
 
@@ -50,9 +53,3 @@ describe('Index', () => {
         worker.terminate();
     });
 });
-
-function workerOnline(worker: Worker): Promise<void> {
-    return new Promise((resolve) => {
-        worker.once('online', () => resolve());
-    });
-}

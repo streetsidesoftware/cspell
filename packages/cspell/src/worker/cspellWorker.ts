@@ -10,20 +10,23 @@ export class CSpellWorker {
     #worker: Worker;
     #isTerminated: boolean = false;
     #online: Promise<void>;
+    #ok: (timeout?: number) => Promise<boolean>;
 
     constructor() {
         this.#isTerminated = false;
-        const { client, worker } = startCSpellWorker();
-
+        const { client, worker, ok, online } = startCSpellWorker();
+        this.#ok = ok;
         worker.ref();
         this.#worker = worker;
         this.#client = client;
 
-        this.#online = new Promise((resolve) => {
-            this.#worker.once('online', resolve);
-        });
+        this.#online = online;
 
         this.#worker.once('exit', this.#handleOnExit);
+    }
+
+    get ok(): (timeout?: number) => Promise<boolean> {
+        return this.#ok;
     }
 
     get api(): CSpellRPCApi {
