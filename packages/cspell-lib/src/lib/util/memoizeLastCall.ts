@@ -1,9 +1,9 @@
 import { isArrayEqual } from './util.js';
 
 /**
- * Create a function that memorizes the last call. If the next call is called with the same arguments, the
+ * Create a function that memoizes the last call. If the next call is called with the same arguments, the
  * the last value is returned.
- * @param fn - function to memorize
+ * @param fn - function to memoize
  * @returns a new function.
  */
 
