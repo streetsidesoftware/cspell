@@ -27,9 +27,20 @@ describe('Index', () => {
         const { worker, client } = startCSpellWorker();
         await workerOnline(worker);
 
-        const api = client.getApi();
+        await expect(client.isOK()).resolves.toBe(true);
+
+        client[Symbol.dispose]();
+        worker.terminate();
+    });
+
+    test('Spell check a document.', async () => {
+        const { worker, client } = startCSpellWorker();
+        await workerOnline(worker);
 
         await expect(client.isOK()).resolves.toBe(true);
+
+        const api = client.getApi();
+
         const doc = { uri: import.meta.url };
         const result = await api.spellCheckDocument(doc, {}, {});
         expect(result).toBeDefined();

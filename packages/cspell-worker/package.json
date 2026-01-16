@@ -38,7 +38,7 @@
     "clean-build": "pnpm run clean && pnpm run build",
     "sort-filetypes": "pnpm build && node scripts/sortFileTypes.js && prettier --write src/definitions.ts",
     "coverage": "vitest run --coverage --pool=forks",
-    "test": "vitest run"
+    "test": "vitest run --pool=forks"
   },
   "repository": {
     "type": "git",
