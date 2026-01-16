@@ -57,7 +57,7 @@ export interface RequestOptions {
 }
 
 const DefaultOkOptions: RequestOptions = {
-    timeoutMs: 10,
+    timeoutMs: 200,
 };
 
 /**
