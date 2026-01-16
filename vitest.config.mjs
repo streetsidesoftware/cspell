@@ -43,7 +43,6 @@ const defaultConfig = {
                 '**/samples/**',
                 '**/test*/**',
                 '**/test.*',
-                '**/cspell-worker/**', // code coverage for worker threads is not supported.
                 'ajv.config.*',
                 'bin.cjs',
                 'bin.js',
