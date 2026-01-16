@@ -20,7 +20,7 @@ import {
 import type { SpellingDictionaryCollection, SuggestionResult, SuggestOptions } from './SpellingDictionary/index.js';
 import { getDictionaryInternal, refreshDictionaryCache } from './SpellingDictionary/index.js';
 import { createAutoResolveCache } from './util/AutoResolve.js';
-import { memorizeLastCall } from './util/memorizeLastCall.js';
+import { memoizeLastCall } from './util/memoizeLastCall.js';
 import * as util from './util/util.js';
 
 export interface WordSuggestion extends SuggestionResult {
@@ -113,7 +113,7 @@ export async function* suggestionsForWords(
     }
 }
 
-const memorizeSuggestions = memorizeLastCall(cacheSuggestionsForWord);
+const memoizeSuggestions = memoizeLastCall(cacheSuggestionsForWord);
 
 function cacheSuggestionsForWord(
     options: SuggestOptions,
@@ -129,7 +129,7 @@ export async function suggestionsForWord(
     settings: CSpellSettings | ICSpellConfigFile = emptyCSpellSettings,
 ): Promise<SuggestionsForWordResult> {
     const cspellSettings = satisfiesCSpellConfigFile(settings) ? await resolveConfigFileImports(settings) : settings;
-    return memorizeSuggestions(options, cspellSettings)(word);
+    return memoizeSuggestions(options, cspellSettings)(word);
 }
 
 async function _suggestionsForWord(

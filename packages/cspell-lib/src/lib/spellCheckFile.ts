@@ -13,7 +13,7 @@ import type { DocumentValidatorOptions } from './textValidation/index.js';
 import { DocumentValidator } from './textValidation/index.js';
 import { isError } from './util/errors.js';
 import type { Uri } from './util/IUri.js';
-import { memorizeLastCall } from './util/memorizeLastCall.js';
+import { memoizeLastCall } from './util/memoizeLastCall.js';
 import { toUri } from './util/Uri.js';
 import type { ValidateTextOptions, ValidationIssue } from './validator.js';
 
@@ -132,7 +132,7 @@ export async function spellCheckDocument(
     }
 }
 
-const memoizedCloneSettingsForExport = memorizeLastCall(cloneSettingsForExport);
+const memoizedCloneSettingsForExport = memoizeLastCall(cloneSettingsForExport);
 
 function sanitizeSettingsForExport(settings: CSpellSettingsWithSourceTrace | undefined): CSpellSettingsWithSourceTrace {
     return settings ? memoizedCloneSettingsForExport(settings) : {};
