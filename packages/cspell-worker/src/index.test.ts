@@ -1,44 +1,35 @@
 import { describe, expect, test } from 'vitest';
 
-import { startCSpellWorker, startSimpleRPCWorker } from '../dist/index.js';
+import { startCSpellWorker } from '../dist/index.js';
 
 const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
 
 describe('Index', () => {
-    test('Create Simple Server', async () => {
-        const { worker, client, ok, online } = startSimpleRPCWorker();
-        await online;
-
-        await expect(ok(1000)).resolves.toBe(true);
-
-        const api = client.api;
-        await expect(api.add(2, 3)).resolves.toBe(5);
-        await expect(api.mul(2, 3)).resolves.toBe(6);
-        await expect(api.sub(2, 3)).resolves.toBe(-1);
-        await expect(api.div(33, 3)).resolves.toBe(11);
-        await expect(api.sleep(2)).resolves.toBe(undefined);
-        await expect(api.error('My Error')).rejects.toEqual(new Error('My Error'));
-
-        client[Symbol.dispose]();
-        worker.terminate();
-    });
-
     test('Create CSpell Server', async () => {
-        const { worker, client, ok, online } = startCSpellWorker();
-        await online;
+        await using worker = startCSpellWorker();
+        await worker.ready;
+        const client = worker.client;
 
-        await expect(ok(1000)).resolves.toBe(true);
+        await expect(worker.ok(1000)).resolves.toBe(true);
         await expect(client.isOK()).resolves.toBe(true);
 
-        client[Symbol.dispose]();
-        worker.terminate();
+        const status = worker.status;
+        expect(status.size).toBeGreaterThan(0);
+        expect([...status.keys()]).toEqual([
+            'status:starting',
+            'status:server:starting',
+            'status:server:ready',
+            'status:ready',
+            'status:ok',
+        ]);
     });
 
     test('Spell check a document.', async () => {
-        const { worker, client, ok, online } = startCSpellWorker();
-        await online;
+        await using worker = startCSpellWorker();
+        await worker.ready;
+        const client = worker.client;
 
-        await expect(ok(1000)).resolves.toBe(true);
+        await expect(worker.ok(1000)).resolves.toBe(true);
 
         await expect(client.isOK()).resolves.toBe(true);
 
@@ -48,8 +39,5 @@ describe('Index', () => {
         const result = await api.spellCheckDocument(doc, {}, {});
         expect(result).toBeDefined();
         expect(result).toEqual(oc({ document: oc(doc), issues: [], errors: undefined }));
-
-        client[Symbol.dispose]();
-        worker.terminate();
     });
 });

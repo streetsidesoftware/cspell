@@ -1,30 +1,29 @@
 import { describe, expect, test } from 'vitest';
 
-import { CSpellWorker } from './cspellWorker.js';
+import { startCSpellWorker } from './cspellWorker.js';
 
 const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
 
 describe('Validate CSpellWorker', () => {
     test('Check creation', async () => {
-        await using worker = new CSpellWorker();
+        await using worker = startCSpellWorker();
 
         expect(worker).toBeDefined();
-        await worker.online;
+        await worker.ready;
         await expect(worker.ok(1000)).resolves.toBe(true);
     });
 
     test('spell checking a document.', async () => {
-        await using worker = new CSpellWorker();
-
+        await using worker = startCSpellWorker();
         expect(worker).toBeDefined();
+        await worker.ready;
 
-        const api = worker.api;
+        const api = worker.client.getApi();
         expect(api).toBeDefined();
         expect(api.spellCheckDocument).toBeDefined();
 
-        const client = worker.getClient();
+        const client = worker.client;
 
-        await worker.online;
         await expect(worker.ok(1000)).resolves.toBe(true);
 
         const t = performance.now();
