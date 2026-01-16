@@ -15,19 +15,12 @@ export class CSpellWorker {
         this.#isTerminated = false;
         const { client, worker } = startCSpellWorker();
 
-        worker.on('error', (err) => {
-            console.error('CSpell Worker error: %o', err);
-        });
         worker.ref();
         this.#worker = worker;
         this.#client = client;
 
         this.#online = new Promise((resolve) => {
-            console.log('Waiting for CSpell Worker to come online...');
-            this.#worker.once('online', (event: unknown) => {
-                console.log('CSpell Worker is online. %o', event);
-                resolve();
-            });
+            this.#worker.once('online', resolve);
         });
 
         this.#worker.once('exit', this.#handleOnExit);
@@ -50,7 +43,6 @@ export class CSpellWorker {
     }
 
     #handleOnExit = () => {
-        console.log('CSpell Worker exited.');
         this.#terminate();
     };
 
