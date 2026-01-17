@@ -6,10 +6,12 @@ import {
     createRPCCanceledResponse,
     createRPCError,
     createRPCOkResponse,
+    createRPCReadyResponse,
     createRPCResponse,
     isRPCBaseMessage,
     isRPCCancelRequest,
     isRPCOkRequest,
+    isRPCReadyRequest,
     isRPCRequest,
 } from './modelsHelpers.js';
 import type { RPCProtocol, RPCProtocolMethodNames } from './protocol.js';
@@ -68,6 +70,7 @@ export class RPCServer<
         port.addListener('close', this.#onClose);
         port.addListener('message', this.#onMessage);
         port.start?.();
+        this.#sendReadyResponse();
     }
 
     #sendResponse(response: RPCMessage): void {
@@ -93,6 +96,10 @@ export class RPCServer<
                 this.#sendCancelResponse(msg.id, RESPONSE_CODES.OK);
                 return;
             }
+            if (isRPCReadyRequest(msg)) {
+                this.#sendReadyResponse(msg.id);
+                return;
+            }
             if (isRPCOkRequest(msg)) {
                 this.#sendResponse(createRPCOkResponse(msg.id, RESPONSE_CODES.OK));
                 return;
@@ -108,6 +115,10 @@ export class RPCServer<
         } catch (err) {
             this.#sendErrorResponse(id, err);
         }
+    }
+
+    #sendReadyResponse(id?: RequestID): void {
+        this.#sendResponse(createRPCReadyResponse(id || 0, RESPONSE_CODES.OK));
     }
 
     #isMethod(method: string): method is MethodsNames {

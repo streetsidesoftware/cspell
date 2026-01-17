@@ -17,14 +17,23 @@ export interface RPCMessage {
     /**
      * The type of message being sent.
      */
-    type: 'request' | 'response' | 'cancel' | 'canceled' | 'ok';
+    type: 'request' | 'response' | 'cancel' | 'canceled' | 'ok' | 'ready';
 }
 
 export interface RCPBaseRequest extends RPCMessage {
     /**
      * The type of message being sent.
      */
-    type: 'request' | 'cancel' | 'ok';
+    type: 'request' | 'cancel' | 'ok' | 'ready';
+}
+
+export interface RPCResponse extends RPCMessage {
+    /**
+     * The type of message being sent.
+     */
+    type: 'response' | 'canceled' | 'ok' | 'ready';
+    code: ResponseCode;
+    error?: RPCError | undefined;
 }
 
 /**
@@ -37,20 +46,38 @@ export interface RPCOkRequestMessage extends RCPBaseRequest {
     type: 'ok';
 }
 
-export interface RPCResponse extends RPCMessage {
-    /**
-     * The type of message being sent.
-     */
-    type: 'response' | 'canceled' | 'ok';
-    code: ResponseCode;
-    error?: RPCError | undefined;
-}
-
 /**
  * A message to check if the server is running.
  */
 export interface RPCOkResponseMessage extends RPCResponse {
     type: 'ok';
+}
+
+/**
+ * A message send from a client to request if the server is ready.
+ * This can be sent once or multiple times. It allows for multiple clients
+ * to wait for the server to be ready. When the server is ready it will respond
+ * with a `RPCReadyResponseMessage`.
+ *
+ * This is useful when the server takes some time to initialize and clients
+ * need to wait for it to be ready before sending other requests.
+ *
+ */
+export interface RPCReadyRequestMessage extends RCPBaseRequest {
+    /**
+     * The type of message being sent.
+     */
+    type: 'ready';
+}
+
+/**
+ * A response message send to the client when the server is ready.
+ * This is sent once when the server is initialized or upon request.
+ *
+ * This allows clients to know when the server is ready to accept requests.
+ */
+export interface RPCReadyResponseMessage extends RPCResponse {
+    type: 'ready';
 }
 
 /**

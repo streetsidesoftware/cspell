@@ -1,7 +1,7 @@
 import type { MessagePortLike, RPCServerOptions } from '../rpc/index.js';
 import { RPCServer } from '../rpc/index.js';
 import type { CSpellRPCApi } from './api.js';
-import type { spellCheckDocumentRPC } from './spellCheckFile.js';
+import { spellCheckDocumentRPC } from './spellCheckFile.js';
 
 export type { MessagePortLike } from '../rpc/index.js';
 
@@ -13,29 +13,36 @@ export class CSpellRPCServer extends RPCServer<CSpellRPCApi> {
     }
 }
 
+/**
+ * Create a CSpell RPC Server that listens on the given port.
+ * @param port - The message port to listen on.
+ * @param options - Options for the RPC server.
+ * @returns The CSpell RPC Server.
+ */
 export function createCSpellRPCServer(port: MessagePortLike, options?: CSpellRPCServerOptions): CSpellRPCServer {
     return new CSpellRPCServer(port, options);
 }
 
-let pSpellCheckFileJs: Promise<{ spellCheckDocumentRPC: typeof spellCheckDocumentRPC }> | undefined = undefined;
-
 /**
  * Get the CSpell RPC API.
- *
- * NOTE: This function lazy loads the implementation to avoid loading unnecessary code during initialization of workers.
  *
  * @returns the api implementation.
  */
 function getCSpellRPCApi(): CSpellRPCApi {
     return {
-        spellCheckDocument: async (...params) => {
-            const { spellCheckDocumentRPC } = await getSpellCheckFileJs();
-            return spellCheckDocumentRPC(...params);
-        },
+        spellCheckDocument: spellCheckDocumentRPC,
+        sleep,
+        echo,
     };
+}
 
-    function getSpellCheckFileJs() {
-        pSpellCheckFileJs ??= import('./spellCheckFile.js');
-        return pSpellCheckFileJs;
-    }
+function echo(msg: string): Promise<string> {
+    return Promise.resolve(msg);
+}
+
+function sleep(ms: number): Promise<number> {
+    return new Promise((resolve) => {
+        const start = performance.now();
+        setTimeout(() => resolve(performance.now() - start), ms);
+    });
 }

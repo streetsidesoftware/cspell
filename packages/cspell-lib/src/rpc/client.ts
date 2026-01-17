@@ -1,17 +1,19 @@
 import { AbortRPCRequestError, CanceledRPCRequestError, TimeoutRPCRequestError } from './errors.js';
+import { Future } from './Future.js';
 import type { MessagePortLike } from './messagePort.js';
 import type { RCPBaseRequest, RequestID, RPCPendingClientRequest, RPCResponse } from './models.js';
 import {
     createRPCCancelRequest,
+    createRPCMethodRequest,
     createRPCOkRequest,
-    createRPCRequest,
+    createRPCReadyRequest,
     isBaseResponse,
     isRPCCanceledResponse,
     isRPCErrorResponse,
+    isRPCReadyResponse,
     isRPCResponse,
 } from './modelsHelpers.js';
 import type { RPCProtocol, RPCProtocolMethodNames } from './protocol.js';
-import { Resolver } from './Resolver.js';
 
 interface PendingRequest {
     readonly id: RequestID;
@@ -49,11 +51,11 @@ export interface RequestOptions {
     /**
      * An AbortSignal to abort the request.
      */
-    signal?: AbortSignal;
+    signal?: AbortSignal | undefined;
     /**
      * Timeout in milliseconds to wait before aborting the request.
      */
-    timeoutMs?: number;
+    timeoutMs?: number | undefined;
 }
 
 const DefaultOkOptions: RequestOptions = {
@@ -77,6 +79,9 @@ export class RPCClient<
 
     #defaultTimeoutMs: number | undefined;
 
+    #isReady: boolean;
+    #ready: Future<boolean>;
+
     #onMessage: (msg: unknown) => void;
 
     /**
@@ -87,6 +92,8 @@ export class RPCClient<
         this.#port = port;
         this.#options = options;
         this.#defaultTimeoutMs = options.timeoutMs;
+        this.#isReady = false;
+        this.#ready = new Future<boolean>();
 
         this.#onMessage = (msg: unknown) => this.#processMessageFromServer(msg);
 
@@ -94,6 +101,16 @@ export class RPCClient<
         port.start?.();
     }
 
+    /**
+     * Make a request to the RPC server.
+     *
+     * It is unlikely you need to use this method directly. Consider using `call` or `getApi` instead.
+     *
+     * @param method - The method name.
+     * @param params - The method parameters.
+     * @param options - Request options including abort signal and timeout.
+     * @returns The pending client request.
+     */
     request<M extends MethodNames>(
         method: M,
         params: Parameters<P[M]>,
@@ -102,7 +119,7 @@ export class RPCClient<
         // Register the request.
 
         const id = this.#calcId(method);
-        const request = createRPCRequest(id, method, params);
+        const request = createRPCMethodRequest(id, method, params);
 
         const pendingRequest = this.#sendRequest(request, options);
 
@@ -153,12 +170,12 @@ export class RPCClient<
 
         const timeoutSignal = timeoutMs ? AbortSignal.timeout(timeoutMs) : undefined;
 
-        const resolver = new Resolver<RPCResponse>();
+        const future = new Future<RPCResponse>();
 
         options.signal?.addEventListener('abort', abort);
         timeoutSignal?.addEventListener('abort', timeoutHandler);
 
-        const response = resolver.promise;
+        const response = future.promise;
 
         const cancelRequest = () => this.#port.postMessage(createRPCCancelRequest(id));
 
@@ -209,22 +226,26 @@ export class RPCClient<
             reason ??= `Request ${id} aborted`;
             reason = typeof reason === 'string' ? new AbortRPCRequestError(reason) : reason;
             cleanup();
-            resolver.reject(reason);
+            future.reject(reason);
         }
 
         function handleResponse(res: RPCResponse): void {
             // Do not process anything if already resolved or canceled.
             if (isResolved || isCanceled) return;
-
             isResolved = true;
             if (isRPCCanceledResponse(res)) {
                 isCanceled = true;
             }
             cleanup();
-            resolver.resolve(res);
+            future.resolve(res);
         }
     }
 
+    /**
+     * Check the health of the RPC server.
+     * @param options - used to set timeout and abort signal.
+     * @returns resolves to true if the server is OK, false on timeout.
+     */
     async isOK(options: RequestOptions = DefaultOkOptions): Promise<boolean> {
         try {
             const req = this.#sendRequest(createRPCOkRequest(this.#calcId('isOK')), options);
@@ -233,6 +254,28 @@ export class RPCClient<
         } catch {
             return false;
         }
+    }
+
+    /**
+     * The current known ready state of the RPC server.
+     * - `true` - The server is ready.
+     * - `false` - The server is not ready.
+     */
+    get isReady(): boolean {
+        return this.#isReady;
+    }
+
+    /**
+     * Check if the RPC server is ready. If already ready, returns true immediately.
+     * If not ready, sends a 'ready' request to the server.
+     * @param options - used to set timeout and abort signal.
+     * @returns resolves to true when the server is ready, rejects if the request times out or fails.
+     */
+    async ready(options?: RequestOptions): Promise<boolean> {
+        if (this.#isReady) return true;
+        // We send the request, but we do not care about the result other than it succeeded.
+        await this.#sendRequest(createRPCReadyRequest(this.#calcId('ready')), options).response;
+        return this.#isReady; // We are returning the current state.
     }
 
     /**
@@ -247,6 +290,14 @@ export class RPCClient<
         return req.response;
     }
 
+    /**
+     * Get the API for the given method names.
+     *
+     * This is useful passing the API to other parts of the code that do not need to know about the RPCClient.
+     *
+     * @param methods - The method names to include in the API.
+     * @returns A partial API with the requested methods.
+     */
     getApi<M extends MethodNames>(methods: M[]): Pick<P, M> {
         const apiEntries: [M, P[M]][] = methods.map(
             (method) => [method, ((...params: Parameters<P[M]>) => this.call(method, params)) as P[M]] as const,
@@ -254,14 +305,31 @@ export class RPCClient<
         return Object.fromEntries(apiEntries) as Pick<P, M>;
     }
 
+    /**
+     * Get info about a pending request by its RequestID.
+     * @param id - The RequestID of the pending request.
+     * @returns The found pending request or undefined if not found.
+     */
     getPendingRequestById(id: RequestID): PendingRequest | undefined {
         return this.#pendingRequests.get(id);
     }
 
+    /**
+     * Get info about a pending request by the promise returned using `call` or an api method.
+     * @param id - The RequestID of the pending request.
+     * @returns The found pending request or undefined if not found.
+     */
     getPendingRequestByPromise(promise: Promise<unknown>): PendingRequest | undefined {
         const requestId = this.#pendingRequestsByPromise.get(promise);
         if (!requestId) return undefined;
         return this.getPendingRequestById(requestId);
+    }
+
+    /**
+     * Get the number of pending requests.
+     */
+    get length(): number {
+        return this.#pendingRequests.size;
     }
 
     #calcId(method: string): RequestID {
@@ -278,9 +346,21 @@ export class RPCClient<
     #processMessageFromServer(msg: unknown): void {
         // Ignore messages that are not RPC messages
         if (!isBaseResponse(msg)) return;
+        this.#handleReadyResponse(msg);
         const pendingRequest = this.#pendingRequests.get(msg.id);
         if (!pendingRequest) return;
         pendingRequest.handleResponse(msg);
+    }
+
+    /**
+     * Handle possible ready response messages.
+     * @param msg - The message to handle.
+     */
+    #handleReadyResponse(msg: RPCResponse): void {
+        if (!isRPCReadyResponse(msg)) return;
+        if (this.#ready.isResolved) return;
+        this.#isReady = msg.code === 200;
+        this.#ready.resolve(this.#isReady);
     }
 
     /**
@@ -312,6 +392,13 @@ export class RPCClient<
         return true;
     }
 
+    /**
+     * Abort all pending requests.
+     *
+     * Note: each request promise will be rejected with an AbortRequestError.
+     *
+     * @param reason - The reason for aborting the request.
+     */
     abortAllRequests(reason?: unknown): void {
         for (const pendingRequest of this.#pendingRequests.values()) {
             try {
@@ -322,12 +409,26 @@ export class RPCClient<
         }
     }
 
+    /**
+     * Cancel a pending request by its RequestID.
+     *
+     * Tries to cancel the request by sending a cancel request to the server and waiting for the response.
+     * @param id - The RequestID of the request to cancel.
+     * @returns resolves to true if the request was found and canceled, false otherwise.
+     */
     async cancelRequest(id: RequestID): Promise<boolean> {
         const pendingRequest = this.getPendingRequestById(id);
         if (!pendingRequest) return false;
         return await pendingRequest.cancel();
     }
 
+    /**
+     * Cancel a pending request by its Promise.
+     *
+     * Tries to cancel the request by sending a cancel request to the server and waiting for the response.
+     * @param id - The RequestID of the request to cancel.
+     * @returns resolves to true if the request was found and canceled, false otherwise.
+     */
     async cancelPromise(promise: Promise<unknown>): Promise<boolean> {
         const request = this.getPendingRequestByPromise(promise);
         if (!request) return false;
@@ -342,6 +443,9 @@ export class RPCClient<
         this.#defaultTimeoutMs = timeoutMs;
     }
 
+    /**
+     * Dispose of the RPC client, aborting all pending requests and closing the port if specified in options.
+     */
     [Symbol.dispose](): void {
         this.abortAllRequests(new Error('RPC Client disposed'));
         this.#pendingRequests.clear();

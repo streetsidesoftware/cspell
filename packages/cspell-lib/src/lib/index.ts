@@ -69,6 +69,7 @@ export {
     determineFinalDocumentSettings,
     type DetermineFinalDocumentSettingsResult,
     spellCheckDocument,
+    spellCheckDocumentRPC,
     spellCheckFile,
     type SpellCheckFileOptions,
     type SpellCheckFilePerf,
