@@ -13,7 +13,7 @@ export interface CSpellWorkerPoolOptions {
      */
     minWorkers?: number;
     /**
-     *
+     * The maximum number of pending tasks allowed per worker before the worker is considered unavailable.
      */
     maxPendingTasksPerWorker?: number;
 }
