@@ -6,7 +6,10 @@ import type { MessagePortLike } from './index.js';
 import { CSpellRPCClient } from './index.js';
 import { CSpellRPCServer } from './index.js';
 
+const packageUrl = new URL('../../package.json', import.meta.url);
+
 const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
+const ac = (...params: Parameters<typeof expect.arrayContaining>) => expect.arrayContaining(...params);
 
 describe('Validate Client / Server communications', () => {
     test('Check creation', async () => {
@@ -34,6 +37,51 @@ describe('Validate Client / Server communications', () => {
         const result2 = await api.spellCheckDocument(doc, {}, {});
         expect(result2).toBeDefined();
         expect(result2).toEqual(oc({ issues: [], errors: undefined }));
+    });
+
+    const urlFixtures = new URL('fixtures/', packageUrl);
+    const urlSampleFilesWithIssues = new URL('docValidator/sample-files-with-issues/', urlFixtures);
+    const noIssues = { issues: [], errors: undefined, configErrors: undefined, dictionaryErrors: undefined };
+
+    const expectedFor = {
+        'WOX_Permissions.ps1': { ...noIssues, issues: ac([oc({ text: 'explicitily' })]) },
+        'import-errors/file.txt': {
+            ...noIssues,
+            configErrors: [
+                {
+                    filename: expect.stringContaining('missing.config.yaml'),
+                    error: oc({
+                        message: expect.stringContaining(
+                            'Failed to resolve configuration file: "./missing.config.yaml"',
+                        ),
+                    }),
+                },
+            ],
+            dictionaryErrors: new Map([['my-dict', [new Error('failed to load', { cause: expect.anything() })]]]),
+            errors: [
+                oc({
+                    message: expect.stringContaining('Failed to resolve configuration file: "./missing.config.yaml"'),
+                }),
+            ],
+        },
+    };
+
+    // cspell:ignore explicitily
+
+    test.each`
+        filename                    | rootUrl                     | expected
+        ${import.meta.url}          | ${import.meta.url}          | ${noIssues}
+        ${'WOX_Permissions.ps1'}    | ${urlSampleFilesWithIssues} | ${expectedFor['WOX_Permissions.ps1']}
+        ${'import-errors/file.txt'} | ${urlFixtures}              | ${expectedFor['import-errors/file.txt']}
+    `('spell document $filename', async ({ filename, rootUrl, expected }) => {
+        const { client } = createClientServerPair();
+        const api = client.getApi();
+        const uri = new URL(filename, rootUrl).href;
+
+        const doc = { uri };
+        const result = await api.spellCheckDocument(doc, {}, {});
+        const { issues, errors, configErrors, dictionaryErrors } = result;
+        expect({ issues, errors, configErrors, dictionaryErrors }).toEqual(expected);
     });
 });
 
