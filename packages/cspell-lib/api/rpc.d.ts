@@ -51,19 +51,19 @@ interface RPCMessage {
   /**
   * The type of message being sent.
   */
-  type: "request" | "response" | "cancel" | "canceled" | "ok";
+  type: "request" | "response" | "cancel" | "canceled" | "ok" | "ready";
 }
 interface RCPBaseRequest extends RPCMessage {
   /**
   * The type of message being sent.
   */
-  type: "request" | "cancel" | "ok";
+  type: "request" | "cancel" | "ok" | "ready";
 }
 interface RPCResponse extends RPCMessage {
   /**
   * The type of message being sent.
   */
-  type: "response" | "canceled" | "ok";
+  type: "response" | "canceled" | "ok" | "ready";
   code: ResponseCode;
   error?: RPCError | undefined;
 }
@@ -144,11 +144,11 @@ interface RequestOptions {
   /**
   * An AbortSignal to abort the request.
   */
-  signal?: AbortSignal;
+  signal?: AbortSignal | undefined;
   /**
   * Timeout in milliseconds to wait before aborting the request.
   */
-  timeoutMs?: number;
+  timeoutMs?: number | undefined;
 }
 /**
 * The RPC Client.
@@ -160,8 +160,36 @@ declare class RPCClient<T, P extends RPCProtocol<T> = RPCProtocol<T>, MethodName
   * @param port - The port used to send and receive RPC messages.
   */
   constructor(port: MessagePortLike, options?: RPCClientOptions);
+  /**
+  * Make a request to the RPC server.
+  *
+  * It is unlikely you need to use this method directly. Consider using `call` or `getApi` instead.
+  *
+  * @param method - The method name.
+  * @param params - The method parameters.
+  * @param options - Request options including abort signal and timeout.
+  * @returns The pending client request.
+  */
   request<M extends MethodNames>(method: M, params: Parameters<P[M]>, options?: RequestOptions): RPCPendingClientRequest<M, ReturnType<P[M]>>;
+  /**
+  * Check the health of the RPC server.
+  * @param options - used to set timeout and abort signal.
+  * @returns resolves to true if the server is OK, false on timeout.
+  */
   isOK(options?: RequestOptions): Promise<boolean>;
+  /**
+  * The current known ready state of the RPC server.
+  * - `true` - The server is ready.
+  * - `false` - The server is not ready.
+  */
+  get isReady(): boolean;
+  /**
+  * Check if the RPC server is ready. If already ready, returns true immediately.
+  * If not ready, sends a 'ready' request to the server.
+  * @param options - used to set timeout and abort signal.
+  * @returns resolves to true when the server is ready, rejects if the request times out or fails.
+  */
+  ready(options?: RequestOptions): Promise<boolean>;
   /**
   * Call a method on the RPC server.
   * @param method - The method name.
@@ -170,9 +198,31 @@ declare class RPCClient<T, P extends RPCProtocol<T> = RPCProtocol<T>, MethodName
   * @returns A Promise with the method result.
   */
   call<M extends MethodNames>(method: M, params: Parameters<P[M]>, options?: RequestOptions): ReturnType<P[M]>;
+  /**
+  * Get the API for the given method names.
+  *
+  * This is useful passing the API to other parts of the code that do not need to know about the RPCClient.
+  *
+  * @param methods - The method names to include in the API.
+  * @returns A partial API with the requested methods.
+  */
   getApi<M extends MethodNames>(methods: M[]): Pick<P, M>;
+  /**
+  * Get info about a pending request by its RequestID.
+  * @param id - The RequestID of the pending request.
+  * @returns The found pending request or undefined if not found.
+  */
   getPendingRequestById(id: RequestID): PendingRequest | undefined;
+  /**
+  * Get info about a pending request by the promise returned using `call` or an api method.
+  * @param id - The RequestID of the pending request.
+  * @returns The found pending request or undefined if not found.
+  */
   getPendingRequestByPromise(promise: Promise<unknown>): PendingRequest | undefined;
+  /**
+  * Get the number of pending requests.
+  */
+  get length(): number;
   /**
   * Abort a pending request by its promise.
   *
@@ -191,15 +241,57 @@ declare class RPCClient<T, P extends RPCProtocol<T> = RPCProtocol<T>, MethodName
   * @returns True if the request was found and aborted, false otherwise.
   */
   abortRequest(requestId: RequestID, reason?: unknown): boolean;
+  /**
+  * Abort all pending requests.
+  *
+  * Note: each request promise will be rejected with an AbortRequestError.
+  *
+  * @param reason - The reason for aborting the request.
+  */
   abortAllRequests(reason?: unknown): void;
+  /**
+  * Cancel a pending request by its RequestID.
+  *
+  * Tries to cancel the request by sending a cancel request to the server and waiting for the response.
+  * @param id - The RequestID of the request to cancel.
+  * @returns resolves to true if the request was found and canceled, false otherwise.
+  */
   cancelRequest(id: RequestID): Promise<boolean>;
+  /**
+  * Cancel a pending request by its Promise.
+  *
+  * Tries to cancel the request by sending a cancel request to the server and waiting for the response.
+  * @param id - The RequestID of the request to cancel.
+  * @returns resolves to true if the request was found and canceled, false otherwise.
+  */
   cancelPromise(promise: Promise<unknown>): Promise<boolean>;
   /**
   * Set the default timeout for requests. Requests can override this value.
   * @param timeoutMs - the timeout in milliseconds
   */
   setTimeout(timeoutMs: number | undefined): void;
+  /**
+  * Dispose of the RPC client, aborting all pending requests and closing the port if specified in options.
+  */
   [Symbol.dispose](): void;
+}
+//#endregion
+//#region src/rpc/errors.d.ts
+declare class RPCRequestError extends Error {
+  constructor(message: string);
+}
+declare class AbortRPCRequestError extends RPCRequestError {
+  constructor(message: string);
+}
+declare class TimeoutRPCRequestError extends RPCRequestError {
+  constructor(message: string);
+}
+declare class UnknownMethodRPCRequestError extends RPCRequestError {
+  method: string;
+  constructor(method: string, message?: string);
+}
+declare class CanceledRPCRequestError extends RPCRequestError {
+  constructor(message?: string);
 }
 //#endregion
 //#region src/rpc/server.d.ts
@@ -217,4 +309,4 @@ declare class RPCServer<TApi, P extends RPCProtocol<TApi> = RPCProtocol<TApi>, M
   [Symbol.dispose](): void;
 }
 //#endregion
-export { MessagePortLike, RPCClient, RPCClientOptions, RPCProtocol, RPCProtocolMethods, RPCServer, RPCServerOptions, protocolDefinition, protocolMethods };
+export { AbortRPCRequestError, CanceledRPCRequestError, MessagePortLike, RPCClient, RPCClientOptions, RPCProtocol, RPCProtocolMethods, RPCRequestError, RPCServer, RPCServerOptions, TimeoutRPCRequestError, UnknownMethodRPCRequestError, protocolDefinition, protocolMethods };

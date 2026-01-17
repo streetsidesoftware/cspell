@@ -13,6 +13,10 @@ describe('Validate Client / Server communications', () => {
     test('Simple API', async () => {
         const { client, server, api } = createClientServerPair(getTestApi());
 
+        expect(client.isReady).toBe(false);
+        await expect(client.ready()).resolves.toBe(true);
+        expect(client.isReady).toBe(true);
+
         expect(client).toBeDefined();
         expect(server).toBeDefined();
         expect(api).toBeDefined();
@@ -29,6 +33,7 @@ describe('Validate Client / Server communications', () => {
 
     test('Simple API sleep', async () => {
         const { client } = createClientServerPair(getTestApi());
+        await expect(client.ready()).resolves.toBe(true);
         const clientApi = client.getApi(['sleep']);
         await expect(clientApi.sleep(10)).resolves.toBe(undefined);
         await expect(client.call('sleep', [10_000], { timeoutMs: 10 })).rejects.toThrow(TimeoutRPCRequestError);
@@ -51,6 +56,7 @@ describe('Validate Client / Server communications', () => {
 
     test('Using a default client timeout', async () => {
         const { client } = createClientServerPair(getTestApi());
+        await expect(client.ready()).resolves.toBe(true);
         const clientApi = client.getApi(['sleep']);
         client.setTimeout(10);
         await expect(clientApi.sleep(10_000)).rejects.toThrow(TimeoutRPCRequestError);
@@ -58,6 +64,7 @@ describe('Validate Client / Server communications', () => {
 
     test('Shutdown server with pending requests', async () => {
         const { client, server } = createClientServerPair(getTestApi());
+        await expect(client.ready()).resolves.toBe(true);
         const clientApi = client.getApi(['sleep']);
 
         const longSleep = clientApi.sleep(10_000);
@@ -68,6 +75,7 @@ describe('Validate Client / Server communications', () => {
 
     test('Stop client with pending requests', async () => {
         const { client } = createClientServerPair(getTestApi());
+        await expect(client.ready()).resolves.toBe(true);
         const clientApi = client.getApi(['sleep']);
 
         const longSleep = clientApi.sleep(10_000);
@@ -78,6 +86,7 @@ describe('Validate Client / Server communications', () => {
 
     test('Send malformed messages to the client', async () => {
         const { client, portClient } = createClientServerPair(getTestApi());
+        await expect(client.ready()).resolves.toBe(true);
         const clientApi = client.getApi(['sleep', 'add']);
 
         const longSleep = clientApi.sleep(10_000);

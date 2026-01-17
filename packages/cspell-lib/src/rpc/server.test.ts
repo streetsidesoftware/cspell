@@ -4,7 +4,7 @@ import { MessageChannel } from 'node:worker_threads';
 import { describe, expect, test, vi } from 'vitest';
 
 import type { MessagePortLike } from './messagePort.js';
-import { createRPCOkRequest, createRPCOkResponse, createRPCRequest, isRPCOkResponse } from './modelsHelpers.js';
+import { createRPCMethodRequest, createRPCOkRequest, createRPCOkResponse, isRPCOkResponse } from './modelsHelpers.js';
 import { RPCServer } from './server.js';
 
 describe('RPC Server', () => {
@@ -52,8 +52,10 @@ describe('RPC Server', () => {
         };
 
         const server = new RPCServer(serverPort, api, { returnMalformedRPCRequestError: true });
+        const readyMsg = (await msgs.next()).value;
+        expect(readyMsg.type).toEqual('ready');
 
-        clientPort.postMessage(createRPCRequest(randomUUID(), 'add', [10, 5]));
+        clientPort.postMessage(createRPCMethodRequest(randomUUID(), 'add', [10, 5]));
 
         // We do not expect an immediate response.
         expect(msgs.length).toBe(0);
@@ -75,7 +77,7 @@ describe('RPC Server', () => {
         expect(okResponse.value.code).toBe(200);
 
         // Bad method
-        clientPort.postMessage(createRPCRequest(randomUUID(), 'length unknown', []));
+        clientPort.postMessage(createRPCMethodRequest(randomUUID(), 'length unknown', []));
         expect((await msgs.next()).value.error).toBeDefined();
 
         await wait(10);
@@ -87,7 +89,7 @@ describe('RPC Server', () => {
 
         expect(msgs.isStopped).toBe(true);
         expect(serverPort.close).toHaveBeenCalled();
-        expect(receivedMessages.length).toBe(5);
+        expect(receivedMessages.length).toBe(6);
     });
 });
 

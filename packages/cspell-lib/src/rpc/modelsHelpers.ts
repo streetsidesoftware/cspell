@@ -9,6 +9,8 @@ import type {
     RPCMessage,
     RPCOkRequestMessage,
     RPCOkResponseMessage,
+    RPCReadyRequestMessage,
+    RPCReadyResponseMessage,
     RPCRequestMessage,
     RPCResponse,
     RPCResponseMessage,
@@ -19,6 +21,7 @@ type RPCRequestTypeNames = {
 };
 
 const RequestTypeNames: RPCRequestTypeNames = {
+    ready: 'ready',
     request: 'request',
     cancel: 'cancel',
     ok: 'ok',
@@ -29,6 +32,7 @@ type RPCResponseTypeNames = {
 };
 
 const ResponseTypeNames: RPCResponseTypeNames = {
+    ready: 'ready',
     response: 'response',
     canceled: 'canceled',
     ok: 'ok',
@@ -75,6 +79,14 @@ export function isRPCOkResponse(response: RPCMessage): response is RPCOkResponse
     return response.type === ResponseTypeNames.ok && typeof (response as RPCOkResponseMessage).code === 'number';
 }
 
+export function isRPCReadyRequest(request: RPCMessage): request is RPCReadyRequestMessage {
+    return request.type === RequestTypeNames.ready;
+}
+
+export function isRPCReadyResponse(response: RPCMessage): response is RPCReadyResponseMessage {
+    return response.type === ResponseTypeNames.ready && typeof (response as RPCReadyResponseMessage).code === 'number';
+}
+
 export function isRPCResponse<TResult>(response: RPCMessage): response is RPCResponseMessage<TResult> {
     return response.type === ResponseTypeNames.response && 'result' in response;
 }
@@ -90,7 +102,7 @@ export function isRPCRequest<P>(message: RPCMessage): message is RPCRequestMessa
  * @param params - The parameters for the request.
  * @returns A RPC Request Message.
  */
-export function createRPCRequest<P>(id: RequestID, method: string, params: P): RPCRequestMessage<P> {
+export function createRPCMethodRequest<P>(id: RequestID, method: string, params: P): RPCRequestMessage<P> {
     return { sig, id, type: RequestTypeNames.request, method, params };
 }
 
@@ -147,4 +159,12 @@ export function createRPCOkRequest(id: RequestID): RPCOkRequestMessage {
 
 export function createRPCOkResponse(id: RequestID, code: ResponseCode): RPCOkResponseMessage {
     return { sig, id, type: ResponseTypeNames.ok, code };
+}
+
+export function createRPCReadyRequest(id: RequestID): RPCReadyRequestMessage {
+    return { sig, id, type: RequestTypeNames.ready };
+}
+
+export function createRPCReadyResponse(id: RequestID, code: ResponseCode): RPCReadyResponseMessage {
+    return { sig, id, type: ResponseTypeNames.ready, code };
 }

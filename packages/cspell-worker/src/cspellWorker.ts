@@ -20,9 +20,11 @@ export function startCSpellWorker(): CSpellWorker {
 
 export interface CSpellWorker {
     ready: Promise<boolean>;
-    ok: (timeout?: number) => Promise<boolean>;
+    isReadyNow: boolean;
+    numberOfPendingRequests: number;
+    ok: (timeoutMs?: number) => Promise<boolean>;
+    api: CSpellRPCClient['getApi'];
     client: CSpellRPCClient;
-    status: Map<string, number>;
     [Symbol.asyncDispose](): Promise<void>;
 }
 
@@ -34,85 +36,43 @@ interface CSpellWorkerInstance {
 class CSpellWorkerImpl implements CSpellWorker {
     #terminated: boolean = false;
     #worker: Worker;
-    #ready: Promise<boolean>;
     #client: CSpellRPCClient;
-    #handleMessage: (message: unknown) => void;
-    #listeners: Set<(message: unknown) => boolean> = new Set();
-    #status: Map<string, number> = new Map();
 
     constructor(instance: CSpellWorkerInstance) {
-        this.#handleMessage = (message: unknown) => this.#processMessage(message);
-        this.#ready = this.#waitForReady();
         this.#worker = instance.worker;
-        this.#worker.on('message', this.#handleMessage);
         this.#client = createCSpellRPCClient(instance.port);
-        this.#worker.once('exit', () => this.terminate());
-    }
-
-    ok(timeout?: number): Promise<boolean> {
-        const p = new Promise<boolean>((resolve) => {
-            let done = false;
-            setTimeout(() => {
-                if (done) return;
-                done = true;
-                resolve(false);
-            }, timeout);
-            this.#listeners.add((message: unknown) => {
-                if (done) return true;
-                if (message === 'status:ok') {
-                    done = true;
-                    resolve(true);
-                }
-                return done;
-            });
-        });
-        this.#worker.postMessage('status:ok');
-        return p;
     }
 
     get ready(): Promise<boolean> {
-        return this.#ready;
+        return this.#client.ready();
+    }
+
+    get isReadyNow(): boolean {
+        return this.#client.isReady;
+    }
+
+    get numberOfPendingRequests(): number {
+        return this.#client.length;
     }
 
     get client(): CSpellRPCClient {
         return this.#client;
     }
 
-    get status(): Map<string, number> {
-        return new Map(this.#status);
-    }
-
     get isTerminated(): boolean {
         return this.#terminated;
     }
 
-    #waitForReady(): Promise<boolean> {
-        return new Promise((resolve) => {
-            const listener = (message: unknown): boolean => {
-                if (message === 'status:ready') {
-                    resolve(true);
-                    return true;
-                }
-                return false;
-            };
-            this.#listeners.add(listener);
-        });
+    ok(timeoutMs?: number): Promise<boolean> {
+        return this.#client.isOK({ timeoutMs });
     }
-
-    #processMessage = (message: unknown): void => {
-        if (typeof message === 'string') {
-            this.#status.set(message, performance.now());
-        }
-        for (const listener of this.#listeners) {
-            const removeListener = listener(message);
-            if (removeListener) {
-                this.#listeners.delete(listener);
-            }
-        }
-    };
 
     terminate(): Promise<void> {
         return this[Symbol.asyncDispose]();
+    }
+
+    api(): ReturnType<CSpellRPCClient['getApi']> {
+        return this.#client.getApi();
     }
 
     async [Symbol.asyncDispose](): Promise<void> {
