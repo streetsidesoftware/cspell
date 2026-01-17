@@ -22,7 +22,7 @@ export interface CSpellWorker {
     ready: Promise<boolean>;
     isReadyNow: boolean;
     numberOfPendingRequests: number;
-    ok: (timeout?: number) => Promise<boolean>;
+    ok: (timeoutMs?: number) => Promise<boolean>;
     api: CSpellRPCClient['getApi'];
     client: CSpellRPCClient;
     [Symbol.asyncDispose](): Promise<void>;
