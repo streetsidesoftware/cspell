@@ -3597,6 +3597,8 @@ declare class DocumentValidator {
   private genSuggestions;
   private adjustSuggestions;
   getFinalizedDocSettings(): CSpellSettingsInternal;
+  getConfigErrors(): ImportFileRefWithError[] | undefined;
+  getDictionaryErrors(): Map<string, Error[]> | undefined;
   /**
   * Returns true if the final result of the configuration calculation results
   * in the document being enabled. Note: in some cases, checking the document
@@ -3730,6 +3732,8 @@ interface SpellCheckFileResult {
   issues: ValidationIssue[];
   checked: boolean;
   errors: Error[] | undefined;
+  configErrors?: ImportFileRefWithError[] | undefined;
+  dictionaryErrors?: Map<string, Error[]> | undefined;
   perf?: SpellCheckFilePerf;
 }
 /**

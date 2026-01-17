@@ -20,6 +20,7 @@ import type { TextDocument, TextDocumentLine, TextDocumentRef } from '../Models/
 import { documentUriToURL, updateTextDocument } from '../Models/TextDocument.js';
 import type { ValidationIssue } from '../Models/ValidationIssue.js';
 import { createPerfTimer, measurePerf } from '../perf/index.js';
+import type { ImportFileRefWithError } from '../Settings/index.js';
 import {
     extractImportErrors,
     finalizeSettings,
@@ -498,6 +499,22 @@ export class DocumentValidator {
         assert(this._ready);
         assert(this._preparations, ERROR_NOT_PREPARED);
         return this._preparations.docSettings;
+    }
+
+    public getConfigErrors(): ImportFileRefWithError[] | undefined {
+        const settings = this.getFinalizedDocSettings();
+        const errors = extractImportErrors(settings);
+        return errors.length ? errors : undefined;
+    }
+
+    public getDictionaryErrors(): Map<string, Error[]> | undefined {
+        assert(this._ready);
+        assert(this._preparations, ERROR_NOT_PREPARED);
+        const { dictionary } = this._preparations;
+        const errors = dictionary.dictionaries
+            .map((dict) => [dict.name, dict.getErrors?.()] as const)
+            .filter((entry): entry is [string, Error[]] => (entry[1] && entry[1].length > 0) || false);
+        return errors.length ? new Map(errors) : undefined;
     }
 
     /**

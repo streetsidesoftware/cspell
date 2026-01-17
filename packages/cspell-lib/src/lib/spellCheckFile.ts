@@ -7,6 +7,7 @@ import { isBinaryDoc } from './Document/isBinaryDoc.js';
 import { documentToTextDocument, resolveDocument } from './Document/resolveDocument.js';
 import { createTextDocument } from './Models/TextDocument.js';
 import { createPerfTimer } from './perf/index.js';
+import type { ImportFileRefWithError } from './Settings/index.js';
 import { cloneSettingsForExport } from './Settings/sanitizeSettings.js';
 import { determineTextDocumentSettings } from './textValidation/determineTextDocumentSettings.js';
 import type { DocumentValidatorOptions } from './textValidation/index.js';
@@ -54,6 +55,8 @@ export interface SpellCheckFileResult {
     issues: ValidationIssue[];
     checked: boolean;
     errors: Error[] | undefined;
+    configErrors?: ImportFileRefWithError[] | undefined;
+    dictionaryErrors?: Map<string, Error[]> | undefined;
     perf?: SpellCheckFilePerf;
 }
 
@@ -198,6 +201,8 @@ async function spellCheckFullDocument(
             issues: [],
             checked: false,
             errors: docValidator.errors,
+            configErrors: docValidator.getConfigErrors(),
+            dictionaryErrors: docValidator.getDictionaryErrors(),
             perf,
         };
     }
@@ -216,6 +221,8 @@ async function spellCheckFullDocument(
         issues,
         checked: docValidator.shouldCheckDocument(),
         errors: undefined,
+        configErrors: docValidator.getConfigErrors(),
+        dictionaryErrors: docValidator.getDictionaryErrors(),
         perf,
     };
     timer.end();
