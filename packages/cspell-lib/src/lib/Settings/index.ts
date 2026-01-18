@@ -31,6 +31,7 @@ export {
     getSources,
     mergeInDocSettings,
     mergeSettings,
+    toCSpellSettingsWithOutSourceTrace,
 } from './CSpellSettingsServer.js';
 export { defaultSettingsLoader, getDefaultBundledSettingsAsync, getDefaultSettings } from './DefaultSettings.js';
 export type {

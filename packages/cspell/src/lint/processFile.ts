@@ -37,6 +37,7 @@ export interface ProcessFileOptions {
     cfg: LintRequest;
     configErrors: Set<string>;
     chalk: ChalkInstance;
+    userSettings: CSpellSettingsWithSourceTrace;
 }
 
 export async function processFile(
@@ -47,7 +48,7 @@ export async function processFile(
 ): Promise<LintFileResult> {
     if (prefetch?.fileResult) return prefetch.fileResult;
 
-    const { reporter, cfg, configInfo } = processFileOptions;
+    const { reporter, cfg, configInfo, userSettings } = processFileOptions;
 
     const { spellCheckDocument } = await getCSpellAPI();
 
@@ -99,7 +100,7 @@ export async function processFile(
             validateDirectives,
             skipValidation,
         });
-        const r = await spellCheckDocument(doc, validateOptions, configInfo.config);
+        const r = await spellCheckDocument(doc, validateOptions, userSettings);
         // console.warn('filename: %o %o', path.relative(process.cwd(), filename), r.perf);
         spellResult = r;
         result.processed = r.checked;
