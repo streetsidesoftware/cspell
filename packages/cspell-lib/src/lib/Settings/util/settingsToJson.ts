@@ -99,7 +99,7 @@ export function walkToJSONObj(value: unknown): unknown {
     function walkObj(value: object): unknown {
         const visited = mapVisited.get(value);
         // Note: it is possible that the value is in mapVisited but maps to undefined.
-        //. It is not worth the cost of checking for that case since the result will be the same.
+        // It is not worth the cost of checking for that case since the result will be the same.
         if (visited !== undefined) {
             return visited;
         }
