@@ -1,36 +1,23 @@
 ---
-title: 'Programming language dictionaries'
+title: 'Available Languages'
 categories: docs
 # parent: Docs
-sidebar_position: 5
-sidebar_label: Programming language dictionaries
+sidebar_position: 4
+sidebar_label: Available Languages
 ---
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-import { programmingLangDefinitions } from "@cspell/filetypes";
 
-# Programming language dictionaries
+import { LanguagesTable } from '@site/src/components/LanguagesTable';
 
-This page lists all supported programming languages and file types with their corresponding file extensions
-that triggers a language check in CSpell.
+# Available Languages & Triggers
 
-## Programming Languages
+This page lists all supported programming languages and file types with their corresponding file extensions that triggers
+the given language check in CSpell.
 
-{programmingLangDefinitions.map((lang) => (
-  <div key={lang.id} style={{ marginBottom: '2rem' }}>
-    <h2>{lang.id}</h2>
-    {lang.description && <p>{lang.description}</p>}
-    {(lang.filenames || []).length > 0 && (
-      <>
-        <h6>Filenames:</h6>
-        <pre><code>{(lang.filenames || []).join('\n') || 'No filename specified'}</code></pre>
-      </>
-    )}
-    {(lang.extensions || []).length > 0 && (
-        <>
-            <h6>File Extensions:</h6>
-            <pre><code>{(lang.extensions || []).join('\n') || 'No file extension specified'}</code></pre>
-        </>
-    )}
-  </div>
-))}
+## Overview
+
+CSpell automatically detects the programming language based on file extensions and applies the appropriate spell checking rules. The table below shows all supported languages and their associated file patterns.
+
+## Supported Languages
+
+<LanguagesTable />
+
