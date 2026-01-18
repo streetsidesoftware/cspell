@@ -4,7 +4,12 @@ export {
     createCSpellSettingsInternal,
     isCSpellSettingsInternal,
 } from './CSpellSettingsInternalDef.js';
-export { calcDictionaryDefsToLoad, filterDictDefsToLoad, mapDictDefToInternal } from './DictionarySettings.js';
+export {
+    calcDictionaryDefsToLoad,
+    filterDictDefsToLoad,
+    mapDictDefsToInternal,
+    mapDictDefToInternal,
+} from './DictionarySettings.js';
 export type {
     DictionaryDefinitionInlineInternal,
     DictionaryDefinitionInternal,

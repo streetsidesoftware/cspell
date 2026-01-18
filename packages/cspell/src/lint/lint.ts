@@ -328,6 +328,9 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             verboseLevel,
             useColor,
             configErrors,
+            // We could use the cli settings here but it is much slower.
+            // userSettings: cfg.cspellSettingsFromCliOptions,
+            userSettings: configInfo.config,
         };
         return processFileOptionsGeneral;
     }

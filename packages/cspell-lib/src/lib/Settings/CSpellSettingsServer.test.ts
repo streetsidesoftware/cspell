@@ -1,4 +1,5 @@
 import * as path from 'node:path';
+import { MessageChannel } from 'node:worker_threads';
 
 import type { CSpellUserSettings } from '@cspell/cspell-types';
 import type { CSpellConfigFile } from 'cspell-config-lib';
@@ -9,7 +10,7 @@ import { pathPackageRoot, pathPackageSamples } from '../../test-util/test.locati
 import { toURL } from '../util/url.js';
 import { calcOverrideSettings } from './calcOverrideSettings.js';
 import { checkFilenameMatchesGlob } from './checkFilenameMatchesGlob.js';
-import { getDefaultConfigLoader } from './Controller/configLoader/defaultConfigLoader.js';
+import { getDefaultConfigLoader, getGlobalSettingsAsync } from './Controller/configLoader/defaultConfigLoader.js';
 import {
     __testing__ as __configLoader_testing__,
     clearCachedSettingsFiles,
@@ -21,7 +22,14 @@ import {
     readSettingsFiles,
 } from './Controller/configLoader/index.js';
 import type { CSpellSettingsWST } from './Controller/configLoader/types.js';
-import { getMergeStats, getSources, mergeSettings } from './CSpellSettingsServer.js';
+import type { CSpellSettingsI } from './CSpellSettingsServer.js';
+import {
+    getMergeStats,
+    getSources,
+    mergeSettings,
+    toCSpellSettingsWithOutSourceTrace,
+    toCSpellSettingsWithSourceTrace,
+} from './CSpellSettingsServer.js';
 import { _defaultSettings, getDefaultBundledSettingsAsync } from './DefaultSettings.js';
 import { createCSpellSettingsInternal as csi } from './internal/index.js';
 
@@ -310,6 +318,51 @@ describe('Validate CSpellSettingsServer', () => {
     });
 });
 
+describe('toCSpellSettingsWithSourceTrace', () => {
+    test('toCSpellSettingsWithSourceTrace simple settings', () => {
+        const { port1 } = new MessageChannel();
+        const sampleSettings = getSampleSettings();
+        const settings = toCSpellSettingsWithSourceTrace(sampleSettings);
+        expect(settings).toEqual(Object.fromEntries(Object.entries(sampleSettings)));
+
+        expect(() => port1.postMessage(settings)).not.toThrow();
+        expect(() => port1.postMessage(sampleSettings)).not.toThrow();
+    });
+
+    test('toCSpellSettingsWithSourceTrace global settings', async () => {
+        const { port1 } = new MessageChannel();
+        const sampleSettings = mergeSettings(await getDefaultBundledSettingsAsync(), await getGlobalSettingsAsync());
+        const settings = toCSpellSettingsWithSourceTrace(sampleSettings);
+
+        expect(() => port1.postMessage(settings)).not.toThrow();
+        expect(() => port1.postMessage(sampleSettings)).toThrow();
+    });
+
+    test('toCSpellSettingsWithOutSourceTrace global settings', async () => {
+        const { port1 } = new MessageChannel();
+        const sampleSettings = mergeSettings(await getDefaultBundledSettingsAsync(), await getGlobalSettingsAsync());
+        const settings = toCSpellSettingsWithOutSourceTrace(sampleSettings);
+
+        expect(() => port1.postMessage(settings)).not.toThrow();
+        expect(() => port1.postMessage(sampleSettings)).toThrow();
+    });
+
+    test.each`
+        file
+        ${'nested/dir/spell.test.ts'}
+    `('calcOverrideSettings $file expected $expected', ({ file }) => {
+        file = rs(file);
+        const { port1 } = new MessageChannel();
+        const sampleSettings = calcOverrideSettings(getSampleSettings(), file);
+        const settings = toCSpellSettingsWithSourceTrace(sampleSettings);
+
+        expect(JSON.stringify(settings)).toEqual(JSON.stringify(sampleSettings));
+
+        expect(() => port1.postMessage(settings)).not.toThrow();
+        expect(() => port1.postMessage(sampleSettings)).not.toThrow();
+    });
+});
+
 describe('Validate Overrides', () => {
     test.each`
         file                               | glob                                    | expected
@@ -386,4 +439,8 @@ const sampleSettings = await getDefaultConfigLoader().mergeConfigFileWithImports
 
 function cf(settings: CSpellSettingsWST, url: URL | string = import.meta.url): CSpellConfigFile {
     return new CSpellConfigFileInMemory(toURL(url), settings);
+}
+
+function getSampleSettings(): CSpellSettingsI {
+    return sampleSettings;
 }

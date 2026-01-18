@@ -40,6 +40,41 @@ describe('walkToJSONObj', () => {
     function myFunc() {
         return 'test';
     }
+
+    test('walkToJSONObj complex object', () => {
+        const obj = {
+            a: 1,
+            b: 'string',
+            c: {
+                d: true,
+                e: [1, 2, 3, { f: 'nested' }],
+            },
+            g: new Map<string, any>([['key1', 'value1'] as const, ['key2', { h: 'value2' }] as const]),
+            i: new Set([1, 2, 3]),
+        };
+        // Create a circular reference
+        (obj.c as any).circular = obj;
+
+        const result = walkToJSONObj(obj);
+        const expected = {
+            a: 1,
+            b: 'string',
+            c: {
+                d: true,
+                e: [1, 2, 3, { f: 'nested' }],
+                circular: '[Circular]',
+            },
+            g: [
+                ['key1', 'value1'],
+                ['key2', { h: 'value2' }],
+            ],
+            i: [1, 2, 3],
+        };
+        // Adjust expected to account for circular reference handling
+        (expected.c.circular as any) = expected;
+
+        expect(result).toEqual(expected);
+    });
 });
 
 function roundTripJSON(value: unknown): unknown {
