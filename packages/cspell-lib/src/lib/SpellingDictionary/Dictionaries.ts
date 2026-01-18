@@ -8,8 +8,8 @@ import {
     createSuggestDictionary,
 } from 'cspell-dictionary';
 
-import type { CSpellSettingsInternal, DictionaryDefinitionInternal } from '../Models/CSpellSettingsInternalDef.js';
-import { calcDictionaryDefsToLoad } from '../Settings/DictionarySettings.js';
+import type { CSpellSettingsInternal, DictionaryDefinitionInternal } from '../Settings/index.js';
+import { calcDictionaryDefsToLoad } from '../Settings/index.js';
 import { isDefined } from '../util/util.js';
 import { loadDictionary, refreshCacheEntries } from './DictionaryLoader.js';
 

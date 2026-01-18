@@ -11,17 +11,14 @@ import {
 import type { Stats, TextFileResource, VFileSystem } from 'cspell-io';
 import { compareStats, toFileURL, urlBasename } from 'cspell-io';
 
+import { measurePerfFn } from '../../perf/index.js';
 import type {
     DictionaryDefinitionInlineInternal,
     DictionaryDefinitionInternal,
     DictionaryDefinitionSimpleInternal,
     DictionaryFileDefinitionInternal,
-} from '../../Models/CSpellSettingsInternalDef.js';
-import {
-    isDictionaryDefinitionInlineInternal,
-    isDictionaryFileDefinitionInternal,
-} from '../../Models/CSpellSettingsInternalDef.js';
-import { measurePerfFn } from '../../perf/index.js';
+} from '../../Settings/index.js';
+import { isDictionaryDefinitionInlineInternal, isDictionaryFileDefinitionInternal } from '../../Settings/index.js';
 import { AutoResolveWeakCache, AutoResolveWeakWeakCache } from '../../util/AutoResolve.js';
 import { toError } from '../../util/errors.js';
 import { SimpleCache } from '../../util/simpleCache.js';

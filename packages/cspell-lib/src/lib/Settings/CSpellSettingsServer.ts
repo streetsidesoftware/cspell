@@ -11,14 +11,14 @@ import type {
 } from '@cspell/cspell-types';
 
 import { onClearCache } from '../events/index.js';
-import type { CSpellSettingsInternal, CSpellSettingsInternalFinalized } from '../Models/CSpellSettingsInternalDef.js';
-import { cleanCSpellSettingsInternal as csi, isCSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef.js';
 import { autoResolveWeak, AutoResolveWeakCache } from '../util/AutoResolve.js';
 import type { OptionalOrUndefined } from '../util/types.js';
 import { toFileUrl } from '../util/url.js';
 import * as util from '../util/util.js';
 import { configSettingsFileVersion0_1, ENV_CSPELL_GLOB_ROOT } from './constants.js';
-import { calcDictionaryDefsToLoad, mapDictDefsToInternal } from './DictionarySettings.js';
+import { calcDictionaryDefsToLoad, mapDictDefsToInternal } from './internal/DictionarySettings.js';
+import type { CSpellSettingsInternal, CSpellSettingsInternalFinalized } from './internal/index.js';
+import { cleanCSpellSettingsInternal as csi, isCSpellSettingsInternal } from './internal/index.js';
 import { mergeList, mergeListUnique } from './mergeList.js';
 import { resolvePatterns } from './patterns.js';
 import { CwdUrlResolver } from './resolveCwd.js';

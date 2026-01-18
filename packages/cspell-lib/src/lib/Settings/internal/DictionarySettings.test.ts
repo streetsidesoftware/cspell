@@ -7,11 +7,11 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import type { DictionaryDefinition, DictionaryDefinitionLegacy } from '@cspell/cspell-types';
 import { describe, expect, test } from 'vitest';
 
-import { isDictionaryDefinitionInlineInternal } from '../Models/CSpellSettingsInternalDef.js';
-import { isDefined } from '../util/util.js';
-import { getDefaultBundledSettingsAsync } from './DefaultSettings.js';
-import { createDictionaryReferenceCollection as createRefCol } from './DictionaryReferenceCollection.js';
+import { isDefined } from '../../util/util.js';
+import { getDefaultBundledSettingsAsync } from '../DefaultSettings.js';
+import { createDictionaryReferenceCollection as createRefCol } from '../DictionaryReferenceCollection.js';
 import * as DictSettings from './DictionarySettings.js';
+import { isDictionaryDefinitionInlineInternal } from './InternalDictionaryDef.js';
 
 const __filename = fileURLToPath(import.meta.url);
 
@@ -138,5 +138,12 @@ describe('Validate DictionarySettings', () => {
         ${DictSettings.mapDictDefToInternal({ name: 'def', path: './dict.txt' }, pathToFileURL(__filename))} | ${true}
     `('isDictionaryDefinitionInternal', ({ def, expected }) => {
         expect(DictSettings.isDictionaryDefinitionInternal(def)).toBe(expected);
+    });
+
+    test.each`
+        def                                                                                                  | expected
+        ${DictSettings.mapDictDefToInternal({ name: 'def', path: './dict.txt' }, pathToFileURL(__filename))} | ${{ name: 'def', path: expect.stringContaining('dict.txt') }}
+    `('toJSON', ({ def, expected }) => {
+        expect(def.toJSON()).toEqual(expected);
     });
 });

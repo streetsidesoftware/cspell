@@ -2900,18 +2900,7 @@ type OptionalKeys<T> = Exclude<{ [P in keyof T]: T[P] extends Exclude<T[P], unde
 */
 type OptionalOrUndefined<T> = { [P in keyof T]: P extends OptionalKeys<T> ? T[P] | undefined : T[P] };
 //#endregion
-//#region src/lib/Models/CSpellSettingsInternalDef.d.ts
-declare const SymbolCSpellSettingsInternal: unique symbol;
-interface CSpellSettingsInternal extends Omit<AdvancedCSpellSettingsWithSourceTrace, "dictionaryDefinitions"> {
-  [SymbolCSpellSettingsInternal]: true;
-  dictionaryDefinitions?: DictionaryDefinitionInternal[];
-}
-interface CSpellSettingsInternalFinalized extends CSpellSettingsInternal {
-  parserFn: Parser | undefined;
-  finalized: true;
-  ignoreRegExpList: RegExp[];
-  includeRegExpList: RegExp[];
-}
+//#region src/lib/Settings/internal/InternalDictionaryDef.d.ts
 type DictionaryDefinitionCustomUniqueFields = Omit<DictionaryDefinitionCustom, keyof DictionaryDefinitionPreferred>;
 type DictionaryDefinitionInternal = DictionaryFileDefinitionInternal | DictionaryDefinitionInlineInternal | DictionaryDefinitionSimpleInternal;
 type DictionaryDefinitionInlineInternal = DictionaryDefinitionInline & {
@@ -2931,40 +2920,18 @@ interface DictionaryFileDefinitionInternal extends Readonly<DictionaryDefinition
   readonly __source?: string | undefined;
 }
 //#endregion
-//#region src/lib/SpellingDictionary/Dictionaries.d.ts
-declare function refreshDictionaryCache(maxAge?: number): Promise<void>;
-//#endregion
-//#region src/lib/SpellingDictionary/DictionaryController/DictionaryLoader.d.ts
-type LoadOptions = DictionaryDefinitionInternal;
-//#endregion
-//#region src/lib/SpellingDictionary/SpellingDictionaryError.d.ts
-declare class SpellingDictionaryLoadError extends Error {
-  readonly uri: string;
-  readonly options: LoadOptions;
-  readonly cause: Error;
-  readonly name: string;
-  constructor(uri: string, options: LoadOptions, cause: Error, message: string);
+//#region src/lib/Settings/internal/CSpellSettingsInternalDef.d.ts
+declare const SymbolCSpellSettingsInternal: unique symbol;
+interface CSpellSettingsInternal extends Omit<AdvancedCSpellSettingsWithSourceTrace, "dictionaryDefinitions"> {
+  [SymbolCSpellSettingsInternal]: true;
+  dictionaryDefinitions?: DictionaryDefinitionInternal[];
 }
-declare function isSpellingDictionaryLoadError(e: Error): e is SpellingDictionaryLoadError;
-//#endregion
-//#region src/lib/getDictionary.d.ts
-/**
-* Load a dictionary collection defined by the settings.
-* @param settings - that defines the dictionaries and the ones to load.
-* @returns a dictionary collection that represents all the enabled dictionaries.
-*/
-declare function getDictionary(settings: CSpellUserSettings): Promise<SpellingDictionaryCollection>;
-//#endregion
-//#region src/lib/perf/timer.d.ts
-interface PerfTimer {
-  readonly name: string;
-  readonly startTime: number;
-  readonly elapsed: number;
-  start(): void;
-  end(): void;
+interface CSpellSettingsInternalFinalized extends CSpellSettingsInternal {
+  parserFn: Parser | undefined;
+  finalized: true;
+  ignoreRegExpList: RegExp[];
+  includeRegExpList: RegExp[];
 }
-type TimeNowFn = () => number;
-declare function createPerfTimer(name: string, onEnd?: (elapsed: number, name: string) => void, timeNowFn?: TimeNowFn): PerfTimer;
 //#endregion
 //#region src/lib/Settings/CSpellSettingsServer.d.ts
 type CSpellSettingsWST$1 = AdvancedCSpellSettingsWithSourceTrace;
@@ -3246,6 +3213,41 @@ declare class ImportError extends Error {
 //#region src/lib/Settings/DefaultSettings.d.ts
 declare function getDefaultSettings(useDefaultDictionaries?: boolean): Promise<CSpellSettingsInternal>;
 declare function getDefaultBundledSettingsAsync(): Promise<CSpellSettingsInternal>;
+//#endregion
+//#region src/lib/SpellingDictionary/Dictionaries.d.ts
+declare function refreshDictionaryCache(maxAge?: number): Promise<void>;
+//#endregion
+//#region src/lib/SpellingDictionary/DictionaryController/DictionaryLoader.d.ts
+type LoadOptions = DictionaryDefinitionInternal;
+//#endregion
+//#region src/lib/SpellingDictionary/SpellingDictionaryError.d.ts
+declare class SpellingDictionaryLoadError extends Error {
+  readonly uri: string;
+  readonly options: LoadOptions;
+  readonly cause: Error;
+  readonly name: string;
+  constructor(uri: string, options: LoadOptions, cause: Error, message: string);
+}
+declare function isSpellingDictionaryLoadError(e: Error): e is SpellingDictionaryLoadError;
+//#endregion
+//#region src/lib/getDictionary.d.ts
+/**
+* Load a dictionary collection defined by the settings.
+* @param settings - that defines the dictionaries and the ones to load.
+* @returns a dictionary collection that represents all the enabled dictionaries.
+*/
+declare function getDictionary(settings: CSpellUserSettings): Promise<SpellingDictionaryCollection>;
+//#endregion
+//#region src/lib/perf/timer.d.ts
+interface PerfTimer {
+  readonly name: string;
+  readonly startTime: number;
+  readonly elapsed: number;
+  start(): void;
+  end(): void;
+}
+type TimeNowFn = () => number;
+declare function createPerfTimer(name: string, onEnd?: (elapsed: number, name: string) => void, timeNowFn?: TimeNowFn): PerfTimer;
 //#endregion
 //#region src/lib/Settings/link.d.ts
 interface ListGlobalImportsResult {

@@ -2,7 +2,7 @@ import type { SpellingDictionary } from 'cspell-dictionary';
 
 import type { VFileSystem } from '../fileSystem.js';
 import { getFileSystem } from '../fileSystem.js';
-import type { DictionaryDefinitionInternal } from '../Models/CSpellSettingsInternalDef.js';
+import type { DictionaryDefinitionInternal } from '../Settings/index.js';
 import { DictionaryLoader } from './DictionaryController/index.js';
 export type { LoadOptions } from './DictionaryController/index.js';
 

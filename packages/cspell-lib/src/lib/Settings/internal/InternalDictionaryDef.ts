@@ -1,32 +1,12 @@
 import type {
-    AdvancedCSpellSettingsWithSourceTrace,
-    CSpellSettingsWithSourceTrace,
     DictionaryDefinition,
     DictionaryDefinitionAugmented,
     DictionaryDefinitionCustom,
     DictionaryDefinitionInline,
     DictionaryDefinitionPreferred,
     DictionaryDefinitionSimple,
-    Parser,
 } from '@cspell/cspell-types';
 import type { WeightMap } from 'cspell-trie-lib';
-
-import type { OptionalOrUndefined } from '../util/types.js';
-import { clean } from '../util/util.js';
-
-export const SymbolCSpellSettingsInternal: unique symbol = Symbol('CSpellSettingsInternal');
-
-export interface CSpellSettingsInternal extends Omit<AdvancedCSpellSettingsWithSourceTrace, 'dictionaryDefinitions'> {
-    [SymbolCSpellSettingsInternal]: true;
-    dictionaryDefinitions?: DictionaryDefinitionInternal[];
-}
-
-export interface CSpellSettingsInternalFinalized extends CSpellSettingsInternal {
-    parserFn: Parser | undefined;
-    finalized: true;
-    ignoreRegExpList: RegExp[];
-    includeRegExpList: RegExp[];
-}
 
 type DictionaryDefinitionCustomUniqueFields = Omit<DictionaryDefinitionCustom, keyof DictionaryDefinitionPreferred>;
 
@@ -65,29 +45,6 @@ export interface DictionaryFileDefinitionInternalWithSource extends DictionaryFi
 export type DictionaryDefinitionInternalWithSource = DictionaryDefinitionInternal & {
     readonly __source: string;
 };
-
-export function cleanCSpellSettingsInternal(
-    parts?: OptionalOrUndefined<Partial<CSpellSettingsInternal>>,
-): CSpellSettingsInternal {
-    return parts
-        ? Object.assign(clean(parts), { [SymbolCSpellSettingsInternal]: true })
-        : { [SymbolCSpellSettingsInternal]: true };
-}
-
-export function createCSpellSettingsInternal(
-    parts?: OptionalOrUndefined<Partial<CSpellSettingsInternal>>,
-): CSpellSettingsInternal {
-    return cleanCSpellSettingsInternal({ ...parts });
-}
-
-export function isCSpellSettingsInternal(
-    cs:
-        | CSpellSettingsInternal
-        | CSpellSettingsWithSourceTrace
-        | OptionalOrUndefined<CSpellSettingsInternal | CSpellSettingsWithSourceTrace>,
-): cs is CSpellSettingsInternal {
-    return !!(<CSpellSettingsInternal>cs)[SymbolCSpellSettingsInternal];
-}
 
 export function isDictionaryDefinitionInlineInternal(
     def: DictionaryDefinitionInternal | DictionaryDefinitionInline | DictionaryDefinition,

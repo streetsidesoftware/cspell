@@ -12,20 +12,20 @@ import type {
 import type { WeightMap } from 'cspell-trie-lib';
 import { mapDictionaryInformationToWeightMap } from 'cspell-trie-lib';
 
+import { createAutoResolveWeakWeakCache } from '../../util/AutoResolve.js';
+import { resolveRelativeTo } from '../../util/resolveFile.js';
+import type { RequireOptional, UnionFields } from '../../util/types.js';
+import { toFilePathOrHref } from '../../util/url.js';
+import { clean } from '../../util/util.js';
+import type { DictionaryReferenceCollection } from '../DictionaryReferenceCollection.js';
+import { createDictionaryReferenceCollection } from '../DictionaryReferenceCollection.js';
+import type { CSpellSettingsInternal } from './CSpellSettingsInternalDef.js';
 import type {
-    CSpellSettingsInternal,
     DictionaryDefinitionInternal,
     DictionaryDefinitionInternalWithSource,
     DictionaryFileDefinitionInternalWithSource,
-} from '../Models/CSpellSettingsInternalDef.js';
-import { isDictionaryDefinitionInlineInternal } from '../Models/CSpellSettingsInternalDef.js';
-import { createAutoResolveWeakWeakCache } from '../util/AutoResolve.js';
-import { resolveRelativeTo } from '../util/resolveFile.js';
-import type { RequireOptional, UnionFields } from '../util/types.js';
-import { toFilePathOrHref } from '../util/url.js';
-import { clean } from '../util/util.js';
-import type { DictionaryReferenceCollection } from './DictionaryReferenceCollection.js';
-import { createDictionaryReferenceCollection } from './DictionaryReferenceCollection.js';
+} from './InternalDictionaryDef.js';
+import { isDictionaryDefinitionInlineInternal } from './InternalDictionaryDef.js';
 
 export type DefMapArrayItem = [string, DictionaryDefinitionInternal];
 
@@ -169,11 +169,14 @@ class _DictionaryDefinitionInternalWithSource implements DictionaryFileDefinitio
     readonly ignoreForbiddenWords?: boolean;
     readonly scope?: CustomDictionaryScope | CustomDictionaryScope[];
     readonly __source: string;
-    private ddi: DDI;
+    #ddi: DDI;
+    #def: DictionaryDefinition;
+
     constructor(
         def: DictionaryDefinition,
         readonly sourceURL: URL,
     ) {
+        this.#def = def;
         this.__source = sourceURL.href;
         // this bit of assignment is to have the compiler help use if any new fields are added.
         const defAll: DictDef = def;
@@ -218,7 +221,7 @@ class _DictionaryDefinitionInternalWithSource implements DictionaryFileDefinitio
         };
 
         Object.assign(this, clean(ddi));
-        this.ddi = ddi;
+        this.#ddi = ddi;
         this.name = ddi.name;
         this.file = ddi.file;
         this.path = ddi.path;
@@ -232,6 +235,10 @@ class _DictionaryDefinitionInternalWithSource implements DictionaryFileDefinitio
     }
 
     toJSON() {
-        return this.ddi;
+        return this.#ddi;
+    }
+
+    __getOriginalDefinition() {
+        return this.#def;
     }
 }
