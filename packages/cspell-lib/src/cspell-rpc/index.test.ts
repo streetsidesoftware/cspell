@@ -44,7 +44,7 @@ describe('Validate Client / Server communications', () => {
     const noIssues = { issues: [], errors: undefined, configErrors: undefined, dictionaryErrors: undefined };
 
     const expectedFor = {
-        'WOX_Permissions.ps1': { ...noIssues, issues: ac([oc({ text: 'explicitily' })]) },
+        'WOX_Permissions.ps1': { ...noIssues, issues: ac([oc({ text: 'explicitily' })]) }, // cspell:ignore explicitily
         'import-errors/file.txt': {
             ...noIssues,
             configErrors: [
@@ -65,8 +65,6 @@ describe('Validate Client / Server communications', () => {
             ],
         },
     };
-
-    // cspell:ignore explicitily
 
     test.each`
         filename                    | rootUrl                     | expected
