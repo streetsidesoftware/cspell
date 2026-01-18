@@ -338,7 +338,7 @@ describe('toCSpellSettingsWithSourceTrace', () => {
         expect(() => port1.postMessage(sampleSettings)).toThrow();
     });
 
-    test.only('toCSpellSettingsWithOutSourceTrace global settings', async () => {
+    test('toCSpellSettingsWithOutSourceTrace global settings', async () => {
         const { port1 } = new MessageChannel();
         const sampleSettings = mergeSettings(await getDefaultBundledSettingsAsync(), await getGlobalSettingsAsync());
         const settings = toCSpellSettingsWithOutSourceTrace(sampleSettings);
