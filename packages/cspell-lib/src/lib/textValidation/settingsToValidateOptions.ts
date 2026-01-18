@@ -1,4 +1,4 @@
-import type { CSpellSettingsInternalFinalized } from '../Models/CSpellSettingsInternalDef.js';
+import type { CSpellSettingsInternalFinalized } from '../Settings/index.js';
 import type { ValidationOptions } from './ValidationTypes.js';
 
 export function settingsToValidateOptions(settings: CSpellSettingsInternalFinalized): ValidationOptions {

@@ -9,14 +9,14 @@ import {
     normalizeGlobPatterns,
     normalizeGlobToRoot,
     workaroundPicomatchBug,
-} from './globHelper.js';
+} from './globHelper.ts';
 import type {
     GlobMatch,
     GlobPattern,
     GlobPatternNormalized,
     GlobPatternWithRoot,
     PathInterface,
-} from './GlobMatcherTypes.js';
+} from './GlobMatcherTypes.ts';
 
 // cspell:ignore fname
 

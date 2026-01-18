@@ -58,6 +58,7 @@ export {
     resolveConfigFileImports,
     searchForConfig,
     sectionCSpell,
+    toCSpellSettingsWithOutSourceTrace,
 } from './Settings/index.js';
 export { defaultFileName as defaultSettingsFilename } from './Settings/index.js';
 export * as Link from './Settings/index.link.js';
@@ -69,6 +70,7 @@ export {
     determineFinalDocumentSettings,
     type DetermineFinalDocumentSettingsResult,
     spellCheckDocument,
+    spellCheckDocumentRPC,
     spellCheckFile,
     type SpellCheckFileOptions,
     type SpellCheckFilePerf,

@@ -14,12 +14,13 @@ import type { ICSpellConfigFile } from 'cspell-config-lib';
 import { satisfiesCSpellConfigFile } from 'cspell-config-lib';
 
 import { getGlobMatcherForExcluding } from '../globs/getGlobMatcher.js';
-import type { CSpellSettingsInternal, CSpellSettingsInternalFinalized } from '../Models/CSpellSettingsInternalDef.js';
 import type { ExtendedSuggestion } from '../Models/Suggestion.js';
 import type { TextDocument, TextDocumentLine, TextDocumentRef } from '../Models/TextDocument.js';
 import { documentUriToURL, updateTextDocument } from '../Models/TextDocument.js';
 import type { ValidationIssue } from '../Models/ValidationIssue.js';
 import { createPerfTimer, measurePerf } from '../perf/index.js';
+import type { ImportFileRefWithError } from '../Settings/index.js';
+import type { CSpellSettingsInternal, CSpellSettingsInternalFinalized } from '../Settings/index.js';
 import {
     extractImportErrors,
     finalizeSettings,
@@ -39,6 +40,7 @@ import { catchPromiseError, toError } from '../util/errors.js';
 import { AutoCache } from '../util/simpleCache.js';
 import type { MatchRange } from '../util/TextRange.js';
 import { uriToFilePath } from '../util/Uri.js';
+import { cleanValidationIssue } from './cleanValidationIssue.js';
 import { defaultMaxDuplicateProblems, defaultMaxNumberOfProblems } from './defaultConstants.js';
 import { determineTextDocumentSettings } from './determineTextDocumentSettings.js';
 import type { TextValidator } from './lineValidatorFactory.js';
@@ -215,6 +217,7 @@ export class DocumentValidator {
         this._ready = true;
         this._preparationTime = timer.elapsed;
         this.perfTiming.prepTime = this._preparationTime;
+
         stopMeasure();
     }
 
@@ -350,7 +353,9 @@ export class DocumentValidator {
                 forceCheck || this.shouldCheckDocument() ? [...this._checkParsedText(this._parse())] : [];
             const directiveIssues = this.checkDocumentDirectives();
             // console.log('Stats: %o', this._preparations.textValidator.lineValidator.dict.stats());
-            const allIssues = [...spellingIssues, ...directiveIssues].sort((a, b) => a.offset - b.offset);
+            const allIssues = [...spellingIssues, ...directiveIssues]
+                .map(cleanValidationIssue)
+                .sort((a, b) => a.offset - b.offset);
             return allIssues;
         } finally {
             timerDone();
@@ -494,6 +499,22 @@ export class DocumentValidator {
         assert(this._ready);
         assert(this._preparations, ERROR_NOT_PREPARED);
         return this._preparations.docSettings;
+    }
+
+    public getConfigErrors(): ImportFileRefWithError[] | undefined {
+        const settings = this.getFinalizedDocSettings();
+        const errors = extractImportErrors(settings);
+        return errors.length ? errors : undefined;
+    }
+
+    public getDictionaryErrors(): Map<string, Error[]> | undefined {
+        assert(this._ready);
+        assert(this._preparations, ERROR_NOT_PREPARED);
+        const { dictionary } = this._preparations;
+        const errors = dictionary.dictionaries
+            .map((dict) => [dict.name, dict.getErrors?.()] as const)
+            .filter((entry): entry is [string, Error[]] => (entry[1] && entry[1].length > 0) || false);
+        return errors.length ? new Map(errors) : undefined;
     }
 
     /**

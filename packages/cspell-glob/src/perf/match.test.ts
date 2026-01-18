@@ -2,8 +2,8 @@ import assert from 'node:assert';
 
 import { describe } from 'vitest';
 
-import { GlobMatcher } from '../GlobMatcher.js';
-import { loadFileList, loadPatterns } from './loadFileList.js';
+import { GlobMatcher } from '../GlobMatcher.ts';
+import { loadFileList, loadPatterns } from './loadFileList.ts';
 
 describe('cspell-glob GlobMatcher match', async (test) => {
     const fileList = await loadFileList();

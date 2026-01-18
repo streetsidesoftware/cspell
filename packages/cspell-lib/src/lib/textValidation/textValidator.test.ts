@@ -3,8 +3,8 @@ import { type CSpellUserSettings, type TextOffset, unknownWordsChoices } from '@
 import { createInlineSpellingDictionary, createSuggestDictionary } from 'cspell-dictionary';
 import { describe, expect, test } from 'vitest';
 
-import { createCSpellSettingsInternal as csi } from '../Models/CSpellSettingsInternalDef.js';
 import { finalizeSettings } from '../Settings/index.js';
+import { createCSpellSettingsInternal as csi } from '../Settings/index.js';
 import type { SpellingDictionaryOptions } from '../SpellingDictionary/index.js';
 import { createCollection, createSpellingDictionary, getDictionaryInternal } from '../SpellingDictionary/index.js';
 import { FreqCounter } from '../util/FreqCounter.js';

@@ -5,20 +5,15 @@ import type {
     CSpellSettings,
     CSpellSettingsWithSourceTrace,
     Document,
+    ImportFileRefWithError,
     Issue,
     SpellCheckFileResult,
     TextDocumentOffset,
     ValidationIssue,
 } from 'cspell-lib';
-import {
-    extractDependencies,
-    extractImportErrors,
-    getDictionary,
-    MessageTypes,
-    spellCheckDocument,
-    Text as cspellText,
-} from 'cspell-lib';
+import { extractDependencies, extractImportErrors, MessageTypes, Text as cspellText } from 'cspell-lib';
 
+import { getCSpellAPI } from '../cspell-api/index.js';
 import type { CSpellLintResultCache } from '../util/cache/CSpellLintResultCache.js';
 import type { ConfigInfo } from '../util/configFileHelper.js';
 import { toError } from '../util/errors.js';
@@ -42,6 +37,7 @@ export interface ProcessFileOptions {
     cfg: LintRequest;
     configErrors: Set<string>;
     chalk: ChalkInstance;
+    userSettings: CSpellSettingsWithSourceTrace;
 }
 
 export async function processFile(
@@ -52,7 +48,9 @@ export async function processFile(
 ): Promise<LintFileResult> {
     if (prefetch?.fileResult) return prefetch.fileResult;
 
-    const { reporter, cfg, configInfo } = processFileOptions;
+    const { reporter, cfg, configInfo, userSettings } = processFileOptions;
+
+    const { spellCheckDocument } = await getCSpellAPI();
 
     const getElapsedTimeMs = getTimeMeasurer();
     const reportIssueOptions = prefetch?.reportIssueOptions;
@@ -102,7 +100,7 @@ export async function processFile(
             validateDirectives,
             skipValidation,
         });
-        const r = await spellCheckDocument(doc, validateOptions, configInfo.config);
+        const r = await spellCheckDocument(doc, validateOptions, userSettings);
         // console.warn('filename: %o %o', path.relative(process.cwd(), filename), r.perf);
         spellResult = r;
         result.processed = r.checked;
@@ -119,7 +117,8 @@ export async function processFile(
         spellResult.settingsUsed || configInfo.config,
         reportIssueOptions,
     );
-    result.configErrors += await reportConfigurationErrors(config, processFileOptions);
+
+    result.configErrors += reportSpellingResultConfigErrors(spellResult, processFileOptions);
 
     reportCheckResult(result, doc, spellResult, config, processFileOptions);
 
@@ -179,12 +178,13 @@ function calcDependencies(config: CSpellSettings): ConfigDependencies {
     return { files: [...configFiles, ...dictionaryFiles] };
 }
 
-export async function reportConfigurationErrors(
-    config: CSpellSettings,
-    processFileOptions: ProcessFileOptions,
-): Promise<number> {
-    const { reporter, configErrors } = processFileOptions;
+function reportConfigurationErrors(config: CSpellSettings, processFileOptions: ProcessFileOptions): number {
     const errors = extractImportErrors(config);
+    return reportImportErrors(errors, processFileOptions);
+}
+
+function reportImportErrors(errors: ImportFileRefWithError[], processFileOptions: ProcessFileOptions): number {
+    const { reporter, configErrors } = processFileOptions;
     let count = 0;
     errors.forEach((ref) => {
         const key = ref.error.toString();
@@ -194,10 +194,19 @@ export async function reportConfigurationErrors(
         reporter.error('Configuration', ref.error);
     });
 
-    const dictCollection = await getDictionary(config);
-    dictCollection.dictionaries.forEach((dict) => {
-        const dictErrors = dict.getErrors?.() || [];
-        const msg = `Dictionary Error with (${dict.name})`;
+    return count;
+}
+
+function reportSpellingResultConfigErrors(
+    spellResult: Partial<SpellCheckFileResult>,
+    processFileOptions: ProcessFileOptions,
+): number {
+    const { reporter, configErrors } = processFileOptions;
+    let count = reportImportErrors(spellResult.configErrors || [], processFileOptions);
+
+    const dictionaryErrors = [...(spellResult.dictionaryErrors || [])];
+    for (const [dictName, dictErrors] of dictionaryErrors) {
+        const msg = `Dictionary Error with (${dictName})`;
         dictErrors.forEach((error) => {
             const key = msg + error.toString();
             if (configErrors.has(key)) return;
@@ -205,11 +214,11 @@ export async function reportConfigurationErrors(
             count += 1;
             reporter.error(msg, error);
         });
-    });
+    }
 
     return count;
 }
 
-export function countConfigErrors(configInfo: ConfigInfo, processFileOptions: ProcessFileOptions): Promise<number> {
+export function countConfigErrors(configInfo: ConfigInfo, processFileOptions: ProcessFileOptions): number {
     return reportConfigurationErrors(configInfo.config, processFileOptions);
 }

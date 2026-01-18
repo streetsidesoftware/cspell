@@ -7,11 +7,14 @@ import { isBinaryDoc } from './Document/isBinaryDoc.js';
 import { documentToTextDocument, resolveDocument } from './Document/resolveDocument.js';
 import { createTextDocument } from './Models/TextDocument.js';
 import { createPerfTimer } from './perf/index.js';
+import type { ImportFileRefWithError } from './Settings/index.js';
+import { cloneSettingsForExport } from './Settings/sanitizeSettings.js';
 import { determineTextDocumentSettings } from './textValidation/determineTextDocumentSettings.js';
 import type { DocumentValidatorOptions } from './textValidation/index.js';
 import { DocumentValidator } from './textValidation/index.js';
 import { isError } from './util/errors.js';
 import type { Uri } from './util/IUri.js';
+import { memoizeLastCall } from './util/memoizeLastCall.js';
 import { toUri } from './util/Uri.js';
 import type { ValidateTextOptions, ValidationIssue } from './validator.js';
 
@@ -52,6 +55,8 @@ export interface SpellCheckFileResult {
     issues: ValidationIssue[];
     checked: boolean;
     errors: Error[] | undefined;
+    configErrors?: ImportFileRefWithError[] | undefined;
+    dictionaryErrors?: Map<string, Error[]> | undefined;
     perf?: SpellCheckFilePerf;
 }
 
@@ -130,6 +135,28 @@ export async function spellCheckDocument(
     }
 }
 
+const memoizedCloneSettingsForExport = memoizeLastCall(cloneSettingsForExport);
+
+function sanitizeSettingsForExport(settings: CSpellSettingsWithSourceTrace | undefined): CSpellSettingsWithSourceTrace {
+    return settings ? memoizedCloneSettingsForExport(settings) : {};
+}
+
+/**
+ * Spell Check a Document.
+ * @param document - document to be checked. If `document.text` is `undefined` the file will be loaded
+ * @param options - options to control checking
+ * @param settings - default settings to use.
+ */
+export async function spellCheckDocumentRPC(
+    document: Document | DocumentWithText,
+    options: SpellCheckFileOptions,
+    settingsOrConfigFile: CSpellUserSettings | ICSpellConfigFile,
+): Promise<SpellCheckFileResult> {
+    const result = { ...(await spellCheckDocument(document, options, settingsOrConfigFile)) };
+    result.settingsUsed = sanitizeSettingsForExport(result.settingsUsed);
+    return result;
+}
+
 async function spellCheckFullDocument(
     document: DocumentWithText,
     options: SpellCheckFileOptions,
@@ -162,18 +189,20 @@ async function spellCheckFullDocument(
     const prep = docValidator._getPreparations();
 
     if (docValidator.errors.length) {
+        const settingsUsed =
+            prep?.localConfig ||
+            (satisfiesCSpellConfigFile(settingsOrConfigFile) ? settingsOrConfigFile.settings : settingsOrConfigFile);
+
         return {
             document,
             options,
-            settingsUsed:
-                prep?.localConfig ||
-                (satisfiesCSpellConfigFile(settingsOrConfigFile)
-                    ? settingsOrConfigFile.settings
-                    : settingsOrConfigFile),
+            settingsUsed,
             localConfigFilepath: prep?.localConfigFilepath,
             issues: [],
             checked: false,
             errors: docValidator.errors,
+            configErrors: docValidator.getConfigErrors(),
+            dictionaryErrors: docValidator.getDictionaryErrors(),
             perf,
         };
     }
@@ -192,6 +221,8 @@ async function spellCheckFullDocument(
         issues,
         checked: docValidator.shouldCheckDocument(),
         errors: undefined,
+        configErrors: docValidator.getConfigErrors(),
+        dictionaryErrors: docValidator.getDictionaryErrors(),
         perf,
     };
     timer.end();

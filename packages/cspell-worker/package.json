@@ -1,0 +1,57 @@
+{
+  "name": "@cspell/cspell-worker",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "version": "9.6.0",
+  "description": "Client Server RPC worker for CSpell.",
+  "keywords": [
+    "cspell",
+    "rpc",
+    "worker"
+  ],
+  "author": "Jason Dent <jason@streetsidesoftware.nl>",
+  "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-worker#readme",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": true,
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "directories": {
+    "dist": "dist"
+  },
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "!**/*.tsbuildInfo",
+    "!**/__mocks__",
+    "!**/*.test.*",
+    "!**/*.spec.*",
+    "!**/*.map"
+  ],
+  "scripts": {
+    "build": "tsdown && tsc -p .",
+    "watch": "tsdown --watch",
+    "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
+    "clean-build": "pnpm run clean && pnpm run build",
+    "sort-filetypes": "pnpm build && node scripts/sortFileTypes.js && prettier --write src/definitions.ts",
+    "coverage": "vitest run --coverage --pool=forks",
+    "test": "vitest run --pool=forks"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/streetsidesoftware/cspell.git",
+    "directory": "packages/cspell-worker"
+  },
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/cspell"
+  },
+  "engines": {
+    "node": ">=20.18"
+  },
+  "dependencies": {
+    "cspell-lib": "workspace:*"
+  }
+}

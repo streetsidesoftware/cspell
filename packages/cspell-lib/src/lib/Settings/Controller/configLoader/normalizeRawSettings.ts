@@ -7,7 +7,7 @@ import { resolveFile } from '../../../util/resolveFile.js';
 import type { OptionalOrUndefined, RemoveUndefined } from '../../../util/types.js';
 import { resolveFileWithURL, toFilePathOrHref } from '../../../util/url.js';
 import * as util from '../../../util/util.js';
-import { mapDictDefsToInternal } from '../../DictionarySettings.js';
+import { mapDictDefsToInternal } from '../../internal/index.js';
 import { toGlobDef } from './toGlobDef.js';
 
 interface NormalizableFields {

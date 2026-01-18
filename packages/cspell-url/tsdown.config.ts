@@ -1,6 +1,7 @@
+import type { UserConfig } from 'tsdown';
 import { defineConfig } from 'tsdown';
 
-export default defineConfig({
+const config: UserConfig = defineConfig({
     entry: ['src/index.mts'],
     outDir: 'dist',
     format: ['esm'],
@@ -9,3 +10,5 @@ export default defineConfig({
     sourcemap: true,
     clean: true,
 });
+
+export default config;

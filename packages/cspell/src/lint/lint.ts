@@ -274,7 +274,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             reporter.info(`Config Files Found:\n    ${relativeToCwd(configInfo.source)}\n`, MessageTypes.Info);
         }
 
-        const configErrors = await countConfigErrors(configInfo, processFileOptions);
+        const configErrors = countConfigErrors(configInfo, processFileOptions);
         if (configErrors && cfg.options.exitCode !== false && !cfg.options.continueOnError) {
             return runResult({ errors: configErrors });
         }
@@ -328,6 +328,9 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             verboseLevel,
             useColor,
             configErrors,
+            // We could use the cli settings here but it is much slower.
+            // userSettings: cfg.cspellSettingsFromCliOptions,
+            userSettings: configInfo.config,
         };
         return processFileOptionsGeneral;
     }

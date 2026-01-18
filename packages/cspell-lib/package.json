@@ -13,6 +13,18 @@
   "exports": {
     ".": {
       "import": "./dist/lib/index.js"
+    },
+    "./rpc": {
+      "import": "./dist/rpc/index.js"
+    },
+    "./cspell-rpc": {
+      "import": "./dist/cspell-rpc/index.js"
+    },
+    "./cspell-rpc/server": {
+      "import": "./dist/cspell-rpc/server.js"
+    },
+    "./cspell-rpc/client": {
+      "import": "./dist/cspell-rpc/client.js"
     }
   },
   "files": [
@@ -38,7 +50,7 @@
     "test": "vitest run --pool=forks",
     "test:update-snapshot": "vitest run -u",
     "test:perf": "NODE_ENV=production insight --file \"**/*.perf.{mjs,js}\"",
-    "test:perf:ts": "NODE_ENV=production insight --file \"**/*.perf.{mts,ts}\" --register ts-node/esm",
+    "test:perf:ts": "NODE_ENV=production insight --file \"**/*.perf.{mts,ts}\" ",
     "test:perf:prof": "NODE_ENV=production node --cpu-prof ../../node_modules/perf-insight/bin.mjs --file \"dist/**/*.perf.{mjs,js}\" -t 1000"
   },
   "repository": {

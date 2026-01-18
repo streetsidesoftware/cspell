@@ -4,8 +4,8 @@ import { satisfiesCSpellConfigFile } from 'cspell-config-lib';
 import { genSequence } from 'gensequence';
 
 import type { LanguageId } from './fileTypes.js';
-import type { CSpellSettingsInternal } from './Models/CSpellSettingsInternalDef.js';
 import { toInternalSettings } from './Settings/CSpellSettingsServer.js';
+import type { CSpellSettingsInternal } from './Settings/index.js';
 import { finalizeSettings, mergeSettings, resolveConfigFileImports } from './Settings/index.js';
 import { calcSettingsForLanguageId } from './Settings/LanguageSettings.js';
 import type { SpellingDictionaryCollection } from './SpellingDictionary/index.js';
