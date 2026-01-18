@@ -9,8 +9,8 @@ import type {
     DictionaryDefinitionInlineInternal,
     DictionaryDefinitionInternal,
     DictionaryFileDefinitionInternal,
-} from '../../Models/CSpellSettingsInternalDef.js';
-import { mapDictDefToInternal } from '../../Settings/DictionarySettings.js';
+} from '../../Settings/index.js';
+import { mapDictDefToInternal } from '../../Settings/index.js';
 import { clean } from '../../util/util.js';
 import type { LoadOptions } from './DictionaryLoader.js';
 import { DictionaryLoader } from './DictionaryLoader.js';

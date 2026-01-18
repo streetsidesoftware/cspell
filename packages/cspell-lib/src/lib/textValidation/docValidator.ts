@@ -14,13 +14,13 @@ import type { ICSpellConfigFile } from 'cspell-config-lib';
 import { satisfiesCSpellConfigFile } from 'cspell-config-lib';
 
 import { getGlobMatcherForExcluding } from '../globs/getGlobMatcher.js';
-import type { CSpellSettingsInternal, CSpellSettingsInternalFinalized } from '../Models/CSpellSettingsInternalDef.js';
 import type { ExtendedSuggestion } from '../Models/Suggestion.js';
 import type { TextDocument, TextDocumentLine, TextDocumentRef } from '../Models/TextDocument.js';
 import { documentUriToURL, updateTextDocument } from '../Models/TextDocument.js';
 import type { ValidationIssue } from '../Models/ValidationIssue.js';
 import { createPerfTimer, measurePerf } from '../perf/index.js';
 import type { ImportFileRefWithError } from '../Settings/index.js';
+import type { CSpellSettingsInternal, CSpellSettingsInternalFinalized } from '../Settings/index.js';
 import {
     extractImportErrors,
     finalizeSettings,

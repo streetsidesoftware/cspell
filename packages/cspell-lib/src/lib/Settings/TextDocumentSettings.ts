@@ -1,8 +1,8 @@
 import type { CSpellSettings, CSpellUserSettings } from '@cspell/cspell-types';
 
-import type { CSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef.js';
 import { mergeSettings, toInternalSettings } from './CSpellSettingsServer.js';
 import { getInDocumentSettings } from './InDocSettings.js';
+import type { CSpellSettingsInternal } from './internal/index.js';
 import { calcSettingsForLanguageId } from './LanguageSettings.js';
 
 export function combineTextAndLanguageSettings(

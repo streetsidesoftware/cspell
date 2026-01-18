@@ -3,8 +3,8 @@ import * as path from 'node:path';
 import type { CSpellUserSettings } from '@cspell/cspell-types';
 
 import { getLanguagesForBasename } from '../fileTypes.js';
-import type { CSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef.js';
 import type { TextDocument, TextDocumentRef } from '../Models/TextDocument.js';
+import type { CSpellSettingsInternal } from '../Settings/index.js';
 import { calcOverrideSettings, getDefaultSettings, getGlobalSettingsAsync, mergeSettings } from '../Settings/index.js';
 import { combineTextAndLanguageSettings } from '../Settings/TextDocumentSettings.js';
 import { uriToFilePath } from '../util/Uri.js';

@@ -5,10 +5,10 @@ import type { CSpellUserSettings } from '@cspell/cspell-types';
 import { describe, expect, test } from 'vitest';
 
 import { pathPackageRoot } from '../../test-util/test.locations.js';
-import { createCSpellSettingsInternal as csi } from '../Models/CSpellSettingsInternalDef.js';
 import { createDictionaryReferenceCollection } from '../Settings/DictionaryReferenceCollection.js';
-import { filterDictDefsToLoad, mapDictDefToInternal } from '../Settings/DictionarySettings.js';
 import { getDefaultBundledSettingsAsync, loadConfig } from '../Settings/index.js';
+import { createCSpellSettingsInternal as csi } from '../Settings/index.js';
+import { filterDictDefsToLoad, mapDictDefToInternal } from '../Settings/index.js';
 import * as Dictionaries from './Dictionaries.js';
 import { isSpellingDictionaryLoadError } from './SpellingDictionaryError.js';
 

@@ -9,9 +9,9 @@ import type {
     Source,
 } from '@cspell/cspell-types';
 
-import type { CSpellSettingsInternal, CSpellSettingsInternalFinalized } from '../Models/CSpellSettingsInternalDef.js';
 import type { Handlers } from '../util/clone.js';
 import { cloneInto, copy0, copy1, skip } from '../util/clone.js';
+import type { CSpellSettingsInternal, CSpellSettingsInternalFinalized } from './internal/index.js';
 
 type CloneableSettings = CSpellSettingsWithSourceTrace | CSpellSettingsInternal | CSpellSettingsInternalFinalized;
 

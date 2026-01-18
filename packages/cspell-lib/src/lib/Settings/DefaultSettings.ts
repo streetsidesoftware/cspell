@@ -1,14 +1,14 @@
 import type { PredefinedPatterns, RegExpPatternDefinition } from '@cspell/cspell-types';
 import { parsers } from 'cspell-grammar';
 
-import type { CSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef.js';
-import { createCSpellSettingsInternal } from '../Models/CSpellSettingsInternalDef.js';
 import { PatternRegExp } from '../Models/PatternRegExp.js';
 import { srcDirectory } from '../pkg-info.mjs';
 import { resolveFile } from '../util/resolveFile.js';
 import { defaultConfigFileModuleRef } from './constants.js';
 import { readSettings } from './Controller/configLoader/index.js';
 import { mergeSettings } from './CSpellSettingsServer.js';
+import type { CSpellSettingsInternal } from './internal/index.js';
+import { createCSpellSettingsInternal } from './internal/index.js';
 import * as LanguageSettings from './LanguageSettings.js';
 import * as RegPat from './RegExpPatterns.js';
 

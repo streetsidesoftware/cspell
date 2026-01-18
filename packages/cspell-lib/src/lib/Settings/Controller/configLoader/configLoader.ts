@@ -12,7 +12,6 @@ import { URI, Utils as UriUtils } from 'vscode-uri';
 import { onClearCache } from '../../../events/index.js';
 import type { VFileSystem } from '../../../fileSystem.js';
 import { getVirtualFS } from '../../../fileSystem.js';
-import { createCSpellSettingsInternal as csi } from '../../../Models/CSpellSettingsInternalDef.js';
 import { srcDirectory } from '../../../pkg-info.mjs';
 import type { CacheStats } from '../../../util/AutoResolve.js';
 import { autoResolve, AutoResolveCache, autoResolveWeak } from '../../../util/AutoResolve.js';
@@ -37,6 +36,7 @@ import {
 } from '../../constants.js';
 import { getMergeStats, mergeSettings, toInternalSettings } from '../../CSpellSettingsServer.js';
 import { getGlobalConfig } from '../../GlobalSettings.js';
+import { createCSpellSettingsInternal as csi } from '../../internal/index.js';
 import { ImportError } from '../ImportError.js';
 import type { LoaderResult } from '../pnpLoader.js';
 import { pnpLoader } from '../pnpLoader.js';

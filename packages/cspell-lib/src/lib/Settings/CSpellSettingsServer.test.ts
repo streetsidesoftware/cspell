@@ -6,7 +6,6 @@ import { CSpellConfigFileInMemory } from 'cspell-config-lib';
 import { describe, expect, test } from 'vitest';
 
 import { pathPackageRoot, pathPackageSamples } from '../../test-util/test.locations.js';
-import { createCSpellSettingsInternal as csi } from '../Models/CSpellSettingsInternalDef.js';
 import { toURL } from '../util/url.js';
 import { calcOverrideSettings } from './calcOverrideSettings.js';
 import { checkFilenameMatchesGlob } from './checkFilenameMatchesGlob.js';
@@ -24,6 +23,7 @@ import {
 import type { CSpellSettingsWST } from './Controller/configLoader/types.js';
 import { getMergeStats, getSources, mergeSettings } from './CSpellSettingsServer.js';
 import { _defaultSettings, getDefaultBundledSettingsAsync } from './DefaultSettings.js';
+import { createCSpellSettingsInternal as csi } from './internal/index.js';
 
 const samplesDir = pathPackageSamples;
 const pathSrc = path.join(pathPackageRoot, 'src');

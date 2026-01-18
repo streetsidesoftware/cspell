@@ -5,11 +5,8 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { describe, expect, test, vi } from 'vitest';
 
 import { pathPackageRoot, pathPackageSamples } from '../../test-util/test.locations.js';
-import type {
-    DictionaryDefinitionInternal,
-    DictionaryFileDefinitionInternal,
-} from '../Models/CSpellSettingsInternalDef.js';
-import { mapDictDefToInternal } from '../Settings/DictionarySettings.js';
+import type { DictionaryDefinitionInternal, DictionaryFileDefinitionInternal } from '../Settings/index.js';
+import { mapDictDefToInternal } from '../Settings/index.js';
 import { clean } from '../util/util.js';
 import type { LoadOptions } from './DictionaryLoader.js';
 import { loadDictionary, refreshCacheEntries } from './DictionaryLoader.js';

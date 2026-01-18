@@ -33,3 +33,19 @@ export {
     mergeSettings,
 } from './CSpellSettingsServer.js';
 export { defaultSettingsLoader, getDefaultBundledSettingsAsync, getDefaultSettings } from './DefaultSettings.js';
+export type {
+    CSpellSettingsInternal,
+    CSpellSettingsInternalFinalized,
+    DictionaryDefinitionInlineInternal,
+    DictionaryDefinitionInternal,
+    DictionaryDefinitionSimpleInternal,
+    DictionaryFileDefinitionInternal,
+} from './internal/index.js';
+export {
+    calcDictionaryDefsToLoad,
+    createCSpellSettingsInternal,
+    filterDictDefsToLoad,
+    isDictionaryDefinitionInlineInternal,
+    isDictionaryFileDefinitionInternal,
+    mapDictDefToInternal,
+} from './internal/index.js';
