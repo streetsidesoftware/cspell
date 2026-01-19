@@ -180,8 +180,8 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             reportIssueOptions: undefined,
         };
 
-        async function processPrefetchFileResult(pf: PrefetchFileResult | Promise<PrefetchFileResult>, index: number) {
-            const { filename, result: pFetchResult } = await pf;
+        async function processPrefetchFileResult(pf: PrefetchFileResult, index: number) {
+            const { filename, result: pFetchResult } = pf;
             const getElapsedTimeMs = getTimeMeasurer();
             const fetchResult = await pFetchResult;
             if (fetchResult instanceof Error) {
@@ -215,7 +215,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             }
             if (BATCH_PROCESS_SIZE <= 1) {
                 for (const pf of prefetchFiles(files)) {
-                    await pf.result;
+                    await pf.result; // force one at a time
                     yield processPrefetchFileResult(pf, ++i);
                 }
                 return;
