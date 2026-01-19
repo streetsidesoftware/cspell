@@ -139,17 +139,6 @@ describe('Linter Validation Tests', () => {
         expect(runResult).toEqual(reporter.runResult);
     });
 
-    test.only.each`
-        files          | options                                   | expectedRunResult                         | expectedReport
-        ${['code.ts']} | ${{ root: pUnknownWords, report: 'all' }} | ${oc({ errors: 0, files: 1, issues: 2 })} | ${oc({ issues: [oc({ text: 'spellllingmistake' }), oc({ text: 'Orangges' })] })}
-    `('runLint $files $options', async ({ files, options, expectedRunResult, expectedReport }) => {
-        const reporter = new InMemoryReporter();
-        const runResult = await runLint(new LintRequest(files, options, reporter));
-        expect(report(reporter)).toEqual(expectedReport);
-        expect(runResult).toEqual(expectedRunResult);
-        expect(runResult).toEqual(reporter.runResult);
-    });
-
     test.each`
         files | options
         ${[]} | ${{ root: latexSamples }}
