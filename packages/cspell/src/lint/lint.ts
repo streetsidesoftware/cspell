@@ -66,8 +66,8 @@ import type { PFCached, PFFile, PFSkipped, PrefetchFileResult } from './types.js
 
 const version = npmPackage.version;
 
-const BATCH_FETCH_SIZE = 48;
-const BATCH_PROCESS_SIZE = 24;
+const BATCH_FETCH_SIZE = 8;
+const BATCH_PROCESS_SIZE = 1;
 
 const debugStats = false;
 

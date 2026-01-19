@@ -10,6 +10,9 @@ export interface CSpellAPI extends Pick<CSpellRPCApi, 'spellCheckDocument'> {}
 const useRPC = false;
 const usePool = false;
 
+const MIN_NUM_WORKERS = 6;
+const JOBS_PER_CORE = 16;
+
 const apiOrig = {
     spellCheckDocument,
 } as const;
@@ -29,7 +32,8 @@ export function getCSpellAPI(): Promise<CSpellAPI> {
     }
     if (usePool) {
         pool ??= new CSpellWorkerPool({
-            minWorkers: 1,
+            minWorkers: MIN_NUM_WORKERS,
+            maxPendingTasksPerWorker: JOBS_PER_CORE,
         });
         // if (!requests) {
         //     process.stdout.write(`CSpell Worker Pool started with ${pool.size} workers. ${pool.maxWorkers} \r\n`);
