@@ -21,6 +21,7 @@ import {
 } from 'cspell-lib';
 
 import { console } from '../console.js';
+import { releaseCSpellAPI } from '../cspell-api/cspell-api.js';
 import { getEnvironmentVariable, setEnvironmentVariable, truthy } from '../environment.js';
 import { getFeatureFlags } from '../featureFlags/index.js';
 import type { CSpellReporterConfiguration } from '../models.js';
@@ -65,13 +66,19 @@ import type { PFCached, PFFile, PFSkipped, PrefetchFileResult } from './types.js
 
 const version = npmPackage.version;
 
-const BATCH_SIZE = 8;
+const BATCH_FETCH_SIZE = 48;
+const BATCH_PROCESS_SIZE = 24;
 
 const debugStats = false;
 
 const { opFilterAsync } = operators;
 
 export async function runLint(cfg: LintRequest): Promise<RunResult> {
+    await using _api = {
+        async [Symbol.asyncDispose]() {
+            await releaseCSpellAPI();
+        },
+    };
     const reporter = new LintReporter(cfg.reporter, cfg.options);
     const configErrors = new Set<string>();
     const verboseLevel = calcVerboseLevel(cfg.options);
@@ -92,7 +99,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
 
     await reporter.result(lintResult);
     const elapsed = timer();
-    if (getFeatureFlags().getFlag('timer')) {
+    if (getFeatureFlags().getFlag('timer') || verboseLevel >= 1 || cfg.options.showPerfSummary) {
         console.log(`Elapsed Time: ${elapsed.toFixed(2)}ms`);
     }
     return lintResult;
@@ -150,7 +157,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
                     files,
                     opMap((filename) => prefetch(filename, configInfo, cache)),
                 ),
-                BATCH_SIZE,
+                BATCH_FETCH_SIZE,
             );
             for (const v of iter) {
                 yield v;
@@ -173,8 +180,8 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             reportIssueOptions: undefined,
         };
 
-        async function processPrefetchFileResult(pf: PrefetchFileResult, index: number) {
-            const { filename, result: pFetchResult } = pf;
+        async function processPrefetchFileResult(pf: PrefetchFileResult | Promise<PrefetchFileResult>, index: number) {
+            const { filename, result: pFetchResult } = await pf;
             const getElapsedTimeMs = getTimeMeasurer();
             const fetchResult = await pFetchResult;
             if (fetchResult instanceof Error) {
@@ -204,15 +211,29 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
                 for await (const pf of prefetchFilesAsync(files)) {
                     yield processPrefetchFileResult(pf, ++i);
                 }
-            } else {
+                return;
+            }
+            if (BATCH_PROCESS_SIZE <= 1) {
                 for (const pf of prefetchFiles(files)) {
                     await pf.result;
                     yield processPrefetchFileResult(pf, ++i);
                 }
+                return;
             }
+            yield* pipe(
+                prefetchIterable(
+                    pipe(
+                        prefetchFiles(files),
+                        opMap(async (pf) => processPrefetchFileResult(pf, ++i)),
+                    ),
+                    BATCH_PROCESS_SIZE,
+                ),
+            );
         }
 
-        for await (const fileP of loadAndProcessFiles()) {
+        const toLoadAndProcess = loadAndProcessFiles();
+
+        for await (const fileP of toLoadAndProcess) {
             const { filename, fileNum, result } = fileP;
             status.files += 1;
             status.cachedFiles = (status.cachedFiles || 0) + (result.cached ? 1 : 0);
@@ -329,8 +350,8 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             useColor,
             configErrors,
             // We could use the cli settings here but it is much slower.
-            // userSettings: cfg.cspellSettingsFromCliOptions,
-            userSettings: configInfo.config,
+            userSettings: cfg.cspellSettingsFromCliOptions,
+            // userSettings: configInfo.config,
         };
         return processFileOptionsGeneral;
     }

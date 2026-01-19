@@ -197,7 +197,8 @@ export function getReporter(options: ReporterOptions, config?: CSpellReporterCon
         filesProcessed: 0,
         filesSkipped: 0,
         filesCached: 0,
-        elapsedTimeMs: 0,
+        accumulatedTimeMs: 0,
+        startTime: performance.now(),
         perf: Object.create(null) as SpellCheckFilePerf,
     };
     const noColor = options.color === false;
@@ -325,12 +326,15 @@ export function getReporter(options: ReporterOptions, config?: CSpellReporterCon
         }
 
         if (options.showPerfSummary) {
+            const elapsedTotal = performance.now() - perfStats.startTime;
+
             consoleError('-------------------------------------------');
             consoleError('Performance Summary:');
-            consoleError(`  Files Processed: ${perfStats.filesProcessed.toString().padStart(6)}`);
-            consoleError(`  Files Skipped  : ${perfStats.filesSkipped.toString().padStart(6)}`);
-            consoleError(`  Files Cached   : ${perfStats.filesCached.toString().padStart(6)}`);
-            consoleError(`  Processing Time: ${perfStats.elapsedTimeMs.toFixed(2).padStart(9)}ms`);
+            consoleError(`  Files Processed : ${perfStats.filesProcessed.toString().padStart(11)}`);
+            consoleError(`  Files Skipped   : ${perfStats.filesSkipped.toString().padStart(11)}`);
+            consoleError(`  Files Cached    : ${perfStats.filesCached.toString().padStart(11)}`);
+            consoleError(`  Processing Time : ${perfStats.accumulatedTimeMs.toFixed(2).padStart(9)}ms`);
+            consoleError(`  Total Time.     : ${elapsedTotal.toFixed(2).padStart(9)}ms`);
 
             const tableStats: Table = {
                 title: chalk.bold('Perf Stats:'),
@@ -411,7 +415,7 @@ export function getReporter(options: ReporterOptions, config?: CSpellReporterCon
         }
         perfStats.filesProcessed += p.processed ? 1 : 0;
         perfStats.filesSkipped += !p.processed ? 1 : 0;
-        perfStats.elapsedTimeMs += p.elapsedTimeMs || 0;
+        perfStats.accumulatedTimeMs += p.elapsedTimeMs || 0;
 
         if (!p.perf) return;
         for (const [key, value] of Object.entries(p.perf)) {
