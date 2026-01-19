@@ -35,21 +35,6 @@ error"
 
 exports[`Validate cli > app '--continue-on-error - missing config' Expect Error: [Function CheckFailed] 3`] = `""`;
 
-exports[`Validate cli > app '--continue-on-error - missing dict' Expect Error: [Function CheckFailed] 1`] = `[]`;
-
-exports[`Validate cli > app '--continue-on-error - missing dict' Expect Error: [Function CheckFailed] 2`] = `
-"error	Dictionary Error with (my-dict) Error: ENOENT: no such file or directory, open './fixtures/import/import-errors/missing.txt'
-error
-error	1/1 README.md 0.00ms
-error
-error	-------------------------------------------
-error
-error	CSpell: Files checked: 1, Issues found: 0 in 0 files with 1 error.
-error"
-`;
-
-exports[`Validate cli > app '--continue-on-error - missing dict' Expect Error: [Function CheckFailed] 3`] = `""`;
-
 exports[`Validate cli > app '--continue-on-error - missing import' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli > app '--continue-on-error - missing import' Expect Error: [Function CheckFailed] 2`] = `
@@ -412,13 +397,15 @@ error	-------------------------------------------
 error
 error	Performance Summary:
 error
-error	  Files Processed:      1
+error	  Files Processed :           1
 error
-error	  Files Skipped  :      0
+error	  Files Skipped   :           0
 error
-error	  Files Cached   :      0
+error	  Files Cached    :           0
 error
-error	  Processing Time: 0.00ms
+error	  Processing Time : 0.00ms
+error
+error	  Total Time.     : 0.00ms
 error
 error
 error
@@ -427,6 +414,10 @@ error
 error	  Name                            | Time (ms)
 error
 error	  prepareTimeMs                   | 0.00
+error
+error	  ___searchForDocumentConfig      | 0.00
+error
+error	  __loadConfig                    | 0.00
 error
 error	  __determineTextDocumentSettings | 0.00
 error
@@ -447,6 +438,8 @@ error
 error	  totalTimeMs                     | 0.00
 error
 error	  loadTimeMs                      | 0.00
+error
+error	Elapsed Time: 0.00ms
 error"
 `;
 
@@ -497,6 +490,8 @@ info	    typescript, web-services, workspace
 error	1/1 src/app.test.ts 0.00ms
 error
 error	CSpell: Files checked: 1, Issues found: 0 in 0 files.
+error
+error	Elapsed Time: 0.00ms
 error"
 `;
 
@@ -508,6 +503,8 @@ exports[`Validate cli > app 'current_file --verbose' Expect Error: undefined 2`]
 "error	1/1 src/app.test.ts 0.00ms
 error
 error	CSpell: Files checked: 1, Issues found: 0 in 0 files.
+error
+error	Elapsed Time: 0.00ms
 error"
 `;
 
@@ -579,6 +576,8 @@ info	    softwareTerms, web-services
 error	1/1 fix-words.txt 0.00ms
 error
 error	CSpell: Files checked: 1, Issues found: 0 in 0 files.
+error
+error	Elapsed Time: 0.00ms
 error"
 `;
 
@@ -858,6 +857,8 @@ info	    softwareTerms, web-services
 error	14/14 samples/smartquotes.OUT.textproto 0.00ms
 error
 error	CSpell: Files checked: 14, Issues found: 0 in 0 files.
+error
+error	Elapsed Time: 0.00ms
 error"
 `;
 
@@ -2213,11 +2214,13 @@ exports[`Validate cli > app 'with forbidden words' Expect Error: [Function Check
 exports[`Validate cli > app 'with forbidden words' Expect Error: [Function CheckFailed] 2`] = `
 "error	1/1 samples/src/sample-with-forbidden-words.md 0.00ms X
 error
-log	samples/src/sample-with-forbidden-words.md:3:3 - Unknown word (behaviour)
+log	samples/src/sample-with-forbidden-words.md:3:3 - Forbidden word (behaviour)
 log
-log	samples/src/sample-with-forbidden-words.md:5:3 - Unknown word (colour)
+log	samples/src/sample-with-forbidden-words.md:4:3 - Forbidden word (flavour)
 log
-error	CSpell: Files checked: 1, Issues found: 2 in 1 file.
+log	samples/src/sample-with-forbidden-words.md:5:3 - Forbidden word (colour)
+log
+error	CSpell: Files checked: 1, Issues found: 3 in 1 file.
 error"
 `;
 

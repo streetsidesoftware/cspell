@@ -21,7 +21,6 @@ import {
 } from 'cspell-lib';
 
 import { console } from '../console.js';
-import { releaseCSpellAPI } from '../cspell-api/cspell-api.js';
 import { getEnvironmentVariable, setEnvironmentVariable, truthy } from '../environment.js';
 import { getFeatureFlags } from '../featureFlags/index.js';
 import type { CSpellReporterConfiguration } from '../models.js';
@@ -67,18 +66,13 @@ import type { PFCached, PFFile, PFSkipped, PrefetchFileResult } from './types.js
 const version = npmPackage.version;
 
 const BATCH_FETCH_SIZE = 8;
-const BATCH_PROCESS_SIZE = 1;
+// const BATCH_PROCESS_SIZE = 1;
 
 const debugStats = false;
 
 const { opFilterAsync } = operators;
 
 export async function runLint(cfg: LintRequest): Promise<RunResult> {
-    await using _api = {
-        async [Symbol.asyncDispose]() {
-            await releaseCSpellAPI();
-        },
-    };
     const reporter = new LintReporter(cfg.reporter, cfg.options);
     const configErrors = new Set<string>();
     const verboseLevel = calcVerboseLevel(cfg.options);
@@ -100,7 +94,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
     await reporter.result(lintResult);
     const elapsed = timer();
     if (getFeatureFlags().getFlag('timer') || verboseLevel >= 1 || cfg.options.showPerfSummary) {
-        console.log(`Elapsed Time: ${elapsed.toFixed(2)}ms`);
+        console.error(`Elapsed Time: ${elapsed.toFixed(2)}ms`);
     }
     return lintResult;
 
@@ -213,27 +207,25 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
                 }
                 return;
             }
-            if (BATCH_PROCESS_SIZE <= 1) {
-                for (const pf of prefetchFiles(files)) {
-                    await pf.result; // force one at a time
-                    yield processPrefetchFileResult(pf, ++i);
-                }
-                return;
+            // if (BATCH_PROCESS_SIZE <= 1) {
+            for (const pf of prefetchFiles(files)) {
+                await pf.result; // force one at a time
+                yield processPrefetchFileResult(pf, ++i);
             }
-            yield* pipe(
-                prefetchIterable(
-                    pipe(
-                        prefetchFiles(files),
-                        opMap(async (pf) => processPrefetchFileResult(pf, ++i)),
-                    ),
-                    BATCH_PROCESS_SIZE,
-                ),
-            );
+            //     return;
+            // }
+            // yield* pipe(
+            //     prefetchIterable(
+            //         pipe(
+            //             prefetchFiles(files),
+            //             opMap(async (pf) => processPrefetchFileResult(pf, ++i)),
+            //         ),
+            //         BATCH_PROCESS_SIZE,
+            //     ),
+            // );
         }
 
-        const toLoadAndProcess = loadAndProcessFiles();
-
-        for await (const fileP of toLoadAndProcess) {
+        for await (const fileP of loadAndProcessFiles()) {
             const { filename, fileNum, result } = fileP;
             status.files += 1;
             status.cachedFiles = (status.cachedFiles || 0) + (result.cached ? 1 : 0);
