@@ -11,9 +11,14 @@ import type {
     TextDocumentOffset,
     ValidationIssue,
 } from 'cspell-lib';
-import { extractDependencies, extractImportErrors, MessageTypes, Text as cspellText } from 'cspell-lib';
+import {
+    extractDependencies,
+    extractImportErrors,
+    MessageTypes,
+    spellCheckDocument,
+    Text as cspellText,
+} from 'cspell-lib';
 
-import { getCSpellAPI } from '../cspell-api/index.js';
 import type { CSpellLintResultCache } from '../util/cache/CSpellLintResultCache.js';
 import type { ConfigInfo } from '../util/configFileHelper.js';
 import { toError } from '../util/errors.js';
@@ -49,8 +54,6 @@ export async function processFile(
     if (prefetch?.fileResult) return prefetch.fileResult;
 
     const { reporter, cfg, configInfo, userSettings } = processFileOptions;
-
-    const { spellCheckDocument } = await getCSpellAPI();
 
     const getElapsedTimeMs = getTimeMeasurer();
     const reportIssueOptions = prefetch?.reportIssueOptions;
