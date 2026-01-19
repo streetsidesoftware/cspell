@@ -227,7 +227,7 @@ To remove a dictionary from the list, add `!` before the name.
 For example, `!typescript` will turn off the dictionary with the name `typescript`.
 
 See the [Dictionaries](https://cspell.org/docs/dictionaries/)
-and [Custom Dictionaries](https://cspell.org/docs/dictionaries-custom/) for more details.
+and [Custom Dictionaries](https://cspell.org/docs/dictionaries/custom-dictionaries/) for more details.
 
 </dd>
 
@@ -5486,7 +5486,7 @@ It is expected to match the name of a dictionary.
 
 Reference to a dictionary by name.
 One of:
--  [DictionaryRef](#dictionaryref) 
+-  [DictionaryRef](#dictionaryref)
 -  [DictionaryNegRef](#dictionarynegref)
 
 </dd>
@@ -6135,7 +6135,7 @@ To remove a dictionary from the list, add `!` before the name.
 For example, `!typescript` will turn off the dictionary with the name `typescript`.
 
 See the [Dictionaries](https://cspell.org/docs/dictionaries/)
-and [Custom Dictionaries](https://cspell.org/docs/dictionaries-custom/) for more details.
+and [Custom Dictionaries](https://cspell.org/docs/dictionaries/custom-dictionaries/) for more details.
 
 </dd>
 
@@ -6858,7 +6858,7 @@ To remove a dictionary from the list, add `!` before the name.
 For example, `!typescript` will turn off the dictionary with the name `typescript`.
 
 See the [Dictionaries](https://cspell.org/docs/dictionaries/)
-and [Custom Dictionaries](https://cspell.org/docs/dictionaries-custom/) for more details.
+and [Custom Dictionaries](https://cspell.org/docs/dictionaries/custom-dictionaries/) for more details.
 
 </dd>
 
@@ -8486,4 +8486,3 @@ Legacy Configuration File Versions.
 </dd>
 
 </dl>
-
