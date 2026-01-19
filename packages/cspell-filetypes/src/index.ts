@@ -7,6 +7,6 @@ export {
     isFileTypeGenerated,
     isGeneratedExt,
     isGeneratedFile,
-    programmingLangDefinitions,
+    fileTypeDefinitions,
 } from './filetypes.js';
 export type { FileTypeId } from './types.js';

@@ -22,7 +22,7 @@ export const generatedFiles: Set<string> = new Set([
 
 export const languageIds: FileTypeId[] = definitions.map(({ id }) => id);
 
-export const programmingLangDefinitions: FileTypeDefinitions = definitions;
+export const fileTypeDefinitions: FileTypeDefinitions = definitions;
 
 const mapExtensionToSetOfLanguageIds: ExtensionToFileTypeIdMapSet = buildLanguageExtensionMapSet(definitions);
 const mapExtensionToLanguageIds: ExtensionToFileTypeIdMap =

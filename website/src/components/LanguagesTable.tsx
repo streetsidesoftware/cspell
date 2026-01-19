@@ -1,15 +1,15 @@
 import React, { useState, useMemo } from 'react';
-import { programmingLangDefinitions } from '@cspell/filetypes';
+import { fileTypeDefinitions } from '@cspell/filetypes';
 import './languages-table.scss';
 
 export const LanguagesTable: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
 
   const filteredLanguages = useMemo(() => {
-    if (!searchTerm) return programmingLangDefinitions;
+    if (!searchTerm) return fileTypeDefinitions;
 
     const term = searchTerm.toLowerCase();
-    return programmingLangDefinitions.filter((lang) => {
+    return fileTypeDefinitions.filter((lang) => {
       const extensions = [...lang.extensions, ...(lang.filenames || [])].join(' ').toLowerCase();
       return (
         lang.id.toLowerCase().includes(term) ||
