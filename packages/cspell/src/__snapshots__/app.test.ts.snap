@@ -35,6 +35,21 @@ error"
 
 exports[`Validate cli > app '--continue-on-error - missing config' Expect Error: [Function CheckFailed] 3`] = `""`;
 
+exports[`Validate cli > app '--continue-on-error - missing dict' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app '--continue-on-error - missing dict' Expect Error: [Function CheckFailed] 2`] = `
+"error	Dictionary Error with (my-dict) Error: ENOENT: no such file or directory, open './fixtures/import/import-errors/missing.txt'
+error
+error	1/1 README.md 0.00ms
+error
+error	-------------------------------------------
+error
+error	CSpell: Files checked: 1, Issues found: 0 in 0 files with 1 error.
+error"
+`;
+
+exports[`Validate cli > app '--continue-on-error - missing dict' Expect Error: [Function CheckFailed] 3`] = `""`;
+
 exports[`Validate cli > app '--continue-on-error - missing import' Expect Error: [Function CheckFailed] 1`] = `[]`;
 
 exports[`Validate cli > app '--continue-on-error - missing import' Expect Error: [Function CheckFailed] 2`] = `
@@ -414,10 +429,6 @@ error
 error	  Name                            | Time (ms)
 error
 error	  prepareTimeMs                   | 0.00
-error
-error	  ___searchForDocumentConfig      | 0.00
-error
-error	  __loadConfig                    | 0.00
 error
 error	  __determineTextDocumentSettings | 0.00
 error
@@ -2214,13 +2225,11 @@ exports[`Validate cli > app 'with forbidden words' Expect Error: [Function Check
 exports[`Validate cli > app 'with forbidden words' Expect Error: [Function CheckFailed] 2`] = `
 "error	1/1 samples/src/sample-with-forbidden-words.md 0.00ms X
 error
-log	samples/src/sample-with-forbidden-words.md:3:3 - Forbidden word (behaviour)
+log	samples/src/sample-with-forbidden-words.md:3:3 - Unknown word (behaviour)
 log
-log	samples/src/sample-with-forbidden-words.md:4:3 - Forbidden word (flavour)
+log	samples/src/sample-with-forbidden-words.md:5:3 - Unknown word (colour)
 log
-log	samples/src/sample-with-forbidden-words.md:5:3 - Forbidden word (colour)
-log
-error	CSpell: Files checked: 1, Issues found: 3 in 1 file.
+error	CSpell: Files checked: 1, Issues found: 2 in 1 file.
 error"
 `;
 

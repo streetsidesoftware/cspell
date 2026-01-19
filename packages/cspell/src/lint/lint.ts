@@ -65,8 +65,8 @@ import type { PFCached, PFFile, PFSkipped, PrefetchFileResult } from './types.js
 
 const version = npmPackage.version;
 
-const BATCH_FETCH_SIZE = 8;
-// const BATCH_PROCESS_SIZE = 1;
+const BATCH_FETCH_SIZE = 48;
+const BATCH_PROCESS_SIZE = 24;
 
 const debugStats = false;
 
@@ -207,22 +207,22 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
                 }
                 return;
             }
-            // if (BATCH_PROCESS_SIZE <= 1) {
-            for (const pf of prefetchFiles(files)) {
-                await pf.result; // force one at a time
-                yield processPrefetchFileResult(pf, ++i);
+            if (BATCH_PROCESS_SIZE <= 1) {
+                for (const pf of prefetchFiles(files)) {
+                    await pf.result; // force one at a time
+                    yield processPrefetchFileResult(pf, ++i);
+                }
+                return;
             }
-            //     return;
-            // }
-            // yield* pipe(
-            //     prefetchIterable(
-            //         pipe(
-            //             prefetchFiles(files),
-            //             opMap(async (pf) => processPrefetchFileResult(pf, ++i)),
-            //         ),
-            //         BATCH_PROCESS_SIZE,
-            //     ),
-            // );
+            yield* pipe(
+                prefetchIterable(
+                    pipe(
+                        prefetchFiles(files),
+                        opMap(async (pf) => processPrefetchFileResult(pf, ++i)),
+                    ),
+                    BATCH_PROCESS_SIZE,
+                ),
+            );
         }
 
         for await (const fileP of loadAndProcessFiles()) {
@@ -342,8 +342,8 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             useColor,
             configErrors,
             // We could use the cli settings here but it is much slower.
-            userSettings: cfg.cspellSettingsFromCliOptions,
-            // userSettings: configInfo.config,
+            // userSettings: cfg.cspellSettingsFromCliOptions,
+            userSettings: configInfo.config,
         };
         return processFileOptionsGeneral;
     }
