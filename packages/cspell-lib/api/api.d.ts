@@ -1773,7 +1773,7 @@ interface BaseSetting extends InlineDictionary, ExperimentalBaseSettings, Unknow
   * For example, `!typescript` will turn off the dictionary with the name `typescript`.
   *
   * See the [Dictionaries](https://cspell.org/docs/dictionaries/)
-  * and [Custom Dictionaries](https://cspell.org/docs/dictionaries-custom/) for more details.
+  * and [Custom Dictionaries](https://cspell.org/docs/dictionaries/custom-dictionaries/) for more details.
   */
   dictionaries?: DictionaryReference[];
   /**
