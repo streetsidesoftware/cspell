@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Admonition from '@theme/Admonition';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import defaultConfigFilenamesAll from './config-filenames.json';
@@ -43,7 +44,7 @@ function toListItem(filename: string, index: number): React.ReactElement {
 }
 
 function toList(list: string[]): React.ReactElement {
-  return <ul style={{ minHeight: '200px', columnCount: list.length > 6 ? 2 : 1 }}>{list.map(toListItem)}</ul>;
+  return <ul style={{ columnCount: list.length > 6 ? 2 : 1 }}>{list.map(toListItem)}</ul>;
 }
 
 export function ConfigFileList(props: ConfigFileListProps): React.ReactElement {
@@ -56,6 +57,15 @@ export function ConfigFileList(props: ConfigFileListProps): React.ReactElement {
           </TabItem>
         ))}
       </Tabs>
+
+      <Admonition type="info" >
+      <code>cspell</code> configuration files can be prefixed with <code>.</code> and or <code>.config</code>,
+      i.e. <code>.cspell.config.yaml</code>, <code>.config/cspell.config.yaml</code> and <code>.config/.cspell.config.yaml</code>.
+      </Admonition>
+
+      <Admonition type="info" >
+      <b><code>package.json</code></b>: Only the <code>cspell</code> fields in <code>package.json</code> is considered.
+      </Admonition>
     </div>
   );
 }

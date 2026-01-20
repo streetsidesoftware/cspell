@@ -4,21 +4,44 @@ sidebar_position: 8
 sidebar_label: Language Settings
 ---
 
+
 # Language Settings
 
 ## LanguageSettings
 
-The Language Settings allow configuration to be based upon the programming language and/or the locale.
-There are two selector fields: `locale` and `languageId`.
+The Language Settings allow configuration to be based upon the programming language and/or the language locale.
+There are two **selector** fields: `locale` and `languageId`.
 
-- `languageId` defines which programming languages to match against.
-  A value of `"python,javascript"` will match against _python_ and _javascript_ files. To match against ALL programming languages,
+:::info Terminology Note
+
+**`language`** enables which spoken languages to use. A value of `"en,fr"` will enable both English and French.
+Specify a locale like `"en-GB"` to be more specific.
+
+:::
+
+:::info Terminology Note
+
+**`languageId`** defines which programming languages to match against.
+  A value of `"python,javascript"` will match against _Python_ and _JavaScript_ files. To match against ALL programming languages,
   use `"*"`.
-- `locale` defines which spoken languages to match against. A value of `"en-GB,nl"` will match against British English or Dutch.
+
+:::
+
+:::info Terminology Note
+
+**`locale`** defines which spoken languages to match against. A value of `"en-GB,nl"` will match against British English or Dutch.
   A value of `"*"` will match all spoken languages.
-- Most configuration values allowed in a `cspell.json` file can be defined or redefined within the `languageSettings`.
+
+:::
+
+:::tip **`languageSettings`**
+
+**`languageSettings`** can be used to set or override most configuration values allowed in a `cspell.json` file.
+
+:::
 
 ```javascript
+    "language": "es-es",
     "languageSettings": [
         {
             // VSCode languageId. i.e. typescript, java, go, cpp, javascript, markdown, latex
@@ -33,8 +56,14 @@ There are two selector fields: `locale` and `languageId`.
             ],
             // List of dictionaries to enable by name in `dictionaryDefinitions`
             "dictionaries": ["cpp"],
-            // Dictionary definitions can also be supplied here. They are only used if "languageId" and "locale" match.
+            // Dictionary definitions can also be supplied here.
+            // They are only used if "languageId" and "locale" match.
             "dictionaryDefinitions": []
+        },
+        {
+            "languageId": "*",
+            "locale": "es",  // Match any Spanish locale
+            "caseSensitive": true // Make spell checking case sensitive for Spanish files.
         }
     ]
 ```

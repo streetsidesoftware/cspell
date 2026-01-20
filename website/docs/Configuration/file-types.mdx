@@ -8,12 +8,15 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 import { FileTypeTable } from '@site/src/components/FileTypeTable';
+import TermLanguageId from '@site/src/components/terminology/language-id.mdx';
 
 # File Types and Extensions
 
 This page provides a reference for how CSpell associates file extensions with file type IDs (also called `languageId` in configuration files for historical reasons).
 
 ## Understanding File Type Ids
+
+<TermLanguageId />
 
 :::info Terminology Note
 In CSpell configuration files, the field is called `languageId` for historical reasons (to match VSCode's convention). However, this refers to **file types** (like `javascript`, `python`, `markdown`), not spoken languages (like English, German or Spanish).
