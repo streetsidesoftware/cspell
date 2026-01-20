@@ -65,7 +65,7 @@ Example:
   {
     // Force `*.hrr` and `*.crr` files to be treated as `cpp` files:
     "filename": "**/{*.hrr,*.crr}",
-    "languageId": "cpp,hpp" // Set the languageId `cpp` and `hpp` overriding the defaults.
+    "languageId": ["cpp", "hpp"] // Set the languageId `cpp` and `hpp` overriding the defaults.
   },
   {
     // Force `*.txt` to use the Dutch dictionary (Dutch dictionary needs to be installed separately):
