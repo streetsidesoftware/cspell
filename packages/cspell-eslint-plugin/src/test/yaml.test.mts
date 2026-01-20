@@ -5,7 +5,7 @@ import { fileURLToPath } from 'node:url';
 import typeScriptParser from '@typescript-eslint/parser';
 import type { Linter } from 'eslint';
 import { RuleTester } from 'eslint';
-import parserYml from 'yaml-eslint-parser';
+import * as parserYml from 'yaml-eslint-parser';
 
 import type { Options as RuleOptions } from '../plugin/index.cjs';
 import Rule from '../plugin/index.cjs';

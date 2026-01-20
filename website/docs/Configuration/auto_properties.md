@@ -1,9 +1,11 @@
 ---
 # AUTO-GENERATED ALL CHANGES WILL BE LOST
-# See `_scripts/extract-properties.js`
+# See `_scripts/extract-properties.mts`
 title: Properties
 slug: properties
 toc_max_heading_level: 5
+sidebar_position: 1
+sidebar_label: Properties
 format: md
 ---
 
@@ -227,7 +229,7 @@ To remove a dictionary from the list, add `!` before the name.
 For example, `!typescript` will turn off the dictionary with the name `typescript`.
 
 See the [Dictionaries](https://cspell.org/docs/dictionaries/)
-and [Custom Dictionaries](https://cspell.org/docs/dictionaries-custom/) for more details.
+and [Custom Dictionaries](https://cspell.org/docs/dictionaries/custom-dictionaries/) for more details.
 
 </dd>
 
@@ -6135,7 +6137,7 @@ To remove a dictionary from the list, add `!` before the name.
 For example, `!typescript` will turn off the dictionary with the name `typescript`.
 
 See the [Dictionaries](https://cspell.org/docs/dictionaries/)
-and [Custom Dictionaries](https://cspell.org/docs/dictionaries-custom/) for more details.
+and [Custom Dictionaries](https://cspell.org/docs/dictionaries/custom-dictionaries/) for more details.
 
 </dd>
 
@@ -6858,7 +6860,7 @@ To remove a dictionary from the list, add `!` before the name.
 For example, `!typescript` will turn off the dictionary with the name `typescript`.
 
 See the [Dictionaries](https://cspell.org/docs/dictionaries/)
-and [Custom Dictionaries](https://cspell.org/docs/dictionaries-custom/) for more details.
+and [Custom Dictionaries](https://cspell.org/docs/dictionaries/custom-dictionaries/) for more details.
 
 </dd>
 

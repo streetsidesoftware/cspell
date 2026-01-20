@@ -1,6 +1,6 @@
 import eslint from '@eslint/js';
 import cspellRecommended from '@cspell/eslint-plugin/recommended';
-import parserYml from 'yaml-eslint-parser';
+import * as parserYml from 'yaml-eslint-parser';
 import pluginYml from 'eslint-plugin-yml';
 
 /**

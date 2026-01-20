@@ -1,13 +1,14 @@
 ---
 title: 'Github Action Settings'
-categories: configuration
-parent: Configuration
-nav_order: 11
+sidebar_position: 20
+sidebar_label: cspell-action
 ---
 
 # Github Action Settings
 
-## Github Job Settings
+Settings for [cspell-action](https://github.com/streetsidesoftware/cspell-action).
+
+## Github Workflow Job Settings
 
 - `files` -- Define glob patterns to filter the files to be checked. Use a new line between patterns to define multiple patterns. The default is to check ALL files that were changed in in the pull_request or push. Note: `ignorePaths` defined in cspell.json still apply.
 - `check_dot_files` -- Check files and directories starting with `.`.
