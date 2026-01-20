@@ -1424,9 +1424,6 @@ importers:
 
   website:
     dependencies:
-      '@cspell/filetypes':
-        specifier: workspace:*
-        version: link:../packages/cspell-filetypes
       '@docusaurus/core':
         specifier: ^3.9.2
         version: 3.9.2(@mdx-js/react@3.1.1(@types/react@19.2.8)(react@19.2.3))(@swc/core@1.7.26)(esbuild@0.27.2)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(typescript@5.9.3)
@@ -1457,10 +1454,10 @@ importers:
       react-dom:
         specifier: ^19.2.3
         version: 19.2.3(react@19.2.3)
-      sass:
-        specifier: ^1.97.2
-        version: 1.97.2
     devDependencies:
+      '@cspell/filetypes':
+        specifier: workspace:*
+        version: link:../packages/cspell-filetypes
       '@docusaurus/module-type-aliases':
         specifier: ^3.9.2
         version: 3.9.2(@swc/core@1.7.26)(esbuild@0.27.2)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -1470,9 +1467,15 @@ importers:
       '@docusaurus/types':
         specifier: ^3.9.2
         version: 3.9.2(@swc/core@1.7.26)(esbuild@0.27.2)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      '@types/react':
+        specifier: ^19.2.8
+        version: 19.2.8
       docusaurus-plugin-typedoc:
         specifier: ^1.4.2
         version: 1.4.2(typedoc-plugin-markdown@4.9.0(typedoc@0.28.15(typescript@5.9.3)))
+      sass:
+        specifier: ^1.97.2
+        version: 1.97.2
       typedoc:
         specifier: 0.28.15
         version: 0.28.15(typescript@5.9.3)
@@ -1494,6 +1497,9 @@ importers:
       '@types/node':
         specifier: ^24.10.9
         version: 24.10.9
+      cspell-lib:
+        specifier: workspace:*
+        version: link:../../packages/cspell-lib
       json-schema:
         specifier: ^0.4.0
         version: 0.4.0

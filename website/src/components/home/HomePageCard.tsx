@@ -15,7 +15,7 @@ export interface HomePageCardProps {
 }
 
 export function HomePageCards(props: HomePageCardProps): React.ReactElement {
-  const cspellSvgStyle: React.CSSProperties = (card: HomePageCard) =>
+  const cspellSvgStyle: CSSPropertiesFunc = (card: HomePageCard) =>
     card.fill
       ? {
           maskImage: `url(${card.icon})`,
@@ -26,11 +26,11 @@ export function HomePageCards(props: HomePageCardProps): React.ReactElement {
           backgroundImage: `url(${card.icon})`,
         };
 
-  const cspellSvgFillStyle: React.CSSProperties = (card: HomePageCard) =>
+  const cspellSvgFillStyle: CSSPropertiesFunc = (card: HomePageCard) =>
     card.fill
-      ? {
+      ? ({
           '--icon-color': card.fill,
-        }
+        } as React.CSSProperties)
       : {};
 
   return (
@@ -53,3 +53,5 @@ export function HomePageCards(props: HomePageCardProps): React.ReactElement {
     </>
   );
 }
+
+type CSSPropertiesFunc = (card: HomePageCard) => React.CSSProperties;
