@@ -27,12 +27,12 @@ jobs:
       - name: Setup Node and Pnpm
         uses: ./.github/actions/setup-node
         with:
-          node-version: 20.x
+          node-version: 'lts/*'
 
       - name: Build website
         run: |
           pnpm i
-          pnpm run build
+          pnpm run build:prod
           cd website
           pnpm run build:site
 
