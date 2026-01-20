@@ -5486,7 +5486,7 @@ It is expected to match the name of a dictionary.
 
 Reference to a dictionary by name.
 One of:
--  [DictionaryRef](#dictionaryref)
+-  [DictionaryRef](#dictionaryref) 
 -  [DictionaryNegRef](#dictionarynegref)
 
 </dd>
@@ -8486,3 +8486,4 @@ Legacy Configuration File Versions.
 </dd>
 
 </dl>
+
