@@ -1,5 +1,5 @@
 /**
- *
+ * Constants for site script usage.
  */
 
 /**
