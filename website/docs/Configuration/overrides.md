@@ -6,10 +6,11 @@ sidebar_label: Overrides
 
 # Overrides
 
-The configuration used for a file is calculated by applying the configuration in two phases.
-The first phase is to gather all the relevant configuration files and merge the settings.
-The second phase is to finalize the configuration based upon the resulting **`overrides`** and **`languageSettings`**
-that match the path name, `languageId`, and `locale`.
+**Overrides** allow you to apply different spell-checking settings to specific files or file patterns. They're useful when different parts of your project need different dictionaries, languages, or spell-checking rules—for example, enabling special dictionaries for test files or disabling spell-checking for generated code.
+
+## How Configuration Works
+
+Configuration is applied in two phases. The first phase gathers all relevant configuration files and merges the settings. The second phase finalizes the configuration by applying **`overrides`** and **`languageSettings`** that match the file's path, `languageId`, and `locale`.
 
 ## Configuration Gathering
 
