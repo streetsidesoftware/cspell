@@ -58,13 +58,17 @@ export function ConfigFileList(props: ConfigFileListProps): React.ReactElement {
         ))}
       </Tabs>
 
-      <Admonition type="info" >
-      <code>cspell</code> configuration files can be prefixed with <code>.</code> and or <code>.config</code>,
-      i.e. <code>.cspell.config.yaml</code>, <code>.config/cspell.config.yaml</code> and <code>.config/.cspell.config.yaml</code>.
+      <Admonition type="info">
+        <code>cspell</code> configuration files can be prefixed with <code>.</code> and or <code>.config</code>, i.e.{' '}
+        <code>.cspell.config.yaml</code>, <code>.config/cspell.config.yaml</code> and{' '}
+        <code>.config/.cspell.config.yaml</code>.
       </Admonition>
 
-      <Admonition type="info" >
-      <b><code>package.json</code></b>: Only the <code>cspell</code> fields in <code>package.json</code> is considered.
+      <Admonition type="info">
+        <b>
+          <code>package.json</code>
+        </b>
+        : Only the <code>cspell</code> fields in <code>package.json</code> is considered.
       </Admonition>
     </div>
   );
