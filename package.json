@@ -90,7 +90,9 @@
     "CI/CD"
   ],
   "pnpm": {
-    "overrides": {},
+    "overrides": {
+      "diff@<8.0.3": ">=8.0.3"
+    },
     "patchedDependencies": {},
     "onlyBuiltDependencies": [
       "@swc/core",
