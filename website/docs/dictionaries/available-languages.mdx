@@ -6,6 +6,9 @@ sidebar_position: 4
 sidebar_label: File Types
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 import { FileTypeTable } from '@site/src/components/FileTypeTable';
 
 # File Types and Extensions
@@ -31,51 +34,58 @@ CSpell uses file extensions and filenames to determine the file type, which then
 
 Force a specific file type for certain file patterns:
 
-```yaml
-overrides:
-  - filename: "**/*.xyz"
-    languageId: javascript  # Treat .xyz files as JavaScript
-```
+<Tabs>
+    <TabItem value="yaml" label="cspell.config.yaml">
+        ```yaml
+        overrides:
+        - filename: "**/*.xyz"
+            languageId: javascript  # Treat .xyz files as JavaScript
+        ```
+    </TabItem>
+    <TabItem value="json" label="cspell.json">
+        ```json
+        {
+            "overrides": [
+                {
+                "filename": "**/*.xyz",
+                "languageId": "javascript"
+                }
+            ]
+        }
+        ```
+    </TabItem>
+</Tabs>
 
-Or in JSON format:
-
-```json
-{
-  "overrides": [
-    {
-      "filename": "**/*.xyz",
-      "languageId": "javascript"
-    }
-  ]
-}
-```
 
 ### Using Language Settings
 
 Apply specific settings based on file type:
 
-```yaml
-languageSettings:
-  - languageId: python,javascript
-    caseSensitive: true
-    dictionaries:
-      - python
-      - node
-```
 
-Or in JSON format:
+<Tabs>
+    <TabItem value="yaml" label="cspell.config.yaml">
+        ```yaml
+        languageSettings:
+        - languageId: python,javascript
+            dictionaries:
+            - html
+            - lorem-ipsum
+        ```
+    </TabItem>
+    <TabItem value="json" label="cspell.json">
+        ```json
+        {
+            "languageSettings": [
+                {
+                "languageId": "python,javascript",
+                "dictionaries": ["html", "lorem-ipsum"]
+                }
+            ]
+        }
+        ```
+    </TabItem>
+</Tabs>
 
-```json
-{
-  "languageSettings": [
-    {
-      "languageId": "python,javascript",
-      "caseSensitive": true,
-      "dictionaries": ["python", "node"]
-    }
-  ]
-}
-```
 
 ## Related Documentation
 
