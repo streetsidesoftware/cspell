@@ -4,6 +4,8 @@
 title: Properties
 slug: properties
 toc_max_heading_level: 5
+sidebar_position: 1
+sidebar_label: Properties
 format: md
 ---
 

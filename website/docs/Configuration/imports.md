@@ -1,12 +1,8 @@
 ---
-layout: default
 title: Importing / Extending Configuration
-categories: configuration
-parent: Configuration
-nav_order: 11
+sidebar_position: 3
+sidebar_label: Importing Configuration
 ---
-
-<!--- Remove nav_exclude and published when the page is ready  --->
 
 # Importing Configuration
 

@@ -1,9 +1,7 @@
 ---
-layout: default
 title: Overrides
-categories: configuration
-parent: Configuration
-nav_order: 11
+sidebar_position: 8
+sidebar_label: Overrides
 ---
 
 <!--- Remove published when the page is ready  --->

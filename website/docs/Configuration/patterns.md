@@ -1,12 +1,8 @@
 ---
-layout: default
 title: Exclude / Include Patterns
-categories: configuration
-parent: Configuration
-nav_order: 11
+sidebar_position: 9
+sidebar_label: Exclude / Include
 ---
-
-<!--- Remove published when the page is ready  --->
 
 # Exclude / Include Patterns
 

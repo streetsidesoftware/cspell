@@ -1,8 +1,7 @@
 ---
 title: 'Document Settings'
-categories: configuration
-parent: Configuration
-nav_order: 11
+sidebar_position: 1
+sidebar_label: Document Settings
 ---
 
 # Inline Document Settings

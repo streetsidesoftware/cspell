@@ -9,7 +9,7 @@
     "cspell": "bin.mjs",
     "cspell-tools": "cspell-tools.mjs"
   },
-  "packageManager": "pnpm@10.27.0+sha512.72d699da16b1179c14ba9e64dc71c9a40988cbdc65c264cb0e489db7de917f20dcf4d64d8723625f2969ba52d4b7e2a1170682d9ac2a5dcaeaab732b7e16f04a",
+  "packageManager": "pnpm@10.28.1",
   "private": true,
   "scripts": {
     "bp": "pnpm build:prod",
@@ -61,7 +61,7 @@
     "test:bin-spell-cache-metadata": "node ./bin.mjs -c cspell.test.json --cache --cache-strategy metadata --cache-location temp/.cspellcache-meta",
     "test:bin-trace": "node ./bin.mjs trace test",
     "test:prep": "cspell-tools btrie node_modules/@cspell/dict-en_us/en_US.trie.gz",
-    "test-build-docs": "cd website && pnpm run build:site",
+    "test-build-docs": "pnpm run build:prod && cd website && pnpm run build:site",
     "test-integrations": "cd ./integration-tests && pnpm run integration-tests",
     "test-schema": "node ./test-packages/cspell-types/validate-schema/validate-schema.mjs",
     "test:deno": "deno run -A ./bin.mjs lint rfc packages/cspell/src",
