@@ -80,4 +80,10 @@ export default defineConfig(
             'n/no-missing-import': 'off',
         },
     },
+    {
+        files: ['_scripts/**'],
+        rules: {
+            'n/no-unsupported-features/node-builtins': 'off',
+        },
+    },
 );
