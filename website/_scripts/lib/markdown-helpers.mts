@@ -5,8 +5,18 @@
  * @returns The generated markdown code block.
  */
 export function codeBlock(code: string, language = 'text'): string {
-    const foundNestedBackticks = new Set([...code.matchAll(/`+/g)].map((m) => m[0].length));
-    const minLength = Math.max(2, ...[...foundNestedBackticks]) + 1;
+    const foundNestedBackticks = [...matchAllUnique(code, /`+/g)].map((bt) => bt.length);
+    const minLength = Math.max(2, ...foundNestedBackticks) + 1;
     const fence = '`'.repeat(minLength);
     return `${fence}${language}\n${code.replace(/\r?\n$/, '')}\n${fence}`;
+}
+
+function* matchAllText(str: string, re: RegExp): Iterable<string> {
+    for (const match of str.matchAll(re)) {
+        yield match[0];
+    }
+}
+
+function matchAllUnique(str: string, re: RegExp): Set<string> {
+    return new Set(matchAllText(str, re));
 }
