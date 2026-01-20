@@ -4,31 +4,15 @@ description: 'Customizing CSpell'
 has_children: true
 ---
 
+import { ConfigFileList } from '@site/src/components/ConfigFileList';
+
 # Configuration
 
 _CSpell_'s behavior can be controlled through a config file.
 
 By default it looks for any of the following files:
 
-- `.cspell.json`
-- `cspell.json`
-- `.cSpell.json`
-- `cSpell.json`
-- `cspell.config.js`
-- `cspell.config.mjs`
-- `cspell.config.cjs`
-- `cspell.config.ts`
-- `cspell.config.mts`
-- `cspell.config.cts`
-- `cspell.config.json`
-- `cspell.config.yaml`
-- `cspell.config.yml`
-- `cspell.config.toml`
-- `cspell.yaml`
-- `cspell.yml`
-- [`package.json`](#packagejson)
-
-Note: `cspell` can be prefixed with `.` and/or `.config/`, i.e. `.cspell.config.yaml`, `.config/cspell.config.yaml` and `.config/.cspell.config.yaml`.
+<ConfigFileList />
 
 Or you can specify a path to a config file with the `--config <path>` argument on the command line.
 
@@ -36,7 +20,7 @@ Or you can specify a path to a config file with the `--config <path>` argument o
 
 #### Example `cspell.json` file
 
-<!--- cspell:ignore hte -->
+ {/* cspell:ignore hte */ }
 
 ```javascript
 // cSpell Settings
@@ -154,6 +138,4 @@ for the configuration in the `cspell` field of the `.json` file.
 }
 ```
 
-<!---
-cspell:ignore packagejson
---->
+{ /* cspell:ignore packagejson */ }
