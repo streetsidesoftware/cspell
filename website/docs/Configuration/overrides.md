@@ -46,7 +46,7 @@ Most Array like settings are joined as a union. In most cases order is preserved
 
 ## Override Configuration Field: `overrides`
 
-The `overrides` configuration is a useful way to for force configuration on a per file basis.
+The `overrides` configuration is a useful way to force configuration on a per file basis.
 The `filename` field is used to set the glob selection criteria.
 When the path of the file being checked matches the glob/globs specified in `filename`, the override settings will be applied.
 
