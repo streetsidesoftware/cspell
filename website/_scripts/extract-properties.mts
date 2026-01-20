@@ -23,15 +23,15 @@ export async function run(): Promise<void> {
         ---
         # AUTO-GENERATED ALL CHANGES WILL BE LOST
         # See \`${relativeToSite(import.meta.url)}\`
-        title: Properties
+        title: Configuration Fields
         slug: properties
         toc_max_heading_level: 5
-        sidebar_position: 1
-        sidebar_label: Properties
+        sidebar_position: 20
+        sidebar_label: Configuration Fields
         format: md
         ---
 
-        # CSpell Configuration
+        # CSpell Configuration Fields
     `;
 
     const sections = [header, '', schemaEntry(schema, 'Settings'), '', formatDefinitions(schema)];

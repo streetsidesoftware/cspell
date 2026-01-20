@@ -1,6 +1,6 @@
 ---
 title: 'Document Settings'
-sidebar_position: 1
+sidebar_position: 4
 sidebar_label: Document Settings
 ---
 

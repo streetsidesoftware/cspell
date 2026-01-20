@@ -8,50 +8,14 @@ sidebar_label: Overrides
 
 **Overrides** allow you to apply different spell-checking settings to specific files or file patterns. They're useful when different parts of your project need different dictionaries, languages, or spell-checking rules—for example, enabling special dictionaries for test files or disabling spell-checking for generated code.
 
-## How Configuration Works
+## Using Overrides
 
-Configuration is applied in two phases. The first phase gathers all relevant configuration files and merges the settings. The second phase finalizes the configuration by applying **`overrides`** and **`languageSettings`** that match the file's path, `languageId`, and `locale`.
+Overrides are defined in the `overrides` field of your configuration file. Each override contains:
 
-## Configuration Gathering
+- **`filename`** - A glob pattern (or array of patterns) that matches files
+- **Settings** - Any configuration settings you want to apply to matching files
 
-The spell checker gathers all the relevant configuration files and merges the settings from each file.
-
-**Settings Gathering Order**
-
-1. Default Configuration - the settings included in `cspell`.
-1. Command line settings - the settings given on the command line.
-1. Imports found in the configuration file. - any imports found in the configuration file loaded.
-1. Configuration file - the settings found in the configuration file.
-
-### Merge Rules
-
-Most individual settings will overwrite the settings from the previous step / file. There are a few important exceptions.
-
-#### Array Settings are Unions
-
-Most Array like settings are joined as a union. In most cases order is preserved.
-
-**Examples:**
-
-- Word lists like: `words`, `flagWords`, `ignoreWords` are the union of all the settings. The order is not preserved.
-- `overrides` and `languageSettings` are accumulated in the order they were loaded to be applied later.
-- `patterns`, `includeRegExpList`, and `ignoreRegExpList` are collected in order so that patterns of the same name can be replaced.
-- `dictionaryDefinitions` and `dictionaries` are collected in order so that dictionaries can be replaced by other dictionaries with the same name.
-
-## Configuration Finalization
-
-**Order**
-
-1. **`overrides`** - the settings from the matching `filename` globs are applied.
-1. **`languageSettings`** - the settings from the matching `languageId` or `locale` are applied.
-
-## Override Configuration Field: `overrides`
-
-The `overrides` configuration is a useful way to force configuration on a per file basis.
-The `filename` field is used to set the glob selection criteria.
-When the path of the file being checked matches the glob/globs specified in `filename`, the override settings will be applied.
-
-### Example Overrides
+When a file matches an override's `filename` pattern, the override settings are applied for that file.
 
 :::tip
 
@@ -59,7 +23,11 @@ When the path of the file being checked matches the glob/globs specified in `fil
 
 :::
 
-Example:
+## Common Use Cases
+
+Here are practical examples of using overrides:
+
+**Example:**
 
 ```javascript
 "overrides": [
@@ -84,3 +52,27 @@ Example:
   }
 ]
 ```
+
+## How Overrides are Applied
+
+Overrides are applied during the configuration finalization phase, after all configuration files have been gathered and merged.
+
+**Application Order:**
+
+1. **Base Configuration** - Settings from all configuration files are merged (default config, command line, imported configs, and your config file)
+2. **Overrides** - Settings from matching `overrides` are applied based on the file's path
+3. **Language Settings** - Settings from matching `languageSettings` are applied based on `languageId` or `locale`
+
+### Multiple Matching Overrides
+
+When multiple overrides match a file, they are applied in the order they appear in the configuration. Later overrides can modify or extend settings from earlier ones.
+
+:::info Configuration Merging
+
+Most settings are merged intelligently:
+
+- **Simple values** (strings, numbers, booleans) are replaced
+- **Arrays** like `words`, `dictionaries`, and `ignoreWords` are combined as unions
+- **Overrides** and **languageSettings** accumulate in order for later application
+
+:::

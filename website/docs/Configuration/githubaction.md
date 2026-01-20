@@ -1,6 +1,6 @@
 ---
 title: 'Github Action Settings'
-sidebar_position: 20
+sidebar_position: 19
 sidebar_label: cspell-action
 ---
 

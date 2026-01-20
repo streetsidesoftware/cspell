@@ -1,15 +1,15 @@
 ---
 # AUTO-GENERATED ALL CHANGES WILL BE LOST
 # See `_scripts/extract-properties.mts`
-title: Properties
+title: Configuration Fields
 slug: properties
 toc_max_heading_level: 5
-sidebar_position: 1
-sidebar_label: Properties
+sidebar_position: 20
+sidebar_label: Configuration Fields
 format: md
 ---
 
-# CSpell Configuration
+# CSpell Configuration Fields
 
 
 ## Settings

@@ -1,0 +1,66 @@
+---
+title: Configuration
+sidebar_position: 1
+sidebar_label: Using Configuration
+---
+
+import { ConfigFileList } from '@site/src/components/ConfigFileList';
+
+# Using CSpell Configuration
+
+_CSpell_'s behavior can be controlled through a config file.
+
+By default it looks for any of the following files:
+
+<ConfigFileList />
+
+Or you can specify a path to a config file with the `--config <path>` argument on the command line.
+
+## How Configuration Works
+
+Configuration is applied in two phases. The first phase gathers all relevant configuration files and merges the settings. The second phase finalizes the configuration by applying **`overrides`** and **`languageSettings`** that match the file's path, `languageId`, and `locale`.
+
+## Configuration Gathering
+
+The spell checker gathers all the relevant configuration files and merges the settings from each file.
+
+**Settings Gathering Order**
+
+1. Default Configuration - the settings included in `cspell`.
+1. Command line settings - the settings given on the command line.
+1. Imports found in the configuration file. - any imports found in the configuration file loaded.
+1. Configuration file - the settings found in the configuration file.
+
+### Merge Rules
+
+Most individual settings will overwrite the settings from the previous step / file. There are a few important exceptions.
+
+#### Array Settings are Unions
+
+Most Array like settings are joined as a union. In most cases order is preserved.
+
+**Examples:**
+
+- Word lists like: `words`, `flagWords`, `ignoreWords` are the union of all the settings. The order is not preserved.
+- `overrides` and `languageSettings` are accumulated in the order they were loaded to be applied later.
+- `patterns`, `includeRegExpList`, and `ignoreRegExpList` are collected in order so that patterns of the same name can be replaced.
+- `dictionaryDefinitions` and `dictionaries` are collected in order so that dictionaries can be replaced by other dictionaries with the same name.
+
+## Configuration Finalization
+
+**Order**
+
+1. **`overrides`** - the settings from the matching `filename` globs are applied.
+1. **`languageSettings`** - the settings from the matching `languageId` or `locale` are applied.
+
+## Override Configuration Field: `overrides`
+
+See: [Overrides](./overrides.md)
+
+The `overrides` configuration is a useful way to force configuration on a per file basis.
+The `filename` field is used to set the glob selection criteria.
+When the path of the file being checked matches the glob/globs specified in `filename`, the override settings will be applied.
+
+## Language Specific Configuration Field: `languageSettings`
+
+See: [Language Settings](./language-settings)
