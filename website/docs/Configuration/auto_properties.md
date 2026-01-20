@@ -1,6 +1,6 @@
 ---
 # AUTO-GENERATED ALL CHANGES WILL BE LOST
-# See `_scripts/extract-properties.js`
+# See `_scripts/extract-properties.mts`
 title: Properties
 slug: properties
 toc_max_heading_level: 5
@@ -5488,7 +5488,7 @@ It is expected to match the name of a dictionary.
 
 Reference to a dictionary by name.
 One of:
--  [DictionaryRef](#dictionaryref)
+-  [DictionaryRef](#dictionaryref) 
 -  [DictionaryNegRef](#dictionarynegref)
 
 </dd>
@@ -8488,3 +8488,4 @@ Legacy Configuration File Versions.
 </dd>
 
 </dl>
+
