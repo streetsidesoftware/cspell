@@ -159,7 +159,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         const cache = await createCache(cacheSettings);
         const failFast = cfg.options.failFast ?? configInfo.config.failFast ?? false;
 
-        function* prefetchFiles(files: FileToProcess[]) {
+        function* prefetchFiles(files: FileToProcess[]): Iterable<PrefetchFileResult> {
             const iter = prefetchIterable(
                 pipe(
                     files,
@@ -167,12 +167,12 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
                 ),
                 BATCH_FETCH_SIZE,
             );
-            for (const v of iter) {
-                yield v;
-            }
+            yield* iter;
         }
 
-        async function* prefetchFilesAsync(files: FileToProcess[] | AsyncIterable<FileToProcess>) {
+        async function* prefetchFilesAsync(
+            files: FileToProcess[] | AsyncIterable<FileToProcess>,
+        ): AsyncIterable<PrefetchFileResult> {
             for await (const file of files) {
                 yield prefetch(file, configInfo, cache);
             }
@@ -210,7 +210,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             return { filename, sequence, sequenceSize, result };
         }
 
-        async function* loadAndProcessFiles() {
+        async function* loadAndProcessFiles(): AsyncIterable<ProcessPrefetchFileResult> {
             if (isAsyncIterable(files)) {
                 for await (const pf of prefetchFilesAsync(files)) {
                     yield processPrefetchFileResult(pf);
@@ -323,7 +323,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         }
     }
 
-    function header(files: string[], cliExcludes: string[]) {
+    function header(files: string[], cliExcludes: string[]): void {
         if (verboseLevel < 2) return;
         const formattedFiles = files.length > 100 ? [...files.slice(0, 100), '...'] : files;
 
@@ -373,7 +373,7 @@ interface AppGlobInfo {
     normalizedExcludes: string[];
 }
 
-function checkGlobs(globs: string[], reporter: FinalizedReporter) {
+function checkGlobs(globs: string[], reporter: FinalizedReporter): void {
     globs
         .filter((g) => g.startsWith("'") || g.endsWith("'"))
         .map((glob) => chalk.yellow(glob))
@@ -473,7 +473,7 @@ async function determineFilesToCheck(
         return files;
     }
 
-    function isExcluded(filename: string, globMatcherExclude: GlobMatcher) {
+    function isExcluded(filename: string, globMatcherExclude: GlobMatcher): boolean {
         if (cspellIsBinaryFile(toFileURL(filename))) {
             return true;
         }
@@ -510,7 +510,12 @@ async function determineFilesToCheck(
     return _determineFilesToCheck();
 }
 
-function extractGlobSource(g: GlobPatternWithRoot | GlobPatternNormalized) {
+interface GlobAndSource {
+    glob: string;
+    source: string | undefined;
+}
+
+function extractGlobSource(g: GlobPatternWithRoot | GlobPatternNormalized): GlobAndSource {
     const { glob, rawGlob, source } = <GlobPatternNormalized>g;
     return {
         glob: rawGlob || glob,
@@ -523,7 +528,7 @@ function runResult(init: Partial<RunResult> = {}): RunResult {
     return { files, filesWithIssues, issues, errors, cachedFiles };
 }
 
-function yesNo(value: boolean) {
+function yesNo(value: boolean): 'Yes' | 'No' {
     return value ? 'Yes' : 'No';
 }
 
@@ -551,7 +556,7 @@ function getLoggerFromReporter(reporter: Pick<FinalizedReporter, 'info' | 'error
     };
 }
 
-async function generateGitIgnore(roots: string | string[] | undefined) {
+async function generateGitIgnore(roots: string | string[] | undefined): Promise<GitIgnore> {
     const root = (typeof roots === 'string' ? [roots].filter((r) => !!r) : roots) || [];
     if (!root?.length) {
         const cwd = process.cwd();
@@ -569,7 +574,11 @@ async function useFileLists(
     return pipeAsync(files, opFilter(filterFiles), opFilterAsync(isNotDir));
 }
 
-function createIncludeFileFilterFn(includeGlobPatterns: Glob[] | undefined, root: string, dot: boolean | undefined) {
+function createIncludeFileFilterFn(
+    includeGlobPatterns: Glob[] | undefined,
+    root: string,
+    dot: boolean | undefined,
+): (file: string) => boolean {
     if (!includeGlobPatterns?.length) {
         return () => true;
     }
@@ -592,7 +601,7 @@ async function* concatAsyncIterables<T>(
     }
 }
 
-async function writeDictionaryLog() {
+async function writeDictionaryLog(): Promise<void> {
     const fieldsCsv = getEnvironmentVariable('CSPELL_ENABLE_DICTIONARY_LOG_FIELDS') || 'time, word, value';
     const fields = fieldsCsv.split(',').map((f) => f.trim());
     const header = fields.join(', ') + '\n';
@@ -605,7 +614,7 @@ async function writeDictionaryLog() {
     await writeFileOrStream(filename, data);
 }
 
-function globPattern(g: Glob) {
+function globPattern(g: Glob): string {
     return typeof g === 'string' ? g : g.glob;
 }
 
