@@ -2,7 +2,7 @@ import * as path from 'node:path';
 import { formatWithOptions } from 'node:util';
 
 import { isAsyncIterable, operators, opFilter, pipeAsync } from '@cspell/cspell-pipe';
-import { opMap, pipe } from '@cspell/cspell-pipe/sync';
+import { pipe } from '@cspell/cspell-pipe/sync';
 import type { Glob, RunResult } from '@cspell/cspell-types';
 import { MessageTypes } from '@cspell/cspell-types';
 import { toFileURL } from '@cspell/url';
@@ -17,7 +17,6 @@ import {
     isBinaryFile as cspellIsBinaryFile,
     mergeSettings,
     setLogger,
-    shouldCheckDocument,
 } from 'cspell-lib';
 
 import { console } from '../console.js';
@@ -25,22 +24,10 @@ import { getEnvironmentVariable, setEnvironmentVariable, truthy } from '../envir
 import { getFeatureFlags } from '../featureFlags/index.js';
 import type { CSpellReporterConfiguration } from '../models.js';
 import { npmPackage } from '../pkgInfo.js';
-import type { CreateCacheSettings, CSpellLintResultCache } from '../util/cache/index.js';
-import { calcCacheSettings, createCache } from '../util/cache/index.js';
+import { calcCacheSettings } from '../util/cache/index.js';
 import { type ConfigInfo, readConfig } from '../util/configFileHelper.js';
-import { ApplicationError, CheckFailed, toApplicationError } from '../util/errors.js';
-import {
-    filenameToUri,
-    findFiles,
-    getFileSize,
-    isBinaryFile,
-    isFile,
-    isNotDir,
-    readFileInfo,
-    readFileListFiles,
-    relativeToCwd,
-    resolveFilename,
-} from '../util/fileHelper.js';
+import { CheckFailed, toApplicationError } from '../util/errors.js';
+import { findFiles, isFile, isNotDir, readFileListFiles, relativeToCwd, resolveFilename } from '../util/fileHelper.js';
 import type { GlobOptions } from '../util/glob.js';
 import {
     buildGlobMatcher,
@@ -49,38 +36,29 @@ import {
     normalizeFileOrGlobsToRoot,
     normalizeGlobsToRoot,
 } from '../util/glob.js';
-import type { LintFileResult } from '../util/LintFileResult.js';
-import { prefetchIterable } from '../util/prefetch.js';
-import type { FinalizedReporter } from '../util/reporters.js';
-import { extractReporterIssueOptions, LintReporter } from '../util/reporters.js';
+import type { FinalizedReporter, LintFileReporter } from '../util/reporters.js';
+import { LintReporter } from '../util/reporters.js';
 import { getTimeMeasurer } from '../util/timer.js';
 import { unindent } from '../util/unindent.js';
-import { sizeToNumber } from '../util/unitNumbers.js';
 import * as util from '../util/util.js';
 import { wordWrapAnsiText } from '../util/wrap.js';
 import { writeFileOrStream } from '../util/writeFile.js';
 import type { LintRequest } from './LintRequest.js';
-import { countConfigErrors, processFile, type ProcessFileOptions } from './processFile.js';
-import type {
-    FileToProcess,
-    PFCached,
-    PFFile,
-    PFSkipped,
-    PrefetchFileResult,
-    ProcessPrefetchFileResult,
-} from './types.js';
+import type { ProcessFileOptions } from './processFile.js';
+import { countConfigErrors } from './processFile.js';
+import type { ProcessFilesOptions } from './processFiles.js';
+import { processFiles, runResult } from './processFiles.js';
+import type { FileToProcess } from './types.js';
 
 const version = npmPackage.version;
-
-const BATCH_FETCH_SIZE = 12;
-const BATCH_PROCESS_SIZE = 1;
 
 const debugStats = false;
 
 const { opFilterAsync } = operators;
 
 export async function runLint(cfg: LintRequest): Promise<RunResult> {
-    const reporter = new LintReporter(cfg.reporter, cfg.options);
+    const lintReporter = new LintReporter(cfg.reporter, cfg.options);
+    const reporter: LintFileReporter = lintReporter;
     const configErrors = new Set<string>();
     const verboseLevel = calcVerboseLevel(cfg.options);
     const useColor = cfg.options.color ?? true;
@@ -98,164 +76,12 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         await writeDictionaryLog();
     }
 
-    await reporter.result(lintResult);
+    await lintReporter.result(lintResult);
     const elapsed = timer();
     if (getFeatureFlags().getFlag('timer') || verboseLevel >= 1 || cfg.options.showPerfSummary) {
         console.error(`Elapsed Time: ${elapsed.toFixed(2)}ms`);
     }
     return lintResult;
-
-    function prefetch(
-        fileToProcess: FileToProcess,
-        configInfo: ConfigInfo,
-        cache: CSpellLintResultCache,
-    ): PrefetchFileResult {
-        const { filename } = fileToProcess;
-        if (isBinaryFile(filename, cfg.root)) {
-            return {
-                ...fileToProcess,
-                result: Promise.resolve({ skip: true, skipReason: 'Binary file.' }),
-            };
-        }
-        const reportIssueOptions = extractReporterIssueOptions(configInfo.config);
-
-        async function fetch(): Promise<PFCached | PFFile | PFSkipped> {
-            const getElapsedTimeMs = getTimeMeasurer();
-            const cachedResult = await cache.getCachedLintResults(filename);
-            if (cachedResult) {
-                reporter.debug(`Filename: ${filename}, using cache`);
-                const fileResult = { ...cachedResult, elapsedTimeMs: getElapsedTimeMs() };
-                return { fileResult };
-            }
-            const uri = filenameToUri(filename, cfg.root).href;
-            const checkResult = await shouldCheckDocument({ uri }, {}, configInfo.config);
-            if (!checkResult.shouldCheck) {
-                return { skip: true, skipReason: checkResult.reason || 'Ignored by configuration.' } as const;
-            }
-            const maxFileSize = processMaxFileSize(cfg.maxFileSize ?? checkResult.settings.maxFileSize);
-            if (maxFileSize) {
-                const size = await getFileSize(filename);
-                if (size > maxFileSize) {
-                    return {
-                        skip: true,
-                        skipReason: `File exceeded max file size of ${maxFileSize.toLocaleString()}`,
-                    } as const;
-                }
-            }
-            const fileInfo = await readFileInfo(filename, undefined, true);
-            return { fileInfo, reportIssueOptions };
-        }
-
-        const result: Promise<PFCached | PFFile | PFSkipped | Error> = fetch().catch((e) => toApplicationError(e));
-        return { ...fileToProcess, result };
-    }
-
-    async function processFiles(
-        files: FileToProcess[] | AsyncIterable<FileToProcess>,
-        configInfo: ConfigInfo,
-        cacheSettings: CreateCacheSettings,
-    ): Promise<RunResult> {
-        const status: RunResult = runResult();
-        const cache = await createCache(cacheSettings);
-        const failFast = cfg.options.failFast ?? configInfo.config.failFast ?? false;
-
-        function* prefetchFiles(files: FileToProcess[]): Iterable<PrefetchFileResult> {
-            const iter = prefetchIterable(
-                pipe(
-                    files,
-                    opMap((file) => prefetch(file, configInfo, cache)),
-                ),
-                BATCH_FETCH_SIZE,
-            );
-            yield* iter;
-        }
-
-        async function* prefetchFilesAsync(
-            files: FileToProcess[] | AsyncIterable<FileToProcess>,
-        ): AsyncIterable<PrefetchFileResult> {
-            for await (const file of files) {
-                yield prefetch(file, configInfo, cache);
-            }
-        }
-
-        const emptyResult: LintFileResult = {
-            fileInfo: { filename: '' },
-            issues: [],
-            processed: false,
-            errors: 0,
-            configErrors: 0,
-            elapsedTimeMs: 1,
-            reportIssueOptions: undefined,
-        };
-
-        async function processPrefetchFileResult(pf: PrefetchFileResult): Promise<ProcessPrefetchFileResult> {
-            const { filename, sequence, sequenceSize, result: pFetchResult } = pf;
-            const getElapsedTimeMs = getTimeMeasurer();
-            const fetchResult = await pFetchResult;
-            if (fetchResult instanceof Error) {
-                throw fetchResult;
-            }
-            const fileNum = sequence + 1;
-            reporter.emitProgressBegin(filename, fileNum, pf.sequenceSize ?? sequence);
-            if (fetchResult?.skip) {
-                const result: LintFileResult = {
-                    ...emptyResult,
-                    fileInfo: { filename },
-                    elapsedTimeMs: getElapsedTimeMs(),
-                    skippedReason: fetchResult.skipReason,
-                };
-                return { filename, sequence, sequenceSize, result };
-            }
-            const result = await processFile(filename, cache, fetchResult, getProcessFileOptions(configInfo));
-            return { filename, sequence, sequenceSize, result };
-        }
-
-        async function* loadAndProcessFiles(): AsyncIterable<ProcessPrefetchFileResult> {
-            if (isAsyncIterable(files)) {
-                for await (const pf of prefetchFilesAsync(files)) {
-                    yield processPrefetchFileResult(pf);
-                }
-                return;
-            }
-            if (BATCH_PROCESS_SIZE <= 1) {
-                for (const pf of prefetchFiles(files)) {
-                    await pf.result; // force one at a time
-                    yield processPrefetchFileResult(pf);
-                }
-                return;
-            }
-            yield* pipe(
-                prefetchIterable(
-                    pipe(
-                        prefetchFiles(files),
-                        opMap(async (pf) => processPrefetchFileResult(pf)),
-                    ),
-                    BATCH_PROCESS_SIZE,
-                ),
-            );
-        }
-
-        for await (const fileP of loadAndProcessFiles()) {
-            const { filename, sequence, sequenceSize, result } = fileP;
-            status.files += 1;
-            status.cachedFiles = (status.cachedFiles || 0) + (result.cached ? 1 : 0);
-            status.skippedFiles = (status.skippedFiles || 0) + (result.processed ? 0 : 1);
-            const fileNum = sequence + 1;
-            const numIssues = reporter.emitProgressComplete(filename, fileNum, sequenceSize ?? fileNum, result);
-            if (numIssues || result.errors) {
-                status.filesWithIssues.add(relativeToCwd(filename, cfg.root));
-                status.issues += numIssues;
-                status.errors += result.errors;
-                if (failFast) {
-                    return status;
-                }
-            }
-            status.errors += result.configErrors;
-        }
-
-        await cache.reconcile();
-        return status;
-    }
 
     async function run(): Promise<RunResult> {
         if (cfg.options.root) {
@@ -279,9 +105,9 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         });
 
         const reporters = cfg.options.reporter ?? configInfo.config.reporters;
-        reporter.config = reporterConfig;
-        await reporter.loadReportersAndFinalize(reporters);
-        setLogger(getLoggerFromReporter(reporter, useColor));
+        lintReporter.config = reporterConfig;
+        await lintReporter.loadReportersAndFinalize(reporters);
+        setLogger(getLoggerFromReporter(lintReporter, useColor));
 
         const globInfo = await determineGlobs(configInfo, cfg);
         const { fileGlobs, excludeGlobs } = globInfo;
@@ -292,15 +118,15 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         }
         header(fileGlobs, excludeGlobs);
 
-        checkGlobs(fileGlobs, reporter);
+        checkGlobs(fileGlobs, lintReporter);
 
         if (verboseLevel > 1) {
-            reporter.info(`Config Files Found:\n    ${relativeToCwd(configInfo.source)}\n`, MessageTypes.Info);
+            lintReporter.info(`Config Files Found:\n    ${relativeToCwd(configInfo.source)}\n`, MessageTypes.Info);
         }
 
-        const configErrors = countConfigErrors(configInfo, processFileOptions);
-        if (configErrors && cfg.options.exitCode !== false && !cfg.options.continueOnError) {
-            return runResult({ errors: configErrors });
+        const configErrorCount = countConfigErrors(configInfo, processFileOptions);
+        if (configErrorCount && cfg.options.exitCode !== false && !cfg.options.continueOnError) {
+            return runResult({ errors: configErrorCount });
         }
 
         // Get Exclusions from the config files.
@@ -308,17 +134,29 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
 
         try {
             const cacheSettings = await calcCacheSettings(configInfo.config, { ...cfg.options, version }, root);
-            const files = await determineFilesToCheck(configInfo, cfg, reporter, globInfo);
+            const files = await determineFilesToCheck(configInfo, cfg, lintReporter, globInfo);
 
-            const result = await processFiles(files, configInfo, cacheSettings);
-            if (configErrors && cfg.options.exitCode !== false) {
-                result.errors ||= configErrors;
+            const processFileOptions: ProcessFilesOptions = {
+                chalk,
+                configInfo,
+                cfg,
+                verboseLevel,
+                useColor,
+                configErrors,
+                userSettings: configInfo.config,
+                lintReporter,
+                cacheSettings,
+            };
+
+            const result = await processFiles(files, processFileOptions);
+            if (configErrorCount && cfg.options.exitCode !== false) {
+                result.errors ||= configErrorCount;
             }
             debugStats && console.error('stats: %o', getDefaultConfigLoader().getStats());
             return result;
         } catch (e) {
             const err = toApplicationError(e);
-            reporter.error('Linter', err);
+            lintReporter.error('Linter', err);
             return runResult({ errors: 1 });
         }
     }
@@ -327,7 +165,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         if (verboseLevel < 2) return;
         const formattedFiles = files.length > 100 ? [...files.slice(0, 100), '...'] : files;
 
-        reporter.info(
+        lintReporter.info(
             unindent`
                 cspell;
                 Date: ${new Date().toUTCString()}
@@ -352,8 +190,6 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             verboseLevel,
             useColor,
             configErrors,
-            // We could use the cli settings here but it is much slower.
-            // userSettings: cfg.cspellSettingsFromCliOptions,
             userSettings: configInfo.config,
         };
         return processFileOptionsGeneral;
@@ -523,11 +359,6 @@ function extractGlobSource(g: GlobPatternWithRoot | GlobPatternNormalized): Glob
     };
 }
 
-function runResult(init: Partial<RunResult> = {}): RunResult {
-    const { files = 0, filesWithIssues = new Set<string>(), issues = 0, errors = 0, cachedFiles = 0 } = init;
-    return { files, filesWithIssues, issues, errors, cachedFiles };
-}
-
 function yesNo(value: boolean): 'Yes' | 'No' {
     return value ? 'Yes' : 'No';
 }
@@ -620,14 +451,4 @@ function globPattern(g: Glob): string {
 
 function calcVerboseLevel(options: LintRequest['options']): number {
     return options.verboseLevel ?? (options.verbose ? 1 : 0);
-}
-
-function processMaxFileSize(value: number | string | undefined): number | undefined {
-    if (!value) return undefined;
-    if (typeof value === 'number') return value;
-    const num = sizeToNumber(value);
-    if (Number.isNaN(num)) {
-        throw new ApplicationError(`Invalid max file size: "${value}"`);
-    }
-    return num;
 }

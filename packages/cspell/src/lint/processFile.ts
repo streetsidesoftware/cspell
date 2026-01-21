@@ -25,7 +25,8 @@ import { toError } from '../util/errors.js';
 import { extractContext } from '../util/extractContext.js';
 import { fileInfoToDocument, readFileInfo, relativeToCwd } from '../util/fileHelper.js';
 import type { LintFileResult } from '../util/LintFileResult.js';
-import { type LintReporter, mergeReportIssueOptions } from '../util/reporters.js';
+import type { LintFileReporter } from '../util/reporters.js';
+import { mergeReportIssueOptions } from '../util/reporters.js';
 import { getTimeMeasurer } from '../util/timer.js';
 import { indent, unindent } from '../util/unindent.js';
 import * as util from '../util/util.js';
@@ -35,14 +36,14 @@ import type { LintRequest } from './LintRequest.js';
 import type { PrefetchResult } from './types.js';
 
 export interface ProcessFileOptions {
-    reporter: LintReporter;
-    configInfo: ConfigInfo;
-    verboseLevel: number;
-    useColor: boolean;
-    cfg: LintRequest;
-    configErrors: Set<string>;
-    chalk: ChalkInstance;
-    userSettings: CSpellSettingsWithSourceTrace;
+    readonly reporter: LintFileReporter;
+    readonly configInfo: ConfigInfo;
+    readonly verboseLevel: number;
+    readonly useColor: boolean;
+    readonly cfg: LintRequest;
+    readonly configErrors: Set<string>;
+    readonly chalk: ChalkInstance;
+    readonly userSettings: CSpellSettingsWithSourceTrace;
 }
 
 export async function processFile(
