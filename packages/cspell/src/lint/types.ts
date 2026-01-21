@@ -54,3 +54,7 @@ export interface FileToProcess {
 export interface PrefetchFileResult extends FileToProcess {
     result?: Promise<PFCached | PFFile | PFSkipped | Error>;
 }
+
+export interface ProcessPrefetchFileResult extends FileToProcess {
+    result: LintFileResult;
+}

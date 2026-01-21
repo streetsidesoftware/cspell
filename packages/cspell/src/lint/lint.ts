@@ -61,7 +61,14 @@ import { wordWrapAnsiText } from '../util/wrap.js';
 import { writeFileOrStream } from '../util/writeFile.js';
 import type { LintRequest } from './LintRequest.js';
 import { countConfigErrors, processFile, type ProcessFileOptions } from './processFile.js';
-import type { FileToProcess, PFCached, PFFile, PFSkipped, PrefetchFileResult } from './types.js';
+import type {
+    FileToProcess,
+    PFCached,
+    PFFile,
+    PFSkipped,
+    PrefetchFileResult,
+    ProcessPrefetchFileResult,
+} from './types.js';
 
 const version = npmPackage.version;
 
@@ -148,7 +155,6 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         configInfo: ConfigInfo,
         cacheSettings: CreateCacheSettings,
     ): Promise<RunResult> {
-        const fileCount = Array.isArray(files) ? files.length : undefined;
         const status: RunResult = runResult();
         const cache = await createCache(cacheSettings);
         const failFast = cfg.options.failFast ?? configInfo.config.failFast ?? false;
@@ -182,14 +188,15 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             reportIssueOptions: undefined,
         };
 
-        async function processPrefetchFileResult(pf: PrefetchFileResult) {
-            const { filename, sequence, result: pFetchResult } = pf;
+        async function processPrefetchFileResult(pf: PrefetchFileResult): Promise<ProcessPrefetchFileResult> {
+            const { filename, sequence, sequenceSize, result: pFetchResult } = pf;
             const getElapsedTimeMs = getTimeMeasurer();
             const fetchResult = await pFetchResult;
             if (fetchResult instanceof Error) {
                 throw fetchResult;
             }
-            reporter.emitProgressBegin(filename, sequence, fileCount ?? sequence);
+            const fileNum = sequence + 1;
+            reporter.emitProgressBegin(filename, fileNum, pf.sequenceSize ?? sequence);
             if (fetchResult?.skip) {
                 const result: LintFileResult = {
                     ...emptyResult,
@@ -197,14 +204,10 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
                     elapsedTimeMs: getElapsedTimeMs(),
                     skippedReason: fetchResult.skipReason,
                 };
-                return {
-                    filename,
-                    fileNum: sequence,
-                    result,
-                };
+                return { filename, sequence, sequenceSize, result };
             }
             const result = await processFile(filename, cache, fetchResult, getProcessFileOptions(configInfo));
-            return { filename, fileNum: sequence, result };
+            return { filename, sequence, sequenceSize, result };
         }
 
         async function* loadAndProcessFiles() {
@@ -233,11 +236,12 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         }
 
         for await (const fileP of loadAndProcessFiles()) {
-            const { filename, fileNum, result } = fileP;
+            const { filename, sequence, sequenceSize, result } = fileP;
             status.files += 1;
             status.cachedFiles = (status.cachedFiles || 0) + (result.cached ? 1 : 0);
             status.skippedFiles = (status.skippedFiles || 0) + (result.processed ? 0 : 1);
-            const numIssues = reporter.emitProgressComplete(filename, fileNum, fileCount ?? fileNum, result);
+            const fileNum = sequence + 1;
+            const numIssues = reporter.emitProgressComplete(filename, fileNum, sequenceSize ?? fileNum, result);
             if (numIssues || result.errors) {
                 status.filesWithIssues.add(relativeToCwd(filename, cfg.root));
                 status.issues += numIssues;
