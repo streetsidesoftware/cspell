@@ -34,14 +34,23 @@ export interface PFSkipped extends PrefetchResult {
     reportIssueOptions?: undefined;
 }
 
-export interface PrefetchFileResult {
+export interface FileToProcess {
     /**
      * The full path to the file being processed.
      */
     filename: string;
     /**
      * A sequence number to help with ordering the results.
+     * Starts with 0 and goes up to `sequenceSize - 1`.
      */
     sequence: number;
+
+    /**
+     * The number of files being processed. `undefined` if unknown.
+     */
+    sequenceSize?: number | undefined;
+}
+
+export interface PrefetchFileResult extends FileToProcess {
     result?: Promise<PFCached | PFFile | PFSkipped | Error>;
 }

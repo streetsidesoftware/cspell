@@ -61,7 +61,7 @@ import { wordWrapAnsiText } from '../util/wrap.js';
 import { writeFileOrStream } from '../util/writeFile.js';
 import type { LintRequest } from './LintRequest.js';
 import { countConfigErrors, processFile, type ProcessFileOptions } from './processFile.js';
-import type { PFCached, PFFile, PFSkipped, PrefetchFileResult } from './types.js';
+import type { FileToProcess, PFCached, PFFile, PFSkipped, PrefetchFileResult } from './types.js';
 
 const version = npmPackage.version;
 
@@ -99,13 +99,16 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
     return lintResult;
 
     function prefetch(
-        filename: string,
-        sequence: number,
+        fileToProcess: FileToProcess,
         configInfo: ConfigInfo,
         cache: CSpellLintResultCache,
     ): PrefetchFileResult {
+        const { filename } = fileToProcess;
         if (isBinaryFile(filename, cfg.root)) {
-            return { filename, sequence, result: Promise.resolve({ skip: true, skipReason: 'Binary file.' }) };
+            return {
+                ...fileToProcess,
+                result: Promise.resolve({ skip: true, skipReason: 'Binary file.' }),
+            };
         }
         const reportIssueOptions = extractReporterIssueOptions(configInfo.config);
 
@@ -137,11 +140,11 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         }
 
         const result: Promise<PFCached | PFFile | PFSkipped | Error> = fetch().catch((e) => toApplicationError(e));
-        return { filename, sequence, result };
+        return { ...fileToProcess, result };
     }
 
     async function processFiles(
-        files: string[] | AsyncIterable<string>,
+        files: FileToProcess[] | AsyncIterable<FileToProcess>,
         configInfo: ConfigInfo,
         cacheSettings: CreateCacheSettings,
     ): Promise<RunResult> {
@@ -150,12 +153,11 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         const cache = await createCache(cacheSettings);
         const failFast = cfg.options.failFast ?? configInfo.config.failFast ?? false;
 
-        function* prefetchFiles(files: string[]) {
-            let i: number = 0;
+        function* prefetchFiles(files: FileToProcess[]) {
             const iter = prefetchIterable(
                 pipe(
                     files,
-                    opMap((filename) => prefetch(filename, i++, configInfo, cache)),
+                    opMap((file) => prefetch(file, configInfo, cache)),
                 ),
                 BATCH_FETCH_SIZE,
             );
@@ -164,10 +166,9 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             }
         }
 
-        async function* prefetchFilesAsync(files: string[] | AsyncIterable<string>) {
-            let i: number = 0;
-            for await (const filename of files) {
-                yield prefetch(filename, i++, configInfo, cache);
+        async function* prefetchFilesAsync(files: FileToProcess[] | AsyncIterable<FileToProcess>) {
+            for await (const file of files) {
+                yield prefetch(file, configInfo, cache);
             }
         }
 
@@ -404,13 +405,26 @@ async function determineGlobs(configInfo: ConfigInfo, cfg: LintRequest): Promise
     return appGlobs;
 }
 
+async function* filesToProcessAsync(filenames: AsyncIterable<string>): AsyncIterable<FileToProcess> {
+    let sequence = 0;
+    for await (const filename of filenames) {
+        yield { filename, sequence: sequence++ };
+    }
+}
+
+function filesToProcess(files: Iterable<string>): FileToProcess[] {
+    const filenames = [...files];
+    const sequenceSize = filenames.length;
+    return filenames.map((filename, sequence) => ({ filename, sequence, sequenceSize }));
+}
+
 async function determineFilesToCheck(
     configInfo: ConfigInfo,
     cfg: LintRequest,
     reporter: FinalizedReporter,
     globInfo: AppGlobInfo,
-): Promise<string[] | AsyncIterable<string>> {
-    async function _determineFilesToCheck(): Promise<string[] | AsyncIterable<string>> {
+): Promise<FileToProcess[] | AsyncIterable<FileToProcess>> {
+    async function _determineFilesToCheck(): Promise<FileToProcess[] | AsyncIterable<FileToProcess>> {
         const { fileLists } = cfg;
         const hasFileLists = !!fileLists.length;
         const { allGlobs, gitIgnore, fileGlobs, excludeGlobs, normalizedExcludes } = globInfo;
@@ -448,9 +462,10 @@ async function determineFilesToCheck(
             ? concatAsyncIterables(cliFiles, await useFileLists(fileLists, includeFilter))
             : cliFiles || (await findFiles(fileGlobs, globOptions));
         const filtered = gitIgnore ? await gitIgnore.filterOutIgnored(foundFiles) : foundFiles;
+
         const files = isAsyncIterable(filtered)
-            ? pipeAsync(filtered, opFilterExcludedFiles)
-            : [...pipe(filtered, opFilterExcludedFiles)];
+            ? pipeAsync(filtered, opFilterExcludedFiles, filesToProcessAsync)
+            : filesToProcess(pipe(filtered, opFilterExcludedFiles));
         return files;
     }
 
