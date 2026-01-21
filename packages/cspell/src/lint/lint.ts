@@ -36,7 +36,7 @@ import {
     normalizeFileOrGlobsToRoot,
     normalizeGlobsToRoot,
 } from '../util/glob.js';
-import type { FinalizedReporter, LintFileReporter } from '../util/reporters.js';
+import type { FinalizedReporter } from '../util/reporters.js';
 import { LintReporter } from '../util/reporters.js';
 import { getTimeMeasurer } from '../util/timer.js';
 import { unindent } from '../util/unindent.js';
@@ -57,8 +57,7 @@ const debugStats = false;
 const { opFilterAsync } = operators;
 
 export async function runLint(cfg: LintRequest): Promise<RunResult> {
-    const lintReporter = new LintReporter(cfg.reporter, cfg.options);
-    const reporter: LintFileReporter = lintReporter;
+    const reporter = new LintReporter(cfg.reporter, cfg.options);
     const configErrors = new Set<string>();
     const verboseLevel = calcVerboseLevel(cfg.options);
     const useColor = cfg.options.color ?? true;
@@ -76,7 +75,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         await writeDictionaryLog();
     }
 
-    await lintReporter.result(lintResult);
+    await reporter.result(lintResult);
     const elapsed = timer();
     if (getFeatureFlags().getFlag('timer') || verboseLevel >= 1 || cfg.options.showPerfSummary) {
         console.error(`Elapsed Time: ${elapsed.toFixed(2)}ms`);
@@ -105,9 +104,9 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         });
 
         const reporters = cfg.options.reporter ?? configInfo.config.reporters;
-        lintReporter.config = reporterConfig;
-        await lintReporter.loadReportersAndFinalize(reporters);
-        setLogger(getLoggerFromReporter(lintReporter, useColor));
+        reporter.config = reporterConfig;
+        await reporter.loadReportersAndFinalize(reporters);
+        setLogger(getLoggerFromReporter(reporter, useColor));
 
         const globInfo = await determineGlobs(configInfo, cfg);
         const { fileGlobs, excludeGlobs } = globInfo;
@@ -118,10 +117,10 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         }
         header(fileGlobs, excludeGlobs);
 
-        checkGlobs(fileGlobs, lintReporter);
+        checkGlobs(fileGlobs, reporter);
 
         if (verboseLevel > 1) {
-            lintReporter.info(`Config Files Found:\n    ${relativeToCwd(configInfo.source)}\n`, MessageTypes.Info);
+            reporter.info(`Config Files Found:\n    ${relativeToCwd(configInfo.source)}\n`, MessageTypes.Info);
         }
 
         const configErrorCount = countConfigErrors(configInfo, processFileOptions);
@@ -134,7 +133,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
 
         try {
             const cacheSettings = await calcCacheSettings(configInfo.config, { ...cfg.options, version }, root);
-            const files = await determineFilesToCheck(configInfo, cfg, lintReporter, globInfo);
+            const files = await determineFilesToCheck(configInfo, cfg, reporter, globInfo);
 
             const processFileOptions: ProcessFilesOptions = {
                 chalk,
@@ -144,7 +143,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
                 useColor,
                 configErrors,
                 userSettings: configInfo.config,
-                lintReporter,
+                lintReporter: reporter,
                 cacheSettings,
             };
 
@@ -156,7 +155,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             return result;
         } catch (e) {
             const err = toApplicationError(e);
-            lintReporter.error('Linter', err);
+            reporter.error('Linter', err);
             return runResult({ errors: 1 });
         }
     }
@@ -165,7 +164,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         if (verboseLevel < 2) return;
         const formattedFiles = files.length > 100 ? [...files.slice(0, 100), '...'] : files;
 
-        lintReporter.info(
+        reporter.info(
             unindent`
                 cspell;
                 Date: ${new Date().toUTCString()}
@@ -183,7 +182,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
 
     function getProcessFileOptions(configInfo: ConfigInfo): ProcessFileOptions {
         const processFileOptionsGeneral: ProcessFileOptions = {
-            reporter,
+            reporter: reporter,
             chalk,
             configInfo,
             cfg,
