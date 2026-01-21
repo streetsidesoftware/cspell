@@ -35,6 +35,13 @@ export interface PFSkipped extends PrefetchResult {
 }
 
 export interface PrefetchFileResult {
+    /**
+     * The full path to the file being processed.
+     */
     filename: string;
+    /**
+     * A sequence number to help with ordering the results.
+     */
+    sequence: number;
     result?: Promise<PFCached | PFFile | PFSkipped | Error>;
 }

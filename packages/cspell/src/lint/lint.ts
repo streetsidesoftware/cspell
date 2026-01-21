@@ -66,7 +66,7 @@ import type { PFCached, PFFile, PFSkipped, PrefetchFileResult } from './types.js
 const version = npmPackage.version;
 
 const BATCH_FETCH_SIZE = 12;
-const BATCH_PROCESS_SIZE = 6;
+const BATCH_PROCESS_SIZE = 1;
 
 const debugStats = false;
 
@@ -98,9 +98,14 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
     }
     return lintResult;
 
-    function prefetch(filename: string, configInfo: ConfigInfo, cache: CSpellLintResultCache): PrefetchFileResult {
+    function prefetch(
+        filename: string,
+        sequence: number,
+        configInfo: ConfigInfo,
+        cache: CSpellLintResultCache,
+    ): PrefetchFileResult {
         if (isBinaryFile(filename, cfg.root)) {
-            return { filename, result: Promise.resolve({ skip: true, skipReason: 'Binary file.' }) };
+            return { filename, sequence, result: Promise.resolve({ skip: true, skipReason: 'Binary file.' }) };
         }
         const reportIssueOptions = extractReporterIssueOptions(configInfo.config);
 
@@ -132,7 +137,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         }
 
         const result: Promise<PFCached | PFFile | PFSkipped | Error> = fetch().catch((e) => toApplicationError(e));
-        return { filename, result };
+        return { filename, sequence, result };
     }
 
     async function processFiles(
@@ -146,10 +151,11 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         const failFast = cfg.options.failFast ?? configInfo.config.failFast ?? false;
 
         function* prefetchFiles(files: string[]) {
+            let i: number = 0;
             const iter = prefetchIterable(
                 pipe(
                     files,
-                    opMap((filename) => prefetch(filename, configInfo, cache)),
+                    opMap((filename) => prefetch(filename, i++, configInfo, cache)),
                 ),
                 BATCH_FETCH_SIZE,
             );
@@ -159,8 +165,9 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
         }
 
         async function* prefetchFilesAsync(files: string[] | AsyncIterable<string>) {
+            let i: number = 0;
             for await (const filename of files) {
-                yield prefetch(filename, configInfo, cache);
+                yield prefetch(filename, i++, configInfo, cache);
             }
         }
 
@@ -174,14 +181,14 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             reportIssueOptions: undefined,
         };
 
-        async function processPrefetchFileResult(pf: PrefetchFileResult, index: number) {
-            const { filename, result: pFetchResult } = pf;
+        async function processPrefetchFileResult(pf: PrefetchFileResult) {
+            const { filename, sequence, result: pFetchResult } = pf;
             const getElapsedTimeMs = getTimeMeasurer();
             const fetchResult = await pFetchResult;
             if (fetchResult instanceof Error) {
                 throw fetchResult;
             }
-            reporter.emitProgressBegin(filename, index, fileCount ?? index);
+            reporter.emitProgressBegin(filename, sequence, fileCount ?? sequence);
             if (fetchResult?.skip) {
                 const result: LintFileResult = {
                     ...emptyResult,
@@ -191,26 +198,25 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
                 };
                 return {
                     filename,
-                    fileNum: index,
+                    fileNum: sequence,
                     result,
                 };
             }
             const result = await processFile(filename, cache, fetchResult, getProcessFileOptions(configInfo));
-            return { filename, fileNum: index, result };
+            return { filename, fileNum: sequence, result };
         }
 
         async function* loadAndProcessFiles() {
-            let i = 0;
             if (isAsyncIterable(files)) {
                 for await (const pf of prefetchFilesAsync(files)) {
-                    yield processPrefetchFileResult(pf, ++i);
+                    yield processPrefetchFileResult(pf);
                 }
                 return;
             }
             if (BATCH_PROCESS_SIZE <= 1) {
                 for (const pf of prefetchFiles(files)) {
                     await pf.result; // force one at a time
-                    yield processPrefetchFileResult(pf, ++i);
+                    yield processPrefetchFileResult(pf);
                 }
                 return;
             }
@@ -218,7 +224,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
                 prefetchIterable(
                     pipe(
                         prefetchFiles(files),
-                        opMap(async (pf) => processPrefetchFileResult(pf, ++i)),
+                        opMap(async (pf) => processPrefetchFileResult(pf)),
                     ),
                     BATCH_PROCESS_SIZE,
                 ),
