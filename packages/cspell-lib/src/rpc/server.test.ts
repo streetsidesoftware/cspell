@@ -100,6 +100,8 @@ describe('RPC Server', () => {
         clientPort.postMessage(createRPCMethodRequest(randomUUID(), 'length unknown', []));
         expect((await nextMsg()).error).toBeDefined();
 
+        expect(receivedMessages.length).toBe(6);
+
         await wait(10);
     });
 });

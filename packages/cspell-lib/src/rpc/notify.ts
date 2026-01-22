@@ -34,6 +34,16 @@ export class NotifyEmitter<T> {
     readonly notify: (value: T) => void = (value) => this.#notify(value);
 
     /**
+     * A NotifyEvent that only fires once for each handler added.
+     *
+     * Multiple handlers can be added. The same handler can be added multiple times
+     * and will be called once for each time it is added.
+     *
+     * Note: This property can be used without needing to bind 'this'.
+     */
+    readonly once: NotifyOnceEvent<T> = notifyEventOnce(this.event);
+
+    /**
      * The number of registered handlers.
      */
     get size(): number {

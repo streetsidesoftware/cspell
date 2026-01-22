@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
 
-import { NotifyEmitter, notifyEventToPromise } from './notify.js';
+import { NotifyEmitter, notifyEventOnce, notifyEventToPromise } from './notify.js';
 
 describe('notify', () => {
     test('NotifyEmitter', () => {
@@ -22,7 +22,7 @@ describe('notify', () => {
         expect(calls).toEqual(['first', 'second']);
     });
 
-    test('NotifyEmitter toPromise', async () => {
+    test('notifyEventToPromise', async () => {
         const emitter = new NotifyEmitter<string>();
         expect(emitter.size).toBe(0);
 
@@ -46,6 +46,62 @@ describe('notify', () => {
 
         expect(calls).toEqual(['first', 'second', 'third', 'fourth']);
         await expect(p).resolves.toBe('third');
+        expect(emitter.size).toBe(1);
+    });
+
+    test('notifyEventOnce ', async () => {
+        const emitter = new NotifyEmitter<string>();
+        const once = notifyEventOnce(emitter.event);
+        expect(emitter.size).toBe(0);
+
+        const calls: string[] = [];
+        const addToCalls = (value: string) => calls.push(value);
+        using _disposable = emitter.event(addToCalls);
+        expect(emitter.size).toBe(1);
+
+        emitter.notify('first');
+        emitter.notify('second');
+
+        expect(calls).toEqual(['first', 'second']);
+
+        expect(emitter.size).toBe(1);
+        using _once1 = once(addToCalls);
+        using _once2 = once(addToCalls);
+        using _once3 = once(addToCalls);
+        expect(emitter.size).toBe(4);
+
+        emitter.notify('third');
+        emitter.notify('fourth');
+
+        expect(calls).toEqual(['first', 'second', 'third', 'third', 'third', 'third', 'fourth']);
+        expect(emitter.size).toBe(1);
+    });
+
+    test('NotifyEmitter.once ', async () => {
+        const emitter = new NotifyEmitter<string>();
+        const once = emitter.once;
+        expect(emitter.size).toBe(0);
+
+        const calls: string[] = [];
+        const addToCalls = (value: string) => calls.push(value);
+        using _disposable = emitter.event(addToCalls);
+        expect(emitter.size).toBe(1);
+
+        emitter.notify('first');
+        emitter.notify('second');
+
+        expect(calls).toEqual(['first', 'second']);
+
+        expect(emitter.size).toBe(1);
+        using _once1 = once(addToCalls);
+        using _once2 = once(addToCalls);
+        using _once3 = once(addToCalls);
+        expect(emitter.size).toBe(4);
+
+        emitter.notify('third');
+        emitter.notify('fourth');
+
+        expect(calls).toEqual(['first', 'second', 'third', 'third', 'third', 'third', 'fourth']);
         expect(emitter.size).toBe(1);
     });
 });
