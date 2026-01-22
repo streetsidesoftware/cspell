@@ -135,7 +135,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             const cacheSettings = await calcCacheSettings(configInfo.config, { ...cfg.options, version }, root);
             const files = await determineFilesToCheck(configInfo, cfg, reporter, globInfo);
 
-            const processFileOptions: ProcessFilesOptions = {
+            const processFilesOptions: ProcessFilesOptions = {
                 chalk,
                 configInfo,
                 cfg,
@@ -147,7 +147,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
                 cacheSettings,
             };
 
-            const result = await processFiles(files, processFileOptions);
+            const result = await processFiles(files, processFilesOptions);
             if (configErrorCount && cfg.options.exitCode !== false) {
                 result.errors ||= configErrorCount;
             }
