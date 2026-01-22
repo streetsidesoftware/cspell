@@ -349,9 +349,8 @@ declare class RPCServerImpl<ServerApi, PApi extends RPCProtocol<ServerApi> = RPC
 declare class RPCServer<ServerApi> extends RPCServerImpl<ServerApi> {
   /**
   *
-  * @param port - the port to send and receive messages
-  * @param methods - The methods to implement the API
-  * @param options - options related to the behavior of the server.
+  * @param config - The server configuration, including the message port and options.
+  * @param methods - The methods to implement the API.
   */
   constructor(config: RPCServerConfiguration, methods: ServerApi);
 }
