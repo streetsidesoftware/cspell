@@ -360,7 +360,7 @@ declare class NotifyEmitter<T> {
 /**
 * Convert a NotifyEvent to a Promise.
 * @param event - The event to convert.
-* @returns
+* @returns A Promise that resolves with the first value emitted by the event.
 */
 declare function notifyEventToPromise<T>(event: NotifyEvent<T>): Promise<T>;
 /**
