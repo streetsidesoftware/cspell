@@ -334,7 +334,7 @@ export function getReporter(options: ReporterOptions, config?: CSpellReporterCon
             consoleError(`  Files Skipped   : ${perfStats.filesSkipped.toString().padStart(11)}`);
             consoleError(`  Files Cached    : ${perfStats.filesCached.toString().padStart(11)}`);
             consoleError(`  Processing Time : ${perfStats.accumulatedTimeMs.toFixed(2).padStart(9)}ms`);
-            consoleError(`  Total Time.     : ${elapsedTotal.toFixed(2).padStart(9)}ms`);
+            consoleError(`  Total Time      : ${elapsedTotal.toFixed(2).padStart(9)}ms`);
 
             const tableStats: Table = {
                 title: chalk.bold('Perf Stats:'),
