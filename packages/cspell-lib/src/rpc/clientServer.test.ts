@@ -210,8 +210,8 @@ function createClientServerPair<TApi>(api: TApi): ClientServerPair<TApi> {
     spyOnPort(portServer);
     spyOnPort(portClient);
 
-    const server = new RPCServer<TApi>(portServer, api);
-    const client = new RPCClient<TApi>(portClient, { randomUUID });
+    const server = new RPCServer<TApi>({ port: portServer }, api);
+    const client = new RPCClient<TApi>({ port: portClient, randomUUID });
 
     return { client, server, api, portClient, portServer };
 }

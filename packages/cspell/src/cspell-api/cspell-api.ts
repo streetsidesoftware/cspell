@@ -65,8 +65,8 @@ function getAPIOverChannel() {
     }
 
     const { port1, port2 } = new MessageChannel();
-    createCSpellRPCServer(port1);
-    client = createCSpellRPCClient(port2);
+    createCSpellRPCServer({ port: port1 });
+    client = createCSpellRPCClient({ port: port2 });
     apiOverChannel = client.getApi();
     return apiOverChannel;
 }

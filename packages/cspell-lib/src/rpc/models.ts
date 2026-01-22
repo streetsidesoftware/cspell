@@ -9,7 +9,15 @@ export type ResponseCode = 0 | 200 | 400 | 408 | 500 | 503;
  * A base RPC Message.
  */
 export interface RPCMessage {
+    /**
+     * A signature to identify the message as an RPC message.
+     */
     sig: 'RPC0';
+    /**
+     * The server Identifier used to identify the server instance.
+     * This allows multiple servers with different protocols to share the same communication channel.
+     */
+    sid?: string;
     /**
      * A Unique identifier for the request/response.
      */
