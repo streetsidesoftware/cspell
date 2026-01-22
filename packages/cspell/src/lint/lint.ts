@@ -182,7 +182,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
 
     function getProcessFileOptions(configInfo: ConfigInfo): ProcessFileOptions {
         const processFileOptionsGeneral: ProcessFileOptions = {
-            reporter: reporter,
+            reporter,
             chalk,
             configInfo,
             cfg,
