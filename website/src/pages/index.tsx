@@ -1,5 +1,6 @@
 import React from 'react';
 import Layout from '@theme/Layout';
+import CodeBlock from '@theme/CodeBlock';
 import { HomePageCards } from '@site/src/components/home/HomePageCard';
 import { CARD_DATA, SPONSOR_LINKS, VIDEO_PRESENTATIONS } from '@site/src/components/home/content';
 import { HomePageSection } from '@site/src/components/home/HomePageSection';
@@ -40,7 +41,7 @@ export default function Home() {
         <div className="cards-grid">
           <HomePageCards cards={CARD_DATA} />
         </div>
-        <HomePageSection title="Support Future Development">
+        <HomePageSection title="Support Future Development" center>
           <SponsorLinks links={SPONSOR_LINKS} />
         </HomePageSection>
         <HomePageSection title="Related Packages">
@@ -50,9 +51,9 @@ export default function Home() {
             </a>{' '}
             — <code>cspell-cli</code> is useful for including <code>cspell</code> directly from GitHub.
           </p>
-          <p>
-            Example install: <code>npm install -g git+https://github.com/streetsidesoftware/cspell-cli</code>
-          </p>
+          <CodeBlock title="Install from GitHub">
+            npm install -g git+https://github.com/streetsidesoftware/cspell-cli
+          </CodeBlock>
           <p>
             This will add the <code>cspell-cli</code> command, which is an alias of the <code>cspell</code> command.
           </p>
@@ -92,6 +93,7 @@ export default function Home() {
         <HomePageSection
           title="Third-Party Video Presentations"
           description="Some videos related to CSpell from the community."
+          center
         >
           <VideoCards videos={VIDEO_PRESENTATIONS} />
         </HomePageSection>
