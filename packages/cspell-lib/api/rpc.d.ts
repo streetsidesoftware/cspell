@@ -352,6 +352,15 @@ declare class NotifyEmitter<T> {
   */
   readonly notify: (value: T) => void;
   /**
+  * A NotifyEvent that only fires once for each handler added.
+  *
+  * Multiple handlers can be added. The same handler can be added multiple times
+  * and will be called once for each time it is added.
+  *
+  * Note: This property can be used without needing to bind 'this'.
+  */
+  readonly once: NotifyOnceEvent<T>;
+  /**
   * The number of registered handlers.
   */
   get size(): number;
