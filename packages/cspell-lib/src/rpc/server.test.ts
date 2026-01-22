@@ -20,12 +20,12 @@ describe('RPC Server', () => {
             div: (a: number, b: number): number => a / b,
         };
 
-        const server = new RPCServer(port, api);
+        const server = new RPCServer({ port }, api);
         expect(server).toBeDefined();
         expect(port.addListener).toHaveBeenCalledWith('message', expect.any(Function));
         expect(port.start).toHaveBeenCalled();
         server[Symbol.dispose]();
-        expect(port.close).toHaveBeenCalled();
+        expect(port.close).not.toHaveBeenCalled();
     });
 
     test('bad requests', async () => {
@@ -51,7 +51,10 @@ describe('RPC Server', () => {
             length: 42,
         };
 
-        const server = new RPCServer(serverPort, api, { returnMalformedRPCRequestError: true });
+        const server = new RPCServer(
+            { port: serverPort, returnMalformedRPCRequestError: true, closePortOnDispose: true },
+            api,
+        );
         const readyMsg = (await msgs.next()).value;
         expect(readyMsg.type).toEqual('ready');
 

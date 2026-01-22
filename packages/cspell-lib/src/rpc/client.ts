@@ -38,13 +38,20 @@ export interface RPCClientOptions {
     randomUUID?: () => string;
     /**
      * If true, the client will close the port when disposed.
-     * @default true
+     * @default false
      */
     closePortOnDispose?: boolean;
     /**
      * Set the default timeout in milliseconds for requests.
      */
     timeoutMs?: number;
+}
+
+export interface RPCClientConfiguration extends RPCClientOptions {
+    /**
+     * The message port to use for communication.
+     */
+    port: MessagePortLike;
 }
 
 export interface RequestOptions {
@@ -65,7 +72,7 @@ const DefaultOkOptions: RequestOptions = {
 /**
  * The RPC Client.
  */
-export class RPCClient<
+class RPCClientImpl<
     T,
     P extends RPCProtocol<T> = RPCProtocol<T>,
     MethodNames extends RPCProtocolMethodNames<P> = RPCProtocolMethodNames<P>,
@@ -86,12 +93,13 @@ export class RPCClient<
 
     /**
      * Create an RPC Client.
-     * @param port - The port used to send and receive RPC messages.
+     * @param config - The client configuration.
      */
-    constructor(port: MessagePortLike, options: RPCClientOptions = {}) {
+    constructor(config: RPCClientConfiguration) {
+        const port = config.port;
         this.#port = port;
-        this.#options = options;
-        this.#defaultTimeoutMs = options.timeoutMs;
+        this.#options = config;
+        this.#defaultTimeoutMs = config.timeoutMs;
         this.#isReady = false;
         this.#ready = new Future<boolean>();
 
@@ -455,5 +463,18 @@ export class RPCClient<
         if (this.#options.closePortOnDispose ?? true) {
             this.#port.close?.();
         }
+    }
+}
+
+/**
+ * The RPC Client.
+ */
+export class RPCClient<T> extends RPCClientImpl<T> {
+    /**
+     * Create an RPC Client.
+     * @param config - The client configuration.
+     */
+    constructor(config: RPCClientConfiguration) {
+        super(config);
     }
 }

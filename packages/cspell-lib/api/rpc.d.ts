@@ -43,7 +43,15 @@ type ResponseCode = 0 | 200 | 400 | 408 | 500 | 503;
 * A base RPC Message.
 */
 interface RPCMessage {
+  /**
+  * A signature to identify the message as an RPC message.
+  */
   sig: "RPC0";
+  /**
+  * The server Identifier used to identify the server instance.
+  * This allows multiple servers with different protocols to share the same communication channel.
+  */
+  sid?: string;
   /**
   * A Unique identifier for the request/response.
   */
@@ -132,13 +140,19 @@ interface RPCClientOptions {
   randomUUID?: () => string;
   /**
   * If true, the client will close the port when disposed.
-  * @default true
+  * @default false
   */
   closePortOnDispose?: boolean;
   /**
   * Set the default timeout in milliseconds for requests.
   */
   timeoutMs?: number;
+}
+interface RPCClientConfiguration extends RPCClientOptions {
+  /**
+  * The message port to use for communication.
+  */
+  port: MessagePortLike;
 }
 interface RequestOptions {
   /**
@@ -153,13 +167,13 @@ interface RequestOptions {
 /**
 * The RPC Client.
 */
-declare class RPCClient<T, P extends RPCProtocol<T> = RPCProtocol<T>, MethodNames extends RPCProtocolMethodNames<P> = RPCProtocolMethodNames<P>> {
+declare class RPCClientImpl<T, P extends RPCProtocol<T> = RPCProtocol<T>, MethodNames extends RPCProtocolMethodNames<P> = RPCProtocolMethodNames<P>> {
   #private;
   /**
   * Create an RPC Client.
-  * @param port - The port used to send and receive RPC messages.
+  * @param config - The client configuration.
   */
-  constructor(port: MessagePortLike, options?: RPCClientOptions);
+  constructor(config: RPCClientConfiguration);
   /**
   * Make a request to the RPC server.
   *
@@ -275,6 +289,16 @@ declare class RPCClient<T, P extends RPCProtocol<T> = RPCProtocol<T>, MethodName
   */
   [Symbol.dispose](): void;
 }
+/**
+* The RPC Client.
+*/
+declare class RPCClient<T> extends RPCClientImpl<T> {
+  /**
+  * Create an RPC Client.
+  * @param config - The client configuration.
+  */
+  constructor(config: RPCClientConfiguration);
+}
 //#endregion
 //#region src/rpc/errors.d.ts
 declare class RPCRequestError extends Error {
@@ -296,6 +320,10 @@ declare class CanceledRPCRequestError extends RPCRequestError {
 //#endregion
 //#region src/rpc/server.d.ts
 interface RPCServerOptions {
+  /**
+  * If true, the server will close the message port when disposed.
+  * @default false
+  */
   closePortOnDispose?: boolean;
   /**
   * If true, the server will respond with an error message for unknown or malformed requests.
@@ -303,10 +331,29 @@ interface RPCServerOptions {
   */
   returnMalformedRPCRequestError?: boolean;
 }
-declare class RPCServer<TApi, P extends RPCProtocol<TApi> = RPCProtocol<TApi>, MethodsNames extends RPCProtocolMethodNames<P> = RPCProtocolMethodNames<P>> {
+interface RPCServerConfiguration extends RPCServerOptions {
+  /**
+  * The message port to use for communication.
+  */
+  port: MessagePortLike;
+}
+declare class RPCServerImpl<ServerApi, PApi extends RPCProtocol<ServerApi> = RPCProtocol<ServerApi>, MethodsNames extends RPCProtocolMethodNames<PApi> = RPCProtocolMethodNames<PApi>> {
   #private;
-  constructor(port: MessagePortLike, methods: TApi, options?: RPCServerOptions);
+  constructor(config: RPCServerConfiguration, methods: ServerApi);
   [Symbol.dispose](): void;
 }
+/**
+* RPC Server implementation.
+* @param ServerApi - The API methods of the server.
+*/
+declare class RPCServer<ServerApi> extends RPCServerImpl<ServerApi> {
+  /**
+  *
+  * @param port - the port to send and receive messages
+  * @param methods - The methods to implement the API
+  * @param options - options related to the behavior of the server.
+  */
+  constructor(config: RPCServerConfiguration, methods: ServerApi);
+}
 //#endregion
-export { AbortRPCRequestError, CanceledRPCRequestError, MessagePortLike, RPCClient, RPCClientOptions, RPCProtocol, RPCProtocolMethods, RPCRequestError, RPCServer, RPCServerOptions, TimeoutRPCRequestError, UnknownMethodRPCRequestError, protocolDefinition, protocolMethods };
+export { AbortRPCRequestError, CanceledRPCRequestError, MessagePortLike, RPCClient, RPCClientConfiguration, RPCClientOptions, RPCProtocol, RPCProtocolMethods, RPCRequestError, RPCServer, RPCServerConfiguration, RPCServerOptions, TimeoutRPCRequestError, UnknownMethodRPCRequestError, protocolDefinition, protocolMethods };

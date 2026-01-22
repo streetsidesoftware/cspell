@@ -1,19 +1,18 @@
 import { randomUUID } from 'node:crypto';
 
-import type { MessagePortLike, RPCClientOptions, RPCProtocol, RPCServerOptions } from '../rpc/index.js';
+import type { RPCClientConfiguration, RPCClientOptions, RPCProtocol } from '../rpc/index.js';
 import { RPCClient } from '../rpc/index.js';
 import type { CSpellRPCApi, CSpellRPCApiMethodNames } from './api.js';
 import { CSPELL_RPC_API_ENDPOINTS } from './api.js';
 
 export type { MessagePortLike } from '../rpc/index.js';
 
-export type CSpellRPCServerOptions = RPCServerOptions;
-
 export type CSpellRPCClientOptions = RPCClientOptions;
+export type CSpellRPCClientConfig = RPCClientConfiguration;
 
 export class CSpellRPCClient extends RPCClient<CSpellRPCApi> {
-    constructor(port: MessagePortLike, options?: CSpellRPCClientOptions) {
-        super(port, { randomUUID, ...options });
+    constructor(config: CSpellRPCClientConfig) {
+        super({ randomUUID, ...config });
     }
 
     getApi(): RPCProtocol<CSpellRPCApi> {
@@ -21,6 +20,11 @@ export class CSpellRPCClient extends RPCClient<CSpellRPCApi> {
     }
 }
 
-export function createCSpellRPCClient(port: MessagePortLike, options?: CSpellRPCClientOptions): CSpellRPCClient {
-    return new CSpellRPCClient(port, options);
+/**
+ * Create a CSpell RPC Client.
+ * @param config - Client configuration
+ * @returns CSpellRPCClient
+ */
+export function createCSpellRPCClient(config: CSpellRPCClientConfig): CSpellRPCClient {
+    return new CSpellRPCClient(config);
 }

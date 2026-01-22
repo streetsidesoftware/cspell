@@ -40,7 +40,7 @@ class CSpellWorkerImpl implements CSpellWorker {
 
     constructor(instance: CSpellWorkerInstance) {
         this.#worker = instance.worker;
-        this.#client = createCSpellRPCClient(instance.port);
+        this.#client = createCSpellRPCClient({ port: instance.port });
     }
 
     get ready(): Promise<boolean> {

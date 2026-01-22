@@ -19,7 +19,7 @@ describe('RPC Client', () => {
     test('new RPCClient', () => {
         const port = createPort();
         spyOnPort(port);
-        const client = new RPCClient<any>(port);
+        const client = new RPCClient<any>({ port });
         expect(client).toBeDefined();
         expect(port.addListener).toHaveBeenCalledWith('message', expect.any(Function));
         expect(port.start).toHaveBeenCalled();
@@ -37,7 +37,7 @@ describe('RPC Client', () => {
 
         const mockPort = createPort(attachHandler);
 
-        const client = new RPCClient<ServerApi>(mockPort);
+        const client = new RPCClient<ServerApi>({ port: mockPort });
 
         expect(client).toBeDefined();
 
@@ -88,7 +88,7 @@ describe('RPC Client', () => {
 
         const mockPort = createPort(attachHandler);
 
-        const client = new RPCClient<ServerApi>(mockPort, { randomUUID });
+        const client = new RPCClient<ServerApi>({ port: mockPort, randomUUID });
         expect(client).toBeDefined();
 
         const error = new Error('Method not found');
@@ -134,7 +134,7 @@ describe('RPC Client', () => {
         const port = createPort(attachHandler);
         const spyOnPostMessage = vi.spyOn(port, 'postMessage');
 
-        const client = new RPCClient<ServerApi>(port, { randomUUID });
+        const client = new RPCClient<ServerApi>({ port, randomUUID });
 
         expect(client).toBeDefined();
 
@@ -172,7 +172,7 @@ describe('RPC Client', () => {
 
         const mockPort = createPort(attachHandler);
 
-        const client = new RPCClient<ServerApi>(mockPort, { randomUUID });
+        const client = new RPCClient<ServerApi>({ port: mockPort, randomUUID });
 
         expect(client).toBeDefined();
 

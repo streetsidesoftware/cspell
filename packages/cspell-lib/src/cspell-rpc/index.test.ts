@@ -97,8 +97,8 @@ function createClientServerPair(): ClientServerPair {
     spyOnPort(portServer);
     spyOnPort(portClient);
 
-    const server = new CSpellRPCServer(portServer);
-    const client = new CSpellRPCClient(portClient);
+    const server = new CSpellRPCServer({ port: portServer });
+    const client = new CSpellRPCClient({ port: portClient });
 
     return { client, server, portClient, portServer };
 }

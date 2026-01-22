@@ -1,4 +1,4 @@
-export type { RPCClientOptions } from './client.js';
+export type { RPCClientConfiguration, RPCClientOptions } from './client.js';
 export { RPCClient } from './client.js';
 export {
     AbortRPCRequestError,
@@ -10,5 +10,5 @@ export {
 export type { MessagePortLike } from './messagePort.js';
 export type { RPCProtocol, RPCProtocolMethods } from './protocol.js';
 export { protocolDefinition, protocolMethods } from './protocol.js';
-export type { RPCServerOptions } from './server.js';
+export type { RPCServerConfiguration, RPCServerOptions } from './server.js';
 export { RPCServer } from './server.js';

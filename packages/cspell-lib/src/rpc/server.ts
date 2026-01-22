@@ -25,6 +25,10 @@ const RESPONSE_CODES = {
 } as const;
 
 export interface RPCServerOptions {
+    /**
+     * If true, the server will close the message port when disposed.
+     * @default false
+     */
     closePortOnDispose?: boolean;
     /**
      * If true, the server will respond with an error message for unknown or malformed requests.
@@ -33,15 +37,22 @@ export interface RPCServerOptions {
     returnMalformedRPCRequestError?: boolean;
 }
 
+export interface RPCServerConfiguration extends RPCServerOptions {
+    /**
+     * The message port to use for communication.
+     */
+    port: MessagePortLike;
+}
+
 interface PendingRequest {
     requestMessage: RPCRequestMessage;
     promise: Promise<void>;
 }
 
-export class RPCServer<
-    TApi,
-    P extends RPCProtocol<TApi> = RPCProtocol<TApi>,
-    MethodsNames extends RPCProtocolMethodNames<P> = RPCProtocolMethodNames<P>,
+class RPCServerImpl<
+    ServerApi,
+    PApi extends RPCProtocol<ServerApi> = RPCProtocol<ServerApi>,
+    MethodsNames extends RPCProtocolMethodNames<PApi> = RPCProtocolMethodNames<PApi>,
 > {
     #port: MessagePortLike;
     #options: RPCServerOptions;
@@ -49,14 +60,15 @@ export class RPCServer<
     #onClose: () => void;
     #isClosed: boolean;
     #allowedMethods: Set<MethodsNames>;
-    #methods: P;
+    #methods: PApi;
     #pendingRequests: Map<number | string, PendingRequest>;
 
-    constructor(port: MessagePortLike, methods: TApi, options: RPCServerOptions = {}) {
+    constructor(config: RPCServerConfiguration, methods: ServerApi) {
+        const port = config.port;
         this.#port = port;
         this.#isClosed = false;
-        this.#options = options;
-        this.#methods = methods as unknown as P;
+        this.#options = config;
+        this.#methods = methods as unknown as PApi;
 
         this.#allowedMethods = new Set(
             Object.keys(this.#methods).filter(
@@ -132,7 +144,7 @@ export class RPCServer<
                 return;
             }
             const method = msg.method;
-            const params = msg.params as Parameters<P[typeof method]>;
+            const params = msg.params as Parameters<PApi[typeof method]>;
             assert(Array.isArray(params), 'RPC method parameters must be an array');
             assert(typeof this.#methods[method] === 'function', `RPC method ${method} is not a function`);
 
@@ -181,8 +193,24 @@ export class RPCServer<
         this.#port.removeListener('message', this.#onMessage);
         this.#port.removeListener('close', this.#onClose);
 
-        if (this.#options.closePortOnDispose ?? true) {
+        if (this.#options.closePortOnDispose) {
             this.#port.close?.();
         }
+    }
+}
+
+/**
+ * RPC Server implementation.
+ * @param ServerApi - The API methods of the server.
+ */
+export class RPCServer<ServerApi> extends RPCServerImpl<ServerApi> {
+    /**
+     *
+     * @param port - the port to send and receive messages
+     * @param methods - The methods to implement the API
+     * @param options - options related to the behavior of the server.
+     */
+    constructor(config: RPCServerConfiguration, methods: ServerApi) {
+        super(config, methods);
     }
 }
