@@ -28,6 +28,26 @@ describe('RPC Server', () => {
         expect(port.close).not.toHaveBeenCalled();
     });
 
+    test('new RPCServer auto close', () => {
+        const channel = new MessageChannel();
+        const port = channel.port1;
+        spyOnPort(port);
+
+        const api = {
+            add: (a: number, b: number): number => a + b,
+            sub: (a: number, b: number): number => a - b,
+            mul: (a: number, b: number): number => a * b,
+            div: (a: number, b: number): number => a / b,
+        };
+
+        const server = new RPCServer({ port, closePortOnDispose: true }, api);
+        expect(server).toBeDefined();
+        expect(port.addListener).toHaveBeenCalledWith('message', expect.any(Function));
+        expect(port.start).toHaveBeenCalled();
+        server[Symbol.dispose]();
+        expect(port.close).toHaveBeenCalled();
+    });
+
     test('bad requests', async () => {
         const channel = new MessageChannel();
         const serverPort = channel.port1;
@@ -51,10 +71,7 @@ describe('RPC Server', () => {
             length: 42,
         };
 
-        const server = new RPCServer(
-            { port: serverPort, returnMalformedRPCRequestError: true, closePortOnDispose: true },
-            api,
-        );
+        const server = new RPCServer({ port: serverPort, returnMalformedRPCRequestError: true }, api);
         const readyMsg = (await msgs.next()).value;
         expect(readyMsg.type).toEqual('ready');
 
@@ -91,7 +108,6 @@ describe('RPC Server', () => {
         msgs[Symbol.dispose]();
 
         expect(msgs.isStopped).toBe(true);
-        expect(serverPort.close).toHaveBeenCalled();
         expect(receivedMessages.length).toBe(6);
     });
 });

@@ -24,6 +24,17 @@ describe('RPC Client', () => {
         expect(port.addListener).toHaveBeenCalledWith('message', expect.any(Function));
         expect(port.start).toHaveBeenCalled();
         client[Symbol.dispose]();
+        expect(port.close).not.toHaveBeenCalled();
+    });
+
+    test('new RPCClient auto close', () => {
+        const port = createPort();
+        spyOnPort(port);
+        const client = new RPCClient<any>({ port, closePortOnDispose: true });
+        expect(client).toBeDefined();
+        expect(port.addListener).toHaveBeenCalledWith('message', expect.any(Function));
+        expect(port.start).toHaveBeenCalled();
+        client[Symbol.dispose]();
         expect(port.close).toHaveBeenCalled();
     });
 

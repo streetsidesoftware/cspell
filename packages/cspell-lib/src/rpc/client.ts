@@ -460,7 +460,7 @@ class RPCClientImpl<
 
         this.#port.removeListener('message', this.#onMessage);
 
-        if (this.#options.closePortOnDispose ?? true) {
+        if (this.#options.closePortOnDispose) {
             this.#port.close?.();
         }
     }
