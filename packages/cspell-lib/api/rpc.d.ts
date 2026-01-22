@@ -73,6 +73,7 @@ interface RPCResponse extends RPCMessage {
   */
   type: "response" | "canceled" | "ok" | "ready";
   code: ResponseCode;
+  result?: unknown;
   error?: RPCError | undefined;
 }
 /**
@@ -318,6 +319,61 @@ declare class CanceledRPCRequestError extends RPCRequestError {
   constructor(message?: string);
 }
 //#endregion
+//#region src/rpc/notify.d.ts
+type NotifyHandler<T> = (event: T) => void;
+type NotifyEvent<T> = (handler: NotifyHandler<T>) => Disposable;
+/**
+* Used to have a type distinction between NotifyOnceEvents and NotifyEvents.
+* It is not used at runtime.
+*/
+declare const SymbolNotifyOnceEvent: symbol;
+type NotifyOnceEvent<T> = NotifyEvent<T> & {
+  [SymbolNotifyOnceEvent]?: true;
+};
+/**
+* A Class used to emit notifications to registered handlers.
+*/
+declare class NotifyEmitter<T> {
+  #private;
+  /**
+  * Adds a handler for the event. Multiple handlers can be added. The same handler will
+  * not be added more than once. To add the same handler multiple times, use a wrapper function.
+  *
+  * Note: This function can be used without needing to bind 'this'.
+  * @param handler - the handler to add.
+  * @returns a Disposable to remove the handler.
+  */
+  readonly event: NotifyEvent<T>;
+  /**
+  * Notify all handlers of the event.
+  *
+  * Note: This function can be used without needing to bind 'this'.
+  * @param value - The event value.
+  */
+  readonly notify: (value: T) => void;
+  /**
+  * The number of registered handlers.
+  */
+  get size(): number;
+  [Symbol.dispose](): void;
+}
+/**
+* Convert a NotifyEvent to a Promise.
+* @param event - The event to convert.
+* @returns
+*/
+declare function notifyEventToPromise<T>(event: NotifyEvent<T>): Promise<T>;
+/**
+* Create a NotifyEvent that only fires once.
+*
+* The same handler can be added multiple times and will be called once for each time it is added.
+* This is different from a normal NotifyEvent where the same handler is only added once.
+*
+* @param event - The event to wrap.
+* @returns A NotifyOnceEvent that only fires once for the handlers added.
+*/
+declare function notifyEventOnce<T>(event: NotifyEvent<T>): NotifyOnceEvent<T>;
+//#endregion
 //#region src/rpc/server.d.ts
 interface RPCServerOptions {
   /**
@@ -355,4 +411,4 @@ declare class RPCServer<ServerApi> extends RPCServerImpl<ServerApi> {
   constructor(config: RPCServerConfiguration, methods: ServerApi);
 }
 //#endregion
-export { AbortRPCRequestError, CanceledRPCRequestError, MessagePortLike, RPCClient, RPCClientConfiguration, RPCClientOptions, RPCProtocol, RPCProtocolMethods, RPCRequestError, RPCServer, RPCServerConfiguration, RPCServerOptions, TimeoutRPCRequestError, UnknownMethodRPCRequestError, protocolDefinition, protocolMethods };
+export { AbortRPCRequestError, CanceledRPCRequestError, MessagePortLike, NotifyEmitter, NotifyEvent, NotifyHandler, NotifyOnceEvent, RPCClient, RPCClientConfiguration, RPCClientOptions, RPCProtocol, RPCProtocolMethods, RPCRequestError, RPCServer, RPCServerConfiguration, RPCServerOptions, TimeoutRPCRequestError, UnknownMethodRPCRequestError, notifyEventOnce, notifyEventToPromise, protocolDefinition, protocolMethods };

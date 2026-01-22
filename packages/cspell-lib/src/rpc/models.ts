@@ -41,6 +41,7 @@ export interface RPCResponse extends RPCMessage {
      */
     type: 'response' | 'canceled' | 'ok' | 'ready';
     code: ResponseCode;
+    result?: unknown;
     error?: RPCError | undefined;
 }
 
