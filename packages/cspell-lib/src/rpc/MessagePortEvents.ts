@@ -2,6 +2,15 @@ import type { MessagePortLike } from './messagePort.js';
 import type { NotifyEvent } from './notify.js';
 import { NotifyEmitter } from './notify.js';
 
+/**
+ * Wraps a {@link MessagePortLike} and exposes its key events through a
+ * {@link NotifyEmitter}-based interface.
+ *
+ * This class listens to the underlying port's {@code message},
+ * {@code messageerror}, and {@code close} events and re-emits them as
+ * {@link NotifyEvent} instances, making it easier to subscribe to and manage
+ * notifications from a message port.
+ */
 export class MessagePortEvents {
     #notifyMessage: NotifyEmitter<unknown> = new NotifyEmitter();
     #notifyClose: NotifyEmitter<Event> = new NotifyEmitter();
