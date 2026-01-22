@@ -49,7 +49,7 @@ export function splitWordWithOffset(wo: TextOffset, regExpWordBreaks: RegExp): T
  * Split camelCase words into an array of strings.
  */
 export function splitWord(word: string, regExpWordBreaks: RegExp): string[] {
-    return word.split(regExpWordBreaks);
+    return word.split(new RegExp(regExpWordBreaks));
 }
 
 /**
@@ -57,7 +57,7 @@ export function splitWord(word: string, regExpWordBreaks: RegExp): string[] {
  */
 export function match(reg: RegExp, text: string): Iterable<RegExpExecArray> {
     if (!text) return [];
-    reg = reg.global ? reg : new RegExp(reg.source, reg.flags + 'g');
+    reg = reg.global ? new RegExp(reg) : new RegExp(reg.source, reg.flags + 'g');
     return text.matchAll(reg);
 }
 
@@ -108,6 +108,7 @@ export function extractWordsFromTextOffset(text: TextOffset): Iterable<TextOffse
 export function cleanText(text: string): string {
     regExIgnoreCharacters.lastIndex = 0;
     if (!regExIgnoreCharacters.test(text)) return text;
+    regExIgnoreCharacters.lastIndex = 0;
     text = text.replace(regExIgnoreCharacters, (match: string) => ' '.repeat(match.length));
     return text;
 }
@@ -253,6 +254,7 @@ export function calculateTextDocumentOffsets<T extends TextOffset>(
 }
 
 export function removeAccents(text: string): string {
+    regExAccents.lastIndex = 0;
     return text.normalize('NFD').replace(regExAccents, '');
 }
 
@@ -260,6 +262,6 @@ export const __testing__: {
     regExWords: RegExp;
     regExWordsAndDigits: RegExp;
 } = {
-    regExWords,
-    regExWordsAndDigits,
+    regExWords: regExWords,
+    regExWordsAndDigits: regExWordsAndDigits,
 };

@@ -5,9 +5,9 @@ export const regExSplitWords: RegExp = /(\p{Ll}\p{M}?)(\p{Lu})/gu;
 export const regExSplitWords2: RegExp = /(\p{Lu}\p{M}?)((\p{Lu}\p{M}?)\p{Ll})/gu;
 export const regExpCamelCaseWordBreaksWithEnglishSuffix: RegExp =
     /(?<=\p{Ll}\p{M}?)(?=\p{Lu})|(?<=\p{Lu}\p{M}?)(?=\p{Lu}\p{M}?\p{Ll})(?!\p{Lu}\p{M}?(?:s|ing|ies|es|ings|ed|ning)(?!\p{Ll}))/gu;
-export const regExpCamelCaseWordBreaks: RegExp =
+export const regExpCamelCaseWordBreaks_NOT_USED: RegExp =
     /(?<=\p{Ll}\p{M}?)(?=\p{Lu})|(?<=\p{Lu}\p{M}?)(?=\p{Lu}\p{M}?\p{Ll})/gu;
-export const regExpAllPossibleWordBreaks: RegExp =
+export const regExpAllPossibleWordBreaks_NOT_USED: RegExp =
     /(?<=\p{Ll}\p{M}?)(?=\p{Lu})|(?<=\p{Lu}\p{M}?)(?=\p{Lu}\p{M}?\p{Ll})|(?<=\p{Lu}\p{M}?\p{Lu}\p{M}?)(?=\p{Ll})|(?<=\p{L}\p{M}?)(?=\P{L})|(?<=\P{L})(?=\p{L})/gu;
 export const regExWords: RegExp = /\p{L}\p{M}?(?:(?:\\?['’])?\p{L}\p{M}?)*/gu;
 // Words can be made of letters, numbers, period, underscore, dash, plus, and single quote

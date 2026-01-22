@@ -193,11 +193,6 @@ const settingParsers: readonly (readonly [RegExp, ReducerFn, Directive])[] = [
     [/^LocalWords:/, (acc, m) => reduceWordList(acc, m.replaceAll(/^LocalWords:?/gi, ' '), 'words'), 'Words'],
 ] as const;
 
-export const regExSpellingGuardBlock: RegExp =
-    /(\bc?spell(?:-?checker)?::?)\s*disable(?!-line|-next)\b[\s\S]*?((?:\1\s*enable\b)|$)/gi;
-export const regExSpellingGuardNext: RegExp = /\bc?spell(?:-?checker)?::?\s*disable-next\b.*\s\s?.*/gi;
-export const regExSpellingGuardLine: RegExp = /^.*\bc?spell(?:-?checker)?::?\s*disable-line\b.*/gim;
-
 const issueMessages = {
     unknownDirective: 'Unknown CSpell directive',
 } as const;
@@ -205,6 +200,7 @@ const issueMessages = {
 function parseSettingMatchValidation(possibleMatch: PossibleMatch): DirectiveIssue | undefined {
     const { fullDirective, offset } = possibleMatch;
 
+    regExCSpellDirectiveKey.lastIndex = 0;
     const directiveMatch = fullDirective.match(regExCSpellDirectiveKey);
     if (!directiveMatch) return undefined;
 
@@ -337,6 +333,7 @@ function parseFlagWords(acc: CSpellUserSettings, match: string): CSpellUserSetti
 
 function parseRegEx(match: string): string[] {
     const patterns = [match.replace(/^[^\s]+\s+/, '')].map((a) => {
+        regExMatchRegEx.lastIndex = 0;
         const m = a.match(regExMatchRegEx);
         if (m && m[0]) {
             return m[0];

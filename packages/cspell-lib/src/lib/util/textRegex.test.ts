@@ -195,6 +195,22 @@ describe('Validate textRegex', () => {
         const r = stringToRegExp(pattern);
         expect(r).toEqual(expected);
     });
+
+    test('matchAll with shared global regex', () => {
+        // We want to make sure it takes a copy.
+        const reg = /./g;
+        const text = 'It is a beautiful day.';
+        reg.lastIndex = 4;
+        const result: string[] = [];
+        for (const letter of text.matchAll(reg)) {
+            result.push(letter[0]);
+            reg.lastIndex += 1;
+        }
+
+        expect(result.join('')).toBe(text.slice(4));
+        expect(reg.lastIndex).toBe(text.length);
+        expect(new RegExp(reg).lastIndex).toBe(0);
+    });
 });
 
 // function s(t: string, on: string | RegExp = '|'): string[] {

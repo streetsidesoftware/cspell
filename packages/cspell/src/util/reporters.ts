@@ -176,6 +176,15 @@ export function mergeReportIssueOptions(
     return options;
 }
 
+export interface LintFileReporter {
+    issue(issue: Issue, reportOptions?: ReportIssueOptions): void;
+    info(...params: Parameters<FinalizedReporter['info']>): void;
+    debug(...params: Parameters<FinalizedReporter['debug']>): void;
+    error(...params: Parameters<FinalizedReporter['error']>): void;
+    emitProgressBegin(filename: string, fileNum: number, fileCount: number): void;
+    emitProgressComplete(filename: string, fileNum: number, fileCount: number, result: LintFileResult): number;
+}
+
 export class LintReporter {
     #reporters: FinalizedReporter[] = [];
     #config: ReporterConfiguration;
