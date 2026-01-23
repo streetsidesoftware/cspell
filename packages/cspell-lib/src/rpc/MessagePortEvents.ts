@@ -6,8 +6,8 @@ import { NotifyEmitter } from './notify.js';
  * Wraps a {@link MessagePortLike} and exposes its key events through a
  * {@link NotifyEmitter}-based interface.
  *
- * This class listens to the underlying port's {@code message},
- * {@code messageerror}, and {@code close} events and re-emits them as
+ * This class listens to the underlying port's `message`,
+ * `messageerror`, and `close` events and re-emits them as
  * {@link NotifyEvent} instances, making it easier to subscribe to and manage
  * notifications from a message port.
  */
@@ -43,9 +43,19 @@ export class MessagePortNotifyEvents {
         return this.#notifyMessage.onEvent;
     }
 
-    nextMessage(signal?: AbortSignal): Promise<unknown> {
-        return this.#notifyMessage.next(signal);
-    }
+    /**
+     * Return a Promise that resolves on the next message.
+     * @param signal - A signal to abort the wait.
+     * @returns A Promise that resolves with the next message received.
+     */
+    readonly awaitNextMessage = (signal?: AbortSignal): Promise<unknown> => this.#notifyMessage.awaitNext(signal);
+
+    /**
+     * Return a Promise that resolves on the close event.
+     * @param signal - A signal to abort the wait.
+     * @returns A Promise that resolves when the port is closed.
+     */
+    readonly awaitClose = (signal?: AbortSignal): Promise<unknown> => this.#notifyClose.awaitNext(signal);
 
     /**
      * Register a handler to called when the port is closed.

@@ -365,11 +365,11 @@ declare class NotifyEmitter<T> {
   */
   readonly once: NotifyOnceEvent<T>;
   /**
-  * Get a Promise that resolves on the next event.
+  * Get a Promise that resolves with the next event.
   * @param signal - A signal to abort the wait.
-  * @returns a Promise that will resolve when the next value is emitted.
+  * @returns a Promise that will resolve with the next value emitted.
   */
-  readonly next: (signal?: AbortSignal) => Promise<T>;
+  readonly awaitNext: (signal?: AbortSignal) => Promise<T>;
   /**
   * The number of registered handlers.
   */

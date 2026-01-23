@@ -73,7 +73,7 @@ describe('notify', () => {
     test('emitter.next', async () => {
         using emitter = new NotifyEmitter<string>();
         expect(emitter.size).toBe(0);
-        const n1 = emitter.next();
+        const n1 = emitter.awaitNext();
         expect(emitter.size).toBe(1);
         emitter.notify('first');
         emitter.notify('second');
@@ -84,7 +84,7 @@ describe('notify', () => {
     test('emitter.next timeout', async () => {
         using emitter = new NotifyEmitter<string>();
         expect(emitter.size).toBe(0);
-        const n1 = emitter.next(AbortSignal.timeout(10));
+        const n1 = emitter.awaitNext(AbortSignal.timeout(10));
         expect(emitter.size).toBe(1);
         await expect(n1).rejects.toThrowError('The operation was aborted due to timeout');
         expect(emitter.size).toBe(0);

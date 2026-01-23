@@ -7,7 +7,6 @@ import type { MessagePortLike } from './messagePort.js';
 import { MessagePortNotifyEvents } from './MessagePortEvents.js';
 import type { RPCResponse } from './models.js';
 import { createRPCMethodRequest, createRPCOkRequest, createRPCOkResponse, isRPCOkResponse } from './modelsHelpers.js';
-import { notifyEventToPromise } from './notify.js';
 import { RPCServer } from './server.js';
 
 describe('RPC Server', () => {
@@ -58,7 +57,7 @@ describe('RPC Server', () => {
         const receivedMessages: unknown[] = [];
         using clientEvents = new MessagePortNotifyEvents(clientPort);
         clientEvents.onMessage((msg) => receivedMessages.push(msg));
-        const nextMsg = () => notifyEventToPromise(clientEvents.onMessage) as Promise<RPCResponse>;
+        const nextMsg = clientEvents.awaitNextMessage as () => Promise<RPCResponse>;
 
         spyOnPort(serverPort);
 
