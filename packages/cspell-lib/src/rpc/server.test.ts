@@ -5,8 +5,13 @@ import { describe, expect, test, vi } from 'vitest';
 
 import type { MessagePortLike } from './messagePort.js';
 import { MessagePortNotifyEvents } from './MessagePortEvents.js';
-import type { RPCResponse } from './models.js';
-import { createRPCMethodRequest, createRPCOkRequest, createRPCOkResponse, isRPCOkResponse } from './modelsHelpers.js';
+import {
+    createRPCMethodRequest,
+    createRPCOkRequest,
+    createRPCOkResponse,
+    isBaseResponse,
+    isRPCOkResponse,
+} from './modelsHelpers.js';
 import { RPCServer } from './server.js';
 
 describe('RPC Server', () => {
@@ -57,7 +62,7 @@ describe('RPC Server', () => {
         const receivedMessages: unknown[] = [];
         using clientEvents = new MessagePortNotifyEvents(clientPort);
         clientEvents.onMessage((msg) => receivedMessages.push(msg));
-        const nextMsg = clientEvents.awaitNextMessage as () => Promise<RPCResponse>;
+        const nextMsg = makeAwaitNextMessage(clientEvents.awaitNextMessage, isBaseResponse);
 
         spyOnPort(serverPort);
 
@@ -104,6 +109,19 @@ describe('RPC Server', () => {
         await wait(10);
     });
 });
+
+function makeAwaitNextMessage<T>(
+    src: MessagePortNotifyEvents['awaitNextMessage'],
+    assertPrimitive: (v: unknown) => v is T,
+): (signal?: AbortSignal) => Promise<T> {
+    return async (signal?: AbortSignal): Promise<T> => {
+        const msg = await src(signal);
+        if (!assertPrimitive(msg)) {
+            throw new Error(`Expected primitive message, got ${typeof msg}`);
+        }
+        return msg;
+    };
+}
 
 function spyOnPort(port: MessagePortLike) {
     const spyOnAddListener = vi.spyOn(port, 'addListener');
