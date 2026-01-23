@@ -39,6 +39,8 @@ describe('MessagePortEvents', () => {
         using msgEvents = new MessagePortNotifyEvents(port1);
         using _dMsg = msgEvents.onMessage(recordCalls(calls));
 
+        msgEvents.start();
+
         port2.postMessage('test1');
         port2.postMessage('test2');
 
@@ -67,7 +69,7 @@ describe('MessagePortEvents', () => {
         expect(calls).toEqual([expect.any(Event)]);
     });
 
-    test('onClose', async () => {
+    test('onClose reverse', async () => {
         const channel = new MessageChannel();
         const { port1, port2 } = channel;
 
@@ -79,10 +81,10 @@ describe('MessagePortEvents', () => {
         using _dMsg = msgEvents1.onClose(recordCalls(calls));
         const pClose1 = msgEvents1.awaitClose(timeout);
         const pClose2 = msgEvents2.awaitClose(timeout);
-        port1.close();
-        await expect(pClose1).resolves.toBeInstanceOf(Event);
-        // Because port1 was closed, port2 should also get the close event.
+        msgEvents2.close();
         await expect(pClose2).resolves.toBeInstanceOf(Event);
+        // Because port2 was closed, port1 should also get the close event.
+        await expect(pClose1).resolves.toBeInstanceOf(Event);
         expect(calls).toEqual([expect.any(Event)]);
     });
 
