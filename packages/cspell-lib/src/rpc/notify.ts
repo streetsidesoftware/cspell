@@ -148,7 +148,7 @@ export function notifyEventOnce<T>(event: NotifyEvent<T>): NotifyOnceEvent<T> {
     function notifyOnce(handler: NotifyHandler<T>): Disposable {
         const disposable = event((e) => {
             // A NotifyEvent should register a handler, but never call it immediately.
-            // Therefor the disposable should always be defined here. A ReferenceError
+            // Therefore the disposable should always be defined here. A ReferenceError
             // would indicate a bug in NotifyEmitter or NotifyEvent implementation.
             disposable[Symbol.dispose]();
             handler(e);
