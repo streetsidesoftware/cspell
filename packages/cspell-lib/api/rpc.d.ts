@@ -339,7 +339,7 @@ declare class NotifyEmitter<T> {
   * Registers a handler for the event. Multiple handlers can be added. The same handler will
   * not be added more than once. To add the same handler multiple times, use a wrapper function.
   *
-  * Events are Async, so the handler will NOT be called during the registration.
+  * The handler will NOT be called during the registration. They will be called when {@link notify} is called.
   *
   * Note: This function can be used without needing to bind 'this'.
   * @param handler - the handler to add.
