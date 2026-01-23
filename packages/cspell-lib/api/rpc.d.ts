@@ -326,7 +326,7 @@ type NotifyEvent<T> = (handler: NotifyHandler<T>) => Disposable;
 * Used to have a type distinction between NotifyOnceEvents and NotifyEvents.
 * It is not used at runtime.
 */
-declare const SymbolNotifyOnceEvent: symbol;
+declare const SymbolNotifyOnceEvent: unique symbol;
 type NotifyOnceEvent<T> = NotifyEvent<T> & {
   [SymbolNotifyOnceEvent]?: true;
 };
