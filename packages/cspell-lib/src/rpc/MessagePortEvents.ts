@@ -11,15 +11,15 @@ import { NotifyEmitter } from './notify.js';
  * {@link NotifyEvent} instances, making it easier to subscribe to and manage
  * notifications from a message port.
  */
-export class MessagePortNotifyEvents {
+export class MessagePortNotifyEvents<T extends MessagePortLike = MessagePortLike> {
     #notifyMessage: NotifyEmitter<unknown> = new NotifyEmitter();
     #notifyClose: NotifyEmitter<Event> = new NotifyEmitter();
     #notifyMessageError: NotifyEmitter<Error> = new NotifyEmitter();
-    #port: MessagePortLike;
+    #port: T;
     #disposed = false;
     #closed: Event | undefined;
 
-    constructor(port: MessagePortLike) {
+    constructor(port: T) {
         this.#port = port;
         this.#port.addListener('message', this.#notifyMessage.notify);
         this.#port.addListener('messageerror', this.#notifyMessageError.notify);
@@ -63,6 +63,26 @@ export class MessagePortNotifyEvents {
     };
 
     /**
+     * Post a message to the underlying port.
+     * @param message - The message to post.
+     */
+    readonly postMessage: T['postMessage'] = (message: unknown): void => this.#port.postMessage(message);
+
+    /**
+     * Start the underlying port.
+     */
+    start(): void {
+        this.#port.start?.();
+    }
+
+    /**
+     * Close the underlying port.
+     */
+    close(): void {
+        this.#port.close?.();
+    }
+
+    /**
      * Register a handler to be called when the port is closed.
      */
     get onClose(): NotifyEvent<Event> {
@@ -74,5 +94,13 @@ export class MessagePortNotifyEvents {
      */
     get onMessageError(): NotifyEvent<Error> {
         return this.#notifyMessageError.onEvent;
+    }
+
+    get isClosed(): boolean {
+        return this.#closed !== undefined;
+    }
+
+    get port(): T {
+        return this.#port;
     }
 }

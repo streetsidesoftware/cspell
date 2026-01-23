@@ -1,6 +1,7 @@
 import { AbortRPCRequestError, CanceledRPCRequestError, TimeoutRPCRequestError } from './errors.js';
 import { Future } from './Future.js';
 import type { MessagePortLike } from './messagePort.js';
+import { MessagePortNotifyEvents } from './MessagePortEvents.js';
 import type { RCPBaseRequest, RequestID, RPCPendingClientRequest, RPCResponse } from './models.js';
 import {
     createRPCCancelRequest,
@@ -77,7 +78,7 @@ class RPCClientImpl<
     P extends RPCProtocol<T> = RPCProtocol<T>,
     MethodNames extends RPCProtocolMethodNames<P> = RPCProtocolMethodNames<P>,
 > {
-    #port: MessagePortLike;
+    #port: MessagePortNotifyEvents;
     #count: number = 0;
     #options: RPCClientOptions;
 
@@ -89,24 +90,19 @@ class RPCClientImpl<
     #isReady: boolean;
     #ready: Future<boolean>;
 
-    #onMessage: (msg: unknown) => void;
-
     /**
      * Create an RPC Client.
      * @param config - The client configuration.
      */
     constructor(config: RPCClientConfiguration) {
-        const port = config.port;
-        this.#port = port;
+        this.#port = new MessagePortNotifyEvents(config.port);
         this.#options = config;
         this.#defaultTimeoutMs = config.timeoutMs;
         this.#isReady = false;
         this.#ready = new Future<boolean>();
 
-        this.#onMessage = (msg: unknown) => this.#processMessageFromServer(msg);
-
-        port.addListener('message', this.#onMessage);
-        port.start?.();
+        this.#port.onMessage((msg: unknown) => this.#processMessageFromServer(msg));
+        this.#port.start();
     }
 
     /**
@@ -457,12 +453,10 @@ class RPCClientImpl<
     [Symbol.dispose](): void {
         this.abortAllRequests(new Error('RPC Client disposed'));
         this.#pendingRequests.clear();
-
-        this.#port.removeListener('message', this.#onMessage);
-
         if (this.#options.closePortOnDispose) {
-            this.#port.close?.();
+            this.#port.close();
         }
+        this.#port[Symbol.dispose]();
     }
 }
 

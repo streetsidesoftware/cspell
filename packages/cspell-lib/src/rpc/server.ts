@@ -1,6 +1,7 @@
 import { assert } from './assert.js';
 import { MalformedRPCRequestError, UnknownMethodRPCRequestError } from './errors.js';
 import type { MessagePortLike } from './messagePort.js';
+import { MessagePortNotifyEvents } from './MessagePortEvents.js';
 import type { RequestID, ResponseCode, RPCMessage, RPCRequestMessage } from './models.js';
 import {
     createRPCCanceledResponse,
@@ -54,19 +55,14 @@ class RPCServerImpl<
     PApi extends RPCProtocol<ServerApi> = RPCProtocol<ServerApi>,
     MethodsNames extends RPCProtocolMethodNames<PApi> = RPCProtocolMethodNames<PApi>,
 > {
-    #port: MessagePortLike;
+    #portWrapper: MessagePortNotifyEvents;
     #options: RPCServerOptions;
-    #onMessage: (msg: unknown) => void;
-    #onClose: () => void;
-    #isClosed: boolean;
     #allowedMethods: Set<MethodsNames>;
     #methods: PApi;
     #pendingRequests: Map<number | string, PendingRequest>;
 
     constructor(config: RPCServerConfiguration, methods: ServerApi) {
-        const port = config.port;
-        this.#port = port;
-        this.#isClosed = false;
+        this.#portWrapper = new MessagePortNotifyEvents(config.port);
         this.#options = config;
         this.#methods = methods as unknown as PApi;
 
@@ -77,17 +73,18 @@ class RPCServerImpl<
         );
 
         this.#pendingRequests = new Map();
-        this.#onMessage = (msg: unknown) => this.#handleMessage(msg);
-        this.#onClose = () => this.#cancelAllRequests(new Error('RPC Server port closed'));
-        port.addListener('close', this.#onClose);
-        port.addListener('message', this.#onMessage);
-        port.start?.();
+        this.#portWrapper.onMessage((msg: unknown) => this.#handleMessage(msg));
+        this.#portWrapper.start();
         this.#sendReadyResponse();
+    }
+
+    get #isClosed(): boolean {
+        return this.#portWrapper.isClosed;
     }
 
     #sendResponse(response: RPCMessage): void {
         if (this.#isClosed) return;
-        this.#port.postMessage(response);
+        this.#portWrapper.postMessage(response);
     }
 
     #handleMessage(msg: unknown): void {
@@ -190,12 +187,10 @@ class RPCServerImpl<
 
     [Symbol.dispose](): void {
         this.#cancelAllRequests();
-        this.#port.removeListener('message', this.#onMessage);
-        this.#port.removeListener('close', this.#onClose);
-
         if (this.#options.closePortOnDispose) {
-            this.#port.close?.();
+            this.#portWrapper.close();
         }
+        this.#portWrapper[Symbol.dispose]();
     }
 }
 
