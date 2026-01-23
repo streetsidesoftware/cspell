@@ -68,7 +68,7 @@ export function ConfigFileList(props: ConfigFileListProps): React.ReactElement {
         <b>
           <code>package.json</code>
         </b>
-        : Only the <code>cspell</code> fields in <code>package.json</code> is considered.
+        : Only the <code>cspell</code> field in <code>package.json</code> is considered.
       </Admonition>
     </div>
   );
