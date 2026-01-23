@@ -8,7 +8,7 @@ export type NotifyEvent<T> = (handler: NotifyHandler<T>) => Disposable;
  * Used to have a type distinction between NotifyOnceEvents and NotifyEvents.
  * It is not used at runtime.
  */
-const SymbolNotifyOnceEvent: symbol = Symbol('NotifyOnceEvent');
+declare const SymbolNotifyOnceEvent: unique symbol;
 export type NotifyOnceEvent<T> = NotifyEvent<T> & { [SymbolNotifyOnceEvent]?: true };
 
 /**
