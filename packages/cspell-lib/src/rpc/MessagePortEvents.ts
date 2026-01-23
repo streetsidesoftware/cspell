@@ -57,7 +57,7 @@ export class MessagePortNotifyEvents {
      * @param signal - A signal to abort the wait.
      * @returns A Promise that resolves when the port is closed.
      */
-    readonly awaitClose = (signal?: AbortSignal): Promise<unknown> => {
+    readonly awaitClose = (signal?: AbortSignal): Promise<Event> => {
         if (this.#closed) return Promise.resolve(this.#closed);
         return this.#notifyClose.awaitNext(signal);
     };
