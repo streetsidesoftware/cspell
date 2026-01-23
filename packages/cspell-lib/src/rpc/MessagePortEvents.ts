@@ -17,12 +17,14 @@ export class MessagePortNotifyEvents {
     #notifyMessageError: NotifyEmitter<Error> = new NotifyEmitter();
     #port: MessagePortLike;
     #disposed = false;
+    #closed: Event | undefined;
 
     constructor(port: MessagePortLike) {
         this.#port = port;
         this.#port.addListener('message', this.#notifyMessage.notify);
         this.#port.addListener('messageerror', this.#notifyMessageError.notify);
         this.#port.addListener('close', this.#notifyClose.notify);
+        this.#notifyClose.once((event) => (this.#closed = event));
     }
 
     [Symbol.dispose](): void {
@@ -55,7 +57,10 @@ export class MessagePortNotifyEvents {
      * @param signal - A signal to abort the wait.
      * @returns A Promise that resolves when the port is closed.
      */
-    readonly awaitClose = (signal?: AbortSignal): Promise<unknown> => this.#notifyClose.awaitNext(signal);
+    readonly awaitClose = (signal?: AbortSignal): Promise<unknown> => {
+        if (this.#closed) return Promise.resolve(this.#closed);
+        return this.#notifyClose.awaitNext(signal);
+    };
 
     /**
      * Register a handler to called when the port is closed.

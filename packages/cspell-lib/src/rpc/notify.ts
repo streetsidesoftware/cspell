@@ -97,7 +97,7 @@ export class NotifyEmitter<T> {
      * @param value - The event value.
      */
     #notify(value: T): void {
-        for (const handler of this.#handlers.keys()) {
+        for (const handler of [...this.#handlers.keys()]) {
             handler(value);
         }
     }
