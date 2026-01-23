@@ -336,16 +336,20 @@ type NotifyOnceEvent<T> = NotifyEvent<T> & {
 declare class NotifyEmitter<T> {
   #private;
   /**
-  * Adds a handler for the event. Multiple handlers can be added. The same handler will
+  * Registers a handler for the event. Multiple handlers can be added. The same handler will
   * not be added more than once. To add the same handler multiple times, use a wrapper function.
+  *
+  * Events are Async, so the handler will NOT be called during the registration.
   *
   * Note: This function can be used without needing to bind 'this'.
   * @param handler - the handler to add.
   * @returns a Disposable to remove the handler.
   */
-  readonly event: NotifyEvent<T>;
+  readonly onEvent: NotifyEvent<T>;
   /**
   * Notify all handlers of the event.
+  *
+  * If a handler throws an error, the error is not caught and will propagate up the call stack.
   *
   * Note: This function can be used without needing to bind 'this'.
   * @param value - The event value.
@@ -361,9 +365,19 @@ declare class NotifyEmitter<T> {
   */
   readonly once: NotifyOnceEvent<T>;
   /**
+  * Get a Promise that resolves on the next event.
+  * @param signal - A signal to abort the wait.
+  * @returns a Promise that will resolve when the next value is emitted.
+  */
+  readonly next: (signal?: AbortSignal) => Promise<T>;
+  /**
   * The number of registered handlers.
   */
   get size(): number;
+  /**
+  * Removes all registered handlers.
+  */
+  clear(): void;
   [Symbol.dispose](): void;
 }
 /**

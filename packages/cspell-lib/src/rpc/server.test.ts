@@ -4,7 +4,7 @@ import { MessageChannel } from 'node:worker_threads';
 import { describe, expect, test, vi } from 'vitest';
 
 import type { MessagePortLike } from './messagePort.js';
-import { MessagePortEvents } from './MessagePortEvents.js';
+import { MessagePortNotifyEvents } from './MessagePortEvents.js';
 import type { RPCResponse } from './models.js';
 import { createRPCMethodRequest, createRPCOkRequest, createRPCOkResponse, isRPCOkResponse } from './modelsHelpers.js';
 import { notifyEventToPromise } from './notify.js';
@@ -56,9 +56,9 @@ describe('RPC Server', () => {
         const serverPort = channel.port1;
         const clientPort = channel.port2;
         const receivedMessages: unknown[] = [];
-        using clientEvents = new MessagePortEvents(clientPort);
-        clientEvents.event((msg) => receivedMessages.push(msg));
-        const nextMsg = () => notifyEventToPromise(clientEvents.event) as Promise<RPCResponse>;
+        using clientEvents = new MessagePortNotifyEvents(clientPort);
+        clientEvents.onMessage((msg) => receivedMessages.push(msg));
+        const nextMsg = () => notifyEventToPromise(clientEvents.onMessage) as Promise<RPCResponse>;
 
         spyOnPort(serverPort);
 

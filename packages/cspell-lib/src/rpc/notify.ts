@@ -1,3 +1,5 @@
+import { AlreadyDisposedError } from './errors.js';
+
 export type NotifyHandler<T> = (event: T) => void;
 
 export type NotifyEvent<T> = (handler: NotifyHandler<T>) => Disposable;
@@ -13,20 +15,25 @@ export type NotifyOnceEvent<T> = NotifyEvent<T> & { [SymbolNotifyOnceEvent]?: tr
  * A Class used to emit notifications to registered handlers.
  */
 export class NotifyEmitter<T> {
-    #handlers: Set<NotifyHandler<T>> = new Set();
+    #handlers: Map<NotifyHandler<T>, Disposable> = new Map();
+    #disposed = false;
 
     /**
-     * Adds a handler for the event. Multiple handlers can be added. The same handler will
+     * Registers a handler for the event. Multiple handlers can be added. The same handler will
      * not be added more than once. To add the same handler multiple times, use a wrapper function.
+     *
+     * Events are Async, so the handler will NOT be called during the registration.
      *
      * Note: This function can be used without needing to bind 'this'.
      * @param handler - the handler to add.
      * @returns a Disposable to remove the handler.
      */
-    readonly event: NotifyEvent<T> = (handler) => this.#event(handler);
+    readonly onEvent: NotifyEvent<T> = (handler) => this.#onEvent(handler);
 
     /**
      * Notify all handlers of the event.
+     *
+     * If a handler throws an error, the error is not caught and will propagate up the call stack.
      *
      * Note: This function can be used without needing to bind 'this'.
      * @param value - The event value.
@@ -41,7 +48,15 @@ export class NotifyEmitter<T> {
      *
      * Note: This property can be used without needing to bind 'this'.
      */
-    readonly once: NotifyOnceEvent<T> = notifyEventOnce(this.event);
+    readonly once: NotifyOnceEvent<T> = notifyEventOnce(this.onEvent);
+
+    /**
+     * Get a Promise that resolves on the next event.
+     * @param signal - A signal to abort the wait.
+     * @returns a Promise that will resolve when the next value is emitted.
+     */
+    readonly next: (signal?: AbortSignal) => Promise<T> = (signal?: AbortSignal) =>
+        notifyEventToPromise(this.onEvent, signal);
 
     /**
      * The number of registered handlers.
@@ -50,13 +65,31 @@ export class NotifyEmitter<T> {
         return this.#handlers.size;
     }
 
-    #event(handler: NotifyHandler<T>): Disposable {
-        this.#handlers.add(handler);
-        return {
+    /**
+     * Removes all registered handlers.
+     */
+    clear(): void {
+        this.#handlers.clear();
+    }
+
+    #onEvent(handler: NotifyHandler<T>): Disposable {
+        if (this.#disposed) {
+            throw new AlreadyDisposedError();
+        }
+        const found = this.#handlers.get(handler);
+        if (found) {
+            return found;
+        }
+        let disposed = false;
+        const disposable = {
             [Symbol.dispose]: () => {
+                if (disposed) return;
+                disposed = true;
                 this.#handlers.delete(handler);
             },
         };
+        this.#handlers.set(handler, disposable);
+        return disposable;
     }
 
     /**
@@ -64,12 +97,14 @@ export class NotifyEmitter<T> {
      * @param value - The event value.
      */
     #notify(value: T): void {
-        for (const handler of this.#handlers) {
+        for (const handler of this.#handlers.keys()) {
             handler(value);
         }
     }
 
     [Symbol.dispose](): void {
+        if (this.#disposed) return;
+        this.#disposed = true;
         this.#handlers.clear();
     }
 }
@@ -83,29 +118,20 @@ export class NotifyEmitter<T> {
 export function notifyEventToPromise<T>(event: NotifyEvent<T>, signal?: AbortSignal): Promise<T> {
     const once = notifyEventOnce(event);
     return new Promise<T>((resolve, reject) => {
-        if (signal?.aborted) {
-            reject(new Error('notifyEventToPromise aborted before subscription.'));
-            return;
-        }
+        signal?.throwIfAborted();
 
         const disposable = once((value) => {
-            if (signal) {
-                signal.removeEventListener('abort', onAbort);
-            }
+            signal?.removeEventListener('abort', onAbort);
             resolve(value);
         });
 
         function onAbort() {
             disposable[Symbol.dispose]();
-            if (signal) {
-                signal.removeEventListener('abort', onAbort);
-            }
-            reject(new Error('notifyEventToPromise aborted.'));
+            signal?.removeEventListener('abort', onAbort);
+            reject(signal?.reason);
         }
 
-        if (signal) {
-            signal.addEventListener('abort', onAbort, { once: true });
-        }
+        signal?.addEventListener('abort', onAbort, { once: true });
     });
 }
 
@@ -121,10 +147,14 @@ export function notifyEventToPromise<T>(event: NotifyEvent<T>, signal?: AbortSig
 export function notifyEventOnce<T>(event: NotifyEvent<T>): NotifyOnceEvent<T> {
     function notifyOnce(handler: NotifyHandler<T>): Disposable {
         const disposable = event((e) => {
+            // A NotifyEvent should register a handler, but never call it immediately.
+            // Therefor the disposable should always be defined here. A ReferenceError
+            // would indicate a bug in NotifyEmitter or NotifyEvent implementation.
             disposable[Symbol.dispose]();
             handler(e);
         });
         return disposable;
     }
+
     return notifyOnce as NotifyOnceEvent<T>;
 }

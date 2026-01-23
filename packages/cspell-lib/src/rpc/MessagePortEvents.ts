@@ -11,11 +11,12 @@ import { NotifyEmitter } from './notify.js';
  * {@link NotifyEvent} instances, making it easier to subscribe to and manage
  * notifications from a message port.
  */
-export class MessagePortEvents {
+export class MessagePortNotifyEvents {
     #notifyMessage: NotifyEmitter<unknown> = new NotifyEmitter();
     #notifyClose: NotifyEmitter<Event> = new NotifyEmitter();
     #notifyMessageError: NotifyEmitter<Error> = new NotifyEmitter();
     #port: MessagePortLike;
+    #disposed = false;
 
     constructor(port: MessagePortLike) {
         this.#port = port;
@@ -25,6 +26,8 @@ export class MessagePortEvents {
     }
 
     [Symbol.dispose](): void {
+        if (this.#disposed) return;
+        this.#disposed = true;
         this.#port.removeListener('message', this.#notifyMessage.notify);
         this.#port.removeListener('messageerror', this.#notifyMessageError.notify);
         this.#port.removeListener('close', this.#notifyClose.notify);
@@ -34,23 +37,27 @@ export class MessagePortEvents {
     }
 
     /**
-     * Event fired when a message is received.
+     * Register a handler to called when a message is received.
      */
-    get event(): NotifyEvent<unknown> {
-        return this.#notifyMessage.event;
+    get onMessage(): NotifyEvent<unknown> {
+        return this.#notifyMessage.onEvent;
+    }
+
+    nextMessage(signal?: AbortSignal): Promise<unknown> {
+        return this.#notifyMessage.next(signal);
     }
 
     /**
-     * Event fired when the port is closed.
+     * Register a handler to called when the port is closed.
      */
-    get eventClose(): NotifyEvent<Event> {
-        return this.#notifyClose.event;
+    get onClose(): NotifyEvent<Event> {
+        return this.#notifyClose.onEvent;
     }
 
     /**
-     * Event fired when a message error is received.
+     * Register a handler to called when a message error is received.
      */
-    get eventMessageError(): NotifyEvent<Error> {
-        return this.#notifyMessageError.event;
+    get onMessageError(): NotifyEvent<Error> {
+        return this.#notifyMessageError.onEvent;
     }
 }
