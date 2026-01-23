@@ -369,9 +369,10 @@ declare class NotifyEmitter<T> {
 /**
 * Convert a NotifyEvent to a Promise.
 * @param event - The event to convert.
+* @param signal - Optional AbortSignal to cancel the subscription if the promise is abandoned.
 * @returns A Promise that resolves with the first value emitted by the event.
 */
-declare function notifyEventToPromise<T>(event: NotifyEvent<T>): Promise<T>;
+declare function notifyEventToPromise<T>(event: NotifyEvent<T>, signal?: AbortSignal): Promise<T>;
 /**
 * Create a NotifyEvent that only fires once.
 *
