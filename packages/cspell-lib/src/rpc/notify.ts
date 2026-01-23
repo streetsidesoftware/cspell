@@ -77,12 +77,35 @@ export class NotifyEmitter<T> {
 /**
  * Convert a NotifyEvent to a Promise.
  * @param event - The event to convert.
+ * @param signal - Optional AbortSignal to cancel the subscription if the promise is abandoned.
  * @returns A Promise that resolves with the first value emitted by the event.
  */
-export function notifyEventToPromise<T>(event: NotifyEvent<T>): Promise<T> {
+export function notifyEventToPromise<T>(event: NotifyEvent<T>, signal?: AbortSignal): Promise<T> {
     const once = notifyEventOnce(event);
-    return new Promise<T>((resolve) => {
-        once(resolve);
+    return new Promise<T>((resolve, reject) => {
+        if (signal?.aborted) {
+            reject(new Error('notifyEventToPromise aborted before subscription.'));
+            return;
+        }
+
+        const disposable = once((value) => {
+            if (signal) {
+                signal.removeEventListener('abort', onAbort);
+            }
+            resolve(value);
+        });
+
+        function onAbort() {
+            disposable[Symbol.dispose]();
+            if (signal) {
+                signal.removeEventListener('abort', onAbort);
+            }
+            reject(new Error('notifyEventToPromise aborted.'));
+        }
+
+        if (signal) {
+            signal.addEventListener('abort', onAbort, { once: true });
+        }
     });
 }
 
