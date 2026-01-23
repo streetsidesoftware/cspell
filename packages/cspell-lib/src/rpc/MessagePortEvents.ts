@@ -39,7 +39,7 @@ export class MessagePortNotifyEvents {
     }
 
     /**
-     * Register a handler to called when a message is received.
+     * Register a handler to be called when a message is received.
      */
     get onMessage(): NotifyEvent<unknown> {
         return this.#notifyMessage.onEvent;
@@ -63,14 +63,14 @@ export class MessagePortNotifyEvents {
     };
 
     /**
-     * Register a handler to called when the port is closed.
+     * Register a handler to be called when the port is closed.
      */
     get onClose(): NotifyEvent<Event> {
         return this.#notifyClose.onEvent;
     }
 
     /**
-     * Register a handler to called when a message error is received.
+     * Register a handler to be called when a message error is received.
      */
     get onMessageError(): NotifyEvent<Error> {
         return this.#notifyMessageError.onEvent;
