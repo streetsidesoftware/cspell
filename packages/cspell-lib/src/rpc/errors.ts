@@ -45,3 +45,10 @@ export class CanceledRPCRequestError extends RPCRequestError {
         this.name = 'CanceledRPCRequestError';
     }
 }
+
+export class AlreadyDisposedError extends Error {
+    constructor() {
+        super('NotifyEmitter has been disposed.');
+        this.name = 'AlreadyDisposedError';
+    }
+}

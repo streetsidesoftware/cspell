@@ -4,7 +4,14 @@ import { MessageChannel } from 'node:worker_threads';
 import { describe, expect, test, vi } from 'vitest';
 
 import type { MessagePortLike } from './messagePort.js';
-import { createRPCMethodRequest, createRPCOkRequest, createRPCOkResponse, isRPCOkResponse } from './modelsHelpers.js';
+import { MessagePortNotifyEvents } from './MessagePortEvents.js';
+import {
+    createRPCMethodRequest,
+    createRPCOkRequest,
+    createRPCOkResponse,
+    isBaseResponse,
+    isRPCOkResponse,
+} from './modelsHelpers.js';
 import { RPCServer } from './server.js';
 
 describe('RPC Server', () => {
@@ -53,13 +60,9 @@ describe('RPC Server', () => {
         const serverPort = channel.port1;
         const clientPort = channel.port2;
         const receivedMessages: unknown[] = [];
-
-        const msgs = new AsyncMessageQueue(clientPort);
-
-        msgs.onMessage = (msg) => {
-            // console.log('Client received message: %o', msg);
-            receivedMessages.push(msg);
-        };
+        using clientEvents = new MessagePortNotifyEvents(clientPort);
+        clientEvents.onMessage((msg) => receivedMessages.push(msg));
+        const nextMsg = makeAwaitNextMessage(clientEvents.awaitNextMessage, isBaseResponse);
 
         spyOnPort(serverPort);
 
@@ -71,111 +74,53 @@ describe('RPC Server', () => {
             length: 42,
         };
 
-        const server = new RPCServer({ port: serverPort, returnMalformedRPCRequestError: true }, api);
-        const readyMsg = (await msgs.next()).value;
+        using _server = new RPCServer({ port: serverPort, returnMalformedRPCRequestError: true }, api);
+        const readyMsg = await nextMsg();
         expect(readyMsg.type).toEqual('ready');
+        expect(receivedMessages.length).toBe(1);
 
         clientPort.postMessage(createRPCMethodRequest(randomUUID(), 'add', [10, 5]));
 
         // We do not expect an immediate response.
-        expect(msgs.length).toBe(0);
+        expect(receivedMessages.length).toBe(1);
 
         // Check a good one.
-        expect((await msgs.next()).value.result).toEqual(15);
+        expect((await nextMsg()).result).toEqual(15);
 
         // Send Random text
         clientPort.postMessage('Hello World');
-        expect((await msgs.next()).value.error).toBeDefined();
+        expect((await nextMsg()).error).toBeDefined();
 
         clientPort.postMessage({ foo: 'bar' });
-        expect((await msgs.next()).value.error).toBeDefined();
+        expect((await nextMsg()).error).toBeDefined();
 
         clientPort.postMessage(createRPCOkRequest(randomUUID()));
-        const okResponse = await msgs.next();
-        expect(okResponse.value).toEqual(createRPCOkResponse(okResponse.value.id, 200));
-        expect(isRPCOkResponse(okResponse.value)).toBe(true);
-        expect(okResponse.value.code).toBe(200);
+        const okResponse = await nextMsg();
+        expect(okResponse).toEqual(createRPCOkResponse(okResponse.id, 200));
+        expect(isRPCOkResponse(okResponse)).toBe(true);
+        expect(okResponse.code).toBe(200);
 
         // Bad method
         clientPort.postMessage(createRPCMethodRequest(randomUUID(), 'length unknown', []));
-        expect((await msgs.next()).value.error).toBeDefined();
+        expect((await nextMsg()).error).toBeDefined();
+
+        expect(receivedMessages.length).toBe(6);
 
         await wait(10);
-
-        server[Symbol.dispose]();
-
-        expect(msgs.isClosed).toBe(false);
-        msgs[Symbol.dispose]();
-
-        expect(msgs.isStopped).toBe(true);
-        expect(receivedMessages.length).toBe(6);
     });
 });
 
-class AsyncMessageQueue implements AsyncIterator<unknown> {
-    #close: () => void;
-    #message: (msg: unknown) => void;
-    #buffer: unknown[] = [];
-    #port: MessagePortLike;
-    #stop: boolean = false;
-    #closed: boolean = false;
-    #resolve: ((msg: unknown) => void) | undefined;
-    onMessage: ((msg: unknown) => void) | undefined;
-
-    constructor(port: MessagePortLike) {
-        this.#port = port;
-        this.#close = () => {
-            this.#closed = true;
-            this.#stop = true;
-        };
-
-        this.#message = (msg: unknown) => {
-            const r = this.#resolve;
-            this.#resolve = undefined;
-            if (!r) {
-                this.#buffer.push(msg);
-                return;
-            }
-            r(msg);
-            this.onMessage?.(msg);
-        };
-
-        this.#port.addListener('close', this.#close);
-        this.#port.addListener('message', this.#message);
-    }
-
-    async next(): Promise<IteratorResult<unknown>> {
-        if (this.#stop) {
-            return { done: true, value: undefined };
+function makeAwaitNextMessage<T>(
+    src: MessagePortNotifyEvents['awaitNextMessage'],
+    assertPrimitive: (v: unknown) => v is T,
+): (signal?: AbortSignal) => Promise<T> {
+    return async (signal?: AbortSignal): Promise<T> => {
+        const msg = await src(signal);
+        if (!assertPrimitive(msg)) {
+            throw new Error(`Expected primitive message, got ${typeof msg}`);
         }
-        if (this.#buffer.length > 0) {
-            const value = this.#buffer.shift();
-            return { done: false, value };
-        }
-        return new Promise<IteratorResult<unknown>>((resolve) => {
-            this.#resolve = (value: unknown) => {
-                resolve({ done: false, value });
-            };
-        });
-    }
-
-    get length(): number {
-        return this.#buffer.length;
-    }
-
-    get isStopped(): boolean {
-        return this.#stop;
-    }
-
-    get isClosed(): boolean {
-        return this.#closed;
-    }
-
-    [Symbol.dispose]() {
-        this.#stop = true;
-        this.#port.removeListener('close', this.#close);
-        this.#port.removeListener('message', this.#message);
-    }
+        return msg;
+    };
 }
 
 function spyOnPort(port: MessagePortLike) {
