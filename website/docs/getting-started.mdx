@@ -9,6 +9,7 @@ sidebar_label: Getting Started
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import HelpLint from '@site/src/components/help-lint.md';
+import { ConfigFileList } from '@site/src/components/ConfigFileList';
 
 # Spell Checking
 
@@ -49,76 +50,9 @@ Steps:
 
 CSpell can use JSON, Yaml, and JavaScript files for configuration. It automatically searches for one of the following:
 
-{/** @see https://github.com/streetsidesoftware/cspell/blob/main/packages/cspell-lib/src/lib/Settings/Controller/configLoader/configLocations.ts */}
+<ConfigFileList />
 
-- `package.json`
-- `.cspell.json`
-- `cspell.json`
-- `.cSpell.json`
-- `cSpell.json`
-- `.cspell.jsonc`
-- `cspell.jsonc`
-- `.cspell.yaml`
-- `cspell.yaml`
-- `.cspell.yml`
-- `cspell.yml`
-- `.cspell.config.json`
-- `cspell.config.json`
-- `.cspell.config.jsonc`
-- `cspell.config.jsonc`
-- `.cspell.config.yaml`
-- `cspell.config.yaml`
-- `.cspell.config.yml`
-- `cspell.config.yml`
-- `.cspell.config.mjs`
-- `cspell.config.mjs`
-- `.cspell.config.cjs`
-- `cspell.config.cjs`
-- `.cspell.config.js`
-- `cspell.config.js`
-- `.cspell.config.mts`
-- `cspell.config.mts`
-- `.cspell.config.cts`
-- `cspell.config.cts`
-- `.cspell.config.ts`
-- `cspell.config.ts`
-- `.cspell.config.toml`
-- `cspell.config.toml`
-- `.config/.cspell.json`
-- `.config/cspell.json`
-- `.config/.cSpell.json`
-- `.config/cSpell.json`
-- `.config/.cspell.jsonc`
-- `.config/cspell.jsonc`
-- `.config/cspell.yaml`
-- `.config/cspell.yml`
-- `.config/.cspell.config.json`
-- `.config/cspell.config.json`
-- `.config/.cspell.config.jsonc`
-- `.config/cspell.config.jsonc`
-- `.config/.cspell.config.yaml`
-- `.config/cspell.config.yaml`
-- `.config/.cspell.config.yml`
-- `.config/cspell.config.yml`
-- `.config/.cspell.config.mjs`
-- `.config/cspell.config.mjs`
-- `.config/.cspell.config.cjs`
-- `.config/cspell.config.cjs`
-- `.config/.cspell.config.js`
-- `.config/cspell.config.js`
-- `.config/.cspell.config.mts`
-- `.config/cspell.config.mts`
-- `.config/.cspell.config.cts`
-- `.config/cspell.config.cts`
-- `.config/.cspell.config.ts`
-- `.config/cspell.config.ts`
-- `config/.cspell.config.toml`
-- `config/cspell.config.toml`
-- `.vscode/.cspell.json`
-- `.vscode/cSpell.json`
-- `.vscode/cspell.json`
-
-For now choose to use either JSON or Yaml. Below are examples of each that include a custom dictionary definition. Both of them are equivalent. If you have both, CSpell will look for the `.json` file first.
+Below are examples of each that include a custom dictionary definition. Both of them are equivalent. If you have both, CSpell will look for the `.json` file first.
 
 <Tabs>
     <TabItem value="json" label="cspell.json">
