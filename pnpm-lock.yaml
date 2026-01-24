@@ -224,6 +224,9 @@ importers:
       '@cspell/cspell-json-reporter':
         specifier: workspace:*
         version: link:../cspell-json-reporter
+      '@cspell/cspell-performance-monitor':
+        specifier: workspace:*
+        version: link:../cspell-performance-monitor
       '@cspell/cspell-pipe':
         specifier: workspace:*
         version: link:../cspell-pipe
@@ -499,6 +502,9 @@ importers:
 
   packages/cspell-dictionary:
     dependencies:
+      '@cspell/cspell-performance-monitor':
+        specifier: workspace:*
+        version: link:../cspell-performance-monitor
       '@cspell/cspell-pipe':
         specifier: workspace:*
         version: link:../cspell-pipe
@@ -724,6 +730,9 @@ importers:
       '@cspell/cspell-bundled-dicts':
         specifier: workspace:*
         version: link:../cspell-bundled-dicts
+      '@cspell/cspell-performance-monitor':
+        specifier: workspace:*
+        version: link:../cspell-performance-monitor
       '@cspell/cspell-pipe':
         specifier: workspace:*
         version: link:../cspell-pipe
@@ -850,6 +859,8 @@ importers:
         specifier: workspace:*
         version: link:../cspell-filetypes
 
+  packages/cspell-performance-monitor: {}
+
   packages/cspell-pipe:
     devDependencies:
       globby:
@@ -924,6 +935,9 @@ importers:
         specifier: workspace:*
         version: link:../cspell-types
     devDependencies:
+      '@cspell/cspell-performance-monitor':
+        specifier: workspace:*
+        version: link:../cspell-performance-monitor
       '@cspell/cspell-pipe':
         specifier: workspace:*
         version: link:../cspell-pipe

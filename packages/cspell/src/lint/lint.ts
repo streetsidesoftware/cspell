@@ -1,6 +1,7 @@
 import * as path from 'node:path';
 import { formatWithOptions } from 'node:util';
 
+import { enablePerformanceMeasurements, measurePerf } from '@cspell/cspell-performance-monitor';
 import { isAsyncIterable, operators, opFilter, pipeAsync } from '@cspell/cspell-pipe';
 import { pipe } from '@cspell/cspell-pipe/sync';
 import type { Glob, RunResult } from '@cspell/cspell-types';
@@ -62,6 +63,10 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
     const verboseLevel = calcVerboseLevel(cfg.options);
     const useColor = cfg.options.color ?? true;
 
+    if (verboseLevel >= 1 && cfg.options.showPerfSummary) {
+        enablePerformanceMeasurements();
+    }
+
     const timer = getTimeMeasurer();
 
     const logDictRequests = truthy(getEnvironmentVariable('CSPELL_ENABLE_DICTIONARY_LOGGING'));
@@ -83,6 +88,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
     return lintResult;
 
     async function run(): Promise<RunResult> {
+        using _ = measurePerf('runLint');
         if (cfg.options.root) {
             setEnvironmentVariable(ENV_CSPELL_GLOB_ROOT, cfg.root);
         }

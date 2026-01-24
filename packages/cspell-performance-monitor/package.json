@@ -1,0 +1,53 @@
+{
+  "name": "@cspell/cspell-performance-monitor",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "version": "9.6.0",
+  "description": "A performance monitor library for cspell.",
+  "keywords": [
+    "cspell",
+    "performance",
+    "monitoring"
+  ],
+  "author": "Jason Dent <jason@streetsidesoftware.nl>",
+  "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-performance-monitor#readme",
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "directories": {
+    "dist": "dist"
+  },
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "!**/*.tsbuildInfo",
+    "!**/__mocks__",
+    "!**/*.test.*",
+    "!**/*.spec.*",
+    "!**/*.map"
+  ],
+  "scripts": {
+    "build": "tsdown && tsc -p .",
+    "watch": "tsdown --watch",
+    "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
+    "clean-build": "pnpm run clean && pnpm run build",
+    "coverage": "vitest run --coverage --pool=forks",
+    "test": "vitest run --pool=forks"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/streetsidesoftware/cspell.git",
+    "directory": "packages/cspell-performance-monitor"
+  },
+  "bugs": {
+    "url": "https://github.com/streetsidesoftware/cspell"
+  },
+  "engines": {
+    "node": ">=20.18"
+  }
+}
