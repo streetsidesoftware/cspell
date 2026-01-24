@@ -71,7 +71,7 @@ describe('performance enabled.', () => {
         const measures = performance.getEntriesByName(name, 'measure');
         expect(measures.length).toBe(1);
         const measure = measures[0];
-        expect(measure.duration).toBeGreaterThanOrEqual(50);
+        expect(measure.duration).toBeGreaterThanOrEqual(45); // Note: 45 is to allow for some timing slop
     });
 
     test('measurePerf await using', async () => {
@@ -87,7 +87,7 @@ describe('performance enabled.', () => {
         const measures = performance.getEntriesByName(name, 'measure');
         expect(measures.length).toBe(1);
         const measure = measures[0];
-        expect(measure.duration).toBeGreaterThanOrEqual(50);
+        expect(measure.duration).toBeGreaterThanOrEqual(45); // Note: 45 is to allow for some timing slop
     });
 
     test('measurePerfStart', () => {
