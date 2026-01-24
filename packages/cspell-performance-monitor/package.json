@@ -1,21 +1,21 @@
 {
-  "name": "@cspell/cspell-worker",
+  "name": "@cspell/cspell-performance-monitor",
   "publishConfig": {
     "access": "public",
     "provenance": true
   },
   "version": "9.6.0",
-  "description": "Client Server RPC worker for CSpell.",
+  "description": "A performance monitor library for cspell.",
   "keywords": [
     "cspell",
-    "rpc",
-    "worker"
+    "performance",
+    "monitoring"
   ],
   "author": "Jason Dent <jason@streetsidesoftware.nl>",
-  "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-worker#readme",
+  "homepage": "https://github.com/streetsidesoftware/cspell/tree/main/packages/cspell-performance-monitor#readme",
   "license": "MIT",
   "type": "module",
-  "sideEffects": true,
+  "sideEffects": false,
   "exports": {
     ".": "./dist/index.js"
   },
@@ -42,15 +42,12 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/streetsidesoftware/cspell.git",
-    "directory": "packages/cspell-worker"
+    "directory": "packages/cspell-performance-monitor"
   },
   "bugs": {
     "url": "https://github.com/streetsidesoftware/cspell"
   },
   "engines": {
     "node": ">=20.18"
-  },
-  "dependencies": {
-    "cspell-lib": "workspace:*"
   }
 }

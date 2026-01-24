@@ -11,7 +11,7 @@ import {
 import type { Stats, TextFileResource, VFileSystem } from 'cspell-io';
 import { compareStats, toFileURL, urlBasename } from 'cspell-io';
 
-import { measurePerfFn } from '../../perf/index.js';
+import { measurePerf } from '../../perf/index.js';
 import type {
     DictionaryDefinitionInlineInternal,
     DictionaryDefinitionInternal,
@@ -273,10 +273,7 @@ async function load(reader: Reader, uri: URL, options: LoadOptions): Promise<Spe
 
 async function legacyWordList(reader: Reader, filename: URL, options: LoadOptions) {
     const lines = await reader.readLines(filename);
-    return measurePerfFn('legacyWords', () => _legacyWordListSync(lines, filename, options));
-}
-
-function _legacyWordListSync(lines: Iterable<string>, filename: URL, options: LoadOptions) {
+    using _ = measurePerf('legacyWords');
     const words = pipe(
         lines,
         // Remove comments
@@ -290,10 +287,7 @@ function _legacyWordListSync(lines: Iterable<string>, filename: URL, options: Lo
 
 async function wordsPerLineWordList(reader: Reader, filename: URL, options: LoadOptions) {
     const lines = await reader.readLines(filename);
-    return measurePerfFn('wordsPerLineWordList', () => _wordsPerLineWordList(lines, filename.toString(), options));
-}
 
-function _wordsPerLineWordList(lines: Iterable<string>, filename: string, options: LoadOptions) {
     const words = pipe(
         lines,
         // Remove comments
@@ -302,21 +296,19 @@ function _wordsPerLineWordList(lines: Iterable<string>, filename: string, option
         opConcatMap((line) => line.split(/\s+/gu)),
         opFilter((word) => !!word),
     );
-    return createSpellingDictionary(words, options.name, filename, options, true);
+    return createSpellingDictionary(words, options.name, filename.href, options, true);
 }
 
 async function loadSimpleWordList(reader: Reader, filename: URL, options: LoadOptions) {
     const lines = await reader.readLines(filename);
-    return measurePerfFn('loadSimpleWordList', () =>
-        createSpellingDictionary(lines, options.name, filename.href, options),
-    );
+    using _ = measurePerf('loadSimpleWordList');
+    return createSpellingDictionary(lines, options.name, filename.href, options);
 }
 
 async function loadTrie(reader: Reader, filename: URL, options: LoadOptions) {
     const content = await reader.read(filename);
-    return measurePerfFn('loadTrie', () =>
-        createSpellingDictionaryFromTrieFile(content, options.name, filename.href, options),
-    );
+    using _ = measurePerf('loadTrie');
+    return createSpellingDictionaryFromTrieFile(content, options.name, filename.href, options);
 }
 
 function toLines(content: string): string[] {
