@@ -1,1 +1,1 @@
-export { enablePerformanceMeasurements,measurePerf, measurePerfEnd, measurePerfStart } from './performance.ts'
+export { enablePerformanceMeasurements, measurePerf, measurePerfEnd, measurePerfStart } from './performance.ts';
