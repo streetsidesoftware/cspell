@@ -36,7 +36,6 @@
     "watch": "tsdown --watch",
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "clean-build": "pnpm run clean && pnpm run build",
-    "sort-filetypes": "pnpm build && node scripts/sortFileTypes.js && prettier --write src/definitions.ts",
     "coverage": "vitest run --coverage --pool=forks",
     "test": "vitest run --pool=forks"
   },
