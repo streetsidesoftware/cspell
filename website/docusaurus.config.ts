@@ -199,6 +199,14 @@ const config: Config = {
             additionalLanguages: ['json', 'json5', 'bash'],
         },
     } satisfies Preset.ThemeConfig,
+
+    scripts: [
+        {
+            defer: true,
+            'data-domain': 'cspell.org',
+            src: 'https://plausible.io/js/script.js',
+        },
+    ],
 };
 
 export default config;
