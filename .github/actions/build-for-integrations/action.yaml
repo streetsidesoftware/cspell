@@ -8,7 +8,7 @@ inputs:
   node-version:
     required: false
     description: The version of Node to use.
-    default: '24.x'
+    default: 'lts/*'
   use-setup:
     required: false
     description: |
@@ -55,11 +55,13 @@ runs:
       with:
         value: >-
           integrations-build-${{ hashFiles(
+            '.github/actions/build-for-integrations/action.yaml',
             'integration-tests/src/**/*.ts',
             'integration-tests/tsconfig.json',
             '*-lock.yaml',
             'packages/*/src/**/*.ts',
             'packages/*/lib/**/*.cts',
+            'packages/*/lib/**/*.mts',
             'packages/*/tsconfig.json'
           ) }}
         debug: true
