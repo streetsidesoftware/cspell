@@ -80,10 +80,15 @@ runs:
           Build Cache: ${{ steps.step-cache-build.outputs.cache-hit && 'Hit' || 'Miss' }}
 
     - name: Setup Env
-      if: ${{ steps.step-cache-build.outputs.cache-hit != 'true' && inputs.use-setup }}
-      uses: ./.github/actions/setup
+      uses: ./.github/actions/setup-node
       with:
         node-version: ${{ inputs.node-version }}
+
+    - name: Install Dependencies
+      # Install production (non-test) dependencies only
+      run: |
+        pnpm install:prod
+      shell: bash
 
     - name: Has Pnpm has failed?
       if: ${{ failure() }}

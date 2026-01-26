@@ -177,12 +177,6 @@ jobs:
           value: |
             Run Cache: ${{ steps.step-cache-run.outputs == 'true' && 'Hit' || 'Miss' }}
 
-      - name: Setup Env
-        if: ${{ steps.step-cache-run.outputs.cache-hit != 'true' }}
-        uses: ./.github/actions/setup
-        with:
-          node-version: ${{ matrix.node-version }}
-
       - id: step-cache-build
         if: ${{ steps.step-cache-run.outputs.cache-hit != 'true' }}
         uses: ./.github/actions/build-for-integrations
@@ -207,7 +201,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: >
           cd integration-tests
-          && pnpm i
           && pnpm run integration-tests -- ${{ matrix.repo }}
 
       - name: store perf run
