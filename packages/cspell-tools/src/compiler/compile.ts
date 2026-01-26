@@ -14,6 +14,7 @@ import type {
     Target,
 } from '../config/index.ts';
 import { isFileListSource, isFilePath, isFileSource } from '../config/index.ts';
+import { compressFile } from '../gzip/index.ts';
 import { checkShasumFile, updateChecksumForFiles } from '../shasum/index.ts';
 import { stringToRegExp } from '../util/textRegex.ts';
 import { generateBTrieFromFile } from './bTrie.ts';
@@ -107,7 +108,79 @@ export async function compileTarget(
     compileOptions: CompileTargetOptions,
 ): Promise<string[]> {
     logWithTimestamp(`Start compile: ${target.name}`);
-    const { rootDir, cwd, checksumFile, conditional } = compileOptions;
+    const buildOptions = genBuildTargetDictionaryOptions(target, compileOptions);
+    const deps: Set<string> = new Set();
+
+    addToSet(
+        deps,
+        await buildTargetDictionary(target, options, compileOptions, buildOptions),
+        await compressDictionaryFileIfNeeded(buildOptions),
+        await genBTrieForTarget(target, buildOptions),
+    );
+
+    logWithTimestamp(`Done compile: ${target.name}`);
+
+    const checksumRoot = buildOptions.checksumRoot;
+    const relDeps = [...deps].map((d) => path.relative(checksumRoot, d));
+
+    return relDeps;
+}
+
+interface BuildTargetDictionaryOptions {
+    /**
+     * The name of the target dictionary.
+     */
+    name: string;
+    /**
+     * the full path to the output file.
+     */
+    filename: string;
+    /**
+     * Whether to use a trie format.
+     */
+    useTrie: boolean;
+
+    /**
+     * Whether to generate a compressed version of the dictionary.
+     */
+    generateCompressed: boolean;
+
+    /**
+     * Only a compressed version should be generated.
+     */
+    generateOnlyCompressedDictionary: boolean;
+
+    checksumRoot: string;
+}
+
+function genBuildTargetDictionaryOptions(
+    target: Target,
+    compileOptions: CompileTargetOptions,
+): BuildTargetDictionaryOptions {
+    const { rootDir, checksumFile, cwd } = compileOptions;
+    let targetDirectory = target.targetDirectory ?? cwd ?? process.cwd();
+    targetDirectory = targetDirectory.replace('${cwd}', cwd ?? process.cwd());
+    targetDirectory = path.resolve(rootDir, targetDirectory);
+
+    const name = normalizeTargetName(target.name);
+
+    const useTrie = target.format.startsWith('trie');
+    const generateCompressed = target.compress ?? false;
+    const generateUncompressed = target.keepUncompressed ?? false;
+    const generateOnlyCompressedDictionary = generateCompressed && !generateUncompressed;
+    const filename = resolveTarget(name, targetDirectory, useTrie);
+    const checksumRoot = (checksumFile && path.dirname(checksumFile)) || rootDir;
+
+    return { name, filename, useTrie, generateOnlyCompressedDictionary, generateCompressed, checksumRoot };
+}
+
+async function buildTargetDictionary(
+    target: Target,
+    options: CompileSourceConfig,
+    compileOptions: CompileTargetOptions,
+    buildOptions: BuildTargetDictionaryOptions,
+): Promise<string[]> {
+    const { rootDir, checksumFile, conditional } = compileOptions;
     const {
         format,
         sources,
@@ -118,9 +191,7 @@ export async function compileTarget(
         excludeWordsNotFoundIn = [],
         excludeWordsMatchingRegex,
     } = target;
-    let targetDirectory = target.targetDirectory ?? cwd ?? process.cwd();
-    targetDirectory = targetDirectory.replace('${cwd}', cwd ?? process.cwd());
-    targetDirectory = path.resolve(rootDir, targetDirectory);
+    const { filename, useTrie, generateOnlyCompressedDictionary, checksumRoot } = buildOptions;
     const dictionaryDirectives = target.dictionaryDirectives ?? compileOptions.dictionaryDirectives;
     const removeDuplicates = target.removeDuplicates ?? false;
 
@@ -132,18 +203,7 @@ export async function compileTarget(
         return excludeFromFilter(word) && includeFromFilter(word) && excludeRegexFilter(word);
     };
 
-    const name = normalizeTargetName(target.name);
-
-    const useTrie = format.startsWith('trie');
-    const generateCompressed = target.compress ?? false;
-    const generateUncompressed = target.keepUncompressed ?? false;
-    const genSet = new Set<boolean>();
-    genSet.add(generateCompressed);
-    if (generateUncompressed) {
-        genSet.add(false);
-    }
-
-    const filename = resolveTarget(name, targetDirectory, useTrie);
+    const compress = generateOnlyCompressedDictionary;
 
     const filesToProcessAsync = pipeAsync(
         readSourceList(sources, rootDir),
@@ -158,11 +218,10 @@ export async function compileTarget(
         dictionaryDirectives,
         // removeDuplicates, // Add this in if we use it.
     });
-    const checksumRoot = (checksumFile && path.dirname(checksumFile)) || rootDir;
 
     const deps = [
         ...calculateDependencies(
-            filename + (generateCompressed ? '.gz' : ''),
+            filename + (compress ? '.gz' : ''),
             filesToProcess,
             [...excludeWordsFrom, ...excludeWordsNotFoundIn],
             checksumRoot,
@@ -192,28 +251,45 @@ export async function compileTarget(
               });
         const data = iterableToString(pipe(words, normalizer, compiler));
 
-        for (const compress of genSet) {
-            await createTargetFile(dst, data, compress);
-        }
+        await createTargetFile(dst, data, compress);
     }
 
     await processFiles({ action, filesToProcess, mergeTarget: filename });
 
-    if (target.bTrie) {
-        const cfg = typeof target.bTrie === 'object' ? target.bTrie : {};
-        await generateBTrieFromFile(filename, { compress: true, optimize: true, useStringTable: true, ...cfg });
-    }
-
-    logWithTimestamp(`Done compile: ${target.name}`);
-
     return deps;
+}
+
+async function compressDictionaryFileIfNeeded(buildOptions: BuildTargetDictionaryOptions): Promise<string[]> {
+    const { filename, generateCompressed, generateOnlyCompressedDictionary } = buildOptions;
+    if (generateOnlyCompressedDictionary || !generateCompressed) return [];
+    logWithTimestamp(`Compress: ${filename}`);
+    const targetFile = await compressFile(filename);
+    return [filename, targetFile];
+}
+
+async function genBTrieForTarget(target: Target, buildOptions: BuildTargetDictionaryOptions): Promise<string[]> {
+    if (!target.bTrie) {
+        return [];
+    }
+    const { filename, generateOnlyCompressedDictionary } = buildOptions;
+    const srcFilename = filename + (generateOnlyCompressedDictionary ? '.gz' : '');
+    logWithTimestamp(`Generate BTrie from: ${srcFilename}`);
+    const cfg = typeof target.bTrie === 'object' ? target.bTrie : undefined;
+    const outputFile = await generateBTrieFromFile(srcFilename, {
+        compress: true,
+        optimize: true,
+        useStringTable: true,
+        ...cfg,
+        logger: logWithTimestamp,
+    });
+    return [srcFilename, outputFile];
 }
 
 function calculateDependencies(
     targetFile: string,
     filesToProcess: FileToProcess[],
     extraDependencyFiles: string[] | undefined,
-    rootDir: string,
+    checksumRoot: string,
 ): Set<string> {
     const dependencies = new Set<string>();
 
@@ -224,10 +300,10 @@ function calculateDependencies(
     return dependencies;
 
     function addDependency(filename: string) {
-        const rel = path.relative(rootDir, filename);
-        dependencies.add(rel);
-        dependencies.add(rel.replace(/\.aff$/, '.dic'));
-        dependencies.add(rel.replace(/\.dic$/, '.aff'));
+        const abs = path.resolve(checksumRoot, filename);
+        dependencies.add(abs);
+        dependencies.add(abs.replace(/\.aff$/, '.dic'));
+        dependencies.add(abs.replace(/\.dic$/, '.aff'));
     }
 }
 
@@ -409,4 +485,12 @@ function createExcludeRegexFilter(excludeWordsMatchingRegex: string[] | undefine
 
 function iterableToString(iter: Iterable<string>): string {
     return Array.isArray(iter) ? iter.join('') : [...iter].join('');
+}
+
+function addToSet<T>(set: Set<T>, ...sources: Iterable<T>[]) {
+    for (const items of sources) {
+        for (const item of items) {
+            set.add(item);
+        }
+    }
 }

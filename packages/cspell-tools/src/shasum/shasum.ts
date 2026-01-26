@@ -1,5 +1,5 @@
 import { readFile, writeFile } from 'node:fs/promises';
-import { resolve, sep as pathSep } from 'node:path';
+import { dirname, relative, resolve, sep as pathSep } from 'node:path';
 
 import { toError } from '../util/errors.ts';
 import { isDefined } from '../util/index.ts';
@@ -32,7 +32,7 @@ export async function shasumFile(filename: string, root: string | undefined): Pr
 /**
  *
  * @param filename - name of checksum file
- * @param files - optional list of files to check
+ * @param files - optional list of files to check - they will be resolved relative to the checksum file.
  * @param root - optional root, default cwd.
  */
 export async function checkShasumFile(
@@ -41,13 +41,15 @@ export async function checkShasumFile(
     root?: string,
 ): Promise<CheckShasumFileResult> {
     files = !files ? files : files.length ? files : undefined;
+    const resolvedRoot = resolve(root || '.');
+    const fileDir = dirname(resolve(resolvedRoot, filename));
     const shaFiles = await readAndParseShasumFile(filename);
     const filesToCheck = !files ? shaFiles.map(({ filename }) => filename) : files;
+    const relFilesToCheck = filesToCheck.map((f) => relative(fileDir, resolve(fileDir, f)));
     const mapNameToChecksum = new Map(shaFiles.map((r) => [normalizeFilename(r.filename), r.checksum] as const));
-    const resolvedRoot = resolve(root || '.');
 
     const results: CheckFileResult[] = await Promise.all(
-        filesToCheck.map(normalizeFilename).map((filename) => {
+        relFilesToCheck.map(normalizeFilename).map((filename) => {
             return tryToCheckFile(filename, resolvedRoot, mapNameToChecksum.get(filename));
         }),
     );

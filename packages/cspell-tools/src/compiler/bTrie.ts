@@ -5,24 +5,29 @@ import { encodeTrieDataToBTrie } from 'cspell-trie-lib';
 
 import type { BTrieOptions } from '../config/config.ts';
 import { writeFile } from '../util/writeFile.ts';
+import type { Logger } from './logger.ts';
 import { createReader } from './Reader.ts';
 
 export interface GenerateBTrieOptions extends BTrieOptions {
     /** output directory */
     output?: string;
+    logger?: Logger;
 }
 
-export async function generateBTrieFromFile(file: string, options: GenerateBTrieOptions): Promise<void> {
-    console.log(`Processing file: ${file}`);
+export async function generateBTrieFromFile(file: string, options: GenerateBTrieOptions): Promise<string> {
+    const log = options.logger || console.log.bind(console);
+    log(`Processing file: ${file}`);
     const btrie = await createBTrieFromFile(file, options);
     const outFile = bTrieFileName(file, options);
     await mkdir(fsPath.dirname(outFile), { recursive: true });
     await writeFile(outFile, btrie);
-    console.log(`Written BTrie to: ${outFile}`);
+    log(`Written BTrie to: ${outFile}`);
+    return outFile;
 }
 
 export async function generateBTrieFromFiles(files: string[], options: GenerateBTrieOptions): Promise<void> {
-    console.log(`Generating BTrie for ${files.length} file(s).`);
+    const log = options.logger || console.log.bind(console);
+    log(`Generating BTrie for ${files.length} file(s).`);
     for (const file of files) {
         await generateBTrieFromFile(file, options);
     }
