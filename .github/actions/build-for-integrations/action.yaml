@@ -8,6 +8,7 @@ inputs:
   node-version:
     required: false
     description: The version of Node to use.
+    default: '24.x'
   use-setup:
     required: false
     description: |
@@ -81,11 +82,6 @@ runs:
       uses: ./.github/actions/setup
       with:
         node-version: ${{ inputs.node-version }}
-
-    - name: Pnpm CI
-      if: ${{ steps.step-cache-build.outputs.cache-hit != 'true' }}
-      run: pnpm i
-      shell: bash
 
     - name: Has Pnpm has failed?
       if: ${{ failure() }}
