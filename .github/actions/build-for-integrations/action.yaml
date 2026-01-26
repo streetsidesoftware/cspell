@@ -87,7 +87,7 @@ runs:
     - name: Install Dependencies
       # Install production (non-test) dependencies only
       run: |
-        pnpm install:prod
+        pnpm install:prod --filter \!./website
       shell: bash
 
     - name: Has Pnpm has failed?
