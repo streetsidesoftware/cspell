@@ -3,6 +3,242 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v9.6.1 (2026-01-25)
+
+### Fixes
+
+<details>
+<summary>fix: Move performance monitoring into its own package (<a href="https://github.com/streetsidesoftware/cspell/pull/8431">#8431</a>)</summary>
+
+### fix: Move performance monitoring into its own package ([#8431](https://github.com/streetsidesoftware/cspell/pull/8431))
+
+## Pull request overview
+
+This PR extracts performance monitoring functionality from multiple packages into a new dedicated package `@cspell/cspell-performance-monitor`. The new package provides a centralized, conditionally-enabled performance measurement system using the standard Performance API.
+
+**Changes:**
+
+- Created a new `@cspell/cspell-performance-monitor` package with improved performance measurement functions that can be conditionally enabled/disabled
+- Migrated and removed duplicate performance measurement code from `cspell-lib`, `cspell-dictionary`, and `cspell-trie-lib` packages
+- Updated performance measurement calls to use the new disposable pattern (`using _ = measurePerf()`) that leverages TypeScript's explicit resource management
+
+---
+
+</details>
+
+<details>
+<summary>fix: Add NotifyEmitter (<a href="https://github.com/streetsidesoftware/cspell/pull/8423">#8423</a>)</summary>
+
+### fix: Add NotifyEmitter ([#8423](https://github.com/streetsidesoftware/cspell/pull/8423))
+
+## Pull request overview
+
+This pull request adds a new `NotifyEmitter` class to provide a reusable event notification system based on the Disposable pattern. The PR refactors the RPC server test to use this new event emitter pattern instead of a custom `AsyncMessageQueue` implementation, resulting in cleaner and more maintainable code.
+
+**Changes:**
+
+- Introduces `NotifyEmitter` class with `NotifyEvent` pattern for event handling with automatic cleanup via `Symbol.dispose`
+- Adds helper functions `notifyEventToPromise` and `notifyEventOnce` for working with notify events
+- Creates `MessagePortEvents` wrapper class to adapt MessagePort events to the NotifyEmitter pattern
+- Refactors `server.test.ts` to use the new event system, removing the custom `AsyncMessageQueue` implementation
+- Adds `result?: unknown` field to `RPCResponse` interface for more consistent type handling
+- Exports new notify-related types and functions through the public API
+
+---
+
+</details>
+
+<details>
+<summary>refactor: Adjust RPC interface to use a config (<a href="https://github.com/streetsidesoftware/cspell/pull/8420">#8420</a>)</summary>
+
+### refactor: Adjust RPC interface to use a config ([#8420](https://github.com/streetsidesoftware/cspell/pull/8420))
+
+## Pull request overview
+
+Refactors the RPC client/server APIs (and cspell RPC wrappers) to accept a single configuration object, and updates worker integration and tests accordingly.
+
+**Changes:**
+
+- Update RPCClient/RPCServer (and CSpellRPCClient/CSpellRPCServer) constructors/factories to accept `{ port, ...options }` config objects.
+- Adjust RPC tests and worker usage to match the new config-based API.
+- Update `cspell-lib` package entrypoint to `dist/index.*` and add `src/index.ts` re-export.
+
+---
+
+</details>
+
+<details>
+<summary>refactor: Refactor CLI to make it easier to spell check files in parallel (<a href="https://github.com/streetsidesoftware/cspell/pull/8387">#8387</a>)</summary>
+
+### refactor: Refactor CLI to make it easier to spell check files in parallel ([#8387](https://github.com/streetsidesoftware/cspell/pull/8387))
+
+## Pull request overview
+
+This PR refactors the CLI file processing architecture to improve processing speed. The main improvements include extracting file processing logic into a dedicated module, adding sequence tracking for file processing, fixing regex `lastIndex` state sharing issues, and preparing infrastructure for optional worker pool parallelization (currently disabled).
+
+**Changes:**
+
+- Extracted file processing logic from `lint.ts` into a new `processFiles.ts` module with improved batch processing
+- Added sequence tracking interfaces (`FileToProcess`, `ProcessPrefetchFileResult`) to maintain file processing order
+- Fixed regex `lastIndex` state sharing bugs by creating new RegExp instances before use
+- Added worker pool and RPC infrastructure to `cspell-api.ts` (currently disabled via feature flags)
+- Updated performance reporting to track both accumulated processing time and total elapsed time
+
+---
+
+</details>
+
+<details>
+<summary>refactor: Refactor settings a bit (<a href="https://github.com/streetsidesoftware/cspell/pull/8385">#8385</a>)</summary>
+
+### refactor: Refactor settings a bit ([#8385](https://github.com/streetsidesoftware/cspell/pull/8385))
+
+## Pull request overview
+
+This pull request refactors settings handling in the CSpell codebase. The main focus is on improving the serialization of settings objects by adding circular reference detection and handling to `walkToJSONObj`, along with introducing new utility functions for working with settings that need to be serialized (e.g., for IPC via MessageChannel).
+
+**Changes:**
+
+- Enhanced `walkToJSONObj` to handle circular references using a WeakMap-based visited tracking system
+- Added `toCSpellSettingsWithSourceTrace` and `toCSpellSettingsWithOutSourceTrace` functions to convert settings to serializable formats
+- Refactored `processFile` to accept and use `userSettings` parameter instead of directly accessing `configInfo.config`
+
+---
+
+</details>
+
+<details>
+<summary>refactor: Refactor internal settings (<a href="https://github.com/streetsidesoftware/cspell/pull/8382">#8382</a>)</summary>
+
+### refactor: Refactor internal settings ([#8382](https://github.com/streetsidesoftware/cspell/pull/8382))
+
+## Pull request overview
+
+This pull request refactors the internal settings structure by reorganizing code from `Models/CSpellSettingsInternalDef.js` into a new `Settings/internal/` directory structure. This improves code organization by collocating internal settings definitions with other settings-related code.
+
+**Changes:**
+
+- Created new `Settings/internal/` directory with split files: `CSpellSettingsInternalDef.ts`, `InternalDictionaryDef.ts`, and `DictionarySettings.ts` (with improved private field syntax)
+- Updated all import paths across the codebase from `Models/CSpellSettingsInternalDef` to `Settings/internal/` or `Settings/index`
+- Added new utility function `walkToJSONObj` for JSON serialization (with comprehensive tests) and `__getOriginalDefinition()` method for accessing original dictionary definitions
+
+---
+
+</details>
+
+<details>
+<summary>fix: report errors in spelling result. (<a href="https://github.com/streetsidesoftware/cspell/pull/8381">#8381</a>)</summary>
+
+### fix: report errors in spelling result. ([#8381](https://github.com/streetsidesoftware/cspell/pull/8381))
+
+## Pull request overview
+
+This PR enhances error reporting in spell check results by including configuration and dictionary errors directly in the `SpellCheckFileResult` object. Previously, errors were only extracted from configuration during the lint process; now they're also captured from the spell checking itself.
+
+**Changes:**
+
+- Added `configErrors` and `dictionaryErrors` fields to `SpellCheckFileResult` interface
+- Refactored error reporting to extract errors from spell check results instead of re-computing them from configuration
+- Created a new `cspell-api` module to abstract spell checking implementation
+- Added comprehensive test coverage with fixture files demonstrating error scenarios
+
+---
+
+</details>
+
+<details>
+<summary>fix: Add CSpell Worker Pool (<a href="https://github.com/streetsidesoftware/cspell/pull/8379">#8379</a>)</summary>
+
+### fix: Add CSpell Worker Pool ([#8379](https://github.com/streetsidesoftware/cspell/pull/8379))
+
+## Pull request overview
+
+This pull request adds a CSpell Worker Pool implementation to manage multiple spell-checking workers efficiently, along with significant improvements to the RPC infrastructure for better readiness tracking.
+
+**Changes:**
+
+- Added `CSpellWorkerPool` class to manage a pool of spell-checking workers with configurable sizing based on CPU cores
+- Simplified the worker implementation by removing custom status tracking in favor of RPC-based readiness checks
+- Enhanced RPC client/server with ready request/response mechanism, allowing clients to wait for server initialization
+- Renamed `Resolver` utility class to `Future` with improved state tracking (added `isRejected` property)
+
+---
+
+</details>
+
+<details>
+<summary>refactor: Clean Up CSpell Worker (<a href="https://github.com/streetsidesoftware/cspell/pull/8372">#8372</a>)</summary>
+
+### refactor: Clean Up CSpell Worker ([#8372](https://github.com/streetsidesoftware/cspell/pull/8372))
+
+---
+
+</details>
+
+<details>
+<summary>fix: Add CSpellRPCServer and CSpellRPCClient classes (<a href="https://github.com/streetsidesoftware/cspell/pull/8366">#8366</a>)</summary>
+
+### fix: Add CSpellRPCServer and CSpellRPCClient classes ([#8366](https://github.com/streetsidesoftware/cspell/pull/8366))
+
+## Pull request overview
+
+This pull request adds RPC (Remote Procedure Call) infrastructure to enable remote spell checking through CSpell. The implementation includes a generic RPC client/server framework, CSpell-specific RPC adapters, and worker thread support for isolated spell checking operations.
+
+**Changes:**
+
+- Move the RPC framwork from cspell to cspell-lib
+- Adds complete RPC framework with message-based client/server communication over MessagePort
+- Implements CSpell-specific RPC server and client classes for remote spell checking
+- Introduces worker thread support for isolated spell checking operations
+- Adds utility functions for cloning and sanitizing settings for safe RPC transmission
+
+---
+
+</details>
+
+<details>
+<summary>fix: Work on adding support for Workers (<a href="https://github.com/streetsidesoftware/cspell/pull/8363">#8363</a>)</summary>
+
+### fix: Work on adding support for Workers ([#8363](https://github.com/streetsidesoftware/cspell/pull/8363))
+
+## Pull request overview
+
+This pull request adds RPC (Remote Procedure Call) infrastructure to support Workers in the cspell package. The implementation provides a client-server communication framework using MessagePort for inter-process or inter-worker communication.
+
+**Changes:**
+
+- Added RPC client and server implementations with support for request/response patterns, cancellation, and error handling
+- Implemented type-safe protocol definitions with automatic Promise wrapping for async operations
+- Created comprehensive test coverage for client, server, and integration scenarios
+
+---
+
+</details>
+
+### Dictionary Updates
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/8433">#8433</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#8433](https://github.com/streetsidesoftware/cspell/pull/8433))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ .../MartinThoma/LaTeX-examples/report.yaml         |  9 +---
+ .../MartinThoma/LaTeX-examples/snapshot.txt        |  7 +--
+ packages/cspell-bundled-dicts/package.json         | 10 ++--
+ packages/cspell/src/__snapshots__/app.test.ts.snap |  6 +--
+ pnpm-lock.yaml                                     | 57 ++++++++++++----------
+ 5 files changed, 42 insertions(+), 47 deletions(-)
+```
+
+---
+
+</details>
+
 ## v9.6.0 (2026-01-12)
 
 ### Features
