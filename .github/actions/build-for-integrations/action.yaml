@@ -8,6 +8,7 @@ inputs:
   node-version:
     required: false
     description: The version of Node to use.
+    default: 'lts/*'
   use-setup:
     required: false
     description: |
@@ -54,11 +55,13 @@ runs:
       with:
         value: >-
           integrations-build-${{ hashFiles(
+            '.github/actions/build-for-integrations/action.yaml',
             'integration-tests/src/**/*.ts',
             'integration-tests/tsconfig.json',
             '*-lock.yaml',
             'packages/*/src/**/*.ts',
             'packages/*/lib/**/*.cts',
+            'packages/*/lib/**/*.mts',
             'packages/*/tsconfig.json'
           ) }}
         debug: true
@@ -81,11 +84,6 @@ runs:
       uses: ./.github/actions/setup
       with:
         node-version: ${{ inputs.node-version }}
-
-    - name: Pnpm CI
-      if: ${{ steps.step-cache-build.outputs.cache-hit != 'true' }}
-      run: pnpm i
-      shell: bash
 
     - name: Has Pnpm has failed?
       if: ${{ failure() }}
