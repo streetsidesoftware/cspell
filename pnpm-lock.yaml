@@ -1404,12 +1404,6 @@ importers:
 
   tools/perf-chart:
     dependencies:
-      '@observablehq/plot':
-        specifier: ^0.6.17
-        version: 0.6.17
-      chart.js:
-        specifier: ^4.5.1
-        version: 4.5.1
       commander:
         specifier: ^14.0.2
         version: 14.0.2
@@ -1419,6 +1413,22 @@ importers:
       csv-stringify:
         specifier: ^6.6.0
         version: 6.6.0
+      thistogram:
+        specifier: ^2.0.0
+        version: 2.0.0
+    devDependencies:
+      '@observablehq/plot':
+        specifier: ^0.6.17
+        version: 0.6.17
+      '@types/d3':
+        specifier: ^7.4.3
+        version: 7.4.3
+      '@types/jsdom':
+        specifier: ^27.0.0
+        version: 27.0.0
+      chart.js:
+        specifier: ^4.5.1
+        version: 4.5.1
       d3:
         specifier: ^7.9.0
         version: 7.9.0
@@ -1428,16 +1438,6 @@ importers:
       skia-canvas:
         specifier: ^3.0.8
         version: 3.0.8
-      thistogram:
-        specifier: ^2.0.0
-        version: 2.0.0
-    devDependencies:
-      '@types/d3':
-        specifier: ^7.4.3
-        version: 7.4.3
-      '@types/jsdom':
-        specifier: ^27.0.0
-        version: 27.0.0
 
   website:
     dependencies:
