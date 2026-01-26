@@ -2,9 +2,9 @@
 import * as Plot from '@observablehq/plot';
 import { JSDOM } from 'jsdom';
 
-import type { CsvRecordsRO } from './CsvRecord.ts';
-import { createDailyStats } from './dailyStats.ts';
-import type { Options } from './options.ts';
+import type { CsvRecordsRO } from '../CsvRecord.ts';
+import { createDailyStats } from '../dailyStats.ts';
+import type { Options } from '../options.ts';
 
 const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 

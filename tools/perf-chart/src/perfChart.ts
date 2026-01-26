@@ -7,8 +7,6 @@ import type { CsvRecord, CsvRecordsRO } from './CsvRecord.ts';
 import { createDailyStats, dailyStatsToCsv } from './dailyStats.ts';
 import type { Options } from './options.ts';
 import { perfReportMd } from './perfChartMD.ts';
-import { plotPng } from './plotPng.ts';
-import { plotSvg } from './plotSvg.ts';
 import { filterOutIncompleteRuns, groupCsvRecordsByRun } from './runs.ts';
 
 const debug = false;
@@ -61,6 +59,9 @@ async function outputReport(markdown: string, options: Options): Promise<void> {
 async function generateSvg(records: CsvRecord[], options: Options): Promise<void> {
     if (!options.svg) return;
 
+    // Delay the import until needed - not actively used.
+    const { plotSvg } = await import('./experimental/plotSvg.ts');
+
     const svg = plotSvg(records, options);
     await outputFile(options.svg, svg);
 }
@@ -75,6 +76,9 @@ async function outputDailyCsv(records: CsvRecord[], options: Options): Promise<v
 
 async function generatePng(records: CsvRecord[], options: Options): Promise<void> {
     if (!options.png) return;
+
+    // Delay the import until needed - not actively used.
+    const { plotPng } = await import('./experimental/plotPng.ts');
 
     const buffer = await plotPng(records, options);
     await outputFile(options.png, buffer);
