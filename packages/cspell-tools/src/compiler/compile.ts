@@ -271,16 +271,14 @@ async function genBTrieForTarget(target: Target, buildOptions: BuildTargetDictio
     if (!target.bTrie) {
         return [];
     }
-    const options = typeof target.bTrie === 'object' ? target.bTrie : {};
+    const cfg = typeof target.bTrie === 'object' ? target.bTrie : {};
     const { filename, generateOnlyCompressedDictionary } = buildOptions;
     const srcFilename = filename + (generateOnlyCompressedDictionary ? '.gz' : '');
     logWithTimestamp(`Generate BTrie from: ${srcFilename}`);
-    const cfg = typeof target.bTrie === 'object' ? target.bTrie : undefined;
     const outputFile = await generateBTrieFromFile(srcFilename, {
-        compress: options.compress ?? true,
-        optimize: options.optimize ?? true,
-        useStringTable: options.useStringTable ?? true,
-        ...cfg,
+        compress: cfg.compress ?? true,
+        optimize: cfg.optimize ?? true,
+        useStringTable: cfg.useStringTable ?? true,
         logger: logWithTimestamp,
     });
     return [srcFilename, outputFile];
