@@ -177,7 +177,8 @@ jobs:
           value: |
             Run Cache: ${{ steps.step-cache-run.outputs == 'true' && 'Hit' || 'Miss' }}
 
-      - id: step-cache-build
+      - name: Use Cache Build
+        id: step-cache-build
         if: ${{ steps.step-cache-run.outputs.cache-hit != 'true' }}
         uses: ./.github/actions/build-for-integrations
 
@@ -225,13 +226,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
-      - name: Setup Env
-        uses: ./.github/actions/setup
-        with:
-          node-version: ${{ needs.prepare.outputs.node_version }}
-
-      - name: Setup
-        run: pnpm i
+      - name: Install Using Cached Build
+        uses: ./.github/actions/build-for-integrations
 
       - name: Create the temp directory
         run: |
