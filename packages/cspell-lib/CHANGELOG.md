@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v9.6.2 (2026-01-26)
+
+### Fixes
+
+- fix: Conditionally compress and build bTrie (<a href="https://github.com/streetsidesoftware/cspell/pull/8437">#8437</a>)
+
+### Dictionary Updates
+
+- fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/8440">#8440</a>)
+
 ## v9.6.1 (2026-01-25)
 
 ### Fixes
