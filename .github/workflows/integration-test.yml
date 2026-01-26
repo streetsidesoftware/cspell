@@ -117,8 +117,12 @@ jobs:
         #   - typescript-eslint/typescript-eslint
 
     steps:
+      - run: date "+%H:%M:%S.%N"
+
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - run: date "+%H:%M:%S.%N"
 
       - name: Normalize Repo Name
         id: step-normalize-repo-name
@@ -128,6 +132,8 @@ jobs:
           REPLACE_WITH: '__'
         run: |
           echo "REPO_NAME=${REPO//${REPLACE}/${REPLACE_WITH}}" >> $GITHUB_OUTPUT
+
+      - run: date "+%H:%M:%S.%N"
 
       - id: repo-hash
         uses: streetsidesoftware/actions/public/output@v1
@@ -151,10 +157,14 @@ jobs:
               '*-lock.yaml'
             ) }}
 
+      - run: date "+%H:%M:%S.%N"
+
       - name: Repo Info
         id: step-repo-info
         run: |
           echo "repo-info=$(jq -c '.repositories[] | select(.path == "${{ matrix.repo }}")' integration-tests/config/config.json)" >> $GITHUB_OUTPUT
+
+      - run: date "+%H:%M:%S.%N"
 
       - uses: ./.github/actions/echo
         with:
@@ -162,6 +172,8 @@ jobs:
             step.repo-hash: "${{ steps.repo-hash.outputs.value }}"
             env.repo-info: ${{ steps.step-repo-info.outputs.repo-info }}
             $repo-hash
+
+      - run: date "+%H:%M:%S.%N"
 
       - name: Cache Integration Run
         id: step-cache-run
@@ -172,21 +184,29 @@ jobs:
           path: |
             integration-tests/perf/perf-run-*.csv
 
+      - run: date "+%H:%M:%S.%N"
+
       - uses: ./.github/actions/echo
         with:
           value: |
             Run Cache: ${{ steps.step-cache-run.outputs == 'true' && 'Hit' || 'Miss' }}
+
+      - run: date "+%H:%M:%S.%N"
 
       - name: Use Cache Build
         id: step-cache-build
         if: ${{ steps.step-cache-run.outputs.cache-hit != 'true' }}
         uses: ./.github/actions/build-for-integrations
 
+      - run: date "+%H:%M:%S.%N"
+
       - uses: ./.github/actions/echo
         if: ${{ steps.step-cache-run.outputs.cache-hit != 'true' }}
         with:
           value: |
             Run Cache: ${{ steps.step-cache-run.outputs.cache-hit == 'true' && 'Hit' || 'Miss' }}
+
+      - run: date "+%H:%M:%S.%N"
 
       - name: Cache Integration Test Repository Files
         if: ${{ steps.step-cache-run.outputs.cache-hit != 'true' }}
@@ -196,6 +216,8 @@ jobs:
           path: |
             integration-tests/repositories/temp/${{ matrix.repo }}
 
+      - run: date "+%H:%M:%S.%N"
+
       - name: Run Integration Tests ${{ matrix.repo }}
         if: ${{ steps.step-cache-run.outputs.cache-hit != 'true' }}
         env:
@@ -204,6 +226,8 @@ jobs:
           cd integration-tests
           && pnpm run integration-tests -- ${{ matrix.repo }}
 
+      - run: date "+%H:%M:%S.%N"
+
       - name: store perf run
         if: ${{ steps.step-cache-run.outputs.cache-hit != 'true' }}
         uses: actions/upload-artifact@v6
@@ -211,6 +235,8 @@ jobs:
           name: perf-repo-${{ steps.step-normalize-repo-name.outputs.REPO_NAME }}
           path: integration-tests/perf/perf-run-*.csv
           retention-days: 1
+
+      - run: date "+%H:%M:%S.%N"
 
   integration-tests-summary:
     permissions:
@@ -223,15 +249,23 @@ jobs:
     # We do not want to fail the build if the user does not have permissions to comment on the PR.
     continue-on-error: true
     steps:
+      - run: date "+%H:%M:%S.%N"
+
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - run: date "+%H:%M:%S.%N"
 
       - name: Install Using Cached Build
         uses: ./.github/actions/build-for-integrations
 
+      - run: date "+%H:%M:%S.%N"
+
       - name: Create the temp directory
         run: |
           mkdir -p temp/perf
+
+      - run: date "+%H:%M:%S.%N"
 
       - name: restore repos perf
         uses: actions/download-artifact@v7
@@ -240,8 +274,12 @@ jobs:
           merge-multiple: true
           path: temp/perf
 
+      - run: date "+%H:%M:%S.%N"
+
       - name: show downloaded
         run: ls -alF temp/perf
+
+      - run: date "+%H:%M:%S.%N"
 
       - name: append the runs
         run: |
@@ -249,12 +287,16 @@ jobs:
           cat temp/perf/perf-run-*.csv | sort >> integration-tests/perf/perf.csv
           ./tools/perf-chart/bin.ts ./integration-tests/perf/perf.csv -o perf-report.md --daily-csv ./static/daily-stats.csv
 
+      - run: date "+%H:%M:%S.%N"
+
       - name: Gen Report
         id: report
         run: |
           echo 'report<<@@REPORT@@' >> $GITHUB_OUTPUT
           ./tools/perf-chart/bin.ts ./integration-tests/perf/perf.csv >> $GITHUB_OUTPUT
           echo '@@REPORT@@' >> $GITHUB_OUTPUT
+
+      - run: date "+%H:%M:%S.%N"
 
       - name: PR Body
         id: pr-body
@@ -271,17 +313,23 @@ jobs:
 
             ${{ steps.report.outputs.report }}
 
+      - run: date "+%H:%M:%S.%N"
+
       - name: Show PR in Summary
         uses: streetsidesoftware/actions/public/summary@v1
         with:
           text: |
             ${{ steps.pr-body.outputs.body }}
 
+      - run: date "+%H:%M:%S.%N"
+
       - name: Add comment to PR
         continue-on-error: true
         uses: mshick/add-pr-comment@v2
         with:
           message: ${{ steps.report.outputs.report }}
+
+      - run: date "+%H:%M:%S.%N"
 
       - name: Create PR
         if: github.ref_name == 'main'
@@ -294,3 +342,5 @@ jobs:
           body: ${{ steps.pr-body.outputs.body }}
           token: ${{ secrets.GITHUB_TOKEN }}
           sign-commits: true # Sign commits made by the action
+
+      - run: date "+%H:%M:%S.%N"
