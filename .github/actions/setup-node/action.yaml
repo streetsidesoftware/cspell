@@ -8,8 +8,16 @@ inputs:
 runs:
   using: 'composite'
   steps:
+    - name: Time
+      run: date "+%H:%M:%S.%N"
+      shell: bash
+
     - name: Setup pnpm
       uses: pnpm/action-setup@v4
+
+    - name: Time
+      run: date "+%H:%M:%S.%N"
+      shell: bash
 
     - name: Use Node.js ${{ inputs.node-version }}
       uses: actions/setup-node@v6.2.0
@@ -17,6 +25,10 @@ runs:
         registry-url: 'https://registry.npmjs.org'
         node-version: ${{ inputs.node-version }}
         cache: 'pnpm'
+
+    - name: Time
+      run: date "+%H:%M:%S.%N"
+      shell: bash
 
     - name: Where is corepack power shell
       if: runner.os == 'Windows'
@@ -29,14 +41,26 @@ runs:
       run: Remove-Item -Recurse -Force (Get-Command corepack.cmd).Path
       shell: pwsh
 
+    - name: Time
+      run: date "+%H:%M:%S.%N"
+      shell: bash
+
     - name: Install Corepack
       # See: [actions/setup-node/issues/1222](https://github.com/actions/setup-node/issues/1222)
       run: |
         npm i -g --force corepack
       shell: bash
 
+    - name: Time
+      run: date "+%H:%M:%S.%N"
+      shell: bash
+
     - name: Enable Corepack
       run: |
         corepack enable
         pnpm -v
+      shell: bash
+
+    - name: Time
+      run: date "+%H:%M:%S.%N"
       shell: bash

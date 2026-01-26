@@ -33,20 +33,12 @@ runs:
   using: 'composite'
 
   steps:
-    - name: Time
-      run: date "+%H:%M:%S.%N"
-      shell: bash
-
     - name: Inputs
       shell: bash
       env:
         INPUTS: ${{ toJSON(inputs || github.event.inputs) }}
       run: |
         echo "inputs: $INPUTS"
-
-    - name: Time
-      run: date "+%H:%M:%S.%N"
-      shell: bash
 
     - id: cache-path
       uses: streetsidesoftware/action-set-output@v1
@@ -57,10 +49,6 @@ runs:
           packages/*/lib
           integration-tests/dist
         debug: true
-
-    - name: Time
-      run: date "+%H:%M:%S.%N"
-      shell: bash
 
     - id: cache-key
       uses: streetsidesoftware/action-set-output@v1
@@ -78,10 +66,6 @@ runs:
           ) }}
         debug: true
 
-    - name: Time
-      run: date "+%H:%M:%S.%N"
-      shell: bash
-
     - name: Cache Build
       id: step-cache-build
       uses: actions/cache@v5.0.2
@@ -89,37 +73,21 @@ runs:
         key: ${{ steps.cache-key.outputs.value }}
         path: ${{ steps.cache-path.outputs.value }}
 
-    - name: Time
-      run: date "+%H:%M:%S.%N"
-      shell: bash
-
     - name: Cached Results
       uses: ./.github/actions/echo
       with:
         value: >-
           Build Cache: ${{ steps.step-cache-build.outputs.cache-hit && 'Hit' || 'Miss' }}
 
-    - name: Time
-      run: date "+%H:%M:%S.%N"
-      shell: bash
-
     - name: Setup Env
       uses: ./.github/actions/setup-node
       with:
         node-version: ${{ inputs.node-version }}
 
-    - name: Time
-      run: date "+%H:%M:%S.%N"
-      shell: bash
-
     - name: Install Dependencies
       # Install production (non-test) dependencies only
       run: |
         pnpm install:prod --filter \!./website
-      shell: bash
-
-    - name: Time
-      run: date "+%H:%M:%S.%N"
       shell: bash
 
     - name: Has Pnpm has failed?
@@ -129,17 +97,9 @@ runs:
         cat /home/runner/.pnpm/_logs/*.log
       shell: bash
 
-    - name: Time
-      run: date "+%H:%M:%S.%N"
-      shell: bash
-
     - name: Build
       if: ${{ steps.step-cache-build.outputs.cache-hit != 'true' }}
       run: pnpm run build:prod
-      shell: bash
-
-    - name: Time
-      run: date "+%H:%M:%S.%N"
       shell: bash
 
     - name: Summary
@@ -154,7 +114,3 @@ runs:
           ${{ steps.cache-path.outputs.value }}
           ```
           - hit: ${{ steps.step-cache-build.outputs.cache-hit || 'Miss' }}
-
-    - name: Time
-      run: date "+%H:%M:%S.%N"
-      shell: bash
