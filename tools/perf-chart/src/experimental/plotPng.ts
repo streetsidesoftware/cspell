@@ -11,9 +11,9 @@ import {
 } from 'chart.js';
 import { Canvas } from 'skia-canvas';
 
-import type { CsvRecordsRO } from './CsvRecord.ts';
-import { createDailyStats } from './dailyStats.ts';
-import type { Options } from './options.ts';
+import type { CsvRecordsRO } from '../CsvRecord.ts';
+import { createDailyStats } from '../dailyStats.ts';
+import type { Options } from '../options.ts';
 
 const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 

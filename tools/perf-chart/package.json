@@ -8,7 +8,7 @@
   },
   "type": "module",
   "engines": {
-    "node": ">=20"
+    "node": ">=22.18"
   },
   "scripts": {
     "build": "pnpm run build:tsc",
@@ -24,18 +24,18 @@
     "bin.ts"
   ],
   "devDependencies": {
+    "@observablehq/plot": "^0.6.17",
     "@types/d3": "^7.4.3",
-    "@types/jsdom": "^27.0.0"
+    "@types/jsdom": "^27.0.0",
+    "chart.js": "^4.5.1",
+    "d3": "^7.9.0",
+    "jsdom": "^27.4.0",
+    "skia-canvas": "^3.0.8"
   },
   "dependencies": {
-    "@observablehq/plot": "^0.6.17",
-    "chart.js": "^4.5.1",
     "commander": "^14.0.2",
     "csv-parse": "^6.1.0",
     "csv-stringify": "^6.6.0",
-    "d3": "^7.9.0",
-    "jsdom": "^27.4.0",
-    "skia-canvas": "^3.0.8",
     "thistogram": "^2.0.0"
   }
 }
