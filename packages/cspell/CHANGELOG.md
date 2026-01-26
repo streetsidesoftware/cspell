@@ -3,6 +3,50 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v9.6.2 (2026-01-26)
+
+### Fixes
+
+<details>
+<summary>fix: Conditionally compress and build bTrie (<a href="https://github.com/streetsidesoftware/cspell/pull/8437">#8437</a>)</summary>
+
+### fix: Conditionally compress and build bTrie ([#8437](https://github.com/streetsidesoftware/cspell/pull/8437))
+
+## Pull request overview
+
+This PR refactors the compilation process to conditionally compress dictionary files and build bTrie files based on the compression settings. The main changes separate compression and bTrie generation into distinct steps and update dependency path handling to be relative to the checksum file location.
+
+**Changes:**
+
+- Separated dictionary compression into a dedicated step that runs after building the dictionary
+- Modified bTrie generation to use the appropriate source file (compressed or uncompressed) based on target configuration
+- Updated dependency path resolution to make paths relative to the checksum file directory instead of the root directory
+
+---
+
+</details>
+
+### Dictionary Updates
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/8440">#8440</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#8440](https://github.com/streetsidesoftware/cspell/pull/8440))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ packages/cspell-bundled-dicts/package.json |  4 ++--
+ pnpm-lock.yaml                             | 24 ++++++++++++------------
+ 2 files changed, 14 insertions(+), 14 deletions(-)
+```
+
+---
+
+</details>
+
 ## v9.6.1 (2026-01-25)
 
 ### Fixes
