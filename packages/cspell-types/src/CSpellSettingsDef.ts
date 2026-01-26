@@ -1,3 +1,4 @@
+import type { CSpellVFS } from './cspell-vfs.js';
 import type { ReportingConfiguration, UnknownWordsConfiguration } from './CSpellReporter.js';
 import type { DictionaryDefinition, DictionaryReference } from './DictionaryDefinition.js';
 import type { Features } from './features.js';
@@ -141,6 +142,18 @@ export interface FileSettings extends ExtendableSettings, CommandLineSettings {
      * Verify that the in-document directives are correct.
      */
     validateDirectives?: boolean;
+
+    /**
+     * Files to add to the CSpell Virtual File System.
+     *
+     * They can be referenced using `cspell-vfs:///<module>/<path-to-file>/<file-name>` URLs.
+     *
+     * They can be referenced in the `path` field of dictionary definitions.
+     *
+     * @since 9.7.0
+     * @stability experimental
+     */
+    vfs?: CSpellVFS | undefined;
 
     /**
      * Configure CSpell features.

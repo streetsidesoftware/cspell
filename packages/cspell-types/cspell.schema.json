@@ -3,6 +3,68 @@
   "additionalProperties": false,
   "allowTrailingCommas": true,
   "definitions": {
+    "CSpellVFS": {
+      "additionalProperties": {
+        "$ref": "#/definitions/CSpellVFSFileEntry"
+      },
+      "description": "A declaration of files to add to the CSpell Virtual File System.",
+      "markdownDescription": "A declaration of files to add to the CSpell Virtual File System.",
+      "propertyNames": {
+        "description": "A URL string representing a CSpellVFS file. It should be of the form:\n\n```txt cspell-vfs:///<module>/<path-to-file>/<file-name> ```\n\nExample: `cspell-vfs:///@cspell/dict-en_us/en_US.trie.gz`",
+        "markdownDescription": "A URL string representing a CSpellVFS file.\nIt should be of the form:\n\n```txt\ncspell-vfs:///<module>/<path-to-file>/<file-name>\n```\n\nExample: `cspell-vfs:///@cspell/dict-en_us/en_US.trie.gz`",
+        "since": "9.7.0"
+      },
+      "since": "9.7.0",
+      "type": "object"
+    },
+    "CSpellVFSData": {
+      "$ref": "#/definitions/CSpellVFSTextData",
+      "description": "The data content of a CSpellVFS file.",
+      "markdownDescription": "The data content of a CSpellVFS file."
+    },
+    "CSpellVFSFileEntry": {
+      "additionalProperties": false,
+      "description": "An entry in the CSpell Virtual File System. It may or may not have a URL.",
+      "markdownDescription": "An entry in the CSpell Virtual File System.\nIt may or may not have a URL.",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/CSpellVFSData",
+          "description": "The content data of the file.",
+          "markdownDescription": "The content data of the file."
+        },
+        "encoding": {
+          "description": "The encoding of the data. In most cases the encoding is determined from the data type and filename url.",
+          "enum": [
+            "base64",
+            "plaintext",
+            "utf8"
+          ],
+          "markdownDescription": "The encoding of the data. In most cases the encoding is determined from the data type and filename url.",
+          "type": "string"
+        },
+        "url": {
+          "$ref": "#/definitions/CSpellVFSFileUrl",
+          "description": "The optional file vfs url. It is already part of the CSpellVFS key.",
+          "markdownDescription": "The optional file vfs url. It is already part of the CSpellVFS key."
+        }
+      },
+      "required": [
+        "data"
+      ],
+      "since": "9.7.0",
+      "type": "object"
+    },
+    "CSpellVFSFileUrl": {
+      "description": "A URL string representing a CSpellVFS file. It should be of the form:\n\n```txt cspell-vfs:///<module>/<path-to-file>/<file-name> ```\n\nExample: `cspell-vfs:///@cspell/dict-en_us/en_US.trie.gz`",
+      "markdownDescription": "A URL string representing a CSpellVFS file.\nIt should be of the form:\n\n```txt\ncspell-vfs:///<module>/<path-to-file>/<file-name>\n```\n\nExample: `cspell-vfs:///@cspell/dict-en_us/en_US.trie.gz`",
+      "since": "9.7.0",
+      "type": "string"
+    },
+    "CSpellVFSTextData": {
+      "description": "Data content stored in a string for CSpellVFS file. It is often encoded (e.g. base64) binary data.",
+      "markdownDescription": "Data content stored in a string for CSpellVFS file.\nIt is often encoded (e.g. base64) binary data.",
+      "type": "string"
+    },
     "CacheFormat": {
       "enum": [
         "legacy",
@@ -2188,6 +2250,12 @@
       "default": "0.2",
       "description": "Configuration format version of the settings file.\n\nThis controls how the settings in the configuration file behave.",
       "markdownDescription": "Configuration format version of the settings file.\n\nThis controls how the settings in the configuration file behave."
+    },
+    "vfs": {
+      "$ref": "#/definitions/CSpellVFS",
+      "description": "Files to add to the CSpell Virtual File System.\n\nThey can be referenced using `cspell-vfs:///<module>/<path-to-file>/<file-name>` URLs.\n\nThey can be referenced in the `path` field of dictionary definitions.",
+      "markdownDescription": "Files to add to the CSpell Virtual File System.\n\nThey can be referenced using `cspell-vfs:///<module>/<path-to-file>/<file-name>` URLs.\n\nThey can be referenced in the `path` field of dictionary definitions.",
+      "since": "9.7.0"
     },
     "words": {
       "description": "List of words to be considered correct.",
