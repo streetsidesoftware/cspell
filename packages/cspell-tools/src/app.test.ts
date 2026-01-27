@@ -29,7 +29,7 @@ const testHelper = createTestHelper(import.meta.url);
 
 const projectRoot = testHelper.packageRoot;
 const _relPathTemp = 'app-out';
-const pathSamples = path.join(projectRoot, '../Samples/dicts');
+const pathSamples = testHelper.resolveSample('dicts');
 
 function relPathTemp(...parts: string[]) {
     return pathTemp(_relPathTemp, ...parts);
@@ -142,7 +142,6 @@ describe('Validate the application', () => {
         const targetDir = relPathTemp();
         const name = 'merge';
         const target = name + '.txt';
-        const pathSamples = path.join(projectRoot, '../Samples/dicts');
         const cities = path.join(pathSamples, 'cities.txt');
         const exampleHunspell = path.join(pathSamples, 'hunspell/example.dic');
         const args = argv(
@@ -166,7 +165,6 @@ describe('Validate the application', () => {
         const targetDir = relPathTemp();
         const name = 'merge';
         const target = name + '.txt';
-        const pathSamples = path.join(projectRoot, '..', 'Samples', 'dicts');
         const cities = path.join(pathSamples, 'cities.txt');
         const exampleHunspell = path.join(pathSamples, 'hunspell', 'example.dic');
         const args = argv('compile', '-n', '--split', '-M', name, cities, exampleHunspell, '-o', targetDir);
@@ -180,7 +178,6 @@ describe('Validate the application', () => {
         const targetDir = relPathTemp();
         const name = 'merge';
         const target = name + '.txt';
-        const pathSamples = path.join(projectRoot, '..', 'Samples', 'dicts');
         const cities = path.join(pathSamples, 'cities.txt');
         const exampleHunspell = path.join(pathSamples, 'hunspell', 'example.dic');
         const args = argv('compile', '-n', '-M', name, cities, exampleHunspell, '-o', targetDir);
@@ -194,7 +191,6 @@ describe('Validate the application', () => {
         const targetDir = relPathTemp();
         const name = 'merge';
         const target = name + '.txt';
-        const pathSamples = path.join(projectRoot, '..', 'Samples', 'dicts');
         const cities = path.join(pathSamples, 'cities.txt');
         const exampleHunspell = path.join(pathSamples, 'hunspell', 'example.dic');
         const args = argv('compile', '--keep-raw-case', '-n', '-M', name, cities, exampleHunspell, '-o', targetDir);

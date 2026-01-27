@@ -8,7 +8,7 @@ import { defaultAllowedSplitWords } from './WordsCollection.ts';
 
 const _dirname = test_dirname(import.meta.url);
 
-const samples = path.join(_dirname, '../../../Samples/dicts');
+const samples = path.join(_dirname, '../../../../fixtures/Samples/dicts');
 
 const allowedSplitWords = defaultAllowedSplitWords;
 

@@ -12,7 +12,7 @@ import { readTextFile } from './readers/readTextFile.ts';
 
 const testHelper = createTestHelper(import.meta.url);
 
-const pathSamples = path.join(testHelper.packageRoot, '../Samples/dicts');
+const pathSamples = path.join(testHelper.packageRoot, '../../fixtures/Samples/dicts');
 
 function sample(...parts: string[]): string {
     return path.resolve(pathSamples, ...parts);

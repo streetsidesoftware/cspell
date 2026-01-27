@@ -149,6 +149,12 @@ importers:
 
   examples/yarn: {}
 
+  fixtures/Samples:
+    devDependencies:
+      '@cspell/cspell-tools':
+        specifier: workspace:*
+        version: link:../../packages/cspell-tools
+
   integration-tests:
     dependencies:
       '@cspell/cspell-types':
@@ -212,12 +218,6 @@ importers:
       cspell:
         specifier: workspace:*
         version: link:../packages/cspell
-
-  packages/Samples:
-    devDependencies:
-      '@cspell/cspell-tools':
-        specifier: workspace:*
-        version: link:../cspell-tools
 
   packages/cspell:
     dependencies:
