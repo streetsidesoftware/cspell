@@ -1,11 +1,12 @@
 import { randomUUID } from 'node:crypto';
 
-import type { RPCClientConfiguration, RPCClientOptions, RPCProtocol } from '../rpc/index.js';
-import { RPCClient } from '../rpc/index.js';
+import type { RPCClientConfiguration, RPCClientOptions, RPCProtocol } from '@cspell/rpc';
+import { RPCClient } from '@cspell/rpc';
+
 import type { CSpellRPCApi, CSpellRPCApiMethodNames } from './api.js';
 import { CSPELL_RPC_API_ENDPOINTS } from './api.js';
 
-export type { MessagePortLike } from '../rpc/index.js';
+export type { MessagePortLike } from '@cspell/rpc';
 
 export type CSpellRPCClientOptions = RPCClientOptions;
 export type CSpellRPCClientConfig = RPCClientConfiguration;
