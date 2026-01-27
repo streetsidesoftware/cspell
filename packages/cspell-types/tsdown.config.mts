@@ -1,6 +1,7 @@
+import type { UserConfig } from 'tsdown';
 import { defineConfig } from 'tsdown';
 
-export default defineConfig({
+const config: UserConfig = defineConfig({
     entry: ['src/index.ts', 'src/Parser/index.ts'],
     outDir: 'dist',
     format: ['esm', 'cjs'],
@@ -8,4 +9,7 @@ export default defineConfig({
     dts: true,
     sourcemap: true,
     clean: true,
+    inlineOnly: [],
 });
+
+export default config;

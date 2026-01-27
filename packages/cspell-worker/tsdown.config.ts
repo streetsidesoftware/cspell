@@ -11,6 +11,7 @@ const baseConfig: UserConfig = {
     sourcemap: true,
     clean: true,
     platform: 'node',
+    inlineOnly: [],
 };
 
 const config: UserConfig[] = defineConfig([baseConfig]);

@@ -10,6 +10,7 @@ const baseConfig: UserConfig = {
     sourcemap: true,
     clean: true,
     platform: 'neutral',
+    inlineOnly: ['gensequence'],
 };
 
 const config: UserConfig[] = defineConfig([baseConfig]);

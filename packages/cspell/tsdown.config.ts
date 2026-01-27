@@ -9,6 +9,7 @@ const config: UserConfig[] = defineConfig([
         dts: true,
         sourcemap: true,
         clean: true,
+        inlineOnly: [],
     },
     {
         entry: ['src/commonJsApi.ts'],
@@ -18,6 +19,7 @@ const config: UserConfig[] = defineConfig([
         dts: true,
         sourcemap: true,
         clean: true,
+        inlineOnly: [],
     },
 ]);
 

@@ -1,5 +1,4 @@
 import { DictionaryDefinitionAugmented, SuggestionCostMapDef } from "@cspell/cspell-types";
-import { Operator } from "@cspell/cspell-pipe/sync";
 
 //#region src/lib/BuildOptions.d.ts
 interface BuildOptions {
@@ -16,7 +15,6 @@ interface BuildOptions {
 }
 //#endregion
 //#region src/lib/distance/weightedMaps.d.ts
-
 /**
 * Costs are minimized while penalties are maximized.
 */
@@ -633,6 +631,9 @@ type DictionaryInformation = Exclude<DictionaryDefinitionAugmented["dictionaryIn
 //#region src/lib/mappers/mapDictionaryInfoToWeightMap.d.ts
 declare function mapDictionaryInformationToWeightMap(dictInfo: DictionaryInformation): WeightMap;
 //#endregion
+//#region ../cspell-pipe/dist/operators/types.d.ts
+type OperatorSync<T, U = T> = (i: Iterable<T>) => Iterable<U>;
+//#endregion
 //#region src/lib/TrieNode/find.d.ts
 interface FindResult {
   found: string | false;
@@ -829,7 +830,7 @@ interface ParseDictionaryOptions extends BuildOptions {
 * @param options - defines prefixes used when parsing lines.
 * @returns words that have been normalized.
 */
-declare function createDictionaryLineParserMapper(options?: Partial<ParseDictionaryOptions>): Operator<string>;
+declare function createDictionaryLineParserMapper(options?: Partial<ParseDictionaryOptions>): OperatorSync<string>;
 /**
 * Normalizes a dictionary words based upon prefix / suffixes.
 * Case insensitive versions are also generated.

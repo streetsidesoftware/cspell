@@ -9,6 +9,7 @@ const config: UserConfig = defineConfig({
     dts: true,
     sourcemap: true,
     clean: true,
+    inlineOnly: [],
 });
 
 export default config;
