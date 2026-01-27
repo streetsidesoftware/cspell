@@ -70,6 +70,7 @@ format: md
 | [userWords](#settings-userwords)                               | `string`&ZeroWidthSpace;`[]`                                              | Words to add to global dictionary -- should only be in the user config file.                                                                                         |
 | [validateDirectives](#settings-validatedirectives)             | `boolean`                                                                 | Verify that the in-document directives are correct.                                                                                                                  |
 | [version](#settings-version)                                   | [`Version`](#version)                                                     | Configuration format version of the settings file.                                                                                                                   |
+| [vfs](#settings-vfs)                                           | [`CSpellVFS`](#cspellvfs)                                                 | Files to add to the CSpell Virtual File System.                                                                                                                      |
 | [words](#settings-words)                                       | `string`&ZeroWidthSpace;`[]`                                              | List of words to be considered correct.                                                                                                                              |
 
 
@@ -1719,6 +1720,39 @@ This controls how the settings in the configuration file behave.
 
 ---
 
+#### `vfs` {#settings-vfs}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+Files to add to the CSpell Virtual File System.
+
+They can be referenced using `cspell-vfs:///<module>/<path-to-file>/<file-name>` URLs.
+
+They can be referenced in the `path` field of dictionary definitions.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`CSpellVFS`](#cspellvfs)
+
+</dd>
+
+<dt>Since</dt>
+<dd>9.7.0</dd>
+
+</dl>
+
+
+
+
+---
+
 #### `words` {#settings-words}
 
 
@@ -1735,6 +1769,195 @@ List of words to be considered correct.
 <dd>
 
 `string`&ZeroWidthSpace;`[]`
+
+</dd>
+
+</dl>
+
+
+
+## CSpellVFS
+
+| Field | Type | Description |
+| ----- | ---- | ----------- |
+
+
+### CSpellVFS Fields
+
+
+
+---
+
+## CSpellVFSData {#cspellvfsdata}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+The data content of a CSpellVFS file.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`CSpellVFSTextData`](#cspellvfstextdata)
+
+</dd>
+
+</dl>
+
+
+
+## CSpellVFSFileEntry
+
+| Field                                             | Type                                    | Description                                                                                             |
+| ------------------------------------------------- | --------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| [data](#cspellvfsfileentry-data) <sup>_req_</sup> | [`CSpellVFSData`](#cspellvfsdata)       | The content data of the file.                                                                           |
+| [encoding](#cspellvfsfileentry-encoding)          | `"base64"` | `"plaintext"` | `"utf8"`   | The encoding of the data. In most cases the encoding is determined from the data type and filename url. |
+| [url](#cspellvfsfileentry-url)                    | [`CSpellVFSFileUrl`](#cspellvfsfileurl) | The optional file vfs url. It is already part of the CSpellVFS key.                                     |
+
+
+### CSpellVFSFileEntry Fields
+
+
+---
+
+#### `data` {#cspellvfsfileentry-data}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+The content data of the file.
+
+</dd>
+
+<dt>Type <sub><sup> _< required >_ </sup></sub></dt>
+<dd>
+
+[`CSpellVFSData`](#cspellvfsdata)
+
+</dd>
+
+</dl>
+
+
+
+
+---
+
+#### `encoding` {#cspellvfsfileentry-encoding}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+The encoding of the data. In most cases the encoding is determined from the data type and filename url.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`"base64"` | `"plaintext"` | `"utf8"`
+
+</dd>
+
+</dl>
+
+
+
+
+---
+
+#### `url` {#cspellvfsfileentry-url}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+The optional file vfs url. It is already part of the CSpellVFS key.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`CSpellVFSFileUrl`](#cspellvfsfileurl)
+
+</dd>
+
+</dl>
+
+
+
+
+
+---
+
+## CSpellVFSFileUrl {#cspellvfsfileurl}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+A URL string representing a CSpellVFS file.
+It should be of the form:
+
+```txt
+cspell-vfs:///<module>/<path-to-file>/<file-name>
+```
+
+Example: `cspell-vfs:///@cspell/dict-en_us/en_US.trie.gz`
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
+
+<dt>Since</dt>
+<dd>9.7.0</dd>
+
+</dl>
+
+
+
+
+
+---
+
+## CSpellVFSTextData {#cspellvfstextdata}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+Data content stored in a string for CSpellVFS file.
+It is often encoded (e.g. base64) binary data.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
 
 </dd>
 
