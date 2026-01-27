@@ -9,7 +9,7 @@ import type { ReaderOptions } from './readers/ReaderOptions.ts';
 
 const _dirname = test_dirname(import.meta.url);
 
-const samples = path.join(_dirname, '../../../Samples/dicts');
+const samples = path.join(_dirname, '../../../../fixtures/Samples/dicts');
 
 const readerOptions: ReaderOptions = {};
 

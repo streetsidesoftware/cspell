@@ -10,7 +10,7 @@ const _dirname = test_dirname(import.meta.url);
 const packageRoot = path.join(_dirname, '../..');
 const repoRoot = path.join(packageRoot, '../..');
 const tempDirBase = path.join(packageRoot, 'temp');
-const repoSamples = path.join(repoRoot, 'packages/Samples');
+const repoSamples = path.join(repoRoot, 'fixtures/Samples');
 
 export interface TestHelper {
     /** path to `.../cspell/package/cspell-tools/` */

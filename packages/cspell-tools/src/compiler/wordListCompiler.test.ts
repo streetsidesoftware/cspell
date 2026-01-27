@@ -28,7 +28,7 @@ import { defaultAllowedSplitWords } from './WordsCollection.ts';
 
 const testHelper = createTestHelper(import.meta.url);
 
-const samples = path.join(testHelper.packageRoot, '../Samples/dicts');
+const samples = path.join(testHelper.packageRoot, '../../fixtures/Samples/dicts');
 const sampleDictEnUS = path.join(samples, 'hunspell', 'en_US.dic');
 const sampleDictEn = path.join(samples, 'en_US.txt');
 

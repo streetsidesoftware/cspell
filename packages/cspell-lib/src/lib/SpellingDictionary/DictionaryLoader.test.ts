@@ -162,7 +162,7 @@ function sample(file: string): string {
 }
 
 function dict(file: string): string {
-    const dictDir = path.join(root, '../Samples/dicts');
+    const dictDir = path.join(root, '../../fixtures/Samples/dicts');
     return path.resolve(dictDir, file);
 }
 

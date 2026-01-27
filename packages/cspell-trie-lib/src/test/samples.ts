@@ -6,7 +6,7 @@ export const dirUrl: URL = new URL('.', import.meta.url);
 export const pkgRootUrl: URL = new URL('../../', dirUrl);
 export const repoRootUrl: URL = new URL('../../', pkgRootUrl);
 export const pkgSamplesUrl: URL = new URL('Samples/', pkgRootUrl);
-export const globalSamplesPkgUrl: URL = new URL('../Samples/', pkgRootUrl);
+export const globalSamplesPkgUrl: URL = new URL('../../fixtures/Samples/', pkgRootUrl);
 
 export const rootDir: string = fileURLToPath(pkgRootUrl);
 export const samplesDir: string = fileURLToPath(pkgSamplesUrl);
