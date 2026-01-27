@@ -19,12 +19,12 @@ export interface RPCMessage {
   /**
    * The type of message being sent.
    */
-  type: 'request' | 'response' | 'cancel' | 'canceled' | 'ok';
+  type: 'request' | 'response' | 'cancel' | 'canceled' | 'ok' | 'ready';
 }
 
-export type RPCRequestType = 'request' | 'cancel' | 'ok';
+export type RPCRequestType = 'request' | 'cancel' | 'ok' | 'ready';
 
-export type RPCResponseType = 'response' | 'canceled' | 'ok';
+export type RPCResponseType = 'response' | 'canceled' | 'ok' | 'ready';
 ```
 
 There are two types of messages: Request and Response. The client sends requests and the server sends responses.

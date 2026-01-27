@@ -1,9 +1,10 @@
-import type { RPCServerConfiguration, RPCServerOptions } from '../rpc/index.js';
-import { RPCServer } from '../rpc/index.js';
+import type { RPCServerConfiguration, RPCServerOptions } from '@cspell/rpc';
+import { RPCServer } from '@cspell/rpc';
+
 import type { CSpellRPCApi } from './api.js';
 import { spellCheckDocumentRPC } from './spellCheckFile.js';
 
-export type { MessagePortLike } from '../rpc/index.js';
+export type { MessagePortLike } from '@cspell/rpc';
 
 export type CSpellRPCServerOptions = RPCServerOptions;
 export type CSpellRPCServerConfig = RPCServerConfiguration;
