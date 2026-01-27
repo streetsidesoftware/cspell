@@ -58,6 +58,7 @@ export const ConfigFields: CSpellUserSettingsFields = {
     usePnP: 'usePnP',
     userWords: 'userWords',
     validateDirectives: 'validateDirectives',
+    vfs: 'vfs',
     words: 'words',
 
     // Experimental

@@ -272,6 +272,68 @@ type Scope = ScopeChain | ScopeString;
 //#endregion
 //#endregion
 //#region ../cspell-types/dist/index.d.mts
+//#region src/cspell-vfs.d.ts
+
+/**
+* Binary data for CSpellVFS file.
+* This can be exported by a JavaScript based CSpell Configuration file.
+* @hidden
+*/
+type CSpellVFSBinaryData = Uint8Array;
+/**
+* Data content stored in a string for CSpellVFS file.
+* It is often encoded (e.g. base64) binary data.
+*/
+type CSpellVFSTextData = string;
+/**
+* The data content of a CSpellVFS file.
+*/
+type CSpellVFSData = CSpellVFSBinaryData | CSpellVFSTextData;
+/**
+* An entry in the CSpell Virtual File System.
+* It may or may not have a URL.
+* @since 9.7.0
+*/
+interface CSpellVFSFileEntry {
+  /**
+  * The optional file vfs url. It is already part of the CSpellVFS key.
+  */
+  url?: CSpellVFSFileUrl;
+  /**
+  * The content data of the file.
+  */
+  data: CSpellVFSData;
+  /**
+  * The encoding of the data. In most cases the encoding is determined from the data type and filename url.
+  */
+  encoding?: "base64" | "plaintext" | "utf8";
+}
+interface CSpellVFSFile extends CSpellVFSFileEntry {
+  /**
+  * The file URL.
+  */
+  url: CSpellVFSFileUrl;
+}
+/**
+* A URL string representing a CSpellVFS file.
+* It should be of the form:
+*
+* ```txt
+* cspell-vfs:///<module>/<path-to-file>/<file-name>
+* ```
+*
+* Example: `cspell-vfs:///@cspell/dict-en_us/en_US.trie.gz`
+*
+* @since 9.7.0
+*/
+type CSpellVFSFileUrl = string;
+/**
+* A declaration of files to add to the CSpell Virtual File System.
+* @since 9.7.0
+* @stability experimental
+*/
+type CSpellVFS = Record<CSpellVFSFileUrl, CSpellVFSFileEntry>;
+//#endregion
 //#region src/SuggestionsConfiguration.d.ts
 interface SuggestionsConfiguration {
   /**
@@ -1453,6 +1515,17 @@ interface FileSettings extends ExtendableSettings, CommandLineSettings {
   * Verify that the in-document directives are correct.
   */
   validateDirectives?: boolean;
+  /**
+  * Files to add to the CSpell Virtual File System.
+  *
+  * They can be referenced using `cspell-vfs:///<module>/<path-to-file>/<file-name>` URLs.
+  *
+  * They can be referenced in the `path` field of dictionary definitions.
+  *
+  * @since 9.7.0
+  * @stability experimental
+  */
+  vfs?: CSpellVFS | undefined;
   /**
   * Configure CSpell features.
   *
@@ -3869,4 +3942,4 @@ declare namespace textApi_d_exports {
   export { calculateTextDocumentOffsets, camelToSnake, cleanText, cleanTextOffset, extractLinesOfText, extractPossibleWordsFromTextOffset, extractText, extractWordsFromCode, extractWordsFromCodeTextOffset, extractWordsFromText, extractWordsFromTextOffset, isFirstCharacterLower, isFirstCharacterUpper, isLowerCase, isUpperCase, lcFirst, match, matchCase, matchStringToTextOffset, matchToTextOffset, removeAccents, snakeToCamel, splitCamelCaseWord, splitCamelCaseWordWithOffset, stringToRegExp, textOffset, ucFirst };
 }
 //#endregion
-export { type AdvancedCSpellSettings, type AdvancedCSpellSettingsWithSourceTrace, type BaseSetting, type CSpellConfigFile, type CSpellPackageSettings, type CSpellReporter, type CSpellReporterEmitters, type CSpellReporterModule, type CSpellSettings, type CSpellSettingsWithSourceTrace, type CSpellUserSettings, type CSpellUserSettingsFields, type CSpellUserSettingsWithComments, type CacheFormat, type CacheSettings, type CacheStrategy, type CharacterSet, type CharacterSetCosts, CheckTextInfo, type CommandLineSettings, CompoundWordsMethod, ConfigFields, ConfigurationDependencies, CreateTextDocumentParams, type CustomDictionaryPath, type CustomDictionaryScope, type DebugEmitter, DetermineFinalDocumentSettingsResult, type DictionaryDefinition, type DictionaryDefinitionAlternate, type DictionaryDefinitionAugmented, type DictionaryDefinitionBase, type DictionaryDefinitionCustom, type DictionaryDefinitionInline, type DictionaryDefinitionInlineFlagWords, type DictionaryDefinitionInlineIgnoreWords, type DictionaryDefinitionInlineWords, type DictionaryDefinitionLegacy, type DictionaryDefinitionPreferred, type DictionaryDefinitionSimple, type DictionaryFileTypes, type DictionaryId, type DictionaryInformation, type DictionaryNegRef, type DictionaryPath, type DictionaryRef, type DictionaryReference, Document, DocumentValidator, DocumentValidatorOptions, ENV_CSPELL_GLOB_ROOT, type EditCosts, type ErrorEmitter, type ErrorLike, ExcludeFilesGlobMap, ExclusionFunction, exclusionHelper_d_exports as ExclusionHelper, type ExperimentalBaseSettings, type ExperimentalFileSettings, type ExtendableSettings, FSCapabilityFlags, type FSPathResolvable, type Feature, FeatureFlag, FeatureFlags, type Features, type FeaturesSupportedByReporter, type FileSettings, type FileSource, type FsPath, type Glob, type GlobDef, type ICSpellConfigFile, ImportError, type ImportFileRef, ImportFileRefWithError, type InMemorySource, IncludeExcludeFlag, IncludeExcludeOptions, type Issue, IssueType, type LanguageId, type LanguageIdMultiple, type LanguageIdMultipleNeg, type LanguageIdSingle, type LanguageSetting, type LanguageSettingFilterFields, type LanguageSettingFilterFieldsDeprecated, type LanguageSettingFilterFieldsPreferred, type LegacySettings, index_link_d_exports as Link, type LocalId, type LocaleId, Logger, type MappedText, type MatchingFileType, type MergeSource, type MessageEmitter, type MessageType, type MessageTypeLookup, MessageTypes, type OverrideFilterFields, type OverrideSettings, type ParseResult, type ParsedText, type Parser, type ParserName, type ParserOptions, type Pattern, type PatternId, type PatternRef, PerfTimer, type Plugin, type PnPSettings, type PredefinedPatterns, type ProgressBase, type ProgressEmitter, type ProgressFileBase, type ProgressFileBegin, type ProgressFileComplete, type ProgressItem, type ProgressTypes, type RegExpPatternDefinition, type RegExpPatternList, type ReplaceEntry, type ReplaceMap, type ReportIssueOptions, type ReporterConfiguration, type ReporterSettings, type ReportingConfiguration, type ResultEmitter, type RunResult, type Settings, type SimpleGlob, type Source, SpellCheckFileOptions, SpellCheckFilePerf, SpellCheckFileResult, SpellingDictionary, SpellingDictionaryCollection, SpellingDictionaryLoadError, type SpellingErrorEmitter, SuggestOptions, SuggestedWord, SuggestionCollector, type SuggestionCostMapDef, type SuggestionCostsDefs, SuggestionError, SuggestionOptions, SuggestionResult, type SuggestionsConfiguration, SuggestionsForWordResult, textApi_d_exports as Text, TextDocument, TextDocumentLine, type TextDocumentOffset, TextDocumentRef, TextInfoItem, type TextOffset, TraceOptions, TraceResult, TraceWordResult, type TrustLevel, UnknownFeatureFlagError, type UnknownWordsChoices, type UnknownWordsConfiguration, type VFileSystemProvider, ValidationIssue, type Version, type VersionLatest, type VersionLegacy, type VirtualFS, type WorkspaceTrustSettings, toArray as asyncIterableToArray, calcOverrideSettings, checkFilenameMatchesExcludeGlob as checkFilenameMatchesGlob, checkText, checkTextDocument, clearCachedFiles, clearCaches, combineTextAndLanguageSettings, combineTextAndLanguageSettings as constructSettingsForText, createConfigLoader, createPerfTimer, createSpellingDictionary, createCollection as createSpellingDictionaryCollection, createTextDocument, currentSettingsFileVersion, defaultCSpellSettings, defaultConfigFilenames, defaultFileName, defaultFileName as defaultSettingsFilename, defineConfig, determineFinalDocumentSettings, extractDependencies, extractImportErrors, fileToDocument, fileToTextDocument, finalizeSettings, getCachedFileSize, getDefaultBundledSettingsAsync, getDefaultConfigLoader, getDefaultSettings, getDictionary, getGlobalSettings, getGlobalSettingsAsync, findMatchingFileTypes as getLanguageIdsForBaseFilename, getFileTypesForExt as getLanguagesForExt, getLogger, getSources, getSystemFeatureFlags, getVirtualFS, isBinaryFile, isSpellingDictionaryLoadError, loadConfig, loadPnP, mergeInDocSettings, mergeSettings, readConfigFile, readFileText as readFile, readFileTextSync as readFileSync, readRawSettings, readSettings, readSettingsFiles, refreshDictionaryCache, resolveConfigFileImports, resolveFile, searchForConfig, sectionCSpell, setLogger, shouldCheckDocument, spellCheckDocument, spellCheckDocumentRPC, spellCheckFile, suggestionsForWord, suggestionsForWords, toCSpellSettingsWithOutSourceTrace, traceWords, traceWordsAsync, unknownWordsChoices, updateTextDocument, validateText, writeToFile, writeToFileIterable, writeToFileIterable as writeToFileIterableP };
+export { type AdvancedCSpellSettings, type AdvancedCSpellSettingsWithSourceTrace, type BaseSetting, type CSpellConfigFile, type CSpellPackageSettings, type CSpellReporter, type CSpellReporterEmitters, type CSpellReporterModule, type CSpellSettings, type CSpellSettingsWithSourceTrace, type CSpellUserSettings, type CSpellUserSettingsFields, type CSpellUserSettingsWithComments, type CSpellVFS, type CSpellVFSBinaryData, type CSpellVFSData, type CSpellVFSFile, type CSpellVFSFileEntry, type CSpellVFSFileUrl, type CSpellVFSTextData, type CacheFormat, type CacheSettings, type CacheStrategy, type CharacterSet, type CharacterSetCosts, CheckTextInfo, type CommandLineSettings, CompoundWordsMethod, ConfigFields, ConfigurationDependencies, CreateTextDocumentParams, type CustomDictionaryPath, type CustomDictionaryScope, type DebugEmitter, DetermineFinalDocumentSettingsResult, type DictionaryDefinition, type DictionaryDefinitionAlternate, type DictionaryDefinitionAugmented, type DictionaryDefinitionBase, type DictionaryDefinitionCustom, type DictionaryDefinitionInline, type DictionaryDefinitionInlineFlagWords, type DictionaryDefinitionInlineIgnoreWords, type DictionaryDefinitionInlineWords, type DictionaryDefinitionLegacy, type DictionaryDefinitionPreferred, type DictionaryDefinitionSimple, type DictionaryFileTypes, type DictionaryId, type DictionaryInformation, type DictionaryNegRef, type DictionaryPath, type DictionaryRef, type DictionaryReference, Document, DocumentValidator, DocumentValidatorOptions, ENV_CSPELL_GLOB_ROOT, type EditCosts, type ErrorEmitter, type ErrorLike, ExcludeFilesGlobMap, ExclusionFunction, exclusionHelper_d_exports as ExclusionHelper, type ExperimentalBaseSettings, type ExperimentalFileSettings, type ExtendableSettings, FSCapabilityFlags, type FSPathResolvable, type Feature, FeatureFlag, FeatureFlags, type Features, type FeaturesSupportedByReporter, type FileSettings, type FileSource, type FsPath, type Glob, type GlobDef, type ICSpellConfigFile, ImportError, type ImportFileRef, ImportFileRefWithError, type InMemorySource, IncludeExcludeFlag, IncludeExcludeOptions, type Issue, IssueType, type LanguageId, type LanguageIdMultiple, type LanguageIdMultipleNeg, type LanguageIdSingle, type LanguageSetting, type LanguageSettingFilterFields, type LanguageSettingFilterFieldsDeprecated, type LanguageSettingFilterFieldsPreferred, type LegacySettings, index_link_d_exports as Link, type LocalId, type LocaleId, Logger, type MappedText, type MatchingFileType, type MergeSource, type MessageEmitter, type MessageType, type MessageTypeLookup, MessageTypes, type OverrideFilterFields, type OverrideSettings, type ParseResult, type ParsedText, type Parser, type ParserName, type ParserOptions, type Pattern, type PatternId, type PatternRef, PerfTimer, type Plugin, type PnPSettings, type PredefinedPatterns, type ProgressBase, type ProgressEmitter, type ProgressFileBase, type ProgressFileBegin, type ProgressFileComplete, type ProgressItem, type ProgressTypes, type RegExpPatternDefinition, type RegExpPatternList, type ReplaceEntry, type ReplaceMap, type ReportIssueOptions, type ReporterConfiguration, type ReporterSettings, type ReportingConfiguration, type ResultEmitter, type RunResult, type Settings, type SimpleGlob, type Source, SpellCheckFileOptions, SpellCheckFilePerf, SpellCheckFileResult, SpellingDictionary, SpellingDictionaryCollection, SpellingDictionaryLoadError, type SpellingErrorEmitter, SuggestOptions, SuggestedWord, SuggestionCollector, type SuggestionCostMapDef, type SuggestionCostsDefs, SuggestionError, SuggestionOptions, SuggestionResult, type SuggestionsConfiguration, SuggestionsForWordResult, textApi_d_exports as Text, TextDocument, TextDocumentLine, type TextDocumentOffset, TextDocumentRef, TextInfoItem, type TextOffset, TraceOptions, TraceResult, TraceWordResult, type TrustLevel, UnknownFeatureFlagError, type UnknownWordsChoices, type UnknownWordsConfiguration, type VFileSystemProvider, ValidationIssue, type Version, type VersionLatest, type VersionLegacy, type VirtualFS, type WorkspaceTrustSettings, toArray as asyncIterableToArray, calcOverrideSettings, checkFilenameMatchesExcludeGlob as checkFilenameMatchesGlob, checkText, checkTextDocument, clearCachedFiles, clearCaches, combineTextAndLanguageSettings, combineTextAndLanguageSettings as constructSettingsForText, createConfigLoader, createPerfTimer, createSpellingDictionary, createCollection as createSpellingDictionaryCollection, createTextDocument, currentSettingsFileVersion, defaultCSpellSettings, defaultConfigFilenames, defaultFileName, defaultFileName as defaultSettingsFilename, defineConfig, determineFinalDocumentSettings, extractDependencies, extractImportErrors, fileToDocument, fileToTextDocument, finalizeSettings, getCachedFileSize, getDefaultBundledSettingsAsync, getDefaultConfigLoader, getDefaultSettings, getDictionary, getGlobalSettings, getGlobalSettingsAsync, findMatchingFileTypes as getLanguageIdsForBaseFilename, getFileTypesForExt as getLanguagesForExt, getLogger, getSources, getSystemFeatureFlags, getVirtualFS, isBinaryFile, isSpellingDictionaryLoadError, loadConfig, loadPnP, mergeInDocSettings, mergeSettings, readConfigFile, readFileText as readFile, readFileTextSync as readFileSync, readRawSettings, readSettings, readSettingsFiles, refreshDictionaryCache, resolveConfigFileImports, resolveFile, searchForConfig, sectionCSpell, setLogger, shouldCheckDocument, spellCheckDocument, spellCheckDocumentRPC, spellCheckFile, suggestionsForWord, suggestionsForWords, toCSpellSettingsWithOutSourceTrace, traceWords, traceWordsAsync, unknownWordsChoices, updateTextDocument, validateText, writeToFile, writeToFileIterable, writeToFileIterable as writeToFileIterableP };

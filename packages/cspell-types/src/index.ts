@@ -1,6 +1,15 @@
 export type { CSpellUserSettingsFields } from './configFields.js';
 export { ConfigFields } from './configFields.js';
 export type {
+    CSpellVFS,
+    CSpellVFSBinaryData,
+    CSpellVFSData,
+    CSpellVFSFile,
+    CSpellVFSFileEntry,
+    CSpellVFSFileUrl,
+    CSpellVFSTextData,
+} from './cspell-vfs.js';
+export type {
     CSpellReporter,
     CSpellReporterEmitters,
     CSpellReporterModule,

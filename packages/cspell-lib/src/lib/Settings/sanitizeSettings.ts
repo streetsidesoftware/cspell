@@ -91,6 +91,7 @@ const handlers: CSpellSettingsHandlers = {
     usePnP: skip,
     userWords: copy1,
     validateDirectives: copy1,
+    vfs: skip,
     words: copy1,
 
     // Experimental
