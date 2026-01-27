@@ -27,9 +27,8 @@ const mockedCompressFile = vi.mocked(compressFile);
 
 const testHelper = createTestHelper(import.meta.url);
 
-const projectRoot = testHelper.packageRoot;
 const _relPathTemp = 'app-out';
-const pathSamples = testHelper.resolveSample('dicts');
+const pathSampleDicts = testHelper.resolveSample('dicts');
 
 function relPathTemp(...parts: string[]) {
     return pathTemp(_relPathTemp, ...parts);
@@ -56,7 +55,7 @@ describe('Validate the application', () => {
 
     beforeEach(() => {
         testHelper.createTempDir();
-        testHelper.cpFileSync(path.join(pathSamples, 'cities.txt'), '.');
+        testHelper.cpFileSync(path.join(pathSampleDicts, 'cities.txt'), '.');
         consoleSpy.attach();
     });
     afterEach(() => {
@@ -142,8 +141,8 @@ describe('Validate the application', () => {
         const targetDir = relPathTemp();
         const name = 'merge';
         const target = name + '.txt';
-        const cities = path.join(pathSamples, 'cities.txt');
-        const exampleHunspell = path.join(pathSamples, 'hunspell/example.dic');
+        const cities = path.join(pathSampleDicts, 'cities.txt');
+        const exampleHunspell = path.join(pathSampleDicts, 'hunspell/example.dic');
         const args = argv(
             'compile',
             '-n',
@@ -165,8 +164,8 @@ describe('Validate the application', () => {
         const targetDir = relPathTemp();
         const name = 'merge';
         const target = name + '.txt';
-        const cities = path.join(pathSamples, 'cities.txt');
-        const exampleHunspell = path.join(pathSamples, 'hunspell', 'example.dic');
+        const cities = path.join(pathSampleDicts, 'cities.txt');
+        const exampleHunspell = path.join(pathSampleDicts, 'hunspell', 'example.dic');
         const args = argv('compile', '-n', '--split', '-M', name, cities, exampleHunspell, '-o', targetDir);
         await expect(app.run(commander, args)).resolves.toBeUndefined();
         const words = await fs.readFile(path.join(targetDir, target), 'utf8');
@@ -178,8 +177,8 @@ describe('Validate the application', () => {
         const targetDir = relPathTemp();
         const name = 'merge';
         const target = name + '.txt';
-        const cities = path.join(pathSamples, 'cities.txt');
-        const exampleHunspell = path.join(pathSamples, 'hunspell', 'example.dic');
+        const cities = path.join(pathSampleDicts, 'cities.txt');
+        const exampleHunspell = path.join(pathSampleDicts, 'hunspell', 'example.dic');
         const args = argv('compile', '-n', '-M', name, cities, exampleHunspell, '-o', targetDir);
         await expect(app.run(commander, args)).resolves.toBeUndefined();
         const words = await fs.readFile(path.join(targetDir, target), 'utf8');
@@ -191,8 +190,8 @@ describe('Validate the application', () => {
         const targetDir = relPathTemp();
         const name = 'merge';
         const target = name + '.txt';
-        const cities = path.join(pathSamples, 'cities.txt');
-        const exampleHunspell = path.join(pathSamples, 'hunspell', 'example.dic');
+        const cities = path.join(pathSampleDicts, 'cities.txt');
+        const exampleHunspell = path.join(pathSampleDicts, 'hunspell', 'example.dic');
         const args = argv('compile', '--keep-raw-case', '-n', '-M', name, cities, exampleHunspell, '-o', targetDir);
         await expect(app.run(commander, args)).resolves.toBeUndefined();
         const words = await fs.readFile(path.join(targetDir, target), 'utf8');
