@@ -1,5 +1,6 @@
 import type { RPCServerConfiguration, RPCServerOptions } from '@cspell/rpc';
 import { RPCServer } from '@cspell/rpc';
+
 import type { CSpellRPCApi } from './api.js';
 import { spellCheckDocumentRPC } from './spellCheckFile.js';
 
