@@ -3,6 +3,48 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v9.6.3 (2026-01-27)
+
+### Fixes
+
+<details>
+<summary>fix: Move cspell-lib/rpc into its own package (<a href="https://github.com/streetsidesoftware/cspell/pull/8468">#8468</a>)</summary>
+
+### fix: Move cspell-lib/rpc into its own package ([#8468](https://github.com/streetsidesoftware/cspell/pull/8468))
+
+## Pull request overview
+
+This PR refactors the RPC implementation by moving it from `packages/cspell-lib/src/rpc` into a standalone package `@cspell/rpc`. This improves modularity and allows the RPC library to be used independently of cspell-lib.
+
+**Changes:**
+
+- Created new `@cspell/rpc` package with complete RPC implementation (client, server, protocol, types, utilities)
+- Updated `cspell-lib` to import from `@cspell/rpc` instead of local `./rpc` directory
+- Updated workspace configuration and dependency management in pnpm-lock.yaml
+
+---
+
+</details>
+
+<details>
+<summary>fix: Add types for cspell-vfs (<a href="https://github.com/streetsidesoftware/cspell/pull/8451">#8451</a>)</summary>
+
+### fix: Add types for cspell-vfs ([#8451](https://github.com/streetsidesoftware/cspell/pull/8451))
+
+## Pull request overview
+
+This PR adds TypeScript type definitions for the CSpell Virtual File System (cspell-vfs) feature, enabling users to declare virtual files in their configuration that can be referenced via `cspell-vfs://` URLs.
+
+**Changes:**
+
+- Added comprehensive TypeScript type definitions for the CSpell VFS feature
+- Added `vfs` configuration field to CSpell settings
+- Updated JSON schemas to reflect the new types
+
+---
+
+</details>
+
 ## v9.6.2 (2026-01-26)
 
 ### Fixes
