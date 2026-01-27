@@ -1,4 +1,5 @@
-import { defineConfig, type UserConfig } from 'tsdown';
+import type { UserConfig } from 'tsdown';
+import { defineConfig } from 'tsdown';
 
 const config: UserConfig = defineConfig({
     tsconfig: './tsconfig.esm.json',
@@ -8,6 +9,7 @@ const config: UserConfig = defineConfig({
     dts: true,
     sourcemap: true,
     clean: true,
+    inlineOnly: [],
 });
 
 export default config;

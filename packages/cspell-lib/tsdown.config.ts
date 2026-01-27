@@ -6,10 +6,11 @@ const config: UserConfig[] = defineConfig([
         entry: ['src/api.ts', 'src/rpc.ts'],
         outDir: 'api',
         format: ['esm'],
-        dts: { emitDtsOnly: true, sourcemap: false, resolve: true /* dtsInput: true */ },
+        dts: { emitDtsOnly: true, sourcemap: false },
         fixedExtension: false,
         sourcemap: 'hidden',
         clean: true,
+        inlineOnly: [],
     },
 ]);
 
