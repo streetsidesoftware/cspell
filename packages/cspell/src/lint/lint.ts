@@ -25,6 +25,8 @@ import { getEnvironmentVariable, setEnvironmentVariable, truthy } from '../envir
 import { getFeatureFlags } from '../featureFlags/index.js';
 import type { CSpellReporterConfiguration } from '../models.js';
 import { npmPackage } from '../pkgInfo.js';
+import type { FinalizedReporter } from '../reporters/index.js';
+import { LintReporter } from '../reporters/index.js';
 import { calcCacheSettings } from '../util/cache/index.js';
 import { type ConfigInfo, readConfig } from '../util/configFileHelper.js';
 import { CheckFailed, toApplicationError } from '../util/errors.js';
@@ -37,8 +39,6 @@ import {
     normalizeFileOrGlobsToRoot,
     normalizeGlobsToRoot,
 } from '../util/glob.js';
-import type { FinalizedReporter } from '../util/reporters.js';
-import { LintReporter } from '../util/reporters.js';
 import { getTimeMeasurer } from '../util/timer.js';
 import { unindent } from '../util/unindent.js';
 import * as util from '../util/util.js';
@@ -129,7 +129,7 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
             reporter.info(`Config Files Found:\n    ${relativeToCwd(configInfo.source)}\n`, MessageTypes.Info);
         }
 
-        const configErrorCount = countConfigErrors(configInfo, processFileOptions);
+        const configErrorCount = countConfigErrors(reporter, configInfo, processFileOptions);
         if (configErrorCount && cfg.options.exitCode !== false && !cfg.options.continueOnError) {
             return runResult({ errors: configErrorCount });
         }
@@ -188,7 +188,6 @@ export async function runLint(cfg: LintRequest): Promise<RunResult> {
 
     function getProcessFileOptions(configInfo: ConfigInfo): ProcessFileOptions {
         const processFileOptionsGeneral: ProcessFileOptions = {
-            reporter,
             chalk,
             configInfo,
             cfg,

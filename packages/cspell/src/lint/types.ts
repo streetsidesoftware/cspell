@@ -1,7 +1,7 @@
 import type { ReportIssueOptions } from '@cspell/cspell-types';
 
+import type { LintFileResult } from '../reporters/LintFileResult.js';
 import type { ReadFileInfoResult } from '../util/fileHelper.js';
-import type { LintFileResult } from '../util/LintFileResult.js';
 
 export interface PrefetchResult {
     fileResult?: LintFileResult | undefined;

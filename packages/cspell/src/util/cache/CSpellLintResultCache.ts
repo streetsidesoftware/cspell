@@ -1,4 +1,4 @@
-import type { LintFileResult } from '../LintFileResult.js';
+import type { LintFileResult } from '../../reporters/index.js';
 
 export interface CSpellLintResultCache {
     /**

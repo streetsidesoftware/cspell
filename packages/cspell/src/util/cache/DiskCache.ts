@@ -12,8 +12,8 @@ import { fileURLToPath } from 'node:url';
 
 import { isUrlLike, toFilePathOrHref } from '@cspell/url';
 
+import type { LintFileResult } from '../../reporters/index.js';
 import { readFileInfo } from '../../util/fileHelper.js';
-import type { LintFileResult } from '../../util/LintFileResult.js';
 import type { CSpellLintResultCache } from './CSpellLintResultCache.js';
 import type { FileDescriptor, FileEntryCache } from './fileEntryCache.js';
 import { createFromFile } from './fileEntryCache.js';
