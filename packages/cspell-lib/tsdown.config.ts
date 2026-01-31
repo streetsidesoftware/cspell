@@ -1,6 +1,6 @@
 import { defineConfig, type UserConfig } from 'tsdown';
 
-const config: UserConfig[] = defineConfig([
+export default defineConfig([
     {
         // The API
         entry: ['src/api.ts', 'src/rpc.ts'],
@@ -9,9 +9,8 @@ const config: UserConfig[] = defineConfig([
         dts: { emitDtsOnly: true, sourcemap: false },
         fixedExtension: false,
         sourcemap: 'hidden',
+        target: 'Node20',
         clean: true,
         inlineOnly: [],
     },
-]);
-
-export default config;
+]) as UserConfig[];
