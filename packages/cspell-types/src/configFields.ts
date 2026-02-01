@@ -18,6 +18,7 @@ export const ConfigFields: CSpellUserSettingsFields = {
     enableFiletypes: 'enableFiletypes',
     enabledFileTypes: 'enabledFileTypes',
     enableGlobDot: 'enableGlobDot',
+    engines: 'engines',
     failFast: 'failFast',
     features: 'features',
     files: 'files',

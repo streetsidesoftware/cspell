@@ -141,6 +141,25 @@
       ],
       "type": "object"
     },
+    "CompatibleEngineVersions": {
+      "additionalProperties": {
+        "$ref": "#/definitions/SemVersionPredicate",
+        "description": "Other engine version predicates.",
+        "markdownDescription": "Other engine version predicates."
+      },
+      "description": "Engine version predicates.\n\nThis allows dictionaries and other components to specify the versions of engines (like cspell) they are compatible with.",
+      "markdownDescription": "Engine version predicates.\n\nThis allows dictionaries and other components to specify the versions of engines (like cspell) they are compatible with.",
+      "properties": {
+        "cspell": {
+          "$ref": "#/definitions/SemVersionPredicate",
+          "description": "CSpell version predicate.",
+          "markdownDescription": "CSpell version predicate.",
+          "since": "9.6.3"
+        }
+      },
+      "since": "9.6.3",
+      "type": "object"
+    },
     "CostMapDefInsDel": {
       "additionalProperties": false,
       "properties": {
@@ -1784,6 +1803,11 @@
       "description": "Declare a reporter to use.\n\n`default` - is a special name for the default cli reporter.\n\nExamples:\n- `\"default\"` - to use the default reporter\n- `\"@cspell/cspell-json-reporter\"` - use the cspell JSON reporter.\n- `[\"@cspell/cspell-json-reporter\", { \"outFile\": \"out.json\" }]`",
       "markdownDescription": "Declare a reporter to use.\n\n`default` - is a special name for the default cli reporter.\n\nExamples:\n- `\"default\"` - to use the default reporter\n- `\"@cspell/cspell-json-reporter\"` - use the cspell JSON reporter.\n- `[\"@cspell/cspell-json-reporter\", { \"outFile\": \"out.json\" }]`"
     },
+    "SemVersionPredicate": {
+      "description": "Semantic Version Predicate\n\nExamples:\n- `>=8`",
+      "markdownDescription": "Semantic Version Predicate\n\nExamples:\n- `>=8`",
+      "type": "string"
+    },
     "Serializable": {
       "anyOf": [
         {
@@ -1952,6 +1976,12 @@
       "title": "Enabled Language Ids",
       "type": "array",
       "uniqueItems": true
+    },
+    "engines": {
+      "$ref": "#/definitions/CompatibleEngineVersions",
+      "description": "Specify compatible engine versions.\n\nThis allows dictionaries and other components to specify the versions of engines (like cspell) they are compatible with.\n\nIt does not enforce compatibility, it is up to the client to use this information as needed.",
+      "markdownDescription": "Specify compatible engine versions.\n\nThis allows dictionaries and other components to specify the versions of engines (like cspell) they are compatible with.\n\nIt does not enforce compatibility, it is up to the client to use this information as needed.",
+      "since": "9.6.3"
     },
     "failFast": {
       "default": false,

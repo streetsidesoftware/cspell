@@ -161,6 +161,17 @@ export interface FileSettings extends ExtendableSettings, CommandLineSettings {
      * @since 5.16.0
      */
     features?: Features;
+
+    /**
+     * Specify compatible engine versions.
+     *
+     * This allows dictionaries and other components to specify the versions of engines (like cspell) they are compatible with.
+     *
+     * It does not enforce compatibility, it is up to the client to use this information as needed.
+     *
+     * @since 9.6.3
+     */
+    engines?: CompatibleEngineVersions;
 }
 
 /* eslint-disable no-irregular-whitespace */
@@ -897,4 +908,32 @@ export interface ExperimentalBaseSettings {
  */
 export interface Plugin {
     parsers?: Parser[];
+}
+
+/**
+ * Semantic Version Predicate
+ *
+ * Examples:
+ * - `>=8`
+ */
+export type SemVersionPredicate = string;
+
+/**
+ * Engine version predicates.
+ *
+ * This allows dictionaries and other components to specify the versions of engines (like cspell) they are compatible with.
+ *
+ * @since 9.6.3
+ */
+export interface CompatibleEngineVersions {
+    /**
+     * CSpell version predicate.
+     * @since 9.6.3
+     */
+    cspell?: SemVersionPredicate;
+
+    /**
+     * Other engine version predicates.
+     */
+    [engine: string]: SemVersionPredicate;
 }
