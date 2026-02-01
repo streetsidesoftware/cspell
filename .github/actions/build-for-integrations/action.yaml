@@ -68,7 +68,7 @@ runs:
 
     - name: Cache Build
       id: step-cache-build
-      uses: actions/cache@v5.0.2
+      uses: actions/cache@v5.0.3
       with:
         key: ${{ steps.cache-key.outputs.value }}
         path: ${{ steps.cache-path.outputs.value }}
