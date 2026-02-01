@@ -19,24 +19,23 @@ import {
     Text as cspellText,
 } from 'cspell-lib';
 
+import type { ProcessFileReporter } from '../reporters/LintFileResult.js';
+import type { LintFileResult } from '../reporters/LintFileResult.js';
+import { mergeReportIssueOptions, ReportItemCollector } from '../reporters/reporters.js';
 import type { CSpellLintResultCache } from '../util/cache/CSpellLintResultCache.js';
 import type { ConfigInfo } from '../util/configFileHelper.js';
 import { toError } from '../util/errors.js';
 import { extractContext } from '../util/extractContext.js';
 import { fileInfoToDocument, readFileInfo, relativeToCwd } from '../util/fileHelper.js';
-import type { LintFileResult } from '../util/LintFileResult.js';
-import type { LintFileReporter } from '../util/reporters.js';
-import { mergeReportIssueOptions } from '../util/reporters.js';
 import { getTimeMeasurer } from '../util/timer.js';
 import { indent, unindent } from '../util/unindent.js';
 import * as util from '../util/util.js';
 import { wordWrapAnsiText } from '../util/wrap.js';
 import { LinterError } from './LinterError.js';
 import type { LintRequest } from './LintRequest.js';
-import type { PrefetchResult } from './types.js';
+import type { FileToProcess, PrefetchResult } from './types.js';
 
 export interface ProcessFileOptions {
-    readonly reporter: LintFileReporter;
     readonly configInfo: ConfigInfo;
     readonly verboseLevel: number;
     readonly useColor: boolean;
@@ -47,20 +46,20 @@ export interface ProcessFileOptions {
 }
 
 export async function processFile(
-    filename: string,
+    file: FileToProcess,
     cache: CSpellLintResultCache,
     prefetch: PrefetchResult | undefined,
     processFileOptions: ProcessFileOptions,
 ): Promise<LintFileResult> {
     if (prefetch?.fileResult) return prefetch.fileResult;
+    const { filename } = file;
 
-    const { reporter, cfg, configInfo, userSettings } = processFileOptions;
+    const { cfg, configInfo, userSettings } = processFileOptions;
 
     const getElapsedTimeMs = getTimeMeasurer();
     const reportIssueOptions = prefetch?.reportIssueOptions;
     const cachedResult = await cache.getCachedLintResults(filename);
     if (cachedResult) {
-        reporter.debug(`Filename: ${filename}, using cache`);
         return {
             ...cachedResult,
             elapsedTimeMs: getElapsedTimeMs(),
@@ -78,7 +77,10 @@ export async function processFile(
         configErrors: 0,
         elapsedTimeMs: 0,
         reportIssueOptions,
+        reportItems: undefined,
     };
+
+    const reporter = new ReportItemCollector(result);
 
     const fileInfo = prefetch?.fileInfo || (await readFileInfo(filename, undefined, true));
     if (fileInfo.errorCode) {
@@ -122,7 +124,7 @@ export async function processFile(
         reportIssueOptions,
     );
 
-    result.configErrors += reportSpellingResultConfigErrors(spellResult, processFileOptions);
+    result.configErrors += reportSpellingResultConfigErrors(reporter, spellResult, processFileOptions);
 
     reportCheckResult(result, doc, spellResult, config, processFileOptions);
 
@@ -144,9 +146,11 @@ export function reportCheckResult(
     config: CSpellSettingsWithSourceTrace,
     processFileOptions: ProcessFileOptions,
 ): void {
-    const { configInfo, reporter, verboseLevel, useColor, cfg, chalk } = processFileOptions;
+    const { configInfo, verboseLevel, useColor, cfg, chalk } = processFileOptions;
     const elapsed = result.elapsedTimeMs || 0;
     const dictionaries = config.dictionaries || [];
+
+    const reporter = new ReportItemCollector(result);
 
     if (verboseLevel > 1) {
         const dictsUsed = [...dictionaries]
@@ -182,13 +186,21 @@ function calcDependencies(config: CSpellSettings): ConfigDependencies {
     return { files: [...configFiles, ...dictionaryFiles] };
 }
 
-function reportConfigurationErrors(config: CSpellSettings, processFileOptions: ProcessFileOptions): number {
+function reportConfigurationErrors(
+    reporter: ProcessFileReporter,
+    config: CSpellSettings,
+    processFileOptions: ProcessFileOptions,
+): number {
     const errors = extractImportErrors(config);
-    return reportImportErrors(errors, processFileOptions);
+    return reportImportErrors(reporter, errors, processFileOptions);
 }
 
-function reportImportErrors(errors: ImportFileRefWithError[], processFileOptions: ProcessFileOptions): number {
-    const { reporter, configErrors } = processFileOptions;
+function reportImportErrors(
+    reporter: ProcessFileReporter,
+    errors: ImportFileRefWithError[],
+    processFileOptions: ProcessFileOptions,
+): number {
+    const { configErrors } = processFileOptions;
     let count = 0;
     errors.forEach((ref) => {
         const key = ref.error.toString();
@@ -202,11 +214,12 @@ function reportImportErrors(errors: ImportFileRefWithError[], processFileOptions
 }
 
 function reportSpellingResultConfigErrors(
+    reporter: ProcessFileReporter,
     spellResult: Partial<SpellCheckFileResult>,
     processFileOptions: ProcessFileOptions,
 ): number {
-    const { reporter, configErrors } = processFileOptions;
-    let count = reportImportErrors(spellResult.configErrors || [], processFileOptions);
+    const { configErrors } = processFileOptions;
+    let count = reportImportErrors(reporter, spellResult.configErrors || [], processFileOptions);
 
     const dictionaryErrors = [...(spellResult.dictionaryErrors || [])];
     for (const [dictName, dictErrors] of dictionaryErrors) {
@@ -223,6 +236,10 @@ function reportSpellingResultConfigErrors(
     return count;
 }
 
-export function countConfigErrors(configInfo: ConfigInfo, processFileOptions: ProcessFileOptions): number {
-    return reportConfigurationErrors(configInfo.config, processFileOptions);
+export function countConfigErrors(
+    reporter: ProcessFileReporter,
+    configInfo: ConfigInfo,
+    processFileOptions: ProcessFileOptions,
+): number {
+    return reportConfigurationErrors(reporter, configInfo.config, processFileOptions);
 }

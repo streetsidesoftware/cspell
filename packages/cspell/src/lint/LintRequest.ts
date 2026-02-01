@@ -3,9 +3,9 @@ import * as path from 'node:path';
 import { type CSpellUserSettings, unknownWordsChoices, type UnknownWordsConfiguration } from '@cspell/cspell-types';
 
 import type { CSpellConfigFile, LinterCliOptions, LinterOptions } from '../options.js';
+import type { FinalizedReporter } from '../reporters/LintFileResult.js';
 import type { GlobSrcInfo } from '../util/glob.js';
 import { calcExcludeGlobInfo } from '../util/glob.js';
-import type { FinalizedReporter } from '../util/reporters.js';
 import { sizeToNumber } from '../util/unitNumbers.js';
 
 const defaultContextRange = 20;

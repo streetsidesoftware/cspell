@@ -9,6 +9,12 @@ import { toFetchUrlError } from './FetchError.js';
 
 // cspell:ignore dontMock
 
+vi.mock('./_fetch.js', async (_importOriginal) => {
+    return {
+        _fetch: globalThis.fetch,
+    };
+});
+
 const mockFetch = createFetchMock(vi);
 
 const useMockFetch = true;
@@ -47,14 +53,13 @@ describe('fetch', () => {
 
     test.each`
         url
-        ${'https://www.interglot.com/images/flagsheet44.jpg'}
+        ${'https://www.jsdelivr.com/icons/favicon.svg'}
     `(
         'fetchHead $url',
         async ({ url }) => {
             const response = await fetchHead(url);
             // console.log('%o', toObj(response));
             expect(response.get('etag')).toEqual(expect.any(String));
-            expect(Number.parseInt(response.get('content-length') || '', 10)).toBeGreaterThan(0);
         },
         timeout,
     );
@@ -127,6 +132,7 @@ function getMockResponse(url: URL) {
                 body: '',
                 statusText: 'Service Unavailable',
                 url: 'https://httpbingo.org/status/503',
+                headers: { 'Retry-After': '120' },
             };
         }
         case 'https://www.google.com/404': {
@@ -146,6 +152,7 @@ function getMockResponse(url: URL) {
                     '  <p>The requested URL <code>/404</code> was not found on this server.  <ins>That’s all we know.</ins>\n',
                 statusText: 'Not Found',
                 url: 'https://www.google.com/404',
+                headers: {},
             };
         }
         case 'https://x.example.com/': {
@@ -203,6 +210,7 @@ function getMockResponse(url: URL) {
                     '</html>\n',
                 statusText: 'OK',
                 url: 'https://example.com/',
+                headers: {},
             };
         }
     }

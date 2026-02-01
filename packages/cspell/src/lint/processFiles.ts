@@ -4,15 +4,15 @@ import type { CSpellSettings, CSpellSettingsWithSourceTrace, RunResult } from '@
 import type { ChalkInstance } from 'chalk';
 import { shouldCheckDocument } from 'cspell-lib';
 
+import type { LintFileReporter, LintFileResult } from '../reporters/LintFileResult.js';
+import type { LintReporter } from '../reporters/reporters.js';
+import { extractReporterIssueOptions, replayReportItems } from '../reporters/reporters.js';
 import type { CreateCacheSettings, CSpellLintResultCache } from '../util/cache/index.js';
 import { createCache } from '../util/cache/index.js';
 import type { ConfigInfo } from '../util/configFileHelper.js';
 import { ApplicationError, toApplicationError } from '../util/errors.js';
 import { filenameToUri, getFileSize, isBinaryFile, readFileInfo, relativeToCwd } from '../util/fileHelper.js';
-import type { LintFileResult } from '../util/LintFileResult.js';
 import { prefetchIterable } from '../util/prefetch.js';
-import type { LintFileReporter, LintReporter } from '../util/reporters.js';
-import { extractReporterIssueOptions } from '../util/reporters.js';
 import { getTimeMeasurer } from '../util/timer.js';
 import { sizeToNumber } from '../util/unitNumbers.js';
 import type { LintRequest } from './LintRequest.js';
@@ -31,7 +31,6 @@ const BATCH_FETCH_SIZE = 12;
 const BATCH_PROCESS_SIZE = 1;
 
 interface PrefetchConfig {
-    readonly reporter: LintFileReporter;
     readonly root: LintRequest['root'];
     readonly maxFileSize: LintRequest['maxFileSize'];
     readonly config: CSpellSettings;
@@ -52,7 +51,6 @@ function prefetch(fileToProcess: FileToProcess, cfg: PrefetchConfig): PrefetchFi
         const getElapsedTimeMs = getTimeMeasurer();
         const cachedResult = await cfg.cache.getCachedLintResults(filename);
         if (cachedResult) {
-            cfg.reporter.debug(`Filename: ${filename}, using cache`);
             const fileResult = { ...cachedResult, elapsedTimeMs: getElapsedTimeMs() };
             return { fileResult };
         }
@@ -100,14 +98,12 @@ export async function processFiles(
     const failFast = options.cfg.options.failFast ?? options.configInfo.config.failFast ?? false;
     const reporter: LintFileReporter = options.lintReporter;
     const prefetchConfig: PrefetchConfig = {
-        reporter,
         root: options.cfg.root,
         maxFileSize: options.cfg.maxFileSize,
         config: options.configInfo.config,
         cache,
     };
     const processFileOptionsGeneral: ProcessFileOptions = {
-        reporter,
         chalk: options.chalk,
         configInfo: options.configInfo,
         cfg: options.cfg,
@@ -146,6 +142,7 @@ export async function processFiles(
         configErrors: 0,
         elapsedTimeMs: 1,
         reportIssueOptions: undefined,
+        reportItems: undefined,
     };
 
     async function processPrefetchFileResult(pf: PrefetchFileResult): Promise<ProcessPrefetchFileResult> {
@@ -166,7 +163,7 @@ export async function processFiles(
             };
             return { filename, sequence, sequenceSize, result };
         }
-        const result = await processFile(filename, cache, fetchResult, processFileOptionsGeneral);
+        const result = await processFile(pf, cache, fetchResult, processFileOptionsGeneral);
         return { filename, sequence, sequenceSize, result };
     }
 
@@ -195,8 +192,9 @@ export async function processFiles(
         );
     }
 
-    for await (const fileP of loadAndProcessFiles()) {
-        const { filename, sequence, sequenceSize, result } = fileP;
+    for await (const processed of loadAndProcessFiles()) {
+        const { filename, sequence, sequenceSize, result } = processed;
+        replayReportItems(result, reporter);
         status.files += 1;
         status.cachedFiles = (status.cachedFiles || 0) + (result.cached ? 1 : 0);
         status.skippedFiles = (status.skippedFiles || 0) + (result.processed ? 0 : 1);

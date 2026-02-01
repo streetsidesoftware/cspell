@@ -1,7 +1,7 @@
 import type { CSpellReporter, ReporterSettings } from '@cspell/cspell-types';
 import { describe, expect, test, vi } from 'vitest';
 
-import { ApplicationError } from './errors.js';
+import { ApplicationError } from '../util/errors.js';
 import { loadReporters } from './reporters.js';
 
 const defaultReporter: CSpellReporter = {

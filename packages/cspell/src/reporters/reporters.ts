@@ -18,11 +18,16 @@ import {
 import { dynamicImport } from '@cspell/dynamic-import';
 
 import { pkgDir } from '../pkgInfo.js';
-import { ApplicationError, toError } from './errors.js';
-import type { LintFileResult } from './LintFileResult.js';
-import { clean } from './util.js';
-
-export type FinalizedReporter = Required<CSpellReporter>;
+import { ApplicationError, toError } from '../util/errors.js';
+import { clean } from '../util/util.js';
+import type {
+    FinalizedReporter,
+    LintFileReporter,
+    LintFileResult,
+    ProcessFileReporter,
+    ReportItem,
+    ReportItemsCollection,
+} from './LintFileResult.js';
 
 function filterFeatureIssues(
     features: FeaturesSupportedByReporter | undefined,
@@ -176,15 +181,6 @@ export function mergeReportIssueOptions(
     return options;
 }
 
-export interface LintFileReporter {
-    issue(issue: Issue, reportOptions?: ReportIssueOptions): void;
-    info(...params: Parameters<FinalizedReporter['info']>): void;
-    debug(...params: Parameters<FinalizedReporter['debug']>): void;
-    error(...params: Parameters<FinalizedReporter['error']>): void;
-    emitProgressBegin(filename: string, fileNum: number, fileCount: number): void;
-    emitProgressComplete(filename: string, fileNum: number, fileCount: number, result: LintFileResult): number;
-}
-
 export class LintReporter {
     #reporters: FinalizedReporter[] = [];
     #config: ReporterConfiguration;
@@ -293,5 +289,57 @@ export class LintReporter {
         result.issues.forEach((issue) => this.issue(issue, result.reportIssueOptions));
 
         return numIssues;
+    }
+}
+
+export class ReportItemCollector implements ProcessFileReporter {
+    #collection: ReportItemsCollection;
+
+    constructor(collection: ReportItemsCollection) {
+        this.#collection = collection;
+    }
+
+    get #items(): ReportItem[] {
+        if (!this.#collection.reportItems) {
+            this.#collection.reportItems = [];
+        }
+        return this.#collection.reportItems;
+    }
+
+    get items(): ReadonlyArray<ReportItem> | undefined {
+        return this.#collection.reportItems;
+    }
+
+    info(...params: Parameters<FinalizedReporter['info']>): void {
+        this.#items.push({ type: 'info', payload: params });
+    }
+
+    debug(...params: Parameters<FinalizedReporter['debug']>): void {
+        this.#items.push({ type: 'debug', payload: params });
+    }
+
+    error(...params: Parameters<FinalizedReporter['error']>): void {
+        this.#items.push({ type: 'error', payload: params });
+    }
+}
+
+export function replayReportItems(reportItemsCollection: ReportItemsCollection, reporter: LintFileReporter): void {
+    const items = reportItemsCollection.reportItems;
+    if (!items) return;
+    for (const item of items) {
+        switch (item.type) {
+            case 'info': {
+                reporter.info(...item.payload);
+                break;
+            }
+            case 'debug': {
+                reporter.debug(...item.payload);
+                break;
+            }
+            case 'error': {
+                reporter.error(...item.payload);
+                break;
+            }
+        }
     }
 }
