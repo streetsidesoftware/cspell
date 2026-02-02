@@ -3,7 +3,7 @@ Repository: googleapis/google-cloud-cpp
 Url: "https://github.com/googleapis/google-cloud-cpp.git"
 Args: ["--config=../../../../config/repositories/googleapis/google-cloud-cpp/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]
 Lines:
- CSpell: Files checked: 20988, skipped: 29, Issues found: 45202 in 7841 files.
+ CSpell: Files checked: 20995, skipped: 29, Issues found: 45228 in 7845 files.
  exit code: 1
 ARCHITECTURE.md:158:48    - Unknown word (googlemock) -- implementation using `googlemock`
 BUILD.bazel:151:20    - Unknown word (ctype)      -- name = "enable-ctype-cord-workaround",
@@ -231,8 +231,10 @@ doc/packaging.md:67:69     - Unknown word (msbuild)    -- generator from `make` 
 doc/packaging.md:69:16     - Unknown word (multicore)  -- advantage of multicore machines. Be aware that
 doc/packaging.md:72:65     - Unknown word (NCPU)       -- consider appending `-- -j ${NCPU}` to the
 doc/packaging.md:75:38     - Unknown word (physicalcpu) -- Linux, or `sysctl -n hw.physicalcpu` on macOS.
+doc/product-neutral-guides/core-concepts.md:38:10     - Unknown word (cerr)       -- std::cerr << "RPC failed: " <
+doc/product-neutral-guides/core-concepts.md:42:8      - Unknown word (cout)       -- std::cout << "Success: " << *response
 doc/public-api.md:163:20    - Unknown word (lgoogle)    -- e.g., by using `-lgoogle_cloud_cpp_bigtable`
-docfx/CMakeLists.txt:122:10    - Unknown word (fname)      -- foreach (fname IN LISTS unit_tests
+docfx/CMakeLists.txt:125:10    - Unknown word (fname)      -- foreach (fname IN LISTS unit_tests
 docfx/README.md:45:31     - Unknown word (testdata)   -- f $HOME/doc-pipeline/testdata/cpp/* \
 docfx/README.md:55:35     - Unknown word (devrel)     -- TRAMPOLINE_IMAGE=gcr.io/cloud-devrel-kokoro-resources/docfx
 docfx/README.md:74:28     - Unknown word (xrefmap)    -- HOME/doc-pipeline/site/xrefmap.yml build-out
@@ -392,8 +394,6 @@ generator/internal/scaffold_generator_test.cc:458:37    - Unknown word (Bazelrc)
 generator/internal/service_code_generator.h:195:46    - Unknown word (autopopulated) -- of the methods has an autopopulated `request_id`-like
 generator/templates/WORKSPACE.bazel:19:21     - Unknown word (Starlark)   -- # Add the necessary Starlark functions to fetch google
 google/cloud/BUILD.bazel:73:15     - Unknown word (DEFAULTLIB) -- "-DEFAULTLIB:bcrypt.lib",
-google/cloud/accessapproval/README.md:29:10     - Unknown word (cerr)       -- std::cerr << "Usage: " << argv
-google/cloud/accessapproval/README.md:39:10     - Unknown word (cout)       -- std::cout << a->DebugString()
 google/cloud/accessapproval/access_approval_client.h:19:39     - Unknown word (ACCESSAPPROVAL) -- CLOUD_CPP_GOOGLE_CLOUD_ACCESSAPPROVAL_ACCESS_APPROVAL_CLIENT
 google/cloud/accessapproval/doc/main.dox:3:2       - Unknown word (mainpage)   -- @mainpage Access Approval API
 google/cloud/advisorynotifications/v1/advisory_notifications_client.h:19:39     - Unknown word (ADVISORYNOTIFICATIONS) -- CLOUD_CPP_GOOGLE_CLOUD_ADVISORYNOTIFICATIONS_V1_ADVISORY_NOTIFICATIONS
@@ -786,7 +786,7 @@ google/cloud/storage/benchmarks/README.md:116:14    - Unknown word (vebm)       
 google/cloud/storage/benchmarks/README.md:132:13    - Unknown word (plotnine)   -- pip install plotnine pandas
 google/cloud/storage/benchmarks/README.md:35:17     - Unknown word (ttfb)       -- tee tp-vs-cpu.ttfb.txt
 google/cloud/storage/benchmarks/aggregate_download_throughput_benchmark.cc:421:18    - Unknown word (Gbit)       -- << " Gbit/s=" << bandwidth <<
-google/cloud/storage/benchmarks/async_throughput_benchmark.cc:386:28    - Unknown word (guploader)  -- l = headers.find("x-guploader-uploadid");
+google/cloud/storage/benchmarks/async_throughput_benchmark.cc:385:28    - Unknown word (guploader)  -- l = headers.find("x-guploader-uploadid");
 google/cloud/storage/benchmarks/async_throughput_benchmark.cc:92:11     - Unknown word (saturage)   -- 1) Try to saturage the egress path on the
 google/cloud/storage/bucket_autoclass.h:49:66     - Unknown word (tscu)       -- system_clock::time_point tscu)
 google/cloud/storage/bucket_encryption.h:139:61    - Unknown word (gmek)       -- edEncryptionEnforcementConfig gmek,
@@ -806,7 +806,7 @@ google/cloud/storage/doc/storage-main.dox:49:87     - Unknown word (Quickstarts)
 google/cloud/storage/doc/storage-mocking.dox:15:57     - Unknown word (readobject) -- samples.cc mock successful readobject
 google/cloud/storage/doc/storage-mocking.dox:29:57     - Unknown word (writeobject) -- samples.cc mock successful writeobject
 google/cloud/storage/examples/CMakeLists.txt:36:20     - Unknown word (autoclass)  -- storage_bucket_autoclass_samples.cc
-google/cloud/storage/examples/storage_async_samples.cc:182:8     - Unknown word (coro)       -- auto coro =
+google/cloud/storage/examples/storage_async_samples.cc:178:8     - Unknown word (coro)       -- auto coro =
 google/cloud/storage/examples/storage_object_file_transfer_samples.cc:143:23    - Unknown word (amet)       -- Lorem ipsum dolor sit amet, consectetur adipiscing
 google/cloud/storage/examples/storage_object_file_transfer_samples.cc:143:29    - Unknown word (consectetur) -- ipsum dolor sit amet, consectetur adipiscing elit, sed
 google/cloud/storage/examples/storage_object_file_transfer_samples.cc:143:41    - Unknown word (adipiscing)  -- sit amet, consectetur adipiscing elit, sed do eiusmod
@@ -850,7 +850,7 @@ google/cloud/storage/internal/async/connection_impl_appendable_upload_test.cc:84
 google/cloud/storage/internal/async/connection_impl_open_test.cc:371:38    - Unknown word (Transien)   -- yncConnectionImplTest, TooManyTransienErrors) {
 google/cloud/storage/internal/async/connection_impl_upload_test.cc:463:42    - Unknown word (eksb)       -- sha256_bytes: "test-eksb"
 google/cloud/storage/internal/async/insert_object.cc:50:21     - Unknown word (Subcord)    -- auto next = data_.Subcord(0, n);
-google/cloud/storage/internal/async/writer_connection_buffered.cc:559:39    - Unknown word (unsatisified) -- call that returns an unsatisified future until the buffer
+google/cloud/storage/internal/async/writer_connection_buffered.cc:558:39    - Unknown word (unsatisified) -- call that returns an unsatisified future until the buffer
 google/cloud/storage/internal/grpc/default_options.cc:100:49    - Unknown word (unviverse)  -- already a set endpoint or unviverse domain endpoint.
 google/cloud/storage/internal/grpc/default_options_test.cc:112:29    - Unknown word (testbench)  -- "from-testbench-env");
 google/cloud/storage/internal/grpc/object_request_parser_test.cc:63:33     - Unknown word (Cuakt)      -- md5) : StEvo2V/qoDCuaktZSw3IQ==

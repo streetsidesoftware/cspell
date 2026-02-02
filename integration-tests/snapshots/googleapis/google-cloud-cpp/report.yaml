@@ -3,9 +3,9 @@ Repository: googleapis/google-cloud-cpp
 Url: https://github.com/googleapis/google-cloud-cpp.git
 Args: '["--config=${repoConfig}/cspell.json","**/*","-e","{*.BUILD,BUILD,CHANGELOG.md,*.sh,*.cfg,*.ps1,Dockerfile.*,*.Dockerfile,*.{yaml,xml,json,cmake}}"]'
 Summary:
-  files: 21017
-  filesWithIssues: 7841
-  issues: 45202
+  files: 21024
+  filesWithIssues: 7845
+  issues: 45228
   errors: 0
 Errors: []
 
@@ -234,8 +234,10 @@ issues:
   - "doc/packaging.md:1199:21        epel                U       sudo dnf install -y epel-release && \\"
   - "doc/packaging.md:1203:35        binutils            U       autoconf automake libtool binutils"
   - "doc/packaging.md:1246:1         Abseiil             U       Abseiil from source. Enabling"
+  - "doc/product-neutral-guides/core-concepts.md:38:10       cerr    U       std::cerr << \"RPC failed: \" <"
+  - "doc/product-neutral-guides/core-concepts.md:42:8        cout    U       std::cout << \"Success: \" << *response"
   - "doc/public-api.md:163:20        lgoogle     U       e.g., by using `-lgoogle_cloud_cpp_bigtable`"
-  - "docfx/CMakeLists.txt:122:10         fname       U       foreach (fname IN LISTS unit_tests"
+  - "docfx/CMakeLists.txt:125:10         fname       U       foreach (fname IN LISTS unit_tests"
   - "docfx/doxygen_errors.cc:22:59       pugi    U       std::string_view name, pugi::xml_node node) {"
   - "docfx/doxygen_groups_test.cc:27:8           briefdescription        U       <briefdescription><para>Something pithy"
   - "docfx/doxygen_groups_test.cc:28:8           detaileddescription     U       <detaileddescription><para>Something very"
@@ -396,8 +398,6 @@ issues:
   - "generator/templates/WORKSPACE.bazel:19:21       Starlark    U       # Add the necessary Starlark functions to fetch google"
   - "google/cloud/accessapproval/access_approval_client.h:19:39          ACCESSAPPROVAL      U       CLOUD_CPP_GOOGLE_CLOUD_ACCESSAPPROVAL_ACCESS_APPROVAL_CLIENT"
   - "google/cloud/accessapproval/doc/main.dox:3:2            mainpage    U       @mainpage Access Approval API"
-  - "google/cloud/accessapproval/README.md:29:10         cerr    U       std::cerr << \"Usage: \" << argv"
-  - "google/cloud/accessapproval/README.md:39:10         cout    U       std::cout << a->DebugString()"
   - "google/cloud/advisorynotifications/v1/advisory_notifications_client.h:19:39         ADVISORYNOTIFICATIONS       U       CLOUD_CPP_GOOGLE_CLOUD_ADVISORYNOTIFICATIONS_V1_ADVISORY_NOTIFICATIONS"
   - "google/cloud/aiplatform/samples/samples.cc:30:13        generativeaionvertexai      U       // [START generativeaionvertexai_gemini_generate_from"
   - "google/cloud/aiplatform/samples/samples.cc:162:34       generativeai                U       \"gs://generativeai-downloads/images/scones"
@@ -783,7 +783,7 @@ issues:
   - "google/cloud/storage/async/idempotency_policy_test.cc:49:45         metageneration      U       write_object_spec { if_metageneration_match: 42 })pb\","
   - "google/cloud/storage/benchmarks/aggregate_download_throughput_benchmark.cc:421:18       Gbit    U       << \" Gbit/s=\" << bandwidth <<"
   - "google/cloud/storage/benchmarks/async_throughput_benchmark.cc:92:11         saturage        U       1) Try to saturage the egress path on the"
-  - "google/cloud/storage/benchmarks/async_throughput_benchmark.cc:386:28        guploader       U       l = headers.find(\"x-guploader-uploadid\");"
+  - "google/cloud/storage/benchmarks/async_throughput_benchmark.cc:385:28        guploader       U       l = headers.find(\"x-guploader-uploadid\");"
   - "google/cloud/storage/benchmarks/README.md:10:60         TTFB        U       time to first byte (TTFB) is high, so"
   - "google/cloud/storage/benchmarks/README.md:35:17         ttfb        U       tee tp-vs-cpu.ttfb.txt"
   - "google/cloud/storage/benchmarks/README.md:108:53        venv        U       and assume that the `venv` module is installed"
@@ -807,7 +807,7 @@ issues:
   - "google/cloud/storage/doc/storage-mocking.dox:15:57          readobject      U       samples.cc mock successful readobject"
   - "google/cloud/storage/doc/storage-mocking.dox:29:57          writeobject     U       samples.cc mock successful writeobject"
   - "google/cloud/storage/examples/CMakeLists.txt:36:20          autoclass       U       storage_bucket_autoclass_samples.cc"
-  - "google/cloud/storage/examples/storage_async_samples.cc:182:8        coro    U       auto coro ="
+  - "google/cloud/storage/examples/storage_async_samples.cc:178:8        coro    U       auto coro ="
   - "google/cloud/storage/examples/storage_object_file_transfer_samples.cc:143:23        amet                U       Lorem ipsum dolor sit amet, consectetur adipiscing"
   - "google/cloud/storage/examples/storage_object_file_transfer_samples.cc:143:29        consectetur         U       ipsum dolor sit amet, consectetur adipiscing elit, sed"
   - "google/cloud/storage/examples/storage_object_file_transfer_samples.cc:143:41        adipiscing          U       sit amet, consectetur adipiscing elit, sed do eiusmod"
@@ -851,7 +851,7 @@ issues:
   - "google/cloud/storage/internal/async/connection_impl_open_test.cc:371:38         Transien    U       yncConnectionImplTest, TooManyTransienErrors) {"
   - "google/cloud/storage/internal/async/connection_impl_upload_test.cc:463:42       eksb    U       sha256_bytes: \"test-eksb\""
   - "google/cloud/storage/internal/async/insert_object.cc:50:21          Subcord     U       auto next = data_.Subcord(0, n);"
-  - "google/cloud/storage/internal/async/writer_connection_buffered.cc:559:39        unsatisified    U       call that returns an unsatisified future until the buffer"
+  - "google/cloud/storage/internal/async/writer_connection_buffered.cc:558:39        unsatisified    U       call that returns an unsatisified future until the buffer"
   - "google/cloud/storage/internal/grpc/default_options_test.cc:112:29       testbench       U       \"from-testbench-env\");"
   - "google/cloud/storage/internal/grpc/default_options.cc:100:49        unviverse       U       already a set endpoint or unviverse domain endpoint."
   - "google/cloud/storage/internal/grpc/object_request_parser_test.cc:63:33          Cuakt       U       md5) : StEvo2V/qoDCuaktZSw3IQ=="
