@@ -143,13 +143,26 @@
     },
     "CompatibleEngineVersions": {
       "additionalProperties": {
-        "$ref": "#/definitions/SemVersionPredicate",
+        "anyOf": [
+          {
+            "$ref": "#/definitions/SemVersionPredicate"
+          },
+          {
+            "not": {}
+          }
+        ],
         "description": "Other engine version predicates.",
         "markdownDescription": "Other engine version predicates."
       },
       "description": "Engine version predicates.\n\nThis allows dictionaries and other components to specify the versions of engines (like cspell) they are compatible with.",
       "markdownDescription": "Engine version predicates.\n\nThis allows dictionaries and other components to specify the versions of engines (like cspell) they are compatible with.",
       "properties": {
+        "code-spell-checker": {
+          "$ref": "#/definitions/SemVersionPredicate",
+          "description": "The VSCode Spell Checker version predicate.",
+          "markdownDescription": "The VSCode Spell Checker version predicate.",
+          "since": "9.6.3"
+        },
         "cspell": {
           "$ref": "#/definitions/SemVersionPredicate",
           "description": "CSpell version predicate.",

@@ -930,10 +930,16 @@ export interface CompatibleEngineVersions {
      * CSpell version predicate.
      * @since 9.6.3
      */
-    cspell?: SemVersionPredicate;
+    cspell?: SemVersionPredicate | undefined;
+
+    /**
+     * The VSCode Spell Checker version predicate.
+     * @since 9.6.3
+     */
+    'code-spell-checker'?: SemVersionPredicate | undefined;
 
     /**
      * Other engine version predicates.
      */
-    [engine: string]: SemVersionPredicate;
+    [engine: string]: SemVersionPredicate | undefined;
 }
