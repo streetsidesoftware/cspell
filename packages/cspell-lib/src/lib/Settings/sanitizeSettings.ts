@@ -51,6 +51,7 @@ const handlers: CSpellSettingsHandlers = {
     enableFiletypes: copy1,
     enabledFileTypes: copy1,
     enableGlobDot: copy1,
+    engines: copy1,
     failFast: copy1,
     features: skip,
     files: copyGlobsSettingsFields,
