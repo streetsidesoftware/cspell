@@ -3,7 +3,7 @@ Repository: ktaranov/sqlserver-kit
 Url: "https://github.com/ktaranov/sqlserver-kit.git"
 Args: ["--issues-summary-report","**","--exclude=**/Backup/**"]
 Lines:
- CSpell: Files checked: 489, Issues found: 10889 in 428 files.
+ CSpell: Files checked: 490, Issues found: 10911 in 429 files.
  exit code: 1
 ADS/README.md:30:15     - Unknown word (Dacpac)     -- | [SQL Server Dacpac]
 ADS/README.md:30:181    - Unknown word (wizarding)  -- Provides an easy-to-use wizarding experience to deploy
@@ -4561,6 +4561,28 @@ Scripts/Index Breakdown.sql:615:63    - Unknown word (IBKF)           -- filters
 Scripts/Index_Creating_Info.sql:6:19      - Unknown word (Rutzky)     -- <author>Solomon Rutzky</author>
 Scripts/Index_Creating_Info.sql:8:27      - Unknown word (Konstantin) -- modified>2021-08-12 by Konstantin Taranov</modified>
 Scripts/Index_Creating_Info.sql:8:38      - Unknown word (Taranov)    -- 08-12 by Konstantin Taranov</modified>
+Scripts/Index_Fragmentation_on_DB:10:1      - Unknown word (indexstats) -- indexstats.alloc_unit_type_desc
+Scripts/Index_Fragmentation_on_DB:11:1      - Unknown word (indexstats) -- indexstats.avg_fragmentation_in
+Scripts/Index_Fragmentation_on_DB:12:1      - Unknown word (indexstats) -- indexstats.page_count,
+Scripts/Index_Fragmentation_on_DB:13:149    - Unknown word (NORECOMPUTE) -- INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB
+Scripts/Index_Fragmentation_on_DB:13:19     - Unknown word (dbindexes)  -- 'ALTER INDEX [' + dbindexes.[name] + '] ON ['+dbschemas
+Scripts/Index_Fragmentation_on_DB:13:47     - Unknown word (dbschemas)  -- dbindexes.[name] + '] ON ['+dbschemas.[name] +'].['+dbtables
+Scripts/Index_Fragmentation_on_DB:13:71     - Unknown word (dbtables)   -- dbschemas.[name] +'].['+dbtables.[name]+ '] REBUILD PARTITION
+Scripts/Index_Fragmentation_on_DB:14:74     - Unknown word (indexstats)  -- NULL, NULL, NULL) AS indexstats
+Scripts/Index_Fragmentation_on_DB:15:23     - Unknown word (dbtables)    -- INNER JOIN sys.tables dbtables on dbtables.[object
+Scripts/Index_Fragmentation_on_DB:15:35     - Unknown word (dbtables)    -- sys.tables dbtables on dbtables.[object_id] = indexstats
+Scripts/Index_Fragmentation_on_DB:15:58     - Unknown word (indexstats)  -- dbtables.[object_id] = indexstats.[object_id]
+Scripts/Index_Fragmentation_on_DB:16:24     - Unknown word (dbschemas)   -- INNER JOIN sys.schemas dbschemas on dbtables.[schema
+Scripts/Index_Fragmentation_on_DB:16:37     - Unknown word (dbtables)    -- schemas dbschemas on dbtables.[schema_id] = dbschemas
+Scripts/Index_Fragmentation_on_DB:16:60     - Unknown word (dbschemas)   -- dbtables.[schema_id] = dbschemas.[schema_id]
+Scripts/Index_Fragmentation_on_DB:17:27     - Unknown word (dbindexes)   -- JOIN sys.indexes AS dbindexes ON dbindexes.[object
+Scripts/Index_Fragmentation_on_DB:17:40     - Unknown word (dbindexes)   -- indexes AS dbindexes ON dbindexes.[object_id] = indexstats
+Scripts/Index_Fragmentation_on_DB:18:27     - Unknown word (dbindexes)   -- indexstats.index_id = dbindexes.index_id
+Scripts/Index_Fragmentation_on_DB:2:14      - Unknown word (Agunuru)    -- Author: Arun Agunuru
+Scripts/Index_Fragmentation_on_DB:2:9       - Unknown word (Arun)       -- Author: Arun Agunuru
+Scripts/Index_Fragmentation_on_DB:7:8       - Unknown word (dbschemas)  -- SELECT dbschemas.[name] as 'Schema',
+Scripts/Index_Fragmentation_on_DB:8:1       - Unknown word (dbtables)   -- dbtables.[name] as 'Table',
+Scripts/Index_Fragmentation_on_DB:9:1       - Unknown word (dbindexes)  -- dbindexes.[name] as 'Index',
 Scripts/Indexes_Script_Out.sql:78:15     - Unknown word (filegroups) -- LEFT JOIN sys.filegroups AS fg ON si.data_space
 Scripts/Job_AG_Resume_Data_Movement.sql:103:10    - Unknown word (alertname)  -- DECLARE @alertname sysname = N'AG Data
 Scripts/Job_AG_Resume_Data_Movement.sql:104:59    - Unknown word (alertname)  -- sysalerts WHERE name = @alertname)

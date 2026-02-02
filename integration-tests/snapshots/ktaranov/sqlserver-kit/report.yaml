@@ -3,9 +3,9 @@ Repository: ktaranov/sqlserver-kit
 Url: https://github.com/ktaranov/sqlserver-kit.git
 Args: '["--issues-summary-report","**","--exclude=**/Backup/**"]'
 Summary:
-  files: 489
-  filesWithIssues: 428
-  issues: 10889
+  files: 490
+  filesWithIssues: 429
+  issues: 10911
   errors: 0
 Errors: []
 
@@ -3410,6 +3410,28 @@ issues:
   - "Scripts/Index_Creating_Info.sql:6:19        Rutzky          U       <author>Solomon Rutzky</author>"
   - "Scripts/Index_Creating_Info.sql:8:27        Konstantin      U       modified>2021-08-12 by Konstantin Taranov</modified>"
   - "Scripts/Index_Creating_Info.sql:8:38        Taranov         U       08-12 by Konstantin Taranov</modified>"
+  - "Scripts/Index_Fragmentation_on_DB:2:9           Arun            U       Author: Arun Agunuru"
+  - "Scripts/Index_Fragmentation_on_DB:2:14          Agunuru         U       Author: Arun Agunuru"
+  - "Scripts/Index_Fragmentation_on_DB:7:8           dbschemas       U       SELECT dbschemas.[name] as 'Schema',"
+  - "Scripts/Index_Fragmentation_on_DB:8:1           dbtables        U       dbtables.[name] as 'Table',"
+  - "Scripts/Index_Fragmentation_on_DB:9:1           dbindexes       U       dbindexes.[name] as 'Index',"
+  - "Scripts/Index_Fragmentation_on_DB:10:1          indexstats      U       indexstats.alloc_unit_type_desc"
+  - "Scripts/Index_Fragmentation_on_DB:11:1          indexstats      U       indexstats.avg_fragmentation_in"
+  - "Scripts/Index_Fragmentation_on_DB:12:1          indexstats      U       indexstats.page_count,"
+  - "Scripts/Index_Fragmentation_on_DB:13:19         dbindexes       U       'ALTER INDEX [' + dbindexes.[name] + '] ON ['+dbschemas"
+  - "Scripts/Index_Fragmentation_on_DB:13:47         dbschemas       U       dbindexes.[name] + '] ON ['+dbschemas.[name] +'].['+dbtables"
+  - "Scripts/Index_Fragmentation_on_DB:13:71         dbtables        U       dbschemas.[name] +'].['+dbtables.[name]+ '] REBUILD PARTITION"
+  - "Scripts/Index_Fragmentation_on_DB:13:149        NORECOMPUTE     U       INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB"
+  - "Scripts/Index_Fragmentation_on_DB:14:74         indexstats      U       NULL, NULL, NULL) AS indexstats"
+  - "Scripts/Index_Fragmentation_on_DB:15:23         dbtables        U       INNER JOIN sys.tables dbtables on dbtables.[object"
+  - "Scripts/Index_Fragmentation_on_DB:15:35         dbtables        U       sys.tables dbtables on dbtables.[object_id] = indexstats"
+  - "Scripts/Index_Fragmentation_on_DB:15:58         indexstats      U       dbtables.[object_id] = indexstats.[object_id]"
+  - "Scripts/Index_Fragmentation_on_DB:16:24         dbschemas       U       INNER JOIN sys.schemas dbschemas on dbtables.[schema"
+  - "Scripts/Index_Fragmentation_on_DB:16:37         dbtables        U       schemas dbschemas on dbtables.[schema_id] = dbschemas"
+  - "Scripts/Index_Fragmentation_on_DB:16:60         dbschemas       U       dbtables.[schema_id] = dbschemas.[schema_id]"
+  - "Scripts/Index_Fragmentation_on_DB:17:27         dbindexes       U       JOIN sys.indexes AS dbindexes ON dbindexes.[object"
+  - "Scripts/Index_Fragmentation_on_DB:17:40         dbindexes       U       indexes AS dbindexes ON dbindexes.[object_id] = indexstats"
+  - "Scripts/Index_Fragmentation_on_DB:18:27         dbindexes       U       indexstats.index_id = dbindexes.index_id"
   - "Scripts/Index Breakdown.sql:4:5         ARITHABORT          U       SET ARITHABORT OFF"
   - "Scripts/Index Breakdown.sql:5:5         ARITHIGNORE         U       SET ARITHIGNORE ON"
   - "Scripts/Index Breakdown.sql:144:81      COLUMNPROPERTY      U       CONVERT (VARCHAR (11), COLUMNPROPERTY (C.[object_id], C.name"
@@ -10957,6 +10979,7 @@ issuesSummary:
   - "text: Agrawal, count: 1, files: 1,"
   - "text: agregated, count: 1, files: 1,"
   - "text: agrs, count: 3, files: 1,"
+  - "text: Agunuru, count: 1, files: 1,"
   - "text: Aire, count: 2, files: 1,"
   - "text: Aireforge, count: 5, files: 1,"
   - "text: AKRBL, count: 1, files: 1,"
@@ -11022,7 +11045,7 @@ issuesSummary:
   - "text: Artur, count: 3, files: 3,"
   - "text: Arulmani, count: 1, files: 1,"
   - "text: Arulraj, count: 1, files: 1,"
-  - "text: Arun, count: 1, files: 1,"
+  - "text: Arun, count: 2, files: 2,"
   - "text: Arvind, count: 4, files: 3,"
   - "text: Asanka, count: 1, files: 1,"
   - "text: Aschenbrenner, count: 10, files: 4,"
@@ -11452,6 +11475,7 @@ issuesSummary:
   - "text: dbfs, count: 1, files: 1,"
   - "text: DBFS, count: 5, files: 1,"
   - "text: dbghelp, count: 1, files: 1,"
+  - "text: dbindexes, count: 5, files: 1,"
   - "text: dbinfo, count: 1, files: 1,"
   - "text: DBINFO, count: 3, files: 2,"
   - "text: dblib, count: 1, files: 1,"
@@ -11477,8 +11501,10 @@ issuesSummary:
   - "text: dbrepair, count: 1, files: 1,"
   - "text: dbrole, count: 5, files: 1,"
   - "text: dbrolmem, count: 5, files: 1,"
+  - "text: dbschemas, count: 4, files: 1,"
   - "text: DBSTARTUP, count: 17, files: 14,"
   - "text: dbtable, count: 1, files: 1,"
+  - "text: dbtables, count: 5, files: 1,"
   - "text: DBTIME, count: 3, files: 1,"
   - "text: DBTIMESTAMP, count: 3, files: 1,"
   - "text: DBTIMESTAMPOFFSET, count: 2, files: 1,"
@@ -12062,6 +12088,7 @@ issuesSummary:
   - "text: indexkey, count: 3, files: 1,"
   - "text: indexobjectid, count: 5, files: 1,"
   - "text: INDEXPROPERTY, count: 1, files: 1,"
+  - "text: indexstats, count: 5, files: 1,"
   - "text: indianred, count: 1, files: 1,"
   - "text: indid, count: 20, files: 7,"
   - "text: indname, count: 5, files: 2,"
@@ -12635,7 +12662,7 @@ issuesSummary:
   - "text: nonunique, count: 1, files: 1,"
   - "text: Noof, count: 5, files: 1,"
   - "text: Nooijer, count: 1, files: 1,"
-  - "text: NORECOMPUTE, count: 10, files: 5,"
+  - "text: NORECOMPUTE, count: 11, files: 6,"
   - "text: NORESEED, count: 1, files: 1,"
   - "text: NOREWIND, count: 5, files: 1,"
   - "text: Norheim, count: 1, files: 1,"
