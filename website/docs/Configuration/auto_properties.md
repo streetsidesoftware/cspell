@@ -28,6 +28,7 @@ format: md
 | [enabledLanguageIds](#settings-enabledlanguageids)             | [`LanguageIdSingle`](#languageidsingle)&ZeroWidthSpace;`[]`               | Specify a list of file types to spell check. It is better to use  [Settings.enabledFileTypes](#settings-enabledfiletypes)  to Enable / Disable checking files types. |
 | [enableFiletypes](#settings-enablefiletypes)                   | [`LanguageIdSingle`](#languageidsingle)&ZeroWidthSpace;`[]`               | Enable / Disable checking file types (languageIds).                                                                                                                  |
 | [enableGlobDot](#settings-enableglobdot)                       | `boolean`                                                                 | Enable scanning files and directories beginning with `.` (period).                                                                                                   |
+| [engines](#settings-engines)                                   | [`CompatibleEngineVersions`](#compatibleengineversions)                   | Specify compatible engine versions.                                                                                                                                  |
 | [failFast](#settings-failfast)                                 | `boolean`                                                                 | Exit with non-zero code as soon as an issue/error is encountered (useful for CI or git hooks)                                                                        |
 | [features](#settings-features)                                 | [`Features`](#features)                                                   | Configure CSpell features.                                                                                                                                           |
 | [files](#settings-files)                                       | [`Glob`](#glob)&ZeroWidthSpace;`[]`                                       | Glob patterns of files to be checked.                                                                                                                                |
@@ -444,6 +445,39 @@ By default, CSpell does not scan `hidden` files.
 `boolean`
 
 </dd>
+
+</dl>
+
+
+
+
+---
+
+#### `engines` {#settings-engines}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+Specify compatible engine versions.
+
+This allows dictionaries and other components to specify the versions of engines (like cspell) they are compatible with.
+
+It does not enforce compatibility, it is up to the client to use this information as needed.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`CompatibleEngineVersions`](#compatibleengineversions)
+
+</dd>
+
+<dt>Since</dt>
+<dd>9.6.3</dd>
 
 </dl>
 
@@ -2255,6 +2289,74 @@ This is used to discourage
 `number`
 
 </dd>
+
+</dl>
+
+
+
+## CompatibleEngineVersions
+
+| Field                                                              | Type                                          | Description                                 |
+| ------------------------------------------------------------------ | --------------------------------------------- | ------------------------------------------- |
+| [code-spell-checker](#compatibleengineversions-code-spell-checker) | [`SemVersionPredicate`](#semversionpredicate) | The VSCode Spell Checker version predicate. |
+| [cspell](#compatibleengineversions-cspell)                         | [`SemVersionPredicate`](#semversionpredicate) | CSpell version predicate.                   |
+
+
+### CompatibleEngineVersions Fields
+
+
+---
+
+#### `code-spell-checker` {#compatibleengineversions-code-spell-checker}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+The VSCode Spell Checker version predicate.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`SemVersionPredicate`](#semversionpredicate)
+
+</dd>
+
+<dt>Since</dt>
+<dd>9.6.3</dd>
+
+</dl>
+
+
+
+
+---
+
+#### `cspell` {#compatibleengineversions-cspell}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+CSpell version predicate.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`SemVersionPredicate`](#semversionpredicate)
+
+</dd>
+
+<dt>Since</dt>
+<dd>9.6.3</dd>
 
 </dl>
 
@@ -8493,6 +8595,36 @@ Examples:
 <dd>
 
 [`ReporterModuleName`](#reportermodulename)<br />[`ReporterModuleName`](#reportermodulename)&ZeroWidthSpace;`[]`<br />`[`[`ReporterModuleName`](#reportermodulename), [`ReporterOptions`](#reporteroptions)`]`
+
+</dd>
+
+</dl>
+
+
+
+
+
+---
+
+## SemVersionPredicate {#semversionpredicate}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+Semantic Version Predicate
+
+Examples:
+- `>=8`
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
 
 </dd>
 
