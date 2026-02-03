@@ -291,6 +291,8 @@ Options:
                               words.
   --dictionary <name>         Enable a dictionary by name. Can be used multiple
                               times.
+  --no-dictionary <name>      Disable a dictionary by name. Can be used multiple
+                              times.
   --dictionary-path <format>  Configure how to display the dictionary path.
                               (choices: "hide", "short", "long", "full",
                               default: Display most of the path.)
