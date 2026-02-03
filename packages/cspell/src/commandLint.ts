@@ -1,7 +1,7 @@
 import type { AddHelpTextContext, Command, CommandOptions } from 'commander';
 
 import * as App from './application.mjs';
-import { collect, crOpt } from './commandHelpers.js';
+import { collect, crOpt, prefixCollect } from './commandHelpers.js';
 import type { LinterCliCommandOptions } from './options.js';
 import { cvtLinterCliCommandOptionsToLinterCliOptions, type LinterCliOptions, ReportChoicesAll } from './options.js';
 import { DEFAULT_CACHE_LOCATION } from './util/cache/index.js';
@@ -172,6 +172,13 @@ export function commandLint(prog: Command, opts: CommandOptions): Command {
         .addOption(crOpt('--default-configuration', 'Load the default configuration and dictionaries.').hideHelp())
         .addOption(crOpt('--no-default-configuration', 'Do not load the default configuration and dictionaries.'))
         .option('--dictionary <name>', 'Enable a dictionary by name.', collect)
+        .addOption(
+            crOpt(
+                '--no-dictionary <name>',
+                'Disable a dictionary by name. Can be used multiple times.',
+                prefixCollect('!'),
+            ).hideHelp(),
+        )
         .option('--disable-dictionary <name>', 'Disable a dictionary by name.', collect)
         .option('--reporter <module|path>', 'Specify one or more reporters to use.', collect)
         .addOption(crOpt('--report <level>', 'Set how unknown words are reported').choices(ReportChoicesAll))
