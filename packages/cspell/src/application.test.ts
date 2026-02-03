@@ -201,6 +201,22 @@ describe('Validate the Application', () => {
         expect(foundIn.map((d) => d.dictName)).toEqual(expect.arrayContaining(['en-gb', 'en_us', 'companies']));
     });
 
+    test('Tests running the trace command with blocked dictionary', testOptions, async () => {
+        const result = await trace(['apple'], { dictionary: ['!en_us'] });
+        expect(result.length).toBeGreaterThan(2);
+
+        const foundIn = result.filter((r) => r.found);
+        expect(foundIn).toContainEqual(
+            expect.objectContaining({
+                dictName: 'en_us',
+                dictActive: false,
+                dictBlocked: true,
+                dictSource: expect.stringMatching(/en_US.(trie|btrie).gz/),
+            }),
+        );
+        expect(foundIn.map((d) => d.dictName)).toEqual(expect.arrayContaining(['en-gb', 'en_us', 'companies']));
+    });
+
     test('Tests running the trace command with missing dictionary', testOptions, async () => {
         const result = await trace(['apple'], { config: 'samples/cspell-missing-dict.json' });
         expect(result.length).toBeGreaterThan(2);

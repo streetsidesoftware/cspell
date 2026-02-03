@@ -376,6 +376,7 @@ describe('Validate cli', () => {
         ${'trace flavour'}                          | ${['trace', 'flavour', '-c', pathSamples('.cspell.json')]}                              | ${undefined}       | ${false} | ${true}  | ${false}
         ${'trace dict not enabled'}                 | ${['trace', 'winkelstraat', cpFeat('d-trace', 'cspell.config.yaml')]}                   | ${undefined}       | ${false} | ${true}  | ${false}
         ${'trace dict enabled'}                     | ${['trace', 'winkelstraat', cpFeat('d-trace', 'cspell.config.yaml'), argDict('words')]} | ${undefined}       | ${false} | ${true}  | ${false}
+        ${'trace dict blocked'}                     | ${['trace', 'hello', '--no-dictionary=en_us']}                                          | ${undefined}       | ${false} | ${true}  | ${false}
     `('app $msg Expect Error: $errorCheck', async ({ testArgs, errorCheck, eError, eLog, eInfo }: TestCase) => {
         chalk.level = 0;
         const commander = getCommander();
@@ -392,14 +393,15 @@ describe('Validate cli', () => {
     });
 
     test.each`
-        msg                           | testArgs
-        ${'trace hello --all'}        | ${['trace', 'hello', '--all']}
-        ${'trace hello --color'}      | ${['trace', 'hello', '--color']}
-        ${'trace hello --no-color'}   | ${['trace', 'hello', '--no-color']}
-        ${'trace hello --only-found'} | ${['trace', 'hello', '--only-found']}
-        ${'trace café'}               | ${['trace', 'café'.normalize('NFD')]}
-        ${'trace hello'}              | ${['trace', '--locale=en-gb', 'hello']}
-        ${'suggest'}                  | ${['suggest', 'café'.normalize('NFD'), '--num-suggestions=1', '--no-include-ties']}
+        msg                                    | testArgs
+        ${'trace hello --all'}                 | ${['trace', 'hello', '--all']}
+        ${'trace hello --color'}               | ${['trace', 'hello', '--color']}
+        ${'trace hello --no-color'}            | ${['trace', 'hello', '--no-color']}
+        ${'trace hello --only-found'}          | ${['trace', 'hello', '--only-found']}
+        ${'trace café'}                        | ${['trace', 'café'.normalize('NFD')]}
+        ${'trace hello --no-dictionary=en_us'} | ${'trace hello --dictionary=en-gb --no-dictionary=en_us'.split(' ')}
+        ${'trace hello'}                       | ${['trace', '--locale=en-gb', 'hello']}
+        ${'suggest'}                           | ${['suggest', 'café'.normalize('NFD'), '--num-suggestions=1', '--no-include-ties']}
     `('app trace $msg run with $testArgs', async ({ testArgs }: TestCase) => {
         chalk.level = 0;
         const commander = getCommander();

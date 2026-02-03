@@ -21,6 +21,7 @@ export default mergeConfig(
                 reportsDirectory: 'coverage',
                 reporter: ['html', 'text', 'json'],
                 exclude: [
+                    '**/node_modules/**',
                     '_snapshots_',
                     '.coverage/**',
                     '.eslint*',

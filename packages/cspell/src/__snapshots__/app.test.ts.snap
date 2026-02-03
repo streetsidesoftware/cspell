@@ -1815,6 +1815,36 @@ café - workspace*           ../../cspell-dict.txt
 "
 `;
 
+exports[`Validate cli > app 'trace dict blocked' Expect Error: undefined 1`] = `[]`;
+
+exports[`Validate cli > app 'trace dict blocked' Expect Error: undefined 2`] = `
+"Word  F Dictionary           Dictionary Location
+hello - [flagWords]*         From Settings \`flagWords\`
+hello - [ignoreWords]*       From Settings \`ignoreWords\`
+hello - [suggestWords]*      From Settings \`suggestWords\`
+hello - [words]*             From Settings \`words\`
+hello - aws*                 node_modules/@cspell/dict-aws/dict/aws.txt
+hello - coding-compound-ter* node_modules/…/dict/coding-compound-terms.txt
+hello - companies*           node_modules/@cspell/…/dict/companies.txt
+hello - computing-acronyms*  node_modules/@cspell/…/dict/computing-acronyms.txt
+hello * cpp                  node_modules/@cspell/dict-cpp/dict/cpp.txt.gz
+hello * cpp-compound-words   node_modules/…/dict/cpp-compound-words.txt.gz
+hello * cryptocurrencies*    node_modules/@cspell/…/dict/cryptocurrencies.txt
+hello * en_us!               node_modules/@cspell/dict-en_us/en_US.trie.gz
+hello - en-common-misspelli* node_modules/@cspell/…/dict/dict-en.json
+hello * en-gb                node_modules/@cspell/dict-en-gb-mit/en_GB.trie.gz
+hello - filetypes*           node_modules/…/dict-filetypes/filetypes.txt.gz
+hello * golang               node_modules/@cspell/dict-golang/dict/go.txt
+hello * node                 node_modules/@cspell/dict-node/dict/node.txt
+hello - public-licenses*     node_modules/@cspell/…/public-licenses.txt.gz
+hello - software-term-sugge* node_modules/@cspell/…/dict/cspell-corrections.yaml
+hello - software-tools*      node_modules/@cspell/…/dict/software-tools.txt
+hello - softwareTerms*       node_modules/@cspell/…/dict/softwareTerms.txt
+hello - web-services*        node_modules/@cspell/…/dict/webServices.txt
+hello - workspace*           ../../cspell-dict.txt
+"
+`;
+
 exports[`Validate cli > app 'trace dict enabled' Expect Error: undefined 1`] = `[]`;
 
 exports[`Validate cli > app 'trace dict enabled' Expect Error: undefined 2`] = `
@@ -5184,6 +5214,36 @@ hello * cryptocurrencies*    node_modules/@cspell/…/dict/cryptocurrencies.txt
 hello * en_us*               node_modules/@cspell/dict-en_us/en_US.trie.gz
 hello - en-common-misspelli* node_modules/@cspell/…/dict/dict-en.json
 hello * en-gb                node_modules/@cspell/dict-en-gb-mit/en_GB.trie.gz
+hello - filetypes*           node_modules/…/dict-filetypes/filetypes.txt.gz
+hello * golang               node_modules/@cspell/dict-golang/dict/go.txt
+hello * node                 node_modules/@cspell/dict-node/dict/node.txt
+hello - public-licenses*     node_modules/@cspell/…/public-licenses.txt.gz
+hello - software-term-sugge* node_modules/@cspell/…/dict/cspell-corrections.yaml
+hello - software-tools*      node_modules/@cspell/…/dict/software-tools.txt
+hello - softwareTerms*       node_modules/@cspell/…/dict/softwareTerms.txt
+hello - web-services*        node_modules/@cspell/…/dict/webServices.txt
+hello - workspace*           ../../cspell-dict.txt
+"
+`;
+
+exports[`Validate cli > app trace 'trace hello --no-dictionary=en_us' run with [ 'trace', 'hello', '--dictionary=en-gb', '--no-dictionary=en_us' ] 1`] = `[]`;
+
+exports[`Validate cli > app trace 'trace hello --no-dictionary=en_us' run with [ 'trace', 'hello', '--dictionary=en-gb', '--no-dictionary=en_us' ] 2`] = `
+"Word  F Dictionary           Dictionary Location
+hello - [flagWords]*         From Settings \`flagWords\`
+hello - [ignoreWords]*       From Settings \`ignoreWords\`
+hello - [suggestWords]*      From Settings \`suggestWords\`
+hello - [words]*             From Settings \`words\`
+hello - aws*                 node_modules/@cspell/dict-aws/dict/aws.txt
+hello - coding-compound-ter* node_modules/…/dict/coding-compound-terms.txt
+hello - companies*           node_modules/@cspell/…/dict/companies.txt
+hello - computing-acronyms*  node_modules/@cspell/…/dict/computing-acronyms.txt
+hello * cpp                  node_modules/@cspell/dict-cpp/dict/cpp.txt.gz
+hello * cpp-compound-words   node_modules/…/dict/cpp-compound-words.txt.gz
+hello * cryptocurrencies*    node_modules/@cspell/…/dict/cryptocurrencies.txt
+hello * en_us!               node_modules/@cspell/dict-en_us/en_US.trie.gz
+hello - en-common-misspelli* node_modules/@cspell/…/dict/dict-en.json
+hello * en-gb*               node_modules/@cspell/dict-en-gb-mit/en_GB.trie.gz
 hello - filetypes*           node_modules/…/dict-filetypes/filetypes.txt.gz
 hello * golang               node_modules/@cspell/dict-golang/dict/go.txt
 hello * node                 node_modules/@cspell/dict-node/dict/node.txt
