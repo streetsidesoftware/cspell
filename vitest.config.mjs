@@ -28,6 +28,7 @@ const defaultConfig = {
             reportsDirectory: 'coverage',
             reporter: ['html', 'json', ['lcov', { projectRoot: __dirname }], 'text'],
             exclude: [
+                '**/node_modules/**',
                 '_snapshots_',
                 '.coverage/**',
                 '.eslint*',

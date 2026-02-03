@@ -5,8 +5,13 @@ import { genSequence } from 'gensequence';
 
 import type { LanguageId } from './fileTypes.js';
 import { toInternalSettings } from './Settings/CSpellSettingsServer.js';
-import type { CSpellSettingsInternal } from './Settings/index.js';
-import { finalizeSettings, mergeSettings, resolveConfigFileImports } from './Settings/index.js';
+import type { CSpellSettingsInternal, DictionaryReferenceCollection } from './Settings/index.js';
+import {
+    createDictionaryReferenceCollection,
+    finalizeSettings,
+    mergeSettings,
+    resolveConfigFileImports,
+} from './Settings/index.js';
 import { calcSettingsForLanguageId } from './Settings/LanguageSettings.js';
 import type { SpellingDictionaryCollection } from './SpellingDictionary/index.js';
 import { getDictionaryInternal, refreshDictionaryCache } from './SpellingDictionary/index.js';
@@ -18,6 +23,8 @@ import * as util from './util/util.js';
 export interface TraceResult extends DictionaryTraceResult {
     /** True if the dictionary is currently active. */
     dictActive: boolean;
+    /** True if the dictionary is blocked from use. */
+    dictBlocked: boolean;
 }
 
 export interface TraceOptions {
@@ -59,6 +66,7 @@ export async function* traceWordsAsync(
 
     async function finalize(config: CSpellSettings): Promise<{
         activeDictionaries: DictionaryId[];
+        dictionaryReferenceCollection: DictionaryReferenceCollection;
         config: CSpellSettingsInternal;
         dicts: SpellingDictionaryCollection;
     }> {
@@ -74,24 +82,28 @@ export async function* traceWordsAsync(
             languageId ?? withLocale.languageId ?? 'plaintext',
         );
         const settings = finalizeSettings(withLanguageId);
-        const dictionaries = [
+        const rawDictionaryRefs = [
             ...(settings.dictionaries || []),
             ...(settings.dictionaryDefinitions || []).map((d) => d.name),
-        ].filter(util.uniqueFn);
+        ];
+        const dictionaryReferenceCollection = createDictionaryReferenceCollection(rawDictionaryRefs);
+        const dictionaries = [...dictionaryReferenceCollection.enabled(), ...dictionaryReferenceCollection.blocked()];
         const dictSettings = toInternalSettings({ ...settings, dictionaries });
         const dictBase = await getDictionaryInternal(settings);
         const dicts = await getDictionaryInternal(dictSettings);
         const activeDictionaries = dictBase.dictionaries.map((d) => d.name);
         return {
             activeDictionaries,
+            dictionaryReferenceCollection,
             config: settings,
             dicts,
         };
     }
 
     await refreshDictionaryCache();
-    const { config, dicts, activeDictionaries } = await finalize(settings);
+    const { activeDictionaries, config, dicts, dictionaryReferenceCollection } = await finalize(settings);
     const setOfActiveDicts = new Set(activeDictionaries);
+    const setOfExcludedDicts = new Set(dictionaryReferenceCollection.blocked());
 
     function processWord(word: string): TraceWordResult {
         const results = traceWord(word, dicts, { ...config, ignoreCase, compoundSeparator });
@@ -99,6 +111,7 @@ export async function* traceWordsAsync(
         const r = results.map((r) => ({
             ...r,
             dictActive: setOfActiveDicts.has(r.dictName),
+            dictBlocked: setOfExcludedDicts.has(r.dictName),
             dictSource: toFilePathOrHref(r.dictSource),
             configSource: r.configSource || config.name || '',
             splits: results.splits,

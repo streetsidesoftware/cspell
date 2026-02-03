@@ -25,6 +25,7 @@ export { createPerfTimer } from './perf/index.js';
 export type {
     ConfigurationDependencies,
     CSpellConfigFile,
+    DictionaryReferenceCollection,
     ICSpellConfigFile,
     ImportFileRefWithError,
 } from './Settings/index.js';
@@ -32,9 +33,11 @@ export {
     calcOverrideSettings,
     checkFilenameMatchesGlob,
     createConfigLoader,
+    createDictionaryReferenceCollection,
     currentSettingsFileVersion,
     defaultConfigFilenames,
     defaultFileName,
+    defaultFileName as defaultSettingsFilename,
     ENV_CSPELL_GLOB_ROOT,
     extractDependencies,
     extractImportErrors,
@@ -60,7 +63,6 @@ export {
     sectionCSpell,
     toCSpellSettingsWithOutSourceTrace,
 } from './Settings/index.js';
-export { defaultFileName as defaultSettingsFilename } from './Settings/index.js';
 export * as Link from './Settings/index.link.js';
 export {
     combineTextAndLanguageSettings,

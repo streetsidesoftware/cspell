@@ -84,7 +84,7 @@ function emitTraceResult(r: TraceResult, options: EmitTraceOptions): TableRow {
     const sug = r.preferredSuggestions?.map((s) => chalk.yellowBright(s)).join(', ') || '';
     const w = (r.forbidden ? chalk.red(cWord) : chalk.green(cWord)) + (sug ? `->(${sug})` : '');
     const f = calcFoundChar(r);
-    const a = r.dictActive ? '*' : ' ';
+    const a = (r.dictBlocked ? chalk.redBright('!') : '') + (r.dictActive ? '*' : ' ');
     const dictName = r.dictName.slice(0, colWidthDictionaryName - 1) + a;
     const dictColor = r.dictActive ? chalk.yellowBright : chalk.rgb(200, 128, 50);
     const n = dictColor(dictName);

@@ -7,6 +7,7 @@ import type { Issue, RunResult } from '@cspell/cspell-types';
 import { afterEach, describe, expect, test, vi } from 'vitest';
 
 import * as App from './application.mjs';
+import { console } from './console.js';
 import type { LinterOptions, TraceOptions } from './options.js';
 import { pathPackageRoot, pathSamples } from './test/test.helper.js';
 import { asyncIterableToArray } from './util/async.js';
@@ -56,12 +57,14 @@ describe('Validate the Application', () => {
         const options = { ...sampleOptions, verbose: true };
         const reporter = new InMemoryReporter();
         const lint = App.lint(files, options, reporter);
+        const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
         const result = await lint;
         expect(reporter.errorCount).toBe(0);
         expect(reporter.infoCount).toBe(0); // verbose is off, no info messages.
         expect(reporter.debugCount).toBe(0);
         expect(reporter.runResult).toEqual(result);
         expect(result.files).toBe(1);
+        expect(consoleSpy).toHaveBeenCalledWith(expect.stringMatching(/Elapsed Time:/));
         return;
     });
 
@@ -115,6 +118,7 @@ describe('Validate the Application', () => {
             verboseLevel: 2,
         };
 
+        const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
         const reporter = new InMemoryReporter();
         const result = await App.lint(files, options, reporter);
 
@@ -127,6 +131,7 @@ describe('Validate the Application', () => {
         expect(reporter.log.some((line) => line.includes('Config Files Found') && line.includes('None found'))).toBe(
             true,
         );
+        expect(consoleSpy).toHaveBeenCalledWith(expect.stringMatching(/Elapsed Time:/));
         return;
     });
 
@@ -145,6 +150,7 @@ describe('Validate the Application', () => {
             verboseLevel: 2,
         };
 
+        const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
         const reporter = new InMemoryReporter();
         const result = await App.lint(files, options, reporter);
 
@@ -159,6 +165,7 @@ describe('Validate the Application', () => {
         );
 
         expect(reporter.issues[0].text).toBe('baddword'); // cspell:disable-line
+        expect(consoleSpy).toHaveBeenCalledWith(expect.stringMatching(/Elapsed Time:/));
         return;
     });
 
@@ -188,6 +195,22 @@ describe('Validate the Application', () => {
         expect(foundIn).toContainEqual(
             expect.objectContaining({
                 dictName: 'en_us',
+                dictSource: expect.stringMatching(/en_US.(trie|btrie).gz/),
+            }),
+        );
+        expect(foundIn.map((d) => d.dictName)).toEqual(expect.arrayContaining(['en-gb', 'en_us', 'companies']));
+    });
+
+    test('Tests running the trace command with blocked dictionary', testOptions, async () => {
+        const result = await trace(['apple'], { dictionary: ['!en_us'] });
+        expect(result.length).toBeGreaterThan(2);
+
+        const foundIn = result.filter((r) => r.found);
+        expect(foundIn).toContainEqual(
+            expect.objectContaining({
+                dictName: 'en_us',
+                dictActive: false,
+                dictBlocked: true,
                 dictSource: expect.stringMatching(/en_US.(trie|btrie).gz/),
             }),
         );
@@ -238,6 +261,7 @@ describe('Validate the Application', () => {
                 We can ignore values within the text: badspellingintext
             `;
         vi.mocked(streamConsumers.text).mockImplementation(async () => text);
+        const consoleSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
 
         const lint = App.lint(files, options, reporter);
         const result = await lint;
@@ -247,6 +271,7 @@ describe('Validate the Application', () => {
         expect(reporter.debugCount).toBeGreaterThan(0);
         expect(reporter.issues.map((i) => i.text)).toEqual(['texxt']);
         expect(reporter.runResult).toEqual(result);
+        expect(consoleSpy).toHaveBeenCalledWith(expect.stringMatching(/Elapsed Time:/));
     });
 });
 
