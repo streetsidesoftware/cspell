@@ -143,6 +143,38 @@ describe('Verify trace', () => {
             }),
         );
     });
+
+    test('tracing with blocked dictionary.', testOptions, async () => {
+        const words = ['apple'];
+        const defaultConfig = await getSettings();
+        const config: CSpellSettings = {
+            ...defaultConfig,
+            // block en_us dictionary
+            dictionaries: [...(defaultConfig.dictionaries || []), '!en_us'],
+        };
+        const results = await traceWords(words, config, {});
+        expect(Object.keys(results)).not.toHaveLength(0);
+        const foundIn = results.filter((r) => r.found);
+        expect(foundIn).toEqual(
+            expect.arrayContaining([
+                expect.objectContaining({
+                    dictName: 'en_us',
+                    dictActive: false,
+                    dictBlocked: true,
+                    dictSource: expect.stringMatching(/en_US.(trie|btrie).gz/),
+                }),
+                expect.objectContaining({
+                    dictName: 'en-gb',
+                    dictActive: false,
+                    dictBlocked: false,
+                    dictSource: expect.stringMatching(/en_GB.(trie|btrie).gz/),
+                }),
+            ]),
+        );
+
+        const resultsWithErrors = results.filter((r) => !!r.errors);
+        expect(resultsWithErrors).toHaveLength(0);
+    });
 });
 
 async function getSettings(...settings: CSpellSettings[]): Promise<CSpellSettings> {

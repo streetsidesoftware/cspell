@@ -5,7 +5,7 @@ import chalk from 'chalk';
 import { console } from '../console.js';
 import type { ListDictionariesResult } from '../dictionaries/index.js';
 import type { DictionariesOptions } from '../options.js';
-import { pruneAnsiTextEnd, pruneAnsiTextStart } from '../util/ansi.js';
+import { ansiWidth, pruneAnsiTextEnd, pruneAnsiTextStart } from '../util/ansi.js';
 import type { TableCell, TableRow } from '../util/table.js';
 import { tableToLines } from '../util/table.js';
 import type { DictionaryPathFormat } from './DictionaryPathFormat.js';
@@ -80,9 +80,9 @@ function calcHeaders(options: EmitDictOptions): [string, string][] {
 }
 
 function emitDictResult(r: ListDictionariesResult, options: EmitDictOptions): DictTableRow {
-    const a = r.enabled ? '*' : ' ';
+    const a = (r.blocked ? chalk.redBright('!') : '') + (r.enabled ? '*' : ' ');
     const dictColor = r.enabled ? chalk.yellowBright : chalk.rgb(200, 128, 50);
-    const n = (width: number | undefined) => dictColor(pruneAnsiTextEnd(r.name, width && width - a.length) + a);
+    const n = (width: number | undefined) => dictColor(pruneAnsiTextEnd(r.name, width && width - ansiWidth(a)) + a);
     const c = colorize(chalk.white);
 
     const locales = (width?: number) => c(pruneAnsiTextEnd(r.locales?.join(',') || '', width));

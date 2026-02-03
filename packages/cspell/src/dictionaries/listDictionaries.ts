@@ -3,7 +3,13 @@ import type {
     DictionaryDefinition,
     DictionaryDefinitionInline,
 } from '@cspell/cspell-types';
-import { combineTextAndLanguageSettings, getDefaultSettings, getGlobalSettingsAsync, mergeSettings } from 'cspell-lib';
+import {
+    combineTextAndLanguageSettings,
+    createDictionaryReferenceCollection,
+    getDefaultSettings,
+    getGlobalSettingsAsync,
+    mergeSettings,
+} from 'cspell-lib';
 
 import type { DictionariesOptions } from '../options.js';
 import { readConfig } from '../util/configFileHelper.js';
@@ -25,6 +31,10 @@ export interface ListDictionariesResult {
      * True if the dictionary is enabled.
      */
     enabled: boolean;
+    /**
+     * True if the dictionary is blocked.
+     */
+    blocked: boolean;
     /**
      * The inline dictionaries supported by the dictionary.
      */
@@ -48,21 +58,25 @@ const inlineDictionaries = {
         name: '[words]',
         description: 'List of words to be included in the spell check.',
         enabled: true,
+        blocked: false,
     },
     '[flagWords]': {
         name: '[flagWords]',
         description: 'List of words to be flagged as incorrect.',
         enabled: true,
+        blocked: false,
     },
     '[ignoreWords]': {
         name: '[ignoreWords]',
         description: 'List of words to be ignored in the spell check.',
         enabled: true,
+        blocked: false,
     },
     '[suggestWords]': {
         name: '[suggestWords]',
         description: 'List of spelling suggestions for words.',
         enabled: true,
+        blocked: false,
     },
 } as const satisfies InlineDictionaries;
 
@@ -165,10 +179,16 @@ export async function listDictionaries(options: DictionariesOptions): Promise<Li
     }
 
     const config = combineTextAndLanguageSettings(configBase, '', useFileType || configBase.languageId || 'plaintext');
+    const dictRefs = createDictionaryReferenceCollection(config.dictionaries || []);
+    const allDictionaries = [...dictRefs.enabled(), ...dictRefs.blocked()];
 
-    const dictionaryLocalesAndFileTypes = extractDictionaryLocalesAndFileTypes(config);
+    const dictionaryLocalesAndFileTypes = extractDictionaryLocalesAndFileTypes({
+        ...config,
+        dictionaries: allDictionaries,
+    });
 
-    const enabledDictionaries = new Set(config.dictionaries || []);
+    const enabledDictionaries = new Set(dictRefs.enabled());
+    const blockedDictionaries = new Set(dictRefs.blocked());
 
     function toListDictionariesResult(dict: DictionaryDefinition): ListDictionariesResult {
         const inline = extractInlineDictionaries(dict);
@@ -176,6 +196,7 @@ export async function listDictionaries(options: DictionariesOptions): Promise<Li
             name: dict.name,
             description: dict.description,
             enabled: enabledDictionaries.has(dict.name),
+            blocked: blockedDictionaries.has(dict.name),
             path: dict.path,
             inline,
             locales: [...(dictionaryLocalesAndFileTypes.get(dict.name)?.locales || [])].sort(),

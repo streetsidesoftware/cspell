@@ -39,6 +39,11 @@ export function commandTrace(prog: Command): Command {
         .option('--ignore-case', 'Ignore case and accents when searching for words.')
         .option('--no-ignore-case', 'Do not ignore case and accents when searching for words.')
         .option('--dictionary <name>', 'Enable a dictionary by name. Can be used multiple times.', collect)
+        .option(
+            '--no-dictionary <name>',
+            'Disable a dictionary by name. Can be used multiple times.',
+            prefixCollect('!'),
+        )
         .addOption(
             new CommanderOption('--dictionary-path <format>', 'Configure how to display the dictionary path.')
                 .choices(['hide', 'short', 'long', 'full'])
@@ -97,6 +102,13 @@ export function commandTrace(prog: Command): Command {
                 throw new CheckFailed('no matches', 1);
             }
         });
+}
+
+function prefixCollect(prefix: string): (value: string | string[], previous: string[] | undefined) => string[] {
+    return (value: string | string[], previous: string[] | undefined): string[] => {
+        const values = (Array.isArray(value) ? value : [value]).map((v) => prefix + v);
+        return previous ? [...previous, ...values] : values;
+    };
 }
 
 function filterTraceResults(results: App.TraceResult[], options: TraceCommandOptions): App.TraceResult[] {

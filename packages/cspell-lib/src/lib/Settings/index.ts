@@ -34,6 +34,8 @@ export {
     toCSpellSettingsWithOutSourceTrace,
 } from './CSpellSettingsServer.js';
 export { defaultSettingsLoader, getDefaultBundledSettingsAsync, getDefaultSettings } from './DefaultSettings.js';
+export type { DictionaryReferenceCollection } from './DictionaryReferenceCollection.js';
+export { createDictionaryReferenceCollection } from './DictionaryReferenceCollection.js';
 export type {
     CSpellSettingsInternal,
     CSpellSettingsInternalFinalized,
