@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v9.6.4 (2026-02-04)
+
+### Fixes
+
+- fix: add --no-dictionary option to lint command (<a href="https://github.com/streetsidesoftware/cspell/pull/8514">#8514</a>)
+- fix: Correctly report blocked dictionaries (<a href="https://github.com/streetsidesoftware/cspell/pull/8506">#8506</a>)
+
 ## v9.6.3 (2026-02-02)
 
 ### Fixes
