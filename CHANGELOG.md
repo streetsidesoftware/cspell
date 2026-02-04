@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v9.6.4 (2026-02-04)
+
+### Fixes
+
+<details>
+<summary>fix: add --no-dictionary option to lint command (<a href="https://github.com/streetsidesoftware/cspell/pull/8514">#8514</a>)</summary>
+
+### fix: add --no-dictionary option to lint command ([#8514](https://github.com/streetsidesoftware/cspell/pull/8514))
+
+## Pull request overview
+
+This PR adds the `--no-dictionary` option to the lint command and refactors the `prefixCollect` helper function for reuse across commands.
+
+**Changes:**
+
+- Moved `prefixCollect` function from `commandTrace.ts` to `commandHelpers.ts` for reuse
+- Added `--no-dictionary` option to the lint command (hidden, as an alias for `--disable-dictionary`)
+- Added comprehensive tests for the new option including `--dictionary=!words` and `--no-dictionary=words` syntax
+
+---
+
+</details>
+
+<details>
+<summary>fix: Correctly report blocked dictionaries (<a href="https://github.com/streetsidesoftware/cspell/pull/8506">#8506</a>)</summary>
+
+### fix: Correctly report blocked dictionaries ([#8506](https://github.com/streetsidesoftware/cspell/pull/8506))
+
+---
+
+</details>
+
 ## v9.6.3 (2026-02-02)
 
 ### Fixes
