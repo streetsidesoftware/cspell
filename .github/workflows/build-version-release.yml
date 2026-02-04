@@ -45,7 +45,7 @@ jobs:
       - name: Setup Node and Pnpm
         uses: ./.github/actions/setup-node
         with:
-          node-version: 20.x
+          node-version: lts/*
 
       - name: Version
         id: version
