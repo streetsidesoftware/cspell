@@ -4677,6 +4677,8 @@ exports[`Validate cli > app help [ 'lint', '--help', '--verbose' ] 1`] = `
   "  --no-validate-directives       Do not validate in-document CSpell directives.",
   "  --default-configuration        Load the default configuration and",
   "                                 dictionaries.",
+  "  --no-dictionary <name>         Disable a dictionary by name. Can be used",
+  "                                 multiple times.",
   "  --skip-validation              Collect and process documents, but do not spell",
   "                                 check.",
   "  --issues-summary-report        Output a summary of issues found.",
@@ -4797,6 +4799,21 @@ exports[`Validate cli > app help [ 'trace', '--help' ] 1`] = `
 
 exports[`Validate cli > app help [ 'trace', '--help' ] 2`] = `""`;
 
+exports[`Validate cli > app lint 'lint --dictionary=!words' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app lint 'lint --dictionary=!words' Expect Error: [Function CheckFailed] 2`] = `
+"error	1/1 README.md 0.00ms X
+error
+log	README.md:7:3 - Unknown word (winkelcentrum)
+log
+log	README.md:8:3 - Unknown word (winkelstraat)
+log
+error	CSpell: Files checked: 1, Issues found: 2 in 1 file.
+error"
+`;
+
+exports[`Validate cli > app lint 'lint --dictionary=!words' Expect Error: [Function CheckFailed] 3`] = `""`;
+
 exports[`Validate cli > app lint 'lint --disable-dictionary --enable-dictionary' Expect Error: undefined 1`] = `[]`;
 
 exports[`Validate cli > app lint 'lint --disable-dictionary --enable-dictionary' Expect Error: undefined 2`] = `
@@ -4822,6 +4839,21 @@ error"
 `;
 
 exports[`Validate cli > app lint 'lint --disable-dictionary' Expect Error: [Function CheckFailed] 3`] = `""`;
+
+exports[`Validate cli > app lint 'lint --no-dictionary=words' Expect Error: [Function CheckFailed] 1`] = `[]`;
+
+exports[`Validate cli > app lint 'lint --no-dictionary=words' Expect Error: [Function CheckFailed] 2`] = `
+"error	1/1 README.md 0.00ms X
+error
+log	README.md:7:3 - Unknown word (winkelcentrum)
+log
+log	README.md:8:3 - Unknown word (winkelstraat)
+log
+error	CSpell: Files checked: 1, Issues found: 2 in 1 file.
+error"
+`;
+
+exports[`Validate cli > app lint 'lint --no-dictionary=words' Expect Error: [Function CheckFailed] 3`] = `""`;
 
 exports[`Validate cli > app suggest [ 'sug' ] 1`] = `
 [

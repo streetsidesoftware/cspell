@@ -168,6 +168,7 @@ describe('Validate cli', () => {
 
     const argDict = (dict: string) => `--dictionary=${dict}`;
     const argDDict = (dict: string) => `--disable-dictionary=${dict}`;
+    const argNDict = (dict: string) => `--no-dictionary=${dict}`;
 
     beforeEach(() => {
         mockCreateInterface.mockClear();
@@ -300,6 +301,8 @@ describe('Validate cli', () => {
     test.each`
         msg                                                | testArgs                                                                 | errorCheck         | eError  | eLog     | eInfo    | notes
         ${'lint --disable-dictionary'}                     | ${[rpFeat('dictionaries'), argDDict('words'), '*.md']}                   | ${app.CheckFailed} | ${true} | ${true}  | ${false} | ${'Disable dictionary words'}
+        ${'lint --dictionary=!words'}                      | ${[rpFeat('dictionaries'), argDict('!words'), '*.md']}                   | ${app.CheckFailed} | ${true} | ${true}  | ${false} | ${'Disable --dictionary=!words'}
+        ${'lint --no-dictionary=words'}                    | ${[rpFeat('dictionaries'), argNDict('words'), '*.md']}                   | ${app.CheckFailed} | ${true} | ${true}  | ${false} | ${'Disable --no-dictionary=words'}
         ${'lint --disable-dictionary --enable-dictionary'} | ${[rpFeat('dictionaries'), argDDict('words'), argDict('words'), '*.md']} | ${undefined}       | ${true} | ${false} | ${false} | ${'Disable and reenable dictionary words'}
     `('app lint $msg Expect Error: $errorCheck', async ({ testArgs, errorCheck, eError, eLog, eInfo }: TestCase) => {
         chalk.level = 1;

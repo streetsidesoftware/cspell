@@ -2,7 +2,7 @@ import type { Command } from 'commander';
 import { Option as CommanderOption } from 'commander';
 
 import * as App from './application.mjs';
-import { collect } from './commandHelpers.js';
+import { collect, prefixCollect } from './commandHelpers.js';
 import { console } from './console.js';
 import { isDictionaryPathFormat } from './emitters/DictionaryPathFormat.js';
 import { emitTraceResults } from './emitters/traceEmitter.js';
@@ -102,13 +102,6 @@ export function commandTrace(prog: Command): Command {
                 throw new CheckFailed('no matches', 1);
             }
         });
-}
-
-function prefixCollect(prefix: string): (value: string | string[], previous: string[] | undefined) => string[] {
-    return (value: string | string[], previous: string[] | undefined): string[] => {
-        const values = (Array.isArray(value) ? value : [value]).map((v) => prefix + v);
-        return previous ? [...previous, ...values] : values;
-    };
 }
 
 function filterTraceResults(results: App.TraceResult[], options: TraceCommandOptions): App.TraceResult[] {

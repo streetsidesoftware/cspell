@@ -12,6 +12,18 @@ export function collect(value: string | string[], previous: string[] | undefined
 }
 
 /**
+ * Collects string values into an array, prefixing each value with the given prefix.
+ * @param prefix the prefix to add to each value.
+ * @returns a function that collects values with the given prefix.
+ */
+export function prefixCollect(prefix: string): (value: string | string[], previous: string[] | undefined) => string[] {
+    return (value: string | string[], previous: string[] | undefined): string[] => {
+        const values = (Array.isArray(value) ? value : [value]).map((v) => prefix + v);
+        return previous ? [...previous, ...values] : values;
+    };
+}
+
+/**
  * Create Option - a helper function to create a commander option.
  * @param name - the name of the option
  * @param description - the description of the option
