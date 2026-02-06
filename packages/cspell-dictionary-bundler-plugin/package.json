@@ -1,0 +1,52 @@
+{
+  "name": "@cspell/dictionary-bundler-plugin",
+  "type": "module",
+  "version": "9.6.4",
+  "description": "A plugin for bundling cspell dictionaries.",
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "license": "MIT",
+  "keywords": [
+    "cspell",
+    "dictionary",
+    "bundler",
+    "plugin"
+  ],
+  "exports": {
+    ".": "./dist/index.js",
+    "./api": "./dist/api.js",
+    "./esbuild": "./dist/esbuild.js",
+    "./farm": "./dist/farm.js",
+    "./rolldown": "./dist/rolldown.js",
+    "./rollup": "./dist/rollup.js",
+    "./rspack": "./dist/rspack.js",
+    "./vite": "./dist/vite.js",
+    "./webpack": "./dist/webpack.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "engines": {
+    "node": ">=20.18.0"
+  },
+  "scripts": {
+    "lint": "eslint --cache .",
+    "lint:fix": "pnpm run lint --fix",
+    "build": "tsdown",
+    "build:tsc": "tsc",
+    "watch": "tsdown --watch",
+    "test": "pnpm build:tsc && vitest run",
+    "test:watch": "vitest",
+    "prepublishOnly": "pnpm run build"
+  },
+  "dependencies": {
+    "unplugin": "^3.0.0"
+  },
+  "devDependencies": {
+    "@sxzz/test-utils": "^0.5.15",
+    "vitest": "~4.0.18"
+  }
+}
