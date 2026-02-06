@@ -88,7 +88,7 @@ describe('inject', () => {
         expect(result).toBe('Hello world!');
     });
 
-    test.only('should inject multiple values', () => {
+    test('should inject multiple values', () => {
         const result = inject`
             ${'a'} and ${'b\nbb\nbbb\n'} and ${'c'}
         `;
