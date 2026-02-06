@@ -85,14 +85,14 @@ export interface SfxMutation extends AfxMutation {
 
 export interface PfxMutation extends AfxMutation {
     /**
-     * The string to remove from the end of the word.
-     * - The string MUST match the end of the word.
+     * The string to remove from the beginning of the word.
+     * - The string MUST match the beginning of the word.
      * - It may include more rules to apply.
      * - Empty string means no characters are removed.
      */
     remove: string;
     /**
-     * The string to attach to the end of the word.
+     * The string to attach to the beginning of the word.
      * It may include more rules to apply.
      */
     attach: string;
