@@ -254,7 +254,7 @@ const hasRegExp = /[[\].?]/;
 export function makeMatchFunction(match: string, id: AfxRuleId, afxType: AfxType): (word: string) => boolean {
     if (!match || match === '.') return () => true;
     assert(forbiddenMatchRegex.test(match) === false, `Invalid characters in ${id} match string: ${match}`);
-    match = afxType === 'P' ? match.replaceAll('^', '') : match.replace('$', '');
+    match = afxType === 'P' ? match.replaceAll('^', '') : match.replaceAll('$', '');
     if (!hasRegExp.test(match)) {
         const afx = match;
         return afxType === 'P' ? (word) => word.startsWith(afx) : (word) => word.endsWith(afx);
