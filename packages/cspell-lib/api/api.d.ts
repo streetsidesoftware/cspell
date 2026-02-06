@@ -6,7 +6,7 @@ import { CompoundWordsMethod, WeightMap } from "cspell-trie-lib";
 import { CSpellConfigFile, CSpellConfigFile as CSpellConfigFile$1, ICSpellConfigFile, ICSpellConfigFile as ICSpellConfigFile$1 } from "cspell-config-lib";
 export * from "@cspell/cspell-types";
 
-//#region rolldown:runtime
+//#region \0rolldown/runtime.js
 //#endregion
 //#region src/lib/clearCachedFiles.d.ts
 /**
