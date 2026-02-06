@@ -15,8 +15,6 @@ export function inject(template: TemplateStringsArray, ...values: unknown[]): st
         adjValues.push(valueLines.join('\n'));
     }
 
-    console.log('%o', { template, values, adjValues });
-
     return unindent(template, ...adjValues);
 }
 
