@@ -140,7 +140,7 @@ export function extractKeyValues<T, K extends keyof T>(key: K, records: (T | und
     return records
         .filter((r): r is T => !!r)
         .map((r) => r[key])
-        .filter((v): v is Exclude<T[K], undefined> => !!v);
+        .filter((v): v is Exclude<T[K], undefined> => v !== undefined);
 }
 
 function recKV<K extends keyof CSpellSettings>(
