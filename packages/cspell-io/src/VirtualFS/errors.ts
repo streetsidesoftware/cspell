@@ -8,7 +8,7 @@ export class VFSError extends Error {
     readonly url?: string | undefined;
     readonly code?: string | number | undefined;
     constructor(message: string, options?: VFSErrorOptions) {
-        super(message, options);
+        super(message, { cause: options?.cause });
         this.name = 'VFSError';
         this.url = options?.url instanceof URL ? options.url.href : options?.url;
         this.code = options?.code;
