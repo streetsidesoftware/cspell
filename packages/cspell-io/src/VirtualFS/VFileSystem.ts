@@ -1,4 +1,11 @@
-import type { BufferEncoding, DirEntry, FileReference, FileResource, Stats, TextFileResource } from './models/index.js';
+import type {
+    BufferEncoding,
+    DirEntry,
+    FileReference,
+    FileResource,
+    Stats,
+    TextFileResource,
+} from '../models/index.js';
 
 export type UrlOrReference = URL | FileReference;
 
@@ -58,12 +65,12 @@ export interface VFileSystemCore {
      * The capabilities can be more restrictive than the general capabilities of the provider.
      * @param url - the url to try
      */
-    getCapabilities(url: URL): FSCapabilities;
+    getCapabilities(url: URL): Readonly<FSCapabilities>;
     /**
      * Information about the provider.
      * It is up to the provider to define what information is available.
      */
-    providerInfo: FileSystemProviderInfo;
+    providerInfo: Readonly<FileSystemProviderInfo>;
     /**
      * Indicates that a provider was found for the url.
      */

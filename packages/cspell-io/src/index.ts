@@ -3,7 +3,6 @@ export * from './common/index.js';
 export { compareStats, createTextFileResource } from './common/index.js';
 export type { CSpellIO } from './CSpellIO.js';
 export { CSpellIONode, getDefaultCSpellIO } from './CSpellIONode.js';
-export { createVirtualFS, getDefaultVirtualFs } from './CVirtualFS.js';
 export {
     getStat,
     getStatSync,
@@ -22,12 +21,13 @@ export { isFileURL, isUrlLike, toFileURL, toURL, urlBasename, urlDirname } from 
 export type {
     VFileSystem,
     VFileSystemCore,
+    VFileSystemProvider,
     VFindEntryType,
     VFindUpPredicate,
     VFindUpURLOptions,
     VfsDirEntry,
     VfsStat,
-} from './VFileSystem.js';
-export { FSCapabilityFlags } from './VFileSystem.js';
-export type { VFileSystemProvider, VirtualFS, VProviderFileSystem } from './VirtualFS.js';
-export { createRedirectProvider } from './VirtualFS/redirectProvider.js';
+    VirtualFS,
+    VProviderFileSystem,
+} from './VirtualFS/index.js';
+export { createRedirectProvider, createVirtualFS, FSCapabilityFlags, getDefaultVirtualFs } from './VirtualFS/index.js';

@@ -1,20 +1,20 @@
-import { urlOrReferenceToUrl } from './common/index.js';
-import type { CSpellIO } from './CSpellIO.js';
-import { getDefaultCSpellIO } from './CSpellIONode.js';
-import type { Disposable } from './models/index.js';
-import type { LogEvent } from './models/LogEvent.js';
+import { urlOrReferenceToUrl } from '../common/index.js';
+import type { CSpellIO } from '../CSpellIO.js';
+import { getDefaultCSpellIO } from '../CSpellIONode.js';
+import type { Disposable } from '../models/index.js';
+import type { LogEvent } from '../models/LogEvent.js';
+import { CVFileSystem } from './CVFileSystem.js';
+import { VFSErrorUnsupportedRequest } from './errors.js';
 import type { UrlOrReference, VFileSystem, VFileSystemCore } from './VFileSystem.js';
 import type { NextProvider, VFileSystemProvider, VirtualFS } from './VirtualFS.js';
 import { debug } from './VirtualFS.js';
-import { CVFileSystem } from './VirtualFS/CVFileSystem.js';
 import {
-    chopUrl,
+    chopUrlAtNodeModules,
     cspellIOToFsProvider,
     CVfsDirEntry,
     rPad,
-    VFSErrorUnsupportedRequest,
     WrappedProviderFs,
-} from './VirtualFS/WrappedProviderFs.js';
+} from './WrappedProviderFs.js';
 
 class CVirtualFS implements VirtualFS {
     private readonly providers = new Set<VFileSystemProvider>();
@@ -39,7 +39,7 @@ class CVirtualFS implements VirtualFS {
             const id = event.traceID.toFixed(13).replaceAll(/\d{4}(?=\d)/g, '$&.');
             const msg = event.message ? `\n\t\t${event.message}` : '';
             const method = rPad(`${event.method}-${event.event}`, 16);
-            this.log(`${method} ID:${id} ts:${event.ts.toFixed(13)} ${chopUrl(event.url)}${msg}`);
+            this.log(`${method} ID:${id} ts:${event.ts.toFixed(13)} ${chopUrlAtNodeModules(event.url)}${msg}`);
         }
     };
 

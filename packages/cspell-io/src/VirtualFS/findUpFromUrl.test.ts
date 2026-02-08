@@ -2,7 +2,7 @@ import { pathToFileURL } from 'node:url';
 
 import { describe, expect, test, vi } from 'vitest';
 
-import { getDefaultVFileSystemCore } from '../CVirtualFS.js';
+import { getDefaultVFileSystemCore } from './CVirtualFS.js';
 import { findUpFromUrl } from './findUpFromUrl.js';
 
 const cwdURL = pathToFileURL('./');

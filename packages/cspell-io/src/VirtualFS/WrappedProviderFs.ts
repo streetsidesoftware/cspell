@@ -1,15 +1,11 @@
 import { createTextFileResource, urlOrReferenceToUrl } from '../common/index.js';
 import type { CSpellIO } from '../CSpellIO.js';
-import type {
-    BufferEncoding,
-    DirEntry,
-    FileReference,
-    FileResource,
-    Stats,
-    TextFileResource,
-} from '../models/index.js';
-import { FileType } from '../models/index.js';
+import type { BufferEncoding, DirEntry, FileReference, FileResource, TextFileResource } from '../models/index.js';
 import type { EventMethods, LogEvent, LogEvents } from '../models/LogEvent.js';
+import { fsCapabilities } from './capabilities.js';
+import { CFileType } from './CFileType.js';
+import { CVfsStat } from './CVfsStat.js';
+import { VFSError, VFSErrorUnsupportedRequest } from './errors.js';
 import type {
     FileSystemProviderInfo,
     FSCapabilities,
@@ -18,9 +14,9 @@ import type {
     VFileSystemCore,
     VfsDirEntry,
     VfsStat,
-} from '../VFileSystem.js';
-import { FSCapabilityFlags } from '../VFileSystem.js';
-import type { VFileSystemProvider, VProviderFileSystem } from '../VirtualFS.js';
+} from './VFileSystem.js';
+import { FSCapabilityFlags } from './VFileSystem.js';
+import type { VFileSystemProvider, VProviderFileSystem } from './VirtualFS.js';
 
 export function cspellIOToFsProvider(cspellIO: CSpellIO): VFileSystemProvider {
     const capabilities = FSCapabilityFlags.Stat | FSCapabilityFlags.ReadWrite | FSCapabilityFlags.ReadDir;
@@ -57,53 +53,6 @@ function wrapError(e: unknown): unknown {
     if (e instanceof VFSError) return e;
     // return new VFSError(e instanceof Error ? e.message : String(e), { cause: e });
     return e;
-}
-
-export class VFSError extends Error {
-    constructor(message: string, options?: { cause?: unknown }) {
-        super(message, options);
-    }
-}
-
-export class VFSErrorUnsupportedRequest extends VFSError {
-    public readonly url?: string | undefined;
-
-    constructor(
-        public readonly request: string,
-        url?: URL | string,
-        public readonly parameters?: unknown,
-    ) {
-        super(`Unsupported request: ${request}`);
-        this.url = url?.toString();
-    }
-}
-
-class CFsCapabilities {
-    constructor(readonly flags: FSCapabilityFlags) {}
-
-    get readFile(): boolean {
-        return !!(this.flags & FSCapabilityFlags.Read);
-    }
-
-    get writeFile(): boolean {
-        return !!(this.flags & FSCapabilityFlags.Write);
-    }
-
-    get readDirectory(): boolean {
-        return !!(this.flags & FSCapabilityFlags.ReadDir);
-    }
-
-    get writeDirectory(): boolean {
-        return !!(this.flags & FSCapabilityFlags.WriteDir);
-    }
-
-    get stat(): boolean {
-        return !!(this.flags & FSCapabilityFlags.Stat);
-    }
-}
-
-export function fsCapabilities(flags: FSCapabilityFlags): FSCapabilities {
-    return new CFsCapabilities(flags);
 }
 
 export class WrappedProviderFs implements VFileSystemCore {
@@ -209,42 +158,7 @@ function checkCapabilityOrThrow(
         throw new VFSErrorUnsupportedRequest(name, url);
     }
 }
-class CFileType {
-    constructor(readonly fileType: FileType) {}
 
-    isFile(): boolean {
-        return this.fileType === FileType.File;
-    }
-
-    isDirectory(): boolean {
-        return this.fileType === FileType.Directory;
-    }
-
-    isUnknown(): boolean {
-        return !this.fileType;
-    }
-
-    isSymbolicLink(): boolean {
-        return !!(this.fileType & FileType.SymbolicLink);
-    }
-}
-class CVfsStat extends CFileType implements VfsStat {
-    constructor(private stat: Stats) {
-        super(stat.fileType || FileType.Unknown);
-    }
-
-    get size(): number {
-        return this.stat.size;
-    }
-
-    get mtimeMs(): number {
-        return this.stat.mtimeMs;
-    }
-
-    get eTag(): string | undefined {
-        return this.stat.eTag;
-    }
-}
 export class CVfsDirEntry extends CFileType implements VfsDirEntry {
     private _url: URL | undefined;
     constructor(private entry: DirEntry) {
@@ -273,17 +187,30 @@ export class CVfsDirEntry extends CFileType implements VfsDirEntry {
         };
     }
 }
-export function chopUrl(url: URL | undefined): string {
+
+/**
+ * Chop URL at node_modules to make it more readable in logs. If the URL contains `node_modules`, the
+ * chopped URL will include the part before `node_modules`, followed by `…`, and then the last 3 parts
+ * of the URL. If the URL does not contain `node_modules`, the original URL href will be returned.
+ * @param url - the URL to chop.
+ * @returns string - the chopped URL, if the URL contains node_modules, otherwise the original URL href.
+ */
+export function chopUrlAtNodeModules(url: URL | undefined): string {
     if (!url) return '';
     const href = url.href;
     const parts = href.split('/');
     const n = parts.indexOf('node_modules');
     if (n > 0) {
-        const tail = parts.slice(Math.max(parts.length - 3, n + 1));
-        return parts.slice(0, n + 1).join('/') + '/…/' + tail.join('/');
+        const tail = parts.slice(n + 1);
+        if (tail.length <= 3) {
+            return href;
+        }
+        const head = parts.slice(0, n + 1);
+        return head.join('/') + '/…/' + tail.slice(-3).join('/');
     }
     return href;
 }
+
 export function rPad(str: string, len: number, ch = ' '): string {
     return str.padEnd(len, ch);
 }
