@@ -49,7 +49,7 @@ interface MemVFileSystemEntry {
 export class MemVFileSystem implements VProviderFileSystem {
     readonly name: string;
     readonly protocol: string;
-    readonly capabilities: FSCapabilityFlags = FSCapabilityFlags.ReadWrite;
+    readonly capabilities: FSCapabilityFlags = FSCapabilityFlags.ReadWrite | FSCapabilityFlags.Stat;
     #files: Map<string, MemVFileSystemEntry> = new Map();
 
     constructor(name: string, protocol: string) {
