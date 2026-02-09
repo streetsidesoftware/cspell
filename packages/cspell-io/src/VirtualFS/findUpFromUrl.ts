@@ -1,4 +1,4 @@
-import type { VFileSystemCore, VFindEntryType, VFindUpURLOptions } from '../VFileSystem.js';
+import type { VFileSystemCore, VFindEntryType, VFindUpURLOptions } from './VFileSystem.js';
 
 export type FindUpFileSystem = Pick<VFileSystemCore, 'stat'>;
 

@@ -26,13 +26,13 @@ await test('gatherIssues', () => {
 await test('filesize index.cjs', async () => {
     const stats = await fs.stat('dist/index.cjs');
     assert(stats.size > 0, 'File size is greater than 0');
-    assert(stats.size <= 2048, 'File size is less than 2048');
+    assert(stats.size <= 1024 * 10, 'Try to keep it small');
 });
 
 await test('filesize index.mjs', async () => {
     const stats = await fs.stat('dist/index.mjs');
     assert(stats.size > 0, 'File size is greater than 0');
-    assert(stats.size <= 1024, 'File size is less than 1024');
+    assert(stats.size <= 1024 * 10, 'Try to keep it small');
 });
 
 if (failed) {

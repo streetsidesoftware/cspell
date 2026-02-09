@@ -3,14 +3,14 @@ import { basename } from 'node:path';
 
 import { afterEach, beforeEach, describe, expect, test, vi } from 'vitest';
 
-import { CFileResource } from './common/index.js';
+import { CFileResource } from '../common/index.js';
+import { FileType } from '../models/Stats.js';
+import { toFileURL, urlBasename } from '../node/file/url.js';
+import { pathToSample as ps } from '../test/test.helper.js';
 import { createVirtualFS, getDefaultVFileSystem } from './CVirtualFS.js';
-import { FileType } from './models/Stats.js';
-import { toFileURL, urlBasename } from './node/file/url.js';
-import { pathToSample as ps } from './test/test.helper.js';
+import { VFSErrorUnsupportedRequest } from './errors.js';
 import { FSCapabilityFlags } from './VFileSystem.js';
 import type { VFileSystemProvider, VirtualFS, VProviderFileSystem } from './VirtualFS.js';
-import { VFSErrorUnsupportedRequest } from './VirtualFS/WrappedProviderFs.js';
 
 const sc = (m: string) => expect.stringContaining(m);
 const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);

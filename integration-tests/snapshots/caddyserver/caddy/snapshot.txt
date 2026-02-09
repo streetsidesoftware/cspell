@@ -5,16 +5,16 @@ Args: ["**/*.go"]
 Lines:
  CSpell: Files checked: 291, Issues found: 3848 in 261 files.
  exit code: 1
-admin.go:1082:20   - Unknown word (Redir)       -- return errInternalRedir
-admin.go:1361:6    - Unknown word (loggable)    -- type loggableURLArray []*url.URL
-admin.go:1363:10   - Unknown word (loggable)    -- func (ua loggableURLArray) MarshalLogArray
-admin.go:1384:21   - Unknown word (pidfile)     -- // PIDFile writes a pidfile to the file at filename
-admin.go:1392:2    - Unknown word (pidfile)     -- pidfile = filename
-admin.go:1402:31   - Unknown word (pidfile)     -- pidfile is the name of the pidfile, if any.
-admin.go:1402:4    - Unknown word (pidfile)     -- // pidfile is the name of the pidfile
-admin.go:1403:5    - Unknown word (pidfile)     -- var pidfile string
-admin.go:1405:15   - Unknown word (Redir)       -- // errInternalRedir indicates an internal
-admin.go:1410:16   - Unknown word (Redir)       -- var errInternalRedir = fmt.Errorf("internal
+admin.go:1107:20   - Unknown word (Redir)       -- return errInternalRedir
+admin.go:1386:6    - Unknown word (loggable)    -- type loggableURLArray []*url.URL
+admin.go:1388:10   - Unknown word (loggable)    -- func (ua loggableURLArray) MarshalLogArray
+admin.go:1409:21   - Unknown word (pidfile)     -- // PIDFile writes a pidfile to the file at filename
+admin.go:1417:2    - Unknown word (pidfile)     -- pidfile = filename
+admin.go:1427:31   - Unknown word (pidfile)     -- pidfile is the name of the pidfile, if any.
+admin.go:1427:4    - Unknown word (pidfile)     -- // pidfile is the name of the pidfile
+admin.go:1428:5    - Unknown word (pidfile)     -- var pidfile string
+admin.go:1430:15   - Unknown word (Redir)       -- // errInternalRedir indicates an internal
+admin.go:1435:16   - Unknown word (Redir)       -- var errInternalRedir = fmt.Errorf("internal
 admin.go:165:12    - Unknown word (certmagic)   -- issuers []certmagic.Issuer
 admin.go:329:26    - Unknown word (infosec)     -- security checks, the infosec community assures me
 admin.go:43:14     - Unknown word (caddyserver) -- "github.com/caddyserver/certmagic"
@@ -29,8 +29,8 @@ admin.go:507:25    - Unknown word (caddytls)    -- as explained in the caddytls 
 admin.go:510:30    - Unknown word (caddytls)    -- avoid import cycle with caddytls package, so manually
 admin.go:511:56    - Unknown word (certmagic)   -- interface{ SetConfig(cfg *certmagic.Config) }); ok {
 admin.go:586:23    - Unknown word (stdlib)      -- / convert logger to stdlib so it can be used by
-admin.go:850:23    - Unknown word (Redir)       -- if err == errInternalRedir {
-admin.go:951:38    - Unknown word (xxhash)      -- hash.Hash { return xxhash.New() }
+admin.go:875:23    - Unknown word (Redir)       -- if err == errInternalRedir {
+admin.go:976:38    - Unknown word (xxhash)      -- hash.Hash { return xxhash.New() }
 admin_test.go:29:14     - Unknown word (caddyserver) -- "github.com/caddyserver/certmagic"
 admin_test.go:29:26     - Unknown word (certmagic)   -- github.com/caddyserver/certmagic"
 admin_test.go:423:10    - Unknown word (Provisionable) -- type mockProvisionableRouter struct {
@@ -2407,19 +2407,19 @@ modules/caddyhttp/reverseproxy/streaming.go:554:7     - Unknown word (weakrand) 
 modules/caddyhttp/reverseproxy/streaming.go:592:5     - Unknown word (nolint)       -- //nolint:errcheck
 modules/caddyhttp/reverseproxy/streaming.go:99:17     - Unknown word (caddyhttp)   -- if body, ok := caddyhttp.GetVar(req.Context(
 modules/caddyhttp/reverseproxy/streaming_test.go:9:14      - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
-modules/caddyhttp/reverseproxy/upstreams.go:104:14    - Unknown word (gosec)       -- //nolint:gosec
-modules/caddyhttp/reverseproxy/upstreams.go:104:7     - Unknown word (nolint)      -- //nolint:gosec
-modules/caddyhttp/reverseproxy/upstreams.go:105:34    - Unknown word (weakrand)    -- su.Resolver.netAddrs[weakrand.Intn(len(su.Resolver
-modules/caddyhttp/reverseproxy/upstreams.go:121:2     - Unknown word (srvs)        -- srvsMu.RLock()
-modules/caddyhttp/reverseproxy/upstreams.go:122:12    - Unknown word (srvs)        -- cached := srvs[suAddr]
-modules/caddyhttp/reverseproxy/upstreams.go:123:2     - Unknown word (srvs)        -- srvsMu.RUnlock()
-modules/caddyhttp/reverseproxy/upstreams.go:129:2     - Unknown word (srvs)        -- srvsMu.Lock()
-modules/caddyhttp/reverseproxy/upstreams.go:130:8     - Unknown word (srvs)        -- defer srvsMu.Unlock()
+modules/caddyhttp/reverseproxy/upstreams.go:109:14    - Unknown word (gosec)       -- //nolint:gosec
+modules/caddyhttp/reverseproxy/upstreams.go:109:7     - Unknown word (nolint)      -- //nolint:gosec
+modules/caddyhttp/reverseproxy/upstreams.go:110:34    - Unknown word (weakrand)    -- su.Resolver.netAddrs[weakrand.Intn(len(su.Resolver
+modules/caddyhttp/reverseproxy/upstreams.go:126:2     - Unknown word (srvs)        -- srvsMu.RLock()
+modules/caddyhttp/reverseproxy/upstreams.go:127:12    - Unknown word (srvs)        -- cached := srvs[suAddr]
+modules/caddyhttp/reverseproxy/upstreams.go:128:2     - Unknown word (srvs)        -- srvsMu.RUnlock()
+modules/caddyhttp/reverseproxy/upstreams.go:134:2     - Unknown word (srvs)        -- srvsMu.Lock()
+modules/caddyhttp/reverseproxy/upstreams.go:135:8     - Unknown word (srvs)        -- defer srvsMu.Unlock()
 modules/caddyhttp/reverseproxy/upstreams.go:17:14     - Unknown word (caddyserver) -- "github.com/caddyserver/caddy/v2"
-modules/caddyhttp/reverseproxy/upstreams.go:324:14    - Unknown word (gosec)       -- //nolint:gosec
-modules/caddyhttp/reverseproxy/upstreams.go:324:7     - Unknown word (nolint)      -- //nolint:gosec
-modules/caddyhttp/reverseproxy/upstreams.go:325:34    - Unknown word (weakrand)    -- au.Resolver.netAddrs[weakrand.Intn(len(au.Resolver
-modules/caddyhttp/reverseproxy/upstreams.go:435:4     - Unknown word (failovers)   -- // failovers, especially in conjunction
+modules/caddyhttp/reverseproxy/upstreams.go:332:14    - Unknown word (gosec)       -- //nolint:gosec
+modules/caddyhttp/reverseproxy/upstreams.go:332:7     - Unknown word (nolint)      -- //nolint:gosec
+modules/caddyhttp/reverseproxy/upstreams.go:333:34    - Unknown word (weakrand)    -- au.Resolver.netAddrs[weakrand.Intn(len(au.Resolver
+modules/caddyhttp/reverseproxy/upstreams.go:443:4     - Unknown word (failovers)   -- // failovers, especially in conjunction
 modules/caddyhttp/reverseproxy/upstreams.go:7:2       - Unknown word (weakrand)   -- weakrand "math/rand"
 modules/caddyhttp/rewrite/caddyfile.go:105:6     - Unknown word (rewr)          -- var rewr Rewrite
 modules/caddyhttp/rewrite/caddyfile.go:112:3     - Unknown word (rewr)          -- rewr.StripPathPrefix = args

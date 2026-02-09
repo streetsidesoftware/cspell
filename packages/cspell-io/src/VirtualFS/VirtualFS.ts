@@ -1,4 +1,4 @@
-import type { DirEntry, Disposable, FileReference, FileResource, Stats } from './models/index.js';
+import type { DirEntry, Disposable, FileReference, FileResource, Stats } from '../models/index.js';
 import type {
     FileSystemProviderInfo,
     FSCapabilities,
@@ -67,7 +67,7 @@ export interface VProviderFileSystem extends Disposable {
     capabilities: FSCapabilityFlags;
 
     /**
-     * Get the capabilities for a URL. Make it possible for a provider to support more capabilities for a given url.
+     * Get the capabilities for a URL. Makes it possible for a provider to support more capabilities for a given url.
      * These capabilities should be more restrictive than the general capabilities.
      * @param url - the url to try
      * @returns the capabilities for the url.

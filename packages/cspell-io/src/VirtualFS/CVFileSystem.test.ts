@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
-import { getDefaultVFileSystemCore } from '../CVirtualFS.js';
 import { CVFileSystem } from './CVFileSystem.js';
+import { getDefaultVFileSystemCore } from './CVirtualFS.js';
 
 describe('CVFileSystem', () => {
     test('CVFileSystem', () => {

@@ -3,14 +3,13 @@ Repository: RustPython/RustPython
 Url: "https://github.com/RustPython/RustPython.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 746, Issues found: 1208 in 164 files.
+ CSpell: Files checked: 751, Issues found: 1206 in 163 files.
  exit code: 1
-Cargo.toml:106:28    - Unknown word (nsis)       -- package.metadata.packager.nsis]
-Cargo.toml:159:80    - Unknown word (oldtime)    -- features = ["clock", "oldtime", "std"] }
-Cargo.toml:175:119   - Unknown word (zerocopy)   -- "socket", "sched", "zerocopy", "dir", "hostname"
-Cargo.toml:194:1     - Unknown word (rustix)     -- rustix = { version = "1.1"
-Cargo.toml:199:1     - Unknown word (scopeguard) -- scopeguard = "1"
-Cargo.toml:92:62     - Unknown word (redoxer)    -- to compile/check with redoxer
+Cargo.toml:107:28    - Unknown word (nsis)       -- package.metadata.packager.nsis]
+Cargo.toml:161:80    - Unknown word (oldtime)    -- features = ["clock", "oldtime", "std"] }
+Cargo.toml:177:119   - Unknown word (zerocopy)   -- "socket", "sched", "zerocopy", "dir", "hostname"
+Cargo.toml:201:1     - Unknown word (scopeguard) -- scopeguard = "1"
+Cargo.toml:93:62     - Unknown word (redoxer)    -- to compile/check with redoxer
 DEVELOPMENT.md:148:5     - Unknown word (speedscope) -- The speedscope json format (default
 DEVELOPMENT.md:165:26    - Unknown word (subcrates)  -- src`: using the other subcrates to bring rustpython
 LICENSE-logo:139:15    - Unknown word (sublicensable)   -- non-sublicensable, non-exclusive, irrevocable
@@ -103,14 +102,12 @@ crates/doc/LICENSE:52:20     - Unknown word (Stallman's)   -- CNRI, however, Sta
 crates/doc/LICENSE:52:47     - Unknown word (CNRI's)       -- Stallman's lawyer has told CNRI's lawyer that 1.6.1
 crates/doc/LICENSE:52:5      - Unknown word (CNRI)         -- CNRI, however, Stallman's
 crates/doc/LICENSE:5:1       - Unknown word (Mathematisch) -- Mathematisch Centrum (CWI, see https
-crates/doc/generate.py:132:38    - Unknown word (getowndoc)  -- DocEntry(parts, pydoc._getowndoc(obj))
-crates/doc/generate.py:169:46    - Unknown word (getowndoc)  -- DocEntry(new_parts, pydoc._getowndoc(attr))
-crates/doc/generate.py:208:38    - Unknown word (getowndoc)  -- DocEntry(parts, pydoc._getowndoc(typ))
+crates/doc/generate.py:140:38    - Unknown word (getowndoc)  -- DocEntry(parts, pydoc._getowndoc(obj))
+crates/doc/generate.py:177:46    - Unknown word (getowndoc)  -- DocEntry(new_parts, pydoc._getowndoc(attr))
+crates/doc/generate.py:216:38    - Unknown word (getowndoc)  -- DocEntry(parts, pydoc._getowndoc(typ))
 crates/jit/Cargo.toml:11:1      - Unknown word (autotests)  -- autotests = false
 crates/sre_engine/Cargo.toml:3:13      - Unknown word (Kangzhi)    -- authors = ["Kangzhi Shi <shikangzhi@gmail
-crates/stdlib/Cargo.toml:107:1     - Unknown word (rustix)     -- rustix = { workspace = true
-crates/vm/Cargo.toml:69:1      - Unknown word (scopeguard) -- scopeguard = { workspace = true
-crates/vm/Cargo.toml:96:1      - Unknown word (rustix)     -- rustix = { workspace = true
+crates/vm/Cargo.toml:70:1      - Unknown word (scopeguard) -- scopeguard = { workspace = true
 crates/wasm/Cargo.toml:12:16     - Unknown word (cdylib)     -- crate-type = ["cdylib", "rlib"]
 crates/wasm/Cargo.toml:12:26     - Unknown word (rlib)       -- crate-type = ["cdylib", "rlib"]
 crates/wasm/Lib/_microdistlib.py:127:14    - Unknown word (distname)   -- rs = distname
@@ -1028,79 +1025,80 @@ scripts/redox/run-redoxer.sh:17:1      - Unknown word (redoxer)    -- redoxer ex
 scripts/release-wapm.sh:10:95     - Unknown word (WAPM)       -- features="${FEATURES_FOR_WAPM[*]}"
 scripts/release-wapm.sh:12:1      - Unknown word (wapm)       -- wapm publish
 scripts/release-wapm.sh:6:14      - Unknown word (WAPM)       -- FEATURES_FOR_WAPM=(stdlib zlib)
-scripts/update_lib/cmd_quick.py:277:38    - Unknown word (libregrtest) -- -> cpython/Lib/test/libregrtest (from DEPENDENCIES)
-scripts/update_lib/cmd_quick.py:277:9     - Unknown word (regrtest)   -- regrtest -> cpython/Lib/test
-scripts/update_lib/cmd_quick.py:285:58    - Unknown word (regrtest)    -- path overrides (e.g., regrtest)
-scripts/update_lib/deps.py:1067:65   - Unknown word (cjkencodings)     -- multibytecodec_support -> cjkencodings
-scripts/update_lib/deps.py:1327:14   - Unknown word (submods)          -- for top, submods in by_package.items
-scripts/update_lib/deps.py:1328:16   - Unknown word (submods)          -- if len(submods) > threshold:
-scripts/update_lib/deps.py:1330:27   - Unknown word (submods)          -- result[top] = submods
-scripts/update_lib/deps.py:1333:24   - Unknown word (submods)          -- for mod in submods:
-scripts/update_lib/deps.py:1439:62   - Unknown word (blocklisted)      -- cycle detection) and blocklisted modules
-scripts/update_lib/deps.py:217:31    - Unknown word (libregrtest) -- regrtest is in Lib/test/libregrtest/, not Lib/libregrtest
-scripts/update_lib/deps.py:217:53    - Unknown word (libregrtest) -- libregrtest/, not Lib/libregrtest/
-scripts/update_lib/deps.py:217:7     - Unknown word (regrtest)    -- # regrtest is in Lib/test/libregrtest
-scripts/update_lib/deps.py:218:6     - Unknown word (regrtest)    -- "regrtest": {
-scripts/update_lib/deps.py:219:23    - Unknown word (libregrtest) -- "lib": ["test/libregrtest"],
-scripts/update_lib/deps.py:220:24    - Unknown word (regrtest)    -- "test": ["test_regrtest"],
-scripts/update_lib/deps.py:221:24    - Unknown word (regrtestdata) -- "data": ["test/regrtestdata"],
-scripts/update_lib/deps.py:248:19    - Unknown word (dictcomps)    -- "test_dictcomps.py",
-scripts/update_lib/deps.py:249:19    - Unknown word (dictviews)    -- "test_dictviews.py",
-scripts/update_lib/deps.py:257:19    - Unknown word (listcomps)    -- "test_listcomps.py",
-scripts/update_lib/deps.py:282:19    - Unknown word (picklebuffer) -- "test_picklebuffer.py",
-scripts/update_lib/deps.py:293:19    - Unknown word (weakset)      -- "test_weakset.py",
-scripts/update_lib/deps.py:299:19    - Unknown word (codeccallbacks) -- "test_codeccallbacks.py",
-scripts/update_lib/deps.py:300:19    - Unknown word (codecencodings) -- "test_codecencodings_cn.py",
-scripts/update_lib/deps.py:301:19    - Unknown word (codecencodings) -- "test_codecencodings_hk.py",
-scripts/update_lib/deps.py:302:19    - Unknown word (codecencodings) -- "test_codecencodings_iso2022.py",
-scripts/update_lib/deps.py:303:19    - Unknown word (codecencodings) -- "test_codecencodings_jp.py",
-scripts/update_lib/deps.py:304:19    - Unknown word (codecencodings) -- "test_codecencodings_kr.py",
-scripts/update_lib/deps.py:306:19    - Unknown word (codecmaps)      -- "test_codecmaps_cn.py",
-scripts/update_lib/deps.py:307:19    - Unknown word (codecmaps)      -- "test_codecmaps_hk.py",
-scripts/update_lib/deps.py:308:19    - Unknown word (codecmaps)      -- "test_codecmaps_jp.py",
-scripts/update_lib/deps.py:309:19    - Unknown word (codecmaps)      -- "test_codecmaps_kr.py",
-scripts/update_lib/deps.py:310:19    - Unknown word (codecmaps)      -- "test_codecmaps_tw.py",
-scripts/update_lib/deps.py:311:19    - Unknown word (charmapcodec)   -- "test_charmapcodec.py",
-scripts/update_lib/deps.py:347:34    - Unknown word (regrtest)       -- support library (like regrtest)
-scripts/update_lib/deps.py:350:24    - Unknown word (wheeldata)      -- "data": ["test/wheeldata"],
-scripts/update_lib/deps.py:385:27    - Unknown word (localnet)       -- "test_urllib2_localnet.py",
-scripts/update_lib/deps.py:387:19    - Unknown word (urllibnet)      -- "test_urllibnet.py",
-scripts/update_lib/deps.py:407:19    - Unknown word (httpservers)    -- "test_httpservers.py",
-scripts/update_lib/deps.py:471:19    - Unknown word (threadsignals)  -- "test_threadsignals.py",
-scripts/update_lib/deps.py:478:19    - Unknown word (threadedtempfile) -- "test_threadedtempfile.py",
-scripts/update_lib/deps.py:486:19    - Unknown word (genericclass)     -- "test_genericclass.py",
-scripts/update_lib/deps.py:487:19    - Unknown word (subclassinit)     -- "test_subclassinit.py",
-scripts/update_lib/deps.py:494:19    - Unknown word (genexps)          -- "test_genexps.py",
-scripts/update_lib/deps.py:503:19    - Unknown word (descrtut)         -- "test_descrtut.py",
-scripts/update_lib/deps.py:522:19    - Unknown word (memoryio)         -- "test_memoryio.py",
-scripts/update_lib/deps.py:577:19    - Unknown word (docxmlrpc)        -- "test_docxmlrpc.py",
+scripts/update_lib/cmd_quick.py:286:38    - Unknown word (libregrtest) -- -> cpython/Lib/test/libregrtest (from DEPENDENCIES)
+scripts/update_lib/cmd_quick.py:286:9     - Unknown word (regrtest)   -- regrtest -> cpython/Lib/test
+scripts/update_lib/cmd_quick.py:294:58    - Unknown word (regrtest)    -- path overrides (e.g., regrtest)
+scripts/update_lib/deps.py:1026:56   - Unknown word (lineterm)         -- diff(a_lines, b_lines, lineterm=""):
+scripts/update_lib/deps.py:1178:65   - Unknown word (cjkencodings)     -- multibytecodec_support -> cjkencodings
+scripts/update_lib/deps.py:1438:14   - Unknown word (submods)          -- for top, submods in by_package.items
+scripts/update_lib/deps.py:1439:16   - Unknown word (submods)          -- if len(submods) > threshold:
+scripts/update_lib/deps.py:1441:27   - Unknown word (submods)          -- result[top] = submods
+scripts/update_lib/deps.py:1444:24   - Unknown word (submods)          -- for mod in submods:
+scripts/update_lib/deps.py:1550:62   - Unknown word (blocklisted)      -- cycle detection) and blocklisted modules
+scripts/update_lib/deps.py:218:31    - Unknown word (libregrtest) -- regrtest is in Lib/test/libregrtest/, not Lib/libregrtest
+scripts/update_lib/deps.py:218:53    - Unknown word (libregrtest) -- libregrtest/, not Lib/libregrtest/
+scripts/update_lib/deps.py:218:7     - Unknown word (regrtest)    -- # regrtest is in Lib/test/libregrtest
+scripts/update_lib/deps.py:219:6     - Unknown word (regrtest)    -- "regrtest": {
+scripts/update_lib/deps.py:220:23    - Unknown word (libregrtest) -- "lib": ["test/libregrtest"],
+scripts/update_lib/deps.py:221:24    - Unknown word (regrtest)    -- "test": ["test_regrtest"],
+scripts/update_lib/deps.py:222:24    - Unknown word (regrtestdata) -- "data": ["test/regrtestdata"],
+scripts/update_lib/deps.py:249:19    - Unknown word (dictcomps)    -- "test_dictcomps.py",
+scripts/update_lib/deps.py:250:19    - Unknown word (dictviews)    -- "test_dictviews.py",
+scripts/update_lib/deps.py:258:19    - Unknown word (listcomps)    -- "test_listcomps.py",
+scripts/update_lib/deps.py:283:19    - Unknown word (picklebuffer) -- "test_picklebuffer.py",
+scripts/update_lib/deps.py:294:19    - Unknown word (weakset)      -- "test_weakset.py",
+scripts/update_lib/deps.py:300:19    - Unknown word (codeccallbacks) -- "test_codeccallbacks.py",
+scripts/update_lib/deps.py:301:19    - Unknown word (codecencodings) -- "test_codecencodings_cn.py",
+scripts/update_lib/deps.py:302:19    - Unknown word (codecencodings) -- "test_codecencodings_hk.py",
+scripts/update_lib/deps.py:303:19    - Unknown word (codecencodings) -- "test_codecencodings_iso2022.py",
+scripts/update_lib/deps.py:304:19    - Unknown word (codecencodings) -- "test_codecencodings_jp.py",
+scripts/update_lib/deps.py:305:19    - Unknown word (codecencodings) -- "test_codecencodings_kr.py",
+scripts/update_lib/deps.py:307:19    - Unknown word (codecmaps)      -- "test_codecmaps_cn.py",
+scripts/update_lib/deps.py:308:19    - Unknown word (codecmaps)      -- "test_codecmaps_hk.py",
+scripts/update_lib/deps.py:309:19    - Unknown word (codecmaps)      -- "test_codecmaps_jp.py",
+scripts/update_lib/deps.py:310:19    - Unknown word (codecmaps)      -- "test_codecmaps_kr.py",
+scripts/update_lib/deps.py:311:19    - Unknown word (codecmaps)      -- "test_codecmaps_tw.py",
+scripts/update_lib/deps.py:312:19    - Unknown word (charmapcodec)   -- "test_charmapcodec.py",
+scripts/update_lib/deps.py:348:34    - Unknown word (regrtest)       -- support library (like regrtest)
+scripts/update_lib/deps.py:351:24    - Unknown word (wheeldata)      -- "data": ["test/wheeldata"],
+scripts/update_lib/deps.py:386:27    - Unknown word (localnet)       -- "test_urllib2_localnet.py",
+scripts/update_lib/deps.py:388:19    - Unknown word (urllibnet)      -- "test_urllibnet.py",
+scripts/update_lib/deps.py:408:19    - Unknown word (httpservers)    -- "test_httpservers.py",
+scripts/update_lib/deps.py:472:19    - Unknown word (threadsignals)  -- "test_threadsignals.py",
+scripts/update_lib/deps.py:479:19    - Unknown word (threadedtempfile) -- "test_threadedtempfile.py",
+scripts/update_lib/deps.py:487:19    - Unknown word (genericclass)     -- "test_genericclass.py",
+scripts/update_lib/deps.py:488:19    - Unknown word (subclassinit)     -- "test_subclassinit.py",
+scripts/update_lib/deps.py:495:19    - Unknown word (genexps)          -- "test_genexps.py",
+scripts/update_lib/deps.py:504:19    - Unknown word (descrtut)         -- "test_descrtut.py",
+scripts/update_lib/deps.py:523:19    - Unknown word (memoryio)         -- "test_memoryio.py",
+scripts/update_lib/deps.py:578:19    - Unknown word (docxmlrpc)        -- "test_docxmlrpc.py",
 scripts/update_lib/deps.py:5:34      - Unknown word (libregrtest) -- library paths (e.g., libregrtest at Lib/test/libregrtest
 scripts/update_lib/deps.py:5:58      - Unknown word (libregrtest) -- libregrtest at Lib/test/libregrtest/)
-scripts/update_lib/deps.py:619:19    - Unknown word (smtpnet)          -- "test_smtpnet.py",
-scripts/update_lib/deps.py:652:19    - Unknown word (crossinterp)      -- "test_crossinterp.py",
-scripts/update_lib/deps.py:742:6     - Unknown word (audiotests)       -- "audiotests": {
-scripts/update_lib/deps.py:747:19    - Unknown word (archivetestdata)  -- "data": ["archivetestdata"],
-scripts/update_lib/deps.py:750:19    - Unknown word (archivetestdata)  -- "data": ["archivetestdata"],
-scripts/update_lib/deps.py:754:19    - Unknown word (configdata)       -- "data": ["configdata"],
-scripts/update_lib/deps.py:757:19    - Unknown word (configdata)       -- "data": ["configdata"],
-scripts/update_lib/deps.py:761:19    - Unknown word (decimaltestdata)  -- "data": ["decimaltestdata"],
-scripts/update_lib/deps.py:764:19    - Unknown word (dtracedata)       -- "data": ["dtracedata"],
-scripts/update_lib/deps.py:767:19    - Unknown word (mathdata)         -- "data": ["mathdata"],
-scripts/update_lib/deps.py:770:19    - Unknown word (certdata)         -- "data": ["certdata"],
-scripts/update_lib/deps.py:773:19    - Unknown word (subprocessdata)   -- "data": ["subprocessdata"],
-scripts/update_lib/deps.py:776:19    - Unknown word (tkinterdata)      -- "data": ["tkinterdata"],
-scripts/update_lib/deps.py:779:19    - Unknown word (tokenizedata)     -- "data": ["tokenizedata"],
-scripts/update_lib/deps.py:782:19    - Unknown word (typinganndata)    -- "data": ["typinganndata"],
-scripts/update_lib/deps.py:787:23    - Unknown word (xmltestdata)      -- # XML tests share xmltestdata
-scripts/update_lib/deps.py:789:19    - Unknown word (xmltestdata)      -- "data": ["xmltestdata"],
-scripts/update_lib/deps.py:792:19    - Unknown word (xmltestdata)      -- "data": ["xmltestdata"],
-scripts/update_lib/deps.py:795:19    - Unknown word (xmltestdata)      -- "data": ["xmltestdata"],
-scripts/update_lib/deps.py:798:19    - Unknown word (xmltestdata)      -- "data": ["xmltestdata"],
-scripts/update_lib/deps.py:800:36    - Unknown word (cjkencodings)     -- Multibytecodec support needs cjkencodings
-scripts/update_lib/deps.py:802:19    - Unknown word (cjkencodings)     -- "data": ["cjkencodings"],
-scripts/update_lib/deps.py:806:19    - Unknown word (translationdata)  -- "data": ["translationdata"],
-scripts/update_lib/deps.py:808:7     - Unknown word (wheeldata)        -- # wheeldata is used by test_makefile
-scripts/update_lib/deps.py:810:19    - Unknown word (wheeldata)        -- "data": ["wheeldata"],
+scripts/update_lib/deps.py:620:19    - Unknown word (smtpnet)          -- "test_smtpnet.py",
+scripts/update_lib/deps.py:653:19    - Unknown word (crossinterp)      -- "test_crossinterp.py",
+scripts/update_lib/deps.py:743:6     - Unknown word (audiotests)       -- "audiotests": {
+scripts/update_lib/deps.py:748:19    - Unknown word (archivetestdata)  -- "data": ["archivetestdata"],
+scripts/update_lib/deps.py:751:19    - Unknown word (archivetestdata)  -- "data": ["archivetestdata"],
+scripts/update_lib/deps.py:755:19    - Unknown word (configdata)       -- "data": ["configdata"],
+scripts/update_lib/deps.py:758:19    - Unknown word (configdata)       -- "data": ["configdata"],
+scripts/update_lib/deps.py:762:19    - Unknown word (decimaltestdata)  -- "data": ["decimaltestdata"],
+scripts/update_lib/deps.py:765:19    - Unknown word (dtracedata)       -- "data": ["dtracedata"],
+scripts/update_lib/deps.py:768:19    - Unknown word (mathdata)         -- "data": ["mathdata"],
+scripts/update_lib/deps.py:771:19    - Unknown word (certdata)         -- "data": ["certdata"],
+scripts/update_lib/deps.py:774:19    - Unknown word (subprocessdata)   -- "data": ["subprocessdata"],
+scripts/update_lib/deps.py:777:19    - Unknown word (tkinterdata)      -- "data": ["tkinterdata"],
+scripts/update_lib/deps.py:780:19    - Unknown word (tokenizedata)     -- "data": ["tokenizedata"],
+scripts/update_lib/deps.py:783:19    - Unknown word (typinganndata)    -- "data": ["typinganndata"],
+scripts/update_lib/deps.py:788:23    - Unknown word (xmltestdata)      -- # XML tests share xmltestdata
+scripts/update_lib/deps.py:790:19    - Unknown word (xmltestdata)      -- "data": ["xmltestdata"],
+scripts/update_lib/deps.py:793:19    - Unknown word (xmltestdata)      -- "data": ["xmltestdata"],
+scripts/update_lib/deps.py:796:19    - Unknown word (xmltestdata)      -- "data": ["xmltestdata"],
+scripts/update_lib/deps.py:799:19    - Unknown word (xmltestdata)      -- "data": ["xmltestdata"],
+scripts/update_lib/deps.py:801:36    - Unknown word (cjkencodings)     -- Multibytecodec support needs cjkencodings
+scripts/update_lib/deps.py:803:19    - Unknown word (cjkencodings)     -- "data": ["cjkencodings"],
+scripts/update_lib/deps.py:807:19    - Unknown word (translationdata)  -- "data": ["translationdata"],
+scripts/update_lib/deps.py:809:7     - Unknown word (wheeldata)        -- # wheeldata is used by test_makefile
+scripts/update_lib/deps.py:811:19    - Unknown word (wheeldata)        -- "data": ["wheeldata"],
 scripts/update_lib/tests/test_deps.py:109:33    - Unknown word (regrtest)   -- paths = get_test_paths("regrtest", "cpython")
 scripts/update_lib/tests/test_deps.py:111:72    - Unknown word (regrtest)   -- cpython/Lib/test/test_regrtest"))
 scripts/update_lib/tests/test_deps.py:170:21    - Unknown word (codecencodings) -- Chain: test_codecencodings_kr -> multibytecodec

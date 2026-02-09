@@ -3,7 +3,7 @@ Repository: wireapp/wire-webapp
 Url: "https://github.com/wireapp/wire-webapp.git"
 Args: ["{apps,docs}/**/*.{js,ts,tsx,md,mjs,mts,cjs,cts}"]
 Lines:
- CSpell: Files checked: 2071, Issues found: 3753 in 961 files.
+ CSpell: Files checked: 2075, Issues found: 3770 in 962 files.
  exit code: 1
 apps/server/Server.ts:133:9     - Unknown word (frameguard)       -- frameguard: {action: 'deny'},
 apps/server/Server.ts:139:14    - Unknown word (hsts)             -- helmet.hsts({
@@ -539,8 +539,8 @@ apps/webapp/src/script/components/Conversation/useFilesUploadDropzone/buildCellF
 apps/webapp/src/script/components/Conversation/useFilesUploadDropzone/buildCellFileMetadata/buildCellFileMetadata.ts:45:51     - Unknown word (Millis)     -- videoMetadata.durationInMillis,
 apps/webapp/src/script/components/Conversation/useFilesUploadDropzone/buildCellFileMetadata/buildCellFileMetadata.ts:53:19     - Unknown word (Millis)     -- durationInMillis: audioMetadata.durationInMill
 apps/webapp/src/script/components/Conversation/useFilesUploadDropzone/buildCellFileMetadata/buildCellFileMetadata.ts:53:51     - Unknown word (Millis)     -- audioMetadata.durationInMillis,
-apps/webapp/src/script/components/Conversation/useFilesUploadDropzone/useFilesUploadDropzone.ts:125:11    - Unknown word (attatch)    -- await attatchMetadataToFiles(transformedAcc
-apps/webapp/src/script/components/Conversation/useFilesUploadDropzone/useFilesUploadDropzone.ts:182:9     - Unknown word (attatch)    -- const attatchMetadataToFiles = async
+apps/webapp/src/script/components/Conversation/useFilesUploadDropzone/useFilesUploadDropzone.ts:130:13    - Unknown word (attatch)    -- await attatchMetadataToFiles(transformedAcc
+apps/webapp/src/script/components/Conversation/useFilesUploadDropzone/useFilesUploadDropzone.ts:190:9     - Unknown word (attatch)    -- const attatchMetadataToFiles = async
 apps/webapp/src/script/components/Conversation/useFilesUploadState/useFilesUploadState.ts:36:15     - Unknown word (Millis)     -- durationInMillis?: number;
 apps/webapp/src/script/components/Conversation/useFilesUploadState/useFilesUploadState.ts:42:15     - Unknown word (Millis)     -- durationInMillis?: number;
 apps/webapp/src/script/components/Conversation/useFilesUploadState/useFilesUploadState.ts:66:19     - Unknown word (Millis)     -- durationInMillis?: number;
@@ -647,9 +647,12 @@ apps/webapp/src/script/components/InViewport/InViewport.tsx:22:9      - Unknown 
 apps/webapp/src/script/components/InViewport/InViewport.tsx:31:36     - Unknown word (overlayed)  -- check if the element is overlayed by something else. Can
 apps/webapp/src/script/components/InViewport/InViewport.tsx:61:9      - Unknown word (overlayed)  -- overlayedObserver.removeElement
 apps/webapp/src/script/components/InViewport/InViewport.tsx:99:7      - Unknown word (overlayed)  -- overlayedObserver.trackElement
+apps/webapp/src/script/components/InputBar/FilePreviews/FilePreviews.test.tsx:36:41     - Unknown word (conv)       -- nversationQualifiedId = {id: 'conv-id', domain: 'example
 apps/webapp/src/script/components/InputBar/FilePreviews/FilePreviews.tsx:20:32     - Unknown word (formkit)    -- useAutoAnimate} from '@formkit/auto-animate/react'
 apps/webapp/src/script/components/InputBar/FilePreviews/FilePreviews.tsx:21:29     - Unknown word (wireapp)    -- QualifiedId} from '@wireapp/api-client/lib/user
 apps/webapp/src/script/components/InputBar/FilePreviews/FilePreviews.tsx:22:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
+apps/webapp/src/script/components/InputBar/FilePreviews/FilePreviews.tsx:27:11     - Unknown word (Previewable) -- import {isPreviewableImage} from 'Util/ImageUtil
+apps/webapp/src/script/components/InputBar/FilePreviews/FilePreviews.tsx:70:26     - Unknown word (Previewable) -- (isImage(file) && isPreviewableImage({mimeType: file
 apps/webapp/src/script/components/InputBar/FilePreviews/common/FilePreviewErrorMoreButton/FilePreviewErrorMoreButton.tsx:22:26     - Unknown word (wireapp)    -- import {MoreIcon} from '@wireapp/react-ui-kit';
 apps/webapp/src/script/components/InputBar/FilePreviews/common/FilePreviewPlayButton/FilePreviewPlayButton.tsx:20:26     - Unknown word (wireapp)    -- import {PlayIcon} from '@wireapp/react-ui-kit';
 apps/webapp/src/script/components/InputBar/FilePreviews/common/MediaFilePreviewCard/MediaFilePreviewCard.tsx:22:27     - Unknown word (wireapp)    -- import {AlertIcon} from '@wireapp/react-ui-kit';
@@ -821,6 +824,8 @@ apps/webapp/src/script/components/MessagesList/Message/ContentMessage/asset/Mess
 apps/webapp/src/script/components/MessagesList/Message/ContentMessage/asset/MultipartAssetPreview.tsx:22:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 apps/webapp/src/script/components/MessagesList/Message/ContentMessage/asset/MultipartAssetPreview.tsx:24:28     - Unknown word (wireapp)    -- {ICellAsset} from '@wireapp/protocol-messaging'
 apps/webapp/src/script/components/MessagesList/Message/ContentMessage/asset/MultipartAssetPreview.tsx:25:45     - Unknown word (wireapp)    -- leFilesIcon, PlayIcon} from '@wireapp/react-ui-kit';
+apps/webapp/src/script/components/MessagesList/Message/ContentMessage/asset/MultipartAssetPreview.tsx:30:11     - Unknown word (Previewable) -- import {isPreviewableImage} from 'Util/ImageUtil
+apps/webapp/src/script/components/MessagesList/Message/ContentMessage/asset/MultipartAssetPreview.tsx:58:29     - Unknown word (Previewable) -- canPreviewImage = isPreviewableImage({mimeType: firstAsset
 apps/webapp/src/script/components/MessagesList/Message/ContentMessage/asset/MultipartAssets/FileAssetCard/FileAssetWithPreview/FileAssetWithPreview.tsx:22:27     - Unknown word (wireapp)    -- import {AlertIcon} from '@wireapp/react-ui-kit';
 apps/webapp/src/script/components/MessagesList/Message/ContentMessage/asset/MultipartAssets/FileAssetCard/common/FileAssetOptions/FileAssetOptions.tsx:20:40     - Unknown word (wireapp)    -- ropdownMenu, MoreIcon} from '@wireapp/react-ui-kit';
 apps/webapp/src/script/components/MessagesList/Message/ContentMessage/asset/MultipartAssets/ImageAssetCard/ImageAssetCard.tsx:20:28     - Unknown word (wireapp)    -- {ICellAsset} from '@wireapp/protocol-messaging'
@@ -831,9 +836,12 @@ apps/webapp/src/script/components/MessagesList/Message/ContentMessage/asset/Mult
 apps/webapp/src/script/components/MessagesList/Message/ContentMessage/asset/MultipartAssets/MultipartAssets.test.tsx:162:29    - Unknown word (conv)       -- conversationId="conv-123"
 apps/webapp/src/script/components/MessagesList/Message/ContentMessage/asset/MultipartAssets/MultipartAssets.test.tsx:178:48    - Unknown word (conv)       -- hash = '#/conversation/conv-123/section';
 apps/webapp/src/script/components/MessagesList/Message/ContentMessage/asset/MultipartAssets/MultipartAssets.test.tsx:23:28     - Unknown word (wireapp)    -- {ICellAsset} from '@wireapp/protocol-messaging'
+apps/webapp/src/script/components/MessagesList/Message/ContentMessage/asset/MultipartAssets/MultipartAssets.test.tsx:457:43    - Unknown word (previewable) -- a file card for non-previewable image formats', async
 apps/webapp/src/script/components/MessagesList/Message/ContentMessage/asset/MultipartAssets/MultipartAssets.test.tsx:79:29     - Unknown word (conv)       -- conversationId="conv-123"
+apps/webapp/src/script/components/MessagesList/Message/ContentMessage/asset/MultipartAssets/MultipartAssets.tsx:104:29    - Unknown word (Previewable) -- canPreviewImage = isPreviewableImage({mimeType: contentType
 apps/webapp/src/script/components/MessagesList/Message/ContentMessage/asset/MultipartAssets/MultipartAssets.tsx:22:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 apps/webapp/src/script/components/MessagesList/Message/ContentMessage/asset/MultipartAssets/MultipartAssets.tsx:24:28     - Unknown word (wireapp)    -- {ICellAsset} from '@wireapp/protocol-messaging'
+apps/webapp/src/script/components/MessagesList/Message/ContentMessage/asset/MultipartAssets/MultipartAssets.tsx:28:11     - Unknown word (Previewable) -- import {isPreviewableImage} from 'Util/ImageUtil
 apps/webapp/src/script/components/MessagesList/Message/ContentMessage/asset/MultipartAssets/VideoAssetCard/VideoAssetPlayer/VideoAssetError/VideoAssetError.tsx:20:27     - Unknown word (wireapp)    -- import {AlertIcon} from '@wireapp/react-ui-kit';
 apps/webapp/src/script/components/MessagesList/Message/ContentMessage/asset/MultipartAssets/VideoAssetCard/VideoAssetPlayer/VideoAssetPlayer.tsx:143:30    - Unknown word (UNFOCUSABLE) -- tabIndex={TabIndex.UNFOCUSABLE}
 apps/webapp/src/script/components/MessagesList/Message/ContentMessage/asset/MultipartAssets/VideoAssetCard/VideoAssetPlayer/VideoAssetPlayer.tsx:20:26     - Unknown word (wireapp)    -- import {TabIndex} from '@wireapp/react-ui-kit';
@@ -1096,7 +1104,7 @@ apps/webapp/src/script/components/TitleBar/TitleBar.test.tsx:25:25     - Unknown
 apps/webapp/src/script/components/TitleBar/TitleBar.test.tsx:26:26     - Unknown word (wireapp)    -- import * as uiKit from '@wireapp/react-ui-kit';
 apps/webapp/src/script/components/TitleBar/TitleBar.test.tsx:27:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
 apps/webapp/src/script/components/TitleBar/TitleBar.test.tsx:43:13     - Unknown word (wireapp)    -- jest.mock('@wireapp/react-ui-kit', () =
-apps/webapp/src/script/components/TitleBar/TitleBar.tsx:196:84    - Unknown word (MILLIS)     -- ?.remove(), TIME_IN_MILLIS.SECOND);
+apps/webapp/src/script/components/TitleBar/TitleBar.tsx:193:84    - Unknown word (MILLIS)     -- ?.remove(), TIME_IN_MILLIS.SECOND);
 apps/webapp/src/script/components/TitleBar/TitleBar.tsx:24:26     - Unknown word (tsyringe)   -- import {container} from 'tsyringe';
 apps/webapp/src/script/components/TitleBar/TitleBar.tsx:26:89     - Unknown word (wireapp)    -- useMatchMedia} from '@wireapp/react-ui-kit';
 apps/webapp/src/script/components/TitleBar/TitleBar.tsx:27:30     - Unknown word (wireapp)    -- WebAppEvents} from '@wireapp/webapp-events';
@@ -3107,15 +3115,26 @@ apps/webapp/src/script/util/Environment.ts:20:25     - Unknown word (wireapp)   
 apps/webapp/src/script/util/ErrorUtil.ts:20:56     - Unknown word (wireapp)    -- SyntheticErrorLabel} from '@wireapp/api-client/lib/http
 apps/webapp/src/script/util/FileTypeUtil.test.ts:93:28     - Unknown word (docxs)      -- expect(isFileEditable('docxs')).toBe(false);
 apps/webapp/src/script/util/FileTypeUtil.test.ts:94:28     - Unknown word (xdocx)      -- expect(isFileEditable('xdocx')).toBe(false);
-apps/webapp/src/script/util/ImageUtil.test.ts:20:17     - Unknown word (Exif)       -- import {imageHasExifData, stripImageExifData
-apps/webapp/src/script/util/ImageUtil.test.ts:20:37     - Unknown word (Exif)       -- imageHasExifData, stripImageExifData} from './ImageUtil
-apps/webapp/src/script/util/ImageUtil.test.ts:22:15     - Unknown word (Exif)       -- const jpegWithExif = new Blob([new Uint
-apps/webapp/src/script/util/ImageUtil.test.ts:26:18     - Unknown word (Exif)       -- const jpegWithoutExif = new Blob([new Uint
-apps/webapp/src/script/util/ImageUtil.test.ts:75:21     - Unknown word (Exif)       -- describe('imageHasExifData', () => {
-apps/webapp/src/script/util/ImageUtil.test.ts:76:36     - Unknown word (EXIF)       -- returns true for JPEG with EXIF data', async () =>
-apps/webapp/src/script/util/ImageUtil.test.ts:81:40     - Unknown word (EXIF)       -- false for JPEG without EXIF data', async () =>
-apps/webapp/src/script/util/ImageUtil.test.ts:93:29     - Unknown word (EXIF)       -- successfully strips EXIF data and returns a new
+apps/webapp/src/script/util/FileTypeUtil.test.ts:95:28     - Unknown word (xdoc)       -- expect(isFileEditable('xdoc')).toBe(false);
+apps/webapp/src/script/util/ImageUtil.test.ts:120:15    - Unknown word (Previewable) -- describe('isPreviewableImage', () => {
+apps/webapp/src/script/util/ImageUtil.test.ts:122:16    - Unknown word (Previewable) -- expect(isPreviewableImage({mimeType: 'image
+apps/webapp/src/script/util/ImageUtil.test.ts:123:16    - Unknown word (Previewable) -- expect(isPreviewableImage({mimeType: 'image
+apps/webapp/src/script/util/ImageUtil.test.ts:124:16    - Unknown word (Previewable) -- expect(isPreviewableImage({mimeType: 'image
+apps/webapp/src/script/util/ImageUtil.test.ts:20:17     - Unknown word (Exif)       -- import {imageHasExifData, isPreviewableImage
+apps/webapp/src/script/util/ImageUtil.test.ts:20:29     - Unknown word (Previewable) -- imageHasExifData, isPreviewableImage, stripImageExifData
+apps/webapp/src/script/util/ImageUtil.test.ts:20:57     - Unknown word (Exif)        -- isPreviewableImage, stripImageExifData} from './ImageUtil
+apps/webapp/src/script/util/ImageUtil.test.ts:22:15     - Unknown word (Exif)        -- const jpegWithExif = new Blob([new Uint
+apps/webapp/src/script/util/ImageUtil.test.ts:26:18     - Unknown word (Exif)        -- const jpegWithoutExif = new Blob([new Uint
+apps/webapp/src/script/util/ImageUtil.test.ts:75:21     - Unknown word (Exif)        -- describe('imageHasExifData', () => {
+apps/webapp/src/script/util/ImageUtil.test.ts:76:36     - Unknown word (EXIF)        -- returns true for JPEG with EXIF data', async () =>
+apps/webapp/src/script/util/ImageUtil.test.ts:81:40     - Unknown word (EXIF)        -- false for JPEG without EXIF data', async () =>
+apps/webapp/src/script/util/ImageUtil.test.ts:93:29     - Unknown word (EXIF)        -- successfully strips EXIF data and returns a new
 apps/webapp/src/script/util/ImageUtil.ts:113:15    - Unknown word (Exif)       -- const containsExifData = (view: DataView
+apps/webapp/src/script/util/ImageUtil.ts:161:7     - Unknown word (PREVIEWABLE) -- const PREVIEWABLE_IMAGE_MIME_TYPES = new
+apps/webapp/src/script/util/ImageUtil.ts:162:7     - Unknown word (PREVIEWABLE) -- const PREVIEWABLE_IMAGE_EXTENSIONS = new
+apps/webapp/src/script/util/ImageUtil.ts:164:16    - Unknown word (Previewable) -- export const isPreviewableImage = ({
+apps/webapp/src/script/util/ImageUtil.ts:174:29    - Unknown word (PREVIEWABLE) -- normalizedMimeType && PREVIEWABLE_IMAGE_MIME_TYPES.has
+apps/webapp/src/script/util/ImageUtil.ts:180:35    - Unknown word (PREVIEWABLE) -- normalizedExtension && PREVIEWABLE_IMAGE_EXTENSIONS.has
 apps/webapp/src/script/util/ImageUtil.ts:20:24     - Unknown word (Exif)       -- export const stripImageExifData = async (image:
 apps/webapp/src/script/util/ImageUtil.ts:29:40     - Unknown word (EXIF)       -- Error(`Failed to strip EXIF data: ${error.message
 apps/webapp/src/script/util/ImageUtil.ts:73:7      - Unknown word (EXIF)       -- const EXIF_MARKER = 0xffe1;
@@ -3332,7 +3351,7 @@ apps/webapp/src/types/i18n.d.ts:2071:11   - Unknown word (Callbackground) -- 'vi
 apps/webapp/src/types/i18n.d.ts:2072:11   - Unknown word (Callbackground) -- 'videoCallbackgroundBlurHeadline': `Background
 apps/webapp/src/types/i18n.d.ts:2073:11   - Unknown word (Callbackground) -- 'videoCallbackgroundNotBlurred': `Don\'t
 apps/webapp/src/types/i18n.d.ts:2074:11   - Unknown word (Callvideo)      -- 'videoCallvideoInputCamera': `Camera
-apps/webapp/src/types/i18n.d.ts:402:28    - Unknown word (Combained)   -- cells.folderBreadcrumbCombained': `Show more`;
+apps/webapp/src/types/i18n.d.ts:403:28    - Unknown word (Combained)   -- cells.folderBreadcrumbCombained': `Show more`;
 apps/webapp/src/types/i18n.d.ts:641:38    - Unknown word (showmore)    -- nversationCreateTeam': `with [showmore]all team members[/showmore
 apps/webapp/src/types/i18n.d.ts:641:65    - Unknown word (showmore)    -- showmore]all team members[/showmore]`;
 apps/webapp/src/types/i18n.d.ts:642:43    - Unknown word (showmore)    -- ationCreateTeamGuest': `with [showmore]all team members and
@@ -3419,9 +3438,7 @@ apps/webapp/test/e2e_tests/backend/authRepository.e2e.ts:20:34     - Unknown wor
 apps/webapp/test/e2e_tests/backend/authRepository.e2e.ts:86:7      - Unknown word (dryrun)     -- dryrun: false,
 apps/webapp/test/e2e_tests/backend/brigRepository.e2e.ts:198:11    - Unknown word (collabora)  -- collabora: {
 apps/webapp/test/e2e_tests/backend/brigRepository.e2e.ts:207:15    - Unknown word (usermeta)   -- usermetaTags: {
-apps/webapp/test/e2e_tests/backend/callingServiceClient.e2e.ts:46:38     - Unknown word (nginz)      -- websocketUrl: 'wss://staging-nginz-ssl.zinfra.io',
-apps/webapp/test/e2e_tests/backend/callingServiceClient.e2e.ts:46:48     - Unknown word (zinfra)     -- //staging-nginz-ssl.zinfra.io',
-apps/webapp/test/e2e_tests/backend/callingServiceClient.e2e.ts:52:9      - Unknown word (zcall)      -- zcall: false,
+apps/webapp/test/e2e_tests/backend/callingServiceClient.e2e.ts:46:9      - Unknown word (zcall)      -- zcall: false,
 apps/webapp/test/e2e_tests/backend/featureConfigRepository.e2e.ts:20:58     - Unknown word (wireapp)    -- FEATURE_STATUS} from '@wireapp/api-client/lib/team
 apps/webapp/test/e2e_tests/backend/inbucketClient.e2e.ts:22:14     - Unknown word (Inbucket)   -- export class InbucketClientE2E {
 apps/webapp/test/e2e_tests/backend/inbucketClient.e2e.ts:24:20     - Unknown word (inbucket)   -- private readonly inbucketUsername;
@@ -3476,15 +3493,6 @@ apps/webapp/test/e2e_tests/specs/Authentication/authentication.spec.ts:159:75   
 apps/webapp/test/e2e_tests/specs/Authentication/authentication.spec.ts:210:73    - Unknown word (networkidle) -- 30_000, waitUntil: 'networkidle'});
 apps/webapp/test/e2e_tests/specs/Authentication/authentication.spec.ts:57:71     - Unknown word (networkidle) -- 30_000, waitUntil: 'networkidle'});
 apps/webapp/test/e2e_tests/specs/Authentication/authentication.spec.ts:89:73     - Unknown word (networkidle) -- 30_000, waitUntil: 'networkidle'});
-apps/webapp/test/e2e_tests/specs/CriticalFlow/Cells/editMultipartMessage-TC-8786.spec.ts:30:20     - Unknown word (integrationtest) -- userA.firstName = 'integrationtest';
-apps/webapp/test/e2e_tests/specs/CriticalFlow/Cells/editMultipartMessage-TC-8786.spec.ts:31:19     - Unknown word (integrationtest) -- userA.lastName = 'integrationtest';
-apps/webapp/test/e2e_tests/specs/CriticalFlow/Cells/editMultipartMessage-TC-8786.spec.ts:32:19     - Unknown word (integrationtest) -- userA.fullName = 'integrationtest';
-apps/webapp/test/e2e_tests/specs/CriticalFlow/Cells/replyingToMultipartMessage-TC-8787.spec.ts:30:20     - Unknown word (integrationtest) -- userA.firstName = 'integrationtest';
-apps/webapp/test/e2e_tests/specs/CriticalFlow/Cells/replyingToMultipartMessage-TC-8787.spec.ts:31:19     - Unknown word (integrationtest) -- userA.lastName = 'integrationtest';
-apps/webapp/test/e2e_tests/specs/CriticalFlow/Cells/replyingToMultipartMessage-TC-8787.spec.ts:32:19     - Unknown word (integrationtest) -- userA.fullName = 'integrationtest';
-apps/webapp/test/e2e_tests/specs/CriticalFlow/Cells/uploadingFileInGroupConversation.spec.ts:30:20     - Unknown word (integrationtest) -- userA.firstName = 'integrationtest';
-apps/webapp/test/e2e_tests/specs/CriticalFlow/Cells/uploadingFileInGroupConversation.spec.ts:31:19     - Unknown word (integrationtest) -- userA.lastName = 'integrationtest';
-apps/webapp/test/e2e_tests/specs/CriticalFlow/Cells/uploadingFileInGroupConversation.spec.ts:32:19     - Unknown word (integrationtest) -- userA.fullName = 'integrationtest';
 apps/webapp/test/e2e_tests/specs/CriticalFlow/accountManagement-TC-8639.spec.ts:41:35     - Unknown word (applock)    -- step('Member enables applock and sets their password
 apps/webapp/test/e2e_tests/specs/CriticalFlow/accountManagement-TC-8639.spec.ts:47:39     - Unknown word (applock)    -- 'Member verifies if applock is working', async
 apps/webapp/test/e2e_tests/specs/CriticalFlow/accountManagement-TC-8639.spec.ts:62:37     - Unknown word (inbucket)   -- activationUrl = await api.inbucket.getAccountActivationURL
@@ -3500,6 +3508,15 @@ apps/webapp/test/e2e_tests/specs/CriticalFlow/groupVideoCall-TC-8637.spec.ts:26:
 apps/webapp/test/e2e_tests/specs/CriticalFlow/groupVideoCall-TC-8637.spec.ts:28:21     - Unknown word (Backoffice) -- // ToDo(WPB-22442): Backoffice does not unlock calling
 apps/webapp/test/e2e_tests/specs/CriticalFlow/personalAccountLifecycle-TC-8638.spec.ts:175:27    - Unknown word (inbucket)   -- const url = await api.inbucket.getAccountDeletionURL
 apps/webapp/test/e2e_tests/specs/Delete/delete.spec.ts:338:24    - Unknown word (Veryify)    -- await test.step('Veryify send action', async
+apps/webapp/test/e2e_tests/specs/Drive/editMultipartMessage-TC-8786.spec.ts:30:20     - Unknown word (integrationtest) -- userA.firstName = 'integrationtest';
+apps/webapp/test/e2e_tests/specs/Drive/editMultipartMessage-TC-8786.spec.ts:31:19     - Unknown word (integrationtest) -- userA.lastName = 'integrationtest';
+apps/webapp/test/e2e_tests/specs/Drive/editMultipartMessage-TC-8786.spec.ts:32:19     - Unknown word (integrationtest) -- userA.fullName = 'integrationtest';
+apps/webapp/test/e2e_tests/specs/Drive/replyingToMultipartMessage-TC-8787.spec.ts:30:20     - Unknown word (integrationtest) -- userA.firstName = 'integrationtest';
+apps/webapp/test/e2e_tests/specs/Drive/replyingToMultipartMessage-TC-8787.spec.ts:31:19     - Unknown word (integrationtest) -- userA.lastName = 'integrationtest';
+apps/webapp/test/e2e_tests/specs/Drive/replyingToMultipartMessage-TC-8787.spec.ts:32:19     - Unknown word (integrationtest) -- userA.fullName = 'integrationtest';
+apps/webapp/test/e2e_tests/specs/Drive/uploadingFileInGroupConversation-TC-8785.spec.ts:30:20     - Unknown word (integrationtest) -- userA.firstName = 'integrationtest';
+apps/webapp/test/e2e_tests/specs/Drive/uploadingFileInGroupConversation-TC-8785.spec.ts:31:19     - Unknown word (integrationtest) -- userA.lastName = 'integrationtest';
+apps/webapp/test/e2e_tests/specs/Drive/uploadingFileInGroupConversation-TC-8785.spec.ts:32:19     - Unknown word (integrationtest) -- userA.fullName = 'integrationtest';
 apps/webapp/test/e2e_tests/specs/Folders/folders.spec.ts:116:54    - Unknown word (Converations) -- conversationSidebar().allConverationsButton.click();
 apps/webapp/test/e2e_tests/specs/Folders/folders.spec.ts:140:54    - Unknown word (Converations) -- conversationSidebar().allConverationsButton.click();
 apps/webapp/test/e2e_tests/specs/RegisterSpecs/register.spec.ts:83:15     - Unknown word (blablablawire) -- input: 'blablablawire.engineering',

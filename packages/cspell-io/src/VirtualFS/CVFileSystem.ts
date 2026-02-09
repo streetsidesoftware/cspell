@@ -1,5 +1,5 @@
-import type { VFileSystem, VFileSystemCore, VFindUpPredicate, VFindUpURLOptions } from '../VFileSystem.js';
 import { findUpFromUrl } from './findUpFromUrl.js';
+import type { VFileSystem, VFileSystemCore, VFindUpPredicate, VFindUpURLOptions } from './VFileSystem.js';
 
 export class CVFileSystem implements VFileSystem {
     #core: VFileSystemCore;

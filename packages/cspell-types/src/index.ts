@@ -122,6 +122,7 @@ export type {
 } from './DictionaryDefinition.js';
 export type { CharacterSet, CharacterSetCosts, DictionaryInformation, EditCosts } from './DictionaryInformation.js';
 export type { Feature, Features } from './features.js';
+export { mergeConfig } from './merge.js';
 export type { ParsedText, Parser, ParseResult, ParserName, ParserOptions } from './Parser/index.js';
 export type { SuggestionCostMapDef, SuggestionCostsDefs } from './suggestionCostsDef.js';
 export type { SuggestionsConfiguration } from './SuggestionsConfiguration.js';
