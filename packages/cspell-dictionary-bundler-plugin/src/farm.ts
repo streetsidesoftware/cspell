@@ -4,7 +4,7 @@
  * @module
  */
 
-import { Starter } from './index.ts';
+import { InlineCSpellConfig } from './index.ts';
 
 /**
  * Farm plugin
@@ -19,6 +19,6 @@ import { Starter } from './index.ts';
  * }
  * ```
  */
-const farm = Starter.farm as typeof Starter.farm;
+const farm = InlineCSpellConfig.farm as typeof InlineCSpellConfig.farm;
 export default farm;
 export { farm as 'module.exports' };

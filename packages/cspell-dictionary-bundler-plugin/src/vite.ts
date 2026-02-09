@@ -4,7 +4,7 @@
  * @module
  */
 
-import { Starter } from './index.ts';
+import { InlineCSpellConfig } from './index.ts';
 
 /**
  * Vite plugin
@@ -19,6 +19,6 @@ import { Starter } from './index.ts';
  * })
  * ```
  */
-const vite = Starter.vite as typeof Starter.vite;
+const vite = InlineCSpellConfig.vite as typeof InlineCSpellConfig.vite;
 export default vite;
 export { vite as 'module.exports' };

@@ -4,7 +4,7 @@
  * @module
  */
 
-import { Starter } from './index.ts';
+import { InlineCSpellConfig } from './index.ts';
 
 /**
  * Rollup plugin
@@ -19,6 +19,6 @@ import { Starter } from './index.ts';
  * }
  * ```
  */
-const rollup = Starter.rollup as typeof Starter.rollup;
+const rollup = InlineCSpellConfig.rollup as typeof InlineCSpellConfig.rollup;
 export default rollup;
 export { rollup as 'module.exports' };

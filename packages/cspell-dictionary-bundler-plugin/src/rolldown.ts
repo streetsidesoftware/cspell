@@ -4,7 +4,7 @@
  * @module
  */
 
-import { Starter } from './index.ts';
+import { InlineCSpellConfig } from './index.ts';
 
 /**
  * Rolldown plugin
@@ -19,6 +19,6 @@ import { Starter } from './index.ts';
  * }
  * ```
  */
-const rolldown = Starter.rolldown as typeof Starter.rolldown;
+const rolldown = InlineCSpellConfig.rolldown as typeof InlineCSpellConfig.rolldown;
 export default rolldown;
 export { rolldown as 'module.exports' };

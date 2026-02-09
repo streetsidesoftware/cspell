@@ -5,12 +5,11 @@ const baseConfig: UserConfig = {
     outDir: 'dist',
     format: ['esm'],
     target: 'Node20',
-    fixedExtension: false,
     dts: true,
     sourcemap: true,
     clean: true,
-    platform: 'neutral',
-    inlineOnly: ['gensequence'],
+    platform: 'node',
+    inlineOnly: false,
 };
 
 const config: UserConfig[] = defineConfig([baseConfig]);

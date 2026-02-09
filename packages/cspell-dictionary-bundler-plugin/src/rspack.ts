@@ -4,7 +4,7 @@
  * @module
  */
 
-import { Starter } from './index.ts';
+import { InlineCSpellConfig } from './index.ts';
 
 /**
  * Rspack plugin
@@ -19,6 +19,6 @@ import { Starter } from './index.ts';
  * }
  * ```
  */
-const rspack = Starter.rspack as typeof Starter.rspack;
+const rspack = InlineCSpellConfig.rspack as typeof InlineCSpellConfig.rspack;
 export default rspack;
 export { rspack as 'module.exports' };

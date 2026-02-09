@@ -7,6 +7,7 @@
     "access": "public",
     "provenance": true
   },
+  "private": true,
   "license": "MIT",
   "keywords": [
     "cspell",
@@ -27,7 +28,8 @@
     "./package.json": "./package.json"
   },
   "files": [
-    "dist"
+    "dist/*.mjs",
+    "dist/*.d.ts"
   ],
   "engines": {
     "node": ">=20.18.0"
@@ -40,12 +42,18 @@
     "watch": "tsdown --watch",
     "test": "pnpm build:tsc && vitest run",
     "test:watch": "vitest",
+    "coverage": "vitest run --coverage",
     "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
+    "@rollup/pluginutils": "^5.3.0",
+    "cspell-config-lib": "workspace:*",
+    "cspell-trie-lib": "workspace:*",
     "unplugin": "^3.0.0"
   },
   "devDependencies": {
+    "@cspell/cspell-types": "workspace:*",
+    "@cspell/dict-html-symbol-entities": "^4.0.5",
     "@sxzz/test-utils": "^0.5.15",
     "vitest": "~4.0.18"
   }

@@ -4,7 +4,7 @@
  * @module
  */
 
-import { Starter } from './index.ts';
+import { InlineCSpellConfig } from './index.ts';
 
 /**
  * Esbuild plugin
@@ -17,6 +17,6 @@ import { Starter } from './index.ts';
  * build({ plugins: [Starter()] })
 ```
  */
-const esbuild = Starter.esbuild as typeof Starter.esbuild;
+const esbuild = InlineCSpellConfig.esbuild as typeof InlineCSpellConfig.esbuild;
 export default esbuild;
 export { esbuild as 'module.exports' };

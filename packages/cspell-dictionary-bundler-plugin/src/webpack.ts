@@ -4,7 +4,7 @@
  * @module
  */
 
-import { Starter } from './index.ts';
+import { InlineCSpellConfig } from './index.ts';
 
 /**
  * Webpack plugin
@@ -19,6 +19,6 @@ import { Starter } from './index.ts';
  * }
  * ```
  */
-const webpack = Starter.webpack as typeof Starter.webpack;
+const webpack = InlineCSpellConfig.webpack as typeof InlineCSpellConfig.webpack;
 export default webpack;
 export { webpack as 'module.exports' };
