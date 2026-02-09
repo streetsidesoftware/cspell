@@ -3,9 +3,9 @@ Repository: iluwatar/java-design-patterns
 Url: https://github.com/iluwatar/java-design-patterns.git
 Args: '["**/*.md","**/*.java"]'
 Summary:
-  files: 1992
-  filesWithIssues: 1970
-  issues: 11660
+  files: 2039
+  filesWithIssues: 2017
+  issues: 11927
   errors: 0
 Errors: []
 
@@ -131,7 +131,22 @@ issues:
   - "currying/README.md:141:20       scifi           U       Book.AddAuthor scifiBookFunc = Book.builder"
   - "currying/README.md:141:67       SCIFI           U       builder().withGenre(Genre.SCIFI);"
   - "currying/src/test/java/com/iluwatar/currying/BookCurryingTest.java:38:22        initialise      U       public static void initialiseBook() {"
-  - "data-access-object/README.md:64:176         RDBMS           U       DBCustomerDao` is the real RDBMS implementation."
+  - "dao-factory/README.md:22:82         seperate (separate)     U       Factory patterns to seperate business logic from"
+  - "dao-factory/README.md:48:174        RDBMS                   U       relational database (RDBMS), a MongoDB (object"
+  - "dao-factory/README.md:147:17        Gson                    U       private final Gson gson;"
+  - "dao-factory/README.md:147:22        gson                    U       private final Gson gson;"
+  - "dao-factory/README.md:241:25        Inmemory                U       List.of(customerInmemory1, customerInmemory2"
+  - "dao-factory/README.md:274:50        daofactory              U       i.d.App com.iluwatar.daofactory.App - H2 - Create customer"
+  - "dao-factory/README.md:286:110       Masca                   U       0286dbc2bc5c1, name=Masca)"
+  - "dao-factory/README.md:295:87        Quang                   U       Customer(id=2, name=Quang)"
+  - "dao-factory/README.md:296:87        Nhat                    U       Customer(id=3, name=Nhat)"
+  - "dao-factory/README.md:319:43        Caveof                  U       Patterns and Architecture (CaveofProgramming)](https:"
+  - "dao-factory/README.md:347:131       SQLDAO                  U       data sources (e.g., MySQLDAO, OracleDAO), DAO Factory"
+  - "dao-factory/src/main/java/com/iluwatar/daofactory/DAOFactory.java:32:4          approriate (appropriate)    U       * approriate DAO implementation without"
+  - "dao-factory/src/main/java/com/iluwatar/daofactory/DAOFactoryProvider.java:47:44         intance (instance, intense)     U       concrete {@link DAOFactory} intance based on the specified"
+  - "dao-factory/src/main/java/com/iluwatar/daofactory/H2CustomerDAO.java:75:34          Custome (Custom, Customs, Costume, Customer)    U       new CustomException(\"Custome null or customer id"
+  - "dao-factory/src/test/java/com/iluwatar/daofactory/FlatFileCustomerDAOTest.java:477:7        Clas (Class)    U       /** Clas test with scenario Delete"
+  - "dao-factory/src/test/java/com/iluwatar/daofactory/H2CustomerDAOTest.java:49:53          testdb      U       DB_URL = \"jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1\";"
   - "data-access-object/README.md:144:54         Danson          U       Customer(4, \"Dan\", \"Danson\");"
   - "data-access-object/README.md:148:31         Danielson       U       customer.setLastName(\"Danielson\");"
   - "data-access-object/README.md:152:36         cust            U       customerStream.forEach(cust -> LOGGER.info(cust"
@@ -158,7 +173,6 @@ issues:
   - "dependency-injection/README.md:107:9        guice           U       var guiceWizard = injector.getInstance"
   - "dependency-injection/README.md:126:53       lifecycles      U       libraries that manage object lifecycles and dependencies, such"
   - "dirty-flag/README.md:108:50         dirtyflag       U       ] INFO com.iluwatar.dirtyflag.DataFetcher -- world"
-  - "domain-model/README.md:91:57        testdb          U       DB_URL = \"jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1\";"
   - "domain-model/README.md:212:39       domainmodel     U       main] INFO com.iluwatar.domainmodel.Customer -- Tom balance"
   - "domain-model/README.md:240:53       Inviqa          U       domain model and friends (Inviqa)](https://inviqa.com"
   - "domain-model/src/main/java/com/iluwatar/domainmodel/App.java:27:19          joda    U       import static org.joda.money.CurrencyUnit.USD"
@@ -401,6 +415,17 @@ issues:
   - "microservices-idempotent-consumer/src/test/java/com/iluwatar/idempotentconsumer/RequestServiceTests.java:128:31         Inprogress      U       completeRequest_whenNotInprogress() {"
   - "microservices-log-aggregation/README.md:43:21       Aggregration (Aggregation)      U       ![Microservices Log Aggregration flowchart](./etc/microservice"
   - "microservices-log-aggregation/src/main/java/com/iluwatar/logaggregation/App.java:25:22          logaggregation      U       package com.iluwatar.logaggregation;"
+  - "microservices-self-registration/contextservice/src/main/java/com/learning/contextservice/client/GreetingServiceClient.java:1:22         contextservice      U       package com.learning.contextservice.client;"
+  - "microservices-self-registration/contextservice/src/main/java/com/learning/contextservice/client/GreetingServiceClient.java:6:22         greetingservice     U       FeignClient(name = \"greetingservice\")"
+  - "microservices-self-registration/contextservice/src/main/java/com/learning/contextservice/ContextserviceApplication.java:11:14       Contextservice      U       public class ContextserviceApplication {"
+  - "microservices-self-registration/contextservice/src/test/java/com/learning/contextservice/ContextControllerTest.java:40:120      Nadu    U       from Chennai, Tamil Nadu, India\"));"
+  - "microservices-self-registration/eurekaserver/src/main/java/com/learning/eurekaserver/EurekaserverApplication.java:1:22          eurekaserver    U       package com.learning.eurekaserver;"
+  - "microservices-self-registration/eurekaserver/src/main/java/com/learning/eurekaserver/EurekaserverApplication.java:9:14          Eurekaserver    U       public class EurekaserverApplication {"
+  - "microservices-self-registration/greetingservice/src/main/java/com/learning/greetingservice/GreetingserviceApplication.java:11:14        Greetingservice     U       public class GreetingserviceApplication {"
+  - "microservices-self-registration/README.md:89:38         openfeign           U       springframework.cloud.openfeign.EnableFeignClients;"
+  - "microservices-self-registration/README.md:153:80        Initializr          U       Maven during Spring Initializr setup) or Gradle (if"
+  - "microservices-self-registration/README.md:176:106       GREETINGSERVICE     U       You should now see GREETINGSERVICE listed under the \"Instances"
+  - "microservices-self-registration/README.md:183:106       CONTEXTSERVICE      U       You should now see CONTEXTSERVICE listed under the \"Instances"
   - "model-view-intent/README.md:47:244      MVVM        U       Model-View-ViewModel (MVVM) patterns, but with"
   - "model-view-intent/README.md:200:60      Kodeco      U       Tutorial: Getting Started (Kodeco)](https://www.kodeco"
   - "model-view-presenter/src/main/java/com/iluwatar/model/view/presenter/App.java:34:16         Jframe      U       * FileSelectorJframe} is the GUI and the"
@@ -967,6 +992,8 @@ issues:
   - "README.md:578:189       mion                    U       100px;\" alt=\"yoobin_mion\"/><br /><sub><b>yoobin"
   - "README.md:579:187       Soumik                  U       width=\"100px;\" alt=\"Soumik Sarker\"/><br /><sub"
   - "README.md:579:194       Sarker                  U       100px;\" alt=\"Soumik Sarker\"/><br /><sub><b>Soumik"
+  - "README.md:580:184       Naman                   U       width=\"100px;\" alt=\"Naman Srivastava\"/><br />"
+  - "README.md:580:190       Srivastava              U       \"100px;\" alt=\"Naman Srivastava\"/><br /><sub><b>Naman"
   - "repository/README.md:119:9          nasta           U       var nasta = new Person(\"Nasta"
   - "repository/README.md:119:29         Nasta           U       nasta = new Person(\"Nasta\", \"Kuzminova\", 25);"
   - "repository/README.md:119:38         Kuzminova       U       new Person(\"Nasta\", \"Kuzminova\", 25);"
@@ -1098,4 +1125,6 @@ issues:
   - "version-number/README.md:134:39         Mallanaga           U       setAuthor(\"Vatsyayana Mallanaga\"); // Bob updates the"
   - "version-number/README.md:150:39         versionnumber       U       main] INFO com.iluwatar.versionnumber.App -- An empty book"
   - "version-number/README.md:164:27         byteslounge         U       JPA entity versioning (byteslounge.com)](https://www.byteslounge"
+  - "view-helper/README.md:78:299        Thymeleaf       U       views. Technologies like Thymeleaf or JSF often rely on"
+  - "view-helper/src/main/java/com/iluwatar/viewhelper/App.java:26:22        viewhelper      U       package com.iluwatar.viewhelper;"
   - "visitor/README.md:240:28        Sourcemaking    U       Visitor Design Pattern (Sourcemaking)](https://sourcemaking"
