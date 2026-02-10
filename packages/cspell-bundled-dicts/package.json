@@ -11,12 +11,12 @@
   "main": "cspell-default.json",
   "files": [
     "cspell-default.json",
-    "cspell-default.config.js",
-    "cspell-compatibility.json",
-    "compatibility-words.txt.gz"
+    "cspell-default.config.js"
   ],
   "exports": {
     ".": "./cspell-default.config.js",
+    "./cspell-bundled.mjs": "./dist/cspell-bundled.mjs",
+    "./cspell-bundled.js": "./dist/cspell-bundled.mjs",
     "./cspell-default.config.js": "./cspell-default.config.js",
     "./cspell-default.json": "./cspell-default.json"
   },
@@ -112,6 +112,7 @@
   },
   "devDependencies": {
     "@cspell/cspell-tools": "workspace:*",
-    "@cspell/cspell-types": "workspace:*"
+    "@cspell/cspell-types": "workspace:*",
+    "@cspell/dictionary-bundler-plugin": "workspace:*"
   }
 }

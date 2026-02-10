@@ -1,16 +1,35 @@
 import { createHash } from 'node:crypto';
 import fs from 'node:fs/promises';
+import { createRequire } from 'node:module';
+import { pathToFileURL } from 'node:url';
 
 import type { CSpellSettings, CSpellVFS } from '@cspell/cspell-types';
 import { mergeConfig } from '@cspell/cspell-types';
 import type { CSpellConfigFile, CSpellConfigFileReaderWriter, ICSpellConfigFile } from 'cspell-config-lib';
 
+export interface CSpellDictionaryBundlerOptions {
+    debug?: boolean;
+}
+
 export class CSpellDictionaryBundler {
     #loadedConfigs = new Map<string, Promise<ICSpellConfigFile>>();
+    #options: CSpellDictionaryBundlerOptions;
 
-    constructor(readonly reader: CSpellConfigFileReaderWriter) {}
+    constructor(
+        readonly reader: CSpellConfigFileReaderWriter,
+        options: CSpellDictionaryBundlerOptions,
+    ) {
+        this.#options = options;
+    }
+
+    log(...args: Parameters<typeof console.log>): void {
+        if (this.#options.debug) {
+            console.log(...args);
+        }
+    }
 
     bundle(url: URL, content?: string): Promise<ICSpellConfigFile> {
+        this.log(`Bundling ${url.href}`);
         const found = this.#loadedConfigs.get(url.href);
         if (found) {
             return found;
@@ -27,6 +46,7 @@ export class CSpellDictionaryBundler {
             await this.resolveDictionaries(config),
         );
         delete settings.import;
+        delete settings['$schema'];
         return {
             url: config.url,
             settings,
@@ -57,7 +77,7 @@ export class CSpellDictionaryBundler {
     }
 
     importConfig(url: URL, content?: string): Promise<CSpellConfigFile> {
-        if (content) {
+        if (content && !isCodeFile(url)) {
             return Promise.resolve(this.reader.parse({ url, content }));
         }
         return this.reader.readConfig(url);
@@ -65,7 +85,7 @@ export class CSpellDictionaryBundler {
 
     loadImports(config: CSpellConfigFile): Promise<ICSpellConfigFile[]> {
         const imports = [config.settings.import || []].flat();
-        return Promise.all(imports.map((importPath) => this.bundle(new URL(importPath, config.url))));
+        return Promise.all(imports.map((importPath) => this.bundle(resolveImport(importPath, config.url))));
     }
 }
 
@@ -105,4 +125,28 @@ export function makeVfsUrl(url: URL, hash: string): URL {
     }
     const path = parts.slice(pos).join('/');
     return new URL(`cspell-vfs:///${hash}/${path}`);
+}
+
+const isUrlLikeRegExp = /^[a-z_0-9-]{3,}:/i;
+function isUrlLike(s: string): boolean {
+    return isUrlLikeRegExp.test(s);
+}
+
+function resolveImport(file: string, from: URL): URL {
+    if (file.startsWith('./') || file.startsWith('../')) {
+        return new URL(file, from);
+    }
+    if (isUrlLike(file)) {
+        return new URL(file);
+    }
+    const require = createRequire(from);
+    const importPath = require.resolve(file);
+
+    return pathToFileURL(importPath);
+}
+
+const isCodeFileRegExp = /\.[cm]?(js|ts)$/i;
+
+function isCodeFile(url: URL): boolean {
+    return isCodeFileRegExp.test(url.pathname);
 }
