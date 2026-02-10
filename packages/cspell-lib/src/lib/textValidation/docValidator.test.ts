@@ -211,16 +211,17 @@ describe('docValidator', () => {
     );
 
     test.each`
-        filename                          | configFile                            | maxDuplicateProblems | expectedIssues | expectedRawIssues
-        ${'dictionaries/btrie/README.md'} | ${'bundles/cspell.config.bundle.mjs'} | ${undefined}         | ${[]}          | ${undefined}
+        filename             | configFile                                                                     | expectedIssues | expectedRawIssues
+        ${'btrie/README.md'} | ${'btrie/cspell.config.bundle.mjs'}                                            | ${[]}          | ${undefined}
+        ${'btrie/README.md'} | ${fixDir('../dist/test/fixtures/dictionaries/btrie/cspell.config.bundle.mjs')} | ${[]}          | ${undefined}
     `(
         'checkDocument with cspell-vfs $filename $configFile $maxDuplicateProblems',
-        async ({ filename, configFile, maxDuplicateProblems, expectedIssues, expectedRawIssues }) => {
-            const doc = await loadDoc(fixDir(filename));
+        async ({ filename, configFile, expectedIssues, expectedRawIssues }) => {
+            const doc = await loadDoc(fixDict(filename));
             const dVal = new DocumentValidator(
                 doc,
-                { generateSuggestions: false, configFile: fixDir(configFile), noConfigSearch: true },
-                { maxDuplicateProblems },
+                { generateSuggestions: false, configFile: fixDict(configFile), noConfigSearch: true },
+                {},
             );
             await dVal.prepare();
             expect(dVal.errors).toEqual([]);

@@ -16,8 +16,8 @@ export default defineConfig([
     },
     {
         // The API
-        entry: ['fixtures/dictionaries/**/*.bundle.js'],
-        outDir: 'fixtures/bundles',
+        entry: ['fixtures/dictionaries/btrie/*.bundle.js'],
+        outDir: 'dist/test/fixtures/dictionaries/btrie',
         format: ['esm'],
         target: 'Node20',
         tsconfig: 'fixtures/tsconfig.json',
