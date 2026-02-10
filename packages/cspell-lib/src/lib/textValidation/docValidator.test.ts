@@ -215,7 +215,7 @@ describe('docValidator', () => {
         ${'btrie/README.md'} | ${'btrie/cspell.config.bundle.mjs'}                                            | ${[]}          | ${undefined}
         ${'btrie/README.md'} | ${fixDir('../dist/test/fixtures/dictionaries/btrie/cspell.config.bundle.mjs')} | ${[]}          | ${undefined}
     `(
-        'checkDocument with cspell-vfs $filename $configFile $maxDuplicateProblems',
+        'checkDocument with cspell-vfs $filename $configFile',
         async ({ filename, configFile, expectedIssues, expectedRawIssues }) => {
             const doc = await loadDoc(fixDict(filename));
             const dVal = new DocumentValidator(
