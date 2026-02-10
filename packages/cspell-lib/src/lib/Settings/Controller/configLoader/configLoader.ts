@@ -335,6 +335,7 @@ export class ConfigLoader implements IConfigLoader {
         this.cachedMergedConfig = new WeakMap();
         this.cachedCSpellConfigFileInMemory = new WeakMap();
         this.prefetchGlobalSettingsAsync();
+        this.#knownVirtualFiles.clear();
     }
 
     /**
@@ -579,6 +580,7 @@ export class ConfigLoader implements IConfigLoader {
         const waitFor: Promise<unknown>[] = [];
         for (const [href, entry] of entries) {
             if (this.#knownVirtualFiles.has(href)) continue;
+            assert(href.startsWith('cspell-vfs:///'), `Invalid virtual file URL: ${href}`);
             const url = toFileURL(href);
             this.#knownVirtualFiles.add(href);
             let content = entry.data;
