@@ -580,7 +580,7 @@ export class ConfigLoader implements IConfigLoader {
         const waitFor: Promise<unknown>[] = [];
         for (const [href, entry] of entries) {
             if (this.#knownVirtualFiles.has(href)) continue;
-            assert(href.startsWith(CSPELL_VFS_PROTOCOL), `Invalid virtual file URL: ${href}`);
+            assert(href.startsWith(CSPELL_VFS_PROTOCOL + '///'), `Invalid virtual file URL: ${href}`);
             const url = toFileURL(href);
             let content = entry.data;
             if (typeof content === 'string' && entry.encoding === 'base64') {
