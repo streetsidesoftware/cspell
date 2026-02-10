@@ -582,12 +582,11 @@ export class ConfigLoader implements IConfigLoader {
             if (this.#knownVirtualFiles.has(href)) continue;
             assert(href.startsWith('cspell-vfs:///'), `Invalid virtual file URL: ${href}`);
             const url = toFileURL(href);
-            this.#knownVirtualFiles.add(href);
             let content = entry.data;
             if (typeof content === 'string' && entry.encoding === 'base64') {
                 content = Buffer.from(content, 'base64');
             }
-            waitFor.push(this.fs.writeFile({ url, content }));
+            waitFor.push(this.fs.writeFile({ url, content }).then(() => this.#knownVirtualFiles.add(href)));
         }
         return Promise.all(waitFor).then(() => undefined);
     }
