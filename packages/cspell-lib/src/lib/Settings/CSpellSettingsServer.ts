@@ -189,6 +189,7 @@ function _merge(
         features: mergeObjects(_left.features, _right.features),
         source: mergeSources(_left, _right),
         plugins: mergeList(_left.plugins, _right.plugins),
+        vfs: mergeObjects(_left.vfs, _right.vfs),
         __imports: mergeImportRefs(_left, _right),
     });
     return settings;

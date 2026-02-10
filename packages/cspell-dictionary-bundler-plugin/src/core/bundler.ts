@@ -45,10 +45,11 @@ export class CSpellDictionaryBundler {
             if (!def.path) continue;
             const d = { ...def };
             dictDefs[i] = d;
-            delete d.file;
             const url = new URL(def.btrie ?? def.path, config.url);
             if (url.protocol !== 'file:') continue;
             const vfsUrl = await populateVfs(vfs, url);
+            delete d.file;
+            delete d.btrie;
             d.path = vfsUrl.href;
         }
 

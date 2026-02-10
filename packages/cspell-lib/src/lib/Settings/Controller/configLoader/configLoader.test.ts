@@ -3,7 +3,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import type { CSpellSettingsWithSourceTrace, CSpellUserSettings, ImportFileRef } from '@cspell/cspell-types';
 import { CSpellConfigFile, CSpellConfigFileInMemory } from 'cspell-config-lib';
-import { createRedirectProvider, createVirtualFS } from 'cspell-io';
+import { createRedirectProvider, createVirtualFS, getDefaultVirtualFs } from 'cspell-io';
 import { assert, beforeEach, describe, expect, test, vi } from 'vitest';
 import { URI } from 'vscode-uri';
 
@@ -784,6 +784,47 @@ describe('ConfigLoader with VirtualFS', () => {
         expect(configFile).toBeInstanceOf(Error);
         assert(configFile instanceof Error);
         expect(configFile.cause).toEqual(expectError(`Untrusted URL: "${location?.href}"`));
+    });
+
+    test('cspell-vfs://', async () => {
+        const vfs = createVirtualFS();
+        const loader = createConfigLoader(vfs.fs);
+
+        const dataUrl = 'cspell-vfs:///configLoader/test.txt';
+
+        const config: Pick<CSpellUserSettings, 'vfs'> = {
+            vfs: {
+                [dataUrl]: { data: 'test' },
+            },
+        };
+
+        const configFile = loader.createCSpellConfigFile(import.meta.url, config);
+        await loader.mergeConfigFileWithImports(configFile);
+        await expect(vfs.fs.readFile(new URL(dataUrl), 'utf8')).resolves.toEqual(
+            expect.objectContaining({ content: 'test' }),
+        );
+        // Check that we did not pollute the global VFS with the test file.
+        await expect(getDefaultVirtualFs().fs.readFile(new URL(dataUrl), 'utf8')).rejects.toThrow(
+            'Not found: cspell-vfs:///configLoader/test.txt',
+        );
+    });
+
+    test('vfs with file url', async () => {
+        const vfs = createVirtualFS();
+        const loader = createConfigLoader(vfs.fs);
+
+        const dataUrl = new URL('/tmp/my_file.txt', import.meta.url).href;
+
+        const config: Pick<CSpellUserSettings, 'vfs'> = {
+            vfs: {
+                [dataUrl]: { data: 'test' },
+            },
+        };
+
+        const configFile = loader.createCSpellConfigFile(import.meta.url, config);
+        await expect(loader.mergeConfigFileWithImports(configFile)).rejects.toThrow(
+            'Invalid virtual file URL: ' + dataUrl,
+        );
     });
 });
 

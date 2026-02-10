@@ -115,7 +115,6 @@ export class MemVFileSystem implements VProviderFileSystem {
      * It is up to the provider to define what information is available.
      */
     readonly providerInfo: FileSystemProviderInfo;
-    readonly hasProvider: boolean = true;
 
     dispose(): void {
         this.#files.clear();
