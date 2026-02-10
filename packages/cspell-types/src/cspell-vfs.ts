@@ -3,7 +3,7 @@
  * This can be exported by a JavaScript based CSpell Configuration file.
  * @hidden
  */
-export type CSpellVFSBinaryData = Uint8Array;
+export type CSpellVFSBinaryData = Uint8Array<ArrayBuffer>;
 
 /**
  * Data content stored in a string for CSpellVFS file.

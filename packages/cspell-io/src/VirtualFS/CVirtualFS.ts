@@ -3,8 +3,10 @@ import type { CSpellIO } from '../CSpellIO.js';
 import { getDefaultCSpellIO } from '../CSpellIONode.js';
 import type { Disposable } from '../models/index.js';
 import type { LogEvent } from '../models/LogEvent.js';
+import { CSPELL_VFS_PROTOCOL } from './constants.js';
 import { CVFileSystem } from './CVFileSystem.js';
 import { VFSErrorUnsupportedRequest } from './errors.js';
+import { MemFileSystemProvider } from './MemVfsProvider.js';
 import type { UrlOrReference, VFileSystem, VFileSystemCore } from './VFileSystem.js';
 import type { NextProvider, VFileSystemProvider, VirtualFS } from './VirtualFS.js';
 import { debug } from './VirtualFS.js';
@@ -161,6 +163,7 @@ export function createVirtualFS(cspellIO?: CSpellIO): VirtualFS {
     const cspell = cspellIO || getDefaultCSpellIO();
     const vfs = new CVirtualFS();
     vfs.registerFileSystemProvider(cspellIOToFsProvider(cspell));
+    vfs.registerFileSystemProvider(new MemFileSystemProvider(CSPELL_VFS_PROTOCOL + 'default', CSPELL_VFS_PROTOCOL));
     return vfs;
 }
 let defaultVirtualFs: VirtualFS | undefined = undefined;

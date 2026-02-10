@@ -1,4 +1,6 @@
-import { fileURLToPath, pathToFileURL } from 'node:url';
+import { createRequire } from 'node:module';
+import path from 'node:path';
+import { pathToFileURL } from 'node:url';
 
 import { createFilter, dataToEsm } from '@rollup/pluginutils';
 import type { CSpellConfigFileReaderWriter } from 'cspell-config-lib';
@@ -12,6 +14,7 @@ export function createPlugin(): UnpluginInstance<Options | undefined, false> {
     return createUnplugin((rawOptions = {}) => {
         const options = resolveOptions(rawOptions);
         const filter = createFilter(options.include, options.exclude);
+        const consoleLog = options.debug ? console.log.bind(console) : () => {};
 
         let readerWriter: CSpellConfigFileReaderWriter | undefined = undefined;
         let bundler: CSpellDictionaryBundler | undefined = undefined;
@@ -22,13 +25,13 @@ export function createPlugin(): UnpluginInstance<Options | undefined, false> {
             enforce: options.enforce,
 
             transform: {
-                // filter: {
-                //     id: { include: options.include, exclude: options.exclude },
-                // },
+                filter: {
+                    id: { include: options.include, exclude: options.exclude },
+                },
                 async handler(code, id) {
-                    console.log(`Can transform ${id}? ${filter(id) ? 'yes' : 'no'}`);
+                    consoleLog(`Can transform ${id}? ${filter(id) ? 'yes' : 'no'}`);
                     if (!filter(id)) return undefined;
-                    console.log(`Transforming ${id} with ${code.length} characters`);
+                    consoleLog(`Transforming ${id} with ${code.length} characters`);
                     readerWriter ??= createReaderWriter();
                     bundler ??= new CSpellDictionaryBundler(readerWriter);
 
@@ -49,15 +52,17 @@ export function createPlugin(): UnpluginInstance<Options | undefined, false> {
                 },
             },
             resolveId: {
-                // filter: {
-                //     id: { include: options.include, exclude: options.exclude },
-                // },
+                filter: {
+                    id: { include: options.include, exclude: options.exclude },
+                },
                 handler(id, importer) {
-                    console.log(`Can Resolve ${id}? ${filter(id) ? 'yes' : 'no'} %o`, { id, importer });
+                    consoleLog(`Can Resolve ${id}? ${filter(id) ? 'yes' : 'no'} %o`, { id, importer });
                     if (id.includes('\0') || !filter(id)) return undefined;
-                    const importedFromUrl = pathToFileURL(importer || process.cwd() + '/');
-                    const resolvedId = fileURLToPath(import.meta.resolve(id, importedFromUrl));
-                    console.log(`Resolving ${id}: %o`, import.meta.resolve(id));
+                    const resolvedId = resolveId(id, importer);
+                    if (!resolvedId) return undefined;
+                    consoleLog(`Resolving ${id}: %o`, {
+                        resolvedId,
+                    });
                     return {
                         id: resolvedId,
                         external: false,
@@ -69,6 +74,20 @@ export function createPlugin(): UnpluginInstance<Options | undefined, false> {
     });
 }
 
+function resolveId(id: string, importer?: string): string | undefined {
+    if (id.includes('\0')) return undefined;
+    const dir = (importer ? path.dirname(importer) : process.cwd()) + '/';
+    if (id.startsWith('./') || id.startsWith('../')) {
+        return path.resolve(dir, id);
+    }
+    const require = createRequire(pathToFileURL(dir));
+    try {
+        return require.resolve(id, { paths: [dir] });
+    } catch {
+        return undefined;
+    }
+}
+
 type Overwrite<T, U> = Pick<T, Exclude<keyof T, keyof U>> & U;
 
 export type OptionsResolved = Overwrite<Required<Options>, Pick<Options, 'enforce' | 'exclude'>>;
@@ -78,5 +97,6 @@ export function resolveOptions(options: Options): OptionsResolved {
         include: options.include || [/.*cspell(?:[-]ext)?(\..*)?\.(?:jsonc?|ya?ml|toml)$/i],
         exclude: options.exclude || undefined,
         enforce: 'enforce' in options ? options.enforce : 'pre',
+        debug: !!options.debug,
     };
 }

@@ -43,7 +43,6 @@ import { pnpLoader } from '../pnpLoader.js';
 import { searchPlaces } from './configLocations.js';
 import { ConfigSearch } from './configSearch.js';
 import { configErrorToRawSettings, configToRawSettings } from './configToRawSettings.js';
-import type { StopSearchAt } from './defaultConfigLoader.js';
 import { defaultSettings } from './defaultSettings.js';
 import {
     normalizeCacheSettings,
@@ -58,6 +57,8 @@ import {
 import type { PnPSettingsOptional } from './PnPSettings.js';
 import { defaultPnPSettings, normalizePnPSettings } from './PnPSettings.js';
 import type { CSpellSettingsI, CSpellSettingsWST } from './types.js';
+
+export type StopSearchAt = URL | string | (URL | string)[] | undefined;
 
 type CSpellSettingsVersion = Exclude<CSpellUserSettings['version'], undefined>;
 const supportedCSpellConfigVersions: CSpellSettingsVersion[] = [configSettingsFileVersion0_2];
@@ -197,7 +198,9 @@ const unTrustedSearch: Map<string, readonly string[]> = new Map([['*', defaultEx
 export class ConfigLoader implements IConfigLoader {
     public onReady: Promise<void>;
     readonly fileResolver: FileResolver;
-    private _isTrusted = true;
+    #isTrusted = true;
+    /** the href of known dictionary files that have been added to the cspell-vfs:// */
+    #knownVirtualFiles = new Set<string>();
 
     /**
      * Use `createConfigLoader`
@@ -510,6 +513,7 @@ export class ConfigLoader implements IConfigLoader {
 
         const importSettings = await Promise.all(pendingImports);
         const cfg = await this.mergeImports(cfgFile, importSettings);
+        await this.registerVirtualFiles(cfg);
         return cfg;
     }
 
@@ -569,6 +573,23 @@ export class ConfigLoader implements IConfigLoader {
         return finalizeSettings;
     }
 
+    registerVirtualFiles(settings: CSpellSettings): Promise<void> {
+        if (!settings.vfs) return Promise.resolve();
+        const entries = Object.entries(settings.vfs);
+        const waitFor: Promise<unknown>[] = [];
+        for (const [href, entry] of entries) {
+            if (this.#knownVirtualFiles.has(href)) continue;
+            const url = toFileURL(href);
+            this.#knownVirtualFiles.add(href);
+            let content = entry.data;
+            if (typeof content === 'string' && entry.encoding === 'base64') {
+                content = Buffer.from(content, 'base64');
+            }
+            waitFor.push(this.fs.writeFile({ url, content }));
+        }
+        return Promise.all(waitFor).then(() => undefined);
+    }
+
     createCSpellConfigFile(filename: URL | string, settings: CSpellUserSettings): CSpellConfigFile {
         const map = autoResolveWeak(
             this.cachedCSpellConfigFileInMemory,
@@ -624,11 +645,11 @@ export class ConfigLoader implements IConfigLoader {
     }
 
     get isTrusted(): boolean {
-        return this._isTrusted;
+        return this.#isTrusted;
     }
 
     setIsTrusted(isTrusted: boolean): void {
-        this._isTrusted = isTrusted;
+        this.#isTrusted = isTrusted;
         this.clearCachedSettingsFiles();
         this.configSearch = new ConfigSearch(searchPlaces, isTrusted ? trustedSearch : unTrustedSearch, this.fs);
         this.cspellConfigFileReaderWriter.setUntrustedExtensions(isTrusted ? [] : defaultJsExtensions);

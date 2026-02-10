@@ -30,4 +30,10 @@ export type {
     VirtualFS,
     VProviderFileSystem,
 } from './VirtualFS/index.js';
-export { createRedirectProvider, createVirtualFS, FSCapabilityFlags, getDefaultVirtualFs } from './VirtualFS/index.js';
+export {
+    createRedirectProvider,
+    createVirtualFS,
+    CSPELL_VFS_PROTOCOL,
+    FSCapabilityFlags,
+    getDefaultVirtualFs,
+} from './VirtualFS/index.js';

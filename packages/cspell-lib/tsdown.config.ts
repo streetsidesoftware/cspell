@@ -1,3 +1,4 @@
+import dictionaryBundler from '@cspell/dictionary-bundler-plugin/rolldown';
 import { defineConfig, type UserConfig } from 'tsdown';
 
 export default defineConfig([
@@ -10,6 +11,18 @@ export default defineConfig([
         fixedExtension: false,
         dts: { emitDtsOnly: true, sourcemap: false },
         sourcemap: 'hidden',
+        clean: true,
+        inlineOnly: [],
+    },
+    {
+        // The API
+        entry: ['fixtures/dictionaries/**/*.bundle.js'],
+        outDir: 'fixtures/bundles',
+        format: ['esm'],
+        target: 'Node20',
+        tsconfig: 'fixtures/tsconfig.json',
+        sourcemap: false,
+        plugins: [dictionaryBundler()],
         clean: true,
         inlineOnly: [],
     },

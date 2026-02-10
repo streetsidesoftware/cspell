@@ -1,3 +1,4 @@
+export { CSPELL_VFS_PROTOCOL } from './constants.js';
 export { CVFileSystem } from './CVFileSystem.js';
 export { createVirtualFS, getDefaultVirtualFs } from './CVirtualFS.js';
 export { VFSError, VFSErrorUnsupportedRequest, VFSNotImplemented, VFSNotSupported } from './errors.js';

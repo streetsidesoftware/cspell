@@ -11,8 +11,6 @@ import type { CSpellSettingsI, CSpellSettingsWST } from './types.js';
 
 export type { CSpellConfigFile, ICSpellConfigFile } from 'cspell-config-lib';
 
-export type StopSearchAt = URL | string | (URL | string)[] | undefined;
-
 const gcl = getDefaultConfigLoaderInternal;
 /**
  *

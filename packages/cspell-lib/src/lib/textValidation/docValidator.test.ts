@@ -96,6 +96,8 @@ describe('docValidator', () => {
         const doc = await loadDoc(filename);
         const dVal = new DocumentValidator(doc, { configFile }, {});
         await dVal.prepare();
+        expect(dVal.errors).toEqual([]);
+        expect(dVal.getDictionaryErrors()).toEqual(undefined);
         const offset = doc.text.indexOf(text);
         assert(offset >= 0);
         const range = [offset, offset + text.length] as const;
@@ -125,6 +127,8 @@ describe('docValidator', () => {
         const doc = await loadDoc(filename);
         const dVal = new DocumentValidator(doc, { generateSuggestions: true }, { suggestionsTimeout: 10_000 });
         await dVal.prepare();
+        expect(dVal.errors).toEqual([]);
+        expect(dVal.getDictionaryErrors()).toEqual(undefined);
         const offset = doc.text.indexOf(text);
         assert(offset >= 0);
         const range = [offset, offset + text.length] as const;
@@ -150,6 +154,8 @@ describe('docValidator', () => {
             const doc = await loadDoc(filename);
             const dVal = new DocumentValidator(doc, { generateSuggestions: false }, { maxDuplicateProblems });
             await dVal.prepare();
+            expect(dVal.errors).toEqual([]);
+            expect(dVal.getDictionaryErrors()).toEqual(undefined);
             const r = dVal.checkDocument();
 
             expect(r.map((issue) => issue.text)).toEqual(expectedIssues);
@@ -195,7 +201,32 @@ describe('docValidator', () => {
             const doc = await loadDoc(filename);
             const dVal = new DocumentValidator(doc, { generateSuggestions: false }, { maxDuplicateProblems });
             await dVal.prepare();
+            expect(dVal.errors).toEqual([]);
+            expect(dVal.getDictionaryErrors()).toEqual(undefined);
             const r = dVal.checkDocument();
+
+            expect(r.map((issue) => issue.text)).toEqual(expectedIssues);
+            expect(extractRawText(doc.text, r)).toEqual(expectedRawIssues ?? expectedIssues);
+        },
+    );
+
+    test.each`
+        filename                          | configFile                            | maxDuplicateProblems | expectedIssues | expectedRawIssues
+        ${'dictionaries/btrie/README.md'} | ${'bundles/cspell.config.bundle.mjs'} | ${undefined}         | ${[]}          | ${undefined}
+    `(
+        'checkDocument with cspell-vfs $filename $configFile $maxDuplicateProblems',
+        async ({ filename, configFile, maxDuplicateProblems, expectedIssues, expectedRawIssues }) => {
+            const doc = await loadDoc(fixDir(filename));
+            const dVal = new DocumentValidator(
+                doc,
+                { generateSuggestions: false, configFile: fixDir(configFile), noConfigSearch: true },
+                { maxDuplicateProblems },
+            );
+            await dVal.prepare();
+            expect(dVal.errors).toEqual([]);
+            expect(dVal.getDictionaryErrors()).toEqual(undefined);
+            const r = dVal.checkDocument();
+            expect(dVal.errors).toEqual([]);
 
             expect(r.map((issue) => issue.text)).toEqual(expectedIssues);
             expect(extractRawText(doc.text, r)).toEqual(expectedRawIssues ?? expectedIssues);
@@ -355,8 +386,20 @@ function loadDoc(filename: string) {
     return docCache.get(filename);
 }
 
+/**
+ * Resolve the path to the fixtures directory for this package.
+ * @param fixtureFile - the path to the fixture file, relative to the `docValidator` test fixtures directory.
+ */
+function fixDir(...fixtureFile: string[]): string {
+    return path.resolve(fixturesDir, ...fixtureFile);
+}
+
+/**
+ * Resolve the path to the fixtures directory for the docValidator tests.
+ * @param fixtureFile - the path to the fixture file, relative to the `docValidator` test fixtures directory.
+ */
 function fix(...fixtureFile: string[]): string {
-    return path.resolve(path.join(fixturesDir, 'docValidator'), ...fixtureFile);
+    return fixDir('docValidator', ...fixtureFile);
 }
 
 function tFix(...fixtureFile: string[]): string {
@@ -364,7 +407,7 @@ function tFix(...fixtureFile: string[]): string {
 }
 
 function fixDict(...fixtureFile: string[]): string {
-    return fix('../dictionaries', ...fixtureFile);
+    return fixDir('dictionaries', ...fixtureFile);
 }
 
 function opts(...options: DocumentValidatorOptions[]): DocumentValidatorOptions {
