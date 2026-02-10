@@ -6,7 +6,7 @@ import type { CSpellSettings, CSpellUserSettings, ImportFileRef, Source } from '
 import type { CSpellConfigFileReaderWriter, ICSpellConfigFile, IO, TextFile } from 'cspell-config-lib';
 import { CSpellConfigFile, CSpellConfigFileWithErrors } from 'cspell-config-lib';
 import { createReaderWriter } from 'cspell-config-lib';
-import { isUrlLike, toFileURL } from 'cspell-io';
+import { CSPELL_VFS_PROTOCOL, isUrlLike, toFileURL } from 'cspell-io';
 import { URI, Utils as UriUtils } from 'vscode-uri';
 
 import { onClearCache } from '../../../events/index.js';
@@ -580,7 +580,7 @@ export class ConfigLoader implements IConfigLoader {
         const waitFor: Promise<unknown>[] = [];
         for (const [href, entry] of entries) {
             if (this.#knownVirtualFiles.has(href)) continue;
-            assert(href.startsWith('cspell-vfs:///'), `Invalid virtual file URL: ${href}`);
+            assert(href.startsWith(CSPELL_VFS_PROTOCOL), `Invalid virtual file URL: ${href}`);
             const url = toFileURL(href);
             let content = entry.data;
             if (typeof content === 'string' && entry.encoding === 'base64') {
