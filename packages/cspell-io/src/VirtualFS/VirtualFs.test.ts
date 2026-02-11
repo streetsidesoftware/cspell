@@ -245,7 +245,7 @@ describe('VirtualFs', () => {
         const provider = mockFileSystemProvider();
         const mfs = mockFileSystem();
         vi.mocked(provider.getFileSystem).mockImplementation((_url) => mfs);
-        const d = virtualFs.registerFileSystemProvider(provider);
+        using _d = virtualFs.registerFileSystemProvider(provider);
         const mockedWriteFile = vi.mocked(mfs.writeFile);
         mockedWriteFile.mockImplementation((file) => Promise.resolve({ url: file.url }));
         const fs = virtualFs.fs;
@@ -255,7 +255,6 @@ describe('VirtualFs', () => {
         expect(mockedWriteFile).toHaveBeenLastCalledWith(file);
         expect(result).not.toBe(file);
         expect(result).toStrictEqual(oc({ url: file.url }));
-        d.dispose();
     });
 
     test('fsCapabilities', () => {
@@ -303,6 +302,7 @@ function mockFileSystem(): VProviderFileSystem {
         writeFile: vi.fn(),
         dispose: vi.fn(),
         getCapabilities: vi.fn(),
+        [Symbol.dispose]: vi.fn(),
     };
     return p;
 }

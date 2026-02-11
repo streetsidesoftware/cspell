@@ -126,6 +126,8 @@ function remapFS(
         return { ...de, dir };
     };
 
+    const dispose = () => fs.dispose();
+
     const fs2: VProviderFileSystem = {
         stat: async (url) => {
             const url2 = mapUrlOrReferenceToPrivate(url);
@@ -151,7 +153,8 @@ function remapFS(
         },
         providerInfo: { ...fs.providerInfo, name },
         capabilities: capabilities ?? fs.capabilities & capabilitiesMask,
-        dispose: () => fs.dispose(),
+        dispose,
+        [Symbol.dispose]: dispose,
     };
 
     return fsPassThrough(fs2, shadowFs, publicRoot);
@@ -191,6 +194,9 @@ function fsPassThrough(
         dispose: () => {
             fs.dispose();
             shadowFs?.dispose();
+        },
+        [Symbol.dispose]() {
+            this.dispose();
         },
     };
     return passThroughFs;

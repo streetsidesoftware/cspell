@@ -38,9 +38,11 @@ describe('Validate RedirectProvider', () => {
     test('createRedirectProvider.fs.dispose', async () => {
         const mockFS = createMockFS();
         const provider = createRedirectProvider('test', new URL('file:///public/'), new URL('file:///private/'));
-        const fs = provider.getFileSystem(new URL('file:///public/'), () => mockFS);
-        assert(fs);
-        expect(() => fs.dispose()).not.toThrow();
+        {
+            using fs = provider.getFileSystem(new URL('file:///public/'), () => mockFS);
+            expect(fs?.dispose).toBeDefined();
+        }
+        expect(mockFS.dispose).toHaveBeenCalled();
     });
 
     test.each`
@@ -190,6 +192,7 @@ function createVFS(publicURL: URL, pathnameOrURL: string | URL) {
 }
 
 function createMockFS(): VProviderFileSystem {
+    const dispose = vi.fn();
     return {
         capabilities: 0,
         providerInfo: { name: 'mock' },
@@ -197,6 +200,7 @@ function createMockFS(): VProviderFileSystem {
         readFile: vi.fn(() => Promise.reject(new VFSErrorUnsupportedRequest('readFile'))),
         readDirectory: vi.fn(() => Promise.reject(new VFSErrorUnsupportedRequest('readDirectory'))),
         writeFile: vi.fn(() => Promise.reject(new VFSErrorUnsupportedRequest('writeFile'))),
-        dispose: vi.fn(() => undefined),
+        dispose,
+        [Symbol.dispose]: dispose,
     };
 }

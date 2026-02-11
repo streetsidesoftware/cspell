@@ -1,12 +1,12 @@
 import { urlOrReferenceToUrl } from '../common/index.js';
-import type { Disposable } from '../models/index.js';
+import type { DisposableEx } from '../models/index.js';
 import { type FileReference, type FileResource, FileType, type Stats } from '../models/index.js';
 import { VFSNotFoundError, VFSNotSupported } from './errors.js';
 import type { FileSystemProviderInfo, UrlOrReference, VfsDirEntry } from './VFileSystem.js';
 import { FSCapabilityFlags } from './VFileSystem.js';
 import type { VFileSystemProvider, VProviderFileSystem, VProviderFileSystemReadFileOptions } from './VirtualFS.js';
 
-export class MemFileSystemProvider implements VFileSystemProvider, Disposable {
+export class MemFileSystemProvider implements VFileSystemProvider, DisposableEx {
     readonly name: string;
     readonly protocol: string;
     #vfs: MemVFileSystem;

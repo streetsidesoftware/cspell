@@ -1,7 +1,7 @@
 import { urlOrReferenceToUrl } from '../common/index.js';
 import type { CSpellIO } from '../CSpellIO.js';
 import { getDefaultCSpellIO } from '../CSpellIONode.js';
-import type { Disposable } from '../models/index.js';
+import type { DisposableEx } from '../models/index.js';
 import type { LogEvent } from '../models/LogEvent.js';
 import { CSPELL_VFS_PROTOCOL } from './constants.js';
 import { CVFileSystem } from './CVFileSystem.js';
@@ -45,20 +45,19 @@ class CVirtualFS implements VirtualFS {
         }
     };
 
-    registerFileSystemProvider(...providers: VFileSystemProvider[]): Disposable {
+    registerFileSystemProvider(...providers: VFileSystemProvider[]): DisposableEx {
         providers.forEach((provider) => this.providers.add(provider));
         this.reset();
-        return {
-            dispose: () => {
-                for (const provider of providers) {
-                    for (const key of this.revCacheFs.get(provider) || []) {
-                        this.cachedFs.delete(key);
-                    }
-                    this.providers.delete(provider) && undefined;
+        const dispose = () => {
+            for (const provider of providers) {
+                for (const key of this.revCacheFs.get(provider) || []) {
+                    this.cachedFs.delete(key);
                 }
-                this.reset();
-            },
+                this.providers.delete(provider) && undefined;
+            }
+            this.reset();
         };
+        return { dispose, [Symbol.dispose]: dispose };
     }
 
     getFS(url: URL): VFileSystem {
@@ -130,6 +129,10 @@ class CVirtualFS implements VirtualFS {
                 // continue - we are cleaning up.
             }
         }
+    }
+
+    [Symbol.dispose](): void {
+        this.dispose();
     }
 }
 

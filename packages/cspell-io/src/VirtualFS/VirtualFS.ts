@@ -1,4 +1,4 @@
-import type { DirEntry, Disposable, FileReference, FileResource, Stats } from '../models/index.js';
+import type { DirEntry, DisposableEx, FileReference, FileResource, Stats } from '../models/index.js';
 import type {
     FileSystemProviderInfo,
     FSCapabilities,
@@ -12,8 +12,8 @@ export type NextProvider = (url: URL) => VProviderFileSystem | undefined;
 
 export const debug = false;
 
-export interface VirtualFS extends Disposable {
-    registerFileSystemProvider(provider: VFileSystemProvider, ...providers: VFileSystemProvider[]): Disposable;
+export interface VirtualFS extends DisposableEx {
+    registerFileSystemProvider(provider: VFileSystemProvider, ...providers: VFileSystemProvider[]): DisposableEx;
     /**
      * Get the fs for a given url.
      */
@@ -50,7 +50,7 @@ export type VProviderFileSystemReadFileOptions = OptionAbort;
 
 export type VProviderFileSystemReadDirectoryOptions = OptionAbort;
 
-export interface VProviderFileSystem extends Disposable {
+export interface VProviderFileSystem extends DisposableEx {
     readFile(url: UrlOrReference, options?: VProviderFileSystemReadFileOptions): Promise<FileResource>;
     writeFile(file: FileResource): Promise<FileReference>;
     /**
@@ -75,7 +75,7 @@ export interface VProviderFileSystem extends Disposable {
     getCapabilities?: (url: URL) => FSCapabilities;
 }
 
-export interface VFileSystemProvider extends Partial<Disposable> {
+export interface VFileSystemProvider extends Partial<DisposableEx> {
     /** Name of the Provider */
     name: string;
     /**
