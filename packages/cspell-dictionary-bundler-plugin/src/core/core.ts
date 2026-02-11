@@ -40,29 +40,16 @@ export function createPlugin(): UnpluginInstance<Options | undefined, false> {
                     const inlineCode = dataToEsm(configFile.settings, {
                         // preferConst: options.preferConst,
                         // compact: options.compact,
-                        // namedExports: true,
+                        namedExports: true,
                         // preferConst: true,
                         // includeArbitraryNames: options.includeArbitraryNames,
                         // indent,
                     });
 
-                    consoleLog(
-                        `Result ${id}: %o\n----\n%s`,
-                        {
-                            url: configFile.url.href,
-                            settings: configFile.settings,
-                            inlineCode,
-                        },
-                        inlineCode,
-                    );
-
-                    const codeOut = inlineCode;
-                    const map = undefined;
-
                     return {
                         // code: inlineCode,
-                        code: codeOut,
-                        map,
+                        code: inlineCode,
+                        map: undefined,
                     };
                 },
             },
