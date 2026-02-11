@@ -303,6 +303,7 @@ function mockFileSystem(): VProviderFileSystem {
         writeFile: vi.fn(),
         dispose: vi.fn(),
         getCapabilities: vi.fn(),
+        [Symbol.dispose]: vi.fn(),
     };
     return p;
 }

@@ -152,6 +152,9 @@ function remapFS(
         providerInfo: { ...fs.providerInfo, name },
         capabilities: capabilities ?? fs.capabilities & capabilitiesMask,
         dispose: () => fs.dispose(),
+        [Symbol.dispose]() {
+            this.dispose();
+        },
     };
 
     return fsPassThrough(fs2, shadowFs, publicRoot);
@@ -191,6 +194,9 @@ function fsPassThrough(
         dispose: () => {
             fs.dispose();
             shadowFs?.dispose();
+        },
+        [Symbol.dispose]() {
+            this.dispose();
         },
     };
     return passThroughFs;

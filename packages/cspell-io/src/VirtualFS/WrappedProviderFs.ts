@@ -39,6 +39,7 @@ export function cspellIOToFsProvider(cspellIO: CSpellIO): VFileSystemProvider {
         getCapabilities(url) {
             return fsCapabilities(capMap[url.protocol] || FSCapabilityFlags.None);
         },
+        [Symbol.dispose]() {},
     };
 
     return {

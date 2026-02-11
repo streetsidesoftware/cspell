@@ -197,6 +197,7 @@ function createMockFS(): VProviderFileSystem {
         readFile: vi.fn(() => Promise.reject(new VFSErrorUnsupportedRequest('readFile'))),
         readDirectory: vi.fn(() => Promise.reject(new VFSErrorUnsupportedRequest('readDirectory'))),
         writeFile: vi.fn(() => Promise.reject(new VFSErrorUnsupportedRequest('writeFile'))),
-        dispose: vi.fn(() => undefined),
+        dispose: vi.fn(),
+        [Symbol.dispose]: vi.fn(),
     };
 }

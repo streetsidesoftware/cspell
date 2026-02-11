@@ -1,7 +1,7 @@
 import { urlOrReferenceToUrl } from '../common/index.js';
 import type { CSpellIO } from '../CSpellIO.js';
 import { getDefaultCSpellIO } from '../CSpellIONode.js';
-import type { Disposable } from '../models/index.js';
+import type { DisposableEx } from '../models/index.js';
 import type { LogEvent } from '../models/LogEvent.js';
 import { CSPELL_VFS_PROTOCOL } from './constants.js';
 import { CVFileSystem } from './CVFileSystem.js';
@@ -45,7 +45,7 @@ class CVirtualFS implements VirtualFS {
         }
     };
 
-    registerFileSystemProvider(...providers: VFileSystemProvider[]): Disposable {
+    registerFileSystemProvider(...providers: VFileSystemProvider[]): DisposableEx {
         providers.forEach((provider) => this.providers.add(provider));
         this.reset();
         return {
@@ -57,6 +57,9 @@ class CVirtualFS implements VirtualFS {
                     this.providers.delete(provider) && undefined;
                 }
                 this.reset();
+            },
+            [Symbol.dispose]() {
+                this.dispose();
             },
         };
     }
@@ -130,6 +133,10 @@ class CVirtualFS implements VirtualFS {
                 // continue - we are cleaning up.
             }
         }
+    }
+
+    [Symbol.dispose](): void {
+        this.dispose();
     }
 }
 
