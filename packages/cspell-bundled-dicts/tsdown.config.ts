@@ -10,7 +10,7 @@ export default defineConfig([
         target: 'Node20',
         sourcemap: false,
         // plugins: [dictionaryBundler({ include: ['cspell*.config.*', 'cspell*.json'], debug: true })],
-        plugins: [dictionaryBundler({ include: ['cspell-default*.js'], debug: false })],
+        plugins: [dictionaryBundler({ include: [/cspell-default/], debug: false })],
         clean: true,
         inlineOnly: [],
     },

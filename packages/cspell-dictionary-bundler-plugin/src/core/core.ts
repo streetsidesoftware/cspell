@@ -57,7 +57,7 @@ export function createPlugin(): UnpluginInstance<Options | undefined, false> {
                     );
 
                     const codeOut = inlineCode;
-                    const map = '';
+                    const map = undefined;
 
                     return {
                         // code: inlineCode,
