@@ -33,21 +33,23 @@ export function createPlugin(): UnpluginInstance<Options | undefined, false> {
                     if (!filter(id)) return undefined;
                     consoleLog(`Transforming ${id} with ${code.length} characters`);
                     readerWriter ??= createReaderWriter();
-                    bundler ??= new CSpellDictionaryBundler(readerWriter);
+                    bundler ??= new CSpellDictionaryBundler(readerWriter, options);
 
                     const url = pathToFileURL(id);
                     const configFile = await bundler.bundle(url, code);
                     const inlineCode = dataToEsm(configFile.settings, {
                         // preferConst: options.preferConst,
                         // compact: options.compact,
-                        namedExports: false,
+                        namedExports: true,
+                        // preferConst: true,
                         // includeArbitraryNames: options.includeArbitraryNames,
                         // indent,
                     });
 
                     return {
+                        // code: inlineCode,
                         code: inlineCode,
-                        map: { mappings: '' },
+                        map: undefined,
                     };
                 },
             },

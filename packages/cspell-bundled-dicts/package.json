@@ -12,17 +12,16 @@
   "files": [
     "cspell-default.json",
     "cspell-default.config.js",
-    "cspell-compatibility.json",
-    "compatibility-words.txt.gz"
+    "dist/cspell-bundled.mjs"
   ],
   "exports": {
     ".": "./cspell-default.config.js",
+    "./cspell-bundled.js": "./dist/cspell-bundled.mjs",
     "./cspell-default.config.js": "./cspell-default.config.js",
     "./cspell-default.json": "./cspell-default.json"
   },
   "scripts": {
-    "build": "tsc -p .",
-    "build-dict": "cspell-tools-cli compile compatibility-words.txt",
+    "build": "tsc -p . && tsdown",
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "clean-build": "pnpm run clean && pnpm run build",
     "watch": "pnpm run build --watch",
@@ -112,6 +111,7 @@
   },
   "devDependencies": {
     "@cspell/cspell-tools": "workspace:*",
-    "@cspell/cspell-types": "workspace:*"
+    "@cspell/cspell-types": "workspace:*",
+    "@cspell/dictionary-bundler-plugin": "workspace:*"
   }
 }
