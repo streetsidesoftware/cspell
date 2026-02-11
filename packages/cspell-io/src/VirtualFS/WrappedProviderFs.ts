@@ -28,18 +28,19 @@ export function cspellIOToFsProvider(cspellIO: CSpellIO): VFileSystemProvider {
     };
     const name = 'CSpellIO';
     const supportedProtocols = new Set(['file:', 'http:', 'https:']);
+    const dispose = () => undefined;
     const fs: VProviderFileSystem = {
         providerInfo: { name },
         stat: (url) => cspellIO.getStat(url),
         readFile: (url, options) => cspellIO.readFile(url, options),
         readDirectory: (url) => cspellIO.readDirectory(url),
         writeFile: (file) => cspellIO.writeFile(file.url, file.content),
-        dispose: () => undefined,
+        dispose,
         capabilities,
         getCapabilities(url) {
             return fsCapabilities(capMap[url.protocol] || FSCapabilityFlags.None);
         },
-        [Symbol.dispose]() {},
+        [Symbol.dispose]: dispose,
     };
 
     return {

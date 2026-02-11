@@ -48,20 +48,16 @@ class CVirtualFS implements VirtualFS {
     registerFileSystemProvider(...providers: VFileSystemProvider[]): DisposableEx {
         providers.forEach((provider) => this.providers.add(provider));
         this.reset();
-        return {
-            dispose: () => {
-                for (const provider of providers) {
-                    for (const key of this.revCacheFs.get(provider) || []) {
-                        this.cachedFs.delete(key);
-                    }
-                    this.providers.delete(provider) && undefined;
+        const dispose = () => {
+            for (const provider of providers) {
+                for (const key of this.revCacheFs.get(provider) || []) {
+                    this.cachedFs.delete(key);
                 }
-                this.reset();
-            },
-            [Symbol.dispose]() {
-                this.dispose();
-            },
+                this.providers.delete(provider) && undefined;
+            }
+            this.reset();
         };
+        return { dispose, [Symbol.dispose]: dispose };
     }
 
     getFS(url: URL): VFileSystem {
