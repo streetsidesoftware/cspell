@@ -101,7 +101,7 @@ export function resolveOptions(options: Options): OptionsResolved {
         enforce: 'enforce' in options ? options.enforce : 'pre',
         convertToBTrie: options.convertToBTrie ?? true,
         minConvertSize: options.minConvertSize ?? 200,
-        compress: options.compress ?? true,
+        compress: options.compress ?? false,
         debug: !!options.debug,
     };
 }
