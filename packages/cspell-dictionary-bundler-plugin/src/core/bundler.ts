@@ -47,7 +47,7 @@ export class CSpellDictionaryBundler {
         const imports = await this.loadImports(config);
         const settings = mergeConfig(
             imports.map((f) => f.settings),
-            await this.resolveDictionaries(config),
+            await resolveDictionaries(config, this.#options),
         );
         delete settings.import;
         delete settings['$schema'];
@@ -55,33 +55,6 @@ export class CSpellDictionaryBundler {
             url: config.url,
             settings,
         };
-    }
-
-    async resolveDictionaries(config: ICSpellConfigFile): Promise<CSpellSettings> {
-        const settings = { ...config.settings };
-        if (!settings.dictionaryDefinitions) return settings;
-        // Make a copy of the dictionary definitions and vfs to avoid mutating the original config file.
-        const dictDefs = (settings.dictionaryDefinitions = [...settings.dictionaryDefinitions]);
-        const vfs: CSpellVFS = (settings.vfs ??= Object.create(null));
-        const minConvertSize = this.#options.minConvertSize ?? 1024;
-
-        for (let i = 0; i < dictDefs.length; ++i) {
-            const def = dictDefs[i];
-            if (!def.path) continue;
-            const d = { ...def };
-            dictDefs[i] = d;
-            const url = new URL(def.btrie ?? def.path, config.url);
-            if (url.protocol !== 'file:') continue;
-            let file = await readFile({ url });
-            file = this.#options.convertToBTrie && fileLength(file) >= minConvertSize ? await convert(file) : file;
-            file = this.#options.compress && fileLength(file) >= minConvertSize ? compressFile(file) : file;
-            const vfsUrl = await populateVfs(vfs, file);
-            delete d.file;
-            delete d.btrie;
-            d.path = vfsUrl.href;
-        }
-
-        return settings;
     }
 
     importConfig(url: URL, content?: string): Promise<CSpellConfigFile> {
@@ -95,6 +68,36 @@ export class CSpellDictionaryBundler {
         const imports = [config.settings.import || []].flat();
         return Promise.all(imports.map((importPath) => this.bundle(resolveImport(importPath, config.url))));
     }
+}
+
+export async function resolveDictionaries(
+    config: ICSpellConfigFile,
+    options: CSpellDictionaryBundlerOptions,
+): Promise<CSpellSettings> {
+    const settings = { ...config.settings };
+    if (!settings.dictionaryDefinitions) return settings;
+    // Make a copy of the dictionary definitions and vfs to avoid mutating the original config file.
+    const dictDefs = (settings.dictionaryDefinitions = [...settings.dictionaryDefinitions]);
+    const vfs: CSpellVFS = (settings.vfs ??= Object.create(null));
+    const minConvertSize = options.minConvertSize ?? 1024;
+
+    for (let i = 0; i < dictDefs.length; ++i) {
+        const def = dictDefs[i];
+        if (!def.path) continue;
+        const d = { ...def };
+        dictDefs[i] = d;
+        const url = new URL(def.btrie ?? def.path, config.url);
+        if (url.protocol !== 'file:') continue;
+        let file = await readFile({ url });
+        file = options.convertToBTrie && fileLength(file) >= minConvertSize ? await convert(file) : file;
+        file = options.compress && fileLength(file) >= minConvertSize ? compressFile(file) : file;
+        const vfsUrl = await populateVfs(vfs, file);
+        delete d.file;
+        delete d.btrie;
+        d.path = vfsUrl.href;
+    }
+
+    return settings;
 }
 
 interface FileReference {
