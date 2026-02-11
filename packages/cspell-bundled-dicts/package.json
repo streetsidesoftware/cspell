@@ -16,14 +16,12 @@
   ],
   "exports": {
     ".": "./cspell-default.config.js",
-    "./cspell-bundled.mjs": "./dist/cspell-bundled.mjs",
     "./cspell-bundled.js": "./dist/cspell-bundled.mjs",
     "./cspell-default.config.js": "./cspell-default.config.js",
     "./cspell-default.json": "./cspell-default.json"
   },
   "scripts": {
     "build": "tsc -p . && tsdown",
-    "build-dict": "cspell-tools-cli compile compatibility-words.txt",
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "clean-build": "pnpm run clean && pnpm run build",
     "watch": "pnpm run build --watch",
