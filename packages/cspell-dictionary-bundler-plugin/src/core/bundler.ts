@@ -2,14 +2,18 @@ import { createHash } from 'node:crypto';
 import fs from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import { pathToFileURL } from 'node:url';
+import { gzipSync } from 'node:zlib';
 
 import type { CSpellSettings, CSpellVFS } from '@cspell/cspell-types';
 import { mergeConfig } from '@cspell/cspell-types';
 import type { CSpellConfigFile, CSpellConfigFileReaderWriter, ICSpellConfigFile } from 'cspell-config-lib';
+import { convertToBTrie } from 'cspell-trie-lib';
 
-export interface CSpellDictionaryBundlerOptions {
-    debug?: boolean;
-}
+import type { Options } from './options.ts';
+
+export type CSpellDictionaryBundlerOptions = Required<
+    Pick<Options, 'debug' | 'convertToBTrie' | 'minConvertSize' | 'compress'>
+>;
 
 export class CSpellDictionaryBundler {
     #loadedConfigs = new Map<string, Promise<ICSpellConfigFile>>();
@@ -59,6 +63,7 @@ export class CSpellDictionaryBundler {
         // Make a copy of the dictionary definitions and vfs to avoid mutating the original config file.
         const dictDefs = (settings.dictionaryDefinitions = [...settings.dictionaryDefinitions]);
         const vfs: CSpellVFS = (settings.vfs ??= Object.create(null));
+        const minConvertSize = this.#options.minConvertSize ?? 1024;
 
         for (let i = 0; i < dictDefs.length; ++i) {
             const def = dictDefs[i];
@@ -67,7 +72,10 @@ export class CSpellDictionaryBundler {
             dictDefs[i] = d;
             const url = new URL(def.btrie ?? def.path, config.url);
             if (url.protocol !== 'file:') continue;
-            const vfsUrl = await populateVfs(vfs, url);
+            let file = await readFile({ url });
+            file = this.#options.convertToBTrie && fileLength(file) >= minConvertSize ? await convert(file) : file;
+            file = this.#options.compress && fileLength(file) >= minConvertSize ? compressFile(file) : file;
+            const vfsUrl = await populateVfs(vfs, file);
             delete d.file;
             delete d.btrie;
             d.path = vfsUrl.href;
@@ -89,6 +97,20 @@ export class CSpellDictionaryBundler {
     }
 }
 
+interface FileReference {
+    url: URL;
+    content?: string | Uint8Array<ArrayBuffer>;
+}
+
+interface FileResource extends FileReference {
+    content: string | Uint8Array<ArrayBuffer>;
+}
+
+async function convert(file: FileReference): Promise<FileResource> {
+    const resource = await readFile(file);
+    return convertToBTrie(resource, { optimize: true });
+}
+
 /**
  * Load a file from the file system and populate the virtual file system with its content.
  *
@@ -96,12 +118,12 @@ export class CSpellDictionaryBundler {
  * @param url - The url to load and store.
  * @return The cspell-vfs url that was loaded.
  */
-export async function populateVfs(vfs: CSpellVFS, url: URL): Promise<URL> {
-    const content = await fs.readFile(url);
+export async function populateVfs(vfs: CSpellVFS, fileRef: FileReference): Promise<URL> {
+    const { url, content } = await readFile(fileRef);
 
     const hash = createHash('sha256').update(content).digest('hex');
 
-    const data = content.toString('base64');
+    const data = typeof content === 'string' ? content : Buffer.from(content).toString('base64');
     const vfsUrl = makeVfsUrl(url, hash.slice(0, 16));
     vfs[vfsUrl.href] = {
         data,
@@ -149,4 +171,29 @@ const isCodeFileRegExp = /\.[cm]?(js|ts)$/i;
 
 function isCodeFile(url: URL): boolean {
     return isCodeFileRegExp.test(url.pathname);
+}
+
+async function readFile(fileRef: FileReference): Promise<FileResource> {
+    const url = fileRef.url;
+    const content = fileRef.content ?? (await fs.readFile(url));
+    return { url, content };
+}
+
+/**
+ * This is the approximate size of the file in bytes.
+ * @param file
+ * @returns
+ */
+function fileLength(file: FileResource): number {
+    if (typeof file.content === 'string') {
+        return file.content.length;
+    }
+    return file.content.byteLength;
+}
+
+function compressFile(file: FileResource): FileResource {
+    if (file.url.pathname.endsWith('.gz')) return file;
+    const url = new URL(file.url.pathname + '.gz', file.url);
+    const content = gzipSync(file.content);
+    return { url, content };
 }

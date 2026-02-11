@@ -25,7 +25,7 @@ describe('populateVfs', () => {
     test('should populate the vfs with the content of the file', async () => {
         const vfs: CSpellVFS = {};
         const fileUrl = new URL('words.txt', fixturesUrl);
-        const url = await populateVfs(vfs, fileUrl);
+        const url = await populateVfs(vfs, { url: fileUrl });
         expect(url.href).toMatch(/^cspell-vfs:\/\/\//);
         expect(vfs[url.href]).toBeDefined();
         expect(vfs[url.href].encoding).toBe('base64');
