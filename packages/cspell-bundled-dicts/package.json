@@ -11,7 +11,8 @@
   "main": "cspell-default.json",
   "files": [
     "cspell-default.json",
-    "cspell-default.config.js"
+    "cspell-default.config.js",
+    "dist/cspell-bundled.mjs"
   ],
   "exports": {
     ".": "./cspell-default.config.js",
@@ -21,7 +22,7 @@
     "./cspell-default.json": "./cspell-default.json"
   },
   "scripts": {
-    "build": "tsc -p .",
+    "build": "tsc -p . && tsdown",
     "build-dict": "cspell-tools-cli compile compatibility-words.txt",
     "clean": "shx rm -rf dist temp coverage \"*.tsbuildInfo\"",
     "clean-build": "pnpm run clean && pnpm run build",
