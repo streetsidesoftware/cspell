@@ -38,8 +38,9 @@ describe('populateVfs', () => {
 
 describe('resolveDictionaries', () => {
     test('should resolve dictionary definitions and populate the vfs', async () => {
+        const url = new URL('test/config.json', import.meta.url);
         const config: ICSpellConfigFile = {
-            url: new URL('file:///path/to/config.json'),
+            url,
             settings: {
                 dictionaryDefinitions: [{ name: 'test-dict', path: fileURLToPath(new URL('words.txt', fixturesUrl)) }],
             },

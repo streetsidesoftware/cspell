@@ -1,7 +1,8 @@
 import { createHash } from 'node:crypto';
 import fs from 'node:fs/promises';
 import { createRequire } from 'node:module';
-import { pathToFileURL } from 'node:url';
+import nodePath from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { gzipSync } from 'node:zlib';
 
 import type { CSpellSettings, CSpellVFS } from '@cspell/cspell-types';
@@ -76,6 +77,7 @@ export async function resolveDictionaries(
 ): Promise<CSpellSettings> {
     const settings = { ...config.settings };
     if (!settings.dictionaryDefinitions) return settings;
+    if (config.url.protocol !== 'file:') return settings;
     // Make a copy of the dictionary definitions and vfs to avoid mutating the original config file.
     const dictDefs = (settings.dictionaryDefinitions = [...settings.dictionaryDefinitions]);
     const vfs: CSpellVFS = (settings.vfs ??= Object.create(null));
@@ -83,10 +85,10 @@ export async function resolveDictionaries(
 
     for (let i = 0; i < dictDefs.length; ++i) {
         const def = dictDefs[i];
-        if (!def.path) continue;
         const d = { ...def };
+        if (!d.path) continue;
         dictDefs[i] = d;
-        const url = new URL(def.btrie ?? def.path, config.url);
+        const url = resolvePath(d.btrie ?? d.path, config.url);
         if (url.protocol !== 'file:') continue;
         let file = await readFile({ url });
         file = options.convertToBTrie && fileLength(file) >= minConvertSize ? await convert(file) : file;
@@ -199,4 +201,14 @@ function compressFile(file: FileResource): FileResource {
     const url = new URL(file.url.pathname + '.gz', file.url);
     const content = gzipSync(file.content);
     return { url, content };
+}
+
+function resolvePath(path: string, base: URL): URL {
+    if (isUrlLike(path)) {
+        return new URL(path);
+    }
+
+    const dir = fileURLToPath(new URL('./', base));
+    const filePath = nodePath.resolve(dir, path);
+    return pathToFileURL(filePath);
 }
