@@ -12,7 +12,7 @@ export interface Options {
     convertToBTrie?: boolean | undefined;
     /**
      * The minimum size (in bytes) a dictionary must be to be converted to BTrie format.
-     * @default 1024
+     * @default 200
      */
     minConvertSize?: number | undefined;
 
