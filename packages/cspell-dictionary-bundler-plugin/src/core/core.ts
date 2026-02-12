@@ -99,6 +99,9 @@ export function resolveOptions(options: Options): OptionsResolved {
         include: options.include || [/.*cspell(?:[-]ext)?(\..*)?\.(?:jsonc?|ya?ml|toml)$/i],
         exclude: options.exclude || undefined,
         enforce: 'enforce' in options ? options.enforce : 'pre',
+        convertToBTrie: options.convertToBTrie ?? true,
+        minConvertSize: options.minConvertSize ?? 200,
+        compress: options.compress ?? false,
         debug: !!options.debug,
     };
 }

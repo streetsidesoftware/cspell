@@ -9,7 +9,7 @@ export {
     FORBID_PREFIX,
     OPTIONAL_COMPOUND_FIX,
 } from './constants.ts';
-export { decodeTrie } from './decodeTrie.ts';
+export { convertToBTrie, decodeFile, decodeTrie } from './decodeTrie.ts';
 export type { WeightMap } from './distance/index.ts';
 export { createWeightedMap, editDistance, editDistanceWeighted } from './distance/index.ts';
 export { type ExportOptions, importTrie, serializeTrie } from './io/importExport.ts';
@@ -26,7 +26,7 @@ export type { MaxCost, SuggestionCollector, SuggestionResult } from './suggestCo
 export { impersonateCollector, suggestionCollector } from './suggestCollector.ts';
 export type { PartialTrieOptions, TrieOptions, TrieOptionsRO } from './trie.ts';
 export { Trie } from './trie.ts';
-export { encodeTrieDataToBTrie } from './TrieBlob/index.ts';
+export { encodeITrieToBTrie, encodeTrieDataToBTrie } from './TrieBlob/index.ts';
 export { buildTrie, buildTrieFast, TrieBuilder } from './TrieBuilder.ts';
 export type { FindFullResult } from './TrieNode/find.ts';
 export {
