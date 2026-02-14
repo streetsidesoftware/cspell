@@ -596,15 +596,42 @@ interface ExtendedSuggestion {
 }
 //#endregion
 //#region src/lib/Models/ValidationResult.d.ts
-interface ValidationResult extends TextOffset, Pick<Issue, "message" | "issueType" | "hasPreferredSuggestions" | "hasSimpleSuggestions"> {
+interface ValidationResult extends Omit<TextOffset, "length">, Pick<Issue, "message" | "issueType" | "hasPreferredSuggestions" | "hasSimpleSuggestions"> {
+  length?: number | undefined;
   line: TextOffset;
   isFlagged?: boolean | undefined;
   isFound?: boolean | undefined;
+}
+/**
+* The ValidationResultRPC is used for RPC communication. It is a subset of ValidationResult that can be serialized.
+*
+* The URI, document, row, and column information are not included in the RPC version of ValidationResult
+* because they can be calculated from the offset and the document text.
+*/
+interface ValidationResultRPC extends Pick<ValidationResult, "text" | "length" | "offset" | "message" | "issueType" | "hasPreferredSuggestions" | "hasSimpleSuggestions" | "isFlagged" | "isFound"> {
+  /**
+  * The line information is not included in the RPC version of ValidationResult because it can be calculated from the offset and the document text.
+  */
+  line?: undefined;
+  /**
+  * The context information is not included in the RPC version of ValidationResult because it can be calculated from the offset and the document text.
+  */
+  context?: undefined;
+  uri?: undefined;
+  doc?: undefined;
+  row?: undefined;
+  col?: undefined;
 }
 //#endregion
 //#region src/lib/Models/ValidationIssue.d.ts
 interface ValidationIssue extends ValidationResult {
   suggestions?: string[] | undefined;
+  suggestionsEx?: ExtendedSuggestion[] | undefined;
+}
+/**
+* The ValidationIssueRPC is used for RPC communication. It is a subset of ValidationIssue that can be serialized.
+*/
+interface ValidationIssueRPC extends ValidationResultRPC {
   suggestionsEx?: ExtendedSuggestion[] | undefined;
 }
 //#endregion
@@ -1012,6 +1039,26 @@ interface SpellCheckFileResult {
   dictionaryErrors?: Map<string, Error[]> | undefined;
   perf?: SpellCheckFilePerf;
 }
+interface DocumentReferenceRPC extends Pick<Document, "uri"> {
+  text?: undefined;
+  languageId?: undefined;
+  locale?: undefined;
+}
+interface SpellCheckFileResultRPC {
+  /**
+  * The document that was checked.
+  *
+  * **Note:** the text will be missing to avoid sending large amounts of text over the RPC channel.
+  * If the text is needed, the document should be reloaded using the URI.
+  */
+  document: DocumentReferenceRPC;
+  issues?: ValidationIssueRPC[] | undefined;
+  checked: boolean;
+  errors?: Error[] | undefined;
+  configErrors?: ImportFileRefWithError[] | undefined;
+  dictionaryErrors?: Map<string, Error[]> | undefined;
+  perf?: SpellCheckFilePerf | undefined;
+}
 /**
 * Spell Check a file
 * @param file - absolute path to file to read and check.
@@ -1032,7 +1079,7 @@ declare function spellCheckDocument(document: Document | DocumentWithText, optio
 * @param options - options to control checking
 * @param settings - default settings to use.
 */
-declare function spellCheckDocumentRPC(document: Document | DocumentWithText, options: SpellCheckFileOptions, settingsOrConfigFile: CSpellUserSettings | ICSpellConfigFile$1): Promise<SpellCheckFileResult>;
+declare function spellCheckDocumentRPC(document: Document | DocumentWithText, options: SpellCheckFileOptions, settingsOrConfigFile: CSpellUserSettings | ICSpellConfigFile$1): Promise<SpellCheckFileResultRPC>;
 interface DetermineFinalDocumentSettingsResult {
   document: DocumentWithText;
   settings: CSpellSettingsWithSourceTrace;
