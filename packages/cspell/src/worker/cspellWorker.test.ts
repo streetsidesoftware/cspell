@@ -2,7 +2,7 @@ import { describe, expect, test } from 'vitest';
 
 import { startCSpellWorker } from './cspellWorker.js';
 
-const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
+// const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
 
 describe('Validate CSpellWorker', () => {
     test('Check creation', async () => {

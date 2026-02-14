@@ -3,7 +3,7 @@ import { describe, expect, test } from 'vitest';
 
 import { startCSpellWorker } from '../dist/index.js';
 
-const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
+// const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
 
 describe('Index', () => {
     test('Create CSpell Server', async () => {
