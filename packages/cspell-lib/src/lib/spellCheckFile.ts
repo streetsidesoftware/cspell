@@ -172,15 +172,32 @@ export async function spellCheckDocumentRPC(
         options,
         settingsOrConfigFile,
     );
-    return {
+
+    const result: SpellCheckFileResultRPC = {
         document: { uri: document.uri },
-        issues: issues.length ? issues.map(toValidationIssueRPC) : undefined,
         checked,
-        errors: errors?.length ? errors : undefined,
-        configErrors: configErrors?.length ? configErrors : undefined,
-        dictionaryErrors: dictionaryErrors && dictionaryErrors.size ? dictionaryErrors : undefined,
-        perf,
     };
+
+    if (issues.length) {
+        result.issues = issues.map(toValidationIssueRPC);
+    }
+
+    if (errors?.length) {
+        result.errors = errors;
+    }
+
+    if (configErrors?.length) {
+        result.configErrors = configErrors;
+    }
+    if (dictionaryErrors?.size) {
+        result.dictionaryErrors = dictionaryErrors;
+    }
+
+    if (perf) {
+        result.perf = perf;
+    }
+
+    return result;
 }
 
 async function spellCheckFullDocument(
