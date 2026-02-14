@@ -2,7 +2,7 @@ import { describe, expect, test } from 'vitest';
 
 import { startCSpellWorker } from './cspellWorker.js';
 
-const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
+// const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
 
 describe('Validate CSpellWorker', () => {
     test('Check creation', async () => {
@@ -39,7 +39,7 @@ describe('Validate CSpellWorker', () => {
             const result = await api.spellCheckDocument(doc, {}, {});
             console.log(`check time: ${performance.now() - t} ms`);
             expect(result).toBeDefined();
-            expect(result).toEqual(oc({ document: oc({ uri }), issues: [], errors: undefined }));
+            expect(result).toEqual({ document: { uri }, checked: true, issues: undefined, errors: undefined });
         }
     });
 });

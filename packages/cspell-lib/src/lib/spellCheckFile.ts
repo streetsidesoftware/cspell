@@ -6,15 +6,14 @@ import type { Document, DocumentWithText } from './Document/index.js';
 import { isBinaryDoc } from './Document/isBinaryDoc.js';
 import { documentToTextDocument, resolveDocument } from './Document/resolveDocument.js';
 import { createTextDocument } from './Models/TextDocument.js';
+import { toValidationIssueRPC, type ValidationIssueRPC } from './Models/ValidationIssue.js';
 import { createPerfTimer } from './perf/index.js';
 import type { ImportFileRefWithError } from './Settings/index.js';
-import { cloneSettingsForExport } from './Settings/sanitizeSettings.js';
 import { determineTextDocumentSettings } from './textValidation/determineTextDocumentSettings.js';
 import type { DocumentValidatorOptions } from './textValidation/index.js';
 import { DocumentValidator } from './textValidation/index.js';
 import { isError } from './util/errors.js';
 import type { Uri } from './util/IUri.js';
-import { memoizeLastCall } from './util/memoizeLastCall.js';
 import { toUri } from './util/Uri.js';
 import type { ValidateTextOptions, ValidationIssue } from './validator.js';
 
@@ -40,6 +39,10 @@ export interface SpellCheckFileOptions extends ValidateTextOptions, Pick<CSpellU
     noConfigSearch?: boolean;
 }
 
+export interface SpellCheckFileOptionsRPC extends SpellCheckFileOptions {
+    measurePerf?: boolean;
+}
+
 export interface SpellCheckFilePerf extends Record<string, number | undefined> {
     loadTimeMs?: number;
     prepareTimeMs?: number;
@@ -58,6 +61,28 @@ export interface SpellCheckFileResult {
     configErrors?: ImportFileRefWithError[] | undefined;
     dictionaryErrors?: Map<string, Error[]> | undefined;
     perf?: SpellCheckFilePerf;
+}
+
+interface DocumentReferenceRPC extends Pick<Document, 'uri'> {
+    text?: undefined;
+    languageId?: undefined;
+    locale?: undefined;
+}
+
+export interface SpellCheckFileResultRPC {
+    /**
+     * The document that was checked.
+     *
+     * **Note:** the text will be missing to avoid sending large amounts of text over the RPC channel.
+     * If the text is needed, the document should be reloaded using the URI.
+     */
+    document: DocumentReferenceRPC;
+    issues?: ValidationIssueRPC[] | undefined;
+    checked: boolean;
+    errors?: Error[] | undefined;
+    configErrors?: ImportFileRefWithError[] | undefined;
+    dictionaryErrors?: Map<string, Error[]> | undefined;
+    perf?: SpellCheckFilePerf | undefined;
 }
 
 /**
@@ -135,12 +160,6 @@ export async function spellCheckDocument(
     }
 }
 
-const memoizedCloneSettingsForExport = memoizeLastCall(cloneSettingsForExport);
-
-function sanitizeSettingsForExport(settings: CSpellSettingsWithSourceTrace | undefined): CSpellSettingsWithSourceTrace {
-    return settings ? memoizedCloneSettingsForExport(settings) : {};
-}
-
 /**
  * Spell Check a Document.
  * @param document - document to be checked. If `document.text` is `undefined` the file will be loaded
@@ -149,11 +168,39 @@ function sanitizeSettingsForExport(settings: CSpellSettingsWithSourceTrace | und
  */
 export async function spellCheckDocumentRPC(
     document: Document | DocumentWithText,
-    options: SpellCheckFileOptions,
+    options: SpellCheckFileOptionsRPC,
     settingsOrConfigFile: CSpellUserSettings | ICSpellConfigFile,
-): Promise<SpellCheckFileResult> {
-    const result = { ...(await spellCheckDocument(document, options, settingsOrConfigFile)) };
-    result.settingsUsed = sanitizeSettingsForExport(result.settingsUsed);
+): Promise<SpellCheckFileResultRPC> {
+    const { issues, checked, errors, configErrors, dictionaryErrors, perf } = await spellCheckDocument(
+        document,
+        options,
+        settingsOrConfigFile,
+    );
+
+    const result: SpellCheckFileResultRPC = {
+        document: { uri: document.uri },
+        checked,
+    };
+
+    if (issues.length) {
+        result.issues = issues.map(toValidationIssueRPC);
+    }
+
+    if (errors?.length) {
+        result.errors = errors;
+    }
+
+    if (configErrors?.length) {
+        result.configErrors = configErrors;
+    }
+    if (dictionaryErrors?.size) {
+        result.dictionaryErrors = dictionaryErrors;
+    }
+
+    if (perf && options.measurePerf) {
+        result.perf = perf;
+    }
+
     return result;
 }
 
