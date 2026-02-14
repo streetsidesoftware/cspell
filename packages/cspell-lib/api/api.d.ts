@@ -1021,6 +1021,9 @@ interface SpellCheckFileOptions extends ValidateTextOptions, Pick<CSpellUserSett
   */
   noConfigSearch?: boolean;
 }
+interface SpellCheckFileOptionsRPC extends SpellCheckFileOptions {
+  measurePerf?: boolean;
+}
 interface SpellCheckFilePerf extends Record<string, number | undefined> {
   loadTimeMs?: number;
   prepareTimeMs?: number;
@@ -1079,7 +1082,7 @@ declare function spellCheckDocument(document: Document | DocumentWithText, optio
 * @param options - options to control checking
 * @param settings - default settings to use.
 */
-declare function spellCheckDocumentRPC(document: Document | DocumentWithText, options: SpellCheckFileOptions, settingsOrConfigFile: CSpellUserSettings | ICSpellConfigFile$1): Promise<SpellCheckFileResultRPC>;
+declare function spellCheckDocumentRPC(document: Document | DocumentWithText, options: SpellCheckFileOptionsRPC, settingsOrConfigFile: CSpellUserSettings | ICSpellConfigFile$1): Promise<SpellCheckFileResultRPC>;
 interface DetermineFinalDocumentSettingsResult {
   document: DocumentWithText;
   settings: CSpellSettingsWithSourceTrace;

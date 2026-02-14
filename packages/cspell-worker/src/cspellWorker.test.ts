@@ -39,6 +39,6 @@ describe('Index', () => {
         expect(worker.numberOfPendingRequests).toBe(1);
         const result = await pending;
         expect(result).toBeDefined();
-        expect(result).toEqual(oc({ document: oc(doc), issues: [], errors: undefined }));
+        expect(result).toEqual({ document: doc, checked: true, issues: undefined });
     });
 });

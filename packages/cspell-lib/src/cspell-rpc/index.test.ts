@@ -36,10 +36,10 @@ describe('Validate Client / Server communications', () => {
             issues: undefined,
             checked: true,
             document: doc,
-            perf: expect.anything(),
+            perf: undefined,
         });
 
-        const result2 = await api.spellCheckDocument(doc, {}, {});
+        const result2 = await api.spellCheckDocument(doc, { measurePerf: true }, {});
         expect(result2).toBeDefined();
         expect(result2).toEqual({
             issues: undefined,

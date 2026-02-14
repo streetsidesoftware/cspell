@@ -39,6 +39,10 @@ export interface SpellCheckFileOptions extends ValidateTextOptions, Pick<CSpellU
     noConfigSearch?: boolean;
 }
 
+export interface SpellCheckFileOptionsRPC extends SpellCheckFileOptions {
+    measurePerf?: boolean;
+}
+
 export interface SpellCheckFilePerf extends Record<string, number | undefined> {
     loadTimeMs?: number;
     prepareTimeMs?: number;
@@ -164,7 +168,7 @@ export async function spellCheckDocument(
  */
 export async function spellCheckDocumentRPC(
     document: Document | DocumentWithText,
-    options: SpellCheckFileOptions,
+    options: SpellCheckFileOptionsRPC,
     settingsOrConfigFile: CSpellUserSettings | ICSpellConfigFile,
 ): Promise<SpellCheckFileResultRPC> {
     const { issues, checked, errors, configErrors, dictionaryErrors, perf } = await spellCheckDocument(
@@ -193,7 +197,7 @@ export async function spellCheckDocumentRPC(
         result.dictionaryErrors = dictionaryErrors;
     }
 
-    if (perf) {
+    if (perf && options.measurePerf) {
         result.perf = perf;
     }
 

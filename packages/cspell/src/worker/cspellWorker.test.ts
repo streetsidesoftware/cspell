@@ -39,7 +39,7 @@ describe('Validate CSpellWorker', () => {
             const result = await api.spellCheckDocument(doc, {}, {});
             console.log(`check time: ${performance.now() - t} ms`);
             expect(result).toBeDefined();
-            expect(result).toEqual(oc({ document: oc({ uri }), issues: [], errors: undefined }));
+            expect(result).toEqual({ document: { uri }, checked: true, issues: undefined, errors: undefined });
         }
     });
 });
