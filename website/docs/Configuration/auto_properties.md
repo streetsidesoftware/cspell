@@ -62,6 +62,8 @@ format: md
 | [reporters](#settings-reporters)                               | [`ReporterSettings`](#reportersettings)&ZeroWidthSpace;`[]`               | Define which reports to use.                                                                                                                                         |
 | [showStatus](#settings-showstatus)                             | `boolean`                                                                 | Show status.                                                                                                                                                         |
 | [spellCheckDelayMs](#settings-spellcheckdelayms)               | `number`                                                                  | Delay in ms after a document has changed before checking it for spelling errors.                                                                                     |
+| [substitutionDefinitions](#settings-substitutiondefinitions)   | [`SubstitutionDefinitions`](#substitutiondefinitions)                     | The set of available substitutions. This is a collection of substitution definitions that can be applied to a document before spell checking.                        |
+| [substitutions](#settings-substitutions)                       | [`Substitutions`](#substitutions)                                         | The set of substitutions to apply to a document before spell checking.                                                                                               |
 | [suggestionNumChanges](#settings-suggestionnumchanges)         | `number`                                                                  | The maximum number of changes allowed on a word to be considered a suggestions.                                                                                      |
 | [suggestionsTimeout](#settings-suggestionstimeout)             | `number`                                                                  | The maximum amount of time in milliseconds to generate suggestions for a word.                                                                                       |
 | [suggestWords](#settings-suggestwords)                         | `string`&ZeroWidthSpace;`[]`                                              | A list of suggested replacements for words.                                                                                                                          |
@@ -1484,6 +1486,64 @@ Delay in ms after a document has changed before checking it for spelling errors.
 `number`
 
 </dd>
+
+</dl>
+
+
+
+
+---
+
+#### `substitutionDefinitions` {#settings-substitutiondefinitions}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+The set of available substitutions. This is a collection of substitution definitions that can be applied to a document before spell checking.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`SubstitutionDefinitions`](#substitutiondefinitions)
+
+</dd>
+
+<dt>Since</dt>
+<dd>9.7.0</dd>
+
+</dl>
+
+
+
+
+---
+
+#### `substitutions` {#settings-substitutions}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+The set of substitutions to apply to a document before spell checking.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`Substitutions`](#substitutions)
+
+</dd>
+
+<dt>Since</dt>
+<dd>9.7.0</dd>
 
 </dl>
 
@@ -6308,28 +6368,30 @@ A file type:
 
 ## LanguageSetting
 
-| Field                                                           | Type                                                                      | Description                                                                                                                   |
-| --------------------------------------------------------------- | ------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
-| [languageId](#languagesetting-languageid) <sup>_req_</sup>      | [`MatchingFileType`](#matchingfiletype)                                   | The language id.  Ex: `typescript`, `html`, or `php`.  `*` -- will match all languages.                                       |
-| [allowCompoundWords](#languagesetting-allowcompoundwords)       | `boolean`                                                                 | True to enable compound word checking.                                                                                        |
-| [caseSensitive](#languagesetting-casesensitive)                 | `boolean`                                                                 | Determines if words must match case and accent rules.                                                                         |
-| [description](#languagesetting-description)                     | `string`                                                                  | Optional description of configuration.                                                                                        |
-| [dictionaries](#languagesetting-dictionaries)                   | [`DictionaryReference`](#dictionaryreference)&ZeroWidthSpace;`[]`         | Optional list of dictionaries to use. Each entry should match the name of the dictionary.                                     |
-| [dictionaryDefinitions](#languagesetting-dictionarydefinitions) | [`DictionaryDefinition`](#dictionarydefinition)&ZeroWidthSpace;`[]`       | Define additional available dictionaries.                                                                                     |
-| [enabled](#languagesetting-enabled)                             | `boolean`                                                                 | Is the spell checker enabled.                                                                                                 |
-| [flagWords](#languagesetting-flagwords)                         | `string`&ZeroWidthSpace;`[]`                                              | List of words to always be considered incorrect. Words found in `flagWords` override `words`.                                 |
-| [id](#languagesetting-id)                                       | `string`                                                                  | Optional identifier.                                                                                                          |
-| [ignoreRegExpList](#languagesetting-ignoreregexplist)           | [`RegExpPatternList`](#regexppatternlist)                                 | List of regular expression patterns or pattern names to exclude from spell checking.                                          |
-| [ignoreWords](#languagesetting-ignorewords)                     | `string`&ZeroWidthSpace;`[]`                                              | List of words to be ignored. An ignored word will not show up as an error, even if it is                                      |
-| [includeRegExpList](#languagesetting-includeregexplist)         | [`RegExpPatternList`](#regexppatternlist)                                 | List of regular expression patterns or defined pattern names to match for spell checking.                                     |
-| [local](#languagesetting-local)                                 | [`LocaleId`](#localeid)<br />[`LocaleId`](#localeid)&ZeroWidthSpace;`[]`  | Deprecated - The locale filter, matches against the language. This can be a comma separated list. `*` will match all locales. |
-| [locale](#languagesetting-locale)                               | [`LocaleId`](#localeid)<br />[`LocaleId`](#localeid)&ZeroWidthSpace;`[]`  | The locale filter, matches against the language. This can be a comma separated list. `*` will match all locales.              |
-| [name](#languagesetting-name)                                   | `string`                                                                  | Optional name of configuration.                                                                                               |
-| [noSuggestDictionaries](#languagesetting-nosuggestdictionaries) | [`DictionaryReference`](#dictionaryreference)&ZeroWidthSpace;`[]`         | Optional list of dictionaries that will not be used for suggestions.                                                          |
-| [patterns](#languagesetting-patterns)                           | [`RegExpPatternDefinition`](#regexppatterndefinition)&ZeroWidthSpace;`[]` | Defines a list of patterns that can be used with the  [ignoreRegExpList](#ignoreregexplist)  and                              |
-| [suggestWords](#languagesetting-suggestwords)                   | `string`&ZeroWidthSpace;`[]`                                              | A list of suggested replacements for words.                                                                                   |
-| [unknownWords](#languagesetting-unknownwords)                   | [`UnknownWordsChoices`](#unknownwordschoices)                             | Controls how unknown words are handled.                                                                                       |
-| [words](#languagesetting-words)                                 | `string`&ZeroWidthSpace;`[]`                                              | List of words to be considered correct.                                                                                       |
+| Field                                                               | Type                                                                      | Description                                                                                                                                   |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| [languageId](#languagesetting-languageid) <sup>_req_</sup>          | [`MatchingFileType`](#matchingfiletype)                                   | The language id.  Ex: `typescript`, `html`, or `php`.  `*` -- will match all languages.                                                       |
+| [allowCompoundWords](#languagesetting-allowcompoundwords)           | `boolean`                                                                 | True to enable compound word checking.                                                                                                        |
+| [caseSensitive](#languagesetting-casesensitive)                     | `boolean`                                                                 | Determines if words must match case and accent rules.                                                                                         |
+| [description](#languagesetting-description)                         | `string`                                                                  | Optional description of configuration.                                                                                                        |
+| [dictionaries](#languagesetting-dictionaries)                       | [`DictionaryReference`](#dictionaryreference)&ZeroWidthSpace;`[]`         | Optional list of dictionaries to use. Each entry should match the name of the dictionary.                                                     |
+| [dictionaryDefinitions](#languagesetting-dictionarydefinitions)     | [`DictionaryDefinition`](#dictionarydefinition)&ZeroWidthSpace;`[]`       | Define additional available dictionaries.                                                                                                     |
+| [enabled](#languagesetting-enabled)                                 | `boolean`                                                                 | Is the spell checker enabled.                                                                                                                 |
+| [flagWords](#languagesetting-flagwords)                             | `string`&ZeroWidthSpace;`[]`                                              | List of words to always be considered incorrect. Words found in `flagWords` override `words`.                                                 |
+| [id](#languagesetting-id)                                           | `string`                                                                  | Optional identifier.                                                                                                                          |
+| [ignoreRegExpList](#languagesetting-ignoreregexplist)               | [`RegExpPatternList`](#regexppatternlist)                                 | List of regular expression patterns or pattern names to exclude from spell checking.                                                          |
+| [ignoreWords](#languagesetting-ignorewords)                         | `string`&ZeroWidthSpace;`[]`                                              | List of words to be ignored. An ignored word will not show up as an error, even if it is                                                      |
+| [includeRegExpList](#languagesetting-includeregexplist)             | [`RegExpPatternList`](#regexppatternlist)                                 | List of regular expression patterns or defined pattern names to match for spell checking.                                                     |
+| [local](#languagesetting-local)                                     | [`LocaleId`](#localeid)<br />[`LocaleId`](#localeid)&ZeroWidthSpace;`[]`  | Deprecated - The locale filter, matches against the language. This can be a comma separated list. `*` will match all locales.                 |
+| [locale](#languagesetting-locale)                                   | [`LocaleId`](#localeid)<br />[`LocaleId`](#localeid)&ZeroWidthSpace;`[]`  | The locale filter, matches against the language. This can be a comma separated list. `*` will match all locales.                              |
+| [name](#languagesetting-name)                                       | `string`                                                                  | Optional name of configuration.                                                                                                               |
+| [noSuggestDictionaries](#languagesetting-nosuggestdictionaries)     | [`DictionaryReference`](#dictionaryreference)&ZeroWidthSpace;`[]`         | Optional list of dictionaries that will not be used for suggestions.                                                                          |
+| [patterns](#languagesetting-patterns)                               | [`RegExpPatternDefinition`](#regexppatterndefinition)&ZeroWidthSpace;`[]` | Defines a list of patterns that can be used with the  [ignoreRegExpList](#ignoreregexplist)  and                                              |
+| [substitutionDefinitions](#languagesetting-substitutiondefinitions) | [`SubstitutionDefinitions`](#substitutiondefinitions)                     | The set of available substitutions. This is a collection of substitution definitions that can be applied to a document before spell checking. |
+| [substitutions](#languagesetting-substitutions)                     | [`Substitutions`](#substitutions)                                         | The set of substitutions to apply to a document before spell checking.                                                                        |
+| [suggestWords](#languagesetting-suggestwords)                       | `string`&ZeroWidthSpace;`[]`                                              | A list of suggested replacements for words.                                                                                                   |
+| [unknownWords](#languagesetting-unknownwords)                       | [`UnknownWordsChoices`](#unknownwordschoices)                             | Controls how unknown words are handled.                                                                                                       |
+| [words](#languagesetting-words)                                     | `string`&ZeroWidthSpace;`[]`                                              | List of words to be considered correct.                                                                                                       |
 
 
 ### LanguageSetting Fields
@@ -6873,6 +6935,64 @@ For example:
 
 ---
 
+#### `substitutionDefinitions` {#languagesetting-substitutiondefinitions}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+The set of available substitutions. This is a collection of substitution definitions that can be applied to a document before spell checking.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`SubstitutionDefinitions`](#substitutiondefinitions)
+
+</dd>
+
+<dt>Since</dt>
+<dd>9.7.0</dd>
+
+</dl>
+
+
+
+
+---
+
+#### `substitutions` {#languagesetting-substitutions}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+The set of substitutions to apply to a document before spell checking.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`Substitutions`](#substitutions)
+
+</dd>
+
+<dt>Since</dt>
+<dd>9.7.0</dd>
+
+</dl>
+
+
+
+
+---
+
 #### `suggestWords` {#languagesetting-suggestwords}
 
 
@@ -7047,6 +7167,8 @@ This is a written language locale like: `en`, `en-GB`, `fr`, `es`, `de` or `en,f
 | [numSuggestions](#overridesettings-numsuggestions)                     | `number`                                                                  | Number of suggestions to make.                                                                                                                                       |
 | [patterns](#overridesettings-patterns)                                 | [`RegExpPatternDefinition`](#regexppatterndefinition)&ZeroWidthSpace;`[]` | Defines a list of patterns that can be used with the  [ignoreRegExpList](#ignoreregexplist)  and                                                                     |
 | [pnpFiles](#overridesettings-pnpfiles)                                 | `string`&ZeroWidthSpace;`[]`                                              | The PnP files to search for. Note: `.mjs` files are not currently supported.                                                                                         |
+| [substitutionDefinitions](#overridesettings-substitutiondefinitions)   | [`SubstitutionDefinitions`](#substitutiondefinitions)                     | The set of available substitutions. This is a collection of substitution definitions that can be applied to a document before spell checking.                        |
+| [substitutions](#overridesettings-substitutions)                       | [`Substitutions`](#substitutions)                                         | The set of substitutions to apply to a document before spell checking.                                                                                               |
 | [suggestionNumChanges](#overridesettings-suggestionnumchanges)         | `number`                                                                  | The maximum number of changes allowed on a word to be considered a suggestions.                                                                                      |
 | [suggestionsTimeout](#overridesettings-suggestionstimeout)             | `number`                                                                  | The maximum amount of time in milliseconds to generate suggestions for a word.                                                                                       |
 | [suggestWords](#overridesettings-suggestwords)                         | `string`&ZeroWidthSpace;`[]`                                              | A list of suggested replacements for words.                                                                                                                          |
@@ -7995,6 +8117,64 @@ The PnP files to search for. Note: `.mjs` files are not currently supported.
 
 ---
 
+#### `substitutionDefinitions` {#overridesettings-substitutiondefinitions}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+The set of available substitutions. This is a collection of substitution definitions that can be applied to a document before spell checking.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`SubstitutionDefinitions`](#substitutiondefinitions)
+
+</dd>
+
+<dt>Since</dt>
+<dd>9.7.0</dd>
+
+</dl>
+
+
+
+
+---
+
+#### `substitutions` {#overridesettings-substitutions}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+The set of substitutions to apply to a document before spell checking.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`Substitutions`](#substitutions)
+
+</dd>
+
+<dt>Since</dt>
+<dd>9.7.0</dd>
+
+</dl>
+
+
+
+
+---
+
 #### `suggestionNumChanges` {#overridesettings-suggestionnumchanges}
 
 
@@ -8672,6 +8852,196 @@ Simple Glob string, the root will be globRoot.
 <dd>
 
 `string`
+
+</dd>
+
+</dl>
+
+
+
+## SubstitutionDefinition
+
+| Field                                                       | Type                                                          | Description |
+| ----------------------------------------------------------- | ------------------------------------------------------------- | ----------- |
+| [entries](#substitutiondefinition-entries) <sup>_req_</sup> | [`SubstitutionEntry`](#substitutionentry)&ZeroWidthSpace;`[]` |             |
+| [id](#substitutiondefinition-id) <sup>_req_</sup>           | [`SubstitutionID`](#substitutionid)                           |             |
+| [description](#substitutiondefinition-description)          | `string`                                                      |             |
+
+
+### SubstitutionDefinition Fields
+
+
+---
+
+#### `entries` {#substitutiondefinition-entries}
+
+
+<dl>
+
+<dt>Type <sub><sup> _< required >_ </sup></sub></dt>
+<dd>
+
+[`SubstitutionEntry`](#substitutionentry)&ZeroWidthSpace;`[]`
+
+</dd>
+
+</dl>
+
+
+
+
+---
+
+#### `id` {#substitutiondefinition-id}
+
+
+<dl>
+
+<dt>Type <sub><sup> _< required >_ </sup></sub></dt>
+<dd>
+
+[`SubstitutionID`](#substitutionid)
+
+</dd>
+
+</dl>
+
+
+
+
+---
+
+#### `description` {#substitutiondefinition-description}
+
+
+<dl>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
+
+</dl>
+
+
+
+
+
+---
+
+## SubstitutionDefinitions {#substitutiondefinitions}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+The set of available substitutions. This is a collection of substitution definitions that can be applied to a document
+before spell checking.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`SubstitutionDefinition`](#substitutiondefinition)&ZeroWidthSpace;`[]`
+
+</dd>
+
+</dl>
+
+
+
+
+
+---
+
+## SubstitutionEntry {#substitutionentry}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+A substitution entry is a tuple of the form `[find, replacement]`. The find string is the string to find,
+and the replacement string is the string to replace it with.
+
+- `find` - The string to find. This is the string that will be replaced in the text. Only an exact match will be replaced.
+  The find string is not treated as a regular expression.
+- `replacement` - The string to replace the `find` string with. This is the string that will be used to replace the `find`
+  string in the text.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`[``string`, `string``]`
+
+</dd>
+
+<dt>Since</dt>
+<dd>9.7.0</dd>
+
+</dl>
+
+
+
+
+
+---
+
+## SubstitutionID {#substitutionid}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+The ID for a substitution definition. This is used to reference the substitution definition in the substitutions array.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+`string`
+
+</dd>
+
+<dt>Since</dt>
+<dd>9.7.0</dd>
+
+</dl>
+
+
+
+
+
+---
+
+## Substitutions {#substitutions}
+
+
+<dl>
+
+<dt>Description</dt>
+<dd>
+
+The set of substitutions to apply to a document before spell checking.
+This is a collection of substitution entries that can be applied to a document before spell checking.
+
+</dd>
+
+<dt>Type</dt>
+<dd>
+
+[`SubstitutionEntry`](#substitutionentry)<br />[`SubstitutionID`](#substitutionid)&ZeroWidthSpace;`[]`
 
 </dd>
 
