@@ -4,8 +4,8 @@ Url: https://github.com/eslint/eslint
 Args: '[".","--config=../../../config/eslint/cspell.config.yaml","--issues-summary-report","--exclude=bin/**","--exclude=CHANGELOG.md","--exclude=_data","--exclude=tests/bench/large.js","--exclude=docs/src/_includes","--exclude=docs/src/assets/{fonts,s?css,images}"]'
 Summary:
   files: 2060
-  filesWithIssues: 298
-  issues: 1511
+  filesWithIssues: 299
+  issues: 1516
   errors: 0
 Errors: []
 
@@ -1028,7 +1028,6 @@ issues:
   - "Makefile.js:126:82      ined            U       followed by the string \"ined\"."
   - "Makefile.js:375:9       gensite         U       target.gensite();"
   - "Makefile.js:986:18      Multifiles      U       function downloadMultifilesTestTarget() {"
-  - "messages/all-files-ignored.js:1:1\tNo issues found"
   - "messages/all-matched-files-ignored.js:1:1\tNo issues found"
   - "messages/config-file-missing.js:1:1\tNo issues found"
   - "messages/config-plugin-missing.js:1:1\tNo issues found"
@@ -1044,7 +1043,6 @@ issues:
   - "messages/plugin-conflict.js:1:1\tNo issues found"
   - "messages/plugin-invalid.js:1:1\tNo issues found"
   - "messages/plugin-missing.js:1:1\tNo issues found"
-  - "messages/print-config-with-directory-path.js:1:1\tNo issues found"
   - "messages/shared.js:1:1\tNo issues found"
   - "messages/whitespace-found.js:1:1\tNo issues found"
   - "package.json:63:20          attw            U       \"lint:types\": \"attw --pack\","
@@ -1860,6 +1858,7 @@ issues:
   - "tests/lib/cli-engine/lint-result-cache.js:1:1\tNo issues found"
   - "tests/lib/cli.js:351:11         fakeformatter       U       `-f fakeformatter ${filePath} --no-config"
   - "tests/lib/cli.js:2013:37        oldx                U       = `--flag test_only_oldx --config ${configPath"
+  - "tests/lib/config-api.js:1:1\tNo issues found"
   - "tests/lib/config/config-loader.js:1:1\tNo issues found"
   - "tests/lib/config/config.js:1:1\tNo issues found"
   - "tests/lib/config/flat-config-array.js:222:19        noniterable         U       it(\"should allow noniterable baseConfig objects\""
@@ -2258,6 +2257,7 @@ issues:
   - "tests/lib/types/types.test.ts:1038:7        eslinter    U       const eslinter = new ESLinter();"
   - "tests/lib/universal.js:1:1\tNo issues found"
   - "tests/lib/unsupported-api.js:1:1\tNo issues found"
+  - "tests/messages/messages.js:1:1\tNo issues found"
   - "tests/performance/jshint.js:91:14           shtylman                    U       // TODO(shtylman)"
   - "tests/performance/jshint.js:540:8           SVGCSS                      U       SVGCSSRule: false,"
   - "tests/performance/jshint.js:594:8           SVGH                        U       SVGHKernElement: false,"
@@ -2622,7 +2622,7 @@ issuesSummary:
   - "text: immed, count: 5, files: 1,"
   - "text: implieds, count: 5, files: 1,"
   - "text: inblock, count: 5, files: 1,"
-  - "text: incompat, count: 1, files: 1,"
+  - "text: incompat, count: 6, files: 2,"
   - "text: incrementcurrent, count: 2, files: 1,"
   - "text: ined, count: 1, files: 1,"
   - "text: inof, count: 3, files: 1,"
