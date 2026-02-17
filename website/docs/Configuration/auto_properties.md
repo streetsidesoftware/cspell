@@ -8861,11 +8861,11 @@ Simple Glob string, the root will be globRoot.
 
 ## SubstitutionDefinition
 
-| Field                                                       | Type                                                          | Description |
-| ----------------------------------------------------------- | ------------------------------------------------------------- | ----------- |
-| [entries](#substitutiondefinition-entries) <sup>_req_</sup> | [`SubstitutionEntry`](#substitutionentry)&ZeroWidthSpace;`[]` |             |
-| [id](#substitutiondefinition-id) <sup>_req_</sup>           | [`SubstitutionID`](#substitutionid)                           |             |
-| [description](#substitutiondefinition-description)          | `string`                                                      |             |
+| Field                                                       | Type                                                          | Description                                                                                                                |
+| ----------------------------------------------------------- | ------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| [entries](#substitutiondefinition-entries) <sup>_req_</sup> | [`SubstitutionEntry`](#substitutionentry)&ZeroWidthSpace;`[]` | The entries for the substitution definition. This is a collection of substitution entries that can be applied to a         |
+| [name](#substitutiondefinition-name) <sup>_req_</sup>       | [`SubstitutionID`](#substitutionid)                           | The name of the substitution definition. This is used to reference the substitution definition in the substitutions array. |
+| [description](#substitutiondefinition-description)          | `string`                                                      | An optional description of the substitution definition. This is not used for anything, but can be useful for               |
 
 
 ### SubstitutionDefinition Fields
@@ -8877,6 +8877,14 @@ Simple Glob string, the root will be globRoot.
 
 
 <dl>
+
+<dt>Description</dt>
+<dd>
+
+The entries for the substitution definition. This is a collection of substitution entries that can be applied to a
+document before spell checking.
+
+</dd>
 
 <dt>Type <sub><sup> _< required >_ </sup></sub></dt>
 <dd>
@@ -8892,10 +8900,17 @@ Simple Glob string, the root will be globRoot.
 
 ---
 
-#### `id` {#substitutiondefinition-id}
+#### `name` {#substitutiondefinition-name}
 
 
 <dl>
+
+<dt>Description</dt>
+<dd>
+
+The name of the substitution definition. This is used to reference the substitution definition in the substitutions array.
+
+</dd>
 
 <dt>Type <sub><sup> _< required >_ </sup></sub></dt>
 <dd>
@@ -8915,6 +8930,14 @@ Simple Glob string, the root will be globRoot.
 
 
 <dl>
+
+<dt>Description</dt>
+<dd>
+
+An optional description of the substitution definition. This is not used for anything, but can be useful for
+documentation purposes.
+
+</dd>
 
 <dt>Type</dt>
 <dd>
