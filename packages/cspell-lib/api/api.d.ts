@@ -1,4 +1,4 @@
-import { AdvancedCSpellSettingsWithSourceTrace, CSpellSettings, CSpellSettingsWithSourceTrace, CSpellUserSettings, DictionaryDefinitionAugmented, DictionaryDefinitionCustom, DictionaryDefinitionInline, DictionaryDefinitionPreferred, DictionaryDefinitionSimple, DictionaryId, DictionaryReference, Glob, ImportFileRef, Issue, LocaleId, MappedText, ParsedText, Parser, PnPSettings, ReportingConfiguration, TextDocumentOffset, TextOffset } from "@cspell/cspell-types";
+import { AdvancedCSpellSettingsWithSourceTrace, CSpellSettings, CSpellSettingsWithSourceTrace, CSpellUserSettings, DictionaryDefinitionAugmented, DictionaryDefinitionCustom, DictionaryDefinitionInline, DictionaryDefinitionPreferred, DictionaryDefinitionSimple, DictionaryId, DictionaryReference, Glob, ImportFileRef, Issue, LocaleId, MappedText, ParsedText, Parser, PnPSettings, Range, ReportingConfiguration, TextDocumentOffset, TextOffset } from "@cspell/cspell-types";
 import { FSCapabilityFlags, VFileSystem, VFileSystem as VFileSystem$1, VFileSystemProvider, VirtualFS, VirtualFS as VirtualFS$1, asyncIterableToArray, readFileText as readFile, readFileTextSync as readFileSync, writeToFile, writeToFileIterable, writeToFileIterableP } from "cspell-io";
 import { FileTypeId as LanguageId, findMatchingFileTypes as getLanguagesForBasename, getFileTypesForExt as getLanguagesForExt } from "@cspell/filetypes";
 import { CachingDictionary, SpellingDictionary, SpellingDictionaryCollection, SuggestOptions, SuggestionCollector, SuggestionResult, createCollection, createSpellingDictionary } from "cspell-dictionary";
@@ -635,6 +635,26 @@ interface ValidationIssueRPC extends ValidationResultRPC {
   suggestionsEx?: ExtendedSuggestion[] | undefined;
 }
 //#endregion
+//#region src/lib/Transform/TextRange.d.ts
+/**
+* A range of text in a document.
+* The range is inclusive of the startPos and exclusive of the endPos.
+*/
+interface MatchRange {
+  startPos: number;
+  endPos: number;
+}
+//#endregion
+//#region src/lib/Transform/types.d.ts
+type SimpleRange = Readonly<Range>;
+//#endregion
+//#region src/lib/Transform/SubstitutionTransformer.d.ts
+declare class SubstitutionTransformer {
+  #private;
+  constructor(subMap: Map<string, string> | undefined);
+  transform(text: string): MappedText;
+}
+//#endregion
 //#region src/lib/suggestions.d.ts
 interface WordSuggestion extends SuggestionResult {
   /**
@@ -705,16 +725,6 @@ declare class SuggestionError extends Error {
   constructor(message: string, code: string);
 }
 //#endregion
-//#region src/lib/util/TextRange.d.ts
-/**
-* A range of text in a document.
-* The range is inclusive of the startPos and exclusive of the endPos.
-*/
-interface MatchRange {
-  startPos: number;
-  endPos: number;
-}
-//#endregion
 //#region src/lib/textValidation/ValidationTypes.d.ts
 type TextOffsetRO = Readonly<TextOffset>;
 interface ValidationOptions extends IncludeExcludeOptions, ReportingConfiguration {
@@ -753,10 +763,6 @@ interface TextValidator {
   validate: TextValidatorFn;
   lineValidator: LineValidator;
 }
-//#endregion
-//#region src/lib/textValidation/parsedText.d.ts
-type Offset = number;
-type SimpleRange = readonly [Offset, Offset];
 //#endregion
 //#region src/lib/textValidation/traceWord.d.ts
 type Href = string;
@@ -929,6 +935,7 @@ interface Preparations {
   validateOptions: ValidationOptions;
   localConfig: CSpellUserSettings | undefined;
   localConfigFilepath: string | undefined;
+  subTransformer: SubstitutionTransformer;
 }
 interface ShouldCheckDocumentResult {
   /** possible errors found while loading configuration. */

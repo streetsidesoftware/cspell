@@ -133,5 +133,5 @@ export type {
 } from './Substitutions.js';
 export type { SuggestionCostMapDef, SuggestionCostsDefs } from './suggestionCostsDef.js';
 export type { SuggestionsConfiguration } from './SuggestionsConfiguration.js';
-export type { MappedText } from './TextMap.js';
+export type { MappedText, Range } from './TextMap.js';
 export type { TextDocumentOffset, TextOffset } from './TextOffset.js';

@@ -2,8 +2,8 @@ import { opConcatMap, opFilter, opTake, pipe } from '@cspell/cspell-pipe/sync';
 import type { SpellingDictionary } from 'cspell-dictionary';
 
 import type { ValidationResult } from '../Models/ValidationResult.js';
+import * as TextRange from '../Transform/index.js';
 import * as Text from '../util/text.js';
-import * as TextRange from '../util/TextRange.js';
 import { defaultMaxDuplicateProblems, defaultMaxNumberOfProblems } from './defaultConstants.js';
 import { lineValidatorFactory } from './lineValidatorFactory.js';
 import type { IncludeExcludeOptions, LineSegment, TextOffsetRO, ValidationOptions } from './ValidationTypes.js';

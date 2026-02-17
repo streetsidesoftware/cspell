@@ -36,17 +36,19 @@ import type { SpellingDictionaryCollection, SuggestionResult } from '../Spelling
 import { getDictionaryInternal } from '../SpellingDictionary/index.js';
 import type { WordSuggestion } from '../suggestions.js';
 import { calcSuggestionAdjustedToToMatchCase } from '../suggestions.js';
+import type { SubstitutionTransformer } from '../Transform/index.js';
+import type { SimpleRange } from '../Transform/index.js';
+import type { MatchRange } from '../Transform/index.js';
+import { createSubstitutionTransformer } from '../Transform/index.js';
+import { createMappedTextSegmenter } from '../Transform/index.js';
 import { catchPromiseError, toError } from '../util/errors.js';
 import { AutoCache } from '../util/simpleCache.js';
-import type { MatchRange } from '../util/TextRange.js';
 import { uriToFilePath } from '../util/Uri.js';
 import { cleanValidationIssue } from './cleanValidationIssue.js';
 import { defaultMaxDuplicateProblems, defaultMaxNumberOfProblems } from './defaultConstants.js';
 import { determineTextDocumentSettings } from './determineTextDocumentSettings.js';
 import type { TextValidator } from './lineValidatorFactory.js';
 import { textValidatorFactory } from './lineValidatorFactory.js';
-import type { SimpleRange } from './parsedText.js';
-import { createMappedTextSegmenter } from './parsedText.js';
 import { settingsToValidateOptions } from './settingsToValidateOptions.js';
 import { calcTextInclusionRanges } from './textValidator.js';
 import type { TraceResult } from './traceWord.js';
@@ -199,6 +201,10 @@ export class DocumentValidator {
         const textValidator = textValidatorFactory(dict, validateOptions);
 
         recFinalizeTime();
+        const sub = createSubstitutionTransformer(finalSettings);
+        if (sub.missing) {
+            this.addPossibleError(`Missing substitutions: ${sub.missing.join(', ')}`);
+        }
 
         this._preparations = {
             config,
@@ -212,6 +218,7 @@ export class DocumentValidator {
             textValidator,
             localConfig,
             localConfigFilepath: localConfig?.__importRef?.filename,
+            subTransformer: sub.transformer,
         };
 
         this._ready = true;
@@ -559,6 +566,7 @@ interface Preparations {
     validateOptions: ValidationOptions;
     localConfig: CSpellUserSettings | undefined;
     localConfigFilepath: string | undefined;
+    subTransformer: SubstitutionTransformer;
 }
 
 async function searchForDocumentConfig(

@@ -2,8 +2,8 @@ import type { TextOffset } from '@cspell/cspell-types';
 import { describe, expect, test } from 'vitest';
 
 import { readSampleFileSync } from '../../test-util/test.helper.mjs';
+import * as TextRange from '../Transform/index.js';
 import { calculateTextDocumentOffsets } from '../util/text.js';
-import * as TextRange from '../util/TextRange.js';
 import * as RegPat from './RegExpPatterns.js';
 import { regExBase64SingleLine, regExMatchCommonHexFormats, regExMatchUrls } from './RegExpPatterns.js';
 

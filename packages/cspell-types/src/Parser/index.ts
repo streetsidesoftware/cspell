@@ -29,7 +29,7 @@ export interface ParsedText {
      */
     readonly rawText?: string | undefined;
     /**
-     * start and end offsets of the text
+     * start and end offsets of the text in the original document.
      */
     readonly range: Range;
     /**

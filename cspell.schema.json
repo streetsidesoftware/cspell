@@ -1875,20 +1875,26 @@
       "markdownDescription": "Allows for the definition of a substitution set. A substitution set is a collection of substitution\nentries that can be applied to a document before spell checking. This is useful for converting html entities, url encodings,\nor other transformations that may be necessary to get the correct text for spell checking.\n\nSubstitutions are applied based upon the longest matching find string. If there are multiple matches of the same `find`,\nthe last one in the list is used. This allows for the overriding of substitutions. For example, if you have a substitution\nfor `&` to `and`, and then a substitution for `&amp;` to `&`, the `&amp;` substitution will be used for the string `&amp;`,\nand the `&` substitution will be used for the string `&`.",
       "properties": {
         "description": {
+          "description": "An optional description of the substitution definition. This is not used for anything, but can be useful for documentation purposes.",
+          "markdownDescription": "An optional description of the substitution definition. This is not used for anything, but can be useful for\ndocumentation purposes.",
           "type": "string"
         },
         "entries": {
+          "description": "The entries for the substitution definition. This is a collection of substitution entries that can be applied to a document before spell checking.",
           "items": {
             "$ref": "#/definitions/SubstitutionEntry"
           },
+          "markdownDescription": "The entries for the substitution definition. This is a collection of substitution entries that can be applied to a\ndocument before spell checking.",
           "type": "array"
         },
-        "id": {
-          "$ref": "#/definitions/SubstitutionID"
+        "name": {
+          "$ref": "#/definitions/SubstitutionID",
+          "description": "The name of the substitution definition. This is used to reference the substitution definition in the substitutions array.",
+          "markdownDescription": "The name of the substitution definition. This is used to reference the substitution definition in the substitutions array."
         }
       },
       "required": [
-        "id",
+        "name",
         "entries"
       ],
       "since": "9.7.0",

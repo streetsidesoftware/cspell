@@ -14,6 +14,7 @@ import { createCachingDictionary } from 'cspell-dictionary';
 
 import type { ValidationIssue } from '../Models/ValidationIssue.js';
 import * as RxPat from '../Settings/RegExpPatterns.js';
+import { mapRangeBackToOriginalPos } from '../Transform/index.js';
 import { autoResolve } from '../util/AutoResolve.js';
 import {
     extractPossibleWordsFromTextOffset,
@@ -26,7 +27,6 @@ import { split } from '../util/wordSplitter.js';
 import { defaultMinWordLength } from './defaultConstants.js';
 import { extractHexSequences, isRandomString } from './isRandomString.js';
 import { isWordValidWithEscapeRetry } from './isWordValid.js';
-import { mapRangeBackToOriginalPos } from './parsedText.js';
 import type {
     LineSegment,
     LineValidatorFn,

@@ -12,6 +12,7 @@ export {
 export { convertToBTrie, decodeFile, decodeTrie } from './decodeTrie.ts';
 export type { WeightMap } from './distance/index.ts';
 export { createWeightedMap, editDistance, editDistanceWeighted } from './distance/index.ts';
+export { GTrie, GTrieNode } from './GTrie/index.ts';
 export { type ExportOptions, importTrie, serializeTrie } from './io/importExport.ts';
 export type { FindWordOptions, ITrie } from './ITrie.ts';
 export { mapDictionaryInformationToWeightMap } from './mappers/mapDictionaryInfoToWeightMap.ts';

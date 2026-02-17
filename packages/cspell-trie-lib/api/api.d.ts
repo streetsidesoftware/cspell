@@ -832,6 +832,45 @@ interface FileResource {
 declare function decodeFile(file: FileResource, options?: Partial<ParseDictionaryOptions>): Promise<ITrie>;
 declare function convertToBTrie(file: FileResource, options?: Partial<ParseDictionaryOptions>): Promise<FileResource>;
 //#endregion
+//#region src/lib/GTrie/GTrie.d.ts
+declare class GTrieNode<K, V> {
+  children: Map<K, GTrieNode<K, V>> | undefined;
+  value: V | undefined;
+  constructor(value?: V, children?: Map<K, GTrieNode<K, V>>);
+}
+/**
+* ### Generic Tries
+*
+* This is a Trie class that can contain any data. It is used in optimizing the dictionary and storing lookup data.
+* The performance is "good enough" for most uses, but may need to be optimized for large data sets.
+*
+* K - Key type
+* V - Value type
+*/
+declare class GTrie<K, V> {
+  root: GTrieNode<K, V>;
+  constructor();
+  /**
+  *
+  * @param keys - the path to the child node
+  * @param value - the value to set / insert
+  * @return the previous value if one existed
+  */
+  insert(keys: Iterable<K>, value: V): V | undefined;
+  /**
+  * Insert nodes for the given keys into the trie.
+  * Existing nodes are reused.
+  * @param keys
+  * @returns the final node inserted or found
+  */
+  insertNode(keys: Iterable<K>): GTrieNode<K, V>;
+  findNode(keys: Iterable<K>): GTrieNode<K, V> | undefined;
+  has(keys: Iterable<K>): boolean;
+  hasNode(keys: Iterable<K>): boolean;
+  get(keys: Iterable<K>): V | undefined;
+  static fromEntries<K, V>(entries: Iterable<[Iterable<K>, V]>): GTrie<K, V>;
+}
+//#endregion
 //#region src/lib/io/importExport.d.ts
 interface ExportOptions {
   base?: number;
@@ -976,5 +1015,5 @@ declare const normalizeWordForCaseInsensitive: (text: string) => string[];
 */
 declare function expandCharacterSet(line: string, rangeChar?: string): Set<string>;
 //#endregion
-export { CASE_INSENSITIVE_PREFIX, COMPOUND_FIX, ChildMap, CompoundWordsMethod, ExportOptions, FLAG_WORD, FORBID_PREFIX, FindFullResult, FindWordOptions, HintedWalkerIterator, Hinting, ITrie, JOIN_SEPARATOR, MaxCost, OPTIONAL_COMPOUND_FIX, type PartialTrieOptions, SuggestionCollector, type SuggestionCostMapDef, SuggestionResult, Trie, TrieBuilder, TrieNode, type TrieOptions, type TrieOptionsRO, TrieRoot, WORD_SEPARATOR, WalkerIterator, WeightMap, YieldResult, buildITrieFromWords, buildTrie, buildTrieFast, consolidate, convertToBTrie, countNodes, countWords, createDictionaryLineParserMapper as createDictionaryLineParser, createTrieRoot, createTrieRootFromList, createWeightedMap, decodeFile, decodeTrie, defaultTrieInfo, defaultTrieInfo as defaultTrieOptions, editDistance, editDistanceWeighted, encodeITrieToBTrie, encodeTrieDataToBTrie, expandCharacterSet, findNode, has, hintedWalker, impersonateCollector, importTrie, insert, isCircular, isDefined, isWordTerminationNode, iterateTrie, iteratorTrieWords, mapDictionaryInformationToWeightMap, mergeDefaults, mergeOptionalWithDefaults, normalizeWord, normalizeWordForCaseInsensitive, normalizeWordToLowercase, orderTrie, parseDictionary, parseDictionaryLegacy, parseDictionaryLines, serializeTrie, suggestionCollector, trieNodeToRoot, walk, walker };
+export { CASE_INSENSITIVE_PREFIX, COMPOUND_FIX, ChildMap, CompoundWordsMethod, ExportOptions, FLAG_WORD, FORBID_PREFIX, FindFullResult, FindWordOptions, GTrie, GTrieNode, HintedWalkerIterator, Hinting, ITrie, JOIN_SEPARATOR, MaxCost, OPTIONAL_COMPOUND_FIX, type PartialTrieOptions, SuggestionCollector, type SuggestionCostMapDef, SuggestionResult, Trie, TrieBuilder, TrieNode, type TrieOptions, type TrieOptionsRO, TrieRoot, WORD_SEPARATOR, WalkerIterator, WeightMap, YieldResult, buildITrieFromWords, buildTrie, buildTrieFast, consolidate, convertToBTrie, countNodes, countWords, createDictionaryLineParserMapper as createDictionaryLineParser, createTrieRoot, createTrieRootFromList, createWeightedMap, decodeFile, decodeTrie, defaultTrieInfo, defaultTrieInfo as defaultTrieOptions, editDistance, editDistanceWeighted, encodeITrieToBTrie, encodeTrieDataToBTrie, expandCharacterSet, findNode, has, hintedWalker, impersonateCollector, importTrie, insert, isCircular, isDefined, isWordTerminationNode, iterateTrie, iteratorTrieWords, mapDictionaryInformationToWeightMap, mergeDefaults, mergeOptionalWithDefaults, normalizeWord, normalizeWordForCaseInsensitive, normalizeWordToLowercase, orderTrie, parseDictionary, parseDictionaryLegacy, parseDictionaryLines, serializeTrie, suggestionCollector, trieNodeToRoot, walk, walker };
 //# sourceMappingURL=index.d.ts.map

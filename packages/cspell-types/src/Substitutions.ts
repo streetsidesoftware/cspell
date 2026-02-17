@@ -30,8 +30,19 @@ export type SubstitutionEntry = [find: string, replacement: string];
  * @since 9.7.0
  */
 export interface SubstitutionDefinition {
-    id: SubstitutionID;
+    /**
+     * The name of the substitution definition. This is used to reference the substitution definition in the substitutions array.
+     */
+    name: SubstitutionID;
+    /**
+     * An optional description of the substitution definition. This is not used for anything, but can be useful for
+     * documentation purposes.
+     */
     description?: string;
+    /**
+     * The entries for the substitution definition. This is a collection of substitution entries that can be applied to a
+     * document before spell checking.
+     */
     entries: SubstitutionEntry[];
 }
 
@@ -42,7 +53,7 @@ export interface SubstitutionDefinition {
 export type SubstitutionDefinitions = SubstitutionDefinition[];
 
 export interface SubstitutionDefinitionMap {
-    [id: SubstitutionID]: SubstitutionDefinition;
+    [name: SubstitutionID]: SubstitutionDefinition;
 }
 
 /**

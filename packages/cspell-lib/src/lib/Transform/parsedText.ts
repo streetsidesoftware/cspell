@@ -1,12 +1,9 @@
 import type { MappedText, TextOffset } from '@cspell/cspell-types';
 
 import type { ValidationIssue } from '../Models/ValidationIssue.js';
-import { extractTextMapRangeOrigin } from '../util/TextMap.js';
-import type * as TextRange from '../util/TextRange.js';
-
-export type Offset = number;
-
-export type SimpleRange = readonly [Offset, Offset];
+import { extractTextMapRangeOrigin } from './TextMap.js';
+import type * as TextRange from './TextRange.js';
+import type { SimpleRange } from './types.js';
 
 export function mapIssueBackToOriginalPos(mappedText: MappedText, issue: ValidationIssue): ValidationIssue {
     if (!mappedText.map || mappedText.map.length === 0) return issue;
