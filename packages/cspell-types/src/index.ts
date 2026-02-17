@@ -123,7 +123,16 @@ export type {
 export type { CharacterSet, CharacterSetCosts, DictionaryInformation, EditCosts } from './DictionaryInformation.js';
 export type { Feature, Features } from './features.js';
 export { mergeConfig } from './merge.js';
-export type { ParsedText, Parser, ParseResult, ParserName, ParserOptions } from './Parser/index.js';
+export type {
+    MappedText,
+    ParsedText,
+    Parser,
+    ParseResult,
+    ParserName,
+    ParserOptions,
+    Range,
+    SourceMap,
+} from './Parser/index.js';
 export type {
     SubstitutionDefinition,
     SubstitutionDefinitions,
@@ -133,5 +142,4 @@ export type {
 } from './Substitutions.js';
 export type { SuggestionCostMapDef, SuggestionCostsDefs } from './suggestionCostsDef.js';
 export type { SuggestionsConfiguration } from './SuggestionsConfiguration.js';
-export type { MappedText, Range } from './TextMap.js';
 export type { TextDocumentOffset, TextOffset } from './TextOffset.js';

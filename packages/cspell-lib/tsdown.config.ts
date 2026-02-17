@@ -15,7 +15,7 @@ export default defineConfig([
         inlineOnly: [],
     },
     {
-        // The API
+        // Testing the Plugin
         entry: ['fixtures/dictionaries/btrie/*.bundle.js'],
         outDir: 'dist/test/fixtures/dictionaries/btrie',
         format: ['esm'],

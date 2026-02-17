@@ -38,7 +38,7 @@ describe('SubstitutionTransformer', () => {
         expect(missing).toBeUndefined();
     });
 
-    test('createSubstitutionTransformer', () => {
+    test('createSubstitutionTransformer with missing', () => {
         const infoWithMissing: SubstitutionInfo = {
             ...info,
             substitutions: [...(info.substitutions || []), 'missing-substitution'],
