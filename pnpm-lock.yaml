@@ -28,11 +28,11 @@ importers:
         specifier: workspace:*
         version: link:scripts
       '@lerna-lite/cli':
-        specifier: ^4.11.2
-        version: 4.11.2(@lerna-lite/publish@4.11.2(@types/node@20.19.33)(conventional-commits-filter@5.0.0))(@lerna-lite/version@4.11.2(@lerna-lite/publish@4.11.2(@types/node@20.19.33)(conventional-commits-filter@5.0.0))(@types/node@20.19.33)(conventional-commits-filter@5.0.0))(@types/node@20.19.33)
+        specifier: ^4.11.3
+        version: 4.11.3(@lerna-lite/publish@4.11.3(@types/node@20.19.33)(conventional-commits-filter@5.0.0))(@lerna-lite/version@4.11.3(@lerna-lite/publish@4.11.3(@types/node@20.19.33)(conventional-commits-filter@5.0.0))(@types/node@20.19.33)(conventional-commits-filter@5.0.0))(@types/node@20.19.33)
       '@lerna-lite/publish':
-        specifier: ^4.11.2
-        version: 4.11.2(@types/node@20.19.33)(conventional-commits-filter@5.0.0)
+        specifier: ^4.11.3
+        version: 4.11.3(@types/node@20.19.33)(conventional-commits-filter@5.0.0)
       '@rollup/plugin-alias':
         specifier: ^6.0.0
         version: 6.0.0(rollup@4.57.1)
@@ -615,8 +615,8 @@ importers:
         specifier: ^12.1.1
         version: 12.1.1(eslint@9.39.2(jiti@1.21.7))
       eslint-plugin-yml:
-        specifier: ^3.1.2
-        version: 3.1.2(eslint@9.39.2(jiti@1.21.7))
+        specifier: ^3.2.1
+        version: 3.2.1(@eslint/markdown@7.5.1)(eslint@9.39.2(jiti@1.21.7))
       globals:
         specifier: ^17.3.0
         version: 17.3.0
@@ -1529,16 +1529,16 @@ importers:
         version: 19.2.14
       docusaurus-plugin-typedoc:
         specifier: ^1.4.2
-        version: 1.4.2(typedoc-plugin-markdown@4.10.0(typedoc@0.28.16(typescript@5.9.3)))
+        version: 1.4.2(typedoc-plugin-markdown@4.10.0(typedoc@0.28.17(typescript@5.9.3)))
       sass:
         specifier: ^1.97.3
         version: 1.97.3
       typedoc:
-        specifier: 0.28.16
-        version: 0.28.16(typescript@5.9.3)
+        specifier: 0.28.17
+        version: 0.28.17(typescript@5.9.3)
       typedoc-plugin-markdown:
         specifier: ^4.10.0
-        version: 4.10.0(typedoc@0.28.16(typescript@5.9.3))
+        version: 4.10.0(typedoc@0.28.17(typescript@5.9.3))
       typescript:
         specifier: ~5.9.3
         version: 5.9.3
@@ -3267,6 +3267,10 @@ packages:
     resolution: {integrity: sha512-q1mjIoW1VX4IvSocvM/vbTiveKC4k9eLrajNEuSsmjymSDEbpGddtpfOoN7YGAqBK3NG+uqo8ia4PDTt8buCYA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
+  '@eslint/markdown@7.5.1':
+    resolution: {integrity: sha512-R8uZemG9dKTbru/DQRPblbJyXpObwKzo8rv1KYGGuPUPtjM4LXBYM9q5CIZAComzZupws3tWbDwam5AFpPLyJQ==}
+    engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
   '@eslint/object-schema@2.1.7':
     resolution: {integrity: sha512-VtAOaymWVfZcmZbp6E2mympDIHvyjXs/12LqWYjVw6qjrfF+VK+fyG33kChz3nnK+SU5/NeHOqrTEHS8sXO3OA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
@@ -3560,8 +3564,8 @@ packages:
   '@leichtgewicht/ip-codec@2.0.5':
     resolution: {integrity: sha512-Vo+PSpZG2/fmgmiNzYK9qWRh8h/CHrwD0mo1h1DzL4yzHNSfWYujGTYsWGreD000gcgmZ7K4Ys6Tx9TxtsKdDw==}
 
-  '@lerna-lite/cli@4.11.2':
-    resolution: {integrity: sha512-CmnrRFc4BSPFCfgUHtMLvwIvlhPQagqGLuU9WHM0kJ+0VqFSL2dqN20CLlb3RWJQNKcsemLdaVHDDK0lI4VTzg==}
+  '@lerna-lite/cli@4.11.3':
+    resolution: {integrity: sha512-Xgs57JflCV8gTctP3piJaHvFBDQihLyX8DxaSelRMCGfJ+CiONXPLMWf81SVkmqW/ADZkARYKUf6C7hMes46Jg==}
     engines: {node: ^20.17.0 || >=22.9.0}
     hasBin: true
     peerDependencies:
@@ -3585,24 +3589,24 @@ packages:
       '@lerna-lite/watch':
         optional: true
 
-  '@lerna-lite/core@4.11.2':
-    resolution: {integrity: sha512-HFc1zAaQU6poCyaSLTPg/IfFa9HlTNGLgrAArd4jZyMpeF72AhwJhCyBm4ZgnO1+7ejd0C8UQxIBGSNemovc9w==}
+  '@lerna-lite/core@4.11.3':
+    resolution: {integrity: sha512-ZdgnLBay5seb5xC/hd8ug99eRdApfd7nw8IXqG1j9tp6iGKruWrvUvY53u8Ht7pEwHCRFXWwYDsL153h5Q9PRQ==}
     engines: {node: ^20.17.0 || >=22.9.0}
 
-  '@lerna-lite/init@4.11.2':
-    resolution: {integrity: sha512-3jcjhbarAAdLJNAtToSYTcIEPQbLQpLhB14WLFq+3Abt0c+EUzHwbnrlmqbZ0nnm9StmzK1dc0epEiKWvZZwuQ==}
+  '@lerna-lite/init@4.11.3':
+    resolution: {integrity: sha512-I7TZ4fga8w7L4WzleVCNZSiaKm1oH+YveHcDcksjrzOn1aFLZIAI0yQ3uq14JVPr6qMsu8t1T+LWU89cD9TD4w==}
     engines: {node: ^20.17.0 || >=22.9.0}
 
-  '@lerna-lite/npmlog@4.11.0':
-    resolution: {integrity: sha512-9jKM3gUCpg/3ZEhjetv4fDMUNqfqq8jiqUYrP9mp49mhDjrP9rRsSNteoz+57jT1lgJ7MNRhKgG7l+ObnAjXnQ==}
+  '@lerna-lite/npmlog@4.11.3':
+    resolution: {integrity: sha512-iHSB+by3a8fj6lD2+dzEgnV4pwHaEWlaowg4/F9S85VBXyepaqMnrl299slnCCVATxfHCdKSiYFr99Bp+dLIhg==}
     engines: {node: ^20.17.0 || >=22.9.0}
 
-  '@lerna-lite/publish@4.11.2':
-    resolution: {integrity: sha512-FIzUuqnlkOM4Lod+QvMRIZpOXKoW8rBSMctAHHrsncoZBFzF8y1sl+yGHc2zECmj2cdwC9rL2ekHBSOCJ+ry9A==}
+  '@lerna-lite/publish@4.11.3':
+    resolution: {integrity: sha512-BZFjkZAmyFN+ETOxABzMpBRnqYjjXVbfXAArj9kVhpyZ5NJWX2LxwG0scHUsDcvj4CYfhTib+zmLiYHGpjoFBQ==}
     engines: {node: ^20.17.0 || >=22.9.0}
 
-  '@lerna-lite/version@4.11.2':
-    resolution: {integrity: sha512-p1Kqrh6w7S7ZTwoQjOOYdBiJv3iuUbfCBzaXcfHJnaVQ2v+RflrwEfaWOwTYkiq+B9Tjir+8nTdfNuf6bfiu/w==}
+  '@lerna-lite/version@4.11.3':
+    resolution: {integrity: sha512-kPUBDiwofM9eX+27mUPo3343A6ZNzhNUdKlRzmZU0mgpb4GgyaPBfnuvAwCYJlZFFC2NREX0jDMSgYGZ4ThlTQ==}
     engines: {node: ^20.17.0 || >=22.9.0}
 
   '@mdx-js/mdx@3.1.1':
@@ -3637,8 +3641,8 @@ packages:
     resolution: {integrity: sha512-kAQTcEN9E8ERLVg5AsGwLNoFb+oEG6engbqAU2P43gD4JEIkNGMHdVQ096FsOAAYpZPB0RSt0zgInKIAS1l5QA==}
     engines: {node: ^20.17.0 || >=22.9.0}
 
-  '@npmcli/arborist@9.3.0':
-    resolution: {integrity: sha512-+iH0S4YZBsSgItmFWJsxbxtuFmaldGG8h9hQfCHeYHQxFZuIKD8NZB960c22OeFtQnI0FcuGLRA+sWQ3/4EEHQ==}
+  '@npmcli/arborist@9.3.1':
+    resolution: {integrity: sha512-s8+F1CEpEVV4pejQTDXeZDsE1XcIK/RepTTRPdnerKnt+Ii/4o7H5QfMEIAZ6UJRukSfBHHcFwxgmCOxkCDVqA==}
     engines: {node: ^20.17.0 || >=22.9.0}
     hasBin: true
 
@@ -3691,8 +3695,8 @@ packages:
     resolution: {integrity: sha512-f7zYC6kQautXHvNbLEWgD/uGu1+xCn9izgqBfgItWSx22U0ZDekxN08A1vM8cTxj/cRVe0Q94Ode+tdoYmIOOQ==}
     engines: {node: ^16.14.0 || >=18.0.0}
 
-  '@npmcli/package-json@7.0.4':
-    resolution: {integrity: sha512-0wInJG3j/K40OJt/33ax47WfWMzZTm6OQxB9cDhTt5huCP2a9g2GnlsxmfN+PulItNPIpPrZ+kfwwUil7eHcZQ==}
+  '@npmcli/package-json@7.0.5':
+    resolution: {integrity: sha512-iVuTlG3ORq2iaVa1IWUxAO/jIp77tUKBhoMjuzYW2kL4MLN1bi/ofqkZ7D7OOwh8coAx1/S2ge0rMdGv8sLSOQ==}
     engines: {node: ^20.17.0 || >=22.9.0}
 
   '@npmcli/promise-spawn@7.0.2':
@@ -3773,6 +3777,13 @@ packages:
 
   '@octokit/types@16.0.0':
     resolution: {integrity: sha512-sKq+9r1Mm4efXW1FCk7hFSeJo4QKreL/tTbR0rz/qx/r1Oa2VV83LTA/H/MuCOX7uCIJmQVRKBcbmWoySjAnSg==}
+
+  '@ota-meshi/ast-token-store@0.2.1':
+    resolution: {integrity: sha512-+8oB1wcOSWJCR6vAm2ioSLas7SoPwp+8tZ1Tcy8DSVEHMip6jxxlGu6EsRzJLAYVCyzKQ38B5pAqSbon1l1rmA==}
+    engines: {node: ^20.19.0 || ^22.13.0 || >=24}
+    peerDependencies:
+      '@eslint/markdown': ^7.4.0
+      eslint: '>=9.0.0'
 
   '@oxc-project/types@0.112.0':
     resolution: {integrity: sha512-m6RebKHIRsax2iCwVpYW2ErQwa4ywHJrE4sCK3/8JK8ZZAWOKXaRJFl/uP51gaVyyXlaS4+chU1nSCdzYf6QqQ==}
@@ -6691,8 +6702,8 @@ packages:
     peerDependencies:
       eslint: '>=9.38.0'
 
-  eslint-plugin-yml@3.1.2:
-    resolution: {integrity: sha512-n9lxbFrNlGDLOSyIrEYkkYr7icbULMh66wwkIEluisq0lXSu1qVEEXM0g8MM8UQbtd9t1HMgN6bC+DaOe5dWdQ==}
+  eslint-plugin-yml@3.2.1:
+    resolution: {integrity: sha512-/oFj7MWk56AKLelLSUb7zN1OKDI9kR+uKEzbf/sGu7Bov0tJs3qwtMcu+VCcEtFAFD7KZe0LSYhyy0Uq8hKF9g==}
     engines: {node: ^20.19.0 || ^22.13.0 || >=24.0.0}
     peerDependencies:
       eslint: '>=9.38.0'
@@ -7075,6 +7086,10 @@ packages:
     resolution: {integrity: sha512-QZjmEOC+IT1uk6Rx0sX22V6uHWVwbdbxf1faPqJ1QhLdGgsRGCZoyaQBm/piRdJy/D2um6hM1UP7ZEeQ4EkP+Q==}
     engines: {node: '>=18'}
 
+  get-east-asian-width@1.5.0:
+    resolution: {integrity: sha512-CQ+bEO+Tva/qlmw24dCejulK5pMzVnUOFOijVogd3KQs07HnRIgp8TGipvCCRT06xeYEbpbgwaCxglFyiuIcmA==}
+    engines: {node: '>=18'}
+
   get-intrinsic@1.3.0:
     resolution: {integrity: sha512-9fSjSaos/fRIVIp+xSJlE6lfwhES7LNtKaCBIamHsjr2na1BiABJPo0mOjjz8GJDURarmCPGqaiVg5mfjb98CQ==}
     engines: {node: '>= 0.4'}
@@ -7118,6 +7133,9 @@ packages:
   github-slugger@1.5.0:
     resolution: {integrity: sha512-wIh+gKBI9Nshz2o46B0B3f5k/W+WI9ZAv6y5Dn5WJ5SK1t0TnDimB4WE5rmTD05ZAIn8HALCZVmCsvj0w0v0lw==}
 
+  github-slugger@2.0.0:
+    resolution: {integrity: sha512-IaOQ9puYtjrkq7Y0Ygl9KDZnrf/aiUJYUpVf89y8kyaxbRG7Y1SrX/jaumrv81vc61+kiMempujsM3Yw7w5qcw==}
+
   glob-parent@5.1.2:
     resolution: {integrity: sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow==}
     engines: {node: '>= 6'}
@@ -7149,6 +7167,10 @@ packages:
   glob@13.0.4:
     resolution: {integrity: sha512-KACie1EOs9BIOMtenFaxwmYODWA3/fTfGSUnLhMJpXRntu1g+uL/Xvub5f8SCTppvo9q62Qy4LeOoUiaL54G5A==}
     engines: {node: 20 || >=22}
+
+  glob@13.0.6:
+    resolution: {integrity: sha512-Wjlyrolmm8uDpm/ogGyXZXb1Z+Ca2B8NbJwqBVg0axK9GbBeoS7yGV6vjXnYdGm6X53iehEuxxbyiKp8QmN4Vw==}
+    engines: {node: 18 || 20 || >=22}
 
   glob@7.2.3:
     resolution: {integrity: sha512-nFR0zLpU2YCaRxwoCJvL6UvCH2JFyFVIvwTLsIf21AuHlMskA1hhTdk+LlYJtOlYt9v6dvszD2BGRqBL+iQK9Q==}
@@ -8478,6 +8500,10 @@ packages:
     resolution: {integrity: sha512-MClCe8IL5nRRmawL6ib/eT4oLyeKMGCghibcDWK+J0hh0Q8kqSdia6BvbRMVk6mPa6WqUa5uR2oxt6C5jd533A==}
     engines: {node: 20 || >=22}
 
+  minimatch@10.2.2:
+    resolution: {integrity: sha512-+G4CpNBxa5MprY+04MbgOw1v7So6n5JY166pFi9KfYwT78fxScCeSNQSNzp6dpPSW2rONOps6Ocam1wFhCgoVw==}
+    engines: {node: 18 || 20 || >=22}
+
   minimatch@3.1.2:
     resolution: {integrity: sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==}
 
@@ -8514,6 +8540,10 @@ packages:
 
   minipass@7.1.2:
     resolution: {integrity: sha512-qOOzS1cBTWYF4BH8fVePDBOO9iptMnGUEZwNc/cMWnTV2nVLZ7VoNWEPHkYczZA0pdoA7dl6e7FL659nX9S2aw==}
+    engines: {node: '>=16 || 14 >=14.17'}
+
+  minipass@7.1.3:
+    resolution: {integrity: sha512-tEBHqDnIoM/1rXME1zgka9g6Q2lcoCkxHLuc7ODJ5BxbP5d4c2Z5cGgtXAku59200Cx7diuHTOYfSBD8n6mm8A==}
     engines: {node: '>=16 || 14 >=14.17'}
 
   minizlib@3.1.0:
@@ -8997,6 +9027,10 @@ packages:
   path-scurry@2.0.1:
     resolution: {integrity: sha512-oWyT4gICAu+kaA7QWk/jvCHWarMKNs6pXOGWKDTr7cw4IGcUbW+PeTfbaQiLGheFRpjo6O9J0PmyMfQPjH71oA==}
     engines: {node: 20 || >=22}
+
+  path-scurry@2.0.2:
+    resolution: {integrity: sha512-3O/iVVsJAPsOnpwWIeD+d6z/7PmqApyQePUtCndjatj/9I5LylHvt5qluFaBT3I5h3r1ejfR056c+FCv+NnNXg==}
+    engines: {node: 18 || 20 || >=22}
 
   path-to-regexp@0.1.12:
     resolution: {integrity: sha512-RA1GjUVMnvYFxuqovrEqZoxxW5NUZqbwKtYz/Tt7nXerk0LbLblQmrsgdeOxV5SFHf0UDggjS/bSeOZwt1pmEQ==}
@@ -10257,6 +10291,9 @@ packages:
   spdx-expression-parse@3.0.1:
     resolution: {integrity: sha512-cbqHunsQWnJNE6KhVSMsMeH5H/L9EpymbzqTQ3uLwNCLZ1Q481oWaofqH7nO6V07xlXwY6PhQdQ2IedWx/ZK4Q==}
 
+  spdx-expression-parse@4.0.0:
+    resolution: {integrity: sha512-Clya5JIij/7C6bRR22+tnGXbc4VKlibKSVj2iHvVeX5iMW7s1SIQlqu699JkODJJIhh/pUu8L0/VLh8xflD+LQ==}
+
   spdx-license-ids@3.0.22:
     resolution: {integrity: sha512-4PRT4nh1EImPbt2jASOKHX7PB7I+e4IWNLvkKFDxNhJlfjbYlleYQh285Z/3mPTHSAK/AvdMmw5BNNuYH8ShgQ==}
 
@@ -10739,8 +10776,8 @@ packages:
     peerDependencies:
       typedoc: 0.28.x
 
-  typedoc@0.28.16:
-    resolution: {integrity: sha512-x4xW77QC3i5DUFMBp0qjukOTnr/sSg+oEs86nB3LjDslvAmwe/PUGDWbe3GrIqt59oTqoXK5GRK9tAa0sYMiog==}
+  typedoc@0.28.17:
+    resolution: {integrity: sha512-ZkJ2G7mZrbxrKxinTQMjFqsCoYY6a5Luwv2GKbTnBCEgV2ihYm5CflA9JnJAwH0pZWavqfYxmDkFHPt4yx2oDQ==}
     engines: {node: '>= 18', pnpm: '>= 10'}
     hasBin: true
     peerDependencies:
@@ -13869,6 +13906,20 @@ snapshots:
 
   '@eslint/js@9.39.2': {}
 
+  '@eslint/markdown@7.5.1':
+    dependencies:
+      '@eslint/core': 0.17.0
+      '@eslint/plugin-kit': 0.4.1
+      github-slugger: 2.0.0
+      mdast-util-from-markdown: 2.0.2
+      mdast-util-frontmatter: 2.0.1
+      mdast-util-gfm: 3.1.0
+      micromark-extension-frontmatter: 2.0.0
+      micromark-extension-gfm: 3.0.0
+      micromark-util-normalize-identifier: 2.0.1
+    transitivePeerDependencies:
+      - supports-color
+
   '@eslint/object-schema@2.1.7': {}
 
   '@eslint/plugin-kit@0.4.1':
@@ -13967,7 +14018,7 @@ snapshots:
 
   '@isaacs/fs-minipass@4.0.1':
     dependencies:
-      minipass: 7.1.2
+      minipass: 7.1.3
 
   '@isaacs/string-locale-compare@1.1.0': {}
 
@@ -14165,30 +14216,30 @@ snapshots:
 
   '@leichtgewicht/ip-codec@2.0.5': {}
 
-  '@lerna-lite/cli@4.11.2(@lerna-lite/publish@4.11.2(@types/node@20.19.33)(conventional-commits-filter@5.0.0))(@lerna-lite/version@4.11.2(@lerna-lite/publish@4.11.2(@types/node@20.19.33)(conventional-commits-filter@5.0.0))(@types/node@20.19.33)(conventional-commits-filter@5.0.0))(@types/node@20.19.33)':
+  '@lerna-lite/cli@4.11.3(@lerna-lite/publish@4.11.3(@types/node@20.19.33)(conventional-commits-filter@5.0.0))(@lerna-lite/version@4.11.3(@lerna-lite/publish@4.11.3(@types/node@20.19.33)(conventional-commits-filter@5.0.0))(@types/node@20.19.33)(conventional-commits-filter@5.0.0))(@types/node@20.19.33)':
     dependencies:
-      '@lerna-lite/core': 4.11.2(@types/node@20.19.33)
-      '@lerna-lite/init': 4.11.2(@types/node@20.19.33)
-      '@lerna-lite/npmlog': 4.11.0
+      '@lerna-lite/core': 4.11.3(@types/node@20.19.33)
+      '@lerna-lite/init': 4.11.3(@types/node@20.19.33)
+      '@lerna-lite/npmlog': 4.11.3
       dedent: 1.7.1
       dotenv: 17.3.1
       import-local: 3.2.0
       load-json-file: 7.0.1
       yargs: 18.0.0
     optionalDependencies:
-      '@lerna-lite/publish': 4.11.2(@types/node@20.19.33)(conventional-commits-filter@5.0.0)
-      '@lerna-lite/version': 4.11.2(@lerna-lite/publish@4.11.2(@types/node@20.19.33)(conventional-commits-filter@5.0.0))(@types/node@20.19.33)(conventional-commits-filter@5.0.0)
+      '@lerna-lite/publish': 4.11.3(@types/node@20.19.33)(conventional-commits-filter@5.0.0)
+      '@lerna-lite/version': 4.11.3(@lerna-lite/publish@4.11.3(@types/node@20.19.33)(conventional-commits-filter@5.0.0))(@types/node@20.19.33)(conventional-commits-filter@5.0.0)
     transitivePeerDependencies:
       - '@types/node'
       - babel-plugin-macros
       - supports-color
 
-  '@lerna-lite/core@4.11.2(@types/node@20.19.33)':
+  '@lerna-lite/core@4.11.3(@types/node@20.19.33)':
     dependencies:
       '@inquirer/expand': 4.0.23(@types/node@20.19.33)
       '@inquirer/input': 4.3.1(@types/node@20.19.33)
       '@inquirer/select': 4.4.2(@types/node@20.19.33)
-      '@lerna-lite/npmlog': 4.11.0
+      '@lerna-lite/npmlog': 4.11.3
       '@npmcli/run-script': 10.0.3
       ci-info: 4.4.0
       dedent: 1.7.1
@@ -14215,9 +14266,9 @@ snapshots:
       - babel-plugin-macros
       - supports-color
 
-  '@lerna-lite/init@4.11.2(@types/node@20.19.33)':
+  '@lerna-lite/init@4.11.3(@types/node@20.19.33)':
     dependencies:
-      '@lerna-lite/core': 4.11.2(@types/node@20.19.33)
+      '@lerna-lite/core': 4.11.3(@types/node@20.19.33)
       fs-extra: 11.3.3
       p-map: 7.0.4
       write-json-file: 7.0.0
@@ -14226,7 +14277,7 @@ snapshots:
       - babel-plugin-macros
       - supports-color
 
-  '@lerna-lite/npmlog@4.11.0':
+  '@lerna-lite/npmlog@4.11.3':
     dependencies:
       aproba: 2.1.0
       fast-string-width: 3.0.2
@@ -14236,14 +14287,14 @@ snapshots:
       tinyrainbow: 3.0.3
       wide-align: 1.1.5
 
-  '@lerna-lite/publish@4.11.2(@types/node@20.19.33)(conventional-commits-filter@5.0.0)':
+  '@lerna-lite/publish@4.11.3(@types/node@20.19.33)(conventional-commits-filter@5.0.0)':
     dependencies:
-      '@lerna-lite/cli': 4.11.2(@lerna-lite/publish@4.11.2(@types/node@20.19.33)(conventional-commits-filter@5.0.0))(@lerna-lite/version@4.11.2(@lerna-lite/publish@4.11.2(@types/node@20.19.33)(conventional-commits-filter@5.0.0))(@types/node@20.19.33)(conventional-commits-filter@5.0.0))(@types/node@20.19.33)
-      '@lerna-lite/core': 4.11.2(@types/node@20.19.33)
-      '@lerna-lite/npmlog': 4.11.0
-      '@lerna-lite/version': 4.11.2(@lerna-lite/publish@4.11.2(@types/node@20.19.33)(conventional-commits-filter@5.0.0))(@types/node@20.19.33)(conventional-commits-filter@5.0.0)
-      '@npmcli/arborist': 9.3.0
-      '@npmcli/package-json': 7.0.4
+      '@lerna-lite/cli': 4.11.3(@lerna-lite/publish@4.11.3(@types/node@20.19.33)(conventional-commits-filter@5.0.0))(@lerna-lite/version@4.11.3(@lerna-lite/publish@4.11.3(@types/node@20.19.33)(conventional-commits-filter@5.0.0))(@types/node@20.19.33)(conventional-commits-filter@5.0.0))(@types/node@20.19.33)
+      '@lerna-lite/core': 4.11.3(@types/node@20.19.33)
+      '@lerna-lite/npmlog': 4.11.3
+      '@lerna-lite/version': 4.11.3(@lerna-lite/publish@4.11.3(@types/node@20.19.33)(conventional-commits-filter@5.0.0))(@types/node@20.19.33)(conventional-commits-filter@5.0.0)
+      '@npmcli/arborist': 9.3.1
+      '@npmcli/package-json': 7.0.5
       byte-size: 9.0.1
       ci-info: 4.4.0
       columnify: 1.6.0
@@ -14274,12 +14325,12 @@ snapshots:
       - conventional-commits-filter
       - supports-color
 
-  '@lerna-lite/version@4.11.2(@lerna-lite/publish@4.11.2(@types/node@20.19.33)(conventional-commits-filter@5.0.0))(@types/node@20.19.33)(conventional-commits-filter@5.0.0)':
+  '@lerna-lite/version@4.11.3(@lerna-lite/publish@4.11.3(@types/node@20.19.33)(conventional-commits-filter@5.0.0))(@types/node@20.19.33)(conventional-commits-filter@5.0.0)':
     dependencies:
       '@conventional-changelog/git-client': 2.5.1(conventional-commits-filter@5.0.0)(conventional-commits-parser@6.2.1)
-      '@lerna-lite/cli': 4.11.2(@lerna-lite/publish@4.11.2(@types/node@20.19.33)(conventional-commits-filter@5.0.0))(@lerna-lite/version@4.11.2(@lerna-lite/publish@4.11.2(@types/node@20.19.33)(conventional-commits-filter@5.0.0))(@types/node@20.19.33)(conventional-commits-filter@5.0.0))(@types/node@20.19.33)
-      '@lerna-lite/core': 4.11.2(@types/node@20.19.33)
-      '@lerna-lite/npmlog': 4.11.0
+      '@lerna-lite/cli': 4.11.3(@lerna-lite/publish@4.11.3(@types/node@20.19.33)(conventional-commits-filter@5.0.0))(@lerna-lite/version@4.11.3(@lerna-lite/publish@4.11.3(@types/node@20.19.33)(conventional-commits-filter@5.0.0))(@types/node@20.19.33)(conventional-commits-filter@5.0.0))(@types/node@20.19.33)
+      '@lerna-lite/core': 4.11.3(@types/node@20.19.33)
+      '@lerna-lite/npmlog': 4.11.3
       '@octokit/plugin-enterprise-rest': 6.0.1
       '@octokit/rest': 22.0.1
       conventional-changelog: 7.1.1(conventional-commits-filter@5.0.0)
@@ -14383,7 +14434,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@npmcli/arborist@9.3.0':
+  '@npmcli/arborist@9.3.1':
     dependencies:
       '@isaacs/string-locale-compare': 1.1.0
       '@npmcli/fs': 5.0.0
@@ -14392,7 +14443,7 @@ snapshots:
       '@npmcli/metavuln-calculator': 9.0.3
       '@npmcli/name-from-folder': 4.0.0
       '@npmcli/node-gyp': 5.0.0
-      '@npmcli/package-json': 7.0.4
+      '@npmcli/package-json': 7.0.5
       '@npmcli/query': 5.0.0
       '@npmcli/redact': 4.0.0
       '@npmcli/run-script': 10.0.3
@@ -14402,7 +14453,7 @@ snapshots:
       hosted-git-info: 9.0.2
       json-stringify-nice: 1.1.4
       lru-cache: 11.2.6
-      minimatch: 10.2.1
+      minimatch: 10.2.2
       nopt: 9.0.0
       npm-install-checks: 8.0.0
       npm-package-arg: 13.0.2
@@ -14478,9 +14529,9 @@ snapshots:
   '@npmcli/map-workspaces@5.0.3':
     dependencies:
       '@npmcli/name-from-folder': 4.0.0
-      '@npmcli/package-json': 7.0.4
-      glob: 13.0.4
-      minimatch: 10.2.1
+      '@npmcli/package-json': 7.0.5
+      glob: 13.0.6
+      minimatch: 10.2.2
 
   '@npmcli/metavuln-calculator@9.0.3':
     dependencies:
@@ -14510,15 +14561,15 @@ snapshots:
     transitivePeerDependencies:
       - bluebird
 
-  '@npmcli/package-json@7.0.4':
+  '@npmcli/package-json@7.0.5':
     dependencies:
       '@npmcli/git': 7.0.1
-      glob: 13.0.4
+      glob: 13.0.6
       hosted-git-info: 9.0.2
       json-parse-even-better-errors: 5.0.0
       proc-log: 6.1.0
       semver: 7.7.4
-      validate-npm-package-license: 3.0.4
+      spdx-expression-parse: 4.0.0
 
   '@npmcli/promise-spawn@7.0.2':
     dependencies:
@@ -14537,7 +14588,7 @@ snapshots:
   '@npmcli/run-script@10.0.3':
     dependencies:
       '@npmcli/node-gyp': 5.0.0
-      '@npmcli/package-json': 7.0.4
+      '@npmcli/package-json': 7.0.5
       '@npmcli/promise-spawn': 9.0.1
       node-gyp: 12.2.0
       proc-log: 6.1.0
@@ -14614,6 +14665,11 @@ snapshots:
   '@octokit/types@16.0.0':
     dependencies:
       '@octokit/openapi-types': 27.0.0
+
+  '@ota-meshi/ast-token-store@0.2.1(@eslint/markdown@7.5.1)(eslint@9.39.2(jiti@1.21.7))':
+    dependencies:
+      '@eslint/markdown': 7.5.1
+      eslint: 9.39.2(jiti@1.21.7)
 
   '@oxc-project/types@0.112.0': {}
 
@@ -15336,7 +15392,7 @@ snapshots:
   '@tufjs/models@4.1.0':
     dependencies:
       '@tufjs/canonical-json': 2.0.0
-      minimatch: 10.2.1
+      minimatch: 10.2.2
 
   '@tybys/wasm-util@0.10.1':
     dependencies:
@@ -16359,9 +16415,9 @@ snapshots:
     dependencies:
       '@npmcli/fs': 5.0.0
       fs-minipass: 3.0.3
-      glob: 13.0.4
+      glob: 13.0.6
       lru-cache: 11.2.6
-      minipass: 7.1.2
+      minipass: 7.1.3
       minipass-collect: 2.0.1
       minipass-flush: 1.0.5
       minipass-pipeline: 1.2.4
@@ -17356,10 +17412,10 @@ snapshots:
       - sass-embedded
       - webpack
 
-  docusaurus-plugin-typedoc@1.4.2(typedoc-plugin-markdown@4.10.0(typedoc@0.28.16(typescript@5.9.3))):
+  docusaurus-plugin-typedoc@1.4.2(typedoc-plugin-markdown@4.10.0(typedoc@0.28.17(typescript@5.9.3))):
     dependencies:
-      typedoc-docusaurus-theme: 1.4.2(typedoc-plugin-markdown@4.10.0(typedoc@0.28.16(typescript@5.9.3)))
-      typedoc-plugin-markdown: 4.10.0(typedoc@0.28.16(typescript@5.9.3))
+      typedoc-docusaurus-theme: 1.4.2(typedoc-plugin-markdown@4.10.0(typedoc@0.28.17(typescript@5.9.3)))
+      typedoc-plugin-markdown: 4.10.0(typedoc@0.28.17(typescript@5.9.3))
 
   dom-converter@0.2.0:
     dependencies:
@@ -17791,10 +17847,11 @@ snapshots:
       semver: 7.7.4
       strip-indent: 4.1.1
 
-  eslint-plugin-yml@3.1.2(eslint@9.39.2(jiti@1.21.7)):
+  eslint-plugin-yml@3.2.1(@eslint/markdown@7.5.1)(eslint@9.39.2(jiti@1.21.7)):
     dependencies:
       '@eslint/core': 1.1.0
       '@eslint/plugin-kit': 0.6.0
+      '@ota-meshi/ast-token-store': 0.2.1(@eslint/markdown@7.5.1)(eslint@9.39.2(jiti@1.21.7))
       debug: 4.4.3(supports-color@8.1.1)
       diff-sequences: 29.6.3
       escape-string-regexp: 5.0.0
@@ -17802,6 +17859,7 @@ snapshots:
       natural-compare: 1.4.0
       yaml-eslint-parser: 2.0.0
     transitivePeerDependencies:
+      - '@eslint/markdown'
       - supports-color
 
   eslint-scope@5.1.1:
@@ -18211,7 +18269,7 @@ snapshots:
 
   fs-minipass@3.0.3:
     dependencies:
-      minipass: 7.1.2
+      minipass: 7.1.3
 
   fs.realpath@1.0.0: {}
 
@@ -18242,6 +18300,8 @@ snapshots:
   get-caller-file@2.0.5: {}
 
   get-east-asian-width@1.4.0: {}
+
+  get-east-asian-width@1.5.0: {}
 
   get-intrinsic@1.3.0:
     dependencies:
@@ -18297,6 +18357,8 @@ snapshots:
 
   github-slugger@1.5.0: {}
 
+  github-slugger@2.0.0: {}
+
   glob-parent@5.1.2:
     dependencies:
       is-glob: 4.0.3
@@ -18334,6 +18396,12 @@ snapshots:
       minimatch: 10.2.1
       minipass: 7.1.2
       path-scurry: 2.0.1
+
+  glob@13.0.6:
+    dependencies:
+      minimatch: 10.2.2
+      minipass: 7.1.3
+      path-scurry: 2.0.2
 
   glob@7.2.3:
     dependencies:
@@ -18767,7 +18835,7 @@ snapshots:
 
   ignore-walk@8.0.0:
     dependencies:
-      minimatch: 10.2.1
+      minimatch: 10.2.2
 
   ignore@5.3.2: {}
 
@@ -19333,7 +19401,7 @@ snapshots:
 
   libnpmpublish@11.1.3:
     dependencies:
-      '@npmcli/package-json': 7.0.4
+      '@npmcli/package-json': 7.0.5
       ci-info: 4.4.0
       npm-package-arg: 13.0.2
       npm-registry-fetch: 19.1.1
@@ -19456,7 +19524,7 @@ snapshots:
       '@npmcli/agent': 4.0.0
       cacache: 20.0.3
       http-cache-semantics: 4.2.0
-      minipass: 7.1.2
+      minipass: 7.1.3
       minipass-fetch: 5.0.1
       minipass-flush: 1.0.5
       minipass-pipeline: 1.2.4
@@ -20051,6 +20119,10 @@ snapshots:
     dependencies:
       brace-expansion: 5.0.2
 
+  minimatch@10.2.2:
+    dependencies:
+      brace-expansion: 5.0.2
+
   minimatch@3.1.2:
     dependencies:
       brace-expansion: 1.1.12
@@ -20063,11 +20135,11 @@ snapshots:
 
   minipass-collect@2.0.1:
     dependencies:
-      minipass: 7.1.2
+      minipass: 7.1.3
 
   minipass-fetch@5.0.1:
     dependencies:
-      minipass: 7.1.2
+      minipass: 7.1.3
       minipass-sized: 2.0.0
       minizlib: 3.1.0
     optionalDependencies:
@@ -20083,7 +20155,7 @@ snapshots:
 
   minipass-sized@2.0.0:
     dependencies:
-      minipass: 7.1.2
+      minipass: 7.1.3
 
   minipass@3.3.6:
     dependencies:
@@ -20091,9 +20163,11 @@ snapshots:
 
   minipass@7.1.2: {}
 
+  minipass@7.1.3: {}
+
   minizlib@3.1.0:
     dependencies:
-      minipass: 7.1.2
+      minipass: 7.1.3
 
   mlly@1.8.0:
     dependencies:
@@ -20294,7 +20368,7 @@ snapshots:
       '@npmcli/redact': 4.0.0
       jsonparse: 1.3.1
       make-fetch-happen: 15.0.3
-      minipass: 7.1.2
+      minipass: 7.1.3
       minipass-fetch: 5.0.1
       minizlib: 3.1.0
       npm-package-arg: 13.0.2
@@ -20573,12 +20647,12 @@ snapshots:
     dependencies:
       '@npmcli/git': 7.0.1
       '@npmcli/installed-package-contents': 4.0.0
-      '@npmcli/package-json': 7.0.4
+      '@npmcli/package-json': 7.0.5
       '@npmcli/promise-spawn': 9.0.1
       '@npmcli/run-script': 10.0.3
       cacache: 20.0.3
       fs-minipass: 3.0.3
-      minipass: 7.1.2
+      minipass: 7.1.3
       npm-package-arg: 13.0.2
       npm-packlist: 10.0.3
       npm-pick-manifest: 11.0.3
@@ -20701,6 +20775,11 @@ snapshots:
     dependencies:
       lru-cache: 11.2.6
       minipass: 7.1.2
+
+  path-scurry@2.0.2:
+    dependencies:
+      lru-cache: 11.2.6
+      minipass: 7.1.3
 
   path-to-regexp@0.1.12: {}
 
@@ -22146,6 +22225,11 @@ snapshots:
       spdx-exceptions: 2.5.0
       spdx-license-ids: 3.0.22
 
+  spdx-expression-parse@4.0.0:
+    dependencies:
+      spdx-exceptions: 2.5.0
+      spdx-license-ids: 3.0.22
+
   spdx-license-ids@3.0.22: {}
 
   spdy-transport@3.0.0:
@@ -22175,7 +22259,7 @@ snapshots:
 
   ssri@13.0.1:
     dependencies:
-      minipass: 7.1.2
+      minipass: 7.1.3
 
   stackback@0.0.2: {}
 
@@ -22217,7 +22301,7 @@ snapshots:
   string-width@7.2.0:
     dependencies:
       emoji-regex: 10.6.0
-      get-east-asian-width: 1.4.0
+      get-east-asian-width: 1.5.0
       strip-ansi: 7.1.2
 
   string-width@8.1.1:
@@ -22380,7 +22464,7 @@ snapshots:
     dependencies:
       '@isaacs/fs-minipass': 4.0.1
       chownr: 3.0.0
-      minipass: 7.1.2
+      minipass: 7.1.3
       minizlib: 3.1.0
       yallist: 5.0.0
 
@@ -22665,15 +22749,15 @@ snapshots:
 
   typedarray@0.0.6: {}
 
-  typedoc-docusaurus-theme@1.4.2(typedoc-plugin-markdown@4.10.0(typedoc@0.28.16(typescript@5.9.3))):
+  typedoc-docusaurus-theme@1.4.2(typedoc-plugin-markdown@4.10.0(typedoc@0.28.17(typescript@5.9.3))):
     dependencies:
-      typedoc-plugin-markdown: 4.10.0(typedoc@0.28.16(typescript@5.9.3))
+      typedoc-plugin-markdown: 4.10.0(typedoc@0.28.17(typescript@5.9.3))
 
-  typedoc-plugin-markdown@4.10.0(typedoc@0.28.16(typescript@5.9.3)):
+  typedoc-plugin-markdown@4.10.0(typedoc@0.28.17(typescript@5.9.3)):
     dependencies:
-      typedoc: 0.28.16(typescript@5.9.3)
+      typedoc: 0.28.17(typescript@5.9.3)
 
-  typedoc@0.28.16(typescript@5.9.3):
+  typedoc@0.28.17(typescript@5.9.3):
     dependencies:
       '@gerrit0/mini-shiki': 3.22.0
       lunr: 2.3.9
