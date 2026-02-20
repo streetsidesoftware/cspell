@@ -3,6 +3,8 @@ import type { Range, SourceMap } from '@cspell/cspell-types/Parser';
 import type { GTrieNode } from 'cspell-trie-lib';
 import { GTrie } from 'cspell-trie-lib';
 
+import { mapOffsetPairsToSourceMap } from './SourceMap.js';
+
 type DeepReadonly<T> = T extends object ? { readonly [K in keyof T]: DeepReadonly<T[K]> } : T;
 
 export interface SubstitutionInfo {
@@ -52,7 +54,7 @@ export class SubstitutionTransformer {
         const result: MappedText = {
             text: repText,
             range: [0, text.length],
-            map,
+            map: mapOffsetPairsToSourceMap(map),
         };
 
         return result;

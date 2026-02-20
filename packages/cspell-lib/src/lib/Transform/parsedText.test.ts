@@ -1,6 +1,7 @@
 import { describe, expect, test } from 'vitest';
 
 import { mapRangeBackToOriginalPos, mapRangeToLocal } from './parsedText.js';
+import { mapOffsetPairsToSourceMap } from './SourceMap.js';
 
 describe('parsedText', () => {
     test.each`
@@ -12,7 +13,7 @@ describe('parsedText', () => {
         ${6}  | ${17} | ${[5, 5, 9, 6, 19, 16]} | ${[6, 20]}
         ${0}  | ${17} | ${[5, 5, 9, 6, 19, 16]} | ${[0, 20]}
     `('mapRangeBackToOriginalPos $start $end $map', ({ start, end, map, expected }) => {
-        expect(mapRangeBackToOriginalPos([start, end], map)).toEqual(expected);
+        expect(mapRangeBackToOriginalPos([start, end], mapOffsetPairsToSourceMap(map))).toEqual(expected);
     });
 
     test.each`
@@ -27,6 +28,6 @@ describe('parsedText', () => {
         ${6}  | ${20} | ${[0, 0, 5, 5, 9, 6, 19, 16]} | ${[6, 17]}
         ${0}  | ${30} | ${[0, 0, 5, 5, 9, 6, 19, 16]} | ${[0, 27]}
     `('mapRangeBackToOriginalPos $start $end $map', ({ start, end, map, expected }) => {
-        expect(mapRangeToLocal([start, end], map)).toEqual(expected);
+        expect(mapRangeToLocal([start, end], mapOffsetPairsToSourceMap(map))).toEqual(expected);
     });
 });

@@ -14,8 +14,7 @@ export interface Mapped {
      * Example:
      * - source text = `"caf\xe9"`
      * - mapped text = `"café"`
-     * - map = `[3, 3, 7, 4]`, which is equivalent to `[0, 0, 3, 3, 7, 4]`
-     *   where the `[0, 0]` is unnecessary.
+     * - map = `[3, 3, 4, 1]`
      *
      * See: {@link SourceMap}
      *
