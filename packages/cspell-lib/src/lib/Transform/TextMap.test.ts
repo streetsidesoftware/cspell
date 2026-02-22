@@ -15,12 +15,14 @@ describe('TextMap', () => {
         text                  | range         | map                   | extRange      | expected
         ${'fine café'}        | ${[200, 209]} | ${undefined}          | ${[205, 209]} | ${tm('café', [205, 209])}
         ${'fine café coffee'} | ${[200, 219]} | ${[8, 8, 4, 1, 7, 7]} | ${[205, 212]} | ${tm('café', [205, 212], [3, 3, 4, 1])}
-        ${'fine café coffee'} | ${[200, 219]} | ${[8, 8, 4, 1, 7, 7]} | ${[200, 212]} | ${tm('fine café', [200, 212], [8, 8, 4, 1, 7, 7])}
+        ${'fine café coffee'} | ${[200, 219]} | ${[8, 8, 4, 1, 7, 7]} | ${[200, 212]} | ${tm('fine café', [200, 212], [8, 8, 4, 1])}
+        ${'fine café coffee'} | ${[200, 219]} | ${[8, 8, 4, 1, 7, 7]} | ${[200, 213]} | ${tm('fine café ', [200, 213], [8, 8, 4, 1, 7, 7])}
         ${'fine café coffee'} | ${[200, 219]} | ${[8, 8, 4, 1, 7, 7]} | ${[200, 219]} | ${tm('fine café coffee', [200, 219], [8, 8, 4, 1, 7, 7])}
-        ${'fine café coffee'} | ${[200, 219]} | ${[8, 8, 4, 1]}       | ${[205, 212]} | ${tm('café', [205, 212], [3, 3, 7, 4])}
+        ${'fine café coffee'} | ${[200, 219]} | ${[8, 8, 4, 1]}       | ${[200, 219]} | ${tm('fine café coffee', [200, 219], [8, 8, 4, 1])}
+        ${'fine café coffee'} | ${[200, 219]} | ${[8, 8, 4, 1]}       | ${[205, 212]} | ${tm('café', [205, 212], [3, 3, 4, 1])}
         ${'fine café coffee'} | ${[200, 219]} | ${[8, 8, 4, 1]}       | ${[205, 219]} | ${tm('café coffee', [205, 219], [3, 3, 4, 1])}
-    `('extractTextMap $text $range $map', ({ text, range, map, extRange, expected }) => {
-        const tm = { text, range, mapRel: map };
+    `('extractTextMap $text $range $map $extRange', ({ text, range, map, extRange, expected }) => {
+        const tm = { text, range, map };
         const r = extractTextMapRangeOrigin(tm, extRange);
         expect(r).toEqual(expected);
     });

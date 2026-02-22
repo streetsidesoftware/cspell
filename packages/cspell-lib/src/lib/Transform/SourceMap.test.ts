@@ -3,7 +3,7 @@ import assert from 'node:assert';
 import type { MappedText, SubstitutionDefinition } from '@cspell/cspell-types';
 import { describe, expect, test } from 'vitest';
 
-import { mergeSourceMaps } from './SourceMap.js';
+import { mergeSourceMaps, sliceSourceMapToSourceRange } from './SourceMap.js';
 import type { SubstitutionInfo } from './SubstitutionTransformer.js';
 import { createSubstitutionTransformer } from './SubstitutionTransformer.js';
 import { calculateRangeInDest, calculateRangeInSrc } from './TextMap.js';
@@ -37,8 +37,10 @@ describe('mergeSourceMaps', () => {
         ${undefined}    | ${[]}           | ${undefined}
         ${undefined}    | ${undefined}    | ${undefined}
         ${[1, 8]}       | ${[]}           | ${[1, 8]}
+        ${[3, 3, 4, 1]} | ${[5, 5]}       | ${[3, 3, 4, 1, 1, 1]}
+        ${[3, 3, 4, 1]} | ${[0, 0, 5, 5]} | ${[8, 5]}
         ${[]}           | ${[0, 0, 3, 3]} | ${[0, 0, 3, 3]}
-        ${[0, 0, 8, 8]} | ${[0, 0, 3, 3]} | ${[0, 0, 3, 3, 5, 5]}
+        ${[0, 0, 8, 8]} | ${[0, 0, 3, 3]} | ${[0, 0, 8, 8]}
     `('mergeSourceMaps $map1, $map2', ({ map1, map2, expected }) => {
         const r = mergeSourceMaps(map1, map2);
         expect(r).toEqual(expected);
@@ -49,7 +51,7 @@ describe('mergeSourceMaps', () => {
         ${'café'}                       | ${'identity'}    | ${'identity'}             | ${'café'}             | ${undefined}
         ${'caf%C3%A9'}                  | ${'uri-escapes'} | ${'identity'}             | ${'café'}             | ${[3, 3, 6, 1]}
         ${'caf%26%23233%3B%26apos%3Bs'} | ${'uri-escapes'} | ${'identity'}             | ${'caf&#233;&apos;s'} | ${[3, 3, 3, 1, 3, 1, 3, 3, 3, 1, 3, 1, 4, 4, 3, 1, 1, 1]}
-        ${'caf%26%23233%3B%26apos%3Bs'} | ${'uri-escapes'} | ${'html-symbol-entities'} | ${"café's"}           | ${[3, 3, 3, 0, 3, 0, 3, 0, 3, 0, 0, 1, 3, 0, 4, 0, 3, 0, 0, 1, 1, 1]}
+        ${'caf%26%23233%3B%26apos%3Bs'} | ${'uri-escapes'} | ${'html-symbol-entities'} | ${"café's"}           | ${[3, 3, 12, 1, 10, 1, 1, 1]}
     `('mergeSourceMaps substitutions  $text, $sub1, $sub2', ({ text, sub1, sub2, expectedText, expectedMap }) => {
         const t1 = makeTransformer(sub1);
         const t2 = makeTransformer(sub2);
@@ -66,7 +68,7 @@ describe('mergeSourceMaps', () => {
         ${'caf%C3%A9'}                  | ${[0, 'caf%C3%A9'.length]} | ${'café'}    | ${'café'}
         ${'caf%26%23233%3B%26apos%3Bs'} | ${undefined}               | ${"café's"}  | ${"café's"}
         ${'caf%C3%A9'}                  | ${[3, 9]}                  | ${'café'}    | ${'é'}
-    `('mergeSourceMaps range from origin  $text, $range', ({ text, range, expectedText, expectedSeg }) => {
+    `('mergeSourceMaps range from origin  $text, $range in source', ({ text, range, expectedText, expectedSeg }) => {
         range ??= [0, text.length];
         const t1 = makeTransformer('uri-escapes');
         const t2 = makeTransformer('html-symbol-entities');
@@ -79,6 +81,38 @@ describe('mergeSourceMaps', () => {
         const rSrc = calculateRangeInSrc(srcMap, r);
         expect(rSrc).toEqual(range);
     });
+});
+
+describe('sliceSourceMapToSourceRange', () => {
+    const t0 = 'caf%26%23233%3B%26apos%3Bs';
+    const tm0 = decodeUri(t0);
+
+    test('assumptions', () => {
+        expect(tm0.text).toEqual("café's");
+        expect(tm0.text.slice(...calculateRangeInDest(tm0.map, [0, t0.length]))).toEqual(tm0.text);
+        expect(tm0.text.slice(...calculateRangeInDest(tm0.map, [0, 15]))).toEqual('café');
+    });
+
+    test.each`
+        map                                     | extRange      | expected
+        ${[]}                                   | ${[200, 219]} | ${[]}
+        ${tm0.map}                              | ${tm0.range}  | ${tm0.map}
+        ${[3, 3, 3, 0, 3, 0, 3, 0, 3, 0, 0, 1]} | ${[0, 26]}    | ${[3, 3, 3, 0, 3, 0, 3, 0, 3, 0, 0, 1]}
+        ${[3, 3, 3, 0, 3, 0, 3, 0, 3, 0, 0, 1]} | ${[0, 15]}    | ${[3, 3, 3, 0, 3, 0, 3, 0, 3, 0, 0, 1]}
+    `('sliceSourceMapToSourceRange $map, $extRange', ({ map, extRange, expected }) => {
+        const r = sliceSourceMapToSourceRange(map, extRange);
+        expect(r).toEqual(expected);
+    });
+
+    function decodeUri(text: string): MappedText {
+        const range = [0, text.length] as const;
+        const t1 = makeTransformer('uri-escapes');
+        const t2 = makeTransformer('html-symbol-entities');
+        const tText1 = t1.transform(text);
+        const tText2 = t2.transform(tText1.text);
+        const srcMap = mergeSourceMaps(tText1.map, tText2.map);
+        return { text: tText2.text, range, map: srcMap };
+    }
 });
 
 describe('Substitution Assumptions', () => {

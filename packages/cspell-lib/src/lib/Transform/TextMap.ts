@@ -18,13 +18,24 @@ export function extractTextMapRangeOrigin(textMap: MappedText, extractRange: Ran
     const a = startOrig - r0;
     const b = endOrig - r0;
     const range = [startOrig, endOrig] as const;
-    const text = srcTxt.slice(a, b);
-    const tm: Writable<MappedText> = { text, range };
 
-    const mapRel = sliceSourceMapToSourceRange(textMap.map, [a, b]);
+    if (!textMap.map?.length) {
+        const text = srcTxt.slice(a, b);
+        return { text, range };
+    }
 
-    if (mapRel?.length) {
-        tm.map = mapRel;
+    const rangeSrc = [a, b] as const;
+    const [a1, b1] = calculateRangeInDest(textMap.map, rangeSrc);
+
+    const tm: Writable<MappedText> = {
+        text: srcTxt.slice(a1, b1),
+        range,
+    };
+
+    const sourceMap = sliceSourceMapToSourceRange(textMap.map, rangeSrc);
+
+    if (sourceMap?.length) {
+        tm.map = sourceMap;
     }
 
     return tm;
