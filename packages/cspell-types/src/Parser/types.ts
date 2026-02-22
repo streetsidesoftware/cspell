@@ -38,7 +38,7 @@
  * | 18-24  |    6 | `\u00f8`    | 13-14  |    1 | `ø`         |
  * | 24-29  |    5 | `rvika`     | 14-19  |    5 | `rvika`     |
  *
- * Node: The trailing 5,5 is not necessary since it is a 1:1 mapping, but it is included for clarity.
+ * Note: The trailing 5,5 is not necessary since it is a 1:1 mapping, but it is included for clarity.
  *
  * <!--- cspell:ignore Bjørvika rvika --->
  */
