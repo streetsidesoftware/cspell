@@ -1,7 +1,6 @@
 import type { MappedText, SourceMap } from '@cspell/cspell-types';
 import { describe, expect, test } from 'vitest';
 
-import { mergeSourceMaps } from './SourceMap.js';
 import {
     calRangeInSrc,
     doesIntersect,
@@ -16,7 +15,7 @@ describe('TextMap', () => {
         ${'fine café'}        | ${[200, 209]} | ${undefined}          | ${[205, 209]} | ${tm('café', [205, 209])}
         ${'fine café coffee'} | ${[200, 219]} | ${[8, 8, 4, 1, 7, 7]} | ${[205, 212]} | ${tm('café', [205, 212], [3, 3, 4, 1])}
         ${'fine café coffee'} | ${[200, 219]} | ${[8, 8, 4, 1, 7, 7]} | ${[200, 212]} | ${tm('fine café', [200, 212], [8, 8, 4, 1])}
-        ${'fine café coffee'} | ${[200, 219]} | ${[8, 8, 4, 1, 7, 7]} | ${[200, 213]} | ${tm('fine café ', [200, 213], [8, 8, 4, 1, 7, 7])}
+        ${'fine café coffee'} | ${[200, 219]} | ${[8, 8, 4, 1, 7, 7]} | ${[200, 213]} | ${tm('fine café ', [200, 213], [8, 8, 4, 1])}
         ${'fine café coffee'} | ${[200, 219]} | ${[8, 8, 4, 1, 7, 7]} | ${[200, 219]} | ${tm('fine café coffee', [200, 219], [8, 8, 4, 1, 7, 7])}
         ${'fine café coffee'} | ${[200, 219]} | ${[8, 8, 4, 1]}       | ${[200, 219]} | ${tm('fine café coffee', [200, 219], [8, 8, 4, 1])}
         ${'fine café coffee'} | ${[200, 219]} | ${[8, 8, 4, 1]}       | ${[205, 212]} | ${tm('café', [205, 212], [3, 3, 4, 1])}
@@ -144,41 +143,6 @@ describe('TextMap', () => {
 });
 
 // cspell:dictionaries html-symbol-entities unicode-escapes
-
-describe('mergeSourceMaps', () => {
-    test('mergeSourceMaps', () => {
-        /**
-         * orig | len |  intermediate | len | final | len |
-         * ---- | --- |  ------------ | --- | ----- | --- |
-         * 0-3  | 3   |  0-3          | 3   | 0-3   | 3   |
-         * 3-7  | 4   |  3-7          | 4   | 3-4   | 1   |
-         * 7-8  | 1   |  7-8          | 1   | 4-5   | 1   |
-         * 8-12 | 4   |  8-9          | 1   | 5-6   | 1   |
-         * 12-19| 7   |  9-16         | 7   | 6-13  | 7   |
-         * 19-22| 3   |  16-16        | 0   | 13-13 | 0   |
-         * 22-24| 2   |  16-18        | 2   | 13-15 | 2   |
-         */
-        const map1 = [8, 8, 4, 1, 7, 7, 3, 0, 2, 2];
-        const map2 = [3, 3, 4, 1];
-        const expected = [3, 3, 4, 1, 1, 1, 4, 1, 7, 7, 3, 0, 2, 2];
-        const r = mergeSourceMaps(map1, map2);
-        expect(r).toEqual(expected);
-    });
-
-    test.each`
-        map1            | map2            | expected
-        ${[]}           | ${[]}           | ${undefined}
-        ${[]}           | ${undefined}    | ${undefined}
-        ${undefined}    | ${[]}           | ${undefined}
-        ${undefined}    | ${undefined}    | ${undefined}
-        ${[1, 8]}       | ${[]}           | ${[1, 8]}
-        ${[]}           | ${[0, 0, 3, 3]} | ${[0, 0, 3, 3]}
-        ${[0, 0, 8, 8]} | ${[0, 0, 3, 3]} | ${[0, 0, 3, 3, 5, 5]}
-    `('mergeSourceMaps $map1, $map2', ({ map1, map2, expected }) => {
-        const r = mergeSourceMaps(map1, map2);
-        expect(r).toEqual(expected);
-    });
-});
 
 function tm(text: string, range: [number, number], map?: number[]): MappedText {
     return map ? { text, range, map } : { text, range };

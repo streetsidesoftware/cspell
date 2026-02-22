@@ -4,7 +4,7 @@ import { opFlatten, opMap, pipe } from '@cspell/cspell-pipe/sync';
 import type { ParsedText, ParseResult, Scope, ScopeChain } from '@cspell/cspell-types/Parser';
 
 import { grammar } from '../../grammars/typescript.js';
-import { appendMappedText } from '../../mappers/appendMappedText.js';
+import { appendParsedText } from '../../mappers/appendMappedText.js';
 import { mapRawString } from '../../mappers/typescript.js';
 import { compileGrammar } from '../../parser/grammar.js';
 import { createParser } from '../../parser/parser.js';
@@ -25,7 +25,7 @@ function* transform(texts: ParseResult['parsedTexts']): ParseResult['parsedTexts
             yield {
                 text: mapped.text,
                 scope: scope?.parent,
-                map: absMapToRelMap(mapped.map),
+                map: absMapToRelMap(mapped.offsetMap),
                 range: parsed.range,
             };
             continue;
@@ -60,12 +60,10 @@ function* mergeStringResults(results: Iterable<ParsedText>): Iterable<ParsedText
 }
 
 function mergeParsedText(a: ParsedText, b: ParsedText): ParsedText {
-    const abT = appendMappedText(a, b);
+    const abT = appendParsedText(a, b);
     const ab: ParsedText = {
-        text: abT.text,
+        ...abT,
         scope: a.scope,
-        range: [a.range[0], b.range[1]],
-        map: absMapToRelMap(abT.map),
         delegate: a.delegate,
     };
 
