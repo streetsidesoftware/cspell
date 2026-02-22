@@ -14,7 +14,7 @@
 * This is important when multiple transformations have been applied to the same text, and the source map
 * is being used to map back to the original text.
 *
-* For example: `\u00e9` might be transformed to `é` in on transformation and then to html entity `&#233;`.
+* For example: `\u00e9` might be transformed to `é` in one transformation and then to HTML entity `&#233;`.
 * The resulting sourceMap would be `[..., 0, 0, 6, 6, ...]` to indicate that the 6 character segment should
 * not be split when mapping back to the original text.
 *
@@ -39,7 +39,7 @@
 * | 18-24  |    6 | `\u00f8`    | 13-14  |    1 | `ø`         |
 * | 24-29  |    5 | `rvika`     | 14-19  |    5 | `rvika`     |
 *
-* Node: The trailing 5,5 is not necessary since it is a 1:1 mapping, but it is included for clarity.
+* Note: The trailing 5,5 is not necessary since it is a 1:1 mapping, but it is included for clarity.
 *
 * <!--- cspell:ignore Bjørvika rvika --->
 */
