@@ -14,5 +14,5 @@ export interface MappedText {
      */
     offsetMap?: number[] | undefined;
 
-    map?: symbol;
+    map?: never;
 }
