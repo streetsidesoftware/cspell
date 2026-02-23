@@ -18,5 +18,5 @@ describe('appendMappedText', () => {
 });
 
 function mt(text: string, map: number[] | undefined): MappedText {
-    return { text, map };
+    return { text, offsetMap: map };
 }

@@ -1,8 +1,10 @@
+import assert from 'node:assert';
+
 import { opFlatten, opMap, pipe } from '@cspell/cspell-pipe/sync';
 import type { ParsedText, ParseResult, Scope, ScopeChain } from '@cspell/cspell-types/Parser';
 
 import { grammar } from '../../grammars/typescript.js';
-import { appendMappedText } from '../../mappers/appendMappedText.js';
+import { appendParsedText } from '../../mappers/appendMappedText.js';
 import { mapRawString } from '../../mappers/typescript.js';
 import { compileGrammar } from '../../parser/grammar.js';
 import { createParser } from '../../parser/parser.js';
@@ -23,7 +25,7 @@ function* transform(texts: ParseResult['parsedTexts']): ParseResult['parsedTexts
             yield {
                 text: mapped.text,
                 scope: scope?.parent,
-                map: mapped.map,
+                map: absMapToRelMap(mapped.offsetMap),
                 range: parsed.range,
             };
             continue;
@@ -58,12 +60,10 @@ function* mergeStringResults(results: Iterable<ParsedText>): Iterable<ParsedText
 }
 
 function mergeParsedText(a: ParsedText, b: ParsedText): ParsedText {
-    const abT = appendMappedText(a, b);
+    const abT = appendParsedText(a, b);
     const ab: ParsedText = {
-        text: abT.text,
+        ...abT,
         scope: a.scope,
-        range: [a.range[0], b.range[1]],
-        map: abT.map,
         delegate: a.delegate,
     };
 
@@ -98,4 +98,21 @@ export const parser = createParser(tsGrammar, 'typescript', mapTokenizedLines);
 function doesScopeMatch(s: Scope | undefined, match: string): boolean {
     if (!s) return false;
     return typeof s === 'string' ? s.startsWith(match) : s.value.startsWith(match);
+}
+
+function absMapToRelMap(map: number[] | undefined): number[] | undefined {
+    if (!map) return undefined;
+    assert((map.length & 1) === 0, 'Map must be pairs of values.');
+    const relMap: number[] = [];
+    let base0 = 0;
+    let base1 = 0;
+    for (let i = 0; i < map.length; i += 2) {
+        const d0 = map[i] - base0;
+        const d1 = map[i + 1] - base1;
+        base0 += d0;
+        base1 += d1;
+        if (d0 === 0 && d1 === 0) continue;
+        relMap.push(d0, d1);
+    }
+    return relMap;
 }

@@ -1,15 +1,41 @@
 import assert from 'node:assert';
 
+import type { ParsedText } from '@cspell/cspell-types';
+
 import type { MappedText } from './types.js';
 
+export function appendParsedText(a: ParsedText, b: ParsedText): ParsedText {
+    const adjacent = a.range[1] === b.range[0];
+
+    if (adjacent && !a.map && !b.map) {
+        return {
+            text: a.text + b.text,
+            range: [a.range[0], b.range[1]],
+        };
+    }
+
+    const aMap = a.map || [a.range[1] - a.range[0], a.text.length];
+    const bMap = b.map || [b.range[1] - b.range[0], b.text.length];
+
+    const inject = adjacent ? [] : [b.range[0] - a.range[1], 0];
+    const map = [...aMap, ...inject, ...bMap];
+    return {
+        ...a,
+        ...b,
+        text: a.text + b.text,
+        range: [a.range[0], b.range[1]],
+        map,
+    };
+}
+
 export function appendMappedText(a: MappedText, b: MappedText): MappedText {
-    if (!a.map && !b.map) {
+    if (!a.offsetMap && !b.offsetMap) {
         return { text: a.text + b.text };
     }
     const aLen = a.text.length;
     const bLen = b.text.length;
-    const aMap = [0, 0, ...(a.map || [0, 0, aLen, aLen])];
-    const bMap = [0, 0, ...(b.map || [0, 0, bLen, bLen])];
+    const aMap = [0, 0, ...(a.offsetMap || [0, 0, aLen, aLen])];
+    const bMap = [0, 0, ...(b.offsetMap || [0, 0, bLen, bLen])];
 
     assert(aMap[aMap.length - 1] === aLen);
     assert(bMap[bMap.length - 1] === bLen);
@@ -17,7 +43,7 @@ export function appendMappedText(a: MappedText, b: MappedText): MappedText {
     assert((bMap.length & 1) === 0);
     return {
         text: a.text + b.text,
-        map: joinMaps(aMap, bMap),
+        offsetMap: joinMaps(aMap, bMap),
     };
 }
 

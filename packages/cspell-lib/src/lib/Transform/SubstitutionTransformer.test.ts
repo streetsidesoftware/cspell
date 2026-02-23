@@ -50,14 +50,14 @@ describe('SubstitutionTransformer', () => {
 
     test.each`
         input                                | expectedText                 | expectedMap
-        ${'&apos;'}                          | ${"'"}                       | ${[0, 0, 6, 1]}
-        ${'&apos;s'}                         | ${"'s"}                      | ${[0, 0, 6, 1, 7, 2]}
-        ${'&#39;'}                           | ${"'"}                       | ${[0, 0, 5, 1]}
-        ${'&#768;'}                          | ${String.fromCodePoint(768)} | ${[0, 0, 6, 1]}
-        ${'e&#769;'}                         | ${'é'}                       | ${[0, 0, 7, 1]}
-        ${'e&#768;'}                         | ${'è'.normalize('NFD')}      | ${[0, 0, 1, 1, 7, 2]}
-        ${'Grand Caf\\u00e9 Bj\\u00f8rvika'} | ${'Grand Café Bjørvika'}     | ${[0, 0, 9, 9, 15, 10, 18, 13, 24, 14, 29, 19]}
-        ${'Don&apos;t, shouldn&#39;t'}       | ${"Don't, shouldn't"}        | ${[0, 0, 3, 3, 9, 4, 19, 14, 24, 15, 25, 16]}
+        ${'&apos;'}                          | ${"'"}                       | ${[6, 1]}
+        ${'&apos;s'}                         | ${"'s"}                      | ${[6, 1, 1, 1]}
+        ${'&#39;'}                           | ${"'"}                       | ${[5, 1]}
+        ${'&#768;'}                          | ${String.fromCodePoint(768)} | ${[6, 1]}
+        ${'e&#769;'}                         | ${'é'}                       | ${[7, 1]}
+        ${'e&#768;'}                         | ${'è'.normalize('NFD')}      | ${[1, 1, 6, 1]}
+        ${'Grand Caf\\u00e9 Bj\\u00f8rvika'} | ${'Grand Café Bjørvika'}     | ${[9, 9, 6, 1, 3, 3, 6, 1, 5, 5]}
+        ${'Don&apos;t, shouldn&#39;t'}       | ${"Don't, shouldn't"}        | ${[3, 3, 6, 1, 10, 10, 5, 1, 1, 1]}
     `('transformText - $input', ({ input, expectedText, expectedMap }) => {
         const { transformer } = createSubstitutionTransformer(info);
         const result = transformer.transform(input);

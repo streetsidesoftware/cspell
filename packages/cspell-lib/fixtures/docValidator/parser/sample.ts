@@ -16,4 +16,4 @@ export async function loadFile(filename: string): Promise<string> {
 
 export const messages = ['This is the first message.', 'This is the \x73econd message.'];
 
-export const messagesWithErrors = ['This message has some \x73errors.'];
+export const messagesWithErrors = ['This message has some \x73errors. \u0073issues are bad.'];
