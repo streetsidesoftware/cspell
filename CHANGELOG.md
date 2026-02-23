@@ -3,6 +3,329 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## v9.7.0 (2026-02-23)
+
+### Features
+
+<details>
+<summary>feat: Substitution Part 4 - enable substitutions during document check (<a href="https://github.com/streetsidesoftware/cspell/pull/8630">#8630</a>)</summary>
+
+### feat: Substitution Part 4 - enable substitutions during document check ([#8630](https://github.com/streetsidesoftware/cspell/pull/8630))
+
+## Pull request overview
+
+This PR enables substitution-based text transformations during document spell checking, allowing configured text patterns to be replaced before validation occurs.
+
+**Changes:**
+
+- Added substitution transformer support to the text validation pipeline
+- Enhanced `SubstitutionTransformer` to handle both string and `MappedText` inputs with source map merging
+- Refactored `settingsToValidateOptions` to explicitly map all validation option fields
+
+---
+
+</details>
+
+<details>
+<summary>feat: Substitution Part 3 (<a href="https://github.com/streetsidesoftware/cspell/pull/8616">#8616</a>)</summary>
+
+### feat: Substitution Part 3 ([#8616](https://github.com/streetsidesoftware/cspell/pull/8616))
+
+## Pull request overview
+
+This PR updates the SourceMap encoding/handling to use _relative span-length pairs_ (instead of absolute offset pairs) so transformations can be composed more reliably, while updating affected parsers, mappers, and tests across the monorepo.
+
+**Changes:**
+
+- Redefines SourceMap documentation/usage to represent relative `[srcSpanLen, dstSpanLen]` segments (with non-linear segment semantics).
+- Introduces new SourceMap utilities in `cspell-lib` and refactors `TextMap`/mapping code and tests to use them.
+- Updates TypeScript grammar parsing/mappers to emit relative maps and adjusts fixtures/tests accordingly.
+
+> \[!CAUTION]
+> Internal breaking: SourceMaps are now span lengths instead of being offsets. This makes them invariant during translation, making concatenation, and slicing much easier.
+> A minor version change was chosen instead of a major version change since it was only used with the experimental TypeScript parser.
+
+---
+
+</details>
+
+<details>
+<summary>feat: Substitution Part 2 (<a href="https://github.com/streetsidesoftware/cspell/pull/8599">#8599</a>)</summary>
+
+### feat: Substitution Part 2 ([#8599](https://github.com/streetsidesoftware/cspell/pull/8599))
+
+## Pull request overview
+
+This pull request is part of a "Substitution" feature series (Part 2), focusing on reorganizing type definitions and adding utility functions for text transformation and source mapping. The main purpose is to consolidate Parser-related types and introduce new mapping utilities needed for the substitution feature.
+
+**Changes:**
+
+- Reorganizes type definitions by moving `MappedText`, `Range`, and `SourceMap` from root-level exports to the Parser directory structure
+- Adds new source map manipulation functions (`mapOffsetToSource`, `mapRangeToSource`, `mergeSourceMaps`) to support text transformation workflows
+- Introduces API declaration file generation for documentation purposes via separate tsdown build configurations
+
+---
+
+</details>
+
+<details>
+<summary>feat: Support text substitutions prior to spell checking - part 1 (<a href="https://github.com/streetsidesoftware/cspell/pull/8592">#8592</a>)</summary>
+
+### feat: Support text substitutions prior to spell checking - part 1 ([#8592](https://github.com/streetsidesoftware/cspell/pull/8592))
+
+## Text Substitution Support Part 1
+
+Steps towards supporting text substitutions prior to spell checking by introducing a Transform layer (range/mapping + substitution) and wiring it into document validation configuration.
+
+It is not yet added to the normal spell checking flow. That will happen in a later PR.
+
+**Changes:**
+
+- Extend types + JSON schema to support substitution definitions keyed by `name` and export `Range` for reuse.
+- Add `cspell-lib` Transform module (TextRange/TextMap/parsedText mapping + `SubstitutionTransformer`) and update validators/tests to use it.
+- Export `GTrie`/`GTrieNode` from `cspell-trie-lib` to support efficient substitution matching.
+
+## Related Issues
+
+- [Support Latex umlauts and accents · Issue #340 · streetsidesoftware/cspell](https://github.com/streetsidesoftware/cspell/issues/340)
+- [Words containing HTML Symbol Entities should not be marked as an error · Issue #4104 · streetsidesoftware/cspell](https://github.com/streetsidesoftware/cspell/issues/4104)
+
+---
+
+</details>
+
+### Fixes
+
+<details>
+<summary>fix: Support ESLint 10 (<a href="https://github.com/streetsidesoftware/cspell/pull/8620">#8620</a>)</summary>
+
+### fix: Support ESLint 10 ([#8620](https://github.com/streetsidesoftware/cspell/pull/8620))
+
+---
+
+</details>
+
+<details>
+<summary>fix: Prepare to support substitutions (<a href="https://github.com/streetsidesoftware/cspell/pull/8584">#8584</a>)</summary>
+
+### fix: Prepare to support substitutions ([#8584](https://github.com/streetsidesoftware/cspell/pull/8584))
+
+## Pull request overview
+
+Adds initial type/schema/plumbing in `cspell-types` and `cspell-lib` to support upcoming “substitutions” configuration fields (definitions + per-document substitutions) throughout config merging, exported field lists, and JSON schema.
+
+**Changes:**
+
+- Introduces `Substitutions` types and wires them into `CSpellSettingsDef` and the public `@cspell/cspell-types` index exports.
+- Adds `substitutionDefinitions` / `substitutions` to config field registries and config merge behavior.
+- Updates JSON schemas (package + root) and adjusts API snapshot / settings sanitization to recognize the new fields.
+
+---
+
+</details>
+
+<details>
+<summary>fix: cspell-rpc - reduce the size of an RPC result. (<a href="https://github.com/streetsidesoftware/cspell/pull/8574">#8574</a>)</summary>
+
+### fix: cspell-rpc - reduce the size of an RPC result. ([#8574](https://github.com/streetsidesoftware/cspell/pull/8574))
+
+## Pull request overview
+
+This PR updates the `cspell-lib` RPC spell-checking surface to reduce payload sizes by introducing RPC-specific result/issue types and returning a slimmer result from `spellCheckDocumentRPC`.
+
+**Changes:**
+
+- Switch `spellCheckDocumentRPC` to return a new `SpellCheckFileResultRPC` that omits large fields (notably document text and several result fields).
+- Introduce `ValidationResultRPC` / `ValidationIssueRPC` and a mapper (`toValidationIssueRPC`) to reduce issue payload.
+- Update the `cspell-rpc` client/server communication test expectations for the new RPC result shape.
+
+---
+
+</details>
+
+<details>
+<summary>fix: Add convertToBtrie method to trie-lib (<a href="https://github.com/streetsidesoftware/cspell/pull/8562">#8562</a>)</summary>
+
+### fix: Add convertToBtrie method to trie-lib ([#8562](https://github.com/streetsidesoftware/cspell/pull/8562))
+
+## Pull request overview
+
+This PR adds utilities to decode dictionary/trie files (including `.gz`) and convert them into the binary `.btrie` format, then integrates that conversion into the dictionary bundler plugin so bundled dictionaries can be inlined as (optionally compressed) BTrie data for faster load times.
+
+**Changes:**
+
+- Add `decodeFile` / `convertToBTrie` APIs to `cspell-trie-lib` and export them from the public index.
+- Add `encodeITrieToBTrie` convenience encoder for converting an `ITrie` directly to BTrie bytes.
+- Extend `cspell-dictionary-bundler-plugin` to optionally convert/inline dictionaries as `.btrie` (and optionally gzip them), with updated snapshots/tests.
+
+---
+
+</details>
+
+<details>
+<summary>refactor: Use standard dispose (<a href="https://github.com/streetsidesoftware/cspell/pull/8559">#8559</a>)</summary>
+
+### refactor: Use standard dispose ([#8559](https://github.com/streetsidesoftware/cspell/pull/8559))
+
+---
+
+</details>
+
+<details>
+<summary>refactor: Experiment with bundling default dictionaries (<a href="https://github.com/streetsidesoftware/cspell/pull/8556">#8556</a>)</summary>
+
+### refactor: Experiment with bundling default dictionaries ([#8556](https://github.com/streetsidesoftware/cspell/pull/8556))
+
+## Pull request overview
+
+This PR experiments with bundling default dictionaries for CSpell, adding infrastructure to bundle dictionary configuration files into JavaScript modules using a custom plugin. The changes introduce a new build pipeline for the cspell-bundled-dicts package but intentionally leave the bundling functionality disabled through configuration.
+
+**Changes:**
+
+- Added dictionary bundler plugin integration to cspell-bundled-dicts with tsdown configuration (currently disabled via `/no-match/` pattern)
+- Enhanced CSpellDictionaryBundler class with debug logging support and module import resolution
+- Updated package.json exports to include new bundled output format while removing compatibility-related files
+
+---
+
+</details>
+
+<details>
+<summary>fix: Enable reading dictionaries from cspell-vfs (<a href="https://github.com/streetsidesoftware/cspell/pull/8553">#8553</a>)</summary>
+
+### fix: Enable reading dictionaries from cspell-vfs ([#8553](https://github.com/streetsidesoftware/cspell/pull/8553))
+
+## Pull request overview
+
+This PR enables dictionaries bundled into the `cspell-vfs:` virtual filesystem to be registered into the runtime VFS so dictionary loading can read them. It adds fixtures/tests to validate the behavior.
+
+**Changes:**
+
+- Register `settings.vfs` entries into the active `VirtualFS` during config load/merge.
+- Add a default in-memory `cspell-vfs:` provider to `cspell-io`’s `createVirtualFS`, and export `CSPELL_VFS_PROTOCOL`.
+- Add bundling/build + fixtures and a `docValidator` test that loads a bundled config using `cspell-vfs:` dictionary content.
+
+---
+
+</details>
+
+<details>
+<summary>fix: Work on a bundler for CSpell Dictionaries (<a href="https://github.com/streetsidesoftware/cspell/pull/8532">#8532</a>)</summary>
+
+### fix: Work on a bundler for CSpell Dictionaries ([#8532](https://github.com/streetsidesoftware/cspell/pull/8532))
+
+## Pull request overview
+
+This PR introduces a new `@cspell/dictionary-bundler-plugin` package intended to inline/bundle CSpell dictionary/config assets for consumption across multiple bundlers (Rollup/Vite/Webpack/Rspack/Rolldown/Farm/esbuild), and updates workspace metadata and dependency lockfiles accordingly.
+
+**Changes:**
+
+- Added new `packages/cspell-dictionary-bundler-plugin` package with build config (tsdown), TypeScript config, plugin entrypoints, core bundling logic, and Vitest coverage (fixtures + snapshots).
+- Updated repo-level Node engine requirement and pnpm lockfile to reflect new dependencies and resolutions.
+- Updated workspace and repo dictionary wordlist to recognize new terms used by the package/dependencies.
+
+---
+
+</details>
+
+<details>
+<summary>fix: Add support for MemVfs to cspell-io (<a href="https://github.com/streetsidesoftware/cspell/pull/8543">#8543</a>)</summary>
+
+### fix: Add support for MemVfs to cspell-io ([#8543](https://github.com/streetsidesoftware/cspell/pull/8543))
+
+## Pull request overview
+
+This PR refactors `cspell-io`’s VirtualFS internals (exports/import paths) and introduces foundational pieces for an in-memory VirtualFS provider (“MemVfs”), along with new shared error/capability utilities and updated tests.
+
+**Changes:**
+
+- Consolidates VirtualFS public exports under `src/VirtualFS/index.ts` and updates imports across VirtualFS code/tests.
+- Extracts shared VirtualFS concerns into new modules (`errors.ts`, `capabilities.ts`, `CFileType.ts`, `CVfsStat.ts`) and updates `WrappedProviderFs`.
+- Adds a new in-memory provider (`MemVfsProvider`) plus basic unit tests.
+
+---
+
+</details>
+
+<details>
+<summary>fix: Add mergeConfig (<a href="https://github.com/streetsidesoftware/cspell/pull/8539">#8539</a>)</summary>
+
+### fix: Add mergeConfig ([#8539](https://github.com/streetsidesoftware/cspell/pull/8539))
+
+## Pull request overview
+
+Adds a `mergeConfig` helper to `cspell-types` for merging multiple `CSpellSettings` objects (including key-specific merge semantics like append/record-merge), and exposes it as part of the public package API.
+
+**Changes:**
+
+- Add `mergeConfig` implementation (plus supporting merge helpers) for combining settings objects.
+
+---
+
+</details>
+
+<details>
+<summary>fix: stemming rules part 1 (<a href="https://github.com/streetsidesoftware/cspell/pull/8527">#8527</a>)</summary>
+
+### fix: stemming rules part 1 ([#8527](https://github.com/streetsidesoftware/cspell/pull/8527))
+
+## Pull request overview
+
+This pull request introduces the first phase of stemming rules support for the CSpell trie library by implementing an affix (prefix/suffix) mutation system. The implementation is based on Hunspell-style affix rules, which allow for word transformations through prefix and suffix mutations.
+
+**Changes:**
+
+- Implemented a complete affix (afx) transformation system with type definitions, core logic, and Hunspell .aff file parser
+- Added comprehensive test coverage for both the utility and affix system
+- Included Danish and French Hunspell dictionary fixtures for integration testing
+- Added a new `unindent` utility for working with template strings in tests and code generation
+
+---
+
+</details>
+
+### Dictionary Updates
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/8570">#8570</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#8570](https://github.com/streetsidesoftware/cspell/pull/8570))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ packages/cspell-bundled-dicts/package.json |  6 ++---
+ pnpm-lock.yaml                             | 36 +++++++++++++++---------------
+ 2 files changed, 21 insertions(+), 21 deletions(-)
+```
+
+---
+
+</details>
+
+<details>
+<summary>fix: Workflow Bot -- Update Dictionaries (main) (<a href="https://github.com/streetsidesoftware/cspell/pull/8542">#8542</a>)</summary>
+
+### fix: Workflow Bot -- Update Dictionaries (main) ([#8542](https://github.com/streetsidesoftware/cspell/pull/8542))
+
+# Update Dictionaries (main)
+
+## Summary
+
+```
+ .../snapshots/vitest-dev/vitest/report.yaml        |  6 ++--
+ .../snapshots/vitest-dev/vitest/snapshot.txt       |  3 +-
+ packages/cspell-bundled-dicts/package.json         |  6 ++--
+ pnpm-lock.yaml                                     | 33 +++++++++++++---------
+ 4 files changed, 25 insertions(+), 23 deletions(-)
+```
+
+---
+
+</details>
+
 ## v9.6.4 (2026-02-04)
 
 ### Fixes
