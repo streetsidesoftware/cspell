@@ -1134,6 +1134,43 @@ importers:
         specifier: workspace:*
         version: link:../../../packages/cspell-dictionary
 
+  test-packages/cspell-eslint-plugin/test-cspell-eslint-plugin-v10:
+    dependencies:
+      react:
+        specifier: ^19.2.4
+        version: 19.2.4
+    devDependencies:
+      '@cspell/eslint-plugin':
+        specifier: workspace:*
+        version: link:../../../packages/cspell-eslint-plugin
+      '@eslint/js':
+        specifier: ^10.0.1
+        version: 10.0.1(eslint@10.0.1(jiti@1.21.7))
+      '@types/react':
+        specifier: ^19.2.14
+        version: 19.2.14
+      eslint:
+        specifier: ^10.0.1
+        version: 10.0.1(jiti@1.21.7)
+      eslint-plugin-n:
+        specifier: ^17.24.0
+        version: 17.24.0(eslint@10.0.1(jiti@1.21.7))(typescript@5.9.3)
+      typescript-eslint:
+        specifier: ^8.56.0
+        version: 8.56.0(eslint@10.0.1(jiti@1.21.7))(typescript@5.9.3)
+
+  test-packages/cspell-eslint-plugin/test-cspell-eslint-plugin-v10-basic:
+    devDependencies:
+      '@cspell/eslint-plugin':
+        specifier: workspace:*
+        version: link:../../../packages/cspell-eslint-plugin
+      '@eslint/js':
+        specifier: ^10.0.1
+        version: 10.0.1(eslint@10.0.1(jiti@1.21.7))
+      eslint:
+        specifier: ^10.0.1
+        version: 10.0.1(jiti@1.21.7)
+
   test-packages/cspell-eslint-plugin/test-cspell-eslint-plugin-v9:
     dependencies:
       react:
