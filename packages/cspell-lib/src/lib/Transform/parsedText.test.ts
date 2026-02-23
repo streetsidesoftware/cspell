@@ -30,7 +30,7 @@ describe('parsedText', () => {
         ${6}  | ${14} | ${[0, 0, 5, 5, 9, 6, 19, 16]} | ${[5, 11]}
         ${6}  | ${20} | ${[0, 0, 5, 5, 9, 6, 19, 16]} | ${[5, 17]}
         ${0}  | ${30} | ${[0, 0, 5, 5, 9, 6, 19, 16]} | ${[0, 27]}
-    `('mapRangeBackToOriginalPos $start $end $map', ({ start, end, map, expected }) => {
+    `('mapRangeToLocal $start $end $map', ({ start, end, map, expected }) => {
         expect(mapRangeToLocal([start, end], mapOffsetPairsToSourceMap(map))).toEqual(expected);
     });
 });
