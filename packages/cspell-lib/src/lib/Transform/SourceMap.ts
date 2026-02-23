@@ -482,35 +482,37 @@ function advanceCursors(cursor1: SourceMapMergeCursor, cursor2: SourceMapMergeCu
 export function sliceSourceMapToSourceRange(map: SourceMap | undefined, range: Range): SourceMap | undefined {
     if (!map?.length) return map;
 
+    const cursor = createSourceMapCursor(map);
     const [start, end] = range;
 
-    let idx = 0;
-    let p = 0;
-    for (; idx < map.length && p + map[idx] < start; idx += 2) {
-        p += map[idx];
-    }
+    const startDst = cursor.mapOffsetToDest(start);
+    if (cursor.done) return [];
 
-    if (idx >= map.length) {
+    const startIdx = cursor.idx;
+    const startOffsetSrc = cursor.begin0;
+    const startOffsetDst = cursor.begin1;
+    const startLinear = cursor.linear;
+
+    cursor.mapOffsetToDest(end);
+
+    let endIdx = cursor.idx;
+    if (startIdx === endIdx && startLinear) {
         return [];
     }
 
-    const startIdx = idx;
-    const startOffset = start - p;
-
-    for (; idx < map.length && p + map[idx] <= end; idx += 2) {
-        p += map[idx];
-    }
-
-    const endIdx = idx;
-    if (startIdx === endIdx) {
-        return undefined;
+    if (!cursor.linear || cursor.begin0 < end) {
+        endIdx += 2;
     }
 
     const newMap = map.slice(startIdx, endIdx);
 
-    if (startOffset !== 0) {
-        newMap[0] -= startOffset;
-        newMap[1] -= Math.min(startOffset, newMap[1]);
+    // Only adjust the first pair of offsets, the rest are relative to the first pair.
+    newMap[0] -= start - startOffsetSrc;
+    newMap[1] -= startDst - startOffsetDst;
+
+    if (newMap[0] === newMap[1] && !startLinear) {
+        // Force a non-linear map when the deltas are the same but the segment is non-linear.
+        newMap.unshift(0, 0);
     }
 
     return newMap;
