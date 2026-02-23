@@ -1,12 +1,12 @@
 //#region src/Parser/types.d.ts
 /**
-* A SourceMap is used to map transform the location of a piece of text back to its original offsets.
+* A SourceMap is used to map or transform the location of a piece of text back to its original offsets.
 * This is necessary in order to report the correct location of a spelling issue.
 * An empty source map indicates that it was a 1:1 transformation.
 *
 * Non-1:1 transformations are considered to be a single segment and cannot be split.
 *
-* A partial index into a non-linear segments will get mapped to the start of the segment.
+* A partial index into a non-linear segment will get mapped to the start of the segment.
 *
 * To signal a non-1:1 transformation a 0,0 pair can be used in the source map. This indicates that the
 * following segment is a non-linear transformation and should not be split.
