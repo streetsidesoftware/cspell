@@ -36,25 +36,22 @@ import type { SpellingDictionaryCollection, SuggestionResult } from '../Spelling
 import { getDictionaryInternal } from '../SpellingDictionary/index.js';
 import type { WordSuggestion } from '../suggestions.js';
 import { calcSuggestionAdjustedToToMatchCase } from '../suggestions.js';
-import type { SubstitutionTransformer } from '../Transform/index.js';
-import type { SimpleRange } from '../Transform/index.js';
-import type { MatchRange } from '../Transform/index.js';
-import { createSubstitutionTransformer } from '../Transform/index.js';
-import { createMappedTextSegmenter } from '../Transform/index.js';
+import type { MatchRange, SimpleRange, SubstitutionTransformer } from '../Transform/index.js';
+import { createMappedTextSegmenter, createSubstitutionTransformer } from '../Transform/index.js';
 import { catchPromiseError, toError } from '../util/errors.js';
 import { AutoCache } from '../util/simpleCache.js';
 import { uriToFilePath } from '../util/Uri.js';
 import { cleanValidationIssue } from './cleanValidationIssue.js';
 import { defaultMaxDuplicateProblems, defaultMaxNumberOfProblems } from './defaultConstants.js';
 import { determineTextDocumentSettings } from './determineTextDocumentSettings.js';
-import type { TextValidator } from './lineValidatorFactory.js';
+import type { TextValidationFactoryOptions, TextValidator } from './lineValidatorFactory.js';
 import { textValidatorFactory } from './lineValidatorFactory.js';
 import { settingsToValidateOptions } from './settingsToValidateOptions.js';
 import { calcTextInclusionRanges } from './textValidator.js';
 import type { TraceResult } from './traceWord.js';
 import { traceWord } from './traceWord.js';
 import type { ValidateTextOptions } from './ValidateTextOptions.js';
-import type { MappedTextValidationResult, ValidationOptions } from './ValidationTypes.js';
+import type { MappedTextValidationResult } from './ValidationTypes.js';
 
 export interface DocumentValidatorOptions extends ValidateTextOptions {
     /**
@@ -195,16 +192,16 @@ export class DocumentValidator {
         const recFinalizeTime = recordPerfTime(this.perfTiming, '_finalizeSettings');
 
         const finalSettings = finalizeSettings(docSettings);
-        const validateOptions = settingsToValidateOptions(finalSettings);
+        const sub = createSubstitutionTransformer(finalSettings);
+        if (sub.missing) {
+            this.addPossibleError(`Missing substitutions: ${sub.missing.join(', ')}`);
+        }
+        const validateOptions = { ...settingsToValidateOptions(finalSettings), transformer: sub.transformer };
         const includeRanges = calcTextInclusionRanges(this._document.text, validateOptions);
         const segmenter = createMappedTextSegmenter(includeRanges);
         const textValidator = textValidatorFactory(dict, validateOptions);
 
         recFinalizeTime();
-        const sub = createSubstitutionTransformer(finalSettings);
-        if (sub.missing) {
-            this.addPossibleError(`Missing substitutions: ${sub.missing.join(', ')}`);
-        }
 
         this._preparations = {
             config,
@@ -237,7 +234,11 @@ export class DocumentValidator {
         const stopMeasure = measurePerf('DocumentValidator._updatePrep');
         const shouldCheck = docSettings.enabled ?? true;
         const finalSettings = finalizeSettings(docSettings);
-        const validateOptions = settingsToValidateOptions(finalSettings);
+        const sub = createSubstitutionTransformer(finalSettings);
+        if (sub.missing) {
+            this.addPossibleError(`Missing substitutions: ${sub.missing.join(', ')}`);
+        }
+        const validateOptions = { ...settingsToValidateOptions(finalSettings), transformer: sub.transformer };
         const includeRanges = calcTextInclusionRanges(this._document.text, validateOptions);
         const segmenter = createMappedTextSegmenter(includeRanges);
         const textValidator = textValidatorFactory(dict, validateOptions);
@@ -563,7 +564,7 @@ interface Preparations {
     textValidator: TextValidator;
     segmenter: (texts: MappedText) => Iterable<MappedText>;
     shouldCheck: boolean;
-    validateOptions: ValidationOptions;
+    validateOptions: TextValidationFactoryOptions;
     localConfig: CSpellUserSettings | undefined;
     localConfigFilepath: string | undefined;
     subTransformer: SubstitutionTransformer;

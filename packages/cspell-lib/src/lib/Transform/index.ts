@@ -1,4 +1,6 @@
 export { createMappedTextSegmenter, mapRangeBackToOriginalPos } from './parsedText.js';
+export type { SourceMapCursor } from './SourceMap.js';
+export { createSourceMapCursor } from './SourceMap.js';
 export type { SubstitutionInfo } from './SubstitutionTransformer.js';
 export { createSubstitutionTransformer, SubstitutionTransformer } from './SubstitutionTransformer.js';
 export type { MatchRange } from './TextRange.js';

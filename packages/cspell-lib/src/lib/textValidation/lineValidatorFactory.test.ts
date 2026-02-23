@@ -25,7 +25,12 @@ describe('lineValidatorFactory', () => {
         ${'lion'}                                         | ${[oc({ text: 'lion', suggestionsEx: [oc({ word: 'tiger', isPreferred: true })] })]}
     `('textValidatorFactory $text', ({ text, expected }) => {
         const dict = getDict();
-        const tv = textValidatorFactory(dict, { ignoreCase: true, minWordLength: 3, minRandomLength: 20 });
+        const tv = textValidatorFactory(dict, {
+            ignoreCase: true,
+            minWordLength: 3,
+            minRandomLength: 20,
+            transformer: undefined,
+        });
         const r = [...tv.validate({ text: text, range: [10, 10 + text.length] })];
         expect(r).toEqual(expected);
     });
@@ -44,7 +49,12 @@ describe('lineValidatorFactory', () => {
         ${'self.assertIn("schema_relationmodel_field_id_395fbb08_like")'} | ${['relationmodel']}
     `('textValidatorFactory $text', ({ text, expected }) => {
         const dict = getDict();
-        const tv = textValidatorFactory(dict, { ignoreCase: true, minWordLength: 3, minRandomLength: 20 });
+        const tv = textValidatorFactory(dict, {
+            ignoreCase: true,
+            minWordLength: 3,
+            minRandomLength: 20,
+            transformer: undefined,
+        });
         const r = [...tv.validate({ text: text, range: [10, 10 + text.length] })].map((a) => a.text);
         expect(r).toEqual(expected);
     });

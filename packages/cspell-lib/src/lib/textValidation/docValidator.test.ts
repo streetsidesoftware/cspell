@@ -147,7 +147,8 @@ describe('docValidator', () => {
         ${fix('sample-with-directives-errors.ts')}       | ${1}                 | ${['disable-prev', 'ignored', 'world', 'enable-line']}                                                                                                                                        | ${undefined}
         ${tFix('issues/issue-4811/#local/README.md')}    | ${undefined}         | ${[]}                                                                                                                                                                                         | ${undefined}
         ${tFix('issues/issue-4811/#local/version@2.md')} | ${undefined}         | ${['marrkdown']}                                                                                                                                                                              | ${undefined /* cspell:disable-line */}
-        ${fixDict('supportNonStrictSearches/test.txt')}  | ${undefined}         | ${['paris']}                                                                                                                                                                                  | ${undefined /* cspell:disable-line */}
+        ${fixDict('supportNonStrictSearches/test.txt')}  | ${undefined}         | ${['paris']}                                                                                                                                                                                  | ${undefined}
+        ${fixSubs('README.md')}                          | ${undefined}         | ${[]}                                                                                                                                                                                         | ${undefined}
     `(
         'checkDocument $filename $maxDuplicateProblems',
         async ({ filename, maxDuplicateProblems, expectedIssues, expectedRawIssues }) => {
@@ -357,7 +358,7 @@ describe('docValidator suggestions', () => {
 
 function sampleCode() {
     // cspell:ignore Orangges
-    const text = `
+    const text = /* ts */ `
 export function remainingOrangges(count: number): number {
     return count % 42;
 }
@@ -401,6 +402,10 @@ function fixDir(...fixtureFile: string[]): string {
  */
 function fix(...fixtureFile: string[]): string {
     return fixDir('docValidator', ...fixtureFile);
+}
+
+function fixSubs(...fixtureFile: string[]): string {
+    return fixDir('features/substitutions', ...fixtureFile);
 }
 
 function tFix(...fixtureFile: string[]): string {

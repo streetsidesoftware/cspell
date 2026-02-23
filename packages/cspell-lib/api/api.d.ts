@@ -652,7 +652,8 @@ type SimpleRange = Readonly<Range>;
 declare class SubstitutionTransformer {
   #private;
   constructor(subMap: Map<string, string> | undefined);
-  transform(text: string): MappedText;
+  transform(text: string | MappedText): MappedText;
+  transformString(text: string): MappedText;
 }
 //#endregion
 //#region src/lib/suggestions.d.ts
@@ -762,6 +763,9 @@ interface LineValidator {
 interface TextValidator {
   validate: TextValidatorFn;
   lineValidator: LineValidator;
+}
+interface TextValidationFactoryOptions extends ValidationOptions {
+  transformer: SubstitutionTransformer | undefined;
 }
 //#endregion
 //#region src/lib/textValidation/traceWord.d.ts
@@ -932,7 +936,7 @@ interface Preparations {
   textValidator: TextValidator;
   segmenter: (texts: MappedText) => Iterable<MappedText>;
   shouldCheck: boolean;
-  validateOptions: ValidationOptions;
+  validateOptions: TextValidationFactoryOptions;
   localConfig: CSpellUserSettings | undefined;
   localConfigFilepath: string | undefined;
   subTransformer: SubstitutionTransformer;

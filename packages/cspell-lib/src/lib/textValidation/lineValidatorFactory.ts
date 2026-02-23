@@ -14,6 +14,7 @@ import { createCachingDictionary } from 'cspell-dictionary';
 
 import type { ValidationIssue } from '../Models/ValidationIssue.js';
 import * as RxPat from '../Settings/RegExpPatterns.js';
+import type { SubstitutionTransformer } from '../Transform/index.js';
 import { mapRangeBackToOriginalPos } from '../Transform/index.js';
 import { autoResolve } from '../util/AutoResolve.js';
 import {
@@ -436,12 +437,18 @@ export interface TextValidator {
     lineValidator: LineValidator;
 }
 
-export function textValidatorFactory(dict: SpellingDictionary, options: ValidationOptions): TextValidator {
+export interface TextValidationFactoryOptions extends ValidationOptions {
+    transformer: SubstitutionTransformer | undefined;
+}
+
+export function textValidatorFactory(dict: SpellingDictionary, options: TextValidationFactoryOptions): TextValidator {
     const lineValidator = lineValidatorFactory(dict, options);
     const lineValidatorFn = lineValidator.fn;
+    const transformer = options.transformer;
 
     function validate(pText: ParsedText): Iterable<MappedTextValidationResult> {
-        const { text, range: srcRange, map } = pText;
+        const transformedText = transformer?.transform(pText) || pText;
+        const { text, range: srcRange, map } = transformedText;
         const srcOffset = srcRange[0];
         const segment = { text, offset: 0 };
         const lineSegment: LineSegment = { line: segment, segment };

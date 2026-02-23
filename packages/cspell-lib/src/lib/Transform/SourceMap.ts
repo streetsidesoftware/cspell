@@ -24,6 +24,7 @@ export interface SourceMapCursor {
 
     mapOffsetToDest(offsetInSrc: number): number;
     mapOffsetToSrc(offsetInDst: number): number;
+    mapRangeToSrc(rangeInDst: Range): Range;
 }
 
 class SourceMapCursorImpl implements SourceMapCursor {
@@ -102,6 +103,10 @@ class SourceMapCursorImpl implements SourceMapCursor {
         }
         // For a non-linear segment, the offset in the transformed text maps to the start of the segment in the source text.
         return this.begin0;
+    }
+
+    mapRangeToSrc(rangeInDst: Range): Range {
+        return [this.mapOffsetToSrc(rangeInDst[0]), this.mapOffsetToSrc(rangeInDst[1])];
     }
 
     reset(): void {
