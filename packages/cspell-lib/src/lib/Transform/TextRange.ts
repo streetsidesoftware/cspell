@@ -16,13 +16,12 @@ export interface MatchRangeOptionalText extends MatchRange {
 }
 
 function toMatchRangeWithText(m: RegExpMatchArray): MatchRangeWithText {
-    const index = m.index || 0;
-    const _text = m[0];
-    return {
-        startPos: index,
-        endPos: index + _text.length,
-        text: _text,
-    };
+    const range = m.indices?.[0];
+    const index = range?.[0] ?? (m.index || 0);
+    const text = m[0];
+    const startPos = index;
+    const endPos = range?.[1] ?? index + text.length;
+    return { startPos, endPos, text };
 }
 
 export function findMatchingRanges(pattern: RegExp, text: string): MatchRangeOptionalText[] {
@@ -39,7 +38,7 @@ export function findMatchingRanges(pattern: RegExp, text: string): MatchRangeOpt
     return [...text.matchAll(regex)].map(toMatchRangeWithText);
 }
 
-function compareRanges(a: MatchRange, b: MatchRange) {
+function compareRanges(a: MatchRange, b: MatchRange): number {
     return a.startPos - b.startPos || a.endPos - b.endPos;
 }
 

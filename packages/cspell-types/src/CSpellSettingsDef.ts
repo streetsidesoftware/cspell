@@ -4,6 +4,7 @@ import type { DictionaryDefinition, DictionaryReference } from './DictionaryDefi
 import type { Features } from './features.js';
 import type { InlineDictionary } from './InlineDictionary.js';
 import type { Parser, ParserName } from './Parser/index.js';
+import type { SubstitutionDefinitions, Substitutions } from './Substitutions.js';
 import type { Serializable } from './types.js';
 
 /**
@@ -607,6 +608,18 @@ export interface BaseSetting extends InlineDictionary, ExperimentalBaseSettings,
      * ```
      */
     patterns?: RegExpPatternDefinition[];
+
+    /**
+     * The set of available substitutions. This is a collection of substitution definitions that can be applied to a document before spell checking.
+     * @since 9.7.0
+     */
+    substitutionDefinitions?: SubstitutionDefinitions;
+
+    /**
+     * The set of substitutions to apply to a document before spell checking.
+     * @since 9.7.0
+     */
+    substitutions?: Substitutions;
 }
 
 export interface LanguageSetting extends LanguageSettingFilterFields, BaseSetting {}

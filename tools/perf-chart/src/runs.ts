@@ -15,9 +15,9 @@ export function filterOutIncompleteRuns(runs: CsvRecord[][]): CsvRecord[][] {
 
     // We are going to make a curve that will allow us to filter out runs that are too small.
     // Keep looking while changes are made.
-    let changes = false;
+    let changes = true;
 
-    do {
+    while (changes) {
         changes = false;
         for (let i = 0; i < sizes.length; ++i) {
             const max = Math.max(getSize(i - 1), getSize(i + 1));
@@ -35,7 +35,7 @@ export function filterOutIncompleteRuns(runs: CsvRecord[][]): CsvRecord[][] {
                 changes = true;
             }
         }
-    } while (changes);
+    }
 
     const result = runs.filter((r, i) => r.length >= sizes[i]);
     return result;

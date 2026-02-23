@@ -27,6 +27,7 @@ env:
 
 jobs:
   release_version:
+    if: github.repository_owner == 'streetsidesoftware'
     runs-on: ubuntu-latest
     steps:
       - name: Show Inputs
@@ -87,7 +88,7 @@ jobs:
             - **Dry Run**: `${{ inputs.dry_run }}`
 
   publish_version:
-    if: ${{ !inputs.dry_run }}
+    if: github.repository_owner == 'streetsidesoftware' && !inputs.dry_run
     needs: release_version
     uses: ./.github/workflows/publish.yml
     secrets:

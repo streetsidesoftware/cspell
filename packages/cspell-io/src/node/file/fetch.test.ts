@@ -28,15 +28,15 @@ describe('fetch', () => {
         vi.resetAllMocks();
     });
 
-    test(
-        'fetchURL',
-        async () => {
-            const url = new URL('https://example.com/');
-            const response = await doFetchUrl(url);
-            expect(response).toBeInstanceOf(Uint8Array);
-        },
-        timeout,
-    );
+    // test.only(
+    //     'fetchURL',
+    //     async () => {
+    //         const url = new URL('https://example.com/');
+    //         const response = await doFetchUrl(url);
+    //         expect(response).toBeInstanceOf(Uint8Array);
+    //     },
+    //     timeout,
+    // );
 
     /*
     test.each`

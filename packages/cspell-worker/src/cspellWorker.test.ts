@@ -3,7 +3,7 @@ import { describe, expect, test } from 'vitest';
 
 import { startCSpellWorker } from '../dist/index.js';
 
-const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
+// const oc = (...params: Parameters<typeof expect.objectContaining>) => expect.objectContaining(...params);
 
 describe('Index', () => {
     test('Create CSpell Server', async () => {
@@ -39,6 +39,6 @@ describe('Index', () => {
         expect(worker.numberOfPendingRequests).toBe(1);
         const result = await pending;
         expect(result).toBeDefined();
-        expect(result).toEqual(oc({ document: oc(doc), issues: [], errors: undefined }));
+        expect(result).toEqual({ document: doc, checked: true, issues: undefined });
     });
 });

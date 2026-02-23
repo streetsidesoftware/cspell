@@ -8,7 +8,7 @@ import type { TextDocument } from '../Models/TextDocument.js';
 import { isTextDocument } from '../Models/TextDocument.js';
 import type { ValidationIssue } from '../Models/ValidationIssue.js';
 import * as Settings from '../Settings/index.js';
-import type { MatchRange } from '../util/TextRange.js';
+import type { MatchRange } from '../Transform/index.js';
 import { clean } from '../util/util.js';
 import type { DocumentValidatorOptions } from './docValidator.js';
 import { DocumentValidator } from './docValidator.js';

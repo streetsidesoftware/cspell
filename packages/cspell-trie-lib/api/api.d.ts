@@ -606,31 +606,6 @@ declare const CASE_INSENSITIVE_PREFIX = "~";
 declare const FORBID_PREFIX = "!";
 declare const defaultTrieInfo: TrieInfo;
 //#endregion
-//#region src/lib/decodeTrie.d.ts
-declare function decodeTrie(raw: string | ArrayBufferView<ArrayBuffer> | Uint8Array<ArrayBuffer>): ITrie;
-//#endregion
-//#region src/lib/io/importExport.d.ts
-interface ExportOptions {
-  base?: number;
-  comment?: string;
-  version?: number;
-  addLineBreaksToImproveDiffs?: boolean;
-}
-/**
-* Serialize a TrieNode.
-* Note: This is destructive.  The node will no longer be usable.
-* Even though it is possible to preserve the trie, dealing with very large tries can consume a lot of memory.
-* Considering this is the last step before exporting, it was decided to let this be destructive.
-*/
-declare function serializeTrie(root: TrieRoot, options?: ExportOptions | number): Iterable<string>;
-declare function importTrie(input: Iterable<string> | IterableIterator<string> | string[] | string): TrieRoot;
-//#endregion
-//#region src/lib/models/DictionaryInformation.d.ts
-type DictionaryInformation = Exclude<DictionaryDefinitionAugmented["dictionaryInformation"], undefined>;
-//#endregion
-//#region src/lib/mappers/mapDictionaryInfoToWeightMap.d.ts
-declare function mapDictionaryInformationToWeightMap(dictInfo: DictionaryInformation): WeightMap;
-//#endregion
 //#region ../cspell-pipe/dist/operators/types.d.ts
 type OperatorSync<T, U = T> = (i: Iterable<T>) => Iterable<U>;
 //#endregion
@@ -842,7 +817,84 @@ declare function parseDictionaryLines(lines: Iterable<string> | string, options?
 declare function parseDictionaryLegacy(text: string | string[], options?: Partial<ParseDictionaryOptions>): Trie;
 declare function parseDictionary(text: string | Iterable<string>, options?: Partial<ParseDictionaryOptions>): ITrie;
 //#endregion
+//#region src/lib/decodeTrie.d.ts
+declare function decodeTrie(raw: string | ArrayBufferView<ArrayBuffer> | Uint8Array<ArrayBuffer>): ITrie;
+interface FileResource {
+  /**
+  * The URL of the File
+  */
+  readonly url: URL;
+  /**
+  * The contents of the file
+  */
+  readonly content: string | Uint8Array<ArrayBuffer>;
+}
+declare function decodeFile(file: FileResource, options?: Partial<ParseDictionaryOptions>): Promise<ITrie>;
+declare function convertToBTrie(file: FileResource, options?: Partial<ParseDictionaryOptions>): Promise<FileResource>;
+//#endregion
+//#region src/lib/GTrie/GTrie.d.ts
+declare class GTrieNode<K, V> {
+  children: Map<K, GTrieNode<K, V>> | undefined;
+  value: V | undefined;
+  constructor(value?: V, children?: Map<K, GTrieNode<K, V>>);
+}
+/**
+* ### Generic Tries
+*
+* This is a Trie class that can contain any data. It is used in optimizing the dictionary and storing lookup data.
+* The performance is "good enough" for most uses, but may need to be optimized for large data sets.
+*
+* K - Key type
+* V - Value type
+*/
+declare class GTrie<K, V> {
+  root: GTrieNode<K, V>;
+  constructor();
+  /**
+  *
+  * @param keys - the path to the child node
+  * @param value - the value to set / insert
+  * @return the previous value if one existed
+  */
+  insert(keys: Iterable<K>, value: V): V | undefined;
+  /**
+  * Insert nodes for the given keys into the trie.
+  * Existing nodes are reused.
+  * @param keys
+  * @returns the final node inserted or found
+  */
+  insertNode(keys: Iterable<K>): GTrieNode<K, V>;
+  findNode(keys: Iterable<K>): GTrieNode<K, V> | undefined;
+  has(keys: Iterable<K>): boolean;
+  hasNode(keys: Iterable<K>): boolean;
+  get(keys: Iterable<K>): V | undefined;
+  static fromEntries<K, V>(entries: Iterable<[Iterable<K>, V]>): GTrie<K, V>;
+}
+//#endregion
+//#region src/lib/io/importExport.d.ts
+interface ExportOptions {
+  base?: number;
+  comment?: string;
+  version?: number;
+  addLineBreaksToImproveDiffs?: boolean;
+}
+/**
+* Serialize a TrieNode.
+* Note: This is destructive.  The node will no longer be usable.
+* Even though it is possible to preserve the trie, dealing with very large tries can consume a lot of memory.
+* Considering this is the last step before exporting, it was decided to let this be destructive.
+*/
+declare function serializeTrie(root: TrieRoot, options?: ExportOptions | number): Iterable<string>;
+declare function importTrie(input: Iterable<string> | IterableIterator<string> | string[] | string): TrieRoot;
+//#endregion
+//#region src/lib/models/DictionaryInformation.d.ts
+type DictionaryInformation = Exclude<DictionaryDefinitionAugmented["dictionaryInformation"], undefined>;
+//#endregion
+//#region src/lib/mappers/mapDictionaryInfoToWeightMap.d.ts
+declare function mapDictionaryInformationToWeightMap(dictInfo: DictionaryInformation): WeightMap;
+//#endregion
 //#region src/lib/TrieBlob/trieDataEncoder.d.ts
+declare function encodeITrieToBTrie(trie: ITrie, buildOptions?: BuildOptions): Uint8Array<ArrayBuffer>;
 declare function encodeTrieDataToBTrie(data: TrieData, buildOptions?: BuildOptions): Uint8Array<ArrayBuffer>;
 //#endregion
 //#region src/lib/TrieBuilder.d.ts
@@ -963,5 +1015,5 @@ declare const normalizeWordForCaseInsensitive: (text: string) => string[];
 */
 declare function expandCharacterSet(line: string, rangeChar?: string): Set<string>;
 //#endregion
-export { CASE_INSENSITIVE_PREFIX, COMPOUND_FIX, ChildMap, CompoundWordsMethod, ExportOptions, FLAG_WORD, FORBID_PREFIX, FindFullResult, FindWordOptions, HintedWalkerIterator, Hinting, ITrie, JOIN_SEPARATOR, MaxCost, OPTIONAL_COMPOUND_FIX, type PartialTrieOptions, SuggestionCollector, type SuggestionCostMapDef, SuggestionResult, Trie, TrieBuilder, TrieNode, type TrieOptions, type TrieOptionsRO, TrieRoot, WORD_SEPARATOR, WalkerIterator, WeightMap, YieldResult, buildITrieFromWords, buildTrie, buildTrieFast, consolidate, countNodes, countWords, createDictionaryLineParserMapper as createDictionaryLineParser, createTrieRoot, createTrieRootFromList, createWeightedMap, decodeTrie, defaultTrieInfo, defaultTrieInfo as defaultTrieOptions, editDistance, editDistanceWeighted, encodeTrieDataToBTrie, expandCharacterSet, findNode, has, hintedWalker, impersonateCollector, importTrie, insert, isCircular, isDefined, isWordTerminationNode, iterateTrie, iteratorTrieWords, mapDictionaryInformationToWeightMap, mergeDefaults, mergeOptionalWithDefaults, normalizeWord, normalizeWordForCaseInsensitive, normalizeWordToLowercase, orderTrie, parseDictionary, parseDictionaryLegacy, parseDictionaryLines, serializeTrie, suggestionCollector, trieNodeToRoot, walk, walker };
+export { CASE_INSENSITIVE_PREFIX, COMPOUND_FIX, ChildMap, CompoundWordsMethod, ExportOptions, FLAG_WORD, FORBID_PREFIX, FindFullResult, FindWordOptions, GTrie, GTrieNode, HintedWalkerIterator, Hinting, ITrie, JOIN_SEPARATOR, MaxCost, OPTIONAL_COMPOUND_FIX, type PartialTrieOptions, SuggestionCollector, type SuggestionCostMapDef, SuggestionResult, Trie, TrieBuilder, TrieNode, type TrieOptions, type TrieOptionsRO, TrieRoot, WORD_SEPARATOR, WalkerIterator, WeightMap, YieldResult, buildITrieFromWords, buildTrie, buildTrieFast, consolidate, convertToBTrie, countNodes, countWords, createDictionaryLineParserMapper as createDictionaryLineParser, createTrieRoot, createTrieRootFromList, createWeightedMap, decodeFile, decodeTrie, defaultTrieInfo, defaultTrieInfo as defaultTrieOptions, editDistance, editDistanceWeighted, encodeITrieToBTrie, encodeTrieDataToBTrie, expandCharacterSet, findNode, has, hintedWalker, impersonateCollector, importTrie, insert, isCircular, isDefined, isWordTerminationNode, iterateTrie, iteratorTrieWords, mapDictionaryInformationToWeightMap, mergeDefaults, mergeOptionalWithDefaults, normalizeWord, normalizeWordForCaseInsensitive, normalizeWordToLowercase, orderTrie, parseDictionary, parseDictionaryLegacy, parseDictionaryLines, serializeTrie, suggestionCollector, trieNodeToRoot, walk, walker };
 //# sourceMappingURL=index.d.ts.map

@@ -147,6 +147,6 @@ export function mapRawString(text: string): MappedText {
 
     return {
         text: t,
-        map,
+        offsetMap: map,
     };
 }

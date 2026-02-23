@@ -11,11 +11,11 @@ export interface TextOffset {
     /**
      * Assumed to match `text.length` if the text has not been transformed.
      */
-    length?: number;
+    length?: number | undefined;
 }
 
 export interface TextDocumentOffset extends TextOffset {
-    uri?: string;
+    uri?: string | undefined;
     doc: string;
     row: number;
     col: number;

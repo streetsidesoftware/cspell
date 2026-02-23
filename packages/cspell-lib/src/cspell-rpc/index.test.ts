@@ -32,21 +32,31 @@ describe('Validate Client / Server communications', () => {
         const doc = { uri: import.meta.url };
         const result = await api.spellCheckDocument(doc, {}, {});
         expect(result).toBeDefined();
-        expect(result).toEqual(oc({ issues: [], errors: undefined }));
+        expect(result).toEqual({
+            issues: undefined,
+            checked: true,
+            document: doc,
+            perf: undefined,
+        });
 
-        const result2 = await api.spellCheckDocument(doc, {}, {});
+        const result2 = await api.spellCheckDocument(doc, { measurePerf: true }, {});
         expect(result2).toBeDefined();
-        expect(result2).toEqual(oc({ issues: [], errors: undefined }));
+        expect(result2).toEqual({
+            issues: undefined,
+            checked: true,
+            document: doc,
+            perf: expect.anything(),
+        });
     });
 
     const urlFixtures = new URL('fixtures/', packageUrl);
     const urlSampleFilesWithIssues = new URL('docValidator/sample-files-with-issues/', urlFixtures);
-    const noIssues = { issues: [], errors: undefined, configErrors: undefined, dictionaryErrors: undefined };
+    const noIssuesRPC = { issues: undefined, errors: undefined, configErrors: undefined, dictionaryErrors: undefined };
 
     const expectedFor = {
-        'WOX_Permissions.ps1': { ...noIssues, issues: ac([oc({ text: 'explicitily' })]) }, // cspell:ignore explicitily
+        'WOX_Permissions.ps1': { ...noIssuesRPC, issues: ac([oc({ text: 'explicitily' })]) }, // cspell:ignore explicitily
         'import-errors/file.txt': {
-            ...noIssues,
+            ...noIssuesRPC,
             configErrors: [
                 {
                     filename: expect.stringContaining('missing.config.yaml'),
@@ -68,7 +78,7 @@ describe('Validate Client / Server communications', () => {
 
     test.each`
         filename                    | rootUrl                     | expected
-        ${import.meta.url}          | ${import.meta.url}          | ${noIssues}
+        ${import.meta.url}          | ${import.meta.url}          | ${noIssuesRPC}
         ${'WOX_Permissions.ps1'}    | ${urlSampleFilesWithIssues} | ${expectedFor['WOX_Permissions.ps1']}
         ${'import-errors/file.txt'} | ${urlFixtures}              | ${expectedFor['import-errors/file.txt']}
     `('spell document $filename', async ({ filename, rootUrl, expected }) => {

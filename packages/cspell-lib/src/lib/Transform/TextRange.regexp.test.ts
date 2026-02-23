@@ -3,7 +3,7 @@ import { describe, expect, test } from 'vitest';
 
 import * as RegPat from '../Settings/RegExpPatterns.js';
 import { regExMatchCommonHexFormats, regExMatchUrls } from '../Settings/RegExpPatterns.js';
-import { calculateTextDocumentOffsets } from './text.js';
+import { calculateTextDocumentOffsets } from '../util/text.js';
 import * as TextRange from './TextRange.js';
 
 const matchUrl = regExMatchUrls;

@@ -3,7 +3,7 @@ Repository: gitbucket/gitbucket
 Url: "https://github.com/gitbucket/gitbucket.git"
 Args: ["**"]
 Lines:
- CSpell: Files checked: 414, Issues found: 1908 in 398 files.
+ CSpell: Files checked: 414, Issues found: 1909 in 398 files.
  exit code: 1
 README.md:82:88     - Unknown word (MVCC)       -- configuration, remove `;MVCC=true` from `url`.
 build.sbt:21:4      - Unknown word (scalafmt)   -- // scalafmtOnCompile := true
@@ -150,14 +150,14 @@ src/main/scala/gitbucket/core/controller/PullRequestsController.scala:206:41    
 src/main/scala/gitbucket/core/controller/PullRequestsController.scala:556:46    - Unknown word (mergecheck) -- repository/compare/*...*/mergecheck")(readableUsersOnly
 src/main/scala/gitbucket/core/controller/RepositorySettingsController.scala:179:9     - Unknown word (protecteions) -- val protecteions = getProtectedBranchList
 src/main/scala/gitbucket/core/controller/RepositorySettingsController.scala:472:37    - Unknown word (deploykey)    -- repository/settings/deploykey")(ownerOnly { repository
-src/main/scala/gitbucket/core/controller/RepositoryViewerController.scala:746:16    - Unknown word (commited)   -- "commited" -> blame.commitTime
+src/main/scala/gitbucket/core/controller/RepositoryViewerController.scala:750:16    - Unknown word (commited)   -- "commited" -> blame.commitTime
 src/main/scala/gitbucket/core/controller/SystemSettingsController.scala:251:15    - Unknown word (dbviewer)   -- get("/admin/dbviewer")(adminOnly {
 src/main/scala/gitbucket/core/controller/SystemSettingsController.scala:396:22    - Unknown word (newuser)    -- get("/admin/users/_newuser")(adminOnly {
 src/main/scala/gitbucket/core/controller/SystemSettingsController.scala:415:32    - Unknown word (edituser)   -- admin/users/:userName/_edituser")(adminOnly {
 src/main/scala/gitbucket/core/controller/SystemSettingsController.scala:463:22    - Unknown word (newgroup)   -- get("/admin/users/_newgroup")(adminOnly {
 src/main/scala/gitbucket/core/controller/SystemSettingsController.scala:77:10     - Unknown word (starttls)   -- "starttls" -> trim(label("Enable
 src/main/scala/gitbucket/core/controller/SystemSettingsController.scala:77:42     - Unknown word (STARTTLS)   -- trim(label("Enable STARTTLS", optional(boolean(
-src/main/scala/gitbucket/core/controller/WikiController.scala:226:22    - Unknown word (Gollum)     -- WebHookGollumPayload("edited", form
+src/main/scala/gitbucket/core/controller/WikiController.scala:220:22    - Unknown word (Gollum)     -- WebHookGollumPayload("edited", form
 src/main/scala/gitbucket/core/controller/api/ApiGitReferenceControllerBase.scala:40:9      - Unknown word (revstr)     -- val revstr = multiParams("splat
 src/main/scala/gitbucket/core/controller/api/ApiRepositoryCommitControllerBase.scala:49:13     - Unknown word (revfilters) -- val revfilters = new ListBuffer[(RevFilter
 src/main/scala/gitbucket/core/controller/api/ApiRepositoryContentsControllerBase.scala:8:39      - Unknown word (Renderable) -- core.view.helpers.{isRenderable, renderMarkup}
@@ -181,7 +181,7 @@ src/main/scala/gitbucket/core/util/FileUtil.scala:11:20     - Unknown word (Tika
 src/main/scala/gitbucket/core/util/JDBCUtil.scala:194:46    - Unknown word (FKTABLE)    -- hildTableName = rs.getString("FKTABLE_NAME").toUpperCase
 src/main/scala/gitbucket/core/util/JDBCUtil.scala:215:21    - Unknown word (tsort)      -- val ordered = tsort(edges).toSeq
 src/main/scala/gitbucket/core/util/JDBCUtil.scala:223:19    - Unknown word (Preds)      -- def tsort(toPreds: Map[A, Set[A]], done
-src/main/scala/gitbucket/core/util/JGitUtil.scala:1010:38   - Unknown word (receivepack) -- setBoolean("http", null, "receivepack", true)
+src/main/scala/gitbucket/core/util/JGitUtil.scala:1017:38   - Unknown word (receivepack) -- setBoolean("http", null, "receivepack", true)
 src/main/scala/gitbucket/core/util/LDAPUtil.scala:135:46    - Unknown word (JSSE)       -- set the property that JSSE uses to identify
 src/main/scala/gitbucket/core/util/LDAPUtil.scala:143:32    - Unknown word (LDAPJSSE)   -- new LDAPConnection(new LDAPJSSESecureSocketFactory(
 src/main/scala/gitbucket/core/util/StringUtil.scala:30:62     - Unknown word (Hmac)       -- getInstance("PBKDF2WithHmacSHA256")
@@ -208,19 +208,19 @@ src/main/twirl/gitbucket/core/dashboard/header.scala.html:10:37     - Unknown wo
 src/main/twirl/gitbucket/core/dashboard/issues.scala.html:14:38     - Unknown word (issuesnavi) -- core.dashboard.html.issuesnavi("issues", filter, openCount
 src/main/twirl/gitbucket/core/dashboard/issues.scala.html:15:38     - Unknown word (issueslist) -- core.dashboard.html.issueslist(issues, page, openCount
 src/main/twirl/gitbucket/core/dashboard/issueslist.scala.html:30:41     - Unknown word (commitstatus) -- gitbucket.core.helper.html.commitstatus(commitId.get, summary
-src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:55:34     - Unknown word (dreamweaver) -- <option value="dreamweaver">Dreamweaver</option
-src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:55:47     - Unknown word (Dreamweaver) -- value="dreamweaver">Dreamweaver</option>
-src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:61:34     - Unknown word (iplastic)    -- <option value="iplastic">Iplastic</option>
-src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:61:44     - Unknown word (Iplastic)    -- option value="iplastic">Iplastic</option>
-src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:62:34     - Unknown word (katzenmilch) -- <option value="katzenmilch">Katzenmilch</option
-src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:62:47     - Unknown word (Katzenmilch) -- value="katzenmilch">Katzenmilch</option>
-src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:64:34     - Unknown word (kuroir)      -- <option value="kuroir">Kuroir</option>
-src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:64:42     - Unknown word (Kuroir)      -- option value="kuroir">Kuroir</option>
-src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:65:34     - Unknown word (merbivore)   -- <option value="merbivore">Merbivore</option>
-src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:65:45     - Unknown word (Merbivore)   -- option value="merbivore">Merbivore</option>
-src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:67:52     - Unknown word (Monokai)     -- selected value="monokai">Monokai</option>
-src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:68:34     - Unknown word (nord)        -- <option value="nord_dark">Nord Dark</option
-src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:68:45     - Unknown word (Nord)        -- option value="nord_dark">Nord Dark</option>
+src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:53:34     - Unknown word (dreamweaver) -- <option value="dreamweaver">Dreamweaver</option
+src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:53:47     - Unknown word (Dreamweaver) -- value="dreamweaver">Dreamweaver</option>
+src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:59:34     - Unknown word (iplastic)    -- <option value="iplastic">Iplastic</option>
+src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:59:44     - Unknown word (Iplastic)    -- option value="iplastic">Iplastic</option>
+src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:60:34     - Unknown word (katzenmilch) -- <option value="katzenmilch">Katzenmilch</option
+src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:60:47     - Unknown word (Katzenmilch) -- value="katzenmilch">Katzenmilch</option>
+src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:62:34     - Unknown word (kuroir)      -- <option value="kuroir">Kuroir</option>
+src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:62:42     - Unknown word (Kuroir)      -- option value="kuroir">Kuroir</option>
+src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:63:34     - Unknown word (merbivore)   -- <option value="merbivore">Merbivore</option>
+src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:63:45     - Unknown word (Merbivore)   -- option value="merbivore">Merbivore</option>
+src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:65:52     - Unknown word (Monokai)     -- selected value="monokai">Monokai</option>
+src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:66:34     - Unknown word (nord)        -- <option value="nord_dark">Nord Dark</option
+src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:66:45     - Unknown word (Nord)        -- option value="nord_dark">Nord Dark</option>
 src/main/twirl/gitbucket/core/helper/attached.scala.html:20:21     - Unknown word (textcomplete) -- $('#@textareaId').textcomplete([
 src/main/twirl/gitbucket/core/helper/attached.scala.html:95:112    - Unknown word (uploadprogress) -- dz-upload\" data-dz-uploadprogress>Uploading your files
 src/main/twirl/gitbucket/core/helper/commitcomments.scala.html:17:35     - Unknown word (commitcomment) -- gitbucket.core.helper.html.commitcomment(comment, hasWritePermission
@@ -230,9 +230,9 @@ src/main/twirl/gitbucket/core/helper/diff.scala.html:155:63    - Unknown word (j
 src/main/twirl/gitbucket/core/helper/diff.scala.html:155:73    - Unknown word (difflib)    -- "/vendors/jsdifflib/difflib.js")"></script>
 src/main/twirl/gitbucket/core/helper/diff.scala.html:156:49    - Unknown word (diffview)   -- "/vendors/jsdifflib/diffview.css")" type="text/css
 src/main/twirl/gitbucket/core/helper/diff.scala.html:373:16    - Unknown word (diffstat)   -- table.find(".diffstat").text(add + del +
-src/main/twirl/gitbucket/core/helper/preview.scala.html:101:8     - Unknown word (Headding)   -- setHeadding(textarea);
-src/main/twirl/gitbucket/core/helper/preview.scala.html:63:41     - Unknown word (textareajs) -- document.getElementById("textareajs");
-src/main/twirl/gitbucket/core/helper/preview.scala.html:75:9      - Unknown word (markedown)  -- const markedownBold = document.getElementById
+src/main/twirl/gitbucket/core/helper/preview.scala.html:61:41     - Unknown word (textareajs) -- document.getElementById("textareajs");
+src/main/twirl/gitbucket/core/helper/preview.scala.html:73:9      - Unknown word (markedown)  -- const markedownBold = document.getElementById
+src/main/twirl/gitbucket/core/helper/preview.scala.html:99:8      - Unknown word (Headding)   -- setHeadding(textarea);
 src/main/twirl/gitbucket/core/index.scala.html:40:32     - Unknown word (signinform) -- gitbucket.core.html.signinform(context.settings)
 src/main/twirl/gitbucket/core/issues/commentform.scala.html:2:3       - Unknown word (reopenable) -- reopenable: Boolean,
 src/main/twirl/gitbucket/core/issues/commentlist.scala.html:317:33    - Unknown word (commitcomments) -- gitbucket.core.helper.html.commitcomments(comments, isManageable
@@ -249,7 +249,7 @@ src/main/twirl/gitbucket/core/menu.scala.html:113:54    - Unknown word (closelab
 src/main/twirl/gitbucket/core/repo/blob.scala.html:130:30    - Unknown word (linenums)      -- const pos = pre.find('ol.linenums').position();
 src/main/twirl/gitbucket/core/repo/blob.scala.html:41:35     - Unknown word (branchcontrol) -- gitbucket.core.helper.html.branchcontrol(branch, repository,
 src/main/twirl/gitbucket/core/repo/editor.scala.html:31:35     - Unknown word (acenavbar)  -- gitbucket.core.helper.html.acenavbar()
-src/main/twirl/gitbucket/core/repo/editor.scala.html:75:52     - Unknown word (modelist)   -- assets("/vendors/ace/ext-modelist.js")' type="text/javascript
+src/main/twirl/gitbucket/core/repo/editor.scala.html:76:52     - Unknown word (modelist)   -- assets("/vendors/ace/ext-modelist.js")' type="text/javascript
 src/main/twirl/gitbucket/core/settings/deploykey.scala.html:6:41      - Unknown word (deploykeys) -- settings.html.menu("deploykeys", repository){
 src/main/twirl/gitbucket/core/settings/issues.scala.html:18:41     - Unknown word (issuesfield) -- gitbucket.core.settings.html.issuesfield(customField)
 src/test/scala/gitbucket/core/api/ApiIntegrationTest.scala:302:44    - Unknown word (testref)    -- createRef("refs/heads/testref", sha1)

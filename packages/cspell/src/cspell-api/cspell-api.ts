@@ -1,7 +1,7 @@
 import { MessageChannel } from 'node:worker_threads';
 
 import { CSpellWorkerPool } from '@cspell/cspell-worker';
-import { spellCheckDocument, spellCheckDocumentRPC } from 'cspell-lib';
+import { spellCheckDocumentRPC } from 'cspell-lib';
 import type { CSpellRPCApi, CSpellRPCClient } from 'cspell-lib/cspell-rpc';
 import { createCSpellRPCClient, createCSpellRPCServer } from 'cspell-lib/cspell-rpc';
 
@@ -14,7 +14,7 @@ const MIN_NUM_WORKERS = 6;
 const JOBS_PER_CORE = 16;
 
 const apiOrig = {
-    spellCheckDocument,
+    spellCheckDocument: spellCheckDocumentRPC,
 } as const;
 
 const apiRPCNoChannel: CSpellAPI = {

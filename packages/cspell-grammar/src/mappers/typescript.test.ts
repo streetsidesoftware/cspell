@@ -67,7 +67,7 @@ describe('mappers typescript', () => {
         ${'hello\\u{020}there'}                   | ${[5, 5, 12, 6, 17, 11]}
     `('mapRawString map $# [$text]', ({ text, expected }) => {
         const r = mapRawString(text);
-        expect(r.map).toEqual(expected);
+        expect(r.offsetMap).toEqual(expected);
     });
 });
 

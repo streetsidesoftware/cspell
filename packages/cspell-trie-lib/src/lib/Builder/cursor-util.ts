@@ -19,7 +19,7 @@ export function insertWordsAtCursor(cursor: BuilderCursor, words: Iterable<strin
 
 export function commonStringPrefixLen(a: string, b: string): number {
     let i = 0;
-    for (i = 0; i < a.length && a[i] === b[i]; ++i) {
+    for (; i < a.length && a[i] === b[i]; ++i) {
         /* empty */
     }
     if (i) {
@@ -35,7 +35,7 @@ export function commonStringPrefixLen(a: string, b: string): number {
 
 function commonStrPrefix(a: string[], b: string[]): number {
     let i = 0;
-    for (i = 0; i < a.length && a[i] === b[i]; ++i) {
+    for (; i < a.length && a[i] === b[i]; ++i) {
         /* empty */
     }
     return i;

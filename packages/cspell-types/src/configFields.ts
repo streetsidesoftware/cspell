@@ -51,6 +51,8 @@ export const ConfigFields: CSpellUserSettingsFields = {
     reporters: 'reporters',
     showStatus: 'showStatus',
     spellCheckDelayMs: 'spellCheckDelayMs',
+    substitutionDefinitions: 'substitutionDefinitions',
+    substitutions: 'substitutions',
     suggestionNumChanges: 'suggestionNumChanges',
     suggestionsTimeout: 'suggestionsTimeout',
     suggestWords: 'suggestWords',
