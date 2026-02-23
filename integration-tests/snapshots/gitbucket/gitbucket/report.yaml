@@ -5,7 +5,7 @@ Args: '["**"]'
 Summary:
   files: 414
   filesWithIssues: 398
-  issues: 1908
+  issues: 1909
   errors: 0
 Errors: []
 
@@ -165,7 +165,7 @@ issues:
   - "src/main/scala/gitbucket/core/controller/SystemSettingsController.scala:396:22      newuser     U       get(\"/admin/users/_newuser\")(adminOnly {"
   - "src/main/scala/gitbucket/core/controller/SystemSettingsController.scala:415:32      edituser    U       admin/users/:userName/_edituser\")(adminOnly {"
   - "src/main/scala/gitbucket/core/controller/SystemSettingsController.scala:463:22      newgroup    U       get(\"/admin/users/_newgroup\")(adminOnly {"
-  - "src/main/scala/gitbucket/core/controller/WikiController.scala:226:22        Gollum      U       WebHookGollumPayload(\"edited\", form"
+  - "src/main/scala/gitbucket/core/controller/WikiController.scala:220:22        Gollum      U       WebHookGollumPayload(\"edited\", form"
   - "src/main/scala/gitbucket/core/model/AccountWebHook.scala:7:55           whct        U       WebHookContentType, String](whct => whct.code, code"
   - "src/main/scala/gitbucket/core/model/AccountWebHook.scala:14:45          CTYPE       U       WebHookContentType](\"CTYPE\")"
   - "src/main/scala/gitbucket/core/model/WebHook.scala:34:37         gollum      U       Gollum extends Event(\"gollum\")"
@@ -213,19 +213,19 @@ issues:
   - "src/main/twirl/gitbucket/core/dashboard/issues.scala.html:14:38         issuesnavi      U       core.dashboard.html.issuesnavi(\"issues\", filter, openCount"
   - "src/main/twirl/gitbucket/core/dashboard/issues.scala.html:15:38         issueslist      U       core.dashboard.html.issueslist(issues, page, openCount"
   - "src/main/twirl/gitbucket/core/dashboard/issueslist.scala.html:30:41         commitstatus    U       gitbucket.core.helper.html.commitstatus(commitId.get, summary"
-  - "src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:55:34         dreamweaver     U       <option value=\"dreamweaver\">Dreamweaver</option"
-  - "src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:55:47         Dreamweaver     U       value=\"dreamweaver\">Dreamweaver</option>"
-  - "src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:61:34         iplastic        U       <option value=\"iplastic\">Iplastic</option>"
-  - "src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:61:44         Iplastic        U       option value=\"iplastic\">Iplastic</option>"
-  - "src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:62:34         katzenmilch     U       <option value=\"katzenmilch\">Katzenmilch</option"
-  - "src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:62:47         Katzenmilch     U       value=\"katzenmilch\">Katzenmilch</option>"
-  - "src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:64:34         kuroir          U       <option value=\"kuroir\">Kuroir</option>"
-  - "src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:64:42         Kuroir          U       option value=\"kuroir\">Kuroir</option>"
-  - "src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:65:34         merbivore       U       <option value=\"merbivore\">Merbivore</option>"
-  - "src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:65:45         Merbivore       U       option value=\"merbivore\">Merbivore</option>"
-  - "src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:67:52         Monokai         U       selected value=\"monokai\">Monokai</option>"
-  - "src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:68:34         nord            U       <option value=\"nord_dark\">Nord Dark</option"
-  - "src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:68:45         Nord            U       option value=\"nord_dark\">Nord Dark</option>"
+  - "src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:53:34         dreamweaver     U       <option value=\"dreamweaver\">Dreamweaver</option"
+  - "src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:53:47         Dreamweaver     U       value=\"dreamweaver\">Dreamweaver</option>"
+  - "src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:59:34         iplastic        U       <option value=\"iplastic\">Iplastic</option>"
+  - "src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:59:44         Iplastic        U       option value=\"iplastic\">Iplastic</option>"
+  - "src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:60:34         katzenmilch     U       <option value=\"katzenmilch\">Katzenmilch</option"
+  - "src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:60:47         Katzenmilch     U       value=\"katzenmilch\">Katzenmilch</option>"
+  - "src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:62:34         kuroir          U       <option value=\"kuroir\">Kuroir</option>"
+  - "src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:62:42         Kuroir          U       option value=\"kuroir\">Kuroir</option>"
+  - "src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:63:34         merbivore       U       <option value=\"merbivore\">Merbivore</option>"
+  - "src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:63:45         Merbivore       U       option value=\"merbivore\">Merbivore</option>"
+  - "src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:65:52         Monokai         U       selected value=\"monokai\">Monokai</option>"
+  - "src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:66:34         nord            U       <option value=\"nord_dark\">Nord Dark</option"
+  - "src/main/twirl/gitbucket/core/helper/acenavbar.scala.html:66:45         Nord            U       option value=\"nord_dark\">Nord Dark</option>"
   - "src/main/twirl/gitbucket/core/helper/attached.scala.html:20:21          textcomplete        U       $('#@textareaId').textcomplete(["
   - "src/main/twirl/gitbucket/core/helper/attached.scala.html:95:112         uploadprogress      U       dz-upload\\\" data-dz-uploadprogress>Uploading your files"
   - "src/main/twirl/gitbucket/core/helper/commitcomments.scala.html:17:35        commitcomment       U       gitbucket.core.helper.html.commitcomment(comment, hasWritePermission"
@@ -235,9 +235,9 @@ issues:
   - "src/main/twirl/gitbucket/core/helper/diff.scala.html:155:73         difflib         U       \"/vendors/jsdifflib/difflib.js\")\"></script>"
   - "src/main/twirl/gitbucket/core/helper/diff.scala.html:156:49         diffview        U       \"/vendors/jsdifflib/diffview.css\")\" type=\"text/css"
   - "src/main/twirl/gitbucket/core/helper/diff.scala.html:373:16         diffstat        U       table.find(\".diffstat\").text(add + del +"
-  - "src/main/twirl/gitbucket/core/helper/preview.scala.html:63:41       textareajs      U       document.getElementById(\"textareajs\");"
-  - "src/main/twirl/gitbucket/core/helper/preview.scala.html:75:9        markedown       U       const markedownBold = document.getElementById"
-  - "src/main/twirl/gitbucket/core/helper/preview.scala.html:101:8       Headding        U       setHeadding(textarea);"
+  - "src/main/twirl/gitbucket/core/helper/preview.scala.html:61:41       textareajs      U       document.getElementById(\"textareajs\");"
+  - "src/main/twirl/gitbucket/core/helper/preview.scala.html:73:9        markedown       U       const markedownBold = document.getElementById"
+  - "src/main/twirl/gitbucket/core/helper/preview.scala.html:99:8        Headding        U       setHeadding(textarea);"
   - "src/main/twirl/gitbucket/core/index.scala.html:40:32        signinform      U       gitbucket.core.html.signinform(context.settings)"
   - "src/main/twirl/gitbucket/core/issues/commentform.scala.html:2:3         reopenable      U       reopenable: Boolean,"
   - "src/main/twirl/gitbucket/core/issues/commentlist.scala.html:317:33      commitcomments      U       gitbucket.core.helper.html.commitcomments(comments, isManageable"
