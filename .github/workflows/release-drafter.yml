@@ -21,6 +21,7 @@ env:
 
 jobs:
   update_release_draft:
+    if: github.repository_owner == 'streetsidesoftware'
     permissions:
       contents: write # needed by release-drafter/release-drafter to write to the draft release.
     runs-on: ubuntu-latest
@@ -57,7 +58,8 @@ jobs:
 
   create-pr:
     if: >-
-      ${{ !startsWith(github.event.head_commit.message, 'chore: Prepare Release') }}
+      github.repository_owner == 'streetsidesoftware' &&
+      !startsWith(github.event.head_commit.message, 'chore: Prepare Release')
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -128,7 +130,9 @@ jobs:
 
   create-release:
     if: >-
-      ${{ startsWith(github.event.head_commit.message, 'chore: Prepare Release') && contains(github.event.head_commit.message, '(auto-deploy)') }}
+      github.repository_owner == 'streetsidesoftware' &&
+      startsWith(github.event.head_commit.message, 'chore: Prepare Release') &&
+      contains(github.event.head_commit.message, '(auto-deploy)')
     permissions:
       contents: write
       id-token: write

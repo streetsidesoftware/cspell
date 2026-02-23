@@ -10,6 +10,7 @@ permissions:
 
 jobs:
   stale:
+    if: github.repository_owner == 'streetsidesoftware'
     permissions:
       issues: write # for dessant/lock-threads to lock issues
     runs-on: ubuntu-latest

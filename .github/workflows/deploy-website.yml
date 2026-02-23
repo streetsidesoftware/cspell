@@ -19,6 +19,7 @@ concurrency:
 
 jobs:
   build:
+    if: github.repository_owner == 'streetsidesoftware'
     name: Build Website
     runs-on: ubuntu-latest
     steps:

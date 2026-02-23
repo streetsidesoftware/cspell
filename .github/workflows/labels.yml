@@ -7,7 +7,7 @@ on:
 jobs:
   fix-labels-on-pr:
     name: Fix labels on PR
-    if: ${{ contains(github.event.pull_request.labels.*.name, 'fix') && contains(github.event.pull_request.labels.*.name, 'Update Dictionaries')  }}
+    if: github.repository_owner == 'streetsidesoftware' && contains(github.event.pull_request.labels.*.name, 'fix') && contains(github.event.pull_request.labels.*.name, 'Update Dictionaries')
     continue-on-error: true
     runs-on: ubuntu-latest
     permissions:
