@@ -39,10 +39,11 @@ const messages = {
 type Messages = typeof messages;
 type MessageIds = keyof Messages;
 
-const ruleMeta: Rule.RuleModule['meta'] = {
+type RuleMeta = Exclude<Rule.RuleModule['meta'], undefined>;
+
+const ruleMeta: RuleMeta = {
     docs: {
         description: 'CSpell spellchecker',
-        category: 'Possible Errors',
         recommended: false,
     },
     messages,
@@ -58,7 +59,13 @@ function nullFix(): null {
     return null;
 }
 
-function create(context: Rule.RuleContext): Rule.RuleListener {
+type LegacyESLintContext = {
+    getCwd(): string;
+    getFilename(): string;
+    getSourceCode(): Rule.RuleContext['sourceCode'];
+};
+
+function create(context: Rule.RuleContext & LegacyESLintContext): Rule.RuleListener {
     const logger = getDefaultLogger();
     const log = logger.log;
     const options = normalizeOptions(context.options[0] as Options, context.cwd || context.getCwd());
@@ -169,7 +176,7 @@ function logContext(log: typeof console.log, context: Rule.RuleContext) {
     });
 }
 
-function contextSourceCode(context: Rule.RuleContext): Rule.RuleContext['sourceCode'] {
+function contextSourceCode(context: Rule.RuleContext & LegacyESLintContext): Rule.RuleContext['sourceCode'] {
     return context.sourceCode || context.getSourceCode();
 }
 
