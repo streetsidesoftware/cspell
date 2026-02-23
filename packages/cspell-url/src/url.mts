@@ -188,7 +188,7 @@ export function urlToUrlRelative(urlFrom: URL, urlTo: URL): string {
     const p0Parts = p0.split('/').slice(0, -1); // drop the last segment.
     const p1Parts = p1.split('/');
     let i = 0;
-    for (i = 0; i < p0Parts.length && i < p1Parts.length - 1 && p0Parts[i] === p1Parts[i]; ++i) {
+    for (; i < p0Parts.length && i < p1Parts.length - 1 && p0Parts[i] === p1Parts[i]; ++i) {
         // empty
     }
     const rel = '../'.repeat(p0Parts.length - i) + p1Parts.slice(i).join('/');

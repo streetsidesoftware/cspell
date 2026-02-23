@@ -439,6 +439,7 @@ export class TrieBlob implements TrieData {
 
         const iterable = this.#walk(stack);
 
+        // eslint-disable-next-line no-useless-assignment
         let deeper = false;
         for (let next = iterable.next(true); !next.done; next = iterable.next(deeper)) {
             const depth = next.value;
