@@ -1,7 +1,7 @@
 import type { MappedText, SourceMap, TextOffset } from '@cspell/cspell-types';
 
 import type { ValidationIssue } from '../Models/ValidationIssue.js';
-import { extractTextMapRangeOrigin } from './TextMap.js';
+import { calculateRangeInDest, calculateRangeInSrc, extractTextMapRangeOrigin } from './TextMap.js';
 import type * as TextRange from './TextRange.js';
 import type { SimpleRange } from './types.js';
 
@@ -28,57 +28,13 @@ function mapTextOffsetBackToOriginalPos(mappedText: MappedText, textOff: TextOff
 export function mapRangeBackToOriginalPos(offRange: SimpleRange, map: SourceMap | undefined): SimpleRange {
     if (!map || !map.length) return offRange;
 
-    const [start, end] = offRange;
-
-    let i = 0,
-        j = 0,
-        p = 1;
-
-    while (p < map.length && map[p] + j < start) {
-        i += map[p - 1];
-        j += map[p];
-        p += 2;
-    }
-
-    const iA = start - j + i;
-
-    while (p < map.length && map[p] + j < end) {
-        i += map[p - 1];
-        j += map[p];
-        p += 2;
-    }
-
-    const iB = end - j + i;
-
-    return [iA, iB];
+    return calculateRangeInSrc(map, offRange);
 }
 
 export function mapRangeToLocal(rangeOrig: SimpleRange, map: SourceMap | undefined): SimpleRange {
     if (!map?.length) return rangeOrig;
 
-    const [start, end] = rangeOrig;
-
-    let i = 0,
-        j = 0,
-        p = 0;
-
-    while (p < map.length && map[p] + i < start) {
-        i += map[p];
-        j += map[p + 1];
-        p += 2;
-    }
-
-    const jA = start - i + j;
-
-    while (p < map.length && map[p] + i < end) {
-        i += map[p];
-        j += map[p + 1];
-        p += 2;
-    }
-
-    const jB = end - i + j;
-
-    return [jA, jB];
+    return calculateRangeInDest(map, rangeOrig);
 }
 
 /**
