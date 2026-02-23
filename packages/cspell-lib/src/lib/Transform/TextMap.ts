@@ -1,5 +1,3 @@
-import assert from 'node:assert';
-
 import type { MappedText, Range, SourceMap } from '@cspell/cspell-types';
 
 import { calcOffsetInDst, calcOffsetInSrc, createSourceMapCursor, sliceSourceMapToSourceRange } from './SourceMap.js';
@@ -47,8 +45,8 @@ export function calculateRangeInDest(srcMap: SourceMap | undefined, rangeOrigin:
         return rangeOrigin;
     }
 
-    const start = calcOffsetInDst(cursor, rangeOrigin[0]);
-    const end = calcOffsetInDst(cursor, rangeOrigin[1]);
+    const start = cursor.mapOffsetToDest(rangeOrigin[0]);
+    const end = cursor.mapOffsetToDest(rangeOrigin[1]);
     return [start, end];
 }
 
@@ -58,8 +56,8 @@ export function calculateRangeInSrc(srcMap: SourceMap | undefined, rangeOrigin: 
         return rangeOrigin;
     }
 
-    const start = calcOffsetInSrc(cursor, rangeOrigin[0]);
-    const end = calcOffsetInSrc(cursor, rangeOrigin[1]);
+    const start = cursor.mapOffsetToSrc(rangeOrigin[0]);
+    const end = cursor.mapOffsetToSrc(rangeOrigin[1]);
     return [start, end];
 }
 
@@ -71,9 +69,6 @@ export function calculateTextMapRangeDest(textMap: MappedText, rangeOrigin: Rang
     const end = Math.min(Math.max(rangeOrigin[1], r0), r1) - r0;
 
     const range = [start, end] as const;
-    if (!srcMap || !srcMap.length) {
-        return range;
-    }
     return calculateRangeInDest(srcMap, range);
 }
 
@@ -101,25 +96,6 @@ export function mapOffsetToSource(map: SourceMap | undefined, offset: number): n
 export function mapOffsetToDest(map: SourceMap | undefined, offset: number): number {
     const cursor = createSourceMapCursor(map);
     return calcOffsetInDst(cursor, offset);
-}
-
-/**
- * Map an offset in the transformed text back to the original text.
- *
- * @param map - The source map to use for the mapping.
- *   If undefined or empty, the input offset is returned, assuming it is a 1:1 mapping.
- * @param range - the range in the transformed text to map back to the original text
- */
-export function calRangeInSrc(map: SourceMap | undefined, range: Range): Range {
-    if (!map || !map.length) {
-        return range;
-    }
-    assert(range[0] <= range[1], 'Range start must be less than or equal to range end.');
-
-    const cursor = createSourceMapCursor(map);
-    const start = calcOffsetInSrc(cursor, range[0]);
-    const end = calcOffsetInSrc(cursor, range[1]);
-    return [start, end];
 }
 
 interface WithRange {

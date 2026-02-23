@@ -6,32 +6,109 @@ export interface SourceMapCursor {
     /**
      * The source map being traversed.
      */
-    sourceMap: SourceMap;
+    readonly sourceMap: SourceMap;
     /**
      * The current index in the source map.
      */
-    idx: number;
+    readonly idx: number;
     /**
      * The base offset in the source text.
      */
-    base0: number;
+    readonly begin0: number;
     /**
      * The base offset in the transformed text.
      */
-    base1: number;
+    readonly begin1: number;
+
+    reset(): void;
+
+    mapOffsetToDest(offsetInSrc: number): number;
+    mapOffsetToSrc(offsetInDst: number): number;
 }
 
 class SourceMapCursorImpl implements SourceMapCursor {
     sourceMap: SourceMap;
     idx: number;
-    base0: number;
-    base1: number;
+    begin0: number;
+    begin1: number;
+    /**
+     * The delta in the source
+     */
+    d0: number;
+    /**
+     * The delta in the transformed text.
+     */
+    d1: number;
+    /**
+     * Indicates whether the current segment is linear (1:1) or non-linear.
+     * A linear segment has equal deltas in the source and transformed text,
+     * while a non-linear segment has different deltas.
+     * It is possible that a non-linear segment has the same deltas,
+     * but it is not possible for a linear segment to have different deltas.
+     */
+    linear: boolean;
+    /**
+     * indicates that the cursor has reached the end of the source map.
+     */
+    done: boolean;
 
     constructor(sourceMap: SourceMap) {
         this.sourceMap = sourceMap;
-        this.idx = 0;
-        this.base0 = 0;
-        this.base1 = 0;
+        this.idx = -2;
+        this.begin0 = 0;
+        this.begin1 = 0;
+        this.d0 = 0;
+        this.d1 = 0;
+        this.linear = true;
+        this.done = false;
+        this.next();
+    }
+
+    next(): boolean {
+        if (this.done) return false;
+        this.idx += 2;
+        this.begin0 += this.d0;
+        this.begin1 += this.d1;
+        this.d0 = this.sourceMap[this.idx] || 0;
+        this.d1 = this.sourceMap[this.idx + 1] || 0;
+        this.linear = this.d0 === this.d1;
+        this.done = this.idx >= this.sourceMap.length;
+        if (this.d0 === 0 && this.d1 === 0 && !this.done) {
+            this.next();
+            this.linear = this.done;
+        }
+        return !this.done;
+    }
+
+    mapOffsetToDest(offsetInSrc: number): number {
+        if (offsetInSrc < this.begin0) this.reset();
+        while (!this.done && offsetInSrc >= this.begin0 + this.d0) {
+            this.next();
+        }
+        if (this.linear) {
+            return offsetInSrc - this.begin0 + this.begin1;
+        }
+        // For a non-linear segment, the offset in the source maps to the start of the segment in the transformed text.
+        return this.begin1;
+    }
+
+    mapOffsetToSrc(offsetInDst: number): number {
+        if (offsetInDst < this.begin1) this.reset();
+        while (!this.done && offsetInDst >= this.begin1 + this.d1) {
+            this.next();
+        }
+        if (this.linear) {
+            return offsetInDst - this.begin1 + this.begin0;
+        }
+        // For a non-linear segment, the offset in the source maps to the start of the segment in the transformed text.
+        return this.begin0;
+    }
+
+    reset(): void {
+        this.idx = -2;
+        this.begin0 = 0;
+        this.begin1 = 0;
+        this.next();
     }
 }
 
@@ -50,12 +127,6 @@ export function createSourceMapCursor(sourceMap: SourceMap | undefined): SourceM
     return new SourceMapCursorImpl(sourceMap);
 }
 
-export function resetCursor(cursor: SourceMapCursor): void {
-    cursor.idx = 0;
-    cursor.base0 = 0;
-    cursor.base1 = 0;
-}
-
 /**
  * Calculated the transformed offset in the destination text based on the source map and the offset in the source text.
  * @param cursor - The cursor to use for the mapping. If undefined or empty, the input offset is returned, assuming it is a 1:1 mapping.
@@ -67,33 +138,7 @@ export function calcOffsetInDst(cursor: SourceMapCursor | undefined, offsetInSrc
         return offsetInSrc;
     }
 
-    if (offsetInSrc < cursor.base0) {
-        // If the offset is before the current base, reset the cursor to the start of the map.
-        resetCursor(cursor);
-    }
-
-    const srcMap = cursor.sourceMap;
-
-    let idx = cursor.idx;
-    let base0 = cursor.base0;
-    let base1 = cursor.base1;
-    for (; idx < srcMap.length && offsetInSrc > srcMap[idx] + base0; idx += 2) {
-        base0 += srcMap[idx];
-        base1 += srcMap[idx + 1];
-    }
-
-    cursor.idx = idx;
-    cursor.base0 = base0;
-    cursor.base1 = base1;
-
-    if (offsetInSrc === srcMap[idx] + base1) {
-        base0 += srcMap[idx];
-        base1 += srcMap[idx + 1];
-        idx += 2;
-    }
-    const d0 = srcMap[idx];
-    const d1 = srcMap[idx + 1];
-    return d0 === d1 ? offsetInSrc - base0 + base1 : base1;
+    return cursor.mapOffsetToDest(offsetInSrc);
 }
 
 /**
@@ -107,34 +152,7 @@ export function calcOffsetInSrc(cursor: SourceMapCursor | undefined, offsetInDst
         return offsetInDst;
     }
 
-    if (offsetInDst < cursor.base1) {
-        // If the offset is before the current base, reset the cursor to the start of the map.
-        resetCursor(cursor);
-    }
-
-    const srcMap = cursor.sourceMap;
-
-    let idx = cursor.idx;
-    let base0 = cursor.base0;
-    let base1 = cursor.base1;
-    for (; idx < srcMap.length && offsetInDst > srcMap[idx + 1] + base1; idx += 2) {
-        base0 += srcMap[idx];
-        base1 += srcMap[idx + 1];
-    }
-
-    cursor.idx = idx;
-    cursor.base0 = base0;
-    cursor.base1 = base1;
-
-    if (offsetInDst === srcMap[idx + 1] + base1) {
-        base0 += srcMap[idx];
-        base1 += srcMap[idx + 1];
-        idx += 2;
-    }
-
-    const d0 = srcMap[idx];
-    const d1 = srcMap[idx + 1];
-    return d0 === d1 ? offsetInDst - base1 + base0 : base0;
+    return cursor.mapOffsetToSrc(offsetInDst);
 }
 
 /**

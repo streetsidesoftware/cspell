@@ -2,7 +2,7 @@ import type { MappedText, SourceMap } from '@cspell/cspell-types';
 import { describe, expect, test } from 'vitest';
 
 import {
-    calRangeInSrc,
+    calculateRangeInSrc,
     doesIntersect,
     extractTextMapRangeOrigin,
     mapOffsetToDest,
@@ -72,11 +72,11 @@ describe('TextMap', () => {
         expect(mapOffsetToSource(rev, 8)).toBe(3); // `9` -> 'é'
         expect(mapOffsetToSource(rev, 9)).toBe(4); // `'` -> `'`
         expect(mapOffsetToSource(rev, 10)).toBe(5); // `s` -> `s`
-        expect(mapOffsetToSource(rev, 11)).toBe(6); // `` -> ` `
-        expect(mapOffsetToSource(rev, 12)).toBe(8); // `G` -> `G`
-        expect(mapOffsetToSource(rev, 13)).toBe(9); // `r` -> `r`
-        expect(mapOffsetToSource(rev, 14)).toBe(10); // `a` -> `a`
-        expect(mapOffsetToSource(rev, 15)).toBe(11); // `n` -> `n`
+        expect(mapOffsetToSource(rev, 11)).toBe(7); // `G` -> `G`
+        expect(mapOffsetToSource(rev, 12)).toBe(8); // `r` -> `r`
+        expect(mapOffsetToSource(rev, 13)).toBe(9); // `a` -> `a`
+        expect(mapOffsetToSource(rev, 14)).toBe(10); // `n` -> `n`
+        expect(mapOffsetToSource(rev, 15)).toBe(11); // `d` -> `d`
     });
 
     test('mapOffsetToDest', () => {
@@ -116,7 +116,7 @@ describe('TextMap', () => {
         expect(mapOffsetToDest(map, 8)).toBe(3); // `9` -> 'é'
         expect(mapOffsetToDest(map, 9)).toBe(4); // `'` -> `'`
         expect(mapOffsetToDest(map, 10)).toBe(5); // `s` -> `s`
-        expect(mapOffsetToDest(map, 11)).toBe(6); // `` -> ` `
+        expect(mapOffsetToDest(map, 11)).toBe(7); // `` -> ` `
         expect(mapOffsetToDest(map, 12)).toBe(8); // `G` -> `G`
         expect(mapOffsetToDest(map, 13)).toBe(9); // `r` -> `r`
         expect(mapOffsetToDest(map, 14)).toBe(10); // `a` -> `a`
@@ -133,12 +133,12 @@ describe('TextMap', () => {
          */
         const map = [3, 3, 1, 6, 2, 2];
 
-        expect(calRangeInSrc(map, [0, 11])).toEqual([0, 6]);
-        expect(calRangeInSrc(map, [3, 9])).toEqual([3, 4]);
-        expect(calRangeInSrc(map, [9, 11])).toEqual([4, 6]);
-        expect(calRangeInSrc(map, [9, 10])).toEqual([4, 5]);
-        expect(calRangeInSrc(map, [3, 6])).toEqual([3, 3]);
-        expect(calRangeInSrc(map, [3, 3])).toEqual([3, 3]);
+        expect(calculateRangeInSrc(map, [0, 11])).toEqual([0, 6]);
+        expect(calculateRangeInSrc(map, [3, 9])).toEqual([3, 4]);
+        expect(calculateRangeInSrc(map, [9, 11])).toEqual([4, 6]);
+        expect(calculateRangeInSrc(map, [9, 10])).toEqual([4, 5]);
+        expect(calculateRangeInSrc(map, [3, 6])).toEqual([3, 3]);
+        expect(calculateRangeInSrc(map, [3, 3])).toEqual([3, 3]);
     });
 });
 
