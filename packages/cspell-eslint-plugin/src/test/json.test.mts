@@ -6,7 +6,7 @@ import typeScriptParser from '@typescript-eslint/parser';
 import type { Linter } from 'eslint';
 import { RuleTester } from 'eslint';
 import eslintPluginJsonc from 'eslint-plugin-jsonc';
-import parser from 'jsonc-eslint-parser';
+import * as parser from 'jsonc-eslint-parser';
 
 import type { Options as RuleOptions } from '../plugin/index.cjs';
 import Rule from '../plugin/index.cjs';
