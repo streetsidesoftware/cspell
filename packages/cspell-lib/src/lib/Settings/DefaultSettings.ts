@@ -86,21 +86,33 @@ const definedDefaultRegExpExcludeList: PredefinedPatterns[] = [
 // This bit of copying is done to have the compiler ensure that the defaults exist.
 const defaultRegExpExcludeList: PredefinedPatternNames[] = definedDefaultRegExpExcludeList;
 
+export const STATIC_DEFAULTS = {
+    id: 'static_defaults',
+    language: 'en',
+    name: 'Static Defaults',
+    enabled: true,
+    maxNumberOfProblems: 100,
+    numSuggestions: 10,
+    suggestionsTimeout: 500,
+    suggestionNumChanges: 3,
+    allowCompoundWords: false,
+} as const;
+
 export const _defaultSettingsBasis: Readonly<CSpellSettingsInternal> = Object.freeze(
     createCSpellSettingsInternal({
-        id: 'static_defaults',
-        language: 'en',
-        name: 'Static Defaults',
-        enabled: true,
+        id: STATIC_DEFAULTS.id,
+        language: STATIC_DEFAULTS.language,
+        name: STATIC_DEFAULTS.name,
+        enabled: STATIC_DEFAULTS.enabled,
         enabledLanguageIds: [],
-        maxNumberOfProblems: 100,
-        numSuggestions: 10,
-        suggestionsTimeout: 500,
-        suggestionNumChanges: 3,
+        maxNumberOfProblems: STATIC_DEFAULTS.maxNumberOfProblems,
+        numSuggestions: STATIC_DEFAULTS.numSuggestions,
+        suggestionsTimeout: STATIC_DEFAULTS.suggestionsTimeout,
+        suggestionNumChanges: STATIC_DEFAULTS.suggestionNumChanges,
         words: [],
         userWords: [],
         ignorePaths: [],
-        allowCompoundWords: false,
+        allowCompoundWords: STATIC_DEFAULTS.allowCompoundWords,
         patterns: defaultRegExpPatterns,
         ignoreRegExpList: [],
         languageSettings: [],

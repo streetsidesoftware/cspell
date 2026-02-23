@@ -652,7 +652,8 @@ type SimpleRange = Readonly<Range>;
 declare class SubstitutionTransformer {
   #private;
   constructor(subMap: Map<string, string> | undefined);
-  transform(text: string): MappedText;
+  transform(text: string | MappedText): MappedText;
+  transformString(text: string): MappedText;
 }
 //#endregion
 //#region src/lib/suggestions.d.ts

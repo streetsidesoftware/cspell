@@ -3,7 +3,7 @@ import type { Range, SourceMap } from '@cspell/cspell-types/Parser';
 import type { GTrieNode } from 'cspell-trie-lib';
 import { GTrie } from 'cspell-trie-lib';
 
-import { mapOffsetPairsToSourceMap } from './SourceMap.js';
+import { mapOffsetPairsToSourceMap, mergeSourceMaps } from './SourceMap.js';
 
 type DeepReadonly<T> = T extends object ? { readonly [K in keyof T]: DeepReadonly<T[K]> } : T;
 
@@ -23,7 +23,25 @@ export class SubstitutionTransformer {
         this.#trie = subMap ? GTrie.fromEntries(subMap) : undefined;
     }
 
-    transform(text: string): MappedText {
+    transform(text: string | MappedText): MappedText {
+        if (typeof text === 'string') {
+            return this.transformString(text);
+        }
+
+        if (!this.#trie) return text;
+
+        const transformed = this.transformString(text.text);
+
+        const result: MappedText = {
+            ...text,
+            text: transformed.text,
+            map: mergeSourceMaps(text.map, transformed.map),
+        };
+
+        return result;
+    }
+
+    transformString(text: string): MappedText {
         if (!this.#trie) {
             return { text, range: [0, text.length] };
         }

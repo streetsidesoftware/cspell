@@ -1,0 +1,34 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json
+
+# The version of the configuration file format.
+version: '0.2'
+# The locale to use when spell checking. (e.g., en, en-GB, de-DE
+language: en
+
+substitutionDefinitions:
+  - name: html-entities
+    entries:
+      - ['&amp;', '&']
+      - ['&lt;', '<']
+      - ['&gt;', '>']
+      - ['&quot;', '"']
+      - ['&apos;', "'"] # cspell:ignore apos
+  - name: uri-encoded
+    entries:
+      - ['%20', ' ']
+      - ['%C3%A9', 'é']
+      - ['%C3%B1', 'ñ']
+      - ['%C3%BC', 'ü']
+      - ['%C3%A7', 'ç']
+
+substitutions:
+  - html-entities
+  - uri-encoded
+
+languageSettings:
+  - languageId: markdown
+    patterns:
+      - name: HTML-symbol-entity
+        pattern: ''
+    ignoreRegExpList:
+      - 'HTML-symbol-entity'
