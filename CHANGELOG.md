@@ -97,6 +97,17 @@ It is not yet added to the normal spell checking flow. That will happen in a lat
 ### Fixes
 
 <details>
+<summary>fix: Publish 9.7 (<a href="https://github.com/streetsidesoftware/cspell/pull/8634">#8634</a>)</summary>
+
+### fix: Publish 9.7 ([#8634](https://github.com/streetsidesoftware/cspell/pull/8634))
+
+Fix issue with test packages having the same name preventing publishing.
+
+---
+
+</details>
+
+<details>
 <summary>fix: Support ESLint 10 (<a href="https://github.com/streetsidesoftware/cspell/pull/8620">#8620</a>)</summary>
 
 ### fix: Support ESLint 10 ([#8620](https://github.com/streetsidesoftware/cspell/pull/8620))
