@@ -764,6 +764,9 @@ interface TextValidator {
   validate: TextValidatorFn;
   lineValidator: LineValidator;
 }
+interface TextValidationFactoryOptions extends ValidationOptions {
+  transformer: SubstitutionTransformer | undefined;
+}
 //#endregion
 //#region src/lib/textValidation/traceWord.d.ts
 type Href = string;
@@ -933,7 +936,7 @@ interface Preparations {
   textValidator: TextValidator;
   segmenter: (texts: MappedText) => Iterable<MappedText>;
   shouldCheck: boolean;
-  validateOptions: ValidationOptions;
+  validateOptions: TextValidationFactoryOptions;
   localConfig: CSpellUserSettings | undefined;
   localConfigFilepath: string | undefined;
   subTransformer: SubstitutionTransformer;
