@@ -97,6 +97,7 @@ export class CSpellWorkerPool {
         workers = options?.onlyIdle ? workers.filter((worker) => worker.numberOfPendingRequests === 0) : workers;
 
         workers.sort((a, b) => {
+            // eslint-disable-next-line no-useless-assignment
             let v: number = 0;
             v = (a.isReadyNow ? 0 : 1) - (b.isReadyNow ? 0 : 1);
             if (v !== 0) return v;

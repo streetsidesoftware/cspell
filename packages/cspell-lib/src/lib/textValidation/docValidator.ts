@@ -451,7 +451,7 @@ export class DocumentValidator {
 
     private addPossibleError(error: Error | undefined | unknown): undefined {
         if (!error) return;
-        error = this.errors.push(toError(error));
+        this.errors.push(toError(error));
     }
 
     private _parse(): Iterable<ParsedText> {
@@ -623,7 +623,7 @@ export async function shouldCheckDocument(
 
     function addPossibleError(error: Error | undefined | unknown): undefined {
         if (!error) return undefined;
-        error = errors.push(toError(error));
+        errors.push(toError(error));
         return undefined;
     }
 

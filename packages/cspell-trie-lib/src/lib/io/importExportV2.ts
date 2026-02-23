@@ -48,6 +48,7 @@ function leaves(node: TrieRefNode): Sequence<LeafResult> {
 function flattenToReferences(node: TrieRefNode): Sequence<TrieRefNode> {
     function* walk(): IterableIterator<TrieRefNode> {
         let iterations = 100;
+        // eslint-disable-next-line no-useless-assignment
         let processed = 0;
         let index = 0;
 

@@ -154,6 +154,7 @@ export default defineConfig(
             'unicorn/throw-new-error': 'error',
 
             // To be evaluated
+            'no-useless-assignment': 'warn', // Too many false positives, and it isn't really a problem.
         },
     },
     {
@@ -285,6 +286,7 @@ export default defineConfig(
                 'error',
                 { prefer: 'type-imports', fixStyle: 'separate-type-imports', disallowTypeAnnotations: false },
             ],
+            'no-useless-assignment': 'off',
         },
     },
     {

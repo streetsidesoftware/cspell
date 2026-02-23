@@ -89,14 +89,12 @@ function extractSummaryText(markdown: string): string {
  * Summarize the release notes by replacing the <details> tags with the summary text.
  */
 function summarizeReleaseNotes(markdown: string): string {
-    let index = 0;
     let lastIndex = 0;
-    let summary = '';
-    for (index = markdown.indexOf('<details>'); index >= 0; index = markdown.indexOf('<details>', index)) {
+    for (let index = markdown.indexOf('<details>'); index >= 0; index = markdown.indexOf('<details>', index)) {
         const endIndex = markdown.indexOf('</details>', index);
         if (endIndex < 0) break; // No closing tag found
         const prefix = markdown[index - 1] !== '\n' ? '\n' : '';
-        summary = prefix + `- ${extractSummaryText(markdown.slice(index))}\n`;
+        const summary = prefix + `- ${extractSummaryText(markdown.slice(index))}\n`;
         // Trim off any extra whitespace before the summary text
         const idx = markdown.slice(lastIndex, index).trim() ? index : lastIndex;
         markdown = markdown.slice(0, idx) + summary + markdown.slice(endIndex + '</details>'.length);

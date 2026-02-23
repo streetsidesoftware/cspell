@@ -77,6 +77,7 @@ export class SpellingDictionaryFromTrie implements SpellingDictionary {
         if (!this._size) {
             // walk the trie and get the approximate size.
             const i = this.trie.iterate();
+            // eslint-disable-next-line no-useless-assignment
             let deeper = true;
             let size = 0;
             for (let r = i.next(); !r.done; r = i.next(deeper)) {

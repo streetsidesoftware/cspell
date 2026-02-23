@@ -443,7 +443,7 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
 
         function resolveChild(node: FastTrieBlobNode, charIndex: number): number {
             let i = 1;
-            for (i = 1; i < node.length && (node[i] & NodeCharIndexMask) !== charIndex; ++i) {
+            for (; i < node.length && (node[i] & NodeCharIndexMask) !== charIndex; ++i) {
                 // empty
             }
             return i;
@@ -515,7 +515,7 @@ export class TrieBlobBuilder implements TrieBuilder<TrieBlob> {
 
         function resolveChild(node: FastTrieBlobNode, charIndex: number): number {
             let i = 1;
-            for (i = 1; i < node.length && (node[i] & NodeCharIndexMask) !== charIndex; ++i) {
+            for (; i < node.length && (node[i] & NodeCharIndexMask) !== charIndex; ++i) {
                 // empty
             }
             return i;

@@ -466,7 +466,7 @@ function filterExcludedTextOffsets(issues: ValidationIssue[], excluded: TextOffs
     const keep: ValidationIssue[] = [];
     let i = 0;
     let j = 0;
-    for (i = 0; i < issues.length && j < excluded.length; i++) {
+    for (; i < issues.length && j < excluded.length; i++) {
         const issue = issues[i];
         while (j < excluded.length && excluded[j].offset + excluded[j].text.length <= issue.offset) {
             j++;
