@@ -100,7 +100,7 @@ class SourceMapCursorImpl implements SourceMapCursor {
         if (this.linear) {
             return offsetInDst - this.begin1 + this.begin0;
         }
-        // For a non-linear segment, the offset in the source maps to the start of the segment in the transformed text.
+        // For a non-linear segment, the offset in the transformed text maps to the start of the segment in the source text.
         return this.begin0;
     }
 
