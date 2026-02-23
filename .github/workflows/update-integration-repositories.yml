@@ -20,6 +20,7 @@ env:
 
 jobs:
   calc-ref:
+    if: github.repository_owner == 'streetsidesoftware'
     runs-on: ubuntu-latest
     outputs:
       ref: ${{ github.event.inputs.ref || env.REF_BRANCH_G }}
