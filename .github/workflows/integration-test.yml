@@ -206,7 +206,7 @@ jobs:
 
       - name: store perf run
         if: ${{ steps.step-cache-run.outputs.cache-hit != 'true' }}
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v7
         with:
           name: perf-repo-${{ steps.step-normalize-repo-name.outputs.REPO_NAME }}
           path: integration-tests/perf/perf-run-*.csv
@@ -234,7 +234,7 @@ jobs:
           mkdir -p temp/perf
 
       - name: restore repos perf
-        uses: actions/download-artifact@v7
+        uses: actions/download-artifact@v8
         with:
           pattern: perf-*
           merge-multiple: true
